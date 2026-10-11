@@ -59,6 +59,22 @@ PRESET_DEFAULTS = {
     # agglomerated cork: granules about `granule_mm` across, each its own shade of the colour (`variation`), darker
     # gaps between them, matt; expanded (smoked) cork is dark brown, natural cork tan
     'cork': dict(color='#3B2F28', granule_mm=3.0, variation=0.35, gaps=0.5, roughness=0.9, bump=0.5),
+    # pressed recycled plastic (HDPE flakes laid out and hot-pressed into a sheet, as a coloured record is pressed): each
+    # flake a flat patch of one colour from the weighted `palette`, about `flake` across, drawn out by the press's flow
+    # (`stretch` across and up the face) and swirled (`warp`), dark `fleck`s (colour, share of the patches, size) among
+    # them, a waxy satin face; one preset a colourway
+    'pressed_eucalyptus': dict(palette=[['#4E6A2A', 0.2], ['#B88A3E', 0.17], ['#A2482A', 0.16], ['#8A8478', 0.18],
+                                        ['#D9CBA6', 0.13], ['#3D3A33', 0.06], ['#6E8A3A', 0.1]],
+                               flake=0.028, stretch=(1.0, 6.0), warp=0.9, fleck=('#1F1D1A', 0.0, 0.25), roughness=0.36, coat=0.2),
+    'pressed_birch': dict(palette=[['#EEEAE0', 0.8], ['#DCD6CA', 0.11], ['#C9976E', 0.03], ['#B9B4AA', 0.06]],
+                          flake=0.026, stretch=(5.0, 1.0), warp=0.5, fleck=('#1C1A18', 0.5, 0.4), roughness=0.36, coat=0.2),
+    # the frosted resin poured in layers of colour (strata, each about `band` thick, their boundaries wavy by `warp`) or
+    # with recycled plastic chips cast through it (terrazzo: chips about `chip` across in a `share` of the cells)
+    'frosted_strata': dict(color='#E6E8DA', absorb='#B9C9A9', roughness=0.45, ior=1.5, radius=0.025, clear=0.15,
+                           palette=[['#CBD5BC', 0.26], ['#E6DECB', 0.2], ['#D8B27E', 0.12], ['#C9D1C4', 0.2],
+                                    ['#A9B896', 0.22]], band=0.045, warp=0.6),
+    'frosted_terrazzo': dict(color='#F4F1EA', absorb='#EFE5D3', roughness=0.45, ior=1.5, radius=0.02, clear=0.1,
+                             palette=[['#1E1C1A', 0.55], ['#5E5A54', 0.25], ['#C9976E', 0.2]], chip=0.015, share=0.24),
 }
 
 
@@ -165,13 +181,19 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
             nt.links.new(comb.outputs['Color'], ins[1]); nt.links.new(outs[0], I['Base Color'])
     elif preset == 'glass':
         setin('Base Color', hex_lin(p['color'])); setin('Roughness', p['roughness']); setin('Transmission Weight', 1.0); setin('IOR', p['ior'])
-    elif preset == 'frosted':
+    elif preset in ('frosted', 'frosted_strata', 'frosted_terrazzo'):
         setin('Base Color', hex_lin(p['color'])); setin('Roughness', p['roughness']); setin('IOR', p['ior'])
         setin('Subsurface Weight', 1.0); setin('Subsurface Scale', p['radius'])
         dc = hex_lin(p['absorb'])
         setin('Subsurface Radius', (max(dc[0], 0.05), max(dc[1], 0.05), max(dc[2], 0.05)))   # deeper where the tint lets light through
         setin('Transmission Weight', p['clear'])
+        if preset == 'frosted_strata':
+            nt.links.new(_strata(nt, p), I['Base Color'])
+        elif preset == 'frosted_terrazzo':
+            nt.links.new(_terrazzo(nt, p), I['Base Color'])
         if normal is not None: nt.links.new(normal, I['Normal'])
+    elif preset in ('pressed_eucalyptus', 'pressed_birch'):
+        _pressed_plastic(nt, b, p, normal)
     elif preset == 'emit':
         out = nt.nodes['Material Output']; nt.nodes.remove(b)
         em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = hex_lin(p['color']); em.inputs['Strength'].default_value = p['strength']
@@ -486,6 +508,105 @@ def _eucalyptus_bark(nt, b, p, normal_in=None):
     if normal_in is not None:
         nt.links.new(normal_in, bn.inputs['Normal'])
     nt.links.new(bn.outputs['Normal'], b.inputs['Normal'])
+
+
+def _weighted_ramp(node, nt, fac, palette, interpolation='CONSTANT'):
+    """A colour ramp whose stops share [0, 1] by the palette's weights ([[hex, weight], ...]), driven by `fac`."""
+    r = node('ShaderNodeValToRGB'); cr = r.color_ramp; cr.interpolation = interpolation
+    tot = sum(w for _, w in palette)
+    while len(cr.elements) < len(palette):
+        cr.elements.new(0.0)
+    acc = 0.0
+    for el, (hx, w) in zip(cr.elements, palette):
+        el.position = acc / tot; el.color = hex_lin(hx); acc += w
+    nt.links.new(fac, r.inputs['Fac'])
+    return r.outputs['Color']
+
+
+def _pressed_plastic(nt, b, p, normal_in=None):
+    """Pressed recycled plastic: flakes of the palette's colours, each a patch with a crisp edge, drawn out by the
+    press's flow (2D cells in the face's plane, stretched by `stretch`, swirled by a slow noise, `warp`), dark flecks in
+    a share of them (`fleck`: colour, share, size against the cell), a faint mottle, a waxy satin face."""
+    node, math_, mix, smooth = _nodes(nt)
+    uv, geo = _face_uv(nt, node, math_)
+    sep = node('ShaderNodeSeparateXYZ'); nt.links.new(uv, sep.inputs['Vector'])
+    fl, (sx, sy) = p['flake'], p['stretch']
+    # the swirl: a slow noise moves each point a little before the cells are read
+    wn = node('ShaderNodeTexNoise'); wn.inputs['Scale'].default_value = 1.0; wn.inputs['Detail'].default_value = 3.0
+    wc = node('ShaderNodeCombineXYZ')
+    nt.links.new(math_('DIVIDE', sep.outputs['X'], fl * 4 * sx), wc.inputs['X'])
+    nt.links.new(math_('DIVIDE', sep.outputs['Y'], fl * 4 * sy), wc.inputs['Y'])
+    nt.links.new(wc.outputs['Vector'], wn.inputs['Vector'])
+    ws = node('ShaderNodeSeparateColor'); nt.links.new(wn.outputs['Color'], ws.inputs['Color'])
+    # and a fine one smears each flake's edge, as the press drags it (a cell's straight sides read as cut shards)
+    sm = node('ShaderNodeTexNoise'); sm.inputs['Scale'].default_value = 1.0; sm.inputs['Detail'].default_value = 4.0
+    smc = node('ShaderNodeCombineXYZ')
+    nt.links.new(math_('DIVIDE', sep.outputs['X'], fl * 0.35 * sx), smc.inputs['X'])
+    nt.links.new(math_('DIVIDE', sep.outputs['Y'], fl * 0.35 * sy), smc.inputs['Y'])
+    nt.links.new(smc.outputs['Vector'], sm.inputs['Vector'])
+    ss = node('ShaderNodeSeparateColor'); nt.links.new(sm.outputs['Color'], ss.inputs['Color'])
+    q = node('ShaderNodeCombineXYZ')
+    nt.links.new(math_('ADD', math_('ADD', math_('DIVIDE', sep.outputs['X'], fl * sx), math_('MULTIPLY', math_('SUBTRACT', ws.outputs['Red'], 0.5), 2 * p['warp'])),
+                       math_('MULTIPLY', math_('SUBTRACT', ss.outputs['Red'], 0.5), 0.7)), q.inputs['X'])
+    nt.links.new(math_('ADD', math_('ADD', math_('DIVIDE', sep.outputs['Y'], fl * sy), math_('MULTIPLY', math_('SUBTRACT', ws.outputs['Green'], 0.5), 2 * p['warp'])),
+                       math_('MULTIPLY', math_('SUBTRACT', ss.outputs['Green'], 0.5), 0.7)), q.inputs['Y'])
+    vo = node('ShaderNodeTexVoronoi', feature='F1', voronoi_dimensions='2D'); vo.inputs['Scale'].default_value = 1.0
+    vo.inputs['Randomness'].default_value = 1.0; nt.links.new(q.outputs['Vector'], vo.inputs['Vector'])
+    cs = node('ShaderNodeSeparateColor'); nt.links.new(vo.outputs['Color'], cs.inputs['Color'])
+    col = _weighted_ramp(node, nt, cs.outputs['Red'], p['palette'])
+    # flecks: a finer set of cells, a dark spot in a share of them
+    fc, share, size = p['fleck']
+    if share > 0:
+        q2 = node('ShaderNodeMapping'); q2.inputs['Scale'].default_value = (3.0, 3.0, 1.0); q2.inputs['Location'].default_value = (7.3, 2.1, 0.0)
+        nt.links.new(q.outputs['Vector'], q2.inputs['Vector'])
+        v2 = node('ShaderNodeTexVoronoi', feature='F1', voronoi_dimensions='2D'); v2.inputs['Scale'].default_value = 1.0
+        nt.links.new(q2.outputs['Vector'], v2.inputs['Vector'])
+        c2 = node('ShaderNodeSeparateColor'); nt.links.new(v2.outputs['Color'], c2.inputs['Color'])
+        spot = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(v2.outputs['Distance'], size * 0.8, size)),
+                     math_('LESS_THAN', c2.outputs['Green'], share))
+        col = mix(spot, col, hex_lin(fc))
+    mo = node('ShaderNodeTexNoise'); mo.inputs['Scale'].default_value = 1.0 / (fl * 0.6); mo.inputs['Detail'].default_value = 4.0
+    nt.links.new(geo.outputs['Position'], mo.inputs['Vector'])
+    mr = node('ShaderNodeMapRange'); nt.links.new(mo.outputs['Fac'], mr.inputs['Value'])
+    mr.inputs['To Min'].default_value = 0.94; mr.inputs['To Max'].default_value = 1.06
+    g = node('ShaderNodeCombineColor')
+    for ch in ('Red', 'Green', 'Blue'):
+        nt.links.new(mr.outputs['Result'], g.inputs[ch])
+    col = mix(1.0, col, g.outputs['Color'], 'MULTIPLY')
+    nt.links.new(col, b.inputs['Base Color'])
+    b.inputs['Roughness'].default_value = p['roughness']
+    if 'Coat Weight' in b.inputs:
+        b.inputs['Coat Weight'].default_value = p['coat']; b.inputs['Coat Roughness'].default_value = 0.25
+    if normal_in is not None:
+        nt.links.new(normal_in, b.inputs['Normal'])
+
+
+def _strata(nt, p):
+    """The base colour of resin poured in layers: bands of the palette's colours up the part (world z, each about
+    `band` thick by its weight, repeating), their boundaries made wavy by a slow noise (`warp`)."""
+    node, math_, mix, smooth = _nodes(nt)
+    geo = node('ShaderNodeNewGeometry')
+    sep = node('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], sep.inputs['Vector'])
+    nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / (p['band'] * 6); nz.inputs['Detail'].default_value = 3.0
+    nt.links.new(geo.outputs['Position'], nz.inputs['Vector'])
+    period = p['band'] * len(p['palette'])
+    z = math_('ADD', sep.outputs['Z'], math_('MULTIPLY', math_('SUBTRACT', nz.outputs['Fac'], 0.5), 2 * p['warp'] * p['band']))
+    return _weighted_ramp(node, nt, math_('FRACT', math_('DIVIDE', z, period)), p['palette'], 'EASE')
+
+
+def _terrazzo(nt, p):
+    """The base colour of resin with chips cast through it: 3D cells about `chip` across, a chip in a `share` of them
+    (its colour from the palette), the resin's own colour round them."""
+    node, math_, mix, smooth = _nodes(nt)
+    geo = node('ShaderNodeNewGeometry')
+    mp = node('ShaderNodeMapping'); s = 1.0 / p['chip']; mp.inputs['Scale'].default_value = (s, s, s)
+    nt.links.new(geo.outputs['Position'], mp.inputs['Vector'])
+    vo = node('ShaderNodeTexVoronoi', feature='F1', voronoi_dimensions='3D'); vo.inputs['Scale'].default_value = 1.0
+    nt.links.new(mp.outputs['Vector'], vo.inputs['Vector'])
+    cs = node('ShaderNodeSeparateColor'); nt.links.new(vo.outputs['Color'], cs.inputs['Color'])
+    chip = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(vo.outputs['Distance'], 0.26, 0.32)),
+                 math_('LESS_THAN', cs.outputs['Green'], p['share']))
+    return mix(chip, hex_lin(p['color']), _weighted_ramp(node, nt, cs.outputs['Blue'], p['palette']))
 
 
 def _cloth(nt, b, p, normal_in=None):

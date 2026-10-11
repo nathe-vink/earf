@@ -296,3 +296,72 @@ def waveguide_shell(mouth_w, mouth_h, depth, r0=12.7, wall=6.0, rim=10.0, n_mout
                               Cylinder(pod_r - 2 * wall, 11.0, align=(Align.CENTER, Align.CENTER, Align.MIN)))
     cap = cap + spigot
     return shell, cap
+
+
+def _lens_outer(hw, hh, depth, rim, back, back_r, taper, edge, n_mouth):
+    """The lens waveguide's outside, section by section [(W, H, n, z)]: from the front face (the mouth's plane, its
+    edge rounded on `edge`) back to a round back `back_r` across at z = -back, each half dimension falling as
+    (1 - t/T)^taper with the depth t behind the front: steep at once, so the edge is thin, and flat at the back,
+    where the driver sits."""
+    T = depth + back
+    Wf, Hf = hw + rim, hh + rim
+    prof = lambda t: (1.0 - min(t, T) / T) ** taper
+
+    def sec(t, inset=0.0):
+        g = prof(t)
+        return (back_r + (Wf - back_r) * g - inset, back_r + (Hf - back_r) * g - inset,
+                2.0 + (n_mouth - 2.0) * g ** 2, depth - t)
+    out = [sec(edge * (1 - math.cos(th)), edge * (1 - math.sin(th))) for th in np.linspace(0, math.pi / 2, 6)]
+    out += [sec(t) for t in [edge + (T - edge) * u for u in (0.08, 0.18, 0.3, 0.44, 0.58, 0.7, 0.8, 0.88, 0.94, 0.98, 1.0)]]
+    return out
+
+
+def waveguide_lens(mouth_w, mouth_h, depth, r0=12.7, rim=14.0, n_mouth=4.5, back=70.0, back_r=84.0, taper=0.55,
+                   edge=5.0, pod_r=68.0, pod_wall=8.0, boss=None):
+    """A rectangular waveguide cast as a lens: the flare (waveguide_shell's: round at the throat r0, squaring toward
+    the `mouth_w` x `mouth_h` mouth) opens in a front face `rim` wide all round, and the body curves back from that
+    face (thin at its edge) to a round back `back_r` across, deepest in the middle, where a pod `pod_r` across holds
+    the compression driver behind the throat, `pod_wall` inside the back. Cast hollow in production (a 7 mm skin and
+    the flare's own); drawn solid for the study. Local frame as waveguide_shell: x across, y up, z from the throat (0)
+    to the mouth (depth); the back at z = -back."""
+    from build123d import Pos, Cylinder, Align
+    hw, hh = mouth_w / 2, mouth_h / 2
+    secs = _lens_outer(hw, hh, depth, rim, back, back_r, taper, edge, n_mouth)
+    body = Solid.make_loft([_se_wire(W, H, n, z) for W, H, n, z in reversed(secs)], False)
+    cav = Solid.make_loft(_se_sections(r0, hw, hh, depth, n_mouth, beyond=5.0, before=6.0), False)
+    bt = boss['t'] if boss else 12.0             # the driver's face sits this far behind the throat
+    pod = Pos(0, 0, -back + pod_wall) * Cylinder(pod_r, back - pod_wall - bt, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    bore = Pos(0, 0, -bt - 1.0) * Cylinder(r0, bt + 2.0, align=(Align.CENTER, Align.CENTER, Align.MIN))   # throat to driver
+    return body - cav - pod - bore
+
+
+def waveguide_slab(mouth_w, mouth_h, depth, r0=12.7, rim=16.0, n_mouth=4.5, slab_t=64.0, wall=6.0, pod_r=74.0,
+                   pod_back=70.0, boss=None):
+    """A rectangular waveguide as a slim slab, after the photograph's: a flat superellipse slab `slab_t` thick, its edges
+    rounded right round (a bar of soap's), the flare's mouth opening in its face; behind the slab the rest of the flare
+    in a tail that follows it (`wall` thick) and runs into a round pod (`pod_r`, `pod_back` long) round the driver.
+    Local frame as waveguide_shell."""
+    from build123d import Pos, Cylinder, Align
+    hw, hh = mouth_w / 2, mouth_h / 2
+    Wf, Hf = hw + rim, hh + rim
+    rr = slab_t / 2
+    z0 = depth - slab_t
+    slab = Solid.make_loft([_se_wire(Wf - rr * (1 - math.sin(th)), Hf - rr * (1 - math.sin(th)), n_mouth,
+                                     z0 + rr - rr * math.cos(th)) for th in np.linspace(0.02, math.pi - 0.02, 13)], False)
+    ta = math.sqrt(max(hw ** 2 - r0 ** 2, 0.0)) / depth
+    tb = math.sqrt(max(hh ** 2 - r0 ** 2, 0.0)) / depth
+
+    def tail(z):
+        w = math.sqrt(r0 ** 2 + (z * ta) ** 2) + wall; h = math.sqrt(r0 ** 2 + (z * tb) ** 2) + wall
+        W, H = _smax(w, pod_r), _smax(h, pod_r)
+        pod = (pod_r / max(W, H)) ** 4
+        return W, H, (2.0 + (n_mouth - 2.0) * (z / depth) ** 1.2) * (1 - pod) + 2.0 * pod
+    # sections spaced as waveguide_shell's (a smooth loft through unevenly spaced ones overshoots), ending inside the slab
+    zt = [-pod_back, -pod_back * 0.6, -pod_back * 0.25, 0.0] + [z for z in (depth * (i / 14) ** 1.25 for i in range(1, 15))
+                                                                if z < z0 + rr - 4.0] + [z0 + rr]
+    tailbody = Solid.make_loft([_se_wire(*tail(max(z, 0.0))[:2], tail(max(z, 0.0))[2], z) for z in zt], False)
+    cav = Solid.make_loft(_se_sections(r0, hw, hh, depth, n_mouth, beyond=5.0, before=6.0), False)
+    bt = boss['t'] if boss else 12.0
+    pod = Pos(0, 0, -pod_back + wall) * Cylinder(pod_r - wall, pod_back - wall - bt, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    bore = Pos(0, 0, -bt - 1.0) * Cylinder(r0, bt + 2.0, align=(Align.CENTER, Align.CENTER, Align.MIN))   # throat to driver
+    return (slab + tailbody) - cav - pod - bore

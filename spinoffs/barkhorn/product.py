@@ -24,7 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, '..', '..', 'studio', 'fabkit'))
 from kit import *                                                    # noqa: E402,F403
 from speaker.drivers import driver_part, place                      # noqa: E402
-from speaker.horn import waveguide_shell                            # noqa: E402
+from speaker.horn import waveguide_shell, waveguide_lens, waveguide_slab, round_horn, tractrix   # noqa: E402
 
 import json  # noqa: E402
 LIB = json.load(open(os.path.join(HERE, '..', '..', 'studio', 'fabkit', 'library', 'components.json')))
@@ -42,9 +42,17 @@ P = dict(
     brace_z=200.0, brace_window=(420.0, 300.0),
     amp='hypex-fa122', amp_z=520.0,
     hf='bms-4550-16',
-    # the waveguide: a hollow cast shell, a rounded rectangle 640 x 300, 170 deep, its mouth filling the face (612 x 272)
-    horn=dict(mouth_w=612.0, mouth_h=272.0, d=170.0, r0=12.7, wall=6.0, rim=10.0, n_mouth=4.5,
-              pod_r=74.0, pod_back=70.0, dome=45.0, boss=dict(d=130.0, t=12.0, bolt_d=76.2, bolts=2, bolt_hole=6.5)),
+    # the waveguide, a rounded rectangle about 640 x 300 with its mouth filling the face (612 x 272), 170 deep, in one of
+    # the forms of the 2026-10-11 study: 'shell' (a thin cast shell following its flare, a pod behind round the driver),
+    # 'lens' (thin at its edge, deep only in the middle where it holds the driver), 'slab' (a slim slab, after the
+    # photograph's, the rest of the flare in a tail behind), 'pebble' (the slab's soft rolled rim on the lens's smooth
+    # back) or 'round' (a round tractrix horn, a rolled lip)
+    horn=dict(form='shell', mouth_w=612.0, mouth_h=272.0, d=170.0, r0=12.7, wall=6.0, rim=10.0, n_mouth=4.5,
+              pod_r=74.0, pod_back=70.0, dome=45.0, boss=dict(d=130.0, t=12.0, bolt_d=76.2, bolts=2, bolt_hole=6.5),
+              lens=dict(rim=14.0, back=78.0, back_r=84.0, taper=0.55, edge=5.0, pod_r=68.0),
+              slab=dict(rim=16.0, slab_t=64.0),
+              pebble=dict(rim=30.0, back=78.0, back_r=88.0, taper=0.7, edge=27.0, pod_r=68.0),
+              round=dict(fc=400.0, lip=22.0, wall=6.0, rods_front=90.0)),
     gap=80.0, rod_d=10.0, rods_front=(150.0, 40.0),   # the two front rods: +-x from the centre, y back from the face
     # the front's covers, options (the photograph shows the panel bare), each in the recess in front of the panel, 1.5
     # clear of the shell all round: a cloth grille (an MDF frame, the cloth stretched over it), a slotted grille
@@ -55,7 +63,9 @@ P = dict(
                grille_t=6.0, border=22.0, slot_w=6.0,
                lenticel=dict(pitch=14.0, length=(22.0, 120.0), gap=(10.0, 34.0), seed=11),
                strips=dict(pitch=16.0, length=(90.0, 260.0), gap=(14.0, 30.0), seed=5),
-               face_t=dict(bark=1.0, cork=3.0)),
+               face_t=dict(bark=1.0, cork=3.0),
+               disc_t=12.0,                    # the cloth disc's frame, over the woofer alone, in front of the ring
+               disc_magnet=dict(d=15.0, t=3.0, n=4)),   # its magnet pairs, one in its back and one behind the ring
 )
 
 
@@ -142,8 +152,7 @@ def parts(P):
     # cable's gland behind them
     top = box(T, 0, H - T, W - T, D, H)
     hz = P['horn']
-    rods = [(cx - P['rods_front'][0], P['rods_front'][1]), (cx + P['rods_front'][0], P['rods_front'][1]),
-            (cx, hz['d'] + hz['pod_back'] * 0.5)]
+    rods = rod_places(P)
     for rx, ry in rods:
         top -= cyl('z', (rx, ry), 12.0, H - 15.0, H + 1)          # M8 threaded inserts, 12 drilled 15 deep
     top -= cyl('z', (cx, D - 70.0), 16.5, H - T - 1, H + 1)
@@ -169,9 +178,12 @@ def parts(P):
     for k in range(wf['bolts']):          # pockets behind it for the woofer's screw heads: it lies flat over the frame
         a = 2 * math.pi * (k + 0.5) / wf['bolts']
         ring -= cyl('y', (cx + wf['bolt_d'] / 2 * math.cos(a), wz + wf['bolt_d'] / 2 * math.sin(a)), 14.0, yb - 4.0, yb + 1)
+    mg = P['cover']['disc_magnet']
+    for mx, mz in disc_magnets(P, cx, wz):  # and for the cloth disc's magnets, behind its face, so the face stays clean
+        ring -= cyl('y', (mx, mz), mg['d'] + 0.2, yb - mg['t'] - 0.2, yb + 1)
     out.append(Part('woofer-ring', ring, Sheet('mdf', r['t'], face='-y'), finish='ring', group='cabinet',
                     notes=['sprayed in the ring colour; held by four dots of silicone on the panel; eight pockets behind it '
-                           'clear the woofer\'s screw heads']))
+                           'clear the woofer\'s screw heads; four more take the cloth disc\'s magnets (an option)']))
     tube = box(pt['x'] - o / 2, yb, pt['z'] - o / 2, pt['x'] + o / 2, yb + plen, pt['z'] + o / 2)
     tube -= box(pt['x'] - pt['a'] / 2, yb - 1, pt['z'] - pt['a'] / 2, pt['x'] + pt['a'] / 2, yb + plen + 1, pt['z'] + pt['a'] / 2)
     out.append(Part('port', tube, Printed('asa', orient='on end'), finish='port', group='cabinet',
@@ -183,21 +195,16 @@ def parts(P):
     module = box(cx - amp['cutout_w'] / 2 + 4, D - amp['depth'], az - amp['cutout_h'] / 2 + 6, cx + amp['cutout_w'] / 2 - 4, D - 3.0, az + amp['cutout_h'] / 2 - 6)
     out.append(Part('amp-plate', plate.fuse(module), Bought(P['amp']), finish='amp'))
 
-    # the waveguide: a thin shell following its flare, a pod behind hiding the driver, its face flush with the
-    # cabinet's front and its mouth's lower rim `gap` above the top; it stands on three rods cut to its underside
-    zc = H + P['gap'] + hz['mouth_h'] / 2 + hz['rim']
-    shell, cap = waveguide_shell(hz['mouth_w'], hz['mouth_h'], hz['d'], r0=hz['r0'], wall=hz['wall'], rim=hz['rim'],
-                                 n_mouth=hz['n_mouth'], pod_r=hz['pod_r'], pod_back=hz['pod_back'], dome=hz['dome'], boss=hz['boss'])
-    shell = place(shell, (cx, hz['d'], zc), (0, -1, 0))
-    cap = place(cap, (cx, hz['d'], zc), (0, -1, 0))
+    # the waveguide (the form chosen in P['horn']), its face flush with the cabinet's front and its mouth's lower rim
+    # `gap` above the top; it stands on three rods cut to its underside
+    wg = waveguide(P)
+    shell, zc = wg['shell'], wg['zc']
     out.append(Part('waveguide', shell, Machined('cast-resin', 'cast', setup_usd=900.0), finish='horn', group='horn',
-                    notes=[f'mouth {hz["mouth_w"]:g} x {hz["mouth_h"]:g}, {hz["d"]:g} deep, 1 in throat; a shell {hz["wall"]:g} thick following '
-                           f'its flare, {hz["rim"]:g} at the rim, and a pod {2 * hz["pod_r"]:g} across behind it round the driver; cast in tinted '
-                           'translucent polyurethane in a two-part silicone mould from a CNC-cut plug, bead-blasted to frost; '
-                           'M8 inserts bonded into pads inside its underside take the rods']))
-    out.append(Part('waveguide-cap', cap, Machined('cast-resin', 'cast', setup_usd=250.0), finish='horn', group='horn',
-                    notes=['closes the pod behind the driver; a spigot locates it, three M4 screws hold it; the cable leaves through its centre']))
-    hfp, _ = driver_part('hf', P['hf'], hf, centre=(cx, hz['d'] + hz['boss']['t'], zc))
+                    notes=wg['notes']))
+    if wg['cap'] is not None:
+        out.append(Part('waveguide-cap', wg['cap'], Machined('cast-resin', 'cast', setup_usd=250.0), finish='horn', group='horn',
+                        notes=['closes the pod behind the driver; a spigot locates it, three M4 screws hold it; the cable leaves through its centre']))
+    hfp, _ = driver_part('hf', P['hf'], hf, centre=(cx, wg['throat_y'] + hz['boss']['t'], zc))
     out.append(hfp)
     from build123d import Axis
     for i, (rx, ry) in enumerate(rods, 1):
@@ -225,6 +232,78 @@ def parts(P):
         Part('glides', None, Bought('felt-glides')),
     ]
     return out
+
+
+def rod_places(P):
+    """The three rods' places (x, y) on the top: two under the waveguide's mouth, one under its back."""
+    hz, cx = P['horn'], P['W'] / 2
+    f = hz['form']
+    fx, fy = (hz['round']['rods_front'], P['rods_front'][1]) if f == 'round' else P['rods_front']
+    back = {'lens': hz['lens']['back'], 'pebble': hz['pebble']['back']}.get(f, hz['pod_back'])
+    depth = round_profile(P)[-1][0] if f == 'round' else hz['d']
+    return [(cx - fx, fy), (cx + fx, fy), (cx, depth + back * 0.5)]
+
+
+def disc_magnets(P, cx, wz):
+    """The cloth disc's magnet pairs' centres (x, z): on the ring's mid-radius, between the woofer's screws."""
+    r, n = P['ring'], P['cover']['disc_magnet']['n']
+    rm = (r['od'] + r['id']) / 4
+    return [(cx + rm * math.cos(2 * math.pi * k / n), wz + rm * math.sin(2 * math.pi * k / n)) for k in range(n)]
+
+
+def round_profile(P):
+    return tractrix(P['horn']['round']['fc'], P['horn']['r0'])
+
+
+def waveguide(P):
+    """The waveguide in the form P['horn']['form'], placed: {'shell', 'cap' (or None), 'zc' (its axis's height),
+    'throat_y' (where the driver's face meets it), 'notes'}."""
+    hz, cx, H = P['horn'], P['W'] / 2, P['H']
+    f = hz['form']
+    cast = ('cast in tinted translucent polyurethane in a two-part silicone mould from a CNC-cut plug, bead-blasted to '
+            'frost; M8 inserts bonded into pads inside its underside take the rods')
+    cap = None
+    if f == 'shell':
+        shell, cap = waveguide_shell(hz['mouth_w'], hz['mouth_h'], hz['d'], r0=hz['r0'], wall=hz['wall'], rim=hz['rim'],
+                                     n_mouth=hz['n_mouth'], pod_r=hz['pod_r'], pod_back=hz['pod_back'], dome=hz['dome'], boss=hz['boss'])
+        depth, half_h = hz['d'], hz['mouth_h'] / 2 + hz['rim']
+        notes = [f'mouth {hz["mouth_w"]:g} x {hz["mouth_h"]:g}, {hz["d"]:g} deep, 1 in throat; a shell {hz["wall"]:g} thick following '
+                 f'its flare, {hz["rim"]:g} at the rim, and a pod {2 * hz["pod_r"]:g} across behind it round the driver; {cast}']
+    elif f in ('lens', 'pebble'):
+        L = hz[f]
+        shell = waveguide_lens(hz['mouth_w'], hz['mouth_h'], hz['d'], r0=hz['r0'], rim=L['rim'], n_mouth=hz['n_mouth'], back=L['back'],
+                               back_r=L['back_r'], taper=L['taper'], edge=L['edge'], pod_r=L['pod_r'], boss=hz['boss'])
+        depth, half_h = hz['d'], hz['mouth_h'] / 2 + L['rim'] - L['edge']
+        notes = [f'mouth {hz["mouth_w"]:g} x {hz["mouth_h"]:g}, {hz["d"]:g} deep, 1 in throat; a lens: a {L["rim"]:g} face round the mouth, '
+                 f'the body curving back to a round back {2 * L["back_r"]:g} across, {hz["d"] + L["back"]:g} deep in all, the driver in a pod '
+                 f'inside it; cast hollow (a 7 mm skin) in production, {cast}']
+    elif f == 'slab':
+        S = hz['slab']
+        shell = waveguide_slab(hz['mouth_w'], hz['mouth_h'], hz['d'], r0=hz['r0'], rim=S['rim'], n_mouth=hz['n_mouth'], slab_t=S['slab_t'],
+                               wall=hz['wall'], pod_r=hz['pod_r'], pod_back=hz['pod_back'] + 6.0, boss=hz['boss'])
+        depth, half_h = hz['d'], hz['mouth_h'] / 2 + S['rim']
+        notes = [f'mouth {hz["mouth_w"]:g} x {hz["mouth_h"]:g}, {hz["d"]:g} deep, 1 in throat; a slab {S["slab_t"]:g} thick, its edges '
+                 f'rounded right round, the rest of the flare in a tail behind running into a pod round the driver; {cast}']
+    else:
+        R = hz['round']
+        prof = round_profile(P)
+        shell = round_horn(prof, wall=R['wall'], lip=R['lip'])
+        from build123d import Pos, Cylinder, Align
+        pod = Pos(0, 0, -hz['pod_back']) * (Cylinder(hz['pod_r'], hz['pod_back'], align=(Align.CENTER, Align.CENTER, Align.MIN)) -
+                                           Pos(0, 0, R['wall']) * Cylinder(hz['pod_r'] - R['wall'], hz['pod_back'] - 2 * R['wall'],
+                                                                          align=(Align.CENTER, Align.CENTER, Align.MIN)))   # closed: a can round the driver
+        pod -= Cylinder(hz['r0'], 2 * R['wall'], align=(Align.CENTER, Align.CENTER, Align.CENTER))
+        shell = shell + pod
+        depth = prof[-1][0]
+        b = shell.bounding_box()
+        half_h = max(b.max.X, b.max.Y)
+        notes = [f'a round tractrix horn for {R["fc"]:g} Hz: mouth {2 * prof[-1][1]:.0f} across, {depth:.0f} long, its lip rolled back on '
+                 f'{R["lip"]:g}, {R["wall"]:g} thick; the driver in a round pod behind its throat; {cast}']
+    zc = H + P['gap'] + half_h
+    shell = place(shell, (cx, depth, zc), (0, -1, 0))
+    if cap is not None:
+        cap = place(cap, (cx, depth, zc), (0, -1, 0))
+    return dict(shell=shell, cap=cap, zc=zc, throat_y=depth, notes=notes)
 
 
 def covers(P, wz, port_o):
@@ -266,6 +345,22 @@ def covers(P, wz, port_o):
                                + '; pegs in its corners as the cloth grille\'s']))
         out.append(Part(f'grille-{name}-pegs', None, Bought('grille-pegs'), option=opt))
 
+    # the cloth disc: the woofer alone covered, a solid colour circle on the panel (or on its bark face): a 12 mm MDF ring
+    # frame on the woofer's ring, in front of it, the cloth across its face and round its edge; magnets hold it
+    dt = cv['disc_t']
+    yr = yb - r['t']                                  # the ring's front
+    dframe = cyl('y', (cx, wz), r['od'], yr - dt, yr) - cyl('y', (cx, wz), r['id'], yr - dt - 1, yr + 1)
+    mg = cv['disc_magnet']
+    for mx, mz in disc_magnets(P, cx, wz):
+        dframe -= cyl('y', (mx, mz), mg['d'] + 0.2, yr - mg['t'] - 0.2, yr + 1)
+    out.append(Part('disc-frame', dframe, Sheet('mdf', dt), finish='black', option='cloth-disc', render=False,
+                    notes=[f'sprayed black; its face edge rounded; {mg["n"]} magnets ({mg["d"]:g} x {mg["t"]:g}) bonded in the pockets '
+                           f'behind it, each attracting its partner in a pocket behind the ring through {r["t"] - mg["t"] - 0.2:g} of MDF']))
+    out.append(Part('cloth-disc', cyl('y', (cx, wz), r['od'] + 1.0, yr - dt - 0.5, yr), Bought('grille-cloth'), finish='disc',
+                    option='cloth-disc', notes=[f'Ø{r["od"] + 1:g}: stretched across the frame\'s face and round its edge, glued behind; '
+                                                f'its face {yr - dt - 0.5:g} back from the shell\'s front']))
+    out.append(Part('cloth-disc-magnets', None, Bought('grille-magnets'), option='cloth-disc'))
+
     # the facings: bark (1 mm) or cork (3 mm) laid on the panel round the ring and the port before the ring goes on
     holes = [('circle', cx, wz, r['od'] + 1.0), ('rect', pt['x'], pt['z'], port_o + 0.4, port_o + 0.4)]
     for name, make, fin in (('bark', Bought('bark-sheet'), 'bark'), ('cork', Sheet('cork', cv['face_t']['cork'], face='-y'), 'cork')):
@@ -276,24 +371,41 @@ def covers(P, wz, port_o):
     return out
 
 
+# each waveguide from its bark: birch's milk white (a warm white deep in the casting, as sap), on a pale panel and an
+# off-white ring as photographed; eucalyptus's sage, deepening to its leaf green, on a sage-grey panel and a cream ring
+VARIANTS = dict(
+    birch={'bark': 'birch_bark', 'panel': '#D8D5CD', 'ring': '#EEEAE2', 'horn': '#F5F2EC', 'horn_deep': '#EFE5D3',
+           'horn_preset': 'frosted', 'cloth': '#DCD6C8', 'cork': '#3B2F28', 'disc': '#2E2C2A'},
+    eucalyptus={'bark': 'eucalyptus_bark', 'panel': '#CBCFC4', 'ring': '#E8E2D4', 'horn': '#DEE6D4', 'horn_deep': '#B9C9A9',
+                'horn_preset': 'frosted', 'cloth': '#6F7F66', 'cork': '#3B2F28', 'disc': '#9A4526'})
+# the material experiments of 2026-10-11 (frames.py experiments): the shell in pressed recycled plastic, the waveguide
+# in resin poured in layers (strata) or with recycled plastic chips cast through it (terrazzo)
+VARIANTS.update({
+    'eucalyptus-pressed': {**VARIANTS['eucalyptus'], 'bark': 'pressed_eucalyptus'},
+    'birch-pressed': {**VARIANTS['birch'], 'bark': 'pressed_birch'},
+    'eucalyptus-strata': {**VARIANTS['eucalyptus'], 'horn_preset': 'frosted_strata'},
+    'birch-terrazzo': {**VARIANTS['birch'], 'horn_preset': 'frosted_terrazzo'},
+})
+
+
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,
     notes=['Bark on the shell (sides, top, bottom and back): real birch bark sheet (Betula papyrifera, from fallen or felled trees) laminated to the plywood with PVA in a vacuum bag and sealed with a matt waterborne lacquer, wrapped round the shell\'s front edges; for eucalyptus, the shed bark of a smooth-barked gum (spotted or snow gum) pressed flat and laminated the same way, or a UV-printed veneer of it. Approve a sample board first.',
            'Glue-up: sides to the bottom, the brace, then the front panel (set back 24 mm), the back, then the top.',
            'The woofer flush in its rebate on a gasket, eight M6 T-nuts from inside, the ring over its frame; the port pushed in dry, trimmed to tune (impedance minimum at fb), then bonded.',
            'The waveguide stands on three 10 mm stainless rods, M8 at both ends, in inserts in the top and in pads cast inside its underside.',
-           'Covers (options): a cloth grille, a slotted plywood grille (lenticels or strips), or the panel faced in bark or cork; a grille sits flush with the shell\'s front on four pegs into cups in the panel\'s corners, its back at least 12 clear of the cone at rest (twice the woofer\'s Xmax).',
+           'Covers (options): a cloth grille, a slotted plywood grille (lenticels or strips), a cloth disc over the woofer alone, or the panel faced in bark or cork; a grille sits flush with the shell\'s front on four pegs into cups in the panel\'s corners, its back at least 12 clear of the cone at rest (twice the woofer\'s Xmax); the disc stands on the woofer\'s ring on magnets.',
            'The FA122 crosses at about 800 Hz (LR4) with the HF channel about 14 dB down, part of it in the passive L-pad after the amplifier, so its hiss stays inaudible through a 113 dB driver.',
            'Hypex advises a sealed box round the amplifier module (left out here, as in the kit\'s example).'],
-    touching=[('grille-cloth', 'cloth-frame')],                 # the cloth wraps its frame
+    touching=[('grille-cloth', 'cloth-frame'), ('cloth-disc', 'disc-frame')],     # the cloth wraps its frame
     materials={'bark': {'preset': '$bark'}, 'raw': {'preset': 'birch'},
-               'cloth': {'preset': 'cloth', 'color': '$cloth'},
+               'cloth': {'preset': 'cloth', 'color': '$cloth'}, 'disc': {'preset': 'cloth', 'color': '$disc'},
                'grille-paint': {'preset': 'satin_paint', 'color': '$panel', 'roughness': 0.6, 'specular': 0.3},
                'grille-timber': {'preset': 'birch', 'color': '#8E6E4E', 'roughness': 0.55},
                'cork': {'preset': 'cork', 'color': '$cork'},
                'panel': {'preset': 'satin_paint', 'color': '$panel', 'roughness': 0.6, 'specular': 0.3},
                'ring': {'preset': 'satin_paint', 'color': '$ring', 'roughness': 0.45, 'specular': 0.4},
-               'horn': {'preset': 'frosted', 'color': '$horn', 'absorb': '$horn_deep', 'radius': 0.025, 'clear': 0.15, 'roughness': 0.45},
+               'horn': {'preset': '$horn_preset', 'color': '$horn', 'absorb': '$horn_deep', 'radius': 0.025, 'clear': 0.15, 'roughness': 0.45},
                'rod': {'preset': 'metal', 'color': '#C9C9C6', 'roughness': 0.3},
                'port': {'preset': 'satin_paint', 'color': '#1A1817', 'roughness': 0.7},
                'amp': {'preset': 'satin_paint', 'color': '#303033', 'roughness': 0.4, 'specular': 0.5},   # black anodised plate
@@ -302,13 +414,7 @@ PRODUCT = Product(
                'driver-motor': {'preset': 'metal', 'color': '#3A3A3A'}, 'driver-magnet': {'preset': 'satin_paint', 'color': '#2B2B2B'},
                'driver-coil': {'preset': 'metal', 'color': '#B87333'}, 'driver-spider': {'preset': 'rubber', 'color': '#C8B88A'},
                'driver-plug': {'preset': 'satin_paint', 'color': '#111111'}},
-    # each waveguide from its bark: birch's milk white (a warm white deep in the casting, as sap), on a pale panel and
-    # an off-white ring as photographed; eucalyptus's sage, deepening to its leaf green, on a sage-grey panel and a
-    # cream ring
-    variants={'birch': {'bark': 'birch_bark', 'panel': '#D8D5CD', 'ring': '#EEEAE2', 'horn': '#F5F2EC', 'horn_deep': '#EFE5D3',
-                        'cloth': '#DCD6C8', 'cork': '#3B2F28'},
-              'eucalyptus': {'bark': 'eucalyptus_bark', 'panel': '#CBCFC4', 'ring': '#E8E2D4', 'horn': '#DEE6D4', 'horn_deep': '#B9C9A9',
-                             'cloth': '#6F7F66', 'cork': '#3B2F28'}},
+    variants=VARIANTS,
 )
 
 

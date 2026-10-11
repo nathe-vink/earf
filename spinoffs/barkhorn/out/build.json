@@ -1,14 +1,15 @@
 {
  "product": "barkhorn",
  "title": "barkhorn",
- "parts": 36,
- "seconds": 157,
+ "parts": 39,
+ "seconds": 192,
  "sheets": {
   "baltic-birch-18": 3,
   "mdf-6": 1,
   "mdf-6-cloth": 1,
   "baltic-birch-6-lenticel-grille": 1,
   "spotted-gum-ply-6-strip-grille": 1,
+  "mdf-12-cloth-disc": 1,
   "cork-3-cork-face": 1
  },
  "budget_usd": {
@@ -29,6 +30,10 @@
   },
   "strip-grille": {
    "usd": 0,
+   "unpriced": 2
+  },
+  "cloth-disc": {
+   "usd": 9,
    "unpriced": 2
   },
   "bark-face": {

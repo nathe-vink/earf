@@ -24,6 +24,10 @@
    "preset": "cork",
    "color": "$cork"
   },
+  "disc": {
+   "preset": "cloth",
+   "color": "$disc"
+  },
   "driver-cap": {
    "preset": "paper_cone",
    "color": "#1D1B1A"
@@ -72,7 +76,7 @@
    "roughness": 0.55
   },
   "horn": {
-   "preset": "frosted",
+   "preset": "$horn_preset",
    "color": "$horn",
    "absorb": "$horn_deep",
    "radius": 0.025,
@@ -121,6 +125,10 @@
   {
    "match": "cork-face",
    "material": "cork"
+  },
+  {
+   "match": "cloth-disc",
+   "material": "disc"
   },
   {
    "match": "woofer-cap",
@@ -198,8 +206,10 @@
    "ring": "#EEEAE2",
    "horn": "#F5F2EC",
    "horn_deep": "#EFE5D3",
+   "horn_preset": "frosted",
    "cloth": "#DCD6C8",
-   "cork": "#3B2F28"
+   "cork": "#3B2F28",
+   "disc": "#2E2C2A"
   },
   "eucalyptus": {
    "bark": "eucalyptus_bark",
@@ -207,8 +217,54 @@
    "ring": "#E8E2D4",
    "horn": "#DEE6D4",
    "horn_deep": "#B9C9A9",
+   "horn_preset": "frosted",
    "cloth": "#6F7F66",
-   "cork": "#3B2F28"
+   "cork": "#3B2F28",
+   "disc": "#9A4526"
+  },
+  "eucalyptus-pressed": {
+   "bark": "pressed_eucalyptus",
+   "panel": "#CBCFC4",
+   "ring": "#E8E2D4",
+   "horn": "#DEE6D4",
+   "horn_deep": "#B9C9A9",
+   "horn_preset": "frosted",
+   "cloth": "#6F7F66",
+   "cork": "#3B2F28",
+   "disc": "#9A4526"
+  },
+  "birch-pressed": {
+   "bark": "pressed_birch",
+   "panel": "#D8D5CD",
+   "ring": "#EEEAE2",
+   "horn": "#F5F2EC",
+   "horn_deep": "#EFE5D3",
+   "horn_preset": "frosted",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#2E2C2A"
+  },
+  "eucalyptus-strata": {
+   "bark": "eucalyptus_bark",
+   "panel": "#CBCFC4",
+   "ring": "#E8E2D4",
+   "horn": "#DEE6D4",
+   "horn_deep": "#B9C9A9",
+   "horn_preset": "frosted_strata",
+   "cloth": "#6F7F66",
+   "cork": "#3B2F28",
+   "disc": "#9A4526"
+  },
+  "birch-terrazzo": {
+   "bark": "birch_bark",
+   "panel": "#D8D5CD",
+   "ring": "#EEEAE2",
+   "horn": "#F5F2EC",
+   "horn_deep": "#EFE5D3",
+   "horn_preset": "frosted_terrazzo",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#2E2C2A"
   }
  },
  "options": {
@@ -220,6 +276,9 @@
   ],
   "strip-grille": [
    "grille-strips"
+  ],
+  "cloth-disc": [
+   "cloth-disc"
   ],
   "bark-face": [
    "bark-face"

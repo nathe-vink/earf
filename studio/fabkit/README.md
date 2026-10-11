@@ -128,6 +128,9 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
     `variants`, and each option's meshes (a shot fits an option per instance: `"options": ["cloth"]`).
   - A proof shot on a grey sweep, which a rebuild leaves alone once you have edited it. Render it with
     `python3 studio/engine/render.py studio/shots/<name>/proof.json --out ...`.
+  - A study of a product's variants (a part in several forms) can write each variant's model elsewhere:
+    `render.write(product, parts, out, engine_file=..., proof=False)` keeps it out of `studio/products/`
+    (barkhorn's `frames.py study` does this for its waveguide's forms).
 
 ## The speaker helpers (`speaker/`)
 

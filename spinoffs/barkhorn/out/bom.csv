@@ -5,7 +5,7 @@ bottom,cut,2,"18 mm Baltic birch plywood, BB/BB",524 x 420,2694,15.96,bark,,,cut
 front-panel,cut,2,"18 mm Baltic birch plywood, BB/BB",524 x 844,3879,32.06,panel,,,cut file dxf/front-panel.dxf,
 back,cut,2,"18 mm Baltic birch plywood, BB/BB",524 x 844,5040,32.06,bark,,,cut file dxf/back.dxf,
 brace,cut,2,"18 mm Baltic birch plywood, BB/BB",524 x 360,767,13.68,raw,,,cut file dxf/brace.dxf,
-woofer-ring,cut,2,6 mm MDF,436 x 436,235,4.28,ring,,,cut file dxf/woofer-ring.dxf,
+woofer-ring,cut,2,6 mm MDF,436 x 436,233,4.28,ring,,,cut file dxf/woofer-ring.dxf,
 port,print,2,"ASA, FDM (outdoor, paintable)",89 cm3,95,14.22,port,,,stl/port.stl,
 woofer,buy,2,"FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm)","393 frame, 356 cut-out, 165 deep",3600,194,99 dB 1 W/1 m (Faital); Xmax 5.75 mm (6 by another source),Thomann (US storefront; EUR 198 in the EU),2026-10-10,https://www.thomannmusic.com/faitalpro_15pr400_8_ohms.htm,
 amp-plate,buy,2,"Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm","315 x 120 x 55 plate, 291 x 96 recess",815,422.4,,Parts Express 221-006,2026-10-08,https://www.hypex.nl/,
@@ -31,5 +31,8 @@ grille-lenticel,cut,2,"6 mm Baltic birch plywood, BB/BB",521 x 841,1354,31.77,gr
 grille-lenticel-pegs,buy,2,"Grille pegs and cups, a set of four (push-fit; the cups in 10 mm holes 12 deep in the panel's corners)",,,,,any,2026-10-10,,lenticel-grille
 grille-strips,cut,2,6 mm Spotted gum-veneered plywood (a eucalypt hardwood face),521 x 841,1322,,grille-timber,,,cut file dxf/grille-strips.dxf,strip-grille
 grille-strips-pegs,buy,2,"Grille pegs and cups, a set of four (push-fit; the cups in 10 mm holes 12 deep in the panel's corners)",,,,,any,2026-10-10,,strip-grille
+disc-frame,cut,2,12 mm MDF,436 x 436,476,4.28,black,,,cut file dxf/disc-frame.dxf,cloth-disc
+cloth-disc,buy,2,"Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour",,,,,any,2026-10-10,,cloth-disc
+cloth-disc-magnets,buy,2,"Grille magnets: eight 15 x 3 neodymium discs (N42), four attracting pairs, a set",,,,,any,2026-10-11,,cloth-disc
 bark-face,buy,2,"Bark for laminating, a square metre: paper birch (Betula papyrifera) sheet from fallen or felled trees, or a smooth-barked gum's shed bark pressed flat (or a UV-printed veneer of it); approve a sample board first",,,,,a bark craft supplier,2026-10-10,,bark-face
 cork-face,cut,2,"3 mm Cork sheet, agglomerated",523 x 843,201,,cork,,,cut file dxf/cork-face.dxf,cork-face

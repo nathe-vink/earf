@@ -69,6 +69,16 @@ No price yet for: Grille pegs and cups, a set of four (push-fit; the cups in 10 
 
 No price yet for: 6 mm Spotted gum-veneered plywood (a eucalypt hardwood face); Grille pegs and cups, a set of four (push-fit; the cups in 10 mm holes 12 deep in the panel's corners).
 
+### cloth-disc: about $9 before the unpriced
+
+| item | make | qty | what | size | each, USD |
+|---|---|---|---|---|---|
+| disc-frame | cut | 2 | 12 mm MDF | 436 x 436 | 4.28 |
+| cloth-disc | buy | 2 | Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour |  | [PRICE] |
+| cloth-disc-magnets | buy | 2 | Grille magnets: eight 15 x 3 neodymium discs (N42), four attracting pairs, a set |  | [PRICE] |
+
+No price yet for: Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour; Grille magnets: eight 15 x 3 neodymium discs (N42), four attracting pairs, a set.
+
 ### bark-face: [PRICE]
 
 | item | make | qty | what | size | each, USD |

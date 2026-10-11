@@ -17,7 +17,9 @@ import json, os
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
-def write(product, parts, out):
+def write(product, parts, out, engine_file=None, proof=True):
+    """`engine_file` puts the engine's product file elsewhere than studio/products/<name>.json (a study's variant of a
+    product, kept out of the products), and `proof` False writes no proof shot."""
     from build123d import Compound, Unit, export_gltf
     rd = os.path.join(out, 'render'); os.makedirs(rd, exist_ok=True)
     kids, boxes, finish = [], {}, {}
@@ -53,9 +55,11 @@ def write(product, parts, out):
             opts.setdefault(p.option, []).extend([f'{p.name}-{k}' for k in p.pieces] or [p.name])
     if opts:
         eng['options'] = opts
-    pf = os.path.join(ROOT, 'studio', 'products', f'{product.name}.json')
-    json.dump(eng, open(pf, 'w'), indent=1)
-    proof_shot(product, boxes, origin)
+    pf = engine_file or os.path.join(ROOT, 'studio', 'products', f'{product.name}.json')
+    json.dump(eng, open(pf + '.part', 'w'), indent=1)
+    os.replace(pf + '.part', pf)                 # whole or not at all: a render may be reading it
+    if proof:
+        proof_shot(product, boxes, origin)
     return glb, pf
 
 

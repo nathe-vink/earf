@@ -4,10 +4,73 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
 it). There are two finishes, birch bark and eucalyptus bark, each with a horn in its bark's colours.
 
-Status: **concept, round 2**. The proportions follow the photograph. The sizes are scaled from its turntable (about
+Status: **concept, round 3**. The proportions follow the photograph. The sizes are scaled from its turntable (about
 450 wide).
 
 ![The two barks, front](../../renders/2026-10-10/barkhorn/front-v3.png)
+
+## Round 3: the owner's notes of 2026-10-11
+
+| the note | what changed |
+|---|---|
+| "Maybe bark face with a solid color cloth grille." | Both readings are rendered, on both barks (`../../renders/2026-10-11/barkhorn/front.png`). The first is the front faced in bark under a full cloth grille in one colour, so the bark shows when the grille comes off. The second is a **cloth disc** over the woofer alone, so the bark and the colour show together. The disc is a new option: a 12 mm MDF ring frame on the woofer's ring, the cloth across its face and round its edge, held by magnets, its face 18.5 clear of the cone. |
+| "The eucalyptus is sick." | Kept as it is. |
+| "The waveguide still needs work." | A **study of five forms** (below; `../../renders/2026-10-11/barkhorn/study.png`). Each is built in the CAD on the same speaker and seen from the front, the side and behind. |
+| "Also open to more experimental shit." | **Material experiments** (below; `../../renders/2026-10-11/barkhorn/experiments.png`): the cabinet in pressed recycled plastic, and the waveguide in strata or terrazzo resin. |
+
+![The bark face under a solid colour cloth](../../renders/2026-10-11/barkhorn/front.png)
+
+**My picks for the front:** the disc, charcoal or apricot on birch and rust on eucalyptus. Each takes a colour the
+bark already has: birch's lenticels or its peel, the gum's rust strips.
+
+### The waveguide study
+
+![The waveguide study](../../renders/2026-10-11/barkhorn/study.png)
+
+What was wrong with round 2's shell, now that it is seen from every side:
+
+- From the front it reads as a moulded basin, not as frosted resin with any depth.
+- From the side, a funnel with a can behind it reads as a megaphone.
+- From behind, the pod is a bulb stuck on.
+
+| form | what it is | resin (production) | read |
+|---|---|---|---|
+| shell (round 2) | a 6 mm shell following the flare, a pod behind round the driver | 1.5 L | thinnest; a megaphone from the side, a bulb from behind |
+| lens | thin at its edge, curving back to a round back that holds the driver | about 5 L cast hollow (18 L solid) | one stone, nothing showing; from the front much as the shell |
+| slab | a 64 mm slab with fully rounded edges (the photograph's soft rim), the rest of the flare in a tail behind | 6 L solid (about 4 L hollow) | the most presence from the front; a neck and pod behind |
+| **pebble** | the slab's rolled rim (30 round the mouth) on the lens's smooth back | about 5 L cast hollow (19 L solid) | the soft rim from the front, a stone from the side and behind |
+| round | a round tractrix horn for 400 Hz, its lip rolled back, a closed can behind | 1.1 L | a trumpet; rhymes with the disc, beams more at high frequencies |
+
+The hollow volumes are a 7 mm skin over every face, from the CAD's surface areas. The shell, lens, slab and pebble
+share one flare: 612 x 272 at the mouth, 170 deep, about 120 x 75 degrees. They
+differ only in how they look and what they weigh. Each was checked against the rods (cut to its underside) and the
+driver (no clashes). The round horn is acoustically different: it is axisymmetric, and its coverage narrows as the
+frequency rises.
+
+**My pick: the pebble**, in strata resin on eucalyptus and in terrazzo on birch (below). It hides the driver as the
+round-1 block did, but tapers to a thin edge, so it reads as one sculpted stone rather than a box. The resin's
+thickness shows as a glow and a deepening of colour, which the thin shell could not.
+
+![Where the study points](../../renders/2026-10-11/barkhorn/proposal.png)
+
+### Material experiments
+
+![Material experiments](../../renders/2026-10-11/barkhorn/experiments.png)
+
+- **Pressed recycled plastic** (the owner's vinyl-pressing idea of 2026-10-11). Flakes of coloured HDPE are laid out
+  and hot-pressed into sheet, the press's flow drawing them out:
+  - eucalyptus: strands of green, ochre, rust and grey stretch into camo strips;
+  - birch: black flakes in white stretch into lenticel dashes.
+
+  The sheet is welded, not glued. A cast or rotomoulded cabinet in the same pattern would need ribs or a stone-filled
+  resin to be as stiff as the plywood.
+- **Strata resin**: the waveguide poured in layers of the gum's colours (sage, cream, honey), each a few centimetres
+  thick, their boundaries wavy. It reads as agate and glows where the resin is thick.
+- **Terrazzo resin**: milky resin with recycled plastic chips cast through it (black, grey, apricot): birch's
+  lenticels again.
+
+These are renders of the idea. The materials are procedural (`pressed_eucalyptus`, `pressed_birch`, `frosted_strata`,
+`frosted_terrazzo` in `studio/engine/materials.py`). A sample from a maker comes before any of them is drawn up.
 
 ## Round 2: the owner's notes of 2026-10-10
 
@@ -74,6 +137,7 @@ crossover.
 | strip grille (eucalyptus's own) | 6 mm spotted-gum plywood (a eucalypt hardwood face), oiled, cut with 124 long vertical slots in columns, bridged at random heights, as the bark's strips; 28 % open | warm timber under the wet bark: the tree's wood in front, its bark round it |
 | bark face | the panel faced in the bark itself (1 mm), cut round the ring and the port | a log with a speaker in it; the boldest |
 | cork face | 3 mm cork sheet laid on the panel round the ring and the port; dark, as smoked expanded cork | cork is bark too (the cork oak's): a third bark, dark behind the white ring |
+| cloth disc (round 3) | the woofer alone covered: a 12 mm MDF ring frame on the woofer's ring, the cloth across its face and round its edge; four magnet pairs hold it, their partners in pockets behind the ring, so the ring's face stays clean without it; any solid colour | a circle of colour on the panel or on its bark face; the bark shows round it |
 
 The slot patterns are seeded, so a rebuild cuts the same panel. Their cut files are in `out/dxf/`, nested on sheets of
 their own. The covers' materials are budgets only where the kit has a rate: the cloth, the pegs, the bark, the cork
@@ -91,7 +155,10 @@ tree. Bare stays the reference for both.
 Built with the fab kit (`studio/fabkit`):
 
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/product.py
-    python3 spinoffs/barkhorn/render_covers.py          # the covers' grid (one frame per bark and cover)
+    python3 spinoffs/barkhorn/frames.py study           # a comparison sheet: covers, front, study, experiments or proposal
+
+The waveguide's form is `P['horn']['form']` in `product.py` (`shell` as built today; `lens`, `slab`, `pebble` or
+`round`). `frames.py study` builds each form's render model into `out/study/` first.
 
 It writes `out/`:
 
@@ -100,7 +167,7 @@ It writes `out/`:
 - the checks (no clashes, covers included);
 - the parts list (`bom.md`): about $3,430 for the pair at budget rates, before the few unpriced items, with each cover
   listed after it with its own subtotal;
-- 17 A3 drawing sheets (`out/drawings/barkhorn-sheets.pdf`). The assembly sheets show the speaker without covers;
+- 18 A3 drawing sheets (`out/drawings/barkhorn-sheets.pdf`). The assembly sheets show the speaker without covers;
   each cover's cut panel has a sheet of its own, its slots as one pattern;
 - the render model.
 
@@ -110,16 +177,14 @@ The shots are in `studio/shots/barkhorn/`:
 - `birch` and `eucalyptus`;
 - `eucalyptus-detail`: the bark close to;
 - `back`: the waveguide from behind;
-- `covers/`: one shot per bark and cover.
+- `covers/`, `front/`, `study/`, `experiments/` and `proposal/`: one shot per frame of each comparison sheet.
 
 ## Open questions for the owner
 
-1. **The waveguide.** Is the thin shell with its pod the sleek look you meant?
-2. **The eucalyptus.** Is this the gum after rain you meant? A photograph of the tree you have in mind would let it be
-   matched.
-3. **The covers.** Pick per finish, or none. The grilles can also go the other way round (lenticels on eucalyptus,
-   strips on birch), and any cover can take another colour.
-4. **The colours above.** Keep them or swap. Options include a charcoal front panel on birch, or a salmon or amber
-   waveguide on eucalyptus (as Friendly Pressure's amber).
-5. **A name.** barkhorn is a placeholder.
-6. **Price.** [PAIR PRICE] stays open.
+1. **The waveguide.** Which form: the pebble (my pick), the lens, the slab, the round horn, or another round? And in
+   which resin: frosted, strata or terrazzo?
+2. **The front.** The disc or the full grille, and which colour on each bark?
+3. **The experiments.** Is pressed recycled plastic a direction to take further? The next steps would be a sample sheet
+   from a maker, then a cast or rotomoulded cabinet drawn up in it.
+4. **A name.** barkhorn is a placeholder.
+5. **Price.** [PAIR PRICE] stays open.
