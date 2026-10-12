@@ -21,7 +21,10 @@ Sets:
   four sides;
 - shells (round 5): the waveguide's resins, close to: clear, dark and clear, opaque, marbled and swirled;
 - woodfree (round 5): the cabinet without wood, its panels pressed recycled plastic laid out in each bark's pattern;
-- pick5 (round 5): where round 5 points, both barks.
+- pick5 (round 5): where round 5 points, both barks;
+- printed (round 6): the horn printed with its bark's pattern in translucent inks, close to and on the speaker;
+- cabinets (round 6): the cabinet in other plastics, without wood: translucent acrylic, stone looks, marble and swirl;
+- pick6 (round 6): the line, without wood, its two ports, from three-quarter and from the front.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -168,6 +171,36 @@ SETS = {
                      F('pick5-eucalyptus', 'eucalyptus', 'eucalyptus: bottle-green resin, rust disc', lights=GLOW5)],
         'as photographed': [F('pick5-photo-birch', 'birch', 'birch, from the photograph\'s angle', camera=PHOTO, lights=GLOW5),
                             F('pick5-photo-eucalyptus', 'eucalyptus', 'eucalyptus, from the photograph\'s angle', camera=PHOTO, lights=GLOW5)]}),
+    'printed': dict(title='barkhorn: the horn printed with its bark, in translucent inks', rows={
+        'birch': [F('printed-birch', 'birch-printed', 'lenticels printed on clear', product=PRESSED, camera=CLOSE, lights=GLOW5, size=[900, 640]),
+                  F('printed-birch-smoke', 'birch-printed-smoke', 'on a light smoke', product=PRESSED, camera=CLOSE, lights=GLOW5,
+                    size=[900, 640]),
+                  F('printed-birch-speaker', 'birch-printed', 'the speaker', product=PRESSED, camera=RIGHT_Q, lights=GLOW5)],
+        'eucalyptus': [F('printed-eucalyptus', 'eucalyptus-printed', 'strips printed on clear', product=PRESSED, camera=CLOSE, lights=GLOW5,
+                         size=[900, 640]),
+                       F('printed-eucalyptus-green', 'eucalyptus-printed-green', 'on a light green', product=PRESSED, camera=CLOSE,
+                         lights=GLOW5, size=[900, 640]),
+                       F('printed-eucalyptus-speaker', 'eucalyptus-printed', 'the speaker', product=PRESSED, camera=RIGHT_Q, lights=GLOW5)]}),
+    'cabinets': dict(title='barkhorn without wood: the cabinet in other plastics', camera=RIGHT_Q, rows={
+        'translucent, as late-90s electronics (cast acrylic)': [
+            F('cab-y2k-smoke', 'birch-y2k-smoke', 'smoked acrylic, smoked horn', product=PRESSED, lights=GLOW5),
+            F('cab-y2k-green', 'eucalyptus-y2k-green', 'green acrylic, bottle-green horn', product=PRESSED, lights=GLOW5),
+            F('cab-y2k-ice', 'birch-y2k-ice', 'frosted ice, clear horn', product=PRESSED, lights=GLOW5)],
+        'stone': [F('cab-terrazzo', 'birch-stone-terrazzo', 'terrazzo', product=PRESSED, lights=GLOW5),
+                  F('cab-marble', 'birch-stone-marble', 'cultured marble', product=PRESSED, lights=GLOW5),
+                  F('cab-onyx', 'eucalyptus-stone-onyx', 'green onyx, translucent', product=PRESSED, lights=GLOW5)],
+        'marble and swirl, horn and cabinet alike': [
+            F('cab-marbled-birch', 'birch-marbled', 'marbled black and white', product=PRESSED, lights=GLOW5),
+            F('cab-marbled-eucalyptus', 'eucalyptus-marbled', 'marbled in the bark\'s colours', product=PRESSED, lights=GLOW5),
+            F('cab-swirled-birch', 'birch-swirled', 'smoke swirled through clear', product=PRESSED, lights=GLOW5),
+            F('cab-swirled-eucalyptus', 'eucalyptus-swirled', 'green swirled through amber', product=PRESSED, lights=GLOW5)]}),
+    'pick6': dict(title='barkhorn: the line, without wood', rows={
+        'the pair': [F('pick6-birch', 'birch-pressed', 'birch: smoked resin, charcoal disc', product=PRESSED, camera=RIGHT_Q, lights=GLOW5),
+                     F('pick6-eucalyptus', 'eucalyptus-pressed', 'eucalyptus: bottle-green resin, rust disc', product=PRESSED, camera=RIGHT_Q,
+                       lights=GLOW5)],
+        'from the front: a port in each corner': [
+            F('pick6-front-birch', 'birch-pressed', 'birch', product=PRESSED, camera=FRONT_CAM, lights=GLOW5),
+            F('pick6-front-eucalyptus', 'eucalyptus-pressed', 'eucalyptus', product=PRESSED, camera=FRONT_CAM, lights=GLOW5)]}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],

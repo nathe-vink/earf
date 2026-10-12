@@ -115,9 +115,16 @@ PRESET_DEFAULTS = {
     # after `radius` metres of it). Its face is satin (`roughness`: 0.05 polished, 0.3 frosted), which blurs what lies
     # behind it. `milk`: a share of white haze through it (0 is water-clear). `cloud`: a second, denser tint folded
     # through it in swirls `cloud_m` across, as a hand pour folds in a second colour; `vein` is that tint's colour after
-    # `radius` (None: `deep`, deeper)
+    # `radius` (None: `deep`, deeper); `cloud_edge`, where along the folded noise the swirls start and are full (close
+    # together: an onyx's banded veins). `print` (round 6): a bark preset's pattern printed on the face in translucent
+    # inks (a hydrographic film, or tinted resin laid in the mould), `print_strength` of the way from clear to the
+    # pattern's colours, `print_scale` its size (> 1 smaller)
     'clear_resin': dict(color='#FFFFFF', deep='#9A9C96', radius=0.01, roughness=0.16, ior=1.5, milk=0.0, cloud=0.0,
-                        cloud_m=0.07, vein=None),
+                        cloud_m=0.07, vein=None, cloud_edge=(0.42, 0.85), print=None, print_strength=0.7, print_scale=1.0),
+    # terrazzo, opaque (round 6, a stone look): chips about `chip` across in a `share` of the cells, each its colour from
+    # the palette, in a ground of `color`, honed satin (cast resin, Jesmonite or pressed recycled plastic chips)
+    'terrazzo': dict(color='#ECE8E0', palette=[['#1E1C1A', 0.4], ['#7A766F', 0.3], ['#C9976E', 0.15], ['#B9B4AA', 0.15]],
+                     chip=0.012, share=0.35, roughness=0.38, coat=0.15),
     # pigmented cast resin, opaque (round 5, the owner: "something entirely darker, like black on birch and green on
     # eucalyptus"): a satin face (`roughness`), a thin glossier skin over it (`coat`) as a cast face keeps, a slow drift
     # in its value (`cloud`, `cloud_m` across) so it reads as a cast part and not as paint, and a faint fibre
@@ -262,6 +269,10 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         _clear_resin(nt, b, p, normal)
     elif preset in ('dark_resin', 'marbled_resin'):
         _opaque_resin(nt, b, p, normal)
+    elif preset == 'terrazzo':
+        nt.links.new(_terrazzo(nt, p), I['Base Color'])
+        setin('Roughness', p['roughness']); setin('Coat Weight', p['coat']); setin('Coat Roughness', 0.3)
+        if normal is not None: nt.links.new(normal, I['Normal'])
     elif preset == 'emit':
         out = nt.nodes['Material Output']; nt.nodes.remove(b)
         em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = hex_lin(p['color']); em.inputs['Strength'].default_value = p['strength']
@@ -427,7 +438,7 @@ def _birch_bark(nt, b, p, normal_in=None):
     here, the trunk's axis taken as z), longer and fewer ones among them, a few dark scars, and apricot where the
     papery outer layer has peeled. World space, metres; `scale` > 1 makes every mark smaller."""
     node, math_, mix, smooth = _nodes(nt)
-    uv, geo = _face_uv(nt, node, math_)
+    uv, geo = (_front_uv if p.get('project') == 'front' else _face_uv)(nt, node, math_)
     pos = geo.outputs['Position']
     k = p['scale']
     sheet = _sheet_seed(nt, node, math_, geo, p)
@@ -499,6 +510,15 @@ def _birch_bark(nt, b, p, normal_in=None):
     nt.links.new(bn.outputs['Normal'], b.inputs['Normal'])
 
 
+def _front_uv(nt, node, math_):
+    """Coordinates projected from the front, metres: (x, z, 0) on every face, as a print laid on a horn reads from in
+    front of it (the face-plane coordinates of a box streak along a flare's walls)."""
+    geo = node('ShaderNodeNewGeometry')
+    sep = node('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], sep.inputs['Vector'])
+    co = node('ShaderNodeCombineXYZ'); nt.links.new(sep.outputs['X'], co.inputs['X']); nt.links.new(sep.outputs['Z'], co.inputs['Y'])
+    return co.outputs['Vector'], geo
+
+
 def _eucalyptus_bark(nt, b, p, normal_in=None):
     """A smooth-barked gum after rain. Its bark sheds in layers. Under everything is the fresh underbark (`base`, a ramp
     streaked up the trunk: deep green, olive, yellow, orange). Over it lie the older layers (`layers`, fresh to old),
@@ -511,7 +531,7 @@ def _eucalyptus_bark(nt, b, p, normal_in=None):
     after rain.\""""
     from statistics import NormalDist
     node, math_, mix, smooth = _nodes(nt)
-    uv, geo = _face_uv(nt, node, math_)
+    uv, geo = (_front_uv if p.get('project') == 'front' else _face_uv)(nt, node, math_)
     k = p['scale']
     sep = node('ShaderNodeSeparateXYZ'); nt.links.new(uv, sep.inputs['Vector'])
     y = sep.outputs['Y']
@@ -851,18 +871,35 @@ def _clear_resin(nt, b, p, normal_in=None):
     if p['cloud'] > 0:                               # the denser tint in soft clouds over half a folded noise (thin
         cv = tuple(1.0 - c / D for c in sv) + (1.0,)  # ribbons of it read as crumpled foil through the face)
         f = _folded(nt, node, p['cloud_m'], 0.8, 1.6, detail=3.0)
-        nt.links.new(mix(math_('MULTIPLY', smooth(f, 0.42, 0.85), p['cloud']), c0, cv), ab.inputs['Color'])
+        lo, hi = p['cloud_edge']
+        nt.links.new(mix(math_('MULTIPLY', smooth(f, lo, hi), p['cloud']), c0, cv), ab.inputs['Color'])
     else:
         ab.inputs['Color'].default_value = c0
     nt.links.new(ab.outputs['Volume'], out.inputs['Volume'])
     lp = node('ShaderNodeLightPath')
     tr = node('ShaderNodeBsdfTransparent'); g = 1.0 - 0.6 * p['milk']; tr.inputs['Color'].default_value = (g, g, g, 1.0)
+    if p.get('print'):                               # the bark printed on the face: its colours tint what crosses it
+        ink = _print_colour(nt, p['print'], p['print_scale'])
+        tint = mix(p['print_strength'], hex_lin(p['color']), ink)
+        nt.links.new(tint, I['Base Color'])
+        nt.links.new(mix(1.0 - 0.6 * p['milk'], (0.0, 0.0, 0.0, 1.0), tint), tr.inputs['Color'])
     ms = node('ShaderNodeMixShader')
     nt.links.new(lp.outputs['Is Shadow Ray'], ms.inputs['Fac'])
     nt.links.new(b.outputs['BSDF'], ms.inputs[1]); nt.links.new(tr.outputs['BSDF'], ms.inputs[2])
     nt.links.new(ms.outputs['Shader'], out.inputs['Surface'])
     if normal_in is not None:
         nt.links.new(normal_in, I['Normal'])
+
+
+def _print_colour(nt, preset, scale):
+    """A bark preset's colour alone, as a socket: its shader built against a stand-in BSDF that is then removed, the
+    colour it fed kept (so a clear part can wear the bark as a translucent print)."""
+    stand = nt.nodes.new('ShaderNodeBsdfPrincipled')
+    q = {**PRESET_DEFAULTS[preset], 'scale': PRESET_DEFAULTS[preset].get('scale', 1.0) * scale, 'bump': 0.0, 'project': 'front'}
+    {'birch_bark': _birch_bark, 'eucalyptus_bark': _eucalyptus_bark}[preset](nt, stand, q)
+    col = next(l.from_socket for l in nt.links if l.to_socket == stand.inputs['Base Color'])
+    nt.nodes.remove(stand)
+    return col
 
 
 def _opaque_resin(nt, b, p, normal_in=None):

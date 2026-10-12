@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461326.76599537
+2461326.84875
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461326.76599537
+2461326.84875
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-4F
+50
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{DAD2D8B9-D36E-4B5B-A17C-D5A08C6C22D8}
+{F2514EBF-EAE0-4CEC-B568-066CA2D81E04}
   9
 $VERSIONGUID
   2
-{BDC20549-8CA3-4CC7-9BD2-E8038B7938B1}
+{9679B8AB-7672-49F3-B732-2341D112C16F}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1651,7 +1651,7 @@ Continuous
   0
 LAYER
   5
-3D
+3E
 330
 1
 100
@@ -1773,7 +1773,7 @@ ACAD
   0
 APPID
   5
-4C
+4D
 330
 3
 100
@@ -1787,7 +1787,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-4D
+4E
 330
 3
 100
@@ -2179,6 +2179,42 @@ AcDbPolyline
  70
 1
  10
+149.2
+ 20
+157.2
+ 10
+40.8
+ 20
+157.2
+ 10
+40.8
+ 20
+48.800000000000004
+ 10
+149.2
+ 20
+48.8
+ 10
+149.2
+ 20
+157.2
+  0
+LWPOLYLINE
+  5
+34
+330
+17
+100
+AcDbEntity
+  8
+CUT_INSIDE
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
 499.19999999999993
  20
 157.2
@@ -2201,7 +2237,7 @@ AcDbPolyline
   0
 CIRCLE
   5
-34
+35
 330
 17
 100
@@ -2221,7 +2257,7 @@ AcDbCircle
   0
 CIRCLE
   5
-35
+36
 330
 17
 100
@@ -2241,7 +2277,7 @@ AcDbCircle
   0
 CIRCLE
   5
-36
+37
 330
 17
 100
@@ -2258,26 +2294,6 @@ AcDbCircle
 0.0
  40
 3.5
-  0
-CIRCLE
-  5
-37
-330
-17
-100
-AcDbEntity
-  8
-CUT_INSIDE
-100
-AcDbCircle
- 10
-270.0
- 20
-468.0
- 30
-0.0
- 40
-178.0
   0
 CIRCLE
   5
@@ -2331,13 +2347,13 @@ CUT_INSIDE
 100
 AcDbCircle
  10
-341.75314356845433
+270.0
  20
-641.2274123458662
+468.0
  30
 0.0
  40
-3.5
+178.0
   0
 CIRCLE
   5
@@ -2351,9 +2367,9 @@ CUT_INSIDE
 100
 AcDbCircle
  10
-443.22741234586624
+341.75314356845433
  20
-396.24685643154555
+641.2274123458662
  30
 0.0
  40
@@ -2373,6 +2389,26 @@ AcDbCircle
  10
 443.22741234586624
  20
+396.24685643154555
+ 30
+0.0
+ 40
+3.5
+  0
+CIRCLE
+  5
+3D
+330
+17
+100
+AcDbEntity
+  8
+CUT_INSIDE
+100
+AcDbCircle
+ 10
+443.22741234586624
+ 20
 539.7531435684543
  30
 0.0
@@ -2381,7 +2417,7 @@ AcDbCircle
   0
 LWPOLYLINE
   5
-3E
+3F
 330
 17
 100
@@ -4001,7 +4037,7 @@ AcDbPolyline
   0
 TEXT
   5
-3F
+40
 330
 17
 100
@@ -4031,7 +4067,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-40
+41
 330
 17
 100
@@ -4066,36 +4102,6 @@ AcDbPolyline
 15.0
   0
 TEXT
-  5
-41
-330
-17
-100
-AcDbEntity
-  8
-NOTES
-100
-AcDbText
- 10
-547.0
- 20
-25.0
- 30
-0.0
- 40
-12.0
-  1
-rib-right-2
- 11
-547.0
- 21
-25.0
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
   5
 42
 330
@@ -4103,35 +4109,29 @@ LWPOLYLINE
 100
 AcDbEntity
   8
-CUT_OUTSIDE
+NOTES
 100
-AcDbPolyline
- 90
-5
- 70
-1
+AcDbText
  10
-609.0
+547.0
  20
-15.0
- 10
-669.0
- 20
-15.0
- 10
-669.0
- 20
-490.0
- 10
-609.0
- 20
-490.0
- 10
-609.0
- 20
-15.0
+25.0
+ 30
+0.0
+ 40
+12.0
+  1
+rib-right-1
+ 11
+547.0
+ 21
+25.0
+ 31
+0.0
+100
+AcDbText
   0
-TEXT
+LWPOLYLINE
   5
 43
 330
@@ -4139,29 +4139,35 @@ TEXT
 100
 AcDbEntity
   8
-NOTES
+CUT_OUTSIDE
 100
-AcDbText
+AcDbPolyline
+ 90
+5
+ 70
+1
  10
-619.0
+609.0
  20
-25.0
- 30
-0.0
- 40
-12.0
-  1
-rib-right-2
- 11
-619.0
- 21
-25.0
- 31
-0.0
-100
-AcDbText
+15.0
+ 10
+669.0
+ 20
+15.0
+ 10
+669.0
+ 20
+490.0
+ 10
+609.0
+ 20
+490.0
+ 10
+609.0
+ 20
+15.0
   0
-LWPOLYLINE
+TEXT
   5
 44
 330
@@ -4169,35 +4175,29 @@ LWPOLYLINE
 100
 AcDbEntity
   8
-CUT_OUTSIDE
+NOTES
 100
-AcDbPolyline
- 90
-5
- 70
-1
+AcDbText
  10
-741.0
+619.0
  20
-15.0
- 10
-741.0
- 20
-490.0
- 10
-681.0
- 20
-490.0
- 10
-681.0
- 20
-15.0
- 10
-741.0
- 20
-15.0
+25.0
+ 30
+0.0
+ 40
+12.0
+  1
+rib-right-1
+ 11
+619.0
+ 21
+25.0
+ 31
+0.0
+100
+AcDbText
   0
-TEXT
+LWPOLYLINE
   5
 45
 330
@@ -4205,29 +4205,35 @@ TEXT
 100
 AcDbEntity
   8
-NOTES
+CUT_OUTSIDE
 100
-AcDbText
+AcDbPolyline
+ 90
+5
+ 70
+1
  10
-691.0
+741.0
  20
-25.0
- 30
-0.0
- 40
-12.0
-  1
-rib-back-1-2
- 11
-691.0
- 21
-25.0
- 31
-0.0
-100
-AcDbText
+15.0
+ 10
+741.0
+ 20
+490.0
+ 10
+681.0
+ 20
+490.0
+ 10
+681.0
+ 20
+15.0
+ 10
+741.0
+ 20
+15.0
   0
-LWPOLYLINE
+TEXT
   5
 46
 330
@@ -4235,35 +4241,29 @@ LWPOLYLINE
 100
 AcDbEntity
   8
-CUT_OUTSIDE
+NOTES
 100
-AcDbPolyline
- 90
-5
- 70
-1
+AcDbText
  10
-813.0
+691.0
  20
-15.0
- 10
-813.0
- 20
-490.0
- 10
-753.0
- 20
-490.0
- 10
-753.0
- 20
-15.0
- 10
-813.0
- 20
-15.0
+25.0
+ 30
+0.0
+ 40
+12.0
+  1
+rib-back-1-1
+ 11
+691.0
+ 21
+25.0
+ 31
+0.0
+100
+AcDbText
   0
-TEXT
+LWPOLYLINE
   5
 47
 330
@@ -4271,29 +4271,35 @@ TEXT
 100
 AcDbEntity
   8
-NOTES
+CUT_OUTSIDE
 100
-AcDbText
+AcDbPolyline
+ 90
+5
+ 70
+1
  10
-763.0
+813.0
  20
-25.0
- 30
-0.0
- 40
-12.0
-  1
-rib-back-1-2
- 11
-763.0
- 21
-25.0
- 31
-0.0
-100
-AcDbText
+15.0
+ 10
+813.0
+ 20
+490.0
+ 10
+753.0
+ 20
+490.0
+ 10
+753.0
+ 20
+15.0
+ 10
+813.0
+ 20
+15.0
   0
-LWPOLYLINE
+TEXT
   5
 48
 330
@@ -4301,6 +4307,36 @@ LWPOLYLINE
 100
 AcDbEntity
   8
+NOTES
+100
+AcDbText
+ 10
+763.0
+ 20
+25.0
+ 30
+0.0
+ 40
+12.0
+  1
+rib-back-1-1
+ 11
+763.0
+ 21
+25.0
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+49
+330
+17
+100
+AcDbEntity
+  8
 CUT_OUTSIDE
 100
 AcDbPolyline
@@ -4331,7 +4367,7 @@ AcDbPolyline
   0
 TEXT
   5
-49
+4A
 330
 17
 100
@@ -4349,7 +4385,7 @@ AcDbText
  40
 12.0
   1
-rib-back-2-2
+rib-back-2-1
  11
 835.0
  21
@@ -4361,7 +4397,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-4A
+4B
 330
 17
 100
@@ -4397,7 +4433,7 @@ AcDbPolyline
   0
 TEXT
   5
-4B
+4C
 330
 17
 100
@@ -4415,7 +4451,7 @@ AcDbText
  40
 12.0
   1
-rib-back-2-2
+rib-back-2-1
  11
 907.0
  21
@@ -5415,7 +5451,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-4E
+4F
   0
 DICTIONARYVAR
   5
@@ -5427,11 +5463,11 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-12T18:23:02.546574+00:00
+1.4.4 @ 2026-10-12T20:22:12.689357+00:00
   0
 DICTIONARYVAR
   5
-4E
+4F
 330
 2D
 100
@@ -5439,7 +5475,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-12T18:23:02.550095+00:00
+1.4.4 @ 2026-10-12T20:22:12.692629+00:00
   0
 ENDSEC
   0

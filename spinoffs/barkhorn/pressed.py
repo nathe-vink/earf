@@ -9,8 +9,9 @@ Why 25 mm, two braces and ribs: HDPE is about a tenth as stiff as birch plywood 
 25 mm panel has about 40 % of the bending stiffness of 18 mm plywood and twice its weight per square metre, so a
 panel of the same span rings at about 0.45 of the plywood's frequency. The braces alone are not enough: a side panel's
 first resonance is set mostly by its short span, front to back. So ribs 25 x 60 are welded on edge inside: one up each
-side at mid-depth, a pair up the back, one under the top and one over the bottom. A second brace (z 700, between the
-woofer and the top) shortens the long spans. As simply supported plates, the panels' first resonances are then at or
+side at mid-depth and a pair up the back, between the braces (below and above them the spans are short and already
+stiff, and the ports run through the bottom bay), one under the top and one over the bottom. A second brace (z 700,
+between the woofer and the top) shortens the long spans. As simply supported plates, the panels' first resonances are then at or
 above the plywood cabinet's (a side: about 550 Hz against 300). HDPE's own damping, several times plywood's, keeps
 whatever still rings low.
 
@@ -30,7 +31,7 @@ import product as base                                               # noqa: E40
 P = copy.deepcopy(base.P)
 P.update(finish='pressed', stock='recycled-hdpe', T=25.0,
          braces=[dict(z=200.0, window=(420.0, 300.0)), dict(z=700.0, window=(420.0, 300.0))],
-         ribs=dict(t=25.0, depth=60.0, back=(150.0, 410.0)))
+         ribs=dict(t=25.0, depth=60.0, back=(150.0, 410.0), min_span=300.0))
 P['ring']['stock'] = 'recycled-hdpe'
 P['cover']['disc_stock'] = 'recycled-hdpe'
 PRODUCT = dataclasses.replace(

@@ -4,9 +4,145 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
 it). There are two finishes, birch bark and eucalyptus bark, each with a horn in its bark's colours.
 
-Status: **concept, round 5**. The proportions follow the photograph. The sizes are scaled from its turntable (about
-450 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver, and
-there is a version with no wood in it (round 5).
+Status: **concept, round 6**. The proportions follow the photograph. The sizes are scaled from its turntable (about
+450 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
+Decided by the owner: no wood (the cabinet is pressed recycled HDPE), smoked resin on birch and bottle green on
+eucalyptus, the solid neck round the throat, and a port in each bottom corner (round 6).
+
+## Round 6: the owner's notes of 2026-10-12 (evening)
+
+| the note | what changed |
+|---|---|
+| "I like the smoked and bottle green resin." | **Decided**: smoked resin on birch, bottle green on eucalyptus (the `birch` and `eucalyptus` flavours). |
+| "I like the solid horn neck I think, assuming that's what's pictured." | **Decided**: yes, every round 5 render shows the solid neck, the dark disc round the throat in the clear and smoked resins. |
+| "I want to go wood free with this if possible." | **Decided**: it is possible, and it is the line now: `pressed.py`, every panel 25 mm pressed recycled HDPE, welded (round 5). The plywood and bark build (`product.py`) stays as the reference. The renders below are all the cabinet without wood. |
+| "What's with the standalone black square on the bottom right of the cabinets? ... I prefer symmetry." | It is the **bass port**: the opening that lets the air in the box resonate at 38 Hz and extend the bass. The reference speaker has one in each bottom corner, so ours does too now, tuned together (below). |
+| "One thing we haven't tried is the same bark patterns as the speakers for the horn, except semitransparent." | **The horn printed with its bark**, in translucent inks on clear resin and on a light tint (below), and how it would be made. |
+| "I think the marbling would be cool for a marble patterned speaker though. Same with the swirl." / "there's some cool opportunities with resin cabinets, like semitransparent cabinets ... some that look like stone" | **The cabinet in other plastics**, still without wood: translucent acrylic like late-90s electronics, stone looks, and whole speakers marbled or swirled (below). |
+| "How do you get samples? From who and how much?" | Researched (below). |
+
+![The line, without wood](../../renders/2026-10-12/barkhorn/pick6.png)
+
+### Two ports
+
+The two square ports are 100 mm each, one in each bottom corner, and tuned together. Together they have twice one
+port's area, so for the same 38 Hz tuning each is longer: 236 mm in the HDPE cabinet (196 in plywood, against 73 and
+53 for one). The air through each moves half as fast, about 23 m/s at full power against 50, so they chuff less at
+high levels. The tuning and the bass are unchanged: the -3 dB point is still about 49 Hz in HDPE. The side and back
+ribs now run only between the two braces, where the panels' spans need them. Below the lower brace the spans are short
+and already stiff, and that is where the ports run.
+
+### The horn printed with its bark
+
+![The horn printed with its bark](../../renders/2026-10-12/barkhorn/printed.png)
+
+The bark's own pattern, as the cabinet wears it, printed on the clear horn in translucent inks. On birch, the
+lenticels are dark dashes on clear, with the white skin printed as nothing at all. On eucalyptus, the strips become
+stained glass in green, ochre, rust and grey. Each is shown on clear resin and on a light tint of the line's colour.
+The print is projected from the front, so it reads straight from the listening seat and stretches along the flare's
+walls, as a film laid over the horn would.
+
+It can be made three ways, in order of how repeatable they are:
+
+1. **Hydrographic (water transfer) printing.** The bark artwork is printed on a water-soluble film, the film is floated
+   on water, and the cast clear horn is dipped through it. The pattern wraps the horn's compound curves, and a clear
+   2K coat seals it. With translucent inks and no white base coat, a clear part shows the print as stained glass. Every
+   horn comes out the same. Custom film is a print run (see the samples below).
+2. **Laid in the mould by hand.** Tinted resin is painted into the open silicone mould in the bark's patches and left to
+   gel, then the horn is cast clear behind it. The pattern sits in the resin's skin with no film and no coating. It is
+   a resin artist's job, and every horn is its own.
+3. **UV printing on the part.** Printers with a deep print gap can print on curved parts, but not 278 mm down inside
+   the flare. The outside of the pod could be printed, not the mouth.
+
+A dip trial on a cast offcut is the first step: whether the inks stay translucent enough over clear resin is the open
+question.
+
+### The cabinet in other plastics
+
+![The cabinet in other plastics](../../renders/2026-10-12/barkhorn/cabinets.png)
+
+All of these are without wood, on the same welded box with its braces and ribs:
+
+- **Translucent, as late-90s electronics.** Cast acrylic, 20 to 25 mm, CNC-cut and cemented (a two-part acrylic
+  cement makes airtight joints as strong as the sheet). Acrylic is about three times as stiff as HDPE (3.2 GPa), so 25 mm
+  bends about as little as 18 mm birch plywood. But it is much heavier per square metre, so it keeps the ribs, which
+  show as fins. The cabinet weighs about 63 kg at 25 mm, or 50 at 20 mm. You see inside: the braces, the ribs, the
+  ports, the woofer's basket and the amplifier. So those are designed to be seen, and the damping is a thin felt on
+  the back panel instead of fibre fill. Shown:
+  smoked acrylic with the smoked horn, green with the bottle-green horn, and frosted ice with a clear horn.
+- **Stone.** Terrazzo comes most naturally: a sheet press makes it from recycled chips in a coloured ground, or it can
+  be cast in Jesmonite. Cultured marble (cast resin or Jesmonite veined as it is poured) and cultured onyx (the same,
+  translucent: it glows when lit from behind) are heavier and cast in moulds, but they are real trades, used for
+  vanities and wall panels.
+- **Marble and swirl, horn and cabinet alike.** Marbling is what a sheet press does when the flakes flow, so a marbled
+  HDPE cabinet costs no more than the bark one. The horns are cast marbled. The swirled speakers are clear resin with a
+  second colour folded through it: the most striking and the most expensive, since a cabinet of cast resin panels is
+  about 53 L of resin.
+
+**How they compare** (per cabinet; resin and acrylic prices from the sample research below):
+
+| cabinet | material | weight | made by | cost |
+|---|---|---|---|---|
+| bark pattern, marble, terrazzo (the line) | pressed recycled HDPE, 25 mm | about 50 kg | a sheet-press workspace, welded | on request (a made-to-order 10 mm sheet is EUR 150 a square metre) |
+| translucent | cast acrylic, 20 to 25 mm | 50 to 63 kg | any plastics fabricator, cemented | about $1,000 to $1,300 of 3/4 in smoked sheet |
+| cultured marble or onyx | cast resin with mineral filler | heavier still | a cultured-marble shop, in moulds | by quote |
+| swirled clear | cast clear resin panels | about 58 kg | a resin caster | about $1,100 to $2,700 of resin (deep-pour epoxy to water-clear urethane) |
+
+### Samples: who from, and how much
+
+Searched 2026-10-12. The figures come from search results (the pages themselves could not be opened from here), and
+most prices carry no date, so confirm each one before ordering. US sources first.
+
+**Pressed recycled sheet in a laid pattern** (the cabinet):
+
+| who | what | samples | sheets | how |
+|---|---|---|---|---|
+| [Marble Plastics](https://marbleplastics.com/), Columbus, Ohio | pressed 100 % recycled sheet, mostly HIPS (polystyrene), some HDPE; custom pattern work for clients | trade samples through Material Bank; a 10 x 15 cm sample on the Precious Plastic Bazar (price not found) | 1/2 to 1 in thick, pressed in steel moulds | price on request: 614-582-8972 |
+| [Yemm & Hart](https://yemmhart.com/), Marquand, Missouri | "Origins" recycled HDPE panels, colours and patterns made per batch | library samples exist (price not found) | 4 x 8 ft; 1/2 in solid colour about $609 to $742 a panel in batches of 15 to 30 (a 2021 price table); 10-sheet minimum; about 8 weeks | quote |
+| a made-to-order HDPE seller on the [Precious Plastic Bazar](https://bazar.preciousplastic.com/) | HDPE from bottle caps, pressed to your colours ("contact before ordering") | none listed | 1 x 1 m at 5, 10 or 20 mm; EUR 150 for 1 m x 10 mm, unfinished, before tax | message the seller |
+| other Bazar sellers (India, Czechia, France) | HDPE, PP or PS, some up to 25 to 30 mm | none listed | e.g. 1 x 1 m HDPE, 8 to 25 mm, EUR 60 plus EUR 170 shipping to the US; a French maker presses marble-look PS to your colours in 2 to 3 weeks | message the seller |
+| [Smile Plastics](https://smile-plastics.com/), Wales | recycled HDPE, HIPS and PET panels; bespoke service | 100 x 60 mm pieces at GBP 1.50, a 200 x 200 mm sample at GBP 18 (trade customers) | 3000 x 1200 mm at 12 or 20 mm; quote only; bespoke minimums not published | info@smile-plastics.com |
+| [Polygood](https://polygood.com/), Netherlands | recycled polystyrene panels, 50+ patterns including terrazzo; 100+ custom patterns made | a box of 14 samples for EUR 24.79 | 2800 x 1400 mm and smaller, 12 or 19 mm | sample shop; custom work through an account manager |
+| [Plasticiet](https://www.plasticiet.com/), Netherlands | translucent and pearl recycled sheet | a pack of 8 for EUR 29; a custom colour, 4 small pieces, EUR 250 | about 1 x 1 m, 10 to 12 mm; custom colours from 10 m2 | web shop |
+
+Nobody publishes a price for a custom-laid 200 mm sample. The made-to-order Bazar sheet (EUR 150 a square metre at
+10 mm) is the nearest thing: a whole small sheet laid to the pattern. Several makers press polystyrene rather than
+HDPE. Polystyrene is about twice as stiff and glues well with solvent cement, so it would also suit the cabinet, joined
+by gluing instead of welding.
+
+**The horn**: upload the STEP to Xometry for an instant urethane-casting quote (parts up to 30 in; 2 to 4 weeks), and
+ask Quickparts, protoCAD (parts up to 4 x 3 x 1 ft), Printform and Meisner Art Casting (New York, clear and pigmented
+sculptural castings). No service publishes a price for a part this size. Published guides put a large silicone mould
+at $1,200 to $3,000. The resin for one horn is about one 15 lb kit of water-clear urethane, $316 to $420 (Polytek
+Poly-Optic 1411, Smooth-On Crystal Clear 200). Crystal Clear 200 pours at most 3 in at a time, so the solid neck
+(about 13 cm across) would be cast in layers. Tints: Smooth-On's SO-Strong sampler, about $47. Alumilite warns that
+its translucent green turns blue in epoxy, so test the bottle green.
+
+**The printed horn**: TWN (Water Transfer Network) prints custom digital hydrographic film from your artwork at
+$30 a metre, minimum 3 m, in 1 or 2 days, and refers you to one of about 1,300 dip shops; Liquid Concepts prints
+custom film with no minimum. Shops charge from about $50 a project. None confirmed dipping a clear part without a
+base coat, so the first step is a proof on a cast offcut.
+
+**Acrylic** (the translucent cabinets): 3/4 in smoked grey cast acrylic (TruCast 2064) is $1,003 for a 4 x 8 ft
+sheet at A&C Plastics, about one sheet a cabinet. Reynolds Polymer casts 3/4 to 4 in acrylic in custom colours,
+including green, and a frosted 1 in sheet, by quote. Tint sample sets cost about $9 to $15 (eplastics). Thick panels
+are joined with a two-part reactive cement (Weld-On 40 or 42), not a solvent one.
+
+**Stone**: Jesmonite kits from $44 (875 g) to $1,081 (70 kg) through FTC Creative, its US hub. Corian sends 3
+samples free, and Hi-Macs samples are $3.99 at Home Depot. Cultured-marble and cultured-onyx shops (for example
+Classic Cultured Marble, Florida) cast panels by quote.
+
+**What to order first**:
+
+| | sample | from | cost |
+|---|---|---|---|
+| 1 | a custom-laid HDPE test sheet in each pattern, 20 to 25 mm, to judge the pattern, the flatness, the machining and a weld | the Bazar's made-to-order seller, and a quote from Marble Plastics | about $175 to $265, plus duties |
+| 2 | finished recycled panels to compare against | Polygood's sample box, Smile's 200 mm sample, Plasticiet's pack | about $35 to $65 |
+| 3 | a step wedge of the horn's resin, 10 to 75 mm thick, smoked and bottle green | a pint of Crystal Clear 200 ($56) and two dyes (about $10 each) | about $76 |
+| 4 | acrylic tints | eplastics' sample sets | about $24 |
+
+The core plan is about $310 to $430, plus shipping and tax. A hydro-dip proof adds about $140, and the horn and
+resin-casting quotes are free.
 
 ## Round 5: the owner's notes of 2026-10-12
 
@@ -430,17 +566,17 @@ and `birch-clear`, `birch-black`, `eucalyptus-green` and the rest take the other
 - STEP and STL;
 - DXF cut files for the plywood (three 1525 mm sheets), the MDF ring and the disc's frame;
 - the checks (no clashes);
-- the parts list (`bom.md`): about $4,580 for the pair at budget rates (round 4: $3,520; the 2 in drivers add about
+- the parts list (`bom.md`): about $4,680 for the pair at budget rates (round 4: $3,520; the 2 in drivers add about
   $720 and the larger horn's resin the rest), before the unpriced items (the bark, the cloth, the magnets, the fixings,
   the posts' inserts and a few small parts);
 - 14 A3 drawing sheets (`out/drawings/barkhorn-sheets.pdf`): the assembly, each sheet part (the ring and the disc's
   frame with their magnet pockets), the cast horn, its cap, the driver's adaptor ring and the posts, and the notes;
 - the render model.
 
-`pressed.py` builds the cabinet without wood into `out-pressed/`. Every panel, brace and rib nests on ten 1 m sheets of
-25 mm HDPE for the pair, the rings on one of 6 mm and the disc's frames on one of 12 mm. The parts list is about $4,240
-before the unpriced items; the pressed sheet has no published dated price, so its lines stay open, as does the weld
-rod. There are 15 drawing sheets.
+`pressed.py` builds the cabinet without wood, the line since round 6, into `out-pressed/`. Every panel, brace and rib
+nests on ten 1 m sheets of 25 mm HDPE for the pair, the rings on one of 6 mm and the disc's frames on one of 12 mm.
+The parts list is about $4,350 before the unpriced items; the pressed sheet has no published dated price, so its lines
+stay open, as does the weld rod. There are 15 drawing sheets.
 
 The shots are in `studio/shots/barkhorn/`:
 
@@ -450,17 +586,14 @@ The shots are in `studio/shots/barkhorn/`:
 - `back`: the waveguide from behind;
 - one folder per comparison sheet, one shot per frame: `covers/` (round 2), `front/`, `study/`, `experiments/`,
   `proposal/` (round 3), `horn/`, `resin/`, `pressed/` and `pick/` (round 4), `horn5/`, `shells/`, `woodfree/` and
-  `pick5/` (round 5).
+  `pick5/` (round 5), `pick6/`, `printed/` and `cabinets/` (round 6).
 
 ## Open questions for the owner
 
-1. **The resin.** Smoked on birch and bottle green on eucalyptus (my proposal: semi-transparent and dark at once), or
-   another from the study: lightly tinted clear, opaque black or deep green, marbled, or swirled?
-2. **Wood or no wood.** Bark on plywood, or the pressed HDPE cabinet with no wood in it (heavier, a little less bass
-   extension, nothing to laminate)? Or both, as two lines?
-3. **Pressed samples.** Go to samples of the bark pattern? The next step is a 200 mm sample of each from a sheet-press
-   workspace, then one full 25 mm sheet from a single batch.
-4. **The horn's neck.** Solid (a glass-block look in clear resin, 5.4 L) or hollow (3.0 L, lighter and cheaper to cast,
-   a second surface showing through)?
-5. **A name.** barkhorn is a placeholder.
-6. **Price.** [PAIR PRICE] stays open.
+1. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
+   the commercial benchmarks, a resin step wedge and acrylic tints? And send the horn for casting quotes?
+2. **The printed horn.** Worth a hydro-dip proof (about $140)?
+3. **Other cabinets.** Develop any of the translucent, stone, marble or swirl speakers, as editions beside the bark
+   line?
+4. **A name.** barkhorn is a placeholder.
+5. **Price.** [PAIR PRICE] stays open.

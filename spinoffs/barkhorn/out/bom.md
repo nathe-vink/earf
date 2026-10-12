@@ -9,7 +9,7 @@
 | back | cut | 2 | 18 mm Baltic birch plywood, BB/BB | 524 x 844 | 32.06 |
 | brace | cut | 2 | 18 mm Baltic birch plywood, BB/BB | 524 x 360 | 13.68 |
 | woofer-ring | cut | 2 | 6 mm MDF | 436 x 436 | 4.28 |
-| port | print | 2 | ASA, FDM (outdoor, paintable) | 89 cm3 | 14.22 |
+| port-left, port-right | print | 4 | ASA, FDM (outdoor, paintable) | 327 cm3 | 30.89 |
 | woofer | buy | 2 | FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm) | 393 frame, 356 cut-out, 165 deep | 194.00 |
 | amp-plate | buy | 2 | Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm | 315 x 120 x 55 plate, 291 x 96 recess | 422.40 |
 | waveguide | cast | 2 | Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented | 5221 cm3, 635 x 418 x 372 | 684.74 |
@@ -39,8 +39,8 @@
 | cast | 1,646 |
 | cut | 344 |
 | lathe | 219 |
-| print | 28 |
-| total | 4,582 |
+| print | 124 |
+| total | 4,677 |
 
 No price yet for: Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour; Grille magnets: eight 15 x 3 neodymium discs (N42), four attracting pairs, a set; Bark for laminating, a square metre: paper birch (Betula papyrifera) sheet from fallen or felled trees, or a smooth-barked gum's shed bark pressed flat (or a UV-printed veneer of it); approve a sample board first; M6 x 25 button heads (A2) with M6 T-nuts, a set of 8 (the 15PR400's eight holes on 375); The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set; Brass threaded inserts M10 x 1: four bonded into the waveguide's pads (13 across, 14 long) and four screwed into the cabinet's top (14 across, 15 long, one with a through-bore for the cable), a set of eight; Resistor L-pad for the HF channel, about -9 dB at 16 ohm (lowers the amplifier's hiss through the 108 dB driver); Felt glides 30 mm, screw-in, a set of 4.
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

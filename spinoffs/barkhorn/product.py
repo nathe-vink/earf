@@ -45,7 +45,9 @@ P = dict(
     woofer='faital-15pr400-8', woofer_z=478.0,   # its centre 45.7 % down from the top, as photographed
     gasket=1.0,
     ring=dict(od=436.0, id=350.0, t=6.0, stock='mdf'),   # the off-white ring over the frame, 6 mm, standing on the panel
-    port=dict(a=100.0, wall=4.0, x=455.0, z=113.0),   # the square port, bottom right, as photographed
+    # the square ports, one in each bottom corner, as the reference speaker has them (the owner, 2026-10-12: one is cut
+    # off in the photograph; round 1 to 5 had the bottom right one only), tuned together
+    port=dict(a=100.0, wall=4.0, x=(105.0, 455.0), z=113.0),
     fb=38.0,
     braces=[dict(z=200.0, window=(420.0, 300.0))],   # level braces across the shell, each a frame round its window
     ribs=None,                                   # ribs welded on edge inside the panels (pressed.py: the HDPE shell needs them)
@@ -134,23 +136,41 @@ def strips(x0, z0, x1, z1, w, pitch, length, gap, seed):
 
 
 def port_length(P, net_l):
-    """The square port's length tuning `net_l` litres to fb (one end flanged, one free; the end correction of the
-    round port of the same area)."""
+    """The square ports' length tuning `net_l` litres to fb, the ports in parallel (one end flanged, one free; each with
+    the end correction of the round port of the same area)."""
     c, a = 343.0, P['port']['a'] / 1000
-    sp = a * a
+    sp = len(P['port']['x']) * a * a
     d_eq = 2 * a / math.sqrt(math.pi)
     w = 2 * math.pi * P['fb']
     return (sp * c * c / (w * w * net_l * 1e-3) - 0.732 * d_eq) * 1000
+
+
+def tuned(P):
+    """The ports' length and the net volume they leave, each found from the other (a long port takes room)."""
+    net = net_volume(P)
+    for _ in range(3):
+        pl = port_length(P, net)
+        net = net_volume(P, pl)
+    return round(port_length(P, net), 1), net
+
+
+def rib_spans(P):
+    """The heights (z0, z1) between the bottom, the braces and the top where a panel's span is long enough to want a
+    rib (P['ribs']['min_span']): below the lowest brace and above the highest, the spans are short and already stiff."""
+    T, H = P['T'], P['H']
+    zs = [T] + [z for b in P['braces'] for z in (b['z'], b['z'] + T)] + [H - T]
+    return [(zs[i], zs[i + 1]) for i in range(0, len(zs), 2) if zs[i + 1] - zs[i] > P['ribs'].get('min_span', 0.0)]
 
 
 def net_volume(P, port_l=60.0):
     W, D, H, T = P['W'], P['D'], P['H'], P['T']
     inner = (W - 2 * T) * (D - T - (P['inset'] + T)) * (H - 2 * T) / 1e6
     o = P['port']['a'] + 2 * P['port']['wall']
-    port = o * o * port_l / 1e6
+    port = len(P['port']['x']) * o * o * port_l / 1e6
     brace = sum(((W - 2 * T) * (D - P['inset'] - 3 * T) - b['window'][0] * b['window'][1]) * T / 1e6 for b in P['braces'])
     rb = P.get('ribs')
-    ribs = ((2 + len(rb['back'])) * (H - 2 * T - len(P['braces']) * T) + 2 * (D - P['inset'] - 3 * T)) * rb['t'] * rb['depth'] / 1e6 if rb else 0.0
+    ribs = ((2 + len(rb['back'])) * sum(z1 - z0 for z0, z1 in rib_spans(P)) + 2 * (D - P['inset'] - 3 * T)) * rb['t'] * rb['depth'] / 1e6 \
+        if rb else 0.0
     return inner - 4.5 - 1.3 - port - brace - ribs      # woofer (estimated), amplifier module, port, braces, ribs
 
 
@@ -160,7 +180,7 @@ def parts(P):
     yb = P['inset']                                   # the front panel's face
     wf = LIB[P['woofer']]['geom']; amp = LIB[P['amp']]['geom']; hf = LIB[P['hf']]['geom']
     pt = P['port']
-    plen = round(port_length(P, net_volume(P)), 1)
+    plen, _ = tuned(P)
     ply = lambda grain, face=None: Sheet(P['stock'], T, face=face, grain=grain)
     wood = P['finish'] != 'pressed'                   # pressed: no wood anywhere (pressed.py)
 
@@ -173,7 +193,8 @@ def parts(P):
         a = 2 * math.pi * (k + 0.5) / wf['bolts']
         baffle -= cyl('y', (cx + wf['bolt_d'] / 2 * math.cos(a), wz + wf['bolt_d'] / 2 * math.sin(a)), 7.0, yb - 1, yb + T + 1)
     o = pt['a'] + 2 * pt['wall']
-    baffle -= box(pt['x'] - o / 2 - 0.2, yb - 1, pt['z'] - o / 2 - 0.2, pt['x'] + o / 2 + 0.2, yb + T + 1, pt['z'] + o / 2 + 0.2)
+    for px in pt['x']:
+        baffle -= box(px - o / 2 - 0.2, yb - 1, pt['z'] - o / 2 - 0.2, px + o / 2 + 0.2, yb + T + 1, pt['z'] + o / 2 + 0.2)
 
     back = box(T, D - T, T, W - T, D, H - T)
     az = P['amp_z']
@@ -208,9 +229,7 @@ def parts(P):
         # ribs on edge inside the shell (the cabinet without wood): one up each side at mid-depth and a pair up the back,
         # each in lengths between the braces, and one front to back under the top and over the bottom
         rb = P['ribs']; rt, rd = rb['t'], rb['depth']
-        zs = [T] + [z for b in P['braces'] for z in (b['z'], b['z'] + T)] + [H - T]
-        spans = [(zs[i], zs[i + 1]) for i in range(0, len(zs), 2)]
-        for k, (z0, z1) in enumerate(spans, 1):
+        for k, (z0, z1) in enumerate(rib_spans(P), 1):
             ribs.append((f'rib-left-{k}', box(T, ym - rt / 2, z0, T + rd, ym + rt / 2, z1)))
             ribs.append((f'rib-right-{k}', box(W - T - rd, ym - rt / 2, z0, W - T, ym + rt / 2, z1)))
             for j, x in enumerate(rb['back'], 1):
@@ -243,10 +262,14 @@ def parts(P):
                     notes=[('sprayed in the ring colour' if r['stock'] == 'mdf' else 'pressed in the ring colour, one colour of flake')
                            + '; held by four dots of silicone on the panel; eight pockets behind it '
                            'clear the woofer\'s screw heads; four more take the cloth disc\'s magnets (an option)']))
-    tube = box(pt['x'] - o / 2, yb, pt['z'] - o / 2, pt['x'] + o / 2, yb + plen, pt['z'] + o / 2)
-    tube -= box(pt['x'] - pt['a'] / 2, yb - 1, pt['z'] - pt['a'] / 2, pt['x'] + pt['a'] / 2, yb + plen + 1, pt['z'] + pt['a'] / 2)
-    out.append(Part('port', tube, Printed('asa', orient='on end'), finish='port', group='cabinet',
-                    notes=[f'{pt["a"]:g} square, {plen:.0f} long from the panel\'s face: tunes the box to {P["fb"]:g} Hz; print 15 longer and trim to tune']))
+    for px in pt['x']:
+        tube = box(px - o / 2, yb, pt['z'] - o / 2, px + o / 2, yb + plen, pt['z'] + o / 2)
+        tube -= box(px - pt['a'] / 2, yb - 1, pt['z'] - pt['a'] / 2, px + pt['a'] / 2, yb + plen + 1, pt['z'] + pt['a'] / 2)
+        name = 'port' if len(pt['x']) == 1 else ('port-left' if px < cx else 'port-right')
+        out.append(Part(name, tube, Printed('asa', orient='on end'), finish='port', group='cabinet',
+                        notes=[f'{pt["a"]:g} square, {plen:.0f} long from the panel\'s face: '
+                               + (f'the {len(pt["x"])} together tune' if len(pt['x']) > 1 else 'tunes')
+                               + f' the box to {P["fb"]:g} Hz; print 15 longer and trim to tune']))
 
     woofer, _ = driver_part('woofer', P['woofer'], wf, centre=(cx, yb, wz))
     out.append(woofer)
@@ -571,7 +594,7 @@ def disc_and_face(P, wz, port_o, alt):
 
     # the facings: bark (1 mm; or cork, 3 mm, with the alternatives) laid on the panel round the ring and the port
     # before the ring goes on
-    holes = [('circle', cx, wz, r['od'] + 1.0), ('rect', pt['x'], pt['z'], port_o + 0.4, port_o + 0.4)]
+    holes = [('circle', cx, wz, r['od'] + 1.0)] + [('rect', px, pt['z'], port_o + 0.4, port_o + 0.4) for px in pt['x']]
     if P['finish'] == 'pressed':                      # the panel's own sheet carries the pattern: nothing laid on it
         faces = []
     elif P['finish'] == 'faced':
@@ -635,6 +658,50 @@ VARIANTS.update({
     'eucalyptus-strata': {**EUCALYPTUS, 'horn_preset': 'frosted_strata', 'horn': '#DEE6D4', 'horn_deep': '#B9C9A9', 'horn_cloud': 0.0},
     'birch-terrazzo': {**BIRCH, 'horn_preset': 'frosted_terrazzo', 'horn': '#F5F2EC', 'horn_deep': '#EFE5D3', 'horn_cloud': 0.0},
 })
+# black veins through white, thinner than the study's bold marble, for a speaker marbled all over
+VEINED = {'stops': [[0.0, '#EEEBE4'], [0.44, '#EEEBE4'], [0.47, '#8E8B85'], [0.49, '#1E1C1A'], [0.51, '#1E1C1A'], [0.53, '#8E8B85'],
+                    [0.56, '#EEEBE4'], [1.0, '#EEEBE4']], 'warp': 1.0}
+VARIANTS.update({
+    # round 6, the owner's notes of 2026-10-12 (evening). The horn printed with its bark's pattern in translucent inks,
+    # over clear resin and over a light tint, on the cabinet without wood
+    'birch-printed': {**VARIANTS['birch-pressed'], 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#EEECE6', 'horn_cloud': 0.0,
+                      'materials': {'horn': {'print': 'birch_bark', 'print_strength': 0.9, 'roughness': 0.1}}},
+    'birch-printed-smoke': {**VARIANTS['birch-pressed'], 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#9C9A95', 'horn_cloud': 0.0,
+                            'materials': {'horn': {'print': 'birch_bark', 'print_strength': 0.9, 'roughness': 0.1}}},
+    'eucalyptus-printed': {**VARIANTS['eucalyptus-pressed'], 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#E8EBDD',
+                           'horn_cloud': 0.0, 'materials': {'horn': {'print': 'eucalyptus_bark', 'print_strength': 0.85, 'roughness': 0.1}}},
+    'eucalyptus-printed-green': {**VARIANTS['eucalyptus-pressed'], 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#A3B88A',
+                                 'horn_cloud': 0.0, 'materials': {'horn': {'print': 'eucalyptus_bark', 'print_strength': 0.85, 'roughness': 0.1}}},
+    # the cabinet in other plastics, still without wood: translucent cast acrylic as late-90s electronics were (smoke,
+    # green, frosted ice), stone looks (terrazzo, cultured marble, a translucent green onyx), and whole speakers
+    # marbled or swirled, the horn and the cabinet alike. 'bark' is the cabinet's material
+    'birch-y2k-smoke': {**BIRCH, **HORNS['birch']['smoked'], 'bark': 'clear_resin', 'ring': '#3A3936',
+                        'materials': {'bark': {'deep': '#C9C7C2', 'radius': 0.025, 'roughness': 0.05}}},
+    'eucalyptus-y2k-green': {**EUCALYPTUS, **HORNS['eucalyptus']['bottle'], 'bark': 'clear_resin', 'ring': '#2F3A28',
+                             'materials': {'bark': {'deep': '#B2C9A2', 'radius': 0.025, 'roughness': 0.05}}},
+    'birch-y2k-ice': {**BIRCH, **HORNS['birch']['clear'], 'bark': 'clear_resin', 'ring': '#DDE2E4',
+                      'materials': {'horn': {'roughness': 0.1}, 'bark': {'deep': '#E4E9EB', 'radius': 0.025, 'roughness': 0.35, 'milk': 0.15}}},
+    'birch-stone-terrazzo': {**BIRCH, **HORNS['birch']['smoked'], 'bark': 'terrazzo'},
+    'birch-stone-marble': {**BIRCH, **HORNS['birch']['smoked'], 'bark': 'marbled_resin',
+                           'materials': {'bark': {'stops': [[0.0, '#F1EFEA'], [0.4, '#ECE9E3'], [0.46, '#C9C6BF'], [0.49, '#5C5955'],
+                                                            [0.5, '#2A2826'], [0.52, '#8E8B85'], [0.58, '#E9E6E0'], [1.0, '#F3F1EC']],
+                                                  'vein_m': 0.5, 'warp': 1.1, 'stretch': 1.6, 'roughness': 0.3}}},
+    'eucalyptus-stone-onyx': {**EUCALYPTUS, **HORNS['eucalyptus']['bottle'], 'bark': 'clear_resin', 'ring': '#E8E2D4',
+                              'materials': {'bark': {'deep': '#DCDFB8', 'radius': 0.025, 'roughness': 0.1, 'milk': 0.12, 'cloud': 1.0,
+                                                     'cloud_m': 0.13, 'cloud_edge': [0.47, 0.6], 'vein': '#3F4A1E'}}},
+    'birch-marbled': {**BIRCH, **HORNS['birch']['marble'], 'bark': 'marbled_resin',
+                      'materials': {'horn': {**VEINED, 'vein_m': 0.32}, 'bark': {**VEINED, 'vein_m': 0.5}}},
+    'eucalyptus-marbled': {**EUCALYPTUS, **HORNS['eucalyptus']['marble'], 'bark': 'marbled_resin',
+                           'materials': {'horn': HORNS['eucalyptus']['marble']['materials']['horn'],
+                                         'bark': {**HORNS['eucalyptus']['marble']['materials']['horn'], 'vein_m': 0.4}}},
+    'birch-swirled': {**BIRCH, **HORNS['birch']['swirl'], 'bark': 'clear_resin', 'ring': '#3A3936',
+                      'materials': {'horn': HORNS['birch']['swirl']['materials']['horn'],
+                                    'bark': {'deep': '#D9D8D3', 'radius': 0.025, 'roughness': 0.06, 'cloud': 1.0, 'vein': '#5E5B56', 'cloud_m': 0.3}}},
+    'eucalyptus-swirled': {**EUCALYPTUS, **HORNS['eucalyptus']['swirl'], 'bark': 'clear_resin',
+                           'materials': {'horn': HORNS['eucalyptus']['swirl']['materials']['horn'],
+                                         'bark': {'deep': '#E2D6AE', 'radius': 0.025, 'roughness': 0.06, 'cloud': 1.0, 'vein': '#4F6A2C',
+                                                  'cloud_m': 0.3}}},
+})
 
 
 PRODUCT = Product(
@@ -671,12 +738,10 @@ PRODUCT = Product(
 if __name__ == '__main__':
     from speaker.box import vented, suggest_vented
     ts = LIB[P['woofer']]['ts']
-    net = net_volume(P)
-    pl = port_length(P, net)
-    net = net_volume(P, pl)
-    pl = port_length(P, net)
+    pl, net = tuned(P)
+    n = len(P['port']['x'])
     print(f"QB3 start: {suggest_vented(ts)} (L, Hz)")
-    print(f"net {net:.1f} L, a {P['port']['a']:g} mm square port {pl:.0f} long for {P['fb']:g} Hz")
+    print(f"net {net:.1f} L, {n} x {P['port']['a']:g} mm square ports {pl:.0f} long for {P['fb']:g} Hz")
     for fb in (32.0, 35.0, 38.0):
-        r = vented(ts, net, fb, bore_mm=2 * P['port']['a'] / math.sqrt(math.pi))
+        r = vented(ts, net, fb, bore_mm=2 * P['port']['a'] * math.sqrt(n / math.pi))
         print(fb, {k: r[k] for k in ('f3', 'ref_db', 'max_spl_db', 'port_air_m_s_at_max')})
