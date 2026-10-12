@@ -40,7 +40,7 @@ SHEETS = {
                             usd_per_m2=None, thicknesses=(6, 9, 12, 18)),
     'cork': dict(title='Cork sheet, agglomerated', density=0.24, sheet=(1830.0, 915.0), usd_per_m2=None, thicknesses=(3, 6)),
     'recycled-hdpe': dict(title='Recycled HDPE sheet, pressed to order (a sheet press workspace)', density=0.95,
-                          sheet=(1000.0, 1000.0), usd_per_m2=None, thicknesses=(5, 6, 8, 10, 12)),
+                          sheet=(1000.0, 1000.0), usd_per_m2=None, thicknesses=(5, 6, 8, 10, 12, 15, 20, 25, 30)),
 }
 PRINTS = {
     'resin-tough': dict(title='Tough (ABS-like) SLA resin', process='sla', density=1.15, usd_per_cm3=0.35, min_wall=1.5),
@@ -56,7 +56,7 @@ SOLIDS = {
     'brass': dict(title='Brass C360', density=8.5, usd_per_cm3=0.12),
     'steel': dict(title='Mild steel', density=7.85, usd_per_cm3=0.01),
     'stainless': dict(title='Stainless steel 304', density=8.0, usd_per_cm3=0.03),
-    'cast-resin': dict(title='Tinted polyurethane casting resin, translucent', density=1.1, usd_per_cm3=0.04),
+    'cast-resin': dict(title='Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented', density=1.1, usd_per_cm3=0.04),
 }
 
 

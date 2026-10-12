@@ -89,6 +89,7 @@ KNOBS = [
     ('lights.*.color', 'K or hex', None, 'colour temperature or sRGB hex'),
     ('lights.*.spread_deg', 'deg', (1, 180), 'area lamp beam spread: 180 a bare softbox, 30 to 60 a gridded one'),
     ('lights.*.camera', 'bool', None, 'whether the lamp\'s face is visible to the camera'),
+    ('lights.*.transmission', 'bool', None, 'area lamp: false hides it from rays through clear parts (a lamp behind clear resin, which would otherwise show through it)'),
     ('lights.*.diffuse', '0 to 1', (0, 1), 'the lamp\'s share in diffuse light'),
     ('lights.*.specular', '0 to 1', (0, 1), 'the lamp\'s share in reflections (0: lights without a highlight; with diffuse 0: a glint only)'),
     ('lights.*.portal', 'bool', None, 'a window portal: guides the sky\'s light through an opening, adds none'),

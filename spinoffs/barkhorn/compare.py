@@ -2,7 +2,7 @@
 the cabinets' fronts are the same width and lined up at the top's front edge, for checking proportions (the horn's
 size and shape, its height over the cabinet, the posts).
 
-    python3 spinoffs/barkhorn/compare.py renders/2026-10-12/barkhorn/pick/pick-photo-birch.png OUT.png
+    python3 spinoffs/barkhorn/compare.py renders/2026-10-12/barkhorn/pick5/pick5-photo-birch.png OUT.png ['LABEL']
 
 The render's cabinet comes from its report (the parts' boxes on screen), not from its pixels.
 """
@@ -21,7 +21,7 @@ CAB_X, CAB_TOP = (139.0, 361.0), 285.0
 WINDOW = (95, 95, 405, 600)
 
 
-def main(render, out):
+def main(render, out, label='barkhorn, from its angle'):
     rep = json.load(open(os.path.splitext(render)[0] + '.report.json'))['parts_2d']
     l, r = rep['left#0']['box_px'][0], rep['right#0']['box_px'][0]     # the front's left edge; the right side's front edge
     top = rep['top#0']['box_px'][3]                                     # the top's front edge (its lowest on screen)
@@ -41,10 +41,10 @@ def main(render, out):
     sheet.paste(a, (pad, pad)); sheet.paste(b, (2 * pad + a.width, pad))
     d = ImageDraw.Draw(sheet)
     d.text((pad, pad + H + 10), 'the photograph', font=font(22), fill=(60, 56, 52))
-    d.text((2 * pad + a.width, pad + H + 10), 'barkhorn round 4, from its angle', font=font(22), fill=(60, 56, 52))
+    d.text((2 * pad + a.width, pad + H + 10), label, font=font(22), fill=(60, 56, 52))
     sheet.save(out)
     print(out)
 
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2])
+    main(*sys.argv[1:4])

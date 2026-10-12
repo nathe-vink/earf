@@ -92,6 +92,42 @@ PRESET_DEFAULTS = {
         base=[['#EEEAE1', 0.6], ['#E4DED2', 0.25], ['#F5F2EC', 0.15]], base_flake=0.010, strips=None, flow=0.5, vary=0.03,
         marble=0.03, flakes=dict(palette=[['#C9976E', 0.55], ['#B9B4AA', 0.45]], size=0.014, share=0.035),
         dashes=('#1C1A18', 0.26, (0.05, 0.010)), specks=('#8C877E', 0.05, 0.003), roughness=0.34, coat=0.15, wax=0.15),
+    # the barks themselves pressed in recycled plastic (round 5: the owner liked the eucalyptus bark's pattern better
+    # than the pressed strips): each bark's pattern, as its shader draws it, laid out in colour-sorted flakes and
+    # pressed flat. No edge lifts, so no lip catches the light, but a thin line of dark flakes runs where the bark's
+    # shadow was (eucalyptus). Each colour is mottled by its own flakes (`flake` across, each `mottle` lighter or darker),
+    # with crumbs of other colours (`specks`: colour, share, size) and a waxy satin face. Each panel is its own sheet
+    # (`sheets`), so the pattern breaks at the corners, as on a real cabinet
+    'pressed_eucalyptus_bark': dict(base=['#3F5E1C', '#6E8427', '#A99B35', '#C9772C'],
+                                    layers=[dict(color=['#B8955A', '#CDB27C'], cover=0.30, w=0.12, l=0.8),
+                                            dict(color=['#9E3F22', '#C8683A'], cover=0.30, w=0.10, l=0.9),
+                                            dict(color=['#6C6863', '#8C8478'], cover=0.40, w=0.20, l=1.2),
+                                            dict(color=['#3E2C22', '#57402F'], cover=0.10, w=0.05, l=0.6)],
+                                    wander=1.0, torn=0.3, edge=0.8, streak=0.1, wet=0.6, scale=1.0, bump=0.0,
+                                    plastic=True, flake=0.009, mottle=0.07, specks=('#2A2622', 0.04, 0.003),
+                                    roughness=0.36, coat=0.15, wax=0.12, sheets=True),
+    'pressed_birch_bark': dict(color='#ECE7DC', warm='#E6D6C4', lenticel='#2B2724', peel='#C9976E', roughness=0.36, lenticels=1.0,
+                               scars=0.6, peel_amount=0.5, scale=1.0, bump=0.0,
+                               plastic=True, flake=0.009, mottle=0.035, specks=('#8C877E', 0.04, 0.003), coat=0.15, wax=0.15,
+                               sheets=True),
+    # clear cast resin, tinted (round 5, the owner: "something semitransparent"). Light crosses it and is absorbed on
+    # the way, so a thin wall is pale and a thick one, or one seen edge-on, deepens toward `deep` (the colour light has
+    # after `radius` metres of it). Its face is satin (`roughness`: 0.05 polished, 0.3 frosted), which blurs what lies
+    # behind it. `milk`: a share of white haze through it (0 is water-clear). `cloud`: a second, denser tint folded
+    # through it in swirls `cloud_m` across, as a hand pour folds in a second colour; `vein` is that tint's colour after
+    # `radius` (None: `deep`, deeper)
+    'clear_resin': dict(color='#FFFFFF', deep='#9A9C96', radius=0.01, roughness=0.16, ior=1.5, milk=0.0, cloud=0.0,
+                        cloud_m=0.07, vein=None),
+    # pigmented cast resin, opaque (round 5, the owner: "something entirely darker, like black on birch and green on
+    # eucalyptus"): a satin face (`roughness`), a thin glossier skin over it (`coat`) as a cast face keeps, a slow drift
+    # in its value (`cloud`, `cloud_m` across) so it reads as a cast part and not as paint, and a faint fibre
+    'dark_resin': dict(color='#1D1D1C', roughness=0.42, coat=0.25, cloud=0.08, cloud_m=0.12, fibre=0.03),
+    # cast resin or Jesmonite marbled with pigments folded through it (round 5, the owner: "more obvious texture if not
+    # monochromatic"). The colours are stops [[position 0..1, hex], ...] along a slow noise folded on itself twice
+    # (`warp`), `vein_m` across, drawn out along x by `stretch`. Thin stops close together read as veins, wide ones as
+    # pours of colour. Opaque and satin, like the dark resin
+    'marbled_resin': dict(stops=[[0.0, '#EDEAE3'], [0.44, '#EDEAE3'], [0.47, '#1E1C1A'], [0.5, '#EDEAE3'], [1.0, '#EDEAE3']],
+                          vein_m=0.15, warp=1.2, stretch=1.0, roughness=0.4, coat=0.2, fibre=0.02),
     # the frosted resin poured in layers of colour (strata, each about `band` thick, their boundaries wavy by `warp`) or
     # with recycled plastic chips cast through it (terrazzo: chips about `chip` across in a `share` of the cells)
     'frosted_strata': dict(color='#E6E8DA', absorb='#B9C9A9', roughness=0.45, ior=1.5, radius=0.025, clear=0.15,
@@ -178,9 +214,9 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         _planks(nt, b, p)
     elif preset == 'veneer':
         _veneer(nt, b, p)
-    elif preset == 'birch_bark':
+    elif preset in ('birch_bark', 'pressed_birch_bark'):
         _birch_bark(nt, b, p, normal)
-    elif preset == 'eucalyptus_bark':
+    elif preset in ('eucalyptus_bark', 'pressed_eucalyptus_bark'):
         _eucalyptus_bark(nt, b, p, normal)
     elif preset == 'cloth':
         _cloth(nt, b, p, normal)
@@ -222,6 +258,10 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         _pressed_sheet(nt, b, p, normal)
     elif preset == 'cast_resin':
         _cast_resin(nt, b, p, normal)
+    elif preset == 'clear_resin':
+        _clear_resin(nt, b, p, normal)
+    elif preset in ('dark_resin', 'marbled_resin'):
+        _opaque_resin(nt, b, p, normal)
     elif preset == 'emit':
         out = nt.nodes['Material Output']; nt.nodes.remove(b)
         em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = hex_lin(p['color']); em.inputs['Strength'].default_value = p['strength']
@@ -390,6 +430,13 @@ def _birch_bark(nt, b, p, normal_in=None):
     uv, geo = _face_uv(nt, node, math_)
     pos = geo.outputs['Position']
     k = p['scale']
+    sheet = _sheet_seed(nt, node, math_, geo, p)
+    uv0 = uv
+    if not isinstance(sheet, float):                 # each panel its own sheet: the pattern read from elsewhere
+        sh_ = node('ShaderNodeCombineXYZ'); nt.links.new(math_('MULTIPLY', sheet, 0.37), sh_.inputs['X'])
+        nt.links.new(math_('MULTIPLY', sheet, 0.21), sh_.inputs['Y'])
+        ad = node('ShaderNodeVectorMath', operation='ADD'); nt.links.new(uv, ad.inputs[0]); nt.links.new(sh_.outputs['Vector'], ad.inputs[1])
+        uv = ad.outputs['Vector']
 
     def mapped(sh, sv, offset=(0.0, 0.0, 0.0)):
         mp = node('ShaderNodeMapping'); mp.inputs['Scale'].default_value = (sh * k, sv * k, 1.0)
@@ -434,6 +481,9 @@ def _birch_bark(nt, b, p, normal_in=None):
     peel = math_('MULTIPLY', smooth(pn.outputs['Fac'], 0.66 - 0.06 * p['peel_amount'], 0.70 - 0.06 * p['peel_amount']), p['peel_amount'])
     col = mix(peel, skin, hex_lin(p['peel']))
     col = mix(marks, col, hex_lin(p['lenticel']))
+    if p.get('plastic'):
+        _pressed_finish(nt, b, p, col, uv0, geo, normal_in)
+        return
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Roughness'].default_value = p['roughness']
     if 'Sheen Weight' in b.inputs:
@@ -465,6 +515,8 @@ def _eucalyptus_bark(nt, b, p, normal_in=None):
     k = p['scale']
     sep = node('ShaderNodeSeparateXYZ'); nt.links.new(uv, sep.inputs['Vector'])
     y = sep.outputs['Y']
+    plastic = p.get('plastic', False)
+    sheet = _sheet_seed(nt, node, math_, geo, p)
 
     def noise(x, w, l, seed, detail=2.0):
         """Perlin noise drawn out up the face: features about `w` across and `l` along (Fac: mean 0.5, sd 0.089 at
@@ -472,7 +524,10 @@ def _eucalyptus_bark(nt, b, p, normal_in=None):
         co = node('ShaderNodeCombineXYZ')
         nt.links.new(math_('DIVIDE', x, w / k), co.inputs['X'])
         nt.links.new(math_('DIVIDE', y, l / k), co.inputs['Y'])
-        co.inputs['Z'].default_value = seed
+        if isinstance(sheet, float):
+            co.inputs['Z'].default_value = seed
+        else:
+            nt.links.new(math_('ADD', sheet, seed), co.inputs['Z'])
         nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0; nz.inputs['Detail'].default_value = detail
         nt.links.new(co.outputs['Vector'], nz.inputs['Vector'])
         return nz.outputs['Fac']
@@ -513,12 +568,14 @@ def _eucalyptus_bark(nt, b, p, normal_in=None):
         n = math_('ADD', noise(x, L['w'], L['l'], seed), torn)
         t = 0.5 + (0.0887 ** 2 + (p['torn'] * 0.0833) ** 2) ** 0.5 * NormalDist().inv_cdf(1.0 - L['cover'])
         m = smooth(n, t - 0.002, t + 0.002)
-        shadow = math_('MULTIPLY', smooth(n, t - 0.04, t), math_('SUBTRACT', 1.0, m))
+        # pressed flat, the shadow under a lifted edge becomes a thin line of dark flakes, and no lip catches the light
+        shadow = math_('MULTIPLY', smooth(n, t - (0.012 if plastic else 0.04), t), math_('SUBTRACT', 1.0, m))
         lip = math_('SUBTRACT', smooth(n, t, t + 0.006), smooth(n, t + 0.012, t + 0.03))
         c, _ = streaked(ramp(noise(x, L['w'] * 0.5, L['l'], seed + 2.0), L['color']), seed + 3.0)
         col = mix(math_('MULTIPLY', shadow, 0.7 * edge), col, hex_lin('#1E1712'))
         col = mix(m, col, c)
-        col = mix(math_('MULTIPLY', lip, 0.35 * edge), col, hex_lin('#EDE3CF'))
+        if not plastic:
+            col = mix(math_('MULTIPLY', lip, 0.35 * edge), col, hex_lin('#EDE3CF'))
         h = math_('SUBTRACT', h, math_('MULTIPLY', shadow, 0.4 * edge))
         hm = node('ShaderNodeMix', data_type='FLOAT'); nt.links.new(m, hm.inputs['Factor'])
         nt.links.new(h, hm.inputs['A']); nt.links.new(math_('ADD', float(i), math_('MULTIPLY', lip, 0.6 * edge)), hm.inputs['B'])
@@ -527,6 +584,9 @@ def _eucalyptus_bark(nt, b, p, normal_in=None):
     # little), smooths and glosses
     wl = math_('MULTIPLY', math_('ADD', 0.7, math_('MULTIPLY', smooth(noise(x, 0.1, 1.4, 9.1), 0.38, 0.62), 0.6)), p['wet'])
     col = mix(math_('MULTIPLY', wl, 0.45), col, mix(1.0, col, col, 'MULTIPLY'))
+    if plastic:                                      # the wet look's depth of colour kept, in a satin plastic face
+        _pressed_finish(nt, b, p, col, uv, geo, normal_in)
+        return
     nt.links.new(col, b.inputs['Base Color'])
     nt.links.new(math_('MAXIMUM', math_('SUBTRACT', 0.55, math_('MULTIPLY', wl, 0.3)), 0.12), b.inputs['Roughness'])
     if 'Coat Weight' in b.inputs:
@@ -735,6 +795,164 @@ def _pressed_sheet(nt, b, p, normal_in=None):
         b.inputs['Coat Weight'].default_value = p['coat']; b.inputs['Coat Roughness'].default_value = 0.22
     n = _bump_noise(nt, 0.0007, 0.03, normal_in=normal_in)      # the press plate's faint peel
     nt.links.new(n, b.inputs['Normal'])
+
+
+def _folded(nt, node, scale_m, warp, stretch=1.0, seed=0.0, detail=5.0):
+    """A slow noise folded on itself twice (domain warping, as a pour folds colours through each other), read in world
+    space: about 0..1 (the noise's narrow spread stretched), features `scale_m` across, drawn out along x by `stretch`."""
+    geo = node('ShaderNodeNewGeometry')
+    mp = node('ShaderNodeMapping')
+    mp.inputs['Scale'].default_value = (1.0 / (scale_m * stretch), 1.0 / scale_m, 1.0 / scale_m)
+    mp.inputs['Location'].default_value = (seed, seed * 0.7, seed * 1.3)
+    nt.links.new(geo.outputs['Position'], mp.inputs['Vector'])
+    v = mp.outputs['Vector']
+    for _ in range(2):
+        nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0; nz.inputs['Detail'].default_value = 3.0
+        nz.inputs['Roughness'].default_value = 0.55
+        nt.links.new(v, nz.inputs['Vector'])
+        sub = node('ShaderNodeVectorMath', operation='SUBTRACT'); sub.inputs[1].default_value = (0.5, 0.5, 0.5)
+        nt.links.new(nz.outputs['Color'], sub.inputs[0])
+        sc = node('ShaderNodeVectorMath', operation='SCALE'); sc.inputs['Scale'].default_value = warp
+        nt.links.new(sub.outputs['Vector'], sc.inputs[0])
+        add = node('ShaderNodeVectorMath', operation='ADD')
+        nt.links.new(v, add.inputs[0]); nt.links.new(sc.outputs['Vector'], add.inputs[1])
+        v = add.outputs['Vector']
+    nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0; nz.inputs['Detail'].default_value = detail
+    nz.inputs['Roughness'].default_value = 0.6
+    nt.links.new(v, nz.inputs['Vector'])
+    mr = node('ShaderNodeMapRange'); nt.links.new(nz.outputs['Fac'], mr.inputs['Value'])
+    mr.inputs['From Min'].default_value = 0.3; mr.inputs['From Max'].default_value = 0.7
+    return mr.outputs['Result']
+
+
+def _clear_resin(nt, b, p, normal_in=None):
+    """Clear tinted cast resin (the preset's comment says what each setting does). The tint is a volume: light is
+    absorbed along its path through the resin (Beer's law, each channel at its own rate, so `deep` after `radius`), so
+    the colour deepens with thickness and nothing scatters (a scattering volume behind a refracting face goes dark with
+    refractive caustics off). Shadow rays cross the face as if it were not there, and the volume still tints them, so
+    what is inside, the driver, is lit through the thin wall as it would be; a refracting face would block that light."""
+    import math as _m
+    node, math_, mix, smooth = _nodes(nt)
+    I = b.inputs
+    out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+
+    def sigma(hx):                                   # absorption per metre, each channel
+        return [-_m.log(max(c, 0.002)) / p['radius'] for c in hex_lin(hx)[:3]]
+    s0 = sigma(p['deep'])
+    sv = sigma(p['vein']) if p.get('vein') else [c * 2.5 for c in s0]
+    D = max(s0 + (sv if p['cloud'] > 0 else [])) + 1e-6
+    c0 = tuple(1.0 - c / D for c in s0) + (1.0,)
+    I['Base Color'].default_value = hex_lin(p['color'])
+    I['Roughness'].default_value = p['roughness']; I['IOR'].default_value = p['ior']
+    I['Transmission Weight'].default_value = 1.0 - p['milk']
+    if p['milk'] > 0:
+        I['Subsurface Weight'].default_value = 1.0; I['Subsurface Scale'].default_value = 0.003
+    ab = node('ShaderNodeVolumeAbsorption'); ab.inputs['Density'].default_value = D
+    if p['cloud'] > 0:                               # the denser tint in soft clouds over half a folded noise (thin
+        cv = tuple(1.0 - c / D for c in sv) + (1.0,)  # ribbons of it read as crumpled foil through the face)
+        f = _folded(nt, node, p['cloud_m'], 0.8, 1.6, detail=3.0)
+        nt.links.new(mix(math_('MULTIPLY', smooth(f, 0.42, 0.85), p['cloud']), c0, cv), ab.inputs['Color'])
+    else:
+        ab.inputs['Color'].default_value = c0
+    nt.links.new(ab.outputs['Volume'], out.inputs['Volume'])
+    lp = node('ShaderNodeLightPath')
+    tr = node('ShaderNodeBsdfTransparent'); g = 1.0 - 0.6 * p['milk']; tr.inputs['Color'].default_value = (g, g, g, 1.0)
+    ms = node('ShaderNodeMixShader')
+    nt.links.new(lp.outputs['Is Shadow Ray'], ms.inputs['Fac'])
+    nt.links.new(b.outputs['BSDF'], ms.inputs[1]); nt.links.new(tr.outputs['BSDF'], ms.inputs[2])
+    nt.links.new(ms.outputs['Shader'], out.inputs['Surface'])
+    if normal_in is not None:
+        nt.links.new(normal_in, I['Normal'])
+
+
+def _opaque_resin(nt, b, p, normal_in=None):
+    """Opaque cast resin, dark (a colour drifting a little in value) or marbled (colour stops along a folded noise);
+    the presets' comments say what each setting does."""
+    node, math_, mix, smooth = _nodes(nt)
+    I = b.inputs
+    if 'stops' in p:
+        f = _folded(nt, node, p['vein_m'], p['warp'], p['stretch'])
+        r = node('ShaderNodeValToRGB'); cr = r.color_ramp; cr.interpolation = 'LINEAR'
+        stops = sorted(p['stops'], key=lambda s_: s_[0])
+        while len(cr.elements) < len(stops):
+            cr.elements.new(0.0)
+        for el, (pos, hx) in zip(cr.elements, stops):
+            el.position = pos; el.color = hex_lin(hx)
+        nt.links.new(f, r.inputs['Fac'])
+        col = r.outputs['Color']
+    else:
+        geo = node('ShaderNodeNewGeometry')
+        nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / p['cloud_m']; nz.inputs['Detail'].default_value = 3.0
+        nt.links.new(geo.outputs['Position'], nz.inputs['Vector'])
+        mr = node('ShaderNodeMapRange'); nt.links.new(nz.outputs['Fac'], mr.inputs['Value'])
+        mr.inputs['From Min'].default_value = 0.3; mr.inputs['From Max'].default_value = 0.7
+        mr.inputs['To Min'].default_value = 1.0 - p['cloud']; mr.inputs['To Max'].default_value = 1.0 + p['cloud']
+        g = node('ShaderNodeCombineColor')
+        for ch in ('Red', 'Green', 'Blue'):
+            nt.links.new(mr.outputs['Result'], g.inputs[ch])
+        col = mix(1.0, hex_lin(p['color']), g.outputs['Color'], 'MULTIPLY')
+    nt.links.new(col, I['Base Color'])
+    I['Roughness'].default_value = p['roughness']
+    if 'Coat Weight' in I:
+        I['Coat Weight'].default_value = p['coat']; I['Coat Roughness'].default_value = 0.3
+    n = normal_in
+    if p['fibre'] > 0:
+        n = _bump_noise(nt, 0.0015, p['fibre'], detail=2.0, normal_in=n)
+    if n is not None:
+        nt.links.new(n, I['Normal'])
+
+
+def _sheet_seed(nt, node, math_, geo, p):
+    """With p['sheets'], a number that differs for each way a face looks (+x, -x, +y, ...), so a pattern read in the
+    face's plane starts afresh on each panel, as separate sheets do; 0.0 otherwise."""
+    if not p.get('sheets'):
+        return 0.0
+    nrm = node('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Normal'], nrm.inputs['Vector'])
+    return math_('ADD', math_('ADD', math_('MULTIPLY', nrm.outputs['X'], 13.1), math_('MULTIPLY', nrm.outputs['Y'], 29.3)),
+                 math_('MULTIPLY', nrm.outputs['Z'], 41.7))
+
+
+def _pressed_finish(nt, b, p, col, uv, geo, normal_in=None):
+    """A pattern as pressed recycled plastic (a bark preset with `plastic`): the colour mottled by its flakes (2D cells
+    `flake` across in the face's plane, each `mottle` lighter or darker, their edges smeared), crumbs of another colour
+    (`specks`), a waxy satin face (`roughness`, `coat`, `wax` subsurface) and the press plate's faint peel."""
+    node, math_, mix, smooth = _nodes(nt)
+    seed = _sheet_seed(nt, node, math_, geo, p)
+
+    def cells(size, smear, z):
+        sm = node('ShaderNodeTexNoise'); sm.inputs['Scale'].default_value = 1.0 / (size * 0.3); sm.inputs['Detail'].default_value = 3.0
+        nt.links.new(uv, sm.inputs['Vector'])
+        ss = node('ShaderNodeSeparateColor'); nt.links.new(sm.outputs['Color'], ss.inputs['Color'])
+        sep = node('ShaderNodeSeparateXYZ'); nt.links.new(uv, sep.inputs['Vector'])
+        q = node('ShaderNodeCombineXYZ')
+        nt.links.new(math_('ADD', math_('DIVIDE', sep.outputs['X'], size), math_('MULTIPLY', math_('SUBTRACT', ss.outputs['Red'], 0.5), smear)), q.inputs['X'])
+        nt.links.new(math_('ADD', math_('DIVIDE', sep.outputs['Y'], size), math_('MULTIPLY', math_('SUBTRACT', ss.outputs['Green'], 0.5), smear)), q.inputs['Y'])
+        if isinstance(seed, float):
+            q.inputs['Z'].default_value = z + seed
+        else:
+            nt.links.new(math_('ADD', seed, z), q.inputs['Z'])
+        vo = node('ShaderNodeTexVoronoi', feature='F1', voronoi_dimensions='3D'); vo.inputs['Scale'].default_value = 1.0
+        nt.links.new(q.outputs['Vector'], vo.inputs['Vector'])
+        cs = node('ShaderNodeSeparateColor'); nt.links.new(vo.outputs['Color'], cs.inputs['Color'])
+        return cs.outputs['Red'], cs.outputs['Green'], vo.outputs['Distance']
+    r, _, _ = cells(p['flake'], 0.8, 0.31)
+    g = node('ShaderNodeCombineColor')
+    k = math_('ADD', 1.0 - p['mottle'], math_('MULTIPLY', r, 2 * p['mottle']))
+    for ch in ('Red', 'Green', 'Blue'):
+        nt.links.new(k, g.inputs[ch])
+    col = mix(1.0, col, g.outputs['Color'], 'MULTIPLY')
+    if p.get('specks'):
+        kc, share, size = p['specks']
+        _, g4, d4 = cells(size, 0.6, 5.7)
+        sp = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(d4, 0.12, 0.22)), math_('LESS_THAN', g4, share))
+        col = mix(sp, col, hex_lin(kc))
+    nt.links.new(col, b.inputs['Base Color'])
+    b.inputs['Roughness'].default_value = p['roughness']
+    if 'Coat Weight' in b.inputs:
+        b.inputs['Coat Weight'].default_value = p['coat']; b.inputs['Coat Roughness'].default_value = 0.22
+    if 'Subsurface Weight' in b.inputs and p.get('wax', 0) > 0:
+        b.inputs['Subsurface Weight'].default_value = p['wax']; b.inputs['Subsurface Scale'].default_value = 0.002
+    nt.links.new(_bump_noise(nt, 0.0007, 0.03, normal_in=normal_in), b.inputs['Normal'])
 
 
 def _strata(nt, p):

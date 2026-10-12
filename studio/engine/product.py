@@ -7,7 +7,8 @@ A product definition (studio/products/NAME.json) says:
                  the front face, z up); glTF's Y-up turns that into Blender's (x, -z, y), which is undone here
     origin_mm    the CAD point that stands at the shot's origin (the footprint's centre on the floor)
     flavours     named colourways: {"whole": {"body": "#FFFFFF", "accent": "#C62828", ...}}; a material's value
-                 "$body" takes the flavour's colour
+                 "$body" takes the flavour's colour. A flavour's "materials" ({"horn": {"stops": [...]}}) are its own
+                 overrides of named materials (a setting no token carries), under any the shot makes
     materials    named materials: {"body": {"preset": "paint", "color": "$body"}, ...}
     assign       [{"match": "front-baffle|side-*", "material": "body"}], first match wins (fnmatch, | for or)
     zones        [{"match": "...", "below_z_mm": 110, "material": "accent", "part": "plinth"}]: faces of matching parts
@@ -284,7 +285,7 @@ def build_materials(bpy, pdef, flavour_name, shot_mats, tag):
         spec = {k: _resolve(v, fl) for k, v in spec.items()}
         preset = spec.pop('preset')
         bevel = spec.pop('bevel_mm', 0.0)
-        ov = {**spec, **shot_mats.get(preset, {}), **shot_mats.get(name, {})}
+        ov = {**spec, **fl.get('materials', {}).get(name, {}), **shot_mats.get(preset, {}), **shot_mats.get(name, {})}
         ov = {k: v for k, v in ov.items() if k in M.PRESET_DEFAULTS[preset]}
         out[name] = M.make(bpy, f'{name}@{tag}', preset, ov, bevel_mm=bevel)
         # a colour the flavour sets on a paint (body, accent, insert) is a swatch the retouch matches (retouch.py)

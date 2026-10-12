@@ -154,11 +154,13 @@ def mouth_for_coverage(fc, angle_deg):
 
 def _se_wire(w, h, n, z, pts=72):
     """A closed superellipse |x/w|^n + |y/h|^n = 1 at height z, as one periodic spline (one smooth face when lofted:
-    no seams at the corners, as a rounded rectangle's straight-and-arc edges leave)."""
+    no seams at the corners, as a rounded rectangle's straight-and-arc edges leave). The points start at a corner,
+    where they lie close together: started at a side's middle, where a square section's points lie far apart, the
+    spline's closure dented that side by up to 1.6 mm (round 5)."""
     from build123d import Edge, Wire, Vector
     P = []
     for k in range(pts):
-        t = 2 * math.pi * k / pts
+        t = math.pi / 4 + 2 * math.pi * k / pts
         c, s_ = math.cos(t), math.sin(t)
         P.append(Vector(w * math.copysign(abs(c) ** (2 / n), c), h * math.copysign(abs(s_) ** (2 / n), s_), z))
     return Wire([Edge.make_spline(P, periodic=True)])

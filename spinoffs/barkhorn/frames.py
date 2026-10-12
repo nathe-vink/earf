@@ -16,7 +16,12 @@ Sets:
   driver or as a tub, from three sides, and beside the photograph from its own angle;
 - resin (round 4): the cast resin's tints, close to;
 - pressed (round 4): the cabinet faced in pressed recycled plastic sheet, and the sheets close to;
-- pick (round 4): where round 4 points, both barks.
+- pick (round 4): where round 4 points, both barks;
+- horn5 (round 5): the horn running the cabinet's full depth, its back flush with the cabinet's, on a 2 in driver, from
+  four sides;
+- shells (round 5): the waveguide's resins, close to: clear, dark and clear, opaque, marbled and swirled;
+- woodfree (round 5): the cabinet without wood, its panels pressed recycled plastic laid out in each bark's pattern;
+- pick5 (round 5): where round 5 points, both barks.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -67,6 +72,16 @@ PHOTO = {'position': [0.75, -2.9, 0.98], 'target': [0.0, 0.0, 0.78], 'lens_mm': 
 CLOSE = {'position': [0.55, -1.75, 1.18], 'target': [0.0, 0.1, 1.09], 'lens_mm': 70, 'level': True}
 CORNER = {'position': [0.78, -0.86, 0.8], 'target': [0.22, -0.16, 0.56], 'lens_mm': 60, 'level': True}
 PRESSED = 'studio/products/barkhorn-pressed.json'      # pressed.py's build
+# round 5: the glow lamp hidden from rays through clear resin (it would show through it as a bright patch)
+GLOW5 = {'glow': {**GLOW['glow'], 'transmission': False}}
+# looking into the horn from in front and a little above, at the throat
+THROAT = {'position': [0.18, -1.15, 1.22], 'target': [0.0, 0.25, 1.1], 'lens_mm': 60, 'level': True}
+SHELLS = {'birch': [('birch', 'smoked: clear resin tinted dark (the proposal)'), ('birch-clear', 'clear, a little warm'),
+                    ('birch-black', 'black, opaque'), ('birch-marble', 'marbled black and white'),
+                    ('birch-swirl', 'smoke swirled through clear')],
+          'eucalyptus': [('eucalyptus', 'bottle green: clear, tinted dark (the proposal)'), ('eucalyptus-clear', 'clear, gum-leaf green'),
+                         ('eucalyptus-green', 'deep green, opaque'), ('eucalyptus-marble', 'marbled in the bark\'s colours'),
+                         ('eucalyptus-swirl', 'green swirled through amber')]}
 SETS = {
     'covers': dict(title='barkhorn: front covers (options)', camera=FRONT_CAM, rows={
         'birch': [F('birch-bare', 'birch', 'bare, as photographed'), F('birch-cloth', 'birch', 'cloth grille', ['cloth']),
@@ -131,6 +146,28 @@ SETS = {
                      F('pick-eucalyptus', 'eucalyptus', 'eucalyptus: amber resin, rust disc', lights=GLOW)],
         'as photographed': [F('pick-photo-birch', 'birch', 'birch, from the photograph\'s angle', camera=PHOTO, lights=GLOW),
                             F('pick-photo-eucalyptus', 'eucalyptus', 'eucalyptus, from the photograph\'s angle', camera=PHOTO, lights=GLOW)]}),
+    'horn5': dict(title='barkhorn: the horn the cabinet\'s full depth, on a 2 in driver', rows={
+        bark: [F(f'{bark}-3q', bark, 'three-quarter', camera=HORN_Q, lights=GLOW5),
+               F(f'{bark}-side', bark, 'side: its back flush with the cabinet\'s', camera=HORN_SIDE, lights=GLOW5),
+               F(f'{bark}-behind', bark, 'from behind: the pod and its cap', camera=HORN_BEHIND, at=TURNED, lights=GLOW5),
+               F(f'{bark}-throat', throat, label, camera=THROAT, lights=GLOW5, size=[900, 640])]
+        for bark, throat, label in (('birch', 'birch-clear', 'into the 2 in throat (clear resin shows it)'),
+                                    ('eucalyptus', 'eucalyptus-green', 'into the 2 in throat (opaque green)'))}),
+    'shells': dict(title='barkhorn: the waveguide\'s resin, close to', camera=CLOSE, rows={
+        bark: [F(f'shell-{fl}', fl, label, lights=GLOW5, size=[900, 640]) for fl, label in frames] for bark, frames in SHELLS.items()}),
+    'woodfree': dict(title='barkhorn without wood: pressed recycled plastic in the bark\'s pattern', camera=RIGHT_Q, rows={
+        'the speakers': [F('woodfree-eucalyptus', 'eucalyptus-pressed', 'eucalyptus: the bark\'s strips, pressed', product=PRESSED, lights=GLOW5),
+                         F('woodfree-birch', 'birch-pressed', 'birch: the bark\'s lenticels, pressed', product=PRESSED, lights=GLOW5)],
+        'close to': [F('woodfree-eucalyptus-corner', 'eucalyptus-pressed', 'a corner: each panel its own sheet', product=PRESSED,
+                       camera=CORNER, lights=GLOW5),
+                     F('woodfree-birch-corner', 'birch-pressed', 'a corner, birch', product=PRESSED, camera=CORNER, lights=GLOW5),
+                     F('woodfree-strips-corner', 'eucalyptus-strips', 'round 4\'s strips, to compare', product=PRESSED, camera=CORNER,
+                       lights=GLOW5)]}),
+    'pick5': dict(title='barkhorn: where round 5 points', camera=RIGHT_Q, rows={
+        'the pair': [F('pick5-birch', 'birch', 'birch: smoked resin, charcoal disc', lights=GLOW5),
+                     F('pick5-eucalyptus', 'eucalyptus', 'eucalyptus: bottle-green resin, rust disc', lights=GLOW5)],
+        'as photographed': [F('pick5-photo-birch', 'birch', 'birch, from the photograph\'s angle', camera=PHOTO, lights=GLOW5),
+                            F('pick5-photo-eucalyptus', 'eucalyptus', 'eucalyptus, from the photograph\'s angle', camera=PHOTO, lights=GLOW5)]}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],
@@ -215,7 +252,10 @@ def grid(title, cells, out, cell_w=480):
         y += rowhead
         for c, (png, label) in enumerate(cells[row]):
             x = pad + c * (w + pad)
-            sheet.paste(Image.open(png).convert('RGB').resize((w, h), Image.LANCZOS), (x, y))
+            im = Image.open(png).convert('RGB')
+            k = min(w / im.width, h / im.height)             # a frame of another shape fits inside the cell, centred
+            fw, fh = round(im.width * k), round(im.height * k)
+            sheet.paste(im.resize((fw, fh), Image.LANCZOS), (x + (w - fw) // 2, y + (h - fh) // 2))
             d.text((x, y + h + 8), label, font=font(20), fill=(60, 56, 52))
     sheet.save(out)
     return out

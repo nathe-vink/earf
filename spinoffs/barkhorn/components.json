@@ -16,6 +16,13 @@
   "geom": {"kind": "compression", "flange_d": 123.0, "flange_t": 10.0, "body_d": 118.0, "body_depth": 42.0, "exit_d": 25.4,
            "bolts": 2, "bolt_d": 76.2, "bolt_hole": 6.5, "_proportioned": "flange_t, body_d"}},
 
+ "bc-de1085tn-16": {"kind": "compression", "maker": "B&C Speakers", "model": "DE1085TN 2 in compression driver, titanium diaphragm, 100 mm voice coil, neodymium, 16 ohm (round 5: the owner's bigger throat)",
+  "usd": 512, "supplier": "Sonovente (EUR 472 incl. VAT, EUR 393 ex; the snippet does not say which impedance)", "price_date": "2026-10-12", "url": "https://bcspeakers.com/en/print/hf-driver/2/8/DE1085TN",
+  "size": "154 across, 86 deep, 4 x M6 on 102", "mass_g": 3600, "note": "108 dB 2.83 V/1 m (16 ohm; 109 dB the 8 ohm); B&C: cross at 800 Hz or above, 12 dB/oct or steeper; audioXpress bench-tested it on B&C's ME60 horn; the 16 ohm version 3 dB less sensitive a volt, so the FA122's hiss 3 dB lower",
+  "ts": {"sens_db": 108.0, "sens_ref": "2.83V", "Pe_w": 140, "nominal_ohm": 16, "xover_min_hz": 800},
+  "geom": {"kind": "compression", "flange_d": 154.0, "flange_t": 12.0, "body_d": 140.0, "body_depth": 74.0, "exit_d": 50.8,
+           "bolts": 4, "bolt_d": 101.6, "bolt_hole": 6.5, "_proportioned": "flange_t, body_d (the 154 x 86 envelope is B&C's)"}},
+
  "artofsound-jmlc-400": {"kind": "horn", "maker": "Art of Sound (Michelstadt)", "model": "Le Cleac'h round horn, 400 mm mouth, solid beech, 1 in throat (the bought alternative to turning the horn)",
   "usd": null, "supplier": "Kleinanzeigen listing (EUR 1,200 a pair, dated 2026-06-25)", "price_date": "2026-06-25", "url": "https://www.kleinanzeigen.de/pro/Born-Propeller-SRL",
   "note": "cut-off, coverage and throat flange not stated: confirm it takes the 4550's 2 x M6 on 76.2"},
@@ -23,12 +30,15 @@
  "felt-glides": {"kind": "hardware", "maker": "any", "model": "Felt glides 30 mm, screw-in, a set of 4", "usd": null, "supplier": "any", "price_date": "2026-10-10"},
  "m6-tnut-set": {"kind": "hardware", "maker": "any", "model": "M6 x 25 button heads (A2) with M6 T-nuts, a set of 8 (the 15PR400's eight holes on 375)", "usd": null, "supplier": "any", "price_date": "2026-10-10"},
  "m6-hf-screws": {"kind": "hardware", "maker": "any", "model": "M6 x 25 socket caps with washers (the compression driver to the horn's flange), a pair", "usd": null, "supplier": "any", "price_date": "2026-10-10"},
- "attenuator-l-pad": {"kind": "wiring", "maker": "any", "model": "Resistor L-pad for the HF channel, about -10 dB at 16 ohm (lowers the amplifier's hiss through a 113 dB driver)", "usd": null, "supplier": "any", "price_date": "2026-10-10"},
+ "attenuator-l-pad": {"kind": "wiring", "maker": "any", "model": "Resistor L-pad for the HF channel, about -9 dB at 16 ohm (lowers the amplifier's hiss through the 108 dB driver)", "usd": null, "supplier": "any", "price_date": "2026-10-10"},
 
  "bark-sheet": {"kind": "finish", "maker": "any", "model": "Bark for laminating, a square metre: paper birch (Betula papyrifera) sheet from fallen or felled trees, or a smooth-barked gum's shed bark pressed flat (or a UV-printed veneer of it); approve a sample board first", "usd": null, "supplier": "a bark craft supplier", "price_date": "2026-10-10"},
  "grille-cloth": {"kind": "cover", "maker": "any", "model": "Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour", "usd": null, "supplier": "any", "price_date": "2026-10-10"},
  "grille-magnets": {"kind": "hardware", "maker": "any", "model": "Grille magnets: eight 15 x 3 neodymium discs (N42), four attracting pairs, a set", "usd": null, "supplier": "any", "price_date": "2026-10-11"},
  "post-inserts": {"kind": "hardware", "maker": "any", "model": "Brass threaded inserts M10 x 1: four bonded into the waveguide's pads (13 across, 14 long) and four screwed into the cabinet's top (14 across, 15 long, one with a through-bore for the cable), a set of eight", "usd": null, "supplier": "any lighting hardware supplier", "price_date": "2026-10-12"},
  "skin-fixings": {"kind": "hardware", "maker": "any", "model": "Stainless No. 8 x 25 pan-head screws with washers, for the pressed sheets (through 8 mm holes in the plywood, from inside), a set of 60", "usd": null, "supplier": "any", "price_date": "2026-10-12"},
- "grille-pegs": {"kind": "hardware", "maker": "any", "model": "Grille pegs and cups, a set of four (push-fit; the cups in 10 mm holes 12 deep in the panel's corners)", "usd": null, "supplier": "any", "price_date": "2026-10-10"}
+ "grille-pegs": {"kind": "hardware", "maker": "any", "model": "Grille pegs and cups, a set of four (push-fit; the cups in 10 mm holes 12 deep in the panel's corners)", "usd": null, "supplier": "any", "price_date": "2026-10-10"},
+ "hf-mount-screws": {"kind": "hardware", "maker": "any", "model": "The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set", "usd": null, "supplier": "any", "price_date": "2026-10-12"},
+ "m6-plastic-inserts": {"kind": "hardware", "maker": "any", "model": "M6 threaded inserts for plastics (self-tapping, brass) with M6 x 25 button heads (A2), a set of 8 (the 15PR400's eight holes on 375, in the HDPE panel; HDPE will not hold a hammered T-nut)", "usd": null, "supplier": "any", "price_date": "2026-10-12"},
+ "hdpe-weld-rod": {"kind": "material", "maker": "any", "model": "HDPE welding rod or extrusion-welder granulate, the panels' own polymer, about 0.4 kg a speaker (the cabinet without wood: corners hot-plate butt welded, the panel, the back and the braces extrusion welded inside)", "usd": null, "supplier": "a plastics fabricator's supplier", "price_date": "2026-10-12"}
 }

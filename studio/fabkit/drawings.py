@@ -129,7 +129,13 @@ def _edge_lines(c):
         if L < 0.2:
             continue
         n = 2 if e.geom_type.name == 'LINE' else int(min(240, max(6, L / 1.0)))
-        out.append(np.array([[p.X, p.Y] for p in (e.position_at(t) for t in np.linspace(0, 1, n))]))
+        try:
+            out.append(np.array([[p.X, p.Y] for p in (e.position_at(t) for t in np.linspace(0, 1, n))]))
+        except Exception:                       # an HLR piece arc length cannot place (round 5's horn): its own parameter
+            from OCP.BRepAdaptor import BRepAdaptor_Curve
+            ad = BRepAdaptor_Curve(e.wrapped)
+            ts = np.linspace(ad.FirstParameter(), ad.LastParameter(), n)
+            out.append(np.array([[ad.Value(t).X(), ad.Value(t).Y()] for t in ts]))
     return out
 
 

@@ -72,6 +72,8 @@ def area(bpy, name, spec, centre):
     if spec.get('roll_deg'):
         ob.rotation_euler.rotate_axis('Z', math.radians(spec['roll_deg']))
     _visibility(ob, spec.get('camera', False))
+    if spec.get('transmission') is False:       # not seen through a clear part (a lamp behind clear resin)
+        ob.visible_transmission = False
     lamp_shares(bpy, ob, spec)
     return ob
 
