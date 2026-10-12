@@ -39,6 +39,8 @@ SHEETS = {
     'spotted-gum-ply': dict(title='Spotted gum-veneered plywood (a eucalypt hardwood face)', density=0.7, sheet=(2400.0, 1200.0),
                             usd_per_m2=None, thicknesses=(6, 9, 12, 18)),
     'cork': dict(title='Cork sheet, agglomerated', density=0.24, sheet=(1830.0, 915.0), usd_per_m2=None, thicknesses=(3, 6)),
+    'recycled-hdpe': dict(title='Recycled HDPE sheet, pressed to order (a sheet press workspace)', density=0.95,
+                          sheet=(1000.0, 1000.0), usd_per_m2=None, thicknesses=(5, 6, 8, 10, 12)),
 }
 PRINTS = {
     'resin-tough': dict(title='Tough (ABS-like) SLA resin', process='sla', density=1.15, usd_per_cm3=0.35, min_wall=1.5),

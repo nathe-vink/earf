@@ -2,7 +2,7 @@
  "_note": "barkhorn for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
  "model": "spinoffs/barkhorn/out/render/barkhorn.glb",
  "origin_mm": [
-  280.2,
+  280.8,
   210.0,
   0.0
  ],
@@ -15,14 +15,6 @@
   },
   "bark": {
    "preset": "$bark"
-  },
-  "cloth": {
-   "preset": "cloth",
-   "color": "$cloth"
-  },
-  "cork": {
-   "preset": "cork",
-   "color": "$cork"
   },
   "disc": {
    "preset": "cloth",
@@ -64,24 +56,13 @@
    "preset": "rubber",
    "color": "#151515"
   },
-  "grille-paint": {
-   "preset": "satin_paint",
-   "color": "$panel",
-   "roughness": 0.6,
-   "specular": 0.3
-  },
-  "grille-timber": {
-   "preset": "birch",
-   "color": "#8E6E4E",
-   "roughness": 0.55
-  },
   "horn": {
    "preset": "$horn_preset",
    "color": "$horn",
    "absorb": "$horn_deep",
-   "radius": 0.025,
-   "clear": 0.15,
-   "roughness": 0.45
+   "deep": "$horn_deep",
+   "cloud": "$horn_cloud",
+   "cloud_m": 0.12
   },
   "panel": {
    "preset": "satin_paint",
@@ -117,14 +98,6 @@
   {
    "match": "left|right|top|bottom|back|bark-face",
    "material": "bark"
-  },
-  {
-   "match": "grille-cloth",
-   "material": "cloth"
-  },
-  {
-   "match": "cork-face",
-   "material": "cork"
   },
   {
    "match": "cloth-disc",
@@ -167,14 +140,6 @@
    "material": "driver-surround"
   },
   {
-   "match": "grille-lenticel",
-   "material": "grille-paint"
-  },
-  {
-   "match": "grille-strips",
-   "material": "grille-timber"
-  },
-  {
    "match": "waveguide|waveguide-cap",
    "material": "horn"
   },
@@ -195,7 +160,7 @@
    "material": "ring"
   },
   {
-   "match": "rod-1|rod-2|rod-3",
+   "match": "post-1|post-2|post-3|post-4",
    "material": "rod"
   }
  ],
@@ -204,9 +169,10 @@
    "bark": "birch_bark",
    "panel": "#D8D5CD",
    "ring": "#EEEAE2",
-   "horn": "#F5F2EC",
-   "horn_deep": "#EFE5D3",
-   "horn_preset": "frosted",
+   "horn": "#F2EEE6",
+   "horn_deep": "#D9AE6E",
+   "horn_cloud": 0.3,
+   "horn_preset": "cast_resin",
    "cloth": "#DCD6C8",
    "cork": "#3B2F28",
    "disc": "#2E2C2A"
@@ -215,31 +181,34 @@
    "bark": "eucalyptus_bark",
    "panel": "#CBCFC4",
    "ring": "#E8E2D4",
-   "horn": "#DEE6D4",
-   "horn_deep": "#B9C9A9",
-   "horn_preset": "frosted",
+   "horn": "#EFE5D0",
+   "horn_deep": "#D6A04E",
+   "horn_cloud": 0.6,
+   "horn_preset": "cast_resin",
    "cloth": "#6F7F66",
    "cork": "#3B2F28",
    "disc": "#9A4526"
   },
   "eucalyptus-pressed": {
-   "bark": "pressed_eucalyptus",
+   "bark": "pressed_eucalyptus_sheet",
    "panel": "#CBCFC4",
    "ring": "#E8E2D4",
-   "horn": "#DEE6D4",
-   "horn_deep": "#B9C9A9",
-   "horn_preset": "frosted",
+   "horn": "#EFE5D0",
+   "horn_deep": "#D6A04E",
+   "horn_cloud": 0.6,
+   "horn_preset": "cast_resin",
    "cloth": "#6F7F66",
    "cork": "#3B2F28",
    "disc": "#9A4526"
   },
   "birch-pressed": {
-   "bark": "pressed_birch",
+   "bark": "pressed_birch_sheet",
    "panel": "#D8D5CD",
    "ring": "#EEEAE2",
-   "horn": "#F5F2EC",
-   "horn_deep": "#EFE5D3",
-   "horn_preset": "frosted",
+   "horn": "#F2EEE6",
+   "horn_deep": "#D9AE6E",
+   "horn_cloud": 0.3,
+   "horn_preset": "cast_resin",
    "cloth": "#DCD6C8",
    "cork": "#3B2F28",
    "disc": "#2E2C2A"
@@ -250,6 +219,7 @@
    "ring": "#E8E2D4",
    "horn": "#DEE6D4",
    "horn_deep": "#B9C9A9",
+   "horn_cloud": 0.6,
    "horn_preset": "frosted_strata",
    "cloth": "#6F7F66",
    "cork": "#3B2F28",
@@ -261,30 +231,11 @@
    "ring": "#EEEAE2",
    "horn": "#F5F2EC",
    "horn_deep": "#EFE5D3",
+   "horn_cloud": 0.3,
    "horn_preset": "frosted_terrazzo",
    "cloth": "#DCD6C8",
    "cork": "#3B2F28",
    "disc": "#2E2C2A"
   }
- },
- "options": {
-  "cloth": [
-   "grille-cloth"
-  ],
-  "lenticel-grille": [
-   "grille-lenticel"
-  ],
-  "strip-grille": [
-   "grille-strips"
-  ],
-  "cloth-disc": [
-   "cloth-disc"
-  ],
-  "bark-face": [
-   "bark-face"
-  ],
-  "cork-face": [
-   "cork-face"
-  ]
  }
 }

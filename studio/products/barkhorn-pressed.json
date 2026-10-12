@@ -1,0 +1,241 @@
+{
+ "_note": "barkhorn for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/out-pressed/render/barkhorn-pressed.glb",
+ "origin_mm": [
+  280.8,
+  210.0,
+  0.0
+ ],
+ "materials": {
+  "amp": {
+   "preset": "satin_paint",
+   "color": "#303033",
+   "roughness": 0.4,
+   "specular": 0.5
+  },
+  "bark": {
+   "preset": "$bark"
+  },
+  "disc": {
+   "preset": "cloth",
+   "color": "$disc"
+  },
+  "driver-cap": {
+   "preset": "paper_cone",
+   "color": "#1D1B1A"
+  },
+  "driver-coil": {
+   "preset": "metal",
+   "color": "#B87333"
+  },
+  "driver-cone": {
+   "preset": "paper_cone",
+   "color": "#1D1B1A"
+  },
+  "driver-frame": {
+   "preset": "satin_paint",
+   "color": "#1E1E1E"
+  },
+  "driver-magnet": {
+   "preset": "satin_paint",
+   "color": "#2B2B2B"
+  },
+  "driver-motor": {
+   "preset": "metal",
+   "color": "#3A3A3A"
+  },
+  "driver-plug": {
+   "preset": "satin_paint",
+   "color": "#111111"
+  },
+  "driver-spider": {
+   "preset": "rubber",
+   "color": "#C8B88A"
+  },
+  "driver-surround": {
+   "preset": "rubber",
+   "color": "#151515"
+  },
+  "horn": {
+   "preset": "$horn_preset",
+   "color": "$horn",
+   "absorb": "$horn_deep",
+   "deep": "$horn_deep",
+   "cloud": "$horn_cloud",
+   "cloud_m": 0.12
+  },
+  "panel": {
+   "preset": "satin_paint",
+   "color": "$panel",
+   "roughness": 0.6,
+   "specular": 0.3
+  },
+  "port": {
+   "preset": "satin_paint",
+   "color": "#1A1817",
+   "roughness": 0.7
+  },
+  "raw": {
+   "preset": "birch"
+  },
+  "ring": {
+   "preset": "satin_paint",
+   "color": "$ring",
+   "roughness": 0.45,
+   "specular": 0.4
+  },
+  "rod": {
+   "preset": "metal",
+   "color": "#C9C9C6",
+   "roughness": 0.3
+  }
+ },
+ "assign": [
+  {
+   "match": "amp-plate",
+   "material": "amp"
+  },
+  {
+   "match": "left|right|top|bottom|back|pressed-face|skin-left|skin-right|skin-top|skin-back|skin-edge-left|skin-edge-right|skin-edge-top|skin-edge-bottom",
+   "material": "bark"
+  },
+  {
+   "match": "cloth-disc",
+   "material": "disc"
+  },
+  {
+   "match": "woofer-cap",
+   "material": "driver-cap"
+  },
+  {
+   "match": "woofer-coil",
+   "material": "driver-coil"
+  },
+  {
+   "match": "woofer-cone",
+   "material": "driver-cone"
+  },
+  {
+   "match": "woofer-frame|hf-frame",
+   "material": "driver-frame"
+  },
+  {
+   "match": "woofer-magnet",
+   "material": "driver-magnet"
+  },
+  {
+   "match": "woofer-motor|hf-motor",
+   "material": "driver-motor"
+  },
+  {
+   "match": "hf-plug",
+   "material": "driver-plug"
+  },
+  {
+   "match": "woofer-spider",
+   "material": "driver-spider"
+  },
+  {
+   "match": "woofer-surround",
+   "material": "driver-surround"
+  },
+  {
+   "match": "waveguide|waveguide-cap",
+   "material": "horn"
+  },
+  {
+   "match": "front-panel",
+   "material": "panel"
+  },
+  {
+   "match": "port",
+   "material": "port"
+  },
+  {
+   "match": "brace",
+   "material": "raw"
+  },
+  {
+   "match": "woofer-ring",
+   "material": "ring"
+  },
+  {
+   "match": "post-1|post-2|post-3|post-4",
+   "material": "rod"
+  }
+ ],
+ "flavours": {
+  "birch": {
+   "bark": "birch_bark",
+   "panel": "#D8D5CD",
+   "ring": "#EEEAE2",
+   "horn": "#F2EEE6",
+   "horn_deep": "#D9AE6E",
+   "horn_cloud": 0.3,
+   "horn_preset": "cast_resin",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#2E2C2A"
+  },
+  "eucalyptus": {
+   "bark": "eucalyptus_bark",
+   "panel": "#CBCFC4",
+   "ring": "#E8E2D4",
+   "horn": "#EFE5D0",
+   "horn_deep": "#D6A04E",
+   "horn_cloud": 0.6,
+   "horn_preset": "cast_resin",
+   "cloth": "#6F7F66",
+   "cork": "#3B2F28",
+   "disc": "#9A4526"
+  },
+  "eucalyptus-pressed": {
+   "bark": "pressed_eucalyptus_sheet",
+   "panel": "#CBCFC4",
+   "ring": "#E8E2D4",
+   "horn": "#EFE5D0",
+   "horn_deep": "#D6A04E",
+   "horn_cloud": 0.6,
+   "horn_preset": "cast_resin",
+   "cloth": "#6F7F66",
+   "cork": "#3B2F28",
+   "disc": "#9A4526"
+  },
+  "birch-pressed": {
+   "bark": "pressed_birch_sheet",
+   "panel": "#D8D5CD",
+   "ring": "#EEEAE2",
+   "horn": "#F2EEE6",
+   "horn_deep": "#D9AE6E",
+   "horn_cloud": 0.3,
+   "horn_preset": "cast_resin",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#2E2C2A"
+  },
+  "eucalyptus-strata": {
+   "bark": "eucalyptus_bark",
+   "panel": "#CBCFC4",
+   "ring": "#E8E2D4",
+   "horn": "#DEE6D4",
+   "horn_deep": "#B9C9A9",
+   "horn_cloud": 0.6,
+   "horn_preset": "frosted_strata",
+   "cloth": "#6F7F66",
+   "cork": "#3B2F28",
+   "disc": "#9A4526"
+  },
+  "birch-terrazzo": {
+   "bark": "birch_bark",
+   "panel": "#D8D5CD",
+   "ring": "#EEEAE2",
+   "horn": "#F5F2EC",
+   "horn_deep": "#EFE5D3",
+   "horn_cloud": 0.3,
+   "horn_preset": "frosted_terrazzo",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#2E2C2A"
+  }
+ }
+}

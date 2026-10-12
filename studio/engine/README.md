@@ -71,7 +71,8 @@ lists included (`glints.0` adds the first glint).
 
 `studio/products/<product>.json`: the GLB, the CAD point that stands on the origin, the flavours (colour sets),
 materials (`materials.py` presets: paint under a clear coat with a faint orange peel, metals, rubber, paper and
-coated cones, birch, plastics, glass), `assign` rules from part names to materials, colour `zones` (a band of faces
+coated cones, birch, plastics, glass, frosted and cast translucent resin, bark, cloth, cork, pressed recycled plastic
+sheet), `assign` rules from part names to materials, colour `zones` (a band of faces
 by height), and `decals`: the print files themselves (the Nutrition Facts, the stencilled marks) laid inside a
 material's colour coat, under its clear, exactly where the fab files put them.
 

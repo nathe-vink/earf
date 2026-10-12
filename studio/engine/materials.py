@@ -37,6 +37,13 @@ PRESET_DEFAULTS = {
     # `radius` metres deep, so a thin wall glows and a thick one deepens to `absorb`), a frosted surface over it
     # (`roughness`), and a little clear transmission (`clear`) so it reads as cast resin and not as paint
     'frosted':    dict(color='#F2EEE6', absorb='#E9DFC9', roughness=0.45, ior=1.5, radius=0.025, clear=0.15),
+    # cast translucent resin, as the photograph's waveguide: a milky body (`color`) that light crosses by random-walk
+    # subsurface scattering, each channel's mean free path from `deep` (the colour it turns where thick or seen through
+    # edge-on: red travels farthest, so thick resin goes amber), `radius` metres at its longest; cloudy (`cloud`: the
+    # body drifts toward `deep` in blotches `cloud_m` across, as an uneven pour or a laminate's mat), its face
+    # bead-blasted (`roughness`), a faint fibre in it (`fibre`)
+    'cast_resin': dict(color='#F1ECE1', deep='#D6A45C', radius=0.014, roughness=0.5, ior=1.5, cloud=0.3, cloud_m=0.09,
+                       anisotropy=0.35, fibre=0.05, clear=0.0),
     'emit':       dict(color='#FFFFFF', strength=1.0),
     'print':      dict(color='#1E1A17', roughness=0.6),
     # bark finishes, procedural (no texture download): paper birch's chalky white with dark horizontal lenticels, a few
@@ -68,6 +75,23 @@ PRESET_DEFAULTS = {
                                flake=0.028, stretch=(1.0, 6.0), warp=0.9, fleck=('#1F1D1A', 0.0, 0.25), roughness=0.36, coat=0.2),
     'pressed_birch': dict(palette=[['#EEEAE0', 0.8], ['#DCD6CA', 0.11], ['#C9976E', 0.03], ['#B9B4AA', 0.06]],
                           flake=0.026, stretch=(5.0, 1.0), warp=0.5, fleck=('#1C1A18', 0.5, 0.4), roughness=0.36, coat=0.2),
+    # pressed recycled plastic sheet, as a maker would press it to order (round 4, after the maker research): melted
+    # flakes at three sizes, their edges smeared by the press's flow, a waxy satin face. `strips` (eucalyptus): the
+    # colours laid as vertical strips `width` wide (mean) and `length` long, their edges torn by `edge`; `flakes`:
+    # smaller pieces of other colours pressed in among them (palette, size, share of cells); `dashes` (birch): short
+    # horizontal black pieces (colour, share, size along and across); `specks`: crumbs (colour, share, size); `vary`:
+    # each strip or flake lighter or darker by up to that share; `marble`: flow marbling inside each; `wax` a little
+    # subsurface, so it reads as plastic, not paint
+    'pressed_eucalyptus_sheet': dict(
+        base=[['#55692E', 0.35], ['#B98B3C', 0.25], ['#A44A28', 0.2], ['#8A867C', 0.2]], base_flake=0.012,
+        strips=dict(width=0.045, length=0.5, edge=0.35), flow=0.6, vary=0.14, marble=0.1,
+        flakes=dict(palette=[['#6B7F3A', 0.2], ['#C79A4A', 0.18], ['#8E3E22', 0.16], ['#9E9A90', 0.16], ['#D8CBA8', 0.16],
+                             ['#3E3128', 0.14]], size=0.014, share=0.24),
+        dashes=None, specks=('#2A2622', 0.05, 0.0035), roughness=0.34, coat=0.15, wax=0.12),
+    'pressed_birch_sheet': dict(
+        base=[['#EEEAE1', 0.6], ['#E4DED2', 0.25], ['#F5F2EC', 0.15]], base_flake=0.010, strips=None, flow=0.5, vary=0.03,
+        marble=0.03, flakes=dict(palette=[['#C9976E', 0.55], ['#B9B4AA', 0.45]], size=0.014, share=0.035),
+        dashes=('#1C1A18', 0.26, (0.05, 0.010)), specks=('#8C877E', 0.05, 0.003), roughness=0.34, coat=0.15, wax=0.15),
     # the frosted resin poured in layers of colour (strata, each about `band` thick, their boundaries wavy by `warp`) or
     # with recycled plastic chips cast through it (terrazzo: chips about `chip` across in a `share` of the cells)
     'frosted_strata': dict(color='#E6E8DA', absorb='#B9C9A9', roughness=0.45, ior=1.5, radius=0.025, clear=0.15,
@@ -194,6 +218,10 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         if normal is not None: nt.links.new(normal, I['Normal'])
     elif preset in ('pressed_eucalyptus', 'pressed_birch'):
         _pressed_plastic(nt, b, p, normal)
+    elif preset in ('pressed_eucalyptus_sheet', 'pressed_birch_sheet'):
+        _pressed_sheet(nt, b, p, normal)
+    elif preset == 'cast_resin':
+        _cast_resin(nt, b, p, normal)
     elif preset == 'emit':
         out = nt.nodes['Material Output']; nt.nodes.remove(b)
         em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = hex_lin(p['color']); em.inputs['Strength'].default_value = p['strength']
@@ -579,6 +607,134 @@ def _pressed_plastic(nt, b, p, normal_in=None):
         b.inputs['Coat Weight'].default_value = p['coat']; b.inputs['Coat Roughness'].default_value = 0.25
     if normal_in is not None:
         nt.links.new(normal_in, b.inputs['Normal'])
+
+
+def _cast_resin(nt, b, p, normal_in=None):
+    """Cast translucent resin (the preset's comment says what each setting does). The cloud is one slow 3D noise: its
+    contrasty part tints the body toward `deep` and the whole of it moves the scattering depth, so the blotches read as
+    thicker resin, not as paint."""
+    node, math_, mix, smooth = _nodes(nt)
+    I = b.inputs
+    try:
+        b.subsurface_method = 'RANDOM_WALK'
+    except (AttributeError, TypeError):
+        pass
+    geo = node('ShaderNodeNewGeometry')
+    nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / p['cloud_m']; nz.inputs['Detail'].default_value = 3.0
+    nz.inputs['Roughness'].default_value = 0.55
+    nt.links.new(geo.outputs['Position'], nz.inputs['Vector'])
+    blot = math_('MULTIPLY', smooth(nz.outputs['Fac'], 0.42, 0.72), p['cloud'])
+    deep = hex_lin(p['deep'])
+    tint = tuple(0.55 * c + 0.45 * d for c, d in zip(hex_lin(p['color'])[:3], deep[:3])) + (1.0,)
+    nt.links.new(mix(blot, hex_lin(p['color']), tint), I['Base Color'])
+    I['Subsurface Weight'].default_value = 1.0
+    m = max(deep[:3])
+    I['Subsurface Radius'].default_value = tuple(max(c / m, 0.04) for c in deep[:3])
+    depth = math_('MULTIPLY', math_('ADD', 1.0 - 0.5 * p['cloud'], math_('MULTIPLY', nz.outputs['Fac'], p['cloud'])), p['radius'])
+    nt.links.new(depth, I['Subsurface Scale'])
+    if 'Subsurface Anisotropy' in I:
+        I['Subsurface Anisotropy'].default_value = p['anisotropy']
+    I['Roughness'].default_value = p['roughness']; I['IOR'].default_value = p['ior']
+    if p['clear'] > 0:
+        I['Transmission Weight'].default_value = p['clear']
+    n = normal_in
+    if p['fibre'] > 0:
+        n = _bump_noise(nt, 0.0015, p['fibre'], detail=2.0, normal_in=n)
+    if n is not None:
+        nt.links.new(n, I['Normal'])
+
+
+def _pressed_sheet(nt, b, p, normal_in=None):
+    """Pressed recycled plastic sheet (the presets' comment says what each setting does): 2D cells in the face's plane,
+    every coordinate first moved by a slow flow noise, then a base of flakes (or strips), pieces pressed in among them,
+    dashes and crumbs over that, each piece's edge smeared by a fine noise so none reads as cut."""
+    node, math_, mix, smooth = _nodes(nt)
+    uv, geo = _face_uv(nt, node, math_)
+    sep = node('ShaderNodeSeparateXYZ'); nt.links.new(uv, sep.inputs['Vector'])
+    X, Y = sep.outputs['X'], sep.outputs['Y']
+    # the press's flow: a slow noise moves every point a little, so no field of cells is regular
+    fn = node('ShaderNodeTexNoise'); fn.inputs['Scale'].default_value = 1.0 / 0.12; fn.inputs['Detail'].default_value = 3.0
+    nt.links.new(uv, fn.inputs['Vector'])
+    fs = node('ShaderNodeSeparateColor'); nt.links.new(fn.outputs['Color'], fs.inputs['Color'])
+    fx = math_('MULTIPLY', math_('SUBTRACT', fs.outputs['Red'], 0.5), 0.02 * p['flow'])
+    fy = math_('MULTIPLY', math_('SUBTRACT', fs.outputs['Green'], 0.5), 0.02 * p['flow'])
+    X, Y = math_('ADD', X, fx), math_('ADD', Y, fy)
+
+    def cells(sx, sy, smear, seed):
+        """Voronoi cells sx by sy (metres), their edges smeared by a fine noise `smear` of a cell: (random 0..1, a second
+        random 0..1, distance to the cell's centre in cells)."""
+        sm = node('ShaderNodeTexNoise'); sm.inputs['Scale'].default_value = 1.0; sm.inputs['Detail'].default_value = 4.0
+        smc = node('ShaderNodeCombineXYZ')
+        nt.links.new(math_('DIVIDE', X, sx * 0.3), smc.inputs['X']); nt.links.new(math_('DIVIDE', Y, sy * 0.3), smc.inputs['Y'])
+        smc.inputs['Z'].default_value = seed
+        nt.links.new(smc.outputs['Vector'], sm.inputs['Vector'])
+        ss = node('ShaderNodeSeparateColor'); nt.links.new(sm.outputs['Color'], ss.inputs['Color'])
+        q = node('ShaderNodeCombineXYZ')
+        nt.links.new(math_('ADD', math_('DIVIDE', X, sx), math_('MULTIPLY', math_('SUBTRACT', ss.outputs['Red'], 0.5), smear)), q.inputs['X'])
+        nt.links.new(math_('ADD', math_('DIVIDE', Y, sy), math_('MULTIPLY', math_('SUBTRACT', ss.outputs['Green'], 0.5), smear)), q.inputs['Y'])
+        q.inputs['Z'].default_value = seed
+        vo = node('ShaderNodeTexVoronoi', feature='F1', voronoi_dimensions='3D'); vo.inputs['Scale'].default_value = 1.0
+        nt.links.new(q.outputs['Vector'], vo.inputs['Vector'])
+        cs = node('ShaderNodeSeparateColor'); nt.links.new(vo.outputs['Color'], cs.inputs['Color'])
+        return cs.outputs['Red'], cs.outputs['Green'], vo.outputs['Distance']
+
+    # the base: strips (long cells up the face, torn edges) or flakes
+    if p['strips']:
+        st = p['strips']
+        r, g0, _ = cells(st['width'], st['length'], 2 * st['edge'], 0.0)
+        sx, sy = st['width'], st['length']
+    else:
+        r, g0, _ = cells(p['base_flake'], p['base_flake'], 0.8, 0.0)
+        sx = sy = p['base_flake']
+    col = _weighted_ramp(node, nt, r, p['base'])
+
+    def scale_by(k):                                 # the colour times a grey of value k
+        g = node('ShaderNodeCombineColor')
+        for ch in ('Red', 'Green', 'Blue'):
+            nt.links.new(k, g.inputs[ch])
+        return mix(1.0, col, g.outputs['Color'], 'MULTIPLY')
+    if p.get('vary', 0) > 0:                         # each strip or flake a little lighter or darker than the next
+        col = scale_by(math_('ADD', 1.0 - p['vary'], math_('MULTIPLY', g0, 2 * p['vary'])))
+    if p.get('marble', 0) > 0:                       # flow marbling inside each, drawn out the way the strips run
+        mq = node('ShaderNodeCombineXYZ')
+        nt.links.new(math_('DIVIDE', X, min(sx, sy) * 0.6), mq.inputs['X'])
+        nt.links.new(math_('DIVIDE', Y, min(sx, sy) * 0.6 * max(sy / sx, 1.0) ** 0.5), mq.inputs['Y'])
+        mn = node('ShaderNodeTexNoise'); mn.inputs['Scale'].default_value = 1.0; mn.inputs['Detail'].default_value = 5.0
+        nt.links.new(mq.outputs['Vector'], mn.inputs['Vector'])
+        col = scale_by(math_('ADD', 1.0 - p['marble'], math_('MULTIPLY', mn.outputs['Fac'], 2 * p['marble'])))
+    # pieces pressed in among them: a blob round a share of a finer set of cells' centres
+    fl = p['flakes']
+    if fl and fl['share'] > 0:
+        r2, g2, d2 = cells(fl['size'], fl['size'], 0.9, 3.7)
+        blob = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(d2, 0.28, 0.42)), math_('LESS_THAN', g2, fl['share']))
+        col = mix(blob, col, _weighted_ramp(node, nt, r2, fl['palette']))
+    if p['dashes']:
+        dc, share, (dl, dh) = p['dashes']
+        _, g3, d3 = cells(dl, dh, 0.7, 7.1)
+        dash = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(d3, 0.22, 0.34)), math_('LESS_THAN', g3, share))
+        col = mix(dash, col, hex_lin(dc))
+    if p['specks']:
+        kc, share, size = p['specks']
+        _, g4, d4 = cells(size, size, 0.6, 11.3)
+        sp = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(d4, 0.12, 0.22)), math_('LESS_THAN', g4, share))
+        col = mix(sp, col, hex_lin(kc))
+    # a faint mottle in every colour (a sheet is never one value)
+    mo = node('ShaderNodeTexNoise'); mo.inputs['Scale'].default_value = 1.0 / 0.008; mo.inputs['Detail'].default_value = 3.0
+    nt.links.new(geo.outputs['Position'], mo.inputs['Vector'])
+    mr = node('ShaderNodeMapRange'); nt.links.new(mo.outputs['Fac'], mr.inputs['Value'])
+    mr.inputs['To Min'].default_value = 0.95; mr.inputs['To Max'].default_value = 1.05
+    g = node('ShaderNodeCombineColor')
+    for ch in ('Red', 'Green', 'Blue'):
+        nt.links.new(mr.outputs['Result'], g.inputs[ch])
+    col = mix(1.0, col, g.outputs['Color'], 'MULTIPLY')
+    nt.links.new(col, b.inputs['Base Color'])
+    if 'Subsurface Weight' in b.inputs and p['wax'] > 0:
+        b.inputs['Subsurface Weight'].default_value = p['wax']; b.inputs['Subsurface Scale'].default_value = 0.002
+    b.inputs['Roughness'].default_value = p['roughness']
+    if 'Coat Weight' in b.inputs:
+        b.inputs['Coat Weight'].default_value = p['coat']; b.inputs['Coat Roughness'].default_value = 0.22
+    n = _bump_noise(nt, 0.0007, 0.03, normal_in=normal_in)      # the press plate's faint peel
+    nt.links.new(n, b.inputs['Normal'])
 
 
 def _strata(nt, p):

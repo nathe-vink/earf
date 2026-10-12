@@ -1,50 +1,21 @@
 {
  "product": "barkhorn",
  "title": "barkhorn",
- "parts": 39,
- "seconds": 192,
+ "parts": 33,
+ "seconds": 227,
  "sheets": {
   "baltic-birch-18": 3,
   "mdf-6": 1,
-  "mdf-6-cloth": 1,
-  "baltic-birch-6-lenticel-grille": 1,
-  "spotted-gum-ply-6-strip-grille": 1,
-  "mdf-12-cloth-disc": 1,
-  "cork-3-cork-face": 1
+  "mdf-12": 1
  },
  "budget_usd": {
-  "cut": 335,
+  "cut": 344,
   "print": 28,
   "buy": 1629,
-  "cast": 1313,
-  "lathe": 120
+  "cast": 1383,
+  "lathe": 133
  },
- "options_usd": {
-  "cloth": {
-   "usd": 20,
-   "unpriced": 2
-  },
-  "lenticel-grille": {
-   "usd": 64,
-   "unpriced": 1
-  },
-  "strip-grille": {
-   "usd": 0,
-   "unpriced": 2
-  },
-  "cloth-disc": {
-   "usd": 9,
-   "unpriced": 2
-  },
-  "bark-face": {
-   "usd": 0,
-   "unpriced": 1
-  },
-  "cork-face": {
-   "usd": 0,
-   "unpriced": 1
-  }
- },
+ "options_usd": {},
  "checks_ok": true,
  "drawings": "spinoffs/barkhorn/out/drawings/barkhorn-sheets.pdf",
  "render": "spinoffs/barkhorn/out/render/barkhorn.glb"

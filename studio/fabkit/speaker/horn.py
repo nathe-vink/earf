@@ -247,49 +247,143 @@ def _smax(a, b, k=8.0):
 
 
 def waveguide_shell(mouth_w, mouth_h, depth, r0=12.7, wall=6.0, rim=10.0, n_mouth=4.5, pod_r=74.0, pod_back=70.0,
-                    dome=45.0, cable_d=10.0, boss=None, n=14):
+                    dome=45.0, cable_d=10.0, boss=None, n=14, round_rim=0.0, pads=(), cap_hole=True, tub=None,
+                    solid_neck=False):
     """A rectangular waveguide as a thin cast shell that follows its own flare: the inner (air) surface a superellipse
     waveguide (round at the throat r0, squaring toward the `mouth_w` x `mouth_h` mouth, n_mouth), the outside `wall`
     away, thickening to a `rim` at the mouth, and behind the throat a round pod (`pod_r`, `pod_back` long) that hides
     the compression driver, the flare running into it smoothly. The pod is open at the back; `dome` is a separate cap
     that closes it, with a hole for the cable. Local frame: x across, y up, z from the throat (0) to the mouth (depth);
-    the pod behind, z < 0. Returns (shell, cap)."""
+    the pod behind, z < 0. Returns (shell, cap).
+
+    `round_rim` rounds the rim over a crest halfway through its thickness, the air surface and the outside each curving
+    to it over about that radius (so the rim reads as a rolled edge, not a flat face).
+    `pads`: bosses under the shell that take its mounting posts, each {'x', 'z' (where, local), 'd' (across), 'h' (how far
+    its flat foot stands below the lowest point of the shell over it), 'bore' and 'bore_depth' (the hole for the
+    post's thread or insert, up from the foot), 'cable' (a hole of that diameter on up through the shell, for a cable
+    run down inside the post)}. The flare and the pod's void trim each boss, so none pokes into the air path.
+    `cap_hole` False leaves the cap without the cable's hole (the cable leaves through a pad instead).
+    `solid_neck`: the neck between the flare and the pod cast solid, not hollow (the pod's void stops behind the boss):
+    in translucent resin a hollow there shows through as a squarish shadow round the throat, solid resin as a round,
+    deeper halo, as the photograph's.
+    `tub` {'back' (how far behind the throat the back wall's outside stands), 'taper' (how much smaller the back than the
+    rim), 'round' (the share of the depth the back's edges round over in), 'end' (the back wall's size against the rim),
+    'lid' (how deep the removable back is), 'seam'}: instead of following the flare, the outside runs straight back from
+    the rim as a tub, rounding over into a flat back wall that hides the driver; the flare is its own skin inside, the
+    space between them hollow. The cap is then the tub's back (`lid` deep, a `seam` gap), screwed on."""
     from build123d import Pos, Cylinder, Align
     hw, hh = mouth_w / 2, mouth_h / 2
     ta = math.sqrt(max(hw ** 2 - r0 ** 2, 0.0)) / depth
     tb = math.sqrt(max(hh ** 2 - r0 ** 2, 0.0)) / depth
 
-    def outer(z, inset=0.0):
-        if z >= 0:
-            zz = min(z, depth)
-            w = math.sqrt(r0 ** 2 + (zz * ta) ** 2); h = math.sqrt(r0 ** 2 + (zz * tb) ** 2)
-            nn = 2.0 + (n_mouth - 2.0) * (zz / depth) ** 1.2
-            grow = wall + (rim - wall) * max(0.0, (zz - (depth - 25.0)) / 25.0) ** 2
-            W, H = _smax(w + grow, pod_r), _smax(h + grow, pod_r)
-            pod = (pod_r / max(W, H)) ** 4                       # how much the pod rules here: round where it does
-            return W - inset, H - inset, nn * (1 - pod) + 2.0 * pod
-        return pod_r - inset, pod_r - inset, 2.0
+    if tub:
+        zb, L = -tub['back'], depth + tub['back']
 
-    zs = sorted(set([-pod_back, -pod_back * 0.6, -pod_back * 0.25, 0.0] + [depth * (i / n) ** 1.25 for i in range(1, n + 1)]))
-    outer_solid = Solid.make_loft([_se_wire(*outer(z)[:2], outer(z)[2], z) for z in zs], False)
-    vz = [-pod_back - 1.0] + [z for z in zs if -pod_back < z < depth - wall] + [depth - wall]
+        def outer(z, inset=0.0):
+            t = min(max((depth - z) / L, 0.0), 1.0)
+            r_ = tub['round']
+            u = max(0.0, (t - (1 - r_)) / r_)          # 0 until the rounding begins, 1 at the back
+            e = tub['end'] + (1 - tub['end']) * math.sqrt(max(1 - u * u, 0.0))
+            k = (1 - tub['taper'] * t) * e
+            return (hw + rim) * k - inset, (hh + rim) * k - inset, n_mouth - (n_mouth - 4.0) * t
+    else:
+        def outer(z, inset=0.0):
+            if z >= 0:
+                zz = min(z, depth)
+                w = math.sqrt(r0 ** 2 + (zz * ta) ** 2); h = math.sqrt(r0 ** 2 + (zz * tb) ** 2)
+                nn = 2.0 + (n_mouth - 2.0) * (zz / depth) ** 1.2
+                grow = wall + (rim - wall) * max(0.0, (zz - (depth - 25.0)) / 25.0) ** 2
+                W, H = _smax(w + grow, pod_r), _smax(h + grow, pod_r)
+                pod = (pod_r / max(W, H)) ** 4                   # how much the pod rules here: round where it does
+                return W - inset, H - inset, nn * (1 - pod) + 2.0 * pod
+            return pod_r - inset, pod_r - inset, 2.0
+
+    def flare(z):                                # the air surface's section at z
+        return math.sqrt(r0 ** 2 + (z * ta) ** 2), math.sqrt(r0 ** 2 + (z * tb) ** 2), 2.0 + (n_mouth - 2.0) * (z / depth) ** 1.2
+
+    def rounding(f, za, wc, hc):
+        """Sections from z = za, where they leave surface f along its own slope, curving toward (wc, hc) at the mouth's
+        plane: a quadratic Bezier in each half dimension, sampled at evenly spaced z (sections bunched where it turns
+        flat make the loft overshoot), so the rim's crest is a narrow flat between two rounded shoulders."""
+        (w0, h0, n0), (w1, h1, _) = f(za), f(za - 0.5)
+        qw, qh = w0 + (w0 - w1) / 0.5 * (depth - za), h0 + (h0 - h1) / 0.5 * (depth - za)
+        out = []
+        for k in range(5):
+            u = 1.0 - math.sqrt(1.0 - k / 4) if k < 4 else 0.82      # z = za + k (depth - za) / 4; the last eased off flat
+            a, b, c = (1 - u) ** 2, 2 * u * (1 - u), u * u
+            out.append((a * w0 + b * qw + c * wc, a * h0 + b * qh + c * hc, n0, za + (depth - za) * k / 4))
+        return out
+
+    if tub:                                      # dense where the back's edges round over
+        zs = [zb + L * f for f in (0.003, 0.012, 0.03, 0.055, 0.09, 0.135, 0.19, 0.26, 0.36, 0.48, 0.6, 0.72, 0.83, 0.92, 1.0)]
+    else:
+        zs = sorted(set([-pod_back, -pod_back * 0.6, -pod_back * 0.25, 0.0] + [depth * (i / n) ** 1.25 for i in range(1, n + 1)]))
+    back_run = (boss['t'] + 2.0) if boss else 6.0    # the air path runs straight on behind the throat, through any boss
+    if round_rim > 0:                            # the rim rounded over a crest halfway through its thickness
+        ra = round_rim
+        crest = (hw + rim / 2, hh + rim / 2)
+        osecs = [(*outer(z)[:2], outer(z)[2], z) for z in zs if z < depth - ra - 4.0] + rounding(outer, depth - ra, *crest)
+        csecs = [(*flare(z)[:2], flare(z)[2], z) for z in [depth * (i / 12) ** 1.3 for i in range(0, 13)] if z < depth - ra - 4.0]
+        csecs = [(r0, r0, 2.0, -back_run)] + csecs + rounding(flare, depth - ra, *crest) + [(crest[0] + 4.0, crest[1] + 4.0, n_mouth, depth + 3.0)]
+        outer_solid = Solid.make_loft([_se_wire(W, H, nn, z) for W, H, nn, z in osecs], False)
+        cav = Solid.make_loft([_se_wire(W, H, nn, z) for W, H, nn, z in csecs], False)
+    else:
+        outer_solid = Solid.make_loft([_se_wire(*outer(z)[:2], outer(z)[2], z) for z in zs], False)
+        cav = Solid.make_loft(_se_sections(r0, hw, hh, depth, n_mouth, beyond=5.0, before=back_run), False)
+    zv = (zb + wall) if tub else (-pod_back - 1.0)
+    zt = -(boss['t'] if boss else wall) if (solid_neck and not tub) else depth - wall
+    vz = [zv] + [z for z in zs if zv < z < zt] + [zt]
     void = Solid.make_loft([_se_wire(*outer(z, wall)[:2], outer(z, wall)[2], z) for z in vz], False)
     grown = Solid.make_loft(_se_sections(r0, hw, hh, depth, n_mouth, grow=wall, beyond=5.0, before=6.0), False)
-    cav = Solid.make_loft(_se_sections(r0, hw, hh, depth, n_mouth, beyond=5.0, before=6.0), False)
-    shell = outer_solid - (void - grown) - cav
-    if boss:
-        b = Pos(0, 0, -boss['t']) * (Cylinder(boss['d'] / 2, boss['t'], align=(Align.CENTER, Align.CENTER, Align.MIN)) -
-                                     Cylinder(r0, boss['t'] + 1, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    body = outer_solid
+    feet = []
+    for pd in pads:                             # bosses under the shell for its posts, fused before the voids are cut
+        W, H, nn = outer(pd['z'])
+        r = pd['d'] / 2
+        def under(x):                           # the shell's underside (outer surface, y < 0) at x, section z
+            u = min(abs(x) / W, 0.999999)
+            return -H * (1 - u ** nn) ** (1 / nn)
+        zs_ = [pd['z'] - r, pd['z'], pd['z'] + r]
+        low = min(-outer(z_)[1] * (1 - min(abs(pd['x'] + dx) / outer(z_)[0], 0.999999) ** outer(z_)[2]) ** (1 / outer(z_)[2])
+                  for z_ in zs_ for dx in (-r, 0.0, r))
+        foot = low - pd['h']
+        top = under(pd['x']) + 2 * wall + r     # well into the wall; the voids trim what rises past it
+        boss_ = Pos(pd['x'], foot, pd['z']) * Cylinder(r, top - foot, rotation=(-90, 0, 0), align=(Align.CENTER, Align.CENTER, Align.MIN))
+        body = body + boss_
+        feet.append((pd, foot))
+    shell = body - (void - grown)
+    if boss:                                    # the driver's mounting boss, fused before the air path is cut through it
+        b = Pos(0, 0, -boss['t']) * Cylinder(boss['d'] / 2, boss['t'], align=(Align.CENTER, Align.CENTER, Align.MIN))
         for k in range(boss.get('bolts', 0)):
             a = 2 * math.pi * (k + 0.5) / boss['bolts']
             b = b - Pos(boss['bolt_d'] / 2 * math.cos(a), boss['bolt_d'] / 2 * math.sin(a), -boss['t'] - 0.5) * \
                 Cylinder(boss['bolt_hole'] / 2, boss['t'] + 1, align=(Align.CENTER, Align.CENTER, Align.MIN))
         shell = shell + b
+    shell = shell - cav
+    for pd, foot in feet:                       # the posts' holes, up from each foot; a cable's on through the shell
+        shell = shell - Pos(pd['x'], foot - 1.0, pd['z']) * Cylinder(pd['bore'] / 2, pd['bore_depth'] + 1.0, rotation=(-90, 0, 0),
+                                                                    align=(Align.CENTER, Align.CENTER, Align.MIN))
+        if pd.get('cable'):                     # on up through the shell's wall into the pod, no farther
+            W, H, nn = outer(pd['z'])
+            u = min(abs(pd['x']) / W, 0.999999)
+            reach = -H * (1 - u ** nn) ** (1 / nn) + 2 * wall
+            shell = shell - Pos(pd['x'], foot - 1.0, pd['z']) * Cylinder(pd['cable'] / 2, reach - foot + 1.0, rotation=(-90, 0, 0),
+                                                                        align=(Align.CENTER, Align.CENTER, Align.MIN))
+    if tub:                                      # the back, split off as a lid a seam's width clear of the rest
+        from build123d import Box
+        zl = zb + tub['lid']
+        big = 4 * (hw + hh + rim)
+        lid = shell & (Pos(0, 0, zl - tub['seam'] / 2) * Box(big, big, big, align=(Align.CENTER, Align.CENTER, Align.MAX)))
+        shell = shell & (Pos(0, 0, zl + tub['seam'] / 2) * Box(big, big, big, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+        return shell, lid
     # the cap: an ellipsoidal dome on the pod's back, a spigot inside the pod (0.3 clear) to locate it, the cable's hole
     z0 = -pod_back
     rings = [(z0 - dome * u, max(pod_r * math.sqrt(max(1 - u * u, 0.0)), cable_d / 2 + wall + 2)) for u in (0.0, 0.3, 0.55, 0.75, 0.9, 1.0)]
     cap_out = Solid.make_loft([_se_wire(r, r, 2.0, z) for z, r in rings], False)
-    inner_rings = [(z, max(r - wall, cable_d / 2 + 1.0)) for z, r in rings[:-1]] + [(rings[-1][0] - 1.0, cable_d / 2 + 1.0)]
+    if cap_hole:
+        inner_rings = [(z, max(r - wall, cable_d / 2 + 1.0)) for z, r in rings[:-1]] + [(rings[-1][0] - 1.0, cable_d / 2 + 1.0)]
+    else:                                       # closed: the inside stops a wall short of the dome's crown
+        inner_rings = [(z + wall * u, max(r - wall, 2.0)) for (z, r), u in zip(rings[:-1], (0.0, 0.3, 0.55, 0.75, 0.9))]
     cap_in = Solid.make_loft([_se_wire(pod_r - wall + 0.0, pod_r - wall, 2.0, z0 + 1.0)] + [_se_wire(r, r, 2.0, z) for z, r in inner_rings], False)
     cap = cap_out - cap_in
     spigot = Pos(0, 0, z0) * (Cylinder(pod_r - wall - 0.3, 10.0, align=(Align.CENTER, Align.CENTER, Align.MIN)) -

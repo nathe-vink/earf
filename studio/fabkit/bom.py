@@ -100,7 +100,7 @@ def write(product, parts, recs, library, out):
     md = [f'# {product.title}: parts for {product.count} ({product.kind})', ''] + table(base)
     md += ['', '| | USD |', '|---|---|'] + [f'| {k} | {v:,.0f} |' for k, v in sorted(tot.items())] + [f'| total | {sum(tot.values()):,.0f} |', '']
     if unknown:
-        md.append('No price yet for: ' + '; '.join(unknown) + '.')
+        md.append('No price yet for: ' + '; '.join(dict.fromkeys(unknown)) + '.')      # each once, in order
     opts = list(dict.fromkeys(r['option'] for r in R if r['option']))
     if opts:
         md += ['', f'## Options (each for {product.count}, on top of the total above)', '']
@@ -111,7 +111,7 @@ def write(product, parts, recs, library, out):
             head = (f'about ${ot:,.0f}' + (' before the unpriced' if missing else '')) if ot else '[PRICE]'
             md += [f'### {o}: {head}', ''] + table(rs) + ['']
             if missing:
-                md += ['No price yet for: ' + '; '.join(missing) + '.', '']
+                md += ['No price yet for: ' + '; '.join(dict.fromkeys(missing)) + '.', '']
     md.append('Budget figures: bought parts from the component library (dated retailer listings), made parts from the '
               "kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread "
               "over its pieces. A shop's quote replaces them.")

@@ -1,7 +1,7 @@
 """barkhorn's comparison sheets: sets of frames, one speaker each under the same light and camera, rendered and set
 in a grid with their names.
 
-    python3 spinoffs/barkhorn/frames.py covers|front|study|experiments [--samples 64] [--all | --only NAME ...]
+    python3 spinoffs/barkhorn/frames.py SET [--samples 64] [--all | --only NAME ...]
 
 Sets:
 - covers: each bark bare, as photographed, then with each front cover (round 2);
@@ -11,7 +11,12 @@ Sets:
   first into out/study/ (`--build` to build them again after a change);
 - experiments: material experiments (pressed recycled plastic, strata and terrazzo resin);
 - proposal: where the study points: the pebble waveguide in strata resin (eucalyptus) and in terrazzo (birch), on the
-  bark face with a cloth disc.
+  bark face with a cloth disc;
+- horn (round 4): the photograph's horn, measured again, on four posts as photographed: its back as a shell round the
+  driver or as a tub, from three sides, and beside the photograph from its own angle;
+- resin (round 4): the cast resin's tints, close to;
+- pressed (round 4): the cabinet faced in pressed recycled plastic sheet, and the sheets close to;
+- pick (round 4): where round 4 points, both barks.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -24,7 +29,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SHOTS = os.path.join(ROOT, 'studio', 'shots', 'barkhorn')
 PRODUCT = 'studio/products/barkhorn.json'
 STUDY = os.path.join(HERE, 'out', 'study')
-DAY = {'covers': '2026-10-10'}                 # where each set's renders live (a set first made that day)
+DAY = {'covers': '2026-10-10', 'front': '2026-10-11', 'study': '2026-10-11', 'proposal': '2026-10-11',
+       'experiments': '2026-10-11'}             # where each set's renders live (a set first made that day; the rest 2026-10-12)
 
 FRONT_CAM = {'position': [-0.78, -2.6, 1.0], 'target': [0.0, 0.0, 0.64], 'lens_mm': 66, 'level': True}
 THREE_Q = {'position': [1.45, -2.7, 1.45], 'target': [0.0, 0.08, 0.66], 'lens_mm': 60, 'level': True}
@@ -36,9 +42,9 @@ BEHIND = {'position': [-1.0, -3.2, 1.45], 'target': [0.0, -1.2, 0.72], 'lens_mm'
 TURNED = dict(position=[0.0, -1.2, 0], rotate_z=180, shift=-1.2)
 
 
-def F(name, bark, label, options=(), materials=None, product=PRODUCT, camera=None, lights=None, at=None):
+def F(name, bark, label, options=(), materials=None, product=PRODUCT, camera=None, lights=None, at=None, size=None):
     return dict(name=name, bark=bark, label=label, options=list(options), materials=materials or {}, product=product,
-                camera=camera, lights=lights or {}, at=at)
+                camera=camera, lights=lights or {}, at=at, size=size)
 
 
 def form_product(form):
@@ -47,6 +53,20 @@ def form_product(form):
 
 FORMS = [('shell', 'shell (round 2)'), ('lens', 'lens'), ('slab', 'slab'), ('pebble', 'pebble: slab rim, lens back'),
          ('round', 'round')]
+# each study model: the product with these parameters changed (dotted paths into P), built into out/study/
+MODELS = {f: {'horn.form': f} for f, _ in FORMS}
+MODELS.update({'cast': {'horn.form': 'cast', 'horn.cast.back': 'shell'}, 'cast-tub': {'horn.form': 'cast', 'horn.cast.back': 'tub'}})
+# round 4's light: a soft lamp close behind the horn, so its resin glows as the photograph's does with the room behind it
+GLOW = {'glow': {'type': 'area', 'size_m': [0.7, 0.32], 'position': [0.0, 0.66, 1.12], 'target': [0.0, 0.0, 1.1],
+                 'irradiance': 1.6, 'color': '#FFF1DC', 'specular': 0}}      # it lights the resin, leaves no highlight
+HORN_Q = {'position': [1.3, -2.45, 1.5], 'target': [0.0, 0.1, 0.8], 'lens_mm': 58, 'level': True}
+HORN_SIDE = {'position': [2.9, -0.55, 1.3], 'target': [0.0, 0.16, 0.86], 'lens_mm': 62, 'level': True}
+HORN_BEHIND = {'position': [-1.15, -3.1, 1.75], 'target': [0.0, -1.2, 0.9], 'lens_mm': 55, 'level': True}
+# the photograph's own angle on its left speaker: from the room's middle, a little right of it, the camera low
+PHOTO = {'position': [0.75, -2.9, 0.98], 'target': [0.0, 0.0, 0.78], 'lens_mm': 50, 'level': True}
+CLOSE = {'position': [0.55, -1.75, 1.18], 'target': [0.0, 0.1, 1.09], 'lens_mm': 70, 'level': True}
+CORNER = {'position': [0.78, -0.86, 0.8], 'target': [0.22, -0.16, 0.56], 'lens_mm': 60, 'level': True}
+PRESSED = 'studio/products/barkhorn-pressed.json'      # pressed.py's build
 SETS = {
     'covers': dict(title='barkhorn: front covers (options)', camera=FRONT_CAM, rows={
         'birch': [F('birch-bare', 'birch', 'bare, as photographed'), F('birch-cloth', 'birch', 'cloth grille', ['cloth']),
@@ -79,6 +99,38 @@ SETS = {
                            ['bark-face', 'cloth-disc'], product=form_product('pebble')),
                          F('pebble-terrazzo-birch', 'birch-terrazzo', 'birch: pebble in terrazzo resin, charcoal disc',
                            ['bark-face', 'cloth-disc'], product=form_product('pebble'))]}),
+    'horn': dict(title='barkhorn: the photograph\'s horn on four posts', rows={
+        'three-quarter': [F('shell-3q', 'eucalyptus', 'back: shell round the driver', product=form_product('cast'), camera=HORN_Q, lights=GLOW),
+                          F('tub-3q', 'eucalyptus', 'back: tub', product=form_product('cast-tub'), camera=HORN_Q, lights=GLOW)],
+        'side': [F('shell-side', 'eucalyptus', 'shell: posts 55 and 148 showing', product=form_product('cast'), camera=HORN_SIDE, lights=GLOW),
+                 F('tub-side', 'eucalyptus', 'tub: posts 33 and 42 showing', product=form_product('cast-tub'), camera=HORN_SIDE, lights=GLOW)],
+        'behind': [F('shell-behind', 'eucalyptus', 'shell, from behind', product=form_product('cast'), camera=HORN_BEHIND, at=TURNED, lights=GLOW),
+                   F('tub-behind', 'eucalyptus', 'tub, from behind', product=form_product('cast-tub'), camera=HORN_BEHIND, at=TURNED, lights=GLOW)]}),
+    'resin': dict(title='barkhorn: the cast resin, close to', camera=CLOSE, rows={
+        'birch': [F('birch-milk', 'birch', 'milk, honey where thick (birch\'s)', product=form_product('cast'), lights=GLOW, size=[900, 640]),
+                  F('birch-amber', 'birch', 'amber, as the eucalyptus\'s', product=form_product('cast'), lights=GLOW, size=[900, 640],
+                    materials={'horn': {'color': '#EFE5D0', 'deep': '#D6A04E', 'cloud': 0.6}}),
+                  F('birch-clear', 'birch', 'clearer milk, little amber', product=form_product('cast'), lights=GLOW, size=[900, 640],
+                    materials={'horn': {'color': '#F4F2EC', 'deep': '#E6D3AE', 'radius': 0.03}})],
+        'eucalyptus': [F('eucalyptus-amber', 'eucalyptus', 'amber: cream clouded with honey (the photograph\'s)', product=form_product('cast'),
+                         lights=GLOW, size=[900, 640]),
+                       F('eucalyptus-kino', 'eucalyptus', 'kino: the gum\'s red-brown resin', product=form_product('cast'), lights=GLOW, size=[900, 640],
+                         materials={'horn': {'color': '#EEE3D3', 'deep': '#B4602F', 'cloud': 0.3}}),
+                       F('eucalyptus-leaf', 'eucalyptus', 'leaf: deep gum-leaf green', product=form_product('cast'), lights=GLOW, size=[900, 640],
+                         materials={'horn': {'color': '#E3E8D8', 'deep': '#4F6E35', 'cloud': 0.3}}),
+                       F('eucalyptus-smoke', 'eucalyptus', 'smoke: the grey bark\'s', product=form_product('cast'), lights=GLOW, size=[900, 640],
+                         materials={'horn': {'color': '#E6E4DD', 'deep': '#6E6A60', 'cloud': 0.3}})]}),
+    'pressed': dict(title='barkhorn: faced in pressed recycled plastic', camera=RIGHT_Q, rows={
+        'the speakers': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'eucalyptus: strips of olive, ochre, rust and grey', product=PRESSED, lights=GLOW),
+                         F('pressed-birch', 'birch-pressed', 'birch: black dashes in milk', product=PRESSED, lights=GLOW)],
+        'close to': [F('pressed-eucalyptus-corner', 'eucalyptus-pressed', 'strips, pressed-in bits, an edge strip in front', product=PRESSED,
+                       camera=CORNER, lights=GLOW),
+                     F('pressed-birch-corner', 'birch-pressed', 'milk flakes, black dashes', product=PRESSED, camera=CORNER, lights=GLOW)]}),
+    'pick': dict(title='barkhorn: where round 4 points', camera=RIGHT_Q, rows={
+        'the pair': [F('pick-birch', 'birch', 'birch: milk resin, charcoal disc', lights=GLOW),
+                     F('pick-eucalyptus', 'eucalyptus', 'eucalyptus: amber resin, rust disc', lights=GLOW)],
+        'as photographed': [F('pick-photo-birch', 'birch', 'birch, from the photograph\'s angle', camera=PHOTO, lights=GLOW),
+                            F('pick-photo-eucalyptus', 'eucalyptus', 'eucalyptus, from the photograph\'s angle', camera=PHOTO, lights=GLOW)]}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],
@@ -100,7 +152,7 @@ def shot_for(frame, set_camera):
         inst['options'] = frame['options']
     s['product'] = {'def': frame['product'], 'flavour': frame['bark'], 'instances': [inst]}
     s['camera'] = copy.deepcopy(frame['camera'] or set_camera)
-    s['size'] = [760, 1000]
+    s['size'] = frame['size'] or [760, 1000]
     s['title'] = f"barkhorn, {frame['label']}"
     if frame['materials']:
         s.setdefault('materials', {}).update(frame['materials'])
@@ -108,8 +160,9 @@ def shot_for(frame, set_camera):
     return s
 
 
-def build_forms():
-    """Each waveguide form's render model and engine file into out/study/ (the speaker the same, the waveguide not)."""
+def build_models(names):
+    """Each named study model (MODELS: the product with some parameters changed) built into out/study/: its render
+    model and engine file."""
     venv = os.path.join(ROOT, '.venv-fab', 'bin', 'python')
     code = f'''
 import copy, dataclasses, os, sys
@@ -117,12 +170,18 @@ sys.path.insert(0, {os.path.join(ROOT, 'studio', 'fabkit')!r})
 import build, render
 P0 = build.load_product({os.path.join(HERE, 'product.py')!r})
 os.makedirs({STUDY!r}, exist_ok=True)
-for form in {[f for f, _ in FORMS]!r}:
-    params = copy.deepcopy(P0.params); params['horn']['form'] = form
-    prod = dataclasses.replace(P0, name='barkhorn-' + form, params=params)
+for name, changes in {[(n, MODELS[n]) for n in names]!r}:
+    params = copy.deepcopy(P0.params)
+    for path, v in changes.items():
+        d = params
+        *head, last = path.split('.')
+        for k in head:
+            d = d[k]
+        d[last] = v
+    prod = dataclasses.replace(P0, name='barkhorn-' + name, params=params)
     parts = [p for p in prod.parts(params) if p.solid is not None]
-    glb, pf = render.write(prod, parts, {STUDY!r}, engine_file=os.path.join({STUDY!r}, 'barkhorn-' + form + '.json'), proof=False)
-    print('built', form, os.path.relpath(glb, {ROOT!r}))
+    glb, pf = render.write(prod, parts, {STUDY!r}, engine_file=os.path.join({STUDY!r}, 'barkhorn-' + name + '.json'), proof=False)
+    print('built', name, os.path.relpath(glb, {ROOT!r}), flush=True)
 '''
     subprocess.run([venv, '-c', code], check=True, cwd=ROOT)
 
@@ -167,14 +226,18 @@ def main():
     ap.add_argument('set', choices=list(SETS))
     ap.add_argument('--samples', type=int, default=64)
     ap.add_argument('--scale', type=float, default=1.0)
-    ap.add_argument('--day', default='2026-10-11')
+    ap.add_argument('--day', default='2026-10-12')
     ap.add_argument('--only', nargs='*', default=[], help='frame names to render again (e.g. birch-disc-charcoal)')
     ap.add_argument('--all', action='store_true', help='render every frame again')
-    ap.add_argument('--build', action='store_true', help='build the study\'s render models again')
+    ap.add_argument('--build', action='store_true', help='build the set\'s study models again')
     a = ap.parse_args()
     S = SETS[a.set]
-    if a.set == 'study' and (a.build or not all(os.path.exists(os.path.join(STUDY, f'barkhorn-{f}.json')) for f, _ in FORMS)):
-        build_forms()
+    need = sorted({os.path.basename(fr['product'])[len('barkhorn-'):-len('.json')] for frames in S['rows'].values() for fr in frames
+                   if fr['product'].startswith(os.path.relpath(STUDY, ROOT))})
+    todo = [n for n in need if a.build or not os.path.exists(os.path.join(STUDY, f'barkhorn-{n}.json'))
+            or not os.path.exists(os.path.join(STUDY, 'render', f'barkhorn-{n}.glb'))]
+    if todo:
+        build_models(todo)
     sd = os.path.join(SHOTS, a.set); os.makedirs(sd, exist_ok=True)
     rd = os.path.join(ROOT, 'renders', DAY.get(a.set, a.day), 'barkhorn')
     od = os.path.join(rd, a.set); os.makedirs(od, exist_ok=True)

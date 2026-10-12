@@ -1,0 +1,24 @@
+{
+ "product": "barkhorn-pressed",
+ "title": "barkhorn",
+ "parts": 41,
+ "seconds": 223,
+ "sheets": {
+  "baltic-birch-18": 3,
+  "mdf-6": 1,
+  "mdf-12": 1,
+  "recycled-hdpe-5": 2,
+  "recycled-hdpe-8": 5
+ },
+ "budget_usd": {
+  "cut": 344,
+  "print": 28,
+  "buy": 1629,
+  "cast": 1383,
+  "lathe": 133
+ },
+ "options_usd": {},
+ "checks_ok": true,
+ "drawings": "spinoffs/barkhorn/out-pressed/drawings/barkhorn-pressed-sheets.pdf",
+ "render": "spinoffs/barkhorn/out-pressed/render/barkhorn-pressed.glb"
+}

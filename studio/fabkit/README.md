@@ -151,7 +151,11 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
   - `rect_horn` (lofted);
   - `waveguide_block` (a superellipse waveguide cut into a solid block);
   - `waveguide_shell` (the same flare as a thin shell, wall `wall` and rim `rim`, with a round pod behind the throat
-    closing round the driver, and its cap);
+    closing round the driver, and its cap). Its options: `round_rim` rounds the rim over a crest (lofted, not
+    filleted: OCC's fillets fail on these surfaces); `pads` casts bosses under it for mounting posts, with their
+    inserts' holes and a cable's; `solid_neck` casts the neck round the throat solid; `tub` runs the outside straight
+    back from the rim to a flat back that hides the driver, its back split off as a lid;
+  - `waveguide_lens` and `waveguide_slab` (round 3's study forms);
   - `mouth_for_coverage(fc, angle)`, Keele's rule.
 
   Nothing here simulates a horn's response. That needs a BEM run, like earmilk's `fab/bem.py`.
