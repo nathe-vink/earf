@@ -1,10 +1,11 @@
-# barkhorn: Dogs Barking's horn speaker, after Friendly Pressure, in bark, acrylic and stone
+# barkhorn: EARF's horn speaker, after Friendly Pressure, in bark, acrylic and stone
 
 The owner's idea of 2026-10-10 was speakers that look like their reference photograph of Friendly Pressure's horns
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
-it). The brand is **Dogs Barking** (the owner, round 10); barkhorn stays the project's name in this repository.
+it). The brand is **EARF**, its logo a globe of geometric shapes (the owner, round 11; Dogs Barking before it, round
+10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 10**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 11**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), smoked resin on birch and bottle green on
 eucalyptus, the solid neck round the throat, and a port in each bottom corner (round 6). The disc takes a neutral that
@@ -12,8 +13,23 @@ suits each cabinet, the woofer's ring the same colour, and a patterned horn has 
 7). Round 8 made the speakers three lines, and round 10 names them Bark (pressed recycled plastic in the pattern of a
 bark: eucalyptus, autumn birch, manzanita, striped maple), Cloud (translucent cast acrylic: Poison, Smoke, Fog) and
 Crag (pressed recycled plastic in the pattern of a stone, the horn cast resin: cobalt marble, malachite, lapis lazuli,
-turquoise). Each speaker has an acrylic mark, its line's shape in its own colour. The brand has no logo in the look
-book for now; a geometric dog with the horn for its head is proposed.
+turquoise). Each speaker has an acrylic mark, its line's shape in its own colour, and the brand's globe is drawn the
+same way.
+
+## Round 11: the owner's note of 2026-10-13 (late)
+
+| the note | what changed |
+|---|---|
+| "Okay new brand idea EARF and the logo is a globe made of geometric shapes" | **EARF**, with **a globe of geometric shapes** in the marks' acrylic style: the ocean a circle, the land a triangle, a parallelogram and a circle cut by it (`marks/globe.svg`). The alternate is the cloud's ingredients, three equal circles side by side, the outer two cut by the middle one as meridians, and a band across as the tropics (`marks/globe-alt.svg`). The look book's cover sets the globe beside EARF over FLOOR STANDING LOUDSPEAKERS, and every page's foot says EARF. Round 10's geometric dog is gone with Dogs Barking. |
+
+EARF reads three ways: earth (the globe, and Bark, Cloud and Crag are the earth's own), ear (earmilk, earworm and
+earwig's family) and arf, a dog's bark, which keeps something of Dogs Barking.
+
+The name needs clearing before it is used. One search found no mark for EARF, but EARFUN is a registered audio brand
+covering headphones and speakers ([its US mark](https://trademarks.justia.com/881/47/earfun-88147257.html)), close
+enough in sound and goods that a trademark search by a professional should come first.
+
+![The marks: the globe and its alternate, then each line](../../renders/2026-10-13/barkhorn/marks.png)
 
 ## Round 10: the owner's notes of 2026-10-13 (night)
 
@@ -49,9 +65,10 @@ as if each piece were clear acrylic laid on the others. They follow the cloud:
 | Bark | a tree: a crown of three circles overlapping deeply, the trunk's top inside them | Eucalyptus (olive), Autumn Birch (gold), Manzanita (red), Striped Maple (pale green) |
 | Cloud | the cloud: three circles on a rectangle from the outer two's centres down to their common tangent | Poison (bottle green), Smoke (smoke grey), Fog (white) |
 | Crag | a crag: three slabs, parallelograms of three sizes standing on one base line, the outer two leaning in and the tall one between them leaning with the left | Cobalt Marble (cool white), Malachite (green), Lapis Lazuli (ultramarine), Turquoise (turquoise) |
-| (the brand) | the dog, proposed: a body, two legs, a tail and a neck of rectangles and parallelograms, the horn's pod and flare for a head, two triangles for ears, the bark in three arcs | gold |
+| (the logo) | EARF's globe: the ocean a circle, the land a triangle, a parallelogram and a circle cut by it; the alternate three equal circles and a band, cut by the middle one (round 11) | ocean blue, land green |
 
-`marks.py` writes `marks/<key>.svg` for each speaker (transparent round it), `marks/dog.svg` and `marks/sheet.html`.
+`marks.py` writes `marks/<key>.svg` for each speaker (transparent round it), `marks/globe.svg` (the logo),
+`marks/globe-alt.svg` and `marks/sheet.html`.
 
 ### The lines
 
@@ -84,10 +101,10 @@ The cobalt marble keeps its mist cover.
 
 ### The look book
 
-[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) (version 15) opens on the name, Dogs Barking, set in
-type over FLOOR STANDING LOUDSPEAKERS, with the eleven marks by line. Each line opens with its name, one line on how it
-is made, and its marks. Its speakers follow, cover on and off, each page with its mark, its line and number (Cloud 01),
-its name, and Dogs Barking at its foot. Two pages show the horn from the side and from behind, then the specification
+[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) (version 16) opens on EARF and its globe over FLOOR
+STANDING LOUDSPEAKERS, with the eleven marks by line. Each line opens with its name, one line on how it is made, and
+its marks. Its speakers follow, cover on and off, each page with its mark, its line and number (Cloud 01), its name,
+and EARF at its foot. Two pages show the horn from the side and from behind, then the specification
 and the drawings close it. It is private until the owner shares it from its Share menu.
 
 ![The horn from the side and from behind](../../renders/2026-10-13/barkhorn/horn10.png)
@@ -809,10 +826,10 @@ The shots are in `studio/shots/barkhorn/`:
 ## Open questions for the owner
 
 1. **The line names.** Bark, Cloud and Crag, or the plain Tree, Cloud and Stone? (The owner: "Trees, Clouds, Stones.
-   Maybe there's a better name for each category though.") Bark and Crag are kept as the proposal: Bark echoes the
-   brand, and Cloud and Crag alliterate, and the crag mark now draws its name.
+   Maybe there's a better name for each category though.") Bark and Crag are kept as the proposal: under EARF all three
+   are the earth's own, Cloud and Crag alliterate, and the crag mark draws its name.
 2. **The marks' colours.** One for each speaker, from its material (the table above). Change any?
-3. **The dog.** Put the geometric dog on the look book's cover, or keep the name alone?
+3. **EARF.** The globe or its alternate? And clear the name first: EARFUN is a registered audio brand.
 4. **The disc.** Oat on birch and graphite on eucalyptus, or another neutral from the study?
 5. **The bark horns for the line.** Do the cast-in bark horns replace smoked and bottle green on the birch and
    eucalyptus everywhere (the default flavours and pick6), and on clear resin or on round 6's light smoke and green?

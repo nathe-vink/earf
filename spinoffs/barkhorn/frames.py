@@ -260,7 +260,7 @@ SETS = {
                              F(f'look-{key}-off', flav, 'cover off', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c),
                                sky=STUDIO, hide=['cloth-disc'])]
         for line, key, flav, label, c in LOOKS}),
-    'horn10': dict(title='Dogs Barking: the horn from the side and from behind', camera=HORN10, rows={
+    'horn10': dict(title='EARF: the horn from the side and from behind', camera=HORN10, rows={
         f'{line}: {label}': [F(f'horn-{key}-side', flav, 'from the side', product=PRESSED, lights=GLOW5, size=[1200, 900],
                                stage=sweep(c), sky=STUDIO, at={'rotate_z': 115}),
                              F(f'horn-{key}-back', flav, 'from behind', product=PRESSED, lights=GLOW5, size=[1200, 900],
