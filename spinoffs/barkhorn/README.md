@@ -24,7 +24,8 @@ book for now; a geometric dog with the horn for its head is proposed.
 | "The brand name is dogs barking, not bark horn." | **Dogs Barking** wherever the speakers are presented: the look book's cover and pages. |
 | "Like an old electricity PSA ... How can we get to design agency level quality ... Retro PSA brand logo with stamps/badges for each speaker", then "I want a dog with a horn head ... Reference similar brand systems", then "Just drop the branding for now. Do the lookbook with just the dogs barking brand name and no logo or marks." | **The branding is parked.** The look book carries the name in type only, with no logo. What was found and tried is noted below for when it resumes. `stickers.py` and its marks are gone. |
 | (of round 8's clouds) "These acrylic marks, without the circular framing (ie just the geometric cloud), are great. Representative of the speaker design and theme. Also these aren't the Y2K ones, the theme is Cloud or Air or something like that." Then: "Acrylic style marks for each theme, with a distinct color for each speaker. Trees, Clouds, Stones ... The tree could be a vertical rectangle with circles at the top", and: "I like the cloud because it combines multiple shapes and sizes with large enough gaps between the overlapping strokes of each shape. The tree and stone need to accomplish the same thing ... For the stone we could make an exception and do something more like the rock option, but that front left side looks too much like a house shape." | **Y2K is now Cloud**, and **every speaker has an acrylic mark** (`marks.py`, below): Bark a tree, Cloud the cloud as approved, Crag a stone, each speaker its line's shape in its own colour. The look book carries them. |
-| "The previous three tree was better. The two smaller circles feel too detached. The cloud and the tree use very uniform shapes. The stone should do the same. Clean parallelograms, squares/rectangles, and triangles are best I think." | **The three-circle tree is back**, its crown three circles overlapping deeply. **The stone is now a crag** built as the cloud is: three equilateral triangles, small, big and medium, on a rectangle from the outer two's centres down to the base. |
+| "The previous three tree was better. The two smaller circles feel too detached. The cloud and the tree use very uniform shapes. The stone should do the same. Clean parallelograms, squares/rectangles, and triangles are best I think." | **The three-circle tree is back**, its crown three circles overlapping deeply. **The stone is now a crag** of uniform shapes. |
+| (of a draft of three leaning slabs, with a rectangle across their feet) "I like this, but without the bottom rectangle" | **The crag is the three slabs**: parallelograms of three sizes standing on one base line, the outer two leaning in and the tall one between them leaning with the left. |
 | "If you can make a dog barking out of geometric shapes, that could be cool." | **A dog of rectangles and parallelograms with the horn for its head** (the pod a rectangle, the flare a trapezoid), two triangles for ears, barking in three arcs, in the marks' acrylic style (`marks/dog.svg`). It is proposed, and not in the look book. |
 | "Also, add some back or side shots of the horn" | **Two pages of the horn** in the look book, from the side and from behind, on one speaker of each line: the autumn birch, Poison and turquoise, each on its own sweep (`frames.py horn10`). |
 | "Instead of LOOK BOOK 2026 on the cover, put FLOOR STANDING LOUDSPEAKERS" | Done. |
@@ -39,17 +40,15 @@ The acrylic: every primitive is filled, then every outline is drawn over all of 
 as if each piece were clear acrylic laid on the others. They follow the cloud:
 
 - The primitives overlap deeply.
-- In the cloud and the crag, the rectangle's corners sit on the outer shapes' centres, so its edges cross them square
-  on, strokes that come close without crossing stay well apart, and crossings stay open.
-- Tangents fall only on the silhouette, where the lines merge.
-- The shapes are uniform: circles for the tree and the cloud, equilateral triangles for the crag, with one rectangle
-  in each.
+- In the cloud, the rectangle's corners sit on the outer circles' centres, so its edges cross them square on.
+- Tangents fall only on the silhouette, where the lines merge: the cloud's and the crag's along their base.
+- The shapes are uniform: circles for the tree and the cloud, parallelograms for the crag.
 
 | line | shape | speakers, and their colours |
 |---|---|---|
 | Bark | a tree: a crown of three circles overlapping deeply, the trunk's top inside them | Eucalyptus (olive), Autumn Birch (gold), Manzanita (red), Striped Maple (pale green) |
 | Cloud | the cloud: three circles on a rectangle from the outer two's centres down to their common tangent | Poison (bottle green), Smoke (smoke grey), Fog (white) |
-| Crag | a crag, the cloud's build in straight lines: three equilateral triangles, small, big and medium, on a rectangle from the outer two's centres down to the base | Cobalt Marble (cool white), Malachite (green), Lapis Lazuli (ultramarine), Turquoise (turquoise) |
+| Crag | a crag: three slabs, parallelograms of three sizes standing on one base line, the outer two leaning in and the tall one between them leaning with the left | Cobalt Marble (cool white), Malachite (green), Lapis Lazuli (ultramarine), Turquoise (turquoise) |
 | (the brand) | the dog, proposed: a body, two legs, a tail and a neck of rectangles and parallelograms, the horn's pod and flare for a head, two triangles for ears, the bark in three arcs | gold |
 
 `marks.py` writes `marks/<key>.svg` for each speaker (transparent round it), `marks/dog.svg` and `marks/sheet.html`.
@@ -85,7 +84,7 @@ The cobalt marble keeps its mist cover.
 
 ### The look book
 
-[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) (version 14) opens on the name, Dogs Barking, set in
+[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) (version 15) opens on the name, Dogs Barking, set in
 type over FLOOR STANDING LOUDSPEAKERS, with the eleven marks by line. Each line opens with its name, one line on how it
 is made, and its marks. Its speakers follow, cover on and off, each page with its mark, its line and number (Cloud 01),
 its name, and Dogs Barking at its foot. Two pages show the horn from the side and from behind, then the specification

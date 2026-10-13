@@ -9,14 +9,14 @@ could make an exception and do something more like the rock option, but that fro
 house shape."
 
 - A line is one shape, built from a few primitives of different sizes: Bark a tree (a trunk and three circles), Cloud a
-  cloud (three circles on a rectangle), Crag a crag (three equilateral triangles on a rectangle, the cloud's build in
-  straight lines; the owner, after a round of stones: "The cloud and the tree use very uniform shapes. The stone should
-  do the same. Clean parallelograms, squares/rectangles, and triangles are best I think").
+  cloud (three circles on a rectangle), Crag a crag (three slabs, parallelograms of three sizes leaning together; the
+  owner, after a round of stones: "The cloud and the tree use very uniform shapes. The stone should do the same. Clean
+  parallelograms, squares/rectangles, and triangles are best I think", then of the slabs: "I like this, but without the
+  bottom rectangle").
 - A speaker is its line's shape in its own colour.
 - The acrylic: every primitive is filled, then every outline is drawn over all of them, U wide, so the construction
   shows through as if each piece were clear acrylic laid on the others.
-- The cloud's build, kept by the crag: three shapes of three sizes, small, big and medium, and a rectangle from the
-  outer two's centres down to the base, so its edges cross them square on and the lines merge only along the base.
+- Like the cloud, the crag is three shapes of three sizes on one base line, where their lines merge.
 - The dog, a proposal for the brand (the owner: "If you can make a dog barking out of geometric shapes, that could be
   cool", after "I want a dog with a horn head"): a dog of rectangles and parallelograms, the speaker's horn for its head
   (the pod a rectangle, the flare a trapezoid), two triangles for ears, barking in three arcs. Not in the look book,
@@ -49,9 +49,11 @@ def place(prims, k=1.0, dx=0.0, dy=0.0):
     return out
 
 
-def triangle(cx, base, side):
-    """An equilateral triangle standing on the base line (y down)."""
-    return ('poly', (cx - side / 2, base), (cx + side / 2, base), (cx, base - side * 3 ** 0.5 / 2))
+def slab(x0, base, w, h, lean):
+    """A parallelogram standing on the base line (y down): w wide along it from x0, h tall, its sides leaning `lean`
+    degrees from upright (positive to the right)."""
+    dx = h * math.tan(math.radians(lean))
+    return ('poly', (x0, base), (x0 + w, base), (x0 + w + dx, base - h), (x0 + dx, base - h))
 
 
 # the cloud as approved: three circles and a rectangle from the outer two's centres down to their common tangent
@@ -60,11 +62,12 @@ CLOUD = place([('circle', -179, 35, 115), ('circle', -19, -67, 173), ('circle', 
 # the tree: a crown of three circles overlapping deeply, the trunk's top inside them (the owner: "The previous three tree
 # was better. The two smaller circles feel too detached")
 TREE = place([('rect', -44, -40, 44, 340), ('circle', 0, -210, 150), ('circle', -140, -70, 128), ('circle', 140, -70, 128)])
-# the crag: three equilateral triangles, small, big and medium, on the base line, and a rectangle from the outer two's
-# centres down to it, as the cloud's runs from its outer circles' centres
+# the crag: three slabs, parallelograms of three sizes standing on the base line, the outer two leaning in and the tall
+# one between them leaning with the left (the owner, of a draft with a rectangle across their feet: "I like this, but
+# without the bottom rectangle")
 _B = 170
-STONE = place([triangle(-200, _B, 240), triangle(-20, _B, 420), triangle(190, _B, 300),
-               ('rect', -200, _B - 240 * 3 ** 0.5 / 6, 190, _B)], k=0.92, dx=-10, dy=12)
+STONE = place([slab(-330, _B, 190, 230, 20), slab(-170, _B, 260, 380, 12), slab(80, _B, 220, 290, -16)],
+              k=0.96, dx=15, dy=20)
 # the dog: a body, two legs, a tail and a neck of rectangles and parallelograms, the horn's pod and flare for a head, two
 # ears, the bark in three arcs of the flare's mouth
 DOG = place([('rect', -280, -10, 120, 130), ('rect', -260, 100, -190, 320), ('rect', 50, 100, 120, 320),
