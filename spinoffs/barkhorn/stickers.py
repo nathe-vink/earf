@@ -6,7 +6,8 @@ another." Then: "I'd like it to work in black and white, meaning we can't rely o
 each speaker", and: "What about dogs barking for the brand name, back to back dogs with horns for head, with roar-like
 shapes emitting from the horn. Again, I want to stress minimalism. Something that could work as a stamp."
 
-- The brand: two dogs back to back, each with a horn for a head, barking out of it: a stereo pair.
+- The brand: a dog barking ("Kind of like this style. Could also be one dog. Something that feels like it's from
+  Fallout."), its head in one ink with the light cut out, in a badge the shape of the horn's mouth with its name.
 - A line: its shape. Bark is the circle (a trunk cut across), Y2K the rounded square (a translucent case), Crag the
   triangle (a peak).
 - A speaker: its line's shape, solid, with one mark cut out of it, centred: the material reduced to a primitive. Bark:
@@ -19,8 +20,8 @@ Colour is a second layer on the same drawing, for the stickers: each sits on a w
     python3 spinoffs/barkhorn/stickers.py
 
 writes stickers/<key>.svg (the colour sticker), <key>-mono.svg (the one-colour sticker), mark-<key>.svg and
-mark-<key>-white.svg (the mark alone in ink or in white, transparent round it), the line marks, the brand's dogs
-(brand.svg, brand-white.svg) and stickers/sheet.html.
+mark-<key>-white.svg (the mark alone in ink or in white, transparent round it), the line marks, the brand's badge
+(brand.svg, brand-white.svg), the dog alone (dog.svg, dog-white.svg) and stickers/sheet.html.
 """
 import math, os
 
@@ -288,37 +289,98 @@ def shape_mark(shape, color, size=S):
     return svg(paint(shape_el(shape), fill=color), shape, size, size)
 
 
-# --- the brand: two dogs back to back, horns for heads, barking out of them ---------------------------------------
-def dog(c):
-    """One dog, facing right, its rump at x = 0 (the pair's middle), standing on y = 84: a long body, a leg under each end,
-    its tail curled up, and for a head a horn on a strong neck, barking out of it."""
-    a = math.radians(24)                         # the horn points up and forward
-    ax, ay, nx, ny = math.cos(a), -math.sin(a), math.sin(a), math.cos(a)
-    tx, ty = 128.0, -30.0                        # the horn's throat
-    L, r0, r1 = 88.0, 12.0, 52.0                 # its length, half its throat and half its mouth
-    def p(u, v):
-        return (tx + ax * u + nx * v, ty + ay * u + ny * v)
-    t0, t1, m0, m1 = p(-6, -r0), p(-6, r0), p(L, -r1), p(L, r1)
-    c0, c1 = p(L * 0.66, -r0 - 7), p(L * 0.66, r0 + 7)   # the flare drawn in: a bell, not a cone
-    horn = (f'<path d="M{t0[0]:.1f} {t0[1]:.1f} Q{c0[0]:.1f} {c0[1]:.1f} {m0[0]:.1f} {m0[1]:.1f} L{m1[0]:.1f} {m1[1]:.1f} '
-            f'Q{c1[0]:.1f} {c1[1]:.1f} {t1[0]:.1f} {t1[1]:.1f} Z" fill="{c}"/>')
-    roar = ''
-    for R, span in ((110, 24), (130, 21), (150, 18)):   # three arcs out of the mouth, about the throat
-        s0, s1 = a + math.radians(span), a - math.radians(span)
-        x0, y0 = tx + R * math.cos(s0), ty - R * math.sin(s0)
-        x1, y1 = tx + R * math.cos(s1), ty - R * math.sin(s1)
-        roar += stroke(f'M{x0:.1f} {y0:.1f} A{R} {R} 0 0 1 {x1:.1f} {y1:.1f}', c, 10)
-    return (f'<rect x="8" y="0" width="114" height="40" rx="20" fill="{c}"/>'        # the body
-            + stroke('M26 30 L24 84', c, 15) + stroke('M104 30 L108 84', c, 15)      # a leg under each end
-            + stroke('M18 12 C2 2 2 -22 16 -34', c, 12)                              # the tail, curled up
-            + stroke(f'M106 12 L{tx - 4:.1f} {ty + 4:.1f}', c, 26)                   # the neck
-            + horn + roar)
+# --- the brand: a dog barking, in a badge the shape of the horn's mouth -------------------------------------------
+# (round 8, the owner, after the dogs back to back: "Kind of like this style. Could also be one dog. Something that
+# feels like it's from Fallout.") One dog's head in profile, barking up, in one ink with its light cut out (the lips,
+# teeth, tongue, eye, brow, the ridge of the muzzle, the cheek, the ear's hollow, fur, the collar and its tag), and its
+# bark in jagged bolts. Drawn here, in a 1000 box, y down
+HEAD = ('M300 840 C390 862 480 872 566 866 '                                               # the bust, cut in a curve
+        'C572 800 586 742 606 700 C622 668 654 650 700 640 C748 630 784 618 806 604 '      # neck front, under the jaw
+        'C824 594 830 576 820 562 '                                                         # the chin
+        'C810 500 838 414 876 360 '                                                         # the open mouth's front
+        'C894 346 912 330 920 312 C936 296 938 264 918 250 '                                # the nose
+        'C866 260 768 268 700 280 '                                                         # the muzzle's bridge
+        'C664 268 624 228 584 212 C556 202 528 204 504 212 '                                # brow and crown
+        'C498 170 478 98 448 46 C430 100 412 170 400 228 '                                  # the near ear
+        'C388 176 362 128 330 96 C320 156 314 222 312 280 '                                 # the far ear
+        'C296 318 290 360 302 404 C318 470 300 640 304 840 Z')                              # the skull, the nape, the neck
 
 
-def dogs(c, w=600, h=280, label='barkhorn: two dogs back to back, horns for heads, barking'):
-    """The pair, mirrored about the middle."""
-    one = dog(c)
-    return svg(f'<g transform="translate(300 172)"><g>{one}</g><g transform="scale(-1 1)">{one}</g></g>', label, w, h, 600, 280)
+def band(chain, w0, w1, w2):
+    """A curve drawn as a filled band: w0 wide at its start, w1 in the middle, w2 at its end."""
+    pts = bezier(chain, 28)
+    n, left, right = len(pts), [], []
+    for i, (x, y) in enumerate(pts):
+        (xa, ya), (xb, yb) = pts[max(i - 1, 0)], pts[min(i + 1, n - 1)]
+        dx, dy = xb - xa, yb - ya; ln = math.hypot(dx, dy) or 1.0
+        t = i / (n - 1)
+        w = (w0 + (w1 - w0) * math.sin(t * math.pi / 2)) if t < 0.5 else (w1 + (w2 - w1) * (1 - math.cos((t - 0.5) * math.pi)))
+        left.append((x - dy / ln * w / 2, y + dx / ln * w / 2)); right.append((x + dy / ln * w / 2, y - dx / ln * w / 2))
+    return poly(left + right[::-1]) + ' Z'
+
+
+LIGHT_CUTS = [band(*b) for b in (
+    ([(652, 470), (724, 430), (806, 386), (872, 358)], 4, 11, 4),          # the upper lip
+    ([(652, 474), (712, 504), (772, 532), (816, 552)], 4, 9, 3),           # the lower lip
+    ([(706, 290), (770, 280), (836, 270), (900, 260)], 2, 12, 2),          # the ridge of the muzzle
+    ([(588, 286), (614, 262), (650, 258), (680, 274)], 3, 10, 2),          # the brow
+    ([(606, 350), (648, 392), (662, 446), (648, 502)], 3, 16, 2),          # the cheek's crescent
+    ([(906, 264), (916, 266), (922, 274), (920, 288)], 2, 5, 1),           # the nose's shine
+    ([(342, 470), (360, 520), (366, 570), (360, 630)], 2, 16, 1),          # fur on the neck
+    ([(410, 500), (430, 556), (436, 606), (428, 660)], 2, 16, 1),
+    ([(470, 196), (464, 150), (456, 106), (448, 76)], 16, 10, 1),          # the ear's hollow
+    ([(300, 716), (420, 742), (500, 744), (578, 724)], 26, 30, 26))]       # the collar
+LIGHT_SHAPES = [
+    'M598 300 C614 280 642 274 666 284 C650 302 624 310 598 300 Z',            # the eye
+    'M818 380 L850 368 L838 446 Z', 'M786 540 L812 548 L816 478 Z',             # the fangs
+    'M850 366 L868 359 L860 392 Z', 'M812 549 L824 553 L828 520 Z',             # incisors
+    'M686 482 C742 468 798 470 820 504 C808 524 764 530 718 514 C704 508 692 496 686 482 Z',   # the tongue
+]
+BOLTS = ['M908 360 L960 338 L950 318 L1014 290', 'M918 420 L974 410 L962 388 L1034 378',
+         'M910 482 L968 490 L954 512 L1028 526', 'M888 540 L936 566 L918 584 L978 620']
+# the name, BARK over HORN, in Anton (Vernon Adams, SIL Open Font License), drawn as outlines with fontTools: its units
+# are 2048 to the em, the capitals 1760 tall, BARK 4007 wide and HORN 4104 wide
+BARK = ('M78 0V-1760H555Q747 -1760 834.5 -1666.5Q922 -1573 922 -1358V-1281Q922 -1157 877.5 -1080.0Q833 -1003 742 -979Q861 -949 901.5 -838.5Q942 -728 942 -569Q942 -398 910.0 -270.0Q878 -142 794.0 -71.0Q710 0 555 0ZM422 -1097H494Q543 -1097 557.0 -1135.0Q571 -1173 571 -1226V-1403Q571 -1488 496 -1488H422ZM457 -310Q594 -310 594 -440V-660Q594 -735 571.5 -778.5Q549 -822 487 -822H422V-312Q444 -310 457 -310ZM1040 0 1210 -1760H1807L1974 0H1641L1616 -284H1404L1382 0ZM1429 -565H1589L1512 -1460H1496ZM2112 0V-1760H2652Q2787 -1760 2856.0 -1698.5Q2925 -1637 2948.5 -1526.5Q2972 -1416 2972 -1267Q2972 -1123 2935.5 -1037.0Q2899 -951 2798 -918Q2881 -901 2914.5 -835.5Q2948 -770 2948 -666V0H2601V-689Q2601 -766 2569.5 -784.5Q2538 -803 2468 -803V0ZM2470 -1108H2555Q2628 -1108 2628 -1267Q2628 -1370 2612.0 -1402.0Q2596 -1434 2552 -1434H2470ZM3118 0V-1760H3466V-1055L3630 -1760H3984L3787 -954L4025 0H3660L3468 -852V0Z')
+HORN = ('M78 0V-1760H428V-1131H594V-1760H944V0H594V-798H428V0ZM1550 16Q1339 16 1227.5 -111.5Q1116 -239 1116 -480V-1316Q1116 -1542 1226.5 -1659.0Q1337 -1776 1550 -1776Q1763 -1776 1873.5 -1659.0Q1984 -1542 1984 -1316V-480Q1984 -239 1872.5 -111.5Q1761 16 1550 16ZM1553 -308Q1633 -308 1633 -463V-1322Q1633 -1452 1555 -1452Q1467 -1452 1467 -1319V-461Q1467 -379 1487.0 -343.5Q1507 -308 1553 -308ZM2156 0V-1760H2696Q2831 -1760 2900.0 -1698.5Q2969 -1637 2992.5 -1526.5Q3016 -1416 3016 -1267Q3016 -1123 2979.5 -1037.0Q2943 -951 2842 -918Q2925 -901 2958.5 -835.5Q2992 -770 2992 -666V0H2645V-689Q2645 -766 2613.5 -784.5Q2582 -803 2512 -803V0ZM2514 -1108H2599Q2672 -1108 2672 -1267Q2672 -1370 2656.0 -1402.0Q2640 -1434 2596 -1434H2514ZM3162 0V-1760H3524L3686 -917V-1760H4026V0H3682L3506 -880V0Z')
+
+
+def head_layers(on, off):
+    """The dog's head as mask layers: the ink drawn with `on`, the light cut out with `off`."""
+    return (f'<path d="{HEAD}" fill="{on}"/>' + ''.join(f'<path d="{d}" fill="{off}"/>' for d in LIGHT_CUTS + LIGHT_SHAPES)
+            + f'<circle cx="636" cy="290" r="8" fill="{on}"/>'                                  # the pupil
+            + f'<path d="M704 490 C738 492 774 498 806 508" stroke="{on}" stroke-width="5" stroke-linecap="round" fill="none"/>'
+            + f'<circle cx="470" cy="790" r="22" fill="{off}"/><circle cx="470" cy="790" r="7" fill="{on}"/>'   # the tag
+            + ''.join(f'<path d="{d}" stroke="{on}" stroke-width="14" stroke-miterlimit="6" fill="none"/>' for d in BOLTS))
+
+
+def inked(uid, layers, ink, vb):
+    """One ink through a mask of the layers (on: white, off: black), so the light is transparent."""
+    x, y, w, h = vb
+    return (f'<defs><mask id="m-{uid}" maskUnits="userSpaceOnUse" x="{x}" y="{y}" width="{w}" height="{h}">{layers}</mask></defs>'
+            f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{ink}" mask="url(#m-{uid})"/>')
+
+
+def dog(ink, uid='dog', w=560, h=560):
+    """The head alone."""
+    vb = (270, 30, 790, 860)
+    return svg(inked(uid, head_layers('#FFFFFF', '#000000'), ink, vb), 'barkhorn: a dog barking', w, h, *vb[2:]).replace(
+        f'viewBox="0 0 {vb[2]} {vb[3]}"', f'viewBox="{vb[0]} {vb[1]} {vb[2]} {vb[3]}"')
+
+
+def badge(ink, uid='badge', w=1200, h=700):
+    """The brand: the horn's mouth (a rounded rectangle, 1.7 : 1) in a double border, the dog in it barking its name."""
+    W, H, r = 1200, 700, 140
+    k = 470 / 4007
+    cap = 1760 * k
+    y1 = H / 2 - (2 * cap + 36) / 2 + cap
+    on, off = '#FFFFFF', '#000000'
+    layers = (f'<rect x="13" y="13" width="{W - 26}" height="{H - 26}" rx="{r - 13}" fill="none" stroke="{on}" stroke-width="26"/>'
+              f'<rect x="40" y="40" width="{W - 80}" height="{H - 80}" rx="{r - 40}" fill="none" stroke="{on}" stroke-width="7"/>'
+              f'<clipPath id="p-{uid}"><rect x="44" y="44" width="{W - 88}" height="{H - 88}" rx="{r - 44}"/></clipPath>'
+              f'<g clip-path="url(#p-{uid})"><g transform="translate(-112 92) scale(0.7)">{head_layers(on, off)}</g></g>'
+              f'<path d="{BARK}" transform="translate(640 {y1:.1f}) scale({k:.5f})" fill="{on}"/>'
+              f'<path d="{HORN}" transform="translate(640 {y1 + cap + 36:.1f}) scale({k:.5f})" fill="{on}"/>')
+    return svg(inked(uid, layers, ink, (0, 0, W, H)), 'barkhorn: a dog barking its name, in a badge the shape of the horn', w, h, W, H)
 
 
 def main():
@@ -346,7 +408,8 @@ def main():
             colour_cells.append(f'<figure>{svg(die_cut(shape) + colour_body(k + "-sc", shape, ground, layers), label, 200, 200)}</figure>')
         rows.append(f'<section><h2>{shape_mark(shape, INK, 28)}<span>{name}</span></h2>'
                     f'<div class="row">{"".join(mono_cells)}</div><div class="row">{"".join(colour_cells)}</div></section>')
-    write('brand.svg', dogs(INK)); write('brand-white.svg', dogs(PAPER))
+    write('brand.svg', badge(INK)); write('brand-white.svg', badge(PAPER, 'badge-w'))
+    write('dog.svg', dog(INK)); write('dog-white.svg', dog(PAPER, 'dog-w'))
     open(os.path.join(OUT, 'sheet.html'), 'w').write(
         '<!doctype html><meta charset="utf-8"><title>barkhorn marks</title><style>'
         'body{margin:0;padding:56px 64px;background:#E9E6DF;font:14px/1.4 "IBM Plex Mono",monospace;color:#5E5A53;width:1652px}'
@@ -356,8 +419,8 @@ def main():
         'margin-bottom:14px}figure{margin:0;width:220px}figure svg{width:200px;height:200px;display:block}figcaption{margin:2px 0 6px;'
         'letter-spacing:.06em;text-transform:uppercase;color:#1A1917}b{font-weight:500;margin-right:6px}i{display:block;'
         'margin-top:2px;font-style:normal;text-transform:none;letter-spacing:0;color:#6F6A61;font-size:13px}</style>'
-        f'<header>{dogs(INK, 360, 168)}<b>barkhorn</b></header>' + ''.join(rows) + '\n')
-    print(f'{len(SPEAKERS)} marks, {len(LINES)} lines and the dogs in {os.path.relpath(OUT)}')
+        f'<header>{badge(INK, "badge-s", 420, 245)}{dog(INK, "dog-s", 245, 245)}</header>' + ''.join(rows) + '\n')
+    print(f'{len(SPEAKERS)} marks, {len(LINES)} lines, the badge and the dog in {os.path.relpath(OUT)}')
 
 
 if __name__ == '__main__':

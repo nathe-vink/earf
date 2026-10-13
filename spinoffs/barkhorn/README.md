@@ -4,16 +4,30 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
 it). There are two finishes, birch bark and eucalyptus bark, each with a horn in its bark's colours.
 
-Status: **concept, round 8**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 9**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), smoked resin on birch and bottle green on
 eucalyptus, the solid neck round the throat, and a port in each bottom corner (round 6). The disc takes a neutral that
 suits each cabinet, the woofer's ring the same colour, and a patterned horn has its pattern cast in, not printed (round
 7; the discs proposed: oat on birch, graphite on eucalyptus). Round 8 makes the speakers a brand of three lines: Bark
 (the barks), Y2K (translucent acrylic: Poison, Smoke and Fog) and Crag (stone), each with its own shape, each speaker
-with its own mark, drawn as a stamp, and for the brand two dogs back to back with horns for heads. Bark keeps the
-eucalyptus, the autumn birch, the manzanita and the striped maple; Crag gains malachite, rhodochrosite, lapis lazuli and
-travertine beside the cobalt marble.
+with its own mark, drawn as a stamp; the brand is a dog barking its name in a badge the shape of the horn's mouth (round
+9). Bark keeps the eucalyptus, the autumn birch, the manzanita and the striped maple; Crag gains malachite,
+rhodochrosite, lapis lazuli and travertine beside the cobalt marble.
+
+## Round 9: the owner's note of 2026-10-13 (later)
+
+| the note | what changed |
+|---|---|
+| (a stock graphic of a Doberman barking, as a reference) "Kind of like this style. Could also be one dog. Something that feels like it's from Fallout." | **The brand mark redrawn** in that manner, from scratch (the reference is a stock graphic, so nothing is traced from it): one dog's head in profile, barking up, in one ink with its light cut out, and its bark in jagged bolts. It sits in a badge the shape of the horn's mouth (a rounded rectangle, 1.7 : 1) with a double border, and barks its name, BARK over HORN, in a heavy condensed grotesque (Anton, open licence). It is the look book's cover. |
+
+![The brand: the badge and the dog, in ink, in white on dark, over colour, and small](../../renders/2026-10-13/barkhorn/brand.png)
+
+The dog is minimal, for a stamp: one outline, its light cut out in tapered bands (the lips, the ridge of the muzzle, the
+brow, the cheek, the ear's hollow, two strokes of fur) and a few shapes (the eye, the fangs, the tongue). A collar
+with a tag says it is a dog, not a wolf. The cut-outs are transparent, so the badge prints in one ink on anything, and
+in white it reads as a negative. `stickers.py` draws it: `brand.svg` (the badge), `dog.svg` (the head alone), and each
+in white.
 
 ## Round 8: the owner's notes of 2026-10-13
 
@@ -43,16 +57,16 @@ moulds, by quote. But it is stone dust in resin, it takes a polish, and it can k
 
 ### The marks
 
-![The marks: the dogs, then each line, one colour above and colour below](../../renders/2026-10-13/barkhorn/stickers.png)
+![The marks: the badge, then each line, one colour above and colour below](../../renders/2026-10-13/barkhorn/stickers.png)
 
-**The brand** is two dogs back to back, each with a horn for a head, barking out of it in three arcs: barkhorn, a
-horn that barks, and a stereo pair facing out. **A line** is its shape: Bark the circle, Y2K the rounded square, Crag
+**The brand** was two dogs back to back here, each with a horn for a head; round 9 redrew it as one dog barking its
+name in a badge (above). **A line** is its shape: Bark the circle, Y2K the rounded square, Crag
 the triangle. **A speaker** is its line's shape, solid, with one mark cut out of it and centred: the material reduced to
 a primitive. Each is drawn as a stamp would print it, in one ink, and says everything there; no two share a form.
 Colour goes on top of the same drawing, for the stickers, each on a white die-cut edge with a hairline. In colour the
 ground is the material's, so the birch, the striped maple and the marble keep their light grounds. The look book uses
 the one-colour marks, in each page's ink. `stickers.py` draws them all into `stickers/`: the colour sticker, the
-one-colour sticker, the mark alone in ink and in white, and the dogs.
+one-colour sticker, the mark alone in ink and in white, and the brand.
 
 | mark | its form | for |
 |---|---|---|
@@ -85,7 +99,7 @@ The cobalt marble keeps its mist cover.
 
 ### The look book, by line
 
-[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) now has the dogs and the twelve marks, by line, on
+[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) now has the badge and the twelve marks, by line, on
 its cover. Each line opens with its shape, one line on how it is made, and its marks. Its speakers follow, cover on and
 off, each page with its mark in the page's ink, its line and number (Bark 01) and its name; the Y2K pages are Poison,
 Smoke and Fog. Two pages of drawings close it (the owner: "Include the spec drawings on a page or two at the end of the
@@ -767,8 +781,8 @@ The shots are in `studio/shots/barkhorn/`:
 
 ## Open questions for the owner
 
-1. **The name.** With the dogs, barkhorn reads as a horn that barks, which covers all three lines. Keep it, or is it
-   still a working name?
+1. **The name.** With the dog barking it, barkhorn reads as a horn that barks, which covers all three lines. Keep it,
+   or is it still a working name?
 2. **Crag's stones.** Keep all five (cobalt marble, malachite, rhodochrosite, lapis lazuli, travertine), or pick? And
    Crag as cast stone (heavier, by quote), or pressed HDPE where the pattern allows (the marble and the banded stones)?
 3. **The disc.** Oat on birch and graphite on eucalyptus, or another neutral from the study?
