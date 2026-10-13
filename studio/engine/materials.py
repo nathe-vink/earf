@@ -230,6 +230,14 @@ PRESET_DEFAULTS = {
                          [1.0, '#0F1D5A']],
                   repeat=1, band_m=0.14, warp=1.4, detail=4.0, stretch=1.0, seed=7.0, flecks=('#D9B44A', 0.2, 0.016, 1.0),
                   pits=None, roughness=0.16, coat=0.45),
+    # turquoise, spiderweb (barkhorn round 10, the owner: "replace the two of them with one more interesting rock.
+    # Something that will pop, that is a different color than the other options"): a mottled sky green-blue, polished
+    # waxy, crossed by a web of dark matrix (`web`: colour, cell size, vein width as a share of the distance between
+    # cells; `web2` a finer web inside it, in patches), the cells drawn out of shape by a slow noise (`web_warp`), each vein
+    # swelling and thinning along its length
+    'turquoise': dict(bands=[[0.0, '#2B9DAA'], [0.3, '#38AEBA'], [0.55, '#4FC0C8'], [0.78, '#72D0D2'], [1.0, '#33A5B0']],
+                      repeat=1, band_m=0.09, warp=1.0, detail=3.0, stretch=1.0, seed=11.0, flecks=None, pits=None,
+                      web=('#241D18', 0.075, 0.045), web2=('#3A3029', 0.025, 0.04), web_warp=0.6, roughness=0.28, coat=0.35),
     'travertine': dict(strata=[['#E9DDC5', 0.25], ['#E0D0B0', 0.15], ['#ECE3D0', 0.2], ['#D9C7A3', 0.12], ['#E5D8BC', 0.18],
                                ['#D3BE96', 0.10]],
                        band=0.014, warp=1.2, flecks=None, pits=('#8E7754', 0.3, 0.016, 0.004), roughness=0.5, coat=0.05),
@@ -362,7 +370,7 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         _clear_resin(nt, b, p, normal)
     elif preset in ('dark_resin', 'marbled_resin'):
         _opaque_resin(nt, b, p, normal)
-    elif preset in ('malachite', 'rhodochrosite', 'lapis', 'travertine'):
+    elif preset in ('malachite', 'rhodochrosite', 'lapis', 'travertine', 'turquoise'):
         _stone(nt, b, p, normal)
     elif preset == 'terrazzo':
         nt.links.new(_terrazzo(nt, p), I['Base Color'])
@@ -1155,6 +1163,28 @@ def _stone(nt, b, p, normal_in=None):
         col = mix(fl, col, hex_lin(kc))
         if metallic > 0:
             nt.links.new(math_('MULTIPLY', fl, metallic), I['Metallic'])
+    for key, warp_k in (('web', 1.0), ('web2', 0.8)):
+        if p.get(key):                               # turquoise's matrix: dark veins along the cells' edges
+            kc, size, width = p[key]
+            geo = node('ShaderNodeNewGeometry')
+            mp = node('ShaderNodeMapping'); mp.inputs['Scale'].default_value = (1.0 / size, 1.0 / size, 1.0 / size)
+            nt.links.new(geo.outputs['Position'], mp.inputs['Vector'])
+            nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 0.6; nz.inputs['Detail'].default_value = 2.0
+            nt.links.new(mp.outputs['Vector'], nz.inputs['Vector'])
+            sub = node('ShaderNodeVectorMath', operation='SUBTRACT'); sub.inputs[1].default_value = (0.5, 0.5, 0.5)
+            nt.links.new(nz.outputs['Color'], sub.inputs[0])
+            sc = node('ShaderNodeVectorMath', operation='SCALE'); sc.inputs['Scale'].default_value = p.get('web_warp', 0.5) * warp_k
+            nt.links.new(sub.outputs['Vector'], sc.inputs[0])
+            add = node('ShaderNodeVectorMath', operation='ADD')
+            nt.links.new(mp.outputs['Vector'], add.inputs[0]); nt.links.new(sc.outputs['Vector'], add.inputs[1])
+            vo = node('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE', voronoi_dimensions='3D'); vo.inputs['Scale'].default_value = 1.0
+            nt.links.new(add.outputs['Vector'], vo.inputs['Vector'])
+            wn = node('ShaderNodeTexNoise'); wn.inputs['Scale'].default_value = 0.35 if key == 'web' else 0.5
+            nt.links.new(mp.outputs['Vector'], wn.inputs['Vector'])   # the vein's width along it: the web from 0.12 to 1.5
+            k = math_('MAXIMUM', math_('MULTIPLY_ADD', wn.outputs['Fac'], 3.5, -0.95), 0.12) if key == 'web' else \
+                math_('MAXIMUM', math_('MULTIPLY_ADD', wn.outputs['Fac'], 4.0, -1.5), 0.02)   # the fine web, in patches
+            vein = math_('SUBTRACT', 1.0, smooth(math_('DIVIDE', vo.outputs['Distance'], k), width * 0.45, width))
+            col = mix(vein, col, hex_lin(kc))
     n = normal_in
     if p.get('pits'):
         kc, share, along, up = p['pits']

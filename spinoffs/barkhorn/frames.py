@@ -26,8 +26,8 @@ Sets:
 - cabinets (round 6): the cabinet in other plastics, without wood: translucent acrylic, stone looks, marble and swirl;
 - pick6 (round 6): the line, without wood, its two ports, from three-quarter and from the front;
 - discs (round 7): the cloth disc in neutral colours on each cabinet, so the cabinet and the horn carry the colour;
-- lookbook (rounds 7 and 8): the look book's speakers by line (Bark, Y2K, Crag), each on a sweep in its own colour, the
-  cover on and off.
+- lookbook (rounds 7 to 10): the look book's speakers by line (Bark, Cloud, Crag), each on a sweep in its own colour,
+  the cover on and off.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -100,21 +100,21 @@ LOOK = {'position': [1.2, -2.5, 1.0], 'target': [0.0, 0.05, 0.52], 'lens_mm': 68
 STUDIO = {'kind': 'gradient', 'zenith': '#C4C2BE', 'horizon': '#CFCDC8', 'ground': '#5A5650', 'strength': 0.7}
 # the look book's speakers by line (round 8, the owner: "bark is more of a product style/line. Y2K another. Crag
 # another, which would include marble and such"): Bark (the barks, each horn wearing its bark's pattern cast in, drawn
-# as round 6's printed horns, which show the same artwork; the autumn birch's horn golden yellow), Y2K (translucent
-# acrylic, named poison, smoke and fog) and Crag (cast stone). Round 8 also: "Remove Phoenix, red vein, cherry. Only do
+# as round 6's printed horns, which show the same artwork; the autumn birch's horn golden yellow), Cloud (translucent
+# acrylic, named poison, smoke and fog; round 10, the owner: "the theme is Cloud") and Crag (cast stone; round 10's
+# turquoise in place of the rhodochrosite and the travertine). Round 8 also: "Remove Phoenix, red vein, cherry. Only do
 # the autumn birch for the birch option."
 LOOKS = [('Bark', 'eucalyptus', 'eucalyptus-printed', 'eucalyptus', '#B7C3B4'),
          ('Bark', 'autumn', 'birch-autumn-pressed', 'autumn birch', '#BDB5A9'),
          ('Bark', 'manzanita', 'manzanita-pressed', 'manzanita', '#D8C69E'),
          ('Bark', 'striped', 'snakebark-white-pressed', 'striped maple', '#4F5B3A'),
-         ('Y2K', 'green', 'eucalyptus-y2k-green', 'poison', '#D9E4D3'),
-         ('Y2K', 'smoke', 'birch-y2k-smoke', 'smoke', '#C9C5D3'),
-         ('Y2K', 'ice', 'birch-y2k-ice', 'fog', '#CFDCE4'),
+         ('Cloud', 'green', 'eucalyptus-y2k-green', 'poison', '#D9E4D3'),
+         ('Cloud', 'smoke', 'birch-y2k-smoke', 'smoke', '#C9C5D3'),
+         ('Cloud', 'ice', 'birch-y2k-ice', 'fog', '#CFDCE4'),
          ('Crag', 'cobalt', 'birch-marbled-cobalt', 'cobalt marble', '#2F4FA8'),
          ('Crag', 'malachite', 'crag-malachite', 'malachite', '#E3DACA'),
-         ('Crag', 'rhodochrosite', 'crag-rhodochrosite', 'rhodochrosite', '#6A2B3A'),
          ('Crag', 'lapis', 'crag-lapis', 'lapis lazuli', '#C9A35E'),
-         ('Crag', 'travertine', 'crag-travertine', 'travertine', '#B9775C')]
+         ('Crag', 'turquoise', 'crag-turquoise', 'turquoise', '#B8694C')]
 
 
 def sweep(color):

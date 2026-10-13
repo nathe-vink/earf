@@ -689,7 +689,9 @@ VARIANTS.update({
     # marbled or swirled, the horn and the cabinet alike. 'bark' is the cabinet's material
     'birch-y2k-smoke': {**BIRCH, **HORNS['birch']['smoked'], 'bark': 'clear_resin', 'disc': CHARCOAL,
                         'materials': {'bark': {'deep': '#C9C7C2', 'radius': 0.025, 'roughness': 0.05}}},
-    'eucalyptus-y2k-green': {**EUCALYPTUS, **HORNS['eucalyptus']['bottle'], 'bark': 'clear_resin',
+    # Poison (round 10, the owner: "Poison should have a matching green cover and frame around the driver"): the cover
+    # and the ring (which follows the disc) in the acrylic's own green, as Smoke's and Fog's follow theirs
+    'eucalyptus-y2k-green': {**EUCALYPTUS, **HORNS['eucalyptus']['bottle'], 'bark': 'clear_resin', 'disc': '#2E4A2C',
                              'materials': {'bark': {'deep': '#B2C9A2', 'radius': 0.025, 'roughness': 0.05}}},
     'birch-y2k-ice': {**BIRCH, **HORNS['birch']['clear'], 'bark': 'clear_resin', 'disc': PEWTER,
                       'materials': {'horn': {'roughness': 0.1}, 'bark': {'deep': '#E4E9EB', 'radius': 0.025, 'roughness': 0.35, 'milk': 0.15}}},
@@ -756,9 +758,12 @@ VARIANTS.update({
 
 # round 8, the owner: "bark is more of a product style/line. Y2K another. Crag another, which would include marble and
 # such ... Let's explore some more stone/crag options. Malachite maybe." The Crag line is cast stone, the horn and the
-# cabinet alike (as the cobalt marble is): malachite, rhodochrosite, lapis lazuli and travertine (the engine's stone
-# presets). Each is one colour, so its cover takes the stone's own colour (the owner, round 7: "I like when the driver
-# covers are the same color for the monochromatic options")
+# cabinet alike (as the cobalt marble is): malachite, lapis lazuli and turquoise (the engine's stone presets). Each is
+# one colour, so its cover takes the stone's own colour (the owner, round 7: "I like when the driver covers are the same
+# color for the monochromatic options"). Round 10, the owner: "The travertine is boring and the rhodochrosite is too
+# much like a pink malachite. Let's replace the two of them with one more interesting rock. Something that will pop,
+# that is a different color than the other options": spiderweb turquoise, sky blue-green in a dark web (their presets
+# stay in the engine's library)
 def crag(stone, cover):
     """A speaker in one cast stone, horn and cabinet, with a cover of the stone's colour."""
     return {'bark': stone, 'panel': cover, 'cloth': cover, 'cork': '#3B2F28', 'disc': cover,
@@ -767,9 +772,8 @@ def crag(stone, cover):
 
 VARIANTS.update({
     'crag-malachite': crag('malachite', '#1F4C34'),
-    'crag-rhodochrosite': crag('rhodochrosite', '#B65C6E'),
     'crag-lapis': crag('lapis', '#1D2D6B'),
-    'crag-travertine': crag('travertine', '#D3C6AB'),
+    'crag-turquoise': crag('turquoise', '#3597A2'),
 })
 
 
