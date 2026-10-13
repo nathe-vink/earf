@@ -11,8 +11,9 @@ eucalyptus, the solid neck round the throat, and a port in each bottom corner (r
 suits each cabinet, the woofer's ring the same colour, and a patterned horn has its pattern cast in, not printed (round
 7). Round 8 made the speakers three lines, and round 10 names them Bark (pressed recycled plastic in the pattern of a
 bark: eucalyptus, autumn birch, manzanita, striped maple), Cloud (translucent cast acrylic: Poison, Smoke, Fog) and
-Crag (cast stone: cobalt marble, malachite, lapis lazuli, turquoise). Each speaker has an acrylic mark, its line's shape
-in its own colour. The brand has no logo for now.
+Crag (pressed recycled plastic in the pattern of a stone, the horn cast resin: cobalt marble, malachite, lapis lazuli,
+turquoise). Each speaker has an acrylic mark, its line's shape in its own colour. The brand has no logo in the look
+book for now; a geometric dog with the horn for its head is proposed.
 
 ## Round 10: the owner's notes of 2026-10-13 (night)
 
@@ -23,6 +24,11 @@ in its own colour. The brand has no logo for now.
 | "The brand name is dogs barking, not bark horn." | **Dogs Barking** wherever the speakers are presented: the look book's cover and pages. |
 | "Like an old electricity PSA ... How can we get to design agency level quality ... Retro PSA brand logo with stamps/badges for each speaker", then "I want a dog with a horn head ... Reference similar brand systems", then "Just drop the branding for now. Do the lookbook with just the dogs barking brand name and no logo or marks." | **The branding is parked.** The look book carries the name in type only, with no logo. What was found and tried is noted below for when it resumes. `stickers.py` and its marks are gone. |
 | (of round 8's clouds) "These acrylic marks, without the circular framing (ie just the geometric cloud), are great. Representative of the speaker design and theme. Also these aren't the Y2K ones, the theme is Cloud or Air or something like that." Then: "Acrylic style marks for each theme, with a distinct color for each speaker. Trees, Clouds, Stones ... The tree could be a vertical rectangle with circles at the top", and: "I like the cloud because it combines multiple shapes and sizes with large enough gaps between the overlapping strokes of each shape. The tree and stone need to accomplish the same thing ... For the stone we could make an exception and do something more like the rock option, but that front left side looks too much like a house shape." | **Y2K is now Cloud**, and **every speaker has an acrylic mark** (`marks.py`, below): Bark a tree, Cloud the cloud as approved, Crag a stone, each speaker its line's shape in its own colour. The look book carries them. |
+| "The previous three tree was better. The two smaller circles feel too detached. The cloud and the tree use very uniform shapes. The stone should do the same. Clean parallelograms, squares/rectangles, and triangles are best I think." | **The three-circle tree is back**, its crown three circles overlapping deeply. **The stone is now a crag** built as the cloud is: three equilateral triangles, small, big and medium, on a rectangle from the outer two's centres down to the base. |
+| "If you can make a dog barking out of geometric shapes, that could be cool." | **A dog of rectangles and parallelograms with the horn for its head** (the pod a rectangle, the flare a trapezoid), two triangles for ears, barking in three arcs, in the marks' acrylic style (`marks/dog.svg`). It is proposed, and not in the look book. |
+| "Also, add some back or side shots of the horn" | **Two pages of the horn** in the look book, from the side and from behind, on one speaker of each line: the autumn birch, Poison and turquoise, each on its own sweep (`frames.py horn10`). |
+| "Instead of LOOK BOOK 2026 on the cover, put FLOOR STANDING LOUDSPEAKERS" | Done. |
+| "Also the stone aren't going to be cast stone, they'll be plastic and resin. I imagine cast stone would be way too expensive and heavy." | **Crag is plastic and resin**: the cabinet pressed recycled plastic in the stone's pattern (as round 6 pressed the marble), the horn cast resin with the pattern cast in, as the bark horns are. The renders are unchanged. |
 
 ### The marks
 
@@ -30,23 +36,23 @@ in its own colour. The brand has no logo for now.
 
 Each line is one shape built from a few primitives of different sizes, and each speaker is that shape in its own colour.
 The acrylic: every primitive is filled, then every outline is drawn over all of them, so the construction shows through
-as if each piece were clear acrylic laid on the others. All three keep the cloud's rules, measured against the cloud
-itself:
+as if each piece were clear acrylic laid on the others. They follow the cloud:
 
 - The primitives overlap deeply.
-- A rectangle's corners sit on circles' centres, so its edges cross them square on.
-- Strokes that come close without crossing stay at least 2 U apart, the cloud's own narrowest gap. On a 1000 artboard
-  the tree's narrowest is 48, and the stone has none.
-- Crossings stay open: the tree's at 70 degrees or more, the stone's at 33 or more.
+- In the cloud and the crag, the rectangle's corners sit on the outer shapes' centres, so its edges cross them square
+  on, strokes that come close without crossing stay well apart, and crossings stay open.
 - Tangents fall only on the silhouette, where the lines merge.
+- The shapes are uniform: circles for the tree and the cloud, equilateral triangles for the crag, with one rectangle
+  in each.
 
 | line | shape | speakers, and their colours |
 |---|---|---|
-| Bark | a tree: a crown of three circles of three sizes, the trunk's top at the big one's centre, clear of the small ones | Eucalyptus (olive), Autumn Birch (gold), Manzanita (red), Striped Maple (pale green) |
+| Bark | a tree: a crown of three circles overlapping deeply, the trunk's top inside them | Eucalyptus (olive), Autumn Birch (gold), Manzanita (red), Striped Maple (pale green) |
 | Cloud | the cloud: three circles on a rectangle from the outer two's centres down to their common tangent | Poison (bottle green), Smoke (smoke grey), Fog (white) |
-| Crag | a stone, the exception in straight lines: a big plate spanning the base and a smaller plate either side, overlapping it but not each other, its top a tilted slab so no face reads as a house | Cobalt Marble (cool white), Malachite (green), Lapis Lazuli (ultramarine), Turquoise (turquoise) |
+| Crag | a crag, the cloud's build in straight lines: three equilateral triangles, small, big and medium, on a rectangle from the outer two's centres down to the base | Cobalt Marble (cool white), Malachite (green), Lapis Lazuli (ultramarine), Turquoise (turquoise) |
+| (the brand) | the dog, proposed: a body, two legs, a tail and a neck of rectangles and parallelograms, the horn's pod and flare for a head, two triangles for ears, the bark in three arcs | gold |
 
-`marks.py` writes `marks/<key>.svg` for each speaker (transparent round it) and `marks/sheet.html`.
+`marks.py` writes `marks/<key>.svg` for each speaker (transparent round it), `marks/dog.svg` and `marks/sheet.html`.
 
 ### The lines
 
@@ -54,21 +60,21 @@ itself:
 |---|---|---|---|
 | Bark | recycled plastic, pressed in the pattern of a bark | clear cast resin, the pattern cast in (the autumn birch's tinted golden yellow) | eucalyptus, autumn birch, manzanita, striped maple |
 | Cloud | cast acrylic, translucent, one colour | clear cast resin, tinted to match | Poison (green), Smoke, Fog (frosted) |
-| Crag | cast stone: resin or Jesmonite filled with stone dust, as cultured marble is made | the same stone | cobalt marble, malachite, lapis lazuli, turquoise |
+| Crag | recycled plastic, pressed in the pattern of a stone | clear cast resin, the stone's pattern cast in | cobalt marble, malachite, lapis lazuli, turquoise |
 
 The Cloud flavours keep their keys (`eucalyptus-y2k-green`, `birch-y2k-smoke`, `birch-y2k-ice`), so earlier renders and
 shots still resolve.
 
-Crag as cast stone is a proposal. In round 6 the cobalt marble's kind of marbling was pressed in HDPE at the bark
-line's cost, and the banded stones could be pressed too. Cast stone is heavier, and a cultured-marble shop makes it in
-moulds, by quote. But it is stone dust in resin, and it takes a polish.
+Crag is plastic and resin (the owner: "I imagine cast stone would be way too expensive and heavy"). Round 6 pressed
+the cobalt marble's kind of marbling in HDPE at the bark line's cost, and the banded and flecked stones press the same
+way, coloured flakes laid in the pattern. The renders still show the stones polished, as a sample would decide.
 
 ### The Crag line
 
 ![The Crag line](../../renders/2026-10-13/barkhorn/crag.png)
 
-Each stone makes the horn and the cabinet alike, with a cover in the stone's own colour (a one-colour cabinet keeps a
-matching cover, round 7):
+Each stone's pattern runs over the horn and the cabinet alike, with a cover in the stone's own colour (a one-colour
+cabinet keeps a matching cover, round 7):
 
 - **Malachite**: bands of dark, mid and light green ringing its eyes, polished. A deep green cover.
 - **Lapis lazuli**: deep blue, mottled, with white calcite and flecks of gold pyrite, polished. A deep blue cover.
@@ -79,10 +85,13 @@ The cobalt marble keeps its mist cover.
 
 ### The look book
 
-[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) (version 12) opens on the name, Dogs Barking, set in
-type, with the eleven marks by line. Each line opens with its name, one line on how it is made, and its marks. Its
-speakers follow, cover on and off, each page with its mark, its line and number (Cloud 01), its name, and Dogs Barking
-at its foot. The specification and the drawings close it. It is private until the owner shares it from its Share menu.
+[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) (version 14) opens on the name, Dogs Barking, set in
+type over FLOOR STANDING LOUDSPEAKERS, with the eleven marks by line. Each line opens with its name, one line on how it
+is made, and its marks. Its speakers follow, cover on and off, each page with its mark, its line and number (Cloud 01),
+its name, and Dogs Barking at its foot. Two pages show the horn from the side and from behind, then the specification
+and the drawings close it. It is private until the owner shares it from its Share menu.
+
+![The horn from the side and from behind](../../renders/2026-10-13/barkhorn/horn10.png)
 
 ![The look book's frames](../../renders/2026-10-12/barkhorn/lookbook.png)
 
@@ -802,10 +811,9 @@ The shots are in `studio/shots/barkhorn/`:
 
 1. **The line names.** Bark, Cloud and Crag, or the plain Tree, Cloud and Stone? (The owner: "Trees, Clouds, Stones.
    Maybe there's a better name for each category though.") Bark and Crag are kept as the proposal: Bark echoes the
-   brand, and Cloud and Crag alliterate.
+   brand, and Cloud and Crag alliterate, and the crag mark now draws its name.
 2. **The marks' colours.** One for each speaker, from its material (the table above). Change any?
-3. **Crag as cast stone** (heavier, by quote), or pressed HDPE where the pattern allows (the marble and the banded
-   stones)?
+3. **The dog.** Put the geometric dog on the look book's cover, or keep the name alone?
 4. **The disc.** Oat on birch and graphite on eucalyptus, or another neutral from the study?
 5. **The bark horns for the line.** Do the cast-in bark horns replace smoked and bottle green on the birch and
    eucalyptus everywhere (the default flavours and pick6), and on clear resin or on round 6's light smoke and green?

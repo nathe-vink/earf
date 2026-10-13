@@ -208,9 +208,9 @@ PRESET_DEFAULTS = {
                                     ['#A9B896', 0.22]], band=0.045, warp=0.6),
     'frosted_terrazzo': dict(color='#F4F1EA', absorb='#EFE5D3', roughness=0.45, ior=1.5, radius=0.02, clear=0.1,
                              palette=[['#1E1C1A', 0.55], ['#5E5A54', 0.25], ['#C9976E', 0.2]], chip=0.015, share=0.24),
-    # cast stone (barkhorn round 8, the Crag line, the owner: "Crag another, which would include marble and such ... Let's
-    # explore some more stone/crag options. Malachite maybe."): opaque resin filled with stone powder, as cultured marble
-    # is made. `bands`: colour stops [[position 0..1, hex], ...] repeated `repeat` times along a slow folded noise
+    # stone looks (barkhorn round 8, the Crag line, the owner: "Crag another, which would include marble and such ... Let's
+    # explore some more stone/crag options. Malachite maybe."), opaque: first drawn as resin filled with stone powder, as
+    # cultured marble is made; from round 10 pressed plastic and cast resin in a stone's pattern. `bands`: colour stops [[position 0..1, hex], ...] repeated `repeat` times along a slow folded noise
     # (`band_m` across, `warp`, `detail`), so the bands ring the noise's peaks as a malachite's ring its eyes; or `strata`:
     # the palette's layers up the part ([[hex, weight], ...], each about `band` thick, wavy by `warp`), as travertine is
     # laid down. `flecks`: crystals in a share of small cells (colour, share, size, metallic: lapis's pyrite); `pits`: the

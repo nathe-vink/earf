@@ -41,7 +41,7 @@ SHOTS = os.path.join(ROOT, 'studio', 'shots', 'barkhorn')
 PRODUCT = 'studio/products/barkhorn.json'
 STUDY = os.path.join(HERE, 'out', 'study')
 DAY = {'covers': '2026-10-10', 'front': '2026-10-11', 'study': '2026-10-11', 'proposal': '2026-10-11',
-       'experiments': '2026-10-11'}             # where each set's renders live (a set first made that day; the rest 2026-10-12)
+       'experiments': '2026-10-11', 'horn10': '2026-10-13'}   # where each set's renders live (a set first made that day; the rest 2026-10-12)
 
 FRONT_CAM = {'position': [-0.78, -2.6, 1.0], 'target': [0.0, 0.0, 0.64], 'lens_mm': 66, 'level': True}
 THREE_Q = {'position': [1.45, -2.7, 1.45], 'target': [0.0, 0.08, 0.66], 'lens_mm': 60, 'level': True}
@@ -101,7 +101,8 @@ STUDIO = {'kind': 'gradient', 'zenith': '#C4C2BE', 'horizon': '#CFCDC8', 'ground
 # the look book's speakers by line (round 8, the owner: "bark is more of a product style/line. Y2K another. Crag
 # another, which would include marble and such"): Bark (the barks, each horn wearing its bark's pattern cast in, drawn
 # as round 6's printed horns, which show the same artwork; the autumn birch's horn golden yellow), Cloud (translucent
-# acrylic, named poison, smoke and fog; round 10, the owner: "the theme is Cloud") and Crag (cast stone; round 10's
+# acrylic, named poison, smoke and fog; round 10, the owner: "the theme is Cloud") and Crag (stone patterns in plastic
+# and resin; round 10's
 # turquoise in place of the rhodochrosite and the travertine). Round 8 also: "Remove Phoenix, red vein, cherry. Only do
 # the autumn birch for the birch option."
 LOOKS = [('Bark', 'eucalyptus', 'eucalyptus-printed', 'eucalyptus', '#B7C3B4'),
@@ -115,6 +116,12 @@ LOOKS = [('Bark', 'eucalyptus', 'eucalyptus-printed', 'eucalyptus', '#B7C3B4'),
          ('Crag', 'malachite', 'crag-malachite', 'malachite', '#E3DACA'),
          ('Crag', 'lapis', 'crag-lapis', 'lapis lazuli', '#C9A35E'),
          ('Crag', 'turquoise', 'crag-turquoise', 'turquoise', '#B8694C')]
+
+
+# round 10, the owner: "add some back or side shots of the horn": one speaker of each line turned on its own sweep, the
+# horn from the side (its mouth to the right) and from behind (the pod round the driver), framed on the horn
+HORN10 = {'position': [1.2, -2.5, 1.25], 'target': [0.0, 0.05, 1.06], 'lens_mm': 95, 'level': True}
+HORN10_KEYS = ('autumn', 'green', 'turquoise')
 
 
 def sweep(color):
@@ -253,6 +260,12 @@ SETS = {
                              F(f'look-{key}-off', flav, 'cover off', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c),
                                sky=STUDIO, hide=['cloth-disc'])]
         for line, key, flav, label, c in LOOKS}),
+    'horn10': dict(title='Dogs Barking: the horn from the side and from behind', camera=HORN10, rows={
+        f'{line}: {label}': [F(f'horn-{key}-side', flav, 'from the side', product=PRESSED, lights=GLOW5, size=[1200, 900],
+                               stage=sweep(c), sky=STUDIO, at={'rotate_z': 115}),
+                             F(f'horn-{key}-back', flav, 'from behind', product=PRESSED, lights=GLOW5, size=[1200, 900],
+                               stage=sweep(c), sky=STUDIO, at={'rotate_z': 155})]
+        for line, key, flav, label, c in LOOKS if key in HORN10_KEYS}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],

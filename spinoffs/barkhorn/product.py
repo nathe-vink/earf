@@ -757,15 +757,18 @@ VARIANTS.update({
 
 
 # round 8, the owner: "bark is more of a product style/line. Y2K another. Crag another, which would include marble and
-# such ... Let's explore some more stone/crag options. Malachite maybe." The Crag line is cast stone, the horn and the
-# cabinet alike (as the cobalt marble is): malachite, lapis lazuli and turquoise (the engine's stone presets). Each is
+# such ... Let's explore some more stone/crag options. Malachite maybe." The Crag line wears a stone's pattern on the horn
+# and the cabinet alike (as the cobalt marble does): malachite, lapis lazuli and turquoise (the engine's stone presets).
+# Round 10, the owner: "the stone aren't going to be cast stone, they'll be plastic and resin. I imagine cast stone would
+# be way too expensive and heavy": the cabinet pressed recycled plastic, the horn cast resin with the pattern cast in. Each is
 # one colour, so its cover takes the stone's own colour (the owner, round 7: "I like when the driver covers are the same
 # color for the monochromatic options"). Round 10, the owner: "The travertine is boring and the rhodochrosite is too
 # much like a pink malachite. Let's replace the two of them with one more interesting rock. Something that will pop,
 # that is a different color than the other options": spiderweb turquoise, sky blue-green in a dark web (their presets
 # stay in the engine's library)
 def crag(stone, cover):
-    """A speaker in one cast stone, horn and cabinet, with a cover of the stone's colour."""
+    """A speaker in one stone's pattern, horn (cast resin) and cabinet (pressed recycled plastic), with a cover of the
+    stone's colour."""
     return {'bark': stone, 'panel': cover, 'cloth': cover, 'cork': '#3B2F28', 'disc': cover,
             'horn_preset': stone, 'horn': '#FFFFFF', 'horn_deep': '#FFFFFF', 'horn_cloud': 0.0}
 
