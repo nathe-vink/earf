@@ -71,10 +71,13 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
   - `Bought(ref)`: a key of `library/components.json`, or of a `components.json` beside the product file, which adds
     to or overrides the kit's library.
 - **Product**: `Product(name, title, kind, params, parts, count=2, notes=[], touching=[], materials={}, variants={},
-  origin=(0,0,0), revision='A', drawing_prefix='')`.
+  origin=(0,0,0), revision='A', drawing_prefix='', drawing_style={})`.
   - `touching` lists name patterns (fnmatch) of pairs allowed to overlap, such as a press fit or a squeezed gasket.
   - `materials` maps finish names to the engine's presets (`studio/engine/materials.py`).
   - `variants` is the colourways, which the engine reads as flavours.
+  - `drawing_style` sets the drawings' own type: `face` and `face_bold` (TTF paths) for the views' names and the
+    figures, `label_pt`, `dim_pt` (the general arrangement's figures), `balloon_pt` and `balloon_r` (mm). Left out,
+    the kit's defaults. IBM Plex Mono is in `fonts/` (OFL).
 
 ## What the kit reads off the solids
 
@@ -122,6 +125,10 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
      The assembly sheets (1 to 3) show the product without its options.
   6. **Printed and machined parts**, one sheet per parts-list line, three views with hidden lines and their sizes.
   7. **The parts list and the notes.**
+
+  A view with a lofted or other spline surface in it is drawn from meshes of the solids (OpenCascade's polygonal
+  hidden-line removal), which hide behind any surface; the outline round each such solid is traced from its mesh
+  filled on a raster, so it is whole and smooth. Other views use the exact algorithm.
 - **Render** (`render.py`):
   - One named mesh per part, or per piece when the part has pieces.
   - The engine's product file: materials by finish, the origin at the footprint's centre on the floor, flavours from

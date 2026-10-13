@@ -23,6 +23,7 @@ paper cone), B&C DE1085TN-16 compression driver (2 in exit, 100 mm titanium diap
 import math, os, random, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+FONTS = os.path.normpath(os.path.join(HERE, '..', '..', 'studio', 'fabkit', 'fonts'))
 sys.path.insert(0, os.path.join(HERE, '..', '..', 'studio', 'fabkit'))
 from kit import *                                                    # noqa: E402,F403
 from speaker.drivers import driver_part, place                      # noqa: E402
@@ -778,18 +779,41 @@ VARIANTS.update({
 # much like a pink malachite. Let's replace the two of them with one more interesting rock. Something that will pop,
 # that is a different color than the other options": spiderweb turquoise, sky blue-green in a dark web (their presets
 # stay in the engine's library)
-def crag(stone, cover):
-    """A speaker in one stone's pattern, horn (cast resin) and cabinet (pressed recycled plastic), with a cover of the
-    stone's colour."""
-    return {'bark': stone, 'panel': cover, 'cloth': cover, 'cork': '#3B2F28', 'disc': cover,
-            'horn_preset': stone, 'horn': '#FFFFFF', 'horn_deep': '#FFFFFF', 'horn_cloud': 0.0}
+def crag(stone, cover, deep=None, bands=None, milk=0.0):
+    """A speaker in one stone's pattern, horn and cabinet, with a cover of the stone's colour: the cabinet pressed
+    recycled plastic in the stone's pattern; the horn cast resin with the pattern cast in (round 10). With `deep` the
+    resin is clear, the pattern through it and `milk` a white haze in it (round 11: the critic of the look book found
+    the opaque horns' mouths read as "solid blocks with a dot"; cast in, the flare's depth shows, as the bark horns'
+    does), else opaque, the stone's pigment through it. `bands`: the stone's colours changed."""
+    over = {'bands': bands} if bands else {}
+    horn = ({'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': deep, 'horn_cloud': 0.0,
+             'materials': {'horn': {'print': stone, 'print_params': over, 'print_strength': 0.9, 'roughness': 0.08, 'milk': milk},
+                           **({'bark': over} if over else {})}} if deep else
+            {'horn_preset': stone, 'horn': '#FFFFFF', 'horn_deep': '#FFFFFF', 'horn_cloud': 0.0,
+             **({'materials': {'horn': over, 'bark': over}} if over else {})})
+    return {'bark': stone, 'panel': cover, 'cloth': cover, 'cork': '#3B2F28', 'disc': cover, **horn}
 
 
+# lapis lazuli without its white calcite (round 11: the critic read a wisp of it on the cabinet's corner as a smudge,
+# and the owner's words for it are "deep blue, flecked with gold"): the pale stops blue. Its horn stays opaque (cast in,
+# the deep blue reads as smoke); the malachite's and the turquoise's are cast in
+LAPIS_BANDS = [[0.0, '#0B1648'], [0.22, '#0F1D5A'], [0.42, '#16286E'], [0.58, '#0E1B55'], [0.72, '#1B3282'], [0.83, '#24408F'],
+               [0.86, '#2B4898'], [0.895, '#3552A3'], [0.925, '#284391'], [0.96, '#16286E'], [1.0, '#0F1D5A']]
 VARIANTS.update({
-    'crag-malachite': crag('malachite', '#1F4C34'),
-    'crag-lapis': crag('lapis', '#1D2D6B'),
-    'crag-turquoise': crag('turquoise', '#3597A2'),
+    'crag-malachite': crag('malachite', '#1F4C34', '#CFE3D6', milk=0.1),
+    'crag-lapis': crag('lapis', '#1D2D6B', bands=LAPIS_BANDS),
+    'crag-turquoise': crag('turquoise', '#3597A2', '#CDEBEE', milk=0.3),
 })
+# the cobalt marble's horn stays opaque marbled resin (cast in, the white goes clear and the cobalt veins grey), polished,
+# its veins drawn out down the walls into the throat as a pour runs down a mould, so the flare reads (the critic: the
+# Crag horns' mouths "read as solid blocks with a dot"); the Cloud horns polished too (the critic: Poison's and Smoke's
+# throats "smeared": a satin face blurs the dark pod behind it)
+_cob = VARIANTS['birch-marbled-cobalt']
+VARIANTS['birch-marbled-cobalt'] = {**_cob, 'materials': {**_cob['materials'],
+                                                          'horn': {**_cob['materials']['horn'], 'roughness': 0.15, 'coat': 0.6,
+                                                                   'vein_m': 0.22, 'stretch': 6.0, 'stretch_axis': 1}}}
+for _k in ('birch-y2k-smoke', 'eucalyptus-y2k-green'):
+    VARIANTS[_k] = {**VARIANTS[_k], 'materials': {**VARIANTS[_k]['materials'], 'horn': {'roughness': 0.03}}}
 
 
 PRODUCT = Product(
@@ -820,6 +844,8 @@ PRODUCT = Product(
                'driver-coil': {'preset': 'metal', 'color': '#B87333'}, 'driver-spider': {'preset': 'rubber', 'color': '#C8B88A'},
                'driver-plug': {'preset': 'satin_paint', 'color': '#111111'}},
     variants=VARIANTS,
+    drawing_style={'face': os.path.join(FONTS, 'IBMPlexMono-Regular.ttf'), 'face_bold': os.path.join(FONTS, 'IBMPlexMono-SemiBold.ttf'),
+                   'label_pt': 11, 'dim_pt': 10, 'balloon_pt': 11, 'balloon_r': 4.4},    # the look book's mono, read off a slide
 )
 
 

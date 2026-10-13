@@ -138,6 +138,9 @@ class Product:
                                     # centre on the floor, worked out at build time)
     revision: str = 'A'
     drawing_prefix: str = ''        # drawing numbers' prefix; left out, the name's first letters
+    drawing_style: dict = field(default_factory=dict)   # the drawings' own type, read off a slide as well as a sheet:
+                                    # {'face', 'face_bold': TTF paths for the views' names and the figures, 'label_pt',
+                                    # 'dim_pt', 'balloon_pt', 'balloon_r' (mm)}; left out, the kit's defaults
 
 
 def make_kind(part):

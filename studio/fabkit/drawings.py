@@ -51,48 +51,58 @@ def to2d(view, pts):
 ANALYTIC = ('PLANE', 'CYLINDER', 'CONE', 'SPHERE', 'TORUS')
 
 
-def _seams(shapes, view):
+def _seams(shapes, view, edge_on=True, analytic=False):
     """The seams of closed faces (where a lofted or revolved surface meets itself), projected: no edge a drawing
     shows, but hidden-line removal draws a spline surface's seam as a line. A seam that lies on the face's silhouette
-    in this view (the face turned edge-on to the eye along it) is the outline there, and stays."""
+    in this view (the face turned edge-on to the eye along it) is the outline there, and stays, unless `edge_on` is
+    False (the mesh pass draws outlines of its own). Analytic faces' seams only with `analytic` (the exact algorithm
+    leaves them out itself)."""
     from OCP.BRep import BRep_Tool
     d = np.array(VIEWS[view][0], dtype=float); d /= np.linalg.norm(d)
     out = []
     for s in shapes:
         for f in s.faces():
-            if f.geom_type.name in ANALYTIC:
-                continue                          # analytic seams are already left out
+            if f.geom_type.name in ANALYTIC and not analytic:
+                continue
             for e in f.edges():
                 if BRep_Tool.IsClosed_s(e.wrapped, f.wrapped):
                     n = int(min(2000, max(60, e.length / 0.4)))         # dense: the test is distance to its points
                     pts = [e.position_at(t) for t in np.linspace(0, 1, n)]
-                    try:
-                        facing = [abs(np.dot([v.X, v.Y, v.Z], d)) for v in (f.normal_at(p) for p in pts[1:-1:max(1, n // 9)])]
-                    except Exception:
-                        facing = [1.0]
-                    if np.median(facing) < 0.15:
-                        continue                  # edge-on: the seam is the silhouette in this view
+                    if edge_on:
+                        try:
+                            facing = [abs(np.dot([v.X, v.Y, v.Z], d)) for v in (f.normal_at(p) for p in pts[1:-1:max(1, n // 9)])]
+                        except Exception:
+                            facing = [1.0]
+                        if np.median(facing) < 0.15:
+                            continue              # edge-on: the seam is the silhouette in this view
                     out.append(to2d(view, [[p.X, p.Y, p.Z] for p in pts]))
     return out
 
 
-def _hlr_kinds(comp, d, up, hidden):
-    """OpenCascade's hidden-line removal with its kinds kept apart (build123d's Drawing merges them): the edges, sharp
-    and smooth, as Compounds (or None), and the outlines (a curved face's silhouette) as 2D polylines, visible and
-    hidden. An outline is never a seam, even where a seam projects onto it, so only the edges are tested for seams.
-    The exact algorithm finds no silhouette on a lofted spline face (a waveguide's shell drew only its rims): where the
-    shape has any face that is not plane, cylinder, cone, sphere or torus, the outlines come from a pass over a mesh of
-    a copy of it instead, which finds them on any surface."""
-    from OCP.BRepLib import BRepLib
+def _projector(view):
     from OCP.HLRAlgo import HLRAlgo_Projector
-    from OCP.HLRBRep import HLRBRep_Algo, HLRBRep_HLRToShape
     from OCP.gp import gp_Ax2
-    from build123d import Compound, Shape, Vector
+    from build123d import Vector
+    d, up = VIEWS[view]
+    n = Vector(d).normalized()
+    return HLRAlgo_Projector(gp_Ax2(Vector(0, 0, 0).to_pnt(), n.to_dir(), Vector(up).normalized().cross(n).to_dir()))
+
+
+def _curved(s):
+    """Whether a shape has a face that is not plane, cylinder, cone, sphere or torus (a lofted waveguide's shell)."""
+    return any(f.geom_type.name not in ANALYTIC for f in s.faces())
+
+
+def _hlr_kinds(comp, view, hidden):
+    """OpenCascade's exact hidden-line removal with its kinds kept apart (build123d's Drawing merges them): the edges, sharp
+    and smooth, as Compounds (or None), and the outlines (a curved face's silhouette) as 2D polylines, visible and
+    hidden. An outline is never a seam, even where a seam projects onto it, so only the edges are tested for seams."""
+    from OCP.BRepLib import BRepLib
+    from OCP.HLRBRep import HLRBRep_Algo, HLRBRep_HLRToShape
+    from build123d import Compound, Shape
     from build123d.geometry import TOLERANCE
     algo = HLRBRep_Algo(); algo.Add(comp.wrapped)
-    n = Vector(d).normalized()
-    proj = HLRAlgo_Projector(gp_Ax2(Vector(0, 0, 0).to_pnt(), n.to_dir(), Vector(up).normalized().cross(n).to_dir()))
-    algo.Projector(proj)
+    algo.Projector(_projector(view))
     algo.Update(); algo.Hide()
     h = HLRBRep_HLRToShape(algo)
 
@@ -103,20 +113,295 @@ def _hlr_kinds(comp, d, up, hidden):
         return Compound([Shape(c) for c in cs]) if cs else None
     edges = kind(h.VCompound(), h.Rg1LineVCompound())
     h_edges = kind(h.HCompound()) if hidden else None
-    if any(f.geom_type.name not in ANALYTIC for f in comp.faces()):
-        from OCP.BRepBuilderAPI import BRepBuilderAPI_Copy
-        from OCP.BRepMesh import BRepMesh_IncrementalMesh
-        from OCP.HLRBRep import HLRBRep_PolyAlgo, HLRBRep_PolyHLRToShape
-        mesh = BRepBuilderAPI_Copy(comp.wrapped).Shape()
-        BRepMesh_IncrementalMesh(mesh, 0.25, False, 0.1, True)     # 0.25 mm: well under a line's width at 1:10
-        pa = HLRBRep_PolyAlgo(); pa.Load(mesh); pa.Projector(proj); pa.Update()
-        ph = HLRBRep_PolyHLRToShape(); ph.Update(pa)
-        out_v = _mesh_lines(ph.OutLineVCompound())
-        out_h = _mesh_lines(ph.OutLineHCompound()) if hidden else []
-    else:
-        out_v = _edge_lines(kind(h.OutLineVCompound()))
-        out_h = _edge_lines(kind(h.OutLineHCompound())) if hidden else []
+    out_v = _edge_lines(kind(h.OutLineVCompound()))
+    out_h = _edge_lines(kind(h.OutLineHCompound())) if hidden else []
     return edges, h_edges, out_v, out_h
+
+
+# Shapes with a spline face (round 11, the critic of barkhorn's look book: "the broken underside contour of the horn",
+# "stray ticks", "the wobbly hand-traced outline of the plan view"). The exact algorithm finds no silhouette on a lofted
+# spline face, so it neither draws a waveguide's shell nor hides what lies behind it: the cabinet's edges ran on under
+# the horn in the plan, and the rim of a cavity inside the horn showed through as a tick. Such views are drawn from
+# meshes of copies of the shapes instead (OpenCascade's polygonal algorithm), which hides behind any surface. Its
+# silhouettes flicker where a surface turns edge-on, so the outline round each curved shape is traced from its mesh
+# filled on a raster (hidden where a line from the eye meets another shape first), the pass's own copy of that outline
+# taken out, and in the rest a short hidden stretch between two visible ends bridged where no other shape covers it.
+MESH_MM, MESH_ANGLE = 0.25, 0.08    # the mesh's chord and angle deflection (mm, rad)
+FOOT_PX, NEAR_MM = 0.25, 4.0        # the outline's raster pixel (mm); the pass's silhouettes nearer to it, along it, dropped
+BRIDGE_MM, STRAY_MM, EASE_MM, MEET_MM = 80.0, 30.0, 6.0, 1.5
+
+
+def _length(q):
+    return float(np.hypot(*np.diff(q, axis=0).T).sum()) if len(q) > 1 else 0.0
+
+
+def _resample(q, step):
+    """A polyline with points every `step` mm along it (its ends kept)."""
+    q = np.asarray(q, float)
+    L = _length(q)
+    if L == 0:
+        return q[:1]
+    t = np.concatenate([[0], np.cumsum(np.hypot(*np.diff(q, axis=0).T))])
+    ts = np.linspace(0, L, max(int(np.ceil(L / step)) + 1, 2))
+    return np.stack([np.interp(ts, t, q[:, 0]), np.interp(ts, t, q[:, 1])], axis=1)
+
+
+def _tangents(r):
+    t = np.gradient(r, axis=0)
+    return t / np.maximum(np.hypot(*t.T), 1e-12)[:, None]
+
+
+def _runs(flags):
+    """The (start, stop) of each run of true flags."""
+    out, a = [], None
+    for i, f in enumerate(list(flags) + [False]):
+        if f and a is None:
+            a = i
+        elif not f and a is not None:
+            out.append((a, i)); a = None
+    return out
+
+
+def _join(lines, tol):
+    """Polylines joined where an end of one lies within `tol` of an end of another (the nearest end first)."""
+    lines = [np.asarray(q, float) for q in lines if len(q) > 1]
+    if len(lines) < 2:
+        return lines
+    key = lambda p: (int(p[0] // tol), int(p[1] // tol))
+    grid = {}
+    for i, q in enumerate(lines):
+        for e in (0, -1):
+            grid.setdefault(key(q[e]), []).append((i, e))
+    alive = [True] * len(lines)
+
+    def partner(p):
+        kx, ky, best = *key(p), None
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                for j, f in grid.get((kx + dx, ky + dy), ()):
+                    dd = float(np.hypot(*(p - lines[j][f]))) if alive[j] else 9e9
+                    if dd <= tol and (best is None or dd < best[0]):
+                        best = (dd, j, f)
+        return best
+    out = []
+    for i in range(len(lines)):
+        if not alive[i]:
+            continue
+        alive[i] = False
+        q = lines[i]
+        for tail in (True, False):
+            while (b := partner(q[-1] if tail else q[0])) is not None:
+                _, j, f = b
+                alive[j] = False
+                r = lines[j] if (f == 0) == tail else lines[j][::-1]
+                q = np.vstack([q, r[1:]]) if tail else np.vstack([r[:-1], q])
+        out.append(q)
+    return out
+
+
+def _ease(q, mm):
+    """A polyline resampled every millimetre and averaged over `mm` of its length (its ends kept)."""
+    L = _length(q)
+    if L < 2 * mm or len(q) < 3:
+        return q
+    r = _resample(q, L / max(int(L), 3))
+    k = max(int(mm), 1)
+    out = r.copy()
+    c = np.cumsum(np.vstack([np.zeros((1, 2)), r]), axis=0)
+    out[k:len(r) - k] = (c[2 * k + 1:] - c[:len(r) - 2 * k]) / (2 * k + 1)
+    return out
+
+
+def _apart(lines, F, near):
+    """`lines` with the stretches that run along the polylines F (nearer to them than `near`, in their direction)
+    taken out."""
+    from scipy.spatial import cKDTree
+    F = [r for r in (_resample(f, 0.5) for f in F) if len(r) > 1]
+    if not F or not lines:
+        return lines
+    B, TB = np.vstack(F), np.vstack([_tangents(f) for f in F])
+    tree = cKDTree(B)
+    out = []
+    for q in lines:
+        r = _resample(q, 0.5)
+        if len(r) < 2:
+            continue
+        dist, j = tree.query(r, distance_upper_bound=near)
+        along = np.zeros(len(r), bool)
+        hit = np.isfinite(dist)
+        along[hit] = np.abs((_tangents(r)[hit] * TB[j[hit]]).sum(axis=1)) > 0.8
+        out += [r[a:b] for a, b in _runs(~along) if b - a >= 5]           # 2 mm or more
+    return out
+
+
+def _dedupe(lines, over=(), tol=0.45):
+    """`lines` with what lies on `over`, or on what of themselves came before (longest first), taken out (within `tol`,
+    point by point every half millimetre): a dashed line drawn over a copy of itself, or under a visible line, reads
+    solid. The mesh pass chains edges that project onto each other (a hole's two rims seen end on) into one line."""
+    cells = {}
+    key = lambda p: (int(p[0] // tol), int(p[1] // tol))
+
+    def near(p):
+        kx, ky = key(p)
+        return any((r[0] - p[0]) ** 2 + (r[1] - p[1]) ** 2 < tol * tol
+                   for dx in (-1, 0, 1) for dy in (-1, 0, 1) for r in cells.get((kx + dx, ky + dy), ()))
+    for q in over:
+        for p in _resample(q, 0.5):
+            cells.setdefault(key(p), []).append(p)
+    out = []
+    for q in sorted(lines, key=_length, reverse=True):
+        r, free = _resample(q, 0.5), []
+        for p in r:
+            free.append(not near(p))
+            if free[-1]:
+                cells.setdefault(key(p), []).append(p)
+        out += [r[a:b] for a, b in _runs(free) if b - a >= 5]
+    return out
+
+
+def _triangles(m):
+    """A meshed shape's triangles: its points (n, 3) and their index triples (k, 3)."""
+    from OCP.BRep import BRep_Tool
+    from OCP.TopAbs import TopAbs_FACE
+    from OCP.TopExp import TopExp_Explorer
+    from OCP.TopLoc import TopLoc_Location
+    from OCP.TopoDS import TopoDS
+    P, T, n = [], [], 0
+    ex = TopExp_Explorer(m, TopAbs_FACE)
+    while ex.More():
+        loc = TopLoc_Location()
+        t = BRep_Tool.Triangulation_s(TopoDS.Face(ex.Current()), loc)
+        if t is not None:
+            tr = loc.Transformation()
+            P.append([(p.X(), p.Y(), p.Z()) for p in (t.Node(i).Transformed(tr) for i in range(1, t.NbNodes() + 1))])
+            T.append(np.array([[t.Triangle(i).Value(j) for j in (1, 2, 3)] for i in range(1, t.NbTriangles() + 1)]) - 1 + n)
+            n += t.NbNodes()
+        ex.Next()
+    return np.array([p for ps in P for p in ps], float), np.vstack(T)
+
+
+def _footprint(m, view):
+    """The outline round a meshed shape seen from `view`: its triangles projected and filled on a raster of FOOT_PX mm,
+    the filled area's edge traced (closed 2D polylines); and the raster (cells, origin, pixel) to test points with."""
+    import contourpy
+    from PIL import Image, ImageDraw
+    P, T = _triangles(m)
+    Q = to2d(view, P)
+    lo = Q.min(axis=0) - 4 * FOOT_PX
+    W, H = (np.ceil((Q.max(axis=0) - lo) / FOOT_PX) + 5).astype(int)
+    im = Image.new('1', (int(W), int(H)), 0)
+    draw = ImageDraw.Draw(im)
+    for tri in ((Q[T] - lo) / FOOT_PX).reshape(-1, 6).tolist():
+        draw.polygon(tri, fill=1, outline=1)
+    A = np.asarray(im, bool)
+    lines = contourpy.contour_generator(z=A.astype(float)).lines(0.5)
+    return [lo + np.asarray(q) * FOOT_PX for q in lines if len(q) >= 8], (A, lo, FOOT_PX)
+
+
+class _Rays:
+    """Lines from the eye through points of a view, met with the shapes' surfaces: what lies in front of what."""
+
+    def __init__(self, shapes, view):
+        self.shapes = shapes
+        d = np.array(VIEWS[view][0], float); self.d = d / np.linalg.norm(d)
+        self.X, self.Y = basis(view)
+        self.box, self.depth, self.ix = [], [], {}
+        for s in shapes:
+            bb = s.bounding_box()
+            C = np.array([[x, y, z] for x in (bb.min.X, bb.max.X) for y in (bb.min.Y, bb.max.Y) for z in (bb.min.Z, bb.max.Z)])
+            q = to2d(view, C)
+            self.box.append((q.min(axis=0) - 1.0, q.max(axis=0) + 1.0))
+            self.depth.append((float((C @ self.d).min()), float((C @ self.d).max())))
+
+    def hits(self, i, p):
+        """How far toward the eye shape i's surface meets the line through the view's point p."""
+        lo, hi = self.box[i]
+        if not (lo[0] <= p[0] <= hi[0] and lo[1] <= p[1] <= hi[1]):
+            return []
+        from OCP.gp import gp_Dir, gp_Lin, gp_Pnt
+        from OCP.IntCurvesFace import IntCurvesFace_ShapeIntersector
+        if i not in self.ix:
+            self.ix[i] = IntCurvesFace_ShapeIntersector(); self.ix[i].Load(self.shapes[i].wrapped, 1e-4)
+        o = p[0] * self.X + p[1] * self.Y
+        ix = self.ix[i]
+        ix.Perform(gp_Lin(gp_Pnt(*o), gp_Dir(*self.d)), -1e7, 1e7)
+        return [ix.WParameter(j) for j in range(1, ix.NbPnt() + 1)] if ix.IsDone() else []
+
+    def before(self, k):
+        """The other shapes that could lie in front of shape k somewhere."""
+        return [i for i in range(len(self.shapes)) if i != k and self.depth[i][1] > self.depth[k][0] + 1e-3]
+
+    def covered(self, p, k):
+        return any(self.hits(i, p) for i in self.before(k))
+
+    def unhidden(self, F, k, raster):
+        """The stretches of shape k's outline F that no other shape hides: each point nudged into the shape, hidden
+        where another shape's surface on the line through it lies nearer the eye than shape k's own."""
+        others = self.before(k)
+        if not others:
+            return F
+        A, lo, px = raster
+
+        def inside(p):
+            c, r = np.round((p - lo) / px).astype(int)
+            return 0 <= r < A.shape[0] and 0 <= c < A.shape[1] and A[r, c]
+        out = []
+        for f in F:
+            r = _resample(f, 1.0)
+            if len(r) < 2:
+                continue
+            seen = []
+            for p, t in zip(r, _tangents(r)):
+                n = np.array([-t[1], t[0]]) * 0.4
+                q = p + n if inside(p + n) else p - n
+                own = self.hits(k, q)
+                near = max(own) if own else -9e9
+                seen.append(not any(h and max(h) > near + 0.05 for h in (self.hits(i, q) for i in others)))
+            out += [r[a:b] for a, b in _runs(seen) if b - a >= 2]
+        return out
+
+
+def _bridged(vis, hid, k, rays):
+    """Shape k's visible lines joined end to end, a short hidden stretch whose both ends meet visible ends bridged where
+    no other shape covers it (there the mesh pass's visibility flickered)."""
+    vis = _join(vis, 1.0)
+    ends = [q[i] for q in vis for i in (0, -1)]
+    for h in hid:
+        if _length(h) <= BRIDGE_MM and all(min((np.hypot(*(h[i] - e)) for e in ends), default=9e9) <= MEET_MM for i in (0, -1)):
+            mid = _resample(h, max(_length(h) / 2, 1e-3))
+            if not rays.covered(mid[len(mid) // 2], k):
+                vis.append(h)
+    return _join(vis, MEET_MM)
+
+
+def _hlr_mesh(shapes, view, hidden):
+    """Hidden-line removal over meshes of copies of the shapes (see MESH_MM above): visible and hidden 2D polylines,
+    seams left out."""
+    from OCP.BRepBuilderAPI import BRepBuilderAPI_Copy
+    from OCP.BRepMesh import BRepMesh_IncrementalMesh
+    from OCP.HLRBRep import HLRBRep_PolyAlgo, HLRBRep_PolyHLRToShape
+    pa, copies = HLRBRep_PolyAlgo(), []
+    for s in shapes:
+        m = BRepBuilderAPI_Copy(s.wrapped).Shape()
+        BRepMesh_IncrementalMesh(m, MESH_MM, False, MESH_ANGLE, True)
+        pa.Load(m); copies.append(m)
+    pa.Projector(_projector(view)); pa.Update()
+    ph = HLRBRep_PolyHLRToShape(); ph.Update(pa)
+    seams = _seams(shapes, view, analytic=True)
+    rays = _Rays(shapes, view)
+    vis, hid = [], []
+    for k, (s, m) in enumerate(zip(shapes, copies)):
+        ev = _apart(_mesh_lines(ph.VCompound(m)) + _mesh_lines(ph.Rg1LineVCompound(m)), seams, 0.6)
+        eh = _apart(_mesh_lines(ph.HCompound(m)) + _mesh_lines(ph.Rg1LineHCompound(m)), seams, 0.6)
+        ov, oh = _mesh_lines(ph.OutLineVCompound(m)), _mesh_lines(ph.OutLineHCompound(m))
+        foot = []
+        if _curved(s):
+            F, raster = _footprint(m, view)
+            ov, oh, ev = _apart(ov, F, NEAR_MM), _apart(oh, F, NEAR_MM), _apart(ev, F, 1.0)
+            foot = [_ease(q, 1.0) for q in rays.unhidden(F, k, raster)]
+        vis += _bridged(ev, eh, k, rays) + [_ease(q, EASE_MM) for q in _bridged(ov, oh, k, rays)] + foot
+        hid += eh + oh
+    return [_thin(q, 0.05) for q in vis], ([_thin(q, 0.05) for q in _join(_dedupe(hid, vis), 1.0)] if hidden else [])
 
 
 def _edge_lines(c):
@@ -205,11 +490,14 @@ def _thin(P, tol):
 
 def hlr(shapes, view, hidden=False):
     """Visible (and hidden) edges seen from `view`, as 2D polylines in the view's frame (orthographic, origin at the
-    world origin; the same frame as to2d). Seams of spline surfaces are left out; outlines are always kept."""
+    world origin; the same frame as to2d). Seams of spline surfaces are left out; outlines are always kept. Shapes with
+    a spline face are drawn from meshes (see MESH_MM above)."""
     from build123d import Compound
-    comp = Compound(children=list(shapes))
-    d, up = VIEWS[view]
-    v_edges, h_edges, v_out, h_out = _hlr_kinds(comp, d, up, hidden)
+    shapes = list(shapes)
+    if any(_curved(s) for s in shapes):
+        vis, hid = _hlr_mesh(shapes, view, hidden)
+        return _drop_slivers(vis), hid
+    v_edges, h_edges, v_out, h_out = _hlr_kinds(Compound(children=shapes), view, hidden)
     seams = _seams(shapes, view)
     S = np.vstack(seams) if seams else None
 
@@ -225,6 +513,24 @@ def hlr(shapes, view, hidden=False):
             out.append(q)
         return out
     return edges(v_edges) + v_out, (edges(h_edges) + h_out if hidden else [])
+
+
+def _drop_slivers(lines, short=STRAY_MM, touch=2.0):
+    """Lines shorter than `short` that touch no other line (neither end within `touch` of another line's points; a
+    copy of the same line does not count)."""
+    pts = [np.asarray(q, float) for q in lines]
+    out = []
+
+    def along(q, r):                                 # every point of r lies on q
+        return float(np.hypot(*(r[:, None, :] - q[None, :, :]).transpose(2, 0, 1)).min(axis=1).max()) < 1.0
+    for i, q in enumerate(pts):
+        if _length(q) < short:
+            rest = [r for j, r in enumerate(pts) if j != i and not (_length(r) < short + 2 and (along(q, r) or along(r, q)))]
+            R = np.vstack(rest) if rest else np.zeros((0, 2))
+            if len(R) and all(float(np.hypot(*(R - q[k]).T).min()) > touch for k in (0, -1)):
+                continue
+        out.append(q)
+    return out
 
 
 def fit_scale(w, h, box_w, box_h):
@@ -252,6 +558,16 @@ class Page:
         ax.set_xlim(0, A3[0]); ax.set_ylim(0, A3[1]); ax.set_aspect('equal'); ax.axis('off')
         ax.add_patch(Rectangle((10, 10), A3[0] - 20, A3[1] - 20, fill=False, lw=0.6 * PT, ec=INK))
         self.product, self.number, self.total, self.title = product, number, total, title
+        self.style = dict(getattr(product, 'drawing_style', None) or {})
+        self.face = self.face_bold = None
+        if self.style.get('face'):
+            from matplotlib import font_manager
+            from matplotlib.font_manager import FontProperties
+            for k in ('face', 'face_bold'):
+                if self.style.get(k):
+                    font_manager.fontManager.addfont(self.style[k])
+            self.face = FontProperties(fname=self.style['face'])
+            self.face_bold = FontProperties(fname=self.style.get('face_bold', self.style['face']))
         self.head_y = 281.0
         self._title_block()
 
@@ -285,7 +601,15 @@ class Page:
     def text(self, x, y, s, size=MIN_PT, **kw):
         self.ax.text(x, y, s, fontsize=max(size, MIN_PT), zorder=kw.pop('zorder', 6), **kw)
 
-    def dim(self, a, b, off, text, size=MIN_PT):
+    def label(self, x, y, s, size=None, **kw):
+        """A view's name or a section's letter: bold, in the product's face and size when it sets them."""
+        size = size or self.style.get('label_pt', 9)
+        if self.face_bold is not None:
+            self.ax.text(x, y, s, fontsize=size, fontproperties=self.face_bold, zorder=6, **kw)
+        else:
+            self.text(x, y, s, size=size, fontweight='bold', **kw)
+
+    def dim(self, a, b, off, text, size=None):
         """A linear dimension between paper points a and b, its line `off` mm to the left of a->b."""
         a = np.array(a, float); b = np.array(b, float)
         d = b - a; L = np.linalg.norm(d)
@@ -302,8 +626,11 @@ class Page:
         ang = math.degrees(math.atan2(u[1], u[0]))
         if ang > 90.1 or ang < -89.9:
             ang += 180
+        size = size or MIN_PT
+        m = (a2 + b2) / 2 + n * (1.8 + 0.12 * (size - MIN_PT))
+        kw = {'fontproperties': self.face} if self.face is not None else {}
         self.ax.text(m[0], m[1], text, fontsize=size, ha='center', va='center', rotation=ang, zorder=6,
-                     bbox=dict(fc='white', ec='none', pad=0.2))
+                     bbox=dict(fc='white', ec='none', pad=0.2), **kw)
 
     def box_dims(self, lo, hi, w_mm, h_mm):
         """Overall width (above) and height (right) of a view drawn between paper points lo and hi."""
@@ -345,20 +672,21 @@ def sheet_ga(pg, parts, cut_x):
     tx = fx; ty = 60 - b['top'][0][1] / k
     pg.lines(views['top'], (tx, ty), k)
     f0 = (fx + b['front'][0][0] / k, fy + b['front'][0][1] / k); f1 = (fx + b['front'][1][0] / k, fy + b['front'][1][1] / k)
-    pg.dim((f0[0], f1[1]), (f1[0], f1[1]), 8, f'{W:.0f}')
-    pg.dim((f1[0], f0[1]), (f1[0], f1[1]), -8, f'{H:.0f}')
+    big = pg.style.get('dim_pt')                     # the product's figures, read off a slide as well as the sheet
+    pg.dim((f0[0], f1[1]), (f1[0], f1[1]), 8, f'{W:.0f}', big)
+    pg.dim((f1[0], f0[1]), (f1[0], f1[1]), -8, f'{H:.0f}', big)
     r0 = (rx + b['right'][0][0] / k, ry + b['right'][0][1] / k); r1 = (rx + b['right'][1][0] / k, ry + b['right'][1][1] / k)
-    pg.dim((r0[0], r1[1]), (r1[0], r1[1]), 8, f'{D:.0f}')
-    pg.text(f0[0], f0[1] - 7, 'FRONT', size=9, fontweight='bold')
-    pg.text(r0[0], r0[1] - 7, 'FROM THE RIGHT', size=9, fontweight='bold')
+    pg.dim((r0[0], r1[1]), (r1[0], r1[1]), 8, f'{D:.0f}', big)
+    pg.label(f0[0], f0[1] - 7, 'FRONT')
+    pg.label(r0[0], r0[1] - 7, 'FROM THE RIGHT')
     tb0 = (tx + b['top'][0][0] / k, ty + b['top'][0][1] / k)
-    pg.text(tb0[0], tb0[1] - 7, 'FROM ABOVE', size=9, fontweight='bold')
+    pg.label(tb0[0], tb0[1] - 7, 'FROM ABOVE')
     # the section plane, x = cut_x, seen from the right: a chain line with arrows pointing the way it is looked at
     sx = fx + to2d('front', [[cut_x, 0, 0]])[0][0] / k
     pg.ax.plot([sx, sx], [f0[1] - 4, f1[1] + 4], color=INK, lw=0.25 * PT, ls=(0, (8, 2, 1, 2)), zorder=5)
     for y, va in ((f1[1] + 4, 'bottom'), (f0[1] - 4, 'top')):
         pg.ax.annotate('', xy=(sx - 5, y), xytext=(sx, y), arrowprops=dict(arrowstyle='-|>', lw=0.3 * PT, color=INK, mutation_scale=6), zorder=5)
-        pg.text(sx - 7, y + (1.5 if va == 'bottom' else -1.5), 'A', size=9, fontweight='bold', ha='center', va=va)
+        pg.label(sx - 7, y + (1.5 if va == 'bottom' else -1.5), 'A', ha='center', va=va)
     pg.head(f'Scale 1:{k}. First angle: the view from the right is drawn to the left of the front, the view from above '
             'under it. A-A: the section on sheet 2.')
     return k
@@ -449,19 +777,21 @@ def sheet_exploded(pg, parts, numbers):
         anchors.append((n, ox + q[0] / k, oy + q[1] / k))
     mid = ox + (blo[0] + bhi[0]) / 2 / k
     left, right = max(28.0, ox + blo[0] / k - 22), min(392.0, ox + bhi[0] / k + 22)
+    br = pg.style.get('balloon_r', 3.6); pitch = max(9.0, 2 * br + 1.4)
+    bkw = {'fontproperties': pg.face} if pg.face is not None else {}
     for side, xb in ((-1, left), (1, right)):
         col = sorted([a for a in anchors if (a[1] < mid) == (side < 0)], key=lambda a: -a[2])
-        ys, prev = [], 272.0 + 9
+        ys, prev = [], 272.0 + pitch
         for _, _, y in col:
-            yb = min(max(y, 60.0), prev - 9.0)
+            yb = min(max(y, 60.0), prev - pitch)
             ys.append(yb); prev = yb
         if ys and ys[-1] < 60:                        # pushed off the bottom: lift the column
             ys = [y + (60 - ys[-1]) for y in ys]
         for (n, x, y), yb in zip(col, ys):
-            pg.ax.plot([x, xb - side * 3.6], [y, yb], color=INK, lw=0.18 * PT, zorder=5)
+            pg.ax.plot([x, xb - side * br], [y, yb], color=INK, lw=0.18 * PT, zorder=5)
             pg.ax.plot([x], [y], marker='o', ms=1.6, color=INK, zorder=5)
-            pg.ax.add_patch(Circle((xb, yb), 3.6, fc='white', ec=INK, lw=0.3 * PT, zorder=6))
-            pg.ax.text(xb, yb, str(n), fontsize=MIN_PT, ha='center', va='center', zorder=7)
+            pg.ax.add_patch(Circle((xb, yb), br, fc='white', ec=INK, lw=0.3 * PT, zorder=6))
+            pg.ax.text(xb, yb, str(n), fontsize=pg.style.get('balloon_pt', MIN_PT), ha='center', va='center', zorder=7, **bkw)
     pg.head(f'Scale 1:{k}, parts drawn apart. Balloons are the parts list\'s numbers (last sheet).')
 
 
@@ -687,7 +1017,7 @@ def sheet_solids(pg, items):
             pg.lines(hid, o, k, lw=0.2, ls=(0, (2.5, 1.5)))
             lo = (x, y_base); hi = (x + sz[v][0] / k, y_base + sz[v][1] / k)
             pg.box_dims(lo, hi, sz[v][0], sz[v][1])
-            pg.text(x, y_base - 6, label, size=8, fontweight='bold')
+            pg.label(x, y_base - 6, label, size=8)
             x = hi[0] + 34
         m = p.make
         what = (f'{m.material} print' + (f', {m.orient}' if getattr(m, 'orient', '') else '')) if isinstance(m, Printed) else f'{m.process}, {m.material}'

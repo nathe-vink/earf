@@ -41,7 +41,7 @@ SHOTS = os.path.join(ROOT, 'studio', 'shots', 'barkhorn')
 PRODUCT = 'studio/products/barkhorn.json'
 STUDY = os.path.join(HERE, 'out', 'study')
 DAY = {'covers': '2026-10-10', 'front': '2026-10-11', 'study': '2026-10-11', 'proposal': '2026-10-11',
-       'experiments': '2026-10-11', 'horn10': '2026-10-13'}   # where each set's renders live (a set first made that day; the rest 2026-10-12)
+       'experiments': '2026-10-11', 'horn10': '2026-10-13', 'lookbook2': '2026-10-13'}   # where each set's renders live (a set first made that day; the rest 2026-10-12)
 
 FRONT_CAM = {'position': [-0.78, -2.6, 1.0], 'target': [0.0, 0.0, 0.64], 'lens_mm': 66, 'level': True}
 THREE_Q = {'position': [1.45, -2.7, 1.45], 'target': [0.0, 0.08, 0.66], 'lens_mm': 60, 'level': True}
@@ -121,6 +121,10 @@ LOOKS = [('Bark', 'eucalyptus', 'eucalyptus-printed', 'eucalyptus', '#B7C3B4'),
 # round 10, the owner: "add some back or side shots of the horn": one speaker of each line turned on its own sweep, the
 # horn from the side (its mouth to the right) and from behind (the pod round the driver), framed on the horn
 HORN10 = {'position': [1.2, -2.5, 1.25], 'target': [0.0, 0.05, 1.06], 'lens_mm': 95, 'level': True}
+# round 11 (the critic of the look book: "Renders that are sharp at the size they are shown"): the look frames again at
+# twice the size the look book shows them, the strip of the frame a page shows (546 x 1100 of the 840 x 1100 frame)
+# rendered alone at 1080 x 2160, the lens longer by 840 / 546 so the framing holds
+LOOK2 = {**LOOK, 'lens_mm': round(68 * 840 / 545.9, 1)}
 HORN10_KEYS = ('autumn', 'green', 'turquoise')
 
 
@@ -258,6 +262,12 @@ SETS = {
         f'{line}: {label}': [F(f'look-{key}-on', flav, 'cover on', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c),
                                sky=STUDIO),
                              F(f'look-{key}-off', flav, 'cover off', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c),
+                               sky=STUDIO, hide=['cloth-disc'])]
+        for line, key, flav, label, c in LOOKS}),
+    'lookbook2': dict(title='EARF: the look book at twice the size', camera=LOOK2, rows={
+        f'{line}: {label}': [F(f'look-{key}-on', flav, 'cover on', product=PRESSED, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                               sky=STUDIO),
+                             F(f'look-{key}-off', flav, 'cover off', product=PRESSED, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
                                sky=STUDIO, hide=['cloth-disc'])]
         for line, key, flav, label, c in LOOKS}),
     'horn10': dict(title='EARF: the horn from the side and from behind', camera=HORN10, rows={

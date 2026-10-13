@@ -184,7 +184,8 @@ PRESET_DEFAULTS = {
     # `radius` (None: `deep`, deeper); `cloud_edge`, where along the folded noise the swirls start and are full (close
     # together: an onyx's banded veins). `print` (round 6): a bark preset's pattern printed on the face in translucent
     # inks (a hydrographic film, or tinted resin laid in the mould), `print_strength` of the way from clear to the
-    # pattern's colours, `print_scale` its size (> 1 smaller)
+    # pattern's colours, `print_scale` its size (> 1 smaller); a stone or a marble too (round 11), its settings changed by
+    # `print_params`
     'clear_resin': dict(color='#FFFFFF', deep='#9A9C96', radius=0.01, roughness=0.16, ior=1.5, milk=0.0, cloud=0.0,
                         cloud_m=0.07, vein=None, cloud_edge=(0.42, 0.85), print=None, print_strength=0.7, print_scale=1.0),
     # terrazzo, opaque (round 6, a stone look): chips about `chip` across in a `share` of the cells, each its colour from
@@ -920,13 +921,14 @@ def _pressed_sheet(nt, b, p, normal_in=None):
     nt.links.new(n, b.inputs['Normal'])
 
 
-def _folded(nt, node, scale_m, warp, stretch=1.0, seed=0.0, detail=5.0, spread=(0.3, 0.7)):
+def _folded(nt, node, scale_m, warp, stretch=1.0, seed=0.0, detail=5.0, spread=(0.3, 0.7), axis=0):
     """A slow noise folded on itself twice (domain warping, as a pour folds colours through each other), read in world
-    space: about 0..1 (the noise's narrow spread, `spread`, stretched), features `scale_m` across, drawn out along x by
-    `stretch`."""
+    space: about 0..1 (the noise's narrow spread, `spread`, stretched), features `scale_m` across, drawn out by
+    `stretch` along x (axis 0) or y (axis 1, front to back: a horn's veins run down its walls into the throat)."""
     geo = node('ShaderNodeNewGeometry')
     mp = node('ShaderNodeMapping')
-    mp.inputs['Scale'].default_value = (1.0 / (scale_m * stretch), 1.0 / scale_m, 1.0 / scale_m)
+    sc = [1.0 / scale_m] * 3; sc[axis] = 1.0 / (scale_m * stretch)
+    mp.inputs['Scale'].default_value = tuple(sc)
     mp.inputs['Location'].default_value = (seed, seed * 0.7, seed * 1.3)
     nt.links.new(geo.outputs['Position'], mp.inputs['Vector'])
     v = mp.outputs['Vector']
@@ -983,7 +985,7 @@ def _clear_resin(nt, b, p, normal_in=None):
     lp = node('ShaderNodeLightPath')
     tr = node('ShaderNodeBsdfTransparent'); g = 1.0 - 0.6 * p['milk']; tr.inputs['Color'].default_value = (g, g, g, 1.0)
     if p.get('print'):                               # the bark printed on the face: its colours tint what crosses it
-        ink = _print_colour(nt, p['print'], p['print_scale'])
+        ink = _print_colour(nt, p['print'], p['print_scale'], p.get('print_params'))
         tint = mix(p['print_strength'], hex_lin(p['color']), ink)
         nt.links.new(tint, I['Base Color'])
         nt.links.new(mix(1.0 - 0.6 * p['milk'], (0.0, 0.0, 0.0, 1.0), tint), tr.inputs['Color'])
@@ -995,13 +997,17 @@ def _clear_resin(nt, b, p, normal_in=None):
         nt.links.new(normal_in, I['Normal'])
 
 
-def _print_colour(nt, preset, scale):
-    """A bark preset's colour alone, as a socket: its shader built against a stand-in BSDF that is then removed, the
-    colour it fed kept (so a clear part can wear the bark as a translucent print)."""
+def _print_colour(nt, preset, scale, over=None):
+    """A bark's, a stone's or a marble's colour alone, as a socket: its shader built against a stand-in BSDF that is
+    then removed, the colour it fed kept (so a clear part can wear the pattern as a translucent print; barkhorn round
+    11: the Crag horns' stones cast in). `over`: the preset's settings changed, as a material's overrides change them."""
     stand = nt.nodes.new('ShaderNodeBsdfPrincipled')
-    q = {**PRESET_DEFAULTS[preset], 'scale': PRESET_DEFAULTS[preset].get('scale', 1.0) * scale, 'bump': 0.0, 'project': 'front'}
+    base = {**PRESET_DEFAULTS[preset], **(over or {})}
+    q = {**base, 'scale': base.get('scale', 1.0) * scale, 'bump': 0.0, 'project': 'front'}
     {'birch_bark': _birch_bark, 'eucalyptus_bark': _eucalyptus_bark, 'manzanita_bark': _eucalyptus_bark, 'snakebark_white': _eucalyptus_bark,
-     'snakebark_coral': _eucalyptus_bark, 'cherry_bark': _eucalyptus_bark, 'redvein_bark': _eucalyptus_bark}[preset](nt, stand, q)
+     'snakebark_coral': _eucalyptus_bark, 'cherry_bark': _eucalyptus_bark, 'redvein_bark': _eucalyptus_bark,
+     'malachite': _stone, 'rhodochrosite': _stone, 'lapis': _stone, 'travertine': _stone, 'turquoise': _stone,
+     'marbled_resin': _opaque_resin}[preset](nt, stand, q)
     col = next(l.from_socket for l in nt.links if l.to_socket == stand.inputs['Base Color'])
     nt.nodes.remove(stand)
     return col
@@ -1013,7 +1019,7 @@ def _opaque_resin(nt, b, p, normal_in=None):
     node, math_, mix, smooth = _nodes(nt)
     I = b.inputs
     if 'stops' in p:
-        f = _folded(nt, node, p['vein_m'], p['warp'], p['stretch'])
+        f = _folded(nt, node, p['vein_m'], p['warp'], p['stretch'], axis=p.get('stretch_axis', 0))
         r = node('ShaderNodeValToRGB'); cr = r.color_ramp; cr.interpolation = 'LINEAR'
         stops = sorted(p['stops'], key=lambda s_: s_[0])
         while len(cr.elements) < len(stops):
@@ -1036,7 +1042,7 @@ def _opaque_resin(nt, b, p, normal_in=None):
     nt.links.new(col, I['Base Color'])
     I['Roughness'].default_value = p['roughness']
     if 'Coat Weight' in I:
-        I['Coat Weight'].default_value = p['coat']; I['Coat Roughness'].default_value = 0.3
+        I['Coat Weight'].default_value = p['coat']; I['Coat Roughness'].default_value = p.get('coat_roughness', 0.3)
     n = normal_in
     if p['fibre'] > 0:
         n = _bump_noise(nt, 0.0015, p['fibre'], detail=2.0, normal_in=n)
