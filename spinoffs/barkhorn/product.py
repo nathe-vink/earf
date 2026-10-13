@@ -610,9 +610,16 @@ def disc_and_face(P, wz, port_o, alt):
 
 
 # each bark's colours: a pale panel and an off-white ring on birch, as photographed; a sage-grey panel and a cream ring on
-# eucalyptus. The discs: charcoal on birch, rust on eucalyptus (the owner's pick of round 3's recommendations)
-BIRCH = {'bark': 'birch_bark', 'panel': '#D8D5CD', 'ring': '#EEEAE2', 'cloth': '#DCD6C8', 'cork': '#3B2F28', 'disc': '#2E2C2A'}
-EUCALYPTUS = {'bark': 'eucalyptus_bark', 'panel': '#CBCFC4', 'ring': '#E8E2D4', 'cloth': '#6F7F66', 'cork': '#3B2F28', 'disc': '#9A4526'}
+# eucalyptus. The discs (round 7, the owner: "more neutral colors, depending on the cabinet, will help the cabinet and
+# horn pop more"; rounds 4 to 6 had charcoal on birch and rust on eucalyptus): a neutral that steps back into the
+# cabinet, oat on birch's pale ground, graphite on eucalyptus's busy one, so the cabinet and the horn carry the colour;
+# pewter on the frosted ice (the frost reads mid grey over the dark inside), mist on the cobalt marble's cool white. The
+# woofer's ring takes the disc's colour (round 7, the owner: "That white ring around the driver when there's no cover is
+# a little much"; off-white on birch and cream on eucalyptus before), so with the cover off the cone sits in the same
+# quiet circle
+OAT, GRAPHITE, CHARCOAL, PEWTER, MIST = '#CFC8BA', '#4B4844', '#2E2C2A', '#7A807E', '#C8CACA'
+BIRCH = {'bark': 'birch_bark', 'panel': '#D8D5CD', 'cloth': '#DCD6C8', 'cork': '#3B2F28', 'disc': OAT}
+EUCALYPTUS = {'bark': 'eucalyptus_bark', 'panel': '#CBCFC4', 'cloth': '#6F7F66', 'cork': '#3B2F28', 'disc': GRAPHITE}
 # the waveguide's resin (round 5, the owner's third notes: "something semitransparent", "or something entirely darker,
 # like black on birch and green on eucalyptus", "or more obvious texture if not monochromatic"). Each is a set of the
 # horn material's tokens, plus settings of its own ('materials'). The first of each bark is the proposal and both
@@ -630,7 +637,11 @@ HORNS = dict(
                                                     [0.56, '#9C9890'], [0.6, '#EEEBE4'], [1.0, '#EEEBE4']], 'vein_m': 0.32, 'warp': 0.9}}},
         'swirl': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#E2E0DA', 'horn_cloud': 1.0,
                   'materials': {'horn': {'vein': '#55524D', 'cloud_m': 0.2}}},
-        'milk': {'horn_preset': 'cast_resin', 'horn': '#F2EEE6', 'horn_deep': '#D9AE6E', 'horn_cloud': 0.3}},
+        'milk': {'horn_preset': 'cast_resin', 'horn': '#F2EEE6', 'horn_deep': '#D9AE6E', 'horn_cloud': 0.3},
+        # round 7, the owner: "try a yellow for the horn on birch to showcase what the tree looks like in the fall": the
+        # birch's autumn leaves, a clear horn tinted golden yellow (seen against blue it turns green, so it is shot warm)
+        'autumn': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#F2B705', 'horn_cloud': 0.0,
+                   'materials': {'horn': {'roughness': 0.08}}}},
     eucalyptus={
         'bottle': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#4C6A36', 'horn_cloud': 0.0},
         'clear': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#BCCB9A', 'horn_cloud': 0.0,
@@ -653,6 +664,7 @@ VARIANTS.update({
     'birch-pressed': {**VARIANTS['birch'], 'bark': 'pressed_birch_bark'},
     'eucalyptus-strips': {**VARIANTS['eucalyptus'], 'bark': 'pressed_eucalyptus_sheet'},
     'birch-dashes': {**VARIANTS['birch'], 'bark': 'pressed_birch_sheet'},
+    'birch-autumn-pressed': {**VARIANTS['birch-autumn'], 'bark': 'pressed_birch_bark'},
     # the material experiments of 2026-10-11: the waveguide in resin poured in layers (strata) or with recycled plastic
     # chips cast through it (terrazzo), in round 3's colours
     'eucalyptus-strata': {**EUCALYPTUS, 'horn_preset': 'frosted_strata', 'horn': '#DEE6D4', 'horn_deep': '#B9C9A9', 'horn_cloud': 0.0},
@@ -675,18 +687,18 @@ VARIANTS.update({
     # the cabinet in other plastics, still without wood: translucent cast acrylic as late-90s electronics were (smoke,
     # green, frosted ice), stone looks (terrazzo, cultured marble, a translucent green onyx), and whole speakers
     # marbled or swirled, the horn and the cabinet alike. 'bark' is the cabinet's material
-    'birch-y2k-smoke': {**BIRCH, **HORNS['birch']['smoked'], 'bark': 'clear_resin', 'ring': '#3A3936',
+    'birch-y2k-smoke': {**BIRCH, **HORNS['birch']['smoked'], 'bark': 'clear_resin', 'disc': CHARCOAL,
                         'materials': {'bark': {'deep': '#C9C7C2', 'radius': 0.025, 'roughness': 0.05}}},
-    'eucalyptus-y2k-green': {**EUCALYPTUS, **HORNS['eucalyptus']['bottle'], 'bark': 'clear_resin', 'ring': '#2F3A28',
+    'eucalyptus-y2k-green': {**EUCALYPTUS, **HORNS['eucalyptus']['bottle'], 'bark': 'clear_resin',
                              'materials': {'bark': {'deep': '#B2C9A2', 'radius': 0.025, 'roughness': 0.05}}},
-    'birch-y2k-ice': {**BIRCH, **HORNS['birch']['clear'], 'bark': 'clear_resin', 'ring': '#DDE2E4',
+    'birch-y2k-ice': {**BIRCH, **HORNS['birch']['clear'], 'bark': 'clear_resin', 'disc': PEWTER,
                       'materials': {'horn': {'roughness': 0.1}, 'bark': {'deep': '#E4E9EB', 'radius': 0.025, 'roughness': 0.35, 'milk': 0.15}}},
     'birch-stone-terrazzo': {**BIRCH, **HORNS['birch']['smoked'], 'bark': 'terrazzo'},
     'birch-stone-marble': {**BIRCH, **HORNS['birch']['smoked'], 'bark': 'marbled_resin',
                            'materials': {'bark': {'stops': [[0.0, '#F1EFEA'], [0.4, '#ECE9E3'], [0.46, '#C9C6BF'], [0.49, '#5C5955'],
                                                             [0.5, '#2A2826'], [0.52, '#8E8B85'], [0.58, '#E9E6E0'], [1.0, '#F3F1EC']],
                                                   'vein_m': 0.5, 'warp': 1.1, 'stretch': 1.6, 'roughness': 0.3}}},
-    'eucalyptus-stone-onyx': {**EUCALYPTUS, **HORNS['eucalyptus']['bottle'], 'bark': 'clear_resin', 'ring': '#E8E2D4',
+    'eucalyptus-stone-onyx': {**EUCALYPTUS, **HORNS['eucalyptus']['bottle'], 'bark': 'clear_resin',
                               'materials': {'bark': {'deep': '#DCDFB8', 'radius': 0.025, 'roughness': 0.1, 'milk': 0.12, 'cloud': 1.0,
                                                      'cloud_m': 0.13, 'cloud_edge': [0.47, 0.6], 'vein': '#3F4A1E'}}},
     'birch-marbled': {**BIRCH, **HORNS['birch']['marble'], 'bark': 'marbled_resin',
@@ -694,13 +706,66 @@ VARIANTS.update({
     'eucalyptus-marbled': {**EUCALYPTUS, **HORNS['eucalyptus']['marble'], 'bark': 'marbled_resin',
                            'materials': {'horn': HORNS['eucalyptus']['marble']['materials']['horn'],
                                          'bark': {**HORNS['eucalyptus']['marble']['materials']['horn'], 'vein_m': 0.4}}},
-    'birch-swirled': {**BIRCH, **HORNS['birch']['swirl'], 'bark': 'clear_resin', 'ring': '#3A3936',
+    'birch-swirled': {**BIRCH, **HORNS['birch']['swirl'], 'bark': 'clear_resin', 'disc': CHARCOAL,
                       'materials': {'horn': HORNS['birch']['swirl']['materials']['horn'],
                                     'bark': {'deep': '#D9D8D3', 'radius': 0.025, 'roughness': 0.06, 'cloud': 1.0, 'vein': '#5E5B56', 'cloud_m': 0.3}}},
     'eucalyptus-swirled': {**EUCALYPTUS, **HORNS['eucalyptus']['swirl'], 'bark': 'clear_resin',
                            'materials': {'horn': HORNS['eucalyptus']['swirl']['materials']['horn'],
                                          'bark': {'deep': '#E2D6AE', 'radius': 0.025, 'roughness': 0.06, 'cloud': 1.0, 'vein': '#4F6A2C',
                                                   'cloud_m': 0.3}}},
+})
+# round 7, the look book (the owner: "make the marble a white and cobalt instead of white and black"): the marbled
+# speaker's veins in cobalt through a cool white, the horn and the cabinet alike, and a mist disc
+COBALT = {'stops': [[0.0, '#F2F3F1'], [0.44, '#F2F3F1'], [0.47, '#9DB0DD'], [0.49, '#1D3C9A'], [0.51, '#1D3C9A'], [0.53, '#9DB0DD'],
+                    [0.56, '#F2F3F1'], [1.0, '#F2F3F1']], 'warp': 1.0}
+VARIANTS['birch-marbled-cobalt'] = {**BIRCH, **HORNS['birch']['marble'], 'horn': '#F2F3F1', 'horn_deep': '#1D3C9A', 'bark': 'marbled_resin',
+                                    'disc': MIST,
+                                    'materials': {'horn': {**COBALT, 'vein_m': 0.32}, 'bark': {**COBALT, 'vein_m': 0.5}}}
+# round 7, the owner: "We should also do a manzanita". Its smooth bark, deep red and polished, peeling in thin curls to a
+# fresh underbark of green, tan and orange (manzanita_bark, the eucalyptus's shader retuned). Its horn wears the bark's
+# pattern cast in, as the bark pair's do in the look book; or clear resin tinted ember red. The disc: graphite (the
+# ground is a deep red, mid-dark), the ring with it
+MANZANITA = {'bark': 'manzanita_bark', 'panel': '#D3C6B8', 'cloth': '#5B2B22', 'cork': '#3B2F28', 'disc': GRAPHITE}
+HORNS['manzanita'] = {
+    'cast': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#EFE6DF', 'horn_cloud': 0.0,
+             'materials': {'horn': {'print': 'manzanita_bark', 'print_strength': 0.85, 'roughness': 0.1}}},
+    'ember': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#8A3F2C', 'horn_cloud': 0.0}}
+VARIANTS.update({
+    'manzanita': {**MANZANITA, **HORNS['manzanita']['cast']},
+    'manzanita-ember': {**MANZANITA, **HORNS['manzanita']['ember']},
+    'manzanita-pressed': {**MANZANITA, **HORNS['manzanita']['cast'], 'bark': 'pressed_manzanita_bark'},
+})
+# round 7, the owner's photos of snakebark maples ("Lots of cool barks we can work with"): a striped maple ('Joe Witt',
+# chalk white with green pinstripes) and 'Phoenix' (coral, red veins, dark lenticels), their patterns cast into the
+# horn. The discs: mist on the striped maple's cool white, stone on the coral (a mid-light ground: graphite reads as a
+# hole in it)
+STONE = '#8E8981'
+SNAKEBARK_WHITE = {'bark': 'snakebark_white', 'panel': '#DCE0D8', 'cloth': '#6B784A', 'cork': '#3B2F28', 'disc': MIST}
+SNAKEBARK_CORAL = {'bark': 'snakebark_coral', 'panel': '#E8D2C2', 'cloth': '#B4432C', 'cork': '#3B2F28', 'disc': STONE}
+
+
+def cast_horn(preset, deep):
+    """A clear horn with a bark's pattern cast into it."""
+    return {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': deep, 'horn_cloud': 0.0,
+            'materials': {'horn': {'print': preset, 'print_strength': 0.85, 'roughness': 0.1}}}
+
+
+VARIANTS.update({
+    'snakebark-white': {**SNAKEBARK_WHITE, **cast_horn('snakebark_white', '#EEF0EA')},
+    'snakebark-white-pressed': {**SNAKEBARK_WHITE, **cast_horn('snakebark_white', '#EEF0EA'), 'bark': 'pressed_snakebark_white'},
+    'snakebark-coral': {**SNAKEBARK_CORAL, **cast_horn('snakebark_coral', '#F3E2D6')},
+    'snakebark-coral-pressed': {**SNAKEBARK_CORAL, **cast_horn('snakebark_coral', '#F3E2D6'), 'bark': 'pressed_snakebark_coral'},
+})
+# two more from the owner's photos: a Tibetan cherry (Prunus serrula: polished mahogany ringed by rough lenticel bands,
+# amber shards where it exfoliates; a graphite disc on its dark ground) and the redvein maple 'Albolimbatum' (olive green
+# with red veins, white streaks and diamond scars; stone on its mid ground), their patterns cast into the horn
+CHERRY = {'bark': 'cherry_bark', 'panel': '#D6C7BE', 'cloth': '#5A2A20', 'cork': '#3B2F28', 'disc': GRAPHITE}
+REDVEIN = {'bark': 'redvein_bark', 'panel': '#D2D6C6', 'cloth': '#6F7B3C', 'cork': '#3B2F28', 'disc': STONE}
+VARIANTS.update({
+    'cherry': {**CHERRY, **cast_horn('cherry_bark', '#F0E2D8')},
+    'cherry-pressed': {**CHERRY, **cast_horn('cherry_bark', '#F0E2D8'), 'bark': 'pressed_cherry_bark'},
+    'snakebark-redvein': {**REDVEIN, **cast_horn('redvein_bark', '#E6EADB')},
+    'snakebark-redvein-pressed': {**REDVEIN, **cast_horn('redvein_bark', '#E6EADB'), 'bark': 'pressed_redvein_bark'},
 })
 
 
@@ -720,7 +785,7 @@ PRODUCT = Product(
                'grille-timber': {'preset': 'birch', 'color': '#8E6E4E', 'roughness': 0.55},
                'cork': {'preset': 'cork', 'color': '$cork'},
                'panel': {'preset': 'satin_paint', 'color': '$panel', 'roughness': 0.6, 'specular': 0.3},
-               'ring': {'preset': 'satin_paint', 'color': '$ring', 'roughness': 0.45, 'specular': 0.4},
+               'ring': {'preset': 'satin_paint', 'color': '$disc', 'roughness': 0.45, 'specular': 0.4},     # the disc's colour
                'horn': {'preset': '$horn_preset', 'color': '$horn', 'absorb': '$horn_deep', 'deep': '$horn_deep', 'cloud': '$horn_cloud',
                         'cloud_m': 0.12},
                'rod': {'preset': 'metal', 'color': '#C9C9C6', 'roughness': 0.3},

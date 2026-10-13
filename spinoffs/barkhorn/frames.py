@@ -24,7 +24,9 @@ Sets:
 - pick5 (round 5): where round 5 points, both barks;
 - printed (round 6): the horn printed with its bark's pattern in translucent inks, close to and on the speaker;
 - cabinets (round 6): the cabinet in other plastics, without wood: translucent acrylic, stone looks, marble and swirl;
-- pick6 (round 6): the line, without wood, its two ports, from three-quarter and from the front.
+- pick6 (round 6): the line, without wood, its two ports, from three-quarter and from the front;
+- discs (round 7): the cloth disc in neutral colours on each cabinet, so the cabinet and the horn carry the colour;
+- lookbook (round 7): six speakers for the look book, each on a sweep in its own colour, the cover on and off.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -50,9 +52,12 @@ BEHIND = {'position': [-1.0, -3.2, 1.45], 'target': [0.0, -1.2, 0.72], 'lens_mm'
 TURNED = dict(position=[0.0, -1.2, 0], rotate_z=180, shift=-1.2)
 
 
-def F(name, bark, label, options=(), materials=None, product=PRODUCT, camera=None, lights=None, at=None, size=None):
+def F(name, bark, label, options=(), materials=None, product=PRODUCT, camera=None, lights=None, at=None, size=None, stage=None,
+      hide=(), sky=None):
+    """One frame. `stage`: a set of its own in place of the room (a sweep), with its `sky`; `hide`: parts left out (the
+    cloth disc)."""
     return dict(name=name, bark=bark, label=label, options=list(options), materials=materials or {}, product=product,
-                camera=camera, lights=lights or {}, at=at, size=size)
+                camera=camera, lights=lights or {}, at=at, size=size, stage=stage, hide=list(hide), sky=sky)
 
 
 def form_product(form):
@@ -79,6 +84,34 @@ PRESSED = 'studio/products/barkhorn-pressed.json'      # pressed.py's build
 GLOW5 = {'glow': {**GLOW['glow'], 'transmission': False}}
 # looking into the horn from in front and a little above, at the throat
 THROAT = {'position': [0.18, -1.15, 1.22], 'target': [0.0, 0.25, 1.1], 'lens_mm': 60, 'level': True}
+# round 7, the owner: "I'm not sure I like the rust disc anymore. I think more neutral colors, depending on the cabinet,
+# will help the cabinet and horn pop more." Warm neutrals, dark to light; on eucalyptus the middle one is the bark's
+# own grey layer
+DISCS_BIRCH = [('charcoal', 'charcoal (round 6\'s)', '#2E2C2A'), ('graphite', 'graphite', '#4B4844'), ('stone', 'stone', '#8E8981'),
+               ('oat', 'oat', '#CFC8BA')]
+DISCS_EUCALYPTUS = [('charcoal', 'charcoal', '#2E2C2A'), ('graphite', 'graphite', '#4B4844'), ('bark-grey', 'the bark\'s grey', '#7C776F'),
+                    ('oat', 'oat', '#CFC8BA')]
+# the look book (round 7, the owner: "a little look book that I can share out. For each cabinet, I want a version with the
+# driver cover on and off. Each page should be designed to accent the speaker being showcased"): each speaker on a seamless
+# sweep in a colour drawn from it, from three-quarter, with its cloth disc on and off. The studio's ambient is a neutral
+# grey (the default sky's blue tints an open sweep)
+LOOK = {'position': [1.2, -2.5, 1.0], 'target': [0.0, 0.05, 0.52], 'lens_mm': 68, 'level': True}
+STUDIO = {'kind': 'gradient', 'zenith': '#C4C2BE', 'horizon': '#CFCDC8', 'ground': '#5A5650', 'strength': 0.7}
+# the bark pair wear their bark's pattern in the horn, cast in (the owner: "And yes, cast-in"; "Why did you get rid of the
+# birch and eucalyptus cast-in horns?"), drawn as round 6's printed horns, which show the same artwork
+LOOKS = [('eucalyptus', 'eucalyptus-printed', 'eucalyptus', '#B7C3B4'), ('birch', 'birch-printed', 'birch', '#E6CDB8'),
+         ('autumn', 'birch-autumn-pressed', 'autumn birch', '#BDB5A9'),
+         ('manzanita', 'manzanita-pressed', 'manzanita', '#D8C69E'), ('striped', 'snakebark-white-pressed', 'striped maple', '#4F5B3A'),
+         ('phoenix', 'snakebark-coral-pressed', 'phoenix maple', '#2F5A5C'), ('cherry', 'cherry-pressed', 'tibetan cherry', '#C3CDCB'),
+         ('redvein', 'snakebark-redvein-pressed', 'redvein maple', '#C99A84'),
+         ('green', 'eucalyptus-y2k-green', 'green acrylic', '#D9E4D3'), ('smoke', 'birch-y2k-smoke', 'smoke', '#C9C5D3'),
+         ('ice', 'birch-y2k-ice', 'frosted ice', '#CFDCE4'), ('cobalt', 'birch-marbled-cobalt', 'cobalt marble', '#2F4FA8')]
+
+
+def sweep(color):
+    return {'kind': 'sweep', 'color': color, 'width': 6.0, 'front': 5.0, 'depth': 1.5, 'radius': 1.2, 'height': 4.0}
+
+
 SHELLS = {'birch': [('birch', 'smoked: clear resin tinted dark (the proposal)'), ('birch-clear', 'clear, a little warm'),
                     ('birch-black', 'black, opaque'), ('birch-marble', 'marbled black and white'),
                     ('birch-swirl', 'smoke swirled through clear')],
@@ -195,12 +228,21 @@ SETS = {
             F('cab-swirled-birch', 'birch-swirled', 'smoke swirled through clear', product=PRESSED, lights=GLOW5),
             F('cab-swirled-eucalyptus', 'eucalyptus-swirled', 'green swirled through amber', product=PRESSED, lights=GLOW5)]}),
     'pick6': dict(title='barkhorn: the line, without wood', rows={
-        'the pair': [F('pick6-birch', 'birch-pressed', 'birch: smoked resin, charcoal disc', product=PRESSED, camera=RIGHT_Q, lights=GLOW5),
-                     F('pick6-eucalyptus', 'eucalyptus-pressed', 'eucalyptus: bottle-green resin, rust disc', product=PRESSED, camera=RIGHT_Q,
-                       lights=GLOW5)],
+        'the pair': [F('pick6-birch', 'birch-pressed', 'birch: smoked resin, oat disc', product=PRESSED, camera=RIGHT_Q, lights=GLOW5),
+                     F('pick6-eucalyptus', 'eucalyptus-pressed', 'eucalyptus: bottle-green resin, graphite disc', product=PRESSED,
+                       camera=RIGHT_Q, lights=GLOW5)],
         'from the front: a port in each corner': [
             F('pick6-front-birch', 'birch-pressed', 'birch', product=PRESSED, camera=FRONT_CAM, lights=GLOW5),
             F('pick6-front-eucalyptus', 'eucalyptus-pressed', 'eucalyptus', product=PRESSED, camera=FRONT_CAM, lights=GLOW5)]}),
+    'discs': dict(title='barkhorn: the disc in neutral colours', camera=RIGHT_Q, rows={
+        bark: [F(f'disc-{bark}-{name}', f'{bark}-pressed', label, product=PRESSED, lights=GLOW5, materials={'disc': {'color': hx}})
+               for name, label, hx in options]
+        for bark, options in (('birch', DISCS_BIRCH), ('eucalyptus', DISCS_EUCALYPTUS))}),
+    'lookbook': dict(title='barkhorn: the look book', camera=LOOK, rows={
+        label: [F(f'look-{key}-on', flav, 'cover on', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c), sky=STUDIO),
+                F(f'look-{key}-off', flav, 'cover off', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c), sky=STUDIO,
+                  hide=['cloth-disc'])]
+        for key, flav, label, c in LOOKS}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],
@@ -220,6 +262,8 @@ def shot_for(frame, set_camera):
                 L[k] = [L[k][0], L[k][1] + at.get('shift', 0.0), L[k][2]]
     if frame['options']:
         inst['options'] = frame['options']
+    if frame.get('hide'):
+        inst['hide'] = frame['hide']
     s['product'] = {'def': frame['product'], 'flavour': frame['bark'], 'instances': [inst]}
     s['camera'] = copy.deepcopy(frame['camera'] or set_camera)
     s['size'] = frame['size'] or [760, 1000]
@@ -227,6 +271,10 @@ def shot_for(frame, set_camera):
     if frame['materials']:
         s.setdefault('materials', {}).update(frame['materials'])
     s['lights'].update(copy.deepcopy(frame['lights']))
+    if frame.get('stage'):
+        s['set'] = copy.deepcopy(frame['stage'])
+    if frame.get('sky'):
+        s['sky'] = copy.deepcopy(frame['sky'])
     return s
 
 

@@ -4,10 +4,101 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
 it). There are two finishes, birch bark and eucalyptus bark, each with a horn in its bark's colours.
 
-Status: **concept, round 6**. The proportions follow the photograph. The sizes are scaled from its turntable (about
+Status: **concept, round 7**. The proportions follow the photograph. The sizes are scaled from its turntable (about
 450 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), smoked resin on birch and bottle green on
-eucalyptus, the solid neck round the throat, and a port in each bottom corner (round 6).
+eucalyptus, the solid neck round the throat, and a port in each bottom corner (round 6). The disc takes a neutral
+that suits each cabinet, the woofer's ring the same colour, and a patterned horn has its pattern cast in, not printed
+(round 7; the discs proposed: oat on birch, graphite on eucalyptus). Five more barks join in round 7: manzanita, two
+snakebark maples, a Tibetan cherry and the redvein maple.
+
+## Round 7: the owner's note of 2026-10-12 (night)
+
+| the note | what changed |
+|---|---|
+| "I'm not sure I like the rust disc anymore. I think more neutral colors, depending on the cabinet, will help the cabinet and horn pop more." | **The disc in a neutral that suits each cabinet**, chosen from a study of four on each bark (below). Proposed: **oat on birch, graphite on eucalyptus**. Rust is gone from every flavour. Round 6's renders of the line, the printed horns and the other cabinets are redone with the new discs. |
+| "Why do the horns need printing? Why can't they be resin cast like the body?" | They don't. The horn is cast in resin either way; the print was only one way to put the bark's pattern into it. The other is to cast the pattern in: tinted resin laid into the open mould in the bark's patches, then the clear horn poured behind it (round 6's second method). It needs no film or coating, so it can't wear off, but it is hand work and no two horns match. The line's cabinet is pressed, not cast: coloured flakes laid in the pattern and pressed into flat, opaque sheet, which can't make the horn's deep, see-through shape. |
+| "And yes, cast-in." | **Decided**: the bark horns have their pattern cast in by hand. The samples' hydro-dip proof gives way to a cast-in test tile, from the same resin and tints as the step wedge. |
+| "That white ring around the driver when there's no cover is a little much." | **The woofer's ring takes the disc's colour** (oat on birch, graphite on eucalyptus, and so on), so with the cover off the cone sits in the same quiet circle the cover makes. The look book shows it. |
+| "Why did you get rid of the birch and eucalyptus cast-in horns?" | I read "yes, cast-in" as how a patterned horn would be made, and gave the look book round 6's smoked and bottle-green horns. The birch and eucalyptus pages now wear their bark's pattern in the horn, cast in (drawn as round 6's printed horns, the same artwork; a cast-in horn's edges come out a little softer). The line's flavours (`birch`, `eucalyptus` and the pick6 renders) still carry smoked and bottle green until the owner says otherwise. |
+| "We should also do a manzanita." | **A third bark**: manzanita's smooth bark, deep red and polished, peeling in thin curls to a fresh underbark of green, tan and orange (`manzanita_bark`, the eucalyptus's shader with its layers retuned, and `pressed_manzanita_bark` for the line). Its horn wears the bark's pattern cast in (`manzanita`, `manzanita-pressed`; `manzanita-ember` tints it red instead), with a graphite disc and ring. It is in the look book on a sand backdrop. |
+| "Lots of cool barks we can work with" (photos of two snakebark maples) | **Two snakebark maples**: a striped maple after *Acer tegmentosum* 'Joe Witt' (chalk white with fine green pinstripes) and one after *Acer* × *conspicuum* 'Phoenix' (coral, red veins and a scatter of dark lenticels). `snakebark_white` and `snakebark_coral` are the eucalyptus's shader again, with flat layers of fine stripes, plus pressed versions for the line; the flavours `snakebark-white` and `snakebark-coral` (and `-pressed`) cast each pattern into the horn, with a mist disc on the white and stone on the coral. Both are in the look book, on deep olive and deep teal. |
+| (photos of a Tibetan cherry and the redvein maple 'Albolimbatum') | **Two more**: a Tibetan cherry after *Prunus serrula* (polished mahogany ringed by rough lenticel bands, amber shards where it exfoliates: the first bark whose layers run round the trunk, wide and short) and the redvein maple after *Acer rufinerve* 'Albolimbatum' (olive green with red veins, white streaks and diamond scars). `cherry_bark` and `redvein_bark` with pressed versions; the flavours `cherry` and `snakebark-redvein` (and `-pressed`) cast each pattern into the horn, with a graphite disc on the cherry and stone on the redvein. Both are in the look book, on fog and terracotta. |
+| "Also might be cool to try a yellow for the horn on birch to showcase what the tree looks like in the fall." | **Autumn birch**: the birch with a clear horn tinted golden yellow, its leaves in the fall (`birch-autumn`, `birch-autumn-pressed`). Seen against a blue backdrop the yellow horn turns green where the backdrop shows through it, so it is shot on a warm grey. In the look book beside the birch. |
+| "I like when the driver covers are the same color for the monochromatic options, like the green and ice and black." | **Kept as the rule**: on a cabinet of one colour (the green acrylic, the frosted ice, the smoke) the cover matches the cabinet, so the front reads as one colour (graphite, pewter and charcoal, as rendered). |
+| "The words in the look book are a little lame ... It would be cool to have a more structured design system ... Something that could come as a sticker representative of the specific speaker style. A rudimentary but intuitive visual language. Minimal. Bold. Direct." | **The look book rebuilt** on a sticker system (below): one die-cut sticker per speaker from one grammar, every page on one template, the copy cut to plain specifications. |
+| "I want to create a little look book that I can share out. For each cabinet, I want a version with the driver cover on and off. Each page should be designed to accent the speaker being showcased. ... make the marble a white and cobalt instead of white and black." | **The look book** (below): eucalyptus, birch, green acrylic, frosted ice, smoke and a new white-and-cobalt marble, each on a seamless backdrop in its own colour, with the cover on and off. |
+
+![The disc in neutral colours](../../renders/2026-10-12/barkhorn/discs.png)
+
+The study puts four warm neutrals on each bark, dark to light, on the line (pressed HDPE, the smoked and bottle-green
+horns). The neutral that helps is the one closest in value to the cabinet's own ground. Then the disc reads as part of
+the cabinet, not as a third shape beside the cabinet and the horn:
+
+- **Birch: oat** (`#CFC8BA`). It sits tone on tone with the white bark, a step darker, so the cabinet reads as one pale
+  block and the smoked horn is the only dark shape. Charcoal (rounds 4 to 6) and graphite each make a second dark shape
+  that competes with the horn. Stone, the mid grey, reads flat.
+- **Eucalyptus: graphite** (`#4B4844`). It reads as the woofer's shadow, so the strips run round it and carry the
+  colour, with the bottle-green horn above. Oat is a bright target on the busy bark, and charcoal reads as a hole. The
+  bark's own grey (`#7C776F`) comes close, but looks flat against the strips' colours.
+
+![The line with its new discs](../../renders/2026-10-12/barkhorn/pick6.png)
+
+The same rule picks the disc on round 6's other cabinets, and their renders below now show it:
+
+| cabinet | its ground | disc |
+|---|---|---|
+| birch; terrazzo, cultured marble, marbled black and white | warm white | oat `#CFC8BA` |
+| frosted ice acrylic | cool mid grey (the frost over the dark inside) | pewter `#7A807E` |
+| white-and-cobalt marble (the look book's) | cool white | mist `#C8CACA` |
+| manzanita | deep red, mid-dark | graphite `#4B4844` |
+| striped maple | cool white with green stripes | mist `#C8CACA` |
+| Phoenix maple | coral, mid-light | stone `#8E8981` |
+| Tibetan cherry | mahogany, dark | graphite `#4B4844` |
+| redvein maple | olive green, mid | stone `#8E8981` |
+| eucalyptus; marbled in the bark's colours, green acrylic, green onyx, green swirled through amber | busy, or dark and coloured | graphite `#4B4844` |
+| smoked acrylic, smoke swirled through clear | near black | charcoal `#2E2C2A`, as before |
+
+The colour is each flavour's `disc` token (`product.py`), so any colour from the study is a one-line change. The
+frosted ice first had mist, a pale grey: the frost renders mid grey with the dark inside showing through it, so mist
+was the brightest thing on the cabinet. Pewter sits into it.
+
+### The look book
+
+[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) is a deck to share: twelve speakers, each with the
+cover on and off. Each stands on a seamless backdrop in a colour drawn from it: gum-leaf sage for the eucalyptus, peeled
+apricot for the birch, an overcast warm grey for the autumn birch, chaparral sand for the manzanita, deep olive for the
+striped maple, deep teal for the Phoenix maple, fog for the Tibetan cherry, terracotta for the redvein maple, pale mint
+for the green acrylic, lavender grey for the smoke, ice blue for the frosted ice, and deep cobalt for the marble. The
+seven barks wear their pattern in the horn, cast in clear resin, and the autumn birch a golden yellow one; the acrylic
+speakers keep their tinted horns. The marble is new: the marbled speaker's veins in cobalt through a cool white, the
+horn and the cabinet alike (`birch-marbled-cobalt`).
+
+Every page follows one template. A panel holds the speaker's sticker, its number and name, and four plain rows:
+surface, cabinet, horn and cover. The two photographs run full height beside it. The panel is a gradient sampled down
+the edge of the first photograph, so it runs on into the backdrop without a seam, and each page uses one ink, dark or
+light, whichever reads on its backdrop. The type is Instrument Sans and IBM Plex Mono. The cover is the twelve stickers
+in a row, and the last page gives the specification they share.
+
+![The look book's frames](../../renders/2026-10-12/barkhorn/lookbook.png)
+
+### The stickers
+
+![The twelve stickers](../../renders/2026-10-12/barkhorn/stickers.png)
+
+One die-cut sticker for each speaker, all drawn from one grammar (`stickers.py` writes them to `stickers/`). The
+sticker is the speaker reduced to its parts, in proportion: the horn (a rounded rectangle), its throat (a dark dot),
+the cabinet, the cover (a disc 437 across, its centre 45.7 % down) and the two ports. A style changes three things and
+nothing else:
+
+| part | how it varies |
+|---|---|
+| cabinet | the surface as a pattern code: bands (eucalyptus), dashes (birch), patches (manzanita), lines (the maples), rings (the cherry), veins (the marble), or a flat tint with its frame showing (the acrylics) |
+| horn | the cabinet's pattern, lightened, where the pattern is cast in; otherwise its tint (golden yellow, bottle green, smoked, clear) |
+| cover | its colour, as the speaker has it |
+
+Each sits on a white die-cut edge with a hairline round it, so it reads on any ground. A new style needs a new
+pattern code and three colours.
 
 ## Round 6: the owner's notes of 2026-10-12 (evening)
 
@@ -488,8 +579,8 @@ These are renders of the idea. The materials are procedural (`pressed_eucalyptus
 
 | | shell | front panel | ring | waveguide |
 |---|---|---|---|---|
-| birch | paper birch: chalk white, dark lenticels in bands, a few scars, apricot where it has peeled | faced in its bark, under a charcoal cloth disc `#2E2C2A` (round 4; the paint behind, pale warm grey `#D8D5CD`) | off-white `#EEEAE2` | milk resin `#F2EEE6`, warming to honey `#D9AE6E` where thick, faintly clouded (round 4) |
-| eucalyptus | a smooth-barked gum after rain: underbark streaked green, olive, yellow and orange under strips of straw, rust, grey and brown, wet | faced in its bark, under a rust cloth disc `#9A4526` (round 4; the paint behind, pale sage grey `#CBCFC4`) | cream `#E8E2D4` | cream resin `#EFE5D0` clouded with amber `#D6A04E`, the photograph's own (round 4; round 2's sage read pastel) |
+| birch | paper birch: chalk white, dark lenticels in bands, a few scars, apricot where it has peeled | faced in its bark, under an oat cloth disc `#CFC8BA` (round 7; charcoal `#2E2C2A` in rounds 4 to 6; the paint behind, pale warm grey `#D8D5CD`) | the disc's oat (round 7; off-white `#EEEAE2` before) | milk resin `#F2EEE6`, warming to honey `#D9AE6E` where thick, faintly clouded (round 4) |
+| eucalyptus | a smooth-barked gum after rain: underbark streaked green, olive, yellow and orange under strips of straw, rust, grey and brown, wet | faced in its bark, under a graphite cloth disc `#4B4844` (round 7; rust `#9A4526` in rounds 4 to 6; the paint behind, pale sage grey `#CBCFC4`) | the disc's graphite (round 7; cream `#E8E2D4` before) | cream resin `#EFE5D0` clouded with amber `#D6A04E`, the photograph's own (round 4; round 2's sage read pastel) |
 
 ![The birch, three-quarter](../../renders/2026-10-10/barkhorn/birch-v3.png)
 ![The eucalyptus, three-quarter](../../renders/2026-10-10/barkhorn/eucalyptus-v3.png)
@@ -581,19 +672,21 @@ stay open, as does the weld rod. There are 15 drawing sheets.
 The shots are in `studio/shots/barkhorn/`:
 
 - `front`: the pair, as photographed;
-- `birch` and `eucalyptus`;
+- `birch` and `eucalyptus`, and round 7's `manzanita`, `snakebark` and `cherry`;
 - `eucalyptus-detail`: the bark close to;
 - `back`: the waveguide from behind;
 - one folder per comparison sheet, one shot per frame: `covers/` (round 2), `front/`, `study/`, `experiments/`,
   `proposal/` (round 3), `horn/`, `resin/`, `pressed/` and `pick/` (round 4), `horn5/`, `shells/`, `woodfree/` and
-  `pick5/` (round 5), `pick6/`, `printed/` and `cabinets/` (round 6).
+  `pick5/` (round 5), `pick6/`, `printed/` and `cabinets/` (round 6), `discs/` and `lookbook/` (round 7).
 
 ## Open questions for the owner
 
-1. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
+1. **The disc.** Oat on birch and graphite on eucalyptus, or another neutral from the study?
+2. **The bark horns for the line.** Do the cast-in bark horns replace smoked and bottle green on the birch and
+   eucalyptus everywhere (the default flavours and pick6), and on clear resin or on round 6's light smoke and green?
+3. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
    the commercial benchmarks, a resin step wedge and acrylic tints? And send the horn for casting quotes?
-2. **The printed horn.** Worth a hydro-dip proof (about $140)?
-3. **Other cabinets.** Develop any of the translucent, stone, marble or swirl speakers, as editions beside the bark
+4. **Other cabinets.** Develop any of the translucent, stone, marble or swirl speakers, as editions beside the bark
    line?
-4. **A name.** barkhorn is a placeholder.
-5. **Price.** [PAIR PRICE] stays open.
+5. **A name.** barkhorn is a placeholder.
+6. **Price.** [PAIR PRICE] stays open.

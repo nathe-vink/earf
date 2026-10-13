@@ -106,6 +106,72 @@ PRESET_DEFAULTS = {
                                     wander=1.0, torn=0.3, edge=0.8, streak=0.1, wet=0.6, scale=1.0, bump=0.0,
                                     plastic=True, flake=0.009, mottle=0.07, specks=('#2A2622', 0.04, 0.003),
                                     roughness=0.36, coat=0.15, wax=0.12, sheets=True),
+    # a manzanita (barkhorn round 7): smooth bark, deep red and polished, peeling in thin curls; under it the fresh
+    # underbark in green, tan and orange, and new bark reddening at the patches' edges. The eucalyptus's shader, its
+    # layers retuned: the old red covers most of the face, the patches shorter and broader than a gum's strips
+    'manzanita_bark': dict(base=['#8A9A55', '#B0A862', '#C8955A', '#C9743E'],
+                           layers=[dict(color=['#9E4428', '#B4583A'], cover=0.30, w=0.10, l=0.35),
+                                   dict(color=['#4A1512', '#682119'], cover=0.74, w=0.30, l=0.55),
+                                   dict(color=['#3A140E', '#521D14'], cover=0.06, w=0.025, l=0.12)],
+                           wander=0.8, torn=0.25, edge=1.0, streak=0.06, wet=0.45, scale=1.0, bump=0.35),
+    'pressed_manzanita_bark': dict(base=['#8A9A55', '#B0A862', '#C8955A', '#C9743E'],
+                                   layers=[dict(color=['#9E4428', '#B4583A'], cover=0.30, w=0.10, l=0.35),
+                                           dict(color=['#4A1512', '#682119'], cover=0.74, w=0.30, l=0.55),
+                                           dict(color=['#3A140E', '#521D14'], cover=0.06, w=0.025, l=0.12)],
+                                   wander=0.8, torn=0.25, edge=1.0, streak=0.06, wet=0.4, scale=1.0, bump=0.0,
+                                   plastic=True, flake=0.009, mottle=0.06, specks=('#2A1A14', 0.04, 0.003),
+                                   roughness=0.36, coat=0.15, wax=0.12, sheets=True),
+    # snakebark maples (barkhorn round 7, the owner's photos: "Lots of cool barks we can work with"): fine wavy
+    # pinstripes up a smooth bark, the eucalyptus's shader with flat layers (no lifted edges): a striped maple ('Joe
+    # Witt': chalk white, green stripes) and 'Phoenix' (coral, red veins, a scatter of dark lenticels, drawn as short
+    # patches wider than they are long)
+    'snakebark_white': dict(base=['#E4E8E1', '#D9E0D6', '#EDEFE9', '#D2DACD'],
+                            layers=[dict(color=['#6B784A', '#859164'], cover=0.30, w=0.005, l=0.12),
+                                    dict(color=['#4C5838', '#5F6B46'], cover=0.10, w=0.003, l=0.08)],
+                            wander=0.5, torn=0.3, edge=0.0, streak=0.04, wet=0.1, scale=1.0, bump=0.2),
+    'snakebark_coral': dict(base=['#E2864C', '#EC985A', '#F1A96A', '#DD7740'],
+                            layers=[dict(color=['#B4432C', '#C6563A'], cover=0.25, w=0.004, l=0.10),
+                                    dict(color=['#3C2E2A', '#524038'], cover=0.025, w=0.010, l=0.003)],
+                            wander=0.5, torn=0.25, edge=0.0, streak=0.05, wet=0.15, scale=1.0, bump=0.2),
+    'pressed_snakebark_white': dict(base=['#E4E8E1', '#D9E0D6', '#EDEFE9', '#D2DACD'],
+                                    layers=[dict(color=['#6B784A', '#859164'], cover=0.30, w=0.005, l=0.12),
+                                            dict(color=['#4C5838', '#5F6B46'], cover=0.10, w=0.003, l=0.08)],
+                                    wander=0.5, torn=0.3, edge=0.0, streak=0.04, wet=0.1, scale=1.0, bump=0.0,
+                                    plastic=True, flake=0.009, mottle=0.03, specks=('#7A846A', 0.03, 0.003),
+                                    roughness=0.36, coat=0.15, wax=0.15, sheets=True),
+    'pressed_snakebark_coral': dict(base=['#E2864C', '#EC985A', '#F1A96A', '#DD7740'],
+                                    layers=[dict(color=['#B4432C', '#C6563A'], cover=0.25, w=0.004, l=0.10),
+                                            dict(color=['#3C2E2A', '#524038'], cover=0.025, w=0.010, l=0.003)],
+                                    wander=0.5, torn=0.25, edge=0.0, streak=0.05, wet=0.15, scale=1.0, bump=0.0,
+                                    plastic=True, flake=0.009, mottle=0.04, specks=('#5A3A2E', 0.03, 0.003),
+                                    roughness=0.36, coat=0.15, wax=0.12, sheets=True),
+    # two more from the owner's photos: a Tibetan cherry (Prunus serrula: polished mahogany ringed by rough lenticel
+    # bands, amber shards where it exfoliates; the layers wide and short, so they run round the trunk) and the redvein
+    # maple 'Albolimbatum' (olive green, red veins and white streaks up it, diamond scars in grey-white)
+    'cherry_bark': dict(base=['#5A1C14', '#74281A', '#8C3622', '#6A2318'],
+                        layers=[dict(color=['#C27030', '#D88A3E'], cover=0.05, w=0.12, l=0.012),
+                                dict(color=['#4A3C32', '#635040'], cover=0.20, w=0.6, l=0.022),
+                                dict(color=['#C68A40', '#D9A050'], cover=0.03, w=0.012, l=0.004)],
+                        wander=0.3, torn=0.35, edge=0.6, streak=0.05, wet=0.55, scale=1.0, bump=0.4),
+    'redvein_bark': dict(base=['#6F7B3C', '#808C48', '#939E56', '#6A7438'],
+                         layers=[dict(color=['#B0532E', '#C4673C'], cover=0.16, w=0.004, l=0.14),
+                                 dict(color=['#D8DED0', '#ECEFE6'], cover=0.12, w=0.004, l=0.16),
+                                 dict(color=['#AEB2A6', '#CDD1C5'], cover=0.05, w=0.026, l=0.018)],
+                         wander=0.5, torn=0.3, edge=0.0, streak=0.04, wet=0.1, scale=1.0, bump=0.2),
+    'pressed_cherry_bark': dict(base=['#5A1C14', '#74281A', '#8C3622', '#6A2318'],
+                                layers=[dict(color=['#C27030', '#D88A3E'], cover=0.05, w=0.12, l=0.012),
+                                        dict(color=['#4A3C32', '#635040'], cover=0.20, w=0.6, l=0.022),
+                                        dict(color=['#C68A40', '#D9A050'], cover=0.03, w=0.012, l=0.004)],
+                                wander=0.3, torn=0.35, edge=0.6, streak=0.05, wet=0.5, scale=1.0, bump=0.0,
+                                plastic=True, flake=0.009, mottle=0.06, specks=('#2A1A14', 0.04, 0.003),
+                                roughness=0.32, coat=0.2, wax=0.1, sheets=True),
+    'pressed_redvein_bark': dict(base=['#6F7B3C', '#808C48', '#939E56', '#6A7438'],
+                                 layers=[dict(color=['#B0532E', '#C4673C'], cover=0.16, w=0.004, l=0.14),
+                                         dict(color=['#D8DED0', '#ECEFE6'], cover=0.12, w=0.004, l=0.16),
+                                         dict(color=['#AEB2A6', '#CDD1C5'], cover=0.05, w=0.026, l=0.018)],
+                                 wander=0.5, torn=0.3, edge=0.0, streak=0.04, wet=0.1, scale=1.0, bump=0.0,
+                                 plastic=True, flake=0.009, mottle=0.04, specks=('#4C5634', 0.03, 0.003),
+                                 roughness=0.36, coat=0.15, wax=0.12, sheets=True),
     'pressed_birch_bark': dict(color='#ECE7DC', warm='#E6D6C4', lenticel='#2B2724', peel='#C9976E', roughness=0.36, lenticels=1.0,
                                scars=0.6, peel_amount=0.5, scale=1.0, bump=0.0,
                                plastic=True, flake=0.009, mottle=0.035, specks=('#8C877E', 0.04, 0.003), coat=0.15, wax=0.15,
@@ -223,7 +289,9 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         _veneer(nt, b, p)
     elif preset in ('birch_bark', 'pressed_birch_bark'):
         _birch_bark(nt, b, p, normal)
-    elif preset in ('eucalyptus_bark', 'pressed_eucalyptus_bark'):
+    elif preset in ('eucalyptus_bark', 'pressed_eucalyptus_bark', 'manzanita_bark', 'pressed_manzanita_bark', 'snakebark_white',
+                    'pressed_snakebark_white', 'snakebark_coral', 'pressed_snakebark_coral', 'cherry_bark', 'pressed_cherry_bark',
+                    'redvein_bark', 'pressed_redvein_bark'):
         _eucalyptus_bark(nt, b, p, normal)
     elif preset == 'cloth':
         _cloth(nt, b, p, normal)
@@ -896,7 +964,8 @@ def _print_colour(nt, preset, scale):
     colour it fed kept (so a clear part can wear the bark as a translucent print)."""
     stand = nt.nodes.new('ShaderNodeBsdfPrincipled')
     q = {**PRESET_DEFAULTS[preset], 'scale': PRESET_DEFAULTS[preset].get('scale', 1.0) * scale, 'bump': 0.0, 'project': 'front'}
-    {'birch_bark': _birch_bark, 'eucalyptus_bark': _eucalyptus_bark}[preset](nt, stand, q)
+    {'birch_bark': _birch_bark, 'eucalyptus_bark': _eucalyptus_bark, 'manzanita_bark': _eucalyptus_bark, 'snakebark_white': _eucalyptus_bark,
+     'snakebark_coral': _eucalyptus_bark, 'cherry_bark': _eucalyptus_bark, 'redvein_bark': _eucalyptus_bark}[preset](nt, stand, q)
     col = next(l.from_socket for l in nt.links if l.to_socket == stand.inputs['Base Color'])
     nt.nodes.remove(stand)
     return col
