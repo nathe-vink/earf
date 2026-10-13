@@ -1,0 +1,155 @@
+{
+  "stage1": {
+    "impression": "A disciplined, coherent system: family dividers with marks, one template per finish on a colour-matched ground, a grotesque-plus-mono pairing, horn studies and drawings, and the finish-to-ground colour work is the best thing in it. But the eleven product pages are one composition repeated, each spending half its image area on a near-duplicate cover-off render, with a visible compositing seam at x~1375 and soft, upscaled renders, while the cover carries no product and the three dividers are half-empty text slides. The back end is weak: two horn pages that repeat each other, drawings with type too small to read, an exploded view whose 20 callouts have no key, and no back cover, so it reads as a well-organised draft, not yet a book.",
+    "score": 5.8,
+    "pages": {
+      "page-01-cover": 5.0,
+      "page-02-bark": 4.5,
+      "page-03-eucalyptus": 6.0,
+      "page-04-autumn": 6.5,
+      "page-05-manzanita": 5.5,
+      "page-06-striped": 6.0,
+      "page-07-cloud": 4.5,
+      "page-08-green": 6.5,
+      "page-09-smoke": 6.0,
+      "page-10-ice": 6.0,
+      "page-11-crag": 4.5,
+      "page-12-cobalt": 6.0,
+      "page-13-malachite": 6.0,
+      "page-14-lapis": 5.5,
+      "page-15-turquoise": 6.5,
+      "page-16-horn-side": 6.0,
+      "page-17-horn-back": 5.5,
+      "page-18-closer": 5.5,
+      "page-19-drawings": 5.5
+    }
+  },
+  "blocking_9": [
+    "Renders that are sharp at the size they are shown. Today they are visibly soft, the Poison and Smoke horn throats are smeared, and the Lapis Lazuli cabinet has a white smudge at its top corner. The renders are fixed, so this needs the owner to re-render.",
+    "No visible joins: the hard seam at x=1375 between the two photographs is gone on all eleven product pages.",
+    "One locked grid: mark, eyebrow, title, rule, footer and labels at the same coordinates on every page of a type, with no 33-36 px jumps between pages, and one bottom baseline (y=1016) through the whole book.",
+    "Cover and dividers that use the page: the marks at a size that reads as the range, not 68-131 px figures beside 800 px of empty ground.",
+    "Copy that agrees with itself and with the card: one sentence per divider, no 'clear resin' beside a golden-yellow horn, no 'stone cabinets' for pressed plastic, and a tagline that says 'horn'.",
+    "Drawings a maker can use: a key for the 20 balloons, and drawing type in the deck's two faces at a readable size. The drawings are fixed, so the second half is the owner's to do.",
+    "One image that gives scale: a 1281 mm speaker beside a person or in a room. This needs a new render."
+  ],
+  "changes": [
+    {
+      "id": "c1",
+      "rank": 1,
+      "pages": ["page-03-eucalyptus", "page-04-autumn", "page-05-manzanita", "page-06-striped", "page-08-green", "page-09-smoke", "page-10-ice", "page-12-cobalt", "page-13-malachite", "page-14-lapis", "page-15-turquoise"],
+      "element": "Joint between the cover-on and cover-off photographs",
+      "problem": "Each render has its own vignette, so where the two 544 px frames butt at x=1375/1376 there is a hard vertical step the full height of the page. On Cobalt Marble, #3251A3 meets #21479C at y=40, and the step reverses at the bottom (#10439F against #1748A6). It shows on all eleven pages and reads as a pasting error on the pages that carry the book.",
+      "now": "Two frames placed edge to edge with hard edges: cover-on at x=832-1375 and cover-off at x=1376-1919, both y=0-1080, with no mask. There is also a faint 1-5 level step at the cover-on frame's left edge (x=832).",
+      "to": "Leave both frames where they are and soften the edges over the page colour. Cover-on: mask from 100% opacity at x=1336 to 0% at x=1375 (mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent)), plus the same 40 px fade on its left edge (0% at x=832 to 100% at x=871). Cover-off: 0% at x=1376 to 100% at x=1415 (mask-image: linear-gradient(to right, transparent, #000 40px)). The colour under the joint is the page colour already behind the type (#A5B8A7 on Eucalyptus, #21479C on Cobalt Marble, and so on). All three fades fall on empty floor: the left speaker and its shadow end by x=1342, the right speaker starts at x=1425, and the left horn starts at x=881.",
+      "why": "The pair then reads as one photograph of two speakers, cover on and cover off, side by side, which is what the card asks for. Taking the book's most visible flaw off eleven pages is the largest single gain."
+    },
+    {
+      "id": "c2",
+      "rank": 2,
+      "pages": ["page-02-bark", "page-07-cloud", "page-11-crag"],
+      "element": "Row of marks and their labels on the line dividers",
+      "problem": "The marks are small (Bark 116x151, Cloud 131x86, Crag 131x81) and stay in the left 1,050 px, so everything right of x=1060 is empty below the sentence on all three dividers. Each mark is indented 38-45 px from its label. The row sits at a different height on each divider (mark bottoms at y=854, 853 and 822; label cap-tops at 909, 938 and 909). Four of the eleven labels break onto two lines in 256 px columns: '02 AUTUMN / BIRCH', '04 STRIPED / MAPLE', '01 COBALT / MARBLE', '03 LAPIS / LAZULI'.",
+      "now": "Marks on a 256 px pitch (Bark at x=158, 414, 670, 926). Labels in IBM Plex Mono at about 24 px, #1A1917, at x=113, 369, 625, 881, wrapping.",
+      "to": "A 4-column grid across the full measure: 400 px columns with 32 px gutters at x=112, 544, 976 and 1408 (Cloud uses the first three). Scale every mark by 1.6 (Bark about 186x242, Cloud about 210x138, Crag about 210x130), left-align each to its column's x, and stand all of them on one baseline at y=860 on all three dividers. Labels go on one line, in IBM Plex Mono 24 px, tracking 0.1em, #1A1917, at the column x, cap-top y=904 on all three, with two spaces after the number: \"01  EUCALYPTUS\", \"02  AUTUMN BIRCH\", \"03  MANZANITA\", \"04  STRIPED MAPLE\" / \"01  POISON\", \"02  SMOKE\", \"03  FOG\" / \"01  COBALT MARBLE\", \"02  MALACHITE\", \"03  LAPIS LAZULI\", \"04  TURQUOISE\".",
+      "why": "The marks are the dividers' only picture. At 1.6x across the full width, each divider becomes a deliberate section opener rather than a half-empty slide, and the three openers match one another."
+    },
+    {
+      "id": "c3",
+      "rank": 3,
+      "pages": ["page-01-cover"],
+      "element": "Tagline and the eleven-mark index",
+      "problem": "The tagline leaves out horn, the word that defines the product and that the card's own description uses. The eleven marks are 68-76 px wide, about a quarter of the 255 px globe, so the line-at-a-glance reads as a footnote under a 378 px void (y=428-806). The marks are indented 21-25 px from their line names (BARK at x=113 but its first mark at x=138; CLOUD 693/715; CRAG 1141/1162), and the three groups follow no grid, so the row stops at x=1633, 175 px short of the right margin.",
+      "now": "\"FLOOR STANDING LOUDSPEAKERS\" in IBM Plex Mono at about 24 px, cap-top y=412. Marks are Bark 68x87, Cloud 76x50 and Crag 76x47 on a 132 px pitch, bottoms at y=949. Line names \"BARK\", \"CLOUD\", \"CRAG\" in IBM Plex Mono at about 24 px, cap-top y=806, at x=113, 693, 1141.",
+      "to": "Tagline \"FLOOR-STANDING HORN LOUDSPEAKERS\" in IBM Plex Mono 28 px, tracking 0.12em, #1A1917, x=112, cap-top y=412. Scale the marks by 1.5, to the size used on the product pages (Bark 102x130, Cloud 114x75, Crag 114x70). Set them on a 144 px pitch with 104 px between lines, all standing on a baseline at y=968: Bark at x=112, 256, 400, 544; Cloud at 750, 894, 1038; Crag at 1256, 1400, 1544, 1688 (the row ends at x=1802). Line names in IBM Plex Mono 24 px, tracking 0.12em, #1A1917, cap-top y=784, flush left with each line's first mark (x=112, 750, 1256).",
+      "why": "The cover is the one page every reader sees. It should say what kind of speaker this is and show the eleven marks as the range, at the size readers will meet them again on the product pages and with enough weight to balance the blue logo. That is what the card asks of the cover."
+    },
+    {
+      "id": "c4",
+      "rank": 4,
+      "pages": ["page-03-eucalyptus", "page-04-autumn", "page-05-manzanita", "page-06-striped", "page-08-green", "page-09-smoke", "page-10-ice", "page-12-cobalt", "page-13-malachite", "page-14-lapis", "page-15-turquoise"],
+      "element": "Product-page header (mark, eyebrow, title) and the spec table's rule",
+      "problem": "The header is centred on the mark, so the eyebrow's cap-top sits at y=161 under one-line titles and y=128 under the two-line ones (Autumn Birch, Striped Maple, Cobalt Marble). The table hangs from the bottom, so the rule sits at y=670 where SURFACE wraps (Eucalyptus, Manzanita) and at y=706 elsewhere. Each mark is centred in a 184 px box (left edges at x=146-153), which adds a third left edge between the table (x=112) and the title (x=332). Turning one page at a time, the header and rule jump 33-36 px.",
+      "now": "Mark centred in x=112-296 at about y=210. Eyebrow in IBM Plex Mono at about 24 px, x=332, cap-top y=161 or 128. Title in Instrument Sans at about 76 px, x=332, on one or two lines. Rule 2 px at x=112-728, y=670 or 706. Table anchored to the bottom, with the COVER row's baseline at about y=911.",
+      "to": "Hang everything from fixed lines, identical on all eleven pages. Mark: left edge x=112, top y=128, scale unchanged (Bark 103x133, Cloud 114x75, Crag 115x71). Eyebrow: x=276, cap-top y=128, face and size unchanged. Title: Instrument Sans 72 px in the same weight, on one line at x=276, baseline y=228. The longest title, 'Cobalt Marble', is about 435 px and ends by x=711, so no title wraps. Rule: 2 px, x=112-728, y=670. The table hangs from the rule: first label cap-top at y=703, 50 px row pitch, and a wrapped SURFACE line at 36 px leading pushes the rows below it down. Labels stay at x=112 and values at x=276.",
+      "why": "Title and values then share x=276, and mark, labels and footer share x=112, which makes a true two-column grid. Nothing moves when the reader turns the page, so the eleven pages read as one set, and because no title wraps, the gap from eyebrow to title is the same on every page."
+    },
+    {
+      "id": "c5",
+      "rank": 5,
+      "pages": ["page-02-bark", "page-07-cloud", "page-11-crag"],
+      "element": "The sentence on how each line is made",
+      "problem": "The card allows one sentence, and each divider has two. Bark's 'The horn is cast in clear resin' contradicts its own pages, which give 'Cast resin, patterned' (three) and 'Cast resin, golden yellow' (Autumn Birch). 'In the pattern of a bark' is unidiomatic, and Crag's 'the pattern cast in' trails off. Crag's 'g' descender also comes within 27 px of the sentence, against 59 px on Bark and Cloud.",
+      "now": "Bark: \"Recycled plastic, pressed in the pattern of a bark. The horn is cast in clear resin.\" Cloud: \"Cast acrylic, translucent, in one colour. The horn is tinted to match.\" Crag: \"Recycled plastic, pressed in the pattern of a stone. The horn is cast in resin, the pattern cast in.\" Instrument Sans at about 36 px, #5E5A53, cap-top y=301, measure ending near x=1195.",
+      "to": "Bark: \"Recycled plastic pressed in the pattern of a tree’s bark, under a horn cast in clear resin that carries the pattern or a tint.\" Cloud: \"Cast acrylic, translucent and in one colour, under a horn tinted to match.\" Crag: \"Recycled plastic pressed in the pattern of a stone, under a horn cast in resin that carries the same pattern.\" Instrument Sans 36 px, #5E5A53, line-height 48 px, measure x=112-1312 with text-wrap: balance (Cloud on one line; Bark and Crag in two balanced lines). Cap-top y=318 on all three, which clears Crag's descender (bottom at y=274) by 44 px.",
+      "why": "One accurate sentence per line, built the same way on all three dividers, keeps every fact the product pages state. A partner who reads 'clear resin' and then sees a golden-yellow horn two pages later starts to distrust the copy."
+    },
+    {
+      "id": "c6",
+      "rank": 6,
+      "pages": ["page-19-drawings"],
+      "element": "Left column: body copy and a missing parts key",
+      "problem": "The exploded view has 20 numbered balloons that refer to nothing on the page, so a maker cannot tell what part 11 or 19 is. The copy says 'the acrylic and stone cabinets', but Crag is pressed recycled plastic, like Bark, not stone. The copy also sits low (y=780-911), leaving a 520 px gap under the title.",
+      "now": "Body copy in Instrument Sans at about 30 px, #1A1917, y=780-911: \"From the fabrication package, drawn for the pressed cabinet. The acrylic and stone cabinets have the same dimensions.\" No parts list.",
+      "to": "Body copy moves up under the title: Instrument Sans 30 px, line-height 40 px, #1A1917, x=112-700, cap-top y=300: \"From the fabrication package, drawn for the pressed cabinet of Bark and Crag. The cast acrylic cabinet of Cloud has the same dimensions.\" Below it, a label \"PARTS\" in IBM Plex Mono 20 px, tracking 0.12em, #5E5A53, cap-top y=500. Then two columns of ten rows, 1-10 at x=112 and 11-20 at x=424, 34 px row pitch from cap-top y=544. Each row is the number in IBM Plex Mono 20 px, right-aligned in a 32 px box, then the part name in Instrument Sans 22 px, #1A1917, starting 48 px after the box. Copy the names word for word from the fabrication package's parts list, numbered as on the drawing.",
+      "why": "The makers and partners on the card are exactly the readers who need the key; without it the exploded view is decoration. The corrected sentence stops implying the Crag speakers are made of stone."
+    },
+    {
+      "id": "c7",
+      "rank": 7,
+      "pages": ["all"],
+      "element": "Running footer, bottom baseline, photo labels and the renders note",
+      "problem": "'EARF' appears only on the product pages, at baseline y=1008, 8 px above the COVER ON / COVER OFF labels at baseline y=1016. The dividers, horn pages and specification page have no footer, page 19 has its own ('EARF. Concept renders.'), and no page is numbered. 'Concept renders' appears only on the last page, after seventeen pages of images that read as photographs.",
+      "now": "Product pages: \"EARF\" in IBM Plex Mono at about 24 px, x=112, baseline y=1008; \"COVER ON\" at x=873 and \"COVER OFF\" at x=1417, baseline y=1016. Page 19: \"EARF. Concept renders.\", \"SECTION A-A\" and \"EXPLODED VIEW\" at baseline y=1008. Pages 02, 07, 11, 16, 17 and 18 have no footer.",
+      "to": "One bottom baseline, y=1016, on pages 02-19, in IBM Plex Mono 24 px, tracking 0.12em, in the page's ink (#1A1917; #F7F5F0 on Striped Maple, Cobalt Marble and Turquoise): \"EARF\" at x=112 and the folio at x=208 (\"02 / 19\" to \"19 / 19\"). On the product pages, \"COVER ON\" moves to x=882 and \"COVER OFF\" to x=1426, flush with each horn's left edge, and both keep baseline 1016. On page 19, \"SECTION A-A\" and \"EXPLODED VIEW\" drop to baseline 1016, and \"EARF. Concept renders.\" is replaced by the standard footer. On the cover, add \"CONCEPT RENDERS\" in IBM Plex Mono 24 px, tracking 0.12em, #5E5A53, right-aligned at x=1808, cap-top y=128.",
+      "why": "A numbered footer on every inner page, on the baseline the photo labels already use, binds four page types into one book and lets a partner say 'see page 12'. Saying 'concept renders' on the cover, before anyone takes the images for photographs of built speakers, is honest with the partners the deck is courting."
+    },
+    {
+      "id": "c8",
+      "rank": 8,
+      "pages": ["page-16-horn-side", "page-17-horn-back"],
+      "element": "Horn pages: copy, captions and the height of the tiles",
+      "problem": "Page 16's sentence runs three ideas together and ends on 'as deep as the cabinet', which reads as depth of colour rather than 420 mm. Page 17 has the unhyphenated '2 inch'. The captions join line and name with a comma ('BARK 02, AUTUMN BIRCH'), where everywhere else they are two levels, eyebrow and title. The 165 px gap between the copy (ending at y=335) and the tiles (y=500) leaves the tiles floating low.",
+      "now": "Page 16: \"A flat mouth, a flare and a pod round the driver: the same horn on every speaker, cast in resin in its colours, as deep as the cabinet.\" Page 17: \"The pod closes round the 2 inch compression driver. Four slim posts hold the horn above the cabinet.\" Copy in Instrument Sans at about 30 px, #5E5A53. Tiles 544x408 at x=112, 688, 1264, y=500-907. Captions in IBM Plex Mono at about 24 px, baseline about 954: \"BARK 02, AUTUMN BIRCH\", \"CLOUD 01, POISON\", \"CRAG 04, TURQUOISE\".",
+      "to": "Page 16: \"Every speaker carries the same horn: a flat mouth, a flare and a pod round the driver, cast in resin in the speaker’s colours and 420 mm deep, the cabinet’s full depth.\" Page 17: \"The pod closes round the 2-inch compression driver, and four slim posts hold the horn above the cabinet.\" Both in Instrument Sans 30 px, line-height 40 px, #5E5A53, cap-top y=272, measure x=112-1232 (to the middle tile's right edge), text-wrap: balance. Tiles keep their crops and x positions and move up to y=432-839. Under each tile, at its x, a two-level caption: \"BARK 02\" / \"CLOUD 01\" / \"CRAG 04\" in IBM Plex Mono 20 px, tracking 0.12em, #5E5A53, cap-top y=871, then \"Autumn Birch\" / \"Poison\" / \"Turquoise\" in Instrument Sans 28 px, in the product titles' weight, #1A1917, cap-top y=903.",
+      "why": "The copy then states the horn's one hard fact, which the specification page confirms. The captions borrow the product pages' own hierarchy, so each speaker is recognised at a glance, and the raised tiles sit evenly between the copy and the footer at y=1016."
+    },
+    {
+      "id": "c9",
+      "rank": 9,
+      "pages": ["page-18-closer"],
+      "element": "Specification table values",
+      "problem": "The values are written in mixed styles. '625 mm; the cabinet 560' gives the second figure no unit, '15 inch' and '2 inch' are unhyphenated, HORN gives a phrase where a figure belongs, and 'Two, front corners' doesn't say which corners. For makers this table is the reference, so it should read as one.",
+      "now": "HEIGHT \"1281 mm\" / WIDTH \"625 mm; the cabinet 560\" / DEPTH \"420 mm\" / WOOFER \"15 inch\" / HORN DRIVER \"2 inch compression\" / HORN \"The cabinet's full depth\" / PORTS \"Two, front corners\" / AMPLIFIER \"Built in\"",
+      "to": "HEIGHT \"1281 mm\" / WIDTH \"625 mm at the horn; cabinet 560 mm\" / DEPTH \"420 mm\" / WOOFER \"15-inch\" / HORN DRIVER \"2-inch compression driver\" / HORN \"420 mm deep, the cabinet’s full depth\" / PORTS \"Two, at the lower corners of the front\" / AMPLIFIER \"Built in\". Type and grid unchanged: labels in IBM Plex Mono at about 24 px at x=112, values in Instrument Sans at about 28 px at x=326, 50 px pitch, and the rule at y=505, level with the cabinet top in the drawing.",
+      "why": "Every value then has a unit and a place, and each matches the drawing beside it: the '625' dimension spans the horn, and the ports sit at the lower corners of the front. The figures are all already in the book; only the wording changes."
+    }
+  ],
+  "out_of_scope": [
+    {
+      "request": "Re-render all eleven speakers at twice the current resolution (1088x2160 per frame), so they are sharp at full bleed and can stand a close crop of each pressed surface.",
+      "why": "The renders are fixed. Their softness shows on every product page and is the biggest single thing holding the book below a 9. Sharp renders would also allow a close-up of each pattern to carry the 'pressed in the pattern of bark / stone' story."
+    },
+    {
+      "request": "Fix the render defects: the white smudge at the top-right corner of the Lapis Lazuli cabinet (both photos, about x=1230,y=413 and x=1774,y=413); the smeared black horn throats on Poison and Smoke; and the patterned horns on Cobalt Marble, Malachite and Turquoise, whose mouths read as solid blocks with a dot.",
+      "why": "The renders are fixed. Each defect sits at the focal point of its page, and the Crag horns hide the shape that pages 16-17 present as the signature shared by all eleven."
+    },
+    {
+      "request": "Re-set the GA drawing's embedded labels ('FROM THE RIGHT', 'FRONT', 'FROM ABOVE', section mark 'A') and dimension figures ('420', '625', '1281') from DejaVu Sans to IBM Plex Mono, with the figures at 18 px or more (about 14 px now).",
+      "why": "The drawings are fixed. This is the only third typeface in the book, its bold labels clash with page 19's Plex Mono 'SECTION A-A', and 14 px figures are hard to read on screen."
+    },
+    {
+      "request": "Clean the GA line work: the broken underside contour of the horn in the side elevation (a gap at about x=806-834, y=447), the stray ticks (about x=885,y=352 and x=1218,y=359), and the wobbly hand-traced outline of the plan view ('FROM ABOVE').",
+      "why": "The drawings are fixed. Rough line work undercuts page 19's claim that the drawings come 'from the fabrication package', and makers and partners will read it as unfinished engineering."
+    },
+    {
+      "request": "Enlarge the exploded view's balloon numerals (about 12 px in 35 px circles) to 16 px or more.",
+      "why": "The drawings are fixed. These numbers are what the new parts key (c6) points to, and at 12 px they are hard to match on screen."
+    },
+    {
+      "request": "Add a render of one speaker beside a person or in a room.",
+      "why": "Every render is the owner's choice and fixed. Nothing in the book shows that each speaker stands 1.28 m tall, which friends and partners will want to know before anything else."
+    }
+  ],
+  "score_if_fixed": 7.0
+}

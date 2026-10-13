@@ -2,25 +2,29 @@
 
 The owner's idea of 2026-10-10 was speakers that look like their reference photograph of Friendly Pressure's horns
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
-it). The brand is **EARF**, its logo a globe of geometric shapes (the owner, round 11; Dogs Barking before it, round
-10); barkhorn stays the project's name in this repository.
+it). The brand is **EARF**, its logo a globe of circles beside the name built of the marks' shapes (the owner, round 11;
+Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
 Status: **concept, round 11**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
-Decided by the owner: no wood (the cabinet is pressed recycled HDPE), smoked resin on birch and bottle green on
-eucalyptus, the solid neck round the throat, and a port in each bottom corner (round 6). The disc takes a neutral that
-suits each cabinet, the woofer's ring the same colour, and a patterned horn has its pattern cast in, not printed (round
-7). Round 8 made the speakers three lines, and round 10 names them Bark (pressed recycled plastic in the pattern of a
+Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
+each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
+patterned horn has its pattern cast in, not printed (round 7). The horn is golden yellow on birch and the cast-in bark
+pattern on eucalyptus everywhere, and the discs on eucalyptus and manzanita take their bark's colour (round 11). Round 8 made the speakers three lines, and round 10 names them Bark (pressed recycled plastic in the pattern of a
 bark: eucalyptus, autumn birch, manzanita, striped maple), Cloud (translucent cast acrylic: Poison, Smoke, Fog) and
 Crag (pressed recycled plastic in the pattern of a stone, the horn cast resin: cobalt marble, malachite, lapis lazuli,
-turquoise). Each speaker has an acrylic mark, its line's shape in its own colour, and the brand's globe is drawn the
-same way.
+turquoise). Each speaker has an acrylic mark, its line's shape in its own colour, and the brand's globe and wordmark are
+drawn the same way.
 
-## Round 11: the owner's note of 2026-10-13 (late)
+## Round 11: the owner's notes of 2026-10-13 (late)
 
 | the note | what changed |
 |---|---|
+| "I don't like the graphite discs on eucalyptus or manzanita. I think we can do something closer to the bark color for each, or black." Then, of the test below: "Black on eucalyptus is preferred. Makes the cabinet pop more" | **Black on eucalyptus** (#1E1C1A) and **red-brown on manzanita** (#5B2B22, its bark's own), the rings with them, from a test of each bark's colour beside black. Every eucalyptus flavour takes black. Oat stays on birch. |
+| "And the cast-in pattern should be used for eucalyptus and the yellow gold can be used for birch everywhere." | **The line's horns**: the default `birch` and `eucalyptus` flavours, and everything built on them (the pressed cabinets, round 4's sheets), now have the golden yellow horn and the cast-in bark pattern. Smoked resin and bottle green stay as the options `birch-smoked` and `eucalyptus-bottle`; the Cloud speakers keep their tinted horns. Older renders (round 6's pick6 and before) still show the old horns. |
+| "Do a critic pass on the look book after these updates" | **A critic round on the whole look book**: a fresh reviewer that saw only the pages and a card of what is fixed (`critic/card-lookbook.md`, `critic/PROMPT-lookbook.md`), a blind score first, then changes marked up like a proof (`critic/rounds/2026-10-13/lookbook-r1.json`, `critic/LOG.md`). **5.8 blind**, its estimate 7.0 with its nine changes. All nine are in, but one line: the joint between the two photographs faded; one grid on every page of a type, the product pages' header and facts hung from fixed lines; the dividers' marks 1.6 times larger across the page, with one sentence each; the cover's marks at the product pages' size; EARF and the page number on one bottom baseline from page 2; CONCEPT RENDERS on the cover; a key to the exploded view's 20 balloons; the horn pages' and the specification's copy. Not applied: its tagline "FLOOR-STANDING HORN LOUDSPEAKERS", because the cover line is the owner's. The rest of the way to a 9 is in the renders and the drawings, which the card fixes: sharper renders (twice the resolution), a smudge on the lapis cabinet, the horn throats of Poison and Smoke, the drawings' type and line work, and an image that gives scale. |
 | "Okay new brand idea EARF and the logo is a globe made of geometric shapes" | **EARF**, with **a globe of geometric shapes** in the marks' acrylic style: the ocean a circle, the land a triangle, a parallelogram and a circle cut by it (`marks/globe.svg`). The alternate is the cloud's ingredients, three equal circles side by side, the outer two cut by the middle one as meridians, and a band across as the tropics (`marks/globe-alt.svg`). The look book's cover sets the globe beside EARF over FLOOR STANDING LOUDSPEAKERS, and every page's foot says EARF. Round 10's geometric dog is gone with Dogs Barking. |
+| "I like the geometric shape earf logo, except the top of the A shouldn't have the parallelograms protruding past each other. They should overlap cleanly at the very top. On the R, the parallelogram should come out more so it's flush with or just past the edge of the circle like it is in type. I like B2 for the globe but would be interested in seeing one where the green shapes overlap more to form continents", then: "I meant I liked B3, not B2, but wanted to try one that incorporated the geometric shapes in a way that looks more like land." | **The wordmark**: EARF built of the marks' primitives (rectangles; two leaning slabs and a bar for the A; a stem, a circle and a slab for the R), filled ocean blue and outlined like the marks (`marks/earf.svg`). The A's legs now lean exactly enough for their tops to coincide, one clean top, and the R's leg runs out to just past its bowl (by 8 on a cap height of 300). **The globe is B3**: a circle of ocean, two equal circles of land cut by it (their arcs the meridians) and a band of ocean across them (`marks/globe.svg`; `marks/earf-lockup.svg` sets it beside the wordmark). **The continents**, as an option: the Americas a parallelogram cut by the sphere with a triangle hanging from inside its foot, Eurasia a parallelogram running off the right, Africa a triangle across a Mediterranean and Australia a parallelogram at the rim, drawn so no two outlines nearly meet (`marks/globe-continents.svg`); and the same on B3's band (`marks/globe-continents-band.svg`). B3's meridians made the land too busy (their arcs run beside the coasts), so only its band is carried over. The look book's cover carries the lockup. The first globe, of three separate shapes, is gone. |
 
 EARF reads three ways: earth (the globe, and Bark, Cloud and Crag are the earth's own), ear (earmilk, earworm and
 earwig's family) and arf, a dog's bark, which keeps something of Dogs Barking.
@@ -29,7 +33,9 @@ The name needs clearing before it is used. One search found no mark for EARF, bu
 covering headphones and speakers ([its US mark](https://trademarks.justia.com/881/47/earfun-88147257.html)), close
 enough in sound and goods that a trademark search by a professional should come first.
 
-![The marks: the globe and its alternate, then each line](../../renders/2026-10-13/barkhorn/marks.png)
+![The discs: each bark's own colour beside black (black chosen on eucalyptus, red-brown on manzanita)](../../renders/2026-10-13/barkhorn/discs11.png)
+
+![The marks: the logo, the continents (options), then each line](../../renders/2026-10-13/barkhorn/marks.png)
 
 ## Round 10: the owner's notes of 2026-10-13 (night)
 
@@ -65,10 +71,11 @@ as if each piece were clear acrylic laid on the others. They follow the cloud:
 | Bark | a tree: a crown of three circles overlapping deeply, the trunk's top inside them | Eucalyptus (olive), Autumn Birch (gold), Manzanita (red), Striped Maple (pale green) |
 | Cloud | the cloud: three circles on a rectangle from the outer two's centres down to their common tangent | Poison (bottle green), Smoke (smoke grey), Fog (white) |
 | Crag | a crag: three slabs, parallelograms of three sizes standing on one base line, the outer two leaning in and the tall one between them leaning with the left | Cobalt Marble (cool white), Malachite (green), Lapis Lazuli (ultramarine), Turquoise (turquoise) |
-| (the logo) | EARF's globe: the ocean a circle, the land a triangle, a parallelogram and a circle cut by it; the alternate three equal circles and a band, cut by the middle one (round 11) | ocean blue, land green |
+| (the logo) | EARF's globe: the ocean a circle, two equal circles of land and a band of ocean cut by it, beside EARF built of rectangles, slabs and a circle (round 11); the continents, an option, its land parallelograms and triangles | ocean blue and land green |
 
-`marks.py` writes `marks/<key>.svg` for each speaker (transparent round it), `marks/globe.svg` (the logo),
-`marks/globe-alt.svg` and `marks/sheet.html`.
+`marks.py` writes `marks/<key>.svg` for each speaker (transparent round it), `marks/globe.svg` and `marks/earf.svg`
+(the logo's globe and wordmark), `marks/earf-lockup.svg` (the two side by side), `marks/globe-continents.svg` and
+`globe-continents-band.svg` (the options) and `marks/sheet.html`.
 
 ### The lines
 
@@ -101,11 +108,13 @@ The cobalt marble keeps its mist cover.
 
 ### The look book
 
-[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) (version 16) opens on EARF and its globe over FLOOR
-STANDING LOUDSPEAKERS, with the eleven marks by line. Each line opens with its name, one line on how it is made, and
-its marks. Its speakers follow, cover on and off, each page with its mark, its line and number (Cloud 01), its name,
-and EARF at its foot. Two pages show the horn from the side and from behind, then the specification
-and the drawings close it. It is private until the owner shares it from its Share menu.
+[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) (version 18) opens on EARF's logo, the B3 globe
+beside the wordmark, over FLOOR STANDING LOUDSPEAKERS, with the eleven marks by line and CONCEPT RENDERS at the top.
+Each line opens with its name, one sentence on how it is made, and its marks across the page. Its speakers follow, cover
+on and off, each page hung from the same lines: its mark, its line and number (Cloud 01), its name, four facts. Two
+pages show the horn from the side and from behind, then the specification beside the general arrangement, and the
+section and exploded view with a key to its parts. From page 2 every page carries EARF and its number. It is private
+until the owner shares it from its Share menu.
 
 ![The horn from the side and from behind](../../renders/2026-10-13/barkhorn/horn10.png)
 
@@ -829,10 +838,8 @@ The shots are in `studio/shots/barkhorn/`:
    Maybe there's a better name for each category though.") Bark and Crag are kept as the proposal: under EARF all three
    are the earth's own, Cloud and Crag alliterate, and the crag mark draws its name.
 2. **The marks' colours.** One for each speaker, from its material (the table above). Change any?
-3. **EARF.** The globe or its alternate? And clear the name first: EARFUN is a registered audio brand.
-4. **The disc.** Oat on birch and graphite on eucalyptus, or another neutral from the study?
-5. **The bark horns for the line.** Do the cast-in bark horns replace smoked and bottle green on the birch and
-   eucalyptus everywhere (the default flavours and pick6), and on clear resin or on round 6's light smoke and green?
-6. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
+3. **EARF.** The globe (B3), or the continents, alone or on B3's band? And clear the name first: EARFUN is a registered
+   audio brand.
+4. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
    the commercial benchmarks, a resin step wedge and acrylic tints? And send the horn for casting quotes?
-7. **Price.** [PAIR PRICE] stays open.
+5. **Price.** [PAIR PRICE] stays open.

@@ -612,14 +612,19 @@ def disc_and_face(P, wz, port_o, alt):
 # each bark's colours: a pale panel and an off-white ring on birch, as photographed; a sage-grey panel and a cream ring on
 # eucalyptus. The discs (round 7, the owner: "more neutral colors, depending on the cabinet, will help the cabinet and
 # horn pop more"; rounds 4 to 6 had charcoal on birch and rust on eucalyptus): a neutral that steps back into the
-# cabinet, oat on birch's pale ground, graphite on eucalyptus's busy one, so the cabinet and the horn carry the colour;
+# cabinet, oat on birch's pale ground, graphite on eucalyptus's busy one (black from round 11, below), so the cabinet and
+# the horn carry the colour;
 # pewter on the frosted ice (the frost reads mid grey over the dark inside), mist on the cobalt marble's cool white. The
 # woofer's ring takes the disc's colour (round 7, the owner: "That white ring around the driver when there's no cover is
 # a little much"; off-white on birch and cream on eucalyptus before), so with the cover off the cone sits in the same
 # quiet circle
 OAT, GRAPHITE, CHARCOAL, PEWTER, MIST = '#CFC8BA', '#4B4844', '#2E2C2A', '#7A807E', '#C8CACA'
+# round 11, the owner: "I don't like the graphite discs on eucalyptus or manzanita. I think we can do something closer
+# to the bark color for each, or black"; then, of a test of each beside black: "Black on eucalyptus is preferred. Makes
+# the cabinet pop more"
+BLACK = '#1E1C1A'
 BIRCH = {'bark': 'birch_bark', 'panel': '#D8D5CD', 'cloth': '#DCD6C8', 'cork': '#3B2F28', 'disc': OAT}
-EUCALYPTUS = {'bark': 'eucalyptus_bark', 'panel': '#CBCFC4', 'cloth': '#6F7F66', 'cork': '#3B2F28', 'disc': GRAPHITE}
+EUCALYPTUS = {'bark': 'eucalyptus_bark', 'panel': '#CBCFC4', 'cloth': '#6F7F66', 'cork': '#3B2F28', 'disc': BLACK}
 # the waveguide's resin (round 5, the owner's third notes: "something semitransparent", "or something entirely darker,
 # like black on birch and green on eucalyptus", "or more obvious texture if not monochromatic"). Each is a set of the
 # horn material's tokens, plus settings of its own ('materials'). The first of each bark is the proposal and both
@@ -653,10 +658,16 @@ HORNS = dict(
                                           'vein_m': 0.26, 'warp': 1.0}}},
         'swirl': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#DCCB98', 'horn_cloud': 1.0,
                   'materials': {'horn': {'vein': '#3F5E1C', 'cloud_m': 0.2}}},
-        'amber': {'horn_preset': 'cast_resin', 'horn': '#EFE5D0', 'horn_deep': '#D6A04E', 'horn_cloud': 0.6}})
-VARIANTS = dict(birch={**BIRCH, **HORNS['birch']['smoked']}, eucalyptus={**EUCALYPTUS, **HORNS['eucalyptus']['bottle']})
+        'amber': {'horn_preset': 'cast_resin', 'horn': '#EFE5D0', 'horn_deep': '#D6A04E', 'horn_cloud': 0.6},
+        # the bark's own pattern cast into clear resin (round 7's decision for a patterned horn; drawn as round 6's
+        # printed horn, which shows the same artwork)
+        'cast': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#E8EBDD', 'horn_cloud': 0.0,
+                 'materials': {'horn': {'print': 'eucalyptus_bark', 'print_strength': 0.85, 'roughness': 0.1}}}})
+# the line's horns (round 11, the owner: "the cast-in pattern should be used for eucalyptus and the yellow gold can be
+# used for birch everywhere"; smoked resin on birch and bottle green on eucalyptus before, round 6)
+VARIANTS = dict(birch={**BIRCH, **HORNS['birch']['autumn']}, eucalyptus={**EUCALYPTUS, **HORNS['eucalyptus']['cast']})
 for bark, base_ in (('birch', BIRCH), ('eucalyptus', EUCALYPTUS)):
-    VARIANTS.update({f'{bark}-{k}': {**base_, **v} for k, v in HORNS[bark].items() if k not in ('smoked', 'bottle')})
+    VARIANTS.update({f'{bark}-{k}': {**base_, **v} for k, v in HORNS[bark].items()})
 VARIANTS.update({
     # the cabinet without wood (pressed.py): the sheets laid out in each bark's own pattern (round 5); round 4's sheets
     # (the eucalyptus's colours in vertical strips, the birch's black dashes on milk) kept to compare
@@ -727,7 +738,8 @@ VARIANTS['birch-marbled-cobalt'] = {**BIRCH, **HORNS['birch']['marble'], 'horn':
 # fresh underbark of green, tan and orange (manzanita_bark, the eucalyptus's shader retuned). Its horn wears the bark's
 # pattern cast in, as the bark pair's do in the look book; or clear resin tinted ember red. The disc: graphite (the
 # ground is a deep red, mid-dark), the ring with it
-MANZANITA = {'bark': 'manzanita_bark', 'panel': '#D3C6B8', 'cloth': '#5B2B22', 'cork': '#3B2F28', 'disc': GRAPHITE}
+MANZANITA = {'bark': 'manzanita_bark', 'panel': '#D3C6B8', 'cloth': '#5B2B22', 'cork': '#3B2F28',
+             'disc': '#5B2B22'}      # its bark's deep red-brown (round 11, in place of graphite)
 HORNS['manzanita'] = {
     'cast': {'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#EFE6DF', 'horn_cloud': 0.0,
              'materials': {'horn': {'print': 'manzanita_bark', 'print_strength': 0.85, 'roughness': 0.1}}},
