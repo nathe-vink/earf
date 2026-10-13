@@ -208,6 +208,31 @@ PRESET_DEFAULTS = {
                                     ['#A9B896', 0.22]], band=0.045, warp=0.6),
     'frosted_terrazzo': dict(color='#F4F1EA', absorb='#EFE5D3', roughness=0.45, ior=1.5, radius=0.02, clear=0.1,
                              palette=[['#1E1C1A', 0.55], ['#5E5A54', 0.25], ['#C9976E', 0.2]], chip=0.015, share=0.24),
+    # cast stone (barkhorn round 8, the Crag line, the owner: "Crag another, which would include marble and such ... Let's
+    # explore some more stone/crag options. Malachite maybe."): opaque resin filled with stone powder, as cultured marble
+    # is made. `bands`: colour stops [[position 0..1, hex], ...] repeated `repeat` times along a slow folded noise
+    # (`band_m` across, `warp`, `detail`), so the bands ring the noise's peaks as a malachite's ring its eyes; or `strata`:
+    # the palette's layers up the part ([[hex, weight], ...], each about `band` thick, wavy by `warp`), as travertine is
+    # laid down. `flecks`: crystals in a share of small cells (colour, share, size, metallic: lapis's pyrite); `pits`: the
+    # open voids of unfilled travertine (colour, share, size along, size up). Polished or honed (`roughness`, `coat`)
+    'malachite': dict(bands=[[0.0, '#0C4128'], [0.10, '#0C4128'], [0.13, '#2B8C55'], [0.30, '#2F9259'], [0.33, '#5DB57E'],
+                             [0.45, '#63BA83'], [0.47, '#0A3622'], [0.50, '#0A3622'], [0.53, '#1E7446'], [0.70, '#237C4B'],
+                             [0.73, '#49A56C'], [0.82, '#4DA970'], [0.85, '#125536'], [1.0, '#0C4128']],
+                      repeat=7, band_m=0.6, warp=0.5, detail=1.5, stretch=1.0, seed=0.0, flecks=None, pits=None,
+                      roughness=0.12, coat=0.6),
+    'rhodochrosite': dict(bands=[[0.0, '#B8455E'], [0.15, '#BC4A62'], [0.18, '#E58C9C'], [0.38, '#E8929F'], [0.40, '#F6D3D4'],
+                                 [0.46, '#F6D3D4'], [0.48, '#9C2E48'], [0.52, '#9C2E48'], [0.55, '#D7697F'], [0.75, '#DA6E83'],
+                                 [0.78, '#F0B3BC'], [0.86, '#F0B3BC'], [0.89, '#C4566C'], [1.0, '#B8455E']],
+                          repeat=5, band_m=0.4, warp=0.55, detail=1.5, stretch=1.0, seed=3.0, flecks=None, pits=None,
+                          roughness=0.15, coat=0.5),
+    'lapis': dict(bands=[[0.0, '#0B1648'], [0.22, '#0F1D5A'], [0.42, '#16286E'], [0.58, '#0E1B55'], [0.72, '#1B3282'],
+                         [0.83, '#24408F'], [0.86, '#7D8AB0'], [0.895, '#CDD2DC'], [0.925, '#6F7EAA'], [0.96, '#16286E'],
+                         [1.0, '#0F1D5A']],
+                  repeat=1, band_m=0.14, warp=1.4, detail=4.0, stretch=1.0, seed=7.0, flecks=('#D9B44A', 0.2, 0.016, 1.0),
+                  pits=None, roughness=0.16, coat=0.45),
+    'travertine': dict(strata=[['#E9DDC5', 0.25], ['#E0D0B0', 0.15], ['#ECE3D0', 0.2], ['#D9C7A3', 0.12], ['#E5D8BC', 0.18],
+                               ['#D3BE96', 0.10]],
+                       band=0.014, warp=1.2, flecks=None, pits=('#8E7754', 0.3, 0.016, 0.004), roughness=0.5, coat=0.05),
 }
 
 
@@ -337,6 +362,8 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         _clear_resin(nt, b, p, normal)
     elif preset in ('dark_resin', 'marbled_resin'):
         _opaque_resin(nt, b, p, normal)
+    elif preset in ('malachite', 'rhodochrosite', 'lapis', 'travertine'):
+        _stone(nt, b, p, normal)
     elif preset == 'terrazzo':
         nt.links.new(_terrazzo(nt, p), I['Base Color'])
         setin('Roughness', p['roughness']); setin('Coat Weight', p['coat']); setin('Coat Roughness', 0.3)
@@ -885,9 +912,10 @@ def _pressed_sheet(nt, b, p, normal_in=None):
     nt.links.new(n, b.inputs['Normal'])
 
 
-def _folded(nt, node, scale_m, warp, stretch=1.0, seed=0.0, detail=5.0):
+def _folded(nt, node, scale_m, warp, stretch=1.0, seed=0.0, detail=5.0, spread=(0.3, 0.7)):
     """A slow noise folded on itself twice (domain warping, as a pour folds colours through each other), read in world
-    space: about 0..1 (the noise's narrow spread stretched), features `scale_m` across, drawn out along x by `stretch`."""
+    space: about 0..1 (the noise's narrow spread, `spread`, stretched), features `scale_m` across, drawn out along x by
+    `stretch`."""
     geo = node('ShaderNodeNewGeometry')
     mp = node('ShaderNodeMapping')
     mp.inputs['Scale'].default_value = (1.0 / (scale_m * stretch), 1.0 / scale_m, 1.0 / scale_m)
@@ -909,7 +937,7 @@ def _folded(nt, node, scale_m, warp, stretch=1.0, seed=0.0, detail=5.0):
     nz.inputs['Roughness'].default_value = 0.6
     nt.links.new(v, nz.inputs['Vector'])
     mr = node('ShaderNodeMapRange'); nt.links.new(nz.outputs['Fac'], mr.inputs['Value'])
-    mr.inputs['From Min'].default_value = 0.3; mr.inputs['From Max'].default_value = 0.7
+    mr.inputs['From Min'].default_value = spread[0]; mr.inputs['From Max'].default_value = spread[1]
     return mr.outputs['Result']
 
 
@@ -1087,6 +1115,65 @@ def _terrazzo(nt, p):
     chip = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(vo.outputs['Distance'], 0.26, 0.32)),
                  math_('LESS_THAN', cs.outputs['Green'], p['share']))
     return mix(chip, hex_lin(p['color']), _weighted_ramp(node, nt, cs.outputs['Blue'], p['palette']))
+
+
+def _cells(nt, node, math_, smooth, size, share, radius=(0.2, 0.28)):
+    """A mask of small round bodies in a `share` of 3D cells (`size`: metres across, or (along, along, up) for flattened
+    ones), soft-edged at `radius` of a cell."""
+    geo = node('ShaderNodeNewGeometry')
+    sz = size if isinstance(size, (tuple, list)) else (size, size, size)
+    mp = node('ShaderNodeMapping'); mp.inputs['Scale'].default_value = tuple(1.0 / v for v in sz)
+    nt.links.new(geo.outputs['Position'], mp.inputs['Vector'])
+    vo = node('ShaderNodeTexVoronoi', feature='F1', voronoi_dimensions='3D'); vo.inputs['Scale'].default_value = 1.0
+    nt.links.new(mp.outputs['Vector'], vo.inputs['Vector'])
+    cs = node('ShaderNodeSeparateColor'); nt.links.new(vo.outputs['Color'], cs.inputs['Color'])
+    return math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(vo.outputs['Distance'], *radius)), math_('LESS_THAN', cs.outputs['Green'], share))
+
+
+def _stone(nt, b, p, normal_in=None):
+    """Cast stone, opaque (the presets' comment says what each setting does): banded along a folded noise, or laid in
+    strata, with crystals and open pits."""
+    node, math_, mix, smooth = _nodes(nt)
+    I = b.inputs
+    if p.get('strata'):
+        col = _strata(nt, {'palette': p['strata'], 'band': p['band'], 'warp': p['warp']})
+    else:
+        f = _folded(nt, node, p['band_m'], p['warp'], p['stretch'], seed=p['seed'], detail=p['detail'], spread=(0.25, 0.75))
+        if p['repeat'] > 1:
+            f = math_('FRACT', math_('MULTIPLY', f, p['repeat']))
+        r = node('ShaderNodeValToRGB'); cr = r.color_ramp; cr.interpolation = 'LINEAR'
+        stops = sorted(p['bands'], key=lambda s_: s_[0])
+        while len(cr.elements) < len(stops):
+            cr.elements.new(0.0)
+        for el, (pos, hx) in zip(cr.elements, stops):
+            el.position = pos; el.color = hex_lin(hx)
+        nt.links.new(f, r.inputs['Fac'])
+        col = r.outputs['Color']
+    if p.get('flecks'):
+        kc, share, size, metallic = p['flecks']
+        fl = _cells(nt, node, math_, smooth, size, share, (0.16, 0.24))
+        col = mix(fl, col, hex_lin(kc))
+        if metallic > 0:
+            nt.links.new(math_('MULTIPLY', fl, metallic), I['Metallic'])
+    n = normal_in
+    if p.get('pits'):
+        kc, share, along, up = p['pits']
+        pit = _cells(nt, node, math_, smooth, (along, along, up), share, (0.22, 0.3))
+        col = mix(pit, col, hex_lin(kc))
+        bump = node('ShaderNodeBump'); bump.invert = True
+        bump.inputs['Strength'].default_value = 0.7; bump.inputs['Distance'].default_value = 0.0008
+        nt.links.new(pit, bump.inputs['Height'])
+        if n is not None:
+            nt.links.new(n, bump.inputs['Normal'])
+        n = bump.outputs['Normal']
+        nt.links.new(math_('ADD', p['roughness'], math_('MULTIPLY', pit, 0.3)), I['Roughness'])
+    else:
+        I['Roughness'].default_value = p['roughness']
+    nt.links.new(col, I['Base Color'])
+    if 'Coat Weight' in I:
+        I['Coat Weight'].default_value = p['coat']; I['Coat Roughness'].default_value = 0.08
+    if n is not None:
+        nt.links.new(n, I['Normal'])
 
 
 def _cloth(nt, b, p, normal_in=None):

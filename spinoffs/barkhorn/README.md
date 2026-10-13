@@ -4,13 +4,96 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
 it). There are two finishes, birch bark and eucalyptus bark, each with a horn in its bark's colours.
 
-Status: **concept, round 7**. The proportions follow the photograph. The sizes are scaled from its turntable (about
-450 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
+Status: **concept, round 8**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), smoked resin on birch and bottle green on
-eucalyptus, the solid neck round the throat, and a port in each bottom corner (round 6). The disc takes a neutral
-that suits each cabinet, the woofer's ring the same colour, and a patterned horn has its pattern cast in, not printed
-(round 7; the discs proposed: oat on birch, graphite on eucalyptus). Five more barks join in round 7: manzanita, two
-snakebark maples, a Tibetan cherry and the redvein maple.
+eucalyptus, the solid neck round the throat, and a port in each bottom corner (round 6). The disc takes a neutral that
+suits each cabinet, the woofer's ring the same colour, and a patterned horn has its pattern cast in, not printed (round
+7; the discs proposed: oat on birch, graphite on eucalyptus). Round 8 makes the speakers a brand of three lines: Bark
+(the barks), Y2K (translucent acrylic: Poison, Smoke and Fog) and Crag (stone), each with its own shape, each speaker
+with its own mark, drawn as a stamp, and for the brand two dogs back to back with horns for heads. Bark keeps the
+eucalyptus, the autumn birch, the manzanita and the striped maple; Crag gains malachite, rhodochrosite, lapis lazuli and
+travertine beside the cobalt marble.
+
+## Round 8: the owner's notes of 2026-10-13
+
+| the note | what changed |
+|---|---|
+| "Not stickers of the speakers. Stickers of a visual metaphor that represents each speaker. The brand is as important as the speakers themselves." | **New marks** (below). Each is its line's shape carrying one mark for the material: strips for the eucalyptus, a curl for the manzanita, rings for the malachite. None draws the speaker. |
+| "And I think bark is more of a product style/line. Y2K another. Crag another, which would include marble and such." | **Three lines** (below): Bark, Y2K and Crag, each with a shape (a circle, a rounded square, a triangle). Proposed: each line is also one way of making the cabinet: pressed recycled plastic, cast acrylic, cast stone. The look book is now in three parts, each opened by its line. |
+| "Remove Phoenix, red vein, cherry." | Gone from the look book and from the product's flavours. Their bark presets stay in the engine's library. |
+| "Only do the autumn birch for the birch option." | The birch page is gone from the look book. The autumn birch is the Bark line's birch. The `birch` flavour and the pick6 renders (smoked horn) are unchanged. |
+| "Getting there with the symbolism, but I'd like it to work in black and white, meaning we can't rely on color to communicate the design of each speaker." | **One colour first** (below): every mark says everything in one ink, and colour goes on top of the same drawing, for the stickers. The look book uses the one-colour marks, in each page's ink. |
+| "The marble should look more marbly, the malachite should look more wavy, the lazuli is just dots. The birch can just be the horizontal lines, no leaf. The ice is inverted in color relative to the other ones. ... A lot of the icons need to be centered, like the manzanita." | **Stamps** (below): every mark is now a solid shape with its mark cut out and centred, so none is inverted against another. The marble's veins swell and branch, the malachite's rings wave unevenly, the lapis has pyrite's square crystals instead of dots, the rhodochrosite nested bands instead of chevrons (they read as arrows), and the birch its dashes alone. |
+| "What if we changed Y2K to cloud: poison, smoke, fog, and used the same shape but different color." | **Y2K is three clouds**: Poison (the green acrylic), Smoke and Fog (the frosted ice), one cloud in three colours. In one ink they keep their colours by heraldry's hatching, made for exactly this: diagonal lines for green, cross-hatching for black, plain for white. |
+| "What about dogs barking for the brand name, back to back dogs with horns for head, with roar-like shapes emitting from the horn. Again, I want to stress minimalism. Something that could work as a stamp." | **The brand mark** (below): two dogs back to back, each with a horn for a head, three arcs out of each horn. A pair facing out is a stereo pair. It reads barkhorn as a horn that barks, which fits all three lines; the name stays. |
+| "Let's explore some more stone/crag options. Malachite maybe." | **Four stones join the cobalt marble in Crag**: malachite, rhodochrosite, lapis lazuli and travertine (`crag-malachite` and so on), all in the look book. They use a new cast-stone shader in the engine: colour bands ringing a folded noise (malachite, rhodochrosite, lapis's mottling), or layers laid down (travertine), with crystals (lapis's gold pyrite) and open pores (travertine). |
+
+### The three lines
+
+| line | shape | the cabinet | the horn | speakers |
+|---|---|---|---|---|
+| Bark | a circle: a trunk cut across | recycled plastic, pressed in the pattern of a bark | clear cast resin, the pattern cast in (the autumn birch's tinted golden yellow) | eucalyptus, autumn birch, manzanita, striped maple |
+| Y2K | a rounded square: a translucent case | cast acrylic, translucent, one colour | clear cast resin, tinted to match | Poison (green), Smoke, Fog (frosted) |
+| Crag | a triangle: a peak | cast stone: resin or Jesmonite filled with stone dust, as cultured marble is made | the same stone | cobalt marble, malachite, rhodochrosite, lapis lazuli, travertine |
+
+Crag as cast stone is a proposal. In round 6 the cobalt marble's kind of marbling was pressed in HDPE at the bark
+line's cost, and the banded stones could be pressed too. Cast stone is heavier, and a cultured-marble shop makes it in
+moulds, by quote. But it is stone dust in resin, it takes a polish, and it can keep travertine's open pores.
+
+### The marks
+
+![The marks: the dogs, then each line, one colour above and colour below](../../renders/2026-10-13/barkhorn/stickers.png)
+
+**The brand** is two dogs back to back, each with a horn for a head, barking out of it in three arcs: barkhorn, a
+horn that barks, and a stereo pair facing out. **A line** is its shape: Bark the circle, Y2K the rounded square, Crag
+the triangle. **A speaker** is its line's shape, solid, with one mark cut out of it and centred: the material reduced to
+a primitive. Each is drawn as a stamp would print it, in one ink, and says everything there; no two share a form.
+Colour goes on top of the same drawing, for the stickers, each on a white die-cut edge with a hairline. In colour the
+ground is the material's, so the birch, the striped maple and the marble keep their light grounds. The look book uses
+the one-colour marks, in each page's ink. `stickers.py` draws them all into `stickers/`: the colour sticker, the
+one-colour sticker, the mark alone in ink and in white, and the dogs.
+
+| mark | its form | for |
+|---|---|---|
+| Bark 01, Eucalyptus | three strips | bark shed in strips of colour |
+| Bark 02, Autumn Birch | dashes | the birch's lenticels (in colour, one dash gold, for its horn) |
+| Bark 03, Manzanita | a curl | red bark peeling to green |
+| Bark 04, Striped Maple | waves | a snakebark's stripes |
+| Y2K 01, Poison | a cloud, hatched diagonally (green) | the green acrylic |
+| Y2K 02, Smoke | a cloud, cross-hatched (black) | the smoked acrylic |
+| Y2K 03, Fog | a cloud, plain (white) | the frosted acrylic |
+| Crag 01, Cobalt Marble | veins, swelling and branching | marble |
+| Crag 02, Malachite | wavy rings, off centre | its banded eyes |
+| Crag 03, Rhodochrosite | nested bands | its layers of rose and white |
+| Crag 04, Lapis Lazuli | square crystals | pyrite in deep blue |
+| Crag 05, Travertine | strata and pores | stone laid down by a spring |
+
+### The Crag line
+
+![The Crag line](../../renders/2026-10-13/barkhorn/crag.png)
+
+Each stone makes the horn and the cabinet alike, with a cover in the stone's own colour (a one-colour cabinet keeps a
+matching cover, round 7):
+
+- **Malachite**: bands of dark, mid and light green ringing its eyes, polished. A deep green cover.
+- **Rhodochrosite**: bands of rose, raspberry and white, polished. A rose cover.
+- **Lapis lazuli**: deep blue, mottled, with white calcite and flecks of gold pyrite, polished. A deep blue cover.
+- **Travertine**: cream and sand in wavy layers, with open pores, honed. A sand cover.
+
+The cobalt marble keeps its mist cover.
+
+### The look book, by line
+
+[The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) now has the dogs and the twelve marks, by line, on
+its cover. Each line opens with its shape, one line on how it is made, and its marks. Its speakers follow, cover on and
+off, each page with its mark in the page's ink, its line and number (Bark 01) and its name; the Y2K pages are Poison,
+Smoke and Fog. Two pages of drawings close it (the owner: "Include the spec drawings on a page or two at the end of the
+lookbook"): the specification beside the general arrangement, then the section and the parts drawn apart. Both come from
+the pressed cabinet's drawing package, and the acrylic and stone cabinets have the same dimensions. The new backdrops
+are warm limestone for the malachite, wine for the rhodochrosite, ochre for the lapis and terracotta for the travertine.
+
+![The look book's frames](../../renders/2026-10-12/barkhorn/lookbook.png)
 
 ## Round 7: the owner's note of 2026-10-12 (night)
 
@@ -65,6 +148,7 @@ was the brightest thing on the cabinet. Pewter sits into it.
 
 ### The look book
 
+(As round 7 left it; round 8 regrouped it by line, above.)
 [The look book](https://claude.ai/artifact/5GzQJd9n2ExaceCDKsaYU9) is a deck to share: twelve speakers, each with the
 cover on and off. Each stands on a seamless backdrop in a colour drawn from it: gum-leaf sage for the eucalyptus, peeled
 apricot for the birch, an overcast warm grey for the autumn birch, chaparral sand for the manzanita, deep olive for the
@@ -83,6 +167,8 @@ in a row, and the last page gives the specification they share.
 ![The look book's frames](../../renders/2026-10-12/barkhorn/lookbook.png)
 
 ### The stickers
+
+(Round 7's; round 8 replaced them with marks, above.)
 
 ![The twelve stickers](../../renders/2026-10-12/barkhorn/stickers.png)
 
@@ -672,7 +758,7 @@ stay open, as does the weld rod. There are 15 drawing sheets.
 The shots are in `studio/shots/barkhorn/`:
 
 - `front`: the pair, as photographed;
-- `birch` and `eucalyptus`, and round 7's `manzanita`, `snakebark` and `cherry`;
+- `birch` and `eucalyptus`, round 7's `manzanita` and `snakebark`, and round 8's `crag`;
 - `eucalyptus-detail`: the bark close to;
 - `back`: the waveguide from behind;
 - one folder per comparison sheet, one shot per frame: `covers/` (round 2), `front/`, `study/`, `experiments/`,
@@ -681,12 +767,13 @@ The shots are in `studio/shots/barkhorn/`:
 
 ## Open questions for the owner
 
-1. **The disc.** Oat on birch and graphite on eucalyptus, or another neutral from the study?
-2. **The bark horns for the line.** Do the cast-in bark horns replace smoked and bottle green on the birch and
+1. **The name.** With the dogs, barkhorn reads as a horn that barks, which covers all three lines. Keep it, or is it
+   still a working name?
+2. **Crag's stones.** Keep all five (cobalt marble, malachite, rhodochrosite, lapis lazuli, travertine), or pick? And
+   Crag as cast stone (heavier, by quote), or pressed HDPE where the pattern allows (the marble and the banded stones)?
+3. **The disc.** Oat on birch and graphite on eucalyptus, or another neutral from the study?
+4. **The bark horns for the line.** Do the cast-in bark horns replace smoked and bottle green on the birch and
    eucalyptus everywhere (the default flavours and pick6), and on clear resin or on round 6's light smoke and green?
-3. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
+5. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
    the commercial benchmarks, a resin step wedge and acrylic tints? And send the horn for casting quotes?
-4. **Other cabinets.** Develop any of the translucent, stone, marble or swirl speakers, as editions beside the bark
-   line?
-5. **A name.** barkhorn is a placeholder.
 6. **Price.** [PAIR PRICE] stays open.

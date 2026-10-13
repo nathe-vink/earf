@@ -736,12 +736,10 @@ VARIANTS.update({
     'manzanita-pressed': {**MANZANITA, **HORNS['manzanita']['cast'], 'bark': 'pressed_manzanita_bark'},
 })
 # round 7, the owner's photos of snakebark maples ("Lots of cool barks we can work with"): a striped maple ('Joe Witt',
-# chalk white with green pinstripes) and 'Phoenix' (coral, red veins, dark lenticels), their patterns cast into the
-# horn. The discs: mist on the striped maple's cool white, stone on the coral (a mid-light ground: graphite reads as a
-# hole in it)
-STONE = '#8E8981'
+# chalk white with green pinstripes), its pattern cast into the horn, and a mist disc on its cool white. Round 8, the
+# owner: "Remove Phoenix, red vein, cherry": the coral snakebark, the redvein maple and the Tibetan cherry are gone from
+# the line (their bark presets stay in the engine's library)
 SNAKEBARK_WHITE = {'bark': 'snakebark_white', 'panel': '#DCE0D8', 'cloth': '#6B784A', 'cork': '#3B2F28', 'disc': MIST}
-SNAKEBARK_CORAL = {'bark': 'snakebark_coral', 'panel': '#E8D2C2', 'cloth': '#B4432C', 'cork': '#3B2F28', 'disc': STONE}
 
 
 def cast_horn(preset, deep):
@@ -753,19 +751,25 @@ def cast_horn(preset, deep):
 VARIANTS.update({
     'snakebark-white': {**SNAKEBARK_WHITE, **cast_horn('snakebark_white', '#EEF0EA')},
     'snakebark-white-pressed': {**SNAKEBARK_WHITE, **cast_horn('snakebark_white', '#EEF0EA'), 'bark': 'pressed_snakebark_white'},
-    'snakebark-coral': {**SNAKEBARK_CORAL, **cast_horn('snakebark_coral', '#F3E2D6')},
-    'snakebark-coral-pressed': {**SNAKEBARK_CORAL, **cast_horn('snakebark_coral', '#F3E2D6'), 'bark': 'pressed_snakebark_coral'},
 })
-# two more from the owner's photos: a Tibetan cherry (Prunus serrula: polished mahogany ringed by rough lenticel bands,
-# amber shards where it exfoliates; a graphite disc on its dark ground) and the redvein maple 'Albolimbatum' (olive green
-# with red veins, white streaks and diamond scars; stone on its mid ground), their patterns cast into the horn
-CHERRY = {'bark': 'cherry_bark', 'panel': '#D6C7BE', 'cloth': '#5A2A20', 'cork': '#3B2F28', 'disc': GRAPHITE}
-REDVEIN = {'bark': 'redvein_bark', 'panel': '#D2D6C6', 'cloth': '#6F7B3C', 'cork': '#3B2F28', 'disc': STONE}
+
+
+# round 8, the owner: "bark is more of a product style/line. Y2K another. Crag another, which would include marble and
+# such ... Let's explore some more stone/crag options. Malachite maybe." The Crag line is cast stone, the horn and the
+# cabinet alike (as the cobalt marble is): malachite, rhodochrosite, lapis lazuli and travertine (the engine's stone
+# presets). Each is one colour, so its cover takes the stone's own colour (the owner, round 7: "I like when the driver
+# covers are the same color for the monochromatic options")
+def crag(stone, cover):
+    """A speaker in one cast stone, horn and cabinet, with a cover of the stone's colour."""
+    return {'bark': stone, 'panel': cover, 'cloth': cover, 'cork': '#3B2F28', 'disc': cover,
+            'horn_preset': stone, 'horn': '#FFFFFF', 'horn_deep': '#FFFFFF', 'horn_cloud': 0.0}
+
+
 VARIANTS.update({
-    'cherry': {**CHERRY, **cast_horn('cherry_bark', '#F0E2D8')},
-    'cherry-pressed': {**CHERRY, **cast_horn('cherry_bark', '#F0E2D8'), 'bark': 'pressed_cherry_bark'},
-    'snakebark-redvein': {**REDVEIN, **cast_horn('redvein_bark', '#E6EADB')},
-    'snakebark-redvein-pressed': {**REDVEIN, **cast_horn('redvein_bark', '#E6EADB'), 'bark': 'pressed_redvein_bark'},
+    'crag-malachite': crag('malachite', '#1F4C34'),
+    'crag-rhodochrosite': crag('rhodochrosite', '#B65C6E'),
+    'crag-lapis': crag('lapis', '#1D2D6B'),
+    'crag-travertine': crag('travertine', '#D3C6AB'),
 })
 
 

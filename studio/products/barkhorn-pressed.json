@@ -1096,113 +1096,49 @@
     }
    }
   },
-  "snakebark-coral": {
-   "bark": "snakebark_coral",
-   "panel": "#E8D2C2",
-   "cloth": "#B4432C",
+  "crag-malachite": {
+   "bark": "malachite",
+   "panel": "#1F4C34",
+   "cloth": "#1F4C34",
    "cork": "#3B2F28",
-   "disc": "#8E8981",
-   "horn_preset": "clear_resin",
+   "disc": "#1F4C34",
+   "horn_preset": "malachite",
    "horn": "#FFFFFF",
-   "horn_deep": "#F3E2D6",
-   "horn_cloud": 0.0,
-   "materials": {
-    "horn": {
-     "print": "snakebark_coral",
-     "print_strength": 0.85,
-     "roughness": 0.1
-    }
-   }
+   "horn_deep": "#FFFFFF",
+   "horn_cloud": 0.0
   },
-  "snakebark-coral-pressed": {
-   "bark": "pressed_snakebark_coral",
-   "panel": "#E8D2C2",
-   "cloth": "#B4432C",
+  "crag-rhodochrosite": {
+   "bark": "rhodochrosite",
+   "panel": "#B65C6E",
+   "cloth": "#B65C6E",
    "cork": "#3B2F28",
-   "disc": "#8E8981",
-   "horn_preset": "clear_resin",
+   "disc": "#B65C6E",
+   "horn_preset": "rhodochrosite",
    "horn": "#FFFFFF",
-   "horn_deep": "#F3E2D6",
-   "horn_cloud": 0.0,
-   "materials": {
-    "horn": {
-     "print": "snakebark_coral",
-     "print_strength": 0.85,
-     "roughness": 0.1
-    }
-   }
+   "horn_deep": "#FFFFFF",
+   "horn_cloud": 0.0
   },
-  "cherry": {
-   "bark": "cherry_bark",
-   "panel": "#D6C7BE",
-   "cloth": "#5A2A20",
+  "crag-lapis": {
+   "bark": "lapis",
+   "panel": "#1D2D6B",
+   "cloth": "#1D2D6B",
    "cork": "#3B2F28",
-   "disc": "#4B4844",
-   "horn_preset": "clear_resin",
+   "disc": "#1D2D6B",
+   "horn_preset": "lapis",
    "horn": "#FFFFFF",
-   "horn_deep": "#F0E2D8",
-   "horn_cloud": 0.0,
-   "materials": {
-    "horn": {
-     "print": "cherry_bark",
-     "print_strength": 0.85,
-     "roughness": 0.1
-    }
-   }
+   "horn_deep": "#FFFFFF",
+   "horn_cloud": 0.0
   },
-  "cherry-pressed": {
-   "bark": "pressed_cherry_bark",
-   "panel": "#D6C7BE",
-   "cloth": "#5A2A20",
+  "crag-travertine": {
+   "bark": "travertine",
+   "panel": "#D3C6AB",
+   "cloth": "#D3C6AB",
    "cork": "#3B2F28",
-   "disc": "#4B4844",
-   "horn_preset": "clear_resin",
+   "disc": "#D3C6AB",
+   "horn_preset": "travertine",
    "horn": "#FFFFFF",
-   "horn_deep": "#F0E2D8",
-   "horn_cloud": 0.0,
-   "materials": {
-    "horn": {
-     "print": "cherry_bark",
-     "print_strength": 0.85,
-     "roughness": 0.1
-    }
-   }
-  },
-  "snakebark-redvein": {
-   "bark": "redvein_bark",
-   "panel": "#D2D6C6",
-   "cloth": "#6F7B3C",
-   "cork": "#3B2F28",
-   "disc": "#8E8981",
-   "horn_preset": "clear_resin",
-   "horn": "#FFFFFF",
-   "horn_deep": "#E6EADB",
-   "horn_cloud": 0.0,
-   "materials": {
-    "horn": {
-     "print": "redvein_bark",
-     "print_strength": 0.85,
-     "roughness": 0.1
-    }
-   }
-  },
-  "snakebark-redvein-pressed": {
-   "bark": "pressed_redvein_bark",
-   "panel": "#D2D6C6",
-   "cloth": "#6F7B3C",
-   "cork": "#3B2F28",
-   "disc": "#8E8981",
-   "horn_preset": "clear_resin",
-   "horn": "#FFFFFF",
-   "horn_deep": "#E6EADB",
-   "horn_cloud": 0.0,
-   "materials": {
-    "horn": {
-     "print": "redvein_bark",
-     "print_strength": 0.85,
-     "roughness": 0.1
-    }
-   }
+   "horn_deep": "#FFFFFF",
+   "horn_cloud": 0.0
   }
  }
 }

@@ -26,7 +26,8 @@ Sets:
 - cabinets (round 6): the cabinet in other plastics, without wood: translucent acrylic, stone looks, marble and swirl;
 - pick6 (round 6): the line, without wood, its two ports, from three-quarter and from the front;
 - discs (round 7): the cloth disc in neutral colours on each cabinet, so the cabinet and the horn carry the colour;
-- lookbook (round 7): six speakers for the look book, each on a sweep in its own colour, the cover on and off.
+- lookbook (rounds 7 and 8): the look book's speakers by line (Bark, Y2K, Crag), each on a sweep in its own colour, the
+  cover on and off.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -97,15 +98,23 @@ DISCS_EUCALYPTUS = [('charcoal', 'charcoal', '#2E2C2A'), ('graphite', 'graphite'
 # grey (the default sky's blue tints an open sweep)
 LOOK = {'position': [1.2, -2.5, 1.0], 'target': [0.0, 0.05, 0.52], 'lens_mm': 68, 'level': True}
 STUDIO = {'kind': 'gradient', 'zenith': '#C4C2BE', 'horizon': '#CFCDC8', 'ground': '#5A5650', 'strength': 0.7}
-# the bark pair wear their bark's pattern in the horn, cast in (the owner: "And yes, cast-in"; "Why did you get rid of the
-# birch and eucalyptus cast-in horns?"), drawn as round 6's printed horns, which show the same artwork
-LOOKS = [('eucalyptus', 'eucalyptus-printed', 'eucalyptus', '#B7C3B4'), ('birch', 'birch-printed', 'birch', '#E6CDB8'),
-         ('autumn', 'birch-autumn-pressed', 'autumn birch', '#BDB5A9'),
-         ('manzanita', 'manzanita-pressed', 'manzanita', '#D8C69E'), ('striped', 'snakebark-white-pressed', 'striped maple', '#4F5B3A'),
-         ('phoenix', 'snakebark-coral-pressed', 'phoenix maple', '#2F5A5C'), ('cherry', 'cherry-pressed', 'tibetan cherry', '#C3CDCB'),
-         ('redvein', 'snakebark-redvein-pressed', 'redvein maple', '#C99A84'),
-         ('green', 'eucalyptus-y2k-green', 'green acrylic', '#D9E4D3'), ('smoke', 'birch-y2k-smoke', 'smoke', '#C9C5D3'),
-         ('ice', 'birch-y2k-ice', 'frosted ice', '#CFDCE4'), ('cobalt', 'birch-marbled-cobalt', 'cobalt marble', '#2F4FA8')]
+# the look book's speakers by line (round 8, the owner: "bark is more of a product style/line. Y2K another. Crag
+# another, which would include marble and such"): Bark (the barks, each horn wearing its bark's pattern cast in, drawn
+# as round 6's printed horns, which show the same artwork; the autumn birch's horn golden yellow), Y2K (translucent
+# acrylic, named poison, smoke and fog) and Crag (cast stone). Round 8 also: "Remove Phoenix, red vein, cherry. Only do
+# the autumn birch for the birch option."
+LOOKS = [('Bark', 'eucalyptus', 'eucalyptus-printed', 'eucalyptus', '#B7C3B4'),
+         ('Bark', 'autumn', 'birch-autumn-pressed', 'autumn birch', '#BDB5A9'),
+         ('Bark', 'manzanita', 'manzanita-pressed', 'manzanita', '#D8C69E'),
+         ('Bark', 'striped', 'snakebark-white-pressed', 'striped maple', '#4F5B3A'),
+         ('Y2K', 'green', 'eucalyptus-y2k-green', 'poison', '#D9E4D3'),
+         ('Y2K', 'smoke', 'birch-y2k-smoke', 'smoke', '#C9C5D3'),
+         ('Y2K', 'ice', 'birch-y2k-ice', 'fog', '#CFDCE4'),
+         ('Crag', 'cobalt', 'birch-marbled-cobalt', 'cobalt marble', '#2F4FA8'),
+         ('Crag', 'malachite', 'crag-malachite', 'malachite', '#E3DACA'),
+         ('Crag', 'rhodochrosite', 'crag-rhodochrosite', 'rhodochrosite', '#6A2B3A'),
+         ('Crag', 'lapis', 'crag-lapis', 'lapis lazuli', '#C9A35E'),
+         ('Crag', 'travertine', 'crag-travertine', 'travertine', '#B9775C')]
 
 
 def sweep(color):
@@ -239,10 +248,11 @@ SETS = {
                for name, label, hx in options]
         for bark, options in (('birch', DISCS_BIRCH), ('eucalyptus', DISCS_EUCALYPTUS))}),
     'lookbook': dict(title='barkhorn: the look book', camera=LOOK, rows={
-        label: [F(f'look-{key}-on', flav, 'cover on', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c), sky=STUDIO),
-                F(f'look-{key}-off', flav, 'cover off', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c), sky=STUDIO,
-                  hide=['cloth-disc'])]
-        for key, flav, label, c in LOOKS}),
+        f'{line}: {label}': [F(f'look-{key}-on', flav, 'cover on', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c),
+                               sky=STUDIO),
+                             F(f'look-{key}-off', flav, 'cover off', product=PRESSED, lights=GLOW5, size=[840, 1100], stage=sweep(c),
+                               sky=STUDIO, hide=['cloth-disc'])]
+        for line, key, flav, label, c in LOOKS}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],
