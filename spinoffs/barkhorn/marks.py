@@ -18,13 +18,17 @@ house shape."
   shows through as if each piece were clear acrylic laid on the others.
 - Like the cloud, the crag is three shapes of three sizes on one base line, where their lines merge.
 - The logo (round 11, the owner: "Okay new brand idea EARF and the logo is a globe made of geometric shapes"; then, of
-  the drafts: "I meant I liked B3, not B2"): the globe is B3, the cloud's ingredients in two colours: a circle of ocean,
-  two equal circles of land cut by it, their arcs the meridians, and a band of ocean across them as the tropics, in the
-  same acrylic style. The continents (the owner: "wanted to try one that incorporated the geometric shapes in a way that
-  looks more like land") are an option: the land a parallelogram and a triangle for the Americas, overlapping, a
-  parallelogram for Eurasia running off the edge, a triangle for Africa across a Mediterranean and a parallelogram for
-  Australia at the rim, with no two outlines nearly meeting; and the same on B3's band. EARF reads as earth, as ear and
-  as a dog's arf.
+  the drafts: "I meant I liked B3, not B2", and "B3 is still the strongest"): the globe is B3, the cloud's ingredients
+  in two colours: a circle of ocean, two equal circles of land cut by it, their arcs the meridians, and a band of ocean
+  across them as the tropics, in the same acrylic style. Two options beside it, from the owner's next note: "C2 was
+  also okay, but I'd prefer to have the shapes overlap and for the triangle to not look italicized. For that one, the
+  continent doesn't need to look geographically correct. One other option is to put a triangle inside the circle and a
+  square inside the triangle ..., with the points of each shape at the stroke of the outer shape, then coloring in the
+  smaller shapes created as green or blue." So C2 overlapped: an upright (equilateral) triangle, a circle and a
+  parallelogram (or a square) overlapping into one continent, no two outlines nearly meeting; and the nested globe:
+  the triangle in the circle, the square standing in the triangle, each touching the outer shape, the regions between
+  them ocean or land (and one more circle in the square, as "and so on"). EARF reads as earth, as ear and as a dog's
+  arf.
 - The wordmark: EARF built of the marks' primitives (rectangles, two leaning slabs and a bar for the A, a stem, a
   circle and a slab for the R), filled and outlined like the marks. The owner, of the first draft: "the top of the A
   shouldn't have the parallelograms protruding past each other. They should overlap cleanly at the very top. On the R,
@@ -34,8 +38,8 @@ house shape."
     python3 spinoffs/barkhorn/marks.py
 
 writes marks/<key>.svg for each speaker (transparent round it), marks/globe.svg (the logo), marks/earf.svg (the
-wordmark), marks/earf-lockup.svg (the two side by side), marks/globe-continents.svg and
-globe-continents-band.svg (the options) and marks/sheet.html.
+wordmark), marks/earf-lockup.svg (the two side by side), marks/globe-<option>.svg for each option (c2-overlap,
+c2-square, nested, nested-land, nested-circle, nested-mixed) and marks/sheet.html.
 """
 import math, os
 
@@ -80,18 +84,55 @@ _B = 170
 STONE = place([slab(-330, _B, 190, 230, 20), slab(-170, _B, 260, 380, 12), slab(80, _B, 220, 290, -16)],
               k=0.96, dx=15, dy=20)
 # EARF's globe (B3): the ocean a circle; two equal circles of land cut by it, their arcs the meridians; a band of ocean
-# across them, the tropics. The continents, an option: the Americas a parallelogram (cut by the sphere) with a triangle
-# hanging from inside its foot; Eurasia a parallelogram running off the right; Africa a triangle across a Mediterranean;
-# Australia a parallelogram at the rim. Every corner at least 54 from any outline it does not lie on, every crossing
-# at least 28 degrees (no slivers). Each layer: (primitives, colour or None for lines only, cut by the sphere)
+# across them, the tropics. Each layer: (primitives, colour or None for lines only, cut by the sphere[, lines: False
+# for a region's fill whose edges are other shapes' lines])
 OCEAN, LAND, GLOBE_R = '#3F7CC4', '#6FA35A', 330
+_SPHERE = ([('circle', 0, 0, GLOBE_R)], OCEAN, False)
 _MERIDIANS = [('circle', -0.52 * GLOBE_R, 0, GLOBE_R), ('circle', 0.52 * GLOBE_R, 0, GLOBE_R)]
 _BAND = ('rect', -GLOBE_R, -0.4 * GLOBE_R, GLOBE_R, 0.4 * GLOBE_R)
-GLOBE = [([('circle', 0, 0, GLOBE_R)], OCEAN, False), (_MERIDIANS, LAND, True), ([_BAND], OCEAN, True)]
-_CONTINENTS = [slab(-400, -30, 260, 220, 18), ('poly', (-245, -100), (-50, -100), (-135, 225)), slab(40, -70, 340, 170, -12),
-               ('poly', (20, 0), (200, 0), (105, 240)), slab(195, 195, 100, 75, 16)]
-CONTINENTS = [([('circle', 0, 0, GLOBE_R)], OCEAN, False), (_CONTINENTS, LAND, True)]
-CONTINENTS_BAND = CONTINENTS + [([_BAND], None, True)]     # the same on B3's band (lines only)
+GLOBE = [_SPHERE, (_MERIDIANS, LAND, True), ([_BAND], OCEAN, True)]
+
+
+def _tri(cx, base, side):
+    """An equilateral triangle standing on its base (upright, not leaning)."""
+    return ('poly', (cx - side / 2, base), (cx + side / 2, base), (cx, base - side * math.sqrt(3) / 2))
+
+
+# C2 overlapped (options): an upright triangle, a circle and a parallelogram, or a square, overlapping into one
+# continent of three sizes; placed by a search for no two outlines within 60 of each other and no crossing under 28
+# degrees (as the marks: deep overlaps, no slivers)
+C2_OVERLAP = [_SPHERE, ([_tri(-111.8, 70, 297.5), ('circle', 95, -40, 119.6), slab(-150, 220, 250, 250, 12)], LAND, True)]
+C2_SQUARE = [_SPHERE, ([_tri(-113.9, 64.8, 295.1), ('circle', 92.8, -42.7, 118.8),
+                        ('rect', -132.1, 230 - 220.8, -132.1 + 220.8, 230)], LAND, True)]
+# the nested globe (options): an equilateral triangle in the circle, its corners on the circle; the square standing on
+# the triangle's base, its top corners on the triangle's sides; the circle in the square, touching its sides
+_T = [(0, -GLOBE_R), (GLOBE_R * math.sqrt(3) / 2, GLOBE_R / 2), (-GLOBE_R * math.sqrt(3) / 2, GLOBE_R / 2)]
+_A, _H = GLOBE_R * math.sqrt(3), 1.5 * GLOBE_R
+_S = _A * _H / (_A + _H)                             # the inscribed square's side
+_TRI = ('poly',) + tuple(_T)
+_SQ = ('rect', -_S / 2, GLOBE_R / 2 - _S, _S / 2, GLOBE_R / 2)
+_IN = ('circle', 0, GLOBE_R / 2 - _S / 2, _S / 2)
+
+
+def _beyond(p0, p1):
+    """The sphere's segment beyond the chord p0-p1 (a polygon reaching past the sphere, cut by it)."""
+    mx, my = (p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2
+    k = 900 / (math.hypot(mx, my) or 1)
+    return ('poly', p0, p1, (p1[0] + mx * k, p1[1] + my * k), (p0[0] + mx * k, p0[1] + my * k))
+
+
+NESTED = [_SPHERE, ([_TRI], LAND, True), ([_SQ], OCEAN, True)]                 # ocean, land, ocean
+NESTED_LAND = [([('circle', 0, 0, GLOBE_R)], LAND, False), ([_TRI], OCEAN, True), ([_SQ], LAND, True)]
+NESTED_CIRCLE = NESTED + [([_IN], LAND, True)]                                # and one more circle in the square
+NESTED_MIXED = [_SPHERE, ([_beyond(_T[2], _T[0]), _beyond(_T[0], _T[1])], LAND, True, False), ([_TRI], OCEAN, True),
+                ([('poly', _T[0], (_S / 2, GLOBE_R / 2 - _S), (-_S / 2, GLOBE_R / 2 - _S))], LAND, True, False),
+                ([_SQ], LAND, True)]                                          # the north land, the south ocean
+OPTIONS = [('c2-overlap', 'C2 overlapped', 'an upright triangle, a circle, a parallelogram', C2_OVERLAP),
+           ('c2-square', 'C2 overlapped, a square', 'nothing leaning', C2_SQUARE),
+           ('nested', 'Nested', 'ocean, land, ocean', NESTED),
+           ('nested-land', 'Nested', 'land, ocean, land', NESTED_LAND),
+           ('nested-circle', 'Nested, and a circle', 'ocean, land, ocean, land', NESTED_CIRCLE),
+           ('nested-mixed', 'Nested', 'land north, ocean south', NESTED_MIXED)]
 
 
 def _wordmark():
@@ -180,11 +221,13 @@ def globe_svg(layers, label, size=None, uid='globe', tight=False):
     wh = f' width="{size}" height="{size}"' if size else ''
     vb = f'{-GLOBE_R - U} {-GLOBE_R - U} {2 * (GLOBE_R + U)} {2 * (GLOBE_R + U)}' if tight else '-500 -500 1000 1000'
     fills, lines = '', ''
-    for prims, colour, cut in layers:
+    for layer in layers:
+        prims, colour, cut = layer[:3]
         g0, g1 = (f'<g clip-path="url(#{uid}-cut)">', '</g>') if cut else ('', '')
         if colour:
             fills += g0 + ''.join(_el(p, f'fill="{colour}"') for p in prims) + g1
-        lines += g0 + ''.join(_el(p, f'fill="none" stroke="{INK}" stroke-width="{U}" stroke-linejoin="round"') for p in prims) + g1
+        if len(layer) < 4 or layer[3]:
+            lines += g0 + ''.join(_el(p, f'fill="none" stroke="{INK}" stroke-width="{U}" stroke-linejoin="round"') for p in prims) + g1
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}"{wh} role="img" aria-label="{label}">'
             f'<title>{label}</title><defs><clipPath id="{uid}-cut"><circle r="{GLOBE_R}"/></clipPath></defs>{fills}{lines}</svg>')
 
@@ -237,26 +280,22 @@ def main():
     open(os.path.join(OUT, 'globe.svg'), 'w').write(globe_svg(GLOBE, 'EARF: a globe of land circles and a band of ocean') + '\n')
     open(os.path.join(OUT, 'earf.svg'), 'w').write(wordmark_svg() + '\n')
     open(os.path.join(OUT, 'earf-lockup.svg'), 'w').write(lockup_svg() + '\n')
-    open(os.path.join(OUT, 'globe-continents.svg'), 'w').write(
-        globe_svg(CONTINENTS, 'EARF: a globe whose land overlaps into continents', uid='cont') + '\n')
-    open(os.path.join(OUT, 'globe-continents-band.svg'), 'w').write(
-        globe_svg(CONTINENTS_BAND, 'EARF: the continents on the band', uid='contb') + '\n')
+    for key, name, sub, layers in OPTIONS:
+        open(os.path.join(OUT, f'globe-{key}.svg'), 'w').write(globe_svg(layers, f'EARF: {name.lower()}, {sub}', uid=key) + '\n')
     rows.insert(0, '<section><h2>The logo <i>the globe and the wordmark</i></h2>'
                 f'<div class="lock">{lockup_svg(size=150, uid="s0")}</div>'
                 f'<div class="lock">{lockup_svg(colour="#F2EFEA", size=70, uid="s1")}'
                 f'{lockup_svg(size=40, uid="s2")}</div></section>'
-                '<section><h2>The continents <i>options: the land of geometric shapes</i></h2><div class="row">'
-                f'<figure>{globe_svg(GLOBE, "EARF", 200, "s3")}<figcaption>the globe (chosen)</figcaption></figure>'
-                f'<figure>{globe_svg(CONTINENTS, "EARF", 200, "s4")}<figcaption>continents<i>parallelograms and triangles'
-                '</i></figcaption></figure>'
-                f'<figure>{globe_svg(CONTINENTS_BAND, "EARF", 200, "s5")}<figcaption>continents on the band<i>with B3\'s '
-                'tropics</i></figcaption></figure></div></section>')
+                '<section><h2>The globe and its options <i>B3 the logo; C2 overlapped and nested, options</i></h2><div class="row wrap">'
+                f'<figure>{globe_svg(GLOBE, "EARF", 200, "s3")}<figcaption>B3<i>the logo</i></figcaption></figure>'
+                + ''.join(f'<figure>{globe_svg(layers, "EARF", 200, "o" + key)}<figcaption>{name}<i>{sub}</i></figcaption></figure>'
+                          for key, name, sub, layers in OPTIONS) + '</div></section>')
     open(os.path.join(OUT, 'sheet.html'), 'w').write(
         '<!doctype html><meta charset="utf-8"><title>EARF marks</title><style>'
         'body{margin:0;padding:56px 64px;background:#F2EFEA;font:14px/1.4 "IBM Plex Mono",monospace;color:#5E5A53;width:1100px}'
         'header{font:700 64px/1 "Instrument Sans",Arial,sans-serif;letter-spacing:-2px;color:#1A1917;margin-bottom:40px}'
         'section{margin-bottom:28px}h2{margin:0 0 8px;font:600 24px/1 "Instrument Sans",Arial,sans-serif;color:#1A1917}'
-        'h2 i{display:inline;font:400 14px/1 "IBM Plex Mono",monospace;color:#6F6A61;margin-left:10px}.row{display:flex;gap:44px}'
+        '.wrap{flex-wrap:wrap;row-gap:28px}h2 i{display:inline;font:400 14px/1 "IBM Plex Mono",monospace;color:#6F6A61;margin-left:10px}.row{display:flex;gap:44px}'
         'figure{margin:0;width:200px}figure svg{display:block}figcaption{letter-spacing:.06em;text-transform:uppercase;'
         'color:#1A1917}b{font-weight:500;margin-right:6px}i{display:block;font-style:normal;color:#8A857C;font-size:12px}'
         '.lock{display:flex;align-items:center;gap:56px;margin:0 0 24px}.lock svg{display:block}'
