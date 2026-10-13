@@ -2,8 +2,8 @@
 
 The owner's idea of 2026-10-10 was speakers that look like their reference photograph of Friendly Pressure's horns
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
-it). The brand is **EARF**, its logo a globe of circles beside the name built of the marks' shapes (the owner, round 11;
-Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
+it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
+11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
 Status: **concept, round 11**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
@@ -26,6 +26,7 @@ drawn the same way.
 | "Okay new brand idea EARF and the logo is a globe made of geometric shapes" | **EARF**, with **a globe of geometric shapes** in the marks' acrylic style: the ocean a circle, the land a triangle, a parallelogram and a circle cut by it (`marks/globe.svg`). The alternate is the cloud's ingredients, three equal circles side by side, the outer two cut by the middle one as meridians, and a band across as the tropics (`marks/globe-alt.svg`). The look book's cover sets the globe beside EARF over FLOOR STANDING LOUDSPEAKERS, and every page's foot says EARF. Round 10's geometric dog is gone with Dogs Barking. |
 | "I like the geometric shape earf logo, except the top of the A shouldn't have the parallelograms protruding past each other. They should overlap cleanly at the very top. On the R, the parallelogram should come out more so it's flush with or just past the edge of the circle like it is in type. I like B2 for the globe but would be interested in seeing one where the green shapes overlap more to form continents", then: "I meant I liked B3, not B2, but wanted to try one that incorporated the geometric shapes in a way that looks more like land." | **The wordmark**: EARF built of the marks' primitives (rectangles; two leaning slabs and a bar for the A; a stem, a circle and a slab for the R), filled ocean blue and outlined like the marks (`marks/earf.svg`). The A's legs now lean exactly enough for their tops to coincide, one clean top, and the R's leg runs out to just past its bowl (by 8 on a cap height of 300). **The globe is B3**: a circle of ocean, two equal circles of land cut by it (their arcs the meridians) and a band of ocean across them (`marks/globe.svg`; `marks/earf-lockup.svg` sets it beside the wordmark). **The continents** were shown as an option (the Americas, Eurasia, Africa and Australia of parallelograms and triangles, alone and on B3's band; B3's meridians made the land too busy), and are replaced by the next note's options. The look book's cover carries the lockup. The first globe, of three separate shapes, is gone. |
 | "B3 is still the strongest. C2 was also okay, but I'd prefer to have the shapes overlap and for the triangle to not look italicized. For that one, the continent doesn't need to look geographically correct. One other option is to put a triangle inside the circle and a square inside the triangle and cover, with the points of each shape at the stroke of the outer shape, then coloring in the smaller shapes created as green or blue." | **B3 stays the logo.** Two options beside it (`marks/globe-<option>.svg`): **C2 overlapped**, an upright, equilateral triangle, a circle and a parallelogram overlapping into one continent of three sizes, placed by a search so no two outlines come within 60 and none cross under 28 degrees (`c2-overlap`), and the same with a square, so nothing leans (`c2-square`); and **the nested globe**, an equilateral triangle in the circle with its corners on it, the square standing on the triangle's base with its top corners on its sides, the regions between them ocean or land, in four colourings: ocean, land, ocean (`nested`), land, ocean, land (`nested-land`), one more circle in the square, reading "and cover" as "and so on" (`nested-circle`), and the land north, the ocean south (`nested-mixed`). They replace the continents. |
+| "B3 final for now" | **B3 is the logo**, decided. The options (C2 overlapped, the nested globe) stay in `marks.py` and on the marks sheet, set aside. |
 
 EARF reads three ways: earth (the globe, and Bark, Cloud and Crag are the earth's own), ear (earmilk, earworm and
 earwig's family) and arf, a dog's bark, which keeps something of Dogs Barking.
@@ -839,9 +840,12 @@ The shots are in `studio/shots/barkhorn/`:
    Maybe there's a better name for each category though.") Bark and Crag are kept as the proposal: under EARF all three
    are the earth's own, Cloud and Crag alliterate, and the crag mark draws its name.
 2. **The marks' colours.** One for each speaker, from its material (the table above). Change any?
-3. **EARF.** B3 stays the logo ("B3 is still the strongest"). Does either option beat it: C2 overlapped (with the
-   parallelogram or the square), or the nested globe (and in which colouring)? And clear the name first: EARFUN is a
-   registered audio brand.
+3. **EARF.** The logo is decided (B3, "final for now"). Clear the name before it is used: EARFUN is a registered audio
+   brand.
 4. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
    the commercial benchmarks, a resin step wedge and acrylic tints? And send the horn for casting quotes?
 5. **Price.** [PAIR PRICE] stays open.
+6. **The cover line.** The critic's "FLOOR-STANDING HORN LOUDSPEAKERS", or the owner's "FLOOR STANDING LOUDSPEAKERS"
+   (kept)?
+7. **Sharper renders.** Render the eleven again at twice the resolution and fix what the critic found (the lapis
+   cabinet's smudge, the Poison and Smoke horn throats, the Crag horns' mouths)? A long job, eleven pairs of frames.

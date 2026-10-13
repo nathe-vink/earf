@@ -18,7 +18,7 @@ house shape."
   shows through as if each piece were clear acrylic laid on the others.
 - Like the cloud, the crag is three shapes of three sizes on one base line, where their lines merge.
 - The logo (round 11, the owner: "Okay new brand idea EARF and the logo is a globe made of geometric shapes"; then, of
-  the drafts: "I meant I liked B3, not B2", and "B3 is still the strongest"): the globe is B3, the cloud's ingredients
+  the drafts: "I meant I liked B3, not B2", "B3 is still the strongest" and "B3 final for now"): the globe is B3, the cloud's ingredients
   in two colours: a circle of ocean, two equal circles of land cut by it, their arcs the meridians, and a band of ocean
   across them as the tropics, in the same acrylic style. Two options beside it, from the owner's next note: "C2 was
   also okay, but I'd prefer to have the shapes overlap and for the triangle to not look italicized. For that one, the
@@ -286,7 +286,7 @@ def main():
                 f'<div class="lock">{lockup_svg(size=150, uid="s0")}</div>'
                 f'<div class="lock">{lockup_svg(colour="#F2EFEA", size=70, uid="s1")}'
                 f'{lockup_svg(size=40, uid="s2")}</div></section>'
-                '<section><h2>The globe and its options <i>B3 the logo; C2 overlapped and nested, options</i></h2><div class="row wrap">'
+                '<section><h2>The globe <i>B3, the logo (final for now); the options set aside</i></h2><div class="row wrap">'
                 f'<figure>{globe_svg(GLOBE, "EARF", 200, "s3")}<figcaption>B3<i>the logo</i></figcaption></figure>'
                 + ''.join(f'<figure>{globe_svg(layers, "EARF", 200, "o" + key)}<figcaption>{name}<i>{sub}</i></figcaption></figure>'
                           for key, name, sub, layers in OPTIONS) + '</div></section>')
