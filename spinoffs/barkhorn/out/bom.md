@@ -24,23 +24,24 @@
 | bark-face, bark | buy | 6 | Bark for laminating, a square metre: paper birch (Betula papyrifera) sheet from fallen or felled trees, or a smooth-barked gum's shed bark pressed flat (or a UV-printed veneer of it); approve a sample board first |  | [PRICE] |
 | woofer-fixings | buy | 2 | M6 x 25 button heads (A2) with M6 T-nuts, a set of 8 (the 15PR400's eight holes on 375) |  | [PRICE] |
 | hf-fixings | buy | 2 | The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set |  | [PRICE] |
-| post-inserts | buy | 2 | Brass threaded inserts M10 x 1: four bonded into the waveguide's pads (13 across, 14 long) and four screwed into the cabinet's top (14 across, 15 long, one with a through-bore for the cable), a set of eight |  | [PRICE] |
+| post-fixings | buy | 2 | The posts' brass fittings: four M10 x 1 threaded inserts bonded into the waveguide's pads (13 across, 14 long), and four sockets bonded into the cabinet's top (14 across, 15 long: a 10.2 bore 13 deep on a 2 floor, the cable post's floor with a 7 hole), turned to order, a set of eight |  | [PRICE] |
 | gasket | buy | 4 | 1.5 mm closed-cell foam gasket strip, 1 m |  | 5.00 |
 | damping | buy | 4 | Polyester fibre fill, 150 g |  | 8.00 |
 | amp-fixings | buy | 2 | Hypex 4.3 x 16 self-tapping pan heads and 3 mm EPDM tape, a plate's set |  | 10.00 |
-| cable | buy | 6 | Round-sheathed speaker cable 2 x 1.5 mm2, 1 m |  | 2.00 |
+| cable | buy | 4 | Round-sheathed speaker cable 2 x 1.5 mm2, 1 m |  | 2.00 |
+| hf-pair | buy | 2 | HF lead: two 0.75 mm2 (18 AWG) silicone-insulated wires twisted together, 1.2 m (about 4.5 thick, through the post's 7 bore), ferrules at the pod's end, and a two-way lever connector (Wago 221-412 or like) on the driver's own leads |  | 6.00 |
 | terminals | buy | 8 | 6.3 mm insulated push-on terminal |  | 0.50 |
 | hf-pad | buy | 2 | Resistor L-pad for the HF channel, about -9 dB at 16 ohm (lowers the amplifier's hiss through the 108 dB driver) |  | [PRICE] |
 | glides | buy | 2 | Felt glides 30 mm, screw-in, a set of 4 |  | [PRICE] |
 
 | | USD |
 |---|---|
-| buy | 2,345 |
+| buy | 2,353 |
 | cast | 1,646 |
 | cut | 344 |
 | lathe | 219 |
 | print | 124 |
-| total | 4,677 |
+| total | 4,685 |
 
-No price yet for: Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour; Grille magnets: eight 15 x 3 neodymium discs (N42), four attracting pairs, a set; Bark for laminating, a square metre: paper birch (Betula papyrifera) sheet from fallen or felled trees, or a smooth-barked gum's shed bark pressed flat (or a UV-printed veneer of it); approve a sample board first; M6 x 25 button heads (A2) with M6 T-nuts, a set of 8 (the 15PR400's eight holes on 375); The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set; Brass threaded inserts M10 x 1: four bonded into the waveguide's pads (13 across, 14 long) and four screwed into the cabinet's top (14 across, 15 long, one with a through-bore for the cable), a set of eight; Resistor L-pad for the HF channel, about -9 dB at 16 ohm (lowers the amplifier's hiss through the 108 dB driver); Felt glides 30 mm, screw-in, a set of 4.
+No price yet for: Acoustically transparent speaker cloth (a knit sold for grilles), about 0.6 x 0.95 m a grille, in the finish's colour; Grille magnets: eight 15 x 3 neodymium discs (N42), four attracting pairs, a set; Bark for laminating, a square metre: paper birch (Betula papyrifera) sheet from fallen or felled trees, or a smooth-barked gum's shed bark pressed flat (or a UV-printed veneer of it); approve a sample board first; M6 x 25 button heads (A2) with M6 T-nuts, a set of 8 (the 15PR400's eight holes on 375); The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set; The posts' brass fittings: four M10 x 1 threaded inserts bonded into the waveguide's pads (13 across, 14 long), and four sockets bonded into the cabinet's top (14 across, 15 long: a 10.2 bore 13 deep on a 2 floor, the cable post's floor with a 7 hole), turned to order, a set of eight; Resistor L-pad for the HF channel, about -9 dB at 16 ohm (lowers the amplifier's hiss through the 108 dB driver); Felt glides 30 mm, screw-in, a set of 4.
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

@@ -74,7 +74,9 @@ P = dict(
                         boss=dict(d=184.0, t=14.0, bolt_d=170.0, bolts=4, bolt_hole=7.0),   # 2 clear inside the pod
                         adaptor=dict(t=10.0, od=184.0, driver_holes=6.6, sink=12.5, screw_hole=5.5),
                         posts=dict(front=(183.0, 35.0), back=(40.0, 75.0), d=10.0, bore=7.0, pad_d=26.0, pad_h=6.0,
-                                   insert_d=13.0, insert_depth=14.0, top_insert=(14.0, 15.0), cable_post=2),
+                                   insert_d=13.0, insert_depth=14.0, socket=(14.0, 15.0), cable_post=2),
+                                   # socket: the brass cup in the top each post's plain foot stands in, 14 across, 15
+                                   # deep (a 10.2 bore 13 deep on a 2 floor, the cable post's floor holed for the pair)
                         # its back: 'shell' (the photograph's: the shell follows the flare to a round pod round the driver)
                         # or 'tub' (the outside runs straight back from the rim to a flat back that hides the driver, the
                         # flare its own skin inside; the back pair of posts wider, under its flat bottom)
@@ -202,16 +204,17 @@ def parts(P):
     back -= box(cx - (amp['plate_w'] + 0.5) / 2, D - 4.5, az - (amp['plate_h'] + 0.5) / 2, cx + (amp['plate_w'] + 0.5) / 2, D + 1, az + (amp['plate_h'] + 0.5) / 2)
     back -= box(cx - amp['cutout_w'] / 2, D - T - 1, az - amp['cutout_h'] / 2, cx + amp['cutout_w'] / 2, D, az + amp['cutout_h'] / 2)
 
-    # the top: the cast horn's four posts screw into brass inserts in it (the front pair stand over the front panel's
-    # top edge, so nothing can hang below; the HF cable comes down inside one of the rear pair and through a hole under
-    # its insert), or the study forms' rods stand in inserts in it, the cable through a gland behind them
+    # the top: the cast horn's four posts stand in brass sockets bonded in it (round 11, the owner: "go with the sockets
+    # and the thin wire"; the front pair stand over the front panel's top edge, so nothing can hang below; the HF pair
+    # comes down inside one of the rear pair and through a hole under its socket), or the study forms' rods stand in
+    # inserts in it, the cable through a gland behind them
     top = box(T, 0, H - T, W - T, D, H)
     hz = P['horn']
     rods = rod_places(P)
     if hz['form'] == 'cast':
         pp = hz['cast']['posts']
         for i, (rx, ry) in enumerate(rods):
-            top -= cyl('z', (rx, ry), pp['top_insert'][0], H - pp['top_insert'][1], H + 1)
+            top -= cyl('z', (rx, ry), pp['socket'][0], H - pp['socket'][1], H + 1)
             if i == pp['cable_post']:
                 top -= cyl('z', (rx, ry), pp['bore'] + 1.0, H - T - 1, H)
     else:
@@ -289,7 +292,8 @@ def parts(P):
                         notes=[('the tub\'s back, a lid; six M4 screws into inserts round its edge; the cable leaves through a post below'
                                 if hz['form'] == 'cast' and hz['cast']['back'] == 'tub' else
                                 'closes the pod behind the driver; a spigot locates it, three M4 screws hold it; '
-                                + ('the cable leaves through a post below' if hz['form'] == 'cast' else 'the cable leaves through its centre'))]))
+                                + ('the HF pair leaves through a post below; unplugged here, the horn lifts off its sockets'
+                                   if hz['form'] == 'cast' else 'the cable leaves through its centre'))]))
     hfp, _ = driver_part('hf', P['hf'], hf, centre=(cx, wg['driver_y'], zc))
     out.append(hfp)
     if hz['form'] == 'cast':
@@ -318,12 +322,14 @@ def parts(P):
         (Part('woofer-fixings', None, Bought('m6-tnut-set'), notes=['the T-nuts hammered in from inside before the glue-up']) if wood else
          Part('woofer-fixings', None, Bought('m6-plastic-inserts'), notes=['the inserts screwed into the panel from the front, in 8.0 holes'])),
         Part('hf-fixings', None, Bought('hf-mount-screws' if hz['form'] == 'cast' else 'm6-hf-screws')),
-        *([Part('post-inserts', None, Bought('post-inserts'))] if hz['form'] == 'cast' else []),
+        *([Part('post-fixings', None, Bought('post-fixings'))] if hz['form'] == 'cast' else []),
         *([] if wood else [Part('weld-rod', None, Bought('hdpe-weld-rod'))]),
         Part('gasket', None, Bought('gasket-foam'), qty=2),
         Part('damping', None, Bought('damping-fill'), qty=2),
         Part('amp-fixings', None, Bought('amp-screws')),
-        Part('cable', None, Bought('speaker-cable-1m'), qty=3),
+        Part('cable', None, Bought('speaker-cable-1m'), qty=2),
+        *([Part('hf-pair', None, Bought('hf-pair'), notes=['up the cable post from the L-pad to the driver: 7 bore'])] if hz['form'] == 'cast' else
+          [Part('hf-cable', None, Bought('speaker-cable-1m'))]),
         Part('terminals', None, Bought('push-on-terminal'), qty=4),
         Part('hf-pad', None, Bought('attenuator-l-pad')),
         Part('glides', None, Bought('felt-glides')),
@@ -388,8 +394,10 @@ def disc_magnets(P, cx, wz):
 
 
 def posts(P, places, shell):
-    """The cast horn's four posts: stainless lamp tube threaded M10 x 1 at both ends, each screwed into a brass insert
-    bonded in a pad under the horn and into another in the top; the HF cable comes down inside one of them."""
+    """The cast horn's four posts: stainless lamp tube threaded M10 x 1 at its top, screwed into a brass insert bonded in
+    a pad under the horn, its plain foot standing in a brass socket bonded in the top (round 11: a post threaded into
+    fixed inserts at both ends cannot be screwed home, so the horn and its posts lift off as one); the HF pair comes
+    down inside one of them."""
     from build123d import Axis
     H, T = P['H'], P['T']
     c = P['horn']['cast']; pp = c['posts']
@@ -401,13 +409,14 @@ def posts(P, places, shell):
             rr = (pp['insert_d'] / 2 + pp['pad_d'] / 2) / 2
             hits = shell.find_intersection_points(Axis((rx + rr * math.cos(a), ry + rr * math.sin(a), H + 1.0), (0, 0, 1)))
             foot = min([foot] + [h[0].Z for h in hits if h[0].Z > H + 1.0])
-        z0, z1 = H - pp['top_insert'][1] + 2.0, foot + pp['insert_depth'] - 2.0
+        z0, z1 = H - pp['socket'][1] + 2.0, foot + pp['insert_depth'] - 2.0
         tube = cyl('z', (rx, ry), pp['d'], z0, z1) - cyl('z', (rx, ry), pp['bore'], z0 - 1, z1 + 1)
         cable = i == pp['cable_post'] + 1
         out.append(Part(f'post-{i}', tube, Machined('stainless', 'lathe'), finish='rod', group='horn',
                         notes=[f'{z1 - z0:.0f} long ({foot - H:.0f} showing): stainless tube {pp["d"]:g} x {pp["bore"]:g}, threaded M10 x 1 '
-                               f'{pp["insert_depth"] - 2:g} at the top and {pp["top_insert"][1] - 2:g} at the foot, each end into a brass insert'
-                               + ('; the HF cable runs down inside it' if cable else '')]))
+                               f'{pp["insert_depth"] - 2:g} at the top into the brass insert in its pad; its foot plain, standing '
+                               f'{pp["socket"][1] - 2:g} deep in a brass socket in the top'
+                               + ('; the HF pair runs down inside it' if cable else '')]))
     return out
 
 
@@ -826,7 +835,7 @@ PRODUCT = Product(
     notes=['Bark on the shell (sides, top, bottom and back): real birch bark sheet (Betula papyrifera, from fallen or felled trees) laminated to the plywood with PVA in a vacuum bag and sealed with a matt waterborne lacquer, wrapped round the shell\'s front edges; for eucalyptus, the shed bark of a smooth-barked gum (spotted or snow gum) pressed flat and laminated the same way, or a UV-printed veneer of it. Approve a sample board first.',
            'Glue-up: sides to the bottom, the brace, then the front panel (set back 24 mm), the back, then the top.',
            'The woofer flush in its rebate on a gasket, eight M6 T-nuts from inside, the ring over its frame; the port pushed in dry, trimmed to tune (impedance minimum at fb), then bonded.',
-           'The waveguide stands on four posts, stainless lamp tube 10 x 7 threaded M10 x 1 at both ends, screwed into brass inserts bonded in pads cast under it and into inserts in the top; the HF cable runs down inside a rear post.',
+           'The waveguide stands on four posts, stainless lamp tube 10 x 7, each threaded M10 x 1 at its top into a brass insert bonded in a pad cast under the horn, its plain foot standing in a brass socket bonded in the top, so the horn and its posts lift off as one. The HF lead, a thin twisted pair, runs from the L-pad up inside a rear post and through a hole in its pad into the pod, where it plugs into the driver\'s leads; to lift the horn off, the cap off and the pair unplugged.',
            'The front: the panel faced in bark (1 mm) round the ring and the port, and a cloth disc over the woofer, its MDF frame standing on the ring on four magnet pairs, its face 18.5 clear of the cone at rest.',
            'The FA122 crosses at about 800 Hz (LR4: B&C asks 12 dB/oct or steeper there) with the HF channel about 9 dB down (108 dB at 2.83 V against the woofer\'s 99), part of it in the passive L-pad after the amplifier, so its hiss stays inaudible.',
            'Hypex advises a sealed box round the amplifier module (left out here, as in the kit\'s example).'],
