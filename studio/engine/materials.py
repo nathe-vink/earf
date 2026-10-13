@@ -1152,7 +1152,8 @@ def _stone(nt, b, p, normal_in=None):
     if p.get('strata'):
         col = _strata(nt, {'palette': p['strata'], 'band': p['band'], 'warp': p['warp']})
     else:
-        f = _folded(nt, node, p['band_m'], p['warp'], p['stretch'], seed=p['seed'], detail=p['detail'], spread=(0.25, 0.75))
+        f = _folded(nt, node, p['band_m'], p['warp'], p['stretch'], seed=p['seed'], detail=p['detail'], spread=(0.25, 0.75),
+                    axis=p.get('stretch_axis', 0))
         if p['repeat'] > 1:
             f = math_('FRACT', math_('MULTIPLY', f, p['repeat']))
         r = node('ShaderNodeValToRGB'); cr = r.color_ramp; cr.interpolation = 'LINEAR'
@@ -1173,7 +1174,9 @@ def _stone(nt, b, p, normal_in=None):
         if p.get(key):                               # turquoise's matrix: dark veins along the cells' edges
             kc, size, width = p[key]
             geo = node('ShaderNodeNewGeometry')
-            mp = node('ShaderNodeMapping'); mp.inputs['Scale'].default_value = (1.0 / size, 1.0 / size, 1.0 / size)
+            mp = node('ShaderNodeMapping'); ws = [1.0 / size] * 3
+            ws[p.get('stretch_axis', 0)] = 1.0 / (size * p.get('web_stretch', 1.0))   # the cells drawn out with the bands
+            mp.inputs['Scale'].default_value = tuple(ws)
             nt.links.new(geo.outputs['Position'], mp.inputs['Vector'])
             nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 0.6; nz.inputs['Detail'].default_value = 2.0
             nt.links.new(mp.outputs['Vector'], nz.inputs['Vector'])

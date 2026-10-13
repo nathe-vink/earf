@@ -779,30 +779,35 @@ VARIANTS.update({
 # much like a pink malachite. Let's replace the two of them with one more interesting rock. Something that will pop,
 # that is a different color than the other options": spiderweb turquoise, sky blue-green in a dark web (their presets
 # stay in the engine's library)
-def crag(stone, cover, deep=None, bands=None, milk=0.0):
+def crag(stone, cover, deep=None, bands=None, milk=0.0, horn=None):
     """A speaker in one stone's pattern, horn and cabinet, with a cover of the stone's colour: the cabinet pressed
-    recycled plastic in the stone's pattern; the horn cast resin with the pattern cast in (round 10). With `deep` the
-    resin is clear, the pattern through it and `milk` a white haze in it (round 11: the critic of the look book found
-    the opaque horns' mouths read as "solid blocks with a dot"; cast in, the flare's depth shows, as the bark horns'
-    does), else opaque, the stone's pigment through it. `bands`: the stone's colours changed."""
+    recycled plastic in the stone's pattern; the horn cast resin with the pattern cast in (round 10), opaque, the
+    stone's pigment through it, `horn` its own settings (the pattern drawn out down its walls, below). With `deep` the
+    resin clear instead, the pattern through it and `milk` a white haze in it (tried in round 11; the owner prefers
+    the opaque horns). `bands`: the stone's colours changed."""
     over = {'bands': bands} if bands else {}
-    horn = ({'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': deep, 'horn_cloud': 0.0,
-             'materials': {'horn': {'print': stone, 'print_params': over, 'print_strength': 0.9, 'roughness': 0.08, 'milk': milk},
-                           **({'bark': over} if over else {})}} if deep else
-            {'horn_preset': stone, 'horn': '#FFFFFF', 'horn_deep': '#FFFFFF', 'horn_cloud': 0.0,
-             **({'materials': {'horn': over, 'bark': over}} if over else {})})
-    return {'bark': stone, 'panel': cover, 'cloth': cover, 'cork': '#3B2F28', 'disc': cover, **horn}
+    own = {**over, **(horn or {})}
+    h = ({'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': deep, 'horn_cloud': 0.0,
+          'materials': {'horn': {'print': stone, 'print_params': over, 'print_strength': 0.9, 'roughness': 0.08, 'milk': milk},
+                        **({'bark': over} if over else {})}} if deep else
+         {'horn_preset': stone, 'horn': '#FFFFFF', 'horn_deep': '#FFFFFF', 'horn_cloud': 0.0,
+          **({'materials': {'horn': own, **({'bark': over} if over else {})}} if own else {})})
+    return {'bark': stone, 'panel': cover, 'cloth': cover, 'cork': '#3B2F28', 'disc': cover, **h}
 
 
 # lapis lazuli without its white calcite (round 11: the critic read a wisp of it on the cabinet's corner as a smudge,
-# and the owner's words for it are "deep blue, flecked with gold"): the pale stops blue. Its horn stays opaque (cast in,
-# the deep blue reads as smoke); the malachite's and the turquoise's are cast in
+# and the owner's words for it are "deep blue, flecked with gold"): the pale stops blue
 LAPIS_BANDS = [[0.0, '#0B1648'], [0.22, '#0F1D5A'], [0.42, '#16286E'], [0.58, '#0E1B55'], [0.72, '#1B3282'], [0.83, '#24408F'],
                [0.86, '#2B4898'], [0.895, '#3552A3'], [0.925, '#284391'], [0.96, '#16286E'], [1.0, '#0F1D5A']]
+# the Crag horns opaque, like stone (round 11, the owner: "i kind of prefer the opaque waveguides for the stone
+# options"), the pattern drawn out down the walls into the throat as a pour runs down a mould, so the flare reads (the
+# critic of the look book: the opaque horns' mouths "read as solid blocks with a dot"): the malachite's bands become
+# rings following the horn in, the turquoise's web drawn in with them; the lapis's deep blue and gold flecks read as is
+DOWN = {'stretch': 4.0, 'stretch_axis': 1}
 VARIANTS.update({
-    'crag-malachite': crag('malachite', '#1F4C34', '#CFE3D6', milk=0.1),
+    'crag-malachite': crag('malachite', '#1F4C34', horn=DOWN),
     'crag-lapis': crag('lapis', '#1D2D6B', bands=LAPIS_BANDS),
-    'crag-turquoise': crag('turquoise', '#3597A2', '#CDEBEE', milk=0.3),
+    'crag-turquoise': crag('turquoise', '#3597A2', horn={**DOWN, 'web_stretch': 2.5}),
 })
 # the cobalt marble's horn stays opaque marbled resin (cast in, the white goes clear and the cobalt veins grey), polished,
 # its veins drawn out down the walls into the throat as a pour runs down a mould, so the flare reads (the critic: the

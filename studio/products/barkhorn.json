@@ -1205,17 +1205,14 @@
    "cloth": "#1F4C34",
    "cork": "#3B2F28",
    "disc": "#1F4C34",
-   "horn_preset": "clear_resin",
+   "horn_preset": "malachite",
    "horn": "#FFFFFF",
-   "horn_deep": "#CFE3D6",
+   "horn_deep": "#FFFFFF",
    "horn_cloud": 0.0,
    "materials": {
     "horn": {
-     "print": "malachite",
-     "print_params": {},
-     "print_strength": 0.9,
-     "roughness": 0.08,
-     "milk": 0.1
+     "stretch": 4.0,
+     "stretch_axis": 1
     }
    }
   },
@@ -1334,17 +1331,15 @@
    "cloth": "#3597A2",
    "cork": "#3B2F28",
    "disc": "#3597A2",
-   "horn_preset": "clear_resin",
+   "horn_preset": "turquoise",
    "horn": "#FFFFFF",
-   "horn_deep": "#CDEBEE",
+   "horn_deep": "#FFFFFF",
    "horn_cloud": 0.0,
    "materials": {
     "horn": {
-     "print": "turquoise",
-     "print_params": {},
-     "print_strength": 0.9,
-     "roughness": 0.08,
-     "milk": 0.3
+     "stretch": 4.0,
+     "stretch_axis": 1,
+     "web_stretch": 2.5
     }
    }
   }
