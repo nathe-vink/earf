@@ -435,14 +435,14 @@ def _tube(bpy, name, pts, r, mat, n=8):
 
 def prop(bpy, name, p, mats):
     """Props, each at `position` [x, y] (its centre on the floor), turned `rotate_z` degrees: rug, table, books,
-    sideboard (with a turntable), vase (with branches), lamp, sofa, curtain, frame."""
+    sideboard (with a turntable), vase (with branches), lamp, sofa (`seats` 1: one seat), armchair, curtain, frame."""
     import random
     kind = p['kind']; x, y = p['position']; rot = math.radians(p.get('rotate_z', 0))
     rnd = random.Random(p.get('seed', 7))
     made = []
     if kind == 'rug':
         w, d = p.get('size', [2.0, 1.4])
-        m = _mat_fabric(bpy, name, p.get('color', '#C9C1B4'), sheen=0.7, bump=0.35, weave_mm=3.5)
+        m = _mat_fabric(bpy, name, p.get('color', '#C9C1B4'), sheen=p.get('sheen', 0.7), bump=0.35, weave_mm=3.5)
         made.append(box(bpy, name, -w / 2, -d / 2, 0.0, w / 2, d / 2, 0.009, m, bevel=0.004))
     elif kind == 'table':
         w, d, hh = p.get('size', [1.0, 0.5, 0.42])
@@ -523,7 +523,7 @@ def prop(bpy, name, p, mats):
         made.append(box(bpy, name + '-back', -w / 2, d / 2 - 0.2, 0.4, w / 2, d / 2, hh, fab, bevel=0.05))
         for sx in (-1, 1):
             made.append(box(bpy, f'{name}-arm{sx}', sx * w / 2 - (0.18 if sx > 0 else 0), -d / 2, 0.4, sx * w / 2 + (0.18 if sx < 0 else 0), d / 2, 0.62, fab, bevel=0.05))
-        nseat = 2
+        nseat = p.get('seats', 2)                      # seats 1: an armchair
         for k in range(nseat):
             x0_ = -w / 2 + 0.18 + k * (w - 0.36) / nseat; x1_ = x0_ + (w - 0.36) / nseat
             made.append(box(bpy, f'{name}-seat{k}', x0_ + 0.005, -d / 2 + 0.02, 0.4, x1_ - 0.005, d / 2 - 0.2, 0.52, fab, bevel=0.04))
@@ -531,6 +531,35 @@ def prop(bpy, name, p, mats):
             for sy in (-1, 1):
                 lg = _cyl(bpy, f'{name}-leg{sx}{sy}', 0.018, 0.12, legm, n=16, r_top=0.024)
                 lg.location = Vector((sx * (w / 2 - 0.08), sy * (d / 2 - 0.08), 0)); made.append(lg)
+    elif kind == 'armchair':
+        # an easy chair: a wooden frame (tapered legs, side rails, flat arms on the front legs, back posts raked
+        # back) holding a seat cushion and a back cushion; front toward -y before rotate_z
+        w, d = p.get('size', [0.72, 0.8])
+        sh, ah, bh, rake = p.get('seat_h', 0.42), p.get('arm_h', 0.6), p.get('back_h', 0.84), math.radians(p.get('rake', 14))
+        fab = _mat_fabric(bpy, name + '-fabric', p.get('color', '#7D6B58'), sheen=0.5, bump=0.3, weave_mm=2.2)
+        wood = M.make(bpy, name + '-wood', 'birch', {'color': p.get('wood', '#6E4B30'), 'roughness': 0.4})
+        xl, yf, yb = w / 2 - 0.035, -d / 2 + 0.05, d / 2 - 0.12
+        for sx in (-1, 1):
+            fl = _cyl(bpy, f'{name}-front-leg{sx}', 0.016, ah - 0.012, wood, n=20, r_top=0.019)
+            fl.location = Vector((sx * xl, yf, 0)); made.append(fl)
+            rl = _cyl(bpy, f'{name}-rear-leg{sx}', 0.016, sh - 0.1, wood, n=20, r_top=0.02)
+            rl.location = Vector((sx * xl, yb, 0)); made.append(rl)
+            made.append(box(bpy, f'{name}-rail{sx}', sx * xl - 0.014, yf, sh - 0.14, sx * xl + 0.014, yb, sh - 0.1, wood, bevel=0.004))
+            made.append(box(bpy, f'{name}-arm{sx}', sx * xl - 0.03, yf - 0.03, ah - 0.012, sx * xl + 0.03, yb + 0.02, ah + 0.012, wood,
+                            bevel=0.009))
+            L = bh - sh + 0.12                          # the back post, from the rail's back end, raked back
+            bp = _cyl(bpy, f'{name}-back-post{sx}', 0.017, L, wood, n=20, r_top=0.014)
+            bp.rotation_euler = (-rake, 0, 0); bp.location = Vector((sx * xl, yb, sh - 0.14)); made.append(bp)
+        for yy in (yf, yb):                             # the front and back rails under the seat
+            made.append(box(bpy, f'{name}-cross{yy:+.2f}', -xl, yy - 0.014, sh - 0.14, xl, yy + 0.014, sh - 0.1, wood, bevel=0.004))
+        made.append(box(bpy, name + '-seat', -xl + 0.02, yf - 0.02, sh - 0.1, xl - 0.02, yb + 0.02, sh + 0.03, fab, bevel=0.04))
+        # the back cushion leaning on the posts: built standing at the origin, raked, then set on the seat's back edge
+        bw_, bt_, bl_ = 2 * xl - 0.06, 0.1, bh - sh - 0.02
+        bc = box(bpy, name + '-back', -bw_ / 2, -bt_, 0.0, bw_ / 2, 0.0, bl_, fab, bevel=0.04)
+        bc.rotation_euler = (-rake, 0, 0); bc.location = Vector((0, yb + 0.03, sh + 0.02)); made.append(bc)
+        made.append(box(bpy, name + '-top-rail', -xl, -0.012, -0.02, xl, 0.012, 0.02, wood, bevel=0.006))
+        tr = made[-1]; tr.rotation_euler = (-rake, 0, 0)
+        tr.location = Vector((0, yb + math.sin(rake) * (L - 0.06) + 0.02, sh - 0.14 + math.cos(rake) * (L - 0.06)))
     elif kind == 'curtain':
         # a sheer panel hanging in folds; position is its centre on the floor, it faces -y before rotate_z
         w, hh = p.get('size', [1.0, 2.6]); folds = p.get('folds', 9); amp = p.get('depth', 0.035)

@@ -27,7 +27,8 @@ Sets:
 - pick6 (round 6): the line, without wood, its two ports, from three-quarter and from the front;
 - discs (round 7): the cloth disc in neutral colours on each cabinet, so the cabinet and the horn carry the colour;
 - lookbook (rounds 7 to 10): the look book's speakers by line (Bark, Cloud, Crag), each on a sweep in its own colour,
-  the cover on and off.
+  the cover on and off;
+- room12 (round 12): the pair in a living room, for scale.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -41,7 +42,7 @@ SHOTS = os.path.join(ROOT, 'studio', 'shots', 'barkhorn')
 PRODUCT = 'studio/products/barkhorn.json'
 STUDY = os.path.join(HERE, 'out', 'study')
 DAY = {'covers': '2026-10-10', 'front': '2026-10-11', 'study': '2026-10-11', 'proposal': '2026-10-11',
-       'experiments': '2026-10-11', 'horn10': '2026-10-13', 'lookbook2': '2026-10-13'}   # where each set's renders live (a set first made that day; the rest 2026-10-12)
+       'experiments': '2026-10-11', 'horn10': '2026-10-13', 'lookbook2': '2026-10-13', 'room12': '2026-10-13'}   # where each set's renders live (a set first made that day; the rest 2026-10-12)
 
 FRONT_CAM = {'position': [-0.78, -2.6, 1.0], 'target': [0.0, 0.0, 0.64], 'lens_mm': 66, 'level': True}
 THREE_Q = {'position': [1.45, -2.7, 1.45], 'target': [0.0, 0.08, 0.66], 'lens_mm': 60, 'level': True}
@@ -54,11 +55,11 @@ TURNED = dict(position=[0.0, -1.2, 0], rotate_z=180, shift=-1.2)
 
 
 def F(name, bark, label, options=(), materials=None, product=PRODUCT, camera=None, lights=None, at=None, size=None, stage=None,
-      hide=(), sky=None):
+      hide=(), sky=None, pair=None, sun=None):
     """One frame. `stage`: a set of its own in place of the room (a sweep), with its `sky`; `hide`: parts left out (the
-    cloth disc)."""
+    cloth disc); `pair`: several speakers, each {position, rotate_z}, in place of the one at `at`; `sun`: the shot's sun."""
     return dict(name=name, bark=bark, label=label, options=list(options), materials=materials or {}, product=product,
-                camera=camera, lights=lights or {}, at=at, size=size, stage=stage, hide=list(hide), sky=sky)
+                camera=camera, lights=lights or {}, at=at, size=size, stage=stage, hide=list(hide), sky=sky, pair=pair, sun=sun)
 
 
 def form_product(form):
@@ -127,6 +128,49 @@ HORN10 = {'position': [1.2, -2.5, 1.25], 'target': [0.0, 0.05, 1.06], 'lens_mm':
 LOOK2 = {**LOOK, 'lens_mm': round(68 * 840 / 545.9, 1)}
 HORN10_KEYS = ('autumn', 'green', 'turquoise')
 
+
+# round 12 (the critic of the look book: "an image that gives scale"; the owner: "Do 1-3"): the pair in a living room,
+# things whose size everyone knows round them: a low sideboard (52 high) with a record player and a record on it, an
+# armchair beside the left one at the same depth (so the two compare directly), a floor lamp, a print, the window's
+# light from the left. The speakers 44 cm out from the wall, 2.6 m apart, toed in 8 degrees; the room 6.2 x 6.4 x 2.8 m,
+# its back wall at y = 0.85
+ROOM12_CAM = {'position': [1.0, -5.1, 1.3], 'target': [-0.25, 0.2, 0.8], 'lens_mm': 35, 'level': True}
+ROOM12_PAIR = [{'position': [-1.3, 0.2, 0], 'rotate_z': 8}, {'position': [1.3, 0.2, 0], 'rotate_z': -8}]
+ROOM12_SET = {
+    'kind': 'room', 'size': [6.2, 6.4, 2.8], 'center': [0.0, -2.35],
+    'floor': {'plank_w': 0.18, 'plank_l': 1.8, 'base': '#B08A62', 'dark': '#97734F', 'light': '#C29C72', 'plank_contrast': 0.6},
+    'wall': {'color': '#E9E4DA'}, 'ceiling': '#F3F0EA', 'skirting': {'h': 0.1, 'color': '#E2DCD0'},
+    'windows': [{'wall': 'left', 'along': 1.75, 'sill': 0.45, 'size': [1.7, 2.0], 'mullions': [1, 2]}],
+    'props': [
+        {'kind': 'rug', 'position': [-0.2, -1.0], 'size': [2.6, 1.7], 'color': '#5A4E42', 'sheen': 0.15},
+        {'kind': 'sideboard', 'position': [0.0, 0.58], 'size': [1.5, 0.42, 0.52], 'color': '#6B4A33', 'wood': 'veneer',
+         'grain': 0.25, 'label': '#C9A227'},
+        {'kind': 'books', 'position': [0.16, 0.6], 'z': 0.52, 'colors': ['#3C4A5A', '#B9A27A', '#7A2E2A'], 'seed': 4},
+        {'kind': 'vase', 'position': [0.52, 0.58], 'z': 0.52, 'height': 0.3, 'branches': 5, 'seed': 3},
+        {'kind': 'frame', 'position': [0.0, 0.85], 'z': 1.55, 'size': [0.72, 0.92], 'artwork': {
+            'bands': [['#D9CDB6', 0.34], ['#6F7F66', 0.4], ['#8C8273', 0.26]], 'ground': '#E4DCCD', 'seed': 12}},
+        {'kind': 'lamp', 'position': [-2.65, 0.45], 'height': 1.6},
+        {'kind': 'armchair', 'position': [-2.3, -0.35], 'rotate_z': 45, 'color': '#8A7A66', 'wood': '#6E4B30'},
+        {'kind': 'vase', 'position': [2.15, 0.5], 'height': 0.55, 'branches': 7, 'seed': 9, 'color': '#CFC6B6'},
+        {'kind': 'curtain', 'position': [-3.04, 0.42], 'size': [0.8, 2.75], 'rotate_z': 90},
+    ]}
+ROOM12_SKY = {'kind': 'gradient', 'strength': 3.0, 'zenith': '#9FB8DA', 'horizon': '#E7EDF2', 'ground': '#857F73'}
+# a low afternoon sun through the window, its patch on the floor in front of the chair
+ROOM12_SUN = {'aim': {'at': [-1.9, -1.4, 0.0], 'window': 0, 'through': [0.5, 0.55]}, 'irradiance': 6.0, 'angle_deg': 1.0,
+              'color': '#FFF0DC'}
+ROOM12_LIGHTS = {
+    'key': {'off': True}, 'fill': {'off': True}, 'wash': {'off': True},
+    # the room behind the camera: a soft, low front light, as a ceiling and a wall would bounce it
+    'room': {'type': 'area', 'size_m': [3.2, 1.4], 'position': [0.4, -4.3, 2.3], 'target': [-0.2, 0.4, 0.9],
+             'irradiance': 0.45, 'color': '#FFF4E6'},
+    # the window's daylight, helped: a lamp in its opening, the sky's colour
+    'window': {'type': 'area', 'size_m': [1.6, 1.9], 'position': [-2.95, -0.7, 1.45], 'target': [0.0, -0.2, 0.9],
+               'irradiance': 2.4, 'color': '#F2F5FF'},
+    # each horn lit from behind, as the look frames' glow, so its resin reads
+    **{f'glow{k}': {'type': 'area', 'size_m': [0.7, 0.32], 'position': [x, 0.72, 1.12], 'target': [x, 0.0, 1.1],
+                    'irradiance': 1.4, 'color': '#FFF1DC', 'specular': 0, 'transmission': False}
+       for k, x in (('L', -1.27), ('R', 1.27))},
+}
 
 def sweep(color):
     return {'kind': 'sweep', 'color': color, 'width': 6.0, 'front': 5.0, 'depth': 1.5, 'radius': 1.2, 'height': 4.0}
@@ -276,6 +320,9 @@ SETS = {
                              F(f'horn-{key}-back', flav, 'from behind', product=PRESSED, lights=GLOW5, size=[1200, 900],
                                stage=sweep(c), sky=STUDIO, at={'rotate_z': 155})]
         for line, key, flav, label, c in LOOKS if key in HORN10_KEYS}),
+    'room12': dict(title='EARF: the pair in a room', camera=ROOM12_CAM, rows={
+        'room': [F('room-eucalyptus', 'eucalyptus-printed', 'eucalyptus, in a room', product=PRESSED, lights=ROOM12_LIGHTS,
+                   size=[2880, 1620], stage=ROOM12_SET, sky=ROOM12_SKY, pair=ROOM12_PAIR, sun=ROOM12_SUN)]}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],
@@ -297,7 +344,10 @@ def shot_for(frame, set_camera):
         inst['options'] = frame['options']
     if frame.get('hide'):
         inst['hide'] = frame['hide']
-    s['product'] = {'def': frame['product'], 'flavour': frame['bark'], 'instances': [inst]}
+    insts = [inst]
+    if frame.get('pair'):
+        insts = [{**{k: v for k, v in inst.items() if k not in ('position', 'rotate_z')}, **q} for q in frame['pair']]
+    s['product'] = {'def': frame['product'], 'flavour': frame['bark'], 'instances': insts}
     s['camera'] = copy.deepcopy(frame['camera'] or set_camera)
     s['size'] = frame['size'] or [760, 1000]
     s['title'] = f"barkhorn, {frame['label']}"
@@ -308,6 +358,8 @@ def shot_for(frame, set_camera):
         s['set'] = copy.deepcopy(frame['stage'])
     if frame.get('sky'):
         s['sky'] = copy.deepcopy(frame['sky'])
+    if frame.get('sun'):
+        s['sun'] = copy.deepcopy(frame['sun'])
     return s
 
 

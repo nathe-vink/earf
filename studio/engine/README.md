@@ -337,7 +337,7 @@ the mirror map's radiance in front of it.
 
 The critic may also move and turn the product within its set (`product.instances.N.position`, `.rotate_z`), set how
 far an exploded part is drawn out along its own axis (`product.explode.N.offset_m`), and dress a room with the
-engine's props (`set.props.N`: rug, table, books, sideboard, vase, lamp, sofa, curtain, frame; `off` takes one out).
+engine's props (`set.props.N`: rug, table, books, sideboard, vase, lamp, sofa, armchair, curtain, frame; `off` takes one out).
 The product's geometry, flavour, marks and what is cut stay fixed.
 
 ## The loop

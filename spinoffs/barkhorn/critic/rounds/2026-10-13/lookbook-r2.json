@@ -1,0 +1,145 @@
+{
+  "stage1": {
+    "impression": "A disciplined, coherent system (112 px margins, a four-column grid, a grotesk display face over letterspaced mono labels, and a ground colour tuned to each finish) that reads as one book and peaks on the four Crag pages and the two horn studies. It undersells itself at both ends: a cover with no product, a misspelt tagline ('NEATURE') and a 395 px dead band, then a CG room whose grey type sits at about 2.4:1 on the wall, and it stops on a parts list with no sign-off. In between, eleven identical cover-on/cover-off spreads, each with a visible light crease between its two render tiles and a 410 px void in the left column, turn eleven remarkable materials into one photograph repeated.",
+    "score": 6.0,
+    "pages": {
+      "page-01-cover": 4.5,
+      "page-02-room": 5.0,
+      "page-03-bark": 5.5,
+      "page-04-eucalyptus": 6.0,
+      "page-05-autumn": 6.0,
+      "page-06-manzanita": 6.0,
+      "page-07-striped": 5.5,
+      "page-08-cloud": 5.5,
+      "page-09-green": 6.5,
+      "page-10-smoke": 6.5,
+      "page-11-ice": 5.5,
+      "page-12-crag": 5.5,
+      "page-13-cobalt": 6.5,
+      "page-14-malachite": 7.0,
+      "page-15-lapis": 7.0,
+      "page-16-turquoise": 7.0,
+      "page-17-horn-side": 7.0,
+      "page-18-horn-back": 7.0,
+      "page-19-closer": 6.0,
+      "page-20-drawings": 6.5
+    }
+  },
+  "blocking_9": [
+    "A cover that carries the page: the lockup at full presence, no dead band, and one line that says what EARF makes (c1).",
+    "Product photographs that read as deliberate photographs, with no light crease where the cover-on and cover-off renders meet. The proper fix is to re-render each pair on one sweep (out of scope); the gutter and panel in c2 are the minimum.",
+    "Render fidelity level with the best books in the field: the room's blocky armchair and flat rug, the soft Eucalyptus and Manzanita horns, Fog's cabinet reading as grey plastic, the Crag horns' throats reading as black dots. The renders are fixed, and this is the largest single gap to a 9.",
+    "Each line's material seen up close at least once (macro renders, out of scope). At about 400 px wide the eleven surfaces read as prints, and the surfaces are the product.",
+    "Size that reads at a glance on the room page, with every line of type there at 4.5:1 or better (c3).",
+    "An ending: a last page with the brand and a way to reply (c5), and pages 19 and 20 set to the same standard as the rest (c7, c8)."
+  ],
+  "changes": [
+    {
+      "id": "c1",
+      "rank": 1,
+      "pages": ["page-01-cover"],
+      "element": "Brand lockup, subtitle, a new range line, and the vertical composition",
+      "problem": "At 256 px the lockup reads as a letterhead, not a cover. The band from y=380 to y=775 is empty across the full width (395 px), so the lockup and the marks read as two unrelated strips, and nothing on the page says these are eleven floor-standing horn speakers.",
+      "now": "Globe 256×256 at x=116, y=116. Wordmark 603×187 at x=435, y=125. Subtitle NEATURE-INSPIRED LOUDSPEAKERS in IBM Plex Mono ≈28px, tracking ≈0.11em, #1A1917, cap top y=343. Nothing between y=380 and the line labels (cap top y=784). Marks at y=835–967.",
+      "to": "Scale the lockup to 150%: globe 384×384 at x=112, y=168; wordmark 905×281 at x=591, y=182 (a 95 px gap from the globe, in the same proportion as now). Subtitle in IBM Plex Mono Regular 42px, tracking 0.11em, #1A1917, at x=591, cap top y=508 (about 867 px wide, under the wordmark). Add one line at x=112, cap top y=672, in Instrument Sans Regular 34px, #5E5A53: ‘Eleven floor-standing horn speakers, in three lines.’ Keep CONCEPT RENDERS (x=1550, cap top y=128), the labels BARK / CLOUD / CRAG (cap top y=784) and the eleven marks (y=835–967) where they are.",
+      "why": "The cover is the one page every recipient sees. At 150% the lockup carries it, and the dead band closes into two measured gaps (120 px and 89 px). The new line tells a partner in one breath what EARF makes and how the marks below are grouped. Everything stays within the card's brief for the cover: the brand, what it makes, and the line at a glance."
+    },
+    {
+      "id": "c2",
+      "rank": 2,
+      "pages": ["page-04-eucalyptus", "page-05-autumn", "page-06-manzanita", "page-07-striped", "page-09-green", "page-10-smoke", "page-11-ice", "page-13-cobalt", "page-14-malachite", "page-15-lapis", "page-16-turquoise"],
+      "element": "The cover-on and cover-off photographs, and the type panel beside them",
+      "problem": "Each render carries its own pool of light, brightest at its centre (x≈1130 and x≈1670) and falling to a crease where the two renders meet at x≈1380. It reads as a compositing seam. The difference is about 5–7 levels of luminance on the pale grounds, and plain on the dark ones: 11 on Striped Maple, 11 on Cobalt Marble, 9 on Turquoise.",
+      "now": "Cover-on render at x=840–1380 and cover-off at x=1380–1920, butted, full height. The type panel (x=0–840) is painted to match their outer edges (e.g. #24499E on Cobalt Marble, #B0AC9F on Autumn Birch), so the photographs have no edges.",
+      "to": "Trim 8 px off each inner edge: cover-on to x=840–1372, cover-off to x=1388–1920, full height. The speakers do not move. This opens a 16 px gutter at x=1372–1388. Darken the gutter and the type panel (x=0–840) with a Multiply layer of #DBDBDB (−14%) over their current colour: Eucalyptus #A7BBA9→#8FA091, Autumn Birch #B0AC9F→#979388, Manzanita #CDBE93→#B0A37E, Striped Maple #435333→#39472B, Poison #CBDFCA→#AEBFAD, Smoke #BBBDCB→#A0A2AE, Fog #C0D6DE→#A5B8BE, Cobalt Marble #24499E→#1E3E87, Malachite #D8D4C1→#B9B6A5, Lapis Lazuli #BE9956→#A38349, Turquoise #AE6044→#95523A. Type colours stay as they are.",
+      "why": "Once they have edges and a gutter, the two pools of light read as two photographs, each lit on purpose, rather than as a crease in one. The panel becomes a deliberate field in each speaker's colour. Type contrast stays at 4.9:1 or better (Lapis Lazuli) and rises on the dark pages (Turquoise goes from 4.2:1 to 5.4:1). The renders are not altered, only trimmed by 8 px, and the pair stays side by side as the card asks."
+    },
+    {
+      "id": "c3",
+      "rank": 3,
+      "pages": ["page-02-room"],
+      "element": "The type block, and the scale",
+      "problem": "The eyebrow and both dimension lines are #5E5A53 on a wall that darkens to #A29990–#968E81 at the top right. That gives 2.1–2.6:1, below even the 3:1 floor for large text. The page exists so the speakers' size reads, but size is left to reading two numbers.",
+      "now": "‘BARK 01  EUCALYPTUS’ (IBM Plex Mono 24px) and ‘1281 mm tall, 560 mm wide’ / ‘The sideboard: 520 mm high’ (Instrument Sans 30px), all in #5E5A53, right-aligned at x=1808. The title ‘In a room’ is #1A1917. Nothing is drawn on the photograph.",
+      "to": "Set the eyebrow and both lines in #1A1917 (5.4:1 or better on that wall). Line one becomes ‘Each speaker: 1281 mm tall, 560 mm wide’; line two stays ‘The sideboard: 520 mm high’. Draw two dimension lines on the photograph in the drawings' style, 2 px #1A1917 with 16 px end ticks. (1) Beside the right-hand speaker at x=1664, from y=378 (horn top) to y=870 (floor), labelled ‘1281’ in IBM Plex Mono Medium 22px #1A1917, left edge at x=1684, centred on y=624. (2) At the sideboard's right end at x=1346, from y=620 (top) to y=812 (floor), labelled ‘520’ in the same style, centred on x=1346, baseline y=604.",
+      "why": "Two ticked lines, 1281 against 520, make the size read at a glance, in the same language page 19 uses to dimension the drawings. The photograph then does the job the card gives this page, and the copy becomes readable."
+    },
+    {
+      "id": "c4",
+      "rank": 4,
+      "pages": ["page-04-eucalyptus", "page-05-autumn", "page-06-manzanita", "page-07-striped", "page-09-green", "page-10-smoke", "page-11-ice", "page-13-cobalt", "page-14-malachite", "page-15-lapis", "page-16-turquoise"],
+      "element": "The SURFACE fact",
+      "problem": "The one fact that tells the eleven apart sits as row one of a table whose other rows barely change: CABINET reads ‘Pressed recycled plastic’ on eight pages and HORN reads ‘Cast resin, patterned’ on seven. That row is 475 px below the name's baseline, across a 428 px void. On Eucalyptus and Manzanita it wraps, which pushes the other rows 35 px lower than on the other nine pages.",
+      "now": "SURFACE is row one of the table: label in IBM Plex Mono 24px at x=112, value in Instrument Sans 30px at x=277. Rule at y=670. Rows at cap tops y=704, 755, 806 and 857 (790, 841 and 892 where SURFACE wraps). Nothing between the name (baseline y=229) and the rule.",
+      "to": "Lift the surface into a standfirst under the name, with no label: Instrument Sans Regular 40px/52px, in the name's colour, at x=277, first baseline y=305, max width 531 px (for example ‘Long strips of green, ochre, rust and grey’). The table keeps CABINET, HORN and COVER. Move the rule to y=721 and set the rows at cap tops y=755, 806 and 857 on every page.",
+      "why": "Turning the pages, the eye lands on the name and then the material, which is the part that changes. The table becomes the constant it really is, and all eleven pages end their facts on the same line. All four facts the card asks for are still there."
+    },
+    {
+      "id": "c5",
+      "rank": 5,
+      "pages": ["page-21-contact (new)"],
+      "element": "A closing page",
+      "problem": "The book stops on page 20's parts list, so its last words are ‘20 Cloth disc’. A reader who could be a partner or a maker is never told who is behind EARF or how to reply, and decks like this get forwarded.",
+      "now": "No closing page. Folios read ‘EARF  NN / 20’.",
+      "to": "Add page 21 on #F2EFEA. Place the lockup at its present cover size: globe 256×256 at x=112, y=128; wordmark 603×187 at x=431, y=137. Headline in Instrument Sans SemiBold 76px #1A1917 (set like ‘From the side’) at x=112, cap top y=704: ‘Eleven speakers, three lines, one horn.’ Below it, in Instrument Sans Regular 34px/48px #5E5A53 at x=112, cap top y=812, max width 1100 px: ‘To talk about EARF as a maker, a partner or a friend, write to [owner’s name] at [email address].’ The owner supplies the name and the address. Folio ‘EARF  21 / 21’; renumber every other folio to ‘/ 21’.",
+      "why": "The last page is where a partner decides whether to answer. This one closes the book on the brand, with one sentence that sums up the range using only facts already in the book, and it gives the way to reply. The lockup at the top and the copy low on the page follow the book's own top-and-bottom layout."
+    },
+    {
+      "id": "c6",
+      "rank": 6,
+      "pages": ["page-03-bark", "page-08-cloud", "page-12-crag"],
+      "element": "The line's one sentence, and the line names (on which the card asks for advice)",
+      "problem": "The only copy on the page is set small and grey (34px, #5E5A53) under a 160 px name, and at three different measures: 991 px, 1169 px on a single line, and 898 px broken by hand. The three dividers don't match, and how each line is made reads like a caption.",
+      "now": "Instrument Sans Regular 34px/48px, #5E5A53, first baseline ≈y=343. Bark breaks after ‘under’, Cloud runs as one line, Crag breaks after ‘stone,’.",
+      "to": "Instrument Sans Regular 40px/54px, #1A1917, first baseline y=350. Two lines on all three dividers, each broken before ‘under a horn’ so that line one is the cabinet and line two the horn: ‘Recycled plastic pressed in the pattern of a tree’s bark, / under a horn cast in clear resin that carries the pattern or a tint.’ · ‘Cast acrylic, translucent and in one colour, / under a horn tinted to match.’ · ‘Recycled plastic pressed in the pattern of a stone, / under a horn cast in resin that carries the same pattern.’ Keep the line names Bark, Cloud and Crag.",
+      "why": "The same break on all three pages shows the book's structure (a cabinet, then a horn) three times in the same shape, and at 40 px in black the sentence gets read rather than skipped. On the names: keep them. Each is a one-syllable nature noun that matches its fixed mark (tree, cloud, outcrop) and names the motif rather than the material, and the three differ clearly in sound and shape. Crag is the least literal, since the finishes are polished stones, but ‘Stone’ would be flatter and would no longer match the outcrop mark."
+    },
+    {
+      "id": "c7",
+      "rank": 7,
+      "pages": ["page-19-closer"],
+      "element": "The specification table",
+      "problem": "Three of the eight values wrap mid-phrase (‘625 mm at the horn; cabinet / 560 mm’, ‘420 mm deep, the cabinet’s / full depth’, ‘Two, at the lower corners of / the front’). That breaks the table's rhythm and buries the two widths.",
+      "now": "WIDTH ‘625 mm at the horn; cabinet 560 mm’; HORN ‘420 mm deep, the cabinet’s full depth’; PORTS ‘Two, at the lower corners of the front’. Values in Instrument Sans 30px in a 366 px column (x=326–692), rows at a 51 px pitch, wrapped lines 36 px apart.",
+      "to": "WIDTH as two deliberate lines, ‘625 mm at the horn’ / ‘560 mm at the cabinet’, with the second line 36 px below the first. HORN ‘Full cabinet depth, 420 mm’ on one line. PORTS ‘Two, lower front corners’ on one line. Keep the 30px size and the 51 px row pitch from the rule at y=288.",
+      "why": "Every row now ends where its fact ends, the two widths read as a pair, and the whole table can be taken in at a glance beside the drawings. The facts are unchanged."
+    },
+    {
+      "id": "c8",
+      "rank": 8,
+      "pages": ["page-20-drawings"],
+      "element": "Body copy and the two drawing captions",
+      "problem": "The body copy is #1A1917 here but #5E5A53 everywhere else, and it starts 28 px lower under the title than on pages 17 and 18. The captions SECTION A-A and EXPLODED VIEW sit on the folio line, 93–98 px below their drawings and in a different style from page 19's view titles, so they read as footer text.",
+      "now": "Body in Instrument Sans 30px/40px #1A1917, first line top y=298. Captions in IBM Plex Mono Regular 24px, tracking ≈0.2em, cap top y=999, at x=821 and x=1179.",
+      "to": "Body in #5E5A53, first line top y=270, as on pages 17 and 18. Captions in IBM Plex Mono SemiBold 20px, no tracking, #1A1917, matching FROM THE RIGHT / FRONT / FROM ABOVE on page 19. Set their cap tops at y=930 (about 24 px under each drawing) with left edges on their drawings: SECTION A-A at x=834, EXPLODED VIEW at x=1189.",
+      "why": "Each caption then belongs to its drawing, pages 19 and 20 read as one set, and the body copy goes back to the single grey the rest of the book uses."
+    }
+  ],
+  "out_of_scope": [
+    {
+      "request": "Respell the subtitle NEATURE-INSPIRED LOUDSPEAKERS as NATURE-INSPIRED LOUDSPEAKERS.",
+      "why": "The card fixes this as the owner's spelling. It matters because it is the first line of copy on the one page every reader sees, and nothing in the book signals a pun, so a partner reading cold will take it for a typo. If it is deliberate, the owner should know that is the cost."
+    },
+    {
+      "request": "Re-render each cover-on/cover-off pair as one image on one continuous sweep, lit from a single source centred between the two speakers. While doing so, give Autumn Birch and Fog grounds with more contrast; both now sit on greys close to their own cabinets.",
+      "why": "The renders are fixed. The crease comes from each render's own pool of light, so the gutter in c2 reframes it but cannot remove it. Removing it needs new renders."
+    },
+    {
+      "request": "Re-render the room with real furniture in place of the blocky armchair cushions, a textured rug in place of the flat grey plane, and the right-hand wall lit to about #C8C2B8.",
+      "why": "It is the book's only lifestyle image and its second page, so partners will judge the whole project's craft by it. A lighter wall would also let the type sit there without fighting for contrast."
+    },
+    {
+      "request": "Add a macro render of each finish (a cabinet corner and the horn lip, about a 300 mm field of view).",
+      "why": "The surfaces are the product, yet the largest view of any is about 400 px wide. The best books in this field always show the material up close, and makers will want to see the pressing and the casting."
+    },
+    {
+      "request": "Sharpen the horn textures on Eucalyptus and Manzanita, and let the opaque Crag horns show the driver throat rather than a black dot.",
+      "why": "The renders are fixed. At page size these horns read as soft or unfinished, which undercuts the claim of patterned cast resin on the very part the book gives two pages to."
+    },
+    {
+      "request": "On the general arrangement drawing, move the section mark ‘A’ off the 625 dimension line, and the lower ‘A’ away from the FRONT view title.",
+      "why": "The drawings are fixed. Makers read drawings closely, and collisions like these cost trust in the rest of the package."
+    }
+  ],
+  "score_if_fixed": 7.0
+}

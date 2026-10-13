@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 11**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 12**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -15,6 +15,67 @@ bark: eucalyptus, autumn birch, manzanita, striped maple), Cloud (translucent ca
 Crag (pressed recycled plastic in the pattern of a stone, the horn cast resin: cobalt marble, malachite, lapis lazuli,
 turquoise). Each speaker has an acrylic mark, its line's shape in its own colour, and the brand's globe and wordmark are
 drawn the same way.
+
+## Round 12: the owner's notes of 2026-10-13 (night)
+
+| the note | what changed |
+|---|---|
+| "Do 1-3" (the three next steps: check the horn's acoustics by simulation, an image that gives scale, a second critic round on the look book) | Below: **the horn, by simulation** (it works, and its shape stays), **in a room** (a new page 2 of the look book), and **the look book's second critic round** (6.0 blind, its eight changes applied). |
+| "Line names are fine for now unless the critic recommends something else." | The critic's card opened the names to advice, and it recommends keeping them: "Each is a one-syllable nature noun that matches its fixed mark (tree, cloud, outcrop) and names the motif rather than the material ... 'Stone' would be flatter and would no longer match the outcrop mark." **Bark, Cloud and Crag stay.** |
+| "EARF is fine." | **EARF stays**, and the open question on clearing the name is closed. |
+| "No samples yet." | **No samples are ordered**; the open question is closed for now. |
+| "Forget the earmilk idea for now." | The earmilk threads are parked: its bookshelf version, the exploded view and the earnest valve amplifier. |
+| "These look way better." | (the look book after round 11) |
+
+### The horn, by simulation
+
+The horn's shape was traced from the photograph and had never been simulated. `horn_sim.py` meshes it from the same
+section formulas as the CAD (sections through both agree) and solves its sound field by boundary elements, the solver
+checked against the pulsating sphere. The full report is `acoustics/README.md`.
+
+- **It works.** From 1 to 8 kHz it holds about the coverage its walls are drawn for: 70 to 100 degrees across (the
+  walls open to 95) and 40 to 70 up and down (the walls: 63). It loads the driver fully from about 900 Hz.
+- **Its shape stays.** A bell-flared lip, simulated as the obvious alternative to the thin rim, moves the coverage by a
+  few degrees and leaves the ripple below 2 kHz where it was: it comes from the mouth's size, not its edge.
+- **The crossover stays at 800 Hz.** There the horn narrows to 53 degrees across while the woofer spreads to 139.
+  Crossing higher matches the two at the handover but narrows the vertical window, and over 400 Hz to 2 kHz the sound
+  off axis is no smoother. 900 Hz is the setting to try on a measured prototype.
+- One dip on the axis at 4.5 to 5 kHz, about 4 dB, the same on two meshes; the DSP can level it.
+
+![The horn alone: each direction against the axis, its coverage and directivity beside the woofer's](acoustics/coverage.png)
+
+### In a room
+
+The critic's last open note of round 1 was "an image that gives scale". The pair stands in a living room, 2.6 m apart
+and 44 cm out from the wall, either side of a sideboard 52 cm high with a record player on it. An armchair (a new prop
+in the engine: a wooden frame, a seat and a back cushion) stands beside the left one at the same depth, so the two
+compare directly, with a floor lamp, a print and the window's light from the left (`frames.py room12`). It is page 2 of
+the look book, with two dimension lines on it, 1281 against 520.
+
+![The pair in a room](../../renders/2026-10-13/barkhorn/room12/room-eucalyptus.png)
+
+### The look book's second critic round
+
+A fresh reviewer saw only the pages (the room page new) and its card, with the round-1 prompt (`critic/LOG.md`,
+`critic/rounds/2026-10-13/lookbook-r2.json`). **6.0 blind** (round 1: 5.8), its estimate 7.0 with its changes. All
+eight were layout and copy, and all are applied:
+
+- **The cover:** the lockup at 150 %, and one line on what EARF makes: "Eleven floor-standing horn speakers, in three
+  lines."
+- **The speaker pages:** the two photographs parted by a 16 px gutter, each trimmed 8 px, the panel darkened 14 % so
+  they read as two photographs, not one with a crease (less on Lapis Lazuli, to keep its type at 4.5:1). Each
+  speaker's surface now sits under its name, and the table keeps cabinet, horn and cover.
+- **The room page:** its type in black, and the two dimension lines.
+- **A closing page (21):** the lockup, "Eleven speakers, three lines, one horn." and a line to write to. **The name and
+  the address are the owner's to give** (`[NAME]`, `[EMAIL]` for now).
+- **The dividers, the specification and the drawings page:** each divider's sentence in two lines in black, the cabinet
+  then the horn; every specification row on one line (the two widths as a pair); the drawings' captions under their
+  drawings.
+
+Not applied, because each would change something fixed: re-rendering each pair on one sweep, the room with richer
+furniture and a textured rug, macro renders of each finish, sharper horn textures, and moving the section marks on the
+general arrangement. The critic also warns that NEATURE, the owner's spelling, reads as a typo to a cold reader; it
+stays.
 
 ## Round 11: the owner's notes of 2026-10-13 (late)
 
@@ -843,12 +904,7 @@ The shots are in `studio/shots/barkhorn/`:
 
 ## Open questions for the owner
 
-1. **The line names.** Bark, Cloud and Crag, or the plain Tree, Cloud and Stone? (The owner: "Trees, Clouds, Stones.
-   Maybe there's a better name for each category though.") Bark and Crag are kept as the proposal: under EARF all three
-   are the earth's own, Cloud and Crag alliterate, and the crag mark draws its name.
-2. **The marks' colours.** One for each speaker, from its material (the table above). Change any?
-3. **EARF.** The logo is decided (B3, "final for now"). Clear the name before it is used: EARFUN is a registered audio
-   brand.
-4. **Samples.** Order the core set (about $310 to $430 plus shipping): a custom-laid HDPE test sheet in each pattern,
-   the commercial benchmarks, a resin step wedge and acrylic tints? And send the horn for casting quotes?
-5. **Price.** [PAIR PRICE] stays open.
+1. **The marks' colours.** One for each speaker, from its material (the table above). Change any?
+2. **The closing page.** A name and an address to write to, in place of `[NAME]` and `[EMAIL]` on the look book's
+   last page.
+3. **Price.** [PAIR PRICE] stays open.
