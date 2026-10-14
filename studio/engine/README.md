@@ -79,6 +79,8 @@ material's colour coat, under its clear, exactly where the fab files put them.
 Patterns (bark, pressed sheet, stone) are laid in world space, so two copies of a product in one shot show different
 stretches of them. A shot's material override `"space": "object"` reads them in each part's own space instead
 (`materials.object_space`): every copy then wears the face it wears alone at the origin (barkhorn's pair in a room).
+A shot's (or a flavour's) override of a material by name may also name another `preset`: the same parts in another
+finish, for a study (barkhorn's rotomoulded cabinet in speckle, its Cloud ports in the cabinet's acrylic).
 
 ## What it writes
 

@@ -3,8 +3,8 @@
  "model": "spinoffs/barkhorn/out-pressed/render/barkhorn-pressed.glb",
  "origin_mm": [
   280.0,
-  210.5,
-  0.0
+  211.4,
+  -12.0
  ],
  "materials": {
   "amp": {
@@ -66,6 +66,11 @@
    "preset": "rubber",
    "color": "#151515"
   },
+  "foot": {
+   "preset": "plastic",
+   "color": "#1C1C1C",
+   "roughness": 0.6
+  },
   "gland": {
    "preset": "plastic",
    "color": "#1A1A1A",
@@ -84,8 +89,10 @@
   },
   "port": {
    "preset": "satin_paint",
-   "color": "#1A1817",
-   "roughness": 0.7
+   "color": "#1C1B1A",
+   "roughness": 0.45,
+   "specular": 0.5,
+   "bevel_mm": 0.8
   },
   "ring": {
    "preset": "satin_paint",
@@ -98,6 +105,11 @@
    "color": "#C9C9C6",
    "roughness": 0.3
   },
+  "screw": {
+   "preset": "metal",
+   "color": "#262626",
+   "roughness": 0.4
+  },
   "sleeve": {
    "preset": "rubber",
    "color": "#1B1B1B"
@@ -109,7 +121,7 @@
    "material": "amp"
   },
   {
-   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1-1|rib-back-2-1|rib-top|rib-bottom",
+   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|land-left|land-right|land-top|land-bottom",
    "material": "bark"
   },
   {
@@ -161,6 +173,10 @@
    "material": "driver-surround"
   },
   {
+   "match": "feet-base",
+   "material": "foot"
+  },
+  {
    "match": "cable-glands",
    "material": "gland"
   },
@@ -169,7 +185,7 @@
    "material": "horn"
   },
   {
-   "match": "lining-back-1-web|lining-bottom-1a-web|lining-bottom-1b-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-back-2a-web|lining-back-2b-web|lining-back-2c-web|lining-left-3-web|lining-right-3-web|lining-back-3-web|lining-top-3a-web|lining-top-3b-web",
+   "match": "lining-bottom-1a-web|lining-bottom-1b-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3a-web|lining-top-3b-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web",
    "material": "lining"
   },
   {
@@ -181,11 +197,15 @@
    "material": "ring"
   },
   {
-   "match": "post-1|post-2|post-3|post-4|tie-rod-rod",
+   "match": "post-1|post-2|post-3|post-4|tie-rod-rod|back-screws|feet-stem",
    "material": "rod"
   },
   {
-   "match": "amp-box-gasket|post-sleeves",
+   "match": "port-screws",
+   "material": "screw"
+  },
+  {
+   "match": "amp-box-gasket|post-sleeves|back-gasket",
    "material": "sleeve"
   }
  ],

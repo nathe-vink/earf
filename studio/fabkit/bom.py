@@ -27,7 +27,7 @@ def rows(product, parts, recs, library):
             st = SHEETS.get(m.material, {})
             r = recs.get(p.name, {})
             area = r.get('w', 0) * r.get('h', 0) / 1e6
-            rate = st.get('usd_per_m2', 0)
+            rate = st['usd_per_m2_mm'] * m.thickness if st.get('usd_per_m2_mm') else st.get('usd_per_m2', 0)
             out.append(dict(item=p.name, kind='cut', qty=n, what=f"{m.thickness:g} mm {st.get('title', m.material)}",
                             size=f"{r.get('w', 0):.0f} x {r.get('h', 0):.0f}", mass_g=round(vol_cm3 * st.get('density', 0.7)),
                             usd_each=round(area * rate * 1.25, 2) if rate is not None else None, source='cut file dxf/' + p.name + '.dxf',

@@ -39,11 +39,16 @@ SHEETS = {
     'spotted-gum-ply': dict(title='Spotted gum-veneered plywood (a eucalypt hardwood face)', density=0.7, sheet=(2400.0, 1200.0),
                             usd_per_m2=None, thicknesses=(6, 9, 12, 18)),
     'cork': dict(title='Cork sheet, agglomerated', density=0.24, sheet=(1830.0, 915.0), usd_per_m2=None, thicknesses=(3, 6)),
+    # thick sheet priced by its thickness (usd_per_m2_mm: a square metre a millimetre): pressed to order, recycled HDPE
+    # runs about EUR 150 a square metre at 10 mm from the Precious Plastic sellers (2026; a laid-out pattern costs more);
+    # cast acrylic about $1,400 a 4 x 8 ft sheet at 25 mm (US retail, 2026), as thin cast sheet runs pro rata
     'recycled-hdpe': dict(title='Recycled HDPE sheet, pressed to order (a sheet press workspace)', density=0.95,
-                          sheet=(1000.0, 1000.0), usd_per_m2=None, thicknesses=(5, 6, 8, 10, 12, 15, 20, 25, 30)),
+                          sheet=(1000.0, 1000.0), usd_per_m2_mm=16.0, thicknesses=(5, 6, 8, 10, 12, 15, 20, 25, 30)),
+    'cast-acrylic': dict(title='Cast acrylic, tinted through (smoke, green, frosted ice), 4 x 8 ft sheet', density=1.19,
+                         sheet=(2440.0, 1220.0), usd_per_m2_mm=19.0, thicknesses=(6, 8, 10, 12, 15, 20, 25, 30)),
     # a speaker's lining: soft, cut with a long knife or a hot wire against a straightedge rather than routed
     'polyester-batting': dict(title='Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content',
-                              density=0.03, sheet=(1200.0, 600.0), usd_per_m2=None, thicknesses=(25, 50, 75)),
+                              density=0.03, sheet=(1200.0, 600.0), usd_per_m2_mm=0.2, thicknesses=(25, 50, 75)),   # about $10 a m2 at 50
 }
 PRINTS = {
     'resin-tough': dict(title='Tough (ABS-like) SLA resin', process='sla', density=1.15, usd_per_cm3=0.35, min_wall=1.5),
@@ -60,6 +65,7 @@ SOLIDS = {
     'steel': dict(title='Mild steel', density=7.85, usd_per_cm3=0.01),
     'stainless': dict(title='Stainless steel 304', density=8.0, usd_per_cm3=0.03),
     'cast-resin': dict(title='Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented', density=1.1, usd_per_cm3=0.04),
+    'rotomoulded-pe': dict(title='Recycled polyethylene, rotomoulded (a hollow double-walled part)', density=0.94, usd_per_cm3=0.004),
 }
 
 

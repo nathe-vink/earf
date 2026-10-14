@@ -110,13 +110,14 @@ def bbox(solid):
 def slotted_panel(x0, z0, x1, z1, y0, y1, slots=(), holes=()):
     """A panel standing in x-z, from (x0, z0) to (x1, z1), y0 to y1 thick (a grille, a facing), with router slots
     through it, round-ended as a bit cuts them: slots [(cx, cz, length, width, vertical)], and openings `holes`
-    [('circle', cx, cz, d) or ('rect', cx, cz, w, h)]. One sketch and one extrusion, so a grille's hundreds of slots cost
-    about a second."""
-    from build123d import Rectangle, Circle, SlotCenterToCenter, Location
+    [('circle', cx, cz, d), ('rect', cx, cz, w, h) or ('rrect', cx, cz, w, h, r): its corners rounded on r]. One sketch
+    and one extrusion, so a grille's hundreds of slots cost about a second."""
+    from build123d import Rectangle, RectangleRounded, Circle, SlotCenterToCenter, Location
     sk = Pos((x0 + x1) / 2, (z0 + z1) / 2) * Rectangle(x1 - x0, z1 - z0)
     cut = [Location((cx, cz), 90 if vert else 0) * SlotCenterToCenter(L - w, w) for cx, cz, L, w, vert in slots]
     for h in holes:
-        cut.append(Pos(h[1], h[2]) * (Circle(h[3] / 2) if h[0] == 'circle' else Rectangle(h[3], h[4])))
+        cut.append(Pos(h[1], h[2]) * (Circle(h[3] / 2) if h[0] == 'circle' else
+                                      RectangleRounded(h[3], h[4], h[5]) if h[0] == 'rrect' else Rectangle(h[3], h[4])))
     if cut:
         sk = sk - cut
     return extrude(Plane.XZ.offset(-y0) * sk, amount=-(y1 - y0))         # Plane.XZ faces -y: this runs y0 to y1

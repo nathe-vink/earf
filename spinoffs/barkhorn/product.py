@@ -9,7 +9,7 @@ What the photograph shows, and how it is read here:
 - a bass cabinet about 1 : 1.6 (wide to tall), a thin wooden shell (walnut there; bark here) framing a pale front
   panel set back in it;
 - a 15 in black paper cone in a wide off-white ring, its centre a little above the cabinet's middle;
-- a small square port at the bottom right;
+- a small square port at the bottom right (round 14, the owner: a round tube behind a square frame);
 - a frosted, translucent waveguide on top: a rounded rectangle about 1.72 : 1 (measured again in round 4; round 1
   read 2.1 : 1), wider than the cabinet (about 1.12 times), its rim thin, the driver's dark throat near its centre,
   on four slim posts (a wide pair in front, a narrow pair behind), its rim just above the cabinet.
@@ -34,7 +34,7 @@ LIB = json.load(open(os.path.join(HERE, '..', '..', 'studio', 'fabkit', 'library
 LIB.update(json.load(open(os.path.join(HERE, 'components.json'))))
 
 P = dict(
-    W=560.0, D=420.0, H=880.0, T=18.0,           # the cabinet's shell, outside; it stands on the floor on glides
+    W=560.0, D=420.0, H=880.0, T=18.0,           # the cabinet's shell, outside; it stands on levelling feet (below)
     stock='baltic-birch',                        # the shell's sheet (pressed.py: recycled HDPE, no wood at all)
     # the shell's finish: 'bark' (bark sheet laminated to the plywood); 'pressed' (round 5, pressed.py: no wood, the
     # shell's own panels pressed recycled HDPE, laid out in the bark's pattern, welded); or 'faced' (round 4: the
@@ -48,10 +48,25 @@ P = dict(
     woofer_hole=8.0,                             # its eight fixing holes: M6 T-nuts in plywood (pressed.py: 9.0, for inserts for
                                                  # plastics, as their maker's chart for PE gives; round 13, the reality check's r3)
     ring=dict(od=436.0, id=350.0, t=6.0, stock='mdf'),   # the off-white ring over the frame, 6 mm, standing on the panel
-    # the square ports, one in each bottom corner, as the reference speaker has them (the owner, 2026-10-12: one is cut
-    # off in the photograph; round 1 to 5 had the bottom right one only), tuned together
-    port=dict(a=100.0, wall=4.0, x=(105.0, 455.0), z=113.0,
-              flange=140.0, flange_t=5.0, seal=2.0),   # round 13 (r3): a flange behind the panel, on a foam seal, screwed to it
+    # the ports, one in each bottom corner, as the reference speaker has them (the owner, 2026-10-12: one is cut off in the
+    # photograph; round 1 to 5 had the bottom right one only), tuned together. Round 14, the owner: "It's not meant to be
+    # a square opening. It's meant to be cylindrical with square framing around the end": a tube `d` across inside (the
+    # area of round 6's 100 square), `wall` thick, its front end a square `frame` (corners `frame_r`) `frame_t` thick,
+    # printed in one; fitted from the front into a recess in the panel, flush with its face, on a `seal` of foam, four
+    # black countersunk screws (`screw`: the hole, the countersink) in the frame's corners. Its centre on the corner's
+    # diagonal, 105 in from the side and the bottom, as photographed. `flare`: both mouths rounded on it (0: plain)
+    port=dict(d=113.0, wall=4.0, x=(105.0, 455.0), z=105.0, frame=140.0, frame_r=10.0, frame_t=5.0, seal=1.0, flare=0.0,
+              screw=(4.5, 9.0)),
+    # the back (round 14, the owner's pick; the reality check's r4): it comes off, the way in to the amplifier, the L-pad
+    # and the leads. It closes on a `gasket` against four `land` strips (`land` wide, the shell's thickness deep) fixed
+    # inside the shell, `clear` from the shell all round; sixteen M5 button heads (`screw_hole`) through it into inserts
+    # (`insert`: the hole across, deep) in the strips, `edge` in from its edges. The amplifier's compartment, the back's
+    # ribs and its batts come off with it
+    back=dict(land=25.0, gasket=3.0, clear=1.0, edge=12.5, per_side=6, per_end=4, screw_hole=5.5, insert=(8.0, 12.0)),
+    # the feet (round 14, the owner's pick; r11): four levelling feet, M8 into inserts in the bottom (`insert`: the hole
+    # across, deep), `inset` in from its edges, `lift` under it (a shadow gap): a 1.29 m speaker with 10 kg at its top
+    # stands level and cannot rock
+    feet=dict(inset=50.0, lift=12.0, d=40.0, base=6.0, insert=(12.5, 15.0)),
     fb=38.0,
     braces=[dict(z=200.0, window=(420.0, 300.0))],   # level braces across the shell, each a frame round its window
     ribs=None,                                   # ribs welded on edge inside the panels (pressed.py: the HDPE shell needs them)
@@ -165,14 +180,53 @@ def strips(x0, z0, x1, z1, w, pitch, length, gap, seed):
     return out
 
 
+def shell_kind(P):
+    """What the shell is made of, for its notes and fixings: 'wood' (plywood, bark-faced or faced), 'hdpe' (pressed.py:
+    welded, nothing bonds to it) or 'acrylic' (cloud.py: cemented, bonds well, brittle, so nothing is pressed into it)."""
+    if P['finish'] != 'pressed':
+        return 'wood'
+    return 'acrylic' if 'acrylic' in P['stock'] else 'hdpe'
+
+
 def port_length(P, net_l):
-    """The square ports' length tuning `net_l` litres to fb, the ports in parallel (one end flanged, one free; each with
-    the end correction of the round port of the same area)."""
-    c, a = 343.0, P['port']['a'] / 1000
-    sp = len(P['port']['x']) * a * a
-    d_eq = 2 * a / math.sqrt(math.pi)
+    """The round ports' length tuning `net_l` litres to fb, the ports in parallel (one end flanged, one free)."""
+    c, d = 343.0, P['port']['d'] / 1000
+    sp = len(P['port']['x']) * math.pi * d * d / 4
     w = 2 * math.pi * P['fb']
-    return (sp * c * c / (w * w * net_l * 1e-3) - 0.732 * d_eq) * 1000
+    return (sp * c * c / (w * w * net_l * 1e-3) - 0.732 * d) * 1000
+
+
+def port_reach(P):
+    """A port's greatest radius behind the panel: its tube, or its flared inner mouth."""
+    pt = P['port']
+    return max(pt['d'] / 2 + pt['wall'], pt['d'] / 2 + pt['flare'])
+
+
+def back_edge(P):
+    """Where the braces end at the back (round 14): short of the back's ribs and its batts, which come off with it.
+    The top's and the bottom's ribs, clear of the back's ribs, end at the batts' face."""
+    T, D, L = P['T'], P['D'], P['lining']
+    ye = D - T - L['t'] - 2 * L['gap']                      # the back's batts' face, less a gap
+    return min(ye, D - T - P['ribs']['depth'] - 1.0) if P['ribs'] else ye, ye
+
+
+def brace_window(P, b):
+    """A brace's window, front to back (y0, y1): its front edge as before, its back edge leaving a member as wide as
+    the front one, so each brace is still a closed frame round its window (round 14: the braces end short of the back)."""
+    yb, T, D = P['inset'], P['T'], P['D']
+    ym = (yb + T + D - T) / 2
+    y0 = ym - b['window'][1] / 2
+    return y0, min(ym + b['window'][1] / 2, back_edge(P)[0] - (y0 - (yb + T)))
+
+
+def back_screws(P):
+    """The back's sixteen screws' centres (x, z): `per_side` up each side, `per_end` along the top and the bottom (the
+    corners shared), on the land strips' centre lines."""
+    W, H, T, bk = P['W'], P['H'], P['T'], P['back']
+    e = T + bk['land'] / 2
+    zs = [e + (H - 2 * e) * k / (bk['per_side'] - 1) for k in range(bk['per_side'])]
+    xs = [e + (W - 2 * e) * k / (bk['per_end'] - 1) for k in range(bk['per_end'])]
+    return [(x, z) for x in (e, W - e) for z in zs] + [(x, z) for x in xs[1:-1] for z in (e, H - e)]
 
 
 def tuned(P):
@@ -185,28 +239,35 @@ def tuned(P):
 
 
 def rib_spans(P):
-    """The heights (z0, z1) between the bottom, the braces and the top where a panel's span is long enough to want a
-    rib (P['ribs']['min_span']): below the lowest brace and above the highest, the spans are short and already stiff."""
+    """The heights (z0, z1) between the bottom, the braces and the top where a side's span is long enough to want a
+    rib (P['ribs']['min_span']): below the lowest brace and above the highest, the spans are short and already stiff.
+    (The back's ribs run its full height, round 14: it comes off, and the braces stop short of it.)"""
     T, H = P['T'], P['H']
     zs = [T] + [z for b in P['braces'] for z in (b['z'], b['z'] + T)] + [H - T]
     return [(zs[i], zs[i + 1]) for i in range(0, len(zs), 2) if zs[i + 1] - zs[i] > P['ribs'].get('min_span', 0.0)]
 
 
 def lining(P, plen, ribs):
-    """The lining's batts, (name, solid) each, in the zones between the bottom, the braces and the top. The sides' batts
-    run the full depth, the back's fit between them, the top's and the bottom's between both. A zone holding a port
-    has none on its sides (the ports stand 26 from them). Every batt keeps clear of each port's tube, of the jet from
-    its inner end (up to the back's batt), of the amplifier's compartment, and (the cast horn) of the HF lead's gland
-    and the tie rod's insert under the top. The ribs cut a wall's batt into one a bay; a batt is named for its wall, its
-    zone (1 the lowest) and, where the ribs cut it, its bay (a, b, ... front to back, left to right)."""
+    """The lining's batts, (name, solid) each. The sides', the top's and the bottom's sit in the zones between the
+    bottom, the braces and the top: the sides' run from the front panel to the back's land strips, the top's and the
+    bottom's between them, up to the back's ribs (or its batts). The back's (round 14) run its full height between its
+    land strips, on the back between its ribs, so they come off with it. A zone holding a port has none on its sides
+    (the ports stand 20 from them). Every batt keeps clear of each port's tube, of the jet from its inner end (up to the
+    back's batts), of the amplifier's compartment, and (the cast horn) of the HF lead's gland and the tie rod's insert
+    under the top. The ribs cut a wall's batt into one a bay; a batt is named for its wall, its zone (1 the lowest; the
+    back's have none) and, where the ribs or a keep-out cut it, its piece (a, b, ... front to back, left to right, bottom
+    to top)."""
     W, D, H, T = P['W'], P['D'], P['H'], P['T']
     L = P['lining']; t, g, ms = L['t'], L['gap'], L['min_strip']
+    bk = P['back']; lw = bk['land']
     x0, x1, y0, y1 = T, W - T, P['inset'] + T, D - T        # the inside faces: the sides, the front panel's back, the back
     yback = y1 - g - t                                       # the back's batts' face
+    yland = y1 - bk['gasket'] - T                            # the back's land strips' front face
+    ytb = (min(yback, y1 - P['ribs']['depth']) if P['ribs'] else yback) - g    # where the top's and the bottom's end
     zs = [T] + [z for b in P['braces'] for z in (b['z'], b['z'] + T)] + [H - T]
     zones = [(zs[i], zs[i + 1]) for i in range(0, len(zs), 2)]
-    pt = P['port']; o = pt['a'] + 2 * pt['wall']; c = L['port_clear']
-    pw = max(o / 2 + c, pt['flange'] / 2 + 3.0)             # half a port's keep-out: its tube, or its flange
+    pt = P['port']
+    pw = port_reach(P) + L['port_clear']                     # half a port's keep-out
     az, cx = P['amp_z'], W / 2
     ab = P['amp_box']; (iw, idp, ih), ac = ab['inside'], L['amp_clear']
     aw, ah = iw / 2 + ab['t'] + ab['flange'] + ac, ih / 2 + ab['t'] + ab['flange'] + ac   # the compartment, with room
@@ -214,7 +275,7 @@ def lining(P, plen, ribs):
     if P['horn']['form'] == 'cast':
         pp = P['horn']['cast']['posts']; places = rod_places(P)
         (gx, gy), (tx, ty) = places[pp['cable_post']], places[pp['tie_post']]
-        under_top += [(gx - 20, gx + 20, H - T - 60, H - T + 1, gy - 23, y1 + 1),    # the HF lead's gland and its way in
+        under_top += [(gx - 20, gx + 20, H - T - 60, H - T + 1, gy - 12, y1 + 1),    # the HF lead's gland and its way in
                       (tx - 10, tx + 10, H - T - t - g - 2, H - T + 1, min(ty - 9, yback - g), y1 + 1)]   # the tie rod's anchor
 
     def keep_out(xa, xb, za, zb, ya, yb_, zone, stops):
@@ -224,6 +285,14 @@ def lining(P, plen, ribs):
         za = zone[0] - 1 if za - zone[0] < ms else za; zb = zone[1] + 1 if zone[1] - zb < ms else zb
         return box(xa, ya, za, xb, yb_, zb)
 
+    grown = lambda r: box(*(v - g for v in r.bounding_box().min), *(v + g for v in r.bounding_box().max))
+    mid = lambda b, i: getattr(b.bounding_box().center(), 'XYZ'[i])
+
+    def named(wall, k, s, axes):
+        bits = sorted(s.solids(), key=lambda b: tuple(round(mid(b, i)) for i in axes))
+        return [(f'lining-{wall}' + (f'-{k}' if k else '') + (('' if k else '-') + chr(ord('a') + j) if len(bits) > 1 else ''), b)
+                for j, b in enumerate(bits)]
+
     out = []
     for k, zone in enumerate(zones):
         za, zb = zone
@@ -231,32 +300,35 @@ def lining(P, plen, ribs):
         ports = [px for px in pt['x'] if za < pt['z'] < zb]
         sides = not ports
         xi0, xi1 = (x0 + 2 * g + t, x1 - 2 * g - t) if sides else (x0 + g, x1 - g)
-        slabs = ([('left', box(x0 + g, y0 + g, lo, x0 + g + t, y1 - g, hi)),
-                  ('right', box(x1 - g - t, y0 + g, lo, x1 - g, y1 - g, hi))] if sides else [])
-        slabs.append(('back', box(xi0, yback, lo, xi1, y1 - g, hi)))
+        slabs = ([('left', box(x0 + g, y0 + g, lo, x0 + g + t, yland - g, hi)),
+                  ('right', box(x1 - g - t, y0 + g, lo, x1 - g, yland - g, hi))] if sides else [])
         if k == len(zones) - 1:
-            slabs.append(('top', box(xi0, y0 + g, hi - t, xi1, yback - g, hi)))
+            slabs.append(('top', box(xi0, y0 + g, hi - t, xi1, ytb, hi)))
         if k == 0:
-            slabs.append(('bottom', box(xi0, y0 + g, lo, xi1, yback - g, lo + t)))
-        cut = [box(*(v - g for v in r.bounding_box().min), *(v + g for v in r.bounding_box().max)) for _, r in ribs]
-        stops = [x0, x1, xi0, xi1] + [v for n, r in ribs if n.startswith('rib-back') and r.bounding_box().min.Z < zb
-                                      and r.bounding_box().max.Z > za
-                                      for v in (r.bounding_box().min.X - g, r.bounding_box().max.X + g)]
+            slabs.append(('bottom', box(xi0, y0 + g, lo, xi1, ytb, lo + t)))
+        cut = [grown(r) for _, r in ribs]
+        stops = [x0, x1, xi0, xi1]
         for px in ports:
             cut.append(keep_out(px - pw, px + pw, pt['z'] - pw, pt['z'] + pw, -1.0, yback - g, zone, stops))
-        if za < az < zb:
-            cut.append(keep_out(cx - aw, cx + aw, az - ah, az + ah, min(y1 - idp - ab['t'] - ac, yback - 1), D + 1, zone, stops))
         for ux0, ux1, uz0, uz1, uy0, uy1 in under_top:
             if uz0 < zb and uz1 > za:
                 cut.append(box(ux0, uy0, uz0, ux1, uy1, uz1))
         for wall, s in slabs:
             for r in cut:
                 s = s - r
-            mid = lambda b, i: getattr(b.bounding_box().center(), 'XYZ'[i])
-            bits = sorted(s.solids(), key=lambda b: (round(mid(b, 1)), round(mid(b, 0))) if wall in ('left', 'right') else
-                          (round(mid(b, 0)), round(mid(b, 1))))
-            for j, b in enumerate(bits):
-                out.append((f'lining-{wall}-{k + 1}' + (chr(ord('a') + j) if len(bits) > 1 else ''), b))
+            out += named(wall, k + 1, s, (1, 0) if wall in ('left', 'right') else (0, 1))
+    # the back's: its full height between its land strips, inside the sides' batts, cut by its ribs, round the
+    # amplifier's compartment and under the top
+    zone = (T + lw, H - T - lw)
+    xb0, xb1 = x0 + 2 * g + t, x1 - 2 * g - t
+    s = box(xb0, yback, zone[0] + g, xb1, y1 - g, zone[1] - g)
+    backs = [r for n, r in ribs if n.startswith('rib-back')]
+    stops = [xb0, xb1] + [v for r in backs for v in (r.bounding_box().min.X - g, r.bounding_box().max.X + g)]
+    cut = [grown(r) for r in backs] + [keep_out(cx - aw, cx + aw, az - ah, az + ah, yback - 1, D + 1, zone, stops)]
+    cut += [box(ux0, uy0, uz0, ux1, uy1, uz1) for ux0, ux1, uz0, uz1, uy0, uy1 in under_top]
+    for r in cut:
+        s = s - r
+    out += named('back', 0, s, (0, 2))
     return out
 
 
@@ -273,17 +345,23 @@ def soft(s, r):
 
 def net_volume(P, port_l=60.0):
     W, D, H, T = P['W'], P['D'], P['H'], P['T']
-    inner = (W - 2 * T) * (D - T - (P['inset'] + T)) * (H - 2 * T) / 1e6
-    o = P['port']['a'] + 2 * P['port']['wall']
-    port = len(P['port']['x']) * o * o * port_l / 1e6
-    brace = sum(((W - 2 * T) * (D - P['inset'] - 3 * T) - b['window'][0] * b['window'][1]) * T / 1e6 for b in P['braces'])
+    yb = P['inset']
+    inner = (W - 2 * T) * (D - T - (yb + T)) * (H - 2 * T) / 1e6
+    pt = P['port']
+    port = len(pt['x']) * math.pi * (pt['d'] / 2 + pt['wall']) ** 2 * port_l / 1e6
+    ye, ytr = back_edge(P)
+    brace = sum(((W - 2 * T) * (ye - yb - T) - b['window'][0] * (lambda w: w[1] - w[0])(brace_window(P, b))) * T / 1e6
+                for b in P['braces'])
     rb = P.get('ribs')
-    ribs = ((2 + len(rb['back'])) * sum(z1 - z0 for z0, z1 in rib_spans(P)) + 2 * (D - P['inset'] - 3 * T)) * rb['t'] * rb['depth'] / 1e6 \
-        if rb else 0.0
+    ribs = (2 * len(rb.get('side') or (0,)) * sum(z1 - z0 for z0, z1 in rib_spans(P))
+            + len(rb['back']) * (H - 2 * T - 2 * P['back']['land'] - 1.0)
+            + 2 * len(rb.get('top') or (0,)) * (ytr - yb - T)) * rb['t'] * rb['depth'] / 1e6 if rb else 0.0
+    bk = P['back']; lw = bk['land']
+    land = (2 * (H - 2 * T) + 2 * (W - 2 * T - 2 * lw)) * lw * (T + bk['gasket']) / 1e6     # the strips and the gasket on them
     ab = P['amp_box']; (iw, idp, ih) = ab['inside']
     amp = (iw + 2 * ab['t'] + 2 * ab['flange']) * (ih + 2 * ab['t'] + 2 * ab['flange']) * (ab['gasket'] + ab['t']) / 1e6 + \
         (iw + 2 * ab['t']) * (ih + 2 * ab['t']) * (idp + ab['t'] - ab['gasket']) / 1e6
-    return inner - 4.5 - amp - port - brace - ribs       # woofer (estimated), amplifier compartment, port, braces, ribs
+    return inner - 4.5 - amp - port - brace - ribs - land   # woofer (estimated), compartment, ports, braces, ribs, lands
 
 
 def parts(P):
@@ -294,7 +372,8 @@ def parts(P):
     pt = P['port']
     plen, _ = tuned(P)
     ply = lambda grain, face=None: Sheet(P['stock'], T, face=face, grain=grain)
-    wood = P['finish'] != 'pressed'                   # pressed: no wood anywhere (pressed.py)
+    kind = shell_kind(P)
+    wood = kind == 'wood'                             # pressed and cloud: no wood anywhere (pressed.py, cloud.py)
 
     # the front panel, set back in the shell: the woofer flush in its rebate, its T-nut holes, the square port
     baffle = box(T, yb, T, W - T, yb + T, H - T)
@@ -304,14 +383,22 @@ def parts(P):
     for k in range(wf['bolts']):
         a = 2 * math.pi * (k + 0.5) / wf['bolts']
         baffle -= cyl('y', (cx + wf['bolt_d'] / 2 * math.cos(a), wz + wf['bolt_d'] / 2 * math.sin(a)), P['woofer_hole'], yb - 1, yb + T + 1)
-    o = pt['a'] + 2 * pt['wall']
-    for px in pt['x']:
-        baffle -= box(px - o / 2 - 0.2, yb - 1, pt['z'] - o / 2 - 0.2, px + o / 2 + 0.2, yb + T + 1, pt['z'] + o / 2 + 0.2)
+    fr, ft, sl = pt['frame'], pt['frame_t'], pt['seal']
+    for px in pt['x']:                                # each port's frame in a recess, flush with the face; its tube through
+        baffle -= prism(rounded_rect(fr + 0.5, fr + 0.5, pt['frame_r'] + 0.25, cx=px, cy=pt['z']), 'y', yb - 1, yb + ft + sl)
+        baffle -= cyl('y', (px, pt['z']), 2 * port_reach(P) + 1.0, yb + ft + sl - 0.5, yb + T + 1)
+        for sx, sz in port_screws(P, px):
+            baffle -= cyl('y', (sx, sz), 3.5, yb + ft + sl - 0.5, yb + ft + sl + 15.0)
     mg = P['cover']['disc_magnet']
     for mx, mz in disc_magnets(P, cx, wz):            # round 13 (r7): the magnets that hold the ring, under its steel discs
         baffle -= cyl('y', (mx, mz), mg['pocket'], yb - 1, yb + mg['t'] + 0.2)
 
-    back = box(T, D - T, T, W - T, D, H - T)
+    # the back (round 14): it comes off, `clear` from the shell all round, on its gasket against the land strips inside
+    # the shell, sixteen M5 button heads through it
+    bk = P['back']
+    back = box(T + bk['clear'], D - T, T + bk['clear'], W - T - bk['clear'], D, H - T - bk['clear'])
+    for sx, sz in back_screws(P):
+        back -= cyl('y', (sx, sz), bk['screw_hole'], D - T - 1, D + 1)
     az = P['amp_z']
     back -= box(cx - (amp['plate_w'] + 0.5) / 2, D - 4.5, az - (amp['plate_h'] + 0.5) / 2, cx + (amp['plate_w'] + 0.5) / 2, D + 1, az + (amp['plate_h'] + 0.5) / 2)
     back -= box(cx - amp['cutout_w'] / 2, D - T - 1, az - amp['cutout_h'] / 2, cx + amp['cutout_w'] / 2, D, az + amp['cutout_h'] / 2)
@@ -338,35 +425,49 @@ def parts(P):
             top -= cyl('z', (rx, ry), 12.0, H - 15.0, H + 1)      # M8 threaded inserts, 12 drilled 15 deep
         top -= cyl('z', (cx, D - 70.0), 16.5, H - T - 1, H + 1)
     bottom = box(T, 0, 0, W - T, D, T)
+    for x, y in feet_places(P):                       # round 14: the levelling feet's inserts
+        bottom -= cyl('z', (x, y), P['feet']['insert'][0], -1, P['feet']['insert'][1])
     braces = []
     ym = (yb + T + D - T) / 2
+    ye, ytr = back_edge(P)                            # round 14: the braces stop short of the back, which comes off
     for b in P['braces']:
-        brace = box(T, yb + T, b['z'], W - T, D - T, b['z'] + T)
-        bw, bd = b['window']
-        braces.append(brace - box(cx - bw / 2, ym - bd / 2, b['z'] - 1, cx + bw / 2, ym + bd / 2, b['z'] + T + 1))
+        brace = box(T, yb + T, b['z'], W - T, ye, b['z'] + T)
+        (bw, _), (wy0, wy1) = b['window'], brace_window(P, b)
+        braces.append(brace - box(cx - bw / 2, wy0, b['z'] - 1, cx + bw / 2, wy1, b['z'] + T + 1))
     ribs = []
     if P['ribs']:
-        # ribs on edge inside the shell (the cabinet without wood): one up each side at mid-depth and a pair up the back,
-        # each in lengths between the braces, and one front to back under the top and over the bottom
+        # ribs on edge inside the shell (the cabinet without wood): one up each side at mid-depth, in lengths between the
+        # braces, and one front to back under the top and over the bottom; a pair up the back, welded to it, its full
+        # height between the land strips, so they come off with it (round 14)
         rb = P['ribs']; rt, rd = rb['t'], rb['depth']
+        ys, xs = rb.get('side') or (ym,), rb.get('top') or (cx,)     # the sides' ribs (y), the top's and the bottom's (x)
         for k, (z0, z1) in enumerate(rib_spans(P), 1):
-            ribs.append((f'rib-left-{k}', box(T, ym - rt / 2, z0, T + rd, ym + rt / 2, z1)))
-            ribs.append((f'rib-right-{k}', box(W - T - rd, ym - rt / 2, z0, W - T, ym + rt / 2, z1)))
-            for j, x in enumerate(rb['back'], 1):
-                ribs.append((f'rib-back-{j}-{k}', box(x - rt / 2, D - T - rd, z0, x + rt / 2, D - T, z1)))
-        ribs.append(('rib-top', box(cx - rt / 2, yb + T, H - T - rd, cx + rt / 2, D - T, H - T)))
-        ribs.append(('rib-bottom', box(cx - rt / 2, yb + T, T, cx + rt / 2, D - T, T + rd)))
+            for j, y in enumerate(ys):
+                n = f'{k}' + (chr(ord('a') + j) if len(ys) > 1 else '')
+                ribs.append((f'rib-left-{n}', box(T, y - rt / 2, z0, T + rd, y + rt / 2, z1)))
+                ribs.append((f'rib-right-{n}', box(W - T - rd, y - rt / 2, z0, W - T, y + rt / 2, z1)))
+        for j, x in enumerate(rb['back'], 1):
+            ribs.append((f'rib-back-{j}', box(x - rt / 2, D - T - rd, T + bk['land'] + 0.5, x + rt / 2, D - T, H - T - bk['land'] - 0.5)))
+        for j, x in enumerate(xs, 1):
+            n = f'-{j}' if len(xs) > 1 else ''
+            ribs.append((f'rib-top{n}', box(x - rt / 2, yb + T, H - T - rd, x + rt / 2, ytr, H - T)))
+            ribs.append((f'rib-bottom{n}', box(x - rt / 2, yb + T, T, x + rt / 2, ytr, T + rd)))
 
-    out = [
-        Part('left', box(0, 0, 0, T, D, H), ply('z'), finish='bark', group='cabinet'),
-        Part('right', box(W - T, 0, 0, W, D, H), ply('z'), finish='bark', group='cabinet'),
-        Part('top', top, ply('x', '+z'), finish='bark', group='cabinet'),
-        Part('bottom', bottom, ply('x', '-z'), finish='bark', group='cabinet'),
+    shell = [Part('left', box(0, 0, 0, T, D, H), ply('z'), finish='bark', group='cabinet'),
+             Part('right', box(W - T, 0, 0, W, D, H), ply('z'), finish='bark', group='cabinet'),
+             Part('top', top, ply('x', '+z'), finish='bark', group='cabinet'),
+             Part('bottom', bottom, ply('x', '-z'), finish='bark', group='cabinet')]
+    if P.get('roto'):
+        shell = [roto_shell(P, [p.solid for p in shell])]
+    out = shell + [
         Part('front-panel', baffle, ply('z', '-y'), finish='panel' if wood else 'bark', group='cabinet'),
         Part('back', back, ply('z', '+y'), finish='bark', group='cabinet'),
     ] + [Part('brace' if i == 0 else f'brace-{i + 1}', b, ply('x', '+z'), finish='raw' if wood else 'bark', group='cabinet', inside=True)
          for i, b in enumerate(braces)] + [Part(n, r, ply('z'), finish='bark', group='cabinet', inside=True,
-                                                notes=[f'{P["ribs"]["depth"]:g} on edge, extrusion welded to the panel both sides'])
+                                                notes=[f'{P["ribs"]["depth"]:g} on edge, '
+                                                       + {'hdpe': 'extrusion welded', 'acrylic': 'cemented', 'wood': 'glued'}[kind] + ' to '
+                                                       + ('the back both sides: it comes off with the back' if n.startswith('rib-back') else
+                                                          'the panel both sides')])
                                            for n, r in ribs]
     batts = [Part(n, s, Sheet(P['lining']['stock'], P['lining']['t']), finish='lining', group='lining', inside=True,
                  pieces={'web': (soft(s, P['lining']['soft']), 'lining')},
@@ -383,22 +484,23 @@ def parts(P):
     for mx, mz in disc_magnets(P, cx, wz):  # and four for steel discs, behind its face, so the face stays clean (round 13)
         ring -= cyl('y', (mx, mz), mg['pocket'], yb - mg['t'] - 0.2, yb + 1)
     out.append(Part('woofer-ring', ring, Sheet(r['stock'], r['t'], face='-y'), finish='ring', group='cabinet',
-                    notes=[('sprayed in the ring colour' if r['stock'] == 'mdf' else 'pressed in the ring colour, one colour of flake')
+                    notes=[('sprayed in the ring colour' if r['stock'] == 'mdf' else 'cast acrylic, tinted opaque in the ring colour'
+                            if 'acrylic' in r['stock'] else 'pressed in the ring colour, one colour of flake')
                            + '; eight pockets behind it clear the woofer\'s screw heads; four more hold steel discs '
                            f'({mg["d"]:g} x {mg["t"]:g}), {"pressed" if mg["pocket"] < mg["d"] else "bonded"} in: the magnets under them in the panel '
                            'hold the ring, and the cloth disc\'s hold to them through it, more weakly, so the disc comes away alone']))
     for px in pt['x']:
-        tube = box(px - o / 2, yb, pt['z'] - o / 2, px + o / 2, yb + plen, pt['z'] + o / 2)
-        fy, fw = yb + T + pt['seal'], pt['flange'] / 2          # round 13 (r3): a flange behind the panel, on a foam seal
-        tube += box(px - fw, fy, pt['z'] - fw, px + fw, fy + pt['flange_t'], pt['z'] + fw)
-        tube -= box(px - pt['a'] / 2, yb - 1, pt['z'] - pt['a'] / 2, px + pt['a'] / 2, yb + plen + 1, pt['z'] + pt['a'] / 2)
         name = 'port' if len(pt['x']) == 1 else ('port-left' if px < cx else 'port-right')
-        out.append(Part(name, tube, Printed('asa', orient='on its flange'), finish='port', group='cabinet',
-                        notes=[f'{pt["a"]:g} square, {plen:.0f} long from the panel\'s face: '
-                               + (f'the {len(pt["x"])} together tune' if len(pt['x']) > 1 else 'tunes')
-                               + f' the box to {P["fb"]:g} Hz; print 15 longer and trim to tune; fitted from inside, its '
-                               f'{pt["flange"]:g} square flange on a {pt["seal"]:g} closed-cell PE foam seal on the panel\'s back, four '
-                               + ('wood screws' if wood else 'thread-forming screws for plastics') + ' through it']))
+        out.append(Part(name, port_solid(P, px, plen), Printed('asa', orient='on its frame'), finish='port', group='cabinet',
+                        notes=[f'{pt["d"]:g} across inside, {plen:.0f} long from the panel\'s face, its {pt["frame"]:g} square frame '
+                               f'(corners R{pt["frame_r"]:g}) printed in one'
+                               + (f', both mouths rounded on R{pt["flare"]:g}' if pt['flare'] else '') + ': '
+                               + (f'the {len(pt["x"])} together tune' if len(pt['x']) > 1 else 'it tunes')
+                               + f' the box to {P["fb"]:g} Hz; print 15 longer and trim to tune with the back off; fitted from the '
+                               f'front, the frame flush in a {pt["frame_t"] + pt["seal"]:g} recess on a {pt["seal"]:g} closed-cell PE '
+                               'foam gasket, four black countersunk ' + {'wood': 'wood screws', 'hdpe': 'thread-forming screws for plastics',
+                                                                         'acrylic': 'M4 screws into threads tapped in the panel'}[kind]
+                               + ' in its corners']))
 
     woofer, _ = driver_part('woofer', P['woofer'], wf, centre=(cx, yb, wz))
     out.append(woofer)
@@ -440,23 +542,25 @@ def parts(P):
         out.append(Part(f'rod-{i}', cyl('z', (rx, ry), P['rod_d'], H, ztop), Machined('stainless', 'lathe'), finish='rod',
                         group='horn', notes=[f'{ztop - H:.0f} long; M8 thread 15 deep each end']))
 
-    out += covers(P, wz, o)
+    out += covers(P, wz)
     if P['finish'] == 'faced':
         out += skins(P, rod_places(P), amp)
     elif P['finish'] == 'bark':
         out.append(Part('bark', None, Bought('bark-sheet'), qty=2, notes=['about 1.75 m2 a speaker: the shell\'s sides, top, bottom, back and front edges']))
+    later += back_and_feet(P, kind) + [port_screws_part(P, kind)]     # round 14's
     out += later + batts                          # after the parts the drawings have numbered since round 5
     out += [
         (Part('woofer-fixings', None, Bought('m6-tnut-set'), notes=['the T-nuts hammered in from inside before the glue-up']) if wood else
          Part('woofer-fixings', None, Bought('m6-plastic-inserts'),
               notes=[f'the inserts screwed into the panel from the front, in {P["woofer_hole"]:g} holes; the screws\' torque checked again '
-                     'after 48 hours (HDPE creeps)'])),
+                     'after 48 hours (HDPE creeps)']) if kind == 'hdpe' else
+         Part('woofer-fixings', None, Bought('m6-acrylic-inserts'),
+              notes=[f'the inserts bonded into the panel with epoxy, in {P["woofer_hole"]:g} holes, flush with its face'])),
         Part('hf-fixings', None, Bought('hf-mount-screws' if hz['form'] == 'cast' else 'm6-hf-screws')),
-        Part('port-fixings', None, Bought('port-fixings')),
-        *([] if wood else [Part('weld-rod', None, Bought('hdpe-weld-rod'))]),
+        *({'hdpe': [Part('weld-rod', None, Bought('hdpe-weld-rod'))], 'acrylic': [Part('cement', None, Bought('acrylic-cement'))]}.get(kind, [])),
         Part('gasket', None, Bought('gasket-foam'), qty=2),
         Part('lining-sleeves', None, Bought('voile-sleeves')),
-        *([] if wood else [Part('lining-tape', None, Bought('lse-tape-dots'))]),
+        *({'hdpe': [Part('lining-tape', None, Bought('lse-tape-dots'))], 'acrylic': [Part('lining-tape', None, Bought('vhb-clear-dots'))]}.get(kind, [])),
         Part('amp-fixings', None, Bought('amp-screws')),
         Part('amp-box-fixings', None, Bought('amp-box-screws')),
         *([] if hz['form'] == 'cast' else [Part('hf-cable', None, Bought('speaker-cable-1m'))]),
@@ -465,7 +569,8 @@ def parts(P):
                                                                     'about 300 Hz into 16 ohm)']),
         Part('loom', None, Bought('loom-set')),
         Part('terminals', None, Bought('push-on-terminal'), qty=4),
-        Part('glides', None, Bought('felt-glides')),
+        Part('back-inserts', None, Bought({'wood': 'm5-inserts-wood', 'hdpe': 'm5-inserts-plastic', 'acrylic': 'm5-inserts-acrylic'}[kind])),
+        Part('feet-inserts', None, Bought({'wood': 'm8-inserts-wood', 'hdpe': 'm8-inserts-plastic', 'acrylic': 'm8-inserts-acrylic'}[kind])),
     ]
     return out
 
@@ -527,6 +632,174 @@ def disc_magnets(P, cx, wz):
     rebate = (LIB[P['woofer']]['geom']['frame_od'] + 1.6) / 2
     assert rm - mg['d'] / 2 > rebate + 1.0 and rm + mg['d'] / 2 < P['ring']['od'] / 2 - 1.0, 'the magnets must sit between the rebate and the ring\'s edge'
     return [(cx + rm * math.cos(2 * math.pi * k / n), wz + rm * math.sin(2 * math.pi * k / n)) for k in range(n)]
+
+
+def roto_shell(P, panels):
+    """The rotomoulded shell (a study, round 14: the production route the pressed sheet's suppliers point to): the
+    sides, the top and the bottom moulded as one hollow part, a double wall `skin` thick each side round a hollow core,
+    its outside edges rounded on `r`, the front's inside edge on `r_in`. Moulded, the bark's laid-out pattern turns
+    to speckle."""
+    W, D, H, T = P['W'], P['D'], P['H'], P['T']
+    ro = P['roto']; r, sk = ro['r'], ro['skin']
+    shell = panels[0]
+    for s in panels[1:]:
+        shell = shell.fuse(s)
+    shell = shell.clean()
+
+    def edges(solid, x0, x1, y0, y1, z0, z1, inner=None):
+        """The edges round a box's outside: along y at its corners, and round its front and back faces."""
+        on = lambda v, vals: any(abs(v - q) < 0.01 for q in vals)
+        out = []
+        for e in solid.edges():
+            b = e.bounding_box()
+            fx, fy, fz = b.max.X - b.min.X < 0.01, b.max.Y - b.min.Y < 0.01, b.max.Z - b.min.Z < 0.01
+            if fx and fz and on(b.min.X, (x0, x1)) and on(b.min.Z, (z0, z1)):
+                out.append(e)
+            elif fy and on(b.min.Y, (y0, y1)) and ((fx and on(b.min.X, (x0, x1))) or (fz and on(b.min.Z, (z0, z1)))):
+                out.append(e)
+        return out
+    shell = shell.fillet(r, edges(shell, 0, W, 0, D, 0, H))
+    inner = [e for e in shell.edges() if (lambda b: b.max.Y - b.min.Y < 0.01 and abs(b.min.Y) < 0.01 and
+                                         ((b.max.X - b.min.X < 0.01 and any(abs(b.min.X - q) < 0.01 for q in (T, W - T))) or
+                                          (b.max.Z - b.min.Z < 0.01 and any(abs(b.min.Z - q) < 0.01 for q in (T, H - T)))))(e.bounding_box())]
+    if inner and ro.get('r_in'):
+        shell = shell.fillet(ro['r_in'], inner)
+    core = box(sk, sk, sk, W - sk, D - sk, H - sk)
+    core = core.fillet(r - sk, edges(core, sk, W - sk, sk, D - sk, sk, H - sk))
+    core -= box(T - sk, -1, T - sk, W - T + sk, D + 1, H - T + sk)
+    shell -= core
+    return Part('shell', shell, Machined('rotomoulded-pe', 'rotomoulded', setup_usd=12000.0), finish='bark', group='cabinet',
+                notes=[f'the sides, the top and the bottom rotomoulded as one in recycled PE, a double wall ({sk:g} skins round a '
+                       f'hollow core), its outside edges rounded on R{r:g}; the bark\'s colours as speckle'])
+
+
+def port_screws(P, px):
+    """A port's frame's four screws' centres (x, z), 12 in from its edges."""
+    pt = P['port']; e = pt['frame'] / 2 - 12.0
+    return [(px + sx * e, pt['z'] + sz * e) for sx in (-1, 1) for sz in (-1, 1)]
+
+
+def cone_y(c, d0, d1, y0, y1):
+    """A cone's frustum along y through (x, z) = c: d0 across at y0, d1 at y1."""
+    return revolve_profile([(0.0, 0.0), (d0 / 2, 0.0), (d1 / 2, y1 - y0), (0.0, y1 - y0)], 'y', (c[0], y0, c[1]))
+
+
+def port_solid(P, px, plen):
+    """A port as printed (round 14): its tube, `plen` long from the panel's face, and its square frame in one, the
+    frame's corners countersunk for its screws; with `flare`, both mouths rounded on it, the inner one a bell. Each
+    profile (r, h) runs along the port from the panel's face."""
+    pt = P['port']; yb = P['inset']
+    ri, ro, R, ft, pz = pt['d'] / 2, pt['d'] / 2 + pt['wall'], pt['flare'], pt['frame_t'], pt['z']
+
+    def arc(c, r, a0, a1, n=24):
+        return [(c[0] + r * math.cos(math.radians(a0 + (a1 - a0) * k / n)), c[1] + r * math.sin(math.radians(a0 + (a1 - a0) * k / n)))
+                for k in range(n + 1)]
+    c = (px, yb, pz)
+    frame = prism(rounded_rect(pt['frame'], pt['frame'], pt['frame_r'], cx=px, cy=pz), 'y', yb, yb + ft)
+    if R:
+        # the tube's wall as one section from the frame's back face (no boolean between two revolutions that meet at the
+        # bell's rim: OCC returns the first unchanged): the front flare's last part, the bore, the bell rolled out to
+        # its rim, and back down its outside. The arcs are polylines of 24 (a spline's surface of revolution fails in
+        # the frame's cut, silently, and leaves the frame whole)
+        if ft < R:
+            ra = ri + R - math.sqrt(R * R - (R - ft) ** 2)
+            front = arc((ri + R, R), R, math.degrees(math.atan2(ft - R, ra - ri - R)) % 360, 180)
+        else:
+            front = [(ri, ft)]
+        wall = [(ro, ft)] + front + arc((ri + R, plen - R), R, 180, 90) + arc((ri + R, plen - R), R - pt['wall'], 90, 180)
+        tube = revolve_profile(wall, 'y', c)
+        mouth = [(0.0, -1.0), (ri + R, -1.0)] + arc((ri + R, R), R, 270, 180) + [(ri, max(R, ft) + 1.0), (0.0, max(R, ft) + 1.0)]
+        out = (frame - revolve_profile(mouth, 'y', c)).fuse(tube)
+    else:
+        tube = revolve_profile([(ri, ft), (ro, ft), (ro, plen), (ri, plen)], 'y', c)
+        out = (frame - cyl('y', (px, pz), 2 * ri, yb - 1, yb + ft + 1)).fuse(tube)
+    sh, sk = pt['screw']
+    for sx, sz in port_screws(P, px):
+        out -= cyl('y', (sx, sz), sh, yb - 1, yb + ft + 1)
+        out -= cone_y((sx, sz), sk, sh, yb, yb + (sk - sh) / 2)                 # a 90 degree countersink
+    return out
+
+
+def port_screws_part(P, kind):
+    """The ports' screws (round 14): four black countersunk screws through each frame's corners into the panel, their
+    heads flush with the frame's face."""
+    from build123d import Compound
+    pt, yb = P['port'], P['inset']
+    sh, sk = pt['screw']
+    d0, d1 = sk - 0.2, sh - 0.2
+    yh = yb + 0.1 + (d0 - d1) / 2
+    heads = [cone_y((sx, sz), d0, d1, yb + 0.1, yh).fuse(cyl('y', (sx, sz), 3.4, yh - 0.1, yb + pt['frame_t'] + pt['seal'] + 14.0))
+             for px in pt['x'] for sx, sz in port_screws(P, px)]
+    return Part('port-screws', Compound(children=heads), Bought('port-fixings'), finish='screw', group='cabinet',
+                notes=[f'{len(heads)} black countersunk ' + {'wood': 'wood screws 4 x 20 into 3.5 pilot holes',
+                                                             'hdpe': 'thread-forming screws for plastics (EJOT PT K40 x 20 kind) into 3.5 pilot holes',
+                                                             'acrylic': 'M4 x 20 screws into threads tapped (3.3 drill)'}[kind]
+                       + ' 15 deep in the recess\'s floor, four through each port\'s frame, on the foam gasket'])
+
+
+def feet_places(P):
+    """The levelling feet's centres (x, y) under the bottom, `inset` in from its edges."""
+    i = P['feet']['inset']
+    return [(x, y) for x in (i, P['W'] - i) for y in (i, P['D'] - i)]
+
+
+def back_and_feet(P, kind):
+    """Round 14, the owner's picks (the reality check's r4 and r11). The back comes off: it closes on an EPDM gasket
+    against four land strips fixed inside the shell (welded in HDPE; cleats glued and screwed in plywood), sixteen M5
+    button heads through it into inserts in the strips. The amplifier's compartment, the back's ribs and its batts come
+    off with it; the leads unplug at the compartment. Four levelling feet in inserts in the bottom lift the cabinet
+    `lift` and level it."""
+    from build123d import Compound
+    W, D, H, T = P['W'], P['D'], P['H'], P['T']
+    bk = P['back']; lw, gk, bc = bk['land'], bk['gasket'], bk['clear']
+    yl1 = D - T - gk; yl0 = yl1 - T                  # the strips' back face (the gasket on it) and their front
+    screws = back_screws(P)
+    hd, hl = bk['insert']
+    wood = kind == 'wood'
+    fix = {'hdpe': 'extrusion welded to the shell along both edges', 'acrylic': 'cemented to the shell along both edges',
+           'wood': 'a cleat glued and screwed to the shell'}[kind]
+    ins = {'wood': 'for wood', 'hdpe': 'for plastics', 'acrylic': 'bonded with epoxy'}[kind]
+    out = []
+    for n, s in (('land-left', box(T, yl0, T, T + lw, yl1, H - T)), ('land-right', box(W - T - lw, yl0, T, W - T, yl1, H - T)),
+                 ('land-top', box(T + lw, yl0, H - T - lw, W - T - lw, yl1, H - T)),
+                 ('land-bottom', box(T + lw, yl0, T, W - T - lw, yl1, T + lw))):
+        bb, k = s.bounding_box(), 0
+        for sx, sz in screws:
+            if bb.min.X < sx < bb.max.X and bb.min.Z < sz < bb.max.Z:
+                s -= cyl('y', (sx, sz), hd, yl1 - hl, yl1 + 1); k += 1
+        out.append(Part(n, s, Sheet(P['stock'], T, face='+y', grain='z' if n in ('land-left', 'land-right') else 'x'),
+                        finish='raw' if wood else 'bark', group='cabinet', inside=True,
+                        notes=[f'{lw:g} x {T:g}, {fix}, its back face {gk + T:g} in from the shell\'s back edge; {k} M5 inserts '
+                               + ins + f' in {hd:g} holes {hl:g} deep take the back\'s screws']))
+    gasket = box(T + bc, yl1, T + bc, W - T - bc, D - T, H - T - bc) - box(T + lw, yl1 - 1, T + lw, W - T - lw, D - T + 1, H - T - lw)
+    for sx, sz in screws:
+        gasket -= cyl('y', (sx, sz), 6.0, yl1 - 1, D - T + 1)
+    out.append(Part('back-gasket', gasket, Bought('back-gasket'), finish='sleeve', group='cabinet', inside=True,
+                    notes=[f'{lw - bc:g} wide, {gk:g} thick, on the land strips under the back\'s edge, punched for the screws, which '
+                           'locate it' + (' (no adhesive: HDPE holds none)' if kind == 'hdpe' else '') + '; at full output the box runs at '
+                           'about 1 kPa inside, so it must seal all round']))
+    heads = []
+    for sx, sz in screws:
+        h = cyl('y', (sx, sz), 9.5, D, D + 2.8)
+        try:
+            h = h.fillet(1.4, [e for e in h.edges() if abs(e.center().Y - (D + 2.8)) < 0.01])
+        except Exception:
+            pass
+        heads.append(h.fuse(cyl('y', (sx, sz), 4.8, yl1 - hl + 2.0, D)))
+    out.append(Part('back-screws', Compound(children=heads), Bought('back-screws'), finish='rod', group='cabinet',
+                    notes=[f'{len(screws)} M5 x {round(T + gk + hl - 2, -1):g} button heads (ISO 7380, A2) on nylon washers, '
+                           f'{bk["edge"]:g} in from the back\'s edges, into the inserts in the land strips; tightened evenly '
+                           'round the back, by hand, to compress the gasket without crushing it']))
+    f = P['feet']
+    bases = [cyl('z', (x, y), f['d'], -f['lift'], -f['lift'] + f['base']) for x, y in feet_places(P)]
+    stems = [cyl('z', (x, y), 13.0, -5.0, 0.0).fuse(cyl('z', (x, y), 7.8, -f['lift'] + f['base'] - 0.5, f['insert'][1] - 1.0))
+             for x, y in feet_places(P)]
+    out.append(Part('feet', Compound(children=[b.fuse(t) for b, t in zip(bases, stems)]), Bought('levelling-feet'), finish='foot',
+                    group='cabinet', pieces={'base': (Compound(children=bases), 'foot'), 'stem': (Compound(children=stems), 'rod')},
+                    notes=[f'4 levelling feet, M8, a {f["d"]:g} swivel base on a rubber pad, in M8 inserts '
+                           + ins + f' ({f["insert"][0]:g} holes {f["insert"][1]:g} deep) '
+                           f'{f["inset"]:g} in from the bottom\'s edges; set to {f["lift"]:g} and levelled, then locked by their nuts']))
+    return out
 
 
 def insert_depth(pp, ry, depth):
@@ -610,27 +883,27 @@ def amp_compartment(P, ribs, wz, wood):
            Part('hf-pad', pad, Bought('attenuator-l-pad'), finish='amp', inside=True, render=False,
                 notes=['on a 3 mm aluminium plate screwed to the compartment\'s front, inside, with thermal compound under the '
                        'resistors; the capacitor beside them; crimped, insulated 6.3 mm receptacles'])]
-    # the leads: the HF lead along the back rib's inner edge (or the back's batts), up through brace-2's window and in
-    # under the top batts to its gland; the woofer's under the motor to the basket's lower spoke
+    # the leads (round 14: they stay in the cabinet when the back comes off, each unplugged at its connector at the
+    # compartment): the HF lead straight up from its gland, through brace-2's window, in under the top's batts to its
+    # gland at the cable post; the woofer's under the motor to the basket's lower spoke
     Lc = P['lining']
-    edge = min([D - T - Lc['gap'] - Lc['t']] + [r.bounding_box().min.Y for n, r in ribs if n.startswith('rib-back')])
-    ly = edge - 3.0
-    lx = P['ribs']['back'][0] if P['ribs'] else cx - 130.0
     top_glands = []
     if P['horn']['form'] == 'cast':
         pp = P['horn']['cast']['posts']; gx, gy = rod_places(P)[pp['cable_post']]
         top_glands = [cyl('z', (gx, gy), gd, H - T - gl, H - T)]
-        t0 = tip(g_hf)
-        hf_path = [t0, (t0[0] - 18, t0[1] - 8, t0[2] + 7), (lx + 22, ly - 6, t0[2] + 22), (lx, ly, t0[2] + 38), (lx, ly, H - T - 65),
-                   (gx - 12, ly - 2, H - T - 58), (gx - 2, gy - 6, H - T - gl - 8), (gx, gy, H - T - gl)]
+        t0 = tip(g_hf); zt = H - T - Lc['t'] - Lc['gap']          # the top's batts' underside
+        hf_path = [t0, (t0[0], t0[1] - 7, t0[2] + 4), (t0[0] - 4, t0[1] - 2, t0[2] + 22), (gx, t0[1] + 9.5, zt - 20),
+                   (gx, gy - 13, zt - 6), (gx, gy, zt + 8), (gx, gy, H - T - gl)]
         out.append(Part('lead-hf', tube_along(hf_path, 5.0), Bought('hf-pair'), finish='cable', inside=True,
-                        notes=['from the compartment\'s gland up the back rib, a screw-mount tie base every 120, through brace-2\'s '
-                               'window, through the gland under the top and up the cable post (7 bore) into the pod; a 50 service '
-                               'loop at each end; silicone sleeving where it meets the post\'s cut ends']))
+                        notes=['from its connector at the compartment\'s upper gland straight up'
+                               + (', through brace-2\'s window (on a screw-mount tie base on its back member)' if len(P['braces']) > 1 else '')
+                               + ', through the gland under the top and up the cable post (7 bore) into the pod; it stays in the '
+                               'cabinet when the back comes off; a 50 service loop at each end; silicone sleeving where it meets the '
+                               'post\'s cut ends']))
     t1, end = tip(g_lf), (cx + 5.0, yb + 68.0, wz - 122.0)
     lerp = lambda f, dz: tuple(a + (b - a) * f for a, b in zip(t1, end))[:2] + (t1[2] + (end[2] - t1[2]) * f + dz,)
     out.append(Part('lead-woofer', tube_along([t1, lerp(0.3, -12.0), lerp(0.65, -8.0), end], 7.0), Bought('speaker-cable-1m'),
-                    finish='cable', inside=True, notes=['from the compartment\'s lower gland to the woofer\'s terminals, under the '
+                    finish='cable', inside=True, notes=['from its connector at the compartment\'s lower gland to the woofer\'s terminals, under the '
                                                         'motor, tied to the basket\'s lower spoke, clear of the cone\'s travel']))
     out.append(Part('cable-glands', Compound(children=glands + top_glands), Bought('cable-glands'), finish='gland', inside=True))
     pw = amp['plate_w'] / 2
@@ -668,7 +941,8 @@ def fittings(P, places, shell):
     if T - sdep >= bl:                              # a flanged insert for plastics in the top's underside, under the socket
         z0 = H - T + 1.0
         insert = (cyl('z', (tx, ty), bi, H - T, H - T + bl) + cyl('z', (tx, ty), fd, H - T - ft, H - T)) - cyl('z', (tx, ty), d, H - T - ft - 1, H - T + bl + 1)
-        anchor = 'a flanged M6 insert for plastics in the top\'s underside'
+        anchor = ('a flanged M6 insert bonded into the top\'s underside' if shell_kind(P) == 'acrylic' else
+                  'a flanged M6 insert for plastics in the top\'s underside')
     else:                                           # plywood too thin under the socket for one: a flange nut epoxied below
         z0 = H - T - ft - 4.0
         insert = (cyl('z', (tx, ty), fd, H - T - ft, H - T) + cyl('z', (tx, ty), 11.5, H - T - ft - 5.0, H - T - ft)) - cyl('z', (tx, ty), d, H - T - ft - 6, H - T + 1)
@@ -677,7 +951,8 @@ def fittings(P, places, shell):
     nut = (cyl('z', (tx, ty), 16.0, zf, zf + 1.6) + cyl('z', (tx, ty), 16.0, zf + 1.6, zf + 9.6)) - cyl('z', (tx, ty), d, zf - 1, zf + 11)
     tie = rod.fuse(nut)
     return [Part('post-sockets', Compound(children=cups), Bought('post-fixings'), finish='brass', group='cabinet',
-                 notes=[f'{len(places)} brass cups, knurled to 15 and pressed into {sd:g} holes {sdep:g} deep in the top, bored {sb:g} '
+                 notes=[f'{len(places)} brass cups, ' + ('bonded with epoxy into' if shell_kind(P) == 'acrylic' else 'knurled to 15 and pressed into')
+                        + f' {sd:g} holes {sdep:g} deep in the top, bored {sb:g} '
                         '13 deep on a 2 floor; the cable post\'s floor holed 7 for the HF lead, the tie post\'s 6.5 for the rod']),
             Part('post-sleeves', Compound(children=sleeves), Bought('post-sleeves'), finish='sleeve', group='cabinet',
                  notes=[f'polyurethane, Shore A 90, {so:g} x {si:g} x {sl:g}, pressed into the sockets: they centre the posts, take up '
@@ -788,7 +1063,7 @@ def adaptor_ring(P, wg, hf):
                        'to them) take M5 socket caps into the brass inserts in the horn\'s boss; black anodised'])
 
 
-def covers(P, wz, port_o):
+def covers(P, wz):
     """The front: the panel faced in bark under a cloth disc over the woofer (the owner's pick, 2026-10-11). With
     P['cover']['alternatives'] the covers of rounds 2 and 3 come back as options beside them (a cloth grille, the
     slotted grilles, a cork face; the disc and the bark face then options too), each in the recess in front of the panel
@@ -801,7 +1076,7 @@ def covers(P, wz, port_o):
     out = []
     if alt:
         out += alternative_covers(P, x0, x1, z0, z1)
-    out += disc_and_face(P, wz, port_o, alt)
+    out += disc_and_face(P, wz, alt)
     return out
 
 
@@ -843,7 +1118,7 @@ def alternative_covers(P, x0, x1, z0, z1):
     return out
 
 
-def disc_and_face(P, wz, port_o, alt):
+def disc_and_face(P, wz, alt):
     """The front as picked: a cloth disc over the woofer on its ring, and the panel faced in bark round the ring and the
     port (with the alternatives, both options, and a cork face as a third)."""
     W, H, T = P['W'], P['H'], P['T']
@@ -860,21 +1135,22 @@ def disc_and_face(P, wz, port_o, alt):
     for mx, mz in disc_magnets(P, cx, wz):
         dframe -= cyl('y', (mx, mz), mg['pocket'], yr - mg['t'] - 0.2, yr + 1)
     ds = cv['disc_stock']
-    fixed = 'bonded' if ds == 'mdf' else 'pressed'     # round 13 (r3): HDPE holds no bond
+    fixed = 'pressed' if 'hdpe' in ds else 'bonded'   # round 13 (r3): HDPE holds no bond
     out.append(Part('disc-frame', dframe, Sheet(ds, dt), finish='black', option=disc_opt, render=False,
-                    notes=[f'{"sprayed black" if ds == "mdf" else "pressed black"}; its face edge rounded; {mg["n"]} magnets ({mg["d"]:g} x '
+                    notes=[f'{"sprayed black" if ds == "mdf" else "cast acrylic, black" if "acrylic" in ds else "pressed black"}; its face edge rounded; {mg["n"]} magnets ({mg["d"]:g} x '
                            f'{mg["t"]:g}) {fixed} into the pockets behind it, each holding to a steel disc in the ring\'s back through '
                            f'{r["t"] - mg["t"] - 0.2:g} of {"MDF" if r["stock"] == "mdf" else "the ring"}']))
     out.append(Part('cloth-disc', cyl('y', (cx, wz), r['od'] + 1.0, yr - dt - 0.5, yr), Bought('grille-cloth'), finish='disc',
                     option=disc_opt, notes=[f'Ø{r["od"] + 1:g}: stretched across the frame\'s face and round its edge, '
-                                                + ('glued behind' if ds == 'mdf' else 'held behind on an adhesive transfer tape made for '
+                                                + ('glued behind' if 'hdpe' not in ds else 'held behind on an adhesive transfer tape made for '
                                                    'low-surface-energy plastics (3M 300LSE kind)')
                                                 + f'; its face {yr - dt - 0.5:g} back from the shell\'s front']))
     out.append(Part('cloth-disc-magnets', None, Bought('grille-magnets'), option=disc_opt))
 
     # the facings: bark (1 mm; or cork, 3 mm, with the alternatives) laid on the panel round the ring and the port
     # before the ring goes on
-    holes = [('circle', cx, wz, r['od'] + 1.0)] + [('rect', px, pt['z'], port_o + 0.4, port_o + 0.4) for px in pt['x']]
+    holes = [('circle', cx, wz, r['od'] + 1.0)] + [('rrect', px, pt['z'], pt['frame'] + 1.0, pt['frame'] + 1.0, pt['frame_r'] + 0.5)
+                                                   for px in pt['x']]
     if P['finish'] == 'pressed':                      # the panel's own sheet carries the pattern: nothing laid on it
         faces = []
     elif P['finish'] == 'faced':
@@ -885,7 +1161,7 @@ def disc_and_face(P, wz, port_o, alt):
         ft = P['skin']['face_t'] if name == 'pressed' else cv['face_t'][name]
         face = slotted_panel(T + 0.5, T + 0.5, W - T - 0.5, H - T - 0.5, yb - ft, yb, holes=holes)
         out.append(Part(f'{name}-face', face, make, finish=fin, option=f'{name}-face' if alt else '',
-                        notes=[f'{ft:g} thick, cut round the ring (Ø{r["od"] + 1:g}) and the port; laminated to the panel before the ring goes on']))
+                        notes=[f'{ft:g} thick, cut round the ring (Ø{r["od"] + 1:g}) and the ports\' frames; laminated to the panel before the ring goes on']))
     return out
 
 
@@ -1105,14 +1381,16 @@ for _k in ('birch-y2k-smoke', 'eucalyptus-y2k-green'):
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,
     notes=['Bark on the shell (sides, top, bottom and back): real birch bark sheet (Betula papyrifera, from fallen or felled trees) laminated to the plywood with PVA in a vacuum bag and sealed with a matt waterborne lacquer, wrapped round the shell\'s front edges; for eucalyptus, the shed bark of a smooth-barked gum (spotted or snow gum) pressed flat and laminated the same way, or a UV-printed veneer of it. Approve a sample board first.',
-           'Glue-up: sides to the bottom, the brace, then the front panel (set back 24 mm), the back, then the top.',
-           'The woofer flush in its rebate on a gasket, on eight M6 T-nuts from inside; the ring over its frame, held by four magnets in the panel under steel discs in its back; each port fitted from inside, trimmed to tune (impedance minimum at fb), its flange screwed to the panel on a foam seal.',
-           'The waveguide stands on four posts, stainless lamp tube 10 x 7, each threaded M10 x 1 at its top into a brass insert bonded in a pad cast under the horn (drilled after casting, through a jig taken off the top\'s sockets), its plain foot standing in a polyurethane sleeve in a brass socket pressed into the top, so the horn and its posts lift off as one. An M6 rod down the free rear post, from a thumb nut inside the pod to an insert under the top, holds them down. The HF lead, a round silicone cable 5 across, runs from the amplifier\'s compartment up the back, through a gland under the top and up inside a rear post into the pod, where it plugs into the driver\'s leads. To lift the horn off: the cap off, the nut undone and the lead unplugged.',
+           'Glue-up: sides to the bottom, the brace, then the front panel (set back 24 mm), the top, and the back\'s four cleats, their back faces 21 in from the shell\'s back edge; the back screws on last, on its gasket, and comes off.',
+           'The woofer flush in its rebate on a gasket, on eight M6 T-nuts from inside; the ring over its frame, held by four magnets in the panel under steel discs in its back; each port, printed in one with its square frame, fitted from the front, the frame flush in a recess on a foam gasket, four black wood screws in its corners; trimmed to tune (impedance minimum at fb) with the back off.',
+           'The waveguide stands on four posts, stainless lamp tube 10 x 7, each threaded M10 x 1 at its top into a brass insert bonded in a pad cast under the horn (drilled after casting, through a jig taken off the top\'s sockets), its plain foot standing in a polyurethane sleeve in a brass socket pressed into the top, so the horn and its posts lift off as one. An M6 rod down the free rear post, from a thumb nut inside the pod to an insert under the top, holds them down. The HF lead, a round silicone cable 5 across, runs from its connector at the amplifier\'s compartment straight up, through a gland under the top and up inside a rear post into the pod, where it plugs into the driver\'s leads. To lift the horn off: the cap off, the nut undone and the lead unplugged.',
            'The front: the panel faced in bark (1 mm) round the ring and the port, and a cloth disc over the woofer, its MDF frame standing on the ring on four magnet pairs, its face 18.5 clear of the cone at rest.',
            'The FA122 crosses at about 800 Hz (LR4: B&C asks 12 dB/oct or steeper there) with the HF channel about 9 dB down (108 dB at 2.83 V against the woofer\'s 99), part of it in the passive L-pad after the amplifier, so its hiss stays inaudible: two 25 W aluminium-housed resistors on a plate in the compartment, behind a 33 uF film capacitor that keeps low frequencies off the driver if the preset is ever lost.',
-           'The amplifier\'s preset, stored before the speaker ships: the crossover; a 4th-order Butterworth high-pass at 28 Hz on the woofer (below the ports\' tuning the box no longer holds the cone, which would pass Xmax below about 30 Hz at full output, and a record\'s warp drives it there); limiters set to the woofer\'s Xmax and the driver\'s rating; a notch at the ports\' pipe resonance (about 540 Hz), measured in each port\'s near field.',
+           'The amplifier\'s preset, stored before the speaker ships: the crossover; a 4th-order Butterworth high-pass at 28 Hz on the woofer (below the ports\' tuning the box no longer holds the cone, which would pass Xmax below about 30 Hz at full output, and a record\'s warp drives it there); limiters set to the woofer\'s Xmax and the driver\'s rating; a notch at the ports\' pipe resonance (about 520 Hz in the pressed cabinet, 600 in the plywood one), measured in each port\'s near field.',
            'The amplifier in a sealed compartment of its own, as Hypex asks: 1.5 mm aluminium, black anodised, on an EPDM gasket on the back\'s inner face, so the box stays airtight and the mains electronics are enclosed in metal. The leads leave it through cable glands. A rating plate beside the amplifier carries the model, the serial number, the ratings, the marks and the maker\'s address; the finished speaker needs an EMC pre-scan and an IEC 62368-1 assessment.',
-           'The lining: polyester batts (thermally bonded, recycled PET, 50 mm) on the sides, the back, the top and the bottom, one to each bay between the braces (and the ribs), each cut 10 full each way and sewn into a sleeve of white voile; none on the front panel, none beside the ports (10 clear of each tube, nothing between its inner end and the back\'s batt) and none within 20 of the amplifier\'s module.'],
+           'The lining: polyester batts (thermally bonded, recycled PET, 50 mm) on the sides, the top and the bottom, one to each bay between the braces (and the ribs), and on the back, its full height between its ribs, so they come off with it; each cut 10 full each way and sewn into a sleeve of white voile; none on the front panel, none beside the ports (10 clear of each tube, nothing between its inner end and the back\'s batts) and none within 20 of the amplifier\'s compartment.',
+           'The back comes off (round 14): it closes on a 3 mm EPDM gasket against four land strips inside the shell, sixteen M5 button heads through it into inserts in them. The amplifier\'s compartment, the back\'s ribs and its batts come off with it and the leads unplug at the compartment, so the amplifier, the L-pad and the leads can be reached, and the ports trimmed.',
+           'Four levelling feet (M8, 40 swivel bases on rubber pads) in inserts in the bottom, 50 in from its edges, lift the cabinet 12 mm: set them so it stands level and cannot rock under the horn, and lock their nuts.'],
     touching=[('grille-cloth', 'cloth-frame'), ('cloth-disc', 'disc-frame'),      # the cloth wraps its frame
               ('lead-hf', 'cable-glands'), ('lead-woofer', 'cable-glands')],        # and the leads pass through their glands
     materials={'bark': {'preset': '$bark'}, 'raw': {'preset': 'birch'},
@@ -1125,7 +1403,9 @@ PRODUCT = Product(
                'horn': {'preset': '$horn_preset', 'color': '$horn', 'absorb': '$horn_deep', 'deep': '$horn_deep', 'cloud': '$horn_cloud',
                         'cloud_m': 0.12},
                'rod': {'preset': 'metal', 'color': '#C9C9C6', 'roughness': 0.3},
-               'port': {'preset': 'satin_paint', 'color': '#1A1817', 'roughness': 0.7},
+               # the ports printed in black ASA: a satin face, its edges catching the light, so the round bore reads in its
+               # square frame (round 14)
+               'port': {'preset': 'satin_paint', 'color': '#1C1B1A', 'roughness': 0.45, 'specular': 0.5, 'bevel_mm': 0.8},
                'amp': {'preset': 'satin_paint', 'color': '#303033', 'roughness': 0.4, 'specular': 0.5},   # black anodised plate
                'driver-frame': {'preset': 'satin_paint', 'color': '#1E1E1E'}, 'driver-cone': {'preset': 'paper_cone', 'color': '#1D1B1A'},
                'driver-surround': {'preset': 'rubber', 'color': '#151515'}, 'driver-cap': {'preset': 'paper_cone', 'color': '#1D1B1A'},
@@ -1137,7 +1417,10 @@ PRODUCT = Product(
                'brass': {'preset': 'metal', 'color': '#C9A660', 'roughness': 0.3},
                'sleeve': {'preset': 'rubber', 'color': '#1B1B1B'},
                'cable': {'preset': 'rubber', 'color': '#141414', 'roughness': 0.5},
-               'gland': {'preset': 'plastic', 'color': '#1A1A1A', 'roughness': 0.5}},
+               'gland': {'preset': 'plastic', 'color': '#1A1A1A', 'roughness': 0.5},
+               # round 14: the ports' black screws, and the feet
+               'screw': {'preset': 'metal', 'color': '#262626', 'roughness': 0.4},
+               'foot': {'preset': 'plastic', 'color': '#1C1C1C', 'roughness': 0.6}},
     variants=VARIANTS,
     drawing_style={'face': os.path.join(FONTS, 'IBMPlexMono-Regular.ttf'), 'face_bold': os.path.join(FONTS, 'IBMPlexMono-SemiBold.ttf'),
                    'label_pt': 11, 'dim_pt': 10, 'balloon_pt': 11, 'balloon_r': 4.4},    # the look book's mono, read off a slide
@@ -1150,7 +1433,7 @@ if __name__ == '__main__':
     pl, net = tuned(P)
     n = len(P['port']['x'])
     print(f"QB3 start: {suggest_vented(ts)} (L, Hz)")
-    print(f"net {net:.1f} L, {n} x {P['port']['a']:g} mm square ports {pl:.0f} long for {P['fb']:g} Hz")
+    print(f"net {net:.1f} L, {n} x {P['port']['d']:g} mm round ports {pl:.0f} long for {P['fb']:g} Hz")
     for fb in (32.0, 35.0, 38.0):
-        r = vented(ts, net, fb, bore_mm=2 * P['port']['a'] * math.sqrt(n / math.pi))
+        r = vented(ts, net, fb, bore_mm=P['port']['d'] * math.sqrt(n))
         print(fb, {k: r[k] for k in ('f3', 'ref_db', 'max_spl_db', 'port_air_m_s_at_max')})

@@ -28,7 +28,10 @@ Sets:
 - discs (round 7): the cloth disc in neutral colours on each cabinet, so the cabinet and the horn carry the colour;
 - lookbook (rounds 7 to 10): the look book's speakers by line (Bark, Cloud, Crag), each on a sweep in its own colour,
   the cover on and off;
-- room12 (round 12): the pair in a living room, for scale.
+- room12 (round 12): the pair in a living room, for scale;
+- options14 (round 14): the owner's open choices side by side: the ports' mouths (plain or rounded), the Cloud's ports
+  (black or in the cabinet's acrylic) and the sheet's routes (25 mm planed, 20 mm with more ribs, rotomoulded), each
+  route whole, its corner close to and cut open.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -42,7 +45,8 @@ SHOTS = os.path.join(ROOT, 'studio', 'shots', 'barkhorn')
 PRODUCT = 'studio/products/barkhorn.json'
 STUDY = os.path.join(HERE, 'out', 'study')
 DAY = {'covers': '2026-10-10', 'front': '2026-10-11', 'study': '2026-10-11', 'proposal': '2026-10-11',
-       'experiments': '2026-10-11', 'horn10': '2026-10-13', 'lookbook2': '2026-10-13', 'room12': '2026-10-13'}   # where each set's renders live (a set first made that day; the rest 2026-10-12)
+       'experiments': '2026-10-11', 'horn10': '2026-10-13', 'lookbook2': '2026-10-13', 'room12': '2026-10-13',
+       'options14': '2026-10-14'}   # where each set's renders live (a set first made that day; the rest 2026-10-12)
 
 FRONT_CAM = {'position': [-0.78, -2.6, 1.0], 'target': [0.0, 0.0, 0.64], 'lens_mm': 66, 'level': True}
 THREE_Q = {'position': [1.45, -2.7, 1.45], 'target': [0.0, 0.08, 0.66], 'lens_mm': 60, 'level': True}
@@ -55,13 +59,13 @@ TURNED = dict(position=[0.0, -1.2, 0], rotate_z=180, shift=-1.2)
 
 
 def F(name, bark, label, options=(), materials=None, product=PRODUCT, camera=None, lights=None, at=None, size=None, stage=None,
-      hide=(), sky=None, pair=None, sun=None, render=None):
+      hide=(), sky=None, pair=None, sun=None, render=None, cutaway=None):
     """One frame. `stage`: a set of its own in place of the room (a sweep), with its `sky`; `hide`: parts left out (the
     cloth disc); `pair`: several speakers, each {position, rotate_z}, in place of the one at `at`; `sun`: the shot's sun;
-    `render`: settings over the shot's (white balance, exposure)."""
+    `render`: settings over the shot's (white balance, exposure); `cutaway`: the engine's cutaway (a box cut out)."""
     return dict(name=name, bark=bark, label=label, options=list(options), materials=materials or {}, product=product,
                 camera=camera, lights=lights or {}, at=at, size=size, stage=stage, hide=list(hide), sky=sky, pair=pair, sun=sun,
-                render=render)
+                render=render, cutaway=cutaway)
 
 
 def form_product(form):
@@ -73,6 +77,14 @@ FORMS = [('shell', 'shell (round 2)'), ('lens', 'lens'), ('slab', 'slab'), ('peb
 # each study model: the product with these parameters changed (dotted paths into P), built into out/study/
 MODELS = {f: {'horn.form': f} for f, _ in FORMS}
 MODELS.update({'cast': {'horn.form': 'cast', 'horn.cast.back': 'shell'}, 'cast-tub': {'horn.form': 'cast', 'horn.cast.back': 'tub'}})
+# round 14's study models, on the cabinet without wood (pressed.py): the ports' mouths rounded; the sheet 20 mm with more
+# ribs (two up each side, four up the back, two under the top and over the bottom); the shell rotomoulded
+MODELS.update({
+    'p14-flared': {'base': 'pressed', 'port.flare': 8.0},
+    'p14-sheet20': {'base': 'pressed', 'T': 20.0, 'ribs': {'t': 20.0, 'depth': 60.0, 'back': [125.0, 185.0, 375.0, 435.0],
+                                                           'side': [155.0, 266.0], 'top': [210.0, 350.0], 'min_span': 300.0}},
+    'p14-roto': {'base': 'pressed', 'roto': {'r': 12.0, 'skin': 6.0, 'r_in': 3.0}},
+})
 # round 4's light: a soft lamp close behind the horn, so its resin glows as the photograph's does with the room behind it
 GLOW = {'glow': {'type': 'area', 'size_m': [0.7, 0.32], 'position': [0.0, 0.66, 1.12], 'target': [0.0, 0.0, 1.1],
                  'irradiance': 1.6, 'color': '#FFF1DC', 'specular': 0}}      # it lights the resin, leaves no highlight
@@ -183,6 +195,26 @@ ROOM12_LIGHTS = {
                     'irradiance': 1.4, 'color': '#FFF1DC', 'specular': 0, 'transmission': False}
        for k, x in (('L', -1.27), ('R', 1.27))},
 }
+
+# round 14 (the owner's answers of 2026-10-14): the choices still open, side by side. The ports close to (the right one,
+# from the front and a little above, the feet's shadow gap below); Poison's lower half with its ports black or in its
+# own acrylic; and each route for the pressed sheet whole, at its top front corner, and cut open down the right side
+# (its lining left out, so the ribs show)
+PORT14 = {'position': [0.44, -0.98, 0.42], 'target': [0.16, -0.19, 0.125], 'lens_mm': 75, 'level': True}
+CLOUD14 = {'position': [1.05, -1.95, 0.66], 'target': [0.04, -0.05, 0.36], 'lens_mm': 50, 'level': True}
+CORNER14 = {'position': [0.66, -0.78, 1.08], 'target': [0.23, -0.19, 0.83], 'lens_mm': 60, 'level': True}
+CUT14 = {'position': [0.7, -2.75, 1.25], 'target': [0.0, 0.0, 0.6], 'lens_mm': 62, 'level': True}    # the speaker turned 40 degrees
+CUTAWAY14 = {'box_m': [0.236, -0.3, 0.0, 0.4, 0.3, 0.95], 'skip': 'waveguide*|post-*|hf*|tie-rod*|feet*|cloth-disc*|woofer*',
+             'sections': [{'match': '-', 'color': '#000000'}]}      # no rule matches: each cut face shows its own material
+SHEETS14 = [('25', PRESSED, '25 mm pressed, planed (as now)', {}),
+            ('20', 'spinoffs/barkhorn/out/study/barkhorn-p14-sheet20.json', '20 mm pressed, more ribs', {}),
+            ('roto', 'spinoffs/barkhorn/out/study/barkhorn-p14-roto.json', 'rotomoulded, speckled',
+             {'bark': {'preset': 'terrazzo', 'color': '#7F8A5C', 'chip': 0.0045, 'share': 0.6, 'roughness': 0.5, 'coat': 0.05,
+                       'palette': [['#3F5E1C', 0.24], ['#8C8478', 0.2], ['#CDB27C', 0.2], ['#C9772C', 0.14], ['#9E3F22', 0.1],
+                                   ['#E0D5B6', 0.12]]}})]
+# Poison's ports in its own acrylic: the cabinet's clear resin, as its flavour sets it
+ACRYLIC_PORT = {'port': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#B2C9A2', 'radius': 0.025, 'roughness': 0.05}}
+
 
 def sweep(color):
     return {'kind': 'sweep', 'color': color, 'width': 6.0, 'front': 5.0, 'depth': 1.5, 'radius': 1.2, 'height': 4.0}
@@ -336,6 +368,25 @@ SETS = {
         'room': [F('room-eucalyptus', 'eucalyptus-printed', 'eucalyptus, in a room', product=PRESSED, lights=ROOM12_LIGHTS,
                    size=[2880, 1620], stage=ROOM12_SET, sky=ROOM12_SKY, pair=ROOM12_PAIR, sun=ROOM12_SUN,
                    render=ROOM12_RENDER, materials={'bark': {'space': 'object'}, 'horn': {'space': 'object'}})]}),
+    'options14': dict(title='EARF: the choices still open (round 14)', camera=LOOK, rows={
+        'the ports\' mouths': [F('port-plain', 'eucalyptus-printed', 'square frame, plain mouth', product=PRESSED, camera=PORT14,
+                                 lights=GLOW5, size=[1200, 900], stage=sweep('#B7C3B4'), sky=STUDIO),
+                               F('port-rounded', 'eucalyptus-printed', 'square frame, rounded mouth', camera=PORT14,
+                                 product='spinoffs/barkhorn/out/study/barkhorn-p14-flared.json', lights=GLOW5, size=[1200, 900],
+                                 stage=sweep('#B7C3B4'), sky=STUDIO)],
+        'the Cloud\'s ports': [F('cloud-port-black', 'eucalyptus-y2k-green', 'black, as now', product=PRESSED, camera=CLOUD14,
+                                 lights=GLOW5, size=[1200, 1000], stage=sweep('#D9E4D3'), sky=STUDIO),
+                               F('cloud-port-acrylic', 'eucalyptus-y2k-green', 'in the cabinet\'s acrylic', product=PRESSED,
+                                 camera=CLOUD14, lights=GLOW5, size=[1200, 1000], stage=sweep('#D9E4D3'), sky=STUDIO,
+                                 materials=ACRYLIC_PORT)],
+        **{f'the sheet: {label}': [F(f'sheet-{key}-whole', 'eucalyptus-printed', 'whole', product=prod, lights=GLOW5,
+                                     size=[840, 1100], stage=sweep('#B7C3B4'), sky=STUDIO, materials=mats),
+                                   F(f'sheet-{key}-corner', 'eucalyptus-printed', 'its top front corner', product=prod, camera=CORNER14,
+                                     lights=GLOW5, size=[1100, 900], stage=sweep('#B7C3B4'), sky=STUDIO, materials=mats),
+                                   F(f'sheet-{key}-cut', 'eucalyptus-printed', 'cut open down its right side', product=prod,
+                                     camera=CUT14, size=[1000, 1100], stage=sweep('#B7C3B4'), sky=STUDIO, at={'rotate_z': -40},
+                                     materials=mats, hide=['lining-*'], cutaway=CUTAWAY14)]
+           for key, prod, label, mats in SHEETS14}}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],
@@ -361,6 +412,8 @@ def shot_for(frame, set_camera):
     if frame.get('pair'):
         insts = [{**{k: v for k, v in inst.items() if k not in ('position', 'rotate_z')}, **q} for q in frame['pair']]
     s['product'] = {'def': frame['product'], 'flavour': frame['bark'], 'instances': insts}
+    if frame.get('cutaway'):
+        s['product']['cutaway'] = copy.deepcopy(frame['cutaway'])
     s['camera'] = copy.deepcopy(frame['camera'] or set_camera)
     s['size'] = frame['size'] or [760, 1000]
     s['title'] = f"barkhorn, {frame['label']}"
@@ -379,16 +432,17 @@ def shot_for(frame, set_camera):
 
 
 def build_models(names):
-    """Each named study model (MODELS: the product with some parameters changed) built into out/study/: its render
-    model and engine file."""
+    """Each named study model (MODELS: the product with some parameters changed, from product.py, or from the file its
+    'base' names) built into out/study/: its render model and engine file."""
     venv = os.path.join(ROOT, '.venv-fab', 'bin', 'python')
     code = f'''
 import copy, dataclasses, os, sys
 sys.path.insert(0, {os.path.join(ROOT, 'studio', 'fabkit')!r})
 import build, render
-P0 = build.load_product({os.path.join(HERE, 'product.py')!r})
 os.makedirs({STUDY!r}, exist_ok=True)
 for name, changes in {[(n, MODELS[n]) for n in names]!r}:
+    changes = dict(changes)
+    P0 = build.load_product(os.path.join({HERE!r}, changes.pop('base', 'product') + '.py'))
     params = copy.deepcopy(P0.params)
     for path, v in changes.items():
         d = params

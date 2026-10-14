@@ -780,14 +780,22 @@ def sheet_exploded(pg, parts, numbers):
     left, right = max(28.0, ox + blo[0] / k - 22), min(392.0, ox + bhi[0] / k + 22)
     br = pg.style.get('balloon_r', 3.6); pitch = max(9.0, 2 * br + 1.4)
     bkw = {'fontproperties': pg.face} if pg.face is not None else {}
+    cap = int(212.0 / (2 * br + 0.4)) + 1             # the most balloons a column holds
+    cols = {-1: sorted([a for a in anchors if a[1] < mid], key=lambda a: a[1]),
+            1: sorted([a for a in anchors if a[1] >= mid], key=lambda a: a[1])}
+    while len(cols[-1]) > cap and len(cols[1]) < cap:   # a column too full: its balloons nearest the middle cross over
+        cols[1].insert(0, cols[-1].pop())
+    while len(cols[1]) > cap and len(cols[-1]) < cap:
+        cols[-1].append(cols[1].pop(0))
     for side, xb in ((-1, left), (1, right)):
-        col = sorted([a for a in anchors if (a[1] < mid) == (side < 0)], key=lambda a: -a[2])
-        ys, prev = [], 272.0 + pitch
+        col = sorted(cols[side], key=lambda a: -a[2])
+        p_ = pitch if len(col) < 2 else max(2 * br + 0.4, min(pitch, 212.0 / (len(col) - 1)))   # closer, if it must, to fit
+        ys, prev = [], 272.0 + p_
         for _, _, y in col:
-            yb = min(max(y, 60.0), prev - pitch)
+            yb = min(max(y, 60.0), prev - p_)
             ys.append(yb); prev = yb
-        if ys and ys[-1] < 60:                        # pushed off the bottom: lift the column
-            ys = [y + (60 - ys[-1]) for y in ys]
+        for i in range(len(ys) - 1, -1, -1):          # pushed off the bottom: lift those, each above the one below
+            ys[i] = max(ys[i], 60.0 if i == len(ys) - 1 else ys[i + 1] + p_)
         for (n, x, y), yb in zip(col, ys):
             pg.ax.plot([x, xb - side * br], [y, yb], color=INK, lw=0.18 * PT, zorder=5)
             pg.ax.plot([x], [y], marker='o', ms=1.6, color=INK, zorder=5)
@@ -1029,30 +1037,59 @@ def sheet_solids(pg, items):
     pg.head('Three views each, hidden edges dashed; STL and STEP files in stl/ and step/. Numbers are the parts list\'s.')
 
 
-def sheet_parts_list(pg, rows, notes):
+PL_COLS = [(20, 'no.', 4), (30, 'item', 30), (88, 'make', 8), (104, 'qty', 5), (116, 'what', 82), (276, 'size', 40), (360, 'each USD', 12)]
+
+
+def _row_cells(i, r):
+    """A parts list row's cells, each wrapped to its column, and how many lines it takes (three at most)."""
+    vals = [str(i), r['item'], r['kind'], str(r['qty']), (f"[option: {r['option']}] " if r.get('option') else '') + str(r['what']), str(r['size']),
+            f"{r['usd_each']:,.2f}" if isinstance(r['usd_each'], (int, float)) else '[PRICE]']
+    wrapped = [textwrap.wrap(v, w) or [''] for v, (_, _, w) in zip(vals, PL_COLS)]
+    return wrapped, min(3, max(len(wl) for wl in wrapped))
+
+
+def plan_list_sheets(rows, notes):
+    """The parts list and the notes on as few sheets as hold them all: one sheet when both fit (the list down to 110, the
+    notes under it down to 50); else the list on sheets of its own and the notes on theirs, so that no line and no note
+    is ever left off. [('both' | 'list' | 'notes', row indices, note indices), ...]"""
+    hs = [4.2 * _row_cells(i, r)[1] + 1.6 for i, r in enumerate(rows, 1)]
+    nh = [4.4 * len(textwrap.wrap(f'{j}. {n}', 120)) for j, n in enumerate(notes, 1)]
+    if 262 - sum(hs) >= 110 and 262 - sum(hs) - 11 - sum(nh) >= 50:
+        return [('both', list(range(len(rows))), list(range(len(notes))))]
+    pages = []
+    for kind, heights in (('list', hs), ('notes', nh)):
+        y, cur = 262.0, []
+        for k, h in enumerate(heights):
+            if y - h < 50 and cur:
+                pages.append((kind, cur, []) if kind == 'list' else (kind, [], cur)); y, cur = 262.0, []
+            cur.append(k); y -= h
+        if cur:
+            pages.append((kind, cur, []) if kind == 'list' else (kind, [], cur))
+    return pages
+
+
+def sheet_parts_list(pg, rows, notes, rows_idx=None, notes_idx=None):
+    """The parts list (the rows `rows_idx`, numbered as in the whole list) and, under it, the notes `notes_idx`; with
+    no rows the sheet is the notes' alone."""
+    rows_idx = range(len(rows)) if rows_idx is None else rows_idx
+    notes_idx = range(len(notes)) if notes_idx is None else notes_idx
     y = 268
-    cols = [(20, 'no.', 4), (30, 'item', 30), (88, 'make', 8), (104, 'qty', 5), (116, 'what', 82), (276, 'size', 40), (360, 'each USD', 12)]
-    for x, t, _ in cols:
-        pg.text(x, y, t, size=8, fontweight='bold')
-    y -= 6
-    for i, r in enumerate(rows, 1):
-        vals = [str(i), r['item'], r['kind'], str(r['qty']), (f"[option: {r['option']}] " if r.get('option') else '') + str(r['what']), str(r['size']),
-                f"{r['usd_each']:,.2f}" if isinstance(r['usd_each'], (int, float)) else '[PRICE]']
-        wrapped = [textwrap.wrap(v, w) or [''] for v, (_, _, w) in zip(vals, cols)]
-        nl = min(3, max(len(wl) for wl in wrapped))
-        for (x, _, _), wl in zip(cols, wrapped):
-            for j, ln in enumerate(wl[:nl]):
-                pg.text(x, y - 4.2 * j, ln)
-        y -= 4.2 * nl + 1.6
-        if y < 110:
-            pg.text(20, y, f'{len(rows) - i} more lines: bom.md', color=RED); break
-    y -= 5
-    pg.text(20, y, 'Notes', size=9, fontweight='bold'); y -= 6
-    for j, n in enumerate(notes, 1):
-        for ln in textwrap.wrap(f'{j}. {n}', 120):
-            pg.text(20, y, ln); y -= 4.4
-        if y < 50:
-            break
+    if rows_idx:
+        for x, t, _ in PL_COLS:
+            pg.text(x, y, t, size=8, fontweight='bold')
+        y -= 6
+        for i in rows_idx:
+            wrapped, nl = _row_cells(i + 1, rows[i])
+            for (x, _, _), wl in zip(PL_COLS, wrapped):
+                for j, ln in enumerate(wl[:nl]):
+                    pg.text(x, y - 4.2 * j, ln)
+            y -= 4.2 * nl + 1.6
+        y -= 5
+    if notes_idx:
+        pg.text(20, y, 'Notes', size=9, fontweight='bold'); y -= 6
+        for j in notes_idx:
+            for ln in textwrap.wrap(f'{j + 1}. {notes[j]}', 120):
+                pg.text(20, y, ln); y -= 4.4
 
 
 def write(product, parts, recs, bom_rows, out):
@@ -1071,7 +1108,8 @@ def write(product, parts, recs, bom_rows, out):
         if p is not None and isinstance(p.make, (Printed, Machined)):
             solids.append((p, r, i))
     solid_pages = [solids[i:i + 2] for i in range(0, len(solids), 2)]
-    total = 3 + bool(plain) + len(featured) + len(solid_pages) + 1
+    lists = plan_list_sheets(bom_rows, product.notes)
+    total = 3 + bool(plain) + len(featured) + len(solid_pages) + len(lists)
     base = [p for p in parts if not p.option]          # the assembly drawings show the product without its options
     lo, hi = _extent(base)
     cut_x = (lo[0] + hi[0]) / 2
@@ -1092,7 +1130,13 @@ def write(product, parts, recs, bom_rows, out):
             sheet_featured(pg, recs[nm], product); pg.save(pdf, dd); n += 1
         for items in solid_pages:
             pg = Page(product, n, total, 'Printed and machined parts'); sheet_solids(pg, items); pg.save(pdf, dd); n += 1
-        pg = Page(product, n, total, 'Parts list and notes')
-        pg.head(f'For {product.count}; prices are budgets (bom.md says where each comes from).')
-        sheet_parts_list(pg, bom_rows, product.notes); pg.save(pdf, dd)
+        nl = sum(1 for k, _, _ in lists if k == 'list')
+        for k, (kind, ri, ni) in enumerate(lists):
+            title = {'both': 'Parts list and notes', 'list': 'Parts list', 'notes': 'Notes'}[kind]
+            if kind == 'list' and nl > 1:
+                title += f' ({k + 1} of {nl})'
+            pg = Page(product, n, total, title)
+            if kind != 'notes':
+                pg.head(f'For {product.count}; prices are budgets (bom.md says where each comes from).')
+            sheet_parts_list(pg, bom_rows, product.notes, ri, ni); pg.save(pdf, dd); n += 1
     return path, total

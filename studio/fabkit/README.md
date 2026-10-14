@@ -104,7 +104,9 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
 - **Parts list** (`bom.py`):
   - **Prices.** Bought parts come from the library, each with its supplier and the date of the listing. Made parts
     come from the stock rates:
-    - sheet parts: their area with 25 % for offcuts;
+    - sheet parts: their area with 25 % for offcuts, at the stock's rate a square metre (`usd_per_m2`), or for thick
+      stock priced by its thickness, at its rate a square metre a millimetre (`usd_per_m2_mm`: pressed HDPE, cast
+      acrylic, batting);
     - prints: their volume plus a handling charge;
     - machined parts: their blank plus a setup charge per line.
   - **Merging.** Identical lines merge. Made parts merge only when their solids match.
@@ -115,7 +117,8 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
 - **Drawings** (`drawings.py`, A3, first angle, hidden-line removal on the solids, all text 2.5 mm or more):
   1. **General arrangement**, with the section line.
   2. **Section A-A** down the middle, each part's cut faces hatched at its own angle.
-  3. **Exploded view**, ballooned to the parts list.
+  3. **Exploded view**, ballooned to the parts list, one balloon a line, in two columns that close up and share
+     balloons between them so that every balloon fits the sheet.
   4. **Plain panels**, on one sheet.
   5. **Panels with features**, one sheet each, with a feature table. Each feature is marked P (pocket), H (through
      cut) or U (inner-face pocket) and listed with its size, its centre from the lower-left corner and its depth.
@@ -124,7 +127,8 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
 
      The assembly sheets (1 to 3) show the product without its options.
   6. **Printed and machined parts**, one sheet per parts-list line, three views with hidden lines and their sizes.
-  7. **The parts list and the notes.**
+  7. **The parts list and the notes**, on one sheet when they fit; else the list on sheets of its own (1 of n) and the
+     notes on theirs, so no line and no note is left off.
 
   A view with a lofted or other spline surface in it is drawn from meshes of the solids (OpenCascade's polygonal
   hidden-line removal), which hide behind any surface; the outline round each such solid is traced from its mesh

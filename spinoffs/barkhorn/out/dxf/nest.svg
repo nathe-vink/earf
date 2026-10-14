@@ -7,10 +7,26 @@
 <text x="111.0" y="164.0">left</text>
 <rect x="195.8" y="156.0" width="84.0" height="176.0" fill="#d9c7a3" stroke="#6b5532"/>
 <text x="197.4" y="164.0">right</text>
+<rect x="282.2" y="163.2" width="5.0" height="168.8" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="283.8" y="171.2">land-left</text>
+<rect x="289.6" y="163.2" width="5.0" height="168.8" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="291.2" y="171.2">land-left</text>
+<rect x="297.0" y="163.2" width="5.0" height="168.8" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="298.6" y="171.2">land-right</text>
+<rect x="304.4" y="163.2" width="5.0" height="168.8" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="306.0" y="171.2">land-right</text>
 <rect x="23.0" y="69.6" width="104.8" height="84.0" fill="#d9c7a3" stroke="#6b5532"/>
 <text x="24.6" y="77.6">top</text>
 <rect x="130.2" y="69.6" width="104.8" height="84.0" fill="#d9c7a3" stroke="#6b5532"/>
 <text x="131.8" y="77.6">top</text>
+<rect x="23.0" y="62.2" width="94.8" height="5.0" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="24.6" y="70.2">land-top</text>
+<rect x="120.2" y="62.2" width="94.8" height="5.0" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="121.8" y="70.2">land-top</text>
+<rect x="217.4" y="62.2" width="94.8" height="5.0" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="219.0" y="70.2">land-bottom</text>
+<rect x="23.0" y="54.8" width="94.8" height="5.0" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="24.6" y="62.8">land-bottom</text>
 <rect x="345.0" y="30" width="305.0" height="305.0" fill="#f4efe6" stroke="#333"/>
 <text x="345.0" y="20">baltic-birch 18 mm, sheet 2</text>
 <rect x="348.0" y="156.0" width="84.0" height="176.0" fill="#d9c7a3" stroke="#6b5532"/>
@@ -25,14 +41,14 @@
 <text x="456.8" y="77.6">bottom</text>
 <rect x="670.0" y="30" width="305.0" height="305.0" fill="#f4efe6" stroke="#333"/>
 <text x="670.0" y="20">baltic-birch 18 mm, sheet 3</text>
-<rect x="673.0" y="163.2" width="104.8" height="168.8" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="674.6" y="171.2">back</text>
-<rect x="780.2" y="163.2" width="104.8" height="168.8" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="781.8" y="171.2">back</text>
-<rect x="673.0" y="88.8" width="104.8" height="72.0" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="674.6" y="96.8">brace</text>
-<rect x="780.2" y="88.8" width="104.8" height="72.0" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="781.8" y="96.8">brace</text>
+<rect x="673.0" y="163.6" width="104.4" height="168.4" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="674.6" y="171.6">back</text>
+<rect x="779.8" y="163.6" width="104.4" height="168.4" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="781.4" y="171.6">back</text>
+<rect x="673.0" y="99.4" width="104.8" height="61.8" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="674.6" y="107.4">brace</text>
+<rect x="780.2" y="99.4" width="104.8" height="61.8" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="781.8" y="107.4">brace</text>
 <rect x="995.0" y="30" width="488.0" height="244.0" fill="#f4efe6" stroke="#333"/>
 <text x="995.0" y="20">mdf 6 mm, sheet 1</text>
 <rect x="998.0" y="183.8" width="87.2" height="87.2" fill="#d9c7a3" stroke="#6b5532"/>
@@ -47,38 +63,34 @@
 <text x="1597.2" y="191.8">disc-frame</text>
 <rect x="2011.0" y="30" width="240.0" height="120.0" fill="#f4efe6" stroke="#333"/>
 <text x="2011.0" y="20">polyester-batting 50 mm, sheet 1</text>
-<rect x="2014.0" y="62.6" width="128.6" height="84.4" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2015.6" y="70.6">lining-back-2</text>
-<rect x="2145.0" y="85.3" width="84.4" height="61.7" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2146.6" y="93.3">lining-top-2</text>
+<rect x="2014.0" y="62.6" width="158.6" height="84.4" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="2015.6" y="70.6">lining-back</text>
+<rect x="2175.0" y="62.6" width="61.7" height="84.4" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="2176.6" y="70.6">lining-top-2</text>
 <rect x="2271.0" y="30" width="240.0" height="120.0" fill="#f4efe6" stroke="#333"/>
 <text x="2271.0" y="20">polyester-batting 50 mm, sheet 2</text>
-<rect x="2274.0" y="62.6" width="128.6" height="84.4" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2275.6" y="70.6">lining-back-2</text>
-<rect x="2405.0" y="85.3" width="84.4" height="61.7" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2406.6" y="93.3">lining-top-2</text>
+<rect x="2274.0" y="62.6" width="158.6" height="84.4" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="2275.6" y="70.6">lining-back</text>
+<rect x="2435.0" y="62.6" width="61.7" height="84.4" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="2436.6" y="70.6">lining-top-2</text>
 <rect x="2531.0" y="30" width="240.0" height="120.0" fill="#f4efe6" stroke="#333"/>
 <text x="2531.0" y="20">polyester-batting 50 mm, sheet 3</text>
-<rect x="2534.0" y="75.2" width="128.6" height="71.8" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2535.6" y="83.2">lining-left-2</text>
-<rect x="2534.0" y="36.6" width="104.6" height="36.2" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2535.6" y="44.6">lining-back-1</text>
-<rect x="2641.0" y="36.6" width="104.6" height="36.2" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2642.6" y="44.6">lining-back-1</text>
-<rect x="2665.0" y="85.3" width="40.8" height="61.7" fill="#d9c7a3" stroke="#6b5532"/>
+<rect x="2534.0" y="79.4" width="128.6" height="67.6" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="2535.6" y="87.4">lining-left-2</text>
+<rect x="2665.0" y="85.3" width="41.8" height="61.7" fill="#d9c7a3" stroke="#6b5532"/>
 <text x="2666.6" y="93.3">lining-bottom-1</text>
-<rect x="2708.2" y="85.3" width="40.8" height="61.7" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2709.8" y="93.3">lining-bottom-1</text>
+<rect x="2709.2" y="85.3" width="41.8" height="61.7" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="2710.8" y="93.3">lining-bottom-1</text>
 <rect x="2791.0" y="30" width="240.0" height="120.0" fill="#f4efe6" stroke="#333"/>
 <text x="2791.0" y="20">polyester-batting 50 mm, sheet 4</text>
-<rect x="2794.0" y="75.2" width="128.6" height="71.8" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="2795.6" y="83.2">lining-left-2</text>
+<rect x="2794.0" y="79.4" width="128.6" height="67.6" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="2795.6" y="87.4">lining-left-2</text>
 <rect x="3051.0" y="30" width="240.0" height="120.0" fill="#f4efe6" stroke="#333"/>
 <text x="3051.0" y="20">polyester-batting 50 mm, sheet 5</text>
-<rect x="3054.0" y="75.2" width="128.6" height="71.8" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="3055.6" y="83.2">lining-right-2</text>
+<rect x="3054.0" y="79.4" width="128.6" height="67.6" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="3055.6" y="87.4">lining-right-2</text>
 <rect x="3311.0" y="30" width="240.0" height="120.0" fill="#f4efe6" stroke="#333"/>
 <text x="3311.0" y="20">polyester-batting 50 mm, sheet 6</text>
-<rect x="3314.0" y="75.2" width="128.6" height="71.8" fill="#d9c7a3" stroke="#6b5532"/>
-<text x="3315.6" y="83.2">lining-right-2</text>
+<rect x="3314.0" y="79.4" width="128.6" height="67.6" fill="#d9c7a3" stroke="#6b5532"/>
+<text x="3315.6" y="87.4">lining-right-2</text>
 </svg>

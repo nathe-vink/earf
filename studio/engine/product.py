@@ -278,12 +278,14 @@ def _resolve(v, flavour):
 
 def build_materials(bpy, pdef, flavour_name, shot_mats, tag):
     """The product's materials for one flavour, with the shot's overrides: by preset name (all paints) and by
-    material name (one), the name winning."""
+    material name (one), the name winning. An override by name may swap the material's preset itself ("preset"), as a
+    flavour's may: a study of another finish on the same part."""
     fl = pdef['flavours'][flavour_name]
     out = {}
     for name, spec in pdef['materials'].items():
         spec = {k: _resolve(v, fl) for k, v in spec.items()}
         preset = spec.pop('preset')
+        preset = shot_mats.get(name, {}).get('preset', fl.get('materials', {}).get(name, {}).get('preset', preset))
         bevel = spec.pop('bevel_mm', 0.0)
         ov = {**spec, **fl.get('materials', {}).get(name, {}), **shot_mats.get(preset, {}), **shot_mats.get(name, {})}
         ov = {k: v for k, v in ov.items() if k in M.PRESET_DEFAULTS[preset] or k == 'space'}   # space: materials.object_space

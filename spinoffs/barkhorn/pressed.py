@@ -17,9 +17,10 @@ whatever still rings low.
 
 The whole cabinet is one material, so nothing moves against anything else. HDPE grows 2 to 3.5 mm on 880 mm over
 20 degrees, and plywood hardly at all, which is what made round 4's faced sheets need loose screws and gaps. Here the
-corners are hot-plate butt welded, the bead planed flush. The front panel, the back, the braces and the ribs are
-extrusion welded inside, so the box is airtight with no screws and no glue (HDPE glues badly). The woofer, the amplifier and
-the horn's posts screw into threaded inserts made for plastics.
+corners are hot-plate butt welded, the bead planed flush. The front panel, the braces, the ribs and the back's land strips
+are extrusion welded inside, so the box is airtight with no glue (HDPE glues badly); the back closes on a gasket and
+screws, and comes off (round 14). The woofer, the amplifier and the horn's posts screw into threaded inserts made for
+plastics.
 For production, rotomoulded recycled PE, double-walled (Technomad's speakers are made that way). The pattern would
 then come out speckled rather than laid out.
 """
@@ -38,6 +39,8 @@ P['cover']['disc_stock'] = 'recycled-hdpe'
 # inserts go in holes sized by the insert maker's chart for PE, and the magnets and steel discs are pressed in
 P['woofer_hole'] = 9.0
 P['cover']['disc_magnet']['pocket'] = 14.85
+P['back']['insert'] = (7.2, 12.0)       # round 14: the back's M5 inserts and the feet's M8, by the same chart
+P['feet']['insert'] = (11.5, 15.0)
 PRODUCT = dataclasses.replace(
     base.PRODUCT, name='barkhorn-pressed', params=P,
     kind='Two-way horn loudspeaker after Friendly Pressure, in pressed recycled plastic, no wood',
@@ -46,14 +49,16 @@ PRODUCT = dataclasses.replace(
         'No wood: every panel is recycled HDPE sheet, 25 mm, pressed to order from colour-sorted flakes laid out in the bark\'s '
         'pattern (approve a 200 mm pressed sample and a full-sheet trial from one batch first). The ring (6 mm) and the cloth '
         'disc\'s frame (12 mm) are HDPE too.',
-        'Assembly (round 13): the ribs welded to their panels flat; the shell\'s corners hot-plate welded, the bead planed flush; '
-        'the front panel (set back 24 mm) and the two braces extrusion welded inside, through the open back; the back closes the '
-        'box last, from outside (on a gasket and screws, or welded in an outside V: the owner\'s choice). The flake ordered as HDPE '
+        'Assembly (round 14): the ribs welded to their panels flat (the back\'s to the back); the shell\'s corners hot-plate '
+        'welded, the bead planed flush; the front panel (set back 24 mm), the two braces and the back\'s four land strips '
+        'extrusion welded inside, through the open back; the back closes the box last, on its gasket and sixteen screws, and '
+        'comes off. The flake ordered as HDPE '
         'only, in a narrow melt-flow band: polypropylene caps in the mix will not weld. Nothing is glued: HDPE holds no ordinary '
         'adhesive.',
         'The woofer flush in its rebate on a gasket, on eight M6 threaded inserts for plastics in 9 mm holes (the torque checked '
-        'again after 48 hours: HDPE creeps); the ring over its frame on its magnets; each port fitted from inside, trimmed to tune '
-        '(impedance minimum at fb), its flange screwed to the panel with thread-forming screws for plastics on a foam seal.',
+        'again after 48 hours: HDPE creeps); the ring over its frame on its magnets; each port, printed in one with its square '
+        'frame, fitted from the front into a recess on a foam gasket, four black thread-forming screws for plastics in its '
+        'corners; trimmed to tune (impedance minimum at fb) with the back off.',
         'The front: the panel\'s own sheet in the pattern, and a cloth disc over the woofer on its HDPE frame, standing on the '
         'ring on four magnet pairs.'],
     drawing_prefix='BHP')
