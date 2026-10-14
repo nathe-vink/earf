@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 12**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 13**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -14,7 +14,111 @@ pattern on eucalyptus everywhere, and the discs on eucalyptus and manzanita take
 bark: eucalyptus, autumn birch, manzanita, striped maple), Cloud (translucent cast acrylic: Poison, Smoke, Fog) and
 Crag (pressed recycled plastic in the pattern of a stone, the horn cast resin: cobalt marble, malachite, lapis lazuli,
 turquoise). Each speaker has an acrylic mark, its line's shape in its own colour, and the brand's globe and wordmark are
-drawn the same way.
+drawn the same way. Round 13 lines every cabinet, the lining showing as cloud through the Cloud line's acrylic. It also
+makes the design real where a reality check found it was not: what holds the horn, seals the box, encloses the
+amplifier, protects the drivers and carries the wiring.
+
+## Round 13: the owner's notes of 2026-10-14
+
+| the note | what changed |
+|---|---|
+| "Question about the cloud speakers. Most speakers to my knowledge have insulation in them. Would that mean insulation would have to be visible in these speakers? If done right it could help with the cloud effect." | Yes. A box this size needs its walls lined, and in the Cloud cabinets the lining shows. The answer proposed batting against the walls between the ribs, behind voile. |
+| "Yes, let's do what has to be done. And continue refining the designs in this sense. We need to get as close to reality as possible." | **The lining** in every cabinet, seen through the Cloud's acrylic, and Poison, Smoke and Fog rendered again with it (below). **A reality check** of the whole design by a fresh reviewer briefed as a loudspeaker product engineer: 5.5 out of 10, fifteen findings (below). Everything it found inside the box or behind it is fixed. What would change the look is in the open questions. |
+
+### The lining
+
+![Poison, Smoke and Fog, lined](../../renders/2026-10-14/barkhorn/cloud-lined.png)
+
+A box this size rings at its own resonances, all of them in the woofer's range: about 205 Hz top to bottom, 340 side
+to side, 415 (top to bottom again) and 495 front to back. The ports leak them too. Round 6's thin felt on the acrylic
+cabinets' back was too little for that, and the plastic cabinets had only a bag of fibre in the parts list, drawn
+nowhere. Every cabinet is now lined.
+
+- **What.** Polyester batts, 50 mm thick, of an acoustic grade at about 30 kg/m3 (the light batts sold for walls
+  absorb less in the midrange): thermally bonded, with no binder, and with recycled PET in them. Each batt is sewn
+  into a sleeve of white polyester voile, so no fibre can reach the ports or the woofer, and its face stays even.
+- **Where.** A batt to each bay between the braces and the ribs, on the sides, the back, the top and the bottom: 15 a
+  speaker, 57 % of the inside walls. There are none on the front panel. The ports run 26 mm from the sides, so the
+  bottom bay's sides stay bare. Elsewhere the batts keep clear of the ports' tubes and flanges, and the 79 mm between
+  each port's inner end and the back's batt stays open. The back's middle bay has a batt only under the amplifier's
+  compartment (below).
+- **How it is held.** Each batt is cut 10 mm full each way and pressed into its bay, where friction between the ribs
+  and the braces holds it. Four dots of double-sided tape hold it flat on the wall. On HDPE the tape is one made for
+  low-energy plastics. On the Cloud's acrylic it is clear acrylic foam tape (VHB 4910 or alike), all but invisible
+  through the wall. The light frames proposed before are not needed.
+- **What it does.** Bare acrylic or HDPE sends back nearly all the sound that strikes it. A lined wall takes about
+  half of it at the resonances the woofer drives hardest, the second top to bottom (415 Hz) and front to back
+  (495 Hz), and most of it above 800 Hz (Miki's model for the batt). The lowest, top to bottom at 205 Hz, it barely
+  touches. But the woofer sits near that resonance's node at half height, so it barely excites it either. Side to
+  side (340 Hz) the centred woofer does not excite at all. The batts are 98 % air and make the box act a little
+  larger. The ports are trimmed to tune on the built box anyway.
+- **What it costs.** 1.2 kg of batting a speaker (39 L of it), cut from four 1200 x 600 batts a pair, about 3 m2 of
+  voile a speaker, and about 60 dots of tape.
+- **How it looks.** In Smoke it is a grey storm cloud, in Poison a green glow, and in Fog a box of mist. The batts
+  fill the walls between the clear ribs and braces, so each side reads as a panel of cloud in a frame. Through the
+  front panel, with the cover off, the back's batts frame the woofer. The smoke's tint is neutral now: its grey was a
+  little warm, and seen through two walls, lit through several, that warmth turned the lining olive.
+
+In the CAD it is `lining()` in `product.py` (the sizes in `P['lining']`): every batt is a cut part, in the cut list,
+the parts list and the drawings. The render rounds the batts' edges, as a sleeved batt's are. The engine has a new
+material for it, `batting`: a white fibre web in soft clouds of denser and thinner, light carried a few millimetres
+into it, and the voile's sheen.
+
+### The reality check
+
+The owner asked for the design "as close to reality as possible". A render critic asks whether a picture would ship,
+and the drawing checker whether a shop could build from the sheets. This asks whether the speaker, as designed and as
+rendered, is what a real one would be (`critic/PROMPT-reality.md`). A fresh reviewer, briefed as a loudspeaker product
+engineer, read the README, the acoustics report, the pressed cabinet's drawings and parts list, and the renders. Its
+reply is `critic/rounds/2026-10-14/reality-r1.json`, logged in `critic/LOG.md`.
+
+> "Close in its fundamentals, short in its details. The drivers, the amplifier, the box tuning and the horn are real,
+> matched parts ... What separates it from a product is everything that holds, seals, protects and connects."
+
+It scored the design 5.5 out of 10. Fixed, each inside the box or behind it:
+
+- **The horn is held down** (r1). About 10 kg stood loose on four plain pins in their sockets: tipped or bumped, it
+  would lift off, and it would buzz in the sockets' clearance. Now an M6 rod runs down the free rear post, from a
+  thumb nut inside the pod to an insert under the top. With the cap off and the nut undone, the horn and its posts
+  still lift off as one. Each post's foot stands in a polyurethane sleeve in its socket, which centres it, takes up
+  the casting's scatter and stops the buzz. The front pads' inserts are 10 mm deep, not 14, which left as little as
+  3 mm of resin under the flare.
+- **The box is airtight again** (r2). The amplifier is vented, and Hypex asks for a sealed compartment, which the
+  drawings left out. At full output the box runs at about 1 kPa inside, so any leak hisses. The amplifier now sits in
+  a compartment of its own: 1.5 mm aluminium, black anodised, on an EPDM gasket on the back's inner face. Its mains
+  electronics are enclosed in metal, as the safety standard asks (neither HDPE nor polyester could be that
+  enclosure). The leads leave through cable glands, and the HF lead's open hole under the top is a gland too.
+- **Nothing is glued to HDPE** (r3), which no ordinary adhesive or sealant holds. The posts' sockets are knurled and
+  pressed in. The ports have a flange behind the panel, screwed to it on a foam seal. The magnets are pressed into
+  their pockets. The woofer's inserts go in 9 mm holes (7 mm took only the bare screw). The cloth disc goes on tape
+  made for low-energy plastics.
+- **The L-pad has a place** (r5). At full output its series resistor would burn about 20 W. Its two resistors are
+  25 W aluminium-housed parts on an aluminium plate in the compartment, behind a 33 µF film capacitor that keeps low
+  frequencies off the driver if the amplifier's preset is ever lost.
+- **The bass is protected** (r6). Below the ports' tuning a vented box stops holding the cone. At full output it
+  passes its 5.75 mm limit below about 30 Hz, and a record's warp drives it there. The preset stored before the
+  speaker ships gets a 4th-order high-pass at 28 Hz, limiters, and a notch at the ports' pipe resonance (about
+  540 Hz). By the box model in `studio/fabkit/speaker/box.py`, the cone then peaks at 5.3 mm, and the bass's -3 dB
+  point moves from 49.7 to 50.1 Hz.
+- **The ring is held** (r7). It had no fixing, and lifting the cover lifted it too. Now four magnets in the panel
+  hold four steel discs in the ring's back. The cover's magnets hold to the same steel through the ring, more weakly,
+  so the cover comes away alone. Nothing shows.
+- **The wiring is drawn** (r8). The HF lead, a round silicone cable 5 mm across, climbs the back rib on screw-mount
+  tie bases, passes brace-2's window and goes in through the gland under the top and up the cable post. The woofer's
+  lead runs under the motor to the basket. Each lead has a polarised connector at the compartment, so the amplifier
+  comes out whole.
+- **A rating plate** (r12) beside the amplifier carries the model, the serial number, the ratings, the marks and the
+  maker's address. The finished speaker still needs an EMC pre-scan and an IEC 62368-1 assessment by a test lab.
+
+The Cloud renders show what a photograph would (part of r9): the lining, the brass sockets and their sleeves at the
+posts' feet, and, behind the woofer, the compartment and the HF lead on its way up to the top. The other speakers'
+pages are as they were. Of these fixes they would show only the sockets' brass rims and, from behind, the rating
+plate.
+
+Not fixed, because each changes the look: the back (r4), the ports' mouths (r10), feet (r11) and the Cloud's ports
+(r9). They are in the open questions. So are what the renders still leave out (r13 to r15): weld lines, broken edges
+and cut faces on the plastic cabinets; the horn's cap screws and parting line; cables in the room; and a view of the
+back. They are the next full re-render, and the weld lines wait on the back.
 
 ## Round 12: the owner's notes of 2026-10-13 (night)
 
@@ -386,8 +490,8 @@ All of these are without wood, on the same welded box with its braces and ribs:
   cement makes airtight joints as strong as the sheet). Acrylic is about three times as stiff as HDPE (3.2 GPa), so 25 mm
   bends about as little as 18 mm birch plywood. But it is much heavier per square metre, so it keeps the ribs, which
   show as fins. The cabinet weighs about 63 kg at 25 mm, or 50 at 20 mm. You see inside: the braces, the ribs, the
-  ports, the woofer's basket and the amplifier. So those are designed to be seen, and the damping is a thin felt on
-  the back panel instead of fibre fill. Shown:
+  ports, the woofer's basket and the amplifier. So those are designed to be seen, and the damping was to be a thin felt
+  on the back panel instead of fibre fill (round 13 found that too little and lines every bay instead, above). Shown:
   smoked acrylic with the smoked horn, green with the bottle-green horn, and frosted ice with a clear horn.
 - **Stone.** Terrazzo comes most naturally: a sheet press makes it from recycled chips in a coloured ground, or it can
   be cast in Jesmonite. Cultured marble (cast resin or Jesmonite veined as it is poured) and cultured onyx (the same,
@@ -883,19 +987,22 @@ and `birch-clear`, `birch-black`, `eucalyptus-green` and the rest take the other
 `product.py` writes `out/`:
 
 - STEP and STL;
-- DXF cut files for the plywood (three 1525 mm sheets), the MDF ring and the disc's frame;
+- DXF cut files for the plywood (three 1525 mm sheets), the MDF ring and the disc's frame, and the lining's batts
+  (six 1200 x 600 batts a pair);
 - the checks (no clashes);
-- the parts list (`bom.md`): about $4,690 for the pair at budget rates (round 4: $3,520; the 2 in drivers add about
-  $720 and the larger horn's resin the rest), before the unpriced items (the bark, the cloth, the magnets, the fixings,
-  the posts' brass fittings and a few small parts);
-- 14 A3 drawing sheets (`out/drawings/barkhorn-sheets.pdf`): the assembly, each sheet part (the ring and the disc's
-  frame with their magnet pockets), the cast horn, its cap, the driver's adaptor ring and the posts, and the notes;
+- the parts list (`bom.md`): about $4,850 for the pair at budget rates (round 4: $3,520; the 2 in drivers add about
+  $720, the larger horn's resin most of the rest, and round 13's amplifier compartment about $170), before the
+  unpriced items (the bark, the cloth, the magnets, the fixings, the posts' brass fittings, the lining's batts and a
+  few small parts);
+- 16 A3 drawing sheets (`out/drawings/barkhorn-sheets.pdf`): the assembly, each sheet part (the ring and the disc's
+  frame with their magnet pockets), the cast horn, its cap, the driver's adaptor ring, the posts, the amplifier's
+  compartment, and the notes;
 - the render model.
 
 `pressed.py` builds the cabinet without wood, the line since round 6, into `out-pressed/`. Every panel, brace and rib
-nests on ten 1 m sheets of 25 mm HDPE for the pair, the rings on one of 6 mm and the disc's frames on one of 12 mm.
-The parts list is about $4,360 before the unpriced items; the pressed sheet has no published dated price, so its lines
-stay open, as does the weld rod. There are 15 drawing sheets.
+nests on ten 1 m sheets of 25 mm HDPE for the pair, the rings on one of 6 mm, the disc's frames on one of 12 mm and
+the lining on four 1200 x 600 batts. The parts list is about $4,550 before the unpriced items; the pressed sheet has
+no published dated price, so its lines stay open, as do the weld rod and the batts. There are 16 drawing sheets.
 
 The shots are in `studio/shots/barkhorn/`:
 
@@ -913,3 +1020,24 @@ The shots are in `studio/shots/barkhorn/`:
 2. **The closing page.** A name and an address to write to, in place of `[NAME]` and `[EMAIL]` on the look book's
    last page.
 3. **Price.** [PAIR PRICE] stays open.
+4. **The back** (round 13, the reality check's r4). The welded box cannot be closed with welds inside it. Either the
+   back comes off, on a gasket and sixteen screws round its edge, which is also the way in to the amplifier, the L-pad
+   and the leads (recommended); or it is welded from outside, which leaves a planed band round it. Either shows on the
+   back.
+5. **The ports' mouths** (r10). Rounded mouths (R15) and a narrow flange over the panel's edge would quiet them at
+   high levels and ease their ring at about 540 Hz. They would soften the two crisp square openings chosen in round 6.
+   Rounded, or square (the amplifier's notch then does what it can)?
+6. **Feet** (r11). Adjustable levelling feet in place of the felt glides, so a 1.28 m speaker with 10 kg at its top
+   stands level and does not rock. They lift it 10 to 12 mm, a shadow gap under the cabinet, 1293 mm tall in all.
+   Feet, or glides?
+7. **The Cloud's ports** (r9). In the cabinet's own acrylic, so they glow with it, or black as now?
+8. **The pressed sheet.** Most of the suppliers named here press 10 to 20 mm and few press 25. A thick pressed sheet
+   cools with voids in its core and has to be planed, which cuts into the laid pattern, and a pair needs ten sheets
+   from one batch. Rotomoulding, the production route, would turn the bark into speckle. Keep 25 mm pressed sheet and
+   its planing, or look at another route?
+9. **A drawing set for the Cloud cabinet:** cemented 25 mm cast acrylic, its edges machined and annealed, inserts made
+   for acrylic, every fitting drawn to be seen. Make one next?
+
+Kept as rendered unless you would rather otherwise: the horn stays on its sockets, now held down by a rod (the reviewer
+asked whether to fix it to the cabinet outright), and the ring is held by hidden magnets (eight black screws would
+clamp the woofer harder, and show with the cover off).

@@ -63,6 +63,12 @@ PRESET_DEFAULTS = {
     # a grille's acoustically transparent knit: the yarn's colour, heathered (each yarn a little lighter or darker), a
     # fine weave about `pitch_mm` (its relief only reads close to), matt with a fabric's sheen
     'cloth': dict(color='#DCD6C8', pitch_mm=1.2, heather=0.08, roughness=0.88, sheen=0.6, bump=0.2),
+    # a speaker's lining as seen through a clear wall (barkhorn's round 13): polyester batting in a sleeve of sheer
+    # voile, a white fibre web, denser and thinner in soft clouds (`cloud` the swing, `cloud_m` metres across; thin, it
+    # greys as the dark inside shows through), a fibrous relief (`fibre`, `fibre_mm`), light carried a few millimetres
+    # into the web (`subsurface`, `radius`) and the voile's sheen at grazing angles
+    'batting': dict(color='#EFF0EE', roughness=0.95, specular=0.25, sheen=0.5, subsurface=0.4, radius=0.004, cloud=0.14,
+                    cloud_m=0.03, fibre=0.25, fibre_mm=1.5),
     # agglomerated cork: granules about `granule_mm` across, each its own shade of the colour (`variation`), darker
     # gaps between them, matt; expanded (smoked) cork is dark brown, natural cork tan
     'cork': dict(color='#3B2F28', granule_mm=3.0, variation=0.35, gaps=0.5, roughness=0.9, bump=0.5),
@@ -329,6 +335,8 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         _eucalyptus_bark(nt, b, p, normal)
     elif preset == 'cloth':
         _cloth(nt, b, p, normal)
+    elif preset == 'batting':
+        _batting(nt, b, p, normal)
     elif preset == 'cork':
         _cork(nt, b, p, normal)
     elif preset in ('plaster', 'sweep'):
@@ -1266,6 +1274,33 @@ def _cloth(nt, b, p, normal_in=None):
     if normal_in is not None:
         nt.links.new(normal_in, bn.inputs['Normal'])
     nt.links.new(bn.outputs['Normal'], b.inputs['Normal'])
+
+
+def _batting(nt, b, p, normal_in=None):
+    """Polyester batting in a voile sleeve (the preset's comment says what each setting does). The clouds are a soft
+    noise in the world (`space: object` reads it in the part's own), lighter where the web is denser and greyer where it
+    is thin; the relief a fine noise over it."""
+    node, math_, mix, smooth = _nodes(nt)
+    I = b.inputs
+    geo = node('ShaderNodeNewGeometry')
+    nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / p['cloud_m']
+    nz.inputs['Detail'].default_value = 4.0; nz.inputs['Roughness'].default_value = 0.55
+    nt.links.new(geo.outputs['Position'], nz.inputs['Vector'])
+    mr = node('ShaderNodeMapRange'); nt.links.new(nz.outputs['Fac'], mr.inputs['Value'])
+    mr.inputs['From Min'].default_value = 0.3; mr.inputs['From Max'].default_value = 0.7
+    mr.inputs['To Min'].default_value = 1 - p['cloud']; mr.inputs['To Max'].default_value = 1 + 0.25 * p['cloud']
+    g = node('ShaderNodeCombineColor')
+    for ch in ('Red', 'Green', 'Blue'):
+        nt.links.new(mr.outputs['Result'], g.inputs[ch])
+    nt.links.new(mix(1.0, hex_lin(p['color']), g.outputs['Color'], 'MULTIPLY'), I['Base Color'])
+    I['Roughness'].default_value = p['roughness']
+    if 'Specular IOR Level' in I:
+        I['Specular IOR Level'].default_value = p['specular']
+    I['Subsurface Weight'].default_value = p['subsurface']; I['Subsurface Scale'].default_value = p['radius']
+    I['Subsurface Radius'].default_value = (1.0, 0.95, 0.9)
+    if 'Sheen Weight' in I:
+        I['Sheen Weight'].default_value = p['sheen']; I['Sheen Roughness'].default_value = 0.5
+    nt.links.new(_bump_noise(nt, p['fibre_mm'] / 1000, p['fibre'], detail=8.0, normal_in=normal_in), I['Normal'])
 
 
 def _cork(nt, b, p, normal_in=None):

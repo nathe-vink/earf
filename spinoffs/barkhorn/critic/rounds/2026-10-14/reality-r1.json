@@ -1,0 +1,182 @@
+{
+ "verdict": "Close in its fundamentals, short in its details. The drivers, the amplifier, the box tuning and the horn are real, matched parts: the 15PR400 in 132 L at 38 Hz gives the README's bass (my lumped model from components.json: f3 about 47 Hz), the horn has been solved properly, and the HDPE drawing set is unusually complete for a concept. What separates it from a product is everything that holds, seals, protects and connects. The horn assembly, about 10 kg, stands loose on plain pins in sockets. The reflex box runs at about 1 kPa inside at full output, and it leaks through an amplifier Hypex says belongs in a sealed compartment (sheet 15 says so and leaves it out) and through the HF lead's open hole. Four joints rely on bonding to HDPE, which ordinary adhesives and sealants do not hold. The welded box cannot be closed as described, and once it is there is no way back in but the woofer hole. The L-pad has no place, the woofer ring no fixing, the cabinet no feet, the DSP no subsonic filter, the wiring no loom and the back no rating plate. The renders show a seamless object with no fasteners and no cables, the Cloud line most of all, where every insert, magnet and wire, and the amplifier, would show through the acrylic. The score is on the critic log's 0 to 10 scale.",
+ "reality_score": 5.5,
+ "findings": [
+  {
+   "id": "r1",
+   "rank": 1,
+   "kind": "won't work",
+   "where": "The horn on its posts: sheet 5 (top, sockets P1 to P4, Ø14 x 15), sheet 14 (posts 17 and 18), sheet 15 note 1; every render",
+   "problem": "Nothing holds the horn assembly (about 10 kg) down. Four plain post feet stand loose in 13 mm sockets, so it lifts off if the cabinet is tipped or bumped, it buzzes in the sockets' clearance, and four positions set in a casting will not reliably drop into four machined holes.",
+   "evidence": "From the STLs: the waveguide is 5228 cm³ (about 5.5 kg of resin), the DE1085TN 3.6 kg (a retailer lists 3.9), the adaptor 242 cm³ of aluminium (0.65 kg) and the cap 0.19 kg, so about 9.9 kg. Its centre of gravity is about 260 mm behind the mouth and about 220 mm above the top. The front posts are at ±183 mm, 35 mm back; the rear pair is only ±40 mm, 353 mm back. The CG therefore sits 75 mm inside the footprint's slanted side and 94 mm in front of the rear pair. The horn's own weight resists only 7 to 9 N·m, about 20 N at its top edge. Past that, everything rests on 13 mm of plain 10.0 post in a 10.2 bore, and that socket is 'bonded' into HDPE (r3). The 0.2 mm clearance lets each post tilt ±0.9°, about ±1 to 2 mm at the pod, so the woofer's vibration will rattle it. Resin shrinkage and mould sag move the cast pad positions 0.4 mm or more across the front pair's 366 mm. HDPE also grows about twice as fast as the resin, about 0.3 to 0.5 mm across 366 mm for 15 K, against 0.2 mm of clearance. In IEC 62368-1's horizontal-force test (13 % of the weight, here about 85 N, at the top) the cabinet passes, since it only tips at about 21°; the loose horn would not.",
+   "fix": "Keep the sockets and the lift-off, and add four things. (1) Tie the horn down at the free rear post (post-4). Run an M6 A2 threaded rod, about 180 long, down its 7 mm bore from inside the pod, through a 6.5 mm hole in that socket's floor, into a flanged M6 insert for plastics fitted in the top's underside before the top is welded on. A nut and washer bear on the pad's insert inside the pod, and the rod is undone with the cap off, as the HF pair is now. (2) Open every socket's bore to 12 mm and press in a 12 x 10 x 13 polyurethane sleeve (Shore A 90). It takes up about ±0.3 mm of position error, centres the posts and stops them buzzing. (3) Bond the pads' M10 x 1 inserts after casting, in holes drilled through a jig taken off the cabinet's socket pattern. (4) Shorten the front inserts to 10 mm (8 mm of thread). The mesh shows the 14 mm hole leaves only 3 to 8 mm of resin between it and the flare near the mouth.",
+   "changes_the_look": false
+  },
+  {
+   "id": "r2",
+   "rank": 2,
+   "kind": "won't work",
+   "where": "Sheet 7 (back, the 96 x 291 cut-out), sheet 15 note 3, sheet 5 (top, H1 Ø8 through under the cable post), sheet 13 (the pod's cap)",
+   "problem": "The reflex box is not airtight. The FusionAmp is vented and is drawn without the sealed compartment Hypex calls for, and the HF lead leaves through an open hole into an unsealed pod. The box will hiss and lose tuning, and the amplifier's mains electronics sit in a box of polyethylene and polyester.",
+   "evidence": "Sheet 15, note 3: 'Hypex advises a sealed box round the amplifier module (left out here, as in the kit's example)'. Hypex's FAQ says the FusionAmp 'should be installed in a sealed compartment of your speaker cabinet', and distributors' pages list the range as not airtight because of its thermal regulation. With the 15PR400's T/S from components.json in 132 L at 38 Hz, the FA122's full output (about 22 V rms) puts 0.84 to 1.0 kPa (149 to 151 dB) inside the box between 30 and 45 Hz. Any leak jets at about 40 m/s and hisses, and the box's losses rise. The cable post's 7 mm bore holds two wires of about 2.3 mm, leaving about 30 mm² open from the box into a pod whose cap sits on a spigot with three M4 screws. Unless the module is enclosed in itself, neither recycled HDPE (UL 94 HB at best) nor the polyester lining can be the fire enclosure IEC 62368-1 asks for round its mains supply.",
+   "fix": "Add a sealed amplifier compartment: a 1.5 mm aluminium box about 320 x 125 x 75 inside (the module's 291 x 96 x 55 with about 15 mm round it; check Hypex's FusionAmp drawing for its minimum). Its 15 mm flange sits on 3 mm EPDM, screwed to the back's inner face round the cut-out. The woofer and HF leads leave through two M12 nylon cable glands (for 3 to 6.5 mm cable) or one 4-pin panel connector, and the L-pad goes inside it (r5). Re-trim the ports by impedance minimum for the 2 to 3 L it takes (a few mm longer). At the top, replace the open Ø8 hole with an M12 gland on the top's underside, and make the HF lead a round 2 x 0.5 mm² silicone-sheathed cable (about 5 mm across, so it still passes the 7 mm bore). The pod then sits outside the box's air.",
+   "changes_the_look": false
+  },
+  {
+   "id": "r3",
+   "rank": 3,
+   "kind": "won't work",
+   "where": "Sheet 5 (the sockets, 'bonded into the cabinet's top'), sheet 6 (front panel H4 to H11, Ø7.0), sheets 10 and 11 (magnet pockets U1 to U4, Ø15.2), the parts list (post-fixings, woofer-fixings, cloth-disc) and pressed.py's notes (the port 'sealed with a bead of MS polymer')",
+   "problem": "Four fixings are drawn as bonds to HDPE, which ordinary adhesives and sealants do not hold, and the woofer's inserts are drawn into holes they cannot go in.",
+   "evidence": "The posts' brass sockets are 'bonded into the cabinet's top', and the port is 'pushed in dry ... then sealed with a bead of MS polymer'. MS-polymer makers list PE, PP and PTFE as not recommended, and the README itself says only special acrylics (3M DP8005/DP8010) hold HDPE at all. The cover's and the ring's 15 x 3 magnets sit in Ø15.2 x 3.2 pockets: clearance, with nothing to keep them in. The cloth goes 'across its face and round its edge' of a 12 mm HDPE frame, and no fixing is named. The woofer's 'M6 threaded inserts for plastics (self-tapping, brass)' go into H4 to H11, drawn Ø7.0 through. An M6 insert for plastics is about 9 to 10 mm across and wants a hole of about 8.5 to 9.5 mm, so a 7 mm hole takes only the bare screw. HDPE also creeps, so the clamp on the woofer's gasket relaxes.",
+   "fix": "Sockets: knurled brass, pressed or heat-staked into Ø13.7 holes (interference fit, no adhesive). Port: held mechanically by r10's flange, with four thread-forming screws for plastics (EJOT PT K40 x 16 class) through it into the panel, on a closed-cell PE foam gasket. Magnets: Ø14.85 pockets (a press fit, which HDPE holds), or a 0.5 mm lip heat-staked over each. Cloth: an adhesive transfer tape made for low-surface-energy plastics (3M 300LSE class), or a polyolefin (APAO) hot-melt, on the frame's back, with a 3 x 3 mm spline groove. Woofer: holes sized to the insert maker's chart for PE (about Ø9, through the 14 mm under the rebate), and the torque checked again after 48 h. In the Cloud line's acrylic, use no self-tapping parts, because they craze it: use inserts for acrylic set in epoxy, or through-bolts.",
+   "changes_the_look": false
+  },
+  {
+   "id": "r4",
+   "rank": 4,
+   "kind": "won't work",
+   "where": "pressed.py and sheet 15 note 4 (assembly); sheets 4 to 9 (panel sizes, no joint preparation); sheet 3 (exploded view)",
+   "problem": "The box cannot be closed as specified. The inside extrusion welds of whichever panel goes on last cannot be reached, the corners have no preparation or sequence, and once the box is welded there is no way back in but the woofer hole.",
+   "evidence": "pressed.py: 'The front panel, the back, the braces and the ribs are extrusion welded inside, so the box is airtight'. Once the shell is closed, its only openings are the Ø356 woofer hole, the 96 x 291 amplifier hole and two 100 mm ports, and brace-2's 420 x 300 window leads to a top bay only 130 mm high. A hand extruder needs a straight run along the joint with its shoe on it. So the closing panel's four inside fillets cannot be welded, nor can the braces' and back ribs' joints to it. The top and bottom sit between the sides as plain T-joints (sheet 4: sides 420 x 880, top and bottom 510 x 420). There is no mitre, no weld preparation and no melt-off allowance in the cut sizes. The amplifier, the L-pad and the HF lead can be reached only through the woofer hole.",
+   "fix": "Add a sheet with the welding sequence and the joints. Weld the ribs to their panels flat. Mitre the shell's corners at 45° for hot-plate angle welding (or cut a 10 mm x 45° outside V on each T-joint, extrusion-weld it and plane it), and add the melt-off allowance to the cut sizes. Weld the front panel and both braces inside, through the open back. Make the back the closing panel and make it removable: a 3 mm EPDM gasket on a 15 mm land and sixteen M5 A2 button heads into brass inserts at about 120 mm pitch, with the amplifier compartment (r2) mounted on it. If the back must be welded, cut a 45° x 15 mm outside V round its four edges, extrusion-weld it and plane it, which leaves a band round the back. Order the flake as HDPE only, in a narrow melt-flow band, because polypropylene caps in the mix will not weld to HDPE.",
+   "changes_the_look": true
+  },
+  {
+   "id": "r5",
+   "rank": 5,
+   "kind": "missing",
+   "where": "Parts list (hf-pad, '[PRICE]'), sheet 15 note 2; no drawing shows it",
+   "problem": "The HF channel's L-pad, and any protection for the compression driver, exist only as a line in the parts list, with no part numbers, no place and no heat path.",
+   "evidence": "A -9 dB L-pad at 16 ohm is about 10.3 ohm in series and about 8.8 ohm across the driver. At the FA122's full output (about 22 V rms into the pad's 16 ohm input), the series resistor burns about 20 W and the shunt about 7 W while the driver gets about 4 W. That calls for power resistors mounted on metal, not parts loose in a box now lined with polyester and walled in HDPE, whose heat-deflection temperature is about 60 to 80 °C. Nothing protects the DE1085TN from low frequencies if the DSP's preset is lost, reset or wrong. B&C asks for a crossover at 800 Hz or above, at 12 dB/oct or steeper, and Hypex ships the FusionAmp with no filter loaded.",
+   "fix": "Use two aluminium-housed wirewound resistors (Vishay Dale RH-25 or Arcol HS25 class; 10 ohm and 8.2 ohm, trimmed after measurement), screwed with thermal compound to a 3 mm aluminium plate inside the amplifier compartment (r2). Put a 33 µF 100 V polypropylene film capacitor in series ahead of them as the driver's protection (a first-order high-pass at about 300 Hz into 16 ohm), and use crimped, insulated 6.3 mm receptacles. Alternatively, drop the pad and set the 9 dB in the DSP, if the FA122's measured hiss through the 108 dB driver is inaudible at the listening seat. Keep the capacitor either way.",
+   "changes_the_look": false
+  },
+  {
+   "id": "r6",
+   "rank": 6,
+   "kind": "acoustic",
+   "where": "The FA122's filter (sheet 15 note 2 and acoustics/README specify only the 800 Hz LR4); the record player in room12",
+   "problem": "Nothing filters the woofer below the port's tuning, where a vented box unloads it. At the amplifier's full output it runs past Xmax below about 30 Hz, and a record's warp drives it there.",
+   "evidence": "I modelled components.json's T/S (Fs 35 Hz, Qts 0.32, Vas 223 L, Sd 805 cm², Xmax 5.75 mm) in 132 L at 38 Hz; the model reproduces the README's f3, about 47 Hz. At about 22 V rms (125 W into 4 ohm) the cone moves 6.2 mm peak at 30 Hz, 10 mm at 25 Hz, 14 mm at 20 Hz and about 24 mm toward 5 Hz. Record warp and rumble (0.5 to 10 Hz), lifted further by a phono stage's RIAA bass boost, fall exactly in that range, so on records the cone pumps and the ports chuff.",
+   "fix": "In the FusionAmp's filter (HFD), put a 4th-order Butterworth high-pass at 28 Hz on the woofer channel. In the same model the peak excursion then stays at or below 5.6 mm up to full output, and f3 moves only from 47.2 to 47.9 Hz. Set the DSP's limiters (the woofer's to its Xmax, the HF channel's to the driver's rating) and store the preset in the amplifier before it ships.",
+   "changes_the_look": false
+  },
+  {
+   "id": "r7",
+   "rank": 7,
+   "kind": "missing",
+   "where": "Sheet 10 (woofer-ring) and the parts list; the cover-off renders (look-eucalyptus-off, look-cobalt-off, look-ice-off)",
+   "problem": "The 6 mm ring over the woofer has no fixing, so it lifts off with the magnetic cover.",
+   "evidence": "Sheet 10 draws the ring Ø436/Ø350 x 6 with only blind pockets underneath (U5 to U12, Ø14 x 4, over the woofer's button heads; U1 to U4, Ø15.2 x 3.2, for magnets). It has no through holes, and the parts list has no fixing for it; pressed.py says only 'the ring over its frame'. The 15PR400's basket is cast aluminium, so nothing magnetic holds the ring. Meanwhile the cover's four N42 15 x 3 pairs pull on the ring's magnets through 2.8 mm of HDPE, so lifting the cover lifts the ring with it.",
+   "fix": "Hidden version: make the ring's four magnets 15 x 3 mild-steel discs and move them to a 207.5 mm radius from the woofer's centre, which is over the panel, between the Ø394.6 rebate and the ring's Ø436 edge. Press four 15 x 3 N42 magnets into Ø14.85 x 3.2 pockets in the front panel under them, and move the cover's magnets to the same circle. The ring is then held at contact (about 20 to 30 N a pair) and located by the eight screw heads in its pockets, while the cover pulls through about 3.5 mm (about 5 N a pair) and comes away alone. If screws are acceptable: make U5 to U12 Ø6.6 through holes with 90° countersinks, and use black A2 M6 x 30 countersunk screws through the ring and the woofer's flange.",
+   "changes_the_look": false
+  },
+  {
+   "id": "r8",
+   "rank": 8,
+   "kind": "missing",
+   "where": "Parts list (cable 2 x 1.5 mm², hf-pair, terminals), sheet 15 note 1; no routing on any sheet, and none in sheet 2's section",
+   "problem": "The wiring has parts but no loom: no route, no retention, no strain relief, no chafe protection, and no connector where the box comes apart.",
+   "evidence": "The woofer lead crosses about 350 mm of box, from the amplifier on the back (z 362 to 678) to the woofer's terminals. The 1.2 m HF pair climbs through brace-2's window to the cable post. Loose in a box running at about 1 kPa (r2), both leads will slap the panels and the basket and buzz. Adhesive cable-tie bases do not stick to HDPE. The pair runs over the cut ends of a 10 x 7 stainless tube that the woofer shakes. A removable back (r4) needs the amplifier's leads on connectors.",
+   "fix": "Draw the loom. Fit screw-mount cable-tie bases (thread-forming screws for plastics, EJOT PT K30 x 10 class) every 120 mm: along rib-back-1 and brace-2 for the HF lead, and along the lower brace for the woofer lead, with a 50 mm service loop at each end. Put polarised connectors (Molex Mini-Fit Jr or Wago 2092 class, 2-way for HF and 2-way for LF) at the amplifier compartment's glands, and crimped, insulated, colour-coded 6.3 mm receptacles at the woofer. Deburr the posts' bores and sleeve the pair in silicone at both ends. Keep every lead clear of the cone's travel and of the ports' inner ends.",
+   "changes_the_look": false
+  },
+  {
+   "id": "r9",
+   "rank": 9,
+   "kind": "render",
+   "where": "look-green-on and -off, look-smoke-off and look-ice-off (the Cloud line), horn-green-back; the render model barkhorn-pressed.glb",
+   "problem": "Through the translucent acrylic the renders show braces, ribs and ports, but none of the hardware a photograph would show. There is no wiring, no fasteners and no magnets, the amplifier is a featureless block, and the ports are rendered in acrylic although the parts list prints them in opaque ASA.",
+   "evidence": "The look renders carry the render model's 37 parts: panels, ribs, ring, ports, the woofer's pieces, the amplifier plate, the horn, the adaptor, the posts and the disc. There are no screws, inserts, magnets, sockets, cables, L-pad or glands, and the HF lead is not modelled even inside the clear horns. A photograph of these cabinets would show: the woofer's eight brass inserts and screw tips round the cut-out; the cover's and ring's magnets; the four brass sockets under the posts; the HF lead climbing from the amplifier through brace-2's window to the cable post; the woofer lead; the L-pad; the amplifier's board (or r2's compartment); every cemented joint as a fine line; and FDM ports, opaque and showing their layer lines.",
+   "fix": "Design these parts to be seen, then model and render them. Run the HF lead as one round black silicone cable in clear acrylic clips cemented every 100 mm along rib-back-1, and the woofer lead along the lower brace. Make the amplifier compartment a black anodised box (r2). Show the inserts, sockets and magnets in brass and nickel, as bought. Fabricate the Cloud line's ports from the cabinet's own acrylic (a cemented square tube with acrylic flares) instead of printing them in ASA.",
+   "changes_the_look": true
+  },
+  {
+   "id": "r10",
+   "rank": 10,
+   "kind": "acoustic",
+   "where": "Sheet 12 (part 10: 100 square, 236 long, square-cut), sheet 6 (H2, H3); the ports in every front view",
+   "problem": "The two straight, square-cut ports have their first pipe resonance inside the woofer's band, and their sharp mouths start to make noise near the amplifier's full output.",
+   "evidence": "Each 100 x 100 tube is 236 long with no flare. With end corrections (about 1.46 times its 56 mm equivalent radius), its first pipe mode is about 343 / (2 x 0.318), roughly 540 Hz. There the woofer's 800 Hz LR4 is only 1.6 dB down, and 200 cm² of mouth (a quarter of the cone's 805 cm²) radiates the resonance beside the woofer. The box's front-to-back mode (346 mm, about 500 Hz) feeds the same openings. At the FA122's full output the air in the ports peaks at about 12 m/s near 32 Hz (my model), where sharp square edges begin to make noise. The README's 23 m/s is for 400 W, more than the amplifier delivers.",
+   "fix": "Print each port with an R15 flare at the front, ending in a 5 mm flange over the panel's cut edge (about 148 mm square overall, 6 mm clear of the side wall; the flange carries r3's screws), and an R15 flare at the inner end. Re-trim it to tune by impedance minimum. Measure each port's near field and set a PEQ notch on the woofer channel at its pipe mode. Keep the lining off the ports' inner ends but on the back wall facing them.",
+   "changes_the_look": true
+  },
+  {
+   "id": "r11",
+   "rank": 11,
+   "kind": "missing",
+   "where": "Sheet 4 (bottom, a plain 510 x 420 panel), the parts list ('Felt glides 30 mm, screw-in', [PRICE]); the base in every render",
+   "problem": "There are no real feet. Nothing levels a 1.28 m column carrying 10 kg on posts at its top, and the bottom panel has no holes or inserts for anything.",
+   "evidence": "Sheet 4 draws the bottom uncut. The only support is four screw-in felt glides, about 16 kg each on a 30 mm pad, with no adjustment. On an uneven floor a 0.5° lean moves the horn about 10 mm at 1.1 m, and the speaker rocks on its diagonal. Every render stands the cabinet flat on the floor with no gap.",
+   "fix": "Fit four M8 brass threaded inserts for plastics in the bottom, 40 mm in from each edge (hole sized to the maker's PE chart, no deeper than 18 mm in the 25 mm panel). Use adjustable levelling feet in them (M8, Ø40, about ±8 mm of travel, felt or rubber pad), with spikes and floor cups as an option. Render the 10 to 12 mm shadow gap they make.",
+   "changes_the_look": true
+  },
+  {
+   "id": "r12",
+   "rank": 12,
+   "kind": "missing",
+   "where": "The back (sheet 7 shows only the cut-out, and no render shows the back); the parts list",
+   "problem": "There is no rating plate and no compliance path. A mains-powered active speaker sold under EARF's name must carry its ratings and marks, and pass safety and EMC tests as a finished product.",
+   "evidence": "Nothing in the sheets, the parts list or the renders gives a model, a serial number, the rated voltage, frequency and power, the maker's name and address, CE, UKCA or FCC marks, or the WEEE crossed-out bin. The FA122 is a module. Built into EARF's cabinet, the speaker itself is the product under the EU's LVD, EMC, RoHS and WEEE rules, their UK equivalents and FCC Part 15, and it faces IEC/EN 62368-1's tests, stability and fire enclosure among them (r1, r2).",
+   "fix": "Put a 70 x 40 mm rating plate beside the amplifier: laser-marked black-anodised aluminium on two M3 screws into inserts, or a polyester label on a low-surface-energy adhesive (3M 300LSE class, which holds on HDPE). It carries the marks, the ratings, the serial number, the WEEE symbol and the maker's address. Then have a test lab run a pre-compliance EMC scan and a 62368-1 assessment of the finished speaker, budgeted per model.",
+   "changes_the_look": false
+  },
+  {
+   "id": "r13",
+   "rank": 13,
+   "kind": "render",
+   "where": "look-eucalyptus-on and -off, look-cobalt-off and the other Bark and Crag pages (the shell's corners, the front frame, the top round the posts); horn-autumn-back and horn-turquoise-back (the top)",
+   "problem": "The pressed-HDPE cabinets render as seamless solids with razor edges. A photograph would show a weld line at every joint, cut edges that read differently from the faces, broken edges, and brass round each post.",
+   "evidence": "Every corner meets crisply with no joint, and the face pattern runs straight onto the 25 mm edges of the front frame (eucalyptus) and over the top edge (cobalt). The shell is hot-plate and extrusion welded (pressed.py). A planed weld leaves a 1 to 3 mm band of dragged, smeared flake, here along the four vertical edges, round the top and bottom, and round the recessed front panel. A cut edge through pressed flake sheet shows the flakes in section, finer and mixed, sometimes with voids from a thick sheet's core. A fabricator breaks every edge to about R1 to 2. Each post stands in a Ø14 brass socket (sheet 5). HDPE's face is a waxy satin that scuffs.",
+   "fix": "Render a 2 mm band of smeared flake at each weld, placed where r4's sequence puts the welds, and R1.5 on every outer edge. Give cut faces (the front frame, the woofer and port holes) a cross-section shader. Add a Ø14 brass ring round each post's foot, and make the faces waxier and lower in gloss.",
+   "changes_the_look": true
+  },
+  {
+   "id": "r14",
+   "rank": 14,
+   "kind": "render",
+   "where": "horn10 (horn-autumn-back, horn-green-back, horn-turquoise-back), look-ice-off and look-green-on (the clear horns' pads and pod), sheet 13 (the cap)",
+   "problem": "The horns render as single flawless castings with nothing inside. A photograph would show the cap's joint and screws, a parting line, the brass in the pads and, through clear resin, the hardware in the pod.",
+   "evidence": "Sheet 13 says 'three M4 screws hold' the cap but draws no holes, and no render shows them. On the turquoise horn the pattern runs unbroken across the cap's joint. The clear pads are rendered empty, though each holds a 13 x 14 brass M10 insert with 12 mm of post thread in it. The front inserts sit only 3 to 8 mm under the flare near the mouth (from the mesh), so they show from the front. Through the clear and tinted horns a photograph would also show the black Ø184 adaptor with four countersunk M6 and four M5 cap heads, the driver's label and terminals, the lever connector (the orange levers of a Wago 221) and the loop of the HF lead. The mould leaves a parting line round the rim and a gate mark. A neck poured in layers (the README's plan for Crystal Clear 200) shows its layers.",
+   "fix": "Draw the cap's three M4 fixings (radial, through the pod wall into brass inserts in the spigot, 120° apart, with black button heads) and render them. Render the cap's joint, the brass inserts in the pads and a polished parting line on the rim. In the clear horns, choose the hardware to be seen (a black adaptor, black heat-shrink on the pair, a black or clear lever connector) and render it. Pour the neck in one shot with a 3 to 6 in clear urethane (Crystal Clear 204 class) so it has no layers.",
+   "changes_the_look": true
+  },
+  {
+   "id": "r15",
+   "rank": 15,
+   "kind": "render",
+   "where": "room12/room-eucalyptus.png; no frame shows a speaker's back",
+   "problem": "The pair in the room has no cables and nothing to drive it, and no image shows the back, where an active speaker's hardware is.",
+   "evidence": "Each speaker is active: an FA122 on its back with a mains inlet and analogue (XLR, RCA) and digital inputs. So each needs a mains cord and a signal cable, and the record player on the sideboard needs a phono stage and a volume control before them. The speakers stand 44 cm from the wall, where those cables would show. The look book's speaker and horn pages never show the back, with its amplifier plate, inlet and inputs, the cables and the rating plate (r12).",
+   "fix": "Add a phono preamp (or a streamer-preamp with a phono input) beside the record player, and two interconnects of about 3 m and two IEC mains cords dressed along the skirting to each speaker's back, visible in the gap. Add one rear three-quarter frame of a speaker showing the amplifier plate, its cables and the rating plate.",
+   "changes_the_look": true
+  }
+ ],
+ "questions": [
+  {
+   "question": "Should the horn stay on its sockets with a tie rod down the free rear post, undone from inside the pod with the cap off, or be fixed to the cabinet outright?",
+   "why": "The sockets are your choice (round 11). A horn of about 10 kg that lifts freely off a 1.28 m speaker is a falling-object hazard and fails a push test at the top. The tie rod (r1) keeps 'lift off as one' at the cost of one more step."
+  },
+  {
+   "question": "May the woofer ring be held by hidden magnets on steel, or would you accept eight black countersunk screws on it, visible with the cover off?",
+   "why": "The ring has no fixing today (r7). The hidden version keeps it as rendered. Screws are simpler and clamp the woofer better, but they show."
+  },
+  {
+   "question": "May the two square ports get rounded R15 mouths and a narrow flange?",
+   "why": "Straight, square-cut ports ring at about 540 Hz, inside the woofer's band, and start chuffing at lower levels (r10). The flare changes the two crisp square openings you chose to keep symmetrical (round 6)."
+  },
+  {
+   "question": "Do you want a removable back on sixteen screws, or a box welded shut with a weld band round the back?",
+   "why": "The box cannot be closed with inside welds (r4). A removable back is also the only service access to the amplifier, the L-pad and the HF lead other than the woofer hole."
+  },
+  {
+   "question": "Is 25 mm pressed, pattern-laid HDPE the production material, or only for the first pairs?",
+   "why": "25 mm is at the thick end of what the README's suppliers press: most list 10 to 20 mm, Marble Plastics goes to 1 in, Yemm & Hart to 2 in, and some Bazar sellers to 25 to 30 mm. A thick pressed sheet cools with voids in its core and varies in thickness, so it has to be planed, which cuts into the laid pattern, and a pair needs ten 1 m sheets from one batch. The README's own production route, rotomoulding, would turn the bark into speckle, which changes the look you decided on."
+  },
+  {
+   "question": "Should the Cloud line get its own drawing set?",
+   "why": "It exists only in renders. Cemented 25 mm cast acrylic needs machined, annealed edges and inserts made for acrylic, and the cabinet alone weighs about 63 kg. Everything inside it shows (r9), so its wiring, amplifier compartment and fixings have to be drawn to be seen."
+  }
+ ]
+}

@@ -768,11 +768,12 @@ def sheet_exploded(pg, parts, numbers):
     k = fit_scale(*(bhi - blo), 280, 215)
     ox = 70 - blo[0] / k + (280 - (bhi - blo)[0] / k) / 2; oy = 55 - blo[1] / k + (215 - (bhi - blo)[1] / k) / 2
     pg.lines(vis, (ox, oy), k, lw=0.3)
-    anchors = []
+    anchors, seen = [], set()
     for p in parts:
         n = numbers.get(p.name)
-        if n is None:
+        if n is None or n in seen:                    # one balloon a parts-list line: its other pieces are the same part
             continue
+        seen.add(n)
         q = to2d('iso', [centres[p.name]])[0]
         anchors.append((n, ox + q[0] / k, oy + q[1] / k))
     mid = ox + (blo[0] + bhi[0]) / 2 / k

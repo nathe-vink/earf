@@ -34,6 +34,10 @@ P.update(finish='pressed', stock='recycled-hdpe', T=25.0,
          ribs=dict(t=25.0, depth=60.0, back=(150.0, 410.0), min_span=300.0))
 P['ring']['stock'] = 'recycled-hdpe'
 P['cover']['disc_stock'] = 'recycled-hdpe'
+# round 13, the reality check's r3: nothing is bonded to HDPE, which no ordinary adhesive or sealant holds. The woofer's
+# inserts go in holes sized by the insert maker's chart for PE, and the magnets and steel discs are pressed in
+P['woofer_hole'] = 9.0
+P['cover']['disc_magnet']['pocket'] = 14.85
 PRODUCT = dataclasses.replace(
     base.PRODUCT, name='barkhorn-pressed', params=P,
     kind='Two-way horn loudspeaker after Friendly Pressure, in pressed recycled plastic, no wood',
@@ -42,10 +46,14 @@ PRODUCT = dataclasses.replace(
         'No wood: every panel is recycled HDPE sheet, 25 mm, pressed to order from colour-sorted flakes laid out in the bark\'s '
         'pattern (approve a 200 mm pressed sample and a full-sheet trial from one batch first). The ring (6 mm) and the cloth '
         'disc\'s frame (12 mm) are HDPE too.',
-        'Assembly: the shell\'s corners hot-plate butt welded, the bead planed flush; the front panel (set back 24 mm), the back, '
-        'the two braces and the ribs extrusion welded inside, so the box is airtight. No screws, no glue.',
-        'The woofer flush in its rebate on a gasket, on eight M6 threaded inserts for plastics; the ring over its frame; the port '
-        'pushed in dry, trimmed to tune (impedance minimum at fb), then sealed with a bead of MS polymer.',
+        'Assembly (round 13): the ribs welded to their panels flat; the shell\'s corners hot-plate welded, the bead planed flush; '
+        'the front panel (set back 24 mm) and the two braces extrusion welded inside, through the open back; the back closes the '
+        'box last, from outside (on a gasket and screws, or welded in an outside V: the owner\'s choice). The flake ordered as HDPE '
+        'only, in a narrow melt-flow band: polypropylene caps in the mix will not weld. Nothing is glued: HDPE holds no ordinary '
+        'adhesive.',
+        'The woofer flush in its rebate on a gasket, on eight M6 threaded inserts for plastics in 9 mm holes (the torque checked '
+        'again after 48 hours: HDPE creeps); the ring over its frame on its magnets; each port fitted from inside, trimmed to tune '
+        '(impedance minimum at fb), its flange screwed to the panel with thread-forming screws for plastics on a foam seal.',
         'The front: the panel\'s own sheet in the pattern, and a cloth disc over the woofer on its HDPE frame, standing on the '
         'ring on four magnet pairs.'],
     drawing_prefix='BHP')

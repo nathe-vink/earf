@@ -41,6 +41,9 @@ SHEETS = {
     'cork': dict(title='Cork sheet, agglomerated', density=0.24, sheet=(1830.0, 915.0), usd_per_m2=None, thicknesses=(3, 6)),
     'recycled-hdpe': dict(title='Recycled HDPE sheet, pressed to order (a sheet press workspace)', density=0.95,
                           sheet=(1000.0, 1000.0), usd_per_m2=None, thicknesses=(5, 6, 8, 10, 12, 15, 20, 25, 30)),
+    # a speaker's lining: soft, cut with a long knife or a hot wire against a straightedge rather than routed
+    'polyester-batting': dict(title='Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content',
+                              density=0.03, sheet=(1200.0, 600.0), usd_per_m2=None, thicknesses=(25, 50, 75)),
 }
 PRINTS = {
     'resin-tough': dict(title='Tough (ABS-like) SLA resin', process='sla', density=1.15, usd_per_cm3=0.35, min_wall=1.5),

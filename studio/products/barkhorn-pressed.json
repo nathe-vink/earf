@@ -3,7 +3,7 @@
  "model": "spinoffs/barkhorn/out-pressed/render/barkhorn-pressed.glb",
  "origin_mm": [
   280.0,
-  210.0,
+  210.5,
   0.0
  ],
  "materials": {
@@ -15,6 +15,16 @@
   },
   "bark": {
    "preset": "$bark"
+  },
+  "brass": {
+   "preset": "metal",
+   "color": "#C9A660",
+   "roughness": 0.3
+  },
+  "cable": {
+   "preset": "rubber",
+   "color": "#141414",
+   "roughness": 0.5
   },
   "disc": {
    "preset": "cloth",
@@ -56,6 +66,11 @@
    "preset": "rubber",
    "color": "#151515"
   },
+  "gland": {
+   "preset": "plastic",
+   "color": "#1A1A1A",
+   "roughness": 0.5
+  },
   "horn": {
    "preset": "$horn_preset",
    "color": "$horn",
@@ -63,6 +78,9 @@
    "deep": "$horn_deep",
    "cloud": "$horn_cloud",
    "cloud_m": 0.12
+  },
+  "lining": {
+   "preset": "batting"
   },
   "port": {
    "preset": "satin_paint",
@@ -79,16 +97,28 @@
    "preset": "metal",
    "color": "#C9C9C6",
    "roughness": 0.3
+  },
+  "sleeve": {
+   "preset": "rubber",
+   "color": "#1B1B1B"
   }
  },
  "assign": [
   {
-   "match": "amp-plate",
+   "match": "amp-plate|amp-box|rating-plate",
    "material": "amp"
   },
   {
    "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1-1|rib-back-2-1|rib-top|rib-bottom",
    "material": "bark"
+  },
+  {
+   "match": "post-sockets|tie-rod-insert",
+   "material": "brass"
+  },
+  {
+   "match": "lead-hf|lead-woofer",
+   "material": "cable"
   },
   {
    "match": "cloth-disc",
@@ -131,8 +161,16 @@
    "material": "driver-surround"
   },
   {
+   "match": "cable-glands",
+   "material": "gland"
+  },
+  {
    "match": "waveguide|waveguide-cap",
    "material": "horn"
+  },
+  {
+   "match": "lining-back-1-web|lining-bottom-1a-web|lining-bottom-1b-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-back-2a-web|lining-back-2b-web|lining-back-2c-web|lining-left-3-web|lining-right-3-web|lining-back-3-web|lining-top-3a-web|lining-top-3b-web",
+   "material": "lining"
   },
   {
    "match": "port-left|port-right",
@@ -143,8 +181,12 @@
    "material": "ring"
   },
   {
-   "match": "post-1|post-2|post-3|post-4",
+   "match": "post-1|post-2|post-3|post-4|tie-rod-rod",
    "material": "rod"
+  },
+  {
+   "match": "amp-box-gasket|post-sleeves",
+   "material": "sleeve"
   }
  ],
  "flavours": {
@@ -636,7 +678,7 @@
    "horn_cloud": 0.0,
    "materials": {
     "bark": {
-     "deep": "#C9C7C2",
+     "deep": "#C7C7C5",
      "radius": 0.025,
      "roughness": 0.05
     },
