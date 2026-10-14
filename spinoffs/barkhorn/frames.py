@@ -55,11 +55,13 @@ TURNED = dict(position=[0.0, -1.2, 0], rotate_z=180, shift=-1.2)
 
 
 def F(name, bark, label, options=(), materials=None, product=PRODUCT, camera=None, lights=None, at=None, size=None, stage=None,
-      hide=(), sky=None, pair=None, sun=None):
+      hide=(), sky=None, pair=None, sun=None, render=None):
     """One frame. `stage`: a set of its own in place of the room (a sweep), with its `sky`; `hide`: parts left out (the
-    cloth disc); `pair`: several speakers, each {position, rotate_z}, in place of the one at `at`; `sun`: the shot's sun."""
+    cloth disc); `pair`: several speakers, each {position, rotate_z}, in place of the one at `at`; `sun`: the shot's sun;
+    `render`: settings over the shot's (white balance, exposure)."""
     return dict(name=name, bark=bark, label=label, options=list(options), materials=materials or {}, product=product,
-                camera=camera, lights=lights or {}, at=at, size=size, stage=stage, hide=list(hide), sky=sky, pair=pair, sun=sun)
+                camera=camera, lights=lights or {}, at=at, size=size, stage=stage, hide=list(hide), sky=sky, pair=pair, sun=sun,
+                render=render)
 
 
 def form_product(form):
@@ -155,6 +157,10 @@ ROOM12_SET = {
         {'kind': 'curtain', 'position': [-3.04, 0.42], 'size': [0.8, 2.75], 'rotate_z': 90},
     ]}
 ROOM12_SKY = {'kind': 'gradient', 'strength': 3.0, 'zenith': '#9FB8DA', 'horizon': '#E7EDF2', 'ground': '#857F73'}
+# each speaker wears its own pattern (materials.object_space): laid in the world, the right one stood on the grey strips
+# of the eucalyptus; read in its own space it wears its look book page's face, as the left one does
+# the white point on the daylight (the base shot's 5600 K left the sky's light blue on the cabinets' greys)
+ROOM12_RENDER = {'white_balance_k': 6300, 'white_balance_tint': 8.0, 'exposure': 0.2}
 # a low afternoon sun through the window, its patch on the floor in front of the chair
 ROOM12_SUN = {'aim': {'at': [-1.9, -1.4, 0.0], 'window': 0, 'through': [0.5, 0.55]}, 'irradiance': 6.0, 'angle_deg': 1.0,
               'color': '#FFF0DC'}
@@ -166,6 +172,12 @@ ROOM12_LIGHTS = {
     # the window's daylight, helped: a lamp in its opening, the sky's colour
     'window': {'type': 'area', 'size_m': [1.6, 1.9], 'position': [-2.95, -0.7, 1.45], 'target': [0.0, -0.2, 0.9],
                'irradiance': 2.4, 'color': '#F2F5FF'},
+    # the speakers' own light (the owner: "the speakers look more grey than they should"): the window rakes across their
+    # fronts, so a soft warm lamp behind the camera lights them alone (light linking), as a photographer's bounce would
+    'speakers': {'type': 'area', 'size_m': [3.0, 2.0], 'position': [1.2, -5.4, 2.1], 'target': [0.0, 0.2, 0.75],
+                 'irradiance': 1.4, 'color': '#FFF1DE',
+                 'receivers': ['left', 'right', 'top', 'front-panel', 'cloth-disc', 'woofer-ring', 'waveguide', 'waveguide-cap',
+                               'port-left', 'port-right']},
     # each horn lit from behind, as the look frames' glow, so its resin reads
     **{f'glow{k}': {'type': 'area', 'size_m': [0.7, 0.32], 'position': [x, 0.72, 1.12], 'target': [x, 0.0, 1.1],
                     'irradiance': 1.4, 'color': '#FFF1DC', 'specular': 0, 'transmission': False}
@@ -322,7 +334,8 @@ SETS = {
         for line, key, flav, label, c in LOOKS if key in HORN10_KEYS}),
     'room12': dict(title='EARF: the pair in a room', camera=ROOM12_CAM, rows={
         'room': [F('room-eucalyptus', 'eucalyptus-printed', 'eucalyptus, in a room', product=PRESSED, lights=ROOM12_LIGHTS,
-                   size=[2880, 1620], stage=ROOM12_SET, sky=ROOM12_SKY, pair=ROOM12_PAIR, sun=ROOM12_SUN)]}),
+                   size=[2880, 1620], stage=ROOM12_SET, sky=ROOM12_SKY, pair=ROOM12_PAIR, sun=ROOM12_SUN,
+                   render=ROOM12_RENDER, materials={'bark': {'space': 'object'}, 'horn': {'space': 'object'}})]}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],
@@ -360,6 +373,8 @@ def shot_for(frame, set_camera):
         s['sky'] = copy.deepcopy(frame['sky'])
     if frame.get('sun'):
         s['sun'] = copy.deepcopy(frame['sun'])
+    if frame.get('render'):
+        s['render'].update(frame['render'])
     return s
 
 

@@ -13,3 +13,8 @@ per look.
 After round 1 of the look book (2026-10-13), the owner: "Yes fix critic flaws". Fixed without a new round: the renders at twice the size, each pair of photographs one picture with the joint blended, the Crag horns, the lapis, the Poison and Smoke throats, the drawings' line work and type, and every page inside the slide format (the README's round 11). Still open: an image that gives scale.
 
 Round 2 (2026-10-13): the card asked for advice on the line names, and the critic recommends keeping Bark, Cloud and Crag ("Each is a one-syllable nature noun that matches its fixed mark"). Its eight changes are applied (the README's round 12).
+
+After round 2, the owner: "Brand is way too big on the front of the look book. The sizing on the last page is best" (c1's
+150 % lockup back to the closing page's size; its line on what EARF makes kept), and "The text overlay on the scale page
+makes it hard to read, and the speakers look more grey than they should" (c3's type moved off the photograph onto a
+paper band below it; the room rendered again, each speaker wearing its own pattern and lit by a lamp of its own).

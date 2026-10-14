@@ -241,6 +241,37 @@
    "irradiance": 2.4,
    "color": "#F2F5FF"
   },
+  "speakers": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.0
+   ],
+   "position": [
+    1.2,
+    -5.4,
+    2.1
+   ],
+   "target": [
+    0.0,
+    0.2,
+    0.75
+   ],
+   "irradiance": 1.4,
+   "color": "#FFF1DE",
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "front-panel",
+    "cloth-disc",
+    "woofer-ring",
+    "waveguide",
+    "waveguide-cap",
+    "port-left",
+    "port-right"
+   ]
+  },
   "glowL": {
    "type": "area",
    "size_m": [
@@ -291,9 +322,9 @@
   "clamp": 8,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.0,
-  "white_balance_k": 5600,
-  "white_balance_tint": 3.0
+  "exposure": 0.2,
+  "white_balance_k": 6300,
+  "white_balance_tint": 8.0
  },
  "title": "barkhorn, eucalyptus, in a room",
  "size": [
@@ -313,6 +344,14 @@
   ],
   "lens_mm": 35,
   "level": true
+ },
+ "materials": {
+  "bark": {
+   "space": "object"
+  },
+  "horn": {
+   "space": "object"
+  }
  },
  "sky": {
   "kind": "gradient",

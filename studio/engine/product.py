@@ -286,7 +286,7 @@ def build_materials(bpy, pdef, flavour_name, shot_mats, tag):
         preset = spec.pop('preset')
         bevel = spec.pop('bevel_mm', 0.0)
         ov = {**spec, **fl.get('materials', {}).get(name, {}), **shot_mats.get(preset, {}), **shot_mats.get(name, {})}
-        ov = {k: v for k, v in ov.items() if k in M.PRESET_DEFAULTS[preset]}
+        ov = {k: v for k, v in ov.items() if k in M.PRESET_DEFAULTS[preset] or k == 'space'}   # space: materials.object_space
         out[name] = M.make(bpy, f'{name}@{tag}', preset, ov, bevel_mm=bevel)
         # a colour the flavour sets on a paint (body, accent, insert) is a swatch the retouch matches (retouch.py)
         raw = pdef['materials'][name].get('color', '')

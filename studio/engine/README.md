@@ -76,6 +76,10 @@ sheet), `assign` rules from part names to materials, colour `zones` (a band of f
 by height), and `decals`: the print files themselves (the Nutrition Facts, the stencilled marks) laid inside a
 material's colour coat, under its clear, exactly where the fab files put them.
 
+Patterns (bark, pressed sheet, stone) are laid in world space, so two copies of a product in one shot show different
+stretches of them. A shot's material override `"space": "object"` reads them in each part's own space instead
+(`materials.object_space`): every copy then wears the face it wears alone at the origin (barkhorn's pair in a room).
+
 ## What it writes
 
 - `IMG.shot.json`: the resolved shot, every setting as used.

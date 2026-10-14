@@ -381,7 +381,24 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         out = nt.nodes['Material Output']; nt.nodes.remove(b)
         em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = hex_lin(p['color']); em.inputs['Strength'].default_value = p['strength']
         nt.links.new(em.outputs['Emission'], out.inputs['Surface'])
+    if (overrides or {}).get('space') == 'object':
+        object_space(nt)
     return m
+
+
+def object_space(nt):
+    """A material's world-space pattern read in each object's own space instead (`space: object` in its overrides):
+    every link from Geometry's Position and Normal moved to Texture Coordinate's Object and Normal. A pattern laid in
+    the world shows a different stretch on each copy of a part, wherever it stands (barkhorn's round 12: of a pair in a
+    room, the right speaker stood on the grey strips of its eucalyptus); read in its own space, every copy wears the
+    face it wears alone at the origin."""
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    for link in list(nt.links):
+        if link.from_node.bl_idname == 'ShaderNodeNewGeometry' and link.from_socket.name in ('Position', 'Normal'):
+            src = tc.outputs['Object' if link.from_socket.name == 'Position' else 'Normal']
+            to = link.to_socket
+            nt.links.remove(link)
+            nt.links.new(src, to)
 
 
 def _contact(nt, I, col_lin, strength, distance, core=0.0, core_distance=0.025):

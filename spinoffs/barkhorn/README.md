@@ -26,6 +26,8 @@ drawn the same way.
 | "No samples yet." | **No samples are ordered**; the open question is closed for now. |
 | "Forget the earmilk idea for now." | The earmilk threads are parked: its bookshelf version, the exploded view and the earnest valve amplifier. |
 | "These look way better." | (the look book after round 11) |
+| "Brand is way too big on the front of the look book. The sizing on the last page is best." | **The cover's logo is back at the closing page's size and place** (the critic's c1 had set it at 150 %). The line on what EARF makes stays. |
+| "The text overlay on the scale page makes it hard to read, and the speakers look more grey than they should." | **The room page:** the photograph across the top, every word on a paper band below it. **The room rendered again:** the bark's pattern is laid in the world, so the right speaker stood on the eucalyptus's grey strips; now each speaker wears its own pattern (the engine's new `space: object`), the same face as its look book page. The window raked across their fronts, so a soft warm lamp of their own lights them (light linking), and the white point sits on the daylight (6300 K). |
 
 ### The horn, by simulation
 
@@ -50,7 +52,9 @@ The critic's last open note of round 1 was "an image that gives scale". The pair
 and 44 cm out from the wall, either side of a sideboard 52 cm high with a record player on it. An armchair (a new prop
 in the engine: a wooden frame, a seat and a back cushion) stands beside the left one at the same depth, so the two
 compare directly, with a floor lamp, a print and the window's light from the left (`frames.py room12`). It is page 2 of
-the look book, with two dimension lines on it, 1281 against 520.
+the look book: the photograph across the top with two dimension lines on it, 1281 against 520, and the words on a paper
+band below. Each speaker wears its own pattern (laid in the world, the right one stood on the grey strips of its
+eucalyptus), lit by a soft warm lamp of its own.
 
 ![The pair in a room](../../renders/2026-10-13/barkhorn/room12/room-eucalyptus.png)
 
@@ -60,12 +64,13 @@ A fresh reviewer saw only the pages (the room page new) and its card, with the r
 `critic/rounds/2026-10-13/lookbook-r2.json`). **6.0 blind** (round 1: 5.8), its estimate 7.0 with its changes. All
 eight were layout and copy, and all are applied:
 
-- **The cover:** the lockup at 150 %, and one line on what EARF makes: "Eleven floor-standing horn speakers, in three
-  lines."
+- **The cover:** one line on what EARF makes: "Eleven floor-standing horn speakers, in three lines." (Its lockup at
+  150 % went back to the closing page's size: the owner, "Brand is way too big".)
 - **The speaker pages:** the two photographs parted by a 16 px gutter, each trimmed 8 px, the panel darkened 14 % so
   they read as two photographs, not one with a crease (less on Lapis Lazuli, to keep its type at 4.5:1). Each
   speaker's surface now sits under its name, and the table keeps cabinet, horn and cover.
-- **The room page:** its type in black, and the two dimension lines.
+- **The room page:** its type in black, and the two dimension lines. (The owner then found the type hard to read over
+  the photograph: it now sits on a paper band below it.)
 - **A closing page (21):** the lockup, "Eleven speakers, three lines, one horn." and a line to write to. **The name and
   the address are the owner's to give** (`[NAME]`, `[EMAIL]` for now).
 - **The dividers, the specification and the drawings page:** each divider's sentence in two lines in black, the cabinet
