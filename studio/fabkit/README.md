@@ -62,7 +62,8 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
     material's minimum unless `min_wall` overrides it.
   - `Machined(material, process='cnc-mill', stock=None, setup_usd=None)`: from solid wood or metal. The blank defaults
     to the bounding box plus 5 mm a side. A `process` of `'cast'` pours its own volume (plus 10 %) instead of cutting a
-    blank, and `setup_usd` (a mould, a fixture) is paid once a line, spread over its pieces.
+    blank, and so does `'formed'` (a tube's end flared over a heated mandrel, a sheet bent); `setup_usd` (a mould, a
+    fixture, a former) is paid once a line, spread over its pieces.
 - **Shapes** (`geom.py`):
   - `box`, `cyl`, `prism`, `rounded_rect`, `circle_pts`, `revolve_profile` and `union`;
   - `slotted_panel(x0, z0, x1, z1, y0, y1, slots, holes)`: a panel standing in x-z with router slots (round-ended)
@@ -90,7 +91,10 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
   - **Pockets from the inner face.** These go in their own file, seen from that face and turned over left to right,
     with the through cuts on `REF_THROUGH` to register them.
   - **Faces a 2D file can't carry.** Bevels and roundovers are listed on `NOTES`, in the cut list and on the
-    drawings, in red.
+    drawings, in red, said as a shop would: faces of revolution grouped round their axis, a lone cone a countersink
+    ("4 holes countersunk 90 deg from the outer face"), several round one opening its edge rounded over. A hole
+    countersunk or rounded over from the outer face is cut at its bore (its opening at the face is wider, on the same
+    centre), not left out.
   - **Nesting.** It packs the set's parts per stock in shelves, largest first, turning a part 90 degrees only when it
     has no grain. An option's parts go on sheets of their own.
 - **Checks** (`checks.py`):
@@ -118,7 +122,8 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
   1. **General arrangement**, with the section line.
   2. **Section A-A** down the middle, each part's cut faces hatched at its own angle.
   3. **Exploded view**, ballooned to the parts list, one balloon a line, in two columns that close up and share
-     balloons between them so that every balloon fits the sheet.
+     balloons between them so that every balloon fits the sheet; when both columns are full, the balloons get
+     smaller (their figures with them, never under 2.5 mm) rather than run into the sheet's note.
   4. **Plain panels**, on one sheet.
   5. **Panels with features**, one sheet each, with a feature table. Each feature is marked P (pocket), H (through
      cut) or U (inner-face pocket) and listed with its size, its centre from the lower-left corner and its depth.

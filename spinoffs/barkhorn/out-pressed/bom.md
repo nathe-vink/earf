@@ -2,17 +2,17 @@
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|
-| left, right | cut | 4 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 420 x 880 | 184.80 |
-| top | cut | 2 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 510 x 420 | 107.10 |
-| bottom | cut | 2 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 510 x 420 | 107.10 |
-| front-panel | cut | 2 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 510 x 830 | 211.65 |
-| back | cut | 2 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 508 x 828 | 210.31 |
-| brace, brace-2 | cut | 4 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 510 x 285 | 72.67 |
-| rib-left-1, rib-right-1 | cut | 4 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 60 x 475 | 14.25 |
-| rib-back-1, rib-back-2 | cut | 4 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 60 x 779 | 23.37 |
-| rib-top, rib-bottom | cut | 4 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 295 x 60 | 8.85 |
+| left, right | cut | 4 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 420 x 880 | 147.84 |
+| top | cut | 2 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 520 x 420 | 87.36 |
+| bottom | cut | 2 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 520 x 420 | 87.36 |
+| front-panel | cut | 2 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 520 x 840 | 174.72 |
+| back | cut | 2 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 518 x 838 | 173.63 |
+| brace, brace-2 | cut | 4 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 520 x 295 | 61.36 |
+| rib-left-1a, rib-right-1a, rib-left-1b, rib-right-1b | cut | 8 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 60 x 480 | 11.52 |
+| rib-back-1, rib-back-2, rib-back-3, rib-back-4 | cut | 8 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 60 x 789 | 18.94 |
+| rib-top-1, rib-bottom-1, rib-top-2, rib-bottom-2 | cut | 8 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 305 x 60 | 7.32 |
 | woofer-ring | cut | 2 | 6 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 436 x 436 | 22.81 |
-| port-left, port-right | print | 4 | ASA, FDM (outdoor, paintable) | 408 cm3 | 36.55 |
+| port-left, port-right | print | 4 | ASA, FDM (outdoor, paintable) | 380 cm3 | 34.58 |
 | woofer | buy | 2 | FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm) | 393 frame, 356 cut-out, 165 deep | 194.00 |
 | amp-plate | buy | 2 | Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm | 315 x 120 x 55 plate, 291 x 96 recess | 422.40 |
 | waveguide | cast | 2 | Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented | 5222 cm3, 635 x 418 x 372 | 684.78 |
@@ -34,20 +34,24 @@
 | post-sockets | buy | 2 | The posts' brass fittings: four M10 x 1 threaded inserts bonded with epoxy into the waveguide's pads after casting, in holes drilled through a jig taken off the top's sockets (13 across; the front pair 10 long, the rear 14, the tie post's bored through), and four sockets knurled to 15 and pressed into the cabinet's top, or bonded with epoxy into acrylic, which a press fit would crack (15 long: a 12 bore 13 deep on a 2 floor; the cable post's floor with a 7 hole, the tie post's with a 6.5), turned to order, a set of eight |  | 48.00 |
 | post-sleeves | buy | 2 | Polyurethane sleeves 12 x 10 x 13, Shore A 90, a set of four: pressed into the posts' sockets, they centre the posts and stop them buzzing |  | 8.00 |
 | tie-rod | buy | 2 | The horn's tie-down: an M6 A2 threaded rod about 110 long, an M6 knurled thumb nut and a washer, and a flanged M6 threaded insert (body 9 x 10) for the top's underside: one for plastics in HDPE, bonded with epoxy in acrylic |  | 8.00 |
-| land-left, land-right | cut | 4 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 25 x 830 | 10.38 |
-| land-top, land-bottom | cut | 4 | 25 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 460 x 25 | 5.75 |
+| land-left, land-right | cut | 4 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 25 x 840 | 8.40 |
+| land-top, land-bottom | cut | 4 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 470 x 25 | 4.70 |
 | back-gasket | buy | 2 | EPDM sponge strip 25 x 3, closed cell, cut and joined as a frame on the back's four land strips, punched for its 16 screws |  | 8.00 |
 | back-screws | buy | 2 | 16 M5 button heads (ISO 7380, A2) on nylon washers: the back to the inserts in its land strips (M5 x 40 into HDPE or acrylic, M5 x 30 into plywood) |  | 8.00 |
 | feet | buy | 2 | Levelling feet M8, a 40 mm swivel base on a rubber pad, black, with lock nuts, a set of 4 |  | 18.00 |
-| port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 x 20 kind, in HDPE; M4 x 20 into tapped threads in acrylic; wood screws 4 x 20 in plywood), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
-| lining-bottom-1a, lining-bottom-1b | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 92 x 285 | 0.33 |
-| lining-left-2a, lining-right-2a | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 160 x 474 | 0.95 |
-| lining-left-2b, lining-right-2b | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 132 x 474 | 0.78 |
-| lining-left-3, lining-right-3 | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 317 x 129 | 0.51 |
-| lining-top-3a, lining-top-3b | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 191 x 285 | 0.68 |
-| lining-back-a, lining-back-d | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 61 x 779 | 0.59 |
-| lining-back-b | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 234 x 273 | 0.80 |
-| lining-back-c | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 234 x 113 | 0.33 |
+| port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 kind, 4 x 16 in the 20 mm HDPE; M4 x 20 into tapped threads in the 25 mm acrylic; wood screws 4 x 14 in the plywood; round 15: their holes stop 2 short of the panel's back), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
+| top-pad | cut | 2 | 20 mm Recycled HDPE sheet, pressed to order (a sheet press workspace) | 108 x 28 | 1.21 |
+| lining-bottom-1a, lining-bottom-1c | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 20 x 295 | 0.07 |
+| lining-bottom-1b | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 119 x 295 | 0.44 |
+| lining-left-2a, lining-left-2c, lining-right-2a, lining-right-2c | cut | 8 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 100 x 479 | 0.60 |
+| lining-left-2b, lining-right-2b | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 90 x 479 | 0.54 |
+| lining-left-3, lining-right-3 | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 332 x 139 | 0.58 |
+| lining-top-3a, lining-top-3c | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 128 x 295 | 0.47 |
+| lining-top-3b | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 119 x 295 | 0.44 |
+| lining-back-a, lining-back-f | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 44 x 789 | 0.43 |
+| lining-back-b, lining-back-e | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 39 x 789 | 0.38 |
+| lining-back-c | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 169 x 278 | 0.59 |
+| lining-back-d | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 169 x 118 | 0.25 |
 | woofer-fixings | buy | 2 | M6 threaded inserts for plastics (self-tapping, brass) with M6 x 25 button heads (A2), a set of 8 (the 15PR400's eight holes on 375, in the HDPE panel; HDPE will not hold a hammered T-nut) |  | 14.00 |
 | hf-fixings | buy | 2 | The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set |  | 6.00 |
 | weld-rod | buy | 2 | HDPE welding rod or extrusion-welder granulate, the panels' own polymer, about 0.4 kg a speaker (the cabinet without wood: corners hot-plate butt welded, the panel, the back and the braces extrusion welded inside) |  | 6.00 |
@@ -66,10 +70,10 @@
 |---|---|
 | buy | 2,845 |
 | cast | 1,646 |
-| cut | 2,707 |
+| cut | 2,395 |
 | lathe | 219 |
-| print | 146 |
+| print | 138 |
 | sheet metal | 171 |
-| total | 7,734 |
+| total | 7,414 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

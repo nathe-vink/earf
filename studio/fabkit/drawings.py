@@ -787,6 +787,13 @@ def sheet_exploded(pg, parts, numbers):
         cols[1].insert(0, cols[-1].pop())
     while len(cols[1]) > cap and len(cols[-1]) < cap:
         cols[-1].append(cols[1].pop(0))
+    # both columns full (more balloons than two columns hold): the balloons smaller, so the fuller column still fits
+    # between 60 and 272, under the sheet's note (round 15: 49 balloons ran the top one into it)
+    fullest = max(len(cols[-1]), len(cols[1]))
+    br0 = br
+    if fullest > 1:
+        br = min(br, (212.0 / (fullest - 1) - 0.4) / 2)
+    bpt = max(MIN_PT, pg.style.get('balloon_pt', MIN_PT) * min(1.0, br / br0))
     for side, xb in ((-1, left), (1, right)):
         col = sorted(cols[side], key=lambda a: -a[2])
         p_ = pitch if len(col) < 2 else max(2 * br + 0.4, min(pitch, 212.0 / (len(col) - 1)))   # closer, if it must, to fit
@@ -800,7 +807,7 @@ def sheet_exploded(pg, parts, numbers):
             pg.ax.plot([x, xb - side * br], [y, yb], color=INK, lw=0.18 * PT, zorder=5)
             pg.ax.plot([x], [y], marker='o', ms=1.6, color=INK, zorder=5)
             pg.ax.add_patch(Circle((xb, yb), br, fc='white', ec=INK, lw=0.3 * PT, zorder=6))
-            pg.ax.text(xb, yb, str(n), fontsize=pg.style.get('balloon_pt', MIN_PT), ha='center', va='center', zorder=7, **bkw)
+            pg.ax.text(xb, yb, str(n), fontsize=bpt, ha='center', va='center', zorder=7, **bkw)
     pg.head(f'Scale 1:{k}, parts drawn apart. Balloons are the parts list\'s numbers (last sheet).')
 
 
@@ -1001,8 +1008,8 @@ def sheet_featured(pg, rec, product):
             + (f" (option: {p.option})" if p.option else ''), size=8, fontweight='bold')
     if rec['under']:
         pg.text(x0, y0 - 13.5, f"inner-face pockets: dxf/{rec['name']}-underside.dxf (seen from that face)")
-    if rec['odd']:
-        pg.text(x0, y0 - 18, 'not in the cut file: ' + rec['odd'][0][:90], color=RED)
+    for i, odd in enumerate(rec['odd'][:3]):          # each on its own line (round 15: a frame's rounded mouth went unsaid)
+        pg.text(x0, y0 - 18 - 4.2 * i, ('not in the cut file: ' if i == 0 else '    and: ') + odd[:110], color=RED)
     feature_table(pg, feats, 300, 268)
     pg.head(f'Scale 1:{k}. As the router sees it from the outer face; DXF: dxf/{rec["name"]}.dxf. Marks listed at the right.', 62)
 

@@ -50,7 +50,9 @@ lists included (`glints.0` adds the first glint).
   exactly where a surface would mirror them into the camera.
 - **set:** a sweep (a cove of any size and colour, with flags and bounce cards) or a room (walls with real window
   openings, reveals, mullions and sills, skirting, wainscot, a ceiling, an oak floor by plank, plaster walls) and props
-  (rug, table, books, sideboard with a turntable, vase with branches, floor lamp, sofa, sheer curtain, framed print).
+  (rug, table, books, sideboard with a turntable, vase with branches, floor lamp, sofa, sheer curtain, framed print, and
+  a `cable`: a lead through `points`, `d` across, rounded through its bends and carried without twisting, a moulded
+  `plug` [length, across] on its first end, as a powered speaker's mains lead to the wall).
 - **product:** which product file, which flavour, how many copies where (`instances`), and:
   - `hide`: parts left out, by name pattern (on the product block for every copy, or on one instance for that copy);
   - `options`: the product's options this copy is fitted with (`"options": ["cloth"]` on an instance, or on the block
@@ -343,7 +345,7 @@ the mirror map's radiance in front of it.
 
 The critic may also move and turn the product within its set (`product.instances.N.position`, `.rotate_z`), set how
 far an exploded part is drawn out along its own axis (`product.explode.N.offset_m`), and dress a room with the
-engine's props (`set.props.N`: rug, table, books, sideboard, vase, lamp, sofa, armchair, curtain, frame; `off` takes one out).
+engine's props (`set.props.N`: rug, table, books, sideboard, vase, lamp, sofa, armchair, curtain, frame, cable; `off` takes one out).
 The product's geometry, flavour, marks and what is cut stay fixed.
 
 ## The loop

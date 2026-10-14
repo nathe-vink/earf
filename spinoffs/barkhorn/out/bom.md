@@ -9,7 +9,7 @@
 | back | cut | 2 | 18 mm Baltic birch plywood, BB/BB | 522 x 842 | 31.87 |
 | brace | cut | 2 | 18 mm Baltic birch plywood, BB/BB | 524 x 309 | 11.74 |
 | woofer-ring | cut | 2 | 6 mm MDF | 436 x 436 | 4.28 |
-| port-left, port-right | print | 4 | ASA, FDM (outdoor, paintable) | 340 cm3 | 31.77 |
+| port-left, port-right | print | 4 | ASA, FDM (outdoor, paintable) | 337 cm3 | 31.61 |
 | woofer | buy | 2 | FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm) | 393 frame, 356 cut-out, 165 deep | 194.00 |
 | amp-plate | buy | 2 | Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm | 315 x 120 x 55 plate, 291 x 96 recess | 422.40 |
 | waveguide | cast | 2 | Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented | 5222 cm3, 635 x 418 x 372 | 684.78 |
@@ -37,8 +37,9 @@
 | back-gasket | buy | 2 | EPDM sponge strip 25 x 3, closed cell, cut and joined as a frame on the back's four land strips, punched for its 16 screws |  | 8.00 |
 | back-screws | buy | 2 | 16 M5 button heads (ISO 7380, A2) on nylon washers: the back to the inserts in its land strips (M5 x 40 into HDPE or acrylic, M5 x 30 into plywood) |  | 8.00 |
 | feet | buy | 2 | Levelling feet M8, a 40 mm swivel base on a rubber pad, black, with lock nuts, a set of 4 |  | 18.00 |
-| port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 x 20 kind, in HDPE; M4 x 20 into tapped threads in acrylic; wood screws 4 x 20 in plywood), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
-| lining-bottom-1 | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 209 x 308 | 0.81 |
+| port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 kind, 4 x 16 in the 20 mm HDPE; M4 x 20 into tapped threads in the 25 mm acrylic; wood screws 4 x 14 in the plywood; round 15: their holes stop 2 short of the panel's back), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
+| top-pad | cut | 2 | 18 mm Baltic birch plywood, BB/BB | 108 x 28 | 0.22 |
+| lining-bottom-1 | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 201 x 308 | 0.78 |
 | lining-left-2, lining-right-2 | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 338 x 643 | 2.72 |
 | lining-top-2 | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 422 x 308 | 1.63 |
 | lining-back | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 422 x 793 | 4.18 |
@@ -58,9 +59,9 @@
 |---|---|
 | buy | 2,799 |
 | cast | 1,646 |
-| cut | 373 |
+| cut | 374 |
 | lathe | 219 |
-| print | 127 |
+| print | 126 |
 | sheet metal | 171 |
 | total | 5,335 |
 

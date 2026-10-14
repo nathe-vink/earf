@@ -433,9 +433,39 @@ def _tube(bpy, name, pts, r, mat, n=8):
     return _mesh(bpy, name, verts, faces, mat)
 
 
+def _smooth(P, per=10):
+    """A Catmull-Rom curve through the points P (Vectors), `per` points a span: it passes through each and rounds each
+    bend, as a lead lies."""
+    out = []
+    for i in range(len(P) - 1):
+        p0, p1, p2, p3 = P[max(i - 1, 0)], P[i], P[i + 1], P[min(i + 2, len(P) - 1)]
+        for k in range(per):
+            t = k / per; t2, t3 = t * t, t * t * t
+            out.append(0.5 * (2 * p1 + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 + (-p0 + 3 * p1 - 3 * p2 + p3) * t3))
+    out.append(P[-1])
+    return out
+
+
+def _cable(bpy, name, P, r, mat, n=10):
+    """A round lead along the points P (Vectors), its rings carried along without twisting (each ring's frame is the
+    last one's, squared to the new direction), so no bend pinches."""
+    verts, faces = [], []
+    a = None
+    for i, p in enumerate(P):
+        t = (P[min(i + 1, len(P) - 1)] - P[max(i - 1, 0)]).normalized()
+        a = t.orthogonal().normalized() if a is None else (a - a.dot(t) * t).normalized()
+        b = t.cross(a)
+        verts += [p + r * (math.cos(2 * math.pi * k / n) * a + math.sin(2 * math.pi * k / n) * b) for k in range(n)]
+    for i in range(len(P) - 1):
+        for k in range(n):
+            faces.append((i * n + k, i * n + (k + 1) % n, (i + 1) * n + (k + 1) % n, (i + 1) * n + k))
+    return _mesh(bpy, name, verts, faces, mat)
+
+
 def prop(bpy, name, p, mats):
     """Props, each at `position` [x, y] (its centre on the floor), turned `rotate_z` degrees: rug, table, books,
-    sideboard (with a turntable), vase (with branches), lamp, sofa (`seats` 1: one seat), armchair, curtain, frame."""
+    sideboard (with a turntable), vase (with branches), lamp, sofa (`seats` 1: one seat), armchair, curtain, frame,
+    cable (a lead through `points`, with a moulded plug at its first end)."""
     import random
     kind = p['kind']; x, y = p['position']; rot = math.radians(p.get('rotate_z', 0))
     rnd = random.Random(p.get('seed', 7))
@@ -574,6 +604,24 @@ def prop(bpy, name, p, mats):
                 a0 = j * (nx + 1) + i
                 faces.append((a0, a0 + 1, a0 + nx + 2, a0 + nx + 1))
         made.append(_mesh(bpy, name, verts, faces, m))
+    elif kind == 'cable':
+        # a lead (a speaker's mains lead) through `points` [[x, y, z], ...] in metres from `position` (on the floor),
+        # rounded through its bends, `d` across; `plug` [length, across]: a moulded plug on its first `length`. Keep
+        # the points a radius off the floor: the curve passes through them
+        d = p.get('d', 0.007)
+        m = M.make(bpy, name, 'rubber', {'color': p.get('color', '#151515'), 'roughness': p.get('roughness', 0.55)})
+        P = _smooth([Vector(q) for q in p['points']], p.get('per', 12))
+        for q in P:
+            q.z = max(q.z, d / 2)
+        made.append(_cable(bpy, name, P, d / 2, m))
+        if p.get('plug'):
+            L, D = p['plug']
+            run, head = 0.0, [P[0]]
+            for q0, q1 in zip(P, P[1:]):
+                run += (q1 - q0).length; head.append(q1)
+                if run >= L:
+                    break
+            made.append(_cable(bpy, name + '-plug', _smooth(head, 4), D / 2, m, n=14))
     elif kind == 'frame':
         # a framed print on a wall: position [x, y] is its centre, z its centre height, it faces -y before rotate_z
         w, hh = p.get('size', [0.6, 0.8]); z = p.get('z', 1.5)

@@ -91,6 +91,7 @@ def analyse(part, centre):
     rec = dict(name=part.name, axis='xyz'[axis], sign=sign, T=T, outline=None, holes=[], circles=[], pockets={},
                under={}, odd=[], frame=(right.tolist(), up.tolist()))
     outer_open, inner_open, floor_inner, under_outer, under_inner = [], [], [], [], []
+    slant = []                                                 # faces neither parallel nor square to the sheet
     for f in part.solid.faces():
         c = f.center()
         try:
@@ -102,7 +103,8 @@ def analyse(part, centre):
         if along < 1e-4:
             continue                                           # a wall square to the sheet: the cutter's side
         if f.geom_type.name != 'PLANE' or along < 1 - 1e-4:
-            rec['odd'].append(f'{f.geom_type.name.lower()} face at {"xyz"[axis]} {a:.1f}, {math.degrees(math.acos(min(1, along))):.0f} deg off the sheet')
+            bc = f.bounding_box().center()                      # a face of revolution's box is centred on its axis
+            slant.append((f.geom_type.name.lower(), np.array([bc.X, bc.Y, bc.Z]), math.degrees(math.acos(min(1, along))), a))
             continue
         outward = np.sign(fn[axis]) == sign
         if abs(a - a_out) < TOL and outward:
@@ -134,8 +136,14 @@ def analyse(part, centre):
         M, Z = tab
         m, s_ = sig(w)
         return bool(len(Z)) and bool(np.any((np.linalg.norm(M - m, axis=1) < 0.3) & (np.abs(Z - s_) < 0.6)))
+    def widened(w, tab):                                   # the same opening, wider at the outer face (countersunk, rounded over)
+        M, Z = tab
+        m, s_ = sig(w)
+        return bool(len(Z)) and bool(np.any((np.linalg.norm(M - m, axis=1) < 0.3) & (Z > s_ + 0.6)))
     t_open, t_under_in, t_under_out = table(outer_open + floor_inner), table(under_inner), table(under_outer)
     through = [w for w in inner_open if matches(w, t_open)]
+    # a hole countersunk or rounded over from the outer face: cut at its bore, the countersink or the roundover on NOTES
+    through += [w for w in inner_open if not matches(w, t_open) and widened(w, table(outer_open))]
     t_through = table(through)
     through += [w for w in outer_open if matches(w, t_under_in) and not matches(w, t_through)]
     for w in through:
@@ -144,12 +152,38 @@ def analyse(part, centre):
             rec['circles'].append((circ[0], circ[1]))
         else:
             rec['holes'].append(_wire_poly(w))
-    stray = [w for w in inner_open if not matches(w, t_open) and not matches(w, t_under_out)]
+    stray = [w for w in inner_open if not matches(w, t_open) and not matches(w, t_under_out) and not widened(w, table(outer_open))]
     if stray:
         rec['odd'].append(f'{len(stray)} opening(s) in the inner face that reach neither face nor a pocket')
     if rec['outline'] is None:
         raise ValueError(f'{part.name}: no outer face found')
+    rec['odd'] = _slants(rec, slant) + rec['odd']
     return rec
+
+
+def _slants(rec, faces):
+    """The faces a 2D file cannot carry, said as a shop would: those of revolution grouped round their axis, a lone cone a countersink, several faces round one opening its edge rounded over
+    (or chamfered); any other face alone, where it is. Positions from the outline's lower left, as in the file."""
+    o = to2d(rec, rec['outline']).min(axis=0)
+    groups, out = {}, []
+    for kind, c3, deg, a in faces:
+        if kind in ('cone', 'torus', 'sphere', 'cylinder', 'revolution', 'bspline'):
+            q = to2d(rec, c3)[0] - o
+            groups.setdefault((round(q[0], 1), round(q[1], 1)), []).append((kind, deg, a))
+        else:
+            out.append(f'{kind} face at {"xyz"["xyz".index(rec["axis"])]} {a:.1f}, {deg:.0f} deg off the sheet')
+    sinks = {}
+    for (x, y), g in groups.items():
+        if len(g) == 1 and g[0][0] == 'cone':
+            sinks.setdefault(round(2 * (90 - g[0][1])), []).append((x, y))
+        else:
+            r = [rr for c, rr in rec['circles'] if np.allclose(to2d(rec, c)[0] - o, (x, y), atol=0.3)]
+            what = f'the {2 * r[0]:g} hole' if r else 'the opening'
+            out.append(f'{what} at {x:g}, {y:g} rounded over from the outer face ({len(g)} faces, {min(d for _, d, _ in g):.0f} to '
+                       f'{max(d for _, d, _ in g):.0f} deg off the sheet)')
+    for ang, at in sorted(sinks.items()):
+        out.insert(0, f'{len(at)} hole{"s" if len(at) > 1 else ""} countersunk {ang:g} deg from the outer face')
+    return out
 
 
 def to2d(rec, P):

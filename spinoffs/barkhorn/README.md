@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 14**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 15**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -18,7 +18,132 @@ drawn the same way. Round 13 lines every cabinet, the lining showing as cloud th
 makes the design real where a reality check found it was not: what holds the horn, seals the box, encloses the
 amplifier, protects the drivers and carries the wiring. Round 14 settles what the owner chose from that: the back comes
 off, the speaker stands on levelling feet, and the ports are round tubes framed square. It draws the Cloud cabinet in
-cemented acrylic and proposes a price, and shows the choices still open side by side.
+cemented acrylic and proposes a price, and shows the choices still open side by side. Round 15 builds what the owner
+picked from those: rounded port mouths, the 20 mm sheet for every cabinet without wood (the Cloud's in acrylic), the
+Cloud's ports in its own acrylic, and the price: $16,000 a pair for Bark and Crag and $19,000 for Cloud, sold direct.
+
+## Round 15: the owner's picks of 2026-10-14
+
+Round 14's open choices, asked together, each with the renders beside it.
+
+| the question | the answer | what changed |
+|---|---|---|
+| The ports: which mouth, and front or back? | "Rounded, in front (Recommended)" | **Both mouths rounded on R8**, in every cabinet; the ports stay in front (below). |
+| The Cloud's ports: black, or in its own acrylic? | "In its acrylic (Recommended)" | **The Cloud's ports in its acrylic**: a tube flared over a mandrel, cemented into a frame cut from sheet (below). |
+| How should the pressed sheet for Bark and Crag be made? | "20 mm, more ribs (Recommended)" | **`pressed.py` at 20 mm**, with round 14's ribs (below). The Cloud stays 25 mm. |
+| What should EARF charge for a pair at launch? | "$16k and $19k, direct (Recommended)" | **Decided**: $16,000 a pair for Bark and Crag, $19,000 for Cloud, sold direct (below). |
+
+Then four more, from what those answers opened:
+
+| the question | the answer | what changed |
+|---|---|---|
+| Should the Cloud go to 20 mm acrylic too? | "Yes, 20 mm (Recommended)" | **`cloud.py` at 20 mm** on its own ribs (below). |
+| Should the look book show the price? | "Not yet (Recommended)" | It stays out until a shop's quote confirms the cost: the figures are still budgets. |
+| What should come next? | "Keep refining the design" | No requests for quotes yet; the design goes on. |
+| The power leads in the room photograph? | "Show them, tidy (Recommended)" | **Each speaker's mains lead** is in the room (below). |
+
+### The ports, rounded
+
+Each mouth is rounded on R8: the front one in the frame, the inner one rolled out into a bell, so the air turns the
+corner at full output without chuffing (round 14). A rounded end cannot be trimmed, so the ports are no longer cut to
+tune on each speaker: on the first sample three are made 10 mm apart, the one whose impedance minimum falls at the box's
+38 Hz is kept, and the rest are made to it.
+
+Round 14's port screws went 15 deep into the panel, which ran them out through the back of the 20 mm sheet and the
+plywood's 18. Their length now follows the panel: 4 x 16 in the 20 mm HDPE, 4 x 14 in the plywood, M4 x 16 into the
+Cloud's tapped 20 mm acrylic, each hole stopping 2 short of the panel's back.
+
+### The pressed sheet, 20 mm
+
+`pressed.py` is now 20 mm, with the ribs of round 14's study model: two up each side, four up the back (two each side
+of the amplifier), two under the top and two over the bottom. As plates, the panels ring at or above the 25 mm
+cabinet's. Against the 25 mm cabinet:
+
+| | 25 mm (round 14) | 20 mm (now) |
+|---|---|---|
+| sheet, a cabinet | 52 kg | 47 kg |
+| net volume | 124 L | 131 L |
+| the ports' length | 251 mm | 233 mm |
+| -3 dB | 50 Hz | 49 Hz |
+| the ports' first pipe resonance (the preset's notch) | 515 Hz | 543 Hz |
+| sheets a pair | ten 1 m sheets of 25 mm | ten 1 m sheets of 20 mm |
+| the parts list, a pair | $7,734 | $7,414 |
+
+Thinner sheet left only 5 mm of the top under the horn's brass sockets, too little for the tie rod's insert or the HF
+lead's gland. So a pad of the same sheet (108 x 28) is welded under the top between the rear posts: the insert and the
+gland's thread now have 25 mm to hold in. The plywood cabinet had the same trouble (3 mm under its sockets: the tie rod
+went to a flange nut epoxied below, and the gland held by about two threads). It now gets the same pad, glued and screwed.
+
+### The Cloud: 20 mm, its ports in its acrylic
+
+The Cloud goes to 20 mm too, but on round 14's ribs (one up each side, two up the back, one under the top and one over
+the bottom), not the pressed cabinet's doubled ones. Acrylic is about three times as stiff as HDPE, so a 20 mm acrylic
+panel is stiffer than the 25 mm HDPE one was, at the same weight a square metre. The top's rib now ends at the pad
+under the top, which the Cloud needs too at 20 mm.
+
+| | 25 mm (round 14) | 20 mm (now) |
+|---|---|---|
+| sheet, a cabinet | 65 kg | 53 kg |
+| net volume | 124 L | 135 L |
+| the ports' length | 251 mm | 224 mm |
+| the ports' first pipe resonance | 515 Hz | 560 Hz |
+| sheets a pair | three 4 x 8 ft of 25 mm | three 4 x 8 ft of 20 mm |
+| the parts list, a pair | $8,530 (with the acrylic ports) | $7,968 |
+
+Its ports are now its own acrylic, in two parts cemented together:
+
+- **The frame** is cut from 8 mm cast acrylic on the router. It is 140 square, its corners R10, and it is thick enough
+  to hold the whole rounded front mouth (R8), so no joint shows in the mouth. The mouth is rounded over and flame polished,
+  and the frame has four holes countersunk for M4 screws into tapped threads.
+- **The tube** is cast acrylic, 121 x 4 (113 bore). It is cut to the length found on the first sample, and its inner
+  end is flared to R8 over a heated mandrel and annealed. It is then cemented square into the frame's back face.
+
+Two things came into the drawing kit with it. A formed part (a tube flared over a mandrel) is now priced by its own
+volume, as a casting is. And a sheet part's holes that are countersunk or rounded over from its face are now cut at
+their bore, the countersink or the rounding said in words on the cut file ("4 holes countersunk 90 deg from the outer
+face", "the 113 hole at 70, 70 rounded over from the outer face"). Until now such a hole was left out of the cut file.
+
+### The price, decided
+
+The owner picked round 14's proposal: **$16,000 a pair for Bark and Crag and $19,000 for Cloud, sold direct.**
+`price.py` works each cabinet's cost a pair from its parts list again, on the picked cabinet, and prints the price as a
+multiple of it:
+
+| a pair | Bark and Crag (pressed, 20 mm) | Cloud (acrylic, 20 mm) |
+|---|---|---|
+| cost, a first batch of 25 pairs | $7,920 | $8,540 |
+| cost, a leaner batch (the sheet pressed in-house, trade prices on the drivers and the amplifier, batches of 50) | $6,230 | $7,810 |
+| **the price, sold direct** | **$16,000** | **$19,000** |
+| the price over the first batch's cost | 2.0 | 2.2 |
+| the price over the leaner batch's cost | 2.6 | 2.4 |
+
+The 20 mm sheet takes about $270 off a Bark or Crag pair's cost on a first batch: about $310 less sheet, and an hour
+more welding. The Cloud's 20 mm acrylic and its own ports take about $530 off its cost: about $560 less sheet, the
+ports about $30 more (the tubes, their mandrel and an hour forming and cementing them). The figures are still budgets,
+not quotes (round 14), so the price stays out of the look book until a shop's quote confirms them (the owner: "Not
+yet").
+
+### The look book
+
+All eleven speakers are rendered again on the picked cabinet, so the rounded ports and the feet show on every speaker
+page. So are the horn pages and the room. The Cloud speakers now come from their own build: 20 mm acrylic, their ports
+in it. The drawings page and the specification's views come from the 20 mm drawing set.
+
+![The back, on its gasket and sixteen screws](../../renders/2026-10-14/barkhorn/back15.png)
+
+From round 13's list of what the renders left out:
+
+- **The shell's edges** are broken on 1 mm in the render materials. No sheet's edge stays sharp once it is welded and
+  planed, cemented and polished, or wrapped in bark. The seams between panels now catch the light as the welds would.
+- **The back** is rendered for the first time (`frames.py back15`), on its gasket and sixteen screws, with the
+  amplifier's plate and the rating plate beside it.
+- **The mains leads** (the owner: "Show them, tidy"). Each runs from its plug low on the amplifier's plate, down behind
+  the speaker to the floor, back to the wall and along the skirting to a socket behind the sideboard (`mains_lead` in
+  `frames.py`, drawn with the engine's new `cable` prop). Seen from the room, each is a thin dark line along the
+  skirting.
+
+![The pair in the room again, on the picked cabinet, their leads along the skirting](../../renders/2026-10-14/barkhorn/room15/room-eucalyptus.png)
+- Still left out: the horn's cap screws and its parting line.
 
 ## Round 14: the owner's answers of 2026-10-14
 
@@ -1059,7 +1184,7 @@ These are renders of the idea. The materials are procedural (`pressed_eucalyptus
 | a bass cabinet about 1 : 1.6 | 560 wide, 880 tall, 420 deep, on four levelling feet 12 above the floor (round 14) |
 | a thin walnut shell framing a pale front panel set back in it | The shell (sides, top, bottom, back) is 18 mm birch plywood faced in **bark**, wrapped round its front edges. The front panel is set back 24 mm and painted pale. 24 mm is deep enough for a cover to clear the cone. |
 | a 15 in black cone in a wide off-white ring, its centre a little above the middle | FaitalPRO 15PR400-8 (treated paper cone, 99 dB), flush in its rebate, its centre 45.7 % down. A 6 mm MDF ring 436 across lies over its frame, with pockets behind for the screw heads. |
-| a small square port at the bottom right | A round port in each bottom corner (round 6), 113 across inside, in a 140 square frame printed in one with it in black (round 14, the owner: "cylindrical with square framing around the end"). In the pressed cabinet it is 250 long, the box 124 L net, tuned to 38 Hz, its -3 dB point about 50 Hz in half space before room gain (`.venv-fab/bin/python spinoffs/barkhorn/product.py` for the plywood cabinet's numbers). |
+| a small square port at the bottom right | A round port in each bottom corner (round 6), 113 across inside, in a 140 square frame printed in one with it in black (round 14, the owner: "cylindrical with square framing around the end"; the Cloud's in its own acrylic, round 15), both its mouths rounded on R8 (round 15). In the pressed cabinet (20 mm, round 15) it is 233 long, the box 131 L net, tuned to 38 Hz, its -3 dB point about 49 Hz in half space before room gain (`.venv-fab/bin/python spinoffs/barkhorn/product.py` for the plywood cabinet's numbers). |
 | a frosted, translucent rounded-rectangle waveguide about 629 x 366 (1.72 : 1), wider than the cabinet, its rim thin, the throat a dark dot near its centre | Since round 4: 626 x 361 outside, a 610 x 346 mouth, a 10 mm rim rounded over. Its flare is 200 deep, with the pod 70 behind it. It is a superellipse waveguide: round at the 1 in throat, squaring toward the mouth (corners about 70), covering about 113 x 82 degrees. It is a 6 mm shell cast in tinted translucent polyurethane, its neck solid, bead-blasted to frost. (Rounds 1 to 3: 633 x 292, read wrongly as 2.1 : 1.) |
 | it stands on four slim posts, a wide pair in front and a narrow pair behind, its rim just above the cabinet | Since round 4, four posts in that layout: stainless lamp tube 10 x 7, screwed M10 x 1 into brass inserts in pads under the horn, their feet standing in brass sockets in the top (round 11), the HF pair inside a rear one; the rim 39 above the top. (Rounds 1 to 3: three rods, 80 clear.) |
 | (not visible) | A B&C DE1085TN-16 compression driver (2 in exit, titanium diaphragm) sits in the pod (round 5). A Hypex FusionAmp FA122 on the cabinet's back, in a sealed compartment of its own (round 13), crosses at about 800 Hz and pads the HF channel about 9 dB. Part of the pad is a passive L-pad after the amplifier, so its hiss stays inaudible. The back comes off (round 14). |
@@ -1150,19 +1275,24 @@ and `birch-clear`, `birch-black`, `eucalyptus-green` and the rest take the other
 - the checks (no clashes);
 - the parts list (`bom.md`): about $5,340 for the pair at budget rates, every line priced since round 14 (the small
   parts as marked estimates) but the bark itself; the moulds are spread over the one pair;
-- 24 A3 drawing sheets (`out/drawings/barkhorn-sheets.pdf`): the assembly, each sheet part (the ring and the disc's
+- 26 A3 drawing sheets (`out/drawings/barkhorn-sheets.pdf`): the assembly, each sheet part (the ring and the disc's
   frame with their magnet pockets, the back's land strips with their inserts), the cast horn, its cap, the driver's
   adaptor ring, the posts, the amplifier's compartment, the parts list and the notes;
 - the render model.
 
-`pressed.py` builds the cabinet without wood, the line since round 6, into `out-pressed/`. Every panel, brace and rib
-nests on ten 1 m sheets of 25 mm HDPE for the pair, the rings on one of 6 mm, the disc's frames on one of 12 mm and
-the lining on four 1200 x 600 batts. The parts list is about $7,730 for the pair: the sheet now priced at a
-made-to-order rate (about $400 a square metre at 25 mm), about $2,690 of it. There are 24 drawing sheets.
+`pressed.py` builds the cabinet without wood, the line since round 6, into `out-pressed/`. Every panel, brace, rib and
+the pad under the top nests on ten 1 m sheets of 20 mm HDPE for the pair (round 15), the rings on one of 6 mm, the
+disc's frames on one of 12 mm and the lining on four 1200 x 600 batts. The parts list is about $7,410 for the pair: the
+sheet priced at a made-to-order rate (about $320 a square metre at 20 mm), about $2,380 of it. There are 26 drawing
+sheets.
 
-`cloud.py` builds the Cloud cabinet into `out-cloud/` (round 14): the same geometry in tinted cast acrylic, 25 mm, on
-three 4 x 8 ft sheets for the pair, cemented and annealed, its inserts and sockets bonded. The parts list is about
-$8,330 for the pair. There are 24 drawing sheets.
+`cloud.py` builds the Cloud cabinet into `out-cloud/` (round 14): the same geometry in tinted cast acrylic, 20 mm since
+round 15 on round 14's ribs, on three 4 x 8 ft sheets for the pair, cemented and annealed, its inserts and sockets
+bonded; its ports' frames on one sheet of 8 mm, their tubes formed (round 15). The parts list is about $7,970 for the
+pair. There are 28 drawing sheets.
+
+`price.py` works each cabinet's cost a pair from its parts list and prints the price as a multiple of it (rounds 14
+and 15).
 
 The shots are in `studio/shots/barkhorn/`:
 
@@ -1172,18 +1302,19 @@ The shots are in `studio/shots/barkhorn/`:
 - `back`: the waveguide from behind;
 - one folder per comparison sheet, one shot per frame: `covers/` (round 2), `front/`, `study/`, `experiments/`,
   `proposal/` (round 3), `horn/`, `resin/`, `pressed/` and `pick/` (round 4), `horn5/`, `shells/`, `woodfree/` and
-  `pick5/` (round 5), `pick6/`, `printed/` and `cabinets/` (round 6), `discs/` and `lookbook/` (round 7).
+  `pick5/` (round 5), `pick6/`, `printed/` and `cabinets/` (round 6), `discs/` and `lookbook/` (round 7), `options14/`
+  (round 14), `lookbook15/`, `horn15/`, `room15/` and `back15/` (round 15).
 
 ## Open questions for the owner
 
-1. **The ports' mouths.** Plain, as you described them, or rounded (quieter at full output)? Either is a frame of
-   the same size; the renders are under round 14.
-2. **The Cloud's ports.** Black, as the other lines have them, or in the cabinet's own acrylic?
-3. **The pressed sheet.** 25 mm planed as now, 20 mm with more ribs, or rotomoulded (speckled, from a mould)?
-4. **Price.** $16,000 a pair for Bark and Crag and $19,000 for Cloud, sold direct (the proposal), or another
-   positioning?
+The owner's direction since round 15: keep refining the design (no requests for quotes yet).
 
-Kept as drawn unless you would rather otherwise: the ports in front (at the back they would want the wall 20 to 30 cm
-away). Next, once these are chosen: the full re-render with what round 13's reality check found the renders leave out
-(the shell's weld lines and broken edges, the horn's cap screws and parting line, the cables in the room, and a view of
-the back with its sixteen screws).
+1. **The horn's cap.** It closes the pod behind the driver and comes off to reach the HF lead and the tie rod's nut.
+   A quarter-turn twist-lock on three lugs with an O-ring, so that no screw shows from behind; or three small screws
+   (in the pod's side, or through the cap's face)?
+2. **The back's screws.** The sixteen button heads round the back: stainless (as drawn), or black?
+3. **The posts.** Stainless as photographed, or another finish (brushed brass, black)?
+
+Still left out of the renders: the horn's cap screws or lock, whichever is chosen, and the amplifier plate's own
+sockets and switch (the renders show it as a plain black plate; it stays open on the back, since it sheds the
+amplifier's heat).

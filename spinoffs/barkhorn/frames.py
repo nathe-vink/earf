@@ -31,7 +31,10 @@ Sets:
 - room12 (round 12): the pair in a living room, for scale;
 - options14 (round 14): the owner's open choices side by side: the ports' mouths (plain or rounded), the Cloud's ports
   (black or in the cabinet's acrylic) and the sheet's routes (25 mm planed, 20 mm with more ribs, rotomoulded), each
-  route whole, its corner close to and cut open.
+  route whole, its corner close to and cut open;
+- lookbook15, horn15, room15 (round 15): the look book's speakers, horns and room again on the cabinet the owner
+  picked (rounded port mouths, levelling feet, the 20 mm sheet; the Cloud's in its own build, 25 mm acrylic, its
+  ports in its acrylic); back15, the speaker from behind, its back on its sixteen screws.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -46,7 +49,9 @@ PRODUCT = 'studio/products/barkhorn.json'
 STUDY = os.path.join(HERE, 'out', 'study')
 DAY = {'covers': '2026-10-10', 'front': '2026-10-11', 'study': '2026-10-11', 'proposal': '2026-10-11',
        'experiments': '2026-10-11', 'horn10': '2026-10-13', 'lookbook2': '2026-10-13', 'room12': '2026-10-13',
-       'options14': '2026-10-14'}   # where each set's renders live (a set first made that day; the rest 2026-10-12)
+       'options14': '2026-10-14', 'lookbook15': '2026-10-14', 'horn15': '2026-10-14', 'room15': '2026-10-14',
+       'back15': '2026-10-14'}
+# where each set's renders live (a set first made that day; the rest 2026-10-12)
 
 FRONT_CAM = {'position': [-0.78, -2.6, 1.0], 'target': [0.0, 0.0, 0.64], 'lens_mm': 66, 'level': True}
 THREE_Q = {'position': [1.45, -2.7, 1.45], 'target': [0.0, 0.08, 0.66], 'lens_mm': 60, 'level': True}
@@ -96,6 +101,7 @@ PHOTO = {'position': [0.75, -2.9, 0.98], 'target': [0.0, 0.0, 0.78], 'lens_mm': 
 CLOSE = {'position': [0.55, -1.75, 1.18], 'target': [0.0, 0.1, 1.09], 'lens_mm': 70, 'level': True}
 CORNER = {'position': [0.78, -0.86, 0.8], 'target': [0.22, -0.16, 0.56], 'lens_mm': 60, 'level': True}
 PRESSED = 'studio/products/barkhorn-pressed.json'      # pressed.py's build
+CLOUD = 'studio/products/barkhorn-cloud.json'          # cloud.py's (round 15: the Cloud speakers rendered from their own build)
 # round 5: the glow lamp hidden from rays through clear resin (it would show through it as a bright patch)
 GLOW5 = {'glow': {**GLOW['glow'], 'transmission': False}}
 # looking into the horn from in front and a little above, at the throat
@@ -195,6 +201,30 @@ ROOM12_LIGHTS = {
                     'irradiance': 1.4, 'color': '#FFF1DC', 'specular': 0, 'transmission': False}
        for k, x in (('L', -1.27), ('R', 1.27))},
 }
+
+# round 15 (the owner: "Show them, tidy"): each speaker's mains lead, from the plug in the amplifier's inlet low on its
+# plate, down behind the speaker to the floor, back to the wall and along the skirting to a socket behind the sideboard
+INLET_MM = [(280.0, 421.0, 407.0), (280.0, 480.0, 400.0), (284.0, 545.0, 330.0), (288.0, 575.0, 140.0), (292.0, 600.0, -8.5)]
+ORIGIN_MM = (280.0, 211.4, -12.0)                       # the pressed build's origin (its engine file's origin_mm)
+
+
+def mains_lead(inst, skirting_y=0.8285, socket_x=0.60):
+    """The lead for a speaker placed as `inst` ({position, rotate_z}) in round 12's room: its points in the room's
+    metres, the speaker's own (INLET_MM, from its CAD) turned and moved with it, then along the floor to the wall."""
+    import math
+    a = math.radians(inst['rotate_z']); c, s_ = math.cos(a), math.sin(a)
+    x0, y0 = inst['position'][:2]
+    pts = []
+    for X, Y, Z in INLET_MM:
+        lx, ly, lz = (X - ORIGIN_MM[0]) / 1000, (Y - ORIGIN_MM[1]) / 1000, (Z - ORIGIN_MM[2]) / 1000
+        pts.append([round(x0 + lx * c - ly * s_, 4), round(y0 + lx * s_ + ly * c, 4), round(lz, 4)])
+    side = 1 if x0 < 0 else -1                          # toward the room's middle
+    xe = pts[-1][0]
+    pts += [[xe + 0.04 * side, 0.74, 0.0035], [xe + 0.14 * side, skirting_y, 0.0035],
+            [-side * (socket_x + 0.10), skirting_y, 0.0035], [-side * (socket_x + 0.02), skirting_y, 0.012],
+            [-side * socket_x, skirting_y, 0.16]]
+    return {'kind': 'cable', 'position': [0.0, 0.0], 'points': pts, 'd': 0.007, 'plug': [0.05, 0.024]}
+
 
 # round 14 (the owner's answers of 2026-10-14): the choices still open, side by side. The ports close to (the right one,
 # from the front and a little above, the feet's shadow gap below); Poison's lower half with its ports black or in its
@@ -387,6 +417,31 @@ SETS = {
                                      camera=CUT14, size=[1000, 1100], stage=sweep('#B7C3B4'), sky=STUDIO, at={'rotate_z': -40},
                                      materials=mats, hide=['lining-*'], cutaway=CUTAWAY14)]
            for key, prod, label, mats in SHEETS14}}),
+    # round 15 (the owner's picks of 2026-10-14): the look book's frames again on the cabinet as picked, each line on its
+    # own build
+    'lookbook15': dict(title='EARF: the look book, round 15', camera=LOOK2, rows={
+        f'{line}: {label}': [F(f'look-{key}-on', flav, 'cover on', product=CLOUD if line == 'Cloud' else PRESSED, lights=GLOW5,
+                               size=[1080, 2160], stage=sweep(c), sky=STUDIO),
+                             F(f'look-{key}-off', flav, 'cover off', product=CLOUD if line == 'Cloud' else PRESSED, lights=GLOW5,
+                               size=[1080, 2160], stage=sweep(c), sky=STUDIO, hide=['cloth-disc'])]
+        for line, key, flav, label, c in LOOKS}),
+    'horn15': dict(title='EARF: the horn from the side and from behind, round 15', camera=HORN10, rows={
+        f'{line}: {label}': [F(f'horn-{key}-side', flav, 'from the side', product=CLOUD if line == 'Cloud' else PRESSED, lights=GLOW5,
+                               size=[1200, 900], stage=sweep(c), sky=STUDIO, at={'rotate_z': 115}),
+                             F(f'horn-{key}-back', flav, 'from behind', product=CLOUD if line == 'Cloud' else PRESSED, lights=GLOW5,
+                               size=[1200, 900], stage=sweep(c), sky=STUDIO, at={'rotate_z': 155})]
+        for line, key, flav, label, c in LOOKS if key in HORN10_KEYS}),
+    'room15': dict(title='EARF: the pair in a room, round 15', camera=ROOM12_CAM, rows={
+        'room': [F('room-eucalyptus', 'eucalyptus-printed', 'eucalyptus, in a room', product=PRESSED, lights=ROOM12_LIGHTS,
+                   size=[2880, 1620], stage={**ROOM12_SET, 'props': ROOM12_SET['props'] + [mains_lead(q) for q in ROOM12_PAIR]}, sky=ROOM12_SKY, pair=ROOM12_PAIR, sun=ROOM12_SUN,
+                   render=ROOM12_RENDER, materials={'bark': {'space': 'object'}, 'horn': {'space': 'object'}})]}),
+    # the back (round 13's reality check: the renders never showed it): on its gasket and sixteen screws, the amplifier's
+    # plate and the rating plate beside it, the feet's shadow under it
+    'back15': dict(title='EARF: the back, round 15', camera=LOOK, rows={
+        'Bark: from behind': [F('back-eucalyptus', 'eucalyptus-printed', 'pressed, 20 mm', product=PRESSED, lights=GLOW5,
+                                size=[840, 1100], stage=sweep('#B7C3B4'), sky=STUDIO, at={'rotate_z': 232})],
+        'Cloud: from behind': [F('back-poison', 'eucalyptus-y2k-green', 'acrylic', product=CLOUD, lights=GLOW5,
+                                 size=[840, 1100], stage=sweep('#D9E4D3'), sky=STUDIO, at={'rotate_z': 232})]}),
     'experiments': dict(title='barkhorn: material experiments', camera=RIGHT_Q, rows={
         'cabinet': [F('pressed-eucalyptus', 'eucalyptus-pressed', 'pressed recycled plastic, eucalyptus', ['bark-face', 'cloth-disc']),
                     F('pressed-birch', 'birch-pressed', 'pressed recycled plastic, birch', ['bark-face', 'cloth-disc'])],
@@ -505,6 +560,8 @@ def main():
     ap.add_argument('--only', nargs='*', default=[], help='frame names to render again (e.g. birch-disc-charcoal)')
     ap.add_argument('--all', action='store_true', help='render every frame again')
     ap.add_argument('--build', action='store_true', help='build the set\'s study models again')
+    ap.add_argument('--rows', nargs='*', default=[], help='render only the rows whose name holds one of these (e.g. Bark Crag); '
+                    'the grid is set from whatever is rendered')
     a = ap.parse_args()
     S = SETS[a.set]
     need = sorted({os.path.basename(fr['product'])[len('barkhorn-'):-len('.json')] for frames in S['rows'].values() for fr in frames
@@ -523,12 +580,16 @@ def main():
             path = os.path.join(sd, f"{fr['name']}.json")
             json.dump(shot_for(fr, S.get('camera')), open(path, 'w'), indent=1)
             png = os.path.join(od, f"{fr['name']}.png")
-            if a.all or fr['name'] in a.only or not os.path.exists(png):
+            held = a.rows and not any(r in row for r in a.rows)
+            if held and not os.path.exists(png):
+                continue                                  # a row not asked for, not yet rendered: left out of the grid
+            if not held and (a.all or fr['name'] in a.only or not os.path.exists(png)):
                 print('render', fr['name'], flush=True)
                 subprocess.run([sys.executable, os.path.join(ROOT, 'studio', 'engine', 'render.py'), path, '--out', png,
                                 '--samples', str(a.samples), '--scale', str(a.scale)], check=True, cwd=ROOT,
                                stdout=subprocess.DEVNULL)
             cells[row].append((png, fr['label']))
+    cells = {k: v for k, v in cells.items() if v}
     print(grid(S['title'], cells, os.path.join(rd, f'{a.set}.png')))
 
 

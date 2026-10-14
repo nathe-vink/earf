@@ -14,7 +14,8 @@
    "specular": 0.5
   },
   "bark": {
-   "preset": "$bark"
+   "preset": "$bark",
+   "bevel_mm": 1.0
   },
   "brass": {
    "preset": "metal",
@@ -87,13 +88,6 @@
   "lining": {
    "preset": "batting"
   },
-  "port": {
-   "preset": "satin_paint",
-   "color": "#1C1B1A",
-   "roughness": 0.45,
-   "specular": 0.5,
-   "bevel_mm": 0.8
-  },
   "ring": {
    "preset": "satin_paint",
    "color": "$disc",
@@ -121,7 +115,7 @@
    "material": "amp"
   },
   {
-   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|land-left|land-right|land-top|land-bottom",
+   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|port-left|port-frame-left|port-right|port-frame-right|land-left|land-right|land-top|land-bottom|top-pad",
    "material": "bark"
   },
   {
@@ -185,12 +179,8 @@
    "material": "horn"
   },
   {
-   "match": "lining-bottom-1a-web|lining-bottom-1b-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3a-web|lining-top-3b-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web",
+   "match": "lining-bottom-1a-web|lining-bottom-1b-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web",
    "material": "lining"
-  },
-  {
-   "match": "port-left|port-right",
-   "material": "port"
   },
   {
    "match": "woofer-ring",

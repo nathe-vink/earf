@@ -1,0 +1,510 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-pressed.json",
+  "flavour": "eucalyptus-printed",
+  "instances": [
+   {
+    "flavour": "eucalyptus-printed",
+    "position": [
+     -1.3,
+     0.2,
+     0
+    ],
+    "rotate_z": 8
+   },
+   {
+    "flavour": "eucalyptus-printed",
+    "position": [
+     1.3,
+     0.2,
+     0
+    ],
+    "rotate_z": -8
+   }
+  ]
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   6.2,
+   6.4,
+   2.8
+  ],
+  "center": [
+   0.0,
+   -2.35
+  ],
+  "floor": {
+   "plank_w": 0.18,
+   "plank_l": 1.8,
+   "base": "#B08A62",
+   "dark": "#97734F",
+   "light": "#C29C72",
+   "plank_contrast": 0.6
+  },
+  "wall": {
+   "color": "#E9E4DA"
+  },
+  "ceiling": "#F3F0EA",
+  "skirting": {
+   "h": 0.1,
+   "color": "#E2DCD0"
+  },
+  "windows": [
+   {
+    "wall": "left",
+    "along": 1.75,
+    "sill": 0.45,
+    "size": [
+     1.7,
+     2.0
+    ],
+    "mullions": [
+     1,
+     2
+    ]
+   }
+  ],
+  "props": [
+   {
+    "kind": "rug",
+    "position": [
+     -0.2,
+     -1.0
+    ],
+    "size": [
+     2.6,
+     1.7
+    ],
+    "color": "#5A4E42",
+    "sheen": 0.15
+   },
+   {
+    "kind": "sideboard",
+    "position": [
+     0.0,
+     0.58
+    ],
+    "size": [
+     1.5,
+     0.42,
+     0.52
+    ],
+    "color": "#6B4A33",
+    "wood": "veneer",
+    "grain": 0.25,
+    "label": "#C9A227"
+   },
+   {
+    "kind": "books",
+    "position": [
+     0.16,
+     0.6
+    ],
+    "z": 0.52,
+    "colors": [
+     "#3C4A5A",
+     "#B9A27A",
+     "#7A2E2A"
+    ],
+    "seed": 4
+   },
+   {
+    "kind": "vase",
+    "position": [
+     0.52,
+     0.58
+    ],
+    "z": 0.52,
+    "height": 0.3,
+    "branches": 5,
+    "seed": 3
+   },
+   {
+    "kind": "frame",
+    "position": [
+     0.0,
+     0.85
+    ],
+    "z": 1.55,
+    "size": [
+     0.72,
+     0.92
+    ],
+    "artwork": {
+     "bands": [
+      [
+       "#D9CDB6",
+       0.34
+      ],
+      [
+       "#6F7F66",
+       0.4
+      ],
+      [
+       "#8C8273",
+       0.26
+      ]
+     ],
+     "ground": "#E4DCCD",
+     "seed": 12
+    }
+   },
+   {
+    "kind": "lamp",
+    "position": [
+     -2.65,
+     0.45
+    ],
+    "height": 1.6
+   },
+   {
+    "kind": "armchair",
+    "position": [
+     -2.3,
+     -0.35
+    ],
+    "rotate_z": 45,
+    "color": "#8A7A66",
+    "wood": "#6E4B30"
+   },
+   {
+    "kind": "vase",
+    "position": [
+     2.15,
+     0.5
+    ],
+    "height": 0.55,
+    "branches": 7,
+    "seed": 9,
+    "color": "#CFC6B6"
+   },
+   {
+    "kind": "curtain",
+    "position": [
+     -3.04,
+     0.42
+    ],
+    "size": [
+     0.8,
+     2.75
+    ],
+    "rotate_z": 90
+   },
+   {
+    "kind": "cable",
+    "position": [
+     0.0,
+     0.0
+    ],
+    "points": [
+     [
+      -1.3292,
+      0.4076,
+      0.419
+     ],
+     [
+      -1.3374,
+      0.466,
+      0.412
+     ],
+     [
+      -1.3425,
+      0.5309,
+      0.342
+     ],
+     [
+      -1.3427,
+      0.5612,
+      0.152
+     ],
+     [
+      -1.3422,
+      0.5865,
+      0.0035
+     ],
+     [
+      -1.3022,
+      0.74,
+      0.0035
+     ],
+     [
+      -1.2022,
+      0.8285,
+      0.0035
+     ],
+     [
+      -0.7,
+      0.8285,
+      0.0035
+     ],
+     [
+      -0.62,
+      0.8285,
+      0.012
+     ],
+     [
+      -0.6,
+      0.8285,
+      0.16
+     ]
+    ],
+    "d": 0.007,
+    "plug": [
+     0.05,
+     0.024
+    ]
+   },
+   {
+    "kind": "cable",
+    "position": [
+     0.0,
+     0.0
+    ],
+    "points": [
+     [
+      1.3292,
+      0.4076,
+      0.419
+     ],
+     [
+      1.3374,
+      0.466,
+      0.412
+     ],
+     [
+      1.3504,
+      0.5298,
+      0.342
+     ],
+     [
+      1.3585,
+      0.5589,
+      0.152
+     ],
+     [
+      1.366,
+      0.5831,
+      0.0035
+     ],
+     [
+      1.326,
+      0.74,
+      0.0035
+     ],
+     [
+      1.226,
+      0.8285,
+      0.0035
+     ],
+     [
+      0.7,
+      0.8285,
+      0.0035
+     ],
+     [
+      0.62,
+      0.8285,
+      0.012
+     ],
+     [
+      0.6,
+      0.8285,
+      0.16
+     ]
+    ],
+    "d": 0.007,
+    "plug": [
+     0.05,
+     0.024
+    ]
+   }
+  ]
+ },
+ "lights": {
+  "key": {
+   "off": true
+  },
+  "fill": {
+   "off": true
+  },
+  "wash": {
+   "off": true
+  },
+  "room": {
+   "type": "area",
+   "size_m": [
+    3.2,
+    1.4
+   ],
+   "position": [
+    0.4,
+    -4.3,
+    2.3
+   ],
+   "target": [
+    -0.2,
+    0.4,
+    0.9
+   ],
+   "irradiance": 0.45,
+   "color": "#FFF4E6"
+  },
+  "window": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.9
+   ],
+   "position": [
+    -2.95,
+    -0.7,
+    1.45
+   ],
+   "target": [
+    0.0,
+    -0.2,
+    0.9
+   ],
+   "irradiance": 2.4,
+   "color": "#F2F5FF"
+  },
+  "speakers": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.0
+   ],
+   "position": [
+    1.2,
+    -5.4,
+    2.1
+   ],
+   "target": [
+    0.0,
+    0.2,
+    0.75
+   ],
+   "irradiance": 1.4,
+   "color": "#FFF1DE",
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "front-panel",
+    "cloth-disc",
+    "woofer-ring",
+    "waveguide",
+    "waveguide-cap",
+    "port-left",
+    "port-right"
+   ]
+  },
+  "glowL": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    -1.27,
+    0.72,
+    1.12
+   ],
+   "target": [
+    -1.27,
+    0.0,
+    1.1
+   ],
+   "irradiance": 1.4,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  },
+  "glowR": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    1.27,
+    0.72,
+    1.12
+   ],
+   "target": [
+    1.27,
+    0.0,
+    1.1
+   ],
+   "irradiance": 1.4,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.2,
+  "white_balance_k": 6300,
+  "white_balance_tint": 8.0
+ },
+ "title": "barkhorn, eucalyptus, in a room",
+ "size": [
+  2880,
+  1620
+ ],
+ "camera": {
+  "position": [
+   1.0,
+   -5.1,
+   1.3
+  ],
+  "target": [
+   -0.25,
+   0.2,
+   0.8
+  ],
+  "lens_mm": 35,
+  "level": true
+ },
+ "materials": {
+  "bark": {
+   "space": "object"
+  },
+  "horn": {
+   "space": "object"
+  }
+ },
+ "sky": {
+  "kind": "gradient",
+  "strength": 3.0,
+  "zenith": "#9FB8DA",
+  "horizon": "#E7EDF2",
+  "ground": "#857F73"
+ },
+ "sun": {
+  "aim": {
+   "at": [
+    -1.9,
+    -1.4,
+    0.0
+   ],
+   "window": 0,
+   "through": [
+    0.5,
+    0.55
+   ]
+  },
+  "irradiance": 6.0,
+  "angle_deg": 1.0,
+  "color": "#FFF0DC",
+  "azimuth_deg": -123.69,
+  "elevation_deg": 47.06
+ }
+}

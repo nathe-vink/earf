@@ -1,17 +1,17 @@
 {
  "product": "barkhorn-pressed",
  "title": "barkhorn",
- "parts": 75,
- "seconds": 431,
+ "parts": 88,
+ "seconds": 655,
  "sheets": {
-  "recycled-hdpe-25": 10,
+  "recycled-hdpe-20": 10,
   "recycled-hdpe-6": 1,
   "recycled-hdpe-12": 1,
   "polyester-batting-50": 4
  },
  "budget_usd": {
-  "cut": 2707,
-  "print": 146,
+  "cut": 2395,
+  "print": 138,
   "buy": 2845,
   "cast": 1646,
   "lathe": 219,
@@ -20,5 +20,5 @@
  "options_usd": {},
  "checks_ok": true,
  "drawings": "spinoffs/barkhorn/out-pressed/drawings/barkhorn-pressed-sheets.pdf",
- "render": "spinoffs/barkhorn/out-pressed/render/barkhorn-pressed.glb"
+ "render": null
 }

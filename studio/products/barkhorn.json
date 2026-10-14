@@ -14,7 +14,8 @@
    "specular": 0.5
   },
   "bark": {
-   "preset": "$bark"
+   "preset": "$bark",
+   "bevel_mm": 1.0
   },
   "brass": {
    "preset": "metal",
@@ -206,7 +207,7 @@
    "material": "port"
   },
   {
-   "match": "brace|land-left|land-right|land-top|land-bottom",
+   "match": "brace|land-left|land-right|land-top|land-bottom|top-pad",
    "material": "raw"
   },
   {
