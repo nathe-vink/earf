@@ -44,11 +44,11 @@
 | feet | buy | 2 | Levelling feet M8, a 40 mm swivel base on a rubber pad, black, with lock nuts, a set of 4 |  | 18.00 |
 | port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 kind, 4 x 16 in the 20 mm HDPE; M4 x 20 into tapped threads in the 25 mm acrylic; wood screws 4 x 14 in the plywood; round 15: their holes stop 2 short of the panel's back), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
 | top-pad | cut | 2 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 108 x 28 | 1.44 |
-| lining-bottom-1a, lining-bottom-1b | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 90 x 295 | 0.33 |
+| lining-bottom-1 | cut | 2 | 100 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 201 x 295 | 1.48 |
 | lining-left-2a, lining-right-2a | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 167 x 479 | 1.00 |
 | lining-left-2b, lining-right-2b | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 144 x 479 | 0.86 |
 | lining-left-3, lining-right-3 | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 332 x 139 | 0.58 |
-| lining-top-3 | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 418 x 295 | 1.54 |
+| lining-top-3 | cut | 2 | 100 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 418 x 295 | 3.08 |
 | lining-back-a, lining-back-d | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 68 x 789 | 0.68 |
 | lining-back-b | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 239 x 278 | 0.83 |
 | lining-back-c | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 239 x 118 | 0.35 |
@@ -70,10 +70,10 @@
 |---|---|
 | buy | 2,939 |
 | cast | 1,647 |
-| cut | 2,677 |
+| cut | 2,681 |
 | formed | 326 |
 | lathe | 219 |
 | sheet metal | 171 |
-| total | 7,979 |
+| total | 7,984 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

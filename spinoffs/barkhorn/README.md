@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 20**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 22**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -30,7 +30,208 @@ top and bottom want more lining. Round 19 makes the Clouds a full spectrum of ei
 black, all numbered again in that order) and draws the R's bowl as a circle again, on stems widened to meet it, each
 letter as wide as its shape needs. Round 20 draws the globe as a colour wheel of the Clouds, eight circles through one
 centre, and animates the brand as a film studio's ident: a pen draws the circles at one steady speed, or they
-bloom out of one, then the name.
+bloom out of one, then the name. Round 21 names the red Flare, doubles the lining at the top and the bottom, draws five
+globes that are each their own ident, drafts earf.world, and shows where the mark could go on the speaker and ways to
+lift it. Round 22 draws the globe as a 3D Earth in the six colours (three parallels and three meridians on the Earth's
+tilt), in lines and in discs, in every colourway the brand needs, and animates it as late-90s software: the ident, a
+loader, a cursor and a spinning coin. It also makes Fog the white Cloud.
+
+## Round 22: the globe as a 3D Earth, and Fog in white (the owner's notes of 2026-10-15)
+
+| the owner's note | what this round does |
+|---|---|
+| "Get rid of the black and white segments." | **Six rings in the six colours.** Nothing black or white is in the mark: Smoke and Fog are its black-only and white-only versions. |
+| "we're kind of losing site of the fact that it's supposed to look like earth. Maybe movie animation was a bad lead. More like late 90s early 2000s computer software animation and design" | **A globe on the Earth's tilt**, animated the way software of that time was. It is drawn ring by ring and coloured, then turns on its axis like a 1998 browser's loading globe. Also a loader, a cursor and a coin (below). Its page is set in Verdana on platinum grey. |
+| "I want the color to appear after each circle is closed" | **Each ring is drawn in ink and takes its colour only once it closes.** |
+| "Should we redo the fog to be more clear white the same way we redid smoke" | **Yes: Fog is now the white Cloud**, polished like the others instead of frosted (below). |
+| "Clouds may not be the right theme anymore, though I still like the iconography and how it ties into the brand" | Kept for now, and asked below. |
+| "the logo has to work in white only, black only, single color, multicolor and animated" | **Each version is drawn**: these are the guide rails (below). |
+| "three longitudinal and three latitudinal ovular strokes, with the object tilted in such a way to show its depth. Then you could have those be colored discs without strokes as well." | **Lines** and **Discs**, from the same six rings. |
+| The loader, the cursor and the spinning coin | **All three are built**, on the page and as videos. |
+
+### The globe
+
+- **The rings.** Three parallels (40° N, the equator, 40° S) and three meridians 60° apart. The axis leans 23.4°,
+  the Earth's own tilt and the angle a desk globe's stand holds it at. It also tips 22° toward you, so the parallels
+  open into ovals and the far side shows through behind the near.
+- **The colours.** Each ring is one Cloud, in spectrum order. The parallels are warm, north to south: Flare, Dust,
+  Acid. The meridians are cool, west to east: Poison, Ice, Haze. Ice's meridian faces you, so the globe's outline
+  is blue, as the Earth's is from space.
+- **Lines, the mark.** The six ovals with their far halves at 42% of the weight, under the near ones. Three
+  treatments were tested. With every line one weight ("even lines"), the one-colour mark tangles. With the far
+  halves cut wherever a near line crosses them, the far side breaks into dashes. With the far halves lighter, the
+  globe reads as round in one colour, down to about 32 px.
+- **Discs.** Each ring filled as a flat disc, with no strokes. The six discs cross as six sheets of the Clouds'
+  tinted acrylic would if slotted together into a globe. Each disc shows only where nothing nearer covers it, a seam
+  of the ground between the faces. This is worked out exactly: two flat discs' depths differ linearly across the
+  picture, so the region where one is nearer is a half-plane. Discs is the solid version, for fills, stamps,
+  stickers and the smallest sizes, and it suggests an object too: the six acrylics slotted into a globe.
+
+![The guide rails: lines and discs in black only, white only, one colour and multicolour, and the lockups](brand/earth.png)
+
+### Animated, and the software kit
+
+- **The ident.** Each ring is drawn at one steady speed in the ground's ink, and takes its colour all at once when
+  it closes, as a paint bucket only fills a closed shape. The pen lifts between rings, so no stroke falls outside
+  them. The globe then turns once on its axis at one speed, easing only briefly at each end, and moves aside while
+  EARF types in a letter at a time. In Discs, each ring becomes its disc as it closes. It runs 11 seconds.
+- **The loader.** A white circle rolls left to right across the ink, and the six colours appear in its wake as it
+  uncovers each one, like an eclipse. Then it rolls back and covers them. On paper it is a black circle. It can
+  show real progress, the circle's position standing for it.
+- **The cursor.** A circle with the six colours trailing it, each 75 ms behind the one before. They bunch under
+  the circle when it stops and fan out into a rainbow when it moves.
+- **The coin.** A disc spins on its edge, a colour each half turn, Flare to Haze. On one more half turn, slowing,
+  it deals out the three meridians as it passes them. The view rises to the globe's tilt as the parallels grow
+  round them, and the globe turns once. The coin becomes the Discs globe.
+
+![The ident: lines on paper, and discs on ink](brand/earth-ident.png)
+
+![The loader, the cursor and the coin](brand/earth-kit.png)
+
+`earth.py` writes `brand/earth-<lines|even|discs>-<colour>.svg` (multi, black, white and each of the six),
+`brand/earth-lockup-<paper|ink|black|white>.svg` and `brand/earth.html`. With `--video` it writes nine MP4s,
+1280 x 720 at 30 frames a second: the ident in lines and in discs on paper and on ink, the loader on ink and on
+paper, the cursor, and the coin on ink and on paper (`brand/earth-<scene>-...mp4`). The page is published privately
+at the globe's link, replacing round 21's five globes there; those remain in `brand/` and `globes.py`. The draft of
+earf.world tries the new pieces too: the lockup in its header, the loader as the page opens (a click skips it, and
+"Loader again" in the draft bar plays it again), and the cursor with a mouse (switched in the draft bar).
+
+### Fog, the white Cloud
+
+Smoke became the black Cloud in round 19, in polished tinted acrylic like the colours. Fog now follows it as the white
+one: polished cast acrylic, nearly colourless with a faint opal haze (`milk` 0.05), so the white lining reads
+through it clear and white. Its horn is polished water-clear and its cover and ring are white. Until now Fog was
+frosted (roughness 0.35) and a pale ice blue. Two low-resolution tests set it: `milk` 0.3 turned it into a matt grey
+box, and none at all gave plain glass with dark green edges. The key stays `birch-y2k-ice`. Fog is rendered again
+with the rest of round 21's speakers (above), and its copy in the look book and on the site now reads clear white.
+
+## Round 21: the owner's answers (2026-10-15)
+
+| the question | the owner's answer | what this round does |
+|---|---|---|
+| Which ident? | "None. We haven't nailed it yet. See all my previous notes." | **Five globes**, each drawn by one dot in one unbroken line, the last frame the logo (below). |
+| The wheel as EARF's globe? | "No decision yet. The idea is for the animated thing to be the globe. They should be one and the same. But we need the right globe design and then we need to work backward from the animation. We can also venture from the globe if we find something else that embodies the earf brand." | The globe and its animation designed as one thing, four globes and one idea beyond the globe, for the owner to pick from. |
+| The red Cloud's name | "Flare" | **Flare**, everywhere: the marks, the look book, the site, the code (Ember until now). |
+| The top's and the bottom's lining | "100 mm now (Recommended)" | **Doubled to 100 mm** in the CAD; the eight Clouds and their horns rendered again. |
+| earf.world | "Draft the site first" | **A private draft of the site**, from the look book. The domain is not bought. |
+| The recycled acrylic makers | "Not yet" | No letters. |
+| The EARF mark on the speaker | "I'd like to see options" | **Six places**, rendered close up. |
+| Lifting a 72 kg speaker | "Open to ideas" | **Three ideas rendered**, and the others written down. |
+
+### The globe, as it draws itself
+
+All the owner's notes on the globe, read together:
+
+- "overlapping concentric circles that form a larger circle, kind of like a color wheel";
+- "a Spirograph type thing where a black dot rotates around several times to create a circle of circles, each
+  adopting a color as its mini circle is traced";
+- of round 20's first ident: "too much like a film reel", "the acceleration changes too much as it draws. It should
+  be on fluid motion", "it shouldn't have to create a stroke outside of each circle";
+- now: the animated thing and the globe "should be one and the same", the globe first, the animation worked back
+  from it.
+
+So each globe here is a path that one dot follows at one steady speed, measured along the line. It never stops and
+never turns a corner, and every stroke it leaves belongs to a circle. Where two circles cross, it veers through a
+turn too short to see. Where it must reach another circle, it runs on along a line it has already drawn. It speeds
+up once at the start and slows once at the end. The globe is the last frame, so the logo and the ident are the same
+drawing. `globes.py` writes them (`brand/globe-<name>.svg` on paper, `-light.svg` as light; `brand/globes.html`).
+
+- **Orbits.** The dot orbits the globe pole to pole, each orbit a great circle in a Cloud's colour, so eight
+  meridians build the globe and its colours run round the axis, as a colour wheel's run round its centre (Runge's
+  colour sphere of 1810 is the same idea). It grows out of B3, whose lens is one meridian. The far side shows faintly,
+  as through the acrylic.
+- **Spirograph.** Eight circles of one size, nearly concentric, their centres on a small ring, as a Spirograph's gear
+  draws inside its ring. The dot goes round eight times; together the circles form the larger circle.
+- **Rose.** Round 20's rosette as one curve (a rose, r = cos 4t/3, three turns round). The dot passes straight through
+  the centre from one petal to the next, so it never leaves the petals.
+- **Light.** The six hues as six overlapping circles. As light they add to white in the middle, which is Fog; on paper
+  the tints multiply to near black, which is Smoke. So six circles hold all eight Clouds.
+- **Layers**, beyond the globe. One groove spiralling out from the centre, a turn a Cloud. The spectrum order turns out
+  to be the Earth's own, from its core: red core, orange, yellow, green land, blue sea, violet sky, white cloud, black
+  space. It is also a record's groove, a tree's rings and the ear's cochlea.
+
+Each can be drawn in lines, every circle in its Cloud's colour, or (all but Orbits) filled, the tints sweeping in
+behind the dot.
+Each plays on paper or as light, then moves aside for the name, as round 20's did.
+
+![The five globes, on paper and as light](brand/globes.png)
+
+The page is published privately as an Artifact, *EARF Globe*, at round 20's ident's link. It also writes an MP4 of
+each globe on each ground (`brand/globe-<name>-<paper|light>.mp4`, 1280 x 720, 30 frames a second, 9 to 11 seconds),
+and the two reels of all five (`brand/globes-paper.mp4`, `brand/globes-light.mp4`, 50 seconds).
+
+### Flare
+
+The red Cloud is **Flare**, Cloud 01 (marks.py, the look book, the site; the round 19 renders keep Ember's name in
+their titles, as made).
+
+### The lining, 100 mm at the top and the bottom
+
+The top's and the bottom's batts are now 100 mm thick (`lining` in `product.py`: `t_top`, `t_bottom`); the sides' and
+the back's stay 50. The HF lead's gland and the tie rod's anchor are kept clear through the deeper top batt, and the
+lead runs under it. The bottom batt is now one piece, 201 x 295, laid over the bottom's rib between the ports
+(round 18's two 50 mm pieces either side of it). The build checks clean (no clashes) and the outline check finds the
+35 cut parts true. The cut list takes one sheet of 100 mm batt.
+
+lining.py on the new build: each mode's Q, the lining's share of its damping (lower damps better), against round
+18's 50 mm:
+
+| the box's mode | Hz | Q, 50 mm (round 18) | Q, 100 mm at the top and bottom (now) |
+|---|---|---|---|
+| top to bottom, first | 204 | 15 | 5.8 |
+| side to side | 330 | 8 | 6.2 |
+| top to bottom, second | 408 | 8 | 3.9 |
+| front to back | 482 | 7 | 5.1 |
+
+![The eight Clouds again, the top and the bottom lined 100 deep](../../renders/2026-10-15/barkhorn/lookbook21.png)
+
+![Their horns](../../renders/2026-10-15/barkhorn/horn21.png)
+
+The room's pair (round 17) still shows the 50 mm lining; at that size the difference does not show.
+
+**A fix in the render model.** Parts made of several separate pieces (the four levelling feet, the back's sixteen
+screws, the cable glands) were written into the render model as unnamed pieces, and the engine, which finds each
+part's mesh by its name, left them out. So every render until now showed the speaker without its feet, its base
+12 mm above the floor on nothing, and without the screws in its back. `studio/fabkit/render.py` now writes each such
+part as one shape, and round 21's renders are the first to show them.
+
+### Where the mark could go
+
+Six places, on Poison (`mark` in `product.py`, `frames.py options21`). The mark is the wordmark alone, since the globe
+is not chosen; any of these can carry the globe instead.
+
+- **The rating plate** beside the amplifier: laser-marked, 46 wide. Seen only by whoever plugs it in.
+- **High on the back**: cut from 3 mm white acrylic, 140 wide, cemented on. It could be the speaker's own tint for a
+  quieter mark.
+- **The front panel's top right corner**: laser-etched, frosted, 60 wide. Seen from the room, small.
+- **The bottom's front edge**, under the front panel: etched, 52 wide, as a hi-fi maker's name sits on its plinth.
+- **The horn's cap**, between its finger dimples: etched, 64 wide, so the mark is on the part you turn.
+- **The cloth disc**: printed low on it, 64 wide, as most speakers carry their maker's name on the grille.
+
+### Lifting it
+
+A Cloud weighs about 72 kg, 62 with the horn lifted off. Three ideas rendered (`lift` in `product.py`):
+
+- **Handles, screwed in**: two stainless bar handles each side, into M8 inserts bonded in the side near the top; off
+  once the speaker is in place, leaving two small brass rings.
+- **Castors in the feet's threads**: the feet unscrew and four twin-wheel castors go into the same M8 inserts to roll
+  it, then the feet go back.
+- **Grips let into the sides**: a hand grip cut through each side near the top, a cup of 3 mm acrylic in the side's
+  tint cemented behind it so the box stays sealed, the side's batt cut round the cup. Nothing to fit or lose, and it
+  shows through the acrylic.
+
+Two more need no change to the speaker: lifting straps (the forearm kind movers use), and a two-person carry by the
+bottom edges, as now.
+
+![Where the mark could go, and ways to lift it](../../renders/2026-10-15/barkhorn/options21.png)
+
+### earf.world, a draft
+
+A private draft of the site, published as an Artifact, *EARF Website Draft*: the eight Clouds in spectrum order,
+each with its cover on or off, the pair in a room, the horn from the side or from behind, the specification beside
+the drawings, a line on record players and lights to come, and a contact address (a placeholder until the domain is
+registered). The price shows in the specification ($19,000 a pair, direct) and can come out. Its pages are the look
+book's photographs and copy.
 
 ## Round 20: the wheel, and the ident (the owner's notes of 2026-10-15)
 
@@ -105,7 +306,7 @@ from grey to black, and round 10's grey leaves the line (`cloud-red` and `cloud-
 
 | | name | the acrylic | the horn | the cover and ring |
 |---|---|---|---|---|
-| 01 | **Ember** (new; a working name) | red (#F2A29C through 25 mm) | red (#C8262B) | oxblood (#7A1A1C) |
+| 01 | **Ember** (new; a working name, **Flare** since round 21) | red (#F2A29C through 25 mm) | red (#C8262B) | oxblood (#7A1A1C) |
 | 02 | Dust | orange | orange | rust |
 | 03 | Acid | golden yellow | golden yellow | ochre |
 | 04 | Poison | bottle green | bottle green | bottle green |
@@ -1846,7 +2047,10 @@ pair. There are 29 drawing sheets.
 `price.py` works each cabinet's cost a pair from its parts list and prints the price as a multiple of it (rounds 14
 and 15). `lining.py` finds the Cloud cabinet's standing waves and how well its lining damps each (round 18), and
 `brand.py` draws the logo in the Clouds' colours (`brand/`, round 18) and the wheel (round 20), and `ident.py`
-animates it (`brand/ident.html` and its videos, round 20).
+animates it (`brand/ident.html` and its videos, round 20). `globes.py` draws five globes, each drawn by one dot in one
+line, so each is its own ident (`brand/globes.html`, its SVGs and videos, round 21). `earth.py` draws the globe as a
+3D Earth in its guide rails, and its software: the ident, the loader, the cursor and the coin (`brand/earth.html`, its
+SVGs and videos, round 22).
 
 The shots are in `studio/shots/barkhorn/`:
 
@@ -1858,31 +2062,29 @@ The shots are in `studio/shots/barkhorn/`:
   `proposal/` (round 3), `horn/`, `resin/`, `pressed/` and `pick/` (round 4), `horn5/`, `shells/`, `woodfree/` and
   `pick5/` (round 5), `pick6/`, `printed/` and `cabinets/` (round 6), `discs/` and `lookbook/` (round 7), `options14/`
   (round 14), `lookbook15/`, `horn15/`, `room15/` and `back15/` (round 15), `horn16/`, `back16/` and `real16/`
-  (round 16), `lookbook17/`, `horn17/` and `room17/` (round 17), `lookbook18/` and `horn18/` (round 18), `lookbook19/` and `horn19/` (round 19).
+  (round 16), `lookbook17/`, `horn17/` and `room17/` (round 17), `lookbook18/` and `horn18/` (round 18), `lookbook19/` and `horn19/` (round 19),
+  `lookbook21/`, `horn21/` and `options21/` (round 21).
 
 ## Open questions for the owner
 
 The owner's direction since round 15: keep refining the design (no requests for quotes yet); since round 17, no wood,
 Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a maker is found.
 
-1. **More lining** (round 18). Double the top's and the bottom's batts to 100 mm now (the renders change: the white
-   bands at the top and the bottom deepen), or keep 50 mm and decide on the first sample's measurements?
-2. **The names** (round 19). Ember for the new red (or Flare, or Blaze), Smoke kept for the black, and Acid, Haze,
-   Dust and Ice: keep them? Acid usually names a sharper, greener yellow. And the new numbers, in spectrum order?
-3. **The brand in colour** (round 18). Strokes, acrylic or glass: which to take further, and for what (the site, the
-   packaging, the look book's cover)?
-4. **earf.world** (round 18). Buy it now ($3.99 for the first year, $38.10 a year after, through Vercel), and build
-   the site from the look book?
-5. **The recycled acrylic partner** (round 17). Write to Plastiglas de México (Chemcast EcoGreen) and Madreperla
-   (Green Cast) for the eight tints at 20 mm: minimums, prices, lead times, and whether they take back offcuts?
-6. **Beyond the speakers.** A record player or a lamp in the Clouds' colours drawn next, or the speakers first?
-7. **The EARF mark on the speaker.** The look book carries each speaker's acrylic mark; the speaker itself carries
-   none yet. On the rating plate only (laser-etched, beside the amplifier), as a small acrylic mark on the back, or
-   in a corner of the front panel's frame?
-8. **The wheel** (round 20). Make it EARF's globe, in the lockup, the look book and the site? Which ident: the
-   pen or the bloom, on paper or as light? And play it as earf.world opens?
-9. **Lifting it.** A Cloud speaker weighs about 72 kg, its cabinet about 62 with the horn lifted off. Two people
-   lift it by the bottom edges, as now, or two recessed grips cut into the back panel?
+1. **The globe** (round 22). The 3D Earth in lines as the mark, and discs as its solid version? Its tilt and its
+   colours' order (warm parallels, cool meridians)? Which of the loader, the cursor and the coin to keep?
+2. **The theme** (round 22). Keep the Clouds, or move toward the Earth, say the line named Atmosphere? Every name is
+   already weather (Flare, Dust, Acid, Poison, Ice, Haze, Fog, Smoke), and the cloud mark could stay.
+3. **The mark on the speaker** (round 21). The rating plate, high on the back, the front panel's corner, the bottom's
+   front edge, the horn's cap or the cloth disc, or two of them? The wordmark, or the globe once it is chosen?
+4. **Lifting it** (round 21). Screw-in handles, castors in the feet's threads, grips let into the sides, straps, or
+   the bottom edges as now?
+5. **earf.world** (rounds 21 and 22). The draft now tries the new globe, the loader and the cursor. What to change
+   in it, and when to buy the domain ($3.99 for the first year, $38.10 a year after)? Show the price on it?
+6. **The other names** (round 19). Flare is chosen; keep Dust, Acid, Poison, Ice, Haze, Fog and Smoke? Acid usually
+   names a sharper, greener yellow.
+7. **Beyond the speakers.** A record player or a lamp in the Clouds' colours drawn next, or the speakers first?
+8. **The recycled acrylic partner** (round 17; "Not yet", round 21). Plastiglas de México (Chemcast EcoGreen) and
+   Madreperla (Green Cast), for the eight tints at 20 mm, when the design settles.
 
 Still left out of the renders: the amplifier plate's own face. Its connectors are known (an IEC C14 inlet, XLR in
 and out, an RCA output, AES, S/PDIF coaxial and optical inputs, and USB for setup), but not where each sits, so it

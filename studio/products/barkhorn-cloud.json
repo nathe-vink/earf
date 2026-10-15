@@ -179,7 +179,7 @@
    "material": "horn"
   },
   {
-   "match": "lining-bottom-1a-web|lining-bottom-1b-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web",
+   "match": "lining-bottom-1-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web",
    "material": "lining"
   },
   {
@@ -723,20 +723,20 @@
    "panel": "#D8D5CD",
    "cloth": "#DCD6C8",
    "cork": "#3B2F28",
-   "disc": "#7A807E",
+   "disc": "#E7E6E1",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#EAE6DA",
+   "horn_deep": "#F1F1EE",
    "horn_cloud": 0.0,
    "materials": {
-    "horn": {
-     "roughness": 0.1
-    },
     "bark": {
-     "deep": "#E4E9EB",
+     "deep": "#F5F6F5",
      "radius": 0.025,
-     "roughness": 0.35,
-     "milk": 0.15
+     "roughness": 0.05,
+     "milk": 0.05
+    },
+    "horn": {
+     "roughness": 0.03
     }
    }
   },

@@ -734,20 +734,20 @@
    "panel": "#D8D5CD",
    "cloth": "#DCD6C8",
    "cork": "#3B2F28",
-   "disc": "#7A807E",
+   "disc": "#E7E6E1",
    "horn_preset": "clear_resin",
    "horn": "#FFFFFF",
-   "horn_deep": "#EAE6DA",
+   "horn_deep": "#F1F1EE",
    "horn_cloud": 0.0,
    "materials": {
-    "horn": {
-     "roughness": 0.1
-    },
     "bark": {
-     "deep": "#E4E9EB",
+     "deep": "#F5F6F5",
      "radius": 0.025,
-     "roughness": 0.35,
-     "milk": 0.15
+     "roughness": 0.05,
+     "milk": 0.05
+    },
+    "horn": {
+     "roughness": 0.03
     }
    }
   },

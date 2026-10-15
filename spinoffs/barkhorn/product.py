@@ -82,9 +82,11 @@ P = dict(
     # the top and the bottom, a batt to each bay between the ribs and braces, each in a sewn sleeve of white voile. None
     # on the front panel; none beside a port (`port_clear` round its tube; the jet from its inner end left clear to the
     # back's batt); none round the amplifier's module (`amp_clear`); a strip left narrower than `min_strip` beside a
-    # keep-out goes with it. `gap`: the air between a batt and any face, so no two faces coincide
-    lining=dict(t=50.0, gap=0.5, port_clear=10.0, amp_clear=20.0, min_strip=40.0, stock='polyester-batting',
-                soft=9.0),                       # the render's batts: their edges rounded, as a sleeved batt's are
+    # keep-out goes with it. `gap`: the air between a batt and any face, so no two faces coincide. `t_top` and
+    # `t_bottom` (round 21, the owner: "100 mm now"): the top's and the bottom's batts doubled, as lining.py found those
+    # faces the least lined and the modes between them, top to bottom, the least damped
+    lining=dict(t=50.0, t_top=100.0, t_bottom=100.0, gap=0.5, port_clear=10.0, amp_clear=20.0, min_strip=40.0,
+                stock='polyester-batting', soft=9.0),    # soft: the render's batts' edges rounded, as a sleeved batt's are
     amp='hypex-fa122', amp_z=520.0,
     # the amplifier's sealed compartment (round 13, the reality check's r2: Hypex asks for one, and the box must stay
     # airtight): 1.5 mm aluminium folded and welded, black anodised, `inside` (across, deep, high) round the module, its
@@ -298,6 +300,7 @@ def lining(P, plen, ribs):
     to top)."""
     W, D, H, T = P['W'], P['D'], P['H'], P['T']
     L = P['lining']; t, g, ms = L['t'], L['gap'], L['min_strip']
+    t_top, t_bot = L.get('t_top', t), L.get('t_bottom', t)  # the top's and the bottom's (round 21)
     bk = P['back']; lw = bk['land']
     x0, x1, y0, y1 = T, W - T, P['inset'] + T, D - T        # the inside faces: the sides, the front panel's back, the back
     yback = y1 - g - t                                       # the back's batts' face
@@ -314,11 +317,15 @@ def lining(P, plen, ribs):
     if P['horn']['form'] == 'cast':
         pp = P['horn']['cast']['posts']; places = rod_places(P)
         (gx, gy), (tx, ty) = places[pp['cable_post']], places[pp['tie_post']]
-        under_top += [(gx - 20, gx + 20, H - T - 60, H - T + 1, gy - 12, y1 + 1),    # the HF lead's gland and its way in
-                      (tx - 10, tx + 10, H - T - t - g - 2, H - T + 1, min(ty - 9, yback - g), y1 + 1)]   # the tie rod's anchor
+        under_top += [(gx - 20, gx + 20, H - T - max(60, t_top + 10), H - T + 1, gy - 12, y1 + 1),   # the HF lead's gland and its way in
+                      (tx - 10, tx + 10, H - T - t_top - g - 2, H - T + 1, min(ty - 9, yback - g), y1 + 1)]   # the tie rod's anchor
         tb = top_boss(P)
         if tb:                                                # round 15: the pad under the top
             under_top.append((tb[0] - g, tb[2] + g, tb[4] - g, H - T + 1, tb[1] - g, tb[3] + g))
+    if 'grips' in (P.get('lift') or []):                      # round 21's recessed grips: the side batts cut round the cups
+        (gy0, gy1, gz0, gz1), dep = grip_boxes(P)
+        for xa, xb in ((-1.0, T + dep + 3.0 + g), (W - T - dep - 3.0 - g, W + 1.0)):
+            under_top.append((xa, xb, gz0 - 3.0 - g, gz1 + 3.0 + g, gy0 - 3.0 - g, gy1 + 3.0 + g))
 
     def keep_out(xa, xb, za, zb, ya, yb_, zone, stops):
         """A keep-out box, run on to a wall, a rib or a zone's end where it leaves a strip narrower than `min_strip`."""
@@ -345,9 +352,9 @@ def lining(P, plen, ribs):
         slabs = ([('left', box(x0 + g, y0 + g, lo, x0 + g + t, yland - g, hi)),
                   ('right', box(x1 - g - t, y0 + g, lo, x1 - g, yland - g, hi))] if sides else [])
         if k == len(zones) - 1:
-            slabs.append(('top', box(xi0, y0 + g, hi - t, xi1, ytb, hi)))
+            slabs.append(('top', box(xi0, y0 + g, hi - t_top, xi1, ytb, hi)))
         if k == 0:
-            slabs.append(('bottom', box(xi0, y0 + g, lo, xi1, ytb, lo + t)))
+            slabs.append(('bottom', box(xi0, y0 + g, lo, xi1, ytb, lo + t_bot)))
         cut = [grown(r) for _, r in ribs]
         stops = [x0, x1, xi0, xi1]
         for px in ports:
@@ -372,6 +379,13 @@ def lining(P, plen, ribs):
         s = s - r
     out += named('back', 0, s, (0, 2))
     return out
+
+
+def batt_t(P, name):
+    """A batt's thickness, by its name: the top's and the bottom's their own (round 21), the others `t`."""
+    L = P['lining']
+    return (L.get('t_top', L['t']) if name.startswith('lining-top') else
+            L.get('t_bottom', L['t']) if name.startswith('lining-bottom') else L['t'])
 
 
 def soft(s, r):
@@ -516,7 +530,7 @@ def parts(P):
                                                        + ('the back both sides: it comes off with the back' if n.startswith('rib-back') else
                                                           'the panel both sides')])
                                            for n, r in ribs]
-    batts = [Part(n, s, Sheet(P['lining']['stock'], P['lining']['t']), finish='lining', group='lining', inside=True,
+    batts = [Part(n, s, Sheet(P['lining']['stock'], batt_t(P, n)), finish='lining', group='lining', inside=True,
                  pieces={'web': (soft(s, P['lining']['soft']), 'lining')},
                  notes=['cut 10 full each way, sewn into its voile sleeve and pressed into its bay; '
                         + ('stapled through the sleeve\'s edge to the panel' if wood else 'four dots of tape hold it flat on the wall')])
@@ -652,7 +666,128 @@ def parts(P):
         Part('back-inserts', None, Bought({'wood': 'm5-inserts-wood', 'hdpe': 'm5-inserts-plastic', 'acrylic': 'm5-inserts-acrylic'}[kind])),
         Part('feet-inserts', None, Bought({'wood': 'm8-inserts-wood', 'hdpe': 'm8-inserts-plastic', 'acrylic': 'm8-inserts-acrylic'}[kind])),
     ]
+    return extras(P, out)
+
+
+def wordmark_outlines(width):
+    """EARF's wordmark (marks.py's shapes) as closed outlines [(u, v), ...] in mm: u across from its left, v up from its
+    foot, `width` wide."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import marks as M
+    s = width / M.WORDMARK_W
+    out = []
+    for p in M.WORDMARK:
+        if p[0] == 'rect':
+            x0, y0, x1, y1 = p[1:5]
+            pts = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
+        elif p[0] == 'circle':
+            pts = [(p[1] + p[3] * math.cos(a), p[2] + p[3] * math.sin(a)) for a in (2 * math.pi * k / 72 for k in range(72))]
+        else:
+            pts = list(p[1:])
+        out.append([(x * s, (300 - y) * s) for x, y in pts])
     return out
+
+
+def mark_solid(width, at, face, t):
+    """The wordmark `width` wide as a solid `t` deep on a face of the cabinet: `face` '-y' (a front face, read from in
+    front) or '+y' (a back face, read from behind, so drawn mirrored), `at` = (x of its middle, y of the face, z of its
+    foot)."""
+    xm, yf, z0 = at
+    sol = []
+    for o in wordmark_outlines(width):
+        if face == '-y':
+            pts = [(xm - width / 2 + u, z0 + v) for u, v in o]
+            sol.append(prism(pts, 'y', yf - t, yf))
+        else:
+            pts = [(xm + width / 2 - u, z0 + v) for u, v in o]
+            sol.append(prism(pts, 'y', yf, yf + t))
+    return union(*sol)
+
+
+def grip_boxes(P):
+    """Round 21's recessed grips: each side's opening (y0, y1, z0, z1) and how deep its cup reaches in."""
+    g = dict(w=124.0, h=42.0, depth=40.0, below=92.0)
+    y0, z1 = P['D'] / 2 - g['w'] / 2, P['H'] - g['below']
+    return (y0, y0 + g['w'], z1 - g['h'], z1), g['depth']
+
+
+def extras(P, out):
+    """Round 21's options, none unless P asks. P['mark'] (the owner, of where EARF's mark goes on the speaker: "I'd
+    like to see options"), any of: 'plate', laser-marked on the rating plate beside the amplifier; 'back', cut from 3 mm
+    white acrylic and cemented high on the back; 'corner', laser-etched into the front panel's top right corner; 'edge',
+    etched into the bottom's front edge, under the front panel; 'cap', etched into the horn's twist-lock cap; 'disc',
+    printed low on the cloth disc. The mark is the wordmark: the globe is not chosen yet. P['lift'] (the owner, of
+    lifting a 72 kg speaker: "Open to ideas"), any of: 'handles', two removable bar handles each side, screwed into M8
+    inserts bonded in the side near the top; 'castors', four castors screwed into the feet's M8 inserts in place of the
+    feet; 'grips', a recessed grip in each side near the top, a cup of 3 mm acrylic cemented behind the opening, the
+    side's batt cut round it."""
+    import dataclasses
+    from build123d import Compound, Pos
+    marks, lifts = P.get('mark') or [], P.get('lift') or []
+    if not marks and not lifts:
+        return out
+    W, D, H, T = P['W'], P['D'], P['H'], P['T']
+    by = {p.name: p for p in out}
+    bb = lambda n: by[n].solid.bounding_box()
+    add = []
+    etched = 'laser-etched, frosted, about 0.1 deep'
+    for m in marks:
+        if m == 'plate':
+            b = bb('rating-plate')
+            add.append(Part('mark-plate', mark_solid(46.0, ((b.min.X + b.max.X) / 2, b.max.Y, b.max.Z - 8.0 - 46.0 * 300 / 1020), '+y', 0.1),
+                            Bought('rating-plate'), finish='etch', notes=['EARF laser-marked across the rating plate\'s top, 46 wide']))
+        elif m == 'back':
+            add.append(Part('mark-back', mark_solid(140.0, (W / 2, D, H - 72.0 - 140.0 * 300 / 1020), '+y', 3.0),
+                            Sheet('cast-acrylic', 3.0), finish='mark',
+                            notes=['EARF cut from 3 mm white cast acrylic, 140 wide, cemented high on the back, centred']))
+        elif m == 'corner':
+            b = bb('front-panel'); w = 60.0
+            add.append(Part('mark-corner', mark_solid(w, (b.max.X - 24.0 - w / 2, b.min.Y, b.max.Z - 24.0 - w * 300 / 1020), '-y', 0.1),
+                            Bought('laser-etch'), finish='etch', notes=[f'EARF {etched}, 60 wide, into the front panel\'s top right corner']))
+        elif m == 'edge':
+            w = 52.0
+            add.append(Part('mark-edge', mark_solid(w, (W / 2, 0.0, (T - w * 300 / 1020) / 2), '-y', 0.1), Bought('laser-etch'),
+                            finish='etch', notes=[f'EARF {etched}, 52 wide, centred in the bottom\'s front edge']))
+        elif m == 'cap':
+            cap = by['waveguide-cap'].solid; b = cap.bounding_box(); w = 64.0
+            plate = mark_solid(w, ((b.min.X + b.max.X) / 2, b.max.Y - 4.0, (b.min.Z + b.max.Z) / 2 - w * 150 / 1020), '+y', 4.12)
+            skin = Pos(0, 0.12, 0) * cap - cap                    # a skin 0.12 deep on the cap's faces that look back
+            add.append(Part('mark-cap', plate & skin, Bought('laser-etch'), finish='etch',
+                            notes=[f'EARF {etched}, 64 wide, across the middle of the horn\'s cap, between its finger dimples']))
+        elif m == 'disc':
+            b = bb('cloth-disc'); w = 64.0
+            add.append(Part('mark-disc', mark_solid(w, ((b.min.X + b.max.X) / 2, b.min.Y, b.min.Z + 34.0), '-y', 0.1), Bought('cloth-print'),
+                            finish='print', option=by['cloth-disc'].option, notes=['EARF printed in white on the cloth, 64 wide, low on the disc']))
+    if 'handles' in lifts:
+        yc, zc = D / 2, H - 110.0
+        for side, x0, sgn in (('left', 0.0, -1), ('right', W, 1)):
+            legs = [cyl('x', (y, zc), 18.0, x0, x0 + sgn * 44.0) for y in (yc - 62.0, yc + 62.0)]
+            bar = cyl('y', (x0 + sgn * 35.0, zc), 22.0, yc - 76.0, yc + 76.0)
+            add.append(Part(f'handle-{side}', union(*legs, bar), Bought('lift-handles'), finish='rod',
+                            notes=['a stainless bar handle, 150 between its legs, screwed into two M8 inserts bonded in the side; '
+                                   'off when the speaker is in place, the inserts left as two small brass rings']))
+    if 'castors' in lifts:
+        out = [p for p in out if p.name != 'feet']
+        hubs, wheels = [], []
+        for x, y in feet_places(P):
+            hubs.append(cyl('z', (x, y), 42.0, -14.0, 0.0).fuse(box(x - 15.0, y - 26.0, -46.0, x + 15.0, y + 8.0, -14.0)))
+            for dx in (-15.5, 3.5):
+                wheels.append(cyl('x', (y - 9.0, -37.0), 50.0, x + dx, x + dx + 12.0))
+        add.append(Part('castors', Compound(children=hubs), Bought('castors-m8'), finish='amp',
+                        notes=['four twin-wheel swivel castors, 50 wheels, M8 stems screwed into the feet\'s inserts in place of '
+                               'the feet to move the speaker, the feet back in to stand it']))
+        add.append(Part('castor-wheels', Compound(children=wheels), Bought('castors-m8'), finish='sleeve'))
+    if 'grips' in lifts:
+        (y0, y1, z0, z1), dep = grip_boxes(P)
+        hole = lambda x_a, x_b: prism(rounded_rect(y1 - y0, z1 - z0, 14.0, cx=(y0 + y1) / 2, cy=(z0 + z1) / 2), 'x', x_a, x_b)
+        for side, (xa, xb), (ca, cb) in (('left', (-1.0, T + 1.0), (T, T + dep)), ('right', (W - T - 1.0, W + 1.0), (W - T - dep, W - T))):
+            p = by[side]
+            out = [dataclasses.replace(q, solid=q.solid - hole(xa, xb)) if q.name == side else q for q in out]
+            cup = box(ca, y0 - 3.0, z0 - 3.0, cb, y1 + 3.0, z1 + 3.0) - hole(*((T - 1.0, T + dep - 3.0) if side == 'left' else (W - T - dep + 3.0, W - T + 1.0)))
+            add.append(Part(f'grip-{side}', cup, Sheet('cast-acrylic', 3.0), finish='bark', inside=True,
+                            notes=[f'a hand grip {y1 - y0:g} x {z1 - z0:g}, its corners rounded on 14, cut through the side; a cup of 3 mm '
+                                   f'acrylic in the side\'s tint, {dep:g} deep, cemented behind it, so the box stays sealed']))
+    return out + add
 
 
 def rod_places(P):
@@ -974,7 +1109,7 @@ def amp_compartment(P, ribs, wz, wood):
         pp = P['horn']['cast']['posts']; gx, gy = rod_places(P)[pp['cable_post']]
         pad = top_boss(P); zg = pad[4] if pad else H - T          # the gland screws into the top, or the pad under it
         top_glands = [cyl('z', (gx, gy), gd, zg - gl, zg)]
-        t0 = tip(g_hf); zt = H - T - Lc['t'] - Lc['gap']          # the top's batts' underside
+        t0 = tip(g_hf); zt = H - T - Lc.get('t_top', Lc['t']) - Lc['gap']     # the top's batts' underside
         hf_path = [t0, (t0[0], t0[1] - 7, t0[2] + 4), (t0[0] - 4, t0[1] - 2, t0[2] + 22), (gx, t0[1] + 9.5, zt - 20),
                    (gx, gy - 13, zt - 6), (gx, gy, min(zt + 8, zg - gl - 6)), (gx, gy, zg - gl)]
         out.append(Part('lead-hf', tube_along(hf_path, 5.0), Bought('hf-pair'), finish='cable', inside=True,
@@ -1481,7 +1616,7 @@ VARIANTS.update({
                    'bark': 'clear_resin', 'disc': '#24557E',
                    'materials': {'bark': {'deep': '#B5D9EE', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
     # round 19 (the owner: "What if we did a full spectrum, red orange yellow green blue purple white and black"): a red
-    # one (Ember, a working name) and Smoke made black ("Smoke was meant to be the black one"), a deep smoked tint the
+    # one (Flare since round 21; Ember until then) and Smoke made black ("Smoke was meant to be the black one"), a deep smoked tint the
     # lining still shows faintly through (round 10's grey, birch-y2k-smoke, retired from the line)
     'cloud-red': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#C8262B', 'horn_cloud': 0.0,
                   'bark': 'clear_resin', 'disc': '#7A1A1C',
@@ -1490,6 +1625,15 @@ VARIANTS.update({
                     'bark': 'clear_resin', 'disc': '#141316',
                     'materials': {'bark': {'deep': '#8A888E', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
 })
+# round 22 (the owner: "Should we redo the fog to be more clear white the same way we redid smoke"): Fog made the white
+# one as Smoke was made the black: polished, not frosted, cast acrylic, near colourless with a faint opal haze, so the
+# white lining reads through it clear and white rather than frosted pale blue; the horn polished water-clear, the cover
+# and the ring white. (Tested: milk 0.3 turned it a matt grey box; none at all, plain glass with dark green edges.) The
+# key stays 'birch-y2k-ice' (Fog's since round 8; frosted ice-blue until round 22)
+VARIANTS['birch-y2k-ice'] = {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#F1F1EE', 'horn_cloud': 0.0,
+                             'bark': 'clear_resin', 'disc': '#E7E6E1',
+                             'materials': {'bark': {'deep': '#F5F6F5', 'radius': 0.025, 'roughness': 0.05, 'milk': 0.05},
+                                           'horn': {'roughness': 0.03}}}
 
 
 PRODUCT = Product(
@@ -1502,7 +1646,7 @@ PRODUCT = Product(
            'The FA122 crosses at about 800 Hz (LR4: B&C asks 12 dB/oct or steeper there) with the HF channel about 9 dB down (108 dB at 2.83 V against the woofer\'s 99), part of it in the passive L-pad after the amplifier, so its hiss stays inaudible: two 25 W aluminium-housed resistors on a plate in the compartment, behind a 33 uF film capacitor that keeps low frequencies off the driver if the preset is ever lost.',
            'The amplifier\'s preset, stored before the speaker ships: the crossover; a 4th-order Butterworth high-pass at 28 Hz on the woofer (below the ports\' tuning the box no longer holds the cone, which would pass Xmax below about 30 Hz at full output, and a record\'s warp drives it there); limiters set to the woofer\'s Xmax and the driver\'s rating; a notch at the ports\' pipe resonance (about 540 Hz in the pressed cabinet, 560 in the Cloud\'s, 600 in the plywood one), measured in each port\'s near field.',
            'The amplifier in a sealed compartment of its own, as Hypex asks: 1.5 mm aluminium, black anodised, on an EPDM gasket on the back\'s inner face, so the box stays airtight and the mains electronics are enclosed in metal. The leads leave it through cable glands. A rating plate beside the amplifier carries the model, the serial number, the ratings, the marks and the maker\'s address; the finished speaker needs an EMC pre-scan and an IEC 62368-1 assessment.',
-           'The lining: polyester batts (thermally bonded, recycled PET, 50 mm) on the sides, the top and the bottom, one to each bay between the braces (and the ribs), and on the back, its full height between its ribs, so they come off with it; each cut 10 full each way and sewn into a sleeve of white voile; none on the front panel, none beside the ports (10 clear of each tube, nothing between its inner end and the back\'s batts) and none within 20 of the amplifier\'s compartment.',
+           'The lining: polyester batts (thermally bonded, recycled PET), 50 mm on the sides and 100 mm on the top and the bottom (round 21), one to each bay between the braces (and the ribs), and 50 mm on the back, its full height between its ribs, so they come off with it; each cut 10 full each way and sewn into a sleeve of white voile; none on the front panel, none beside the ports (10 clear of each tube, nothing between its inner end and the back\'s batts) and none within 20 of the amplifier\'s compartment.',
            'The back comes off (round 14): it closes on a 3 mm EPDM gasket against four land strips inside the shell, sixteen M5 button heads through it into inserts in them. The amplifier\'s compartment, the back\'s ribs and its batts come off with it and the leads unplug at the compartment, so the amplifier, the L-pad and the leads can be reached.',
            'Four levelling feet (M8, 40 swivel bases on rubber pads) in inserts in the bottom, 50 in from its edges, lift the cabinet 12 mm: set them so it stands level and cannot rock under the horn, and lock their nuts.'],
     touching=[('grille-cloth', 'cloth-frame'), ('cloth-disc', 'disc-frame'),      # the cloth wraps its frame
@@ -1529,6 +1673,10 @@ PRODUCT = Product(
                'driver-coil': {'preset': 'metal', 'color': '#B87333'}, 'driver-spider': {'preset': 'rubber', 'color': '#C8B88A'},
                'driver-plug': {'preset': 'satin_paint', 'color': '#111111'},
                'lining': {'preset': 'batting'},
+               # round 21's marks: laser-etched (frosted) acrylic or laser-marked anodising, white acrylic, a print on cloth
+               'etch': {'preset': 'satin_paint', 'color': '#ECEBE7', 'roughness': 0.85, 'specular': 0.15},
+               'mark': {'preset': 'satin_paint', 'color': '#F3F2EE', 'roughness': 0.3, 'specular': 0.45},
+               'print': {'preset': 'satin_paint', 'color': '#EDEBE5', 'roughness': 0.9, 'specular': 0.05},
                # round 13: the fittings a photograph shows (through the Cloud's acrylic, most of all)
                'brass': {'preset': 'metal', 'color': '#C9A660', 'roughness': 0.3},
                'sleeve': {'preset': 'rubber', 'color': '#1B1B1B'},

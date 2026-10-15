@@ -27,6 +27,10 @@ def write(product, parts, out, engine_file=None, proof=True):
         if not p.render:
             continue
         for nm, (s, f) in ({f'{p.name}-{k}': v for k, v in p.pieces.items()} or {p.name: (p.solid, p.finish)}).items():
+            if isinstance(s, Compound) and s.children:
+                # a part of several pieces (the feet, the screws, the glands) as one shape: kept as a compound of
+                # children it was written as unnamed nodes, which the engine (keying meshes by name) left out
+                s = Compound(s.wrapped)
             s.label = nm
             kids.append(s)
             b = s.bounding_box()

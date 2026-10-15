@@ -1,5 +1,5 @@
-"""barkhorn's Cloud cabinet (rounds 10 to 19): the cabinet without wood (pressed.py) made in cast acrylic, 20 mm, tinted
-through, since round 19 in a full spectrum of eight: Ember's red, Dust's orange, Acid's amber, Poison's green, Ice's
+"""barkhorn's Cloud cabinet (rounds 10 to 21): the cabinet without wood (pressed.py) made in cast acrylic, 20 mm, tinted
+through, since round 19 in a full spectrum of eight: Flare's red, Dust's orange, Acid's amber, Poison's green, Ice's
 blue, Haze's violet, Fog's frosted white and Smoke's black (grey until round 19); in recycled cast acrylic where a
 maker can make the colour. Its lining shows through it (round 13),
 so every fitting inside is drawn to be seen.

@@ -44,8 +44,12 @@ Sets:
   autumn birch's horn colour) and violet, cover on and off, their horns from the side and from behind, and a Cloud
   pair in the room;
 - lookbook18, horn18 (round 18): two more, orange (Dust) and blue (Ice), cover on and off, and their horns;
-- lookbook19, horn19 (round 19, the full spectrum): a red one (Ember) and Smoke made black, cover on and off, and their
-  horns.
+- lookbook19, horn19 (round 19, the full spectrum): a red one (Ember, named Flare in round 21) and Smoke made black,
+  cover on and off, and their horns;
+- lookbook21, horn21 (round 21, the owner chose the top's and the bottom's batts at 100 mm): all eight Clouds again,
+  cover on and off, and their horns, the deeper lining showing through;
+- options21 (round 21): where EARF's mark could go on the speaker (six places, close up) and three ways to lift it,
+  on Poison.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -551,6 +555,58 @@ SETS['horn19'] = dict(SETS['horn17'], title='EARF: the Ember and Smoke horns fro
                            sky=STUDIO, at={'rotate_z': 155})]
     for line, key, flav, label, c in LOOKS19 + [('Cloud', 'ice', 'birch-y2k-ice', 'fog', '#CFDCE4')]})   # and Fog's, for the
 DAY.update({'lookbook19': '2026-10-15', 'horn19': '2026-10-15'})                                  # spread of eight
+
+# round 21 (the owner: "100 mm now", for the top's and the bottom's batts; and Flare for the red): the eight Clouds again,
+# in spectrum order, framed as before (build the Cloud's study model again first: frames.py lookbook21 --build)
+LOOKS21 = [('Cloud', 'red', 'cloud-red', 'flare', '#EAD6D2'), ('Cloud', 'orange', 'cloud-orange', 'dust', '#E9DCCB'),
+           ('Cloud', 'amber', 'cloud-amber', 'acid', '#E9DFC4'), ('Cloud', 'green', 'eucalyptus-y2k-green', 'poison', '#D9E4D3'),
+           ('Cloud', 'blue', 'cloud-blue', 'ice', '#D6E3EC'), ('Cloud', 'violet', 'cloud-violet', 'haze', '#DCD4E6'),
+           ('Cloud', 'ice', 'birch-y2k-ice', 'fog', '#CFDCE4'), ('Cloud', 'black', 'cloud-black', 'smoke', '#DAD8D6')]
+SETS['lookbook21'] = dict(SETS['lookbook17'], title='EARF: the eight Clouds, the top and bottom lined 100 deep, round 21', rows={
+    f'{line}: {label}': [F(f'look-{key}-on', flav, 'cover on', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                           sky=STUDIO),
+                         F(f'look-{key}-off', flav, 'cover off', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                           sky=STUDIO, hide=['cloth-disc'])]
+    for line, key, flav, label, c in LOOKS21})
+SETS['horn21'] = dict(SETS['horn17'], title='EARF: the eight horns from the side and from behind, round 21', rows={
+    f'{line}: {label}': [F(f'horn-{key}-side', flav, 'from the side', product=CLOUD, lights=GLOW5, size=[1200, 900], stage=sweep(c),
+                           sky=STUDIO, at={'rotate_z': 115}),
+                         F(f'horn-{key}-back', flav, 'from behind', product=CLOUD, lights=GLOW5, size=[1200, 900], stage=sweep(c),
+                           sky=STUDIO, at={'rotate_z': 155})]
+    for line, key, flav, label, c in LOOKS21})
+DAY.update({'lookbook21': '2026-10-15', 'horn21': '2026-10-15'})
+
+# round 21's options (the owner: "I'd like to see options" for the mark, "Open to ideas" for lifting): study models of
+# the Cloud with product.py's extras, each frame close on one (the camera from the parts' places, metres, the origin at
+# the footprint's middle and the floor)
+MODELS.update({'marks21': {'base': 'cloud', 'mark': ['plate', 'back', 'corner', 'edge', 'cap', 'disc']},
+               'lift-handles': {'base': 'cloud', 'lift': ['handles']}, 'lift-castors': {'base': 'cloud', 'lift': ['castors']},
+               'lift-grips': {'base': 'cloud', 'lift': ['grips']}})
+CAM21 = lambda pos, tgt, lens: {'position': pos, 'target': tgt, 'lens_mm': lens, 'level': True}
+OPT21 = dict(lights=GLOW5, size=[1200, 900], stage=sweep('#D9E4D3'), sky=STUDIO)
+MARKS21 = ['mark-plate', 'mark-back', 'mark-corner', 'mark-edge', 'mark-cap', 'mark-disc']
+only = lambda m: [n for n in MARKS21 if n != m]                 # each frame shows its own mark, the others hidden
+BACK21 = {'rotate_z': 180}                                      # the back views: the speaker turned to the sweep
+SETS['options21'] = dict(title='EARF: where the mark could go, and ways to lift it, round 21', camera=LOOK2, rows={
+    'the mark': [F('mark-plate', 'eucalyptus-y2k-green', 'the rating plate', product=form_product('marks21'), at=BACK21,
+                   camera=CAM21([-0.02, -0.78, 0.70], [-0.11, -0.21, 0.62], 70), hide=only('mark-plate'), **OPT21),
+                 F('mark-back', 'eucalyptus-y2k-green', 'high on the back', product=form_product('marks21'), at=BACK21,
+                   camera=CAM21([-0.32, -1.25, 1.02], [0.0, -0.21, 0.80], 55), hide=only('mark-back'), **OPT21),
+                 F('mark-corner', 'eucalyptus-y2k-green', 'the front panel\'s corner', product=form_product('marks21'),
+                   camera=CAM21([0.46, -0.78, 0.97], [0.20, -0.19, 0.84], 70), hide=only('mark-corner'), **OPT21),
+                 F('mark-edge', 'eucalyptus-y2k-green', 'the bottom\'s front edge', product=form_product('marks21'),
+                   camera=CAM21([0.20, -0.80, 0.14], [0.0, -0.21, 0.03], 60), hide=only('mark-edge'), **OPT21),
+                 F('mark-cap', 'eucalyptus-y2k-green', 'the horn\'s cap', product=form_product('marks21'), at=BACK21,
+                   camera=CAM21([-0.26, -0.92, 1.26], [0.0, -0.21, 1.11], 60), hide=only('mark-cap'), **OPT21),
+                 F('mark-disc', 'eucalyptus-y2k-green', 'the cloth disc', product=form_product('marks21'),
+                   camera=CAM21([0.36, -1.62, 0.70], [0.0, -0.20, 0.49], 50), hide=only('mark-disc'), **OPT21)],
+    'lifting': [F('lift-handles', 'eucalyptus-y2k-green', 'handles, screwed in', product=form_product('lift-handles'),
+                  camera=CAM21([1.2, -0.75, 1.0], [0.3, 0.0, 0.76], 50), **OPT21),
+                F('lift-castors', 'eucalyptus-y2k-green', 'castors in the feet\'s threads', product=form_product('lift-castors'),
+                  camera=CAM21([0.8, -0.85, 0.2], [0.15, -0.05, 0.1], 45), **OPT21),
+                F('lift-grips', 'eucalyptus-y2k-green', 'grips let into the sides', product=form_product('lift-grips'),
+                  camera=CAM21([1.15, -0.55, 0.98], [0.28, 0.0, 0.79], 60), **OPT21)]})
+DAY.update({'options21': '2026-10-15'})
 
 
 def shot_for(frame, set_camera):

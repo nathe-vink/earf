@@ -1,17 +1,18 @@
 {
  "product": "barkhorn-cloud",
  "title": "barkhorn",
- "parts": 78,
- "seconds": 500,
+ "parts": 77,
+ "seconds": 256,
  "sheets": {
   "cast-acrylic-20": 3,
   "cast-acrylic-6": 1,
   "cast-acrylic-8": 1,
   "cast-acrylic-12": 1,
-  "polyester-batting-50": 4
+  "polyester-batting-100": 1,
+  "polyester-batting-50": 3
  },
  "budget_usd": {
-  "cut": 2677,
+  "cut": 2681,
   "formed": 326,
   "buy": 2939,
   "cast": 1647,
@@ -20,6 +21,6 @@
  },
  "options_usd": {},
  "checks_ok": true,
- "drawings": "spinoffs/barkhorn/out-cloud/drawings/barkhorn-cloud-sheets.pdf",
- "render": null
+ "drawings": null,
+ "render": "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb"
 }
