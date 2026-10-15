@@ -1,0 +1,122 @@
+{
+ "product": {
+  "def": "studio/products/earf-globe.json",
+  "flavour": "default",
+  "instances": [
+   {
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": 0,
+    "flavour": "default"
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#F1EFEA",
+  "width": 4.0,
+  "front": 3.0,
+  "depth": 1.2,
+  "radius": 0.8,
+  "height": 3.0
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 45,
+    "distance_m": 2.2
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.13382442620105758
+   ],
+   "irradiance": 2.6,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": 35,
+    "elevation_deg": 15,
+    "distance_m": 2.4
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.13382442620105758
+   ],
+   "irradiance": 0.8,
+   "color": "#FFF7EA"
+  },
+  "back": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.8
+   ],
+   "orbit": {
+    "azimuth_deg": 170,
+    "elevation_deg": 35,
+    "distance_m": 1.8
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.13382442620105758
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF7EA"
+  }
+ },
+ "render": {
+  "samples": 160,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "EARF globe, six tinted acrylics",
+ "size": [
+  1400,
+  1400
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -1.4371349745785205,
+   0.7144646459957212
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.12182442620105759
+  ],
+  "lens_mm": 105.0,
+  "level": false
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#C4C2BE",
+  "horizon": "#CFCDC8",
+  "ground": "#5A5650",
+  "strength": 0.7
+ }
+}

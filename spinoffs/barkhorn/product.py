@@ -717,7 +717,7 @@ def extras(P, out):
     white acrylic and cemented high on the back; 'corner', laser-etched into the front panel's top right corner; 'edge',
     etched into the bottom's front edge, under the front panel; 'cap', etched into the horn's twist-lock cap; 'disc',
     printed low on the cloth disc. The mark is the wordmark: the globe is not chosen yet. P['lift'] (the owner, of
-    lifting a 72 kg speaker: "Open to ideas"), any of: 'handles', two removable bar handles each side, screwed into M8
+    lifting a 72 kg speaker: "Open to ideas"), any of: 'handles', a removable bar handle each side, screwed into two M8
     inserts bonded in the side near the top; 'castors', four castors screwed into the feet's M8 inserts in place of the
     feet; 'grips', a recessed grip in each side near the top, a cup of 3 mm acrylic cemented behind the opening, the
     side's batt cut round it."""

@@ -1,0 +1,91 @@
+{
+ "_note": "EARF globe for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/out-globe/render/earf-globe.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "materials": {
+  "acrylic-acid": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F2D06B",
+   "radius": 0.014,
+   "roughness": 0.03
+  },
+  "acrylic-dust": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F2B184",
+   "radius": 0.014,
+   "roughness": 0.03
+  },
+  "acrylic-flare": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F2A29C",
+   "radius": 0.014,
+   "roughness": 0.03
+  },
+  "acrylic-haze": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#BEADD8",
+   "radius": 0.014,
+   "roughness": 0.03
+  },
+  "acrylic-ice": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#B5D9EE",
+   "radius": 0.014,
+   "roughness": 0.03
+  },
+  "acrylic-poison": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#B2C9A2",
+   "radius": 0.014,
+   "roughness": 0.03
+  },
+  "steel": {
+   "preset": "metal",
+   "color": "#C9C9C6",
+   "roughness": 0.32
+  }
+ },
+ "assign": [
+  {
+   "match": "disc-acid",
+   "material": "acrylic-acid"
+  },
+  {
+   "match": "disc-dust",
+   "material": "acrylic-dust"
+  },
+  {
+   "match": "disc-flare",
+   "material": "acrylic-flare"
+  },
+  {
+   "match": "disc-haze",
+   "material": "acrylic-haze"
+  },
+  {
+   "match": "disc-ice",
+   "material": "acrylic-ice"
+  },
+  {
+   "match": "disc-poison",
+   "material": "acrylic-poison"
+  },
+  {
+   "match": "stand",
+   "material": "steel"
+  }
+ ],
+ "flavours": {
+  "default": {}
+ }
+}

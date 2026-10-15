@@ -69,6 +69,15 @@ loader, a cursor and a spinning coin. It also makes Fog the white Cloud.
 
 ![The guide rails: lines and discs in black only, white only, one colour and multicolour, and the lockups](brand/earth.png)
 
+**The globe as an object.** The Discs version suggests a real thing: the six discs cut from the Clouds' own tinted
+acrylic and slotted into a desk globe. `globe_object.py` builds one: six 8 mm discs, 240 across, each slotted round the
+ones before it, resting in a brushed steel ring, the axis on the mark's tilt. It is rendered the way the speakers are
+(`studio/shots/barkhorn/globe22/`). It could be a display piece for a shop, or something to keep on a desk. It is a
+picture to react to, not a proposal to make. The cabinets' pale tints keep it clear; the horns' deeper ones, tried
+first, stacked to mud where four discs overlap.
+
+![The globe as six discs of the Clouds' acrylic](../../renders/2026-10-15/barkhorn/globe22/globe.png)
+
 ### Animated, and the software kit
 
 - **The ident.** Each ring is drawn at one steady speed in the ground's ink, and takes its colour all at once when
@@ -104,6 +113,8 @@ through it clear and white. Its horn is polished water-clear and its cover and r
 frosted (roughness 0.35) and a pale ice blue. Two low-resolution tests set it: `milk` 0.3 turned it into a matt grey
 box, and none at all gave plain glass with dark green edges. The key stays `birch-y2k-ice`. Fog is rendered again
 with the rest of round 21's speakers (above), and its copy in the look book and on the site now reads clear white.
+
+![Fog until now, frosted pale blue, and Fog now, clear white](../../renders/2026-10-15/barkhorn/fog22.png)
 
 ## Round 21: the owner's answers (2026-10-15)
 
@@ -212,8 +223,8 @@ is not chosen; any of these can carry the globe instead.
 
 A Cloud weighs about 72 kg, 62 with the horn lifted off. Three ideas rendered (`lift` in `product.py`):
 
-- **Handles, screwed in**: two stainless bar handles each side, into M8 inserts bonded in the side near the top; off
-  once the speaker is in place, leaving two small brass rings.
+- **Handles, screwed in**: a stainless bar handle each side, on two M8 inserts bonded in the side near the top; off
+  once the speaker is in place, leaving two small brass rings each side.
 - **Castors in the feet's threads**: the feet unscrew and four twin-wheel castors go into the same M8 inserts to roll
   it, then the feet go back.
 - **Grips let into the sides**: a hand grip cut through each side near the top, a cup of 3 mm acrylic in the side's
@@ -2050,7 +2061,8 @@ and 15). `lining.py` finds the Cloud cabinet's standing waves and how well its l
 animates it (`brand/ident.html` and its videos, round 20). `globes.py` draws five globes, each drawn by one dot in one
 line, so each is its own ident (`brand/globes.html`, its SVGs and videos, round 21). `earth.py` draws the globe as a
 3D Earth in its guide rails, and its software: the ident, the loader, the cursor and the coin (`brand/earth.html`, its
-SVGs and videos, round 22).
+SVGs and videos, round 22); `globe_object.py` builds the Discs globe as six slotted discs of the Clouds' acrylic and
+its shot (round 22).
 
 The shots are in `studio/shots/barkhorn/`:
 

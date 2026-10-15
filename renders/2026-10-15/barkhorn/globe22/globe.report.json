@@ -1,0 +1,119 @@
+{
+ "shot": "studio/shots/barkhorn/globe22/globe.json",
+ "image": "renders/2026-10-15/barkhorn/globe22/globe.png",
+ "seconds": {
+  "build": 0.2,
+  "render": 1058.7
+ },
+ "samples": 160,
+ "size": [
+  1400,
+  1400
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "disc-acid#0": {
+   "part": "disc-acid",
+   "centre_px": [
+    620.4,
+    840.7
+   ],
+   "box_px": [
+    378,
+    656,
+    853,
+    1043
+   ],
+   "depth_m": 1.577
+  },
+  "disc-dust#0": {
+   "part": "disc-dust",
+   "centre_px": [
+    700.0,
+    670.8
+   ],
+   "box_px": [
+    379,
+    440,
+    1021,
+    930
+   ],
+   "depth_m": 1.55
+  },
+  "disc-flare#0": {
+   "part": "disc-flare",
+   "centre_px": [
+    782.4,
+    494.8
+   ],
+   "box_px": [
+    542,
+    319,
+    1035,
+    688
+   ],
+   "depth_m": 1.523
+  },
+  "disc-haze#0": {
+   "part": "disc-haze",
+   "centre_px": [
+    700.0,
+    670.8
+   ],
+   "box_px": [
+    480,
+    301,
+    920,
+    1068
+   ],
+   "depth_m": 1.55
+  },
+  "disc-ice#0": {
+   "part": "disc-ice",
+   "centre_px": [
+    700.0,
+    670.8
+   ],
+   "box_px": [
+    373,
+    365,
+    1027,
+    960
+   ],
+   "depth_m": 1.55
+  },
+  "disc-poison#0": {
+   "part": "disc-poison",
+   "centre_px": [
+    700.0,
+    670.8
+   ],
+   "box_px": [
+    480,
+    301,
+    920,
+    1068
+   ],
+   "depth_m": 1.55
+  },
+  "stand#0": {
+   "part": "stand",
+   "centre_px": [
+    700.0,
+    964.3
+   ],
+   "box_px": [
+    579,
+    891,
+    821,
+    1041
+   ],
+   "depth_m": 1.597
+  }
+ }
+}

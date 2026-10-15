@@ -1,0 +1,150 @@
+{
+ "product": {
+  "def": "spinoffs/barkhorn/out/study/barkhorn-marks21.json",
+  "flavour": "eucalyptus-y2k-green",
+  "instances": [
+   {
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": 0,
+    "flavour": "eucalyptus-y2k-green",
+    "hide": [
+     "mark-plate",
+     "mark-back",
+     "mark-corner",
+     "mark-cap",
+     "mark-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#D9E4D3",
+  "width": 6.0,
+  "front": 5.0,
+  "depth": 1.5,
+  "radius": 1.2,
+  "height": 4.0
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": -35,
+    "elevation_deg": 40,
+    "distance_m": 4.0
+   },
+   "target": [
+    0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 2.2,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.5
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 18,
+    "distance_m": 4.0
+   },
+   "target": [
+    0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 1.0,
+   "color": "#FFF7EA"
+  },
+  "wash": {
+   "type": "area",
+   "size_m": [
+    5.0,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -1.0,
+    2.9
+   ],
+   "target": [
+    0.0,
+    0.5,
+    1.2
+   ],
+   "irradiance": 0.8,
+   "color": "#FFF7EA"
+  },
+  "glow": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    0.0,
+    0.66,
+    1.12
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "barkhorn, the bottom's front edge",
+ "size": [
+  1200,
+  900
+ ],
+ "camera": {
+  "position": [
+   0.2,
+   -0.8,
+   0.14
+  ],
+  "target": [
+   0.0,
+   -0.21,
+   0.03
+  ],
+  "lens_mm": 60,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#C4C2BE",
+  "horizon": "#CFCDC8",
+  "ground": "#5A5650",
+  "strength": 0.7
+ }
+}
