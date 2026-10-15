@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 15**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 18**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -21,6 +21,412 @@ off, the speaker stands on levelling feet, and the ports are round tubes framed 
 cemented acrylic and proposes a price, and shows the choices still open side by side. Round 15 builds what the owner
 picked from those: rounded port mouths, the 20 mm sheet for every cabinet without wood (the Cloud's in acrylic), the
 Cloud's ports in its own acrylic, and the price: $16,000 a pair for Bark and Crag and $19,000 for Cloud, sold direct.
+Round 16 holds the horn's cap on a twist-lock, so no screw shows, and makes the back's screws black; it renders
+three speakers as a sheet press would really make them, and weighs recycled plastic against new plastic and wood.
+Round 17 makes Cloud the line (the owner: no wood, Bark and Crag paused): two more colours, Acid and Haze, the look
+book Cloud's alone, and the makers of recycled cast acrylic to approach. Round 18 adds Dust and Ice, calls the line
+the Clouds, gives the R a bowl flat from the stem, draws the logo in the seven colours, and finds that the cabinet's
+top and bottom want more lining.
+
+## Round 18: the Clouds (the owner's notes of 2026-10-15)
+
+> Can we do dust in an orange color, and ice in a blue color? Are those types of clouds? Is cloud the right term
+> still? I think we should pluralize it at least. Should there be more insulation on the bottom of the cabinet or
+> elsewhere, or are we good there? One thing about the logo that's bothering me is it feels like the top of the R,
+> where the circle meets the rectangle, should be a flat line. There's currently a divot. We should update the other
+> letters to make sure they all follow the same conventions based on how we update the R. I'm also interested in
+> exploring the brand further, like a version of the logo and letters that includes all of the speaker colors, either
+> as unfilled strokes or as the colored in portions of each shape that happens as a result of the overlapping
+> strokes. My goal is to buy earf.world and host a marketing site there with the speakers, record players, lights,
+> and other products.
+
+| the note | what this round does |
+|---|---|
+| Dust in orange, Ice in blue | **Two more Clouds**, Dust and Ice (below), made as the others are, rendered cover on and off with their horns. |
+| "Are those types of clouds? Is cloud the right term still?" | **Yes, both are clouds**, so the name holds (below). |
+| "I think we should pluralize it at least" | **The line is now the Clouds**. One speaker of it is still a Cloud (Cloud 06, Dust). |
+| More insulation? | **Not quite good yet: the top and the bottom want more** (below). It changes what shows through the acrylic, so it is the owner's call (an open question). |
+| The R's divot | **The R's bowl starts flat from the stem**, and the letters follow one set of rules (below). |
+| The logo in every speaker's colour | **Five versions** in `brand.py`: strokes, acrylic, glass (below). |
+| earf.world | **Unregistered, $3.99 for the first year** through Vercel. Not bought; a site plan is below. |
+
+### Dust and Ice
+
+`cloud-orange` and `cloud-blue` in `product.py`, made as Poison is: the cabinet in tinted cast acrylic, lined in
+white, the horn polished clear resin tinted to match, the cover and the ring in the colour, deeper. The flavours are
+keyed orange and blue, because `ice` has been Fog's key since round 8.
+
+| | the acrylic | the horn | the cover and ring | name |
+|---|---|---|---|---|
+| orange | orange (#F2B184 through 25 mm) | orange (#E0661C) | rust (#8C3B14) | **Dust**, the owner's |
+| blue | ice blue (#B5D9EE through 25 mm) | blue (#3C86C2) | deep blue (#24557E) | **Ice**, the owner's |
+
+![Dust and Ice, cover on and off](../../renders/2026-10-15/barkhorn/lookbook18.png)
+
+![Their horns from the side and from behind](../../renders/2026-10-15/barkhorn/horn18.png)
+
+The Clouds are now seven: Poison, Smoke, Fog, Acid, Haze, Dust and Ice. Each has its mark in its own colour
+(`marks.py`: Dust #E5732A, Ice #4A90C8).
+
+**Are they clouds?** Yes, both:
+
+- A **dust cloud** is what a dust storm raises: a haboob's wall, or the Saharan dust that crosses the Atlantic.
+- An **ice cloud** is a meteorologist's term: cirrus, and the anvil tops of thunderclouds, are made of ice crystals,
+  not droplets.
+
+All seven names hang in the air: a cloud of poison, smoke, fog, acid, haze, dust or ice. So the name holds. The
+plural reads as the line ("the Clouds"), and each speaker stays "a Cloud": Cloud 01, Poison, to Cloud 07, Ice.
+
+### More lining? (the cabinet's standing waves)
+
+The owner asked whether the bottom, or anywhere else, needs more insulation. `lining.py` works it out for the Cloud's
+cabinet: 520 x 356 x 840 mm inside, lined with 50 mm batts.
+
+- **The box's strongest standing wave runs from top to bottom**, at 204 Hz, where its height is half a wavelength.
+  Its second is at 408 Hz. Both fall well inside the woofer's band, which runs up to the horn at 800 Hz.
+- **The woofer barely drives the first and drives the second hard.** Its centre is a little above half height (458
+  of 840 mm), close to the still point of the 204 Hz wave (0.14 of full) and close to the loud point of the 408 Hz
+  wave (0.80).
+- **The ports pick up both.** Their inner ends sit low (85 mm up), where both waves are near their loudest (0.95 and
+  0.80), so whatever rings there leaks out of the ports.
+- **The waves bounce between the top and the bottom, the least lined faces.** The bottom is 29 % lined: only a strip
+  between the two ports' tubes, which take its sides. The top is 63 % lined, cut round the pad, the HF lead's gland
+  and the tie rod's anchor. Below the lower brace there are no side batts at all, since the ports run 20 mm from the
+  sides.
+- **A 50 mm batt absorbs little that low**: 15 % at 200 Hz and 40 % at 400 Hz (Miki's model; polyester at about 30
+  kg/m3). At 100 mm: 52 % and 87 %.
+
+Each mode's Q, the lining's share of its damping (lower damps better; under about 5 is well damped):
+
+| the box's mode | Hz | the woofer drives it | the ports pick it up | Q now | top and bottom at 100 mm | every batt at 100 mm |
+|---|---|---|---|---|---|---|
+| top to bottom, first | 204 | 0.14 | 0.95 | 15 | 6 | 3 |
+| side to side | 330 | 0 (the woofer is centred) | 0.87, the two ports opposite, so they cancel | 8 | 6 | 2 |
+| top to bottom, second | 408 | 0.80 | 0.80 | 8 | 4 | 2 |
+| front to back | 482 | 1.00 | 0.22 | 7 | 5 | 2 |
+
+The cone, the ports and the acrylic damp these modes too, so the real Qs are lower; the comparison between linings
+holds.
+
+The recommendation: **double the top's and the bottom's batts to 100 mm**, the bottom's still kept clear of the
+ports' tubes. That damps the 204 Hz wave about two and a half times as well (its Q from about 15 to 6) and the 408 Hz
+wave twice as well (8 to 4), for a second layer of batt over the top's and the bottom's (about 0.17 m2 a speaker, a
+few dollars). Doubling every batt damps everything (Q 2 to 3), but it crowds the woofer's frame (63 mm from each
+side) and brings the back's batts to 50 mm from the ports' inner ends (100 mm now), which need the room. Through the
+acrylic, the white bands at the top and the bottom would grow from 50 to 100 mm deep, and the top's zone (140 mm
+between the upper brace and the top) would look nearly full. The first sample's impedance curve and a microphone at
+a port settle it either way.
+
+While measuring this, a fault in the drawing set came to light: the top's batt has been one piece since round 15,
+notched round the rib under the top and the pad, but its cut file drew only one side of the rib (198 x 295, and so
+the parts list). The kit took the outline from one piece of the batt's face where a pocket split it; it now joins
+the pieces (`studio/fabkit/flats.py`), and the Cloud's package is built again with the batt's true outline.
+
+### The R, and one set of rules for the letters
+
+The R's bowl was a circle beside the stem, so its top met the stem's corner in a notch. It is now a D: it starts at
+the stem's outer edge, runs flat along the cap line and turns in a half circle down to 185, the height where the E's
+middle bar ends and the A's crossbar starts. The letters now keep one set of rules (`marks.py`, `_wordmark`):
+
+- every bar and bowl starts at the stem's outer edge and runs flat;
+- every bar is 70 deep;
+- the middle bars and the R's bowl end on 185, where the A's crossbar starts.
+
+The E and the A kept these already. The F's middle bar moves up 5 to end on 185. The cover and the last page of the
+look book carry the new R, and so do the marks (`marks/`).
+
+![The wordmark before (above) and after (below)](marks/wordmark-r18.png)
+
+### EARF in the Clouds' colours
+
+The owner: "a version of the logo and letters that includes all of the speaker colors, either as unfilled strokes or
+as the colored in portions of each shape that happens as a result of the overlapping strokes". `brand.py` draws the
+globe and the wordmark five ways (`brand/sheet.html`, each also as its own SVG):
+
+- **Strokes**: no fills, each shape's outline in a speaker's colour, the colours taken in turn. On paper, Fog's white
+  is left out, since it disappears there; on ink, all seven.
+- **Acrylic**: each shape filled with a speaker's colour, the fills multiplied where they overlap, as tinted acrylic
+  sheets darken where they are laid on one another (the Clouds' own material); with the ink outlines and without them.
+- **Glass**: every region the overlapping outlines cut out (38 of them) filled with its own colour, no two that share
+  an edge alike, the outlines in ink over them, as a leaded window is.
+
+![EARF in the Clouds' colours](brand/sheet.png)
+
+### earf.world
+
+The owner: "My goal is to buy earf.world and host a marketing site there with the speakers, record players, lights,
+and other products."
+
+- **earf.world is unregistered** (checked 2026-10-15 through Vercel, the host this session can reach): $3.99 for the
+  first year, then $38.10 a year. It is not bought: buying it is the owner's call (an open question below).
+- **A plan for the site**, built from the look book's pages and photographs:
+  - the home page: the lockup, the room, "Seven colours, one horn";
+  - the Clouds, each with its cover on and off;
+  - the horn;
+  - the materials: recycled cast acrylic, and its maker once chosen;
+  - the specification and the drawings;
+  - "coming": record players and lights, once drawn;
+  - a way to get in touch.
+
+  It would be a static site on Vercel, with the domain pointed at it.
+
+### The look book
+
+The book now holds the seven Clouds, on 15 pages:
+
+- The cover reads "Seven floor-standing horn speakers, in cast acrylic", over the seven marks.
+- The line's page is CLOUDS, its seven marks on a narrower pitch.
+- Dust and Ice have pages of their own.
+- The horn pages show the five tinted horns (Poison, Acid, Haze, Dust, Ice), each frame cropped close so that five
+  fit across at the size three had.
+- The specification is "common to all seven".
+- The last page reads "Seven colours, one horn.", and the R on the cover and the last page is the new one.
+
+## Round 17: Cloud, the line (the owner's direction of 2026-10-15)
+
+After round 16's realism study and the environmental comparison, the owner:
+
+> I don't want to use wood. Let's put a pause on bark and crag. The cloud line I think is the strongest aesthetically.
+> It presents other opportunities. If we can find a good recycled acrylic partner, we can make other components, like
+> record players, lights, etc. Let's add some other colors to the mix, like the autumn color from the birch horn. Not
+> sure what I'd call a yellow cloud though. Acid maybe. Purple could be cool too.
+
+So:
+
+- **No wood.** Round 16's plywood recommendation is set aside.
+- **Bark and Crag are paused.** Their builds, renders and pages are kept, but the look book now shows Cloud only. Its
+  builder lists the lines it shows (`ACTIVE`), so Bark and Crag come back by adding them.
+- **Two more Cloud speakers**, made as Poison is: the cabinet in tinted cast acrylic, lined in white; the horn polished
+  clear resin, tinted to match; the cover and the ring in the colour, deeper (`cloud-amber` and `cloud-violet` in
+  `product.py`):
+
+| | the acrylic | the horn | the cover and ring | working name |
+|---|---|---|---|---|
+| amber | golden yellow (#F2D06B through 25 mm) | the autumn birch's horn as it was, golden yellow (#F2B705) | ochre (#9A6A12) | **Acid**, the owner's |
+| violet | violet (#BEADD8 through 25 mm) | deep violet (#5E3F8F), about as deep as Poison's bottle green | deep violet (#3F2A5E) | **Haze**, proposed |
+
+Acid usually names a sharp, greenish yellow, and this is a warm golden one: the names are the owner's to settle (an
+open question below).
+
+![Acid and Haze, cover on and off](../../renders/2026-10-15/barkhorn/lookbook17.png)
+
+![Their horns from the side and from behind](../../renders/2026-10-15/barkhorn/horn17.png)
+
+![A pair of Poison in the room](../../renders/2026-10-15/barkhorn/room17.png)
+
+### The look book
+
+The book now holds Cloud alone: the cover, the room (a Poison pair in place of Eucalyptus), the line, its five
+speakers (Poison, Smoke, Fog, Acid, Haze), the horn pages (Poison, Acid and Haze), the specification ("common to all
+five"), the drawings (now Cloud's own set: the cabinet in cast acrylic, cemented) and the last page ("Five colours, one
+horn.").
+
+### A recycled cast acrylic partner
+
+The owner: "If we can find a good recycled acrylic partner, we can make other components." The cabinet wants cast
+sheet, 20 mm, tinted through, in five colours; chemically recycled acrylic (PMMA broken back down to its monomer,
+methyl methacrylate, and cast again) is as clear and as strong as new, so it can. Searched 2026-10-15; confirm each
+before ordering:
+
+| who | what | thickness | colours | where | notes |
+|---|---|---|---|---|---|
+| [Madreperla](https://spotmaterial.com/article/green-cast-recycled-acrylic-sheet/), Italy: Green Cast | cast sheet of 100 % recycled MMA, made by Madreperla itself | clear 3 to 10 mm stocked, up to 25 mm to order ([Induflex](https://induflex.dk/uk/materials-old/plastics/recycled-acrylic)) | more than 50 shades, opaque and translucent, some with minimum orders ([Image Reports](https://imagereportsmag.co.uk/new-to-amari-comes-green-cast/)); a frosted range | in the US through [MakerStock](https://makerstock.com/products/recycled-acrylic-yellow-nearly-opaque) (3 mm only, seen) | 2.13 kg CO2 a kilogram, about 75 % below new ([EPD](https://environdec.com/library/epd3495), lapsed March 2026) |
+| [Plastiglas de México](https://harborsales.net/YesYouCan/Substrates/EcogreenRecycledAcrylicSheet.aspx) (Unigel): Chemcast EcoGreen | cell-cast sheet, 100 % recycled MMA | 3 mm to 25 mm (0.118 to 1.00 in), 48 x 96 and 80 x 120 in ([data sheet](https://harborsales.net/Portals/0/docs/ecogreentds.pdf)) | clear, whites, black listed; other colours by asking | made in North America; sold by Harbor Sales, [Multicraft](https://www.multicraftplastics.com/plastics-and-substrates/acrylic/100-recycled-cast-acrylic-sheet.html) | an [EPD](https://www.environdec.com/library/epd2009) valid to 2027 |
+| [Perspex](https://perspex.co.uk/about-us/all-news/coloured-perspex-acrylic-sheet-your-questions-a), UK: Perspex re | cast sheet from recycled cast acrylic waste ([Simply Plastics](https://www.simplyplastics.com/catalog/perspexre-100-recycled-black-cast-acrylic-sheet/c-24/p-1162)) | not published | "can be produced in any colour", by its colour-matching service | UK | |
+| [Trinseo](https://www.trinseo.com/solutions/acrylic-cast-sheets/emea-and-apac-cast-sheets/altuglas-r-life-cn-cast-sheets): Altuglas R-Life | cast sheet from chemically recycled MMA | not published | a wide range | made in France and Denmark, sold in Europe | US supply not confirmed |
+| [Röhm / Polyvantis](https://www.roehm.com/en/detail/new-and-sustainable-plexiglas-r-proterra-is-a-recycled-high-performance-plastic-with-a-proven-brand-quality): PLEXIGLAS proTerra | about 90 % recycled, but extruded, 2 to 8 mm, clear, white and black | | | Europe | not for the cabinet; its maker takes back offcuts ([with Pekutherm](https://renewable-carbon.eu/news/?p=166207)) |
+
+The first two to ask: **Plastiglas de México** (North American, cell cast to 1 in, 100 % recycled; ask whether it will
+cast the five tints at 20 mm and at what minimum) and **Madreperla** (the widest recycled colour range, to 25 mm; a 4 x
+8 ft sheet of 20 mm weighs about 71 kg, so it would cross by sea). Ask each also to take back the router's offcuts and
+swarf, which go back to monomer. The horns stay cast resin: methyl methacrylate shrinks about a fifth as it sets, which
+rules out casting a thick horn in acrylic; bio-based epoxy is their lower-carbon resin (round 16).
+
+**Beyond the speakers.** A partner that casts the five colours in sheet, rod and block lets one fabricator make a
+family in them: a record player's plinth (cemented layers, CNC cut, as acrylic turntables are made) and its platter,
+lamps (tinted acrylic glows when lit through), stands. Each needs its own design (a turntable's motor and arm, a
+lamp's listed driver), so none is drawn yet: an open question below.
+
+## Round 16: the owner's picks of 2026-10-15
+
+Asked to keep refining the design (round 15), three details:
+
+| the question | the answer | what changed |
+|---|---|---|
+| The horn's back cap comes off for servicing: how is it held? | "Twist-lock (Recommended)" | **A twist-lock** (below): no screw shows. |
+| The sixteen screws round the back: what finish? | "Black (Recommended)" | **Black** (A2 stainless, black finish), on black nylon washers. |
+| The four posts the horn stands on: what finish? | "Stainless, as now (Recommended)" | Kept, as photographed. |
+
+### The horn's cap, on a twist-lock
+
+The cap closes the pod behind the compression driver, and comes off to reach the HF lead's connector and the tie rod's
+thumb nut. Until now the notes said three M4 screws held it, and the renders showed none. It is now held by a
+twist-lock (`twist_lock` in `studio/fabkit/speaker/horn.py`):
+
+- **Three lugs** are cast on the cap's spigot, 12 wide, standing 2.6 proud of it. They go into three L-slots cut 2.7
+  deep into the pod's 6 mm wall: in along the slot's entry, then an eighth of a turn (45 degrees, clockwise seen
+  from behind) along its run. A small bump in each slot clicks the lugs home (in the cap's notes, not modelled).
+  This is less than the quarter turn the question described: three lugs at 120 degrees leave room for 45-degree runs
+  with the pod's wall kept whole between them.
+- **An O-ring** (182 x 2, EPDM) in a groove on the spigot, beyond the lugs, seals the cap and stops it rattling. It
+  runs on the bore past the slots' ends, so it seals all round. The spigot is lengthened from 10 to 16 mm to carry it,
+  still 4 mm clear of the driver's back.
+- **Two shallow finger dimples** in the cap's dome, at its sides, 24 across and 1.5 deep, show where to take it and
+  turn it.
+- **The joint** between the cap and the pod is a fine line, both edges chamfered 0.8 mm.
+
+From behind, the horn now shows a plain dome with two soft dimples and a fine seam round its edge.
+
+### The back's screws, black
+
+The sixteen M5 button heads are now black, as the ports' screws at the front are. They read quieter against the
+patterned and tinted backs.
+
+![The back, its screws black](../../renders/2026-10-15/barkhorn/back16.png)
+
+![The horn from the side and from behind, the cap on its twist-lock](../../renders/2026-10-15/barkhorn/horn16.png)
+
+The cap's O-ring adds about $10 to a pair's cost (`price.py`): about $7,930 for Bark and Crag and $8,550 for
+Cloud on a first batch. The price's multiples stay 2.0 and 2.2.
+
+### The look book
+
+The horn pages are rendered again, so the cap shows its seam and dimples, and the horn-back page now says the cap
+twists off by hand, with no screws. The drawings page and the specification's views come from round 16's drawing set.
+
+### Would pressed recycled plastic really look like this? (a realism study)
+
+The owner asked: "Do you think it's actually possible to achieve these looks from recycled plastic, or do you think
+they will look entirely different?" In short: Cloud's tinted acrylic and the resin horns can look as rendered. The bark
+and stone patterns come out softer, coarser and more handmade, and the finest marks don't survive a sheet press
+(birch's dashes, the stones' bands and webs). To show this, three speakers were rendered again as a sheet press would
+really make them, beside the look book's renders (the owner: "Yes, a few"). Eucalyptus should press well; Autumn Birch
+and Malachite should not. Malachite is also shown in cast resin (the owner: "Show both side by side").
+
+![Whole: the look book's render, as really pressed, and Malachite as cast resin](../../renders/2026-10-15/barkhorn/real16-whole.png)
+
+![At the top front corner, the same ways](../../renders/2026-10-15/barkhorn/real16-corner.png)
+
+**What the realistic renders model** (`frames.py real16`; the press settings in `studio/engine/materials.py`, which any
+material now takes, `ANY_PRESET`):
+
+- **Flakes.** A pressed sheet is made from shredded flakes, each one colour, laid in a mould and pressed hot. The
+  pattern is broken into flakes about 7 mm across (9 for the stone). Every colour edge goes ragged, and a mark smaller
+  than a few flakes smears or breaks up.
+- **Flow.** The plastic moves as the press closes and warps the laid pattern: long soft waves about 160 mm across and
+  a short smear about 30 mm. A stone's bands, laid over a whole panel, swirl harder.
+- **Each panel is its own pressing**, as the Bark renders already were.
+- **Milky colour.** HDPE is a little translucent and white, so every colour is lifted about 12 % toward white and
+  mottled.
+- **Stray flakes** of other colours, about 5 % dark and 3 % light.
+- **A waxy satin face**, as planed and buffed HDPE has, not the gloss the look book shows.
+
+These settings are the best a skilled maker could hope for with hand-laid flakes, not the worst.
+
+**What they show:**
+
+| speaker | as really pressed | verdict |
+|---|---|---|
+| Eucalyptus | Still long strips of green, rust, ochre and grey, but softer and milkier: the strips' edges ragged, the darkest browns gone grey, stray flakes between them | **Close.** From across a room it reads as the render; close to, as pressed plastic in the bark's colours. The kind of pattern a press does best. |
+| Autumn Birch | The short black dashes break into ragged dark flecks, the finest lost; the white shows its flakes | **Different.** White plastic flecked with black, a terrazzo, more than birch. |
+| Malachite | The bands blur into a coarse, ragged marbling of two greens; the darkest greens go grey-green; each panel's bands differ and stop at its edges | **Inspired by the stone, not like it.** Green marbled plastic, under a horn whose cast bands stay crisp. |
+| Malachite in cast resin | The bands as crisp as the render's, running on round the corners (one cast shell), under a polished face | **Keeps the stone.** The look book's Crag renders are, in effect, cast resin. |
+
+By the same reasoning (not rendered): Manzanita and Cobalt Marble, flowing patterns, should press as close as
+Eucalyptus; Striped Maple's fine pinstripes will fare as birch's dashes do; Lapis's gold flecks and Turquoise's dark
+web as Malachite's bands. The dark colours come out greyer than rendered because HDPE is milky; more pigment in the
+flakes wins some depth back. Laying cut pieces by hand would keep birch's dashes and the pinstripes sharper, at a
+cost. Pressed sample tiles (the samples above) are still what settles it.
+
+**Cast resin for Crag.** Solid surface (Corian's kind) and cultured marble are cast from resin filled with mineral
+powder. They weigh about 1.7 g/cm³ (a [paper on Corian](https://agro.icm.edu.pl/agro/element/bwmeta1.element.agro-9db306f5-e288-42e7-a362-2474ce74eaf0/c/54.pdf)
+measured 1.71; a [Corian data sheet](https://leeuwerik.nl/amfile/file/download/file/119/product/19084) gives 1.75),
+and their modulus is about 8 to 10 GPa, against 0.5 to 1.5 for recycled HDPE (secondary sources; confirm against the
+maker's data sheet). So 10 to 12 mm of it weighs about what the 20 mm HDPE does (19 kg a square metre) and is as
+stiff or stiffer. The pattern is poured into the mould, so veins and bands stay crisp. A cabinet can be cast as one
+shell, so the pattern runs on round the corners, as the renders show. It polishes to the renders' gloss. But it is
+not recycled (the resin is new), and it carries about four times recycled HDPE's carbon a square metre (the
+environment, below).
+
+**A correction.** The answer to the owner said the pattern would not run round the corners unbroken as it does in the
+renders. That is true of Crag only. The Bark renders already start the pattern afresh on each panel, as separate
+pressings would, so their corners meet with a break. Only the Crag stones run on round the corners, which only a cast
+shell could give.
+
+### Recycled plastic, new plastic or wood? (the environment)
+
+The owner asked: "Environmentally speaking, is it even worth using recycled plastic over new plastic? Is the
+pollution output the better by any means? Is it better than using wood?", and whether another material could give
+these looks at a lower cost or a lower impact.
+
+**Carbon, to make each material** (cradle to gate: from the raw material to the sheet, per square metre of the
+cabinet's wall; from published averages and makers' declarations, so read them as estimates):
+
+| a square metre of wall | kg CO2e | from |
+|---|---|---|
+| birch plywood, 18 mm | about 5 (and it stores about 16 kg of CO2 while in use) | [Koskisen's EPD](https://koskisen.fi/en/downloads/epd-koskistandard), 291 kg a cubic metre |
+| plywood faced in linoleum | about 4 to 5 | linoleum is about carbon-neutral to make ([Specification Online](https://specificationonline.co.uk/articles/2023-08-01/forbo-s-marmoleum-achieves-climate-positive-status)) |
+| plywood faced in printed laminate (HPL) | about 7 | [One Click LCA](https://materials.oneclicklca.com/en/material/hpl-laminated-plywood-panel/69b444df2ee9922dc96273ce), 372 kg a cubic metre |
+| recycled HDPE, 20 mm, from a small press | about 14 to 18 | 71 % below virgin resin ([APR, via Waste Dive](https://www.wastedive.com/news/apr-recycled-plastics-reduce-energy-consumption-ghg-emissions/547027/)), plus an estimate of a small electric press's heat (0.5 to 1 kWh a kilogram, from the [Precious Plastic sheetpress](https://onearmy.github.io/academy/build/sheetpress)'s 15 kW and heating times) |
+| virgin HDPE, 20 mm | about 36, before the sheet is made | 1.91 kg a kilogram ([EPA](https://www.epa.gov/sites/default/files/2018-02/documents/lca_tv.pdf)) |
+| recycled cast acrylic, 20 mm | about 51 | [Green Cast](https://spotmaterial.com/article/green-cast-recycled-acrylic-sheet/), 2.13 kg a kilogram ([its EPD](https://environdec.com/library/epd3495) lapsed in March 2026) |
+| cast solid surface (Crag in resin), 12 mm | about 69 | one maker's EPD ([Durasein](https://durasein.com/uk/the-durasein-global-warming-potential-gwp-difference-sustainable-surfaces-for-modern-design/)), 5,780 kg a cubic metre |
+| virgin cast acrylic, 20 mm | about 200 | 8.56 kg a kilogram ([AusLCI, via Climatiq](https://www.climatiq.io/data/emission-factor/b9b3d21d-c2ac-4ea0-a45e-147aa9126b6b)) |
+
+For a pair, from the parts lists' masses: the Bark and Crag cabinets' 94 kg of recycled HDPE about 70 to 90 kg CO2e
+(about 180 if virgin); the plywood cabinets' 51 kg about 20 to 25; Cloud's 110 kg of cast acrylic about 940 (about 235
+if recycled); and the two horns' 12 kg of epoxy about 70 to 100 (6 to 8.5 kg a kilogram,
+[a study](https://www.nepjol.info/index.php/TUJ/article/view/93711)), as much as both recycled cabinets. The
+electronics and shipping are not counted.
+
+So:
+
+- **Recycled over new plastic: worth it.** About half the carbon of virgin sheet here, even after a small press's heat
+  (the recyclers' own figure, for pellets, is 71 % less carbon and 88 % less energy), and it keeps waste in use. A
+  welded, all-HDPE cabinet can be shredded and pressed again at the end of its life.
+- **Wood beats both on carbon.** Birch plywood is about a third of recycled HDPE's footprint a square metre, stores
+  carbon while in use, and is about ten times as stiff, so it needs fewer ribs. The plywood cabinet's parts list is
+  about $2,000 a pair cheaper than the pressed one's (before its face is priced).
+- **The biggest levers are not the bark cabinets**: Cloud's acrylic, and the resin horns.
+- **Pollution besides carbon.** Recycled feedstock can carry old additives: flame retardants (decaBDE) were found in
+  recycled HDPE pellets from 24 facilities ([Food Packaging Forum](https://www.foodpackagingforum.org/?p=330341)), and
+  491 chemicals in recycled polyethylene pellets ([a dataset](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10641591/)).
+  A speaker indoors is a low-exposure use, but clean, traced feedstock (post-industrial, or sorted bottle caps) matters,
+  and machining's swarf and dust must be caught and pressed again. Plywood's issue is its glue: formaldehyde-free
+  soy-glued plywood ([PureBond](https://columbiaforestproducts.com/purebond)) costs about the same as the usual.
+  Epoxy can't be recycled, and uncured it sensitises the skin of whoever casts it.
+
+**Materials that could give these looks at a lower cost or impact:**
+
+1. **Printed laminate on plywood.** [Abet Laminati](https://abetlaminati.com/en/?p=9122) prints any image on HPL with
+   no minimum order ([its specification](https://abetlaminati.com/wp-content/uploads/2023/12/Abet-Laminati-Digital-Print-Specifications-19oct23.pdf)):
+   exactly the rendered patterns, at the lowest cost and about half recycled HDPE's carbon. But it is a print: the
+   edges show the core, and the recycled story goes.
+2. **Engineered wood veneer.** [Alpi's ALPIlignum](https://www.alpi.it/en/info): dyed poplar and ayous layers glued and
+   sliced again into designed patterns ([MaterialDistrict](https://materialdistrict.com/material/alpilignum-design-collection/)),
+   from plantation and FSC wood, with an [EPD](https://environdec.com/library/epd28314). Stripes come naturally to it
+   (Eucalyptus, Striped Maple); a design of one's own needs volume.
+3. **Real birch bark**, sold on plywood tiles for walls ([Freund](https://www.architonic.com/en/p/birch-bark-1500586)):
+   true to Autumn Birch, but fragile. The plywood design has allowed a bark face since round 1.
+4. **Linoleum** (Marmoleum): 97 to 98 % natural materials, about carbon-neutral to make
+   ([Material Source](https://www.materialsource.co.uk/carbon-12-forbo-marmoleum-/)). Its marbling looks much like
+   pressed flakes, so on plywood it could carry soft marble colourways, but not malachite's bands.
+5. **Crag's cast-stone look**: [Jesmonite](https://jesmonite.com/product-range/what-is-ac100/) (a water-based acrylic
+   and mineral composite, cast with veins; no carbon figure published) or [Durat](https://durat.fi/en/collections/all)
+   (a solid surface with about 30 % recycled plastic, taken back at the end). Cast resin is about four times recycled
+   HDPE's carbon a square metre.
+6. **Cloud in recycled acrylic** ([Green Cast](https://spotmaterial.com/article/green-cast-recycled-acrylic-sheet/),
+   100 % recycled monomer, in transparent colours): about 75 % less carbon than virgin, the line's biggest single cut.
+7. **Bio-based epoxy for the horns**: 10 to 60 % less, by product ([Entropy Resins' LCA](https://entropyresins.com/?p=11605),
+   [European Coatings](https://www.european-coatings.com/articles/archiv/enabling-sustainable-epoxy-resins); the high
+   end is the makers' claim).
+8. **New plastic from sugarcane** ([Braskem's I'm green HDPE](https://fkur.com/wp-content/uploads/braskem-brochure-i-m-green.pdf))
+   claims a negative footprint (the company's figures; land use is the caveat).
+
+The recommendation: if a low impact matters most, FSC birch plywood with formaldehyde-free glue, faced in engineered
+veneer, linoleum or printed laminate (about two-thirds less carbon in the cabinets, and cheaper); if the recycled
+story is the brand, keep pressed HDPE (honest, and half of virgin). Either way, Cloud in recycled acrylic. The owner's
+answer: no wood, and Cloud the line (round 17, above).
 
 ## Round 15: the owner's picks of 2026-10-14
 
@@ -1282,39 +1688,53 @@ and `birch-clear`, `birch-black`, `eucalyptus-green` and the rest take the other
 
 `pressed.py` builds the cabinet without wood, the line since round 6, into `out-pressed/`. Every panel, brace, rib and
 the pad under the top nests on ten 1 m sheets of 20 mm HDPE for the pair (round 15), the rings on one of 6 mm, the
-disc's frames on one of 12 mm and the lining on four 1200 x 600 batts. The parts list is about $7,410 for the pair: the
+disc's frames on one of 12 mm and the lining on four 1200 x 600 batts. The parts list is about $7,420 for the pair: the
 sheet priced at a made-to-order rate (about $320 a square metre at 20 mm), about $2,380 of it. There are 26 drawing
 sheets.
 
 `cloud.py` builds the Cloud cabinet into `out-cloud/` (round 14): the same geometry in tinted cast acrylic, 20 mm since
 round 15 on round 14's ribs, on three 4 x 8 ft sheets for the pair, cemented and annealed, its inserts and sockets
-bonded; its ports' frames on one sheet of 8 mm, their tubes formed (round 15). The parts list is about $7,970 for the
-pair. There are 28 drawing sheets.
+bonded; its ports' frames on one sheet of 8 mm, their tubes formed (round 15). The parts list is about $7,980 for the
+pair. There are 29 drawing sheets.
 
 `price.py` works each cabinet's cost a pair from its parts list and prints the price as a multiple of it (rounds 14
-and 15).
+and 15). `lining.py` finds the Cloud cabinet's standing waves and how well its lining damps each (round 18), and
+`brand.py` draws the logo in the Clouds' colours (`brand/`, round 18).
 
 The shots are in `studio/shots/barkhorn/`:
 
 - `front`: the pair, as photographed;
-- `birch` and `eucalyptus`, round 7's `manzanita` and `snakebark`, and round 8's `crag`;
+- `birch` and `eucalyptus`, round 7's `manzanita` and `snakebark`, round 8's `crag` and round 17's `cloud`;
 - `eucalyptus-detail`: the bark close to;
 - `back`: the waveguide from behind;
 - one folder per comparison sheet, one shot per frame: `covers/` (round 2), `front/`, `study/`, `experiments/`,
   `proposal/` (round 3), `horn/`, `resin/`, `pressed/` and `pick/` (round 4), `horn5/`, `shells/`, `woodfree/` and
   `pick5/` (round 5), `pick6/`, `printed/` and `cabinets/` (round 6), `discs/` and `lookbook/` (round 7), `options14/`
-  (round 14), `lookbook15/`, `horn15/`, `room15/` and `back15/` (round 15).
+  (round 14), `lookbook15/`, `horn15/`, `room15/` and `back15/` (round 15), `horn16/`, `back16/` and `real16/`
+  (round 16), `lookbook17/`, `horn17/` and `room17/` (round 17), `lookbook18/` and `horn18/` (round 18).
 
 ## Open questions for the owner
 
-The owner's direction since round 15: keep refining the design (no requests for quotes yet).
+The owner's direction since round 15: keep refining the design (no requests for quotes yet); since round 17, no wood,
+Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a maker is found.
 
-1. **The horn's cap.** It closes the pod behind the driver and comes off to reach the HF lead and the tie rod's nut.
-   A quarter-turn twist-lock on three lugs with an O-ring, so that no screw shows from behind; or three small screws
-   (in the pod's side, or through the cap's face)?
-2. **The back's screws.** The sixteen button heads round the back: stainless (as drawn), or black?
-3. **The posts.** Stainless as photographed, or another finish (brushed brass, black)?
+1. **More lining** (round 18). Double the top's and the bottom's batts to 100 mm now (the renders change: the white
+   bands at the top and the bottom deepen), or keep 50 mm and decide on the first sample's measurements?
+2. **The names.** Acid (golden yellow), Haze (violet), Dust (orange) and Ice (blue): keep all four? Acid usually
+   names a sharper, greener yellow.
+3. **The brand in colour** (round 18). Strokes, acrylic or glass: which to take further, and for what (the site, the
+   packaging, the look book's cover)?
+4. **earf.world** (round 18). Buy it now ($3.99 for the first year, $38.10 a year after, through Vercel), and build
+   the site from the look book?
+5. **The recycled acrylic partner** (round 17). Write to Plastiglas de México (Chemcast EcoGreen) and Madreperla
+   (Green Cast) for the seven tints at 20 mm: minimums, prices, lead times, and whether they take back offcuts?
+6. **Beyond the speakers.** A record player or a lamp in the Clouds' colours drawn next, or the speakers first?
+7. **The EARF mark on the speaker.** The look book carries each speaker's acrylic mark; the speaker itself carries
+   none yet. On the rating plate only (laser-etched, beside the amplifier), as a small acrylic mark on the back, or
+   in a corner of the front panel's frame?
+8. **Lifting it.** A Cloud speaker weighs about 72 kg, its cabinet about 62 with the horn lifted off. Two people
+   lift it by the bottom edges, as now, or two recessed grips cut into the back panel?
 
-Still left out of the renders: the horn's cap screws or lock, whichever is chosen, and the amplifier plate's own
-sockets and switch (the renders show it as a plain black plate; it stays open on the back, since it sheds the
-amplifier's heat).
+Still left out of the renders: the amplifier plate's own face. Its connectors are known (an IEC C14 inlet, XLR in
+and out, an RCA output, AES, S/PDIF coaxial and optical inputs, and USB for setup), but not where each sits, so it
+shows as a plain black plate until Hypex's drawing is to hand (their site could not be reached from this session).

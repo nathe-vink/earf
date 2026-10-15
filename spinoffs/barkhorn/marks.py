@@ -55,8 +55,8 @@ def place(prims, k=1.0, dx=0.0, dy=0.0):
     for p in prims:
         if p[0] == 'circle':
             out.append(('circle', p[1] * k + dx, p[2] * k + dy, p[3] * k))
-        elif p[0] == 'rect':
-            out.append(('rect', p[1] * k + dx, p[2] * k + dy, p[3] * k + dx, p[4] * k + dy))
+        elif p[0] in ('rect', 'dee'):
+            out.append((p[0], p[1] * k + dx, p[2] * k + dy, p[3] * k + dx, p[4] * k + dy))
         elif p[0] == 'arc':                          # a stroke only: centre, radius, aim and half-span in degrees
             out.append(('arc', p[1] * k + dx, p[2] * k + dy, p[3] * k, p[4], p[5]))
         else:
@@ -136,17 +136,23 @@ OPTIONS = [('c2-overlap', 'C2 overlapped', 'an upright triangle, a circle, a par
 
 
 def _wordmark():
-    """EARF on a cap height of 300 (y down from the cap line), stems 74 wide. Returns the primitives and the width."""
-    s, h = 74, 300
-    e = [('rect', 0, 0, s, h), ('rect', 0, 0, 200, 70), ('rect', 0, 115, 175, 185), ('rect', 0, 230, 200, h)]
+    """EARF on a cap height of 300 (y down from the cap line), stems 74 wide. Returns the primitives and the width.
+
+    One rule for every letter (round 18, the owner: the R's top "should be a flat line. There's currently a divot. We
+    should update the other letters to make sure they all follow the same conventions"): every bar and bowl starts at
+    its stem's outer edge and runs flat along the cap line, a bar line or the baseline, and only its far end may turn;
+    so a bowl is a bar whose end is a half circle (a 'dee'), never a circle laid over the stem. The middle bars (E, F)
+    and the R's bowl end on one line, 185 down, where the A's crossbar starts; every bar is 70 deep."""
+    s, h, mid = 74, 300, 185
+    e = [('rect', 0, 0, s, h), ('rect', 0, 0, 200, 70), ('rect', 0, mid - 70, 175, mid), ('rect', 0, 230, 200, h)]
     xa, span, w = 240, 210, 90                       # the A: two legs 90 wide, their feet 210 apart, leaning so their
     lean = math.degrees(math.atan(span / 2 / h))     # tops coincide exactly
-    a = [slab(xa, h, w, h, lean), slab(xa + span, h, w, h, -lean), ('rect', xa + 92, 190, xa + 208, 245)]
+    a = [slab(xa, h, w, h, lean), slab(xa + span, h, w, h, -lean), ('rect', xa + 92, mid, xa + 208, mid + 70)]
     xr = xa + span + w + 30
-    r = [('rect', xr, 0, xr + s, h), ('circle', xr + 100, 92, 92),
-         slab(xr + 108, h, 92, 170, -22)]            # the leg's foot ends at xr + 200, just past the bowl's xr + 192
+    r = [('rect', xr, 0, xr + s, h), ('dee', xr, 0, xr + 100, mid),   # the bowl: flat on the cap line to its half circle
+         slab(xr + 108, h, 92, 170, -22)]            # the leg's foot ends at xr + 200, just past the bowl's xr + 192.5
     xf = xr + 240
-    f = [('rect', xf, 0, xf + s, h), ('rect', xf, 0, xf + 200, 70), ('rect', xf, 120, xf + 170, 190)]
+    f = [('rect', xf, 0, xf + s, h), ('rect', xf, 0, xf + 200, 70), ('rect', xf, mid - 70, xf + 170, mid)]
     return e + a + r + f, xf + 200
 
 
@@ -162,6 +168,12 @@ SPEAKERS = [
     ('green', 'Cloud', '01', 'Poison', '#4F7F3A'),
     ('smoke', 'Cloud', '02', 'Smoke', '#5D5A66'),
     ('ice', 'Cloud', '03', 'Fog', '#F6F8F8'),
+    # round 17: two more Cloud speakers, amber (the autumn birch's horn colour) and violet; the names are working ones
+    ('amber', 'Cloud', '04', 'Acid', '#E9B320'),
+    ('violet', 'Cloud', '05', 'Haze', '#6C4BA3'),
+    # round 18: Dust in orange and Ice in a clear blue
+    ('orange', 'Cloud', '06', 'Dust', '#E5732A'),
+    ('blue', 'Cloud', '07', 'Ice', '#4A90C8'),
     ('cobalt', 'Crag', '01', 'Cobalt Marble', '#ECEFF6'),
     ('malachite', 'Crag', '02', 'Malachite', '#22875A'),
     ('lapis', 'Crag', '03', 'Lapis Lazuli', '#283C96'),
@@ -180,6 +192,10 @@ def _el(p, attrs):
         return f'<circle cx="{p[1]:g}" cy="{p[2]:g}" r="{p[3]:g}" {attrs}/>'
     if p[0] == 'rect':
         return f'<rect x="{p[1]:g}" y="{p[2]:g}" width="{p[3] - p[1]:g}" height="{p[4] - p[2]:g}" {attrs}/>'
+    if p[0] == 'dee':                                # a bar from x0 whose far end is a half circle centred on xc
+        _, x0, y0, xc, y1 = p
+        r = (y1 - y0) / 2
+        return f'<path d="M{x0:g} {y0:g} H{xc:g} A{r:g} {r:g} 0 0 1 {xc:g} {y1:g} H{x0:g} Z" {attrs}/>'
     return f'<polygon points="{" ".join(f"{x:g},{y:g}" for x, y in p[1:])}" {attrs}/>'
 
 
@@ -191,6 +207,8 @@ def bbox(prims):
             xs += [p[1] - p[3], p[1] + p[3]]; ys += [p[2] - p[3], p[2] + p[3]]
         elif p[0] == 'rect':
             xs += [p[1], p[3]]; ys += [p[2], p[4]]
+        elif p[0] == 'dee':
+            xs += [p[1], p[3] + (p[4] - p[2]) / 2]; ys += [p[2], p[4]]
         else:
             xs += [x for x, _ in p[1:]]; ys += [y for _, y in p[1:]]
     h = U / 2

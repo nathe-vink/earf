@@ -84,7 +84,8 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
 
 - **Cut files** (`flats.py`):
   - **Thickness and show face.** It finds the part's thickness axis and looks at it from the show face.
-  - **Outline.** `CUT_OUTSIDE`.
+  - **Outline.** `CUT_OUTSIDE`. Where pockets run off the face and cut it into pieces (a batt notched round a pad),
+    the outline is the pieces and the pockets' floors joined, not one piece alone.
   - **Through holes.** `CUT_INSIDE`, with round ones written as circles. An opening counts as a through hole when it
     matches across both faces, or across a face and a pocket's floor.
   - **Pockets from the face.** `POCKET_<depth>MM`, one layer per depth.
@@ -171,6 +172,11 @@ PRODUCT = Product('name', 'Title', 'What it is', params=dict(D=260, H=400), part
     filleted: OCC's fillets fail on these surfaces); `pads` casts bosses under it for mounting posts, with their
     inserts' holes and a cable's; `solid_neck` casts the neck round the throat solid; `tub` runs the outside straight
     back from the rim to a flat back that hides the driver, its back split off as a lid;
+  - `twist_lock(shell, cap, pod_r, wall, pod_back, dome, ...)`: a twist-lock for that cap, in the shell's local frame.
+    Lugs on the cap's spigot run in L-slots cut in the pod's bore (in along an entry, then `turn` degrees to lock), an
+    O-ring sits in a groove beyond them on a lengthened spigot (so it seals on the bore past the slots), finger
+    dimples are cut in the dome, and the joint's edges are chamfered so it reads as a fine line. It returns the shell,
+    the cap and the O-ring, and checks every boolean by its volume, raising if one left a solid unchanged;
   - `waveguide_lens` and `waveguide_slab` (round 3's study forms);
   - `mouth_for_coverage(fc, angle)`, Keele's rule.
 

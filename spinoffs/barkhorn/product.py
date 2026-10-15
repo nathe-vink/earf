@@ -27,7 +27,7 @@ FONTS = os.path.normpath(os.path.join(HERE, '..', '..', 'studio', 'fabkit', 'fon
 sys.path.insert(0, os.path.join(HERE, '..', '..', 'studio', 'fabkit'))
 from kit import *                                                    # noqa: E402,F403
 from speaker.drivers import driver_part, place                      # noqa: E402
-from speaker.horn import waveguide_shell, waveguide_lens, waveguide_slab, round_horn, tractrix   # noqa: E402
+from speaker.horn import waveguide_shell, waveguide_lens, waveguide_slab, round_horn, tractrix, twist_lock   # noqa: E402
 
 import json  # noqa: E402
 LIB = json.load(open(os.path.join(HERE, '..', '..', 'studio', 'fabkit', 'library', 'components.json')))
@@ -126,6 +126,10 @@ P = dict(
                         # or 'tub' (the outside runs straight back from the rim to a flat back that hides the driver, the
                         # flare its own skin inside; the back pair of posts wider, under its flat bottom)
                         back='shell',
+                        # round 16, the owner's pick ("Twist-lock"): the cap held by a twist-lock, three lugs on its
+                        # spigot in L-slots in the pod's bore, an O-ring beyond them, two finger dimples to turn it by
+                        # (speaker.horn.twist_lock); no screw shows
+                        lock=dict(lugs=3, turn=45.0),
                         tub=dict(back=142.0, taper=0.08, round=0.25, end=0.6, lid=30.0, seam=0.4, posts_back=(120.0, 20.0))),
               lens=dict(rim=14.0, back=78.0, back_r=84.0, taper=0.55, edge=5.0, pod_r=68.0),
               slab=dict(rim=16.0, slab_t=64.0),
@@ -574,9 +578,17 @@ def parts(P):
         out.append(Part('waveguide-cap', wg['cap'], Machined('cast-resin', 'cast', setup_usd=250.0), finish='horn', group='horn',
                         notes=[('the tub\'s back, a lid; six M4 screws into inserts round its edge; the cable leaves through a post below'
                                 if hz['form'] == 'cast' and hz['cast']['back'] == 'tub' else
-                                'closes the pod behind the driver; a spigot locates it, three M4 screws hold it; '
+                                (('closes the pod behind the driver on a twist-lock: three lugs cast on its spigot go into L-slots '
+                                  f'in the pod\'s bore and an eighth of a turn ({hz["cast"]["lock"]["turn"]:g} degrees, clockwise from '
+                                  'behind) locks them, a small bump in each slot clicking them home; an O-ring on the spigot, '
+                                  'beyond the lugs, seals it and stops it rattling; two shallow finger dimples to turn it by; '
+                                  'no screw shows; ') if hz['form'] == 'cast' and hz['cast'].get('lock') else
+                                 'closes the pod behind the driver; a spigot locates it, three M4 screws hold it; ')
                                 + ('the HF pair leaves through a post below; unplugged here, the horn lifts off its sockets'
                                    if hz['form'] == 'cast' else 'the cable leaves through its centre'))]))
+        if wg.get('ring') is not None:
+            later.append(Part('cap-o-ring', wg['ring'], Bought('cap-o-ring'), finish='sleeve', group='horn', inside=True,
+                              notes=['in the groove on the cap\'s spigot, beyond the lugs; a smear of silicone grease so it turns']))
     hfp, _ = driver_part('hf', P['hf'], hf, centre=(cx, wg['driver_y'], zc))
     out.append(hfp)
     if hz['form'] == 'cast':
@@ -856,8 +868,8 @@ def back_and_feet(P, kind):
         except Exception:
             pass
         heads.append(h.fuse(cyl('y', (sx, sz), 4.8, yl1 - hl + 2.0, D)))
-    out.append(Part('back-screws', Compound(children=heads), Bought('back-screws'), finish='rod', group='cabinet',
-                    notes=[f'{len(screws)} M5 x {round(T + gk + hl - 2, -1):g} button heads (ISO 7380, A2) on nylon washers, '
+    out.append(Part('back-screws', Compound(children=heads), Bought('back-screws'), finish='screw', group='cabinet',
+                    notes=[f'{len(screws)} M5 x {round(T + gk + hl - 2, -1):g} button heads (ISO 7380, A2, black: round 16) on black nylon washers, '
                            f'{bk["edge"]:g} in from the back\'s edges, into the inserts in the land strips; tightened evenly '
                            'round the back, by hand, to compress the gasket without crushing it']))
     f = P['feet']
@@ -1061,10 +1073,14 @@ def waveguide(P):
                  f'brass inserts; cast in tinted clear resin in a two-part silicone mould from a CNC-cut plug, its faces polished '
                  f'satin (a slow deep-pour resin: the neck round the throat is solid, {shell.volume / 1e6:.1f} L in all), or '
                  f'pigmented the same way for the opaque and marbled finishes']
+        ring = None
+        if c.get('lock') and c['back'] == 'shell':
+            shell, cap, ring = twist_lock(shell, cap, c['pod_r'], c['wall'], c['pod_back'], c['dome'], **c['lock'])
         zc = H + c['gap'] + half_h
         shell = place(shell, (cx, depth, zc), (0, -1, 0))
         cap = place(cap, (cx, depth, zc), (0, -1, 0))
-        return dict(shell=shell, cap=cap, zc=zc, throat_y=depth, driver_y=depth + c['boss']['t'] + c['adaptor']['t'], notes=notes)
+        ring = place(ring, (cx, depth, zc), (0, -1, 0)) if ring is not None else None
+        return dict(shell=shell, cap=cap, ring=ring, zc=zc, throat_y=depth, driver_y=depth + c['boss']['t'] + c['adaptor']['t'], notes=notes)
     if f == 'shell':
         shell, cap = waveguide_shell(hz['mouth_w'], hz['mouth_h'], hz['d'], r0=hz['r0'], wall=hz['wall'], rim=hz['rim'],
                                      n_mouth=hz['n_mouth'], pod_r=hz['pod_r'], pod_back=hz['pod_back'], dome=hz['dome'], boss=hz['boss'])
@@ -1444,6 +1460,27 @@ VARIANTS['birch-marbled-cobalt'] = {**_cob, 'materials': {**_cob['materials'],
                                                                    'vein_m': 0.22, 'stretch': 6.0, 'stretch_axis': 1}}}
 for _k in ('birch-y2k-smoke', 'eucalyptus-y2k-green'):
     VARIANTS[_k] = {**VARIANTS[_k], 'materials': {**VARIANTS[_k]['materials'], 'horn': {'roughness': 0.03}}}
+# round 17 (the owner: "Let's put a pause on bark and crag. The cloud line I think is the strongest aesthetically";
+# "Let's add some other colors to the mix, like the autumn color from the birch horn. Not sure what I'd call a yellow
+# cloud though. Acid maybe. Purple could be cool too"): two more Cloud speakers made as Poison is, the cabinet in
+# tinted cast acrylic lined in white, the horn polished clear resin tinted to match, the cover and the ring in the
+# colour, deeper. Amber takes the autumn birch's horn as it is; violet goes about as deep as Poison's bottle green
+VARIANTS.update({
+    'cloud-amber': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#F2B705', 'horn_cloud': 0.0,
+                    'bark': 'clear_resin', 'disc': '#9A6A12',
+                    'materials': {'bark': {'deep': '#F2D06B', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
+    'cloud-violet': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#5E3F8F', 'horn_cloud': 0.0,
+                     'bark': 'clear_resin', 'disc': '#3F2A5E',
+                     'materials': {'bark': {'deep': '#BEADD8', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
+    # round 18 (the owner: "Can we do dust in an orange color, and ice in a blue color?"): orange (Dust) and a clear blue
+    # (Ice; the key is blue, as 'ice' has been Fog's, the frosted one, since round 8)
+    'cloud-orange': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#E0661C', 'horn_cloud': 0.0,
+                     'bark': 'clear_resin', 'disc': '#8C3B14',
+                     'materials': {'bark': {'deep': '#F2B184', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
+    'cloud-blue': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#3C86C2', 'horn_cloud': 0.0,
+                   'bark': 'clear_resin', 'disc': '#24557E',
+                   'materials': {'bark': {'deep': '#B5D9EE', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
+})
 
 
 PRODUCT = Product(
@@ -1451,7 +1488,7 @@ PRODUCT = Product(
     notes=['Bark on the shell (sides, top, bottom and back): real birch bark sheet (Betula papyrifera, from fallen or felled trees) laminated to the plywood with PVA in a vacuum bag and sealed with a matt waterborne lacquer, wrapped round the shell\'s front edges; for eucalyptus, the shed bark of a smooth-barked gum (spotted or snow gum) pressed flat and laminated the same way, or a UV-printed veneer of it. Approve a sample board first.',
            'Glue-up: sides to the bottom, the brace, then the front panel (set back 24 mm), the top, and the back\'s four cleats, their back faces 21 in from the shell\'s back edge; the back screws on last, on its gasket, and comes off.',
            'The woofer flush in its rebate on a gasket, on eight M6 T-nuts from inside; the ring over its frame, held by four magnets in the panel under steel discs in its back; each port, printed in one with its square frame, fitted from the front, the frame flush in a recess on a foam gasket, four black wood screws in its corners; its length found on the first sample (its rounded ends cannot be trimmed).',
-           'The waveguide stands on four posts, stainless lamp tube 10 x 7, each threaded M10 x 1 at its top into a brass insert bonded in a pad cast under the horn (drilled after casting, through a jig taken off the top\'s sockets), its plain foot standing in a polyurethane sleeve in a brass socket pressed into the top, so the horn and its posts lift off as one. An M6 rod down the free rear post, from a thumb nut inside the pod to an insert under the top, holds them down. The HF lead, a round silicone cable 5 across, runs from its connector at the amplifier\'s compartment straight up, through a gland under the top and up inside a rear post into the pod, where it plugs into the driver\'s leads. To lift the horn off: the cap off, the nut undone and the lead unplugged.',
+           'The waveguide stands on four posts, stainless lamp tube 10 x 7, each threaded M10 x 1 at its top into a brass insert bonded in a pad cast under the horn (drilled after casting, through a jig taken off the top\'s sockets), its plain foot standing in a polyurethane sleeve in a brass socket pressed into the top, so the horn and its posts lift off as one. An M6 rod down the free rear post, from a thumb nut inside the pod to an insert under the top, holds them down. The cap closing the pod is held by a twist-lock (round 16): three lugs on its spigot in L-slots in the pod\'s bore, locked by an eighth of a turn, an O-ring beyond them; no screw shows. The HF lead, a round silicone cable 5 across, runs from its connector at the amplifier\'s compartment straight up, through a gland under the top and up inside a rear post into the pod, where it plugs into the driver\'s leads. To lift the horn off: the cap off, the nut undone and the lead unplugged.',
            'The front: the panel faced in bark (1 mm) round the ring and the port, and a cloth disc over the woofer, its MDF frame standing on the ring on four magnet pairs, its face 18.5 clear of the cone at rest.',
            'The FA122 crosses at about 800 Hz (LR4: B&C asks 12 dB/oct or steeper there) with the HF channel about 9 dB down (108 dB at 2.83 V against the woofer\'s 99), part of it in the passive L-pad after the amplifier, so its hiss stays inaudible: two 25 W aluminium-housed resistors on a plate in the compartment, behind a 33 uF film capacitor that keeps low frequencies off the driver if the preset is ever lost.',
            'The amplifier\'s preset, stored before the speaker ships: the crossover; a 4th-order Butterworth high-pass at 28 Hz on the woofer (below the ports\' tuning the box no longer holds the cone, which would pass Xmax below about 30 Hz at full output, and a record\'s warp drives it there); limiters set to the woofer\'s Xmax and the driver\'s rating; a notch at the ports\' pipe resonance (about 540 Hz in the pressed cabinet, 560 in the Cloud\'s, 600 in the plywood one), measured in each port\'s near field.',

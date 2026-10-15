@@ -152,6 +152,77 @@ def mouth_for_coverage(fc, angle_deg):
     return 25.0e6 / (angle_deg * fc)
 
 
+def _ring_sector(r0, r1, z0, z1, a0, a1, n=24):
+    """A ring's sector about the z axis: radii r0..r1, heights z0..z1, angles a0..a1 (degrees), its arcs polylines of
+    n (a spline's surface can fail a boolean silently)."""
+    from build123d import extrude
+    A = [math.radians(a0 + (a1 - a0) * k / n) for k in range(n + 1)]
+    pts = [(r1 * math.cos(a), r1 * math.sin(a), z0) for a in A] + [(r0 * math.cos(a), r0 * math.sin(a), z0) for a in reversed(A)]
+    return extrude(make_face(Polyline(*(pts + [pts[0]]))), amount=z1 - z0, dir=(0, 0, 1))
+
+
+def _checked(a, b, op, name, min_mm3=1.0):
+    """a - b or a + b, checked by its volume: OpenCascade can return the first operand unchanged, silently, when a
+    spline surface defeats it."""
+    out = a - b if op == '-' else a + b
+    dv = abs(out.volume - a.volume)
+    if dv < min_mm3:
+        raise RuntimeError(f'twist_lock: {name} left the solid unchanged (a failed boolean)')
+    return out
+
+
+def twist_lock(shell, cap, pod_r, wall, pod_back, dome, lugs=3, turn=45.0, lug=(12.0, 3.0, 2.6), clear=0.4, at=3.5,
+               spigot=16.0, oring=(2.0, 1.25, 2.7, 9.3), dimples=(2, 50.0, 1.5, 0.72), seam=0.8):
+    """A twist-lock for a waveguide_shell's cap (round 16, the owner's pick), in the shell's local frame (the pod behind,
+    z < 0, open at z = -pod_back). `lugs` lugs on the cap's spigot (`lug`: across, along, out; their near face `at` in
+    from the pod's back), each in an L-slot cut in the pod's bore, `clear` all round: in along an axial entry, then
+    `turn` degrees about +z (clockwise seen from behind) along the slot's run, to lock. An O-ring (`oring`: its cord,
+    the groove's depth and width, the groove's near face in from the pod's back) in a groove on the spigot seals the
+    cap and stops it rattling: it sits beyond the lugs (the spigot lengthened to `spigot`), so it runs on the bore past
+    the slots' ends and seals all round. `dimples` (how many, the sphere's radius, how deep, where across as a share of pod_r):
+    shallow finger dimples in the cap's dome to turn it by. `seam`: the cap's and the pod's meeting edges chamfered so
+    the joint reads as a fine line. Returns (shell, cap, o_ring); each boolean is checked by its volume."""
+    from build123d import Sphere
+    z0 = -pod_back
+    rb, rs = pod_r - wall, pod_r - wall - 0.3              # the pod's bore, the spigot's outside
+    lw, lh, lt = lug
+    cap = _checked(cap, Pos(0, 0, z0 + 9.9) * (Cylinder(rs, spigot - 9.9, align=(Align.CENTER, Align.CENTER, Align.MIN)) -
+                                              Cylinder(pod_r - 2 * wall, spigot - 9.9 + 1.0, align=(Align.CENTER, Align.CENTER, Align.MIN))),
+                   '+', 'the spigot lengthened')
+    half_l, half_s = math.degrees(lw / 2 / rs), math.degrees((lw / 2 + clear) / rb)
+    for k in range(lugs):
+        a = 90.0 + 360.0 * k / lugs                          # the lugs locked: the first at the top
+        cap = _checked(cap, _ring_sector(rs - 0.5, rs + lt, z0 + at, z0 + at + lh, a - half_l, a + half_l), '+', f'lug {k + 1}')
+        r1 = rs + lt + clear
+        shell = _checked(shell, _ring_sector(rb - 1.0, r1, z0 - 1.0, z0 + at + lh + clear, a - turn - half_s, a - turn + half_s),
+                         '-', f'slot {k + 1}, its entry')
+        shell = _checked(shell, _ring_sector(rb - 1.0, r1, z0 + at - clear, z0 + at + lh + clear, a - turn - half_s, a + half_s),
+                         '-', f'slot {k + 1}, its run')
+    cord, gd, gw, gz = oring
+    cap = _checked(cap, Pos(0, 0, z0 + gz) * (Cylinder(rs + 1.0, gw, align=(Align.CENTER, Align.CENTER, Align.MIN)) -
+                                             Cylinder(rs - gd, gw + 1.0, align=(Align.CENTER, Align.CENTER, Align.MIN))),
+                   '-', 'the O-ring groove')
+    ring = Pos(0, 0, z0 + gz + 0.2) * (Cylinder(rb - 0.05, gw - 0.4, align=(Align.CENTER, Align.CENTER, Align.MIN)) -
+                                       Cylinder(rs - gd, gw, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    n_d, R, d, share = dimples
+    rd = share * pod_r
+    u = math.sqrt(max(1 - (rd / pod_r) ** 2, 0.0))
+    zs = z0 - dome * u                                       # the dome's surface there, and its outward normal
+    nr, nz = rd / pod_r ** 2, (zs - z0) / dome ** 2
+    m = math.hypot(nr, nz); nr, nz = nr / m, nz / m
+    for k in range(n_d):
+        a = math.radians(360.0 * k / n_d)                    # at the sides, where two hands take it
+        rc, zc = rd + nr * (R - d), zs + nz * (R - d)
+        cap = _checked(cap, Pos(rc * math.cos(a), rc * math.sin(a), zc) * Sphere(R), '-', f'dimple {k + 1}', min_mm3=0.2)
+    if seam:
+        tri_cap = [(pod_r - seam - 0.5, z0 + 0.5), (pod_r + 2.0, z0 + 0.5), (pod_r + 2.0, z0 - seam - 2.0)]
+        tri_pod = [(pod_r - seam - 0.5, z0 - 0.5), (pod_r + 2.0, z0 - 0.5), (pod_r + 2.0, z0 + seam + 2.0)]
+        rev = lambda tri: revolve(make_face(Polyline(*([(r, 0.0, z) for r, z in tri] + [(tri[0][0], 0.0, tri[0][1])]))), Axis.Z, 360)
+        cap = _checked(cap, rev(tri_cap), '-', 'the cap\'s seam chamfer', min_mm3=0.2)
+        shell = _checked(shell, rev(tri_pod), '-', 'the pod\'s seam chamfer', min_mm3=0.2)
+    return shell, cap, ring
+
+
 def _se_wire(w, h, n, z, pts=72):
     """A closed superellipse |x/w|^n + |y/h|^n = 1 at height z, as one periodic spline (one smooth face when lofted:
     no seams at the corners, as a rounded rectangle's straight-and-arc edges leave). The points start at a corner,

@@ -34,7 +34,16 @@ Sets:
   route whole, its corner close to and cut open;
 - lookbook15, horn15, room15 (round 15): the look book's speakers, horns and room again on the cabinet the owner
   picked (rounded port mouths, levelling feet, the 20 mm sheet; the Cloud's in its own build, 25 mm acrylic, its
-  ports in its acrylic); back15, the speaker from behind, its back on its sixteen screws.
+  ports in its acrylic); back15, the speaker from behind, its back on its sixteen screws;
+- horn16, back16 (round 16): the horn pages and the back again, the horn's cap on its twist-lock, the back's screws
+  black;
+- real16 (round 16, the owner asked whether these looks can really be had from recycled plastic): Eucalyptus, Autumn
+  Birch and Malachite as a sheet press would really give them, whole and at the corner, beside the look book's (now);
+  and Malachite as cast resin;
+- lookbook17, horn17, room17 (round 17, Bark and Crag paused, Cloud the line): two more Cloud speakers, amber (the
+  autumn birch's horn colour) and violet, cover on and off, their horns from the side and from behind, and a Cloud
+  pair in the room;
+- lookbook18, horn18 (round 18): two more, orange (Dust) and blue (Ice), cover on and off, and their horns.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -50,7 +59,7 @@ STUDY = os.path.join(HERE, 'out', 'study')
 DAY = {'covers': '2026-10-10', 'front': '2026-10-11', 'study': '2026-10-11', 'proposal': '2026-10-11',
        'experiments': '2026-10-11', 'horn10': '2026-10-13', 'lookbook2': '2026-10-13', 'room12': '2026-10-13',
        'options14': '2026-10-14', 'lookbook15': '2026-10-14', 'horn15': '2026-10-14', 'room15': '2026-10-14',
-       'back15': '2026-10-14'}
+       'back15': '2026-10-14', 'horn16': '2026-10-15', 'back16': '2026-10-15', 'real16': '2026-10-15'}
 # where each set's renders live (a set first made that day; the rest 2026-10-12)
 
 FRONT_CAM = {'position': [-0.78, -2.6, 1.0], 'target': [0.0, 0.0, 0.64], 'lens_mm': 66, 'level': True}
@@ -448,6 +457,81 @@ SETS = {
         'waveguide': [F('strata-eucalyptus', 'eucalyptus-strata', 'strata resin waveguide', ['bark-face', 'cloth-disc']),
                       F('terrazzo-birch', 'birch-terrazzo', 'terrazzo resin waveguide', ['bark-face', 'cloth-disc'])]}),
 }
+
+# round 16: the horn pages and the back again (the cap's twist-lock, the back's black screws), the round 15 sets' frames
+SETS['horn16'] = dict(SETS['horn15'], title='EARF: the horn from the side and from behind, round 16')
+SETS['back16'] = dict(SETS['back15'], title='EARF: the back, round 16')
+
+# round 16's realism study (the owner: "Do you think it's actually possible to achieve these looks from recycled
+# plastic, or do you think they will look entirely different?"). As a sheet press really gives them: the flakes
+# (7 mm) each one colour, so colour edges go ragged and marks smaller than a few flakes smudge; the pattern warped by
+# the press's flow; each panel its own pressing; the colours a little milky (HDPE); stray flakes of other colours; a
+# waxy satin face (materials.ANY_PRESET). The best a skilled maker could hope for, not the worst
+PRESS16 = {'flake': 0.007, 'flow': [0.16, 0.022], 'smear': [0.03, 0.009], 'keep': 0.22}
+REAL16 = {'press': PRESS16, 'sheets': True, 'milk_plastic': 0.12, 'mottle': 0.09, 'roughness': 0.42, 'coat': 0.08, 'wax': 0.2}
+# a stone's bands laid over a whole panel move more as the press closes: a stronger, tighter swirl
+REAL16_STONE = {**REAL16, 'press': {**PRESS16, 'flow': [0.12, 0.035]}, 'plastic': True, 'flake': 0.009,
+                'specks': ['#0B2A1A', 0.05, 0.004], 'specks2': ['#D8DCCF', 0.03, 0.004]}
+REAL16_FLAVOURS = [('eucalyptus', 'eucalyptus-printed', '#B7C3B4',
+                    {**REAL16, 'specks': ['#2A2622', 0.05, 0.004], 'specks2': ['#D9D4C7', 0.03, 0.004]}),
+                   ('autumn', 'birch-autumn-pressed', '#BDB5A9',
+                    {**REAL16, 'specks': ['#8C877E', 0.05, 0.004], 'specks2': ['#3A3632', 0.02, 0.004]}),
+                   ('malachite', 'crag-malachite', '#E3DACA', REAL16_STONE)]
+# cast resin, as cultured marble and solid surface are made: the pattern cast in, crisp, one shell (its veins run on
+# round the corners), a polished face
+RESIN16 = {'roughness': 0.06, 'coat': 0.9}
+SETS['real16'] = dict(title='EARF: as a sheet press would really give them (round 16)', camera=LOOK2, rows={
+    **{f'{key}: whole': [F(f'real-{key}', flav, 'as really pressed', product=PRESSED, lights=GLOW5, size=[1080, 2160],
+                          stage=sweep(c), sky=STUDIO, materials={'bark': mats})]
+       + ([F('resin-malachite', flav, 'as cast resin', product=PRESSED, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+             sky=STUDIO, materials={'bark': RESIN16})] if key == 'malachite' else [])
+       for key, flav, c, mats in REAL16_FLAVOURS},
+    **{f'{key}: the corner': [F(f'now-{key}-corner', flav, 'as rendered now', product=PRESSED, camera=CORNER14, lights=GLOW5,
+                                size=[1100, 900], stage=sweep(c), sky=STUDIO),
+                              F(f'real-{key}-corner', flav, 'as really pressed', product=PRESSED, camera=CORNER14, lights=GLOW5,
+                                size=[1100, 900], stage=sweep(c), sky=STUDIO, materials={'bark': mats})]
+       + ([F('resin-malachite-corner', flav, 'as cast resin', product=PRESSED, camera=CORNER14, lights=GLOW5, size=[1100, 900],
+             stage=sweep(c), sky=STUDIO, materials={'bark': RESIN16})] if key == 'malachite' else [])
+       for key, flav, c, mats in REAL16_FLAVOURS}})
+
+# round 17 (the owner: "Let's put a pause on bark and crag. The cloud line I think is the strongest aesthetically";
+# "Let's add some other colors to the mix, like the autumn color from the birch horn ... Purple could be cool too"):
+# the two new Cloud speakers framed as the look book frames the others, their horns from the side and from behind,
+# and a Cloud pair (Poison) in the room in place of Eucalyptus. Working names, Acid and Haze, for the owner to confirm
+LOOKS17 = [('Cloud', 'amber', 'cloud-amber', 'acid', '#E9DFC4'), ('Cloud', 'violet', 'cloud-violet', 'haze', '#DCD4E6')]
+SETS['lookbook17'] = dict(title='EARF: two more Cloud speakers, round 17', camera=LOOK2, rows={
+    f'{line}: {label}': [F(f'look-{key}-on', flav, 'cover on', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                           sky=STUDIO),
+                         F(f'look-{key}-off', flav, 'cover off', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                           sky=STUDIO, hide=['cloth-disc'])]
+    for line, key, flav, label, c in LOOKS17})
+SETS['horn17'] = dict(title='EARF: the new Cloud horns from the side and from behind, round 17', camera=HORN10, rows={
+    f'{line}: {label}': [F(f'horn-{key}-side', flav, 'from the side', product=CLOUD, lights=GLOW5, size=[1200, 900], stage=sweep(c),
+                           sky=STUDIO, at={'rotate_z': 115}),
+                         F(f'horn-{key}-back', flav, 'from behind', product=CLOUD, lights=GLOW5, size=[1200, 900], stage=sweep(c),
+                           sky=STUDIO, at={'rotate_z': 155})]
+    for line, key, flav, label, c in LOOKS17})
+SETS['room17'] = dict(title='EARF: a Cloud pair in a room, round 17', camera=ROOM12_CAM, rows={
+    'room': [F('room-poison', 'eucalyptus-y2k-green', 'Poison, in a room', product=CLOUD, lights=ROOM12_LIGHTS, size=[2880, 1620],
+               stage={**ROOM12_SET, 'props': ROOM12_SET['props'] + [mains_lead(q) for q in ROOM12_PAIR]}, sky=ROOM12_SKY,
+               pair=ROOM12_PAIR, sun=ROOM12_SUN, render=ROOM12_RENDER)]})
+DAY.update({'lookbook17': '2026-10-15', 'horn17': '2026-10-15', 'room17': '2026-10-15'})
+
+# round 18 (the owner: "Can we do dust in an orange color, and ice in a blue color?"): two more, framed as round 17's
+LOOKS18 = [('Cloud', 'orange', 'cloud-orange', 'dust', '#E9DCCB'), ('Cloud', 'blue', 'cloud-blue', 'ice', '#D6E3EC')]
+SETS['lookbook18'] = dict(SETS['lookbook17'], title='EARF: Dust and Ice, round 18', rows={
+    f'{line}: {label}': [F(f'look-{key}-on', flav, 'cover on', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                           sky=STUDIO),
+                         F(f'look-{key}-off', flav, 'cover off', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                           sky=STUDIO, hide=['cloth-disc'])]
+    for line, key, flav, label, c in LOOKS18})
+SETS['horn18'] = dict(SETS['horn17'], title='EARF: the Dust and Ice horns from the side and from behind, round 18', rows={
+    f'{line}: {label}': [F(f'horn-{key}-side', flav, 'from the side', product=CLOUD, lights=GLOW5, size=[1200, 900], stage=sweep(c),
+                           sky=STUDIO, at={'rotate_z': 115}),
+                         F(f'horn-{key}-back', flav, 'from behind', product=CLOUD, lights=GLOW5, size=[1200, 900], stage=sweep(c),
+                           sky=STUDIO, at={'rotate_z': 155})]
+    for line, key, flav, label, c in LOOKS18})
+DAY.update({'lookbook18': '2026-10-15', 'horn18': '2026-10-15'})
 
 
 def shot_for(frame, set_camera):

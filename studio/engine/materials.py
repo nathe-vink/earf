@@ -394,6 +394,12 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
     return m
 
 
+# settings any preset takes from a flavour or a shot (round 16's realism study), besides its own: where the pattern is
+# read (space), the press (press, sheets: each panel its own pressing) and the pressed finish (plastic, flake,
+# mottle, specks, specks2, wax, milk_plastic, milk_colour); the bark and stone shaders read them, the rest ignore them
+ANY_PRESET = {'space', 'press', 'sheets', 'plastic', 'flake', 'mottle', 'specks', 'specks2', 'wax', 'milk_plastic', 'milk_colour'}
+
+
 def object_space(nt):
     """A material's world-space pattern read in each object's own space instead (`space: object` in its overrides):
     every link from Geometry's Position and Normal moved to Texture Coordinate's Object and Normal. A pattern laid in
@@ -568,6 +574,7 @@ def _birch_bark(nt, b, p, normal_in=None):
     papery outer layer has peeled. World space, metres; `scale` > 1 makes every mark smaller."""
     node, math_, mix, smooth = _nodes(nt)
     uv, geo = (_front_uv if p.get('project') == 'front' else _face_uv)(nt, node, math_)
+    uv = _press_uv(nt, node, math_, uv, geo, p)              # as really pressed (round 16), with p['press']
     pos = geo.outputs['Position']
     k = p['scale']
     sheet = _sheet_seed(nt, node, math_, geo, p)
@@ -661,6 +668,7 @@ def _eucalyptus_bark(nt, b, p, normal_in=None):
     from statistics import NormalDist
     node, math_, mix, smooth = _nodes(nt)
     uv, geo = (_front_uv if p.get('project') == 'front' else _face_uv)(nt, node, math_)
+    uv = _press_uv(nt, node, math_, uv, geo, p)              # as really pressed (round 16), with p['press']
     k = p['scale']
     sep = node('ShaderNodeSeparateXYZ'); nt.links.new(uv, sep.inputs['Vector'])
     y = sep.outputs['Y']
@@ -946,16 +954,17 @@ def _pressed_sheet(nt, b, p, normal_in=None):
     nt.links.new(n, b.inputs['Normal'])
 
 
-def _folded(nt, node, scale_m, warp, stretch=1.0, seed=0.0, detail=5.0, spread=(0.3, 0.7), axis=0):
+def _folded(nt, node, scale_m, warp, stretch=1.0, seed=0.0, detail=5.0, spread=(0.3, 0.7), axis=0, pos=None):
     """A slow noise folded on itself twice (domain warping, as a pour folds colours through each other), read in world
     space: about 0..1 (the noise's narrow spread, `spread`, stretched), features `scale_m` across, drawn out by
-    `stretch` along x (axis 0) or y (axis 1, front to back: a horn's veins run down its walls into the throat)."""
+    `stretch` along x (axis 0) or y (axis 1, front to back: a horn's veins run down its walls into the throat). `pos`:
+    read there instead of each point's own position (round 16: a stone as really pressed, _press_pos)."""
     geo = node('ShaderNodeNewGeometry')
     mp = node('ShaderNodeMapping')
     sc = [1.0 / scale_m] * 3; sc[axis] = 1.0 / (scale_m * stretch)
     mp.inputs['Scale'].default_value = tuple(sc)
     mp.inputs['Location'].default_value = (seed, seed * 0.7, seed * 1.3)
-    nt.links.new(geo.outputs['Position'], mp.inputs['Vector'])
+    nt.links.new(pos if pos is not None else geo.outputs['Position'], mp.inputs['Vector'])
     v = mp.outputs['Vector']
     for _ in range(2):
         nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0; nz.inputs['Detail'].default_value = 3.0
@@ -1075,6 +1084,74 @@ def _opaque_resin(nt, b, p, normal_in=None):
         nt.links.new(n, I['Normal'])
 
 
+def _press_uv(nt, node, math_, uv, geo, p):
+    """A pattern as it would really come out of a sheet press (p['press'], round 16's realism study; unchanged
+    without it). Coloured flakes laid in a mould flow as they melt, so the pattern's coordinates are first warped by
+    the flow (`flow`: [feature across, how far, metres]) and smeared finer (`smear`, the same), then read at each
+    flake's centre (`flake` across): every flake takes one colour, so colour edges follow the flakes' ragged outlines
+    and marks smaller than a few flakes smudge or vanish. `keep` of the warped, unquantised coordinate is kept, as
+    flakes melt into each other a little. With p['sheets'] each panel is its own pressing."""
+    pr = p.get('press')
+    if not pr:
+        return uv
+    seed = _sheet_seed(nt, node, math_, geo, p)
+    sep = node('ShaderNodeSeparateXYZ'); nt.links.new(uv, sep.inputs['Vector'])
+    x, y = sep.outputs['X'], sep.outputs['Y']
+    for (size, amount), z in ((pr['flow'], 3.1), (pr['smear'], 8.7)):
+        co = node('ShaderNodeCombineXYZ')
+        nt.links.new(math_('DIVIDE', x, size), co.inputs['X']); nt.links.new(math_('DIVIDE', y, size), co.inputs['Y'])
+        if isinstance(seed, float):
+            co.inputs['Z'].default_value = z + seed
+        else:
+            nt.links.new(math_('ADD', seed, z), co.inputs['Z'])
+        nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0; nz.inputs['Detail'].default_value = 3.0
+        nt.links.new(co.outputs['Vector'], nz.inputs['Vector'])
+        cs = node('ShaderNodeSeparateColor'); nt.links.new(nz.outputs['Color'], cs.inputs['Color'])
+        x = math_('ADD', x, math_('MULTIPLY', math_('SUBTRACT', cs.outputs['Red'], 0.5), 2 * amount))
+        y = math_('ADD', y, math_('MULTIPLY', math_('SUBTRACT', cs.outputs['Green'], 0.5), 2 * amount))
+    f = pr['flake']
+    q = node('ShaderNodeCombineXYZ')
+    nt.links.new(math_('DIVIDE', x, f), q.inputs['X']); nt.links.new(math_('DIVIDE', y, f), q.inputs['Y'])
+    if isinstance(seed, float):
+        q.inputs['Z'].default_value = 0.5 + seed
+    else:
+        nt.links.new(math_('ADD', seed, 0.5), q.inputs['Z'])
+    vo = node('ShaderNodeTexVoronoi', feature='F1', voronoi_dimensions='3D'); vo.inputs['Scale'].default_value = 1.0
+    vo.inputs['Randomness'].default_value = 1.0
+    nt.links.new(q.outputs['Vector'], vo.inputs['Vector'])
+    ps = node('ShaderNodeSeparateXYZ'); nt.links.new(vo.outputs['Position'], ps.inputs['Vector'])
+    k = pr.get('keep', 0.15)
+    out = node('ShaderNodeCombineXYZ')
+    for axis, warped in (('X', x), ('Y', y)):
+        cell = math_('MULTIPLY', ps.outputs[axis], f)
+        nt.links.new(math_('ADD', cell, math_('MULTIPLY', math_('SUBTRACT', warped, cell), k)), out.inputs[axis])
+    return out.outputs['Vector']
+
+
+def _press_pos(nt, node, math_, p):
+    """_press_uv for a pattern read in 3D (a stone's): the point moved within its face's plane to where its flake's
+    centre reads, and, with p['sheets'], each panel's pattern read from elsewhere, as separate pressings."""
+    uv, geo = _face_uv(nt, node, math_)
+    uq = _press_uv(nt, node, math_, uv, geo, p)
+    a, b_ = node('ShaderNodeSeparateXYZ'), node('ShaderNodeSeparateXYZ')
+    nt.links.new(uv, a.inputs['Vector']); nt.links.new(uq, b_.inputs['Vector'])
+    dh, dv = math_('SUBTRACT', b_.outputs['X'], a.outputs['X']), math_('SUBTRACT', b_.outputs['Y'], a.outputs['Y'])
+    nrm = node('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Normal'], nrm.inputs['Vector'])
+    ax, ay, up = (math_('ABSOLUTE', nrm.outputs[c]) for c in ('X', 'Y', 'Z'))
+    pos = node('ShaderNodeSeparateXYZ'); nt.links.new(geo.outputs['Position'], pos.inputs['Vector'])
+    seed = _sheet_seed(nt, node, math_, geo, p)
+    out = node('ShaderNodeCombineXYZ')
+    d = {'X': math_('MULTIPLY', dh, math_('ADD', ay, up)),
+         'Y': math_('ADD', math_('MULTIPLY', dh, ax), math_('MULTIPLY', dv, up)),
+         'Z': math_('MULTIPLY', dv, math_('SUBTRACT', 1.0, up))}
+    for c, k in (('X', 0.37), ('Y', 0.21), ('Z', 0.13)):
+        v = math_('ADD', pos.outputs[c], d[c])
+        if not isinstance(seed, float):
+            v = math_('ADD', v, math_('MULTIPLY', seed, k))
+        nt.links.new(v, out.inputs[c])
+    return out.outputs['Vector'], uq, geo
+
+
 def _sheet_seed(nt, node, math_, geo, p):
     """With p['sheets'], a number that differs for each way a face looks (+x, -x, +y, ...), so a pattern read in the
     face's plane starts afresh on each panel, as separate sheets do; 0.0 otherwise."""
@@ -1091,6 +1168,8 @@ def _pressed_finish(nt, b, p, col, uv, geo, normal_in=None):
     (`specks`), a waxy satin face (`roughness`, `coat`, `wax` subsurface) and the press plate's faint peel."""
     node, math_, mix, smooth = _nodes(nt)
     seed = _sheet_seed(nt, node, math_, geo, p)
+    if p.get('milk_plastic'):                        # round 16: HDPE is a little translucent and waxy, its colours milky
+        col = mix(p['milk_plastic'], col, hex_lin(p.get('milk_colour', '#E8E6E0')))
 
     def cells(size, smear, z):
         sm = node('ShaderNodeTexNoise'); sm.inputs['Scale'].default_value = 1.0 / (size * 0.3); sm.inputs['Detail'].default_value = 3.0
@@ -1114,11 +1193,12 @@ def _pressed_finish(nt, b, p, col, uv, geo, normal_in=None):
     for ch in ('Red', 'Green', 'Blue'):
         nt.links.new(k, g.inputs[ch])
     col = mix(1.0, col, g.outputs['Color'], 'MULTIPLY')
-    if p.get('specks'):
-        kc, share, size = p['specks']
-        _, g4, d4 = cells(size, 0.6, 5.7)
-        sp = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(d4, 0.12, 0.22)), math_('LESS_THAN', g4, share))
-        col = mix(sp, col, hex_lin(kc))
+    for key, z in (('specks', 5.7), ('specks2', 9.3)):    # crumbs of other colours (round 16: a second)
+        if p.get(key):
+            kc, share, size = p[key]
+            _, g4, d4 = cells(size, 0.6, z)
+            sp = math_('MULTIPLY', math_('SUBTRACT', 1.0, smooth(d4, 0.12, 0.22)), math_('LESS_THAN', g4, share))
+            col = mix(sp, col, hex_lin(kc))
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Roughness'].default_value = p['roughness']
     if 'Coat Weight' in b.inputs:
@@ -1174,11 +1254,12 @@ def _stone(nt, b, p, normal_in=None):
     strata, with crystals and open pits."""
     node, math_, mix, smooth = _nodes(nt)
     I = b.inputs
+    pressed = _press_pos(nt, node, math_, p) if p.get('press') else None     # round 16: as really pressed
     if p.get('strata'):
         col = _strata(nt, {'palette': p['strata'], 'band': p['band'], 'warp': p['warp']})
     else:
         f = _folded(nt, node, p['band_m'], p['warp'], p['stretch'], seed=p['seed'], detail=p['detail'], spread=(0.25, 0.75),
-                    axis=p.get('stretch_axis', 0))
+                    axis=p.get('stretch_axis', 0), pos=pressed[0] if pressed else None)
         if p['repeat'] > 1:
             f = math_('FRACT', math_('MULTIPLY', f, p['repeat']))
         r = node('ShaderNodeValToRGB'); cr = r.color_ramp; cr.interpolation = 'LINEAR'
@@ -1233,6 +1314,10 @@ def _stone(nt, b, p, normal_in=None):
         nt.links.new(math_('ADD', p['roughness'], math_('MULTIPLY', pit, 0.3)), I['Roughness'])
     else:
         I['Roughness'].default_value = p['roughness']
+    if p.get('plastic'):                             # round 16: the stone's pattern in pressed plastic, finished as one
+        uv, geo = (pressed[1], pressed[2]) if pressed else _face_uv(nt, node, math_)
+        _pressed_finish(nt, b, p, col, uv, geo, n)
+        return
     nt.links.new(col, I['Base Color'])
     if 'Coat Weight' in I:
         I['Coat Weight'].default_value = p['coat']; I['Coat Roughness'].default_value = 0.08

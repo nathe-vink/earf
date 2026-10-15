@@ -66,6 +66,19 @@ def _circle(w):
     return None
 
 
+def _silhouette(faces, axis, level):
+    """The outline of several faces parallel to a sheet seen along its axis: each moved onto one level, fused, and the
+    largest piece's outer boundary taken."""
+    from build123d import Location, Vector
+    moved = []
+    for f in faces:
+        d = [0.0, 0.0, 0.0]
+        d[axis] = level - getattr(f.center(), 'XYZ'[axis])
+        moved.append(f.moved(Location(Vector(*d))))
+    u = moved[0].fuse(*moved[1:]).clean() if len(moved) > 1 else moved[0]
+    return _wire_poly(max(u.faces(), key=lambda f: f.area).outer_wire())
+
+
 def analyse(part, centre):
     """The cutting record of one sheet part: its thickness axis, frame, outline, holes, pockets (both sides) and the
     faces a 2D file cannot carry. `centre` is the product's centre, to tell the outer face when the part does not."""
@@ -91,6 +104,7 @@ def analyse(part, centre):
     rec = dict(name=part.name, axis='xyz'[axis], sign=sign, T=T, outline=None, holes=[], circles=[], pockets={},
                under={}, odd=[], frame=(right.tolist(), up.tolist()))
     outer_open, inner_open, floor_inner, under_outer, under_inner = [], [], [], [], []
+    outer_faces, outer_floors = [], []                         # the outer face's pieces, and the pockets' floors between
     slant = []                                                 # faces neither parallel nor square to the sheet
     for f in part.solid.faces():
         c = f.center()
@@ -109,6 +123,7 @@ def analyse(part, centre):
         outward = np.sign(fn[axis]) == sign
         if abs(a - a_out) < TOL and outward:
             rec['outline'] = _wire_poly(f.outer_wire())
+            outer_faces.append(f)
             outer_open += list(f.inner_wires())
         elif abs(a - a_in) < TOL and not outward:
             inner_open += list(f.inner_wires())
@@ -117,11 +132,14 @@ def analyse(part, centre):
         elif outward:                                          # a floor seen from the outer face: a pocket
             d = round(abs(a_out - a), 2)
             rec['pockets'].setdefault(d, []).append(_wire_poly(f.outer_wire()))
+            outer_floors.append(f)
             floor_inner += list(f.inner_wires())
         else:                                                  # a floor seen from the inner face
             d = round(abs(a - a_in), 2)
             rec['under'].setdefault(d, []).append(_wire_poly(f.outer_wire()))
             under_outer.append(f.outer_wire()); under_inner += list(f.inner_wires())
+    if len(outer_faces) > 1:            # the outer face cut in pieces by pockets that run off it (a batt notched round a pad
+        rec['outline'] = _silhouette(outer_faces + outer_floors, axis, a_out)   # under the top): their shared outline
 
     cache = {}
     def sig(w):                                            # the opening's box in the sheet's plane: centre, size

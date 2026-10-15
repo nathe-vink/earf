@@ -84,6 +84,15 @@ stretches of them. A shot's material override `"space": "object"` reads them in 
 A shot's (or a flavour's) override of a material by name may also name another `preset`: the same parts in another
 finish, for a study (barkhorn's rotomoulded cabinet in speckle, its Cloud ports in the cabinet's acrylic).
 
+A pattern can also be shown as a sheet press would really give it (`materials.ANY_PRESET`: settings any preset takes,
+which the bark and stone shaders read and the rest ignore). `press: {flake, flow, smear, keep}` breaks the pattern
+into flakes `flake` metres across, each one colour, after warping it by the press's flow (`flow` and `smear`: a
+feature's size and how far it moves, metres); `keep` of the unbroken pattern shows through, as flakes melt into each
+other. `sheets: true` starts the pattern afresh on each panel, as separate pressings do. On a stone, `plastic: true`
+finishes it as pressed plastic. `milk_plastic` lifts the colours toward HDPE's milky white (`milk_colour`), `specks`
+and `specks2` (`[colour, share, size]`) scatter flakes of other colours, and `roughness`, `coat` and `wax` give the
+waxy satin face (barkhorn's realism study, `frames.py real16`).
+
 ## What it writes
 
 - `IMG.shot.json`: the resolved shot, every setting as used.

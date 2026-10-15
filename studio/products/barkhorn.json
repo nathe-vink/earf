@@ -215,15 +215,15 @@
    "material": "ring"
   },
   {
-   "match": "post-1|post-2|post-3|post-4|tie-rod-rod|back-screws|feet-stem",
+   "match": "post-1|post-2|post-3|post-4|tie-rod-rod|feet-stem",
    "material": "rod"
   },
   {
-   "match": "port-screws",
+   "match": "back-screws|port-screws",
    "material": "screw"
   },
   {
-   "match": "amp-box-gasket|post-sleeves|back-gasket",
+   "match": "amp-box-gasket|cap-o-ring|post-sleeves|back-gasket",
    "material": "sleeve"
   }
  ],
@@ -1403,6 +1403,90 @@
      "stretch": 4.0,
      "stretch_axis": 1,
      "web_stretch": 2.5
+    }
+   }
+  },
+  "cloud-amber": {
+   "bark": "clear_resin",
+   "panel": "#D8D5CD",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#9A6A12",
+   "horn_preset": "clear_resin",
+   "horn": "#FFFFFF",
+   "horn_deep": "#F2B705",
+   "horn_cloud": 0.0,
+   "materials": {
+    "bark": {
+     "deep": "#F2D06B",
+     "radius": 0.025,
+     "roughness": 0.05
+    },
+    "horn": {
+     "roughness": 0.03
+    }
+   }
+  },
+  "cloud-violet": {
+   "bark": "clear_resin",
+   "panel": "#D8D5CD",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#3F2A5E",
+   "horn_preset": "clear_resin",
+   "horn": "#FFFFFF",
+   "horn_deep": "#5E3F8F",
+   "horn_cloud": 0.0,
+   "materials": {
+    "bark": {
+     "deep": "#BEADD8",
+     "radius": 0.025,
+     "roughness": 0.05
+    },
+    "horn": {
+     "roughness": 0.03
+    }
+   }
+  },
+  "cloud-orange": {
+   "bark": "clear_resin",
+   "panel": "#D8D5CD",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#8C3B14",
+   "horn_preset": "clear_resin",
+   "horn": "#FFFFFF",
+   "horn_deep": "#E0661C",
+   "horn_cloud": 0.0,
+   "materials": {
+    "bark": {
+     "deep": "#F2B184",
+     "radius": 0.025,
+     "roughness": 0.05
+    },
+    "horn": {
+     "roughness": 0.03
+    }
+   }
+  },
+  "cloud-blue": {
+   "bark": "clear_resin",
+   "panel": "#D8D5CD",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#24557E",
+   "horn_preset": "clear_resin",
+   "horn": "#FFFFFF",
+   "horn_deep": "#3C86C2",
+   "horn_cloud": 0.0,
+   "materials": {
+    "bark": {
+     "deep": "#B5D9EE",
+     "radius": 0.025,
+     "roughness": 0.05
+    },
+    "horn": {
+     "roughness": 0.03
     }
    }
   }

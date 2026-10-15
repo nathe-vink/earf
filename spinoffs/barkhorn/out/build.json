@@ -1,8 +1,8 @@
 {
  "product": "barkhorn",
  "title": "barkhorn",
- "parts": 60,
- "seconds": 645,
+ "parts": 61,
+ "seconds": 569,
  "sheets": {
   "baltic-birch-18": 3,
   "mdf-6": 1,
@@ -12,13 +12,13 @@
  "budget_usd": {
   "cut": 374,
   "print": 126,
-  "buy": 2799,
-  "cast": 1646,
+  "buy": 2807,
+  "cast": 1647,
   "lathe": 219,
   "sheet metal": 171
  },
  "options_usd": {},
  "checks_ok": true,
  "drawings": "spinoffs/barkhorn/out/drawings/barkhorn-sheets.pdf",
- "render": null
+ "render": "spinoffs/barkhorn/out/render/barkhorn.glb"
 }

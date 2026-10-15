@@ -12,8 +12,8 @@
 | port-left, port-right | print | 4 | ASA, FDM (outdoor, paintable) | 337 cm3 | 31.61 |
 | woofer | buy | 2 | FaitalPRO 15PR400-8 15 in woofer (treated paper cone, neodymium, 8 ohm) | 393 frame, 356 cut-out, 165 deep | 194.00 |
 | amp-plate | buy | 2 | Hypex FusionAmp FA122 DSP plate amplifier, 2 x 125 W into 4 ohm | 315 x 120 x 55 plate, 291 x 96 recess | 422.40 |
-| waveguide | cast | 2 | Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented | 5222 cm3, 635 x 418 x 372 | 684.78 |
-| waveguide-cap | cast | 2 | Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented | 187 cm3, 210 x 32 x 210 | 138.21 |
+| waveguide | cast | 2 | Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented | 5218 cm3, 635 x 418 x 372 | 684.59 |
+| waveguide-cap | cast | 2 | Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented | 204 cm3, 209 x 38 x 209 | 138.97 |
 | hf | buy | 2 | B&C Speakers DE1085TN 2 in compression driver, titanium diaphragm, 100 mm voice coil, neodymium, 16 ohm (round 5: the owner's bigger throat) | 154 across, 86 deep, 4 x M6 on 102 | 512.00 |
 | hf-adaptor | lathe | 2 | Aluminium 6061 | 194 x 20 x 194 | 43.82 |
 | post-1, post-2 | lathe | 4 | Stainless steel 304 | 20 x 20 x 80 | 15.96 |
@@ -29,13 +29,14 @@
 | lead-woofer | buy | 2 | Round-sheathed speaker cable 2 x 1.5 mm2, 1 m |  | 2.00 |
 | cable-glands | buy | 2 | Three M12 nylon cable glands for 3 to 6.5 mm cable, black: two in the amplifier compartment's front, one under the top at the cable post, in an M12 insert for plastics (in acrylic, a thread tapped in the top) |  | 4.00 |
 | rating-plate | buy | 2 | Rating plate 70 x 40 x 1, black anodised aluminium, laser-marked: the model, the serial number, the ratings, the marks (CE, UKCA, FCC, the WEEE bin) and the maker's address; two M3 screws into inserts |  | 10.00 |
+| cap-o-ring | buy | 2 | O-ring for the horn's cap, 182 x 2 mm, EPDM 70 Shore A (round 16: the twist-lock), and a tube of silicone grease |  | 4.00 |
 | post-sockets | buy | 2 | The posts' brass fittings: four M10 x 1 threaded inserts bonded with epoxy into the waveguide's pads after casting, in holes drilled through a jig taken off the top's sockets (13 across; the front pair 10 long, the rear 14, the tie post's bored through), and four sockets knurled to 15 and pressed into the cabinet's top, or bonded with epoxy into acrylic, which a press fit would crack (15 long: a 12 bore 13 deep on a 2 floor; the cable post's floor with a 7 hole, the tie post's with a 6.5), turned to order, a set of eight |  | 48.00 |
 | post-sleeves | buy | 2 | Polyurethane sleeves 12 x 10 x 13, Shore A 90, a set of four: pressed into the posts' sockets, they centre the posts and stop them buzzing |  | 8.00 |
 | tie-rod | buy | 2 | The horn's tie-down: an M6 A2 threaded rod about 110 long, an M6 knurled thumb nut and a washer, and a flanged M6 threaded insert (body 9 x 10) for the top's underside: one for plastics in HDPE, bonded with epoxy in acrylic |  | 8.00 |
 | land-left, land-right | cut | 4 | 18 mm Baltic birch plywood, BB/BB | 25 x 844 | 1.53 |
 | land-top, land-bottom | cut | 4 | 18 mm Baltic birch plywood, BB/BB | 474 x 25 | 0.86 |
 | back-gasket | buy | 2 | EPDM sponge strip 25 x 3, closed cell, cut and joined as a frame on the back's four land strips, punched for its 16 screws |  | 8.00 |
-| back-screws | buy | 2 | 16 M5 button heads (ISO 7380, A2) on nylon washers: the back to the inserts in its land strips (M5 x 40 into HDPE or acrylic, M5 x 30 into plywood) |  | 8.00 |
+| back-screws | buy | 2 | 16 M5 button heads (ISO 7380, A2 stainless, black: round 16) on black nylon washers: the back to the inserts in its land strips (M5 x 40 into HDPE or acrylic, M5 x 30 into plywood) |  | 8.00 |
 | feet | buy | 2 | Levelling feet M8, a 40 mm swivel base on a rubber pad, black, with lock nuts, a set of 4 |  | 18.00 |
 | port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 kind, 4 x 16 in the 20 mm HDPE; M4 x 20 into tapped threads in the 25 mm acrylic; wood screws 4 x 14 in the plywood; round 15: their holes stop 2 short of the panel's back), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
 | top-pad | cut | 2 | 18 mm Baltic birch plywood, BB/BB | 108 x 28 | 0.22 |
@@ -57,13 +58,13 @@
 
 | | USD |
 |---|---|
-| buy | 2,799 |
-| cast | 1,646 |
+| buy | 2,807 |
+| cast | 1,647 |
 | cut | 374 |
 | lathe | 219 |
 | print | 126 |
 | sheet metal | 171 |
-| total | 5,335 |
+| total | 5,344 |
 
 No price yet for: Bark for laminating, a square metre: paper birch (Betula papyrifera) sheet from fallen or felled trees, or a smooth-barked gum's shed bark pressed flat (or a UV-printed veneer of it); approve a sample board first.
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

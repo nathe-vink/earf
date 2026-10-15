@@ -44,7 +44,7 @@ SHEETS = {
     # cast acrylic about $1,400 a 4 x 8 ft sheet at 25 mm (US retail, 2026), as thin cast sheet runs pro rata
     'recycled-hdpe': dict(title='Recycled HDPE sheet, pressed to order (a sheet press workspace)', density=0.95,
                           sheet=(1000.0, 1000.0), usd_per_m2_mm=16.0, thicknesses=(5, 6, 8, 10, 12, 15, 20, 25, 30)),
-    'cast-acrylic': dict(title='Cast acrylic, tinted through (smoke, green, frosted ice), 4 x 8 ft sheet', density=1.19,
+    'cast-acrylic': dict(title='Cast acrylic, tinted through in the speaker\'s colour, 4 x 8 ft sheet', density=1.19,
                          sheet=(2440.0, 1220.0), usd_per_m2_mm=19.0, thicknesses=(6, 8, 10, 12, 15, 20, 25, 30)),
     # a speaker's lining: soft, cut with a long knife or a hot wire against a straightedge rather than routed
     'polyester-batting': dict(title='Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content',
