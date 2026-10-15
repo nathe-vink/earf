@@ -1,0 +1,105 @@
+{
+ "shot": "studio/shots/barkhorn/globe23/tubes.json",
+ "image": "renders/2026-10-15/barkhorn/globe23/tubes.png",
+ "seconds": {
+  "build": 9.7,
+  "render": 1924.8
+ },
+ "samples": 96,
+ "size": [
+  1200,
+  1200
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "tube-acid#0": {
+   "part": "tube-acid",
+   "centre_px": [
+    498.9,
+    791.2
+   ],
+   "box_px": [
+    179,
+    541,
+    808,
+    1061
+   ],
+   "depth_m": 2.027
+  },
+  "tube-dust#0": {
+   "part": "tube-dust",
+   "centre_px": [
+    600.0,
+    575.3
+   ],
+   "box_px": [
+    184,
+    266,
+    1016,
+    916
+   ],
+   "depth_m": 2.0
+  },
+  "tube-flare#0": {
+   "part": "tube-flare",
+   "centre_px": [
+    703.9,
+    353.5
+   ],
+   "box_px": [
+    386,
+    113,
+    1033,
+    613
+   ],
+   "depth_m": 1.973
+  },
+  "tube-haze#0": {
+   "part": "tube-haze",
+   "centre_px": [
+    600.0,
+    575.3
+   ],
+   "box_px": [
+    315,
+    84,
+    885,
+    1095
+   ],
+   "depth_m": 2.0
+  },
+  "tube-ice#0": {
+   "part": "tube-ice",
+   "centre_px": [
+    600.0,
+    575.3
+   ],
+   "box_px": [
+    167,
+    169,
+    1033,
+    965
+   ],
+   "depth_m": 2.0
+  },
+  "tube-poison#0": {
+   "part": "tube-poison",
+   "centre_px": [
+    600.0,
+    575.3
+   ],
+   "box_px": [
+    315,
+    84,
+    885,
+    1095
+   ],
+   "depth_m": 2.0
+  }
+ }
+}

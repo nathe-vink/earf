@@ -1,0 +1,82 @@
+{
+ "_note": "EARF globe in tubes for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/out-globe/render/earf-globe-tubes.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  -126.3
+ ],
+ "materials": {
+  "tube-acid": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#E9B320",
+   "radius": 0.005,
+   "roughness": 0.02
+  },
+  "tube-dust": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#E5732A",
+   "radius": 0.005,
+   "roughness": 0.02
+  },
+  "tube-flare": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#D2382F",
+   "radius": 0.005,
+   "roughness": 0.02
+  },
+  "tube-haze": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#6C4BA3",
+   "radius": 0.005,
+   "roughness": 0.02
+  },
+  "tube-ice": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#4A90C8",
+   "radius": 0.005,
+   "roughness": 0.02
+  },
+  "tube-poison": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#4F7F3A",
+   "radius": 0.005,
+   "roughness": 0.02
+  }
+ },
+ "assign": [
+  {
+   "match": "tube-acid",
+   "material": "tube-acid"
+  },
+  {
+   "match": "tube-dust",
+   "material": "tube-dust"
+  },
+  {
+   "match": "tube-flare",
+   "material": "tube-flare"
+  },
+  {
+   "match": "tube-haze",
+   "material": "tube-haze"
+  },
+  {
+   "match": "tube-ice",
+   "material": "tube-ice"
+  },
+  {
+   "match": "tube-poison",
+   "material": "tube-poison"
+  }
+ ],
+ "flavours": {
+  "default": {}
+ }
+}

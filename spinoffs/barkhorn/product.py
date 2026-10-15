@@ -705,8 +705,9 @@ def mark_solid(width, at, face, t):
 
 
 def grip_boxes(P):
-    """Round 21's recessed grips: each side's opening (y0, y1, z0, z1) and how deep its cup reaches in."""
-    g = dict(w=124.0, h=42.0, depth=40.0, below=92.0)
+    """Round 21's recessed grips: each side's opening (y0, y1, z0, z1) and how deep its cup reaches in. P['grip_w'] the
+    opening's length (round 23: 240 takes both hands, 124 one)."""
+    g = dict(w=P.get('grip_w', 124.0), h=42.0, depth=40.0, below=92.0)
     y0, z1 = P['D'] / 2 - g['w'] / 2, P['H'] - g['below']
     return (y0, y0 + g['w'], z1 - g['h'], z1), g['depth']
 
@@ -720,7 +721,12 @@ def extras(P, out):
     lifting a 72 kg speaker: "Open to ideas"), any of: 'handles', a removable bar handle each side, screwed into two M8
     inserts bonded in the side near the top; 'castors', four castors screwed into the feet's M8 inserts in place of the
     feet; 'grips', a recessed grip in each side near the top, a cup of 3 mm acrylic cemented behind the opening, the
-    side's batt cut round it."""
+    side's batt cut round it.
+
+    Round 23 (the owner: "either the front corner or high on the back, etched in the speakers own tint or uncolored"):
+    the back's mark etched too, 140 wide, and P['mark_finish'] for the back's and the corner's: 'etch' (frosted,
+    uncoloured) or 'tint' (the etch filled with the speaker's own colour, deeper: its cover's and ring's). And of the
+    grips ("only if it would help ergonomically"): P['grip_w'], their length, 240 for two hands (grip_boxes)."""
     import dataclasses
     from build123d import Compound, Pos
     marks, lifts = P.get('mark') or [], P.get('lift') or []
@@ -731,19 +737,22 @@ def extras(P, out):
     bb = lambda n: by[n].solid.bounding_box()
     add = []
     etched = 'laser-etched, frosted, about 0.1 deep'
+    tint = P.get('mark_finish', 'etch') == 'tint'
+    face_finish = 'mark-tint' if tint else 'etch'
+    how = etched + (', the etch filled with the speaker\'s own colour, deeper' if tint else '')
     for m in marks:
         if m == 'plate':
             b = bb('rating-plate')
             add.append(Part('mark-plate', mark_solid(46.0, ((b.min.X + b.max.X) / 2, b.max.Y, b.max.Z - 8.0 - 46.0 * 300 / 1020), '+y', 0.1),
                             Bought('rating-plate'), finish='etch', notes=['EARF laser-marked across the rating plate\'s top, 46 wide']))
         elif m == 'back':
-            add.append(Part('mark-back', mark_solid(140.0, (W / 2, D, H - 72.0 - 140.0 * 300 / 1020), '+y', 3.0),
-                            Sheet('cast-acrylic', 3.0), finish='mark',
-                            notes=['EARF cut from 3 mm white cast acrylic, 140 wide, cemented high on the back, centred']))
+            add.append(Part('mark-back', mark_solid(140.0, (W / 2, D, H - 72.0 - 140.0 * 300 / 1020), '+y', 0.1),
+                            Bought('laser-etch'), finish=face_finish,
+                            notes=[f'EARF {how}, 140 wide, high on the back, centred']))
         elif m == 'corner':
             b = bb('front-panel'); w = 60.0
             add.append(Part('mark-corner', mark_solid(w, (b.max.X - 24.0 - w / 2, b.min.Y, b.max.Z - 24.0 - w * 300 / 1020), '-y', 0.1),
-                            Bought('laser-etch'), finish='etch', notes=[f'EARF {etched}, 60 wide, into the front panel\'s top right corner']))
+                            Bought('laser-etch'), finish=face_finish, notes=[f'EARF {how}, 60 wide, into the front panel\'s top right corner']))
         elif m == 'edge':
             w = 52.0
             add.append(Part('mark-edge', mark_solid(w, (W / 2, 0.0, (T - w * 300 / 1020) / 2), '-y', 0.1), Bought('laser-etch'),
@@ -1634,6 +1643,18 @@ VARIANTS['birch-y2k-ice'] = {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FF
                              'bark': 'clear_resin', 'disc': '#E7E6E1',
                              'materials': {'bark': {'deep': '#F5F6F5', 'radius': 0.025, 'roughness': 0.05, 'milk': 0.05},
                                            'horn': {'roughness': 0.03}}}
+# round 23 (the owner: "Are all of the others not hazy? If so this one could be not hazy for consistency. Completely
+# clear like the old phones, or semi opaque like the old gameboy. It would be good to compare options"): the colours
+# and Smoke are clear, no haze in them, so two candidates for Fog to set beside round 22's faint haze: water-clear (as
+# the colours, the lining seen sharp through it) and semi-opaque (milk 0.18: the lining and the fittings seen as soft
+# shapes, as through a translucent Game Boy). A frosted body (the engine's frosted preset, glossy) was tried and read
+# as opaque white plastic. (Named birch- as Fog's is, so frames.py takes the same base shot.)
+VARIANTS['birch-fog-clear'] = {**VARIANTS['birch-y2k-ice'],
+                         'materials': {**VARIANTS['birch-y2k-ice']['materials'],
+                                       'bark': {'deep': '#F7F8F7', 'radius': 0.025, 'roughness': 0.05, 'milk': 0.0}}}
+VARIANTS['birch-fog-opal'] = {**VARIANTS['birch-y2k-ice'],
+                        'materials': {**VARIANTS['birch-y2k-ice']['materials'],
+                                      'bark': {'deep': '#F5F6F5', 'radius': 0.025, 'roughness': 0.05, 'milk': 0.18}}}
 
 
 PRODUCT = Product(
@@ -1675,6 +1696,7 @@ PRODUCT = Product(
                'lining': {'preset': 'batting'},
                # round 21's marks: laser-etched (frosted) acrylic or laser-marked anodising, white acrylic, a print on cloth
                'etch': {'preset': 'satin_paint', 'color': '#ECEBE7', 'roughness': 0.85, 'specular': 0.15},
+               'mark-tint': {'preset': 'satin_paint', 'color': '$disc', 'roughness': 0.6, 'specular': 0.25},   # round 23
                'mark': {'preset': 'satin_paint', 'color': '#F3F2EE', 'roughness': 0.3, 'specular': 0.45},
                'print': {'preset': 'satin_paint', 'color': '#EDEBE5', 'roughness': 0.9, 'specular': 0.05},
                # round 13: the fittings a photograph shows (through the Cloud's acrylic, most of all)

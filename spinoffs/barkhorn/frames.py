@@ -608,6 +608,38 @@ SETS['options21'] = dict(title='EARF: where the mark could go, and ways to lift 
                   camera=CAM21([1.15, -0.55, 0.98], [0.28, 0.0, 0.79], 60), **OPT21)]})
 DAY.update({'options21': '2026-10-15'})
 
+# round 23. Fog (the owner: "Completely clear like the old phones, or semi opaque like the old gameboy. It would be good
+# to compare options"): the two candidates, cover on, as the look book's Fog
+SETS['fog23'] = dict(SETS['lookbook17'], title='EARF: Fog clear or semi-opaque, round 23', rows={
+    'Fog': [F('fog-clear', 'birch-fog-clear', 'water-clear', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep('#CFDCE4'), sky=STUDIO),
+            F('fog-opal', 'birch-fog-opal', 'semi-opaque', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep('#CFDCE4'), sky=STUDIO)]})
+# the mark (the owner: "either the front corner or high on the back, etched in the speakers own tint or uncolored"):
+# both places, each etched plain (frosted) or filled with the speaker's own colour, on Poison as round 21's
+MODELS.update({'marks23-etch': {'base': 'cloud', 'mark': ['back', 'corner'], 'mark_finish': 'etch'},
+               'marks23-tint': {'base': 'cloud', 'mark': ['back', 'corner'], 'mark_finish': 'tint'}})
+SETS['options23'] = dict(title='EARF: the mark etched or tinted, and the grips, round 23', camera=LOOK2, rows={
+    f'the {place}': [F(f'mark-{place}-{fin}', 'eucalyptus-y2k-green', f'{place}, {label}', product=form_product(f'marks23-{fin}'),
+                       hide=[f'mark-{other}'], **cam, **OPT21) for fin, label in (('etch', 'etched'), ('tint', 'in its own colour'))]
+    for place, other, cam in (('corner', 'back', dict(camera=CAM21([0.46, -0.78, 0.97], [0.20, -0.19, 0.84], 70))),
+                              ('back', 'corner', dict(camera=CAM21([-0.32, -1.25, 1.02], [0.0, -0.21, 0.80], 55), at=BACK21)))})
+# the grips (the owner: "only if it would help ergonomically"): each of two lifters at the sides wants both hands in
+# one, so a grip 240 long, framed as round 21's 124 (options21's lift-grips)
+MODELS.update({'lift-grips240': {'base': 'cloud', 'lift': ['grips'], 'grip_w': 240.0}})
+SETS['options23']['rows']['the grips'] = [F('lift-grips240', 'eucalyptus-y2k-green', 'grips 240 long, for both hands',
+                                            product=form_product('lift-grips240'),
+                                            camera=CAM21([1.15, -0.55, 0.98], [0.28, 0.0, 0.79], 60), **OPT21)]
+# the site (the owner: "I like the idea of the horn shots rotating 360 degrees as the user scrolls. It doesn't need to
+# be fully fluid. It could kind of stutter like a stop motion movie, but not too much"): each horn through a full turn
+# in 24 steps of 15 degrees, framed close as the site's tiles (round 21's side view, the lens long enough that the horn
+# fits at every turn), small
+TURN = 24
+CAM23 = {'position': [1.2, -2.5, 1.25], 'target': [0.0, 0.05, 1.04], 'lens_mm': 125, 'level': True}
+SETS['turn23'] = dict(title='EARF: the eight horns turning, round 23', camera=CAM23, rows={
+    f'{line}: {label}': [F(f'turn-{key}-{k:02d}', flav, f'{15 * k} degrees', product=CLOUD, lights=GLOW5, size=[640, 576],
+                           stage=sweep(c), sky=STUDIO, camera=CAM23, at={'rotate_z': (115 + 15 * k) % 360}) for k in range(TURN)]
+    for line, key, flav, label, c in LOOKS21})
+DAY.update({'fog23': '2026-10-15', 'options23': '2026-10-15', 'turn23': '2026-10-15'})
+
 
 def shot_for(frame, set_camera):
     bark = frame['bark'].split('-')[0]
@@ -749,6 +781,9 @@ def main():
                                stdout=subprocess.DEVNULL)
             cells[row].append((png, fr['label']))
     cells = {k: v for k, v in cells.items() if v}
+    if not cells:
+        print('no frames rendered yet: shots written, no grid')   # e.g. --build --rows none-yet
+        return
     print(grid(S['title'], cells, os.path.join(rd, f'{a.set}.png')))
 
 

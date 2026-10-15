@@ -1,4 +1,4 @@
-"""EARF's globe as a 3D Earth, and the software it moves in (round 22).
+"""EARF's globe as a 3D Earth, and the software it moves in (rounds 22 and 23).
 
 The owner, of round 21's five globes: "Get rid of the black and white segments. Also we're kind of losing site of the
 fact that it's supposed to look like earth. Maybe movie animation was a bad lead. More like late 90s early 2000s
@@ -17,16 +17,30 @@ spinning disc silhouette that looks like a coin spinning. It can flash each colo
   drawn in spectrum order: the parallels warm, north to south (Flare, Dust, Acid), the meridians cool, west to east
   (Poison, Ice, Haze). Nothing black or white is in it; Smoke and Fog are the black-only and white-only marks.
 - Lines: the six ovals, the far halves lighter and under the near, so even in one colour the near side reads in front
-  (the even version, every line one weight, tangles in one colour). Discs: each ring
+  (the even version, every line one weight, tangles in one colour). Tubes (round 23): the even lines as tubes of
+  tinted acrylic, see-through where they cross. Discs: each ring
   filled as a flat disc, no strokes, the discs crossing one another as six sheets of the Clouds' tinted acrylic slotted
   into a globe would, each showing only where nothing nearer covers it, a seam of the ground between facets.
-- Animated (the ident): each ring drawn at one steady speed, in the ground's ink, and given its colour only once it
-  closes, as a paint bucket only fills a closed shape; then the globe turns once on its axis, as the loading globes
-  of 1998 browsers did, and EARF types in beside it.
 - The software kit: the loader (a white circle rolling across black uncovers the six colours in its wake, and covers
-  them again on its way back; or black on paper), the cursor (a circle with the six colours trailing it, each a beat
-  behind), and the coin (a disc spinning on its edge flashes each colour in turn, deals out the three meridians as it
-  turns, and the parallels close round them into the globe).
+  them again on its way back; or black on paper) and the cursor (a circle with the six colours trailing it, each a
+  beat behind).
+
+Round 23. The owner, of round 22's ident: "I like the even lines, but not the animation. I like the discs, but not the
+animation. Instead of them being drawn, what else can we try? One idea I had was to have a parent ring or disc move
+back and forth similar to a printer, leaving pieces in its wake. Another idea is to have two gyroscopic rings spin on
+different axis until they align to reveal the globe. Another is using the disks and/or circles to makes a speaker
+kick/reverb effect and shape", "The coin animation wasn't working for me", and of the draw: "It doesn't seem fluid or
+quick enough". So four idents, each about two seconds, none drawn, the even lines the default:
+
+- Printer: a disc sweeps across and back six times, like a print head, and leaves the globe behind it band by band.
+- Gyroscope: two rings spin on crossed axes, slowing, until they settle as the equator and the meridian facing us;
+  the other four open out from them.
+- Kick: the globe seen from above its pole is a speaker, rings round one centre; it kicks twice, each kick sending
+  three rings of colour out, then tips down to the Earth's tilt.
+- Coin: round 22's coin, faster, starting only once it is in view, and looping in the player.
+
+Then the globe moves aside and EARF types in. The theme section shows an icon for each Cloud (icons.py) and the line's
+name four ways (Clouds, Atmosphere, Elements, and the colours as chemical elements).
 
     python3 spinoffs/barkhorn/earth.py                  ->  brand/earth.html, brand/earth-<style>-<colour>.svg,
                                                             brand/earth-lockup-<ground>.svg
@@ -42,6 +56,7 @@ from shapely.ops import unary_union
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import marks as M                                        # noqa: E402
+import icons as IC                                       # noqa: E402
 
 OUT = os.path.join(HERE, 'brand')
 LEAN, ELEV, LAT = 23.44, 22.0, 40.0                      # the axis's lean (the Earth's), its tip toward us, the parallels
@@ -51,6 +66,20 @@ CLOUDS = [(name, colour) for key, line, num, name, colour in M.SPEAKERS if line 
 HUES = [c for n, c in CLOUDS if n not in ('Fog', 'Smoke')]          # Flare Dust Acid Poison Ice Haze, ring by ring
 NAMES = [n for n, c in CLOUDS if n not in ('Fog', 'Smoke')]
 PAPER, INK, WHITE = '#F2EFEA', '#1C1A18', '#F6F5F2'
+# round 23 (the owner: "Could try one where the even lines look like acrylic tubes"): each ring a tube of tinted acrylic,
+# a little bolder than the line so its shading reads: a faint tint through its middle (core), deeper along its two
+# walls (wall, at wall_at either side, wall_w wide), and a highlight toward the light, up and to the left (hi: its
+# offset, width and opacity, of the tube's width); the tint multiplies over what is behind it on paper and glows
+# (screen) on ink, so wherever two rings cross, one shows through the other; each ring fading with depth to `far` at
+# the back (from depth -fade to +fade; a ring is flat, so its depth runs straight across the picture and a linear
+# gradient fades it exactly), so the near side reads in front. Blending in either order comes to the same, so each
+# ring's tint is one unbroken loop (no joins to show); the highlights go over every tint, on the near side only,
+# coming in from the rim over depth `shine`. Tried and left: every run alike, which tangles; the far runs at half all
+# at once, which steps at the rim; a glint through the far wall, which crowds it; solid rods, no walls, which read as
+# plastic rather than glass
+W_TUBE = 0.105
+TUBE = dict(core=0.45, wall=0.8, wall_at=0.36, wall_w=0.28, hi=(-0.16, -0.2, 0.12, 0.9), far=0.5, fade=0.5, shine=0.3)
+_GRAD = [0]                                              # gradient ids, unique across a page of many marks
 NIGHT = '#121114'                                        # the ink ground
 
 
@@ -127,6 +156,77 @@ def lines_body(colours, depth=False, spin=0.0, w=W_LINE):
     return f'<g fill="none" stroke-linecap="round" stroke-linejoin="round">{far}{near}</g>'
 
 
+def _offset(c, d, closed):
+    """A polyline (SVG coordinates) moved d along its normal at every point."""
+    if closed:
+        prev, nxt = np.roll(c, 1, 0), np.roll(c, -1, 0)
+    else:
+        prev, nxt = np.vstack([c[:1], c[:-1]]), np.vstack([c[1:], c[-1:]])
+    t = nxt - prev
+    L = np.hypot(t[:, 0], t[:, 1])[:, None]
+    L[L == 0] = 1.0
+    return c + np.stack([-t[:, 1], t[:, 0]], 1) / L * d
+
+
+def _depth_ends(g, z0, z1):
+    """Where on the picture (SVG coordinates) the ring's plane is at depths z0 and z1: the ends of a gradient that
+    follows its depth; None if the plane faces us or is seen edge on."""
+    n, c = g['n'], g['c']
+    if abs(n[2]) < 0.03:
+        return None
+    gx, gy = -n[0] / n[2], -n[1] / n[2]
+    m2 = gx * gx + gy * gy
+    if m2 < 1e-9:
+        return None
+    at = lambda zz: (c[0] + gx * (zz - c[2]) / m2, -(c[1] + gy * (zz - c[2]) / m2))
+    return at(z0), at(z1)
+
+
+def tubes_body(colours, ground='paper', spin=0.0, w=W_TUBE, T=None):
+    """The six rings as acrylic tubes (TUBE): each ring's tint (core and walls, blended) one unbroken loop fading
+    with depth, then every highlight over them, on the near side. A ring seen edge on (no depth gradient) is drawn in
+    runs instead, its far runs at T['far'] and its highlight on its near runs."""
+    T = {**TUBE, **(T or {})}
+    mode, defs, tints, lights = ('screen' if ground == 'night' else 'multiply'), [], [], []
+    path = lambda c, closed: 'M' + 'L'.join(f'{x:.4f} {y:.4f}' for x, y in c) + ('Z' if closed else '')
+
+    def grad(ends, colour, a0):
+        _GRAD[0] += 1
+        (x1, y1), (x2, y2) = ends
+        defs.append(f'<linearGradient id="tube{_GRAD[0]}" gradientUnits="userSpaceOnUse" x1="{x1:.4f}" y1="{y1:.4f}" '
+                    f'x2="{x2:.4f}" y2="{y2:.4f}"><stop offset="0" stop-color="{colour}" stop-opacity="{a0}"/>'
+                    f'<stop offset="1" stop-color="{colour}"/></linearGradient>')
+        return f'url(#tube{_GRAD[0]})'
+
+    def tube(c, closed, paint, k):
+        tint = f' stroke="{paint}" style="mix-blend-mode:{mode}"'
+        tints.append(f'<path d="{path(c, closed)}"{tint} stroke-opacity="{T["core"] * k:.3f}" stroke-width="{w:.4f}"/>')
+        tints.extend(f'<path d="{path(_offset(c, sg * T["wall_at"] * w, closed), closed)}"{tint} stroke-opacity="{T["wall"] * k:.3f}" '
+                     f'stroke-width="{T["wall_w"] * w:.4f}"/>' for sg in (1, -1))
+
+    def light(c, closed, paint):
+        dx, dy, lw, op = T['hi']
+        lights.append(f'<path d="{path(c + [dx * w, dy * w], closed)}" stroke="{paint}" stroke-opacity="{op}" stroke-width="{lw * w:.4f}"/>')
+
+    clean = lambda c: c[np.r_[True, np.hypot(*np.diff(c, axis=0).T) > 1e-9]]   # no repeated points: they skew a butt end
+    for i, g in enumerate(rings(spin)):
+        tint_ends, light_ends = _depth_ends(g, -T['fade'], T['fade']), _depth_ends(g, 0.0, T['shine'])
+        if tint_ends:
+            c = g['pts'][:, :2] * [1, -1]
+            tube(c, True, grad(tint_ends, colours[i], T['far']), 1.0)
+            light(c, True, grad(light_ends, '#FFFFFF', 0))
+            continue
+        for front in (False, True):
+            for r in _runs(g['pts'], front):
+                closed = len(r) > 2 and np.allclose(r[0], r[-1])
+                c = clean(np.asarray(r[:-1] if closed else r)[:, :2] * [1, -1])
+                tube(c, closed, colours[i], 1.0 if front else T['far'])
+                if front:
+                    light(c, closed, '#FFFFFF')
+    return (f'<defs>{"".join(defs)}</defs><g fill="none" stroke-linecap="butt" stroke-linejoin="round">'
+            f'{"".join(tints)}{"".join(lights)}</g>')
+
+
 def facets(spin=0.0):
     """Each disc's visible part: its own oval less every other disc's oval where that disc is nearer (two planes'
     depths differ linearly across the screen, so where one is nearer is a half-plane)."""
@@ -170,13 +270,16 @@ def discs_body(colours, spin=0.0, seam=SEAM, least=0.004):
     return out
 
 
-def mark_svg(style, colours, size=None, bg=None, label='EARF'):
-    """style: lines (the far halves lighter: the mark), even (every line one weight) or discs; colours: six (a ring
-    each) or one."""
+def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper'):
+    """style: lines (the far halves lighter: the mark), even (every line one weight), discs, or tubes (round 23, on
+    `ground`, paper or night); colours: six (a ring each) or one."""
     if isinstance(colours, str):
         colours = [colours] * 6
-    body = discs_body(colours) if style == 'discs' else lines_body(colours, depth=style == 'lines')
-    e = 1 + W_LINE / 2
+    if style == 'tubes':
+        body, e = tubes_body(colours, ground), 1 + W_TUBE / 2 + 0.02
+    else:
+        body = discs_body(colours) if style == 'discs' else lines_body(colours, depth=style == 'lines')
+        e = 1 + W_LINE / 2
     wh = f' width="{size}" height="{size}"' if size else ''
     ground = f'<rect x="{-e:.4f}" y="{-e:.4f}" width="{2 * e:.4f}" height="{2 * e:.4f}" fill="{bg}"/>' if bg else ''
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-e:.4f} {-e:.4f} {2 * e:.4f} {2 * e:.4f}"{wh} role="img" '
@@ -203,10 +306,10 @@ def letters():
     return out
 
 
-def lockup_svg(style, colours, word, size=None, bg=None):
+def lockup_svg(style, colours, word, size=None, bg=None, ground='paper'):
     """The globe beside EARF, its diameter one and a half cap heights, centred on the letters."""
-    k = 225 / (1 + W_LINE / 2)
-    inner = mark_svg(style, colours)
+    k = 225 / ((1 + W_TUBE / 2 + 0.02) if style == 'tubes' else (1 + W_LINE / 2))
+    inner = mark_svg(style, colours, ground=ground)
     inner = inner[inner.index('</title>') + 8:inner.rindex('</svg>')]
     vw, vh, gap = 450 + 110 + M.WORDMARK_W, 450, 110
     wh = f' width="{size * vw / vh:.0f}" height="{size}"' if size else ''
@@ -219,7 +322,7 @@ def lockup_svg(style, colours, word, size=None, bg=None):
 
 
 def data():
-    return dict(lean=LEAN, elev=ELEV, lat=LAT, mer=list(MERIDIANS), w=W_LINE, wDepth=W_DEPTH, seam=SEAM, hues=HUES,
+    return dict(lean=LEAN, elev=ELEV, lat=LAT, mer=list(MERIDIANS), w=W_LINE, wDepth=W_DEPTH, seam=SEAM, hues=HUES, wTube=W_TUBE, tube=TUBE,
                 names=NAMES, paper=PAPER, ink=INK, night=NIGHT, white=WHITE, letters=letters(), wordW=M.WORDMARK_W)
 
 
@@ -231,18 +334,57 @@ RAILS = [('Black only', 'paper', lambda: INK), ('White only', 'night', lambda: W
 def rails_html():
     """The guide rails: each style in black only, white only, one colour and multicolour, and the singles."""
     rows = ''
-    for style, title in (('lines', 'Lines'), ('discs', 'Discs')):
-        cells = ''.join(f'<figure class="rail {g}">{mark_svg(style, f(), label=f"{title}, {t.lower()}")}<figcaption>{t}</figcaption></figure>'
-                        for t, g, f in RAILS)
+    for style, title in (('even', 'Lines'), ('tubes', 'Tubes'), ('discs', 'Discs')):
+        cells = ''.join(f'<figure class="rail {g}">{mark_svg(style, f(), label=f"{title}, {t.lower()}", ground=g)}'
+                        f'<figcaption>{t}</figcaption></figure>' for t, g, f in RAILS)
         singles = ''.join(f'<span class="one" title="{n}">{mark_svg(style, c, label=f"{title} in {n}")}</span>'
                           for n, c in zip(NAMES, HUES))
         rows += (f'<div class="railrow"><h3>{title}</h3><div class="rails">{cells}</div>'
                  f'<div class="singles"><span class="lab">Each Cloud in its own colour</span>{singles}</div></div>')
-    locks = (f'<figure class="lock paper">{lockup_svg("lines", HUES, INK)}<figcaption>Lockup on paper</figcaption></figure>'
-             f'<figure class="lock night">{lockup_svg("lines", HUES, WHITE)}<figcaption>On ink</figcaption></figure>'
+    locks = (f'<figure class="lock paper">{lockup_svg("even", HUES, INK)}<figcaption>Lockup on paper</figcaption></figure>'
+             f'<figure class="lock night">{lockup_svg("even", HUES, WHITE)}<figcaption>On ink</figcaption></figure>'
              f'<figure class="lock paper">{lockup_svg("discs", INK, INK)}<figcaption>Black only, discs</figcaption></figure>'
-             f'<figure class="lock night">{lockup_svg("lines", WHITE, WHITE)}<figcaption>White only</figcaption></figure>')
+             f'<figure class="lock night">{lockup_svg("even", WHITE, WHITE)}<figcaption>White only</figcaption></figure>'
+             f'<figure class="lock paper">{lockup_svg("tubes", HUES, INK)}<figcaption>Tubes on paper</figcaption></figure>'
+             f'<figure class="lock night">{lockup_svg("tubes", HUES, WHITE, ground="night")}<figcaption>Tubes on ink</figcaption></figure>')
     return rows + f'<div class="locks">{locks}</div>'
+
+
+# the line's name, three ways (the owner: "Atmosphere is cool, but open to other earth themes. Elements was another
+# idea I had"), and a fourth: the same colours as chemical elements, numbered by their atomic numbers
+THEMES = [
+    ('Clouds', 'Now', 'Cloud 05 &middot; Ice', 'Things in the sky. The cloud mark stays the line&rsquo;s sign, with the '
+     'eight icons under it.', None),
+    ('Atmosphere', 'Wider', 'Atmosphere 05 &middot; Ice', 'The same eight names, as what the air holds: light (Flare, Haze), '
+     'what it carries (Dust, Fog, Smoke, Poison) and what falls through it (Acid, Ice). The globe already draws one.', None),
+    ('Elements', 'Sharper', 'Element 05 &middot; Ice', 'The same eight, read as the elements and their dangers: fire, earth, '
+     'water and air, acid and poison. The icons work as hazard signs, which is where the crossbones and the drop come '
+     'from.', None),
+    ('Elements, literally', 'Furthest', 'Element 27 &middot; Cobalt', 'Each speaker named for a chemical element of its '
+     'colour, and numbered by its atomic number. The icons fit half (Sulfur&rsquo;s drop, Chlorine&rsquo;s crossbones, '
+     'Iodine&rsquo;s haze, Carbon&rsquo;s smoke); the rest would be redrawn.',
+     [('Neon', 10), ('Sodium', 11), ('Sulfur', 16), ('Chlorine', 17), ('Cobalt', 27), ('Iodine', 53), ('Magnesium', 12),
+      ('Carbon', 6)]),
+]
+ON_INK = {'Smoke': '#8A888E'}                            # Smoke's lines lightened, to be seen on ink at all
+
+
+def theme_html():
+    """The eight icons tinted on paper, as lines on ink and in black only; then the line's name four ways."""
+    rows = ''
+    for title, ground, draw in (('Tinted, on paper', 'paper', lambda n: IC.icon_svg(n, IC.COLOURS[n])),
+                                ('Lines, on ink', 'night', lambda n: IC.icon_svg(n, None, line=ON_INK.get(n, IC.COLOURS[n]))),
+                                ('Black only', 'paper', lambda n: IC.icon_svg(n, INK, line=PAPER))):
+        cells = ''.join(f'<figure class="icon {ground}">{draw(n)}<figcaption>{n}</figcaption></figure>' for n, _ in IC.ICONS)
+        rows += f'<div class="iconrow"><h3>{title}</h3><div class="icons">{cells}</div></div>'
+    cards = ''
+    for name, tag, box, why, chem in THEMES:
+        items = [(n, IC.COLOURS[n], '') for n, _ in IC.ICONS] if chem is None else \
+                [(c, IC.COLOURS[n], f' {z}') for (n, _), (c, z) in zip(IC.ICONS, chem)]
+        lis = ''.join(f'<li><i style="background:{col}"></i>{n}<span>{z}</span></li>' for n, col, z in items)
+        cards += (f'<div class="name"><div class="tag">{tag}</div><h3>{name}</h3><div class="box">{box}</div>'
+                  f'<p>{why}</p><ol>{lis}</ol></div>')
+    return rows + f'<div class="names">{cards}</div>'
 
 
 PAGE = r"""<title>EARF Globe</title>
@@ -251,13 +393,13 @@ PAGE = r"""<title>EARF Globe</title>
 /* a desktop of 2001: platinum grey, white panels with a bevel, Verdana at small sizes; the globe and its software */
 :root {
   --page: #DEDCD7; --panel: #F6F5F2; --fg: #1C1A18; --muted: #57534C; --line: #B9B5AD; --hi: #FFFFFF; --lo: #A8A49C;
-  --bar: #E9E7E3; --font: Verdana, Tahoma, 'DejaVu Sans', Geneva, sans-serif; color-scheme: light;
+  --bar: #E9E7E3; --ring: rgba(0,0,0,.3); --font: Verdana, Tahoma, 'DejaVu Sans', Geneva, sans-serif; color-scheme: light;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --page: #121114; --panel: #1B1A1E; --fg: #ECEAE6; --muted: #A6A29B; --line: #3A383F; --hi: #2C2A31; --lo: #08080A;
-  --bar: #232127; color-scheme: dark } }
+  --bar: #232127; --ring: rgba(255,255,255,.4); color-scheme: dark } }
 :root[data-theme="dark"] { --page: #121114; --panel: #1B1A1E; --fg: #ECEAE6; --muted: #A6A29B; --line: #3A383F;
-  --hi: #2C2A31; --lo: #08080A; --bar: #232127; color-scheme: dark }
+  --hi: #2C2A31; --lo: #08080A; --bar: #232127; --ring: rgba(255,255,255,.4); color-scheme: dark }
 body { margin: 0; background: var(--page); color: var(--fg); font: 14px/1.6 var(--font);
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   padding-block: 28px 56px }
@@ -276,7 +418,7 @@ p { margin: 0; max-width: 72ch }
 .bar i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,.18) }
 .bar b { font-weight: 400; margin-left: 4px }
 .screen { position: relative; aspect-ratio: 16 / 9; background: #F2EFEA }
-.screen canvas, .strip canvas, .pad canvas { display: block; width: 100%; height: 100% }
+.screen canvas, .strip canvas, .pad canvas, .coin canvas { display: block; width: 100%; height: 100% }
 .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 10px; border-top: 1px solid var(--line) }
 .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: var(--panel);
   box-shadow: inset 1px 1px 0 var(--hi) }
@@ -297,6 +439,21 @@ button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px }
 .one svg { display: block; width: 46px; height: 46px; padding: 6px; background: #F2EFEA; border-radius: 4px }
 .locks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 14px; border-top: 1px solid var(--line) }
 .lock svg { display: block; width: 100%; height: auto; padding: 8% 7%; box-sizing: border-box; border-radius: 4px }
+.lead { padding: 14px 14px 0; color: var(--muted); font-size: 13px }
+.iconrow { display: grid; gap: 8px; padding: 14px }
+.iconrow + .iconrow { padding-top: 0 }
+.icons { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px }
+.icon { margin: 0; display: grid; gap: 4px; font-size: 11px; color: var(--muted); text-align: center }
+.icon svg { display: block; width: 100%; height: auto; padding: 10%; box-sizing: border-box; border-radius: 4px }
+.names { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 14px; border-top: 1px solid var(--line) }
+.name { display: grid; gap: 6px; align-content: start; padding: 12px; border: 1px solid var(--line); border-radius: 4px;
+  box-shadow: inset 1px 1px 0 var(--hi), inset -1px -1px 0 var(--lo) }
+.name .tag { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted) }
+.name .box { font-size: 12px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 3px; justify-self: start }
+.name p { font-size: 12px; color: var(--muted) }
+.name ol { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 10px; font-size: 12px }
+.name li i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; box-shadow: inset 0 0 0 1px var(--ring) }
+.name li span { color: var(--muted) }
 .kit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px }
 .kit .wide { grid-column: 1 / -1 }
 .strip { aspect-ratio: 5 / 1 }
@@ -306,26 +463,30 @@ button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px }
 .notes h3 { margin-top: 6px }
 .notes ul { margin: 0; padding-left: 18px; max-width: 74ch } .notes li { margin: 3px 0 }
 @media (max-width: 720px) { .rails { grid-template-columns: repeat(3, minmax(0, 1fr)) } .kit, .locks { grid-template-columns: 1fr }
+  .icons { grid-template-columns: repeat(4, minmax(0, 1fr)) } .names { grid-template-columns: 1fr }
   .seg button, .btn { padding: 10px 10px } }
 body.capture { padding: 0; overflow: hidden } body.capture main { display: none }
 #cap { display: none } body.capture #cap { display: block; position: fixed; inset: 0; width: 100vw; height: 100vh }
 </style>
 <main>
   <header>
-    <div class="eyebrow">EARF &middot; Round 22 &middot; the globe</div>
-    <h1>A 3D Earth in six colours, and the software it lives in</h1>
-    <p class="lede">Three parallels and three meridians on the Earth's own 23.4&deg; tilt, tipped toward you so the far
-      side shows through. Each ring is one of the six colour Clouds, and none of them is black or white: Smoke and Fog
-      are the black-only and white-only marks. Each ring is drawn at one steady speed and takes its colour once it
-      closes. Then the globe turns on its axis, the way browser globes did in 1998.</p>
+    <div class="eyebrow">EARF &middot; Round 23 &middot; the globe</div>
+    <h1>The globe arrives four ways, and the Clouds get icons</h1>
+    <p class="lede">The same 3D Earth: three parallels and three meridians on the Earth's 23.4&deg; tilt, each ring one of
+      the six colour Clouds, in even lines, as acrylic tubes or as discs. It is no longer drawn. A printer head lays it down band by band,
+      two gyroscope rings spin into it, it kicks like a speaker seen from above, or a spinning coin deals it out. Each
+      takes about two seconds before EARF types in.</p>
   </header>
 
   <section class="win" aria-label="The ident">
     <div class="bar"><i style="background:#D2382F"></i><i style="background:#E9B320"></i><i style="background:#4F7F3A"></i><b>earf.world &mdash; ident</b></div>
     <div class="screen" id="screen"><canvas id="stage" aria-label="The EARF globe drawn ring by ring"></canvas></div>
     <div class="controls">
+      <div class="seg" id="kind" role="group" aria-label="Ident">
+        <button aria-pressed="true" data-v="printer">Printer</button><button aria-pressed="false" data-v="gyro">Gyroscope</button><button aria-pressed="false" data-v="kick">Kick</button><button aria-pressed="false" data-v="coin">Coin</button>
+      </div>
       <div class="seg" id="style" role="group" aria-label="Style">
-        <button aria-pressed="true" data-v="lines">Lines</button><button aria-pressed="false" data-v="even">Even lines</button><button aria-pressed="false" data-v="discs">Discs</button>
+        <button aria-pressed="true" data-v="even">Lines</button><button aria-pressed="false" data-v="tubes">Tubes</button><button aria-pressed="false" data-v="discs">Discs</button>
       </div>
       <div class="seg" id="ground" role="group" aria-label="Ground">
         <button aria-pressed="true" data-v="paper">Paper</button><button aria-pressed="false" data-v="night">Ink</button>
@@ -340,6 +501,14 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
     __RAILS__
   </section>
 
+  <section class="win" aria-label="Theme">
+    <div class="bar"><b>Theme &mdash; an icon for each Cloud, from the marks&rsquo; own circles, bars and triangles</b></div>
+    <p class="lead">Each icon is made as the cloud mark is: a few circles, bars and triangles, all filled, then every
+      outline drawn over them, like stacked clear acrylic. Poison is two crossing bars with circles at the ends; Acid is
+      a circle with a triangle on top.</p>
+    __THEME__
+  </section>
+
   <section class="kit" aria-label="The software kit">
     <div class="win wide">
       <div class="bar"><b>Loader &mdash; a white circle uncovers the six; black on paper the same</b></div>
@@ -351,9 +520,8 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <div class="pad" id="pad" style="background:#121114"><canvas id="cursor" aria-label="Cursor trail"></canvas></div>
     </div>
     <div class="win">
-      <div class="bar"><b>Coin &mdash; spins, flashes each colour, becomes the globe</b></div>
-      <div class="coin" style="background:#121114"><canvas id="coin" aria-label="Spinning coin becoming the globe"></canvas></div>
-      <div class="controls"><button class="btn" id="coin-replay">Replay</button></div>
+      <div class="bar"><b>Kick, looped &mdash; for the speakers</b></div>
+      <div class="coin" style="background:#121114"><canvas id="kickloop" aria-label="The globe from above the pole kicking like a speaker"></canvas></div>
     </div>
   </section>
 
@@ -364,16 +532,23 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <ul>
         <li>The axis leans 23.4&deg;, as the Earth's does and as a desk globe's stand holds it. It also tips 22&deg; toward you, so the parallels open into ovals and the far halves show behind the near ones.</li>
         <li>The parallels are warm, north to south: Flare, Dust, Acid. The meridians are cool: Poison, Ice, Haze. Ice is the meridian facing you, so the globe's outline is blue.</li>
-        <li>The rings are drawn in that spectrum order. Each one stays in the ground's ink until it closes, then takes its colour all at once, like a paint bucket filling a closed shape.</li>
-        <li>The far half of each ring is lighter and sits under the near halves. Even in one colour, the near side reads in front and the globe reads as round. With every line the same weight, the one-colour mark tangles (see Even lines in the player).</li>
+        <li>Lines are even, every line one weight, the far halves under the near. Round 22's lighter far halves (in <code>brand/earth-lines-*.svg</code>) remain for one colour at small sizes, where even lines tangle.</li>
+        <li>Seen from above the pole, the same rings are a speaker: rings round one centre, with the meridians as spokes. The Kick uses that view, and the looped kick could mark the speakers themselves.</li>
+        <li>Tubes: each ring a tube of tinted acrylic, faint through the middle and deeper along its walls, with a highlight toward the light. On paper the tint darkens what is behind it, as coloured acrylic does; on ink it glows. Where two rings cross, one shows through the other, and the far halves are at half strength so the near side reads in front. It is for screens and large sizes, like the animation; the flat lines stay the mark for print.</li>
       </ul>
       <h3>The rails</h3>
       <ul>
         <li>Black only: paper, print, embossing and a one-colour etch. White only: dark grounds, and the etched mark on the acrylic.</li>
         <li>One colour: each Cloud's own mark, for its speaker, box and page. Avoid Acid on paper, where yellow is too faint; use it on ink.</li>
-        <li>Multicolour: the brand at large. Animated: screens only (the ident, the loader, the cursor, the coin).</li>
-        <li>Lines for most sizes. Below about 32 px the far halves fade and the near ones still read. Discs are the solid version, for fills, stamps, stickers and the smallest sizes.</li>
+        <li>Multicolour: the brand at large. Animated: screens only (the idents, the loader, the cursor).</li>
+        <li>Even lines for most sizes. Below about 32 px, or in one colour, round 22's lighter far halves read better. Discs are the solid version, for fills, stamps, stickers and the smallest sizes.</li>
         <li>Clear space: a quarter of the globe's width on every side. In the lockup, the globe is one and a half cap heights tall, centred on the letters.</li>
+      </ul>
+      <h3>The icons</h3>
+      <ul>
+        <li>Each works in the same rails as the globe: tinted, lines and black only. Fog's tint is nearly white, so on paper its outline carries it.</li>
+        <li>Where they could go: beside the mark on the speaker (etched as the mark is), on the end of the box, and as each speaker's tab on the site.</li>
+        <li>The names don't have to change to use them. Under Elements the icons read as hazard signs; under Clouds or Atmosphere, as weather.</li>
       </ul>
     </div>
   </section>
@@ -522,29 +697,174 @@ function drawGlobe(ctx, V, s) {
     const p = upto(g, s.drawn[k]).at(-1); ctx.fillStyle = ink; ctx.beginPath(); ctx.arc(V.X(p), V.Y(p), w * 0.95, 0, TAU); ctx.fill(); });
 }
 
-// the ident: the rings one by one at one speed, each coloured when it closes; one turn; EARF typed in
-const SPEED = 7.2, BEAT = 0.2, LEAD = 0.5, TURN = 3.2, TYPE = 0.11, MOVE = 0.8;
-function identPlan() {
-  const gs = ringsAt(0), plan = []; let t = LEAD;
-  gs.forEach(g => { const d = g.len / SPEED; plan.push([t, t + d]); t += d + BEAT; });
-  const turn0 = t + 0.1, move0 = turn0 + TURN - MOVE, word0 = turn0 + TURN + 0.15;
-  return { plan, turn0, move0, word0, end: word0 + 4 * TYPE + 1.6 };
+// round 23: rings for the new idents (a parallel at any latitude; the equator tipped about an axis in its plane)
+function parallelRing(phi, B, n = 160) {
+  const { a, e1, e2 } = B, cp = Math.cos(rad(phi)), sp = Math.sin(rad(phi)), pts = [];
+  for (let i = 0; i <= n; i++) { const l = TAU * i / n, c = Math.cos(l), s = Math.sin(l);
+    pts.push([0, 1, 2].map(j => cp * (c * e1[j] + s * e2[j]) + sp * a[j])); }
+  return { pts, n: a, d: sp, c: a.map(v => v * sp), r: cp };
 }
-const IDENT = identPlan();
+function tippedRing(beta, B, k, n = 160) {
+  const { a, e1, e2 } = B, ax = [0, 1, 2].map(j => k[0] * e1[j] + k[1] * e2[j]);
+  const rot = v => { const c = Math.cos(beta), s = Math.sin(beta), kv = cross(ax, v), kd = dot(ax, v);
+    return [0, 1, 2].map(j => v[j] * c + kv[j] * s + ax[j] * kd * (1 - c)); };
+  const pts = [];
+  for (let i = 0; i <= n; i++) { const l = TAU * i / n; pts.push(rot([0, 1, 2].map(j => Math.cos(l) * e1[j] + Math.sin(l) * e2[j]))); }
+  return { pts, n: rot(a), d: 0, c: [0, 0, 0], r: 1 };
+}
+// round 23, the tubes (earth.py TUBE): a ring's runs on one side as screen polylines, each cut at the rim, the run that
+// ends where the ring began joined to the one it began with, a ring wholly on one side one closed loop
+function sideRuns(V, pts, front) {
+  const out = [], P = p => [V.X(p), V.Y(p)], n = pts.length - 1; let cur = null, at0 = false;
+  const add = (r, q) => { const l = r[r.length - 1]; if (!l || Math.hypot(q[0] - l[0], q[1] - l[1]) > 1e-6) r.push(q); };
+  for (let i = 0; i <= n; i++) {
+    const p = pts[i], inn = (p[2] >= 0) === front;
+    if (i > 0) { const q = pts[i - 1], qin = (q[2] >= 0) === front;
+      if (qin !== inn) { const s = q[2] / (q[2] - p[2]), c = P([q[0] + s * (p[0] - q[0]), q[1] + s * (p[1] - q[1])]);
+        if (qin) { add(cur, c); out.push(cur); cur = null; } else cur = [c]; } }
+    if (inn) { if (!cur) { cur = []; if (i === 0) at0 = true; } add(cur, P(p)); }
+  }
+  const loop = Math.hypot(pts[0][0] - pts[n][0], pts[0][1] - pts[n][1], pts[0][2] - pts[n][2]) < 1e-9;
+  if (cur && at0 && loop) { if (!out.length) return [{ run: cur.slice(0, -1), closed: true }]; out[0] = cur.concat(out[0].slice(1)); }
+  else if (cur) out.push(cur);
+  return out.filter(r => r.length > 1).map(run => ({ run, closed: false }));
+}
+function offsetRun(run, d, closed) {
+  const n = run.length;
+  return run.map((p, i) => { const a = run[closed ? (i + n - 1) % n : Math.max(0, i - 1)], b = run[closed ? (i + 1) % n : Math.min(n - 1, i + 1)];
+    const tx = b[0] - a[0], ty = b[1] - a[1], L = Math.hypot(tx, ty) || 1; return [p[0] - ty / L * d, p[1] + tx / L * d]; });
+}
+function runPath(ctx, run, closed) { ctx.beginPath(); run.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); if (closed) ctx.closePath(); }
+// each ring a tube of tinted acrylic: every far run, then every near run, each its tint (faint through the middle,
+// deeper along the walls) blended over what is behind (multiply on paper, screen on ink), then its highlight
+// a paint for ring g that follows its depth: alpha a0 at depth z0 to 1 at z1 (a ring is flat, so its depth runs straight
+// across the picture); null if its plane faces us or is seen edge on
+const rgba = (c, a) => `rgba(${[1, 3, 5].map(i => parseInt(c.slice(i, i + 2), 16)).join(',')},${a})`;
+function depthPaint(ctx, V, g, col, z0, z1, a0) {
+  const n = g.n; if (Math.abs(n[2]) < 0.03) return null;
+  const gx = -n[0] / n[2], gy = -n[1] / n[2], m2 = gx * gx + gy * gy; if (m2 < 1e-9) return null;
+  const at = z => { const k = (z - g.c[2]) / m2; return [V.cx + (g.c[0] + gx * k) * V.R, V.cy - (g.c[1] + gy * k) * V.R]; };
+  const [a, b] = [at(z0), at(z1)], p = ctx.createLinearGradient(a[0], a[1], b[0], b[1]);
+  p.addColorStop(0, rgba(col, a0)); p.addColorStop(1, rgba(col, 1)); return p;
+}
+// each ring a tube of tinted acrylic: its tint (faint through the middle, deeper along the walls) one unbroken loop
+// fading with depth, blended over what is behind (multiply on paper, screen on ink, either order the same), then every
+// highlight over all of them, on the near side only; a ring seen edge on is drawn in runs, its far runs fainter
+function drawTubes(ctx, V, items, G) {
+  const T = D.tube, w = D.wTube * V.R, mode = G.bg === D.night ? 'screen' : 'multiply', [dx, dy, lw, op] = T.hi;
+  ctx.lineCap = 'butt'; ctx.lineJoin = 'round';
+  const tube = (run, closed, paint, k) => {
+    ctx.save(); ctx.globalCompositeOperation = mode; ctx.strokeStyle = paint;
+    ctx.globalAlpha = T.core * k; ctx.lineWidth = w; runPath(ctx, run, closed); ctx.stroke();
+    ctx.globalAlpha = T.wall * k; ctx.lineWidth = w * T.wall_w;
+    for (const sg of [1, -1]) { runPath(ctx, offsetRun(run, sg * T.wall_at * w, closed), closed); ctx.stroke(); }
+    ctx.restore(); };
+  const light = (run, closed, paint) => {
+    ctx.save(); ctx.globalAlpha = op; ctx.strokeStyle = paint; ctx.lineWidth = lw * w; ctx.translate(dx * w, dy * w);
+    runPath(ctx, run, closed); ctx.stroke(); ctx.restore(); };
+  const later = [];
+  for (const i of items) {
+    if (i.g.r <= 1e-3) continue;
+    const tp = depthPaint(ctx, V, i.g, i.col, -T.fade, T.fade, T.far);
+    if (tp) { const pts = i.g.pts, n = pts.length - 1, loop = Math.hypot(pts[0][0] - pts[n][0], pts[0][1] - pts[n][1]) < 1e-9;
+      const run = (loop ? pts.slice(0, -1) : pts).map(p => [V.X(p), V.Y(p)]);
+      tube(run, loop, tp, 1); later.push([run, loop, depthPaint(ctx, V, i.g, '#FFFFFF', 0, T.shine, 0)]); continue; }
+    for (const front of [false, true]) for (const { run, closed } of sideRuns(V, i.g.pts, front)) {
+      tube(run, closed, i.col, front ? 1 : T.far); if (front) later.push([run, closed, '#FFFFFF']); }
+  }
+  for (const [run, closed, paint] of later) light(run, closed, paint);
+}
+// rings as a style draws them: even lines (each in its colour, every line one weight, the far halves under the near),
+// tubes (round 23) or discs (filled, seamed); a ring marked `ink` stays a line over the discs, hidden where a nearer
+// disc covers it
+function drawRings(ctx, V, items, style, G) {
+  const w = D.w * V.R; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  if (style === 'tubes') { drawTubes(ctx, V, items, G); return; }
+  if (style === 'discs') {
+    const ds = items.filter(i => !i.ink && i.g.r > 1e-3);
+    drawDiscs(ctx, V, ds.map(i => i.g), ds.map(() => true), ds.map(i => i.col), G.bg, D.seam * V.R);
+    for (const i of items) if (i.ink) { ctx.strokeStyle = i.col; ctx.lineWidth = w * 0.8; strokeVisible(ctx, V, i.g.pts, ds.map(d => d.g), []); }
+  } else {
+    for (const front of [false, true]) for (const i of items) {
+      if (i.g.r <= 1e-3) continue;
+      ctx.strokeStyle = i.col; ctx.lineWidth = w; sidePath(ctx, V, i.g.pts, front); ctx.stroke(); }
+  }
+}
+const globeItems = (geom, spin = 0) => ringsAt(spin, geom || {}).map((g, k) => ({ g, col: D.hues[k] }));
+
+// the printer: a head shuttles across and back, a band lower each pass, and leaves the globe in its wake
+const PRINT = { lead: 0.15, pass: 0.3, n: 6 };
+function drawPrinter(ctx, V, t, style, G) {
+  const items = globeItems(), ext = (1 + D.w) * V.R, h = 2 * ext / PRINT.n, top = V.cy - ext;
+  const left = V.cx - ext - h, right = V.cx + ext + h, u = (t - PRINT.lead) / PRINT.pass, k = Math.floor(u), f = smooth(u - k);
+  if (k >= PRINT.n) { drawRings(ctx, V, items, style, G); return; }
+  const hx = k < 0 ? left : k % 2 ? right - (right - left) * f : left + (right - left) * f;
+  if (k >= 0) {
+    ctx.save(); ctx.beginPath();
+    for (let j = 0; j < k; j++) ctx.rect(left, top + j * h - 0.5, right - left, h + 1);
+    if (k % 2) ctx.rect(hx, top + k * h - 0.5, right - hx, h + 1); else ctx.rect(left, top + k * h - 0.5, hx - left, h + 1);
+    ctx.clip(); drawRings(ctx, V, items, style, G); ctx.restore();
+  }
+  ctx.fillStyle = G.ink; ctx.beginPath(); ctx.arc(hx, top + (Math.max(k, 0) + 0.5) * h, h * 0.42, 0, TAU); ctx.fill();
+}
+
+// the gyroscope: two rings spin on two axes, slow and settle as the equator and the rim; the other four unfold from them
+const GYRO = { spin: 1.5, unfold: 0.45 };
+function drawGyro(ctx, V, t, style, G) {
+  const B = basis(D.lean, D.elev), s = clamp(t / GYRO.spin, 0, 1), e = 1 - Math.pow(1 - s, 3), u = smooth((t - GYRO.spin) / GYRO.unfold);
+  const items = [{ g: tippedRing(rad(540) * (1 - e), B, [Math.SQRT1_2, Math.SQRT1_2]), col: D.hues[1] },
+                 { g: meridianRing(90 + 720 * (1 - e), B), col: D.hues[4] }];
+  if (u > 0) items.push({ g: parallelRing(40 * u, B), col: D.hues[0] }, { g: parallelRing(-40 * u, B), col: D.hues[2] },
+                        { g: meridianRing(90 - 60 * u, B), col: D.hues[3] }, { g: meridianRing(90 + 60 * u, B), col: D.hues[5] });
+  drawRings(ctx, V, items, style, G);
+}
+
+// the kick: seen from above the pole the globe is a speaker, its parallels rings round one centre and its meridians
+// spokes; it kicks twice, three rings of colour going out at each hit, then tips down to the Earth's tilt
+const KICK = { hits: [0.15, 0.62], tilt: [1.05, 1.9] };
+const pulse = x => x < 0 ? 0 : x < 0.045 ? x / 0.045 : Math.exp(-(x - 0.045) / 0.11);
+function ripples(ctx, V, t, hits, hue0) {
+  hits.forEach((h, j) => { for (let m = 0; m < 3; m++) {
+    const p = (t - h - 0.05 * m) / 0.62; if (p <= 0 || p >= 1) continue;
+    ctx.globalAlpha = (1 - p) * (1 - p); ctx.strokeStyle = D.hues[(hue0(j) + m) % 6]; ctx.lineWidth = D.w * V.R * (1 - 0.6 * p);
+    ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R * (1.06 + 0.85 * p), 0, TAU); ctx.stroke(); } });
+  ctx.globalAlpha = 1;
+}
+function drawKick(ctx, V, t, style, G) {
+  const tl = smooth((t - KICK.tilt[0]) / (KICK.tilt[1] - KICK.tilt[0])), geom = { lean: D.lean * tl, elev: 90 + (D.elev - 90) * tl };
+  const amp = KICK.hits.reduce((a, h) => a + pulse(t - h), 0);
+  ripples(ctx, V, t, KICK.hits, j => 3 * j);
+  drawRings(ctx, view(0, 0, V.cx, V.cy, V.R * (1 + 0.09 * amp)), globeItems(geom), style, G);
+}
+// and looped, for the speakers: a kick each half second, the colours going round
+function drawKickLoop(ctx, W, H, t, o) {
+  const G = GROUNDS[o.ground], V = view(W, H, W / 2, H / 2, Math.min(W, H) * 0.25), beat = 0.5, n = Math.floor(t / beat);
+  ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
+  const hits = [n - 1, n].map(i => i * beat);
+  ripples(ctx, V, t, hits, j => 3 * (n - 1 + j));
+  const amp = hits.reduce((a, h) => a + pulse(t - h), 0);
+  drawRings(ctx, view(0, 0, V.cx, V.cy, V.R * (1 + 0.09 * amp)), globeItems({ lean: 0, elev: 90 }), o.style || 'even', G);
+  return 4.0;
+}
+
+// an ident: the globe arrives, holds, moves aside, and EARF types in beside it
+const IDENTS = { printer: { dur: 2.05, draw: drawPrinter }, gyro: { dur: 2.0, draw: drawGyro }, kick: { dur: 1.95, draw: drawKick },
+                 coin: { dur: 3.15, draw: (c, V, t, s, G) => coinAt(c, V, t, s, G, false) } };
+const HOLD = 0.35, MOVE = 0.5, TYPE = 0.07;
+function identTimes(kind) { const m0 = IDENTS[kind].dur + HOLD; return { move0: m0, word0: m0 + MOVE, end: m0 + MOVE + 4 * TYPE + 1.3 }; }
 function identLayout(W, H) {
   const lockW = 450 + 110 + D.wordW, k = Math.min(W * 0.74 / lockW, H * 0.5 / 450), x0 = (W - lockW * k) / 2;
   return { R: 225 * k / (1 + D.w / 2), cx: x0 + 225 * k, cy: H / 2, wx: x0 + 560 * k, wy: H / 2 - 150 * k, k };
 }
 function drawIdent(ctx, W, H, t, o) {
-  const G = GROUNDS[o.ground], L = identLayout(W, H), m = smooth((t - IDENT.move0) / MOVE);
+  const G = GROUNDS[o.ground], L = identLayout(W, H), T = identTimes(o.kind), m = smooth((t - T.move0) / MOVE);
   const hR = Math.min(H * 0.34, W * 0.3), V = view(W, H, W / 2 + (L.cx - W / 2) * m, H / 2 + (L.cy - H / 2) * m, hR + (L.R - hR) * m);
   ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
-  const drawn = IDENT.plan.map(([a, b]) => clamp((t - a) / (b - a), 0, 1)), done = IDENT.plan.map(([a, b]) => t >= b);
-  drawGlobe(ctx, V, { style: o.style, ground: o.ground, drawn, done, spin: 360 * turn((t - IDENT.turn0) / TURN) });
-  const nl = Math.floor((t - IDENT.word0) / TYPE) + 1;                     // the letters, one a beat
+  IDENTS[o.kind].draw(ctx, V, Math.min(t, IDENTS[o.kind].dur + 0.01), o.style, G);
+  const nl = Math.floor((t - T.word0) / TYPE) + 1;
   ctx.save(); ctx.translate(L.wx, L.wy); ctx.scale(L.k, L.k); ctx.fillStyle = G.ink;
   D.letters.slice(0, clamp(nl, 0, 4)).forEach(d => ctx.fill(new Path2D(d))); ctx.restore();
-  return IDENT.end;
+  return T.end;
 }
 
 // the loader: a white circle rolling across the ink uncovers the six behind it, and covers them again coming back
@@ -618,38 +938,37 @@ function coinSilhouette(ctx, V, th, B, thick) {
 }
 
 // the coin: spins on its edge, a colour a half turn (Flare to Haze); on one more half turn, slowing, it deals out the
-// three meridians where it passes them; the camera rises to the globe's tilt as the parallels close round them; a turn
-const COIN = { spin: 3.0, deal: 1.0, tilt: [3.7, 4.9], grow: [4.4, 4.62, 4.84], turn: [5.4, 8.4], end: 9.2, elev0: 8 };
+// three meridians where it passes them; the view rises to the globe's tilt as the parallels close round them; a turn
+const COIN = { rate: 600, spin: 1.8, deal: 0.6, tilt: [2.2, 3.0], grow: [2.55, 2.7, 2.85], turn: [3.4, 5.4], end: 6.0, elev0: 8 };
 function coinAng(t) {
-  if (t <= COIN.spin) return 360 * t - 90;
+  if (t <= COIN.spin) return COIN.rate * t - 90;
   const u = clamp((t - COIN.spin) / COIN.deal, 0, 1);
-  return 360 * COIN.spin - 90 + 180 * (1 - (1 - u) * (1 - u));
+  return COIN.rate * COIN.spin - 90 + 180 * (1 - (1 - u) * (1 - u));
 }
-function drawCoin(ctx, W, H, t, o) {
-  const G = GROUNDS[o.ground], R = Math.min(W, H) * 0.3, V = view(W, H, W / 2, H / 2, R);
-  ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
+function coinAt(ctx, V, t, style, G, turning = true) {
   const ang = coinAng(t), thick = 0.07;
   if (t < COIN.spin) {
-    ctx.fillStyle = D.hues[clamp(Math.floor(2 * t), 0, 5)];
-    coinSilhouette(ctx, V, ang, basis(0, COIN.elev0), thick);
-    return COIN.end;
+    ctx.fillStyle = D.hues[clamp(Math.floor((ang + 90) / 180), 0, 5)];
+    coinSilhouette(ctx, V, ang, basis(0, COIN.elev0), thick); return;
   }
-  const rel = ang - 360 * COIN.spin, placed = [-60, 0, 60].map(d => rel >= d), k = placed.filter(Boolean).length;
+  const rel = ang - COIN.rate * COIN.spin, placed = [-60, 0, 60].map(d => rel >= d), k = placed.filter(Boolean).length;
   const tilt = smooth((t - COIN.tilt[0]) / (COIN.tilt[1] - COIN.tilt[0]));
   const geom = { lean: D.lean * tilt, elev: COIN.elev0 + (D.elev - COIN.elev0) * tilt, grow: COIN.grow.map(g => smooth((t - g) / 0.3)) };
-  const spin = 360 * turn((t - COIN.turn[0]) / (COIN.turn[1] - COIN.turn[0]));
-  const gs = ringsAt(spin, geom), cols = D.hues.slice(), done = geom.grow.map(g => g > 0).concat(placed);
-  if (k < 3 && rel < -72) {                                                // the coin still on its edge: its thickness shows
-    drawDiscs(ctx, V, gs, done, cols, G.bg, D.seam * R);
-    ctx.fillStyle = D.hues[3]; coinSilhouette(ctx, V, rel, basis(geom.lean, geom.elev), thick);
-    return COIN.end;
+  const spin = turning ? 360 * turn((t - COIN.turn[0]) / (COIN.turn[1] - COIN.turn[0])) : 0, B = basis(geom.lean, geom.elev);
+  const items = ringsAt(spin, geom).map((g, i) => ({ g, col: D.hues[i], on: i < 3 ? geom.grow[i] > 0 : placed[i - 3] })).filter(i => i.on);
+  if (k < 3 && rel < -72) {                                                // still on its edge: its thickness shows
+    drawRings(ctx, V, items, style, G); ctx.fillStyle = D.hues[3]; coinSilhouette(ctx, V, rel, B, thick); return;
   }
-  if (k < 3) { gs.push(meridianRing(90 + rel, basis(geom.lean, geom.elev))); cols.push(D.hues[3 + k]); done.push(true); }
-  drawDiscs(ctx, V, gs, done, cols, G.bg, D.seam * R);
+  if (k < 3) items.push({ g: meridianRing(90 + rel, B), col: D.hues[3 + k] });
+  drawRings(ctx, V, items, style, G);
+}
+function drawCoin(ctx, W, H, t, o) {
+  const G = GROUNDS[o.ground]; ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
+  coinAt(ctx, view(W, H, W / 2, H / 2, Math.min(W, H) * 0.3), t, o.style || 'discs', G);
   return COIN.end;
 }
 
-const SCENES = { ident: drawIdent, loader: drawLoader, cursor: drawCursor, coin: drawCoin };
+const SCENES = { ident: drawIdent, loader: drawLoader, cursor: drawCursor, coin: drawCoin, kick: drawKickLoop };
 
 function fit(cv) {
   const dpr = Math.min(2, window.devicePixelRatio || 1), r = cv.getBoundingClientRect();
@@ -669,23 +988,22 @@ window.__frame = (scene, t, o) => {
 
 if (!location.hash.startsWith('#capture')) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const state = { style: 'lines', ground: 'paper', t0: performance.now() };
+  const state = { kind: 'printer', style: 'even', ground: 'paper', t0: null };
   const CAPS = {
-    lines: 'Lines, the mark: the six ovals with their far halves lighter and under the near ones, so the near side reads in front even in one colour.',
-    even: 'Even lines: every line one weight. Fine in colour, where the hues tell the rings apart; in one colour it tangles.',
-    discs: 'Discs: each ring filled as a flat disc with no strokes. The discs cross one another like six sheets of the Clouds\' tinted acrylic slotted together, with a seam of the ground between the faces.' };
-  const capText = document.getElementById('cap-text');
+    printer: 'Printer: a head shuttles across and back, a band lower each pass, and leaves the finished globe in its wake.',
+    gyro: 'Gyroscope: two rings spin on two axes and settle as the equator and the rim. The other four unfold out of them.',
+    kick: 'Kick: seen from above the pole, the globe is a speaker: rings round one centre, the meridians its spokes. It kicks twice, then tips down to the Earth\'s tilt.',
+    coin: 'Coin: a disc spins on its edge, a colour each half turn. On one more turn it deals out the meridians, and the parallels close round them.' };
+  const capText = document.getElementById('cap-text'), screen = document.getElementById('screen');
   function segs(id, key) {
     const el = document.getElementById(id);
     el.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
       el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-      state[key] = b.dataset.v; state.t0 = performance.now(); capText.textContent = CAPS[state.style];
-      document.getElementById('screen').style.background = GROUNDS[state.ground].bg; });
+      state[key] = b.dataset.v; state.t0 = performance.now(); capText.textContent = CAPS[state.kind];
+      screen.style.background = GROUNDS[state.ground].bg; });
   }
-  segs('style', 'style'); segs('ground', 'ground'); capText.textContent = CAPS.lines;
+  segs('kind', 'kind'); segs('style', 'style'); segs('ground', 'ground'); capText.textContent = CAPS.printer;
   document.getElementById('replay').onclick = () => { state.t0 = performance.now(); };
-  const coin = { t0: performance.now() };
-  document.getElementById('coin-replay').onclick = () => { coin.t0 = performance.now(); };
   // the cursor: the pointer's path, kept a moment, so each colour can be where the circle was a beat ago
   const pad = document.getElementById('pad'), hist = []; let last = -1e9;
   pad.addEventListener('pointermove', e => { const r = pad.getBoundingClientRect(), now = performance.now() / 1000;
@@ -700,20 +1018,23 @@ if (!location.hash.startsWith('#capture')) {
       return [xa + (xb - xa) * f, ya + (yb - ya) * f]; }
     return [hist.at(-1)[1], hist.at(-1)[2]];
   }
+  // each panel runs only while it is on screen, and the ident starts when it first comes into view, then loops
   const vis = new Map(); const io = new IntersectionObserver(es => es.forEach(e => vis.set(e.target, e.isIntersecting)));
-  ['stage', 'load-night', 'load-paper', 'cursor', 'coin'].forEach(id => io.observe(document.getElementById(id)));
-  const on = id => vis.get(document.getElementById(id)) !== false;
+  ['stage', 'load-night', 'load-paper', 'cursor', 'kickloop'].forEach(id => io.observe(document.getElementById(id)));
+  const on = id => vis.get(document.getElementById(id)) === true;
   function tick(now) {
     const s = now / 1000;
     if (on('stage')) { const { ctx, W, H } = fit(document.getElementById('stage'));
-      const t = reduce ? IDENT.end : (now - state.t0) / 1000;
-      drawIdent(ctx, W, H, Math.min(t, IDENT.end), state); }
+      if (state.t0 === null) state.t0 = now;
+      const end = identTimes(state.kind).end, t = (now - state.t0) / 1000;
+      if (t > end + 0.8) state.t0 = now;                                     // a pause, then again
+      drawIdent(ctx, W, H, reduce ? end : Math.min(t, end), state); }
     for (const g of ['night', 'paper']) if (on('load-' + g)) { const { ctx, W, H } = fit(document.getElementById('load-' + g));
       drawLoader(ctx, W, H, reduce ? LOAD.go : s, { ground: g }); }
     if (on('cursor')) { const { ctx, W, H } = fit(document.getElementById('cursor'));
       const live = s - last < 2.5; drawCursor(ctx, W, H, s, { ground: 'night' }, live ? at : (tt => ghost(tt, W, H))); }
-    if (on('coin')) { const { ctx, W, H } = fit(document.getElementById('coin'));
-      drawCoin(ctx, W, H, reduce ? COIN.end : Math.min((now - coin.t0) / 1000, COIN.end), { ground: 'night' }); }
+    if (on('kickloop')) { const { ctx, W, H } = fit(document.getElementById('kickloop'));
+      drawKickLoop(ctx, W, H, reduce ? 0.3 : s, { ground: 'night', style: 'even' }); }
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
@@ -723,7 +1044,7 @@ if (!location.hash.startsWith('#capture')) {
 
 
 def page():
-    return PAGE.replace('__RAILS__', rails_html()).replace('__DATA__', json.dumps(data(), separators=(',', ':')))
+    return PAGE.replace('__RAILS__', rails_html()).replace('__THEME__', theme_html()).replace('__DATA__', json.dumps(data(), separators=(',', ':')))
 
 
 def standalone():
@@ -731,10 +1052,10 @@ def standalone():
             'initial-scale=1, viewport-fit=cover"></head><body>\n' + page() + '\n</body></html>\n')
 
 
-SCENE_SET = [('ident', dict(style='lines', ground='paper')), ('ident', dict(style='lines', ground='night')),
-             ('ident', dict(style='discs', ground='paper')), ('ident', dict(style='discs', ground='night')),
-             ('loader', dict(ground='night')), ('loader', dict(ground='paper')),
-             ('cursor', dict(ground='night')), ('coin', dict(ground='night')), ('coin', dict(ground='paper'))]
+SCENE_SET = [('ident', dict(kind=k, style=st, ground=g)) for k in ('printer', 'gyro', 'kick', 'coin')
+             for st, g in (('even', 'paper'), ('discs', 'night'), ('tubes', 'night'))] + [
+             ('kick', dict(style='even', ground='night')), ('loader', dict(ground='night')), ('loader', dict(ground='paper')),
+             ('cursor', dict(ground='night'))]
 
 
 def video(out_dir, scene, opts, fps=30, w=1280, h=720, loops=1):
@@ -762,8 +1083,8 @@ const {{ chromium }} = require('playwright');
     r = subprocess.run(['node', js], capture_output=True, text=True)
     if r.returncode:
         raise SystemExit(r.stderr[-2000:])
-    tag = opts.get('style', '')
-    name = f'earth-{scene}' + (f'-{tag}' if scene == 'ident' else '') + f'-{opts["ground"]}.mp4'
+    parts = [scene, opts.get('kind'), opts.get('style') if scene == 'ident' else None, opts['ground']]
+    name = 'earth-' + '-'.join(x for x in parts if x) + '.mp4'
     mp4 = os.path.join(out_dir, name)
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-framerate', str(fps), '-i', os.path.join(tmp, 'f%04d.png'),
                     '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '18', '-movflags', '+faststart', mp4], check=True)
@@ -775,24 +1096,28 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--fragment', help='also write the page as an Artifact body to this path')
     ap.add_argument('--video', action='store_true', help='also write an MP4 of each scene')
+    ap.add_argument('--only', nargs='*', default=[], help='with --video, only the scenes whose options mention one of these (e.g. tubes)')
     a = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
     written = []
-    for style in ('lines', 'even', 'discs'):
+    for style in ('lines', 'even', 'tubes', 'discs'):
         for tag, cols in [('multi', HUES), ('black', INK), ('white', WHITE)] + [(n.lower(), c) for n, c in zip(NAMES, HUES)]:
             f = f'earth-{style}-{tag}.svg'
-            open(os.path.join(OUT, f), 'w').write(mark_svg(style, cols, label=f'EARF globe, {style}, {tag}'))
+            open(os.path.join(OUT, f), 'w').write(mark_svg(style, cols, label=f'EARF globe, {style}, {tag}',
+                                                           ground='night' if tag == 'white' else 'paper'))
             written.append(f)
     for g, word, bg in (('paper', INK, PAPER), ('ink', WHITE, NIGHT)):
-        open(os.path.join(OUT, f'earth-lockup-{g}.svg'), 'w').write(lockup_svg('lines', HUES, word, bg=bg))
-    open(os.path.join(OUT, 'earth-lockup-black.svg'), 'w').write(lockup_svg('lines', INK, INK))
-    open(os.path.join(OUT, 'earth-lockup-white.svg'), 'w').write(lockup_svg('lines', WHITE, WHITE))
+        open(os.path.join(OUT, f'earth-lockup-{g}.svg'), 'w').write(lockup_svg('even', HUES, word, bg=bg))
+    open(os.path.join(OUT, 'earth-lockup-black.svg'), 'w').write(lockup_svg('even', INK, INK))
+    open(os.path.join(OUT, 'earth-lockup-white.svg'), 'w').write(lockup_svg('even', WHITE, WHITE))
     open(os.path.join(OUT, 'earth.html'), 'w').write(standalone())
     if a.fragment:
         open(a.fragment, 'w').write(page())
     print(f'brand/earth.html, {len(written)} marks, 4 lockups')
     if a.video:
         for scene, opts in SCENE_SET:
+            if a.only and not any(w in json.dumps(opts) for w in a.only):
+                continue
             print(os.path.relpath(video(OUT, scene, opts, loops=2 if scene == 'loader' else 1), HERE))
 
 
