@@ -9,9 +9,9 @@ overlapping strokes"). The globe and the wordmark from marks.py, three ways:
 - glass: every region the overlapping outlines cut out filled with its own colour, no two that touch alike, the ink
   outlines over them, as a leaded window is;
 - wheel (round 20, the owner: "I wonder if the earth can be formed a different way, like overlapping concentric circles
-  that form a larger circle, kind of like a color wheel"): the globe as a ring of circles, one for each Cloud in
-  spectrum order, each overlapping its neighbours, inside one larger circle, a black dot at the centre; or six round
-  it, the hues, with Fog's white and Smoke's black at the centre. ident.py animates it.
+  that form a larger circle, kind of like a color wheel"): the globe as the eight Clouds' circles round one centre,
+  each passing through it, together one larger circle; in the acrylics' own tints laid over one another, or as light
+  on a dark ground. ident.py animates it.
 
     python3 spinoffs/barkhorn/brand.py      ->  brand/<variant>.svg and brand/sheet.html (needs shapely for glass)
 """
@@ -146,66 +146,74 @@ def glass():
     return page(body, vb, PAPER), len(faces)
 
 
-# the wheel (round 20): n circles on a ring, each overlapping only its neighbours, the larger circle round them touching
-# each at its outermost point; k is a circle's radius over the ring's. Radii are of the larger circle, 1
-WHEELS = {'eight': dict(n=8, k=0.58, dot=0.06, centre=False),     # every Cloud a circle; a black dot at the centre
-          'six': dict(n=6, k=0.68, dot=0.09, centre=True)}        # the six hues round; Fog's white disc at the centre,
-                                                                  # touching all six, Smoke's black dot in it
-FROST = 0.82                                                      # Fog's white, laid over what is beneath as frosted acrylic
+# the wheel (round 20): the eight Clouds' circles round a centre, each passing through it, so together they form one
+# larger circle with no hub and no rim (the owner, of a first try with both: "It's too much like a film reel"). Radii
+# are of that larger circle, 1: each circle's is 1/2 and its centre is 1/2 out, at -90 + 45 i degrees (from the top,
+# clockwise on screen). On paper each is filled with its Cloud's own acrylic tint (the colour product.py gives the sheet
+# through 25 mm), the tints multiplied where they overlap as the sheets would be laid one on another, Fog's frosted
+# white over what lies under it; as light, on a dark ground, the speakers' colours add towards white and Smoke's black
+# shades what it covers.
+FLAVOUR = {'red': 'cloud-red', 'orange': 'cloud-orange', 'amber': 'cloud-amber', 'green': 'eucalyptus-y2k-green',
+           'blue': 'cloud-blue', 'violet': 'cloud-violet', 'ice': 'birch-y2k-ice', 'black': 'cloud-black'}
+FROST = 0.7                                                      # Fog's white, laid over what is beneath
+WHEEL_SW = 0.022                                                 # the circles' outline, of the larger circle's radius
+DARK = '#121114'                                                 # the ground of the light version
 
 
-def wheel(name):
-    """The wheel's parts in units of its larger circle's radius: [(name, colour, mode, cx, cy, r, start angle)] for the
-    circles in drawing order (mode: 'multiply' for a tint, 'frost' for Fog's white), the centre disc (or None), the dot's
-    radius. Circle i's centre sits at angle -90 + 360 i / n degrees (from the top, clockwise on screen), and it is drawn
-    from its outermost point, on the larger circle."""
-    w = WHEELS[name]
-    n, k = w['n'], w['k']
-    R = 1 / (1 + k); r = k * R
-    cl = [(nm, col) for nm, col in CLOUDS if nm not in (('Fog', 'Smoke') if w['centre'] else ())]
+def tints():
+    import product
+    return {k: product.VARIANTS[f]['materials']['bark']['deep'] for k, f in FLAVOUR.items()}
+
+
+def wheel():
+    """The wheel's circles in drawing order: dicts of name, key, colour (the mark's), tint (the acrylic's), mode
+    ('frost' for Fog, 'shade' for Smoke as light, else 'tint'), cx, cy, r and a0, the angle of its outermost point,
+    where the pen starts it."""
+    t = tints()
     out = []
-    for i, (nm, col) in enumerate(cl):
-        a = math.radians(-90 + 360 * i / n)
-        out.append((nm, '#FFFFFF' if nm == 'Fog' else col, 'frost' if nm == 'Fog' else 'multiply', R * math.cos(a), R * math.sin(a), r, a))
-    centre = ('Fog', '#FFFFFF', 'frost', 0.0, 0.0, R - r, math.radians(-90)) if w['centre'] else None
-    return out, centre, w['dot']
+    for i, (key, line, num, name, col) in enumerate([s for s in M.SPEAKERS if s[1] == 'Cloud']):
+        a = math.radians(-90 + 45 * i)
+        out.append(dict(name=name, key=key, colour=col, tint=t[key], cx=0.5 * math.cos(a), cy=0.5 * math.sin(a), r=0.5, a0=a,
+                        mode={'Fog': 'frost', 'Smoke': 'shade'}.get(name, 'tint')))
+    return out
 
 
-WHEEL_SW = 11.0                                                   # the wheel's outline at 450 across: lighter than the
-                                                                  # letters' 17.6, as its lines are many and close
-
-
-def wheel_svg(name, size=450, bg=PAPER, sw=None, with_bg=True):
-    """The wheel at `size` across (the lockup's globe is 450), its outlines `sw` wide (WHEEL_SW at 450)."""
-    sw = sw or WHEEL_SW * size / 450
-    cl, centre, dot = wheel(name)
+def wheel_svg(size=450, light=False, with_bg=True):
+    """The wheel at `size` across (the lockup's globe is 450): on paper in the acrylics' tints, or as light."""
     s = size / 2
-    def circ(cx, cy, r, attrs):
-        return f'<circle cx="{cx * s:.2f}" cy="{cy * s:.2f}" r="{r * s:.2f}" {attrs}/>'
-    fill = lambda col, mode: (f'fill="{col}" fill-opacity="{FROST}"' if mode == 'frost'
-                              else f'fill="{col}" fill-opacity="0.82" style="mix-blend-mode:multiply"')
-    parts = [c for c in cl] + ([centre] if centre else [])
-    body = '<g style="isolation:isolate">' + ''.join(circ(cx, cy, r, fill(col, mode)) for _, col, mode, cx, cy, r, _ in parts) + '</g>'
-    line = f'fill="none" stroke="{INK}" stroke-width="{sw:g}"'
-    body += ''.join(circ(cx, cy, r, line) for _, _, _, cx, cy, r, _ in parts) + circ(0, 0, 1, line)
-    body += circ(0, 0, dot, f'fill="{INK}"')
+    sw = WHEEL_SW * s
+    def circ(c, attrs):
+        return f'<circle cx="{c["cx"] * s:.2f}" cy="{c["cy"] * s:.2f}" r="{c["r"] * s:.2f}" {attrs}/>'
+    def fill(c):
+        if light:
+            if c['mode'] == 'shade':
+                return 'fill="#000000" fill-opacity="0.55"'
+            col = '#FFFFFF' if c['mode'] == 'frost' else c['colour']
+            return f'fill="{col}" fill-opacity="{0.55 if c["mode"] == "frost" else 0.8}" style="mix-blend-mode:screen"'
+        if c['mode'] == 'frost':
+            return f'fill="#FFFFFF" fill-opacity="{FROST}"'
+        return f'fill="{c["tint"]}" style="mix-blend-mode:multiply"'
+    cl = wheel()
+    body = '<g style="isolation:isolate">' + ''.join(circ(c, fill(c)) for c in cl) + '</g>'
+    line = f'fill="none" stroke="{PAPER if light else INK}" stroke-width="{sw:.2f}"' + (' stroke-opacity="0.85"' if light else '')
+    body += ''.join(circ(c, line) for c in cl)
     m = sw
     vb = f'{-s - m:g} {-s - m:g} {2 * (s + m):g} {2 * (s + m):g}'
-    bgr = f'<rect x="{-s - m:g}" y="{-s - m:g}" width="{2 * (s + m):g}" height="{2 * (s + m):g}" fill="{bg}"/>' if with_bg else ''
-    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}" width="{2 * (s + m):g}" height="{2 * (s + m):g}">{bgr}{body}</svg>'
+    bg = f'<rect x="{-s - m:g}" y="{-s - m:g}" width="{2 * (s + m):g}" height="{2 * (s + m):g}" fill="{DARK if light else PAPER}"/>' if with_bg else ''
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}" width="{2 * (s + m):g}" height="{2 * (s + m):g}">{bg}{body}</svg>'
 
 
-def wheel_lockup(name, word_fill=PAPER):
+def wheel_lockup(light=False):
     """The wheel beside the wordmark as marks.lockup_svg sets the globe (450 across, 110 gap, the letters' cap 300
-    centred on it), the letters drawn as the pen draws them: outlines, filled with the paper."""
-    g = wheel_svg(name, with_bg=False)
+    centred on it), the letters drawn as outlines."""
+    g = wheel_svg(light=light, with_bg=False)
     inner = g[g.index('>') + 1:g.rindex('</svg>')]
     sw = M.U * 0.8                                   # the letters' outline
-    word = (''.join(svg_el(p, f'fill="{word_fill}"') for p in M.WORDMARK)
-            + ''.join(svg_el(p, f'fill="none" stroke="{INK}" stroke-width="{sw:g}" stroke-linejoin="round"') for p in M.WORDMARK))
+    ink, ground = (PAPER, DARK) if light else (INK, PAPER)
+    word = ''.join(svg_el(p, f'fill="none" stroke="{ink}" stroke-width="{sw:g}" stroke-linejoin="round"') for p in M.WORDMARK)
     w, h = 450 + 110 + M.WORDMARK_W + 2 * sw, 450 + 2 * sw
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-sw:g} {-sw:g} {w:g} {h:g}" width="{w:g}" height="{h:g}">'
-            f'<rect x="{-sw:g}" y="{-sw:g}" width="{w:g}" height="{h:g}" fill="{PAPER}"/>'
+            f'<rect x="{-sw:g}" y="{-sw:g}" width="{w:g}" height="{h:g}" fill="{ground}"/>'
             f'<g transform="translate(225 225)">{inner}</g><g transform="translate({450 + 110} 75)">{word}</g></svg>')
 
 
@@ -220,14 +228,14 @@ def main():
         variants.append(('glass', 'Glass', f'each of the {n} regions the outlines cut out in its own colour', svg))
     except ImportError:
         print('glass needs shapely (pip install shapely); left out')
-    variants += [('wheel-eight', 'Wheel, eight', 'the globe as a ring of the eight Clouds, a black dot at the centre (round 20)',
-                  wheel_lockup('eight')),
-                 ('wheel-six', 'Wheel, six', 'the six hues round; Fog\'s white and Smoke\'s black at the centre (round 20)',
-                  wheel_lockup('six'))]
+    variants += [('wheel', 'Wheel', 'the eight Clouds\' circles through one centre, in their acrylics\' tints (round 20)',
+                  wheel_lockup()),
+                 ('wheel-light', 'Wheel, as light', 'the speakers\' colours adding towards white; Smoke\'s black shades (round 20)',
+                  wheel_lockup(light=True))]
     for key, *_ , svg in variants:
         open(os.path.join(OUT, f'{key}.svg'), 'w').write(svg)
-    for nm in WHEELS:
-        open(os.path.join(OUT, f'globe-wheel-{nm}.svg'), 'w').write(wheel_svg(nm))
+    open(os.path.join(OUT, 'globe-wheel.svg'), 'w').write(wheel_svg())
+    open(os.path.join(OUT, 'globe-wheel-light.svg'), 'w').write(wheel_svg(light=True))
     now = M.lockup_svg(size=None)
     rows = ''.join(f'<div class="row"><div class="cap"><b>{t}</b><br>{d}</div><div class="art">{s}</div></div>'
                    for _, t, d, s in [('now', 'As now', 'ocean and land', now)] + variants)

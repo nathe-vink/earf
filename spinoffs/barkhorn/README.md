@@ -28,8 +28,9 @@ book Cloud's alone, and the makers of recycled cast acrylic to approach. Round 1
 the Clouds, gives the R a bowl flat from the stem, draws the logo in the seven colours, and finds that the cabinet's
 top and bottom want more lining. Round 19 makes the Clouds a full spectrum of eight (Ember added in red, Smoke made
 black, all numbered again in that order) and draws the R's bowl as a circle again, on stems widened to meet it, each
-letter as wide as its shape needs. Round 20 draws the globe as a colour wheel of the Clouds and animates the brand as
-a film studio's ident: a pen traces the circles one by one, each taking its colour, then the name.
+letter as wide as its shape needs. Round 20 draws the globe as a colour wheel of the Clouds, eight circles through one
+centre, and animates the brand as a film studio's ident: a pen draws the circles at one steady speed, or they
+bloom out of one, then the name.
 
 ## Round 20: the wheel, and the ident (the owner's notes of 2026-10-15)
 
@@ -38,37 +39,49 @@ a film studio's ident: a pen traces the circles one by one, each taking its colo
 > starts, where the world and/or earf are animated somehow, like a Spirograph type thing where a black dot rotates
 > around several times to create a circle of circles, each adopting a color as its mini circle is traced.
 
+A first version set the circles in a ring round a black dot, the rim drawn between them. The owner's note on it:
+
+> It's too much like a film reel and the acceleration changes too much as it draws. It should be on fluid motion, and
+> it shouldn't have to create a stroke outside of each circle. I'm open to more ideas here as well.
+
+So the ring, the rim and the dot have gone, and the wheel and its ident are drawn again.
+
 ### The wheel
 
-The globe drawn as a colour wheel (`wheel` in `brand.py`; `brand/globe-wheel-eight.svg`, `brand/globe-wheel-six.svg`),
-in two versions:
+The globe drawn as a colour wheel of the eight Clouds (`wheel` in `brand.py`; `brand/globe-wheel.svg`). There is one
+circle for each Cloud, in spectrum order, from Ember at the top clockwise to Smoke. Each circle's radius is half the
+wheel's, and each passes through the wheel's centre, so the eight overlap like petals. Their outer edges trace the
+larger circle without its being drawn.
 
-- **Eight round.** One circle for each Cloud, in spectrum order, from Ember at the top clockwise to Smoke. Each is
-  0.367 of the wheel's radius, its centre on a ring at 0.633. So each overlaps its two neighbours and touches the
-  larger circle at one point. A black dot sits at the centre.
-- **Six round.** The six hues (Ember to Haze), each 0.405 of the radius, on a ring at 0.595. At the centre is Fog's
-  white disc, touching all six, with Smoke's black dot in it.
+- **On paper**, each circle is its acrylic's own tint. Where circles overlap the tints multiply, as sheets of tinted
+  acrylic do laid one on another, and Fog's white frosts what lies under it. The lines are lighter than the letters'
+  (4.95 against 17.6 at the lockup's size), because they are many and close.
+- **As light** (`brand/globe-wheel-light.svg`), on a near-black ground, the speakers' own colours add towards white
+  where they overlap, and Smoke's black shades what it covers.
 
-Where two circles overlap, their tints multiply, as two sheets of tinted acrylic do when laid one on the other. Fog's
-white frosts what lies under it. The wheel's lines are lighter than the letters' (11 against 17.6 at the lockup's
-size), because they are many and close. The dot at the centre also reads as a record's spindle.
-
-![The wheel beside EARF, both versions](brand/wheels.png)
+![The wheel beside EARF, on paper and as light](brand/wheels.png)
 
 ### The ident
 
 `ident.py` writes `brand/ident.html`, a page that plays the brand the way a film studio's ident plays before the
-film. It is also published privately as an Artifact, *EARF Ident*. It also writes `brand/ident-eight.mp4` and
-`brand/ident-six.mp4` (1280 x 720, 30 frames a second, 10.6 seconds).
+film. It is also published privately as an Artifact, *EARF Ident*. The wheel comes on in one of two ways, on either
+ground, and the page lets you pick:
 
-1. A black dot, the pen, appears at the centre and moves out to the top of the wheel.
-2. It draws each Cloud's circle in turn, starting where the circle touches the rim and going clockwise. The circle's
-   colour sweeps in behind it as it goes.
-3. Between circles it glides along the rim to the next one, so the glides draw the larger circle.
-4. It returns to the centre and settles as the dot. In the six-round version it first draws Fog's white disc, then
-   settles in it as Smoke's black.
-5. The wheel moves aside and shrinks to its place in the lockup. EARF is drawn beside it, letter by letter, then the
-   line, NEATURE-INSPIRED LOUDSPEAKERS.
+- **Pen.** A dot draws each circle at one steady speed, from its outermost point, clockwise, and the circle's tint
+  sweeps in behind it. At that point each circle runs along the wheel's edge, so between circles the pen swings along
+  the edge to the next, drawing nothing. It never stops and never turns a corner. It speeds up once, as it starts, and
+  slows once, at the end, lifting as it comes back to the top where it began. Each circle takes 0.63 seconds.
+- **Bloom.** The eight circles start stacked as one, grown from a dot, and part in one movement, turning as they
+  spiral out to their places. Stacked, the eight tints multiply to nearly black, as eight sheets of the acrylic would,
+  and as light they add to white. So on paper a black disc opens into the colours, and as light white parts into the
+  spectrum.
+
+Then the wheel moves aside and shrinks to its place in the lockup. EARF is drawn beside it, letter by letter at a
+steady pace, then the line, NEATURE-INSPIRED LOUDSPEAKERS.
+
+It also writes an MP4 of each, 1280 x 720 at 30 frames a second: `brand/ident-pen-paper.mp4` and
+`brand/ident-pen-light.mp4` (10.4 seconds), and `brand/ident-bloom-paper.mp4` and `brand/ident-bloom-light.mp4`
+(7.3 seconds).
 
 The page draws on a canvas from the same geometry as the marks, so it stays sharp at any size and weighs about 17 KB.
 On earf.world it could play as the site opens, in place of a video. The letters are drawn as outlines; their blue fill
@@ -1861,13 +1874,13 @@ Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a m
 4. **earf.world** (round 18). Buy it now ($3.99 for the first year, $38.10 a year after, through Vercel), and build
    the site from the look book?
 5. **The recycled acrylic partner** (round 17). Write to Plastiglas de México (Chemcast EcoGreen) and Madreperla
-   (Green Cast) for the seven tints at 20 mm: minimums, prices, lead times, and whether they take back offcuts?
+   (Green Cast) for the eight tints at 20 mm: minimums, prices, lead times, and whether they take back offcuts?
 6. **Beyond the speakers.** A record player or a lamp in the Clouds' colours drawn next, or the speakers first?
 7. **The EARF mark on the speaker.** The look book carries each speaker's acrylic mark; the speaker itself carries
    none yet. On the rating plate only (laser-etched, beside the amplifier), as a small acrylic mark on the back, or
    in a corner of the front panel's frame?
-8. **The wheel** (round 20). Make it EARF's globe, eight round or six round, in the lockup, the look book and the
-   site? And play the ident as earf.world opens?
+8. **The wheel** (round 20). Make it EARF's globe, in the lockup, the look book and the site? Which ident: the
+   pen or the bloom, on paper or as light? And play it as earf.world opens?
 9. **Lifting it.** A Cloud speaker weighs about 72 kg, its cabinet about 62 with the horn lifted off. Two people
    lift it by the bottom edges, as now, or two recessed grips cut into the back panel?
 
