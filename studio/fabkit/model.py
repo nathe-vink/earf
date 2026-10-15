@@ -67,6 +67,8 @@ SOLIDS = {
     'cast-resin': dict(title='Casting resin (polyurethane or epoxy), tinted clear, translucent or pigmented', density=1.1, usd_per_cm3=0.04),
     'rotomoulded-pe': dict(title='Recycled polyethylene, rotomoulded (a hollow double-walled part)', density=0.94, usd_per_cm3=0.004),
     'cast-acrylic': dict(title='Cast acrylic tube, tinted through', density=1.19, usd_per_cm3=0.04),
+    'cast-acrylic-formed': dict(title='Cast acrylic sheet 3 mm, tinted through, drape-formed over a buck', density=1.19,
+                                usd_per_cm3=0.04),
 }
 
 

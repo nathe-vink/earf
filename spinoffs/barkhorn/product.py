@@ -704,6 +704,32 @@ def mark_solid(width, at, face, t):
     return union(*sol)
 
 
+def globe_outlines(style):
+    """Round 24 (24b): the globe (earth.py's outlines, brand/earth-outlines.json): `style` 'discs' (seamed, for one
+    colour), 'flush' (for colour), 'base' (the ball's gaps at the rim, violet, under the flush discs) or 'lines':
+    [(ring, exterior, holes)] on the unit globe, y up."""
+    G = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'brand', 'earth-outlines.json')))
+    return [tuple(q) for q in G[style]]
+
+
+def globe_solid(d, at, face, t, style, rings=None):
+    """The globe `d` across as a solid `t` deep on a face of the cabinet (as mark_solid): `at` = (x of its centre, y of
+    the face, z of its centre); `rings` the rings whose shapes to keep (None for all)."""
+    xc, yf, zc = at
+    r, sx = d / 2, (1 if face == '-y' else -1)               # read from behind, mirrored
+    y0, y1 = (yf - t, yf) if face == '-y' else (yf, yf + t)
+    flat = lambda pts: [(xc + sx * r * u, zc + r * v) for u, v in pts]
+    sol = []
+    for k, ext, holes in globe_outlines(style):
+        if rings is not None and k not in rings:
+            continue
+        s = prism(flat(ext), 'y', y0, y1)
+        for h in holes:
+            s = s - prism(flat(h), 'y', y0 - 0.05, y1 + 0.05)
+        sol.append(s)
+    return union(*sol)
+
+
 def grip_boxes(P):
     """Round 21's recessed grips: each side's opening (y0, y1, z0, z1) and how deep its cup reaches in. P['grip_w'] the
     opening's length (round 23: 240 takes both hands, 124 one)."""
@@ -726,7 +752,14 @@ def extras(P, out):
     Round 23 (the owner: "either the front corner or high on the back, etched in the speakers own tint or uncolored"):
     the back's mark etched too, 140 wide, and P['mark_finish'] for the back's and the corner's: 'etch' (frosted,
     uncoloured) or 'tint' (the etch filled with the speaker's own colour, deeper: its cover's and ring's). And of the
-    grips ("only if it would help ergonomically"): P['grip_w'], their length, 240 for two hands (grip_boxes)."""
+    grips ("only if it would help ergonomically"): P['grip_w'], their length, 240 for two hands (grip_boxes).
+
+    Round 24 (the owner: "I'm thinking logo in the corner, depending on what it looks like. Name on back own color"):
+    'globe', the globe in the front panel's top right corner, P['globe'] = dict(d=its diameter, style='discs' (the
+    facets, the seams clear) or 'lines' (the rings at one weight), finish='etch' (frosted), 'tint' (the etch filled
+    with the speaker's own colour) or 'print' (UV-printed in the six colours on a white underprint: round 24b, flush,
+    no seams and no outline, the ball violet where no disc reaches its rim)). The Cloud carries the back's name in its
+    own colour and the 240 grips as standard (cloud.py)."""
     import dataclasses
     from build123d import Compound, Pos
     marks, lifts = P.get('mark') or [], P.get('lift') or []
@@ -763,6 +796,23 @@ def extras(P, out):
             skin = Pos(0, 0.12, 0) * cap - cap                    # a skin 0.12 deep on the cap's faces that look back
             add.append(Part('mark-cap', plate & skin, Bought('laser-etch'), finish='etch',
                             notes=[f'EARF {etched}, 64 wide, across the middle of the horn\'s cap, between its finger dimples']))
+        elif m == 'globe':
+            b = bb('front-panel'); g = P.get('globe') or {}
+            d, style, fin = g.get('d', 48.0), g.get('style', 'discs'), g.get('finish', 'etch')
+            c = (b.max.X - 24.0 - d / 2, b.min.Y, b.max.Z - 24.0 - d / 2)
+            where = f'{d:g} across, its centre {24 + d / 2:g} in from the front panel\'s top and right edges'
+            if fin == 'print':                           # in colour: flush, the ball's gaps in the violet
+                for k in range(6):
+                    sol = globe_solid(d, c, '-y', 0.1, 'flush', rings=[k])
+                    if k == 4:
+                        sol = union(sol, globe_solid(d, c, '-y', 0.1, 'base'))
+                    add.append(Part(f'mark-globe-{k}', sol, Bought('uv-print'), finish=f'print-{k}',
+                                    notes=[f'the globe\'s ring {k + 1} of six, UV-printed in its colour, flush with the next; {where}']))
+            else:
+                add.append(Part('mark-globe', globe_solid(d, c, '-y', 0.1, style), Bought('laser-etch'),
+                                finish='mark-tint' if fin == 'tint' else 'etch',
+                                notes=[f'the globe ({style}) {etched}' + (', the etch filled with the speaker\'s own colour, deeper'
+                                                                         if fin == 'tint' else '') + f'; {where}']))
         elif m == 'disc':
             b = bb('cloth-disc'); w = 64.0
             add.append(Part('mark-disc', mark_solid(w, ((b.min.X + b.max.X) / 2, b.min.Y, b.min.Z + 34.0), '-y', 0.1), Bought('cloth-print'),
@@ -793,9 +843,11 @@ def extras(P, out):
             p = by[side]
             out = [dataclasses.replace(q, solid=q.solid - hole(xa, xb)) if q.name == side else q for q in out]
             cup = box(ca, y0 - 3.0, z0 - 3.0, cb, y1 + 3.0, z1 + 3.0) - hole(*((T - 1.0, T + dep - 3.0) if side == 'left' else (W - T - dep + 3.0, W - T + 1.0)))
-            add.append(Part(f'grip-{side}', cup, Sheet('cast-acrylic', 3.0), finish='bark', inside=True,
-                            notes=[f'a hand grip {y1 - y0:g} x {z1 - z0:g}, its corners rounded on 14, cut through the side; a cup of 3 mm '
-                                   f'acrylic in the side\'s tint, {dep:g} deep, cemented behind it, so the box stays sealed']))
+            # round 24: the cup drape-formed from 3 mm sheet over a buck (a box with rounded corners is not a flat part)
+            add.append(Part(f'grip-{side}', cup, Machined('cast-acrylic-formed', 'formed', setup_usd=120.0), finish='bark', inside=True,
+                            notes=[f'a hand grip {y1 - y0:g} x {z1 - z0:g}, its corners rounded on 14, cut through the side; a cup '
+                                   f'drape-formed from 3 mm acrylic in the side\'s tint over a buck, {dep:g} deep, its flange '
+                                   f'trimmed and cemented behind the opening, so the box stays sealed']))
     return out + add
 
 
@@ -1641,8 +1693,10 @@ VARIANTS.update({
 # key stays 'birch-y2k-ice' (Fog's since round 8; frosted ice-blue until round 22)
 VARIANTS['birch-y2k-ice'] = {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#F1F1EE', 'horn_cloud': 0.0,
                              'bark': 'clear_resin', 'disc': '#E7E6E1',
-                             'materials': {'bark': {'deep': '#F5F6F5', 'radius': 0.025, 'roughness': 0.05, 'milk': 0.05},
+                             'materials': {'bark': {'deep': '#F7F8F7', 'radius': 0.025, 'roughness': 0.05, 'milk': 0.0},
                                            'horn': {'roughness': 0.03}}}
+# round 24 (the owner, of round 23's two: "Water-clear"): Fog is water-clear, as the other seven are clear: no haze
+# (milk 0, round 22's 0.05), the deep a touch whiter, as round 23's 'birch-fog-clear' (kept below with the opal)
 # round 23 (the owner: "Are all of the others not hazy? If so this one could be not hazy for consistency. Completely
 # clear like the old phones, or semi opaque like the old gameboy. It would be good to compare options"): the colours
 # and Smoke are clear, no haze in them, so two candidates for Fog to set beside round 22's faint haze: water-clear (as
@@ -1699,6 +1753,10 @@ PRODUCT = Product(
                'mark-tint': {'preset': 'satin_paint', 'color': '$disc', 'roughness': 0.6, 'specular': 0.25},   # round 23
                'mark': {'preset': 'satin_paint', 'color': '#F3F2EE', 'roughness': 0.3, 'specular': 0.45},
                'print': {'preset': 'satin_paint', 'color': '#EDEBE5', 'roughness': 0.9, 'specular': 0.05},
+               # round 24: the globe UV-printed in the corner, each ring's colour (earth.py's RING: the primaries across,
+               # the mixed colours round the poles) and the outline in ink
+               **{f'print-{k}': {'preset': 'satin_paint', 'color': c, 'roughness': 0.55, 'specular': 0.3}
+                  for k, c in enumerate(('#D2382F', '#E9B320', '#4A90C8', '#E5732A', '#6C4BA3', '#4F7F3A'))},
                # round 13: the fittings a photograph shows (through the Cloud's acrylic, most of all)
                'brass': {'preset': 'metal', 'color': '#C9A660', 'roughness': 0.3},
                'sleeve': {'preset': 'rubber', 'color': '#1B1B1B'},

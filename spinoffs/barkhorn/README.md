@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 23**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 24b**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -38,7 +38,190 @@ loader, a cursor and a spinning coin. It also makes Fog the white Cloud. Round 2
 without drawing it (a print head, two gyroscope rings, a speaker's kick and the coin), gives each Cloud an icon built
 from the marks' shapes, compares Fog water-clear and semi-opaque, renders the mark at the front corner and high on
 the back, etched or in the speaker's colour, checks the grips against the lifting equation, and makes the site's
-horns turn as you scroll.
+horns turn as you scroll. Round 24 makes the globe's discs across the primaries and the upright ones the colours they
+mix, lights the discs as a sphere, tints them as acrylic that mixes where it crosses, ends the Gyroscope and the Coin
+on the whole globe before it tilts, and cuts the globe open with a driver for its core. It renames the line
+Atmosphere, pairs its colours on the site by the painter's wheel, makes Fog water-clear, and makes the 240 grips and
+EARF on the back, in the speaker's own colour, standard. Round 24b, after the owner's notes on it, makes the discs
+flush in colour (the strokes only in one colour), tints all six in the acrylic, calms the Gyroscope to a spin on its
+axis, makes the Coin's face the globe, adds Earthrise, and draws the globe as a Death Star whose dish is a driver.
+
+## Round 24b: flush, calmer, simpler (the owner's notes on round 24, 2026-10-15)
+
+| the owner's note | what changes |
+|---|---|
+| "The gyroscope is too chaotic." | **The globe spins on its axis**, as a gyroscope's rotor does, slowing to rest whole and upright, then tilts. The six rings each on its own axis are gone; two gimbals (the parallels rocking as well) were tried, and were busier. |
+| "The stroke around the globe is off." and "For the discs, I want them to not have strokes, so they are flush. The strokes should be the non-color versions." | **In colour the discs are flush**: no seams, no outline, no light. The ball itself is violet, the atmosphere, where no disc reaches its rim, so the globe is round without a stroke. **In one colour the seams are the strokes**: the ball less a gap along every edge, its rim kept whole. |
+| "The acrylic is missing orange, green, and purple latitude ovals that are present in the gyro version." | **Every disc is tinted** (below). |
+| "The coin spin still has an animation between the coin spin and tilt." | **The coin's face is the globe**: it spins on its edge, stops facing you, and the globe tilts. Nothing between. |
+| "The speaker cross section is too big and has too much detail. I was thinking more like a death star with a slightly bigger divot." | **A Death Star**: a blue sphere, a green trench, and a dish a little bigger than the film's that is a driver (below). |
+| "These don't feel minimal and polished enough. I'm still open to other ideas." | Everything above is flatter and simpler. And one new ident, **Earthrise**: the globe rises over a horizon, then tilts. |
+
+### The discs, flush
+
+In colour, each disc's visible part is drawn whole and meets the next with no seam, and there is no outline and no
+light. Drawn alone, the discs' ovals leave a few small gaps at the rim, where no disc reaches it, so the ball itself is
+filled first, in the violet of the meridian that faces you. The globe is round and solid without a stroke, and the
+violet is the atmosphere's colour. Each part is drawn a hair wider than itself, so no hairline of the ground shows
+between two, on the page and in the SVGs.
+
+In one colour (black, white, or a speaker's own) there is nothing to tell the parts apart but a line, so the seams
+are the strokes: the whole ball, less a gap along every edge between two parts. The gaps stop a little short of the
+rim, which stays whole, so the mark is round there too and reads as one engraved piece.
+
+![In colour, flush](brand/earth-discs-multi.svg) ![In one colour, seamed](brand/earth-discs-black.svg) ![On ink](brand/earth-discs-white.svg)
+
+### Acrylic, all six
+
+Tinting all six alike goes to mud whichever way it is blended. The violet meridian faces you, so it lies behind
+everything else, and every colour mixed through it turns brown. So the three mixed colours' discs go down first as a
+light wash, and the primaries over them, multiplied on paper: where red crosses yellow it makes orange, and yellow over
+blue green, while orange, green and violet are all there in their own ovals. On ink each disc is laid over the last.
+No strokes.
+
+![The globe in acrylic, all six tinted](brand/earth-acrylic-multi.svg)
+
+### The Gyroscope, the Coin and Earthrise
+
+- **Gyroscope.** The globe spins on its axis like a gyroscope's rotor, the meridians turning about the pole (the
+  parallels, round it, do not change), slowing to rest whole and upright. Then it tilts to the Earth's 23.4 degrees.
+  2.05 seconds.
+- **Coin.** The coin's face is the whole globe. It spins on its edge, slowing, its rim a deeper violet as it turns,
+  and stops facing you; then the globe tilts. 2.15 seconds.
+- **Earthrise** (new, after the photograph of the Earth rising over the Moon). The whole globe, upright, rises from
+  behind a horizon, slowing as it clears it; then it tilts. 1.75 seconds.
+
+Each then holds, moves aside, and EARF types in. The globe's page plays any of the three in discs, acrylic or lines,
+on paper or on ink.
+
+![The Gyroscope, the Coin and Earthrise, frame by frame](brand/earth-idents-r24b.png)
+
+`earth.py --video` writes each in discs on paper and on ink, in acrylic and in lines on paper
+(`brand/earth-ident-<gyro|coin|rise>-<style>-<ground>.mp4`).
+
+### The globe as a Death Star
+
+A sphere in Ice blue with the equator's trench in Poison green: the outside, blue and green. In its northern half, a
+dish a little bigger than the Death Star's (21 degrees across from the centre, the film's about 15) that is a driver
+seen from the front: the surround Flare red, the cone Dust orange, the dust cap Acid yellow, the inside as the Earth's
+core. The dish is concave, so its rings sit a little off centre, toward the middle. Flat colour, no strokes; in one
+colour, the trench and the rings' edges are gaps. Purple can be a small cap at the dish's centre (a variant), and it
+is the ring of sound the dish sends out when it kicks.
+
+![On paper](brand/earth-core-paper.svg) ![With a violet cap](brand/earth-core-cap.svg) ![On ink](brand/earth-core-ink.svg) ![Black only](brand/earth-core-black.svg)
+
+On each beat the cone and the dust cap push out, and a ring of violet goes out from the dish
+(`brand/earth-core-<night|paper>.mp4`, four beats a loop). `core.py` draws it.
+
+![The Death Star kicking, on ink and on paper](brand/earth-core-kick.png)
+
+### The globe in the front corner, four ways
+
+Where round 23's corner wordmark was, 48 mm across and 24 mm in from the front panel's top right corner
+(`product.py` P['globe'], from `earth.py`'s outlines in `brand/earth-outlines.json`), four ways, on Poison and on
+water-clear Fog (`frames.py corner24`):
+
+- **Lines, etched**: the rings at one weight, frosted.
+- **Discs, etched**: the seamed one-colour discs, frosted, the seams clear.
+- **Discs, in its own colour**: the same, the etch filled with the speaker's colour, deeper.
+- **Discs, printed in the six colours**: flush, UV-printed on a white underprint (`uv-print` in `components.json`).
+
+The renders are running and follow in the next commit.
+
+## Round 24: the primaries across, the globe made solid, the globe cut open, and Atmosphere (the owner's answers of 2026-10-15)
+
+| the question | the owner's answer | what this round does |
+|---|---|---|
+| The ident | "Gyroscope, Coin. The horizontal discs should actually be the primary colors. In general I'm interested in tying in color theory here, like the website could recommend related products based on complimentary, monochromatic, etc. as one example. The coin and gyroscope should reveal the full globe when complete, at which point it tilts, vs having to do more animation after the gyro+tilt or the coin+tilt. I like the disk versions best, but it feels like it's still lacking, or it needs a stroke around the whole thing or something that makes it feel more solid, like a sphere. I also like the idea of a cross section of the globe, like the ones that show the mantle and core, where the inside is yellow orange and red and the outside is blue and green. And the core can kind of resemble a driver and its rings. Not sure where purple comes in though." | **The Gyroscope and the Coin**, each ending on the whole globe, upright, which then tilts. **The discs across are the primaries**, the upright ones the colours they mix. **The discs made solid**, lit as a sphere with an outline round it. **The globe cut open**, its core a driver; purple is its atmosphere. **The site pairs the colours** on the painter's wheel. All below. |
+| The tubes | "I prefer the discs. I liked the acrylic idea if it looked more like actual acrylic where the crossing primary colors created secondary colors." | The tubes are set aside. **Acrylic**: tinted discs that mix where they cross (below). |
+| The theme | "Atmosphere" | **The line is Atmosphere**, its speakers Atmosphere 01 to 08, in the look book and on the site. |
+| The logo | "Not yet" | The look book keeps round 11's globe of circles. The site's draft carries the solid discs, as a proposal. |
+| Fog | "Water-clear (Recommended)" | **Fog is water-clear**, rendered again for the look book and for the site's turning horn (below). |
+| The mark | "I'm thinking logo in the corner, depending on what it looks like. Name on back own color" | **EARF on the back in the speaker's own colour, as standard.** The globe in the front corner, rendered four ways to judge (below). |
+| Lifting | "240 grips + feet range (Recommended)" | **The 240 grips on every Atmosphere speaker**, in its drawing set; castors, spikes and isolation feet sold for its feet's threads (below). |
+| The site's turning horns | "Keep as is (Recommended)" | Kept. |
+
+### The colours as colour theory
+
+The six colours are a painter's wheel. Red (Flare), yellow (Acid) and blue (Ice) are the primaries; orange (Dust),
+green (Poison) and violet (Haze) are the colours they mix. On the globe the three discs across, the parallels, are
+now the primaries, north to south Flare, Acid and Ice; the three upright ones, the meridians, are Dust, Haze and
+Poison. Haze faces you, so the globe's outline is violet (`earth.py` RING).
+
+The same wheel gives every pairing a designer uses, and the site now uses it (below). Opposite colours are
+complementary: Flare and Poison, Dust and Ice, Acid and Haze. Neighbours are analogous. The three primaries, or the
+three mixed colours, are triads. One colour in its shades is monochromatic: each speaker's cover and ring are already
+its own colour, deeper. Fog and Smoke are the neutrals, with no hue, so they go with any of the six.
+
+### Made solid, and acrylic that mixes (replaced in round 24b)
+
+This round first lit the discs as a sphere, with an outline round them, and tinted four of the discs as acrylic (the
+three primaries and one meridian, the other two clear). The owner found the outline off, and wanted the discs flush
+and all six in the acrylic: round 24b (above).
+
+### The Gyroscope and the Coin (replaced in round 24b)
+
+This round first ended both on the whole globe, upright, before the tilt: the Gyroscope's six rings each spun on its
+own axis until they came together, and the Coin dealt out the meridians while the parallels grew round them. The owner
+found the Gyroscope too chaotic and the Coin still too long between the spin and the tilt: round 24b (above).
+
+![Round 24's first Gyroscope and Coin](brand/earth-idents-r24.png)
+
+### The globe cut open (replaced in round 24b)
+
+This round first cut the globe open, its layers a driver (the inner core the dust cap, the outer core the cone, the
+mantle the surround, the crust the frame), the land on the half that remained and purple as the atmosphere's ring. The
+owner found it too big and too detailed, and asked for a Death Star with a slightly bigger divot: round 24b (above).
+
+### Atmosphere
+
+The line is renamed Atmosphere: in the look book (its page, each speaker's number, the horns' captions) and on the
+site (its menu, its cards: Atmosphere 01 to 08). The eight names stay as they are, each something the air holds. In
+the look book, the cloud stays the line's mark.
+
+### The site: which colours go together
+
+The site's draft has a new section after the speakers. Pick any of the eight: the wheel draws its pairings, and each
+pairing lists the speakers that make it, as photographs you can pick in turn. Complementary draws a line across the
+wheel, analogous an arc to the neighbours, a triad its triangle, and the neutrals a line to the middle, where Fog and
+Smoke sit. A line under it says what the record player and the lamp would be, once they exist: for a pair of Ice, a
+Dust record player across the room and a Haze lamp beside them. Picking Fog or Smoke shows the six colours, its
+opposite in lightness, and itself.
+
+![The site's colour pairs, Ice picked](brand/site24-colour.jpg)
+
+The draft's header also carries the globe in flush discs (round 24b), and Fog's photographs and turning horn are the
+water-clear ones.
+
+### Fog, water-clear
+
+Fog is now as clear as the other seven: no haze in the acrylic (`milk` 0), so the lining and the fittings show sharp,
+and the 20 mm edges darken as thick clear acrylic's do (`product.py` 'birch-y2k-ice'). Its look book photographs and
+its 24 turntable frames are rendered again.
+
+![Fog, round 23's faint haze (left) and water-clear, cover on and off](../../renders/2026-10-15/barkhorn/fog24.jpg)
+
+### The mark: EARF on the back in its own colour, the globe in the front corner
+
+**The back, as standard.** EARF, 140 mm wide, is laser-etched high on the back and the etch filled with the speaker's
+own colour, deeper, so it reads tone on tone (round 23 rendered it: the back row of `options23.png`, right). It is now
+in every Atmosphere speaker's drawing set and parts list (`cloud.py`; `laser-etch` in `components.json`).
+
+**The front corner** is rendered four ways in round 24b (above).
+
+### Lifting: the grips standard, and feet to swap
+
+**The grips.** A grip 240 by 42 mm through each side, 92 mm below the top, takes both of a lifter's hands, and two
+people lift a speaker by them with its horn off (lifting index 1.6, from 2.6 by the bottom edges; round 23). They are
+now standard (`cloud.py`), so the Atmosphere drawing set is built again with them: the sides cut through, and a cup
+behind each opening. The cup is now drape-formed: one piece of 3 mm acrylic in the side's tint, heated and pressed
+over a wooden buck, its flange trimmed and cemented behind the opening, so the box stays sealed. It cannot be cut
+flat, since its corners follow the opening's 14 mm radius; a buck costs about $120 once.
+
+**Feet to swap.** The feet's four M8 inserts take any foot with an M8 stem, so a small range can be sold alongside:
+castors to roll it (four twin-wheel swivel castors with 50 mm wheels), spikes with floor cups for carpet, and soft
+isolation feet for hard floors. Each set screws in by hand in place of the levelling feet. They are accessories, so
+they are not in the speaker's parts list.
 
 ## Round 23: four idents, an icon for each Cloud, and Fog clear or semi-opaque (the owner's answers of 2026-10-15)
 
@@ -2267,24 +2450,25 @@ The shots are in `studio/shots/barkhorn/`:
 ## Open questions for the owner
 
 The owner's direction since round 15: keep refining the design (no requests for quotes yet); since round 17, no wood,
-Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a maker is found.
+Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a maker is found; since round 24 the
+line is called Atmosphere.
 
-1. **The ident** (round 23). The Printer, the Gyroscope, the Kick or the Coin, or two of them (the Kick for the
-   speakers, say, and another for the brand)? In lines or discs?
-2. **The logo** (rounds 22 and 23). The 3D globe in even lines as EARF's logo everywhere? The look book's cover still
-   carries round 11's globe of circles; the site's draft already has the new one.
-3. **The theme** (round 23). Clouds, Atmosphere, Elements, or the colours named as chemical elements? The icons with
-   it, and where: beside the mark, on the box, on the site?
-4. **Fog** (round 23). Water-clear, semi-opaque, or round 22's faint haze?
-5. **The mark on the speaker** (round 23). The front corner or high on the back, etched plain or filled with the
-   speaker's colour? The globe beside the wordmark once the logo is settled?
-6. **Lifting** (round 23). Grips 240 by 42 on every Cloud? Castors, spikes and isolation feet as accessories?
-7. **earf.world** (rounds 21 to 23). The turning horns: keep the stop motion as it is, smoother or choppier? When to
-   buy the domain ($3.99 for the first year, $38.10 a year after)? Show the price on it?
+1. **The globe in the front corner** (round 24b). In lines etched, in discs etched, in the speaker's own colour, or
+   printed in the six colours? Or the name on the back alone?
+2. **The ident** (round 24b). The Gyroscope, the Coin or Earthrise as EARF's ident (and another as the loader)? In
+   discs or in acrylic?
+3. **The Death Star** (round 24b). The speakers' own sign beside the brand's globe: on the box, in the manual, on each
+   speaker's page? With the violet cap or without? Kicking on the site?
+4. **The logo** (rounds 22 to 24b). The globe in flush discs as EARF's logo everywhere, the look book's cover
+   included, once it is settled? The look book still carries round 11's globe of circles.
+5. **The colour pairs** (round 24). A section of their own on the site, as drafted, or on each speaker's page? And
+   which comes first to pair with, the record player or the lamp?
+6. **The feet** (round 24). Which to sell (castors, spikes, isolation feet), and at what price?
+7. **earf.world** (rounds 21 to 24). When to buy the domain ($3.99 for the first year, $38.10 a year after)? Show the
+   price on it?
 8. **The other names** (round 19). Flare is chosen; keep Dust, Acid, Poison, Ice, Haze, Fog and Smoke? Acid usually
    names a sharper, greener yellow.
-9. **Beyond the speakers.** A record player or a lamp in the Clouds' colours drawn next, or the speakers first?
-10. **The recycled acrylic partner** (round 17; "Not yet", round 21). Plastiglas de México (Chemcast EcoGreen) and
+9. **The recycled acrylic partner** (round 17; "Not yet", round 21). Plastiglas de México (Chemcast EcoGreen) and
    Madreperla (Green Cast), for the eight tints at 20 mm, when the design settles.
 
 Still left out of the renders: the amplifier plate's own face. Its connectors are known (an IEC C14 inlet, XLR in

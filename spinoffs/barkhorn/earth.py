@@ -52,6 +52,7 @@ import argparse, json, math, os, shutil, subprocess, sys, tempfile
 import numpy as np
 from shapely.geometry import LineString, MultiLineString, Point, Polygon
 from shapely.ops import unary_union
+from shapely import make_valid, set_precision
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -63,8 +64,26 @@ LEAN, ELEV, LAT = 23.44, 22.0, 40.0                      # the axis's lean (the 
 MERIDIANS = (30.0, 90.0, 150.0)                          # the meridians' longitudes at rest (90 faces us: the rim)
 W_LINE, W_DEPTH, SEAM = 0.075, 0.42, 0.035               # of the globe's radius: the line, the far line's share, the seam
 CLOUDS = [(name, colour) for key, line, num, name, colour in M.SPEAKERS if line == 'Cloud']
-HUES = [c for n, c in CLOUDS if n not in ('Fog', 'Smoke')]          # Flare Dust Acid Poison Ice Haze, ring by ring
+HUES = [c for n, c in CLOUDS if n not in ('Fog', 'Smoke')]          # Flare Dust Acid Poison Ice Haze, the spectrum
 NAMES = [n for n, c in CLOUDS if n not in ('Fog', 'Smoke')]
+_C = dict(CLOUDS)
+# round 24 (the owner: "The horizontal discs should actually be the primary colors"): the rings' colours, ring by ring
+# (the parallels north to south, then the meridians at 30, 90 and 150): the primaries on the parallels, red, yellow and
+# blue, and the secondaries on the meridians, orange, violet (the one facing us, so the globe's outline is violet, the
+# atmosphere's colour) and green; the loader, the cursor and the coin's flashes keep the spectrum (HUES)
+RING = [_C['Flare'], _C['Acid'], _C['Ice'], _C['Dust'], _C['Haze'], _C['Poison']]
+RING_NAMES = ['Flare', 'Acid', 'Ice', 'Dust', 'Haze', 'Poison']
+# the acrylic (round 24: "I liked the acrylic idea if it looked more like actual acrylic where the crossing primary
+# colors created secondary colors"; round 24b: "The acrylic is missing orange, green, and purple latitude ovals that are
+# present in the gyro version"): every disc tinted. Tinting all six alike goes to mud, the violet meridian facing us
+# lying behind everything, so the three mixed colours' discs go down first as a light wash and the primaries over them,
+# multiplied on paper so where two primaries cross they make the colour between. On ink each is laid over the last.
+# Per ground and per kind: how it blends, how strong, how much lighter its tint. No strokes.
+ACRYLIC = dict(paper=dict(prim=('multiply', 0.6, 0.0), mixed=('normal', 0.5, 0.4), one=('multiply', 0.34, 0.0)),
+               night=dict(prim=('normal', 0.75, 0.0), mixed=('normal', 0.55, 0.0), one=('normal', 0.42, 0.0)))
+ACRYLIC_ORDER = [3, 4, 5, 0, 1, 2]                      # the mixed colours' discs, then the primaries'
+ATMOS = 4                                               # round 24b: the ring whose colour fills the ball under the flush
+                                                        # discs (Haze, the violet meridian facing us: the atmosphere)
 PAPER, INK, WHITE = '#F2EFEA', '#1C1A18', '#F6F5F2'
 # round 23 (the owner: "Could try one where the even lines look like acrylic tubes"): each ring a tube of tinted acrylic,
 # a little bolder than the line so its shading reads: a faint tint through its middle (core), deeper along its two
@@ -258,28 +277,93 @@ def facets(spin=0.0):
     return out
 
 
-def discs_body(colours, spin=0.0, seam=SEAM, least=0.004):
-    """The discs, each facet drawn back from its edges by half a seam, so the ground shows between them; slivers
-    smaller than `least` of the globe's area left out (at a mark's sizes they read as specks on its edge)."""
-    out = ''
-    for i, f in enumerate(facets(spin)):
-        g = f.buffer(-seam / 2, join_style=2, mitre_limit=4).simplify(0.001)
-        parts = [q for q in getattr(g, 'geoms', [g]) if q.area > least * math.pi]
-        if parts:
-            out += f'<path d="{" ".join(_poly_d(q) for q in parts)}" fill="{colours[i]}" fill-rule="evenodd"/>'
+def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, rim=0.045):
+    """Each disc's visible part as drawn. In colour the discs are flush (round 24b, the owner: "For the discs, I want
+    them to not have strokes, so they are flush. The strokes should be the non-color versions"): each part whole, a
+    hair (`lap`) larger than itself so no hairline of the ground shows between two, the globe's own edge kept exact (the
+    ball under them is filled: discs_body). In one colour the seams are the strokes: the whole ball less a band `seam`
+    wide along every edge between two parts (the ball's gaps at the rim counted with the violet meridian's part, as the
+    colour shows them), stopping a little (`rim`) short of the rim so the rim stays whole; returned as one shape, at
+    index 0."""
+    fs = facets(spin)
+    sil = unary_union([f for f in fs if not f.is_empty])
+    if not flush:
+        ball = Point(0, 0).buffer(1.0, resolution=180)
+        gaps = ball.difference(sil).buffer(-2e-4).buffer(2e-4)
+        cells = [f.union(gaps) if i == ATMOS else f for i, f in enumerate(fs)]
+        edges = unary_union([c.boundary for c in cells if not c.is_empty]).difference(ball.boundary.buffer(2e-3))
+        cut = edges.buffer(seam / 2, cap_style=2, join_style=2, mitre_limit=4).intersection(ball.buffer(-rim))
+        cut = unary_union([q for q in getattr(cut, 'geoms', [cut]) if q.area > 0.0025])   # no ticks left by an edge near the rim
+        return [ball.difference(cut).simplify(0.001)] + [None] * (len(fs) - 1)
+    out = []
+    for f in fs:
+        if f.is_empty:
+            out.append(None); continue
+        g = f.buffer(lap, join_style=2, mitre_limit=4).intersection(sil).simplify(0.001)
+        parts = [q for q in getattr(g, 'geoms', [g]) if q.geom_type == 'Polygon' and q.area > 1e-6]
+        out.append(unary_union(parts) if parts else None)
     return out
 
 
+def discs_body(colours, spin=0.0, flush=True):
+    """The discs as SVG paths, flush in colour, seamed in one colour (disc_shapes). In colour the ball itself is filled
+    first, in the atmosphere's violet (ATMOS), so the globe is round where no disc reaches its rim and needs no outline."""
+    base = f'<circle r="1" fill="{colours[ATMOS]}"/>' if flush else ''
+    return base + ''.join(f'<path d="{_poly_d(g)}" fill="{colours[i]}" fill-rule="evenodd"/>'
+                          for i, g in enumerate(disc_shapes(spin, flush)) if g is not None)
+
+
+def _ellipse(g):
+    """A ring as the ellipse it projects to (SVG attributes, y down): its centre, its radius across, and its radius
+    times |n.z| along the screen direction of its plane's normal."""
+    n, c, r = g['n'], g['c'], g['r']
+    th = math.degrees(math.atan2(-n[1], n[0])) if abs(n[0]) + abs(n[1]) > 1e-9 else 0.0
+    return (f'transform="translate({c[0]:.4f} {-c[1]:.4f}) rotate({th:.3f})" rx="{r * abs(n[2]) / np.linalg.norm(n):.4f}" '
+            f'ry="{r:.4f}"')
+
+
+def _lighter(c, k):
+    """A colour k of the way to white (k < 0: toward black)."""
+    c = c.lstrip('#')
+    return '#%02X%02X%02X' % tuple(round(v + (255 - v) * k if k >= 0 else v * (1 + k)) for v in (int(c[i:i + 2], 16) for i in (0, 2, 4)))
+
+
+def acrylic_layers(colours, ground='paper'):
+    """The acrylic's discs in the order they are laid (ACRYLIC_ORDER), each (ring, tint, blend, strength): in colour the
+    mixed colours' discs a light wash and the primaries over them; in one colour every disc alike, where they cross
+    deeper."""
+    A, one = ACRYLIC['night' if ground == 'night' else 'paper'], len(set(colours)) == 1
+    out = []
+    for i in ACRYLIC_ORDER:
+        mode, a, k = A['one'] if one else (A['prim'] if i < 3 else A['mixed'])
+        out.append((i, _lighter(colours[i], k) if k else colours[i], mode, a))
+    return out
+
+
+def acrylic_body(colours, ground='paper'):
+    """Round 24b: the discs as tinted acrylic, every one of them, translucent, no strokes (acrylic_layers)."""
+    rs = rings()
+    return '<g style="isolation:isolate">' + ''.join(
+        f'<ellipse {_ellipse(rs[i])} fill="{c}" fill-opacity="{a}"' + (f' style="mix-blend-mode:{m}"' if m != 'normal' else '') + '/>'
+        for i, c, m, a in acrylic_layers(colours, ground)) + '</g>'
+
+
 def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper'):
-    """style: lines (the far halves lighter: the mark), even (every line one weight), discs, or tubes (round 23, on
-    `ground`, paper or night); colours: six (a ring each) or one."""
-    if isinstance(colours, str):
+    """style: lines (the far halves lighter: the mark), even (every line one weight), discs (round 24b: flush in colour,
+    seamed in one colour), acrylic (round 24b: every disc tinted, crossing to the colours between) or tubes (round 23);
+    on `ground`, paper or night; colours: six (a ring each) or one."""
+    one = isinstance(colours, str)
+    if one:
         colours = [colours] * 6
+    line = colours[0] if one else (WHITE if ground == 'night' else INK)
     if style == 'tubes':
         body, e = tubes_body(colours, ground), 1 + W_TUBE / 2 + 0.02
+    elif style == 'acrylic':
+        body, e = acrylic_body(colours, ground), 1 + 0.03
+    elif style == 'discs':
+        body, e = discs_body(colours, flush=not one), 1 + W_LINE / 2
     else:
-        body = discs_body(colours) if style == 'discs' else lines_body(colours, depth=style == 'lines')
-        e = 1 + W_LINE / 2
+        body, e = lines_body(colours, depth=style == 'lines'), 1 + W_LINE / 2
     wh = f' width="{size}" height="{size}"' if size else ''
     ground = f'<rect x="{-e:.4f}" y="{-e:.4f}" width="{2 * e:.4f}" height="{2 * e:.4f}" fill="{bg}"/>' if bg else ''
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-e:.4f} {-e:.4f} {2 * e:.4f} {2 * e:.4f}"{wh} role="img" '
@@ -321,41 +405,68 @@ def lockup_svg(style, colours, word, size=None, bg=None, ground='paper'):
             + ''.join(f'<path d="{d}"/>' for d in letters()) + '</g></svg>')
 
 
+def _core_paths():
+    import core as K
+    return K.core_paths()
+
+
+def outlines(tol=0.0015):
+    """Round 24 (24b): the globe's shapes for a maker (product.py's mark in the front corner), each a list of [ring,
+    exterior, holes] on the unit globe, y up: the discs seamed, for one colour (an etch, a tint); the discs flush, for
+    colour (a print); and the lines, each ring at one weight (the even style)."""
+    def parts(g, k):                                     # on a 1e-4 grid, each polygon kept valid (a CAD face needs it)
+        g = make_valid(set_precision(g, 1e-4))
+        return [[k, np.array(q.exterior.coords)[:-1].tolist(), [np.array(h.coords)[:-1].tolist() for h in q.interiors]]
+                for q in getattr(g, 'geoms', [g]) if q.geom_type == 'Polygon' and q.area > 1e-6]
+    seamed = [q for i, g in enumerate(disc_shapes(flush=False)) if g is not None for q in parts(g.simplify(tol), i)]
+    flush = [q for i, g in enumerate(disc_shapes(flush=True, lap=0.0)) if g is not None for q in parts(g.simplify(tol), i)]
+    lines = []
+    for i, g in enumerate(rings()):
+        loop = np.vstack([g['pts'], g['pts'][:1]])[:, :2]
+        lines += parts(LineString(loop).buffer(W_LINE / 2, join_style=1).simplify(tol), i)
+    ball = Point(0, 0).buffer(1.0, resolution=180)
+    gaps = ball.difference(unary_union([g for g in disc_shapes(flush=True, lap=0.0) if g is not None]))
+    gaps = gaps.buffer(-2e-4).buffer(2e-4)               # only the gaps at the rim, not the slivers between two parts
+    gaps = unary_union([q for q in getattr(gaps, 'geoms', [gaps]) if q.area > 2e-4])
+    return dict(discs=seamed, flush=flush, lines=lines, base=parts(gaps.simplify(tol), ATMOS))
+
+
 def data():
     return dict(lean=LEAN, elev=ELEV, lat=LAT, mer=list(MERIDIANS), w=W_LINE, wDepth=W_DEPTH, seam=SEAM, hues=HUES, wTube=W_TUBE, tube=TUBE,
+                ring=RING, atmos=ATMOS, rim=_lighter(RING[ATMOS], -0.4), acrylic={g: acrylic_layers(RING, g) for g in ('paper', 'night')}, core=_core_paths(),
                 names=NAMES, paper=PAPER, ink=INK, night=NIGHT, white=WHITE, letters=letters(), wordW=M.WORDMARK_W)
 
 
 RAILS = [('Black only', 'paper', lambda: INK), ('White only', 'night', lambda: WHITE),
-         ('One colour', 'paper', lambda: HUES[4]), ('Multicolour', 'paper', lambda: HUES),
-         ('Multicolour on ink', 'night', lambda: HUES)]
+         ('One colour', 'paper', lambda: _C['Ice']), ('Multicolour', 'paper', lambda: RING),
+         ('Multicolour on ink', 'night', lambda: RING)]
 
 
 def rails_html():
     """The guide rails: each style in black only, white only, one colour and multicolour, and the singles."""
     rows = ''
-    for style, title in (('even', 'Lines'), ('tubes', 'Tubes'), ('discs', 'Discs')):
+    for style, title in (('discs', 'Discs'), ('acrylic', 'Acrylic'), ('even', 'Lines')):
         cells = ''.join(f'<figure class="rail {g}">{mark_svg(style, f(), label=f"{title}, {t.lower()}", ground=g)}'
                         f'<figcaption>{t}</figcaption></figure>' for t, g, f in RAILS)
-        singles = ''.join(f'<span class="one" title="{n}">{mark_svg(style, c, label=f"{title} in {n}")}</span>'
-                          for n, c in zip(NAMES, HUES))
+        singles = ''.join(f'<span class="one" title="{n}">{mark_svg(style, _C[n], label=f"{title} in {n}")}</span>'
+                          for n in RING_NAMES)
         rows += (f'<div class="railrow"><h3>{title}</h3><div class="rails">{cells}</div>'
-                 f'<div class="singles"><span class="lab">Each Cloud in its own colour</span>{singles}</div></div>')
-    locks = (f'<figure class="lock paper">{lockup_svg("even", HUES, INK)}<figcaption>Lockup on paper</figcaption></figure>'
-             f'<figure class="lock night">{lockup_svg("even", HUES, WHITE)}<figcaption>On ink</figcaption></figure>'
-             f'<figure class="lock paper">{lockup_svg("discs", INK, INK)}<figcaption>Black only, discs</figcaption></figure>'
-             f'<figure class="lock night">{lockup_svg("even", WHITE, WHITE)}<figcaption>White only</figcaption></figure>'
-             f'<figure class="lock paper">{lockup_svg("tubes", HUES, INK)}<figcaption>Tubes on paper</figcaption></figure>'
-             f'<figure class="lock night">{lockup_svg("tubes", HUES, WHITE, ground="night")}<figcaption>Tubes on ink</figcaption></figure>')
+                 f'<div class="singles"><span class="lab">Each speaker in its own colour</span>{singles}</div></div>')
+    locks = (f'<figure class="lock paper">{lockup_svg("discs", RING, INK)}<figcaption>Discs on paper</figcaption></figure>'
+             f'<figure class="lock night">{lockup_svg("discs", RING, WHITE, ground="night")}<figcaption>Discs on ink</figcaption></figure>'
+             f'<figure class="lock paper">{lockup_svg("acrylic", RING, INK)}<figcaption>Acrylic on paper</figcaption></figure>'
+             f'<figure class="lock paper">{lockup_svg("even", RING, INK)}<figcaption>Lines on paper</figcaption></figure>'
+             f'<figure class="lock paper">{lockup_svg("discs", INK, INK)}<figcaption>Black only</figcaption></figure>'
+             f'<figure class="lock night">{lockup_svg("discs", WHITE, WHITE, ground="night")}<figcaption>White only</figcaption></figure>')
     return rows + f'<div class="locks">{locks}</div>'
 
 
 # the line's name, three ways (the owner: "Atmosphere is cool, but open to other earth themes. Elements was another
 # idea I had"), and a fourth: the same colours as chemical elements, numbered by their atomic numbers
 THEMES = [
-    ('Clouds', 'Now', 'Cloud 05 &middot; Ice', 'Things in the sky. The cloud mark stays the line&rsquo;s sign, with the '
+    ('Clouds', 'Until now', 'Cloud 05 &middot; Ice', 'Things in the sky. The cloud mark stays the line&rsquo;s sign, with the '
      'eight icons under it.', None),
-    ('Atmosphere', 'Wider', 'Atmosphere 05 &middot; Ice', 'The same eight names, as what the air holds: light (Flare, Haze), '
+    ('Atmosphere', 'Chosen (round 24)', 'Atmosphere 05 &middot; Ice', 'The same eight names, as what the air holds: light (Flare, Haze), '
      'what it carries (Dust, Fog, Smoke, Poison) and what falls through it (Acid, Ice). The globe already draws one.', None),
     ('Elements', 'Sharper', 'Element 05 &middot; Ice', 'The same eight, read as the elements and their dangers: fire, earth, '
      'water and air, acid and poison. The icons work as hazard signs, which is where the crossbones and the drop come '
@@ -367,6 +478,17 @@ THEMES = [
       ('Carbon', 6)]),
 ]
 ON_INK = {'Smoke': '#8A888E'}                            # Smoke's lines lightened, to be seen on ink at all
+
+
+def core_html():
+    """Round 24b: the globe as a Death Star (core.py), on paper and on ink, with the violet cap, and in black and white."""
+    import core as K
+    cells = ''.join(f'<figure class="icon {g}">{K.core_svg(gr, one, cap, label=f"The globe as a Death Star, {t.lower()}")}'
+                    f'<figcaption>{t}</figcaption></figure>'
+                    for t, g, gr, one, cap in (('On paper', 'paper', 'paper', None, False), ('On ink', 'night', 'night', None, False),
+                                               ('With a violet cap', 'paper', 'paper', None, True),
+                                               ('Black only', 'paper', 'paper', INK, False), ('White only', 'night', 'night', WHITE, False)))
+    return f'<div class="iconrow"><div class="cores">{cells}</div></div>'
 
 
 def theme_html():
@@ -443,6 +565,8 @@ button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px }
 .iconrow { display: grid; gap: 8px; padding: 14px }
 .iconrow + .iconrow { padding-top: 0 }
 .icons { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px }
+.cores { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px }
+.cores svg { padding: 12% }
 .icon { margin: 0; display: grid; gap: 4px; font-size: 11px; color: var(--muted); text-align: center }
 .icon svg { display: block; width: 100%; height: auto; padding: 10%; box-sizing: border-box; border-radius: 4px }
 .names { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 14px; border-top: 1px solid var(--line) }
@@ -464,29 +588,32 @@ button:focus-visible { outline: 2px solid var(--fg); outline-offset: 2px }
 .notes ul { margin: 0; padding-left: 18px; max-width: 74ch } .notes li { margin: 3px 0 }
 @media (max-width: 720px) { .rails { grid-template-columns: repeat(3, minmax(0, 1fr)) } .kit, .locks { grid-template-columns: 1fr }
   .icons { grid-template-columns: repeat(4, minmax(0, 1fr)) } .names { grid-template-columns: 1fr }
+  .cores { grid-template-columns: repeat(2, minmax(0, 1fr)) }
   .seg button, .btn { padding: 10px 10px } }
 body.capture { padding: 0; overflow: hidden } body.capture main { display: none }
 #cap { display: none } body.capture #cap { display: block; position: fixed; inset: 0; width: 100vw; height: 100vh }
 </style>
 <main>
   <header>
-    <div class="eyebrow">EARF &middot; Round 23 &middot; the globe</div>
-    <h1>The globe arrives four ways, and the Clouds get icons</h1>
-    <p class="lede">The same 3D Earth: three parallels and three meridians on the Earth's 23.4&deg; tilt, each ring one of
-      the six colour Clouds, in even lines, as acrylic tubes or as discs. It is no longer drawn. A printer head lays it down band by band,
-      two gyroscope rings spin into it, it kicks like a speaker seen from above, or a spinning coin deals it out. Each
-      takes about two seconds before EARF types in.</p>
+    <div class="eyebrow">EARF &middot; Round 24b &middot; the globe</div>
+    <h1>Flush discs, all six in acrylic, a calmer arrival, and a Death Star</h1>
+    <p class="lede">The same 3D Earth on the Earth's 23.4&deg; tilt, in colour theory: the horizontal discs are the
+      primaries, red, yellow and blue, the upright ones the colours they mix, orange, violet and green. In colour the
+      discs are flush, with no strokes: the ball itself is violet, the atmosphere, so the globe is round without an
+      outline. The strokes are the one-colour versions'. In acrylic every disc is tinted. Each ident ends on the whole
+      globe, upright, and then it tilts: the Gyroscope spins on its axis, the Coin&rsquo;s face is the globe, and
+      Earthrise, new, rises over a horizon.</p>
   </header>
 
   <section class="win" aria-label="The ident">
     <div class="bar"><i style="background:#D2382F"></i><i style="background:#E9B320"></i><i style="background:#4F7F3A"></i><b>earf.world &mdash; ident</b></div>
-    <div class="screen" id="screen"><canvas id="stage" aria-label="The EARF globe drawn ring by ring"></canvas></div>
+    <div class="screen" id="screen"><canvas id="stage" aria-label="The EARF globe arriving, then EARF beside it"></canvas></div>
     <div class="controls">
       <div class="seg" id="kind" role="group" aria-label="Ident">
-        <button aria-pressed="true" data-v="printer">Printer</button><button aria-pressed="false" data-v="gyro">Gyroscope</button><button aria-pressed="false" data-v="kick">Kick</button><button aria-pressed="false" data-v="coin">Coin</button>
+        <button aria-pressed="true" data-v="gyro">Gyroscope</button><button aria-pressed="false" data-v="coin">Coin</button><button aria-pressed="false" data-v="rise">Earthrise</button>
       </div>
       <div class="seg" id="style" role="group" aria-label="Style">
-        <button aria-pressed="true" data-v="even">Lines</button><button aria-pressed="false" data-v="tubes">Tubes</button><button aria-pressed="false" data-v="discs">Discs</button>
+        <button aria-pressed="true" data-v="discs">Discs</button><button aria-pressed="false" data-v="acrylic">Acrylic</button><button aria-pressed="false" data-v="even">Lines</button>
       </div>
       <div class="seg" id="ground" role="group" aria-label="Ground">
         <button aria-pressed="true" data-v="paper">Paper</button><button aria-pressed="false" data-v="night">Ink</button>
@@ -501,8 +628,18 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
     __RAILS__
   </section>
 
+  <section class="win" aria-label="The globe as a Death Star">
+    <div class="bar"><b>The globe as a Death Star &mdash; its dish a driver</b></div>
+    <p class="lead">A sphere, blue, with the equator&rsquo;s trench in green: the outside. In its northern half a dish, a
+      little bigger than the Death Star&rsquo;s, that is a driver seen from the front: the surround red, the cone orange,
+      the dust cap yellow, as the Earth&rsquo;s core. The dish is concave, so its rings sit a little off centre. Flat
+      colour and no strokes; in one colour, the trench and the rings&rsquo; edges are gaps. Purple can be a small cap at the
+      centre, and it is the ring of sound the dish sends out when it kicks (below).</p>
+    __CORE__
+  </section>
+
   <section class="win" aria-label="Theme">
-    <div class="bar"><b>Theme &mdash; an icon for each Cloud, from the marks&rsquo; own circles, bars and triangles</b></div>
+    <div class="bar"><b>Theme &mdash; Atmosphere, with an icon for each speaker from the marks&rsquo; own circles, bars and triangles</b></div>
     <p class="lead">Each icon is made as the cloud mark is: a few circles, bars and triangles, all filled, then every
       outline drawn over them, like stacked clear acrylic. Poison is two crossing bars with circles at the ends; Acid is
       a circle with a triangle on top.</p>
@@ -520,8 +657,8 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <div class="pad" id="pad" style="background:#121114"><canvas id="cursor" aria-label="Cursor trail"></canvas></div>
     </div>
     <div class="win">
-      <div class="bar"><b>Kick, looped &mdash; for the speakers</b></div>
-      <div class="coin" style="background:#121114"><canvas id="kickloop" aria-label="The globe from above the pole kicking like a speaker"></canvas></div>
+      <div class="bar"><b>The Death Star, kicking &mdash; for the speakers</b></div>
+      <div class="coin" style="background:#121114"><canvas id="kickloop" aria-label="The globe as a Death Star, its dish kicking like a speaker"></canvas></div>
     </div>
   </section>
 
@@ -531,17 +668,19 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <h3>Why it reads as the Earth</h3>
       <ul>
         <li>The axis leans 23.4&deg;, as the Earth's does and as a desk globe's stand holds it. It also tips 22&deg; toward you, so the parallels open into ovals and the far halves show behind the near ones.</li>
-        <li>The parallels are warm, north to south: Flare, Dust, Acid. The meridians are cool: Poison, Ice, Haze. Ice is the meridian facing you, so the globe's outline is blue.</li>
+        <li>The colours are colour theory (round 24): the parallels are the primaries, north to south, Flare red, Acid yellow and Ice blue; the meridians are the secondaries, Dust orange, Haze violet and Poison green. Haze faces you, so the globe's outline is violet, the colour of the atmosphere at the Earth's edge.</li>
+        <li>Discs in colour are flush (round 24b): no seams, no outline, no light. The ball itself is violet where no disc reaches its rim, so the globe is round and solid without a stroke. The strokes belong to the one-colour versions: there the seams are gaps in the ground, and the parts run out to the rim.</li>
+        <li>Acrylic: every disc tinted (round 24b). All six alike goes to mud, the violet meridian facing you lying behind everything, so the three mixed colours' discs go down first as a light wash and the primaries over them, multiplied on paper so where two primaries cross they make the colour between: red over yellow orange, yellow over blue green. On ink each is laid over the last. No strokes.</li>
         <li>Lines are even, every line one weight, the far halves under the near. Round 22's lighter far halves (in <code>brand/earth-lines-*.svg</code>) remain for one colour at small sizes, where even lines tangle.</li>
-        <li>Seen from above the pole, the same rings are a speaker: rings round one centre, with the meridians as spokes. The Kick uses that view, and the looped kick could mark the speakers themselves.</li>
-        <li>Tubes: each ring a tube of tinted acrylic, faint through the middle and deeper along its walls, with a highlight toward the light. On paper the tint darkens what is behind it, as coloured acrylic does; on ink it glows. Where two rings cross, one shows through the other, and the far halves are at half strength so the near side reads in front. It is for screens and large sizes, like the animation; the flat lines stay the mark for print.</li>
+        <li>Seen from above the pole, the same rings are a speaker: rings round one centre, with the meridians as spokes. Round 23&rsquo;s Kick used that view; round 24b makes the speaker a Death Star&rsquo;s dish instead.</li>
+        <li>Round 23's tubes, the printer and the kick, and round 24's lit sphere and cut-open globe, are set aside; the first three stay in <code>earth.py</code> and in round 23's files.</li>
       </ul>
       <h3>The rails</h3>
       <ul>
         <li>Black only: paper, print, embossing and a one-colour etch. White only: dark grounds, and the etched mark on the acrylic.</li>
-        <li>One colour: each Cloud's own mark, for its speaker, box and page. Avoid Acid on paper, where yellow is too faint; use it on ink.</li>
+        <li>One colour: each speaker's own mark, for the speaker, its box and its page. Avoid Acid on paper, where yellow is too faint; use it on ink.</li>
         <li>Multicolour: the brand at large. Animated: screens only (the idents, the loader, the cursor).</li>
-        <li>Even lines for most sizes. Below about 32 px, or in one colour, round 22's lighter far halves read better. Discs are the solid version, for fills, stamps, stickers and the smallest sizes.</li>
+        <li>Discs, flush, for colour. In one colour, the seamed discs or the even lines; below about 32 px round 22's lighter far halves read better.</li>
         <li>Clear space: a quarter of the globe's width on every side. In the lockup, the globe is one and a half cap heights tall, centred on the letters.</li>
       </ul>
       <h3>The icons</h3>
@@ -639,7 +778,9 @@ let OFF = null;
 function offscreen(w, h) { if (!OFF) OFF = document.createElement('canvas');
   if (OFF.width !== w || OFF.height !== h) { OFF.width = w; OFF.height = h; } return OFF; }
 
-// the discs: each one's oval less every nearer disc's oval (a half-plane apart), then the seams over the edges
+// the discs: each one's oval less every nearer disc's oval (a half-plane apart), then the seams over the edges; round 24b,
+// in colour flush (seamW 0): no seams, each part laid a little wider than itself so no hairline of the ground shows
+const FLUSH = [[0, 0], [0.6, 0], [-0.6, 0], [0, 0.6], [0, -0.6]];
 function drawDiscs(ctx, V, gs, filled, cols, bg, seamW) {
   const on = gs.filter((g, k) => filled[k] && Math.abs(g.n[2]) > 1e-4 && g.r > 1e-3);
   const cv = ctx.canvas, off = offscreen(cv.width, cv.height), o = off.getContext('2d'), T = ctx.getTransform();
@@ -656,8 +797,11 @@ function drawDiscs(ctx, V, gs, filled, cols, bg, seamW) {
         o.beginPath(); q.forEach((p, i) => i ? o.lineTo(V.X(p), V.Y(p)) : o.moveTo(V.X(p), V.Y(p))); o.closePath(); o.clip();
       } else if (C <= 0) { o.restore(); continue; }
       ellipse(o, V, gj.pts); o.fill(); o.restore(); }
-    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(off, 0, 0); ctx.restore();
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
+    for (const [dx, dy] of seamW > 0 ? [[0, 0]] : FLUSH) ctx.drawImage(off, dx, dy);   // flush: a hair wider each way
+    ctx.restore();
   });
+  if (!(seamW > 0)) return;
   ctx.strokeStyle = bg; ctx.lineWidth = seamW; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
   for (const g of on) strokeVisible(ctx, V, g.pts, on, [g]);           // the rims
   for (let i = 0; i < on.length; i++) for (let j = i + 1; j < on.length; j++) {   // where two discs cross
@@ -775,14 +919,16 @@ function drawTubes(ctx, V, items, G) {
   for (const [run, closed, paint] of later) light(run, closed, paint);
 }
 // rings as a style draws them: even lines (each in its colour, every line one weight, the far halves under the near),
-// tubes (round 23) or discs (filled, seamed); a ring marked `ink` stays a line over the discs, hidden where a nearer
-// disc covers it
+// tubes (round 23), discs (round 24b: flush, no seams, no outline) or acrylic (round 24b: every disc tinted); a ring
+// marked `ink` stays a line over the discs, hidden where a nearer disc covers it
 function drawRings(ctx, V, items, style, G) {
   const w = D.w * V.R; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
   if (style === 'tubes') { drawTubes(ctx, V, items, G); return; }
+  if (style === 'acrylic') { drawAcrylic(ctx, V, items, G); return; }
   if (style === 'discs') {
     const ds = items.filter(i => !i.ink && i.g.r > 1e-3);
-    drawDiscs(ctx, V, ds.map(i => i.g), ds.map(() => true), ds.map(i => i.col), G.bg, D.seam * V.R);
+    ctx.fillStyle = D.ring[D.atmos]; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R, 0, TAU); ctx.fill();   // the ball, violet
+    drawDiscs(ctx, V, ds.map(i => i.g), ds.map(() => true), ds.map(i => i.col), G.bg, 0);
     for (const i of items) if (i.ink) { ctx.strokeStyle = i.col; ctx.lineWidth = w * 0.8; strokeVisible(ctx, V, i.g.pts, ds.map(d => d.g), []); }
   } else {
     for (const front of [false, true]) for (const i of items) {
@@ -790,7 +936,21 @@ function drawRings(ctx, V, items, style, G) {
       ctx.strokeStyle = i.col; ctx.lineWidth = w; sidePath(ctx, V, i.g.pts, front); ctx.stroke(); }
   }
 }
-const globeItems = (geom, spin = 0) => ringsAt(spin, geom || {}).map((g, k) => ({ g, col: D.hues[k] }));
+const globeItems = (geom, spin = 0) => ringsAt(spin, geom || {}).map((g, k) => ({ g, col: D.ring[k] }));
+
+// a ring as the ellipse it projects to: its centre, its radius across, and its radius times |n.z| along its normal
+function ringEllipse(ctx, V, g) {
+  const n = g.n, L = Math.hypot(n[0], n[1], n[2]) || 1, th = Math.abs(n[0]) + Math.abs(n[1]) > 1e-9 ? Math.atan2(-n[1], n[0]) : 0;
+  ctx.beginPath(); ctx.ellipse(V.X(g.c), V.Y(g.c), Math.max(1e-4, g.r * Math.abs(n[2]) / L * V.R), Math.max(1e-4, g.r * V.R), th, 0, TAU);
+}
+// round 24b, the acrylic (earth.py ACRYLIC): every disc tinted and laid in turn, the mixed colours' discs a light wash
+// and the primaries over them, multiplied on paper so where two primaries cross they make the colour between; no strokes
+function drawAcrylic(ctx, V, items, G) {
+  for (const [k, col, mode, a] of D.acrylic[G.bg === D.night ? 'night' : 'paper']) { const i = items[k];
+    if (!i || i.g.r <= 1e-3) continue;
+    ctx.save(); ctx.globalCompositeOperation = mode === 'normal' ? 'source-over' : mode; ctx.globalAlpha = a; ctx.fillStyle = col;
+    ringEllipse(ctx, V, i.g); ctx.fill(); ctx.restore(); }
+}
 
 // the printer: a head shuttles across and back, a band lower each pass, and leaves the globe in its wake
 const PRINT = { lead: 0.15, pass: 0.3, n: 6 };
@@ -808,14 +968,20 @@ function drawPrinter(ctx, V, t, style, G) {
   ctx.fillStyle = G.ink; ctx.beginPath(); ctx.arc(hx, top + (Math.max(k, 0) + 0.5) * h, h * 0.42, 0, TAU); ctx.fill();
 }
 
-// the gyroscope: two rings spin on two axes, slow and settle as the equator and the rim; the other four unfold from them
-const GYRO = { spin: 1.5, unfold: 0.45 };
+// round 24b, the gyroscope (the owner: "The gyroscope is too chaotic"): the globe spins on its axis, as a gyroscope's
+// rotor does, the meridians turning about the pole (the parallels, round it, stay), slowing to rest, whole and
+// upright; then it tilts to the Earth's 23.4 degrees. (Two gimbals, the parallels rocking as well, were tried and were
+// busier: the parallels show their faces as they turn.)
+const GYRO = { spin: 1.5, tilt: 0.55, turns: 1 };
+function rotRing(g, ax, ang) {
+  const L = Math.hypot(...ax), k = ax.map(v => v / L), c = Math.cos(ang), s = Math.sin(ang);
+  const rot = v => { const kv = cross(k, v), kd = dot(k, v); return [0, 1, 2].map(j => v[j] * c + kv[j] * s + k[j] * kd * (1 - c)); };
+  return { ...g, pts: g.pts.map(rot), n: rot(g.n), c: rot(g.c) };
+}
 function drawGyro(ctx, V, t, style, G) {
-  const B = basis(D.lean, D.elev), s = clamp(t / GYRO.spin, 0, 1), e = 1 - Math.pow(1 - s, 3), u = smooth((t - GYRO.spin) / GYRO.unfold);
-  const items = [{ g: tippedRing(rad(540) * (1 - e), B, [Math.SQRT1_2, Math.SQRT1_2]), col: D.hues[1] },
-                 { g: meridianRing(90 + 720 * (1 - e), B), col: D.hues[4] }];
-  if (u > 0) items.push({ g: parallelRing(40 * u, B), col: D.hues[0] }, { g: parallelRing(-40 * u, B), col: D.hues[2] },
-                        { g: meridianRing(90 - 60 * u, B), col: D.hues[3] }, { g: meridianRing(90 + 60 * u, B), col: D.hues[5] });
+  const s = clamp(t / GYRO.spin, 0, 1), e = 1 - Math.pow(1 - s, 3), u = smooth((t - GYRO.spin) / GYRO.tilt), lean = D.lean * u;
+  const B = basis(lean, D.elev);
+  const items = ringsAt(0, { lean, elev: D.elev }).map((g, k) => ({ g: k < 3 ? g : rotRing(g, B.a, TAU * GYRO.turns * (1 - e)), col: D.ring[k] }));
   drawRings(ctx, V, items, style, G);
 }
 
@@ -848,8 +1014,9 @@ function drawKickLoop(ctx, W, H, t, o) {
 }
 
 // an ident: the globe arrives, holds, moves aside, and EARF types in beside it
-const IDENTS = { printer: { dur: 2.05, draw: drawPrinter }, gyro: { dur: 2.0, draw: drawGyro }, kick: { dur: 1.95, draw: drawKick },
-                 coin: { dur: 3.15, draw: (c, V, t, s, G) => coinAt(c, V, t, s, G, false) } };
+const IDENTS = { printer: { dur: 2.05, draw: drawPrinter }, gyro: { get dur() { return GYRO.spin + GYRO.tilt; }, draw: drawGyro },
+                 kick: { dur: 1.95, draw: drawKick }, coin: { get dur() { return COIN.spin + COIN.tilt; }, draw: (...a) => coinAt(...a) },
+                 rise: { get dur() { return RISE.up + RISE.tilt; }, draw: (...a) => drawRise(...a) } };
 const HOLD = 0.35, MOVE = 0.5, TYPE = 0.07;
 function identTimes(kind) { const m0 = IDENTS[kind].dur + HOLD; return { move0: m0, word0: m0 + MOVE, end: m0 + MOVE + 4 * TYPE + 1.3 }; }
 function identLayout(W, H) {
@@ -911,56 +1078,32 @@ function drawCursor(ctx, W, H, t, o, at) {
 }
 
 // a turn at one speed, eased in and out briefly (u from 0 to 1)
-function turn(u, ease = 0.12) {
-  u = clamp(u, 0, 1); const k = 2 * ease * (1 - ease);
-  return u < ease ? u * u / k : u > 1 - ease ? 1 - (1 - u) * (1 - u) / k : (u - ease / 2) / (1 - ease);
+// round 24b, the coin (the owner: "The coin spin still has an animation between the coin spin and tilt"): the coin's
+// face is the whole globe, upright. It spins on its edge, slowing, its rim showing its thickness, and stops facing
+// you; then the globe tilts. Nothing between
+const COIN = { spin: 1.6, turns: 2.25, tilt: 0.55, thick: 0.07, get end() { return this.spin + this.tilt + 0.6; } };
+function coinAt(ctx, V, t, style, G) {
+  const s = clamp(t / COIN.spin, 0, 1), e = 1 - Math.pow(1 - s, 3), th = TAU * COIN.turns * (1 - e);
+  const u = smooth((t - COIN.spin) / COIN.tilt), items = globeItems({ lean: D.lean * u, elev: D.elev });
+  if (s >= 1) { drawRings(ctx, V, items, style, G); return; }
+  const c = Math.cos(th), sn = Math.sin(th), w = Math.max(Math.abs(c), 0.004) * V.R;
+  ctx.save(); ctx.fillStyle = style === 'discs' || style === 'acrylic' ? D.rim : G.ink; ctx.globalAlpha = style === 'discs' ? 1 : 0.7;   // the rim
+  for (let k = 1; k <= 12; k++) { ctx.beginPath(); ctx.ellipse(V.cx - sn * COIN.thick * V.R * k / 12, V.cy, w * 0.985, V.R * 0.985, 0, 0, TAU); ctx.fill(); }
+  ctx.restore();
+  ctx.save(); ctx.translate(V.cx, V.cy); ctx.scale(Math.sign(c) * Math.max(Math.abs(c), 0.004), 1); ctx.translate(-V.cx, -V.cy);
+  ctx.fillStyle = G.bg; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R, 0, TAU); ctx.fill();   // the face is solid: no rim through it
+  drawRings(ctx, V, items, style, G); ctx.restore();                        // the face, mirrored when its back is to you
 }
 
-function meridianRing(lam, B) {
-  const { a, e1, e2 } = B, l = rad(lam), u = [0, 1, 2].map(j => Math.cos(l) * e1[j] + Math.sin(l) * e2[j]), pts = [];
-  for (let i = 0; i <= 120; i++) { const q = TAU * i / 120; pts.push([0, 1, 2].map(j => Math.cos(q) * u[j] + Math.sin(q) * a[j])); }
-  return { pts, n: cross(u, a), d: 0, c: [0, 0, 0], r: 1 };
-}
-function hull(P) {
-  P = P.slice().sort((p, q) => p[0] - q[0] || p[1] - q[1]);
-  const cr = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]), lo = [], up = [];
-  for (const p of P) { while (lo.length >= 2 && cr(lo.at(-2), lo.at(-1), p) <= 0) lo.pop(); lo.push(p); }
-  for (const p of P.reverse()) { while (up.length >= 2 && cr(up.at(-2), up.at(-1), p) <= 0) up.pop(); up.push(p); }
-  return lo.slice(0, -1).concat(up.slice(0, -1));
-}
-// a coin of some thickness turned th degrees from face on about the axis: its silhouette, the hull of its two faces
-function coinSilhouette(ctx, V, th, B, thick) {
-  const c = Math.cos(rad(th)), s = Math.sin(rad(th)), { a, e1, e2 } = B, P = [];
-  const h = [0, 1, 2].map(j => c * e2[j] - s * e1[j]), nm = [0, 1, 2].map(j => s * e2[j] + c * e1[j]);
-  for (const sh of [-1, 1]) for (let i = 0; i < 120; i++) { const q = TAU * i / 120;
-    const p = [0, 1, 2].map(j => Math.cos(q) * h[j] + Math.sin(q) * a[j] + sh * thick / 2 * nm[j]); P.push([V.X(p), V.Y(p)]); }
-  const Hh = hull(P); ctx.beginPath(); Hh.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.closePath(); ctx.fill();
-}
-
-// the coin: spins on its edge, a colour a half turn (Flare to Haze); on one more half turn, slowing, it deals out the
-// three meridians where it passes them; the view rises to the globe's tilt as the parallels close round them; a turn
-const COIN = { rate: 600, spin: 1.8, deal: 0.6, tilt: [2.2, 3.0], grow: [2.55, 2.7, 2.85], turn: [3.4, 5.4], end: 6.0, elev0: 8 };
-function coinAng(t) {
-  if (t <= COIN.spin) return COIN.rate * t - 90;
-  const u = clamp((t - COIN.spin) / COIN.deal, 0, 1);
-  return COIN.rate * COIN.spin - 90 + 180 * (1 - (1 - u) * (1 - u));
-}
-function coinAt(ctx, V, t, style, G, turning = true) {
-  const ang = coinAng(t), thick = 0.07;
-  if (t < COIN.spin) {
-    ctx.fillStyle = D.hues[clamp(Math.floor((ang + 90) / 180), 0, 5)];
-    coinSilhouette(ctx, V, ang, basis(0, COIN.elev0), thick); return;
-  }
-  const rel = ang - COIN.rate * COIN.spin, placed = [-60, 0, 60].map(d => rel >= d), k = placed.filter(Boolean).length;
-  const tilt = smooth((t - COIN.tilt[0]) / (COIN.tilt[1] - COIN.tilt[0]));
-  const geom = { lean: D.lean * tilt, elev: COIN.elev0 + (D.elev - COIN.elev0) * tilt, grow: COIN.grow.map(g => smooth((t - g) / 0.3)) };
-  const spin = turning ? 360 * turn((t - COIN.turn[0]) / (COIN.turn[1] - COIN.turn[0])) : 0, B = basis(geom.lean, geom.elev);
-  const items = ringsAt(spin, geom).map((g, i) => ({ g, col: D.hues[i], on: i < 3 ? geom.grow[i] > 0 : placed[i - 3] })).filter(i => i.on);
-  if (k < 3 && rel < -72) {                                                // still on its edge: its thickness shows
-    drawRings(ctx, V, items, style, G); ctx.fillStyle = D.hues[3]; coinSilhouette(ctx, V, rel, B, thick); return;
-  }
-  if (k < 3) items.push({ g: meridianRing(90 + rel, B), col: D.hues[3 + k] });
-  drawRings(ctx, V, items, style, G);
+// round 24b, Earthrise (a new idea, after the photograph of the Earth rising over the Moon): the whole globe, upright,
+// rises from behind a horizon, slowing as it clears it; then it tilts
+const RISE = { up: 1.2, tilt: 0.55, from: 2.3 };
+function drawRise(ctx, V, t, style, G) {
+  const s = clamp(t / RISE.up, 0, 1), e = 1 - Math.pow(1 - s, 3), u = smooth((t - RISE.up) / RISE.tilt);
+  const foot = V.cy + V.R * (1 + D.w);                                       // the horizon, where the globe comes to rest
+  ctx.save(); ctx.beginPath(); ctx.rect(V.cx - 4 * V.R, foot - 8 * V.R, 8 * V.R, 8 * V.R); ctx.clip();
+  drawRings(ctx, view(0, 0, V.cx, V.cy + RISE.from * V.R * (1 - e), V.R), globeItems({ lean: D.lean * u, elev: D.elev }), style, G);
+  ctx.restore();
 }
 function drawCoin(ctx, W, H, t, o) {
   const G = GROUNDS[o.ground]; ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
@@ -968,7 +1111,28 @@ function drawCoin(ctx, W, H, t, o) {
   return COIN.end;
 }
 
-const SCENES = { ident: drawIdent, loader: drawLoader, cursor: drawCursor, coin: drawCoin, kick: drawKickLoop };
+// round 24b: the globe as a Death Star (core.py), its dish a driver, kicking for the speakers: on each beat the cone and
+// the dust cap push out, and a ring of violet, the atmosphere, goes out from the dish as sound
+const CORE = { beat: 0.6, push: 0.09, ripple: 0.85, reach: 1.7 };
+let CP = null;
+function drawCoreKick(ctx, W, H, t, o) {
+  const G = GROUNDS[o.ground], P = D.core;
+  if (!CP) CP = { sphere: new Path2D(P.sphere), trench: new Path2D(P.trench), rings: P.rings.map(([d, c]) => [new Path2D(d), c]) };
+  ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
+  const R = Math.min(W, H) * 0.3, n = Math.floor(t / CORE.beat), amp = pulse(t - n * CORE.beat), [cx, cy] = P.centre;
+  const about = (k, f) => { ctx.translate(cx, cy); ctx.scale(k, k); ctx.translate(-cx, -cy); f(); };
+  ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(R, R);
+  ctx.fillStyle = D.ring[2]; ctx.fill(CP.sphere); ctx.fillStyle = D.ring[5]; ctx.fill(CP.trench);
+  CP.rings.forEach(([p, c], i) => { ctx.save(); about(i ? 1 + CORE.push * amp : 1, () => { ctx.fillStyle = c; ctx.fill(p); }); ctx.restore(); });
+  for (const j of [n - 1, n]) { const age = (t - j * CORE.beat) / CORE.ripple; if (age <= 0 || age >= 1) continue;
+    const k = 1 + CORE.reach * Math.sqrt(age);           // the dish's rim, growing out from it
+    ctx.save(); about(k, () => { ctx.globalAlpha = (1 - age) * (1 - age); ctx.strokeStyle = P.capCol; ctx.lineWidth = 0.05 * (1 - 0.6 * age) / k;
+      ctx.stroke(CP.rings[0][0]); }); ctx.restore(); }
+  ctx.restore();
+  return 2.4;
+}
+
+const SCENES = { ident: drawIdent, loader: drawLoader, cursor: drawCursor, coin: drawCoin, kick: drawKickLoop, core: drawCoreKick };
 
 function fit(cv) {
   const dpr = Math.min(2, window.devicePixelRatio || 1), r = cv.getBoundingClientRect();
@@ -988,12 +1152,13 @@ window.__frame = (scene, t, o) => {
 
 if (!location.hash.startsWith('#capture')) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const state = { kind: 'printer', style: 'even', ground: 'paper', t0: null };
+  const state = { kind: 'gyro', style: 'discs', ground: 'paper', t0: null };
   const CAPS = {
     printer: 'Printer: a head shuttles across and back, a band lower each pass, and leaves the finished globe in its wake.',
-    gyro: 'Gyroscope: two rings spin on two axes and settle as the equator and the rim. The other four unfold out of them.',
+    gyro: 'Gyroscope: the globe spins on its axis like a gyroscope\'s rotor, slowing until it rests, whole and upright. Then it tilts to the Earth\'s 23.4 degrees.',
     kick: 'Kick: seen from above the pole, the globe is a speaker: rings round one centre, the meridians its spokes. It kicks twice, then tips down to the Earth\'s tilt.',
-    coin: 'Coin: a disc spins on its edge, a colour each half turn. On one more turn it deals out the meridians, and the parallels close round them.' };
+    coin: 'Coin: the coin\'s face is the whole globe. It spins on its edge, slowing, and stops facing you; then the globe tilts.',
+    rise: 'Earthrise: the whole globe rises from behind a horizon, slowing as it clears it; then it tilts.' };
   const capText = document.getElementById('cap-text'), screen = document.getElementById('screen');
   function segs(id, key) {
     const el = document.getElementById(id);
@@ -1002,7 +1167,7 @@ if (!location.hash.startsWith('#capture')) {
       state[key] = b.dataset.v; state.t0 = performance.now(); capText.textContent = CAPS[state.kind];
       screen.style.background = GROUNDS[state.ground].bg; });
   }
-  segs('kind', 'kind'); segs('style', 'style'); segs('ground', 'ground'); capText.textContent = CAPS.printer;
+  segs('kind', 'kind'); segs('style', 'style'); segs('ground', 'ground'); capText.textContent = CAPS.gyro;
   document.getElementById('replay').onclick = () => { state.t0 = performance.now(); };
   // the cursor: the pointer's path, kept a moment, so each colour can be where the circle was a beat ago
   const pad = document.getElementById('pad'), hist = []; let last = -1e9;
@@ -1034,7 +1199,7 @@ if (!location.hash.startsWith('#capture')) {
     if (on('cursor')) { const { ctx, W, H } = fit(document.getElementById('cursor'));
       const live = s - last < 2.5; drawCursor(ctx, W, H, s, { ground: 'night' }, live ? at : (tt => ghost(tt, W, H))); }
     if (on('kickloop')) { const { ctx, W, H } = fit(document.getElementById('kickloop'));
-      drawKickLoop(ctx, W, H, reduce ? 0.3 : s, { ground: 'night', style: 'even' }); }
+      drawCoreKick(ctx, W, H, reduce ? 0.3 : s, { ground: 'night' }); }
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
@@ -1044,7 +1209,7 @@ if (!location.hash.startsWith('#capture')) {
 
 
 def page():
-    return PAGE.replace('__RAILS__', rails_html()).replace('__THEME__', theme_html()).replace('__DATA__', json.dumps(data(), separators=(',', ':')))
+    return PAGE.replace('__RAILS__', rails_html()).replace('__CORE__', core_html()).replace('__THEME__', theme_html()).replace('__DATA__', json.dumps(data(), separators=(',', ':')))
 
 
 def standalone():
@@ -1052,10 +1217,12 @@ def standalone():
             'initial-scale=1, viewport-fit=cover"></head><body>\n' + page() + '\n</body></html>\n')
 
 
-SCENE_SET = [('ident', dict(kind=k, style=st, ground=g)) for k in ('printer', 'gyro', 'kick', 'coin')
-             for st, g in (('even', 'paper'), ('discs', 'night'), ('tubes', 'night'))] + [
-             ('kick', dict(style='even', ground='night')), ('loader', dict(ground='night')), ('loader', dict(ground='paper')),
-             ('cursor', dict(ground='night'))]
+# round 24b: the Gyroscope, the Coin and Earthrise, in the discs (on paper and on night), the acrylic and the lines; the
+# Death Star kicking; the loader and the cursor as round 22 made them (round 23's printer, kick and tubes MP4s stay)
+SCENE_SET = [('ident', dict(kind=k, style=st, ground=g)) for k in ('gyro', 'coin', 'rise')
+             for st, g in (('discs', 'paper'), ('discs', 'night'), ('acrylic', 'paper'), ('even', 'paper'))] + [
+             ('core', dict(ground='night')), ('core', dict(ground='paper')),
+             ('loader', dict(ground='night')), ('loader', dict(ground='paper')), ('cursor', dict(ground='night'))]
 
 
 def video(out_dir, scene, opts, fps=30, w=1280, h=720, loops=1):
@@ -1096,29 +1263,30 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--fragment', help='also write the page as an Artifact body to this path')
     ap.add_argument('--video', action='store_true', help='also write an MP4 of each scene')
-    ap.add_argument('--only', nargs='*', default=[], help='with --video, only the scenes whose options mention one of these (e.g. tubes)')
+    ap.add_argument('--only', nargs='*', default=[], help='with --video, only the scenes named, or whose options mention one of these (e.g. core, gyro, acrylic)')
     a = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
     written = []
-    for style in ('lines', 'even', 'tubes', 'discs'):
-        for tag, cols in [('multi', HUES), ('black', INK), ('white', WHITE)] + [(n.lower(), c) for n, c in zip(NAMES, HUES)]:
+    for style in ('lines', 'even', 'discs', 'acrylic'):                 # (round 23's tubes stay as they were)
+        for tag, cols in [('multi', RING), ('black', INK), ('white', WHITE)] + [(n.lower(), c) for n, c in zip(NAMES, HUES)]:
             f = f'earth-{style}-{tag}.svg'
             open(os.path.join(OUT, f), 'w').write(mark_svg(style, cols, label=f'EARF globe, {style}, {tag}',
                                                            ground='night' if tag == 'white' else 'paper'))
             written.append(f)
     for g, word, bg in (('paper', INK, PAPER), ('ink', WHITE, NIGHT)):
-        open(os.path.join(OUT, f'earth-lockup-{g}.svg'), 'w').write(lockup_svg('even', HUES, word, bg=bg))
-    open(os.path.join(OUT, 'earth-lockup-black.svg'), 'w').write(lockup_svg('even', INK, INK))
-    open(os.path.join(OUT, 'earth-lockup-white.svg'), 'w').write(lockup_svg('even', WHITE, WHITE))
+        open(os.path.join(OUT, f'earth-lockup-{g}.svg'), 'w').write(lockup_svg('discs', RING, word, bg=bg, ground='night' if g == 'ink' else 'paper'))
+    open(os.path.join(OUT, 'earth-lockup-black.svg'), 'w').write(lockup_svg('discs', INK, INK))
+    open(os.path.join(OUT, 'earth-lockup-white.svg'), 'w').write(lockup_svg('discs', WHITE, WHITE, ground='night'))
+    json.dump(outlines(), open(os.path.join(OUT, 'earth-outlines.json'), 'w'), separators=(',', ':'))   # round 24: for product.py
     open(os.path.join(OUT, 'earth.html'), 'w').write(standalone())
     if a.fragment:
         open(a.fragment, 'w').write(page())
     print(f'brand/earth.html, {len(written)} marks, 4 lockups')
     if a.video:
         for scene, opts in SCENE_SET:
-            if a.only and not any(w in json.dumps(opts) for w in a.only):
+            if a.only and not any(w == scene or w in json.dumps(opts) for w in a.only):
                 continue
-            print(os.path.relpath(video(OUT, scene, opts, loops=2 if scene == 'loader' else 1), HERE))
+            print(os.path.relpath(video(OUT, scene, opts, loops=2 if scene in ('loader', 'core') else 1), HERE))
 
 
 if __name__ == '__main__':

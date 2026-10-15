@@ -639,6 +639,19 @@ SETS['turn23'] = dict(title='EARF: the eight horns turning, round 23', camera=CA
                            stage=sweep(c), sky=STUDIO, camera=CAM23, at={'rotate_z': (115 + 15 * k) % 360}) for k in range(TURN)]
     for line, key, flav, label, c in LOOKS21})
 DAY.update({'fog23': '2026-10-15', 'options23': '2026-10-15', 'turn23': '2026-10-15'})
+# round 24 (the owner: "I'm thinking logo in the corner, depending on what it looks like"): the globe 48 across in the
+# front panel's top right corner, where round 23's corner wordmark was: in lines or in discs, etched (frosted), in the
+# speaker's own colour, or printed in the six colours (product.extras' 'globe'); on Poison and on water-clear Fog
+GLOBE24 = (('lines', 'etch', 'lines, etched'), ('discs', 'etch', 'discs, etched'), ('discs', 'tint', 'discs, in its own colour'),
+           ('discs', 'print', 'discs, printed in the six colours'))
+MODELS.update({f'globe24-{st}-{fin}': {'base': 'cloud', 'mark': ['globe'], 'globe': {'d': 48.0, 'style': st, 'finish': fin}}
+               for st, fin, _ in GLOBE24})
+CORNER24 = CAM21([0.46, -0.78, 0.97], [0.20, -0.19, 0.84], 70)          # options23's corner
+SETS['corner24'] = dict(title='EARF: the globe in the front corner, round 24', camera=CORNER24, rows={
+    name: [F(f'globe-{key}-{st}-{fin}', flav, label, product=form_product(f'globe24-{st}-{fin}'), camera=CORNER24,
+             **{**OPT21, 'stage': sweep(c), 'size': [1000, 760]}) for st, fin, label in GLOBE24]
+    for key, flav, name, c in (('green', 'eucalyptus-y2k-green', 'Poison', '#D9E4D3'), ('ice', 'birch-y2k-ice', 'Fog', '#CFDCE4'))})
+DAY.update({'corner24': '2026-10-15'})
 
 
 def shot_for(frame, set_camera):

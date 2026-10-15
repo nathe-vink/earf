@@ -1,8 +1,8 @@
 {
  "product": "barkhorn-cloud",
  "title": "barkhorn",
- "parts": 77,
- "seconds": 256,
+ "parts": 80,
+ "seconds": 941,
  "sheets": {
   "cast-acrylic-20": 3,
   "cast-acrylic-6": 1,
@@ -13,14 +13,14 @@
  },
  "budget_usd": {
   "cut": 2681,
-  "formed": 326,
-  "buy": 2939,
+  "formed": 485,
+  "buy": 2989,
   "cast": 1647,
   "lathe": 219,
   "sheet metal": 171
  },
  "options_usd": {},
  "checks_ok": true,
- "drawings": null,
+ "drawings": "spinoffs/barkhorn/out-cloud/drawings/barkhorn-cloud-sheets.pdf",
  "render": "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb"
 }

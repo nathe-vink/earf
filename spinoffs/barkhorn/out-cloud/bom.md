@@ -65,15 +65,17 @@
 | terminals | buy | 8 | 6.3 mm insulated push-on terminal |  | 0.50 |
 | back-inserts | buy | 2 | M5 brass threaded inserts, knurled, a set of 16, bonded with epoxy into 8 holes 12 deep in the back's acrylic land strips |  | 10.00 |
 | feet-inserts | buy | 2 | M8 brass threaded inserts, knurled, a set of 4, bonded with epoxy into 12.5 holes 15 deep in the acrylic bottom, for the feet |  | 5.00 |
+| mark-back | buy | 2 | Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: as standard (round 24) EARF 140 wide high on the back, the etch filled with the speaker's own colour (a deeper tint of it, wiped in and cured) |  | 25.00 |
+| grip-left, grip-right | formed | 4 | Cast acrylic sheet 3 mm, tinted through, drape-formed over a buck | 106 cm3, 50 x 256 x 58 | 39.65 |
 
 | | USD |
 |---|---|
-| buy | 2,939 |
+| buy | 2,989 |
 | cast | 1,647 |
 | cut | 2,681 |
-| formed | 326 |
+| formed | 485 |
 | lathe | 219 |
 | sheet metal | 171 |
-| total | 7,984 |
+| total | 8,192 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

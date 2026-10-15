@@ -42,6 +42,10 @@ P['cover']['disc_magnet']['pocket'] = 15.2       # the magnets and the steel dis
 P['horn']['cast']['posts']['socket'] = (15.2, 15.0)   # the sockets bonded in clearance holes, not pressed
 P['back']['insert'] = (8.0, 12.0)                # the back's M5 inserts and the feet's M8, bonded
 P['feet']['insert'] = (12.5, 15.0)
+# round 24 (the owner, of round 23's options: "Name on back own color", and of lifting: "240 grips + feet range"): EARF
+# etched high on the back and filled with the speaker's own colour, and a grip 240 long for both hands in each side near
+# the top, as standard (product.extras); castors, spikes and isolation feet sold for the feet's M8 inserts
+P.update(mark=['back'], mark_finish='tint', lift=['grips'], grip_w=240.0)
 PRODUCT = dataclasses.replace(
     pressed.PRODUCT, name='barkhorn-cloud', params=P,
     kind='Two-way horn loudspeaker after Friendly Pressure, the Cloud: tinted cast acrylic, no wood',
@@ -66,5 +70,10 @@ PRODUCT = dataclasses.replace(
         'the woofer in the acrylic\'s colour, its frame standing on the ring on four magnet pairs.',
         'Seen through: everything inside is drawn to be seen. The leads run straight and tied, the glands and the brass '
         'sockets show, the amplifier\'s compartment is black anodised, and each batt\'s voile sleeve has its seams to the '
-        'wall.'],
+        'wall.',
+        'Lifting (round 24): a grip 240 x 42 for both hands through each side, 92 below the top, a cup of 3 mm acrylic '
+        'cemented behind it and the side\'s batt cut round it; two people lift a speaker by its grips, the horn off. The '
+        'feet\'s M8 inserts take castors, spikes or isolation feet in place of the levelling feet, sold separately.',
+        'The mark (round 24): EARF 140 wide, laser-etched high on the back, centred, the etch filled with the speaker\'s '
+        'own colour, deeper.'],
     drawing_prefix='BHC')
