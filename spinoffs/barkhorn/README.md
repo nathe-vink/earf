@@ -216,7 +216,8 @@ below).
 In the draft, each horn now turns once as it crosses the screen: 24 frames 15 degrees apart, one for about every 50
 pixels scrolled, so it steps like stop motion without stuttering much. The frames are rendered as round 21's side
 views were, each horn on its own colour's sweep (`frames.py turn23`, 480 by 432). Each horn's 24 frames are one
-sprite sheet on the site, so a turn never waits on a download. With reduced motion set, the horns stand still, side
+sprite sheet on the site, so a turn never waits on a download (kept here as
+`renders/2026-10-15/barkhorn/turn23/sprite-<colour>.jpg`; the frames themselves rebuild from `frames.py`). With reduced motion set, the horns stand still, side
 on. The side and behind buttons are gone, since the turn shows both. The draft also puts each Cloud's icon beside
 its number, and its lockup is now in even lines.
 
