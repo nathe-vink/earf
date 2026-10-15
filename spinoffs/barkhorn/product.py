@@ -1480,6 +1480,15 @@ VARIANTS.update({
     'cloud-blue': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#3C86C2', 'horn_cloud': 0.0,
                    'bark': 'clear_resin', 'disc': '#24557E',
                    'materials': {'bark': {'deep': '#B5D9EE', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
+    # round 19 (the owner: "What if we did a full spectrum, red orange yellow green blue purple white and black"): a red
+    # one (Ember, a working name) and Smoke made black ("Smoke was meant to be the black one"), a deep smoked tint the
+    # lining still shows faintly through (round 10's grey, birch-y2k-smoke, retired from the line)
+    'cloud-red': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#C8262B', 'horn_cloud': 0.0,
+                  'bark': 'clear_resin', 'disc': '#7A1A1C',
+                  'materials': {'bark': {'deep': '#F2A29C', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
+    'cloud-black': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#2A292C', 'horn_cloud': 0.0,
+                    'bark': 'clear_resin', 'disc': '#141316',
+                    'materials': {'bark': {'deep': '#8A888E', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
 })
 
 

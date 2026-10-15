@@ -43,7 +43,9 @@ Sets:
 - lookbook17, horn17, room17 (round 17, Bark and Crag paused, Cloud the line): two more Cloud speakers, amber (the
   autumn birch's horn colour) and violet, cover on and off, their horns from the side and from behind, and a Cloud
   pair in the room;
-- lookbook18, horn18 (round 18): two more, orange (Dust) and blue (Ice), cover on and off, and their horns.
+- lookbook18, horn18 (round 18): two more, orange (Dust) and blue (Ice), cover on and off, and their horns;
+- lookbook19, horn19 (round 19, the full spectrum): a red one (Ember) and Smoke made black, cover on and off, and their
+  horns.
 
 Each frame's shot goes to studio/shots/barkhorn/<set>/ (so any one can be re-rendered or tuned) and its image to
 renders/<day>/barkhorn/<set>/, beside the grid <set>.png. Only frames not yet rendered are rendered, unless named with
@@ -532,6 +534,23 @@ SETS['horn18'] = dict(SETS['horn17'], title='EARF: the Dust and Ice horns from t
                            sky=STUDIO, at={'rotate_z': 155})]
     for line, key, flav, label, c in LOOKS18})
 DAY.update({'lookbook18': '2026-10-15', 'horn18': '2026-10-15'})
+
+# round 19 (the owner: "What if we did a full spectrum, red orange yellow green blue purple white and black"): a red one
+# (Ember, a working name) and Smoke made black, framed as the others
+LOOKS19 = [('Cloud', 'red', 'cloud-red', 'ember', '#EAD6D2'), ('Cloud', 'black', 'cloud-black', 'smoke', '#DAD8D6')]
+SETS['lookbook19'] = dict(SETS['lookbook17'], title='EARF: Ember and a black Smoke, round 19', rows={
+    f'{line}: {label}': [F(f'look-{key}-on', flav, 'cover on', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                           sky=STUDIO),
+                         F(f'look-{key}-off', flav, 'cover off', product=CLOUD, lights=GLOW5, size=[1080, 2160], stage=sweep(c),
+                           sky=STUDIO, hide=['cloth-disc'])]
+    for line, key, flav, label, c in LOOKS19})
+SETS['horn19'] = dict(SETS['horn17'], title='EARF: the Ember and Smoke horns from the side and from behind, round 19', rows={
+    f'{line}: {label}': [F(f'horn-{key}-side', flav, 'from the side', product=CLOUD, lights=GLOW5, size=[1200, 900], stage=sweep(c),
+                           sky=STUDIO, at={'rotate_z': 115}),
+                         F(f'horn-{key}-back', flav, 'from behind', product=CLOUD, lights=GLOW5, size=[1200, 900], stage=sweep(c),
+                           sky=STUDIO, at={'rotate_z': 155})]
+    for line, key, flav, label, c in LOOKS19 + [('Cloud', 'ice', 'birch-y2k-ice', 'fog', '#CFDCE4')]})   # and Fog's, for the
+DAY.update({'lookbook19': '2026-10-15', 'horn19': '2026-10-15'})                                  # spread of eight
 
 
 def shot_for(frame, set_camera):

@@ -1461,6 +1461,48 @@
      "roughness": 0.03
     }
    }
+  },
+  "cloud-red": {
+   "bark": "clear_resin",
+   "panel": "#D8D5CD",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#7A1A1C",
+   "horn_preset": "clear_resin",
+   "horn": "#FFFFFF",
+   "horn_deep": "#C8262B",
+   "horn_cloud": 0.0,
+   "materials": {
+    "bark": {
+     "deep": "#F2A29C",
+     "radius": 0.025,
+     "roughness": 0.05
+    },
+    "horn": {
+     "roughness": 0.03
+    }
+   }
+  },
+  "cloud-black": {
+   "bark": "clear_resin",
+   "panel": "#D8D5CD",
+   "cloth": "#DCD6C8",
+   "cork": "#3B2F28",
+   "disc": "#141316",
+   "horn_preset": "clear_resin",
+   "horn": "#FFFFFF",
+   "horn_deep": "#2A292C",
+   "horn_cloud": 0.0,
+   "materials": {
+    "bark": {
+     "deep": "#8A888E",
+     "radius": 0.025,
+     "roughness": 0.05
+    },
+    "horn": {
+     "roughness": 0.03
+    }
+   }
   }
  }
 }

@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 18**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 20**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -26,7 +26,140 @@ three speakers as a sheet press would really make them, and weighs recycled plas
 Round 17 makes Cloud the line (the owner: no wood, Bark and Crag paused): two more colours, Acid and Haze, the look
 book Cloud's alone, and the makers of recycled cast acrylic to approach. Round 18 adds Dust and Ice, calls the line
 the Clouds, gives the R a bowl flat from the stem, draws the logo in the seven colours, and finds that the cabinet's
-top and bottom want more lining.
+top and bottom want more lining. Round 19 makes the Clouds a full spectrum of eight (Ember added in red, Smoke made
+black, all numbered again in that order) and draws the R's bowl as a circle again, on stems widened to meet it, each
+letter as wide as its shape needs. Round 20 draws the globe as a colour wheel of the Clouds and animates the brand as
+a film studio's ident: a pen traces the circles one by one, each taking its colour, then the name.
+
+## Round 20: the wheel, and the ident (the owner's notes of 2026-10-15)
+
+> I wonder if the earth can be formed a different way, like overlapping concentric circles that form a larger circle,
+> kind of like a color wheel. I also would love the brand to work like a movie studio animation before a movie
+> starts, where the world and/or earf are animated somehow, like a Spirograph type thing where a black dot rotates
+> around several times to create a circle of circles, each adopting a color as its mini circle is traced.
+
+### The wheel
+
+The globe drawn as a colour wheel (`wheel` in `brand.py`; `brand/globe-wheel-eight.svg`, `brand/globe-wheel-six.svg`),
+in two versions:
+
+- **Eight round.** One circle for each Cloud, in spectrum order, from Ember at the top clockwise to Smoke. Each is
+  0.367 of the wheel's radius, its centre on a ring at 0.633. So each overlaps its two neighbours and touches the
+  larger circle at one point. A black dot sits at the centre.
+- **Six round.** The six hues (Ember to Haze), each 0.405 of the radius, on a ring at 0.595. At the centre is Fog's
+  white disc, touching all six, with Smoke's black dot in it.
+
+Where two circles overlap, their tints multiply, as two sheets of tinted acrylic do when laid one on the other. Fog's
+white frosts what lies under it. The wheel's lines are lighter than the letters' (11 against 17.6 at the lockup's
+size), because they are many and close. The dot at the centre also reads as a record's spindle.
+
+![The wheel beside EARF, both versions](brand/wheels.png)
+
+### The ident
+
+`ident.py` writes `brand/ident.html`, a page that plays the brand the way a film studio's ident plays before the
+film. It is also published privately as an Artifact, *EARF Ident*. It also writes `brand/ident-eight.mp4` and
+`brand/ident-six.mp4` (1280 x 720, 30 frames a second, 10.6 seconds).
+
+1. A black dot, the pen, appears at the centre and moves out to the top of the wheel.
+2. It draws each Cloud's circle in turn, starting where the circle touches the rim and going clockwise. The circle's
+   colour sweeps in behind it as it goes.
+3. Between circles it glides along the rim to the next one, so the glides draw the larger circle.
+4. It returns to the centre and settles as the dot. In the six-round version it first draws Fog's white disc, then
+   settles in it as Smoke's black.
+5. The wheel moves aside and shrinks to its place in the lockup. EARF is drawn beside it, letter by letter, then the
+   line, NEATURE-INSPIRED LOUDSPEAKERS.
+
+The page draws on a canvas from the same geometry as the marks, so it stays sharp at any size and weighs about 17 KB.
+On earf.world it could play as the site opens, in place of a video. The letters are drawn as outlines; their blue fill
+can come back. The look book keeps the B3 globe until the owner picks (an open question).
+
+## Round 19: the full spectrum, and the R a circle again (the owner's notes of 2026-10-15)
+
+> What if we did a full spectrum, red orange yellow green blue purple white and black
+>
+> No I think it should still be a circle but the vertical rectangle could be slightly wider to achieve the same
+> effect, no?
+>
+> And should each of the letters be the same width or no? What's standard design convention?
+>
+> Smoke was meant to be the black one
+
+### The full spectrum
+
+The Clouds are now eight, in spectrum order, and numbered again in that order. One red speaker is added, Smoke goes
+from grey to black, and round 10's grey leaves the line (`cloud-red` and `cloud-black` in `product.py`):
+
+| | name | the acrylic | the horn | the cover and ring |
+|---|---|---|---|---|
+| 01 | **Ember** (new; a working name) | red (#F2A29C through 25 mm) | red (#C8262B) | oxblood (#7A1A1C) |
+| 02 | Dust | orange | orange | rust |
+| 03 | Acid | golden yellow | golden yellow | ochre |
+| 04 | Poison | bottle green | bottle green | bottle green |
+| 05 | Ice | ice blue | blue | deep blue |
+| 06 | Haze | violet | deep violet | deep violet |
+| 07 | Fog | frosted white | clear | pewter |
+| 08 | **Smoke**, now black | a deep smoked black (#8A888E through 25 mm) | smoked black (#2A292C) | black |
+
+- **Ember** is a working name. A cloud of embers hangs in the air as the other seven names do. Other candidates are
+  Flare (a flare's red smoke) and Blaze.
+- **The black Smoke.** The owner: "Smoke was meant to be the black one". Round 10 had drawn it smoked grey. It stays
+  translucent: deep enough to read as black, light enough that the braces and the lining show inside as shadows. A
+  first try at #6E6C72 hid them altogether.
+- **The new numbers.** Poison, Cloud 01 since round 10, is Cloud 04 now. The room page says so.
+
+![Ember and the black Smoke, cover on and off](../../renders/2026-10-15/barkhorn/lookbook19.png)
+
+![Their horns, and Fog's, from the side and from behind](../../renders/2026-10-15/barkhorn/horn19.png)
+
+### The R, a circle on a wider stem
+
+The owner's idea works. A circle meets the cap line at one point, its top. If the stem's right edge reaches exactly
+that point, the stem's top edge runs flat into the circle, with no notch.
+
+- **The stem must be 100 wide** (it was 74). The bowl is 185 tall, ending where the E's middle bar does, so the
+  circle's radius is 92.5. With its centre on the stem's right edge, it must also stay inside the stem's left edge.
+  Any narrower and the circle would bulge out past the stem's left side.
+- **Every stem is 100, so the letters keep one weight**: the E's and the F's too.
+- **The diagonals match.** The A's legs and the R's leg are drawn as heavy as the stems, measured square to their run.
+
+### Should the letters be the same width?
+
+No. In type, letters are proportional: each is as wide as its shape needs. What stays constant is:
+
+- the stroke weight;
+- the cap height;
+- the space between letters, as the eye judges it (round and slanted letters sit a little closer).
+
+Equal widths belong to monospaced type, such as typewriter faces and code, and are a deliberate style. The usual order,
+widest first:
+
+1. **A**, a triangle;
+2. **R**, with its bowl and leg;
+3. **E**;
+4. **F**, drawn narrower because its open foot makes it look wider than it is.
+
+EARF now follows that order: A 310, R 210, E 200 and F 190, on a cap height of 300. Before, E, R and F were all 200.
+The rules are written in `marks.py` (`_wordmark`).
+
+![The wordmark, rounds 11 to 19](marks/wordmark-r19.png)
+
+The marks and the brand sheet (`brand/sheet.html`) are drawn again with the new letters and the eight colours. In the
+strokes version, Fog's white is left out on paper and Smoke's black on ink.
+
+![EARF in the Clouds' colours](brand/sheet.png)
+
+### The look book
+
+The book now holds the eight Clouds, on 16 pages:
+
+- **The cover** reads "Eight floor-standing horn speakers, in cast acrylic", over the eight marks.
+- **The line's page** shows its eight marks, a little smaller.
+- **Ember and the black Smoke** have pages of their own.
+- **The horn pages** run the spectrum across the spread, four horns a page: Ember, Dust, Acid and Poison from the side;
+  Ice, Haze, Fog and Smoke from behind.
+- **The last page** reads "Eight colours, one horn."
+- **The new wordmark** is on the cover and the last page.
 
 ## Round 18: the Clouds (the owner's notes of 2026-10-15)
 
@@ -1699,7 +1832,8 @@ pair. There are 29 drawing sheets.
 
 `price.py` works each cabinet's cost a pair from its parts list and prints the price as a multiple of it (rounds 14
 and 15). `lining.py` finds the Cloud cabinet's standing waves and how well its lining damps each (round 18), and
-`brand.py` draws the logo in the Clouds' colours (`brand/`, round 18).
+`brand.py` draws the logo in the Clouds' colours (`brand/`, round 18) and the wheel (round 20), and `ident.py`
+animates it (`brand/ident.html` and its videos, round 20).
 
 The shots are in `studio/shots/barkhorn/`:
 
@@ -1711,7 +1845,7 @@ The shots are in `studio/shots/barkhorn/`:
   `proposal/` (round 3), `horn/`, `resin/`, `pressed/` and `pick/` (round 4), `horn5/`, `shells/`, `woodfree/` and
   `pick5/` (round 5), `pick6/`, `printed/` and `cabinets/` (round 6), `discs/` and `lookbook/` (round 7), `options14/`
   (round 14), `lookbook15/`, `horn15/`, `room15/` and `back15/` (round 15), `horn16/`, `back16/` and `real16/`
-  (round 16), `lookbook17/`, `horn17/` and `room17/` (round 17), `lookbook18/` and `horn18/` (round 18).
+  (round 16), `lookbook17/`, `horn17/` and `room17/` (round 17), `lookbook18/` and `horn18/` (round 18), `lookbook19/` and `horn19/` (round 19).
 
 ## Open questions for the owner
 
@@ -1720,8 +1854,8 @@ Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a m
 
 1. **More lining** (round 18). Double the top's and the bottom's batts to 100 mm now (the renders change: the white
    bands at the top and the bottom deepen), or keep 50 mm and decide on the first sample's measurements?
-2. **The names.** Acid (golden yellow), Haze (violet), Dust (orange) and Ice (blue): keep all four? Acid usually
-   names a sharper, greener yellow.
+2. **The names** (round 19). Ember for the new red (or Flare, or Blaze), Smoke kept for the black, and Acid, Haze,
+   Dust and Ice: keep them? Acid usually names a sharper, greener yellow. And the new numbers, in spectrum order?
 3. **The brand in colour** (round 18). Strokes, acrylic or glass: which to take further, and for what (the site, the
    packaging, the look book's cover)?
 4. **earf.world** (round 18). Buy it now ($3.99 for the first year, $38.10 a year after, through Vercel), and build
@@ -1732,7 +1866,9 @@ Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a m
 7. **The EARF mark on the speaker.** The look book carries each speaker's acrylic mark; the speaker itself carries
    none yet. On the rating plate only (laser-etched, beside the amplifier), as a small acrylic mark on the back, or
    in a corner of the front panel's frame?
-8. **Lifting it.** A Cloud speaker weighs about 72 kg, its cabinet about 62 with the horn lifted off. Two people
+8. **The wheel** (round 20). Make it EARF's globe, eight round or six round, in the lockup, the look book and the
+   site? And play the ident as earf.world opens?
+9. **Lifting it.** A Cloud speaker weighs about 72 kg, its cabinet about 62 with the horn lifted off. Two people
    lift it by the bottom edges, as now, or two recessed grips cut into the back panel?
 
 Still left out of the renders: the amplifier plate's own face. Its connectors are known (an IEC C14 inlet, XLR in

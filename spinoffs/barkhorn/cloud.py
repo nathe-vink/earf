@@ -1,7 +1,7 @@
-"""barkhorn's Cloud cabinet (rounds 10 to 18): the cabinet without wood (pressed.py) made in cast acrylic, 20 mm, tinted
-through: Poison's green, Smoke's grey, Fog's frosted ice, since round 17 (Bark and Crag paused, Cloud the line) Acid's
-amber and Haze's violet, and since round 18 (the line the Clouds) Dust's orange and Ice's blue; in recycled cast
-acrylic where a maker can make the colour. Its lining shows through it (round 13),
+"""barkhorn's Cloud cabinet (rounds 10 to 19): the cabinet without wood (pressed.py) made in cast acrylic, 20 mm, tinted
+through, since round 19 in a full spectrum of eight: Ember's red, Dust's orange, Acid's amber, Poison's green, Ice's
+blue, Haze's violet, Fog's frosted white and Smoke's black (grey until round 19); in recycled cast acrylic where a
+maker can make the colour. Its lining shows through it (round 13),
 so every fitting inside is drawn to be seen.
 
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/cloud.py --out spinoffs/barkhorn/out-cloud
@@ -48,8 +48,8 @@ PRODUCT = dataclasses.replace(
     notes=[n.replace('in a brass socket pressed into the top', 'in a brass socket bonded with epoxy into the top')
            for n in pressed.PRODUCT.notes if not n.startswith(('No wood:', 'Assembly (', 'The woofer flush',
                                                                'The front: the panel'))] + [
-        'No wood: every panel is cast acrylic, 20 mm, tinted through in its colour (green, grey, frosted, amber, violet, orange, '
-        'blue), recycled (made from recycled MMA) where a maker can make the colour, cut '
+        'No wood: every panel is cast acrylic, 20 mm, tinted through in its colour (red, orange, amber, green, blue, violet, '
+        'frosted, black), recycled (made from recycled MMA) where a maker can make the colour, cut '
         'on a CNC router from 4 x 8 ft sheets of one batch (approve a tint swatch and a cemented corner sample first). The '
         'ring (6 mm) is cast acrylic tinted opaque in the ring colour; the cloth disc\'s frame (12 mm) black cast acrylic.',
         'Assembly: each panel\'s edges milled square and polished where they show, the panels annealed (about 80 C, an hour '

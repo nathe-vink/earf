@@ -136,24 +136,32 @@ OPTIONS = [('c2-overlap', 'C2 overlapped', 'an upright triangle, a circle, a par
 
 
 def _wordmark():
-    """EARF on a cap height of 300 (y down from the cap line), stems 74 wide. Returns the primitives and the width.
+    """EARF on a cap height of 300 (y down from the cap line), stems 100 wide. Returns the primitives and the width.
 
-    One rule for every letter (round 18, the owner: the R's top "should be a flat line. There's currently a divot. We
-    should update the other letters to make sure they all follow the same conventions"): every bar and bowl starts at
-    its stem's outer edge and runs flat along the cap line, a bar line or the baseline, and only its far end may turn;
-    so a bowl is a bar whose end is a half circle (a 'dee'), never a circle laid over the stem. The middle bars (E, F)
-    and the R's bowl end on one line, 185 down, where the A's crossbar starts; every bar is 70 deep."""
-    s, h, mid = 74, 300, 185
+    The rules every letter keeps (round 18, the owner: "We should update the other letters to make sure they all follow
+    the same conventions based on how we update the R"; round 19: "it should still be a circle but the vertical
+    rectangle could be slightly wider to achieve the same effect"):
+    - the R's bowl is a circle whose top touches the cap line exactly where its stem ends, so the cap line runs flat
+      from the stem into the circle with no notch; the circle must also stay inside the stem's left edge, which sets the
+      stems at 100 (round 18's 74 left a notch); every stem is 100, the E's and the F's too;
+    - every bar starts at its stem's outer edge and runs flat, 70 deep;
+    - the middle bars (E, F) and the R's bowl end on one line, 185 down, where the A's crossbar starts;
+    - the diagonals (the A's legs, the R's leg) are as heavy as the stems measured square to their run, a little
+      lighter across: 100 and 102 wide along the baseline;
+    - each letter is as wide as its shape needs, as type is drawn (round 19, the owner: "should each of the letters be
+      the same width or no?"): the A widest (310), the R next (210, its bowl and leg), the E (200), the F narrowest (190,
+      its open foot would otherwise look wider)."""
+    s, h, mid = 100, 300, 185
     e = [('rect', 0, 0, s, h), ('rect', 0, 0, 200, 70), ('rect', 0, mid - 70, 175, mid), ('rect', 0, 230, 200, h)]
-    xa, span, w = 240, 210, 90                       # the A: two legs 90 wide, their feet 210 apart, leaning so their
+    xa, span, w = 240, 210, 100                      # the A: two legs 100 wide, their feet 210 apart, leaning so their
     lean = math.degrees(math.atan(span / 2 / h))     # tops coincide exactly
-    a = [slab(xa, h, w, h, lean), slab(xa + span, h, w, h, -lean), ('rect', xa + 92, mid, xa + 208, mid + 70)]
+    a = [slab(xa, h, w, h, lean), slab(xa + span, h, w, h, -lean), ('rect', xa + 92, mid, xa + 118 + w, mid + 70)]
     xr = xa + span + w + 30
-    r = [('rect', xr, 0, xr + s, h), ('dee', xr, 0, xr + 100, mid),   # the bowl: flat on the cap line to its half circle
-         slab(xr + 108, h, 92, 170, -22)]            # the leg's foot ends at xr + 200, just past the bowl's xr + 192.5
-    xf = xr + 240
-    f = [('rect', xf, 0, xf + s, h), ('rect', xf, 0, xf + 200, 70), ('rect', xf, mid - 70, xf + 170, mid)]
-    return e + a + r + f, xf + 200
+    r = [('rect', xr, 0, xr + s, h), ('circle', xr + s, mid / 2, mid / 2),   # the bowl's top on the stem's corner
+         slab(xr + 108, h, 102, 170, -22)]           # the leg's foot ends at xr + 210, past the bowl's xr + 192.5
+    xf = xr + 210 + 40
+    f = [('rect', xf, 0, xf + s, h), ('rect', xf, 0, xf + 190, 70), ('rect', xf, mid - 70, xf + 165, mid)]
+    return e + a + r + f, xf + 190
 
 
 WORDMARK, WORDMARK_W = _wordmark()
@@ -165,15 +173,18 @@ SPEAKERS = [
     ('autumn', 'Bark', '02', 'Autumn Birch', '#E2A62E'),
     ('manzanita', 'Bark', '03', 'Manzanita', '#A33D27'),
     ('striped', 'Bark', '04', 'Striped Maple', '#D9E3CF'),
-    ('green', 'Cloud', '01', 'Poison', '#4F7F3A'),
-    ('smoke', 'Cloud', '02', 'Smoke', '#5D5A66'),
-    ('ice', 'Cloud', '03', 'Fog', '#F6F8F8'),
-    # round 17: two more Cloud speakers, amber (the autumn birch's horn colour) and violet; the names are working ones
-    ('amber', 'Cloud', '04', 'Acid', '#E9B320'),
-    ('violet', 'Cloud', '05', 'Haze', '#6C4BA3'),
-    # round 18: Dust in orange and Ice in a clear blue
-    ('orange', 'Cloud', '06', 'Dust', '#E5732A'),
-    ('blue', 'Cloud', '07', 'Ice', '#4A90C8'),
+    # the Clouds in spectrum order (round 19, the owner: "What if we did a full spectrum, red orange yellow green blue
+    # purple white and black"): a red one added (Ember, a working name), Smoke made black ("Smoke was meant to be the
+    # black one"; round 10's grey retired), all numbered again in that order; Acid and Haze since round 17, Dust and Ice
+    # since round 18
+    ('red', 'Cloud', '01', 'Ember', '#D2382F'),
+    ('orange', 'Cloud', '02', 'Dust', '#E5732A'),
+    ('amber', 'Cloud', '03', 'Acid', '#E9B320'),
+    ('green', 'Cloud', '04', 'Poison', '#4F7F3A'),
+    ('blue', 'Cloud', '05', 'Ice', '#4A90C8'),
+    ('violet', 'Cloud', '06', 'Haze', '#6C4BA3'),
+    ('ice', 'Cloud', '07', 'Fog', '#F6F8F8'),
+    ('black', 'Cloud', '08', 'Smoke', '#34323A'),
     ('cobalt', 'Crag', '01', 'Cobalt Marble', '#ECEFF6'),
     ('malachite', 'Crag', '02', 'Malachite', '#22875A'),
     ('lapis', 'Crag', '03', 'Lapis Lazuli', '#283C96'),
