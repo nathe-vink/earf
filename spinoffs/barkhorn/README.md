@@ -64,7 +64,7 @@ top. Round 27f tips the globe 16° toward you instead of 22°, which halves the 
 
 | the owner's question | the answer |
 |---|---|
-| "What would it look like if the lateral discs intersected like the longitudinal discs do?" and "Did you try a version where the three stacked discs are instead the same layout as the three equal sized intersecting discs?" | **Not before** (round 21's orbits were eight meridians, round 23's gyroscope two rings on two axes). **Drawn now, three ways** (below); nothing is changed until the owner picks. |
+| "What would it look like if the lateral discs intersected like the longitudinal discs do?" and "Did you try a version where the three stacked discs are instead the same layout as the three equal sized intersecting discs?" | **Not before** (round 21's orbits were eight meridians, round 23's gyroscope two rings on two axes). **Drawn now, three ways** (below). The owner's answer: "Keep the parallels (Recommended)", so the mark is unchanged and the study stays as a record (`earth.LATERAL` is None). |
 
 The lateral discs become great circles through the globe's side axis, as the meridians go through the pole
 (`earth.LATERAL`, the tilts from the equator; `mark.py --lateral PATH`):
