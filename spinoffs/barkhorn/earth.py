@@ -309,23 +309,26 @@ def facets(spin=0.0):
     return out
 
 
-def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, rim=0.045):
+def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004):
     """Each disc's visible part as drawn. In colour the discs are flush (round 24b, the owner: "For the discs, I want
     them to not have strokes, so they are flush. The strokes should be the non-color versions"): each part whole, a
     hair (`lap`) larger than itself so no hairline of the ground shows between two, the globe's own edge kept exact.
     Round 25: the globe is the discs alone, with no ball filled under them (the owner: "this artificial green completing
-    the circle shape that isn't one of the discs"), so its outline is theirs. In one colour the seams are the strokes:
-    the discs' union less a band `seam` wide along every edge between two parts, stopping a little (`rim`) short of the
-    outline so the outline stays whole; returned as one shape, at index 0."""
+    the circle shape that isn't one of the discs"), so its outline is theirs. In one colour the seams are the strokes,
+    and round 27c (the owner: "The stroke around the monochromatic ones looks odd. Don't think we need it") takes away
+    the band round the outline that round 24b kept whole: every part is shrunk by half a seam on every side, the
+    outline's sides too, so a seam of the ground lies between any two parts and round the outside alike; a part thinner
+    than one and a half seams (a sliver of a disc's tip) is dropped; and the whole is scaled back to the discs' own
+    width. Returned as one shape, at index 0."""
     fs = facets(spin)
     sil = unary_union([f for f in fs if not f.is_empty])
-    if not flush:                                        # (the outline: the union's outer edge only, hairline slivers
-        whole = sil.buffer(1e-5).buffer(-1e-5)           # between two parts closed, so no seam is cut where one lies)
-        outline = unary_union([LineString(np.asarray(q.exterior.coords)) for q in getattr(whole, 'geoms', [whole])])
-        edges = unary_union([f.boundary for f in fs if not f.is_empty]).difference(outline.buffer(2e-3))
-        cut = edges.buffer(seam / 2, cap_style=2, join_style=2, mitre_limit=4).intersection(whole.buffer(-rim))
-        cut = unary_union([q for q in getattr(cut, 'geoms', [cut]) if q.area > 0.0025])   # no ticks left by an edge near the rim
-        return [whole.difference(cut).simplify(0.001)] + [None] * (len(fs) - 1)
+    if not flush:
+        g = unary_union([f.buffer(-seam / 2, join_style=2, mitre_limit=4) for f in fs if not f.is_empty])
+        k = 0.3 * seam                                   # (hairlines left where two buffers meet, closed)
+        g = g.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
+        g = unary_union([q for q in getattr(g, 'geoms', [g]) if not q.buffer(-0.75 * seam).is_empty])
+        s_ = (sil.bounds[2] - sil.bounds[0]) / (g.bounds[2] - g.bounds[0])
+        return [affinity.scale(g, s_, s_, origin=(0, 0)).simplify(0.001)] + [None] * (len(fs) - 1)
     out = []
     for f in fs:
         if f.is_empty:
@@ -336,11 +339,11 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, rim=0.045):
     return out
 
 
-def discs_body(colours, spin=0.0, flush=True, seam=SEAM, rim=0.045):
+def discs_body(colours, spin=0.0, flush=True, seam=SEAM):
     """The discs as SVG paths, flush in colour, seamed in one colour (disc_shapes); the discs alone (round 25: no ball
     filled under them)."""
     return ''.join(f'<path d="{_poly_d(g)}" fill="{colours[i]}" fill-rule="evenodd"/>'
-                          for i, g in enumerate(disc_shapes(spin, flush, seam=seam, rim=rim)) if g is not None)
+                          for i, g in enumerate(disc_shapes(spin, flush, seam=seam)) if g is not None)
 
 
 def _lighter(c, k):
@@ -616,10 +619,9 @@ INKS = (INK, WHITE)
 SMALL = {16: 0.035, 32: 0.025, 64: 0.02}                  # px across at most: the spread (of the radius)
 # Then the owner: "I like discs for monochrome and acrylic for multicolor". So the mark is the acrylic in colour and the
 # seamed discs (round 24b's one-colour discs) in black, in white and in each speaker's own colour; the parity cut and
-# the tints above stay here as the acrylic's own one-colour forms. The discs' small cuts widen the seams (and stop them
-# further from the rim) so they stay a pixel or more: at the master's 0.035 they go grey at 32 px. At 16 px six discs
-# do not read whatever the seam.
-SMALL_SEAM = {16: (0.10, 0.08), 32: (0.08, 0.07), 64: (0.05, 0.05)}   # px across at most: (seam, rim), of the radius
+# the tints above stay here as the acrylic's own one-colour forms. The discs' small cuts widen the seams so they stay a
+# pixel or more: at the master's 0.035 they go grey at 32 px. At 16 px six discs do not read whatever the seam.
+SMALL_SEAM = {16: 0.10, 32: 0.08, 64: 0.05}                 # px across at most: the seam, of the radius
 
 
 def _lin(c):
@@ -692,8 +694,8 @@ def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper', p
     elif style == 'acrylic':                             # round 27: a speaker's own tint, stacked (round 25: the lines)
         body, e = acrylic_tint_body(colours[0]), 1 + W_LINE / 2
     elif style == 'discs':
-        seam, rim = next((SMALL_SEAM[k] for k in sorted(SMALL_SEAM) if one and px and px <= k), (SEAM, 0.045))
-        body, e = discs_body(colours, flush=not one, seam=seam, rim=rim), 1 + W_LINE / 2
+        seam = next((SMALL_SEAM[k] for k in sorted(SMALL_SEAM) if one and px and px <= k), SEAM)
+        body, e = discs_body(colours, flush=not one, seam=seam), 1 + W_LINE / 2
     else:
         body, e = lines_body(colours, depth=style == 'lines'), 1 + W_LINE / 2
     wh = f' width="{size}" height="{size}"' if size else ''

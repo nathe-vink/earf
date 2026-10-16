@@ -34,10 +34,11 @@ EARF and the lockup's proportions; the grounds (paper #F2EFEA, ink #121114).
 
 ## The versions, and their parameters
 
-- Black, white and each speaker's own (after round 1): the seamed discs, flat (`seam` 0.035 of the radius, stopping
-  `rim` 0.045 short of the outline), each speaker's on the ground where it holds 3:1; small cuts widen the seam to
-  0.05, 0.08 and 0.10 (rim 0.05, 0.07, 0.08) for marks up to 64, 32 and 16 px. Round 1 judged the acrylic's own
-  one-colour forms, kept in the code:
+- Black, white and each speaker's own (after round 1): the seamed discs, flat, each speaker's on the ground where it
+  holds 3:1. Every piece shrunk by half of `seam` (0.035 of the radius) on every side, the outline's too, so no band
+  runs round the outside (the owner: "The stroke around the monochromatic ones looks odd. Don't think we need it");
+  pieces thinner than one and a half seams dropped. Small cuts widen the seam to 0.05, 0.08 and 0.10 for marks up to
+  64, 32 and 16 px. Round 1 judged the acrylic's own one-colour forms, kept in the code:
 - Black and white (one ink, no tints): a point is inked where an odd number of discs cover it (parity: the discs
   cancel where they cross, as two films do in one ink), the discs as flat ovals. Tried and left: a solid ball cut by
   every disc's outline as a seam (`seam` 0.035 of the radius), which read as any globe icon.

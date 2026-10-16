@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27b**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27c**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -55,7 +55,22 @@ where the colour you pick sets what goes with it. Round 26 draws the Planet agai
 beat by beat by the animators' principles; gives the Coin a real coin's physics, spinning,
 tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 27 settles the mark: the acrylic
 globe in colour and the seamed discs in black, in white and in each speaker's colour, as files for printers and
-makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners.
+makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, and 27c takes the stroke from round the one-colour discs.
+
+## Round 27c: no stroke round the one-colour discs (the owner's note of 2026-10-16)
+
+| the owner's note | what changes |
+|---|---|
+| "The stroke around the monochromatic ones looks odd. Don't think we need it" | **The band round the outline is gone**: black, white and each speaker's discs are their pieces alone, a seam of the ground between any two and round the outside alike. |
+
+Round 24b's seams stopped a little short of the outline so that it stayed whole, and that solid band read as a stroke
+round the globe. Running the seams out through the edge left a step where a disc's own edge is the outline between
+two tips, and slivers where a seam ran close along it. So now every piece of every disc is shrunk by half a seam on
+every side, the outline's sides too (`earth.py` disc_shapes): the gap is the same everywhere, nothing runs round the
+outside, and the outline is the pieces' own. A piece thinner than one and a half seams, a sliver of a disc's tip, is
+dropped, and the whole is scaled back to the discs' width. The small cuts follow (seams 0.05, 0.08 and 0.10 of the
+radius up to 64, 32 and 16 px), where the thinnest tips drop out and the outline comes rounder. The maker's outlines
+(`brand/earth-outlines.json`, the etched mark on the speaker) follow too.
 
 ## Round 27b: the acrylic with the discs' own corners (the owner's note of 2026-10-16)
 
