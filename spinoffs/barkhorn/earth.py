@@ -816,7 +816,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       south, orange and violet at the sides. In colour the discs are flush, with no strokes; the strokes are the
       one-colour versions'. No fill completes the circle: the globe is its six discs alone. The acrylic is the discs
       themselves, see-through, each a slab with its side showing, stacked as tinted sheets: one sheet shows its own
-      colour, and where two cross they make one deeper colour, whichever is in front. The Coin flashes the six colours, one each half turn, and lands on the globe; every ident's tilt now
+      colour, and where two cross they make one deeper colour, whichever is in front. The Coin (round 26) spins on its edge through the six colours, one each half turn, then tips and wobbles down, faster as it falls, as a real coin does, and lands face up on the globe; every ident's tilt now
       begins before its spin ends, so nothing stops between them. Open starts as the flat globe icon, Iris opens the
       finished globe out of its own centre, Roll rolls it in like a ball, and the Planet takes a meteor.</p>
   </header>
@@ -829,7 +829,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
         <button aria-pressed="true" data-v="gyro">Gyroscope</button><button aria-pressed="false" data-v="coin">Coin</button><button aria-pressed="false" data-v="rise">Earthrise</button><button aria-pressed="false" data-v="open">Open</button><button aria-pressed="false" data-v="iris">Iris</button><button aria-pressed="false" data-v="planet">Planet</button><button aria-pressed="false" data-v="roll">Roll</button><button aria-pressed="false" data-v="download">Download</button>
       </div>
       <div class="seg" id="style" role="group" aria-label="Style">
-        <button aria-pressed="true" data-v="discs">Discs</button><button aria-pressed="false" data-v="acrylic">Acrylic</button><button aria-pressed="false" data-v="even">Lines</button>
+        <button aria-pressed="true" data-v="discs">Discs</button><button aria-pressed="false" data-v="acrylic">Acrylic</button><button aria-pressed="false" data-v="even">Black &amp; white</button>
       </div>
       <div class="seg" id="ground" role="group" aria-label="Ground">
         <button aria-pressed="true" data-v="paper">Paper</button><button aria-pressed="false" data-v="night">Ink</button>
@@ -853,9 +853,11 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       on every coast. Below 49&nbsp;px a mid cut keeps only the two Americas, and at 24&nbsp;px and under the small cut has
       no land and a 24&deg; dish. In one colour it is knock-outs: the disc solid, the land, the surround and the dust cap
       knocked out to the ground. On each beat the cone pushes out, rebounds and settles, and a ring of sound, knocked out
-      of the globe, crosses the Earth (below). As an ident, the Planet: a violet meteor strikes the North Atlantic, a white
-      cloud bursts and the sea ripples, the cloud breaks into black wisps, and the crater shows, the meteor lodged in its
-      core as the violet cap.</p>
+      of the globe, crosses the Earth (below). As an ident, the Planet (round 26, drawn as early Disney would have):
+      a star twinkles, the meteor grows out of it, draws back and falls on an arc, stretching, and splats on the North
+      Atlantic; the Earth squashes and springs back, a shock runs over it and the sea ripples; a white cloud pops up puff
+      by puff, chars black from the middle out and is eaten away into curling crescents, and the crater springs open, the
+      meteor dropping into its core as the violet cap. In black and white it is knock-outs, as the figure is.</p>
     __CORE__
   </section>
 
@@ -882,8 +884,8 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <div class="coin" style="background:#121114"><canvas id="kickloop" aria-label="The globe as a Death Star, its dish kicking like a speaker"></canvas></div>
     </div>
     <div class="win">
-      <div class="bar"><b>The planet, struck &mdash; the meteor stays in its core</b></div>
-      <div class="coin" style="background:#F2EFEA"><canvas id="meteor" aria-label="A violet meteor strikes the Earth: a white cloud, black wisps, the sea rippling, then the crater with the meteor in its core"></canvas></div>
+      <div class="bar"><b>The planet, struck &mdash; in colour, then in black and white</b></div>
+      <div class="coin" style="background:#F2EFEA"><canvas id="meteor" aria-label="A violet meteor strikes the Earth: a white cloud, black smoke curling away, the sea rippling, then the crater with the meteor in its core; in colour, then in black and white"></canvas></div>
     </div>
   </section>
 
@@ -1378,7 +1380,7 @@ const IDENTS = { printer: { dur: 2.05, draw: drawPrinter },
                          marks: () => [[GYRO.spin - GYRO.lap, 'tilt'], [GYRO.spin, 'spun']] },
                  kick: { dur: 1.95, draw: drawKick },
                  coin: { get dur() { return arrival(COIN.spin, COIN.lap); }, draw: (...a) => coinAt(...a),
-                         marks: () => [[6 * COIN.half, 'globe'], [COIN.spin - COIN.lap, 'tilt']] },
+                         marks: () => [[coinTable().tip, 'tip'], [COIN.spin - COIN.lap, 'tilt']] },
                  rise: { get dur() { return arrival(RISE.up, RISE.lap); }, draw: (...a) => drawRise(...a),
                          marks: () => [[RISE.up - RISE.lap, 'tilt']] },
                  roll: { get dur() { return arrival(ROLL.roll, ROLL.lap); }, draw: (...a) => drawRoll(...a),
@@ -1386,7 +1388,7 @@ const IDENTS = { printer: { dur: 2.05, draw: drawPrinter },
                  download: { get dur() { return arrival(LOADGIF.passes.length * LOADGIF.each, LOADGIF.lap); }, draw: (...a) => drawDownload(...a),
                              marks: () => [[LOADGIF.passes.length * LOADGIF.each, 'sharp']] },
                  planet: { get dur() { return PLANET.end; }, get last() { return PLANET.last; }, draw: (...a) => drawPlanet(...a),
-                           marks: () => [[PLANET.hit, 'hit'], [PLANET.wisps.start, 'wisps']] },
+                           marks: () => [[PLANET.wind.at, 'wind'], [PLANET.hit, 'hit'], [PLANET.char.start, 'char'], [PLANET.crater.at, 'crater']] },
                  iris: { get dur() { return arrival(IRIS.open, IRIS.lap); }, draw: (...a) => drawIris(...a),
                          marks: () => [[IRIS.open - IRIS.lap, 'tilt'], [IRIS.open, 'open']] },
                  open: { get dur() { return arrival(OPEN.lead + 5 * OPEN.stagger + OPEN.each, OPEN.lap); },
@@ -1468,31 +1470,70 @@ function drawCursor(ctx, W, H, t, o, at) {
 // (the second critic: the tilt starts as the landing's last movement dies, lap 0.25, and the third 0.3, so the lean
 // lands with the landing; the coin twice as thick, 0.14 of its
 // radius, as a real coin's edge is, so edge on it is a bar, not a hairline)
-const COIN = { half: 0.34, land: 0.51, thick: 0.14, lap: 0.3, flash: [2, 1, 0, 5, 4, 3],
-               get spin() { return 6 * this.half + this.land; }, get end() { return arrival(this.spin, this.lap) + 0.6; } };
-function coinAngle(t) {                     // the turn still to go: from edge on, six and a half half-turns, to rest
-  const t1 = 6 * COIN.half;
-  if (t < t1) return 6.5 * Math.PI - Math.PI / COIN.half * Math.max(0, t);
-  return 0.5 * Math.PI * Math.pow(1 - clamp((t - t1) / COIN.land, 0, 1), 3);
+// Round 26, a real coin's physics (the owner, of the coin: "Real coin physics"): it spins on its edge, slowing a
+// little as friction takes it (`slow`: each half turn longer, the first `half`, so never under three flashes a second),
+// a new colour on each face as before; the globe's face comes round and the coin tips over, rolling round on its rim,
+// and the lower it leans the faster it wobbles, as Euler's disk does (the lean falls as the square root of the time
+// left over `tip`; the wobble, once the coin can no longer turn its back to you, quickens to `whirl` radians a second),
+// its face hardly turning while the wobble whirls (it turns at the wobble's rate times one less the cosine of the lean,
+// so not at all when it lies flat), until it lies flat. The view, a little above the coin while it spins (`eps0`
+// radians), rises over it as it falls, overhead by `rise` of the way, so it lands face up, facing you, the globe
+// upright (its last turn eased into the fall). It starts to tip `at` radians after the globe's face shows edge on, so
+// that it turns its back to you no more: six edge-ons in all, never more than three in a second
+const COIN = { half: 0.34, slow: 0.06, tip: 0.85, rise: 0.6, at: -1.2, eps0: 0.25, whirl: 34, thick: 0.14, lap: 0.3,
+               flash: [2, 1, 0, 5, 4, 3],
+               get spin() { return coinTable().end; }, get end() { return arrival(this.spin, this.lap) + 0.6; } };
+let CT = null;
+function coinTable() {                                       // the coin's motion, worked out once at 2000 steps a second:
+  if (CT) return CT;                                         // the wobble's angle phi, the lean alpha (of the face from
+  const dt = 1 / 2000, w0 = Math.PI / COIN.half, R = [];    // the table's normal), the view's height eps, the face's turn
+  let t = 0, phi = -Math.PI / 2, rho = phi, flips = 0, side = 1, tTip = null, wTip = 0, tc = null, wc = 0;   // rho, the edge-ons
+  for (let i = 0; i < 40000; i++) {
+    let alpha = Math.PI / 2, eps = COIN.eps0, w = w0 / (1 + COIN.slow * t);
+    if (tTip !== null) {
+      const tau = Math.min(1, (t - tTip) / COIN.tip);
+      alpha = Math.PI / 2 * Math.sqrt(1 - tau);
+      eps = COIN.eps0 + (Math.PI / 2 - COIN.eps0) * smooth((t - tTip) / (COIN.tip * COIN.rise));
+      if (tc === null && eps > alpha) { tc = t; wc = wTip; }        // (past here the coin cannot turn its back to you)
+      w = tc === null ? wTip : wc + (COIN.whirl - wc) * Math.pow(Math.min(1, (t - tc) / (tTip + COIN.tip - tc)), 2);
+    }
+    const s = Math.cos(alpha) * Math.sin(eps) + Math.sin(alpha) * Math.cos(phi) * Math.cos(eps);
+    if (s * side < 0) { side = -side; flips++; }
+    R.push([phi, alpha, eps, rho, flips]);
+    if (tTip !== null && t - tTip >= COIN.tip) break;
+    const ph = Math.atan2(Math.sin(phi), Math.cos(phi));
+    if (tTip === null && flips >= COIN.flash.length && ph >= COIN.at && ph < Math.PI / 2) { tTip = t; wTip = w; }
+    phi += w * dt; rho += w * (1 - Math.cos(alpha)) * dt; t += dt;
+  }
+  const last = R[R.length - 1], turn = Math.atan2(Math.sin(last[3]), Math.cos(last[3]));   // the face lands upright: its
+  R.forEach((r, i) => { r[3] -= turn * smooth((i * dt - tTip) / COIN.tip); });             // last turn eased into the fall
+  CT = { R, dt, end: (R.length - 1) * dt, tip: tTip };
+  return CT;
 }
 function coinAt(ctx, V, t, style, G) {
-  const th = coinAngle(t), items = globeItems({ lean: D.lean * tiltAt(t - COIN.spin + COIN.lap), elev: D.elev });
-  if (t >= COIN.spin) { drawRings(ctx, V, items, style, G); return; }
-  const k = Math.min(6, Math.round(th / Math.PI)), A = D.acrylic[G.bg === D.night ? 'night' : 'paper'];
-  let col = k ? D.hues[COIN.flash[6 - k]] : null;                           // null: the globe
-                                                                            // (in acrylic a lone face is its own colour)
-  const c = Math.cos(th), sn = Math.sin(th), w = Math.max(Math.abs(c), 0.004) * V.R;
-  if (style !== 'even') {                                                   // the rim: the coin's thickness (in acrylic its
-    const c0 = col || D.ring[D.atmos], q = OKL(c0);                         // side's deeper tone, as every acrylic disc's)
-    ctx.save(); ctx.fillStyle = style === 'acrylic' ? fromOKL([q[0] - A.side, q[1] * (1 + A.sideC), q[2] * (1 + A.sideC)]) : c0;
-    for (let j = 1; j <= 12; j++) { ctx.beginPath(); ctx.ellipse(V.cx - sn * COIN.thick * V.R * j / 12, V.cy, w * 0.985, V.R * 0.985, 0, 0, TAU); ctx.fill(); }
-    ctx.restore();
+  const T = coinTable(), items = globeItems({ lean: D.lean * tiltAt(t - COIN.spin + COIN.lap), elev: D.elev });
+  if (t >= T.end) { drawRings(ctx, V, items, style, G); return; }
+  const f = clamp(t, 0, T.end) / T.dt, i = Math.min(T.R.length - 2, Math.floor(f)), e = f - i, A0 = T.R[i], A1 = T.R[i + 1];
+  const [phi, alpha, eps, rho] = [0, 1, 2, 3].map(j => A0[j] + (A1[j] - A0[j]) * e), flips = A0[4];
+  const n = [Math.sin(alpha) * Math.sin(phi), Math.cos(alpha), Math.sin(alpha) * Math.cos(phi)];   // the face's normal, on
+  const e1 = [Math.cos(phi), 0, -Math.sin(phi)], e2 = cross(n, e1), psi = rho - phi;               // the table (y up)
+  const f1 = e1.map((v, j) => Math.cos(psi) * v + Math.sin(psi) * e2[j]), f2 = e1.map((v, j) => -Math.sin(psi) * v + Math.cos(psi) * e2[j]);
+  const zv = [0, Math.sin(eps), Math.cos(eps)], yv = [0, Math.cos(eps), -Math.sin(eps)], front = dot(n, zv) >= 0;
+  const g1 = front ? f1 : f1.map(v => -v);                                   // (its back is drawn the right way round)
+  const L = [V.R * g1[0], -V.R * dot(g1, yv), -V.R * f2[0], V.R * dot(f2, yv)];   // the face's unit disc onto the screen
+  const col = flips < COIN.flash.length ? D.hues[COIN.flash[flips]] : null, A = D.acrylic[G.bg === D.night ? 'night' : 'paper'];
+  const disc = (dx, dy) => { ctx.save(); ctx.transform(L[0], L[1], L[2], L[3], V.cx + dx, V.cy + dy); ctx.beginPath(); ctx.arc(0, 0, 1, 0, TAU); ctx.restore(); };
+  if (style !== 'even') {                                                   // the rim: the coin's thickness behind its face
+    const c0 = col || D.ring[D.atmos], q = OKL(c0), k = (front ? -1 : 1) * COIN.thick * V.R;   // (in acrylic its side's deeper
+    ctx.fillStyle = style === 'acrylic' ? fromOKL([q[0] - A.side, q[1] * (1 + A.sideC), q[2] * (1 + A.sideC)]) : c0;   // tone)
+    for (let j = 1; j <= 12; j++) { disc(n[0] * k * j / 12, -dot(n, yv) * k * j / 12); ctx.fill(); }
   }
-  ctx.save(); ctx.translate(V.cx, V.cy); ctx.scale(Math.sign(c) * Math.max(Math.abs(c), 0.004), 1); ctx.translate(-V.cx, -V.cy);
-  ctx.fillStyle = G.bg; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R, 0, TAU); ctx.fill();   // the face is solid: no rim through it
-  if (!col) drawRings(ctx, V, items, style, G);                             // the globe, mirrored when its back is to you
-  else if (style !== 'even') { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R, 0, TAU); ctx.fill(); }
-  else { const lw = D.w * V.R; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R - lw / 2, 0, TAU); ctx.stroke(); }
+  ctx.save(); ctx.transform(L[0], L[1], L[2], L[3], V.cx, V.cy);
+  ctx.fillStyle = G.bg; ctx.beginPath(); ctx.arc(0, 0, 1, 0, TAU); ctx.fill();   // the face is solid: no rim through it
+  const U = view(0, 0, 0, 0, 1);
+  if (!col) drawRings(ctx, U, items, style, G);
+  else if (style !== 'even') { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(0, 0, 1, 0, TAU); ctx.fill(); }
+  else { ctx.strokeStyle = col; ctx.lineWidth = D.w; ctx.beginPath(); ctx.arc(0, 0, 1 - D.w / 2, 0, TAU); ctx.stroke(); }
   ctx.restore();
 }
 
@@ -1619,8 +1660,10 @@ function corePaths() {                                                     // th
   if (CP) return CP;                                                         // and the land, filled even-odd, is the sea)
   const P = D.core, sea = new Path2D(P.sphere);
   if (P.land) sea.addPath(new Path2D(P.land));
+  const sea1 = new Path2D(P.sphere);                                         // (round 26: and in one colour, the land knocked
+  if (P.land1) sea1.addPath(new Path2D(P.land1));                            // out CLEAR inside the limb)
   CP = { sphere: new Path2D(P.sphere), land: P.land ? new Path2D(P.land) : null, trench: P.trench ? new Path2D(P.trench) : null,
-         cap: new Path2D(P.cap), sea };
+         cap: new Path2D(P.cap), sea, land1: P.land1 ? new Path2D(P.land1) : null, sea1 };
   return CP;
 }
 function drawCoreKick(ctx, W, H, t, o) {
@@ -1646,96 +1689,237 @@ function drawCoreKick(ctx, W, H, t, o) {
 
 // round 25, the planet (the owner: "it would be cool if the purple was a meteor, creates white cloud, disperses into
 // black wisps, then the crater is visible. The water ripples on impact too. Then the purple meteor can stay in the
-// core"): the Earth whole, with no crater; a violet meteor falls on the North Atlantic from the upper right, faster as
-// it comes, its tail behind it; at the hit a white cloud bursts over the spot and rings ripple out across the sea (not
-// the land); the cloud breaks into black wisps that curl outward and thin away, and the crater shows, the meteor lodged
-// at its centre as the violet core. Times in seconds; sizes of the planet's radius; `from` where the meteor starts,
-// from the hit
-// After its first critic (critic/rounds/2026-10-15/brand-planet-r1.json): the meteor larger (0.07 to 0.09) and its
-// tail longer (0.85 to 1.25), holding its colour further; at the hit the planet takes a small knock along the meteor's
-// path (`knock`) and settles; the crater drawn only once the cloud begins to go (it showed between the puffs); the
-// wisps sooner (0.72 to 0.64) and quicker (0.85 to 0.55), kept on the planet (past its edge they read as claws on
-// paper and vanished on ink); the ripples quicker (1.05 to 0.65), all three gone before the planet is still (the last
-// froze, faint, into the lockup); and once the smoke has thinned, the cone thumps once, as a speaker does (`thump`).
-// The cloud bursts in a frame and a bit (0.12 to 0.04) and the knock is a frame out, so the hit is the sharpest beat
-const PLANET = { hit: 0.45, from: [1.55, -1.3], meteor: 0.09, tail: 1.25,
-                 cloud: { grow: 0.04, size: 0.46 }, wisps: { start: 0.64, dur: 0.55, drift: 0.45, dark: 0.18 },
-                 ripples: { n: 3, gap: 0.13, dur: 0.65, grow: 3.4, width: 0.03 },
-                 knock: { dist: 0.04, out: 0.034, back: 0.133 }, thump: { at: 0.97, k: 0.15, out: 0.067, back: 0.1 },
-                 get end() { return this.wisps.start + this.wisps.dur; },              // (wisps.start: from 0, as hit)
-                 get last() { return Math.max(this.end, this.hit + (this.ripples.n - 1) * this.ripples.gap + this.ripples.dur); } };
-const PUFFS = [[0, 0, 0.56], [0.5, -0.2, 0.42], [-0.48, -0.16, 0.4], [0.22, 0.46, 0.38], [-0.3, 0.42, 0.36],
-               [0.7, 0.24, 0.3], [-0.68, 0.18, 0.3], [0.06, -0.58, 0.36]];    // the cloud: circles (x, y, r) of its size
+// core"). Round 26, drawn again as early Disney would have drawn it (the owner: "You gotta really spruce up that planet
+// animation. Pixar quality baby. Or at least early Disney"), by the animators' principles. Staging and anticipation: a
+// star twinkles where the meteor will come from; the meteor grows out of it and draws back, squashed. Arcs, slow in,
+// squash and stretch: it falls on a bowed path, faster as it comes, stretched by its speed, its flame flickering and
+// shedding sparks, and on the frame it strikes it splats flat. Timing: a starburst for two frames (one flash, well under
+// three a second). Follow-through: the planet squashes along the blow and springs back past round and round again,
+// knocked along the blow and back; a shock runs over the globe and the sea ripples, a light crest and a dark trough,
+// the rings drawn on the sphere so they foreshorten toward the limb and wrap round it (solid drawing). Overlapping
+// action: the cloud pops in puff by puff from its middle out, each past its size and back, and billows, shaded in two
+// tones (Fog, lit from the upper left, and a cool shadow); it chars from its middle out, each puff through a beat of a
+// middle tone to flat Smoke, and swells; and the smoke is eaten away from its middle out, each puff bitten from its
+// inner side by a growing circle, so the crater shows first through a hole at the centre and the last of the smoke is
+// crescents curling round it, thinning to nothing (no fades: early Disney's smoke goes by breaking up, and these are
+// the mark's own circles); as it clears the crater springs open ring by ring, past its size and back, its bowl sinking
+// past its depth, and the meteor drops into the core with a bounce, white-hot, cooling to violet. Round 25's thump is
+// gone (the owner: "Drop it"). In one colour (the style 'even', round 26: the owner liked the planet in black and
+// white) it is knock-outs, as the figure is: the planet solid; the land, the ripples' crests, the cloud and the
+// starburst in the ground's colour, outlined in the figure's where they cross the ground; the smoke, the meteor and the
+// cone solid, with gaps. Times in seconds from the start; sizes of the planet's radius
+// After its round 26 critic (critic/rounds/2026-10-16/brand-planet-r2.json): the meteor larger (0.085 to 0.12),
+// launched on the glint (the wind-up at 0.24, not 0.34) and striking 0.1 s sooner (0.62), its fall eased in less (2.4
+// to 1.8, so it is on its way by 0.43); five fat puffs round the cloud's edge, not eight small (they read as beads);
+// the smoke eaten in 0.3 s, not 0.42, then a beat (`hold`) on the clean crater; the ripples to 0.9 rad over 0.55 s
+// (1.3 over 0.85 traced the limb, a plate's rim) and the shock to 1.0 rad (1.95 doubled the outline)
+const PLANET = { star: { at: 0.04, pop: 0.16, ting: 0.24, size: 0.15 },    // the twinkle: it pops in, glints, gives way
+                 wind: { at: 0.24, dur: 0.1, back: 0.1 },                     // the ball grows out of it and draws back
+                 hit: 0.62, from: [1.36, -0.98], bow: 0.14, ease: 1.8,       // the strike; the fall's start (from the core),
+                 meteor: 0.12, stretch: 1.5, tail: 0.95, contact: 0.034,    // its bow and its ease in; the ball, its
+                 flash: 0.06,                                                // stretch at full speed, its flame; the splat
+                 squash: { k: 0.075, hz: 3.4, damp: 6.5 }, knock: { dist: 0.07, hz: 2.8, damp: 7.5 },
+                 shock: { dur: 0.28, to: 1.0, width: 0.012 },                // (radians from the dish's axis)
+                 ripples: { n: 3, gap: 0.15, dur: 0.55, to: 0.9, width: 0.024 },
+                 cloud: { size: 0.5, pop: 0.15, stagger: 0.06, drift: 0.16, boil: 0.035 },
+                 char: { start: 1.02, dur: 0.12, turn: 0.07 }, smoke: { after: 0.05, eat: 0.3, drift: 0.22, swirl: 0.9, hold: 0.12 },   // (each
+                                                                             // puff is eaten from `after` it begins to char)
+                 crater: { at: 1.15, pop: 0.2, stagger: 0.055, wob: 0.05, hz: 3.0, damp: 5, sink: 0.5 }, ember: { cool: 0.7 },
+                 get end() { return this.char.start + this.char.dur + this.smoke.after + this.smoke.eat + this.smoke.hold; },
+                 get last() { return Math.max(this.end, this.hit + 0.02 + (this.ripples.n - 1) * this.ripples.gap + this.ripples.dur,
+                                              this.crater.at + 3 * this.crater.stagger + this.ember.cool); } };
+const PUFFS = [[0.81, 0.22, 0.32], [0.07, 0.82, 0.34], [-0.79, 0.29, 0.31], [-0.58, -0.58, 0.33], [0.42, -0.73, 0.3],
+               [0.42, 0.18, 0.4], [-0.08, 0.46, 0.38], [-0.44, -0.04, 0.4], [-0.02, -0.44, 0.38], [0.38, -0.28, 0.34],
+               [0, 0, 0.46]];                                                // the cloud: circles (x, y, r) of its size, back to
+                                                                             // front (five fat ones round the edge, unevenly
+                                                                             // spaced, five inside, one in the middle on top)
 const hash = (i, k) => { const v = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return v - Math.floor(v); };
-function wispPath(ctx, x, y, ang, len, curl, w) {                           // a tapered curl, its head at (x, y)
-  const N = 16, L = [], Rr = [];
-  for (let j = 0; j <= N; j++) {
-    const s = j / N, a = ang + curl * s, h = w * Math.sin(Math.PI * Math.min(1, s * 1.15)) * (1 - 0.55 * s) / 2;
-    L.push([x - Math.sin(a) * h, y + Math.cos(a) * h]); Rr.push([x + Math.sin(a) * h, y - Math.cos(a) * h]);
-    x += Math.cos(a) * len / N; y += Math.sin(a) * len / N;
+const backOut = (x, s = 1.7) => { x = clamp(x, 0, 1) - 1; return 1 + (s + 1) * x * x * x + s * x * x; };   // past 1, back
+const pip = (ctx, x, y, r) => { if (r > 0) { ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill(); } };
+function planetPal(style, G) {                                               // the Planet's colours: in colour, or in one
+  const P = D.core, FOG = P.fog, SMOKE = P.smoke;                            // colour by knock-outs (figure F, ground B)
+  if (style === 'even') { const F = G.ink, B = G.bg;
+    return { one: true, F, B, gap: P.gap, line: 0.6 * P.gap, sea: F, land: B, crest: B, rings: [B, F, B], core: F, cloud: B, shade: F,
+             smoke: F, smokeShade: B, drop: B, flash: B, meteor: F, star: F, spark: F }; }
+  return { one: false, sea: P.sea, land: P.landCol, crest: mixHex(P.sea, FOG, 0.6), trough: mixHex(P.sea, D.ink, 0.28), shock: FOG,
+           rings: P.rings.map(r => r[1]), core: P.capCol, coreHot: mixHex(P.capCol, FOG, 0.8), cloud: FOG, shade: mixHex(FOG, P.sea, 0.3),
+           smoke: SMOKE, smokeShade: D.ink, drop: FOG, flash: FOG, flashCore: mixHex(FOG, P.rings[2][1], 0.45),
+           meteor: P.capCol, meteorHot: mixHex(P.capCol, FOG, 0.45), flame: mixHex(P.capCol, FOG, 0.42), star: P.capCol,
+           spark: mixHex(P.capCol, FOG, 0.55) };
+}
+let FG = null;
+function fallGeom() {                                                        // the meteor's arc (a quadratic, bowed up to
+  if (FG) return FG;                                                         // the left of its chord), y down
+  const Q = PLANET, [cx, cy] = D.core.centre, L = Math.hypot(...Q.from), n = [Q.from[1] / L, -Q.from[0] / L];
+  const A = [cx + Q.from[0], cy + Q.from[1]], B = [cx, cy], C = [cx + Q.from[0] / 2 + n[0] * Q.bow * L, cy + Q.from[1] / 2 + n[1] * Q.bow * L];
+  const at = u => [0, 1].map(j => (1 - u) * (1 - u) * A[j] + 2 * (1 - u) * u * C[j] + u * u * B[j]);
+  const tan = u => [0, 1].map(j => 2 * (1 - u) * (C[j] - A[j]) + 2 * u * (B[j] - C[j]));
+  const unit = v => { const l = Math.hypot(v[0], v[1]) || 1; return [v[0] / l, v[1] / l]; };
+  const d0 = unit(tan(0));
+  FG = { at, tan, unit, d0, end: unit(tan(1)), B, star: [A[0] + d0[0] * Q.wind.back, A[1] + d0[1] * Q.wind.back] };
+  return FG;
+}
+function meteorAt(t) {                                                       // the ball at t: where, which way, its size,
+  const Q = PLANET, g = fallGeom(), t0 = Q.wind.at + Q.wind.dur;             // its stretch (along and across its path),
+  if (t < Q.wind.at || t >= Q.hit) return null;                              // how far along (u) and how fast (0 to 1)
+  if (t < t0) { const w = (t - Q.wind.at) / Q.wind.dur, e = smooth(w), sq = 1 - 0.35 * Math.sin(Math.PI * w);   // winding up
+    return { p: [g.star[0] - g.d0[0] * Q.wind.back * e, g.star[1] - g.d0[1] * Q.wind.back * e], d: g.d0, k: backOut(w * 1.7, 2),
+             along: sq, across: 1 / Math.sqrt(sq), u: 0, sp: 0 }; }
+  if (t >= Q.hit - Q.contact) return { p: g.B, d: g.end, k: 1, along: 0.5, across: 1.55, u: 1, sp: 1 };   // the splat
+  const s = (t - t0) / (Q.hit - t0), u = Math.pow(s, Q.ease), tn = g.tan(u);
+  const sp = Math.hypot(tn[0], tn[1]) * Math.pow(s, Q.ease - 1) / Math.hypot(...g.tan(1)), along = 1 + Q.stretch * sp;
+  return { p: g.at(u), d: g.unit(tn), k: 1, along, across: 1 / Math.sqrt(along), u, sp };
+}
+function twinkle(ctx, t, pal) {                                              // a four-point sparkle, a lesser one across it
+  const Q = PLANET, S = Q.star, g = fallGeom(), a = (t - S.at) / S.pop; if (a <= 0) return;
+  const k = backOut(a, 2.2) * (1 - smooth((t - Q.wind.at) / (0.6 * Q.wind.dur))); if (k <= 1e-3) return;
+  const b = Math.exp(-Math.pow((t - S.ting) / 0.05, 2)), R = S.size * k;    // b: the glint, its long rays reaching out
+  const spark = (r, c) => { ctx.beginPath(); ctx.moveTo(0, -r); ctx.quadraticCurveTo(c, -c, r, 0); ctx.quadraticCurveTo(c, c, 0, r);
+    ctx.quadraticCurveTo(-c, c, -r, 0); ctx.quadraticCurveTo(-c, -c, 0, -r); ctx.fill(); };
+  ctx.save(); ctx.translate(g.star[0], g.star[1]); ctx.rotate(0.9 * (1 - smooth(a))); ctx.fillStyle = pal.star;
+  spark(R * (1 + 0.55 * b), R * 0.12); ctx.rotate(Math.PI / 4); spark(R * 0.5, R * 0.08);
+  if (!pal.one) { ctx.fillStyle = pal.meteorHot; pip(ctx, 0, 0, R * 0.15); }
+  ctx.restore();
+}
+function flame(ctx, M, t, pal) {                                             // the meteor's flame: two ribbons tapering back
+  const Q = PLANET, g = fallGeom(); if (M.sp < 0.03) return;                 // along its arc, flickering, light over dark
+  const len = Q.tail * Math.pow(M.sp, 0.8), m = Q.meteor * M.across, N = 28;
+  const ribbon = (frac, w0) => { const du = len * frac / Math.max(1e-3, Math.hypot(...g.tan(M.u))), L = [], R = [];
+    for (let j = 0; j <= N; j++) { const s = j / N, u = Math.max(0, M.u - du * s), p = j ? g.at(u) : M.p, d = g.unit(g.tan(u));
+      const w = w0 * Math.pow(1 - s, 0.85) * (1 + 0.16 * Math.sin(TAU * 2.2 * s - 38 * t)) / 2;
+      L.push([p[0] - d[1] * w, p[1] + d[0] * w]); R.push([p[0] + d[1] * w, p[1] - d[0] * w]); }
+    ctx.beginPath(); L.forEach(([x, y], j) => j ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); for (let j = N; j >= 0; j--) ctx.lineTo(...R[j]); ctx.closePath(); };
+  if (pal.one) { ribbon(1, 2.3 * m); ctx.strokeStyle = pal.F; ctx.lineWidth = pal.line; ctx.stroke();
+                 ribbon(0.6, 1.4 * m + 2 * pal.gap); ctx.fillStyle = pal.B; ctx.fill(); ribbon(0.6, 1.4 * m); ctx.fillStyle = pal.F; ctx.fill(); }
+  else { ribbon(1, 2.3 * m); ctx.fillStyle = pal.flame; ctx.fill(); ribbon(0.6, 1.4 * m); ctx.fillStyle = pal.meteor; ctx.fill(); }
+}
+function sparks(ctx, t, pal) {                                               // sparks shed by the flame, drifting off and
+  const Q = PLANET, g = fallGeom(), t0 = Q.wind.at + Q.wind.dur;             // shrinking away
+  ctx.fillStyle = pal.spark;
+  for (let k = 0; k < 8; k++) {
+    const uk = 0.1 + 0.1 * k, a = (t - t0 - Math.pow(uk, 1 / Q.ease) * (Q.hit - t0)) / 0.22; if (a <= 0 || a >= 1) continue;
+    const p = g.at(uk), d = g.unit(g.tan(uk)), off = (hash(k, 41) < 0.5 ? -1 : 1) * (0.05 + 0.06 * hash(k, 42)) * easeOut(a);
+    pip(ctx, p[0] - d[1] * off, p[1] + d[0] * off + 0.04 * a * a, 0.022 * (0.6 + 0.6 * hash(k, 43)) * (1 - a));
   }
-  ctx.beginPath(); L.forEach(([px, py], j) => j ? ctx.lineTo(px, py) : ctx.moveTo(px, py));
-  for (let j = Rr.length - 1; j >= 0; j--) ctx.lineTo(Rr[j][0], Rr[j][1]); ctx.closePath();
+}
+function ball(ctx, M, pal) {                                                 // the meteor, stretched along its path, its
+  const m = PLANET.meteor * M.k;                                             // leading face hot
+  ctx.save(); ctx.translate(M.p[0], M.p[1]); ctx.rotate(Math.atan2(M.d[1], M.d[0])); ctx.scale(M.along, M.across);
+  if (pal.one) { ctx.fillStyle = pal.B; pip(ctx, 0, 0, m + pal.gap / Math.min(M.along, M.across)); }
+  ctx.fillStyle = pal.meteor; pip(ctx, 0, 0, m);
+  if (!pal.one) { ctx.fillStyle = pal.meteorHot; pip(ctx, m * 0.3, 0, m * 0.58); }
+  ctx.restore();
+}
+function capRing(ctx, th) {                                                  // the circle on the sphere th radians from the
+  const K = D.core.dish, [x, y] = K.at, d = [x, y, Math.sqrt(Math.max(0, 1 - x * x - y * y))];   // dish's axis, its near
+  const L = Math.hypot(d[0], d[1]) || 1, u = [-d[1] / L, d[0] / L, 0], v = cross(d, u);          // side only (y down)
+  const lt = rad(-D.core.lean), cl = Math.cos(lt), sl = Math.sin(lt), c = Math.cos(th), s = Math.sin(th);
+  ctx.beginPath(); let pen = false;
+  for (let i = 0; i <= 160; i++) {
+    const a = TAU * i / 160, q = [0, 1, 2].map(j => c * d[j] + s * (Math.cos(a) * u[j] + Math.sin(a) * v[j]));
+    if (q[2] < 0) { pen = false; continue; }
+    const X = q[0] * cl - q[1] * sl, Y = q[0] * sl + q[1] * cl; pen ? ctx.lineTo(X, -Y) : ctx.moveTo(X, -Y); pen = true;
+  }
+}
+function planetWaves(ctx, since, pal, C, sea, land) {                       // the ripples on the sea, and the shock
+  const Q = PLANET, th0 = rad(D.core.dish.ang), R = Q.ripples, S = Q.shock;
+  ctx.save(); ctx.clip(sea, 'evenodd'); ctx.lineCap = 'round';
+  for (let i = 0; i < R.n; i++) {
+    const p = (since - 0.02 - i * R.gap) / R.dur; if (p <= 0 || p >= 1) continue;
+    const th = th0 + (R.to - th0) * (1 - (1 - p) * (1 - p)), w = R.width * (1 - p);
+    if (!pal.one) { ctx.strokeStyle = pal.trough; ctx.lineWidth = 0.7 * w; capRing(ctx, th - 0.045); ctx.stroke(); }
+    ctx.strokeStyle = pal.crest; ctx.lineWidth = w; capRing(ctx, th); ctx.stroke();
+  }
+  ctx.restore();
+  const p = since / S.dur; if (p <= 0 || p >= 1) return;
+  const th = th0 + (S.to - th0) * easeOut(p);
+  ctx.save(); ctx.clip(C.sphere); ctx.lineCap = 'round'; ctx.lineWidth = S.width * Math.pow(1 - p, 1.5);
+  if (!pal.one) { ctx.strokeStyle = pal.shock; capRing(ctx, th); ctx.stroke(); }
+  else { ctx.save(); ctx.clip(sea, 'evenodd'); ctx.strokeStyle = pal.B; capRing(ctx, th); ctx.stroke(); ctx.restore();
+         if (land) { ctx.clip(land, 'evenodd'); ctx.strokeStyle = pal.F; capRing(ctx, th); ctx.stroke(); } }
+  ctx.restore();
+}
+function planetCrater(ctx, t, pal) {                                         // the crater springing open ring by ring, and
+  const P = D.core, Q = PLANET.crater, x = t - Q.at; if (x <= 0) return;    // the meteor dropping into its core
+  const depth = P.dish.depth * (1 + Q.sink * Math.exp(-6 * x) * Math.cos(TAU * 2.2 * x));
+  const grow = i => { const y = x - i * Q.stagger; return y <= 0 ? 0 : backOut(y / Q.pop, 2) * (1 + Q.wob * Math.exp(-Q.damp * y) * Math.sin(TAU * Q.hz * y)); };
+  P.rings.forEach((r, i) => { const k = grow(i); if (k > 0) { ctx.fillStyle = pal.rings[i]; dishRing(ctx, P.fr[i] * k, depth); ctx.fill(); } });
+  const y = x - 3 * Q.stagger; if (y <= 0) return;
+  const heat = 1 - smooth(y / PLANET.ember.cool), k = 1 + 0.55 * Math.exp(-7 * y) * Math.cos(TAU * 2.6 * y);
+  ctx.fillStyle = pal.one ? pal.core : mixHex(pal.core, pal.coreHot, heat); dishRing(ctx, P.capF * k, depth); ctx.fill();
+}
+function planetCloud(ctx, t, since, pal, C) {                                // the cloud, its char and its smoke
+  const P = D.core, Q = PLANET, K = Q.cloud, Ch = Q.char, Sm = Q.smoke, [cx, cy] = P.centre, S = K.size;
+  const puffs = PUFFS.map(([x, y, r], i) => {                                // each puff chars as the front from the middle
+    const d = Math.hypot(x, y), t0 = Ch.start + Ch.dur * Math.pow(d / 0.95, 0.8), c = clamp((t - t0) / Ch.turn, 0, 1);   // reaches it
+    const e = smooth((t - t0 - Sm.after) / Sm.eat), out = S * (1 + K.drift * easeOut(since / 0.7) + Sm.drift * e);       // (a beat of a
+    const rr = r * S * backOut((since - 0.012 - K.stagger * d) / K.pop, 1.8) * (1 + K.boil * Math.sin(TAU * 1.7 * since + TAU * hash(i, 3)))   // middle tone,
+               * (1 + 0.12 * Math.sin(Math.PI * c));                                                     // and a swell), then is
+    return { i, d, c, e, r: rr, x: cx + x * out, y: cy + y * out, th: d > 1e-6 ? Math.atan2(y, x) : 0 }; });   // eaten away
+  const dark = h => h.c >= 0.5, tone = (a, b, h) => pal.one ? (dark(h) ? b : a) : mixHex(a, b, smooth(h.c));
+  const white = puffs.filter(h => h.r > 1e-4 && !dark(h)), smoke = puffs.filter(h => h.r > 1e-4 && dark(h) && h.e < 1);
+  ctx.save(); ctx.clip(C.sphere);
+  if (pal.one) { ctx.fillStyle = pal.F; white.forEach(h => pip(ctx, h.x, h.y, h.r + pal.line)); }
+  white.forEach(h => {                                                       // lit from the upper left: its shadow, then its
+    ctx.fillStyle = tone(pal.shade, pal.smoke, h); pip(ctx, h.x, h.y, h.r);  // lit part over it
+    ctx.fillStyle = tone(pal.cloud, pal.smoke, h); pip(ctx, h.x - 0.1 * h.r, h.y - 0.12 * h.r, 0.86 * h.r); });
+  if (smoke.length) {                                                        // the smoke, flat, one mass, eaten from the middle
+    const sg = h => hash(h.i, 6) < 0.5 ? -1 : 1;                             // out: each puff by its own circle, biting in from
+    const eater = h => { const a = h.th + Math.PI + sg(h) * Sm.swirl * h.e, mid = h.d < 1e-6;   // outside its inner side and
+      const o = mid ? 0 : h.r * (1.5 - 0.95 * h.e), R = mid ? 1.1 * h.r * h.e : h.r * (0.5 + 1.1 * h.e);   // growing over it, so
+      return [h.x + Math.cos(a) * o, h.y + Math.sin(a) * o, R]; };                                     // it thins to a crescent
+    const bitten = (h, grow, draw) => { const [x, y, R] = eater(h); ctx.save();                        // on its outer side,
+      if (R + grow > 0) { const p = new Path2D(); p.rect(-3, -3, 6, 6); p.arc(x, y, R + grow, 0, TAU); ctx.clip(p, 'evenodd'); }   // curling
+      draw(); ctx.restore(); };                                                                        // as it thins
+    if (pal.one) { ctx.fillStyle = pal.B; smoke.forEach(h => bitten(h, 0, () => pip(ctx, h.x, h.y, h.r + pal.gap))); }
+    smoke.forEach(h => bitten(h, pal.one ? pal.gap : 0, () => { ctx.fillStyle = tone(pal.cloud, pal.smoke, h); pip(ctx, h.x, h.y, h.r); })); }
+  ctx.restore();
+}
+function planetFlash(ctx, since, pal) {                                      // the starburst: two frames, the second smaller
+  const [cx, cy] = D.core.centre, R = 0.5 * (since < PLANET.flash / 2 ? 1 : 0.72);
+  const star = (R, n, inner, turn) => { ctx.beginPath();
+    for (let i = 0; i < 2 * n; i++) { const a = TAU * i / (2 * n) + turn, r = i % 2 ? R * inner : R * (0.8 + 0.4 * hash(i, 31));
+      i ? ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r) : ctx.moveTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r); }
+    ctx.closePath(); };
+  star(R, 9, 0.48, 0.2); ctx.fillStyle = pal.flash; ctx.fill();
+  if (pal.one) { ctx.strokeStyle = pal.F; ctx.lineWidth = pal.line; ctx.stroke(); }
+  else { star(0.55 * R, 9, 0.5, 0.55); ctx.fillStyle = pal.flashCore; ctx.fill(); }
 }
 function drawPlanet(ctx, V, t, style, G) {
-  const P = D.core, Q = PLANET, C = corePaths(), [cx, cy] = P.centre, since = t - Q.hit, at = (k, f) => {
-    ctx.save(); ctx.translate(cx, cy); ctx.scale(k, k); ctx.translate(-cx, -cy); f(); ctx.restore(); };
-  const L0 = Math.hypot(...Q.from), K = Q.knock, kn = since <= 0 ? 0 : since < K.out ? easeOut(since / K.out)
-    : 1 - smooth(clamp((since - K.out) / K.back, 0, 1));                    // the knock: out along the meteor's path, back
-  ctx.save(); ctx.translate(V.cx, V.cy); ctx.scale(V.R, V.R); ctx.translate(-Q.from[0] / L0 * K.dist * kn, -Q.from[1] / L0 * K.dist * kn);
-  ctx.fillStyle = P.sea; ctx.fill(C.sphere);
-  if (C.land) { ctx.fillStyle = P.landCol; ctx.fill(C.land, 'evenodd'); }
-  if (since > 0) {
-    ctx.save(); ctx.clip(C.sea, 'evenodd');                                  // the ripples, on the sea only
-    ctx.strokeStyle = mixHex(P.sea, '#FFFFFF', 0.6);
-    for (let i = 0; i < Q.ripples.n; i++) {
-      const p = (since - i * Q.ripples.gap) / Q.ripples.dur; if (p <= 0 || p >= 1) continue;
-      const k = 1 + Q.ripples.grow * easeOut(p);
-      at(k, () => { ctx.globalAlpha = 1 - p; ctx.lineWidth = Q.ripples.width * (1 - p * 0.6) / k; dishRing(ctx, 1, P.dish.depth); ctx.stroke(); });
-    }
-    ctx.restore();
-    if (t >= Q.wisps.start) {                                                // the crater, once the cloud begins to go; the
-      const T = Q.thump, u = t - T.at, kt = u <= 0 ? 1 : u < T.out ? 1 + T.k * easeOut(u / T.out)   // cone, the dust cap and
-        : 1 + T.k * (1 - smooth(clamp((u - T.out) / T.back, 0, 1)));      // the core thump once, the surround still
-      P.rings.forEach(([, col], i) => { const f = () => { ctx.fillStyle = col; dishRing(ctx, P.fr[i], P.dish.depth); ctx.fill(); };
-        i ? at(kt, f) : f(); });
-      at(kt, () => { ctx.fillStyle = P.capCol; ctx.fill(C.cap); }); }      // the meteor lodged in its core
-    // the cloud: it bursts over the spot (cubic ease-out); from `wisps.start` each of its puffs turns from white to
-    // black (over `dark` of the time) and draws out into two thin wisps of smoke curling away from the spot, longer,
-    // thinner and fainter until they are gone
-    const Wd = Q.wisps, S = Q.cloud.size, g = easeOut(since / Q.cloud.grow), p = clamp((t - Wd.start) / Wd.dur, 0, 1);
-    ctx.save(); ctx.clip(C.sphere);                                          // the cloud and its smoke, on the planet
-    ctx.fillStyle = p > 0 ? mixHex('#FFFFFF', D.ink, smooth(clamp(p / Wd.dark, 0, 1))) : '#FFFFFF';
-    PUFFS.forEach(([x, y, r], i) => {
-      const d = Math.hypot(x, y), th = d > 1e-6 ? Math.atan2(y, x) : -TAU / 8, rr = r * S * g;
-      const out = d * S * g + Wd.drift * easeOut(p) * (0.7 + 0.5 * hash(i, 4)), hx = cx + Math.cos(th) * out, hy = cy + Math.sin(th) * out;
-      if (p <= 0) { ctx.beginPath(); ctx.arc(hx, hy, rr, 0, TAU); ctx.fill(); return; }
-      if (p < Wd.dark) { ctx.globalAlpha = 1; ctx.beginPath(); ctx.arc(hx, hy, rr * (1 - p / Wd.dark), 0, TAU); ctx.fill(); }
-      for (const [k, sgn, lag] of [[1, 1, 0], [0.6, -1, 0.08]]) {            // a wisp and a lesser one, curling the other way
-        const q = clamp((p - lag) / (1 - lag), 0, 1); if (q <= 0) continue;
-        const curl = sgn * (hash(i, 6) < 0.5 ? -1 : 1) * (1.2 + 1.0 * hash(i, 7 + k)) * easeOut(q);
-        ctx.globalAlpha = 1 - smooth(clamp((q - 0.25) / 0.75, 0, 1));
-        wispPath(ctx, hx, hy, th + sgn * 0.25, k * rr * (0.5 + 4.2 * easeOut(q)), curl, k * rr * (0.95 - 0.75 * q)); ctx.fill();
-      }
-    });
-    ctx.globalAlpha = 1; ctx.restore();
-  } else {                                                                   // the meteor, falling, faster as it comes
-    const s = clamp(t / Q.hit, 0, 1), e = 1 - Math.pow(s, 1.6), x = cx + Q.from[0] * e, y = cy + Q.from[1] * e;
-    const L = Math.hypot(...Q.from), ux = Q.from[0] / L, uy = Q.from[1] / L, m = Q.meteor, tl = Q.tail * (0.4 + 0.6 * s);
-    const gr = ctx.createLinearGradient(x, y, x + ux * tl, y + uy * tl);
-    gr.addColorStop(0, P.capCol); gr.addColorStop(0.45, P.capCol + 'B0'); gr.addColorStop(1, P.capCol + '00');
-    ctx.fillStyle = gr; ctx.beginPath(); ctx.moveTo(x - uy * m, y + ux * m); ctx.lineTo(x + ux * tl, y + uy * tl); ctx.lineTo(x + uy * m, y - ux * m); ctx.closePath(); ctx.fill();
-    ctx.fillStyle = P.capCol; ctx.beginPath(); ctx.arc(x, y, m, 0, TAU); ctx.fill();
+  const P = D.core, Q = PLANET, C = corePaths(), pal = planetPal(style, G), since = t - Q.hit, ad = fallGeom().end;
+  const land = pal.one ? C.land1 : C.land, sea = pal.one ? C.sea1 : C.sea;
+  ctx.save(); ctx.translate(V.cx, V.cy); ctx.scale(V.R, V.R);
+  ctx.save();
+  if (since > 0) {                                                           // knocked along the blow, and squashed along it
+    const kn = Q.knock.dist * Math.exp(-Q.knock.damp * since) * Math.sin(TAU * Q.knock.hz * since);   // (and stretched across),
+    const sq = Q.squash.k * Math.exp(-Q.squash.damp * since) * Math.cos(TAU * Q.squash.hz * since);   // each on a damped spring
+    const sx = 1 - sq, sy = 1 + 0.6 * sq, [a, b] = ad;
+    ctx.translate(a * kn, b * kn);
+    ctx.transform(1 + (sx - 1) * a * a + (sy - 1) * b * b, (sx - sy) * a * b, (sx - sy) * a * b, 1 + (sx - 1) * b * b + (sy - 1) * a * a, 0, 0);
   }
+  ctx.fillStyle = pal.sea; ctx.fill(C.sphere);
+  if (land) { ctx.fillStyle = pal.land; ctx.fill(land, 'evenodd'); }
+  if (since > 0) {
+    planetWaves(ctx, since, pal, C, sea, land);
+    planetCrater(ctx, t, pal);
+    planetCloud(ctx, t, since, pal, C);
+    if (since < Q.flash) planetFlash(ctx, since, pal);
+  }
+  ctx.restore();
+  sparks(ctx, t, pal);                                                       // the sky: the twinkle, the sparks, the meteor
+  if (t < Q.wind.at + Q.wind.dur) twinkle(ctx, t, pal);
+  const M = meteorAt(t);
+  if (M) { flame(ctx, M, t, pal); ball(ctx, M, pal); }
   ctx.restore();
 }
 function mixHex(a, b, k) {                                                   // two hex colours mixed, k of the way to b
   const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)), A = p(a), B = p(b);
   return '#' + A.map((v, i) => Math.round(v + (B[i] - v) * k).toString(16).padStart(2, '0')).join('');
 }
-function drawPlanetLoop(ctx, W, H, t, o) {                                  // the planet struck, looped, for the page
-  const G = GROUNDS[o.ground]; ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
-  const T = PLANET.last + 1.2; drawPlanet(ctx, view(W, H, W / 2, H / 2, Math.min(W, H) * 0.3), ((t % T) + T) % T, 'discs', G);
+function drawPlanetLoop(ctx, W, H, t, o) {                                  // the planet struck, looped, for the page: in
+  const G = GROUNDS[o.ground], T = PLANET.last + 1.2, n = Math.floor(t / T);   // colour, then in one colour (round 26)
+  ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
+  drawPlanet(ctx, view(W, H, W / 2, H / 2, Math.min(W, H) * 0.3), t - n * T, o.style || (n % 2 ? 'even' : 'discs'), G);
   return 2 * T;
 }
 
@@ -1765,13 +1949,13 @@ if (!location.hash.startsWith('#capture')) {
     printer: 'Printer: a head shuttles across and back, a band lower each pass, and leaves the finished globe in its wake.',
     gyro: 'Gyroscope: the globe spins half a turn on its axis like a gyroscope\'s rotor, slowing until it rests, whole and upright. Then it leans to the Earth\'s 23.4 degrees, a little past and back.',
     kick: 'Kick: seen from above the pole, the globe is a speaker: rings round one centre, the meridians its spokes. It kicks twice, then tips down to the Earth\'s tilt.',
-    coin: 'Coin: it spins on its edge, a new face each half turn at one steady beat (under three flashes a second): the six colours round the colour wheel, yellow to green, then it lands on the globe, whose facing disc is green, and leans.',
+    coin: 'Coin: it spins on its edge as a real coin does, slowing a little, a new face each half turn (never more than three flashes a second): the six colours round the colour wheel, yellow to green. The globe comes round, the coin tips over and rolls on its rim, wobbling faster the lower it leans, as Euler\'s disk does, and lands face up, the globe upright; then it leans.',
     roll: 'Roll: the globe rolls in from the right like a ball, turning as it goes, slows to a stop and rocks back into its lean.',
     rise: 'Earthrise: the whole globe rises from behind a horizon, slowing as it clears it; then it tilts.',
     download: 'Download: the globe arrives as a picture did over a modem in 1999, an interlaced GIF: coarse blocks at once, then each pass finer, sweeping down, until it is sharp; then it tilts.',
     open: 'Open: the globe begins as the flat globe icon, each disc edge on, a line. Each turns about its line and opens into its disc, a beat after the last; then the globe tilts.',
     iris: 'Iris: the finished globe, still and upright, opens out of its own centre in a circle, as a late-90s circle wipe; then it leans.',
-    planet: 'Planet: a violet meteor falls on the Earth; a white cloud bursts and the sea ripples, the cloud breaks into black wisps, and the crater shows, the meteor lodged in its core.' };
+    planet: 'Planet: a star twinkles; the meteor grows out of it, draws back and falls on an arc, stretching as it speeds up, and splats on the North Atlantic. A starburst for two frames; the Earth squashes and springs back; a shock runs over it and the sea ripples. A white cloud pops up puff by puff, chars to black from the middle out and is eaten away into curling crescents, and the crater springs open, the meteor dropping into its core, white-hot, cooling to violet. In black and white it is knock-outs, as the mark is.' };
   const capText = document.getElementById('cap-text'), screen = document.getElementById('screen');
   function segs(id, key) {
     const el = document.getElementById(id);
@@ -1833,11 +2017,12 @@ def standalone():
 
 
 # round 25: the seven idents (the Coin, the Gyroscope, Earthrise, Open, Iris, Roll and Download) in the discs and the acrylic, each
-# on paper and on night, and in the lines; the Death Star kicking; the loader and the cursor as round 22 made them
-# (round 23's printer, kick and tubes MP4s stay)
+# on paper and on night, and in the lines; the Planet in colour (round 26: and in black and white) on both; the Death Star
+# kicking; the loader and the cursor as round 22 made them (round 23's printer, kick and tubes MP4s stay)
 SCENE_SET = [('ident', dict(kind=k, style=st, ground=g)) for k in ('coin', 'gyro', 'rise', 'open', 'iris', 'roll', 'download')
              for st, g in (('discs', 'paper'), ('discs', 'night'), ('acrylic', 'paper'), ('acrylic', 'night'), ('even', 'paper'))] + [
              ('ident', dict(kind='planet', style='discs', ground='paper')), ('ident', dict(kind='planet', style='discs', ground='night')),
+             ('ident', dict(kind='planet', style='even', ground='paper')), ('ident', dict(kind='planet', style='even', ground='night')),
              ('core', dict(ground='night')), ('core', dict(ground='paper')),
              ('loader', dict(ground='night')), ('loader', dict(ground='paper')), ('cursor', dict(ground='night'))]
 

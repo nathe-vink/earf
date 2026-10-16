@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 25**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 26**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -50,7 +50,125 @@ six discs alone, with no fill, makes the acrylic the discs see-through, each a s
 Coin flash the six colours before it lands on the globe, adds five idents (Open, Iris, Roll, Download and the Planet,
 a meteor striking the Death Star), puts the Earth on the Death Star, and builds a pipeline that storyboards the
 brand's motion for a fresh critic to judge, round by round. It also makes the site's colour section a speaker's page,
-where the colour you pick sets what goes with it.
+where the colour you pick sets what goes with it. Round 26 draws the Planet again as early Disney would have drawn it,
+beat by beat by the animators' principles, and in black and white; gives the Coin a real coin's physics, spinning,
+tipping and wobbling down face up; and narrows the A, its crossbar lower.
+
+## Round 26: the Planet as early Disney would draw it, in black and white too, a real coin, and a narrower A (the owner's answers of 2026-10-16)
+
+| the owner's note | what changes |
+|---|---|
+| "You gotta really spruce up that planet animation. Pixar quality baby. Or at least early Disney" | **The Planet drawn again by the animators' principles**: a star twinkles and the meteor winds up out of it, falls on an arc, stretching, and splats; a starburst; the Earth squashes and springs back; a two-tone cloud pops up puff by puff, chars from the middle out and is eaten away into curling crescents; the crater springs open and the meteor drops into its core, white-hot, cooling to violet (below). |
+| (the cone's thump after the smoke, round 25's critic's idea) "Drop it" | **Gone.** |
+| (a black-and-white Planet) "Yes, add black and white" | **The Planet in black and white**, black on paper and white on ink, drawn in knock-outs as the mark is (below). The player's third style is now called Black & white, and the Planet's panel on the globe's page plays in colour, then in black and white. |
+| (the letters) "B: lower crossbar" | **The A narrower**: its feet 170 apart, not 210, so it is 270 wide, 1.29 times the R, with its crossbar 30 lower to keep the triangle inside open (below). |
+| (the Coin, "if done right") "Real coin physics" | **The Coin spins, tips and wobbles down as a real coin does**: it slows on its edge through its six colours, the globe's face comes round, and it falls flat with the wobble quickening, as Euler's disk does, landing face up (below). |
+
+### The Planet, as early Disney would draw it
+
+Each beat is one of the animators' principles (`earth.py` PLANET):
+
+- **Staging and anticipation.** The Earth whole, alone. A violet star twinkles in the sky to the upper right, a
+  four-point sparkle that spins in, a little past its size and back. At 0.24 seconds its long rays reach out in a
+  glint, and the meteor grows out of it, a violet ball with a lighter leading face, and draws back, squashed, as if
+  gathering itself.
+- **Arcs, slow in, squash and stretch.** It falls on a bowed path, faster all the way, stretched along it by its speed.
+  A flame streams behind it along the arc, a light violet ribbon round a violet one, both tapering, their edges
+  flickering, and it sheds sparks that drift off and shrink. On the frame it strikes the North Atlantic it splats flat
+  (0.6 seconds).
+- **Timing.** At 0.62 seconds a starburst, Fog white with a pale yellow star inside, for two frames, the second
+  smaller: one flash, well under three a second.
+- **Follow-through.** The Earth squashes along the blow and springs back past round and round again, knocked along
+  the blow and back. A thin shock runs out over land and sea.
+- **Solid drawing.** Three ripples cross the sea (not the land), each a light crest with a dark trough behind it,
+  drawn as circles on the sphere, so they foreshorten as a ball's would.
+- **Overlapping action.** A white cloud pops up puff by puff from its middle out, each puff past its size and back,
+  and billows. It is shaded in two tones, as a cel is: Fog lit from the upper left over a cool shadow. From 1.02
+  seconds it chars from the middle out, each puff through a beat of grey to flat Smoke black, swelling as it turns.
+- **The wisps.** The smoke is eaten away from its middle out: each puff is bitten from its inner side by a growing
+  circle, so a hole opens over the dish first and the last of the smoke is crescents curling round it, thinning to
+  nothing. No fades, as early Disney's smoke went by breaking up, and the crescents are the mark's own circles. The
+  black wisps, as you asked for them. By 1.49 seconds the planet is clean.
+- **Secondary action and the payoff.** As the smoke clears, the crater springs open ring by ring, each a beat after
+  the last, past its size and back, its bowl sinking past its depth and settling. Then the meteor drops into the core,
+  big as if near, and bounces to rest, white-hot, cooling to violet. The crater holds a beat on the clean planet; at
+  1.61 seconds the planet moves aside and EARF is wiped in, as every ident ends. 3.76 seconds in all.
+
+The thump is gone, as you said. Several ways of drawing the smoke were tried before these crescents: claw-like wisps
+(round 25), chains of beads (tadpoles), tapering ribbons (bananas), and puffs shrinking to dots (a ring of black
+spots). Eating the flat smoke away from its middle was the one that read as smoke clearing.
+
+A fresh critic judged it (6.0 blind, up from round 25's 5.5; projected 7.2). Its keep: "the story draws the mark: the
+violet sparkle becomes the meteor, the strike makes the dish, and the meteor stays as its violet core into the
+lockup". All eight of its changes are in. The meteor is larger (0.085 to 0.12 of the radius; it was a speck carrying
+the whole story) and launches on the glint, striking 0.1 seconds sooner, so the white cloud is a stage of its own. Its
+fall eases in less, so it is on its way by 0.43 seconds. Five fat puffs make the cloud's edge, not eight small ones,
+which read as beads and left a dozen lashes of smoke. The smoke goes in 0.3 seconds, not 0.42, so the crater stands
+clean before the move. The ripples and the shock end well inside the edge: run out to the limb, their arcs read as a
+plate's rim and a doubled outline. Its tests pass on the new sheets, on paper, on ink and in black and white
+(`critic/rounds/2026-10-16/brand-planet-r2.json`, `critic/LOG.md`).
+
+![The Planet, frame by frame](brand/earth-planet-r26.png)
+
+### The Planet in black and white
+
+Black on paper, white on ink, in knock-outs, as the figure is (`earth.py` planetPal). The planet is solid. The land,
+the ripples' crests, the cloud and the starburst are in the ground's colour, outlined in the figure's where they cross
+the ground. The smoke, the meteor and the cone are solid, with gaps; the flame's outer ribbon is an outline. It reads
+as a 1930 cartoon: a black planet, a paper cloud with ink crescents between its puffs, the crater a bullseye in the
+North Atlantic. One question from the critic is yours: on the black sea, black smoke shows only by its paper gaps, so
+there the wisps read as paper outlines. Keep that, or let the smoke turn to the ground's colour where it crosses the
+sea.
+
+![The Planet in black and white](brand/earth-planet-bw-r26.png)
+
+`earth.py --video` writes the Planet in colour and in black and white, on paper and on ink
+(`brand/earth-ident-planet-<discs|even>-<paper|night>.mp4`).
+
+### The Coin, with a real coin's physics
+
+The Coin spins on its edge as a real coin does on a table. It slows a little as friction takes it, each half turn a
+touch longer than the last, the first 0.34 seconds, so it never flashes faster than three times a second. Each half
+turn shows a new face, as before: yellow, orange, red, violet, blue, green, round the colour wheel. The globe's face
+comes round next, and the coin tips over. It rolls round on its rim, and the lower it leans, the faster it wobbles, as
+Euler's disk does: its lean falls as the square root of the time left, and the wobble, once the coin can no longer
+turn its back to you, quickens to 34 radians a second, about five and a half turns a second, by the time it lies
+flat. Its face hardly turns while the wobble whirls, as a real coin's does: it turns at the wobble's rate times one
+less the cosine of the lean, so not at all once it lies flat. The view sits a little above the coin while it spins,
+so the face reads as a disc seen from above, and rises over it as it falls, so the coin lands face up, facing you,
+the globe upright. Its last turn is eased into the fall. Then it leans to the Earth's tilt, as every ident ends.
+
+It starts to tip just after the globe's face shows edge on, so the coin turns its back to you no more: six edge-ons in
+all, never more than three in any second (worked out in `coinTable`, `earth.py`). The face is the whole coin drawn in
+3D, the globe on it in its projection, so it works in the discs, the acrylic and the lines. The ident runs 5.2
+seconds, half a second longer than round 25's, for the wobble.
+
+![The Coin, frame by frame](brand/earth-coin-r26.png)
+
+### The letters: the A narrower, its crossbar lower
+
+As you chose: **B, the lower crossbar**. The A's legs stay 100 wide, as heavy as the stems, their feet 170 apart, not
+210, so the A is 270 wide, not 310: 1.29 times the R, not 1.48. With the legs closer, a crossbar on the 185 line would
+all but close the triangle inside, so the crossbar sits 30 lower, from 215 to 285. It runs from the middle of one leg
+to the middle of the other at its top, so its ends stay inside the legs. The triangle inside is about as open as
+before, its tip 39 above the crossbar. The A's crossbar no longer lines up with the E's and the F's middle bars, which
+end on the 185 line with the R's bowl, the one rule this gives up (`marks.py` `_wordmark`). The word is 980 wide, not
+1020.
+
+Everything drawn from the wordmark follows: the lockups (`brand/earth-lockup-*.svg`, `marks/earf*.svg`), the
+globe's page and its idents, the site's logo and the brand sheets. The speaker's CAD placed EARF by the old width
+(1020), so it now reads the width from the wordmark (`product.py` `wordmark_height`). The renders of the speakers keep
+the old A until they are next rendered, and so does the look book's cover, which you have kept as it is for now.
+
+![EARF, the A narrower](brand/earth-wordmark-r26.png)
+
+### The idents now
+
+Every ident ends as before: the whole globe, upright, leaning to the Earth's tilt, then aside, and EARF (its narrower
+A now) wiped in beside it. The Coin runs 5.2 seconds (round 25: 4.7) and the Planet 3.76 (3.3); the others are as
+round 25 left them. All of them were rendered again for the new A.
+
+![The idents, frame by frame](brand/earth-idents-r26.png)
 
 ## Round 25: blue and green, the acrylic see-through, the coin's colours, and a pipeline to critique the brand (the owner's answers of 2026-10-15)
 
@@ -129,7 +247,7 @@ stacked now, every crossing deeper than its sheets.
 
 ![The acrylic, on paper](brand/earth-acrylic-multi.svg) ![On ink](brand/earth-acrylic-ink.svg)
 
-### The idents
+### The idents (the Coin and the Planet redone in round 26)
 
 Every ident still ends on the whole globe, upright, and leans to the Earth's 23.4 degrees. The lean is one shared
 gesture: 0.3 seconds, going a little past 23.4 and settling back, as a gyroscope finds its axis. It begins before the
@@ -216,7 +334,7 @@ where it crosses the Earth, and is gone by 0.45 seconds. Then half a second of s
 
 ![The kick, frame by frame, with its motion trace](brand/earth-core-kick-r25.png)
 
-### The Planet: the meteor
+### The Planet: the meteor (drawn again in round 26)
 
 A new ident made from the Death Star. It starts on the Earth whole, with no crater. A violet meteor falls on the North
 Atlantic from the upper right, faster as it comes, a long tail behind it. At the hit (0.45 seconds) a white cloud
@@ -263,7 +381,7 @@ Round 25 ran it on three subjects, and on the Planet once it was made:
 | The Death Star | 5.5 (projected 7.0) | 5.5 (7.0) | 5.5 (7.0) |
 | The acrylic | 5.0 (7.0) | 5.0 (6.8) | 4.5 (6.0) |
 | The idents | 6.0 (7.0) | 5.5 (6.5) | 5.5 (6.5) |
-| The Planet (new) | 5.5 (7.0) | | |
+| The Planet (new) | 5.5 (7.0) | 6.0 (7.2), round 26's redraw | |
 
 The blind scores stay flat while each critic projects a point or so more. Each round fixes what one critic saw, and
 the next, fresh critic finds the next thing. The acrylic's third critic scored it lowest of all, though it found the
@@ -271,7 +389,7 @@ rule finally reads as the discs made transparent: it marked the acrylic down for
 (in one colour it is the lines, by your rule) and for the Gyroscope's timing. The log says what each round asked for
 and what was done.
 
-### The letters
+### The letters (B chosen in round 26)
 
 EARF's letters are each as wide as their shape needs (round 19): on a cap height of 300, the E is 200, the A 310, the R
 210 and the F 190. The A is the widest on purpose. Its legs are as heavy as the stems (100) and meet in a flat top, so

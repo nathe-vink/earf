@@ -688,6 +688,14 @@ def wordmark_outlines(width):
     return out
 
 
+def wordmark_height(width):
+    """The wordmark's height when it is `width` wide (its cap height, 300, of marks.py's WORDMARK_W: round 26's narrower
+    A made it 980, not 1020)."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import marks as M
+    return width * 300 / M.WORDMARK_W
+
+
 def mark_solid(width, at, face, t):
     """The wordmark `width` wide as a solid `t` deep on a face of the cabinet: `face` '-y' (a front face, read from in
     front) or '+y' (a back face, read from behind, so drawn mirrored), `at` = (x of its middle, y of the face, z of its
@@ -786,23 +794,23 @@ def extras(P, out):
     for m in marks:
         if m == 'plate':
             b = bb('rating-plate')
-            add.append(Part('mark-plate', mark_solid(46.0, ((b.min.X + b.max.X) / 2, b.max.Y, b.max.Z - 8.0 - 46.0 * 300 / 1020), '+y', 0.1),
+            add.append(Part('mark-plate', mark_solid(46.0, ((b.min.X + b.max.X) / 2, b.max.Y, b.max.Z - 8.0 - wordmark_height(46.0)), '+y', 0.1),
                             Bought('rating-plate'), finish='etch', notes=['EARF laser-marked across the rating plate\'s top, 46 wide']))
         elif m == 'back':
-            add.append(Part('mark-back', mark_solid(140.0, (W / 2, D, H - 72.0 - 140.0 * 300 / 1020), '+y', 0.1),
+            add.append(Part('mark-back', mark_solid(140.0, (W / 2, D, H - 72.0 - wordmark_height(140.0)), '+y', 0.1),
                             Bought('laser-etch'), finish=face_finish,
                             notes=[f'EARF {how}, 140 wide, high on the back, centred']))
         elif m == 'corner':
             b = bb('front-panel'); w = 60.0
-            add.append(Part('mark-corner', mark_solid(w, (b.max.X - 24.0 - w / 2, b.min.Y, b.max.Z - 24.0 - w * 300 / 1020), '-y', 0.1),
+            add.append(Part('mark-corner', mark_solid(w, (b.max.X - 24.0 - w / 2, b.min.Y, b.max.Z - 24.0 - wordmark_height(w)), '-y', 0.1),
                             Bought('laser-etch'), finish=face_finish, notes=[f'EARF {how}, 60 wide, into the front panel\'s top right corner']))
         elif m == 'edge':
             w = 52.0
-            add.append(Part('mark-edge', mark_solid(w, (W / 2, 0.0, (T - w * 300 / 1020) / 2), '-y', 0.1), Bought('laser-etch'),
+            add.append(Part('mark-edge', mark_solid(w, (W / 2, 0.0, (T - wordmark_height(w)) / 2), '-y', 0.1), Bought('laser-etch'),
                             finish='etch', notes=[f'EARF {etched}, 52 wide, centred in the bottom\'s front edge']))
         elif m == 'cap':
             cap = by['waveguide-cap'].solid; b = cap.bounding_box(); w = 64.0
-            plate = mark_solid(w, ((b.min.X + b.max.X) / 2, b.max.Y - 4.0, (b.min.Z + b.max.Z) / 2 - w * 150 / 1020), '+y', 4.12)
+            plate = mark_solid(w, ((b.min.X + b.max.X) / 2, b.max.Y - 4.0, (b.min.Z + b.max.Z) / 2 - wordmark_height(w) / 2), '+y', 4.12)
             skin = Pos(0, 0.12, 0) * cap - cap                    # a skin 0.12 deep on the cap's faces that look back
             add.append(Part('mark-cap', plate & skin, Bought('laser-etch'), finish='etch',
                             notes=[f'EARF {etched}, 64 wide, across the middle of the horn\'s cap, between its finger dimples']))

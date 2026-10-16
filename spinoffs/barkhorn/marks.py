@@ -145,17 +145,24 @@ def _wordmark():
       from the stem into the circle with no notch; the circle must also stay inside the stem's left edge, which sets the
       stems at 100 (round 18's 74 left a notch); every stem is 100, the E's and the F's too;
     - every bar starts at its stem's outer edge and runs flat, 70 deep;
-    - the middle bars (E, F) and the R's bowl end on one line, 185 down, where the A's crossbar starts;
+    - the middle bars (E, F) and the R's bowl end on one line, 185 down; the A's crossbar sits lower, 215 to 285 (round
+      26: with its legs closer, a crossbar on the 185 line would all but close the triangle inside), and runs from the
+      middle of one leg to the middle of the other at its top, so its ends stay inside the legs;
     - the diagonals (the A's legs, the R's leg) are as heavy as the stems measured square to their run, a little
       lighter across: 100 and 102 wide along the baseline;
     - each letter is as wide as its shape needs, as type is drawn (round 19, the owner: "should each of the letters be
-      the same width or no?"): the A widest (310), the R next (210, its bowl and leg), the E (200), the F narrowest (190,
-      its open foot would otherwise look wider)."""
+      the same width or no?"): the A widest (270), the R next (210, its bowl and leg), the E (200), the F narrowest (190,
+      its open foot would otherwise look wider). Round 25 the owner asked: "are the letters sized properly? It's a little
+      odd to me that the A is so wide relative to the R but maybe that's intentional"; of the three ways shown to close
+      the gap, round 26 chose "B: lower crossbar": the legs' feet 170 apart, not 210, so the A is 270 wide, not 310, 1.29
+      times the R, not 1.48, the triangle inside it as before."""
     s, h, mid = 100, 300, 185
     e = [('rect', 0, 0, s, h), ('rect', 0, 0, 200, 70), ('rect', 0, mid - 70, 175, mid), ('rect', 0, 230, 200, h)]
-    xa, span, w = 240, 210, 100                      # the A: two legs 100 wide, their feet 210 apart, leaning so their
-    lean = math.degrees(math.atan(span / 2 / h))     # tops coincide exactly
-    a = [slab(xa, h, w, h, lean), slab(xa + span, h, w, h, -lean), ('rect', xa + 92, mid, xa + 118 + w, mid + 70)]
+    xa, span, w, bar = 240, 170, 100, 215            # the A: two legs 100 wide, their feet 170 apart, leaning so their
+    lean = math.degrees(math.atan(span / 2 / h))     # tops coincide exactly; the crossbar's top 215 down, from leg middle
+    f = 1 - bar / h                                  # to leg middle there
+    a = [slab(xa, h, w, h, lean), slab(xa + span, h, w, h, -lean),
+         ('rect', xa + span / 2 * f + w / 2, bar, xa + span - span / 2 * f + w / 2, bar + 70)]
     xr = xa + span + w + 30
     r = [('rect', xr, 0, xr + s, h), ('circle', xr + s, mid / 2, mid / 2),   # the bowl's top on the stem's corner
          slab(xr + 108, h, 102, 170, -22)]           # the leg's foot ends at xr + 210, past the bowl's xr + 192.5
