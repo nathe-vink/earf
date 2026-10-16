@@ -10,13 +10,16 @@ see-through. This set is every version the brand prints, etches and shows: colou
 site, its look book, its boxes), black and white (one ink, flat: paper, print, an etch, an emboss; white out of dark
 grounds and photographs), and one in each speaker's own tint (that speaker's page, its box, its corner). Sheet 1 is the
 set, each version on the ground it shows on; sheet 2 seven of them at 300, 64, 32 and 16 px; sheet 3 the lockups with
-the wordmark EARF.
+the wordmark EARF; sheet 4 (round 27e) the spins, a frame every 0.4 s; sheet 5 (round 27e) the angle study.
 
 ## The owner's requirements, in their own words (fixed)
 
 - "Let's go with the acrylic globe and have a color version, a black version, and a white version, and a version for
   each speaker" (round 27, 2026-10-16), and after this card's round 1: "I like discs for monochrome and acrylic for
   multicolor". So black, white and each speaker's own are the seamed discs, flat; the colour is the acrylic.
+- After 27d trimmed the one-colour discs to the green disc: "I kind of like it untrimmed because it's true to the shape
+  of the combined discs. Maybe the angle Is wrong. Maybe if we add a spinning animation like a top it will help."
+  (round 27e)
 - "the logo has to work in white only, black only, single color, multicolor and animated" (round 22)
 - "The acrylic is meant to be a transparent version of the discs" and "For acrylic I was expecting each disc to have a
   little thickness to it" (round 25)
@@ -32,15 +35,27 @@ facing us the backing, a single disc its own flat colour, crossings stacked a st
 yellow south, green the meridian facing us, orange and violet the side meridians); the speakers' colours; the wordmark
 EARF and the lockup's proportions; the grounds (paper #F2EFEA, ink #121114).
 
+Open, for the owner (round 27e): the tip toward us, 22, against a lower one. Sheet 5 measures how far the tips reach
+past the front disc (of the radius): 0.07 at 22, about half at 16, 0.02 at 10, where the parallels close toward lines.
+Turning the globe on its axis only makes them reach further (0.19 at 30). Until the owner chooses, judge the mark at 22.
+
 ## The versions, and their parameters
 
 - Black, white and each speaker's own (after round 1): the seamed discs, flat, each speaker's on the ground where it
   holds 3:1. Every piece shrunk by half of `seam` (0.035 of the radius) on every side, the outline's too, so no band
   runs round the outside (the owner: "The stroke around the monochromatic ones looks odd. Don't think we need it");
-  pieces thinner than one and a half seams dropped; every piece first trimmed to the green disc, so no tips hang loose
-  at the edge ("there's weird clipping in that"). The acrylic's thickness is a crescent inside each disc's edge, its
-  cells the discs' faces and crossings alone ("clipping on the multicolor one wherever there is overlap"). Small cuts widen the seam to 0.05, 0.08 and 0.10 for marks up to
-  64, 32 and 16 px. Round 1 judged the acrylic's own one-colour forms, kept in the code:
+  pieces thinner than one and a half seams dropped; the tips kept, so the outline is the discs' own (round 27d trimmed
+  every piece to the green disc; the owner liked it untrimmed). The acrylic's thickness is a crescent inside each
+  disc's edge, its cells the discs' faces and crossings alone ("clipping on the multicolor one wherever there is
+  overlap"). Small cuts widen the seam to 0.05, 0.08 and 0.10 for marks up to 64, 32 and 16 px.
+- In motion (round 27e, new): the spin. The mark turns on its axis the Earth's way (the meridians round the pole, the
+  parallels still), `rate` 45 degrees a second (a turn in 8 s), each loop `turn` 180 degrees (4 s: every coloured disc
+  back in its place, so it loops without a seam and starts on the mark at rest), 30 frames a second, 720 px square
+  with the mark's clear space, `clear` a quarter of its width, round it. The top's version wobbles: its axis runs once a
+  loop round a circle `wobble` 5 degrees across that starts and ends at rest. In motion no piece is dropped (each
+  narrows into its seam) and the scale back to the discs' width is the seam's own, so nothing pops between frames.
+  Black and colour, each steady and as a top, as MP4 and WebM; sheet 4 is a frame every 0.4 s.
+- Round 1 judged the acrylic's own one-colour forms, kept in the code:
 - Black and white (one ink, no tints): a point is inked where an odd number of discs cover it (parity: the discs
   cancel where they cross, as two films do in one ink), the discs as flat ovals. Tried and left: a solid ball cut by
   every disc's outline as a seam (`seam` 0.035 of the radius), which read as any globe icon.

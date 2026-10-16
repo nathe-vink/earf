@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27d**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27e**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -55,7 +55,53 @@ where the colour you pick sets what goes with it. Round 26 draws the Planet agai
 beat by beat by the animators' principles; gives the Coin a real coin's physics, spinning,
 tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 27 settles the mark: the acrylic
 globe in colour and the seamed discs in black, in white and in each speaker's colour, as files for printers and
-makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, 27c takes the stroke from round the one-colour discs, and 27d takes out the clipping.
+makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, 27c takes the stroke from round the one-colour discs, and 27d takes out the clipping. Round 27e
+untrims the one-colour discs again, measures what the angle does to their tips, and spins the mark on its axis like a
+top.
+
+## Round 27e: the tips kept, the angle measured, and the mark spinning like a top (the owner's note of 2026-10-16)
+
+| the owner's note | what changes |
+|---|---|
+| "I kind of like it untrimmed because it's true to the shape of the combined discs. Maybe the angle Is wrong. Maybe if we add a spinning animation like a top it will help." | **The one-colour discs untrimmed again**, as in 27c. **The angle measured** (below): turning the globe never helps, and less tip toward us would, which is the owner's to choose. **The mark spins on its axis**, steady or wobbling as a top does, in black and in colour. |
+
+- **Untrimmed.** Round 27d's trim to the green disc is gone, so the outline is the six discs' own again, tips and
+  all. A piece thinner than one and a half seams is still dropped. The files, the mark's page and the globe page are
+  drawn again; the look book and the site carry only the colour version, which has not changed.
+- **The angle.** A tip is where a disc's rim meets the globe's outline. Every disc's rim meets it somewhere, but the
+  front disc (the green meridian, the largest) meets it only at its two ends, so near the others' meeting points
+  their rims stand past it. How far, as a share of the radius: 0.07 at rest. Turned on the axis it only gets worse,
+  0.09 at 10°, 0.13 at 20° and 0.19 at 30° (halfway to the next meridian, where one meridian is edge on), then back.
+  The lean, the Earth's 23.4°, only turns the picture, so it changes nothing. The tip toward us is what counts: 0.02
+  at 10°, 0.03 at 14°, 0.05 at 18°, 0.07 at 22° (now), 0.11 at 28° and 0.16 at 34°. Less tip also means flatter
+  parallels (at 10° they are near lines). The tip is part of the fixed geometry (the card's "the tip 22"), so it
+  stays at 22° until the owner chooses, and it would change every version, the colour one too
+  (`python3 spinoffs/barkhorn/mark.py --angles PATH`).
+- **The spin.** The globe turns on its tilted axis the Earth's way, the front going right. The meridians sweep round
+  the pole and the parallels stay put. One turn takes 8 seconds, at 30 frames a second. Each clip is half a turn
+  (4 seconds), which brings every coloured disc back to its own place, so it loops without a seam and starts on the
+  mark as it stands (in one colour it repeats every 60°). The top's version wobbles: its axis runs once a loop round a
+  circle 5° across that starts and ends at rest, as a spinning top's axis circles. Each frame keeps the mark's clear
+  space, a quarter of the globe's width on every side. The clips are in `brand/mark/`, 720 px square, as MP4 (for
+  Safari and every player) and WebM (half the size, for browsers built without H.264):
+  `earf-globe-<black|black-top|colour|colour-top>-spin` (`mark.py --spin`, `--spin-sheet PATH` for the sheet below).
+- **Nothing pops in motion.** Three things made the one-colour discs jump between frames. Dropping thin pieces made
+  them blink out. The hairline pass took a nearly edge-on disc's strip all at once. And scaling back to the discs'
+  width jolted the whole mark when a tip narrowed away at the edge. In motion no piece is dropped (it narrows away
+  into its seam), a strip the hairline pass would take whole is kept, and the scale is the seam's own (`keep` in
+  `earth.py` disc_shapes). At a tenth of a degree a step, no change is more than 1.3 times the typical one.
+- **A hole mended in the acrylic.** At a few angles, a face's last clip to the globe's outline (a shapely overlay)
+  dropped a whole cell, leaving a patch of paper for a frame. It never happened at rest, so the stills never showed
+  it. The overlays now snap to a grid of a millionth of the radius (`GRID`), and a check over the whole half turn,
+  every tenth of a degree, found no hole. The stills are the same to the eye: 661 pixels in a million moved, along one
+  rim, at 1024 px.
+
+Drawn again: the mark's files and page (version 6, with the spins and the angle question) and the globe page
+(version 22).
+
+![The angle: turned on its axis, then tipped toward us, in one colour and in colour, with how far the tips reach](brand/earth-mark-angles-r27e.png)
+
+![The spins, a frame every 0.4 seconds: black, black as a top, colour, colour as a top](brand/earth-mark-spin-r27e.png)
 
 ## Round 27d: the clipping taken out (the owner's note of 2026-10-16)
 
@@ -67,7 +113,8 @@ makers; puts it on the look book and the site; and parks the idents. Round 27b g
   came out as loose blobs and slivers round the edge once the band was gone. Now every piece is trimmed to the green
   disc first, then shrunk by half a seam on every side (`earth.py` disc_shapes): the outline is that disc's own, a
   smooth oval as wide as the discs and 5 % less tall, with the same gap between every piece and round it. Tried:
-  joining the tips to the green piece, which made lumpy hoods at the top.
+  joining the tips to the green piece, which made lumpy hoods at the top. (Undone in round 27e: the owner liked the
+  discs' own shape better.)
 - **The acrylic.** Each slab's side stood outside its disc and was sorted on its own plane, so wherever two discs
   crossed it was cut into wedges and slivers along lines that were not the discs'. Now the cells are the discs' faces
   alone, cut by their outlines and their own crossings, and the thickness is a crescent just inside each disc's edge,

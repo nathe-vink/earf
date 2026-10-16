@@ -26,11 +26,20 @@ master, at 64 px and under the small cut for that size; the colour never below 2
 
     python3 spinoffs/barkhorn/mark.py [--sheet PATH] [--sizes PATH]   also a sheet of the set, each on its ground, and
                                                                       a sheet of sizes (300, 64, 32 and 16 px)
+
+Round 27e (the owner: "Maybe if we add a spinning animation like a top it will help") adds the mark in motion and a
+study of its angle:
+
+    brand/mark/earf-globe-<black|black-top|colour|colour-top>-spin.<mp4|webm>   the globe spinning on its axis, steady
+                                                                               or wobbling as a top, 4-second loops
+    python3 spinoffs/barkhorn/mark.py --spin [TAG ...] [--spin-sheet PATH] [--angles PATH]
 """
 import argparse, os, subprocess, sys, tempfile
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
+from shapely.geometry import Point, Polygon
+from shapely.ops import unary_union
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -146,10 +155,139 @@ def sheet(path):
     subprocess.run([sys.executable, os.path.join(HERE, 'storyboard.py'), 'svgs', *args, '--cols', '6', '--out', path], check=True)
 
 
+# Round 27e. The owner, of the one-colour discs untrimmed: "I kind of like it untrimmed because it's true to the shape
+# of the combined discs. Maybe the angle Is wrong. Maybe if we add a spinning animation like a top it will help." So the
+# mark spins on its axis as a top does: the meridians turn about the pole, the Earth's way (west to east, the front
+# going right), while the parallels, round it, stay. `rate` degrees a second (a turn in 8 s); each loop `turn` degrees,
+# the least that brings every disc of the colour back to its own place (one colour repeats every 60). The top's own
+# version wobbles: its axis runs once a loop round a circle `wobble` degrees across that starts and ends at rest, so
+# the loop still begins on the mark as it stands. In motion no part is dropped (earth.disc_shapes' `keep`). Each frame
+# keeps the mark's clear space, `clear` of the globe's width on every side (the rule on the mark's page).
+SPIN = dict(rate=45.0, turn=180.0, fps=30, px=720, wobble=5.0, clear=0.25)
+SPINS = [('black', 'discs', E.INK, E.PAPER, 0.0), ('black-top', 'discs', E.INK, E.PAPER, SPIN['wobble']),
+         ('colour', 'acrylic', E.RING, E.PAPER, 0.0), ('colour-top', 'acrylic', E.RING, E.PAPER, SPIN['wobble'])]
+
+
+def _wobble(beta, f):
+    """The axis's lean off its rest at `f` of the loop: round a circle `beta` degrees across through rest, the way it
+    spins. As earth.WOBBLE: degrees, and the direction (radians) the axis turns about."""
+    p = 2 * np.pi * f
+    d1, d2 = beta / 2 * (1 - np.cos(p)), -beta / 2 * np.sin(p)      # toward e1 (us) and e2 (across), from rest
+    return [float(np.hypot(d1, d2)), float(np.arctan2(d2, d1) + np.pi / 2)]
+
+
+def spin_svg(style, cols, bg, spin, wobble=(0.0, 0.0), keep=0, clear=None):
+    """One frame: the mark turned `spin` degrees on its axis, its axis leaning as `wobble` (earth.WOBBLE); with `clear`,
+    framed with that share of the globe's width clear on every side, else as mark_svg frames it."""
+    if abs(spin % 60 - 30) < 1e-3:                       # a meridian exactly edge on drops out of facets (it hides nothing,
+        spin += 2e-3                                     # but its seam is lost for a frame); a hair past, it is the line
+    E.WOBBLE[:] = wobble
+    try:
+        body = (E.acrylic_body(cols, 'night' if bg == E.NIGHT else 'paper', spin=spin) if style == 'acrylic' else
+                E.discs_body([cols] * 6, spin=spin, flush=False, keep=keep))
+    finally:
+        E.WOBBLE[:] = [0.0, 0.0]
+    e = 1 + 2 * clear if clear else 1 + E.W_LINE / 2
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-e:.4f} {-e:.4f} {2 * e:.4f} {2 * e:.4f}">'
+            f'<rect x="{-e:.4f}" y="{-e:.4f}" width="{2 * e:.4f}" height="{2 * e:.4f}" fill="{bg}"/>{body}</svg>')
+
+
+def _spin_frame(job):
+    path, style, cols, bg, turned, wobble = job
+    open(path[:-4] + '.svg', 'w').write(spin_svg(style, cols, bg, turned, wobble, clear=SPIN['clear']))
+    subprocess.run(['rsvg-convert', '-w', str(SPIN['px']), '-h', str(SPIN['px']), path[:-4] + '.svg', '-o', path], check=True)
+    os.unlink(path[:-4] + '.svg')
+
+
+def spin(out=OUT, only=()):
+    """The spins, each a seamless loop: brand/mark/earf-globe-<tag>-spin.mp4 (H.264, for Safari and every player) and
+    .webm (VP9, half the size, for the browsers built without H.264)."""
+    from multiprocessing import Pool
+    n = round(SPIN['turn'] / SPIN['rate'] * SPIN['fps'])
+    files = []
+    for tag, style, cols, bg, beta in SPINS:
+        if only and tag not in only:
+            continue
+        with tempfile.TemporaryDirectory() as tmp:
+            jobs = [(os.path.join(tmp, f'f{i:04d}.png'), style, cols, bg, SPIN['turn'] * i / n, _wobble(beta, i / n))
+                    for i in range(n)]
+            with Pool() as pool:
+                pool.map(_spin_frame, jobs)
+            src = ['ffmpeg', '-v', 'error', '-y', '-framerate', str(SPIN['fps']), '-i', os.path.join(tmp, 'f%04d.png')]
+            f = os.path.join(out, f'earf-globe-{tag}-spin')
+            subprocess.run(src + ['-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-tune', 'animation', '-pix_fmt', 'yuv420p',
+                                  '-movflags', '+faststart', f + '.mp4'], check=True)
+            subprocess.run(src + ['-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '30', '-row-mt', '1', '-pix_fmt', 'yuv420p',
+                                  '-fflags', '+bitexact', '-flags:v', '+bitexact', f + '.webm'], check=True)   # (no random ids)
+            files += [f + '.mp4', f + '.webm']
+    return files
+
+
+def spin_sheet(path, every=0.4):
+    """The spins on one sheet, a frame `every` seconds across each loop, drawn as the videos are."""
+    font, small = ImageFont.truetype('DejaVuSans.ttf', 15), ImageFont.truetype('DejaVuSans.ttf', 12)
+    secs = SPIN['turn'] / SPIN['rate']
+    ts = [k * every for k in range(round(secs / every))]
+    px, lw = 160, 130
+    sheet = Image.new('RGB', (lw + len(ts) * (px + 6), 10 + len(SPINS) * (px + 28)), '#DEDCD7')
+    d = ImageDraw.Draw(sheet)
+    for r, (tag, style, cols, bg, beta) in enumerate(SPINS):
+        y = 10 + r * (px + 28)
+        d.text((12, y + px // 2 - 8), tag.replace('-top', ', as a top'), fill='#1C1A18', font=font)
+        for i, t in enumerate(ts):
+            f = t / secs
+            svg = spin_svg(style, cols, bg, SPIN['turn'] * f, _wobble(beta, f), clear=SPIN['clear'])
+            sheet.paste(_png(svg, px, bg), (lw + i * (px + 6), y))
+            d.text((lw + i * (px + 6), y + px + 4), f'{t:.1f} s', fill='#57534C', font=small)
+    sheet.save(path)
+
+
+def tips(spin=0.0):
+    """How far the tips reach, of the radius: the discs' edges past the largest disc, where they meet the globe's
+    outline."""
+    discs = [Polygon(g['pts'][:, :2]).buffer(0) for g in E.rings(spin)]
+    big = max(discs, key=lambda d: d.area)
+    out = unary_union(discs).difference(big)
+    return max((big.exterior.distance(Point(c)) for p in getattr(out, 'geoms', [out]) if p.area > 2e-4
+                for c in p.exterior.coords), default=0.0)
+
+
+def angles(path):
+    """Round 27e's angle study: the one-colour discs turned on their axis through 60 degrees (all there is before they
+    repeat), then the tip toward us from 10 to 34 degrees in one colour and in colour (the lean only turns the picture,
+    so it is not here); under each, how far the tips reach past the largest disc."""
+    font, small = ImageFont.truetype('DejaVuSans.ttf', 15), ImageFont.truetype('DejaVuSans.ttf', 12)
+    px, cw, lw = 230, 250, 200
+    rows = [('Turned on its axis', [(s, E.ELEV, 'discs') for s in (0, 10, 20, 30, 40, 50)]),
+            ('Tipped toward us', [(0, t, 'discs') for t in (10, 14, 18, 22, 28, 34)]),
+            ('Tipped, in colour', [(0, t, 'acrylic') for t in (10, 14, 18, 22, 28, 34)])]
+    sheet = Image.new('RGB', (lw + 6 * cw, 20 + len(rows) * (px + 64)), '#DEDCD7')
+    d = ImageDraw.Draw(sheet)
+    for r, (title, cells) in enumerate(rows):
+        y = 20 + r * (px + 64)
+        d.text((16, y + px // 2 - 8), title, fill='#1C1A18', font=font)
+        for i, (s, t, style) in enumerate(cells):
+            tilt = [t - E.ELEV, np.pi / 2]                # another tip: the whole globe turned about e2, across the picture
+            svg = spin_svg(style, E.RING if style == 'acrylic' else E.INK, E.PAPER, s, tilt, keep=1.5)   # as it stands
+            E.WOBBLE[:] = tilt
+            reach = tips(s)
+            E.WOBBLE[:] = [0.0, 0.0]
+            x = lw + i * cw
+            sheet.paste(_png(svg, px, E.PAPER), (x, y))
+            now = s == 0 and t == E.ELEV
+            d.text((x, y + px + 6), (f'turned {s}°' if r == 0 else f'tip {t}°') + (' (now)' if now else ''),
+                   fill='#1C1A18', font=font)
+            d.text((x, y + px + 26), f'tips reach {reach:.2f} of the radius', fill='#57534C', font=small)
+    sheet.save(path)
+
+
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--sheet', help='also a sheet of the set, each on its ground, to this path')
     ap.add_argument('--sizes', help='also a sheet of the sizes, to this path')
+    ap.add_argument('--angles', help="also round 27e's angle study, to this path")
+    ap.add_argument('--spin', nargs='*', help='also the spins (MP4 and WebM in brand/mark), or only those whose tags are named')
+    ap.add_argument('--spin-sheet', help='also a sheet of the spins, a frame every 0.4 s, to this path')
     a = ap.parse_args()
     fs = write()
     print(f'{len(fs)} SVGs and PNGs in', os.path.relpath(OUT, HERE))
@@ -159,3 +297,12 @@ if __name__ == '__main__':
     if a.sizes:
         sizes(a.sizes)
         print(a.sizes)
+    if a.angles:
+        angles(a.angles)
+        print(a.angles)
+    if a.spin is not None:
+        for f in spin(only=a.spin):
+            print(os.path.relpath(f, HERE))
+    if a.spin_sheet:
+        spin_sheet(a.spin_sheet)
+        print(a.spin_sheet)

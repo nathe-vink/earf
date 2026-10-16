@@ -132,17 +132,28 @@ W_TUBE = 0.105
 TUBE = dict(core=0.45, wall=0.8, wall_at=0.36, wall_w=0.28, hi=(-0.16, -0.2, 0.12, 0.9), far=0.5, fade=0.5, shine=0.3)
 _GRAD = [0]                                              # gradient ids, unique across a page of many marks
 NIGHT = '#121114'                                        # the ink ground
+WOBBLE = [0.0, 0.0]                                      # round 27e, the spin: the axis tipped this many degrees toward
+                                                         # this direction round it (radians), as a top's wobbles
+GRID = 1e-6                                              # round 27e: the overlays snapped to this grid (of the radius).
+                                                         # Unsnapped, a face's last clip to the globe's outline could
+                                                         # drop a whole cell at a few angles, a hole for one frame
 
 
 def basis(lean=LEAN, elev=ELEV):
-    """The globe's axis and its longitude 0 and 90 directions on screen (x right, y up, z toward us)."""
+    """The globe's axis and its longitude 0 and 90 directions on screen (x right, y up, z toward us); with a WOBBLE, all
+    three turned so the axis leans that far toward that direction (mark.py's spin sets it frame by frame)."""
     t, e = math.radians(lean), math.radians(elev)
 
     def rot(v):
         x, y, z = v
         y, z = y * math.cos(e) - z * math.sin(e), y * math.sin(e) + z * math.cos(e)
         return np.array([x * math.cos(t) + y * math.sin(t), -x * math.sin(t) + y * math.cos(t), z])
-    return rot((0, 1, 0)), rot((0, 0, 1)), rot((1, 0, 0))
+    a, e1, e2 = rot((0, 1, 0)), rot((0, 0, 1)), rot((1, 0, 0))
+    beta, phi = WOBBLE
+    if beta:                                             # Rodrigues: each turned beta about w, square to the axis
+        w, b = math.cos(phi) * e1 + math.sin(phi) * e2, math.radians(beta)
+        a, e1, e2 = (v * math.cos(b) + np.cross(w, v) * math.sin(b) + w * np.dot(w, v) * (1 - math.cos(b)) for v in (a, e1, e2))
+    return a, e1, e2
 
 
 def rings(spin=0.0, n=360):
@@ -309,7 +320,7 @@ def facets(spin=0.0):
     return out
 
 
-def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004):
+def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=1.5):
     """Each disc's visible part as drawn. In colour the discs are flush (round 24b, the owner: "For the discs, I want
     them to not have strokes, so they are flush. The strokes should be the non-color versions"): each part whole, a
     hair (`lap`) larger than itself so no hairline of the ground shows between two, the globe's own edge kept exact.
@@ -319,36 +330,39 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004):
     the band round the outline that round 24b kept whole: every part is shrunk by half a seam on every side, the
     outline's sides too, so a seam of the ground lies between any two parts and round the outside alike; a part thinner
     than one and a half seams (a sliver of a disc's tip) is dropped; and the whole is scaled back to the discs' own
-    width. Round 27d (the owner: "there's weird clipping in that"): the tips of the other discs reaching past the green
-    disc (the meridian facing us, the largest) came out as loose blobs and slivers round the edge, so in one colour
-    every part is trimmed to the green disc first; the outline is that disc's own, as wide as the discs and 5 % less
-    tall. Returned as one shape, at index 0."""
+    width. (Round 27d trimmed every part to the green disc, the meridian facing us; the owner: "I kind of like it
+    untrimmed because it's true to the shape of the combined discs", so the tips stay.) `keep`: the thinnest part kept,
+    in seams; 0 in the spin (round 27e), where a part dropped at one and a half seams would pop out between two frames,
+    so it narrows away into the seam instead (and so is a part the hairlines' pass would take whole, as a disc nearly
+    edge on, a long strip, would be). Returned as one shape, at index 0."""
     fs = facets(spin)
     sil = unary_union([f for f in fs if not f.is_empty])
     if not flush:
-        green = Polygon(rings(spin)[ATMOS]['pts'][:, :2]).buffer(0)
-        fs = [f.intersection(green) for f in fs if not f.is_empty]
-        g = unary_union([f.buffer(-seam / 2, join_style=2, mitre_limit=4) for f in fs if not f.is_empty])
+        g0 = unary_union([f.buffer(-seam / 2, join_style=2, mitre_limit=4) for f in fs if not f.is_empty])
         k = 0.3 * seam                                   # (hairlines left where two buffers meet, closed)
-        g = g.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
-        g = unary_union([q for q in getattr(g, 'geoms', [g]) if not q.buffer(-0.75 * seam).is_empty])
-        s_ = (sil.bounds[2] - sil.bounds[0]) / (g.bounds[2] - g.bounds[0])
+        g = g0.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
+        if keep:
+            g = unary_union([q for q in getattr(g, 'geoms', [g]) if not q.buffer(-keep / 2 * seam).is_empty])
+            s_ = (sil.bounds[2] - sil.bounds[0]) / (g.bounds[2] - g.bounds[0])
+        else:                                            # (and scaled back by the seam itself: measured, a tip narrowing
+            g = unary_union([g] + [q for q in getattr(g0, 'geoms', [g0]) if not q.intersects(g)])
+            s_ = 1 / (1 - seam / 2)                      # away at the edge would jolt the whole for a frame)
         return [affinity.scale(g, s_, s_, origin=(0, 0)).simplify(0.001)] + [None] * (len(fs) - 1)
     out = []
     for f in fs:
         if f.is_empty:
             out.append(None); continue
-        g = f.buffer(lap, join_style=2, mitre_limit=4).intersection(sil).simplify(0.001)
+        g = f.buffer(lap, join_style=2, mitre_limit=4).intersection(sil, grid_size=GRID).simplify(0.001)
         parts = [q for q in getattr(g, 'geoms', [g]) if q.geom_type == 'Polygon' and q.area > 1e-6]
         out.append(unary_union(parts) if parts else None)
     return out
 
 
-def discs_body(colours, spin=0.0, flush=True, seam=SEAM):
+def discs_body(colours, spin=0.0, flush=True, seam=SEAM, keep=1.5):
     """The discs as SVG paths, flush in colour, seamed in one colour (disc_shapes); the discs alone (round 25: no ball
     filled under them)."""
     return ''.join(f'<path d="{_poly_d(g)}" fill="{colours[i]}" fill-rule="evenodd"/>'
-                          for i, g in enumerate(disc_shapes(spin, flush, seam=seam)) if g is not None)
+                          for i, g in enumerate(disc_shapes(spin, flush, seam=seam, keep=keep)) if g is not None)
 
 
 def _lighter(c, k):
@@ -615,8 +629,8 @@ def acrylic_body(colours, ground='paper', spin=0.0, n=720):
                 k[0] += lab * c.area; k[1] += c.area; k[2].append(c); break
         else:
             clusters.append([lab * c.area, c.area, [c]])
-    faces = sorted(((unary_union([c.buffer(0.0015, join_style=2) for c in k[2]]).intersection(sil), _from_oklab(k[0] / k[1]))
-                    for k in clusters), key=lambda t: -t[0].area)   # the laps: small cells over large
+    faces = sorted(((unary_union([c.buffer(0.0015, join_style=2) for c in k[2]]).intersection(sil, grid_size=GRID),
+                     _from_oklab(k[0] / k[1])) for k in clusters), key=lambda t: -t[0].area)   # the laps: small cells over large
     body = ''.join(f'<path d="{_poly_d(g.simplify(0.0008))}" fill="{col}" fill-rule="evenodd"/>' for g, col in faces)
     if w <= 0:
         return body
@@ -707,7 +721,7 @@ def acrylic_tint_body(colour, spin=0.0):
         n = len(sheets) + (1 if sheets[0][0] != colour else 0)          # a side shows _side's colour, not the tint
         tones.setdefault(n, []).append(c)
     sil = unary_union([c for cs in tones.values() for c in cs])
-    faces = sorted(((unary_union([c.buffer(0.0015, join_style=2) for c in cs]).intersection(sil), _from_lin(T ** n))
+    faces = sorted(((unary_union([c.buffer(0.0015, join_style=2) for c in cs]).intersection(sil, grid_size=GRID), _from_lin(T ** n))
                     for n, cs in tones.items()), key=lambda t: -t[0].area)
     return ''.join(f'<path d="{_poly_d(g.simplify(0.0008))}" fill="{col}" fill-rule="evenodd"/>' for g, col in faces)
 
