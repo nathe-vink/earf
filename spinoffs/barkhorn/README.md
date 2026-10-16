@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27b**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -55,7 +55,34 @@ where the colour you pick sets what goes with it. Round 26 draws the Planet agai
 beat by beat by the animators' principles; gives the Coin a real coin's physics, spinning,
 tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 27 settles the mark: the acrylic
 globe in colour and the seamed discs in black, in white and in each speaker's colour, as files for printers and
-makers; puts it on the look book and the site; and parks the idents.
+makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners.
+
+## Round 27b: the acrylic with the discs' own corners (the owner's note of 2026-10-16)
+
+| the owner's note | what changes |
+|---|---|
+| "The acrylic doesn't look right though in terms of having the same corners where discs meet" | **The acrylic's pieces and corners are now the discs' own**, the discs behind showing through them (below). |
+
+In the discs the nearest disc shows, so where two discs cross they meet along the line their planes share, and where
+three meet there is a sharp corner: the pinwheel at the middle, the red triangle at the top, the joints along the
+bottom. The acrylic mixed every crossing the same whichever disc was in front, as tinted filters do, so those lines
+and corners were gone and only the ovals' outlines showed; and each slab's face stood a little in front of its disc,
+so even its outlines sat off the discs'. Now:
+
+- **The nearest disc leads**: it keeps 0.8 of what shows, and the discs behind share the rest, nearest first
+  (`earth.py` `_acrylic`, ACRYLIC `lead` and `ghost`). So each piece is the discs' piece in that disc's colour, and
+  the discs behind show through it as fainter shapes, as through tinted acrylic. Each sheet behind is a step deeper
+  (`deep`, at most three).
+- **The thickness runs back**: each slab's face is the disc itself, so its outline and its crossings are the discs',
+  and its side shows behind it (`slabs`).
+- Tried: the nearest at 0.75 (the shapes behind too strong, the colours muddier) and 0.85 (barely see-through), and
+  each sheet behind 0.03 deeper (darker than the discs).
+
+The colour globe is drawn again everywhere it appears: the mark's files and page, the look book's cover and last page
+(version 44), the site's logo (version 10) and the globe page (version 19). The idents' player, parked, keeps round
+25's rule.
+
+![The discs, the acrylic now, and the discs' edges drawn over it](brand/earth-acrylic-corners-r27.png)
 
 ## Round 27: the mark settled, the acrylic globe in colour and the discs in one colour (the owner's answers of 2026-10-16)
 

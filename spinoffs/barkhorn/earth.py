@@ -98,8 +98,19 @@ RING_NAMES = ['Flare', 'Ice', 'Acid', 'Haze', 'Poison', 'Dust']
 # The owner after it: "For acrylic I was expecting each disc to have a little thickness to it": each disc a slab `thick`
 # thick (of the radius), its side, where we see it, a deeper tone of its tint (`side`, OKLab lightness lower; `sideC`,
 # the chroma raised), as a polished acrylic edge looks, light running the length of the sheet (slabs)
-ACRYLIC = dict(paper=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=0.10, sideC=0.15),
-               night=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=0.10, sideC=0.15))
+# Round 27b. The owner: "The acrylic doesn't look right though in terms of having the same corners where discs meet".
+# In the discs the nearest disc shows, so where two discs cross they meet along the line their planes share, with sharp
+# corners where three meet (the pinwheel at the middle, the red triangle at the top); the acrylic mixed every crossing
+# the same whichever disc was in front, so those lines and corners were gone, only the ovals' outlines left, and each
+# slab's face stood a little in front of its disc. So now the nearest disc leads (`lead` of what shows) and those behind
+# share the rest, nearest first, each keeping `ghost` of what is left: the discs' own pieces and corners, with the discs
+# behind showing through them; each sheet behind a step deeper (`deep`, OKLab lightness, at most three); and each
+# slab's face lies on its disc, its thickness running back (slabs). (`face`, `green`, `dark` and `smoke` are round 25's
+# rule, which the parked idents' player still draws.)
+ACRYLIC = dict(paper=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=0.10, sideC=0.15,
+                          lead=0.8, ghost=0.6, deep=0.02),
+               night=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=0.10, sideC=0.15,
+                          lead=0.8, ghost=0.6, deep=0.02))
 ATMOS = 4                                               # the meridian facing us (round 25: Poison, green, the land); in
                                                         # the acrylic, the backing. (Round 24b filled the ball in its
                                                         # colour; round 25, the owner: "this artificial green completing
@@ -412,20 +423,21 @@ def _side(c, A):
 
 def slabs(spin=0.0, h=0.025, n=360):
     """Round 25 (the owner: "For acrylic I was expecting each disc to have a little thickness to it"): each ring's disc
-    as a slab 2h thick about its own plane. m its normal turned toward us; `front` the oval of its face toward us (the
-    disc's own, moved h along m); `swept` the slab's whole outline on the picture (the hull of its two faces' ovals:
-    an oval swept along a line is convex), whose part outside `front` is the side we see; its depth z = al x + be y + g
-    on the front face (gf) and on its own plane (gm, for the side)."""
+    as a slab 2h thick. Round 27b: its face toward us is the disc itself, so its outline and its crossings are the
+    discs' own, and its thickness runs back from it, away from us. m its normal turned toward us; `front` the oval of
+    its face; `swept` the slab's whole outline on the picture (the hull of its two faces' ovals: an oval swept along a
+    line is convex), whose part outside `front` is the side we see; its depth z = al x + be y + g on the face (gf) and
+    halfway back (gm, for the side)."""
     out = []
     for g in rings(spin, n):
         m = g['n'] * (1.0 if g['n'][2] >= 0 else -1.0)
         if abs(m[2]) < 1e-6:
             out.append(None); continue
-        P, off = g['pts'][:, :2], h * m[:2]
-        front, back = Polygon(P + off).buffer(0), Polygon(P - off).buffer(0)
+        P, off = g['pts'][:, :2], 2 * h * m[:2]
+        front, back = Polygon(P).buffer(0), Polygon(P - off).buffer(0)
         K = float(np.dot(m, g['c']))
         out.append(dict(front=front, swept=unary_union([front, back]).convex_hull, al=-m[0] / m[2], be=-m[1] / m[2],
-                        gf=(K + h) / m[2], gm=K / m[2]))
+                        gf=K / m[2], gm=(K - h) / m[2]))
     return out
 
 
@@ -474,7 +486,26 @@ def acrylic_cells(colours, A, spin=0.0):
 
 
 def _acrylic(sheets, A):
-    """Round 25 (the acrylic critic's second and third rounds): what shows through the sheets crossed at a point,
+    """Round 27b: what shows through the sheets crossed at a point, nearest first, each (colour, whether it is the
+    green's face): the nearest leads (`lead`), those behind share the rest nearest first (each `ghost` of what is left,
+    the last all of it), mixed in OKLCh (_mix); a step deeper (`deep`) for each sheet behind, at most three. So the
+    pieces and corners are the discs' own, and the discs behind show through. As OKLab; None where there is no sheet."""
+    if not sheets:
+        return None
+    cols = [c for c, _ in sheets]
+    if len(cols) == 1:
+        return _oklab(cols[0])
+    w, keep, rest = [A['lead']], 1 - A['lead'], len(cols) - 1
+    for i in range(rest):
+        w.append(keep if i == rest - 1 else keep * A['ghost'])
+        keep *= 1 - A['ghost']
+    lab = _mix(cols, w)
+    lab[0] -= A['deep'] * min(rest, 3)
+    return lab
+
+
+def _acrylic25(sheets, A):
+    """Round 25 (the acrylic critic's second and third rounds; replaced in round 27b): what shows through the sheets crossed at a point,
     nearest first, each (colour, whether it is the green's face): the green's face the backing; the sheets in front of
     it sharing all of what shows (the nearest `face`, the next `face` of the rest, the farthest what is left); where none
     is, the green with the sheets behind it faint; where the green is not, the sheets alone. Stacked as tinted sheets
