@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27c**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27d**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -55,7 +55,30 @@ where the colour you pick sets what goes with it. Round 26 draws the Planet agai
 beat by beat by the animators' principles; gives the Coin a real coin's physics, spinning,
 tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 27 settles the mark: the acrylic
 globe in colour and the seamed discs in black, in white and in each speaker's colour, as files for printers and
-makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, and 27c takes the stroke from round the one-colour discs.
+makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, 27c takes the stroke from round the one-colour discs, and 27d takes out the clipping.
+
+## Round 27d: the clipping taken out (the owner's note of 2026-10-16)
+
+| the owner's note | what changes |
+|---|---|
+| "Rim 0 seems right but there's weird clipping in that and clipping on the multicolor one wherever there is overlap" | **No band round the one-colour discs, and no loose bits at their edge; the acrylic's crossings clean** (below). |
+
+- **One colour.** The tips of the other discs that reach past the green disc (the meridian facing you, the largest)
+  came out as loose blobs and slivers round the edge once the band was gone. Now every piece is trimmed to the green
+  disc first, then shrunk by half a seam on every side (`earth.py` disc_shapes): the outline is that disc's own, a
+  smooth oval as wide as the discs and 5 % less tall, with the same gap between every piece and round it. Tried:
+  joining the tips to the green piece, which made lumpy hoods at the top.
+- **The acrylic.** Each slab's side stood outside its disc and was sorted on its own plane, so wherever two discs
+  crossed it was cut into wedges and slivers along lines that were not the discs'. Now the cells are the discs' faces
+  alone, cut by their outlines and their own crossings, and the thickness is a crescent just inside each disc's edge,
+  where a slab's side would show, a deeper tone of its tint (`acrylic_cells`). It ends on the discs' lines like
+  everything else, and the outline is the discs' own. Tried: the sides sorted on their faces' planes (cleaner, still
+  stepped where two sides crossed) and no thickness at all (clean, but flat).
+
+Drawn again everywhere: the mark's files and page, the globe page (version 21), the look book's cover and last page
+(version 45) and the site's logo (version 11).
+
+![The acrylic now, the black now, and four of the acrylic's crossings close up](brand/earth-mark-clean-r27.png)
 
 ## Round 27c: no stroke round the one-colour discs (the owner's note of 2026-10-16)
 

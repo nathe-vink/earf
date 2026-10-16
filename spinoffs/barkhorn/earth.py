@@ -319,10 +319,15 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004):
     the band round the outline that round 24b kept whole: every part is shrunk by half a seam on every side, the
     outline's sides too, so a seam of the ground lies between any two parts and round the outside alike; a part thinner
     than one and a half seams (a sliver of a disc's tip) is dropped; and the whole is scaled back to the discs' own
-    width. Returned as one shape, at index 0."""
+    width. Round 27d (the owner: "there's weird clipping in that"): the tips of the other discs reaching past the green
+    disc (the meridian facing us, the largest) came out as loose blobs and slivers round the edge, so in one colour
+    every part is trimmed to the green disc first; the outline is that disc's own, as wide as the discs and 5 % less
+    tall. Returned as one shape, at index 0."""
     fs = facets(spin)
     sil = unary_union([f for f in fs if not f.is_empty])
     if not flush:
+        green = Polygon(rings(spin)[ATMOS]['pts'][:, :2]).buffer(0)
+        fs = [f.intersection(green) for f in fs if not f.is_empty]
         g = unary_union([f.buffer(-seam / 2, join_style=2, mitre_limit=4) for f in fs if not f.is_empty])
         k = 0.3 * seam                                   # (hairlines left where two buffers meet, closed)
         g = g.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
@@ -440,15 +445,62 @@ def slabs(spin=0.0, h=0.025, n=360):
         front, back = Polygon(P).buffer(0), Polygon(P - off).buffer(0)
         K = float(np.dot(m, g['c']))
         out.append(dict(front=front, swept=unary_union([front, back]).convex_hull, al=-m[0] / m[2], be=-m[1] / m[2],
-                        gf=K / m[2], gm=(K - h) / m[2]))
+                        gf=K / m[2], gm=(K - h) / m[2], back_off=(-off).tolist()))
     return out
 
 
 def acrylic_cells(colours, A, spin=0.0):
-    """The discs' slabs cut into cells in each of which the same faces and sides are crossed in the same order: cut by
-    every slab's front face and outline and, where two slabs both lie, by the lines along which they are at one depth
-    (face or side against face or side). Each cell with the sheets crossed there, nearest first: (colour, whether it is
-    the green's face, the backing)."""
+    """Round 27d (the owner: "clipping on the multicolor one wherever there is overlap"): the slabs' sides stood
+    outside the discs and were sorted on their own planes, so wherever two discs crossed they were cut into wedges and
+    slivers along lines that were not the discs'. Now the cells are the discs' faces alone, cut by their outlines, by
+    the lines where two faces are at one depth (the discs' own crossings) and by each face's crescent (crescents): its
+    thickness, seen just inside its edge where a slab's side would show, a deeper tone of its tint, so it ends on the
+    discs' own lines like everything else. Each cell with the sheets crossed there, nearest first: (colour, whether it
+    is the green's face)."""
+    h, S = A['thick'] / 2, []
+    for q in slabs(spin, h):
+        if q is None:
+            S.append(None); continue
+        off = -np.asarray(q['back_off'])                 # the crescent on the side where the slab's side shows
+        S.append(dict(q, cres=q['front'].difference(affinity.translate(q['front'], off[0], off[1]))))
+    lines = []
+    for q in S:
+        if q is not None:
+            lines += [LineString(np.asarray(q['front'].exterior.coords)), q['cres'].boundary]
+    for i in range(len(S)):
+        for j in range(i + 1, len(S)):
+            si, sj = S[i], S[j]
+            if si is None or sj is None:
+                continue
+            both = si['front'].intersection(sj['front'])
+            A_, B_ = si['al'] - sj['al'], si['be'] - sj['be']
+            m = math.hypot(A_, B_)
+            if both.is_empty or m < 1e-12:
+                continue
+            u = np.array([A_ / m, B_ / m]); t = np.array([-u[1], u[0]])
+            p0 = -(si['gf'] - sj['gf']) / m * u
+            seg = LineString([p0 - 3 * t, p0 + 3 * t]).intersection(both.buffer(1e-3))
+            if not seg.is_empty:
+                lines.append(seg)
+    out = []
+    for c in polygonize(unary_union(lines)):
+        if c.area < 1e-7:
+            continue
+        q, hit = c.representative_point(), []
+        for k, sl in enumerate(S):
+            if sl is None or not sl['front'].contains(q):
+                continue
+            col = _side(colours[k], A) if sl['cres'].contains(q) else colours[k]
+            hit.append((sl['al'] * q.x + sl['be'] * q.y + sl['gf'], col, k == ATMOS))
+        if hit:
+            out.append((c, [(col, green) for _, col, green in sorted(hit, key=lambda t: -t[0])]))
+    return out
+
+
+def acrylic_cells25(colours, A, spin=0.0):
+    """(Round 25 to 27c, replaced in round 27d.) The discs' slabs cut into cells in each of which the same faces and
+    sides are crossed in the same order: cut by every slab's front face and outline and, where two slabs both lie, by
+    the lines along which they are at one depth (face or side against face or side)."""
     S = slabs(spin, A['thick'] / 2)
     lines = []
     for q in S:
