@@ -30,8 +30,8 @@ master, at 64 px and under the small cut for that size; the colour never below 2
 Round 27e (the owner: "Maybe if we add a spinning animation like a top it will help") adds the mark in motion and a
 study of its angle:
 
-    brand/mark/earf-globe-<black|black-top|colour|colour-top>-spin.<mp4|webm>   the globe spinning on its axis, steady
-                                                                               or wobbling as a top, 4-second loops
+    brand/mark/earf-globe-<black|colour>-spin.<mp4|webm>   the globe spinning on its axis, 4-second loops (round 27f:
+                                                          the steady spin, chosen over the top's wobble)
     python3 spinoffs/barkhorn/mark.py --spin [TAG ...] [--spin-sheet PATH] [--angles PATH]
 """
 import argparse, os, subprocess, sys, tempfile
@@ -162,10 +162,11 @@ def sheet(path):
 # the least that brings every disc of the colour back to its own place (one colour repeats every 60). The top's own
 # version wobbles: its axis runs once a loop round a circle `wobble` degrees across that starts and ends at rest, so
 # the loop still begins on the mark as it stands. In motion no part is dropped (earth.disc_shapes' `keep`). Each frame
-# keeps the mark's clear space, `clear` of the globe's width on every side (the rule on the mark's page).
+# keeps the mark's clear space, `clear` of the globe's width on every side (the rule on the mark's page). Round 27f:
+# the owner chose the steady spin, so the top's (its lean moving off the Earth's) is no longer made; `wobble` stays,
+# should it come back (a SPINS entry with it as its last value).
 SPIN = dict(rate=45.0, turn=180.0, fps=30, px=720, wobble=5.0, clear=0.25)
-SPINS = [('black', 'discs', E.INK, E.PAPER, 0.0), ('black-top', 'discs', E.INK, E.PAPER, SPIN['wobble']),
-         ('colour', 'acrylic', E.RING, E.PAPER, 0.0), ('colour-top', 'acrylic', E.RING, E.PAPER, SPIN['wobble'])]
+SPINS = [('black', 'discs', E.INK, E.PAPER, 0.0), ('colour', 'acrylic', E.RING, E.PAPER, 0.0)]
 
 
 def _wobble(beta, f):
@@ -254,13 +255,13 @@ def tips(spin=0.0):
 
 def angles(path):
     """Round 27e's angle study: the one-colour discs turned on their axis through 60 degrees (all there is before they
-    repeat), then the tip toward us from 10 to 34 degrees in one colour and in colour (the lean only turns the picture,
-    so it is not here); under each, how far the tips reach past the largest disc."""
+    repeat), then the tip toward us from 10 to 28 degrees in one colour and in colour (the lean only turns the picture,
+    so it is not here); under each, how far the tips reach past the largest disc. (Round 27f's tip, 16, among them.)"""
     font, small = ImageFont.truetype('DejaVuSans.ttf', 15), ImageFont.truetype('DejaVuSans.ttf', 12)
     px, cw, lw = 230, 250, 200
     rows = [('Turned on its axis', [(s, E.ELEV, 'discs') for s in (0, 10, 20, 30, 40, 50)]),
-            ('Tipped toward us', [(0, t, 'discs') for t in (10, 14, 18, 22, 28, 34)]),
-            ('Tipped, in colour', [(0, t, 'acrylic') for t in (10, 14, 18, 22, 28, 34)])]
+            ('Tipped toward us', [(0, t, 'discs') for t in (10, 13, 16, 19, 22, 28)]),
+            ('Tipped, in colour', [(0, t, 'acrylic') for t in (10, 13, 16, 19, 22, 28)])]
     sheet = Image.new('RGB', (lw + 6 * cw, 20 + len(rows) * (px + 64)), '#DEDCD7')
     d = ImageDraw.Draw(sheet)
     for r, (title, cells) in enumerate(rows):

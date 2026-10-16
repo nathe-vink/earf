@@ -30,7 +30,7 @@ import json, math, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, os.path.join(ROOT, 'studio', 'fabkit'))
-LEAN, ELEV, LAT = 23.44, 22.0, 40.0                      # earth.py's (which needs shapely, not in the fab venv)
+LEAN, ELEV, LAT = 23.44, 16.0, 40.0                      # earth.py's (which needs shapely, not in the fab venv; tip 16 since 27f)
 R, T, GAP = 120.0, 8.0, 0.3
 TINTS = {'flare': '#F2A29C', 'dust': '#F2B184', 'acid': '#F2D06B', 'poison': '#B2C9A2', 'ice': '#B5D9EE', 'haze': '#BEADD8'}
 RING = dict(r_out=46.0, r_in=38.0, h=20.0)

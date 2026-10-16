@@ -12,10 +12,10 @@ animation where the cursor is a circle and followed by a trail of rainbow circle
 spinning disc silhouette that looks like a coin spinning. It can flash each color and eventually become a globe".
 
 - The globe: a sphere's three parallels (40 N, the equator, 40 S) and three meridians (60 apart), its axis leaning
-  23.4 degrees, as the Earth's does and a desk globe's stand holds it, and tipped 22 degrees toward us, so the
-  parallels open into ovals and the far side shows through behind the near. Six rings, one for each colour Cloud,
-  drawn in spectrum order: the parallels warm, north to south (Flare, Dust, Acid), the meridians cool, west to east
-  (Poison, Ice, Haze). Nothing black or white is in it; Smoke and Fog are the black-only and white-only marks.
+  23.4 degrees, as the Earth's does and a desk globe's stand holds it, and tipped 16 degrees toward us (22 until round
+  27f), so the parallels open into ovals and the far side shows through behind the near. Six rings, one for each
+  colour Cloud, drawn in spectrum order: the parallels warm, north to south (Flare, Dust, Acid), the meridians cool,
+  west to east (Poison, Ice, Haze). Nothing black or white is in it; Smoke and Fog are the black-only and white-only marks.
 - Lines: the six ovals, the far halves lighter and under the near, so even in one colour the near side reads in front
   (the even version, every line one weight, tangles in one colour). Tubes (round 23): the even lines as tubes of
   tinted acrylic, see-through where they cross. Discs: each ring
@@ -60,7 +60,9 @@ import marks as M                                        # noqa: E402
 import icons as IC                                       # noqa: E402
 
 OUT = os.path.join(HERE, 'brand')
-LEAN, ELEV, LAT = 23.44, 22.0, 40.0                      # the axis's lean (the Earth's), its tip toward us, the parallels
+LEAN, ELEV, LAT = 23.44, 16.0, 40.0                      # the axis's lean (the Earth's), its tip toward us, the parallels
+# (the tip: 22 until round 27f, when the owner chose 16 from round 27e's angle study, mark.py --angles: the discs'
+# tips, where their rims meet the globe's outline past the front disc, reach about half as far, 0.04 of the radius)
 MERIDIANS = (30.0, 90.0, 150.0)                          # the meridians' longitudes at rest (90 faces us: the rim)
 W_LINE, W_DEPTH, SEAM = 0.075, 0.42, 0.035               # of the globe's radius: the line, the far line's share, the seam
 CLOUDS = [(name, colour) for key, line, num, name, colour in M.SPEAKERS if line == 'Cloud']
@@ -1084,7 +1086,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
     <div class="notes">
       <h3>Why it reads as the Earth</h3>
       <ul>
-        <li>The axis leans 23.4&deg;, as the Earth's does and as a desk globe's stand holds it. It also tips 22&deg; toward you, so the parallels open into ovals and the far halves show behind the near ones.</li>
+        <li>The axis leans 23.4&deg;, as the Earth's does and as a desk globe's stand holds it. It also tips 16&deg; toward you (22&deg; until round 27f), so the parallels open into ovals and the far halves show behind the near ones.</li>
         <li>The colours (round 25): blue and green lead, as the Earth's sea and land. The meridian facing you, the largest disc, is Poison green; the equator, the widest band, is Ice blue; north Flare red and south Acid yellow; of the side meridians, the one that shows more is Dust orange and the one that shows less Haze violet. Round 24 had violet facing you and the primaries on the parallels.</li>
         <li>Discs in colour are flush (round 24b): no seams, no outline, no light. The globe is its six discs alone (round 25): no fill completes the circle where no disc reaches the rim, so its outline is the discs' own, the green disc's oval with the others' tips reaching past it. The strokes belong to the one-colour versions: there the seams are gaps in the ground, and the outline stays whole.</li>
         <li>Acrylic (round 25) is the discs themselves, see-through, stacked as tinted sheets, each disc a slab a twentieth of the radius thick, its side, where it faces you, a deeper tone of its tint, as a polished acrylic edge looks. The green meridian facing you is the backing, as in the discs. One disc in front shows its own flat colour; where two cross they make one colour darker than either, whichever is in front, as two filters do: red over violet crimson, blue over violet indigo, and the opposite pairs smoky, blue over orange taupe and yellow over violet brown. Where no disc lies in front, the rings' far halves show through the green a little deeper than it, so each ring closes. Where a disc is, the ground takes nothing, so paper and ink match. Stacked in OKLab (a and b averaged, the lightness the darkest sheet's and lower for each sheet more and the less their hues agree); drawn per pixel on the graphics card (without WebGL, the flush discs). No edges (a cage of hoops, the critic found). In one colour (round 27) it keeps the ball: in black or white the discs cancel where they cross, as two films do in one ink, so every crossing shows without a tint; in a speaker's own colour the discs are stacked sheets of that speaker's acrylic held up to the light, lighter at the rim, deeper where more cross.</li>

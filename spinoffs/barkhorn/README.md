@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27e**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27f**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -57,7 +57,26 @@ tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 
 globe in colour and the seamed discs in black, in white and in each speaker's colour, as files for printers and
 makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, 27c takes the stroke from round the one-colour discs, and 27d takes out the clipping. Round 27e
 untrims the one-colour discs again, measures what the angle does to their tips, and spins the mark on its axis like a
-top.
+top. Round 27f tips the globe 16° toward you instead of 22°, which halves the tips, and keeps the steady spin.
+
+## Round 27f: tipped 16°, and the steady spin (the owner's answers of 2026-10-16)
+
+| the question | the owner's answer | what changes |
+|---|---|---|
+| How far should the globe tip toward the viewer? | "16° (Recommended)" | **The globe tips 16° toward you, not 22°** (`earth.py` ELEV; `globe_object.py` too). The discs' tips reach 0.04 of the radius past the front disc instead of 0.07, and the latitude rings are a little flatter. Every version follows, the colour one too. |
+| Which spin should the mark use? | "Steady (Recommended)" | **The steady spin only.** The top's versions, whose wobble moved the lean off the Earth's 23.4°, are no longer made (`mark.py` SPINS; the wobble stays in the code). |
+
+At 16° the rest pose is still the cleanest: turned 30° the tips reach 0.16. The spins (black and colour, MP4 and WebM)
+were checked again: no frame changes more than a fifth beyond the typical step, and the colour shows no hole across the
+half turn (720 positions). The maker's outlines (`brand/earth-outlines.json`, the mark etched on the speaker) follow;
+the cabinet's CAD takes them at its next build.
+
+Drawn again: the mark's files and its page (version 7), the globe page (version 23), the look book's cover and last
+page (version 46) and the site's logo (version 12).
+
+![The set at 16°, each on its ground](brand/earth-mark-r27.png)
+
+![The steady spins at 16°, a frame every 0.4 seconds](brand/earth-mark-spin-r27f.png)
 
 ## Round 27e: the tips kept, the angle measured, and the mark spinning like a top (the owner's note of 2026-10-16)
 

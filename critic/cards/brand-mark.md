@@ -5,12 +5,13 @@
 EARF makes horn loudspeakers. Its Cloud line (Atmosphere 01 to 08) is cabinets of tinted cast acrylic, one colour
 each: 01 Flare red, 02 Dust orange, 03 Acid amber, 04 Poison bottle green, 05 Ice blue, 06 Haze violet, 07 Fog clear
 white, 08 Smoke black. The mark is the acrylic globe: a sphere's three parallels and three meridians as six discs,
-tilted as the Earth is (its axis leaning 23.4 degrees, tipped 22 toward us), each disc a thin slab of tinted acrylic,
+tilted as the Earth is (its axis leaning 23.4 degrees, tipped 16 toward us, 22 until round 27f), each disc a thin slab of tinted acrylic,
 see-through. This set is every version the brand prints, etches and shows: colour (the six tints together, on its
 site, its look book, its boxes), black and white (one ink, flat: paper, print, an etch, an emboss; white out of dark
 grounds and photographs), and one in each speaker's own tint (that speaker's page, its box, its corner). Sheet 1 is the
 set, each version on the ground it shows on; sheet 2 seven of them at 300, 64, 32 and 16 px; sheet 3 the lockups with
-the wordmark EARF; sheet 4 (round 27e) the spins, a frame every 0.4 s; sheet 5 (round 27e) the angle study.
+the wordmark EARF; sheet 4 the spins, a frame every 0.4 s (round 27f: black and colour, steady); sheet 5 (round 27e)
+the angle study, the tip since chosen.
 
 ## The owner's requirements, in their own words (fixed)
 
@@ -29,15 +30,15 @@ the wordmark EARF; sheet 4 (round 27e) the spins, a frame every 0.4 s; sheet 5 (
 
 ## Fixed
 
-The globe's geometry (parallels at 40 N, 0 and 40 S; meridians 60 degrees apart; the lean 23.44 and the tip 22); the
+The globe's geometry (parallels at 40 N, 0 and 40 S; meridians 60 degrees apart; the lean 23.44 and the tip 16, the owner's pick in round 27f, from 22); the
 six discs alone, nothing filling the circle; the colour version as it is (round 25's acrylic: the green meridian
 facing us the backing, a single disc its own flat colour, crossings stacked a step deeper; red north, blue the equator,
 yellow south, green the meridian facing us, orange and violet the side meridians); the speakers' colours; the wordmark
 EARF and the lockup's proportions; the grounds (paper #F2EFEA, ink #121114).
 
-Open, for the owner (round 27e): the tip toward us, 22, against a lower one. Sheet 5 measures how far the tips reach
-past the front disc (of the radius): 0.07 at 22, about half at 16, 0.02 at 10, where the parallels close toward lines.
-Turning the globe on its axis only makes them reach further (0.19 at 30). Until the owner chooses, judge the mark at 22.
+Chosen in round 27f: the tip 16 (sheet 5: the tips reach 0.04 of the radius past the front disc, against 0.07 at 22
+and 0.02 at 10, where the parallels close toward lines; turning the globe on its axis only makes them reach further)
+and the steady spin.
 
 ## The versions, and their parameters
 
@@ -51,10 +52,10 @@ Turning the globe on its axis only makes them reach further (0.19 at 30). Until 
 - In motion (round 27e, new): the spin. The mark turns on its axis the Earth's way (the meridians round the pole, the
   parallels still), `rate` 45 degrees a second (a turn in 8 s), each loop `turn` 180 degrees (4 s: every coloured disc
   back in its place, so it loops without a seam and starts on the mark at rest), 30 frames a second, 720 px square
-  with the mark's clear space, `clear` a quarter of its width, round it. The top's version wobbles: its axis runs once a
-  loop round a circle `wobble` 5 degrees across that starts and ends at rest. In motion no piece is dropped (each
-  narrows into its seam) and the scale back to the discs' width is the seam's own, so nothing pops between frames.
-  Black and colour, each steady and as a top, as MP4 and WebM; sheet 4 is a frame every 0.4 s.
+  with the mark's clear space, `clear` a quarter of its width, round it. Steady (the owner, round 27f): the top's
+  version, its axis wobbling round a circle `wobble` 5 degrees across, moved the lean off the Earth's and is not made.
+  In motion no piece is dropped (each narrows into its seam) and the scale back to the discs' width is the seam's own,
+  so nothing pops between frames. Black and colour, as MP4 and WebM; sheet 4 is a frame every 0.4 s.
 - Round 1 judged the acrylic's own one-colour forms, kept in the code:
 - Black and white (one ink, no tints): a point is inked where an odd number of discs cover it (parity: the discs
   cancel where they cross, as two films do in one ink), the discs as flat ovals. Tried and left: a solid ball cut by
