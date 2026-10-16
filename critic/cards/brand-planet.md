@@ -7,9 +7,8 @@ blue sea, the Americas facing the viewer) with a dish in the North Atlantic like
 loudspeaker seen from the front (the surround red, the cone orange, the dust cap yellow) and a small violet core at its
 centre. The Planet ident is how the mark arrives: a violet meteor strikes the sea, and the strike makes the crater.
 Then the planet moves aside and EARF appears beside it, as every EARF ident ends. It plays on the brand's site and in
-its videos, on paper (#F2EFEA) and on ink (#121114), in colour and in black and white (black on paper, white on ink).
-Sheet 1 is the ident in colour on paper (frames picked at its moments), sheet 2 in colour on ink, sheet 3 in black and
-white on paper.
+its videos, on paper (#F2EFEA) and on ink (#121114), in colour. (Black and white is the still figure's: the ident is not
+animated in it.) Sheet 1 is the ident on paper (frames picked at its moments), sheet 2 on ink.
 
 ## The owner's requirements, in their own words (fixed)
 
@@ -17,16 +16,16 @@ white on paper.
   the crater is visible. The water ripples on impact too. Then the purple meteor can stay in the core." (round 25)
 - "You gotta really spruce up that planet animation. Pixar quality baby. Or at least early Disney" (round 26)
 - Round 25's thump (the cone thumping once after the smoke): "Drop it" (round 26).
-- "I like how the planet looks in black and white too" (round 25), and asked whether to add a black-and-white Planet:
-  "Yes, add black and white" (round 26).
+- "I like how the planet looks in black and white too" (round 25). Asked whether to add a black-and-white Planet, "Yes,
+  add black and white", and then: "The black and white doesn't need to be animated" (round 26). So the ident is in
+  colour only, and black and white stays the still figure.
 - "These don't feel minimal and polished enough." (round 24b) and "It doesn't seem fluid or quick enough." (round 23)
 
 ## Fixed
 
-The planet's drawing (its land, sea, dish, sizes and colours, and its black-and-white knock-out version: the planet
-solid, the land, the surround and the dust cap knocked out, the cone solid); the hand-off every ident shares (the move
-aside over 0.5 s, EARF wiped out of the globe's rim over 0.45 s starting 0.1 s before the move ends, then a 1.0 s (round 26: 1.3)
-hold); the grounds; flat colour (no gradients or fades on the planet). Flashes stay under three a second (WCAG 2.3.1).
+The planet's drawing (its land, sea, dish, sizes and colours); the ident in colour only; the hand-off every ident
+shares (the move aside over 0.5 s, EARF wiped out of the globe's rim over 0.45 s starting 0.1 s before the move ends,
+then a 1.0 s hold, 1.3 until the owner shortened it in round 26); the grounds; flat colour (no gradients or fades on the planet). Flashes stay under three a second (WCAG 2.3.1).
 
 ## How it moves, and its parameters
 
@@ -77,9 +76,6 @@ the planet's radius. The animators' principles, one by one.
   settles; then the core (the meteor) drops in 1.55 times its size and bounces to rest, white-hot (Haze 80 % of the way
   to white), cooling to violet over `ember.cool` 0.7.
 - The move aside starts at 1.61 (the crater clean since 1.49); the core's cooling finishes during it; the ident runs
-  3.76 in all.
-- Black and white: the same motion in knock-outs. The planet solid; the land, the ripples' crests, the cloud and the
-  starburst in the ground's colour, outlined in the figure's where they cross the ground; the smoke, the meteor and the
-  cone solid, with gaps of 0.032; the flame's outer ribbon an outline.
+  3.46 in all.
 
 You may propose additions (kind "new"), with exact values.

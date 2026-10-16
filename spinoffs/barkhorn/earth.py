@@ -829,7 +829,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
         <button aria-pressed="true" data-v="gyro">Gyroscope</button><button aria-pressed="false" data-v="coin">Coin</button><button aria-pressed="false" data-v="rise">Earthrise</button><button aria-pressed="false" data-v="open">Open</button><button aria-pressed="false" data-v="iris">Iris</button><button aria-pressed="false" data-v="planet">Planet</button><button aria-pressed="false" data-v="roll">Roll</button><button aria-pressed="false" data-v="download">Download</button>
       </div>
       <div class="seg" id="style" role="group" aria-label="Style">
-        <button aria-pressed="true" data-v="discs">Discs</button><button aria-pressed="false" data-v="acrylic">Acrylic</button><button aria-pressed="false" data-v="even">Black &amp; white</button>
+        <button aria-pressed="true" data-v="discs">Discs</button><button aria-pressed="false" data-v="acrylic">Acrylic</button><button aria-pressed="false" data-v="even">Lines</button>
       </div>
       <div class="seg" id="ground" role="group" aria-label="Ground">
         <button aria-pressed="true" data-v="paper">Paper</button><button aria-pressed="false" data-v="night">Ink</button>
@@ -857,7 +857,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       a star twinkles, the meteor grows out of it, draws back and falls on an arc, stretching, and splats on the North
       Atlantic; the Earth squashes and springs back, a shock runs over it and the sea ripples; a white cloud pops up puff
       by puff, chars black from the middle out and is eaten away into curling crescents, and the crater springs open, the
-      meteor dropping into its core as the violet cap. In black and white it is knock-outs, as the figure is.</p>
+      meteor dropping into its core as the violet cap.</p>
     __CORE__
   </section>
 
@@ -884,8 +884,8 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <div class="coin" style="background:#121114"><canvas id="kickloop" aria-label="The globe as a Death Star, its dish kicking like a speaker"></canvas></div>
     </div>
     <div class="win">
-      <div class="bar"><b>The planet, struck &mdash; in colour, then in black and white</b></div>
-      <div class="coin" style="background:#F2EFEA"><canvas id="meteor" aria-label="A violet meteor strikes the Earth: a white cloud, black smoke curling away, the sea rippling, then the crater with the meteor in its core; in colour, then in black and white"></canvas></div>
+      <div class="bar"><b>The planet, struck &mdash; the meteor stays in its core</b></div>
+      <div class="coin" style="background:#F2EFEA"><canvas id="meteor" aria-label="A violet meteor strikes the Earth: a white cloud, black smoke curling away, the sea rippling, then the crater with the meteor in its core"></canvas></div>
     </div>
   </section>
 
@@ -1662,10 +1662,8 @@ function corePaths() {                                                     // th
   if (CP) return CP;                                                         // and the land, filled even-odd, is the sea)
   const P = D.core, sea = new Path2D(P.sphere);
   if (P.land) sea.addPath(new Path2D(P.land));
-  const sea1 = new Path2D(P.sphere);                                         // (round 26: and in one colour, the land knocked
-  if (P.land1) sea1.addPath(new Path2D(P.land1));                            // out CLEAR inside the limb)
   CP = { sphere: new Path2D(P.sphere), land: P.land ? new Path2D(P.land) : null, trench: P.trench ? new Path2D(P.trench) : null,
-         cap: new Path2D(P.cap), sea, land1: P.land1 ? new Path2D(P.land1) : null, sea1 };
+         cap: new Path2D(P.cap), sea };
   return CP;
 }
 function drawCoreKick(ctx, W, H, t, o) {
@@ -1706,10 +1704,9 @@ function drawCoreKick(ctx, W, H, t, o) {
 // crescents curling round it, thinning to nothing (no fades: early Disney's smoke goes by breaking up, and these are
 // the mark's own circles); as it clears the crater springs open ring by ring, past its size and back, its bowl sinking
 // past its depth, and the meteor drops into the core with a bounce, white-hot, cooling to violet. Round 25's thump is
-// gone (the owner: "Drop it"). In one colour (the style 'even', round 26: the owner liked the planet in black and
-// white) it is knock-outs, as the figure is: the planet solid; the land, the ripples' crests, the cloud and the
-// starburst in the ground's colour, outlined in the figure's where they cross the ground; the smoke, the meteor and the
-// cone solid, with gaps. Times in seconds from the start; sizes of the planet's radius
+// gone (the owner: "Drop it"). It plays in colour in every style: round 26 drew it in black and white too, in
+// knock-outs, but the owner meant the still figure ("The black and white doesn't need to be animated"), so that is out.
+// Times in seconds from the start; sizes of the planet's radius
 // After its round 26 critic (critic/rounds/2026-10-16/brand-planet-r2.json): the meteor larger (0.085 to 0.12),
 // launched on the glint (the wind-up at 0.24, not 0.34) and striking 0.1 s sooner (0.62), its fall eased in less (2.4
 // to 1.8, so it is on its way by 0.43); five fat puffs round the cloud's edge, not eight small (they read as beads);
@@ -1738,14 +1735,11 @@ const PUFFS = [[0.81, 0.22, 0.32], [0.07, 0.82, 0.34], [-0.79, 0.29, 0.31], [-0.
 const hash = (i, k) => { const v = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return v - Math.floor(v); };
 const backOut = (x, s = 1.7) => { x = clamp(x, 0, 1) - 1; return 1 + (s + 1) * x * x * x + s * x * x; };   // past 1, back
 const pip = (ctx, x, y, r) => { if (r > 0) { ctx.beginPath(); ctx.arc(x, y, r, 0, TAU); ctx.fill(); } };
-function planetPal(style, G) {                                               // the Planet's colours: in colour, or in one
-  const P = D.core, FOG = P.fog, SMOKE = P.smoke;                            // colour by knock-outs (figure F, ground B)
-  if (style === 'even') { const F = G.ink, B = G.bg;
-    return { one: true, F, B, gap: P.gap, line: 0.6 * P.gap, sea: F, land: B, crest: B, rings: [B, F, B], core: F, cloud: B, shade: F,
-             smoke: F, smokeShade: B, drop: B, flash: B, meteor: F, star: F, spark: F }; }
-  return { one: false, sea: P.sea, land: P.landCol, crest: mixHex(P.sea, FOG, 0.6), trough: mixHex(P.sea, D.ink, 0.28), shock: FOG,
+function planetPal() {                                                      // the Planet's colours (the cloud Fog and the
+  const P = D.core, FOG = P.fog, SMOKE = P.smoke;                            // smoke Smoke, the line's clear white and black)
+  return { sea: P.sea, land: P.landCol, crest: mixHex(P.sea, FOG, 0.6), trough: mixHex(P.sea, D.ink, 0.28), shock: FOG,
            rings: P.rings.map(r => r[1]), core: P.capCol, coreHot: mixHex(P.capCol, FOG, 0.8), cloud: FOG, shade: mixHex(FOG, P.sea, 0.3),
-           smoke: SMOKE, smokeShade: D.ink, drop: FOG, flash: FOG, flashCore: mixHex(FOG, P.rings[2][1], 0.45),
+           smoke: SMOKE, flash: FOG, flashCore: mixHex(FOG, P.rings[2][1], 0.45),
            meteor: P.capCol, meteorHot: mixHex(P.capCol, FOG, 0.45), flame: mixHex(P.capCol, FOG, 0.42), star: P.capCol,
            spark: mixHex(P.capCol, FOG, 0.55) };
 }
@@ -1780,7 +1774,7 @@ function twinkle(ctx, t, pal) {                                              // 
     ctx.quadraticCurveTo(-c, c, -r, 0); ctx.quadraticCurveTo(-c, -c, 0, -r); ctx.fill(); };
   ctx.save(); ctx.translate(g.star[0], g.star[1]); ctx.rotate(0.9 * (1 - smooth(a))); ctx.fillStyle = pal.star;
   spark(R * (1 + 0.55 * b), R * 0.12); ctx.rotate(Math.PI / 4); spark(R * 0.5, R * 0.08);
-  if (!pal.one) { ctx.fillStyle = pal.meteorHot; pip(ctx, 0, 0, R * 0.15); }
+  ctx.fillStyle = pal.meteorHot; pip(ctx, 0, 0, R * 0.15);
   ctx.restore();
 }
 function flame(ctx, M, t, pal) {                                             // the meteor's flame: two ribbons tapering back
@@ -1791,9 +1785,7 @@ function flame(ctx, M, t, pal) {                                             // 
       const w = w0 * Math.pow(1 - s, 0.85) * (1 + 0.16 * Math.sin(TAU * 2.2 * s - 38 * t)) / 2;
       L.push([p[0] - d[1] * w, p[1] + d[0] * w]); R.push([p[0] + d[1] * w, p[1] - d[0] * w]); }
     ctx.beginPath(); L.forEach(([x, y], j) => j ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); for (let j = N; j >= 0; j--) ctx.lineTo(...R[j]); ctx.closePath(); };
-  if (pal.one) { ribbon(1, 2.3 * m); ctx.strokeStyle = pal.F; ctx.lineWidth = pal.line; ctx.stroke();
-                 ribbon(0.6, 1.4 * m + 2 * pal.gap); ctx.fillStyle = pal.B; ctx.fill(); ribbon(0.6, 1.4 * m); ctx.fillStyle = pal.F; ctx.fill(); }
-  else { ribbon(1, 2.3 * m); ctx.fillStyle = pal.flame; ctx.fill(); ribbon(0.6, 1.4 * m); ctx.fillStyle = pal.meteor; ctx.fill(); }
+  ribbon(1, 2.3 * m); ctx.fillStyle = pal.flame; ctx.fill(); ribbon(0.6, 1.4 * m); ctx.fillStyle = pal.meteor; ctx.fill();
 }
 function sparks(ctx, t, pal) {                                               // sparks shed by the flame, drifting off and
   const Q = PLANET, g = fallGeom(), t0 = Q.wind.at + Q.wind.dur;             // shrinking away
@@ -1807,9 +1799,8 @@ function sparks(ctx, t, pal) {                                               // 
 function ball(ctx, M, pal) {                                                 // the meteor, stretched along its path, its
   const m = PLANET.meteor * M.k;                                             // leading face hot
   ctx.save(); ctx.translate(M.p[0], M.p[1]); ctx.rotate(Math.atan2(M.d[1], M.d[0])); ctx.scale(M.along, M.across);
-  if (pal.one) { ctx.fillStyle = pal.B; pip(ctx, 0, 0, m + pal.gap / Math.min(M.along, M.across)); }
   ctx.fillStyle = pal.meteor; pip(ctx, 0, 0, m);
-  if (!pal.one) { ctx.fillStyle = pal.meteorHot; pip(ctx, m * 0.3, 0, m * 0.58); }
+  ctx.fillStyle = pal.meteorHot; pip(ctx, m * 0.3, 0, m * 0.58);
   ctx.restore();
 }
 function capRing(ctx, th) {                                                  // the circle on the sphere th radians from the
@@ -1823,22 +1814,20 @@ function capRing(ctx, th) {                                                  // 
     const X = q[0] * cl - q[1] * sl, Y = q[0] * sl + q[1] * cl; pen ? ctx.lineTo(X, -Y) : ctx.moveTo(X, -Y); pen = true;
   }
 }
-function planetWaves(ctx, since, pal, C, sea, land) {                       // the ripples on the sea, and the shock
+function planetWaves(ctx, since, pal, C) {                                  // the ripples on the sea, and the shock
   const Q = PLANET, th0 = rad(D.core.dish.ang), R = Q.ripples, S = Q.shock;
-  ctx.save(); ctx.clip(sea, 'evenodd'); ctx.lineCap = 'round';
+  ctx.save(); ctx.clip(C.sea, 'evenodd'); ctx.lineCap = 'round';
   for (let i = 0; i < R.n; i++) {
     const p = (since - 0.02 - i * R.gap) / R.dur; if (p <= 0 || p >= 1) continue;
     const th = th0 + (R.to - th0) * (1 - (1 - p) * (1 - p)), w = R.width * (1 - p);
-    if (!pal.one) { ctx.strokeStyle = pal.trough; ctx.lineWidth = 0.7 * w; capRing(ctx, th - 0.045); ctx.stroke(); }
+    ctx.strokeStyle = pal.trough; ctx.lineWidth = 0.7 * w; capRing(ctx, th - 0.045); ctx.stroke();
     ctx.strokeStyle = pal.crest; ctx.lineWidth = w; capRing(ctx, th); ctx.stroke();
   }
   ctx.restore();
   const p = since / S.dur; if (p <= 0 || p >= 1) return;
   const th = th0 + (S.to - th0) * easeOut(p);
   ctx.save(); ctx.clip(C.sphere); ctx.lineCap = 'round'; ctx.lineWidth = S.width * Math.pow(1 - p, 1.5);
-  if (!pal.one) { ctx.strokeStyle = pal.shock; capRing(ctx, th); ctx.stroke(); }
-  else { ctx.save(); ctx.clip(sea, 'evenodd'); ctx.strokeStyle = pal.B; capRing(ctx, th); ctx.stroke(); ctx.restore();
-         if (land) { ctx.clip(land, 'evenodd'); ctx.strokeStyle = pal.F; capRing(ctx, th); ctx.stroke(); } }
+  ctx.strokeStyle = pal.shock; capRing(ctx, th); ctx.stroke();
   ctx.restore();
 }
 function planetCrater(ctx, t, pal) {                                         // the crater springing open ring by ring, and
@@ -1848,7 +1837,7 @@ function planetCrater(ctx, t, pal) {                                         // 
   P.rings.forEach((r, i) => { const k = grow(i); if (k > 0) { ctx.fillStyle = pal.rings[i]; dishRing(ctx, P.fr[i] * k, depth); ctx.fill(); } });
   const y = x - 3 * Q.stagger; if (y <= 0) return;
   const heat = 1 - smooth(y / PLANET.ember.cool), k = 1 + 0.55 * Math.exp(-7 * y) * Math.cos(TAU * 2.6 * y);
-  ctx.fillStyle = pal.one ? pal.core : mixHex(pal.core, pal.coreHot, heat); dishRing(ctx, P.capF * k, depth); ctx.fill();
+  ctx.fillStyle = mixHex(pal.core, pal.coreHot, heat); dishRing(ctx, P.capF * k, depth); ctx.fill();
 }
 function planetCloud(ctx, t, since, pal, C) {                                // the cloud, its char and its smoke
   const P = D.core, Q = PLANET, K = Q.cloud, Ch = Q.char, Sm = Q.smoke, [cx, cy] = P.centre, S = K.size;
@@ -1858,10 +1847,9 @@ function planetCloud(ctx, t, since, pal, C) {                                // 
     const rr = r * S * backOut((since - 0.012 - K.stagger * d) / K.pop, 1.8) * (1 + K.boil * Math.sin(TAU * 1.7 * since + TAU * hash(i, 3)))   // middle tone,
                * (1 + 0.12 * Math.sin(Math.PI * c));                                                     // and a swell), then is
     return { i, d, c, e, r: rr, x: cx + x * out, y: cy + y * out, th: d > 1e-6 ? Math.atan2(y, x) : 0 }; });   // eaten away
-  const dark = h => h.c >= 0.5, tone = (a, b, h) => pal.one ? (dark(h) ? b : a) : mixHex(a, b, smooth(h.c));
+  const dark = h => h.c >= 0.5, tone = (a, b, h) => mixHex(a, b, smooth(h.c));
   const white = puffs.filter(h => h.r > 1e-4 && !dark(h)), smoke = puffs.filter(h => h.r > 1e-4 && dark(h) && h.e < 1);
   ctx.save(); ctx.clip(C.sphere);
-  if (pal.one) { ctx.fillStyle = pal.F; white.forEach(h => pip(ctx, h.x, h.y, h.r + pal.line)); }
   white.forEach(h => {                                                       // lit from the upper left: its shadow, then its
     ctx.fillStyle = tone(pal.shade, pal.smoke, h); pip(ctx, h.x, h.y, h.r);  // lit part over it
     ctx.fillStyle = tone(pal.cloud, pal.smoke, h); pip(ctx, h.x - 0.1 * h.r, h.y - 0.12 * h.r, 0.86 * h.r); });
@@ -1870,11 +1858,10 @@ function planetCloud(ctx, t, since, pal, C) {                                // 
     const eater = h => { const a = h.th + Math.PI + sg(h) * Sm.swirl * h.e, mid = h.d < 1e-6;   // outside its inner side and
       const o = mid ? 0 : h.r * (1.5 - 0.95 * h.e), R = mid ? 1.1 * h.r * h.e : h.r * (0.5 + 1.1 * h.e);   // growing over it, so
       return [h.x + Math.cos(a) * o, h.y + Math.sin(a) * o, R]; };                                     // it thins to a crescent
-    const bitten = (h, grow, draw) => { const [x, y, R] = eater(h); ctx.save();                        // on its outer side,
-      if (R + grow > 0) { const p = new Path2D(); p.rect(-3, -3, 6, 6); p.arc(x, y, R + grow, 0, TAU); ctx.clip(p, 'evenodd'); }   // curling
-      draw(); ctx.restore(); };                                                                        // as it thins
-    if (pal.one) { ctx.fillStyle = pal.B; smoke.forEach(h => bitten(h, 0, () => pip(ctx, h.x, h.y, h.r + pal.gap))); }
-    smoke.forEach(h => bitten(h, pal.one ? pal.gap : 0, () => { ctx.fillStyle = tone(pal.cloud, pal.smoke, h); pip(ctx, h.x, h.y, h.r); })); }
+    const bitten = (h, draw) => { const [x, y, R] = eater(h); ctx.save();                              // on its outer side,
+      if (R > 0) { const p = new Path2D(); p.rect(-3, -3, 6, 6); p.arc(x, y, R, 0, TAU); ctx.clip(p, 'evenodd'); }   // curling as
+      draw(); ctx.restore(); };                                                                        // it thins
+    smoke.forEach(h => bitten(h, () => { ctx.fillStyle = tone(pal.cloud, pal.smoke, h); pip(ctx, h.x, h.y, h.r); })); }
   ctx.restore();
 }
 function planetFlash(ctx, since, pal) {                                      // the starburst: two frames, the second smaller
@@ -1884,12 +1871,10 @@ function planetFlash(ctx, since, pal) {                                      // 
       i ? ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r) : ctx.moveTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r); }
     ctx.closePath(); };
   star(R, 9, 0.48, 0.2); ctx.fillStyle = pal.flash; ctx.fill();
-  if (pal.one) { ctx.strokeStyle = pal.F; ctx.lineWidth = pal.line; ctx.stroke(); }
-  else { star(0.55 * R, 9, 0.5, 0.55); ctx.fillStyle = pal.flashCore; ctx.fill(); }
+  star(0.55 * R, 9, 0.5, 0.55); ctx.fillStyle = pal.flashCore; ctx.fill();
 }
 function drawPlanet(ctx, V, t, style, G) {
-  const P = D.core, Q = PLANET, C = corePaths(), pal = planetPal(style, G), since = t - Q.hit, ad = fallGeom().end;
-  const land = pal.one ? C.land1 : C.land, sea = pal.one ? C.sea1 : C.sea;
+  const P = D.core, Q = PLANET, C = corePaths(), pal = planetPal(), since = t - Q.hit, ad = fallGeom().end;
   ctx.save(); ctx.translate(V.cx, V.cy); ctx.scale(V.R, V.R);
   ctx.save();
   if (since > 0) {                                                           // knocked along the blow, and squashed along it
@@ -1900,9 +1885,9 @@ function drawPlanet(ctx, V, t, style, G) {
     ctx.transform(1 + (sx - 1) * a * a + (sy - 1) * b * b, (sx - sy) * a * b, (sx - sy) * a * b, 1 + (sx - 1) * b * b + (sy - 1) * a * a, 0, 0);
   }
   ctx.fillStyle = pal.sea; ctx.fill(C.sphere);
-  if (land) { ctx.fillStyle = pal.land; ctx.fill(land, 'evenodd'); }
+  if (C.land) { ctx.fillStyle = pal.land; ctx.fill(C.land, 'evenodd'); }
   if (since > 0) {
-    planetWaves(ctx, since, pal, C, sea, land);
+    planetWaves(ctx, since, pal, C);
     planetCrater(ctx, t, pal);
     planetCloud(ctx, t, since, pal, C);
     if (since < Q.flash) planetFlash(ctx, since, pal);
@@ -1918,10 +1903,9 @@ function mixHex(a, b, k) {                                                   // 
   const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)), A = p(a), B = p(b);
   return '#' + A.map((v, i) => Math.round(v + (B[i] - v) * k).toString(16).padStart(2, '0')).join('');
 }
-function drawPlanetLoop(ctx, W, H, t, o) {                                  // the planet struck, looped, for the page: in
-  const G = GROUNDS[o.ground], T = PLANET.last + 1.2, n = Math.floor(t / T);   // colour, then in one colour (round 26)
-  ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
-  drawPlanet(ctx, view(W, H, W / 2, H / 2, Math.min(W, H) * 0.3), t - n * T, o.style || (n % 2 ? 'even' : 'discs'), G);
+function drawPlanetLoop(ctx, W, H, t, o) {                                  // the planet struck, looped, for the page
+  const G = GROUNDS[o.ground]; ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
+  const T = PLANET.last + 1.2; drawPlanet(ctx, view(W, H, W / 2, H / 2, Math.min(W, H) * 0.3), ((t % T) + T) % T, 'discs', G);
   return 2 * T;
 }
 
@@ -1957,7 +1941,7 @@ if (!location.hash.startsWith('#capture')) {
     download: 'Download: the globe arrives as a picture did over a modem in 1999, an interlaced GIF: coarse blocks at once, then each pass finer, sweeping down, until it is sharp; then it tilts.',
     open: 'Open: the globe begins as the flat globe icon, each disc edge on, a line. Each turns about its line and opens into its disc, a beat after the last; then the globe tilts.',
     iris: 'Iris: the finished globe, still and upright, opens out of its own centre in a circle, as a late-90s circle wipe; then it leans.',
-    planet: 'Planet: a star twinkles; the meteor grows out of it, draws back and falls on an arc, stretching as it speeds up, and splats on the North Atlantic. A starburst for two frames; the Earth squashes and springs back; a shock runs over it and the sea ripples. A white cloud pops up puff by puff, chars to black from the middle out and is eaten away into curling crescents, and the crater springs open, the meteor dropping into its core, white-hot, cooling to violet. In black and white it is knock-outs, as the mark is.' };
+    planet: 'Planet: a star twinkles; the meteor grows out of it, draws back and falls on an arc, stretching as it speeds up, and splats on the North Atlantic. A starburst for two frames; the Earth squashes and springs back; a shock runs over it and the sea ripples. A white cloud pops up puff by puff, chars to black from the middle out and is eaten away into curling crescents, and the crater springs open, the meteor dropping into its core, white-hot, cooling to violet.' };
   const capText = document.getElementById('cap-text'), screen = document.getElementById('screen');
   function segs(id, key) {
     const el = document.getElementById(id);
@@ -2019,12 +2003,11 @@ def standalone():
 
 
 # round 25: the seven idents (the Coin, the Gyroscope, Earthrise, Open, Iris, Roll and Download) in the discs and the acrylic, each
-# on paper and on night, and in the lines; the Planet in colour (round 26: and in black and white) on both; the Death Star
+# on paper and on night, and in the lines; the Planet in colour on both; the Death Star
 # kicking; the loader and the cursor as round 22 made them (round 23's printer, kick and tubes MP4s stay)
 SCENE_SET = [('ident', dict(kind=k, style=st, ground=g)) for k in ('coin', 'gyro', 'rise', 'open', 'iris', 'roll', 'download')
              for st, g in (('discs', 'paper'), ('discs', 'night'), ('acrylic', 'paper'), ('acrylic', 'night'), ('even', 'paper'))] + [
              ('ident', dict(kind='planet', style='discs', ground='paper')), ('ident', dict(kind='planet', style='discs', ground='night')),
-             ('ident', dict(kind='planet', style='even', ground='paper')), ('ident', dict(kind='planet', style='even', ground='night')),
              ('core', dict(ground='night')), ('core', dict(ground='paper')),
              ('loader', dict(ground='night')), ('loader', dict(ground='paper')), ('cursor', dict(ground='night'))]
 

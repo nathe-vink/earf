@@ -51,19 +51,18 @@ Coin flash the six colours before it lands on the globe, adds five idents (Open,
 a meteor striking the Death Star), puts the Earth on the Death Star, and builds a pipeline that storyboards the
 brand's motion for a fresh critic to judge, round by round. It also makes the site's colour section a speaker's page,
 where the colour you pick sets what goes with it. Round 26 draws the Planet again as early Disney would have drawn it,
-beat by beat by the animators' principles, and in black and white; gives the Coin a real coin's physics, spinning,
+beat by beat by the animators' principles; gives the Coin a real coin's physics, spinning,
 tipping and wobbling down face up; and narrows the A, its crossbar lower.
 
-## Round 26: the Planet as early Disney would draw it, in black and white too, a real coin, and a narrower A (the owner's answers of 2026-10-16)
+## Round 26: the Planet as early Disney would draw it, a real coin, and a narrower A (the owner's answers of 2026-10-16)
 
 | the owner's note | what changes |
 |---|---|
 | "You gotta really spruce up that planet animation. Pixar quality baby. Or at least early Disney" | **The Planet drawn again by the animators' principles**: a star twinkles and the meteor winds up out of it, falls on an arc, stretching, and splats; a starburst; the Earth squashes and springs back; a two-tone cloud pops up puff by puff, chars from the middle out and is eaten away into curling crescents; the crater springs open and the meteor drops into its core, white-hot, cooling to violet (below). |
 | (the cone's thump after the smoke, round 25's critic's idea) "Drop it" | **Gone.** |
-| (a black-and-white Planet) "Yes, add black and white" | **The Planet in black and white**, black on paper and white on ink, drawn in knock-outs as the mark is (below). The player's third style is now called Black & white, and the Planet's panel on the globe's page plays in colour, then in black and white. |
+| (a black-and-white Planet) "Yes, add black and white", and then "The black and white doesn't need to be animated" | **Black and white stays the still figure.** An animated black-and-white Planet was made, then taken out; the Planet plays in colour in every style. |
 | (the letters) "B: lower crossbar" | **The A narrower**: its feet 170 apart, not 210, so it is 270 wide, 1.29 times the R, with its crossbar 30 lower to keep the triangle inside open (below). |
 | (the Coin, "if done right") "Real coin physics" | **The Coin spins, tips and wobbles down as a real coin does**: it slows on its edge through its six colours, the globe's face comes round, and it falls flat with the wobble quickening, as Euler's disk does, landing face up (below). |
-| (after the round: black smoke on the black planet shows only by its paper gaps; turn it paper-coloured over the sea?) "Don't" | **Kept as it is**: in black and white the smoke over the sea is its outlines, as the knock-out rule draws it. |
 | (three ripples read as sound as much as water) "Keep three" | **Three rings**, water and sound at once. |
 | (the look book's cover and last page still had the old A) "Update the A only" | **The narrower A in the look book**, on the cover and the last page; round 11's globe stays beside it. |
 | (every ident held 1.3 seconds on EARF; the critic suggested 1.0) "Shorten to 1.0 s" | **Every ident rests 1.0 second on EARF**, so each ends 0.3 seconds sooner (`earth.py` REST); all the videos were made again. |
@@ -110,25 +109,10 @@ the whole story) and launches on the glint, striking 0.1 seconds sooner, so the 
 fall eases in less, so it is on its way by 0.43 seconds. Five fat puffs make the cloud's edge, not eight small ones,
 which read as beads and left a dozen lashes of smoke. The smoke goes in 0.3 seconds, not 0.42, so the crater stands
 clean before the move. The ripples and the shock end well inside the edge: run out to the limb, their arcs read as a
-plate's rim and a doubled outline. Its tests pass on the new sheets, on paper, on ink and in black and white
-(`critic/rounds/2026-10-16/brand-planet-r2.json`, `critic/LOG.md`).
+plate's rim and a doubled outline. Its tests pass on the new sheets, on paper and on ink, and on the black-and-white
+version since taken out (`critic/rounds/2026-10-16/brand-planet-r2.json`, `critic/LOG.md`).
 
 ![The Planet, frame by frame](brand/earth-planet-r26.png)
-
-### The Planet in black and white
-
-Black on paper, white on ink, in knock-outs, as the figure is (`earth.py` planetPal). The planet is solid. The land,
-the ripples' crests, the cloud and the starburst are in the ground's colour, outlined in the figure's where they cross
-the ground. The smoke, the meteor and the cone are solid, with gaps; the flame's outer ribbon is an outline. It reads
-as a 1930 cartoon: a black planet, a paper cloud with ink crescents between its puffs, the crater a bullseye in the
-North Atlantic. One question from the critic is yours: on the black sea, black smoke shows only by its paper gaps, so
-there the wisps read as paper outlines. Asked whether to turn the smoke paper-coloured where it crosses the sea, you
-said not to, so it stays as the rule draws it.
-
-![The Planet in black and white](brand/earth-planet-bw-r26.png)
-
-`earth.py --video` writes the Planet in colour and in black and white, on paper and on ink
-(`brand/earth-ident-planet-<discs|even>-<paper|night>.mp4`).
 
 ### The Coin, with a real coin's physics
 

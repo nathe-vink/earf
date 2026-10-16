@@ -211,19 +211,16 @@ def core_svg(ground='paper', one=None, cap=False, size=None, small=False, mid=Fa
 
 
 def core_paths():
-    """The figure as SVG path data (y down, the sphere's radius 1), for the page to draw and move. Round 26, for the
-    Planet in one colour: the land as core_svg knocks it out (CLEAR_ONE of the dish's rim, CLEAR inside the limb) and the
-    gap; and for its cloud and smoke, Fog and Smoke, the line's clear white and black."""
+    """The figure as SVG path data (y down, the sphere's radius 1), for the page to draw and move; and, for the Planet's
+    cloud and smoke (round 26), Fog and Smoke, the line's clear white and black."""
     S = shapes()
     cx, cy = S['centre']
     sea, green, deep = colours()
-    S1 = shapes('full', CLEAR_ONE)
-    land1 = S1['land'].intersection(S1['sphere'].buffer(-CLEAR, resolution=128)) if S1['land'] is not None else None
     return dict(sphere=_path(S['sphere']), land=_path(S['land']) if S['land'] is not None else '',
                 trench=_path(S['trench']) if S['trench'] is not None else '', rings=[(_path(g), c) for g, c in S['rings']],
                 cap=_path(S['cap']), capCol=CAP[1], capF=CAP[0], centre=[round(cx, 4), round(-cy, 4)], sea=sea, landCol=green,
                 trenchCol=deep, dish=dict(S['dish']), lean=LEAN, fr=[f for f, _ in RINGS],   # the dish's own numbers, so the page can move it
-                land1=_path(land1) if land1 is not None and not land1.is_empty else '', gap=GAP, fog=C['Fog'], smoke=C['Smoke'])
+                fog=C['Fog'], smoke=C['Smoke'])
 
 
 def main():
