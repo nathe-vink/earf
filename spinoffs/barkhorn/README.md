@@ -54,7 +54,8 @@ brand's motion for a fresh critic to judge, round by round. It also makes the si
 where the colour you pick sets what goes with it. Round 26 draws the Planet again as early Disney would have drawn it,
 beat by beat by the animators' principles; gives the Coin a real coin's physics, spinning,
 tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 27 settles the mark: the acrylic
-globe, in colour, in black, in white and in each speaker's own tint, as files for printers and makers.
+globe, in colour, in black, in white and in each speaker's own tint, as files for printers and makers; puts it on
+the look book and the site; and parks the idents.
 
 ## Round 27: the mark settled, the acrylic globe in colour, black, white and each speaker's own (the owner's answer of 2026-10-16)
 
@@ -62,6 +63,9 @@ globe, in colour, in black, in white and in each speaker's own tint, as files fo
 |---|---|
 | "I don't even know anymore. Nothing feels good enough." | We looked back over the brand rounds. Every brand critique scored between 4.5 and 6 blind. Everything the owner had praised on the brand side was a still (the discs, the even lines, the cloud icons, the Crag's three slabs, the Planet in black and white). The motion's target had moved from round to round. So: settle the mark, and stop there. |
 | "Let's go with the acrylic globe and have a color version, a black version, and a white version, and a version for each speaker" | **The acrylic globe is EARF's mark**: in colour, in black, in white and in each of the eight speakers' own tints, with four lockups, as SVGs and PNGs in `brand/mark/` (below). |
+| (put it on the look book's cover and the site?) "Both" | **The look book's cover and last page and the site carry it** (below). |
+| (the twelve idents and the Planet?) "Park them" | **Parked**: their code stays in `earth.py` and their videos in `brand/`, but the globe page no longer plays them (`earth.py` PARKED). No more motion for now. |
+| (the critic calls the colour version's browns and rainbow the biggest drag: reopen it?) "Keep it as is" | **The colour version stays as it is.** |
 
 ### The set
 
@@ -111,7 +115,17 @@ whether a simpler favicon of four discs may break the rule of six.
 
 ![Each version at 300, 64, 32 and 16 px, the small cuts at 64 px and under](brand/earth-mark-sizes-r27.png)
 
-The idents, the Planet and the globe page stay as they were, for now.
+### On the look book, the site and the globe page
+
+- **The look book** (version 43): its cover and its last page show the acrylic globe in colour where round 11's globe
+  stood, at the same size and place. EARF beside it is now solid ink, as in the lockup: its blue letters with black
+  outlines were drawn to match the old globe, and beside the acrylic they read as another system. The speakers' cloud
+  icons below keep their outlines; they are the speakers', not the mark.
+- **The site's draft** (version 9): the logo in the header and the footer is the acrylic globe beside EARF, and the
+  draft's banner says the mark is chosen.
+- **The globe page** (version 17) opens on the mark (the rails: the acrylic in colour, black, white and the tints,
+  beside the discs and the lines). The ident player, the Death Star's kick and the Planet's loop are off the page
+  (`earth.py` PARKED; False puts them back); the loader and the cursor stay.
 
 ## Round 26: the Planet as early Disney would draw it, a real coin, and a narrower A (the owner's answers of 2026-10-16)
 

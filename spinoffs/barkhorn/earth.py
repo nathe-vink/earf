@@ -47,7 +47,7 @@ name four ways (Clouds, Atmosphere, Elements, and the colours as chemical elemen
     python3 spinoffs/barkhorn/earth.py --fragment PATH  ->  also the page as an Artifact's body
     python3 spinoffs/barkhorn/earth.py --video [--fonts CSS]  ->  also brand/earth-<scene>-<ground>.mp4
 """
-import argparse, json, math, os, shutil, subprocess, sys, tempfile
+import argparse, json, math, os, re, shutil, subprocess, sys, tempfile
 
 import numpy as np
 from shapely.geometry import LineString, MultiLineString, Point, Polygon
@@ -890,18 +890,16 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
 </style>
 <main>
   <header>
-    <div class="eyebrow">EARF &middot; Round 25 &middot; the globe</div>
-    <h1>Green and blue, see-through acrylic, a coin that flashes the six, and the Earth as a Death Star</h1>
-    <p class="lede">The same 3D Earth on the Earth's 23.4&deg; tilt, its colours moved so blue and green lead: the
-      meridian facing you, the largest disc, is green, the land, and the equator is blue, the sea; red north, yellow
-      south, orange and violet at the sides. In colour the discs are flush, with no strokes; the strokes are the
-      one-colour versions'. No fill completes the circle: the globe is its six discs alone. The acrylic is the discs
-      themselves, see-through, each a slab with its side showing, stacked as tinted sheets: one sheet shows its own
-      colour, and where two cross they make one deeper colour, whichever is in front. The Coin (round 26) spins on its edge through the six colours, one each half turn, then tips and wobbles down, faster as it falls, as a real coin does, and lands face up on the globe; every ident's tilt now
-      begins before its spin ends, so nothing stops between them. Open starts as the flat globe icon, Iris opens the
-      finished globe out of its own centre, Roll rolls it in like a ball, and the Planet takes a meteor.</p>
+    <div class="eyebrow">EARF &middot; Round 27 &middot; the globe</div>
+    <h1>The acrylic globe is the mark; the idents are parked</h1>
+    <p class="lede">Round 27, the owner: &ldquo;Let&rsquo;s go with the acrylic globe and have a color version, a black
+      version, and a white version, and a version for each speaker&rdquo;. The set is in <code>brand/mark/</code> and on
+      the mark&rsquo;s own page; the rails below draw it beside the discs and the lines. The idents and the Planet are
+      parked, as the owner chose: their code stays in <code>earth.py</code> and their videos in <code>brand/</code>, but
+      this page no longer plays them. What follows is the globe as round 25 and 26 left it.</p>
   </header>
 
+  <!--PARKED-->
   <section class="win" aria-label="The ident">
     <div class="bar"><i style="background:#D2382F"></i><i style="background:#E9B320"></i><i style="background:#4F7F3A"></i><b>earf.world &mdash; ident</b></div>
     <div class="screen" id="screen"><canvas id="stage" aria-label="The EARF globe arriving, then EARF beside it"></canvas></div>
@@ -919,6 +917,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
     </div>
     <p class="cap" id="cap-text"></p>
   </section>
+  <!--/PARKED-->
 
   <section class="win" aria-label="Guide rails">
     <div class="bar"><b>Guide rails &mdash; white only, black only, one colour, multicolour</b></div>
@@ -934,7 +933,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       on every coast. Below 49&nbsp;px a mid cut keeps only the two Americas, and at 24&nbsp;px and under the small cut has
       no land and a 24&deg; dish. In one colour it is knock-outs: the disc solid, the land, the surround and the dust cap
       knocked out to the ground. On each beat the cone pushes out, rebounds and settles, and a ring of sound, knocked out
-      of the globe, crosses the Earth (below). As an ident, the Planet (round 26, drawn as early Disney would have):
+      of the globe, crosses the Earth (parked in round 27). As an ident, the Planet (round 26, drawn as early Disney would have, parked in round 27):
       a star twinkles, the meteor grows out of it, draws back and falls on an arc, stretching, and splats on the North
       Atlantic; the Earth squashes and springs back, a shock runs over it and the sea ripples; a white cloud pops up puff
       by puff, chars black from the middle out and is eaten away into curling crescents, and the crater springs open, the
@@ -960,6 +959,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <div class="bar"><b>Cursor &mdash; move over the panel</b></div>
       <div class="pad" id="pad" style="background:#121114"><canvas id="cursor" aria-label="Cursor trail"></canvas></div>
     </div>
+    <!--PARKED-->
     <div class="win">
       <div class="bar"><b>The Death Star, kicking &mdash; for the speakers</b></div>
       <div class="coin" style="background:#121114"><canvas id="kickloop" aria-label="The globe as a Death Star, its dish kicking like a speaker"></canvas></div>
@@ -968,6 +968,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <div class="bar"><b>The planet, struck &mdash; the meteor stays in its core</b></div>
       <div class="coin" style="background:#F2EFEA"><canvas id="meteor" aria-label="A violet meteor strikes the Earth: a white cloud, black smoke curling away, the sea rippling, then the crater with the meteor in its core"></canvas></div>
     </div>
+    <!--/PARKED-->
   </section>
 
   <section class="win" aria-label="Notes">
@@ -2027,13 +2028,14 @@ if (!location.hash.startsWith('#capture')) {
   const capText = document.getElementById('cap-text'), screen = document.getElementById('screen');
   function segs(id, key) {
     const el = document.getElementById(id);
+    if (!el) return;                                                   // round 27: the ident parked, off the page
     el.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
       el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       state[key] = b.dataset.v; state.t0 = performance.now(); capText.textContent = CAPS[state.kind];
       screen.style.background = GROUNDS[state.ground].bg; });
   }
-  segs('kind', 'kind'); segs('style', 'style'); segs('ground', 'ground'); capText.textContent = CAPS.gyro;
-  document.getElementById('replay').onclick = () => { state.t0 = performance.now(); };
+  segs('kind', 'kind'); segs('style', 'style'); segs('ground', 'ground'); if (capText) capText.textContent = CAPS.gyro;
+  const replay = document.getElementById('replay'); if (replay) replay.onclick = () => { state.t0 = performance.now(); };
   // the cursor: the pointer's path, kept a moment, so each colour can be where the circle was a beat ago
   const pad = document.getElementById('pad'), hist = []; let last = -1e9;
   pad.addEventListener('pointermove', e => { const r = pad.getBoundingClientRect(), now = performance.now() / 1000;
@@ -2050,7 +2052,7 @@ if (!location.hash.startsWith('#capture')) {
   }
   // each panel runs only while it is on screen, and the ident starts when it first comes into view, then loops
   const vis = new Map(); const io = new IntersectionObserver(es => es.forEach(e => vis.set(e.target, e.isIntersecting)));
-  ['stage', 'load-night', 'load-paper', 'cursor', 'kickloop', 'meteor'].forEach(id => io.observe(document.getElementById(id)));
+  ['stage', 'load-night', 'load-paper', 'cursor', 'kickloop', 'meteor'].forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
   const on = id => vis.get(document.getElementById(id)) === true;
   function tick(now) {
     const s = now / 1000;
@@ -2075,8 +2077,14 @@ if (!location.hash.startsWith('#capture')) {
 """
 
 
+# round 27 (the owner, of the idents and the Planet: "Park them"): the page leaves out what is between <!--PARKED-->
+# and <!--/PARKED--> (the ident player, the Death Star's kick and the Planet's loop); False puts them back
+PARKED = True
+
+
 def page():
-    return PAGE.replace('__RAILS__', rails_html()).replace('__CORE__', core_html()).replace('__THEME__', theme_html()).replace('__DATA__', json.dumps(data(), separators=(',', ':')))
+    body = re.sub(r'\s*<!--PARKED-->.*?<!--/PARKED-->', '', PAGE, flags=re.S) if PARKED else PAGE
+    return body.replace('__RAILS__', rails_html()).replace('__CORE__', core_html()).replace('__THEME__', theme_html()).replace('__DATA__', json.dumps(data(), separators=(',', ':')))
 
 
 def standalone():
