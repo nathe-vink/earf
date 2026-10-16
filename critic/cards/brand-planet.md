@@ -25,7 +25,7 @@ white on paper.
 
 The planet's drawing (its land, sea, dish, sizes and colours, and its black-and-white knock-out version: the planet
 solid, the land, the surround and the dust cap knocked out, the cone solid); the hand-off every ident shares (the move
-aside over 0.5 s, EARF wiped out of the globe's rim over 0.45 s starting 0.1 s before the move ends, then a 1.3 s
+aside over 0.5 s, EARF wiped out of the globe's rim over 0.45 s starting 0.1 s before the move ends, then a 1.0 s (round 26: 1.3)
 hold); the grounds; flat colour (no gradients or fades on the planet). Flashes stay under three a second (WCAG 2.3.1).
 
 ## How it moves, and its parameters

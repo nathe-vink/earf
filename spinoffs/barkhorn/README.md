@@ -63,6 +63,10 @@ tipping and wobbling down face up; and narrows the A, its crossbar lower.
 | (a black-and-white Planet) "Yes, add black and white" | **The Planet in black and white**, black on paper and white on ink, drawn in knock-outs as the mark is (below). The player's third style is now called Black & white, and the Planet's panel on the globe's page plays in colour, then in black and white. |
 | (the letters) "B: lower crossbar" | **The A narrower**: its feet 170 apart, not 210, so it is 270 wide, 1.29 times the R, with its crossbar 30 lower to keep the triangle inside open (below). |
 | (the Coin, "if done right") "Real coin physics" | **The Coin spins, tips and wobbles down as a real coin does**: it slows on its edge through its six colours, the globe's face comes round, and it falls flat with the wobble quickening, as Euler's disk does, landing face up (below). |
+| (after the round: black smoke on the black planet shows only by its paper gaps; turn it paper-coloured over the sea?) "Don't" | **Kept as it is**: in black and white the smoke over the sea is its outlines, as the knock-out rule draws it. |
+| (three ripples read as sound as much as water) "Keep three" | **Three rings**, water and sound at once. |
+| (the look book's cover and last page still had the old A) "Update the A only" | **The narrower A in the look book**, on the cover and the last page; round 11's globe stays beside it. |
+| (every ident held 1.3 seconds on EARF; the critic suggested 1.0) "Shorten to 1.0 s" | **Every ident rests 1.0 second on EARF**, so each ends 0.3 seconds sooner (`earth.py` REST); all the videos were made again. |
 
 ### The Planet, as early Disney would draw it
 
@@ -92,7 +96,8 @@ Each beat is one of the animators' principles (`earth.py` PLANET):
 - **Secondary action and the payoff.** As the smoke clears, the crater springs open ring by ring, each a beat after
   the last, past its size and back, its bowl sinking past its depth and settling. Then the meteor drops into the core,
   big as if near, and bounces to rest, white-hot, cooling to violet. The crater holds a beat on the clean planet; at
-  1.61 seconds the planet moves aside and EARF is wiped in, as every ident ends. 3.76 seconds in all.
+  1.61 seconds the planet moves aside and EARF is wiped in, as every ident ends. 3.46 seconds in all, with the
+  1.0-second rest on EARF.
 
 The thump is gone, as you said. Several ways of drawing the smoke were tried before these crescents: claw-like wisps
 (round 25), chains of beads (tadpoles), tapering ribbons (bananas), and puffs shrinking to dots (a ring of black
@@ -117,8 +122,8 @@ the ripples' crests, the cloud and the starburst are in the ground's colour, out
 the ground. The smoke, the meteor and the cone are solid, with gaps; the flame's outer ribbon is an outline. It reads
 as a 1930 cartoon: a black planet, a paper cloud with ink crescents between its puffs, the crater a bullseye in the
 North Atlantic. One question from the critic is yours: on the black sea, black smoke shows only by its paper gaps, so
-there the wisps read as paper outlines. Keep that, or let the smoke turn to the ground's colour where it crosses the
-sea.
+there the wisps read as paper outlines. Asked whether to turn the smoke paper-coloured where it crosses the sea, you
+said not to, so it stays as the rule draws it.
 
 ![The Planet in black and white](brand/earth-planet-bw-r26.png)
 
@@ -140,8 +145,8 @@ the globe upright. Its last turn is eased into the fall. Then it leans to the Ea
 
 It starts to tip just after the globe's face shows edge on, so the coin turns its back to you no more: six edge-ons in
 all, never more than three in any second (worked out in `coinTable`, `earth.py`). The face is the whole coin drawn in
-3D, the globe on it in its projection, so it works in the discs, the acrylic and the lines. The ident runs 5.2
-seconds, half a second longer than round 25's, for the wobble.
+3D, the globe on it in its projection, so it works in the discs, the acrylic and the lines. The ident runs 4.9
+seconds: the wobble adds half a second to round 25's, and the shorter rest on EARF takes 0.3 off.
 
 ![The Coin, frame by frame](brand/earth-coin-r26.png)
 
@@ -158,15 +163,17 @@ end on the 185 line with the R's bowl, the one rule this gives up (`marks.py` `_
 Everything drawn from the wordmark follows: the lockups (`brand/earth-lockup-*.svg`, `marks/earf*.svg`), the
 globe's page and its idents, the site's logo and the brand sheets. The speaker's CAD placed EARF by the old width
 (1020), so it now reads the width from the wordmark (`product.py` `wordmark_height`). The renders of the speakers keep
-the old A until they are next rendered, and so does the look book's cover, which you have kept as it is for now.
+the old A until they are next rendered. The look book's cover and last page take the new A, beside round 11's
+globe, which stays.
 
 ![EARF, the A narrower](brand/earth-wordmark-r26.png)
 
 ### The idents now
 
 Every ident ends as before: the whole globe, upright, leaning to the Earth's tilt, then aside, and EARF (its narrower
-A now) wiped in beside it. The Coin runs 5.2 seconds (round 25: 4.7) and the Planet 3.76 (3.3); the others are as
-round 25 left them. All of them were rendered again for the new A.
+A now) wiped in beside it. It rests there 1.0 second now, not 1.3, as you chose, so every ident is 0.3 seconds
+shorter: the Coin 4.9 seconds (round 25: 4.7, before its wobble), the Planet 3.46 (3.3), the others 0.3 under round
+25's. All of them were rendered again for the new A and the shorter rest.
 
 ![The idents, frame by frame](brand/earth-idents-r26.png)
 
@@ -253,7 +260,7 @@ Every ident still ends on the whole globe, upright, and leans to the Earth's 23.
 gesture: 0.3 seconds, going a little past 23.4 and settling back, as a gyroscope finds its axis. It begins before the
 arrival has quite stopped, so nothing stands still between them. The globe moves aside the moment the lean lands, and
 EARF is wiped out of the globe's rim beside it, starting just before the globe settles (typed in, the letters came as
-four one-frame jumps). Then it holds 1.3 seconds. A wipe cuts the letters as it passes (it reads "EAI" for a frame or
+four one-frame jumps). Then it holds 1.3 seconds (1.0 since round 26). A wipe cuts the letters as it passes (it reads "EAI" for a frame or
 two); the acrylic's critic would rather each letter faded in whole, while the ident critic, who judges the timing,
 keeps the wipe. That one is yours to choose.
 

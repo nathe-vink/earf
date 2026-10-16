@@ -40,7 +40,7 @@ owner decides, so those stay on the page and are not judged here. Times in secon
   before its arrival ends.
 - The hand-off (its timings may change): it holds `HOLD` 0 (round 3: 0.1; round 2: 0.35), moves aside over `MOVE` 0.5 (smooth), and EARF is wiped
   out of the globe's right rim, left to right, over `WIPE.dur` 0.45 (cubic ease-out), starting `WIPE.lead` 0.1 before
-  the move ends (round 3: 0; round 2: 0.15); then it holds 1.3. (Round 1 typed the letters in, four one-frame jumps.)
+  the move ends (round 3: 0; round 2: 0.15); then it holds 1.0 (`REST`; round 26: 1.3, the owner chose 1.0). (Round 1 typed the letters in, four one-frame jumps.)
 - Coin: it spins on its edge about the vertical from edge on, a new face each half turn at one steady speed:
   `COIN.half` 0.34 (each colour's half turn), six colours round the colour wheel (yellow, orange, red, violet, blue,
   green), then it lands on the globe (whose facing disc is green) over a quarter turn, `COIN.land` 0.51 (cubic ease-out, its
