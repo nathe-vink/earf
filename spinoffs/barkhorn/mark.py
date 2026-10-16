@@ -294,24 +294,42 @@ LATERALS = [('Now: three parallels, stacked', None),
             ("The meridians' layout on its side: shares the green, five discs", (30, None, -30)),
             ('On its side, the blue equator kept: six discs', (30, 0, -30)),
             ('A second set of three, 60 degrees apart: six discs', (60, 0, -60))]
+# Round 27h (the owner asked again): in those the side axis lies across the picture, so the lateral discs cross on the
+# outline itself, where the meridians cross inside it. Turned TURN degrees on the axis (round 27f's 16 degree tip, seen
+# from the side), the side axis's end comes toward you as far as the pole does, so the lateral discs cross inside the
+# outline too, upper left, as the meridians do upper right (the green then faces you turned that much). Each row: its
+# title, the lateral tilts and the turn.
+TURN = round(np.degrees(np.arcsin(np.sin(np.radians(E.ELEV)) / np.cos(np.radians(E.ELEV)))), 1)
+LATERALS_TURNED = [('Now: three parallels, stacked', None, 0.0),
+                   ('Crossing as the meridians do: five discs, the green shared', (30, None, -30), TURN),
+                   ('The same with the blue equator kept: six discs', (30, 0, -30), TURN)]
 
 
-def lateral(path):
-    """Round 27g's study: each layout in black and in colour, large and at 64 px, with its disc count and how far its
-    tips reach."""
+def lateral(path, rows=LATERALS):
+    """Round 27g's study (and 27h's, rows=LATERALS_TURNED): each layout in black and in colour, large and at 64 px,
+    with its disc count and how far its tips reach."""
     font, small = ImageFont.truetype('DejaVuSans.ttf', 16), ImageFont.truetype('DejaVuSans.ttf', 12)
     px, sm, gap = 300, 64, 18
     w = gap + 2 * (px + gap) + 2 * (sm + gap) + gap
-    sheet = Image.new('RGB', (w, len(LATERALS) * (px + 52) + gap), '#DEDCD7')
+    sheet = Image.new('RGB', (w, len(rows) * (px + 52) + gap), '#DEDCD7')
     d = ImageDraw.Draw(sheet)
-    for r, (title, lat) in enumerate(LATERALS):
+    for r, (title, lat, *turn) in enumerate(rows):
+        turn = turn[0] if turn else 0.0
         y = gap + r * (px + 52)
         E.LATERAL = lat
         try:
-            ims = [_png(E.mark_svg('discs', E.INK), px, E.PAPER), _png(E.mark_svg('acrylic', E.RING), px, E.PAPER),
-                   _png(E.mark_svg('discs', E.INK, px=sm), sm, E.PAPER), _png(E.mark_svg('acrylic', E.RING), sm, E.PAPER)]
+            if turn:                                     # (spin_svg draws it turned; the small cut's seam by hand)
+                small_disc = spin_svg('discs', E.INK, E.PAPER, turn, keep=1.5).replace(
+                    E.discs_body([E.INK] * 6, spin=turn, flush=False), E.discs_body([E.INK] * 6, spin=turn, flush=False,
+                                                                                   seam=E.SMALL_SEAM[64]))
+                ims = [_png(spin_svg('discs', E.INK, E.PAPER, turn, keep=1.5), px, E.PAPER),
+                       _png(spin_svg('acrylic', E.RING, E.PAPER, turn), px, E.PAPER),
+                       _png(small_disc, sm, E.PAPER), _png(spin_svg('acrylic', E.RING, E.PAPER, turn), sm, E.PAPER)]
+            else:
+                ims = [_png(E.mark_svg('discs', E.INK), px, E.PAPER), _png(E.mark_svg('acrylic', E.RING), px, E.PAPER),
+                       _png(E.mark_svg('discs', E.INK, px=sm), sm, E.PAPER), _png(E.mark_svg('acrylic', E.RING), sm, E.PAPER)]
             n = 6 if lat is None else sum(t is not None for t in lat) + 3
-            reach = tips(0)
+            reach = tips(turn)
         finally:
             E.LATERAL = None
         x = gap
@@ -330,6 +348,7 @@ if __name__ == '__main__':
     ap.add_argument('--spin', nargs='*', help='also the spins (MP4 and WebM in brand/mark), or only those whose tags are named')
     ap.add_argument('--spin-sheet', help='also a sheet of the spins, a frame every 0.4 s, to this path')
     ap.add_argument('--lateral', help="also round 27g's study of the lateral discs as a second set, to this path")
+    ap.add_argument('--lateral-turned', help="also round 27h's: the same crossing inside the outline, to this path")
     a = ap.parse_args()
     fs = write()
     print(f'{len(fs)} SVGs and PNGs in', os.path.relpath(OUT, HERE))
@@ -351,3 +370,6 @@ if __name__ == '__main__':
     if a.lateral:
         lateral(a.lateral)
         print(a.lateral)
+    if a.lateral_turned:
+        lateral(a.lateral_turned, LATERALS_TURNED)
+        print(a.lateral_turned)

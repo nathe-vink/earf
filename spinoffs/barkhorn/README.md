@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27g**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27h**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -58,7 +58,19 @@ globe in colour and the seamed discs in black, in white and in each speaker's co
 makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, 27c takes the stroke from round the one-colour discs, and 27d takes out the clipping. Round 27e
 untrims the one-colour discs again, measures what the angle does to their tips, and spins the mark on its axis like a
 top. Round 27f tips the globe 16° toward you instead of 22°, which halves the tips, and keeps the steady spin. Round
-27g studies the lateral discs crossing as the meridians do.
+27g studies the lateral discs crossing as the meridians do, and 27h shows that crossing inside the outline.
+
+## Round 27h: the lateral crossing inside the outline (the owner's question again, 2026-10-16)
+
+| the owner's question | the answer |
+|---|---|
+| "What would it look like if the lateral discs intersected like the longitudinal discs do?" | **Closer than 27g**: there the side axis lay across the picture, so the lateral discs crossed on the outline itself, where the meridians cross inside it. Turned 16.7° on its axis, the side axis's end comes toward you as far as the pole does (`mark.TURN`), and the lateral discs cross inside the outline too: two matching three-way crossings, the meridians' upper right, the lateral discs' upper left, the green disc in both. A study only; the parallels stay (27g's answer). |
+
+Turned, the green no longer faces you squarely, so the tips reach a little further (0.06 of the radius, against 0.04).
+The five-disc version (the green shared) is the cleanest; with the blue equator kept, six discs, it is busier
+(`mark.py --lateral-turned PATH`).
+
+![The lateral discs crossing inside the outline, as the meridians do: now, five discs, six discs](brand/earth-mark-lateral-turned-r27h.png)
 
 ## Round 27g: the lateral discs crossing as the meridians do (a study; the owner's questions of 2026-10-16)
 
