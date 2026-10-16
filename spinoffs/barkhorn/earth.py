@@ -51,8 +51,8 @@ import argparse, json, math, os, re, shutil, subprocess, sys, tempfile
 
 import numpy as np
 from shapely.geometry import LineString, MultiLineString, Point, Polygon
-from shapely.ops import polygonize, unary_union
-from shapely import affinity, make_valid, set_precision
+from shapely.ops import linemerge, polygonize, unary_union
+from shapely import affinity, make_valid, set_precision, union_all
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -375,6 +375,43 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=1.5):
         parts = [q for q in getattr(g, 'geoms', [g]) if q.geom_type == 'Polygon' and q.area > 1e-6]
         out.append(unary_union(parts) if parts else None)
     return out
+
+
+# Round 27i. The owner, of the set: "Can we also do stroke versions of these in addition to fill, or will that not work?"
+# It works, as the same discs drawn in line. In one colour the discs are opaque, so the stroke version is their visible
+# edges: every piece the fill keeps outlined once (where two pieces meet, one line), the outline too, `w` of the radius
+# wide, round at the joins and ends (edge_lines; scaled so the stroke's outer edge lies where the fill's does). In colour
+# the acrylic is see-through, so its stroke version is the six rims themselves, each in its own colour, the far halves
+# under the near and thinner (lines_body with depth, round 22's lines), `wc` wide in front, a little heavier than one
+# colour's lines since the far halves are lighter. Below 64 px the lines knot together, so at 64 px they widen to
+# `small` and under it the fill's small cuts stand in.
+STROKE = dict(w=0.05, wc=0.065, small={64: 0.07})
+
+
+def edge_lines(spin=0.0, seam=SEAM, keep=1.5):
+    """The discs' visible edges as lines (round 27i): each piece disc_shapes keeps (one colour, seamed), outlined, the
+    edges two pieces share drawn once."""
+    kept = []
+    for f in facets(spin):
+        for part in getattr(f, 'geoms', [f]):
+            if part.geom_type != 'Polygon' or part.is_empty:
+                continue
+            q = part.buffer(-seam / 2, join_style=2, mitre_limit=4)        # (disc_shapes' own test for a piece)
+            k = 0.3 * seam
+            q = q.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
+            if not q.is_empty and not q.buffer(-keep / 2 * seam).is_empty:
+                kept.append(part)
+    lines = union_all([q.boundary for q in kept], grid_size=GRID)
+    return linemerge(lines) if lines.geom_type == 'MultiLineString' else lines
+
+
+def strokes_body(colour, spin=0.0, w=STROKE['w']):
+    """One colour's stroke version (round 27i): edge_lines as one stroked path."""
+    k = 1 / (1 + w / 2)
+    lines = affinity.scale(edge_lines(spin), k, k, origin=(0, 0))
+    d = ' '.join(_d(np.array(q.coords)) for q in getattr(lines, 'geoms', [lines]) if q.length > 0)
+    return (f'<path d="{d}" fill="none" stroke="{colour}" stroke-width="{w * k:.4f}" stroke-linejoin="round" '
+            f'stroke-linecap="round"/>')
 
 
 def discs_body(colours, spin=0.0, flush=True, seam=SEAM, keep=1.5):
@@ -764,7 +801,8 @@ def acrylic_ink_body(colour, spin=0.0, n=720, px=None):
 
 def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper', px=None):
     """style: lines (the far halves lighter: the mark), even (every line one weight), discs (round 24b: flush in colour,
-    seamed in one colour), acrylic (round 24b: every disc tinted, crossing to the colours between) or tubes (round 23);
+    seamed in one colour), acrylic (round 24b: every disc tinted, crossing to the colours between), strokes (round 27i:
+    the discs in line) or tubes (round 23);
     on `ground`, paper or night; colours: six (a ring each) or one."""
     one = isinstance(colours, str)
     if one:
@@ -781,6 +819,12 @@ def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper', p
     elif style == 'discs':
         seam = next((SMALL_SEAM[k] for k in sorted(SMALL_SEAM) if one and px and px <= k), SEAM)
         body, e = discs_body(colours, flush=not one, seam=seam), 1 + W_LINE / 2
+    elif style == 'strokes' and one:                     # round 27i: the discs' visible edges in line
+        w = next((STROKE['small'][k] for k in sorted(STROKE['small']) if px and px <= k), STROKE['w'])
+        body, e = strokes_body(colours[0], w=w), 1 + W_LINE / 2
+    elif style == 'strokes':                             # round 27i: the acrylic's rims, see-through, in their colours
+        k = 1 / (1 + STROKE['wc'] / 2)
+        body, e = f'<g transform="scale({k:.5f})">{lines_body(colours, depth=True, w=STROKE["wc"])}</g>', 1 + W_LINE / 2
     else:
         body, e = lines_body(colours, depth=style == 'lines'), 1 + W_LINE / 2
     wh = f' width="{size}" height="{size}"' if size else ''

@@ -56,6 +56,11 @@ and the steady spin.
   version, its axis wobbling round a circle `wobble` 5 degrees across, moved the lean off the Earth's and is not made.
   In motion no piece is dropped (each narrows into its seam) and the scale back to the discs' width is the seam's own,
   so nothing pops between frames. Black and colour, as MP4 and WebM; sheet 4 is a frame every 0.4 s.
+- In line (round 27i, new; the owner: "Can we also do stroke versions of these in addition to fill, or will that not
+  work?"): every version again as strokes, beside the fills. In one colour the discs' visible edges, every piece the
+  fill keeps outlined once, the outline too, `w` 0.05 of the radius, round joins and ends; in colour the six rims,
+  see-through, in their colours, the far halves thinner (round 22's lines), `wc` 0.065 in front. At 64 px a heavier
+  cut (0.07); below 64 px the fills' small cuts. Sheet 6 is the set in line.
 - Round 1 judged the acrylic's own one-colour forms, kept in the code:
 - Black and white (one ink, no tints): a point is inked where an odd number of discs cover it (parity: the discs
   cancel where they cross, as two films do in one ink), the discs as flat ovals. Tried and left: a solid ball cut by

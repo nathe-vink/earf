@@ -33,6 +33,12 @@ study of its angle:
     brand/mark/earf-globe-<black|colour>-spin.<mp4|webm>   the globe spinning on its axis, 4-second loops (round 27f:
                                                           the steady spin, chosen over the top's wobble)
     python3 spinoffs/barkhorn/mark.py --spin [TAG ...] [--spin-sheet PATH] [--angles PATH]
+
+Round 27i adds each globe in line, beside the fills (the owner: "Can we also do stroke versions of these"):
+
+    brand/mark/earf-globe-<tag>-stroke.svg                   the colour as its six rims, the rest as the discs' edges
+    brand/mark/small/earf-globe-<black|white>-stroke-64.svg  the heavier cut for 64 px (under it, the fills' small cuts)
+    python3 spinoffs/barkhorn/mark.py --stroke-sheet PATH
 """
 import argparse, os, subprocess, sys, tempfile
 
@@ -69,6 +75,11 @@ GLOBES = [('colour', 'Colour', 'acrylic', E.RING, E.PAPER), ('black', 'Black', '
 LOCKUPS = [('colour', 'acrylic', E.RING, E.INK, 'paper'), ('colour-ink', 'acrylic', E.RING, E.WHITE, 'night'),
            ('black', 'discs', E.INK, E.INK, 'paper'), ('white', 'discs', E.WHITE, E.WHITE, 'night')]
 INKS = [('black', E.INK, 'paper'), ('white', E.WHITE, 'night')]
+# Round 27i (the owner: "Can we also do stroke versions of these in addition to fill, or will that not work?"): each
+# version again in line (earth.mark_svg's strokes), beside the fills: the colour as its six rims, the rest as the
+# discs' visible edges in their one colour. Above 64 px the master, at 64 px the heavier small cut, and under 64 px the
+# fill's own small cuts stand in.
+STROKES = [(f'{tag}-stroke', f'{title}, in line', 'strokes', cols, bg) for tag, title, style, cols, bg in GLOBES]
 MIN_PX = 24                                               # the colour and the speakers': never smaller (the critic's rule)
 LOCK_W = (450 + 110 + M.WORDMARK_W) / 450                 # a lockup's width over its globe's
 
@@ -77,6 +88,11 @@ def write():
     os.makedirs(OUT, exist_ok=True)
     files = []
     for tag, title, style, cols, bg in GLOBES:
+        f = os.path.join(OUT, f'earf-globe-{tag}.svg')
+        open(f, 'w').write(E.mark_svg(style, cols, label=f'EARF globe, {title.lower()}',
+                                      ground='night' if bg == E.NIGHT else 'paper'))
+        files.append((f, ['-w', '1024', '-h', '1024']))
+    for tag, title, style, cols, bg in STROKES:
         f = os.path.join(OUT, f'earf-globe-{tag}.svg')
         open(f, 'w').write(E.mark_svg(style, cols, label=f'EARF globe, {title.lower()}',
                                       ground='night' if bg == E.NIGHT else 'paper'))
@@ -90,6 +106,10 @@ def write():
         for px in sorted(E.SMALL_SEAM, reverse=True):
             f = os.path.join(OUT, 'small', f'earf-globe-{tag}-{px}.svg')
             open(f, 'w').write(E.mark_svg('discs', ink, label=f'EARF globe, {tag}, up to {px} px', ground=g, px=px))
+            files.append((f, ['-w', str(px), '-h', str(px)]))
+        for px in sorted(E.STROKE['small'], reverse=True):
+            f = os.path.join(OUT, 'small', f'earf-globe-{tag}-stroke-{px}.svg')
+            open(f, 'w').write(E.mark_svg('strokes', ink, label=f'EARF globe, {tag}, in line, up to {px} px', ground=g, px=px))
             files.append((f, ['-w', str(px), '-h', str(px)]))
         for px in (64, 32):
             f = os.path.join(OUT, 'small', f'earf-lockup-{tag}-{px}.svg')
@@ -149,9 +169,9 @@ def sizes(path):
     sheet.save(path)
 
 
-def sheet(path):
-    """The set on one sheet, each globe on its ground (storyboard.py's svgs)."""
-    args = [f'{title}={os.path.join(OUT, f"earf-globe-{tag}.svg")}@{bg}' for tag, title, style, cols, bg in GLOBES]
+def sheet(path, rows=GLOBES):
+    """The set on one sheet, each globe on its ground (storyboard.py's svgs); rows=STROKES for the set in line."""
+    args = [f'{title}={os.path.join(OUT, f"earf-globe-{tag}.svg")}@{bg}' for tag, title, style, cols, bg in rows]
     subprocess.run([sys.executable, os.path.join(HERE, 'storyboard.py'), 'svgs', *args, '--cols', '6', '--out', path], check=True)
 
 
@@ -344,6 +364,7 @@ if __name__ == '__main__':
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--sheet', help='also a sheet of the set, each on its ground, to this path')
     ap.add_argument('--sizes', help='also a sheet of the sizes, to this path')
+    ap.add_argument('--stroke-sheet', help="also a sheet of round 27i's set in line, to this path")
     ap.add_argument('--angles', help="also round 27e's angle study, to this path")
     ap.add_argument('--spin', nargs='*', help='also the spins (MP4 and WebM in brand/mark), or only those whose tags are named')
     ap.add_argument('--spin-sheet', help='also a sheet of the spins, a frame every 0.4 s, to this path')
@@ -358,6 +379,9 @@ if __name__ == '__main__':
     if a.sizes:
         sizes(a.sizes)
         print(a.sizes)
+    if a.stroke_sheet:
+        sheet(a.stroke_sheet, STROKES)
+        print(a.stroke_sheet)
     if a.angles:
         angles(a.angles)
         print(a.angles)

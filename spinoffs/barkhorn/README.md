@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27h**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27i**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -58,7 +58,29 @@ globe in colour and the seamed discs in black, in white and in each speaker's co
 makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, 27c takes the stroke from round the one-colour discs, and 27d takes out the clipping. Round 27e
 untrims the one-colour discs again, measures what the angle does to their tips, and spins the mark on its axis like a
 top. Round 27f tips the globe 16° toward you instead of 22°, which halves the tips, and keeps the steady spin. Round
-27g studies the lateral discs crossing as the meridians do, and 27h shows that crossing inside the outline.
+27g studies the lateral discs crossing as the meridians do, and 27h shows that crossing inside the outline. Round 27i
+draws every version in line as well.
+
+## Round 27i: every version in line (the owner's question of 2026-10-16)
+
+| the owner's question | what changes |
+|---|---|
+| "Can we also do stroke versions of these in addition to fill, or will that not work?" | **It works: every globe now comes in line too**, beside the fills (`earth.py`'s strokes style; `brand/mark/earf-globe-<tag>-stroke`). |
+
+- **One colour (black, white, each speaker's).** The same opaque discs drawn in line: every piece the fill keeps is
+  outlined once, so where two pieces meet there is one line, and the outline is drawn too (`edge_lines`). The lines
+  are 0.05 of the radius wide, round at the joins and ends, and scaled so their outer edge sits where the fill's does.
+- **Colour.** The acrylic is see-through, so its line version is the six rims themselves, each in its own colour, the
+  far halves thinner behind the near (round 22's lines), 0.065 wide in front: a little heavier than one colour's, since
+  the far halves are lighter.
+- **Small sizes.** Above 64 px the full drawing; at 64 px a heavier cut (0.07 wide,
+  `small/earf-globe-<black|white>-stroke-64`); below 64 px the lines knot together, so the fills' small cuts stand in.
+  The lockups stay solid, as EARF's letters are.
+
+Drawn: the eleven globes in line (SVG and a 1024 px PNG each), the two 64 px cuts and a sheet (`mark.py
+--stroke-sheet PATH`); the mark's page (version 8) has a new section, "In line".
+
+![Every version in line, each on its ground](brand/earth-mark-strokes-r27i.png)
 
 ## Round 27h: the lateral crossing inside the outline (the owner's question again, 2026-10-16)
 
