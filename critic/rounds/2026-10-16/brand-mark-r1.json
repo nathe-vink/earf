@@ -1,0 +1,74 @@
+{
+  "stage1": {
+    "impression": "A globe built from a disc and five tilted elliptical rings. The set has a multicolour master, a one-colour even-odd (XOR) cut in black and white, eight single-hue tonal variants (Flare to Smoke), a 300/64/32/16 px ladder, and lockups with a heavy 'EARF' wordmark. The XOR cut is the real find: flat, truly one colour, with a twisting op-art rhythm that already suggests rotation, and it inverts cleanly to White. Almost everything else pulls it down. The Colour master is six hues multiplied into browns, maroons and olives: a rainbow 'global community' globe any NGO could own, busy at 64 px and confetti at 32 and 16. The rings overshoot the disc, so the outline is lumpy (bumps at 12, 3, 6 and 9 o'clock) rather than a confident circle. Five ellipses at arbitrary angles cannot be drawn from memory. The XOR leaves hairline slivers where rings nearly coincide, and these fill in or break: at 16 px Black and White are a spiky broken ring. The tonal variants depend on stacked opacities rather than one ink and differ only in hue, although their names promise character, and Fog on ink loses its structure almost entirely. Colour and Black do not read as the same mark (a filled green planet with rings against an XOR checker). In the lockup the frail mark is lighter than the slab wordmark. A competent draft with one strong idea inside it.",
+    "score": 5.0
+  },
+  "keep": [
+    "The one-ink parity cut (sheet 1 Black/White, sheet 2 at 300 px). The discs cancel where they cross, as films do in one ink, which gives a flat, genuinely one-colour mark with an op-art twist no stock globe icon has, and it inverts cleanly to White.",
+    "The tint system. One physical rule (sheets of the speaker's acrylic, T = c^(1/at), sides one sheet deeper) produces all eight speaker versions as one family that reads as each speaker's material. The slab sides show real thickness at 300 px and still hold the disc edges at 64 px."
+  ],
+  "changes": [
+    {
+      "rank": 1,
+      "problem": "Below 64 px the one-ink mark (Black, White and the one-ink lockups) breaks into a spiky open ring, and in the lockup it looks frail next to the slab wordmark.",
+      "evidence": "Sheet 2, Black and White rows: at 32 and 16 px the ball is an open, spidery ring with no readable middle, and at 64 px it is already spiky. On the 300 px Black render the thinnest inked regions are 0.037-0.07 R at their widest, which is at most 1.1 px at 32 px and 0.55 px at 16 px. About a fifth of the ink is in features narrower than 0.07 R, and only 70% of the rim is inked. Sheet 3, Black and White lockups: the mark inks 33% of its circle, while each EARF letter inks 68-88% of its box.",
+      "kind": "new",
+      "parameter": "small one-ink cut (new)",
+      "from": null,
+      "to": {"applies_to": ["Black", "White"], "spread_R_by_max_diameter_px": [[16, 0.035], [32, 0.025], [64, 0.02]], "master_above_px": 64, "print_mm_per_px": 0.2646, "rescale_to_master_outer_width": true},
+      "description": "An optical-size cut of the one-ink mark, built from the unchanged parity of the six discs. Every inked region (white ink in the White version) grows outward by a fixed spread: 0.035 R for marks up to 16 px across, 0.025 R up to 32 px and 0.02 R up to 64 px. In print, etch and emboss the same steps apply up to 4.2, 8.5 and 17 mm. The spread closes the hairline slivers and the open rim. The cut is then scaled back to the master's outer width, so the fixed lockup proportions hold. Above 64 px (17 mm) the master is used unchanged. The cut applies wherever the mark is drawn at those sizes, lockups included. It was tested on a rebuild of the card's geometry that matches sheet 2's Black render.",
+      "expected": "On sheet 2 at 64, 32 and 16 px, Black and White keep an unbroken round outline (100% of the rim inked, up from 70%). The slivers at the crossings are closed, while the large middle oval and the ovals between the bands stay open, and the mark is no wider than before. At 64 px it inks about 48% of its circle instead of 34%, so in sheet 3's one-ink lockups it sits close to the wordmark's weight. The 300 px master does not change.",
+      "accept": {"kind": "visual", "at": "sheet 2, Black and White rows, 16 px", "check": "Does the 16 px mark show a closed round outline around a clearly open middle oval, rather than a broken, spiky ring?"}
+    },
+    {
+      "rank": 2,
+      "problem": "07 Fog's discs barely separate from one another, so on ink it reads as a blank pale disc rather than a globe of clear slabs.",
+      "evidence": "Sheet 1 '07 Fog' and sheet 2 '07 Fog' row: the four-sheet middle sits at OKLab L 0.84 against 0.96 for one sheet (ΔE 0.12), with steps of only 0.03-0.05 L between sheet counts. Every other tint spans ΔE 0.23-0.44 (Acid 0.23, Flare 0.25, Ice 0.36, Smoke 0.44). At 64 px the meridians are hard to trace, and at 16 px Fog is a plain pale dot.",
+      "kind": "parameter",
+      "parameter": "at (07 Fog)",
+      "from": 0.5,
+      "to": 0.3,
+      "expected": "One sheet moves from about #EDF1F1 to #E2E9E9 (L 0.93), and the four-sheet middle from #BFCCCC to about #9DAFAF (L 0.74). The slab sides land at about L 0.64-0.69. The spread from one to four sheets rises from ΔE 0.12 to about 0.19, with no step smaller than Acid's (0.057). The ball is still the brightest thing on ink and reads as clear, faintly green acrylic, not grey plastic.",
+      "accept": {"kind": "visual", "at": "sheet 2, 07 Fog row, 64 px", "check": "Can the equator and both side meridians be traced as grey bands distinct from the near-white outer areas?"}
+    },
+    {
+      "rank": 3,
+      "problem": "Below about 24 px the colour and tint versions stop being the globe: the colour mark turns to confetti and the tints to a plain tinted dot.",
+      "evidence": "Sheet 2, 16 px column: Colour is a speckle of red, orange, violet, blue, green and yellow pixels with no structure, and at 32 px it is already a mosaic. 03 Acid, 05 Ice, 07 Fog and 08 Smoke are tinted discs with at most a darker smudge in the middle.",
+      "kind": "new",
+      "parameter": "minimum size for the colour and tint versions (new)",
+      "from": null,
+      "to": {"applies_to": ["Colour", "01 Flare", "02 Dust", "03 Acid", "04 Poison", "05 Ice", "06 Haze", "07 Fog", "08 Smoke"], "min_diameter_px": 24, "min_diameter_mm": 6.4, "below_minimum": "small one-ink cut, Black on light grounds, White on dark grounds"},
+      "description": "A usage rule: the colour and tint versions are never drawn smaller than 24 px (6.4 mm) across. Below that, the small one-ink cut from change 1 stands in: Black on light grounds, White on dark ones. This covers favicons, tab icons and small corner marks.",
+      "expected": "Sheet 2's 16 px cells for Colour and the tints show the small one-ink cut, labelled 'min 24 px', so nothing on the ladder is a confetti ball or a featureless dot. Renders at 32 px and above are unchanged.",
+      "accept": {"kind": "visual", "at": "sheet 2, 16 px column, Colour and tint rows", "check": "Does every colour and tint row show the small one-ink cut in its 16 px cell instead of a multicolour or tinted ball?"}
+    },
+    {
+      "rank": 4,
+      "problem": "The owner requires the mark to work animated, and the set has no motion at all.",
+      "evidence": "Sheets 1-3 are all static and the card lists no animated version, though round 22 asks for 'animated'. The fixed geometry already offers a seamless loop. A 60° turn about the globe's own axis maps the three meridians onto one another and leaves the parallels unchanged. On the card's geometry the one-ink frame at 60° matches the rest frame exactly (0 px differ). A snappy 0.4 s step would change up to 34% of the mark's square in a single frame; a 1.0 s symmetric step peaks at about 9%.",
+      "kind": "new",
+      "parameter": "animated mark (new)",
+      "from": null,
+      "to": {"axis": "the globe's own axis, lean 23.44 and tip 22 unchanged", "direction": "eastward, front face moving left to right", "step_deg": 60, "turn_s": 1.0, "ease_cubic_bezier": [0.45, 0, 0.55, 1], "hold_s": 0.5, "loop_s": 1.5, "fps": 30, "moving": "the three meridians", "still": "the three parallels"},
+      "description": "The globe turns as the Earth does, about its own tilted axis, in detents: a 60° turn in 1.0 s on a symmetric ease, then a 0.5 s hold, repeated. Only the three meridians move; the parallels stay put. Parity (one ink) and sheet counts (tints, colour) are recomputed every frame. In one ink and in the tints every hold is exactly the master frame. The colour version's discs return to their own places every three steps (4.5 s).",
+      "expected": "A storyboard in which the meridians sweep past one another and land on the rest frame every 1.5 s, with a clear 0.5 s hold. In one ink the pattern ripples rather than strobes: at 30 fps no more than about a tenth of the mark's square changes between frames. Over 4.5 s the motion trace shows three even humps separated by flat holds.",
+      "accept": {"kind": "motion", "metric": "longest_still", "window": [0.0, 4.5], "op": "between", "value": [0.4, 0.6]}
+    }
+  ],
+  "most_important": "Add the small one-ink cut (change 1). Grow the parity cut by 0.035, 0.025 and 0.02 R for marks up to 16, 32 and 64 px across, and scale it back to the master's width. Black and White then hold a closed, readable ball from 16 to 64 px and in the lockup instead of breaking into a spiky ring.",
+  "out_of_scope": [
+    "The colour version (fixed, round 25). Because its crossings are stacked a step deeper, the six hues turn brown, maroon and olive where orange and violet cross over green, and six hues on a globe read as a generic 'global' rainbow. The green facing meridian covers about 93% of the ball (cos 22°), so the mark reads as a green planet with rings and does not look like the same mark as the one-ink cut. This matters because it is the version on the site, the look book and the boxes.",
+    "The outline (fixed geometry, nothing filling the circle). The union of six discs leaves about 4% of the ball uncovered at the rim, and in one ink 30% of the rim is open, so the silhouette is scalloped rather than a confident circle. That costs recognition at small sizes and in the lockup. Only a change to the geometry or a fill would fix it, and the owner ruled both out in round 25.",
+    "Simplicity against the owner's 'minimal' (round 24b). Six discs at a 23.44° lean and a 22° tip cannot be drawn from memory. Polish can be added within the rules, but minimalism cannot be reached without fewer discs, and the six-disc geometry is fixed.",
+    "Lockup weight (fixed proportions). The small cut narrows the gap up to 64 px, but at large sizes the one-ink mark (34% of its circle inked) stays far lighter than the EARF letters (68-88% of each letter's box). Balancing them at every size would need a change to the lockup or the wordmark."
+  ],
+  "for_owner": [
+    "Grounds for Fog and Smoke. Fog only works on dark grounds: its one-sheet areas (L 0.93-0.96) match paper (0.95). Smoke only works on light grounds: its middle and sides (L 0.18-0.32) sink into ink (0.18). Decide whether the Fog and Smoke pages and boxes always use those grounds, or ask the studio for a Fog on paper and a Smoke on ink.",
+    "Colour in motion. When the globe turns, should the colours travel with their discs? If they do, green leaves the front and returns after three steps, so two holds in every three show violet or orange as the backing. The alternative is for the colour version to rest only on green, with one 180° turn per loop.",
+    "What 'single color' (round 22) covers. Is the tonal tint version enough, or do boxes printed in one spot ink need the one-ink cut in each speaker's tint as a flat colour (eight more files)?",
+    "A favicon fallback. If the small cut still reads as texture at 16 px, the studio's next step would be a favicon without the 40N and 40S parallels: four discs, bolder and simpler. That breaks 'the six discs alone', so it needs your consent.",
+    "Whether to reopen the colour version's crossing depth, which is fixed today (see out_of_scope). It is the biggest remaining drag on the set."
+  ],
+  "projected_score": 6.0
+}

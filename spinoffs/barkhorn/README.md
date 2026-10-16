@@ -2,10 +2,11 @@
 
 The owner's idea of 2026-10-10 was speakers that look like their reference photograph of Friendly Pressure's horns
 (`reference/friendly-pressure-owner-2026-10-10.jpg`, with two more of the same speakers in a bar and a studio beside
-it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
-11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
+it). The brand is **EARF**, its mark the acrylic globe beside the name built of the marks' shapes (the owner, round 27:
+"Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
+barkhorn stays the project's name in this repository.
 
-Status: **concept, round 26**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -52,7 +53,65 @@ a meteor striking the Death Star), puts the Earth on the Death Star, and builds 
 brand's motion for a fresh critic to judge, round by round. It also makes the site's colour section a speaker's page,
 where the colour you pick sets what goes with it. Round 26 draws the Planet again as early Disney would have drawn it,
 beat by beat by the animators' principles; gives the Coin a real coin's physics, spinning,
-tipping and wobbling down face up; and narrows the A, its crossbar lower.
+tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 27 settles the mark: the acrylic
+globe, in colour, in black, in white and in each speaker's own tint, as files for printers and makers.
+
+## Round 27: the mark settled, the acrylic globe in colour, black, white and each speaker's own (the owner's answer of 2026-10-16)
+
+| the owner's note | what changes |
+|---|---|
+| "I don't even know anymore. Nothing feels good enough." | We looked back over the brand rounds. Every brand critique scored between 4.5 and 6 blind. Everything the owner had praised on the brand side was a still (the discs, the even lines, the cloud icons, the Crag's three slabs, the Planet in black and white). The motion's target had moved from round to round. So: settle the mark, and stop there. |
+| "Let's go with the acrylic globe and have a color version, a black version, and a white version, and a version for each speaker" | **The acrylic globe is EARF's mark**: in colour, in black, in white and in each of the eight speakers' own tints, with four lockups, as SVGs and PNGs in `brand/mark/` (below). |
+
+### The set
+
+`mark.py` writes it, from `earth.py`, and [the mark's page](https://claude.ai/artifact/N5LsNPbNHyBmjpTEj756EG) shows
+it, with the small sizes and where each version goes:
+
+- **Colour** is round 25's acrylic as it was: the six discs in the six speakers' tints, see-through, each a slab with
+  its side showing. Nothing in it changed.
+- **Black and white** are one ink, flat, for print, an etch or an emboss, and white out of dark grounds and
+  photographs. A point is inked where an odd number of discs cover it, so where two discs cross they cancel, as two
+  films do in one ink, and every crossing shows without a tint (`acrylic_ink_body`). Until now the acrylic in one
+  colour was the even lines, an open wireframe the brand critic found a different object from the ball in all three of
+  its rounds. Also tried: a solid ball cut by every disc's outline, which read as any globe icon.
+- **Each speaker's own** is stacked sheets of that speaker's acrylic held up to the light (`acrylic_tint_body`). Every
+  disc a line of sight crosses is one sheet, passing T = c^(1/at) of the light (c the tint), so `at` sheets make the
+  speaker's colour: the rim, where one disc lies, is lighter, and the middle, where four cross, deeper. A disc's side,
+  where it is nearest, counts a sheet more, as a polished edge looks deeper. `at` is two, or more for a dark tint so
+  the middle stays no darker than OKLab lightness 0.40: Poison 2.6, Haze 3, Smoke 4 (at two their middles went near
+  black). Fog's tint is nearly clear, so it is taken at 0.3 of a sheet, enough for its stacks to show on ink. As in colour, the ground
+  takes nothing inside the ball, so a tint is the same on paper and on ink, except that Smoke shows only on light
+  grounds and Fog only on dark ones. Also tried: the stack capped at three sheets, which flattened the middle into one
+  blob.
+- **Small sizes** (the critic's first change): below 64 px the black and white broke into a spiky open ring, their
+  thinnest bands under a pixel. So each has three small cuts, every inked part grown and the whole scaled back to the
+  master's width (`earth.py` SMALL): by 0.035 of the radius for marks up to 16 px across, 0.025 up to 32 px and 0.02
+  up to 64 px (4.2, 8.5 and 17 mm in print). They keep a closed outline round an open middle. The colour and the tints
+  go no smaller than 24 px (6.4 mm); below it the small black or white stands in.
+- **The lockups**: the globe beside EARF, one and a half cap heights tall: colour on light, colour on dark, black, white.
+- **The files**: `brand/mark/earf-globe-colour`, `-black`, `-white`, `-01-flare` to `-08-smoke`, and
+  `earf-lockup-colour`, `-colour-ink`, `-black`, `-white`, each an SVG and a transparent PNG (the globes 1024 px
+  square, the lockups 2048 px wide), and in `brand/mark/small/` the small cuts, `earf-globe-black-64`, `-32` and `-16`
+  and the same in white, with the black and white lockups for a globe of 64 or 32 px. Clear space a quarter of the
+  globe's width. `brand/earth-acrylic-*.svg` and the globe page's rails carry the same drawing.
+
+A fresh brand critic judged the set: 5.0 blind, projected 6.0 (`critic/rounds/2026-10-16/brand-mark-r1.json`,
+`critic/LOG.md`). It keeps the black and white ("The XOR cut is the real find: flat, truly one colour, with a twisting
+op-art rhythm") and the tints ("one physical rule ... all eight speaker versions as one family"). Three of its four
+changes are in: the small cuts, Fog at 0.3 (at 0.5 it read as a blank pale disc) and the smallest size for the colour
+and the tints. The fourth, an animated mark (the globe turning 60 degrees on its axis, then holding, looping), is
+yours to call, since you asked for the still set. What holds the score down it may not change: the colour version's
+browns and its rainbow (you chose it as it is), the scalloped outline where no disc reaches the rim, six discs nobody
+could draw from memory, and the black and white lockups lighter than EARF. It asks you three things: whether to reopen
+the colour version's crossings, whether boxes printed in one spot ink need a flat cut in each speaker's colour, and
+whether a simpler favicon of four discs may break the rule of six.
+
+![The mark: colour, black, white and each speaker's own](brand/earth-mark-r27.png)
+
+![Each version at 300, 64, 32 and 16 px, the small cuts at 64 px and under](brand/earth-mark-sizes-r27.png)
+
+The idents, the Planet and the globe page stay as they were, for now.
 
 ## Round 26: the Planet as early Disney would draw it, a real coin, and a narrower A (the owner's answers of 2026-10-16)
 

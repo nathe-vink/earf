@@ -52,7 +52,7 @@ import argparse, json, math, os, shutil, subprocess, sys, tempfile
 import numpy as np
 from shapely.geometry import LineString, MultiLineString, Point, Polygon
 from shapely.ops import polygonize, unary_union
-from shapely import make_valid, set_precision
+from shapely import affinity, make_valid, set_precision
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -560,7 +560,85 @@ def acrylic_body(colours, ground='paper', spin=0.0, n=720):
     return body + g + ''.join(far) + '</g>' + g + ''.join(near) + '</g>'
 
 
-def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper'):
+# Round 27. The owner: "Let's go with the acrylic globe and have a color version, a black version, and a white version,
+# and a version for each speaker". Until now the acrylic in one colour was the lines, which the brand critic found a
+# different object from the ball in all three of its rounds. Now it keeps the ball, two ways:
+# - In a speaker's own tint, the discs are stacked sheets of that speaker's acrylic held up to the light. Every disc a
+#   line of sight crosses (its face, or its side) is one sheet passing T = c ** (1 / at) of the light (c the tint, in
+#   linear light), so `at` sheets make the speaker's own colour, fewer lighter, more deeper. Where a disc's side is
+#   nearest, its polished edge counts one sheet more. As in colour, the ground takes nothing inside the ball, so a tint
+#   reads the same on paper and on ink; but Smoke shows only on paper and Fog only on ink. `at` is two, or more for a
+#   dark tint, so that four sheets (the ball's broad middle, a third of it) are no darker than OKLab lightness `mid`, or
+#   than the tint itself where it is darker (Smoke): at two, Poison's, Haze's and Smoke's middles went near black. So
+#   Poison is taken at 2.6, Haze at 3, Smoke at 4. Fog's tint is nearly clear, so it is taken at half a sheet, deep
+#   enough to show its stacks on ink.
+# - In black or white, the inks, flat for print, an etch or an emboss, the discs cancel where they cross, as two films
+#   do in one ink: a point is inked where an odd number of discs cover it, so every crossing shows with no tints.
+#   (Tried: every disc's outline cut as a seam through a solid ball, which read as any globe icon.)
+# After the brand critic's round (critic/rounds/2026-10-16/brand-mark-r1.json; "The XOR cut is the real find"): below
+# 64 px the one-ink mark broke into a spiky open ring, its thinnest bands under a pixel, so it has small cuts (SMALL):
+# every inked part grown by a spread (of the radius) for the largest size it is drawn at, then scaled back to the
+# master's width, which closes the slivers and the rim and keeps the middle oval open. Fog's sheets go to 0.3 (at 0.5
+# its middle and its rim were 0.12 apart, the least of the tints, and it read as a blank pale disc).
+TINT = dict(at=2.0, mid=0.40, Fog=0.3)
+INKS = (INK, WHITE)
+SMALL = {16: 0.035, 32: 0.025, 64: 0.02}                  # px across at most: the spread (of the radius)
+
+
+def _lin(c):
+    v = _rgb(c) / 255
+    return np.where(v <= 0.04045, v / 12.92, ((v + 0.055) / 1.055) ** 2.4)
+
+
+def _from_lin(v):
+    v = np.clip(v, 0, 1)
+    return _hex(255 * np.where(v <= 0.0031308, 12.92 * v, 1.055 * v ** (1 / 2.4) - 0.055))
+
+
+def tint_at(colour):
+    """How many of a tint's sheets make its own colour (TINT): two, or more for a dark tint, so four sheets stay no darker
+    than OKLab lightness `mid` (or the tint's own); Fog's, half."""
+    if colour == _C['Fog']:
+        return TINT['Fog']
+    c, floor, at = _lin(colour), min(TINT['mid'], _oklab(colour)[0]), TINT['at']
+    while _oklab(_from_lin(c ** (4 / at)))[0] < floor - 1e-3 and at < 12:
+        at += 0.05
+    return round(at, 2)
+
+
+def acrylic_tint_body(colour, spin=0.0):
+    """Round 27: the acrylic in one speaker's tint (TINT): each cell's colour T ** n, n the sheets crossed there (a side
+    nearest, one more), cells of one colour merged."""
+    T = _lin(colour) ** (1 / tint_at(colour))
+    A = ACRYLIC['paper']
+    tones = {}
+    for c, sheets in acrylic_cells([colour] * 6, A, spin):
+        n = len(sheets) + (1 if sheets[0][0] != colour else 0)          # a side shows _side's colour, not the tint
+        tones.setdefault(n, []).append(c)
+    sil = unary_union([c for cs in tones.values() for c in cs])
+    faces = sorted(((unary_union([c.buffer(0.0015, join_style=2) for c in cs]).intersection(sil), _from_lin(T ** n))
+                    for n, cs in tones.items()), key=lambda t: -t[0].area)
+    return ''.join(f'<path d="{_poly_d(g.simplify(0.0008))}" fill="{col}" fill-rule="evenodd"/>' for g, col in faces)
+
+
+def acrylic_ink_body(colour, spin=0.0, n=720, px=None):
+    """Round 27: the acrylic in one ink: inked where an odd number of discs cover the point (the discs as flat ovals).
+    `px`: the largest size it is drawn at; at 64 px or less, the small cut for it (SMALL), scaled back to full width."""
+    x = None
+    for g in rings(spin, n):
+        d = Polygon(g['pts'][:, :2]).buffer(0)
+        x = d if x is None else x.symmetric_difference(d)
+    x = unary_union([p for p in getattr(x, 'geoms', [x]) if p.area > 1e-5])
+    spread = next((SMALL[k] for k in sorted(SMALL) if px and px <= k), 0.0)
+    if spread:
+        w0 = x.bounds[2] - x.bounds[0]
+        x = x.buffer(spread, join_style=1)
+        k = w0 / (x.bounds[2] - x.bounds[0])
+        x = affinity.scale(x, k, k, origin=(0, 0))
+    return f'<path d="{_poly_d(x.simplify(0.0004))}" fill="{colour}" fill-rule="evenodd"/>'
+
+
+def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper', px=None):
     """style: lines (the far halves lighter: the mark), even (every line one weight), discs (round 24b: flush in colour,
     seamed in one colour), acrylic (round 24b: every disc tinted, crossing to the colours between) or tubes (round 23);
     on `ground`, paper or night; colours: six (a ring each) or one."""
@@ -572,8 +650,10 @@ def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper'):
         body, e = tubes_body(colours, ground), 1 + W_TUBE / 2 + 0.02
     elif style == 'acrylic' and not one:
         body, e = acrylic_body(colours, ground), 1 + W_LINE / 2
-    elif style == 'acrylic':                             # in one colour the acrylic is the lines (round 25)
-        body, e = lines_body(colours), 1 + W_LINE / 2
+    elif style == 'acrylic' and colours[0] in INKS:      # round 27: black or white, the discs cancelling where they cross
+        body, e = acrylic_ink_body(colours[0], px=px), 1 + W_LINE / 2
+    elif style == 'acrylic':                             # round 27: a speaker's own tint, stacked (round 25: the lines)
+        body, e = acrylic_tint_body(colours[0]), 1 + W_LINE / 2
     elif style == 'discs':
         body, e = discs_body(colours, flush=not one), 1 + W_LINE / 2
     else:
@@ -604,10 +684,11 @@ def letters():
     return out
 
 
-def lockup_svg(style, colours, word, size=None, bg=None, ground='paper'):
-    """The globe beside EARF, its diameter one and a half cap heights, centred on the letters."""
+def lockup_svg(style, colours, word, size=None, bg=None, ground='paper', px=None):
+    """The globe beside EARF, its diameter one and a half cap heights, centred on the letters (`px`: the globe's largest
+    size, for the one-ink small cuts)."""
     k = 225 / ((1 + W_TUBE / 2 + 0.02) if style == 'tubes' else (1 + W_LINE / 2))
-    inner = mark_svg(style, colours, ground=ground)
+    inner = mark_svg(style, colours, ground=ground, px=px)
     inner = inner[inner.index('</title>') + 8:inner.rindex('</svg>')]
     vw, vh, gap = 450 + 110 + M.WORDMARK_W, 450, 110
     wh = f' width="{size * vw / vh:.0f}" height="{size}"' if size else ''
@@ -897,13 +978,14 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
         <li>The axis leans 23.4&deg;, as the Earth's does and as a desk globe's stand holds it. It also tips 22&deg; toward you, so the parallels open into ovals and the far halves show behind the near ones.</li>
         <li>The colours (round 25): blue and green lead, as the Earth's sea and land. The meridian facing you, the largest disc, is Poison green; the equator, the widest band, is Ice blue; north Flare red and south Acid yellow; of the side meridians, the one that shows more is Dust orange and the one that shows less Haze violet. Round 24 had violet facing you and the primaries on the parallels.</li>
         <li>Discs in colour are flush (round 24b): no seams, no outline, no light. The globe is its six discs alone (round 25): no fill completes the circle where no disc reaches the rim, so its outline is the discs' own, the green disc's oval with the others' tips reaching past it. The strokes belong to the one-colour versions: there the seams are gaps in the ground, and the outline stays whole.</li>
-        <li>Acrylic (round 25) is the discs themselves, see-through, stacked as tinted sheets, each disc a slab a twentieth of the radius thick, its side, where it faces you, a deeper tone of its tint, as a polished acrylic edge looks. The green meridian facing you is the backing, as in the discs. One disc in front shows its own flat colour; where two cross they make one colour darker than either, whichever is in front, as two filters do: red over violet crimson, blue over violet indigo, and the opposite pairs smoky, blue over orange taupe and yellow over violet brown. Where no disc lies in front, the rings' far halves show through the green a little deeper than it, so each ring closes. Where a disc is, the ground takes nothing, so paper and ink match. Stacked in OKLab (a and b averaged, the lightness the darkest sheet's and lower for each sheet more and the less their hues agree); drawn per pixel on the graphics card (without WebGL, the flush discs). No edges (a cage of hoops, the critic found); in one colour the acrylic is the lines.</li>
+        <li>Acrylic (round 25) is the discs themselves, see-through, stacked as tinted sheets, each disc a slab a twentieth of the radius thick, its side, where it faces you, a deeper tone of its tint, as a polished acrylic edge looks. The green meridian facing you is the backing, as in the discs. One disc in front shows its own flat colour; where two cross they make one colour darker than either, whichever is in front, as two filters do: red over violet crimson, blue over violet indigo, and the opposite pairs smoky, blue over orange taupe and yellow over violet brown. Where no disc lies in front, the rings' far halves show through the green a little deeper than it, so each ring closes. Where a disc is, the ground takes nothing, so paper and ink match. Stacked in OKLab (a and b averaged, the lightness the darkest sheet's and lower for each sheet more and the less their hues agree); drawn per pixel on the graphics card (without WebGL, the flush discs). No edges (a cage of hoops, the critic found). In one colour (round 27) it keeps the ball: in black or white the discs cancel where they cross, as two films do in one ink, so every crossing shows without a tint; in a speaker's own colour the discs are stacked sheets of that speaker's acrylic held up to the light, lighter at the rim, deeper where more cross.</li>
         <li>Lines are even, every line one weight, the far halves under the near. Round 22's lighter far halves (in <code>brand/earth-lines-*.svg</code>) remain for one colour at small sizes, where even lines tangle.</li>
         <li>Seen from above the pole, the same rings are a speaker: rings round one centre, with the meridians as spokes. Round 23&rsquo;s Kick used that view; round 24b makes the speaker a Death Star&rsquo;s dish instead.</li>
         <li>Round 23's tubes, the printer and the kick, and round 24's lit sphere and cut-open globe, are set aside; the first three stay in <code>earth.py</code> and in round 23's files.</li>
       </ul>
       <h3>The rails</h3>
       <ul>
+        <li>The mark (round 27, the owner: "Let's go with the acrylic globe"): the acrylic globe in colour, in black, in white and in each speaker's own tint, as files in <code>brand/mark/</code>. The discs and the lines below stay as they were, for reference.</li>
         <li>Black only: paper, print, embossing and a one-colour etch. White only: dark grounds, and the etched mark on the acrylic.</li>
         <li>One colour: each speaker's own mark, for the speaker, its box and its page. Avoid Acid on paper, where yellow is too faint; use it on ink.</li>
         <li>Multicolour: the brand at large. Animated: screens only (the idents, the loader, the cursor).</li>
@@ -2055,7 +2137,10 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     written = []
     for style in ('lines', 'even', 'discs', 'acrylic'):                 # (round 23's tubes stay as they were)
-        for tag, cols in [('multi', RING), ('ink', RING), ('black', INK), ('white', WHITE)] + [(n.lower(), c) for n, c in zip(NAMES, HUES)]:
+        sets = [('multi', RING), ('ink', RING), ('black', INK), ('white', WHITE)] + [(n.lower(), c) for n, c in zip(NAMES, HUES)]
+        if style == 'acrylic':                                           # round 27: every speaker its own, Fog and Smoke too
+            sets += [('fog', _C['Fog']), ('smoke', _C['Smoke'])]
+        for tag, cols in sets:
             f = f'earth-{style}-{tag}.svg'                                   # (round 25: 'ink', the multicolour on ink)
             open(os.path.join(OUT, f), 'w').write(mark_svg(style, cols, label=f'EARF globe, {style}, {tag}',
                                                            ground='night' if tag in ('white', 'ink') else 'paper'))
