@@ -325,11 +325,11 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, rim=0.045):
     return out
 
 
-def discs_body(colours, spin=0.0, flush=True):
+def discs_body(colours, spin=0.0, flush=True, seam=SEAM, rim=0.045):
     """The discs as SVG paths, flush in colour, seamed in one colour (disc_shapes); the discs alone (round 25: no ball
     filled under them)."""
     return ''.join(f'<path d="{_poly_d(g)}" fill="{colours[i]}" fill-rule="evenodd"/>'
-                          for i, g in enumerate(disc_shapes(spin, flush)) if g is not None)
+                          for i, g in enumerate(disc_shapes(spin, flush, seam=seam, rim=rim)) if g is not None)
 
 
 def _lighter(c, k):
@@ -583,6 +583,12 @@ def acrylic_body(colours, ground='paper', spin=0.0, n=720):
 TINT = dict(at=2.0, mid=0.40, Fog=0.3)
 INKS = (INK, WHITE)
 SMALL = {16: 0.035, 32: 0.025, 64: 0.02}                  # px across at most: the spread (of the radius)
+# Then the owner: "I like discs for monochrome and acrylic for multicolor". So the mark is the acrylic in colour and the
+# seamed discs (round 24b's one-colour discs) in black, in white and in each speaker's own colour; the parity cut and
+# the tints above stay here as the acrylic's own one-colour forms. The discs' small cuts widen the seams (and stop them
+# further from the rim) so they stay a pixel or more: at the master's 0.035 they go grey at 32 px. At 16 px six discs
+# do not read whatever the seam.
+SMALL_SEAM = {16: (0.10, 0.08), 32: (0.08, 0.07), 64: (0.05, 0.05)}   # px across at most: (seam, rim), of the radius
 
 
 def _lin(c):
@@ -655,7 +661,8 @@ def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper', p
     elif style == 'acrylic':                             # round 27: a speaker's own tint, stacked (round 25: the lines)
         body, e = acrylic_tint_body(colours[0]), 1 + W_LINE / 2
     elif style == 'discs':
-        body, e = discs_body(colours, flush=not one), 1 + W_LINE / 2
+        seam, rim = next((SMALL_SEAM[k] for k in sorted(SMALL_SEAM) if one and px and px <= k), (SEAM, 0.045))
+        body, e = discs_body(colours, flush=not one, seam=seam, rim=rim), 1 + W_LINE / 2
     else:
         body, e = lines_body(colours, depth=style == 'lines'), 1 + W_LINE / 2
     wh = f' width="{size}" height="{size}"' if size else ''
@@ -893,8 +900,10 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
     <div class="eyebrow">EARF &middot; Round 27 &middot; the globe</div>
     <h1>The acrylic globe is the mark; the idents are parked</h1>
     <p class="lede">Round 27, the owner: &ldquo;Let&rsquo;s go with the acrylic globe and have a color version, a black
-      version, and a white version, and a version for each speaker&rdquo;. The set is in <code>brand/mark/</code> and on
-      the mark&rsquo;s own page; the rails below draw it beside the discs and the lines. The idents and the Planet are
+      version, and a white version, and a version for each speaker&rdquo;, and then: &ldquo;I like discs for monochrome
+      and acrylic for multicolor&rdquo;. So the mark is the acrylic in colour and the seamed discs in black, in white
+      and in each speaker&rsquo;s colour; the set is in <code>brand/mark/</code> and on the mark&rsquo;s own page. The
+      rails below draw every style in every rail, for reference. The idents and the Planet are
       parked, as the owner chose: their code stays in <code>earth.py</code> and their videos in <code>brand/</code>, but
       this page no longer plays them. What follows is the globe as round 25 and 26 left it.</p>
   </header>
@@ -986,7 +995,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       </ul>
       <h3>The rails</h3>
       <ul>
-        <li>The mark (round 27, the owner: "Let's go with the acrylic globe"): the acrylic globe in colour, in black, in white and in each speaker's own tint, as files in <code>brand/mark/</code>. The discs and the lines below stay as they were, for reference.</li>
+        <li>The mark (round 27, the owner: "Let's go with the acrylic globe", then "I like discs for monochrome and acrylic for multicolor"): the acrylic in colour; the seamed discs in black, in white and in each speaker's colour, flat, as files in <code>brand/mark/</code>. The acrylic's own one-colour forms (the overlap cut and the tints) and the lines stay below, for reference.</li>
         <li>Black only: paper, print, embossing and a one-colour etch. White only: dark grounds, and the etched mark on the acrylic.</li>
         <li>One colour: each speaker's own mark, for the speaker, its box and its page. Avoid Acid on paper, where yellow is too faint; use it on ink.</li>
         <li>Multicolour: the brand at large. Animated: screens only (the idents, the loader, the cursor).</li>

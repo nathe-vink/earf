@@ -54,10 +54,10 @@ brand's motion for a fresh critic to judge, round by round. It also makes the si
 where the colour you pick sets what goes with it. Round 26 draws the Planet again as early Disney would have drawn it,
 beat by beat by the animators' principles; gives the Coin a real coin's physics, spinning,
 tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 27 settles the mark: the acrylic
-globe, in colour, in black, in white and in each speaker's own tint, as files for printers and makers; puts it on
-the look book and the site; and parks the idents.
+globe in colour and the seamed discs in black, in white and in each speaker's colour, as files for printers and
+makers; puts it on the look book and the site; and parks the idents.
 
-## Round 27: the mark settled, the acrylic globe in colour, black, white and each speaker's own (the owner's answer of 2026-10-16)
+## Round 27: the mark settled, the acrylic globe in colour and the discs in one colour (the owner's answers of 2026-10-16)
 
 | the owner's note | what changes |
 |---|---|
@@ -66,6 +66,7 @@ the look book and the site; and parks the idents.
 | (put it on the look book's cover and the site?) "Both" | **The look book's cover and last page and the site carry it** (below). |
 | (the twelve idents and the Planet?) "Park them" | **Parked**: their code stays in `earth.py` and their videos in `brand/`, but the globe page no longer plays them (`earth.py` PARKED). No more motion for now. |
 | (the critic calls the colour version's browns and rainbow the biggest drag: reopen it?) "Keep it as is" | **The colour version stays as it is.** |
+| "I like discs for monochrome and acrylic for multicolor" | **The acrylic in colour, the discs in one colour**: black, white and each speaker's own are now round 24b's seamed discs, flat, each speaker's on the ground where it holds 3:1. The acrylic's own one-colour forms (the overlap cut and the tints) stay in `earth.py` (below). |
 
 ### The set
 
@@ -74,12 +75,16 @@ it, with the small sizes and where each version goes:
 
 - **Colour** is round 25's acrylic as it was: the six discs in the six speakers' tints, see-through, each a slab with
   its side showing. Nothing in it changed.
-- **Black and white** are one ink, flat, for print, an etch or an emboss, and white out of dark grounds and
-  photographs. A point is inked where an odd number of discs cover it, so where two discs cross they cancel, as two
-  films do in one ink, and every crossing shows without a tint (`acrylic_ink_body`). Until now the acrylic in one
-  colour was the even lines, an open wireframe the brand critic found a different object from the ball in all three of
-  its rounds. Also tried: a solid ball cut by every disc's outline, which read as any globe icon.
-- **Each speaker's own** is stacked sheets of that speaker's acrylic held up to the light (`acrylic_tint_body`). Every
+- **Black and white** are the seamed discs in one ink (round 24b's one-colour discs, `discs_body`): the discs flat, a
+  seam of the ground 0.035 of the radius wide along every edge between two, stopping short of the rim so the outline
+  stays whole. For print, an etch or an emboss, and white out of dark grounds and photographs. As you chose ("I like
+  discs for monochrome"). Before that, this round, they were the acrylic's own one-ink form, which stays in `earth.py`
+  (`acrylic_ink_body`): a point inked where an odd number of discs cover it, so two discs cancel where they cross, as
+  two films do in one ink; the critic called it "the real find". Also tried: a solid ball cut by every disc's outline,
+  which read as any globe icon.
+- **Each speaker's own** is the same discs in the speaker's colour, flat, each on the ground where it holds 3:1
+  contrast, WCAG's least for graphics (`mark.py` ground): Flare, Poison, Haze and Smoke on light; Dust, Acid, Ice and
+  Fog on dark. Before that, this round, they were stacked sheets of the speaker's acrylic (`acrylic_tint_body`, kept). Every
   disc a line of sight crosses is one sheet, passing T = c^(1/at) of the light (c the tint), so `at` sheets make the
   speaker's colour: the rim, where one disc lies, is lighter, and the middle, where four cross, deeper. A disc's side,
   where it is nearest, counts a sheet more, as a polished edge looks deeper. `at` is two, or more for a dark tint so
@@ -88,11 +93,12 @@ it, with the small sizes and where each version goes:
   takes nothing inside the ball, so a tint is the same on paper and on ink, except that Smoke shows only on light
   grounds and Fog only on dark ones. Also tried: the stack capped at three sheets, which flattened the middle into one
   blob.
-- **Small sizes** (the critic's first change): below 64 px the black and white broke into a spiky open ring, their
-  thinnest bands under a pixel. So each has three small cuts, every inked part grown and the whole scaled back to the
-  master's width (`earth.py` SMALL): by 0.035 of the radius for marks up to 16 px across, 0.025 up to 32 px and 0.02
-  up to 64 px (4.2, 8.5 and 17 mm in print). They keep a closed outline round an open middle. The colour and the tints
-  go no smaller than 24 px (6.4 mm); below it the small black or white stands in.
+- **Small sizes** (the critic's first change, carried over to the discs): at the master's seam the discs go grey at
+  32 px, so their small cuts widen the seams and stop them further from the rim, to stay a pixel or more (`earth.py`
+  SMALL_SEAM): 0.05 of the radius for marks up to 64 px across, 0.08 up to 32 px and 0.10 up to 16 px (17, 8.5 and 4.2
+  mm in print). A speaker's flat globe takes the same cuts in its colour. At 16 px six discs do not read whatever the
+  seam. The colour goes no smaller than 24 px (6.4 mm); below it the small black or white stands in. (The overlap
+  cut's small cuts, `SMALL`, stay with it.)
 - **The lockups**: the globe beside EARF, one and a half cap heights tall: colour on light, colour on dark, black, white.
 - **The files**: `brand/mark/earf-globe-colour`, `-black`, `-white`, `-01-flare` to `-08-smoke`, and
   `earf-lockup-colour`, `-colour-ink`, `-black`, `-white`, each an SVG and a transparent PNG (the globes 1024 px
@@ -109,7 +115,8 @@ yours to call, since you asked for the still set. What holds the score down it m
 browns and its rainbow (you chose it as it is), the scalloped outline where no disc reaches the rim, six discs nobody
 could draw from memory, and the black and white lockups lighter than EARF. It asks you three things: whether to reopen
 the colour version's crossings, whether boxes printed in one spot ink need a flat cut in each speaker's colour, and
-whether a simpler favicon of four discs may break the rule of six.
+whether a simpler favicon of four discs may break the rule of six. It judged the overlap cut and the tints, which
+the discs have since replaced; its rules on small sizes carry over to them.
 
 ![The mark: colour, black, white and each speaker's own](brand/earth-mark-r27.png)
 
@@ -123,8 +130,8 @@ whether a simpler favicon of four discs may break the rule of six.
   icons below keep their outlines; they are the speakers', not the mark.
 - **The site's draft** (version 9): the logo in the header and the footer is the acrylic globe beside EARF, and the
   draft's banner says the mark is chosen.
-- **The globe page** (version 17) opens on the mark (the rails: the acrylic in colour, black, white and the tints,
-  beside the discs and the lines). The ident player, the Death Star's kick and the Planet's loop are off the page
+- **The globe page** (version 18) opens on the mark, its rails drawing every style in every colourway for reference.
+  The ident player, the Death Star's kick and the Planet's loop are off the page
   (`earth.py` PARKED; False puts them back); the loader and the cursor stay.
 
 ## Round 26: the Planet as early Disney would draw it, a real coin, and a narrower A (the owner's answers of 2026-10-16)
