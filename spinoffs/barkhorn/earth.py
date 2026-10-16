@@ -139,6 +139,13 @@ WOBBLE = [0.0, 0.0]                                      # round 27e, the spin: 
 GRID = 1e-6                                              # round 27e: the overlays snapped to this grid (of the radius).
                                                          # Unsnapped, a face's last clip to the globe's outline could
                                                          # drop a whole cell at a few angles, a hole for one frame
+LATERAL = None                                           # round 27g's study (the owner: "What would it look like if
+                                                         # the lateral discs intersected like the longitudinal discs
+                                                         # do?"): the three lateral discs as great circles through the
+                                                         # globe's side axis (longitude 90, across the picture), as the
+                                                         # meridians go through the pole, each tilted this many degrees
+                                                         # from the equator, its near half up (north first). None: the
+                                                         # parallels, 40 N, the equator and 40 S
 
 
 def basis(lean=LEAN, elev=ELEV):
@@ -163,7 +170,17 @@ def rings(spin=0.0, n=360):
     a, e1, e2 = basis()
     s = np.linspace(0, 2 * math.pi, n, endpoint=False)
     out = []
-    for phi in (LAT, 0.0, -LAT):
+    if LATERAL is not None:                              # (round 27g's study) great circles through the side axis,
+        sp = math.radians(spin)                          # turning with the globe as the meridians do
+        fwd, side = math.cos(sp) * e1 + math.sin(sp) * e2, -math.sin(sp) * e1 + math.cos(sp) * e2
+        for tilt in LATERAL:
+            if tilt is None:                             # a disc left out: a ring of no size, drawn nowhere
+                out.append(dict(pts=np.zeros((n, 3)), n=a, d=0.0, c=np.zeros(3), r=0.0)); continue
+            t = math.radians(tilt)
+            nrm = math.cos(t) * a - math.sin(t) * fwd
+            out.append(dict(pts=np.outer(np.cos(s), side) + np.outer(np.sin(s), np.cross(nrm, side)), n=nrm, d=0.0,
+                            c=np.zeros(3), r=1.0))
+    for phi in ((LAT, 0.0, -LAT) if LATERAL is None else ()):
         p = math.radians(phi)
         pts = math.cos(p) * (np.outer(np.cos(s), e1) + np.outer(np.sin(s), e2)) + math.sin(p) * a
         out.append(dict(pts=pts, n=a, d=math.sin(p), c=math.sin(p) * a, r=math.cos(p)))

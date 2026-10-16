@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27f**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27g**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -57,7 +57,34 @@ tipping and wobbling down face up; and narrows the A, its crossbar lower. Round 
 globe in colour and the seamed discs in black, in white and in each speaker's colour, as files for printers and
 makers; puts it on the look book and the site; and parks the idents. Round 27b gives the acrylic the discs' own corners, 27c takes the stroke from round the one-colour discs, and 27d takes out the clipping. Round 27e
 untrims the one-colour discs again, measures what the angle does to their tips, and spins the mark on its axis like a
-top. Round 27f tips the globe 16° toward you instead of 22°, which halves the tips, and keeps the steady spin.
+top. Round 27f tips the globe 16° toward you instead of 22°, which halves the tips, and keeps the steady spin. Round
+27g studies the lateral discs crossing as the meridians do.
+
+## Round 27g: the lateral discs crossing as the meridians do (a study; the owner's questions of 2026-10-16)
+
+| the owner's question | the answer |
+|---|---|
+| "What would it look like if the lateral discs intersected like the longitudinal discs do?" and "Did you try a version where the three stacked discs are instead the same layout as the three equal sized intersecting discs?" | **Not before** (round 21's orbits were eight meridians, round 23's gyroscope two rings on two axes). **Drawn now, three ways** (below); nothing is changed until the owner picks. |
+
+The lateral discs become great circles through the globe's side axis, as the meridians go through the pole
+(`earth.LATERAL`, the tilts from the equator; `mark.py --lateral PATH`):
+
+- **The meridians' layout on its side.** Turned 90°, the meridians' three discs keep the one facing you, and that one
+  is the green disc itself. So the two layouts share it, and only two discs are new, crossing the green at the sides
+  30° either side of the equator. Five discs in all, so one colour (the blue) has no disc. The black is the simplest
+  of the three; the colour reads more like an armillary sphere than the Earth.
+- **On its side, the blue equator kept.** The same two discs with the equator between them: six discs, all six colours,
+  and more crossings.
+- **A second set of three, 60° apart.** Three new discs round the side axis, the equator one of them, none shared. Any
+  three lateral discs 60° apart must have one nearly facing you (here the yellow), so it competes with the green for
+  the outline.
+
+In all three the side crossing sits on the outline itself (the side axis lies across the picture, in the green disc),
+so the discs there taper to points at the edge, where the polar crossing sits inside it. The tips reach about as far
+as now (0.03 to 0.04 of the radius). What the parallels give, and these lose, is the reading as the Earth: latitudes
+stacked between the poles.
+
+![The lateral discs as a second set: now, the meridians' layout on its side, with the equator, and a second set 60° apart](brand/earth-mark-lateral-r27g.png)
 
 ## Round 27f: tipped 16°, and the steady spin (the owner's answers of 2026-10-16)
 

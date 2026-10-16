@@ -282,6 +282,46 @@ def angles(path):
     sheet.save(path)
 
 
+
+# Round 27g's study. The owner: "What would it look like if the lateral discs intersected like the longitudinal discs
+# do? Did you try a version where the three stacked discs are instead the same layout as the three equal sized
+# intersecting discs?" (Not before: round 21's orbits were eight meridians, round 23's gyroscope two rings on two axes.)
+# The lateral discs become great circles through the globe's side axis (earth.LATERAL), as the meridians go through the
+# pole. Turned on its side, the meridians' layout keeps its disc facing you, and that disc is the green one, so the two
+# layouts share it and only two discs are new (five in all); any three lateral discs 60 degrees apart must have one
+# nearly facing you, so a second set of its own competes with the green.
+LATERALS = [('Now: three parallels, stacked', None),
+            ("The meridians' layout on its side: shares the green, five discs", (30, None, -30)),
+            ('On its side, the blue equator kept: six discs', (30, 0, -30)),
+            ('A second set of three, 60 degrees apart: six discs', (60, 0, -60))]
+
+
+def lateral(path):
+    """Round 27g's study: each layout in black and in colour, large and at 64 px, with its disc count and how far its
+    tips reach."""
+    font, small = ImageFont.truetype('DejaVuSans.ttf', 16), ImageFont.truetype('DejaVuSans.ttf', 12)
+    px, sm, gap = 300, 64, 18
+    w = gap + 2 * (px + gap) + 2 * (sm + gap) + gap
+    sheet = Image.new('RGB', (w, len(LATERALS) * (px + 52) + gap), '#DEDCD7')
+    d = ImageDraw.Draw(sheet)
+    for r, (title, lat) in enumerate(LATERALS):
+        y = gap + r * (px + 52)
+        E.LATERAL = lat
+        try:
+            ims = [_png(E.mark_svg('discs', E.INK), px, E.PAPER), _png(E.mark_svg('acrylic', E.RING), px, E.PAPER),
+                   _png(E.mark_svg('discs', E.INK, px=sm), sm, E.PAPER), _png(E.mark_svg('acrylic', E.RING), sm, E.PAPER)]
+            n = 6 if lat is None else sum(t is not None for t in lat) + 3
+            reach = tips(0)
+        finally:
+            E.LATERAL = None
+        x = gap
+        for i, im in enumerate(ims):
+            sheet.paste(im, (x, y + (px - im.height) // 2 if i >= 2 else y))
+            x += im.width + gap
+        d.text((gap, y + px + 8), title, fill='#1C1A18', font=font)
+        d.text((gap, y + px + 30), f'{n} discs; the tips reach {reach:.2f} of the radius', fill='#57534C', font=small)
+    sheet.save(path)
+
 if __name__ == '__main__':
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     ap.add_argument('--sheet', help='also a sheet of the set, each on its ground, to this path')
@@ -289,6 +329,7 @@ if __name__ == '__main__':
     ap.add_argument('--angles', help="also round 27e's angle study, to this path")
     ap.add_argument('--spin', nargs='*', help='also the spins (MP4 and WebM in brand/mark), or only those whose tags are named')
     ap.add_argument('--spin-sheet', help='also a sheet of the spins, a frame every 0.4 s, to this path')
+    ap.add_argument('--lateral', help="also round 27g's study of the lateral discs as a second set, to this path")
     a = ap.parse_args()
     fs = write()
     print(f'{len(fs)} SVGs and PNGs in', os.path.relpath(OUT, HERE))
@@ -307,3 +348,6 @@ if __name__ == '__main__':
     if a.spin_sheet:
         spin_sheet(a.spin_sheet)
         print(a.spin_sheet)
+    if a.lateral:
+        lateral(a.lateral)
+        print(a.lateral)
