@@ -1,0 +1,115 @@
+{
+  "stage1": {
+    "impression": "A rich, stained-glass globe that only half exists as an identity. In colour the translucent discs have real warmth: on sheet 3 the crimson where red crosses violet and the slate where blue crosses violet are the best moments. But the style has no one-colour form of its own. Its black, white and one-colour tiles on sheet 1 are pixel-identical to the 'even' rings: a wireframe whose thick-thin swellings knot into lumps at about 12, 3, 6 and 9 o'clock, and a different object from the filled multicolour ball. In colour it carries 22 tone clusters to the discs' 7, some of them muddy, and faint olive and bluish ellipses inside the green (sheet 3, top, left and right) read as rendering errors. Nobody could draw it from memory. The gyro ident is a list of keyframes rather than one gesture, and a familiar one (spin, shrink, slide left, type on). It cuts in mid-spin (0.65 % change on the first frame), the spin dies below 0.2 % from 0.50 to 0.80 s, a faint tilt follows (peak 0.48 %), then 0.3 s of near-stillness at 1.00-1.27 s with a dead zero at 1.20-1.27 s. The one confident move is the aside, a clean single hump peaking at 1.7 % at 1.47 s into a well-balanced lockup. Then a hard-edged wipe stutters through the name (four sharp peaks, 1.80-2.03 s) and spells 'EAI' at 1.93 s, and the picture freezes for 1.47 s: the gyroscope never turns again once it has a name. Competent illustration, not yet an identity.",
+    "score": 4.5
+  },
+  "keep": [
+    "The aside and the lockup it lands in: one clean, single-humped ease (1.30-1.80 s, peak 1.7 % at 1.47 s, frames 05-08) into a centred lockup where the globe is about 1.4 times the cap height, with a gap of about 0.4 cap height. Keep the move, the proportions and a long still end hold.",
+    "Round 3's backing rule: wherever one disc lies in front, the acrylic shows exactly the discs' flat colour, and paper and ink are identical inside the rim. On sheet 3 the single orange, violet and blue regions match the discs, and the paper and ink tiles carry the same 21 colours. The acrylic finally reads as the discs made transparent, as the owner asked."
+  ],
+  "changes": [
+    {
+      "rank": 1,
+      "problem": "Crossings are mixed like paint, not like stacked tinted sheets: some come out lighter than the sheet in front, the complementary pairs drift to unrelated hues, and the ghosts sit too close to the green to read.",
+      "evidence": "Sheet 3, acrylic large. At the bottom, violet over yellow is a mauve #904ea1 (OKLab L 0.536), lighter than the violet #6c4ba3 in front of it (L 0.491). Just left of centre, blue over orange is a pale periwinkle #5c7fcc. The ghosts #488344, #5e7e27 and #5f8536 are only 0.014-0.028 OKLab from the green #4f7f3a. Sheet 1, acrylic multicolour: 22 tone clusters against the discs' 7.",
+      "kind": "new",
+      "parameter": "crossing mix (new rule, replaces the OKLCh mix)",
+      "from": "OKLCh: lightness and chroma share-weighted, hue a chroma-weighted circular mean, lightness lowered by dark per sheet beyond the first; ghosts not lowered",
+      "to": {
+        "space": "OKLab",
+        "a_and_b": "share-weighted mean of the sheets' a and b, so chroma is the length of that mean and opposed tints neutralise",
+        "L": "lowest L among the sheets - dark x (sheets - 1) - 0.10 x (1 - R)",
+        "R": "length of the weighted mean (a, b) / weighted mean chroma: 1 for one hue, near 0 for opposite hues",
+        "applies_to": "every region where two or more sheets overlap, ghosts included; single-sheet regions unchanged"
+      },
+      "expected": "Every crossing is a step deeper than both of its sheets, as stacked tinted acrylic is, and single-disc regions stay exactly the discs' colours. With changes 2 and 6 the crossings come out at about: red x orange #bb3901, orange x yellow #c57400, red x violet #7c2d54, blue x violet #424b8f. The complementary pairs go smoky: blue x orange #7a6160, yellow x violet #573937. The ghosts land at about #356c45 behind the blue, #5d6020 behind the red and #556d18 behind the yellow.",
+      "accept": {"kind": "visual", "at": "sheet 3, acrylic on paper", "check": "Is every region where two discs cross darker than both of the discs that form it, including the violet-over-yellow crossing at the bottom?"}
+    },
+    {
+      "rank": 2,
+      "problem": "The same two sheets cross to different colours depending on which is in front, so the ball carries twelve crossing colours where real acrylic would show six, and a crossing flips colour whenever two sheets swap depth in the spin.",
+      "evidence": "Sheet 3, acrylic large. Blue x orange is periwinkle #5c7fcc just left of centre, below the centre line, and brick #cf6434 directly above it. Yellow x violet is mauve #904ea1 and amber #ce8200 side by side at the bottom. Red x violet is crimson #b42649 and plum #863588 at upper right. Sheet 2, frames 01-03 (0.00-0.63 s): the spin passes sheets through each other, which at face 0.72 swaps these colours.",
+      "kind": "parameter",
+      "parameter": "face",
+      "from": 0.72,
+      "to": 0.5,
+      "expected": "One colour per pair of sheets wherever it occurs: six crossing colours, three ghosts and the six sheet colours, about 15 flat colours inside the rim instead of 21. The two crossings left of centre become one smoky taupe, and in the spin a crossing keeps its colour as the sheets pass. Apply it with change 1: under the current OKLCh mix, 0.5 turns both complementary crossings into near-identical dusty reds (about #c25857 and #bf4d53) that read as stray pieces of the red disc.",
+      "accept": {"kind": "visual", "at": "sheet 3, acrylic on paper", "check": "Are the two regions just left of centre, where the blue equator overlaps the orange meridian, one and the same colour?"}
+    },
+    {
+      "rank": 3,
+      "problem": "The wordmark arrives by a hard-edged wipe that slices letters and stutters, the one mechanical gesture in an otherwise physical ident.",
+      "evidence": "Sheet 2, frame 07 (t = 1.93 s) reads 'EAI': the R is cut at its stem. Trace 1.80-2.03 s: four sharp peaks (1.23 %, 1.47 %, 1.16 %, 0.72 %) with troughs between, starting with a one-frame jump from 0.17 % to 1.23 % at 1.80 s, just as the aside lands.",
+      "kind": "new",
+      "parameter": "wordmark reveal (new)",
+      "from": "hard-edged left-to-right wipe, 1.80-2.07 s",
+      "to": {
+        "method": "each letter whole, fading in place from 0 to 100 % opacity; no wipe, no movement",
+        "duration_s": 0.18,
+        "ease": "cubic ease-out",
+        "start_s": {"E": 1.70, "A": 1.75, "R": 1.80, "F": 1.85},
+        "fully_on_s": 2.03
+      },
+      "expected": "No frame shows part of a letter. The name builds E, EA, EAR, EARF as translucent letters clearing to solid, starting while the globe is still easing into place (it has cleared the E by 1.70 s). The trace runs from the aside into one rounded hump with no dip or jump and is still by about 2.05 s; the end hold stays about 1.5 s.",
+      "accept": {"kind": "visual", "at": "t = 1.93 s", "check": "Is every letter on screen whole, none cut by an edge, so the frame cannot read 'EAI'?"}
+    },
+    {
+      "rank": 4,
+      "problem": "The spin dies out before the tilt begins, so the opening stalls and then restarts.",
+      "evidence": "Sheet 2 trace 0.50-0.80 s: under 0.2 % for 0.33 s, and frame 03 (0.63 s) looks almost the same as frame 01. The tilt then starts from rest at 0.80 s as a separate small hump (peak 0.48 % at 0.90 s).",
+      "kind": "new",
+      "parameter": "spin and tilt timing (new)",
+      "from": "spin 0.00-0.80 s decaying to near-still, then tilt 0.80-1.00 s",
+      "to": {
+        "tilt": "upright to the 23.4 degree lean",
+        "tilt_start_s": 0.45,
+        "tilt_end_s": 1.0,
+        "spin_end_s": 1.0,
+        "spin_ease": "ease-out, landing in the brand orientation at 1.00 s"
+      },
+      "expected": "One continuous gyroscopic gesture: the globe is still turning as its axis leans over, and spin and lean land together at 1.00 s, with no near-still stretch before 1.0 s. Without change 5, ease the tilt out at 1.00 s; with it, the tilt eases in and carries into the landing.",
+      "accept": {"kind": "motion", "metric": "longest_still", "window": [0.0, 1.0], "op": "<=", "value": 0.1}
+    },
+    {
+      "rank": 5,
+      "problem": "After the tilt the mark goes dead for 0.3 s before moving aside: too short to read as a held beat, too long to pass unseen.",
+      "evidence": "Sheet 2 trace 1.00-1.27 s is under 0.2 %: the 'spun' phase peaks at only 0.13 % (1.07 s), and 'whole' is exactly 0 from 1.20 to 1.27 s. The aside then restarts from rest (0.32 % to 0.82 % at 1.33 s).",
+      "kind": "new",
+      "parameter": "landing nutation (new phase, replaces 'spun' and 'whole')",
+      "from": "1.00-1.30 s: an invisible 'spun' phase, then a 0.1 s dead stop",
+      "to": {
+        "axis_lean_deg_at_s": {"1.00": 23.4, "1.10": 30.4, "1.20": 21.4, "1.30": 23.4},
+        "swing_ease": "ease-in-out on each swing",
+        "tilt_into_landing": "ease-in, reaching 23.4 degrees at 1.00 s still moving",
+        "aside_start_s": 1.3
+      },
+      "expected": "The globe lands like a settling gyroscope: its axis swings 7 degrees past the lean, comes back 2 degrees short and rests on 23.4 degrees at 1.30 s, exactly as the aside begins. There is no flat stretch between the landing and the aside.",
+      "accept": {"kind": "motion", "metric": "peak", "window": [1.0, 1.3], "op": "between", "value": [0.002, 0.006]}
+    },
+    {
+      "rank": 6,
+      "problem": "The ghosts (the back halves of the rings seen through the green) are too faint to read as intended, so they look like dirt instead of transparency.",
+      "evidence": "Sheet 3, acrylic large: the olive band across the top (#5e7e27), the bluish arcs at the left and right edges (#488344) and the yellow-green arc at lower left (#5f8536) sit 0.014-0.028 OKLab from the green #4f7f3a. In the lockup (sheet 2, frames 08-12) they turn the green into a mottled field.",
+      "kind": "parameter",
+      "parameter": "green",
+      "from": 0.9,
+      "to": 0.8,
+      "expected": "Each ring's back half shows through the green as a tinted continuation of its front half: teal behind the blue equator, khaki behind the red, olive behind the orange, yellow-green behind the yellow. The eye closes all six rings and the ball reads as transparent. With change 1 the ghosts sit about 0.05-0.07 OKLab from the green (violet's about 0.11), still quieter than the crossings.",
+      "accept": {"kind": "visual", "at": "sheet 3, acrylic on ink", "check": "Can you follow the blue equator as one closed ellipse, blue in front and a darker teal through the green behind?"}
+    }
+  ],
+  "most_important": "Change 1, the crossing rule: make every crossing and every ghost a step deeper than the sheets that form it, mixed in OKLab so that opposed tints go smoky. It is the difference between blended paint and stacked tinted acrylic, which the owner has now asked for in two rounds, and in one move it fixes the crossings that come out lighter than their own sheet and the ghosts too faint to read.",
+  "out_of_scope": [
+    "One colour is the lines: the owner's rule ('The strokes should be the non-color versions'), and the lines style is fixed. It matters because in black, white and one colour the acrylic becomes a wireframe, a different object from the filled multicolour ball. Sheet 1's acrylic one-colour tiles are pixel-identical to the 'even' row, so the acrylic idea disappears exactly where an identity is most often reproduced.",
+    "The lines' thick-thin swellings pile into knots at about 12, 3, 6 and 9 o'clock (sheet 1, acrylic black only and white only). The silhouette goes lumpy, will fill in at small sizes and is hard to draw from memory. The lines style is fixed, so I do not prescribe a fix here, but it deserves a round of its own.",
+    "'Crossing primary colors created secondary colors' cannot happen literally with the fixed geometry and colours. The primaries are the three parallels, which never overlap one another in this view (sheet 3), so every crossing pairs a primary with orange or violet. That gives a tertiary (vermilion, amber, plum, indigo) or, for blue x orange and yellow x violet, a smoky neutral. True secondaries would need the colours reassigned, which is fixed; the changes meet the request in spirit, because crossings now make new, deeper colours."
+  ],
+  "for_owner": [
+    "Edge glint (the owner's option, 0.012 of the radius): it is the one cue that most says polished cast acrylic, and it would crisp the boundaries between the deeper crossings. But it reads as a hairline, close to the strokes the owner removed from the discs. Judge it on the full-size ident frames 01-05 before deciding.",
+    "Smoky crossings: in real tinted acrylic, blue over orange and yellow over violet go smoky (about #7a6160 taupe left of centre and #573937 brown at the bottom). Decide whether to keep that physical truth, or have every crossing stay colourful at the cost of looking less like acrylic.",
+    "Single colour: the owner's rule makes one colour the strokes. A one-colour acrylic (stacked tints of a single ink, or of a cabinet's own tint, each crossing a step deeper) would carry the acrylic idea into one colour. Decide whether 'single color' must stay the strokes.",
+    "End card: the lockup holds dead still for about 1.5 s (2.07-3.53 s). Decide whether it must stay static wherever the ident runs, or may carry one slow turn of the globe on its axis while the name is read, which would show the acrylic's colour play at the moment the brand is named.",
+    "Smallest size: below about 48 px across on screen (about 12 mm in print), the acrylic's crossings collapse into confetti. Decide whether the system switches to the flush discs below a set size, as it already does without WebGL."
+  ],
+  "projected_score": 6.0
+}

@@ -704,12 +704,22 @@ def mark_solid(width, at, face, t):
     return union(*sol)
 
 
+def _globe():
+    return json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'brand', 'earth-outlines.json')))
+
+
 def globe_outlines(style):
     """Round 24 (24b): the globe (earth.py's outlines, brand/earth-outlines.json): `style` 'discs' (seamed, for one
-    colour), 'flush' (for colour), 'base' (the ball's gaps at the rim, violet, under the flush discs) or 'lines':
-    [(ring, exterior, holes)] on the unit globe, y up."""
-    G = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'brand', 'earth-outlines.json')))
-    return [tuple(q) for q in G[style]]
+    colour), 'flush' (for colour), 'base' (round 24b's ball gaps at the rim; empty since round 25, the globe its discs
+    alone) or 'lines': [(ring, exterior, holes)] on the unit globe, y up."""
+    return [tuple(q) for q in _globe()[style]]
+
+
+def globe_colours():
+    """Round 25: the rings' colours and the ring that fills the ball (earth.py's RING and ATMOS, by way of the
+    outlines file, so a print follows the brand when its colours move)."""
+    G = _globe()
+    return G['ring'], G['atmos']
 
 
 def globe_solid(d, at, face, t, style, rings=None):
@@ -801,11 +811,9 @@ def extras(P, out):
             d, style, fin = g.get('d', 48.0), g.get('style', 'discs'), g.get('finish', 'etch')
             c = (b.max.X - 24.0 - d / 2, b.min.Y, b.max.Z - 24.0 - d / 2)
             where = f'{d:g} across, its centre {24 + d / 2:g} in from the front panel\'s top and right edges'
-            if fin == 'print':                           # in colour: flush, the ball's gaps in the violet
+            if fin == 'print':                           # in colour: flush, the discs alone (round 25: no ball filled)
                 for k in range(6):
                     sol = globe_solid(d, c, '-y', 0.1, 'flush', rings=[k])
-                    if k == 4:
-                        sol = union(sol, globe_solid(d, c, '-y', 0.1, 'base'))
                     add.append(Part(f'mark-globe-{k}', sol, Bought('uv-print'), finish=f'print-{k}',
                                     notes=[f'the globe\'s ring {k + 1} of six, UV-printed in its colour, flush with the next; {where}']))
             else:
@@ -1753,10 +1761,10 @@ PRODUCT = Product(
                'mark-tint': {'preset': 'satin_paint', 'color': '$disc', 'roughness': 0.6, 'specular': 0.25},   # round 23
                'mark': {'preset': 'satin_paint', 'color': '#F3F2EE', 'roughness': 0.3, 'specular': 0.45},
                'print': {'preset': 'satin_paint', 'color': '#EDEBE5', 'roughness': 0.9, 'specular': 0.05},
-               # round 24: the globe UV-printed in the corner, each ring's colour (earth.py's RING: the primaries across,
-               # the mixed colours round the poles) and the outline in ink
+               # round 24: the globe UV-printed in the corner, each ring's colour (round 25: read from earth.py's RING by
+               # way of brand/earth-outlines.json, so the print follows the brand)
                **{f'print-{k}': {'preset': 'satin_paint', 'color': c, 'roughness': 0.55, 'specular': 0.3}
-                  for k, c in enumerate(('#D2382F', '#E9B320', '#4A90C8', '#E5732A', '#6C4BA3', '#4F7F3A'))},
+                  for k, c in enumerate(globe_colours()[0])},
                # round 13: the fittings a photograph shows (through the Cloud's acrylic, most of all)
                'brass': {'preset': 'metal', 'color': '#C9A660', 'roughness': 0.3},
                'sleeve': {'preset': 'rubber', 'color': '#1B1B1B'},

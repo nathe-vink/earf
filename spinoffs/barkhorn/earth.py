@@ -51,7 +51,7 @@ import argparse, json, math, os, shutil, subprocess, sys, tempfile
 
 import numpy as np
 from shapely.geometry import LineString, MultiLineString, Point, Polygon
-from shapely.ops import unary_union
+from shapely.ops import polygonize, unary_union
 from shapely import make_valid, set_precision
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -67,23 +67,44 @@ CLOUDS = [(name, colour) for key, line, num, name, colour in M.SPEAKERS if line 
 HUES = [c for n, c in CLOUDS if n not in ('Fog', 'Smoke')]          # Flare Dust Acid Poison Ice Haze, the spectrum
 NAMES = [n for n, c in CLOUDS if n not in ('Fog', 'Smoke')]
 _C = dict(CLOUDS)
-# round 24 (the owner: "The horizontal discs should actually be the primary colors"): the rings' colours, ring by ring
-# (the parallels north to south, then the meridians at 30, 90 and 150): the primaries on the parallels, red, yellow and
-# blue, and the secondaries on the meridians, orange, violet (the one facing us, so the globe's outline is violet, the
-# atmosphere's colour) and green; the loader, the cursor and the coin's flashes keep the spectrum (HUES)
-RING = [_C['Flare'], _C['Acid'], _C['Ice'], _C['Dust'], _C['Haze'], _C['Poison']]
-RING_NAMES = ['Flare', 'Acid', 'Ice', 'Dust', 'Haze', 'Poison']
-# the acrylic (round 24: "I liked the acrylic idea if it looked more like actual acrylic where the crossing primary
-# colors created secondary colors"; round 24b: "The acrylic is missing orange, green, and purple latitude ovals that are
-# present in the gyro version"): every disc tinted. Tinting all six alike goes to mud, the violet meridian facing us
-# lying behind everything, so the three mixed colours' discs go down first as a light wash and the primaries over them,
-# multiplied on paper so where two primaries cross they make the colour between. On ink each is laid over the last.
-# Per ground and per kind: how it blends, how strong, how much lighter its tint. No strokes.
-ACRYLIC = dict(paper=dict(prim=('multiply', 0.6, 0.0), mixed=('normal', 0.5, 0.4), one=('multiply', 0.34, 0.0)),
-               night=dict(prim=('normal', 0.75, 0.0), mixed=('normal', 0.55, 0.0), one=('normal', 0.42, 0.0)))
-ACRYLIC_ORDER = [3, 4, 5, 0, 1, 2]                      # the mixed colours' discs, then the primaries'
-ATMOS = 4                                               # round 24b: the ring whose colour fills the ball under the flush
-                                                        # discs (Haze, the violet meridian facing us: the atmosphere)
+# the rings' colours, ring by ring (the parallels north to south, then the meridians at 30, 90 and 150). Round 24 (the
+# owner: "The horizontal discs should actually be the primary colors") put the primaries on the parallels and the
+# secondaries on the meridians, violet facing us. Round 25 (the owner: "Purple is the dominant disc color but it should
+# be blue and green. Rearrange discs accordingly"): the meridian facing us, the largest disc, is green, the land, and the equator,
+# the widest band, blue, the sea; red north and yellow south; of the two side meridians, the one that shows larger is
+# orange and the one that shows less violet. The loader, the cursor and the coin's flashes keep the spectrum (HUES)
+RING = [_C['Flare'], _C['Ice'], _C['Acid'], _C['Haze'], _C['Poison'], _C['Dust']]
+RING_NAMES = ['Flare', 'Ice', 'Acid', 'Haze', 'Poison', 'Dust']
+# the acrylic. Round 24 tinted every disc and laid them in a fixed order, which read as six overlapping ovals; the owner
+# (round 25): "The acrylic is meant to be a transparent version of the discs but it looks very different", and "Push it
+# further". So the acrylic is the discs' own mosaic, see-through: wherever you look through the globe, the discs crossed
+# there are laid front to back, the nearest keeping `face` of what shows, the next `face` of the rest, and so on, the ground
+# taking what is left; so the nearest face leads and those behind show through it as ghosts, the discs' own layout and
+# colours. After the brand critic's first round (critic/rounds/2026-10-15/brand-acrylic-r1.json): the faces stronger
+# (0.45 and 0.55 read as "a pale bubble behind a cage of hoops"), no coloured edges in colour (`edge` 0: they read as
+# strokes, which the discs do not have; a thin glint is the owner's to choose), the colours mixed in OKLCh (lightness and
+# chroma weighted, the hue a circular mean weighted by chroma), so crossings are clean colours, not the greys and browns
+# that mixing in sRGB makes; and in one colour the acrylic is the lines (a tint of one colour stacked to a solid blob).
+# After its second round (critic/rounds/2026-10-15/brand-acrylic-r2.json), a cleaner rule: inside the ball the ground takes
+# nothing, and the green (the meridian facing you, with the ball it fills) is the backing. Where coloured discs lie in
+# front of the green they share all of what shows, the nearest keeping `face`, the next `face` of the rest, the farthest
+# what is left, so a single disc shows its own flat colour, as in the discs, and only crossings mix, each a step deeper
+# (`dark`, OKLab lightness, a sheet beyond the first), as stacked tinted sheets go; where none does, the green keeps
+# `green` of what shows and the back halves behind it share the rest, faint ghosts. So paper and ink match inside the rim
+# Its third round (brand-acrylic-r3.json): crossings mixed as stacked tinted sheets, not as paint (_stack): each a step
+# deeper than the darkest sheet in it, opposed tints going smoky (`smoke`, OKLab lightness, the less the hues agree);
+# `face` 0.5, so a crossing is one colour whichever sheet is in front, as filters are; the green 0.8, so the back
+# halves read as the rings' far sides, not dirt
+# The owner after it: "For acrylic I was expecting each disc to have a little thickness to it": each disc a slab `thick`
+# thick (of the radius), its side, where we see it, a deeper tone of its tint (`side`, OKLab lightness lower; `sideC`,
+# the chroma raised), as a polished acrylic edge looks, light running the length of the sheet (slabs)
+ACRYLIC = dict(paper=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=0.10, sideC=0.15),
+               night=dict(face=0.5, edge=0.0, green=0.8, dark=0.04, smoke=0.10, thick=0.05, side=0.10, sideC=0.15))
+ATMOS = 4                                               # the meridian facing us (round 25: Poison, green, the land); in
+                                                        # the acrylic, the backing. (Round 24b filled the ball in its
+                                                        # colour; round 25, the owner: "this artificial green completing
+                                                        # the circle shape that isn't one of the discs", so no fill: the
+                                                        # globe is its discs alone)
 PAPER, INK, WHITE = '#F2EFEA', '#1C1A18', '#F6F5F2'
 # round 23 (the owner: "Could try one where the even lines look like acrylic tubes"): each ring a tube of tinted acrylic,
 # a little bolder than the line so its shading reads: a faint tint through its middle (core), deeper along its two
@@ -280,21 +301,20 @@ def facets(spin=0.0):
 def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, rim=0.045):
     """Each disc's visible part as drawn. In colour the discs are flush (round 24b, the owner: "For the discs, I want
     them to not have strokes, so they are flush. The strokes should be the non-color versions"): each part whole, a
-    hair (`lap`) larger than itself so no hairline of the ground shows between two, the globe's own edge kept exact (the
-    ball under them is filled: discs_body). In one colour the seams are the strokes: the whole ball less a band `seam`
-    wide along every edge between two parts (the ball's gaps at the rim counted with the violet meridian's part, as the
-    colour shows them), stopping a little (`rim`) short of the rim so the rim stays whole; returned as one shape, at
-    index 0."""
+    hair (`lap`) larger than itself so no hairline of the ground shows between two, the globe's own edge kept exact.
+    Round 25: the globe is the discs alone, with no ball filled under them (the owner: "this artificial green completing
+    the circle shape that isn't one of the discs"), so its outline is theirs. In one colour the seams are the strokes:
+    the discs' union less a band `seam` wide along every edge between two parts, stopping a little (`rim`) short of the
+    outline so the outline stays whole; returned as one shape, at index 0."""
     fs = facets(spin)
     sil = unary_union([f for f in fs if not f.is_empty])
-    if not flush:
-        ball = Point(0, 0).buffer(1.0, resolution=180)
-        gaps = ball.difference(sil).buffer(-2e-4).buffer(2e-4)
-        cells = [f.union(gaps) if i == ATMOS else f for i, f in enumerate(fs)]
-        edges = unary_union([c.boundary for c in cells if not c.is_empty]).difference(ball.boundary.buffer(2e-3))
-        cut = edges.buffer(seam / 2, cap_style=2, join_style=2, mitre_limit=4).intersection(ball.buffer(-rim))
+    if not flush:                                        # (the outline: the union's outer edge only, hairline slivers
+        whole = sil.buffer(1e-5).buffer(-1e-5)           # between two parts closed, so no seam is cut where one lies)
+        outline = unary_union([LineString(np.asarray(q.exterior.coords)) for q in getattr(whole, 'geoms', [whole])])
+        edges = unary_union([f.boundary for f in fs if not f.is_empty]).difference(outline.buffer(2e-3))
+        cut = edges.buffer(seam / 2, cap_style=2, join_style=2, mitre_limit=4).intersection(whole.buffer(-rim))
         cut = unary_union([q for q in getattr(cut, 'geoms', [cut]) if q.area > 0.0025])   # no ticks left by an edge near the rim
-        return [ball.difference(cut).simplify(0.001)] + [None] * (len(fs) - 1)
+        return [whole.difference(cut).simplify(0.001)] + [None] * (len(fs) - 1)
     out = []
     for f in fs:
         if f.is_empty:
@@ -306,20 +326,10 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, rim=0.045):
 
 
 def discs_body(colours, spin=0.0, flush=True):
-    """The discs as SVG paths, flush in colour, seamed in one colour (disc_shapes). In colour the ball itself is filled
-    first, in the atmosphere's violet (ATMOS), so the globe is round where no disc reaches its rim and needs no outline."""
-    base = f'<circle r="1" fill="{colours[ATMOS]}"/>' if flush else ''
-    return base + ''.join(f'<path d="{_poly_d(g)}" fill="{colours[i]}" fill-rule="evenodd"/>'
+    """The discs as SVG paths, flush in colour, seamed in one colour (disc_shapes); the discs alone (round 25: no ball
+    filled under them)."""
+    return ''.join(f'<path d="{_poly_d(g)}" fill="{colours[i]}" fill-rule="evenodd"/>'
                           for i, g in enumerate(disc_shapes(spin, flush)) if g is not None)
-
-
-def _ellipse(g):
-    """A ring as the ellipse it projects to (SVG attributes, y down): its centre, its radius across, and its radius
-    times |n.z| along the screen direction of its plane's normal."""
-    n, c, r = g['n'], g['c'], g['r']
-    th = math.degrees(math.atan2(-n[1], n[0])) if abs(n[0]) + abs(n[1]) > 1e-9 else 0.0
-    return (f'transform="translate({c[0]:.4f} {-c[1]:.4f}) rotate({th:.3f})" rx="{r * abs(n[2]) / np.linalg.norm(n):.4f}" '
-            f'ry="{r:.4f}"')
 
 
 def _lighter(c, k):
@@ -328,24 +338,226 @@ def _lighter(c, k):
     return '#%02X%02X%02X' % tuple(round(v + (255 - v) * k if k >= 0 else v * (1 + k)) for v in (int(c[i:i + 2], 16) for i in (0, 2, 4)))
 
 
-def acrylic_layers(colours, ground='paper'):
-    """The acrylic's discs in the order they are laid (ACRYLIC_ORDER), each (ring, tint, blend, strength): in colour the
-    mixed colours' discs a light wash and the primaries over them; in one colour every disc alike, where they cross
-    deeper."""
-    A, one = ACRYLIC['night' if ground == 'night' else 'paper'], len(set(colours)) == 1
+def _rgb(c):
+    c = c.lstrip('#')
+    return np.array([int(c[i:i + 2], 16) for i in (0, 2, 4)], float)
+
+
+def _hex(v):
+    return '#%02X%02X%02X' % tuple(int(round(min(255.0, max(0.0, x)))) for x in v)
+
+
+def _oklab(c):
+    """A colour (hex) in OKLab (Bjorn Ottosson's)."""
+    v = _rgb(c) / 255
+    v = np.where(v <= 0.04045, v / 12.92, ((v + 0.055) / 1.055) ** 2.4)
+    l, m, s_ = (np.array([[0.4122214708, 0.5363325363, 0.0514459929], [0.2119034982, 0.6806995451, 0.1073969566],
+                          [0.0883024619, 0.2817188376, 0.6299787005]]) @ v) ** (1 / 3)
+    return np.array([0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s_, 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s_,
+                     0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s_])
+
+
+def _from_oklab(lab):
+    L, a, b = lab
+    l, m, s_ = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3, (L - 0.1055613458 * a - 0.0638541728 * b) ** 3, \
+        (L - 0.0894841775 * a - 1.2914855480 * b) ** 3
+    v = np.array([4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s_, -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s_,
+                  -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s_])
+    v = np.clip(v, 0, 1)
+    return _hex(255 * np.where(v <= 0.0031308, 12.92 * v, 1.055 * v ** (1 / 2.4) - 0.055))
+
+
+def _mix(colours, weights):
+    """Colours mixed by weight in OKLCh: lightness and chroma weighted, the hue a circular mean weighted by chroma
+    (round 25: mixing in sRGB turns crossings grey and brown); as OKLab."""
+    labs = [_oklab(c) for c in colours]
+    L = sum(w * q[0] for w, q in zip(weights, labs))
+    C = sum(w * math.hypot(q[1], q[2]) for w, q in zip(weights, labs))
+    ha = sum(w * q[1] for w, q in zip(weights, labs))             # (a, b) weighted is the chroma-weighted hue vector
+    hb = sum(w * q[2] for w, q in zip(weights, labs))
+    h = math.atan2(hb, ha)
+    return np.array([L, C * math.cos(h), C * math.sin(h)])
+
+
+def _stack(colours, weights, A, steps=None):
+    """Round 25 (the acrylic critic's third round): tinted sheets stacked, as OKLab: a and b the share-weighted mean,
+    so opposed tints cancel toward grey; the lightness the darkest sheet's, a step (`dark`) lower for each sheet
+    beyond the first and lower still (`smoke`) the less the sheets' hues agree (R, the mean's chroma over the mean
+    chroma: 1 for one hue, near 0 for opposites). So a crossing is darker than every sheet in it, as stacked acrylic
+    is. One sheet is its own colour. `steps`: how many steps deeper (default one for each sheet beyond the first)."""
+    labs = [_oklab(c) for c in colours]
+    if len(labs) == 1:
+        return labs[0]
+    a = sum(w * q[1] for w, q in zip(weights, labs))
+    b = sum(w * q[2] for w, q in zip(weights, labs))
+    C = sum(w * math.hypot(q[1], q[2]) for w, q in zip(weights, labs))
+    R = math.hypot(a, b) / C if C > 1e-9 else 1.0
+    n = len(labs) - 1 if steps is None else steps
+    return np.array([min(q[0] for q in labs) - A['dark'] * n - A['smoke'] * (1 - R), a, b])
+
+
+def _depth(g, x, y):
+    """The depth (z, toward us) of ring g's plane at (x, y) on the picture."""
+    n = g['n']
+    return (g['d'] - n[0] * x - n[1] * y) / n[2]
+
+
+def _side(c, A):
+    """A disc's side, as a polished acrylic edge looks: its tint deeper (OKLab lightness lower by `side`, chroma raised
+    by `sideC`), as hex."""
+    L, a, b = _oklab(c)
+    k = 1 + A['sideC']
+    return _from_oklab(np.array([L - A['side'], a * k, b * k]))
+
+
+def slabs(spin=0.0, h=0.025, n=360):
+    """Round 25 (the owner: "For acrylic I was expecting each disc to have a little thickness to it"): each ring's disc
+    as a slab 2h thick about its own plane. m its normal turned toward us; `front` the oval of its face toward us (the
+    disc's own, moved h along m); `swept` the slab's whole outline on the picture (the hull of its two faces' ovals:
+    an oval swept along a line is convex), whose part outside `front` is the side we see; its depth z = al x + be y + g
+    on the front face (gf) and on its own plane (gm, for the side)."""
     out = []
-    for i in ACRYLIC_ORDER:
-        mode, a, k = A['one'] if one else (A['prim'] if i < 3 else A['mixed'])
-        out.append((i, _lighter(colours[i], k) if k else colours[i], mode, a))
+    for g in rings(spin, n):
+        m = g['n'] * (1.0 if g['n'][2] >= 0 else -1.0)
+        if abs(m[2]) < 1e-6:
+            out.append(None); continue
+        P, off = g['pts'][:, :2], h * m[:2]
+        front, back = Polygon(P + off).buffer(0), Polygon(P - off).buffer(0)
+        K = float(np.dot(m, g['c']))
+        out.append(dict(front=front, swept=unary_union([front, back]).convex_hull, al=-m[0] / m[2], be=-m[1] / m[2],
+                        gf=(K + h) / m[2], gm=K / m[2]))
     return out
 
 
-def acrylic_body(colours, ground='paper'):
-    """Round 24b: the discs as tinted acrylic, every one of them, translucent, no strokes (acrylic_layers)."""
-    rs = rings()
-    return '<g style="isolation:isolate">' + ''.join(
-        f'<ellipse {_ellipse(rs[i])} fill="{c}" fill-opacity="{a}"' + (f' style="mix-blend-mode:{m}"' if m != 'normal' else '') + '/>'
-        for i, c, m, a in acrylic_layers(colours, ground)) + '</g>'
+def acrylic_cells(colours, A, spin=0.0):
+    """The discs' slabs cut into cells in each of which the same faces and sides are crossed in the same order: cut by
+    every slab's front face and outline and, where two slabs both lie, by the lines along which they are at one depth
+    (face or side against face or side). Each cell with the sheets crossed there, nearest first: (colour, whether it is
+    the green's face, the backing)."""
+    S = slabs(spin, A['thick'] / 2)
+    lines = []
+    for q in S:
+        if q is not None:
+            lines += [LineString(np.asarray(q['front'].exterior.coords)), LineString(np.asarray(q['swept'].exterior.coords))]
+    for i in range(len(S)):
+        for j in range(i + 1, len(S)):
+            si, sj = S[i], S[j]
+            if si is None or sj is None:
+                continue
+            both = si['swept'].intersection(sj['swept'])
+            A_, B_ = si['al'] - sj['al'], si['be'] - sj['be']
+            m = math.hypot(A_, B_)
+            if both.is_empty or m < 1e-12:
+                continue
+            u = np.array([A_ / m, B_ / m]); t = np.array([-u[1], u[0]])
+            for gi in (si['gf'], si['gm']):
+                for gj in (sj['gf'], sj['gm']):
+                    p0 = -(gi - gj) / m * u
+                    seg = LineString([p0 - 3 * t, p0 + 3 * t]).intersection(both.buffer(1e-3))
+                    if not seg.is_empty:
+                        lines.append(seg)
+    out = []
+    for c in polygonize(unary_union(lines)):
+        if c.area < 1e-7:
+            continue
+        q, hit = c.representative_point(), []
+        for k, sl in enumerate(S):
+            if sl is None:
+                continue
+            if sl['front'].contains(q):
+                hit.append((sl['al'] * q.x + sl['be'] * q.y + sl['gf'], colours[k], k == ATMOS))
+            elif sl['swept'].contains(q):
+                hit.append((sl['al'] * q.x + sl['be'] * q.y + sl['gm'], _side(colours[k], A), False))
+        if hit:
+            out.append((c, [(col, green) for _, col, green in sorted(hit, key=lambda t: -t[0])]))
+    return out
+
+
+def _acrylic(sheets, A):
+    """Round 25 (the acrylic critic's second and third rounds): what shows through the sheets crossed at a point,
+    nearest first, each (colour, whether it is the green's face): the green's face the backing; the sheets in front of
+    it sharing all of what shows (the nearest `face`, the next `face` of the rest, the farthest what is left); where none
+    is, the green with the sheets behind it faint; where the green is not, the sheets alone. Stacked as tinted sheets
+    (_stack: every crossing deeper than its darkest sheet), as OKLab; None where there is no sheet (round 25: no ball)."""
+    if not sheets:
+        return None
+    a = A['face']
+    gi = next((i for i, (_, green) in enumerate(sheets) if green), len(sheets))
+    front, back = [c for c, _ in sheets[:gi]], [c for c, _ in sheets[gi + 1:]]
+
+    def shares(n, total=1.0):                                         # the nearest a, the next a of the rest, ...; the last what is left
+        w, keep = [], total
+        for i in range(n):
+            w.append(keep if i == n - 1 else keep * a)
+            keep *= 1 - a
+        return w
+    if front:
+        return _stack(front, shares(len(front)), A)
+    green = sheets[gi][0]
+    if not back:
+        return _oklab(green)
+    # behind the green the back halves count as one sheet, a step deeper at most (two crossed back halves, two steps,
+    # came out darker than the crossings in front, against the critic's ghosts 'quieter than the crossings')
+    return _stack([green] + back, [A['green']] + shares(len(back), 1 - A['green']), A, steps=1)
+
+
+def _through(order, colours, a, under):
+    """What shows through faces laid front to back (`order`), the nearest keeping `a` of what shows, the next `a` of the
+    rest, and so on, `under` (a hex colour) taking what is left; mixed in OKLCh (_mix), as OKLab."""
+    w, keep = [], 1.0
+    for _ in order:
+        w.append(keep * a)
+        keep *= 1 - a
+    return _mix([colours[k] for k in order] + [under], w + [keep])
+
+
+def acrylic_body(colours, ground='paper', spin=0.0, n=720):
+    """Round 25: the discs as tinted acrylic (ACRYLIC): their mosaic see-through, each cell's colour by the acrylic's rule
+    (_acrylic: the green the backing, the coloured discs in front of it sharing what shows, the back halves faint behind
+    it), each disc a slab with its side showing (slabs; the globe the discs alone, round 25); cells whose colours are
+    within a hair of each other (OKLab 0.012) given one
+    colour and merged, so no seam shows inside an even area (the brand critic saw hairlines). With `edge` above 0, each
+    disc's edge in its colour: the far halves, each seen through the faces in front of it, then the near halves, whole."""
+    A = ACRYLIC['night' if ground == 'night' else 'paper']
+    a, w = A['face'], A['edge']
+    cells = [(c, lab) for c, sheets in acrylic_cells(colours, A, spin) for lab in [_acrylic(sheets, A)] if lab is not None]
+    sil = unary_union([c for c, _ in cells])
+    clusters = []                                        # [weighted lab sum, area, cells]
+    for c, lab in sorted(cells, key=lambda t: -t[0].area):
+        for k in clusters:
+            if np.linalg.norm(k[0] / k[1] - lab) < 0.012:
+                k[0] += lab * c.area; k[1] += c.area; k[2].append(c); break
+        else:
+            clusters.append([lab * c.area, c.area, [c]])
+    faces = sorted(((unary_union([c.buffer(0.0015, join_style=2) for c in k[2]]).intersection(sil), _from_oklab(k[0] / k[1]))
+                    for k in clusters), key=lambda t: -t[0].area)   # the laps: small cells over large
+    body = ''.join(f'<path d="{_poly_d(g.simplify(0.0008))}" fill="{col}" fill-rule="evenodd"/>' for g, col in faces)
+    if w <= 0:
+        return body
+    rs, far, near = rings(spin, n), [], []
+    for i, g in enumerate(rs):
+        pts, runs, cur, key = g['pts'], [], [], None
+        for k in range(n):
+            p, q = pts[k], pts[(k + 1) % n]
+            m = (p + q) / 2
+            if m[2] > 0:
+                kk = (colours[i], True)
+            else:                                        # the far half: through every face crossing in front of it
+                hit = sorted(((zj, j) for j, gj in enumerate(rs) if j != i and abs(gj['n'][2]) > 1e-6
+                              for zj in [_depth(gj, m[0], m[1])]
+                              if zj > m[2] + 1e-6 and np.linalg.norm(np.array([m[0], m[1], zj]) - gj['c']) <= gj['r'] + 1e-9),
+                             reverse=True)
+                kk = (_from_oklab(_through([j for _, j in hit], colours, a, colours[i])), False)   # (edges: off; kept as before)
+            if kk != key:
+                if cur:
+                    runs.append((key, cur))
+                cur, key = [p], kk
+            cur.append(q)
+        runs.append((key, cur))
+        for (col, front), r in runs:
+            (near if front else far).append(f'<path d="{_d(np.array(r))}" stroke="{col}"/>')
+    g = f'<g fill="none" stroke-width="{w:.4f}" stroke-linecap="butt" stroke-linejoin="round">'
+    return body + g + ''.join(far) + '</g>' + g + ''.join(near) + '</g>'
 
 
 def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper'):
@@ -358,8 +570,10 @@ def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper'):
     line = colours[0] if one else (WHITE if ground == 'night' else INK)
     if style == 'tubes':
         body, e = tubes_body(colours, ground), 1 + W_TUBE / 2 + 0.02
-    elif style == 'acrylic':
-        body, e = acrylic_body(colours, ground), 1 + 0.03
+    elif style == 'acrylic' and not one:
+        body, e = acrylic_body(colours, ground), 1 + W_LINE / 2
+    elif style == 'acrylic':                             # in one colour the acrylic is the lines (round 25)
+        body, e = lines_body(colours), 1 + W_LINE / 2
     elif style == 'discs':
         body, e = discs_body(colours, flush=not one), 1 + W_LINE / 2
     else:
@@ -413,7 +627,8 @@ def _core_paths():
 def outlines(tol=0.0015):
     """Round 24 (24b): the globe's shapes for a maker (product.py's mark in the front corner), each a list of [ring,
     exterior, holes] on the unit globe, y up: the discs seamed, for one colour (an etch, a tint); the discs flush, for
-    colour (a print); and the lines, each ring at one weight (the even style)."""
+    colour (a print); and the lines, each ring at one weight (the even style); with the rings' colours (round 25), so a
+    print takes them from here."""
     def parts(g, k):                                     # on a 1e-4 grid, each polygon kept valid (a CAD face needs it)
         g = make_valid(set_precision(g, 1e-4))
         return [[k, np.array(q.exterior.coords)[:-1].tolist(), [np.array(h.coords)[:-1].tolist() for h in q.interiors]]
@@ -424,16 +639,12 @@ def outlines(tol=0.0015):
     for i, g in enumerate(rings()):
         loop = np.vstack([g['pts'], g['pts'][:1]])[:, :2]
         lines += parts(LineString(loop).buffer(W_LINE / 2, join_style=1).simplify(tol), i)
-    ball = Point(0, 0).buffer(1.0, resolution=180)
-    gaps = ball.difference(unary_union([g for g in disc_shapes(flush=True, lap=0.0) if g is not None]))
-    gaps = gaps.buffer(-2e-4).buffer(2e-4)               # only the gaps at the rim, not the slivers between two parts
-    gaps = unary_union([q for q in getattr(gaps, 'geoms', [gaps]) if q.area > 2e-4])
-    return dict(discs=seamed, flush=flush, lines=lines, base=parts(gaps.simplify(tol), ATMOS))
+    return dict(discs=seamed, flush=flush, lines=lines, base=[], ring=RING, atmos=ATMOS)   # base: round 25, no ball filled
 
 
 def data():
     return dict(lean=LEAN, elev=ELEV, lat=LAT, mer=list(MERIDIANS), w=W_LINE, wDepth=W_DEPTH, seam=SEAM, hues=HUES, wTube=W_TUBE, tube=TUBE,
-                ring=RING, atmos=ATMOS, rim=_lighter(RING[ATMOS], -0.4), acrylic={g: acrylic_layers(RING, g) for g in ('paper', 'night')}, core=_core_paths(),
+                ring=RING, atmos=ATMOS, rim=_lighter(RING[ATMOS], -0.4), acrylic=ACRYLIC, core=_core_paths(),
                 names=NAMES, paper=PAPER, ink=INK, night=NIGHT, white=WHITE, letters=letters(), wordW=M.WORDMARK_W)
 
 
@@ -481,13 +692,16 @@ ON_INK = {'Smoke': '#8A888E'}                            # Smoke's lines lighten
 
 
 def core_html():
-    """Round 24b: the globe as a Death Star (core.py), on paper and on ink, with the violet cap, and in black and white."""
+    """Round 24b: the globe as a Death Star (core.py); round 25: the Earth on it, and its cuts for each size (full, mid
+    for 25 to 48 px, small for 24 px and under), in colour and in one colour, and the violet cap."""
     import core as K
-    cells = ''.join(f'<figure class="icon {g}">{K.core_svg(gr, one, cap, label=f"The globe as a Death Star, {t.lower()}")}'
-                    f'<figcaption>{t}</figcaption></figure>'
-                    for t, g, gr, one, cap in (('On paper', 'paper', 'paper', None, False), ('On ink', 'night', 'night', None, False),
-                                               ('With a violet cap', 'paper', 'paper', None, True),
-                                               ('Black only', 'paper', 'paper', INK, False), ('White only', 'night', 'night', WHITE, False)))
+    rows = (('On paper', 'paper', None, False, 'full'), ('Mid, 25&ndash;48 px', 'paper', None, False, 'mid'),
+            ('Small, 24 px and under', 'paper', None, False, 'small'), ('On ink', 'night', None, False, 'full'),
+            ('With a violet cap', 'paper', None, True, 'full'), ('Black only', 'paper', INK, False, 'full'),
+            ('Black, mid', 'paper', INK, False, 'mid'), ('Black, small', 'paper', INK, False, 'small'),
+            ('White only', 'night', WHITE, False, 'full'), ('White, small', 'night', WHITE, False, 'small'))
+    cells = ''.join(f'<figure class="icon {g}">{K.core_svg(g, one, cap, small=cut == "small", mid=cut == "mid", label="The globe as a Death Star, " + t.lower().replace("&ndash;", " to "))}'
+                    f'<figcaption>{t}</figcaption></figure>' for t, g, one, cap, cut in rows)
     return f'<div class="iconrow"><div class="cores">{cells}</div></div>'
 
 
@@ -595,14 +809,16 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
 </style>
 <main>
   <header>
-    <div class="eyebrow">EARF &middot; Round 24b &middot; the globe</div>
-    <h1>Flush discs, all six in acrylic, a calmer arrival, and a Death Star</h1>
-    <p class="lede">The same 3D Earth on the Earth's 23.4&deg; tilt, in colour theory: the horizontal discs are the
-      primaries, red, yellow and blue, the upright ones the colours they mix, orange, violet and green. In colour the
-      discs are flush, with no strokes: the ball itself is violet, the atmosphere, so the globe is round without an
-      outline. The strokes are the one-colour versions'. In acrylic every disc is tinted. Each ident ends on the whole
-      globe, upright, and then it tilts: the Gyroscope spins on its axis, the Coin&rsquo;s face is the globe, and
-      Earthrise, new, rises over a horizon.</p>
+    <div class="eyebrow">EARF &middot; Round 25 &middot; the globe</div>
+    <h1>Green and blue, see-through acrylic, a coin that flashes the six, and the Earth as a Death Star</h1>
+    <p class="lede">The same 3D Earth on the Earth's 23.4&deg; tilt, its colours moved so blue and green lead: the
+      meridian facing you, the largest disc, is green, the land, and the equator is blue, the sea; red north, yellow
+      south, orange and violet at the sides. In colour the discs are flush, with no strokes; the strokes are the
+      one-colour versions'. No fill completes the circle: the globe is its six discs alone. The acrylic is the discs
+      themselves, see-through, each a slab with its side showing, stacked as tinted sheets: one sheet shows its own
+      colour, and where two cross they make one deeper colour, whichever is in front. The Coin flashes the six colours, one each half turn, and lands on the globe; every ident's tilt now
+      begins before its spin ends, so nothing stops between them. Open starts as the flat globe icon, Iris opens the
+      finished globe out of its own centre, Roll rolls it in like a ball, and the Planet takes a meteor.</p>
   </header>
 
   <section class="win" aria-label="The ident">
@@ -610,7 +826,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
     <div class="screen" id="screen"><canvas id="stage" aria-label="The EARF globe arriving, then EARF beside it"></canvas></div>
     <div class="controls">
       <div class="seg" id="kind" role="group" aria-label="Ident">
-        <button aria-pressed="true" data-v="gyro">Gyroscope</button><button aria-pressed="false" data-v="coin">Coin</button><button aria-pressed="false" data-v="rise">Earthrise</button>
+        <button aria-pressed="true" data-v="gyro">Gyroscope</button><button aria-pressed="false" data-v="coin">Coin</button><button aria-pressed="false" data-v="rise">Earthrise</button><button aria-pressed="false" data-v="open">Open</button><button aria-pressed="false" data-v="iris">Iris</button><button aria-pressed="false" data-v="planet">Planet</button><button aria-pressed="false" data-v="roll">Roll</button><button aria-pressed="false" data-v="download">Download</button>
       </div>
       <div class="seg" id="style" role="group" aria-label="Style">
         <button aria-pressed="true" data-v="discs">Discs</button><button aria-pressed="false" data-v="acrylic">Acrylic</button><button aria-pressed="false" data-v="even">Lines</button>
@@ -630,11 +846,16 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
 
   <section class="win" aria-label="The globe as a Death Star">
     <div class="bar"><b>The globe as a Death Star &mdash; its dish a driver</b></div>
-    <p class="lead">A sphere, blue, with the equator&rsquo;s trench in green: the outside. In its northern half a dish, a
-      little bigger than the Death Star&rsquo;s, that is a driver seen from the front: the surround red, the cone orange,
-      the dust cap yellow, as the Earth&rsquo;s core. The dish is concave, so its rings sit a little off centre. Flat
-      colour and no strokes; in one colour, the trench and the rings&rsquo; edges are gaps. Purple can be a small cap at the
-      centre, and it is the ring of sound the dish sends out when it kicks (below).</p>
+    <p class="lead">The outside is the Earth (round 25): the continents in green on the blue sea, coarse and
+      rounded, the Americas facing you, the land kept clear of the dish and no specks. In the North Atlantic a dish that is
+      a driver seen from the front: the surround red, the cone orange, the dust cap yellow, as the Earth&rsquo;s core. It is
+      21&deg; across, as in round 24b, with a deeper bowl, so its rings sit toward the middle: 24&deg; was tried and pressed
+      on every coast. Below 49&nbsp;px a mid cut keeps only the two Americas, and at 24&nbsp;px and under the small cut has
+      no land and a 24&deg; dish. In one colour it is knock-outs: the disc solid, the land, the surround and the dust cap
+      knocked out to the ground. On each beat the cone pushes out, rebounds and settles, and a ring of sound, knocked out
+      of the globe, crosses the Earth (below). As an ident, the Planet: a violet meteor strikes the North Atlantic, a white
+      cloud bursts and the sea ripples, the cloud breaks into black wisps, and the crater shows, the meteor lodged in its
+      core as the violet cap.</p>
     __CORE__
   </section>
 
@@ -660,6 +881,10 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <div class="bar"><b>The Death Star, kicking &mdash; for the speakers</b></div>
       <div class="coin" style="background:#121114"><canvas id="kickloop" aria-label="The globe as a Death Star, its dish kicking like a speaker"></canvas></div>
     </div>
+    <div class="win">
+      <div class="bar"><b>The planet, struck &mdash; the meteor stays in its core</b></div>
+      <div class="coin" style="background:#F2EFEA"><canvas id="meteor" aria-label="A violet meteor strikes the Earth: a white cloud, black wisps, the sea rippling, then the crater with the meteor in its core"></canvas></div>
+    </div>
   </section>
 
   <section class="win" aria-label="Notes">
@@ -668,9 +893,9 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <h3>Why it reads as the Earth</h3>
       <ul>
         <li>The axis leans 23.4&deg;, as the Earth's does and as a desk globe's stand holds it. It also tips 22&deg; toward you, so the parallels open into ovals and the far halves show behind the near ones.</li>
-        <li>The colours are colour theory (round 24): the parallels are the primaries, north to south, Flare red, Acid yellow and Ice blue; the meridians are the secondaries, Dust orange, Haze violet and Poison green. Haze faces you, so the globe's outline is violet, the colour of the atmosphere at the Earth's edge.</li>
-        <li>Discs in colour are flush (round 24b): no seams, no outline, no light. The ball itself is violet where no disc reaches its rim, so the globe is round and solid without a stroke. The strokes belong to the one-colour versions: there the seams are gaps in the ground, and the parts run out to the rim.</li>
-        <li>Acrylic: every disc tinted (round 24b). All six alike goes to mud, the violet meridian facing you lying behind everything, so the three mixed colours' discs go down first as a light wash and the primaries over them, multiplied on paper so where two primaries cross they make the colour between: red over yellow orange, yellow over blue green. On ink each is laid over the last. No strokes.</li>
+        <li>The colours (round 25): blue and green lead, as the Earth's sea and land. The meridian facing you, the largest disc, is Poison green; the equator, the widest band, is Ice blue; north Flare red and south Acid yellow; of the side meridians, the one that shows more is Dust orange and the one that shows less Haze violet. Round 24 had violet facing you and the primaries on the parallels.</li>
+        <li>Discs in colour are flush (round 24b): no seams, no outline, no light. The globe is its six discs alone (round 25): no fill completes the circle where no disc reaches the rim, so its outline is the discs' own, the green disc's oval with the others' tips reaching past it. The strokes belong to the one-colour versions: there the seams are gaps in the ground, and the outline stays whole.</li>
+        <li>Acrylic (round 25) is the discs themselves, see-through, stacked as tinted sheets, each disc a slab a twentieth of the radius thick, its side, where it faces you, a deeper tone of its tint, as a polished acrylic edge looks. The green meridian facing you is the backing, as in the discs. One disc in front shows its own flat colour; where two cross they make one colour darker than either, whichever is in front, as two filters do: red over violet crimson, blue over violet indigo, and the opposite pairs smoky, blue over orange taupe and yellow over violet brown. Where no disc lies in front, the rings' far halves show through the green a little deeper than it, so each ring closes. Where a disc is, the ground takes nothing, so paper and ink match. Stacked in OKLab (a and b averaged, the lightness the darkest sheet's and lower for each sheet more and the less their hues agree); drawn per pixel on the graphics card (without WebGL, the flush discs). No edges (a cage of hoops, the critic found); in one colour the acrylic is the lines.</li>
         <li>Lines are even, every line one weight, the far halves under the near. Round 22's lighter far halves (in <code>brand/earth-lines-*.svg</code>) remain for one colour at small sizes, where even lines tangle.</li>
         <li>Seen from above the pole, the same rings are a speaker: rings round one centre, with the meridians as spokes. Round 23&rsquo;s Kick used that view; round 24b makes the speaker a Death Star&rsquo;s dish instead.</li>
         <li>Round 23's tubes, the printer and the kick, and round 24's lit sphere and cut-open globe, are set aside; the first three stay in <code>earth.py</code> and in round 23's files.</li>
@@ -789,14 +1014,7 @@ function drawDiscs(ctx, V, gs, filled, cols, bg, seamW) {
     o.setTransform(1, 0, 0, 1, 0, 0); o.clearRect(0, 0, off.width, off.height); o.setTransform(T);
     o.globalCompositeOperation = 'source-over'; o.fillStyle = cols[k]; ellipse(o, V, gi.pts); o.fill();
     o.globalCompositeOperation = 'destination-out';
-    for (const gj of on) { if (gj === gi) continue;
-      const ni = gi.n, nj = gj.n, A = -nj[0] / nj[2] + ni[0] / ni[2], B = -nj[1] / nj[2] + ni[1] / ni[2], C = gj.d / nj[2] - gi.d / ni[2];
-      const m = Math.hypot(A, B); o.save();
-      if (m > 1e-9) { const ux = A / m, uy = B / m, c0 = -C / m, px = ux * c0, py = uy * c0, tx = -uy, ty = ux, b = 4;
-        const q = [[px + tx * b, py + ty * b], [px - tx * b, py - ty * b], [px - tx * b + ux * b, py - ty * b + uy * b], [px + tx * b + ux * b, py + ty * b + uy * b]];
-        o.beginPath(); q.forEach((p, i) => i ? o.lineTo(V.X(p), V.Y(p)) : o.moveTo(V.X(p), V.Y(p))); o.closePath(); o.clip();
-      } else if (C <= 0) { o.restore(); continue; }
-      ellipse(o, V, gj.pts); o.fill(); o.restore(); }
+    for (const gj of on) { if (gj === gi || !nearerClip(o, V, gi, gj)) continue; ellipse(o, V, gj.pts); o.fill(); o.restore(); }
     ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
     for (const [dx, dy] of seamW > 0 ? [[0, 0]] : FLUSH) ctx.drawImage(off, dx, dy);   // flush: a hair wider each way
     ctx.restore();
@@ -819,6 +1037,17 @@ function drawDiscs(ctx, V, gs, filled, cols, bg, seamW) {
   }
 }
 function ellipse(c, V, pts) { c.beginPath(); pts.forEach((p, i) => i ? c.lineTo(V.X(p), V.Y(p)) : c.moveTo(V.X(p), V.Y(p))); c.closePath(); }
+// clip to where disc gj is nearer than disc gi (two planes' depths differ linearly across the picture, so it is a
+// half-plane); false, and no clip, if it is nearer nowhere; otherwise the caller restores
+function nearerClip(o, V, gi, gj) {
+  const ni = gi.n, nj = gj.n, A = -nj[0] / nj[2] + ni[0] / ni[2], B = -nj[1] / nj[2] + ni[1] / ni[2], C = gj.d / nj[2] - gi.d / ni[2];
+  const m = Math.hypot(A, B);
+  if (m <= 1e-9) { if (C <= 0) return false; o.save(); return true; }
+  const ux = A / m, uy = B / m, c0 = -C / m, px = ux * c0, py = uy * c0, tx = -uy, ty = ux, b = 4;
+  const q = [[px + tx * b, py + ty * b], [px - tx * b, py - ty * b], [px - tx * b + ux * b, py - ty * b + uy * b], [px + tx * b + ux * b, py + ty * b + uy * b]];
+  o.save(); o.beginPath(); q.forEach((p, i) => i ? o.lineTo(V.X(p), V.Y(p)) : o.moveTo(V.X(p), V.Y(p))); o.closePath(); o.clip();
+  return true;
+}
 
 // the globe in a state: drawn[k] (share of ring k drawn), done[k] (closed and coloured), the style and ground
 function drawGlobe(ctx, V, s) {
@@ -926,8 +1155,7 @@ function drawRings(ctx, V, items, style, G) {
   if (style === 'tubes') { drawTubes(ctx, V, items, G); return; }
   if (style === 'acrylic') { drawAcrylic(ctx, V, items, G); return; }
   if (style === 'discs') {
-    const ds = items.filter(i => !i.ink && i.g.r > 1e-3);
-    ctx.fillStyle = D.ring[D.atmos]; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R, 0, TAU); ctx.fill();   // the ball, violet
+    const ds = items.filter(i => !i.ink && i.g.r > 1e-3);                  // the discs alone (round 25: no ball filled under them)
     drawDiscs(ctx, V, ds.map(i => i.g), ds.map(() => true), ds.map(i => i.col), G.bg, 0);
     for (const i of items) if (i.ink) { ctx.strokeStyle = i.col; ctx.lineWidth = w * 0.8; strokeVisible(ctx, V, i.g.pts, ds.map(d => d.g), []); }
   } else {
@@ -938,18 +1166,130 @@ function drawRings(ctx, V, items, style, G) {
 }
 const globeItems = (geom, spin = 0) => ringsAt(spin, geom || {}).map((g, k) => ({ g, col: D.ring[k] }));
 
-// a ring as the ellipse it projects to: its centre, its radius across, and its radius times |n.z| along its normal
-function ringEllipse(ctx, V, g) {
-  const n = g.n, L = Math.hypot(n[0], n[1], n[2]) || 1, th = Math.abs(n[0]) + Math.abs(n[1]) > 1e-9 ? Math.atan2(-n[1], n[0]) : 0;
-  ctx.beginPath(); ctx.ellipse(V.X(g.c), V.Y(g.c), Math.max(1e-4, g.r * Math.abs(n[2]) / L * V.R), Math.max(1e-4, g.r * V.R), th, 0, TAU);
+// round 25, the acrylic (earth.py ACRYLIC): wherever you look through the globe, the discs crossed there laid front to
+// back, the nearest keeping `face` of what shows, the next `face` of the rest, the ground taking what is left, mixed in
+// stacked as earth.py stacks the SVGs' cells (_stack: OKLab, a and b weighted, every crossing deeper than its darkest sheet).
+// Drawn on the graphics card, per pixel, four samples a pixel (WebGL); where there is none, composited on the canvas in
+// sRGB (exact in its weights, its crossings a little greyer): what is behind the globe dimmed once for each face it shows
+// through, each face's colour dimmed once for each face nearer than it (nearerClip), the dimmed colours added
+const OKL = hex => {
+  const [r, g, b] = [1, 3, 5].map(i => { const c = parseInt(hex.slice(i, i + 2), 16) / 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); });
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b),
+        s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  return [0.2104542553 * l + 0.7936177850 * m - 0.0040720468 * s, 1.9779984951 * l - 2.4285922050 * m + 0.4505937099 * s,
+          0.0259040371 * l + 0.7827717662 * m - 0.8086757660 * s];
+};
+const fromOKL = ([L, A, B]) => {
+  const l = (L + 0.3963377774 * A + 0.2158037573 * B) ** 3, m = (L - 0.1055613458 * A - 0.0638541728 * B) ** 3, s = (L - 0.0894841775 * A - 1.2914855480 * B) ** 3;
+  const v = [4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s, -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s, -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s];
+  return 'rgb(' + v.map(c => { c = clamp(c, 0, 1); return Math.round(255 * (c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055)); }).join(',') + ')';
+};
+// colours mixed by weight in OKLCh (earth.py _mix), as a CSS colour
+const mixOKL = (cols, ws) => { let L = 0, C = 0, ha = 0, hb = 0;
+  cols.forEach((c, i) => { const q = OKL(c); L += ws[i] * q[0]; C += ws[i] * Math.hypot(q[1], q[2]); ha += ws[i] * q[1]; hb += ws[i] * q[2]; });
+  const h = Math.atan2(hb, ha); return fromOKL([L, C * Math.cos(h), C * Math.sin(h)]); };
+const ACR_VS = 'attribute vec2 aPos; uniform vec2 uHalf; varying vec2 vP; void main() { vP = aPos * uHalf; gl_Position = vec4(aPos, 0.0, 1.0); }';
+const ACR_FS = `precision highp float;
+varying vec2 vP; uniform vec2 uPx; uniform vec4 uN[6]; uniform vec4 uC[6]; uniform vec3 uLab[6]; uniform vec3 uSide[6]; uniform float uOn[6];
+uniform vec3 uBg; uniform float uA; uniform float uAtmos;                         // the facing meridian's index
+uniform float uGreen; uniform float uDark; uniform float uSmoke; uniform float uH; // uH: half a slab's thickness
+vec3 lin(vec3 c) {
+  float l = c.x + 0.3963377774 * c.y + 0.2158037573 * c.z, m = c.x - 0.1055613458 * c.y - 0.0638541728 * c.z, s = c.x - 0.0894841775 * c.y - 1.2914855480 * c.z;
+  l = l * l * l; m = m * m * m; s = s * s * s;
+  return clamp(vec3(4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s, -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
+                    -0.0041960863 * l - 0.7034186147 * m + 1.7076147010 * s), 0.0, 1.0);
 }
-// round 24b, the acrylic (earth.py ACRYLIC): every disc tinted and laid in turn, the mixed colours' discs a light wash
-// and the primaries over them, multiplied on paper so where two primaries cross they make the colour between; no strokes
+vec4 shade(vec2 p) {
+  // each disc a slab (earth.py slabs): where the view first enters it, through its face toward us or through its side
+  float z[6]; float hit[6]; float sd[6]; float n = 0.0;
+  for (int i = 0; i < 6; i++) {
+    z[i] = 0.0; hit[i] = 0.0; sd[i] = 0.0;
+    if (uOn[i] > 0.5) {
+      vec3 m = uN[i].xyz * (uN[i].z < 0.0 ? -1.0 : 1.0), w0 = vec3(p, 0.0) - uC[i].xyz;
+      float r = uC[i].w, a0 = dot(w0, m);
+      vec3 u0 = w0 - a0 * m, k = vec3(0.0, 0.0, 1.0) - m.z * m;
+      if (m.z > 1e-4) { float zf = (uH - a0) / m.z; vec3 uf = u0 + zf * k; if (dot(uf, uf) <= r * r) { z[i] = zf; hit[i] = 1.0; } }
+      if (hit[i] < 0.5) {
+        float kk = dot(k, k), b = dot(u0, k), D = b * b - kk * (dot(u0, u0) - r * r);
+        if (kk > 1e-8 && D >= 0.0) { float zs = (-b + sqrt(D)) / kk; if (abs(a0 + zs * m.z) <= uH) { z[i] = zs; hit[i] = 1.0; sd[i] = 1.0; } }
+      }
+      n += hit[i];
+    }
+  }
+  if (n < 0.5) return vec4(0.0);                        // the discs alone: no ball (round 25)
+  float zg = -1e9; vec3 green = vec3(0.0);               // the green's face, the backing, where it is
+  for (int i = 0; i < 6; i++) { if (float(i) == uAtmos && hit[i] > 0.5 && sd[i] < 0.5) { green = uLab[i]; zg = z[i]; } }
+  float nf = 0.0, nb = 0.0;
+  for (int i = 0; i < 6; i++) { if (hit[i] > 0.5 && !(float(i) == uAtmos && sd[i] < 0.5)) { if (z[i] > zg) nf += 1.0; else nb += 1.0; } }
+  float Lmin = 10.0, C = 0.0, ns = 0.0; vec2 ab = vec2(0.0);            // the sheets stacked (earth.py _stack)
+  float tot = nf > 0.5 ? 1.0 : 1.0 - uGreen, cnt = nf > 0.5 ? nf : nb;
+  if (nf < 0.5) { float wg = nb > 0.5 ? uGreen : 1.0; Lmin = min(Lmin, green.x); C += wg * length(green.yz); ab += wg * green.yz; ns += 1.0; }
+  for (int i = 0; i < 6; i++) {
+    bool mine = hit[i] > 0.5 && !(float(i) == uAtmos && sd[i] < 0.5) && ((nf > 0.5) == (z[i] > zg));
+    if (mine) {
+      float rank = 0.0;
+      for (int j = 0; j < 6; j++) { if (j != i && hit[j] > 0.5 && !(float(j) == uAtmos && sd[j] < 0.5) && ((nf > 0.5) == (z[j] > zg)) && z[j] > z[i]) rank += 1.0; }
+      float w = tot * (rank > cnt - 1.5 ? pow(1.0 - uA, rank) : uA * pow(1.0 - uA, rank));
+      vec3 col = sd[i] > 0.5 ? uSide[i] : uLab[i];
+      Lmin = min(Lmin, col.x); C += w * length(col.yz); ab += w * col.yz; ns += 1.0;
+    }
+  }
+  float R = C > 1e-6 ? length(ab) / C : 1.0;
+  float steps = nf > 0.5 ? ns - 1.0 : min(ns - 1.0, 1.0);                // behind the green, the back halves one sheet
+  float L = ns > 1.5 ? Lmin - uDark * steps - uSmoke * (1.0 - R) : Lmin;
+  return vec4(lin(vec3(L, ab)), 1.0);
+}
+void main() {
+  vec4 acc = shade(vP + uPx * vec2(-0.25, -0.25)) + shade(vP + uPx * vec2(0.25, -0.25)) + shade(vP + uPx * vec2(-0.25, 0.25)) + shade(vP + uPx * vec2(0.25, 0.25));
+  acc /= 4.0;
+  vec3 c = acc.a > 0.0 ? acc.rgb / acc.a : vec3(0.0);
+  vec3 e = mix(12.92 * c, 1.055 * pow(c, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, c));
+  gl_FragColor = vec4(e * acc.a, acc.a);
+}`;
+let AGL;                                                                    // undefined: not tried; false: none
+function acrylicGL() {
+  if (AGL !== undefined) return AGL;
+  AGL = false;
+  try {
+    const cv = document.createElement('canvas'), gl = cv.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true, antialias: false });
+    if (!gl) return AGL;
+    const sh = (type, src) => { const q = gl.createShader(type); gl.shaderSource(q, src); gl.compileShader(q);
+      if (!gl.getShaderParameter(q, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(q)); return q; };
+    const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, ACR_VS)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, ACR_FS)); gl.linkProgram(pr);
+    if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(pr));
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    const u = n => gl.getUniformLocation(pr, n);
+    AGL = { cv, gl, pr, buf, aPos: gl.getAttribLocation(pr, 'aPos'),
+            u: { half: u('uHalf'), px: u('uPx'), N: u('uN'), C: u('uC'), lab: u('uLab'), on: u('uOn'), bg: u('uBg'), a: u('uA'),
+                 atmos: u('uAtmos'), green: u('uGreen'), dark: u('uDark'), smoke: u('uSmoke'), h: u('uH'), side: u('uSide') } };
+  } catch (e) { console.warn('acrylic: no WebGL; compositing in sRGB', e); AGL = false; }
+  return AGL;
+}
 function drawAcrylic(ctx, V, items, G) {
-  for (const [k, col, mode, a] of D.acrylic[G.bg === D.night ? 'night' : 'paper']) { const i = items[k];
-    if (!i || i.g.r <= 1e-3) continue;
-    ctx.save(); ctx.globalCompositeOperation = mode === 'normal' ? 'source-over' : mode; ctx.globalAlpha = a; ctx.fillStyle = col;
-    ringEllipse(ctx, V, i.g); ctx.fill(); ctx.restore(); }
+  const A = D.acrylic[G.bg === D.night ? 'night' : 'paper'], a = A.face, on = items.filter(i => i.g.r > 1e-3);   // (edge on, a slab still shows its side)
+  const edges = front => { if (!(A.edge > 0)) return; ctx.save(); ctx.lineCap = 'butt'; ctx.lineJoin = 'round'; ctx.lineWidth = A.edge * V.R;
+    for (const i of on) { ctx.strokeStyle = i.col; sidePath(ctx, V, i.g.pts, front); ctx.stroke(); } ctx.restore(); };
+  const X = on.length <= 6 ? acrylicGL() : false;
+  if (X) {
+    const T = ctx.getTransform(), k = Math.max(Math.hypot(T.a, T.b), Math.hypot(T.c, T.d)), half = 1.02 + A.thick / 2;
+    const size = Math.max(2, Math.min(2048, Math.ceil(2 * half * V.R * k) || 2)), { cv, gl, u } = X;
+    if (cv.width !== size || cv.height !== size) { cv.width = size; cv.height = size; }
+    const N = new Float32Array(24), Cc = new Float32Array(24), L = new Float32Array(18), Sd = new Float32Array(18), O = new Float32Array(6);
+    on.forEach((i, j) => { const g = i.g, q = OKL(i.col); N.set([g.n[0], g.n[1], g.n[2], g.d], 4 * j); Cc.set([g.c[0], g.c[1], g.c[2], g.r], 4 * j);
+      L.set(q, 3 * j); Sd.set([q[0] - A.side, q[1] * (1 + A.sideC), q[2] * (1 + A.sideC)], 3 * j); O[j] = 1; });   // the side (earth.py _side)
+    gl.viewport(0, 0, size, size); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.useProgram(X.pr);
+    gl.uniform2f(u.half, half, half); gl.uniform2f(u.px, 2 * half / size, 2 * half / size);
+    gl.uniform4fv(u.N, N); gl.uniform4fv(u.C, Cc); gl.uniform3fv(u.lab, L); gl.uniform3fv(u.side, Sd); gl.uniform1fv(u.on, O); gl.uniform3fv(u.bg, OKL(G.bg)); gl.uniform1f(u.a, a);
+    gl.uniform1f(u.atmos, on.indexOf(items[D.atmos])); gl.uniform1f(u.h, A.thick / 2);
+    gl.uniform1f(u.green, A.green); gl.uniform1f(u.dark, A.dark); gl.uniform1f(u.smoke, A.smoke);
+    gl.bindBuffer(gl.ARRAY_BUFFER, X.buf); gl.enableVertexAttribArray(X.aPos); gl.vertexAttribPointer(X.aPos, 2, gl.FLOAT, false, 0, 0);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    edges(false); ctx.drawImage(cv, V.cx - half * V.R, V.cy - half * V.R, 2 * half * V.R, 2 * half * V.R); edges(true);
+    return;
+  }
+  drawRings(ctx, V, items, 'discs', G);                                     // no graphics card: the flush discs, which the
+                                                                             // acrylic matches wherever one disc shows
+  edges(true);
 }
 
 // the printer: a head shuttles across and back, a band lower each pass, and leaves the globe in its wake
@@ -972,14 +1312,30 @@ function drawPrinter(ctx, V, t, style, G) {
 // rotor does, the meridians turning about the pole (the parallels, round it, stay), slowing to rest, whole and
 // upright; then it tilts to the Earth's 23.4 degrees. (Two gimbals, the parallels rocking as well, were tried and were
 // busier: the parallels show their faces as they turn.)
-const GYRO = { spin: 1.5, tilt: 0.55, turns: 1 };
+// Round 25: the tilt starts `lap` before the spin ends, so the globe never stops between them (the storyboard's motion
+// trace showed it standing still for a moment); after the brand critic's first round, a second's spin and half a turn,
+// the least that brings each meridian back to its own place (a full turn swapped the meridian facing you six times).
+// After the acrylic critic's third round: slowing quadratically, not cubically (the cubic spin was spent by half time
+// and stood still a third of a second before the lean; the quadratic starts slower, so it is calmer too), and the lean
+// starting 0.3 before the spin ends
+const GYRO = { spin: 1.0, turns: 0.5, lap: 0.3 };
+// every ident's tilt (round 25, after the brand critics' first round: 0.55 s read as a drift, the one move only EARF
+// makes): 0.4 s, leaning a little past the Earth's 23.4 degrees and settling into it, as a gyroscope finds its axis
+// (keys: its share of the way, its share of the lean, each reached smoothly). The third critic: 0.3 s, its settle at
+// 0.4 too slow to see, so the lean ended in a creep, not a landing
+const TILT = { dur: 0.3, keys: [[0, 0], [0.55, 1.12], [0.8, 0.98], [1, 1]] };
+function tiltAt(t) {
+  const x = clamp(t / TILT.dur, 0, 1), K = TILT.keys;
+  for (let i = 1; i < K.length; i++) if (x <= K[i][0]) return K[i - 1][1] + (K[i][1] - K[i - 1][1]) * smooth((x - K[i - 1][0]) / (K[i][0] - K[i - 1][0]));
+  return 1;
+}
 function rotRing(g, ax, ang) {
   const L = Math.hypot(...ax), k = ax.map(v => v / L), c = Math.cos(ang), s = Math.sin(ang);
   const rot = v => { const kv = cross(k, v), kd = dot(k, v); return [0, 1, 2].map(j => v[j] * c + kv[j] * s + k[j] * kd * (1 - c)); };
   return { ...g, pts: g.pts.map(rot), n: rot(g.n), c: rot(g.c) };
 }
 function drawGyro(ctx, V, t, style, G) {
-  const s = clamp(t / GYRO.spin, 0, 1), e = 1 - Math.pow(1 - s, 3), u = smooth((t - GYRO.spin) / GYRO.tilt), lean = D.lean * u;
+  const s = clamp(t / GYRO.spin, 0, 1), e = 1 - Math.pow(1 - s, 2), lean = D.lean * tiltAt(t - GYRO.spin + GYRO.lap);
   const B = basis(lean, D.elev);
   const items = ringsAt(0, { lean, elev: D.elev }).map((g, k) => ({ g: k < 3 ? g : rotRing(g, B.a, TAU * GYRO.turns * (1 - e)), col: D.ring[k] }));
   drawRings(ctx, V, items, style, G);
@@ -1013,12 +1369,34 @@ function drawKickLoop(ctx, W, H, t, o) {
   return 4.0;
 }
 
-// an ident: the globe arrives, holds, moves aside, and EARF types in beside it
-const IDENTS = { printer: { dur: 2.05, draw: drawPrinter }, gyro: { get dur() { return GYRO.spin + GYRO.tilt; }, draw: drawGyro },
-                 kick: { dur: 1.95, draw: drawKick }, coin: { get dur() { return COIN.spin + COIN.tilt; }, draw: (...a) => coinAt(...a) },
-                 rise: { get dur() { return RISE.up + RISE.tilt; }, draw: (...a) => drawRise(...a) } };
-const HOLD = 0.35, MOVE = 0.5, TYPE = 0.07;
-function identTimes(kind) { const m0 = IDENTS[kind].dur + HOLD; return { move0: m0, word0: m0 + MOVE, end: m0 + MOVE + 4 * TYPE + 1.3 }; }
+// an ident: the globe arrives, holds, moves aside, and EARF is wiped out of the globe's rim beside it (round 25: typed
+// in, it came as four one-frame jumps, the harshest changes in the ident); `marks`: an ident's own phases, for the
+// storyboard. Each arrival ends `lap` into its tilt
+const arrival = (end, lap) => Math.max(end, end - lap + TILT.dur);
+const IDENTS = { printer: { dur: 2.05, draw: drawPrinter },
+                 gyro: { get dur() { return arrival(GYRO.spin, GYRO.lap); }, draw: drawGyro,
+                         marks: () => [[GYRO.spin - GYRO.lap, 'tilt'], [GYRO.spin, 'spun']] },
+                 kick: { dur: 1.95, draw: drawKick },
+                 coin: { get dur() { return arrival(COIN.spin, COIN.lap); }, draw: (...a) => coinAt(...a),
+                         marks: () => [[6 * COIN.half, 'globe'], [COIN.spin - COIN.lap, 'tilt']] },
+                 rise: { get dur() { return arrival(RISE.up, RISE.lap); }, draw: (...a) => drawRise(...a),
+                         marks: () => [[RISE.up - RISE.lap, 'tilt']] },
+                 roll: { get dur() { return arrival(ROLL.roll, ROLL.lap); }, draw: (...a) => drawRoll(...a),
+                         marks: () => [[ROLL.roll, 'stopped']] },
+                 download: { get dur() { return arrival(LOADGIF.passes.length * LOADGIF.each, LOADGIF.lap); }, draw: (...a) => drawDownload(...a),
+                             marks: () => [[LOADGIF.passes.length * LOADGIF.each, 'sharp']] },
+                 planet: { get dur() { return PLANET.end; }, get last() { return PLANET.last; }, draw: (...a) => drawPlanet(...a),
+                           marks: () => [[PLANET.hit, 'hit'], [PLANET.wisps.start, 'wisps']] },
+                 iris: { get dur() { return arrival(IRIS.open, IRIS.lap); }, draw: (...a) => drawIris(...a),
+                         marks: () => [[IRIS.open - IRIS.lap, 'tilt'], [IRIS.open, 'open']] },
+                 open: { get dur() { return arrival(OPEN.lead + 5 * OPEN.stagger + OPEN.each, OPEN.lap); },
+                         draw: (...a) => drawOpen(...a), marks: () => [[OPEN.lead + 5 * OPEN.stagger + OPEN.each - OPEN.lap, 'tilt']] } };
+// HOLD: round 25's second critic, 0.35 to 0.1 (with the lean's settle, the globe stood still half a second before it
+// moved); the third, 0.1 to 0, the move aside starting on the frame the lean lands. The wipe starts `lead` before the
+// move ends: the acrylic critic, 0.15 to 0 (it wiped the E while the globe still crowded it); the third ident critic,
+// 0 to 0.1 (at 0 the globe stopped dead, then the name jumped in; at 0.1 the rim is already clear of the E)
+const HOLD = 0, MOVE = 0.5, WIPE = { lead: 0.1, dur: 0.45 };
+function identTimes(kind) { const m0 = IDENTS[kind].dur + HOLD, w0 = m0 + MOVE - WIPE.lead; return { move0: m0, word0: w0, end: w0 + WIPE.dur + 1.3 }; }
 function identLayout(W, H) {
   const lockW = 450 + 110 + D.wordW, k = Math.min(W * 0.74 / lockW, H * 0.5 / 450), x0 = (W - lockW * k) / 2;
   return { R: 225 * k / (1 + D.w / 2), cx: x0 + 225 * k, cy: H / 2, wx: x0 + 560 * k, wy: H / 2 - 150 * k, k };
@@ -1027,10 +1405,12 @@ function drawIdent(ctx, W, H, t, o) {
   const G = GROUNDS[o.ground], L = identLayout(W, H), T = identTimes(o.kind), m = smooth((t - T.move0) / MOVE);
   const hR = Math.min(H * 0.34, W * 0.3), V = view(W, H, W / 2 + (L.cx - W / 2) * m, H / 2 + (L.cy - H / 2) * m, hR + (L.R - hR) * m);
   ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
-  IDENTS[o.kind].draw(ctx, V, Math.min(t, IDENTS[o.kind].dur + 0.01), o.style, G);
-  const nl = Math.floor((t - T.word0) / TYPE) + 1;
-  ctx.save(); ctx.translate(L.wx, L.wy); ctx.scale(L.k, L.k); ctx.fillStyle = G.ink;
-  D.letters.slice(0, clamp(nl, 0, 4)).forEach(d => ctx.fill(new Path2D(d))); ctx.restore();
+  const I = IDENTS[o.kind];                                                // (a frame's clock can read a hair before a click;
+  I.draw(ctx, V, clamp(t, 0, (I.last || I.dur) + 0.01), o.style, G);       // `last`: an ident still moving as it goes aside)
+  const wf = 1 - Math.pow(1 - clamp((t - T.word0) / WIPE.dur, 0, 1), 3);    // from the globe's right rim, left to right
+  if (wf > 0) { const x0 = L.cx + L.R * (1 + D.w / 2), x1 = L.wx + D.wordW * L.k + 2;
+    ctx.save(); ctx.beginPath(); ctx.rect(x0, 0, (x1 - x0) * wf, H); ctx.clip();
+    ctx.translate(L.wx, L.wy); ctx.scale(L.k, L.k); ctx.fillStyle = G.ink; D.letters.forEach(d => ctx.fill(new Path2D(d))); ctx.restore(); }
   return T.end;
 }
 
@@ -1077,29 +1457,126 @@ function drawCursor(ctx, W, H, t, o, at) {
   return 9.0;
 }
 
-// a turn at one speed, eased in and out briefly (u from 0 to 1)
-// round 24b, the coin (the owner: "The coin spin still has an animation between the coin spin and tilt"): the coin's
-// face is the whole globe, upright. It spins on its edge, slowing, its rim showing its thickness, and stops facing
-// you; then the globe tilts. Nothing between
-const COIN = { spin: 1.6, turns: 2.25, tilt: 0.55, thick: 0.07, get end() { return this.spin + this.tilt + 0.6; } };
+// round 25, the coin (the owner: "The coin was still supposed to flash between all colors first"): it spins on its
+// edge, each half turn showing a new face: the six colours in turn, round the colour wheel from yellow to green (Acid,
+// Dust, Flare, Haze, Ice, Poison), and then the globe, whose facing disc is green, so the last colour runs into it. After the
+// brand critic's first round: the colours at one steady speed, `half` seconds each (slowing all the way had crammed the
+// first into flickers and dragged the last), then it lands on the globe, slowing over a quarter turn (`land`; its speed
+// at the start the colours' own). At 0.34 s a half turn the faces flash under three times a second (WCAG 2.3.1: each
+// swaps a large area between the ground and a colour); faster wants a flash test first. Its rim, the coin's thickness,
+// is its face's colour, flat. The tilt starts `lap` before it lands
+// (the second critic: the tilt starts as the landing's last movement dies, lap 0.25, and the third 0.3, so the lean
+// lands with the landing; the coin twice as thick, 0.14 of its
+// radius, as a real coin's edge is, so edge on it is a bar, not a hairline)
+const COIN = { half: 0.34, land: 0.51, thick: 0.14, lap: 0.3, flash: [2, 1, 0, 5, 4, 3],
+               get spin() { return 6 * this.half + this.land; }, get end() { return arrival(this.spin, this.lap) + 0.6; } };
+function coinAngle(t) {                     // the turn still to go: from edge on, six and a half half-turns, to rest
+  const t1 = 6 * COIN.half;
+  if (t < t1) return 6.5 * Math.PI - Math.PI / COIN.half * Math.max(0, t);
+  return 0.5 * Math.PI * Math.pow(1 - clamp((t - t1) / COIN.land, 0, 1), 3);
+}
 function coinAt(ctx, V, t, style, G) {
-  const s = clamp(t / COIN.spin, 0, 1), e = 1 - Math.pow(1 - s, 3), th = TAU * COIN.turns * (1 - e);
-  const u = smooth((t - COIN.spin) / COIN.tilt), items = globeItems({ lean: D.lean * u, elev: D.elev });
-  if (s >= 1) { drawRings(ctx, V, items, style, G); return; }
+  const th = coinAngle(t), items = globeItems({ lean: D.lean * tiltAt(t - COIN.spin + COIN.lap), elev: D.elev });
+  if (t >= COIN.spin) { drawRings(ctx, V, items, style, G); return; }
+  const k = Math.min(6, Math.round(th / Math.PI)), A = D.acrylic[G.bg === D.night ? 'night' : 'paper'];
+  let col = k ? D.hues[COIN.flash[6 - k]] : null;                           // null: the globe
+                                                                            // (in acrylic a lone face is its own colour)
   const c = Math.cos(th), sn = Math.sin(th), w = Math.max(Math.abs(c), 0.004) * V.R;
-  ctx.save(); ctx.fillStyle = style === 'discs' || style === 'acrylic' ? D.rim : G.ink; ctx.globalAlpha = style === 'discs' ? 1 : 0.7;   // the rim
-  for (let k = 1; k <= 12; k++) { ctx.beginPath(); ctx.ellipse(V.cx - sn * COIN.thick * V.R * k / 12, V.cy, w * 0.985, V.R * 0.985, 0, 0, TAU); ctx.fill(); }
-  ctx.restore();
+  if (style !== 'even') {                                                   // the rim: the coin's thickness (in acrylic its
+    const c0 = col || D.ring[D.atmos], q = OKL(c0);                         // side's deeper tone, as every acrylic disc's)
+    ctx.save(); ctx.fillStyle = style === 'acrylic' ? fromOKL([q[0] - A.side, q[1] * (1 + A.sideC), q[2] * (1 + A.sideC)]) : c0;
+    for (let j = 1; j <= 12; j++) { ctx.beginPath(); ctx.ellipse(V.cx - sn * COIN.thick * V.R * j / 12, V.cy, w * 0.985, V.R * 0.985, 0, 0, TAU); ctx.fill(); }
+    ctx.restore();
+  }
   ctx.save(); ctx.translate(V.cx, V.cy); ctx.scale(Math.sign(c) * Math.max(Math.abs(c), 0.004), 1); ctx.translate(-V.cx, -V.cy);
   ctx.fillStyle = G.bg; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R, 0, TAU); ctx.fill();   // the face is solid: no rim through it
-  drawRings(ctx, V, items, style, G); ctx.restore();                        // the face, mirrored when its back is to you
+  if (!col) drawRings(ctx, V, items, style, G);                             // the globe, mirrored when its back is to you
+  else if (style !== 'even') { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R, 0, TAU); ctx.fill(); }
+  else { const lw = D.w * V.R; ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.beginPath(); ctx.arc(V.cx, V.cy, V.R - lw / 2, 0, TAU); ctx.stroke(); }
+  ctx.restore();
+}
+
+// round 25, Open (new): the globe begins as the flat globe icon, each of its six discs seen edge on, a line: the
+// parallels level bars, the meridians lines through its middle. Each turns about its line and opens into its disc, one
+// a beat after another (the equator first, then the meridians, then the parallels), quickly, so the lines become the
+// globe; the globe whole and upright, then it tilts. In the discs a disc's edge shows while it is nearly edge on, as
+// a sheet's would, and is gone when it is open. After the brand critic's first round: each disc opens in 0.4 s (0.55
+// crept), and until it is `whole` open (a share) it is drawn whole, in front of the discs it crosses, as one clean
+// band: drawn in its depth while nearly edge on it showed slivers and its far edge through the discs before it
+// (the second critic: one bloom, each disc 0.65 s (its 0.6, a hair more to round the peak) and 0.04 apart, so the ball no longer snaps open and no parallel lies
+// as a bar on a finished globe; the lean 0.4 into it, so it does not park; the third: the line icon held 0.3 s before
+// it opens, long enough to read as the icon that becomes the globe; the lean, 0.3 s since, 0.3 into it, so it lands
+// as the last disc opens and nothing parks before the move aside)
+const OPEN = { lead: 0.3, each: 0.65, stagger: 0.04, order: [4, 0, 5, 2, 1, 3], lap: 0.3, whole: 0.3 };
+function drawOpen(ctx, V, t, style, G) {
+  const last = OPEN.lead + 5 * OPEN.stagger + OPEN.each, lean = D.lean * tiltAt(t - last + OPEN.lap);
+  const items = ringsAt(0, { lean, elev: D.elev }).map((g, k) => {
+    const f = clamp((t - OPEN.lead - OPEN.order[k] * OPEN.stagger) / OPEN.each, 0, 1), e = 1 - Math.pow(1 - f, 3);
+    const L = Math.hypot(...g.n), rho = Math.hypot(g.n[0], g.n[1]);
+    if (rho < 1e-6) return { g, col: D.ring[k], open: e };
+    const ax = [g.n[1] / rho, -g.n[0] / rho, 0];                            // its long axis, in the picture's plane
+    return { g: rotRing(g, ax, -Math.asin(clamp(g.n[2] / L, -1, 1)) * (1 - e) * 0.995), col: D.ring[k], open: e };
+  });
+  const thin = style === 'discs' ? items.filter(i => i.open < OPEN.whole) : [], rest = items.filter(i => !thin.includes(i));
+  drawRings(ctx, V, rest, style, G);
+  ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';                 // the nearly edge-on discs, whole, in front
+  for (const i of thin) { const w = D.w * V.R * (1 - i.open / OPEN.whole);
+    ctx.fillStyle = ctx.strokeStyle = i.col; ellipse(ctx, V, i.g.pts); ctx.fill(); if (w > 0.3) { ctx.lineWidth = w; ctx.stroke(); } }
+  ctx.restore();
+}
+
+// round 25, Roll (new, from the brand critic's first round): the globe rolls in from the right like a ball, upright,
+// turning as it travels (its turn its distance over its radius: it does not slip), slowing evenly to a stop at its
+// place, and rocks back into its lean, against the roll, as a ball would. `from` how far right it starts, in radii
+const ROLL = { roll: 0.9, from: 3.7, lap: 0.0 };
+function drawRoll(ctx, V, t, style, G) {
+  const s = clamp(t / ROLL.roll, 0, 1), back = ROLL.from * (1 - s) * (1 - s);
+  const lean = back * 180 / Math.PI + D.lean * tiltAt(t - ROLL.roll + ROLL.lap);
+  drawRings(ctx, view(0, 0, V.cx + back * V.R, V.cy, V.R), globeItems({ lean, elev: D.elev }), style, G);
+}
+
+// round 25, Iris (new, the third ident critic's idea): the finished globe, upright, still and full size at its place,
+// revealed through a circle opening from its centre to its own outline (cubic ease-out), as a late-90s 'circle out';
+// nothing inside moves or scales, and the circle has no stroke. The lean starts `lap` before it is open
+const IRIS = { open: 0.3, lap: 0.1 };
+function drawIris(ctx, V, t, style, G) {
+  const e = 1 - Math.pow(1 - clamp(t / IRIS.open, 0, 1), 3);
+  if (e <= 0) return;
+  const items = globeItems({ lean: D.lean * tiltAt(t - IRIS.open + IRIS.lap), elev: D.elev });
+  if (e >= 1) { drawRings(ctx, V, items, style, G); return; }
+  ctx.save(); ctx.beginPath(); ctx.arc(V.cx, V.cy, e * V.R * (1 + D.w), 0, TAU); ctx.clip();
+  drawRings(ctx, V, items, style, G); ctx.restore();
+}
+
+// round 25, Download (new): the globe arrives as a picture did over a modem in 1999, an interlaced GIF: the whole of it
+// coarse at once, in blocks, then each pass finer (the blocks halving), every pass sweeping down over the last, until it
+// is sharp; then it tilts. `passes` the blocks' sizes, of the globe's radius
+const LOADGIF = { passes: [1 / 4, 1 / 8, 1 / 16, 1 / 32], each: 0.2, lap: 0.1 };
+let LOW = null;
+function lowres(ctx, V, items, style, G, b) {                               // the globe as blocks b of the radius
+  if (!LOW) LOW = document.createElement('canvas');
+  const n = Math.max(2, Math.round(2 / b)), o = LOW; if (o.width !== n || o.height !== n) { o.width = n; o.height = n; }
+  const lc = o.getContext('2d'); lc.setTransform(1, 0, 0, 1, 0, 0); lc.fillStyle = G.bg; lc.fillRect(0, 0, n, n);
+  drawRings(lc, view(n, n, n / 2, n / 2, n / 2), items, style, G);
+  ctx.save(); ctx.imageSmoothingEnabled = false; ctx.drawImage(o, V.cx - V.R, V.cy - V.R, 2 * V.R, 2 * V.R); ctx.restore();
+}
+function drawDownload(ctx, V, t, style, G) {
+  t = Math.max(0, t);
+  const P = LOADGIF.passes, end = P.length * LOADGIF.each;
+  const items = globeItems({ lean: D.lean * tiltAt(t - end + LOADGIF.lap), elev: D.elev }), k = Math.floor(t / LOADGIF.each), f = t / LOADGIF.each - k;
+  if (k >= P.length) { drawRings(ctx, V, items, style, G); return; }
+  if (k > 0) lowres(ctx, V, items, style, G, P[k - 1]);                     // the last pass, whole
+  const sweep = k === 0 ? 1 : f;                                             // the first arrives whole; the rest sweep down
+  ctx.save(); ctx.beginPath(); ctx.rect(V.cx - V.R * 1.1, V.cy - V.R * 1.1, V.R * 2.2, V.R * 2.2 * sweep); ctx.clip();
+  if (k === 0) { ctx.fillStyle = G.bg; ctx.fill(); }
+  lowres(ctx, V, items, style, G, P[k]); ctx.restore();
 }
 
 // round 24b, Earthrise (a new idea, after the photograph of the Earth rising over the Moon): the whole globe, upright,
 // rises from behind a horizon, slowing as it clears it; then it tilts
-const RISE = { up: 1.2, tilt: 0.55, from: 2.3 };
+const RISE = { up: 1.2, from: 2.3, lap: 0.25 };
 function drawRise(ctx, V, t, style, G) {
-  const s = clamp(t / RISE.up, 0, 1), e = 1 - Math.pow(1 - s, 3), u = smooth((t - RISE.up) / RISE.tilt);
+  const s = clamp(t / RISE.up, 0, 1), e = 1 - Math.pow(1 - s, 3), u = tiltAt(t - RISE.up + RISE.lap);
   const foot = V.cy + V.R * (1 + D.w);                                       // the horizon, where the globe comes to rest
   ctx.save(); ctx.beginPath(); ctx.rect(V.cx - 4 * V.R, foot - 8 * V.R, 8 * V.R, 8 * V.R); ctx.clip();
   drawRings(ctx, view(0, 0, V.cx, V.cy + RISE.from * V.R * (1 - e), V.R), globeItems({ lean: D.lean * u, elev: D.elev }), style, G);
@@ -1111,28 +1588,159 @@ function drawCoin(ctx, W, H, t, o) {
   return COIN.end;
 }
 
-// round 24b: the globe as a Death Star (core.py), its dish a driver, kicking for the speakers: on each beat the cone and
-// the dust cap push out, and a ring of violet, the atmosphere, goes out from the dish as sound
-const CORE = { beat: 0.6, push: 0.09, ripple: 0.85, reach: 1.7 };
+// the globe as a Death Star (core.py), its dish a driver, kicking for the speakers: a beat a second. After the brand
+// critic's three rounds, keyed: the push (0.06 s, cubic ease-out) throws the whole driver forward 1.10 times about its
+// centre, pops the dish flush (depth to 0, the rings concentric) and swells the dust cap 1.2 times; it holds to 0.13 s;
+// pulls back once past rest (at 0.24 s the depth 0.75, the driver 0.95, the cap 0.9: a cone sinking back, eased in and
+// out); and rests by 0.42 s. From 0.04 s one ring of sound leaves the rim, knocked out of the globe in the ground's colour
+// (seen only where it crosses the Earth, never on the ground), growing to 2.5 times the dish and thinning to nothing by
+// 0.45 s; then still to the next beat. The globe and its land never move
+const CORE = { beat: 1.0, keys: [[0, null, 1, 1], [0.06, 0, 1.2, 1.1], [0.13, 0, 1.2, 1.1], [0.24, 0.75, 0.9, 0.95], [0.42, null, 1, 1]],
+               ring: [0.04, 0.45], grow: 1.5, width: 0.05 };              // keys: time, depth (null: at rest), cap, driver
+const easeOut = x => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
+function kickAt(t) {                                                         // [depth, cap, driver] t seconds into a beat
+  const K = CORE.keys, rest = D.core.dish.depth, v = k => [k[1] === null ? rest : k[1], k[2], k[3]];
+  for (let i = 1; i < K.length; i++) if (t < K[i][0]) {
+    const f = (t - K[i - 1][0]) / (K[i][0] - K[i - 1][0]), e = i === 1 ? easeOut(f) : i === 4 ? easeOut(f) : smooth(f);
+    const a = v(K[i - 1]), b = v(K[i]); return a.map((x, j) => x + (b[j] - x) * e); }
+  return v(K[K.length - 1]);
+}
+function dishRing(ctx, f, depth) {                                          // core.py's ring(), y down, the radius 1
+  const K = D.core.dish, [x, y] = K.at, d = [x, y, Math.sqrt(Math.max(0, 1 - x * x - y * y))];
+  const L = Math.hypot(d[0], d[1]) || 1, u = [-d[1] / L, d[0] / L, 0], v = cross(d, u);
+  const a = rad(K.ang), rr = Math.sin(a), c = Math.cos(a) - depth * rr * (1 - f * f), lt = rad(-D.core.lean), cl = Math.cos(lt), sl = Math.sin(lt);
+  ctx.beginPath();
+  for (let i = 0; i < 120; i++) { const t = TAU * i / 120, q = [0, 1].map(j => c * d[j] + f * rr * (Math.cos(t) * u[j] + Math.sin(t) * v[j]));
+    const X = q[0] * cl - q[1] * sl, Y = q[0] * sl + q[1] * cl; i ? ctx.lineTo(X, -Y) : ctx.moveTo(X, -Y); }
+  ctx.closePath();
+}
 let CP = null;
+function corePaths() {                                                     // the figure's paths, made once (sea: the sphere
+  if (CP) return CP;                                                         // and the land, filled even-odd, is the sea)
+  const P = D.core, sea = new Path2D(P.sphere);
+  if (P.land) sea.addPath(new Path2D(P.land));
+  CP = { sphere: new Path2D(P.sphere), land: P.land ? new Path2D(P.land) : null, trench: P.trench ? new Path2D(P.trench) : null,
+         cap: new Path2D(P.cap), sea };
+  return CP;
+}
 function drawCoreKick(ctx, W, H, t, o) {
   const G = GROUNDS[o.ground], P = D.core;
-  if (!CP) CP = { sphere: new Path2D(P.sphere), trench: new Path2D(P.trench), rings: P.rings.map(([d, c]) => [new Path2D(d), c]) };
+  corePaths();
   ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
-  const R = Math.min(W, H) * 0.3, n = Math.floor(t / CORE.beat), amp = pulse(t - n * CORE.beat), [cx, cy] = P.centre;
-  const about = (k, f) => { ctx.translate(cx, cy); ctx.scale(k, k); ctx.translate(-cx, -cy); f(); };
+  const R = Math.min(W, H) * 0.3, tb = ((t % CORE.beat) + CORE.beat) % CORE.beat, [depth, capK, throwK] = kickAt(tb), [cx, cy] = P.centre;
+  const about = (k, f) => { ctx.save(); ctx.translate(cx, cy); ctx.scale(k, k); ctx.translate(-cx, -cy); f(); ctx.restore(); };
   ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(R, R);
-  ctx.fillStyle = D.ring[2]; ctx.fill(CP.sphere); ctx.fillStyle = D.ring[5]; ctx.fill(CP.trench);
-  CP.rings.forEach(([p, c], i) => { ctx.save(); about(i ? 1 + CORE.push * amp : 1, () => { ctx.fillStyle = c; ctx.fill(p); }); ctx.restore(); });
-  for (const j of [n - 1, n]) { const age = (t - j * CORE.beat) / CORE.ripple; if (age <= 0 || age >= 1) continue;
-    const k = 1 + CORE.reach * Math.sqrt(age);           // the dish's rim, growing out from it
-    ctx.save(); about(k, () => { ctx.globalAlpha = (1 - age) * (1 - age); ctx.strokeStyle = P.capCol; ctx.lineWidth = 0.05 * (1 - 0.6 * age) / k;
-      ctx.stroke(CP.rings[0][0]); }); ctx.restore(); }
+  ctx.fillStyle = P.sea; ctx.fill(CP.sphere);
+  if (CP.land) { ctx.fillStyle = P.landCol; ctx.fill(CP.land, 'evenodd'); }
+  if (CP.trench) { ctx.fillStyle = P.trenchCol; ctx.fill(CP.trench); }
+  about(throwK, () => P.rings.forEach(([, col], i) => about(i === 2 ? capK : 1, () => { ctx.fillStyle = col; dishRing(ctx, P.fr[i], depth); ctx.fill(); })));
+  ctx.save(); ctx.clip(CP.sphere);                                           // the ring of sound, knocked out of the globe
+  for (const lag of [0, CORE.beat]) {
+    const p = (tb + lag - CORE.ring[0]) / (CORE.ring[1] - CORE.ring[0]); if (p <= 0 || p >= 1) continue;
+    const k = 1 + CORE.grow * easeOut(p);
+    about(k, () => { ctx.strokeStyle = G.bg; ctx.lineWidth = CORE.width * (1 - p) / k; dishRing(ctx, 1, P.dish.depth); ctx.stroke(); }); }
   ctx.restore();
-  return 2.4;
+  ctx.restore();
+  return 4 * CORE.beat;
 }
 
-const SCENES = { ident: drawIdent, loader: drawLoader, cursor: drawCursor, coin: drawCoin, kick: drawKickLoop, core: drawCoreKick };
+// round 25, the planet (the owner: "it would be cool if the purple was a meteor, creates white cloud, disperses into
+// black wisps, then the crater is visible. The water ripples on impact too. Then the purple meteor can stay in the
+// core"): the Earth whole, with no crater; a violet meteor falls on the North Atlantic from the upper right, faster as
+// it comes, its tail behind it; at the hit a white cloud bursts over the spot and rings ripple out across the sea (not
+// the land); the cloud breaks into black wisps that curl outward and thin away, and the crater shows, the meteor lodged
+// at its centre as the violet core. Times in seconds; sizes of the planet's radius; `from` where the meteor starts,
+// from the hit
+// After its first critic (critic/rounds/2026-10-15/brand-planet-r1.json): the meteor larger (0.07 to 0.09) and its
+// tail longer (0.85 to 1.25), holding its colour further; at the hit the planet takes a small knock along the meteor's
+// path (`knock`) and settles; the crater drawn only once the cloud begins to go (it showed between the puffs); the
+// wisps sooner (0.72 to 0.64) and quicker (0.85 to 0.55), kept on the planet (past its edge they read as claws on
+// paper and vanished on ink); the ripples quicker (1.05 to 0.65), all three gone before the planet is still (the last
+// froze, faint, into the lockup); and once the smoke has thinned, the cone thumps once, as a speaker does (`thump`).
+// The cloud bursts in a frame and a bit (0.12 to 0.04) and the knock is a frame out, so the hit is the sharpest beat
+const PLANET = { hit: 0.45, from: [1.55, -1.3], meteor: 0.09, tail: 1.25,
+                 cloud: { grow: 0.04, size: 0.46 }, wisps: { start: 0.64, dur: 0.55, drift: 0.45, dark: 0.18 },
+                 ripples: { n: 3, gap: 0.13, dur: 0.65, grow: 3.4, width: 0.03 },
+                 knock: { dist: 0.04, out: 0.034, back: 0.133 }, thump: { at: 0.97, k: 0.15, out: 0.067, back: 0.1 },
+                 get end() { return this.wisps.start + this.wisps.dur; },              // (wisps.start: from 0, as hit)
+                 get last() { return Math.max(this.end, this.hit + (this.ripples.n - 1) * this.ripples.gap + this.ripples.dur); } };
+const PUFFS = [[0, 0, 0.56], [0.5, -0.2, 0.42], [-0.48, -0.16, 0.4], [0.22, 0.46, 0.38], [-0.3, 0.42, 0.36],
+               [0.7, 0.24, 0.3], [-0.68, 0.18, 0.3], [0.06, -0.58, 0.36]];    // the cloud: circles (x, y, r) of its size
+const hash = (i, k) => { const v = Math.sin(i * 12.9898 + k * 78.233) * 43758.5453; return v - Math.floor(v); };
+function wispPath(ctx, x, y, ang, len, curl, w) {                           // a tapered curl, its head at (x, y)
+  const N = 16, L = [], Rr = [];
+  for (let j = 0; j <= N; j++) {
+    const s = j / N, a = ang + curl * s, h = w * Math.sin(Math.PI * Math.min(1, s * 1.15)) * (1 - 0.55 * s) / 2;
+    L.push([x - Math.sin(a) * h, y + Math.cos(a) * h]); Rr.push([x + Math.sin(a) * h, y - Math.cos(a) * h]);
+    x += Math.cos(a) * len / N; y += Math.sin(a) * len / N;
+  }
+  ctx.beginPath(); L.forEach(([px, py], j) => j ? ctx.lineTo(px, py) : ctx.moveTo(px, py));
+  for (let j = Rr.length - 1; j >= 0; j--) ctx.lineTo(Rr[j][0], Rr[j][1]); ctx.closePath();
+}
+function drawPlanet(ctx, V, t, style, G) {
+  const P = D.core, Q = PLANET, C = corePaths(), [cx, cy] = P.centre, since = t - Q.hit, at = (k, f) => {
+    ctx.save(); ctx.translate(cx, cy); ctx.scale(k, k); ctx.translate(-cx, -cy); f(); ctx.restore(); };
+  const L0 = Math.hypot(...Q.from), K = Q.knock, kn = since <= 0 ? 0 : since < K.out ? easeOut(since / K.out)
+    : 1 - smooth(clamp((since - K.out) / K.back, 0, 1));                    // the knock: out along the meteor's path, back
+  ctx.save(); ctx.translate(V.cx, V.cy); ctx.scale(V.R, V.R); ctx.translate(-Q.from[0] / L0 * K.dist * kn, -Q.from[1] / L0 * K.dist * kn);
+  ctx.fillStyle = P.sea; ctx.fill(C.sphere);
+  if (C.land) { ctx.fillStyle = P.landCol; ctx.fill(C.land, 'evenodd'); }
+  if (since > 0) {
+    ctx.save(); ctx.clip(C.sea, 'evenodd');                                  // the ripples, on the sea only
+    ctx.strokeStyle = mixHex(P.sea, '#FFFFFF', 0.6);
+    for (let i = 0; i < Q.ripples.n; i++) {
+      const p = (since - i * Q.ripples.gap) / Q.ripples.dur; if (p <= 0 || p >= 1) continue;
+      const k = 1 + Q.ripples.grow * easeOut(p);
+      at(k, () => { ctx.globalAlpha = 1 - p; ctx.lineWidth = Q.ripples.width * (1 - p * 0.6) / k; dishRing(ctx, 1, P.dish.depth); ctx.stroke(); });
+    }
+    ctx.restore();
+    if (t >= Q.wisps.start) {                                                // the crater, once the cloud begins to go; the
+      const T = Q.thump, u = t - T.at, kt = u <= 0 ? 1 : u < T.out ? 1 + T.k * easeOut(u / T.out)   // cone, the dust cap and
+        : 1 + T.k * (1 - smooth(clamp((u - T.out) / T.back, 0, 1)));      // the core thump once, the surround still
+      P.rings.forEach(([, col], i) => { const f = () => { ctx.fillStyle = col; dishRing(ctx, P.fr[i], P.dish.depth); ctx.fill(); };
+        i ? at(kt, f) : f(); });
+      at(kt, () => { ctx.fillStyle = P.capCol; ctx.fill(C.cap); }); }      // the meteor lodged in its core
+    // the cloud: it bursts over the spot (cubic ease-out); from `wisps.start` each of its puffs turns from white to
+    // black (over `dark` of the time) and draws out into two thin wisps of smoke curling away from the spot, longer,
+    // thinner and fainter until they are gone
+    const Wd = Q.wisps, S = Q.cloud.size, g = easeOut(since / Q.cloud.grow), p = clamp((t - Wd.start) / Wd.dur, 0, 1);
+    ctx.save(); ctx.clip(C.sphere);                                          // the cloud and its smoke, on the planet
+    ctx.fillStyle = p > 0 ? mixHex('#FFFFFF', D.ink, smooth(clamp(p / Wd.dark, 0, 1))) : '#FFFFFF';
+    PUFFS.forEach(([x, y, r], i) => {
+      const d = Math.hypot(x, y), th = d > 1e-6 ? Math.atan2(y, x) : -TAU / 8, rr = r * S * g;
+      const out = d * S * g + Wd.drift * easeOut(p) * (0.7 + 0.5 * hash(i, 4)), hx = cx + Math.cos(th) * out, hy = cy + Math.sin(th) * out;
+      if (p <= 0) { ctx.beginPath(); ctx.arc(hx, hy, rr, 0, TAU); ctx.fill(); return; }
+      if (p < Wd.dark) { ctx.globalAlpha = 1; ctx.beginPath(); ctx.arc(hx, hy, rr * (1 - p / Wd.dark), 0, TAU); ctx.fill(); }
+      for (const [k, sgn, lag] of [[1, 1, 0], [0.6, -1, 0.08]]) {            // a wisp and a lesser one, curling the other way
+        const q = clamp((p - lag) / (1 - lag), 0, 1); if (q <= 0) continue;
+        const curl = sgn * (hash(i, 6) < 0.5 ? -1 : 1) * (1.2 + 1.0 * hash(i, 7 + k)) * easeOut(q);
+        ctx.globalAlpha = 1 - smooth(clamp((q - 0.25) / 0.75, 0, 1));
+        wispPath(ctx, hx, hy, th + sgn * 0.25, k * rr * (0.5 + 4.2 * easeOut(q)), curl, k * rr * (0.95 - 0.75 * q)); ctx.fill();
+      }
+    });
+    ctx.globalAlpha = 1; ctx.restore();
+  } else {                                                                   // the meteor, falling, faster as it comes
+    const s = clamp(t / Q.hit, 0, 1), e = 1 - Math.pow(s, 1.6), x = cx + Q.from[0] * e, y = cy + Q.from[1] * e;
+    const L = Math.hypot(...Q.from), ux = Q.from[0] / L, uy = Q.from[1] / L, m = Q.meteor, tl = Q.tail * (0.4 + 0.6 * s);
+    const gr = ctx.createLinearGradient(x, y, x + ux * tl, y + uy * tl);
+    gr.addColorStop(0, P.capCol); gr.addColorStop(0.45, P.capCol + 'B0'); gr.addColorStop(1, P.capCol + '00');
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.moveTo(x - uy * m, y + ux * m); ctx.lineTo(x + ux * tl, y + uy * tl); ctx.lineTo(x + uy * m, y - ux * m); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = P.capCol; ctx.beginPath(); ctx.arc(x, y, m, 0, TAU); ctx.fill();
+  }
+  ctx.restore();
+}
+function mixHex(a, b, k) {                                                   // two hex colours mixed, k of the way to b
+  const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)), A = p(a), B = p(b);
+  return '#' + A.map((v, i) => Math.round(v + (B[i] - v) * k).toString(16).padStart(2, '0')).join('');
+}
+function drawPlanetLoop(ctx, W, H, t, o) {                                  // the planet struck, looped, for the page
+  const G = GROUNDS[o.ground]; ctx.fillStyle = G.bg; ctx.fillRect(0, 0, W, H);
+  const T = PLANET.last + 1.2; drawPlanet(ctx, view(W, H, W / 2, H / 2, Math.min(W, H) * 0.3), ((t % T) + T) % T, 'discs', G);
+  return 2 * T;
+}
+
+const SCENES = { ident: drawIdent, loader: drawLoader, cursor: drawCursor, coin: drawCoin, kick: drawKickLoop, core: drawCoreKick,
+                 planet: drawPlanetLoop };
 
 function fit(cv) {
   const dpr = Math.min(2, window.devicePixelRatio || 1), r = cv.getBoundingClientRect();
@@ -1155,10 +1763,15 @@ if (!location.hash.startsWith('#capture')) {
   const state = { kind: 'gyro', style: 'discs', ground: 'paper', t0: null };
   const CAPS = {
     printer: 'Printer: a head shuttles across and back, a band lower each pass, and leaves the finished globe in its wake.',
-    gyro: 'Gyroscope: the globe spins on its axis like a gyroscope\'s rotor, slowing until it rests, whole and upright. Then it tilts to the Earth\'s 23.4 degrees.',
+    gyro: 'Gyroscope: the globe spins half a turn on its axis like a gyroscope\'s rotor, slowing until it rests, whole and upright. Then it leans to the Earth\'s 23.4 degrees, a little past and back.',
     kick: 'Kick: seen from above the pole, the globe is a speaker: rings round one centre, the meridians its spokes. It kicks twice, then tips down to the Earth\'s tilt.',
-    coin: 'Coin: the coin\'s face is the whole globe. It spins on its edge, slowing, and stops facing you; then the globe tilts.',
-    rise: 'Earthrise: the whole globe rises from behind a horizon, slowing as it clears it; then it tilts.' };
+    coin: 'Coin: it spins on its edge, a new face each half turn at one steady beat (under three flashes a second): the six colours round the colour wheel, yellow to green, then it lands on the globe, whose facing disc is green, and leans.',
+    roll: 'Roll: the globe rolls in from the right like a ball, turning as it goes, slows to a stop and rocks back into its lean.',
+    rise: 'Earthrise: the whole globe rises from behind a horizon, slowing as it clears it; then it tilts.',
+    download: 'Download: the globe arrives as a picture did over a modem in 1999, an interlaced GIF: coarse blocks at once, then each pass finer, sweeping down, until it is sharp; then it tilts.',
+    open: 'Open: the globe begins as the flat globe icon, each disc edge on, a line. Each turns about its line and opens into its disc, a beat after the last; then the globe tilts.',
+    iris: 'Iris: the finished globe, still and upright, opens out of its own centre in a circle, as a late-90s circle wipe; then it leans.',
+    planet: 'Planet: a violet meteor falls on the Earth; a white cloud bursts and the sea ripples, the cloud breaks into black wisps, and the crater shows, the meteor lodged in its core.' };
   const capText = document.getElementById('cap-text'), screen = document.getElementById('screen');
   function segs(id, key) {
     const el = document.getElementById(id);
@@ -1185,7 +1798,7 @@ if (!location.hash.startsWith('#capture')) {
   }
   // each panel runs only while it is on screen, and the ident starts when it first comes into view, then loops
   const vis = new Map(); const io = new IntersectionObserver(es => es.forEach(e => vis.set(e.target, e.isIntersecting)));
-  ['stage', 'load-night', 'load-paper', 'cursor', 'kickloop'].forEach(id => io.observe(document.getElementById(id)));
+  ['stage', 'load-night', 'load-paper', 'cursor', 'kickloop', 'meteor'].forEach(id => io.observe(document.getElementById(id)));
   const on = id => vis.get(document.getElementById(id)) === true;
   function tick(now) {
     const s = now / 1000;
@@ -1200,6 +1813,8 @@ if (!location.hash.startsWith('#capture')) {
       const live = s - last < 2.5; drawCursor(ctx, W, H, s, { ground: 'night' }, live ? at : (tt => ghost(tt, W, H))); }
     if (on('kickloop')) { const { ctx, W, H } = fit(document.getElementById('kickloop'));
       drawCoreKick(ctx, W, H, reduce ? 0.3 : s, { ground: 'night' }); }
+    if (on('meteor')) { const { ctx, W, H } = fit(document.getElementById('meteor'));
+      drawPlanetLoop(ctx, W, H, reduce ? PLANET.end : s, { ground: 'paper' }); }
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
@@ -1217,10 +1832,12 @@ def standalone():
             'initial-scale=1, viewport-fit=cover"></head><body>\n' + page() + '\n</body></html>\n')
 
 
-# round 24b: the Gyroscope, the Coin and Earthrise, in the discs (on paper and on night), the acrylic and the lines; the
-# Death Star kicking; the loader and the cursor as round 22 made them (round 23's printer, kick and tubes MP4s stay)
-SCENE_SET = [('ident', dict(kind=k, style=st, ground=g)) for k in ('gyro', 'coin', 'rise')
-             for st, g in (('discs', 'paper'), ('discs', 'night'), ('acrylic', 'paper'), ('even', 'paper'))] + [
+# round 25: the seven idents (the Coin, the Gyroscope, Earthrise, Open, Iris, Roll and Download) in the discs and the acrylic, each
+# on paper and on night, and in the lines; the Death Star kicking; the loader and the cursor as round 22 made them
+# (round 23's printer, kick and tubes MP4s stay)
+SCENE_SET = [('ident', dict(kind=k, style=st, ground=g)) for k in ('coin', 'gyro', 'rise', 'open', 'iris', 'roll', 'download')
+             for st, g in (('discs', 'paper'), ('discs', 'night'), ('acrylic', 'paper'), ('acrylic', 'night'), ('even', 'paper'))] + [
+             ('ident', dict(kind='planet', style='discs', ground='paper')), ('ident', dict(kind='planet', style='discs', ground='night')),
              ('core', dict(ground='night')), ('core', dict(ground='paper')),
              ('loader', dict(ground='night')), ('loader', dict(ground='paper')), ('cursor', dict(ground='night'))]
 
@@ -1268,10 +1885,10 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     written = []
     for style in ('lines', 'even', 'discs', 'acrylic'):                 # (round 23's tubes stay as they were)
-        for tag, cols in [('multi', RING), ('black', INK), ('white', WHITE)] + [(n.lower(), c) for n, c in zip(NAMES, HUES)]:
-            f = f'earth-{style}-{tag}.svg'
+        for tag, cols in [('multi', RING), ('ink', RING), ('black', INK), ('white', WHITE)] + [(n.lower(), c) for n, c in zip(NAMES, HUES)]:
+            f = f'earth-{style}-{tag}.svg'                                   # (round 25: 'ink', the multicolour on ink)
             open(os.path.join(OUT, f), 'w').write(mark_svg(style, cols, label=f'EARF globe, {style}, {tag}',
-                                                           ground='night' if tag == 'white' else 'paper'))
+                                                           ground='night' if tag in ('white', 'ink') else 'paper'))
             written.append(f)
     for g, word, bg in (('paper', INK, PAPER), ('ink', WHITE, NIGHT)):
         open(os.path.join(OUT, f'earth-lockup-{g}.svg'), 'w').write(lockup_svg('discs', RING, word, bg=bg, ground='night' if g == 'ink' else 'paper'))

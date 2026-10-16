@@ -1,0 +1,108 @@
+{
+  "stage1": {
+    "impression": "A likeable, coherent idea with a weak first act. A flat disc flips through six colours, then turns into a globe made of crossing coloured discs; the globe tilts and steps aside, and a heavy black EARF wipes in. Open (lines opening into the globe) and Roll (the globe rolling in) are shorter routes to the same ending. What works: the single disc becoming the globe, the clean ease of the move aside, and a centred lockup that holds still. What doesn't: the Coin spends 2.04 s, 40 % of its 5 s, on six identical flips, one every 0.33 s like a metronome. The trace shows six equal humps (peaks 2-3.7 %) and never goes still, so it reads like a colour-cycling loading spinner, and the moment it becomes the globe (2.04 s) carries no more weight than a seventh flip. In all three versions the tilt barely registers, and then the picture freezes for 0.3 s before the move aside (sheet 1, 2.50-2.77 s): it reads as a hitch, not a pose. The name then starts at full speed the instant the globe stops (0.2 % at 3.27 s, 1.15 % at 3.30 s): a stop, then a jump. The mark is intricate: dozens of small wedges that break up into confetti at lockup size, and it needs six hues to read; in one colour it would be a plain filled circle. Acrylic on the night ground muddies the palette (brown and olive overlaps), and the green ball's edge sinks into the black. Competent and pleasant, but not yet ownable or polished.",
+    "score": 5.5
+  },
+  "keep": [
+    "Open's construction: the flat icon of six edge-on discs (sheet 2, frame 01) turns open, disc by disc, into the solid globe in about 0.4 s (frames 02-03). It is the most ownable idea in the set: the brand's lines style becomes its discs style in front of you, it is minimal, and it feels like a late-90s software icon becoming an object.",
+    "The shared ending: the move aside is one clean, symmetric hump in every trace (sheet 1, 2.80-3.27 s, peak 2.1 %). It lands in a centred, balanced lockup (the ball about 1.45 times the cap height, half its radius from the E) that then holds perfectly still. This is what makes three different arrivals read as one system."
+  ],
+  "changes": [
+    {
+      "rank": 1,
+      "problem": "Every ident freezes for 0.3 s between landing its tilt and moving aside: the last 0.2 s of the tilt's settle is too small to see, and the 0.1 s hold adds three dead frames, so the globe reads as stalled rather than posed.",
+      "evidence": "Sheet 1, trace 2.50-2.77 s: nine frames in a row under 0.2 % (0.05-0.15 %, then 0, 0, 0 at 2.70-2.77 s); frames 10 (2.53 s) and 11 (2.73 s) show the same tilted globe. The same nine-frame flat stretch is at 0.77-1.03 s on sheet 2 (Open) and 1.10-1.37 s on sheet 3 (Roll).",
+      "kind": "parameter",
+      "parameter": "HOLD",
+      "from": 0.1,
+      "to": 0,
+      "expected": "The move aside starts on the frame the tilt lands. The zero-motion frames vanish from every ident, and each one gets 0.1 s shorter. With all the changes here, the Coin runs: tilt 2.25-2.55 s, move 2.55-3.05 s, EARF wipe from 2.95 s, still from about 3.2 s, end 4.70 s. Motion-test windows in this list refer to the Coin (sheets 1 and 4).",
+      "accept": {"kind": "motion", "metric": "longest_still", "window": [2.0, 3.0], "op": "<", "value": 0.25}
+    },
+    {
+      "rank": 2,
+      "problem": "The name starts only after the globe has come to a dead stop, and then arrives at full speed: a stop followed by a jump, at exactly the moment the globe and the name should hand over to each other.",
+      "evidence": "Sheet 1, trace 3.23-3.30 s: the move dies to 0.20 % at 3.27 s, and the next frame jumps to 1.15 % as the E appears (3.30 s), followed by a sawtooth up to 1.38 % (3.37 s). The same dip and jump: sheet 2 at 1.53-1.57 s (0.24 % to 1.0 %) and sheet 3 at 1.87-1.90 s.",
+      "kind": "parameter",
+      "parameter": "WIPE.lead",
+      "from": 0,
+      "to": 0.1,
+      "expected": "EARF starts to emerge from the globe's rim during the globe's last 0.1 s of easing, so the motion passes from globe to name without stopping. Measured at sheet scale: round 2's 0.15 had the moving rim about 8 px into the E. At 0.1 the rim (about 149 px) is already clear of the E (156 px) when the wipe begins, and the wipe edge reaches the E a frame later, by which time the rim is further left. No letter ever overlaps the moving globe.",
+      "accept": {"kind": "motion", "metric": "longest_still", "window": [2.9, 3.12], "op": "<", "value": 0.03}
+    },
+    {
+      "rank": 3,
+      "problem": "The tilt spends nearly half of its 0.4 s on an overshoot and settle that move less than 2 degrees per frame, too slow to read, so the brand's signature lean ends in a creep instead of a landing.",
+      "evidence": "Sheet 3 (Roll), trace 0.90-1.30 s: the visible swing is over by 1.07 s (peak 0.53 % at 1.00 s), and the remaining 0.2 s (1.10-1.30 s) stays at 0.02-0.15 %. The same on sheet 1 at 2.47-2.70 s, which is why frames 10 and 11 look alike.",
+      "kind": "parameter",
+      "parameter": "TILT.dur",
+      "from": 0.4,
+      "to": 0.3,
+      "expected": "The lean swings just past 23.4 degrees in about 5 frames (0.165 s) and settles 0.135 s later, so it reads as a crisp landing. Together with HOLD 0, the still stretch before the move aside drops from nine frames to four or five, and every ident gets another 0.1 s shorter. The keys stay as they are, so the overshoot keeps its character.",
+      "accept": {"kind": "motion", "metric": "longest_still", "window": [2.0, 3.0], "op": "<=", "value": 0.17}
+    },
+    {
+      "rank": 4,
+      "problem": "The coin still lands, slows almost to a stop, and only then leans. That is the separate step between the spin and the tilt that the owner flagged.",
+      "evidence": "Sheet 1, trace 2.04-2.30 s: the land decays from 2.7 % (2.07 s) to 0.19 % at 2.27 s before the tilt's hump rises (0.42 % at 2.33 s, 0.53 % at 2.40 s). Frame 08 (2.17 s, the globe swinging face-on) and frame 09 (2.33 s, whole and upright, not yet leaning) read as two separate moves.",
+      "kind": "parameter",
+      "parameter": "COIN.lap",
+      "from": 0.25,
+      "to": 0.3,
+      "expected": "The lean begins at 2.25 s, when the globe is already 95 % of its full width and still upright. The tail of the landing and the start of the lean overlap into one gesture, and with TILT.dur 0.3 the lean lands at 2.55 s, together with the land; the move aside follows at once. A brief whole, upright globe is still visible before it leans.",
+      "accept": {"kind": "motion", "metric": "longest_still", "window": [2.04, 2.36], "op": "<", "value": 0.03}
+    },
+    {
+      "rank": 5,
+      "problem": "Open's best image, the flat globe icon of six edge-on lines, is on screen for only four frames before the discs burst open, too short to register as the thing that becomes the globe.",
+      "evidence": "Sheet 2, frame 01 (0.00 s) and trace 0.00-0.10 s: four still frames, then the opening jumps from 0.35 % to 1.36 % to 1.90 % between 0.13 and 0.20 s. By frame 02 (0.30 s) the icon is already a half-open ball.",
+      "kind": "parameter",
+      "parameter": "OPEN.lead",
+      "from": 0.12,
+      "to": 0.3,
+      "expected": "The line icon holds for 0.3 s (nine frames), long enough to read as an icon, then opens. The opening becomes a transformation you can follow (icon to globe) rather than a pop. Sheet 2's trace stays still from 0.00 to 0.30 s. With the other changes, Open runs about 3.2 s.",
+      "accept": {"kind": "visual", "at": "Open (sheet 2), t = 0.00-0.25 s", "check": "The flat line icon stays exactly as it is in the first frame for the whole stretch, with no disc yet starting to open."}
+    },
+    {
+      "rank": 6,
+      "problem": "The owner still isn't loving any of the arrivals and keeps asking for ideas that are more minimal and polished. None of the current three is simply the mark appearing whole and leaning, with nothing else moving.",
+      "evidence": "Card, owner rounds 24b and 25: 'These don't feel minimal and polished enough', 'Keep spitballing ideas'. On every sheet the busiest stretch is the arrival (sheet 1, 0-2.3 s; sheet 2, 0.13-0.53 s; sheet 3, 0-0.87 s), while the shared ending is the calmest and best-made part.",
+      "kind": "new",
+      "parameter": "new ident: Iris (IRIS.open, IRIS.lap)",
+      "from": null,
+      "to": {
+        "ident": "Iris",
+        "shows": "the finished globe, upright, full size and motionless at its resting place, revealed through a circular window centred on the ball; the window opens from a point to the ball's own outline; nothing inside it moves or scales, and the window has no stroke",
+        "IRIS.open": 0.3,
+        "IRIS.ease": "cubic ease-out on the window's radius",
+        "IRIS.lap": 0.1,
+        "frames": {
+          "0.000": "plain ground (paper #F2EFEA or ink #121114)",
+          "0.033": "window at 30 % of the ball's radius: only the crossing of the blue equator with the orange and violet meridians",
+          "0.100": "window at 70 %: the inner edges of the red and yellow parallels appear",
+          "0.200": "window at 96 %; the shared tilt begins (0.3 s)",
+          "0.300": "the window equals the ball: the whole globe, upright",
+          "0.500": "the lean has landed at 23.4 degrees; then HOLD 0, move aside 0.50-1.00 s, EARF wiped 0.90-1.35 s, hold 1.3 s; 2.65 s in all"
+        },
+        "styles": "discs, acrylic and lines alike; one reveal, no flashing"
+      },
+      "expected": "A 2.65 s ident in which only two things happen before the hand-off: the ball's circle opens (0.3 s) and the Earth's lean lands (by 0.5 s). It is the most minimal arrival the fixed geometry allows. It reads as a late-90s 'circle out' transition made from the mark's own outline, and it rhymes with the EARF wipe: two reveals and a lean. It gives the owner a purely minimal option to set against Coin and Open; judge it on its own storyboard next round.",
+      "accept": {"kind": "visual", "at": "Iris storyboard, t = 0.10 s", "check": "Only a centred circle of the upright globe is visible on plain ground, at full scale, with every band exactly where it sits in the finished globe (nothing has moved or scaled)."}
+    }
+  ],
+  "most_important": "Set HOLD from 0.1 to 0. Every ident has a frozen beat between landing the lean and moving aside (nine still frames on each sheet). It is the clearest 'not fluid or quick enough' moment in the work, and removing it costs nothing the owner asked for.",
+  "out_of_scope": [
+    "COIN.half cannot go below 0.34 s (WCAG 2.3.1 is fixed), so six faces take 2.04 s. That first act is six identical humps in the trace (sheet 1, 0-2.04 s, peaks 2.1-3.7 %, never under 0.2 % for more than one frame): steady and busy, and the main reason the Coin reads long. Only showing fewer colours would change it, and the owner requires all six.",
+    "The globe's geometry is fixed. At lockup size (sheet 1, frame 16: the ball is about 80 px on the sheet), the 40-degree parallels and the side meridians leave hairline crescents at the rim (yellow at the bottom, violet tips at the poles). These will break up at favicon and app-icon sizes; a simplified small-size drawing would need the owner to relax the geometry.",
+    "Acrylic on ink (styles and grounds are fixed): where the discs overlap, the colours mix to brown and olive, and the green ball's rim nearly disappears on #121114 (sheet 4, frames 9-16). The mark reads murkier than on paper, while the off-white wordmark dominates the lockup.",
+    "The discs style needs all six hues to separate the planes; in one colour it collapses into a plain circle. The fixed lines style is the right one-colour answer. It matters only that one-colour uses always take lines, never single-colour discs."
+  ],
+  "for_owner": [
+    "Which idents to keep: Coin (your brief; the long ident for the site, about 4.7 s after these changes) and Open (the short one for the start and end of videos, about 3.2 s). Keep Roll (about 3.35 s) as a third only if you want a playful version: it shares everything after its arrival and adds little that Open doesn't. Consider Iris once it has been storyboarded. Gyroscope, Earthrise and Download were not judged here.",
+    "The coin's length comes from your requirement and the flash limit together: six colours at 0.34 s each take 2.04 s before the globe can arrive. If it still feels long, the only lever is fewer colour flashes (for example yellow, red, blue, then the green globe). That is your call, not the studio's.",
+    "Two of your requirements pull against each other: 'no animation between the coin spin and the tilt' and 'end on the whole globe, upright, then tilt'. We have kept a brief upright moment (COIN.lap 0.3). If you would rather the coin lean as it lands, say so and the lap can go to about 0.5.",
+    "Acrylic on ink: the see-through overlaps go brown and olive, and the green ball fades into the dark ground (sheet 4). Decide whether acrylic is used on ink at all, or kept for paper.",
+    "EARF makes loudspeakers and the ident plays in its videos, yet it is silent. A short sound mark timed to the coin's faces, the tilt landing and the wipe would make it 'could only be this brand' faster than any timing change. Whether to commission one is your decision."
+  ],
+  "projected_score": 6.5
+}

@@ -5,7 +5,7 @@ The owner's idea of 2026-10-10 was speakers that look like their reference photo
 it). The brand is **EARF**, its logo the B3 globe of circles beside the name built of the marks' shapes (the owner, round
 11, "B3 final for now"; Dogs Barking before it, round 10); barkhorn stays the project's name in this repository.
 
-Status: **concept, round 24b**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 25**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -45,6 +45,256 @@ Atmosphere, pairs its colours on the site by the painter's wheel, makes Fog wate
 EARF on the back, in the speaker's own colour, standard. Round 24b, after the owner's notes on it, makes the discs
 flush in colour (the strokes only in one colour), tints all six in the acrylic, calms the Gyroscope to a spin on its
 axis, makes the Coin's face the globe, adds Earthrise, and draws the globe as a Death Star whose dish is a driver.
+Round 25 lets blue and green lead the globe (the meridian facing you green, and the equator blue), makes the globe its
+six discs alone, with no fill, makes the acrylic the discs see-through, each a slab with its side showing, has the
+Coin flash the six colours before it lands on the globe, adds five idents (Open, Iris, Roll, Download and the Planet,
+a meteor striking the Death Star), puts the Earth on the Death Star, and builds a pipeline that storyboards the
+brand's motion for a fresh critic to judge, round by round. It also makes the site's colour section a speaker's page,
+where the colour you pick sets what goes with it.
+
+## Round 25: blue and green, the acrylic see-through, the coin's colours, and a pipeline to critique the brand (the owner's answers of 2026-10-15)
+
+| the owner's note | what changes |
+|---|---|
+| "Purple is the dominant disc color but it should be blue and green. Rearrange discs accordingly." | **The meridian facing you, the largest disc, is green, and the equator, the widest band, blue**: the land and the sea. Red north, yellow south; of the two side meridians, the one that shows larger is orange and the one that shows less violet. The corner print takes its colours from the brand's own file now, so it follows. |
+| "The acrylic is meant to be a transparent version of the discs but it looks very different." and "Push it further" | **The acrylic is the discs, see-through**, stacked as tinted sheets: one sheet shows its own flat colour, as in the discs; where two cross they make one colour deeper than either, whichever is in front; and the rings' far halves show through the green (below). |
+| "The coin was still supposed to flash between all colors first." | **A new face each half turn**: the six colours round the colour wheel, yellow to green, then the globe, whose facing disc is green. |
+| "The coin spin still has an animation between the coin spin and tilt." (round 24b) | **Every ident's tilt begins before its spin ends**, so the globe never stops between them (the storyboards' motion traces showed the stop). |
+| "Keep spitballing ideas and refining." | Five new idents, **Open**, **Iris** and **Roll** (the critics' ideas), **Download** and the **Planet** (your meteor, below), and the globe's idents refined by a critic. |
+| "Invoke whatever brand and animation skills you need and set up a pipeline for iterating and critiquing and polish." | No brand or animation skills exist to call, so the pipeline is built here: storyboards with a motion trace, a brand critic in two stages, and a log (below). |
+| "Keep exploring. And a slightly larger divot is fine. And more earth on the outside." | **The Death Star is the Earth**: the continents in green on the blue, the Americas facing you, with Earth all round the dish. A 24-degree dish crowded the coasts, so the full drawing keeps 21 degrees, with a deeper bowl, and the smallest cut takes 24 (below). |
+| (the logo) "Not yet" | The look book's cover keeps round 11's globe. |
+| "On the website, that's not what I envisioned for the color theory. What I meant was, when I click into a product page and select a color, the recommended products down below are based on monochromatic, complimentary, or something else. It's a future idea. You wouldn't recommend a speaker based on a speaker. You would recommend a monochromatic record player and complimentary lights, for example." | **The site's colour section is a speaker's page**: pick its colour, and below it what goes with it, never another speaker: a record player in the same colour a shade deeper (monochromatic), a lamp opposite it on the painter's wheel (complementary) and a rug beside it (analogous), drawn flat as placeholders and marked a future idea (below). |
+| (after the critics) "For acrylic I was expecting each disc to have a little thickness to it." | **Each acrylic disc is a slab**, a twentieth of the radius thick: where its side faces you, it shows in a deeper tone of its tint, as a polished acrylic edge does (below). |
+| "Also, it looks like for both discs and acrylic there's this artificial green completing the circle shape that isn't one of the discs." | **No fill: the globe is its six discs alone**, in colour, in acrylic and in one colour, and its outline is theirs (below). |
+| "I'm between acrylic gyroscope and coin, if done right, and the planet." | All three are on the globe's page. The Coin in acrylic now has its rim in the side's deeper tone, as every acrylic disc has, so it spins as a thick acrylic disc. What "done right" should mean for the Coin is a question for you. |
+| "For the planet, it would be cool if the purple was a meteor, creates white cloud, disperses into black wisps, then the crater is visible. The water ripples on impact too. Then the purple meteor can stay in the core." | **The Planet, a new ident**: a violet meteor strikes the North Atlantic, a white cloud bursts and rings ripple across the sea, the cloud breaks into black wisps, and the crater shows with the meteor lodged in its core (below). |
+| "I like how the planet looks in black and white too." | The knock-out versions stay as they are. |
+| "Also are the letters sized properly? It's a little odd to me that the A is so wide relative to the R but maybe that's intentional." | **Intentional, but wider than it needs to be**: three ways to narrow the gap, drawn for you to choose; nothing changed yet (below). |
+
+### Blue and green
+
+The meridian facing you is the largest disc in view, so it is the colour that leads. It is now Poison green, the
+land. The equator, the widest band, is Ice blue, the sea. North is Flare red and south Acid
+yellow. Of the two side meridians, the one that shows larger is Dust orange and the one that shows less Haze violet, so
+violet, which led before, now shows least. Four arrangements were drawn with green facing and blue across; this one
+(`earth.py` RING) puts the warm colours where they read as accents. The corner print's colours now come from the
+brand's own file (`brand/earth-outlines.json`), so the print follows the brand when it moves.
+
+![The discs in the new colours](brand/earth-discs-multi.svg) ![On ink](brand/earth-discs-ink.svg)
+
+### The discs alone
+
+Since round 24b the ball had been filled in the facing meridian's colour wherever no disc reached the rim, so the globe
+was a perfect circle without an outline. That fill was not one of the discs, and you saw it. Now there is none: the
+globe is its six discs alone, in colour, in acrylic and in one colour. Its outline is the green disc's oval with the
+tips of the others reaching past it to where the rim was, the violet at the top and bottom, the orange and the red at
+the upper right, the yellow and the orange at the lower left. It is round, as six discs set in a sphere are, but no
+longer a circle. In one colour it is the discs' union less the seams, its outline kept whole. The corner's renders,
+the site's logo and the globe's page all follow.
+
+### The acrylic: the discs, see-through
+
+Round 24b tinted every disc and laid them in a fixed order, which read as six overlapping ovals, not the discs. Now
+the acrylic is the discs themselves, see-through, stacked as tinted sheets are, and each disc is a slab with a little
+thickness. The green meridian facing you is the backing, as in the discs. Where one disc lies in front of it, the disc shows its own flat
+colour, just as in the discs. Where two cross, they make one colour darker than either, whichever is in front, as
+two filters do: red over orange a deep vermilion, orange over yellow amber, red over violet crimson, blue over violet
+indigo. The opposite pairs go smoky, blue over orange a taupe and yellow over violet a brown, as real tinted acrylic
+does. Where no coloured disc lies in front of the green, the far halves of the rings show through it a little deeper
+than the green: teal behind the blue, khaki behind the red. So the eye closes each ring. Where a disc is, the ground
+takes nothing, so the acrylic is the same on paper and on ink.
+
+Each disc is a slab a twentieth of the radius thick (`earth.py` ACRYLIC `thick`, `slabs`). Where its side faces you, a
+narrow crescent shows along one edge of its oval, widest where the disc is most tilted to you, in a deeper tone of its
+tint (lightness 0.10 lower, chroma 15 % higher), as the polished edge of tinted acrylic looks, light running the
+length of the sheet. The parallels show theirs along their lower edges, since we look down on the globe, and the
+meridians along their sides. Seen through other discs, a side is stacked with them like any sheet. On the page each
+pixel is tested against each slab exactly (where the view first enters it, through its face or its side); in the SVGs
+each disc is cut into its face and its side.
+
+How the sheets are mixed (`_stack`): in OKLab, a and b the share-weighted mean (the nearest sheet half,
+then half of the rest, so two sheets are even), the lightness the darkest sheet's, a step lower (0.04) for each sheet
+beyond the first, and up to 0.10 lower the less their hues agree. The far halves share a fifth of what shows behind
+the green, and count as one sheet. In the SVGs each region is one flat colour, with regions within a hair of each
+other merged. On screen the same rule runs per pixel on the graphics card (WebGL; without it the page draws the
+flush discs). In one colour the acrylic is the lines.
+
+The critic's three rounds got it here. The first version laid the paper under everything and gave each disc's cut
+edge its full colour, as tinted acrylic glows at its edges. The critic read those edges as a cage of hoops, so they
+are off (a thin glint, 0.012 of the radius, is yours to choose). The second found the green sage on paper and olive
+on ink, because the ground showed through every point, so the ground was taken out. The third found the crossings
+mixed like paint, some lighter than the sheet in front and different depending on which sheet was in front. They are
+stacked now, every crossing deeper than its sheets.
+
+![The acrylic, on paper](brand/earth-acrylic-multi.svg) ![On ink](brand/earth-acrylic-ink.svg)
+
+### The idents
+
+Every ident still ends on the whole globe, upright, and leans to the Earth's 23.4 degrees. The lean is one shared
+gesture: 0.3 seconds, going a little past 23.4 and settling back, as a gyroscope finds its axis. It begins before the
+arrival has quite stopped, so nothing stands still between them. The globe moves aside the moment the lean lands, and
+EARF is wiped out of the globe's rim beside it, starting just before the globe settles (typed in, the letters came as
+four one-frame jumps). Then it holds 1.3 seconds. A wipe cuts the letters as it passes (it reads "EAI" for a frame or
+two); the acrylic's critic would rather each letter faded in whole, while the ident critic, who judges the timing,
+keeps the wipe. That one is yours to choose.
+
+- **Coin** (4.7 seconds). It spins on its edge, a new face each half turn at one steady beat: yellow, orange, red,
+  violet, blue, green, round the colour wheel. Then it lands on the globe, whose facing disc is green, so the last
+  colour runs into it, and leans as it lands. Each face holds 0.34 seconds, which keeps the flashes under three a second: each one
+  swaps a large area between the paper and a colour, and faster than three a second can trigger photosensitive
+  seizures (WCAG 2.3.1). Faster would want a flash test first. Its rim is the face's colour, thick enough to read as a
+  bar when the coin is edge on.
+- **Open** (new, 3.3 seconds). The globe begins as the flat globe icon, each disc edge on, a line: three bars and a
+  crossing pair. The icon holds 0.3 seconds, then each disc turns about its line and opens, a beat after the last.
+- **Iris** (new, the third critic's idea, 2.65 seconds). The finished globe, upright, still and full size, opens out
+  of its own centre in a circle, like a late-90s circle wipe. Nothing inside it moves; then it leans. The most minimal
+  arrival the globe allows.
+- **Roll** (new, the first critic's idea, 3.35 seconds). The globe rolls in from the right like a ball, turning as it
+  travels, slows to a stop and rocks back into its lean.
+- **Gyroscope** (3.15 seconds). Half a turn on its axis in a second, slowing evenly, the lean beginning before the spin
+  ends (a full turn swapped the meridian facing you six times, which is what read as chaotic).
+- **Earthrise** (3.4 seconds). The globe rises over a horizon.
+- **Download** (new, 3.15 seconds). The globe arrives as a picture did over a modem in 1999, an interlaced GIF: coarse
+  blocks at once, each pass finer, sweeping down, until it is sharp.
+- **Planet** (new, 3.3 seconds): the Death Star struck by a violet meteor (below).
+
+In acrylic the Coin is a thick acrylic disc: each face its own colour, as a single sheet is, and its rim the side's
+deeper tone, as every acrylic disc's side is.
+
+The critics would keep the Coin as the long ident and Open as the short one, Roll only if you want a playful third,
+and Iris to be judged on its own; they would retire the Gyroscope, Earthrise and Download. That is your call, so all
+eight stay on the globe's page, the Planet with them.
+
+![The idents, frame by frame](brand/earth-idents-r25.png)
+
+`earth.py --video` writes each ident in discs on paper and on ink, in acrylic on paper and on ink, and in lines on
+paper (`brand/earth-ident-<kind>-<discs|acrylic|even>-<paper|night>.mp4`).
+
+### The site: what goes with each colour (a future idea)
+
+Round 24 paired each speaker with other speakers on the painter's wheel. The owner meant something else: on a
+speaker's page, the colour you pick sets what is recommended below it, and what is recommended is never another
+speaker. So the draft's colour section is now a speaker's page: the speaker in the colour picked, its eight swatches,
+and under them "Goes with it": a record player in the same colour, a shade deeper (monochromatic), a lamp in its
+opposite on the wheel (complementary), and a rug in its neighbour (analogous). Fog and Smoke have no hue, so for them
+it is lightness and an accent: a white or black record player, a lamp in any one of the six, and a rug of the opposite
+lightness. The three are flat placeholders, drawn for the idea, and the section says it is a future idea.
+
+### The Death Star, with the Earth on it
+
+The sphere is the Earth now: the continents in Poison green on the Ice blue sea, drawn from coarse outlines and
+rounded, seen from over the Atlantic with the Americas facing you (65 W, 12 N) and leaning 8 degrees. The dish sits in
+the North Atlantic, its centre about 39 degrees up from the middle (half past one), with a crescent of Earth beyond it
+toward the rim. The land is kept clear of the dish, 0.06 of the radius in colour and 0.10 in one colour (at 0.06 the
+two fused at 32 px), and no piece of land under 1.5 % of the disc is kept, so there are no specks. The trench is off;
+a violet one is an option.
+
+A 24-degree divot was tried, since the owner allowed a slightly larger one. With the Earth on the sphere it pressed on
+every Atlantic coast and read as a target stamped on the Earth. So the full drawing keeps round 24b's 21 degrees, with
+the bowl deeper (0.55 of its radius, so the rings sit toward the middle like a bowl seen at an angle), and the dish is
+sized for each cut:
+
+| cut | for | the dish | the land |
+|---|---|---|---|
+| full | 49 px and up | 21 degrees, 0.55 deep | the Americas and the crescent of Africa and Europe |
+| mid | 25 to 48 px | 21 degrees, 0.42 deep | the two Americas |
+| small | 24 px and under | 24 degrees, 0.42 deep | none |
+
+In one colour it is drawn by knock-outs: the disc solid, the land and the surround knocked out to the ground, the cone
+solid, the dust cap knocked out, and the land kept 0.06 of the radius inside the rim so the disc's edge stays whole.
+
+![Colour, full](brand/earth-core-paper.svg) ![Colour, mid](brand/earth-core-mid.svg) ![Colour, small](brand/earth-core-small.svg) ![Black, full](brand/earth-core-black.svg) ![White on ink](brand/earth-core-white.svg)
+
+![Every cut at 300, 64, 48, 32, 24 and 16 px](brand/earth-core-sizes.png)
+
+The kick, on a one-second beat: the cone pushes out flush and holds for 0.07 seconds, the dust cap swelling to 1.2
+times and the whole driver to 1.1. Then it rebounds past its rest, deeper and a little smaller, at 0.24 seconds, and
+settles by 0.42. One ring of sound leaves the rim, knocked out of the globe in the ground's colour so it shows only
+where it crosses the Earth, and is gone by 0.45 seconds. Then half a second of stillness
+(`brand/earth-core-<night|paper>.mp4`).
+
+![The kick, frame by frame, with its motion trace](brand/earth-core-kick-r25.png)
+
+### The Planet: the meteor
+
+A new ident made from the Death Star. It starts on the Earth whole, with no crater. A violet meteor falls on the North
+Atlantic from the upper right, faster as it comes, a long tail behind it. At the hit (0.45 seconds) a white cloud
+bursts over the spot in a frame, the planet takes a small knock along the meteor's path and settles, and three rings
+ripple out across the sea, not the land, fading as they spread. From 0.64 seconds each puff of the cloud turns black
+and draws out into two thin wisps of smoke curling away over the planet, thinner and fainter until they are gone, and
+the crater shows as they go: the dish, with the meteor lodged at its centre as the violet core. As the smoke thins, the
+cone thumps once, as a speaker does (that beat is the critic's, not yours: say if it should go). At 1.19 seconds the
+planet moves aside and EARF is wiped in, as every ident ends; 3.3 seconds in all (`earth.py` PLANET,
+`brand/earth-ident-planet-discs-<paper|night>.mp4`). The cloud is one white burst, far under three flashes a second.
+The globe's page plays it as an ident and loops it beside the kick.
+
+A fresh critic judged its first version (5.5 blind, projected 7.0) and all ten of its changes are in: the meteor larger
+and its tail longer; the burst quicker and the knock, so the hit is the sharpest beat; the crater drawn only as the
+cloud goes (red showed between the puffs); the wisps sooner, quicker and kept on the planet (past its edge they read as
+claws on paper and vanished on ink); the ripples quicker; and a bug fixed, where the last ripple froze, faint, into the
+lockup.
+
+![The Planet, frame by frame](brand/earth-planet-r25.png)
+
+### A pipeline to critique the brand
+
+No brand or animation skills exist to call, so the pipeline was built here, on the one the renders use
+(`critic/PROMPT.md`):
+
+- **Storyboards** (`storyboard.py`). It plays any scene from the globe's page frame by frame, as the videos do, and lays
+  it out on a sheet: frames at even times (or picked ones, such as the coin's faces), each with its time. Under them
+  is the motion trace, the share of the picture that changes from one frame to the next at 30 frames a second, with the
+  phases marked (tilt, whole, aside, EARF). A stop shows as a flat line and a jump as a spike. It lays marks out the
+  same way (each style in every rail, or each drawing at 300, 64, 32 and 16 px) and writes the motion data beside each
+  sheet, so a critic's motion tests can be checked (`storyboard.py check`).
+- **The critic** (`critic/PROMPT-brand.md`). A creative director judges in two stages. First a blind score from the
+  sheets alone. Then it reads the subject's card (`critic/cards/brand-*.md`: what it is for, the owner's requirements
+  in their own words, what is fixed, and the parameters with their values) and prescribes up to ten changes. Each one
+  is a parameter and a value, with a test the next sheet must pass.
+- **The rounds.** Each round goes to a fresh critic that sees only the sheets, the card and the prompt. Its reply is
+  kept (`critic/rounds/2026-10-15/`), logged (`critic/LOG.md`), applied, and checked against its tests before the next
+  round. Three rounds per subject at most; after that the owner decides.
+
+Round 25 ran it on three subjects, and on the Planet once it was made:
+
+| subject | round 1 | round 2 | round 3 |
+|---|---|---|---|
+| The Death Star | 5.5 (projected 7.0) | 5.5 (7.0) | 5.5 (7.0) |
+| The acrylic | 5.0 (7.0) | 5.0 (6.8) | 4.5 (6.0) |
+| The idents | 6.0 (7.0) | 5.5 (6.5) | 5.5 (6.5) |
+| The Planet (new) | 5.5 (7.0) | | |
+
+The blind scores stay flat while each critic projects a point or so more. Each round fixes what one critic saw, and
+the next, fresh critic finds the next thing. The acrylic's third critic scored it lowest of all, though it found the
+rule finally reads as the discs made transparent: it marked the acrylic down for having no one-colour form of its own
+(in one colour it is the lines, by your rule) and for the Gyroscope's timing. The log says what each round asked for
+and what was done.
+
+### The letters
+
+EARF's letters are each as wide as their shape needs (round 19): on a cap height of 300, the E is 200, the A 310, the R
+210 and the F 190. The A is the widest on purpose. Its legs are as heavy as the stems (100) and meet in a flat top, so
+it needs width to keep the triangle inside it open: narrow its feet and the triangle closes, since its tip stands only
+42 above the crossbar now. But at 1.48 times the R it is wider than most geometric faces draw their A against their R,
+and it reads that way. Three ways to close the gap, none of them made until you choose:
+
+- **A.** The legs 90 wide and their feet 190 apart: the A 280 wide, 1.33 times the R, the triangle inside as open as
+  now, the legs a touch lighter than the stems. The one I would take.
+- **B.** The legs as now, their feet 170 apart and the crossbar 30 lower to keep the triangle open: 270, 1.29 times,
+  but the crossbar no longer lines up with the E's and the F's middle bars.
+- **C.** The A as now and the R wider, its leg kicked out to 240: 1.29 times, but the whole word grows wider.
+
+![The A against the R: now, and the three ways](brand/earth-wordmark-a-options.png)
+
+### The corner print, in the new colours
+
+The corner's printed globe now takes its colours from the brand's own file (`product.py` reads
+`brand/earth-outlines.json`), so the print renders on Poison and Fog were made again in green and blue
+(`frames.py corner24`), and again, with the etched and tinted discs, once the fill was gone. On Poison the green
+disc sits on green acrylic. It still reads, but less clearly than on Fog.
+
+![The globe in the front corner, four ways, on Poison and Fog](../../renders/2026-10-15/barkhorn/corner24.png)
 
 ## Round 24b: flush, calmer, simpler (the owner's notes on round 24, 2026-10-15)
 
@@ -71,7 +321,7 @@ rim, which stays whole, so the mark is round there too and reads as one engraved
 
 ![In colour, flush](brand/earth-discs-multi.svg) ![In one colour, seamed](brand/earth-discs-black.svg) ![On ink](brand/earth-discs-white.svg)
 
-### Acrylic, all six
+### Acrylic, all six (replaced in round 25)
 
 Tinting all six alike goes to mud whichever way it is blended. The violet meridian faces you, so it lies behind
 everything else, and every colour mixed through it turns brown. So the three mixed colours' discs go down first as a
@@ -81,7 +331,7 @@ No strokes.
 
 ![The globe in acrylic, all six tinted](brand/earth-acrylic-multi.svg)
 
-### The Gyroscope, the Coin and Earthrise
+### The Gyroscope, the Coin and Earthrise (retimed in round 25)
 
 - **Gyroscope.** The globe spins on its axis like a gyroscope's rotor, the meridians turning about the pole (the
   parallels, round it, do not change), slowing to rest whole and upright. Then it tilts to the Earth's 23.4 degrees.
@@ -99,7 +349,7 @@ on paper or on ink.
 `earth.py --video` writes each in discs on paper and on ink, in acrylic and in lines on paper
 (`brand/earth-ident-<gyro|coin|rise>-<style>-<ground>.mp4`).
 
-### The globe as a Death Star
+### The globe as a Death Star (the Earth put on it in round 25)
 
 A sphere in Ice blue with the equator's trench in Poison green: the outside, blue and green. In its northern half, a
 dish a little bigger than the Death Star's (21 degrees across from the centre, the film's about 15) that is a driver
@@ -126,7 +376,7 @@ water-clear Fog (`frames.py corner24`):
 - **Discs, in its own colour**: the same, the etch filled with the speaker's colour, deeper.
 - **Discs, printed in the six colours**: flush, UV-printed on a white underprint (`uv-print` in `components.json`).
 
-The renders are running and follow in the next commit.
+The renders are in round 25 (above), the printed ones made again in the new colours.
 
 ## Round 24: the primaries across, the globe made solid, the globe cut open, and Atmosphere (the owner's answers of 2026-10-15)
 
