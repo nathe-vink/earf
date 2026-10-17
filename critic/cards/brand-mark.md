@@ -13,7 +13,7 @@ set, each version on the ground it shows on; sheet 2 seven of them at 300, 64, 3
 the wordmark EARF; sheet 4 the spins, a frame every 0.4 s (round 27f: black and colour, steady; round 27k: each disc a
 slab); sheet 5 (round 27e)
 the angle study, the tip since chosen; sheet 6 (round 27i) the set in line; sheet 7 (round 27j) the south pole at less
-tip, a study.
+tip, a study; sheet 8 (round 27l) three ways for the spin to read as one solid object, a study, none chosen yet.
 
 ## The owner's requirements, in their own words (fixed)
 
@@ -27,6 +27,9 @@ tip, a study.
   version, without compromising on the true shape of the object?" (round 27j), and of 27j's answers: "The two lobes
   merged looks worse", "I don't like the joined butt and I don't like changing the form at smaller sizes", and "When
   spinning, each disc flattens when it lines up straight on, instead of reading as a disc with thickness." (round 27k)
+- "I feel like it's missing segments to the left and right of the butt, that would make it look more like a circle
+  when still and stroked or monochrome. Also wondering if, especially for the spinning, there's a way to make it
+  function more like a solid object than a bunch of independent discs clipping through each other." (round 27l)
 - "the logo has to work in white only, black only, single color, multicolor and animated" (round 22)
 - "The acrylic is meant to be a transparent version of the discs" and "For acrylic I was expecting each disc to have a
   little thickness to it" (round 25)
@@ -51,7 +54,8 @@ and the steady spin.
 - Black, white and each speaker's own (after round 1): the seamed discs, flat, each speaker's on the ground where it
   holds 3:1. Every piece shrunk by half of `seam` (0.035 of the radius) on every side, the outline's too, so no band
   runs round the outside (the owner: "The stroke around the monochromatic ones looks odd. Don't think we need it");
-  pieces thinner than one and a half seams dropped; the tips kept, so the outline is the discs' own (round 27d trimmed
+  pieces thinner than one seam dropped (`KEEP`, round 27l: at one and a half the green disc's rim either side of the
+  south pole, 1.2 seams across, was dropped, and the outline broke there); the tips kept, so the outline is the discs' own (round 27d trimmed
   every piece to the green disc; the owner liked it untrimmed). The acrylic's thickness is a crescent inside each
   disc's edge, its cells the discs' faces and crossings alone ("clipping on the multicolor one wherever there is
   overlap"). At the south pole, which sits on the outline at this tip, the side meridians' caps stand either side of
@@ -59,7 +63,8 @@ and the steady spin.
   worse (round 27k). Small cuts (round 27k): the pieces the full drawing keeps, at its own seam, drawn with a wider
   seam, `cut` 0.05 of the radius up to 64 px and 0.06 up to 32 and 16 px, so every piece is still there and the form
   never changes (round 27's cuts dropped what their wider seams would not hold, which bit holes in the outline; round
-  27j drew four discs).
+  27j drew four discs). Only a piece the cut's own seam leaves under a seam across is left out (round 27l: the two
+  segments by the south pole, under a pixel wide at 64 px), where it would draw as a grey speck.
 - In motion (round 27e, new): the spin. The mark turns on its axis the Earth's way (the meridians round the pole, the
   parallels still), `rate` 45 degrees a second (a turn in 8 s), each loop `turn` 180 degrees (4 s: every coloured disc
   back in its place, so it loops without a seam and starts on the mark at rest), 30 frames a second, 720 px square
@@ -70,7 +75,12 @@ and the steady spin.
   its face moves toward us by half the thickness it shows and its rim shows on the near side, the rim on the globe's
   surface so nothing covers it, the thickness shown t - w / 4 (w its oval's width across; seamed, t the ink's and the
   seam), so a disc narrows to a band as wide as it is thick, never to a line; at rest nothing changes. Black and
-  colour, as MP4 and WebM; sheet 4 is a frame every 0.4 s.
+  colour, as MP4 and WebM; sheet 4 is a frame every 0.4 s. On its own axis the parallels never appear to move and the
+  meridians slide through them, which reads as discs clipping through each other. Round 27l studies three ways to
+  make it read as one solid object, for the owner to choose (`spinstudy.py`, sheet 8): A, the colour discs as opaque
+  slabs lit by one light from the upper left, each face and rim toned by it; B, the black discs, each seamed piece a
+  tone of the ink by its light; C, A turned about the upright, a turntable, every disc moving together. Until the
+  owner chooses, the spins stay as they are.
 - In line (round 27i, new; the owner: "Can we also do stroke versions of these in addition to fill, or will that not
   work?"): every version again as strokes, beside the fills. In one colour the discs' visible edges, every piece the
   fill keeps outlined once, the outline too, `w` 0.05 of the radius, round joins and ends; in colour the six rims,

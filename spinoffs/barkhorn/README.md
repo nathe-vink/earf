@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27k**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27l**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -62,7 +62,34 @@ top. Round 27f tips the globe 16° toward you instead of 22°, which halves the 
 draws every version in line as well. Round 27j redraws the 32 and 16 px cuts with four discs, whole, and leaves out the
 line between the two caps at the south pole, the outline kept. Round 27k undoes both after the owner's notes, keeps the
 full drawing at every size with only its seams bolder, and makes each disc a slab in the spin, showing its edge as it
-lines up with you.
+lines up with you. Round 27l brings back the two segments of the outline either side of the butt, and studies three
+ways for the spin to read as one solid object, for the owner to choose.
+
+## Round 27l: the outline either side of the butt, and the spin as one solid object (the owner's notes of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "I feel like it's missing segments to the left and right of the butt, that would make it look more like a circle when still and stroked or monochrome." | **The two segments are back.** They are the green disc's rim (the meridian facing you) either side of the south pole, where it runs along the globe's outline below the discs in front. In one colour every piece is shrunk by half a seam, and since round 27c a piece left under one and a half seams across was dropped as a sliver. These two are 1.2 seams across, so they were dropped, and the outline broke either side of the butt. Now a piece needs one seam (`earth.KEEP`), so the two come back: in the fill as thin crescents, in line as the outline running on round the bottom. Every one-colour globe and lockup, fill and line, is drawn again. The colour versions and the spins don't change. |
+| (the same, small) | **The small cuts stay as they were.** Their wider seams would leave the two segments under a pixel wide at 64 px, a grey speck, and close them up at 32 and 16 px. So a cut keeps a piece only if it is still a seam across at the cut's own seam (`earth._holds`). That leaves out these two and nothing else, so the fill cuts are byte for byte round 27k's. The 64 px stroke cut does draw them, as part of its line. |
+| "Also wondering if, especially for the spinning, there's a way to make it function more like a solid object than a bunch of independent discs clipping through each other." | **A study of three ways, for the owner to choose from** ([the spin study](https://claude.ai/artifact/ECS8MLNBEhJb8565nzyktN), `spinstudy.py`). On its own axis the three parallels are circles round that axis, so they never appear to move, and the meridians slide through discs that stand still: that is what reads as clipping. **A, colour, lit:** opaque slabs under one light from the upper left. Each face lightens as it turns toward the light and its rim shows a deeper tone, so the meridians turn like plates of one object and the back halves stay hidden. **B, black, lit:** the seamed discs, each piece a tone of the one ink by how its disc faces the light. **C, turntable:** A turned about the upright, so every disc moves together. But twice a turn the three parallels line up edge on, and the lean swings round. Recommended: A for colour, B for black. Nothing changes until the owner chooses, and the still mark stays as it is whichever they pick. |
+
+- **Measured.** A piece's width is the largest circle inside it, once shrunk by half a seam. The two segments are
+  0.042 of the radius across (1.2 seams), 6 px at their widest in a 300 px mark. Four tips on the upper half of the
+  outline are thinner still, under a tenth of a seam or nothing once shrunk, and stay out: there is nothing there to
+  draw. The next thinnest piece, the caps by the pole, is 3.7 seams across, so one seam drops only those four.
+- **The study's light.** It comes from up, left and toward you (`spinstudy.LIGHT`). A face's tone moves 0.16 in
+  OKLab lightness per unit of light, darker below 0.6 of full light and lighter above, and a rim's 0.12. In black,
+  each piece is the ink lightened by up to 0.22. The clips are made as the spins are (720 px, 30 fps, 45° a second). A
+  and B loop at half a turn, 4 seconds; C at a whole turn, 8 seconds, since it does not come back to itself sooner.
+- **Drawn again:** every one-colour globe and lockup in fill and in line, the 64 px stroke cuts, the set, sizes and
+  stroke sheets, `earth.html` and the outlines. New: the before and after below (`brand/earth-mark-segments-r27l.png`)
+  and the study's sheet (`spinstudy.py --sheet PATH`; its clips with `--clips DIR`). Also republished: the mark's page
+  (version 11: the one-colour globes and lockups, and the small-size notes, which now name the two segments) and the
+  globe page (version 26). New and private: the spin study page.
+
+![The two segments either side of the butt: round 27k, and now](brand/earth-mark-segments-r27l.png)
+
+![The spin study: A, colour lit, and B, black lit, across half a turn; C, the turntable, across a whole one](brand/earth-mark-spin-study-r27l.png)
 
 ## Round 27k: the caps as before, the same drawing at every size, and the discs' thickness in the spin (the owner's notes of 2026-10-17)
 

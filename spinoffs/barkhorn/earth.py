@@ -65,6 +65,9 @@ LEAN, ELEV, LAT = 23.44, 16.0, 40.0                      # the axis's lean (the 
 # tips, where their rims meet the globe's outline past the front disc, reach about half as far, 0.04 of the radius)
 MERIDIANS = (30.0, 90.0, 150.0)                          # the meridians' longitudes at rest (90 faces us: the rim)
 W_LINE, W_DEPTH, SEAM = 0.075, 0.42, 0.035               # of the globe's radius: the line, the far line's share, the seam
+KEEP = 1.0                                               # the one-colour discs' thinnest piece, in seams (round 27l: the
+                                                         # owner, "missing segments to the left and right of the butt";
+                                                         # at 1.5 it dropped the green disc's rim either side of it)
 CLOUDS = [(name, colour) for key, line, num, name, colour in M.SPEAKERS if line == 'Cloud']
 HUES = [c for n, c in CLOUDS if n not in ('Fog', 'Smoke')]          # Flare Dust Acid Poison Ice Haze, the spectrum
 NAMES = [n for n, c in CLOUDS if n not in ('Fog', 'Smoke')]
@@ -386,20 +389,20 @@ def _parts(fs):
     return [p for f in fs for p in getattr(f, 'geoms', [f]) if p.geom_type == 'Polygon' and p.area > 1e-7]
 
 
-def _kept(fs, seam=SEAM, keep=1.5):
-    """The pieces the one-colour discs keep (round 27c): each that, shrunk by half a seam (its hairlines closed), is
-    still `keep` seams across."""
-    out = []
-    for p in _parts(fs):
-        q = p.buffer(-seam / 2, join_style=2, mitre_limit=4)
-        k = 0.3 * seam
-        q = q.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
-        if not q.is_empty and not q.buffer(-keep / 2 * seam).is_empty:
-            out.append(p)
-    return out
+def _holds(p, seam=SEAM, keep=KEEP):
+    """Whether a piece, shrunk by half a seam (its hairlines closed), is still `keep` seams across (round 27c)."""
+    q = p.buffer(-seam / 2, join_style=2, mitre_limit=4)
+    k = 0.3 * seam
+    q = q.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
+    return not q.is_empty and not q.buffer(-keep / 2 * seam).is_empty
 
 
-def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=1.5, cut=None, thick=THICK):
+def _kept(fs, seam=SEAM, keep=KEEP):
+    """The pieces the one-colour discs keep (round 27c): each that holds at the seam."""
+    return [p for p in _parts(fs) if _holds(p, seam, keep)]
+
+
+def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=KEEP, cut=None, thick=THICK):
     """Each disc's visible part as drawn. In colour the discs are flush (round 24b, the owner: "For the discs, I want
     them to not have strokes, so they are flush. The strokes should be the non-color versions"): each part whole, a
     hair (`lap`) larger than itself so no hairline of the ground shows between two, the globe's own edge kept exact.
@@ -408,19 +411,22 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=1.5, cut=None, 
     and round 27c (the owner: "The stroke around the monochromatic ones looks odd. Don't think we need it") takes away
     the band round the outline that round 24b kept whole: every part is shrunk by half a seam on every side, the
     outline's sides too, so a seam of the ground lies between any two parts and round the outside alike; a part thinner
-    than one and a half seams (a sliver of a disc's tip) is dropped; and the whole is scaled back to the discs' own
+    than `keep` seams (a sliver of a disc's tip) is dropped; and the whole is scaled back to the discs' own
     width. (Round 27d trimmed every part to the green disc, the meridian facing us; the owner: "I kind of like it
     untrimmed because it's true to the shape of the combined discs", so the tips stay.) `keep`: the thinnest part kept,
-    in seams; 0 in the spin (round 27e), where a part dropped at one and a half seams would pop out between two frames,
+    in seams; 0 in the spin (round 27e), where a part dropped at its threshold would pop out between two frames,
     so it narrows away into the seam instead (and so is a part the hairlines' pass would take whole, as a disc nearly
     edge on, a long strip, would be). Returned as one shape, at index 0. Round 27k: each disc a slab `thick` thick
     (facets; seamed, that much ink between its seams), so turning edge on it shows its edge; and a small cut (`cut`):
     the pieces the full drawing keeps, at its own seam, drawn with the seam `cut`, so every piece of it is still there
-    (round 27's cuts dropped what their wider seams would not hold, which bit holes in the outline)."""
+    (round 27's cuts dropped what their wider seams would not hold, which bit holes in the outline), save one the cut's
+    own seam leaves under a seam across, which would draw as a grey speck (round 27l: the green disc's rim either side of
+    the butt, under a pixel wide at 64 px)."""
     fs = facets(spin, thick + (0 if flush else seam))
     sil = unary_union([f for f in fs if not f.is_empty])
     if not flush and cut:                                # round 27k: a small cut, the full drawing's pieces, seamed wider
-        g = unary_union([p.buffer(-cut / 2, join_style=2, mitre_limit=4) for p in _kept(fs, seam, keep)])
+        g = unary_union([p.buffer(-cut / 2, join_style=2, mitre_limit=4) for p in _kept(fs, seam, keep)
+                         if _holds(p, cut, keep)])
         k = 0.3 * seam
         g = g.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
         s_ = (sil.bounds[2] - sil.bounds[0]) / (g.bounds[2] - g.bounds[0])
@@ -457,7 +463,7 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=1.5, cut=None, 
 STROKE = dict(w=0.05, wc=0.065, small={64: 0.07})
 
 
-def edge_lines(spin=0.0, seam=SEAM, keep=1.5):
+def edge_lines(spin=0.0, seam=SEAM, keep=KEEP):
     """The discs' visible edges as lines (round 27i): each piece disc_shapes keeps (one colour, seamed), outlined, the
     edges two pieces share drawn once."""
     lines = union_all([q.boundary for q in _kept(facets(spin, THICK + seam), seam, keep)], grid_size=GRID)
@@ -473,7 +479,7 @@ def strokes_body(colour, spin=0.0, w=STROKE['w']):
             f'stroke-linecap="round"/>')
 
 
-def discs_body(colours, spin=0.0, flush=True, seam=SEAM, keep=1.5, cut=None):
+def discs_body(colours, spin=0.0, flush=True, seam=SEAM, keep=KEEP, cut=None):
     """The discs as SVG paths, flush in colour, seamed in one colour (disc_shapes); the discs alone (round 25: no ball
     filled under them)."""
     return ''.join(f'<path d="{_poly_d(g)}" fill="{colours[i]}" fill-rule="evenodd"/>'
@@ -814,7 +820,9 @@ SMALL = {16: 0.035, 32: 0.025, 64: 0.02}                  # px across at most: t
 # pixel or more: at the master's 0.035 they go grey at 32 px. At 16 px six discs do not read whatever the seam.
 SMALL_SEAM = {16: 0.06, 32: 0.06, 64: 0.05}                 # px across at most: the seam, of the radius (round 27k:
                                                             # the full drawing's pieces at each, so no wider than its
-                                                            # thinnest piece holds; round 27: 0.10, 0.08, 0.05, dropping)
+                                                            # thinnest piece holds; round 27: 0.10, 0.08, 0.05, dropping;
+                                                            # round 27l: bar the two by the butt, which no seam that
+                                                            # still shows at these sizes holds)
 
 
 def _lin(c):
