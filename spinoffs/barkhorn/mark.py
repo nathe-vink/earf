@@ -39,6 +39,12 @@ Round 27i adds each globe in line, beside the fills (the owner: "Can we also do 
     brand/mark/earf-globe-<tag>-stroke.svg                   the colour as its six rims, the rest as the discs' edges
     brand/mark/small/earf-globe-<black|white>-stroke-64.svg  the heavier cut for 64 px (under it, the fills' small cuts)
     python3 spinoffs/barkhorn/mark.py --stroke-sheet PATH
+
+Round 28c (the owner, of the one colour: "Both [fill and line], to be used on different surfaces") spins the line too,
+every line one weight and a disc side on one line; in the black spin a disc side on is one white stroke, its two seams
+met (earth.disc_shapes):
+
+    brand/mark/earf-globe-black-stroke-spin.<mp4|webm>     --spin black-stroke
 """
 import argparse, os, subprocess, sys, tempfile
 
@@ -186,7 +192,8 @@ def sheet(path, rows=GLOBES):
 # the owner chose the steady spin, so the top's (its lean moving off the Earth's) is no longer made; `wobble` stays,
 # should it come back (a SPINS entry with it as its last value).
 SPIN = dict(rate=45.0, turn=180.0, fps=30, px=720, wobble=5.0, clear=0.25)
-SPINS = [('black', 'discs', E.INK, E.PAPER, 0.0), ('colour', 'acrylic', E.RING, E.PAPER, 0.0)]
+SPINS = [('black', 'discs', E.INK, E.PAPER, 0.0), ('black-stroke', 'strokes', E.INK, E.PAPER, 0.0),
+         ('colour', 'acrylic', E.RING, E.PAPER, 0.0)]                     # (round 28c: the line spinning too)
 
 
 def _wobble(beta, f):
@@ -205,6 +212,7 @@ def spin_svg(style, cols, bg, spin, wobble=(0.0, 0.0), keep=0, clear=None):
     E.WOBBLE[:] = wobble
     try:
         body = (E.acrylic_body(cols, 'night' if bg == E.NIGHT else 'paper', spin=spin) if style == 'acrylic' else
+                E.strokes_body(cols, spin=spin, keep=keep) if style == 'strokes' else
                 E.discs_body([cols] * 6, spin=spin, flush=False, keep=keep))
     finally:
         E.WOBBLE[:] = [0.0, 0.0]

@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 28**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 28d**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -65,7 +65,100 @@ full drawing at every size with only its seams bolder, and makes each disc a sla
 lines up with you. Round 27l brings back the two segments of the outline either side of the butt, and studies three
 ways for the spin to read as one solid object, for the owner to choose. Round 28 builds the globe as the real object, six
 discs of the cabinets' tinted acrylic path-traced as the speakers are, and traces new one-colour versions, a fill and a
-line, from it.
+line, from it. Round 28b renders it in translucent acrylic in the mark's own hues, so each colour pops, and brings back
+the old one-colour logos. Round 28c makes the render the colour mark, with a glowing version for dark grounds, spins the
+line version too, every line one weight, turns a meridian side on into one white stroke in the black spin, and cuts
+the parallels' slivers past the outer ring in every one-colour version, keeping the caps either side of the butt. Round
+28d makes the render more transparent in the speakers' colours, takes the study's n4 for dark grounds, takes the flashes
+out of the spin, and runs the equator's edge unbroken where it meets the meridians.
+
+## Round 28d: more transparent in the speakers' colours, n4 on dark, no flashes, the equator's edge unbroken (the owner's notes of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "For the spin, it flashes really bright in several spots at certain positions and looks odd." | **No flashes.** As each side meridian turned square to the camera, its rim mirrored the studio's softbox (in Poly Haven's room, seen only in the acrylic) and the broad fill beside the camera, and showed a white streak for a few frames, three times a loop. The room is now plain grey, and the fill does not show in reflections; the key shows at 0.4 of its strength (`globe_real.py --env grey --shine 0.4 0`, now the defaults). Across the loop at 360 px, the most near-white pixels in any frame fell from 114 to 3, and in the final 720 px spin no frame has more than one. On dark the room was the same studio at a quarter of its strength, and its softbox still turned a rim white at its middle as it squared to the camera, for about four frames, three times a loop (316 near-white pixels at 45°). The dark version now has the same plain grey room (`DARK`): across its final spin, no frame has a near-white pixel. The look barely moves: the globe's mean colour by about 5 of 255. (An earlier check had seemed to clear the room, but `--dark` had quietly overridden the `--env` it was given. A preset now fills in only what is not given: `globe_real.lighting`.) |
+| "Where the edge of the blue disc meets the meridians, can we get rid of those double color triangle shapes and just make the whole outside of the intersection edges blue?" | **The equator's edge runs unbroken.** Cemented, the two rims crossed as two triangles of each colour: across the 20 mm cell where they meet, each rim lies a tenth of a millimetre outside the other in two opposite corners. The meridians' faces in that cell now take the equator's acrylic (`globe_real._equator_owns`), so the blue runs straight through. The 40° parallels keep their crossings: there a meridian really does stand up to 8 mm past the parallel's edge on one side, and recolouring it would paint a bump. |
+| "I liked n4 or n5 without glow for dark." | **On dark, n4 without the bloom**: the rims glow their own colour at 1 and the faces at 0.15 (`--dark`). n4 rather than n5 because at n5's 1.6 the rims pale toward white (the green to a pale lime, the violet to lilac), where at 1 each keeps its own colour. |
+| "I want both paper and dark to be more transparent, like the same colors as the speakers with adjustments so they work on dark and light and aren't as transparent as the earlier version." | **More transparent, in the speakers' colours.** The speakers' horns are clear resin tinted the line's colours (`product.py`). Those are near enough the mark's hues: Poison's bottle green is #4C6A36, the mark's green #4F7F3A. So each disc keeps the mark's hue but lets 0.6 of the light straight through, where 28b let through a quarter. Its face is tinted a little deeper than the hue's square root (`--body through-deep`, `--clear 0.6`): light crossing a sheet is tinted at both faces, so a disc seen against the paper is the hue itself. That lands between round 28's clear tints, where the faces nearly vanished, and 28b's translucent acrylic, where each disc hid the ones behind it. The same acrylic goes on paper and on dark. |
+
+- **Tried and left.**
+  - The speakers' clear tints at two and three times round 28's depth: glow() turned the green lime, and dark lines ran along every crossing.
+  - The horns' tints, raw: the discs multiplied into mud, with black edges.
+  - The face tinted the hue itself, with more light through: dark and heavy.
+  - The face in the cabinets' pale tints: grey.
+  - n5's rims, and an opaque glowing rim, on dark.
+  - Slotting the meridians round all three parallels: Blender's exact boolean left almost nothing of the green disc once three slots were cut in turn.
+- **Costs.** A little more than 28b, as more light crosses the sheets: a 1024 px still about 8 minutes, a 720 px
+  spin frame 22 to 24 s, so a loop about 47 minutes (4 CPUs).
+- **Republished:** [the mark's page](https://claude.ai/artifact/N5LsNPbNHyBmjpTEj756EG), version 15. It has the new render on light and dark, both
+  spinning, the lockups from them, and every one-colour file cut to the ring (round 28c). Also [the study
+  page](https://claude.ai/artifact/PnVHPeDh1DEb7hYNp8euc2), rounds 28b to 28d. Both are private.
+
+![Round 28d: the render on paper and on dark against 28b's and the n4 picked, then the flash at 43.5 degrees into the turn and the equator's edge at a meridian, before and after; and on dark at 45 degrees, the rim in the dim studio and in the plain grey room](brand/earth-mark-r28d.png)
+
+![Round 28d: the materials tried on paper, from round 28's clear tints to 28b's translucent acrylic](brand/earth-mark-tried-r28d.png)
+
+## Round 28c: the render as the colour mark, a glow for dark grounds, a meridian side on as one stroke, and the parallels' slivers cut to the ring (the owner's answers of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "1. Yes" (to: should the render become the colour mark, with its spin as the animated mark?) | **The render is the colour mark** (`globe_real.py --mark`): round 28b's translucent acrylic on paper (round 28d: more see-through, in the speakers' colours), its ground made exactly the paper's colour so it sits on a page without a seam (`brand/mark/earf-globe-render.png`, and spinning, `earf-globe-render-spin.mp4` and `.webm`). The lockups are drawn from it, laid out as before with the clear space round them (`earf-lockup-render.png`, and `-render-night.png` on dark). The flat acrylic stays for printing that cannot take a picture (screen print, vinyl, embroidery). |
+| "2. Both, to be used on different surfaces" (to: the fill, the line, or both?) | **Both stay**: the seamed discs, and their edges in line. Now both spin: the line spin is new (`earf-globe-black-stroke-spin.mp4` and `.webm`). |
+| "3. It's hard to see on dark but I'm not sure what we can do. Maybe give it a glow in dark / neon / phosphorescent effect." | **On dark grounds the acrylic glows** (`earf-globe-render-night.png` and `-render-night-spin`; `globe_real.py --glow`). The discs are drawn as fluorescent acrylic, which gathers light through its faces and gives it out at its cut edges, brightest under ultraviolet. Each rim glows its own colour at full strength, set by its brightest channel so none clips toward white. The faces glow faintly (0.15), the room is dimmer, and a bloom spreads round what is bright, as it does round a neon tube (`bloom()`: the light above 0.35, blurred 1.2% of the picture's width, added back at 0.8). Round 28d replaces it: on dark the render is now the study's n4, without the bloom. |
+| "I don't like when the lines in the line version of the spinning globe changes weights needlessly. Or the change is to drastic. It makes each like look half thick and half skinny without really contributing to depth." | **Every line one weight.** Round 28's traced line drew each ring's front bold and its back thin, and swelled an edge where a disc's thickness faced you. The line spin is the stroke version's own drawing at every angle (every piece's edge once, 0.05 of the radius), the discs given no thickness, so a disc side on is one line, as heavy as the rest (`earth.edge_lines`, in the spin). |
+| "It should just be the white stroke on the side-on meridian, no? Yeah it's weird that at 153 and 27 degrees the white stroke gets smaller and disappears when that's when it should be front and center", and of the published page: "This meridian should be a white stroke just like the rest of the white strokes" | **In the black spin, a meridian side on is one white stroke across the front of the globe, as heavy as every other.** In the spin the discs now have no thickness: as a meridian turns side on, its face narrows away between its two seams, and side on it is one seam, the same white stroke as the rest, where round 28b's bar left only hairlines (`earth.disc_shapes`, in the spin). |
+| Of the white line globe: "Why is the bottom equator disc stroke sticking out further here, while the other discs fit cleanly into the outer circular stroke?"; then "Can you try trimming the butt strokes at the bottom as well, so everything fits in a circle? Otherwise I think we're good to go with the monochromatic options"; and then "Never mind on stroking out the butt. It doesn't look as three dimensional when the bottom is cut off." | **The parallels' slivers are cut to the outer ring, and the butt stays**, in fill and line, at rest and in the spin (`earth._ring`, `earth._cut`). The outer ring is the rim of the green disc, the meridian facing you. It is tipped with the globe, so it falls 4% short of the sphere at the poles, and every disc whose rim reaches the sphere there passes it. The "bottom equator disc" is the south parallel: at the lower left it passed the ring by 0.018 of the radius, so its stroke ran beside the ring's. The parallels are now cut to the ring, so the outline there is one stroke: the trim option shown, which you took. The butt went too for a while: every piece was cut to the ring, round 27d's trim again. That flattened the bottom, so the side meridians keep their caps either side of it, 0.038 of the radius past the ring. The parallels never move in the spin, so their cut is the same in every frame. The colour versions, flush and rendered, are untouched. With this the one-colour options are settled. |
+
+- **Measured.** Side on, the white stroke is one seam, 0.035 of the radius, 8 px in the 720 px spin, as every other.
+  Round 28b's hairlines were 1.3 px, and round 27k's seams 8 px either side of a 12 px strip of ink. For a frame either
+  side, as the two seams close up, the stroke is briefly wider, up to two seams. In line, a disc side on is one 0.05
+  line; for a frame or two either side, its two edges draw as one bolder line before they meet.
+- **Measured, the trim.** At 1024 px the drawing keeps its outline to the pixel, butt and all. Only the sliver at the
+  lower left goes: the fill loses 0.15% of its ink, the line 0.2%. Cutting the butt as well took 4 px off the bottom,
+  0.7% of the ink.
+- **Fixed on the way.** One frame of the line spin, at 34.5°, lost most of its lines: one disc's visible part came back
+  from the overlay as a mix of shapes and lines, and its outline came to nothing. The spin now takes only the shapes
+  (`earth._parts`), as the still always has. The first cut to the ring snapped each piece to the grid on its own, so
+  the edge two pieces share stopped matching. At 40.5° the line spin drew 1.0 of the radius of edges twice, a line a
+  hair heavier for one frame. Each piece is now cut at full precision. Frame to frame, the drawing's length now
+  changes by 0.04% at the median. The largest step is 2%, at 0°, 60° and 120°, where a hair-thin sliver beside the
+  meridian facing you closes up. And the step that clears hairlines of ink between the shrunk pieces (round 27c) could
+  push a mitred corner out past them, by up to 0.013 of the radius in the spin, into a seam or past the outline. Its
+  result is now kept inside the pieces: about 40 px² of stray ink at rest at 1024 px, and up to 37 px² in a 720 px
+  spin frame.
+- **Unchanged.** Every colour file (the flush discs, the colour line and the colour lockups) byte for byte, and the flat
+  acrylic's spin. Every one-colour still, small cut and lockup is redrawn with the parallels cut, and so is the seamed outline
+  in `brand/earth-outlines.json` that `product.py` etches on a speaker. The speaker renders will show it the next time
+  they are rendered.
+- **Tried and left.** Side on, the seams meeting as one stroke two seams wide (a slab one seam thick): the owner
+  wanted it as heavy as the rest. Rims at an emission of 3 to 6, unscaled: the light clipped toward white, so orange and yellow both
+  turned yellow, blue cyan and violet pink. Faces at 0.3 or more: the green disc facing you washed out to lime. The
+  plain translucent on night (`brand/real/earf-real-translucent-night.png`) holds up better than round 28's clear, but
+  without the glow it still sinks into the ground.
+- **Costs.** The glow renders as fast as the paper version: a 1024 px still about 7 minutes, a spin frame about 20 s.
+- **Republished:** [the mark's page](https://claude.ai/artifact/N5LsNPbNHyBmjpTEj756EG) (version 14: the render as the
+  colour mark, the glow on dark, the four spins, the render's lockups) and [the study
+  page](https://claude.ai/artifact/PnVHPeDh1DEb7hYNp8euc2) (rounds 28b and 28c). Both are private.
+
+![Round 28c: the render on paper and its glow on dark; the meridian side on in the black and line spins; the white line globe untrimmed, with the parallels cut (the butt kept), and with everything cut](brand/earth-mark-r28c.png)
+
+![Round 28c: the spins, a frame every 0.4 s: black, black in line, and the flat acrylic](brand/earth-mark-spin-r28c.png)
+
+## Round 28b: colours that pop, and the old one-colour logos back (the owner's notes of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "We could do less transparent acrylic. The individual colors need to pop more" | **The render in translucent acrylic, in the mark's own hues** (`globe_real.py`, now its default look). Each disc is cast in its colour from the mark itself, not the cabinets' pale tints. Light scatters about 12 mm into the 20 mm sheet and a quarter of it crosses straight through, as in translucent cast acrylic (the engine's cast_resin). So each disc reads as its own colour at full strength and only hints at the discs behind it. Translucent acrylic shows its colour by the light that falls on it, so the studio is brighter and a broad fill beside the camera joins the key. |
+| "I feel like the old monochromatic logos were better, they just needed some reshaping." | **The seamed discs and their line version are the one-colour mark again**, every still byte for byte as it was. Where they looked odd, a meridian side on in the spin, a strip of ink no wider than the seam either side of it, the disc grew into its own seams: side on, a solid bar between hairlines. That went up on the mark's page (version 13), and round 28c replaces it after the owner's note. |
+
+- **Tried and left.** A thicker slab, 0.08 or 0.11 of the radius, with its seams whole: the disc side on was still a
+  strip between two seams, only wider. Closing the seams beside the bar altogether: it ran into the green disc behind
+  it and vanished.
+- **Costs.** The translucent look takes half the clear's time: a 1024 px still about 6 minutes at 128 samples, a
+  720 px spin frame about 18 s at 24 (4 CPUs).
+- **Set aside:** round 28's clear tinted render and the fill and line traced from it. They stay in `brand/real/`
+  (`earf-real-colour*`, `earf-real-fill-*`, `earf-real-line-*`) and are still made (`globe_real.py --look clear --env
+  dim --key 2 --fill 0`, `--flat`, `--flat-spin`).
 
 ## Round 28: the globe made real, and the one-colour versions traced from it (the owner's notes of 2026-10-17)
 

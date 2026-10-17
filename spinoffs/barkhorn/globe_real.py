@@ -19,14 +19,37 @@ The ground is the brand's paper (or night) as a backdrop behind the globe, rende
 render sits on the page like the flat marks do; a dim studio (Poly Haven's, CC0) and a soft key above left show only
 in the acrylic's reflections.
 
+Round 28b. The owner: "We could do less transparent acrylic. The individual colors need to pop more. I feel like the old
+monochromatic logos were better, they just needed some reshaping." So the render's look is now translucent (--look
+translucent, the default): each disc cast in the mark's own hue (earth._C), light scattering --scatter metres into the
+sheet (the engine's cast_resin) and --clear of it, a quarter, crossing straight through, as in translucent cast acrylic.
+Each disc reads as its own colour at full strength and only hints at the discs behind it. Translucent acrylic shows its
+colour by the light that falls on it, so the studio is brighter (--env studio) and a broad fill beside the camera joins
+the key (--key 3, --fill 3). Round 28's clear tints are --look clear --env dim --key 2 --fill 0. The one-colour logos
+are earth.py's seamed discs again (their spin reshaped there); --flat still makes round 28's traced fill and line.
+
+Round 28d. The owner: "I want both paper and dark to be more transparent, like the same colors as the speakers with
+adjustments so they work on dark and light and aren't as transparent as the earlier version." The speakers' horns are
+clear resin tinted the line's colours (HORN), and those are the mark's hues near enough, so each disc keeps the mark's
+hue but lets more light straight through, 0.6 of it (--clear; 28b let a quarter through), and its face is tinted the
+hue's square root (--body through-deep, a little deeper than the root): light crossing a sheet's two faces is tinted
+twice, so a disc seen against the paper is the hue itself, the speakers' colour, where a face tinted the hue went dark
+and a pale cabinet tint went grey. On dark grounds, the study's n4 ("I liked n4 or n5 without glow for dark"): the rims
+glowing at 1 and the faces at 0.15, with no bloom (--dark). "For the spin, it flashes really bright in several spots at
+certain positions": each rim turning square to the camera mirrored the studio's softbox, and the fill beside the camera,
+whole, so the room is now a plain grey one (--env grey), on dark as on paper (there the studio at a quarter of its
+strength still whitened such a rim), and neither light shows in reflections but the key at 0.4 (--shine). And the
+equator's edge runs unbroken where it meets the meridians (_equator_owns).
+
     python3 spinoffs/barkhorn/globe_real.py --still OUT.png [--ground paper|night] [--px 1024] [--samples 128] [--spin DEG]
     python3 spinoffs/barkhorn/globe_real.py --spin-frames DIR [--frames 120] [--px 720] [--samples 24] [--first N --last M]
     python3 spinoffs/barkhorn/globe_real.py --encode DIR OUT          the frames as OUT.mp4 and OUT.webm
-    python3 spinoffs/barkhorn/globe_real.py --flat DIR [--flat-spin DIR]   the fill and the line, stills and spins
+    python3 spinoffs/barkhorn/globe_real.py --flat DIR [--flat-spin DIR]   round 28's fill and line, stills and spins
 
 The still is framed as the flat marks are (their SVGs' view box); the spin's frames as mark.py frames its spins (a quarter
-of the globe's width clear round it), half a turn in `frames` frames, so they loop. Times on 4 CPUs: a 1024 px still at
-128 samples about 12 minutes, a 720 px spin frame at 24 samples about 35 s.
+of the globe's width clear round it), half a turn in `frames` frames, so they loop. Times on 4 CPUs, round 28d's acrylic:
+a 1024 px still at 128 samples about 8 minutes, a 720 px spin frame at 24 samples 22 to 24 s (28b's translucent about 6
+minutes and 18 s; round 28's clear, twice those).
 """
 import argparse, math, os, sys, time
 
@@ -45,10 +68,31 @@ SEG = 360                                                # a disc's segments rou
 NAMES = ['flare', 'ice', 'acid', 'haze', 'poison', 'dust']           # earth.RING's order: N, equator, S, meridians 30, 90, 150
 ACRYLIC = {'flare': '#F2A29C', 'dust': '#F2B184', 'acid': '#F2D06B', 'poison': '#B2C9A2', 'ice': '#B5D9EE',
            'haze': '#BEADD8'}                            # the Cloud cabinets' tints after `DEPTH` (product.py's Clouds)
+HORN = {'flare': '#C8262B', 'dust': '#E0661C', 'acid': '#F2B705', 'poison': '#4C6A36', 'ice': '#3C86C2',
+        'haze': '#5E3F8F'}                               # round 28d: the Clouds' horns, the speakers' own colour (product.py)
 DEPTH, POLISH = 0.025, 0.05                              # their depth (m) and roughness, polished cast acrylic
 MARK_DEPTH = 0.02                                        # the globe's: a little deeper, so a face holds its colour on paper
 ORDER = [4, 3, 5, 1, 0, 2]                               # which disc is whole: the meridian facing us, then the others in turn
 GROUNDS = {'paper': E.PAPER, 'night': E.NIGHT}
+GLOW = dict(ground='night', env='dim', key=2.0, fill=1.5,
+            neon=(1.0, 0.15))                            # round 28c, the colour mark on dark grounds: fluorescent acrylic,
+                                                         # its rims their own colour at full and its faces at 0.15, a dim
+                                                         # room, a softer key and fill, and bloom()
+DARK = dict(ground='night', env='grey', key=2.0, fill=1.5,
+            neon=(1.0, 0.15))                            # round 28d, on dark: the study's n4 (rims at 1.0), no bloom, in
+                                                         # the plain grey room as on paper: the studio's softbox, even at
+                                                         # 0.25, whitened a rim turning square to the camera
+LIGHTS = dict(ground='paper', env='grey', key=3.0, fill=3.0, neon=(0.0, 0.0))   # with no preset: the colour mark on paper
+
+
+def lighting(a):
+    """A run's ground, room, key, fill and neon: each as given, else the preset's (--glow, --dark), else LIGHTS'. (Round
+    28d: the presets used to replace what was given, so a test of the dark room, --dark --env dark, rendered the studio.)"""
+    preset = GLOW if a.glow else DARK if a.dark else LIGHTS
+    for k in LIGHTS:
+        if getattr(a, k) is None:
+            setattr(a, k, preset[k])
+    return a
 
 
 def local_discs():
@@ -160,21 +204,45 @@ def glow(hx, keep=0.97, passed=''):
     return '#%02X%02X%02X' % tuple(int(round(255 * min(1.0, x))) for x in s)
 
 
-def build(bpy, tints=None, fuse=True, depth=MARK_DEPTH):
+def _emit(m, hx, strength):
+    """A material given off light: its Principled BSDF's emission, `hx` at `strength` for its brightest channel (so a
+    rim at 1 is its own colour at full, not clipped toward white: the first proofs at 3 turned orange and yellow alike
+    yellow, and blue cyan)."""
+    b = next(n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
+    c = _hex_lin(hx)
+    b.inputs['Emission Color'].default_value = (*c, 1.0)
+    b.inputs['Emission Strength'].default_value = strength / max(c)
+    return m
+
+
+def build(bpy, tints=None, fuse=True, depth=MARK_DEPTH, look='clear', scatter=0.008, clear=0.2, neon=(0.0, 0.0),
+          crossings='equator', milk=0.0, body=None):
     """The six discs, cemented clear (one solid where they cross; `fuse` False: slotted), parented to one empty at the
-    origin whose matrix turns the globe. `tints`: hex per disc, glow()'s of the cabinets' by default."""
+    origin whose matrix turns the globe. `look` 'clear': clear tinted acrylic, `tints` hex per disc (glow()'s of the
+    cabinets' by default). 'translucent': the mark's own hues as translucent cast acrylic, light scattering
+    `scatter` metres into it (the engine's cast_resin), `clear` of it crossing straight through. `neon` (round 28c, for
+    dark grounds; cemented only): fluorescent acrylic, which gathers light through its faces and gives it out at its
+    cut edges, so each disc's rim glows its colour at the first strength and its faces at the second. `crossings`
+    (cemented): 'equator' (round 28d), where the equator's edge meets a meridian the crossing is the equator's
+    (_equator_owns); 'fused', round 28's, both acrylics where they meet. `milk` (clear): a share of the light scattered
+    in the sheet, in its own tint, so a face has some body. `body` (translucent, round 28d): each disc's (surface,
+    scatter) colours by name; the mark's hue for both by default."""
     import bmesh
     from mathutils import Matrix, Vector
     import materials as Mt
     tints = tints or {k: glow(v, passed=PASS.get(k, '')) for k, v in ACRYLIC.items()}
     root = bpy.data.objects.new('globe', None)
     bpy.context.scene.collection.objects.link(root)
+    lit = fuse and max(neon) > 0
 
     def slab(name, c, n, r, grow=0.0, thick=T):
         me = bpy.data.meshes.new(name)
         bm = bmesh.new()
         bmesh.ops.create_cone(bm, cap_ends=True, cap_tris=False, segments=SEG, radius1=r * R + grow, radius2=r * R + grow,
                               depth=thick)
+        if lit:                                          # the rim (the cone's sides, quads) its own material
+            for f in bm.faces:
+                f.material_index = 1 if len(f.verts) == 4 else 0
         m = Matrix.Translation(Vector(c * R)) @ Vector((0, 0, 1)).rotation_difference(Vector(n)).to_matrix().to_4x4()
         bm.transform(m)
         bm.to_mesh(me); bm.free()
@@ -183,12 +251,28 @@ def build(bpy, tints=None, fuse=True, depth=MARK_DEPTH):
         return ob
 
     discs = local_discs()
-    mats = {i: Mt.make(bpy, f'acrylic-{NAMES[i]}', 'clear_resin',
-                       {'color': '#FFFFFF', 'deep': tints[NAMES[i]], 'radius': depth, 'roughness': POLISH}) for i in ORDER}
+    if look == 'translucent':
+        def acrylic(name, i, see=None):
+            face, deep = (body or {}).get(NAMES[i], (E._C[NAMES[i].title()],) * 2)
+            return Mt.make(bpy, name, 'cast_resin', {'color': face, 'deep': deep,
+                                                     'radius': scatter, 'roughness': POLISH, 'cloud': 0.0, 'fibre': 0.0,
+                                                     'clear': clear if see is None else see})
+    else:
+        def acrylic(name, i, see=None):
+            return Mt.make(bpy, name, 'clear_resin', {'color': tints[NAMES[i]] if milk else '#FFFFFF', 'deep': tints[NAMES[i]],
+                                                      'radius': depth, 'roughness': POLISH, 'milk': milk})
+    mats = {i: acrylic(f'acrylic-{NAMES[i]}', i) for i in ORDER}
+    if lit:
+        for i in ORDER:
+            _emit(mats[i], E._C[NAMES[i].title()], neon[1])
+        rims = {i: _emit(acrylic(f'rim-{NAMES[i]}', i, see=min(clear, 0.25)), E._C[NAMES[i].title()], neon[0])
+                for i in ORDER}                          # (round 28d: each rim as dense as 28b's, as in the n4 picked)
     if fuse:                                             # one solid, each face keeping its own disc's acrylic
         parts = {i: slab(f'disc-{NAMES[i]}', *discs[i]) for i in ORDER}
         for i, ob in parts.items():
             ob.data.materials.append(mats[i])
+            if lit:
+                ob.data.materials.append(rims[i])
         base = parts[ORDER[0]]
         for i in ORDER[1:]:
             mod = base.modifiers.new(f'fuse-{NAMES[i]}', 'BOOLEAN')
@@ -216,15 +300,51 @@ def build(bpy, tints=None, fuse=True, depth=MARK_DEPTH):
         me.set_sharp_from_angle(angle=math.radians(25))
         if i is not None:
             me.materials.clear(); me.materials.append(mats[i])
+        elif crossings == 'equator':
+            _equator_owns(me)
         ob.parent = root
     for c in cutters:
         bpy.data.objects.remove(c, do_unlink=True)
     return root
 
 
-def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01):
+def _root_hex(hx, k=0.5):
+    """A colour whose square, light crossing a sheet's two faces each tinted by it, is `hx` (in linear light); with `k`
+    above a half, deeper."""
+    v = np.clip(_hex_lin(hx), 0.0, 1.0) ** k
+    s = np.where(v <= 0.0031308, 12.92 * v, 1.055 * v ** (1 / 2.4) - 0.055)
+    return '#%02X%02X%02X' % tuple(int(round(255 * min(1.0, x))) for x in s)
+
+
+BODIES = {'mark': None,
+          'cabinet': {k: (ACRYLIC[k], HORN[k]) for k in NAMES},
+          'horn': {k: (HORN[k], HORN[k]) for k in NAMES},
+          'through': {k: (_root_hex(E._C[k.title()]), E._C[k.title()]) for k in NAMES},
+          'through-deep': {k: (_root_hex(E._C[k.title()], 0.65), E._C[k.title()]) for k in NAMES}}
+
+
+def _equator_owns(me):
+    """Round 28d. The owner, of the render: "Where the edge of the blue disc meets the meridians, can we get rid of those
+    double color triangle shapes and just make the whole outside of the intersection edges blue?" Cemented, the two rims
+    crossed there as two triangles of each colour: across the cell where they meet, 20 mm square, each rim lies outside
+    the other in two opposite corners, by a tenth of a millimetre at most. So the meridians' faces in that cell, in the
+    equator's sheet at its edge, take the equator's acrylic (and its rim's, lit), and its edge runs on unbroken. (At the
+    40° parallels a meridian stands up to 8 mm past the parallel's edge on one side, its own shape, so those stay.)"""
+    slot = {m.name: k for k, m in enumerate(me.materials)}
+    swap = {slot[f'{kind}-{NAMES[i]}']: slot[f'{kind}-ice'] for kind in ('acrylic', 'rim') for i in (3, 4, 5)
+            if f'{kind}-ice' in slot}
+    for f in me.polygons:
+        p = f.center                                     # (the globe's own frame: the equator its plane z = 0)
+        if f.material_index in swap and abs(p.z) < T / 2 + 1e-5 and math.hypot(p.x, p.y) > R - 0.001:
+            f.material_index = swap[f.material_index]
+
+
+def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01, key=2.0, fill=0.0, shine=(1.0, 1.0), bounces=96):
     """The camera (earth.py's view, orthographic, the frame 2e radii across), the ground as a backdrop of exactly its
-    colour, and the studio seen in the acrylic: a soft key above left, the room round it."""
+    colour, and the studio seen in the acrylic: a soft key above left, the room round it. `shine` (round 28d): the key's
+    and the fill's shares in reflections (lights.lamp_shares). The fill, a broad softbox just beside the camera, was
+    mirrored whole by every rim and face that turned toward the camera, and in the spin those flashed white (the owner:
+    "it flashes really bright in several spots at certain positions and looks odd")."""
     from mathutils import Vector
     import lights as Lt
     scene = bpy.context.scene
@@ -246,8 +366,13 @@ def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01):
                    'dim': {'kind': 'hdri', 'file': 'studio_small_03_1k', 'strength': 0.25},
                    'grey': {'kind': 'gradient', 'zenith': '#6E6C68', 'horizon': '#8A8884', 'ground': '#3A3835', 'strength': 1.0},
                    'dark': {'kind': 'gradient', 'zenith': '#2A2927', 'horizon': '#33322F', 'ground': '#1E1D1B', 'strength': 1.0}}[env])
-    Lt.area(bpy, 'key', {'type': 'area', 'size_m': [3.2, 2.4], 'target': [0, 0, 0], 'irradiance': 2.0, 'color': '#FFF4E6',
-                         'orbit': {'azimuth_deg': -40, 'elevation_deg': 40, 'distance_m': 6.0}}, Vector((0, 0, 0)))
+    Lt.area(bpy, 'key', {'type': 'area', 'size_m': [3.2, 2.4], 'target': [0, 0, 0], 'irradiance': key, 'color': '#FFF4E6',
+                         'orbit': {'azimuth_deg': -40, 'elevation_deg': 40, 'distance_m': 6.0}, 'specular': shine[0]},
+            Vector((0, 0, 0)))
+    if fill:                                             # a broad softbox beside the camera: translucent acrylic shows its
+        Lt.area(bpy, 'fill', {'type': 'area', 'size_m': [5.0, 5.0], 'target': [0, 0, 0], 'irradiance': fill,   # colour by front light
+                              'color': '#FFF8F0', 'orbit': {'azimuth_deg': 15, 'elevation_deg': 8, 'distance_m': 7.0},
+                              'specular': shine[1]}, Vector((0, 0, 0)))
     r = scene.render
     r.engine = 'CYCLES'; r.resolution_x = r.resolution_y = px; r.resolution_percentage = 100; r.film_transparent = False
     cy = scene.cycles
@@ -255,7 +380,7 @@ def stage(bpy, ground, px, e, samples, env='dim', adaptive=0.01):
     cy.use_denoising = True; cy.denoiser = 'OPENIMAGEDENOISE'; cy.denoising_input_passes = 'RGB_ALBEDO_NORMAL'
     # light trapped in a sheet runs along it by total internal reflection, each reflection a glossy bounce: cut short,
     # an edge seen along its disc goes black (the first proofs, at 8)
-    cy.max_bounces = 96; cy.transmission_bounces = 96; cy.glossy_bounces = 96; cy.diffuse_bounces = 2
+    cy.max_bounces = cy.transmission_bounces = cy.glossy_bounces = bounces; cy.diffuse_bounces = 2
     cy.transparent_max_bounces = 32; cy.volume_bounces = 2
     cy.caustics_reflective = False; cy.caustics_refractive = False; cy.sample_clamp_indirect = 10.0; cy.blur_glossy = 0.5
     vs = scene.view_settings; vs.view_transform = 'Standard'; vs.look = 'None'; vs.exposure = 0.0; vs.gamma = 1.0
@@ -273,6 +398,74 @@ def encode(frames, out):
     subprocess.run(src + ['-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '30', '-row-mt', '1', '-pix_fmt', 'yuv420p',
                           '-fflags', '+bitexact', '-flags:v', '+bitexact', out + '.webm'], check=True)
     return [out + '.mp4', out + '.webm']
+
+
+def bloom(path, radius=0.012, strength=0.8, threshold=0.35):
+    """A glow round what is bright, as a lens and an eye spread a bright light (round 28c, for the neon on dark): the
+    light above `threshold` (linear, by its brightest channel) blurred `radius` of the picture's width and added back at
+    `strength`. A PNG in place, or every frame f*.png of a directory."""
+    import glob
+    from PIL import Image
+    from scipy.ndimage import gaussian_filter
+    files = sorted(glob.glob(os.path.join(path, 'f*.png'))) if os.path.isdir(path) else [path]
+    for f in files:
+        v = np.asarray(Image.open(f).convert('RGB'), float) / 255
+        lin = np.where(v <= 0.04045, v / 12.92, ((v + 0.055) / 1.055) ** 2.4)
+        hot = lin * np.clip(lin.max(axis=2, keepdims=True) - threshold, 0, None) / (1 - threshold)
+        s = radius * v.shape[1]
+        out = np.clip(lin + strength * np.stack([gaussian_filter(hot[..., c], s) for c in range(3)], axis=2), 0, 1)
+        out = np.where(out <= 0.0031308, 12.92 * out, 1.055 * out ** (1 / 2.4) - 0.055)
+        Image.fromarray((out * 255 + 0.5).astype(np.uint8)).save(f)
+    return files
+
+
+def _even_ground(path, ground, tol=2):
+    """A render with its ground made exactly the ground's colour (the denoiser leaves it a level or two off): the
+    pixels within `tol` of it that reach the picture's edge, so the file sits on a page of that colour without a seam."""
+    from PIL import Image
+    from scipy.ndimage import label
+    v = np.asarray(Image.open(path).convert('RGB')).astype(int)
+    g = np.array([int(ground[i:i + 2], 16) for i in (1, 3, 5)])
+    lab, _ = label(np.abs(v - g).max(axis=2) <= tol)
+    edge = np.unique(np.r_[lab[0], lab[-1], lab[:, 0], lab[:, -1]])
+    v[np.isin(lab, edge[edge > 0])] = g
+    return Image.fromarray(v.astype(np.uint8))
+
+
+def mark_files(paper, night, spin=None, w=2048, out=os.path.join(HERE, 'brand', 'mark')):
+    """The render as the colour mark (round 28c; the owner, asked whether it should be: "Yes"), into brand/mark: the
+    still on paper and on night (`paper`, `night`; round 28d's --dark), each on its ground made even, as earf-globe-render.png and
+    -render-night.png; the lockups, earf-lockup-render.png and -render-night.png, `w` px wide, laid out as
+    earth.lockup_svg lays them (the globe a 450 square, EARF 110 past it, in ink or white) with a quarter of the globe
+    clear round them; and `spin`'s MP4 and WebM (the paper spin, a path without its extension) as -render-spin."""
+    import shutil, subprocess, tempfile
+    from PIL import Image
+    import marks as M
+    vw, vh, gap, m = 450 + 110 + M.WORDMARK_W, 450, 110, 450 / 4
+    files = []
+    for src, tag, ground, word in ((paper, '', E.PAPER, E.INK), (night, '-night', E.NIGHT, E.WHITE)):
+        globe = _even_ground(src, ground)
+        f = os.path.join(out, f'earf-globe-render{tag}.png')
+        globe.save(f)
+        svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{-m} {-m} {vw + 2 * m} {vh + 2 * m}">'
+               f'<rect x="{-m}" y="{-m}" width="{vw + 2 * m}" height="{vh + 2 * m}" fill="{ground}"/>'
+               f'<g transform="translate({450 + gap} 75)" fill="{word}">'
+               + ''.join(f'<path d="{d}"/>' for d in E.letters()) + '</g></svg>')
+        with tempfile.TemporaryDirectory() as tmp:
+            open(os.path.join(tmp, 'l.svg'), 'w').write(svg)
+            subprocess.run(['rsvg-convert', '-w', str(w), os.path.join(tmp, 'l.svg'), '-o', os.path.join(tmp, 'l.png')],
+                           check=True)
+            lock = Image.open(os.path.join(tmp, 'l.png')).convert('RGB')
+        s = w / (vw + 2 * m)
+        lock.paste(globe.resize((round(450 * s), round(450 * s)), Image.LANCZOS), (round(m * s), round(m * s)))
+        lf = os.path.join(out, f'earf-lockup-render{tag}.png')
+        lock.save(lf)
+        files += [f, lf]
+    if spin:
+        for ext in ('.mp4', '.webm'):
+            shutil.copyfile(spin + ext, os.path.join(out, 'earf-globe-render-spin' + ext))
+            files.append(os.path.join(out, 'earf-globe-render-spin' + ext))
+    return files
 
 
 FLATS = [('line', E.INK, E.PAPER, 'black'), ('fill', E.INK, E.PAPER, 'black'), ('line', E.WHITE, E.NIGHT, 'white'),
@@ -333,13 +526,42 @@ def main():
     ap.add_argument('--spin-frames', help='the half turn, framed as the spins are, as f0000.png ... in this directory')
     ap.add_argument('--spin', type=float, default=0.0, help='with --still, the globe turned this far on its axis')
     ap.add_argument('--frames', type=int, default=120)
-    ap.add_argument('--ground', default='paper', choices=sorted(GROUNDS))
+    ap.add_argument('--ground', choices=sorted(GROUNDS), help="paper, or the preset's")
     ap.add_argument('--px', type=int)
     ap.add_argument('--samples', type=int)
-    ap.add_argument('--env', default='dim', choices=['studio', 'dim', 'grey', 'dark'])
-    ap.add_argument('--tint', default='glow', choices=['cabinet', 'glow'], help="glow()'s tints, or the cabinets' own")
+    ap.add_argument('--env', choices=['studio', 'dim', 'grey', 'dark'],
+                    help="the room seen in the acrylic: round 28d's plain grey, on paper and on dark, as the studio's softbox "
+                         "flashed in each rim turning toward the camera (round 28b: studio)")
+    ap.add_argument('--tint', default='glow', choices=['cabinet', 'glow', 'horn', 'horn-glow'],
+                    help="glow()'s tints of the cabinets', the cabinets' own, or the horns' (round 28d), raw or through glow()")
     ap.add_argument('--slots', action='store_true', help='the discs slotted through one another, not cemented clear')
     ap.add_argument('--depth', type=float, default=MARK_DEPTH, help='the path (m) after which the acrylic is its tint')
+    ap.add_argument('--look', default='translucent', choices=['clear', 'translucent'],
+                    help="translucent in the mark's hues (round 28b), or clear tinted (round 28: with --env dim --key 2 --fill 0)")
+    ap.add_argument('--scatter', type=float, default=0.012, help='translucent: how far (m) light scatters into the acrylic')
+    ap.add_argument('--clear', type=float, default=0.6,
+                    help='translucent: the share of light crossing straight through (round 28b: 0.25)')
+    ap.add_argument('--key', type=float, help="the key's irradiance (W/m2 at the globe; 3, or the preset's)")
+    ap.add_argument('--fill', type=float, help="a front fill's irradiance (0: none; 3, or the preset's)")
+    ap.add_argument('--milk', type=float, default=0.0, help='clear: a share of the light scattered in the sheet (round 28d)')
+    ap.add_argument('--body', default='through-deep', choices=['mark', 'cabinet', 'horn', 'through', 'through-deep'],
+                    help="translucent: the surface and the scatter both the mark's hue (round 28b); the surface the cabinets' tint and "
+                         "the scatter the horns' colour (cabinet); both the horns' (horn); or the surface the mark's hue's square "
+                         "root, so a disc seen through over the paper is the mark's hue (through)")
+    ap.add_argument('--crossings', default='equator', choices=['equator', 'fused'],
+                    help="the equator's edge unbroken where it meets the meridians (round 28d), or both acrylics there (round 28)")
+    ap.add_argument('--shine', type=float, nargs=2, default=(0.4, 0.0), metavar=('KEY', 'FILL'),
+                    help="the key's and the fill's shares in reflections (round 28d; until then 1 1)")
+    ap.add_argument('--bounces', type=int, default=96, help='how far light runs along a sheet inside it (glossy and transmission bounces)')
+    ap.add_argument('--neon', type=float, nargs=2, metavar=('RIM', 'FACE'),
+                    help="fluorescent acrylic for dark grounds (round 28c): the rims and the faces give off light at these "
+                         "strengths (none, or the preset's)")
+    ap.add_argument('--bloom', help='a glow round what is bright, on this PNG or every frame of this directory, in place')
+    ap.add_argument('--glow', action='store_true',
+                    help='the colour mark for dark grounds (round 28c): GLOW where not given, and bloom() on each frame')
+    ap.add_argument('--dark', action='store_true', help='the colour mark for dark grounds (round 28d): DARK where not given, no bloom')
+    ap.add_argument('--mark', nargs=3, metavar=('PAPER', 'NIGHT', 'SPIN'),
+                    help='the render as the colour mark, into brand/mark: the stills, the lockups and the paper spin (no extension)')
     ap.add_argument('--first', type=int, default=0, help='with --spin-frames, start at this frame (a resumed run)')
     ap.add_argument('--last', type=int, help='with --spin-frames, stop before this frame')
     ap.add_argument('--adaptive', type=float, help='the noise Cycles stops sampling at (0.01 a still, 0.02 the spin)')
@@ -356,29 +578,43 @@ def main():
     if a.flat_spin:
         for f in flat_spins(a.flat_spin):
             print(f)
+    if a.bloom:
+        print(f'{len(bloom(a.bloom))} bloomed')
+    if a.mark:
+        for f in mark_files(*a.mark):
+            print(f)
     if not (a.still or a.spin_frames):
         return
+    lighting(a)
     import bpy
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.preferences.addon_enable(module='cycles')
     t0 = time.time()
-    root = build(bpy, ACRYLIC if a.tint == 'cabinet' else {k: glow(v, passed=PASS.get(k, '')) for k, v in ACRYLIC.items()},
-                 not a.slots, a.depth)
+    base = HORN if a.tint.startswith('horn') else ACRYLIC
+    root = build(bpy, base if a.tint in ('cabinet', 'horn') else {k: glow(v, passed=PASS.get(k, '')) for k, v in base.items()},
+                 not a.slots, a.depth, a.look, a.scatter, a.clear, tuple(a.neon), a.crossings, a.milk,
+                 BODIES[a.body])
     if a.still:
-        stage(bpy, a.ground, a.px or 1024, 1 + E.W_LINE / 2, a.samples or 128, a.env, a.adaptive or 0.01)
+        stage(bpy, a.ground, a.px or 1024, 1 + E.W_LINE / 2, a.samples or 128, a.env, a.adaptive or 0.01, a.key, a.fill,
+              tuple(a.shine), a.bounces)
         turn(root, a.spin)
         bpy.context.scene.render.filepath = os.path.abspath(a.still)
         bpy.ops.render.render(write_still=True)
+        if a.glow:
+            bloom(a.still)
         print(f'{a.still}  {time.time() - t0:.0f} s')
     if a.spin_frames:
         os.makedirs(a.spin_frames, exist_ok=True)
         import mark as K
-        stage(bpy, a.ground, a.px or K.SPIN['px'], 1 + 2 * K.SPIN['clear'], a.samples or 24, a.env, a.adaptive or 0.02)
+        stage(bpy, a.ground, a.px or K.SPIN['px'], 1 + 2 * K.SPIN['clear'], a.samples or 24, a.env, a.adaptive or 0.02,
+              a.key, a.fill, tuple(a.shine), a.bounces)
         for k in range(a.first, a.last or a.frames):
             t1 = time.time()
             turn(root, K.SPIN['turn'] * k / a.frames)
             bpy.context.scene.render.filepath = os.path.join(os.path.abspath(a.spin_frames), f'f{k:04d}.png')
             bpy.ops.render.render(write_still=True)
+            if a.glow:
+                bloom(bpy.context.scene.render.filepath)
             print(f'frame {k}  {time.time() - t1:.0f} s', flush=True)
 
 

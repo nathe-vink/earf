@@ -384,6 +384,31 @@ def facets(spin=0.0, thick=0.0):
     return out
 
 
+def _ring():
+    """The outer ring (round 28c): the rim of the green disc facing us at rest, the meridian at 90, as a polygon. Its
+    disc is tipped with the globe, so the ring falls 4% short of the sphere at the poles, and every disc whose rim
+    reaches the sphere there passes it: the parallels by a sliver (the south one at the lower left, its stroke standing
+    out past the ring: the owner, "Why is the bottom equator disc stroke sticking out further here, while the other discs
+    fit cleanly into the outer circular stroke?"), the side meridians by their caps either side of the south pole."""
+    return Polygon(rings(0.0)[4]['pts'][:, :2]).buffer(0)
+
+
+def _cut(fs):
+    """The parallels' facets cut to the outer ring (round 28c), so their slivers past it go and the outline there is the
+    ring's; the meridians whole, their caps either side of the butt kept. (Round 28c first cut every piece to the ring;
+    the owner: "Never mind on stroking out the butt. It doesn't look as three dimensional when the bottom is cut off.")
+    Each first its polygons alone (an overlay can leave lines beside them), and cut at full precision: snapped to the
+    grid one by one, two facets' shared edge no longer matched, and the line version drew it twice (a line a hair
+    heavier for a frame). The parallels never move in the spin, so their cut is the same in every frame."""
+    ring = _ring()
+    out = []
+    for i, f in enumerate(fs):
+        polys = [p for p in getattr(f, 'geoms', [f]) if p.geom_type in ('Polygon', 'MultiPolygon') and not p.is_empty]
+        g = unary_union(polys) if polys else Polygon()
+        out.append(g.intersection(ring) if i < 3 and polys else g)
+    return out
+
+
 def _parts(fs):
     """The facets' pieces, each a polygon."""
     return [p for f in fs for p in getattr(f, 'geoms', [f]) if p.geom_type == 'Polygon' and p.area > 1e-7]
@@ -421,20 +446,31 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=KEEP, cut=None,
     the pieces the full drawing keeps, at its own seam, drawn with the seam `cut`, so every piece of it is still there
     (round 27's cuts dropped what their wider seams would not hold, which bit holes in the outline), save one the cut's
     own seam leaves under a seam across, which would draw as a grey speck (round 27l: the green disc's rim either side of
-    the butt, under a pixel wide at 64 px)."""
-    fs = facets(spin, thick + (0 if flush else seam))
+    the butt, under a pixel wide at 64 px). Round 28c: in the spin (keep 0) the discs have no thickness, so a disc
+    turning side on narrows away between its two seams and, side on, is one white stroke across the front of the
+    globe, as wide as every other seam (27k's slab left a strip of ink between two seams, which read as a crack, and
+    round 28b grew it into its seams, a bar between hairlines; the owner: "It should just be the white stroke on the
+    side-on meridian, no? ... at 153 and 27 degrees the white stroke gets smaller and disappears when that's when it
+    should be front and center", and then: "This meridian should be a white stroke just like the rest of the white
+    strokes"); at rest that changes nothing. And in one colour, at rest and in the spin, the parallels are cut to the
+    outer ring (_cut), so their slivers past it go; the meridians' caps stay."""
+    fs = facets(spin, thick + (0 if flush else seam) if flush or keep else 0.0)   # (round 28c: no slab in the spin)
+    if not flush:                                        # (round 28c: the parallels cut to the outer ring)
+        fs = _cut(fs)
     sil = unary_union([f for f in fs if not f.is_empty])
     if not flush and cut:                                # round 27k: a small cut, the full drawing's pieces, seamed wider
-        g = unary_union([p.buffer(-cut / 2, join_style=2, mitre_limit=4) for p in _kept(fs, seam, keep)
-                         if _holds(p, cut, keep)])
+        g0 = unary_union([p.buffer(-cut / 2, join_style=2, mitre_limit=4) for p in _kept(fs, seam, keep)
+                          if _holds(p, cut, keep)])
         k = 0.3 * seam
-        g = g.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
+        g = g0.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4).intersection(g0)
         s_ = (sil.bounds[2] - sil.bounds[0]) / (g.bounds[2] - g.bounds[0])
         return [affinity.scale(g, s_, s_, origin=(0, 0)).simplify(0.001)] + [None] * (len(fs) - 1)
     if not flush:
         g0 = unary_union([f.buffer(-seam / 2, join_style=2, mitre_limit=4) for f in fs if not f.is_empty])
-        k = 0.3 * seam                                   # (hairlines left where two buffers meet, closed)
-        g = g0.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
+        k = 0.3 * seam                                   # (hairlines left where two buffers meet, closed; round 28c: and
+        g = g0.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4).intersection(g0)
+        # kept inside the pieces, as the mitred corners overshot them by up to 0.013 of the radius in the spin, into a
+        # seam or past the ring)
         if keep:
             g = unary_union([q for q in getattr(g, 'geoms', [g]) if not q.buffer(-keep / 2 * seam).is_empty])
             s_ = (sil.bounds[2] - sil.bounds[0]) / (g.bounds[2] - g.bounds[0])
@@ -465,15 +501,19 @@ STROKE = dict(w=0.05, wc=0.065, small={64: 0.07})
 
 def edge_lines(spin=0.0, seam=SEAM, keep=KEEP):
     """The discs' visible edges as lines (round 27i): each piece disc_shapes keeps (one colour, seamed), outlined, the
-    edges two pieces share drawn once."""
-    lines = union_all([q.boundary for q in _kept(facets(spin, THICK + seam), seam, keep)], grid_size=GRID)
+    edges two pieces share drawn once. Round 28c, in the spin (keep 0): every piece, each disc its face alone (no slab),
+    so a disc side on is one line, as heavy as every other (the owner, of round 28's line spin: "I don't like when the
+    lines in the line version of the spinning globe changes weights needlessly"); and the parallels cut to the outer
+    ring, as the fill's are."""
+    fs = _cut(facets(spin, THICK + seam if keep else 0.0))   # (round 28c: the parallels cut to the ring, as the fill)
+    lines = union_all([q.boundary for q in (_kept(fs, seam, keep) if keep else _parts(fs))], grid_size=GRID)
     return linemerge(lines) if lines.geom_type == 'MultiLineString' else lines
 
 
-def strokes_body(colour, spin=0.0, w=STROKE['w']):
+def strokes_body(colour, spin=0.0, w=STROKE['w'], keep=KEEP):
     """One colour's stroke version (round 27i): edge_lines as one stroked path."""
     k = 1 / (1 + w / 2)
-    lines = affinity.scale(edge_lines(spin), k, k, origin=(0, 0))
+    lines = affinity.scale(edge_lines(spin, keep=keep), k, k, origin=(0, 0))
     d = ' '.join(_d(np.array(q.coords)) for q in getattr(lines, 'geoms', [lines]) if q.length > 0)
     return (f'<path d="{d}" fill="none" stroke="{colour}" stroke-width="{w * k:.4f}" stroke-linejoin="round" '
             f'stroke-linecap="round"/>')
