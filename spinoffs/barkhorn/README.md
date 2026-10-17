@@ -123,9 +123,8 @@ The files, in `brand/mark/`:
   - the globe page's file in this repository (`brand/earth.html`);
   - round 11's outlined set in `marks/`;
   - the site draft's logo (version 13);
-  - the mark's page (version 17), with a new section for the name alone, in acrylic and in one colour.
-- **Not yet redrawn:** the look book's cover and last page, and the published globe page. They wait for the owner's
-  go-ahead.
+  - the mark's page (version 17), with a new section for the name alone, in acrylic and in one colour;
+  - the look book's cover and last page (version 47) and the globe page (version 27), after the owner's "Update both".
 - **The parked idents.** The current set, 37 MP4s (`earth.py --video --only ident`), is rendered again. Round 22's and
   23's older MP4s, and the pages of rounds 20 and 21 (`ident.py`, `globes.py`), are left as they were; their code draws
   the ring if they are run again.
