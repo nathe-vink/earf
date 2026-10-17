@@ -103,7 +103,7 @@ def write():
         files.append((f, ['-w', '2048']))
     os.makedirs(os.path.join(OUT, 'small'), exist_ok=True)
     for tag, ink, g in INKS:
-        for px in sorted(E.SMALL_SEAM, reverse=True):
+        for px in sorted({*E.SMALL_SEAM, *E.SMALL_CUT}, reverse=True):
             f = os.path.join(OUT, 'small', f'earf-globe-{tag}-{px}.svg')
             open(f, 'w').write(E.mark_svg('discs', ink, label=f'EARF globe, {tag}, up to {px} px', ground=g, px=px))
             files.append((f, ['-w', str(px), '-h', str(px)]))
@@ -303,6 +303,56 @@ def angles(path):
 
 
 
+# Round 27j's study. The owner: "what can we do to get rid of the little butt at the bottom of the stroke version,
+# without compromising on the true shape of the object?" The butt is the south pole, on the outline: the side meridians'
+# caps stand either side of it, the axis between them. The line between the caps is now left out (earth._lobes), the
+# outline kept; what is left of the butt is the notch at the pole, the discs' own, and only less tip makes it smaller.
+POLE_TIPS = (16, 14, 12, 10)
+
+
+def _pole():
+    """How deep the south pole sits inside the outline's hull, and how far the caps either side of it reach past the
+    meridian facing us, of the radius."""
+    fs = E.facets(0.0)
+    sil = unary_union([f for f in fs if not f.is_empty])
+    a = E.basis()[0]
+    pole = Point(-a[0], -a[1])
+    green = Polygon(E.rings(0.0)[4]['pts'][:, :2]).buffer(0)
+    out = sil.difference(green)
+    caps = [g for g in getattr(out, 'geoms', [out]) if g.distance(pole) < 1e-3]
+    return (sil.convex_hull.exterior.distance(pole),
+            max((green.exterior.distance(Point(c)) for g in caps for c in np.asarray(g.exterior.coords)), default=0.0))
+
+
+def pole(path):
+    """Round 27j's study: the stroke version at the tips POLE_TIPS (the first the owner's), whole and its south pole
+    close up, the line between the caps left out at each; under each, the notch and the caps' reach."""
+    font, small = ImageFont.truetype('DejaVuSans.ttf', 15), ImageFont.truetype('DejaVuSans.ttf', 12)
+    px, cw, big = 320, 340, 1200
+    e = 1 + E.W_LINE / 2
+    sheet = Image.new('RGB', (20 + len(POLE_TIPS) * cw, px + 160 + 110), '#DEDCD7')
+    d = ImageDraw.Draw(sheet)
+    for i, t in enumerate(POLE_TIPS):
+        E.WOBBLE[:] = [t - E.ELEV, np.pi / 2]             # another tip: the globe turned about e2, as in angles()
+        try:
+            im = _png(E.mark_svg('strokes', E.INK), big, E.PAPER)
+            notch, reach = _pole()
+            a = E.basis()[0]
+        finally:
+            E.WOBBLE[:] = [0.0, 0.0]
+        cx, cy = ((-a[0] + e) / (2 * e) * big, (a[1] + e) / (2 * e) * big)          # the pole, in the picture
+        u = big / (2 * e)                                 # the radius, in the picture
+        crop = im.crop((round(cx - 0.55 * u), round(cy - 0.42 * u),
+                        round(cx + 0.55 * u), min(big, round(cy + 0.1 * u))))
+        x = 20 + i * cw
+        d.text((x, 12), f'tip {t}°' + (' (now)' if t == E.ELEV else ''), fill='#1C1A18', font=font)
+        sheet.paste(im.resize((px, px), Image.LANCZOS), (x, 36))
+        sheet.paste(crop.resize((px, round(px * crop.height / crop.width)), Image.LANCZOS), (x, px + 46))
+        d.text((x, px + 216), f'notch {notch:.3f} of the radius deep', fill='#57534C', font=small)
+        d.text((x, px + 234), f'caps reach {reach:.3f} past the front disc', fill='#57534C', font=small)
+    sheet.save(path)
+
+
 # Round 27g's study. The owner: "What would it look like if the lateral discs intersected like the longitudinal discs
 # do? Did you try a version where the three stacked discs are instead the same layout as the three equal sized
 # intersecting discs?" (Not before: round 21's orbits were eight meridians, round 23's gyroscope two rings on two axes.)
@@ -370,6 +420,7 @@ if __name__ == '__main__':
     ap.add_argument('--spin-sheet', help='also a sheet of the spins, a frame every 0.4 s, to this path')
     ap.add_argument('--lateral', help="also round 27g's study of the lateral discs as a second set, to this path")
     ap.add_argument('--lateral-turned', help="also round 27h's: the same crossing inside the outline, to this path")
+    ap.add_argument('--pole', help="also round 27j's study of the south pole at less tip, to this path")
     a = ap.parse_args()
     fs = write()
     print(f'{len(fs)} SVGs and PNGs in', os.path.relpath(OUT, HERE))
@@ -397,3 +448,6 @@ if __name__ == '__main__':
     if a.lateral_turned:
         lateral(a.lateral_turned, LATERALS_TURNED)
         print(a.lateral_turned)
+    if a.pole:
+        pole(a.pole)
+        print(a.pole)

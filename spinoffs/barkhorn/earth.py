@@ -52,7 +52,7 @@ import argparse, json, math, os, re, shutil, subprocess, sys, tempfile
 import numpy as np
 from shapely.geometry import LineString, MultiLineString, Point, Polygon
 from shapely.ops import linemerge, polygonize, unary_union
-from shapely import affinity, make_valid, set_precision, union_all
+from shapely import affinity, make_valid, maximum_inscribed_circle, set_precision, union_all
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -308,10 +308,11 @@ def tubes_body(colours, ground='paper', spin=0.0, w=W_TUBE, T=None):
             f'{"".join(tints)}{"".join(lights)}</g>')
 
 
-def facets(spin=0.0):
+def facets(spin=0.0, rs=None):
     """Each disc's visible part: its own oval less every other disc's oval where that disc is nearer (two planes'
-    depths differ linearly across the screen, so where one is nearer is a half-plane)."""
-    rs = rings(spin)
+    depths differ linearly across the screen, so where one is nearer is a half-plane). `rs`: these rings instead (round
+    27j's small cuts: some of the discs, as if the others were not there)."""
+    rs = rings(spin) if rs is None else rs
     E = [Polygon(g['pts'][:, :2]).buffer(0) for g in rs]
     out = []
     for i, gi in enumerate(rs):
@@ -339,6 +340,118 @@ def facets(spin=0.0):
     return out
 
 
+# Round 27j. The owner: "The smaller ones are a little fucky. Also what can we do to get rid of the little butt at the
+# bottom of the stroke version, without compromising on the true shape of the object?"
+# - The butt is the south pole. At this tip it sits 0.029 of the radius inside the outline's hull, and the two side
+#   meridians pass through it, so below the south parallel their caps stand either side of it as two cheeks, the
+#   line where they cross (the axis) running between them into the notch. The cheeks are the true silhouette, so they
+#   stay; the line between them goes: at a pole on the outline, the two pieces either side of it whose shared edge
+#   runs into it along the axis are drawn as one (_lobes), in the fill as in the line, so the bottom reads as one cap.
+#   The notch stays, as the discs' own. (Tried: less tip, which shrinks the notch but flattens the parallels and is the
+#   owner's to choose; turning the globe, which only makes the cheeks unequal; merging every small piece, which brings
+#   slivers back as bumps.)
+# - At 32 and 16 px the small cuts dropped every piece too thin for their wide seams, which bit holes in the outline
+#   and left pieces floating, and six discs' seams were more than those sizes hold. There the globe is now drawn with
+#   four of its discs, the equator and the three meridians (SMALL_CUT), as if the 40-degree parallels were not there:
+#   their own outline, never bitten, engraved with the lines between their faces, each `seam` wide, a face thinner
+#   than `thin` (the equator's tips) merged into its neighbour first (_faces), so no sliver, crumb or loose line is
+#   left, and the equator, where its tip is too thin to show as a band, is one line. At 64 px the six discs hold,
+#   with the seam widened (SMALL_SEAM), as before.
+SMALL_CUT = {16: dict(seam=0.13, discs=(1, 3, 4, 5), thin=0.12), 32: dict(seam=0.08, discs=(1, 3, 4, 5), thin=0.12)}
+
+
+def _parts(fs):
+    """The facets' pieces, each a polygon."""
+    return [p for f in fs for p in getattr(f, 'geoms', [f]) if p.geom_type == 'Polygon' and p.area > 1e-7]
+
+
+def _kept(fs, seam=SEAM, keep=1.5):
+    """The pieces the one-colour discs keep (round 27c): each that, shrunk by half a seam (its hairlines closed), is
+    still `keep` seams across."""
+    out = []
+    for p in _parts(fs):
+        q = p.buffer(-seam / 2, join_style=2, mitre_limit=4)
+        k = 0.3 * seam
+        q = q.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
+        if not q.is_empty and not q.buffer(-keep / 2 * seam).is_empty:
+            out.append(p)
+    return out
+
+
+def _lobes(pieces, sil):
+    """Round 27j: the pairs of pieces to draw as one: at a pole on the outline, the two pieces on the outline either
+    side of it whose shared edge runs into it along the axis (two meridians' caps, where they cross); returned as
+    (i, j, their shared edge)."""
+    a = basis()[0]
+    axis = LineString([(-2 * a[0], -2 * a[1]), (2 * a[0], 2 * a[1])]).buffer(1e-4)
+    rim = sil.boundary.buffer(1e-6)
+    out, used = [], set()
+    for pole in (Point(a[0], a[1]), Point(-a[0], -a[1])):
+        if sil.boundary.distance(pole) > 1e-4:          # (a pole inside the outline has no caps on it)
+            continue
+        at = [k for k, p in enumerate(pieces) if p.distance(pole) < 1e-4 and p.boundary.intersection(rim).length > 1e-3]
+        for i, j in ((i, j) for n, i in enumerate(at) for j in at[n + 1:]):
+            edge = pieces[i].boundary.intersection(pieces[j].buffer(1e-5))
+            if (i not in used and j not in used and edge.length > 1e-3 and edge.distance(pole) < 1e-4
+                    and axis.contains(edge)):
+                out.append((i, j, edge)); used |= {i, j}
+    return out
+
+
+def _joined(pieces, sil):
+    """The pieces with each pair _lobes finds drawn as one."""
+    pieces, gone = list(pieces), set()
+    for a, b, _ in _lobes(pieces, sil):
+        pieces[a] = unary_union([pieces[a].buffer(1e-6, join_style=2), pieces[b].buffer(1e-6, join_style=2)]).buffer(
+            -1e-6, join_style=2)
+        gone.add(b)
+    return [p for k, p in enumerate(pieces) if k not in gone]
+
+
+def _inradius(p):
+    """The radius of the largest circle inside p."""
+    return max((maximum_inscribed_circle(q, 1e-4).length for q in getattr(p, 'geoms', [p]) if not q.is_empty),
+               default=0.0)
+
+
+def _faces(pieces, thin):
+    """Round 27j: the pieces as faces (one that pinches to a point, two), each face thinner than `thin` (the radius of
+    the largest circle inside it) merged into the neighbour it shares most edge with. A merge takes away only the edge
+    between the two, so every line left is one of the discs' own edges and runs, as before, from the outline or a
+    crossing to another: where the equator's tip is too thin to show, its edge stays as one line."""
+    fs = [f for f in polygonize(union_all([p.boundary for p in pieces], grid_size=GRID)) if f.area > 1e-7]
+
+    def shared(a, b):
+        return fs[a].boundary.intersection(fs[b].buffer(1e-6)).length
+
+    while True:
+        for k in sorted((k for k in range(len(fs)) if _inradius(fs[k]) < thin), key=lambda k: _inradius(fs[k])):
+            n, j = max((shared(k, j), j) for j in range(len(fs)) if j != k)
+            if n > 1e-4:
+                fs[j] = union_all([fs[j], fs[k]], grid_size=GRID)
+                del fs[k]
+                break
+        else:
+            return fs
+
+
+def small_cut(px, spin=0.0):
+    """Round 27j: the one-colour discs for marks up to px across (SMALL_CUT): some of the discs, their own outline
+    shrunk by half a seam as the master's is, engraved with the lines between their faces (_faces), scaled back to
+    full width. Returned as one shape."""
+    c = SMALL_CUT[px]
+    seam, rs = c['seam'], [rings(spin)[i] for i in c['discs']]
+    sil = unary_union([Polygon(g['pts'][:, :2]).buffer(0) for g in rs])  # (the ovals: their pieces' own union is
+    fs = _faces(_parts(facets(spin, rs)), c['thin'])                      # slit along the crossings)
+    lines = union_all([f.boundary for f in fs], grid_size=GRID).difference(sil.boundary.buffer(1e-5))
+    g = sil.buffer(-seam / 2, join_style=2, mitre_limit=4).difference(lines.buffer(seam / 2, cap_style=2, join_style=2))
+    k = 0.3 * seam                                       # (hairlines and crumbs closed, as in disc_shapes)
+    g = g.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
+    g = unary_union([q for q in getattr(g, 'geoms', [g]) if q.area > (0.75 * seam) ** 2])
+    s_ = (sil.bounds[2] - sil.bounds[0]) / (g.bounds[2] - g.bounds[0])
+    return affinity.scale(g, s_, s_, origin=(0, 0)).simplify(0.002)
+
+
 def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=1.5):
     """Each disc's visible part as drawn. In colour the discs are flush (round 24b, the owner: "For the discs, I want
     them to not have strokes, so they are flush. The strokes should be the non-color versions"): each part whole, a
@@ -357,7 +470,8 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=1.5):
     fs = facets(spin)
     sil = unary_union([f for f in fs if not f.is_empty])
     if not flush:
-        g0 = unary_union([f.buffer(-seam / 2, join_style=2, mitre_limit=4) for f in fs if not f.is_empty])
+        ps = _joined(_kept(fs, seam, keep), sil) if keep else fs    # (round 27j: still, the south pole's cheeks as one)
+        g0 = unary_union([f.buffer(-seam / 2, join_style=2, mitre_limit=4) for f in ps if not f.is_empty])
         k = 0.3 * seam                                   # (hairlines left where two buffers meet, closed)
         g = g0.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
         if keep:
@@ -391,16 +505,8 @@ STROKE = dict(w=0.05, wc=0.065, small={64: 0.07})
 def edge_lines(spin=0.0, seam=SEAM, keep=1.5):
     """The discs' visible edges as lines (round 27i): each piece disc_shapes keeps (one colour, seamed), outlined, the
     edges two pieces share drawn once."""
-    kept = []
-    for f in facets(spin):
-        for part in getattr(f, 'geoms', [f]):
-            if part.geom_type != 'Polygon' or part.is_empty:
-                continue
-            q = part.buffer(-seam / 2, join_style=2, mitre_limit=4)        # (disc_shapes' own test for a piece)
-            k = 0.3 * seam
-            q = q.buffer(-k, join_style=2, mitre_limit=4).buffer(k, join_style=2, mitre_limit=4)
-            if not q.is_empty and not q.buffer(-keep / 2 * seam).is_empty:
-                kept.append(part)
+    fs = facets(spin)
+    kept = _joined(_kept(fs, seam, keep), unary_union([f for f in fs if not f.is_empty]))    # (27j: the cheeks as one)
     lines = union_all([q.boundary for q in kept], grid_size=GRID)
     return linemerge(lines) if lines.geom_type == 'MultiLineString' else lines
 
@@ -743,7 +849,8 @@ SMALL = {16: 0.035, 32: 0.025, 64: 0.02}                  # px across at most: t
 # seamed discs (round 24b's one-colour discs) in black, in white and in each speaker's own colour; the parity cut and
 # the tints above stay here as the acrylic's own one-colour forms. The discs' small cuts widen the seams so they stay a
 # pixel or more: at the master's 0.035 they go grey at 32 px. At 16 px six discs do not read whatever the seam.
-SMALL_SEAM = {16: 0.10, 32: 0.08, 64: 0.05}                 # px across at most: the seam, of the radius
+SMALL_SEAM = {64: 0.05}                                     # px across at most: the seam, of the radius (round 27j:
+                                                            # 32 and 16 px are SMALL_CUT's; they were 0.08 and 0.10)
 
 
 def _lin(c):
@@ -816,6 +923,9 @@ def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper', p
         body, e = acrylic_ink_body(colours[0], px=px), 1 + W_LINE / 2
     elif style == 'acrylic':                             # round 27: a speaker's own tint, stacked (round 25: the lines)
         body, e = acrylic_tint_body(colours[0]), 1 + W_LINE / 2
+    elif style == 'discs' and one and px and px <= max(SMALL_CUT):    # round 27j: 32 and 16 px, four discs engraved
+        cut = small_cut(next(k for k in sorted(SMALL_CUT) if px <= k))
+        body, e = f'<path d="{_poly_d(cut)}" fill="{colours[0]}" fill-rule="evenodd"/>', 1 + W_LINE / 2
     elif style == 'discs':
         seam = next((SMALL_SEAM[k] for k in sorted(SMALL_SEAM) if one and px and px <= k), SEAM)
         body, e = discs_body(colours, flush=not one, seam=seam), 1 + W_LINE / 2

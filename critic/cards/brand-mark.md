@@ -11,7 +11,8 @@ site, its look book, its boxes), black and white (one ink, flat: paper, print, a
 grounds and photographs), and one in each speaker's own tint (that speaker's page, its box, its corner). Sheet 1 is the
 set, each version on the ground it shows on; sheet 2 seven of them at 300, 64, 32 and 16 px; sheet 3 the lockups with
 the wordmark EARF; sheet 4 the spins, a frame every 0.4 s (round 27f: black and colour, steady); sheet 5 (round 27e)
-the angle study, the tip since chosen.
+the angle study, the tip since chosen; sheet 6 (round 27i) the set in line; sheet 7 (round 27j) the south pole at less
+tip, a study.
 
 ## The owner's requirements, in their own words (fixed)
 
@@ -21,6 +22,8 @@ the angle study, the tip since chosen.
 - After 27d trimmed the one-colour discs to the green disc: "I kind of like it untrimmed because it's true to the shape
   of the combined discs. Maybe the angle Is wrong. Maybe if we add a spinning animation like a top it will help."
   (round 27e)
+- "The smaller ones are a little fucky. Also what can we do to get rid of the little butt at the bottom of the stroke
+  version, without compromising on the true shape of the object?" (round 27j)
 - "the logo has to work in white only, black only, single color, multicolor and animated" (round 22)
 - "The acrylic is meant to be a transparent version of the discs" and "For acrylic I was expecting each disc to have a
   little thickness to it" (round 25)
@@ -48,7 +51,13 @@ and the steady spin.
   pieces thinner than one and a half seams dropped; the tips kept, so the outline is the discs' own (round 27d trimmed
   every piece to the green disc; the owner liked it untrimmed). The acrylic's thickness is a crescent inside each
   disc's edge, its cells the discs' faces and crossings alone ("clipping on the multicolor one wherever there is
-  overlap"). Small cuts widen the seam to 0.05, 0.08 and 0.10 for marks up to 64, 32 and 16 px.
+  overlap"). At the south pole, which sits on the outline at this tip, the side meridians' caps stand either side of
+  it; the line between them (the axis, where they cross) is left out, in the fill and in line, so the bottom reads as
+  one cap and the outline stays the discs' own (round 27j: a notch 0.029 of the radius deep is left at the pole). Small
+  cuts: up to 64 px the six discs with the seam widened to 0.05; up to 32 and 16 px (round 27j) four of them, the
+  equator and the three meridians, their own outline whole, engraved with the lines between their faces, `seam` 0.08
+  and 0.13 wide, a face whose largest inner circle is under `thin` 0.12 of the radius (the equator's tips) merged into
+  the neighbour it shares most edge with first, so no sliver, crumb or loose line is left.
 - In motion (round 27e, new): the spin. The mark turns on its axis the Earth's way (the meridians round the pole, the
   parallels still), `rate` 45 degrees a second (a turn in 8 s), each loop `turn` 180 degrees (4 s: every coloured disc
   back in its place, so it loops without a seam and starts on the mark at rest), 30 frames a second, 720 px square

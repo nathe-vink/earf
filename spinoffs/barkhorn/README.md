@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27i**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27j**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -59,7 +59,35 @@ makers; puts it on the look book and the site; and parks the idents. Round 27b g
 untrims the one-colour discs again, measures what the angle does to their tips, and spins the mark on its axis like a
 top. Round 27f tips the globe 16° toward you instead of 22°, which halves the tips, and keeps the steady spin. Round
 27g studies the lateral discs crossing as the meridians do, and 27h shows that crossing inside the outline. Round 27i
-draws every version in line as well.
+draws every version in line as well. Round 27j redraws the 32 and 16 px cuts with four discs, whole, and leaves out the
+line between the two caps at the south pole, the outline kept.
+
+## Round 27j: the small cuts redrawn, and the line at the south pole left out (the owner's notes of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "The smaller ones are a little fucky." | **The 32 and 16 px cuts are redrawn.** They dropped every piece too thin for their wide seams, which bit holes in the outline and left pieces floating, and six discs' seams were more than those sizes hold. Now the globe is drawn there with four of its discs, the equator and the three meridians: their own outline, whole, cut with the lines between their faces, and a face too thin to show merged into its neighbour first, so no sliver, crumb or loose line is left (`earth.small_cut`, `SMALL_CUT`). The 64 px cut held, so it stays six discs with the seam widened. |
+| "Also what can we do to get rid of the little butt at the bottom of the stroke version, without compromising on the true shape of the object?" | **The line between the two cheeks is left out; the outline stays the discs' own.** The butt is the south pole. At the 16° tip it sits on the outline, the two side meridians cross there, and below the south parallel their caps stand either side of it, with the axis between them. The caps are the discs' true silhouette, so they stay. The line between them is no longer drawn, in the fill and in line alike, so the bottom reads as one cap (`earth._lobes`: at a pole on the outline, the two pieces whose shared edge runs into it along the axis). What is left is a notch at the pole, 0.029 of the radius deep, which is the discs' own shape. Only less tip makes it smaller (below). |
+
+- **The small cuts.** At 32 px the lines are 0.08 of the radius wide, at 16 px 0.13 (it was 0.10). A face whose largest
+  inner circle is under 0.12 of the radius is merged into the neighbour it shares most edge with: that takes the
+  equator's two tips (0.11 at their widest), where its band would be a sliver, and leaves its middle (0.13). A merge only
+  ever removes a line, so every line left is one of the discs' own edges, and each runs to the outline or to another
+  line. Where the equator's tip merges, its edge stays as one line to the outline. The outline is the four discs' own;
+  it differs from the six's only by the parallels' tips, at most 0.018 of the radius, a third of a pixel at 32 px.
+- **The south pole at less tip.** The notch at the pole and how far the caps reach past the front disc, of the radius:
+  0.029 and 0.038 at 16° (now), 0.022 and 0.029 at 14°, 0.016 and 0.022 at 12°, 0.011 and 0.015 at 10°, the line
+  between the caps left out at each (`mark.py --pole PATH`). The parallels flatten as the tip comes down (round 27e's
+  angle study), and the tip is the owner's choice of round 27f, so it stays 16° until they say otherwise.
+- **Unchanged:** the colour versions, and the spins, where nothing is joined or dropped, so nothing pops between frames.
+
+Drawn again: every one-colour globe and lockup, in fill and in line, the small cuts and the sheets (`mark.py --sheet,
+--sizes, --stroke-sheet`), with the new pole study. Also republished: the mark's page (version 9, "Small sizes" redrawn)
+and the globe page (version 24).
+
+![The sizes: the 32 and 16 px cuts redrawn with four discs, whole](brand/earth-mark-sizes-r27.png)
+
+![The south pole at the tips 16, 14, 12 and 10, the line between the caps left out](brand/earth-mark-pole-r27j.png)
 
 ## Round 27i: every version in line (the owner's question of 2026-10-16)
 
