@@ -24,7 +24,8 @@ rim on dark in the dim studio and in the plain grey room; sheet 13
 (round 28d) the acrylics tried for it, from round 28's clear tints to 28b's translucent; sheet 14 (round 28e) the
 render on light grounds in 28b, 28d and now, livelier, beside the dark version (unchanged), then the colour line before
 and after in one weight, the black line, and the new spin 43.5 degrees into the turn; sheet 15 (round 28e) the renders
-tried for it, each with its chroma and lightness.
+tried for it, each with its chroma and lightness; sheet 16 (round 29) the R before and with its hole, the acrylic EARF
+rendered on paper and on dark, the flat files traced from those renders, and the wordmark in one colour.
 
 ## The owner's requirements, in their own words (fixed)
 
@@ -67,6 +68,10 @@ tried for it, each with its chroma and lightness.
 - Asked whether the colour line version should be one weight, like the black line: "Yes the color line version should
   be in one weight." And: "My last nit is that the light version of the acrylic globe kind of looks dull and muted in
   color now." (round 28e)
+- Of the wordmark: "Should there be a hole in the are or did we still want to show EARF as combined shapes sometime?
+  Should we also have an acrylic version of EARF as well as monochromatic versions?", and, shown the R with a hole 70
+  in, the letters' shapes as acrylic sheets deeper where they overlap, and the solid letters for one colour: "Yes"
+  (round 29)
 - "the logo has to work in white only, black only, single color, multicolor and animated" (round 22)
 - "The acrylic is meant to be a transparent version of the discs" and "For acrylic I was expecting each disc to have a
   little thickness to it" (round 25)
@@ -80,8 +85,8 @@ The globe's geometry (parallels at 40 N, 0 and 40 S; meridians 60 degrees apart;
 six discs alone, nothing filling the circle; the colour version: the render (round 28c), and as it is for printing
 that takes no picture (round 25's acrylic: the green meridian facing us the backing, a single disc its own flat colour,
 crossings stacked a step deeper); the colours' places (red north, blue the equator, yellow south, green the meridian
-facing us, orange and violet the side meridians); the speakers' colours; the wordmark EARF and the lockup's
-proportions; the grounds (paper #F2EFEA, ink #121114).
+facing us, orange and violet the side meridians); the speakers' colours; the wordmark EARF (since round 29 the R's
+bowl a ring, its hole 70 in) and the lockup's proportions; the grounds (paper #F2EFEA, ink #121114).
 
 Chosen in round 27f: the tip 16 (sheet 5: the tips reach 0.04 of the radius past the front disc, against 0.07 at 22
 and 0.02 at 10, where the parallels close toward lines; turning the globe on its axis only makes them reach further)
@@ -173,6 +178,18 @@ and the steady spin.
   see-through, in their colours, every run the same 0.05, the far halves under the near (round 28e; until then the far
   halves thinner, round 22's lines, and 0.065 in front). At 64 px a heavier
   cut (0.07); below 64 px the fills' small cuts. Sheet 6 is the set in line.
+- The wordmark (round 29, new). The R's bowl is a ring, its wall 70 as every bar is deep, so its hole (22 wide, 45
+  tall, right of the stem) lies from 70 to 115 down, between the E's and the F's top and middle bars. In one colour the
+  letters are solid: black, white and each speaker's, each on the ground where it holds 3:1 (`earf-wordmark-<tag>`). In
+  colour it is acrylic, rendered as the globe is (`word_real.py`): its thirteen shapes cut from the Clouds' 20 mm
+  acrylic, the word 980 mm across, every edge rounded over 4 mm, the pieces laid on one another (the stems and the A's
+  first leg at the back; the bars, the R's bowl and the A's second leg on them; the A's crossbar and the R's leg in
+  front), a colour per letter (E Flare, A Acid, R Ice, F Poison), each sheet letting 0.9 of the light through (the
+  globe's 0.45 left the overlaps barely deeper, a word being seen square on through one sheet), scattering 5 mm, its
+  hues' OKLCh chroma times 1.2; on dark grounds DARK's rims at 1 and faces at 0.15 (`earf-wordmark-render`,
+  `-render-night`). Its flat files are traced from the renders (`earf-wordmark-colour`, `-colour-ink`): each letter's
+  regions under one, two and three sheets in the render's median colour there; on dark each piece's rim too, a band 4
+  units inside its outline, in the bands' 90th-percentile colour. The lockups keep the solid word beside the globe.
 - Round 1 judged the acrylic's own one-colour forms, kept in the code:
 - Black and white (one ink, no tints): a point is inked where an odd number of discs cover it (parity: the discs
   cancel where they cross, as two films do in one ink), the discs as flat ovals. Tried and left: a solid ball cut by

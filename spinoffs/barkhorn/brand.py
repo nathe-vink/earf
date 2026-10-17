@@ -104,6 +104,8 @@ def _shape(p, sphere=None):
         return sphere[3]
     if p[0] == 'circle':
         g = Point(p[1], p[2]).buffer(p[3], 256)
+    elif p[0] == 'ring':
+        g = Point(p[1], p[2]).buffer(p[3], 256).difference(Point(p[1], p[2]).buffer(p[4], 256))
     elif p[0] == 'rect':
         g = box(p[1], p[2], p[3], p[4])
     elif p[0] == 'dee':

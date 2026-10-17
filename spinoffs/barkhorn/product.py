@@ -670,21 +670,26 @@ def parts(P):
 
 
 def wordmark_outlines(width):
-    """EARF's wordmark (marks.py's shapes) as closed outlines [(u, v), ...] in mm: u across from its left, v up from its
-    foot, `width` wide."""
+    """EARF's wordmark (marks.py's shapes) as closed outlines [(u, v), ...] in mm, each with its holes' (round 29: the
+    R's bowl a ring): [(outline, [hole, ...]), ...], u across from its left, v up from its foot, `width` wide."""
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import marks as M
     s = width / M.WORDMARK_W
+    circle = lambda cx, cy, r: [(cx + r * math.cos(a), cy + r * math.sin(a)) for a in (2 * math.pi * k / 72 for k in range(72))]
+    mm = lambda pts: [(x * s, (300 - y) * s) for x, y in pts]
     out = []
     for p in M.WORDMARK:
+        holes = []
         if p[0] == 'rect':
             x0, y0, x1, y1 = p[1:5]
             pts = [(x0, y0), (x1, y0), (x1, y1), (x0, y1)]
         elif p[0] == 'circle':
-            pts = [(p[1] + p[3] * math.cos(a), p[2] + p[3] * math.sin(a)) for a in (2 * math.pi * k / 72 for k in range(72))]
+            pts = circle(p[1], p[2], p[3])
+        elif p[0] == 'ring':
+            pts, holes = circle(p[1], p[2], p[3]), [circle(p[1], p[2], p[4])]
         else:
             pts = list(p[1:])
-        out.append([(x * s, (300 - y) * s) for x, y in pts])
+        out.append((mm(pts), [mm(h) for h in holes]))
     return out
 
 
@@ -701,14 +706,15 @@ def mark_solid(width, at, face, t):
     front) or '+y' (a back face, read from behind, so drawn mirrored), `at` = (x of its middle, y of the face, z of its
     foot)."""
     xm, yf, z0 = at
+    on = (lambda q: [(xm - width / 2 + u, z0 + v) for u, v in q]) if face == '-y' else \
+         (lambda q: [(xm + width / 2 - u, z0 + v) for u, v in q])
+    y0, y1 = (yf - t, yf) if face == '-y' else (yf, yf + t)
     sol = []
-    for o in wordmark_outlines(width):
-        if face == '-y':
-            pts = [(xm - width / 2 + u, z0 + v) for u, v in o]
-            sol.append(prism(pts, 'y', yf - t, yf))
-        else:
-            pts = [(xm + width / 2 - u, z0 + v) for u, v in o]
-            sol.append(prism(pts, 'y', yf, yf + t))
+    for o, holes in wordmark_outlines(width):
+        s = prism(on(o), 'y', y0, y1)
+        for h in holes:                                  # cut a little past both faces, so no skin is left
+            s = s - prism(on(h), 'y', y0 - 0.01, y1 + 0.01)
+        sol.append(s)
     return union(*sol)
 
 

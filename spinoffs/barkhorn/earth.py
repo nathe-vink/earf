@@ -955,6 +955,8 @@ def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper', p
 def _prim_shape(p):
     if p[0] == 'circle':
         return Point(p[1], p[2]).buffer(p[3], resolution=96)
+    if p[0] == 'ring':                                   # round 29: the R's bowl, its hole 70 in
+        return Point(p[1], p[2]).buffer(p[3], resolution=96).difference(Point(p[1], p[2]).buffer(p[4], resolution=96))
     if p[0] == 'rect':
         return Polygon([(p[1], p[2]), (p[3], p[2]), (p[3], p[4]), (p[1], p[4])])
     return Polygon(p[1:])
@@ -962,7 +964,7 @@ def _prim_shape(p):
 
 def letters():
     """EARF's four letters, each its primitives merged into one solid shape (y down, cap height 300), so the wordmark
-    prints in one colour; the R's bowl a solid circle, the globe's own shape."""
+    prints in one colour; the R's bowl a ring (round 29), so a hole 70 in shows right of the stem."""
     groups = [M.WORDMARK[0:4], M.WORDMARK[4:7], M.WORDMARK[7:10], M.WORDMARK[10:13]]
     out = []
     for g in groups:
@@ -970,6 +972,14 @@ def letters():
         out.append(' '.join('M' + 'L'.join(f'{x:.1f} {y:.1f}' for x, y in np.array(r.coords)) + 'Z'
                             for poly in getattr(u, 'geoms', [u]) for r in [poly.exterior] + list(poly.interiors)))
     return out
+
+
+def word_svg(word, label='EARF', size=None):
+    """EARF alone, its letters solid in one colour, its view box the letters' own (WORDMARK_W by 300), `size` the height in
+    px (round 29: the wordmark in one colour, as the globe is in discs; in colour it is acrylic, word_real.py)."""
+    wh = f' width="{size * M.WORDMARK_W / 300:.0f}" height="{size}"' if size else ''
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {M.WORDMARK_W} 300"{wh} role="img" aria-label="{label}">'
+            f'<title>{label}</title><g fill="{word}">' + ''.join(f'<path d="{d}"/>' for d in letters()) + '</g></svg>')
 
 
 def lockup_svg(style, colours, word, size=None, bg=None, ground='paper', px=None):

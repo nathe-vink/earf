@@ -55,6 +55,8 @@ def place(prims, k=1.0, dx=0.0, dy=0.0):
     for p in prims:
         if p[0] == 'circle':
             out.append(('circle', p[1] * k + dx, p[2] * k + dy, p[3] * k))
+        elif p[0] == 'ring':                         # a circle with a round hole in its middle: centre, radius, the hole's
+            out.append(('ring', p[1] * k + dx, p[2] * k + dy, p[3] * k, p[4] * k))
         elif p[0] in ('rect', 'dee'):
             out.append((p[0], p[1] * k + dx, p[2] * k + dy, p[3] * k + dx, p[4] * k + dy))
         elif p[0] == 'arc':                          # a stroke only: centre, radius, aim and half-span in degrees
@@ -145,6 +147,9 @@ def _wordmark():
       from the stem into the circle with no notch; the circle must also stay inside the stem's left edge, which sets the
       stems at 100 (round 18's 74 left a notch); every stem is 100, the E's and the F's too;
     - every bar starts at its stem's outer edge and runs flat, 70 deep;
+    - the R's bowl is a ring, its wall 70 as every bar is deep (round 29, the owner: "Should there be a hole in the
+      are", and of the hole 70 in: "Yes"), so its hole, right of the stem, runs from 70 to 115 down, between the E's and
+      the F's top and middle bars, and is about the A's triangle's size (22 wide and 45 tall, the triangle 22 and 39);
     - the middle bars (E, F) and the R's bowl end on one line, 185 down; the A's crossbar sits lower, 215 to 285 (round
       26: with its legs closer, a crossbar on the 185 line would all but close the triangle inside), and runs from the
       middle of one leg to the middle of the other at its top, so its ends stay inside the legs;
@@ -164,8 +169,9 @@ def _wordmark():
     a = [slab(xa, h, w, h, lean), slab(xa + span, h, w, h, -lean),
          ('rect', xa + span / 2 * f + w / 2, bar, xa + span - span / 2 * f + w / 2, bar + 70)]
     xr = xa + span + w + 30
-    r = [('rect', xr, 0, xr + s, h), ('circle', xr + s, mid / 2, mid / 2),   # the bowl's top on the stem's corner
-         slab(xr + 108, h, 102, 170, -22)]           # the leg's foot ends at xr + 210, past the bowl's xr + 192.5
+    r = [('rect', xr, 0, xr + s, h), ('ring', xr + s, mid / 2, mid / 2, mid / 2 - 70),   # the bowl's top on the stem's
+         slab(xr + 108, h, 102, 170, -22)]           # corner, its wall 70; the leg's foot ends at xr + 210, past the
+                                                     # bowl's xr + 192.5
     xf = xr + 210 + 40
     f = [('rect', xf, 0, xf + s, h), ('rect', xf, 0, xf + 190, 70), ('rect', xf, mid - 70, xf + 165, mid)]
     return e + a + r + f, xf + 190
@@ -208,6 +214,10 @@ def _el(p, attrs):
                 f'{x + r * math.cos(a1):.1f} {y + r * math.sin(a1):.1f}" {attrs}/>')
     if p[0] == 'circle':
         return f'<circle cx="{p[1]:g}" cy="{p[2]:g}" r="{p[3]:g}" {attrs}/>'
+    if p[0] == 'ring':
+        _, x, y, r, ri = p
+        loop = lambda q: f'M{x - q:g} {y:g}A{q:g} {q:g} 0 1 0 {x + q:g} {y:g}A{q:g} {q:g} 0 1 0 {x - q:g} {y:g}Z'
+        return f'<path d="{loop(r)}{loop(ri)}" fill-rule="evenodd" {attrs}/>'
     if p[0] == 'rect':
         return f'<rect x="{p[1]:g}" y="{p[2]:g}" width="{p[3] - p[1]:g}" height="{p[4] - p[2]:g}" {attrs}/>'
     if p[0] == 'dee':                                # a bar from x0 whose far end is a half circle centred on xc
@@ -221,7 +231,7 @@ def bbox(prims):
     """The primitives' extent with their outline: (x0, y0, x1, y1) on the artboard."""
     xs, ys = [], []
     for p in prims:
-        if p[0] in ('circle', 'arc'):
+        if p[0] in ('circle', 'ring', 'arc'):
             xs += [p[1] - p[3], p[1] + p[3]]; ys += [p[2] - p[3], p[2] + p[3]]
         elif p[0] == 'rect':
             xs += [p[1], p[3]]; ys += [p[2], p[4]]

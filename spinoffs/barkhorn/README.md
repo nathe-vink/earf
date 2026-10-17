@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 28e**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 29**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -71,7 +71,68 @@ line version too, every line one weight, turns a meridian side on into one white
 the parallels' slivers past the outer ring in every one-colour version, keeping the caps either side of the butt. Round
 28d makes the render more transparent in the speakers' colours, takes the study's n4 for dark grounds, takes the flashes
 out of the spin, and runs the equator's edge unbroken where it meets the meridians. Round 28e draws the colour line in
-one weight and makes the render on light grounds livelier again, still see-through.
+one weight and makes the render on light grounds livelier again, still see-through. Round 29 gives the R's bowl a hole,
+70 in, and makes EARF in acrylic, rendered as the real thing with its flat colour files traced from it, and in one
+colour.
+
+## Round 29: the R's hole, and EARF in acrylic and in one colour (the owner's notes of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "Should there be a hole in the are or did we still want to show EARF as combined shapes sometime?", shown the R solid, with a hole 70 in and with one 50 in, and then: "Yes" | **The R's bowl has a hole**, 70 in from its edge. The bowl is a ring now (`marks.py` `_wordmark`, a new shape, `ring`), its wall 70, as deep as every bar, so the hole, right of the stem, runs from 70 to 115 down, between the E's and the F's top and middle bars, and is about the size of the A's triangle (22 wide and 45 tall; the triangle 22 and 39). At 24 px of cap height it is a speck, as the A's triangle is, and the word reads as it did. A hole 50 in reads sooner, but its wall would have been the word's thinnest stroke. |
+| "Should we also have an acrylic version of EARF as well as monochromatic versions?", answered yes, by the owner's own rule for the globe ("I like discs for monochrome and acrylic for multicolor"), and then: "Yes" | **EARF as the real thing**, rendered as the globe is (`word_real.py`, below): its thirteen shapes cut from the Clouds' 20 mm tinted acrylic and laid on one another as a layered sign is made, a colour per letter. Where two or three sheets lie the colour deepens, so the shapes show how they combine, with no outline; on dark grounds each piece's rim glows its colour, as the globe's rims do. **Flat colour files traced from the renders**, for print and the web. **The wordmark in one colour**: the letters solid, in black, in white and in each speaker's colour. The lockups keep the solid word beside the globe, so the globe carries the colour. |
+
+![The R before and with its hole, EARF in acrylic on paper and on dark, the flat files traced from it, and the wordmark in one colour](brand/earth-wordmark-r29.png)
+
+### EARF in acrylic
+
+- **The object.** Each shape of the wordmark is a piece of the Clouds' own 20 mm tinted cast acrylic, as the globe's
+  discs are, the word 980 mm across on a cap height of 300 mm. Every edge is rounded over 4 mm and polished (a bevel
+  of four segments on each edge sharper than 30 degrees). The pieces are laid on one another as a layered sign is made:
+  the stems and the A's first leg at the back; the bars, the R's bowl and the A's second leg on them; the A's crossbar
+  and the R's leg in front (`LAYER`), 0.2 mm apart. Through the R's hole, the stem behind shows in its left half.
+- **The colours.** A colour per letter: the E red (Flare), the A yellow (Acid), the R blue (Ice, the globe's equator),
+  the F green (Poison). The R has the most sheets over one another, so it takes the lighter of the two cool hues, and
+  its overlaps stay clear.
+- **The acrylic.** It is the globe's (studio/engine's cast resin, polished), with the faces tinted a little deeper than
+  the hue's square root, so a single sheet against the paper is the hue. Each sheet lets 0.9 of the light straight
+  through and scatters 5 mm into itself, and the hues are a fifth livelier (OKLCh chroma times 1.2, the hue kept). It is
+  clearer than the globe's 0.45, because a word is seen square on, through one sheet: at the globe's settings a sheet
+  read as solid plastic, and the overlaps barely deepened.
+- **The room and the camera.** These are the globe's: the paper (or night) behind, rendered as exactly that colour; the
+  plain grey room; the key at 4 W/m² on paper; the camera square on and orthographic, so a render lies exactly over
+  the flat drawing. On dark: the globe's `DARK`, each piece's rim (its sides and its rounding) giving off its colour at
+  1 and its faces at 0.15.
+- **Time.** A 2120 by 760 still at 128 samples takes about five minutes on 4 CPUs.
+- **The flat files**, traced from the renders (`word_real.files`): each letter's regions under one, two and three
+  sheets, filled with the median colour the render shows there (its rounded edges left out). On dark, each piece's rim
+  is added too: a band 4 units inside its outline, in the colour it glows.
+
+The files, in `brand/mark/`:
+
+- `earf-wordmark-render.png` and `-render-night.png`: the renders, their grounds made exactly the paper and the night;
+- `earf-wordmark-colour` (for light grounds) and `-colour-ink` (for dark): the flat files, SVG and a transparent PNG
+  2048 px wide;
+- `earf-wordmark-black`, `-white`, and `-01-flare` to `-08-smoke`: the letters solid in one colour (`mark.py`), each
+  shown on the ground where it holds 3:1.
+
+### Where the R is drawn again
+
+- **Drawn again with the hole:**
+  - every lockup (`brand/mark/earf-lockup-*`, the render's lockups, `brand/earth-lockup-*`);
+  - the globe page's file in this repository (`brand/earth.html`);
+  - round 11's outlined set in `marks/`;
+  - the site draft's logo (version 13);
+  - the mark's page (version 17), with a new section for the name alone, in acrylic and in one colour.
+- **Not yet redrawn:** the look book's cover and last page, and the published globe page. They wait for the owner's
+  go-ahead.
+- **The parked idents.** The current set, 37 MP4s (`earth.py --video --only ident`), is rendered again. Round 22's and
+  23's older MP4s, and the pages of rounds 20 and 21 (`ident.py`, `globes.py`), are left as they were; their code draws
+  the ring if they are run again.
+- **The Cloud's CAD.** The back's etched EARF now has the hole cut through it (`product.wordmark_outlines` gives each
+  shape its holes, and `mark_solid` cuts them). On the 140 mm mark the hole is 3 by 6 mm, which the drawings at 1:10
+  cannot show. Rebuilt, the drawings, cut files and parts list changed only in their dates, so they are kept as they
+  were.
 
 ## Round 28e: the colour line in one weight, and the render livelier on light (the owner's notes of 2026-10-17)
 

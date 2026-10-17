@@ -11,6 +11,8 @@ round 24b's discs in one colour, seamed):
     brand/mark/earf-globe-01-flare.svg    to 08-smoke: the discs in each speaker's colour, flat, each shown on the ground
                                           where it holds 3:1 (Flare, Poison, Haze, Smoke on light; Dust, Acid, Ice, Fog on dark)
     brand/mark/earf-lockup-<colour|colour-ink|black|white>.svg   the globe beside EARF
+    brand/mark/earf-wordmark-<black|white|01-flare ... 08-smoke>.svg   EARF alone, its letters solid (round 29; in
+                                          colour, word_real.py's acrylic: earf-wordmark-render and -colour)
     and a PNG of each, transparent: the globes 1024 px square, the lockups 2048 px wide
 
 After the brand critic's round (critic/rounds/2026-10-16/brand-mark-r1.json), small sizes have their own files:
@@ -81,6 +83,11 @@ GLOBES = [('colour', 'Colour', 'acrylic', E.RING, E.PAPER), ('black', 'Black', '
 LOCKUPS = [('colour', 'acrylic', E.RING, E.INK, 'paper'), ('colour-ink', 'acrylic', E.RING, E.WHITE, 'night'),
            ('black', 'discs', E.INK, E.INK, 'paper'), ('white', 'discs', E.WHITE, E.WHITE, 'night')]
 INKS = [('black', E.INK, 'paper'), ('white', E.WHITE, 'night')]
+# Round 29 (the owner, asked whether EARF should have an acrylic version as well as monochromatic ones: "Yes"): EARF alone,
+# its letters solid, in black, in white and in each speaker's colour, as the globe's discs are; in colour it is the
+# acrylic (word_real.py: earf-wordmark-render, -colour, -colour-ink)
+WORDS = [('black', 'Black', E.INK, E.PAPER), ('white', 'White', E.WHITE, E.NIGHT)] + \
+        [(f'{num}-{name.lower()}', f'{num} {name}', colour, ground(colour)) for num, name, colour in SPEAKERS]
 # Round 27i (the owner: "Can we also do stroke versions of these in addition to fill, or will that not work?"): each
 # version again in line (earth.mark_svg's strokes), beside the fills: the colour as its six rims, the rest as the
 # discs' visible edges in their one colour. Above 64 px the master, at 64 px the heavier small cut, and under 64 px the
@@ -103,6 +110,10 @@ def write():
         open(f, 'w').write(E.mark_svg(style, cols, label=f'EARF globe, {title.lower()}',
                                       ground='night' if bg == E.NIGHT else 'paper'))
         files.append((f, ['-w', '1024', '-h', '1024']))
+    for tag, title, colour, bg in WORDS:
+        f = os.path.join(OUT, f'earf-wordmark-{tag}.svg')
+        open(f, 'w').write(E.word_svg(colour, label=f'EARF, {title.lower()}'))
+        files.append((f, ['-w', '2048']))
     for tag, style, cols, word, g in LOCKUPS:
         f = os.path.join(OUT, f'earf-lockup-{tag}.svg')
         open(f, 'w').write(E.lockup_svg(style, cols, word, ground=g))

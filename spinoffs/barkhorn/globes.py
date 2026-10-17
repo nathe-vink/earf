@@ -512,7 +512,12 @@ function layout() {
 
 function outline(p) {
   ctx.beginPath();
-  if (p.c) { ctx.arc(p.c[0], p.c[1], p.r, -Math.PI / 2, 1.5 * Math.PI); return TAU * p.r; }
+  if (p.c) {
+    ctx.arc(p.c[0], p.c[1], p.r, -Math.PI / 2, 1.5 * Math.PI);
+    if (!p.ri) return TAU * p.r;
+    ctx.moveTo(p.c[0], p.c[1] - p.ri); ctx.arc(p.c[0], p.c[1], p.ri, -Math.PI / 2, 1.5 * Math.PI);
+    return TAU * (p.r + p.ri);
+  }
   let L = 0;
   p.pts.forEach((q, i) => { if (i) L += Math.hypot(q[0] - p.pts[i - 1][0], q[1] - p.pts[i - 1][1]); i ? ctx.lineTo(q[0], q[1]) : ctx.moveTo(q[0], q[1]); });
   const a = p.pts[p.pts.length - 1], b = p.pts[0]; L += Math.hypot(a[0] - b[0], a[1] - b[1]); ctx.closePath();
