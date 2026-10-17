@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27l**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 28**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -63,7 +63,36 @@ draws every version in line as well. Round 27j redraws the 32 and 16 px cuts wit
 line between the two caps at the south pole, the outline kept. Round 27k undoes both after the owner's notes, keeps the
 full drawing at every size with only its seams bolder, and makes each disc a slab in the spin, showing its edge as it
 lines up with you. Round 27l brings back the two segments of the outline either side of the butt, and studies three
-ways for the spin to read as one solid object, for the owner to choose.
+ways for the spin to read as one solid object, for the owner to choose. Round 28 builds the globe as the real object, six
+discs of the cabinets' tinted acrylic path-traced as the speakers are, and traces new one-colour versions, a fill and a
+line, from it.
+
+## Round 28: the globe made real, and the one-colour versions traced from it (the owner's notes of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "It still looks odd when ever the meridian "seams" of the globe are viewed straight on." | The flat one-colour discs draw a meridian side on as a strip of ink between two seams, which reads as a crack. A sheet of acrylic seen side on is its edge: one band, as wide as the sheet is thick. The render and both new one-colour versions draw it so. |
+| "I want the semi transparent pieces so it looks like acrylic like the speakers. Maybe it's best to actually render the object like we did the speakers, so it looks real," | **The globe built and rendered as an object** (`globe_real.py`, [the study page](https://claude.ai/artifact/PnVHPeDh1DEb7hYNp8euc2)). earth.py's six discs, each a slab 0.05 of the radius thick, are cut from the Cloud cabinets' 20 mm tinted cast acrylic, which makes the globe 800 mm across. They are cemented clear where they cross and path-traced in Cycles with the engine's acrylic, as the speakers are. The camera is earth.py's own, square on and orthographic: the 3D discs land on `earth.rings` to two ten-millionths of the radius. The ground is the paper (or night) as a backdrop of exactly that colour; a dim studio shows only in the reflections. |
+| "and then create the monochromatic fill and stroke versions based on the real thing." | **Traced from the same discs, through the same camera** (`globe_real.slabs`). Each disc has a near face, a far face and an outline, and an edge: what of the outline the near face leaves, where a line of sight enters through the rim and runs along the sheet, so the acrylic is deepest there. That is a crescent on an oblique disc, from nothing to the sheet's thickness, and the whole band side on. **Fill:** every face a sheet of 0.2 of the colour, so crossing sheets build up as tinted acrylic does, and every edge solid. **Line:** every disc's middle ring, 0.024 of the radius wide on the near side and 0.42 of that behind (read through the acrylic), with its edge filled. Laid over the render, every line sits on an edge. |
+
+- **Why the tints changed.** The cabinets' own tints absorb about a tenth of their own colour every 25 mm, so an edge
+  seen along 400 to 800 mm of sheet went nearly black, and the green meridian facing us, behind everything, greyed
+  the rest. `glow()` keeps each tint's face but lets its own colour through freely. Acid passes red and green, so its
+  edge stays yellow: over a long path only the freest channel is left, and an amber's edge goes red. The faces are a
+  little deeper than the cabinets' (their tint after 20 mm, not 25).
+- **Tried and left.** Slotted discs (each slotted round those before it, 0.5 mm clear) showed every joint as a line
+  and broke the glow along the sheets; cemented clear, the crossings are clean. Cycles counts each internal reflection
+  as a glossy bounce: at 8, light trapped in a sheet died before it got out, and the edges came out striped and
+  black; at 96 they glow.
+- **Costs.** A 1024 px still takes 12 minutes at 128 samples; a 720 px spin frame 35 s at 24 (4 CPUs), so the spin's
+  120 frames take 70 minutes.
+- **Nothing in the mark is replaced yet.** If the owner goes with it, the render becomes the colour mark, the fill
+  and line the one-colour mark, and the small sizes, the lockups and the mark's page are redrawn from them. The files
+  so far are in `brand/real/`: the still on paper and on night, the spin, and the fill and line in black and white,
+  stills and spins (`globe_real.py --still`, `--spin-frames` and `--encode`, `--flat`, `--flat-spin`). On night the
+  faces nearly vanish and the glowing edges carry the mark.
+
+![Round 28: the render, the fill and the line, and the meridian side on, now and after](brand/earth-mark-real-r28.png)
 
 ## Round 27l: the outline either side of the butt, and the spin as one solid object (the owner's notes of 2026-10-17)
 

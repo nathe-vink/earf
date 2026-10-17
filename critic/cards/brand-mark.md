@@ -13,7 +13,8 @@ set, each version on the ground it shows on; sheet 2 seven of them at 300, 64, 3
 the wordmark EARF; sheet 4 the spins, a frame every 0.4 s (round 27f: black and colour, steady; round 27k: each disc a
 slab); sheet 5 (round 27e)
 the angle study, the tip since chosen; sheet 6 (round 27i) the set in line; sheet 7 (round 27j) the south pole at less
-tip, a study; sheet 8 (round 27l) three ways for the spin to read as one solid object, a study, none chosen yet.
+tip, a study; sheet 8 (round 27l) three ways for the spin to read as one solid object, a study, none chosen yet; sheet 9
+(round 28) the globe rendered as the real object, with the one-colour fill and line traced from it, a study.
 
 ## The owner's requirements, in their own words (fixed)
 
@@ -30,6 +31,10 @@ tip, a study; sheet 8 (round 27l) three ways for the spin to read as one solid o
 - "I feel like it's missing segments to the left and right of the butt, that would make it look more like a circle
   when still and stroked or monochrome. Also wondering if, especially for the spinning, there's a way to make it
   function more like a solid object than a bunch of independent discs clipping through each other." (round 27l)
+- "It still looks odd when ever the meridian "seams" of the globe are viewed straight on. I want the semi transparent
+  pieces so it looks like acrylic like the speakers. Maybe it's best to actually render the object like we did the
+  speakers, so it looks real, and then create the monochromatic fill and stroke versions based on the real thing."
+  (round 28)
 - "the logo has to work in white only, black only, single color, multicolor and animated" (round 22)
 - "The acrylic is meant to be a transparent version of the discs" and "For acrylic I was expecting each disc to have a
   little thickness to it" (round 25)
@@ -81,6 +86,16 @@ and the steady spin.
   slabs lit by one light from the upper left, each face and rim toned by it; B, the black discs, each seamed piece a
   tone of the ink by its light; C, A turned about the upright, a turntable, every disc moving together. Until the
   owner chooses, the spins stay as they are.
+- The real object (round 28, a study, not yet adopted; `globe_real.py`): earth.py's six discs, each a slab 0.05 of
+  the radius thick, as the Cloud cabinets' 20 mm tinted cast acrylic (the globe 800 mm across), cemented clear where
+  they cross, path-traced in Cycles with the engine's acrylic (clear_resin, roughness 0.05), through earth.py's own
+  camera (square on, orthographic), on the ground as a backdrop of exactly its colour, a dim studio seen only in
+  reflections. Tints: the cabinets' through glow() (each passes its own colour freely, so a long edge glows instead of
+  going black; Acid passes red and green, so its edge stays yellow), their colour after 20 mm, not 25. Traced from it,
+  in one colour: the fill (each face a sheet of 0.2 of the colour, building where sheets cross; each edge, the outline
+  less the near face, solid) and the line (each disc's middle ring 0.024 of the radius wide in front, 0.42 of that
+  behind, its edge filled). A disc side on is one band as wide as the sheet is thick, in all three: no seams either
+  side of it.
 - In line (round 27i, new; the owner: "Can we also do stroke versions of these in addition to fill, or will that not
   work?"): every version again as strokes, beside the fills. In one colour the discs' visible edges, every piece the
   fill keeps outlined once, the outline too, `w` 0.05 of the radius, round joins and ends; in colour the six rims,
