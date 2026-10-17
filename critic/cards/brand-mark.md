@@ -10,7 +10,8 @@ see-through. This set is every version the brand prints, etches and shows: colou
 site, its look book, its boxes), black and white (one ink, flat: paper, print, an etch, an emboss; white out of dark
 grounds and photographs), and one in each speaker's own tint (that speaker's page, its box, its corner). Sheet 1 is the
 set, each version on the ground it shows on; sheet 2 seven of them at 300, 64, 32 and 16 px; sheet 3 the lockups with
-the wordmark EARF; sheet 4 the spins, a frame every 0.4 s (round 27f: black and colour, steady); sheet 5 (round 27e)
+the wordmark EARF; sheet 4 the spins, a frame every 0.4 s (round 27f: black and colour, steady; round 27k: each disc a
+slab); sheet 5 (round 27e)
 the angle study, the tip since chosen; sheet 6 (round 27i) the set in line; sheet 7 (round 27j) the south pole at less
 tip, a study.
 
@@ -23,7 +24,9 @@ tip, a study.
   of the combined discs. Maybe the angle Is wrong. Maybe if we add a spinning animation like a top it will help."
   (round 27e)
 - "The smaller ones are a little fucky. Also what can we do to get rid of the little butt at the bottom of the stroke
-  version, without compromising on the true shape of the object?" (round 27j)
+  version, without compromising on the true shape of the object?" (round 27j), and of 27j's answers: "The two lobes
+  merged looks worse", "I don't like the joined butt and I don't like changing the form at smaller sizes", and "When
+  spinning, each disc flattens when it lines up straight on, instead of reading as a disc with thickness." (round 27k)
 - "the logo has to work in white only, black only, single color, multicolor and animated" (round 22)
 - "The acrylic is meant to be a transparent version of the discs" and "For acrylic I was expecting each disc to have a
   little thickness to it" (round 25)
@@ -52,19 +55,22 @@ and the steady spin.
   every piece to the green disc; the owner liked it untrimmed). The acrylic's thickness is a crescent inside each
   disc's edge, its cells the discs' faces and crossings alone ("clipping on the multicolor one wherever there is
   overlap"). At the south pole, which sits on the outline at this tip, the side meridians' caps stand either side of
-  it; the line between them (the axis, where they cross) is left out, in the fill and in line, so the bottom reads as
-  one cap and the outline stays the discs' own (round 27j: a notch 0.029 of the radius deep is left at the pole). Small
-  cuts: up to 64 px the six discs with the seam widened to 0.05; up to 32 and 16 px (round 27j) four of them, the
-  equator and the three meridians, their own outline whole, engraved with the lines between their faces, `seam` 0.08
-  and 0.13 wide, a face whose largest inner circle is under `thin` 0.12 of the radius (the equator's tips) merged into
-  the neighbour it shares most edge with first, so no sliver, crumb or loose line is left.
+  it, the line between them (the axis, where they cross) drawn: round 27j drew them as one, and the owner found it
+  worse (round 27k). Small cuts (round 27k): the pieces the full drawing keeps, at its own seam, drawn with a wider
+  seam, `cut` 0.05 of the radius up to 64 px and 0.06 up to 32 and 16 px, so every piece is still there and the form
+  never changes (round 27's cuts dropped what their wider seams would not hold, which bit holes in the outline; round
+  27j drew four discs).
 - In motion (round 27e, new): the spin. The mark turns on its axis the Earth's way (the meridians round the pole, the
   parallels still), `rate` 45 degrees a second (a turn in 8 s), each loop `turn` 180 degrees (4 s: every coloured disc
   back in its place, so it loops without a seam and starts on the mark at rest), 30 frames a second, 720 px square
   with the mark's clear space, `clear` a quarter of its width, round it. Steady (the owner, round 27f): the top's
   version, its axis wobbling round a circle `wobble` 5 degrees across, moved the lean off the Earth's and is not made.
   In motion no piece is dropped (each narrows into its seam) and the scale back to the discs' width is the seam's own,
-  so nothing pops between frames. Black and colour, as MP4 and WebM; sheet 4 is a frame every 0.4 s.
+  so nothing pops between frames. Each disc is a slab `THICK` 0.05 of the radius thick (round 27k): as it nears edge on
+  its face moves toward us by half the thickness it shows and its rim shows on the near side, the rim on the globe's
+  surface so nothing covers it, the thickness shown t - w / 4 (w its oval's width across; seamed, t the ink's and the
+  seam), so a disc narrows to a band as wide as it is thick, never to a line; at rest nothing changes. Black and
+  colour, as MP4 and WebM; sheet 4 is a frame every 0.4 s.
 - In line (round 27i, new; the owner: "Can we also do stroke versions of these in addition to fill, or will that not
   work?"): every version again as strokes, beside the fills. In one colour the discs' visible edges, every piece the
   fill keeps outlined once, the outline too, `w` 0.05 of the radius, round joins and ends; in colour the six rims,

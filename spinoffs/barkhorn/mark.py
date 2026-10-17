@@ -103,7 +103,7 @@ def write():
         files.append((f, ['-w', '2048']))
     os.makedirs(os.path.join(OUT, 'small'), exist_ok=True)
     for tag, ink, g in INKS:
-        for px in sorted({*E.SMALL_SEAM, *E.SMALL_CUT}, reverse=True):
+        for px in sorted(E.SMALL_SEAM, reverse=True):
             f = os.path.join(OUT, 'small', f'earf-globe-{tag}-{px}.svg')
             open(f, 'w').write(E.mark_svg('discs', ink, label=f'EARF globe, {tag}, up to {px} px', ground=g, px=px))
             files.append((f, ['-w', str(px), '-h', str(px)]))
@@ -305,8 +305,8 @@ def angles(path):
 
 # Round 27j's study. The owner: "what can we do to get rid of the little butt at the bottom of the stroke version,
 # without compromising on the true shape of the object?" The butt is the south pole, on the outline: the side meridians'
-# caps stand either side of it, the axis between them. The line between the caps is now left out (earth._lobes), the
-# outline kept; what is left of the butt is the notch at the pole, the discs' own, and only less tip makes it smaller.
+# caps stand either side of it, the axis between them. It is the discs' own shape, and only less tip makes it smaller.
+# (27j drew the two caps as one; the owner, round 27k: "The two lobes merged looks worse", so they are two again.)
 POLE_TIPS = (16, 14, 12, 10)
 
 
@@ -326,7 +326,7 @@ def _pole():
 
 def pole(path):
     """Round 27j's study: the stroke version at the tips POLE_TIPS (the first the owner's), whole and its south pole
-    close up, the line between the caps left out at each; under each, the notch and the caps' reach."""
+    close up; under each, the notch and the caps' reach."""
     font, small = ImageFont.truetype('DejaVuSans.ttf', 15), ImageFont.truetype('DejaVuSans.ttf', 12)
     px, cw, big = 320, 340, 1200
     e = 1 + E.W_LINE / 2

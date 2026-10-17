@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 27j**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 27k**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -60,9 +60,32 @@ untrims the one-colour discs again, measures what the angle does to their tips, 
 top. Round 27f tips the globe 16° toward you instead of 22°, which halves the tips, and keeps the steady spin. Round
 27g studies the lateral discs crossing as the meridians do, and 27h shows that crossing inside the outline. Round 27i
 draws every version in line as well. Round 27j redraws the 32 and 16 px cuts with four discs, whole, and leaves out the
-line between the two caps at the south pole, the outline kept.
+line between the two caps at the south pole, the outline kept. Round 27k undoes both after the owner's notes, keeps the
+full drawing at every size with only its seams bolder, and makes each disc a slab in the spin, showing its edge as it
+lines up with you.
 
-## Round 27j: the small cuts redrawn, and the line at the south pole left out (the owner's notes of 2026-10-17)
+## Round 27k: the caps as before, the same drawing at every size, and the discs' thickness in the spin (the owner's notes of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "The two lobes merged looks worse" and "I don't like the joined butt" | **27j's join is undone.** The two caps either side of the south pole are two pieces again, with the line between them, as in round 27i: every full drawing, fill and line, is byte for byte round 27i's again. |
+| "I don't like changing the form at smaller sizes" | **The small cuts are the full drawing.** 27j drew 32 and 16 px with four discs; round 27's cuts dropped every piece too thin for their wider seams, which bit holes in the outline and left pieces floating (what made them "a little fucky"). Now each cut keeps exactly the pieces the full drawing keeps, at its own seam, and only draws them with a wider seam: 0.05 of the radius at 64 px, 0.06 at 32 and 16 px (`SMALL_SEAM`, `disc_shapes(cut=)`), no wider than its thinnest piece holds, so nothing drops out. |
+| "When spinning, each disc flattens when it lines up straight on, instead of reading as a disc with thickness." | **Each disc is a slab.** As a meridian turns edge on it now shows its thickness (`earth._slab`), as a slab truly looks: its face moves toward you by half the thickness it shows and its rim shows on the near side. The thickness shown fades in from nothing when its oval is four times as wide as the disc is thick, to all of it (0.05 of the radius, the acrylic's own) edge on. The rim lies on the globe's surface, so nothing covers it. So the disc narrows to a band as wide as it is thick and opens again, never to a line: in black the band is ink between two seams, in colour the acrylic's deeper edge tone. At rest every disc is wider than that, so the still mark is unchanged. |
+
+- **Tried first, this round:** a disc widened evenly about its line. Near edge on, the half of its face behind the
+  green meridian broke the band into slivers, which the seams ate (a white gap for a frame either side of edge on). A
+  fade ending at twice the thickness made the disc thin where the equator lies close in front of its face (at the
+  middle). The true slab picture, with the fade at four times, keeps the band whole through the pass.
+- **Drawn again:** the small cuts and the sizes sheet. Also the two spins (MP4 and WebM, still reproducible byte for
+  byte), a new spin sheet (`brand/earth-mark-spin-r27k.png`, a frame every 0.4 s; the green meridian is edge on at
+  2.0 s) and the pole study with the caps as they are. Everything else matches round 27i. Also republished: the mark's
+  page (version 10: the small cuts, the spins and the masters as before) and the globe page (version 25).
+
+![The sizes: every cut the full drawing, its seams bolder](brand/earth-mark-sizes-r27.png)
+
+![The spins, a frame every 0.4 s: at 2.0 s the green meridian edge on, a band](brand/earth-mark-spin-r27k.png)
+
+## Round 27j: the small cuts redrawn, and the line at the south pole left out (the owner's notes of 2026-10-17; both undone in 27k)
 
 | the owner's note | what changes |
 |---|---|
