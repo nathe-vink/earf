@@ -21,7 +21,10 @@ parallels cut to the ring (the butt kept) and with everything cut; sheet 11 (rou
 black, black in line, the flat acrylic; sheet 12 (round 28d) the render more see-through in the speakers' colours, on
 paper and on dark (the study's n4), against 28b's, then the flash and the equator's crossing before and after, and a
 rim on dark in the dim studio and in the plain grey room; sheet 13
-(round 28d) the acrylics tried for it, from round 28's clear tints to 28b's translucent.
+(round 28d) the acrylics tried for it, from round 28's clear tints to 28b's translucent; sheet 14 (round 28e) the
+render on light grounds in 28b, 28d and now, livelier, beside the dark version (unchanged), then the colour line before
+and after in one weight, the black line, and the new spin 43.5 degrees into the turn; sheet 15 (round 28e) the renders
+tried for it, each with its chroma and lightness.
 
 ## The owner's requirements, in their own words (fixed)
 
@@ -61,6 +64,9 @@ rim on dark in the dim studio and in the plain grey room; sheet 13
   whole outside of the intersection edges blue? I liked n4 or n5 without glow for dark. I want both paper and dark to be
   more transparent, like the same colors as the speakers with adjustments so they work on dark and light and aren't as
   transparent as the earlier version." (round 28d)
+- Asked whether the colour line version should be one weight, like the black line: "Yes the color line version should
+  be in one weight." And: "My last nit is that the light version of the acrylic globe kind of looks dull and muted in
+  color now." (round 28e)
 - "the logo has to work in white only, black only, single color, multicolor and animated" (round 22)
 - "The acrylic is meant to be a transparent version of the discs" and "For acrylic I was expecting each disc to have a
   little thickness to it" (round 25)
@@ -154,13 +160,18 @@ and the steady spin.
   (`--shine`), as the studio's softbox and the fill, mirrored whole in each rim turning square to the camera, flashed
   white in the spin. On dark: the study's n4 without the bloom (`--dark`: rims at 1, faces at 0.15, each rim as dense
   as 28b's), in the same plain grey room: the dim studio's softbox, at a quarter of its strength, still whitened a rim
-  turning square to the camera. The equator owns its crossings with the meridians (`_equator_owns`): the meridians' faces in the 20 mm cell
+  turning square to the camera. Round 28e: on light grounds the render had lost a third of its colour against 28b
+  (OKLab chroma over the globe 0.073 against 0.112), each disc seen through the green one facing us and multiplying
+  into it; the hues the acrylic follows are now purer and a touch lighter (OKLCh chroma times 1.4, lightness up 0.05,
+  `--vivid`), each sheet lets 0.45 of the light through, and the key and fill are at 4 W/m², so it is as colourful as
+  28b (0.113) and lighter (0.568 against 0.549). The dark version keeps 28d's acrylic (`DARK` carries it). The equator owns its crossings with the meridians (`_equator_owns`): the meridians' faces in the 20 mm cell
   where the rims meet take the equator's acrylic, so its edge runs on unbroken where the two had crossed as two
   triangles of each colour.
 - In line (round 27i, new; the owner: "Can we also do stroke versions of these in addition to fill, or will that not
   work?"): every version again as strokes, beside the fills. In one colour the discs' visible edges, every piece the
   fill keeps outlined once, the outline too, `w` 0.05 of the radius, round joins and ends; in colour the six rims,
-  see-through, in their colours, the far halves thinner (round 22's lines), `wc` 0.065 in front. At 64 px a heavier
+  see-through, in their colours, every run the same 0.05, the far halves under the near (round 28e; until then the far
+  halves thinner, round 22's lines, and 0.065 in front). At 64 px a heavier
   cut (0.07); below 64 px the fills' small cuts. Sheet 6 is the set in line.
 - Round 1 judged the acrylic's own one-colour forms, kept in the code:
 - Black and white (one ink, no tints): a point is inked where an odd number of discs cover it (parity: the discs

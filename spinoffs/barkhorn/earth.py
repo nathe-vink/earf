@@ -493,10 +493,10 @@ def disc_shapes(spin=0.0, flush=True, seam=SEAM, lap=0.004, keep=KEEP, cut=None,
 # edges: every piece the fill keeps outlined once (where two pieces meet, one line), the outline too, `w` of the radius
 # wide, round at the joins and ends (edge_lines; scaled so the stroke's outer edge lies where the fill's does). In colour
 # the acrylic is see-through, so its stroke version is the six rims themselves, each in its own colour, the far halves
-# under the near and thinner (lines_body with depth, round 22's lines), `wc` wide in front, a little heavier than one
-# colour's lines since the far halves are lighter. Below 64 px the lines knot together, so at 64 px they widen to
-# `small` and under it the fill's small cuts stand in.
-STROKE = dict(w=0.05, wc=0.065, small={64: 0.07})
+# under the near, every line `w` wide as one colour's are (round 28e, the owner: "Yes the color line version should be
+# in one weight"; until then the far halves thinner, round 22's lines, and the near 0.065). Below 64 px the lines knot
+# together, so at 64 px they widen to `small` and under it the fill's small cuts stand in.
+STROKE = dict(w=0.05, small={64: 0.07})
 
 
 def edge_lines(spin=0.0, seam=SEAM, keep=KEEP):
@@ -942,8 +942,8 @@ def mark_svg(style, colours, size=None, bg=None, label='EARF', ground='paper', p
         w = next((STROKE['small'][k] for k in sorted(STROKE['small']) if px and px <= k), STROKE['w'])
         body, e = strokes_body(colours[0], w=w), 1 + W_LINE / 2
     elif style == 'strokes':                             # round 27i: the acrylic's rims, see-through, in their colours
-        k = 1 / (1 + STROKE['wc'] / 2)
-        body, e = f'<g transform="scale({k:.5f})">{lines_body(colours, depth=True, w=STROKE["wc"])}</g>', 1 + W_LINE / 2
+        k = 1 / (1 + STROKE['w'] / 2)                    # (round 28e: one weight, as one colour's lines)
+        body, e = f'<g transform="scale({k:.5f})">{lines_body(colours, w=STROKE["w"])}</g>', 1 + W_LINE / 2
     else:
         body, e = lines_body(colours, depth=style == 'lines'), 1 + W_LINE / 2
     wh = f' width="{size}" height="{size}"' if size else ''

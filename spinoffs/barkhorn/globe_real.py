@@ -41,6 +41,13 @@ whole, so the room is now a plain grey one (--env grey), on dark as on paper (th
 strength still whitened such a rim), and neither light shows in reflections but the key at 0.4 (--shine). And the
 equator's edge runs unbroken where it meets the meridians (_equator_owns).
 
+Round 28e. The owner: "the light version of the acrylic globe kind of looks dull and muted in color now." At 0.6
+through every disc was seen through the green one facing us, which covers the whole globe, and the tints multiplied,
+so on paper the render had a third less colour than 28b's. On light grounds the hues the acrylic follows are now purer
+and a touch lighter (--vivid, in OKLCh, the hue kept), each sheet lets 0.45 through (--clear) and the key and fill are
+at 4: as colourful as 28b, and lighter. The dark version had kept its colour, so the presets carry the acrylic too
+(lighting) and --dark keeps 28d's.
+
     python3 spinoffs/barkhorn/globe_real.py --still OUT.png [--ground paper|night] [--px 1024] [--samples 128] [--spin DEG]
     python3 spinoffs/barkhorn/globe_real.py --spin-frames DIR [--frames 120] [--px 720] [--samples 24] [--first N --last M]
     python3 spinoffs/barkhorn/globe_real.py --encode DIR OUT          the frames as OUT.mp4 and OUT.webm
@@ -74,20 +81,25 @@ DEPTH, POLISH = 0.025, 0.05                              # their depth (m) and r
 MARK_DEPTH = 0.02                                        # the globe's: a little deeper, so a face holds its colour on paper
 ORDER = [4, 3, 5, 1, 0, 2]                               # which disc is whole: the meridian facing us, then the others in turn
 GROUNDS = {'paper': E.PAPER, 'night': E.NIGHT}
-GLOW = dict(ground='night', env='dim', key=2.0, fill=1.5,
-            neon=(1.0, 0.15))                            # round 28c, the colour mark on dark grounds: fluorescent acrylic,
+GLOW = dict(ground='night', env='dim', key=2.0, fill=1.5, neon=(1.0, 0.15),
+            body='mark', clear=0.25, vivid=(1.0, 0.0))   # round 28c, the colour mark on dark grounds: fluorescent acrylic,
                                                          # its rims their own colour at full and its faces at 0.15, a dim
-                                                         # room, a softer key and fill, and bloom()
-DARK = dict(ground='night', env='grey', key=2.0, fill=1.5,
-            neon=(1.0, 0.15))                            # round 28d, on dark: the study's n4 (rims at 1.0), no bloom, in
-                                                         # the plain grey room as on paper: the studio's softbox, even at
-                                                         # 0.25, whitened a rim turning square to the camera
-LIGHTS = dict(ground='paper', env='grey', key=3.0, fill=3.0, neon=(0.0, 0.0))   # with no preset: the colour mark on paper
+                                                         # room, a softer key and fill, and bloom(), on 28b's acrylic
+DARK = dict(ground='night', env='grey', key=2.0, fill=1.5, neon=(1.0, 0.15),
+            body='through-deep', clear=0.6, vivid=(1.0, 0.0))   # round 28d, on dark: the study's n4 (rims at 1.0), no bloom,
+                                                         # in the plain grey room as on paper (the studio's softbox, even
+                                                         # at 0.25, whitened a rim turning square to the camera)
+LIGHTS = dict(ground='paper', env='grey', key=4.0, fill=4.0, neon=(0.0, 0.0),
+              body='through-deep', clear=0.45, vivid=(1.4, 0.05))   # with no preset: the colour mark on paper (round 28e,
+                                                         # the owner: "the light version of the acrylic globe kind of looks
+                                                         # dull and muted in color now": livelier hues, a little less clear,
+                                                         # more light; 28d's 0.6 clear in the hues as they are stays on dark)
 
 
 def lighting(a):
-    """A run's ground, room, key, fill and neon: each as given, else the preset's (--glow, --dark), else LIGHTS'. (Round
-    28d: the presets used to replace what was given, so a test of the dark room, --dark --env dark, rendered the studio.)"""
+    """A run's ground, room, key, fill, neon and acrylic (body, clear, vivid): each as given, else the preset's (--glow,
+    --dark), else LIGHTS'. (Round 28d: the presets used to replace what was given, so a test of the dark room, --dark
+    --env dark, rendered the studio.)"""
     preset = GLOW if a.glow else DARK if a.dark else LIGHTS
     for k in LIGHTS:
         if getattr(a, k) is None:
@@ -316,11 +328,33 @@ def _root_hex(hx, k=0.5):
     return '#%02X%02X%02X' % tuple(int(round(255 * min(1.0, x))) for x in s)
 
 
-BODIES = {'mark': None,
-          'cabinet': {k: (ACRYLIC[k], HORN[k]) for k in NAMES},
-          'horn': {k: (HORN[k], HORN[k]) for k in NAMES},
-          'through': {k: (_root_hex(E._C[k.title()]), E._C[k.title()]) for k in NAMES},
-          'through-deep': {k: (_root_hex(E._C[k.title()], 0.65), E._C[k.title()]) for k in NAMES}}
+def _vivid_hex(hx, c=1.0, lift=0.0):
+    """`hx` in OKLCh with its chroma times `c` and its lightness raised by `lift`, its hue kept; where that leaves sRGB
+    the chroma is eased back until it fits (clipping a channel would turn the hue)."""
+    L, a, b = E._oklab(hx)
+    for k in np.linspace(c, min(c, 1.0), 49):
+        l_, m_, s_ = ((L + lift) + 0.3963377774 * a * k + 0.2158037573 * b * k) ** 3, \
+            ((L + lift) - 0.1055613458 * a * k - 0.0638541728 * b * k) ** 3, ((L + lift) - 0.0894841775 * a * k - 1.2914855480 * b * k) ** 3
+        v = np.array([4.0767416621 * l_ - 3.3077115913 * m_ + 0.2309699292 * s_,
+                      -1.2684380046 * l_ + 2.6097574011 * m_ - 0.3413193965 * s_,
+                      -0.0041960863 * l_ - 0.7034186147 * m_ + 1.7076147010 * s_])
+        if v.min() >= -1e-4 and v.max() <= 1 + 1e-4:
+            break
+    return E._from_oklab(np.array([L + lift, a * k, b * k]))
+
+
+def _hues(c=1.0, lift=0.0):
+    """Each disc's hue: the mark's, or livelier (round 28e), its chroma times `c` and its lightness raised by `lift`."""
+    return {k: E._C[k.title()] if (c, lift) == (1.0, 0.0) else _vivid_hex(E._C[k.title()], c, lift) for k in NAMES}
+
+
+def _body(kind, hues):
+    """The acrylic's (face, scatter) colours per disc for --body, from `hues` (_hues) where it follows the mark."""
+    return {'mark': {k: (hues[k], hues[k]) for k in NAMES},
+            'cabinet': {k: (ACRYLIC[k], HORN[k]) for k in NAMES},
+            'horn': {k: (HORN[k], HORN[k]) for k in NAMES},
+            'through': {k: (_root_hex(hues[k]), hues[k]) for k in NAMES},
+            'through-deep': {k: (_root_hex(hues[k], 0.65), hues[k]) for k in NAMES}}[kind]
 
 
 def _equator_owns(me):
@@ -539,15 +573,19 @@ def main():
     ap.add_argument('--look', default='translucent', choices=['clear', 'translucent'],
                     help="translucent in the mark's hues (round 28b), or clear tinted (round 28: with --env dim --key 2 --fill 0)")
     ap.add_argument('--scatter', type=float, default=0.012, help='translucent: how far (m) light scatters into the acrylic')
-    ap.add_argument('--clear', type=float, default=0.6,
-                    help='translucent: the share of light crossing straight through (round 28b: 0.25)')
-    ap.add_argument('--key', type=float, help="the key's irradiance (W/m2 at the globe; 3, or the preset's)")
-    ap.add_argument('--fill', type=float, help="a front fill's irradiance (0: none; 3, or the preset's)")
+    ap.add_argument('--clear', type=float,
+                    help="translucent: the share of light crossing straight through (0.45, or the preset's; round 28b: 0.25)")
+    ap.add_argument('--key', type=float, help="the key's irradiance (W/m2 at the globe; 4, or the preset's)")
+    ap.add_argument('--fill', type=float, help="a front fill's irradiance (0: none; 4, or the preset's)")
     ap.add_argument('--milk', type=float, default=0.0, help='clear: a share of the light scattered in the sheet (round 28d)')
-    ap.add_argument('--body', default='through-deep', choices=['mark', 'cabinet', 'horn', 'through', 'through-deep'],
+    ap.add_argument('--body', choices=['mark', 'cabinet', 'horn', 'through', 'through-deep'],
                     help="translucent: the surface and the scatter both the mark's hue (round 28b); the surface the cabinets' tint and "
                          "the scatter the horns' colour (cabinet); both the horns' (horn); or the surface the mark's hue's square "
-                         "root, so a disc seen through over the paper is the mark's hue (through)")
+                         "root, so a disc seen through over the paper is the mark's hue (through; through-deep a little deeper, "
+                         "or the preset's)")
+    ap.add_argument('--vivid', type=float, nargs=2, metavar=('CHROMA', 'LIFT'),
+                    help="the hues the body follows, livelier (round 28e): their chroma times CHROMA, their lightness raised by "
+                         "LIFT (OKLCh; 1.4 0.05, or the preset's)")
     ap.add_argument('--crossings', default='equator', choices=['equator', 'fused'],
                     help="the equator's edge unbroken where it meets the meridians (round 28d), or both acrylics there (round 28)")
     ap.add_argument('--shine', type=float, nargs=2, default=(0.4, 0.0), metavar=('KEY', 'FILL'),
@@ -593,7 +631,7 @@ def main():
     base = HORN if a.tint.startswith('horn') else ACRYLIC
     root = build(bpy, base if a.tint in ('cabinet', 'horn') else {k: glow(v, passed=PASS.get(k, '')) for k, v in base.items()},
                  not a.slots, a.depth, a.look, a.scatter, a.clear, tuple(a.neon), a.crossings, a.milk,
-                 BODIES[a.body])
+                 _body(a.body, _hues(*a.vivid)))
     if a.still:
         stage(bpy, a.ground, a.px or 1024, 1 + E.W_LINE / 2, a.samples or 128, a.env, a.adaptive or 0.01, a.key, a.fill,
               tuple(a.shine), a.bounces)

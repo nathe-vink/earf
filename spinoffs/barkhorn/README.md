@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 28d**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 28e**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -70,7 +70,31 @@ the old one-colour logos. Round 28c makes the render the colour mark, with a glo
 line version too, every line one weight, turns a meridian side on into one white stroke in the black spin, and cuts
 the parallels' slivers past the outer ring in every one-colour version, keeping the caps either side of the butt. Round
 28d makes the render more transparent in the speakers' colours, takes the study's n4 for dark grounds, takes the flashes
-out of the spin, and runs the equator's edge unbroken where it meets the meridians.
+out of the spin, and runs the equator's edge unbroken where it meets the meridians. Round 28e draws the colour line in
+one weight and makes the render on light grounds livelier again, still see-through.
+
+## Round 28e: the colour line in one weight, and the render livelier on light (the owner's notes of 2026-10-17)
+
+| the owner's note | what changes |
+|---|---|
+| "Yes the color line version should be in one weight." (to: the colour line version draws each rim bold in front and thin behind; one weight, like the black line?) | **The colour line is one weight**: the six rims, each in its colour, every run 0.05 of the radius wide as the one-colour lines are, the far halves still under the near (`earth.mark_svg`'s strokes at `STROKE['w']`; until now the near halves 0.065 wide and the far ones thinner, round 22's lines). Only `earf-globe-colour-stroke.svg` and `.png` change. |
+| "My last nit is that the light version of the acrylic globe kind of looks dull and muted in color now." | **Livelier on light, still see-through.** Measured over the globe, the render on paper had lost a third of its colour against 28b (OKLab chroma 0.073 against 0.112) and gone darker (lightness 0.480 against 0.549). At 0.6 straight through, every disc was seen through the green one facing you, which covers the whole globe, and each sheet's tint multiplied into the next, so the orange read brown and the green grey. Now the hues the acrylic follows are purer and a touch lighter (OKLCh chroma times 1.4, lightness up 0.05, the hue kept: `--vivid 1.4 0.05`), each sheet lets 0.45 of the light straight through (`--clear 0.45`; 28b a quarter, 28d 0.6), and the key and fill are at 4 W/m² (from 3). It measures as colourful as 28b and lighter: chroma 0.113, lightness 0.568. The render on dark had kept its colour (chroma 0.121, against 0.123 on 28b's acrylic), so it keeps 28d's acrylic: the presets now carry the acrylic too (`body`, `clear`, `vivid` in `DARK`, and 28b's in `GLOW`, as round 28c made it), and nothing on dark was rendered again. |
+
+- **Tried and left** (360 px test renders, on the second sheet). Lighter faces alone (the hue's square root, `--body
+  through`): lighter but paler, chroma 0.065. Purer hues alone, at 0.6 through: still muted, 0.080. The mark's hue on
+  the face (`--body mark`) at 0.35 to 0.45 through: as colourful as 28b, but dense and dark, the discs behind fading.
+  Chroma times 1.5: the green creeping toward lime.
+- **No flashes.** The key shows in reflections at 0.4 as before, now of 4 W/m²: across the new spin the most
+  near-white pixels in any frame are 2, at 43.5°, where 28b had 114. Its colour holds round the loop: chroma 0.113 on
+  average (0.110 at the least), against 28d's 0.075.
+- **Costs.** As 28d: a 1024 px still about 8 minutes, a 720 px spin frame 22 to 24 s.
+- **Republished:** [the mark's page](https://claude.ai/artifact/N5LsNPbNHyBmjpTEj756EG), version 16: the new render
+  on light grounds, its spin and lockup, and the colour line in one weight. Also [the study
+  page](https://claude.ai/artifact/PnVHPeDh1DEb7hYNp8euc2), now rounds 28b to 28e. Both are private.
+
+![Round 28e: the render on light grounds in 28b, 28d and now, and on dark (unchanged); the colour line before and after beside the black line, and the new spin 43.5 degrees into the turn](brand/earth-mark-r28e.png)
+
+![Round 28e: the renders tried on paper, each with its chroma and lightness, from 28b and 28d to the one chosen and a step further](brand/earth-mark-tried-r28e.png)
 
 ## Round 28d: more transparent in the speakers' colours, n4 on dark, no flashes, the equator's edge unbroken (the owner's notes of 2026-10-17)
 
@@ -79,7 +103,7 @@ out of the spin, and runs the equator's edge unbroken where it meets the meridia
 | "For the spin, it flashes really bright in several spots at certain positions and looks odd." | **No flashes.** As each side meridian turned square to the camera, its rim mirrored the studio's softbox (in Poly Haven's room, seen only in the acrylic) and the broad fill beside the camera, and showed a white streak for a few frames, three times a loop. The room is now plain grey, and the fill does not show in reflections; the key shows at 0.4 of its strength (`globe_real.py --env grey --shine 0.4 0`, now the defaults). Across the loop at 360 px, the most near-white pixels in any frame fell from 114 to 3, and in the final 720 px spin no frame has more than one. On dark the room was the same studio at a quarter of its strength, and its softbox still turned a rim white at its middle as it squared to the camera, for about four frames, three times a loop (316 near-white pixels at 45°). The dark version now has the same plain grey room (`DARK`): across its final spin, no frame has a near-white pixel. The look barely moves: the globe's mean colour by about 5 of 255. (An earlier check had seemed to clear the room, but `--dark` had quietly overridden the `--env` it was given. A preset now fills in only what is not given: `globe_real.lighting`.) |
 | "Where the edge of the blue disc meets the meridians, can we get rid of those double color triangle shapes and just make the whole outside of the intersection edges blue?" | **The equator's edge runs unbroken.** Cemented, the two rims crossed as two triangles of each colour: across the 20 mm cell where they meet, each rim lies a tenth of a millimetre outside the other in two opposite corners. The meridians' faces in that cell now take the equator's acrylic (`globe_real._equator_owns`), so the blue runs straight through. The 40° parallels keep their crossings: there a meridian really does stand up to 8 mm past the parallel's edge on one side, and recolouring it would paint a bump. |
 | "I liked n4 or n5 without glow for dark." | **On dark, n4 without the bloom**: the rims glow their own colour at 1 and the faces at 0.15 (`--dark`). n4 rather than n5 because at n5's 1.6 the rims pale toward white (the green to a pale lime, the violet to lilac), where at 1 each keeps its own colour. |
-| "I want both paper and dark to be more transparent, like the same colors as the speakers with adjustments so they work on dark and light and aren't as transparent as the earlier version." | **More transparent, in the speakers' colours.** The speakers' horns are clear resin tinted the line's colours (`product.py`). Those are near enough the mark's hues: Poison's bottle green is #4C6A36, the mark's green #4F7F3A. So each disc keeps the mark's hue but lets 0.6 of the light straight through, where 28b let through a quarter. Its face is tinted a little deeper than the hue's square root (`--body through-deep`, `--clear 0.6`): light crossing a sheet is tinted at both faces, so a disc seen against the paper is the hue itself. That lands between round 28's clear tints, where the faces nearly vanished, and 28b's translucent acrylic, where each disc hid the ones behind it. The same acrylic goes on paper and on dark. |
+| "I want both paper and dark to be more transparent, like the same colors as the speakers with adjustments so they work on dark and light and aren't as transparent as the earlier version." | **More transparent, in the speakers' colours.** The speakers' horns are clear resin tinted the line's colours (`product.py`). Those are near enough the mark's hues: Poison's bottle green is #4C6A36, the mark's green #4F7F3A. So each disc keeps the mark's hue but lets 0.6 of the light straight through, where 28b let through a quarter. Its face is tinted a little deeper than the hue's square root (`--body through-deep`, `--clear 0.6`): light crossing a sheet is tinted at both faces, so a disc seen against the paper is the hue itself. That lands between round 28's clear tints, where the faces nearly vanished, and 28b's translucent acrylic, where each disc hid the ones behind it. The same acrylic goes on paper and on dark (round 28e: on paper, purer hues and 0.45 through; dark keeps this). |
 
 - **Tried and left.**
   - The speakers' clear tints at two and three times round 28's depth: glow() turned the green lime, and dark lines ran along every crossing.
