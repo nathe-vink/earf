@@ -353,8 +353,11 @@ def fog(bpy, name, p, kit):
         e = g.mul(e, g.add(0.6, g.mul(g.noise(fv, p.get('wall_fray', 300.0), 3.0), 0.8)))
         top = g.add(top, g.mul(e, wh))
     if p.get('ocean'):
-        ob, oh = p['ocean']
-        top = g.add(top, g.mul(g.smooth(g.div(g.sub(bdeg, ob), 15.0)), oh))
+        ob, oh, od = (p['ocean'] + [0.0])[:3]
+        rise = g.mul(g.smooth(g.div(g.sub(bdeg, ob), p.get('ocean_width', 15.0))), oh)
+        if od:                                              # only beyond `od` metres out, not beside the camera
+            rise = g.mul(rise, g.smooth(g.div(g.sub(dist, od), 800.0)))
+        top = g.add(top, rise)
     layer = g.smooth(g.div(g.sub(top, z), p.get('soft', 4.0)))
     b1 = g.noise(tc.outputs['Object'], p.get('billow_size', 30.0), 5.0, 0.6)
     b2 = g.noise(tc.outputs['Object'], p.get('billow_size', 30.0) * 5.0, 3.0, 0.5)
