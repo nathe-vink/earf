@@ -30,3 +30,21 @@
 | 3 | 5.5 | iterate | The horn's back panel drew a rectangle in the mist; the pool and reflector paled the acrylic; the horn wanted a reflection; the sorrel was a uniform carpet; the snake's scales and pose; no contact ring at the plinth, the death caps hidden; the trunk sliver missing | Sun 30 → 21, reflector 2 → 1; the horn backlight returned with `volume: false` (a new engine knob, a1f2639); sorrel varied in size and colour, some folded, with a 0.58 m bare ring round the speaker; death caps forward into a dapple; frog onto the stump; a stronger scale bump; trunk tint 0.5 |
 | 4 | 5.0 | iterate | No sun pool on the body (66 against 77 in the right shaft); the right shaft and ferns compete; the viper a smooth toy, the frog a beetle; a softbox in the horn (217); the near foreground too bright; agarics waxy and the moss a hard disc; death caps pale; the trunk flat, foxgloves in a row | A tight 0.42 m pool on the upper face, sun 28; the right shaft holes closed or moved deep, rear mist 0.09 → 0.07; reflector 0.5; scrim3 2.5 → 1.2; viper girth 4.8 → 3.8 cm, deeper seams, a shade per scale, roughness 0.38, coat 0.25; death caps olive (#8C8A5E at the rim); moss thinned with ragged edges (`feather` on the strew); trunk tint 0.35 |
 | 5 | 5.0 | iterate | The speaker now darker than the mist and the ground (31 against 53 and 58): the tight pool lit only its top; the horn a black mirror with one hot highlight; the viper, agarics and foxgloves still read as CG; the death caps and frog lost | Stopped: passes 4 and 5 gained −0.5 and 0. The finals come from pass 3's rig (5.5), with one mechanical change, its own top note: the horn's back panel kept out of the mist (`volume: false`) |
+
+## The final and the duel (2026-10-18)
+
+The landscape final was rendered at 2400 × 1600 and 512 samples from pass 3's rig, on the drivers before 01267eb. A small copy is `renders/2026-10-18/barkhorn/proofs31/element-poison_b-final.jpg`. It went into a blind duel against Poison A's final (`renders/2026-10-18/barkhorn/element31/poison.png`), run twice with the order swapped:
+
+| Order | Poison A | Poison B | Preferred |
+|---|---|---|---|
+| B shown first | 6.5 | 4.5 | A |
+| A shown first | 6.5 | 5.0 | A |
+
+**A wins by 1.5–2 points, so A stays on the site.** Both judges named the same faults in B:
+- **The poisons read as CG props.** The viper looks like a glossy toy snake, the fly agarics like red discs with dots, and the death caps and nightshade berries like stray blobs in the ferns. Both judges called this the main reason, and pass 4 and 5 critics said the same.
+- **The horn mirrors a dark green blob.** In A it reads as a horn with a chrome rim.
+- **The ground and bark look weaker.** The sorrel looks repeated and the bark muddy, beside A's ferns and leaf litter.
+
+B's strengths were the even light on the cabinet, its glow through the acrylic, and the haze. At full size the near props are also soft: f/4 at 2.3–3 m puts the snake and the clump out of focus.
+
+**Honest note:** a procedurally modelled snake and procedural fungi cannot pass as photographs at this distance. Five passes kept the props reading as props. For B to make a page, the poisons would need scanned assets (CC0 photogrammetry of a snake and of fungi), which I could not find. Another option is to show fewer and smaller poisons, further back in the haze, where modelling is good enough.
