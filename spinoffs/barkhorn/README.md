@@ -181,13 +181,13 @@ Three of the campaign critics named the speaker's own surfaces:
   | Cloud | Concept A | Concept B | On its page |
   |---|---|---|---|
   | Ember | a lava field at blue hour, its crust cracked to the glow (5.5) | | A |
-  | Dust | the Southwest at golden hour (6.0) | | A |
+  | Dust | the Southwest at golden hour (6.0) | the owner's note: true Route 66 country, its mesas and buttes, saguaro, a blue sky (in passes) | A |
   | Acid | the acid spring at Dallol, sulphur and steam (5.5) | acid rain over wet black lava (6.5) | B, by a blind duel (2 to 1) |
   | Poison | a redwood rainforest (6.5) | | A |
   | Ice | snow country at blue hour, a cabin's window far behind (7.0) | Diamond Beach at sunrise (5.8) | A, by a blind duel (2 to 1) |
   | Haze | a lavender field at dusk (6.0) | layered hills at blue hour (5.5) | B, by a blind duel (2 to 1), then rendered again with its base in view and the sun clear of the horn (a duel, 2 to 0) |
   | Fog | a summit above a sea of cloud (6.5) | San Francisco's fog: a headland at dawn above the fog (6.0) | B, by a blind duel (3 to 0); a third concept, the Golden Gate from the Marin Headlands, is in passes |
-  | Smoke | woodsmoke at dawn in a pine wood (6.5) | a misty birch wood, high-key (5.5) | A, by a blind duel (3 to 0), then re-finished from its raw (a duel, 6.4 to 6.0) |
+  | Smoke | woodsmoke at dawn in a pine wood (6.5) | a misty birch wood, high-key (5.5) | A, by a blind duel (3 to 0), then re-finished from its raw (a duel, 6.4 to 6.0); the owner finds it neither smoky enough nor soft enough, so a third concept is in passes |
 
   The score is a fresh critic's on the final itself. The sessions fixed the engine as they went:
   - scanned plants keep their leaves cut out;
@@ -199,9 +199,11 @@ Three of the campaign critics named the speaker's own surfaces:
   - the hero (the eight together) held at 6.0 over eight passes and three changes of approach; its finals are rendering;
   - the catalogue (each colour's front view) reached 6.0, and its rig has won two duels in a row.
 
-  The site takes each as it lands: `web.py` prefers round 31's hero, room and in-their-element pictures once they are in the repository, with their phone frames below 700 px. Each speaker's page shows its own place ("At home"); the home page shows all eight in a strip once the last is in.
+  The site takes each as it lands: `web.py` prefers round 31's hero, room and in-their-element pictures once they are in the repository, with their phone frames below 700 px. The home page shows all eight in a strip.
+- **The speaker's page, after the owner's note** ("I want the landscape photos to be the hero for each speaker ... Then users can paginate through all of the other images the way they would shopping online for a product"). Each speaker's page now opens on its photograph in its element (its phone frame on phones), captioned with where it stands, and pages through the rest as a shop does: arrows, a count, a swipe, the arrow keys and a strip of thumbnails. The stage keeps the photograph's shape (3:2, and 4:5 on phones), and every other picture is carried to its edges on its own ground, so the tall product shots stand in a seamless field rather than a box.
 - **Render helpers.** A final takes two to three hours on one session's four cores, so the slow ones are split. A helper session renders the frames it is given from the set's own commit, pushes them to its own branch, and stops: the portraits of Ice, Ember, Fog, Smoke and the room, the hero's phone frame, the studio's queue across five more, one strip of Ember's landscape (rendered in four strips on two boxes, stitched, then finished once), and one box for each catalogue colour and each pair of uplit frames. Twelve of them, started at 13:45, never ran: the commits they were given had not reached GitHub when they were made. They were found and started again at 15:55, from full commit names.
-- **The look book** (version 50): a page for each colour in its element, Cumulus and Bell, the round-31 room with its bars measured again (the sideboard 560 mm), and the red Cloud's name, Ember, wherever Flare was left. The Bark and Crag pages, set aside since round 17, are hidden rather than shown last.
+- **The look book** (version 50): a page for each colour in its element, Cumulus and Bell, the round-31 room with its bars measured again (the sideboard 560 mm), and the red Cloud's name, Ember, wherever Flare was left. The Bark and Crag pages, set aside since round 17, are hidden rather than shown last. Version 51 swaps in Haze's re-render and Fog's headland.
+- **Planet EARF** (round 32), the owner's acrylic listening bar in San Francisco, has begun in its own session on the `r32-planet` branch, where the brief and its sourced research are in `planet/`.
 
 ### The site's deployments
 
