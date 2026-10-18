@@ -6,7 +6,7 @@ sun; beyond the edge, far below, a sea of cloud runs to the horizon; a few birds
 """
 from common import area, asset, camera, finish, ground, piece, portrait_of, scatter, shot as frame, sky, sun_from_sky
 
-SKY, ROT = 'qwantani_late_afternoon_puresky', 119.0   # its sun 19 degrees up on the camera's left (az -65), raking the speaker's front
+SKY, ROT = 'qwantani_puresky', 354.0             # the sun 28 degrees up at the front right (az 60): raking light, the sky behind at its bluest
 
 
 def birds(cx, y, cz, n=6, span=0.9, seed=2):
@@ -26,34 +26,36 @@ def props():
     p = []
     # the summit: a scanned cliff top (Poly Haven, real scale); its flattest spot near the top, at (3.72, 3.11, 6.91) in
     # the scan, brought to the origin, the speaker's feet 35 mm into it (its stone is uneven by a few cm under them)
-    p.append(asset('namaqualand_cliff_02', position=(-4.00, -3.11, -6.900), rotate=(0, 0, 0), scale=1.0, res='8k'))
+    p.append(asset('namaqualand_cliff_02', position=(-3.72, -3.11, -6.875), rotate=(0, 0, 0), scale=1.0, res='8k'))
     # the sea of cloud: near, real cloud (a volume with billows and wisps); far, a heaped deck out to the horizon
     # (the volume's box is held to what the lens sees, with a margin toward the sun, and its noise kept light: a
     # procedural volume is traced by null scattering, so its cost goes with its size, its peak density and its noise)
     p.append(piece('ext', module='fog_el', fn='cloudvol', box=[-400.0, 250.0, -230.0, 2600.0, 2800.0, -50.0],
-                   top=-140.0, amp=160.0, scale=380.0, detail=7.0, erode=26.0, soft=0.7, density=0.14,
+                   top=-140.0, amp=110.0, scale=220.0, detail=7.0, erode=18.0, soft=0.5, density=0.14,
                    octaves=5, billow_octaves=4, anisotropy=0.65))
-    p.append(piece('ext', module='fog_el', fn='cloudsea', near=2600.0, far=40000.0, width=120000.0, z=-170.0,
-                   billow=140.0, height=45.0, depth=120.0, x=0.0, lean=0.4, rows=220, cols=480, fan=2.6, seed=3,
-                   sss_r=20.0, bump_size=4.0, bump_dist=14.0))
+    p.append(piece('ext', module='fog_el', fn='cloudsea', near=2600.0, far=40000.0, width=90000.0, z=-170.0,
+                   billow=260.0, height=65.0, depth=120.0, x=3000.0, rows=170, cols=380, fan=2.6, seed=3,
+                   sss_r=20.0, bump_size=14.0, bump_dist=5.0))
     # a loose flock far off in the open sky, upper right
-    p += birds(65.0, 120.0, 16.0, n=6, span=1.2, seed=5)
+    p += birds(36.0, 64.0, 11.5, n=7, span=1.0, seed=5)        # up to the right, clear of the horn
     return p
 
 
 def shot():
-    cam = camera(height=0.85, distance=6.8, azimuth=-22.0, lens=65.0, target=(0.45, 0.0, 0.7), focus=(0.0, -0.25, 0.6), fstop=11.0)
+    cam = camera(height=0.6, distance=6.8, azimuth=-22.0, lens=65.0, target=(0.1, 0.0, 0.7), fstop=8.0)
     s = frame('fog', props(), cam, sky(SKY, ROT, strength=1.0, res='4k'), 'barkhorn, Fog, above the clouds',
-              sun=sun_from_sky(SKY, ROT, irradiance=3.5, color='#FFE2BE'),
-              lights={'bounce': area(-15, 10, 2.0, 1.1, '#E8D6C4', (2.0, 2.0), (0.0, 0.0, 0.6))},   # a warm reflector just off the lens, low
-              haze={'box_m': [-20000.0, 200.0, -900.0, 50000.0, 40000.0, 300.0], 'density': 0.00014, 'anisotropy': 0.7,
-                    'color': '#C9D6E6'},
-              rotate_z=-6.0, fin=finish(contrast=0.08, clarity=0.08, vignette=0.12, saturation=0.12, lift=0.03, lift_color='#3A3530'), exposure=0.0,
+              sun=sun_from_sky(SKY, ROT, irradiance=3.5),
+              lights={'bounce': area(-60, 5, 2.5, 0.8, '#D9B49A', (2.0, 2.0), (0.0, 0.0, 0.6))},   # the warm rock's bounce
+              haze={'box_m': [-40000.0, 200.0, -900.0, 40000.0, 45000.0, 300.0], 'density': 0.00008, 'anisotropy': 0.6,
+                    'color': '#BFD3EA'},
+              rotate_z=-6.0, fin=finish(contrast=0.08, vignette=0.12, saturation=0.12, lift=0.03, lift_color='#3A3530'), exposure=0.0,
               look='AgX - Medium High Contrast')
     s['render']['volume_bounces'] = 6                  # cloud is white because light scatters in it many times
-    s['camera']['clip_end'] = 100000.0                  # the sea of cloud runs out to the horizon
+    s['camera']['clip_end'] = 60000.0                  # the sea of cloud runs out to the horizon
     return s
 
 
 def portrait():
-    return portrait_of(shot(), lens=42)
+    # the same place on a longer lens, aimed a little higher: the speaker large in the tall frame, sky above it for type
+    cam = camera(height=0.6, distance=6.8, azimuth=-22.0, lens=100.0, target=(0.1, 0.0, 0.82), fstop=8.0)
+    return portrait_of(shot(), **cam)
