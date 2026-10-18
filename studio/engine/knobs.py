@@ -35,6 +35,11 @@ KNOBS = [
     ('render.clamp', 'radiance', (0, 100), 'indirect clamp against fireflies; 0 for none'),
     ('render.bounces', 'count', (4, 32), 'light bounces'),
     ('render.denoise', 'bool', None, 'OpenImageDenoise'),
+    ('render.transmission_bounces', 'count', (4, 32), 'transmission bounces (8 by default): light through thick clear parts and their edges'),
+    ('render.glossy_bounces', 'count', (4, 32), 'glossy bounces (8 by default)'),
+    ('render.transparent_bounces', 'count', (8, 256), 'transparent bounces, at least this many (shadow rays through stacked clear parts)'),
+    ('render.caustics_refractive', 'bool', None, 'refractive caustics (off by default): light focused through clear parts onto what is behind them; noisy'),
+    ('render.caustics_reflective', 'bool', None, 'reflective caustics (off by default)'),
     # the retouch (retouch.py): the paints matched to their swatches in the finished frame, as a retoucher does
     ('retouch.enabled', 'bool', None, 'retouch the frame: each paint a flavour colours (body, accent, insert) matched to its swatch per copy, read off its lit face; the raw frame is kept beside it and the tests read the retouched one'),
     ('retouch.match', '0 to 1', (0, 1), 'the share of a colour paint\'s hue and chroma error taken out (1: its lit face reads as the swatch in hue and chroma, as the swatch looks under the light the copy\'s white shows)'),
@@ -176,6 +181,10 @@ PRESET_UNITS = {
     'contact_m': ('m', (0.005, 0.3), 'how far the wide contact shadow reaches'),
     'core': ('0 to 0.9', (0.0, 0.9), 'the sweep\'s tight contact term, multiplied with the wide one'),
     'core_m': ('m', (0.003, 0.05), 'how far the tight contact term reaches'),
+    'tooth': ('bump', (0.0, 0.6), 'the sweep paper\'s grain: a bump of fine noise (0 off)'),
+    'tooth_mm': ('mm', (0.2, 3.0), 'the paper grain\'s size'),
+    'mottle': ('0 to 0.1', (0.0, 0.1), 'the sweep paper\'s colour drift, broad and in fibres (0 off)'),
+    'mottle_m': ('m', (0.05, 2.0), 'the broad drift\'s size'),
 }
 
 

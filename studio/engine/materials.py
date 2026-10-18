@@ -31,7 +31,10 @@ PRESET_DEFAULTS = {
     'oak':        dict(base='#B8905F', dark='#9C7448', light='#C9A273', plank_w=0.18, plank_l=1.6, roughness=0.42, grain=0.6, seam=0.0015, plank_contrast=0.5,
                        figure=0.22, rings=60.0, arch=4.0, flat_sawn=0.6, gloss_vary=0.3),
     'plaster':    dict(color='#DDD6CA', roughness=0.92, bump=0.025, drift=0.03),
-    'sweep':      dict(color='#A9A59E', roughness=0.55, contact=0.0, contact_m=0.05, core=0.0, core_m=0.025),
+    # `tooth`: seamless paper's grain, a bump of fine noise `tooth_mm` across (0 off, about 0.15 reads under a low key);
+    # `mottle`: the share its colour drifts over `mottle_m` and in fine fibres, and its roughness with it (0 off)
+    'sweep':      dict(color='#A9A59E', roughness=0.55, contact=0.0, contact_m=0.05, core=0.0, core_m=0.025,
+                       tooth=0.0, tooth_mm=0.6, mottle=0.0, mottle_m=0.4),
     'glass':      dict(color='#FFFFFF', roughness=0.0, ior=1.5),
     # frosted translucent resin or glass (a cast waveguide): a milky body that light crosses (subsurface scattering
     # `radius` metres deep, so a thin wall glows and a thick one deepens to `absorb`), a frosted surface over it
@@ -343,6 +346,8 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         setin('Base Color', hex_lin(p['color'])); setin('Roughness', p['roughness'])
         if preset == 'sweep' and (p.get('contact', 0) > 0 or p.get('core', 0) > 0):
             _contact(nt, I, hex_lin(p['color']), p['contact'], p['contact_m'], p.get('core', 0.0), p.get('core_m', 0.025))
+        if preset == 'sweep':
+            _paper(nt, I, hex_lin(p['color']), p)
         if preset == 'plaster':
             # a faint plaster bump and a slow colour drift, so a wall is a surface and not a flat fill
             nt.links.new(_bump_noise(nt, 0.004, p['bump']), I['Normal'])
@@ -413,6 +418,48 @@ def object_space(nt):
             to = link.to_socket
             nt.links.remove(link)
             nt.links.new(src, to)
+
+
+def _paper(nt, I, col_lin, p):
+    """A sweep's paper (round 31, the hero): a tooth (a bump of fine noise, `tooth` strength at `tooth_mm`) and a
+    mottle (its colour drifting by the share `mottle` over `mottle_m` and in fibres a few millimetres long, roughness
+    with it), so a floor under a low key is a surface and not a plane. Both 0 by default: the sweep as it was."""
+    if p.get('tooth', 0) > 0:
+        nt.links.new(_bump_noise(nt, p.get('tooth_mm', 0.6) / 1000, p['tooth'], distance_scale=0.5, detail=4.0), I['Normal'])
+    m = p.get('mottle', 0)
+    if m <= 0:
+        return
+    geo = nt.nodes.new('ShaderNodeNewGeometry')
+    def noise(scale, detail, stretch=None):
+        tx = nt.nodes.new('ShaderNodeTexNoise'); tx.inputs['Scale'].default_value = 1.0 / scale; tx.inputs['Detail'].default_value = detail
+        v = geo.outputs['Position']
+        if stretch:
+            mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Scale'].default_value = stretch
+            nt.links.new(v, mp.inputs['Vector']); v = mp.outputs['Vector']
+        nt.links.new(v, tx.inputs['Vector'])
+        return tx.outputs['Fac']
+    big, fib = noise(p.get('mottle_m', 0.4), 3.0), noise(0.004, 2.0, (1.0, 0.25, 1.0))
+    mr = nt.nodes.new('ShaderNodeMath'); mr.operation = 'MULTIPLY_ADD'
+    nt.links.new(fib, mr.inputs[0]); mr.inputs[1].default_value = 0.6; nt.links.new(big, mr.inputs[2])
+    f = nt.nodes.new('ShaderNodeMapRange')
+    nt.links.new(mr.outputs['Value'], f.inputs['Value'])
+    f.inputs['From Min'].default_value = 0.55; f.inputs['From Max'].default_value = 1.25
+    f.inputs['To Min'].default_value = 1.0 - m; f.inputs['To Max'].default_value = 1.0 + m
+    prev = I['Base Color'].links[0].from_socket if I['Base Color'].is_linked else None
+    mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'; mix.blend_type = 'MULTIPLY'; mix.inputs['Factor'].default_value = 1.0
+    ins = [x for x in mix.inputs if x.type == 'RGBA']; outs = [x for x in mix.outputs if x.type == 'RGBA']
+    if prev is not None:
+        nt.links.new(prev, ins[0])
+    else:
+        ins[0].default_value = col_lin
+    comb = nt.nodes.new('ShaderNodeCombineColor')
+    for ch in ('Red', 'Green', 'Blue'):
+        nt.links.new(f.outputs['Result'], comb.inputs[ch])
+    nt.links.new(comb.outputs['Color'], ins[1]); nt.links.new(outs[0], I['Base Color'])
+    rg = nt.nodes.new('ShaderNodeMapRange'); nt.links.new(fib, rg.inputs['Value'])
+    r0 = I['Roughness'].default_value
+    rg.inputs['To Min'].default_value = max(0.0, r0 - 0.06); rg.inputs['To Max'].default_value = min(1.0, r0 + 0.06)
+    nt.links.new(rg.outputs['Result'], I['Roughness'])
 
 
 def _contact(nt, I, col_lin, strength, distance, core=0.0, core_distance=0.025):

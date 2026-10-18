@@ -243,11 +243,13 @@ def main():
     if cy.use_denoising:
         cy.denoiser = 'OPENIMAGEDENOISE'; cy.denoising_input_passes = 'RGB_ALBEDO_NORMAL'
     cy.max_bounces = R.get('bounces', 12); cy.diffuse_bounces = min(cy.max_bounces, R.get('diffuse_bounces', 6))
-    cy.glossy_bounces = min(cy.max_bounces, 8); cy.transmission_bounces = min(cy.max_bounces, 8)
+    cy.glossy_bounces = min(cy.max_bounces, R.get('glossy_bounces', 8))
+    cy.transmission_bounces = min(cy.max_bounces, R.get('transmission_bounces', 8))
+    cy.transparent_max_bounces = max(cy.transparent_max_bounces, R.get('transparent_bounces', 0))
     cy.volume_bounces = R.get('volume_bounces', 2)      # a material with a volume (frosted) scatters inside it
     cy.sample_clamp_indirect = R.get('clamp', 10.0)
     cy.blur_glossy = R.get('filter_glossy', 0.5)
-    cy.caustics_reflective = False; cy.caustics_refractive = False
+    cy.caustics_reflective = bool(R.get('caustics_reflective', False)); cy.caustics_refractive = bool(R.get('caustics_refractive', False))
     if a.threads:
         scene.render.threads_mode = 'FIXED'; scene.render.threads = a.threads
     scene.render.resolution_x = int(W * a.scale); scene.render.resolution_y = int(H * a.scale)
