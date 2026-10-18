@@ -6,17 +6,23 @@
  ],
  "camera": {
   "position": [
-   12.5,
-   4.572,
-   1.6
+   14.75,
+   1.85,
+   1.2
   ],
   "target": [
-   18.288,
-   4.572,
-   1.15
+   17.7,
+   1.45,
+   0.92
   ],
-  "lens_mm": 18,
-  "level": true
+  "lens_mm": 32,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   17.57,
+   0.78,
+   0.9
+  ]
  },
  "products": [
   {
@@ -244,6 +250,24 @@
       0.74
      ],
      "rotate_z": 0.0
+    },
+    {
+     "flavour": "ember",
+     "position": [
+      14.15,
+      4.002,
+      0.432
+     ],
+     "rotate_z": 0.0
+    },
+    {
+     "flavour": "ember",
+     "position": [
+      14.15,
+      5.152,
+      0.432
+     ],
+     "rotate_z": 0.0
     }
    ]
   },
@@ -271,21 +295,22 @@
     "shape": "ext",
     "module": "planet_room",
     "fn": "room",
-    "clock": "late",
-    "membrane": 0.09,
-    "panel_glow": 0.8,
-    "shelf_glow": 0.5,
-    "backpanel_glow": 0.08,
-    "niche_glow": 0.05,
-    "slat_glow": 0.25,
-    "slat_led": 10.0,
+    "clock": "sunset",
+    "membrane": 0.004,
+    "panel_glow": 0.9,
+    "shelf_glow": 0.15,
+    "backpanel_glow": 0.04,
+    "niche_glow": 0.03,
+    "slat_glow": 0.2,
+    "slat_led": 3.0,
     "record_glow": 0.0,
     "neon": 18.0,
     "windows_lit": 0.35,
     "street": true,
     "membrane_white": 0.45,
-    "dj_glow": 0.05,
-    "dj_color": "#F2D6B0"
+    "dj_glow": 0.008,
+    "dj_color": "#F2D6B0",
+    "panel_foot": 0.35
    },
    {
     "kind": "kit",
@@ -481,9 +506,17 @@
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
      13.3,
      2.0,
@@ -492,14 +525,22 @@
     "rotate": [
      0,
      0,
-     -90.0
+     -93.0
     ]
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
      13.3,
      3.3,
@@ -513,9 +554,17 @@
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
      13.3,
      5.85,
@@ -524,14 +573,22 @@
     "rotate": [
      0,
      0,
-     -90.0
+     -87.0
     ]
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
      13.3,
      7.15,
@@ -540,78 +597,118 @@
     "rotate": [
      0,
      0,
-     -90.0
+     -93.0
     ]
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
      15.0,
-     2.4,
+     3.55,
      0.012
     ],
     "rotate": [
      0,
      0,
-     -90.0
+     -91.0
     ]
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
      15.0,
-     3.8,
+     5.6,
      0.012
     ],
     "rotate": [
      0,
      0,
-     -90.0
+     -91.0
     ]
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
-     15.0,
-     5.35,
+     14.15,
+     2.75,
      0.012
     ],
     "rotate": [
      0,
      0,
-     -90.0
+     -88.0
     ]
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
-     15.0,
-     6.75,
+     14.15,
+     6.39,
      0.012
     ],
     "rotate": [
      0,
      0,
-     -90.0
+     -88.0
     ]
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
      14.2,
      0.95,
@@ -625,43 +722,19 @@
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "mid_century_lounge_chair",
     "res": "1k",
-    "position": [
-     15.8,
-     0.95,
-     0.012
+    "match": [
+     "mid_century"
     ],
-    "rotate": [
-     0,
-     0,
-     0.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
+    "blend": "MULTIPLY",
+    "color": "#5E504A",
+    "mix": 1.0,
     "position": [
      14.2,
-     8.19,
-     0.012
-    ],
-    "rotate": [
-     0,
-     0,
-     -180.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
-    "position": [
-     15.8,
      8.19,
      0.012
     ],
@@ -832,21 +905,22 @@
  },
  "lights": {
   "spk0": {
-   "type": "spot",
+   "type": "area",
    "position": [
-    13.06,
-    2.237,
-    3.68
+    12.972,
+    2.058,
+    3.6500000000000004
    ],
    "target": [
     12.27,
     0.62,
-    0.85
+    0.7
    ],
-   "power_w": 900.0,
-   "cone_deg": 18,
-   "blend": 0.6,
-   "radius_m": 0.03,
+   "size_m": [
+    0.7,
+    0.7
+   ],
+   "irradiance": 12.0,
    "color": 3000
   },
   "wash0": {
@@ -859,30 +933,31 @@
    "target": [
     11.35,
     0.15,
-    2.6
+    1.2
    ],
-   "power_w": 120.0,
-   "cone_deg": 70,
+   "power_w": 90.0,
+   "cone_deg": 50,
    "blend": 0.9,
    "radius_m": 0.05,
    "color": "#4A90C8"
   },
   "spk1": {
-   "type": "spot",
+   "type": "area",
    "position": [
-    13.06,
-    6.907,
-    3.68
+    12.972,
+    7.086,
+    3.6500000000000004
    ],
    "target": [
     12.27,
     8.524000000000001,
-    0.85
+    0.7
    ],
-   "power_w": 900.0,
-   "cone_deg": 18,
-   "blend": 0.6,
-   "radius_m": 0.03,
+   "size_m": [
+    0.7,
+    0.7
+   ],
+   "irradiance": 12.0,
    "color": 3000
   },
   "wash1": {
@@ -895,30 +970,31 @@
    "target": [
     11.35,
     8.994,
-    2.6
+    1.2
    ],
-   "power_w": 120.0,
-   "cone_deg": 70,
+   "power_w": 90.0,
+   "cone_deg": 50,
    "blend": 0.9,
    "radius_m": 0.05,
    "color": "#4A90C8"
   },
   "spk2": {
-   "type": "spot",
+   "type": "area",
    "position": [
-    16.4,
-    1.99,
-    3.68
+    16.53,
+    1.838,
+    3.6500000000000004
    ],
    "target": [
     17.567999999999998,
     0.62,
-    0.85
+    0.7
    ],
-   "power_w": 900.0,
-   "cone_deg": 18,
-   "blend": 0.6,
-   "radius_m": 0.03,
+   "size_m": [
+    0.7,
+    0.7
+   ],
+   "irradiance": 12.0,
    "color": 3000
   },
   "wash2": {
@@ -931,30 +1007,31 @@
    "target": [
     18.138,
     0.15,
-    2.6
+    1.2
    ],
-   "power_w": 120.0,
-   "cone_deg": 70,
+   "power_w": 90.0,
+   "cone_deg": 50,
    "blend": 0.9,
    "radius_m": 0.05,
    "color": "#E5732A"
   },
   "spk3": {
-   "type": "spot",
+   "type": "area",
    "position": [
-    16.4,
-    7.154,
-    3.68
+    16.53,
+    7.306,
+    3.6500000000000004
    ],
    "target": [
     17.567999999999998,
     8.524000000000001,
-    0.85
+    0.7
    ],
-   "power_w": 900.0,
-   "cone_deg": 18,
-   "blend": 0.6,
-   "radius_m": 0.03,
+   "size_m": [
+    0.7,
+    0.7
+   ],
+   "irradiance": 12.0,
    "color": 3000
   },
   "wash3": {
@@ -967,10 +1044,10 @@
    "target": [
     18.138,
     8.994,
-    2.6
+    1.2
    ],
-   "power_w": 120.0,
-   "cone_deg": 70,
+   "power_w": 90.0,
+   "cone_deg": 50,
    "blend": 0.9,
    "radius_m": 0.05,
    "color": "#E5732A"
@@ -987,8 +1064,8 @@
     8.668999999999999,
     1.05
    ],
-   "power_w": 150.0,
-   "cone_deg": 40,
+   "power_w": 320.0,
+   "cone_deg": 30,
    "blend": 0.7,
    "radius_m": 0.02,
    "color": 3000
@@ -1005,8 +1082,8 @@
     8.668999999999999,
     1.05
    ],
-   "power_w": 150.0,
-   "cone_deg": 40,
+   "power_w": 320.0,
+   "cone_deg": 30,
    "blend": 0.7,
    "radius_m": 0.02,
    "color": 3000
@@ -1023,7 +1100,7 @@
     7.0,
     1.07
    ],
-   "power_w": 18.0,
+   "power_w": 140.0,
    "cone_deg": 30,
    "blend": 0.7,
    "radius_m": 0.02,
@@ -1041,7 +1118,7 @@
     7.0,
     1.07
    ],
-   "power_w": 18.0,
+   "power_w": 140.0,
    "cone_deg": 30,
    "blend": 0.7,
    "radius_m": 0.02,
@@ -1059,7 +1136,7 @@
     7.0,
     1.07
    ],
-   "power_w": 18.0,
+   "power_w": 140.0,
    "cone_deg": 30,
    "blend": 0.7,
    "radius_m": 0.02,
@@ -1077,7 +1154,7 @@
     7.0,
     1.07
    ],
-   "power_w": 18.0,
+   "power_w": 140.0,
    "cone_deg": 30,
    "blend": 0.7,
    "radius_m": 0.02,
@@ -1095,7 +1172,7 @@
     7.0,
     1.07
    ],
-   "power_w": 18.0,
+   "power_w": 140.0,
    "cone_deg": 30,
    "blend": 0.7,
    "radius_m": 0.02,
@@ -1113,7 +1190,7 @@
     4.422,
     0.94
    ],
-   "power_w": 90.0,
+   "power_w": 70.0,
    "cone_deg": 35,
    "blend": 0.8,
    "radius_m": 0.05,
@@ -1122,54 +1199,54 @@
   "rec0": {
    "type": "spot",
    "position": [
-    16.888,
+    15.888,
     2.6,
     3.68
    ],
    "target": [
     17.888,
     2.6,
-    1.4
+    0.9
    ],
-   "power_w": 150.0,
-   "cone_deg": 60,
-   "blend": 0.8,
+   "power_w": 60.0,
+   "cone_deg": 45,
+   "blend": 1.0,
    "radius_m": 0.04,
    "color": 3200
   },
   "rec1": {
    "type": "spot",
    "position": [
-    16.888,
+    15.888,
     4.57,
     3.68
    ],
    "target": [
     17.888,
     4.57,
-    1.4
+    0.9
    ],
-   "power_w": 150.0,
-   "cone_deg": 60,
-   "blend": 0.8,
+   "power_w": 60.0,
+   "cone_deg": 45,
+   "blend": 1.0,
    "radius_m": 0.04,
    "color": 3200
   },
   "rec2": {
    "type": "spot",
    "position": [
-    16.888,
+    15.888,
     6.5,
     3.68
    ],
    "target": [
     17.888,
     6.5,
-    1.4
+    0.9
    ],
-   "power_w": 150.0,
-   "cone_deg": 60,
-   "blend": 0.8,
+   "power_w": 60.0,
+   "cone_deg": 45,
+   "blend": 1.0,
    "radius_m": 0.04,
    "color": 3200
   },
@@ -1180,7 +1257,7 @@
     7.147,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1194,7 +1271,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1208,7 +1285,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1222,7 +1299,7 @@
     7.147,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1236,7 +1313,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1250,7 +1327,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1264,7 +1341,7 @@
     7.147,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1278,7 +1355,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1292,7 +1369,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1306,7 +1383,7 @@
     7.147,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1320,7 +1397,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1334,7 +1411,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1348,7 +1425,7 @@
     7.147,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1362,7 +1439,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1376,7 +1453,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1390,7 +1467,7 @@
     7.147,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1404,7 +1481,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1418,7 +1495,91 @@
     7.0765,
     2.052
    ],
-   "power_w": 6.0,
+   "power_w": 8.333333333333334,
+   "radius_m": 0.04,
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "side0-0": {
+   "type": "point",
+   "position": [
+    14.15,
+    4.049,
+    0.873
+   ],
+   "power_w": 20.0,
+   "radius_m": 0.04,
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "side0-1": {
+   "type": "point",
+   "position": [
+    14.1093,
+    3.9785,
+    0.873
+   ],
+   "power_w": 20.0,
+   "radius_m": 0.04,
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "side0-2": {
+   "type": "point",
+   "position": [
+    14.1907,
+    3.9785,
+    0.873
+   ],
+   "power_w": 20.0,
+   "radius_m": 0.04,
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "side1-0": {
+   "type": "point",
+   "position": [
+    14.15,
+    5.199,
+    0.873
+   ],
+   "power_w": 20.0,
+   "radius_m": 0.04,
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "side1-1": {
+   "type": "point",
+   "position": [
+    14.1093,
+    5.1285,
+    0.873
+   ],
+   "power_w": 20.0,
+   "radius_m": 0.04,
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "side1-2": {
+   "type": "point",
+   "position": [
+    14.1907,
+    5.1285,
+    0.873
+   ],
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1432,7 +1593,7 @@
     0.417,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1446,7 +1607,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1460,7 +1621,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1474,7 +1635,7 @@
     0.417,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1488,7 +1649,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1502,7 +1663,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1516,7 +1677,7 @@
     0.417,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1530,7 +1691,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1544,7 +1705,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1558,7 +1719,7 @@
     0.417,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1572,7 +1733,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1586,7 +1747,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 11.666666666666666,
+   "power_w": 20.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1634,14 +1795,14 @@
  },
  "haze": {
   "box_m": [
-   -0.1,
-   -0.1,
-   0.0,
-   18.388,
-   9.244,
-   3.7
+   0.02,
+   0.02,
+   0.01,
+   18.268,
+   9.124,
+   3.64
   ],
-  "density": 0.004,
+  "density": 0.008,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1651,10 +1812,10 @@
   "denoise": true,
   "clamp": 10,
   "bounces": 10,
-  "view": "AgX",
+  "view": "Khronos PBR Neutral",
   "look": "None",
-  "exposure": 0.5,
-  "white_balance_k": 4000,
-  "white_balance_tint": 0.0
+  "exposure": 0.3,
+  "white_balance_k": 3300,
+  "white_balance_tint": -10.0
  }
 }

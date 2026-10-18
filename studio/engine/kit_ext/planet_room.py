@@ -110,8 +110,9 @@ def lit_acrylic(bpy, name, color, glow, deep=None, rough=0.04, ramp=None):
     nt.links.new(mr.outputs['Result'], mul.inputs[0])
     out = mul.outputs['Value']
     if ramp:                                             # brighter at the LED strip (bottom) than at the top: (bottom, top)
-        sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Generated'], sep.inputs['Vector'])
+        sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])   # world z
         rz = nt.nodes.new('ShaderNodeMapRange'); rz.inputs['To Min'].default_value = ramp[0]; rz.inputs['To Max'].default_value = ramp[1]
+        rz.inputs['From Min'].default_value = ramp[2]; rz.inputs['From Max'].default_value = ramp[3]
         nt.links.new(sep.outputs['Z'], rz.inputs['Value'])
         m2 = nt.nodes.new('ShaderNodeMath'); m2.operation = 'MULTIPLY'
         nt.links.new(out, m2.inputs[0]); nt.links.new(rz.outputs['Result'], m2.inputs[1]); out = m2.outputs['Value']
@@ -269,16 +270,16 @@ def _pbr(bpy, kit, tex, **k):
 def shell(bpy, kit, p, objs):
     L, D, H, T = P.L, P.D, P.SLAB, P.WALL_T
     floor = Mesh('floor'); floor.box(-T, -T, -0.2, L + T, D + T, 0.0)
-    fm = _pbr(bpy, kit, p.get('floor_tex', 'concrete_floor_02'), res='4k', tint=p.get('floor_tint', '#6B6862'),
-              tint_mix=p.get('floor_tint_mix', 0.35), rough_mul=p.get('floor_rough', 0.8))
+    fm = _pbr(bpy, kit, p.get('floor_tex', 'concrete_floor_worn_001'), res='4k', tint=p.get('floor_tint', '#1F1E1D'),
+              tint_mix=p.get('floor_tint_mix', 0.7), rough_mul=p.get('floor_rough', 0.8))
     fb = next(n for n in fm.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
-    _set(fb, 'Coat Weight', p.get('floor_coat', 0.3))
+    _set(fb, 'Coat Weight', p.get('floor_coat', 0.45))
     # the sealer's sheen, worn in a broad pattern: its roughness from 0.06 (fresh) to 0.35 (scuffed), finer scuffs over it
     nt = fm.node_tree
     tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
     nz.inputs['Scale'].default_value = 0.6; nz.inputs['Detail'].default_value = 10.0
     nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
-    cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.06; cr.inputs['To Max'].default_value = 0.35
+    cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.10; cr.inputs['To Max'].default_value = 0.35
     nt.links.new(nz.outputs['Fac'], cr.inputs['Value']); nt.links.new(cr.outputs['Result'], fb.inputs['Coat Roughness'])
     objs.append(floor.object(bpy, fm))
     # the walls: concrete, painted out dark inside (the room's light comes from its acrylic, not its walls)
@@ -319,7 +320,7 @@ def ceiling(bpy, kit, p, objs):
     edge = Mesh('membrane-edge')
     edge.box(0, 0, z, L, g, z + 0.02); edge.box(0, D - g, z, L, D, z + 0.02)
     edge.box(0, g, z, g, D - g, z + 0.02); edge.box(L - g, g, z, L, D - g, z + 0.02)
-    for xs in (6.10, 12.20):                                                 # two seams, across the room
+    for xs in p.get('membrane_seams', ()):                               # the stretch's seams (none: one span, welded)
         edge.box(xs - 0.008, g, z - 0.004, xs + 0.008, D - g, z + 0.004)
     edge.box(-0.01, -0.01, z + 0.02, L + 0.01, D + 0.01, z + 0.03)           # the plenum's closure (black)
     objs.append(edge.object(bpy, principled(bpy, 'profile', '#1A1A1B', rough=0.5, metal=0.6)))
@@ -338,7 +339,8 @@ def window_and_door(bpy, kit, p, objs):
     gl = Mesh('glass'); gl.box(W['x0'], -0.09, W['sill'], W['x1'], -0.08, W['head'])
     objs.append(gl.object(bpy, principled(bpy, 'window-glass', '#FFFFFF', rough=0.0, trans=1.0, ior=1.5)))
     # the plain door: blackened steel, a pull, a slot of a window at eye height left out (it is plain)
-    dr = Mesh('door'); dr.box(-0.10, Dr['y0'] + 0.01, 0.0, -0.05, Dr['y1'] - 0.01, Dr['h'] - 0.01)
+    # (it fills its opening: a 10 mm gap round it let the street lamp's light in as fireflies)
+    dr = Mesh('door'); dr.box(-0.12, Dr['y0'] - 0.002, 0.0, -0.05, Dr['y1'] + 0.002, Dr['h'] + 0.002)
     objs.append(dr.object(bpy, principled(bpy, 'blackened-steel', '#1C1B1A', rough=0.42, metal=0.85,
                                           bump=(0.03, 0.08, 0.001))))
     pull = Mesh('door-pull')
@@ -354,20 +356,20 @@ def bar(bpy, kit, p, objs):
         a = x0 + i * P.PANEL_W
         pan = Mesh(f'bar-panel-{c}')
         # a 3 mm reveal between panels, the panel from the toe-kick to the top's underside
-        pan.box(a + 0.0015, yF, P.KICK, a + P.PANEL_W - 0.0015, yF + P.PANEL_T, zt - 0.006)
+        pan.box(a + 0.003, yF, P.KICK, a + P.PANEL_W - 0.003, yF + P.PANEL_T, zt - 0.006)
         # each colour's LEDs set so the eight read alike in brightness (measured on the round-1 proof)
-        g = glow * {'ember': 1.41, 'dust': 1.05, 'acid': 0.69, 'poison': 1.36, 'ice': 1.0, 'haze': 1.53, 'fog': 0.50,
-                    'smoke': 0.45}[c]
-        col = P.COLOURS[c] if c not in ('fog',) else '#F2F0EA'
+        g = glow * {'ember': 1.97, 'dust': 1.05, 'acid': 0.59, 'poison': 1.36, 'ice': 1.05, 'haze': 2.45, 'fog': 0.40,
+                    'smoke': 1.8}[c]                          # round 4 (bar-r4 c2): Ember x1.4, Smoke x1.8, Acid x0.85                          # round 2: Haze x1.6, Smoke x2.2, Fog x0.8 (bar-r2 c3)
+        col = {'fog': '#F2F0EA', 'acid': '#EBC52E'}.get(c, P.COLOURS[c])
         deep = {'smoke': '#141316', 'fog': '#DAD8D2'}.get(c, P.COLOURS[c])
         emit_col = {'smoke': '#5A5660'}.get(c, col)
-        objs.append(pan.object(bpy, lit_acrylic(bpy, f'bar-acrylic-{c}', emit_col, g, deep=deep, ramp=(1.0, 0.82))))
-    # the joints: the white liner seen through each 3 mm reveal, brighter than the tinted faces either side
+        objs.append(pan.object(bpy, lit_acrylic(bpy, f'bar-acrylic-{c}', emit_col, g, deep=deep, ramp=(p.get('panel_foot', 0.6), 1.0, P.KICK, zt))))
+    # the joints: a 6 mm black anodised reveal between panels, a dark line between the colours (bar-r3 c2)
     jt = Mesh('bar-joints')
     for i in range(len(P.PANELS) + 1):
         a = x0 + i * P.PANEL_W
-        jt.box(a - 0.0015, yF + 0.004, P.KICK, a + 0.0015, yF + 0.012, zt - 0.006)
-    objs.append(jt.object(bpy, emitter(bpy, 'bar-joint', '#FFF4E6', glow * p.get('joint_glow', 1.3))))
+        jt.box(a - 0.003, yF + 0.001, P.KICK, a + 0.003, yF + 0.019, zt - 0.006)
+    objs.append(jt.object(bpy, principled(bpy, 'reveal-black', '#0B0B0C', rough=0.45, metal=0.6)))
     # the frame behind: the liner's returns, the cavity's body, the counter
     body = Mesh('bar-body')
     body.box(x0, yF + P.PANEL_T, 0.0, P.BAR_X1, yF + P.BAR_DEPTH, zt - 0.006)
@@ -399,9 +401,9 @@ def label_mat(bpy, name, paper, rnd):
     nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
     # the lines of type: thin bands up the label, broken into words by a fine noise around it
     wv = nt.nodes.new('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.bands_direction = 'Z'
-    wv.inputs['Scale'].default_value = rnd.uniform(28, 55); wv.inputs['Distortion'].default_value = 0.0
+    wv.inputs['Scale'].default_value = rnd.uniform(6, 11); wv.inputs['Distortion'].default_value = 0.0
     nt.links.new(tc.outputs['Object'], wv.inputs['Vector'])
-    th = nt.nodes.new('ShaderNodeMath'); th.operation = 'GREATER_THAN'; th.inputs[1].default_value = 0.78
+    th = nt.nodes.new('ShaderNodeMath'); th.operation = 'GREATER_THAN'; th.inputs[1].default_value = rnd.uniform(0.9, 0.96)
     nt.links.new(wv.outputs['Fac'], th.inputs[0])
     nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 140.0
     nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
@@ -567,8 +569,8 @@ def backbar(bpy, kit, p, objs):
                     body, label, cap, r = bodies[k]
                     if x + 2 * r > s1 - 0.02:
                         break
-                    if rnd.random() < 0.06:                                         # a gap where a bottle is out
-                        x += rnd.uniform(0.06, 0.12); continue
+                    if rnd.random() < 0.18:                                         # a gap where a bottle is out
+                        x += rnd.uniform(0.08, 0.16); continue
                     cx = x + r * 1.1; cy = y0 + 0.10 + rnd.uniform(-0.01, 0.02) + (0.16 if rnd.random() < 0.35 else 0.0)
                     gcol = rnd.choice(spirits) if k != 'gin' else rnd.choice(['#EEF2EE', '#E2EEF0', '#F2EEE6'])
                     gm = glass_mat(gcol, k)
@@ -625,14 +627,15 @@ def lounge(bpy, kit, p, objs):
     L, D = P.L, P.D
     # the screens: thermoformed Fog acrylic, frosted and micro-perforated, a gentle wave in plan
     scr = Mesh('screens')
-    for ya, yb in ((0.0 + 1.75, P.SCREEN_OPEN[0]), (P.SCREEN_OPEN[1], D - 1.75)):
+    for ya, yb in [] if not P.SCREENS else ((0.0 + 1.75, P.SCREEN_OPEN[0]), (P.SCREEN_OPEN[1], D - 1.75)):
         n = 28
         for k in range(n):
             y1, y2 = ya + (yb - ya) * k / n, ya + (yb - ya) * (k + 1) / n
             dx1 = 0.06 * math.sin(2 * math.pi * k / n * 2); dx2 = 0.06 * math.sin(2 * math.pi * (k + 1) / n * 2)
             x = P.SCREEN_X
             scr.quad([(x + dx1, y1, 0.0), (x + dx2, y2, 0.0), (x + dx2, y2, P.SCREEN_H), (x + dx1, y1, P.SCREEN_H)])
-    objs.append(scr.object(bpy, principled(bpy, 'fog-frosted', '#F2F3F2', rough=0.28, trans=0.95, ior=1.49), smooth=True))
+    if P.SCREENS:
+        objs.append(scr.object(bpy, principled(bpy, 'fog-frosted', '#F2F3F2', rough=0.28, trans=0.95, ior=1.49), smooth=True))
     # the plinths (Smoke), one under each corner speaker
     pl = Mesh('plinths')
     for role, colour, x, y, z, rot in P.speakers():
@@ -665,12 +668,11 @@ def lounge(bpy, kit, p, objs):
     # a wool rug under the chairs, and three low side tables (Smoke acrylic drums)
     rug = Mesh('rug'); rug.box(12.55, 1.70, 0.0, 15.65, 7.45, 0.012)
     objs.append(rug.object(bpy, _pbr(bpy, kit, p.get('rug_tex', 'poly_wool_herringbone'), res='2k',
-                                     tint=p.get('rug_tint', '#4A4038'), tint_mix=0.85, scale=0.3)))
+                                     tint=p.get('rug_tint', '#2C2826'), tint_mix=0.85, scale=0.3)))
     st = Mesh('side-tables')
     for x, y in P.SIDE_TABLES:
         _cyl(st.bm, x, y, 0.012, 0.22, 0.42, seg=40)
-    objs.append(st.object(bpy, principled(bpy, 'smoke-acrylic', '#0E0D10', rough=0.06, coat=1.0, coat_rough=0.03),
-                          smooth=True))
+    objs.append(st.object(bpy, principled(bpy, 'smoke-satin', '#1C1A19', rough=0.3, coat=0.3, coat_rough=0.25), smooth=True))
 
 
 def record_wall(bpy, kit, p, objs):
@@ -727,7 +729,7 @@ def record_wall(bpy, kit, p, objs):
     # the recess's back: Ice acrylic, back-lit, so Cumulus and the DJ stand in silhouette against it
     bkl = Mesh('dj-backlight'); bkl.box(L - 0.03, dj['y0'], dj['desk_z'], L - 0.01, dj['y1'], dj['recess_z'])
     objs.append(bkl.object(bpy, lit_acrylic(bpy, 'dj-acrylic', p.get('dj_color', P.COLOURS['ice']), p.get('dj_glow', 0.6),
-                                            deep=P.COLOURS['ice'], rough=0.08)))
+                                            deep='#1A1816', rough=0.3)))
     rec = Mesh('dj-recess')
     rec.box(L - dj['desk_d'] - 0.02, dj['y0'], dj['recess_z'], L, dj['y1'], dj['recess_z'] + 0.04)
     objs.append(rec.object(bpy, kit.material(bpy, 'felt', '#1B1A1F')))

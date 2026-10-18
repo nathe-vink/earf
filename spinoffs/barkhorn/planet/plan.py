@@ -62,6 +62,7 @@ BENCH_BACK = 1.05
 TABLE = dict(w=0.70, d=1.20, h=0.74)
 
 # --- the listening lounge -------------------------------------------------------------------------------------------
+SCREENS = False                  # dropped after round 2: they hid the Ember pair and read as boxes (README)
 SCREEN_X = 11.10                 # the thermoformed Fog screens between the bar and the lounge
 SCREEN_OPEN = (3.10, 6.10)       # the opening in them (y)
 SCREEN_H = 1.35                  # chest high: the lounge reads from the bar, its talk does not
@@ -75,9 +76,9 @@ PAIRS = {
 }
 # the low chairs: (x, y, facing deg); 12 in the lounge, in two rows facing the record wall, plus the side pair
 CHAIRS = [(13.30, 2.00, 0), (13.30, 3.30, 0), (13.30, 5.85, 0), (13.30, 7.15, 0),
-          (15.00, 2.40, 0), (15.00, 3.80, 0), (15.00, 5.35, 0), (15.00, 6.75, 0),
-          (14.20, 0.95, 90), (15.80, 0.95, 90), (14.20, 8.19, -90), (15.80, 8.19, -90)]
-SIDE_TABLES = [(13.30, D / 2), (15.00, D / 2)]
+          (15.00, 3.55, 0), (15.00, 5.60, 0), (14.15, 2.75, 0), (14.15, 6.39, 0),
+          (14.20, 0.95, 90), (14.20, 8.19, -90)]      # two by the Ice pair taken out: they stood in front of it
+SIDE_TABLES = [(14.15, D / 2 - 0.57), (14.15, D / 2 + 0.58)]     # off the aisle (door-r4: one sat on the axis)
 # the complementary wash behind each pair (research, move 11: Holl's St Ignatius): Dust behind Ice, Ice behind Ember
 WASH = {'front': 'ice', 'back': 'dust'}
 

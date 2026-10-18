@@ -22,15 +22,21 @@ TT = 'studio/products/barkhorn-turntable.json'
 LAMP = 'studio/products/barkhorn-lamp.json'
 LAMP_STRIP_Z = 0.441             # Bell's strip above its foot (companions/shots.py)
 PENDANT_Z = P.BAR_TOP_Z + P.TOP_T + 0.78 - 0.279      # a pendant's origin: its shade's rim 0.78 m over the bar top
+SIDE_H = 0.432                   # the lounge's side tables' tops (planet_room.lounge: 12 + 420)
 PENDANT_HIDE = ['foot-lower-stack', 'cover', 'stem', 'knob', 'dimmer', 'bumpons', 'cord']
 
 DEFAULT = dict(
-    # round 1's critics (critic/*-r1.json): the ceiling and the shelves outshone the bar and the products; no air
-    clock='late', membrane=0.09, membrane_white=0.45, dj_glow=0.05, dj_color='#F2D6B0', panel_glow=0.8, shelf_glow=0.5,
-    backpanel_glow=0.08, niche_glow=0.05, slat_glow=0.25, slat_led=10.0, record_glow=0.0, neon=18.0, windows_lit=0.35,
-    street=True, spot_speaker=900.0, wash=120.0, spot_fog=150.0, spot_bar=18.0, spot_dj=90.0, spot_records=150.0,
-    bell_w=35.0, pendant_w=18.0, street_lamp=600.0, haze=0.004,
-    exposure=0.5, wb=4000, view='AgX', look='None', samples=256,
+    # round 1's critics (critic/*-r1.json): the ceiling and the shelves outshone the bar and the products; no air.
+    # round 2's (critic/*-r2.json): the room too dark and red; the ceiling still the largest bright field; the record
+    # wall's spots three arches; the glasses unlit; the spectrum uneven
+    # round 3's (listening-r1, door-r3): the membrane still the brightest field at any glow the eye can see it by, so
+    # it is held to a glimmer in the views (the clock's own frames bring it up), at the warm 'sunset' hour, not magenta
+    clock='sunset', membrane=0.004, membrane_white=0.45, dj_glow=0.008, dj_color='#F2D6B0', panel_glow=0.9, panel_foot=0.35,
+    shelf_glow=0.15, backpanel_glow=0.04, niche_glow=0.03, slat_glow=0.2, slat_led=3.0, record_glow=0.0, neon=18.0,
+    windows_lit=0.35, street=True, spk_irr=12.0, wash=90.0, spot_fog=320.0, spot_bar=140.0, spot_dj=70.0,
+    spot_records=60.0, bell_w=60.0, pendant_w=25.0, street_lamp=600.0, haze=0.008,
+    exposure=0.3, wb=3300, wb_tint=-10.0,         # round 5: 3000 K at -25 overshot to green and bright; between the two
+    view='Khronos PBR Neutral', look='None', samples=256,
 )
 
 
@@ -39,7 +45,7 @@ def room_piece(v):
             'record_glow', 'neon', 'windows_lit', 'street', 'floor_tex', 'floor_tint', 'floor_tint_mix', 'floor_coat',
             'wall', 'booth_color', 'absorber', 'rug_tex', 'rug_tint', 'membrane_white', 'last_dim', 'flat_glow',
             'across_glow', 'backpanel_color', 'dj_glow', 'facade', 'dj_color', 'membrane_tint', 'road_rough',
-            'joint_glow', 'props', 'glasses_x')
+            'panel_foot', 'props', 'glasses_x')
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_room', 'fn': 'room', **{k: v[k] for k in keys if k in v}}
 
 
@@ -49,8 +55,11 @@ def props(v):
         out.append({'kind': 'kit', 'shape': 'asset', 'model': 'bar_chair_round_01', 'res': '1k',
                     'position': [round(x, 3), round(y, 3), 0.0], 'rotate': [0, 0, (i * 37) % 23 - 11]})
     for x, y, f in P.CHAIRS:                                          # the lounge's low chairs
-        out.append({'kind': 'kit', 'shape': 'asset', 'model': 'mid_century_lounge_chair', 'res': '1k',
-                    'position': [x, y, 0.012], 'rotate': [0, 0, v.get('chair_rot0', -90.0) + f]})
+        # re-dyed darker (round 4: the tan leather matched the Ember pair's hue and value), each a few degrees off
+        out.append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/room31/pieces.py', 'fn': 'recolour',
+                    'model': 'mid_century_lounge_chair', 'res': '1k', 'match': ['mid_century'], 'blend': 'MULTIPLY',
+                    'color': v.get('chair_dye', '#5E504A'), 'mix': 1.0, 'position': [x, y, 0.012],
+                    'rotate': [0, 0, v.get('chair_rot0', -90.0) + f + ((int(x * 10) * 7 + int(y * 10) * 3) % 9 - 4)]})
     if v['street']:                                                   # the street lamps along the curb (CC0)
         for x in STREET_LAMPS:
             out.append({'kind': 'kit', 'shape': 'asset', 'model': 'street_lamp_01', 'res': '1k', 'position': [x, -3.7, 0.0],
@@ -73,6 +82,8 @@ def products(v):
     for x0 in P.BOOTHS:                                              # one Bell on each booth's table, by the window
         cx = x0 + P.BOOTH_LEN / 2; cy = 0.15 + 0.22
         lamps.append({'flavour': 'ember', 'position': [round(cx, 4), round(cy, 4), P.TABLE['h']], 'rotate_z': 0.0})
+    for x, y in P.SIDE_TABLES:                                       # and one on each of the lounge's side tables
+        lamps.append({'flavour': 'ember', 'position': [x, y, SIDE_H], 'rotate_z': 0.0})
     dj = P.DJ
     tt = [{'flavour': 'ice', 'position': [round(P.L - 0.40, 4), round(P.D / 2 - 0.15, 4), dj['desk_z']], 'rotate_z': -90.0}]
     return [{'def': CLOUD, 'flavour': spk[0]['flavour'], 'instances': spk},
@@ -87,21 +98,21 @@ def lights(v):
         if role == 'backbar':
             continue
         fx, fy = math.sin(math.radians(rot)), -math.cos(math.radians(rot))      # the speaker's front
-        L[f'spk{k}'] = {'type': 'spot', 'position': [round(x + 1.8 * fx, 3), round(y + 1.8 * fy, 3), P.MEMBRANE - 0.02],
-                        'target': [x, y, 0.85], 'power_w': v['spot_speaker'], 'cone_deg': 18, 'blend': 0.6,
-                        'radius_m': 0.03, 'color': 3000}
+        # a broad soft lamp (round 4: a narrow spot overshot onto the wall behind and left the cabinet dark)
+        L[f'spk{k}'] = {'type': 'area', 'position': [round(x + 1.6 * fx, 3), round(y + 1.6 * fy, 3), P.MEMBRANE - 0.05],
+                        'target': [x, y, 0.70], 'size_m': [0.7, 0.7], 'irradiance': v['spk_irr'], 'color': 3000}
         # the wash: a floor uplight in the corner behind, grazing both walls in the pair's complementary colour
         cx = P.LOUNGE_X0 + 0.25 if role == 'front' else P.L - 0.15
         cy = 0.15 if y < P.D / 2 else P.D - 0.15
         if v.get('wash', 0) > 0:
             L[f'wash{k}'] = {'type': 'spot', 'position': [round(x - 0.25 * fx, 3), round(y - 0.25 * fy, 3), 0.18],
-                             'target': [cx, cy, 2.6], 'power_w': v['wash'], 'cone_deg': 70, 'blend': 0.9, 'radius_m': 0.05,
+                             'target': [cx, cy, 1.2], 'power_w': v['wash'], 'cone_deg': 50, 'blend': 0.9, 'radius_m': 0.05,
                              'color': P.COLOURS[P.WASH[role]]}
     # a pinhole in each Fog niche's head, onto the speaker
     for k, (role, colour, x, y, z, rot) in enumerate(P.speakers()):
         if role == 'backbar':
             L[f'fog{k}'] = {'type': 'spot', 'position': [x, y - 0.12, P.NICHE_Z0 + P.NICHE_H - 0.03], 'target': [x, y - 0.25, z + 0.6],
-                            'power_w': v['spot_fog'], 'cone_deg': 40, 'blend': 0.7, 'radius_m': 0.02, 'color': 3000}
+                            'power_w': v['spot_fog'], 'cone_deg': 30, 'blend': 0.7, 'radius_m': 0.02, 'color': 3000}
     # pinholes onto the bar top, between the pendants
     for i, x in enumerate(P.bar_pendants()[:-1]):
         L[f'bar{i}'] = {'type': 'spot', 'position': [x + 0.7, P.BAR_FRONT + 0.05, P.MEMBRANE - 0.02],
@@ -112,8 +123,8 @@ def lights(v):
                'target': [P.L - 0.40, P.D / 2 - 0.15, P.DJ['desk_z']], 'power_w': v['spot_dj'], 'cone_deg': 35, 'blend': 0.8, 'radius_m': 0.05, 'color': 3000}
     if v.get('spot_records', 0) > 0:                                 # a wash down the record wall
         for k, yy in enumerate((2.6, 4.57, 6.5)):
-            L[f'rec{k}'] = {'type': 'spot', 'position': [P.L - 1.4, yy, P.MEMBRANE - 0.02], 'target': [P.L - 0.4, yy, 1.4],
-                            'power_w': v['spot_records'], 'cone_deg': 60, 'blend': 0.8, 'radius_m': 0.04, 'color': 3200}
+            L[f'rec{k}'] = {'type': 'spot', 'position': [P.L - 2.4, yy, P.MEMBRANE - 0.02], 'target': [P.L - 0.4, yy, 0.9],
+                            'power_w': v['spot_records'], 'cone_deg': 45, 'blend': 1.0, 'radius_m': 0.04, 'color': 3200}
     # Bell: three small lamps just outside each lamp's opal sleeve (companions/shots.py's bell_lights)
     def bell(lx, ly, h, watts, tag):
         for k in range(3):
@@ -124,6 +135,8 @@ def lights(v):
                               'transmission': False, 'specular': 0.0}
     for i, x in enumerate(P.bar_pendants()):
         bell(x, P.BAR_FRONT + 0.20, PENDANT_Z, v['pendant_w'], f'pend{i}-')
+    for i, (x, y) in enumerate(P.SIDE_TABLES):
+        bell(x, y, SIDE_H, v['bell_w'], f'side{i}-')
     for i, x0 in enumerate(P.BOOTHS):
         bell(x0 + P.BOOTH_LEN / 2, 0.37, P.TABLE['h'], v['bell_w'], f'booth{i}-')
     # the street lamps (outside, along the curb), 3000 K LED
@@ -146,10 +159,10 @@ def shot(view):
         'sky': {'kind': 'gradient', 'zenith': '#05070C', 'horizon': '#141824', 'ground': '#08080A', 'strength': v.get('sky', 1.0)},
         'lights': lights(v),
         'materials': {'led': {'strength': v.get('led', 22.0)}},
-        'haze': {'box_m': [-0.1, -0.1, 0.0, P.L + 0.1, P.D + 0.1, P.MEMBRANE], 'density': v['haze'], 'anisotropy': 0.3,
+        'haze': {'box_m': [0.02, 0.02, 0.01, P.L - 0.02, P.D - 0.02, P.MEMBRANE - 0.06], 'density': v['haze'], 'anisotropy': 0.3,
                  'color': '#FFFFFF'} if v['haze'] > 0 and view != 'street' else {},
         'render': {'samples': v['samples'], 'adaptive': 0.02, 'denoise': True, 'clamp': 10, 'bounces': 10,
-                   'view': v['view'], 'look': v['look'], 'exposure': v['exposure'], 'white_balance_k': v['wb'], 'white_balance_tint': 0.0},
+                   'view': v['view'], 'look': v['look'], 'exposure': v['exposure'], 'white_balance_k': v['wb'], 'white_balance_tint': v['wb_tint']},
     }
     return s
 
@@ -158,11 +171,17 @@ EYE = 1.60
 STREET_LAMPS = (-7.0, 6.5, 20.0)
 VIEWS = {
     'door': {'title': 'the whole room at night, from the door',
-             'camera': {'position': [1.60, 3.70, 1.35], 'target': [P.L, 4.6, 1.05], 'lens_mm': 24, 'level': True}},
+             'camera': {'position': [2.20, 3.60, 1.35], 'target': [P.L, 4.7, 1.25], 'lens_mm': 30, 'level': True},
+             'settings': {'panel_glow': 0.6}},
     'bar': {'title': 'the bar front lit, at eye level',
-            'camera': {'position': [2.40, 3.60, 1.20], 'target': [7.6, 7.6, 0.8], 'lens_mm': 32, 'level': True}},
+            'camera': {'position': [1.60, 4.60, 1.05], 'target': [7.0, 8.4, 0.75], 'lens_mm': 35, 'level': True}},
     'listening': {'title': 'the listening corner, a pair either side of the lounge',
-                  'camera': {'position': [12.50, P.D / 2, EYE], 'target': [P.L, P.D / 2, 1.15], 'lens_mm': 18, 'level': True}},
+                  # turned round after round 2 (the chairs' backs hid the Ice pair): from the DJ's side of the lounge,
+                  # the Ember pair either side of it, the chairs facing the camera, the bar glowing beyond
+                  # concept changed after three passes at 4.5 (the pair at the frame's edges, behind chairs, from any
+                  # square view): three-quarter, one Ice speaker the hero on the left third, the record wall beyond
+                  'camera': {'position': [14.75, 1.85, 1.20], 'target': [17.7, 1.45, 0.92], 'lens_mm': 32, 'level': True,
+                             'fstop': 4.0, 'focus': [17.57, 0.78, 0.9]}},
     'backbar': {'title': 'the back-bar, the Fog pair among the lit shelves',
                 'camera': {'position': [4.20, 6.20, 1.70], 'target': [3.42, 8.9, 1.2], 'lens_mm': 35, 'level': True,
                            'fstop': 2.8, 'focus': [3.42, 8.72, 1.65]}},
@@ -173,6 +192,12 @@ VIEWS = {
                'camera': {'position': [-6.5, -10.0, 1.5], 'target': [3.0, 0.5, 1.9], 'lens_mm': 32, 'level': True},
                'settings': {'sky': 0.25}},
 }
+
+# the colour clock: the door's view at four hours, the membrane the only change (its glow a little up, so it reads)
+for hour, label in (('opening', '17:00'), ('sunset', '19:30'), ('late', '22:30'), ('last', '01:45')):
+    VIEWS[f'clock-{hour}'] = {'title': f'the colour clock at {label}', 'size': [1800, 1200],
+                              'camera': dict(VIEWS['door']['camera']),
+                              'settings': {'clock': hour, 'membrane': 0.08}}
 
 
 def write(names=None):

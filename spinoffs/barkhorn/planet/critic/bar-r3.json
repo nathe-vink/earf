@@ -1,0 +1,398 @@
+{
+ "stage1": {
+  "impression": "A clean, legible interiors render: the spectrum bar front makes a strong diagonal, and the coloured back-bar repeats it. It still reads as CG. The panels are flat emissive cards with bright seam lines, the floor is a smeared, denoised mottle that barely picks up the panels' colour, every stool is the same model, and the back-bar and the pink ceiling compete with the hero. The cropped stool at bottom left and the half-cut pendant at top left make it feel unedited.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The bar panels must read as back-lit cast acrylic, with a soft vertical gradient and depth rather than flat uniform emission (red panel lum_range under its top 5/8 now about 8)",
+  "The joints between panels must not show bright 1 px white light-leak lines (now lum_median 186 at x 182-186)",
+  "The floor must read as a real honed or polished dark surface that carries soft coloured reflections of the eight panels, with no denoiser blotching",
+  "The panels must be clearly the brightest, most saturated element; the back-bar shelves and the ceiling membrane must sit at least a stop below them",
+  "No cut-off foreground stool and no pendant cropped by the frame edge; a composed edge on every side",
+  "Visible variation and a believable oiled-wood sheen across the stools, so they do not read as one instanced model",
+  "Atmosphere: a little haze to give depth from the bar to the lounge and soft glow around the Bell pendants"
+ ],
+ "defects": [
+  {
+   "region": [
+    182,
+    400,
+    187,
+    760
+   ],
+   "what": "Bright white 1 px line at the red/orange panel joint, a light leak (lum_median 186 against a panel at about 80)"
+  },
+  {
+   "region": [
+    458,
+    375,
+    464,
+    640
+   ],
+   "what": "Same bright seam at the orange/yellow joint (p95 226)"
+  },
+  {
+   "region": [
+    10,
+    440,
+    180,
+    700
+   ],
+   "what": "Red panel is perfectly flat emission (top 5/8 bins 74-82); reads as a coloured card, not lit acrylic"
+  },
+  {
+   "region": [
+    450,
+    600,
+    1200,
+    800
+   ],
+   "what": "Floor is a smeared, mottled denoise texture with no clear reflection of the panels; reads as CG concrete"
+  },
+  {
+   "region": [
+    700,
+    580,
+    800,
+    640
+   ],
+   "what": "Floor in front of the blue panel shows almost no blue spill (b_median 21)"
+  },
+  {
+   "region": [
+    0,
+    590,
+    130,
+    800
+   ],
+   "what": "Foreground stool cut by the left and bottom edges, a distracting dark mass"
+  },
+  {
+   "region": [
+    0,
+    0,
+    110,
+    100
+   ],
+   "what": "Bell pendant cropped by the top-left frame edge, with a hot clipped highlight (clip 0.42%)"
+  },
+  {
+   "region": [
+    0,
+    150,
+    130,
+    380
+   ],
+   "what": "Unclear dark box and white arc at the left edge (screen or appliance) that reads as clutter"
+  },
+  {
+   "region": [
+    190,
+    450,
+    1010,
+    760
+   ],
+   "what": "Ten identical stools, same rotation and same wood; obvious instancing"
+  },
+  {
+   "region": [
+    130,
+    0,
+    780,
+    300
+   ],
+   "what": "Edge-lit shelves with white backs nearly as bright as the panels (p95 180), a second rainbow competing with the hero"
+  },
+  {
+   "region": [
+    830,
+    0,
+    1200,
+    140
+   ],
+   "what": "Pink-lilac ceiling membrane bright and flat (lum_median 119), pulling the eye to the top right"
+  },
+  {
+   "region": [
+    940,
+    300,
+    1200,
+    420
+   ],
+   "what": "Lounge chairs read low-detail, with a muddy orange-brown upholstery"
+  },
+  {
+   "region": [
+    0,
+    340,
+    950,
+    420
+   ],
+   "what": "Bar top stone reads flat dark grey with almost no specular from the pinholes; glasses barely read"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "material",
+   "problem": "The floor reads as a smeared CG mottle and does not reflect the panels, so the hero has no ground and the room no polish.",
+   "evidence": {
+    "region": [
+     700,
+     580,
+     800,
+     640
+    ],
+    "measured": "lum_median 20, b_median 21 in front of the blue panel; floor lum_range 64 over 450-1200 x 600-800 with blotchy low-frequency noise"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "mottled matte concrete",
+    "to": "honed dark charcoal terrazzo or polished concrete, base colour about #2a2826, roughness 0.22, fine 2-4 mm aggregate texture at real scale, no large blotches"
+   },
+   "expected": "Soft vertical coloured streaks of each panel on the floor under the bar, fading to about 1.5 m out; the floor tone takes on each panel's hue in front of it.",
+   "accept": {
+    "region": [
+     700,
+     580,
+     800,
+     640
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The panel joints glow as bright white hairlines, which reads as a light leak and as a render.",
+   "evidence": {
+    "region": [
+     182,
+     420,
+     186,
+     700
+    ],
+    "measured": "lum_median 186 against neighbouring panels at 80 and 118; edge step 86 over 1 px"
+   },
+   "change": {
+    "setting": "the joint or edge finish between bar panels",
+    "from": "lit or clear edge showing white",
+    "to": "matte black anodised reveal (or opaque black edge paint on the acrylic edges) so the joint reads as a dark 3-4 mm shadow line"
+   },
+   "expected": "Joints read as thin dark lines between the colours, darker than either neighbour.",
+   "accept": {
+    "region": [
+     182,
+     420,
+     186,
+     700
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 50
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "Each panel is uniformly emissive, so it reads as a flat coloured card, not light passing through tinted cast acrylic.",
+   "evidence": {
+    "region": [
+     60,
+     420,
+     120,
+     600
+    ],
+    "measured": "vertical profile bins 73.9, 78.5, 81.2, 81.6, 82.0: under 10 levels of variation"
+   },
+   "change": {
+    "setting": "bar panels (emission)",
+    "from": "0.55 uniform",
+    "to": "0.6 at the top edge falling to about 0.4 at the foot (a vertical gradient as from an LED line at the top), plus a faint internal diffusion texture so the acrylic shows depth"
+   },
+   "expected": "Each panel brighter under the stone top and softly darker toward the plinth, by about 25-35% top to bottom.",
+   "accept": {
+    "region": [
+     60,
+     420,
+     120,
+     640
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The back-bar shelves form a second, almost equally bright rainbow that competes with the panels.",
+   "evidence": {
+    "region": [
+     130,
+     0,
+     780,
+     300
+    ],
+    "measured": "p95 180, brighter than every panel's median (80-146); clip 0.1%"
+   },
+   "change": {
+    "setting": "shelves",
+    "from": "0.45",
+    "to": "0.22"
+   },
+   "expected": "The back-bar recedes into a warm glow behind the bottles, about a stop under the panels, and the bottles read as silhouettes with rim light.",
+   "accept": {
+    "region": [
+     130,
+     0,
+     780,
+     300
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The pink ceiling membrane is a large, bright, flat area at the top right that pulls the eye away from the bar.",
+   "evidence": {
+    "region": [
+     900,
+     0,
+     1200,
+     140
+    ],
+    "measured": "lum_median 119, r_median 152 vs b 114 (a lilac-pink cast)"
+   },
+   "change": {
+    "setting": "membrane",
+    "from": "0.02 (clock 'sunset')",
+    "to": "0.01, clock set to a later, dimmer night setting"
+   },
+   "expected": "The ceiling falls to a dim warm field, letting the pendants and panels lead.",
+   "accept": {
+    "region": [
+     900,
+     0,
+     1200,
+     140
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     85
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "camera",
+   "problem": "The first stool is cut by the frame at bottom left and a pendant is cropped at top left, so the edges look unedited.",
+   "evidence": {
+    "region": [
+     0,
+     590,
+     130,
+     800
+    ],
+    "measured": "a dark partial stool mass at the frame corner; pendant at 0-110 x 0-100 clipped, clip 0.42%"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [1.6, 4.6, 1.35], lens 28 mm",
+    "to": "position [1.2, 4.2, 1.2], lens 32 mm, same target [6.8, 8.2, 0.65]; frame so the first full stool sits clear of the left edge and no pendant touches the top edge"
+   },
+   "expected": "The bar front runs in from the left edge as a clean diagonal, with the first whole stool as the foreground anchor and the pendants fully inside the frame.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The stools are visibly one instanced model at one rotation, with a dull, plasticky wood.",
+   "evidence": {
+    "region": [
+     190,
+     450,
+     1010,
+     760
+    ],
+    "measured": "ten identical stools; seat tops median lum about 21 with no specular"
+   },
+   "change": {
+    "setting": "stool wood material and placement",
+    "from": "uniform dull wood, identical rotation",
+    "to": "oiled walnut, roughness 0.35 with clear-coat 0.3, per-stool hue and roughness jitter of plus or minus 5%, each stool rotated by a random 0-12 degrees and offset by plus or minus 15 mm on its spot"
+   },
+   "expected": "Each seat catches a soft coloured highlight from the panel behind it, and the row reads as real furniture.",
+   "accept": {
+    "region": [
+     200,
+     560,
+     410,
+     640
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 75
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The air has no depth: the lounge and the pendants sit flat behind the bar, and the bar top stone gives no sheen to carry the glasses.",
+   "evidence": {
+    "region": [
+     0,
+     340,
+     950,
+     420
+    ],
+    "measured": "bar top lum_median 77 with few specular points; no visible glow volume around the Bell pendants"
+   },
+   "change": {
+    "setting": "haze in the room's air density; bar-top pinholes",
+    "from": "0.006; 80 W",
+    "to": "0.012; 140 W"
+   },
+   "expected": "Faint cones under the pinholes and soft halos on the Bells, the lounge stepping back in tone, and small pools of light on the stone around each glass.",
+   "accept": {
+    "region": [
+     0,
+     340,
+     950,
+     420
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 165
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Show an Atmosphere speaker or a Cumulus in this frame to tie the bar to EARF's products",
+   "why": "This is a composition and layout choice about which products are placed in view; the room layout is fixed, so it is the owner's call"
+  },
+  {
+   "request": "Fewer stools, or a different stool design",
+   "why": "The stools belong to the room's proposed layout, which is fixed"
+  }
+ ],
+ "score_if_fixed": 7.5
+}

@@ -1,0 +1,368 @@
+{
+ "stage1": {
+  "impression": "A moody, convincing-in-layout bar interior, but it reads as a dim CG walkthrough rather than a magazine photograph: the brightest thing in the frame is a speckled, blotchy pink ceiling, the bottom third is an empty brown floor, and a heavy red-magenta cast flattens every material into the same rust tone. There is no hero: the two shafts of light at the back fall on empty dark corners, and the only coloured acrylic that reads is the bar front and the violet slats. The product, whatever it is, is lost.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "At least one Atmosphere speaker must read at a glance as a lit, tinted acrylic object (its colour true, the light passing through it), with the corner spots landing on it rather than on bare wall",
+  "The ceiling membrane must stop being the brightest large area in the frame and must be free of speckle and blotching",
+  "The overall red-magenta cast must go so that upholstery, wood, stone and floor read as different materials (floor r/g ratio near 1.4, not 2.2)",
+  "The empty floor in the bottom third must carry information: reflections of the lit sources, a readable honed or polished texture, or be cropped out by the camera",
+  "No haze or denoiser speckle in flat areas (ceiling, walls)",
+  "The room needs one clear focal point at the record wall with a brightness hierarchy that pulls the eye there"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    230
+   ],
+   "what": "Ceiling membrane is the brightest large area (median lum 100) and is covered in dark speckle and blotchy mottling, a haze/denoise artefact that reads as render noise or a stained surface"
+  },
+  {
+   "region": [
+    340,
+    240,
+    430,
+    380
+   ],
+   "what": "Left corner spot (2000 W) shaft lands on a bare dark corner; no speaker visible there (median lum 32)"
+  },
+  {
+   "region": [
+    780,
+    240,
+    870,
+    380
+   ],
+   "what": "Right corner spot shaft lands on a bare dark corner; no speaker visible (median lum 26); a small cyan glint behind the chair at ~[830, 400] suggests the speaker is hidden behind the lounge chairs"
+  },
+  {
+   "region": [
+    0,
+    600,
+    1200,
+    800
+   ],
+   "what": "Bottom quarter is a featureless dim brown floor (median lum 36, range 27), dead space with only faint smeared reflections"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Global red-magenta cast: floor r 65 / g 29 / b 23; everything warm reads as one rust colour, no neutral reference"
+  },
+  {
+   "region": [
+    420,
+    380,
+    900,
+    480
+   ],
+   "what": "Lounge chairs are identical copies in a row, all the same rust tone, merging with each other and the floor"
+  },
+  {
+   "region": [
+    0,
+    390,
+    320,
+    600
+   ],
+   "what": "Bar front panels read as flat, evenly emissive screens (blue median b 238) rather than glowing acrylic; saturation stronger than anything else in the room"
+  },
+  {
+   "region": [
+    540,
+    325,
+    670,
+    395
+   ],
+   "what": "Screen in the record wall reads as a flat grey-blue rectangle, a dead hole at the centre of the composition"
+  },
+  {
+   "region": [
+    1140,
+    330,
+    1200,
+    400
+   ],
+   "what": "Bright cut-off rectangle at the right edge (screen or window) pulls the eye to the frame edge"
+  },
+  {
+   "region": [
+    580,
+    400,
+    620,
+    480
+   ],
+   "what": "Small dark table/object in the centre aisle sits at the vanishing point and blocks the view to the record wall"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The speakers at the back corners are hidden behind the lounge chairs from a 1.15 m camera, so the frame has no product.",
+   "evidence": {
+    "region": [
+     780,
+     240,
+     870,
+     480
+    ],
+    "measured": "Corner regions median lum 26-32; only a cyan glint visible behind the right chair; spot shafts land on empty wall"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "[2.2, 4.1, 1.15] m, target [18.288, 4.7, 0.85], 28 mm",
+    "to": "[2.6, 3.2, 1.6] m (standing eye level, a step right of centre so the aisle table does not block the axis), target [18.288, 4.7, 1.0], 32 mm"
+   },
+   "expected": "The speaker tops and horns clear the chair backs; the frame loses some ceiling and some empty floor; the record wall and the corner speakers sit on the lower third line.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The ceiling membrane outshines everything and pulls the eye to the top of the frame.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     900,
+     200
+    ],
+    "measured": "median lum 99.7, p95 134, the brightest large area; record wall median 57"
+   },
+   "change": {
+    "setting": "membrane",
+    "from": "0.012 (clock 'sunset')",
+    "to": "0.005, and a cooler, less saturated clock (dusk or a neutral warm) so it reads as a dim glow, not a pink sky"
+   },
+   "expected": "Ceiling becomes a quiet dark-warm field, clearly darker than the record wall and the lit speakers.",
+   "accept": {
+    "region": [
+     300,
+     0,
+     900,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     60
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The corner spots light empty wall because the speakers are not lit as the hero; the acrylic does not glow.",
+   "evidence": {
+    "region": [
+     340,
+     240,
+     430,
+     380
+    ],
+    "measured": "median lum 32 where the 2000 W shafts land; the shafts are visible in the haze but hit nothing"
+   },
+   "change": {
+    "setting": "lamps: on each corner speaker; the wash behind each pair",
+    "from": "4 x spot 2000 W cone 20 deg; wash 4 x 60 W cone 70 deg",
+    "to": "re-aim the corner spots onto the speaker cabinets (cone 25 deg) at 2000 W, and raise the wash behind each pair to 250 W so the tinted acrylic is back-lit and the colour passes through it"
+   },
+   "expected": "Each corner speaker becomes the brightest coloured object in its zone, its tint visible against a darker wall.",
+   "accept": {
+    "region": [
+     780,
+     240,
+     870,
+     420
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 110
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "A heavy red-magenta cast collapses every warm material into one rust tone.",
+   "evidence": {
+    "region": [
+     600,
+     520,
+     900,
+     700
+    ],
+    "measured": "floor r 71 / g 27 / b 22 (r/g 2.6)"
+   },
+   "change": {
+    "setting": "render white_balance_k / white_balance_tint",
+    "from": "3600 K, tint 10.0",
+    "to": "3200 K, tint 0.0"
+   },
+   "expected": "Warm stays warm but separates: wood amber, upholstery cognac, stone dark neutral; r/g on the floor near 1.5-1.8.",
+   "accept": {
+    "region": [
+     600,
+     520,
+     900,
+     700
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 35
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The ceiling and walls are covered in speckle and mottling that reads as render noise.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     900,
+     200
+    ],
+    "measured": "visible dark dot speckle and blotchy patches across the membrane at 1:1; lum_range 52 in a surface that should be smooth"
+   },
+   "change": {
+    "setting": "render samples / haze",
+    "from": "samples 256, adaptive 0.02, haze density 0.01",
+    "to": "samples 1024, adaptive 0.005, haze density 0.006 (keep anisotropy 0.3); if speckle remains, check the membrane material for a noise texture and remove it"
+   },
+   "expected": "A smooth ceiling gradient with no dot pattern; shafts still visible but softer.",
+   "accept": {
+    "region": [
+     400,
+     20,
+     800,
+     150
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 30
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The floor is a dead, featureless field that occupies the bottom third.",
+   "evidence": {
+    "region": [
+     0,
+     600,
+     1200,
+     800
+    ],
+    "measured": "median lum 36, range 27, faint smeared reflections only"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "matte dark warm concrete",
+    "to": "honed dark polished concrete, roughness 0.25, with fine aggregate and subtle trowel variation, so the bar panels, slats and speakers reflect in long soft streaks"
+   },
+   "expected": "Coloured reflections of the bar front and slats lead the eye up the aisle to the record wall.",
+   "accept": {
+    "region": [
+     0,
+     600,
+     1200,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 45
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The bar's front panels read as flat emissive screens, louder than anything else, pulling the eye to the left edge.",
+   "evidence": {
+    "region": [
+     0,
+     400,
+     120,
+     600
+    ],
+    "measured": "median lum 114, b_median 238, the most saturated area in the frame"
+   },
+   "change": {
+    "setting": "bar panels",
+    "from": "0.6",
+    "to": "0.3, keeping the 0.6-to-1 foot-to-top grade"
+   },
+   "expected": "The panels glow as acrylic, subordinate to the speakers.",
+   "accept": {
+    "region": [
+     0,
+     400,
+     120,
+     600
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     65,
+     90
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The record-wall screen is a flat grey-blue hole at the centre and the aisle side table sits on the vanishing point.",
+   "evidence": {
+    "region": [
+     540,
+     325,
+     670,
+     395
+    ],
+    "measured": "median lum 70, neutral grey-blue r 80 / g 66 / b 76, featureless"
+   },
+   "change": {
+    "setting": "screens / props",
+    "from": "grey-blue still on the screen; aisle table on axis",
+    "to": "screen showing a dark, low-key image (a record sleeve or turntable close-up at 30 percent brightness); move the aisle side table 0.6 m off axis or remove it"
+   },
+   "expected": "The centre of the record wall reads as part of the wall, and the eye travels to the speakers either side.",
+   "accept": {
+    "region": [
+     540,
+     325,
+     670,
+     395
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 50
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Vary the lounge chairs so they are not identical copies",
+   "why": "The room's design and layout are fixed; only upholstery material may change, which c4 helps separate."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

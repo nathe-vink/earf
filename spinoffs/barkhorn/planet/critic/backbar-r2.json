@@ -1,0 +1,363 @@
+{
+ "stage1": {
+  "impression": "A cluttered back-bar wall of flat, identically labelled CG bottles under cold blue-white shelf light, with a cream speaker cabinet and a floating clear hood boxed into a dark niche in the centre. The bottles out-shine and out-number the product, the light splits into cold blue on the left and warm on the right, and the foreground counter is a dim slab with a hard diagonal colour seam. It reads as a competent game-engine interior, not a magazine photograph.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speaker must be the brightest, most saturated-to-true object in frame: batts and acrylic brighter than every shelf (shelf lum_median below the speaker face's).",
+  "Bottles must read as real glass with liquid, varied labels and varied models; no repeated twine-wrap label on every bottle.",
+  "One coherent colour world: a single warm shelf/niche temperature, no cold-blue left half against a warm right half.",
+  "The foreground counter must read as honed stone with a soft, believable reflection, not a dark slab with a hard blue/warm diagonal seam.",
+  "Fewer bottles, with negative space and room for type around the hero.",
+  "Neutral grade on the Fog speaker: whites read clear-white, not yellow-green, and the woofer is not crushed to a blue-less black."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    400,
+    500
+   ],
+   "what": "Left shelves lit cold blue-white (b 202 vs r 139), brighter than the product (lum_median 173)."
+  },
+  {
+   "region": [
+    750,
+    0,
+    1200,
+    560
+   ],
+   "what": "Right shelves warm, contradicting the cold left side: two colour temperatures in one wall."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    560
+   ],
+   "what": "Bottles are low-detail CG: flat glass, no liquid refraction, the same twine-wrap label repeated on nearly every bottle, repeated models."
+  },
+  {
+   "region": [
+    0,
+    590,
+    1200,
+    800
+   ],
+   "what": "Foreground counter: blue reflection on the left meets warm on the right along a hard diagonal near x 430; surface reads as flat dark plastic, no honed-stone texture."
+  },
+  {
+   "region": [
+    420,
+    0,
+    860,
+    30
+   ],
+   "what": "Saturated red strip at the top of the niche (r 92, g 15) reads as a stray light leak."
+  },
+  {
+   "region": [
+    430,
+    100,
+    740,
+    330
+   ],
+   "what": "Niche back panel is a flat bright grey (lum 106) that competes with the clear hood; the hood's outline is weak against it."
+  },
+  {
+   "region": [
+    470,
+    360,
+    690,
+    430
+   ],
+   "what": "Cream batts carry a yellow-green cast (r 131, g 119, b 83): the Fog speaker does not read clear-white."
+  },
+  {
+   "region": [
+    560,
+    470,
+    640,
+    580
+   ],
+   "what": "Woofer cone crushed with blue channel near zero (b 1): muddy, detail-less black."
+  },
+  {
+   "region": [
+    460,
+    620,
+    730,
+    680
+   ],
+   "what": "Speaker base sits in shadow with no visible contact shadow or light cast onto its plinth; weight is unclear."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "No atmosphere: nearly no haze, everything at the same sharpness, so no depth between niche, shelves and counter."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The bottle shelves are the brightest thing in the frame, so the speaker is not the hero.",
+   "evidence": {
+    "region": [
+     60,
+     20,
+     380,
+     170
+    ],
+    "measured": "lum_median 172.8 on the left shelves vs 119.2 on the speaker's batts (470,360,690,430)."
+   },
+   "change": {
+    "setting": "shelves (emission strength)",
+    "from": "0.25",
+    "to": "0.10"
+   },
+   "expected": "Shelves drop to a glow around lum 100-115, below the speaker face; bottles become a backdrop.",
+   "accept": {
+    "region": [
+     60,
+     20,
+     380,
+     170
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 115
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Fog speaker is underlit relative to its setting and its face reads dull cream.",
+   "evidence": {
+    "region": [
+     470,
+     360,
+     690,
+     430
+    ],
+    "measured": "lum_median 119.2; batts below the shelf level."
+   },
+   "change": {
+    "setting": "on each Fog speaker 2 x spot",
+    "from": "150.0 W, cone 40 deg",
+    "to": "320.0 W, cone 30 deg, aimed at the cabinet's mid-height so light passes through the acrylic onto the batts"
+   },
+   "expected": "Batts read bright, clean white at lum ~160-185, the brightest surface in frame without clipping; the acrylic edges catch a highlight.",
+   "accept": {
+    "region": [
+     470,
+     360,
+     690,
+     430
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     155,
+     195
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The left half of the back-bar is cold blue and the right half warm, so the wall has no single colour world.",
+   "evidence": {
+    "region": [
+     60,
+     20,
+     380,
+     170
+    ],
+    "measured": "left shelves r 139 / g 179 / b 202; right shelves (800,30,1180,170) r 155 / g 139 / b 133."
+   },
+   "change": {
+    "setting": "shelves light colour",
+    "from": "cold white on the left run, warm on the right",
+    "to": "one warm 2700 K on every shelf run, matching the right side"
+   },
+   "expected": "Both shelf runs share a warm amber tone; blue no longer dominates the left.",
+   "accept": {
+    "region": [
+     60,
+     20,
+     380,
+     170
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 140
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The grade puts a yellow-green cast on the clear-white speaker and crushes the woofer's blue channel.",
+   "evidence": {
+    "region": [
+     560,
+     470,
+     640,
+     580
+    ],
+    "measured": "woofer r 19 / g 16 / b 1; batts r 131 / g 119 / b 83."
+   },
+   "change": {
+    "setting": "render white_balance_k / white_balance_tint",
+    "from": "3000 / -25.0",
+    "to": "3400 / -8.0"
+   },
+   "expected": "Batts read near neutral white (b within ~25 of r); the woofer holds dark neutral detail rather than olive-black.",
+   "accept": {
+    "region": [
+     560,
+     470,
+     640,
+     580
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The foreground counter is a dark slab split by a hard diagonal between a blue reflection and warm light.",
+   "evidence": {
+    "region": [
+     0,
+     610,
+     400,
+     800
+    ],
+    "measured": "left counter r 37 / g 57 / b 65 (lum 53) vs right (500,640,1200,800) r 36 / g 27 / b 13 (lum 28); 58 px transition near x 430."
+   },
+   "change": {
+    "setting": "bar-top pinholes 5 x spot",
+    "from": "140.0 W, cone 30 deg",
+    "to": "200.0 W, cone 45 deg, with one centred in front of the Fog niche so its pool lands on the counter in the lower third"
+   },
+   "expected": "A soft warm pool across the counter in front of the speaker; the blue left reflection fades (with c1/c3) and the seam disappears.",
+   "accept": {
+    "region": [
+     0,
+     610,
+     400,
+     800
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "asset",
+   "problem": "The bottles read as CG: identical twine labels, repeated models, flat glass with no liquid.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     560
+    ],
+    "measured": "seen: the same wrapped label on about 90 % of the bottles; no refraction or meniscus."
+   },
+   "change": {
+    "setting": "back-bar bottle props",
+    "from": "about 70 bottles from a few models with one label",
+    "to": "about 35 bottles from 12+ distinct scanned models, real glass IOR 1.5 with liquid volumes, varied paper labels; leave gaps on the shelves either side of the niche"
+   },
+   "expected": "Bottles read as a real collection; negative space opens around the speaker.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "A saturated red line at the top of the niche reads as a light leak.",
+   "evidence": {
+    "region": [
+     420,
+     0,
+     860,
+     30
+    ],
+    "measured": "r_median 92, g 15, b 14."
+   },
+   "change": {
+    "setting": "the red source above the Fog niche (back-bar back panel / niche edge)",
+    "from": "on, saturated red",
+    "to": "off, or the same warm 2700 K as the niches at 30 % of its level"
+   },
+   "expected": "The top of the niche reads as a dark, quiet frame edge.",
+   "accept": {
+    "region": [
+     420,
+     0,
+     860,
+     30
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "There is no atmosphere, so the niche, shelves and counter have no depth between them.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "seen: equal sharpness and contrast at every depth; no visible beams from the spots."
+   },
+   "change": {
+    "setting": "haze in the room's air density",
+    "from": "0.004",
+    "to": "0.012, anisotropy 0.5"
+   },
+   "expected": "Faint visible cones from the Fog spots and a slight veil over the far shelves, separating the hero from the wall.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The clear hood floats above the cabinet on two thin posts and reads as a separate object, as if it were detached from the speaker.",
+   "why": "It is the product's own part (shape and parts are fixed)."
+  },
+  {
+   "request": "The card says the frame is for the Fog pair, but only one speaker shows; reframing to hold both niches would change the composition substantially.",
+   "why": "This is a camera/brief question for the art director: whether the shot is one speaker or the pair. Pixel tests do not apply after a camera move."
+  },
+  {
+   "request": "Honed dark stone counter could take more visible texture.",
+   "why": "The bar top's material is fixed by the room's design; only its lighting is changed here (c5)."
+  }
+ ],
+ "score_if_fixed": 6.0
+}

@@ -1,0 +1,388 @@
+{
+ "stage1": {
+  "impression": "A hazy, orange-soaked lounge seen down its length, with two red acrylic speakers pushed to the far frame edges and half hidden behind identical chair backs. The brightest thing in the frame is a mottled, blotchy ceiling with two unmotivated light shafts, and the floor shows the same mottling. Everything is one muddy amber, so it reads as a denoised CG walkthrough, not a magazine interior, and the product is not the hero.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speaker pair must be the brightest, most saturated objects in the frame and fully readable as silhouettes, not cut by chair backs or the frame edge",
+  "The camera must look at the record wall with the pair either side of it, as the card says the frame is for; now it looks the other way, toward the door",
+  "The ceiling and floor must be free of denoiser blotches and read as real materials at real scale",
+  "The grade must be neutral enough that the red Ember acrylic separates from the orange upholstery, the floor and the walls",
+  "The haze must be barely there: no shafts without a visible source, and no lifted, veiled blacks in the back half",
+  "The spots must light the speakers through their acrylic, not throw a clipped white patch on the wall next to them"
+ ],
+ "defects": [
+  {
+   "region": [
+    300,
+    0,
+    900,
+    230
+   ],
+   "what": "Ceiling membrane is the brightest field in the frame (lum median 102), with blotchy denoiser mottling and no structure"
+  },
+  {
+   "region": [
+    230,
+    40,
+    300,
+    140
+   ],
+   "what": "Visible light shaft in the haze with no visible source, reads as a CG volumetric"
+  },
+  {
+   "region": [
+    900,
+    40,
+    980,
+    140
+   ],
+   "what": "Second unmotivated light shaft, mirrors the first"
+  },
+  {
+   "region": [
+    450,
+    560,
+    800,
+    800
+   ],
+   "what": "Floor covering is a coarse, blotchy, denoised texture with no real-scale pile; it reads as noise, not carpet"
+  },
+  {
+   "region": [
+    90,
+    350,
+    190,
+    520
+   ],
+   "what": "Left speaker is dark (lum median 20) and half hidden behind a chair back, its horn a murky blob"
+  },
+  {
+   "region": [
+    1010,
+    350,
+    1110,
+    520
+   ],
+   "what": "Right speaker is dark (lum median 23) and cut by two chairs"
+  },
+  {
+   "region": [
+    1110,
+    400,
+    1200,
+    560
+   ],
+   "what": "Spot spill makes a hard, near-white patch on the wall beside the right speaker (p95 199), brighter than the speaker"
+  },
+  {
+   "region": [
+    0,
+    400,
+    80,
+    560
+   ],
+   "what": "A chair is cut by the left frame edge"
+  },
+  {
+   "region": [
+    1110,
+    400,
+    1200,
+    560
+   ],
+   "what": "A chair is cut by the right frame edge"
+  },
+  {
+   "region": [
+    180,
+    400,
+    1100,
+    750
+   ],
+   "what": "Six copies of one chair model, all the same orange as the floor and the light, read as an instanced render"
+  },
+  {
+   "region": [
+    440,
+    250,
+    760,
+    380
+   ],
+   "what": "Back half veiled by haze: blacks lifted (p5 34), the back wall has no detail and no depth"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Global amber cast (median R 74, G 26, B 24): every material is the same hue"
+  },
+  {
+   "region": [
+    540,
+    590,
+    660,
+    760
+   ],
+   "what": "Side table base reads as a dark, smeared cylinder with a soft, muddy shadow"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The camera looks away from the record wall, so the pair the frame is for sits at the extreme edges, cut by chairs, and the centre is an empty dark wall.",
+   "evidence": {
+    "region": [
+     90,
+     350,
+     1110,
+     520
+    ],
+    "measured": "The speakers sit at x 90-190 and 1010-1110 of 1200, behind chair backs; centre 440-760 x 250-380 is a featureless wall (lum range 50, veiled)"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [17.45, 4.572, 1.62] at [11.0, 4.572, 0.85], 18 mm",
+    "to": "position [11.8, 4.572, 1.15] at [18.29, 4.572, 0.95], 28 mm, level, so the record wall fills the centre third with one speaker either side, the chairs seen from behind in the lower foreground"
+   },
+   "expected": "Both speakers whole, each about 25-30% of the frame height, in the left and right thirds, with the record wall between them; no chair cut by the frame edge; less wide-angle stretch at the edges.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The spots on the corner speakers spill a hard, clipped patch onto the wall instead of lighting the acrylic, so the speakers stay dark while their surroundings glow.",
+   "evidence": {
+    "region": [
+     1010,
+     350,
+     1110,
+     520
+    ],
+    "measured": "Speaker cabinet lum median 22.8 against the wall patch beside it at p95 199 (1110-1200 x 460-560)"
+   },
+   "change": {
+    "setting": "lamps: spots on each corner speaker",
+    "from": "2000 W, aimed past the cabinet onto the wall",
+    "to": "700 W, a 25-degree cone, aimed down through the top and back of each cabinet from 0.5 m above and behind, so the light passes through the tinted acrylic and lights the white batts"
+   },
+   "expected": "The cabinets glow Ember red from inside, cabinet lum median 50-75, with no white wall patch; the speakers become the most saturated objects in the frame.",
+   "accept": {
+    "region": "the speaker cabinet's bounding box in the new frame",
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The ceiling membrane is the brightest field in the frame and pulls the eye up and away from the product.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     900,
+     230
+    ],
+    "measured": "lum median 102.5, p95 141, against a frame median of 37"
+   },
+   "change": {
+    "setting": "the room's sources: membrane",
+    "from": "0.012 (clock 'sunset')",
+    "to": "0.004, clock 'night' (a cooler, dimmer glow)"
+   },
+   "expected": "The ceiling sits at about lum 35-50, a quiet field above the speakers, and the brightest regions become the speakers and the record wall.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     150
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "A heavy amber cast makes the upholstery, the floor, the walls and the red acrylic all one hue, so the speakers' colour does not read as true.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "Frame median R 74, G 26, B 24; floor R 131, G 55, B 32; chairs R 52, G 7, B 3"
+   },
+   "change": {
+    "setting": "render: white_balance_k / white_balance_tint",
+    "from": "3600 K, tint 10",
+    "to": "4300 K, tint 0 (keep the night warmth from the sources, not from the grade)"
+   },
+   "expected": "Neutral surfaces read as warm grey rather than orange; the Ember red separates from the upholstery; the slats' violet and the bar panels' spectrum hold.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 34
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The haze veils the back half and makes visible light shafts with no visible source, which says 'volumetric render'.",
+   "evidence": {
+    "region": [
+     440,
+     250,
+     760,
+     380
+    ],
+    "measured": "p5 33.6: no black anywhere in the back half; the shafts at 230-300 and 900-980 x 40-140 have no fixture in frame"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "density 0.01 per metre, anisotropy 0.3",
+    "to": "density 0.002 per metre, anisotropy 0.6"
+   },
+   "expected": "Blacks come back in the far half (frame p5 below 8), the shafts disappear or fall to a faint glow round each source, and depth comes from light falloff rather than fog.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The denoiser leaves blotchy, low-frequency mottling on the ceiling and the floor, the clearest 'render' tell in the frame.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     900,
+     230
+    ],
+    "measured": "Visible blotches 10-30 px across over the whole membrane; the floor crop at 450-800 x 560-800 shows the same mottling"
+   },
+   "change": {
+    "setting": "render: samples / adaptive / delivered scale",
+    "from": "256 samples, adaptive 0.02, proof at scale 0.5",
+    "to": "1024 samples, adaptive 0.005, light-tree on, rendered at the full 2400 x 1600 and judged there"
+   },
+   "expected": "Smooth membrane gradient and a floor that shows real fibre rather than denoiser blotches.",
+   "accept": {
+    "region": [
+     500,
+     0,
+     700,
+     120
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The floor covering has no believable scale or pile: a coarse orange speckle that competes with the product.",
+   "evidence": {
+    "region": [
+     450,
+     560,
+     800,
+     800
+    ],
+    "measured": "lum median 70 (brighter than the speakers), R 131, G 55, B 32, with a large blotchy pattern"
+   },
+   "change": {
+    "setting": "materials: floor",
+    "from": "coarse speckled orange carpet",
+    "to": "a fine low-pile charcoal wool (fibre detail at the 1-2 mm scale, albedo about 0.08), or honed dark concrete with a soft sheen to catch the speakers' red"
+   },
+   "expected": "The floor falls to lum 25-40, reads as a real material, and takes a soft red bounce under each speaker as their cast light.",
+   "accept": {
+    "region": [
+     0,
+     650,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     42
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "Six identical chairs in orange velour share the speakers' hue and value, crowd them, and read as instanced copies.",
+   "evidence": {
+    "region": [
+     180,
+     470,
+     480,
+     750
+    ],
+    "measured": "Chair median R 52, G 7, B 3: the same red-orange as the Ember acrylic"
+   },
+   "change": {
+    "setting": "materials: upholstery",
+    "from": "orange velour on every chair",
+    "to": "deep chocolate or black aniline leather with a soft sheen, with small variations per chair (a 2-6 degree turn, a throw on one)"
+   },
+   "expected": "The chairs become dark, low-key shapes in the foreground that frame the red speakers instead of matching them.",
+   "accept": {
+    "region": "the chair backs in the lower foreground of the new frame",
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 18
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the horn inside each cabinet read as a defined form rather than a dark blob behind the lid",
+   "why": "It is the speaker's own part; better light through the acrylic (c2) may help, but its shape and finish are fixed"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

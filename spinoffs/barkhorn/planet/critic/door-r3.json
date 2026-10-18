@@ -1,0 +1,380 @@
+{
+ "stage1": {
+  "impression": "A wide, competent night interior: the spectrum bar front, the record wall and the violet slats set a clear stage. But the frame is mostly an empty pink ceiling over a mottled CG floor. The speakers, which are the product, are nearly invisible: dark shapes lost behind the lounge chairs, plus one red horn fragment against the slats. It reads as an architectural visualization, not a magazine photograph.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "At least the two corner Atmosphere speakers read at a glance as lit, tinted acrylic cabinets, the brightest coloured objects at the record wall (lum_median > 70 on each cabinet, against a wall around 45).",
+  "The ceiling membrane is no longer the brightest large area: ceiling median under 90, close to a neutral warm white (r_median - g_median < 25).",
+  "The floor reads as real honed or polished concrete with fine aggregate and soft reflections, with no large smeared blotches.",
+  "No speckle or denoise mottling on the ceiling, and no clipped LED lines.",
+  "One human cue (a seated listener, a coat, glasses visibly catching light) so the room reads as inhabited rather than modelled.",
+  "The centre screen no longer reads as a flat blank blue-grey rectangle at the optical centre."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    200
+   ],
+   "what": "The ceiling membrane is the brightest large area (median 124 against a floor of 44) and dusty pink-magenta (R 158, G 114). It takes the top quarter of the frame and pulls the eye away from the bar and the speakers."
+  },
+  {
+   "region": [
+    300,
+    20,
+    700,
+    200
+   ],
+   "what": "Dark speckles across the membrane at 3x: dust or a denoiser artefact. They read as dirty CG."
+  },
+  {
+   "region": [
+    380,
+    360,
+    430,
+    420
+   ],
+   "what": "The left corner speaker is unlit and hidden behind a lounge chair (lum_median 28.6, darker than the record wall at 58). Its acrylic does not read."
+  },
+  {
+   "region": [
+    770,
+    360,
+    830,
+    420
+   ],
+   "what": "The right corner speaker is unlit and hidden (lum_median 21.6)."
+  },
+  {
+   "region": [
+    850,
+    380,
+    900,
+    410
+   ],
+   "what": "A red horn shows only as a fragment against the slats, cut by the booth back. It reads as a stray red object, not as a speaker."
+  },
+  {
+   "region": [
+    400,
+    230,
+    470,
+    300
+   ],
+   "what": "The spot beams are visible in the haze but land on the upper wall and ceiling, not on the speakers below."
+  },
+  {
+   "region": [
+    0,
+    500,
+    1200,
+    800
+   ],
+   "what": "The floor texture is large-scale smeared mottling with no aggregate micro-detail. It reads as a procedural CG texture, and the warm/magenta cast is heavy (R 69, G 36)."
+  },
+  {
+   "region": [
+    550,
+    350,
+    650,
+    400
+   ],
+   "what": "The centre screen is a flat blue-grey rectangle (lum 81, B 99). It is the cold dead centre of the composition, with no content."
+  },
+  {
+   "region": [
+    830,
+    220,
+    950,
+    260
+   ],
+   "what": "The slats' LED line clips (0.79% clipped in the slat region)."
+  },
+  {
+   "region": [
+    0,
+    430,
+    100,
+    620
+   ],
+   "what": "The green bar panel at the left frame edge is saturated (G 125, R 17) and, as the most saturated block, pulls the eye out of frame."
+  },
+  {
+   "region": [
+    1000,
+    340,
+    1150,
+    400
+   ],
+   "what": "The window shows flat white rectangles that read as untextured planes."
+  },
+  {
+   "region": [
+    380,
+    400,
+    850,
+    480
+   ],
+   "what": "The lounge mid-ground is a dark, crushed band (median 26.6), with a row of near-identical chairs that reads as repeated copies."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The product is invisible: the corner speakers sit in the dark behind the chairs, and the spots light the wall above them.",
+   "evidence": {
+    "region": [
+     380,
+     360,
+     430,
+     420
+    ],
+    "measured": "lum_median 28.6 (left) and 21.6 at [770,360,830,420] (right), against 57.9 on the record wall at [460,280,740,400]. The haze beams end on the upper wall around [400,230,470,300]."
+   },
+   "change": {
+    "setting": "spots on each corner speaker (watts and aim)",
+    "from": "900 W, beam landing on the wall above the cabinet",
+    "to": "2000 W, aimed at the cabinet's centre (z about 0.7 m), narrow cone (spot size about 25 deg), so light passes through the tinted acrylic and lights the white batts. Add a low-level uplight behind each cabinet, 60 W, to rim its silhouette."
+   },
+   "expected": "Each corner speaker glows as a tinted block above the chair backs and is the brightest coloured object at the record wall.",
+   "accept": {
+    "region": [
+     380,
+     360,
+     430,
+     420
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 70
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "From 1.35 m at the door, the row of lounge chairs hides the speakers, and a quarter of the frame is ceiling.",
+   "evidence": {
+    "region": [
+     380,
+     360,
+     850,
+     480
+    ],
+    "measured": "The chair backs cover the lower two thirds of both corner cabinets. The ceiling takes y 0 to 200 of 800."
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [1.6, 3.7, 1.35], target [18.288, 4.6, 1.05], 24 mm",
+    "to": "position [2.2, 4.1, 1.15], target [18.288, 4.7, 0.85], 28 mm: slightly lower and pitched down, so the floor reflections carry the bar glow, the ceiling drops to about 15% of the frame and the camera looks through the gap between the chair groups to the speakers."
+   },
+   "expected": "The ceiling falls to about 15% of the frame height. Both corner speakers clear the chairs above roughly half their height. The bar still runs in from the left edge.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The membrane is the brightest, pinkest surface in the frame and fights the room's acrylic light.",
+   "evidence": {
+    "region": [
+     300,
+     40,
+     900,
+     200
+    ],
+    "measured": "lum_median 120 (r 155, g 110, b 113), against the floor at 44 and the record wall at 58."
+   },
+   "change": {
+    "setting": "membrane",
+    "from": "0.05, clock 'late' (pink-magenta)",
+    "to": "0.025, a warm neutral white (about 2700 K, no magenta)"
+   },
+   "expected": "The ceiling becomes a soft, quiet warm-grey canopy, darker than the bar panels and the speakers.",
+   "accept": {
+    "region": [
+     300,
+     40,
+     900,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     65,
+     90
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The floor reads as a smeared procedural texture with no aggregate and a muddy red-magenta cast.",
+   "evidence": {
+    "region": [
+     300,
+     600,
+     900,
+     800
+    ],
+    "measured": "Large-scale blotches at 2x, no fine grain; r_median 83, g_median 44."
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "the mottled concrete texture",
+    "to": "honed dark-grey concrete with a fine aggregate (2 to 6 mm speckle at real scale) and subtle trowel variation at 0.5 to 1 m scale, roughness 0.3, normal strength low, base colour a neutral grey (around #4a4845)"
+   },
+   "expected": "The floor reads as real stone-like concrete with soft, broad reflections of the bar panels and speakers, and the red cast drops.",
+   "accept": {
+    "region": [
+     300,
+     600,
+     900,
+     800
+    ],
+    "metric": "r_median",
+    "op": "<",
+    "value": 70
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "post",
+   "problem": "A red-magenta cast sits over the whole frame, so the true colour of the speakers and the room cannot read.",
+   "evidence": {
+    "region": [
+     0,
+     500,
+     1200,
+     800
+    ],
+    "measured": "Floor r_median 69, g 36, b 38. Ceiling r 158, g 114."
+   },
+   "change": {
+    "setting": "render.white_balance_k / white_balance_tint",
+    "from": "3500 K, tint 0.0",
+    "to": "3200 K, tint +0.08 toward green"
+   },
+   "expected": "Neutral surfaces sit nearer grey with a gentle warmth, and the speakers' tints and the bar's spectrum read truer.",
+   "accept": {
+    "region": [
+     300,
+     600,
+     900,
+     800
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 50
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The centre screen is a flat, cold, blank rectangle at the optical centre.",
+   "evidence": {
+    "region": [
+     550,
+     350,
+     650,
+     400
+    ],
+    "measured": "lum_median 80.9, b 99 against r 75. Uniform, no content."
+   },
+   "change": {
+    "setting": "the screen's emission and content (plain description)",
+    "from": "a uniform blue-grey glow",
+    "to": "a dim, warm still (a record sleeve or a slow waveform), emission at about 40% of now"
+   },
+   "expected": "The screen sits back into the record wall and stops pulling the eye from the speakers.",
+   "accept": {
+    "region": [
+     550,
+     350,
+     650,
+     400
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     60
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The room is empty and reads as a model, not a place in use.",
+   "evidence": {
+    "region": [
+     380,
+     400,
+     850,
+     480
+    ],
+    "measured": "Near-identical chairs in a row, no figures. The props on the bar and booth tables do not register at this scale."
+   },
+   "change": {
+    "setting": "people / props",
+    "from": "none",
+    "to": "two seated listeners in the lounge chairs facing the record wall (not blocking the speakers), and one coat over a bar stool in the foreground. Turn two of the lounge chairs a few degrees off the grid."
+   },
+   "expected": "The room reads as an inhabited kissa at night, and the repetition of the chairs breaks up.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "Ceiling speckle and a clipped slat LED line say 'render'.",
+   "evidence": {
+    "region": [
+     830,
+     220,
+     950,
+     420
+    ],
+    "measured": "clip_pct 0.79 in the slat region. Dark speckles visible across [300,20,700,200] at 3x."
+   },
+   "change": {
+    "setting": "slats' LED and render.samples",
+    "from": "LED 8.0, samples 256",
+    "to": "LED 4.0, samples 512 for the delivered frame. Remove any dust or noise map from the membrane material."
+   },
+   "expected": "A clean ceiling and an LED line that stays below clipping.",
+   "accept": {
+    "region": [
+     830,
+     220,
+     950,
+     420
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.1
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A third speaker (the red horn at about [850,380,900,410]) placed where the booth back cuts it to a fragment.",
+   "why": "Moving a speaker or a booth changes the proposed layout, which is fixed. If it cannot be framed whole, ask the owner whether its placement should change."
+  },
+  {
+   "request": "The bar panels' order and colours (the saturated green at the left edge).",
+   "why": "The bar's panels in spectrum order are fixed. Only their glow level may change (a drop from 0.55 to about 0.4 would calm the edge)."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

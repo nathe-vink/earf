@@ -1,0 +1,355 @@
+{
+ "stage1": {
+  "impression": "A clean, legible bar interior with a strong graphic idea, the spectrum front, but it reads as an archviz render rather than a photograph. The light is flat and too bright for a night listening bar, the panels look like uniformly lit plastic sheets with clipped saturation, the back-bar is a field of cloned, denoiser-smeared bottles, and a bright wall and ceiling hotspots pull the eye away from the panels. The EARF speaker on the bar is a tiny red shape that reads as a toy.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Night mood: overall exposure down about 1 stop so the panels and shelves are the brightest things in the frame (frame lum_median under 60, panels 2x the surrounding wall)",
+  "Panels read as light passing through tinted cast acrylic: visible vertical gradient and a soft falloff, no single-channel clipping (green panel r_median currently 0)",
+  "No surface brighter than the panels: the blank wall right of the back-bar (lum 206) and the floor hotspot (12% clipped) brought under the panel level",
+  "Back-bar bottles that do not read as clones, with crisp labels and no denoiser smear",
+  "Even back-lit ceiling membrane with no blotchy hotspots",
+  "A foreground that leads into the spectrum, not a cut-off dark stool mass at the left edge"
+ ],
+ "defects": [
+  {
+   "region": [
+    800,
+    100,
+    950,
+    320
+   ],
+   "what": "plain wall right of the back-bar is the brightest large area in the frame (lum_median 206), competing with the panels"
+  },
+  {
+   "region": [
+    1000,
+    640,
+    1100,
+    800
+   ],
+   "what": "specular hotspot on the floor, 12% clipped, an unexplained bright blob in the lower right"
+  },
+  {
+   "region": [
+    870,
+    0,
+    1080,
+    140
+   ],
+   "what": "ceiling membrane shows blotchy uneven bright patches that read as stains or render artefacts, 1.3% clipped"
+  },
+  {
+   "region": [
+    0,
+    340,
+    970,
+    720
+   ],
+   "what": "bar panels are flat, uniform emitters with saturated, clipped channels (green r=0, blue/violet b about 248); they read as LED signage, not tinted acrylic; brightness uneven (yellow 173, red 101, Smoke 77)"
+  },
+  {
+   "region": [
+    120,
+    0,
+    800,
+    340
+   ],
+   "what": "back-bar bottles are a small set of repeated models; labels are smeared by the denoiser into mush"
+  },
+  {
+   "region": [
+    0,
+    510,
+    170,
+    800
+   ],
+   "what": "foreground stool cut by the left edge forms a heavy dark mass with no purpose"
+  },
+  {
+   "region": [
+    0,
+    0,
+    160,
+    50
+   ],
+   "what": "Bell pendant cropped by the top-left corner"
+  },
+  {
+   "region": [
+    0,
+    140,
+    120,
+    340
+   ],
+   "what": "unreadable dark screen or frame shape at the left edge of the back-bar"
+  },
+  {
+   "region": [
+    840,
+    290,
+    900,
+    330
+   ],
+   "what": "the speaker on the bar is tiny and reads as a red toy horn; no light passing through it"
+  },
+  {
+   "region": [
+    1080,
+    140,
+    1200,
+    320
+   ],
+   "what": "record wall rendered as a flat repeated texture, reads as wallpaper"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "global: evenly lit, low contrast, no pools of light and dark; haze barely visible"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The frame is too bright and even for a night bar, so the panels do not glow against their surroundings.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "lum_mean 91, only 30% of pixels below 40; floor lum_median 104"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.1",
+    "to": "0.0 (about -1.1 stop), then raise the bar panels per c2 to keep them bright"
+   },
+   "expected": "The room falls to a dark, calm field; panels and shelves stay luminous; floor around 50-60",
+   "accept": {
+    "region": [
+     600,
+     600,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     65
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The panels read as flat clipped LED sheets rather than light through tinted acrylic, and their brightness is uneven across the spectrum.",
+   "evidence": {
+    "region": [
+     630,
+     350,
+     700,
+     400
+    ],
+    "measured": "green panel r_median 0, g 162; blue b 246, violet b 249; yellow lum 173 vs red 101 vs Smoke 77"
+   },
+   "change": {
+    "setting": "bar panels emission and grade",
+    "from": "0.6, graded 0.6 at foot to 1.0 at top",
+    "to": "1.2 after the exposure drop, graded 0.35 at foot to 1.0 at top; per-panel trim so the luminance of red, violet and Smoke rises to within 25% of yellow (red x1.4, Smoke x1.8, yellow x0.85)"
+   },
+   "expected": "A visible vertical falloff on each panel, a deeper floor-level glow, no channel at 0 or 255 in a panel's median, a balanced spectrum",
+   "accept": {
+    "region": [
+     630,
+     350,
+     700,
+     400
+    ],
+    "metric": "r_median",
+    "op": ">",
+    "value": 15
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The blank wall to the right of the back-bar is the brightest area in the frame and steals the eye from the spectrum.",
+   "evidence": {
+    "region": [
+     800,
+     100,
+     950,
+     320
+    ],
+    "measured": "lum_median 206, brighter than every panel"
+   },
+   "change": {
+    "setting": "Fog niches / back-bar back panel and the bar-top pinhole nearest the wall",
+    "from": "Fog niches 0.05, back panel 0.07, pinholes 140 W",
+    "to": "Fog niches 0.02, back panel 0.03; aim the last pinhole 15 deg off the wall or drop it to 70 W"
+   },
+   "expected": "The wall drops to a mid-grey well below the panels",
+   "accept": {
+    "region": [
+     800,
+     100,
+     950,
+     320
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 110
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "A clipped specular hotspot on the floor in the lower right pulls the eye to an empty corner.",
+   "evidence": {
+    "region": [
+     1000,
+     640,
+     1100,
+     800
+    ],
+    "measured": "lum_median 214, clip_pct 12.1"
+   },
+   "change": {
+    "setting": "floor material roughness (and the source it mirrors, the ceiling membrane patch)",
+    "from": "polished concrete, low roughness",
+    "to": "honed concrete, roughness 0.45 with a fine-grain roughness map, so the panels still smear a coloured reflection but the hotspot spreads"
+   },
+   "expected": "No clipped floor; the panels' coloured reflections stay as soft streaks",
+   "accept": {
+    "region": [
+     1000,
+     640,
+     1100,
+     800
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The ceiling membrane is blotchy, with bright patches that read as stains or render faults.",
+   "evidence": {
+    "region": [
+     870,
+     0,
+     1080,
+     140
+    ],
+    "measured": "lum_range high, clip_pct 1.3 at the patches"
+   },
+   "change": {
+    "setting": "membrane emission (clock 'sunset') and the record-wall spots",
+    "from": "0.006, record wall spots 60 W cone 75",
+    "to": "0.003, and record wall spots narrowed to cone 45 and aimed lower so they stop washing the membrane"
+   },
+   "expected": "An even, dim ceiling glow without patches",
+   "accept": {
+    "region": [
+     870,
+     0,
+     1080,
+     140
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.1
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "asset",
+   "problem": "The back-bar bottles are cloned and their labels are smeared by the denoiser, which says 'render' at a glance.",
+   "evidence": {
+    "region": [
+     120,
+     0,
+     800,
+     340
+    ],
+    "measured": "seen at 2x crop: the same five or six bottle shapes repeat; labels blur into flat patches"
+   },
+   "change": {
+    "setting": "back-bar props and render samples",
+    "from": "small repeated bottle set; 256 samples, denoise on",
+    "to": "at least 20 distinct bottle models with random scale (0.9-1.1), rotation and fill level; 512 samples at the delivered 2400 x 1600 with denoise prefilter 'accurate' and albedo/normal passes"
+   },
+   "expected": "Bottles read as a real collection with legible label edges"
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The cut-off foreground stool is a heavy dark mass and the top-left corner crops a pendant, so the frame leaks at both left corners.",
+   "evidence": {
+    "region": [
+     0,
+     510,
+     170,
+     800
+    ],
+    "measured": "near-black stool fills the bottom-left corner; pendant cropped at [0, 0, 160, 50]"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [1.2, 4.2, 1.2], target [6.8, 8.2, 0.65], 32 mm",
+    "to": "position [1.6, 4.6, 1.05], target [7.0, 8.4, 0.75], 35 mm, so the first stool sits whole inside the frame and the pendant drops out above"
+   },
+   "expected": "The spectrum runs from the left edge into depth with a clean foreground; no cropped objects at the corners"
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The air carries no visible atmosphere, so there is no depth between the bar and the lounge.",
+   "evidence": {
+    "region": [
+     950,
+     140,
+     1200,
+     440
+    ],
+    "measured": "lounge and record wall as crisp and contrasty as the foreground"
+   },
+   "change": {
+    "setting": "haze density",
+    "from": "0.004",
+    "to": "0.012, anisotropy 0.5"
+   },
+   "expected": "Soft glow around the pendants and a slight veiling of the lounge, which separates the planes"
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Atmosphere speaker on the bar read as tinted acrylic with light passing through it, rather than a small opaque red horn",
+   "why": "It is the speaker's material and form; fixed. It could be lit from behind with a spot, but at this scale it will not read regardless"
+  },
+  {
+   "request": "Replace the record wall's flat repeated texture with modelled sleeves",
+   "why": "The record wall is part of the room's design as proposed; its asset fidelity is a modelling task for the owner to approve"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

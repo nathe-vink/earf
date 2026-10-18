@@ -1,0 +1,380 @@
+{
+ "stage1": {
+  "impression": "A dark, wide shot down a long bar at night. The bright spectrum-lit bar front and a violet slat wall pull the eye, while the middle of the room is a murky brown cave. There is no product to find: two tall, dull brown-violet boxes in mid-room read as pillars or lecterns, a large flat mauve ceiling takes up the top third, and the dark empty floor takes up the bottom third. It reads as a competent but underlit archviz render, not a magazine interior.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Atmosphere speakers must read at a glance as tinted acrylic with light passing through them; right now the two in mid-room (x 340-440 and 695-810) have a median luminance of about 10 and no visible tint, batts or horn",
+  "The image is far too dark: 70.7% of pixels are below 40, and the floor and middle ground (200-1000, 550-800) have a median of 14",
+  "A strong red-brown cast lies over every neutral surface (floor median R35 G8 B7); the concrete and stone need to read as near-neutral grey with coloured light on them, not as rust",
+  "The ceiling membrane is a flat, featureless mauve field over the top 30% of the frame and is the brightest large area, so it outweighs the room",
+  "The bar panels' saturated green and blue (x 0-100: G128 at median lum 101) shout over the calm kissa idea and over the speakers",
+  "The floor has no reflections or texture to carry the room's coloured light toward the camera; it is a uniform dark plane",
+  "There are no people or props at the bar to give scale and life"
+ ],
+ "defects": [
+  {
+   "region": [
+    340,
+    385,
+    440,
+    500
+   ],
+   "what": "Left Atmosphere speaker reads as a dull brown box (lum median 10.6, R26 G6 B4); its acrylic, colour and horn are unreadable"
+  },
+  {
+   "region": [
+    695,
+    385,
+    810,
+    500
+   ],
+   "what": "Right Atmosphere speaker reads as a faint violet pillar (lum median 9.7); the 150 W spot does not reach it, or is far too weak"
+  },
+  {
+   "region": [
+    450,
+    390,
+    700,
+    460
+   ],
+   "what": "Lounge chairs and the record-player zone in front of the record wall are crushed (median 5.6, 9.6% crushed); Cumulus is invisible"
+  },
+  {
+   "region": [
+    460,
+    280,
+    745,
+    390
+   ],
+   "what": "Record-wall spots make three bright, repeating arch pools that compete with the speakers"
+  },
+  {
+   "region": [
+    300,
+    0,
+    900,
+    120
+   ],
+   "what": "Ceiling membrane is a large flat mauve field (median 59) with a visible hard-edged elliptical boundary; it reads as CG"
+  },
+  {
+   "region": [
+    200,
+    550,
+    1000,
+    800
+   ],
+   "what": "Floor is a uniform dark red-brown plane (median 14, R35 G8 B7) with no texture, no reflections and no light pools; a third of the frame is dead"
+  },
+  {
+   "region": [
+    0,
+    430,
+    360,
+    620
+   ],
+   "what": "Bar panels are oversaturated, flat emissive colour blocks (green median lum 101) that read as an LED sign"
+  },
+  {
+   "region": [
+    850,
+    400,
+    1200,
+    680
+   ],
+   "what": "Booths are a mass of dark red upholstery; the booth Bell lamps glow faintly and light nothing"
+  },
+  {
+   "region": [
+    1000,
+    120,
+    1190,
+    410
+   ],
+   "what": "Street window reads as dark, blank panels with grey rectangles; there is no street life or depth beyond it"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "A red/magenta colour cast across the whole frame; there is no neutral reference anywhere"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers are the products and they are invisible: no light passes through their acrylic, so they read as dull boxes.",
+   "evidence": {
+    "region": [
+     340,
+     385,
+     440,
+     500
+    ],
+    "measured": "lum median 10.6, p95 32.1, R26 G6 B4; the right one (695-810) has median 9.7"
+   },
+   "change": {
+    "setting": "lamps: spots on each Fog speaker (and add a narrow top-down spot on each mid-room speaker, aimed into the cabinet so the batts glow through the tint)",
+    "from": "150.0 W",
+    "to": "900 W, cone 25 deg, aimed at the cabinet's centre from above and behind"
+   },
+   "expected": "Each mid-room speaker glows in its own tint with visible white batts and a bright horn rim, and is the brightest object in the middle third",
+   "accept": {
+    "region": [
+     340,
+     385,
+     440,
+     500
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The frame is underexposed overall and the middle ground is a cave.",
+   "evidence": {
+    "region": [
+     200,
+     550,
+     1000,
+     800
+    ],
+    "measured": "lum median 14.1; 70.7% of the whole frame is below 40"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "0.5",
+    "to": "1.3"
+   },
+   "expected": "Floor and mid-room come up to a readable low-key level while the highlights stay below clipping",
+   "accept": {
+    "region": [
+     200,
+     550,
+     1000,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "A heavy red cast makes the concrete and stone read as rust and muddies every speaker tint.",
+   "evidence": {
+    "region": [
+     200,
+     550,
+     1000,
+     800
+    ],
+    "measured": "R35 G8 B7 on what should be a near-neutral concrete floor"
+   },
+   "change": {
+    "setting": "render.white_balance_k / white_balance_tint",
+    "from": "4000 K, tint 0.0",
+    "to": "about 3000 K (neutralise the warm sources), tint +5 toward green; set it so the floor reads grey-warm, not red"
+   },
+   "expected": "The floor reads as warm grey concrete, and the coloured light from the bar and slats reads as colour on a neutral ground",
+   "accept": {
+    "region": [
+     200,
+     550,
+     1000,
+     800
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The back-lit ceiling membrane is the largest bright field and draws the eye away from the room.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     900,
+     120
+    ],
+    "measured": "lum median 58.7 (p5 53.8) mauve, more than four times the floor's median of 14"
+   },
+   "change": {
+    "setting": "membrane emission",
+    "from": "0.09",
+    "to": "0.04"
+   },
+   "expected": "The ceiling falls to a dark, quiet canopy and the eye drops into the room and onto the speakers",
+   "accept": {
+    "region": [
+     300,
+     0,
+     900,
+     120
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The bar panels are saturated LED blocks that shout over the calm brief and outshine the products.",
+   "evidence": {
+    "region": [
+     0,
+     430,
+     100,
+     620
+    ],
+    "measured": "lum median 101, G128; the blue panel (200-320, 420-470) reaches p95 152"
+   },
+   "change": {
+    "setting": "bar panels emission",
+    "from": "0.8",
+    "to": "0.35"
+   },
+   "expected": "The panels glow softly in spectrum order and stay below the speakers' luminance",
+   "accept": {
+    "region": [
+     0,
+     430,
+     100,
+     620
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The floor is a dead, uniform plane that wastes a third of the frame and carries none of the room's light.",
+   "evidence": {
+    "region": [
+     200,
+     550,
+     1000,
+     800
+    ],
+    "measured": "lum_range 17.8 (p5 6.6, p95 24.4); the falloff toward the camera is flat at 14-16"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "matte dark concrete",
+    "to": "honed, sealed polished concrete: roughness 0.25, a fine aggregate bump map at 2-5 mm scale, a mid-grey base colour"
+   },
+   "expected": "Soft, blurred coloured reflections of the bar panels, the slats and the speakers run across the floor toward the camera, leading the eye into the room",
+   "accept": {
+    "region": [
+     200,
+     550,
+     1000,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The record-wall spots make three repeating bright arches that compete with the speakers, while the lounge and Cumulus below them are crushed.",
+   "evidence": {
+    "region": [
+     450,
+     390,
+     700,
+     460
+    ],
+    "measured": "lum median 5.6, crush 9.6%; the record wall above (460-745, 280-390) has p95 127.6"
+   },
+   "change": {
+    "setting": "spots on each corner speaker; DJ desk lamp",
+    "from": "900.0 W; 90.0 W",
+    "to": "spots re-aimed down onto the corner speakers, not the record wall, and widened to a softer edge (blend 0.6); DJ desk 250 W"
+   },
+   "expected": "The record wall becomes an even, warm backdrop, and the lounge chairs and Cumulus emerge from black",
+   "accept": {
+    "region": [
+     450,
+     390,
+     700,
+     460
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The room is empty and lifeless, with nothing at human scale at the bar or in the booths.",
+   "evidence": {
+    "region": [
+     850,
+     400,
+     1200,
+     680
+    ],
+    "measured": "the booth region is a dark red mass; the booth Bells glow but light nothing"
+   },
+   "change": {
+    "setting": "people / props; each booth Bell",
+    "from": "none; 35.0 W",
+    "to": "two or three seated, slightly motion-blurred figures at the bar and one booth, glasses and a menu on the bar top, a light haze in the air at density 0.005; booth Bells at 70 W"
+   },
+   "expected": "The frame reads as a lived-in bar at night, with scale cues and atmospheric depth toward the record wall",
+   "accept": {
+    "region": [
+     850,
+     400,
+     1200,
+     680
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 20
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A speaker tint lighter or more saturated than Smoke or Fog for the two mid-room speakers, so they read against the dark wood",
+   "why": "The colour of each speaker is fixed; only light can make the tint read"
+  },
+  {
+   "request": "Move the two mid-room speakers so they are not silhouetted against the dark wood panels",
+   "why": "The room's layout is fixed"
+  }
+ ],
+ "score_if_fixed": 6.8
+}

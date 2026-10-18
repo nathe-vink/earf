@@ -16,7 +16,9 @@ def main():
     dst = os.path.join(STAGE, f'render-{tag}.png')
     shutil.copy(img, dst)
     card = os.path.join(STAGE, f'card-{tag}.md')
-    subprocess.run([sys.executable, os.path.join(HERE, 'card.py'), view, card], check=True, stdout=subprocess.DEVNULL)
+    shot = os.path.splitext(img)[0] + '.shot.json'                   # the frame's own resolved shot, as rendered
+    subprocess.run([sys.executable, os.path.join(HERE, 'card.py'), view, card] + (['--shot', shot] if os.path.exists(shot) else []),
+                   check=True, stdout=subprocess.DEVNULL)
     prompt = open(os.path.join(ROOT, 'critic', 'PROMPT-promo.md')).read().split('\n---\n')[1].strip()
     msg = (f"{prompt}\n\nThe image: {dst}\nThe card (read it only in stage 2): {card}\n"
            f"The measuring tool: python3 {os.path.join(ROOT, 'critic', 'measure.py')}\nScratch space: {STAGE}/scratch-{tag}\n")

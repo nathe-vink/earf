@@ -1,0 +1,363 @@
+{
+ "stage1": {
+  "impression": "A wide, symmetrical night lounge: rows of tan swivel chairs, a pink-lit ceiling and a colourful back-bar, with two red acrylic cabinets pushed to the edges and half hidden behind chair shells. The eye goes to the bright, flat, magenta ceiling and the violet slats, not to the product, and the chairs, the blotchy sandy floor and the even CG light make it read as an architectural walkthrough render rather than a photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Atmosphere pair must be fully visible, unoccluded and the brightest coloured objects in frame. Today each is cut by a chair shell and its median luminance (17) is below the frame median (29).",
+  "The frame must show what it is for: the chairs facing the record wall, with the pair either side of it. The current camera stands at the record wall looking back toward the door.",
+  "The ceiling membrane must stop being the brightest, largest surface. It covers the top quarter at median 112, against the speakers at 17.",
+  "The floor must read as a real, fine-grained, slightly reflective surface. Today it is a mottled sand-like blotch with no reflections of the acrylic.",
+  "The light must have a direction and some atmosphere: visible pools and falloff, with haze picking up the acrylic's glow, not an even wash.",
+  "The upholstery needs real leather or wool micro-detail. Today the chairs read as smooth CG shells."
+ ],
+ "defects": [
+  {
+   "region": [
+    90,
+    350,
+    190,
+    520
+   ],
+   "what": "Left Ember speaker cut by the chair in front of it; only the horn and a sliver of the cabinet read; median lum 16.9"
+  },
+  {
+   "region": [
+    1010,
+    350,
+    1110,
+    520
+   ],
+   "what": "Right Ember speaker cut by chair shells on both sides; median lum 17.1"
+  },
+  {
+   "region": [
+    100,
+    40,
+    1100,
+    230
+   ],
+   "what": "Ceiling membrane is the brightest area in frame (median 112, p95 153), magenta cast (R145 G102 B114), flat and featureless"
+  },
+  {
+   "region": [
+    240,
+    40,
+    300,
+    140
+   ],
+   "what": "Diagonal light-cone streak on the ceiling, reads as a light leak or spill artefact"
+  },
+  {
+   "region": [
+    900,
+    30,
+    960,
+    130
+   ],
+   "what": "Matching diagonal light-cone streak on the ceiling, right side"
+  },
+  {
+   "region": [
+    110,
+    85,
+    1090,
+    95
+   ],
+   "what": "Thin dark straight line across the membrane (seam or cable) that reads as a modelling line"
+  },
+  {
+   "region": [
+    370,
+    212,
+    830,
+    222
+   ],
+   "what": "Second thin line across the far ceiling"
+  },
+  {
+   "region": [
+    0,
+    100,
+    170,
+    480
+   ],
+   "what": "Haze slats' LED clips (0.76%) and their saturated violet competes with the red product at the frame edge"
+  },
+  {
+   "region": [
+    400,
+    560,
+    800,
+    800
+   ],
+   "what": "Floor texture mottled like sand or dirt, low-frequency blotches, no reflection of the speakers or Bell lamps"
+  },
+  {
+   "region": [
+    260,
+    470,
+    480,
+    680
+   ],
+   "what": "Chair shell backs: smooth, uniform, dark (median 16.6), no leather grain or stitching; they fill the frame centre"
+  },
+  {
+   "region": [
+    0,
+    400,
+    1200,
+    800
+   ],
+   "what": "Eight near-identical chair copies in mirrored symmetry read as instanced CG"
+  },
+  {
+   "region": [
+    210,
+    190,
+    440,
+    400
+   ],
+   "what": "Street window and screens read as low-detail and flat, with a grey rectangle (screen) that looks unlit and placeholder"
+  },
+  {
+   "region": [
+    690,
+    340,
+    870,
+    400
+   ],
+   "what": "Spectrum bar panels are small and far, fine, but the back-bar shelves are busier and brighter than the product"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The camera stands at the record wall looking toward the door, so the record wall, the frame's subject, is behind the lens and the pair is pushed to the edges behind chair shells.",
+   "evidence": {
+    "region": [
+     90,
+     350,
+     1110,
+     520
+    ],
+    "measured": "Speaker regions median lum 16.9 and 17.1 with chair shells covering about 60% of each cabinet; record wall not in frame"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [17.45, 4.572, 1.62] looking at [11.0, 4.572, 0.85], 18 mm",
+    "to": "position [12.6, 4.572, 1.15] looking at [18.29, 4.572, 1.0], 28 mm on 36 mm, so the view is from behind the chairs toward the record wall with one speaker either side of it, each about 40-45% of the frame height and clear of every chair"
+   },
+   "expected": "Both speakers stand whole, symmetric about the record wall, with chair backs as a low dark foreground and the record wall as the background. The product occupies the middle band at about one third and two thirds of the width.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The back-lit membrane is the brightest, largest surface and pulls the eye away from the speakers.",
+   "evidence": {
+    "region": [
+     100,
+     40,
+     1100,
+     230
+    ],
+    "measured": "lum_median 112.3, p95 152.6, against 17 on the speakers; profile flat at 114-129 across its depth"
+   },
+   "change": {
+    "setting": "membrane emission",
+    "from": "0.05",
+    "to": "0.012"
+   },
+   "expected": "The ceiling falls to a dim, warm plane under about half its current value, and the speakers' glow becomes the brightest coloured light.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     160
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 55
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "With the membrane down, the pair needs to be lit as the hero, from inside and with a directional key, without spill streaks on the ceiling.",
+   "evidence": {
+    "region": [
+     240,
+     30,
+     960,
+     140
+    ],
+    "measured": "Two diagonal light cones on the ceiling at x 250-290 and 910-950, while the cabinets beside them stay at median 17"
+   },
+   "change": {
+    "setting": "spots on each corner speaker",
+    "from": "900 W, spilling onto the ceiling",
+    "to": "1200 W, narrowed to a 25 degree cone aimed down onto each cabinet from 2.6 m, slightly from the camera side, so the beam lands on the acrylic and the floor at its foot and never on the ceiling"
+   },
+   "expected": "Each cabinet shows a bright red internal glow (horn and batts visible through the tint) with a red pool on the floor at its base, and no streaks remain on the ceiling.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The floor reads as mottled sand, with no reflection to ground the speakers or carry their colour.",
+   "evidence": {
+    "region": [
+     400,
+     560,
+     800,
+     800
+    ],
+    "measured": "Low-frequency blotches (lum p5 9, p95 102) and no specular trace of the Bell lamps or cabinets"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "blotchy concrete or sand texture",
+    "to": "honed, sealed concrete: fine aggregate at 2-5 mm scale, mid-dark grey albedo 0.18, roughness 0.3 with 10% variation, faint saw-cut joints every 1.5 m, so the acrylic and Bell lamps leave soft reflections"
+   },
+   "expected": "A soft red reflection under each speaker and a warm one under each Bell lamp, and a floor that reads as real material at real scale.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The Haze slats' LED clips and its saturated violet competes with the Ember pair at the frame edge.",
+   "evidence": {
+    "region": [
+     0,
+     100,
+     170,
+     480
+    ],
+    "measured": "clip_pct 0.76, b_median 130 against r_median 62"
+   },
+   "change": {
+    "setting": "slats LED",
+    "from": "8.0",
+    "to": "3.0 (slats 0.2 unchanged)"
+   },
+   "expected": "The violet becomes a quiet side accent with no clipping, and the red pair dominates the colour.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The air is too clean for a night bar: no depth, no glow halo off the acrylic, and an even wash with no falloff.",
+   "evidence": {
+    "region": [
+     430,
+     250,
+     760,
+     390
+    ],
+    "measured": "Far room flat at median 30.8 with no gradient or light shafts"
+   },
+   "change": {
+    "setting": "haze density",
+    "from": "0.006 per m, anisotropy 0.3",
+    "to": "0.014 per m, anisotropy 0.55"
+   },
+   "expected": "Faint cones under the speaker spots and the Bell pendants, a soft red bloom around each cabinet, and a background that recedes.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The grade has a magenta cast across neutral surfaces (ceiling and walls), which muddies the true Ember red.",
+   "evidence": {
+    "region": [
+     100,
+     40,
+     1100,
+     230
+    ],
+    "measured": "R145 G102 B114 on a surface that should be warm white: B is above G"
+   },
+   "change": {
+    "setting": "render white_balance_tint, exposure",
+    "from": "tint 0.0, exposure 1.1",
+    "to": "tint 6 toward green, exposure 1.0, white_balance_k 3200"
+   },
+   "expected": "Neutrals read warm amber rather than pink, and the red acrylic separates clearly from its surroundings.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     160
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 0
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The chair shells are smooth, uniform CG surfaces repeated eight times in mirror symmetry, which says 'render'.",
+   "evidence": {
+    "region": [
+     260,
+     470,
+     480,
+     680
+    ],
+    "measured": "lum_range 19.9 across a whole shell back: no grain, seam or sheen"
+   },
+   "change": {
+    "setting": "upholstery material and props",
+    "from": "uniform tan smooth shell",
+    "to": "cognac aniline leather with pore normal map at 0.5 mm, roughness 0.45-0.6, visible welt seams, slight per-chair hue and wear variation; turn two chairs 10-15 degrees off axis, and drape a coat on one and set a rocks glass on one side table"
+   },
+   "expected": "The chairs read as real leather furniture and the strict symmetry breaks, so the speakers become the only repeated pair.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "None for the speaker itself; its red tint and form read well once it is unoccluded.",
+   "why": "The products are fixed. All the problems here come from camera, light, set and materials."
+  },
+  {
+   "request": "Remove or simplify the thin lines across the ceiling membrane (y 90 and y 218) if they are not part of the proposed membrane frame.",
+   "why": "The back-lit ceiling membrane is part of the fixed room design. If the lines are modelled seams, the owner should decide."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

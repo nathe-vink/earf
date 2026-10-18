@@ -51,7 +51,7 @@ def _rot(cx, cy, w, d, deg):
 
 def plan_sheet(pg):
     ax = pg.ax
-    ox, oy = 27.0, 78.0                                              # the paper point of the plan's origin
+    ox, oy = 27.0, 75.0                                              # the paper point of the plan's origin
     X = lambda x: ox + x * MM
     Y = lambda y: oy + y * MM
     R = lambda x0, y0, x1, y1, **k: _rect(ax, X(x0), Y(y0), X(x1), Y(y1), **k)
@@ -106,7 +106,7 @@ def plan_sheet(pg):
         R(x0 + P.BENCH_D + 0.08, 0.15, x1 - P.BENCH_D - 0.08, 0.15 + P.TABLE['d'], lw=0.3)
         _circle(ax, (X(x0 + P.BOOTH_LEN / 2), Y(0.37)), 0.108 * MM, fc=P.COLOURS['ember'], lw=0.2, z=5)
     # the screens
-    for ya, yb in ((1.75, P.SCREEN_OPEN[0]), (P.SCREEN_OPEN[1], D - 1.75)):
+    for ya, yb in ((1.75, P.SCREEN_OPEN[0]), (P.SCREEN_OPEN[1], D - 1.75)) if P.SCREENS else ():
         ys = np.linspace(ya, yb, 40)
         ax.plot(X(P.SCREEN_X + 0.06 * np.sin(2 * math.pi * (ys - ya) / (yb - ya) * 2)), Y(ys), color=INK, lw=0.5 * DR.PT,
                 zorder=4)
@@ -116,6 +116,7 @@ def plan_sheet(pg):
         _poly(ax, [(X(px), Y(py)) for px, py in _rot(x, y, 0.80, 0.82, f - 90)], fc='#e6dccb', lw=0.3)
     for x, y in P.SIDE_TABLES:
         _circle(ax, (X(x), Y(y)), 0.22 * MM)
+        _circle(ax, (X(x), Y(y)), 0.108 * MM, fc=P.COLOURS['ember'], lw=0.2, z=5)
     # the speakers: plinth, cabinet, and the axis they aim along
     for role, colour, x, y, z, rot in P.speakers():
         if role != 'backbar':
@@ -149,7 +150,7 @@ def plan_sheet(pg):
     # the zones and their seats
     for txt, (x, y) in [(f"BAR  {P.SEATS['bar']} seats", ((P.BAR_X0 + P.BAR_X1) / 2, P.STOOL_Y - 0.55)),
                         (f"BOOTHS  {P.SEATS['booths']} seats (4 x 4)", (6.0, 1.95)),
-                        (f"LISTENING LOUNGE  {P.SEATS['lounge']} seats", (14.4, 8.05))]:
+                        (f"LISTENING LOUNGE  {P.SEATS['lounge']} seats", (15.6, 7.55))]:
         pg.text(X(x), Y(y), txt, ha='center', va='center', size=8, fontweight='bold')
     total = sum(P.SEATS.values())
     pg.text(X(0.3), Y(5.4), f'{total} seats; occupant load {P.CAPACITY}\n(Group B, under 50)', ha='left', va='center', size=7.1)
@@ -159,7 +160,7 @@ def plan_sheet(pg):
     pg.dim((X(P.BAR_X0), Y(D + T) + 3), (X(P.BAR_X1), Y(D + T) + 3), 3, f'bar front {P.BAR_X1 * 1000 - P.BAR_X0 * 1000:.0f}')
     pg.dim((X(W['x0']), Y(-T) - 12), (X(W['x1']), Y(-T) - 12), -3, f'window {(W["x1"] - W["x0"]) * 1000:.0f}')
     # the legend
-    lx0, ly0 = 22, 62
+    lx0, ly0 = 22, 46
     pg.text(lx0, ly0 + 6, 'Acoustic treatment', size=8, fontweight='bold')
     items = [('membrane', 'ceiling: back-lit micro-perforated membrane, 570 plenum with absorber (NRC 0.85), dashed'),
              ('slats', 'tinted Haze slats 75 x 12 at 150, 75 proud of the absorber (street wall of the lounge)'),
@@ -170,12 +171,12 @@ def plan_sheet(pg):
         _rect(ax, lx0, yy - 1.5, lx0 + 6, yy + 1.5, fc=TREAT[key] if key != 'membrane' else 'none',
               ec=TREAT[key] if key == 'membrane' else INK, lw=0.3, ls=(0, (3, 1.5)) if key == 'membrane' else '-')
         pg.text(lx0 + 8, yy, s, va='center', size=7.1)
-    pg.text(lx0, 38, 'Products', size=8, fontweight='bold')
+    pg.text(lx0, 24.5, 'Products', size=8, fontweight='bold')
     prods = ['Atmosphere pairs on Smoke plinths 120 high: Ember (the lounge\'s front corners), Ice (either side of the record wall);',
              'arrows: each speaker\'s axis, aimed at the listening seat (+). The Fog pair: the back-bar\'s niches, floor 450.',
-             'Bell: six Fog pendants over the bar, four Ember lamps on the booth tables. Cumulus (Ice): the DJ desk.']
+             'Bell: six Fog pendants over the bar, Ember lamps on the four booth tables and the two lounge side tables. Cumulus (Ice): the DJ desk.']
     for k, s in enumerate(prods):
-        pg.text(lx0, 32 - k * 4.6, s, va='center', size=7.1)
+        pg.text(lx0, 19.8 - k * 4.0, s, va='center', size=7.1)
 
 
 def section_sheet(pg):
@@ -228,7 +229,8 @@ def section_sheet(pg):
     for x, y in P.stools():
         R(x - 0.2, 0.0, x + 0.2, 0.76, lw=0.3, z=8, fc='white')
     # the screens (cut), the lounge beyond, the corner pairs on their plinths, the chairs
-    R(P.SCREEN_X - 0.01, 0, P.SCREEN_X + 0.01, P.SCREEN_H, fc=INK, lw=0.3, z=8)
+    if P.SCREENS:
+        R(P.SCREEN_X - 0.01, 0, P.SCREEN_X + 0.01, P.SCREEN_H, fc=INK, lw=0.3, z=8)
     for role, colour, x, y, z, rot in P.speakers():
         if role in ('front', 'back') and y > P.D / 2:
             R(x - P.PLINTH['w'] / 2, 0, x + P.PLINTH['w'] / 2, P.PLINTH['h'], fc='#2a2a2e', lw=0.3, z=5)
@@ -249,7 +251,7 @@ def section_sheet(pg):
     pg.text(X(L - 0.9), Z(P.DJ['desk_z']) + 2, 'Cumulus', ha='right', size=7.1)
     # heights
     for z, s in ((P.BAR_TOP_Z, 'bar top 1070'), (P.NICHE_Z0, 'niche floor 450'), (P.MEMBRANE, 'membrane 3700'),
-                 (H, 'slab 4267'), (P.SCREEN_H, 'screens 1350'), (P.SHELF_TOP_Z, 'back-bar head 3300')):
+                 (H, 'slab 4267'), (P.SHELF_TOP_Z, 'back-bar head 3300')):
         ax.plot([X(0.05), X(0.35)], [Z(z)] * 2, color=INK, lw=0.18 * DR.PT, zorder=7)
         pg.text(X(0.38), Z(z), s, ha='left', va='center', size=7.1, zorder=7, bbox=dict(fc='white', ec='none', pad=0.2))
     pg.dim((X(0), Z(-0.25) - 5), (X(L), Z(-0.25) - 5), -4, f'{L * 1000:.0f}')

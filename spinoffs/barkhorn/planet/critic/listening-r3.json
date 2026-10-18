@@ -1,0 +1,421 @@
+{
+ "stage1": {
+  "impression": "A symmetrical night lounge: mirrored leather swivel chairs and two red glass lamps on glossy drum tables in front of a wall of records, with a glowing cyan alcove at the centre. It reads as a competent CG interior. The leather looks wet and lumpy like plastic, the floor is blotchy salmon, and the two halves mirror each other exactly. There is no clear hero: the eye goes to the cyan box and the lamps, and whatever product is meant to sell this frame is cut off at the left and right edges behind the chairs.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Both Atmosphere speakers are fully in frame and unoccluded, standing on the floor with visible contact shadows. Their tinted acrylic glows and is the brightest saturated colour in the frame.",
+  "No foreground chair is cut by the frame edge into a dark, glossy mass that fills more than 15% of the frame.",
+  "The upholstery reads as real leather (soft sheen, grain, creases), not wet plastic with blobby specular.",
+  "The floor reads as honed concrete at real scale, with no salmon blotches or a hot spot in the middle.",
+  "The room reads as night: walls and ceiling are well below the speakers and record wall in brightness, with light in pools.",
+  "The cyan alcove no longer outshines and out-saturates the product.",
+  "The record wall shows no visible repetition of spine patterns."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    330,
+    110,
+    400
+   ],
+   "what": "Blue-tinted objects, probably the speakers' tops, cut by the left frame edge and hidden behind the near chair; the product does not read."
+  },
+  {
+   "region": [
+    1090,
+    330,
+    1200,
+    400
+   ],
+   "what": "The same on the right: the speaker is cut off and occluded."
+  },
+  {
+   "region": [
+    0,
+    400,
+    215,
+    800
+   ],
+   "what": "The near-left chair fills the corner as a dark, high-gloss mass. The leather looks wet and inflated, with blobby specular highlights (p95 161)."
+  },
+  {
+   "region": [
+    985,
+    400,
+    1200,
+    800
+   ],
+   "what": "The near-right chair has the same defect, and it is an exact mirror of the left one."
+  },
+  {
+   "region": [
+    190,
+    385,
+    470,
+    640
+   ],
+   "what": "The mid-left chair has the same plastic leather. Its quilting reads as a sculpted mesh, not hide."
+  },
+  {
+   "region": [
+    730,
+    385,
+    1000,
+    640
+   ],
+   "what": "The mid-right chair is a mirror copy of the left one."
+  },
+  {
+   "region": [
+    180,
+    640,
+    1020,
+    800
+   ],
+   "what": "The floor is a mottled salmon/pink (r 137, g 93, b 63) with a blotchy texture and a warm hot spot between the tables. It does not read as concrete at scale."
+  },
+  {
+   "region": [
+    470,
+    270,
+    730,
+    410
+   ],
+   "what": "A saturated cyan alcove (r 22, g 90, b 103) is the strongest colour accent in the frame. It pulls the eye to the centre and clashes with the warm grade."
+  },
+  {
+   "region": [
+    450,
+    410,
+    740,
+    545
+   ],
+   "what": "The desk front below the alcove is a flat, featureless dark box (lum 34, range 20) with a murky reflection."
+  },
+  {
+   "region": [
+    310,
+    640,
+    475,
+    800
+   ],
+   "what": "The drum table is a mirror-glossy black cylinder. It throws off blue reflections and has no contact with the floor."
+  },
+  {
+   "region": [
+    720,
+    640,
+    890,
+    800
+   ],
+   "what": "The same on the right drum table."
+  },
+  {
+   "region": [
+    380,
+    500,
+    410,
+    530
+   ],
+   "what": "The top of the lounge lamp clips (20% of pixels clipped)."
+  },
+  {
+   "region": [
+    220,
+    50,
+    990,
+    240
+   ],
+   "what": "The record wall's spines repeat in a visible pattern, are lit evenly and flat, and clip in places (0.57%)."
+  },
+  {
+   "region": [
+    30,
+    60,
+    210,
+    330
+   ],
+   "what": "The side walls are an even mid-grey (lum 92), as bright as the record wall. The room reads as a dim day, not a night bar."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    45
+   ],
+   "what": "A bright warm cove line at the ceiling edges draws the eye to the top of the frame."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame's subject, the Atmosphere pair either side of the lounge, is cut by both frame edges and hidden behind the near chairs.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     1200,
+     800
+    ],
+    "measured": "The only speaker-coloured pixels are blue fragments at x 0-105 and 1095-1200 (lum median 44), behind chairs that fill x 0-215 and 985-1200."
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [11.9, 4.572, 1.3], target [18.288, 4.572, 1.0], 24 mm",
+    "to": "position [9.2, 4.572, 1.15], target [18.288, 4.572, 1.05], 28 mm, so both speakers stand fully inside the frame with about 8% margin and the near chairs drop out or sit low as soft foreground. If the near pair still blocks them, take a three-quarter view instead: position [12.5, 2.2, 1.1] aimed at the right-hand speaker, 35 mm, with that speaker on the left third as the hero and the record wall behind."
+   },
+   "expected": "Both speakers are entire, 1293 mm tall, and about 30-40% of the frame height. Their feet and contact shadows are visible and no chair crosses them.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speakers, once in frame, need to be the brightest saturated colour, and right now the cyan alcove holds that role.",
+   "evidence": {
+    "region": [
+     470,
+     270,
+     730,
+     410
+    ],
+    "measured": "lum median 77, b 103 vs r 22; the most saturated area in the frame."
+   },
+   "change": {
+    "setting": "DJ recess / screen emission and the DJ desk spot",
+    "from": "DJ recess 0.008, DJ desk spot 150 W",
+    "to": "DJ recess 0.003, DJ desk spot 60 W; raise the wash behind each pair from 250 W to 400 W and the corner-speaker area lamps from 6.0 to 9.0 W/m2 so the acrylic glows through"
+   },
+   "expected": "The alcove drops to a quiet background accent and the speakers' tinted acrylic carries the colour.",
+   "accept": {
+    "region": [
+     470,
+     270,
+     730,
+     410
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The leather upholstery reads as wet, inflated plastic.",
+   "evidence": {
+    "region": [
+     0,
+     400,
+     215,
+     800
+    ],
+    "measured": "lum p5 18, p95 161, range 143: hard specular blobs on near-black, with no grain."
+   },
+   "change": {
+    "setting": "upholstery material",
+    "from": "glossy dark leather, low roughness, heavy quilt bump",
+    "to": "semi-aniline cognac-brown leather: base #4a2e1f, roughness 0.55-0.65 varied by a grain map at 0.3 mm scale, clearcoat off, quilt bump halved, fine crease normal map, slight sheen 0.2"
+   },
+   "expected": "A soft, broad sheen with visible grain. The highlights spread and dim.",
+   "accept": {
+    "region": [
+     0,
+     400,
+     215,
+     800
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 130
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The floor is blotchy salmon and does not read as concrete.",
+   "evidence": {
+    "region": [
+     180,
+     640,
+     1020,
+     800
+    ],
+    "measured": "r 137, g 93, b 63, lum median 101, with visible mottling and a hot spot at x 520-680."
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "pale mottled concrete",
+    "to": "honed dark-grey concrete, base albedo about 0.18 (#5a5752), fine aggregate at 2-5 mm, low-contrast trowel variation at 1-2 m scale, roughness 0.35 so it picks up soft reflections of the speakers' glow"
+   },
+   "expected": "A darker, neutral floor that carries the coloured spill and contact shadows of the speakers.",
+   "accept": {
+    "region": [
+     180,
+     640,
+     1020,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     45,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The walls and ceiling are lit as brightly as the features, so the room reads as day.",
+   "evidence": {
+    "region": [
+     30,
+     60,
+     210,
+     330
+    ],
+    "measured": "Wall lum median 92, range 34: an even, flat fill."
+   },
+   "change": {
+    "setting": "membrane emission and exposure",
+    "from": "membrane 0.006, exposure 1.1",
+    "to": "membrane 0.0025, exposure 1.1 held; record-wall spots 60 W to 45 W with cone 75 to 50 deg so the light pools on the records instead of the walls"
+   },
+   "expected": "Walls drop to a dark, warm grey and the light reads as pools from the speakers, the Bells and the record wall.",
+   "accept": {
+    "region": [
+     30,
+     60,
+     210,
+     330
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     62
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The drum side tables are mirror-black cylinders that throw off blue reflections and look pasted on.",
+   "evidence": {
+    "region": [
+     310,
+     640,
+     475,
+     800
+    ],
+    "measured": "Glossy black with sharp blue reflections and no contact shadow."
+   },
+   "change": {
+    "setting": "lounge side-table material",
+    "from": "mirror gloss black",
+    "to": "smoked satin finish, roughness 0.3, base #1c1a19, so the Bell's red glow lands softly on its top"
+   },
+   "expected": "The tables recede, ground on the floor and stop competing with the product.",
+   "accept": {
+    "region": [
+     310,
+     640,
+     475,
+     800
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 120
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "asset",
+   "problem": "The record wall's spines repeat and are lit evenly and flat.",
+   "evidence": {
+    "region": [
+     220,
+     50,
+     990,
+     240
+    ],
+    "measured": "Repeating spine patterns bay to bay; clip 0.57%; p95 239."
+   },
+   "change": {
+    "setting": "record-wall spine texture set",
+    "from": "a small repeated spine atlas",
+    "to": "an atlas of 400 or more varied spines with random per-sleeve offset, thickness 2-6 mm and slight lean, plus a few sleeves pulled forward or face-out"
+   },
+   "expected": "No visible repetition and no clipped highlights on the spines.",
+   "accept": {
+    "region": [
+     220,
+     50,
+     990,
+     240
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.1
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The air is too clean for a night bar, so depth from the chairs to the record wall is weak.",
+   "evidence": {
+    "region": [
+     450,
+     410,
+     740,
+     545
+    ],
+    "measured": "The desk front is flat at lum 34 (range 20) and the background is as sharp and dense as the foreground."
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "density 0.004, anisotropy 0.3",
+    "to": "density 0.012, anisotropy 0.5, so the speakers' and Bells' cones show faintly in the air"
+   },
+   "expected": "Soft beams and recession toward the record wall; the background lifts slightly in value and drops in contrast.",
+   "accept": {
+    "region": [
+     450,
+     410,
+     740,
+     545
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 30
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Break the exact mirror symmetry of the two chair pairs (rotate one chair, move it off the mirror).",
+   "why": "The room's layout is fixed. Turning one swivel chair 10-15 deg may count as styling, but that is the owner's call."
+  },
+  {
+   "request": "The lounge lamp's shade top clips at 20%.",
+   "why": "Bell's diffuser and shape are fixed. Only its wattage (60 W) may drop, and that is a minor gain."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

@@ -1,0 +1,349 @@
+{
+ "stage1": {
+  "impression": "A moody night bar whose idea is clear: a long bar front glowing as a spectrum of coloured panels, with an edge-lit back-bar above it. It still reads as CG. The panels are flat, even emissive cards with no depth of material, every stool is the same model and blocks the colour, the bottles repeat, and the right half of the frame and the floor sink into featureless brown-black. Clean craft and a good mood, but it is a competent render, not a magazine page.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "All eight panels, Ember red included, read in frame as one unbroken spectrum; at present the run starts at orange on the left edge",
+  "The panels read as back-lit cast acrylic with depth, a gentle internal gradient and a visible edge, not as uniform flat emitters (vertical luminance spread inside a clean panel area of 25 or more on the 0-255 scale)",
+  "Perceived brightness is even across the hues: violet and Smoke do not drop out next to Fog and yellow",
+  "The floor carries the spectrum as soft coloured reflections, and the right half of the frame has readable detail instead of crushed brown",
+  "Stools and bottles stop reading as copies of one model, and there is atmosphere and some sign of life (glasses, a menu, a coat) to give scale"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    360,
+    80,
+    700
+   ],
+   "what": "The spectrum is cropped at the left frame edge: it opens on Dust orange and Ember red is missing"
+  },
+  {
+   "region": [
+    90,
+    370,
+    900,
+    640
+   ],
+   "what": "The panels are perfectly uniform emitters (vertical profile 132-141 with no falloff), so they read as flat CG cards rather than tinted acrylic"
+  },
+  {
+   "region": [
+    670,
+    360,
+    900,
+    480
+   ],
+   "what": "Uneven luminance across the hues: violet median 77 and Smoke 30, against Fog 148 and yellow 137"
+  },
+  {
+   "region": [
+    90,
+    380,
+    190,
+    640
+   ],
+   "what": "The Acid yellow panel renders mustard or olive (RGB median 164/139/26), not an acid yellow"
+  },
+  {
+   "region": [
+    0,
+    430,
+    900,
+    760
+   ],
+   "what": "Ten or more identical stools in a row occlude most of the panels and read as one duplicated model"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    360
+   ],
+   "what": "The back-bar bottles repeat the same few models and labels, and shelf after shelf looks copy-pasted"
+  },
+  {
+   "region": [
+    900,
+    300,
+    1200,
+    800
+   ],
+   "what": "The right third is crushed and featureless (median luminance 17, lounge chair at 7): dead space with no information"
+  },
+  {
+   "region": [
+    200,
+    600,
+    1200,
+    800
+   ],
+   "what": "The floor is a dull, uniform warm brown that carries only faint colour spill; there is no reflection of the panels and the base of the composition is heavy"
+  },
+  {
+   "region": [
+    600,
+    0,
+    1000,
+    150
+   ],
+   "what": "A flat, uniformly lit ceiling plane with no atmosphere; the pendants' light does not bloom or scatter"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame's purpose is the eight-panel spectrum, but Ember red is outside the frame and the stools hide about half the colour.",
+   "evidence": {
+    "region": [
+     0,
+     360,
+     900,
+     700
+    ],
+    "measured": "Seven hues visible, leftmost is orange (RGB median 194/99/37); stool silhouettes cut across every panel"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [2.4, 3.6, 1.2] m, at [7.6, 7.6, 0.8], lens 32 mm",
+    "to": "position [1.6, 4.6, 1.35] m, at [6.8, 8.2, 0.65], lens 28 mm; check that the Ember panel's left edge sits at least 4 percent in from the frame edge and that the spectrum spans about 70 percent of the width"
+   },
+   "expected": "All eight panels from Ember to Smoke read as one band receding to the right. A slightly higher, more grazing view stacks the stools so their seats overlap less of the colour.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The panels are dead-even emitters, the main reason they read as CG rather than back-lit cast acrylic.",
+   "evidence": {
+    "region": [
+     100,
+     370,
+     340,
+     640
+    ],
+    "measured": "Vertical profile bins 132, 136, 138, 136, 140, 142: about 4 percent variation over the full panel height"
+   },
+   "change": {
+    "setting": "bar panels emission",
+    "from": "0.8 uniform",
+    "to": "0.8 at the bottom edge falling to 0.55 at the top (a vertical gradient on the emission strength), plus a 15 mm brighter rim at 1.25x along each panel's vertical seam to read as a polished acrylic edge"
+   },
+   "expected": "Each panel glows hotter low down and softens toward the stone top, and thin bright seams separate the colours, so the panels look like thick tinted acrylic lit from behind.",
+   "accept": {
+    "region": [
+     100,
+     375,
+     185,
+     465
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The spectrum is lopsided in brightness: violet and Smoke drop out while Fog shouts.",
+   "evidence": {
+    "region": [
+     670,
+     370,
+     880,
+     480
+    ],
+    "measured": "Violet median 77, Smoke 30, Fog 148, yellow 137, blue 112, green 103"
+   },
+   "change": {
+    "setting": "bar panels emission, per panel",
+    "from": "0.8 for all",
+    "to": "violet x1.6 (1.28), Smoke x2.2 (1.76), Fog x0.8 (0.64), Ice blue x1.05, others unchanged"
+   },
+   "expected": "The eight hues sit within about 25 levels of each other in luminance, Smoke reads as smoky grey glass rather than a hole, and the band reads as one even spectrum.",
+   "accept": {
+    "region": [
+     670,
+     370,
+     740,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     100,
+     135
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The floor is a dull brown plane that wastes the bottom third and carries none of the bar's colour.",
+   "evidence": {
+    "region": [
+     300,
+     680,
+     700,
+     800
+    ],
+    "measured": "Median luminance 23.6, p95 38.5, RGB median 33/22/6"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "matte warm-brown concrete",
+    "to": "dark grey honed, sealed concrete with a slight sheen: base around #2a2a2c, roughness 0.22, a fine aggregate and trowel-mark normal map at 2 m scale"
+   },
+   "expected": "Soft vertical colour streaks from each panel reflect into the floor toward the camera, the floor reads cooler and more neutral, and the base of the frame carries the spectrum.",
+   "accept": {
+    "region": [
+     300,
+     680,
+     700,
+     800
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The Acid yellow panel's glow renders mustard or olive, which muddies the spectrum's most luminous note.",
+   "evidence": {
+    "region": [
+     90,
+     380,
+     190,
+     640
+    ],
+    "measured": "RGB median 164/139/26: green is too low relative to red for an acid yellow"
+   },
+   "change": {
+    "setting": "the yellow panel's emission colour (the light, not the acrylic) and white_balance_k",
+    "from": "current emission colour, white balance 4000 K",
+    "to": "shift the yellow emission toward a green-yellow, about #E6E62E, and set white_balance_k to 4300 so the warm cast stops pulling yellow toward amber"
+   },
+   "expected": "The yellow reads as a clean acid yellow between orange and green, with no muddy olive.",
+   "accept": {
+    "region": [
+     90,
+     380,
+     190,
+     640
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 160
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The right third, the lounge and the record wall, is crushed into an unreadable brown void.",
+   "evidence": {
+    "region": [
+     900,
+     450,
+     1200,
+     800
+    ],
+    "measured": "Median luminance 17.3, p95 23.9; the lounge chair at [960, 330, 1060, 450] has median 7.4 and 5.6 percent crushed"
+   },
+   "change": {
+    "setting": "booth Bell lamps and the record wall's top strip",
+    "from": "booth Bell 35 W, record wall top strip 0.0",
+    "to": "booth Bell 60 W, record wall top strip 0.12"
+   },
+   "expected": "The lounge chair and the record spines read as soft warm pools of light in depth, so the frame gains a background layer without competing with the bar.",
+   "accept": {
+    "region": [
+     960,
+     330,
+     1060,
+     450
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 20
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The air is perfectly clear, so the room lacks depth and the pendants and panels do not glow into the space.",
+   "evidence": {
+    "region": [
+     600,
+     0,
+     1000,
+     150
+    ],
+    "measured": "Ceiling region median 43.5 with a flat profile; there is no bloom around the pendant cores at y of about 60-230"
+   },
+   "change": {
+    "setting": "haze in the air",
+    "from": "none",
+    "to": "a uniform volume scatter, density 0.006, anisotropy 0.3, over the whole room"
+   },
+   "expected": "A faint glow hangs around the pendants and above the panels, the far room recedes, and the image gains photographic atmosphere.",
+   "accept": {
+    "region": [
+     600,
+     0,
+     1000,
+     140
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Nothing is lived in, and the repeated bottles give the CG away.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     360
+    ],
+    "measured": "Visual: the same few bottle shapes and labels repeat on every shelf; the bar top is empty"
+   },
+   "change": {
+    "setting": "small props",
+    "from": "repeated bottle set, empty bar top",
+    "to": "vary the bottles (at least 12 distinct shapes, random rotation and fill level, about 20 percent gaps), and add three glasses and a folded menu on the bar top and a coat over the third stool"
+   },
+   "expected": "The back-bar reads as a real, curated collection, the bar top gives human scale, and the eye stops finding copies.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Fewer stools, or stools of varied heights or turned at varied angles, so they stop blocking the panels",
+   "why": "The stools are part of the room's proposed layout, which is fixed; only the camera can work around them"
+  },
+  {
+   "request": "Thicker or deeper acrylic panels with visible internal structure",
+   "why": "The bar's panels are part of the fixed room design; only their light may change"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
