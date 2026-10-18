@@ -1,0 +1,1716 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-blue",
+  "instances": [
+   {
+    "flavour": "cloud-blue",
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotate_z": -10,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "kit_scale": 11.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "felt",
+    "color": "#0B1E36",
+    "size": [
+     30.0,
+     30.0,
+     0.02
+    ],
+    "position": [
+     0,
+     2.0,
+     -0.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "glow",
+    "color": "#9EDBFF",
+    "module": "ice",
+    "fn": "pool",
+    "radius": 4.2,
+    "emit": 6.0,
+    "power": 1.1,
+    "edge": "#1F5A9C",
+    "position": [
+     0.3,
+     0.9,
+     -0.25
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "glass",
+    "color": "#BFDFF2",
+    "module": "ice",
+    "fn": "lake",
+    "size": [
+     12.0,
+     9.0,
+     0.06
+    ],
+    "position": [
+     0,
+     0.8,
+     -0.001
+    ],
+    "patch": 0.7,
+    "rough": [
+     0.05,
+     0.42
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "felt",
+    "color": "#F4F8FB",
+    "position": [
+     -0.85,
+     0.5,
+     0.1377
+    ],
+    "scale": [
+     0.162,
+     0.162,
+     0.14904
+    ],
+    "grain": 2.5
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "felt",
+    "color": "#F4F8FB",
+    "position": [
+     -0.85,
+     0.5,
+     0.3534
+    ],
+    "scale": 0.11475000000000002,
+    "grain": 2.5
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "felt",
+    "color": "#F4F8FB",
+    "position": [
+     -0.85,
+     0.5,
+     0.5121
+    ],
+    "scale": 0.08370000000000001,
+    "grain": 2.5
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "clay",
+    "color": "#15181C",
+    "position": [
+     -0.7757,
+     0.4677,
+     0.533
+    ],
+    "scale": 0.0108
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "clay",
+    "color": "#15181C",
+    "position": [
+     -0.8177,
+     0.4257,
+     0.533
+    ],
+    "scale": 0.0108
+   },
+   {
+    "kind": "kit",
+    "shape": "cone",
+    "material": "clay",
+    "color": "#E9772E",
+    "radius": 0.01485,
+    "height": 0.081,
+    "position": [
+     -0.7997,
+     0.4497,
+     0.5121
+    ],
+    "segments": 16,
+    "rotate": [
+     -90,
+     0,
+     -135
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "wool",
+    "color": "#8FC6EA",
+    "position": [
+     -0.792,
+     0.558,
+     0.5205
+    ],
+    "scale": [
+     0.027000000000000003,
+     0.0405,
+     0.0405
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "wool",
+    "color": "#8FC6EA",
+    "position": [
+     -0.908,
+     0.442,
+     0.5205
+    ],
+    "scale": [
+     0.027000000000000003,
+     0.0405,
+     0.0405
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "foil",
+    "color": "#DCE2E8",
+    "points": [
+     [
+      -0.9062,
+      0.4438,
+      0.5205
+     ],
+     [
+      -0.8964,
+      0.4536,
+      0.5687
+     ],
+     [
+      -0.8704,
+      0.4796,
+      0.6001
+     ],
+     [
+      -0.85,
+      0.5,
+      0.6059
+     ],
+     [
+      -0.8296,
+      0.5204,
+      0.6001
+     ],
+     [
+      -0.8036,
+      0.5464,
+      0.5687
+     ],
+     [
+      -0.7938,
+      0.5562,
+      0.5205
+     ]
+    ],
+    "radius": 0.006750000000000001,
+    "sides": 10
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "glass",
+    "color": "#A9D4EE",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.2,
+     0.96,
+     2.1
+    ],
+    "seed": 100,
+    "position": [
+     -3.6,
+     2.6,
+     -0.02
+    ],
+    "rotate": [
+     -6.2016182227162275,
+     -2.143252768985149,
+     1.1050422658177905
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#CFEAF8",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.0,
+     0.8,
+     2.7
+    ],
+    "seed": 101,
+    "position": [
+     -2.7,
+     3.1,
+     -0.02
+    ],
+    "rotate": [
+     -5.780945068565908,
+     -7.751128742812254,
+     61.547784610794025
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#A9D4EE",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     0.6,
+     0.48,
+     1.2
+    ],
+    "seed": 102,
+    "position": [
+     -1.9,
+     2.4,
+     -0.02
+    ],
+    "rotate": [
+     4.121479766320185,
+     -7.051975580794432,
+     20.862212136655522
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "glass",
+    "color": "#CFEAF8",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.1,
+     0.8800000000000001,
+     2.0
+    ],
+    "seed": 103,
+    "position": [
+     -1.2,
+     3.4,
+     -0.02
+    ],
+    "rotate": [
+     2.5946664882442114,
+     -7.268429513101397,
+     66.65896790460054
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#A9D4EE",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.3,
+     1.04,
+     2.6
+    ],
+    "seed": 104,
+    "position": [
+     -0.3,
+     3.7,
+     -0.02
+    ],
+    "rotate": [
+     -0.8359851210034623,
+     -1.7485983364389863,
+     48.20955727930099
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#CFEAF8",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     0.9,
+     0.7200000000000001,
+     1.6
+    ],
+    "seed": 105,
+    "position": [
+     0.7,
+     3.3,
+     -0.02
+    ],
+    "rotate": [
+     -6.510217771750904,
+     -9.59267083253743,
+     89.6709322435955
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "glass",
+    "color": "#A9D4EE",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.2,
+     0.96,
+     2.8
+    ],
+    "seed": 106,
+    "position": [
+     1.5,
+     3.6,
+     -0.02
+    ],
+    "rotate": [
+     -1.5528670142253365,
+     -6.0300473561990735,
+     84.58217240788201
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#CFEAF8",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     0.6,
+     0.48,
+     1.1
+    ],
+    "seed": 107,
+    "position": [
+     2.3,
+     2.6,
+     -0.02
+    ],
+    "rotate": [
+     -2.1616844419411816,
+     9.10225693085243,
+     29.727846795876093
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#A9D4EE",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.1,
+     0.8800000000000001,
+     2.3
+    ],
+    "seed": 108,
+    "position": [
+     3.0,
+     3.0,
+     -0.02
+    ],
+    "rotate": [
+     -4.529183457334309,
+     1.6980188582425892,
+     18.92990518478821
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "glass",
+    "color": "#CFEAF8",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.2,
+     0.96,
+     1.7
+    ],
+    "seed": 109,
+    "position": [
+     3.9,
+     2.5,
+     -0.02
+    ],
+    "rotate": [
+     7.25988901276153,
+     6.7736569315031545,
+     49.26433150026773
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#A9D4EE",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.2,
+     0.96,
+     1.6
+    ],
+    "seed": 110,
+    "position": [
+     -4.5,
+     2.0,
+     -0.02
+    ],
+    "rotate": [
+     -4.7382750335186685,
+     6.728270619520778,
+     31.995370031346766
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#CFEAF8",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     1.2,
+     0.96,
+     1.8
+    ],
+    "seed": 111,
+    "position": [
+     4.6,
+     2.0,
+     -0.02
+    ],
+    "rotate": [
+     -7.514084567294978,
+     4.700916041617596,
+     89.00800737647032
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "glass",
+    "color": "#A9D4EE",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     0.5,
+     0.4,
+     0.7
+    ],
+    "seed": 112,
+    "position": [
+     -2.9,
+     1.9,
+     -0.02
+    ],
+    "rotate": [
+     2.4184109936802383,
+     -5.632819055357485,
+     78.15200782925822
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#CFEAF8",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     0.6,
+     0.48,
+     0.6
+    ],
+    "seed": 113,
+    "position": [
+     2.9,
+     1.9,
+     -0.02
+    ],
+    "rotate": [
+     3.6770921191539525,
+     -6.1237623794907,
+     71.69348455157244
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "frosted",
+    "color": "#A9D4EE",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     0.5,
+     0.4,
+     0.8
+    ],
+    "seed": 114,
+    "position": [
+     0.2,
+     2.9,
+     -0.02
+    ],
+    "rotate": [
+     -4.493068279970384,
+     -9.171731283754642,
+     57.679685009226304
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "glass",
+    "color": "#CFEAF8",
+    "module": "ice",
+    "fn": "crystal",
+    "size": [
+     0.4,
+     0.32000000000000006,
+     0.55
+    ],
+    "seed": 115,
+    "position": [
+     -0.9,
+     2.7,
+     -0.02
+    ],
+    "rotate": [
+     -2.650515607369142,
+     -2.0766790983343153,
+     30.240903693464357
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "foil",
+    "color": "#DDE3E8",
+    "size": [
+     0.741,
+     0.104,
+     0.104
+    ],
+    "ease": 0.0312,
+    "position": [
+     1.5,
+     0.35,
+     1.5
+    ],
+    "rotate": [
+     0,
+     0,
+     -25
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.01797,
+      0.06096
+     ],
+     [
+      0.0358,
+      0.12191
+     ],
+     [
+      0.0452,
+      0.18287
+     ],
+     [
+      0.06609,
+      0.24382
+     ],
+     [
+      0.07157,
+      0.30478
+     ],
+     [
+      0.083,
+      0.36573
+     ],
+     [
+      0.09455,
+      0.42669
+     ],
+     [
+      0.11928,
+      0.48764
+     ],
+     [
+      0.13177,
+      0.5486
+     ]
+    ],
+    "position": [
+     1.2761419766019475,
+     0.45438671064995273,
+     0.9930000000000001
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.02028,
+      0.08407
+     ],
+     [
+      0.03667,
+      0.16813
+     ],
+     [
+      0.05168,
+      0.2522
+     ],
+     [
+      0.06258,
+      0.33627
+     ],
+     [
+      0.07669,
+      0.42033
+     ],
+     [
+      0.08401,
+      0.5044
+     ],
+     [
+      0.09904,
+      0.58847
+     ],
+     [
+      0.11902,
+      0.67253
+     ],
+     [
+      0.11621,
+      0.7566
+     ]
+    ],
+    "position": [
+     1.5,
+     0.35,
+     0.7850000000000001
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.01843,
+      0.06096
+     ],
+     [
+      0.03625,
+      0.12191
+     ],
+     [
+      0.05026,
+      0.18287
+     ],
+     [
+      0.0663,
+      0.24382
+     ],
+     [
+      0.07831,
+      0.30478
+     ],
+     [
+      0.08553,
+      0.36573
+     ],
+     [
+      0.09854,
+      0.42669
+     ],
+     [
+      0.11241,
+      0.48764
+     ],
+     [
+      0.13084,
+      0.5486
+     ]
+    ],
+    "position": [
+     1.7238580233980525,
+     0.24561328935004723,
+     0.9930000000000001
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E8EEF2",
+    "a": [
+     1.2179388905184538,
+     0.4815272554189405,
+     1.5988
+    ],
+    "b": [
+     1.2179388905184538,
+     0.4815272554189405,
+     3.2
+    ],
+    "radius": 0.0015
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E8EEF2",
+    "a": [
+     1.7820611094815462,
+     0.2184727445810595,
+     1.5988
+    ],
+    "b": [
+     1.7820611094815462,
+     0.2184727445810595,
+     3.2
+    ],
+    "radius": 0.0015
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "foil",
+    "color": "#DDE3E8",
+    "size": [
+     0.456,
+     0.064,
+     0.064
+    ],
+    "ease": 0.0192,
+    "position": [
+     -1.7,
+     2.0,
+     2.0
+    ],
+    "rotate": [
+     0,
+     0,
+     8
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.01148,
+      0.03751
+     ],
+     [
+      0.02255,
+      0.07502
+     ],
+     [
+      0.02786,
+      0.11253
+     ],
+     [
+      0.03597,
+      0.15004
+     ],
+     [
+      0.0492,
+      0.18756
+     ],
+     [
+      0.0505,
+      0.22507
+     ],
+     [
+      0.0571,
+      0.26258
+     ],
+     [
+      0.07112,
+      0.30009
+     ],
+     [
+      0.07721,
+      0.3376
+     ]
+    ],
+    "position": [
+     -1.8505207464487186,
+     1.97884568865407,
+     1.6879999999999997
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.01225,
+      0.05173
+     ],
+     [
+      0.02259,
+      0.10347
+     ],
+     [
+      0.02828,
+      0.1552
+     ],
+     [
+      0.03608,
+      0.20693
+     ],
+     [
+      0.04291,
+      0.25867
+     ],
+     [
+      0.0511,
+      0.3104
+     ],
+     [
+      0.06141,
+      0.36213
+     ],
+     [
+      0.06487,
+      0.41387
+     ],
+     [
+      0.08067,
+      0.4656
+     ]
+    ],
+    "position": [
+     -1.7,
+     2.0,
+     1.5599999999999998
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.01148,
+      0.03751
+     ],
+     [
+      0.01984,
+      0.07502
+     ],
+     [
+      0.03025,
+      0.11253
+     ],
+     [
+      0.03574,
+      0.15004
+     ],
+     [
+      0.04923,
+      0.18756
+     ],
+     [
+      0.05215,
+      0.22507
+     ],
+     [
+      0.06172,
+      0.26258
+     ],
+     [
+      0.0662,
+      0.30009
+     ],
+     [
+      0.07643,
+      0.3376
+     ]
+    ],
+    "position": [
+     -1.5494792535512814,
+     2.02115431134593,
+     1.6879999999999997
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E8EEF2",
+    "a": [
+     -1.8896561405253856,
+     1.9733455677041283,
+     2.0608
+    ],
+    "b": [
+     -1.8896561405253856,
+     1.9733455677041283,
+     4.2
+    ],
+    "radius": 0.0015
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E8EEF2",
+    "a": [
+     -1.5103438594746144,
+     2.0266544322958717,
+     2.0608
+    ],
+    "b": [
+     -1.5103438594746144,
+     2.0266544322958717,
+     4.2
+    ],
+    "radius": 0.0015
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     2.4,
+     1.2,
+     0.42
+    ],
+    "seed": 1,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 319,
+    "position": [
+     -2.4,
+     -1.3,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     2.0,
+     1.0,
+     0.36
+    ],
+    "seed": 2,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 240,
+    "position": [
+     2.3,
+     -0.6,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "wool",
+    "color": "#DCE8F1",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     2.6,
+     1.0,
+     0.5
+    ],
+    "seed": 3,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 294,
+    "position": [
+     -2.4,
+     1.6,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "wool",
+    "color": "#DCE8F1",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     2.8,
+     1.0,
+     0.55
+    ],
+    "seed": 4,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 312,
+    "position": [
+     2.4,
+     1.9,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "wool",
+    "color": "#DCE8F1",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     2.4,
+     0.9,
+     0.4
+    ],
+    "seed": 5,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 254,
+    "position": [
+     0.0,
+     2.6,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     2.2,
+     1.0,
+     0.45
+    ],
+    "seed": 6,
+    "radius": [
+     0.06,
+     0.2
+    ],
+    "count": 258,
+    "position": [
+     -1.6,
+     -2.7,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     0.7,
+     0.4,
+     0.14
+    ],
+    "seed": 7,
+    "radius": [
+     0.02,
+     0.07
+    ],
+    "count": 85,
+    "position": [
+     1.3,
+     0.8,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     1.4,
+     0.8,
+     0.3
+    ],
+    "seed": 8,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 160,
+    "position": [
+     -1.75,
+     -1.0,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     1.6,
+     0.8,
+     0.28
+    ],
+    "seed": 9,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 175,
+    "position": [
+     1.25,
+     -1.55,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "paper",
+    "color": "#FBFCFD",
+    "module": "ice",
+    "fn": "snowflake",
+    "radius": 0.26,
+    "branches": [
+     [
+      0.4,
+      0.1780618546467441
+     ],
+     [
+      0.64,
+      0.1438973494774893
+     ]
+    ],
+    "depth": 0.006,
+    "position": [
+     -1.6,
+     0.5,
+     1.2
+    ],
+    "rotate": [
+     0.0,
+     0,
+     35
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E8EEF2",
+    "a": [
+     -1.6,
+     0.5,
+     1.4548
+    ],
+    "b": [
+     -1.6,
+     0.5,
+     4.2
+    ],
+    "radius": 0.0015
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "paper",
+    "color": "#FBFCFD",
+    "module": "ice",
+    "fn": "snowflake",
+    "radius": 0.2,
+    "branches": [
+     [
+      0.4,
+      0.227362056313355
+     ],
+     [
+      0.64,
+      0.14791309948237397
+     ]
+    ],
+    "depth": 0.006,
+    "position": [
+     1.55,
+     -0.2,
+     0.95
+    ],
+    "rotate": [
+     0.0,
+     0,
+     -20
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E8EEF2",
+    "a": [
+     1.55,
+     -0.2,
+     1.146
+    ],
+    "b": [
+     1.55,
+     -0.2,
+     4.2
+    ],
+    "radius": 0.0015
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "paper",
+    "color": "#FBFCFD",
+    "module": "ice",
+    "fn": "snowflake",
+    "radius": 0.12,
+    "branches": [
+     [
+      0.4,
+      0.1842778776255135
+     ],
+     [
+      0.64,
+      0.13176916901183808
+     ]
+    ],
+    "depth": 0.006,
+    "position": [
+     -0.95,
+     1.2,
+     1.55
+    ],
+    "rotate": [
+     0.0,
+     0,
+     10
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E8EEF2",
+    "a": [
+     -0.95,
+     1.2,
+     1.6676
+    ],
+    "b": [
+     -0.95,
+     1.2,
+     4.2
+    ],
+    "radius": 0.0015
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "paper",
+    "color": "#FBFCFD",
+    "module": "ice",
+    "fn": "snowflake",
+    "radius": 0.3,
+    "branches": [
+     [
+      0.4,
+      0.20737410169338213
+     ],
+     [
+      0.64,
+      0.1396714795704292
+     ]
+    ],
+    "depth": 0.006,
+    "position": [
+     -2.6,
+     -1.8,
+     1.9
+    ],
+    "rotate": [
+     0.0,
+     0,
+     40
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E8EEF2",
+    "a": [
+     -2.6,
+     -1.8,
+     2.194
+    ],
+    "b": [
+     -2.6,
+     -1.8,
+     4.2
+    ],
+    "radius": 0.0015
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "material": "cotton",
+    "color": "#FFFFFF",
+    "count": 900,
+    "radius": [
+     0.004,
+     0.011
+    ],
+    "seed": 7,
+    "in": [
+     -3.5,
+     -2.5,
+     0.05,
+     3.5,
+     3.0,
+     2.8
+    ],
+    "emit": 0.6,
+    "emit_color": "#EAF6FF"
+   }
+  ]
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    2.4,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 50,
+    "distance_m": 5.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 0.6,
+   "color": "#E6F1FF"
+  },
+  "moon": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    3.0
+   ],
+   "position": [
+    -1.0,
+    -0.5,
+    5.5
+   ],
+   "target": [
+    0.0,
+    0.5,
+    0.0
+   ],
+   "irradiance": 1.4,
+   "color": "#EEF5FF",
+   "receivers": [
+    "prop*"
+   ]
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    0.8
+   ],
+   "orbit": {
+    "azimuth_deg": 165,
+    "elevation_deg": 28,
+    "distance_m": 4.0
+   },
+   "target": [
+    0.0,
+    0.2,
+    1.1
+   ],
+   "irradiance": 5.0,
+   "color": "#F2F8FF"
+  },
+  "rim2": {
+   "type": "area",
+   "size_m": [
+    1.0,
+    1.4
+   ],
+   "orbit": {
+    "azimuth_deg": -145,
+    "elevation_deg": 20,
+    "distance_m": 4.0
+   },
+   "target": [
+    0.0,
+    0.2,
+    0.9
+   ],
+   "irradiance": 2.4,
+   "color": "#CFE8FF",
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "rib-*",
+    "brace*",
+    "waveguide*",
+    "port-*"
+   ]
+  },
+  "wall": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    1.5
+   ],
+   "position": [
+    0.0,
+    4.8,
+    0.8
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "irradiance": 0.7,
+   "color": "#9FD8FF"
+  },
+  "under": {
+   "type": "area",
+   "size_m": [
+    2.4,
+    0.3
+   ],
+   "orbit": {
+    "azimuth_deg": -5,
+    "elevation_deg": 4,
+    "distance_m": 2.8
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "irradiance": 1.0,
+   "color": "#9ED6FA"
+  },
+  "through": {
+   "type": "area",
+   "size_m": [
+    0.9,
+    1.1
+   ],
+   "position": [
+    0.3,
+    1.1,
+    0.45
+   ],
+   "target": [
+    -0.6,
+    -2.0,
+    0.55
+   ],
+   "irradiance": 6.0,
+   "color": "#CDEBFF",
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "rib-*",
+    "brace*",
+    "waveguide*",
+    "port-*"
+   ]
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 6,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "barkhorn, Ice, a frozen grotto",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   -3.0474,
+   -5.1881,
+   3.6972
+  ],
+  "target": [
+   0.15,
+   0.35,
+   0.85
+  ],
+  "lens_mm": 60,
+  "level": false,
+  "fstop": 3.5,
+  "miniature": 11,
+  "focus": [
+   0.0,
+   -0.2,
+   0.7
+  ],
+  "blades": 0
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#0A1A30",
+  "horizon": "#123052",
+  "ground": "#081424",
+  "strength": 0.4
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.08,
+  "clarity": 0.05,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "dream": {
+   "bloom": 0.3,
+   "bloom_px": 45,
+   "bloom_threshold": 0.75,
+   "saturation": 0.15,
+   "lift": 0.04,
+   "lift_color": "#14304F",
+   "vignette": 0.22
+  }
+ }
+}
