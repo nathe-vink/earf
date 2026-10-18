@@ -195,12 +195,13 @@ Three of the campaign critics named the speaker's own surfaces:
   - the places keep their sky's colour (the look book's white balance had turned Ember's lava salmon);
   - a sky can be graded (`sky.grade`), and the camera can see past 300 m (`camera.clip_end`).
 - **The room, the hero and the catalogue** are each lit again in their own sessions:
-  - the room (the Poison pair at home, with Cumulus) rose from 4.5 to 6.5 over fourteen passes, and its finals are rendering;
+  - the room (the Poison pair at home, with Cumulus) rose from 4.5 to 6.5 over fourteen passes; its final is on the home page with a phone frame of its own (a re-render with a softer sun lost a blind duel to it, 6.5 to 6.8);
   - the hero (the eight together) held at 6.0 over eight passes and three changes of approach; its finals are rendering;
   - the catalogue (each colour's front view) reached 6.0, and its rig has won two duels in a row.
 
   The site takes each as it lands: `web.py` prefers round 31's hero, room and in-their-element pictures once they are in the repository, with their phone frames below 700 px. Each speaker's page shows its own place ("At home"); the home page shows all eight in a strip once the last is in.
-- **Render helpers.** A final takes two to three hours on one session's four cores, so the slow ones are split. A helper session renders the frames it is given from the set's own commit, pushes them to its own branch, and stops: the portraits of Ice, Ember, Fog, Smoke and the room, the hero's phone frame, and the studio's queue across three more.
+- **Render helpers.** A final takes two to three hours on one session's four cores, so the slow ones are split. A helper session renders the frames it is given from the set's own commit, pushes them to its own branch, and stops: the portraits of Ice, Ember, Fog, Smoke and the room, the hero's phone frame, the studio's queue across five more, one strip of Ember's landscape (rendered in four strips on two boxes, stitched, then finished once), and one box for each catalogue colour and each pair of uplit frames. Twelve of them, started at 13:45, never ran: the commits they were given had not reached GitHub when they were made. They were found and started again at 15:55, from full commit names.
+- **The look book** (version 50): a page for each colour in its element, Cumulus and Bell, the round-31 room with its bars measured again (the sideboard 560 mm), and the red Cloud's name, Ember, wherever Flare was left. The Bark and Crag pages, set aside since round 17, are hidden rather than shown last.
 
 ### The site's deployments
 
