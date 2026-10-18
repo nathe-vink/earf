@@ -1,0 +1,364 @@
+{
+ "stage1": {
+  "impression": "A moody, believable storm plate: a lone amber speaker standing in a rain-pocked channel of water on a dark plain, a bright band low under a heavy deck, and the horn reading well against it. But the light is a warm beige overcast, not acid; the speaker is lit flat from the front with no rim from the sun behind it; the ground reads as a choppy sea more than as wet lava; and the glassy splash crowns and the post-like rain streaks over the far field say render.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The world reads sulphurous yellow-green: the sky and haze lean green, not beige (upper sky b_median well under r and g, g >= r)",
+  "The light visibly comes from behind: a bright rim on the speaker's right edge and on the horn, and backlit rain streaks glowing on the sun side",
+  "The ground reads at once as wet volcanic rock at real scale (large pillows, boulders, breaks in the pattern), not a uniform chop that looks like the sea",
+  "No seam between the modelled ground and the far field or horizon",
+  "Splashes read as water hitting water (ripple rings, small spray), not glassy tulip-shaped crowns",
+  "Rain streaks near the ground fade out instead of standing as short bright sticks above the far field",
+  "The speaker's edges are crisp where focus falls (edge 10-90 width of a few px at proof size, not 17-22)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    420
+   ],
+   "what": "Sky and horizon band are warm neutral beige (sky r163 g160 b132; band r207 g199 b165), not the sulphurous yellow-green the frame is for"
+  },
+  {
+   "region": [
+    688,
+    360,
+    702,
+    610
+   ],
+   "what": "No rim on the right edge toward the sun: the right face (lum 106) is darker than the left (127); the backlight never reaches the product"
+  },
+  {
+   "region": [
+    0,
+    450,
+    1200,
+    640
+   ],
+   "what": "Ground is a uniform, same-scale chop of displaced bumps; reads as dark choppy sea, not rock; no boulders read in the mid-ground"
+  },
+  {
+   "region": [
+    0,
+    420,
+    1200,
+    455
+   ],
+   "what": "A lighter strip and a step where the near ground meets the far field, a visible seam under the horizon"
+  },
+  {
+   "region": [
+    380,
+    620,
+    820,
+    760
+   ],
+   "what": "Splash crowns are glassy, identical tulip shapes, evenly scattered across the puddle; read as CG instances"
+  },
+  {
+   "region": [
+    100,
+    420,
+    480,
+    500
+   ],
+   "what": "Rain streaks over the far field stop short above the ground and read as short bright vertical sticks or posts"
+  },
+  {
+   "region": [
+    0,
+    480,
+    80,
+    580
+   ],
+   "what": "A soft out-of-focus vertical smear at the left edge (near drop layer) reads as a lens artefact"
+  },
+  {
+   "region": [
+    500,
+    240,
+    710,
+    610
+   ],
+   "what": "Product edges are soft at proof size (edge 10-90 width 17-22 px at the cabinet sides)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Overall low contrast and haze over everything; no true blacks (p1 26) so the image feels greyed rather than stormy"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The world is beige overcast, not acid: nothing in the sky or air is yellow-green.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     200
+    ],
+    "measured": "upper sky r163 g160 b132; horizon band [0,300,500,400] r207 g199 b165; ground near-neutral r50 g52 b43"
+   },
+   "change": {
+    "setting": "Haze colour and density; sky (HDRI) tint",
+    "from": "haze #A9AE84 at 0.0018 /m; HDRI untinted",
+    "to": "haze #B7BC5E at 0.0028 /m; multiply the HDRI by #E6E8A0 (keep its strength 0.13); leave white balance and tint as they are so the speaker's colour holds"
+   },
+   "expected": "The sky and horizon band go sulphur-green (g at or above r, blue clearly down); the far field takes the same cast; the speaker stays golden amber.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     200
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 112
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The sun is behind the speaker but it is lit from the front: no rim, the right face is the darker one.",
+   "evidence": {
+    "region": [
+     690,
+     380,
+     700,
+     600
+    ],
+    "measured": "right edge strip lum_median 90; right face [640,420,690,550] lum 106 vs left face 127"
+   },
+   "change": {
+    "setting": "Rim card behind right (toward the sun); front reflector",
+    "from": "rim card 1.5 m at 9.0; reflector 2 m at 4.0",
+    "to": "rim card 1.0 m at 22.0, moved 30 cm closer to the cabinet's right rear edge and raised to cover the horn as well; reflector 2.5"
+   },
+   "expected": "A bright, narrow line of light down the cabinet's right edge and along the horn's right lip; the front falls slightly darker, so the light reads as coming from behind.",
+   "accept": {
+    "region": [
+     690,
+     380,
+     700,
+     600
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 215
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The light does not break through behind the rain: the rain does not catch the sun, and the sun side of the sky is only a little brighter.",
+   "evidence": {
+    "region": [
+     900,
+     200,
+     1200,
+     420
+    ],
+    "measured": "right sky lum_median 214 vs left [0,200,300,420] 186; streaks the same brightness across the frame"
+   },
+   "change": {
+    "setting": "Sky rotation (sun azimuth with the sun lamp); rain forward scattering",
+    "from": "sun 20 deg right of the camera's axis; streak scattering as is",
+    "to": "rotate the HDRI and the sun lamp together so the sun is 14 deg right (still just out of frame); raise the streaks' forward-scattering anisotropy to 0.8"
+   },
+   "expected": "The right third of the sky warms and brightens toward the sun, and the streaks on the right half glow against the darker cloud.",
+   "accept": {
+    "region": [
+     900,
+     200,
+     1200,
+     420
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 222
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The ground reads as a choppy sea: one scale of bump everywhere, no rock forms or boulders read.",
+   "evidence": {
+    "region": [
+     0,
+     460,
+     480,
+     600
+    ],
+    "measured": "lum_range 35 (p5 35, p95 70); same chop pattern left and right; boulders not visible in the mid-ground"
+   },
+   "change": {
+    "setting": "Ground lava forms and rocks",
+    "from": "true displacement 7 cm of one dominant chop scale; boulders mostly hidden",
+    "to": "cut the 20 to 60 cm grain to half amplitude; raise the pillow forms (1.5 to 4 m) to 25 cm; place two wet scanned boulders at 5 to 8 m either side of the speaker, one breaking the left mid-ground, one smaller at right; put dry, rougher tops (film roughness 0.35) on the high points"
+   },
+   "expected": "The mid-ground breaks into large rounded pillows with darker gaps and a couple of boulders; the sea-like chop goes; contrast rises in the mid-ground.",
+   "accept": {
+    "region": [
+     0,
+     460,
+     480,
+     600
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "asset",
+   "problem": "The splash crowns are glassy, identical and evenly spread; they read as CG instances.",
+   "evidence": {
+    "region": [
+     380,
+     640,
+     500,
+     740
+    ],
+    "measured": "visible repeated tulip-shaped crowns across the puddle in the crop; same size and opacity"
+   },
+   "change": {
+    "setting": "Splashes",
+    "from": "700 crowns 2 to 20 mm within 3 m (opacity 0.15); 900 at 3 to 10 m",
+    "to": "250 crowns 2 to 8 mm within 3 m (opacity 0.08), each with a secondary droplet ring and a short-lived ripple; 400 at 3 to 10 m; double the smallest ripple ring layer"
+   },
+   "expected": "The puddle reads as rain hitting water: rings and pinprick spray, no tulip shapes.",
+   "accept": {
+    "region": [
+     380,
+     640,
+     500,
+     740
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 135
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "A light strip and step under the horizon shows where the near ground meets the far field.",
+   "evidence": {
+    "region": [
+     0,
+     420,
+     1200,
+     455
+    ],
+    "measured": "a lighter band (lum about 100 to 190) sits between the far ridge and the dark near field; visible hard step at about y 450 in the left crop; strip [0,425,500,450] lum_median 114"
+   },
+   "change": {
+    "setting": "Ground far field and haze",
+    "from": "far field 3 m a tile, film roughness 0.18, flat to the horizon; haze box to 900 m",
+    "to": "blend the near and far ground over 20 to 60 m with a noise mask; raise the far field's film roughness to 0.3 so it stops mirroring the bright band; add a low ground-hugging haze layer 0 to 3 m high at 0.006 /m from 40 m out"
+   },
+   "expected": "The ground darkens and fades evenly into haze with no strip or step under the horizon.",
+   "accept": {
+    "region": [
+     0,
+     425,
+     500,
+     450
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 95
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "asset",
+   "problem": "Streaks over the far field end in mid-air as short bright sticks.",
+   "evidence": {
+    "region": [
+     100,
+     420,
+     480,
+     500
+    ],
+    "measured": "several isolated vertical bright marks 30 to 40 px long standing above the ground at x about 140, 280, 430"
+   },
+   "change": {
+    "setting": "Rain streaks, 5 to 60 m layer",
+    "from": "opacity 0.12 to 0.5, none ending within 30 cm of the ground",
+    "to": "opacity cap 0.3 below the horizon line, fade the last 40 % of each streak, and let streaks end on the ground (drop the 30 cm rule)"
+   },
+   "expected": "Rain over the far field reads as a fine, even veil, no individual posts.",
+   "accept": {
+    "region": [
+     100,
+     440,
+     480,
+     500
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 95
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "Edges are soft and the image is greyed: no true blacks and soft cabinet edges.",
+   "evidence": {
+    "region": [
+     680,
+     450,
+     720,
+     470
+    ],
+    "measured": "edge step -40 over 17 px (right), -45 over 22 px (left); whole-frame p1 26; foreground rock [0,650,300,800] p5 20.7"
+   },
+   "change": {
+    "setting": "Finish",
+    "from": "contrast 0.15, clarity 0.07, sharpen 0.35",
+    "to": "contrast 0.22, clarity 0.10, sharpen 0.45, with a black point lift removed so p1 sits near 12"
+   },
+   "expected": "Deeper shadows in the rock and the woofer, crisper cabinet edges.",
+   "accept": {
+    "region": [
+     0,
+     650,
+     300,
+     800
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 14
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the white lining read less like opaque cream card through the acrylic",
+   "why": "It is the speaker's material and colour, which are fixed; the internal boards read flat and cardboard-like at this size."
+  }
+ ],
+ "score_if_fixed": 7.4
+}
