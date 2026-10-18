@@ -1,47 +1,75 @@
-# Poison: a poison garden, in moss, velvet and clay (round 31)
+# Poison: a redwood forest floor, in moss, felt, corduroy and velvet (round 31)
 
 *Green, and not the healthy kind.*
 
+## The owner's direction (verbatim, via the coordinator)
+
+> "'Poison could be more of a witch's garden,' is what it's suggesting I say. Might be cool. Or a mossy, ferny redwood
+> forest with a fallen log and poisonous mushrooms. It's important to stay on the theme of earth and placing the
+> speakers in their respective atmospheres, though the yeti and witch ideas are fun, subtle nods."
+
+The coordinator read this as: the setting is the earth one, a mossy, ferny redwood forest floor. The witch's garden is at most a subtle nod.
+
 ## The concept
 
-A moss-flocked clearing at night, with a cold mist lying in it. Around a swamp of glossy green resin that glows from its depth stand velvet toadstools with felt spots, clay nightshade, foxglove spires in velvet and a crooked black tree. Glass bubbles rise off the swamp and spores drift through the air. The bottle green speaker stands at the swamp's edge: its acrylic is lit from inside and throws green light onto the moss at its feet. A small clay skull, the Poison icon, lies in the moss by the speaker's right front foot, beside a sprig of nightshade.
+The scene is the floor of a redwood forest in the morning:
 
-- **Light, one idea:** the garden glows from the ground. The swamp lights the moss around it and, low from the front right, the speaker's face. A moon low behind the garden lights the mist there, so the tree and the foxgloves stand out as silhouettes against a pale backdrop. A cold rim from high behind picks out the speaker's edges and horn.
-- **Palette:** apothecary greens and blacks: black-green velvet, moss, emerald resin, and a slate-teal mist. Foxglove violet is the one accent. Bone-coloured felt for the stems, the spots and the skull.
-- **Materials:** flock moss (its sheen tinted green, see below), velvet caps and bells, felt stems, spots, throats and lily pads, clay berries and skull, cast resin, glass bubbles, suede bark, and a scattering volume for the mist. No cotton wool, paper or tulle: those belong to the other worlds.
-- **The joke:** the skull is the icon itself (a circle over a rectangle, the eyes and nose cut through and the teeth notched), in clay, small enough that you find it on a second look.
+- Huge corduroy trunks rise out of the frame, flaring into buttresses at their feet.
+- Moss flock lies over everything, with felt ferns among it.
+- A fallen redwood lies furred in moss, its broken end a clay face with growth rings.
+- Red velvet fly agarics with felt warts stand on the log and around it. Pale death caps stand to the speaker's right.
+- Green-gold light falls between the trunks in a shaft onto the speaker, lighting the forest's air behind it. Motes drift in the light.
 
-## Concepts, and the pick
+The bottle green speaker stands in that pool of light, its acrylic lit from inside, and throws green onto the moss at its feet. There are two quiet nods to the witch: a little corked potion bottle with a faint green glow in the moss by the log's end, and the icon's skull in clay beside the speaker's right foot.
 
-The first proofs tried three ideas of light on the same set:
+- **Light, one idea:** sun through the canopy. A broad spot from high on the left lands on the speaker, with smaller shafts behind and beyond. A scattering volume fills only the forest behind the speaker, so the light shows in the air there, while the air between the lens and the speaker stays clear and the speaker stays crisp. A dim green canopy fill keeps the shadows readable. A warm rim and a low green-gold "glow" light only the speaker.
+- **Palette:** moss greens and redwood rust, the gold of the light. Fly agaric red is the one accent.
+- **Materials:** flock moss (its sheen tinted green), corduroy bark (the ribs run up the trunks and along the log), felt ferns, stems, warts and potion cork, velvet caps, clay end grain and skull, glass and a faintly glowing resin for the potion.
 
-- **A, moonlit from behind** (p01 to p03): a big moon behind the speaker. The ground went a flat grey-green and the swamp read as a lamp.
-- **B, a moon spot** (p05): a hard spot from behind. Most of it was lost in the speaker's lining, so the speaker went black.
-- **C, the glow from the ground and a lit mist behind** (p10 onward): the garden stays dark and the light comes from the swamp, the spores and a backdrop of lit mist.
+## Rounds
 
-I picked **C**. It is the only one in which the speaker is the brightest, most saturated thing in the frame. It also gives the backdrop depth: the silhouettes stand against a pale mist instead of disappearing into a black sky.
+### First concept: a poison garden at night (p01 to p19, superseded)
 
-## Proof rounds (scratchpad, 0.3 to 0.5 scale)
+Moss, velvet toadstools, foxgloves, nightshade and a glowing resin swamp, before the owner's direction came. What carried over:
 
-1. **p01, p02:** first layout. The haze was too dense and washed everything grey, the swamp's glow disc was blown out, and the foxglove bells were too small.
-2. **p03, p04:** less haze and a darker resin. The kit's flock catches a back light white, so the moss read grey. Added `moss` (kit_ext), which tints the flock's sheen green. The swamp was overlapping glowing blobs, which looked crude.
-3. **p05 to p07:** moon spot (concept B), a kidney-shaped extrude for the swamp. The speaker read dull. I found the reason: its lining was not among the light-linked receivers, so its body did not light up. With `lining-*` and the rest of the parts in `SPEAKER`, it glows.
-4. **p08, p09:** a rim on the speaker alone and a front-right "glow" from the swamp. Wrote `glow_pool`, an emitter that fades out radially from its centre, so the light seems to come from the swamp's depth.
-5. **p10:** dropped the shot-level haze. Added two of my own `mist` volumes: a low bank torn into wisps by noise, and a deep, thin haze behind the garden, lit by a moon low behind it. This was the turning point.
-6. **p11 to p13:** foxgloves (fewer, bigger bells), a clump in the middle distance, the low mist moved behind the foreground, more contrast, less lift.
-7. **p14 to p16:** the ground rebuilt as a `terrain`: rolling moss, flat where the speaker stands, banks behind, and a bed sunk for the swamp. The swamp is resin poured into that bed, so its shore is the bed's own contour. Cushion moss became `clumps` kept off the resin, and its build went from 111 s to 0.2 s by writing the mesh directly instead of with a bmesh op per ball. Felt lily pads and duckweed on the resin.
-8. **p17, c-crops:** traced white shards on the swamp to the moon and the backdrop light mirrored in the resin, and turned off those two lights' specular (the speaker keeps the highlights of its own rim). Dark felt lily pads now silhouette against the glow. Foxglove bells hang outward with pale, freckled felt throats.
-9. **p18, p19:** reframed so the swamp sits whole in the frame on the right third. Moved the skull into the focus band beside the speaker's foot. Raised the rim so it reaches the horn. Added a faint green spill from the speaker onto the moss in front of it.
-10. **q01 to q07 (portrait):** reframed with a longer lens (105 mm) and a higher target, so the speaker sits centre-left at about 36 % of the frame's height, the swamp bottom right and the tree's crown above. The big toadstool moved a little toward the speaker so its cap frames the left edge.
+- my kit pieces (the terrain, moss clumps, mist volumes, the toadstool, the skull);
+- light-linking the speaker's lining, which is what makes its acrylic glow;
+- turning off the specular of the world lights, so the speaker keeps its own highlights.
+
+### The redwood forest
+
+1. **f01 to f03:** first layout. The fly agarics and ferns read at once. The scene was too dark and showed no shafts. A trunk blocked the sun's path.
+   - Builds fell from 82 s to 14 s: each piece is now built in its own small mesh and then joined, instead of running a bmesh op on one ever-growing mesh. My first attempt at this, indexing the new vertices, scrambled the geometry; joining a separate mesh fixed it.
+2. **f04 to f07:** more sun power. The sun moved to the side so its shaft crosses the frame instead of pointing at the lens. A shot-wide haze was veiling the speaker, so I replaced it with a volume that fills only the forest behind it.
+3. **f08:** that volume thick enough (0.4 per metre) for the light to show in it, with the canopy fill turned down.
+4. **f09:** the near trunks brought in front of the volume, so they read as trunks rising out of the frame and not as fog. The puddle dropped, because it read as a black hole. Death caps moved to the right foreground. Motes turned gold.
+5. **f10, f11:** the sun moved off the trunk that was shading the speaker. The potion moved where it can be found. Fewer, smaller motes, and finer ribs on the log.
+6. **fq1, fq2 (portrait):** a 106 mm lens, the speaker at about 37 % of the frame's height on the centre line, the log at the left, a blurred fern framing the bottom.
 
 ## Final settings
 
-- Camera (landscape): tilt-shift, elevation 24°, azimuth −20°, 7.3 m, 65 mm, f/2.8 at miniature 11, focus on the speaker's front face. Portrait: 21°, −18°, 8.0 m, 105 mm, the same focus.
-- Set: a stage, `kit_scale` 11. Lights: `back` (the mist), `moon`, `key` (dim and cool), `swamp` (a green point, no specular), `spill`, plus `rim` and `glow` with the speaker's parts as receivers.
-- Finish: bloom 0.3, saturation 0.12, lift 0.02 toward #0A1A12, vignette 0.25, contrast 0.14.
-- Renders: landscape 2400 × 1600 and portrait 1600 × 2000, both at 256 samples. Render times are below.
+- Camera (landscape 2400 × 1600): tilt-shift, elevation 22°, azimuth −20°, 7.3 m, 60 mm, f/2.8 at miniature 11, focused on the speaker's front face.
+- Camera (portrait 1600 × 2000): elevation 20°, azimuth −18°, 8.0 m, 106 mm, the same focus.
+- Set: a stage, `kit_scale` 11; the ground a `terrain` of my own.
+- Lights:
+  - `sun`, a spot of 32 kW with an 11° cone;
+  - `sun2` and `shaft0` to `shaft2`, spots of 7 to 16 kW with 5 to 6.5° cones;
+  - `canopy`, an area light at 0.6 from above, no specular;
+  - `key`, at 0.6;
+  - `rim` and `glow`, lighting only the speaker;
+  - `spill`, a green point at the speaker's feet.
+- Finish: bloom 0.28, saturation 0.14, lift 0.03 toward #141E10, vignette 0.22, contrast 0.12.
+- Samples: 256 for both frames. Render times are in the coordinator report.
 
 ## Notes
 
-- Kit pieces of my own, in `studio/engine/kit_ext/poison.py`: `toadstool`, `foxglove`, `nightshade`, `skull`, `moss`, `glow_pool`, `mist`, `terrain` (and `ground_z`, which `poison.py` uses to stand its pieces on the ground) and `clumps`. No engine-core change.
-- Environment: this container's python3 is 3.13, and `bpy==5.0.1` exists only for 3.11. I ran everything on python3.11 (a symlink first on PATH), and no repo file changed for it.
+- My kit pieces, all in `studio/engine/kit_ext/poison.py`:
+  - `toadstool`, `skull`, `potion`, `moss`, `mist`, `terrain` (with `ground_z`, which the set uses to stand pieces on the ground), `clumps`, `trunk` and `fern`;
+  - from the first concept and unused now: `foxglove`, `nightshade` and `glow_pool`.
+
+  I changed nothing in the engine core.
+- Environment: this container's python3 is 3.13, and `bpy==5.0.1` exists only for 3.11. I ran everything on python3.11, using a symlink first on PATH, and changed no repo file for it.
+- Still to improve:
+  - The horn's mouth reads dark, because we look into its throat. It is the product as it is.
+  - The upper left of the landscape is a soft haze with little in it.
+  - A fern frond touches the speaker's right edge from behind.
