@@ -576,7 +576,10 @@ def parts(P):
                                    f'(corners R{pt["frame_r"]:g}) printed in one'
                                    + (f', both mouths rounded on R{pt["flare"]:g}' if pt['flare'] else '') + f': {tune}; {fit}']))
 
-    woofer, _ = driver_part('woofer', P['woofer'], wf, centre=(cx, yb, wz))
+    # round 31: the screws in the slots the panel's holes are under, the gasket in the rebate, the terminals on the lower
+    # spoke where the lead ends (its depth behind the flange, and the posts' base radius), the spokes so one runs down
+    woofer, _ = driver_part('woofer', P['woofer'], dict(wf, bolt_phase=0.5, spoke_phase=0.5, gasket_t=P['gasket'], terminals=(68.0, 115.0)),
+                            centre=(cx, yb, wz))
     out.append(woofer)
     plate = box(cx - amp['plate_w'] / 2, D - 3.0, az - amp['plate_h'] / 2, cx + amp['plate_w'] / 2, D, az + amp['plate_h'] / 2)
     module = box(cx - amp['cutout_w'] / 2 + 4, D - amp['depth'], az - amp['cutout_h'] / 2 + 6, cx + amp['cutout_w'] / 2 - 4, D - 3.0, az + amp['cutout_h'] / 2 - 6)
@@ -2057,7 +2060,8 @@ PRODUCT = Product(
                'grille-timber': {'preset': 'birch', 'color': '#8E6E4E', 'roughness': 0.55},
                'cork': {'preset': 'cork', 'color': '$cork'},
                'panel': {'preset': 'satin_paint', 'color': '$panel', 'roughness': 0.6, 'specular': 0.3},
-               'ring': {'preset': 'satin_paint', 'color': '$disc', 'roughness': 0.45, 'specular': 0.4},     # the disc's colour
+               # the disc's colour; round 31: cast acrylic tinted opaque and polished, as the notes say, not a paint
+               'ring': {'preset': 'opaque_acrylic', 'color': '$disc'},
                'horn': {'preset': '$horn_preset', 'color': '$horn', 'absorb': '$horn_deep', 'deep': '$horn_deep', 'cloud': '$horn_cloud',
                         'cloud_m': 0.12},
                'rod': {'preset': 'metal', 'color': '#C9C9C6', 'roughness': 0.3},
@@ -2065,11 +2069,21 @@ PRODUCT = Product(
                # square frame (round 14)
                'port': {'preset': 'satin_paint', 'color': '#1C1B1A', 'roughness': 0.45, 'specular': 0.5, 'bevel_mm': 0.8},
                'amp': {'preset': 'satin_paint', 'color': '#303033', 'roughness': 0.4, 'specular': 0.5},   # black anodised plate
-               'driver-frame': {'preset': 'satin_paint', 'color': '#1E1E1E'}, 'driver-cone': {'preset': 'paper_cone', 'color': '#1D1B1A'},
-               'driver-surround': {'preset': 'rubber', 'color': '#151515'}, 'driver-cap': {'preset': 'paper_cone', 'color': '#1D1B1A'},
-               'driver-motor': {'preset': 'metal', 'color': '#3A3A3A'}, 'driver-magnet': {'preset': 'satin_paint', 'color': '#2B2B2B'},
+               # round 31 (spinoffs/barkhorn/drivers31.md): the drivers as FaitalPRO and B&C make them. Treated paper with
+               # its fibre and streaks, the doped cloth surround, the cap doped glossier; the baskets and bodies die-cast in
+               # black e-coat; the screws black oxide; the motor's steel in black, its neodymium nickel-plated
+               'driver-frame': {'preset': 'ecoat', 'color': '#1B1B1C'}, 'driver-cone': {'preset': 'treated_paper', 'color': '#242220'},
+               'driver-surround': {'preset': 'doped_cloth', 'color': '#1E1D1C'},
+               'driver-cap': {'preset': 'treated_paper', 'color': '#22201F', 'roughness': 0.6, 'coat': 0.1, 'coat_roughness': 0.4,
+                              'streaks': 0.02},
+               'driver-motor': {'preset': 'ecoat', 'color': '#1D1D1E', 'roughness': 0.34},
+               'driver-magnet': {'preset': 'metal', 'color': '#B9B6AE', 'roughness': 0.3},
                'driver-coil': {'preset': 'metal', 'color': '#B87333'}, 'driver-spider': {'preset': 'rubber', 'color': '#C8B88A'},
-               'driver-plug': {'preset': 'satin_paint', 'color': '#111111'},
+               # the phase plug machined aluminium, dark anodised, so it catches the light at the bottom of the throat
+               'driver-plug': {'preset': 'metal', 'color': '#6A6B6E', 'roughness': 0.28},
+               'driver-screw': {'preset': 'black_oxide'}, 'driver-gasket': {'preset': 'rubber', 'color': '#121212', 'roughness': 0.85},
+               'driver-terminal': {'preset': 'metal', 'color': '#D4D4D2', 'roughness': 0.15},
+               'driver-bright': {'preset': 'metal', 'color': '#C9CACB', 'roughness': 0.22, 'anisotropic': 0.5},
                'lining': {'preset': 'batting'},
                # round 21's marks: laser-etched (frosted) acrylic or laser-marked anodising, white acrylic, a print on cloth
                'etch': {'preset': 'satin_paint', 'color': '#ECEBE7', 'roughness': 0.85, 'specular': 0.15},
