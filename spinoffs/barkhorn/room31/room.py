@@ -136,7 +136,7 @@ DEFAULT = dict(
 PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=0.08, books_x=0.38, vase_x=-0.4, port_d=4.1,
                 port_lens=50, port_tz=0.62,
                 # the sun a little further round for this pair, and the sheers' gaps where its beams come in
-                sun=dict(azimuth_deg=-66.0, elevation_deg=18.0, irradiance=48.0, angle_deg=0.5, color='#FFE4C8'),
+                sun=dict(azimuth_deg=-66.0, elevation_deg=18.0, irradiance=48.0, angle_deg=0.9, color='#FFE4C8'),
                 sheers=[(-0.62, 0.38), (-2.7, 3.0)])     # the gaps where the beams to the pair (now +-0.92) come in
 
 
