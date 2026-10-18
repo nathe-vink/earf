@@ -10,6 +10,8 @@ pass of the critic is a change to `P` and a render, and the site's link boxes co
                                                                  the eight link boxes, % of the frame (projected, or
                                                                  read off a rendered frame)
     python3 spinoffs/barkhorn/hero31.py card --tag h9                              the critic's card, current settings
+    python3.11 spinoffs/barkhorn/hero31.py stitch --strips S1 S2 S3 S4 --out IMG    the landscape from four bands (STRIPS;
+                                                                 the render Python, which has scipy for the finish)
 
 Notes and the critic's passes: hero31.md.
 """
@@ -324,6 +326,40 @@ def spots_from_report(report):
                  h=round((y1 - y0) / H * 100, 2)) for x0, y0, x1, y1 in (boxes[i] for i in sorted(boxes))]
 
 
+STRIPS = [(0.0, 0.275), (0.225, 0.525), (0.475, 0.775), (0.725, 1.0)]   # the landscape in bands, 32 px overlaps
+
+
+def stitch(paths, out, shot):
+    """The landscape rendered in horizontal bands (STRIPS, finish off: `--crop 0 Y0 1 Y1 --set finish.enabled=false`)
+    joined into one raw frame, each overlap a linear crossfade, then the shot's finish run once on the whole frame (its
+    clarity and sharpening work over neighbourhoods, so finishing each band would seam). Writes OUT.raw.png and OUT."""
+    import numpy as np
+    from PIL import Image
+    sys_path = os.path.join(ROOT, 'studio', 'engine')
+    import sys
+    sys.path.insert(0, sys_path)
+    import finish as Fn
+    sh = json.load(open(shot))
+    W, H = sh['size']
+    acc = np.zeros((H, W, 3)); wt = np.zeros((H, 1, 1))
+    for (y0, y1), pth in zip(STRIPS, paths):
+        a = np.asarray(Image.open(pth).convert('RGB')).astype(float)
+        r0, r1 = round(y0 * H), round(y1 * H)
+        assert a.shape[:2] == (r1 - r0, W), (pth, a.shape, r1 - r0)
+        w = np.ones(r1 - r0)
+        ov = 32
+        if r0 > 0:
+            w[:ov] = np.linspace(0, 1, ov + 2)[1:-1]
+        if r1 < H:
+            w[-ov:] = np.linspace(1, 0, ov + 2)[1:-1]
+        acc[r0:r1] += a * w[:, None, None]; wt[r0:r1, 0, 0] += w
+    raw = (acc / wt).clip(0, 255).round().astype(np.uint8)
+    rawp = os.path.splitext(out)[0] + '.raw.png'
+    Image.fromarray(raw).save(rawp)
+    rep = Fn.post(rawp, out, sh.get('finish'), None, None, None)
+    return rep
+
+
 def parse_sets(sets, over=None):
     p = {**copy.deepcopy(P), **(over or {})}
     for kv in sets or []:
@@ -334,7 +370,9 @@ def parse_sets(sets, over=None):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('what', choices=['build', 'spots', 'card'])
+    ap.add_argument('what', choices=['build', 'spots', 'card', 'stitch'])
+    ap.add_argument('--strips', nargs=4, help='stitch: the four band PNGs, top to bottom')
+    ap.add_argument('--out', help='stitch: the finished frame')
     ap.add_argument('--report', help='spots: read the boxes off this rendered frame\'s report instead')
     ap.add_argument('--tag', default='h')
     ap.add_argument('--portrait', action='store_true')
@@ -349,6 +387,9 @@ def main():
         print(os.path.relpath(f, ROOT))
     elif a.what == 'card':
         print(card(p, a.tag, (1600, 2000) if a.portrait else (2560, 1280)))
+    elif a.what == 'stitch':
+        rep = stitch(a.strips, a.out, os.path.join(OUT, 'hero.json'))
+        print(json.dumps(rep.get('finish'), indent=1))
     elif a.report:
         print(json.dumps(spots_from_report(a.report), indent=1))
     else:
