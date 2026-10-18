@@ -403,7 +403,15 @@ def _strew_group(bpy, name, p, col, at):
         dd = N.new('ShaderNodeVectorMath'); dd.operation = 'DISTANCE'; Lk(mulz.outputs['Vector'], dd.inputs[0])
         dd.inputs[1].default_value = (x - ox, y - oy, 0.0)
         c4 = N.new('FunctionNodeCompare'); c4.data_type = 'FLOAT'; c4.operation = 'LESS_THAN'; c4.inputs['B'].default_value = r
-        Lk(dd.outputs['Value'], c4.inputs['A'])
+        dv = dd.outputs['Value']
+        if p.get('feather', 0) > 0:                       # a ragged edge: the radius wanders by up to `feather` m
+            fn = N.new('ShaderNodeTexNoise'); fn.inputs['Scale'].default_value = 1.5 / p['feather']; fn.inputs['Detail'].default_value = 4.0
+            Lk(pos.outputs['Position'], fn.inputs['Vector'])
+            fm = N.new('ShaderNodeMath'); fm.operation = 'MULTIPLY_ADD'; fm.inputs[1].default_value = 2.0 * p['feather']
+            fm.inputs[2].default_value = -p['feather']; Lk(fn.outputs['Fac'], fm.inputs[0])
+            fa = N.new('ShaderNodeMath'); fa.operation = 'ADD'; Lk(dv, fa.inputs[0]); Lk(fm.outputs['Value'], fa.inputs[1])
+            dv = fa.outputs['Value']
+        Lk(dv, c4.inputs['A'])
         an = N.new('FunctionNodeBooleanMath'); an.operation = 'AND'; Lk(sel, an.inputs[0]); Lk(c4.outputs['Result'], an.inputs[1])
         sel = an.outputs['Boolean']
     Lk(sel, dist.inputs['Selection'])

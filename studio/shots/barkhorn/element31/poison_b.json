@@ -53,7 +53,7 @@
     "radius": 1.25,
     "height": 30.0,
     "tint": "#8A4126",
-    "tint_mix": 0.3,
+    "tint_mix": 0.35,
     "tex_scale": 1.4,
     "bump": 1.6,
     "displace": 0.18,
@@ -132,16 +132,17 @@
     "on": [
      "prop0-kit"
     ],
-    "density": 320,
+    "density": 200,
     "up": 0.6,
-    "patch": 0.6,
-    "patch_cut": 0.55,
+    "patch": 0.5,
+    "patch_cut": 0.62,
     "scale": [
-     0.8,
-     1.25
+     0.6,
+     1.4
     ],
     "seed": 51,
     "size": 0.075,
+    "variants": 12,
     "within": [
      0.0,
      -1.0,
@@ -151,7 +152,12 @@
      [
       0.0,
       0.0,
-      0.42
+      0.58
+     ],
+     [
+      0.42,
+      -0.6,
+      0.15
      ],
      [
       0.72,
@@ -179,13 +185,16 @@
     "on": [
      "prop0-kit"
     ],
-    "density": 9000,
+    "density": 2200,
     "up": 0.5,
     "scale": [
-     0.9,
-     1.8
+     0.6,
+     1.5
     ],
     "seed": 52,
+    "patch": 0.06,
+    "patch_cut": 0.25,
+    "feather": 0.1,
     "within": [
      0.72,
      -1.9,
@@ -213,13 +222,16 @@
     "on": [
      "prop0-kit"
     ],
-    "density": 9000,
+    "density": 7000,
     "up": 0.5,
     "scale": [
      0.9,
      1.8
     ],
     "seed": 53,
+    "patch": 0.06,
+    "patch_cut": 0.25,
+    "feather": 0.1,
     "within": [
      -0.35,
      -0.5,
@@ -247,13 +259,16 @@
     "on": [
      "prop0-kit"
     ],
-    "density": 9000,
+    "density": 7000,
     "up": 0.5,
     "scale": [
      0.9,
      1.8
     ],
     "seed": 54,
+    "patch": 0.06,
+    "patch_cut": 0.25,
+    "feather": 0.1,
     "within": [
      0.42,
      -0.38,
@@ -285,9 +300,9 @@
     "open": 0.05,
     "holes": [
      [
-      -25.514,
-      -10.836,
-      0.9
+      -25.466,
+      -10.792,
+      0.42
      ],
      [
       -25.778,
@@ -297,17 +312,22 @@
      [
       -26.312,
       -13.248,
-      0.22
+      0.25
      ],
      [
       -27.492,
       -6.855,
-      0.25
+      0.4
      ],
      [
-      -22.076,
-      -2.379,
-      0.6
+      -26.268,
+      -11.746,
+      0.12
+     ],
+     [
+      -20.73,
+      0.517,
+      0.4
      ],
      [
       -21.903,
@@ -317,12 +337,7 @@
      [
       -17.403,
       3.069,
-      0.55
-     ],
-     [
-      -22.93,
-      -4.314,
-      0.5
+      0.3
      ]
     ]
    },
@@ -341,7 +356,7 @@
      37.8,
      18.0
     ],
-    "density": 0.09,
+    "density": 0.07,
     "top": 0.35,
     "wisp": 2.5,
     "color": "#F2F4EA",
@@ -1716,10 +1731,10 @@
     "fn": "amanita",
     "position": [
      0.36,
-     -0.42,
+     -0.62,
      -0.006
     ],
-    "cap": 0.06,
+    "cap": 0.065,
     "age": "convex",
     "seed": 11,
     "species": "phalloides"
@@ -1730,8 +1745,8 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     0.47,
-     -0.33,
+     0.48,
+     -0.55,
      -0.006
     ],
     "cap": 0.045,
@@ -1762,8 +1777,8 @@
     "module": "poison_b_el",
     "fn": "viper",
     "position": [
-     -0.39999999999999997,
-     -2.23,
+     -0.45999999999999996,
+     -2.19,
      0.3
     ],
     "drop": true,
@@ -1773,12 +1788,12 @@
      20
     ],
     "head": [
-     0.07,
+     0.08,
      -0.1,
      0.15
     ],
-    "look": -35,
-    "girth": 0.024,
+    "look": -30,
+    "girth": 0.019,
     "r_out": 0.13,
     "r_in": 0.05,
     "turns": 2.1
@@ -1790,8 +1805,8 @@
     "fn": "dartfrog",
     "position": [
      -0.21999999999999997,
-     -2.45,
-     0.4
+     -2.37,
+     0.6
     ],
     "rotate": [
      0,
@@ -3500,7 +3515,7 @@
     -0.3,
     0.5
    ],
-   "irradiance": 2.0,
+   "irradiance": 0.5,
    "color": "#EEF0E0",
    "orbit": {
     "azimuth_deg": -35,
@@ -3586,7 +3601,28 @@
     "azimuth_deg": 165,
     "elevation_deg": 30,
     "distance_m": 1.8
-   }
+   },
+   "volume": false
+  },
+  "scrim3": {
+   "type": "area",
+   "size_m": [
+    2.2,
+    1.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.15
+   ],
+   "irradiance": 1.2,
+   "color": "#DCE0CC",
+   "orbit": {
+    "azimuth_deg": 8,
+    "elevation_deg": 12,
+    "distance_m": 3.2
+   },
+   "diffuse": 0.0
   }
  },
  "render": {
@@ -3634,7 +3670,7 @@
  "sun": {
   "azimuth_deg": -75.0,
   "elevation_deg": 30.0,
-  "irradiance": 30.0,
+  "irradiance": 28.0,
   "angle_deg": 0.6,
   "color": "#FFE2AE"
  },
