@@ -131,7 +131,7 @@ def shot_misty():
 
 
 LOGB = ((-0.75, 1.1, 0.24), (-2.9, -0.9, 0.24), 0.27, 0.3)
-ROCK = (-0.5, -2.05, 0.55)         # the mossy stump in the foreground: x, y, scale of the scan (0.84 x 0.77 x 0.29 m)   # the fallen log: its far end, its near end, radii
+ROCK = (-0.42, -2.25, 0.5)         # the mossy stump in the foreground: x, y, scale of the scan (0.84 x 0.77 x 0.29 m)   # the fallen log: its far end, its near end, radii
 
 
 def on_logb(t, v=0.0):
@@ -148,22 +148,16 @@ def poisons():
     P = []
     # fly agarics in clusters: (x, y, cap radius, age, seed, lean, torn)
     rnd = random.Random(41)
-    AG = [  # at the speaker's front left
-          (-0.42, -0.45, 0.085, 'convex', 1, (0.01, -0.01), 0.0), (-0.3, -0.56, 0.05, 'young', 2, (0.0, -0.01), 0.0),
-          (-0.52, -0.6, 0.03, 'button', 3, (0, 0), 0.0), (-0.62, -0.38, 0.1, 'plane', 5, (-0.015, 0.0), 0.15),
-          # at its right
-          (0.42, -0.5, 0.07, 'convex', 6, (0.01, -0.005), 0.0), (0.56, -0.38, 0.105, 'old', 7, (0.02, 0.01), 0.55),
-          (0.34, -0.66, 0.028, 'button', 8, (0, 0), 0.0),
-          # the hero cluster near the lens at the right, big in the frame
-          (0.62, -2.05, 0.095, 'convex', 21, (-0.012, -0.01), 0.0), (0.76, -1.95, 0.065, 'young', 22, (0.01, 0.005), 0.0),
-          (0.52, -2.2, 0.035, 'button', 23, (0, 0), 0.0), (0.88, -2.15, 0.12, 'plane', 24, (0.02, -0.01), 0.25),
-          (0.7, -2.28, 0.045, 'young', 25, (-0.008, -0.012), 0.0), (0.98, -1.85, 0.03, 'button', 26, (0, 0), 0.0),
-          (1.1, -2.05, 0.08, 'convex', 27, (0.015, 0.0), 0.0)]
+    AG = [  # two at the speaker's feet
+          (-0.42, -0.45, 0.075, 'convex', 1, (0.012, -0.01), 0.0), (-0.3, -0.58, 0.03, 'button', 3, (0, 0), 0.0),
+          # one clump at the right, nearer the lens, at every age
+          (0.62, -1.85, 0.09, 'convex', 21, (-0.018, -0.012), 0.0), (0.78, -1.75, 0.06, 'young', 22, (0.015, 0.008), 0.0),
+          (0.52, -2.0, 0.032, 'button', 23, (0, 0), 0.0), (0.92, -1.92, 0.115, 'plane', 24, (0.025, -0.012), 0.3),
+          (0.7, -2.08, 0.045, 'young', 25, (-0.012, -0.018), 0.0)]
     for x, y, R, age, sd, lean, torn in AG:
         P.append(extb('amanita', (x, y, -0.006), cap=R, age=age, seed=sd, lean=list(lean), torn=torn))
     # death caps, olive, half in the ferns at the right behind the speaker's cluster
-    for x, y, R, age, sd in [(0.82, -0.28, 0.055, 'convex', 11), (0.95, -0.45, 0.04, 'young', 12), (0.78, -0.08, 0.065, 'plane', 13),
-                              (1.3, -1.75, 0.05, 'convex', 14)]:
+    for x, y, R, age, sd in [(0.36, -0.5, 0.055, 'convex', 11), (0.5, -0.38, 0.04, 'young', 12)]:
         P.append(extb('amanita', (x, y, -0.006), cap=R, age=age, seed=sd, species='phalloides'))
     # a mossy stump (a Poly Haven scan) in the foreground at the left, the viper coiled on its top, its head raised
     # toward the speaker; the frog on the moss at the stump's foot
@@ -171,12 +165,11 @@ def poisons():
     P.append(asset('tree_stump_02', (rx, ry, -0.03), rotate=(0, 0, 35), scale=rs, res='2k'))
     P.append(extb('viper', (rx + 0.02, ry + 0.02, 0.3), drop=True, rotate=[0, 0, 20], head=[0.07, -0.1, 0.15], look=-35,
                   girth=0.024, r_out=0.13, r_in=0.05, turns=2.1))
-    P.append(extb('dartfrog', (0.3, -2.45, -0.004), rotate=[0, 0, 200], size=0.042))
+    P.append(extb('dartfrog', (rx + 0.28, ry - 0.12, 0.4), rotate=[0, 0, 170], size=0.042, drop=True))
     # foxglove spires behind at the left, nightshade at the right
     P += [extb('foxglove', (-1.2, 0.5, -0.01), height=1.35, lean=[0.05, 0.0], side=-100, seed=1, bells=24),
-          extb('foxglove', (-1.95, 1.4, -0.01), height=1.05, lean=[-0.04, 0.02], side=-90, seed=2, bells=20),
           extb('foxglove', (1.35, 1.25, -0.01), height=1.15, lean=[0.03, 0.0], side=-110, seed=3, bells=22),
-          extb('nightshade', (1.0, -0.55, -0.01), height=0.42, lean=[-0.06, -0.03], seed=5, berries=6)]
+          ]
     return P
 
 
@@ -191,7 +184,7 @@ def ferns_b(seed=3):
         k = 0
         while k < n:
             x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
-            if x * x + y * y < 0.8 ** 2 or (-0.9 < x < 1.1 and -0.8 < y < 0.0) or math.hypot(x - 0.8, y + 2.05) < 0.5 or math.hypot(x - ROCK[0], y - ROCK[1]) < 0.55:
+            if x * x + y * y < 0.8 ** 2 or (-0.9 < x < 1.1 and -0.8 < y < 0.0) or math.hypot(x - 0.72, y + 1.9) < 0.45 or math.hypot(x - ROCK[0], y - ROCK[1]) < 0.55:
                 continue
             pl.append([round(x, 3), round(y, 3), 0.0, round(rnd.uniform(s0, s1), 3), round(rnd.uniform(0, 360), 1),
                        rnd.choice([0, 1, 2, 3]), round(rnd.uniform(-12, 12), 1)])
@@ -200,7 +193,7 @@ def ferns_b(seed=3):
 
 
 SUN_B = {'azimuth_deg': -105.0, 'elevation_deg': 32.0, 'irradiance': 30.0, 'angle_deg': 0.6, 'color': '#FFE2AE'}
-SUNLIT_B = [(0.0, 0.0, 0.7, 1.0), (-0.1, -0.55, 0.05, 0.75), (0.8, -2.05, 0.12, 0.5), (-0.5, -2.05, 0.35, 0.45), (-2.0, 7.0, 4.0, 0.6),
+SUNLIT_B = [(0.0, 0.0, 0.7, 1.0), (-0.05, -0.45, 0.05, 0.6), (0.72, -1.9, 0.1, 0.32), (-0.42, -2.25, 0.35, 0.28), (-2.0, 7.0, 4.0, 0.6),
             (-3.5, 10.0, 5.0, 0.6), (1.0, 12.0, 5.0, 0.55), (2.5, 6.5, 0.8, 0.5)]
 
 
@@ -212,11 +205,12 @@ def shot():
              # the floor in 3D near the speaker: bark crumbs, twigs and moss in irregular cushions
              ext('strew', model='bark_debris_01', on=['prop0-kit'], density=2.0, up=0.5, scale=[0.22, 0.4], seed=31,
                  within=[0.0, -0.3, 3.2], avoid=[[0.0, 0.0, 0.33], [0.0, -0.55, 0.5]]),
-             ext('darken', on=['prop0-kit'], value=0.68, rough=0.85),
+             ext('darken', on=['prop0-kit'], value=0.5, rough=0.85),
              ext('canopy', (0.0, 4.0, CANOPY_Z), size=[220.0, 220.0], gap=1.2, open=0.05,
                  holes=[gap_for(x, y, z, r, (0.0, 4.0), SUN_B) for x, y, z, r in SUNLIT_B]),
-             ext('mist', (0.0, 21.0, -0.2), size=[50.0, 37.0, 18.0], density=0.07, top=0.5, wisp=2.5, color='#F2F4EA',
-                 anisotropy=0.65),
+             ext('mist', (0.0, 20.1, -0.2), size=[50.0, 37.8, 18.0], density=0.09, top=0.35, wisp=2.5, color='#F2F4EA',
+                 anisotropy=0.7),
+             ext('mist', (0.0, -3.0, -0.2), size=[20.0, 8.4, 6.0], density=0.015, top=0.5, color='#F2F4EA', anisotropy=0.7),
              *[ext('redwood', (x, y, -0.1), radius=r, height=40.0, tint=REDWOOD, tint_mix=0.3, tex_scale=1.4, bump=1.6,
                    seed=30 + k, turn=k * 61) for k, (x, y, r) in enumerate(BACK)]]
     props += ferns_b()
@@ -238,11 +232,11 @@ def shot():
     props.append(ext('plants', model='fern_02', place=pl, seed=17))
     # bounces a photographer would set: a reflector low at the camera's left (diffuse only), a dim scrim the horn
     # mirrors, a warm strip behind-right for the body's right edge
-    lights = {'reflector': {**area(-35, 8, 2.5, 3.5, '#EEF0E0', (2.0, 1.2), (0.0, -0.3, 0.5)), 'specular': 0.0},
-              'scrim': {**area(-10, 30, 3.5, 0.5, '#D8DCC8', (4.0, 2.5), (0.0, 0.0, 1.15)), 'diffuse': 0.0},
-              'rim': {**area(140, 10, 2.0, 1.5, '#FFE6B8', (0.6, 1.4), (0.0, 0.0, 1.0)), 'specular': 0.4}}
-    cam = camera(height=0.42, distance=3.9, azimuth=4.0, lens=35.0, target=(0.0, -0.3, 0.62), focus=(0.0, -0.45, 0.5),
-                 fstop=8.0)
+    lights = {'reflector': {**area(-35, 8, 2.5, 2.0, '#EEF0E0', (2.0, 1.2), (0.0, -0.3, 0.5)), 'specular': 0.0},
+              'scrim': {**area(-10, 30, 3.5, 0.5, '#D8DCC8', (2.0, 1.0), (0.0, 0.0, 1.15)), 'diffuse': 0.0},
+              'scrim2': {**area(-40, 55, 2.5, 0.4, '#D8DCC8', (0.5, 1.5), (0.0, 0.0, 1.2)), 'diffuse': 0.0},
+              'rim': {**area(140, 22, 2.0, 1.5, '#FFE6B8', (0.6, 1.8), (0.0, 0.0, 1.2)), 'specular': 0.4}}
+    cam = camera(height=0.5, distance=4.6, azimuth=4.0, lens=50.0, target=(0.05, -0.3, 0.6), fstop=4.0)
     return frame('poison', props, cam, sky(SKY2, rotation_deg=SKY_ROT, strength=0.3, res='4k'),
                  'barkhorn, Poison B, the poisonous forest', lights=lights, sun=SUN_B, rotate_z=-18.0,
                  position=(0.0, 0.0, -0.022), fin=finish(contrast=0.08, clarity=0.06, vignette=0.2))

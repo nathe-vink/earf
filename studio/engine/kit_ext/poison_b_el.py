@@ -210,7 +210,7 @@ def amanita(bpy, name, p, kit):
             _join(bms['gills'], gill)
     # warts: the veil's fragments on a fly agaric, thick at the centre, sparse at the margin; none on a death cap
     if sp == 'muscaria':
-        nw = p.get('warts', {'button': 260, 'young': 200, 'convex': 160, 'plane': 120, 'old': 70}[age])
+        nw = p.get('warts', {'button': 150, 'young': 110, 'convex': 85, 'plane': 65, 'old': 40}[age])
         for k in range(nw):
             t = 1 - rnd.random() ** 1.6                   # nearer the top more often
             i = min(len(pts) - 2, int(t * (len(pts) - 1)))
@@ -219,12 +219,12 @@ def amanita(bpy, name, p, kit):
             u = rnd.random(); r = (ra + (rb - ra) * u) * wob(th, 0); z = za + (zb - za) * u
             nr, nz = (zb - za), -(rb - ra); L = math.hypot(nr, nz) or 1; nr, nz = nr / L, nz / L
             n = Vector((nr * math.cos(th), nr * math.sin(th), nz))
-            s = R * rnd.uniform(0.022, 0.055) * (1.25 if age == 'button' else 1.0) * (1.25 - 0.5 * (1 - t))
+            s = R * rnd.uniform(0.03, 0.085) * (1.2 if age == 'button' else 1.0) * (1.25 - 0.55 * (1 - t))
             def wart(bm, s=s):
                 g = bmesh.ops.create_icosphere(bm, subdivisions=1, radius=1.0)
                 for v in g['verts']:
                     j = 1 + 0.35 * rnd.uniform(-1, 1)
-                    v.co = Vector((v.co.x * s * j, v.co.y * s * j * rnd.uniform(0.75, 1.0), max(-0.3, v.co.z) * s * 0.75 * j))
+                    v.co = Vector((v.co.x * s * j, v.co.y * s * j * rnd.uniform(0.6, 1.0), max(-0.2, v.co.z) * s * 0.4 * j))
             m = Matrix.Translation(Vector((r * math.cos(th), r * math.sin(th), z)) + n * s * 0.1) @ n.to_track_quat('Z', 'Y').to_matrix().to_4x4() @ Matrix.Rotation(rnd.uniform(0, 6.28), 4, 'Z')
             _join(bms['warts'], wart, m)
     # the ring: a skirt hanging from the stem's top
@@ -277,7 +277,7 @@ def _amanita_mats(bpy, name, sp, R, Hs):
     nt.links.new(nz.outputs['Fac'], mix.inputs[0]); mix.inputs[1].default_value = 0.35
     nt.links.new(dv.outputs['Value'], mix.inputs[2])
     if sp == 'muscaria':
-        col = _ramp(nt, mix.outputs['Value'], [(0.15, '#4A0302'), (0.5, '#740804'), (0.9, '#9A1806'), (1.2, '#C04A14')])
+        col = _ramp(nt, mix.outputs['Value'], [(0.15, '#3A0101'), (0.5, '#6A0302'), (0.9, '#8A0A03'), (1.2, '#A8300A')])
         b.inputs['Subsurface Weight'].default_value = 0.12
     else:
         # olive-green to yellowish at the margin, with dark radial fibrils
@@ -285,15 +285,15 @@ def _amanita_mats(bpy, name, sp, R, Hs):
         b.inputs['Subsurface Weight'].default_value = 0.08
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)
-    b.inputs['Roughness'].default_value = 0.42
-    b.inputs['Coat Weight'].default_value = 0.6; b.inputs['Coat Roughness'].default_value = 0.12
+    b.inputs['Roughness'].default_value = 0.55
+    b.inputs['Coat Weight'].default_value = 0.15; b.inputs['Coat Roughness'].default_value = 0.25
     fib = _noise(nt, 1.0 / (R * 0.06), 6.0, stretch=(1.0, 1.0, 1.0))
     _bump(nt, b, fib.outputs['Fac'], 0.25, R * 0.004)
     out['cap'] = m
     # warts: cream, dirty, crumbly
     m, nt, b = _node_mat(bpy, f'{name}-wartmat')
     nz = _noise(nt, 1.0 / (R * 0.03), 5.0)
-    nt.links.new(_ramp(nt, nz.outputs['Fac'], [(0.3, '#D9CFB4'), (0.6, '#EFE8D2'), (0.8, '#B9A784')]), b.inputs['Base Color'])
+    nt.links.new(_ramp(nt, nz.outputs['Fac'], [(0.3, '#CFC09A'), (0.6, '#E4DABA'), (0.8, '#A89668')]), b.inputs['Base Color'])
     b.inputs['Roughness'].default_value = 0.85; b.inputs['Subsurface Weight'].default_value = 0.1
     _bump(nt, b, nz.outputs['Fac'], 0.6, R * 0.003)
     out['warts'] = m
@@ -312,14 +312,14 @@ def _amanita_mats(bpy, name, sp, R, Hs):
         nz = _noise(nt, 1.0 / (R * 0.08), 4.0)
         mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MULTIPLY_ADD'
         nt.links.new(nz.outputs['Fac'], mx.inputs[0]); mx.inputs[1].default_value = 0.25; nt.links.new(hz.outputs['Value'], mx.inputs[2])
-        cols = [(0.05, '#6A5A40'), (0.22, '#B8AC8E'), (0.4, '#E6E0CF'), (1.0, '#F2EEE2')]
+        cols = [(0.05, '#5A4A32'), (0.2, '#A39478'), (0.38, '#D6CCB2'), (1.0, '#E6DEC8')]
         if k == 'volva' and sp != 'muscaria':
             cols = [(0.0, '#7A6A4E'), (0.25, '#CFC6AE'), (1.0, '#EDE8DA')]
         nt.links.new(_ramp(nt, mx.outputs['Value'], cols), b.inputs['Base Color'])
         b.inputs['Roughness'].default_value = 0.72; b.inputs['Subsurface Weight'].default_value = 0.15
         b.inputs['Subsurface Radius'].default_value = (0.003, 0.003, 0.002)
-        fib = _noise(nt, 1.0 / (R * 0.05), 6.0, stretch=(12.0, 12.0, 0.6))
-        _bump(nt, b, fib.outputs['Fac'], 0.35, R * 0.003)
+        fib = _noise(nt, 1.0 / (R * 0.04), 6.0, stretch=(14.0, 14.0, 0.5))
+        _bump(nt, b, fib.outputs['Fac'], 0.7, R * 0.004)
         out[k] = m
     return out
 
@@ -373,7 +373,7 @@ def viper(bpy, name, p, kit):
             return g * (0.12 + 0.88 * (t / 0.18) ** 0.8)
         if t < 0.82:
             return g * (1.0 - 0.15 * ((t - 0.45) / 0.37) ** 2)
-        return g * (0.85 - 0.3 * (t - 0.82) / 0.18)
+        return g * (0.85 - 0.38 * (t - 0.82) / 0.18)
     radii = [rad(i / (N - 1)) for i in range(N)]
     bm = bmesh.new()
     kit._tube(bm, [tuple(v) for v in pts], radii, 0.82, 0.0, 28, 4)
@@ -383,7 +383,7 @@ def viper(bpy, name, p, kit):
     hd = (pts[-1] - pts[-4]).normalized()
     hd.z *= 0.3; hd.normalize()
     side = hd.cross(Vector((0, 0, 1))).normalized(); up = side.cross(hd).normalized()
-    HL, HW, HH = g * 3.2, g * 1.9, g * 1.0
+    HL, HW, HH = g * 3.0, g * 2.15, g * 0.95
     seg_u, seg_v = 20, 24
     rows = []
     for i in range(seg_u + 1):
@@ -410,8 +410,8 @@ def viper(bpy, name, p, kit):
     # the eyes: amber, glossy, set high on the sides, forward of the middle
     eyes = bmesh.new()
     for s in (-1, 1):
-        ec = hp + hd * (HL * 0.6 - g * 0.4) + side * s * HW * 0.62 + up * HH * 0.32
-        kit._sphere(eyes, tuple(ec), (g * 0.32,) * 3, 24)
+        ec = hp + hd * (HL * 0.62 - g * 0.4) + side * s * HW * 0.8 + up * HH * 0.25
+        kit._sphere(eyes, tuple(ec), (g * 0.24,) * 3, 24)
     obs = []
     m_body = _viper_mat(bpy, f'{name}-skin', p, g)
     for nm, b_ in (('body', bm), ('head', head)):
@@ -425,9 +425,9 @@ def viper(bpy, name, p, kit):
     # the pupils: thin black slits on each eye's outer face
     pup = bmesh.new()
     for s in (-1, 1):
-        ec = hp + hd * (HL * 0.6 - g * 0.4) + side * s * HW * 0.62 + up * HH * 0.32 + side * s * g * 0.29
+        ec = hp + hd * (HL * 0.62 - g * 0.4) + side * s * HW * 0.8 + up * HH * 0.25 + side * s * g * 0.21
         m = Matrix.Translation(ec) @ Matrix((hd, up, side)).transposed().to_4x4()
-        _join(pup, lambda t: kit._sphere(t, (0, 0, 0), (g * 0.05, g * 0.22, g * 0.05), 12), m)
+        _join(pup, lambda t: kit._sphere(t, (0, 0, 0), (g * 0.04, g * 0.17, g * 0.04), 12), m)
     m_pup, nt, b = _node_mat(bpy, f'{name}-pupil')
     b.inputs['Base Color'].default_value = (0.005, 0.005, 0.004, 1); b.inputs['Roughness'].default_value = 0.1
     obs.append(_obj(bpy, f'{name}-pupils', pup, m_pup, p))
@@ -451,9 +451,9 @@ def _viper_mat(bpy, name, p, g):
     nt.links.new(mp.outputs['Result'], base.node.inputs['Fac'])
     # the scales
     tc = nt.nodes.new('ShaderNodeTexCoord')
-    vor = nt.nodes.new('ShaderNodeTexVoronoi'); vor.feature = 'F1'; vor.inputs['Scale'].default_value = 1.0 / (g * 0.26)
+    vor = nt.nodes.new('ShaderNodeTexVoronoi'); vor.feature = 'F1'; vor.inputs['Scale'].default_value = 1.0 / (g * 0.24)
     nt.links.new(tc.outputs['Object'], vor.inputs['Vector'])
-    vor2 = nt.nodes.new('ShaderNodeTexVoronoi'); vor2.feature = 'DISTANCE_TO_EDGE'; vor2.inputs['Scale'].default_value = 1.0 / (g * 0.26)
+    vor2 = nt.nodes.new('ShaderNodeTexVoronoi'); vor2.feature = 'DISTANCE_TO_EDGE'; vor2.inputs['Scale'].default_value = 1.0 / (g * 0.24)
     nt.links.new(tc.outputs['Object'], vor2.inputs['Vector'])
     # darker in the seams between scales, each scale's own shade a little different
     seam = nt.nodes.new('ShaderNodeMapRange'); seam.inputs['From Min'].default_value = 0.0; seam.inputs['From Max'].default_value = 0.08
@@ -494,9 +494,9 @@ def _viper_mat(bpy, name, p, g):
     # keeled scales: each cell domed, with a ridge along the body (stretched noise)
     dome = nt.nodes.new('ShaderNodeMath'); dome.operation = 'POWER'; dome.inputs[1].default_value = 0.6
     nt.links.new(vor2.outputs['Distance'], dome.inputs[0])
-    n1 = _bump(nt, b, dome.outputs['Value'], 0.8, g * 0.03)
-    b.inputs['Roughness'].default_value = 0.32
-    b.inputs['Coat Weight'].default_value = 0.35; b.inputs['Coat Roughness'].default_value = 0.2
+    n1 = _bump(nt, b, dome.outputs['Value'], 1.0, g * 0.035)
+    b.inputs['Roughness'].default_value = 0.45
+    b.inputs['Coat Weight'].default_value = 0.1; b.inputs['Coat Roughness'].default_value = 0.2
     b.inputs['Subsurface Weight'].default_value = 0.05
     return m
 
@@ -506,6 +506,12 @@ def dartfrog(bpy, name, p, kit):
     """A dyeing dart frog sitting, `size` (snout to vent, m, about 0.035), facing +y in its frame: green blotches on
     black, glossy wet skin."""
     s = p.get('size', 0.035)
+    if p.get('drop'):                                     # sit on whatever is below
+        p = dict(p); x, y, z = p['position']
+        bpy.context.view_layer.update(); dg = bpy.context.evaluated_depsgraph_get()
+        hit, loc, *_ = bpy.context.scene.ray_cast(dg, Vector((x, y, z + 1.0)), Vector((0, 0, -1)), distance=2.0)
+        if hit:
+            p['position'] = [x, y, loc.z - s * 0.02]
     bm = bmesh.new()
     # body: a plump ellipsoid tilted up at the front; head merged forward
     kit._sphere(bm, (0, 0, s * 0.32), (s * 0.34, s * 0.5, s * 0.28), 40)
@@ -655,3 +661,17 @@ def nightshade(bpy, name, p, kit):
     b.inputs['Subsurface Weight'].default_value = 0.15
     return [_obj(bpy, f'{name}-stalk', stalk, m_g, p), _obj(bpy, f'{name}-berries', berries, m_b, p),
             _obj(bpy, f'{name}-calyx', calyx, m_g, p), _obj(bpy, f'{name}-leaves', leaves, m_g, p)]
+
+
+def moss_pad(bpy, name, p, kit):
+    """A cushion of moss `radius` across, domed, its edge broken: a mound in ambientCG Moss004, displaced."""
+    import assets
+    rnd = random.Random(p.get('seed', 1)); R = p.get('radius', 0.15)
+    bm = bmesh.new()
+    g = bmesh.ops.create_uvsphere(bm, u_segments=64, v_segments=24, radius=1.0)
+    for v in g['verts']:
+        th = math.atan2(v.co.y, v.co.x)
+        k = 1 + 0.18 * noise.noise(Vector((math.cos(th) * 2.5, math.sin(th) * 2.5, p.get('seed', 1))))
+        v.co = Vector((v.co.x * R * k, v.co.y * R * k, max(v.co.z, -0.2) * R * 0.35))
+    m = assets.pbr(bpy, 'acg:Moss004', '2k', scale=0.25, displace=0.008, name=f'{name}-moss')
+    return [_obj(bpy, name, bm, m, p)]

@@ -116,7 +116,7 @@
     "on": [
      "prop0-kit"
     ],
-    "value": 0.68,
+    "value": 0.5,
     "rough": 0.85
    },
    {
@@ -142,19 +142,19 @@
       1.0
      ],
      [
-      -24.756,
-      2.056,
-      0.75
+      -24.706,
+      2.156,
+      0.6
      ],
      [
-      -23.747,
-      0.527,
-      0.5
+      -23.858,
+      0.686,
+      0.32
      ],
      [
-      -24.692,
-      0.432,
-      0.45
+      -24.612,
+      0.232,
+      0.28
      ],
      [
       -20.55,
@@ -185,19 +185,39 @@
     "fn": "mist",
     "position": [
      0.0,
-     21.0,
+     20.1,
      -0.2
     ],
     "size": [
      50.0,
-     37.0,
+     37.8,
      18.0
     ],
-    "density": 0.07,
-    "top": 0.5,
+    "density": 0.09,
+    "top": 0.35,
     "wisp": 2.5,
     "color": "#F2F4EA",
-    "anisotropy": 0.65
+    "anisotropy": 0.7
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_el",
+    "fn": "mist",
+    "position": [
+     0.0,
+     -3.0,
+     -0.2
+    ],
+    "size": [
+     20.0,
+     8.4,
+     6.0
+    ],
+    "density": 0.015,
+    "top": 0.5,
+    "color": "#F2F4EA",
+    "anisotropy": 0.7
    },
    {
     "kind": "kit",
@@ -1437,11 +1457,11 @@
      -0.45,
      -0.006
     ],
-    "cap": 0.085,
+    "cap": 0.075,
     "age": "convex",
     "seed": 1,
     "lean": [
-     0.01,
+     0.012,
      -0.01
     ],
     "torn": 0.0
@@ -1453,26 +1473,7 @@
     "fn": "amanita",
     "position": [
      -0.3,
-     -0.56,
-     -0.006
-    ],
-    "cap": 0.05,
-    "age": "young",
-    "seed": 2,
-    "lean": [
-     0.0,
-     -0.01
-    ],
-    "torn": 0.0
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     -0.52,
-     -0.6,
+     -0.58,
      -0.006
     ],
     "cap": 0.03,
@@ -1490,92 +1491,16 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     -0.62,
-     -0.38,
-     -0.006
-    ],
-    "cap": 0.1,
-    "age": "plane",
-    "seed": 5,
-    "lean": [
-     -0.015,
-     0.0
-    ],
-    "torn": 0.15
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     0.42,
-     -0.5,
-     -0.006
-    ],
-    "cap": 0.07,
-    "age": "convex",
-    "seed": 6,
-    "lean": [
-     0.01,
-     -0.005
-    ],
-    "torn": 0.0
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     0.56,
-     -0.38,
-     -0.006
-    ],
-    "cap": 0.105,
-    "age": "old",
-    "seed": 7,
-    "lean": [
-     0.02,
-     0.01
-    ],
-    "torn": 0.55
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     0.34,
-     -0.66,
-     -0.006
-    ],
-    "cap": 0.028,
-    "age": "button",
-    "seed": 8,
-    "lean": [
-     0,
-     0
-    ],
-    "torn": 0.0
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
      0.62,
-     -2.05,
+     -1.85,
      -0.006
     ],
-    "cap": 0.095,
+    "cap": 0.09,
     "age": "convex",
     "seed": 21,
     "lean": [
-     -0.012,
-     -0.01
+     -0.018,
+     -0.012
     ],
     "torn": 0.0
    },
@@ -1585,16 +1510,16 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     0.76,
-     -1.95,
+     0.78,
+     -1.75,
      -0.006
     ],
-    "cap": 0.065,
+    "cap": 0.06,
     "age": "young",
     "seed": 22,
     "lean": [
-     0.01,
-     0.005
+     0.015,
+     0.008
     ],
     "torn": 0.0
    },
@@ -1605,10 +1530,10 @@
     "fn": "amanita",
     "position": [
      0.52,
-     -2.2,
+     -2.0,
      -0.006
     ],
-    "cap": 0.035,
+    "cap": 0.032,
     "age": "button",
     "seed": 23,
     "lean": [
@@ -1623,18 +1548,18 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     0.88,
-     -2.15,
+     0.92,
+     -1.92,
      -0.006
     ],
-    "cap": 0.12,
+    "cap": 0.115,
     "age": "plane",
     "seed": 24,
     "lean": [
-     0.02,
-     -0.01
+     0.025,
+     -0.012
     ],
-    "torn": 0.25
+    "torn": 0.3
    },
    {
     "kind": "kit",
@@ -1643,15 +1568,15 @@
     "fn": "amanita",
     "position": [
      0.7,
-     -2.28,
+     -2.08,
      -0.006
     ],
     "cap": 0.045,
     "age": "young",
     "seed": 25,
     "lean": [
-     -0.008,
-     -0.012
+     -0.012,
+     -0.018
     ],
     "torn": 0.0
    },
@@ -1661,46 +1586,8 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     0.98,
-     -1.85,
-     -0.006
-    ],
-    "cap": 0.03,
-    "age": "button",
-    "seed": 26,
-    "lean": [
-     0,
-     0
-    ],
-    "torn": 0.0
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     1.1,
-     -2.05,
-     -0.006
-    ],
-    "cap": 0.08,
-    "age": "convex",
-    "seed": 27,
-    "lean": [
-     0.015,
-     0.0
-    ],
-    "torn": 0.0
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     0.82,
-     -0.28,
+     0.36,
+     -0.5,
      -0.006
     ],
     "cap": 0.055,
@@ -1714,8 +1601,8 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     0.95,
-     -0.45,
+     0.5,
+     -0.38,
      -0.006
     ],
     "cap": 0.04,
@@ -1725,41 +1612,11 @@
    },
    {
     "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     0.78,
-     -0.08,
-     -0.006
-    ],
-    "cap": 0.065,
-    "age": "plane",
-    "seed": 13,
-    "species": "phalloides"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     1.3,
-     -1.75,
-     -0.006
-    ],
-    "cap": 0.05,
-    "age": "convex",
-    "seed": 14,
-    "species": "phalloides"
-   },
-   {
-    "kind": "kit",
     "shape": "asset",
     "model": "tree_stump_02",
     "position": [
-     -0.5,
-     -2.05,
+     -0.42,
+     -2.25,
      -0.03
     ],
     "rotate": [
@@ -1767,7 +1624,7 @@
      0,
      35
     ],
-    "scale": 0.55,
+    "scale": 0.5,
     "res": "2k"
    },
    {
@@ -1776,8 +1633,8 @@
     "module": "poison_b_el",
     "fn": "viper",
     "position": [
-     -0.48,
-     -2.03,
+     -0.39999999999999997,
+     -2.23,
      0.3
     ],
     "drop": true,
@@ -1803,16 +1660,17 @@
     "module": "poison_b_el",
     "fn": "dartfrog",
     "position": [
-     0.3,
-     -2.45,
-     -0.004
+     -0.13999999999999996,
+     -2.37,
+     0.4
     ],
     "rotate": [
      0,
      0,
-     200
+     170
     ],
-    "size": 0.042
+    "size": 0.042,
+    "drop": true
    },
    {
     "kind": "kit",
@@ -1839,25 +1697,6 @@
     "module": "poison_b_el",
     "fn": "foxglove",
     "position": [
-     -1.95,
-     1.4,
-     -0.01
-    ],
-    "height": 1.05,
-    "lean": [
-     -0.04,
-     0.02
-    ],
-    "side": -90,
-    "seed": 2,
-    "bells": 20
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "foxglove",
-    "position": [
      1.35,
      1.25,
      -0.01
@@ -1870,24 +1709,6 @@
     "side": -110,
     "seed": 3,
     "bells": 22
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "nightshade",
-    "position": [
-     1.0,
-     -0.55,
-     -0.01
-    ],
-    "height": 0.42,
-    "lean": [
-     -0.06,
-     -0.03
-    ],
-    "seed": 5,
-    "berries": 6
    },
    {
     "kind": "kit",
@@ -1923,7 +1744,7 @@
     ],
     "model": "moss_01",
     "on": [
-     "prop39-kit"
+     "prop29-kit"
     ],
     "density": 1500,
     "up": 0.3,
@@ -3494,7 +3315,7 @@
     -0.3,
     0.5
    ],
-   "irradiance": 3.5,
+   "irradiance": 2.0,
    "color": "#EEF0E0",
    "orbit": {
     "azimuth_deg": -35,
@@ -3506,8 +3327,8 @@
   "scrim": {
    "type": "area",
    "size_m": [
-    4.0,
-    2.5
+    2.0,
+    1.0
    ],
    "target": [
     0.0,
@@ -3523,22 +3344,42 @@
    },
    "diffuse": 0.0
   },
-  "rim": {
+  "scrim2": {
    "type": "area",
    "size_m": [
-    0.6,
-    1.4
+    0.5,
+    1.5
    ],
    "target": [
     0.0,
     0.0,
-    1.0
+    1.2
+   ],
+   "irradiance": 0.4,
+   "color": "#D8DCC8",
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 55,
+    "distance_m": 2.5
+   },
+   "diffuse": 0.0
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    1.8
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.2
    ],
    "irradiance": 1.5,
    "color": "#FFE6B8",
    "orbit": {
     "azimuth_deg": 140,
-    "elevation_deg": 10,
+    "elevation_deg": 22,
     "distance_m": 2.0
    },
    "specular": 0.4
@@ -3561,22 +3402,22 @@
  ],
  "camera": {
   "position": [
-   0.2721,
-   -4.1905,
-   0.42
+   0.3709,
+   -4.8888,
+   0.5
   ],
   "target": [
-   0.0,
+   0.05,
    -0.3,
-   0.62
+   0.6
   ],
-  "lens_mm": 35.0,
+  "lens_mm": 50.0,
   "level": true,
-  "fstop": 8.0,
+  "fstop": 4.0,
   "focus": [
-   0.0,
-   -0.45,
-   0.5
+   0.05,
+   -0.51,
+   0.6
   ]
  },
  "sky": {
