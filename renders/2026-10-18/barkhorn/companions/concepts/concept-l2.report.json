@@ -1,0 +1,63 @@
+{
+ "shot": "studio/shots/barkhorn/companions/concept-l2.json",
+ "image": "renders/2026-10-18/barkhorn/companions/concepts/concept-l2.png",
+ "seconds": {
+  "build": 0.2,
+  "render": 70.9
+ },
+ "samples": 48,
+ "size": [
+  900,
+  720
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    450.0,
+    566.3
+   ],
+   "box_px": [
+    326,
+    506,
+    571,
+    634
+   ],
+   "depth_m": 1.418
+  },
+  "led#0": {
+   "part": "led",
+   "centre_px": [
+    450.0,
+    539.8
+   ],
+   "box_px": [
+    417,
+    527,
+    483,
+    553
+   ],
+   "depth_m": 1.418
+  },
+  "sheet#0": {
+   "part": "sheet",
+   "centre_px": [
+    450.0,
+    344.1
+   ],
+   "box_px": [
+    298,
+    148,
+    589,
+    564
+   ],
+   "depth_m": 1.418
+  }
+ }
+}

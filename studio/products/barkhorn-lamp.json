@@ -1,0 +1,146 @@
+{
+ "_note": "Bell for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-lamp/render/barkhorn-lamp.glb",
+ "origin_mm": [
+  216.0,
+  216.0,
+  0.0
+ ],
+ "materials": {
+  "accent": {
+   "preset": "satin_paint",
+   "color": "$accent",
+   "roughness": 0.45,
+   "specular": 0.4
+  },
+  "acrylic": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.025,
+   "roughness": 0.05
+  },
+  "acrylic-dense": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.006,
+   "roughness": 0.05
+  },
+  "acrylic-satin": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.025,
+   "roughness": 0.22
+  },
+  "aluminium": {
+   "preset": "metal",
+   "color": "#BFC1C2",
+   "roughness": 0.35
+  },
+  "cord": {
+   "preset": "glass",
+   "color": "#F2F2F0",
+   "roughness": 0.15
+  },
+  "led": {
+   "preset": "emit",
+   "color": "#FFD9A8",
+   "strength": 0.0
+  },
+  "opal": {
+   "preset": "frosted",
+   "color": "#F6F3EE",
+   "absorb": "#F1E6D6",
+   "roughness": 0.5,
+   "radius": 0.01,
+   "clear": 0.05
+  },
+  "pcb": {
+   "preset": "satin_paint",
+   "color": "#1E3A2A",
+   "roughness": 0.5
+  },
+  "rubber": {
+   "preset": "rubber",
+   "color": "#161616"
+  }
+ },
+ "assign": [
+  {
+   "match": "knob",
+   "material": "accent"
+  },
+  {
+   "match": "foot-lower-stack|stem",
+   "material": "acrylic"
+  },
+  {
+   "match": "shade",
+   "material": "acrylic-dense"
+  },
+  {
+   "match": "cover",
+   "material": "acrylic-satin"
+  },
+  {
+   "match": "hub|cap",
+   "material": "aluminium"
+  },
+  {
+   "match": "cord",
+   "material": "cord"
+  },
+  {
+   "match": "strip",
+   "material": "led"
+  },
+  {
+   "match": "sleeve",
+   "material": "opal"
+  },
+  {
+   "match": "dimmer",
+   "material": "pcb"
+  },
+  {
+   "match": "bumpons",
+   "material": "rubber"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#F2A29C",
+   "accent": "#7A1A1C"
+  },
+  "dust": {
+   "deep": "#F2B184",
+   "accent": "#8C3B14"
+  },
+  "acid": {
+   "deep": "#F2D06B",
+   "accent": "#9A6A12"
+  },
+  "poison": {
+   "deep": "#B2C9A2",
+   "accent": "#2E4A2C"
+  },
+  "ice": {
+   "deep": "#B5D9EE",
+   "accent": "#24557E"
+  },
+  "haze": {
+   "deep": "#BEADD8",
+   "accent": "#3F2A5E"
+  },
+  "fog": {
+   "deep": "#F7F8F7",
+   "accent": "#E7E6E1"
+  },
+  "smoke": {
+   "deep": "#8A888E",
+   "accent": "#141316"
+  }
+ }
+}

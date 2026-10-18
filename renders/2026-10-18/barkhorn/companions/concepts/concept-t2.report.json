@@ -1,0 +1,147 @@
+{
+ "shot": "studio/shots/barkhorn/companions/concept-t2.json",
+ "image": "renders/2026-10-18/barkhorn/companions/concepts/concept-t2.png",
+ "seconds": {
+  "build": 0.2,
+  "render": 118.3
+ },
+ "samples": 48,
+ "size": [
+  900,
+  720
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "arm#0": {
+   "part": "arm",
+   "centre_px": [
+    557.7,
+    288.7
+   ],
+   "box_px": [
+    388,
+    180,
+    746,
+    430
+   ],
+   "depth_m": 0.993
+  },
+  "bearing#0": {
+   "part": "bearing",
+   "centre_px": [
+    422.7,
+    444.0
+   ],
+   "box_px": [
+    383,
+    372,
+    464,
+    520
+   ],
+   "depth_m": 0.903
+  },
+  "feet#0": {
+   "part": "feet",
+   "centre_px": [
+    494.7,
+    444.3
+   ],
+   "box_px": [
+    195,
+    282,
+    831,
+    696
+   ],
+   "depth_m": 0.94
+  },
+  "platter#0": {
+   "part": "platter",
+   "centre_px": [
+    422.7,
+    357.2
+   ],
+   "box_px": [
+    141,
+    209,
+    751,
+    590
+   ],
+   "depth_m": 0.903
+  },
+  "plinth-0#0": {
+   "part": "plinth-0",
+   "centre_px": [
+    450.0,
+    419.4
+   ],
+   "box_px": [
+    39,
+    230,
+    918,
+    764
+   ],
+   "depth_m": 0.927
+  },
+  "plinth-1#0": {
+   "part": "plinth-1",
+   "centre_px": [
+    450.0,
+    389.7
+   ],
+   "box_px": [
+    39,
+    207,
+    918,
+    723
+   ],
+   "depth_m": 0.927
+  },
+  "pod#0": {
+   "part": "pod",
+   "centre_px": [
+    146.1,
+    375.8
+   ],
+   "box_px": [
+    71,
+    279,
+    224,
+    485
+   ],
+   "depth_m": 0.959
+  },
+  "pulley#0": {
+   "part": "pulley",
+   "centre_px": [
+    146.1,
+    309.8
+   ],
+   "box_px": [
+    111,
+    283,
+    182,
+    338
+   ],
+   "depth_m": 0.959
+  },
+  "spindle#0": {
+   "part": "spindle",
+   "centre_px": [
+    422.7,
+    324.4
+   ],
+   "box_px": [
+    413,
+    306,
+    433,
+    343
+   ],
+   "depth_m": 0.903
+  }
+ }
+}

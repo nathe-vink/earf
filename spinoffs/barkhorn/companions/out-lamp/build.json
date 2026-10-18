@@ -1,0 +1,20 @@
+{
+ "product": "barkhorn-lamp",
+ "title": "Bell",
+ "parts": 20,
+ "seconds": 31,
+ "sheets": {
+  "cast-acrylic-20": 1,
+  "cast-acrylic-6": 1
+ },
+ "budget_usd": {
+  "cut": 47,
+  "lathe": 300,
+  "formed": 139,
+  "buy": 77
+ },
+ "options_usd": {},
+ "checks_ok": true,
+ "drawings": "spinoffs/barkhorn/companions/out-lamp/drawings/barkhorn-lamp-sheets.pdf",
+ "render": "spinoffs/barkhorn/companions/out-lamp/render/barkhorn-lamp.glb"
+}
