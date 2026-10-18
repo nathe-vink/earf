@@ -11,8 +11,9 @@ import math, random
 
 from common import finish, kit, portrait_of, shot as frame, tilt_shift
 
-SUN = (2.45, 5.35, 1.1, 0.8)                    # the sun: x, y, z of its centre, its radius (m)
-FLOOR = '#8E78AA'
+SUN = (1.25, 6.2, 1.0, 1.15)
+MOON = [-2.15, 6.7, 2.05]                    # the sun: x, y, z of its centre, its radius (m)
+FLOOR = '#7C6699'
 SPEAKER = ['[!p]*', 'po*']                        # the speaker's parts: everything but the set's pieces (prop<i>-kit)
 
 
@@ -84,14 +85,15 @@ def crescent(R, k=0.8, d=0.42, n=48):
     return [[round(u, 4), round(v, 4)] for u, v in outer + inner]
 
 
-def backcloth(y=7.2, x0=-11.0, x1=11.0, z1=5.5, hb=0.3, top=3.0):
-    """Strips of paper pasted up the back wall, peach at the horizon to violet by `top`, each overlapping the next."""
+def backcloth(y=7.2, x0=-11.0, x1=11.0, z1=5.5, hb=0.3, base=0.7, top=2.9):
+    """Strips of paper pasted up the back wall, peach at `base` (the horizon) to violet by `top`, each overlapping the
+    next."""
     out = []
     stops = ['#F6C9A8', '#F0B5AE', '#D8A0C2', '#B48CC6', '#8D70B2', '#6A5498']
     bands = int(math.ceil(z1 / hb))
     for i in range(bands):
         z = i * hb
-        c = grade(stops, (z + hb / 2) / top)
+        c = grade(stops, (z + hb / 2 - base) / (top - base))
         out.append(kit('box', 'paper', c, size=[x1 - x0, 0.01, hb + 0.03], position=[(x0 + x1) / 2, y + 0.012 * (i % 2), z - 0.015]))
     return out
 
@@ -107,10 +109,10 @@ def tulle_band(xc, y, z, w, h, seed, color='#9C72BC', alpha=0.62, top=4.8):
 
 
 def river():
-    pts = [[2.6, 2.3, 0.0], [2.2, 1.6, 0.0], [1.35, 1.0, 0.0], [1.25, 0.15, 0.0], [1.7, -0.7, 0.0], [1.35, -1.6, 0.0], [0.8, -2.6, 0.0]]
+    pts = [[2.6, 2.0], [1.6, 1.4], [1.05, 0.7], [1.25, -0.1], [1.0, -0.8], [0.95, -1.45]]
     # a tube's width lies along the vertical, so a ribbon lying flat is a thin one stretched sideways (flat > 1)
-    return [kit('tube', 'satin', '#E7C3CF', points=[[x, y, 0.006] for x, y, _ in pts],
-                radius=[0.0015, 0.0022, 0.0032, 0.0042, 0.0052, 0.0062, 0.0075], flat=40.0, sides=24, res=12)]
+    return [kit('tube', 'satin', '#E7C3CF', points=[[x, y, 0.006] for x, y in pts],
+                radius=[0.0018, 0.0026, 0.0036, 0.0046, 0.0058, 0.007], flat=40.0, sides=24, res=12)]
 
 
 def props():
@@ -118,35 +120,38 @@ def props():
     P = []
     P.append(kit('box', 'paper', FLOOR, size=[16.0, 14.0, 0.02], position=[0.0, 1.0, -0.02]))
     P += backcloth()
-    # the flats, front to back: deep violet in front of the speaker, lilac, rose and peach toward the sun
-    hills = ['#4E3870', '#6E5494', '#8E74B0', '#AE92C4', '#D2AEC8', '#EBC3BA']
-    P.append(flat(-5.0, -1.0, -1.0, 0.16, 0.06, 11, hills[0], waves=1.2, ends=(0, 0.5)))
-    P.append(flat(-5.5, 1.3, 1.25, 0.34, 0.12, 21, hills[1], waves=2.0, ends=(0, 0.7), trees=[(-1.5, 0.08, 0.15, 0.15), (-1.08, 0.06, 0.1, 0.1)]))
-    P.append(flat(1.9, 6.0, 1.45, 0.30, 0.12, 22, hills[1], waves=1.6, ends=(0.6, 0)))
-    P.append(flat(-6.0, 6.0, 2.5, 0.58, 0.16, 31, hills[2], waves=3.0, trees=[(-1.5, 0.06, 0.06, 0.2), (-1.33, 0.05, 0.05, 0.15), (1.3, 0.07, 0.12, 0.12), (3.3, 0.05, 0.065, 0.22), (3.47, 0.04, 0.055, 0.16)]))
-    P.append(flat(-6.5, 6.5, 3.6, 0.82, 0.2, 41, hills[3], waves=2.4, trees=[(-2.6, 0.05, 0.06, 0.18), (0.9, 0.05, 0.1, 0.1)]))
+    # the flats, front to back: deep violet at the lens, lilac, rose and peach toward the sun; seen from the
+    # speaker's height each range rises a little above the one before it
+    hills = ['#4A346C', '#654B8C', '#8468A8', '#A587BE', '#C9A3C4', '#E6B9B4']
+    P.append(flat(-3.5, -0.2, -1.5, 0.48, 0.08, 11, hills[0], waves=1.2, ends=(0, 0.9), skew=-0.3))
+    P.append(flat(0.75, 4.5, -1.6, 0.36, 0.07, 12, hills[0], waves=1.0, ends=(0.6, 0)))
+    P.append(flat(-5.5, 0.95, 1.4, 0.3, 0.08, 21, hills[1], waves=2.2, ends=(0, 0.6)))
+    P.append(flat(1.55, 6.0, 1.55, 0.27, 0.07, 22, hills[1], waves=1.6, ends=(0.55, 0)))
+    P.append(flat(-6.0, 6.0, 2.5, 0.45, 0.1, 31, hills[2], waves=3.0,
+                  trees=[(-1.75, 0.06, 0.07, 0.24), (1.42, 0.07, 0.075, 0.27), (1.6, 0.05, 0.06, 0.19)]))
+    P.append(flat(-6.5, 6.5, 3.6, 0.6, 0.12, 41, hills[3], waves=2.4, trees=[(-1.4, 0.05, 0.12, 0.12), (2.5, 0.05, 0.1, 0.1)]))
     # the far flats in tissue, so the sun behind them shows through their edges
-    P.append(flat(-6.5, 6.5, 4.7, 0.8, 0.2, 51, hills[4], waves=2.0, skew=-0.25, material='tissue'))
-    P.append(flat(-7.0, 7.0, 5.7, 0.55, 0.16, 61, hills[5], waves=1.6, material='tissue'))
-    # the sun, a tissue disc lit from behind, sunk behind the flat at 4.7 and hung on two threads
+    P.append(flat(-7.0, 7.0, 4.65, 0.72, 0.12, 51, hills[4], waves=2.0, material='tissue'))
+    P.append(flat(-7.5, 7.5, 5.6, 0.82, 0.1, 61, hills[5], waves=1.6, material='tissue'))
+    # the sun, a tissue disc lit from behind, sunk behind the last flat and hung on two threads
     P.append(disc(sx, sy, sz, sr, 'tissue', '#FFC08A', emit=0.9, emit_color='#FFB070'))
     for dx in (-sr * 0.55, sr * 0.55):
         a = [sx + dx, sy, sz + math.sqrt(sr * sr - dx * dx) - 0.02]
-        P.append(kit('thread', 'paper', '#EADFE6', a=a, b=[a[0], sy, 5.6], radius=0.0012))
+        P.append(kit('thread', 'paper', '#EADFE6', a=a, b=[a[0], sy, 6.0], radius=0.0012))
     # three bands of tulle across the sun, staggered as layers drift, shorter as they rise
-    P += tulle_band(sx - 0.12, sy - 0.35, sz - 0.13, 2.1, 0.19, 71)
-    P += tulle_band(sx + 0.1, sy - 0.25, sz + 0.14, 1.95, 0.18, 72)
-    P += tulle_band(sx - 0.05, sy - 0.15, sz + 0.41, 1.8, 0.17, 73)
-    # scrims of tulle hung between the flats: the haze that pales each range behind the last
-    for y, top, a in ((3.05, 1.5, 0.14), (4.15, 1.9, 0.14)):
-        P.append(kit('drape', 'tulle', '#EBC6CF', size=[14.0, top + 0.02], folds=22, amplitude=0.012, noise=0.2, thickness=0.0,
-                     res=200, seed=int(y * 10), alpha=a, emit=0.35, emit_color='#F2B9A6', position=[0.0, y, top]))
+    P += tulle_band(sx - 0.17, sy - 0.35, sz - 0.05, 2.25, 0.24, 71, top=6.0)
+    P += tulle_band(sx - 0.05, sy - 0.25, sz + 0.3, 2.1, 0.22, 72, top=6.0)
+    P += tulle_band(sx - 0.12, sy - 0.15, sz + 0.65, 1.9, 0.2, 73, top=6.0)
+    # scrims of tulle hung between the flats, their tops out of sight: the haze that pales each range behind the last
+    for y, a in ((3.05, 0.12), (4.1, 0.12)):
+        P.append(kit('drape', 'tulle', '#EBC6CF', size=[15.0, 4.0], folds=22, amplitude=0.003, noise=0.1, thickness=0.0,
+                     res=200, seed=int(y * 10), alpha=a, emit=0.3, emit_color='#F2B9A6', position=[0.0, y, 3.98]))
     P += river()
-    # the moon, a paper crescent waiting in the wings for its cue
-    moon = crescent(0.34)
-    P.append(kit('extrude', 'card', '#F3E6D6', outline=moon, depth=0.01, ease=0.002, position=[-1.6, 6.6, 1.75],
+    # the moon, a paper crescent already up, waiting for its cue
+    moon = crescent(0.3)
+    P.append(kit('extrude', 'card', '#F3E6D6', outline=moon, depth=0.01, ease=0.002, position=MOON,
                  emit=0.25, emit_color='#FFF1DC'))
-    P.append(kit('thread', 'paper', '#EADFE6', a=[-1.6, 6.6, 2.07], b=[-1.6, 6.6, 6.0], radius=0.0012))
+    P.append(kit('thread', 'paper', '#EADFE6', a=[MOON[0], MOON[1], MOON[2] + 0.29], b=[MOON[0], MOON[1], 6.0], radius=0.0012))
     return P
 
 
@@ -154,43 +159,43 @@ def lights():
     sx, sy, sz, sr = SUN
     return {
         # the sun: behind the tissue disc, low and warm, so the acrylic glows through and throws violet forward
-        'sun': {'type': 'area', 'size_m': [1.6, 1.2], 'position': [sx + 0.3, sy + 0.35, sz + 0.75], 'target': [0.0, 0.0, 0.75],
+        'sun': {'type': 'area', 'size_m': [1.6, 1.2], 'position': [sx - 0.2, sy + 0.3, sz + 0.5], 'target': [0.0, 0.0, 0.8],
                 'irradiance': 7.0, 'color': '#FFB27C', 'camera': False},
         # its glow on the backcloth round the disc
-        'halo': {'type': 'point', 'position': [sx, sy + 0.9, sz], 'power_w': 120, 'color': '#FFB98A', 'radius_m': 0.4},
-        # the evening's last light on the speaker's face, soft and lilac, and its glow from within
-        'face': {'type': 'area', 'size_m': [1.6, 1.6], 'orbit': {'azimuth_deg': -45, 'elevation_deg': 28, 'distance_m': 4.0},
-                 'target': [0.0, 0.0, 0.7], 'irradiance': 3.8, 'color': '#E6D3F4', 'camera': False, 'receivers': SPEAKER},
+        'halo': {'type': 'point', 'position': [sx, sy + 0.6, sz + 0.2], 'power_w': 110, 'color': '#FFB98A', 'radius_m': 0.4},
+        # the key: the dusk sky's soft lilac light on the speaker's face, from the front left, on the speaker alone
+        'face': {'type': 'area', 'size_m': [1.4, 1.4], 'orbit': {'azimuth_deg': -38, 'elevation_deg': 18, 'distance_m': 3.2},
+                 'target': [0.0, 0.0, 0.7], 'irradiance': 3.6, 'color': '#E9D8F4', 'camera': False, 'receivers': SPEAKER},
         'glow': {'type': 'area', 'size_m': [0.7, 0.32], 'position': [0.0, 0.66, 1.12], 'target': [0.0, 0.0, 1.1],
                  'irradiance': 4.0, 'color': '#FFC9A0', 'specular': 0, 'transmission': False, 'receivers': SPEAKER},
-        # the sun's edge on the speaker's left side and top, from behind
-        'rim': {'type': 'area', 'size_m': [1.2, 1.2], 'orbit': {'azimuth_deg': -150, 'elevation_deg': 28, 'distance_m': 3.5},
-                'target': [0.0, 0.0, 0.9], 'irradiance': 8.0, 'color': '#FFB98E', 'camera': False},
+        # the sun's edge down both sides and over the horn, from behind
+        'rim': {'type': 'area', 'size_m': [1.0, 1.4], 'orbit': {'azimuth_deg': -150, 'elevation_deg': 18, 'distance_m': 3.0},
+                'target': [0.0, 0.0, 0.8], 'irradiance': 8.0, 'color': '#FFB98E', 'camera': False, 'receivers': SPEAKER},
+        'rim2': {'type': 'area', 'size_m': [1.0, 1.4], 'orbit': {'azimuth_deg': 150, 'elevation_deg': 18, 'distance_m': 3.0},
+                 'target': [0.0, 0.0, 0.8], 'irradiance': 6.0, 'color': '#FFB27C', 'camera': False, 'receivers': SPEAKER},
         # the sun through the horn, from behind and low, on the speaker alone
-        'through': {'type': 'area', 'size_m': [0.8, 0.8], 'orbit': {'azimuth_deg': 165, 'elevation_deg': 14, 'distance_m': 3.0},
+        'through': {'type': 'area', 'size_m': [0.8, 0.8], 'orbit': {'azimuth_deg': 172, 'elevation_deg': 12, 'distance_m': 3.0},
                     'target': [0.0, 0.0, 1.2], 'irradiance': 10.0, 'color': '#FFB27C', 'camera': False, 'receivers': SPEAKER},
         # the sun grazing the floor, through the speaker's clear foot: violet light thrown forward onto the paper
-        'low': {'type': 'area', 'size_m': [0.9, 0.4], 'orbit': {'azimuth_deg': 168, 'elevation_deg': 6, 'distance_m': 2.2},
-                'target': [0.0, 0.0, 0.2], 'irradiance': 8.0, 'color': '#FFC090', 'camera': False, 'spread_deg': 45},
+        'low': {'type': 'area', 'size_m': [0.9, 0.4], 'orbit': {'azimuth_deg': 172, 'elevation_deg': 6, 'distance_m': 2.2},
+                'target': [0.0, 0.0, 0.2], 'irradiance': 2.0, 'color': '#FFC090', 'camera': False, 'spread_deg': 45},
         # the dusk sky overhead, lilac
-        'sky': {'type': 'area', 'size_m': [5.0, 4.0], 'orbit': {'azimuth_deg': -15, 'elevation_deg': 55, 'distance_m': 7.0},
-                'target': [0.0, 0.5, 0.4], 'irradiance': 0.4, 'color': '#C4B2E8', 'camera': False},
+        'sky': {'type': 'area', 'size_m': [6.0, 4.0], 'orbit': {'azimuth_deg': -10, 'elevation_deg': 55, 'distance_m': 7.0},
+                'target': [0.0, 1.0, 0.4], 'irradiance': 0.5, 'color': '#C4B2E8', 'camera': False},
     }
 
 
 def shot():
-    st = {'kind': 'stage', 'kit_scale': 12.0, 'props': props()}
-    cam = tilt_shift(elevation=17, azimuth=-12, distance=7.8, lens=55, target=(0.85, 0.8, 0.78), focus=(0.0, -0.2, 0.8),
-                     fstop=4.0, miniature=12, shift_y=0.04)
+    st = {'kind': 'stage', 'kit_scale': 6.0, 'props': props()}
+    # level with the speaker (the owner, 2026-10-18), its front turned toward the sun
+    cam = tilt_shift(elevation=2.5, azimuth=0.0, distance=5.2, lens=65, target=(0.36, 0.0, 0.75), focus=(0.0, -0.25, 0.7),
+                     fstop=5.6, miniature=6)
     sky = {'kind': 'gradient', 'zenith': '#4A3A6A', 'horizon': '#8C6E9A', 'ground': '#2E2440', 'strength': 0.35}
     return frame('haze', st, lights(), cam, 'barkhorn, Haze, dusk in paper and tulle', sky=sky,
                  fin=finish(bloom=0.3, bloom_px=50, threshold=0.75, saturation=0.15, lift=0.04, lift_color='#3B2A55',
-                            vignette=0.22), rotate_z=-14.0, exposure=0.3)
+                            vignette=0.22), rotate_z=22.0, exposure=0.3)
 
 
 def portrait():
-    # the sun stacked above the speaker: the camera comes round to the right and the speaker turns to face it
-    s = portrait_of(shot(), **tilt_shift(elevation=16, azimuth=-20, distance=8.6, lens=93, target=(0.45, 1.6, 1.0),
-                                         focus=(0.0, -0.2, 0.8), fstop=4.0, miniature=12, shift_y=-0.085))
-    s['product']['instances'][0]['rotate_z'] = -18.0
-    return s
+    return portrait_of(shot(), **tilt_shift(elevation=2.0, azimuth=0.0, distance=5.2, lens=104, target=(0.27, 0.0, 0.86),
+                                            focus=(0.0, -0.25, 0.7), fstop=8.0, miniature=6))
