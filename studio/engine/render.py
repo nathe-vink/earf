@@ -243,8 +243,8 @@ def main():
     if cy.use_denoising:
         cy.denoiser = 'OPENIMAGEDENOISE'; cy.denoising_input_passes = 'RGB_ALBEDO_NORMAL'
     cy.max_bounces = R.get('bounces', 12); cy.diffuse_bounces = min(cy.max_bounces, R.get('diffuse_bounces', 6))
-    # glossy and transmission depth: 8 unless the shot asks (round 31: light through nested 20 mm acrylic walls and
-    # their total internal reflections died at 8, a black segment along a lit edge)
+    # light trapped in a thick sheet (20 mm acrylic, seen through its edge) bounces many times before it gets out; cut
+    # short, the edge renders black (round 31's critics), so a shot may raise these
     cy.glossy_bounces = min(cy.max_bounces, R.get('glossy_bounces', 8))
     cy.transmission_bounces = min(cy.max_bounces, R.get('transmission_bounces', 8))
     cy.volume_bounces = R.get('volume_bounces', 2)      # a material with a volume (frosted) scatters inside it
