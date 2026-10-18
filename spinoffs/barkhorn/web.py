@@ -1150,6 +1150,9 @@ def build():
                                             {'key': 'Referrer-Policy', 'value': 'strict-origin-when-cross-origin'}]},
             {'source': '/img/(.*)', 'headers': [{'key': 'Cache-Control', 'value': 'public, max-age=3600, must-revalidate'}]},
         ],
+        # only main deploys: round 31's twenty-odd working branches each built a preview on every push, until the
+        # plan's daily allowance ran out and main could not deploy (Vercel: "Deployment rate limited")
+        'git': {'deploymentEnabled': {'r31-*': False, 'r32-*': False, 'claude/*': False}},
     }, open(os.path.join(SITE, 'vercel.json'), 'w'), indent=2)
     n = sum(len(f) for _, _, f in os.walk(SITE))
     kb = int(subprocess.run(['du', '-sk', SITE], capture_output=True, text=True).stdout.split()[0])
