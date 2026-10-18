@@ -1,0 +1,163 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-orange",
+  "instances": [
+   {
+    "flavour": "cloud-orange",
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": -34,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ],
+  "cutaway": {
+   "box_m": [
+    0.0,
+    -0.6,
+    0.03,
+    0.45,
+    0.0,
+    0.95
+   ],
+   "skip": "waveguide*|post-*|hf*|tie-rod*|feet*|cloth-disc*|woofer*|lead*|cable*|gland*",
+   "sections": [
+    {
+     "match": "-",
+     "color": "#000000"
+    }
+   ]
+  }
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#D9E4D3",
+  "width": 6.0,
+  "front": 5.0,
+  "depth": 1.5,
+  "radius": 1.2,
+  "height": 4.0
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": -35,
+    "elevation_deg": 40,
+    "distance_m": 4.0
+   },
+   "target": [
+    0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 2.2,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.5
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 18,
+    "distance_m": 4.0
+   },
+   "target": [
+    0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 1.0,
+   "color": "#FFF7EA"
+  },
+  "wash": {
+   "type": "area",
+   "size_m": [
+    5.0,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -1.0,
+    2.9
+   ],
+   "target": [
+    0.0,
+    0.5,
+    1.2
+   ],
+   "irradiance": 0.8,
+   "color": "#FFF7EA"
+  },
+  "glow": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    0.0,
+    0.66,
+    1.12
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "barkhorn, Poison, cut open (finals31, orange)",
+ "size": [
+  1200,
+  1500
+ ],
+ "camera": {
+  "position": [
+   1.25,
+   -2.45,
+   1.3
+  ],
+  "target": [
+   0.08,
+   -0.02,
+   0.62
+  ],
+  "lens_mm": 74,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#C4C2BE",
+  "horizon": "#CFCDC8",
+  "ground": "#5A5650",
+  "strength": 0.7
+ }
+}
