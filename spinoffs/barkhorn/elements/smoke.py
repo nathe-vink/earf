@@ -40,8 +40,8 @@ def trees(n=22, seed=3):
             continue
         t.append([round(x, 2), round(y, 2), round(rnd.uniform(0.10, 0.42), 3), 18, round(rnd.uniform(0, 6.0), 1),
                   rnd.randrange(360), len(t) + 1])
-    return [piece('ext', module='smoke_el', fn='trunks', trees=t, texture='pine_bark', res='2k', bump=4.0,
-                  tint='#1E1A17', tint_mix=0.6)]
+    return [piece('ext', module='smoke_el', fn='trunks', trees=t, texture='pine_bark', res='2k', bump=5.0,
+                  tint='#1E1A17', tint_mix=0.3)]
 
 
 def shot():
@@ -49,26 +49,26 @@ def shot():
                     res='2k', tint='#4A3626', tint_mix=0.3),
              scatter(['dry_branches_medium_01'], 5, [-5.0, 4.0, 7.0, 12.0], avoid=[(0.0, 0.0, 2.5)], seed=4, res='1k', z=-0.015),
              # the smoke hangs between the trunks; beyond it the photographed wood shows through the mist
-             smoke((0.5, 8.0, 0.0), (30.0, 14.0, 12.0), 0.15, 1, scale=3.0, cut=0.4, soft=0.3, anisotropy=0.85,
-                   fade=[0.12, 0.15, 0.4], floor=0.06),
+             smoke((0.5, 7.0, 0.0), (30.0, 12.0, 12.0), 0.15, 1, scale=3.0, cut=0.4, soft=0.3, anisotropy=0.85,
+                   fade=[0.12, 0.15, 0.4], floor=0.06, ground=0.18, ground_h=1.6),
              # the crowns overhead, out of frame: the sun comes down through their gaps in shafts
              piece('ext', module='smoke_el', fn='canopy', size=[70.0, 70.0], z=13.0, position=[0.0, 12.0], scale=1.4,
                    open=0.35, seed=2),
              piece('ext', module='smoke_el', fn='canopy', size=[70.0, 70.0], z=10.0, position=[0.0, 12.0], scale=0.9,
                    open=0.65, seed=5)]
     props += trees()
-    cam = camera(height=0.8, distance=7.2, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=0.14)
+    cam = camera(height=0.7, distance=7.2, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=0.14)
     lights = {
         # the open sky behind the camera, cool, lifting the shadow side: the woofer and lining just read in the tint
-        'skyfill': area(-20, 5, 2.4, 0.6, '#A9B4C2', (1.2, 1.2), (0.0, 0.0, 0.6)),
+        'skyfill': area(-20, 5, 2.4, 2.0, '#A9B4C2', (4.0, 3.0), (0.0, 0.0, 0.6)),
         # the sunlit litter and the sky bounce into its face: low, broad and cool-neutral
-        'bounce': area(-25, 12, 2.0, 3.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.6)),
+        'bounce': area(-25, 12, 2.0, 7.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.6)),
         # the sun's light off the smoke behind, thin warm rims down both edges and over the top
-        'kicker': {**area(-150, 22, 3.0, 20.0, '#FFB978', (0.3, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
+        'kicker': {**area(-150, 22, 3.0, 42.0, '#FFB978', (0.5, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
         'kicker_r': {**area(150, 14, 3.0, 26.0, '#FFB978', (0.6, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
     }
     return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.15), 'barkhorn, Smoke, woodsmoke at dawn',
-                 sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.01), samples=512, exposure=-0.3,
+                 sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.02), samples=512, exposure=0.0,
                  fin=finish(contrast=0.04, clarity=0.03, bloom=0.04, bloom_px=40, threshold=0.85, vignette=0.25))
 
 

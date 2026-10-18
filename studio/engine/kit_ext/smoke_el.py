@@ -79,7 +79,18 @@ def woodsmoke(bpy, name, p, kit):
     m5 = nt.nodes.new('ShaderNodeMath'); m5.operation = 'MULTIPLY_ADD'
     nt.links.new(m2.outputs[0], m5.inputs[0]); m5.inputs[1].default_value = p.get('floor', 0.02)
     nt.links.new(m4.outputs[0], m5.inputs[2])
-    nt.links.new(m5.outputs[0], vol.inputs['Density'])
+    dens = m5.outputs[0]
+    if p.get('ground'):
+        # a ground-hugging layer: woodsmoke pools low in still morning air, densest at the ground, gone by ground_h
+        oz = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], oz.inputs['Vector'])
+        gr = nt.nodes.new('ShaderNodeMapRange'); gr.clamp = True
+        gr.inputs['From Min'].default_value = 0.0; gr.inputs['From Max'].default_value = p.get('ground_h', 1.5)
+        gr.inputs['To Min'].default_value = p['ground']; gr.inputs['To Max'].default_value = 0.0
+        nt.links.new(oz.outputs['Z'], gr.inputs['Value'])
+        gm = nt.nodes.new('ShaderNodeMath'); gm.operation = 'MULTIPLY_ADD'
+        nt.links.new(m1.outputs[0], gm.inputs[0]); nt.links.new(gr.outputs['Result'], gm.inputs[1]); nt.links.new(dens, gm.inputs[2])
+        dens = gm.outputs[0]
+    nt.links.new(dens, vol.inputs['Density'])
     nt.links.new(vol.outputs['Volume'], out.inputs['Volume'])
     me.materials.append(m)
     ob.visible_shadow = True

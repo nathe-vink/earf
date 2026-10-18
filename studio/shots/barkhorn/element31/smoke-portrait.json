@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.01
+     -0.02
     ],
     "rotate_z": 18.0,
     "hide": [
@@ -74,12 +74,12 @@
     "fn": "woodsmoke",
     "position": [
      0.5,
-     8.0,
+     7.0,
      0.0
     ],
     "size": [
      30.0,
-     14.0,
+     12.0,
      12.0
     ],
     "density": 0.15,
@@ -93,7 +93,9 @@
      0.15,
      0.4
     ],
-    "floor": 0.06
+    "floor": 0.06,
+    "ground": 0.18,
+    "ground_h": 1.6
    },
    {
     "kind": "kit",
@@ -338,9 +340,9 @@
     ],
     "texture": "pine_bark",
     "res": "2k",
-    "bump": 4.0,
+    "bump": 5.0,
     "tint": "#1E1A17",
-    "tint_mix": 0.6
+    "tint_mix": 0.3
    }
   ]
  },
@@ -348,8 +350,8 @@
   "skyfill": {
    "type": "area",
    "size_m": [
-    1.2,
-    1.2
+    4.0,
+    3.0
    ],
    "orbit": {
     "azimuth_deg": -20,
@@ -361,7 +363,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 0.6,
+   "irradiance": 2.0,
    "color": "#A9B4C2"
   },
   "bounce": {
@@ -380,13 +382,13 @@
     0.0,
     0.6
    ],
-   "irradiance": 3.0,
+   "irradiance": 7.0,
    "color": "#C9BBA8"
   },
   "kicker": {
    "type": "area",
    "size_m": [
-    0.3,
+    0.5,
     2.4
    ],
    "orbit": {
@@ -399,7 +401,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 20.0,
+   "irradiance": 42.0,
    "color": "#FFB978",
    "receivers": [
     "left",
@@ -457,7 +459,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": -0.3,
+  "exposure": 0.0,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Smoke, woodsmoke at dawn (4:5)",
@@ -469,7 +471,7 @@
   "position": [
    -2.4625,
    -6.7658,
-   0.8
+   0.7
   ],
   "target": [
    0.0,
