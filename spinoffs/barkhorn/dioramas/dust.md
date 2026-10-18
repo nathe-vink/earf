@@ -1,0 +1,111 @@
+# Dust: golden hour in a suede desert (round 31)
+
+The set is `dust.py`; the frames are `studio/shots/barkhorn/diorama31/dust.json` and `dust-portrait.json`.
+
+## The owner, verbatim (relayed by the coordinator during the rounds)
+
+- "Dust should have something like a tumbleweed too, with the big flat desert plateaus in the back."
+- "It's important to stay on the theme of earth and placing the speakers in their respective atmospheres, though the
+  yeti and witch ideas are fun, subtle nods."
+- "For the dioramas, they are looking lackluster and bleak so far. They don't need to be busy per se, but they look both
+  empty and cluttered at the same time. It's also hard to see the speakers themselves in some of them. ... All of them
+  should be looking at the speaker in a way that's more level with the speaker, with the speaker turned slightly in
+  either direction depending on the setting."
+
+## Concept
+
+A desert at golden hour, built from suede, corduroy and sand, seen level with the speaker. Behind it, broad flat-topped
+plateaus of cut suede and one slim butte rise over the horizon into a warm haze. A big low paper sun, glowing in rings,
+sets between them, and the real sun comes from it, low behind the speaker's right. So the horn and the cabinet's acrylic
+glow amber and red, every piece throws a long shadow toward the camera's left, and corduroy dunes roll in between.
+
+Beside the speaker are three things, no more:
+- on its left, a raffia tumbleweed mid-bounce;
+- on its right, behind, the roadrunner's cloud in wool felt: the icon's three puffs on their flat wedge, a nod rather
+  than the subject;
+- a little sage corduroy saguaro, the one accent.
+
+Two soft suede stones frame the lower right corner, and motes hang in the light.
+
+(The first fifteen rounds were the high tilt-shift view the brief began with. The owner's note on level views, below,
+replaced it; the set kept its materials and light.)
+
+## Rounds
+
+Proofs at `--scale 0.3 --samples 24` (about 45 s each, 30 s before the haze) unless marked mid (`0.5 / 64`, about 5 min).
+
+1. **First set.** Camera from the front left, sun behind the speaker's left, lathe mesas. Muddy and all one tone, no raking
+   shadows. The motes read as snow (160, too bright), the puffs were small and white, the mesas were squat pancakes,
+   and the paper sun was cut off at the corner.
+2. **Sun behind the right, in frame.** The sun now reads, but blows out to white. The mesas look like flowerpots and
+   the dunes like flat discs. Motes cut to 55, dim.
+3. **Halo rings, slimmer mesas.** Still no shadows at all: the paper sky card stood in the sun's path and its shadow
+   covered the whole set at 12 degrees. The card and the paper sun no longer cast shadows (`shadow: False`).
+4. **Shadows.** Long shadows appear, and the speaker throws orange onto the sand. But the tissue sun was lit through from
+   behind by the sun lamp and blew out, so the sun is now paper that glows of its own (`emit`), not tissue.
+5. **My own kit pieces** (`studio/engine/kit_ext/dust.py`): `dunes`, a corduroy sheet over ridges (a gentle windward
+   slope, a steep slip face, a wandering crest) that fades into the floor at its edges, its ribs running along the
+   crests like wind ripples; and `strata`, irregular slabs of cut suede stacked on a rounded talus. The dunes now read
+   at once.
+6. **Raking sun from the right (azimuth 122), warm haze, wool puffs.** At a haze density of 0.035 it was a dust storm.
+7. **Haze at 0.008.** Golden air, long shadows to the left. But the speaker's sunlit side faced away from the camera,
+   so it read flat.
+8. **Camera moved to the front right (azimuth 20), speaker turned to face it (16 degrees).** The acrylic reads amber now.
+   But the puffs overlapped the speaker, the sun was cut by the frame, and the speaker was small.
+9. **Reframed.** Speaker on the left third at about 40 % of the frame height, the streak clear of it to the right,
+   the footprints running out of frame. Still cake-like mesas.
+10. **Mid proof.** The mood works and the footprints land as the joke. But one mesa sat right above the speaker, the
+    sun was still cut, and the palette was muddy brown.
+11. **Long low mesas and one slim butte**, the sun moved in behind the butte (it is setting), and a little sage
+    corduroy saguaro as the one accent: it says "desert" in a word, toy-like.
+12. **Saguaro clear of the edge, warmer puffs (`#E8955A`), a faint glow on the sky card, a stronger rim.**
+13. and 14 (mid). Pebbles in the near foreground, twice: both times they fell below the frame, so they were dropped.
+    The empty sand with the speaker's long shadow is cleaner. At full size the haze veiled the speaker.
+15. **Haze only behind the speaker** (its box starts at y = 0.9, thicker at 0.012): the hero is clear and saturated,
+    while the distance keeps its air. Accepted.
+
+After the owner's note (a tumbleweed and big flat plateaus in the back):
+
+16. **A raffia tumbleweed** (`tumbleweed` in `kit_ext/dust.py`: about fifty soft strands wandering through a hollow
+    ball) mid-bounce to the speaker's left, three wool puffs of dust behind it. **Broad plateaus** replace the long low
+    mesa: a wide one on the left, a smaller one far back, one to the right, with the slim butte in front of the sun.
+    At 110 strands the tumbleweed read as a sponge.
+17. (mid) **48 thinner strands:** now it reads as raffia. It sat a little far behind the focus.
+18. to 20. **Placing it:** nearer it slid to the frame edge, then it touched the speaker's silhouette. It settled at
+    (-1.25, 0.5), with a clear gap to the left of the speaker. The right plateau was pulled in from the frame edge.
+
+Portrait: `portrait_of` at a 55 mm lens left the speaker at 18 % of the height (the 4:5 frame sees much taller). Rebuilt
+at 95 mm from azimuth 6, 7.5 m: the speaker at about 38 %, the big sun above it, the butte to its right. The longer lens
+gives a shallower field, so the background melts more than in the landscape. The footprints fall outside this frame;
+the cloud carries the icon. After the owner's note it was reframed again so that the
+tumbleweed is in it too: a 72 mm lens from azimuth 8 at 6.4 m, the speaker centred at about 33 % of the height, the
+tumbleweed to its left and the cloud to its right.
+
+After the owner's note on level views:
+
+21. **Level camera** (elevation 3.5 degrees, 60 mm, 4.9 m, focused on the front at f/5.6 over a miniature of 5), the
+    speaker at about 70 % of the frame's height, turned 10 degrees against a camera 15 degrees to its left (25 degrees
+    in all). The plateaus rebuilt taller (up to 2.2 m) so they rise over the horizon behind it. A front key from the
+    left, the sun (azimuth 152, 9 degrees) and a rim from behind the right. Kit scale 6 to match. At once a different
+    picture: the horn glows red against the sun. But the cloud's puffs sat behind the speaker's right edge, the
+    tumbleweed's dust was cut by the frame, and the blurred dune lip at the lower left read as a grey slab.
+22. **Cloud moved right and back, saguaro beyond it, the dune lip replaced by two suede stones at the lower right.** The
+    tumbleweed's little puffs read as eggs, so they went.
+23. (mid) **Haze thinned to 0.009** for depth in the plateaus. The speaker is crisp to its back corners and the horn
+    glows; accepted.
+
+Portrait (level): 80 mm from 3.85 m, the speaker at about 63 % of the height, the tumbleweed and the cloud cut by the two
+edges as soft framing.
+
+## Choices and why
+
+- **The sun behind and to the right, in frame.** One idea of light: the low sun is the paper sun you see, so the long
+  shadows and the glow on the acrylic are motivated by it.
+- **The paper sun is opaque paper glowing of its own, not tissue.** Lit from behind by the real sun lamp, tissue blew
+  out to white. Rings of paper, each glowing less than the one inside it, make the halo the way a model-maker would.
+- **Level, from the speaker's left, with the sun behind its right.** The sun backlights the acrylic toward the lens,
+  so the horn glows; the key from the left keeps the front readable.
+- **Fewer, bigger pieces** (the owner: "empty and cluttered at the same time"): one backdrop (plateaus, sun), one
+  middle layer (dunes, saguaro), and the two flankers. The footprints fall below a level view and now sit out of frame.
+- **The haze only behind the speaker.** It gives the distance air without veiling the hero.
+- **No cover**, as the brief defaults.

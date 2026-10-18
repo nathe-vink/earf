@@ -77,6 +77,7 @@ KNOBS = [
     ('sky.res', 'choice', ('1k', '2k', '4k', '8k'), 'hdri: the resolution fetched (4k where the sky shows behind a set; 8k where it is in focus)'),
     ('sky.rotation_deg', 'deg', (0, 360), 'hdri: turns the environment about the vertical, so its brightest part (a window, a softbox) faces where it should'),
     ('sky.strength', 'x', (0, 20), 'the sky\'s brightness'),
+    ('sky.grade', '{horizon, zenith, height_deg}', None, 'hdri: a graduated colour filter over the photographed sky, its colour multiplied by `horizon` at the horizon fading to `zenith` (default white) by `height_deg` up (round 31b: a warm horizon at golden hour)'),
     ('sky.zenith', 'hex', None, 'gradient sky: colour overhead'),
     ('sky.horizon', 'hex', None, 'gradient sky: colour at the horizon'),
     ('sky.ground', 'hex', None, 'gradient sky: colour below the horizon'),
