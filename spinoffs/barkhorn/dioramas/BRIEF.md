@@ -15,13 +15,32 @@ enough to run as a luxury house's campaign image.
   fabric, underlit embers billowing upward."
 - "I want some really high quality editorial shit, that really sets each speaker in its appropriate earth setting.
   Something you'd see a luxury brand do."
+- "For the fog, I want it to be a shot of the speaker sitting on thick felt clouds, with blue skies in the backdrop, a
+  flock of birds in the distance out of focus, etc."
+- "Ember is less hell and more a volcanic cavern. Dust should have something like a tumbleweed too, with the big flat
+  desert plateaus in the back. Ice could have a snow covered wood cabin in the back, or maybe the speaker is in the
+  abominable snowman's cave home."
+- "Or a mossy, ferny redwood forest with a fallen log and poisonous mushrooms. It's important to stay on the theme of
+  earth and placing the speakers in their respective atmospheres, though the yeti and which ideas are fun, subtle
+  nods."
+- On the first proofs: "they are looking lackluster and bleak so far. They don't need to be busy per se, but they look
+  both empty and cluttered at the same time. It's also hard to see the speakers themselves in some of them. The ember
+  one should be well lit by lava pools and lava falls. The poison one should be in a more lush fern and redwood
+  rainforest. All of them should be looking at the speaker in a way that's more level with the speaker, with the
+  speaker turned slightly in either direction depending on the setting."
+
+The later notes overrule the earlier ones and the starting points below wherever they differ: the camera is level with
+the speaker now, not looking down on it, and each world is a real place on earth (the yeti's cave and the witch's
+garden are only nods inside it).
 
 ## What makes the eight one campaign
 
-- **Tilt-shift miniature.** The camera stands above the speaker and looks down 16 to 32 degrees, through a 50 to 100 mm
-  lens. Focus falls on the speaker's front face, and the depth of field is a model's: `common.tilt_shift(...,
-  miniature=8..16)`. The foreground and the distance melt into soft blur, while a band through the speaker stays crisp.
-  Check the speaker's far edges, the horn's rim and the back corners: they must be sharp.
+- **Tilt-shift miniature, seen level.** The camera stands about level with the speaker (an `elevation` of 0 to 8
+  degrees, the lens near the cabinet's middle or the horn's height), through a 50 to 100 mm lens, and the speaker is
+  turned slightly one way or the other to suit its set (`rotate_z` about ±10 to 25). Focus falls on the speaker's front
+  face, and the depth of field is a model's: `common.tilt_shift(..., miniature=8..16)`. The foreground and the distance
+  melt into soft blur, while a band through the speaker stays crisp. Check the speaker's far edges, the horn's rim and
+  the back corners: they must be sharp. (The first proofs looked down 16 to 32 degrees; the owner asked for level.)
 - **Cute and dreamlike.** Make the forms soft, rounded and generous: chunky felt, plump puffs, toy proportions. The set
   is scaled to the speaker as if the speaker were a toy in a toy world, so a toadstool can stand as tall as the
   cabinet and a cloud as wide as the horn. Light should be soft and glowing, with gentle bloom on anything that gives
@@ -31,8 +50,9 @@ enough to run as a luxury house's campaign image.
   fibres, weave and grain read as felt and fabric on a model rather than on a building.
 - **The speaker is the hero.**
   - Use the product model exactly as it is, in its own flavour. Leave the cover off unless the set wants it on.
-  - Show the whole speaker, crisp, with its silhouette clear of clutter, at about 35 to 50 % of the frame's height.
-    Place it on a third or centred.
+  - Show the whole speaker, crisp, with its silhouette clear of clutter, at about 45 to 60 % of the frame's height.
+    Place it on a third or centred. It must be easy to see at a glance: light on it, and a clean ground behind it.
+  - Full but never busy: a few generous forms that build one place, rather than many small props scattered.
   - Its acrylic should catch the world's light, because that is the point of the colour: light through it, glowing
     edges, coloured light cast on the ground.
   - Nothing sharp stands in front of it. Out-of-focus pieces may frame the edges.
@@ -66,14 +86,15 @@ should echo its icon's shapes (`spinoffs/barkhorn/icons.py`; the pictograms are 
 | Fog (`fog`) | water-clear, `birch-fog-clear` | Now you see it. | the cloud: three circles on a bar |
 | Smoke (`smoke`) | smoked black, `cloud-black` | Where there's smoke. | a plume drifting left to right, as from a train's stack |
 
-- **Ember: the depths of hell, in fabric** (the owner's own picture).
+- **Ember: a volcanic cavern, well lit by lava** (the owner's later notes; first pictured as the depths of hell).
   - Make a cavern of draped crimson, oxblood and black velvet and satin, its folds like rock strata.
-  - Below, a fissure of glowing embers; embers billow upward in plumes (`scatter` with `plume`, `glow`) and light
-    everything from beneath.
+  - Lava pools and lava falls light the scene richly: glowing satin and resin rivers, embers billowing upward in
+    plumes (`scatter` with `plume`, `glow`), everything lit from beneath.
   - Add felt flames shaped like the icon, and a heat haze if it helps.
   - The red acrylic should glow, lit through from below.
 - **Dust: a desert at golden hour, in suede, corduroy and sand.**
-  - Ribbed corduroy dunes and suede mesas under a big low tissue-paper sun.
+  - Ribbed corduroy dunes and big flat suede plateaus behind, under a big low tissue-paper sun, and a tumbleweed (the
+    owner's note).
   - Felt puffs kicked up in a streak along the ground, as in the icon (the roadrunner's), with dust motes in the
     raking light and long shadows.
   - Palette: terracotta, rust and apricot.
@@ -82,20 +103,21 @@ should echo its icon's shapes (`spinoffs/barkhorn/icons.py`; the pictograms are 
     bubbles.
   - A sour palette, chartreuse to lemon, backlit so the drops glow.
   - Candy-like, slightly toxic, delightful.
-- **Poison: a poison garden, in moss, velvet and clay.**
-  - Moss flocking, velvet toadstools with felt spots, clay nightshade berries and foxgloves.
-  - A glossy green resin swamp with glass bubbles rising, and a crooked tree.
-  - A faint glow of spores and low mist. A tiny skull somewhere.
-- **Ice: a frozen grotto, in glass and wool.**
-  - Glass icicles hang from above as in the icon. Below: cotton-wool snowdrifts, paper snowflakes on threads and a
-    frosted glass lake.
-  - A cold blue glow from beneath, with silver highlights.
+- **Poison: a lush fern and redwood rainforest, in moss, velvet and clay** (the owner's later notes; first a poison
+  garden, now only a nod).
+  - Redwood trunks, layered ferns, moss flocking over a fallen log, and poisonous toadstools in velvet with felt spots.
+  - Lush and green, light filtering down through the canopy in shafts, a low mist.
+  - A faint glow of spores. A tiny skull somewhere.
+- **Ice: snow country, in glass and wool.**
+  - Cotton-wool snowdrifts, glass icicles as in the icon, a frosted glass lake, and a snow-covered wood cabin behind
+    (the owner's note); the yeti's cave is a subtle nod at most.
+  - A cold blue glow, with silver highlights and the cabin's warm window as the one accent.
 - **Haze: dusk, in layered paper and tulle.**
   - Cut-paper hills recede in graded violets and lilacs, like a paper theatre.
   - A big tissue-paper sun sits low and glowing, with three bands of tulle haze drifting across it (the icon).
   - The sky grades from violet to peach.
-- **Fog: a sky of felt clouds on threads, and cotton-wool fog** (the owner's own example).
-  - White on pale blue-grey, high-key, like dawn. The clear speaker is half veiled by fog.
+- **Fog: the speaker sitting on thick felt clouds** (the owner's own picture).
+  - Blue sky behind, a flock of birds in the distance out of focus, high-key and soft.
   - The softest of the eight. A first sketch is in `fog.py`; make it far better.
 - **Smoke: night, in charcoal wool and black card.**
   - A little steam train or a row of chimneys in black lacquered card, with grey wool smoke billowing in the icon's
