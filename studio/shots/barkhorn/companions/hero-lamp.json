@@ -25,14 +25,14 @@
   ]
  },
  "render": {
-  "samples": 256,
+  "samples": 320,
   "adaptive": 0.015,
   "denoise": true,
   "clamp": 8,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
   "exposure": 0.75,
-  "white_balance_k": 3100
+  "white_balance_k": 3300
  },
  "materials": {
   "oak": {

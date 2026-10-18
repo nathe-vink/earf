@@ -23,7 +23,7 @@ CLOUD = 'studio/products/barkhorn-cloud.json'
 # platter's top: a record goes there
 SPINDLE = (round((218.0 - 241.6) / 1000, 4), round((170.0 - 186.5) / 1000, 4)); PLATTER_TOP = 0.095
 LAMP_STRIP_Z = 0.441                                               # the strip's middle above the lamp's foot
-HERO_SAMPLES = 256                                                # the heroes (promo passes: 64 smeared)
+HERO_SAMPLES = 320                                                # the heroes (promo passes: 64 smeared)
 LAMP_W = 14.0                                                     # its light, watts as Cycles counts them (tuned by eye)
 LED = 22.0                                                         # the strip's emission when the lamp is on
 
@@ -57,7 +57,7 @@ def base(title, size, colour, cam, sweep=None):
 def record(x, y, z, colour):
     """A black LP on the platter, its label in the colour's accent."""
     acc = next(c[4] for c in C.COLOURS if c[0] == colour)
-    return [{'kind': 'kit', 'shape': 'cylinder', 'material': 'gloss', 'color': '#0D0D0E', 'radius': 0.1505, 'height': 0.0018,
+    return [{'kind': 'kit', 'shape': 'cylinder', 'material': 'gloss', 'color': '#0A0A0B', 'roughness': 0.22, 'radius': 0.1505, 'height': 0.0018,
              'position': [x, y, z], 'segments': 128},
             {'kind': 'kit', 'shape': 'cylinder', 'material': 'paper', 'color': acc, 'radius': 0.05, 'height': 0.0003,
              'position': [x, y, z + 0.0018], 'segments': 96}]
@@ -122,7 +122,7 @@ def bell_lights(s, lx, ly, h, watts=None):
                                                  'power_w': (watts or LAMP_W) / 3, 'radius_m': 0.02, 'color': 2700}
 
 
-DUSK_WB = 4300                    # one grade for both heroes (promo pass 2: 3800 K left the frame all red)
+DUSK_WB = 3300                    # one grade for both heroes (promo pass 2: 3800 K left the frame all red)
 WALL_DUSK = '#B9AEA2'             # the wall a stop down (pass 2: it outshone the record player)
 # the window's cool light from the left (pass 2: dusk did not read)
 WINDOW_FILL = {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': -70, 'elevation_deg': 12, 'distance_m': 2.4},
@@ -142,28 +142,32 @@ def hero_turntable(colour='ember'):
     wall, f/4 on the arm. Pass 2 (5.5, critic/rounds/2026-10-18/promo-hero-turntable-p2.json): the camera near eye
     level and longer (70 mm) so the player fills about half the width; a smaller, stronger, lower key on it; Bell
     nearer and dimmer so it lights the walnut by the arm and not the wall; its lamps softer (it clipped); the
-    speaker further back; a cool fill from the window and 4300 K so dusk reads; the wall a stop darker."""
+    speaker further back; a cool fill from the window and 4300 K so dusk reads; the wall a stop darker. Pass 3
+    (5.5, promo-hero-turntable-p3.json): Bell on at 30 W so it pools on the walnut; focus on the arm, f/4; the key
+    lower and raking (45 W, 10 deg); the window 1.0 and the sky 8 for dusk; DUSK_WB 3300 (orange cast); the record
+    satin black vinyl; the speaker back in frame at the left; more samples."""
     tx, ty = 0.36, 0.42
     h = CAB_TOP
     s = room_shot(f'Cumulus beside {C.NAMES[colour]}', [1600, 1100],
-                  {'position': [0.40, -1.08, 1.16], 'target': [0.45, 0.42, 0.78], 'lens_mm': 60, 'level': True, 'fstop': 2.8,
-                   'focus': [0.36, 0.30, 0.80]})
+                  {'position': [0.34, -1.08, 1.18], 'target': [0.36, 0.42, 0.83], 'lens_mm': 60, 'level': True, 'fstop': 4.0,
+                   'focus': [0.40, 0.42, 0.80]})
     s['render']['samples'] = HERO_SAMPLES
     s['set'] = room(dusk=True)
     s['set']['props'][0]['res'] = '4k'
     s['set']['props'].append(dict(WALL, color=WALL_DUSK))
     bx, by = 0.86, 0.56
-    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.6, 0.5, 0], 'rotate_z': 12}]},
+    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.32, 0.5, 0], 'rotate_z': 12}]},
                      {'def': TT, 'flavour': colour, 'instances': [{'position': [tx, ty, h], 'rotate_z': -6}]},
                      {'def': LAMP, 'flavour': colour, 'instances': [{'position': [bx, by, h], 'rotate_z': 0}]}]
     rx = tx + SPINDLE[0] * math.cos(math.radians(-6)) - SPINDLE[1] * math.sin(math.radians(-6))
     ry = ty + SPINDLE[0] * math.sin(math.radians(-6)) + SPINDLE[1] * math.cos(math.radians(-6))
     s['set']['props'] += record(round(rx, 4), round(ry, 4), h + PLATTER_TOP, colour)
     s['sky'] = dict(DUSK)
-    s['lights'] = {'window': dict(WINDOW_FILL, target=[tx, ty, h + 0.1]),
-                   'key': {'type': 'area', 'size_m': [0.6, 0.4], 'orbit': {'azimuth_deg': -20, 'elevation_deg': 25, 'distance_m': 1.1},
-                           'target': [tx, ty, h + 0.06], 'power_w': 70.0, 'color': 2900}}
-    bell_lights(s, bx, by, h, watts=9.0)
+    s['sky']['strength'] = 8.0
+    s['lights'] = {'window': dict(WINDOW_FILL, target=[tx, ty, h + 0.1], irradiance=1.0),
+                   'key': {'type': 'area', 'size_m': [0.6, 0.4], 'orbit': {'azimuth_deg': -35, 'elevation_deg': 10, 'distance_m': 1.1},
+                           'target': [tx, ty, h + 0.06], 'power_w': 45.0, 'color': 2900}}
+    bell_lights(s, bx, by, h, watts=30.0)
     s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 25.0}}
     s['render']['white_balance_k'] = DUSK_WB
     s['render']['exposure'] = -0.3
@@ -194,7 +198,7 @@ def hero_lamp(colour='haze'):
                             'target': [-0.55, 0.5, 1.0], 'irradiance': 0.30, 'color': '#E4D6E8'}}
     bell_lights(s, lx, ly, h, watts=21.0)
     s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 12.0}}
-    s['render']['white_balance_k'] = 3100
+    s['render']['white_balance_k'] = DUSK_WB
     s['render']['exposure'] = 0.75
     return s
 
