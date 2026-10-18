@@ -38,8 +38,8 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.0,
-    "bump": 2.2,
-    "vary": 0.12,
+    "bump": 3.5,
+    "vary": 0.2,
     "vary_m": 3.5,
     "ties": [
      0.6,
@@ -62,8 +62,8 @@
     ],
     "texture": "concrete_pavement",
     "res": "2k",
-    "wet": 0.85,
-    "puddle_m": 0.25,
+    "wet": 0.6,
+    "puddle_m": 0.9,
     "vary": 0.2
    },
    {
@@ -140,16 +140,16 @@
     2.0
    ],
    "position": [
-    -3.0,
-    0.6,
-    9.0
+    -2.2,
+    0.8,
+    5.0
    ],
    "target": [
     0.0,
     0.0,
     0.8
    ],
-   "irradiance": 0.18,
+   "irradiance": 0.55,
    "color": "#D4DCF2"
   }
  },
@@ -162,8 +162,8 @@
    0.98,
    4.0
   ],
-  "density": 0.012,
-  "anisotropy": 0.55
+  "density": 0.028,
+  "anisotropy": 0.7
  },
  "camera": {
   "position": [
@@ -174,7 +174,7 @@
   "target": [
    0.0,
    0.6,
-   1.25
+   1.05
   ],
   "lens_mm": 45.0,
   "level": true
@@ -186,9 +186,18 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 1.0,
+  "exposure": 1.1,
   "white_balance_k": 5600,
   "white_balance_tint": 0.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 205,
+  "white_out": 205,
+  "peak": 246,
+  "contrast": 0.05,
+  "clarity": 0.1,
+  "sharpen": 0.3
  },
  "size": [
   1200,

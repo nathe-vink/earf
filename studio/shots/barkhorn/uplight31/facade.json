@@ -111,7 +111,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     3.2,
+     1.7999999999999998,
      0.0
     ],
     "size": [
@@ -142,7 +142,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     2.48,
+     1.08,
      0.0
     ],
     "size": [
@@ -173,7 +173,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     2.25,
+     0.85,
      4.8
     ],
     "size": [
@@ -213,8 +213,8 @@
     ],
     "texture": "granite_tile",
     "res": "2k",
-    "wet": 0.8,
-    "puddle_m": 1.2,
+    "wet": 0.6,
+    "puddle_m": 0.4,
     "vary": 0.2
    },
    {
@@ -223,16 +223,16 @@
     "position": [
      0.0,
      -3.48,
-     -0.15
+     -0.04
     ],
     "size": [
      60.0,
      0.16,
-     0.15
+     0.04
     ],
     "material": "clay",
-    "color": "#6A6862",
-    "roughness": 0.35
+    "color": "#8A8780",
+    "roughness": 0.25
    },
    {
     "kind": "kit",
@@ -242,14 +242,14 @@
     "position": [
      0.0,
      -18.0,
-     -0.15
+     -0.04
     ],
     "size": [
      80.0,
      29.0
     ],
-    "ripple": 0.1,
-    "ripple_m": 1.4
+    "ripple": 0.25,
+    "ripple_m": 0.6
    },
    {
     "kind": "kit",
@@ -266,7 +266,7 @@
     ],
     "material": "glow",
     "color": "#FFC98A",
-    "emit": 0.6,
+    "emit": 1.2,
     "shadow": false
    },
    {
@@ -276,7 +276,7 @@
     "fn": "wall",
     "position": [
      -14.399999999999999,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -307,7 +307,7 @@
     "fn": "wall",
     "position": [
      -12.0,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -338,7 +338,7 @@
     "fn": "wall",
     "position": [
      -9.6,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -369,7 +369,7 @@
     "fn": "wall",
     "position": [
      -7.199999999999999,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -400,7 +400,7 @@
     "fn": "wall",
     "position": [
      -4.8,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -431,7 +431,7 @@
     "fn": "wall",
     "position": [
      -2.4,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -462,7 +462,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -493,7 +493,7 @@
     "fn": "wall",
     "position": [
      2.4,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -524,7 +524,7 @@
     "fn": "wall",
     "position": [
      4.8,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -555,7 +555,7 @@
     "fn": "wall",
     "position": [
      7.199999999999999,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -586,7 +586,7 @@
     "fn": "wall",
     "position": [
      9.6,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -617,7 +617,7 @@
     "fn": "wall",
     "position": [
      12.0,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -648,7 +648,7 @@
     "fn": "wall",
     "position": [
      14.399999999999999,
-     2.45,
+     1.05,
      0.0
     ],
     "size": [
@@ -710,6 +710,45 @@
    },
    {
     "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     -4.2,
+     -0.615,
+     0.0
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.037000000000000005,
+    "height": 0.03,
+    "material": "clay",
+    "color": "#1A1A1B",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     -4.2,
+     -0.615,
+     0.03
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.025,
+    "height": 0.002,
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 0.3,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
     "shape": "box",
     "position": [
      -3.0,
@@ -742,6 +781,45 @@
     "material": "glow",
     "color": "#FFF2DE",
     "emit": 0.08,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     -3.0,
+     -0.615,
+     0.0
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.037000000000000005,
+    "height": 0.03,
+    "material": "clay",
+    "color": "#1A1A1B",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     -3.0,
+     -0.615,
+     0.03
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.025,
+    "height": 0.002,
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 0.3,
     "shadow": false
    },
    {
@@ -782,6 +860,45 @@
    },
    {
     "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     -1.7999999999999998,
+     -0.615,
+     0.0
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.037000000000000005,
+    "height": 0.03,
+    "material": "clay",
+    "color": "#1A1A1B",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     -1.7999999999999998,
+     -0.615,
+     0.03
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.025,
+    "height": 0.002,
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 0.3,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
     "shape": "box",
     "position": [
      -0.6,
@@ -814,6 +931,45 @@
     "material": "glow",
     "color": "#FFF2DE",
     "emit": 0.08,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     -0.6,
+     -0.615,
+     0.0
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.037000000000000005,
+    "height": 0.03,
+    "material": "clay",
+    "color": "#1A1A1B",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     -0.6,
+     -0.615,
+     0.03
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.025,
+    "height": 0.002,
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 0.3,
     "shadow": false
    },
    {
@@ -854,6 +1010,45 @@
    },
    {
     "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     0.6,
+     -0.615,
+     0.0
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.037000000000000005,
+    "height": 0.03,
+    "material": "clay",
+    "color": "#1A1A1B",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     0.6,
+     -0.615,
+     0.03
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.025,
+    "height": 0.002,
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 0.3,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
     "shape": "box",
     "position": [
      1.7999999999999998,
@@ -886,6 +1081,45 @@
     "material": "glow",
     "color": "#FFF2DE",
     "emit": 0.08,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     1.7999999999999998,
+     -0.615,
+     0.0
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.037000000000000005,
+    "height": 0.03,
+    "material": "clay",
+    "color": "#1A1A1B",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     1.7999999999999998,
+     -0.615,
+     0.03
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.025,
+    "height": 0.002,
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 0.3,
     "shadow": false
    },
    {
@@ -926,6 +1160,45 @@
    },
    {
     "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     3.0,
+     -0.615,
+     0.0
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.037000000000000005,
+    "height": 0.03,
+    "material": "clay",
+    "color": "#1A1A1B",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     3.0,
+     -0.615,
+     0.03
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.025,
+    "height": 0.002,
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 0.3,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
     "shape": "box",
     "position": [
      4.2,
@@ -958,6 +1231,45 @@
     "material": "glow",
     "color": "#FFF2DE",
     "emit": 0.08,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     4.2,
+     -0.615,
+     0.0
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.037000000000000005,
+    "height": 0.03,
+    "material": "clay",
+    "color": "#1A1A1B",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "position": [
+     4.2,
+     -0.615,
+     0.03
+    ],
+    "rotate": [
+     -22,
+     0,
+     0
+    ],
+    "radius": 0.025,
+    "height": 0.002,
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 0.3,
     "shadow": false
    }
   ]
@@ -966,7 +1278,7 @@
   "kind": "hdri",
   "polyhaven": "kloppenheim_07_puresky",
   "res": "2k",
-  "strength": 0.06,
+  "strength": 0.12,
   "rotation_deg": 0.0
  },
  "lights": {
@@ -987,7 +1299,25 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 319.5,
+   "power_w": 202.5,
+   "color": "#FFF2DE"
+  },
+  "up0-horn": {
+   "type": "spot",
+   "position": [
+    -4.2,
+    -0.615,
+    0.035
+   ],
+   "target": [
+    -4.2,
+    -0.08,
+    1.1400000000000001
+   ],
+   "cone_deg": 16,
+   "blend": 0.5,
+   "radius_m": 0.01,
+   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up1": {
@@ -1007,7 +1337,25 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 319.5,
+   "power_w": 202.5,
+   "color": "#FFF2DE"
+  },
+  "up1-horn": {
+   "type": "spot",
+   "position": [
+    -3.0,
+    -0.615,
+    0.035
+   ],
+   "target": [
+    -3.0,
+    -0.08,
+    1.1400000000000001
+   ],
+   "cone_deg": 16,
+   "blend": 0.5,
+   "radius_m": 0.01,
+   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up2": {
@@ -1027,7 +1375,25 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 319.5,
+   "power_w": 202.5,
+   "color": "#FFF2DE"
+  },
+  "up2-horn": {
+   "type": "spot",
+   "position": [
+    -1.7999999999999998,
+    -0.615,
+    0.035
+   ],
+   "target": [
+    -1.7999999999999998,
+    -0.08,
+    1.1400000000000001
+   ],
+   "cone_deg": 16,
+   "blend": 0.5,
+   "radius_m": 0.01,
+   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up3": {
@@ -1047,7 +1413,25 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 319.5,
+   "power_w": 202.5,
+   "color": "#FFF2DE"
+  },
+  "up3-horn": {
+   "type": "spot",
+   "position": [
+    -0.6,
+    -0.615,
+    0.035
+   ],
+   "target": [
+    -0.6,
+    -0.08,
+    1.1400000000000001
+   ],
+   "cone_deg": 16,
+   "blend": 0.5,
+   "radius_m": 0.01,
+   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up4": {
@@ -1067,7 +1451,25 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 319.5,
+   "power_w": 202.5,
+   "color": "#FFF2DE"
+  },
+  "up4-horn": {
+   "type": "spot",
+   "position": [
+    0.6,
+    -0.615,
+    0.035
+   ],
+   "target": [
+    0.6,
+    -0.08,
+    1.1400000000000001
+   ],
+   "cone_deg": 16,
+   "blend": 0.5,
+   "radius_m": 0.01,
+   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up5": {
@@ -1087,7 +1489,25 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 319.5,
+   "power_w": 202.5,
+   "color": "#FFF2DE"
+  },
+  "up5-horn": {
+   "type": "spot",
+   "position": [
+    1.7999999999999998,
+    -0.615,
+    0.035
+   ],
+   "target": [
+    1.7999999999999998,
+    -0.08,
+    1.1400000000000001
+   ],
+   "cone_deg": 16,
+   "blend": 0.5,
+   "radius_m": 0.01,
+   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up6": {
@@ -1107,7 +1527,25 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 319.5,
+   "power_w": 202.5,
+   "color": "#FFF2DE"
+  },
+  "up6-horn": {
+   "type": "spot",
+   "position": [
+    3.0,
+    -0.615,
+    0.035
+   ],
+   "target": [
+    3.0,
+    -0.08,
+    1.1400000000000001
+   ],
+   "cone_deg": 16,
+   "blend": 0.5,
+   "radius_m": 0.01,
+   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up7": {
@@ -1127,7 +1565,25 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 319.5,
+   "power_w": 202.5,
+   "color": "#FFF2DE"
+  },
+  "up7-horn": {
+   "type": "spot",
+   "position": [
+    4.2,
+    -0.615,
+    0.035
+   ],
+   "target": [
+    4.2,
+    -0.08,
+    1.1400000000000001
+   ],
+   "cone_deg": 16,
+   "blend": 0.5,
+   "radius_m": 0.01,
+   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "moon": {
@@ -1137,16 +1593,16 @@
     6.0
    ],
    "position": [
-    10.0,
-    -12.0,
-    16.0
+    6.0,
+    -8.0,
+    9.0
    ],
    "target": [
     0.0,
-    2.6,
+    1.2,
     3.0
    ],
-   "irradiance": 0.09,
+   "irradiance": 0.3,
    "color": "#C4D0F0"
   }
  },
@@ -1156,10 +1612,10 @@
    -20.0,
    -0.5,
    25.0,
-   2.25,
+   0.85,
    16.0
   ],
-  "density": 0.012,
+  "density": 0.007,
   "anisotropy": 0.3
  },
  "camera": {
@@ -1186,6 +1642,15 @@
   "exposure": 1.0,
   "white_balance_k": 5600,
   "white_balance_tint": 0.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 205,
+  "white_out": 205,
+  "peak": 246,
+  "contrast": 0.05,
+  "clarity": 0.1,
+  "sharpen": 0.3
  },
  "size": [
   2880,
