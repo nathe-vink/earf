@@ -33,8 +33,8 @@ def props():
     p.append(piece('ext', module='fog_el', fn='cloudvol', box=[-400.0, 250.0, -230.0, 2600.0, 2800.0, -50.0],
                    top=-140.0, amp=110.0, scale=220.0, detail=7.0, erode=18.0, soft=0.5, density=0.14,
                    octaves=5, billow_octaves=4, anisotropy=0.65))
-    p.append(piece('ext', module='fog_el', fn='cloudsea', near=2600.0, far=80000.0, width=180000.0, z=-170.0,
-                   billow=140.0, height=45.0, depth=120.0, x=3000.0, rows=220, cols=480, fan=2.6, seed=3,
+    p.append(piece('ext', module='fog_el', fn='cloudsea', near=2600.0, far=40000.0, width=120000.0, z=-170.0,
+                   billow=140.0, height=45.0, depth=120.0, x=0.0, lean=0.4, rows=220, cols=480, fan=2.6, seed=3,
                    sss_r=20.0, bump_size=4.0, bump_dist=14.0))
     # a loose flock far off in the open sky, upper right
     p += birds(36.0, 62.0, 13.0, n=5, span=1.0, seed=5)
@@ -46,7 +46,7 @@ def shot():
     s = frame('fog', props(), cam, sky(SKY, ROT, strength=1.0, res='4k'), 'barkhorn, Fog, above the clouds',
               sun=sun_from_sky(SKY, ROT, irradiance=3.5, color='#FFE2BE'),
               lights={'bounce': area(-30, 15, 2.5, 0.4, '#D9B49A', (2.0, 2.0), (0.0, 0.0, 0.6))},   # the warm rock's bounce, a soft lift
-              haze={'box_m': [-90000.0, 200.0, -900.0, 90000.0, 85000.0, 300.0], 'density': 0.00014, 'anisotropy': 0.7,
+              haze={'box_m': [-20000.0, 200.0, -900.0, 50000.0, 40000.0, 300.0], 'density': 0.00014, 'anisotropy': 0.7,
                     'color': '#C9D6E6'},
               rotate_z=-6.0, fin=finish(contrast=0.08, vignette=0.12, saturation=0.12, lift=0.03, lift_color='#3A3530'), exposure=0.0,
               look='AgX - Medium High Contrast')

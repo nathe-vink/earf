@@ -4,6 +4,7 @@
   its mean top at `z`, heaped into billows by layered noise (`billow` metres across the big heaps, `height` metres from
   trough to crest), deep-scattering white so it glows where the sun lights it and goes blue-grey in its troughs. The grid
   grows coarser with distance, so it is fine where it is near.
+  `lean` (x per metre of y) swings the fan to follow a view that looks off the y axis.
 - bird: a bird far off in flight, a dark silhouette of swept wings `span` metres across, `flap` -1 (down) to 1 (up).
 
 Called by kit.py as fn(bpy, name, p, kit); each returns its objects.
@@ -62,7 +63,7 @@ def cloudsea(bpy, name, p, kit):
         w = min(width, max(60.0, y * p.get('fan', 2.4)))
         rt, rb = [], []
         for i in range(nx):
-            x = cx + (i / (nx - 1) - 0.5) * w
+            x = cx + p.get('lean', 0.0) * y + (i / (nx - 1) - 0.5) * w      # `lean`: the fan follows the view off axis
             rt.append(bm.verts.new((x, y, z0 + height(x, y))))
             rb.append(bm.verts.new((x, y, z0 - p.get('depth', 25.0))))
         top.append(rt); bot.append(rb)
