@@ -99,7 +99,7 @@ def drift(x, y, w, d, h, seed, color=SNOW, material='cotton', count=None, radius
                count=count or int(60 + 90 * w * d), position=[x, y, -0.03])
 
 
-def footprints(x0, y0, x1, y1, n, length=0.36, seed=0):
+def footprints(x0, y0, x1, y1, n, length=0.36, seed=0, z=0.003, color=SNOW, material='cotton'):
     """The yeti's nod: a trail of big snowy footprints across the ice, left and right in turn."""
     out = []
     dx, dy = (x1 - x0) / (n - 1), (y1 - y0) / (n - 1)
@@ -108,8 +108,8 @@ def footprints(x0, y0, x1, y1, n, length=0.36, seed=0):
     for i in range(n):
         side = 1 if i % 2 else -1
         x, y = x0 + dx * i + nx * side * 0.11, y0 + dy * i + ny * side * 0.11
-        out.append(kit('ext', 'cotton', SNOW, module='ice', fn='footprint', length=length, side=side, depth=0.008,
-                       position=[round(x, 4), round(y, 4), 0.003], rotate=[0, 0, round(head + side * 6, 2)], grain=0.6))
+        out.append(kit('ext', material, color, module='ice', fn='footprint', length=length, side=side, depth=0.008,
+                       position=[round(x, 4), round(y, 4), z], rotate=[0, 0, round(head + side * 6, 2)], grain=0.6))
     return out
 
 
@@ -154,7 +154,7 @@ def cabin(cx, cy, turn, s=1.0):
         out.append(kit('box', 'card', '#4A3426', size=[(W + 0.36) * s, slope * s, 0.035 * s], position=mid,
                        rotate=[side * -pitch, 0, turn]))
         snow = kit('ext', 'cotton', SNOW, module='ice', fn='drift', size=[(W + 0.42) * s, slope * s * 1.02, 0.12 * s],
-                   radius=[0.035 * s, 0.09 * s], count=150, seed=40 + side, position=at(0, side * (D / 4 + 0.06), H + r + 0.25))
+                   radius=[0.025 * s, 0.06 * s], count=320, seed=40 + side, position=at(0, side * (D / 4 + 0.06), H + r + 0.25))
         snow['rotate'] = [side * -pitch, 0, turn]
         out.append(snow)
     # the window (warm, the frame's one warm note) and the door
@@ -265,6 +265,86 @@ def cabin_world(props):
     return {'kind': 'stage', 'kit_scale': 11.0, 'props': props}
 
 
+# --- the cabin at the speaker's level (the owner, 2026-10-18: "more level with the speaker") -------------------------
+CABIN = (-1.85, 5.0, -10, 1.15)                         # x, y, turn, scale
+POND2 = (-2.4, 2.4, -1.7, 1.5)
+
+
+def window_at():
+    """The cabin's window in the world (cabin(): the window at (-0.28, -D/2 - r, 0.3) in its own frame)."""
+    cx, cy, turn, s = CABIN
+    c, si = math.cos(math.radians(turn)), math.sin(math.radians(turn))
+    dx, dy, z = -0.28, -0.95 / 2 - 0.045 - 0.12, 0.3
+    return [cx + (dx * c - dy * si) * s, cy + (dx * si + dy * c) * s, z * s]
+
+
+def clearing():
+    """A snowy clearing at night: the speaker on a frozen pond lit from beneath, the cabin to its left, felt pines
+    behind it, wool hills beyond; soft drifts at the frame's edges and the yeti's footprints crossing the ice."""
+    props = [kit('box', 'felt', DEEP, size=[40.0, 40.0, 0.02], position=[0, 2.0, -0.6])]
+    x0, x1, y0, y1 = POND2
+    props.append(kit('ext', 'glow', '#9EDBFF', module='ice', fn='pool', radius=2.9, emit=6.5, power=1.1, edge='#1F5A9C',
+                     position=[0.0, 0.25, -0.25]))
+    props.append(kit('ext', 'glass', '#BFDFF2', module='ice', fn='lake', size=[x1 - x0, y1 - y0, 0.06],
+                     position=[(x0 + x1) / 2, (y0 + y1) / 2, -0.001], patch=0.7, rough=[0.05, 0.42]))
+    for bx0, by0, bx1, by1 in ((-20, y1, 20, 20), (-20, -20, 20, y0), (-20, y0, x0, y1), (x1, y0, 20, y1)):
+        props.append(kit('box', 'felt', SNOW, size=[bx1 - bx0, by1 - by0, 0.05], position=[(bx0 + bx1) / 2, (by0 + by1) / 2, -0.04],
+                         grain=3.0))
+    # the pond's rim: cotton banks over the seams
+    for i, (x, y, w, d) in enumerate([(-1.7, y1, 1.6, 0.6), (-0.1, y1 + 0.05, 1.7, 0.6), (1.6, y1, 1.7, 0.6),
+                                      (x1, 0.6, 0.6, 1.6), (x1 + 0.05, -0.9, 0.6, 1.4), (x0, 0.5, 0.6, 1.6), (x0 - 0.05, -1.0, 0.6, 1.3)]):
+        props.append(drift(x, y, w, d, 0.24, 20 + i))
+    for i, x in enumerate((-2.0, -0.7, 0.6, 1.9)):           # the pond's near rim: soft, out of focus
+        props.append(drift(x, y0 - 0.6, 1.5, 1.0, 0.2, 40 + i))
+    props += footprints(-2.9, -1.35, -0.7, -1.0, 6, length=0.55)   # snowy feet across the ice, from the woods to the speaker
+    # the middle: the cabin, and the pines behind the speaker (dark, so its glow stands out)
+    cx, cy, turn, sc = CABIN
+    props += cabin(cx, cy, turn, sc)
+    for i, (x, y, h) in enumerate([(0.55, 4.3, 2.7), (1.75, 5.3, 3.2), (2.9, 4.1, 2.3), (-3.9, 5.2, 3.0),
+                                   (-0.6, 5.9, 2.6), (3.9, 5.6, 2.9)]):
+        props += pine(x, y, h, seed=i)
+    props.append(mound(-4.0, 10.5, -0.9, 5.5, 2.4, 2.4, WOOL, 'wool'))
+    props.append(mound(3.6, 11.0, -1.0, 6.0, 2.6, 3.0, '#C9DBE8', 'wool'))
+    props.append(mound(0.0, 13.0, -1.0, 8.0, 2.2, 3.6, '#B4CADB', 'wool'))
+    # the edges of the frame: soft drifts in front, a big paper snowflake near the lens
+    props.append(drift(-2.0, -2.3, 2.0, 0.9, 0.5, 31, radius=(0.08, 0.22)))
+    props.append(drift(0.75, -2.5, 1.3, 0.8, 0.32, 32, radius=(0.06, 0.16)))
+    props += snowflake(-2.05, -2.6, 1.55, 0.3, rot=30, seed=5, top=5.0)
+    # stars beyond the hills, the snow falling
+    props.append(kit('scatter', 'glow', '#DDEEFF', count=320, radius=[0.015, 0.035], seed=11, emit=5.0, shadow=False,
+                     **{'in': [-14.0, 16.0, 2.0, 14.0, 18.0, 9.0]}))
+    props.append(kit('scatter', 'cotton', '#FFFFFF', count=500, radius=[0.005, 0.012], seed=7,
+                     **{'in': [-3.5, 0.45, 0.05, 3.5, 4.0, 3.0]}, emit=0.6, emit_color='#EAF6FF'))   # behind the speaker only
+    return {'kind': 'stage', 'kit_scale': 8.0, 'props': props}
+
+
+def clearing_lights():
+    wx, wy, wz = window_at()
+    return {
+        # the moon on the speaker's front, cool, from the front left
+        'key': {**area(-50, 24, 5.0, 3.0, '#DCEBFF', (2.0, 2.0), (0.0, 0.0, 0.7)), 'receivers': PRODUCT},
+        # the window's warmth on the speaker's left flank and back edge
+        # (the acrylic shows a lamp only where it refracts or mirrors it: the lining inside is lit by nothing else)
+        'warm': {'type': 'area', 'size_m': [0.8, 1.1], 'position': [-0.75, 1.0, 0.6], 'target': [0.5, -3.0, 0.65],
+                 'irradiance': 6.0, 'color': '#FFB25E', 'receivers': PRODUCT},
+        # a broad soft sheen across its front acrylic (mirrored into the lens), little diffuse light
+        'sheen': {**area(-58, 6, 3.2, 14.0, '#E4F0FF', (2.6, 1.6), (0.0, 0.0, 0.65)), 'receivers': PRODUCT, 'diffuse': 0.2},
+        # a cool rim from behind right, against the dark pines
+        'rim': {**area(150, 22, 4.0, 4.5, '#EAF4FF', (1.2, 1.6), (0.0, 0.0, 0.8)), 'receivers': PRODUCT},
+        # low behind it, through its acrylic toward the lens
+        'through': {'type': 'area', 'size_m': [0.9, 1.0], 'position': [0.5, 1.0, 0.5], 'target': [-0.7, -3.0, 0.6],
+                    'irradiance': 5.0, 'color': '#CDEBFF', 'receivers': PRODUCT},
+        # the moon on the snow, and a cool light behind the pines so they stand off the hills
+        'moon': {'type': 'area', 'size_m': [4.0, 4.0], 'position': [1.0, -1.0, 7.0], 'target': [0.0, 2.0, 0.0],
+                 'irradiance': 1.1, 'color': '#E6F0FF', 'receivers': ['prop*']},
+        'rim_set': {**area(172, 26, 9.0, 1.4, '#CFE2FF', (6.0, 2.0), (0.0, 4.5, 1.0)), 'receivers': ['prop*']},
+        # a low cool fill from the front on the set, so the snow's faces read white, not grey
+        'fill_set': {**area(-8, 14, 8.0, 0.9, '#DCE8FF', (6.0, 2.0), (0.0, 1.0, 0.4)), 'receivers': ['prop*']},
+        # the window's spill on the snow before the cabin
+        'window': point([wx, wy - 0.25, wz], 30.0, '#FFB060', 0.1),
+    }
+
+
 def lights():
     extra = {}
     if WORLD == 'cabin':
@@ -294,9 +374,9 @@ def lights():
 
 def shot():
     if WORLD == 'cabin':
-        cam = tilt_shift(elevation=21, azimuth=-30, distance=7.4, lens=56, target=(0.1, 0.3, 0.88), focus=(0.0, -0.2, 0.7),
-                         miniature=11, fstop=3.5)
-        return frame('ice', grotto(), lights(), cam, 'barkhorn, Ice, a cabin beyond the frozen pond', rotate_z=-10,
+        cam = tilt_shift(elevation=4, azimuth=0, distance=5.8, lens=70, target=(-0.55, 0.0, 0.62), focus=(0.0, -0.05, 0.62),
+                         miniature=6, fstop=6)
+        return frame('ice', clearing(), clearing_lights(), cam, 'barkhorn, Ice, a cabin beyond the frozen pond', rotate_z=-28,
                      sky={'kind': 'gradient', 'zenith': '#08162B', 'horizon': '#1A3A60', 'ground': '#081424', 'strength': 0.45},
                      fin=finish(bloom=0.3, bloom_px=45, threshold=0.75, saturation=0.15, lift=0.04, lift_color='#14304F',
                                 vignette=0.22))
@@ -310,8 +390,10 @@ def shot():
 
 def portrait():
     land = shot()
-    if WORLD == 'cabin':                                  # the cabin above the speaker in the tall frame
-        return portrait_of(land, lens_mm=90, target=[-0.43, 0.6, 0.98])
+    if WORLD == 'cabin':                                  # nearer, a longer lens: the speaker large, the cabin beside it
+        cam = tilt_shift(elevation=4, azimuth=0, distance=4.7, lens=84, target=(-0.64, 0.0, 0.66), focus=(0.0, -0.05, 0.62),
+                         miniature=6, fstop=6)
+        return portrait_of(land, **cam)
     t = [0.45, 0.2, 0.98]
     # the same camera position, aimed a little right and up so the snowman and the icon both stay in the tall frame
     return portrait_of(land, lens_mm=80, target=t)

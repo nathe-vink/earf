@@ -10,7 +10,7 @@
      0.0,
      0.0
     ],
-    "rotate_z": -10,
+    "rotate_z": -28,
     "hide": [
      "cloth-disc"
     ]
@@ -19,7 +19,7 @@
  },
  "set": {
   "kind": "stage",
-  "kit_scale": 11.0,
+  "kit_scale": 8.0,
   "props": [
    {
     "kind": "kit",
@@ -27,8 +27,8 @@
     "material": "felt",
     "color": "#0B1E36",
     "size": [
-     30.0,
-     30.0,
+     40.0,
+     40.0,
      0.02
     ],
     "position": [
@@ -44,13 +44,13 @@
     "color": "#9EDBFF",
     "module": "ice",
     "fn": "pool",
-    "radius": 3.0,
-    "emit": 6.0,
+    "radius": 2.9,
+    "emit": 6.5,
     "power": 1.1,
     "edge": "#1F5A9C",
     "position": [
-     0.2,
-     0.4,
+     0.0,
+     0.25,
      -0.25
     ]
    },
@@ -62,13 +62,13 @@
     "module": "ice",
     "fn": "lake",
     "size": [
-     5.5,
-     3.1,
+     4.8,
+     3.2,
      0.06
     ],
     "position": [
-     0.1499999999999999,
-     0.25,
+     0.0,
+     -0.09999999999999998,
      -0.001
     ],
     "patch": 0.7,
@@ -79,149 +79,17 @@
    },
    {
     "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "footprint",
-    "length": 0.46,
-    "side": -1,
-    "depth": 0.008,
-    "position": [
-     -0.4948,
-     -0.9178,
-     0.003
-    ],
-    "rotate": [
-     0,
-     0,
-     11.02
-    ],
-    "grain": 0.6
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "footprint",
-    "length": 0.46,
-    "side": 1,
-    "depth": 0.008,
-    "position": [
-     -0.8552,
-     -0.4922,
-     0.003
-    ],
-    "rotate": [
-     0,
-     0,
-     23.02
-    ],
-    "grain": 0.6
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "footprint",
-    "length": 0.46,
-    "side": -1,
-    "depth": 0.008,
-    "position": [
-     -0.7948,
-     0.0622,
-     0.003
-    ],
-    "rotate": [
-     0,
-     0,
-     11.02
-    ],
-    "grain": 0.6
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "footprint",
-    "length": 0.46,
-    "side": 1,
-    "depth": 0.008,
-    "position": [
-     -1.1552,
-     0.4878,
-     0.003
-    ],
-    "rotate": [
-     0,
-     0,
-     23.02
-    ],
-    "grain": 0.6
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "footprint",
-    "length": 0.46,
-    "side": -1,
-    "depth": 0.008,
-    "position": [
-     -1.0948,
-     1.0422,
-     0.003
-    ],
-    "rotate": [
-     0,
-     0,
-     11.02
-    ],
-    "grain": 0.6
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "footprint",
-    "length": 0.46,
-    "side": 1,
-    "depth": 0.008,
-    "position": [
-     -1.4552,
-     1.4678,
-     0.003
-    ],
-    "rotate": [
-     0,
-     0,
-     23.02
-    ],
-    "grain": 0.6
-   },
-   {
-    "kind": "kit",
     "shape": "box",
     "material": "felt",
     "color": "#F4F8FB",
     "size": [
-     30,
-     13.2,
+     40,
+     18.5,
      0.05
     ],
     "position": [
      0.0,
-     8.4,
+     10.75,
      -0.04
     ],
     "grain": 3.0
@@ -232,13 +100,13 @@
     "material": "felt",
     "color": "#F4F8FB",
     "size": [
-     30,
-     13.7,
+     40,
+     18.3,
      0.05
     ],
     "position": [
      0.0,
-     -8.15,
+     -10.85,
      -0.04
     ],
     "grain": 3.0
@@ -249,13 +117,13 @@
     "material": "felt",
     "color": "#F4F8FB",
     "size": [
-     12.4,
-     3.1,
+     17.6,
+     3.2,
      0.05
     ],
     "position": [
-     -8.8,
-     0.25,
+     -11.2,
+     -0.09999999999999998,
      -0.04
     ],
     "grain": 3.0
@@ -266,852 +134,39 @@
     "material": "felt",
     "color": "#F4F8FB",
     "size": [
-     12.1,
-     3.1,
+     17.6,
+     3.2,
      0.05
     ],
     "position": [
-     8.95,
-     0.25,
+     11.2,
+     -0.09999999999999998,
      -0.04
     ],
     "grain": 3.0
    },
    {
     "kind": "kit",
-    "shape": "sphere",
-    "material": "wool",
-    "color": "#DCE8F1",
-    "position": [
-     -3.6,
-     9.5,
-     -0.8
-    ],
-    "scale": [
-     4.5,
-     2.4,
-     2.1
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "wool",
-    "color": "#C9DBE8",
-    "position": [
-     3.6,
-     9.8,
-     -0.9
-    ],
-    "scale": [
-     5.0,
-     2.6,
-     2.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "wool",
-    "color": "#B4CADB",
-    "position": [
-     0.2,
-     11.5,
-     -1.0
-    ],
-    "scale": [
-     6.5,
-     2.2,
-     3.1
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.7054,
-      3.4887,
-      0.045
-     ],
-     [
-      0.5889,
-      2.8574,
-      0.045
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.2889,
-      4.3426,
-      0.045
-     ],
-     [
-      1.0054,
-      3.7113,
-      0.045
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.6731,
-      3.3951,
-      0.09
-     ],
-     [
-      -0.1953,
-      4.3748,
-      0.09
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      0.4953,
-      2.8252,
-      0.09
-     ],
-     [
-      0.9731,
-      3.8049,
-      0.09
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.7054,
-      3.4887,
-      0.135
-     ],
-     [
-      0.5889,
-      2.8574,
-      0.135
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.2889,
-      4.3426,
-      0.135
-     ],
-     [
-      1.0054,
-      3.7113,
-      0.135
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.6731,
-      3.3951,
-      0.18
-     ],
-     [
-      -0.1953,
-      4.3748,
-      0.18
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      0.4953,
-      2.8252,
-      0.18
-     ],
-     [
-      0.9731,
-      3.8049,
-      0.18
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.7054,
-      3.4887,
-      0.225
-     ],
-     [
-      0.5889,
-      2.8574,
-      0.225
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.2889,
-      4.3426,
-      0.225
-     ],
-     [
-      1.0054,
-      3.7113,
-      0.225
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.6731,
-      3.3951,
-      0.27
-     ],
-     [
-      -0.1953,
-      4.3748,
-      0.27
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      0.4953,
-      2.8252,
-      0.27
-     ],
-     [
-      0.9731,
-      3.8049,
-      0.27
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.7054,
-      3.4887,
-      0.315
-     ],
-     [
-      0.5889,
-      2.8574,
-      0.315
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.2889,
-      4.3426,
-      0.315
-     ],
-     [
-      1.0054,
-      3.7113,
-      0.315
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.6731,
-      3.3951,
-      0.36
-     ],
-     [
-      -0.1953,
-      4.3748,
-      0.36
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      0.4953,
-      2.8252,
-      0.36
-     ],
-     [
-      0.9731,
-      3.8049,
-      0.36
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.7054,
-      3.4887,
-      0.405
-     ],
-     [
-      0.5889,
-      2.8574,
-      0.405
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.2889,
-      4.3426,
-      0.405
-     ],
-     [
-      1.0054,
-      3.7113,
-      0.405
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.6731,
-      3.3951,
-      0.45
-     ],
-     [
-      -0.1953,
-      4.3748,
-      0.45
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      0.4953,
-      2.8252,
-      0.45
-     ],
-     [
-      0.9731,
-      3.8049,
-      0.45
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.7054,
-      3.4887,
-      0.495
-     ],
-     [
-      0.5889,
-      2.8574,
-      0.495
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.2889,
-      4.3426,
-      0.495
-     ],
-     [
-      1.0054,
-      3.7113,
-      0.495
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.6731,
-      3.3951,
-      0.54
-     ],
-     [
-      -0.1953,
-      4.3748,
-      0.54
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      0.4953,
-      2.8252,
-      0.54
-     ],
-     [
-      0.9731,
-      3.8049,
-      0.54
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.7054,
-      3.4887,
-      0.585
-     ],
-     [
-      0.5889,
-      2.8574,
-      0.585
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.2889,
-      4.3426,
-      0.585
-     ],
-     [
-      1.0054,
-      3.7113,
-      0.585
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.6731,
-      3.3951,
-      0.63
-     ],
-     [
-      -0.1953,
-      4.3748,
-      0.63
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      0.4953,
-      2.8252,
-      0.63
-     ],
-     [
-      0.9731,
-      3.8049,
-      0.63
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.7054,
-      3.4887,
-      0.675
-     ],
-     [
-      0.5889,
-      2.8574,
-      0.675
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#7B563C",
-    "points": [
-     [
-      -0.2889,
-      4.3426,
-      0.675
-     ],
-     [
-      1.0054,
-      3.7113,
-      0.675
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      -0.6731,
-      3.3951,
-      0.72
-     ],
-     [
-      -0.1953,
-      4.3748,
-      0.72
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "tube",
-    "material": "card",
-    "color": "#5E4130",
-    "points": [
-     [
-      0.4953,
-      2.8252,
-      0.72
-     ],
-     [
-      0.9731,
-      3.8049,
-      0.72
-     ]
-    ],
-    "radius": 0.045,
-    "sides": 12,
-    "res": 2,
-    "grain": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "extrude",
-    "material": "card",
-    "color": "#5E4130",
-    "outline": [
-     [
-      -0.475,
-      0
-     ],
-     [
-      0.475,
-      0
-     ],
-     [
-      0,
-      0.42
-     ]
-    ],
-    "depth": 0.04,
-    "ease": 0.004,
-    "position": [
-     -0.4342,
-     3.8849,
-     0.765
-    ],
-    "rotate": [
-     0,
-     0,
-     64
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "extrude",
-    "material": "card",
-    "color": "#5E4130",
-    "outline": [
-     [
-      -0.475,
-      0
-     ],
-     [
-      0.475,
-      0
-     ],
-     [
-      0,
-      0.42
-     ]
-    ],
-    "depth": 0.04,
-    "ease": 0.004,
-    "position": [
-     0.7342,
-     3.3151,
-     0.765
-    ],
-    "rotate": [
-     0,
-     0,
-     64
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "box",
-    "material": "card",
-    "color": "#4A3426",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
     "size": [
-     1.6600000000000001,
-     0.794054414068698,
-     0.035
+     1.6,
+     0.6,
+     0.24
     ],
+    "seed": 20,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 146,
     "position": [
-     0.0284,
-     3.3506,
-     0.995
-    ],
-    "rotate": [
-     41.48345250366455,
-     0,
-     -26
+     -1.7,
+     1.5,
+     -0.03
     ]
    },
    {
@@ -1122,25 +177,1186 @@
     "module": "ice",
     "fn": "drift",
     "size": [
-     1.72,
-     0.8099355023500721,
-     0.12
+     1.7,
+     0.6,
+     0.24
+    ],
+    "seed": 21,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 151,
+    "position": [
+     -0.1,
+     1.55,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     1.7,
+     0.6,
+     0.24
+    ],
+    "seed": 22,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 151,
+    "position": [
+     1.6,
+     1.5,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     0.6,
+     1.6,
+     0.24
+    ],
+    "seed": 23,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 146,
+    "position": [
+     2.4,
+     0.6,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     0.6,
+     1.4,
+     0.24
+    ],
+    "seed": 24,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 135,
+    "position": [
+     2.4499999999999997,
+     -0.9,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     0.6,
+     1.6,
+     0.24
+    ],
+    "seed": 25,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 146,
+    "position": [
+     -2.4,
+     0.5,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     0.6,
+     1.3,
+     0.24
+    ],
+    "seed": 26,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 130,
+    "position": [
+     -2.4499999999999997,
+     -1.0,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     1.5,
+     1.0,
+     0.2
+    ],
+    "seed": 40,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 195,
+    "position": [
+     -2.0,
+     -2.3,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     1.5,
+     1.0,
+     0.2
+    ],
+    "seed": 41,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 195,
+    "position": [
+     -0.7,
+     -2.3,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     1.5,
+     1.0,
+     0.2
+    ],
+    "seed": 42,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 195,
+    "position": [
+     0.6,
+     -2.3,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     1.5,
+     1.0,
+     0.2
+    ],
+    "seed": 43,
+    "radius": [
+     0.06,
+     0.17
+    ],
+    "count": 195,
+    "position": [
+     1.9,
+     -2.3,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "footprint",
+    "length": 0.55,
+    "side": -1,
+    "depth": 0.008,
+    "position": [
+     -2.8827,
+     -1.4586,
+     0.003
+    ],
+    "rotate": [
+     0,
+     0,
+     -86.96
+    ],
+    "grain": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "footprint",
+    "length": 0.55,
+    "side": 1,
+    "depth": 0.008,
+    "position": [
+     -2.4773,
+     -1.1714,
+     0.003
+    ],
+    "rotate": [
+     0,
+     0,
+     -74.96
+    ],
+    "grain": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "footprint",
+    "length": 0.55,
+    "side": -1,
+    "depth": 0.008,
+    "position": [
+     -2.0027,
+     -1.3186,
+     0.003
+    ],
+    "rotate": [
+     0,
+     0,
+     -86.96
+    ],
+    "grain": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "footprint",
+    "length": 0.55,
+    "side": 1,
+    "depth": 0.008,
+    "position": [
+     -1.5973,
+     -1.0314,
+     0.003
+    ],
+    "rotate": [
+     0,
+     0,
+     -74.96
+    ],
+    "grain": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "footprint",
+    "length": 0.55,
+    "side": -1,
+    "depth": 0.008,
+    "position": [
+     -1.1227,
+     -1.1786,
+     0.003
+    ],
+    "rotate": [
+     0,
+     0,
+     -86.96
+    ],
+    "grain": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "footprint",
+    "length": 0.55,
+    "side": 1,
+    "depth": 0.008,
+    "position": [
+     -0.7173,
+     -0.8914,
+     0.003
+    ],
+    "rotate": [
+     0,
+     0,
+     -74.96
+    ],
+    "grain": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.7603,
+      4.6058,
+      0.0517
+     ],
+     [
+      -1.1294,
+      4.3183,
+      0.0517
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.5706,
+      5.6817,
+      0.0517
+     ],
+     [
+      -0.9397,
+      5.3942,
+      0.0517
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.695,
+      4.5126,
+      0.1035
+     ],
+     [
+      -2.4773,
+      5.747,
+      0.1035
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -1.2227,
+      4.253,
+      0.1035
+     ],
+     [
+      -1.005,
+      5.4874,
+      0.1035
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.7603,
+      4.6058,
+      0.1552
+     ],
+     [
+      -1.1294,
+      4.3183,
+      0.1552
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.5706,
+      5.6817,
+      0.1552
+     ],
+     [
+      -0.9397,
+      5.3942,
+      0.1552
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.695,
+      4.5126,
+      0.207
+     ],
+     [
+      -2.4773,
+      5.747,
+      0.207
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -1.2227,
+      4.253,
+      0.207
+     ],
+     [
+      -1.005,
+      5.4874,
+      0.207
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.7603,
+      4.6058,
+      0.2587
+     ],
+     [
+      -1.1294,
+      4.3183,
+      0.2587
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.5706,
+      5.6817,
+      0.2587
+     ],
+     [
+      -0.9397,
+      5.3942,
+      0.2587
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.695,
+      4.5126,
+      0.3105
+     ],
+     [
+      -2.4773,
+      5.747,
+      0.3105
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -1.2227,
+      4.253,
+      0.3105
+     ],
+     [
+      -1.005,
+      5.4874,
+      0.3105
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.7603,
+      4.6058,
+      0.3622
+     ],
+     [
+      -1.1294,
+      4.3183,
+      0.3622
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.5706,
+      5.6817,
+      0.3622
+     ],
+     [
+      -0.9397,
+      5.3942,
+      0.3622
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.695,
+      4.5126,
+      0.414
+     ],
+     [
+      -2.4773,
+      5.747,
+      0.414
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -1.2227,
+      4.253,
+      0.414
+     ],
+     [
+      -1.005,
+      5.4874,
+      0.414
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.7603,
+      4.6058,
+      0.4657
+     ],
+     [
+      -1.1294,
+      4.3183,
+      0.4657
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.5706,
+      5.6817,
+      0.4657
+     ],
+     [
+      -0.9397,
+      5.3942,
+      0.4657
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.695,
+      4.5126,
+      0.5175
+     ],
+     [
+      -2.4773,
+      5.747,
+      0.5175
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -1.2227,
+      4.253,
+      0.5175
+     ],
+     [
+      -1.005,
+      5.4874,
+      0.5175
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.7603,
+      4.6058,
+      0.5692
+     ],
+     [
+      -1.1294,
+      4.3183,
+      0.5692
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.5706,
+      5.6817,
+      0.5692
+     ],
+     [
+      -0.9397,
+      5.3942,
+      0.5692
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.695,
+      4.5126,
+      0.621
+     ],
+     [
+      -2.4773,
+      5.747,
+      0.621
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -1.2227,
+      4.253,
+      0.621
+     ],
+     [
+      -1.005,
+      5.4874,
+      0.621
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.7603,
+      4.6058,
+      0.6728
+     ],
+     [
+      -1.1294,
+      4.3183,
+      0.6728
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.5706,
+      5.6817,
+      0.6728
+     ],
+     [
+      -0.9397,
+      5.3942,
+      0.6728
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.695,
+      4.5126,
+      0.7245
+     ],
+     [
+      -2.4773,
+      5.747,
+      0.7245
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -1.2227,
+      4.253,
+      0.7245
+     ],
+     [
+      -1.005,
+      5.4874,
+      0.7245
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.7603,
+      4.6058,
+      0.7762
+     ],
+     [
+      -1.1294,
+      4.3183,
+      0.7762
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#7B563C",
+    "points": [
+     [
+      -2.5706,
+      5.6817,
+      0.7762
+     ],
+     [
+      -0.9397,
+      5.3942,
+      0.7762
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -2.695,
+      4.5126,
+      0.828
+     ],
+     [
+      -2.4773,
+      5.747,
+      0.828
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "card",
+    "color": "#5E4130",
+    "points": [
+     [
+      -1.2227,
+      4.253,
+      0.828
+     ],
+     [
+      -1.005,
+      5.4874,
+      0.828
+     ]
+    ],
+    "radius": 0.05175,
+    "sides": 12,
+    "res": 2,
+    "grain": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "card",
+    "color": "#5E4130",
+    "outline": [
+     [
+      -0.5462499999999999,
+      0
+     ],
+     [
+      0.5462499999999999,
+      0
+     ],
+     [
+      0,
+      0.48299999999999993
+     ]
+    ],
+    "depth": 0.046,
+    "ease": 0.004,
+    "position": [
+     -2.5861,
+     5.1298,
+     0.8797
+    ],
+    "rotate": [
+     0,
+     0,
+     80
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "card",
+    "color": "#5E4130",
+    "outline": [
+     [
+      -0.5462499999999999,
+      0
+     ],
+     [
+      0.5462499999999999,
+      0
+     ],
+     [
+      0,
+      0.48299999999999993
+     ]
+    ],
+    "depth": 0.046,
+    "ease": 0.004,
+    "position": [
+     -1.1139,
+     4.8702,
+     0.8797
+    ],
+    "rotate": [
+     0,
+     0,
+     80
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "card",
+    "color": "#4A3426",
+    "size": [
+     1.909,
+     0.9131625761790026,
+     0.04025
+    ],
+    "position": [
+     -1.9054,
+     4.6857,
+     1.1442
+    ],
+    "rotate": [
+     41.48345250366455,
+     0,
+     -10
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#F4F8FB",
+    "module": "ice",
+    "fn": "drift",
+    "size": [
+     1.9779999999999998,
+     0.9314258277025828,
+     0.13799999999999998
     ],
     "radius": [
-     0.035,
-     0.09
+     0.028749999999999998,
+     0.06899999999999999
     ],
-    "count": 150,
+    "count": 320,
     "seed": 39,
     "position": [
-     0.0196,
-     3.3326,
-     1.015
+     -1.9094,
+     4.6631,
+     1.1673
     ],
     "rotate": [
      41.48345250366455,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1149,19 +1365,19 @@
     "material": "card",
     "color": "#4A3426",
     "size": [
-     1.6600000000000001,
-     0.794054414068698,
-     0.035
+     1.909,
+     0.9131625761790026,
+     0.04025
     ],
     "position": [
-     0.2716,
-     3.8494,
-     0.995
+     -1.7946,
+     5.3143,
+     1.1442
     ],
     "rotate": [
      -41.48345250366455,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1172,25 +1388,25 @@
     "module": "ice",
     "fn": "drift",
     "size": [
-     1.72,
-     0.8099355023500721,
-     0.12
+     1.9779999999999998,
+     0.9314258277025828,
+     0.13799999999999998
     ],
     "radius": [
-     0.035,
-     0.09
+     0.028749999999999998,
+     0.06899999999999999
     ],
-    "count": 150,
+    "count": 320,
     "seed": 41,
     "position": [
-     0.2804,
-     3.8674,
-     1.015
+     -1.7906,
+     5.3369,
+     1.1673
     ],
     "rotate": [
      -41.48345250366455,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1199,20 +1415,20 @@
     "material": "glow",
     "color": "#FFB866",
     "size": [
-     0.26,
-     0.03,
-     0.22
+     0.299,
+     0.034499999999999996,
+     0.253
     ],
     "position": [
-     -0.3296,
-     3.2554,
-     0.3
+     -2.2709,
+     4.467,
+     0.345
     ],
     "emit": 9.0,
     "rotate": [
      0,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1221,19 +1437,19 @@
     "material": "card",
     "color": "#F0E6D8",
     "size": [
-     0.3,
-     0.035,
-     0.025
+     0.345,
+     0.04025,
+     0.028749999999999998
     ],
     "position": [
-     -0.3322,
-     3.25,
-     0.41
+     -2.2721,
+     4.4602,
+     0.4715
     ],
     "rotate": [
      0,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1242,19 +1458,19 @@
     "material": "card",
     "color": "#F0E6D8",
     "size": [
-     0.3,
-     0.035,
-     0.022
+     0.345,
+     0.04025,
+     0.025299999999999996
     ],
     "position": [
-     -0.3322,
-     3.25,
-     0.3
+     -2.2721,
+     4.4602,
+     0.345
     ],
     "rotate": [
      0,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1263,19 +1479,19 @@
     "material": "card",
     "color": "#F0E6D8",
     "size": [
-     0.3,
-     0.035,
-     0.025
+     0.345,
+     0.04025,
+     0.028749999999999998
     ],
     "position": [
-     -0.3322,
-     3.25,
-     0.19
+     -2.2721,
+     4.4602,
+     0.2185
     ],
     "rotate": [
      0,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1284,19 +1500,19 @@
     "material": "card",
     "color": "#F0E6D8",
     "size": [
-     0.022,
-     0.035,
-     0.24
+     0.025299999999999996,
+     0.04025,
+     0.27599999999999997
     ],
     "position": [
-     -0.3322,
-     3.25,
-     0.19
+     -2.2721,
+     4.4602,
+     0.2185
     ],
     "rotate": [
      0,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1305,19 +1521,19 @@
     "material": "card",
     "color": "#4A3426",
     "size": [
-     0.24,
-     0.03,
-     0.46
+     0.27599999999999997,
+     0.034499999999999996,
+     0.529
     ],
     "position": [
-     0.1917,
-     3.0011,
+     -1.6141,
+     4.3512,
      0.0
     ],
     "rotate": [
      0,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1326,19 +1542,19 @@
     "material": "card",
     "color": "#6F5546",
     "size": [
-     0.16,
-     0.16,
-     0.4
+     0.184,
+     0.184,
+     0.45999999999999996
     ],
     "position": [
-     0.5753,
-     3.5595,
-     1.1
+     -1.367,
+     5.09,
+     1.265
     ],
     "rotate": [
      0,
      0,
-     -26
+     -10
     ]
    },
    {
@@ -1349,20 +1565,20 @@
     "module": "ice",
     "fn": "drift",
     "size": [
-     0.22,
-     0.22,
-     0.07
+     0.253,
+     0.253,
+     0.0805
     ],
     "radius": [
-     0.02,
-     0.045
+     0.023,
+     0.05175
     ],
     "count": 20,
     "seed": 9,
     "position": [
-     0.5753,
-     3.5595,
-     1.51
+     -1.367,
+     5.09,
+     1.7365
     ]
    },
    {
@@ -1376,424 +1592,46 @@
       0.0
      ],
      [
-      0.00364,
-      0.01556
+      0.00418,
+      0.01789
      ],
      [
-      0.006,
-      0.03111
+      0.0069,
+      0.03578
      ],
      [
-      0.00829,
-      0.04667
-     ],
-     [
-      0.01181,
-      0.06222
-     ],
-     [
-      0.01282,
-      0.07778
-     ],
-     [
-      0.01596,
-      0.09333
-     ],
-     [
-      0.01897,
-      0.10889
-     ],
-     [
-      0.0211,
-      0.12444
-     ],
-     [
-      0.02114,
-      0.14
-     ]
-    ],
-    "position": [
-     -0.743,
-     3.2289,
-     0.645
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "lathe",
-    "material": "glass",
-    "color": "#EAF6FC",
-    "profile": [
-     [
-      0.0,
-      0.0
-     ],
-     [
-      0.00409,
-      0.02222
-     ],
-     [
-      0.00674,
-      0.04444
-     ],
-     [
-      0.01079,
-      0.06667
-     ],
-     [
-      0.01252,
-      0.08889
-     ],
-     [
-      0.0168,
-      0.11111
-     ],
-     [
-      0.01733,
-      0.13333
-     ],
-     [
-      0.02028,
-      0.15556
-     ],
-     [
-      0.02393,
-      0.17778
-     ],
-     [
-      0.02422,
-      0.2
-     ]
-    ],
-    "position": [
-     -0.6442,
-     3.1807,
-     0.585
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "lathe",
-    "material": "glass",
-    "color": "#EAF6FC",
-    "profile": [
-     [
-      0.0,
-      0.0
-     ],
-     [
-      0.00575,
-      0.02889
-     ],
-     [
-      0.0111,
-      0.05778
-     ],
-     [
-      0.01655,
-      0.08667
-     ],
-     [
-      0.02045,
-      0.11556
-     ],
-     [
-      0.02331,
-      0.14444
-     ],
-     [
-      0.02856,
-      0.17333
-     ],
-     [
-      0.03455,
-      0.20222
-     ],
-     [
-      0.03367,
-      0.23111
-     ],
-     [
-      0.042,
-      0.26
-     ]
-    ],
-    "position": [
-     -0.5273,
-     3.1237,
-     0.525
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "lathe",
-    "material": "glass",
-    "color": "#EAF6FC",
-    "profile": [
-     [
-      0.0,
-      0.0
-     ],
-     [
-      0.00653,
-      0.04111
-     ],
-     [
-      0.01137,
-      0.08222
-     ],
-     [
-      0.01675,
-      0.12333
-     ],
-     [
-      0.02148,
-      0.16444
-     ],
-     [
-      0.0258,
-      0.20556
-     ],
-     [
-      0.02743,
-      0.24667
-     ],
-     [
-      0.03398,
-      0.28778
-     ],
-     [
-      0.0369,
-      0.32889
-     ],
-     [
-      0.04278,
-      0.37
-     ]
-    ],
-    "position": [
-     -0.4195,
-     3.0711,
-     0.41500000000000004
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "lathe",
-    "material": "glass",
-    "color": "#EAF6FC",
-    "profile": [
-     [
-      0.0,
-      0.0
-     ],
-     [
-      0.00585,
-      0.02889
-     ],
-     [
-      0.01036,
-      0.05778
-     ],
-     [
-      0.01465,
-      0.08667
-     ],
-     [
-      0.01921,
-      0.11556
-     ],
-     [
-      0.02404,
-      0.14444
-     ],
-     [
-      0.02675,
-      0.17333
-     ],
-     [
-      0.03453,
-      0.20222
-     ],
-     [
-      0.03431,
-      0.23111
-     ],
-     [
-      0.04275,
-      0.26
-     ]
-    ],
-    "position": [
-     -0.3116,
-     3.0185,
-     0.525
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "lathe",
-    "material": "glass",
-    "color": "#EAF6FC",
-    "profile": [
-     [
-      0.0,
-      0.0
-     ],
-     [
-      0.00317,
-      0.01444
-     ],
-     [
-      0.00567,
-      0.02889
-     ],
-     [
-      0.00841,
-      0.04333
-     ],
-     [
-      0.00967,
-      0.05778
-     ],
-     [
-      0.01282,
-      0.07222
-     ],
-     [
-      0.01481,
-      0.08667
-     ],
-     [
-      0.01614,
-      0.10111
-     ],
-     [
-      0.01684,
-      0.11556
-     ],
-     [
-      0.02042,
-      0.13
-     ]
-    ],
-    "position": [
-     -0.1139,
-     2.9221,
-     0.655
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "lathe",
-    "material": "glass",
-    "color": "#EAF6FC",
-    "profile": [
-     [
-      0.0,
-      0.0
-     ],
-     [
-      0.00376,
-      0.02333
-     ],
-     [
-      0.00742,
-      0.04667
-     ],
-     [
-      0.01023,
-      0.07
-     ],
-     [
-      0.01285,
-      0.09333
-     ],
-     [
-      0.01602,
-      0.11667
-     ],
-     [
-      0.01805,
-      0.14
-     ],
-     [
-      0.01967,
-      0.16333
-     ],
-     [
-      0.02266,
-      0.18667
-     ],
-     [
-      0.02567,
-      0.21
-     ]
-    ],
-    "position": [
-     0.0119,
-     2.8607,
-     0.5750000000000001
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "lathe",
-    "material": "glass",
-    "color": "#EAF6FC",
-    "profile": [
-     [
-      0.0,
-      0.0
-     ],
-     [
-      0.00364,
-      0.01778
-     ],
-     [
-      0.00571,
-      0.03556
-     ],
-     [
-      0.00809,
-      0.05333
-     ],
-     [
-      0.01106,
-      0.07111
+      0.00953,
+      0.05367
      ],
      [
       0.01358,
-      0.08889
+      0.07156
      ],
      [
-      0.01665,
-      0.10667
+      0.01475,
+      0.08944
      ],
      [
-      0.01847,
-      0.12444
+      0.01835,
+      0.10733
      ],
      [
-      0.0213,
-      0.14222
+      0.02181,
+      0.12522
      ],
      [
-      0.02108,
-      0.16
+      0.02426,
+      0.14311
+     ],
+     [
+      0.02431,
+      0.161
      ]
     ],
     "position": [
-     0.2097,
-     2.7643,
-     0.625
+     -2.7196,
+     4.3067,
+     0.7416999999999999
     ],
     "segments": 40
    },
@@ -1808,46 +1646,424 @@
       0.0
      ],
      [
-      0.0043,
-      0.02778
+      0.00471,
+      0.02556
      ],
      [
-      0.00759,
-      0.05556
+      0.00775,
+      0.05111
      ],
      [
-      0.01017,
-      0.08333
+      0.0124,
+      0.07667
      ],
      [
-      0.01386,
-      0.11111
+      0.01439,
+      0.10222
      ],
      [
-      0.01499,
-      0.13889
+      0.01933,
+      0.12778
      ],
      [
-      0.01782,
-      0.16667
+      0.01993,
+      0.15333
      ],
      [
-      0.02059,
-      0.19444
+      0.02333,
+      0.17889
      ],
      [
-      0.02418,
-      0.22222
+      0.02751,
+      0.20444
      ],
      [
-      0.02539,
-      0.25
+      0.02785,
+      0.23
      ]
     ],
     "position": [
-     0.3715,
-     2.6854,
-     0.535
+     -2.595,
+     4.2848,
+     0.6727
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.00661,
+      0.03322
+     ],
+     [
+      0.01277,
+      0.06644
+     ],
+     [
+      0.01904,
+      0.09967
+     ],
+     [
+      0.02352,
+      0.13289
+     ],
+     [
+      0.02681,
+      0.16611
+     ],
+     [
+      0.03284,
+      0.19933
+     ],
+     [
+      0.03973,
+      0.23256
+     ],
+     [
+      0.03872,
+      0.26578
+     ],
+     [
+      0.0483,
+      0.299
+     ]
+    ],
+    "position": [
+     -2.4478,
+     4.2588,
+     0.6036999999999999
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.00751,
+      0.04728
+     ],
+     [
+      0.01307,
+      0.09456
+     ],
+     [
+      0.01926,
+      0.14183
+     ],
+     [
+      0.0247,
+      0.18911
+     ],
+     [
+      0.02967,
+      0.23639
+     ],
+     [
+      0.03154,
+      0.28367
+     ],
+     [
+      0.03908,
+      0.33094
+     ],
+     [
+      0.04244,
+      0.37822
+     ],
+     [
+      0.0492,
+      0.4255
+     ]
+    ],
+    "position": [
+     -2.3119,
+     4.2348,
+     0.47719999999999996
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.00673,
+      0.03322
+     ],
+     [
+      0.01191,
+      0.06644
+     ],
+     [
+      0.01684,
+      0.09967
+     ],
+     [
+      0.02209,
+      0.13289
+     ],
+     [
+      0.02765,
+      0.16611
+     ],
+     [
+      0.03077,
+      0.19933
+     ],
+     [
+      0.03971,
+      0.23256
+     ],
+     [
+      0.03945,
+      0.26578
+     ],
+     [
+      0.04916,
+      0.299
+     ]
+    ],
+    "position": [
+     -2.176,
+     4.2109,
+     0.6036999999999999
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.00364,
+      0.01661
+     ],
+     [
+      0.00653,
+      0.03322
+     ],
+     [
+      0.00967,
+      0.04983
+     ],
+     [
+      0.01112,
+      0.06644
+     ],
+     [
+      0.01475,
+      0.08306
+     ],
+     [
+      0.01704,
+      0.09967
+     ],
+     [
+      0.01856,
+      0.11628
+     ],
+     [
+      0.01937,
+      0.13289
+     ],
+     [
+      0.02348,
+      0.1495
+     ]
+    ],
+    "position": [
+     -1.9268,
+     4.1669,
+     0.7532
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.00432,
+      0.02683
+     ],
+     [
+      0.00854,
+      0.05367
+     ],
+     [
+      0.01177,
+      0.0805
+     ],
+     [
+      0.01478,
+      0.10733
+     ],
+     [
+      0.01842,
+      0.13417
+     ],
+     [
+      0.02076,
+      0.161
+     ],
+     [
+      0.02262,
+      0.18783
+     ],
+     [
+      0.02605,
+      0.21467
+     ],
+     [
+      0.02952,
+      0.2415
+     ]
+    ],
+    "position": [
+     -1.7683,
+     4.139,
+     0.6612
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.00418,
+      0.02044
+     ],
+     [
+      0.00656,
+      0.04089
+     ],
+     [
+      0.0093,
+      0.06133
+     ],
+     [
+      0.01272,
+      0.08178
+     ],
+     [
+      0.01561,
+      0.10222
+     ],
+     [
+      0.01915,
+      0.12267
+     ],
+     [
+      0.02124,
+      0.14311
+     ],
+     [
+      0.02449,
+      0.16356
+     ],
+     [
+      0.02424,
+      0.184
+     ]
+    ],
+    "position": [
+     -1.5191,
+     4.095,
+     0.7186999999999999
+    ],
+    "segments": 40
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#EAF6FC",
+    "profile": [
+     [
+      0.0,
+      0.0
+     ],
+     [
+      0.00494,
+      0.03194
+     ],
+     [
+      0.00873,
+      0.06389
+     ],
+     [
+      0.01169,
+      0.09583
+     ],
+     [
+      0.01594,
+      0.12778
+     ],
+     [
+      0.01724,
+      0.15972
+     ],
+     [
+      0.02049,
+      0.19167
+     ],
+     [
+      0.02368,
+      0.22361
+     ],
+     [
+      0.02781,
+      0.25556
+     ],
+     [
+      0.02919,
+      0.2875
+     ]
+    ],
+    "position": [
+     -1.3153,
+     4.0591,
+     0.6152
     ],
     "segments": 40
    },
@@ -1856,11 +2072,11 @@
     "shape": "cylinder",
     "material": "felt",
     "color": "#3B2B22",
-    "radius": 0.06,
-    "height": 0.24,
+    "radius": 0.135,
+    "height": 0.54,
     "position": [
-     -1.6,
-     4.4,
+     0.55,
+     4.3,
      -0.02
     ]
    },
@@ -1869,12 +2085,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.40800000000000003,
-    "height": 0.54,
+    "radius": 0.9180000000000001,
+    "height": 1.215,
     "position": [
-     -1.6,
-     4.4,
-     0.144
+     0.55,
+     4.3,
+     0.324
     ],
     "segments": 40,
     "rotate": [
@@ -1888,12 +2104,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.29376,
-    "height": 0.33480000000000004,
+    "radius": 0.6609600000000001,
+    "height": 0.7533000000000001,
     "position": [
-     -1.6,
-     4.4,
-     0.36
+     0.55,
+     4.3,
+     0.81
     ],
     "segments": 40
    },
@@ -1902,12 +2118,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.324,
-    "height": 0.48,
+    "radius": 0.7290000000000001,
+    "height": 1.08,
     "position": [
-     -1.6,
-     4.4,
-     0.45599999999999996
+     0.55,
+     4.3,
+     1.026
     ],
     "segments": 40,
     "rotate": [
@@ -1921,12 +2137,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.23328,
-    "height": 0.2976,
+    "radius": 0.52488,
+    "height": 0.6696000000000001,
     "position": [
-     -1.6,
-     4.4,
-     0.6479999999999999
+     0.55,
+     4.3,
+     1.4580000000000002
     ],
     "segments": 40
    },
@@ -1935,12 +2151,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.22799999999999998,
-    "height": 0.48,
+    "radius": 0.513,
+    "height": 1.08,
     "position": [
-     -1.6,
-     4.4,
-     0.72
+     0.55,
+     4.3,
+     1.62
     ],
     "segments": 40,
     "rotate": [
@@ -1954,12 +2170,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.16415999999999997,
-    "height": 0.2976,
+    "radius": 0.36936,
+    "height": 0.6696000000000001,
     "position": [
-     -1.6,
-     4.4,
-     0.9119999999999999
+     0.55,
+     4.3,
+     2.052
     ],
     "segments": 40
    },
@@ -1968,11 +2184,11 @@
     "shape": "cylinder",
     "material": "felt",
     "color": "#3B2B22",
-    "radius": 0.07500000000000001,
-    "height": 0.30000000000000004,
+    "radius": 0.16000000000000003,
+    "height": 0.6400000000000001,
     "position": [
-     -1.0,
-     5.4,
+     1.75,
+     5.3,
      -0.02
     ]
    },
@@ -1981,12 +2197,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.51,
-    "height": 0.675,
+    "radius": 1.088,
+    "height": 1.4400000000000002,
     "position": [
-     -1.0,
-     5.4,
-     0.18
+     1.75,
+     5.3,
+     0.384
     ],
     "segments": 40,
     "rotate": [
@@ -2000,12 +2216,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.36719999999999997,
-    "height": 0.41850000000000004,
+    "radius": 0.7833600000000001,
+    "height": 0.8928000000000001,
     "position": [
-     -1.0,
-     5.4,
-     0.45
+     1.75,
+     5.3,
+     0.9600000000000001
     ],
     "segments": 40
    },
@@ -2014,12 +2230,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.405,
-    "height": 0.6000000000000001,
+    "radius": 0.8640000000000001,
+    "height": 1.2800000000000002,
     "position": [
-     -1.0,
-     5.4,
-     0.5700000000000001
+     1.75,
+     5.3,
+     1.2160000000000002
     ],
     "segments": 40,
     "rotate": [
@@ -2033,12 +2249,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.2916,
-    "height": 0.37200000000000005,
+    "radius": 0.6220800000000001,
+    "height": 0.7936000000000002,
     "position": [
-     -1.0,
-     5.4,
-     0.81
+     1.75,
+     5.3,
+     1.7280000000000002
     ],
     "segments": 40
    },
@@ -2047,12 +2263,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.28500000000000003,
-    "height": 0.6000000000000001,
+    "radius": 0.6080000000000001,
+    "height": 1.2800000000000002,
     "position": [
-     -1.0,
-     5.4,
-     0.8999999999999999
+     1.75,
+     5.3,
+     1.92
     ],
     "segments": 40,
     "rotate": [
@@ -2066,12 +2282,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.20520000000000002,
-    "height": 0.37200000000000005,
+    "radius": 0.43776000000000004,
+    "height": 0.7936000000000002,
     "position": [
-     -1.0,
-     5.4,
-     1.14
+     1.75,
+     5.3,
+     2.432
     ],
     "segments": 40
    },
@@ -2080,11 +2296,11 @@
     "shape": "cylinder",
     "material": "felt",
     "color": "#3B2B22",
-    "radius": 0.065,
-    "height": 0.26,
+    "radius": 0.11499999999999999,
+    "height": 0.45999999999999996,
     "position": [
-     1.75,
-     4.9,
+     2.9,
+     4.1,
      -0.02
     ]
    },
@@ -2093,12 +2309,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.44200000000000006,
-    "height": 0.5850000000000001,
+    "radius": 0.782,
+    "height": 1.035,
     "position": [
-     1.75,
-     4.9,
-     0.156
+     2.9,
+     4.1,
+     0.27599999999999997
     ],
     "segments": 40,
     "rotate": [
@@ -2112,12 +2328,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.31824,
-    "height": 0.3627,
+    "radius": 0.56304,
+    "height": 0.6416999999999999,
     "position": [
-     1.75,
-     4.9,
-     0.39
+     2.9,
+     4.1,
+     0.69
     ],
     "segments": 40
    },
@@ -2126,12 +2342,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.35100000000000003,
-    "height": 0.52,
+    "radius": 0.621,
+    "height": 0.9199999999999999,
     "position": [
-     1.75,
-     4.9,
-     0.49400000000000005
+     2.9,
+     4.1,
+     0.8739999999999999
     ],
     "segments": 40,
     "rotate": [
@@ -2145,12 +2361,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.25272,
-    "height": 0.3224,
+    "radius": 0.44711999999999996,
+    "height": 0.5703999999999999,
     "position": [
-     1.75,
-     4.9,
-     0.7020000000000001
+     2.9,
+     4.1,
+     1.242
     ],
     "segments": 40
    },
@@ -2159,12 +2375,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.24700000000000003,
-    "height": 0.52,
+    "radius": 0.43699999999999994,
+    "height": 0.9199999999999999,
     "position": [
-     1.75,
-     4.9,
-     0.78
+     2.9,
+     4.1,
+     1.38
     ],
     "segments": 40,
     "rotate": [
@@ -2178,12 +2394,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.17784,
-    "height": 0.3224,
+    "radius": 0.31464,
+    "height": 0.5703999999999999,
     "position": [
-     1.75,
-     4.9,
-     0.988
+     2.9,
+     4.1,
+     1.7479999999999998
     ],
     "segments": 40
    },
@@ -2192,11 +2408,11 @@
     "shape": "cylinder",
     "material": "felt",
     "color": "#3B2B22",
-    "radius": 0.0475,
-    "height": 0.19,
+    "radius": 0.15000000000000002,
+    "height": 0.6000000000000001,
     "position": [
-     2.6,
-     4.1,
+     -3.9,
+     5.2,
      -0.02
     ]
    },
@@ -2205,12 +2421,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.323,
-    "height": 0.4275,
+    "radius": 1.02,
+    "height": 1.35,
     "position": [
-     2.6,
-     4.1,
-     0.11399999999999999
+     -3.9,
+     5.2,
+     0.36
     ],
     "segments": 40,
     "rotate": [
@@ -2224,12 +2440,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.23256,
-    "height": 0.26505,
+    "radius": 0.7343999999999999,
+    "height": 0.8370000000000001,
     "position": [
-     2.6,
-     4.1,
-     0.28500000000000003
+     -3.9,
+     5.2,
+     0.9
     ],
     "segments": 40
    },
@@ -2238,12 +2454,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.2565,
-    "height": 0.38,
+    "radius": 0.81,
+    "height": 1.2000000000000002,
     "position": [
-     2.6,
-     4.1,
-     0.361
+     -3.9,
+     5.2,
+     1.1400000000000001
     ],
     "segments": 40,
     "rotate": [
@@ -2257,12 +2473,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.18468,
-    "height": 0.2356,
+    "radius": 0.5832,
+    "height": 0.7440000000000001,
     "position": [
-     2.6,
-     4.1,
-     0.513
+     -3.9,
+     5.2,
+     1.62
     ],
     "segments": 40
    },
@@ -2271,12 +2487,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.1805,
-    "height": 0.38,
+    "radius": 0.5700000000000001,
+    "height": 1.2000000000000002,
     "position": [
-     2.6,
-     4.1,
-     0.57
+     -3.9,
+     5.2,
+     1.7999999999999998
     ],
     "segments": 40,
     "rotate": [
@@ -2290,12 +2506,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.12996,
-    "height": 0.2356,
+    "radius": 0.41040000000000004,
+    "height": 0.7440000000000001,
     "position": [
-     2.6,
-     4.1,
-     0.722
+     -3.9,
+     5.2,
+     2.28
     ],
     "segments": 40
    },
@@ -2304,11 +2520,11 @@
     "shape": "cylinder",
     "material": "felt",
     "color": "#3B2B22",
-    "radius": 0.08000000000000002,
-    "height": 0.32000000000000006,
+    "radius": 0.13,
+    "height": 0.52,
     "position": [
-     3.4,
-     5.0,
+     -0.6,
+     5.9,
      -0.02
     ]
    },
@@ -2317,12 +2533,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.544,
-    "height": 0.7200000000000001,
+    "radius": 0.8840000000000001,
+    "height": 1.1700000000000002,
     "position": [
-     3.4,
-     5.0,
-     0.192
+     -0.6,
+     5.9,
+     0.312
     ],
     "segments": 40,
     "rotate": [
@@ -2336,12 +2552,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.39168000000000003,
-    "height": 0.4464000000000001,
+    "radius": 0.63648,
+    "height": 0.7254,
     "position": [
-     3.4,
-     5.0,
-     0.48000000000000004
+     -0.6,
+     5.9,
+     0.78
     ],
     "segments": 40
    },
@@ -2350,12 +2566,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.43200000000000005,
-    "height": 0.6400000000000001,
+    "radius": 0.7020000000000001,
+    "height": 1.04,
     "position": [
-     3.4,
-     5.0,
-     0.6080000000000001
+     -0.6,
+     5.9,
+     0.9880000000000001
     ],
     "segments": 40,
     "rotate": [
@@ -2369,12 +2585,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.31104000000000004,
-    "height": 0.3968000000000001,
+    "radius": 0.50544,
+    "height": 0.6448,
     "position": [
-     3.4,
-     5.0,
-     0.8640000000000001
+     -0.6,
+     5.9,
+     1.4040000000000001
     ],
     "segments": 40
    },
@@ -2383,12 +2599,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.30400000000000005,
-    "height": 0.6400000000000001,
+    "radius": 0.49400000000000005,
+    "height": 1.04,
     "position": [
-     3.4,
-     5.0,
-     0.96
+     -0.6,
+     5.9,
+     1.56
     ],
     "segments": 40,
     "rotate": [
@@ -2402,12 +2618,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.21888000000000002,
-    "height": 0.3968000000000001,
+    "radius": 0.35568,
+    "height": 0.6448,
     "position": [
-     3.4,
-     5.0,
-     1.216
+     -0.6,
+     5.9,
+     1.976
     ],
     "segments": 40
    },
@@ -2416,11 +2632,11 @@
     "shape": "cylinder",
     "material": "felt",
     "color": "#3B2B22",
-    "radius": 0.045000000000000005,
-    "height": 0.18000000000000002,
+    "radius": 0.145,
+    "height": 0.58,
     "position": [
-     -2.6,
-     3.6,
+     3.9,
+     5.6,
      -0.02
     ]
    },
@@ -2429,12 +2645,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.30600000000000005,
-    "height": 0.405,
+    "radius": 0.986,
+    "height": 1.305,
     "position": [
-     -2.6,
-     3.6,
-     0.108
+     3.9,
+     5.6,
+     0.348
     ],
     "segments": 40,
     "rotate": [
@@ -2448,12 +2664,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.22032000000000002,
-    "height": 0.2511,
+    "radius": 0.70992,
+    "height": 0.8090999999999999,
     "position": [
-     -2.6,
-     3.6,
-     0.27
+     3.9,
+     5.6,
+     0.87
     ],
     "segments": 40
    },
@@ -2462,12 +2678,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.24300000000000002,
-    "height": 0.36000000000000004,
+    "radius": 0.783,
+    "height": 1.16,
     "position": [
-     -2.6,
-     3.6,
-     0.342
+     3.9,
+     5.6,
+     1.1019999999999999
     ],
     "segments": 40,
     "rotate": [
@@ -2481,12 +2697,12 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.17496,
-    "height": 0.22320000000000004,
+    "radius": 0.56376,
+    "height": 0.7192,
     "position": [
-     -2.6,
-     3.6,
-     0.48600000000000004
+     3.9,
+     5.6,
+     1.5659999999999998
     ],
     "segments": 40
    },
@@ -2495,12 +2711,12 @@
     "shape": "cone",
     "material": "felt",
     "color": "#1F4156",
-    "radius": 0.171,
-    "height": 0.36000000000000004,
+    "radius": 0.5509999999999999,
+    "height": 1.16,
     "position": [
-     -2.6,
-     3.6,
-     0.54
+     3.9,
+     5.6,
+     1.74
     ],
     "segments": 40,
     "rotate": [
@@ -2514,453 +2730,61 @@
     "shape": "cone",
     "material": "cotton",
     "color": "#F4F8FB",
-    "radius": 0.12312000000000001,
-    "height": 0.22320000000000004,
+    "radius": 0.39671999999999996,
+    "height": 0.7192,
     "position": [
-     -2.6,
-     3.6,
-     0.684
+     3.9,
+     5.6,
+     2.2039999999999997
     ],
     "segments": 40
    },
    {
     "kind": "kit",
-    "shape": "cylinder",
-    "material": "felt",
-    "color": "#3B2B22",
-    "radius": 0.05500000000000001,
-    "height": 0.22000000000000003,
+    "shape": "sphere",
+    "material": "wool",
+    "color": "#DCE8F1",
     "position": [
-     4.1,
-     3.7,
-     -0.02
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "felt",
-    "color": "#1F4156",
-    "radius": 0.37400000000000005,
-    "height": 0.49500000000000005,
-    "position": [
-     4.1,
-     3.7,
-     0.132
+     -4.0,
+     10.5,
+     -0.9
     ],
-    "segments": 40,
-    "rotate": [
-     0,
-     0,
-     285.60243015419866
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "radius": 0.26928,
-    "height": 0.3069,
-    "position": [
-     4.1,
-     3.7,
-     0.33000000000000007
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "felt",
-    "color": "#1F4156",
-    "radius": 0.29700000000000004,
-    "height": 0.44000000000000006,
-    "position": [
-     4.1,
-     3.7,
-     0.41800000000000004
-    ],
-    "segments": 40,
-    "rotate": [
-     0,
-     0,
-     295.90345523510166
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "radius": 0.21384000000000003,
-    "height": 0.27280000000000004,
-    "position": [
-     4.1,
-     3.7,
-     0.5940000000000001
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "felt",
-    "color": "#1F4156",
-    "radius": 0.20900000000000002,
-    "height": 0.44000000000000006,
-    "position": [
-     4.1,
-     3.7,
-     0.66
-    ],
-    "segments": 40,
-    "rotate": [
-     0,
-     0,
-     174.61246605514032
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "radius": 0.15048,
-    "height": 0.27280000000000004,
-    "position": [
-     4.1,
-     3.7,
-     0.8360000000000001
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "material": "felt",
-    "color": "#3B2B22",
-    "radius": 0.06999999999999999,
-    "height": 0.27999999999999997,
-    "position": [
-     -0.2,
-     6.2,
-     -0.02
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "felt",
-    "color": "#1F4156",
-    "radius": 0.476,
-    "height": 0.63,
-    "position": [
-     -0.2,
-     6.2,
-     0.16799999999999998
-    ],
-    "segments": 40,
-    "rotate": [
-     0,
-     0,
-     116.57979533993846
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "radius": 0.34271999999999997,
-    "height": 0.3906,
-    "position": [
-     -0.2,
-     6.2,
-     0.42
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "felt",
-    "color": "#1F4156",
-    "radius": 0.378,
-    "height": 0.5599999999999999,
-    "position": [
-     -0.2,
-     6.2,
-     0.5319999999999999
-    ],
-    "segments": 40,
-    "rotate": [
-     0,
-     0,
-     54.305702612820696
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "radius": 0.27216,
-    "height": 0.34719999999999995,
-    "position": [
-     -0.2,
-     6.2,
-     0.7559999999999999
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "felt",
-    "color": "#1F4156",
-    "radius": 0.26599999999999996,
-    "height": 0.5599999999999999,
-    "position": [
-     -0.2,
-     6.2,
-     0.84
-    ],
-    "segments": 40,
-    "rotate": [
-     0,
-     0,
-     234.33641029434736
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "cone",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "radius": 0.19151999999999997,
-    "height": 0.34719999999999995,
-    "position": [
-     -0.2,
-     6.2,
-     1.064
-    ],
-    "segments": 40
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     1.8,
-     0.6,
-     0.22
-    ],
-    "seed": 20,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 157,
-    "position": [
-     -1.8,
-     1.8,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     1.7,
-     0.6,
-     0.22
-    ],
-    "seed": 21,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 151,
-    "position": [
-     -0.2,
-     1.85,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     1.8,
-     0.6,
-     0.22
-    ],
-    "seed": 22,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 157,
-    "position": [
-     1.4,
-     1.8,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     1.2,
-     0.6,
-     0.22
-    ],
-    "seed": 23,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 124,
-    "position": [
-     2.7,
-     1.7,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     0.6,
-     1.4,
-     0.22
-    ],
-    "seed": 24,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 135,
-    "position": [
-     2.9,
-     0.9,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     0.6,
-     1.4,
-     0.22
-    ],
-    "seed": 25,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 135,
-    "position": [
-     2.9499999999999997,
-     -0.4,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     0.6,
-     1.5,
-     0.22
-    ],
-    "seed": 26,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 141,
-    "position": [
-     -2.6,
-     0.8,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     0.6,
-     1.3,
-     0.22
-    ],
-    "seed": 27,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 130,
-    "position": [
-     -2.65,
-     -0.5,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
+    "scale": [
+     5.5,
      2.4,
-     1.2,
-     0.42
-    ],
-    "seed": 1,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 319,
+     2.4
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "wool",
+    "color": "#C9DBE8",
     "position": [
-     -2.4,
-     -1.3,
-     -0.03
+     3.6,
+     11.0,
+     -1.0
+    ],
+    "scale": [
+     6.0,
+     2.6,
+     3.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "wool",
+    "color": "#B4CADB",
+    "position": [
+     0.0,
+     13.0,
+     -1.0
+    ],
+    "scale": [
+     8.0,
+     2.2,
+     3.6
     ]
    },
    {
@@ -2972,18 +2796,18 @@
     "fn": "drift",
     "size": [
      2.0,
-     1.0,
-     0.36
+     0.9,
+     0.5
     ],
-    "seed": 2,
+    "seed": 31,
     "radius": [
-     0.06,
-     0.17
+     0.08,
+     0.22
     ],
-    "count": 240,
+    "count": 222,
     "position": [
-     2.3,
-     -0.6,
+     -2.0,
+     -2.3,
      -0.03
     ]
    },
@@ -2995,163 +2819,21 @@
     "module": "ice",
     "fn": "drift",
     "size": [
-     0.7,
-     0.4,
-     0.14
-    ],
-    "seed": 7,
-    "radius": [
-     0.02,
-     0.07
-    ],
-    "count": 85,
-    "position": [
      1.3,
      0.8,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     1.4,
-     0.8,
-     0.3
+     0.32
     ],
-    "seed": 8,
+    "seed": 32,
     "radius": [
      0.06,
-     0.17
+     0.16
     ],
-    "count": 160,
+    "count": 153,
     "position": [
-     -1.75,
-     -1.0,
+     0.75,
+     -2.5,
      -0.03
     ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "cotton",
-    "color": "#F4F8FB",
-    "module": "ice",
-    "fn": "drift",
-    "size": [
-     1.6,
-     0.8,
-     0.28
-    ],
-    "seed": 9,
-    "radius": [
-     0.06,
-     0.17
-    ],
-    "count": 175,
-    "position": [
-     1.25,
-     -1.55,
-     -0.03
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "paper",
-    "color": "#FBFCFD",
-    "module": "ice",
-    "fn": "snowflake",
-    "radius": 0.24,
-    "branches": [
-     [
-      0.4,
-      0.1780618546467441
-     ],
-     [
-      0.64,
-      0.1438973494774893
-     ]
-    ],
-    "depth": 0.006,
-    "position": [
-     -1.75,
-     -0.1,
-     1.05
-    ],
-    "rotate": [
-     0.0,
-     0,
-     35
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E8EEF2",
-    "a": [
-     -1.75,
-     -0.1,
-     1.2852000000000001
-    ],
-    "b": [
-     -1.75,
-     -0.1,
-     4.2
-    ],
-    "radius": 0.0015
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "material": "paper",
-    "color": "#FBFCFD",
-    "module": "ice",
-    "fn": "snowflake",
-    "radius": 0.2,
-    "branches": [
-     [
-      0.4,
-      0.227362056313355
-     ],
-     [
-      0.64,
-      0.14791309948237397
-     ]
-    ],
-    "depth": 0.006,
-    "position": [
-     1.55,
-     -0.2,
-     0.95
-    ],
-    "rotate": [
-     0.0,
-     0,
-     -20
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E8EEF2",
-    "a": [
-     1.55,
-     -0.2,
-     1.146
-    ],
-    "b": [
-     1.55,
-     -0.2,
-     4.2
-    ],
-    "radius": 0.0015
    },
    {
     "kind": "kit",
@@ -3173,14 +2855,14 @@
     ],
     "depth": 0.006,
     "position": [
+     -2.05,
      -2.6,
-     -1.8,
-     1.9
+     1.55
     ],
     "rotate": [
      0.0,
      0,
-     40
+     30
     ]
    },
    {
@@ -3189,14 +2871,14 @@
     "material": "paper",
     "color": "#E8EEF2",
     "a": [
+     -2.05,
      -2.6,
-     -1.8,
-     2.194
+     1.844
     ],
     "b": [
+     -2.05,
      -2.6,
-     -1.8,
-     4.2
+     5.0
     ],
     "radius": 0.0015
    },
@@ -3205,20 +2887,20 @@
     "shape": "scatter",
     "material": "glow",
     "color": "#DDEEFF",
-    "count": 300,
+    "count": 320,
     "radius": [
-     0.01,
-     0.025
+     0.015,
+     0.035
     ],
     "seed": 11,
     "emit": 5.0,
     "shadow": false,
     "in": [
-     -12.0,
-     12.5,
-     2.5,
-     12.0,
+     -14.0,
+     16.0,
+     2.0,
      14.0,
+     18.0,
      9.0
     ]
    },
@@ -3227,19 +2909,19 @@
     "shape": "scatter",
     "material": "cotton",
     "color": "#FFFFFF",
-    "count": 900,
+    "count": 500,
     "radius": [
-     0.004,
-     0.011
+     0.005,
+     0.012
     ],
     "seed": 7,
     "in": [
      -3.5,
-     -2.5,
+     0.45,
      0.05,
      3.5,
-     3.0,
-     2.8
+     4.0,
+     3.0
     ],
     "emit": 0.6,
     "emit_color": "#EAF6FF"
@@ -3250,62 +2932,115 @@
   "key": {
    "type": "area",
    "size_m": [
-    2.4,
+    2.0,
     2.0
    ],
    "orbit": {
-    "azimuth_deg": -40,
-    "elevation_deg": 50,
+    "azimuth_deg": -50,
+    "elevation_deg": 24,
     "distance_m": 5.0
    },
    "target": [
     0.0,
     0.0,
-    0.8
+    0.7
    ],
-   "irradiance": 0.6,
-   "color": "#E6F1FF"
+   "irradiance": 3.0,
+   "color": "#DCEBFF",
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "rib-*",
+    "brace*",
+    "waveguide*",
+    "port-*"
+   ]
   },
-  "moon": {
+  "warm": {
    "type": "area",
    "size_m": [
-    3.0,
-    3.0
+    0.8,
+    1.1
    ],
    "position": [
-    -1.0,
-    -0.5,
-    5.5
+    -0.75,
+    1.0,
+    0.6
    ],
    "target": [
-    0.0,
     0.5,
-    0.0
+    -3.0,
+    0.65
    ],
-   "irradiance": 1.4,
-   "color": "#EEF5FF",
+   "irradiance": 6.0,
+   "color": "#FFB25E",
    "receivers": [
-    "prop*"
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "rib-*",
+    "brace*",
+    "waveguide*",
+    "port-*"
    ]
+  },
+  "sheen": {
+   "type": "area",
+   "size_m": [
+    2.6,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": -58,
+    "elevation_deg": 6,
+    "distance_m": 3.2
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.65
+   ],
+   "irradiance": 14.0,
+   "color": "#E4F0FF",
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "rib-*",
+    "brace*",
+    "waveguide*",
+    "port-*"
+   ],
+   "diffuse": 0.2
   },
   "rim": {
    "type": "area",
    "size_m": [
-    2.0,
+    1.2,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": 150,
+    "elevation_deg": 22,
+    "distance_m": 4.0
+   },
+   "target": [
+    0.0,
+    0.0,
     0.8
    ],
-   "orbit": {
-    "azimuth_deg": 165,
-    "elevation_deg": 28,
-    "distance_m": 4.0
-   },
-   "target": [
-    0.0,
-    0.2,
-    1.1
-   ],
-   "irradiance": 5.0,
-   "color": "#F2F8FF",
+   "irradiance": 4.5,
+   "color": "#EAF4FF",
    "receivers": [
     "left",
     "right",
@@ -3318,97 +3053,24 @@
     "waveguide*",
     "port-*"
    ]
-  },
-  "rim_set": {
-   "type": "area",
-   "size_m": [
-    4.0,
-    2.0
-   ],
-   "orbit": {
-    "azimuth_deg": 175,
-    "elevation_deg": 48,
-    "distance_m": 6.5
-   },
-   "target": [
-    0.0,
-    1.0,
-    0.3
-   ],
-   "irradiance": 1.4,
-   "color": "#E8F3FF",
-   "receivers": [
-    "prop*"
-   ]
-  },
-  "rim2": {
-   "type": "area",
-   "size_m": [
-    1.0,
-    1.4
-   ],
-   "orbit": {
-    "azimuth_deg": -145,
-    "elevation_deg": 20,
-    "distance_m": 4.0
-   },
-   "target": [
-    0.0,
-    0.2,
-    0.9
-   ],
-   "irradiance": 2.4,
-   "color": "#CFE8FF",
-   "receivers": [
-    "left",
-    "right",
-    "top",
-    "bottom",
-    "front-panel",
-    "back",
-    "rib-*",
-    "brace*",
-    "waveguide*",
-    "port-*"
-   ]
-  },
-  "wall": null,
-  "under": {
-   "type": "area",
-   "size_m": [
-    2.4,
-    0.3
-   ],
-   "orbit": {
-    "azimuth_deg": -5,
-    "elevation_deg": 4,
-    "distance_m": 2.8
-   },
-   "target": [
-    0.0,
-    0.0,
-    0.5
-   ],
-   "irradiance": 1.0,
-   "color": "#9ED6FA"
   },
   "through": {
    "type": "area",
    "size_m": [
     0.9,
-    1.1
+    1.0
    ],
    "position": [
-    0.3,
-    1.1,
-    0.45
+    0.5,
+    1.0,
+    0.5
    ],
    "target": [
-    -0.6,
-    -2.0,
-    0.55
+    -0.7,
+    -3.0,
+    0.6
    ],
-   "irradiance": 6.0,
+   "irradiance": 5.0,
    "color": "#CDEBFF",
    "receivers": [
     "left",
@@ -3423,16 +3085,82 @@
     "port-*"
    ]
   },
+  "moon": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    4.0
+   ],
+   "position": [
+    1.0,
+    -1.0,
+    7.0
+   ],
+   "target": [
+    0.0,
+    2.0,
+    0.0
+   ],
+   "irradiance": 1.1,
+   "color": "#E6F0FF",
+   "receivers": [
+    "prop*"
+   ]
+  },
+  "rim_set": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 172,
+    "elevation_deg": 26,
+    "distance_m": 9.0
+   },
+   "target": [
+    0.0,
+    4.5,
+    1.0
+   ],
+   "irradiance": 1.4,
+   "color": "#CFE2FF",
+   "receivers": [
+    "prop*"
+   ]
+  },
+  "fill_set": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": -8,
+    "elevation_deg": 14,
+    "distance_m": 8.0
+   },
+   "target": [
+    0.0,
+    1.0,
+    0.4
+   ],
+   "irradiance": 0.9,
+   "color": "#DCE8FF",
+   "receivers": [
+    "prop*"
+   ]
+  },
   "window": {
    "type": "point",
    "position": [
-    -0.05,
-    2.95,
-    0.35
+    -2.2949131552327917,
+    4.0810962069917665,
+    0.345
    ],
-   "power_w": 18.0,
+   "power_w": 30.0,
    "color": "#FFB060",
-   "radius_m": 0.08
+   "radius_m": 0.1
   }
  },
  "render": {
@@ -3453,23 +3181,23 @@
  ],
  "camera": {
   "position": [
-   -3.3542,
-   -5.6829,
-   3.5319
+   -0.64,
+   -4.6886,
+   0.9879
   ],
   "target": [
-   -0.43,
-   0.6,
-   0.98
+   -0.64,
+   0.0,
+   0.66
   ],
-  "lens_mm": 90,
+  "lens_mm": 84,
   "level": false,
-  "fstop": 3.5,
-  "miniature": 11,
+  "fstop": 6,
+  "miniature": 6,
   "focus": [
    0.0,
-   -0.2,
-   0.7
+   -0.05,
+   0.62
   ],
   "blades": 0
  },

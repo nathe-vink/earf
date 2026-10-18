@@ -158,8 +158,8 @@ def footprint(bpy, name, p, kit):
         x += side * 0.05 * L * math.sin(t)            # the ball turned out, as a foot is
         sole.append((x, y - L * 0.08))
     kit._extrude(bm, sole, p.get('depth', 0.006), 0.0)
-    for k, (tx, r) in enumerate([(-0.42, 0.065), (-0.21, 0.075), (0.0, 0.08), (0.21, 0.075), (0.44, 0.09)]):
-        cx = tx * W * side * 1.1; cy = L * 0.33 + L * 0.07 * (1 - abs(tx) * 1.8)
+    for k, (tx, r) in enumerate([(-0.46, 0.06), (-0.23, 0.07), (0.0, 0.075), (0.23, 0.07), (0.48, 0.085)]):
+        cx = tx * W * side * 1.15; cy = L * 0.35 + L * 0.07 * (1 - abs(tx) * 1.8)
         toe = bmesh.new()
         kit._extrude(toe, [(cx + math.cos(2 * math.pi * i / 16) * r * L, cy + math.sin(2 * math.pi * i / 16) * r * L) for i in range(16)],
                      p.get('depth', 0.006) * 0.7, 0.0)      # thinner than the sole, so no face lies on another
