@@ -61,3 +61,33 @@ The speaker stands in deep fresh snow in a clearing at the edge of a fir wood af
 | 7 | p7 (blue hour again: p4's rig with p6's soft drift, the throat card) | **7.0** | 8.3 | iterate | the cabinet as bright as the snow (back card 0.9 at 160°); the woofer out of black (bounce 0.7 at -25°); a stray dark wedge left of the base; a blue caustic on the snow; real window panes and spill; the cabin further and smaller (90 m, haze 0.009); an asymmetric drift; finer grain. **Blind duel: p7 beat p4, 6.5 to 6.0** (its base sits in the snow) | the bounce as asked; the back card at 0.35 (at 0.9, then 0.5, the horn blew to white); the cabin at 72 m (at 90 m the trees hid it, b08); the window at emission 35; haze 0.009; grain 0.006. The window already has a frame and a cross of mullions; at this distance it blurs. Not done: the asymmetric drift and the caustic pool |
 | 8 | p8 (p7 with the cards brighter, the cabin at 72 m, haze 0.009) | 6.5 | 7.6 | iterate | rims on the acrylic's edges (strips behind, 1.0 and 0.6); lift the cabinet above the snow; a specular on the horn's driver; crystal detail in the near snow (f/4, more glitter); a haloed window with warm spill; wind texture on the drift; move the sparse fir off the horn; a cooler sky. **Blind duel: p7 beat p8, 6.8 to 6.5**: p7's speaker darker and crisper (p8's brighter cards made it milky), p8's cabin and haze better | **The stopping rule: p8 gained nothing.** One more pass on the best of both: p7's cards on the speaker (the bounce 0.35 at -45°, the back card 0.2 at 150°), p8's cabin (72 m) and haze (0.009); the window at emission 30 with a soft bloom (0.25 over 10 px, above 0.84) for its halo; the young fir moved off the horn (to 6.5, 13.5) |
 | 9 | p9 (p7's speaker light, p8's cabin and haze, a bloom on the window, the young fir moved off the horn) | 7.0 | 8.4 | iterate | crystal grain and glints in the snow, no pen-line ripples; a stray dark wedge beside the speaker; a rounder snow cornice on the cabin, an unclipped window; a slightly brighter grade; an asymmetric drift; thin the left firs; brighter acrylic edges. **Blind duel: p9 beat p7, 6.0 to 5.8** (the horn in clean sky, a quieter window) | **Stopped: two passes in a row gained under half a point (p8 6.5, p9 7.0, against the best 7.0).** Finals from p9's rig, the duel's winner |
+| final | `renders/2026-10-18/barkhorn/element31/ice.png` (2400 x 1600, 512 samples, 109 min) | 7.0 | 8.1 | iterate | snow too grey (exposure -0.7); a hard rectangular dark slab on the snow left of the base; the drift reads crumpled; the cabinet sinks to navy; the window clips (15 %); a narrow tonal range | logged; not acted on (the stopping rule) |
+
+## Finals
+
+- **Landscape:** `renders/2026-10-18/barkhorn/element31/ice.png`, from p9's rig. 2400 x 1600 at 512 samples, 109 minutes on the CPU here. A blind critic on the final: 7.0.
+- **Portrait:** `ice-portrait.png`, 1600 x 2000 at 512 samples. The camera is re-framed, not cropped: same eye height and line, a 120 mm lens aimed at (-0.32, 0, 0.9). A helper session renders it from commit 1b04a57, on its own branch, `r31-element-ice-portrait`.
+
+## Honestly: what holds it back
+
+Seven is the best score among the element sessions so far, but it is not a $20,000 campaign image. Its critics agree on what stands between them:
+
+1. **The acrylic does not glow.**
+   - The cabinet reads as dark navy against the snow. The ice-blue colour shows mostly in the horn.
+   - Two things cause this. The lining and the black woofer fill the cabinet, so little light passes through. And under a soft blue-hour sky there is no strong source behind the speaker to light it from within.
+   - Brighter cards made it milky (p8 lost its duel for that), and the night made it darker. The real fix is a stronger, motivated backlight: the sun's last glow straight behind it, which the critics liked in p2 and p5. That fights the blue-hour idea, so it is a choice for the owner.
+2. **The snow reads as matte plaster.** Its scans are good at 1 m but soft at 8 m. The glitter does not show at f/2.8. Its 3 cm displacement crumples into foam at the base.
+3. **A rectangular dark patch on the snow beside the base.**
+   - It is most likely the snowfield's level, undrifted square under the cabinet (`snowfield`'s bank leaves the footprint flat) showing at its rotated corner, or a card's shadow.
+   - Not yet fixed. It is the cheapest thing to fix next.
+4. **The cabin.** Its window clips and its roof snow is a slab. At 72 m in haze it is soft enough, but the critics read both as CG.
+
+What worked:
+
+- the duels (the night lost, 6.0 to 7.0);
+- the low camera with the horn in the sky;
+- the haze;
+- the soft drift;
+- the speaker on the right third with the warm window opposite it;
+- the throat card;
+- refractive caustics, which keep the lining from rendering black.
