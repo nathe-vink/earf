@@ -96,7 +96,7 @@ def _cast_frame(frame, spec, fo, ft, out):
         frame = frame + blk
         posts = None
         for da in (-10.0, 10.0):
-            pp = _revolve_profile([(0.0, 0.0), (3.5, 0.0), (3.5, 8.0), (3.0, 8.0), (3.0, 10.0), (0.0, 10.0)])
+            pp = _revolve_profile([(0.0, 0.0), (3.5, 0.0), (3.5, 4.5), (3.0, 4.5), (3.0, 5.5), (0.0, 5.5)])   # short: the lead ends on them
             pp = Rot(0, 0, math.degrees(th)) * (Pos(tr - 3.0, 0, -(ta + da)) * Rot(0, -90, 0) * pp)
             posts = pp if posts is None else posts + pp
         out['terminals'] = posts

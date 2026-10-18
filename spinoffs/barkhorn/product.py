@@ -578,7 +578,7 @@ def parts(P):
 
     # round 31: the screws in the slots the panel's holes are under, the gasket in the rebate, the terminals on the lower
     # spoke where the lead ends (its depth behind the flange, and the posts' base radius), the spokes so one runs down
-    woofer, _ = driver_part('woofer', P['woofer'], dict(wf, bolt_phase=0.5, spoke_phase=0.5, gasket_t=P['gasket'], terminals=(68.0, 119.0)),
+    woofer, _ = driver_part('woofer', P['woofer'], dict(wf, bolt_phase=0.5, spoke_phase=0.5, gasket_t=P['gasket'], terminals=(68.0, 115.0)),
                             centre=(cx, yb, wz))
     out.append(woofer)
     plate = box(cx - amp['plate_w'] / 2, D - 3.0, az - amp['plate_h'] / 2, cx + amp['plate_w'] / 2, D, az + amp['plate_h'] / 2)
