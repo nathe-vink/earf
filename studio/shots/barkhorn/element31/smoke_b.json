@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.12
+     -0.09
     ],
     "rotate_z": -18.0,
     "hide": [
@@ -35,10 +35,10 @@
      18.0,
      0.0
     ],
-    "displace": 0.03,
-    "tex_scale": 1.0,
-    "bump": 0.8,
-    "relief": 0.6,
+    "displace": 0.02,
+    "tex_scale": 1.6,
+    "bump": 1.5,
+    "relief": 0.5,
     "res": "2k",
     "cells": 1500,
     "flat": [
@@ -57,8 +57,8 @@
      0.43
     ],
     "rotate_z": -18.0,
-    "height": 0.05,
-    "reach": 0.14,
+    "height": 0.03,
+    "reach": 0.06,
     "mat_object": "prop0-kit"
    },
    {
@@ -83,7 +83,7 @@
       200
      ],
      [
-      -0.6,
+      0.45,
       6.2,
       0.09,
       1.5,
@@ -811,11 +811,11 @@
    "type": "flag",
    "size_m": [
     2.6,
-    1.6
+    2.0
    ],
    "orbit": {
     "azimuth_deg": -26.0,
-    "elevation_deg": 16.0,
+    "elevation_deg": 1.0,
     "distance_m": 1.8
    },
    "target": [
@@ -851,13 +851,13 @@
   },
   "bounce": {
    "type": "flag",
-   "color": "#E6E8EA",
+   "color": "#FFFFFF",
    "size_m": [
-    0.6,
-    0.5
+    0.9,
+    0.7
    ],
    "orbit": {
-    "azimuth_deg": 35.0,
+    "azimuth_deg": 22.0,
     "elevation_deg": 12.0,
     "distance_m": 1.6
    },
@@ -882,11 +882,11 @@
     0.0,
     0.65
    ],
-   "irradiance": 14.0,
+   "irradiance": 7.0,
    "color": "#F2EEE6",
    "orbit": {
     "azimuth_deg": 150.0,
-    "elevation_deg": 28.0,
+    "elevation_deg": 18.0,
     "distance_m": 2.8
    },
    "specular": 0.1,
@@ -955,8 +955,8 @@
  "sun": {
   "azimuth_deg": -100.3,
   "elevation_deg": 14.0,
-  "irradiance": 9.0,
-  "angle_deg": 4.0,
+  "irradiance": 4.0,
+  "angle_deg": 2.0,
   "color": "#FFE6C6"
  },
  "finish": {
