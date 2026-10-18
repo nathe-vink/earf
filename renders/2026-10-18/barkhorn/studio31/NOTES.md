@@ -80,3 +80,15 @@ floor and the horn's crisp specular streaks; the proof's softer light read milky
 
 So of the macro reframes only the horn's held (duel 5); the woofer, grip and corner keep their first finals. The
 module's MACRO_FIX now carries only the horn's change, and every final's shot.json matches its shot file.
+| set | the eight hero-light frames as a contact sheet | **6.5** (if fixed 8.0) | water-clear loses its silhouette in the white; black a dense grey block; no shadow under the plinth, floor and wall one flat 250; the coloured pool missing in clear and black; a darker strip at the left edge; tight headroom |
+| duel 9 | hero-light-ember (final) vs hero-dark-ember (h7) | | **light wins, 6.5 to 5.5**: the horn reads as tinted acrylic, not chrome; crisp edges; believable internals. The dark one's glossy floor and mood favoured it on grounding |
+
+## Where the set stands (2026-10-18, 18:00)
+
+Final scores: hero-light-ember 6.5 (f1, and 6.5 in duel 9); the eight as a set 6.5; lineup 6.5 (n2); macros 5.0 to 5.5
+on their first frames, each kept by duel against its reframe except the horn's (horn reframed 5.0, duel 5 won; woofer
+5.5 in duel 7; grip 5.5 in duel 8; corner 5.0 in duel 6; amp 5.5). Two passes at 8.5 were not reached: from 26 passes
+and 9 duels the ceiling these judges hold to is the product as it stands (the internals seen through clear sides, the
+horn's black driver, smooth uniform materials), named out of scope in nearly every reply. Next round, if wanted, from
+the set pass: a denser contact shadow and a floor a shade darker than the wall; flags for the clear frame's edges; more
+back light for the black frame; a 10-level fall-off up the wall; about 15 % more headroom.
