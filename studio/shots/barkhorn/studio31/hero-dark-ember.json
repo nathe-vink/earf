@@ -24,11 +24,11 @@
  },
  "set": {
   "kind": "sweep",
-  "color": "#141416",
+  "color": "#151414",
   "width": 24.0,
   "front": 14.0,
-  "depth": 3.2,
-  "radius": 2.6,
+  "depth": 4.0,
+  "radius": 3.4,
   "height": 9.0,
   "contact": {
    "strength": 0.35,
@@ -76,7 +76,7 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.2
+   "roughness": 0.35
   }
  },
  "lights": {
@@ -96,7 +96,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 2.4,
+   "irradiance": 1.9,
    "color": "#FFF6EC",
    "spread_deg": 70,
    "camera": false
@@ -108,8 +108,8 @@
     2.0
    ],
    "orbit": {
-    "azimuth_deg": 55,
-    "elevation_deg": 6,
+    "azimuth_deg": 60,
+    "elevation_deg": 18,
     "distance_m": 4.0
    },
    "target": [
@@ -117,7 +117,7 @@
     0.0,
     0.55
    ],
-   "irradiance": 0.35,
+   "irradiance": 0.6,
    "color": "#F2F5FF",
    "camera": false
   },
@@ -125,22 +125,22 @@
    "type": "area",
    "shape": "DISK",
    "size_m": [
-    0.3,
-    0.3
+    0.6,
+    0.6
    ],
    "position": [
     0.0,
-    0.42,
-    0.62
+    0.45,
+    0.9
    ],
    "target": [
     0.0,
     4.0,
-    1.5
+    1.7
    ],
-   "spread_deg": 110,
-   "power_w": 420.0,
-   "color": "#FFF1E2",
+   "spread_deg": 130,
+   "power_w": 520.0,
+   "color": "#FFF6EC",
    "camera": false,
    "specular": 0.0
   },
@@ -178,23 +178,57 @@
     ]
    }
   },
+  "sheen-right": {
+   "type": "panel",
+   "size_m": [
+    2.0,
+    1.2
+   ],
+   "position": [
+    1.6,
+    -2.6,
+    2.3
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "strength": 3.0,
+   "diffuse": 0.0,
+   "specular": 1.0,
+   "receivers": [
+    "*#0"
+   ],
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     1.8,
+     2.9
+    ],
+    "values": [
+     0.15,
+     1.0
+    ]
+   }
+  },
   "strip-left": {
    "type": "panel",
    "size_m": [
-    0.22,
+    0.15,
     3.2
    ],
    "orbit": {
-    "azimuth_deg": -118,
+    "azimuth_deg": -77,
     "elevation_deg": 8,
-    "distance_m": 2.6
+    "distance_m": 2.2
    },
    "target": [
     0.0,
     0.0,
     0.6
    ],
-   "strength": 22.0,
+   "strength": 45.0,
    "diffuse": 0.35,
    "specular": 1.0,
    "receivers": [
@@ -204,7 +238,7 @@
     "axis": "z",
     "at_m": [
      -0.4,
-     0.9,
+     0.7,
      2.2
     ],
     "values": [
@@ -217,20 +251,20 @@
   "strip-right": {
    "type": "panel",
    "size_m": [
-    0.22,
+    0.25,
     3.2
    ],
    "orbit": {
-    "azimuth_deg": 112,
+    "azimuth_deg": 109.5,
     "elevation_deg": 8,
-    "distance_m": 2.6
+    "distance_m": 2.2
    },
    "target": [
     0.0,
     0.0,
     0.6
    ],
-   "strength": 22.0,
+   "strength": 45.0,
    "diffuse": 0.35,
    "specular": 1.0,
    "receivers": [
@@ -240,7 +274,7 @@
     "axis": "z",
     "at_m": [
      -0.4,
-     0.9,
+     0.7,
      2.2
     ],
     "values": [
@@ -257,16 +291,16 @@
     0.4
    ],
    "position": [
-    0.0,
-    0.35,
-    3.1
+    -0.3,
+    -0.6,
+    3.0
    ],
    "target": [
     0.0,
     0.0,
-    0.9
+    1.05
    ],
-   "strength": 10.0,
+   "strength": 18.0,
    "diffuse": 0.5,
    "specular": 1.0,
    "receivers": [
