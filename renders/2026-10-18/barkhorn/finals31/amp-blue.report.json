@@ -2,8 +2,8 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/finals31/amp-blue.json",
  "image": "/home/user/earf/renders/2026-10-18/barkhorn/finals31/amp-blue.png",
  "seconds": {
-  "build": 17.1,
-  "render": 875.4
+  "build": 18.5,
+  "render": 934.2
  },
  "samples": 112,
  "size": [
@@ -969,8 +969,8 @@
    ],
    "depth_m": 1.244
   },
-  "rating-plate#0": {
-   "part": "rating-plate",
+  "rating-plate-plate#0": {
+   "part": "rating-plate-plate",
    "centre_px": [
     308.4,
     528.6
@@ -982,6 +982,34 @@
     583
    ],
    "depth_m": 0.991
+  },
+  "rating-plate-print#0": {
+   "part": "rating-plate-print",
+   "centre_px": [
+    308.7,
+    530.3
+   ],
+   "box_px": [
+    251,
+    490,
+    366,
+    572
+   ],
+   "depth_m": 0.991
+  },
+  "rating-plate-screws#0": {
+   "part": "rating-plate-screws",
+   "centre_px": [
+    309.3,
+    529.1
+   ],
+   "box_px": [
+    230,
+    517,
+    386,
+    542
+   ],
+   "depth_m": 0.99
   },
   "rib-back-1#0": {
    "part": "rib-back-1",
