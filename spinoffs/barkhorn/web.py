@@ -70,19 +70,20 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'smoke': 'in a pine wood at dawn, in shafts of woodsmoke', 'smoke_b': 'in a misty birch wood',
 }
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
+COMPANIONS_SHOWN = False      # Cumulus and Bell stay off the page while their second designs are drawn (the owner, 2026-10-18)
 TITLE = 'EARF · Atmosphere'
 DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours named for things in the air. '
         'A concept from EARF, not yet for sale.')
 
 CLOUDS = [  # key, number, name, icon, the acrylic, its line, its cover (the look book's)
-    ('red', '01', 'Ember', 'ember', 'Translucent red', 'The part of the fire that stays up late.', 'Oxblood'),
-    ('orange', '02', 'Dust', 'dust', 'Translucent orange', 'Settles in nicely.', 'Rust'),
-    ('amber', '03', 'Acid', 'acid', 'Translucent golden yellow', 'A yellow with opinions.', 'Ochre'),
-    ('green', '04', 'Poison', 'poison', 'Translucent bottle green', 'Green, and not the healthy kind.', 'Bottle green'),
-    ('blue', '05', 'Ice', 'ice', 'Translucent ice blue', 'Keeps its cool.', 'Deep blue'),
+    ('red', '01', 'Ember', 'ember', 'Translucent red', 'The last light of the fire.', 'Oxblood'),
+    ('orange', '02', 'Dust', 'dust', 'Translucent orange', 'The colour of a long, dry afternoon.', 'Rust'),
+    ('amber', '03', 'Acid', 'acid', 'Translucent golden yellow', 'A yellow with an edge.', 'Ochre'),
+    ('green', '04', 'Poison', 'poison', 'Translucent bottle green', 'Bottle green, with a hint of menace.', 'Bottle green'),
+    ('blue', '05', 'Ice', 'ice', 'Translucent ice blue', 'Glacier blue, and perfectly composed.', 'Deep blue'),
     ('violet', '06', 'Haze', 'haze', 'Translucent violet', 'Dusk, kept indoors.', 'Deep violet'),
-    ('ice', '07', 'Fog', 'fog', 'Water-clear', 'Now you see it.', 'White'),
-    ('black', '08', 'Smoke', 'smoke', 'Smoked black', "Where there's smoke.", 'Black'),
+    ('ice', '07', 'Fog', 'fog', 'Water-clear', 'Water-clear. Almost not there.', 'White'),
+    ('black', '08', 'Smoke', 'smoke', 'Smoked black', 'Smoked glass, for after dark.', 'Black'),
 ]
 SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabinet'), ('Depth', '420 mm'),
         ('Weight', 'About 72 kg; 62 kg with the horn lifted off'),
@@ -131,6 +132,19 @@ def field(im, top, bottom, side, ground=FIELD):
         return 0.5 - 0.5 * np.cos(np.pi * t)
     m = (ramp(h, top, bottom)[:, None] * ramp(w, side, side)[None, :])[..., None]
     return Image.fromarray((a * m + np.float32(ground) * (1 - m)).round().clip(0, 255).astype(np.uint8))
+
+
+def cutout(im, ground):
+    """A render on a flat ground as a picture with its own transparency: the most transparent colours that, laid over
+    that ground, give the render back. It then sits on any page colour with no blend mode, which Safari drops in places
+    (inside a frosted header, for one)."""
+    v = np.asarray(im, np.float32)
+    G = np.float32(ground)
+    up = np.where(v > G, (v - G) / np.maximum(255 - G, 1), 0)
+    dn = np.where(v < G, (G - v) / np.maximum(G, 1), 0)
+    a = np.clip((np.maximum(up, dn).max(2) - 3 / 255) / (1 - 3 / 255), 0, 1)     # the ground's own grain goes
+    c = np.where(a[..., None] > 0, G + (v - G) / np.maximum(a, 1e-6)[..., None], 0)
+    return Image.fromarray(np.dstack([np.clip(c, 0, 255), a * 255]).round().astype(np.uint8), 'RGBA')
 
 
 def layer(im, ground, dark):
@@ -237,12 +251,33 @@ def make_images(sources=None):
         if f == 'room.jpg' and room:
             continue
         one(at('r25', 'site', 'img', f), lambda p, f=f: shutil.copy(p, os.path.join(IMG, f)))
-    # the icons, acrylic (icons_real.py's renders, each on its ground made even), a layer for light grounds and one for dark
+    # the icons, acrylic (icons_real.py's renders), each cut out of the ground it was rendered on so it sits on any page
+    # colour with no blend mode. Water-clear Fog all but vanished on paper, so its edges are darkened by what its dark
+    # render lights; smoked Smoke likewise on night, so its body is lifted by how dark its light render draws it
+    paper, night = rgb(E.PAPER), rgb(E.NIGHT)
     for k, num, name, icon, *_ in CLOUDS:
-        for tag, ground, dark in (('', rgb(E.PAPER), False), ('-night', rgb(E.NIGHT), True)):
-            one(os.path.join(BRAND, 'icons', f'icon-{icon}-render{tag}.png'),
-                lambda p, g=ground, d=dark: layer(Image.open(p).resize((256, 256), Image.LANCZOS), g, d).save(
-                    os.path.join(IMG, f'icon-{icon}-{"dark" if d else "light"}.jpg'), quality=90))
+        pair = [os.path.join(BRAND, 'icons', f'icon-{icon}-render{t}.png') for t in ('', '-night')]
+        if not all(os.path.exists(p) for p in pair):
+            continue
+        L, D = (np.asarray(Image.open(p).convert('RGB').resize((256, 256), Image.LANCZOS)).astype(np.float32) for p in pair)
+        if icon == 'fog':
+            lit = np.clip((D.mean(2) - np.mean(night)) / (255 - np.mean(night)), 0, 1)[..., None]
+            L = L * (1 - 0.6 * lit ** 1.6)
+        if icon == 'smoke':
+            body = np.clip((np.mean(paper) - L.mean(2)) / np.mean(paper), 0, 1)[..., None]
+            D = D + 0.3 * body * (200 - D)
+        cutout(L, paper).save(os.path.join(IMG, f'icon-{icon}-light.webp'), quality=90, method=6)
+        cutout(D, night).save(os.path.join(IMG, f'icon-{icon}-dark.webp'), quality=90, method=6)
+        made.append(f'icon-{icon}')
+    # the header's globe: its sheet of 60 frames cut out of its white and its black grounds (it showed a square wherever
+    # the blend mode was dropped), at 84 px a frame
+    for tag, ground in (('light', (255, 255, 255)), ('dark', (0, 0, 0))):
+        src = os.path.join(BRAND, 'site', f'globe-spin-{tag}.jpg')
+        if os.path.exists(src):
+            im = cutout(Image.open(src).convert('RGB'), ground).convert('RGBa').resize((840, 504), Image.LANCZOS).convert('RGBA')
+            im.save(os.path.join(IMG, f'globe-spin-{tag}.avif'), quality=60)
+            im.save(os.path.join(IMG, f'globe-spin-{tag}.webp'), quality=70, alpha_quality=80, method=6)
+            made.append(f'globe-spin-{tag}')
     # the coins, in the icons' order, one sheet for each ground (round 30's renders, at 800 px on E.PAPER and E.NIGHT)
     order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
     for tag, ground, dark in (('paper', (242, 238, 232), False), ('night', (17, 16, 19), True)):
@@ -307,8 +342,8 @@ def body():
     spots = hero_spots()
     word = E.word_svg('currentColor').replace('role="img" aria-label="EARF"', 'aria-hidden="true"').replace('<title>EARF</title>', '')
     coin = {k: i for i, k in enumerate(KEYS)}                 # the coins' sheet is in the speakers' order
-    icon_img = lambda icon, name, cls='': (f'<img class="ic only-light {cls}" src="img/icon-{icon}-light.jpg" alt="" width="256" height="256">'
-                                           f'<img class="ic only-dark {cls}" src="img/icon-{icon}-dark.jpg" alt="" width="256" height="256">')
+    icon_img = lambda icon, name, cls='': (f'<img class="ic only-light {cls}" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'
+                                           f'<img class="ic only-dark {cls}" src="img/icon-{icon}-dark.webp" alt="" width="256" height="256">')
     hotspots = ''.join(
         f'<a class="spot" href="#speaker-{k}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%">'
         f'<span class="spot-label"><span class="spot-ic">{icon_img(icon, name)}</span><b>{name}</b><span>{num}</span></span>'
@@ -414,15 +449,15 @@ def body():
             ('lamp', 'Bell', 'A lamp. The horn&rsquo;s flare, hung mouth down.',
              'Bell, a table lamp whose tinted acrylic shade is the horn&rsquo;s flare turned over')]
     figs = ''
-    if all(os.path.exists(os.path.join(IMG, f'next-{t}.jpg')) for t, *_ in pair):
+    if COMPANIONS_SHOWN and all(os.path.exists(os.path.join(IMG, f'next-{t}.jpg')) for t, *_ in pair):
         figs = '\n    <div class="pair">' + ''.join(
             '<figure><img src="img/next-{0}.jpg" width="{1}" height="{2}" loading="lazy" alt="{5}">'
             '<figcaption><b>{3}</b> {4}</figcaption></figure>'.format(t, *Image.open(os.path.join(IMG, f'next-{t}.jpg')).size, n, d, alt)
             for t, n, d, alt in pair) + '</div>'
     nxt = ('  <section class="band"><div class="wrap next">\n    <p class="eyebrow">Next</p>\n'
-           '    <h2>The speakers would like some company.</h2>\n'
-           '    <p>A record player and a lamp, on the drawing board in the same eight colours, so a whole corner of the room can '
-           'match. Or clash, if you prefer.</p>' + figs + '\n  </div></section>')
+           '    <h2>In good company.</h2>\n'
+           '    <p>A record player and a lamp are on the drawing board, cast in the same eight colours.</p>' + figs +
+           '\n  </div></section>')
     data = dict(
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
                      coin=coin[k], views=meta[k], place=PLACES.get(ELEMENT[k], 'in its own weather'))
@@ -492,10 +527,13 @@ header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; b
   backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule) }
 header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: var(--header) }
 .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none }
-.brand .globe { width: 42px; height: 42px; flex: none; background-image: url(img/globe-spin-light.jpg); background-size: 1000% 600%;
-  background-position: 0 0; mix-blend-mode: var(--blend) }
-:root[data-theme="dark"] .brand .globe { background-image: url(img/globe-spin-dark.jpg) }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand .globe { background-image: url(img/globe-spin-dark.jpg) } }
+.brand .globe { width: 42px; height: 42px; flex: none; background-size: 1000% 600%; background-position: 0 0;
+  background-image: url(img/globe-spin-light.webp);
+  background-image: image-set(url(img/globe-spin-light.avif) type("image/avif"), url(img/globe-spin-light.webp) type("image/webp")) }
+:root[data-theme="dark"] .brand .globe { background-image: url(img/globe-spin-dark.webp);
+  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand .globe { background-image: url(img/globe-spin-dark.webp);
+  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) } }
 .brand svg { display: block; height: 22px; width: auto }
 nav ul { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 0; list-style: none }
 nav a { color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 500 }
@@ -511,7 +549,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   border: 1px solid var(--ink); border-radius: 999px; padding: 12px 18px; cursor: pointer; text-decoration: none }
 .btn.solid { background: var(--ink); color: var(--page) }
 .btn:hover { box-shadow: inset 0 0 0 1px var(--ink) }
-.ic { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: var(--blend) }
+.ic { width: 100%; height: 100%; object-fit: contain }
 .coin-dot { width: 22px; height: 22px; flex: none; display: inline-block; background: url(img/coins-light.jpg) calc(var(--i) * 100% / 7) 0 / 800% 100%;
   mix-blend-mode: var(--blend) }
 :root[data-theme="dark"] .coin-dot { background-image: url(img/coins-dark.jpg) }
@@ -538,7 +576,6 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   pointer-events: none }
 .spot-label > span:last-child { font: 500 12px/1 var(--mono); letter-spacing: 0.08em; opacity: .7 }
 .spot-ic { width: 26px; height: 26px; display: block }
-.spot-ic .ic { mix-blend-mode: multiply }
 .spot-ic .only-dark { display: none !important }
 .spot-ic .only-light { display: block !important }
 .spot:hover .spot-label, .spot:focus-visible .spot-label { opacity: 1; transform: translate(-50%, 0) }
@@ -580,7 +617,6 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .about { padding: 14px 16px 18px; display: grid; gap: 4px; align-content: start; min-width: 0 }
 .about .num { margin: 0; display: flex; align-items: center; gap: 8px; font: 500 12px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase }
 .card-ic { width: 34px; height: 34px; flex: none; display: block }
-.card .card-ic .ic { mix-blend-mode: multiply }
 .card .card-ic .only-dark { display: none !important }
 .card .card-ic .only-light { display: block !important }
 .about h3 { margin: 0; font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
@@ -701,7 +737,8 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .stage { position: relative; aspect-ratio: 3 / 2; width: 100%; max-width: 100%; container-type: size; display: grid; place-items: center;
   overflow: hidden; border-radius: 6px; background: var(--paper); touch-action: pan-y; -webkit-user-select: none; user-select: none }
 .stage:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
-.stage > * { grid-area: 1 / 1 }
+.stage > * { grid-area: 1 / 1; position: relative; z-index: 1 }   /* the picture over its blurred fill, explicitly */
+.stage > .blur { z-index: 0 }
 .stage .fill, .stage .fill img { width: 100%; height: 100%; display: block; object-fit: cover }
 .stage .fit { width: min(100cqw, calc(100cqh * var(--ar))); max-width: 100%; aspect-ratio: var(--ar); height: auto; display: block; border-radius: 0;
   -webkit-user-drag: none;
@@ -714,7 +751,7 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .stage .blur { width: 100%; height: 100%; background: center / cover no-repeat; filter: blur(28px) saturate(1.1); transform: scale(1.15) }
 .stage .in { animation: g-in 0.24s ease-out }
 @keyframes g-in { from { opacity: 0 } }
-.stage .tag { position: absolute; left: 12px; bottom: 12px; font: 500 12px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+.stage .tag { position: absolute; z-index: 2; left: 12px; bottom: 12px; font: 500 12px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--on-photo); background: var(--veil); border-radius: 999px; padding: 7px 10px }
 .nav { position: absolute; top: 50%; translate: 0 -50%; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; padding: 0;
   display: grid; place-items: center; color: var(--on-photo); background: var(--veil); cursor: pointer; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.14) }
@@ -734,7 +771,8 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .cap { margin: 0; color: var(--muted); font-size: 15px; max-width: 62ch }
 .buy { position: sticky; top: calc(var(--header) + 24px); display: grid; gap: 18px; min-width: 0; background: var(--page) }
 .buy .num { margin: 0; display: flex; align-items: center; gap: 10px; font: 500 13px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
-.buy .num .pic { width: 46px; height: 46px; display: block }
+.buy h1.named { display: flex; align-items: center; gap: 0.3em }
+.buy h1 .pic { width: 1.05em; height: 1.05em; flex: none; display: block }
 .buy h1 { font-size: clamp(40px, 5vw, 64px) }
 .buy .line { margin: 0; font-size: 18px }
 .price { margin: 0; font-size: 20px; font-weight: 600 }
@@ -751,7 +789,7 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
   border-top: 2px solid var(--ink); padding-top: 14px }
 .goes-head h2 { font-size: 24px }
 .goes-head span { font-size: 14px; color: var(--muted) }
-.goes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px }
+.goes { display: grid; grid-template-columns: repeat(2, minmax(0, 380px)); gap: 16px }
 .good { margin: 0; display: grid; gap: 8px; align-content: start }
 .good .art { aspect-ratio: 4 / 3; display: grid; place-items: center; border-radius: 6px; background: var(--paper) }
 .good .art svg { width: 78%; height: auto; display: block }
@@ -808,8 +846,8 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
       </div>
     </div>
     <div class="wrap hero-foot">
-      <p class="lede">Atmosphere is a horn loudspeaker cast in tinted acrylic, in eight colours named for things in the
-        air. Most of them, you&rsquo;d usually open a window for.</p>
+      <p class="lede">Atmosphere is a horn loudspeaker cast in tinted acrylic, in eight colours named for what hangs in
+        the air.</p>
       <div class="acts"><a class="btn solid" href="#atmosphere">Choose a colour</a><a class="btn" href="#contact">Enquire</a></div>
     </div>
     <div class="wrap"><ul class="cast" aria-label="The eight, in spectrum order">__NAMES__</ul></div>
@@ -830,7 +868,7 @@ __CLOSER__
 
   <section class="band" id="atmosphere"><div class="wrap">
     <div class="head">
-      <div><p class="eyebrow">Atmosphere</p><h2>Pick your poison.</h2>
+      <div><p class="eyebrow">Atmosphere</p><h2>Choose your weather.</h2>
         <p>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The lining shows through the walls,
           so we dressed it in white voile.</p></div>
       <div class="seg" role="group" aria-label="The speakers' covers">
@@ -844,7 +882,7 @@ __CLOSER__
 __REEL__
 __HABITATS__
   <section class="band room" id="room"><div class="wrap">
-    <div class="head"><div><p class="eyebrow">At home</p><h2>A pair of Poison.</h2></div></div>
+    <div class="head"><div><p class="eyebrow">At home</p><h2>A pair in Poison.</h2></div></div>
     <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
       <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 560 mm.</span></figcaption></figure>
   </div></section>
@@ -885,8 +923,8 @@ __NEXT__
         <p class="cap" id="cap" aria-live="polite"></p>
       </section>
       <aside class="buy" aria-label="This speaker">
-        <p class="num"><span class="pic" id="p-icon"></span><span id="p-num"></span></p>
-        <h1 id="p-name"></h1>
+        <p class="num"><span id="p-num"></span></p>
+        <h1 class="named"><span id="p-name"></span><span class="pic" id="p-icon"></span></h1>
         <p class="line" id="p-line"></p>
         <p class="price">Price on request <span>&middot; each pair made to order</span></p>
         <ul class="swatches" id="swatches" aria-label="Colour"></ul>
@@ -1075,7 +1113,7 @@ function showView(v, focus) {
   }
   if (!reduce) pic.classList.add('in');
   stage.replaceChildren(pic);
-  if (s.edge === 'busy') stage.prepend(el('div', { class: 'blur', 'aria-hidden': 'true', style: `background-image:url(${s.src})` }));
+  if (s.edge === 'busy' && v !== 'habitat') stage.prepend(el('div', { class: 'blur', 'aria-hidden': 'true', style: `background-image:url(${s.src})` }));
   if (v === 'inside' && s.shared && cur !== 'green') stage.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
   stage.style.background = ground(v);
   document.getElementById('cap').textContent = say(c, v);
@@ -1096,7 +1134,7 @@ function renderPDP(k) {
   document.getElementById('p-name').textContent = c.name;
   document.getElementById('p-line').textContent = c.line;
   document.getElementById('p-pick').textContent = c.name;
-  document.getElementById('p-icon').innerHTML = `<img class="ic only-light" src="img/icon-${c.icon}-light.jpg" alt="" width="256" height="256"><img class="ic only-dark" src="img/icon-${c.icon}-dark.jpg" alt="" width="256" height="256">`;
+  document.getElementById('p-icon').innerHTML = `<img class="ic only-light" src="img/icon-${c.icon}-light.webp" alt="" width="256" height="256"><img class="ic only-dark" src="img/icon-${c.icon}-dark.webp" alt="" width="256" height="256">`;
   document.getElementById('facts').innerHTML = [
     ['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Cast resin, tinted to match'],
     ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`],
@@ -1145,24 +1183,19 @@ const ART = {
   lamp: c => `<svg viewBox="0 0 160 120" aria-hidden="true"><path d="M44 52 A36 34 0 0 1 116 52 Z" fill="${c}"/>
     <rect x="40" y="50" width="80" height="6" rx="3" fill="${shade(c, 0.8)}"/><rect x="77" y="56" width="6" height="42" fill="${INK}"/>
     <ellipse cx="80" cy="102" rx="26" ry="8" fill="${shade(c, 0.8)}"/><ellipse cx="80" cy="99" rx="26" ry="8" fill="${c}"/></svg>`,
-  rug: c => `<svg viewBox="0 0 160 120" aria-hidden="true"><rect x="14" y="20" width="132" height="80" rx="10" fill="${c}"/>
-    <rect x="24" y="30" width="112" height="60" rx="5" fill="none" stroke="${shade(c, 0.75)}" stroke-width="5"/>
-    <path d="M44 48 H116 M44 60 H116 M44 72 H116" stroke="${light(c, 0.3)}" stroke-width="5" stroke-linecap="round"/></svg>`,
 };
 function goes(c) {
   if (c.hue === null) { const white = c.k === 'ice', acc = white ? hue(4) : hue(0);
-    return [['player', 'Monochromatic', white ? '#EEF1F1' : '#2A2826', white ? 'white' : 'black', `All ${white ? 'white' : 'black'}, for the decisive.`],
-            ['lamp', 'Accent', acc.col, acc.name.toLowerCase(), `Any of the six will do as an accent. ${acc.name}, for instance.`],
-            ['rug', 'Contrast', white ? '#2E2C2A' : '#E4E7E6', white ? 'charcoal' : 'pale grey', 'Its opposite in lightness, to keep things interesting.']]; }
-  const comp = hue(c.hue + 3), near = hue(c.hue + 1);
-  return [['player', 'Monochromatic', shade(c.col, 0.72), `deep ${c.name.toLowerCase()}`, 'The same colour, a shade deeper, for the fully committed.'],
-          ['lamp', 'Complementary', comp.col, comp.name.toLowerCase(), 'Opposite on the colour wheel, so each makes the other look brighter.'],
-          ['rug', 'Analogous', near.col, near.name.toLowerCase(), 'Next door on the wheel, for a quieter room.']];
+    return [['player', 'Monochromatic', white ? '#EEF1F1' : '#2A2826', white ? 'white' : 'black', `All ${white ? 'white' : 'black'}.`],
+            ['lamp', 'Accent', acc.col, acc.name.toLowerCase(), `One of the six as an accent: ${acc.name}, say.`]]; }
+  const comp = hue(c.hue + 3);
+  return [['player', 'Monochromatic', shade(c.col, 0.72), `deep ${c.name.toLowerCase()}`, 'The same colour, a shade deeper.'],
+          ['lamp', 'Complementary', comp.col, comp.name.toLowerCase(), 'Opposite on the colour wheel, so each sets the other off.']];
 }
-const GOODS = { player: 'Record player', lamp: 'Lamp', rug: 'Rug' };
+const GOODS = { player: 'Record player', lamp: 'Lamp' };
 function goesWith(c) {
-  document.getElementById('goes-note').textContent = c.hue === null ? `No hue of its own, so it pairs by lightness. The pieces are sketches for now`
-    : `Paired by the colour wheel. The pieces are sketches for now`;
+  document.getElementById('goes-note').textContent = c.hue === null ? `No hue of its own, so it pairs by lightness. Sketches, for now.`
+    : `Paired by the colour wheel. Sketches, for now.`;
   document.getElementById('goes').replaceChildren(...goes(c).map(([id, way, col, cname, why]) => el('figure', { class: 'good' },
     `<div class="art">${ART[id](col)}</div><b>${GOODS[id]}</b><span class="way">${way} <i>&middot;</i> <span class="chip"><span class="dot" style="--c:${col}"></span>${cname}</span></span><p>${why}</p>`)));
 }
