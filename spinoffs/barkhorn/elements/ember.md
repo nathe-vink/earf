@@ -73,4 +73,21 @@ as the critics agree pass after pass:
 - Sky: qwantani_dusk_2_puresky at 0.15; white balance 4800 K; haze 0.003; AgX, base contrast; bloom 0.18, vignette 0.2.
 - Lamps: soft orange lamps hidden behind the cabinet and the horn; a low lamp from the front left as if from the
   cracks; thin lamps lying in the two cracks by the speaker; one in the steam over the river; one at the far vent.
-- Render times: see below.
+
+## The finals
+
+- `renders/2026-10-18/barkhorn/element31/ember.png`, 2400 x 1600, 512 samples, the denoiser. Rendered as four horizontal
+  strips (`render.py --crop`, finish off), stitched, then `finish.py apply` once on the whole frame, because the
+  container is restarted when the session sits idle and takes any untracked render with it. Strip times 1153, 4373, 3348
+  and 4041 s (the last by a helper session from the same commit): 3.6 h of rendering in all. The strip seams do not
+  show at full size.
+- `ember-portrait.png`, 1600 x 2000, 512 samples, rendered whole by a helper session from 3d757bf (branch
+  r31-element-ember-portrait, 69e9086): the same set and light on a 92 mm lens.
+- A blind pass on the landscape final, full size: **5.5**, iterate (the best of the ten). Score if fixed: 7.5. What
+  it names: the cabinet front still dark (median 26) with the light through the acrylic only at its edges; a pale,
+  clipped right side (6.8 % clipped) and a studio-clean sheen on the horn's right half from the lamps behind; the far
+  ridge a flat cut-out with a serrated crest that reads as a treeline; the midground lava as horizontal streaks and
+  bokeh (f/2.8 smears the bright cracks); the sky flat and grainy; no lava close enough to light the base. Its next
+  steps, if the owner wants another round: lava close to the speaker, the lamps behind moved low and out of the horn's
+  reflection, a smoother caldera rim lit by the vent, larger crust plates at f/5.6, and a three-quarter view with the
+  speaker on the left third.
