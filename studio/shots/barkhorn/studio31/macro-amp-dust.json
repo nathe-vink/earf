@@ -24,7 +24,7 @@
  },
  "set": {
   "kind": "sweep",
-  "color": "#0E0D0D",
+  "color": "#1A1A1A",
   "width": 24.0,
   "front": 14.0,
   "depth": 4.0,
@@ -63,7 +63,7 @@
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
   "white_balance_k": 5600,
-  "white_balance_tint": 10.0
+  "white_balance_tint": 0.0
  },
  "finish": {
   "enabled": true,
@@ -76,8 +76,8 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.2,
-   "specular": 0.06
+   "roughness": 0.3,
+   "specular": 0.035
   }
  },
  "lights": {
@@ -126,8 +126,8 @@
    "type": "area",
    "shape": "DISK",
    "size_m": [
-    0.6,
-    0.6
+    0.8,
+    0.8
    ],
    "position": [
     0.0,
@@ -137,10 +137,10 @@
    "target": [
     0.0,
     4.0,
-    1.7
+    1.4
    ],
-   "spread_deg": 130,
-   "power_w": 800.0,
+   "spread_deg": 100,
+   "power_w": 650.0,
    "color": "#FFF6EC",
    "camera": false,
    "specular": 0.0
@@ -161,7 +161,7 @@
     0.0,
     0.9
    ],
-   "strength": 2.2,
+   "strength": 1.2,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -229,7 +229,7 @@
     0.0,
     1.18
    ],
-   "strength": 10.0,
+   "strength": 16.0,
    "diffuse": 1.0,
    "specular": 0.0,
    "receivers": [
@@ -252,7 +252,7 @@
     0.0,
     0.6
    ],
-   "strength": 30.0,
+   "strength": 24.0,
    "diffuse": 0.35,
    "specular": 1.0,
    "receivers": [
@@ -275,7 +275,7 @@
   "strip-right": {
    "type": "panel",
    "size_m": [
-    0.08,
+    0.12,
     3.2
    ],
    "orbit": {
@@ -288,7 +288,7 @@
     0.0,
     0.6
    ],
-   "strength": 20.0,
+   "strength": 34.0,
    "diffuse": 0.35,
    "specular": 1.0,
    "receivers": [
