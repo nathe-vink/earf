@@ -346,8 +346,12 @@ def world(bpy, sky, sun_spec=None):
         bg.inputs['Color'].default_value = (0, 0, 0, 1)
     elif kind == 'hdri':
         import os
-        name = sky.get('file', 'studio_small_03_1k')
-        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'hdri', name + ('' if name.endswith('.hdr') else '.hdr'))
+        if sky.get('polyhaven'):                                     # any Poly Haven environment, fetched and cached
+            import assets
+            path = assets.hdri(sky['polyhaven'], sky.get('res', '4k'))
+        else:
+            name = sky.get('file', 'studio_small_03_1k')
+            path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'assets', 'hdri', name + ('' if name.endswith('.hdr') else '.hdr'))
         env = nt.nodes.new('ShaderNodeTexEnvironment'); env.image = bpy.data.images.load(os.path.abspath(path), check_existing=True)
         tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping')
         mp.inputs['Rotation'].default_value = (0.0, 0.0, math.radians(sky.get('rotation_deg', 0.0)))

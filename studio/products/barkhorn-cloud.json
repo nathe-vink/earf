@@ -169,7 +169,7 @@
  },
  "assign": [
   {
-   "match": "amp-plate-plate|amp-plate-module|amp-plate-ink|amp-box|rating-plate",
+   "match": "amp-plate-plate|amp-plate-module|amp-plate-ink|amp-box|rating-plate-plate",
    "material": "amp"
   },
   {
@@ -269,7 +269,7 @@
    "material": "mark-tint"
   },
   {
-   "match": "amp-plate-print",
+   "match": "amp-plate-print|rating-plate-print",
    "material": "print"
   },
   {
@@ -293,7 +293,7 @@
    "material": "rod"
   },
   {
-   "match": "amp-plate-screws|back-screws|port-screws",
+   "match": "amp-plate-screws|rating-plate-screws|back-screws|port-screws",
    "material": "screw"
   },
   {
