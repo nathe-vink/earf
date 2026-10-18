@@ -1,0 +1,60 @@
+{
+ "date": "2026-10-18",
+ "new": "renders/2026-10-18/barkhorn/catalogue31/c-deep-blue-on.png",
+ "old": "renders/2026-10-18/barkhorn/catalogue31/c-pale-blue-on.png",
+ "new_score": 5.0,
+ "old_score": 5.6,
+ "prefer": "old",
+ "differences": [
+  {
+   "what": "Pale backdrop gives the dark frame edges and tinted horn rim a clean silhouette; in A the blue-grey sweep sits close in value and hue to the blue product, so the cabinet's outline and the horn's left edge sink into the ground",
+   "region": [
+    80,
+    250,
+    440,
+    960
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "Horn reads as a lighter, more legible translucent blue with a clear gradient toward the throat; in A the horn face goes murky teal and the black driver mass dominates more",
+   "region": [
+    85,
+    260,
+    380,
+    450
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "Woofer disc and inner panels are a touch brighter with more tonal range (lum p95 117 vs 104), so the internal structure reads better through the clear panels",
+   "region": [
+    120,
+    570,
+    335,
+    800
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "A's moodier deep-blue set has a more editorial, premium feel and no stray light; B shows a faint horizontal streak off the right side of the cabinet",
+   "region": [
+    430,
+    640,
+    540,
+    660
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "Floor contact: A's darker floor grounds the base with a visible shadow; in B the soft shadow on the near-white floor is weaker and the cabinet floats slightly",
+   "region": [
+    90,
+    900,
+    450,
+    990
+   ],
+   "favours": "A"
+  }
+ ]
+}

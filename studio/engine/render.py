@@ -256,9 +256,9 @@ def main():
         cy.volume_max_steps = R['volume_max_steps']
     cy.sample_clamp_indirect = R.get('clamp', 10.0)
     cy.blur_glossy = R.get('filter_glossy', 0.5)
-    cy.caustics_reflective = False
-    # refractive caustics off by default (noise); a shot may turn them on so light reaches what stands behind clear
-    # parts (round 31b: the lining inside a tinted acrylic cabinet, lit by the sky through the acrylic)
+    # caustics off by default (noise); a shot may turn them on so light reaches what stands behind clear parts (round
+    # 31b: the lining inside a tinted acrylic cabinet, lit by the sky through the acrylic)
+    cy.caustics_reflective = bool(R.get('caustics_reflective', False))
     cy.caustics_refractive = bool(R.get('caustics_refractive', False))
     if a.threads:
         scene.render.threads_mode = 'FIXED'; scene.render.threads = a.threads

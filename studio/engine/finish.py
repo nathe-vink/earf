@@ -25,8 +25,11 @@ sharpening halos, a cyan LED bleached white, grain raised 40 %. This is that fin
   over `feather_px`, so nothing outside the parts moves and no edge glows (08b's round 9: the tweeter's matte black
   parts crushed at 3 to 37, with nothing on the card to separate them).
 
+- **grain** (round 31): monochrome film grain, `grain` levels in the midtones, tapering at black and white, the same
+  seed every render, so a clean sweep reads as photographed paper and does not band under web compression.
+
 The post chain is raw -> tone (white point, contrast, clarity) -> retouch (the paints matched to their swatches, on the
-toned frame, so the reds stay on their swatch) -> sharpen -> the frame. The raw frame stays beside it as IMG.raw.png.
+toned frame, so the reds stay on their swatch) -> sharpen -> grain -> the frame. The raw frame stays beside it as IMG.raw.png.
 
     finish: {"enabled": true, "white_in": 213, "white_out": 236, "contrast": 0.12, "clarity": 0.08,
              "sharpen": 0.35, "sharpen_px": 0.7}
@@ -45,7 +48,7 @@ from scipy.ndimage import gaussian_filter, maximum_filter, minimum_filter
 
 DEFAULTS = {'enabled': False, 'white_in': 215.0, 'white_out': 236.0, 'peak': 251.0, 'contrast': 0.12,
             'clarity': 0.08, 'clarity_px': 25.0, 'sharpen': 0.35, 'sharpen_px': 0.7, 'sharpen_core': 2.0,
-            'max_gain': 1.12, 'dodge': []}
+            'max_gain': 1.12, 'dodge': [], 'grain': 0.0, 'grain_px': 1.0}
 W = np.array([0.2126, 0.7152, 0.0722])
 
 
@@ -152,6 +155,24 @@ def sharpen(rgb, spec):
     return l2s(lin) * 255
 
 
+def grain(rgb, spec):
+    """Film grain, last in the chain: monochrome noise of `grain` levels (standard deviation, sRGB) in the midtones,
+    tapering to none at black and white so nothing clips, `grain_px` across (at 1350 px wide), seeded the same every
+    render so a set of frames and its re-renders carry the same grain. Float sRGB (0 to 255) in and out."""
+    f = {**DEFAULTS, **(spec or {})}
+    if not f['grain']:
+        return rgb
+    h, w = rgb.shape[:2]
+    n = np.random.default_rng(31).standard_normal((h, w))
+    s = f['grain_px'] * w / 1350
+    if s > 0.6:
+        n = gaussian_filter(n, s / 2)
+        n /= max(n.std(), 1e-9)
+    y = (rgb @ W) / 255
+    amp = f['grain'] * np.clip(4 * y * (1 - y), 0, 1) ** 0.5
+    return np.clip(rgb + (n * amp)[..., None], 0, 255)
+
+
 DREAM = {'bloom': 0.0, 'bloom_px': 40.0, 'bloom_threshold': 0.75, 'saturation': 0.0, 'lift': 0.0,
          'lift_color': '#000000', 'vignette': 0.0}
 
@@ -223,13 +244,15 @@ def post(raw_png, out_png, fin=None, ret=None, swatch_png=None, legend=None, mas
         Image.fromarray(a).save(out_png)
     if on:
         b = np.asarray(Image.open(out_png).convert('RGB')).astype(np.float64)
-        _save(sharpen(b, f), out_png)
+        _save(grain(sharpen(b, f), f), out_png)
         g = f['white_out'] / f['white_in']
         rep['finish'] = {k: f[k] for k in ('white_in', 'white_out', 'peak', 'contrast', 'clarity', 'sharpen', 'sharpen_px')}
         if f.get('dream'):
             rep['finish']['dream'] = f['dream']
         if f.get('dodge'):
             rep['finish']['dodge'] = f['dodge']
+        if f.get('grain'):
+            rep['finish']['grain'] = [f['grain'], f['grain_px']]
         rep['finish']['gain'] = round(g, 4)
     return rep
 

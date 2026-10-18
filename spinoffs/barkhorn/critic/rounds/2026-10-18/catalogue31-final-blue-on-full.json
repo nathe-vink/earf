@@ -1,0 +1,333 @@
+{
+ "stage1": {
+  "impression": "A clean, well-controlled studio packshot: the blue acrylic reads as tinted cast material with believable edge thickness and the horn's resin glows, but the whole frame is sterile and reads as a high-end render rather than a photograph. The speaker barely touches the paper (a faint grey line, no weight, no blue light thrown onto the floor), the horn carries hot plastic-looking streaks and a violet LED-like glow at its throat, and the pale top face dissolves into the backdrop.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The cabinet must sit on the paper: a visible contact shadow just under the plinth (lum_median <= 145 in the 35 px band below the cabinet, against about 173 on open floor) that fades over roughly 0.3-0.5 m",
+  "The tinted acrylic must throw its colour: a soft blue transmitted pool on the floor in front of or beside the cabinet, so the product lights its set",
+  "No clipped, streaky specular on the horn and no saturated violet glow at the throat that reads as an emitter",
+  "The cabinet's top face must separate from the backdrop (at least 30 levels darker than the wall behind it)",
+  "The paper should show a hint of tooth or tonal falloff rather than a perfectly smooth CG plane"
+ ],
+ "defects": [
+  {
+   "region": [
+    250,
+    1880,
+    700,
+    1960
+   ],
+   "what": "Contact shadow too weak: 160 directly under the cabinet against 174 on open floor; the speaker floats"
+  },
+  {
+   "region": [
+    250,
+    1930,
+    700,
+    2160
+   ],
+   "what": "No coloured light from the tinted acrylic on the floor; floor RGB is the same cool grey under and away from the cabinet"
+  },
+  {
+   "region": [
+    600,
+    560,
+    740,
+    640
+   ],
+   "what": "Clipped specular on the horn's upper-right rim (p95 225, 0.26% clipped)"
+  },
+  {
+   "region": [
+    200,
+    560,
+    760,
+    900
+   ],
+   "what": "Radial bright streaks inside the horn read as CG internal reflections, plastic rather than resin"
+  },
+  {
+   "region": [
+    445,
+    650,
+    500,
+    830
+   ],
+   "what": "Saturated violet-blue rim inside the throat (p95 183 on crushed black) reads as an LED, not light through resin"
+  },
+  {
+   "region": [
+    230,
+    935,
+    860,
+    955
+   ],
+   "what": "Top face median 215 against wall 232; the lid edge disappears into the backdrop"
+  },
+  {
+   "region": [
+    0,
+    1950,
+    1080,
+    2160
+   ],
+   "what": "Floor is a perfectly smooth, untextured plane; reads as CG paper"
+  },
+  {
+   "region": [
+    450,
+    640,
+    620,
+    800
+   ],
+   "what": "Driver mass at throat 61% crushed with no shape (fixed by card; noted only)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speaker does not sit on the paper: the floor wash fills the area under the cabinet and the contact shadow is almost invisible.",
+   "evidence": {
+    "region": [
+     250,
+     1925,
+     650,
+     1960
+    ],
+    "measured": "lum_median 160.3 directly under the cabinet vs 173.6 on open floor at [250,2080,650,2150]; ratio 0.92"
+   },
+   "change": {
+    "setting": "lights.wash irradiance; set.contact shadow",
+    "from": "wash 0.5 W/m2; contact shadow strength 0.9, distance_m 0.32",
+    "to": "wash 0.2 W/m2; contact shadow strength 1.0, distance_m 0.45 (core unchanged)"
+   },
+   "expected": "A soft grey shadow under and just in front of the plinth, darkest at the contact line and fading into the floor by about 0.4 m; open floor stays near its current level.",
+   "accept": {
+    "region": [
+     250,
+     1925,
+     650,
+     1960
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 145
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The tinted acrylic casts no colour on the set, so the speaker looks pasted on rather than lighting its surroundings.",
+   "evidence": {
+    "region": [
+     300,
+     1930,
+     650,
+     1990
+    ],
+    "measured": "RGB median 156/167/174 under the cabinet vs 166/175/182 on open floor: same hue, no blue pool"
+   },
+   "change": {
+    "setting": "lights.back receivers and elevation",
+    "from": "receivers speaker parts only, el 20",
+    "to": "add 'sweep' to receivers, el 32, so the back light passes through the cabinet and lands as a blue transmitted pool 0.1-0.4 m in front of the plinth"
+   },
+   "expected": "A soft, clearly blue (not grey) patch on the floor in front of the cabinet, saturation visibly above the surrounding floor.",
+   "accept": {
+    "region": [
+     300,
+     1930,
+     650,
+     1990
+    ],
+    "metric": "delta_e",
+    "hex": "#8DAACB",
+    "op": "<=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The horn carries hot, streaky highlights that read as glossy plastic and clip on the upper-right rim.",
+   "evidence": {
+    "region": [
+     600,
+     560,
+     740,
+     640
+    ],
+    "measured": "lum_p95 224.6, clip_pct 0.26; long radial streaks across the horn mouth"
+   },
+   "change": {
+    "setting": "lights.horn",
+    "from": "irradiance 2.6 W/m2, specular 1.0",
+    "to": "irradiance 2.2 W/m2, specular 0.5"
+   },
+   "expected": "Rim highlight stays as a crisp line without clipping; interior streaks drop in contrast so the resin reads as a deep tinted solid.",
+   "accept": {
+    "region": [
+     600,
+     560,
+     740,
+     640
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.05
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "A saturated violet rim at the throat reads like an LED inside the horn.",
+   "evidence": {
+    "region": [
+     445,
+     650,
+     500,
+     830
+    ],
+    "measured": "lum_p95 183 and 1.07% clipped on a 30% crushed black ground"
+   },
+   "change": {
+    "setting": "lights.rim power",
+    "from": "12 W",
+    "to": "5 W"
+   },
+   "expected": "The throat edge keeps a thin dark-blue separation line but no glowing violet crescent.",
+   "accept": {
+    "region": [
+     445,
+     650,
+     500,
+     830
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 140
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The cabinet's top face is nearly as bright as the backdrop, so the top edge dissolves.",
+   "evidence": {
+    "region": [
+     230,
+     935,
+     860,
+     955
+    ],
+    "measured": "lum_median 215, clip 0.81%, against wall 232 at [50,100,1030,400]"
+   },
+   "change": {
+    "setting": "lights.topline peak radiance",
+    "from": "1.8",
+    "to": "1.0"
+   },
+   "expected": "The top face reads as a mid-light tinted plane with a single crisp front-edge highlight, clearly darker than the wall.",
+   "accept": {
+    "region": [
+     230,
+     935,
+     860,
+     955
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 198
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The paper is a perfectly smooth plane with no tooth, which says CG.",
+   "evidence": {
+    "region": [
+     250,
+     2080,
+     650,
+     2150
+    ],
+    "measured": "lum_range 11.5 including grain; no visible surface structure"
+   },
+   "change": {
+    "setting": "set.sweep material",
+    "from": "flat #DBDFE2 diffuse",
+    "to": "same colour with a fine paper-tooth bump (scale about 0.5 mm, strength 0.05) and roughness 0.85"
+   },
+   "expected": "Floor shows a faint, non-repeating tooth at full size, no visible pattern.",
+   "accept": {
+    "region": [
+     250,
+     2080,
+     650,
+     2150
+    ],
+    "metric": "lum_range",
+    "op": "between",
+    "value": [
+     14,
+     24
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "Overall contrast is a touch flat in the floor and lower cabinet, keeping the image in render territory.",
+   "evidence": {
+    "region": [
+     230,
+     1660,
+     760,
+     1870
+    ],
+    "measured": "lum_median 118.6, p5 21.4, p95 190.3; floor 160-175 almost uniform"
+   },
+   "change": {
+    "setting": "finish.contrast and clarity",
+    "from": "contrast 0.2, clarity 0.05",
+    "to": "contrast 0.25, clarity 0.08"
+   },
+   "expected": "Slightly more depth in the cabinet's lower half and the floor gradient without clipping the wall.",
+   "accept": {
+    "region": [
+     50,
+     100,
+     1030,
+     400
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.1
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the driver mass at the throat some readable shape (it is 61% crushed to black)",
+   "why": "The card fixes it as the resin's own depth; it is the product."
+  },
+  {
+   "request": "The cloth disc and the white lining dominate the front and make the cabinet read as a cutaway",
+   "why": "Cover cloth and lining are the product's own materials."
+  },
+  {
+   "request": "Interior radial streaks in the horn may partly come from the resin's internal geometry",
+   "why": "The horn shape and material are fixed; only the lighting change in c3 is in scope."
+  }
+ ],
+ "score_if_fixed": 7.3
+}
