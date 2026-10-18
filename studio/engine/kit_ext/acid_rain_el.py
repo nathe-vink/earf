@@ -150,6 +150,9 @@ def rain(bpy, name, p, kit):
         L = rnd.uniform(l0, l1); r = rnd.uniform(r0, r1)
         if not z0 < c.z < z1 or c.z - L / 2 < clear:
             continue
+        tb = p.get('thin_below')                           # [height, share kept]: fewer drops low over the rock
+        if tb and c.z < tb[0] and rnd.random() > tb[1]:
+            continue
         if any(math.hypot(c.x - ax, c.y - ay) < ar for ax, ay, ar in avoid):
             continue
         # a bigger drop falls faster and is longer in the frame; the far ones a touch thicker, so they hold a pixel

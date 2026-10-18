@@ -30,12 +30,12 @@ def props(cam):
             relief=False, flat=[0.0, 0.0, 0.7], res='4k', tex_scale=0.8, bump=3.0, rough_mul=0.8, darken=0.55, film=0.3, tint='#1E1D17', tint_mix=0.7,
             film_rough=0.33, film_vary=[0.03, 0.15], lumps=[[2.6, 0.06, 'billow'], [1.1, 0.04, 'fbm'], [0.9, 0.03, 'ridged'], [0.3, 0.02, 'fbm'], [0.12, 0.008, 'fbm'],
                    [9.0, 0.05]],
-            dips=[[0.0, 0.0, 1.1, 0.16], [-0.2, -1.2, 1.2, 0.2], [-0.55, -2.7, 1.5, 0.22], [-0.85, -4.1, 1.6, 0.22], [-1.1, -5.4, 1.4, 0.2],
+            dips=[[0.0, 0.0, 1.1, 0.22], [-0.2, -1.2, 1.2, 0.2], [-0.55, -2.7, 1.5, 0.22], [-0.85, -4.1, 1.6, 0.22], [-1.1, -5.4, 1.4, 0.2],
                   [2.6, 2.4, 1.6, 0.18]], seed=2),
         # beyond it, the same field on to the horizon, coarse (it is far and in the haze)
         ext('wet_ground', texture='dark_rock', size=[900.0, 700.0], position=[0.0, 345.0, -0.12], cells=700,
             displace=0.0, relief=False, flat=[0.0, 0.0, 26.0], res='2k', tex_scale=3.0, rough_mul=0.5,
-            darken=0.72, film=0.4, film_rough=0.08, tint='#1E1D17', tint_mix=0.7, lumps=[[2.5, 0.3, 'ridged'], [7.0, 0.4, 'billow'], [25.0, 0.5]], seed=3),
+            darken=0.72, film=0.4, film_rough=0.18, tint='#1E1D17', tint_mix=0.7, lumps=[[2.5, 0.3, 'ridged'], [7.0, 0.4, 'billow'], [25.0, 0.5]], seed=3),
         # standing water in the hollows, ringed by the drops
         ext('puddle', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], z=-0.11, ring=0.2, ripple=3.0, keep=1.0, roughness=0.01, big_rings=0.5, ripple_m=0.0012),
         # black boulders: one out of focus close at the left, a couple behind on the field
@@ -55,7 +55,7 @@ def props(cam):
         ext('rock', model='moon_rock_01', position=[11.0, 28.0, -0.15], rotate=[0, 0, 220], scale=1.0, darken=0.8, film_rough=0.1),
         # a low broken lava ridge across the left of the horizon, clear of the sun's path
         ext('ridge', position=[5.0, 200.0, -1.0], width=110.0, depth=40.0, height=3.5, spacing=40.0, seed=31, jag=0.8,
-            darken=0.8, film=0.3, film_rough=0.3, cells=[220, 40]),
+            darken=0.9, desaturate=0.9, film=0.3, film_rough=0.3, cells=[220, 40]),
         # more blocks on the far field, so their tops break its line
         ext('rocks', models=['rock_09', 'moon_rock_04'], count=40, area=[-30.0, 25.0, 40.0, 80.0],
             scale=[0.8, 2.2], z=-0.2, seed=28, darken=0.75, film_rough=0.5, tilt_deg=15.0, avoid=SUN_FAR + SUN_LINE),
@@ -63,7 +63,8 @@ def props(cam):
             scale=[1.0, 3.0], z=-0.3, seed=18, darken=0.75, film_rough=0.5, tilt_deg=15.0, avoid=SUN_FAR),
         # the rain, and where it lands
         ext('rain', camera=cam, count=65000, near=5.0, far=60.0, length=[0.08, 0.16], radius=[0.0008, 0.0014],
-            lean=[0.09, 0.02], lean_jitter_deg=3.0, z=[0.0, 30.0], opacity=[0.12, 0.5], scatter=0.9, rough=0.25, clear=0.1,
+            lean=[0.09, 0.02], lean_jitter_deg=6.0, z=[0.0, 30.0], opacity=[0.1, 0.45], scatter=0.9, rough=0.25, clear=0.6,
+            thin_below=[1.5, 0.5],
             avoid=[[0.0, 0.0, 0.4]], seed=3),
         # a few drops close to the lens, far out of focus
         ext('rain', camera=cam, count=30, near=1.5, far=4.0, length=[0.04, 0.08], radius=[0.0006, 0.001],
@@ -71,7 +72,7 @@ def props(cam):
         # and the curtain beyond, too fine to count
         ext('rain', camera=cam, count=300000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.08, scatter=0.9, rough=0.25, clear=0.1, seed=23),
-        ext('splashes', area=[-3.0, -7.0, 3.5, 3.0], z=-0.11, count=900, radius=[0.003, 0.014], opacity=0.2,
+        ext('splashes', area=[-3.0, -7.0, 3.5, 3.0], z=-0.11, count=450, radius=[0.003, 0.014], opacity=0.12,
             avoid=[[0.0, 0.0, 0.45]], seed=5),
     ]
 
@@ -83,15 +84,15 @@ def shot():
     sun = C.sun_from_sky(hdri, rot, irradiance=10.0, angle_deg=2.0, color='#E8DC7A')
     lights = {
         # a photographer's soft bounce from the camera's side, low: it lifts the speaker's shaded front a little
-        'bounce': C.area(-60, 10, 3.5, 0.7, '#F1E6B8', size=(2.0, 2.0)),
+        'bounce': C.area(-40, 10, 3.5, 2.2, '#F1E6B8', size=(2.0, 2.0)),
         # a small card low in front, as a photographer would hold one, into the horn's throat
         'throat': C.area(-8, 4, 2.2, 0.5, '#F1E6B8', size=(0.5, 0.4), target=(0.0, 0.0, 1.15)),
         # a card behind and to the right, toward the sun, to rim the cabinet's right edge
-        'rim': C.area(110, 10, 3.0, 0.6, '#F1E6B8', size=(1.0, 1.0)),
+        'rim': C.area(110, 5, 3.0, 2.0, '#F1E6B8', size=(1.5, 1.5), target=(0.0, 0.0, 0.5)),
     }
     s = C.shot(NAME, props(cam), cam, C.sky(hdri, rot, strength=strength, res='4k'), 'barkhorn Acid, acid rain',
-               lights=lights, sun=sun, white_balance=(6200, -18.0), rotate_z=16.0, position=(0.0, 0.0, -0.09), exposure=-0.1, look='AgX - Medium High Contrast',
-               haze={'density': 0.0006, 'anisotropy': 0.5, 'color': '#C8CC6A', 'box_m': [-700, -15, -2, 700, 900, 20]},
+               lights=lights, sun=sun, white_balance=(6200, -24.0), rotate_z=16.0, position=(0.0, 0.0, -0.15), exposure=-0.1, look='AgX - Medium High Contrast',
+               haze={'density': 0.001, 'anisotropy': 0.5, 'color': '#BFC85A', 'box_m': [-700, -15, -2, 700, 900, 20]},
                fin=C.finish(contrast=0.22, clarity=0.07, sharpen=0.35, vignette=0.14))
     return s
 
