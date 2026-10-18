@@ -811,11 +811,11 @@
    "type": "flag",
    "size_m": [
     2.6,
-    2.0
+    1.6
    ],
    "orbit": {
     "azimuth_deg": -26.0,
-    "elevation_deg": 1.0,
+    "elevation_deg": 16.0,
     "distance_m": 1.8
    },
    "target": [
@@ -823,7 +823,10 @@
     0.0,
     0.65
    ],
-   "glossy": true
+   "glossy": true,
+   "lights": [
+    "mistglow"
+   ]
   },
   "overhead": {
    "type": "flag",
@@ -841,7 +844,10 @@
     0.0,
     1.0
    ],
-   "glossy": true
+   "glossy": true,
+   "lights": [
+    "mistglow"
+   ]
   },
   "bounce": {
    "type": "flag",
@@ -860,7 +866,10 @@
     0.0,
     1.13
    ],
-   "glossy": true
+   "glossy": true,
+   "lights": [
+    "mistglow"
+   ]
   },
   "mistglow": {
    "type": "area",

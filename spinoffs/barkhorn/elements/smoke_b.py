@@ -19,16 +19,19 @@ ROT = -18.0                                               # the speaker's turn (
 # a black flag out of frame on the camera's side, as a photographer would stand one: the speaker's front mirrors black,
 # not the white wood behind the lens, so the smoked acrylic reads deep; and behind the speaker, a soft glow standing
 # for the bright mist there, so light comes through the tint and draws its edges (critic pass 1, c3)
-LIGHTS = {'negative': {'type': 'flag', 'size_m': [2.6, 2.0], 'orbit': {'azimuth_deg': -26.0, 'elevation_deg': 1.0,
+# The flags shade the mist glow alone (`lights`): standing in the low sun, the negative's edge threw one ruler-straight
+# shadow across the foreground that the critic took for a crease in the ground (pass 4); and it clears the snow now.
+LIGHTS = {'negative': {'type': 'flag', 'size_m': [2.6, 1.6], 'orbit': {'azimuth_deg': -26.0, 'elevation_deg': 16.0,
                                                                      'distance_m': 1.8},
-                       'target': [0.0, 0.0, 0.65], 'glossy': True},
+                       'target': [0.0, 0.0, 0.65], 'glossy': True, 'lights': ['mistglow']},
           # and overhead, a second flag, keeping the bright sky out of the horn's flare
           'overhead': {'type': 'flag', 'size_m': [2.0, 2.0], 'orbit': {'azimuth_deg': -15.0, 'elevation_deg': 75.0,
                                                                       'distance_m': 1.8},
-                       'target': [0.0, 0.0, 1.0], 'glossy': True},
+                       'target': [0.0, 0.0, 1.0], 'glossy': True, 'lights': ['mistglow']},
           # a white card low on the right, catching the sun and filling the horn's throat, as on location
           'bounce': {'type': 'flag', 'color': '#E6E8EA', 'size_m': [0.6, 0.5], 'orbit': {'azimuth_deg': 35.0,
-                     'elevation_deg': 12.0, 'distance_m': 1.6}, 'target': [0.0, 0.0, 1.13], 'glossy': True},
+                     'elevation_deg': 12.0, 'distance_m': 1.6}, 'target': [0.0, 0.0, 1.13], 'glossy': True,
+                     'lights': ['mistglow']},
           'mistglow': {**C.area(150.0, 28.0, 2.8, 14.0, color='#F2EEE6', size=(1.6, 2.2), target=(0.0, 0.0, 0.65)),
                        'specular': 0.1,                  # its light, not its mirror image
                        # the cabinet alone: through the horn's resin it blew the horn out white (pass 2; even a
