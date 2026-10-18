@@ -28,27 +28,32 @@ OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'lookbook31')
 
 # the colours by key (finals.py's keys), their flavour, the sweep's tint and an exposure trim (EV)
 COLOURS = {
-    'red':    dict(flavour='cloud-red',            sweep='#E6D3CF', ev=0.0),
-    'orange': dict(flavour='cloud-orange',         sweep='#E7D9C8', ev=0.0),
-    'amber':  dict(flavour='cloud-amber',          sweep='#E6DCC2', ev=0.0),
-    'green':  dict(flavour='eucalyptus-y2k-green', sweep='#D5E0CF', ev=0.0),
-    'blue':   dict(flavour='cloud-blue',           sweep='#D3E0E9', ev=0.0),
-    'violet': dict(flavour='cloud-violet',         sweep='#D9D1E3', ev=0.0),
-    'ice':    dict(flavour='birch-fog-clear',      sweep='#D8DCDD', ev=0.0),
-    'black':  dict(flavour='cloud-black',          sweep='#D6D4D1', ev=0.0),
+    'red':    dict(flavour='cloud-red',            sweep='#DDD7D6', ev=0.0),
+    'orange': dict(flavour='cloud-orange',         sweep='#DDD8D3', ev=0.0),
+    'amber':  dict(flavour='cloud-amber',          sweep='#DBD8D0', ev=0.0),
+    'green':  dict(flavour='eucalyptus-y2k-green', sweep='#D6D9D4', ev=0.0),
+    'blue':   dict(flavour='cloud-blue',           sweep='#DBDFE2', ev=0.0),
+    'violet': dict(flavour='cloud-violet',         sweep='#D9D7DC', ev=0.0),
+    'ice':    dict(flavour='birch-fog-clear',      sweep='#DADCDC', ev=0.0),
+    'black':  dict(flavour='cloud-black',          sweep='#D5D4D3', ev=0.0),
 }
 
 # the lamps that draw lines (edge, rim) light only these, so the paper's gloss never mirrors them
 CABINET = ['right', 'left', 'front-panel', 'top', 'bottom', 'back']
+# the whole speaker, for a lamp that must light it and not the paper (no second shadow on the sweep)
+SPEAKER = CABINET + ['lining-*', 'rib-*', 'brace*', 'land-*', 'waveguide*', 'hf-*', 'grip-*', 'post*', 'port*', 'woofer*',
+                     'cloth-disc', 'amp*', 'feet*', 'tie-rod*', 'top-pad', 'cap-o-ring', 'cable-glands', 'lead-*', 'mark-back',
+                     'rating-plate*', 'back-*']
 HORN = ['waveguide', 'waveguide-cap']
 
 RIG = {
     'size': [1080, 2160],
     'camera': {'position': [1.2, -2.5, 1.0], 'target': [0.0, 0.05, 0.52], 'lens_mm': 90.0, 'level': True,
-               'shift_x': -0.0245, 'shift_y': -0.035},
+               'shift_x': -0.0245, 'shift_y': -0.015,
+               'fstop': 6.3, 'focus': [0.28, -0.21, 0.6]},
     'sky': {'kind': 'gradient', 'zenith': '#2A2A2A', 'horizon': '#2E2E2E', 'ground': '#1A1A1A', 'strength': 0.15},
     'set': {'kind': 'sweep', 'width': 18.0, 'front': 5.0, 'depth': 5.5, 'radius': 2.8, 'height': 5.5,
-            'contact': {'strength': 0.6, 'distance_m': 0.15, 'core_strength': 0.85, 'core_distance_m': 0.02},
+            'contact': {'strength': 0.8, 'distance_m': 0.18, 'core_strength': 0.9, 'core_distance_m': 0.008},
             'flags': [
                 # the side panel's mirror (it looks behind-right and down, azimuth 158 to 161): black on the floor
                 # there and standing behind it, seen only in reflections, so the side reads a deep clean colour
@@ -63,10 +68,23 @@ RIG = {
                  'color': '#080808'},
             ]},
     'lights': {
-        'key': {'type': 'area', 'size_m': [1.0, 1.4], 'orbit': {'azimuth_deg': -55, 'elevation_deg': 38, 'distance_m': 1.5},
-                'target': [-0.55, 0.0, 0.9], 'irradiance': 4.5, 'color': '#FFF5E8', 'spread_deg': 50},
+        'key': {'type': 'area', 'size_m': [1.8, 2.2], 'orbit': {'azimuth_deg': -35, 'elevation_deg': 22, 'distance_m': 1.5},
+                'target': [-0.55, 0.0, 0.9], 'irradiance': 5.2, 'color': '#FFF5E8', 'spread_deg': 70},
         'fill': {'type': 'area', 'size_m': [2.0, 2.0], 'orbit': {'azimuth_deg': 40, 'elevation_deg': 15, 'distance_m': 4.0},
-                 'target': [0.0, 0.0, 0.6], 'irradiance': 1.2, 'color': '#FFF8F0', 'specular': 0.3},
+                 'target': [0.0, 0.0, 0.6], 'irradiance': 1.6, 'color': '#FFF8F0', 'specular': 0.3},
+        # through-light: a softbox behind the speaker, so the light that sells tinted acrylic, the light through it,
+        # is in the picture: a rim on every edge, the horn's resin lit from behind; linked to the speaker, since the
+        # paper's gloss drew it as a streak beside the cabinet
+        'back': {'type': 'area', 'size_m': [1.2, 1.0], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 20, 'distance_m': 2.0},
+                 'target': [0.0, -0.3, 0.3], 'irradiance': 3.0, 'color': '#FFF8F0',
+                 'receivers': SPEAKER},
+        # the same light on the paper alone, diffuse only (so its gloss draws no streak): what crosses the tinted
+        # acrylic lands on the floor in front of the base, coloured
+        'pool': {'type': 'area', 'size_m': [1.2, 1.0], 'orbit': {'azimuth_deg': 160, 'elevation_deg': 35, 'distance_m': 2.0},
+                 'target': [0.1, -0.4, 0.0], 'irradiance': 2.5, 'color': '#FFF8F0', 'specular': 0.0, 'receivers': ['sweep']},
+        # the camera-side face lit through: a kicker on the speaker alone
+        'kick': {'type': 'area', 'size_m': [1.2, 1.8], 'orbit': {'azimuth_deg': 100, 'elevation_deg': 20, 'distance_m': 1.8},
+                 'target': [0.28, 0.0, 0.6], 'irradiance': 1.8, 'color': '#FFF8F0', 'receivers': SPEAKER},
         # the front's acrylic mirrors the floor front-left (azimuth -27, 4 to 20 degrees down): a graduated card
         # lying there, seen only in reflections, a soft sheen up the lower front
         'scrim': {'type': 'panel', 'size_m': [1.6, 3.0], 'position': [-0.75, -2.2, 0.004], 'target': [-0.75, -2.0, 2.0],
@@ -77,26 +95,26 @@ RIG = {
                     'strength': 4.0, 'color': '#FFFFFF', 'diffuse': 0.0},
         # a 1 cm strip standing in the plane the near vertical edge mirrors (through the camera's mirror image and that
         # edge), so its reflection is a line on the edge at every height
-        'edge': {'type': 'area', 'size_m': [0.008, 1.2], 'position': [0.42, 0.135, 0.6], 'target': [0.28, -0.21, 0.6],
-                 'power_w': 0.8, 'color': '#FFFFFF', 'diffuse': 0.0, 'receivers': CABINET},
+        'edge': {'type': 'area', 'size_m': [0.06, 1.2], 'position': [0.42, 0.135, 0.6], 'target': [0.28, -0.21, 0.6],
+                 'power_w': 0.2, 'color': '#FFFFFF', 'diffuse': 0.0, 'receivers': CABINET},
         # the horn's upper rim mirrors up and toward the camera
         'rim': {'type': 'area', 'size_m': [1.4, 0.3], 'position': [0.3, -0.5, 2.0], 'target': [0.05, 0.0, 1.2],
                 'power_w': 12, 'color': '#FFFFFF', 'diffuse': 0.1, 'receivers': HORN},
-        'horn': {'type': 'area', 'size_m': [0.9, 0.25], 'position': [1.6, -2.0, 1.45],
-                 'target': [0.05, 0.0, 1.12], 'irradiance': 0.6, 'color': '#FFF8F0', 'spread_deg': 30, 'specular': 0.0},
-        'paper': {'type': 'area', 'size_m': [0.5, 0.5], 'position': [-0.35, 0.75, 0.12], 'target': [-0.5, 2.2, 1.6],
-                  'power_w': 260, 'color': '#FFF8F0', 'receivers': ['sweep'], 'spread_deg': 140},
+        'horn': {'type': 'area', 'size_m': [1.4, 0.4], 'position': [0.8, -1.4, 1.35],
+                 'target': [0.05, 0.0, 1.12], 'irradiance': 2.6, 'color': '#FFF8F0', 'spread_deg': 30, 'specular': 1.0},
+        'paper': {'type': 'area', 'size_m': [0.5, 0.5], 'position': [-0.35, 0.75, 0.5], 'target': [-0.5, 2.2, 1.6],
+                  'power_w': 150, 'color': '#FFF0E2', 'receivers': ['sweep'], 'spread_deg': 140},
         # the paper on the key side, so it falls off gently and does not go grey
-        'wall': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-1.5, 1.0, 3.5], 'target': [-1.8, 5.0, 1.5],
-                 'irradiance': 1.0, 'color': '#FFF8F0', 'receivers': ['sweep']},
-        'wash': {'type': 'area', 'size_m': [4.0, 1.5], 'position': [-0.6, -1.4, 3.0], 'target': [0.0, 0.4, 0.0],
-                 'irradiance': 1.7, 'color': '#FFF8F0', 'receivers': ['sweep']},
+        'wall': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-1.5, 1.0, 3.5], 'target': [-3.2, 5.0, 2.0],
+                 'irradiance': 1.6, 'color': '#FFF0E2', 'receivers': ['sweep']},
+        'wash': {'type': 'area', 'size_m': [4.0, 1.5], 'position': [0.4, -1.4, 3.0], 'target': [0.0, -0.4, 0.0],
+                 'irradiance': 1.0, 'color': '#FFF0E2', 'receivers': ['sweep']},
     },
-    'render': {'samples': 128, 'adaptive': 0.02, 'denoise': True, 'clamp': 8, 'bounces': 32,
+    'render': {'samples': 256, 'adaptive': 0.01, 'denoise': True, 'clamp': 8, 'bounces': 32,
                'glossy_bounces': 16, 'transmission_bounces': 32, 'view': 'Khronos PBR Neutral', 'exposure': 0.0,
                'white_balance_k': 5600, 'white_balance_tint': 3.0},
-    'finish': {'enabled': True, 'white_in': 236, 'white_out': 236, 'contrast': 0.06, 'clarity': 0.05,
-               'sharpen': 0.3, 'sharpen_px': 0.7, 'grain': 2.0, 'grain_px': 1.0},
+    'finish': {'enabled': True, 'white_in': 236, 'white_out': 236, 'contrast': 0.10, 'clarity': 0.05,
+               'sharpen': 0.3, 'sharpen_px': 0.7, 'grain': 1.5, 'grain_px': 1.0},
 }
 
 
@@ -148,11 +166,12 @@ def card(sh, k, cover):
          'May change: the sweep (colour, size, curve), the light (direction, size, number, power, colour, flags and '
          'reflectors), the camera (framing, lens, height) and the finish (post). Lengths in metres; the speaker stands on '
          'the origin, its front toward -y, z up; the cabinet is about 0.56 m wide (x), 0.43 m deep (y) and 0.9 m tall, '
-         'the horn above it to 1.29 m. Azimuth is measured from the front (-y), positive toward +x (camera side).', '',
+         'the horn above it to 1.29 m. The dark mass at the horn\'s throat is the tinted resin\'s own depth (it is '
+         'thickest there; hiding the driver leaves it as dark), so it is fixed. Azimuth is measured from the front (-y), positive toward +x (camera side).', '',
          '## Settings', '',
          f"- camera: position {sh['camera']['position']}, target {sh['camera']['target']}, lens {sh['camera']['lens_mm']} mm, "
          f"level (verticals vertical), shift_x {sh['camera']['shift_x']}, shift_y {sh['camera']['shift_y']} (in units of the "
-         'frame\'s long side)',
+         f"frame's long side), f/{sh['camera'].get('fstop', 0)} focused at {sh['camera'].get('focus')}",
          f"- set: sweep, colour {sh['set']['color']}, width {sh['set']['width']}, floor to the curve "
          f"{sh['set']['depth'] - sh['set']['radius']} m behind the speaker, curve radius {sh['set']['radius']}, contact "
          f"shadow {sh['set']['contact']}",

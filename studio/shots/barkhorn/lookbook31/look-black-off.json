@@ -17,7 +17,13 @@
   "lens_mm": 90.0,
   "level": true,
   "shift_x": -0.0245,
-  "shift_y": -0.035
+  "shift_y": -0.015,
+  "fstop": 6.3,
+  "focus": [
+   0.28,
+   -0.21,
+   0.6
+  ]
  },
  "sky": {
   "kind": "gradient",
@@ -34,10 +40,10 @@
   "radius": 2.8,
   "height": 5.5,
   "contact": {
-   "strength": 0.6,
-   "distance_m": 0.15,
-   "core_strength": 0.85,
-   "core_distance_m": 0.02
+   "strength": 0.8,
+   "distance_m": 0.18,
+   "core_strength": 0.9,
+   "core_distance_m": 0.008
   },
   "flags": [
    {
@@ -113,18 +119,18 @@
     "color": "#080808"
    }
   ],
-  "color": "#D6D4D1"
+  "color": "#D5D4D3"
  },
  "lights": {
   "key": {
    "type": "area",
    "size_m": [
-    1.0,
-    1.4
+    1.8,
+    2.2
    ],
    "orbit": {
-    "azimuth_deg": -55,
-    "elevation_deg": 38,
+    "azimuth_deg": -35,
+    "elevation_deg": 22,
     "distance_m": 1.5
    },
    "target": [
@@ -132,9 +138,9 @@
     0.0,
     0.9
    ],
-   "irradiance": 4.5,
+   "irradiance": 5.2,
    "color": "#FFF5E8",
-   "spread_deg": 50
+   "spread_deg": 70
   },
   "fill": {
    "type": "area",
@@ -152,9 +158,128 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.2,
+   "irradiance": 1.6,
    "color": "#FFF8F0",
    "specular": 0.3
+  },
+  "back": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 180,
+    "elevation_deg": 20,
+    "distance_m": 2.0
+   },
+   "target": [
+    0.0,
+    -0.3,
+    0.3
+   ],
+   "irradiance": 3.0,
+   "color": "#FFF8F0",
+   "receivers": [
+    "right",
+    "left",
+    "front-panel",
+    "top",
+    "bottom",
+    "back",
+    "lining-*",
+    "rib-*",
+    "brace*",
+    "land-*",
+    "waveguide*",
+    "hf-*",
+    "grip-*",
+    "post*",
+    "port*",
+    "woofer*",
+    "cloth-disc",
+    "amp*",
+    "feet*",
+    "tie-rod*",
+    "top-pad",
+    "cap-o-ring",
+    "cable-glands",
+    "lead-*",
+    "mark-back",
+    "rating-plate*",
+    "back-*"
+   ]
+  },
+  "pool": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 160,
+    "elevation_deg": 35,
+    "distance_m": 2.0
+   },
+   "target": [
+    0.1,
+    -0.4,
+    0.0
+   ],
+   "irradiance": 2.5,
+   "color": "#FFF8F0",
+   "specular": 0.0,
+   "receivers": [
+    "sweep"
+   ]
+  },
+  "kick": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.8
+   ],
+   "orbit": {
+    "azimuth_deg": 100,
+    "elevation_deg": 20,
+    "distance_m": 1.8
+   },
+   "target": [
+    0.28,
+    0.0,
+    0.6
+   ],
+   "irradiance": 1.8,
+   "color": "#FFF8F0",
+   "receivers": [
+    "right",
+    "left",
+    "front-panel",
+    "top",
+    "bottom",
+    "back",
+    "lining-*",
+    "rib-*",
+    "brace*",
+    "land-*",
+    "waveguide*",
+    "hf-*",
+    "grip-*",
+    "post*",
+    "port*",
+    "woofer*",
+    "cloth-disc",
+    "amp*",
+    "feet*",
+    "tie-rod*",
+    "top-pad",
+    "cap-o-ring",
+    "cable-glands",
+    "lead-*",
+    "mark-back",
+    "rating-plate*",
+    "back-*"
+   ]
   },
   "scrim": {
    "type": "panel",
@@ -210,7 +335,7 @@
   "edge": {
    "type": "area",
    "size_m": [
-    0.008,
+    0.06,
     1.2
    ],
    "position": [
@@ -223,7 +348,7 @@
     -0.21,
     0.6
    ],
-   "power_w": 0.8,
+   "power_w": 0.2,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "receivers": [
@@ -262,23 +387,23 @@
   "horn": {
    "type": "area",
    "size_m": [
-    0.9,
-    0.25
+    1.4,
+    0.4
    ],
    "position": [
-    1.6,
-    -2.0,
-    1.45
+    0.8,
+    -1.4,
+    1.35
    ],
    "target": [
     0.05,
     0.0,
     1.12
    ],
-   "irradiance": 0.6,
+   "irradiance": 2.6,
    "color": "#FFF8F0",
    "spread_deg": 30,
-   "specular": 0.0
+   "specular": 1.0
   },
   "paper": {
    "type": "area",
@@ -289,15 +414,15 @@
    "position": [
     -0.35,
     0.75,
-    0.12
+    0.5
    ],
    "target": [
     -0.5,
     2.2,
     1.6
    ],
-   "power_w": 260,
-   "color": "#FFF8F0",
+   "power_w": 150,
+   "color": "#FFF0E2",
    "receivers": [
     "sweep"
    ],
@@ -315,12 +440,12 @@
     3.5
    ],
    "target": [
-    -1.8,
+    -3.2,
     5.0,
-    1.5
+    2.0
    ],
-   "irradiance": 1.0,
-   "color": "#FFF8F0",
+   "irradiance": 1.6,
+   "color": "#FFF0E2",
    "receivers": [
     "sweep"
    ]
@@ -332,25 +457,25 @@
     1.5
    ],
    "position": [
-    -0.6,
+    0.4,
     -1.4,
     3.0
    ],
    "target": [
     0.0,
-    0.4,
+    -0.4,
     0.0
    ],
-   "irradiance": 1.7,
-   "color": "#FFF8F0",
+   "irradiance": 1.0,
+   "color": "#FFF0E2",
    "receivers": [
     "sweep"
    ]
   }
  },
  "render": {
-  "samples": 128,
-  "adaptive": 0.02,
+  "samples": 256,
+  "adaptive": 0.01,
   "denoise": true,
   "clamp": 8,
   "bounces": 32,
@@ -365,11 +490,11 @@
   "enabled": true,
   "white_in": 236,
   "white_out": 236,
-  "contrast": 0.06,
+  "contrast": 0.1,
   "clarity": 0.05,
   "sharpen": 0.3,
   "sharpen_px": 0.7,
-  "grain": 2.0,
+  "grain": 1.5,
   "grain_px": 1.0
  },
  "product": {
