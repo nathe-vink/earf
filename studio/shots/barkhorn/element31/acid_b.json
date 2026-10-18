@@ -1,0 +1,796 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-amber",
+  "instances": [
+   {
+    "flavour": "cloud-amber",
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotate_z": 16.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "wet_ground",
+    "texture": "dark_rock",
+    "size": [
+     40.0,
+     44.0
+    ],
+    "position": [
+     0.0,
+     14.0,
+     0.0
+    ],
+    "cells": 1700,
+    "displace": 0.07,
+    "relief": false,
+    "flat": [
+     0.0,
+     0.0,
+     0.7
+    ],
+    "res": "4k",
+    "tex_scale": 1.4,
+    "bump": 2.0,
+    "rough_mul": 0.8,
+    "darken": 0.72,
+    "film": 0.3,
+    "tint": "#1E1D17",
+    "tint_mix": 0.7,
+    "film_rough": 0.33,
+    "film_vary": [
+     0.1,
+     0.45
+    ],
+    "lumps": [
+     [
+      2.6,
+      0.06,
+      "billow"
+     ],
+     [
+      1.1,
+      0.04,
+      "fbm"
+     ],
+     [
+      0.9,
+      0.03,
+      "ridged"
+     ],
+     [
+      0.3,
+      0.02,
+      "fbm"
+     ],
+     [
+      0.12,
+      0.008,
+      "fbm"
+     ],
+     [
+      9.0,
+      0.05
+     ]
+    ],
+    "dips": [
+     [
+      -0.2,
+      -1.2,
+      1.2,
+      0.2
+     ],
+     [
+      -0.55,
+      -2.7,
+      1.5,
+      0.22
+     ],
+     [
+      -0.85,
+      -4.1,
+      1.6,
+      0.22
+     ],
+     [
+      -1.1,
+      -5.4,
+      1.4,
+      0.2
+     ],
+     [
+      2.6,
+      2.4,
+      1.6,
+      0.18
+     ]
+    ],
+    "seed": 2
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "wet_ground",
+    "texture": "dark_rock_02",
+    "size": [
+     560.0,
+     230.0
+    ],
+    "position": [
+     0.0,
+     125.0,
+     -0.12
+    ],
+    "cells": 600,
+    "displace": 0.0,
+    "relief": false,
+    "flat": [
+     0.0,
+     0.0,
+     26.0
+    ],
+    "res": "2k",
+    "tex_scale": 5.0,
+    "rough_mul": 0.5,
+    "darken": 0.72,
+    "film": 0.6,
+    "film_rough": 0.35,
+    "tint": "#1E1D17",
+    "tint_mix": 0.7,
+    "lumps": [
+     [
+      2.5,
+      0.35,
+      "ridged"
+     ],
+     [
+      7.0,
+      0.5,
+      "billow"
+     ],
+     [
+      25.0,
+      1.2
+     ]
+    ],
+    "seed": 3
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "puddle",
+    "size": [
+     40.0,
+     44.0
+    ],
+    "position": [
+     0.0,
+     14.0,
+     0.0
+    ],
+    "z": -0.11,
+    "ring": 0.2,
+    "ripple": 2.0,
+    "keep": 1.0,
+    "roughness": 0.04,
+    "ripple_m": 0.0012
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rock",
+    "model": "rock_09",
+    "position": [
+     -2.5,
+     -2.4,
+     -0.05
+    ],
+    "rotate": [
+     0,
+     0,
+     40
+    ],
+    "scale": 1.1,
+    "darken": 0.5,
+    "film_rough": 0.15
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rock",
+    "model": "moon_rock_04",
+    "position": [
+     4.4,
+     7.8,
+     -0.1
+    ],
+    "rotate": [
+     0,
+     0,
+     200
+    ],
+    "scale": 1.6,
+    "darken": 0.8,
+    "film_rough": 0.12
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rock",
+    "model": "moon_rock_01",
+    "position": [
+     -4.2,
+     10.0,
+     -0.05
+    ],
+    "rotate": [
+     0,
+     0,
+     70
+    ],
+    "scale": 1.4,
+    "darken": 0.8,
+    "film_rough": 0.12
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rocks",
+    "models": [
+     "rock_09",
+     "moon_rock_01",
+     "moon_rock_04",
+     "rock_07"
+    ],
+    "count": 160,
+    "area": [
+     -22.0,
+     3.0,
+     26.0,
+     45.0
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      3.5
+     ],
+     [
+      1.3,
+      4.85,
+      2.5
+     ],
+     [
+      2.34,
+      8.73,
+      2.5
+     ],
+     [
+      3.38,
+      12.61,
+      2.5
+     ],
+     [
+      4.42,
+      16.49,
+      2.5
+     ],
+     [
+      5.46,
+      20.37,
+      2.5
+     ],
+     [
+      6.5,
+      24.25,
+      2.5
+     ],
+     [
+      7.54,
+      28.13,
+      2.5
+     ],
+     [
+      8.58,
+      32.01,
+      2.5
+     ],
+     [
+      9.62,
+      35.89,
+      2.5
+     ],
+     [
+      10.66,
+      39.77,
+      2.5
+     ],
+     [
+      11.7,
+      43.65,
+      2.5
+     ],
+     [
+      12.74,
+      47.53,
+      2.5
+     ]
+    ],
+    "scale": [
+     0.25,
+     1.4
+    ],
+    "z": -0.08,
+    "seed": 8,
+    "darken": 0.75,
+    "film_rough": 0.35,
+    "tilt_deg": 15.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "ridge",
+    "position": [
+     0.0,
+     220.0,
+     -1.0
+    ],
+    "width": 700.0,
+    "depth": 70.0,
+    "height": 15.0,
+    "spacing": 150.0,
+    "seed": 21,
+    "jag": 2.0,
+    "gaps": [
+     [
+      60.0,
+      45.0
+     ]
+    ],
+    "darken": 0.75,
+    "film": 0.2,
+    "film_rough": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rocks",
+    "models": [
+     "rock_09",
+     "moon_rock_01",
+     "moon_rock_04"
+    ],
+    "count": 220,
+    "area": [
+     -60.0,
+     45.0,
+     90.0,
+     150.0
+    ],
+    "scale": [
+     1.0,
+     3.0
+    ],
+    "z": -0.3,
+    "seed": 18,
+    "darken": 0.75,
+    "film_rough": 0.35,
+    "tilt_deg": 15.0,
+    "avoid": [
+     [
+      12.1,
+      45,
+      7.8
+     ],
+     [
+      14.2,
+      53,
+      8.120000000000001
+     ],
+     [
+      16.3,
+      61,
+      8.44
+     ],
+     [
+      18.5,
+      69,
+      8.76
+     ],
+     [
+      20.6,
+      77,
+      9.08
+     ],
+     [
+      22.8,
+      85,
+      9.4
+     ],
+     [
+      24.9,
+      93,
+      9.72
+     ],
+     [
+      27.1,
+      101,
+      10.04
+     ],
+     [
+      29.2,
+      109,
+      10.36
+     ],
+     [
+      31.4,
+      117,
+      10.68
+     ],
+     [
+      33.5,
+      125,
+      11.0
+     ],
+     [
+      35.6,
+      133,
+      11.32
+     ],
+     [
+      37.8,
+      141,
+      11.64
+     ],
+     [
+      39.9,
+      149,
+      11.96
+     ],
+     [
+      42.1,
+      157,
+      12.280000000000001
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rain",
+    "camera": {
+     "position": [
+      -1.9128,
+      -8.999,
+      0.85
+     ],
+     "target": [
+      0.0,
+      0.0,
+      0.62
+     ],
+     "lens_mm": 80.0,
+     "level": true,
+     "fstop": 3.5,
+     "focus": [
+      0.0,
+      -0.21,
+      0.62
+     ],
+     "clip_end_m": 1500.0
+    },
+    "count": 60000,
+    "near": 3.0,
+    "far": 60.0,
+    "length": [
+     0.05,
+     0.16
+    ],
+    "radius": [
+     0.0003,
+     0.0006
+    ],
+    "lean": [
+     0.09,
+     0.02
+    ],
+    "z": [
+     0.0,
+     30.0
+    ],
+    "opacity": [
+     0.2,
+     0.45
+    ],
+    "scatter": 0.7,
+    "rough": 0.25,
+    "clear": 0.25,
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.4
+     ]
+    ],
+    "seed": 3
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rain",
+    "camera": {
+     "position": [
+      -1.9128,
+      -8.999,
+      0.85
+     ],
+     "target": [
+      0.0,
+      0.0,
+      0.62
+     ],
+     "lens_mm": 80.0,
+     "level": true,
+     "fstop": 3.5,
+     "focus": [
+      0.0,
+      -0.21,
+      0.62
+     ],
+     "clip_end_m": 1500.0
+    },
+    "count": 160,
+    "near": 1.0,
+    "far": 3.0,
+    "length": [
+     0.06,
+     0.15
+    ],
+    "radius": [
+     0.0006,
+     0.001
+    ],
+    "lean": [
+     0.09,
+     0.02
+    ],
+    "z": [
+     0.0,
+     30.0
+    ],
+    "opacity": [
+     0.3,
+     0.6
+    ],
+    "scatter": 0.7,
+    "rough": 0.25,
+    "seed": 13
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "rain",
+    "camera": {
+     "position": [
+      -1.9128,
+      -8.999,
+      0.85
+     ],
+     "target": [
+      0.0,
+      0.0,
+      0.62
+     ],
+     "lens_mm": 80.0,
+     "level": true,
+     "fstop": 3.5,
+     "focus": [
+      0.0,
+      -0.21,
+      0.62
+     ],
+     "clip_end_m": 1500.0
+    },
+    "count": 150000,
+    "near": 15.0,
+    "far": 120.0,
+    "length": [
+     0.08,
+     0.16
+    ],
+    "radius": [
+     0.0004,
+     0.0006
+    ],
+    "lean": [
+     0.09,
+     0.02
+    ],
+    "z": [
+     0.0,
+     30.0
+    ],
+    "opacity": 0.12,
+    "scatter": 0.7,
+    "rough": 0.25,
+    "clear": 0.3,
+    "seed": 23
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "splashes",
+    "area": [
+     -3.0,
+     -7.0,
+     3.5,
+     3.0
+    ],
+    "z": -0.11,
+    "count": 1500,
+    "radius": [
+     0.004,
+     0.011
+    ],
+    "opacity": 0.6,
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.45
+     ]
+    ],
+    "seed": 5
+   }
+  ]
+ },
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": -35,
+    "elevation_deg": 10,
+    "distance_m": 3.5
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 0.6,
+   "color": "#F1E6B8"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 8,
+    "distance_m": 3.5
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 0.2,
+   "color": "#F1E6B8"
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": -0.35,
+  "white_balance_k": 6800,
+  "white_balance_tint": -28.0,
+  "look": "AgX - Medium High Contrast"
+ },
+ "title": "barkhorn Acid, acid rain",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   -1.9128,
+   -8.999,
+   0.85
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.62
+  ],
+  "lens_mm": 80.0,
+  "level": true,
+  "fstop": 3.5,
+  "focus": [
+   0.0,
+   -0.21,
+   0.62
+  ],
+  "clip_end_m": 1500.0
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "belfast_sunset_puresky",
+  "rotation_deg": 68.0,
+  "strength": 0.45,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": 164.9,
+  "elevation_deg": 2.6,
+  "irradiance": 6.5,
+  "angle_deg": 2.0,
+  "color": "#F4D98A"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.22,
+  "clarity": 0.07,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.14
+  }
+ },
+ "haze": {
+  "density": 0.006,
+  "anisotropy": 0.45,
+  "color": "#C8CC6A",
+  "box_m": [
+   -500,
+   -15,
+   -2,
+   500,
+   420,
+   22
+  ]
+ }
+}
