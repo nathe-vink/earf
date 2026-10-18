@@ -66,7 +66,7 @@ as they were):
   inside the 154 x 86 envelope.
 
 **Part data** (`components.json`, added, nothing changed): spokes 8, bolt_slot 9.5 x 7.4, screw 10.5 x 3.3 (ISO
-7380 M6), waves 4, wave_h 3.5, fins 24, fin_h 12. `product.py` passes the product's own: bolt_phase 0.5 (the panel's
+7380 M6), waves 4, wave_h 2.5, fins 24, fin_h 12. `product.py` passes the product's own: bolt_phase 0.5 (the panel's
 holes), spoke_phase 0.5 (a spoke straight down, for the lead), gasket_t (P['gasket']), terminals (68, 115).
 
 **Render materials** (`studio/engine/materials.py`, new presets; `product.py`'s finish table): `treated_paper`

@@ -30,10 +30,10 @@ PRESET_DEFAULTS = {
     # treated paper: felted fibre (`fibre` at `fibre_mm`), faint radial streaks from the pulp's flow in the mould
     # (`streaks`, `streak_n` round), a slow drift in its colour (`vary`), a low sheen and a soft lobe off the dope
     'treated_paper': dict(color='#242220', roughness=0.72, specular=0.3, sheen=0.4, coat=0.05, coat_roughness=0.5,
-                          fibre=0.3, fibre_mm=0.35, streaks=0.05, streak_n=70.0, vary=0.06, axis='y'),
+                          fibre=0.3, fibre_mm=0.35, streaks=0.03, streak_n=70.0, vary=0.06, axis='y'),
     # cloth doped with damping compound (a pro woofer's multi-roll surround): a rubbery semi-gloss that puts a
     # highlight along each roll, the weave just showing through (`weave` at `weave_mm`)
-    'doped_cloth': dict(color='#1E1D1C', roughness=0.42, specular=0.5, coat=0.45, coat_roughness=0.22, sheen=0.2,
+    'doped_cloth': dict(color='#1E1D1C', roughness=0.58, specular=0.4, coat=0.12, coat_roughness=0.4, sheen=0.3,
                         weave=0.12, weave_mm=0.45, vary=0.04, axis='y'),
     # die-cast aluminium in black e-coat: a satin gloss over a fine cast grain (`grain` at `grain_mm`) and a slow
     # waviness of the casting (`wave` at `wave_mm`)
@@ -478,7 +478,7 @@ def _driver_finish(nt, b, p, preset, normal_in=None):
         a, c = {'x': ('Y', 'Z'), 'y': ('X', 'Z'), 'z': ('X', 'Y')}[p.get('axis', 'y')]
         u = math_('SUBTRACT', sep.outputs[a], 0.5); v = math_('SUBTRACT', sep.outputs[c], 0.5)
         r = math_('MULTIPLY', math_('SQRT', math_('ADD', math_('MULTIPLY', u, u), math_('MULTIPLY', v, v))), 2.0)
-        inv = math_('DIVIDE', 2.0, math_('MAXIMUM', r, 1e-4))
+        inv = math_('DIVIDE', 2.0, math_('MAXIMUM', r, 0.02))   # no singular point at the axis
         return math_('MULTIPLY', u, inv), math_('MULTIPLY', v, inv), r
 
     obj = tc.outputs['Object']
@@ -497,7 +497,7 @@ def _driver_finish(nt, b, p, preset, normal_in=None):
         base = tint(fib, p['vary'] * 0.8, base)
         n = bump(fib, p['fibre'], p['fibre_mm'] / 1000 * 0.4, n)
         rr = node('ShaderNodeMapRange'); nt.links.new(streak, rr.inputs['Value'])
-        rr.inputs['To Min'].default_value = p['roughness'] + 0.05; rr.inputs['To Max'].default_value = p['roughness'] - 0.05
+        rr.inputs['To Min'].default_value = p['roughness'] + 0.02; rr.inputs['To Max'].default_value = p['roughness'] - 0.02
         nt.links.new(rr.outputs['Result'], I['Roughness'])
     elif preset == 'doped_cloth':
         wv = node('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.inputs['Scale'].default_value = 1000.0 / p['weave_mm']
