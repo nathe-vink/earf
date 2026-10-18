@@ -1,0 +1,71 @@
+{
+ "shot": "studio/shots/barkhorn/element31/ember.json",
+ "image": "renders/2026-10-18/barkhorn/element31/ember.png",
+ "size": [
+  2400,
+  1600
+ ],
+ "samples": 512,
+ "denoise": "OpenImageDenoise",
+ "engine": "Cycles (CPU), bpy 5.0.1 on python3.11",
+ "method": "rendered as four horizontal strips (render.py --crop 0 y0 1 y1, finish off), stitched top to bottom, then studio/engine/finish.py apply run once on the whole frame with the shot's finish, so bloom and vignette are continuous. Strips 0 to 2 rendered in this session; strip 3 by a helper session (r31-element-ember-strip3, 0b0ef28) from the same commit (3d757bf).",
+ "strips": [
+  {
+   "crop": [
+    0,
+    0,
+    1,
+    0.25
+   ],
+   "render_s": 1153
+  },
+  {
+   "crop": [
+    0,
+    0.25,
+    1,
+    0.5
+   ],
+   "render_s": 4373
+  },
+  {
+   "crop": [
+    0,
+    0.5,
+    1,
+    0.75
+   ],
+   "render_s": 3348
+  },
+  {
+   "crop": [
+    0,
+    0.75,
+    1,
+    1
+   ],
+   "render_s": 4041,
+   "by": "helper session"
+  }
+ ],
+ "render_s_total": 12915,
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.05,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.18,
+   "bloom_px": 34,
+   "bloom_threshold": 0.88,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.2
+  }
+ },
+ "rig_commit": "3d757bf5e91613c6603c88d0bb046f0776677792"
+}
