@@ -49,7 +49,7 @@ def sky_rot(sun_bearing):
 
 
 import os
-SUN_BEARING = float(os.environ.get('FOG_B_SUN', 9.0))
+SUN_BEARING = float(os.environ.get('FOG_B_SUN', 14.0))
 
 
 def props():
@@ -65,7 +65,7 @@ def props():
         # the fog: a sea of it below, pouring through the saddle, a thin haze above
         C.piece('ext', module='fog_b_el', fn='fog', hills=H, floor=FLOOR, pours=pours(), top=-48.0, heave=14.0,
                 billows=[[160.0, 18.0], [50.0, 9.0], [12.0, 5.0]], bank=15.0, bank_size=200.0, rise=[1000.0, 1800.0, 25.0],
-                soft=3.0, density=0.035, anisotropy=0.8, billow_size=30.0, billow_cut=0.2, haze=0.0001, haze_height=170.0,
+                soft=3.0, density=0.035, anisotropy=0.65, billow_size=30.0, billow_cut=0.2, haze=0.0001, haze_height=170.0,
                 box=[-3500.0, 4.4, -170.0, 4500.0, 7000.0, 320.0]),
         # wisps rising up the cliff just behind the brow
         C.piece('ext', module='fog_b_el', fn='fog', top=1.0, heave=4.0, billows=[[22.0, 5.0], [7.0, 1.5]],
@@ -80,7 +80,6 @@ def props():
         C.scatter(['grass_medium_02'], 60, [-1.1, -1.1, 1.1, 1.1], avoid=((0.0, 0.0, 0.42), (0.0, -0.45, 0.3)), scale=(0.2, 0.35), seed=7),
         C.scatter(['grass_medium_02'], 50, [-8.0, 3.1, 12.0, 3.6], avoid=((0.75, 3.3, 1.3),), scale=(1.0, 1.6), seed=5),
         # a greywacke outcrop at the brow, dark against the fog behind the clear cabinet
-        C.asset('coast_rocks_05', (-0.4, 3.5, -0.55), rotate=(0, 0, 200), scale=1.3),
         C.scatter(['grass_medium_02'], 30, [-0.6, 2.6, 1.8, 3.9], avoid=((0.55, 3.4, 0.55),), scale=(0.6, 1.2), seed=13),
         C.asset('coast_rocks_05', (-2.6, 3.6, -0.35), rotate=(0, 0, 20), scale=0.6),
         C.asset('coast_rocks_05', (3.6, 3.8, -0.4), rotate=(0, 0, 140), scale=0.5),
