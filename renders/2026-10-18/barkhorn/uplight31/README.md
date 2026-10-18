@@ -41,6 +41,7 @@ Fresh, blind critics under `critic/PROMPT-promo.md`, staged by `spinoffs/barkhor
 | Frame | Passes (blind score) |
 |---|---|
 | facade | 4.0, 5.5, 5.0, 5.0, 4.5, 5.0, 5.5 (first full size), 5.5, **6.5** (the final, pass 10) |
+| facade-portrait (three quarters down the row) | **6.0** (pass 1, shipped) |
 | uplit-red (the slides' critic frame) | 3.5, 4.0, 4.5, 3.5, 4.5 (own set), 4.5 (the quay), 6.5 (first full size), 5.5, **5.5** (the final, pass 9) |
 
 The bar (two passes in a row at 8.5) was not reached. The scores settled at 5 to 6.5 and swung about a point between
@@ -48,6 +49,17 @@ critics; late passes contradicted earlier ones (the wall moved closer by two cri
 What every critic repeated and the frames still carry: the cabinet's interior burning toward pink-white at the ports,
 the horns dark (true to the cabinet), eight identical copies in a row, and a rendered rather than photographed feel.
 
+## The set
+
+- `uplit-red|orange|amber|green|blue|violet|ice|black.png`: one camera, lamp and set; rendered at 384 samples, Ember here,
+  the others on four helper sessions in parallel from the same shots (r31-uplight-u1 to u4).
+- Smoke's slide has almost no wash: its black acrylic passes very little; left as the honest result. Poison reads
+  darker overall (its green tint is the densest of the bright ones). Dust's and Ember's upper wall carries a faint
+  red-magenta: their own light, mixed with the cool moon.
+- `facade.png` (2880 x 1200, 6.5) and `facade-portrait.png` (1440 x 1800, 6.0): the portrait is a three-quarter view
+  down the row (a head-on 4:5 of the whole row is about 12 m tall: a band of sky or a slab of black water).
+
 ## Times (4 CPU cores, Cycles)
 
-facade 2880 x 1200 at 256 samples: 79 to 85 min. uplit 1600 x 1600 at 384 samples: 41 min.
+facade 2880 x 1200 at 256 samples: 79 to 85 min. uplit 1600 x 1600 at 384 samples: 41 to 44 min. facade-portrait
+1440 x 1800 at 256 samples: 51 min.
