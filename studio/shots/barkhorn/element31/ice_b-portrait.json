@@ -1,0 +1,415 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-blue",
+  "instances": [
+   {
+    "flavour": "cloud-blue",
+    "position": [
+     0.0,
+     0.0,
+     -0.008
+    ],
+    "rotate_z": 10.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "beach",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "texture": "gravelly_sand",
+    "res": "4k",
+    "displace": 0.006,
+    "relief": 0.04,
+    "dark": "#0D0D0E",
+    "light": "#2E2D2C",
+    "tex_scale": 1.25,
+    "wet_h": 0.07,
+    "damp_h": 0.1,
+    "damp_base": 0.0,
+    "spec": 0.05,
+    "bump": 1.0,
+    "wet_jitter": 0.06,
+    "wet_rough": 0.04
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "sea",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "rough": 0.07,
+    "chop": 0.9,
+    "absorb": "#2F4A48",
+    "density": 6.0,
+    "lace_w": 0.15,
+    "crests": [
+     [
+      4.5,
+      0.16,
+      0.45,
+      2.0,
+      1.0
+     ],
+     [
+      11.0,
+      0.28,
+      0.8,
+      3.6,
+      0.9
+     ],
+     [
+      24.0,
+      0.35,
+      1.2,
+      5.5,
+      0.6
+     ],
+     [
+      45.0,
+      0.35,
+      2.0,
+      8.0,
+      0.35
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     -0.9,
+     2.6,
+     -0.163
+    ],
+    "rotate": [
+     0,
+     0,
+     20
+    ],
+    "size": [
+     1.15,
+     0.95,
+     0.88
+    ],
+    "seed": 11,
+    "ice_kind": "blue",
+    "facets": 8,
+    "cracks": 3
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     1.95,
+     4.1,
+     -0.2675
+    ],
+    "rotate": [
+     0,
+     0,
+     -35
+    ],
+    "size": [
+     0.75,
+     0.62,
+     0.52
+    ],
+    "seed": 23,
+    "ice_kind": "clear",
+    "cracks": 1
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     -2.85,
+     4.0,
+     -0.2099
+    ],
+    "rotate": [
+     0,
+     0,
+     60
+    ],
+    "size": [
+     0.62,
+     0.55,
+     0.42
+    ],
+    "seed": 31,
+    "ice_kind": "milky",
+    "cracks": 0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     0.65,
+     1.3,
+     -0.078
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "size": [
+     0.22,
+     0.18,
+     0.14
+    ],
+    "seed": 53,
+    "ice_kind": "clear",
+    "subdiv": 4,
+    "cracks": 0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     -2.2,
+     1.05,
+     -0.0396
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "size": [
+     0.28,
+     0.22,
+     0.17
+    ],
+    "seed": 54,
+    "ice_kind": "blue",
+    "subdiv": 4,
+    "cracks": 0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     2.0,
+     2.9,
+     -0.1775
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "size": [
+     0.45,
+     0.38,
+     0.3
+    ],
+    "seed": 55,
+    "ice_kind": "clear",
+    "facets": 8,
+    "cracks": 1
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.5,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     0.35,
+     3.7,
+     -0.2208
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "size": [
+     0.3,
+     0.26,
+     0.2
+    ],
+    "seed": 56,
+    "ice_kind": "clear",
+    "subdiv": 4,
+    "cracks": 0
+   }
+  ]
+ },
+ "lights": {},
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 16,
+  "view": "AgX",
+  "exposure": -0.3,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0,
+  "look": "AgX - Base Contrast",
+  "volume_bounces": 4
+ },
+ "title": "Ice: Diamond Beach at sunrise (4:5)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -1.2475,
+   -5.8689,
+   0.7
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.62
+  ],
+  "lens_mm": 50.0,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.21,
+   0.62
+  ]
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "umhlanga_sunrise",
+  "rotation_deg": 241.48,
+  "strength": 1.0,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": 172.5,
+  "elevation_deg": 1.9,
+  "color": "#FE8A00",
+  "angle_deg": 0.53,
+  "irradiance": 3.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.04,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.1
+  }
+ },
+ "haze": {
+  "box_m": [
+   -420.0,
+   -12.0,
+   -1.0,
+   420.0,
+   420.0,
+   8.0
+  ],
+  "density": 0.002,
+  "anisotropy": 0.6,
+  "color": "#F2C9A8"
+ }
+}

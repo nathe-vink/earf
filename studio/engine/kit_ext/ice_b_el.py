@@ -1,0 +1,539 @@
+"""Ice, concept B (round 31b): Jokulsarlon's Diamond Beach at dawn. Black volcanic sand running down to the surf,
+the sea out to the horizon, and chunks of glacier ice stranded on the sand and in the wash, the low sun coming through
+them as it comes through the speaker's blue acrylic.
+
+Pieces (kit 'ext', module 'ice_b_el'):
+- fn 'beach': the black sand, its own shore profile (level round the speaker, then down into the sea), wet and
+  mirror-like where the wash reaches, damp above; `texture` a Poly Haven sand for grain and relief.
+- fn 'sea': the sea from the shore to the horizon, its wash lace and surf lines worked out from the beach's own
+  profile, so the foam sits where the water is shallow.
+- fn 'ice': one chunk of glacier ice, `size` [x, y, z] metres, `seed`, `kind` 'clear', 'blue' or 'milky'; cut
+  facets worn round by the sea, melt scallops, a band of bubbles and a crack or two inside it.
+
+The shore: sand z = -slope * max(0, y' - y0), y' = y + wiggle * sin(x * freq + phase); the sea stands at `water_z`.
+"""
+import math, random
+
+import bmesh
+import numpy as np
+from mathutils import Vector, noise
+
+SHORE = {'y0': 1.4, 'slope': 0.05, 'wiggle': 0.55, 'freq': 0.45, 'phase': 0.7, 'water_z': -0.09}
+
+
+def _shore(p):
+    s = dict(SHORE)
+    s.update(p.get('shore', {}))
+    return s
+
+
+def sand_z(x, y, s):
+    yy = y + s['wiggle'] * np.sin(x * s['freq'] + s['phase'])
+    return -s['slope'] * np.maximum(0.0, yy - s['y0'])
+
+
+def _axis(lo, hi, flo, fhi, step, grow=1.08):
+    """Coordinates from lo to hi: `step` apart between flo and fhi, growing geometrically outside."""
+    xs = list(np.arange(flo, fhi + 1e-9, step))
+    d, x = step, flo
+    while x > lo:
+        d *= grow; x -= d; xs.insert(0, max(lo, x))
+    d, x = step, fhi
+    while x < hi:
+        d *= grow; x += d; xs.append(min(hi, x))
+    return np.array(xs)
+
+
+def _hex(h):
+    h = h.lstrip('#'); c = [int(h[i:i + 2], 16) / 255.0 for i in (0, 2, 4)]
+    return tuple(v / 12.92 if v <= 0.04045 else ((v + 0.055) / 1.055) ** 2.4 for v in c) + (1.0,)
+
+
+def _grid_object(bpy, name, xs, ys, zfn, mat):
+    X, Y = np.meshgrid(xs, ys)
+    Z = zfn(X, Y)
+    nx, ny = len(xs), len(ys)
+    verts = np.stack([X.ravel(), Y.ravel(), Z.ravel()], 1)
+    i = np.arange(nx - 1); j = np.arange(ny - 1)
+    I, J = np.meshgrid(i, j)
+    a = (J * nx + I).ravel()
+    faces = np.stack([a, a + 1, a + nx + 1, a + nx], 1)
+    me = bpy.data.meshes.new(name)
+    me.vertices.add(len(verts)); me.vertices.foreach_set('co', verts.astype(np.float32).ravel())
+    me.loops.add(faces.size); me.loops.foreach_set('vertex_index', faces.astype(np.int32).ravel())
+    me.polygons.add(len(faces)); me.polygons.foreach_set('loop_start', (np.arange(len(faces)) * 4).astype(np.int32))
+    me.polygons.foreach_set('loop_total', np.full(len(faces), 4, np.int32))
+    me.update(calc_edges=True); me.validate()
+    me.polygons.foreach_set('use_smooth', np.ones(len(faces), bool))
+    me.materials.append(mat)
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    return ob
+
+
+# --- shader helpers ------------------------------------------------------------------------------------------------
+class _N:
+    """A small node-graph writer: n('Math', operation='MULTIPLY', inputs={0: x, 1: 2.0})."""
+    def __init__(self, nt):
+        self.nt = nt
+
+    def __call__(self, kind, inputs=None, **attrs):
+        n = self.nt.nodes.new('ShaderNode' + kind)
+        for k, v in attrs.items():
+            setattr(n, k, v)
+        for k, v in (inputs or {}).items():
+            sock = n.inputs[k]
+            if hasattr(v, 'is_output') or hasattr(v, 'links'):
+                self.nt.links.new(v, sock)
+            else:
+                sock.default_value = v
+        return n
+
+    def math(self, op, a, b=None, clamp=False):
+        n = self('Math', operation=op, use_clamp=clamp)
+        for i, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if hasattr(v, 'is_output'):
+                self.nt.links.new(v, n.inputs[i])
+            else:
+                n.inputs[i].default_value = v
+        return n.outputs[0]
+
+    def link(self, a, b):
+        self.nt.links.new(a, b)
+
+
+def _xyz(N, space='Object'):
+    tc = N('TexCoord')
+    sep = N('SeparateXYZ', inputs={'Vector': tc.outputs[space]})
+    return tc, sep
+
+
+def _shore_depth(N, sep, s):
+    """water_z - sand_z at this point's (x, y), in the shader."""
+    w = N.math('SINE', N.math('ADD', N.math('MULTIPLY', sep.outputs['X'], s['freq']), s['phase']))
+    yy = N.math('ADD', sep.outputs['Y'], N.math('MULTIPLY', w, s['wiggle']))
+    drop = N.math('MULTIPLY', N.math('MAXIMUM', N.math('SUBTRACT', yy, s['y0']), 0.0), s['slope'])
+    return N.math('ADD', drop, s['water_z']), yy          # depth (m, negative above water), and y'
+
+
+def _sand_material(bpy, name, p, s):
+    import assets
+    tex = p.get('texture', 'gravelly_sand')
+    maps = assets.texture(tex, p.get('res', '4k'))
+    size = p.get('tex_scale') or (assets.size_m(tex) or (2.0, 2.0))[0]
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); N = _N(nt)
+    out = N('OutputMaterial'); bs = N('BsdfPrincipled')
+    N.link(bs.outputs['BSDF'], out.inputs['Surface'])
+    tc, sep = _xyz(N)
+    # the texture, laid twice (its own scale, and turned and larger) and blended by a broad noise, so it does not tile
+    mp1 = N('Mapping', inputs={'Vector': tc.outputs['Object'], 'Scale': (1 / size, 1 / size, 1 / size)})
+    mp2 = N('Mapping', inputs={'Vector': tc.outputs['Object'], 'Scale': (0.71 / size, 0.71 / size, 0.71 / size),
+                               'Rotation': (0, 0, 0.9), 'Location': (0.37, 0.61, 0)})
+    blend = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 0.35, 'Detail': 2.0})
+    bl = N('MapRange', inputs={'Value': blend.outputs['Fac'], 'From Min': 0.42, 'From Max': 0.58})
+
+    def img(key, colour):
+        outs = []
+        for mp in (mp1, mp2):
+            t = N('TexImage'); t.image = bpy.data.images.load(maps[key], check_existing=True)
+            if not colour:
+                t.image.colorspace_settings.name = 'Non-Color'
+            N.link(mp.outputs['Vector'], t.inputs['Vector'])
+            outs.append(t.outputs['Color'])
+        mx = N('Mix', data_type='RGBA', inputs={'Factor': bl.outputs['Result'], 'A': outs[0], 'B': outs[1]})
+        return mx.outputs[2]
+    diff = img('diff', True)
+    lum = N('RGBToBW', inputs={'Color': diff}).outputs[0]
+    # volcanic black: the photographed grain's light and dark, mapped to basalt's near-black with a few pale grains
+    ramp = N('ValToRGB', inputs={'Fac': lum}); cr = ramp.color_ramp
+    cr.elements[0].position = 0.12; cr.elements[0].color = _hex(p.get('dark', '#0B0B0C'))
+    cr.elements[1].position = 0.62; cr.elements[1].color = _hex(p.get('light', '#3A3936'))
+    depth, yy = _shore_depth(N, sep, s)
+    # wetness from how far above the water this point is: soaked below wet_h, damp to damp_h, broken by noise
+    wn = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 1.3, 'Detail': 6.0})
+    jit = N.math('MULTIPLY', N.math('SUBTRACT', wn.outputs['Fac'], 0.5), p.get('wet_jitter', 0.05))
+    height = N.math('ADD', N.math('MULTIPLY', depth, -1.0), jit)       # height above the water (m)
+    wet = N('MapRange', inputs={'Value': height, 'From Min': p.get('wet_h', 0.05), 'From Max': p.get('wet_h', 0.05) - 0.03,
+                                'To Min': 0.0, 'To Max': 1.0}, clamp=True).outputs['Result']
+    damp = N('MapRange', inputs={'Value': height, 'From Min': p.get('damp_h', 0.16), 'From Max': p.get('wet_h', 0.05),
+                                 'To Min': p.get('damp_base', 0.35), 'To Max': 1.0}, clamp=True).outputs['Result']
+    darken = N('Mix', data_type='RGBA', blend_type='MULTIPLY',
+               inputs={'Factor': N.math('MULTIPLY', damp, 0.75), 'A': ramp.outputs['Color'], 'B': (0.45, 0.45, 0.47, 1.0)})
+    N.link(darken.outputs[2], bs.inputs['Base Color'])
+    rough_img = N('RGBToBW', inputs={'Color': img('rough', False)}).outputs[0]
+    dry_r = N.math('ADD', N.math('MULTIPLY', rough_img, 0.2), p.get('dry_rough', 0.82))
+    damp_r = N('MapRange', inputs={'Value': damp, 'From Min': 0.0, 'From Max': 1.0, 'To Min': 1.0, 'To Max': 0.45}).outputs['Result']
+    r = N.math('MULTIPLY', dry_r, damp_r)
+    # glassy grains: a few in a hundred catch the low sun as points of light (black volcanic sand glitters)
+    gv = N('TexVoronoi', inputs={'Vector': tc.outputs['Object'], 'Scale': 1.0 / p.get('grain_m', 0.0016), 'Randomness': 1.0})
+    glint = N('MapRange', inputs={'Value': gv.outputs['Color'], 'From Min': 1.0 - p.get('glint_share', 0.04), 'From Max': 1.0},
+              clamp=True).outputs['Result']
+    glint = N.math('CEIL', N.math('SUBTRACT', glint, 0.001))
+    r = N('Mix', data_type='FLOAT', inputs={'Factor': glint, 'A': r, 'B': 0.12}).outputs[0]
+    r = N('Mix', data_type='FLOAT', inputs={'Factor': wet, 'A': r, 'B': p.get('wet_rough', 0.06)}).outputs[0]
+    N.link(r, bs.inputs['Roughness'])
+    N.link(N('Mix', data_type='FLOAT', inputs={'Factor': glint, 'A': p.get('spec', 0.35), 'B': 0.8}).outputs[0],
+           bs.inputs['Specular IOR Level'])
+    # a water film on the soaked sand: a clear coat that mirrors the sky
+    N.link(N.math('MULTIPLY', wet, 1.0), bs.inputs['Coat Weight'])
+    bs.inputs['Coat Roughness'].default_value = 0.015; bs.inputs['Coat IOR'].default_value = 1.33
+    nm = N('NormalMap', inputs={'Color': img('nor_gl', False)})
+    nstr = N('MapRange', inputs={'Value': wet, 'To Min': p.get('bump', 1.0), 'To Max': p.get('bump', 1.0) * 0.35}).outputs['Result']
+    N.link(nstr, nm.inputs['Strength'])
+    N.link(nm.outputs['Normal'], bs.inputs['Normal'])
+    if p.get('displace', 0.0) > 0 and 'disp' in maps:
+        dsp = N('Displacement', inputs={'Height': N('RGBToBW', inputs={'Color': img('disp', False)}).outputs[0],
+                                        'Midlevel': 0.5, 'Scale': p['displace']})
+        N.link(dsp.outputs[0], out.inputs['Displacement'])
+        m.displacement_method = 'BOTH'
+    return m
+
+
+def beach(bpy, name, p, kit):
+    s = _shore(p)
+    x0, y0, x1, y1 = p.get('extent', [-30.0, -9.0, 30.0, 14.0])
+    fx0, fy0, fx1, fy1 = p.get('fine', [-3.5, -5.5, 3.5, 6.0])
+    xs = _axis(x0, x1, fx0, fx1, p.get('cell', 0.012))
+    ys = _axis(y0, y1, fy0, fy1, p.get('cell', 0.012))
+    relief = p.get('relief', 0.04)
+    rx = random.Random(p.get('seed', 3)).uniform(-50, 50)
+
+    def zfn(X, Y):
+        Z = sand_z(X, Y, s)
+        # gentle undulation up the beach, fading to level under the speaker
+        r = np.hypot(X, Y)
+        t = np.clip((r - 1.0) / 1.5, 0, 1); t = t * t * (3 - 2 * t)
+        U = np.vectorize(lambda x, y: noise.noise(Vector((x * 0.4 + rx, y * 0.4, 0.3))))(X, Y) if relief else 0
+        return Z + relief * t * U * np.clip((Z - s['water_z'] - 0.03) / 0.15, 0, 1)
+    ob = _grid_object(bpy, name, xs, ys, zfn, _sand_material(bpy, name + '-mat', p, s))
+    return [ob]
+
+
+def _sea_material(bpy, name, p, s):
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); N = _N(nt)
+    out = N('OutputMaterial')
+    tc, sep = _xyz(N)
+    depth, yy = _shore_depth(N, sep, s)
+    water = N('BsdfPrincipled', inputs={'Base Color': _hex('#1A2A2C'), 'Roughness': p.get('rough', 0.025),
+                                        'IOR': 1.333, 'Transmission Weight': 1.0, 'Specular IOR Level': 0.5})
+    # waves: long swell and short chop as bump, both in world metres
+    sw = N('TexWave', wave_type='BANDS', bands_direction='Y', inputs={'Vector': tc.outputs['Object'], 'Scale': 0.09,
+                                                                       'Distortion': 6.0, 'Detail': 3.0, 'Detail Scale': 1.5})
+    ch = N('TexNoise', inputs={'Vector': N('Mapping', inputs={'Vector': tc.outputs['Object'], 'Scale': (1.0, 2.2, 1.0)}).outputs[0],
+                               'Scale': 1.6, 'Detail': 8.0, 'Roughness': 0.55})
+    h = N.math('ADD', N.math('MULTIPLY', sw.outputs['Fac'], 0.35), ch.outputs['Fac'])
+    bump = N('Bump', inputs={'Height': h, 'Strength': p.get('chop', 0.18), 'Distance': 0.05})
+    N.link(bump.outputs['Normal'], water.inputs['Normal'])
+    # foam: the wash's lace where the water runs thin over the sand, and the broken surf in lines further out
+    lace = N('TexVoronoi', feature='DISTANCE_TO_EDGE', inputs={'Vector': N('Mapping', inputs={
+        'Vector': tc.outputs['Object'], 'Scale': (1.0, 1.8, 1.0)}).outputs[0], 'Scale': 3.2, 'Randomness': 1.0})
+    lace_n = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 2.5, 'Detail': 6.0})
+    lace_v = N('MapRange', inputs={'Value': lace.outputs['Distance'], 'From Min': 0.03, 'From Max': 0.0}).outputs['Result']
+    lace_v = N.math('MULTIPLY', lace_v, N('MapRange', inputs={'Value': lace_n.outputs['Fac'], 'From Min': 0.42, 'From Max': 0.62}).outputs['Result'])
+    edge = N('MapRange', inputs={'Value': depth, 'From Min': 0.0, 'From Max': p.get('edge_m', 0.012)}).outputs['Result']
+    edge = N.math('SUBTRACT', 1.0, edge)                                    # the very rim of the wash: a thin white line
+    rim_n = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 6.0, 'Detail': 4.0})
+    edge = N.math('MULTIPLY', edge, N('MapRange', inputs={'Value': rim_n.outputs['Fac'], 'From Min': 0.35, 'From Max': 0.6}).outputs['Result'])
+    band = N('MapRange', inputs={'Value': depth, 'From Min': p.get('lace_to', 0.09), 'From Max': 0.0}).outputs['Result']
+    foam = N.math('MAXIMUM', edge, N.math('MULTIPLY', lace_v, band), clamp=True)
+    # surf lines: whitewater in bands at distances from the shore, streaked along them
+    dist = N.math('SUBTRACT', yy, s['y0'] + (-s['water_z']) / s['slope'])
+    streak = N('TexNoise', inputs={'Vector': N('Mapping', inputs={'Vector': tc.outputs['Object'], 'Scale': (0.25, 2.5, 1.0)}).outputs[0],
+                                   'Scale': 1.2, 'Detail': 10.0, 'Roughness': 0.6})
+    st = N('MapRange', inputs={'Value': streak.outputs['Fac'], 'From Min': 0.45, 'From Max': 0.7}).outputs['Result']
+    for c, w, a in p.get('surf', [[9.0, 1.6, 0.9], [22.0, 3.0, 0.7], [45.0, 5.0, 0.5]]):
+        b = N.math('SUBTRACT', 1.0, N.math('ABSOLUTE', N.math('DIVIDE', N.math('SUBTRACT', dist, c), w)), clamp=True)
+        foam = N.math('MAXIMUM', foam, N.math('MULTIPLY', N.math('MULTIPLY', b, st), a), clamp=True)
+    froth = N('BsdfPrincipled', inputs={'Base Color': _hex('#E4ECEE'), 'Roughness': 0.65, 'Subsurface Weight': 0.3,
+                                        'Subsurface Radius': (0.02, 0.025, 0.03)})
+    N.link(bump.outputs['Normal'], froth.inputs['Normal'])
+    mix = N('MixShader', inputs={'Fac': foam, 1: water.outputs[0], 2: froth.outputs[0]})
+    vol = N('VolumeAbsorption', inputs={'Color': _hex(p.get('absorb', '#5E8F8C')), 'Density': p.get('density', 3.0)})
+    N.link(mix.outputs[0], out.inputs['Surface']); N.link(vol.outputs[0], out.inputs['Volume'])
+    return m
+
+
+def _waves(X, Y, s, p):
+    """The sea's surface over the still water level, and its whitewater (0 to 1): a few crests rolling in, each
+    steep on its shoreward face, their heights wandering along the shore."""
+    yy = Y + s['wiggle'] * np.sin(X * s['freq'] + s['phase'])
+    dist = yy - (s['y0'] + (-s['water_z']) / s['slope'])                  # metres out from the still waterline
+    Z = np.zeros_like(X); F = np.zeros_like(X)
+    rx = random.Random(p.get('seed', 5))
+    for c, H, wf, wb, fa in p.get('crests', [[5.5, 0.10, 0.5, 2.2, 0.85], [13.0, 0.22, 0.9, 4.0, 0.7],
+                                               [27.0, 0.30, 1.4, 6.0, 0.45], [48.0, 0.30, 2.0, 9.0, 0.25]]):
+        o = rx.uniform(-100, 100)
+        along = np.vectorize(lambda x: noise.noise(Vector((x * 0.07 + o, o, 0.5))) + 0.6 * noise.noise(Vector((x * 0.31 + o, 2 * o, 0.5))))(X[0])[None, :]
+        h = H * np.clip(0.75 + 0.9 * along, 0.2, 1.6)
+        d = dist - c - 1.2 * along
+        w = np.where(d < 0, wf, wb)
+        Z += h * np.exp(-(d / w) ** 2)
+        # whitewater: on the crest's front and spilling down its back, broken along the shore
+        f = np.clip(1 - np.abs((d - wb * 0.35) / (wb * 0.9 + wf)), 0, 1) * np.clip(0.4 + along * 1.4, 0, 1)
+        F = np.maximum(F, fa * f)
+    near = np.clip((dist + 0.1) / 1.5, 0, 1)                              # the water lies flat where it meets the sand
+    return Z * near, F * near
+
+
+def _sea_material(bpy, name, p, s):
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); N = _N(nt)
+    out = N('OutputMaterial')
+    tc, sep = _xyz(N)
+    depth, yy = _shore_depth(N, sep, s)
+    water = N('BsdfPrincipled', inputs={'Base Color': _hex('#1A2A2C'), 'Roughness': p.get('rough', 0.03),
+                                        'IOR': 1.333, 'Transmission Weight': 1.0, 'Specular IOR Level': 0.5})
+    # chop: short wind ripples over the modelled swell, in world metres
+    ch = N('TexNoise', inputs={'Vector': N('Mapping', inputs={'Vector': tc.outputs['Object'], 'Scale': (1.0, 2.0, 1.0)}).outputs[0],
+                               'Scale': 1.4, 'Detail': 10.0, 'Roughness': 0.55})
+    ch2 = N('TexWave', wave_type='BANDS', bands_direction='X', inputs={'Vector': tc.outputs['Object'], 'Scale': 0.35,
+                                                                        'Distortion': 4.0, 'Detail': 4.0, 'Detail Scale': 2.0})
+    h = N.math('ADD', ch.outputs['Fac'], N.math('MULTIPLY', ch2.outputs['Fac'], 0.5))
+    bump = N('Bump', inputs={'Height': h, 'Strength': p.get('chop', 0.2), 'Distance': 0.04})
+    N.link(bump.outputs['Normal'], water.inputs['Normal'])
+    # the wash's lace where the water runs thin over the sand, and a thin white rim at its edge
+    lace = N('TexVoronoi', feature='DISTANCE_TO_EDGE', inputs={'Vector': N('Mapping', inputs={
+        'Vector': tc.outputs['Object'], 'Scale': (1.0, 1.8, 1.0)}).outputs[0], 'Scale': 3.2, 'Randomness': 1.0})
+    lace_n = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 2.5, 'Detail': 6.0})
+    lace_v = N('MapRange', inputs={'Value': lace.outputs['Distance'], 'From Min': p.get('lace_w', 0.08), 'From Max': 0.0}).outputs['Result']
+    lace_v = N.math('MULTIPLY', lace_v, N('MapRange', inputs={'Value': lace_n.outputs['Fac'], 'From Min': 0.4, 'From Max': 0.6}).outputs['Result'])
+    edge = N('MapRange', inputs={'Value': depth, 'From Min': 0.0, 'From Max': p.get('edge_m', 0.03)}).outputs['Result']
+    edge = N.math('SUBTRACT', 1.0, edge)
+    rim_n = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 6.0, 'Detail': 4.0})
+    edge = N.math('MULTIPLY', edge, N('MapRange', inputs={'Value': rim_n.outputs['Fac'], 'From Min': 0.35, 'From Max': 0.6}).outputs['Result'])
+    band = N('MapRange', inputs={'Value': depth, 'From Min': p.get('lace_to', 0.12), 'From Max': 0.0}).outputs['Result']
+    foam = N.math('MAXIMUM', edge, N.math('MULTIPLY', lace_v, band), clamp=True)
+    # the breakers' whitewater (from the mesh, `foam`), torn into streaks and lace
+    at = N('Attribute', attribute_name='foam')
+    streak = N('TexNoise', inputs={'Vector': N('Mapping', inputs={'Vector': tc.outputs['Object'], 'Scale': (0.5, 2.2, 1.0)}).outputs[0],
+                                   'Scale': 2.0, 'Detail': 12.0, 'Roughness': 0.62})
+    lace2 = N('TexVoronoi', feature='DISTANCE_TO_EDGE', inputs={'Vector': tc.outputs['Object'], 'Scale': 1.6})
+    tear = N.math('ADD', N.math('MULTIPLY', streak.outputs['Fac'], 1.0), N.math('MULTIPLY', lace2.outputs['Distance'], -1.2))
+    wf = N('MapRange', inputs={'Value': N.math('ADD', at.outputs['Fac'], N.math('MULTIPLY', N.math('SUBTRACT', tear, 0.35), 0.9)),
+                               'From Min': 0.35, 'From Max': 0.6}).outputs['Result']
+    foam = N.math('MAXIMUM', foam, wf, clamp=True)
+    froth0 = N('BsdfPrincipled', inputs={'Base Color': _hex('#EEF3F4'), 'Roughness': 0.6, 'Subsurface Weight': 0.35,
+                                         'Subsurface Radius': (0.02, 0.025, 0.03)})
+    N.link(bump.outputs['Normal'], froth0.inputs['Normal'])
+    # foam is thin: the low sun behind it comes through
+    tl = N('BsdfTranslucent', inputs={'Color': _hex('#F4F1EA')})
+    froth = N('MixShader', inputs={'Fac': p.get('foam_translucent', 0.45), 1: froth0.outputs[0], 2: tl.outputs[0]})
+    mix = N('MixShader', inputs={'Fac': foam, 1: water.outputs[0], 2: froth.outputs[0]})
+    vol = N('VolumeAbsorption', inputs={'Color': _hex(p.get('absorb', '#5E8F8C')), 'Density': p.get('density', 3.0)})
+    N.link(mix.outputs[0], out.inputs['Surface']); N.link(vol.outputs[0], out.inputs['Volume'])
+    return m
+
+
+def sea(bpy, name, p, kit):
+    """The sea as a closed body of water: its surface modelled (the breakers rolling in) from the beach out to the
+    horizon, a floor 3 m down, and walls between."""
+    s = _shore(p)
+    x0, y0, x1, y1 = p.get('extent', [-420.0, 0.5, 420.0, 420.0])
+    xs = _axis(x0, x1, -9.0, 9.0, p.get('cell', 0.04), 1.06)
+    ys = _axis(y0, y1, y0, 14.0, p.get('cell', 0.04), 1.05)
+    X, Y = np.meshgrid(xs, ys)
+    Z, F = _waves(X, Y, s, p)
+    Z = Z + s['water_z']
+    nx, ny = len(xs), len(ys)
+    top = np.stack([X.ravel(), Y.ravel(), Z.ravel()], 1)
+    bot = top.copy(); bot[:, 2] = s['water_z'] - 3.0
+    verts = np.concatenate([top, bot])
+    n = nx * ny
+    I, J = np.meshgrid(np.arange(nx - 1), np.arange(ny - 1))
+    a = (J * nx + I).ravel()
+    faces = [np.stack([a, a + 1, a + nx + 1, a + nx], 1), np.stack([a + n, a + nx + n, a + nx + 1 + n, a + 1 + n], 1)]
+    ring = ([j * nx for j in range(ny)][::-1] + list(range(nx)) + [j * nx + nx - 1 for j in range(ny)] + list(range(n - nx, n))[::-1])
+    ring = [r for i, r in enumerate(ring) if i == 0 or r != ring[i - 1]]
+    side = []
+    for i in range(len(ring)):
+        p0, p1 = ring[i], ring[(i + 1) % len(ring)]
+        if p0 != p1:
+            side.append([p0, p0 + n, p1 + n, p1])
+    faces.append(np.array(side))
+    faces = np.concatenate(faces)
+    me = bpy.data.meshes.new(name)
+    me.vertices.add(len(verts)); me.vertices.foreach_set('co', verts.astype(np.float32).ravel())
+    me.loops.add(faces.size); me.loops.foreach_set('vertex_index', faces.astype(np.int32).ravel())
+    me.polygons.add(len(faces)); me.polygons.foreach_set('loop_start', (np.arange(len(faces)) * 4).astype(np.int32))
+    me.polygons.foreach_set('loop_total', np.full(len(faces), 4, np.int32))
+    me.update(calc_edges=True); me.validate()
+    me.polygons.foreach_set('use_smooth', np.ones(len(faces), bool))
+    at = me.attributes.new('foam', 'FLOAT', 'POINT')
+    at.data.foreach_set('value', np.concatenate([F.ravel(), np.zeros(n)]).astype(np.float32))
+    me.materials.append(_sea_material(bpy, name + '-mat', p, s))
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    return [ob]
+
+
+# --- ice -----------------------------------------------------------------------------------------------------------
+ICE = {'clear': {'absorb': '#6CBCE2', 'density': 1.1, 'scatter': 0.05, 'scatter_var': 5.0, 'rough': 0.02},
+       'blue': {'absorb': '#4FAAD8', 'density': 1.7, 'scatter': 0.05, 'scatter_var': 4.0, 'rough': 0.02},
+       'milky': {'absorb': '#8CC4EE', 'density': 1.2, 'scatter': 14.0, 'scatter_var': 10.0, 'rough': 0.12}}
+
+
+def _ice_material(bpy, name, kind, p):
+    k = dict(ICE[kind]); k.update(p.get('ice', {}))
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); N = _N(nt)
+    out = N('OutputMaterial')
+    tc = N('TexCoord')
+    bs = N('BsdfPrincipled', inputs={'Base Color': (1, 1, 1, 1), 'Transmission Weight': 1.0, 'IOR': 1.31,
+                                     'Specular IOR Level': 0.5, 'Coat Weight': p.get('wet', 0.6), 'Coat Roughness': 0.03,
+                                     'Coat IOR': 1.33})
+    # roughness: wet glass in the hollows, frost and melt-haze in patches on the faces
+    rn = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 4.0, 'Detail': 6.0})
+    rr = N('MapRange', inputs={'Value': rn.outputs['Fac'], 'From Min': 0.45, 'From Max': 0.7,
+                               'To Min': k['rough'], 'To Max': k['rough'] + p.get('frost', 0.07)}).outputs['Result']
+    N.link(rr, bs.inputs['Roughness'])
+    # melt scallops at the small scale, and a fine pitting
+    sc = N('TexVoronoi', feature='SMOOTH_F1', inputs={'Vector': tc.outputs['Object'], 'Scale': 22.0, 'Smoothness': 0.4})
+    pit = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 140.0, 'Detail': 4.0})
+    b1 = N('Bump', inputs={'Height': sc.outputs['Distance'], 'Strength': 0.25, 'Distance': 0.01})
+    b2 = N('Bump', inputs={'Height': pit.outputs['Fac'], 'Strength': 0.06, 'Distance': 0.002, 'Normal': b1.outputs['Normal']})
+    N.link(b2.outputs['Normal'], bs.inputs['Normal'])
+    # shadow rays pass through, tinted, so the ice throws blue light (the volume tints them further) instead of black
+    tr = N('BsdfTransparent', inputs={'Color': (0.92, 0.95, 0.98, 1)})
+    lp = N('LightPath')
+    mix = N('MixShader', inputs={'Fac': lp.outputs['Is Shadow Ray'], 1: bs.outputs[0], 2: tr.outputs[0]})
+    N.link(mix.outputs[0], out.inputs['Surface'])
+    # the body: blue by absorption (the red end goes first), clouded by bubbles in drifts
+    dn = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': p.get('cloud_scale', 3.0), 'Detail': 4.0})
+    dv = N('MapRange', inputs={'Value': dn.outputs['Fac'], 'From Min': p.get('cloud_from', 0.56), 'From Max': p.get('cloud_to', 0.68),
+                               'To Min': k['scatter'], 'To Max': k['scatter'] + k['scatter_var']}).outputs['Result']
+    vol = N('VolumePrincipled', inputs={'Color': (1, 1, 1, 1), 'Density': dv, 'Anisotropy': 0.35,
+                                        'Absorption Color': _hex(k['absorb'])})
+    # Principled Volume's absorption scales with density: add a pure absorber for the ice's own blue
+    ab = N('VolumeAbsorption', inputs={'Color': _hex(k['absorb']), 'Density': k['density']})
+    av = N('AddShader', inputs={0: vol.outputs[0], 1: ab.outputs[0]})
+    N.link(av.outputs[0], out.inputs['Volume'])
+    return m
+
+
+def _air_material(bpy, name):
+    """Air inside the ice (bubbles, a crack): an interface from ice into air, bright where it turns light back."""
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); N = _N(nt)
+    out = N('OutputMaterial')
+    g = N('BsdfGlass', inputs={'IOR': 1.0 / 1.31, 'Roughness': 0.04, 'Color': (1, 1, 1, 1)})
+    tr = N('BsdfTransparent'); lp = N('LightPath')
+    mix = N('MixShader', inputs={'Fac': lp.outputs['Is Shadow Ray'], 1: g.outputs[0], 2: tr.outputs[0]})
+    N.link(mix.outputs[0], out.inputs['Surface'])
+    return m
+
+
+def _chunk_mesh(bm, size, seed, subdiv, facets, worn, scallop, p_lumps=0.1):
+    rnd = random.Random(seed)
+    geom = bmesh.ops.create_icosphere(bm, subdivisions=subdiv, radius=1.0)
+    V = np.array([v.co[:] for v in bm.verts])
+    S = np.array(size) / 2.0
+    P = V * S
+    off = Vector((rnd.uniform(-90, 90), rnd.uniform(-90, 90), rnd.uniform(-90, 90)))
+    # broad lumps
+    n = np.array([noise.noise(Vector(v) * 1.4 + off) for v in V])
+    P *= (1.0 + p_lumps * n)[:, None]
+    # fracture planes, the chunk calved and broken: flat faces
+    planes = []
+    for _ in range(facets):
+        d = Vector((rnd.gauss(0, 1), rnd.gauss(0, 1), rnd.gauss(0, 0.7))).normalized()
+        nrm = np.array(d[:])
+        sup = np.max(P @ nrm)
+        planes.append((nrm, sup * rnd.uniform(0.55, 0.85)))
+    planes.append((np.array([0.0, 0.0, -1.0]), S[2] * 0.62))          # its bed, where it sits
+    for nrm, dd in planes:
+        h = P @ nrm - dd
+        P -= np.maximum(h, 0)[:, None] * nrm[None, :]
+    # worn round by the sea: relax toward neighbours, which softens the facets' edges
+    nb = [[] for _ in bm.verts]
+    for e in bm.edges:
+        a, b = e.verts[0].index, e.verts[1].index
+        nb[a].append(b); nb[b].append(a)
+    nbm = max(len(x) for x in nb)
+    idx = np.array([x + [x[0]] * (nbm - len(x)) for x in nb])
+    for _ in range(worn):
+        P = 0.5 * P + 0.5 * P[idx].mean(1)
+    # melt scallops: shallow cups between sharp ridges (Voronoi cells over the surface)
+    if scallop > 0:
+        cells = P[np.array(rnd.sample(range(len(P)), min(len(P), 160)))]
+        dmin = np.full(len(P), 1e9)
+        for c in np.array_split(cells, 8):
+            dmin = np.minimum(dmin, np.min(np.linalg.norm(P[:, None, :] - c[None, :, :], axis=2), 1))
+        cell = np.median(dmin) * 2.2 + 1e-6
+        cup = scallop * (1.0 - np.clip(dmin / cell, 0, 1) ** 2)
+        nrm = P / (np.linalg.norm(P, axis=1)[:, None] + 1e-9)
+        P -= nrm * cup[:, None]
+    zmin = P[:, 2].min()
+    for v, q in zip(bm.verts, P):
+        v.co = Vector((q[0], q[1], q[2] - zmin))
+    return planes, zmin
+
+
+def ice(bpy, name, p, kit):
+    """One chunk of glacier ice standing at `position` (its bed at the position's z), turned by `rotate`."""
+    size = p.get('size', [0.6, 0.5, 0.45]); seed = p.get('seed', 1); kind = p.get('ice_kind', 'clear')
+    bm = bmesh.new()
+    planes, zmin = _chunk_mesh(bm, size, seed, p.get('subdiv', 5), p.get('facets', 12), p.get('worn', 1),
+                               p.get('scallop', min(size) * 0.025), p.get('lumps', 0.1))
+    obs = kit.finish(bpy, name, bm, p, smooth=True, mat=_ice_material(bpy, name + '-ice', kind, p))
+    ob = obs[0]
+    ob.data.polygons.foreach_set('use_smooth', np.ones(len(ob.data.polygons), bool))
+    S = np.array(size) / 2.0
+    rnd = random.Random(seed * 7 + 1)
+    air = _air_material(bpy, name + '-air')
+
+    from mathutils.bvhtree import BVHTree
+    bmt = bmesh.new(); bmt.from_mesh(ob.data); tree = BVHTree.FromBMesh(bmt); bmt.free()
+
+    def inside(q, margin=0.012):
+        """Inside the chunk as it was finally shaped, at least `margin` from its surface."""
+        loc, nrm, _, dist = tree.find_nearest(Vector(q))
+        return loc is not None and (Vector(q) - loc).dot(nrm) < 0 and dist > margin
+    # bubbles: drifts of them along a few layers (the glacier's old snow), and a scatter between
+    nb = p.get('bubbles', int(min(2500, 250 * np.prod(size) / 0.1)))
+    if nb:
+        bmb = bmesh.new()
+        layers = [(Vector((rnd.gauss(0, 0.3), rnd.gauss(0, 0.3), 1)).normalized(), rnd.uniform(-0.4, 0.4)) for _ in range(3)]
+        made, tries = 0, 0
+        while made < nb and tries < nb * 40:
+            tries += 1
+            q = Vector((rnd.uniform(-1, 1) * S[0], rnd.uniform(-1, 1) * S[1], rnd.uniform(0, 2) * S[2]))
+            if rnd.random() < 0.75:
+                ln, lo = rnd.choice(layers)
+                d = (q - Vector((0, 0, S[2]))).dot(ln) - lo * S[2]
+                if abs(d) > rnd.gauss(0, 0.012) + 0.008:
+                    continue
+            if not inside(q[:], 0.006):
+                continue
+            r = rnd.uniform(0.0006, 0.0028) * (3.0 if rnd.random() < 0.04 else 1.0)
+            geom = bmesh.ops.create_icosphere(bmb, subdivisions=1, radius=r)
+            sq = rnd.uniform(0.6, 1.0)
+            for v in geom['verts']:
+                v.co = Vector((v.co.x, v.co.y, v.co.z * sq)) + q
+            made += 1
+        obs += kit.finish(bpy, name + '-bubbles', bmb, p, smooth=True, mat=air)
+    # cracks: a thin sheet of air or two, inside, catching the light
+    for c in range(p.get('cracks', 1)):
+        bmc = bmesh.new()
+        ctr = Vector((rnd.uniform(-0.2, 0.2) * S[0], rnd.uniform(-0.2, 0.2) * S[1], S[2] * rnd.uniform(0.7, 1.2)))
+        nrm = Vector((rnd.gauss(0, 1), rnd.gauss(0, 1), rnd.gauss(0, 0.6))).normalized()
+        u = nrm.orthogonal().normalized(); w = nrm.cross(u)
+        R = min(S) * rnd.uniform(0.35, 0.6)
+        ring = []
+        for i in range(36):
+            a = 2 * math.pi * i / 36
+            rr = R * (0.65 + 0.35 * noise.noise(Vector((math.cos(a) * 2, math.sin(a) * 2, c * 3.1 + seed))) + 0.2 * rnd.random())
+            pt = ctr + u * (rr * math.cos(a)) + w * (rr * math.sin(a))
+            pt += nrm * 0.02 * noise.noise(pt * 8)
+            ring.append(pt)
+        for _ in range(6):
+            if all(inside(q[:], 0.01) for q in ring) and inside(ctr[:], 0.01):
+                break
+            ring = [ctr + (q - ctr) * 0.75 for q in ring]
+        else:
+            continue
+        top = [bmc.verts.new(q + nrm * 0.0004) for q in ring]
+        bot = [bmc.verts.new(q - nrm * 0.0004) for q in ring]
+        bmc.faces.new(top); bmc.faces.new(bot[::-1])
+        for i in range(36):
+            j = (i + 1) % 36
+            bmc.faces.new((top[j], top[i], bot[i], bot[j]))
+        bmesh.ops.recalc_face_normals(bmc, faces=bmc.faces[:])
+        obs += kit.finish(bpy, f'{name}-crack{c}', bmc, p, smooth=False, mat=air)
+    return obs
