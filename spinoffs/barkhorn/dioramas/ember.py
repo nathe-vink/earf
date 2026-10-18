@@ -80,9 +80,9 @@ def props():
     # acrylic from the bottom edge up
     for k, (dx, dy) in enumerate([(-0.34, 0.0), (0.34, 0.0), (0.0, -0.31), (0.0, 0.31)]):
         box = [-0.045, -0.24, 0.0, 0.045, 0.24, 0.015] if dx else [-0.3, -0.045, 0.0, 0.3, 0.045, 0.015]
-        for seed, col, emit in ((40, '#E8500C', 0.22), (50, '#2A0A08', 0.0)):
+        for seed, col, emit in ((40, '#C8380A', 0.5), (50, '#2A0A08', 0.0)):
             P.append(kit('scatter', 'felt', col, position=[sx + dx, sy + dy, RISE], rotate=[0, 0, -14], scale=[1, 1, 0.75],
-                         **{'in': box}, count=8, radius=[0.018, 0.034], seed=seed + k, emit=emit, emit_color='#FF7A18', subdiv=2))
+                         **{'in': box}, count=8, radius=[0.018, 0.034], seed=seed + k, emit=emit, emit_color='#FF4E06', subdiv=2))
     # the walls: hanging velvet and satin, layered like strata, darker toward the back
     P += strata((-6.5, 3.3), (6.5, 3.3), -0.1, [0.55, 0.7, 0.5, 0.8, 0.6, 0.9, 0.8],
                 [OXBLOOD, CRIMSON, BLACK, OXBLOOD, SCARLET, BLACK, OXBLOOD], seed=1)
@@ -138,7 +138,7 @@ def shot():
     cam = tilt_shift(elevation=19, azimuth=-16, distance=6.1, lens=50, target=(0.15, 0.4, 0.72), focus=(0.15, -0.05, 0.7),
                      miniature=11.0)
     return frame('ember', st, lights(), cam, 'barkhorn, Ember, the depths of hell in fabric', sky={'kind': 'none'},
-                 position=(*SPEAKER, RISE), exposure=0.0,
+                 position=(*SPEAKER, RISE), exposure=0.25,
                  fin=finish(bloom=0.35, bloom_px=46, threshold=0.7, saturation=0.15, lift=0.025, lift_color='#36060F',
                             vignette=0.25))
 

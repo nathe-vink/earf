@@ -85,7 +85,7 @@ def fork(bpy, name, p, kit):
         objs += tube(f't{z:+.2f}', [(x0, 0, z), (L, 0, z * 1.05)], [r * 0.75, r * 0.35], metal)
     mq = {**p, 'material': 'cotton', 'color': '#EBCFA8', 'emit': 0.0}
     bm = bmesh.new()
-    geom = bmesh.ops.create_cone(bm, cap_ends=True, segments=32, radius1=L * 0.05, radius2=L * 0.05, depth=L * 0.08)
+    geom = bmesh.ops.create_cone(bm, cap_ends=True, segments=32, radius1=L * 0.065, radius2=L * 0.065, depth=L * 0.1)
     bmesh.ops.bevel(bm, geom=bm.edges[:], offset=L * 0.012, segments=3, affect='EDGES')
     bmesh.ops.rotate(bm, verts=bm.verts[:], cent=Vector((0, 0, 0)), matrix=Matrix.Rotation(math.pi / 2, 3, 'Y'))
     bmesh.ops.translate(bm, vec=Vector((L * 0.9, 0, 0)), verts=bm.verts[:])
@@ -93,54 +93,3 @@ def fork(bpy, name, p, kit):
     # finish() placed every part at the fork's position and turn: they share one frame, so the fork holds together
     return objs
 
-
-def pool(bpy, name, p, kit):
-    """A pool of lava in satin: an irregular round sheet (`radius` [rx, ry], its edge wandering by `wobble`), rumpled in
-    soft folds `amplitude` high, glowing; and its shore, a roll of velvet (`shore` its colour, `shore_r` its radius)
-    along the edge. Lies in x-y at the piece's position."""
-    import random
-    rx, ry = p.get('radius', [1.0, 0.7])
-    rnd = random.Random(p.get('seed', 0))
-    ph = [rnd.uniform(0, 6.283) for _ in range(6)]
-    wob = p.get('wobble', 0.12)
-    def edge(t):
-        return 1.0 + wob * (0.6 * math.sin(2 * t + ph[0]) + 0.3 * math.sin(3 * t + ph[1]) + 0.25 * math.sin(5 * t + ph[2]))
-    amp, nr, ns = p.get('amplitude', 0.008), p.get('rings', 20), p.get('segments', 120)
-    def height(x, y):
-        return amp * (math.sin(x * 9.0 + ph[3] + 2.0 * math.sin(y * 5.0)) * 0.6 + math.sin(y * 13.0 + ph[4] + x * 3.0) * 0.4)
-    bm = bmesh.new()
-    centre = bm.verts.new((0, 0, height(0, 0)))
-    rings = []
-    for i in range(1, nr + 1):
-        f = i / nr
-        ring = []
-        for k in range(ns):
-            t = 2 * math.pi * k / ns
-            e = edge(t) * f
-            x, y = rx * e * math.cos(t), ry * e * math.sin(t)
-            ring.append(bm.verts.new((x, y, height(x, y) * (1 - f ** 4) - p.get('tuck', 0.0) * f ** 6)))   # its hem tucked under
-        rings.append(ring)
-    for k in range(ns):
-        bm.faces.new((centre, rings[0][k], rings[0][(k + 1) % ns]))
-    for a, b in zip(rings, rings[1:]):
-        for k in range(ns):
-            bm.faces.new((a[k], b[k], b[(k + 1) % ns], a[(k + 1) % ns]))
-    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
-    for f_ in bm.faces:                                       # facing up
-        if f_.normal.z < 0:
-            f_.normal_flip()
-    objs = kit.finish(bpy, f'{name}-lava', bm, p)
-    if not p.get('shore'):
-        return objs
-    sr = p.get('shore_r', 0.05)
-    pts = []
-    for k in range(ns + 1):
-        t = 2 * math.pi * k / ns
-        e = edge(t) + sr * 0.4 / max(rx, ry)
-        pts.append((rx * e * math.cos(t), ry * e * math.sin(t), 0.0))
-    bm = bmesh.new()
-    kit._tube(bm, pts[::4] + [pts[4]], [sr * (1 + 0.15 * math.sin(2 * j * 4 * 2 * math.pi / ns + ph[5])) for j in range(len(pts[::4]) + 1)], 1.6, 0, 16, 6)
-    q = {**p, 'material': 'velvet', 'color': p.get('shore', '#140507')}
-    q.pop('emit', None)
-    objs += kit.finish(bpy, f'{name}-shore', bm, q, mat=kit.piece_material(bpy, q))
-    return objs

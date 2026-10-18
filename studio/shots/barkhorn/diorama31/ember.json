@@ -271,7 +271,7 @@
     "kind": "kit",
     "shape": "scatter",
     "material": "felt",
-    "color": "#E8500C",
+    "color": "#C8380A",
     "position": [
      -0.14,
      0.2,
@@ -301,8 +301,8 @@
      0.034
     ],
     "seed": 40,
-    "emit": 0.22,
-    "emit_color": "#FF7A18",
+    "emit": 0.5,
+    "emit_color": "#FF4E06",
     "subdiv": 2
    },
    {
@@ -340,14 +340,14 @@
     ],
     "seed": 50,
     "emit": 0.0,
-    "emit_color": "#FF7A18",
+    "emit_color": "#FF4E06",
     "subdiv": 2
    },
    {
     "kind": "kit",
     "shape": "scatter",
     "material": "felt",
-    "color": "#E8500C",
+    "color": "#C8380A",
     "position": [
      0.54,
      0.2,
@@ -377,8 +377,8 @@
      0.034
     ],
     "seed": 41,
-    "emit": 0.22,
-    "emit_color": "#FF7A18",
+    "emit": 0.5,
+    "emit_color": "#FF4E06",
     "subdiv": 2
    },
    {
@@ -416,14 +416,14 @@
     ],
     "seed": 51,
     "emit": 0.0,
-    "emit_color": "#FF7A18",
+    "emit_color": "#FF4E06",
     "subdiv": 2
    },
    {
     "kind": "kit",
     "shape": "scatter",
     "material": "felt",
-    "color": "#E8500C",
+    "color": "#C8380A",
     "position": [
      0.2,
      -0.10999999999999999,
@@ -453,8 +453,8 @@
      0.034
     ],
     "seed": 42,
-    "emit": 0.22,
-    "emit_color": "#FF7A18",
+    "emit": 0.5,
+    "emit_color": "#FF4E06",
     "subdiv": 2
    },
    {
@@ -492,14 +492,14 @@
     ],
     "seed": 52,
     "emit": 0.0,
-    "emit_color": "#FF7A18",
+    "emit_color": "#FF4E06",
     "subdiv": 2
    },
    {
     "kind": "kit",
     "shape": "scatter",
     "material": "felt",
-    "color": "#E8500C",
+    "color": "#C8380A",
     "position": [
      0.2,
      0.51,
@@ -529,8 +529,8 @@
      0.034
     ],
     "seed": 43,
-    "emit": 0.22,
-    "emit_color": "#FF7A18",
+    "emit": 0.5,
+    "emit_color": "#FF4E06",
     "subdiv": 2
    },
    {
@@ -568,7 +568,7 @@
     ],
     "seed": 53,
     "emit": 0.0,
-    "emit_color": "#FF7A18",
+    "emit_color": "#FF4E06",
     "subdiv": 2
    },
    {
@@ -1811,7 +1811,7 @@
   "clamp": 6,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.0,
+  "exposure": 0.25,
   "white_balance_k": 5600,
   "white_balance_tint": 3.0
  },
