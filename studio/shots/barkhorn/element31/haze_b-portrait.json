@@ -86,19 +86,7 @@
       "fuzz": 0.0,
       "fuzz_feature": 1.5,
       "nx": 700,
-      "ny": 70,
-      "trees": {
-       "models": [
-        "searsia_lucida",
-        "island_tree_01"
-       ],
-       "count": 320,
-       "scale": [
-        0.07,
-        0.13
-       ],
-       "down": 1.0
-      }
+      "ny": 70
      },
      {
       "d": 90.0,
@@ -117,12 +105,14 @@
       "ny": 50,
       "trees": {
        "models": [
-        "searsia_lucida"
+        "searsia_lucida",
+        "island_tree_01",
+        "searsia_burchellii"
        ],
-       "count": 300,
+       "count": 120,
        "scale": [
         0.1,
-        0.16
+        0.22
        ],
        "down": 0.7
       }
@@ -198,7 +188,7 @@
        300.0,
        4.0
       ],
-      "density": 0.0035,
+      "density": 0.0055,
       "color": "#E2D4F0",
       "anisotropy": 0.6
      },
@@ -222,8 +212,8 @@
     "shape": "ext",
     "module": "haze_b_el",
     "fn": "sundisk",
-    "azimuth": 166.6,
-    "elevation": 1.3,
+    "azimuth": 164.5,
+    "elevation": 1.5,
     "distance": 296.0,
     "eye": [
      -1.9411,
@@ -231,7 +221,7 @@
      1.0
     ],
     "diameter_deg": 0.6,
-    "emit": 40.0,
+    "emit": 18.0,
     "color": "#FFC296"
    },
    {
@@ -262,11 +252,11 @@
       1.0
      ]
     ],
-    "count": 8000,
-    "children": 14,
+    "count": 6000,
+    "children": 12,
     "length": [
-     0.18,
-     0.6
+     0.15,
+     0.5
     ],
     "ground": {
      "area": [
@@ -282,12 +272,73 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#7A6854",
-    "color2": "#54483F",
-    "tip": "#A08868",
-    "value_jitter": 0.15,
+    "color": "#5A4834",
+    "color2": "#33291F",
+    "tip": "#7A6448",
+    "value_jitter": 0.3,
     "seed": 3,
-    "patchy": 0.75
+    "patchy": 0.75,
+    "clump": 0.3,
+    "clump_r": 0.05
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "grass",
+    "area": [
+     -6.0,
+     -8.5,
+     6.0,
+     3.0
+    ],
+    "avoid": [
+     [
+      0.0,
+      -0.3,
+      2.2
+     ],
+     [
+      -0.5,
+      -2.0,
+      2.2
+     ],
+     [
+      -1.9411,
+      -7.2444,
+      1.0
+     ]
+    ],
+    "count": 2500,
+    "children": 6,
+    "length": [
+     0.15,
+     0.45
+    ],
+    "ground": {
+     "area": [
+      -10.0,
+      -13.0,
+      9.0,
+      7.0
+     ],
+     "cell": 0.02,
+     "crest_y": 1.4,
+     "drop": 5.0,
+     "relief": 0.1,
+     "flat_r": 0.8,
+     "slope_front": 0.02
+    },
+    "color": "#5A4834",
+    "color2": "#33291F",
+    "tip": "#7A6448",
+    "value_jitter": 0.3,
+    "seed": 8,
+    "patchy": 0.75,
+    "root_mm": 1.8,
+    "tip_mm": 0.35,
+    "random": 0.2,
+    "rough": 0.05
    },
    {
     "kind": "kit",
@@ -315,8 +366,8 @@
     "count": 2500,
     "children": 12,
     "length": [
-     0.04,
-     0.15
+     0.06,
+     0.22
     ],
     "ground": {
      "area": [
@@ -332,12 +383,63 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#7A6854",
-    "color2": "#54483F",
-    "tip": "#A08868",
-    "value_jitter": 0.15,
+    "color": "#5A4834",
+    "color2": "#33291F",
+    "tip": "#7A6448",
+    "value_jitter": 0.3,
     "seed": 5,
     "patchy": 0.9
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "grass",
+    "area": [
+     -0.8,
+     -0.8,
+     0.8,
+     0.8
+    ],
+    "within": [
+     0.0,
+     0.0,
+     0.8
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.33
+     ]
+    ],
+    "count": 900,
+    "children": 10,
+    "length": [
+     0.06,
+     0.2
+    ],
+    "ground": {
+     "area": [
+      -10.0,
+      -13.0,
+      9.0,
+      7.0
+     ],
+     "cell": 0.02,
+     "crest_y": 1.4,
+     "drop": 5.0,
+     "relief": 0.1,
+     "flat_r": 0.8,
+     "slope_front": 0.02
+    },
+    "color": "#5A4834",
+    "color2": "#33291F",
+    "tip": "#7A6448",
+    "value_jitter": 0.3,
+    "seed": 6,
+    "patchy": 1.0,
+    "cell": 0.04
    }
   ]
  },
@@ -358,7 +460,7 @@
     0.0,
     0.7
    ],
-   "irradiance": 3.5,
+   "irradiance": 7.0,
    "color": "#F2DCCB"
   }
  },
@@ -370,8 +472,8 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": -1.0,
-  "white_balance_k": 4800,
-  "white_balance_tint": 6,
+  "white_balance_k": 5000,
+  "white_balance_tint": 0,
   "look": "AgX - Medium High Contrast"
  },
  "title": "Haze in its element: layered hills at dusk (4:5)",
@@ -404,14 +506,14 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
-  "rotation_deg": 246.4,
-  "strength": 1.0,
+  "rotation_deg": 244.3,
+  "strength": 0.75,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 166.6,
-  "elevation_deg": 1.3,
-  "irradiance": 14.0,
+  "azimuth_deg": 164.5,
+  "elevation_deg": 1.5,
+  "irradiance": 24.0,
   "angle_deg": 0.6,
   "color": "#FFB48C"
  },
@@ -424,7 +526,7 @@
   "sharpen": 0.2,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.2,
+   "bloom": 0.3,
    "bloom_px": 40,
    "bloom_threshold": 0.8,
    "saturation": 0.12,

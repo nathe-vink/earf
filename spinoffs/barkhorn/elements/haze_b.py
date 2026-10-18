@@ -13,8 +13,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import common as C                                        # noqa: E402
 
 SKY = 'qwantani_dusk_2_puresky'
-SKY_ROT = 246.4                                           # its afterglow behind the speaker (azimuth 174)
-SUN_AZ, SUN_EL = 166.6, 1.3
+SKY_ROT = 244.3                                           # its afterglow behind the speaker (azimuth 174)
+SUN_AZ, SUN_EL = 164.5, 1.5
 CAM = dict(height=1.0, distance=10.0, azimuth=-15.0, lens=85.0, fstop=5.6)
 
 RIDGE = {'area': [-10.0, -13.0, 9.0, 7.0], 'cell': 0.02, 'crest_y': 1.4, 'drop': 5.0, 'relief': 0.10, 'flat_r': 0.8,
@@ -23,7 +23,10 @@ RIDGE = {'area': [-10.0, -13.0, 9.0, 7.0], 'cell': 0.02, 'crest_y': 1.4, 'drop':
 
 # a photographer's bounce from the camera's side (the dusk sky caught in a large reflector), so the speaker's front
 # is not lost against the glow behind it
-BOUNCE = C.area(-30.0, 10.0, 3.5, 3.5, '#F2DCCB', size=(3.0, 2.0))
+BOUNCE = C.area(-30.0, 10.0, 3.5, 7.0, '#F2DCCB', size=(3.0, 2.0))
+
+
+STRAW = dict(ground=RIDGE, color='#5A4834', color2='#33291F', tip='#7A6448', value_jitter=0.3)
 
 
 def ext(fn, **k):
@@ -35,8 +38,8 @@ def layers(cam_x=-2.6):
     spec = [  # d, crest angle below the eye (deg), amp, fuzz (scrub on the crest)
         (25.0, -3.6, 0.9, 0.0), (50.0, -2.3, 1.6, 0.0), (90.0, -1.4, 2.6, 0.0), (150.0, -0.7, 3.4, 0.0),
         (215.0, +0.1, 5.0, 0.0), (255.0, +1.1, 4.0, 0.0)]
-    trees = {1: {'models': ['searsia_lucida', 'island_tree_01'], 'count': 320, 'scale': [0.07, 0.13], 'down': 1.0},
-             2: {'models': ['searsia_lucida'], 'count': 300, 'scale': [0.1, 0.16], 'down': 0.7}}
+    trees = {2: {'models': ['searsia_lucida', 'island_tree_01', 'searsia_burchellii'], 'count': 120, 'scale': [0.1, 0.22],
+                 'down': 0.7}}
     import math
     out = []
     for k, (d, a, amp, fz) in enumerate(spec):
@@ -57,25 +60,29 @@ def props():
         ext('ridge', texture='withered_grass', res='4k', displace=0.025, tint='#5E4E48', tint_mix=0.35, value=0.5, **RIDGE),
         ext('hills', layers=layers(), texture='rocky_terrain_02', res='2k', tex_scale=9.0, tint='#3E3A3C',
             tint_mix=0.6, folds=0.25),
-        ext('haze', boxes=[{'box': [-160.0, 3.0, -60.0, 220.0, 300.0, 4.0], 'density': 0.0035, 'color': '#E2D4F0',
+        ext('haze', boxes=[{'box': [-160.0, 3.0, -60.0, 220.0, 300.0, 4.0], 'density': 0.0055, 'color': '#E2D4F0',
                             'anisotropy': 0.6},
                            {'box': [-160.0, 3.0, 4.0, 220.0, 300.0, 30.0], 'density': 0.0004, 'color': '#E2D4F0',
                             'anisotropy': 0.8}]),
         ext('sundisk', azimuth=SUN_AZ, elevation=SUN_EL, distance=296.0, eye=[-2.6, -9.7, 1.0], diameter_deg=0.6,
-            emit=40.0, color='#FFC296'),
-        ext('grass', area=[-6.0, -8.5, 6.0, 3.0], avoid=[[0.0, -0.3, 2.2], [-0.5, -2.0, 2.2], [-2.6, -9.7, 1.0]], count=8000, children=14,
-            length=[0.18, 0.6], ground=RIDGE, color='#7A6854', color2='#54483F', tip='#A08868', value_jitter=0.15, seed=3, patchy=0.75),
+            emit=18.0, color='#FFC296'),
+        ext('grass', area=[-6.0, -8.5, 6.0, 3.0], avoid=[[0.0, -0.3, 2.2], [-0.5, -2.0, 2.2], [-2.6, -9.7, 1.0]], count=6000, children=12,
+            length=[0.15, 0.5], **STRAW, seed=3, patchy=0.75, clump=0.3, clump_r=0.05),
+        ext('grass', area=[-6.0, -8.5, 6.0, 3.0], avoid=[[0.0, -0.3, 2.2], [-0.5, -2.0, 2.2], [-2.6, -9.7, 1.0]], count=2500, children=6,
+            length=[0.15, 0.45], **STRAW, seed=8, patchy=0.75, root_mm=1.8, tip_mm=0.35, random=0.2, rough=0.05),
         ext('grass', area=[-2.3, -2.6, 2.3, 2.0], within=[0.0, -0.3, 2.3], avoid=[[0.0, 0.0, 0.5]], count=2500,
-            children=12, length=[0.04, 0.15], ground=RIDGE, color='#7A6854', color2='#54483F', tip='#A08868', value_jitter=0.15, seed=5, patchy=0.9),
+            children=12, length=[0.06, 0.22], **STRAW, seed=5, patchy=0.9),
+        ext('grass', area=[-0.8, -0.8, 0.8, 0.8], within=[0.0, 0.0, 0.8], avoid=[[0.0, 0.0, 0.33]], count=900, children=10,
+            length=[0.06, 0.2], **STRAW, seed=6, patchy=1.0, cell=0.04),
     ]
 
 
 def shot():
     cam = C.camera(target=(0.0, 0.0, 1.09), shift_x=-0.16, **CAM)
-    sun = {'azimuth_deg': SUN_AZ, 'elevation_deg': SUN_EL, 'irradiance': 14.0, 'angle_deg': 0.6, 'color': '#FFB48C'}
-    return C.shot('haze_b', props(), cam, C.sky(SKY, SKY_ROT, 1.0), 'Haze in its element: layered hills at dusk',
-                  sun=sun, lights={'bounce': BOUNCE}, white_balance=(4800, 6), rotate_z=10.0, position=(0.0, 0.0, -0.008), exposure=-1.0, look='AgX - Medium High Contrast',
-                  fin=C.finish(contrast=0.04, clarity=0.1, sharpen=0.2, vignette=0.12, saturation=0.12, bloom=0.2, bloom_px=40, threshold=0.8))
+    sun = {'azimuth_deg': SUN_AZ, 'elevation_deg': SUN_EL, 'irradiance': 24.0, 'angle_deg': 0.6, 'color': '#FFB48C'}
+    return C.shot('haze_b', props(), cam, C.sky(SKY, SKY_ROT, 0.75), 'Haze in its element: layered hills at dusk',
+                  sun=sun, lights={'bounce': BOUNCE}, white_balance=(5000, 0), rotate_z=10.0, position=(0.0, 0.0, -0.008), exposure=-1.0, look='AgX - Medium High Contrast',
+                  fin=C.finish(contrast=0.04, clarity=0.1, sharpen=0.2, vignette=0.12, saturation=0.12, bloom=0.3, bloom_px=40, threshold=0.8))
 
 
 def portrait():
