@@ -154,6 +154,7 @@ Three of the campaign critics named the speaker's own surfaces:
 - **The cover read as brushed metal.** Its heather was drawn out in one direction only, so from a few metres it was a field of vertical streaks. Now the warp's heather runs along the warp and the weft's along the weft, crossing as a cloth's do, with soft slubs and a fabric's sheen.
 - **The lining read as moulded clay.** Its clouds are gentler (3 cm), and the batts are lumpy where they are stuffed into their sleeves (a soft relief 7 cm across).
 - **The black front edge of the top** is the edge itself. Seen end-on through about 400 mm of tint, it stays dark even at 32 light bounces, so the fix is a light placed to catch it, not a shader.
+- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light.
 
 ### Pictures for a launch (in progress)
 
@@ -176,7 +177,7 @@ Three of the campaign critics named the speaker's own surfaces:
 
 ### The site's deployments
 
-Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), so www.earf.world still serves the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main goes up again as the allowance frees.
+Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 to 08:17 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), and www.earf.world kept the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main deployed again at 08:18 (b394ba1), with every colour's finals.
 
 ### Open
 

@@ -387,7 +387,10 @@ def finish(bpy, name, bm, p, smooth=True, mat=None):
 def piece_material(bpy, p):
     if p.get('material') == 'pbr':                                   # a photographed texture set (assets.py)
         import assets
-        return assets.pbr(bpy, p['texture'], p.get('res', '2k'), scale=p.get('tex_scale'), displace=p.get('displace', 0.0),
+        # the texture's resolution is `tex_res`; `res` means it too only when it reads as one ('2k'), since a tube's or a
+        # drape's `res` is its mesh resolution (a pbr tube with res 12 crashed here)
+        res = p.get('tex_res') or (p['res'] if isinstance(p.get('res'), str) else '2k')
+        return assets.pbr(bpy, p['texture'], res, scale=p.get('tex_scale'), displace=p.get('displace', 0.0),
                           tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0), rough_mul=p.get('rough_mul', 1.0),
                           bump=p.get('bump', 1.0), coords=p.get('coords', 'object'), emit=p.get('emit_map', 0.0))
     opts = {k: p[k] for k in ('roughness', 'alpha', 'emit', 'emit_color', 'tint2', 'grain', 'rib') if k in p}
