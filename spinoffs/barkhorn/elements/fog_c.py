@@ -22,7 +22,7 @@ def at(b, d):
     return round(d * math.sin(math.radians(b)), 1), round(d * math.cos(math.radians(b)), 1)
 
 
-def towers(n_bearing=8.0, n_dist=900.0, s_bearing=24.0):
+def towers(n_bearing=13.0, n_dist=900.0, s_bearing=25.0):
     """The north tower at `n_bearing`, `n_dist`; the south tower 1280 m on, seen at `s_bearing`."""
     g = math.radians(s_bearing - n_bearing)
     d = n_dist * math.cos(g) + math.sqrt(1280.0 ** 2 - (n_dist * math.sin(g)) ** 2)
@@ -48,7 +48,7 @@ def props():
         # the headland: coastal grass, level where the speaker stands, falling to the water behind it
         C.ground('sparse_grass', size=(26.0, 18.6), position=(0.0, -5.7, 0.0), displace=0.02, relief=0.12,
                  res='2k', tint='#5F5A3A', tint_mix=0.3, cells=900),
-        C.piece('ext', module='fog_b_el', fn='terrain', hills=[[*at(-22.0, 520.0), 105.0, 320.0, 200.0, 20.0]],
+        C.piece('ext', module='fog_b_el', fn='terrain', hills=[[*at(-10.0, 600.0), 112.0, 380.0, 200.0, 15.0]],
                 grass='#5F5E40', scrub='#2A3320', floor=WATER - 5.0, brow=3.6, steep=10.0, drop=120.0, wide=60.0,
                 y_range=[2.6, 1500.0], x_spread=[0.9, 1.1], x_margin=60.0, cols=400, row_ratio=0.006, min_row=0.3,
                 relief=0.15, relief_far=0.01, gullies=[10.0, 120.0]),
@@ -66,7 +66,7 @@ def props():
         # the fog: under the deck in the Gate, higher over the ocean, a wall rolling over Twin Peaks; haze above
         C.piece('ext', module='fog_c_el', fn='fog', top=WATER + 50.0, heave=8.0,
                 billows=[[220.0, 18.0], [70.0, 8.0], [20.0, 3.0]], wall=[16.0, 7800.0, 230.0, 14.0, 2500.0],
-                ocean=[30.0, 60.0], soft=3.0, density=0.03, anisotropy=0.7, billow_size=40.0, billow_cut=0.25,
+                ocean=[18.0, 120.0], soft=6.0, density=0.03, anisotropy=0.7, billow_size=40.0, billow_cut=0.25,
                 haze=0.00012, haze_height=300.0, box=[-11000.0, 150.0, WATER - 5.0, 11000.0, 15000.0, 700.0]),
         # grass round the speaker
         C.scatter(['grass_medium_02', 'grass_medium_01'], 3000, [-9.0, -14.5, 11.0, 3.2],
@@ -78,12 +78,12 @@ def props():
 
 
 def shot():
-    cam = C.camera(**CAM, fstop=5.6, shift_x=0.2)
+    cam = C.camera(**CAM, fstop=5.6, shift_x=0.23)
     cam['clip_end'] = 20000.0
     rot = sky_rot(SUN_BEARING)
     s = C.shot('fog_c', props(), cam, C.sky(SKY, rotation_deg=rot, strength=1.0, res='4k'),
                'barkhorn, Fog: over the Golden Gate from the Marin Headlands',
-               sun=C.sun_from_sky(SKY, rot, irradiance=4.0), rotate_z=20.0, position=(0.0, 0.0, -0.015),
+               sun=C.sun_from_sky(SKY, rot, irradiance=4.0), rotate_z=25.0, position=(0.0, 0.0, -0.015),
                samples=512, fin=C.finish(contrast=0.10, clarity=0.06, saturation=0.06, vignette=0.15))
     return s
 
