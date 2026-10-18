@@ -107,3 +107,7 @@ Duel, the fixed water against the first final (both old drivers): **6.8 to 6.0**
 (`critic-acid_b/duel-fixed-water.json`): "the splashes small, sparse and sharp, which matches the rain's scale"; against
 it, the near out-of-focus streaks read as faint vertical bars over the ground. `acid_b.png` is now that frame (interim,
 re-graded). For the re-render on main's new drivers the near layer is thinned (60 drops, fainter, shorter).
+
+The landscape final on main's drivers (the 15PR400 woofer, the opaque polished ring; rig 9eac9d8): 2400 x 1600, 512
+samples, 81 min render + 1.5 min build, graded with `acid_b_grade.py`. The near drops thinned as planned; no bars over
+the ground. The portrait on the same rig is a helper's (branch r31-element-acid-b-portrait-d).
