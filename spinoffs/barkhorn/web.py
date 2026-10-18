@@ -241,10 +241,16 @@ def make_images(sources=None):
     for k in KEYS:
         for side in ('on', 'off'):
             one(first(os.path.join(FIN, f'front-{side}-{k}.png'), at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg')),
-                lambda p, s=side: (save(Image.open(p), f'{k}-{s}.jpg', 900, q=80),    # the cards' tall frame
-                                   # and the gallery's, its backdrop carried on to the stage's shapes (3:2, and 4:5 on phones)
-                                   save(widen(Image.open(p), 1.5), f'{k}-{s}-wide.jpg', 1800, q=84),
-                                   save(widen(Image.open(p), 0.8), f'{k}-{s}-tall.jpg', 1000, q=84)))
+                lambda p, s=side: save(Image.open(p), f'{k}-{s}.jpg', 900, q=80))    # the cards' tall frame
+            # the gallery's, at the stage's shapes (3:2, and 4:5 on phones): the fronts rendered at those shapes when they are
+            # in, else the tall front with its backdrop carried on past its sides
+            for shape, ar, px in (('wide', 1.5, 1800), ('tall', 0.8, 1000)):
+                own = first(*[os.path.join(FIN, f'front-{side}-{shape}-{k}.{e}') for e in ('png', 'jpg')])
+                if own:
+                    one(own, lambda p, s=side, sh=shape, w=px: save(Image.open(p), f'{k}-{s}-{sh}.jpg', w, q=84))
+                else:
+                    one(first(os.path.join(FIN, f'front-{side}-{k}.png')),
+                        lambda p, s=side, sh=shape, a=ar, w=px: save(widen(Image.open(p), a), f'{k}-{s}-{sh}.jpg', w, q=84))
         for tag, fin, old in (('back', f'back-{k}.png', f'back-{k}.png'), ('amp', f'amp-{k}.png', f'detail-{k}.png')):
             one(first(os.path.join(FIN, fin), os.path.join(R30, old)), lambda p, t=tag: save(Image.open(p), f'{k}-{t}.jpg', 880, q=82))
         for tag in ('side', 'back'):
