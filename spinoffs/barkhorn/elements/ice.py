@@ -50,7 +50,7 @@ def props():
     p = []
     # the snowfield: fine displaced snow where the speaker stands, broad drifts around it; a coarser field beyond
     p.append(piece('ext', module='ice_el', fn='snowfield', size=[32.0, 30.0], position=[0.0, 6.0, 0.0], displace=0.03,
-                   ripple=0.004, relief=0.5, sparkle=4.0, res='2k', cells=1500, bank=[0.0, 0.0, 0.56, 0.42, TURN, 0.06]))
+                   ripple=0.004, relief=0.5, sparkle=4.0, res='2k', cells=1500, flat=[0.0, -1.5, 2.6], bank=[0.0, 0.0, 0.56, 0.42, TURN, 0.025]))
     p.append(ground('snow_02', size=(220.0, 220.0), position=(0.0, 60.0, -0.7), displace=0.0, relief=1.2, res='1k',
                     cells=440, flat=False))
     p.append(forest())
@@ -78,7 +78,7 @@ def grain(fin, amount):
 def shot():
     cam = camera(height=0.45, distance=8.0, azimuth=-14, lens=85, target=(-0.56, 0.0, 0.66), fstop=2.8)
     s = frame('ice', props(), cam, sky(SKY, SKY_ROT, strength=1.0, res='4k'), 'barkhorn, Ice, snow country at blue hour',
-                 lights=lights(), rotate_z=TURN, position=(0.0, 0.0, -0.04), exposure=-1.1, samples=512,
+                 lights=lights(), rotate_z=TURN, position=(0.0, 0.0, -0.015), exposure=-1.1, samples=512,
                  haze={'box_m': [-40, -12, -1, 40, 60, 20], 'density': 0.009, 'anisotropy': 0.2, 'color': '#C8D8EA'},
                  fin=grain(finish(contrast=0.10, clarity=0.06, sharpen=0.35, vignette=0.2, bloom=0.25, bloom_px=10, threshold=0.84), 0.006),
                  white_balance=(WB_K, 13.0))          # the white point a photographer sets at blue hour: the snow cold, not grey

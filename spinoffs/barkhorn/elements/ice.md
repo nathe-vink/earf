@@ -77,7 +77,7 @@ Seven is the best score among the element sessions so far, but it is not a $20,0
    - Two things cause this. The lining and the black woofer fill the cabinet, so little light passes through. And under a soft blue-hour sky there is no strong source behind the speaker to light it from within.
    - Brighter cards made it milky (p8 lost its duel for that), and the night made it darker. The real fix is a stronger, motivated backlight: the sun's last glow straight behind it, which the critics liked in p2 and p5. That fights the blue-hour idea, so it is a choice for the owner.
 2. **The snow reads as matte plaster.** Its scans are good at 1 m but soft at 8 m. The glitter does not show at f/2.8. Its 3 cm displacement crumples into foam at the base.
-3. **A rectangular dark patch on the snow beside the base.**
+3. **~~A rectangular dark patch on the snow beside the base~~ (fixed, 00c3cbd).** Crops with each piece taken out found it: the snowfield's level footprint under the speaker sat in a hollow of the broad relief. The relief is now measured from the terrain's own height there, so the footprint is flush. Landscape re-rendered at 512 (103 min). Before the fix:
    - It is most likely the snowfield's level, undrifted square under the cabinet (`snowfield`'s bank leaves the footprint flat) showing at its rotated corner, or a card's shadow.
    - Not yet fixed. It is the cheapest thing to fix next.
 4. **The cabin.** Its window clips and its roof snow is a slab. At 72 m in haze it is soft enough, but the critics read both as CG.
