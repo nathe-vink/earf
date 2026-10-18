@@ -126,3 +126,25 @@ colour in the frame.
 - **horn-side, horn-back** (`horn21`): partly. The horn is resin with no lining, so the backlight and the paper falloff
   would help most (the through-light is what the critics praised on the horn); the edge and flank strips must be
   checked against the throat (a flank strip seen through the throat drew a white oval here).
+
+## The finals
+
+The coordinator (08:18) moved the stopping line, since scores across every session sit between 4.5 and 6.0: stop when
+two passes in a row gain under half a point, render the finals from the best rig, duel, report honestly. The passes
+had already met it. Before the finals, main's cover changes were merged (b394ba1, the cloth rolled round a 5 mm edge,
+the model rebuilt; 5747f1c, a melange cloth); the finals' shots are at 4b0fe16. Ice and Smoke rendered here; the six
+other colours in six helper sessions (branches `r31-catalogue-<k>`), all with
+`finals.py render --only <k> --views front-on,front-off --force` at the templates' own settings: 256 samples, full
+size, about 65 minutes a frame on four cores (Ice cover-on: 3913 s, 2.6 MB).
+
+**The final's blind pass** (Ice, cover on, full size, `catalogue31-final-blue-on-full.json`): **6.0**, "a clean,
+well-controlled studio packshot ... reads as a high-end render rather than a photograph". With the new cloth the cover
+reads as cloth at full size; what the critic still names: the contact line faint (no weight); no coloured pool from the
+acrylic; hot streaks on the horn and a violet glow at the throat's lip (the rim lamp); the top face as bright as the
+wall behind; the paper without tooth; then the throat's dark mass, the lining, the internal streaks (the product's).
+
+Next, if the rig is opened again: the rim lamp to about 5 W (the violet glow, named by three critics), the top line
+to 1.0, the horn light's specular to 0.5, a darker floor under the cabinet (wash 0.2, contact 0.45 m), and a paper
+tooth (a material on the sweep: an engine change, not made here). A coloured pool needs either refractive caustics
+(noisy at these samples) or light linking that lets the backlight reach the paper through the acrylic without its
+glossy streak; neither was worth a re-render of all sixteen.
