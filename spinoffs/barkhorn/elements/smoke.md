@@ -50,3 +50,49 @@ at once as a dark, clean silhouette, the reverse of the dioramas, where it was b
 | 4 | p4 | 5.0 | The smoke a flat glowing curtain with no shafts in the air; the ground smeared (no needles at full size); halo lines on the trunks (the kickers grazing them); a weak left rim; the front muddy; the horn's head clipping; a curly branch beside the base | The low sun (elevation 8) beamed almost straight at the camera, so no shaft could cross the view. I changed the light's idea to god rays through the crowns. **Canopy.** Two shadow-only layers out of frame, at 10 m and 13 m, cut by noise into clumps and gaps. **Light.** The sun to azimuth 150, elevation 24, irradiance 30. The kickers light the speaker only (receivers), which ends the halos; the right one went to 26. The bounce went warm (#C9BBA8, 3.0). Exposure -0.3, bloom 0.04. **Smoke.** Density 0.15 with an even floor of 0.06, so the shafts show in the air. **Set.** The trunks varied (radius 0.10 to 0.42, lean up to 6, bump 4); five branches, none within 2.5 m. |
 | 5 | p5 | 5.5 | The speaker's lower body against dark ground, not the glow; the body crushed (median 11.5); a rim on the right edge only; the glow dull (148 to 178); smooth trunks; a seam where the lit floor meets the haze; no cool in the shadows; a lit sliver under the base | **Camera.** The critic asked for a lens at 0.35 m to put the glow behind the whole body. The brief's eye level is 0.7 to 1.2 m, so I took 0.7 m and brought the glow down to the ground instead: a ground-hugging layer of smoke (0.18, gone by 1.6 m), centred 7 m back. **Light.** Exposure 0 (it was -0.3), bounce 7, left kicker 42 and wider, sky fill 2.0 over 4 × 3 m. **Set.** The bark tint 30 % with bump 5; the feet sunk 20 mm. |
 | 6 | p6 | 5.5 | Smooth-column trunks; a dead dark band across the foreground with a ruler-straight edge; a rim on the right only; no light through the tint; the shafts only at the left; blotchy photo leaves through the haze; a featureless mid-ground; all sepia | **Set.** The band came from the canopy: at a sun this low, light slipped under its far edge and flooded everything beyond 2 m. Taking the canopy out and lowering the sun to 16 lets the trunks themselves cut the shafts, and their shadows streak toward the camera. True displacement (0.025 m) on the near trunks, with larger bark plates and a lighter tint; ten more trunks 14 to 25 m back, and the sky down to 0.08. **Light.** The left kicker to 75 at elevation 30; a through-light behind the cabinet (8, cabinet only) for amber at the tint's edges; a cooler sky fill (4.0, #9FB0C8). **Smoke.** Crisper (density 0.10, cut 0.5, soft 0.15) and kept clear of the camera. |
+| 7 | p7 | 5.0 | The trunks still smeared and smooth; the ground a soft leaf smear; the smoke a flat wall; the cabinet near black with a weak left rim; no shadow of the speaker along the shafts; one sepia tone | Stopped here, under the coordinator's rule (two passes in a row since the concept change gained less than 0.5: 5.5, 5.5, 5.0). |
+
+## The duel and the finals
+
+**The duel.** A blind duel (`critic/ab/PROMPT-DUEL.txt`) set p7 (A) against p6 (B). B won, 5.6 to 4.8. The judge preferred
+p6's dappled canopy light, its god rays, its bark, its darker anchors and its irregular light pool. It found p7 milky,
+with synthetic, regular radiating shadows. Against p6 it named one thing, the foreground's "hard, straight upper edge,
+like a wall offscreen" (`critic-smoke/duel-p7-vs-p6.json`).
+
+**The finals are p6's rig, with that edge fixed.** I traced the edge, removing one piece at a time:
+- **Not the canopy's edge.** A canopy of 400 × 400 m still showed it, and so did other noise seeds.
+- **Not the near trunks, not the smoke box.**
+- **The cause: the sky fill and the bounce.** These two big area lamps stand about 2 m in front of the speaker, so they
+  lit the floor only on their far side. Linked to the speaker's parts alone, as a photographer's reflector would be,
+  they leave the floor to the sun, and the floor is dappled to the frame's bottom edge.
+
+The portrait was re-framed, not cropped: 5.5 m away on the same 65 mm lens, the speaker 42 % of the frame's height, with
+the shafts through the crowns above it.
+
+## An honest note: where it stands and what holds it back
+
+The blind critics scored seven passes from 5.0 to 5.5 (scale: 6 is "a competent render that still reads as CG"). The
+duel judge gave the chosen rig 5.6. None reached 8.5. It is a mood piece that reads at once: a dark speaker against
+woodsmoke glowing in a pine wood. But it is not yet a $20,000 campaign photograph. What holds it back, as every critic
+named it:
+- **The trunks.** Modelled columns in a scanned bark texture still read as smooth cylinders through the haze. Real
+  scanned pine trunks (Poly Haven's `pine_tree_01`, 17 M polygons) would not fit in this container's 15 GB; one copy
+  imported per tree ran out of memory. A decimated scan, or a trunk-only cut of it, is the single biggest gain left.
+- **The smoke.** A noise volume reads as an even wall or fog, not woodsmoke. Real smoke has structure at many scales:
+  a simulated plume (Mantaflow, or an OpenVDB cache) would carry it.
+- **The ground.** Litter from one texture lacks the cones, twigs and needle clumps that sell scale at the speaker's
+  feet.
+- **The speaker.** Smoked black acrylic against a bright ground stays a near-black box unless it is lit as a studio
+  would light it. The critics asked for more rim, more light through the tint and more fill, while the brief asks for
+  location light. I kept the fills motivated (litter bounce, sky, the smoke's glow behind) and linked to the speaker.
+- **The grade.** Warm smoke everywhere reads as one sepia tone. The cool fills helped the shadows only a little.
+
+Concept B (the high-key birch wood) puts the black speaker against pale mist, which may solve the speaker's legibility
+more simply.
+
+## Software and environment notes
+
+- **bpy 5.0.1 on Python 3.11, plus Pillow and scipy 1.13 (numpy 1).** The container's python3 is 3.13. Renders run with
+  `python3.11 studio/engine/render.py`.
+- **`.venv-fab` on Python 3.11**, with build123d, for the speaker's model.
+- **No engine core change.** My pieces are in `studio/engine/kit_ext/smoke_el.py`: woodsmoke, trunks and canopy.
