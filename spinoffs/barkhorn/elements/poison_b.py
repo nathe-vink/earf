@@ -156,15 +156,15 @@ def poisons():
     for x, y, R, age, sd, lean, torn in AG:
         P.append(extb('amanita', (x, y, -0.018 if age != 'button' else -0.01), cap=R, age=age, seed=sd, lean=list(lean), torn=torn))
     # death caps, olive, half in the ferns at the right behind the speaker's cluster
-    for x, y, R, age, sd in [(0.36, -0.62, 0.065, 'convex', 11), (0.48, -0.55, 0.045, 'young', 12)]:
+    for x, y, R, age, sd in [(0.36, -0.42, 0.06, 'convex', 11), (0.47, -0.33, 0.045, 'young', 12)]:
         P.append(extb('amanita', (x, y, -0.006), cap=R, age=age, seed=sd, species='phalloides'))
     # a mossy stump (a Poly Haven scan) in the foreground at the left, the viper coiled on its top, its head raised
     # toward the speaker; the frog on the moss at the stump's foot
     rx, ry, rs = ROCK
     P.append(asset('tree_stump_02', (rx, ry, -0.03), rotate=(0, 0, 35), scale=rs, res='2k'))
-    P.append(extb('viper', (rx - 0.04, ry + 0.06, 0.3), drop=True, rotate=[0, 0, 20], head=[0.08, -0.1, 0.15], look=-30,
-                  girth=0.019, r_out=0.13, r_in=0.05, turns=2.1))
-    P.append(extb('dartfrog', (rx + 0.2, ry - 0.12, 0.6), rotate=[0, 0, 170], size=0.045, drop=True))
+    P.append(extb('viper', (rx + 0.02, ry + 0.02, 0.3), drop=True, rotate=[0, 0, 20], head=[0.07, -0.1, 0.15], look=-35,
+                  girth=0.024, r_out=0.13, r_in=0.05, turns=2.1))
+    P.append(extb('dartfrog', (rx + 0.2, ry - 0.2, 0.4), rotate=[0, 0, 170], size=0.045, drop=True))
     # foxglove spires behind at the left, nightshade at the right
     # foxgloves in a group at the left behind the stump, nightshade at the right
     # (kept out of the sun's path to the speaker, which crosses x -1.3 at y -0.35)
@@ -195,32 +195,32 @@ def ferns_b(seed=3):
     return [ext('plants', model='fern_02', place=pl, seed=seed)]
 
 
-SUN_B = {'azimuth_deg': -75.0, 'elevation_deg': 30.0, 'irradiance': 28.0, 'angle_deg': 0.6, 'color': '#FFE2AE'}
-SUNLIT_B = [(-0.12, 0.0, 0.85, 0.42), (0.74, -1.88, 0.15, 0.14), (-0.38, -2.3, 0.5, 0.25), (-3.4, 3.6, 1.6, 0.4), (0.4, -0.6, 0.06, 0.12), (-4.0, 9.0, 6.0, 0.4),
-            (-3.5, 10.0, 5.0, 0.6), (1.0, 12.0, 5.0, 0.3)]
+SUN_B = {'azimuth_deg': -75.0, 'elevation_deg': 30.0, 'irradiance': 30.0, 'angle_deg': 0.6, 'color': '#FFE2AE'}
+SUNLIT_B = [(0.0, 0.0, 0.75, 0.9), (0.74, -1.88, 0.15, 0.14), (-0.38, -2.3, 0.5, 0.22), (-3.4, 3.6, 1.6, 0.25), (-2.0, 7.0, 4.0, 0.6),
+            (-3.5, 10.0, 5.0, 0.6), (1.0, 12.0, 5.0, 0.55), (2.5, 6.5, 0.8, 0.5)]
 
 
 def shot():
     props = [ground('forest_leaves_02', size=(30.0, 30.0), position=(0.0, 8.0, 0.0), displace=0.03, tint='#3A2A1E',
                     tint_mix=0.15, relief=0.15, res='4k', cells=900),
-             ext('redwood', (-3.4, 3.6, -0.1), radius=1.25, height=30.0, tint=REDWOOD, tint_mix=0.35, tex_scale=1.4,
+             ext('redwood', (-3.4, 3.6, -0.1), radius=1.25, height=30.0, tint=REDWOOD, tint_mix=0.3, tex_scale=1.4,
                  bump=1.6, displace=0.18, segments=420, rings=220, seed=1, flare=0.75, foot=1.5, turn=20),
              # the floor in 3D near the speaker: bark crumbs, twigs and moss in irregular cushions
              ext('strew', model='bark_debris_01', on=['prop0-kit'], density=2.0, up=0.5, scale=[0.22, 0.4], seed=31,
                  within=[0.0, -0.3, 3.2], avoid=[[0.0, 0.0, 0.33], [0.0, -0.55, 0.5]]),
              ext('darken', on=['prop0-kit'], value=0.5, rough=0.85),
              # redwood sorrel in patches over the floor, coming close to the lens, and moss cushions round the bases
-             extb('sorrel', on=['prop0-kit'], density=200, up=0.6, patch=0.5, patch_cut=0.62, scale=[0.6, 1.4], seed=51,
-                  size=0.075, variants=12, within=[0.0, -1.0, 5.0], avoid=[[0.0, 0.0, 0.58], [0.42, -0.6, 0.15], [0.72, -1.9, 0.22], [-0.42, -2.25, 0.4]]),
-             ext('strew', model='moss_01', on=['prop0-kit'], density=2200, up=0.5, scale=[0.6, 1.5], seed=52, patch=0.06, patch_cut=0.25, feather=0.1,
+             extb('sorrel', on=['prop0-kit'], density=320, up=0.6, patch=0.6, patch_cut=0.55, scale=[0.8, 1.25], seed=51,
+                  size=0.075, within=[0.0, -1.0, 5.0], avoid=[[0.0, 0.0, 0.42], [0.72, -1.9, 0.22], [-0.42, -2.25, 0.4]]),
+             ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=52,
                  within=[0.72, -1.9, 0.28], avoid=[[0.0, 0.0, 0.32]]),
-             ext('strew', model='moss_01', on=['prop0-kit'], density=7000, up=0.5, scale=[0.9, 1.8], seed=53, patch=0.06, patch_cut=0.25, feather=0.1,
+             ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=53,
                  within=[-0.35, -0.5, 0.22], avoid=[[0.0, 0.0, 0.32]]),
-             ext('strew', model='moss_01', on=['prop0-kit'], density=7000, up=0.5, scale=[0.9, 1.8], seed=54, patch=0.06, patch_cut=0.25, feather=0.1,
+             ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=54,
                  within=[0.42, -0.38, 0.18], avoid=[[0.0, 0.0, 0.32]]),
              ext('canopy', (0.0, 4.0, CANOPY_Z), size=[220.0, 220.0], gap=1.2, open=0.05,
                  holes=[gap_for(x, y, z, r, (0.0, 4.0), SUN_B) for x, y, z, r in SUNLIT_B]),
-             ext('mist', (0.0, 20.1, -0.2), size=[50.0, 37.8, 18.0], density=0.07, top=0.35, wisp=2.5, color='#F2F4EA',
+             ext('mist', (0.0, 20.1, -0.2), size=[50.0, 37.8, 18.0], density=0.09, top=0.35, wisp=2.5, color='#F2F4EA',
                  anisotropy=0.7),
              ext('mist', (0.0, -3.0, -0.2), size=[20.0, 8.4, 6.0], density=0.015, top=0.5, color='#F2F4EA', anisotropy=0.7),
              *[ext('redwood', (x, y, -0.1), radius=r, height=40.0, tint=REDWOOD, tint_mix=0.3, tex_scale=1.4, bump=1.6,
@@ -244,13 +244,11 @@ def shot():
     props.append(ext('plants', model='fern_02', place=pl, seed=17))
     # bounces a photographer would set: a reflector low at the camera's left (diffuse only), a dim scrim the horn
     # mirrors, a warm strip behind-right for the body's right edge
-    lights = {'reflector': {**area(-35, 8, 2.5, 0.5, '#EEF0E0', (2.0, 1.2), (0.0, -0.3, 0.5)), 'specular': 0.0},
+    lights = {'reflector': {**area(-35, 8, 2.5, 2.0, '#EEF0E0', (2.0, 1.2), (0.0, -0.3, 0.5)), 'specular': 0.0},
               'scrim': {**area(-10, 30, 3.5, 0.5, '#D8DCC8', (2.0, 1.0), (0.0, 0.0, 1.15)), 'diffuse': 0.0},
               'scrim2': {**area(-40, 55, 2.5, 0.4, '#D8DCC8', (0.5, 1.5), (0.0, 0.0, 1.2)), 'diffuse': 0.0},
               'rim': {**area(140, 22, 2.0, 1.5, '#FFE6B8', (0.6, 1.8), (0.0, 0.0, 1.0)), 'specular': 0.4},
-              # the horn mirrors a broad soft scrim at the camera's right (reflections only)
-              'horn_back': {**area(165, 30, 1.8, 3.0, '#FFE6B8', (1.0, 0.6), (0.0, 0.0, 1.15)), 'volume': False},
-              'scrim3': {**area(8, 12, 3.2, 1.2, '#DCE0CC', (2.2, 1.0), (0.0, 0.0, 1.15)), 'diffuse': 0.0}}
+              'horn_back': {**area(165, 30, 1.8, 3.0, '#FFE6B8', (1.0, 0.6), (0.0, 0.0, 1.15)), 'volume': False}}
     cam = camera(height=0.5, distance=4.6, azimuth=4.0, lens=50.0, target=(0.05, -0.3, 0.6), fstop=4.0)
     return frame('poison', props, cam, sky(SKY2, rotation_deg=SKY_ROT, strength=0.3, res='4k'),
                  'barkhorn, Poison B, the poisonous forest', lights=lights, sun=SUN_B, rotate_z=-18.0,

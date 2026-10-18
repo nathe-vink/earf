@@ -284,7 +284,7 @@ def _amanita_mats(bpy, name, sp, R, Hs):
         b.inputs['Subsurface Weight'].default_value = 0.12
     else:
         # olive-green to yellowish at the margin, with dark radial fibrils
-        col = _ramp(nt, mix.outputs['Value'], [(0.1, '#384414'), (0.5, '#525E22'), (0.9, '#707C3A'), (1.2, '#8C8A5E')])
+        col = _ramp(nt, mix.outputs['Value'], [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'), (1.2, '#A3A06A')])
         b.inputs['Subsurface Weight'].default_value = 0.08
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)
@@ -471,7 +471,7 @@ def _viper_mat(bpy, name, p, g):
     nt.links.new(tc.outputs['Object'], vor2.inputs['Vector'])
     # darker in the seams between scales, each scale's own shade a little different
     seam = nt.nodes.new('ShaderNodeMapRange'); seam.inputs['From Min'].default_value = 0.0; seam.inputs['From Max'].default_value = 0.08
-    seam.inputs['To Min'].default_value = 0.4; seam.inputs['To Max'].default_value = 1.0
+    seam.inputs['To Min'].default_value = 0.6; seam.inputs['To Max'].default_value = 1.0
     nt.links.new(vor2.outputs['Distance'], seam.inputs['Value'])
     mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'; mul.inputs['Factor'].default_value = 1.0
     nt.links.new(base, mul.inputs['A'])
@@ -480,9 +480,6 @@ def _viper_mat(bpy, name, p, g):
         nt.links.new(seam.outputs['Result'], sv.inputs[k])
     nt.links.new(sv.outputs['Vector'], mul.inputs['B'])
     col = mul.outputs['Result']
-    # each scale a shade of its own (about 10 %)
-    var = nt.nodes.new('ShaderNodeMix'); var.data_type = 'RGBA'; var.blend_type = 'OVERLAY'; var.inputs['Factor'].default_value = 0.18
-    nt.links.new(vor.outputs['Color'], var.inputs['B']); nt.links.new(col, var.inputs['A']); col = var.outputs['Result']
     # the tail's rust tip: the coil's outermost part, by distance from the axis
     vl = nt.nodes.new('ShaderNodeVectorMath'); vl.operation = 'MULTIPLY'; vl.inputs[1].default_value = (1, 1, 0)
     nt.links.new(tc.outputs['Object'], vl.inputs[0])
@@ -511,9 +508,9 @@ def _viper_mat(bpy, name, p, g):
     # keeled scales: each cell domed, with a ridge along the body (stretched noise)
     dome = nt.nodes.new('ShaderNodeMath'); dome.operation = 'POWER'; dome.inputs[1].default_value = 0.6
     nt.links.new(vor2.outputs['Distance'], dome.inputs[0])
-    n1 = _bump(nt, b, dome.outputs['Value'], 1.0, g * 0.07)
-    b.inputs['Roughness'].default_value = 0.38
-    b.inputs['Coat Weight'].default_value = 0.25; b.inputs['Coat Roughness'].default_value = 0.2
+    n1 = _bump(nt, b, dome.outputs['Value'], 1.0, g * 0.035)
+    b.inputs['Roughness'].default_value = 0.45
+    b.inputs['Coat Weight'].default_value = 0.1; b.inputs['Coat Roughness'].default_value = 0.2
     b.inputs['Subsurface Weight'].default_value = 0.2
     b.inputs['Subsurface Radius'].default_value = (0.002, 0.004, 0.0008)
     b.inputs['Sheen Weight'].default_value = 0.15
@@ -724,7 +721,7 @@ def _sorrel_plant(bm, rnd, size):
             nrm = side.cross(d).normalized()
             if nrm.z < 0:
                 nrm = -nrm
-            fold = rnd.uniform(0.15, 0.35) if rnd.random() > 0.12 else rnd.uniform(0.9, 1.4)   # some folded shut
+            fold = rnd.uniform(0.15, 0.35)
             def leaflet(t, d=d, side=side, nrm=nrm, fold=fold):
                 c = t.verts.new(top + d * L * 0.45 + nrm * L * 0.02)
                 ring = []
@@ -757,10 +754,7 @@ def sorrel(bpy, name, p, kit):
     col = bpy.data.collections.new(f'{name}-plants')
     m, nt, b = _node_mat(bpy, f'{name}-leaf')
     nz = _noise(nt, 1.0 / 0.03, 3.0)
-    oi = nt.nodes.new('ShaderNodeObjectInfo')             # each plant its own shade: some darker, some yellower
-    mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MULTIPLY_ADD'; mx.inputs[1].default_value = 0.6
-    nt.links.new(oi.outputs['Random'], mx.inputs[0]); nt.links.new(nz.outputs['Fac'], mx.inputs[2])
-    nt.links.new(_ramp(nt, mx.outputs['Value'], [(0.25, '#2F5419'), (0.5, '#46722A'), (0.75, '#5C8634'), (1.05, '#7F9440')]), b.inputs['Base Color'])
+    nt.links.new(_ramp(nt, nz.outputs['Fac'], [(0.3, '#3F6A22'), (0.6, '#52822C'), (0.8, '#6A9238')]), b.inputs['Base Color'])
     b.inputs['Roughness'].default_value = 0.55; b.inputs['Subsurface Weight'].default_value = 0.25
     b.inputs['Subsurface Radius'].default_value = (0.002, 0.004, 0.001)
     if 'Transmission Weight' in b.inputs:
