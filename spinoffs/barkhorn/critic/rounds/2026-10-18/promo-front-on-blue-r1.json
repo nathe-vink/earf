@@ -1,0 +1,402 @@
+{
+ "stage1": {
+  "impression": "A clean, tonal studio render: a blue acrylic speaker on a pale-blue paper sweep. The tinted horn reads well, but the light is flat and has no direction: nothing shapes the product, the contact shadow is soft and grey, and no blue light passes through the acrylic onto the floor, while the spotless surfaces, clay-like inner lining and flat streaky disc say CG. The base is jammed against the bottom edge with the top fifth empty, the product sits off-centre to the left and blue-on-blue keeps it from popping, so it reads as a competent render, not a photograph.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Directional key: the falloff across the cover is at least 8 levels, and the side panel sits at least 0.7 stop under the lit front (now 1.9 levels; front 103-107 against side 94).",
+  "The acrylic and resin show reflections of the lights: crisp 230-250 lines at the near vertical edge and along the horn rim, with 0% of the product clipped (now nothing on the product is brighter than about 200, below the 220 sweep).",
+  "Framing: the product is centred to within 10 px, with at least 180 px of floor below the near corner and at least 300 px of clear sweep above the horn (now margins of 82/188 px, 89 px below and 445 px above).",
+  "The horn throat holds detail: crush_pct of 15 or less in the throat (now 62).",
+  "The sweep has depth and texture: a halo or falloff of at least 12 levels, and a grain range of 3-6 in a clear 100 px patch (now flat to about 8 levels outside the cast shadow, with a range of 1.3).",
+  "No terminated-path blacks in the acrylic (the top front edge segment at x 115-283 now reads RGB 0,1,2).",
+  "The cover reads as woven cloth, the lining as white felt or foam, and there is no moire through the inner shelf (asset fixes, out of scope here)."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    1080,
+    445
+   ],
+   "what": "445 px (21%) of empty sweep above the horn while the base is crowded at the bottom"
+  },
+  {
+   "region": [
+    640,
+    2071,
+    900,
+    2160
+   ],
+   "what": "the near corner sits 89 px (4%) from the bottom edge, leaving the base no floor to stand on"
+  },
+  {
+   "region": [
+    0,
+    445,
+    82,
+    900
+   ],
+   "what": "the horn is 82 px from the left edge against a 188 px right margin, so the product is off-centre left"
+  },
+  {
+   "region": [
+    400,
+    560,
+    580,
+    760
+   ],
+   "what": "horn throat crushed: lum_median 1.0, crush_pct 62, RGB median (0,1,6), no driver detail"
+  },
+  {
+   "region": [
+    220,
+    1300,
+    600,
+    1500
+   ],
+   "what": "cloth cover lit dead flat (falloff 1.9 levels across 380 px, range 4.6) and textured with vertical brushed-metal streaks, not cloth"
+  },
+  {
+   "region": [
+    150,
+    960,
+    890,
+    1950
+   ],
+   "what": "no light and shade between the faces: the lined front reads 103-107 and the side panel 94 (about 1.1:1)"
+  },
+  {
+   "region": [
+    82,
+    445,
+    892,
+    2071
+   ],
+   "what": "no reflections of the lights anywhere on the product: cabinet front p95 117, horn p95 172, cabinet top median 198, all under the 216-222 sweep"
+  },
+  {
+   "region": [
+    700,
+    950,
+    735,
+    2070
+   ],
+   "what": "the near vertical edge is a dead dark bar (median 30, p95 107), so the 20 mm acrylic thickness never shows"
+  },
+  {
+   "region": [
+    740,
+    1100,
+    880,
+    1880
+   ],
+   "what": "side panel washed grey: RGB median (66,100,123), B-R 57 against 94 on the lined front"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1080,
+    1500
+   ],
+   "what": "the sweep is a flat field (217.8-221.7 across the top, about 219 to 214 down both sides), with no falloff or visible curve, so the product stands in a void"
+  },
+  {
+   "region": [
+    950,
+    100,
+    1050,
+    200
+   ],
+   "what": "no grain: a range of 1.3 levels (218.7-220.0) in a 100 px patch, CG-clean and liable to band under web compression"
+  },
+  {
+   "region": [
+    115,
+    939,
+    283,
+    965
+   ],
+   "what": "a segment of the top front acrylic edge renders pure black (RGB 0,1,2, crush_pct 87) with a hard vertical step to navy (0,6,64) at x about 283"
+  },
+  {
+   "region": [
+    230,
+    1705,
+    340,
+    1740
+   ],
+   "what": "a fine stripe and mesh pattern seen through the inner shelf reads as moire or aliasing"
+  },
+  {
+   "region": [
+    150,
+    960,
+    640,
+    1100
+   ],
+   "what": "the white lining reads as mottled grey-blue clay, not felt or foam"
+  },
+  {
+   "region": [
+    900,
+    1500,
+    1080,
+    2000
+   ],
+   "what": "the cast shadow is neutral grey (RGB 152,176,189, or 0.81/0.84/0.86 of the open floor): no blue from the tinted acrylic reaches the floor"
+  },
+  {
+   "region": [
+    140,
+    1966,
+    200,
+    1990
+   ],
+   "what": "minor: the contact under the lit front edge is thin, 140 against 198 on the open floor, and gone within about 12 px"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The light has no direction: the cloth cover falls off by under 2 levels across 380 px, and the lit front and the side panel are within about 10 levels of each other, so the cabinet has no light and shade and reads as CG in an even wash.",
+   "evidence": {
+    "region": [
+     220,
+     1300,
+     600,
+     1500
+    ],
+    "measured": "cover profile along x 81.6 to 79.7 and along y 81.5 to 79.6 (range 4.6); lined front band [220,990,600,1060] 102.8-107.1; side panel [740,1100,880,1880] median 94.4; the only directional cue is a soft cast shadow to the right ([920,1500,1080,1900] median 176 against 212 open)"
+   },
+   "change": {
+    "setting": "light: direction, size and balance (key against the ambient fill)",
+    "from": "an even, ambient-dominated wrap with a weak soft source front-left",
+    "to": "one 120x180 cm softbox camera-left at azimuth 60\u00b0 from the lens axis, elevation 40\u00b0, 1.6 m from the cabinet front, feathered toward the horn; ambient fill cut by 2 stops (to about 25%); key raised until the upper left of the lined front reads about 135; hold the sweep at its current level with its own light (c5); keep the shadow falling right so the eight colours match"
+   },
+   "expected": "The front face is lit from the upper left with a visible gradient: the cover reads about 100-115 at the left, falling 10-25 levels to the right; the lining reads 120-140; the side panel sits about a stop under the front. The accept region is in the reframed c2 frame.",
+   "accept": {
+    "region": [
+     273,
+     1189,
+     653,
+     1389
+    ],
+    "metric": "falloff",
+    "axis": "x",
+    "op": ">=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The framing crowds the base and pushes the product left: the near corner sits 89 px (4%) above the bottom edge while 445 px (21%) of empty sweep hangs over the horn, and the margins are 82 px left against 188 px right.",
+   "evidence": {
+    "region": [
+     82,
+     445,
+     892,
+     2071
+    ],
+    "measured": "product box from edge steps: horn left edge at x 82 (5 px wide), horn top at y 445, side panel right edge at x 892, near corner bottom at y 2071"
+   },
+   "change": {
+    "setting": "camera: framing (lens shift only; position, height, aim and focal length unchanged; the same on all eight colours)",
+    "from": "product box x 82-892, y 445-2071 (margins left 82, right 188, top 445, bottom 89)",
+    "to": "product box x 135-945, y 334-1960 (margins left 135, right 135, top 334, bottom 200): the content moves 53 px right and 111 px up, a shift of 0.025 of the 2160 px long side horizontally and 0.051 vertically"
+   },
+   "expected": "A centred product with 200 px (9%) of floor in front of the base and 334 px (15%) of clean sweep above for type. The perspective is unchanged, so the set stays consistent. Every other accept region in this reply is written for this reframed frame (current coordinates +53 x, -111 y).",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "Nothing on the product mirrors a light: the brightest product surface (the cabinet top, about 198) is darker than the 220 sweep, the near vertical edge is a dead dark bar and the side panel is washed grey, so the acrylic reads matte and its 20 mm thickness never shows.",
+   "evidence": {
+    "region": [
+     700,
+     950,
+     735,
+     2070
+    ],
+    "measured": "near edge median 30.3, p95 106.9; cabinet front [150,960,690,1950] p95 117; horn [100,480,740,880] p95 172; cabinet top [130,930,880,948] median 198; side panel RGB (66,100,123), B-R 57 against 94 on the front"
+   },
+   "change": {
+    "setting": "light: number (edge strips, a strip in front of a black flag) plus a black flag",
+    "from": "no light source appears in any reflection; camera right is open to the pale studio",
+    "to": "a 120x200 cm black flag at camera right, 1.3 m from the side panel and parallel to it; in front of the flag, a vertical 30x180 cm strip softbox near azimuth 120\u00b0, 1.2 m from the near corner, moved until its reflection is a 3-6 px line on the side panel at the near edge; a 30x120 cm strip 0.8 m above the horn, tilted 30\u00b0 toward the camera, for a line along the horn's top rim; strip power set so the lines read 230-250 without clipping"
+   },
+   "expected": "Crisp 230-250 lines at the near vertical edge and along the horn's top rim. The side panel mirrors black and reads a deeper, cleaner blue (median 55-80, B-R at least 70). clip_pct on the product stays 0. The accept region is in the reframed c2 frame.",
+   "accept": {
+    "region": [
+     753,
+     839,
+     788,
+     1959
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 190
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The horn throat is a hole: the driver and the throat walls are crushed to near-pure black at the visual centre of the horn.",
+   "evidence": {
+    "region": [
+     400,
+     560,
+     580,
+     760
+    ],
+    "measured": "lum_median 1.0, crush_pct 61.7, p95 60.5, RGB median (0,1,6)"
+   },
+   "change": {
+    "setting": "light: number (fill into the horn mouth)",
+    "from": "no source that the throat can see",
+    "to": "a 40 cm round softbox with a grid just above the lens (azimuth 0\u00b0, elevation about 8\u00b0), 2.5 m from the horn, 2.5 stops under the key, gridded so it reaches only the horn; no global black-point lift"
+   },
+   "expected": "The phase plug, the driver rim and the throat walls read as deep navy with shape (median 12-30), with a small round catchlight; crush falls from 62% to 15% or less, and the horn still reads deep. The accept region is in the reframed c2 frame.",
+   "accept": {
+    "region": [
+     453,
+     449,
+     633,
+     649
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The sweep is a flat field with no falloff and no visible curve, so the speaker stands in a featureless void, and the paper behind the resin horn is no brighter than anywhere else.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1080,
+     1500
+    ],
+    "measured": "top band along x 217.8-221.7; left strip down to y 1500 goes 217.7 to 213.8; right strip goes 219 to 213.8 before the cast shadow; falloff along y in [0,0,100,900] is +3.1; the glowing left half of the horn [150,470,370,860] has a median of 144"
+   },
+   "change": {
+    "setting": "sweep: its own light (the shape of the light on the paper)",
+    "from": "lit by the same even wrap: about 220 at the top, 214 at mid-height and 201 on the floor",
+    "to": "a 40 cm diffused head on the floor behind the cabinet, hidden by it and flagged off the product, aimed up the sweep so that a soft glow centres behind the horn at about 228 and falls to about 205 at the top of the frame and about 200 at the sides; floor in front at 195-200; keep the tint (202,224,233 at the top)"
+   },
+   "expected": "Depth: a bright zone behind the horn lifts the glow of the resin (left half from 144 to about 155-165), and the paper darkens gently toward the top and the edges by at least 12 levels, leaving clean room for type. The accept region is in the reframed c2 frame and is clear sweep.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     100,
+     900
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": "<=",
+    "value": -12
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The sweep has no grain at all: a CG-clean field that also bands under web compression.",
+   "evidence": {
+    "region": [
+     950,
+     100,
+     1050,
+     200
+    ],
+    "measured": "lum_range 1.3 (p5 218.7, p95 220.0) in a 100 px patch"
+   },
+   "change": {
+    "setting": "finish: grain",
+    "from": "none",
+    "to": "fine monochrome grain, sigma about 1.2 levels (about 0.5%), 1 px in size, applied after the grade, identical on all eight colours"
+   },
+   "expected": "A patch range of 3-6 levels: the sweep reads as photographed paper, not a gradient fill. The accept region is in the reframed c2 frame and is still clear sweep.",
+   "accept": {
+    "region": [
+     950,
+     100,
+     1050,
+     200
+    ],
+    "metric": "lum_range",
+    "op": "between",
+    "value": [
+     3,
+     8
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "Light dies inside the acrylic: a 170 px segment of the top front edge renders pure black with a hard step to navy, and the shadows carry none of the acrylic's blue.",
+   "evidence": {
+    "region": [
+     185,
+     942,
+     280,
+     962
+    ],
+    "measured": "RGB median (0,1,2), crush_pct 87, against (0,6,64) right of x 283; cast shadow [900,1920,1080,2000] RGB (152,176,189) against open floor (187,209,220), ratios 0.81/0.84/0.86, almost neutral"
+   },
+   "change": {
+    "setting": "finish: render light-path depth and caustics",
+    "from": "the current path depth (the black segment suggests paths are terminated inside the nested 20 mm acrylic) and no coloured transmission",
+    "to": "transmission 32, glossy 16 and total 32 bounces; refractive caustics on, clamped so they throw no fireflies, so light that crosses the acrylic and the resin keeps its colour"
+   },
+   "expected": "The black segment reads navy like the rest of the edge (b_median at least 40), and a faint blue enters the shadow right of the base with no new fireflies. If the segment stays black, it is a part behind the edge (see out_of_scope). The accept region is in the reframed c2 frame.",
+   "accept": {
+    "region": [
+     238,
+     831,
+     333,
+     851
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 40
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the cover a woven cloth material (a fine weave with a soft sheen) in place of the vertical brushed-metal streak texture.",
+   "why": "The cover is part of the speaker, which is fixed. At [220,1300,600,1500] it reads as brushed aluminium, against the card's blue cloth disc, and it is the largest surface on the front, so this alone holds the image below 8.5."
+  },
+  {
+   "request": "Give the white lining a felt or foam micro-texture in place of the mottled noise.",
+   "why": "The lining is part of the speaker. Through the tint it reads as grey clay at [150,960,640,1100]."
+  },
+  {
+   "request": "Resolve the stripe and mesh pattern seen through the inner shelf at [230,1705,340,1740].",
+   "why": "It comes from the speaker's internal parts (fine geometry or a texture behind the shelf), not from the scene."
+  },
+  {
+   "request": "If the black top-edge segment at [115,939,283,965] survives c7, fix the part or material behind that edge.",
+   "why": "In that case it is the speaker's geometry or material, not light transport."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

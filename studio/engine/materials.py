@@ -60,15 +60,18 @@ PRESET_DEFAULTS = {
                                     dict(color=['#6C6863', '#8C8478'], cover=0.40, w=0.20, l=1.2),
                                     dict(color=['#3E2C22', '#57402F'], cover=0.10, w=0.05, l=0.6)],
                             wander=1.0, torn=0.3, edge=0.8, streak=0.12, wet=0.8, scale=1.0, bump=0.4),
-    # a grille's acoustically transparent knit: the yarn's colour, heathered (each yarn a little lighter or darker), a
-    # fine weave about `pitch_mm` (its relief only reads close to), matt with a fabric's sheen
-    'cloth': dict(color='#DCD6C8', pitch_mm=1.2, heather=0.08, roughness=0.88, sheen=0.6, bump=0.2),
+    # a grille's acoustically transparent knit: the yarn's colour, heathered (each yarn a little lighter or darker, the
+    # warp's along it and the weft's along it, so the streaks cross), a fine weave about `pitch_mm` (its relief only
+    # reads close to), soft slubs `slub_mm` across (`slub` the swing), matt with a fabric's sheen
+    'cloth': dict(color='#DCD6C8', pitch_mm=1.2, heather=0.08, slub=0.035, slub_mm=7.0, roughness=0.88, sheen=0.85,
+                  sheen_roughness=0.35, bump=0.2),
     # a speaker's lining as seen through a clear wall (barkhorn's round 13): polyester batting in a sleeve of sheer
     # voile, a white fibre web, denser and thinner in soft clouds (`cloud` the swing, `cloud_m` metres across; thin, it
     # greys as the dark inside shows through), a fibrous relief (`fibre`, `fibre_mm`), light carried a few millimetres
-    # into the web (`subsurface`, `radius`) and the voile's sheen at grazing angles
-    'batting': dict(color='#EFF0EE', roughness=0.95, specular=0.25, sheen=0.5, subsurface=0.4, radius=0.004, cloud=0.14,
-                    cloud_m=0.03, fibre=0.25, fibre_mm=1.5),
+    # into the web (`subsurface`, `radius`), the voile's sheen at grazing angles, and soft lumps where the batt is stuffed
+    # into its sleeve (`billow` the relief, `billow_m` across; round 31: without them a batt read as moulded clay)
+    'batting': dict(color='#EFF0EE', roughness=0.95, specular=0.25, sheen=0.7, subsurface=0.4, radius=0.004, cloud=0.09,
+                    cloud_m=0.03, fibre=0.35, fibre_mm=1.5, billow=0.5, billow_m=0.07),
     # agglomerated cork: granules about `granule_mm` across, each its own shade of the colour (`variation`), darker
     # gaps between them, matt; expanded (smoked) cork is dark brown, natural cork tan
     'cork': dict(color='#3B2F28', granule_mm=3.0, variation=0.35, gaps=0.5, roughness=0.9, bump=0.5),
@@ -1329,7 +1332,9 @@ def _stone(nt, b, p, normal_in=None):
 
 def _cloth(nt, b, p, normal_in=None):
     """A knit stretched on a grille: threads crossing at `pitch_mm` in the face's plane, over and under in a checker
-    (the relief, faint, reads only close to), each yarn's colour heathered by a noise drawn out along it, matt, with a
+    (the relief, faint, reads only close to). Each yarn's colour is heathered by a noise drawn out along it: the warp's
+    along v where the warp is on top, the weft's along u where the weft is, so the streaks cross as a cloth's do (round
+    31: drawn out one way only, they read as brushed metal from a few metres). Soft slubs over all, matt, with a
     fabric's sheen at grazing angles. World space, read in each face's plane."""
     node, math_, mix, smooth = _nodes(nt)
     uv, geo = _face_uv(nt, node, math_)
@@ -1341,21 +1346,40 @@ def _cloth(nt, b, p, normal_in=None):
     wv = math_('ABSOLUTE', math_('SINE', math_('MULTIPLY', v, math.pi)))
     chk = math_('MODULO', math_('ADD', math_('FLOOR', u), math_('FLOOR', v)), 2.0)
     h = math_('ADD', math_('MULTIPLY', wu, chk), math_('MULTIPLY', wv, math_('SUBTRACT', 1.0, chk)))
-    # heather: each yarn a little lighter or darker, a noise drawn out along the threads
-    co = node('ShaderNodeCombineXYZ'); nt.links.new(math_('MULTIPLY', u, 0.5), co.inputs['X']); nt.links.new(math_('MULTIPLY', v, 0.04), co.inputs['Y'])
-    nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0; nz.inputs['Detail'].default_value = 3.0
-    nt.links.new(co.outputs['Vector'], nz.inputs['Vector'])
-    mr = node('ShaderNodeMapRange'); nt.links.new(nz.outputs['Fac'], mr.inputs['Value'])
+
+    def heather(su, sv, seed):
+        """Each yarn a little lighter or darker: a noise drawn out along the yarn (u and v scaled by su and sv)."""
+        co = node('ShaderNodeCombineXYZ')
+        nt.links.new(math_('MULTIPLY', u, su), co.inputs['X']); nt.links.new(math_('MULTIPLY', v, sv), co.inputs['Y'])
+        co.inputs['Z'].default_value = seed
+        nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0; nz.inputs['Detail'].default_value = 3.0
+        nt.links.new(co.outputs['Vector'], nz.inputs['Vector'])
+        return nz.outputs['Fac']
+
+    # where the cell's ridge runs along v (chk 1, the warp on top) the warp's heather, elsewhere the weft's
+    warp, weft = heather(0.5, 0.04, 0.0), heather(0.04, 0.5, 7.3)
+    fac = math_('ADD', math_('MULTIPLY', warp, chk), math_('MULTIPLY', weft, math_('SUBTRACT', 1.0, chk)))
+    mr = node('ShaderNodeMapRange'); nt.links.new(fac, mr.inputs['Value'])
     mr.inputs['From Min'].default_value = 0.35; mr.inputs['From Max'].default_value = 0.65
     mr.inputs['To Min'].default_value = 1 - p['heather']; mr.inputs['To Max'].default_value = 1 + p['heather']
+    shade = mr.outputs['Result']
+    if p.get('slub', 0.0):
+        # slubs: the yarn a touch thicker or thinner here and there, a soft mottle `slub_mm` across
+        sl = node('ShaderNodeTexNoise'); sl.inputs['Scale'].default_value = 1000.0 / p.get('slub_mm', 7.0)
+        sl.inputs['Detail'].default_value = 2.0; nt.links.new(uv, sl.inputs['Vector'])
+        sm = node('ShaderNodeMapRange'); nt.links.new(sl.outputs['Fac'], sm.inputs['Value'])
+        sm.inputs['From Min'].default_value = 0.3; sm.inputs['From Max'].default_value = 0.7
+        sm.inputs['To Min'].default_value = 1 - p['slub']; sm.inputs['To Max'].default_value = 1 + p['slub']
+        shade = math_('MULTIPLY', shade, sm.outputs['Result'])
     g = node('ShaderNodeCombineColor')
     for ch in ('Red', 'Green', 'Blue'):
-        nt.links.new(mr.outputs['Result'], g.inputs[ch])
+        nt.links.new(shade, g.inputs[ch])
     col = mix(1.0, hex_lin(p['color']), g.outputs['Color'], 'MULTIPLY')
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Roughness'].default_value = p['roughness']
     if 'Sheen Weight' in b.inputs:
-        b.inputs['Sheen Weight'].default_value = p['sheen']; b.inputs['Sheen Roughness'].default_value = 0.45
+        b.inputs['Sheen Weight'].default_value = p['sheen']
+        b.inputs['Sheen Roughness'].default_value = p.get('sheen_roughness', 0.45)
     bn = node('ShaderNodeBump'); bn.inputs['Strength'].default_value = p['bump']; bn.inputs['Distance'].default_value = pitch * 0.25
     nt.links.new(h, bn.inputs['Height'])
     if normal_in is not None:
@@ -1387,6 +1411,9 @@ def _batting(nt, b, p, normal_in=None):
     I['Subsurface Radius'].default_value = (1.0, 0.95, 0.9)
     if 'Sheen Weight' in I:
         I['Sheen Weight'].default_value = p['sheen']; I['Sheen Roughness'].default_value = 0.5
+    if p.get('billow', 0.0):
+        # the batt stuffed into its sleeve: soft lumps `billow_m` across, so a pillow is never a moulded slab
+        normal_in = _bump_noise(nt, p.get('billow_m', 0.07), p['billow'], distance_scale=0.08, detail=2.0, normal_in=normal_in)
     nt.links.new(_bump_noise(nt, p['fibre_mm'] / 1000, p['fibre'], detail=8.0, normal_in=normal_in), I['Normal'])
 
 
