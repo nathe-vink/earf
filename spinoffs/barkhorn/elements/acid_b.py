@@ -11,7 +11,7 @@ import common as C
 
 NAME = 'acid_b'
 V = os.environ.get('ACID_B_VARIANT', 'a')                 # the concept proofs: a backlit gap, b a side-back sun
-SKY = {'a': ('belfast_sunset_puresky', 265.0, 0.24), 'b': ('kloppenheim_01_puresky', -40.0, 0.55)}[V]
+SKY = {'a': ('belfast_sunset_puresky', 265.0, 0.13), 'b': ('kloppenheim_01_puresky', -40.0, 0.55)}[V]
 # the sun's line from the speaker (azimuth 148): nothing stands on it to shade the speaker
 SUN_LINE = [[2.5, 4, 2.5], [4.38, 7, 2.5], [6.25, 10, 2.5], [8.12, 13, 2.5], [10.0, 16, 2.5], [11.88, 19, 2.5], [13.75, 22, 2.5], [15.62, 25, 2.5], [17.5, 28, 2.5], [19.38, 31, 2.5], [21.25, 34, 2.5], [23.12, 37, 2.5]]
 SUN_FAR = [[round(0.625 * t, 1), round(t, 1), 6.0 + 0.04 * t] for t in range(45, 160, 8)]
@@ -90,7 +90,7 @@ def shot():
         'rim': C.area(110, 10, 3.0, 0.6, '#F1E6B8', size=(1.0, 1.0)),
     }
     s = C.shot(NAME, props(cam), cam, C.sky(hdri, rot, strength=strength, res='4k'), 'barkhorn Acid, acid rain',
-               lights=lights, sun=sun, white_balance=(6200, -18.0), rotate_z=16.0, position=(0.0, 0.0, -0.09), exposure=-0.35, look='AgX - Medium High Contrast',
+               lights=lights, sun=sun, white_balance=(6200, -18.0), rotate_z=16.0, position=(0.0, 0.0, -0.09), exposure=-0.1, look='AgX - Medium High Contrast',
                haze={'density': 0.0018, 'anisotropy': 0.5, 'color': '#C8CC6A', 'box_m': [-700, -15, -2, 700, 900, 20]},
                fin=C.finish(contrast=0.22, clarity=0.07, sharpen=0.35, vignette=0.14))
     return s
