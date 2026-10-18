@@ -303,7 +303,16 @@ def grass(bpy, name, p, kit):
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location.z = p.get('lift', -0.01)
+    g = p.get('grade')
+    if g:                                                             # trodden toward the speaker's feet
+        vl, vd = ob.vertex_groups.new(name='length'), ob.vertex_groups.new(name='density')
+        for v in me.vertices:
+            f = _grade(g, v.co.x, v.co.y)
+            vl.add([v.index], f, 'REPLACE')
+            vd.add([v.index], g.get('dens_min', 0.5) + (1 - g.get('dens_min', 0.5)) * f, 'REPLACE')
     ps = ob.modifiers.new('grass', 'PARTICLE_SYSTEM').particle_system
+    if g:
+        ps.vertex_group_length = 'length'; ps.vertex_group_density = 'density'
     st = ps.settings
     st.type = 'HAIR'; st.count = p.get('count', 6000); st.hair_length = p.get('length', [0.25, 0.55])[1]
     st.use_advanced_hair = True
@@ -365,3 +374,30 @@ def grass(bpy, name, p, kit):
     nt.links.new(hb.outputs['BSDF'], out.inputs['Surface'])
     me.materials.append(mat)
     return [ob]
+
+
+def _grade(g, x, y):
+    """How long the grass may grow at (x, y), 0 to 1: shortening toward the speaker's feet (`at` [x, y], from `r0` to
+    full at `r1`), and lower still in the corridor toward the camera (`eye` [x, y, z]), where a blade taller than the
+    sight line from the eye to the speaker's foot (plus `clear` metres) would hide the base; `full` is the system's
+    longest strand, `floor` the least share kept."""
+    ax, ay = g['at']
+    r = math.hypot(x - ax, y - ay)
+    t = min(1.0, max(0.0, (r - g.get('r0', 0.4)) / (g.get('r1', 2.0) - g.get('r0', 0.4))))
+    f = t * t * (3 - 2 * t)
+    ex, ey, ez = g['eye']
+    dx, dy = ex - ax, ey - ay
+    D = math.hypot(dx, dy)
+    ux, uy = dx / D, dy / D
+    d = (x - ax) * ux + (y - ay) * uy                                 # along the sight line, from the foot
+    if 0 < d < D:
+        lat = abs(-(x - ax) * uy + (y - ay) * ux)
+        w = g.get('half_width', 0.45) + 0.08 * d                     # the cone the base hides behind
+        hmax = (g.get('clear', 0.02) * (D - d) + ez * d) / D          # the sight line's height above the ground
+        cap = min(1.0, hmax / g['full'])
+        if lat < w:
+            f = min(f, cap)
+        elif lat < w + 0.6:                                           # feathered, so no edge in the grass
+            s_ = (lat - w) / 0.6
+            f = min(f, cap + (1 - cap) * s_ * s_ * (3 - 2 * s_))
+    return max(g.get('floor', 0.08), f)
