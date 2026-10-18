@@ -330,8 +330,9 @@ def snow_lip(bpy, name, p, kit):
             a = 2 * math.pi * k / seg
             # a rounded rectangle: the superellipse through the footprint, pushed out by `off`
             ca, sa = math.cos(a), math.sin(a)
-            x = math.copysign(abs(ca) ** 0.25, ca) * (w / 2 + off)
-            y = math.copysign(abs(sa) ** 0.25, sa) * (d / 2 + off)
+            e = off * (1.0 + 0.6 * noise.noise(Vector((ca * 3.0, sa * 3.0, 1.7))))   # a broken edge, not a plinth
+            x = math.copysign(abs(ca) ** 0.25, ca) * (w / 2 + e)
+            y = math.copysign(abs(sa) ** 0.25, sa) * (d / 2 + e)
             n = noise.noise(Vector((x * 9, y * 9, 0.3)))
             row.append(bm.verts.new((x, y, max(0.0, z * (1 + 0.35 * n)) - 0.004)))
         rows.append(row)
@@ -346,4 +347,59 @@ def snow_lip(bpy, name, p, kit):
         me.materials.append(src.data.materials[0])
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = tuple(p.get('position', [0, 0, 0])); ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
+    return [ob]
+
+
+def plume(bpy, name, p, kit):
+    """A column of woodsmoke rising from a fire out of sight: `base` [x, y] on the ground, its axis leaning along x by
+    `lean` metres at height h (as lean * (h / `height`) ** `bend`: straight up, then bent over by the air), `width`
+    metres across at the foot widening by `spread` a metre risen, wisps as in `smoke`, `density` at its core."""
+    bx, by = p.get('base', [-3.0, 9.0]); H = p.get('height', 6.0)
+    pad = p.get('width', 0.4) + p.get('spread', 0.35) * H + 1.0
+    x0, x1 = bx - pad, bx + p.get('lean', 3.0) + pad
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); L = nt.links.new
+    out = _node(nt, 'ShaderNodeOutputMaterial', 1400, 0)
+    vol = _node(nt, 'ShaderNodeVolumePrincipled', 1150, 0)
+    vol.inputs['Color'].default_value = (*_lin(p.get('color', '#9A938A')), 1)
+    vol.inputs['Absorption Color'].default_value = (*_lin(p.get('absorb_color', '#8A8078')), 1)
+    vol.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.3)
+    L(vol.outputs['Volume'], out.inputs['Volume'])
+    tc = _node(nt, 'ShaderNodeTexCoord', -1600, 0)
+    sep = _node(nt, 'ShaderNodeSeparateXYZ', -1400, -300); L(tc.outputs['Object'], sep.inputs['Vector'])
+
+    def op(kind, a, b=None, x=0, y=0, v1=None):
+        n = _node(nt, 'ShaderNodeMath', x, y); n.operation = kind
+        (L(a, n.inputs[0]) if not isinstance(a, (int, float)) else n.inputs[0].__setattr__('default_value', a))
+        if b is not None:
+            (L(b, n.inputs[1]) if not isinstance(b, (int, float)) else n.inputs[1].__setattr__('default_value', b))
+        return n.outputs['Value']
+    t = op('DIVIDE', sep.outputs['Z'], H, -1200, -300)
+    tb = op('POWER', op('MAXIMUM', t, 0.0, -1100, -300), p.get('bend', 2.0), -1000, -300)
+    ax = op('ADD', op('MULTIPLY', tb, p.get('lean', 3.0), -900, -300), bx, -800, -300)
+    dx = op('SUBTRACT', sep.outputs['X'], ax, -700, -300)
+    dy = op('SUBTRACT', sep.outputs['Y'], by, -700, -450)
+    w = op('ADD', op('MULTIPLY', sep.outputs['Z'], p.get('spread', 0.35), -700, -600), p.get('width', 0.4), -600, -600)
+    r2 = op('ADD', op('MULTIPLY', dx, dx, -550, -300), op('MULTIPLY', dy, dy, -550, -450), -400, -350)
+    q = op('DIVIDE', r2, op('MULTIPLY', w, w, -450, -600), -300, -400)
+    core = op('EXPONENT', op('MULTIPLY', q, -1.0, -200, -400), None, -100, -400)
+    # thinning as it rises and spreads, gone by the top of its box
+    fade = _node(nt, 'ShaderNodeMapRange', -300, -700, **{'From Min': H, 'From Max': H * 0.55})
+    L(sep.outputs['Z'], fade.inputs['Value'])
+    rot = _node(nt, 'ShaderNodeMapping', -1400, 200)
+    rot.inputs['Location'].default_value = (p.get('seed', 1) * 13.1, p.get('seed', 1) * 7.7, 0.0)
+    L(tc.outputs['Object'], rot.inputs['Vector'])
+    wn = _noise(nt, rot.outputs['Vector'], -900, 300, tuple(p.get('scale', (1.2, 1.2, 0.7))), detail=4.0, rough=0.55,
+                distortion=p.get('distortion', 1.5))
+    wm = _node(nt, 'ShaderNodeMapRange', -600, 300, **{'From Min': p.get('lo', 0.35), 'From Max': p.get('hi', 0.65)})
+    L(wn.outputs['Fac'], wm.inputs['Value'])
+    d = op('MULTIPLY', op('MULTIPLY', core, wm.outputs['Result'], 100, 0), fade.outputs['Result'], 300, 0)
+    d = op('MULTIPLY', d, p.get('density', 3.0), 500, 0)
+    L(d, vol.inputs['Density'])
+    bm = bmesh.new()
+    geom = bmesh.ops.create_cube(bm, size=1.0)
+    y0, y1 = by - pad, by + pad
+    for v in geom['verts']:
+        v.co = Vector((x0 + (v.co.x + 0.5) * (x1 - x0), y0 + (v.co.y + 0.5) * (y1 - y0), (v.co.z + 0.5) * H))
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free(); me.materials.append(m)
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     return [ob]
