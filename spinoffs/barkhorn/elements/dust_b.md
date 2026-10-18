@@ -49,3 +49,28 @@ The pieces:
 | 1 | p1 (0.5 / 128) | **5.0** | A grey overcast-looking sky against a warm sun; no aerial perspective, so buttes 3 to 8 km off read darker than the sand and razor-sharp (a miniature); extruded cliffs with level rims and no strata; even ripples with white specks; a tree-like sagebrush and plants crowding the speaker, the yucca cut by the frame; the acrylic shaded on its front with no glow on the sand; a seam at the horizon. Prescribed: a blue cumulus sky with a low sun, haze 0.00011 #C9D3DE, broken rims, a caprock band, beds 0.45, weaker streaks, bigger buttresses, sun behind the right (140, 14), bounce 1.2, varied ripples (bump 0.55), no specks, plants moved off, a domed sagebrush, an 85 mm camera at 11 m. | The coordinator's notes before the pass had already moved the light to a low warm sun (kloppenheim_06, 21 degrees), the horn against the sky, the shale ledges and more plants. For this pass: sky `evening_road_01_puresky` (blue, clouds, a warm sun at 14 degrees), its sun at 115 (between the side light that models the buttes and the backlight that lights the acrylic); haze 0.00011; broken rims (notches up to 28 m) and a darker caprock band; beds 0.45 at 9 m, streaks 0.3; buttresses 1.4x; the stony patches fully tinted (no white); ripples bump 0.55, more wander; the prickly pear to (3.5, 1.7), the yucca to (-1.4, 2.4), the near sagebrush and tumbleweed to 10 m; sagebrush domed, many stems from the ground, foliage low; bounce 1.2; camera 85 mm, 0.4 m, 11 m, f/4. |
 | 2 | p2 (0.5 / 128) | **5.0** | The face backlit and muddy (46 against sand 89), the horn's throat crushed; buttes flat and soft with no thumbs in frame (the 85 mm crop lost them); an empty gradient sky; a pale seam at the horizon; the stony patches invisible; the plants in one clump; the speaker dead centre. Prescribed: the sun front-right (55, 14), the thumbs in silhouette, beds 0.7, varnish 0.5, rock at 15 m a tile, the cumulus sky, rolling relief far off, haze 0.00005, stones at 40 % through a 2 m mask, ripples 0.35, the speaker on the left third, the prickly pear back and apart. | Between passes, the first sky change (evening_road at 14 degrees) and the haze had made the sky grey: low rays cross kilometres of haze, and an 85 mm view sees only the pale bottom 10 degrees of any sky. So: back to the cumulus sky `kloofendal_48d` with its sun at azimuth 55 (front-right); the sun lamp lowered from the sky's 48 degrees to 24 for longer shadows, warm #FFD3A0; a soft blue grade on the horizon only; 60 mm at 8 m, f/5.6, shift_x 0.17 (left third); beds 0.7, varnish 0.5, rock at 15 m; haze 0.00004; stones through a 2 m mask at 40 %; ripples bump 0.35 in 3 m patches; long low rises of up to 8 m from 400 m out (`swell3` in dust_el's terrain, optional); the prickly pear to (4.3, 6.0). |
 | 3 | p3 (0.5 / 128) | **4.5** | Cliffs as extruded blocks with a repeating vertical stripe and combed aprons; no thumbs in frame; a ruled seam where the flat ground meets the butte bases; the sand uniform from horizon to edge; floating pads, a particle-blob sagebrush; a stray shadow at the right edge (an off-frame plant); the orange speaker merging with the orange sand; flat high light. Prescribed: a low backlight (golden hour at 10 to 12 degrees), real Monument Valley geometry or a backplate, rises of 15 to 30 m and a dune ridge to hide the butte bases, pebbles, joined pads, twig sage, a lower camera, a stronger contrast. | Stopped by the plateau rule (5.0, 5.0, 4.5). Pass 2's critic asked for front light to open the acrylic; pass 3's asks for a low backlight: the passes now trade one fault for another. All three name the same three gaps, which need assets this set does not have: photographed Monument Valley geometry, scanned desert plants and a varied real ground. |
+
+### The duels among the three proofs, and the focused fix
+
+Blind duels (critic/ab/PROMPT-DUEL.txt, fresh judges):
+- p1 beat p3, 6.0 to 5.5;
+- p2 beat p3, 6.0 to 4.5;
+- p1 beat p2, 6.0 to 5.5.
+
+p1 is the best rig. The judges preferred:
+- its low warm side light, which models the acrylic (p2's cabinet went dull brown, p3's pink and flat);
+- its cumulus sky;
+- its prickly pear and sagebrush.
+
+Against it they counted the white specks in its sand (gone since pass 1's stony tint went to 1.0) and stray shadows from off-frame plants.
+
+While the rebuilt drivers come to main, the coordinator asked for one focused fix on p1's rig, then one blind pass:
+- **Cliffs:** flutes on three noise scales that merge into broad smooth faces in places; two alcoves or big joints a butte; beds at 0.7; varnish streaks strongest at the rim and fading down the face; a broken caprock edge (kept from pass 1).
+- **Talus:** horizontal ledges stepped in (0.02 to 0.09), with the radial gullies cut back (0.16 to 0.07).
+- **Distance:** a thin, low haze only beyond 1.2 km (box from y 1200, 420 m high, density 0.00009, #C4CFDE). The near air and the sky above stay clear, while the buttes lift and cool.
+- **Sand:**
+  - tonal patches at 40 m;
+  - about 1,000 pebbles of 1 to 6 cm and 160 stones of 6 to 14 cm, half buried near the camera;
+  - low wind mounds of sand on the lee side of each near plant;
+  - the plinth sunk 12 mm.
+- **Light and frame:** p1's sky (`kloppenheim_06`), sun (azimuth 92, 21 degrees, 9, #FFC98E) and framing (50 mm, 6.5 m, 0.5 m). The prickly pear moved from beside the speaker to (1.6, 1.0), off its silhouette.

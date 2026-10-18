@@ -56,7 +56,7 @@ def _pbr(bpy, spec, name):
                       rough_mul=spec.get('rough_mul', 1.0), bump=spec.get('bump', 1.0), name=name)
 
 
-def _streaks(mat, size, amount, seed=0.0):
+def _streaks(mat, size, amount, seed=0.0, zrange=None):
     """Vertical stains (desert varnish): a noise stretched tall, darkening the base colour in streaks `size` m wide."""
     nt = mat.node_tree; bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
     sock = bs.inputs['Base Color']
@@ -75,6 +75,12 @@ def _streaks(mat, size, amount, seed=0.0):
     nt.links.new(nz.outputs['Fac'], ramp.inputs['Fac'])
     mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
     mul.inputs['Factor'].default_value = amount
+    if zrange:                                              # strongest at the rim, fading down the face
+        sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
+        mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = zrange[0]
+        mr.inputs['From Max'].default_value = zrange[1]; mr.inputs['To Min'].default_value = amount * 0.25
+        mr.inputs['To Max'].default_value = amount
+        nt.links.new(sep.outputs['Z'], mr.inputs['Value']); nt.links.new(mr.outputs['Result'], mul.inputs['Factor'])
     nt.links.new(src, mul.inputs['A']); nt.links.new(ramp.outputs['Color'], mul.inputs['B'])
     nt.links.new(mul.outputs['Result'], sock)
 
@@ -86,7 +92,7 @@ def _rock_mat(bpy, spec, name, seed):
     if spec.get('beds'):
         D._beds(m, *spec['beds'], seed=float(seed))
     if spec.get('streaks'):
-        _streaks(m, *spec['streaks'], seed=float(seed) * 13.1)
+        _streaks(m, *spec['streaks'][:2], seed=float(seed) * 13.1, zrange=spec.get('streak_z'))
     if spec.get('albedo', 1.0) != 1.0:
         D._albedo(m, spec['albedo'])
     if spec.get('cap'):
@@ -119,6 +125,8 @@ def butte(bpy, name, p, kit):
     rnd = random.Random(p.get('seed', 1)); seg = p.get('segments', 720)
     off = Vector((rnd.uniform(-90, 90), rnd.uniform(-90, 90), 0.0))
     ph = [rnd.uniform(0, 6.283) for _ in range(6)]
+    alcoves = [(rnd.uniform(0, 6.283), H * rnd.uniform(0.5, 0.85), rnd.uniform(0.03, 0.07), H * rnd.uniform(0.06, 0.14))
+               for _ in range(p.get('alcoves', 2))]
     pos = Vector(p.get('position', [0, 0, 0]))
     rot = math.radians((p.get('rotate') or [0, 0, 0])[2])
 
@@ -133,7 +141,14 @@ def butte(bpy, name, p, kit):
         c = noise.noise(Vector((math.cos(th_) * 70, math.sin(th_) * 70, z / H * 1.5)) + off)
         # joints read as sharp grooves: fold the mid band so its troughs are narrow and its ridges broad
         v = 0.55 + 0.45 * noise.noise(Vector((math.cos(th_) * 5, math.sin(th_) * 5, z / H * 3.0)) + off)
-        return 0.05 * a - 0.04 * abs(b) * v + 0.015 * c
+        # in places the flutes merge into broad smooth faces
+        m = min(1.0, max(0.12, 0.55 + 1.6 * noise.noise(Vector((math.cos(th_) * 3.2, math.sin(th_) * 3.2, 9.1)) + off)))
+        d = noise.noise(Vector((math.cos(th_) * 13, math.sin(th_) * 13, 4.2)) + off)          # a third scale
+        al = 0.0
+        for (ta, za, wa, ha) in alcoves:                    # alcoves and big joints: rounded hollows in the face
+            dt = math.atan2(math.sin(th_ - ta), math.cos(th_ - ta))
+            al += math.exp(-(dt / wa) ** 2 - ((z - za) / ha) ** 2)
+        return 0.05 * a - (0.04 * abs(b) * v + 0.02 * abs(d) + 0.015 * c) * m - 0.07 * al
 
     def xy(r, th_):
         x, y = r * math.cos(th_), r * math.sin(th_) * squash
@@ -175,6 +190,8 @@ def butte(bpy, name, p, kit):
     if cm.get('cap'):                                       # the caprock band, given as shares of the height
         z0, z1, k = cm['cap']
         cm['cap'] = [pos.z + H * z0, pos.z + H * z1, k]
+    if cm.get('streaks'):
+        cm['streak_z'] = [pos.z + H * 0.4, pos.z + H]
     cliff_m = _rock_mat(bpy, cm, f'{name}-cliff', p.get('seed', 1))
     talus_m = _rock_mat(bpy, p['talus_mat'], f'{name}-talus', p.get('seed', 1) + 7)
     # the cliff: from a little inside the talus top (hidden) up to the rim, nearly vertical
@@ -197,7 +214,7 @@ def butte(bpy, name, p, kit):
         t = j / ntl                                          # 0 at the plain, 1 at the cliff's foot
         rf = 1.0 + (spread - 1.0) * (1 - t) ** 1.7
         z = H * th * (t ** 0.85) - 0.5
-        talus.append(ring(rf * 1.01, z, fl=1.0 if t > 0.8 else 0.5, gully=0.16 * (1 - abs(2 * t - 1)) + 0.03, ledge=0.03 * t))
+        talus.append(ring(rf * 1.01, z, fl=1.0 if t > 0.8 else 0.5, gully=0.07 * (1 - abs(2 * t - 1)) + 0.02, ledge=0.07 * t + 0.02))
     objs += mesh(talus, False, talus_m, f'{name}-talus')
     # the Mittens' thumbs: slender spires standing off the main block
     for k, (ang, dist, tr, hs) in enumerate(p.get('thumbs', [])):
