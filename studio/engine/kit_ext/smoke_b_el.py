@@ -311,3 +311,39 @@ def dry_scatter(bpy, name, p, kit):
         hs.inputs['Value'].default_value = p.get('value', 1.5)
         nt.links.new(src, hs.inputs['Color']); nt.links.new(hs.outputs['Color'], bs.inputs['Base Color'])
     return made
+
+
+def snow_lip(bpy, name, p, kit):
+    """Snow banked a little against the speaker's foot: a soft ring round its footprint (`size` [w, d] m, turned
+    `rotate_z` degrees), `height` at the wall falling to nothing over `reach`, in the snow's own material (taken from
+    the object `mat_object`), so the cabinet stands in the snow, not on it."""
+    w, d = p.get('size', [0.56, 0.42]); h = p.get('height', 0.022); reach = p.get('reach', 0.12)
+    rings, seg = 7, 96
+    bm = bmesh.new()
+    rows = []
+    for i in range(rings + 1):
+        t = i / rings                                              # 0 at the wall (inside it a little), 1 at the edge
+        off = -0.01 + t * (reach + 0.01)
+        z = h * (1 - t) ** 1.6 * (0.9 + 0.1 * math.cos(t * math.pi))
+        row = []
+        for k in range(seg):
+            a = 2 * math.pi * k / seg
+            # a rounded rectangle: the superellipse through the footprint, pushed out by `off`
+            ca, sa = math.cos(a), math.sin(a)
+            x = math.copysign(abs(ca) ** 0.25, ca) * (w / 2 + off)
+            y = math.copysign(abs(sa) ** 0.25, sa) * (d / 2 + off)
+            n = noise.noise(Vector((x * 9, y * 9, 0.3)))
+            row.append(bm.verts.new((x, y, max(0.0, z * (1 + 0.35 * n)) - 0.004)))
+        rows.append(row)
+    for a_, b_ in zip(rows, rows[1:]):
+        for k in range(seg):
+            bm.faces.new((a_[k], a_[(k + 1) % seg], b_[(k + 1) % seg], b_[k]))
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    for f in me.polygons:
+        f.use_smooth = True
+    src = bpy.data.objects.get(p.get('mat_object', 'prop0-kit'))
+    if src and src.data.materials:
+        me.materials.append(src.data.materials[0])
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    ob.location = tuple(p.get('position', [0, 0, 0])); ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
+    return [ob]

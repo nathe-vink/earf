@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.025
+     -0.03
     ],
     "rotate_z": -18.0,
     "hide": [
@@ -44,6 +44,20 @@
      0.0,
      1.2
     ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_b_el",
+    "fn": "snow_lip",
+    "size": [
+     0.56,
+     0.43
+    ],
+    "rotate_z": -18.0,
+    "height": 0.022,
+    "reach": 0.12,
+    "mat_object": "prop0-kit"
    },
    {
     "kind": "kit",
@@ -975,6 +989,24 @@
    ],
    "glossy": true
   },
+  "overhead": {
+   "type": "flag",
+   "size_m": [
+    3.0,
+    2.2
+   ],
+   "orbit": {
+    "azimuth_deg": -15.0,
+    "elevation_deg": 40.0,
+    "distance_m": 2.6
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.0
+   ],
+   "glossy": true
+  },
   "mistglow": {
    "type": "area",
    "size_m": [
@@ -991,9 +1023,23 @@
     0.0,
     0.65
    ],
-   "irradiance": 2.0,
+   "irradiance": 1.6,
    "color": "#F4F1EC",
-   "specular": 0.1
+   "specular": 0.1,
+   "receivers": [
+    "left",
+    "right",
+    "back",
+    "top",
+    "bottom",
+    "front-panel",
+    "lining-*",
+    "rib-*",
+    "brace*",
+    "land-*",
+    "woofer-*",
+    "port-*"
+   ]
   }
  },
  "render": {
@@ -1003,7 +1049,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 1.55,
+  "exposure": 1.6,
   "white_balance_k": 7000,
   "white_balance_tint": 10,
   "look": "AgX - Base Contrast"

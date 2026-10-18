@@ -13,6 +13,7 @@ import common as C
 CONCEPT = os.environ.get('SMOKE_B_CONCEPT', 'overcast')
 SKY = {'overcast': ('snow_field', 200.0, 1.0), 'sun': ('birchwood', 150.0, 1.0)}[CONCEPT]
 SPEAKER_X = 0.0
+ROT = -18.0                                               # the speaker's turn (degrees)
 
 
 # a black flag out of frame on the camera's side, as a photographer would stand one: the speaker's front mirrors black,
@@ -21,8 +22,15 @@ SPEAKER_X = 0.0
 LIGHTS = {'negative': {'type': 'flag', 'size_m': [2.0, 1.6], 'orbit': {'azimuth_deg': -26.0, 'elevation_deg': 1.0,
                                                                      'distance_m': 3.2},
                        'target': [0.0, 0.0, 0.65], 'glossy': True},
-          'mistglow': {**C.area(165.0, 6.0, 2.8, 2.0, color='#F4F1EC', size=(1.2, 1.8), target=(0.0, 0.0, 0.65)),
-                       'specular': 0.1}}                 # its light, not its mirror image on the horn's top
+          # and overhead, a second flag: the horn's flare mirrors the bright sky above and blew out white (pass 2)
+          'overhead': {'type': 'flag', 'size_m': [3.0, 2.2], 'orbit': {'azimuth_deg': -15.0, 'elevation_deg': 40.0,
+                                                                      'distance_m': 2.6},
+                       'target': [0.0, 0.0, 1.0], 'glossy': True},
+          'mistglow': {**C.area(165.0, 6.0, 2.8, 1.6, color='#F4F1EC', size=(1.2, 1.8), target=(0.0, 0.0, 0.65)),
+                       'specular': 0.1,                  # its light, not its mirror image
+                       # the cabinet alone: through the horn's resin it blew the horn out white (pass 2)
+                       'receivers': ['left', 'right', 'back', 'top', 'bottom', 'front-panel', 'lining-*', 'rib-*',
+                                     'brace*', 'land-*', 'woofer-*', 'port-*']}}
 
 
 def _trunks():
@@ -48,6 +56,9 @@ def props():
     return [
         C.piece('ext', module='smoke_b_el', fn='snow', texture='snow_02', size=[60.0, 60.0], position=[0.0, 18.0, 0.0],
                 displace=0.015, relief=0.22, res='4k', cells=1500, flat=[0.0, 0.0, 1.2]),
+        # snow banked a little against the speaker's foot (critic pass 1, c2)
+        C.piece('ext', module='smoke_b_el', fn='snow_lip', size=[0.56, 0.43], rotate_z=ROT, height=0.022, reach=0.12,
+                mat_object='prop0-kit'),
         # last summer's grass, dry through the snow in clumps at the trunks' feet, a few strays between
         *[C.piece('ext', module='smoke_b_el', fn='dry_scatter', models=['grass_medium_01', 'grass_medium_02'], count=n,
                   area=[x - r, y - r, x + r, y + r], avoid=[[0.0, 0.0, 0.9]], scale=[0.4, 1.4], z=-0.04, seed=11 + i,
@@ -78,8 +89,8 @@ def shot():
                    shift_x=-0.24)
     sun = C.sun_from_sky(hdri, rot, irradiance=2.5) if CONCEPT == 'sun' else None
     return C.shot('smoke_b', props(), cam, C.sky(hdri, rot, strength, res='4k'), 'Smoke: Where there\'s smoke. (B)',
-                  lights=LIGHTS, sun=sun, rotate_z=-18.0, position=(SPEAKER_X, 0.0, -0.025),
-                  fin=FIN, exposure=1.55, white_balance=(7000, 10))
+                  lights=LIGHTS, sun=sun, rotate_z=ROT, position=(SPEAKER_X, 0.0, -0.03),
+                  fin=FIN, exposure=1.6, white_balance=(7000, 10))
 
 
 def portrait():
