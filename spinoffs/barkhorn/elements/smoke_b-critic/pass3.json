@@ -1,0 +1,12 @@
+{"stage1": {"impression": "A quiet, high-key snowy birch wood with a dark horn loudspeaker standing right of centre. The black-on-white idea reads at thumbnail size, but the picture looks grey rather than pale. The speaker comes out as flat dark grey with no visible smoked tint and barely meets the snow: almost no contact shadow, so it looks placed on top. The mist has a muddy warm-brown band, the near-left trunk is smeared to a ghost, and the low-sample denoise gives everything a waxy CG softness.", "score": 5.5},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "change": {"setting": "overhead flag, speaker z, snow_lip", "to": "flag el 75, 2 x 2 m at 1.8 m; z -0.09; lip reach 0.10 height 0.045"}, "accept": {"region": [800, 578, 965, 592], "metric": "lum_median", "op": "<=", "value": 198}},
+  {"id": "c2", "change": {"setting": "smoke and plume absorb_color, near sheet colour, lift_color", "to": "#B8BBBE, #A9ABAE, #16181A"}, "accept": {"region": [0, 150, 450, 330], "metric": "delta_e", "hex": "#C6C8CA", "op": "<=", "value": 5}},
+  {"id": "c3", "change": {"setting": "mist density, floor, exposure", "to": "0.05, 0.04, 1.75"}, "accept": {"region": [300, 20, 460, 200], "metric": "lum_median", "op": "between", "value": [190, 212]}},
+  {"id": "c4", "change": {"setting": "lights.mistglow", "to": "7.0, az 150, el 18, 1.6 x 2.2 m"}, "accept": {"region": [805, 345, 960, 575], "metric": "lum_p95", "op": ">=", "value": 120}},
+  {"id": "c5", "change": {"setting": "near smoke sheet", "to": "box y 4.6-5.6, density 10"}, "accept": {"region": [200, 250, 300, 280], "metric": "edge", "axis": "x", "op": ">=", "value": 20}},
+  {"id": "c6", "change": {"setting": "birches", "to": "3-6 branch stubs and knot scars per trunk between 2 and 8 m, twig sprays, varied bark"}, "accept": null},
+  {"id": "c7", "change": {"setting": "snow", "to": "displace 0.05, relief 0.7, sparkle, wind scallops"}, "accept": {"region": [0, 620, 1200, 800], "metric": "lum_range", "op": ">=", "value": 33}},
+  {"id": "c8", "change": {"setting": "dry_scatter", "to": "8-12 a patch, scale 0.15-0.9, z -0.14, tilt 0-15, a few single blades"}, "accept": null}],
+ "score_if_fixed": 7.6, "note": "condensed when saved"}

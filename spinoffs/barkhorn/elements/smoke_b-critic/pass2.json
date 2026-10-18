@@ -1,0 +1,13 @@
+{"stage1": {"impression": "A quiet, well-composed high-key birch wood in mist with the speaker placed on the right third and generous room for type on the left; the idea reads. But the whole frame sits in a grey middle, with no true white snow and no true black speaker. The speaker reads as a neutral grey box rather than smoked acrylic, sits on the snow with no contact shadow, and there is no visible woodsmoke, so it looks composited and the line 'Where there's smoke' has nothing to show it.", "score": 5.0},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "change": {"setting": "finish white_in / contrast", "from": "228, 0.04", "to": "212, 0.12"}, "accept": {"region": [0, 620, 1200, 800], "metric": "lum_median", "op": "between", "value": [224, 236]}},
+  {"id": "c2", "change": {"setting": "lights.negative", "from": "3.2 m, [2.0, 1.6]", "to": "1.8 m, [2.6, 2.0]"}, "accept": {"region": [830, 400, 935, 500], "metric": "lum_median", "op": "between", "value": [40, 60]}},
+  {"id": "c3", "change": {"setting": "speaker z, snow_lip", "from": "z -0.03; lip 0.022 / 0.12", "to": "z -0.06; lip 0.035 / 0.05, noise-broken edge"}, "accept": {"region": [810, 578, 960, 590], "metric": "lum_median", "op": "<=", "value": 175}},
+  {"id": "c4", "change": {"setting": "smoke first sheet", "from": "density 14, #B8B2AA, height 1.1, thickness 0.4", "to": "density 24, #8C857D, height 1.5, thickness 0.5"}, "accept": {"region": [560, 280, 780, 470], "metric": "lum_p5", "op": "<=", "value": 160}},
+  {"id": "c5", "change": {"setting": "lights.mistglow", "from": "1.6, az 165, el 6", "to": "3.2, az 160, el 14, #F2EEE6"}, "accept": {"region": [795, 220, 970, 315], "metric": "lum_p95", "op": ">=", "value": 150}},
+  {"id": "c6", "change": {"setting": "snow relief, displace", "from": "0.22, 0.015", "to": "0.45, 0.035, plus a diagonal wind drift"}, "accept": {"region": [0, 620, 1200, 800], "metric": "lum_range", "op": ">=", "value": 26}},
+  {"id": "c7", "change": {"setting": "dry_scatter", "from": "z -0.04, scale 0.4-1.4", "to": "z -0.10, scale 0.3-1.1, half the counts, 3-4 groups"}, "accept": null},
+  {"id": "c8", "change": {"setting": "finish sharpen, bloom", "from": "0.25, 0", "to": "0.12, bloom 0.08 at 30 px, threshold 0.85"}, "accept": {"region": [950, 450, 990, 460], "metric": "edge", "axis": "x", "op": ">=", "value": 2}}],
+ "out_of_scope": ["horn's gap and stand-offs (fixed shape)", "the acrylic's tint (fixed colour)"],
+ "score_if_fixed": 7.4, "note": "condensed when saved; the changes and tests are verbatim"}
