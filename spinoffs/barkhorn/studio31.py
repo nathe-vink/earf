@@ -131,11 +131,11 @@ def bright(name):
                  'flags': [{'center_m': [-1.4, 0.6, 1.2], 'size_m': [1.2, 1.4], 'normal': [1.0, -0.2, 0.0], 'glossy': False,
                             'off': True},   # its shadow on the cove read as a grey wedge in the corner (the finals),
                            {'center_m': [1.35, 2.1, 1.2], 'size_m': [0.3, 2.4], 'normal': [-0.45, -0.89, 0.0], 'glossy': True}],
-                 'bounces': [{'center_m': [0.4, -2.2, 0.6], 'size_m': [2.0, 1.0], 'normal': [-0.15, 0.95, 0.1]}]},
+                 'bounces': [{'center_m': [0.4, -2.2, 0.6], 'size_m': [2.0, 1.0], 'normal': [-0.15, 0.95, 0.1], 'reflect_only': True}]},
          'camera': dict(CAM34), 'sky': {'kind': 'gradient', 'zenith': '#F2F1EF', 'horizon': '#EEEDEB', 'ground': '#CFCCC8',
                                        'strength': 0.6, 'visible': False},
          'render': dict(RENDER, white_balance_k=5900, white_balance_tint=7.0), 'finish': dict(FINISH),
-         'materials': {'sweep': {'roughness': 0.5}}}
+         'materials': {'sweep': {'roughness': 0.32}}}
     s['lights'] = {
         # the background: two broad lamps on the cove behind, out of frame, lifting it to a clean high-key white
         'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 3.2, 3.4], 'target': [-1.5, 6.0, 1.2],
@@ -152,9 +152,10 @@ def bright(name):
         'front-strip': {'type': 'panel', 'size_m': [0.4, 2.0], 'orbit': {'azimuth_deg': -25, 'elevation_deg': 22, 'distance_m': 3.0},
                         'target': [0.0, 0.0, 0.6], 'strength': 4.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
                         'ramp': {'axis': 'z', 'at_m': [0.2, 1.8], 'values': [0.0, 1.0]}},
-        # a smaller, harder lamp high behind, so the tinted acrylic throws its colour forward onto the seamless
-        'back-top': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 5, 'distance_m': 2.5},
-                     'target': [0.0, 0.0, 0.45], 'irradiance': 14.0, 'color': '#FFF8F0', 'camera': False},
+        # a small lamp high behind, aimed through the cabinet at the floor in front: the tinted acrylic throws a pool of
+        # its colour forward onto the seamless (the lineup's pass n1, and every hero pass, asked for it)
+        'back-top': {'type': 'area', 'size_m': [0.8, 0.8], 'orbit': {'azimuth_deg': 200, 'elevation_deg': 30, 'distance_m': 2.5},
+                     'target': [0.0, -0.5, 0.0], 'irradiance': 22.0, 'color': '#FFF8F0', 'camera': False},
     }
     return s
 
