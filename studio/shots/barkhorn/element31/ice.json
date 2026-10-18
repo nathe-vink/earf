@@ -924,8 +924,8 @@
     "module": "ice_el",
     "fn": "cabin",
     "position": [
-     5.5,
-     58.0,
+     6.8,
+     72.0,
      0.0
     ],
     "turn": -6,
@@ -933,8 +933,8 @@
      6.5,
      4.8
     ],
-    "window_emit": 45.0,
-    "lamp_w": 1800.0,
+    "window_emit": 35.0,
+    "lamp_w": 2500.0,
     "window_color": "#FF9A3C",
     "res": "1k"
    }
@@ -944,7 +944,7 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    2.0,
+    3.0,
     1.0
    ],
    "target": [
@@ -952,11 +952,11 @@
     0.0,
     0.8
    ],
-   "irradiance": 0.35,
+   "irradiance": 0.7,
    "color": "#C8D8EA",
    "orbit": {
-    "azimuth_deg": -45,
-    "elevation_deg": 4,
+    "azimuth_deg": -25,
+    "elevation_deg": 5,
     "distance_m": 4.0
    },
    "receivers": [
@@ -979,7 +979,7 @@
   "back": {
    "type": "area",
    "size_m": [
-    2.5,
+    1.5,
     2.0
    ],
    "target": [
@@ -987,10 +987,10 @@
     0.0,
     0.8
    ],
-   "irradiance": 0.2,
-   "color": "#D8E2F0",
+   "irradiance": 0.35,
+   "color": "#DCE6F4",
    "orbit": {
-    "azimuth_deg": 150,
+    "azimuth_deg": 160,
     "elevation_deg": 15,
     "distance_m": 4.0
    },
@@ -1095,7 +1095,7 @@
    "lift": 0.0,
    "lift_color": "#000000",
    "vignette": 0.2,
-   "grain": 0.01
+   "grain": 0.006
   }
  },
  "haze": {
@@ -1107,7 +1107,7 @@
    60,
    20
   ],
-  "density": 0.006,
+  "density": 0.009,
   "anisotropy": 0.2,
   "color": "#C8D8EA"
  }
