@@ -113,17 +113,22 @@ def butte(bpy, name, p, kit):
         b = noise.noise(Vector((math.cos(th_) * 26, math.sin(th_) * 26, z / H * 0.6)) + off)
         c = noise.noise(Vector((math.cos(th_) * 70, math.sin(th_) * 70, z / H * 1.5)) + off)
         # joints read as sharp grooves: fold the mid band so its troughs are narrow and its ridges broad
-        return 0.05 * a - 0.04 * abs(b) + 0.015 * c
+        v = 0.55 + 0.45 * noise.noise(Vector((math.cos(th_) * 5, math.sin(th_) * 5, z / H * 3.0)) + off)
+        return 0.05 * a - 0.04 * abs(b) * v + 0.015 * c
 
     def xy(r, th_):
         x, y = r * math.cos(th_), r * math.sin(th_) * squash
         return x * math.cos(rot) - y * math.sin(rot), x * math.sin(rot) + y * math.cos(rot)
 
-    def ring(rf, z, fl=1.0, gully=0.0):
+    def ring(rf, z, fl=1.0, gully=0.0, ledge=0.0):
         out = []
         for i in range(seg):
             t = 2 * math.pi * i / seg
             k = foot(t) * rf * (1 + fl * flute(t, z))
+            if ledge:                                       # the shale slope's ledges: harder beds stand out
+                band = H * 0.035
+                zw = z + band * 0.4 * math.sin(t * 3 + ph[3])
+                k *= 1 + ledge * (((zw / band) % 1.0) ** 3 - 0.3)
             if gully:                                       # gullies and spurs down the talus
                 k *= 1 + gully * noise.noise(Vector((math.cos(t) * 14, math.sin(t) * 14, z / H * 3)) + off)
             x, y = xy(R * k, t)
@@ -159,12 +164,12 @@ def butte(bpy, name, p, kit):
     cliff.append(cap)
     objs = mesh(cliff, True, cliff_m, f'{name}-cliff')
     # the talus: concave, steep under the cliff and spreading out to the plain, gullied
-    talus, ntl = [], 18
+    talus, ntl = [], 48
     for j in range(ntl + 1):
         t = j / ntl                                          # 0 at the plain, 1 at the cliff's foot
         rf = 1.0 + (spread - 1.0) * (1 - t) ** 1.7
         z = H * th * (t ** 0.85) - 0.5
-        talus.append(ring(rf * 1.01, z, fl=1.0 if t > 0.8 else 0.5, gully=0.16 * (1 - abs(2 * t - 1)) + 0.03))
+        talus.append(ring(rf * 1.01, z, fl=1.0 if t > 0.8 else 0.5, gully=0.16 * (1 - abs(2 * t - 1)) + 0.03, ledge=0.03 * t))
     objs += mesh(talus, False, talus_m, f'{name}-talus')
     # the Mittens' thumbs: slender spires standing off the main block
     for k, (ang, dist, tr, hs) in enumerate(p.get('thumbs', [])):
@@ -187,11 +192,12 @@ def _ellipsoid(bm, centre, axes, rot, seg=20):
 def prickly_pear(bpy, name, p, kit):
     rnd = random.Random(p.get('seed', 1))
     S = p.get('size', 0.24)
-    bm_pad, bm_ar, bm_sp = bmesh.new(), bmesh.new(), bmesh.new()
+    bm_pad, bm_old, bm_ar, bm_sp = bmesh.new(), bmesh.new(), bmesh.new(), bmesh.new()
     pads = []                                               # (centre, frame matrix, half-width, half-height)
 
     def add_pad(c, M, w, h):
-        g = bmesh.ops.create_uvsphere(bm_pad, u_segments=28, v_segments=14, radius=1.0)
+        old = rnd.random() < p.get('old', 0.25)              # older pads, yellowing and scarred
+        g = bmesh.ops.create_uvsphere(bm_old if old else bm_pad, u_segments=28, v_segments=14, radius=1.0)
         for v in g['verts']:
             x, y, z = v.co
             # obovate: wider toward the top (+z in the pad's frame), thin (y)
@@ -232,7 +238,7 @@ def prickly_pear(bpy, name, p, kit):
     base = []
     for k in range(max(3, n // 2)):
         yaw = rnd.uniform(0, 360); M = frame(rnd.uniform(-50, 50), rnd.uniform(-45, 45), yaw)
-        h = S * rnd.uniform(0.42, 0.5); w = h * rnd.uniform(0.72, 0.85)
+        h = S * rnd.uniform(0.4, 0.56); w = h * rnd.uniform(0.72, 0.88)
         c = Vector((rnd.uniform(-1.4, 1.4) * S, rnd.uniform(-1.4, 1.4) * S, h * 0.55))
         add_pad(c, M, w, h); base.append(len(pads) - 1)
     while len(pads) < n:
@@ -242,7 +248,7 @@ def prickly_pear(bpy, name, p, kit):
         t = rnd.uniform(-0.8, 0.8)                           # a point on the parent's upper rim
         rim = pc + PM @ Vector((math.sin(t) * pw, 0.0, math.cos(t) * ph))
         yaw = rnd.uniform(-50, 50); M = PM @ frame(rnd.uniform(-45, 45), math.degrees(t) * 1.2 + rnd.uniform(-25, 25), yaw)
-        h = S * rnd.uniform(0.36, 0.48); w = h * rnd.uniform(0.7, 0.85)
+        h = S * rnd.uniform(0.22, 0.5); w = h * rnd.uniform(0.68, 0.88)
         c = rim + M @ Vector((0, 0, h * 0.9))
         if c.z < h * 0.5:
             continue
@@ -252,7 +258,9 @@ def prickly_pear(bpy, name, p, kit):
             _principled(bpy, f'{name}-spine', p.get('spine', '#E9DFC6'), rough=0.35, sss=0.4, spec=0.5, kit=kit)]
     _noise_tint(mats[0], S * 0.6, p.get('color', '#73885E'), p.get('color2', '#8C8F6A'), kit=kit)
     objs = []
-    for bm, m, suffix in ((bm_pad, mats[0], 'pads'), (bm_ar, mats[1], 'areoles'), (bm_sp, mats[2], 'spines')):
+    mold = _principled(bpy, f'{name}-old', '#8F8A5A', rough=0.75, sss=0.05, spec=0.3, kit=kit)
+    _noise_tint(mold, S * 0.25, '#8F8A5A', '#7A6248', lo=0.45, hi=0.8, kit=kit)
+    for bm, m, suffix in ((bm_pad, mats[0], 'pads'), (bm_old, mold, 'old'), (bm_ar, mats[1], 'areoles'), (bm_sp, mats[2], 'spines')):
         objs += kit.finish(bpy, f'{name}-{suffix}', bm, p, smooth=suffix != 'spines', mat=m)
     return objs
 
