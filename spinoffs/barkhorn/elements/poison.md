@@ -74,7 +74,7 @@ So the finals use the pass-7 rig (commit e1f7c16, restored as `shot()`), unchang
 ## The final
 
 - **Landscape:** `renders/2026-10-18/barkhorn/element31/poison.png`, 2400 × 1600 at 512 samples with the denoiser, 68 min on 4 CPU threads. Clean at full size: no noise, no fireflies.
-- **Portrait:** `poison-portrait.png`, 1600 × 2000 at 512 samples.
+- **Portrait:** `poison-portrait.png`, 1600 × 2000 at 512 samples, 54 min. The shafts read better here than in the landscape.
 - **A last blind critic pass on the landscape final: 6.5.** Its remaining notes:
   - the horn is near black against a dark forest (median 5);
   - the moss round the plinth reads as a mat;
