@@ -1,0 +1,9 @@
+{"A": 5.5, "B": 3.5, "prefer": "A", "differences": [
+{"what": "A's top outer edge and corner are crisp, with a clean chamfer and a defined silhouette against the white; in B the right edge dissolves into a neon-green glow that bleeds into the background, so the product has no outline", "region": [1100, 200, 1600, 1100], "favours": "A"},
+{"what": "B's top rim is a blurry, oversaturated green band with smeared internal shapes, not readable as a glass edge; A shows the top face as a legible bevelled slab with a believable falloff", "region": [0, 250, 1600, 360], "favours": "A"},
+{"what": "A's slot shows interior depth with a lit lower lip and a visible back wall; B's slot is a flat near-black void (median luminance about 25 against 72 in A) that reads as a hole in the image", "region": [260, 630, 1230, 860], "favours": "A"},
+{"what": "B's internal panels are a single flat dark olive with almost no tonal gradation and look muddy; A's panels have soft gradients and lighter values, so the material reads better", "region": [90, 1030, 1360, 1600], "favours": "A"},
+{"what": "B shows a dowel or pin sticking out past the body on the right, which reads as a stray part floating in the glow; A keeps that hardware small and contained", "region": [1380, 380, 1560, 1120], "favours": "A"},
+{"what": "A's top surface is washed out almost to white with a green cast in the upper left and a cut-off shape at the top-left corner, so the frame feels overexposed and unfinished there; B's framing is cleaner above the product", "region": [0, 0, 1600, 560], "favours": "B"},
+{"what": "A shows small orange specks where the rods meet the surface, which read as artefacts", "region": [730, 240, 930, 540], "favours": "B"}
+]}

@@ -1,0 +1,385 @@
+{
+ "stage1": {
+  "impression": "A strong graphic idea, eight glowing cabinets in a spectrum against a concrete wall above a river, but it reads as a render, not a night photograph. The wall's colour is one smeared rainbow gradient instead of eight light columns. The denoiser has left a watercolour blotchiness on the concrete and the posts. A dead-black curb bar and a dark horizontal stripe cut the frame into bands, and the horns read as murky, soft-edged boxes, with the black one almost lost against the wall.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "No denoiser smear: wall concrete and horn posts show crisp micro-detail at 300% crop, no blotchy patches",
+  "Eight distinguishable washes: each column clearly brighter and more saturated than the gaps between them, the overlaps blending, not one continuous gradient",
+  "Wash colours true to the cabinets: green column reads green (g > r), blue reads blue (b > r), no warm-pink cast across the whole wall",
+  "No full-width crushed-black bands: the curb between paving and river and the stripe at woofer height gone or carrying detail",
+  "Every horn's silhouette separates from the wall, the Smoke horn included (at least about 10 levels of contrast)",
+  "Board-formed concrete reads at monumental scale with real grain, tie holes and form-board edges, not a soft painted texture"
+ ],
+ "defects": [
+  {
+   "region": [
+    20,
+    0,
+    1420,
+    250
+   ],
+   "what": "Wall reads as one continuous rainbow gradient; no individual washes (gap 1060-1090 lum 66 vs neighbouring washes 81/65)"
+  },
+  {
+   "region": [
+    540,
+    30,
+    700,
+    330
+   ],
+   "what": "Denoiser watercolour blotches on the concrete; soft, smeared detail"
+  },
+  {
+   "region": [
+    20,
+    0,
+    1420,
+    100
+   ],
+   "what": "Warm pink cast over the whole upper wall (r68 g47 b45), even above the cool speakers"
+  },
+  {
+   "region": [
+    595,
+    30,
+    675,
+    230
+   ],
+   "what": "Green speaker's wash is not green (r82 g56 b52); Ice blue wash neutral (71/69/68)"
+  },
+  {
+   "region": [
+    20,
+    340,
+    1420,
+    372
+   ],
+   "what": "Dark horizontal stripe at woofer height between the speakers (lum ~48 vs ~100-120 just above); reads as a bench or wall line cutting the composition"
+  },
+  {
+   "region": [
+    0,
+    508,
+    1440,
+    530
+   ],
+   "what": "Curb front is crushed black across the full width (47.5% crushed, median 3); a graphic bar splitting paving from water"
+  },
+  {
+   "region": [
+    1282,
+    262,
+    1365,
+    305
+   ],
+   "what": "Smoke horn median 15.6 against wall about 21; silhouette almost lost"
+  },
+  {
+   "region": [
+    60,
+    255,
+    1370,
+    315
+   ],
+   "what": "All horns read murky and soft-edged, no edge definition or specular on the resin"
+  },
+  {
+   "region": [
+    470,
+    0,
+    505,
+    330
+   ],
+   "what": "Hairline dark vertical seams between wall panels (step -27 over 0 px) at x about 487 and 955; reads as a CG seam more than a formwork joint"
+  },
+  {
+   "region": [
+    0,
+    0,
+    18,
+    450
+   ],
+   "what": "Dark vertical strips at both frame edges"
+  },
+  {
+   "region": [
+    0,
+    535,
+    1440,
+    600
+   ],
+   "what": "Reflections are smeared vertical bars with denoiser streaking; the frame has three stacked reflection bands (paving, curb, water)"
+  },
+  {
+   "region": [
+    20,
+    0,
+    1420,
+    250
+   ],
+   "what": "Concrete texture lacks micro-detail at this scale (flat patch lum_range 20.9); reads painted"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "Denoiser artefacts make the whole frame read as CG: blotchy watercolour patches on the concrete and smeared posts and edges.",
+   "evidence": {
+    "region": [
+     540,
+     30,
+     700,
+     330
+    ],
+    "measured": "300% crop shows blotchy patches and smeared post edges; the staged image is 1440x600 against the card's 2880x1200 frame"
+   },
+   "change": {
+    "setting": "render samples / denoiser",
+    "from": "current samples, default denoise",
+    "to": "at least 1024 samples at full 2880x1200, OIDN with albedo+normal passes and prefilter 'accurate', light-path clamp indirect 10; deliver the full-resolution frame"
+   },
+   "expected": "Concrete grain and board marks stay crisp at 300%; post and horn edges sharp; no blotches",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "set",
+   "problem": "The washes do not form columns: the wall stands too far back, so every cabinet's light spreads over the whole wall and the colours mix into one gradient.",
+   "evidence": {
+    "region": [
+     1060,
+     30,
+     1090,
+     230
+    ],
+    "measured": "gap between Haze and Fog lum_median 66 vs washes 81 and 65; x-profile y120-200 is a smooth 46-85 ramp with no peaks"
+   },
+   "change": {
+    "setting": "set.props.8 to set.props.24 position y (wall piers)",
+    "from": "0.9 (face at y 0.75)",
+    "to": "0.55 (face at y 0.40, about 0.18 m behind the cabinets' backs); move set.props.0 to y 1.15 to match"
+   },
+   "expected": "Eight distinct tall columns, each about 1.3-1.6x brighter than the gaps between them, blending only at their edges; the Haze/Fog gap [1060,60,1090,200] falls from about 66 to below 55 while the Haze column [935,30,1015,230] stays at 80 or more",
+   "accept": {
+    "region": [
+     1060,
+     60,
+     1090,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 55
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "set",
+   "problem": "A dark horizontal stripe runs behind the speakers at woofer height and cuts the composition in two.",
+   "evidence": {
+    "region": [
+     540,
+     345,
+     590,
+     370
+    ],
+    "measured": "lum_median 48.4, against about 100-120 just above (y-profile 93/103/120/99 then 54/59/35/30)"
+   },
+   "change": {
+    "setting": "set.props.1 (low wall at y 0.65, 0.6 m tall)",
+    "from": "present",
+    "to": "removed"
+   },
+   "expected": "The wall rises unbroken from the paving behind the speakers; the washes start at the plinths",
+   "accept": {
+    "region": [
+     540,
+     345,
+     590,
+     370
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 70
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The washes' colours are not true: a warm cast floods the wall and the Poison green and Ice blue columns read neutral or warm.",
+   "evidence": {
+    "region": [
+     595,
+     30,
+     675,
+     230
+    ],
+    "measured": "green wash r82 g56 b52; blue wash [765,30,845,230] r71 g69 b68; upper wall r68 g47 b45"
+   },
+   "change": {
+    "setting": "lights.up0 to lights.up7 color (and the lens glow set.props.26 to 40)",
+    "from": "#FFF2DE",
+    "to": "#FFFFFF (neutral 6500 K source, so the acrylic alone sets the hue); keep white balance 5600 K"
+   },
+   "expected": "Each column carries its cabinet's hue; green column g > r, blue column b > r; less pink on the upper wall",
+   "accept": {
+    "region": [
+     595,
+     30,
+     675,
+     230
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 82
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The curb between the paving and the river renders as a full-width crushed-black bar.",
+   "evidence": {
+    "region": [
+     0,
+     508,
+     1440,
+     530
+    ],
+    "measured": "crush_pct 47.5, lum_median 3.1"
+   },
+   "change": {
+    "setting": "set.props.4 (curb)",
+    "from": "thick 0.12, wet 0.9, granite_tile",
+    "to": "thick 0.03 with a 20 mm bullnose and wet 1.0 so its top catches the washes; or remove it and let the paving end at the water with a thin lit arris"
+   },
+   "expected": "A thin wet edge carrying coloured reflections instead of a black bar; ground reads as one surface stepping into water",
+   "accept": {
+    "region": [
+     0,
+     508,
+     1440,
+     530
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 15
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The horns get no light of their own: the Smoke horn melts into the wall and every horn reads murky.",
+   "evidence": {
+    "region": [
+     1290,
+     270,
+     1360,
+     300
+    ],
+    "measured": "Smoke horn lum_median 15.6, lum_range 5.0; wall beside it [1370,260,1420,300] lum_median 21.1"
+   },
+   "change": {
+    "setting": "lights.moon",
+    "from": "irradiance 0.12, position [6, -8, 9]",
+    "to": "irradiance 0.30, position [4, -2, 9] (higher and more overhead) so it rakes the horns' tops and edges"
+   },
+   "expected": "A cool top edge on each horn, the Smoke horn's silhouette readable; the wall above stays dark",
+   "accept": {
+    "region": [
+     1290,
+     262,
+     1360,
+     275
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 30
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The concrete lacks micro-detail and reads painted, not monumental board-formed concrete.",
+   "evidence": {
+    "region": [
+     600,
+     20,
+     700,
+     90
+    ],
+    "measured": "lum_range 20.9 in a flat patch; 300% crop soft, tie holes faint"
+   },
+   "change": {
+    "setting": "set.props.0 and set.props.8 to 24 texture/bump",
+    "from": "concrete_layers_02 4k, bump 2.4",
+    "to": "the same scan at 8k (or a sharper board-formed scan with clear tie holes), bump 3.5, vary 0.6"
+   },
+   "expected": "Visible aggregate, board grain and tie holes catching the grazing uplight",
+   "accept": {
+    "region": [
+     600,
+     20,
+     700,
+     90
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 28
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The 12 mm gaps between wall panels render as hard 1 px black seams and dark strips at the frame edges, which read as CG joins.",
+   "evidence": {
+    "region": [
+     470,
+     50,
+     505,
+     150
+    ],
+    "measured": "edge step -27.2, width 0 px; edges [0,0,18,450] lum_median 39.6 and [1424,0,1440,450] 29.1"
+   },
+   "change": {
+    "setting": "set.props.8 to 24 size x",
+    "from": "3.588 (12 mm gap)",
+    "to": "3.596 (4 mm gap), with a chamfered joint, so it reads as a formwork joint"
+   },
+   "expected": "Joints read as faint form lines, no hard black hairlines",
+   "accept": {
+    "region": [
+     470,
+     50,
+     505,
+     150
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": ">",
+    "value": -12
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "More light and edge definition inside the horns (they read as dark, murky resin)",
+   "why": "The horn's shape and tint are fixed by acoustic simulation and the product's colours; only the light falling on them can change (c6)"
+  },
+  {
+   "request": "Speakers larger in frame",
+   "why": "All eight must stand whole in one row across the frame, which already spans about 90% of its width; their scale is set by the shot's purpose"
+  }
+ ],
+ "score_if_fixed": 7.2
+}

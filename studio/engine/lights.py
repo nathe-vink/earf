@@ -225,6 +225,11 @@ def flag(bpy, name, spec, centre):
     ob.data.materials.append(m)
     ob.visible_camera = False
     ob.visible_glossy = bool(spec.get('glossy', False))
+    if spec.get('see_through'):
+        # a cutter only its lamps' shadow rays meet: bounce light, the sky and rays through clear parts pass it, so it
+        # soaks up nothing (barkhorn's hero31: cutters behind a row of acrylic speakers, the key reaching the floor only
+        # through them)
+        ob.visible_diffuse = False; ob.visible_transmission = False; ob.visible_volume_scatter = False
     ob['engine_light'] = True
     return ob
 

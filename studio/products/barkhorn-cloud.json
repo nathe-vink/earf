@@ -47,41 +47,67 @@
    "preset": "cloth",
    "color": "$disc"
   },
+  "driver-bright": {
+   "preset": "metal",
+   "color": "#C9CACB",
+   "roughness": 0.22,
+   "anisotropic": 0.5
+  },
   "driver-cap": {
-   "preset": "paper_cone",
-   "color": "#1D1B1A"
+   "preset": "treated_paper",
+   "color": "#22201F",
+   "roughness": 0.6,
+   "coat": 0.1,
+   "coat_roughness": 0.4,
+   "streaks": 0.02
   },
   "driver-coil": {
    "preset": "metal",
    "color": "#B87333"
   },
   "driver-cone": {
-   "preset": "paper_cone",
-   "color": "#1D1B1A"
+   "preset": "treated_paper",
+   "color": "#242220"
   },
   "driver-frame": {
-   "preset": "satin_paint",
-   "color": "#1E1E1E"
+   "preset": "ecoat",
+   "color": "#1B1B1C"
+  },
+  "driver-gasket": {
+   "preset": "rubber",
+   "color": "#121212",
+   "roughness": 0.85
   },
   "driver-magnet": {
-   "preset": "satin_paint",
-   "color": "#2B2B2B"
+   "preset": "metal",
+   "color": "#B9B6AE",
+   "roughness": 0.3
   },
   "driver-motor": {
-   "preset": "metal",
-   "color": "#3A3A3A"
+   "preset": "ecoat",
+   "color": "#1D1D1E",
+   "roughness": 0.34
   },
   "driver-plug": {
-   "preset": "satin_paint",
-   "color": "#111111"
+   "preset": "metal",
+   "color": "#6A6B6E",
+   "roughness": 0.28
+  },
+  "driver-screw": {
+   "preset": "black_oxide"
   },
   "driver-spider": {
    "preset": "rubber",
    "color": "#C8B88A"
   },
   "driver-surround": {
-   "preset": "rubber",
-   "color": "#151515"
+   "preset": "doped_cloth",
+   "color": "#1E1D1C"
+  },
+  "driver-terminal": {
+   "preset": "metal",
+   "color": "#D4D4D2",
+   "roughness": 0.15
   },
   "foot": {
    "preset": "plastic",
@@ -147,10 +173,8 @@
    "roughness": 0.35
   },
   "ring": {
-   "preset": "satin_paint",
-   "color": "$disc",
-   "roughness": 0.45,
-   "specular": 0.4
+   "preset": "opaque_acrylic",
+   "color": "$disc"
   },
   "rod": {
    "preset": "metal",
@@ -201,6 +225,10 @@
    "material": "disc"
   },
   {
+   "match": "hf-exit|hf-band",
+   "material": "driver-bright"
+  },
+  {
    "match": "woofer-cap",
    "material": "driver-cap"
   },
@@ -217,6 +245,10 @@
    "material": "driver-frame"
   },
   {
+   "match": "woofer-gasket",
+   "material": "driver-gasket"
+  },
+  {
    "match": "woofer-magnet",
    "material": "driver-magnet"
   },
@@ -229,12 +261,20 @@
    "material": "driver-plug"
   },
   {
+   "match": "woofer-screws",
+   "material": "driver-screw"
+  },
+  {
    "match": "woofer-spider",
    "material": "driver-spider"
   },
   {
    "match": "woofer-surround",
    "material": "driver-surround"
+  },
+  {
+   "match": "woofer-terminals|hf-terminals",
+   "material": "driver-terminal"
   },
   {
    "match": "feet-base",
