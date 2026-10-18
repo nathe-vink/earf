@@ -25,12 +25,13 @@
     "shape": "ext",
     "module": "haze_b_el",
     "fn": "ridge",
-    "texture": "withered_grass",
+    "texture": "sparse_grass",
     "res": "4k",
     "displace": 0.06,
-    "tint": "#5E4E48",
-    "tint_mix": 0.35,
-    "value": 0.5,
+    "tint": "#6A5640",
+    "tint_mix": 0.6,
+    "value": 0.55,
+    "matte": true,
     "area": [
      -10.0,
      -13.0,
@@ -260,9 +261,14 @@
       0.0,
       0.0,
       0.36
+     ],
+     [
+      0.0,
+      -0.4,
+      0.22
      ]
     ],
-    "count": 450,
+    "count": 225,
     "children": 10,
     "length": [
      0.03,
@@ -299,21 +305,21 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    2.0,
-    2.0
+    1.0,
+    1.0
    ],
-   "orbit": {
-    "azimuth_deg": -25.0,
-    "elevation_deg": 10.0,
-    "distance_m": 6.0
-   },
    "target": [
     0.0,
     0.0,
     0.7
    ],
    "irradiance": 16.0,
-   "color": "#F5D6BC"
+   "color": "#F5D6BC",
+   "orbit": {
+    "azimuth_deg": -25.0,
+    "elevation_deg": 25.0,
+    "distance_m": 2.5
+   }
   }
  },
  "render": {
@@ -323,7 +329,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": -2.6,
+  "exposure": -3.2,
   "white_balance_k": 5000,
   "white_balance_tint": 15,
   "look": "AgX - Medium High Contrast"
@@ -358,14 +364,14 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "kiara_9_dusk",
-  "rotation_deg": -118.0,
+  "rotation_deg": -113.7,
   "strength": 1.0,
   "res": "8k"
  },
  "sun": {
-  "azimuth_deg": 167.8,
+  "azimuth_deg": 163.5,
   "elevation_deg": 6.0,
-  "irradiance": 6.0,
+  "irradiance": 12.0,
   "angle_deg": 0.53,
   "color": "#FFC88A"
  },
@@ -378,7 +384,7 @@
   "sharpen": 0.2,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.08,
+   "bloom": 0.04,
    "bloom_px": 40,
    "bloom_threshold": 0.8,
    "saturation": 0.12,

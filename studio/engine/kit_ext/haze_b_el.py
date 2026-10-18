@@ -55,6 +55,12 @@ def _mat(bpy, p, kit):
         mx.inputs['Factor'].default_value = 1.0
         v = p['value']; mx.inputs['B'].default_value = (v, v, v, 1.0)
         nt.links.new(src, mx.inputs['A']); nt.links.new(mx.outputs['Result'], bs.inputs['Base Color'])
+    if p.get('matte'):                                                # dry soil: no sheen of the sky on it
+        bs = next(n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
+        for l in list(bs.inputs['Roughness'].links):
+            m.node_tree.links.remove(l)
+        bs.inputs['Roughness'].default_value = 1.0
+        bs.inputs['Specular IOR Level'].default_value = 0.0
     return m
 
 
