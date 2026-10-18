@@ -211,8 +211,9 @@ def hdri_sun(aid, rotation_deg=0.0, res='1k'):
     rows, cols = np.unravel_index(idx, lum.shape)
     u = (np.average(cols, weights=w) + 0.5) / W
     v = 1.0 - (np.average(rows, weights=w) + 0.5) / H
-    phi, theta = (u - 0.5) * 2 * math.pi, (v - 0.5) * math.pi        # Blender: u from atan2(y, -x), v from elevation
-    d = (-math.cos(phi) * math.cos(theta), math.sin(phi) * math.cos(theta), math.sin(theta))
+    # Cycles' equirectangular lookup: u = 0.5 - atan2(y, x) / 2 pi (u 0.5 looks along +x, 0.25 along +y), v from elevation
+    phi, theta = (u - 0.5) * 2 * math.pi, (v - 0.5) * math.pi
+    d = (math.cos(phi) * math.cos(theta), -math.sin(phi) * math.cos(theta), math.sin(theta))
     r = math.radians(-rotation_deg)                                   # the map is looked up through Rz(rotation)
     x, y = d[0] * math.cos(r) - d[1] * math.sin(r), d[0] * math.sin(r) + d[1] * math.cos(r)
     col = (img.reshape(-1, 3)[idx] * w[:, None]).sum(0); col = col / max(col.max(), 1e-9)
