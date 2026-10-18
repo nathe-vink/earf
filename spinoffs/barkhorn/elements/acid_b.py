@@ -11,7 +11,7 @@ import common as C
 
 NAME = 'acid_b'
 V = os.environ.get('ACID_B_VARIANT', 'a')                 # the concept proofs: a backlit gap, b a side-back sun
-SKY = {'a': ('belfast_sunset_puresky', 265.0, 0.2), 'b': ('kloppenheim_01_puresky', -40.0, 0.55)}[V]
+SKY = {'a': ('belfast_sunset_puresky', 265.0, 0.13), 'b': ('kloppenheim_01_puresky', -40.0, 0.55)}[V]
 # the sun's line from the speaker (azimuth 148): nothing stands on it to shade the speaker
 SUN_LINE = [[2.5, 4, 2.5], [4.38, 7, 2.5], [6.25, 10, 2.5], [8.12, 13, 2.5], [10.0, 16, 2.5], [11.88, 19, 2.5], [13.75, 22, 2.5], [15.62, 25, 2.5], [17.5, 28, 2.5], [19.38, 31, 2.5], [21.25, 34, 2.5], [23.12, 37, 2.5]]
 SUN_FAR = [[round(0.625 * t, 1), round(t, 1), 6.0 + 0.04 * t] for t in range(45, 160, 8)]
@@ -27,8 +27,8 @@ def props(cam):
     return [
         # the lava field: black rock, wet, broadly undulating so the rain pools in its hollows
         ext('wet_ground', texture='dark_rock', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], cells=1700, displace=0.07,
-            relief=False, flat=[0.0, 0.0, 0.7], res='4k', tex_scale=0.8, bump=3.0, rough_mul=0.8, darken=0.75, film=0.6, tint='#121210', tint_mix=0.85,
-            film_rough=0.33, film_vary=[0.03, 0.1], lumps=[[2.6, 0.06, 'billow'], [1.1, 0.04, 'fbm'], [0.9, 0.03, 'ridged'], [0.3, 0.02, 'fbm'], [0.12, 0.008, 'fbm'],
+            relief=False, flat=[0.0, 0.0, 0.7], res='4k', tex_scale=0.8, bump=3.0, rough_mul=0.8, darken=0.75, film=0.45, tint='#121210', tint_mix=0.85,
+            film_rough=0.33, film_vary=[0.06, 0.16], lumps=[[2.6, 0.06, 'billow'], [1.1, 0.04, 'fbm'], [0.9, 0.03, 'ridged'], [0.3, 0.02, 'fbm'], [0.12, 0.008, 'fbm'],
                    [9.0, 0.05]],
             dips=[[0.0, 0.0, 1.1, 0.22], [-0.2, -1.2, 1.2, 0.2], [-0.55, -2.7, 1.5, 0.22], [-0.85, -4.1, 1.6, 0.22], [-1.1, -5.4, 1.4, 0.2],
                   [2.6, 2.4, 1.6, 0.18]], seed=2),
@@ -72,7 +72,9 @@ def props(cam):
         # and the curtain beyond, too fine to count
         ext('rain', camera=cam, count=300000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.08, scatter=0.9, rough=0.25, clear=0.1, seed=23),
-        ext('splashes', area=[-2.0, -3.5, 2.5, 1.5], z=-0.11, count=1200, radius=[0.003, 0.014], opacity=0.25,
+        ext('splashes', area=[-3.5, -8.0, 4.0, 4.0], z=-0.11, count=900, radius=[0.002, 0.012], opacity=0.1,
+            avoid=[[0.0, 0.0, 3.0]], seed=15),
+        ext('splashes', area=[-2.0, -3.5, 2.5, 1.5], z=-0.11, count=700, radius=[0.002, 0.02], opacity=0.15,
             avoid=[[0.0, 0.0, 0.45]], seed=5),
     ]
 
@@ -84,16 +86,18 @@ def shot():
     sun = C.sun_from_sky(hdri, rot, irradiance=10.0, angle_deg=2.0, color='#E8DC7A')
     lights = {
         # a photographer's soft bounce from the camera's side, low: it lifts the speaker's shaded front a little
-        'bounce': C.area(-70, 10, 3.5, 1.2, '#F1E6B8', size=(2.0, 2.0)),
+        'bounce': C.area(-40, 8, 3.5, 4.0, '#F1E6B8', size=(2.0, 2.0), target=(0.0, 0.0, 0.5)),
         # a small card low in front, as a photographer would hold one, into the horn's throat
         'throat': C.area(-8, 4, 2.2, 0.5, '#F1E6B8', size=(0.5, 0.4), target=(0.0, 0.0, 1.15)),
+        # a second small card low in front, on the cabinet's lower half and the woofer
+        'low': C.area(-5, 3, 2.5, 1.5, '#F1E6B8', size=(0.5, 0.5), target=(0.0, 0.0, 0.3)),
         # a card behind and to the right, toward the sun, to rim the cabinet's right edge
-        'rim': C.area(110, 5, 3.0, 3.0, '#F1E6B8', size=(1.5, 1.5), target=(0.0, 0.0, 0.5)),
+        'rim': C.area(130, 5, 3.0, 9.0, '#F1E6B8', size=(1.5, 1.5), target=(0.0, 0.0, 0.5)),
     }
     s = C.shot(NAME, props(cam), cam, C.sky(hdri, rot, strength=strength, res='4k'), 'barkhorn Acid, acid rain',
-               lights=lights, sun=sun, white_balance=(5700, -12.0), rotate_z=16.0, position=(0.0, 0.0, -0.15), exposure=-0.1, look='AgX - Medium High Contrast',
-               haze={'density': 0.0014, 'anisotropy': 0.5, 'color': '#B5C24A', 'box_m': [-700, -15, -2, 700, 900, 20]},
-               fin=C.finish(contrast=0.22, clarity=0.07, sharpen=0.35, vignette=0.14))
+               lights=lights, sun=sun, white_balance=(5700, -6.0), rotate_z=16.0, position=(0.0, 0.0, -0.15), exposure=-0.1, look='AgX - Base Contrast',
+               haze={'density': 0.0018, 'anisotropy': 0.5, 'color': '#A9AE84', 'box_m': [-700, -15, -2, 700, 900, 20]},
+               fin=C.finish(contrast=0.15, clarity=0.07, sharpen=0.35, vignette=0.14))
     return s
 
 

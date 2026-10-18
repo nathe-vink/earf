@@ -48,13 +48,13 @@
     "bump": 3.0,
     "rough_mul": 0.8,
     "darken": 0.75,
-    "film": 0.6,
+    "film": 0.45,
     "tint": "#121210",
     "tint_mix": 0.85,
     "film_rough": 0.33,
     "film_vary": [
-     0.03,
-     0.1
+     0.06,
+     0.16
     ],
     "lumps": [
      [
@@ -903,18 +903,45 @@
     "module": "acid_rain_el",
     "fn": "splashes",
     "area": [
+     -3.5,
+     -8.0,
+     4.0,
+     4.0
+    ],
+    "z": -0.11,
+    "count": 900,
+    "radius": [
+     0.002,
+     0.012
+    ],
+    "opacity": 0.1,
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      3.0
+     ]
+    ],
+    "seed": 15
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "splashes",
+    "area": [
      -2.0,
      -3.5,
      2.5,
      1.5
     ],
     "z": -0.11,
-    "count": 1200,
+    "count": 700,
     "radius": [
-     0.003,
-     0.014
+     0.002,
+     0.02
     ],
-    "opacity": 0.25,
+    "opacity": 0.15,
     "avoid": [
      [
       0.0,
@@ -936,13 +963,13 @@
    "target": [
     0.0,
     0.0,
-    0.7
+    0.5
    ],
-   "irradiance": 1.2,
+   "irradiance": 4.0,
    "color": "#F1E6B8",
    "orbit": {
-    "azimuth_deg": -70,
-    "elevation_deg": 10,
+    "azimuth_deg": -40,
+    "elevation_deg": 8,
     "distance_m": 3.5
    }
   },
@@ -965,6 +992,25 @@
     "distance_m": 2.2
    }
   },
+  "low": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.3
+   ],
+   "irradiance": 1.5,
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": -5,
+    "elevation_deg": 3,
+    "distance_m": 2.5
+   }
+  },
   "rim": {
    "type": "area",
    "size_m": [
@@ -976,10 +1022,10 @@
     0.0,
     0.5
    ],
-   "irradiance": 3.0,
+   "irradiance": 9.0,
    "color": "#F1E6B8",
    "orbit": {
-    "azimuth_deg": 110,
+    "azimuth_deg": 130,
     "elevation_deg": 5,
     "distance_m": 3.0
    }
@@ -994,8 +1040,8 @@
   "view": "AgX",
   "exposure": -0.1,
   "white_balance_k": 5700,
-  "white_balance_tint": -12.0,
-  "look": "AgX - Medium High Contrast"
+  "white_balance_tint": -6.0,
+  "look": "AgX - Base Contrast"
  },
  "title": "barkhorn Acid, acid rain (4:5)",
  "size": [
@@ -1027,7 +1073,7 @@
   "kind": "hdri",
   "polyhaven": "belfast_sunset_puresky",
   "rotation_deg": 265.0,
-  "strength": 0.2,
+  "strength": 0.13,
   "res": "4k"
  },
  "sun": {
@@ -1041,7 +1087,7 @@
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.22,
+  "contrast": 0.15,
   "clarity": 0.07,
   "sharpen": 0.35,
   "sharpen_px": 0.6,
@@ -1056,9 +1102,9 @@
   }
  },
  "haze": {
-  "density": 0.0014,
+  "density": 0.0018,
   "anisotropy": 0.5,
-  "color": "#B5C24A",
+  "color": "#A9AE84",
   "box_m": [
    -700,
    -15,
