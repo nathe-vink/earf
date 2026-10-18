@@ -80,3 +80,34 @@ While the rebuilt drivers come to main, the coordinator asked for one focused fi
 
 - **The speaker darker than the sand (59 against 86).** The sun moved behind it to 110 (a17) left the buttes in flat grey shade and the face at 63 against 99. So the sun went back to 92, and the low warm bounce off the sand (azimuth -25, 4 degrees up, 6 x 1.5 m, #F6C9A0) went from 0.8 to 6. The face now measures 93 against the sunlit sand's 110, and the acrylic glows orange. The bounce lifts the near sand too, so the face stays a little under it.
 - **The hard seam at the butte bases.** Long low rises of up to 14 m from 140 m out (`swell3` [14, 380, 140]) now hide the far bases behind the ground.
+
+## The finals and the duel against Dust A
+
+- **Landscape final:** `renders/2026-10-18/barkhorn/element31/dust_b.png`, 2400 x 1600, 512 samples, 37 min (build 9 min), from rig a23024f on the rebuilt drivers (main at 01267eb).
+- **Portrait:** rendered by the coordinator's helper from the same commit, on its own branch.
+
+**The blind duel against Dust A's final** (`dust.png`, 2400 x 1600, both full size, random order, PROMPT-DUEL): **Dust A 6.5, Dust B 5.5.** A wins by a full point, outside the half point the coordinator set.
+
+The judge preferred A for:
+- its long low-sun shadow, which grounds the speaker;
+- one warm, cohesive grade;
+- fine ripples raking all the way to the foreground;
+- a clean frame with one story beat (the tumbleweed);
+- haze that hides its mesas' edges.
+
+It preferred B only for the product: the woofer, its surround ridges and the horn's throat read clearly, partly from the rebuilt drivers, which A's final does not have yet.
+
+Against B it counted:
+- the buttes' stretched, flat CG faces with hard silhouettes, which read as a matte painting;
+- the plants cluttering the frame;
+- the yucca cut by the edge;
+- a blue-grey sky against saturated red ground.
+
+### What holds Dust B back (honestly)
+
+It answers the owner's note: real Southwest buttes, cacti, a blue sky. But it reads less like a photograph than A:
+- **The buttes:** modelled at true scale and still procedural at a glance. A scan or a real backplate of Monument Valley is the fix.
+- **The plants:** procedural and close to the camera, so their CG reads.
+- **The light:** a high side sun is less flattering than A's low golden backlight.
+
+The coordinator's rule keeps A on the site. A's finals should be rendered again on main so they carry the new drivers, the one thing B did better.
