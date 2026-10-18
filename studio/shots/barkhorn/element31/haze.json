@@ -36,7 +36,9 @@
     "displace": 0.035,
     "res": "4k",
     "cells": 700,
-    "relief": null
+    "relief": null,
+    "tint": "#B4A595",
+    "tint_mix": 0.35
    },
    {
     "kind": "kit",
@@ -125,7 +127,7 @@
      "island_tree_02",
      "island_tree_03"
     ],
-    "count": 28,
+    "count": 14,
     "area": [
      -420.0,
      780.0,
@@ -134,8 +136,8 @@
     ],
     "avoid": [],
     "scale": [
-     0.8,
-     1.25
+     0.6,
+     1.5
     ],
     "seed": 4,
     "res": "1k"
@@ -146,20 +148,20 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    4.0,
-    3.0
+    8.0,
+    4.0
    ],
    "orbit": {
     "azimuth_deg": -10,
-    "elevation_deg": 25,
-    "distance_m": 3.0
+    "elevation_deg": 12,
+    "distance_m": 5.0
    },
    "target": [
     0.0,
     0.0,
     0.7
    ],
-   "irradiance": 2.0,
+   "irradiance": 1.2,
    "color": "#E2D8F4",
    "receivers": [
     "[!p]*",
@@ -169,8 +171,8 @@
   "glow": {
    "type": "area",
    "size_m": [
-    2.0,
-    1.2
+    4.0,
+    2.0
    ],
    "orbit": {
     "azimuth_deg": 178,
@@ -182,12 +184,37 @@
     0.0,
     0.8
    ],
-   "irradiance": 2.0,
+   "irradiance": 0.6,
    "color": "#FFC8A0",
    "camera": false,
    "receivers": [
     "[!p]*",
     "po*"
+   ]
+  },
+  "spill": {
+   "type": "area",
+   "size_m": [
+    0.8,
+    0.5
+   ],
+   "position": [
+    0.0,
+    -0.6,
+    0.3
+   ],
+   "target": [
+    0.0,
+    -1.0,
+    0.0
+   ],
+   "irradiance": 0.35,
+   "color": "#9A7CD8",
+   "camera": false,
+   "specular": 0,
+   "transmission": false,
+   "receivers": [
+    "prop*"
    ]
   }
  },
@@ -235,7 +262,7 @@
   "kind": "hdri",
   "polyhaven": "kiara_9_dusk",
   "rotation_deg": -128.0,
-  "strength": 0.12,
+  "strength": 0.1,
   "res": "4k"
  },
  "sun": {
@@ -254,9 +281,9 @@
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.4,
+   "bloom": 0.12,
    "bloom_px": 40,
-   "bloom_threshold": 0.85,
+   "bloom_threshold": 0.92,
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
@@ -266,13 +293,13 @@
  "haze": {
   "box_m": [
    -8000.0,
-   25.0,
+   12.0,
    0.0,
    8000.0,
    8000.0,
    40.0
   ],
-  "density": 0.0009,
+  "density": 0.0012,
   "anisotropy": 0.3,
   "color": "#B8A4D8"
  }

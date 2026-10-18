@@ -23,7 +23,7 @@ def props():
     P = [
         # the field's dry soil, displaced, under the near rows and the path
         piece('ground', texture='farm_soil', size=[14.0, 22.0], position=[0.0, 5.0, 0.0], displace=0.035, res='4k',
-              cells=700, relief=None),
+              cells=700, relief=None, tint='#B4A595', tint_mix=0.35),
         # clods, pebbles and dry clippings on the path, the litter of a harvest
         ext('litter', area=[-0.5, -9.0, 0.5, 6.0], clods=450, pebbles=160, straws=400, avoid=[[0.0, 0.0, 0.42]], seed=3,
             texture='farm_soil'),
@@ -34,7 +34,7 @@ def props():
             clear=[[0.0, 0.0, 0.62]], seed=7,
             colors={'flower': '#7A5FB0', 'flower2': '#9A7CC4', 'leaf': '#6B775A', 'leaf2': '#8C9478', 'stem': '#5E6B47'}),
         # a lone oak out in the field, and a line of them along a far track: the plateau's own landmarks
-        scatter(['island_tree_01', 'island_tree_02', 'island_tree_03'], 28, [-420.0, 780.0, 420.0, 830.0], avoid=(), scale=(0.8, 1.25),
+        scatter(['island_tree_01', 'island_tree_02', 'island_tree_03'], 14, [-420.0, 780.0, 420.0, 830.0], avoid=(), scale=(0.6, 1.5),
                 seed=4, res='1k'),
     ]
     return P
@@ -43,22 +43,25 @@ def props():
 def lights():
     return {
         # a white card under the lens throws a little of the eastern sky back onto the speaker's face, as a photographer would
-        'bounce': {'type': 'area', 'size_m': [4.0, 3.0], 'orbit': {'azimuth_deg': -10, 'elevation_deg': 25, 'distance_m': 3.0},
-                   'target': [0.0, 0.0, 0.7], 'irradiance': 2.0, 'color': '#E2D8F4', 'receivers': SPEAKER},
+        'bounce': {'type': 'area', 'size_m': [8.0, 4.0], 'orbit': {'azimuth_deg': -10, 'elevation_deg': 12, 'distance_m': 5.0},
+                   'target': [0.0, 0.0, 0.7], 'irradiance': 1.2, 'color': '#E2D8F4', 'receivers': SPEAKER},
         # the afterglow behind, through the acrylic and along its edges
-        'glow': {'type': 'area', 'size_m': [2.0, 1.2], 'orbit': {'azimuth_deg': 178, 'elevation_deg': 2, 'distance_m': 4.0},
-                 'target': [0.0, 0.0, 0.8], 'irradiance': 2.0, 'color': '#FFC8A0', 'camera': False, 'receivers': SPEAKER},
+        'glow': {'type': 'area', 'size_m': [4.0, 2.0], 'orbit': {'azimuth_deg': 178, 'elevation_deg': 2, 'distance_m': 4.0},
+                 'target': [0.0, 0.0, 0.8], 'irradiance': 0.6, 'color': '#FFC8A0', 'camera': False, 'receivers': SPEAKER},
+        # the afterglow that came through the acrylic, a faint violet pool on the path in front of its feet
+        'spill': {'type': 'area', 'size_m': [0.8, 0.5], 'position': [0.0, -0.6, 0.3], 'target': [0.0, -1.0, 0.0], 'irradiance': 0.35,
+                  'color': '#9A7CD8', 'camera': False, 'specular': 0, 'transmission': False, 'receivers': ['prop*']},
     }
 
 
 def shot():
     cam = camera(height=1.0, distance=9.5, azimuth=0.0, lens=85, target=(0.0, 0.0, 0.66), fstop=2.8, shift_y=0.06)
     cam['clip_end'] = 20000.0                      # the hills are kilometres off
-    return frame('haze', props(), cam, sky(SKY, ROT, strength=0.12, res='4k'), 'barkhorn, Haze, lavender at dusk', exposure=0.35,
+    return frame('haze', props(), cam, sky(SKY, ROT, strength=0.1, res='4k'), 'barkhorn, Haze, lavender at dusk', exposure=0.35,
                  lights=lights(), sun=dict(SUN),
-                 haze={'box_m': [-8000.0, 25.0, 0.0, 8000.0, 8000.0, 40.0], 'density': 0.0009, 'anisotropy': 0.3,
+                 haze={'box_m': [-8000.0, 12.0, 0.0, 8000.0, 8000.0, 40.0], 'density': 0.0012, 'anisotropy': 0.3,
                        'color': '#B8A4D8'},
-                 fin=finish(contrast=0.25, clarity=0.04, bloom=0.4, bloom_px=40, threshold=0.85, vignette=0.1),
+                 fin=finish(contrast=0.25, clarity=0.04, bloom=0.12, bloom_px=40, threshold=0.92, vignette=0.1),
                  rotate_z=18.0, position=(0.0, 0.0, -0.025), samples=512,
                  white_balance=(5600, 10))                  # daylight balance: the dusk stays warm, the violet stays true
 
