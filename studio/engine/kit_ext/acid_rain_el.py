@@ -459,3 +459,22 @@ def rocks(bpy, name, p, kit):
                 _desaturate(m, p.get('desaturate', 0.7))
     _wet(meshes, p)
     return made + meshes
+
+
+def haze_box(bpy, name, p, kit):
+    """A second box of haze (the shot's `haze` is one): `box_m` [x0, y0, z0, x1, y1, z1], `density`, `anisotropy`,
+    `color`. Two boxes let the far hills sit deep in haze while the low sun reaches the set along a path kept clear of
+    the far box (one box deep enough for the hills put 500 m of haze between the sun and the speaker)."""
+    x0, y0, z0, x1, y1, z1 = p['box_m']
+    bm = bmesh.new()
+    geom = bmesh.ops.create_cube(bm, size=1.0)
+    for v in geom['verts']:
+        v.co = Vector((x0 + (v.co.x + 0.5) * (x1 - x0), y0 + (v.co.y + 0.5) * (y1 - y0), z0 + (v.co.z + 0.5) * (z1 - z0)))
+    m = bpy.data.materials.new(f'{name}-haze'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); vs = nt.nodes.new('ShaderNodeVolumeScatter')
+    vs.inputs['Density'].default_value = p.get('density', 0.01); vs.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.4)
+    h = p.get('color', '#FFFFFF').lstrip('#')
+    c = [int(h[i:i + 2], 16) / 255.0 for i in (0, 2, 4)]
+    vs.inputs['Color'].default_value = (*[((x + 0.055) / 1.055) ** 2.4 if x > 0.04045 else x / 12.92 for x in c], 1.0)
+    nt.links.new(vs.outputs['Volume'], out.inputs['Volume'])
+    return [_object(bpy, name, bm, m, smooth=False)]
