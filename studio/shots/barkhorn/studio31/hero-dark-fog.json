@@ -55,8 +55,8 @@
   "kind": "none"
  },
  "render": {
-  "samples": 80,
-  "adaptive": 0.015,
+  "samples": 128,
+  "adaptive": 0.01,
   "denoise": true,
   "clamp": 4,
   "bounces": 16,

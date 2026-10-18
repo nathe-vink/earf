@@ -26,7 +26,7 @@ COLOURS = [('ember', 'cloud-red'), ('dust', 'cloud-orange'), ('acid', 'cloud-amb
 FLAVOUR = dict(COLOURS)
 LIGHT_ONES = ['ember', 'ice', 'fog']
 
-RENDER = {'samples': 80, 'adaptive': 0.015, 'denoise': True, 'clamp': 4, 'bounces': 16,
+RENDER = {'samples': 128, 'adaptive': 0.01, 'denoise': True, 'clamp': 4, 'bounces': 16,
           'view': 'Khronos PBR Neutral', 'exposure': 0.0, 'white_balance_k': 5800, 'white_balance_tint': 0.0}
 FINISH = {'enabled': True, 'white_in': 235, 'white_out': 238, 'contrast': 0.10, 'clarity': 0.03,
           'sharpen': 0.12, 'sharpen_px': 0.7}
@@ -126,10 +126,10 @@ def bright(name):
     mirrors a gradient and not black."""
     # cover off: the duel against h7 (round 31c) read the cover's flat disc as a placeholder
     s = {'title': f'barkhorn, {name}, bright field', 'size': [2560, 1440], 'product': product(name),
-         'set': {'kind': 'sweep', 'color': '#F3F1EE', 'width': 44.0, 'front': 20.0, 'depth': 6.0, 'radius': 5.0, 'height': 9.0,
-                 'contact': {'strength': 0.8, 'distance_m': 0.35, 'core_strength': 0.9, 'core_distance_m': 0.04},
-                 'flags': [{'center_m': [-1.4, 0.6, 1.2], 'size_m': [1.2, 1.4], 'normal': [1.0, -0.2, 0.0], 'glossy': True},
-                           {'center_m': [1.0, 2.1, 1.15], 'size_m': [0.9, 2.0], 'normal': [-0.45, -0.89, 0.0], 'glossy': True}],
+         'set': {'kind': 'sweep', 'color': '#F3F1EE', 'width': 52.0, 'front': 20.0, 'depth': 6.0, 'radius': 5.0, 'height': 9.0,
+                 'contact': {'strength': 0.8, 'distance_m': 0.7, 'core_strength': 0.9, 'core_distance_m': 0.08},
+                 'flags': [{'center_m': [-1.4, 0.6, 1.2], 'size_m': [1.2, 1.4], 'normal': [1.0, -0.2, 0.0], 'glossy': False},
+                           {'center_m': [1.35, 2.1, 1.2], 'size_m': [0.3, 2.4], 'normal': [-0.45, -0.89, 0.0], 'glossy': True}],
                  'bounces': [{'center_m': [0.4, -2.2, 0.6], 'size_m': [2.0, 1.0], 'normal': [-0.15, 0.95, 0.1]}]},
          'camera': dict(CAM34), 'sky': {'kind': 'gradient', 'zenith': '#F2F1EF', 'horizon': '#EEEDEB', 'ground': '#CFCCC8',
                                        'strength': 0.6, 'visible': False},
@@ -138,22 +138,22 @@ def bright(name):
     s['lights'] = {
         # the background: two broad lamps on the cove behind, out of frame, lifting it to a clean high-key white
         'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 3.2, 3.4], 'target': [-1.5, 6.0, 1.2],
-                    'irradiance': 3.0, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
+                    'irradiance': 3.6, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
         'bg-right': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [2.6, 3.2, 3.4], 'target': [-0.9, 6.0, 1.0],
-                     'irradiance': 4.2, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
+                     'irradiance': 3.6, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
         # a big scrim overhead, a little forward: the top and the horn's crown
         'scrim': {'type': 'area', 'size_m': [2.0, 1.6], 'position': [0.1, 0.4, 2.8], 'target': [0.0, 0.0, 0.8],
                   'irradiance': 1.6, 'color': '#FFFAF4', 'camera': False},
         # a soft frontal key from the camera's side, low in strength: the faces carry their colour, not a white sheet
-        'key': {'type': 'area', 'size_m': [1.6, 1.6], 'orbit': {'azimuth_deg': -30, 'elevation_deg': 38, 'distance_m': 4.5},
-                'target': [0.0, 0.0, 0.6], 'irradiance': 3.2, 'color': '#FFFAF4', 'camera': False, 'specular': 1.0},
+        'key': {'type': 'area', 'size_m': [1.2, 1.2], 'orbit': {'azimuth_deg': -30, 'elevation_deg': 38, 'distance_m': 4.5},
+                'target': [0.0, 0.0, 0.6], 'irradiance': 4.0, 'color': '#FFFAF4', 'camera': False, 'specular': 1.0},
         # a graduated strip the front face mirrors, so it reads as polished cast acrylic
         'front-strip': {'type': 'panel', 'size_m': [0.4, 2.0], 'orbit': {'azimuth_deg': -25, 'elevation_deg': 22, 'distance_m': 3.0},
                         'target': [0.0, 0.0, 0.6], 'strength': 4.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
                         'ramp': {'axis': 'z', 'at_m': [0.2, 1.8], 'values': [0.0, 1.0]}},
         # a smaller, harder lamp high behind, so the tinted acrylic throws its colour forward onto the seamless
-        'back-top': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 8, 'distance_m': 2.5},
-                     'target': [0.0, 0.0, 0.45], 'irradiance': 10.0, 'color': '#FFF8F0', 'camera': False},
+        'back-top': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 5, 'distance_m': 2.5},
+                     'target': [0.0, 0.0, 0.45], 'irradiance': 14.0, 'color': '#FFF8F0', 'camera': False},
     }
     return s
 

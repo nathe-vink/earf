@@ -109,16 +109,16 @@
  "set": {
   "kind": "sweep",
   "color": "#F3F1EE",
-  "width": 44.0,
+  "width": 52.0,
   "front": 20.0,
   "depth": 6.0,
   "radius": 5.0,
   "height": 9.0,
   "contact": {
    "strength": 0.8,
-   "distance_m": 0.35,
+   "distance_m": 0.7,
    "core_strength": 0.9,
-   "core_distance_m": 0.04
+   "core_distance_m": 0.08
   },
   "flags": [],
   "bounces": [
@@ -163,8 +163,8 @@
   "visible": false
  },
  "render": {
-  "samples": 80,
-  "adaptive": 0.015,
+  "samples": 128,
+  "adaptive": 0.01,
   "denoise": true,
   "clamp": 4,
   "bounces": 16,
@@ -204,7 +204,7 @@
     6.0,
     1.0
    ],
-   "irradiance": 3.0,
+   "irradiance": 3.6,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -225,7 +225,7 @@
     6.0,
     1.0
    ],
-   "irradiance": 4.2,
+   "irradiance": 3.6,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -261,7 +261,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 3.2,
+   "irradiance": 4.0,
    "color": "#FFFAF4",
    "camera": false,
    "specular": 1.0,
@@ -323,7 +323,7 @@
     0.0,
     0.45
    ],
-   "irradiance": 10.0,
+   "irradiance": 14.0,
    "color": "#FFF8F0",
    "camera": false,
    "position": [
