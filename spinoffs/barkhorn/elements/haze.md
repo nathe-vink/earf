@@ -95,3 +95,19 @@ not yet as a photograph a luxury house would run. What holds it back, by the cri
 What I'd try next: a sky with the sun itself in frame and a few degrees higher (so the front gets real skylight), a
 photographed lavender scan if one can be had under CC0, a speaker-sized silk scrim between the sun and the speaker, and
 the camera turned 20 degrees so the sun rims one side rather than sitting behind.
+
+## The finals
+
+- `renders/2026-10-18/barkhorn/element31/haze.png` (2400 x 1600) and `haze-portrait.png` (1600 x 2000), 512 samples,
+  denoised; 27.5 and 21 minutes on 4 CPU cores. The portrait: the same low eye (0.55 m), 6 m, 85 mm, shift_y 0.07.
+- A blind pass on the landscape final: **6.0** (iterate; 7.8 if fixed), as its proof. It names the same limits: the
+  horn pod blown to milky pink (24% clipped) with the waveguide a dark blob through it; at 0.55 m the rows hide the hills
+  (the haze ranges never show); the sun a clipped disc; the cabinet front-filled against a backlit world; a dark,
+  blobby path; the lavender cooler than the sky. Its first changes (the back light 9 to 3.5, the camera up to 1.15 m on
+  100 mm so the hills show) pull against what the earlier passes asked for (the back light raised to make the acrylic
+  glow, the camera lowered so the horizon cleared the horn): the light behind the speaker can't both glow the cabinet
+  and spare the pod, which is why the passes oscillated.
+
+Software and assets: bpy 5.0.1 with numpy 1, pillow and scipy (< 1.15) on python3.11; Poly Haven (CC0)
+`the_sky_is_on_fire`, `kiara_9_dusk` (the afterglow concept), `farm_soil`, `aerial_grass_rock`, `island_tree_01..03`,
+fetched into the ignored asset cache.
