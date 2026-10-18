@@ -128,6 +128,7 @@ KNOBS = [
     ('set.contact.core_strength', '0 to 0.9', (0, 0.9), 'sweep: a second contact term, tight, multiplied with the first: the dark line where the base meets the floor (0 off)'),
     ('set.contact.core_distance_m', 'm', (0.003, 0.05), 'sweep: how far the tight contact term reaches (0.025: the core within about a centimetre of the base)'),
     ('set.height', 'm', (1, 10), 'sweep: the back wall\'s height'),
+    ('set.cast_shadow', 'bool', None, 'sweep: false and the paper casts no shadow, so a sun from behind the wall lights the floor in front of it (a distant key with parallel shadows)'),
     ('set.size', 'm [w, d, h]', None, 'room: width (x), depth (y), height'),
     ('set.center', 'm [x, y]', None, 'room: the floor\'s centre'),
     ('set.floor.*', 'see materials oak', None, 'room: the floor\'s material overrides'),
