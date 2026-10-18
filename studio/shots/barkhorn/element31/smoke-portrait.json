@@ -23,7 +23,7 @@
    {
     "kind": "kit",
     "shape": "ground",
-    "texture": "forest_leaves_04",
+    "texture": "forrest_ground_03",
     "size": [
      40.0,
      40.0
@@ -33,32 +33,29 @@
      10.0,
      0.0
     ],
-    "displace": 0.02,
-    "relief": null,
-    "res": "2k"
+    "displace": 0.04,
+    "relief": 0.12,
+    "res": "2k",
+    "tint": "#5A4330",
+    "tint_mix": 0.25
    },
    {
     "kind": "kit",
     "shape": "scatter_assets",
     "models": [
-     "pine_roots"
+     "dry_branches_medium_01"
     ],
-    "count": 3,
+    "count": 5,
     "area": [
-     -2.5,
-     0.5,
+     -5.0,
      3.0,
-     3.5
+     7.0,
+     12.0
     ],
     "avoid": [
      [
       0.0,
       0.0,
-      1.2
-     ],
-     [
-      0.6,
-      -2.0,
       1.5
      ]
     ],
@@ -75,27 +72,27 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     2.5,
-     7.5,
+     0.0,
+     9.5,
      0.0
     ],
     "size": [
-     20.0,
-     12.0,
-     6.0
+     40.0,
+     15.0,
+     14.0
     ],
-    "density": 0.22,
+    "density": 0.14,
     "seed": 1,
-    "scale": 3.0,
-    "cut": 0.55,
-    "soft": 0.3,
+    "scale": 1.6,
+    "cut": 0.58,
+    "soft": 0.14,
     "anisotropy": 0.85,
     "fade": [
      0.12,
      0.2,
      0.55
     ],
-    "floor": 0.012
+    "floor": 0.004
    },
    {
     "kind": "kit",
@@ -530,31 +527,31 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    1.6,
-    1.6
+    2.4,
+    2.4
    ],
    "orbit": {
-    "azimuth_deg": -30,
-    "elevation_deg": 8,
-    "distance_m": 2.2
+    "azimuth_deg": -25,
+    "elevation_deg": 12,
+    "distance_m": 2.0
    },
    "target": [
     0.0,
     0.0,
     0.6
    ],
-   "irradiance": 0.35,
+   "irradiance": 1.4,
    "color": "#C89A6A"
   },
   "kicker": {
    "type": "area",
    "size_m": [
-    0.5,
-    2.0
+    0.6,
+    2.4
    ],
    "orbit": {
-    "azimuth_deg": -150,
-    "elevation_deg": 10,
+    "azimuth_deg": -160,
+    "elevation_deg": 14,
     "distance_m": 3.0
    },
    "target": [
@@ -562,7 +559,26 @@
     0.0,
     0.8
    ],
-   "irradiance": 6.0,
+   "irradiance": 14.0,
+   "color": "#FFB978"
+  },
+  "kicker_r": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    2.4
+   ],
+   "orbit": {
+    "azimuth_deg": 150,
+    "elevation_deg": 14,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 10.0,
    "color": "#FFB978"
   }
  },
@@ -574,8 +590,6 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
-  "white_balance_k": 5600,
-  "white_balance_tint": 3.0,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Smoke, woodsmoke at dawn (4:5)",
@@ -610,7 +624,7 @@
   "kind": "hdri",
   "polyhaven": "misty_pines",
   "rotation_deg": 0.0,
-  "strength": 0.12,
+  "strength": 0.04,
   "res": "4k"
  },
  "sun": {
@@ -625,7 +639,7 @@
   "white_in": 240,
   "white_out": 240,
   "contrast": 0.04,
-  "clarity": 0.1,
+  "clarity": 0.03,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
@@ -635,7 +649,7 @@
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.15
+   "vignette": 0.25
   }
  }
 }

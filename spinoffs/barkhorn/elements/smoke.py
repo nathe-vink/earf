@@ -39,21 +39,23 @@ def trees(n=46, seed=3):
 
 
 def shot():
-    props = [ground('forest_leaves_04', size=(40.0, 40.0), position=(0.0, 10.0, 0.0), displace=0.02, res='2k'),
-             scatter(['pine_roots'], 3, [-2.5, 0.5, 3.0, 3.5], avoid=[(0.0, 0.0, 1.2), (0.6, -2.0, 1.5)], seed=4, res='1k'),
-             smoke((2.5, 7.5, 0.0), (20.0, 12.0, 6.0), 0.22, 1, scale=3.0, cut=0.55, soft=0.3, anisotropy=0.85,
-                   fade=[0.12, 0.2, 0.55], floor=0.012)]
+    props = [ground('forrest_ground_03', size=(40.0, 40.0), position=(0.0, 10.0, 0.0), displace=0.04, relief=0.12, res='2k',
+                    tint='#5A4330', tint_mix=0.25),
+             scatter(['dry_branches_medium_01'], 5, [-5.0, 3.0, 7.0, 12.0], avoid=[(0.0, 0.0, 1.5)], seed=4, res='1k'),
+             smoke((0.0, 9.5, 0.0), (40.0, 15.0, 14.0), 0.14, 1, scale=1.6, cut=0.58, soft=0.14, anisotropy=0.85,
+                   fade=[0.12, 0.2, 0.55], floor=0.004)]
     props += trees()
     cam = camera(height=0.8, distance=7.2, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=0.14)
     lights = {
         # the sunlit litter in front of the speaker bounces warm light up into its face: a low, broad source
-        'bounce': area(-30, 8, 2.2, 0.35, '#C89A6A', (1.6, 1.6), (0.0, 0.0, 0.6)),
+        'bounce': area(-25, 12, 2.0, 1.4, '#C89A6A', (2.4, 2.4), (0.0, 0.0, 0.6)),
         # the sun's light off the smoke behind-left, a thin warm rim down the cabinet's left edge
-        'kicker': area(-150, 10, 3.0, 6.0, '#FFB978', (0.5, 2.0), (0.0, 0.0, 0.8)),
+        'kicker': area(-160, 14, 3.0, 14.0, '#FFB978', (0.6, 2.4), (0.0, 0.0, 0.8)),
+        'kicker_r': area(150, 14, 3.0, 10.0, '#FFB978', (0.6, 2.4), (0.0, 0.0, 0.8)),
     }
-    return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.12), 'barkhorn, Smoke, woodsmoke at dawn',
+    return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.04), 'barkhorn, Smoke, woodsmoke at dawn',
                  sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.006), samples=512,
-                 fin=finish(contrast=0.04, clarity=0.10, bloom=0.08, bloom_px=40, threshold=0.85, vignette=0.15))
+                 fin=finish(contrast=0.04, clarity=0.03, bloom=0.08, bloom_px=40, threshold=0.85, vignette=0.25))
 
 
 def portrait():

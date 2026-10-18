@@ -104,7 +104,7 @@ def trunks(bpy, name, p, kit):
         for j in range(rings + 1):
             t = j / rings
             z = H * t ** 1.35                                      # rings closer near the root, where the flare is
-            r = r0 * (1.0 - 0.55 * z / H) * (1.0 + 0.55 * math.exp(-z / (r0 * 1.6)))
+            r = r0 * (1.0 - 0.55 * z / H) * (1.0 + 0.8 * math.exp(-z / (r0 * 1.4)))
             sway = math.tan(math.radians(lean)) * z
             row = []
             for i in range(sides):
