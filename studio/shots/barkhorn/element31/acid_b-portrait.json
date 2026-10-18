@@ -262,9 +262,9 @@
      -3.0,
      165.0,
      340.0,
-     40.0
+     13.0
     ],
-    "density": 0.0035,
+    "density": 0.005,
     "anisotropy": 0.45,
     "color": "#C8CC6A"
    },
@@ -581,7 +581,7 @@
      ],
      "clip_end_m": 1500.0
     },
-    "count": 160,
+    "count": 50,
     "near": 1.0,
     "far": 3.0,
     "length": [
@@ -601,8 +601,8 @@
      30.0
     ],
     "opacity": [
-     0.3,
-     0.6
+     0.15,
+     0.35
     ],
     "scatter": 0.7,
     "rough": 0.25,
@@ -758,7 +758,7 @@
   "view": "AgX",
   "exposure": -0.35,
   "white_balance_k": 6800,
-  "white_balance_tint": -28.0,
+  "white_balance_tint": -20.0,
   "look": "AgX - Medium High Contrast"
  },
  "title": "barkhorn Acid, acid rain (4:5)",

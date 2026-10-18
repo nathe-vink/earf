@@ -46,7 +46,7 @@ def props(cam):
         ext('rock', model='moon_rock_01', position=[-4.2, 10.0, -0.05], rotate=[0, 0, 70], scale=1.4, darken=0.8,
             film_rough=0.12),
         # the far haze, deep, over the hills and the far field but off the sun's path to the set
-        ext('haze_box', box_m=[-160.0, 90.0, -3.0, 165.0, 340.0, 40.0], density=0.0035, anisotropy=0.45, color='#C8CC6A'),
+        ext('haze_box', box_m=[-160.0, 90.0, -3.0, 165.0, 340.0, 13.0], density=0.005, anisotropy=0.45, color='#C8CC6A'),
         # loose blocks of lava over the field, thinning toward the hills
         ext('rocks', models=['rock_09', 'moon_rock_01', 'moon_rock_04', 'rock_07'], count=160, area=[-22.0, 3.0, 26.0, 45.0],
             avoid=[[0.0, 0.0, 3.5]] + SUN_LINE, scale=[0.25, 1.4], z=-0.08, seed=8, darken=0.75, film_rough=0.35, tilt_deg=15.0),
@@ -60,8 +60,8 @@ def props(cam):
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.25, 0.6], scatter=0.9, rough=0.25, clear=0.25,
             avoid=[[0.0, 0.0, 0.4]], seed=3),
         # a few drops close to the lens, far out of focus
-        ext('rain', camera=cam, count=160, near=1.0, far=3.0, length=[0.06, 0.15], radius=[0.0006, 0.001],
-            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.3, 0.6], scatter=0.7, rough=0.25, seed=13),
+        ext('rain', camera=cam, count=50, near=1.0, far=3.0, length=[0.06, 0.15], radius=[0.0006, 0.001],
+            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.15, 0.35], scatter=0.7, rough=0.25, seed=13),
         # and the curtain beyond, too fine to count
         ext('rain', camera=cam, count=150000, near=15.0, far=120.0, length=[0.08, 0.16], radius=[0.0006, 0.0009],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.15, scatter=0.9, rough=0.25, clear=0.3, seed=23),
@@ -83,7 +83,7 @@ def shot():
         'fill': C.area(30, 8, 3.5, 0.2, '#F1E6B8', size=(1.2, 1.2)),
     }
     s = C.shot(NAME, props(cam), cam, C.sky(hdri, rot, strength=strength, res='4k'), 'barkhorn Acid, acid rain',
-               lights=lights, sun=sun, white_balance=(6800, -28.0), rotate_z=16.0, exposure=-0.35, look='AgX - Medium High Contrast',
+               lights=lights, sun=sun, white_balance=(6800, -20.0), rotate_z=16.0, exposure=-0.35, look='AgX - Medium High Contrast',
                haze={'density': 0.0015, 'anisotropy': 0.45, 'color': '#C8CC6A', 'box_m': [-200, -15, -2, 200, 90, 22]},
                fin=C.finish(contrast=0.22, clarity=0.07, sharpen=0.25, vignette=0.14))
     return s
