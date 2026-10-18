@@ -1150,95 +1150,250 @@ def tube_along(pts, d):
 
 
 def amp_plate_pieces(amp, cx, D, az):
-    """Round 30 (the owner: "We probably also need to have the back of the speakers, like the hypex module, and the
-    interior, look as real as possible"): the FA122's plate as a photograph would show it, for the render only (the
-    part's solid stays the plain plate and module, for the drawings and the checks). The black anodised plate, 3 thick,
-    held by ten screws in its 12 margin; the inputs the retailers list (analogue: an XLR in, its XLR link out, an RCA in;
-    digital: AES in and out on XLRs, S/PDIF coaxial in and out, Toslink in; USB for the filter software), a status light,
-    the IEC C14 mains inlet beside its rocker switch, and the plate's white print beside each. Their places are
-    provisional: Hypex's drawing (hypex.nl) could not be reached from here, so they follow plate amplifiers generally,
-    the analogue pair above the digital, the small jacks in a row, the mains at the foot. Returns {piece: (solid,
-    finish)}."""
-    from build123d import Compound
+    """The FA122's plate as it is (round 31: Hypex's drawing and photographs, read once hypex.nl could be reached; round
+    30 had placed the connectors provisionally, the XLRs mirrored), for the render only: the part's solid stays the
+    plain plate and module, for the drawings and the checks. The black anodised plate, 120 x 315 x 3, R3 corners, ten
+    4.5 holes 5 in from its edges (110 apart across; 77.5, 75, 75, 77.5 down), each with its pan head into the back.
+    From the top: five vent slots; the XLRs in two rows, the analogue in (a socket, its PUSH latch above) and its link
+    out, the AES in and its link out below them turned half round (the latch below); beside them the RCAs in a column
+    (the unbalanced left and right in, the S/PDIF in and out), the mini-USB and the Toslink, and the four status lights
+    and the Select button with their labels on the slant; the grey label strips between the rows; Ncore's mark; the
+    screws that hold the module; Hypex's name and FA122; the safety marks and the caution; the rating sticker and a
+    blank field; five more vent slots; and the mains entry, the IEC C14 inlet turned on its side beside its rocker, the
+    ratings under it. Every place is measured off Hypex's photograph of the plate square on (3.25 px a mm, its outline
+    and holes agreeing with the drawing to 0.3), as (u, v) from the plate's middle: u = 60 - x and v = 157.5 - y, x and
+    y in from its top left as one faces it (so +u is to one's left: the plate faces the back, +y). Returns {piece:
+    (solid, finish)}."""
+    from build123d import Align, Compound, Plane, Text, extrude
+    FONT, BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
     at = lambda u, v: (cx + u, az + v)
     rr = lambda w, h, r, u, v: rounded_rect(w, h, r, cx=cx + u, cy=az + v)
     slab = lambda outline, y0, y1: prism(outline, 'y', y0, y1)
     hole = lambda u, v, d, y0, y1: cyl('y', at(u, v), d, y0, y1)
-    hexagon = lambda u, v, af: [(cx + u + af / math.sqrt(3) * math.cos(math.radians(30 + 60 * k)),
-                                 az + v + af / math.sqrt(3) * math.sin(math.radians(30 + 60 * k))) for k in range(6)]
-    XLR = [(-27, 112, 'f'), (27, 112, 'm'), (-27, 70, 'f'), (27, 70, 'm')]     # in and link; AES in and out
-    PINS = [(-4.8, 2.0), (4.8, 2.0), (0.0, -5.2)]
-    RCA = [(-39, 30), (-13, 30), (13, 30)]                                      # analogue in; S/PDIF in and out
-    OPT, USB, LED, IEC, SW = (39, 30), (-27, -22), (27, -22), (-14, -115), (30, -115)
-    SCREWS = [(u, v) for u in (-54, 54) for v in (-151.5, -50.5, 50.5, 151.5)] + [(0, -151.5), (0, 151.5)]
-    pw, ph = amp['plate_w'], amp['plate_h']
+    face = lambda y: Plane(origin=(0, y, 0), x_dir=(-1, 0, 0), z_dir=(0, 1, 0))
 
-    plate = slab(rr(pw, ph, 2.0, 0, 0), D - 3.0, D)
-    for u, v, _ in XLR:
-        plate -= hole(u, v, 21.0, D - 4, D + 1)
-    for u, v in RCA:
-        plate -= hole(u, v, 9.6, D - 4, D + 1)
-    for (w, h), (u, v) in (((9.6, 10.6), OPT), ((9.0, 6.0), USB), ((27.6, 20.2), IEC), ((13.2, 19.4), SW)):
+    def text(s, u, v, w=None, size=2.4, rot=0.0, bold=False, y0=D, h=0.05, align=(Align.CENTER, Align.CENTER)):
+        """Print on the plate's face, read from behind: centred on (u, v) unless `align` says otherwise, `w` wide (the
+        size fitted to it) or `size` mm tall, turned `rot` degrees as one reads it."""
+        fp = BOLD if bold else FONT
+        if w:
+            probe = Text(s, font_size=10.0, font_path=fp)
+            size = 10.0 * w / probe.bounding_box().size.X
+        sk = Text(s, font_size=size, font_path=fp, align=align, rotation=rot)
+        pl = Plane(origin=(cx + u, y0, az + v), x_dir=(-1, 0, 0), z_dir=(0, 1, 0))
+        return extrude(pl * sk, amount=h)
+
+    def line(points, wd, y0=D, h=0.05):
+        """A printed stroke `wd` wide through [(u, v), ...]."""
+        out = []
+        for (u0, v0), (u1, v1) in zip(points, points[1:]):
+            L = math.hypot(u1 - u0, v1 - v0); nu, nv = -(v1 - v0) / L * wd / 2, (u1 - u0) / L * wd / 2
+            out.append(slab([(cx + u0 + nu, az + v0 + nv), (cx + u1 + nu, az + v1 + nv),
+                             (cx + u1 - nu, az + v1 - nv), (cx + u0 - nu, az + v0 - nv)], y0, y0 + h))
+        return out
+
+    def ring(u, v, d, wd, y0=D, h=0.05):
+        return hole(u, v, d, y0, y0 + h) - hole(u, v, d - 2 * wd, y0 - 1, y0 + h + 1)
+
+    def frame(w, ht, r, u, v, wd, y0=D, h=0.05):
+        return slab(rr(w, ht, r, u, v), y0, y0 + h) - slab(rr(w - 2 * wd, ht - 2 * wd, max(r - wd, 0.2), u, v), y0 - 1, y0 + h + 1)
+
+    pw, ph = amp['plate_w'], amp['plate_h']            # 120 x 315
+    XLR = [(32.9, 121.15, 'f', 0), (9.8, 121.15, 'm', 0), (32.9, 85.75, 'f', 180), (9.8, 85.75, 'm', 180)]
+    RCA = [(-13.85, 128.4, 'rca-white'), (-13.85, 115.8, 'rca-red'), (-13.85, 91.7, 'rca-orange'), (-13.85, 77.5, 'rca-orange')]
+    USB, OPT, SELECT = (-26.5, 110.8), (-28.8, 92.5), (-41.9, 112.0)
+    LEDS = [(-34.2, 126.5, 'led-red'), (-34.2, 121.5, 'led-on'), (-34.2, 116.2, 'led-green'), (-34.2, 111.2, 'led-green')]
+    VENTS = [(u, v) for v in (139.9, -109.1) for u in (35.4, 17.7, 0.0, -17.7, -35.4)]
+    MOUNT = [(u, v) for u in (55.0, -55.0) for v in (152.5, 75.0, 0.0, -75.0, -152.5)]
+    TORX = [(-22.7, 121.9), (-4.6, 85.2), (-28.8, 82.1), (39.3, 62.2), (-39.0, 62.2), (-17.0, 31.7), (39.3, 0.2), (-39.0, 1.1),
+            (3.2, -32.5), (-39.0, -40.0), (39.3, -45.1), (39.2, -100.9), (-39.2, -100.9), (17.7, -129.2)]
+    PEM, C14, ROCKER = (-22.9, -129.2), (-13.85, -128.9), (-32.9, -129.55)
+
+    # the plate, its holes and slots
+    plate = slab(rr(pw, ph, 3.0, 0, 0), D - 3.0, D)
+    for u, v in MOUNT:
+        plate -= hole(u, v, 4.5, D - 4, D + 1)
+    for u, v in VENTS:
+        plate -= slab(rr(16.2, 3.8, 1.9, u, v), D - 4, D + 1)
+    for u, v, _, _ in XLR:
+        plate -= hole(u, v, 22.0, D - 4, D + 1)
+    for u, v, _ in RCA:
+        plate -= hole(u, v, 10.0, D - 4, D + 1)
+    for (w, h), (u, v) in (((9.6, 8.8), OPT), ((7.2, 3.8), USB), ((41.2, 29.8), PEM)):
         plate -= slab(rr(w, h, 0.8, u, v), D - 4, D + 1)
-    plate -= hole(*LED, 3.4, D - 4, D + 1)
+    for u, v, _ in LEDS:
+        plate -= hole(u, v, 3.2, D - 4, D + 1)
+    plate -= hole(*SELECT, 4.4, D - 4, D + 1)
     module = box(cx - amp['cutout_w'] / 2 + 4, D - amp['depth'], az - amp['cutout_h'] / 2 + 6,
                  cx + amp['cutout_w'] / 2 - 4, D - 3.0, az + amp['cutout_h'] / 2 - 6)
+    # behind every opening a pocket in the module, so a connector's insert and pins show and a slot reads dark and deep
+    for u, v, _, _ in XLR:
+        module -= hole(u, v, 22.6, D - 16, D - 2.9)
+    for u, v, _ in RCA:
+        module -= hole(u, v, 10.6, D - 8, D - 2.9)
+    for u, v in VENTS:
+        module -= slab(rr(16.2, 3.8, 1.9, u, v), D - 9, D - 2.9)
+    for (w, h), (u, v) in (((9.8, 9.0), OPT), ((7.4, 4.0), USB), ((39.2, 28.0), PEM)):
+        module -= slab(rr(w, h, 0.8, u, v), D - 24, D - 2.9)
 
-    black, metal, gold, screws, light = [], [], [], [], []
-    head = lambda u, v, d, y0, y1: (hole(u, v, d, y0, y1)
-                                    - box(cx + u - d * 0.3, y1 - 0.8, az + v - 0.45, cx + u + d * 0.3, y1 + 0.1, az + v + 0.45)
-                                    - box(cx + u - 0.45, y1 - 0.8, az + v - d * 0.3, cx + u + 0.45, y1 + 0.1, az + v + d * 0.3))
-    for u, v in SCREWS:                               # pan heads, cross recessed
-        screws.append(head(u, v, 7.6, D, D + 1.6).fuse(hole(u, v, 6.4, D + 1.5, D + 2.2)))
-    for u, v, sex in XLR:                             # Neutrik D-size flanges, 26 x 31, two M3 heads on the diagonal
-        black.append(slab(rr(26.0, 31.0, 3.0, u, v), D, D + 2.0) - hole(u, v, 21.0, D - 1, D + 3))
-        for su, sv in ((-9.5, 12.0), (9.5, -12.0)):
-            screws.append(head(u + su, v + sv, 5.4, D + 2.0, D + 2.5))
-        if sex == 'f':                                # a socket: its insert near the face, three holes, the latch above
-            ins = hole(u, v, 20.9, D - 7, D - 1.5)
+    P = {k: [] for k in ('black', 'metal', 'ring', 'gold', 'screws', 'print', 'label', 'ink', 'foil', 'led-on', 'led-green', 'led-red',
+                         'rca-white', 'rca-red', 'rca-orange')}
+
+    def pan(u, v, d, y0, recess='cross'):
+        """A screw head: a dome-ish pan `d` across standing on y0, its recess cut."""
+        s = hole(u, v, d, y0, y0 + d * 0.22).fuse(hole(u, v, d * 0.8, y0 + d * 0.22, y0 + d * 0.32))
+        top = y0 + d * 0.32
+        if recess == 'cross':
+            for a, b in ((d * 0.28, 0.45), (0.45, d * 0.28)):
+                s -= box(cx + u - a, top - 0.7, az + v - b, cx + u + a, top + 0.1, az + v + b)
+        else:                                          # a six-lobed socket, drawn as a small hexagon
+            hx = [(cx + u + d * 0.2 * math.cos(math.radians(60 * k)), az + v + d * 0.2 * math.sin(math.radians(60 * k))) for k in range(6)]
+            s -= slab(hx, top - 0.9, top + 0.1)
+        return s
+
+    for u, v in MOUNT:                                 # the plate's ten into the back, M4 pan heads
+        P['screws'].append(pan(u, v, 7.6, D))
+    for u, v in TORX:                                  # the module's, each in a ring of bare metal where it was turned home
+        P['screws'].append(pan(u, v, 5.6, D, 'torx'))
+        P['ring'].append(ring(u, v, 6.6, 0.45, D, 0.06))
+
+    PINS = [(-4.8, 2.0), (4.8, 2.0), (0.0, -5.2)]      # an XLR's three, as one faces it, latch up
+    for u, v, sex, turn in XLR:
+        k = -1 if turn else 1                          # the lower row turned half round
+        for su, sv in ((9.8, 9.95), (-9.8, -9.95)):    # two M3 heads on the diagonal, the same corners for all four
+            P['screws'].append(pan(u + su, v + sv, 5.0, D, 'torx'))
+        P['metal'].append(ring(u, v, 22.6, 0.9, D, 0.4))                      # the connector's bright front ring
+        if sex == 'f':
+            ins = hole(u, v, 21.8, D - 6, D - 1.6)
             for pu, pv in PINS:
-                ins -= hole(u + pu, v + pv, 3.2, D - 5, D - 1.4)
-            black.append(ins)
-            metal.append(box(cx + u - 3.0, D + 2.0, az + v + 11.0, cx + u + 3.0, D + 2.7, az + v + 14.2))
-        else:                                         # a plug: the metal shell's mouth, three pins standing in it
-            metal.append(hole(u, v, 20.9, D - 9, D + 1.9) - hole(u, v, 19.4, D - 10, D + 2))
-            black.append(hole(u, v, 19.3, D - 11, D - 9))
+                ins -= hole(u + pu, v + k * pv, 3.4, D - 5, D - 1.5)
+                P['metal'].append(hole(u + pu, v + k * pv, 2.2, D - 5.4, D - 4.6))   # the contact inside each hole
+            ins -= box(cx + u - 1.6, D - 5, az + v + k * 7.4 - 1.2, cx + u + 1.6, D - 1.5, az + v + k * 7.4 + 1.2)  # the key
+            P['black'].append(ins)
+            lu, lv = u - 0.2, v + k * 13.35                                    # the PUSH latch, a bright tab in a black boss
+            P['black'].append(slab(rr(10.0, 6.4, 2.6, lu, lv), D, D + 1.2))
+            P['metal'].append(slab(rr(7.6, 4.2, 1.6, lu, lv), D + 1.2, D + 1.9))
+            P['ink'].append(text('PUSH', lu, lv - k * 0.3, w=5.6, rot=0 if k > 0 else 180, bold=True, y0=D + 1.9, h=0.08))
+        else:
+            P['metal'].append(hole(u, v, 21.0, D - 10, D + 0.6) - hole(u, v, 19.0, D - 11, D + 0.7))   # the shell's mouth
+            P['metal'].append(box(cx + u - 1.4, D - 9, az + v + k * 9.0 - 0.6, cx + u + 1.4, D + 0.4, az + v + k * 9.0 + 0.9 * k))
+            P['black'].append(hole(u, v, 19.0, D - 12, D - 10))
             for pu, pv in PINS:
-                metal.append(hole(u + pu, v + pv, 1.6, D - 9, D - 2.6))
-    for u, v in RCA:                                  # gold sockets on nickel nuts, black insulators
-        metal.append(slab(hexagon(u, v, 11.0), D, D + 2.0) - hole(u, v, 8.0, D - 1, D + 3))
-        gold.append(hole(u, v, 8.4, D - 2, D + 9.0) - hole(u, v, 6.6, D - 3, D + 9.1))
-        black.append(hole(u, v, 6.5, D - 2, D + 8.2) - hole(u, v, 3.4, D + 4.5, D + 8.3))
-        gold.append(hole(u, v, 3.3, D + 4.8, D + 8.0) - hole(u, v, 1.8, D + 4.7, D + 8.1))
-    u, v = OPT                                        # Toslink: a square port, its mouth keyed
-    black.append(slab(rr(9.4, 10.4, 0.6, u, v), D - 6, D + 3.0) - slab(rr(5.4, 5.4, 0.5, u, v - 0.6), D - 3, D + 3.1))
-    u, v = USB                                        # mini-B in its window, set back
-    trap = lambda w, h: [(cx + u - w / 2, az + v + h / 2), (cx + u + w / 2, az + v + h / 2),
-                         (cx + u + w / 2 - 0.9, az + v - h / 2), (cx + u - w / 2 + 0.9, az + v - h / 2)]
-    metal.append(slab(trap(7.7, 4.0), D - 8, D - 1.2) - slab(trap(6.8, 3.1), D - 7, D - 1.1))
-    black.append(box(cx + u - 2.3, D - 7, az + v - 0.2, cx + u + 2.3, D - 2.6, az + v + 0.6))
-    black.append(slab(rr(9.0, 6.0, 0.8, u, v), D - 9, D - 8))
-    light.append(hole(*LED, 3.0, D - 2, D + 0.6))
-    u, v = IEC                                        # C14 inlet: its flange, the plug's keyed mouth, three blades
-    mouth = [(cx + u - 12.2, az + v - 8.0), (cx + u + 12.2, az + v - 8.0), (cx + u + 12.2, az + v + 4.0),
-             (cx + u + 8.2, az + v + 8.0), (cx + u - 8.2, az + v + 8.0), (cx + u - 12.2, az + v + 4.0)]
-    black.append(slab(rr(31.0, 24.0, 1.5, u, v), D, D + 2.6).fuse(slab(rr(27.4, 19.8, 1.2, u, v), D - 18, D))
-                 - slab(mouth, D - 9, D + 2.7))
-    for bu, bv in ((-7.0, -2.5), (7.0, -2.5), (0.0, 3.0)):
-        metal.append(box(cx + u + bu - 1.0, D - 9, az + bv + v - 2.0, cx + u + bu + 1.0, D - 1.5, az + bv + v + 2.0))
-    u, v = SW                                         # a rocker in its bezel, rocked to I
-    black.append(slab(rr(15.0, 21.0, 1.2, u, v), D, D + 2.0) - slab(rr(11.6, 17.6, 0.8, u, v), D - 1, D + 2.1))
-    black.append(slab(rr(11.6, 17.6, 0.8, u, v), D - 6, D - 5))
-    black.append(prism([(D - 5, az + v - 8.6), (D + 1.4, az + v - 8.6), (D + 3.4, az + v + 8.6), (D - 5, az + v + 8.6)],
-                       'x', cx + u - 5.6, cx + u + 5.6))
-    print_ = [box(cx + u - w / 2, D, az + v - 0.8, cx + u + w / 2, D + 0.05, az + v + 0.8) for u, v, w in (
-        (-27, 131.5, 8), (27, 131.5, 12), (-27, 89.5, 13), (27, 89.5, 15), (-39, 19.5, 7), (-13, 19.5, 9), (13, 19.5, 9),
-        (39, 19.5, 7), (-27, -30.5, 7), (27, -30.5, 9), (-14, -99.0, 22), (30, -101.5, 6))]
-    print_.append(box(cx - 13, D, az - 143.0, cx + 13, D + 0.05, az - 139.0))       # the maker's name, as a bar
-    return {'plate': (plate, 'amp'), 'module': (module, 'amp'), 'housings': (Compound(children=black), 'gland'),
-            'metal': (Compound(children=metal), 'rod'), 'gold': (Compound(children=gold), 'brass'),
-            'screws': (Compound(children=screws), 'screw'), 'light': (Compound(children=light), 'etch'),
-            'print': (Compound(children=print_), 'print')}
+                P['gold'].append(hole(u + pu, v + k * pv, 1.6, D - 10, D - 3.0))
+    hexagon = lambda u, v, af: [(cx + u + af / math.sqrt(3) * math.cos(math.radians(30 + 60 * j)),
+                                 az + v + af / math.sqrt(3) * math.sin(math.radians(30 + 60 * j))) for j in range(6)]
+    for u, v, col in RCA:                              # nickel nuts and barrels, the insulator's colour at the mouth, gold inside
+        P['metal'].append(slab(hexagon(u, v, 10.4), D, D + 1.6) - hole(u, v, 8.2, D - 1, D + 2))
+        P['metal'].append(hole(u, v, 8.4, D - 2, D + 7.5) - hole(u, v, 6.8, D - 3, D + 7.6))
+        P[col].append(hole(u, v, 6.7, D - 2, D + 7.2) - hole(u, v, 3.6, D + 3.5, D + 7.3))
+        P['gold'].append(hole(u, v, 3.4, D + 3.8, D + 6.9) - hole(u, v, 1.9, D + 3.7, D + 7.0))
+    u, v = OPT                                         # Toslink: a square housing, its keyed mouth and shutter
+    P['black'].append(slab(rr(9.4, 8.6, 0.6, u, v), D - 6, D + 0.6)
+                      - slab([(cx + u + 2.6, az + v + 2.2), (cx + u - 2.6, az + v + 2.2), (cx + u - 2.6, az + v - 1.0),
+                              (cx + u - 1.6, az + v - 2.2), (cx + u + 1.6, az + v - 2.2), (cx + u + 2.6, az + v - 1.0)], D - 3, D + 0.7))
+    P['black'].append(slab(rr(5.0, 4.2, 0.5, u, v), D - 3.4, D - 3.0))
+    u, v = USB                                         # mini-B: its shell set back, the tongue in it
+    trap = lambda w, h: [(cx + u + w / 2, az + v + h / 2), (cx + u - w / 2, az + v + h / 2),
+                         (cx + u - w / 2 + 0.9, az + v - h / 2), (cx + u + w / 2 - 0.9, az + v - h / 2)]
+    P['metal'].append(slab(trap(7.0, 3.6), D - 7, D - 0.6) - slab(trap(6.2, 2.9), D - 6, D - 0.5))
+    P['black'].append(box(cx + u - 2.3, D - 6, az + v - 0.1, cx + u + 2.3, D - 2.2, az + v + 0.7))
+    P['black'].append(slab(rr(7.2, 3.8, 0.6, u, v), D - 8, D - 7))
+    for u, v, fin in LEDS:                             # 3 mm lenses: Prot red, P1 lit, P2 and P3 green and dark
+        P[fin].append(hole(u, v, 3.0, D - 2, D + 0.4).fuse(cyl('y', at(u, v), 2.4, D + 0.4, D + 0.8)))
+    P['black'].append(hole(*SELECT, 4.2, D - 3, D + 0.9))                    # the Select button
+    u, v = PEM                                         # the mains entry: a bezel, the C14 inlet on its side, the rocker
+    P['black'].append(slab(rr(41.2, 29.8, 2.4, u, v), D, D + 2.4).fuse(slab(rr(39.0, 27.6, 2.0, u, v), D - 22, D))
+                      - slab(rr(18.6, 26.8, 1.2, C14[0], C14[1]), D - 1, D + 2.5)
+                      - slab(rr(16.6, 22.6, 1.0, ROCKER[0], ROCKER[1]), D + 0.6, D + 2.5))
+    cu, cv = C14
+    mouth = [(cx + cu - 8.25, az + cv - 12.45), (cx + cu + 4.25, az + cv - 12.45), (cx + cu + 8.25, az + cv - 8.45),
+             (cx + cu + 8.25, az + cv + 8.45), (cx + cu + 4.25, az + cv + 12.45), (cx + cu - 8.25, az + cv + 12.45)]
+    P['black'].append(slab(rr(18.6, 26.8, 1.2, cu, cv), D - 9, D + 1.0) - slab(mouth, D - 8, D + 1.1))
+    for (bu, bv), (w, h) in (((-1.15, 7.0), (4.0, 2.0)), ((-1.15, -7.0), (4.0, 2.0)), ((5.35, 0.0), (2.0, 4.0))):
+        P['metal'].append(box(cx + cu + bu - w / 2, D - 8, az + cv + bv - h / 2, cx + cu + bu + w / 2, D - 1.2, az + cv + bv + h / 2))
+    ru, rv = ROCKER                                    # the rocker in its bezel, rocked to I (its lower half proud)
+    P['black'].append(slab(rr(15.0, 20.9, 1.2, ru, rv), D + 0.6, D + 2.4) - slab(rr(11.4, 15.1, 0.8, ru, rv), D, D + 2.5))
+    P['black'].append(prism([(D + 0.8, az + rv + 7.15), (D + 1.6, az + rv + 7.15), (D + 3.8, az + rv - 7.15), (D + 0.8, az + rv - 7.15)],
+                            'x', cx + ru - 5.3, cx + ru + 5.3))
+    P['print'].append(box(cx + ru - 0.35, D + 1.9, az + rv + 2.6, cx + ru + 0.35, D + 2.45, az + rv + 5.0))       # I
+    P['print'].append(cyl('y', at(ru, rv - 3.6), 2.6, D + 3.2, D + 3.62) - cyl('y', at(ru, rv - 3.6), 1.6, D + 3.1, D + 3.7))  # O
+
+    # the grey strips and their words, the white print
+    for (u, w), (v, ht), word in [((34.6, 25.4), (105.65, 3.5), 'analogue in'), ((9.45, 21.3), (105.65, 3.5), 'through'),
+                                  ((-13.85, 13.1), (105.65, 3.5), 'unbal'), ((-27.3, 10.0), (105.65, 3.5), None),
+                                  ((34.6, 25.4), (100.9, 3.8), 'AES in'), ((9.45, 21.3), (100.9, 3.8), 'through'),
+                                  ((-13.85, 13.1), (100.9, 3.8), 'S/PDIF'), ((-28.95, 12.9), (100.9, 3.8), 'optical')]:
+        P['label'].append(slab(rr(w, ht, 0.8, u, v), D, D + 0.05))
+        if word:
+            P['ink'].append(text(word, u, v, size=2.6, y0=D + 0.05, h=0.05))
+    u, v = -27.3, 105.65                               # the USB trident
+    P['ink'] += line([(u + 3.0, v), (u - 2.6, v)], 0.45, D + 0.05)
+    P['ink'] += line([(u + 1.2, v), (u + 0.2, v + 1.0), (u - 1.0, v + 1.0)], 0.4, D + 0.05)
+    P['ink'] += line([(u + 0.6, v), (u - 0.4, v - 0.9), (u - 1.4, v - 0.9)], 0.4, D + 0.05)
+    P['ink'].append(hole(u + 3.1, v, 1.2, D + 0.05, D + 0.1))
+    P['ink'].append(slab([(cx + u - 2.6, az + v + 0.8), (cx + u - 3.6, az + v), (cx + u - 2.6, az + v - 0.8)], D + 0.05, D + 0.1))
+    for (u, v), word, rot in (((-16.7, 135.2), 'left', -30), ((-18.0, 120.8), 'right', -45),
+                              ((-18.3, 86.7), 'input', 45), ((-17.7, 73.0), 'output', 45)):
+        P['print'].append(text(word, u, v, size=2.2, rot=rot))
+    for (u, v, _), word in zip(LEDS + [(SELECT[0], SELECT[1], None)], ('Prot', 'P1 / Left', 'P2 / Right', 'P3 / L+R', 'Select')):
+        a = math.radians(52)
+        P['print'] += line([(u - 1.9, v + 0.4), (u - 1.9 - 3.4 * math.cos(a), v + 0.4 + 3.4 * math.sin(a))], 0.3)
+        P['print'].append(text(word, u - 1.9 - 3.9 * math.cos(a), v + 0.4 + 3.9 * math.sin(a), size=2.1, rot=52,
+                               align=(Align.MIN, Align.CENTER)))
+    P['print'].append(cyl('y', at(-28.15, 74.2), 5.6, D, D + 0.05))          # Ncore's mark: an N in a disc, then core
+    P['ink'].append(text('N', -28.15, 74.2, size=3.4, bold=True, y0=D + 0.05))
+    P['print'].append(text('core', -39.6, 74.6, w=16.0))
+    P['print'].append(text('audio power conversion', -37.2, 70.3, w=22.0))
+    # Hypex's wave and name, and FA122 (1, 2, 2 in white discs)
+    for j in range(7):
+        pts = []
+        for i in range(41):
+            t = i / 40
+            pts.append((13.9 - 28.7 * t, 21.2 + (1.5 + 5.5 * t ** 2.2) * math.sin(2 * math.pi * (1.6 * t + 0.07 * j)) + (j - 3) * 0.35 * t))
+        P['print'] += line(pts, 0.28)
+    P['print'].append(text('hypex', 9.8, 12.2, w=25.4))
+    P['print'].append(text('electronics', -13.45, 10.9, w=18.9))
+    P['print'].append(text('www.hypex.nl', -11.5, 7.9, w=13.8, bold=True))
+    P['print'].append(text('FA', 15.9, -17.6, w=13.4, bold=True))
+    for u, dg in ((3.3, '1'), (-7.4, '2'), (-18.1, '2')):
+        P['print'].append(cyl('y', at(u, -17.6), 9.5, D, D + 0.05))
+        P['ink'].append(text(dg, u, -17.6, size=6.4, bold=True, y0=D + 0.05))
+    # the safety marks (outlines), the caution, the sticker and its blank twin, the ratings
+    u0, v0 = 25.3, -78.2
+    P['print'].append(ring(u0, v0, 6.6, 0.45))
+    P['print'] += line([(u0 + 2.0, v0 - 1.2), (u0 + 0.8, v0 + 1.4), (u0, v0 - 0.2), (u0 - 0.9, v0 + 1.5), (u0 - 2.2, v0 - 1.2)], 0.4)
+    for u0 in (15.0, 4.8):
+        tri = [(u0 + 3.4, v0 - 2.9), (u0 - 3.4, v0 - 2.9), (u0, v0 + 3.1), (u0 + 3.4, v0 - 2.9)]
+        P['print'] += line(tri, 0.5)
+    P['print'] += line([(15.0, -79.9), (15.0, -77.0)], 0.6); P['print'].append(hole(15.0, -80.9, 0.7, D, D + 0.05))
+    P['print'] += line([(5.4, -76.6), (4.2, -78.6), (5.6, -78.4), (4.4, -80.6)], 0.45)
+    u0 = -5.3
+    P['print'].append(frame(4.6, 5.4, 0.4, u0, v0 + 0.6, 0.45)); P['print'] += line([(u0 + 3.2, v0 + 3.6), (u0 - 3.2, v0 - 2.6)], 0.45)
+    P['print'] += line([(u0 - 3.2, v0 + 3.6), (u0 + 3.2, v0 - 2.6)], 0.45); P['print'].append(slab(rr(5.0, 0.8, 0.1, u0, v0 - 3.4), D, D + 0.05))
+    P['print'].append(text('CE', -15.6, -78.2, w=6.4))
+    P['print'].append(frame(6.2, 5.6, 0.4, -25.9, -78.2, 0.45)); P['print'] += line([(-25.9, -75.6), (-25.9, -80.8)], 0.45)
+    P['print'].append(text('CAUTION - RISK OF ELECTRIC SHOCK - DO NOT OPEN', -0.7, -85.3, w=58.6, bold=True))
+    P['print'].append(text('PRECAUTION - RISQUE DE CHOC ÉLECTRIQUE - NE PAS OUVRIR', -0.8, -88.0, w=70.0, bold=True))
+    P['foil'].append(slab(rr(28.0, 13.8, 0.8, 15.2, -98.6), D, D + 0.12))
+    for j in range(5):                                 # the sticker's QR square and its lines, in ink
+        for i in range(5):
+            if (i * 7 + j * 3) % 5 < 3 or i in (0, 4) and j in (0, 4):
+                P['ink'].append(box(cx + 28.4 - i * 1.4, D + 0.12, az - 101.0 + j * 1.4, cx + 27.2 - i * 1.4, D + 0.17, az - 99.8 + j * 1.4))
+    for j, wd in enumerate((17.0, 14.0, 9.0, 18.0, 11.0)):
+        P['ink'].append(box(cx + 20.5, D + 0.12, az - 93.6 - j * 2.0, cx + 20.5 - wd, D + 0.17, az - 94.4 - j * 2.0))
+    P['print'].append(frame(28.2, 14.1, 1.4, -16.8, -98.55, 0.5))
+    P['print'].append(text('100 - 120V~ / 200 - 240V~', -21.0, -149.1, w=35.0))
+    P['print'].append(text('350W Max. / 50Hz - 60Hz', -20.9, -152.3, w=31.2))
+
+    C = lambda xs: Compound(children=xs)
+    out = {'plate': (plate, 'amp'), 'module': (module, 'amp'), 'housings': (C(P['black']), 'gland'),
+           'metal': (C(P['metal']), 'rod'), 'gold': (C(P['gold']), 'brass'), 'screws': (C(P['screws']), 'screw'),
+           'print': (C(P['print']), 'print'), 'labels': (C(P['label']), 'amp-label'), 'ink': (C(P['ink']), 'amp'),
+           'sticker': (C(P['foil']), 'amp-foil'), 'rings': (C(P['ring']), 'amp-ring')}
+    for k in ('led-on', 'led-green', 'led-red', 'rca-white', 'rca-red', 'rca-orange'):
+        if P[k]:
+            out[k] = (C(P[k]), k)
+    return out
 
 
 def amp_compartment(P, ribs, wz, wood):
@@ -1876,6 +2031,17 @@ PRODUCT = Product(
                'sleeve': {'preset': 'rubber', 'color': '#1B1B1B'},
                'cable': {'preset': 'rubber', 'color': '#141414', 'roughness': 0.5},
                'gland': {'preset': 'plastic', 'color': '#1A1A1A', 'roughness': 0.5},
+               # round 31: the FA122's plate as it is, its grey label strips, the rating sticker's foil, the status lights
+               # (P1 lit) and the RCAs' coloured insulators
+               'amp-label': {'preset': 'satin_paint', 'color': '#C4C6C5', 'roughness': 0.5, 'specular': 0.3},
+               'amp-foil': {'preset': 'metal', 'color': '#BEC0C1', 'roughness': 0.35},
+               'amp-ring': {'preset': 'metal', 'color': '#8E8E8C', 'roughness': 0.45},
+               'led-on': {'preset': 'emit', 'color': '#4CF07A', 'strength': 6.0},
+               'led-green': {'preset': 'gloss_plastic', 'color': '#0F3A1E', 'roughness': 0.15},
+               'led-red': {'preset': 'gloss_plastic', 'color': '#4A0E10', 'roughness': 0.15},
+               'rca-white': {'preset': 'plastic', 'color': '#E8E6E0', 'roughness': 0.35},
+               'rca-red': {'preset': 'plastic', 'color': '#B3121A', 'roughness': 0.35},
+               'rca-orange': {'preset': 'plastic', 'color': '#C8742A', 'roughness': 0.35},
                # round 14: the ports' black screws, and the feet
                'screw': {'preset': 'metal', 'color': '#262626', 'roughness': 0.4},
                'foot': {'preset': 'plastic', 'color': '#1C1C1C', 'roughness': 0.6}},
