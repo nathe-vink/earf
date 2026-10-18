@@ -7,6 +7,7 @@
   at a shallow edge and deepens to green (`acid_colors` by depth, `acid_deep`, `acid_edge`). `water` the pools' level, `pools` [[x, y, depth, sigma], ...] dug in, `flat`
   [x, y, r] level ground where the speaker stands, `texture` (Poly Haven id), `seed`.
 - chimney: a lumpy sulphur or salt chimney, `height`, `radius`, `colors` [salt, sulphur, deep], `texture`, `seed`.
+- ridge: a far escarpment on the horizon, `distance`, `height`, `span` [a0, a1] degrees, `tint`, `seed`.
 - steam: a plume of steam rising from a vent (a volume): `height`, widening `r0` to `r1`, leaning `lean`, `density`,
   `wisp` (the noise band that makes its wisps), `seed`.
 """
@@ -215,11 +216,18 @@ def crust_material(bpy, p, attribute='acid_d', name='acid-crust'):
     wet = nt.nodes.new('ShaderNodeMapRange'); wet.inputs['From Min'].default_value = 0.0
     wet.inputs['From Max'].default_value = 0.03; wet.inputs['To Min'].default_value = 0.25; wet.inputs['To Max'].default_value = 1.0
     nt.links.new(at.outputs['Fac'], wet.inputs['Value'])
+    bs.inputs['Specular IOR Level'].default_value = p.get('specular', 0.3)
     rl = next((l for l in nt.links if l.to_socket == bs.inputs['Roughness']), None)
-    if rl and attribute:
+    rough = rl.from_socket if rl else None
+    if rough is not None and p.get('roughness_min') is not None:   # a dry crust: never glossy, whatever the scan says
+        mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MAXIMUM'; mx.inputs[1].default_value = p['roughness_min']
+        nt.links.new(rough, mx.inputs[0]); rough = mx.outputs['Value']
+    if rough is not None and attribute:                             # damp, smoother, at the acid's edge
         rm = nt.nodes.new('ShaderNodeMath'); rm.operation = 'MULTIPLY'
-        nt.links.new(rl.from_socket, rm.inputs[0]); nt.links.new(wet.outputs['Result'], rm.inputs[1])
-        nt.links.new(rm.outputs['Value'], bs.inputs['Roughness'])
+        nt.links.new(rough, rm.inputs[0]); nt.links.new(wet.outputs['Result'], rm.inputs[1])
+        rough = rm.outputs['Value']
+    if rough is not None:
+        nt.links.new(rough, bs.inputs['Roughness'])
     return m
 
 
@@ -260,7 +268,7 @@ def chimney(bpy, name, p, kit):
     c = p.get('colors', ['#F2EDCF', '#E9D33A', '#D9B62A'])
     mat = crust_material(bpy, {'texture': p.get('texture', 'acg:Ground093A'), 'res': p.get('res', '2k'), 'zone_scale': 1.6, 'grain_w': 0.6,
                                'noise_w': 1.4, 'zone_h': 1.0, 'zone_bias': 0.5, 'detail_gain': p.get('detail_gain', 2.2),
-                               'tex_scale': 0.6, 'displace': 0.0, 'zones': [(0.0, c[0]), (0.45, c[1]), (1.0, c[2])]}, attribute=None, name=f'{name}-mat')
+                               'tex_scale': p.get('tex_scale', 0.6), 'displace': 0.0, 'specular': 0.1, 'roughness_min': 0.85, 'zones': [(0.0, c[0]), (0.45, c[1]), (1.0, c[2])]}, attribute=None, name=f'{name}-mat')
     return kit.finish(bpy, name, bm, p, True, mat)
 
 
@@ -326,3 +334,32 @@ def steam(bpy, name, p, kit):
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('turn', 0.0))
     return [ob]
+
+
+def ridge(bpy, name, p, kit):
+    """A far escarpment on the horizon: a strip of ground `distance` metres out across azimuths `span` [a0, a1]
+    (degrees, 0 straight ahead along +y), rising to `height` with a ragged crest (fbm), its face toward the camera; a
+    photographed rock texture tinted toward `tint`, softened by the haze between."""
+    D, H = p.get('distance', 1500.0), p.get('height', 45.0)
+    a0, a1 = [math.radians(a) for a in p.get('span', [-40.0, 20.0])]
+    n, rows = p.get('segments', 600), 12
+    off = p.get('seed', 1) * 7.1
+    bm = bmesh.new()
+    grid = []
+    for j in range(rows + 1):
+        v = j / rows
+        row = []
+        for i in range(n + 1):
+            a = a0 + (a1 - a0) * i / n
+            crest = H * (0.55 + 0.45 * _fbm(a * 9.0, 0.3, off, 5)) * _smooth(0.0, 0.08, i / n) * _smooth(0.0, 0.08, 1 - i / n)
+            d = D + v * H * p.get('slope', 1.0)                        # the face slopes back as it rises
+            z = crest * (v ** 0.7) - 2.0
+            row.append(bm.verts.new((d * math.sin(a), d * math.cos(a), z)))
+        grid.append(row)
+    for j in range(rows):
+        for i in range(n):
+            bm.faces.new((grid[j][i], grid[j][i + 1], grid[j + 1][i + 1], grid[j + 1][i]))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    mat = assets.pbr(bpy, p.get('texture', 'rock_04'), '2k', scale=p.get('tex_scale', 25.0), tint=p.get('tint', '#9A6A48'),
+                     tint_mix=p.get('tint_mix', 0.6), name=f'{name}-mat')
+    return kit.finish(bpy, name, bm, {**p, 'position': [0, 0, 0]}, True, mat)
