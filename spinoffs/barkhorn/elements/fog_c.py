@@ -48,7 +48,7 @@ def props():
         # the headland: coastal grass, level where the speaker stands, falling to the water behind it
         C.ground('sparse_grass', size=(26.0, 18.6), position=(0.0, -5.7, 0.0), displace=0.02, relief=0.12,
                  res='2k', tint='#5F5A3A', tint_mix=0.3, cells=900),
-        C.piece('ext', module='fog_b_el', fn='terrain', hills=[[*at(-12.0, 600.0), 70.0, 300.0, 200.0, 0.0]],
+        C.piece('ext', module='fog_b_el', fn='terrain', hills=[[*at(-22.0, 520.0), 105.0, 320.0, 200.0, 20.0]],
                 grass='#5F5E40', scrub='#2A3320', floor=WATER - 5.0, brow=3.6, steep=10.0, drop=120.0, wide=60.0,
                 y_range=[2.6, 1500.0], x_spread=[0.9, 1.1], x_margin=60.0, cols=400, row_ratio=0.006, min_row=0.3,
                 relief=0.15, relief_far=0.01, gullies=[10.0, 120.0]),
@@ -65,12 +65,14 @@ def props():
                 north_approach=700.0, south_approach=900.0),
         # the fog: under the deck in the Gate, higher over the ocean, a wall rolling over Twin Peaks; haze above
         C.piece('ext', module='fog_c_el', fn='fog', top=WATER + 50.0, heave=8.0,
-                billows=[[220.0, 14.0], [70.0, 6.0], [20.0, 2.0]], wall=[16.0, 7800.0, 230.0, 14.0, 2500.0],
-                ocean=[30.0, 60.0], soft=4.0, density=0.03, anisotropy=0.7, billow_size=40.0, billow_cut=0.25,
+                billows=[[220.0, 18.0], [70.0, 8.0], [20.0, 3.0]], wall=[16.0, 7800.0, 230.0, 14.0, 2500.0],
+                ocean=[30.0, 60.0], soft=3.0, density=0.03, anisotropy=0.7, billow_size=40.0, billow_cut=0.25,
                 haze=0.00012, haze_height=300.0, box=[-11000.0, 150.0, WATER - 5.0, 11000.0, 15000.0, 700.0]),
         # grass round the speaker
         C.scatter(['grass_medium_02', 'grass_medium_01'], 3000, [-9.0, -14.5, 11.0, 3.2],
-                  avoid=((0.0, 0.0, 0.75),), scale=(0.4, 1.4), seed=3),
+                  avoid=((0.0, 0.0, 3.2),), scale=(0.4, 1.6), seed=3),
+        C.scatter(['grass_medium_02', 'grass_medium_01'], 900, [-3.2, -3.2, 3.2, 3.2], avoid=((0.0, 0.0, 1.0),),
+                  scale=(0.4, 0.9), seed=11),
         C.scatter(['grass_medium_02'], 60, [-1.1, -1.1, 1.1, 1.1], avoid=((0.0, 0.0, 0.42),), scale=(0.2, 0.35), seed=7),
     ]
 
