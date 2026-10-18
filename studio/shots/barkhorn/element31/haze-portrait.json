@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.006
+     -0.015
     ],
     "rotate_z": 18.0,
     "hide": [
@@ -96,7 +96,7 @@
     ],
     "span": [
      -11.0,
-     160.0
+     400.0
     ],
     "step": 0.8,
     "near": 30.0,
@@ -234,11 +234,11 @@
     "shape": "ext",
     "module": "haze_el",
     "fn": "sun",
-    "azimuth_deg": 188.0,
+    "azimuth_deg": 176.0,
     "elevation_deg": 3.4,
     "distance": 20000.0,
     "diameter_deg": 0.55,
-    "strength": 15.0,
+    "strength": 60.0,
     "color": "#FF6A2A"
    }
   ]
@@ -260,8 +260,8 @@
     0.0,
     0.7
    ],
-   "irradiance": 1.0,
-   "color": "#F0CDB2",
+   "irradiance": 1.2,
+   "color": "#E8C8D8",
    "receivers": [
     "[!p]*",
     "po*"
@@ -274,8 +274,8 @@
     2.4
    ],
    "orbit": {
-    "azimuth_deg": 188,
-    "elevation_deg": 10,
+    "azimuth_deg": 176,
+    "elevation_deg": 18,
     "distance_m": 2.5
    },
    "target": [
@@ -283,7 +283,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 5.0,
+   "irradiance": 9.0,
    "color": "#FFA860",
    "camera": false,
    "receivers": [
@@ -357,8 +357,8 @@
     0.0,
     1.15
    ],
-   "strength": 0.25,
-   "color": "#9C88B0",
+   "strength": 0.35,
+   "color": "#C8B0D0",
    "diffuse": 0,
    "specular": 1,
    "receivers": [
@@ -374,7 +374,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 0.0,
+  "exposure": 0.25,
   "white_balance_k": 5600,
   "white_balance_tint": 3,
   "look": "AgX - Base Contrast"
@@ -410,12 +410,12 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "the_sky_is_on_fire",
-  "rotation_deg": -157.0,
+  "rotation_deg": -165.0,
   "strength": 0.55,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 188.0,
+  "azimuth_deg": 176.0,
   "elevation_deg": 4.5,
   "irradiance": 15.0,
   "angle_deg": 0.6,
@@ -436,7 +436,7 @@
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.15
+   "vignette": 0.1
   }
  },
  "haze": {
@@ -448,7 +448,7 @@
    8000.0,
    80.0
   ],
-  "density": 0.00022,
+  "density": 0.0003,
   "anisotropy": 0.3,
   "color": "#B8A4D8"
  }
