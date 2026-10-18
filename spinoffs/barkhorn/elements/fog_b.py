@@ -62,14 +62,14 @@ def props():
         # the headland beyond, falling to the fog; the hills across the water
         C.piece('ext', module='fog_b_el', fn='terrain', hills=H, grass='#6B6A45', scrub='#2A3320', floor=FLOOR, brow=12.6, steep=10.0, drop=110.0, wide=50.0,
                 y_range=[11.5, 6500.0], x_spread=[0.55, 1.05], x_margin=40.0, cols=560, row_ratio=0.004, min_row=0.3,
-                relief=0.15, relief_far=0.008, gullies=[26.0, 120.0]),
+                relief=0.15, relief_far=0.008, gullies=[12.0, 150.0]),
         # the fog: a sea of it below, pouring through the saddle, a thin haze above
-        C.piece('ext', module='fog_b_el', fn='fog', hills=H, floor=FLOOR, pours=pours(), top=-48.0, heave=8.0,
-                billows=[[160.0, 12.0], [50.0, 5.0], [15.0, 1.5]], bank=34.0, bank_size=200.0, rise=[1000.0, 1800.0, 44.0],
+        C.piece('ext', module='fog_b_el', fn='fog', hills=H, floor=FLOOR, pours=pours(), top=-32.0, heave=6.0,
+                billows=[[160.0, 12.0], [50.0, 5.0], [15.0, 1.5]], bank=18.0, bank_size=450.0, rise=[1000.0, 1700.0, 40.0],
                 soft=5.0, density=0.06, anisotropy=0.65, billow_size=30.0, billow_cut=0.2, haze=0.00025, haze_height=170.0,
                 box=[-3500.0, 13.0, -170.0, 4500.0, 7000.0, 320.0]),
         # wisps rising up the cliff just behind the brow
-        C.piece('ext', module='fog_b_el', fn='fog', top=-0.5, heave=4.0, billows=[[22.0, 5.0], [7.0, 1.5]],
+        C.piece('ext', module='fog_b_el', fn='fog', top=0.6, heave=4.0, billows=[[22.0, 5.0], [7.0, 1.5]],
                 soft=4.0, density=0.025, anisotropy=0.6, billow_size=6.0, billow_cut=0.42, billow_gain=3.0,
                 box=[-45.0, 13.2, -40.0, 70.0, 100.0, 4.0]),
         # grass tufts round the speaker and along the brow
