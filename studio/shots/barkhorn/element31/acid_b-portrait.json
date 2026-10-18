@@ -47,14 +47,14 @@
     "tex_scale": 0.8,
     "bump": 3.0,
     "rough_mul": 0.8,
-    "darken": 0.55,
-    "film": 0.3,
-    "tint": "#1E1D17",
-    "tint_mix": 0.7,
+    "darken": 0.75,
+    "film": 0.6,
+    "tint": "#121210",
+    "tint_mix": 0.85,
     "film_rough": 0.33,
     "film_vary": [
      0.03,
-     0.15
+     0.1
     ],
     "lumps": [
      [
@@ -194,8 +194,8 @@
     "ring": 0.2,
     "ripple": 3.0,
     "keep": 1.0,
-    "roughness": 0.01,
-    "big_rings": 0.5,
+    "roughness": 0.02,
+    "big_rings": 1.0,
     "ripple_m": 0.0012
    },
    {
@@ -449,8 +449,7 @@
     "spacing": 40.0,
     "seed": 31,
     "jag": 0.8,
-    "darken": 0.9,
-    "desaturate": 0.9,
+    "darken": 0.95,
     "film": 0.3,
     "film_rough": 0.3,
     "cells": [
@@ -751,7 +750,7 @@
      ],
      "clip_end_m": 1500.0
     },
-    "count": 65000,
+    "count": 100000,
     "near": 5.0,
     "far": 60.0,
     "length": [
@@ -772,15 +771,15 @@
      30.0
     ],
     "opacity": [
-     0.1,
-     0.45
+     0.12,
+     0.5
     ],
     "scatter": 0.9,
     "rough": 0.25,
-    "clear": 0.6,
+    "clear": 0.3,
     "thin_below": [
-     1.5,
-     0.5
+     1.0,
+     0.7
     ],
     "avoid": [
      [
@@ -904,18 +903,18 @@
     "module": "acid_rain_el",
     "fn": "splashes",
     "area": [
-     -3.0,
-     -7.0,
-     3.5,
-     3.0
+     -2.0,
+     -3.5,
+     2.5,
+     1.5
     ],
     "z": -0.11,
-    "count": 450,
+    "count": 1200,
     "radius": [
      0.003,
      0.014
     ],
-    "opacity": 0.12,
+    "opacity": 0.25,
     "avoid": [
      [
       0.0,
@@ -939,10 +938,10 @@
     0.0,
     0.7
    ],
-   "irradiance": 2.2,
+   "irradiance": 1.2,
    "color": "#F1E6B8",
    "orbit": {
-    "azimuth_deg": -40,
+    "azimuth_deg": -70,
     "elevation_deg": 10,
     "distance_m": 3.5
    }
@@ -977,7 +976,7 @@
     0.0,
     0.5
    ],
-   "irradiance": 2.0,
+   "irradiance": 3.0,
    "color": "#F1E6B8",
    "orbit": {
     "azimuth_deg": 110,
@@ -994,8 +993,8 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": -0.1,
-  "white_balance_k": 6200,
-  "white_balance_tint": -24.0,
+  "white_balance_k": 5700,
+  "white_balance_tint": -12.0,
   "look": "AgX - Medium High Contrast"
  },
  "title": "barkhorn Acid, acid rain (4:5)",
@@ -1057,9 +1056,9 @@
   }
  },
  "haze": {
-  "density": 0.001,
+  "density": 0.0014,
   "anisotropy": 0.5,
-  "color": "#BFC85A",
+  "color": "#B5C24A",
   "box_m": [
    -700,
    -15,
