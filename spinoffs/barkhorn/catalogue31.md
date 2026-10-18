@@ -85,3 +85,44 @@ flag), the paper's top-left muddy, little weight at the right-back corner, the h
 the floor cooler than the wall. Smoke needs the flag's mirror to carry some light where the clear colours want black:
 a faint graduated sheen in front of the side flag (`sidesheen`, 0.4 peak; at the side's 68 degree incidence a clear
 colour barely shows it), and the wall, pool, horn light and the fill's and ambient's colour as it asked.
+| 10 | p10 (`p10-blue-on.png`) | 6.0 | denoise smear; the lining the brightest thing on the speaker; muddy upper-left paper; weak footprint; no coloured pool | a deeper footprint, the paper's upper left lifted, the lining off the backlight and kicker (`SHELL`), the side opened, the floor flag smaller |
+| 11 | p12 (`p12-blue-on.png`, with Smoke 2's changes) | 5.5 | right backdrop near white; the top's edge lost; a violet fringe at the throat's lip; denoise | lost its duel (below): Smoke 2's changes reverted |
+
+- **duel 3:** p10 against p9: **p10 wins, 6.0 to 5.5** (crisper frame edges and top rail, deeper inner shadow, a cleaner top backdrop).
+- **duel 4:** p11 (the p16 rig, `p11-blue-on.png`) against p10: **p11 wins, 6.0 to 5.7** (a brighter top falling off further, a darker floor grounding the base, a more glass-like gradient down the side).
+- **duel 5:** p12 against p11: **p11 stays, 5.5 to 5.0**: Smoke 2's lower white point and dimmer floor lights made the frame a third of a stop darker and muddier, and the lowered side flag drew a hard edge on the side panel. Reverted; **the p16 rig (p11's frame) is the finals rig.**
+
+**Smoke**, pass 2 (`s2-black-on.png`): 5.5: a faint contact, the side panel's lower half still crushing, the paper beside
+it near white, a steep diagonal on the paper, the horn's left bowl flat, a step in the side's reflection. Its changes
+went into p12 and lost the duel on Ice; Smoke's side sheen at 0.6 stays.
+
+## Where it stands
+
+The bar (two Ice passes in a row at 8.5, Smoke at 8.5) is **not reached**: eleven Ice passes ran 5.5, 5.5, 5.5, 5.5,
+5.5, 5.5, 6.0, 6.0, 5.5, 6.0, 5.5 and two Smoke passes 5.5, 5.5; the critics' own estimates with every in-scope change
+made run 6.5 to 7.6. What holds it under, in their words, every pass:
+
+1. **The product's own surfaces** (out of scope here): the cloth disc reads as a flat matte plate and the lining as
+   smooth foam blocks, even after main's new shaders (a5192de); every critic names them first or second in what keeps
+   it from a 9. The weave shows at full size (1.6 mm a pixel at proof size hides it), the batting does not.
+2. **The horn's throat**: a dark mass that is the resin's depth, not the driver (hiding the driver leaves it as dark);
+   no lamp moves it. A product question for the owner: a lighter `horn_deep` or a thinner throat section.
+3. **Denoise smear** at proof size, 256 samples; the critics ask for 1024 at full size, about four hours a frame on this
+   four-core container. The finals run at 256 full size.
+
+The concept is not the limit, the duels show: each round from p7 to p11 beat the one before side by side, and the
+final rig beat the current catalogue frame (finals31 before this round, `finals31-before-blue-on.png`, the full frame
+halved to match) **5.5 to 4.5**: grounded on a modelled sweep instead of floating on a flat field, the acrylic lit and
+luminous instead of muddy navy, balanced margins; the old frame was crisper at 3x (a full frame halved against a proof).
+The owner's tinted paper holds (duel 1); at a third of the look book's chroma, so the speaker is the only saturated
+colour in the frame.
+
+## Would the rig lift the other sweep views?
+
+- **back** (`site30/back-{k}`): mostly yes, with work. The paper lamps (receivers `sweep`), the dark studio, the grain,
+  the depth and the 256 samples carry over as they are. The reflection cards do not: they were placed from where the
+  front, side and top mirror for this camera, and a camera behind the speaker mirrors other directions, so the flags,
+  scrim, top line and edge strip would need placing again with `--probe` (about an hour's work).
+- **horn-side, horn-back** (`horn21`): partly. The horn is resin with no lining, so the backlight and the paper falloff
+  would help most (the through-light is what the critics praised on the horn); the edge and flank strips must be
+  checked against the throat (a flank strip seen through the throat drew a white oval here).
