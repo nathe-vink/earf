@@ -1,0 +1,324 @@
+{
+ "stage1": {
+  "impression": "A clean, centred studio hero: red tinted acrylic tower on a dark seamless with a wall glow and a faint red floor reflection, and the silhouette reads at once against the glow. But the horn on top reads as pink toy plastic: a broad white specular sheet washes it to near-white pink, with a black blob where its throat shows through. The lit front of the cabinet is salmon while the side is a deep red. The glow is a big grey spotlight ellipse that stops hard at the floor line, leaving the bottom third dead black. Competent CG, not yet a launch image.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The horn reads as tinted acrylic with depth, not a near-white pink sheet: horn face [530,175,600,235] g_median below 120 with r_median at least 1.8x g_median",
+  "The cabinet's lit front holds red rather than salmon, and its red channel does not clip: [600,300,660,345] g_median <= 90, clip_pct < 1",
+  "The wall glow is a soft halo behind the product, not a spotlight ellipse: background beside the product [380,150,500,450] lum_median 45-65, with no visible horizon cut where the glow meets the floor",
+  "The horn's top edge is traced by a line of light, not outlined by a dark CG rim",
+  "Wall and floor neutral to slightly warm, matching the warm key, not cyan-grey (r_median >= g_median on the wall)"
+ ],
+ "defects": [
+  {
+   "region": [
+    520,
+    160,
+    690,
+    270
+   ],
+   "what": "Horn washed by a broad white specular sheet (median RGB 251,200,202 on its face); reads as pink glossy plastic, not tinted acrylic"
+  },
+  {
+   "region": [
+    600,
+    175,
+    690,
+    250
+   ],
+   "what": "Large black blob (38% crushed) where the throat and driver show through the horn; with the pink sheet around it, it reads as a smear"
+  },
+  {
+   "region": [
+    518,
+    155,
+    690,
+    168
+   ],
+   "what": "Dark outline around the horn's top and back edges, like a CG stroke; no edge light on top"
+  },
+  {
+   "region": [
+    535,
+    300,
+    680,
+    350
+   ],
+   "what": "Front face of the cabinet is desaturated salmon (251,129,121) with the red channel at 251; side face [680,360,740,500] is (98,8,6). The two faces read as different materials"
+  },
+  {
+   "region": [
+    380,
+    150,
+    900,
+    450
+   ],
+   "what": "Wall glow too large and bright (median 87, against 10-12 in the top corners); reads as a theatre spotlight ellipse rather than a soft halo"
+  },
+  {
+   "region": [
+    300,
+    470,
+    1000,
+    540
+   ],
+   "what": "Glow stops in a hard band at the floor line (profile falls from 63 to 6 within about 90 px); seamless looks like a wall meeting a black floor"
+  },
+  {
+   "region": [
+    0,
+    520,
+    1280,
+    720
+   ],
+   "what": "Bottom quarter of the frame is near-black dead space (lum_median 12); the floor reflection is faint and only red"
+  },
+  {
+   "region": [
+    380,
+    150,
+    500,
+    450
+   ],
+   "what": "Wall reads cool cyan-grey (R80 G85 B85) under warm-white (#FFF6EC) lights"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The sheen panel's reflection covers the whole side of the horn and the top of the front face, washing the tinted acrylic to near-white pink.",
+   "evidence": {
+    "region": [
+     530,
+     175,
+     600,
+     235
+    ],
+    "measured": "median RGB 251,200,202, lum_median 211, clip 1.7%"
+   },
+   "change": {
+    "setting": "lights.sheen.strength and lights.sheen.ramp.at_m",
+    "from": "1.2, ramp [1.9, 3.2]",
+    "to": "0.45, ramp [2.6, 3.2] (a thin graduated band at the top of the panel, not a sheet)"
+   },
+   "expected": "The horn shows its red body colour with a single soft graduated highlight along its upper surface. The face drops to about lum 110-140 with g well below r.",
+   "accept": {
+    "region": [
+     530,
+     175,
+     600,
+     235
+    ],
+    "metric": "g_median",
+    "op": "<",
+    "value": 120
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The key's specular on the front face, together with the sheen, desaturates the cabinet front to salmon and clips the red channel, while the side stays deep red.",
+   "evidence": {
+    "region": [
+     600,
+     300,
+     660,
+     345
+    ],
+    "measured": "median RGB 251,129,121, clip 4.1%; side [680,360,740,500] is 98,8,6"
+   },
+   "change": {
+    "setting": "lights.key.irradiance and lights.key.orbit.azimuth_deg",
+    "from": "1.9 at azimuth -42",
+    "to": "1.4 at azimuth -55 (more raking, so its reflection leaves the front face)"
+   },
+   "expected": "The front face reads as saturated red acrylic with a gradient across it, and the red channel stays under 245.",
+   "accept": {
+    "region": [
+     600,
+     300,
+     660,
+     345
+    ],
+    "metric": "g_median",
+    "op": "<=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The wall glow is a large bright spotlight ellipse that competes with the product and does not read as Apple's soft halo.",
+   "evidence": {
+    "region": [
+     380,
+     150,
+     500,
+     450
+    ],
+    "measured": "lum_median 84 beside the product against 10-12 in the top corners; the glow spans about 70% of the frame width"
+   },
+   "change": {
+    "setting": "lights.glow.power_w and lights.glow.spread_deg",
+    "from": "650 W, spread 100",
+    "to": "380 W, spread 75"
+   },
+   "expected": "A tighter, dimmer halo centred behind the cabinet. The silhouette still separates (the side face at about 27-40 against a wall of about 55), and the frame is more near-black overall.",
+   "accept": {
+    "region": [
+     380,
+     150,
+     500,
+     450
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     45,
+     65
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The glow cuts off in a hard band where wall meets floor, and the floor below is dead black, so the sweep reads as a wall and a separate black floor.",
+   "evidence": {
+    "region": [
+     820,
+     380,
+     860,
+     560
+    ],
+    "measured": "y-profile 80 -> 63 -> 33 -> 6 over about 90 px; floor [300,600,1000,720] lum_median 12"
+   },
+   "change": {
+    "setting": "set.radius and materials.sweep.specular",
+    "from": "radius 3.4, specular 0.035",
+    "to": "radius 5.0, specular 0.06 (with the glow lamp's target lowered from z 1.4 to 1.0 so part of it lands on the curve)"
+   },
+   "expected": "The glow rolls continuously from wall to floor with no visible horizon. The floor carries a slightly stronger, still soft reflection of the cabinet, which anchors it.",
+   "accept": {
+    "region": [
+     300,
+     600,
+     1000,
+     720
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     15,
+     28
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The horn's top and back edges are outlined in black, which looks like a CG stroke rather than acrylic catching light.",
+   "evidence": {
+    "region": [
+     518,
+     155,
+     690,
+     168
+    ],
+    "measured": "a dark rim along the horn's top edge in a 3x crop; no edge highlight"
+   },
+   "change": {
+    "setting": "lights.strip-top.position and strength",
+    "from": "position [-0.2, -1.5, 2.8], strength 24",
+    "to": "position [-0.2, -0.6, 2.6], strength 34 (closer over the horn, so its reflection lands on the horn's top radius)"
+   },
+   "expected": "A thin continuous highlight along the horn's top radius that separates it from the wall glow.",
+   "accept": {
+    "region": [
+     530,
+     156,
+     680,
+     166
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 200
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The wall and floor read cyan-grey under warm-white lamps, so the light does not feel like one warm studio.",
+   "evidence": {
+    "region": [
+     380,
+     150,
+     500,
+     450
+    ],
+    "measured": "R80 G85 B85; top corners R6-7 G11-13 B11-13"
+   },
+   "change": {
+    "setting": "render.white_balance_k",
+    "from": "5600",
+    "to": "6000 (warms the neutral grey)"
+   },
+   "expected": "The wall reads neutral to faintly warm, matching the key's #FFF6EC. No absolute pixel test, because c3 dims the same wall; check that r_median >= g_median on [380,150,500,450].",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The shadow side of the cabinet is dense, and the internal structure there reads as a flat dark red block.",
+   "evidence": {
+    "region": [
+     680,
+     360,
+     740,
+     500
+    ],
+    "measured": "lum_median 27, lum_range 11 (no gradient)"
+   },
+   "change": {
+    "setting": "lights.fill.irradiance",
+    "from": "0.6",
+    "to": "0.85"
+   },
+   "expected": "The side face opens to about lum 35-45 with a visible gradient, and stays darker than the wall behind it for the silhouette.",
+   "accept": {
+    "region": [
+     680,
+     360,
+     740,
+     500
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     33,
+     48
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the horn's throat and driver less visible through the acrylic (the black blob)",
+   "why": "It is the product's parts and tint; it can only be eased by light (c1), not by changing the horn"
+  },
+  {
+   "request": "Hide or soften the bright white block and the round ports visible inside the bottom of the cabinet",
+   "why": "They are internal parts of the speaker, which is fixed"
+  }
+ ],
+ "score_if_fixed": 7.3
+}

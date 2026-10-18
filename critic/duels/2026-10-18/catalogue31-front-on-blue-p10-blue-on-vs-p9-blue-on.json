@@ -1,0 +1,60 @@
+{
+ "date": "2026-10-18",
+ "new": "renders/2026-10-18/barkhorn/catalogue31/p10-blue-on.png",
+ "old": "renders/2026-10-18/barkhorn/catalogue31/p9-blue-on.png",
+ "new_score": 6.0,
+ "old_score": 5.5,
+ "prefer": "new",
+ "differences": [
+  {
+   "what": "Cabinet frame edges and the top rail read as crisp dark lines in A; in B they wash out to a flat grey, so the box loses its outline and looks foggy",
+   "region": [
+    100,
+    470,
+    440,
+    560
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "Internal shelf and the gap behind the woofer disc have deeper shadow in A, giving the inside depth; B lifts them to a milky grey with low contrast",
+   "region": [
+    140,
+    530,
+    360,
+    620
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "B's front glass shifts to a darker, more saturated blue toward the lower half, which gives a richer coloured-glass read than A's paler, even tint",
+   "region": [
+    100,
+    640,
+    360,
+    800
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "B has a stray horizontal light streak on the right side panel that reads as an artefact",
+   "region": [
+    400,
+    630,
+    440,
+    670
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "Backdrop at the top is brighter and cleaner in A; B's upper backdrop is a duller mid grey, so the horn separates less from the set",
+   "region": [
+    0,
+    0,
+    540,
+    250
+   ],
+   "favours": "A"
+  }
+ ]
+}

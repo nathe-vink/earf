@@ -1,0 +1,324 @@
+{
+ "stage1": {
+  "impression": "A clean, competent studio render of a blue acrylic horn speaker on a pale sweep, but it reads as CG: the whole frame sits in one cold cyan cast, so the Ice blue barely separates from the paper, and the cabinet's visible faces are dark and heavy rather than glowing with light passing through the tint. Surfaces show painterly denoiser smearing (lining, horn, disc), the front contact is thin so the box sits lightly on the floor, and the horn's throat is a hole of pure black.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The visible front and right faces of the cabinet must read as lit translucent blue acrylic (lining visible and bright through the tint), not a dark slab: cabinet side median above 115 at half size.",
+  "The paper must read as a near-neutral sweep under which the Ice blue is the only saturated blue in frame (sweep within dE 2.5 of its specified colour, not shifted cyan).",
+  "No denoiser smearing or watercolour blotching on any surface at full size.",
+  "A dense, believable contact line along the front bottom edge, so the 1.3 m speaker has weight.",
+  "Detail inside the horn throat: no large area of pure 0 black; the resin's depth should still show a specular edge and tonal gradation.",
+  "Even, intentional sweep falloff without the dirty grey wedge in the top-left corner."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    540,
+    1080
+   ],
+   "what": "Global cold cast: sweep renders r212 g228 b238 against specified #D9DFE4 (dE 4.0 top, 4.8 floor); product blue competes with blue paper."
+  },
+  {
+   "region": [
+    360,
+    470,
+    440,
+    940
+   ],
+   "what": "Right side of cabinet dark (lum median 96); translucency of the Ice acrylic does not read."
+  },
+  {
+   "region": [
+    220,
+    300,
+    340,
+    420
+   ],
+   "what": "Horn throat crushed: 53% of pixels below crush threshold, median lum 1.9; reads as a hole."
+  },
+  {
+   "region": [
+    110,
+    952,
+    340,
+    966
+   ],
+   "what": "Weak contact shadow along the front edge (median 191 vs open floor 205); cabinet looks light on the floor."
+  },
+  {
+   "region": [
+    0,
+    0,
+    120,
+    120
+   ],
+   "what": "Top-left sweep corner falls to lum 184 vs 233 at top right; reads as a grey dirty wedge rather than shaped light."
+  },
+  {
+   "region": [
+    120,
+    790,
+    440,
+    940
+   ],
+   "what": "Denoiser smearing / painterly blotches on the lining batts and acrylic ribs; ports' rims are soft."
+  },
+  {
+   "region": [
+    95,
+    260,
+    375,
+    450
+   ],
+   "what": "Horn surface shows watercolour-like mottling in its tinted resin at full size."
+  },
+  {
+   "region": [
+    130,
+    570,
+    330,
+    790
+   ],
+   "what": "Cloth disc reads as flat matte teal plastic (out of scope, being reworked)."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The key light is at az -70, lighting the cabinet's hidden left side, so the faces the camera sees get only fill and kick and the acrylic reads dark instead of glowing.",
+   "evidence": {
+    "region": [
+     360,
+     470,
+     440,
+     940
+    ],
+    "measured": "right side lum median 95.7, front panel band 100-440 x 480-560 median 157 with p5 22"
+   },
+   "change": {
+    "setting": "lights.key orbit az / irradiance",
+    "from": "az -70 el 30, 5.0 W/m2",
+    "to": "az -35 el 30, 6.0 W/m2 (aim unchanged)"
+   },
+   "expected": "Front face and lining behind it brighten, the tint glows lighter blue, the left edge still falls off for shape.",
+   "accept": {
+    "region": [
+     360,
+     470,
+     440,
+     940
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 115
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "set",
+   "problem": "The sweep renders noticeably bluer than specified, so the whole frame is one cold cyan and the Ice blue loses separation from its ground.",
+   "evidence": {
+    "region": [
+     440,
+     300,
+     540,
+     700
+    ],
+    "measured": "rgb 219/235/245 (B-R 26) vs #D9DFE4 (B-R 11); dE2000 3.97 on the upper sweep, 4.84 on the floor"
+   },
+   "change": {
+    "setting": "set.sweep colour",
+    "from": "#D9DFE4",
+    "to": "#DCDEDF (near-neutral, so the bounce from the blue acrylic supplies the tint)"
+   },
+   "expected": "Paper reads pale neutral-cool grey; the product becomes the only saturated blue in frame.",
+   "accept": {
+    "region": [
+     440,
+     300,
+     540,
+     700
+    ],
+    "metric": "delta_e",
+    "hex": "#DCDEDF",
+    "op": "<=",
+    "value": 2.5
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The front contact shadow is too faint for a 1.3 m, heavy acrylic object.",
+   "evidence": {
+    "region": [
+     110,
+     952,
+     340,
+     966
+    ],
+    "measured": "lum median 191 vs open floor 205 (200-300 x 990-1010)"
+   },
+   "change": {
+    "setting": "set.contact shadow",
+    "from": "strength 0.8, distance_m 0.25, core_strength 0.9, core_distance_m 0.012",
+    "to": "strength 1.0, distance_m 0.18, core_strength 1.0, core_distance_m 0.008"
+   },
+   "expected": "A tight dark line at the plinth edge with a short soft falloff; the box sits on the floor.",
+   "accept": {
+    "region": [
+     110,
+     952,
+     340,
+     966
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 178
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The image shows denoiser smearing and watercolour mottling on the lining, ribs and horn resin, which says 'render'.",
+   "evidence": {
+    "region": [
+     120,
+     790,
+     440,
+     940
+    ],
+    "measured": "crops at 3x show blotchy, smeared lining texture and soft port rims"
+   },
+   "change": {
+    "setting": "render samples",
+    "from": "128",
+    "to": "512 for finals (256 minimum for proofs), denoiser on albedo+normal prefilter 'accurate'"
+   },
+   "expected": "Lining weave and rib edges resolve; no blotches on flat acrylic or resin.",
+   "accept": {
+    "region": [
+     440,
+     300,
+     540,
+     700
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The horn's throat clips to pure black over half its area, so it reads as a hole rather than deep tinted resin.",
+   "evidence": {
+    "region": [
+     220,
+     300,
+     340,
+     420
+    ],
+    "measured": "lum median 1.9, crush 53%, p5 0"
+   },
+   "change": {
+    "setting": "lights.horn irradiance / specular",
+    "from": "2.0 W/m2, specular 0.8",
+    "to": "3.0 W/m2, specular 1.0 (position unchanged)"
+   },
+   "expected": "The resin's depth stays dark but gains a specular edge and gradation into deep blue; crushed share drops well below half.",
+   "accept": {
+    "region": [
+     220,
+     300,
+     340,
+     420
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The top-left of the sweep falls to a muddy grey that reads as dirt, not shaped light, and darkens the colour-card crop.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     120,
+     120
+    ],
+    "measured": "lum median 184.6 vs 233.3 at top right (400-540 x 0-120); x profile 182 -> 235"
+   },
+   "change": {
+    "setting": "lights.wall irradiance",
+    "from": "2.0 W/m2",
+    "to": "3.0 W/m2"
+   },
+   "expected": "A gentler left-to-right gradient, top-left around 205-215, keeping some falloff for depth.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     120,
+     120
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     200,
+     218
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "No blue light from the acrylic reaches the floor, so the product does not colour its ground and feels placed rather than standing there.",
+   "evidence": {
+    "region": [
+     380,
+     965,
+     480,
+     990
+    ],
+    "measured": "floor just right of the cabinet base rgb 214/229/238, the same ratio as open floor elsewhere; no distinct tinted pool at the base"
+   },
+   "change": {
+    "setting": "lights.back el / irradiance",
+    "from": "el 28, 2.0 W/m2",
+    "to": "el 20, 3.0 W/m2 (aim unchanged), so transmitted light through the cabinet lands on the floor in front"
+   },
+   "expected": "A faint blue pool on the floor at the cabinet's base, visibly more saturated than the open floor after c2 neutralises the sweep, and a brighter back edge on the cabinet top. No pixel test: c2 changes the floor's base colour in the same round, so judge by eye against the open floor.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the cloth disc a visible weave and soft sheen; it reads as flat matte teal plastic (lum range 70, uniform).",
+   "why": "The cover's cloth shader is fixed for this round and being reworked elsewhere."
+  },
+  {
+   "request": "Give the lining batts real fibrous texture and the voile visible structure.",
+   "why": "The lining's shaders are being reworked elsewhere."
+  },
+  {
+   "request": "Lighten the dark mass at the horn's throat itself.",
+   "why": "The card fixes it as the resin's own depth; only light on it is in scope (c5)."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

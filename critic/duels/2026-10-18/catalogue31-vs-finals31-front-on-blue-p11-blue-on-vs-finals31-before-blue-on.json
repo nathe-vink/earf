@@ -1,0 +1,70 @@
+{
+ "date": "2026-10-18",
+ "new": "renders/2026-10-18/barkhorn/catalogue31/p11-blue-on.png",
+ "old": "renders/2026-10-18/barkhorn/catalogue31/finals31-before-blue-on.png",
+ "new_score": 5.5,
+ "old_score": 4.5,
+ "prefer": "new",
+ "differences": [
+  {
+   "what": "A grounds the cabinet with a soft contact shadow and a floor-to-wall falloff; B sits on a flat, uniform pale-blue field with no floor plane or shadow, so the speaker reads as cut out and floating",
+   "region": [
+    40,
+    900,
+    500,
+    1080
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "A's backdrop has a graded light (bright upper right, darker left) that models the set; B's background is a dead flat fill (luminance range about 5 levels)",
+   "region": [
+    0,
+    0,
+    540,
+    200
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "A's clear cabinet and horn read as lit, luminous tinted acrylic with bright edges and internal glow; B's cabinet is dim, muddy navy with flat light, so the interior parts look grey and murky",
+   "region": [
+    60,
+    460,
+    450,
+    1030
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "B is compositionally cramped: the horn runs nearly to the left edge and the cabinet base almost touches the frame bottom; A leaves balanced margins",
+   "region": [
+    30,
+    220,
+    120,
+    1040
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "A has a painterly, denoise-smeared texture at 2-3x: soft, wobbly edges on the side handle and frame rails and watercolour blotching in the interior; B's edges and hardware are cleaner and geometrically crisp",
+   "region": [
+    330,
+    460,
+    450,
+    620
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "B's horn shows clearer refraction and a defined rim, and its port flanges and screw heads are sharper; in A the horn rim and driver are softer and the port glass smears",
+   "region": [
+    40,
+    220,
+    400,
+    480
+   ],
+   "favours": "B"
+  }
+ ]
+}

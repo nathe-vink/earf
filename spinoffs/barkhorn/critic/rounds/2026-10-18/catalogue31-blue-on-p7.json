@@ -1,0 +1,340 @@
+{
+ "stage1": {
+  "impression": "A clean, well-held studio catalogue shot: the blue acrylic reads as tinted glass, the horn glows at its edges and the cabinet stands with a believable contact shadow. But the light is everywhere and nowhere: the backdrop fades to near-white around the top of the cabinet and the horn so the silhouette goes soft. The tinted body casts no coloured light onto the paper, and the flat matte woofer disc and the toy-like white top pad read as CG. It is competent product visualization, not yet a campaign photograph.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The cabinet's top edge and white top pad must separate from the backdrop: at least 25 levels of luminance difference between the pad and the paper beside it (pad ~240 vs paper ~240 now).",
+  "The backdrop behind the product needs a deliberate tonal gradient so the clear silhouette reads against a mid tone, not a flat right half at 239.",
+  "The paper must take the speaker's colour: a visible blue transmitted pool or bounce on the floor behind and right of the cabinet.",
+  "The paper must be neutral, as the card specifies (#DBDFE2). It now carries a cyan cast (delta E 4.7 in the sky, 4.3 on the floor) that the eight sister colours cannot share.",
+  "The cloth disc over the woofer must read as cloth, not a flat matte CG plane (out of scope here, but it blocks a 9).",
+  "Deliver at full resolution (1080 x 2160) with grain matched to the scale; at this proof size micro-detail and edges cannot be judged."
+ ],
+ "defects": [
+  {
+   "region": [
+    360,
+    440,
+    540,
+    480
+   ],
+   "what": "The cabinet's top-right edge and white top pad dissolve into the backdrop (pad median 240, paper 239.7). The silhouette is lost at its most important corner."
+  },
+  {
+   "region": [
+    20,
+    20,
+    520,
+    200
+   ],
+   "what": "The sweep reads cyan (RGB 224/237/245) against the specified #DBDFE2, delta E 4.66. The whole paper is cast blue."
+  },
+  {
+   "region": [
+    480,
+    0,
+    540,
+    470
+   ],
+   "what": "The right half of the backdrop is flat near-white (lum 239, range 3). It is featureless and gives the clear acrylic nothing to read against."
+  },
+  {
+   "region": [
+    380,
+    900,
+    540,
+    1000
+   ],
+   "what": "No coloured light from the tinted acrylic lands on the floor. The shadow is grey-blue, the same as the paper, so the product looks less like glass in light."
+  },
+  {
+   "region": [
+    128,
+    568,
+    335,
+    800
+   ],
+   "what": "The woofer's cloth disc is a uniform matte plane (lum range 16) with no weave, sheen or edge roll. It reads as a CG disc (shader, out of scope)."
+  },
+  {
+   "region": [
+    230,
+    320,
+    300,
+    400
+   ],
+   "what": "The horn throat is 78% crushed to black with no shape inside. It is fixed by the card (resin depth), but it is a black hole at the frame's upper focus."
+  },
+  {
+   "region": [
+    140,
+    440,
+    330,
+    480
+   ],
+   "what": "The thin steel posts holding the horn above the cabinet read as spindly floating supports. The horn appears to hover."
+  },
+  {
+   "region": [
+    0,
+    0,
+    540,
+    1080
+   ],
+   "what": "Half-size proof: aliasing on the horn's rim and the cabinet's edges can't be judged; a slight smoothness reads as render."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The top of the cabinet and the horn's right side merge into a near-white backdrop, so the silhouette breaks at the upper right.",
+   "evidence": {
+    "region": [
+     440,
+     430,
+     520,
+     470
+    ],
+    "measured": "paper lum_median 239.7 (range 2.7) right beside the top pad at lum_median 240.5; edge step 3.1 levels across x 425-450"
+   },
+   "change": {
+    "setting": "lights.wall",
+    "from": "irradiance 3.0 W/m2, aimed at [-2.6, 5.0, 2.4]",
+    "to": "irradiance 1.6 W/m2, aimed at [-3.2, 5.0, 2.0], so the bright part of the paper sits upper left and the paper behind the product's right side falls to a mid-light grey"
+   },
+   "expected": "The paper behind the top-right corner and horn falls to about lum 200-215. The white pad and the horn rim then stand out against it by at least 25 levels.",
+   "accept": {
+    "region": [
+     440,
+     400,
+     530,
+     470
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     195,
+     215
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The whole paper carries a cyan cast instead of the neutral #DBDFE2 the card specifies, and that does not travel across the eight colours.",
+   "evidence": {
+    "region": [
+     20,
+     20,
+     520,
+     200
+    ],
+    "measured": "RGB median 224/237/245, delta E2000 4.66 vs #DBDFE2; floor 202/214/222, delta E 4.26"
+   },
+   "change": {
+    "setting": "render white balance / finish",
+    "from": "5600 K, no colour correction",
+    "to": "6000 K (or neutralise the paper in post with a grey-point on the sweep), so R and B on the paper are within 6 levels of each other"
+   },
+   "expected": "The sweep reads neutral warm-grey and the blue lives only in the product and the light it casts.",
+   "accept": {
+    "region": [
+     20,
+     20,
+     520,
+     200
+    ],
+    "metric": "delta_e",
+    "hex": "#DBDFE2",
+    "op": "<",
+    "value": 2.5
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The tinted acrylic casts no coloured light on the floor, which is the strongest signal that the cabinet is real tinted glass.",
+   "evidence": {
+    "region": [
+     380,
+     900,
+     530,
+     1000
+    ],
+    "measured": "floor right of cabinet RGB ~187/200/207: the same hue ratio as open paper; no blue pool"
+   },
+   "change": {
+    "setting": "lights.back",
+    "from": "area [1.2, 1.0] at az 180 el 20, 3.0 W/m2, receivers limited to speaker parts",
+    "to": "az 160 el 35, 5.0 W/m2, add 'sweep' to receivers so light passing through the cabinet throws a blue transmitted pool onto the paper in front-right of the base"
+   },
+   "expected": "A soft blue pool on the floor just right of and in front of the base, its B channel 15+ levels above R more than the open paper.",
+   "accept": {
+    "region": [
+     360,
+     960,
+     480,
+     1010
+    ],
+    "metric": "b_median",
+    "op": ">",
+    "value": 225
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The top-right panel and the white top pad are lit as flatly as the paper, so the cabinet's top plane does not read as a separate surface.",
+   "evidence": {
+    "region": [
+     370,
+     465,
+     425,
+     478
+    ],
+    "measured": "top pad lum_median 240.5, nearly at white_in 236 / paper 239.7"
+   },
+   "change": {
+    "setting": "lights.key",
+    "from": "orbit az -35 el 30, 6.0 W/m2",
+    "to": "orbit az -35 el 22, 5.2 W/m2, so the top pad catches less direct light and sits a step below the paper's highlight"
+   },
+   "expected": "The top pad reads at about lum 215-228, distinct from both the paper and the clear edges.",
+   "accept": {
+    "region": [
+     370,
+     465,
+     425,
+     478
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     212,
+     230
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The backdrop has no designed fall-off from top to floor; the upper half is a flat 239 and only the foreground floor shades.",
+   "evidence": {
+    "region": [
+     470,
+     0,
+     530,
+     1080
+    ],
+    "measured": "profile y: 238.7, 239.7, 239.0, 239.7, 239.7, 228.0, (product), 202.9"
+   },
+   "change": {
+    "setting": "lights.wash",
+    "from": "irradiance 1.3 W/m2 aimed at [0.0, 0.4, 0.0]",
+    "to": "irradiance 1.0 W/m2 aimed at [0.0, -0.4, 0.0], letting the top of the sweep fall off toward the frame's top edge"
+   },
+   "expected": "A gentle fall-off from about 225 at the top to 238 behind the horn, which frames the product vertically and leaves room for type.",
+   "accept": {
+    "region": [
+     470,
+     0,
+     530,
+     140
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     215,
+     232
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The horn's throat is a crushed black mass at the frame's upper focal point; a small specular inside would give it depth without changing the object.",
+   "evidence": {
+    "region": [
+     230,
+     320,
+     300,
+     400
+    ],
+    "measured": "crush_pct 77.7, lum_median 0.2"
+   },
+   "change": {
+    "setting": "lights.horn",
+    "from": "irradiance 2.0 W/m2, specular 0.8, position [1.0, -1.2, 1.55]",
+    "to": "irradiance 2.6 W/m2, specular 1.0, position [0.8, -1.4, 1.35], so a highlight runs down into the throat"
+   },
+   "expected": "The throat keeps its depth but shows a curved highlight; crushed pixels drop below 60%.",
+   "accept": {
+    "region": [
+     230,
+     320,
+     300,
+     400
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 60
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The image is a half-size proof with light grain, so the surfaces read as smooth CG.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     540,
+     1080
+    ],
+    "measured": "540 x 1080 proof; paper lum_range 2.7-6.7 in flat areas, so the grain barely shows"
+   },
+   "change": {
+    "setting": "render / finish",
+    "from": "half size, grain 1.0",
+    "to": "full 1080 x 2160 at 256+ samples, grain 1.5 at grain_px 1.0"
+   },
+   "expected": "Edges and micro-detail can be judged at full size, and flat paper gains film texture.",
+   "accept": {
+    "region": [
+     10,
+     500,
+     80,
+     700
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 8
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer's cloth disc weave, sheen and a rolled edge so it reads as fabric.",
+   "why": "The cover's cloth shader is fixed and being reworked elsewhere. At lum range 16 it now reads as a flat CG disc."
+  },
+  {
+   "request": "Make the horn's support posts read as more substantial, or as clearly intentional.",
+   "why": "This is the speaker's parts, which are fixed. The horn now appears to hover on thin pins."
+  },
+  {
+   "request": "Give the white lining batts visible fibre and voile texture.",
+   "why": "The lining shader is being reworked elsewhere. It now reads as smooth foam blocks."
+  }
+ ],
+ "score_if_fixed": 7.3
+}

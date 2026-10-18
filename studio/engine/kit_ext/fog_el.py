@@ -44,6 +44,10 @@ def _domes(p, seed):
                     d2 = (x - cx) ** 2 + (y - cy) ** 2
                     if d2 < R * R:
                         top = max(top, base + h * (1 - d2 / (R * R)) ** 0.5)
+        if p.get('break'):                                    # noise breaks the domes' smooth caps into lumps
+            k = p['break']
+            top += H * k * (noise.noise(Vector((x / (b * 0.35), y / (b * 0.35), 3.1))) +
+                            0.5 * noise.noise(Vector((x / (b * 0.12), y / (b * 0.12), 7.7))))
         return top
     return height
 
@@ -232,3 +236,29 @@ def summit(bpy, name, p, kit):
         for o in root.children_recursive:
             o.hide_render = True
     return obs
+
+
+def scan(bpy, name, p, kit):
+    """A scanned model (assets.place: `model`, `res`, placed by `position`, `rotate`, `scale`) with a fine grain added to
+    its own surface: a noise bump `grain` metres across, `strength`, chained after the scan's normal map, so the stone
+    holds texture at 1:1 where the scan's texels run out."""
+    import assets
+    root = assets.place(bpy, p['model'], p.get('res', '2k'), tuple(p.get('position', [0, 0, 0])),
+                        tuple(p.get('rotate', [0, 0, 0])), p.get('scale', 1.0), name)
+    seen = set()
+    for o in [root] + list(root.children_recursive):
+        for slot in getattr(o, 'material_slots', []):
+            m = slot.material
+            if not m or m.name in seen or not m.use_nodes:
+                continue
+            seen.add(m.name)
+            nt = m.node_tree
+            b = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+            if not b:
+                continue
+            prev = b.inputs['Normal'].links[0].from_socket if b.inputs['Normal'].links else None
+            n = kit._bump(nt, b, p.get('grain', 0.006), p.get('strength', 0.3), p.get('grain', 0.006) * 0.4, detail=6.0,
+                          prev=prev)
+            kit._bump(nt, b, p.get('grain', 0.006) * 6, p.get('strength', 0.3) * 0.6, p.get('grain', 0.006) * 1.5,
+                      detail=4.0, prev=n)
+    return [root]

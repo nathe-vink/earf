@@ -1,0 +1,60 @@
+{
+ "date": "2026-10-18",
+ "new": "renders/2026-10-18/barkhorn/catalogue31/p9-blue-on.png",
+ "old": "renders/2026-10-18/barkhorn/catalogue31/p7-blue-on.png",
+ "new_score": 6.0,
+ "old_score": 5.5,
+ "prefer": "new",
+ "differences": [
+  {
+   "what": "Backdrop: A is a pale cool-blue sweep (lum ~201 upper left) that the blue, translucent product sinks into; B is a darker neutral grey with a vignette (lum ~149), so the cabinet's edges and the horn's silhouette separate cleanly from the set",
+   "region": [
+    0,
+    0,
+    540,
+    470
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "Horn throat: B shows the phase plug's dome and the vanes behind the clear horn with a crisp specular and readable structure; in A the throat reads as a flat dark blob with a soft, muddy centre",
+   "region": [
+    210,
+    300,
+    350,
+    420
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "Horn rim: B picks up a vertical specular on the left rim that describes the moulded thickness of the horn; A's rim is flat and evenly lit",
+   "region": [
+    85,
+    300,
+    110,
+    420
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "Woofer disc and cabinet face: B has more tonal range across the disc (p5-p95 71-162 against 43-133) and a lighter graded inner panel, so the disc reads as a lit surface rather than a flat blue cut-out",
+   "region": [
+    130,
+    570,
+    330,
+    800
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "Floor: A's floor is brighter and cleaner, with an even soft contact shadow; B's floor is greyer and slightly flatter, with less sense of a lit sweep under the cabinet",
+   "region": [
+    0,
+    950,
+    540,
+    1080
+   ],
+   "favours": "A"
+  }
+ ]
+}

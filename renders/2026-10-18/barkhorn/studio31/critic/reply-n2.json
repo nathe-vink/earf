@@ -1,0 +1,62 @@
+{
+  "stage1": {"impression": "A clean, disciplined spectrum line-up on white seamless, very much in the iMac G3 / Apple product-page idiom; the horns' tinted glass glows and the colour order reads at a glance. But the speakers hover rather than stand: there is almost no contact shadow, the floor is a flat near-white with no falloff, and the cabinets read slightly milky and uniform, so the frame says 'clean render' more than 'photographed in a studio'. Grey blocks in both bottom corners are a visible set seam.", "score": 6.5},
+  "verdict": "iterate",
+  "blocking_9": [
+    "Each speaker visibly sits on the seamless: a soft contact shadow under every plinth, darkest at the feet (lum about 215-230 within 25 px below the base) and fading over ~0.4 m",
+    "Floor carries a gentle tonal falloff instead of a flat 248 white, while the coloured caustics under each speaker stay visible",
+    "No grey patches or seams anywhere in the seamless, corners included",
+    "The black and water-clear units hold their silhouette and edges against the white (rim highlight on their side faces)",
+    "Cabinets read as saturated tinted acrylic with depth, not as a milky veil over the internals"
+  ],
+  "defects": [
+    {"region": [0, 900, 160, 1200], "what": "Grey rectangular patch in the bottom-left corner of the floor (lum median 224, range 26 vs 248 floor) - a set edge or unlit reflection seen in the sweep"},
+    {"region": [2740, 900, 2880, 1200], "what": "Same grey patch in the bottom-right corner, slightly blue (lum median 225)"},
+    {"region": [230, 800, 2650, 835], "what": "Contact shadows nearly absent: floor 2-4 px below the bases is already 239-245; speakers look like they float"},
+    {"region": [180, 840, 2700, 1000], "what": "Floor is a flat 248-249 near-white with lum range 3.4: no falloff, no weight, little depth"},
+    {"region": [2430, 360, 2650, 800], "what": "Black unit reads as a flat dark-grey block (median 46); its edges and the horn shape are weak against the frame"},
+    {"region": [1170, 500, 1480, 790], "what": "Cabinet faces read milky/greyish; the tint is washed by front fill so the acrylic does not glow as strongly as the horns"},
+    {"region": [0, 0, 2880, 300], "what": "Background is a flat 235-244 field with no gradient; acceptable for type but adds no depth"}
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "set",
+     "problem": "The speakers do not stand on the floor; there is effectively no contact shadow.",
+     "evidence": {"region": [1220, 790, 1460, 830], "measured": "profile y: 238.7 immediately under the base then 244-246; band [230,805,760,830] median 240.7"},
+     "change": {"setting": "set.contact.strength / distance_m", "from": "0.8 / 0.45", "to": "1.0 / 0.6 (keep core_strength 1.0, core_distance_m 0.03 -> 0.05)"},
+     "expected": "A soft grey pool under each plinth, darkest at the feet (~215-230) and back to floor white within ~60 px.",
+     "accept": {"region": [230, 805, 2650, 830], "metric": "lum_median", "op": "between", "value": [215, 233]}},
+    {"id": "c2", "rank": 2, "kind": "light",
+     "problem": "The back-top lamp floods the floor around the speakers to near-white, flattening it and washing out the contact shadows.",
+     "evidence": {"region": [1180, 830, 1500, 1000], "measured": "lum median 248.7, range 3.4 (flat), white_out is 238 yet floor sits at 248-249"},
+     "change": {"setting": "lights.back-top.irradiance", "from": "16.0", "to": "10.0"},
+     "expected": "Floor in the foreground settles to ~238-244 with a visible gradient toward the camera; caustic tints under each unit remain.",
+     "accept": {"region": [1180, 840, 1500, 1000], "metric": "lum_median", "op": "between", "value": [236, 245]}},
+    {"id": "c3", "rank": 3, "kind": "set",
+     "problem": "Grey blocks in both lower corners break the seamless.",
+     "evidence": {"region": [0, 950, 150, 1200], "measured": "lum median 224, p5 214, range 26 vs centre floor 248; right corner [2750,1000,2880,1200] median 225"},
+     "change": {"setting": "set.bounces[0].size_m (and set.width if the sweep edge is in view)", "from": "[9.0, 1.0]", "to": "[18.0, 1.4] so its reflection in the 0.32-rough sweep covers the full frame width"},
+     "expected": "Corners as light as the adjacent floor, no rectangular edge.",
+     "accept": {"region": [0, 950, 150, 1200], "metric": "lum_range", "op": "<", "value": 10}},
+    {"id": "c4", "rank": 4, "kind": "light",
+     "problem": "Front key fill washes the cabinets milky so the tinted acrylic glows less than the horns.",
+     "evidence": {"region": [1170, 500, 1480, 790], "measured": "green cabinet faces read greyish-green; horns saturated by comparison (blue horn b 206 vs r 62)"},
+     "change": {"setting": "lights.key.irradiance / specular", "from": "4.0 / 1.0", "to": "2.8 / 0.7"},
+     "expected": "Deeper, cleaner tint in the cabinet panels with internals still legible; whites on the floor unchanged.",
+     "accept": {"region": [230, 520, 290, 760], "metric": "g_median", "op": "<=", "value": 34}},
+    {"id": "c5", "rank": 5, "kind": "set",
+     "problem": "The black and water-clear units lose their edges against the white; the black one is a flat block.",
+     "evidence": {"region": [2430, 500, 2650, 790], "measured": "black cabinet lum median 46, p95 219.6, little edge definition on the right face"},
+     "change": {"setting": "set.bounces (new)", "from": "none", "to": "a reflect_only white card, size 2.0 x 1.4 m, center [5.0, -1.0, 1.0], normal [-0.95, 0.3, 0.0], giving a vertical edge highlight on the right faces"},
+     "expected": "A thin bright edge on the right side of each cabinet, strongest on the black unit, so its silhouette reads.",
+     "accept": {"region": [2430, 500, 2650, 790], "metric": "lum_p95", "op": ">=", "value": 228}},
+    {"id": "c6", "rank": 6, "kind": "light",
+     "problem": "The background is a uniform field; a gentle top-to-horizon gradient would add depth and lift the type area.",
+     "evidence": {"region": [0, 0, 2880, 300], "measured": "lum median 239.7, range 8.9; band at y 300-340 is 243.9"},
+     "change": {"setting": "lights.bg-left / bg-right target z", "from": "0.4", "to": "-0.2 (and irradiance 3.6 -> 3.2)"},
+     "expected": "Top of frame ~230-234 easing to ~242 at the horizon; type area still clean.",
+     "accept": {"region": [0, 0, 2880, 80], "metric": "lum_median", "op": "between", "value": [228, 236]}}
+  ],
+  "out_of_scope": [
+    {"request": "The water-clear unit's bright white woofer ring dominates its face compared with the coloured rings", "why": "It is a part/colour of the speaker; fixed by the card."}
+  ],
+  "score_if_fixed": 7.6
+}

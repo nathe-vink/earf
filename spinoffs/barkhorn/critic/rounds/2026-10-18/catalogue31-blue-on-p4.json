@@ -1,0 +1,369 @@
+{
+ "stage1": {
+  "impression": "A clean, competent three-quarter of a blue acrylic horn speaker on a blue-tinted sweep. The silhouette reads and the tinted glass has real depth, but the frame is monochrome, the base has no weight where it meets the floor, a hard white vertical line on the cabinet's front-right edge looks like a glitch, and the horn throat is a crushed black blob. Smeary denoiser blotches in the horn and the lining say proof render. It reads as good CG, not a photograph.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "A visible contact shadow along the whole front and left base edge: the floor within 10 px of the base darker than the floor 60 px away (now it is brighter: 207 at the front edge and 229 at the left, against 187)",
+  "The sweep evenly graded: top-left corner within 30 levels of top-right (now 162 vs 226), and no bright floor patch (233) left of the base that pulls the eye away from the product",
+  "The compression driver at the horn throat shows its form (a rim highlight and a separable body) instead of 52% crushed pixels",
+  "No hard, uniform specular strips: the front-right vertical edge highlight graded and below about 180 median, not a 200+ line of constant brightness",
+  "No denoiser smearing on the horn walls or the lining (final-sample render, grain doing the texture)",
+  "Cover cloth and lining reading as textile (out of scope here, but it holds the image under 9)"
+ ],
+ "defects": [
+  {
+   "region": [
+    200,
+    945,
+    300,
+    970
+   ],
+   "what": "No contact shadow under the front edge: floor reads 207, brighter than open floor at 187; the speaker hovers"
+  },
+  {
+   "region": [
+    60,
+    880,
+    98,
+    940
+   ],
+   "what": "Floor beside the left base edge is the brightest ground in frame (229); no occlusion where the cabinet stands"
+  },
+  {
+   "region": [
+    0,
+    820,
+    60,
+    945
+   ],
+   "what": "Bright floor band (233) on the left, a hot spot competing with the base"
+  },
+  {
+   "region": [
+    440,
+    800,
+    540,
+    945
+   ],
+   "what": "Long soft dark smudge (132 to 152) of cast shadow on the sweep right of the base, detached from the base itself"
+  },
+  {
+   "region": [
+    0,
+    0,
+    100,
+    150
+   ],
+   "what": "Top-left of the sweep a dingy grey (162) against 226 top-right: a strong diagonal gradient that reads as uneven paper"
+  },
+  {
+   "region": [
+    356,
+    560,
+    368,
+    880
+   ],
+   "what": "Hard white vertical line on the front-right edge (median 201, step 138 levels over 11 px): reads as a pasted stroke, not a glass edge"
+  },
+  {
+   "region": [
+    230,
+    280,
+    340,
+    410
+   ],
+   "what": "Compression driver crushed: 52% of pixels at black, median 2; no form"
+  },
+  {
+   "region": [
+    100,
+    270,
+    220,
+    420
+   ],
+   "what": "Painterly denoiser blotches and streaks inside the horn walls"
+  },
+  {
+   "region": [
+    120,
+    790,
+    350,
+    900
+   ],
+   "what": "Lining batts read as smooth pale-blue boxes with denoise smear (shader out of scope; noise is in scope)"
+  },
+  {
+   "region": [
+    128,
+    556,
+    334,
+    790
+   ],
+   "what": "Woofer cover reads as a flat blue plastic disc, no cloth weave (out of scope)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    540,
+    1080
+   ],
+   "what": "Monochrome: product, sweep and shadows all the same blue family; the product's tint does not separate from the paper's tint"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speaker does not stand: no contact darkening along its front and left base edges.",
+   "evidence": {
+    "region": [
+     200,
+     945,
+     300,
+     970
+    ],
+    "measured": "lum_median 207 just below the front edge vs 187 open floor; left edge strip [60,880,98,940] 229"
+   },
+   "change": {
+    "setting": "set contact shadow",
+    "from": "strength 0.6, distance_m 0.15, core_strength 0.85, core_distance_m 0.02",
+    "to": "strength 0.8, distance_m 0.25, core_strength 1.0, core_distance_m 0.012"
+   },
+   "expected": "A tight dark core line under every base edge fading over about 20 px into the floor; front strip near 160, left strip near 180.",
+   "accept": {
+    "region": [
+     200,
+     948,
+     300,
+     958
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 175
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The sweep is unevenly lit: a grey top-left, a hot floor patch left of the base and a detached shadow smudge on the right.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     100,
+     150
+    ],
+    "measured": "top-left 162 vs top-right [400,50,540,200] 226; left floor [0,820,60,940] 233; right shadow [440,860,540,880] 132-152"
+   },
+   "change": {
+    "setting": "lights.wall and lights.wash",
+    "from": "wall aimed at [-1.8, 5.0, 1.5] 1.0 W/m2; wash at [-0.6, -1.4, 3.0] 1.7 W/m2",
+    "to": "wall aimed at [-2.6, 5.0, 2.4] 1.4 W/m2 (lift the upper left); wash moved to [0.4, -1.4, 3.0], 1.3 W/m2 (cool the floor left of the base); lights.paper power 150 to 110 W"
+   },
+   "expected": "Top-left and top-right of the sweep within 30 levels; floor left of the base no brighter than the floor in front.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     100,
+     150
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 195
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "A hard white uniform line on the cabinet's front-right vertical edge reads as a stroke.",
+   "evidence": {
+    "region": [
+     356,
+     560,
+     368,
+     880
+    ],
+    "measured": "median 201, p95 231, edge step 138 levels over 11 px, near-constant top to bottom"
+   },
+   "change": {
+    "setting": "lights.edge",
+    "from": "area [0.02, 1.2] m, power 0.45 W",
+    "to": "area [0.06, 1.2] m, power 0.2 W (wider and dimmer, so it grades with the 20 mm edge instead of clipping a line)"
+   },
+   "expected": "The edge glows as a graded glass edge, median about 150 to 175, brighter mid-height, falling off top and bottom.",
+   "accept": {
+    "region": [
+     356,
+     560,
+     368,
+     880
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     130,
+     180
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The compression driver at the horn throat is a crushed black hole with no form.",
+   "evidence": {
+    "region": [
+     230,
+     280,
+     340,
+     410
+    ],
+    "measured": "crush_pct 52, median 2, p95 114"
+   },
+   "change": {
+    "setting": "lights.horn",
+    "from": "irradiance 0.6 W/m2, specular 0.4, position [1.6, -2.0, 1.45]",
+    "to": "irradiance 1.0 W/m2, specular 0.8, position [1.4, -1.6, 1.75] (higher, so the driver's rim and magnet catch a specular line through the horn's mouth)"
+   },
+   "expected": "The driver's rim and body separate; crushed area under 25% of the throat region while the driver still reads black.",
+   "accept": {
+    "region": [
+     230,
+     280,
+     340,
+     410
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 25
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "post",
+   "problem": "Denoiser blotches and streaks in the horn walls and the lining say render.",
+   "evidence": {
+    "region": [
+     100,
+     270,
+     220,
+     420
+    ],
+    "measured": "seen at 2x crop: painterly smears along the horn's left wall; region lum_range 69 in large flat patches"
+   },
+   "change": {
+    "setting": "render samples",
+    "from": "128",
+    "to": "512 for the final (and check at full size, not the half proof); keep finish grain 1.0 so texture comes from grain not denoise"
+   },
+   "expected": "Smooth graded horn walls with fine grain and no blotches.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The tinted acrylic has little transmitted glow onto the floor, so the product's colour never lands on its setting.",
+   "evidence": {
+    "region": [
+     360,
+     950,
+     420,
+     975
+    ],
+    "measured": "floor right-front of the base 194, r/g/b 176/197/210, same hue as open floor; no coloured caustic or blue bloom"
+   },
+   "change": {
+    "setting": "lights.key",
+    "from": "az -55 el 38 at 1.5 m, irradiance 4.5",
+    "to": "az -70 el 30 at 1.5 m, irradiance 5.0 (more light through the cabinet from behind-left so blue transmission falls onto the floor in front-right)"
+   },
+   "expected": "A faint blue-tinted pool on the floor right-front of the base, b minus r larger there than on open floor.",
+   "accept": {
+    "region": [
+     360,
+     955,
+     440,
+     990
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 185
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The paper is the same blue family as the speaker, so the frame is monochrome and the product's tint does not separate.",
+   "evidence": {
+    "region": [
+     400,
+     50,
+     540,
+     200
+    ],
+    "measured": "sweep r/g/b 206/230/244 vs cabinet front 26/98/146: same hue, only value differs; sweep delta_e to #D3E0E9 4.6"
+   },
+   "change": {
+    "setting": "set sweep colour",
+    "from": "#D3E0E9",
+    "to": "#DDE2E4 (keep a whisper of tint, much less chroma; the same rule, less chroma, applied to all eight colourways)"
+   },
+   "expected": "Paper reads as pale cool grey; the speaker becomes the only saturated blue in frame.",
+   "accept": {
+    "region": [
+     400,
+     50,
+     540,
+     200
+    ],
+    "metric": "delta_e",
+    "hex": "#DDE2E4",
+    "op": "<",
+    "value": 4
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "composition",
+   "problem": "Too much dead space above the horn and too little floor in front for a tall colour card.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     540,
+     248
+    ],
+    "measured": "product spans y 248 to 948 of 1080: 23% empty above, 12% below"
+   },
+   "change": {
+    "setting": "camera shift_y",
+    "from": "-0.035",
+    "to": "-0.015 (product drops about 40 px in the proof; more floor and contact in frame, less empty sweep above)"
+   },
+   "expected": "Roughly equal margins above the horn and below the base.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover a visible cloth weave and soft edge",
+   "why": "It reads as a flat blue plastic disc; the cover's cloth is being reworked elsewhere."
+  },
+  {
+   "request": "Give the lining batts and voile sleeves fibre and folds",
+   "why": "They read as smooth pale-blue boxes; the lining shaders are being reworked elsewhere."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

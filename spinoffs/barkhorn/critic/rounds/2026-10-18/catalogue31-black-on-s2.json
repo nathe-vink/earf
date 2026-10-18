@@ -1,0 +1,303 @@
+{
+ "stage1": {
+  "impression": "A clean, well-separated studio catalogue render: the smoked cabinet and tinted horn read at once against a light grey sweep, and the backlit grip and ports show the acrylic is transparent. It still reads as CG: the woofer cover is a flat matte disc, the inner lining looks like grey card, the right side panel goes to a dead black slab, and the speaker barely sits on the floor because the contact shadow is faint.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The cabinet must sit on the sweep: a dense contact core along the base and a soft falloff, the base strip at least 25% darker than open floor 40 px away (now about 12%).",
+  "The right side panel must keep tone and a readable gradient down to the feet, not crush to black (lower half now median 5, 32% crushed).",
+  "The sweep beside the speaker must keep paper tone rather than read as flat near-white (now median 240, range 6).",
+  "The woofer cover must read as woven cloth with a soft sheen, and the lining as textile in sleeves, not flat grey shapes (out of scope here, but it blocks a 9).",
+  "The final frame at full 1080 x 2160 must be free of grain and noise in the dark acrylic and on the paper."
+ ],
+ "defects": [
+  {
+   "region": [
+    120,
+    950,
+    400,
+    975
+   ],
+   "what": "Weak contact shadow: base strip median 143 against 163 open floor; the cabinet looks set down lightly, not standing with its weight."
+  },
+  {
+   "region": [
+    365,
+    700,
+    430,
+    900
+   ],
+   "what": "Right side panel lower half crushed: median 5.3, 32% of pixels below the crush threshold; it reads as a void, not as smoked acrylic."
+  },
+  {
+   "region": [
+    395,
+    300,
+    540,
+    460
+   ],
+   "what": "The sweep right of the speaker is flat near-white (median 240, range 6): no paper texture, and the brightest area in the frame sits beside the product, not on it."
+  },
+  {
+   "region": [
+    160,
+    620,
+    300,
+    740
+   ],
+   "what": "Woofer cover is a featureless matte disc (median 38, range 20): no weave or sheen (cloth shader, out of scope)."
+  },
+  {
+   "region": [
+    120,
+    490,
+    350,
+    560
+   ],
+   "what": "The inner lining and the ribs read as flat grey cardboard panels through the front (lining shader, out of scope)."
+  },
+  {
+   "region": [
+    100,
+    270,
+    370,
+    440
+   ],
+   "what": "Horn interior 23% crushed; the dark throat is the resin's own depth (fixed), but the bowl's left half has no tonal separation."
+  },
+  {
+   "region": [
+    365,
+    680,
+    430,
+    700
+   ],
+   "what": "A hard horizontal step in the side panel's reflection (about 30 down to 9 over a few px), where the sweep's horizon reflects; it reads as a seam."
+  },
+  {
+   "region": [
+    0,
+    0,
+    60,
+    200
+   ],
+   "what": "A heavy diagonal falloff on the background, from 146 top-left to 227 top-right: the frame feels lopsided once it is cropped narrow for the colour cards."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speaker does not stand with weight: the floor in front is lit almost as brightly as open paper, so the contact shadow is washed out.",
+   "evidence": {
+    "region": [
+     150,
+     952,
+     330,
+     962
+    ],
+    "measured": "base strip lum_median 143.4 vs open floor [150,990,330,1010] 162.5 (about 12% darker); floor profile below the base rises 137 to 166 within 140 px"
+   },
+   "change": {
+    "setting": "lights.pool irradiance; lights.wash irradiance; set contact shadow distance_m",
+    "from": "pool 1.5 W/m2, wash 0.5 W/m2, distance_m 0.22",
+    "to": "pool 0.8 W/m2, wash 0.25 W/m2, distance_m 0.32 (keep core_strength 0.95, core_distance_m 0.015)"
+   },
+   "expected": "A dense dark line under the base fading over about 40 px into the floor; base strip about 30% darker than the open floor nearby; the cabinet reads as heavy.",
+   "accept": {
+    "region": [
+     150,
+     952,
+     330,
+     962
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 118
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The right side panel crushes to black in its lower half, so the cabinet loses its depth and its acrylic reads as a black box.",
+   "evidence": {
+    "region": [
+     380,
+     700,
+     425,
+     900
+    ],
+    "measured": "side panel lum_median 5.3, crush_pct 32.4; profile down the panel 52 to 1.6"
+   },
+   "change": {
+    "setting": "lights.sidesheen peak radiance and ramp values",
+    "from": "radiance 0.4, ramp values [0.15, 1.0]",
+    "to": "radiance 0.7, ramp values [0.55, 1.0]"
+   },
+   "expected": "A soft gradient reflected down the whole side panel, from about 50 at the top to about 15 at the feet, so the edge of the cabinet holds against the floor shadow.",
+   "accept": {
+    "region": [
+     380,
+     700,
+     425,
+     900
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 10
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The paper beside the speaker is flat near-white and is the brightest thing in the frame, drawing the eye off the product.",
+   "evidence": {
+    "region": [
+     395,
+     300,
+     540,
+     460
+    ],
+    "measured": "lum_median 240.4, lum_range 5.8; open background at the same height on the left is 169"
+   },
+   "change": {
+    "setting": "finish white_in",
+    "from": "236",
+    "to": "250 (white_out stays 236)"
+   },
+   "expected": "The bright paper settles at about 225 to 230 with visible tone; the separation behind the dark side panel stays.",
+   "accept": {
+    "region": [
+     395,
+     300,
+     540,
+     460
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     220,
+     232
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The diagonal falloff on the background is too steep for a narrow colour-card crop: the top left goes grey-dark while the top right is bright.",
+   "evidence": {
+    "region": [
+     0,
+     30,
+     60,
+     120
+    ],
+    "measured": "top-left lum_median 146 vs top-right [460,30,540,120] 227; x-profile at y 100-140 runs 150 to 230"
+   },
+   "change": {
+    "setting": "lights.wall irradiance",
+    "from": "1.8 W/m2",
+    "to": "2.4 W/m2 (lifts the left of the sweep only)"
+   },
+   "expected": "Top-left paper at about 165 to 180, so a narrow crop keeps an even tone on both sides of the speaker and the falloff stays gentle.",
+   "accept": {
+    "region": [
+     0,
+     30,
+     60,
+     120
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     162,
+     185
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The left half of the horn's bowl has no tonal separation, so the horn reads as a black lozenge with a rim, not as a tinted resin form.",
+   "evidence": {
+    "region": [
+     100,
+     270,
+     240,
+     440
+    ],
+    "measured": "horn region crush_pct 23.5, lum_median 29.5; highlights only along the right rim"
+   },
+   "change": {
+    "setting": "lights.horn position",
+    "from": "[0.8, -1.4, 1.35]",
+    "to": "[0.2, -1.5, 1.45] (move it across to camera-left of centre so its broad reflection crosses the left half of the bowl); keep 2.6 W/m2"
+   },
+   "expected": "A broad soft gradient across the left half of the bowl (lum about 40 to 90) while the throat stays dark; crush in the horn region falls below 15%.",
+   "accept": {
+    "region": [
+     100,
+     270,
+     370,
+     440
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The side panel shows a hard horizontal step where the sweep's horizon reflects, which reads as a seam in the acrylic.",
+   "evidence": {
+    "region": [
+     380,
+     660,
+     425,
+     720
+    ],
+    "measured": "y-profile down the side falls 30.5 to 8.6 between neighbouring bins; the crop shows a sharp line at about y 690"
+   },
+   "change": {
+    "setting": "set.flags.1 position",
+    "from": "[1.8, 2.7, 1.3]",
+    "to": "[1.8, 2.7, 0.9] (lower the black card behind so the panel reflects a graded card edge rather than the paper's horizon); c2's sheen also softens it"
+   },
+   "expected": "A soft transition over about 40 px instead of a line.",
+   "accept": {
+    "region": [
+     380,
+     670,
+     425,
+     710
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 30
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover a visible weave and soft sheen.",
+   "why": "The cloth disc's shader is being reworked elsewhere; it now reads as a flat matte disc (median 38, range 20) and is the strongest CG tell in the frame."
+  },
+  {
+   "request": "Make the lining batts and voile sleeves read as textile with soft folds.",
+   "why": "The lining shader is being reworked elsewhere; through the front they read as flat grey card."
+  },
+  {
+   "request": "Check that the Smoke tint is neutral: the shadows of the acrylic run blue (side panel r 5, g 5, b 13).",
+   "why": "The speaker's colour is fixed; if Smoke is meant to be a neutral smoked black, the material needs correcting, not the light."
+  }
+ ],
+ "score_if_fixed": 6.8
+}

@@ -1,0 +1,314 @@
+{
+ "stage1": {
+  "impression": "A clean, quiet studio catalogue shot: the blue acrylic carcass and resin horn read at a glance and the soft sweep leaves room for type, but it still reads as a render. The woofer cover is a flat matte plastic disc, the lining looks like grey foam blocks, the compression driver is a crushed black blob, and a bright stripe of light across the left floor plus a weak, colourless shadow keep the speaker from sitting in a real room.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Woofer cover reads as real woven cloth with texture and a soft edge, not a flat matte disc (out of scope here: being reworked)",
+  "Lining reads as voile-sleeved polyester batts, not smooth grey blocks (out of scope here)",
+  "The floor has no hot stripe: the left floor at [0,810,95,940] is no brighter than the floor around it",
+  "The tinted acrylic throws visible blue transmitted light into its own shadow on the sweep",
+  "The compression driver shows its form (a rim or body highlight) instead of a 59 % crushed silhouette",
+  "The camera-side panel reads as translucent ice blue, not navy (median above 80)",
+  "No clipped CG line on the front-right vertical edge"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    810,
+    95,
+    940
+   ],
+   "what": "Bright diagonal stripe on the floor left of the cabinet (median 232 vs 180 for the floor around it); reads as a light leak"
+  },
+  {
+   "region": [
+    0,
+    600,
+    95,
+    780
+   ],
+   "what": "Darker band at the floor-to-curve transition above the stripe, making the sweep's gradient run the wrong way"
+  },
+  {
+   "region": [
+    220,
+    290,
+    330,
+    400
+   ],
+   "what": "Compression driver is a crushed black blob (59 % of pixels crushed), no shape or material"
+  },
+  {
+   "region": [
+    130,
+    560,
+    330,
+    790
+   ],
+   "what": "Woofer cover reads as a flat, smooth, matte plastic disc with no weave"
+  },
+  {
+   "region": [
+    190,
+    800,
+    290,
+    900
+   ],
+   "what": "Lining batts read as smooth grey CG blocks"
+  },
+  {
+   "region": [
+    370,
+    470,
+    430,
+    900
+   ],
+   "what": "Camera-side panel is heavy navy (median 62), losing the translucency of the colour"
+  },
+  {
+   "region": [
+    355,
+    780,
+    368,
+    900
+   ],
+   "what": "Hard clipped white line on the front-right vertical edge that starts and stops mid-height; reads as a CG highlight"
+  },
+  {
+   "region": [
+    435,
+    860,
+    500,
+    950
+   ],
+   "what": "Cast shadow is neutral grey; no blue light from the tinted acrylic on the floor"
+  },
+  {
+   "region": [
+    0,
+    0,
+    540,
+    1080
+   ],
+   "what": "Grain mottling visible in the sweep at full size; overall flat tonality (white_in 236, few true highlights)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "A hot stripe of light lies across the floor left of the cabinet and pulls the eye away from the product.",
+   "evidence": {
+    "region": [
+     0,
+     810,
+     95,
+     940
+    ],
+    "measured": "lum_median 232 vs 179 above it at [0,600,95,780] and 180 in the foreground at [0,1000,540,1080]; flat across x (232-234)"
+   },
+   "change": {
+    "setting": "lights.paper",
+    "from": "power 260 W, position [-0.35, 0.75, 0.12]",
+    "to": "power 150 W, position [-0.35, 0.75, 0.5] (lift it off the floor so it washes the curve, not rakes the floor)"
+   },
+   "expected": "The left floor blends into the surrounding sweep, a smooth gradient from foreground to curve with no band.",
+   "accept": {
+    "region": [
+     0,
+     810,
+     95,
+     940
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     185,
+     210
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The camera-side panel goes navy, so the colour reads as opaque cobalt rather than translucent ice.",
+   "evidence": {
+    "region": [
+     370,
+     470,
+     430,
+     900
+    ],
+    "measured": "lum_median 62, r_median 14"
+   },
+   "change": {
+    "setting": "lights.fill",
+    "from": "irradiance 1.2 W/m2",
+    "to": "irradiance 1.8 W/m2"
+   },
+   "expected": "The side panel lifts to a mid blue where the lining shows through, keeping a clear step darker than the front.",
+   "accept": {
+    "region": [
+     370,
+     470,
+     430,
+     900
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     80,
+     115
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The compression driver is a crushed black silhouette with no form, the darkest and most CG-looking element in the frame.",
+   "evidence": {
+    "region": [
+     220,
+     290,
+     330,
+     400
+    ],
+    "measured": "crush_pct 59, lum_median 1.1"
+   },
+   "change": {
+    "setting": "lights.horn",
+    "from": "specular 0.0",
+    "to": "specular 0.4 (a soft highlight along the driver's body and rim)"
+   },
+   "expected": "The driver keeps its black but shows a soft highlight that describes its round body and rear cap.",
+   "accept": {
+    "region": [
+     220,
+     290,
+     330,
+     400
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 40
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "A clipped hairline highlight on the front-right edge stops abruptly mid-height and reads as a render artefact.",
+   "evidence": {
+    "region": [
+     355,
+     780,
+     368,
+     900
+    ],
+    "measured": "lum_p95 240.5, clip_pct 0.19, rest of the edge median 45"
+   },
+   "change": {
+    "setting": "lights.edge",
+    "from": "power 0.8 W, size [0.008, 1.2]",
+    "to": "power 0.45 W, size [0.02, 1.2] (softer, dimmer, runs the edge evenly)"
+   },
+   "expected": "An even, unclipped edge line along the full corner instead of a hot fragment.",
+   "accept": {
+    "region": [
+     355,
+     780,
+     368,
+     900
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 225
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The shadow is neutral grey: tinted acrylic should throw some of its colour onto the paper, which is what ties a coloured translucent object to the ground.",
+   "evidence": {
+    "region": [
+     435,
+     860,
+     500,
+     950
+    ],
+    "measured": "r 127, g 147, b 160: same hue balance as the open floor (r 163, g 183, b 196), only darker"
+   },
+   "change": {
+    "setting": "render",
+    "from": "no refractive caustics (shadow from transmission blocked)",
+    "to": "enable refractive caustics on the key and the sweep as receiver (filter glossy 1.0), or make the cabinet shell's shadow transmit its colour"
+   },
+   "expected": "A faint ice-blue tint inside the cabinet's shadow on the sweep, stronger near the base.",
+   "accept": {
+    "region": [
+     435,
+     860,
+     500,
+     950
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 115
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "Grain shows as mottling on the clean sweep at full size and the tonality is flat, with no true highlight.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     540,
+     200
+    ],
+    "measured": "lum_p95 229, white_in 236; mottling visible in 2x crops of the floor"
+   },
+   "change": {
+    "setting": "finish (post)",
+    "from": "grain 2.0, contrast 0.06",
+    "to": "grain 1.0, contrast 0.10"
+   },
+   "expected": "A smoother sweep and slightly crisper separation of product from paper.",
+   "accept": {
+    "region": [
+     470,
+     100,
+     530,
+     160
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 5
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover a visible woven cloth texture and a soft, slightly domed edge",
+   "why": "The cover's cloth shader is being reworked elsewhere; at present it reads as a flat matte plastic disc, the single biggest CG tell in the frame."
+  },
+  {
+   "request": "Make the lining read as fibrous batts in voile sleeves",
+   "why": "Lining shader is being reworked elsewhere; it now reads as smooth grey blocks."
+  },
+  {
+   "request": "The Ice colour reads as saturated cobalt rather than a pale ice blue in thick sections",
+   "why": "The speaker's colour is fixed; flag it for the owner if Ice should read paler."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

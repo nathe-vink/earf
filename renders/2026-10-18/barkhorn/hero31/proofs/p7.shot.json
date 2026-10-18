@@ -1,0 +1,461 @@
+{
+ "sun": {
+  "azimuth_deg": 180,
+  "elevation_deg": 24.0,
+  "irradiance": 17.0,
+  "angle_deg": 1.5,
+  "color": 5200
+ },
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-red",
+  "instances": [
+   {
+    "flavour": "cloud-red",
+    "position": [
+     -2.12,
+     0.0,
+     0.0
+    ],
+    "rotate_z": 12.262,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-orange",
+    "position": [
+     -1.625,
+     1.4449,
+     0.0
+    ],
+    "rotate_z": 2.418,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-amber",
+    "position": [
+     -0.84,
+     0.4082,
+     0.0
+    ],
+    "rotate_z": 1.585,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "eucalyptus-y2k-green",
+    "position": [
+     -0.2285,
+     1.6898,
+     0.0
+    ],
+    "rotate_z": 5.891,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-blue",
+    "position": [
+     0.44,
+     0.4898,
+     0.0
+    ],
+    "rotate_z": -4.868,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-violet",
+    "position": [
+     1.1659,
+     1.6082,
+     0.0
+    ],
+    "rotate_z": -2.563,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "birch-fog-clear",
+    "position": [
+     1.72,
+     0.2449,
+     0.0
+    ],
+    "rotate_z": -12.399,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-black",
+    "position": [
+     2.5668,
+     1.2,
+     0.0
+    ],
+    "rotate_z": -6.246,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EEECE7",
+  "width": 34.0,
+  "front": 16.0,
+  "depth": 12.0,
+  "radius": 3.0,
+  "height": 16.0,
+  "cast_shadow": false,
+  "contact": {
+   "strength": 0.6,
+   "distance_m": 0.08,
+   "core_strength": 0.4,
+   "core_distance_m": 0.012
+  }
+ },
+ "materials": {
+  "sweep": {
+   "tooth": 0.5,
+   "tooth_mm": 0.6,
+   "mottle": 0.02,
+   "roughness": 0.85
+  }
+ },
+ "lights": {
+  "cyc": {
+   "type": "area",
+   "size_m": [
+    30.0,
+    5.0
+   ],
+   "position": [
+    0.0,
+    5.0,
+    2.5
+   ],
+   "target": [
+    0.0,
+    12.0,
+    2.5
+   ],
+   "irradiance": 16.0,
+   "color": 5200,
+   "spread_deg": 120,
+   "transmission": false
+  },
+  "top": {
+   "type": "area",
+   "size_m": [
+    24.0,
+    6.0
+   ],
+   "position": [
+    0.0,
+    7.0,
+    8.0
+   ],
+   "target": [
+    0.0,
+    7.5,
+    0.0
+   ],
+   "irradiance": 9.0,
+   "color": 5200,
+   "spread_deg": 90,
+   "transmission": false
+  },
+  "over": {
+   "type": "area",
+   "size_m": [
+    16.0,
+    8.0
+   ],
+   "position": [
+    0.0,
+    -5.0,
+    8.0
+   ],
+   "target": [
+    0.0,
+    -5.0,
+    0.0
+   ],
+   "irradiance": 4.0,
+   "color": 5200,
+   "spread_deg": 90,
+   "transmission": false
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    8.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    -16.0,
+    2.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 3.5,
+   "color": 5200,
+   "specular": 0.0
+  },
+  "side_l": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    3.0
+   ],
+   "position": [
+    -6.0,
+    -3.0,
+    1.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 10.0,
+   "color": 5200,
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "brace*",
+    "rib-*",
+    "land-*"
+   ]
+  },
+  "side_r": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    3.0
+   ],
+   "position": [
+    7.0,
+    -1.0,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 20.0,
+   "color": 5200,
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "brace*",
+    "rib-*",
+    "land-*"
+   ]
+  },
+  "face": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    -12.0,
+    2.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 6.0,
+   "color": 5200,
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "lining-*",
+    "woofer-ring"
+   ],
+   "specular": 0
+  },
+  "edge": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    0.6
+   ],
+   "position": [
+    0.0,
+    -9.0,
+    3.2
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.9
+   ],
+   "irradiance": 3.0,
+   "color": 5200,
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "brace*",
+    "rib-*",
+    "land-*"
+   ]
+  },
+  "smoke": {
+   "type": "area",
+   "size_m": [
+    0.4,
+    2.5
+   ],
+   "position": [
+    5.0,
+    2.0,
+    1.4
+   ],
+   "target": [
+    2.5667692307692307,
+    1.2,
+    0.8
+   ],
+   "irradiance": 8.0,
+   "color": 5200,
+   "receivers": [
+    "left#7",
+    "right#7",
+    "top#7",
+    "bottom#7",
+    "front-panel#7",
+    "back#7",
+    "brace*#7",
+    "rib-*#7",
+    "land-*#7",
+    "waveguide#7"
+   ]
+  },
+  "strip": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    0.5
+   ],
+   "position": [
+    0.0,
+    -4.0,
+    2.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.62
+   ],
+   "irradiance": 45.0,
+   "color": 5200,
+   "receivers": [
+    "woofer-cone",
+    "woofer-surround",
+    "woofer-cap",
+    "hf-motor",
+    "hf-frame",
+    "hf-adaptor",
+    "hf-plug"
+   ]
+  }
+ },
+ "render": {
+  "samples": 192,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 24,
+  "transmission_bounces": 16,
+  "transparent_bounces": 64,
+  "view": "Khronos PBR Neutral",
+  "exposure": -2.5,
+  "white_balance_k": 5150,
+  "white_balance_tint": 4.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 228,
+  "white_out": 230,
+  "peak": 246,
+  "contrast": 0.18,
+  "clarity": 0.1,
+  "sharpen": 0.45,
+  "sharpen_px": 0.7,
+  "dream": {
+   "saturation": 0.4
+  }
+ },
+ "title": "EARF: the eight Clouds (hero31)",
+ "size": [
+  2560,
+  1280
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -13.0,
+   2.0
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.8
+  ],
+  "lens_mm": 75.0,
+  "level": true,
+  "shift_y": -0.03,
+  "fstop": 2.8,
+  "focus": [
+   0.0,
+   0.4,
+   0.7
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#E9E8E5",
+  "horizon": "#ECEBE8",
+  "ground": "#8C8A86",
+  "strength": 0.4
+ }
+}

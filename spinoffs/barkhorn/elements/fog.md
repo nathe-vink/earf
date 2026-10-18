@@ -230,3 +230,51 @@ little higher; the speaker fills 42 % of its height.
 **Samples:** the finals render at 256 samples with the denoiser, not the brief's 512 to 1024. The near cloud deck is a
 procedural volume: at 128 samples a half-size proof took 23 minutes, so 512 at full size would be about 6 hours a frame
 on this 4-core machine. 256 is about 3 hours, and the denoiser cleans the volume's noise.
+
+## The final, and an honest note
+
+**Landscape:** `renders/2026-10-18/barkhorn/element31/fog.png`, 2400 x 1600, 256 samples, 3 h 05 min. It has its
+`.report.json` and `.shot.json`.
+
+**Portrait:** `fog-portrait.png`, 1600 x 2000, from the same rig on a 100 mm lens, rendered by the coordinator's helper
+session on `r31-element-fog-portrait`.
+
+**Blind critic on the final: 6.5** ("iterate"; 8.2 if fixed), the best score of the round. The critic: a clear,
+well-art-directed idea with a believable photographed sky and plenty of room for type; a strong render, not yet a
+location photograph.
+
+What holds it back, in its words and mine:
+
+1. **The far cloud deck** (the modelled slab beyond 2.6 km) is a field of smooth, repeated white domes. It is the
+   biggest tell. The near volume reads as real cloud; carrying the volume out to about 9 km would fix it, at a large
+   render cost (the volume is already about 85 % of the time).
+2. **Footing.** The speaker's left base sits over the crack between two slabs of the scan, with no contact shadow it
+   owns. Moving the speaker about 0.3 m onto the right slab would fix it.
+3. **The scanned rock** is soft at 1:1 in the bottom third. It needs a micro-detail normal and grit (an engine change to
+   the asset material), or a longer lens (85 mm) so the rock band shrinks and the speaker grows.
+4. **Flat front fill.** The warm bounce flattens the speaker's modelling a little against the hard sun on the rock; a
+   lower bounce (0.3) would give the acrylic more sun-made form.
+5. **The flock** is one silhouette repeated: vary the spans, glides and banks.
+
+Scores, pass by pass: 5.0, 5.5, 5.5, then the concept change, then 5.0, 5.5, 5.5, 5.0; the final scored 6.5. The
+fixes above are concrete, and the critic puts them at 8.2. The next round should start with 1 (the far deck as a
+volume) and 2 (footing).
+
+## Round 2, for the record
+
+The coordinator asked for one more round on the final critic's cheap fixes. The rig is a31e7bc:
+- **Footing:** the speaker on the scan's flattest place (found by ray casts; level within 4.8 cm, off the crack).
+- **Birds:** varied in size and pose.
+- **Rock:** a grain bump (kit_ext `scan`).
+- **Bounce:** down from 0.8 to 0.3.
+- **Far domes:** broken with noise.
+
+**Landscape:** fog.png, 2400 x 1600, 256 samples, 3 h 02 min.
+
+**Portrait:** fog-portrait.png, 1600 x 2000, 256 samples, 79 min, by the helper session (r31-element-fog-portrait-r2 at
+d1002aa, merged here). The helper notes the speaker stands square on the slab with no gap, though the contact shadow
+is faint, and two of the six birds are edge-on dashes.
+
+These replace round 1's frames on this branch; round 1's are in main (0e6c7db, 008c243) and in this branch's history.
+Neither frame got a duel or a critic pass. Fog B won the blind duel against Fog A's round 1, 6.7 to 4.7, and is on the
+site, and the owner has asked for a San Francisco Fog (Fog C, by the Fog B session). So this concept stops here.
