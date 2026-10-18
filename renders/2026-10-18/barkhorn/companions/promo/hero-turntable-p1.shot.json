@@ -1,0 +1,197 @@
+{
+ "title": "Cumulus beside Ember",
+ "size": [
+  1600,
+  1100
+ ],
+ "camera": {
+  "position": [
+   0.5172,
+   -1.0953,
+   1.2872
+  ],
+  "target": [
+   0.36,
+   0.39999999999999997,
+   0.74
+  ],
+  "lens_mm": 58,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   0.36,
+   0.37,
+   0.77
+  ]
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.015,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600
+ },
+ "materials": {
+  "oak": {
+   "grain": 1.0,
+   "roughness": 0.38
+  }
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   5.6,
+   4.6,
+   2.8
+  ],
+  "center": [
+   0.4,
+   -1.55
+  ],
+  "floor": {
+   "plank_w": 0.19,
+   "plank_l": 1.8,
+   "base": "#B08A60",
+   "dark": "#97724A",
+   "light": "#C49D70",
+   "plank_contrast": 1.1
+  },
+  "wall": {
+   "color": "#EEE9E1"
+  },
+  "ceiling": "#F3F0EA",
+  "skirting": {
+   "h": 0.11,
+   "color": "#ECE8E1"
+  },
+  "windows": [
+   {
+    "wall": "left",
+    "along": 0.9,
+    "sill": 0.45,
+    "size": [
+     1.5,
+     2.0
+    ],
+    "mullions": [
+     1,
+     2
+    ]
+   }
+  ],
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "modern_wooden_cabinet",
+    "res": "2k",
+    "position": [
+     1.25,
+     0.47,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "gloss",
+    "color": "#0D0D0E",
+    "radius": 0.1505,
+    "height": 0.0018,
+    "position": [
+     0.3348,
+     0.4061,
+     0.775
+    ],
+    "segments": 128
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "paper",
+    "color": "#7A1A1C",
+    "radius": 0.05,
+    "height": 0.0003,
+    "position": [
+     0.3348,
+     0.4061,
+     0.7768
+    ],
+    "segments": 96
+   }
+  ]
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "position": [
+      -0.36,
+      0.36,
+      0
+     ],
+     "rotate_z": 10
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-turntable.json",
+   "flavour": "ember",
+   "instances": [
+    {
+     "position": [
+      0.36,
+      0.42,
+      0.68
+     ],
+     "rotate_z": -6
+    }
+   ]
+  }
+ ],
+ "sky": {
+  "kind": "gradient",
+  "strength": 9.0,
+  "zenith": "#9FB8DA",
+  "horizon": "#D6EAF8",
+  "ground": "#8A8478"
+ },
+ "sun": {
+  "azimuth_deg": -72,
+  "elevation_deg": 24,
+  "irradiance": 3.0,
+  "angle_deg": 0.53,
+  "color": "#FFF0DC"
+ },
+ "lights": {
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": 35,
+    "elevation_deg": 15,
+    "distance_m": 2.2
+   },
+   "target": [
+    0.36,
+    0.39999999999999997,
+    0.74
+   ],
+   "irradiance": 0.35,
+   "color": "#EAF2FF"
+  }
+ }
+}
