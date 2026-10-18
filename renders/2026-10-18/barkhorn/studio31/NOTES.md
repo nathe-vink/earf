@@ -103,3 +103,10 @@ top, 250 on the floor; the finish's shoulder compresses the whites, so the wall 
 Back lamp 22 -> 30 and a low soft bank behind lighting the speaker alone (30), so Smoke reads as smoky acrylic with its
 internals, Ember unclipped. 60 mm and the target raised: about 57 % of the height, room above for type. Proofs: Ember,
 Fog, Smoke at 0.3 and 0.5. The lineup and macros keep the round-31c rig.
+
+Round 31d rendered (helpers h6 to h9) and dueled blind against 31c's set: **31c wins** in all three (Ember alone 6.0 to
+5.7; the set twice, with the order swapped, 6.5 to 6.0 both times). Every judge named the same cause: the extra headroom
+made the speaker read small in an empty field; one also named the new wall-to-floor horizon and the grey upper-left
+fall-off. 31d's flags drew Fog's edges and its back bank gave Smoke presence, and those were noted in its favour. The
+31c heroes and rig are restored (bright2 stays in the module for the record). For the drivers re-render: the 31c rig;
+the flags-in-reflection and the low back bank are candidates to try at 31c's framing, proofed and dueled first.

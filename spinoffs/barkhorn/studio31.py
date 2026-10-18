@@ -342,8 +342,9 @@ def main():
     for name, _ in COLOURS:
         made[f'hero-dark-{name}'] = hero(name, True)
     # round 31c: the studio set is bright field (it won its duel); the dark set stays as h7's record, unrendered
+    # round 31d's bright2 lost its duels to the 31c rig (NOTES.md: duels 10, 11, 11b), so the heroes stay on bright
     for name, _ in COLOURS:
-        made[f'hero-light-{name}'] = bright2(name)
+        made[f'hero-light-{name}'] = bright(name)
     made['lineup'] = lineup_bright()
     for name in ('ember', 'ice', 'smoke'):
         made[f'concept-bright-{name}'] = bright(name)
