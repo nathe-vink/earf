@@ -1,0 +1,514 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-red",
+  "instances": [
+   {
+    "flavour": "cloud-red",
+    "position": [
+     0.0,
+     0.0,
+     -0.003
+    ],
+    "rotate_z": 15.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "terrain",
+    "size": [
+     22.0,
+     16.0
+    ],
+    "position": [
+     0.0,
+     3.0,
+     0.0
+    ],
+    "cell": 0.02,
+    "relief": 0.14,
+    "flat": [
+     0.0,
+     0.0,
+     0.6
+    ],
+    "channels": [
+     {
+      "points": [
+       [
+        -9.0,
+        6.0
+       ],
+       [
+        -4.5,
+        4.4
+       ],
+       [
+        -1.5,
+        3.4
+       ],
+       [
+        1.0,
+        3.0
+       ],
+       [
+        3.6,
+        3.6
+       ],
+       [
+        8.0,
+        5.2
+       ]
+      ],
+      "width": 0.8,
+      "depth": 0.35,
+      "bank": 0.5
+     },
+     {
+      "points": [
+       [
+        -2.6,
+        -2.4
+       ],
+       [
+        -1.9,
+        -1.6
+       ],
+       [
+        -1.5,
+        -0.2
+       ],
+       [
+        -1.2,
+        0.6
+       ],
+       [
+        -0.6,
+        1.3
+       ],
+       [
+        -0.6,
+        2.6
+       ]
+      ],
+      "width": 0.04,
+      "depth": 0.09,
+      "bank": 0.048
+     },
+     {
+      "points": [
+       [
+        0.7,
+        0.55
+       ],
+       [
+        1.4,
+        0.7
+       ],
+       [
+        2.1,
+        0.3
+       ],
+       [
+        3.2,
+        0.5
+       ]
+      ],
+      "width": 0.04,
+      "depth": 0.09,
+      "bank": 0.048
+     },
+     {
+      "points": [
+       [
+        1.4,
+        0.7
+       ],
+       [
+        1.6,
+        1.6
+       ],
+       [
+        1.3,
+        2.7
+       ]
+      ],
+      "width": 0.03,
+      "depth": 0.09,
+      "bank": 0.036
+     }
+    ],
+    "lava_below": true,
+    "rock": "dark_rock_02",
+    "displace": 0.03,
+    "albedo": 0.06,
+    "rough_mul": 0.75,
+    "rock_tint": "#2A2A2A",
+    "rock_tint_mix": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "lava_surface",
+    "size": [
+     22.0,
+     16.0
+    ],
+    "position": [
+     0.0,
+     3.0,
+     -0.06
+    ],
+    "cell": 0.05,
+    "lava": "acg:Lava001",
+    "scale": 2.2,
+    "strength": 80.0,
+    "gain": 2.6,
+    "ripple": 0.012,
+    "crust_rough": 0.85,
+    "crust_spec": 0.2
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "terrain",
+    "size": [
+     90.0,
+     50.0
+    ],
+    "position": [
+     0.0,
+     36.0,
+     -0.25
+    ],
+    "cell": 0.12,
+    "relief": 0.6,
+    "flat": [
+     0.0,
+     -200.0,
+     1.0
+    ],
+    "cliff": {
+     "y0": 34.0,
+     "rise": 12.0,
+     "height": 3.5,
+     "rough": 1.0
+    },
+    "pools": [
+     [
+      -7.5,
+      26.0,
+      1.2,
+      0.3
+     ]
+    ],
+    "channels": [
+     {
+      "points": [
+       [
+        14.0,
+        16.0
+       ],
+       [
+        5.0,
+        14.5
+       ],
+       [
+        -4.0,
+        16.0
+       ],
+       [
+        -16.0,
+        14.0
+       ]
+      ],
+      "width": 0.5,
+      "depth": 0.2,
+      "bank": 0.6,
+      "lava": "flow"
+     }
+    ],
+    "flow": "acg:Lava001",
+    "flow_emit": 40.0,
+    "flow_gain": 2.2,
+    "flow_scale": 2.5,
+    "molten": "acg:Lava004",
+    "molten_emit": 30.0,
+    "molten_scale": 3.0,
+    "rock": "dark_rock_02",
+    "displace": 0.05,
+    "albedo": 0.06,
+    "rough_mul": 0.75,
+    "rock_tint": "#2A2A2A",
+    "rock_tint_mix": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "steam",
+    "box": [
+     -6.0,
+     1.6,
+     -0.1,
+     5.0,
+     4.6,
+     1.8
+    ],
+    "density": 1.4,
+    "scale": 0.8,
+    "anisotropy": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "steam",
+    "box": [
+     -10.5,
+     23.5,
+     0.0,
+     -3.5,
+     28.5,
+     9.0
+    ],
+    "density": 0.25,
+    "scale": 2.5,
+    "anisotropy": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "sparks_mixed",
+    "area": [
+     1.2,
+     2.6,
+     3.4,
+     3.6
+    ],
+    "count": 12,
+    "height": 2.0,
+    "streak": [
+     0.01,
+     0.08
+    ],
+    "radius": [
+     0.001,
+     0.003
+    ],
+    "drift": [
+     0.3,
+     0.1
+    ],
+    "emit": 16.0,
+    "seed": 4
+   }
+  ]
+ },
+ "lights": {
+  "through": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    1.2
+   ],
+   "position": [
+    0.15,
+    0.9,
+    0.5
+   ],
+   "target": [
+    0.0,
+    -0.6,
+    0.3
+   ],
+   "irradiance": 3.0,
+   "color": "#FF5A18"
+  },
+  "horn": {
+   "type": "area",
+   "size_m": [
+    0.9,
+    0.5
+   ],
+   "position": [
+    0.1,
+    0.8,
+    1.25
+   ],
+   "target": [
+    0.0,
+    -0.2,
+    1.12
+   ],
+   "irradiance": 3.0,
+   "color": "#FF5A18"
+  },
+  "crack_l": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    1.4
+   ],
+   "position": [
+    -1.4,
+    -0.2,
+    0.03
+   ],
+   "target": [
+    -1.4,
+    -0.2,
+    1.0
+   ],
+   "irradiance": 0.5,
+   "color": "#FF6A22"
+  },
+  "crack_r": {
+   "type": "area",
+   "size_m": [
+    1.4,
+    0.12
+   ],
+   "position": [
+    1.7,
+    0.6,
+    0.03
+   ],
+   "target": [
+    1.7,
+    0.6,
+    1.0
+   ],
+   "irradiance": 0.5,
+   "color": "#FF6A22"
+  },
+  "face": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.3
+   ],
+   "position": [
+    -1.2,
+    -1.6,
+    0.15
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 0.6,
+   "color": "#FF6A22"
+  },
+  "river": {
+   "type": "point",
+   "position": [
+    1.0,
+    3.2,
+    0.5
+   ],
+   "power_w": 120,
+   "color": "#FF6A22",
+   "radius_m": 0.3
+  },
+  "vent": {
+   "type": "point",
+   "position": [
+    -7.5,
+    26.0,
+    1.0
+   ],
+   "power_w": 3000,
+   "color": "#FF6A22",
+   "radius_m": 0.8
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.0,
+  "white_balance_k": 4800,
+  "white_balance_tint": 10,
+  "look": "AgX - Base Contrast"
+ },
+ "title": "barkhorn, Ember, a lava field at blue hour (4:5)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   2.4349,
+   -6.0267,
+   0.95
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.9
+  ],
+  "lens_mm": 92.0,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   0.0,
+   -0.21,
+   0.66
+  ]
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "qwantani_dusk_2_puresky",
+  "rotation_deg": 0.0,
+  "strength": 0.15,
+  "res": "4k"
+ },
+ "finish": {
+  "enabled": false,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.05,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.18,
+   "bloom_px": 34,
+   "bloom_threshold": 0.88,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.2
+  }
+ },
+ "haze": {
+  "box_m": [
+   -45.0,
+   -10.0,
+   -0.5,
+   45.0,
+   62.0,
+   14.0
+  ],
+  "density": 0.003,
+  "anisotropy": 0.4,
+  "color": "#FFFFFF"
+ }
+}
