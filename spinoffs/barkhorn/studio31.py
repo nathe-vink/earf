@@ -105,6 +105,77 @@ def hero(name, dark=True):
     return s
 
 
+# Round 31c: two concepts after seven passes held at 5.0 to 5.5 (the coordinator, on the plateau: change the concept,
+# not the knobs). Both cover on (the product's own state: the cloth hides the woofer's dark cone) and both from the
+# look book's three-quarter direction (camera about 26 degrees off the speaker's axis), the speaker about 62 % of the
+# frame's height. Each is one of the classic ways glass and clear acrylic are photographed.
+CAM34 = {'position': [2.85, -5.85, 0.98], 'target': [0.0, 0.0, 0.64], 'lens_mm': 63.0, 'level': True}
+
+
+def covered(name):
+    p = product(name)
+    for i in p['instances']:
+        i['hide'] = []
+    return p
+
+
+def bright(name):
+    """Bright field on white (the iMac G3 and the Cube): the seamless lit high-key behind, so it shines through the tint
+    and the colour glows like stained glass; black flags just outside the frame either side, which each vertical edge
+    refracts as a crisp dark line; a big scrim overhead for the top; a white card low in front, so the horn's throat
+    mirrors a gradient and not black."""
+    s = {'title': f'barkhorn, {name}, bright field', 'size': [2560, 1440], 'product': covered(name),
+         'set': {'kind': 'sweep', 'color': '#F4F3F1', 'width': 24.0, 'front': 14.0, 'depth': 4.0, 'radius': 3.0, 'height': 9.0,
+                 'contact': {'strength': 0.3, 'distance_m': 0.06, 'core_strength': 0.6, 'core_distance_m': 0.01},
+                 'flags': [{'center_m': [-2.0, 0.2, 1.6], 'size_m': [1.2, 1.8], 'normal': [1.0, -0.2, 0.0], 'glossy': True},
+                           {'center_m': [1.6, 1.2, 1.6], 'size_m': [1.2, 1.8], 'normal': [-0.8, -0.6, 0.0], 'glossy': True}],
+                 'bounces': [{'center_m': [0.9, -1.9, 0.35], 'size_m': [1.6, 0.6], 'normal': [-0.45, 0.85, 0.35]}]},
+         'camera': dict(CAM34), 'sky': {'kind': 'gradient', 'zenith': '#F2F1EF', 'horizon': '#EEEDEB', 'ground': '#CFCCC8',
+                                       'strength': 0.6, 'visible': False},
+         'render': dict(RENDER, white_balance_tint=0.0), 'finish': dict(FINISH),
+         'materials': {'sweep': {'roughness': 0.5}}}
+    s['lights'] = {
+        # the background: two broad lamps on the cove behind, out of frame, lifting it to a clean high-key white
+        'bg-left': {'type': 'area', 'size_m': [3.0, 3.0], 'position': [-2.6, 1.2, 2.4], 'target': [0.0, 4.0, 1.4],
+                    'irradiance': 2.4, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0},
+        'bg-right': {'type': 'area', 'size_m': [3.0, 3.0], 'position': [2.6, 1.2, 2.4], 'target': [0.0, 4.0, 1.4],
+                     'irradiance': 2.4, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0},
+        # a big scrim overhead, a little forward: the top and the horn's crown
+        'scrim': {'type': 'area', 'size_m': [3.0, 2.4], 'position': [0.3, -0.6, 3.2], 'target': [0.0, 0.0, 0.8],
+                  'irradiance': 1.6, 'color': '#FFFAF4', 'camera': False},
+        # a soft frontal key from the camera's side, low in strength: the faces carry their colour, not a white sheet
+        'key': {'type': 'area', 'size_m': [2.4, 2.4], 'orbit': {'azimuth_deg': 5, 'elevation_deg': 20, 'distance_m': 4.5},
+                'target': [0.0, 0.0, 0.6], 'irradiance': 1.3, 'color': '#FFFAF4', 'camera': False, 'specular': 0.3},
+    }
+    return s
+
+
+def darkfield(name):
+    """Dark field on black: no light on the faces; two tall strips behind at grazing angles, so only the edges and
+    corners glow (cast acrylic pipes light to its edges); a soft backlight through the body for the colour, the inside
+    falling to silhouette."""
+    s = {'title': f'barkhorn, {name}, dark field', 'size': [2560, 1440], 'product': covered(name),
+         'set': {'kind': 'sweep', 'color': '#0B0B0B', 'width': 24.0, 'front': 14.0, 'depth': 5.0, 'radius': 4.0, 'height': 9.0,
+                 'contact': {'strength': 0.3, 'distance_m': 0.06, 'core_strength': 0.6, 'core_distance_m': 0.01}},
+         'camera': dict(CAM34), 'sky': {'kind': 'none'},
+         'render': dict(RENDER, white_balance_tint=0.0), 'finish': dict(FINISH),
+         'materials': {'sweep': {'roughness': 0.15, 'specular': 0.05}}}
+    recv = ['*#0']
+    s['lights'] = {
+        'edge-left': {'type': 'panel', 'size_m': [0.3, 3.2], 'orbit': {'azimuth_deg': -150, 'elevation_deg': 10, 'distance_m': 1.8},
+                      'target': [0.0, 0.0, 0.62], 'strength': 30.0, 'diffuse': 1.0, 'specular': 1.0, 'receivers': recv},
+        'edge-right': {'type': 'panel', 'size_m': [0.3, 3.2], 'orbit': {'azimuth_deg': 160, 'elevation_deg': 10, 'distance_m': 1.8},
+                       'target': [0.0, 0.0, 0.62], 'strength': 30.0, 'diffuse': 1.0, 'specular': 1.0, 'receivers': recv},
+        # the backlight: a soft bank right behind the speaker, facing the camera, lighting it alone
+        'through': {'type': 'panel', 'size_m': [1.0, 0.9], 'position': [-0.35, 0.9, 0.45], 'target': [0.4, -1.0, 0.45],
+                    'strength': 4.0, 'diffuse': 1.0, 'specular': 0.0, 'receivers': recv},
+        # a faint glow on the cove behind, so the black has depth
+        'glow': {'type': 'area', 'shape': 'DISK', 'size_m': [2.0, 2.0], 'position': [0.0, 0.5, 0.9], 'target': [0.0, 5.0, 1.4],
+                 'spread_deg': 120, 'power_w': 140.0, 'color': '#F6F2EC', 'camera': False, 'specular': 0.0},
+    }
+    return s
+
+
 # the details: (name, colour, the speaker's turn, camera position, target, lens); each in the colour that shows it best
 MACROS = [
     # the horn from the side: its rolled lip at the mouth and the twist-lock cap at its back (Acid: the lip glows gold)
@@ -172,6 +243,9 @@ def main():
     for name in LIGHT_ONES:
         made[f'hero-light-{name}'] = hero(name, False)
     made['lineup'] = lineup()
+    for name in ('ember', 'ice', 'smoke'):
+        made[f'concept-bright-{name}'] = bright(name)
+        made[f'concept-darkfield-{name}'] = darkfield(name)
     for m in MACROS:
         made[f'macro-{m[0]}-{m[1]}'] = macro(*m)
     for n, sh in made.items():

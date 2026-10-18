@@ -1,0 +1,175 @@
+{
+ "title": "barkhorn, smoke, dark field",
+ "size": [
+  2560,
+  1440
+ ],
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-black",
+  "instances": [
+   {
+    "position": [
+     0.0,
+     0.0,
+     0
+    ],
+    "rotate_z": 0.0,
+    "flavour": "cloud-black",
+    "hide": []
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#0B0B0B",
+  "width": 24.0,
+  "front": 14.0,
+  "depth": 5.0,
+  "radius": 4.0,
+  "height": 9.0,
+  "contact": {
+   "strength": 0.3,
+   "distance_m": 0.06,
+   "core_strength": 0.6,
+   "core_distance_m": 0.01
+  }
+ },
+ "camera": {
+  "position": [
+   2.85,
+   -5.85,
+   0.98
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.64
+  ],
+  "lens_mm": 63.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "none"
+ },
+ "render": {
+  "samples": 80,
+  "adaptive": 0.015,
+  "denoise": true,
+  "clamp": 4,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5800,
+  "white_balance_tint": 0.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "sweep": {
+   "roughness": 0.15,
+   "specular": 0.05
+  }
+ },
+ "lights": {
+  "edge-left": {
+   "type": "panel",
+   "size_m": [
+    0.3,
+    3.2
+   ],
+   "orbit": {
+    "azimuth_deg": -150,
+    "elevation_deg": 10,
+    "distance_m": 1.8
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.62
+   ],
+   "strength": 30.0,
+   "diffuse": 1.0,
+   "specular": 1.0,
+   "receivers": [
+    "*#0"
+   ]
+  },
+  "edge-right": {
+   "type": "panel",
+   "size_m": [
+    0.3,
+    3.2
+   ],
+   "orbit": {
+    "azimuth_deg": 160,
+    "elevation_deg": 10,
+    "distance_m": 1.8
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.62
+   ],
+   "strength": 30.0,
+   "diffuse": 1.0,
+   "specular": 1.0,
+   "receivers": [
+    "*#0"
+   ]
+  },
+  "through": {
+   "type": "panel",
+   "size_m": [
+    1.0,
+    0.9
+   ],
+   "position": [
+    -0.35,
+    0.9,
+    0.45
+   ],
+   "target": [
+    0.4,
+    -1.0,
+    0.45
+   ],
+   "strength": 4.0,
+   "diffuse": 1.0,
+   "specular": 0.0,
+   "receivers": [
+    "*#0"
+   ]
+  },
+  "glow": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    2.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    0.5,
+    0.9
+   ],
+   "target": [
+    0.0,
+    5.0,
+    1.4
+   ],
+   "spread_deg": 120,
+   "power_w": 140.0,
+   "color": "#F6F2EC",
+   "camera": false,
+   "specular": 0.0
+  }
+ }
+}
