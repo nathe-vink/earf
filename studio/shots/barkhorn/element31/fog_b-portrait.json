@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.008
+     -0.015
     ],
     "rotate_z": 10.0,
     "hide": [
@@ -26,18 +26,18 @@
     "texture": "sparse_grass",
     "size": [
      26.0,
-     16.0
+     26.5
     ],
     "position": [
      0.0,
-     -6.1,
+     -0.75,
      0.0
     ],
     "displace": 0.02,
     "relief": 0.12,
     "res": "2k",
-    "tint": "#8A7B55",
-    "tint_mix": 0.2,
+    "tint": "#5F5A3A",
+    "tint_mix": 0.3,
     "cells": 900
    },
    {
@@ -87,15 +87,15 @@
       -40.0
      ]
     ],
-    "grass": "#7A6C4A",
-    "scrub": "#23281C",
+    "grass": "#6B6A45",
+    "scrub": "#2A3320",
     "floor": -140.0,
-    "brow": 1.95,
+    "brow": 12.6,
     "steep": 10.0,
     "drop": 110.0,
     "wide": 50.0,
     "y_range": [
-     1.0,
+     11.5,
      6500.0
     ],
     "x_spread": [
@@ -109,8 +109,8 @@
     "relief": 0.15,
     "relief_far": 0.008,
     "gullies": [
-     18.0,
-     170.0
+     26.0,
+     120.0
     ]
    },
    {
@@ -219,7 +219,7 @@
     "haze_height": 170.0,
     "box": [
      -3500.0,
-     3.0,
+     13.0,
      -170.0,
      4500.0,
      7000.0,
@@ -231,7 +231,7 @@
     "shape": "ext",
     "module": "fog_b_el",
     "fn": "fog",
-    "top": 0.5,
+    "top": -0.5,
     "heave": 4.0,
     "billows": [
      [
@@ -244,17 +244,17 @@
      ]
     ],
     "soft": 4.0,
-    "density": 0.035,
+    "density": 0.025,
     "anisotropy": 0.6,
     "billow_size": 6.0,
     "billow_cut": 0.42,
     "billow_gain": 3.0,
     "box": [
      -45.0,
-     2.6,
+     13.2,
      -40.0,
      70.0,
-     90.0,
+     100.0,
      4.0
     ]
    },
@@ -263,25 +263,26 @@
     "shape": "scatter_assets",
     "models": [
      "grass_medium_02",
-     "grass_medium_01"
+     "grass_medium_01",
+     "grass_bermuda_01"
     ],
-    "count": 1100,
+    "count": 3500,
     "area": [
      -9.0,
      -13.0,
-     10.0,
-     1.5
+     11.0,
+     12.2
     ],
     "avoid": [
      [
       0.0,
       0.0,
-      0.6
+      0.75
      ]
     ],
     "scale": [
-     0.7,
-     1.4
+     0.4,
+     1.6
     ],
     "seed": 3,
     "res": "1k"
@@ -290,14 +291,41 @@
     "kind": "kit",
     "shape": "scatter_assets",
     "models": [
-     "grass_medium_02"
+     "grass_bermuda_01"
     ],
     "count": 40,
     "area": [
+     -1.1,
+     -1.1,
+     1.1,
+     1.1
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.42
+     ]
+    ],
+    "scale": [
+     0.3,
+     0.5
+    ],
+    "seed": 7,
+    "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter_assets",
+    "models": [
+     "grass_medium_02"
+    ],
+    "count": 60,
+    "area": [
      -8.0,
-     1.4,
-     12.0,
-     1.95
+     11.8,
+     14.0,
+     12.6
     ],
     "avoid": [
      [
@@ -347,7 +375,27 @@
    }
   ]
  },
- "lights": {},
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": -60.0,
+    "elevation_deg": 8.0,
+    "distance_m": 2.5
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 0.75,
+   "color": "#F3E6C8"
+  }
+ },
  "render": {
   "samples": 512,
   "adaptive": 0.02,
@@ -356,7 +404,9 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
-  "look": "AgX - Base Contrast"
+  "look": "AgX - Base Contrast",
+  "volume_biased": true,
+  "volume_step_rate": 4.0
  },
  "title": "barkhorn, Fog: San Francisco fog over a Marin headland at dawn (4:5)",
  "size": [
@@ -390,12 +440,12 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "syferfontein_6d_clear_puresky",
-  "rotation_deg": 214.2,
+  "rotation_deg": 179.2,
   "strength": 1.0,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": -160.0,
+  "azimuth_deg": -125.0,
   "elevation_deg": 5.8,
   "irradiance": 3.0,
   "angle_deg": 0.53,
@@ -405,8 +455,8 @@
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.05,
-  "clarity": 0.04,
+  "contrast": 0.1,
+  "clarity": 0.06,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
@@ -416,7 +466,7 @@
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.15
+   "vignette": 0.22
   }
  }
 }
