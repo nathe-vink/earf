@@ -154,7 +154,7 @@ Three of the campaign critics named the speaker's own surfaces:
 - **The cover read as brushed metal.** Its heather was drawn out in one direction only, so from a few metres it was a field of vertical streaks. Now the warp's heather runs along the warp and the weft's along the weft, crossing as a cloth's do, with soft slubs and a fabric's sheen.
 - **The lining read as moulded clay.** Its clouds are gentler (3 cm), and the batts are lumpy where they are stuffed into their sleeves (a soft relief 7 cm across).
 - **The black front edge of the top** is the edge itself. Seen end-on through about 400 mm of tint, it stays dark even at 32 light bounces, so the fix is a light placed to catch it, not a shader.
-- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light.
+- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light. The room's critics still read its face as one flat matt tone under raking sun, so the cloth is a melange now: each yarn's heather and the slubs stronger, and a faint unevenness 60 mm across where the cloth is stretched over the frame (`mottle`). Under the same raking light the disc's face varies a quarter more (p5 to p95 of its luminance 3.6 to 4.5).
 
 ### Pictures for a launch (in progress)
 
