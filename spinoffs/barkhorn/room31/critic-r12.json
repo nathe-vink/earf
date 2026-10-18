@@ -1,0 +1,346 @@
+{
+ "stage1": {
+  "impression": "A clean, competent architectural-visualisation interior: a coherent low sun from the left, a plausible oak floor and a calm, symmetrical layout with plenty of wall for type. It still reads as CG. The sunlit wall is a near-white flat field with no plaster life, the credenza's three doors repeat the same veneer figure, and the tinted cabinets mostly sit in front of the light rather than glowing with it, so the green looks like a painted box. The horns' wall shadows are opaque grey, and the pair is lit unevenly: the left one is against white sun and the right one is against shade.",
+  "score": 6.3
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Sunlight must visibly pass through both cabinets: lit ribs and batts inside, and green-tinted light pooling on the floor or wall beside each speaker, equally for the pair",
+  "Shadows of the tinted horn and cabinet must carry green, not neutral grey",
+  "The sunlit plaster must hold texture and sit below about 212 so the heading has room and the wall stops being the brightest thing in frame",
+  "Credenza doors must not repeat one veneer flitch figure",
+  "The two speakers must read as one lit pair, with no white-wall versus shadow-wall split between them",
+  "The wall sockets must not be the brightest small objects in the lower frame"
+ ],
+ "defects": [
+  {
+   "region": [
+    160,
+    60,
+    860,
+    470
+   ],
+   "what": "Sunlit plaster near white and flat: median 230-233, range 5.7-6.9 including grain, so there is no visible plaster texture and it reads as a CG wall"
+  },
+  {
+   "region": [
+    860,
+    60,
+    1440,
+    600
+   ],
+   "what": "Hard split: the right third of the wall is in shade (median 91 against 233 on the left), so the right speaker stands against a dark wall and the left against a white one, and the pair reads unequal"
+  },
+  {
+   "region": [
+    1290,
+    400,
+    1380,
+    460
+   ],
+   "what": "The right horn's wall shadow is neutral (RGB 80/73/65): no green transmitted through the tinted resin"
+  },
+  {
+   "region": [
+    600,
+    390,
+    740,
+    480
+   ],
+   "what": "The left horn's shadow behind the credenza is neutral grey and half hidden by the turntable, reading as an unexplained blob"
+  },
+  {
+   "region": [
+    480,
+    500,
+    965,
+    635
+   ],
+   "what": "The same cathedral veneer figure repeats on all three credenza doors (visible tiling)"
+  },
+  {
+   "region": [
+    207,
+    542,
+    232,
+    565
+   ],
+   "what": "The left wall socket is a bright white plate (median 236, p95 250), the brightest small object in the lower frame and a cheap note next to the product"
+  },
+  {
+   "region": [
+    240,
+    395,
+    420,
+    690
+   ],
+   "what": "The left cabinet is lit from the front by fill and not backlit by the sun: body median 75, so the acrylic reads as an opaque green box"
+  },
+  {
+   "region": [
+    1220,
+    645,
+    1340,
+    690
+   ],
+   "what": "Only the right speaker throws a green pool on the floor, and a weak one (median 54); the left has none (pair asymmetry)"
+  },
+  {
+   "region": [
+    700,
+    445,
+    830,
+    490
+   ],
+   "what": "The clear turntable is small, transparent and lost against the wall, reading as clutter rather than a deliberate prop"
+  },
+  {
+   "region": [
+    150,
+    610,
+    1440,
+    640
+   ],
+   "what": "The skirting is a flat uniform white strip with no shadow line or gap at the floor"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The sun lights the wall instead of passing through the cabinets, so the tinted acrylic never glows and the pair is lit unequally.",
+   "evidence": {
+    "region": [
+     240,
+     395,
+     420,
+     690
+    ],
+    "measured": "Left cabinet body lum median 75, p95 134; right body median 82; green floor pool only at the right (1220-1340, 645-690, median 54); wall 233 left of x=860 against 91 right of it"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -62.0, elevation 18.0, irradiance 40",
+    "to": "azimuth -100 (slightly from behind, through window 0), elevation 13, irradiance 40, so both cabinets are backlit and throw green light forward and to the right onto the floor"
+   },
+   "expected": "Both cabinets glow from inside (ribs and batts read), with green-tinted pools on the floor right of each speaker. The back wall falls into even soft shade with no hard split between the speakers.",
+   "accept": {
+    "region": [
+     240,
+     395,
+     420,
+     690
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 175
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Light through the tinted horn and cabinet casts neutral grey shadows, which says opaque CG object rather than tinted resin.",
+   "evidence": {
+    "region": [
+     1290,
+     400,
+     1380,
+     460
+    ],
+    "measured": "Horn shadow RGB median 80/73/65, warmer than neutral with no green"
+   },
+   "change": {
+    "setting": "render",
+    "from": "no refractive caustics, clamp 10",
+    "to": "enable refractive caustics (caustics_refractive on, filter_glossy 0.3), clamp 20, samples 256 for the final"
+   },
+   "expected": "Shadows and light pools behind and beside both speakers carry the Poison green (g_median above r_median in the pool), without fireflies.",
+   "accept": {
+    "region": [
+     430,
+     650,
+     700,
+     760
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The plaster is flat and overexposed where lit, with no texture and no headroom for the heading set over it.",
+   "evidence": {
+    "region": [
+     560,
+     120,
+     820,
+     360
+    ],
+    "measured": "lum median 230.5, range 6.9 (grain only)"
+   },
+   "change": {
+    "setting": "prop 1 (plaster)",
+    "from": "value 1.05, bump 2.0, tex_scale 1.6",
+    "to": "value 0.88, bump 4.0, tex_scale 1.2"
+   },
+   "expected": "Wall mid-tones of 180-210 with visible trowel texture under raking light, and room for a dark or light heading.",
+   "accept": {
+    "region": [
+     560,
+     120,
+     820,
+     360
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "All three credenza doors show the same veneer figure, a texture tile any art director spots at once.",
+   "evidence": {
+    "region": [
+     480,
+     500,
+     965,
+     635
+    ],
+    "measured": "Identical cathedral figure centred on each door at x about 555, 715 and 875 (crop at 2x)"
+   },
+   "change": {
+    "setting": "prop 2 (credenza)",
+    "from": "texture walnut_veneer_02, one UV map for all doors",
+    "to": "per-door UV offset of 0.33 along the grain (sequence-matched flitches), or a rift-cut straight-grain walnut so no figure repeats"
+   },
+   "expected": "Three doors with continuous but non-identical grain.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The bright white socket plates pull the eye down beside the speakers and cheapen the frame.",
+   "evidence": {
+    "region": [
+     207,
+     542,
+     232,
+     565
+    ],
+    "measured": "lum median 236.5, p95 250.4 against wall about 230 and floor about 95"
+   },
+   "change": {
+    "setting": "props 4 and 5 (sockets)",
+    "from": "white plate at x \u00b11.78, z 0.3",
+    "to": "a plaster-matched or dark bronze plate at x \u00b11.66, z 0.25; leads re-routed along the floor to stay visible but short"
+   },
+   "expected": "The sockets read as quiet details and the leads stay visible as required.",
+   "accept": {
+    "region": [
+     207,
+     542,
+     232,
+     565
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 190
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The clear turntable is lost against the wall and half hides the left horn's shadow, so the centre reads as clutter.",
+   "evidence": {
+    "region": [
+     700,
+     445,
+     830,
+     490
+    ],
+    "measured": "A transparent object about 100 px wide with no silhouette against the wall; shadow blob behind it"
+   },
+   "change": {
+    "setting": "prop 8 (books) and the Cumulus turntable position",
+    "from": "turntable at about x 0.1, books at 0.6",
+    "to": "turntable centred at x 0.0 with its lid edge catching the sun; books moved to x -0.55 and vase to x 0.62, so the props bracket the turntable"
+   },
+   "expected": "A single quiet centre accent that leads the eye between the pair.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The skirting is a flat white strip with no shadow gap, which reads as modelled rather than built.",
+   "evidence": {
+    "region": [
+     150,
+     610,
+     1440,
+     640
+    ],
+    "measured": "A uniform bright band with no contact shadow at the floor"
+   },
+   "change": {
+    "setting": "room skirting",
+    "from": "flush white skirting",
+    "to": "a 10 mm shadow-gap skirting painted in the wall colour (value 0.85)"
+   },
+   "expected": "A thin dark line where the wall meets the floor, which grounds the room.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "Once the wall drops into shade, the grade needs to keep the green the brightest saturated colour in frame without crushing the floor.",
+   "evidence": {
+    "region": [
+     0,
+     690,
+     1440,
+     810
+    ],
+    "measured": "Floor lum median 94, p5 54"
+   },
+   "change": {
+    "setting": "finish",
+    "from": "green trim 0.15, vignette 0.22",
+    "to": "green trim 0.08 (let the backlit acrylic carry its saturation), vignette 0.15"
+   },
+   "expected": "The floor foreground holds detail and the cabinets read as the saturated hero.",
+   "accept": {
+    "region": [
+     0,
+     690,
+     1440,
+     810
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 50
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The woofer cover reads as a flat matte disc (delta E 7.5 against #6F7F66, no cloth weave visible at this scale)",
+   "why": "It is part of the fixed speaker (its cover cloth and colour); only the light on it may change"
+  },
+  {
+   "request": "The horn reads much lighter than its deep tint (delta E 23.5 against #4C6A36 at 240-300, 280-350)",
+   "why": "This comes from the bright wall seen through the transparent horn, not from the product. c1 and c3 darken what lies behind it; the horn's material must not be changed"
+  }
+ ],
+ "score_if_fixed": 7.8
+}

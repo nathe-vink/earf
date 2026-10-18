@@ -130,7 +130,8 @@ def credenza(bpy, name, p, kit):
     # the recess behind the doors (dark, so the reveals read as shadow)
     bm = bmesh.new(); _box_uv(bm, x0 + side_t, yf + 0.012, ph, x1 - side_t, yb - 0.02, h - top_t)
     objs.append(_obj(bpy, name + '-inner', bm, [shadow]))
-    # doors: one flitch cut in sequence, alternate leaves flipped (bookmatched), grain continuous across the reveals
+    # doors: `match` 'continuous' (default) lays one flitch across all the doors so the figure runs on over the reveals;
+    # 'book' flips alternate leaves (bookmatched)
     dw = (w - 2 * side_t - (n + 1) * gap) / n; dz0 = ph + gap; dz1 = h - top_t - gap
     bm = bmesh.new()
     for i in range(n):
@@ -138,7 +139,10 @@ def credenza(bpy, name, p, kit):
         # leaf i: its u runs from the flitch's centre line outward, mirrored on every other leaf
         mirror = (i % 2 == 1)
         centre = a + dw if not mirror else a
-        _box_uv(bm, a, yf, dz0, a + dw, yf + 0.019, dz1, mirror=mirror, uoff=(-centre if not mirror else centre) + 0.4)
+        if p.get('match', 'continuous') == 'book':
+            _box_uv(bm, a, yf, dz0, a + dw, yf + 0.019, dz1, mirror=mirror, uoff=(-centre if not mirror else centre) + 0.4)
+        else:                                # one flitch laid on across the doors: the figure runs on over the reveals
+            _box_uv(bm, a, yf, dz0, a + dw, yf + 0.019, dz1, uoff=0.4)
     ob = _obj(bpy, name + '-doors', bm, [wal]); _bevel_mod(ob, 0.0012, 2); objs.append(ob)
     # finger pulls: a shallow shadow groove under the top on each door
     bm = bmesh.new()
@@ -203,7 +207,7 @@ def socket(bpy, name, p, kit):
     """A wall socket: an 86 mm square plate on the wall at `position` [x, y_wall, z] (its face toward -y), a plug in it
     with its lead running down (`lead` adds a short drop, the cable prop does the rest)."""
     x, yw, z = p['position']; s = p.get('size', 0.086); t = 0.009
-    plate = _plain(bpy, name + '-plate', p.get('color', '#EEEBE4'), rough=0.35, spec=0.5)
+    plate = _plain(bpy, name + '-plate', p.get('color', '#D6D0C5'), rough=0.6, spec=0.4)
     plug = _plain(bpy, name + '-plug', '#161616', rough=0.45, spec=0.4)
     bm = bmesh.new(); _box_uv(bm, x - s / 2, yw - t, z - s / 2, x + s / 2, yw, z + s / 2)
     ob = _obj(bpy, name + '-plate', bm, [plate]); _bevel_mod(ob, 0.002, 3); objs = [ob]

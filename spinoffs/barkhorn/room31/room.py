@@ -112,7 +112,7 @@ def room_set(v):
 
 
 DEFAULT = dict(
-    floor='wood_floor', floor_coat=0.15, floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.05, wall_bump=2.0,
+    floor='wood_floor', floor_coat=0.15, floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=0.88, wall_bump=2.0,
     wall_tint=0.5, wall_tex_scale=1.6, socket_x=1.78,
     veneer='walnut_veneer_02', veneer_lift=0.75, grain_rot=90.0,
     rug='poly_wool_herringbone', rug_tex_scale=0.25, rug_tint='#8A7A64', rug_tint_mix=1.0, rug_pos=[0.45, -1.25],
@@ -123,7 +123,7 @@ DEFAULT = dict(
     # the left wall recedes in the frame with its view out and the lounge chair by the glass; the pair, moved 0.35 m
     # clear of the window, stands in the low sun (az -76, el 11) through the open back bays; linen sheers over the
     # front bays soften the rest
-    sheers=[(-0.85, 0.7), (-2.92, 2.56)], sheer_opens=[0.15, 0.35], drape_off=True, sheer_open=0.15, tt_x=0.18, books_x=0.6, vase_x=-0.6,
+    sheers=[(-0.85, 0.7), (-2.92, 2.56)], sheer_opens=[0.15, 0.35], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=-0.55, vase_x=0.62,
     sun=dict(azimuth_deg=-62.0, elevation_deg=18.0, irradiance=40.0, angle_deg=0.6, color='#FFE4C8'),
     sky_strength=1.0, fill=1.3, fill_color='#D2E0F4', fill_pos=[1.6, -3.6, 2.2], bounce=0.7, bounce_pos=[-0.6, -3.6, 1.35],
     bounce_size=[2.4, 1.2], floor_bounce=0.55, fb_pos=[0.0, -0.6, 0.08], rug_off=True, chair_off=True,
@@ -132,9 +132,11 @@ DEFAULT = dict(
 
 
 # the portrait (for phones): the same room, the pair brought in round a two-door credenza so it fills a 4:5 frame
-PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=0.08, books_x=0.38, vase_x=-0.4, port_d=4.7,
-                port_lens=50, port_tz=0.9,
-                sheers=[(-0.79, 0.56), (-2.85, 2.7)])     # the gaps where the beams to the pair (now +-0.92) come in
+PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=0.08, books_x=0.38, vase_x=-0.4, port_d=4.1,
+                port_lens=50, port_tz=0.62,
+                # the sun a little further round for this pair, and the sheers' gaps where its beams come in
+                sun=dict(azimuth_deg=-66.0, elevation_deg=18.0, irradiance=40.0, angle_deg=0.6, color='#FFE4C8'),
+                sheers=[(-0.62, 0.38), (-2.7, 3.0)])     # the gaps where the beams to the pair (now +-0.92) come in
 
 
 def shot(v=None, portrait=False):
