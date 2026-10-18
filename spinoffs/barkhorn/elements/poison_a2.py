@@ -16,11 +16,14 @@ import poison as A
 from common import piece
 
 CLUSTER = (-1.15, 1.3)              # at the left redwood's foot (outside its buttresses), left of the speaker, ~8 m from the lens
-# (dx, dy, cap radius, age, seed, lean, torn)
-AGARICS = [(0.0, 0.0, 0.085, 'convex', 61, (0.02, -0.01), 0.0),
-           (0.13, -0.08, 0.065, 'convex', 62, (0.05, -0.02), 0.0),       # tilted out of the clump
-           (-0.1, -0.1, 0.045, 'young', 63, (-0.01, 0.0), 0.35),          # its margin bitten
-           (0.06, -0.18, 0.024, 'button', 64, (0.0, 0.0), 0.0)]
+# found, not placed (the coordinator's notes on p01): every age, uneven heights, the veil washed off unevenly, the
+# bases sunk in moss and needles, a needle across a cap, one fallen on its side
+# (dx, dy, cap radius, age, seed, extra amanita settings)
+AGARICS = [(0.0, 0.0, 0.08, 'old', 61, dict(lean=[0.015, -0.01], wash=0.05, orange=True, needles=2, torn=0.15)),   # open, rim upturned
+           (0.14, -0.07, 0.06, 'convex', 62, dict(lean=[0.05, -0.02], wash=0.1, orange=True, torn=0.35, height=0.07)),  # tilted, bitten
+           (-0.11, -0.09, 0.048, 'young', 63, dict(lean=[-0.02, 0.01], wash=0.2, orange=True, height=0.095)),  # a dome opening
+           (0.05, -0.19, 0.026, 'button', 64, dict(warts=320)),                                                  # still in its veil
+           (-0.2, 0.05, 0.042, 'convex', 65, dict(rotate=[0, 95, 40], height=0.025, wash=0.1, orange=True, z=0.035))]  # fallen
 FOXGLOVES = [(-0.43, 4.48, 1.25, 1), (-0.17, 5.41, 1.45, 2), (0.35, 4.31, 1.05, 4)]   # x, y, height, seed: in the haze right of the horn, 10-12 m out
 
 
@@ -60,12 +63,12 @@ def shot():
             p['place'] = [q for q in p['place'] if _clear(q[0], q[1])]
         if p.get('fn') == 'canopy':
             cx, cy = CLUSTER
-            p['holes'] = p['holes'] + [A.gap_for(cx, cy, 0.1, 0.22, (0.0, 4.0), A.SUN_A2)]
+            p['holes'] = p['holes'] + [A.gap_for(cx, cy + 0.12, 0.1, 0.14, (0.0, 4.0), A.SUN_A2)]   # a glance, no spotlight
     nk = len(props)
     cx, cy = CLUSTER
-    for dx, dy, R, age, sd, lean, torn in AGARICS:
-        props.append(extb('amanita', (cx + dx, cy + dy, -0.02 if age != 'button' else -0.012), cap=R * 1.3, age=age, seed=sd,
-                          lean=list(lean), torn=torn))
+    for dx, dy, R, age, sd, more in AGARICS:
+        more = dict(more); z = more.pop('z', -0.03 if age != 'button' else -0.015)
+        props.append(extb('amanita', (cx + dx, cy + dy, z), cap=R * 1.3, age=age, seed=sd, **more))
     # moss and duff banked round their bases (the ground is prop 0)
     props.append(A.ext('strew', model='moss_01', on=['prop0-kit'], density=6000, up=0.5, scale=[0.7, 1.5], seed=65,
                        patch=0.06, patch_cut=0.25, within=[cx, cy, 0.3]))

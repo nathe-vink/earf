@@ -148,7 +148,9 @@ def _cap_profile(R, kind, z0):
 def amanita(bpy, name, p, kit):
     """A fly agaric (`species` 'muscaria', the default) or a death cap ('phalloides'): `cap` its radius (m), `age` one
     of button, young, convex, plane, old, `height` from the ground to the cap's underside, `stem` radius, `lean` [dx,
-    dy] at the top, `torn` 0-1 how ragged an old margin is, `warts` how many, `seed`."""
+    dy] at the top, `torn` 0-1 how ragged an old margin is, `warts` how many, `seed`; `wash` the rain's threshold
+    (lower washes more of the veil off; 0.15 default), `ragged` how torn the bulb's veil rings are (0.03), `needles`
+    how many conifer needles lie across the cap (0), `orange` an orange-red margin (False)."""
     rnd = random.Random(p.get('seed', 1))
     sp = p.get('species', 'muscaria')
     R = p.get('cap', 0.06); age = p.get('age', 'convex'); hr, under, up, open_ = _AGES[age]
@@ -162,7 +164,7 @@ def amanita(bpy, name, p, kit):
         if torn:
             k -= torn * 0.08 * max(0.0, noise.noise(Vector((math.cos(th) * 3, math.sin(th) * 3, ph[2]))) + 0.2)
         return k
-    bms = {k: bmesh.new() for k in ('cap', 'gills', 'warts', 'stem', 'ring', 'volva')}
+    bms = {k: bmesh.new() for k in ('cap', 'gills', 'warts', 'stem', 'ring', 'volva', 'needles')}
     # stem: a bulbous base, tapering up; a button is mostly bulb
     bulb = sr * (1.9 if sp == 'muscaria' else 1.7)
     bh = min(Hs * 0.22, bulb * 2.2)                       # the bulb's height: an egg the stem rises from
@@ -214,7 +216,7 @@ def amanita(bpy, name, p, kit):
         for k in range(nw):
             t = 1 - rnd.random() ** 1.6                   # nearer the top more often
             th0 = rnd.uniform(0, 2 * math.pi)
-            if noise.noise(Vector((math.cos(th0) * 2, math.sin(th0) * 2, t * 3 + ph[0]))) > 0.15 and age in ('plane', 'old', 'convex'):
+            if noise.noise(Vector((math.cos(th0) * 2, math.sin(th0) * 2, t * 3 + ph[0]))) > (p['wash'] - 0.35 * (1 - t) if 'wash' in p else 0.15) and age in ('plane', 'old', 'convex'):
                 continue                                  # the rain has washed this patch of veil off
             i = min(len(pts) - 2, int(t * (len(pts) - 1)))
             th = th0
@@ -230,6 +232,21 @@ def amanita(bpy, name, p, kit):
                     v.co = Vector((v.co.x * s * j, v.co.y * s * j * rnd.uniform(0.6, 1.0), max(-0.2, v.co.z) * s * 0.4 * j))
             m = Matrix.Translation(Vector((r * math.cos(th), r * math.sin(th), z)) + n * s * 0.1) @ n.to_track_quat('Z', 'Y').to_matrix().to_4x4() @ Matrix.Rotation(rnd.uniform(0, 6.28), 4, 'Z')
             _join(bms['warts'], wart, m)
+    # needles fallen across the cap: thin flat slivers lying on its surface, 1.5-2.5 cm long
+    for k in range(p.get('needles', 0)):
+        t = rnd.uniform(0.25, 0.8); th = rnd.uniform(0, 2 * math.pi)
+        i = min(len(pts) - 2, int(t * (len(pts) - 1)))
+        (ra, za), (rb, zb) = pts[i], pts[i + 1]
+        r = ra * wob(th, 0); z = za
+        nr, nz = (zb - za), -(rb - ra); L = math.hypot(nr, nz) or 1; nr, nz = nr / L, nz / L
+        n = Vector((nr * math.cos(th), nr * math.sin(th), nz))
+        ln_, w_ = rnd.uniform(0.015, 0.025), 0.0009
+        def needle(bm, ln_=ln_, w_=w_):
+            g = bmesh.ops.create_cube(bm, size=1.0)
+            for v in g['verts']:
+                v.co = Vector((v.co.x * ln_, v.co.y * w_, v.co.z * w_ * 0.5))
+        m = Matrix.Translation(Vector((r * math.cos(th), r * math.sin(th), z)) + n * 0.0006) @ n.to_track_quat('Z', 'Y').to_matrix().to_4x4() @ Matrix.Rotation(rnd.uniform(0, 6.28), 4, 'Z')
+        _join(bms['needles'], needle, m)
     # the ring: a skirt hanging from the stem's top
     if age != 'button':
         zr = Hs * 0.84
@@ -242,7 +259,7 @@ def amanita(bpy, name, p, kit):
             zv = bh * (0.62 + 0.17 * k)
             rv = bulb * (0.93 - 0.17 * k) if k < 2 else sr * 1.25
             _lathe(bms['volva'], [(rv * 0.97, zv - 0.004 * R), (rv * 1.035, zv), (rv * 1.03, zv + 0.004 * R), (rv * 0.97, zv + 0.003 * R)], 40,
-                   lambda th, z, k=k: 1 + 0.03 * noise.noise(Vector((math.cos(th) * 6, math.sin(th) * 6, k * 3))))
+                   lambda th, z, k=k: 1 + p.get('ragged', 0.03) * noise.noise(Vector((math.cos(th) * 6, math.sin(th) * 6, k * 3))))
     else:
         cup = [(bulb * 1.02, -0.003), (bulb * 1.1, bh * 0.5), (bulb * 1.22, bh * 1.05), (bulb * 1.15, bh * 1.1), (bulb * 1.0, bh * 0.55)]
         _lathe(bms['volva'], cup, 40, lambda th, z: 1 + 0.12 * noise.noise(Vector((math.cos(th) * 3, math.sin(th) * 3, z * 40))))
@@ -252,7 +269,7 @@ def amanita(bpy, name, p, kit):
     for bm in bms.values():
         for v in bm.verts:
             t = max(0.0, min(1.5, v.co.z / top)); v.co.x += lx * t * t; v.co.y += ly * t * t
-    mats = _amanita_mats(bpy, name, sp, R, Hs)
+    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False))
     obs = []
     for k, bm in bms.items():
         if len(bm.verts):
@@ -262,7 +279,7 @@ def amanita(bpy, name, p, kit):
     return obs
 
 
-def _amanita_mats(bpy, name, sp, R, Hs):
+def _amanita_mats(bpy, name, sp, R, Hs, orange=False):
     key = (sp,)
     out = {}
     # the cap: viscid (a wet, thin coat), red with orange toward the margin and blotchy, a little light through it
@@ -280,7 +297,8 @@ def _amanita_mats(bpy, name, sp, R, Hs):
     nt.links.new(nz.outputs['Fac'], mix.inputs[0]); mix.inputs[1].default_value = 0.35
     nt.links.new(dv.outputs['Value'], mix.inputs[2])
     if sp == 'muscaria':
-        col = _ramp(nt, mix.outputs['Value'], [(0.15, '#3A0101'), (0.5, '#6A0302'), (0.9, '#8A0A03'), (1.2, '#A8300A')])
+        col = _ramp(nt, mix.outputs['Value'], [(0.15, '#3A0101'), (0.5, '#6A0302'), (0.9, '#8A0A03'), (1.2, '#A8300A')] if not orange
+                    else [(0.15, '#4A0402'), (0.45, '#7A0803'), (0.8, '#A01C05'), (1.1, '#C4420E')])
         b.inputs['Subsurface Weight'].default_value = 0.12
     else:
         # olive-green to yellowish at the margin, with dark radial fibrils
@@ -335,6 +353,10 @@ def _amanita_mats(bpy, name, sp, R, Hs):
         fib = _noise(nt, 1.0 / (R * 0.04), 6.0, stretch=(14.0, 14.0, 0.5))
         _bump(nt, b, fib.outputs['Fac'], 0.7, R * 0.004)
         out[k] = m
+    # needles: redwood needles gone brown
+    m, nt, b = _node_mat(bpy, f'{name}-needlemat')
+    b.inputs['Base Color'].default_value = (*_hex('#6A4A2A'), 1); b.inputs['Roughness'].default_value = 0.6
+    out['needles'] = m
     return out
 
 
