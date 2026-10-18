@@ -1,5 +1,5 @@
 {
- "title": "barkhorn, fog, bright field",
+ "title": "barkhorn, fog, bright field (round 31d)",
  "size": [
   2560,
   1440
@@ -32,28 +32,27 @@
   "height": 9.0,
   "contact": {
    "strength": 0.8,
-   "distance_m": 0.7,
-   "core_strength": 0.9,
-   "core_distance_m": 0.08
+   "distance_m": 0.35,
+   "core_strength": 0.8,
+   "core_distance_m": 0.03
   },
   "flags": [
    {
     "center_m": [
-     -1.4,
+     -1.5,
      0.6,
      1.2
     ],
     "size_m": [
-     1.2,
-     1.4
+     1.4,
+     2.6
     ],
     "normal": [
      1.0,
      -0.2,
      0.0
     ],
-    "glossy": false,
-    "off": true
+    "reflect_only": true
    },
    {
     "center_m": [
@@ -62,15 +61,32 @@
      1.2
     ],
     "size_m": [
-     0.3,
-     2.4
+     0.6,
+     2.6
     ],
     "normal": [
      -0.45,
      -0.89,
      0.0
     ],
-    "glossy": true
+    "reflect_only": true
+   },
+   {
+    "center_m": [
+     0.0,
+     1.6,
+     2.2
+    ],
+    "size_m": [
+     2.4,
+     0.8
+    ],
+    "normal": [
+     0.0,
+     -0.8,
+     -0.6
+    ],
+    "reflect_only": true
    }
   ],
   "bounces": [
@@ -102,9 +118,9 @@
   "target": [
    0.0,
    0.0,
-   0.66
+   0.76
   ],
-  "lens_mm": 70.0,
+  "lens_mm": 60.0,
   "level": true
  },
  "sky": {
@@ -112,7 +128,7 @@
   "zenith": "#F2F1EF",
   "horizon": "#EEEDEB",
   "ground": "#CFCCC8",
-  "strength": 0.6,
+  "strength": 0.22,
   "visible": false
  },
  "render": {
@@ -144,20 +160,20 @@
   "bg-left": {
    "type": "area",
    "size_m": [
-    4.0,
+    6.0,
     3.0
    ],
    "position": [
-    -2.6,
+    -4.5,
     3.2,
     3.4
    ],
    "target": [
-    -1.5,
+    -3.0,
     6.0,
-    1.2
+    0.3
    ],
-   "irradiance": 3.6,
+   "irradiance": 1.8,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -165,7 +181,7 @@
   "bg-right": {
    "type": "area",
    "size_m": [
-    4.0,
+    6.0,
     3.0
    ],
    "position": [
@@ -174,11 +190,11 @@
     3.4
    ],
    "target": [
-    -0.9,
+    0.3,
     6.0,
-    1.0
+    0.3
    ],
-   "irradiance": 3.6,
+   "irradiance": 1.8,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -274,9 +290,32 @@
     -0.5,
     0.0
    ],
-   "irradiance": 22.0,
+   "irradiance": 30.0,
    "color": "#FFF8F0",
    "camera": false
+  },
+  "back-low": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.8
+   ],
+   "orbit": {
+    "azimuth_deg": 175,
+    "elevation_deg": 8,
+    "distance_m": 2.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.45
+   ],
+   "irradiance": 30.0,
+   "color": "#FFF8F0",
+   "camera": false,
+   "receivers": [
+    "*#0"
+   ]
   }
  }
 }
