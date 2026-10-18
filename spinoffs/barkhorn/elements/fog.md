@@ -147,3 +147,23 @@ What I did:
 6. **Shadows:** finish lift 0.03 in #3A3530, a warm rock-shadow colour.
 7. **Bounce:** warm #D9B49A, 5 degrees up, 0.8 (the rock's colour bounced into the clear base).
 8. **Birds:** 7 in a loose V, spread in depth.
+
+### Pass 5: 5.5 ("iterate"; 7.0 if fixed)
+
+The frame was r5: raking sun from the front right and a deep blue sky. The critic: a clean idea with room for type,
+but the cloud sea is evenly lit with smooth faceted domes far off, the white lining and ring merge with the white
+clouds, the near rock is soft, and the birds crowd the horn. A gain of 0.5 over pass 4, so the stopping rule (two
+passes in a row gaining under 0.5) is not met.
+
+What I did:
+1. **A low raking sun from behind on the left:** `mpumalanga_veld_puresky`, the deepest blue of the low-sun skies,
+   turned 184, so its sun and the lamp are at azimuth -130, 8.5 degrees up, in a warm #FFE2BE. Shaded cloud flanks now
+   face the camera, rims fall on the acrylic, and shadows run long.
+2. **Far deck:** smaller heaps (billow 140, height 45), fine bumps (4 m), out to 80 km.
+3. **Haze:** 1.4e-4, #C9D6E6, anisotropy 0.7; the box widened to the new horizon.
+4. **Rock sharpness:** f/11, focused a little in front of the speaker.
+5. **Birds:** 5, moved to the upper right, clear of the horn.
+6. **Footing:** the cliff moved 0.15 m in x and 5 mm up, so the flat block lies under the whole base.
+7. **Bounce:** down to 0.4, azimuth -30, 15 degrees up: a lift only.
+8. **Composition:** the speaker on the left third (target x 0.45), camera at 0.5 m, so the horizon falls below the
+   cabinet's top and the right of the frame is open sky for type.
