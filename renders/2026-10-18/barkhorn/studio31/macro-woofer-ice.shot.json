@@ -95,16 +95,16 @@
  },
  "camera": {
   "position": [
-   0.55,
+   0.3,
    -3.0,
-   0.62
+   0.55
   ],
   "target": [
    0.0,
    -0.2,
    0.49
   ],
-  "lens_mm": 185.0,
+  "lens_mm": 200.0,
   "level": false
  },
  "sky": {
@@ -206,12 +206,12 @@
   "key": {
    "type": "area",
    "size_m": [
-    1.2,
-    1.2
+    0.8,
+    0.8
    ],
    "orbit": {
-    "azimuth_deg": -30,
-    "elevation_deg": 38,
+    "azimuth_deg": -40,
+    "elevation_deg": 55,
     "distance_m": 4.5
    },
    "target": [
@@ -219,7 +219,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 4.0,
+   "irradiance": 6.0,
    "color": "#FFFAF4",
    "camera": false,
    "specular": 1.0
@@ -227,12 +227,12 @@
   "front-strip": {
    "type": "panel",
    "size_m": [
-    0.4,
-    2.0
+    0.8,
+    1.6
    ],
    "orbit": {
-    "azimuth_deg": -25,
-    "elevation_deg": 22,
+    "azimuth_deg": 5,
+    "elevation_deg": 35,
     "distance_m": 3.0
    },
    "target": [
@@ -240,7 +240,7 @@
     0.0,
     0.6
    ],
-   "strength": 4.0,
+   "strength": 6.0,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -274,7 +274,7 @@
     -0.5,
     0.0
    ],
-   "irradiance": 22.0,
+   "irradiance": 14.0,
    "color": "#FFF8F0",
    "camera": false
   }
