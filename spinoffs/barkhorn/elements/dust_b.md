@@ -111,3 +111,21 @@ It answers the owner's note: real Southwest buttes, cacti, a blue sky. But it re
 - **The light:** a high side sun is less flattering than A's low golden backlight.
 
 The coordinator's rule keeps A on the site. A's finals should be rendered again on main so they carry the new drivers, the one thing B did better.
+
+### The coordinator's duel: B against the site's `orange-habitat.jpg`, twice with the order swapped
+
+The judges were told the two frames carry different drivers and to judge the place, the light and the integration, not
+the drivers.
+
+- **Order 1** (B shown as A): **A 6.5, B 5.0**.
+- **Order 2** (A shown first): **A 6.5, B 5.5**.
+
+A wins by about 1.25, outside the 0.5. Both judges gave the same reasons:
+- A's low golden sun throws a long, crisp shadow that seats the speaker; B's higher side light gives a short shadow, so the cabinet reads composited.
+- A's haze ties ground, buttes and sky into one warm palette. B's buttes are equally sharp at every distance and carry stretched vertical streaks and stepped bases.
+- B's plants read as plastic CG at toy scale beside the product; A's lone tumbleweed sits in the haze.
+- A's sand ripples hold up in a 3x crop; B's are softer. B's pebbles read as dark spheres.
+
+B won on its cumulus sky and on keeping the cabinet apart from a cool sky. Both judges counted A's blobby butte outlines against it.
+
+**The right butte's flutes at full size** (crop 1600-2400 x 580-900): the left half of the face has merged into broad smooth rock, but the right half carries pale vertical streaks of near-even width and spacing. They read as procedural (stretched texture), not jointed sandstone; the thumb shows the same streaks, and the talus reads as regular steps.
