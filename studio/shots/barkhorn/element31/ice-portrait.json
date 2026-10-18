@@ -887,8 +887,8 @@
       "fir_tree_01:c"
      ],
      [
-      4.5,
-      9.5,
+      6.5,
+      13.5,
       319.9,
       0.55,
       "fir_sapling_medium:a"
@@ -933,7 +933,7 @@
      6.5,
      4.8
     ],
-    "window_emit": 35.0,
+    "window_emit": 30.0,
     "lamp_w": 2500.0,
     "window_color": "#FF9A3C",
     "res": "1k"
@@ -944,7 +944,7 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    3.0,
+    2.0,
     1.0
    ],
    "target": [
@@ -952,11 +952,11 @@
     0.0,
     0.8
    ],
-   "irradiance": 0.7,
+   "irradiance": 0.35,
    "color": "#C8D8EA",
    "orbit": {
-    "azimuth_deg": -25,
-    "elevation_deg": 5,
+    "azimuth_deg": -45,
+    "elevation_deg": 4,
     "distance_m": 4.0
    },
    "receivers": [
@@ -979,7 +979,7 @@
   "back": {
    "type": "area",
    "size_m": [
-    1.5,
+    2.5,
     2.0
    ],
    "target": [
@@ -987,10 +987,10 @@
     0.0,
     0.8
    ],
-   "irradiance": 0.35,
-   "color": "#DCE6F4",
+   "irradiance": 0.2,
+   "color": "#D8E2F0",
    "orbit": {
-    "azimuth_deg": 160,
+    "azimuth_deg": 150,
     "elevation_deg": 15,
     "distance_m": 4.0
    },
@@ -1088,9 +1088,9 @@
   "sharpen": 0.35,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.0,
-   "bloom_px": 30,
-   "bloom_threshold": 0.92,
+   "bloom": 0.25,
+   "bloom_px": 10,
+   "bloom_threshold": 0.84,
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",

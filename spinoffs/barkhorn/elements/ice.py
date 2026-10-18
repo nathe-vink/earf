@@ -40,7 +40,7 @@ def forest(seed=31):
         trees.append([round(x, 2), round(y, 2), round(rnd.uniform(0, 360), 1), round(rnd.uniform(0.8, 1.0), 2),
                       'fir_tree_01:' + rnd.choice('abc')])
     # younger firs at the wood's edge, nearer
-    for x, y, s, v in [(4.5, 9.5, 0.55, 'a'), (7.5, 11.0, 0.7, 'b'), (-12.0, 10.5, 0.65, 'a'), (11.0, 8.0, 0.5, 'c')]:
+    for x, y, s, v in [(6.5, 13.5, 0.55, 'a'), (7.5, 11.0, 0.7, 'b'), (-12.0, 10.5, 0.65, 'a'), (11.0, 8.0, 0.5, 'c')]:
         trees.append([x, y, round(rnd.uniform(0, 360), 1), s, 'fir_sapling_medium:' + v])
     # a young fir near the lens at the left, soft, framing
     return piece('ext', module='ice_el', fn='firs', trees=trees, snow=0.75, res='1k')
@@ -55,16 +55,16 @@ def props():
                     cells=440, flat=False))
     p.append(forest())
     p.append(piece('ext', module='ice_el', fn='cabin', position=[6.8, 72.0, 0.0], turn=-6, size=[6.5, 4.8],
-                   window_emit=35.0, lamp_w=2500.0, window_color='#FF9A3C', res='1k'))
+                   window_emit=30.0, lamp_w=2500.0, window_color='#FF9A3C', res='1k'))
     return p
 
 
 def lights():
     # the snow's bounce onto the speaker's front: one big, very soft card low at the camera's left (a reflector a
     # photographer would lay on the snow), on the speaker alone
-    return {'bounce': {**area(-25, 5, 4.0, 0.7, '#C8D8EA', (3.0, 1.0), (0.0, 0.0, 0.8)), 'receivers': PRODUCT},
+    return {'bounce': {**area(-45, 4, 4.0, 0.35, '#C8D8EA', (2.0, 1.0), (0.0, 0.0, 0.8)), 'receivers': PRODUCT},
             # and the bright sky behind at the right, through the horn and the side walls (a white card held up)
-            'back': {**area(160, 15, 4.0, 0.35, '#DCE6F4', (1.5, 2.0), (0.0, 0.0, 0.8)), 'receivers': PRODUCT},
+            'back': {**area(150, 15, 4.0, 0.2, '#D8E2F0', (2.5, 2.0), (0.0, 0.0, 0.8)), 'receivers': PRODUCT},
             # a small white card held in front at the horn's height, so its throat reads as acrylic, not a hole
             'throat': {**area(-12, 8, 3.0, 0.5, '#E6EEF8', (1.0, 0.6), (0.0, -0.1, 1.12)), 'receivers': ['waveguide*']}}
 
@@ -80,7 +80,7 @@ def shot():
     s = frame('ice', props(), cam, sky(SKY, SKY_ROT, strength=1.0, res='4k'), 'barkhorn, Ice, snow country at blue hour',
                  lights=lights(), rotate_z=TURN, position=(0.0, 0.0, -0.04), exposure=-1.1, samples=512,
                  haze={'box_m': [-40, -12, -1, 40, 60, 20], 'density': 0.009, 'anisotropy': 0.2, 'color': '#C8D8EA'},
-                 fin=grain(finish(contrast=0.10, clarity=0.06, sharpen=0.35, vignette=0.2), 0.006),
+                 fin=grain(finish(contrast=0.10, clarity=0.06, sharpen=0.35, vignette=0.2, bloom=0.25, bloom_px=10, threshold=0.84), 0.006),
                  white_balance=(WB_K, 13.0))          # the white point a photographer sets at blue hour: the snow cold, not grey
     s['render']['caustics_refractive'] = True   # the sky's light reaches the lining through the acrylic (render.py)
     return s
