@@ -1,12 +1,17 @@
 """Smoke, concept A: woodsmoke backlit in a pine forest at dawn (round 31b; BRIEF.md, notes in smoke.md).
 
+Round C (the owner, 2026-10-18: "Doesn't look like a smokey environment and the speaker is too stark and crisp"): a
+smouldering burn pile in frame behind and right of the speaker sends a plume up and across the wood; the whole air is
+hazed with its smoke, between the camera and the speaker too, so the speaker sits in the same air as the trees.
+
 The speaker stands on the needle floor of a pine wood just after sunrise. Woodsmoke from a fire out of frame drifts
 between the trunks behind it, and the low sun behind the smoke turns it to a glowing wall, cut into shafts by the trunks.
 The smoked black speaker stands in front of that glow, so it reads as a clean dark silhouette rimmed in warm light, and
 the light that comes through its acrylic shows its tint.
 """
-from common import area, asset, camera, finish, ground, piece, scatter, shot as frame, sky, portrait_of
+from common import area, asset, point, camera, finish, ground, piece, scatter, shot as frame, sky, portrait_of
 
+PILE = (3.6, 5.0)            # the burn pile
 SKY = 'misty_pines'           # a real pine wood in morning mist (Poly Haven, CC0)
 SUN = {'azimuth_deg': 150.0, 'elevation_deg': 24.0, 'irradiance': 30.0, 'angle_deg': 0.5, 'color': '#FFB978'}
 
@@ -22,6 +27,18 @@ SPEAKER = SHELL + ['lining-*', 'woofer-*', 'amp-*', 'brace*', 'rib-*', 'land-*',
 def smoke(position, size, density, seed, **k):
     return piece('ext', module='smoke_el', fn='woodsmoke', position=list(position), size=list(size), density=density,
                  seed=seed, **k)
+
+
+def plume(n=7):
+    """The burn pile's plume: overlapping soft cells of smoke, widening as it rises and drifting off to the left with the
+    morning air, densest near the pile."""
+    out = []
+    for k in range(n):
+        w = 1.0 + 0.55 * k
+        out.append(smoke((PILE[0] - 0.22 * k ** 1.5, PILE[1] - 0.1 * k, 0.15 + 1.15 * k), (w, w, 2.4), 7.0 * 0.8 ** k,
+                         11 + k, scale=0.45 + 0.08 * k, cut=0.38, soft=0.35, anisotropy=0.3,
+                         fade=[0.4, 0.4, 0.4], floor=0.3, rise=1.8, color='#E4E2DE'))
+    return out
 
 
 def trees(n=22, seed=3):
@@ -60,6 +77,15 @@ def shot():
              piece('ext', module='smoke_el', fn='canopy', size=[120.0, 200.0], z=10.0, position=[0.0, 70.0], scale=0.9,
                    open=0.65, seed=5)]
     props += trees()
+    # the burn pile, 3 m behind and right of the speaker, and its plume: a dense column that leans off toward the left
+    props += [piece('ext', module='smoke_el', fn='burnpile', position=[PILE[0], PILE[1], 0.0], radius=0.9, seed=3)]
+    pl = plume()
+    plume_names = [f'prop{i}-kit' for i in range(len(props), len(props) + len(pl))]
+    props += pl
+    props += [
+              # where the plume flattens and drifts: a layer across the wood at 2 to 5 m, thinning toward the camera
+              smoke((-1.0, 3.0, 1.6), (16.0, 8.0, 4.0), 0.35, 9, scale=1.2, cut=0.45, soft=0.3, anisotropy=0.75,
+                    fade=[0.3, 0.4, 0.5], floor=0.02, rise=0.6, color='#CFCBC6')]
     cam = camera(height=0.7, distance=7.2, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=0.14)
     lights = {
         # the open sky behind the camera, cool, lifting the shadow side: the woofer and lining just read in the tint
@@ -69,10 +95,21 @@ def shot():
         # the sun's light off the smoke behind, thin warm rims down both edges and over the top
         'kicker': {**area(-150, 22, 3.0, 42.0, '#FFB978', (0.5, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
         'kicker_r': {**area(150, 14, 3.0, 26.0, '#FFB978', (0.6, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
+        # the pile's embers, under the plume
+        'embers': point([PILE[0], PILE[1], 0.25], 80, '#FF6A20', 0.4),
+        # the open sky behind the camera on the plume's face (it would be a dark column lit from behind alone)
+        'plumefill': {'type': 'area', 'size_m': [6.0, 6.0], 'position': [PILE[0] - 3.0, PILE[1] - 9.0, 4.0],
+                      'target': [PILE[0] - 0.6, PILE[1], 3.0], 'irradiance': 1.2, 'color': '#C9CED6',
+                      'receivers': plume_names},
     }
     return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.15), 'barkhorn, Smoke, woodsmoke at dawn',
                  sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.02), samples=512, exposure=0.0,
-                 fin=finish(contrast=0.04, clarity=0.03, bloom=0.04, bloom_px=40, threshold=0.85, vignette=0.25))
+                 # the whole air hazed with the pile's smoke, the camera inside it, so the speaker sits in the same air
+                 haze={'box_m': [-15.0, -15.0, 0.0, 18.0, 30.0, 14.0], 'density': 0.018, 'anisotropy': 0.7,
+                       'color': '#D8D2CA'},
+                 # no clarity and no sharpening: the speaker as soft as the set around it
+                 fin=finish(contrast=0.04, clarity=0.0, sharpen=0.0, bloom=0.06, bloom_px=40, threshold=0.85,
+                            vignette=0.25))
 
 
 def portrait():

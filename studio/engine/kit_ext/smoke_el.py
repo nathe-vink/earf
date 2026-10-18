@@ -192,3 +192,38 @@ def canopy(bpy, name, p, kit):
     me.materials.append(m)
     ob.visible_camera = False
     return [ob]
+
+
+def burnpile(bpy, name, p, kit):
+    """A smouldering burn pile: `logs` of charred pine (cylinders in `texture` bark, darkened) heaped in a low cone of
+    radius `radius`, with embers glowing in the gaps (`ember` strength). One mesh for the logs, one for the embers."""
+    import random
+    import assets
+    rnd = random.Random(p.get('seed', 1))
+    x0, y0, z0 = p.get('position', [0, 0, 0])
+    R = p.get('radius', 0.9)
+    bm = bmesh.new(); uv = bm.loops.layers.uv.new('UVMap')
+    for i in range(p.get('logs', 14)):
+        a = rnd.uniform(0, 2 * math.pi); d = R * math.sqrt(rnd.random()) * 0.7
+        L = rnd.uniform(0.8, 1.6); r = rnd.uniform(0.04, 0.09)
+        z = r + (1 - d / R) * rnd.uniform(0.05, 0.35)
+        yaw = rnd.uniform(0, 2 * math.pi); pitch = math.radians(rnd.uniform(-25, 25))
+        geom = bmesh.ops.create_cone(bm, cap_ends=True, segments=12, radius1=r, radius2=r * 0.9, depth=L)
+        dv = Vector((math.cos(yaw) * math.cos(pitch), math.sin(yaw) * math.cos(pitch), math.sin(pitch)))
+        q = dv.to_track_quat('Z', 'Y')
+        bmesh.ops.rotate(bm, verts=geom['verts'], cent=Vector((0, 0, 0)), matrix=q.to_matrix())
+        bmesh.ops.translate(bm, vec=Vector((x0 + math.cos(a) * d, y0 + math.sin(a) * d, z0 + z)), verts=geom['verts'])
+    for f in bm.faces:
+        for loop in f.loops:
+            co = loop.vert.co
+            loop[uv].uv = (co.x + co.y, co.z)
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    for f in me.polygons:
+        f.use_smooth = True
+    me.materials.append(assets.pbr(bpy, p.get('texture', 'pine_bark'), '1k', coords='uv', tint='#0D0B0A', tint_mix=0.8))
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    # embers: small glowing chips in the heart of the heap
+    em = dict(shape='scatter', material='glow', color='#FF5A14', emit=p.get('ember', 30.0), count=p.get('embers', 140),
+              radius=[0.008, 0.025], seed=p.get('seed', 1), position=[x0, y0, z0],
+              **{'in': [-R * 0.55, -R * 0.55, 0.0, R * 0.55, R * 0.55, 0.25]})
+    return [ob] + kit.piece(bpy, name + '-embers', em)
