@@ -115,3 +115,27 @@ more simply.
   `python3.11 studio/engine/render.py`.
 - **`.venv-fab` on Python 3.11**, with build123d, for the speaker's model.
 - **No engine core change.** My pieces are in `studio/engine/kit_ext/smoke_el.py`: woodsmoke, trunks and canopy.
+
+## The re-finish (after the duel with Smoke B)
+
+Smoke A beat the Smoke B birch wood in two blind duels (6.5 to 3.5, 6.5 to 4.5). Both judges marked down the grade: the
+cabinet was underexposed and merged with the shadowed ground, and the amber hid the acrylic's own smoked tint. The
+coordinator asked for a re-finish from the raw frames, with no re-render.
+
+`critic-smoke/refinish.py` (RAW MASK SHOT OUT wb_r wb_b lift dodge) does it in four steps:
+1. **White balance toward neutral.** It runs in linear light, with luminance kept: R × 0.84, B × 1.25.
+2. **A small toe lift.** It adds up to 0.003 linear at black.
+3. **A 0.7-stop dodge on the speaker's darker tones**, feathered over the part mask. The mask came from
+   `render.py --masks-only` with the set switched off: nothing stands in front of the speaker, and the full set ran
+   out of memory in the mask pass.
+4. **The shot's own finish chain**, run on top.
+
+**Results.**
+- The cabinet's mean luma rose from 45 to 55, and its colour from orange-brown (54/43/36) to grey-brown (62/54/50).
+- The ground below stays darker (38).
+- In a blind duel (`critic-smoke/duel-refinish.json`) the re-finish won, 6.4 to 6.0. The judge liked the lifted body,
+  the readable woofer, panels and ports, and the base separated from the litter. It found the shell a touch cool
+  against the amber forest, and the original's grade richer.
+
+The portrait (rendered by the coordinator's helper, 457212b) got the same re-finish. Both finals in `element31/` are now
+the re-finished frames.
