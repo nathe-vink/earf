@@ -125,17 +125,18 @@ DEFAULT = dict(
     # clear of the window, stands in the low sun (az -76, el 11) through the open back bays; linen sheers over the
     # front bays soften the rest
     sheers=[(-0.66, 0.22), (-2.73, 2.95)], sheer_opens=[0.15, 0.35], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=-0.55, vase_x=0.62,
-    sun=dict(azimuth_deg=-68.0, elevation_deg=14.0, irradiance=48.0, angle_deg=0.9, color='#FFE4C8'),
+    sun=dict(azimuth_deg=-68.0, elevation_deg=14.0, irradiance=48.0, angle_deg=0.5, color='#FFE4C8'),
     sky_strength=1.0, fill=2.2, fill_color='#DCE4EE', fill_pos=[1.6, -3.6, 2.2], bounce=0.7, bounce_pos=[-0.6, -3.6, 1.35],
-    bounce_size=[2.4, 1.2], floor_bounce=0.9, fb_pos=[0.0, -0.6, 0.08], rug_off=True, chair_off=True,
+    bounce_size=[2.4, 1.2], floor_bounce=0.55, fb_pos=[0.0, -0.6, 0.08], rug_off=True, chair_off=True,
     exposure=-1.0, wb=5200, cam_x=0.0, cam_d=5.06, pair_x=0.0, lens=40, cam_tz=0.855, wb_tint=0.0,
 )
 
 
 # the portrait (for phones): the same room, the pair brought in round a two-door credenza so it fills a 4:5 frame
 PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=0.08, books_x=0.38, vase_x=-0.4, port_d=4.1,
-                port_lens=50, port_tz=0.62,
-                # the sun a little further round for this pair, and the sheers' gaps where its beams come in
+                port_lens=50, port_tz=0.62, floor_bounce=0.9,
+                # the sun a little further round for this pair, and the sheers' gaps where its beams come in; a softer sun
+                # (0.9 deg) than the landscape's, for the horn's beam on the credenza
                 sun=dict(azimuth_deg=-66.0, elevation_deg=18.0, irradiance=48.0, angle_deg=0.9, color='#FFE4C8'),
                 sheers=[(-0.62, 0.38), (-2.7, 3.0)])     # the gaps where the beams to the pair (now +-0.92) come in
 
