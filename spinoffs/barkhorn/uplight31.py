@@ -31,7 +31,7 @@ RENDER = {'samples': 128, 'adaptive': 0.02, 'denoise': True, 'clamp': 10, 'bounc
           'exposure': 0.6, 'white_balance_k': 5600, 'white_balance_tint': 0.0}
 CONCRETE = {'texture': 'concrete_layers_02', 'res': '4k', 'tex_scale': 1.4, 'bump': 1.2, 'vary': 0.22, 'vary_m': 3.5, 'ties': [0.6, 0.62]}   # board-formed, photographed (Poly Haven CC0)
 NIGHT = {'kind': 'hdri', 'polyhaven': 'kloppenheim_07_puresky', 'res': '2k', 'strength': 0.6, 'rotation_deg': 0.0}   # an overcast night sky: the ambient and what the water mirrors
-WARM = '#FFF2DE'
+WARM = '#FFFFFF'                    # the uplights: a neutral white, so the acrylic alone gives the wall its colour (a warm lamp turned green and blue washes grey)
 # post: no white point, only a shoulder above 205 that rolls the hot glow inside a cabinet into 246 keeping its hue (PBR
 # Neutral alone bleaches a lit red toward white), a touch of clarity for the concrete's boards, a cored sharpen
 FINISH = {'enabled': True, 'white_in': 205, 'white_out': 205, 'peak': 246, 'contrast': 0.05, 'clarity': 0.1, 'sharpen': 0.3}
@@ -128,24 +128,23 @@ def quay(keys, xs, camera, size, exposure, title, boost=None):
     """The night set both kinds of picture share: speakers in a row on a wet granite quay at the foot of an opera house's
     board-formed concrete river front, each on its uplight, the river at the quay's edge behind the camera's side.
 
-    The wall's face is 0.75 m behind the speakers' centres (half a metre behind the cabinets): close, each cabinet
+    The wall's face is 0.5 m behind the speakers' centres (0.29 m behind the cabinets): close, each cabinet
     throws its own tall column of colour, its batts' shadow a dark spine up the middle (at 1.2 m the columns ran
     together into one gradient, at 2.6 m they were lost). `boost`: a lamp's power by colour key (Smoke passes least)."""
-    wall_y = 0.75                                         # the wall's face
+    wall_y = 0.5                                          # the wall's face
     rnd = random.Random(31)
     def pour(pos, size):                                  # one pour of the wall, its own stretch of the texture
-        return kit('wall', pos, size=size, **dict(CONCRETE, tex_scale=2.0, vary=0.5, vary_m=6.0, bump=2.4,
+        return kit('wall', pos, size=size, **dict(CONCRETE, tex_scale=2.0, vary=0.6, vary_m=6.0, bump=3.5,
                                                   tex_offset=[round(rnd.uniform(0, 1), 3), round(rnd.uniform(0, 1), 3), round(rnd.uniform(0, 1), 3)]))
     props = [
         # the wall, board-formed concrete: one face in pours 3.6 m wide, a 12 mm joint between them falling between
-        # speakers (no pilasters: their edges cut the washes into hard columns), a plinth course, a deep cornice at
+        # speakers (no pilasters: their edges cut the washes into hard columns; no plinth course: its top drew a lit line), a deep cornice at
         # 4.8 m, and above it the night sky (the frame has to say it is outdoors)
         pour([0.0, wall_y + 0.75, 0.0], [60.0, 1.2, 5.6]),
-        pour([0.0, wall_y - 0.1, 0.0], [60.0, 0.2, 0.6]),
         pour([0.0, wall_y - 0.35, 4.8], [60.0, 0.7, 0.8]),
         # the quay: wet granite flags with broad standing water, a wet granite kerb, the river just below
-        kit('paving', [0.0, -1.3, 0.0], size=[60.0, 4.2], texture='granite_tile', res='2k', wet=0.85, puddle_m=1.6, vary=0.2),
-        kit('paving', [0.0, -3.575, 0.0], size=[60.0, 0.35], thick=0.12, texture='granite_tile', res='2k', wet=0.9, puddle_m=0.5, vary=0.3),
+        kit('paving', [0.0, -1.3, 0.0], size=[60.0, 4.2], texture='granite_tile', res='2k', wet=0.7, puddle_m=1.0, vary=0.2),
+        kit('paving', [0.0, -3.575, 0.0], size=[60.0, 0.35], thick=0.03, texture='granite_tile', res='2k', wet=1.0, puddle_m=0.5, vary=0.3),
         kit('water', [0.0, -18.0, -0.06], size=[80.0, 29.0], ripple=0.12, ripple_m=1.2),
         # the city across the river, behind the camera's back, felt only as warm glows low on the water, near and far
         {'kind': 'kit', 'shape': 'box', 'position': [0.0, -40.0, -0.4], 'size': [80.0, 0.5, 0.3], 'material': 'glow',
@@ -154,7 +153,7 @@ def quay(keys, xs, camera, size, exposure, title, boost=None):
          'color': '#FFD2A0', 'emit': 1.5, 'shadow': False},
     ]
     for i in range(-8, 9):                                # the pours
-        props.append(pour([i * 3.6, wall_y + 0.15, 0.0], [3.588, 0.3, 4.8]))
+        props.append(pour([i * 3.6, wall_y + 0.15, 0.0], [3.596, 0.3, 4.8]))
     lights, insts = {}, []
     for i, (k, x) in enumerate(zip(keys, xs)):
         pr, lamps = placement(SLIDE, x=x, y=0.0, z0=Z0, power=0.5 * (boost or {}).get(k, 1.0))
@@ -163,13 +162,13 @@ def quay(keys, xs, camera, size, exposure, title, boost=None):
             lights[f'up{i}{k_}'] = l_
         insts.append({'flavour': FLAVOUR[k], 'position': [x, 0.0, Z0], 'rotate_z': 0, 'hide': ['cloth-disc']})
     # moonlight, cool and faint, high over the river at the front right: it finds the horns and the stone
-    lights['moon'] = {'type': 'area', 'size_m': [10.0, 6.0], 'position': [6.0, -8.0, 9.0], 'target': [0.0, wall_y, 3.0],
-                      'irradiance': 0.12, 'color': '#C4D0F0'}
+    lights['moon'] = {'type': 'area', 'size_m': [10.0, 6.0], 'position': [5.0, -3.0, 8.0], 'target': [0.0, wall_y, 2.0],
+                      'irradiance': 0.22, 'color': '#C4D0F0'}
     return {'product': {'def': PRODUCT, 'flavour': FLAVOUR[keys[0]], 'instances': insts},
             'set': {'kind': 'stage', 'props': props},
             'sky': dict(NIGHT, strength=0.12),
             'lights': lights,
-            'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.02, 16.0], 'density': 0.015, 'anisotropy': 0.55},
+            'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.02, 16.0], 'density': 0.007, 'anisotropy': 0.55},
             'camera': camera,
             'render': dict(RENDER, samples=160, exposure=exposure),
             'finish': dict(FINISH),
@@ -188,7 +187,7 @@ def facade(size=(2880, 1200), camera=None, exposure=1.0):
 def slide(key, size=(1600, 1600)):
     """One slide: a speaker alone on the quay, the same set, camera and lamp for all eight (round 31, pass 6: the
     slides moved into the facade's world after five passes in a set of their own never passed 4.5)."""
-    return quay([key], [0.0], {'position': [0.15, -5.0, 0.5], 'target': [0.0, 0.2, 1.05], 'lens_mm': 45.0, 'level': True},
+    return quay([key], [0.0], {'position': [0.15, -5.0, 0.7], 'target': [0.0, 0.2, 0.85], 'lens_mm': 50.0, 'level': True},
                 size, 1.0, f'barkhorn, {NAME[key]}, uplit on the quay before a concrete wall')
 
 

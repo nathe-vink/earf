@@ -111,7 +111,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     1.5,
+     1.25,
      0.0
     ],
     "size": [
@@ -122,8 +122,8 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -142,38 +142,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     0.65,
-     0.0
-    ],
-    "size": [
-     60.0,
-     0.2,
-     0.6
-    ],
-    "texture": "concrete_layers_02",
-    "res": "4k",
-    "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
-    "vary_m": 6.0,
-    "ties": [
-     0.6,
-     0.62
-    ],
-    "tex_offset": [
-     0.684,
-     0.139,
-     0.112
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "concrete",
-    "fn": "wall",
-    "position": [
-     0.0,
-     0.4,
+     0.15000000000000002,
      4.8
     ],
     "size": [
@@ -184,17 +153,17 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
      0.62
     ],
     "tex_offset": [
-     0.232,
-     0.758,
-     0.147
+     0.684,
+     0.139,
+     0.112
     ]
    },
    {
@@ -213,8 +182,8 @@
     ],
     "texture": "granite_tile",
     "res": "2k",
-    "wet": 0.85,
-    "puddle_m": 1.6,
+    "wet": 0.7,
+    "puddle_m": 1.0,
     "vary": 0.2
    },
    {
@@ -231,10 +200,10 @@
      60.0,
      0.35
     ],
-    "thick": 0.12,
+    "thick": 0.03,
     "texture": "granite_tile",
     "res": "2k",
-    "wet": 0.9,
+    "wet": 1.0,
     "puddle_m": 0.5,
     "vary": 0.3
    },
@@ -298,19 +267,50 @@
     "fn": "wall",
     "position": [
      -28.8,
-     0.9,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.232,
+     0.758,
+     0.147
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     -25.2,
+     0.65,
+     0.0
+    ],
+    "size": [
+     3.596,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -328,20 +328,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -25.2,
-     0.9,
+     -21.6,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -359,20 +359,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -21.6,
-     0.9,
+     -18.0,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -390,20 +390,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -18.0,
-     0.9,
+     -14.4,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -421,20 +421,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -14.4,
-     0.9,
+     -10.8,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -452,20 +452,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -10.8,
-     0.9,
+     -7.2,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -483,20 +483,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -7.2,
-     0.9,
+     -3.6,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -514,20 +514,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -3.6,
-     0.9,
+     0.0,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -545,20 +545,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     0.0,
-     0.9,
+     3.6,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -576,20 +576,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     3.6,
-     0.9,
+     7.2,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -607,20 +607,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     7.2,
-     0.9,
+     10.8,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -638,20 +638,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     10.8,
-     0.9,
+     14.4,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -669,20 +669,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     14.4,
-     0.9,
+     18.0,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -700,20 +700,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     18.0,
-     0.9,
+     21.6,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -731,20 +731,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     21.6,
-     0.9,
+     25.2,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -762,20 +762,20 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     25.2,
-     0.9,
+     28.8,
+     0.65,
      0.0
     ],
     "size": [
-     3.588,
+     3.596,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
+    "bump": 3.5,
+    "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
      0.6,
@@ -789,37 +789,6 @@
    },
    {
     "kind": "kit",
-    "shape": "ext",
-    "module": "concrete",
-    "fn": "wall",
-    "position": [
-     28.8,
-     0.9,
-     0.0
-    ],
-    "size": [
-     3.588,
-     0.3,
-     4.8
-    ],
-    "texture": "concrete_layers_02",
-    "res": "4k",
-    "tex_scale": 2.0,
-    "bump": 2.4,
-    "vary": 0.5,
-    "vary_m": 6.0,
-    "ties": [
-     0.6,
-     0.62
-    ],
-    "tex_offset": [
-     0.546,
-     0.675,
-     0.094
-    ]
-   },
-   {
-    "kind": "kit",
     "shape": "box",
     "position": [
      -4.2,
@@ -850,7 +819,7 @@
      0.003
     ],
     "material": "glow",
-    "color": "#FFF2DE",
+    "color": "#FFFFFF",
     "emit": 0.2,
     "shadow": false
    },
@@ -886,7 +855,7 @@
      0.003
     ],
     "material": "glow",
-    "color": "#FFF2DE",
+    "color": "#FFFFFF",
     "emit": 0.2,
     "shadow": false
    },
@@ -922,7 +891,7 @@
      0.003
     ],
     "material": "glow",
-    "color": "#FFF2DE",
+    "color": "#FFFFFF",
     "emit": 0.2,
     "shadow": false
    },
@@ -958,7 +927,7 @@
      0.003
     ],
     "material": "glow",
-    "color": "#FFF2DE",
+    "color": "#FFFFFF",
     "emit": 0.2,
     "shadow": false
    },
@@ -994,7 +963,7 @@
      0.003
     ],
     "material": "glow",
-    "color": "#FFF2DE",
+    "color": "#FFFFFF",
     "emit": 0.2,
     "shadow": false
    },
@@ -1030,7 +999,7 @@
      0.003
     ],
     "material": "glow",
-    "color": "#FFF2DE",
+    "color": "#FFFFFF",
     "emit": 0.2,
     "shadow": false
    },
@@ -1066,7 +1035,7 @@
      0.003
     ],
     "material": "glow",
-    "color": "#FFF2DE",
+    "color": "#FFFFFF",
     "emit": 0.2,
     "shadow": false
    },
@@ -1102,7 +1071,7 @@
      0.003
     ],
     "material": "glow",
-    "color": "#FFF2DE",
+    "color": "#FFFFFF",
     "emit": 0.2,
     "shadow": false
    }
@@ -1134,7 +1103,7 @@
    ],
    "spread_deg": 120,
    "power_w": 225.0,
-   "color": "#FFF2DE"
+   "color": "#FFFFFF"
   },
   "up1": {
    "type": "area",
@@ -1154,7 +1123,7 @@
    ],
    "spread_deg": 120,
    "power_w": 225.0,
-   "color": "#FFF2DE"
+   "color": "#FFFFFF"
   },
   "up2": {
    "type": "area",
@@ -1174,7 +1143,7 @@
    ],
    "spread_deg": 120,
    "power_w": 225.0,
-   "color": "#FFF2DE"
+   "color": "#FFFFFF"
   },
   "up3": {
    "type": "area",
@@ -1194,7 +1163,7 @@
    ],
    "spread_deg": 120,
    "power_w": 225.0,
-   "color": "#FFF2DE"
+   "color": "#FFFFFF"
   },
   "up4": {
    "type": "area",
@@ -1214,7 +1183,7 @@
    ],
    "spread_deg": 120,
    "power_w": 225.0,
-   "color": "#FFF2DE"
+   "color": "#FFFFFF"
   },
   "up5": {
    "type": "area",
@@ -1234,7 +1203,7 @@
    ],
    "spread_deg": 120,
    "power_w": 225.0,
-   "color": "#FFF2DE"
+   "color": "#FFFFFF"
   },
   "up6": {
    "type": "area",
@@ -1254,7 +1223,7 @@
    ],
    "spread_deg": 120,
    "power_w": 225.0,
-   "color": "#FFF2DE"
+   "color": "#FFFFFF"
   },
   "up7": {
    "type": "area",
@@ -1274,7 +1243,7 @@
    ],
    "spread_deg": 120,
    "power_w": 315.0,
-   "color": "#FFF2DE"
+   "color": "#FFFFFF"
   },
   "moon": {
    "type": "area",
@@ -1283,16 +1252,16 @@
     6.0
    ],
    "position": [
-    6.0,
-    -8.0,
-    9.0
+    5.0,
+    -3.0,
+    8.0
    ],
    "target": [
     0.0,
-    0.75,
-    3.0
+    0.5,
+    2.0
    ],
-   "irradiance": 0.12,
+   "irradiance": 0.22,
    "color": "#C4D0F0"
   }
  },
@@ -1302,10 +1271,10 @@
    -20.0,
    -0.5,
    25.0,
-   0.73,
+   0.48,
    16.0
   ],
-  "density": 0.015,
+  "density": 0.007,
   "anisotropy": 0.55
  },
  "camera": {
