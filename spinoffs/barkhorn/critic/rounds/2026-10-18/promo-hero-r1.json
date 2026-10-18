@@ -1,0 +1,441 @@
+{
+ "stage1": {
+  "impression": "A tidy, high-key colourway line-up: eight tinted-acrylic horn speakers on a gentle arc on a white sweep, backlit so each casts a soft shadow toward camera, and the glassy horns are genuinely lovely. But it reads as a clean configurator render, not a campaign photograph: the cabinets are underlit and muddy (olive green, brown orange, a black void at the end) with grey insides and dead-black woofers, the coloured light on the floor is a faint pastel ghost on a near-blown floor, and a dim khaki sweep plus an edge-to-edge strip with no breathing room give it neither polish nor hierarchy.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Every speaker, red and violet included, throws a defined, saturated pool of its own colour onto the floor inside the frame (violet zone within \u0394E 10 of #B49BE0), on open floor at lum 205-230 with nothing clipped",
+  "The white lining reads near-white through each tint (clear speaker's liner lum 180-215) and each cabinet shows its true colour: golden yellow, not mustard; green, not olive; the smoked black shows its interior (lum 55 or more)",
+  "Every woofer reads as a cone in its coloured ring, with a soft highlight (cone lum_p95 40 or more), not a black disc",
+  "The sweep is even, pale, neutral paper under the title: upper band lum_p5 205 or more, p95-p5 20 or less, within \u0394E 4 of #ECEAE6",
+  "The line-up sits inside side margins of at least 7% on a gentle arc (no speaker more than 5% taller than the centre pair), every baffle facing the lens",
+  "The paper floor has real tooth and nothing in the frame is a textureless blown area (60 px floor patches lum_range 3-10, clip 0.5% or less)",
+  "The acrylic cabinet edges read as lit acrylic rather than black outlines (a product-side fix)"
+ ],
+ "defects": [
+  {
+   "region": [
+    1650,
+    812,
+    1810,
+    870
+   ],
+   "what": "Violet speaker throws no colour: the floor in front is neutral 182/180/186, \u0394E 19.5 from a violet light #B49BE0"
+  },
+  {
+   "region": [
+    100,
+    875,
+    300,
+    935
+   ],
+   "what": "Red speaker casts a plain grey shadow (167/165/160) and no red; its throw heads out of frame to the left"
+  },
+  {
+   "region": [
+    430,
+    840,
+    1580,
+    1040
+   ],
+   "what": "The coloured pools in front of the speakers are pastel ghosts, only \u0394E 5.5-9.8 from the neutral floor at lum 221-240: orange [430,900,700,1040] 8.9, yellow [720,840,900,980] 6.2, green [960,910,1100,1030] 5.5, blue [1430,920,1580,1000] 9.8"
+  },
+  {
+   "region": [
+    1100,
+    800,
+    1160,
+    1060
+   ],
+   "what": "Shadow cores end about 80 px in front of the bases (lum 162 rising to 235 by y=900-920): the key is high and broad, not 'behind and low' as briefed"
+  },
+  {
+   "region": [
+    1990,
+    527,
+    2090,
+    553
+   ],
+   "what": "The white lining reads as a mid-grey slab, lum 130 (125/131/129), and does the same in every cabinet"
+  },
+  {
+   "region": [
+    440,
+    515,
+    1800,
+    570
+   ],
+   "what": "Cabinet colours muddy and 1.1-1.7 stops darker than their own horns: orange 129/74/43 (brown), yellow 129/100/36 (mustard, horn 197/166/20), green 70/93/60 (olive), violet lum 64-66 (horn 112)"
+  },
+  {
+   "region": [
+    2245,
+    520,
+    2500,
+    870
+   ],
+   "what": "Smoked black cabinet crushed to lum 30 (p95 35): a dark void at the frame edge with no visible interior"
+  },
+  {
+   "region": [
+    1390,
+    598,
+    1464,
+    670
+   ],
+   "what": "Woofer cones are dead-black discs: lum 11.5, p95 13, range 4; same on green, red, yellow and black (median 10-12)"
+  },
+  {
+   "region": [
+    1240,
+    500,
+    1320,
+    790
+   ],
+   "what": "Floor pool behind the centre pair blown: median 250.7, 5.2% clipped, 20% clipped in [1250,600,1310,660], no texture"
+  },
+  {
+   "region": [
+    0,
+    0,
+    400,
+    360
+   ],
+   "what": "Sweep corners dim olive-khaki: lum 183 at 183/184/175, \u0394E 12.6 from pale paper #ECEAE6; right corner [2160,0,2560,360] lum 185"
+  },
+  {
+   "region": [
+    0,
+    0,
+    2560,
+    300
+   ],
+   "what": "Title zone has a 47-level vignette (p5 180, p95 227) and a yellow cast (B 13 below R and G)"
+  },
+  {
+   "region": [
+    0,
+    360,
+    170,
+    800
+   ],
+   "what": "Line-up runs edge to edge: red's outer edge at x=61 and black's at x=2497, margins of 2.4%"
+  },
+  {
+   "region": [
+    61,
+    382,
+    315,
+    866
+   ],
+   "what": "End speakers render 12% taller than the centre pair (484 vs 432 px), which puts the weight at the edges; black [2245,382,2497,867] likewise"
+  },
+  {
+   "region": [
+    61,
+    520,
+    105,
+    860
+   ],
+   "what": "End speakers toed out so their outer side panels show: red side washed pink-grey 141/109/102, black side [2450,520,2497,860] grey 105/106/101"
+  },
+  {
+   "region": [
+    0,
+    870,
+    400,
+    1000
+   ],
+   "what": "Large flat grey shadow wedge lower left (lum 155-219), the dullest area of the frame, with no red in it"
+  },
+  {
+   "region": [
+    1036,
+    540,
+    1044,
+    760
+   ],
+   "what": "Acrylic cabinet edges render as near-black outlines (green side lum 47; blue [1333,540,1341,760] lum 42) instead of piping light (product material)"
+  },
+  {
+   "region": [
+    1250,
+    1210,
+    1310,
+    1270
+   ],
+   "what": "Paper floor is a mathematically smooth plane: lum_range 1.8 in a 60 px patch, 1.1-2.0 in others; no tooth, no grain"
+  },
+  {
+   "region": [
+    100,
+    385,
+    330,
+    500
+   ],
+   "what": "Compression drivers read as melted dark blobs through the thick horn resin, on all eight (product geometry)"
+  },
+  {
+   "region": [
+    1930,
+    395,
+    1970,
+    475
+   ],
+   "what": "Water-clear horn reads yellowed (188/189/178) under the warm-green cast"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The card's idea, each cabinet throwing its colour onto the floor, barely reads: the throws are pale tints washed out by a near-white floor, and the violet and red throw only grey.",
+   "evidence": {
+    "region": [
+     1650,
+     812,
+     1810,
+     870
+    ],
+    "measured": "Violet zone is neutral 182/180/186, \u0394E 19.5 from #B49BE0. The red zone [100,875,300,935] is grey 167/165/160. The yellow and green pools are only \u0394E 6.2 and 5.5 from the neutral floor. Open floor runs lum 235-251 (centre column 248-251). Shadow cores end about 80 px past the bases ([1100,800,1160,1060]: 162 at the base, 221 by y=880-900, 235 by y=900-920)."
+   },
+   "change": {
+    "setting": "Light: key (direction, size) and floor fill",
+    "from": "a broad, soft back light set high, plus ambient fill holding the open floor at lum 235-251",
+    "to": "one small hard key (a 30 cm source or a spotted fresnel) 4-5 m behind the centre of the arc at elevation 22-25 deg, about 1.5 stops over the fill; cut the ambient/dome fill on the floor by about 1.3 stops so open floor sits at lum 205-225; turn refractive caustics on with no caustic blur, and raise samples until the throws render clean"
+   },
+   "expected": "Each speaker lays a defined, saturated pool of its own colour on the floor, fanning out from the centre toward camera inside the frame (y 820-1150). The violet zone comes within \u0394E 10 of #B49BE0 and the red throw reads red, not grey. Shadow cores run 2-3x longer, and the open floor sits at lum 205-225 with no clipping.",
+   "accept": {
+    "region": [
+     1650,
+     812,
+     1810,
+     870
+    ],
+    "metric": "delta_e",
+    "hex": "#B49BE0",
+    "op": "<=",
+    "value": 10
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The cabinet faces get no light of their own, so the white lining reads as grey felt and every colourway goes muddy, 1.1-1.7 stops darker than its own horn.",
+   "evidence": {
+    "region": [
+     1990,
+     527,
+     2090,
+     553
+    ],
+    "measured": "The clear speaker's lining is lum 130 (125/131/129). Blue cabinet [1355,520,1500,560] is lum 97. Yellow [760,515,900,555] is 129/100/36 against its horn's 197/166/20. Green [1060,520,1200,560] is 70/93/60. Violet [1650,525,1800,565] is lum 66 against its horn's 112. Smoked black [2270,545,2470,590] is lum 30."
+   },
+   "change": {
+    "setting": "Light: add a front fill (number of lights)",
+    "from": "none: the faces get only ambient bounce",
+    "to": "a 2 x 1 m softbox 2.4 m high just behind the camera, pitched down about 35 deg (the vertical fronts mirror the floor, so it leaves no patch on them), light-linked to the speakers only (or gridded and flagged off the floor), about 1.5 stops under the key, 5500 K"
+   },
+   "expected": "The lining reads near-white through each tint (liner lum 180-215). Cabinets rise about a stop and their colours clean up: blue cabinet about 135-160, yellow toward a golden 200/160/40, green toward a clear bottle green. The smoked black opens to lum 55-75 with its interior visible, and the floor throws are untouched.",
+   "accept": {
+    "region": [
+     1990,
+     527,
+     2090,
+     553
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     180,
+     215
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "set",
+   "problem": "The sweep is a dim khaki-olive vignette rather than pale paper: a muddy field for the site title, and a yellow-green cast over every colour.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     2560,
+     300
+    ],
+    "measured": "lum p5 180, p95 227 (range 47); RGB 207/206/193, with B 13 below R and G; \u0394E 7.9 from pale paper #ECEAE6. Corners [0,0,400,360] are lum 183 at 183/184/175 (\u0394E 12.6). The water-clear horn [1930,395,1970,475] reads yellowed at 188/189/178."
+   },
+   "change": {
+    "setting": "Set: sweep colour; Light: background lights and colour",
+    "from": "khaki-cream paper lit only by the key's spill, 227 at the centre falling to 180 at the corners, under warm-green light",
+    "to": "pale warm-neutral paper (#ECEAE6), lit evenly edge to edge by two large soft background lights (or a 4 x 4 m overhead silk), with every light at the same neutral 5500 K"
+   },
+   "expected": "The upper sweep sits at lum 212-232 everywhere, p95-p5 20 or less, within \u0394E 4 of #ECEAE6. The title sits on a clean, even field, the clear speaker reads clear, and the blue and violet read true.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     2560,
+     300
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 205
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "composition",
+   "problem": "The line-up runs edge to edge on a deep arc: the end speakers crowd the frame edges, render bigger than the centre pair, and are toed out so their side panels show.",
+   "evidence": {
+    "region": [
+     0,
+     360,
+     170,
+     800
+    ],
+    "measured": "The red's outer edge is at x=61 and the black's at x=2497 (margins of 2.4%); speaker pixels pull this strip's p5 down to 21. The end speakers are 484 px tall against 432 px for the centre pair (+12%). Outer side panels show on the red [61,520,105,860] (141/109/102) and the black [2450,520,2497,860]."
+   },
+   "change": {
+    "setting": "Arrangement: arc and turn of each speaker",
+    "from": "a deep arc with the end pair about 11% nearer the camera than the centre pair, toed out",
+    "to": "a gentle arc: move the end pair back until they render no more than 5% taller than the centre pair (about 0.1x the camera distance), and move the next pair back by half that; keep the spacing even; turn every speaker so its baffle faces the lens; leave the camera where it is"
+   },
+   "expected": "At least 180 px of clear sweep at each side (line-up from about x 190 to 2370), with the ends about 450 px tall. Every woofer is seen square-on in its ring, and the smoked black is no longer the biggest mass at the edge. The frame gains a safe area for responsive crops, and each link target stays separate.",
+   "accept": {
+    "region": [
+     0,
+     360,
+     170,
+     800
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The woofers, which the card puts on show with covers off, are dead-black discs with no cone, cap or surround.",
+   "evidence": {
+    "region": [
+     1390,
+     598,
+     1464,
+     670
+    ],
+    "measured": "Blue cone is lum 11.5, p95 13, range 4. Green [1100,588,1162,650] is 11.6/13.8, red [160,640,260,720] 9.8/14.3, black [2300,620,2400,700] 10.7/20.1."
+   },
+   "change": {
+    "setting": "Light: add a specular strip (number of lights)",
+    "from": "nothing for the cones to reflect",
+    "to": "a 30 x 200 cm strip softbox, horizontal, 2 m above and 1 m behind the camera, angled so its reflection crosses the lower half of every cone and its coloured ring, about 1 stop under the key, light-linked to the speakers"
+   },
+   "expected": "Each cone shows a soft highlight band, its dust cap and its surround roll, with p95 at 40 or more while the median stays at 35 or less, so the cones still read black. The coloured rings gain a sheen.",
+   "accept": {
+    "region": [
+     1390,
+     598,
+     1464,
+     670
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The floor behind the centre pair is blown into a textureless white void, the brightest thing in the frame, sitting between two speakers.",
+   "evidence": {
+    "region": [
+     1240,
+     500,
+     1320,
+     790
+    ],
+    "measured": "Median lum 250.7, 5.2% clipped; [1250,600,1310,660] is 20% clipped, with a range of 1.1."
+   },
+   "change": {
+    "setting": "Finish: grade (highlight roll-off)",
+    "from": "highlights run linearly into clipping",
+    "to": "a soft shoulder from lum 228 with the white point at 246 on floor and sweep (or a half-stop net on the lower edge of the key)"
+   },
+   "expected": "The pool holds paper texture at lum 246 or less with 0.5% or less clipped, and the horns still glow against it.",
+   "accept": {
+    "region": [
+     1240,
+     500,
+     1320,
+     790
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The paper floor is a mathematically smooth plane with no tooth or grain, a CG tell across a third of the frame.",
+   "evidence": {
+    "region": [
+     1250,
+     1210,
+     1310,
+     1270
+    ],
+    "measured": "lum_range 1.8 in a 60 px patch; 1.7 at [1200,1150,1260,1210] and 1.1 at [1250,600,1310,660]."
+   },
+   "change": {
+    "setting": "Set: floor (paper material)",
+    "from": "a smooth matte plane",
+    "to": "seamless paper with faint tooth (bump at 0.5-1 mm scale, strength about 0.02) and roughness varying from 0.75 to 0.85, plus a 1-level monochrome grain in the finish"
+   },
+   "expected": "Under the lower key the paper shows a fine, even tooth, and 60 px floor patches read lum_range 3-10 with no visible pattern or tiling.",
+   "accept": {
+    "region": [
+     1250,
+     1210,
+     1310,
+     1270
+    ],
+    "metric": "lum_range",
+    "op": "between",
+    "value": [
+     3,
+     10
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the acrylic cabinet edges glow with piped light instead of rendering as near-black outlines (green side edge [1036,540,1044,760] lum 47, blue [1333,540,1341,760] lum 42)",
+   "why": "Edge finish and absorption belong to the speaker's acrylic material, which is fixed; the product team should confirm whether the real edges are polished and whether the model's edge shading matches them."
+  },
+  {
+   "request": "Clean up how the compression drivers read through the horns (melted dark blobs in all eight)",
+   "why": "That comes from the horn's geometry and the resin's refraction, which are part of the fixed product."
+  },
+  {
+   "request": "Give the woofer cones and rings real surface detail if they still read flat under the new strip light",
+   "why": "Cone and ring materials are parts of the speaker; only their lighting is ours to change."
+  },
+  {
+   "request": "Bring each cabinet's tint closer to its horn's (green horn 106/129/83 against cabinet 70/93/60; orange horn 178/107/36 against a brown cabinet at 129/74/43)",
+   "why": "If the hues still disagree once c2 and c3 are in, the difference lies in the product's colour specification, which is fixed."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
