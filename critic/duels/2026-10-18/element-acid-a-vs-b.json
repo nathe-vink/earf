@@ -1,0 +1,51 @@
+{
+ "subject": "Acid in its element, concept A (the acid spring at Dallol) against concept B (acid rain over wet black lava)",
+ "date": "2026-10-18",
+ "prompt": "critic/ab/PROMPT-DUEL.txt, its second paragraph worded for two candidate pictures of the same page",
+ "frames": {
+  "A": "renders/2026-10-18/barkhorn/element31/acid.png (r31-element-acid)",
+  "B": "renders/2026-10-18/barkhorn/element31/acid_b.png (r31-element-acid-b d753493)"
+ },
+ "judges": [
+  {
+   "shown_as_A": "A",
+   "shown_as_B": "B",
+   "scores": {
+    "A": 5.0,
+    "B": 6.5
+   },
+   "prefer": "B",
+   "notes": "Prefers B: wet volcanic rock and rain-dimpled water read as photographed at 1x and 3x; the gold cabinet (~129) glows against dark wet ground (~60); backlit overcast with a bright horizon band and a rippled gold reflection leading to the product; feet stand at the water's edge; crisp internals. A: the sulphur crust is smeared procedural displacement; the amber cabinet sits on crust of the same luma (~160) and dissolves; a milky grey sky fills ~40%; the chimney is a clay-like blob. B against: an olive/khaki grade (sky ~r176 g172 b144) makes the acrylic mustard; rain streaks over the horn read as scratches at 3x; centred, so a spread's gutter runs through the woofer; repeated splash crowns."
+  },
+  {
+   "shown_as_A": "B",
+   "shown_as_B": "A",
+   "scores": {
+    "B": 5.8,
+    "A": 6.7
+   },
+   "prefer": "A",
+   "notes": "Prefers A: the three-quarter camera shows the box's depth, side panel and the horn's rear driver; the saturated amber horn keeps a crisp edge against a blue-grey sky; a low warm key from the left gives the box shape and a consistent shadow; a cleaner amber-and-teal palette. B: the square-on view flattens the product; the horn washes cream on cream against the pale sky; bone dry in a downpour; splash crowns read as CG sprites; the olive grade makes the amber brassy. A against: amber on amber-yellow sulphur so the base blends in; the crust is procedural noise at 3x; the chimney a clay-like blob; the amber out of gamut (blue <= 2 in ~46% of product pixels)."
+  },
+  {
+   "shown_as_A": "A",
+   "shown_as_B": "B",
+   "scores": {
+    "A": 4.5,
+    "B": 6.5
+   },
+   "prefer": "B",
+   "notes": "Prefers B: wet volcanic ground reads as real rock and mud; low-key backlight (p5-p95 ~38-214) separates the glowing cabinet from dark ground; feet stand in the puddle with a crisp amber reflection; cloud deck, horizon band and rain-hazed hills give weather and depth; smooth horn flare; the woofer's cap and surround read. A: the crust a game-engine heightmap at 3x; hazy and flat (~92-185) with the amber cabinet on same-yellow ground; blue clipped in ~55% of cabinet pixels so the panels posterise; little contact shadow; ruler-straight sprite-like steam. B against: the olive grade turns the acrylic khaki; the near-frontal view hides the driver; no droplets or wet sheen on the product in heavy rain; repeated splash sprites."
+  }
+ ],
+ "agreed": "All three faulted A's sulphur crust (procedural noise at 3x) and its amber cabinet lost against same-coloured ground, and B's olive grade, its dry product in the rain and its CG splash crowns; two of three found B's straight-on view flat.",
+ "result": {
+  "A_mean": 5.4,
+  "B_mean": 6.27,
+  "wins": {
+   "A": 1,
+   "B": 2
+  },
+  "kept": "B"
+ }
+}
