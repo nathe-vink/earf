@@ -5,6 +5,52 @@ The owner, verbatim (relayed by the coordinator during the round):
 - "Ice could have a snow covered wood cabin in the back, or maybe the speaker is in the abominable snowman's cave home."
 - "It's important to stay on the theme of earth and placing the speakers in their respective atmospheres, though the
   yeti and witch ideas are fun, subtle nods."
+- "For the dioramas, they are looking lackluster and bleak so far. They don't need to be busy per se, but they look both
+  empty and cluttered at the same time. It's also hard to see the speakers themselves in some of them. ... All of them
+  should be looking at the speaker in a way that's more level with the speaker, with the speaker turned slightly in
+  either direction depending on the setting."
+
+## At the speaker's level (the final)
+
+The owner's third note changed the camera, so the high tilt-shift frames below are history. In the final:
+
+- **Camera.**
+  - About 1 m up, looking 4° down, 70 mm at 5.8 m.
+  - The speaker fills about 65% of the frame's height, on the right third, turned -28° so it faces into the frame
+    toward the cabin.
+  - f/6 at miniature 6, focused through the speaker. The speaker is crisp to its back corners, and the cabin and pines
+    go soft.
+  - The portrait is nearer (4.7 m) at 84 mm and aimed further left, so the cabin sits beside the speaker.
+- **Composition.** There are fewer, bigger pieces:
+  - one backdrop: tall felt pines (dark, so the speaker's glow stands off them) and wool hills;
+  - one middle layer: the cabin at the left, its window lit, and the pond's cotton rim;
+  - soft drifts at the frame's lower edges.
+  - The snowflakes and the small drifts are gone. The falling snow stays only behind the speaker, so nothing crosses it.
+- **The speaker's light.** The clear acrylic shows a lamp only where it refracts or mirrors it, because the lining
+  inside gets no lamp light through the glass (caustics are off). So the light is built around that:
+  - a broad, mostly specular sheen from the front left is mirrored across the front panel;
+  - a cool lamp low behind it on the right and a warm one behind it on the left light the panel edges (the warm one
+    catches the horn);
+  - a cool rim comes from behind right;
+  - the pond's under-glow lights it from beneath.
+  - The set has its own light: moonlight from above, a low cool fill so the snow reads white, and a back light so the
+    pines stand off the hills. The window spills warm light on the snow.
+- **The nod.** The yeti's snowy footprints now cross the ice from the left, toward the speaker. At this low angle a
+  print seen lengthwise keeps its shape; seen end-on it would flatten to a sliver.
+
+Rounds at the new level (proofs L01 to L11, LQ01 to LQ03):
+
+1. L01: the level frame worked at once, but the cabin was too near and too big, and its window was off the frame. The
+   speaker was nearly square on, and too dark at the front.
+2. L02 and L03: the cabin went back and smaller (x -1.85, y 5.0, scale 1.15), the camera went straight on, and the
+   speaker's turn became -28°. Miniature 6 softens the woods.
+3. L04 and L05: the front and the warm light did not show. The reason is in "The speaker's light" above. The
+   sheen and the two lamps behind it are the fix, checked in a 0.8-scale crop (Lc05): crisp edges, glowing panels,
+   the ports clear.
+4. L06 to L09: a low set fill turned the snow from grey to white. The footprints were turned to cross the frame. I
+   tried putting them in a strip of snow, but that strip read as a table edge, so they went back on the ice.
+5. L10 and L11, portrait LQ01 to LQ03: a soft bank of cotton runs along the pond's near rim, low enough to stay below
+   the speaker's feet. The portrait was aimed further left so the cabin's window is whole.
 
 "Keeps its cool." The final has the ice-blue speaker (`cloud-blue`, cover off) on a frozen pond lit from beneath, in a
 snowy clearing at night. A balsa log cabin stands soft in the distance, with cotton snow on its roof and a warm window.
