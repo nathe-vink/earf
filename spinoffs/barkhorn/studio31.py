@@ -160,6 +160,61 @@ def bright(name):
     return s
 
 
+def bright2(name):
+    """Round 31d, from the set's pass (6.5): the bright field with the speaker standing on the floor and drawn at every
+    edge. The flags are seen only in reflections (no shadow on the cove: the left one's shadow was the grey wedge, so it
+    is back), wider, and a third high behind the horn for the water-clear frame's outline; a denser, tighter contact; the
+    background lamps aimed low, so the wall falls off about ten levels toward the top and the floor at the foot holds;
+    more light through the cabinet for Smoke; about 15 % more headroom for type."""
+    s = bright(name)
+    st = s['set']
+    st['contact'] = {'strength': 0.8, 'distance_m': 0.35, 'core_strength': 0.8, 'core_distance_m': 0.03}
+    st['flags'] = [
+        {'center_m': [-1.5, 0.6, 1.2], 'size_m': [1.4, 2.6], 'normal': [1.0, -0.2, 0.0], 'reflect_only': True},
+        {'center_m': [1.35, 2.1, 1.2], 'size_m': [0.6, 2.6], 'normal': [-0.45, -0.89, 0.0], 'reflect_only': True},
+        {'center_m': [0.0, 1.6, 2.2], 'size_m': [2.4, 0.8], 'normal': [0.0, -0.8, -0.6], 'reflect_only': True},
+    ]
+    L = s['lights']
+    L['bg-left'].update(size_m=[6.0, 3.0], position=[-4.5, 3.2, 3.4], target=[-3.0, 6.0, 0.3], irradiance=1.8)
+    L['bg-right'].update(size_m=[6.0, 3.0], target=[0.3, 6.0, 0.3], irradiance=1.8)
+    s['sky']['strength'] = 0.22          # the dome lit the wall evenly to the top; less of it lets the wall fall off
+    L['back-top']['irradiance'] = 30.0
+    # a low soft bank behind lighting the speaker alone, so light passes through the black and the clear cabinets too
+    L['back-low'] = {'type': 'area', 'size_m': [1.2, 0.8], 'orbit': {'azimuth_deg': 175, 'elevation_deg': 8, 'distance_m': 2.0},
+                     'target': [0.0, 0.0, 0.45], 'irradiance': 30.0, 'color': '#FFF8F0', 'camera': False, 'receivers': ['*#0']}
+    s['camera'] = dict(CAM34, lens_mm=60.0, target=[0.0, 0.0, 0.76])
+    s['title'] = f'barkhorn, {name}, bright field (round 31d)'
+    return s
+
+
+def bright3(name):
+    """Round 31e: the 31c rig and framing (which won its duels against 31d's) with only the two changes the 31d duels
+    credited: the flags seen only in reflections (no shadow on the cove), wider, and one high behind the horn, so the
+    water-clear frame's edges are drawn; and the low soft bank behind lighting the speaker alone, so Smoke reads."""
+    s = bright(name)
+    s['set']['flags'] = [
+        {'center_m': [-1.5, 0.6, 1.2], 'size_m': [1.4, 2.6], 'normal': [1.0, -0.2, 0.0], 'reflect_only': True},
+        {'center_m': [1.35, 2.1, 1.2], 'size_m': [0.6, 2.6], 'normal': [-0.45, -0.89, 0.0], 'reflect_only': True},
+        {'center_m': [0.0, 1.6, 2.2], 'size_m': [2.4, 0.8], 'normal': [0.0, -0.8, -0.6], 'reflect_only': True},
+    ]
+    s['lights']['back-low'] = {'type': 'area', 'size_m': [1.2, 0.8], 'orbit': {'azimuth_deg': 175, 'elevation_deg': 8, 'distance_m': 2.0},
+                               'target': [0.0, 0.0, 0.45], 'irradiance': 30.0, 'color': '#FFF8F0', 'camera': False, 'receivers': ['*#0']}
+    s['title'] = f'barkhorn, {name}, bright field (round 31e)'
+    return s
+
+
+def bright_hero(name):
+    """The heroes on the 31c rig with the drivers as made (2026-10-18): the woofer's ring is now polished opaque acrylic,
+    and on the pale set it mirrors only white and reads as a flat painted band. A graduated card where the ring's face
+    mirrors (low in front, toward the camera, placed by the reflection probe for the hero's camera) gives it a soft sheen
+    from top to bottom; it lights the ring alone. Won two blind duels on Ice against the ring without it (duels 13, 13b)."""
+    s = bright(name)
+    s['lights']['ring-card'] = {'type': 'panel', 'size_m': [1.2, 0.4], 'orbit': {'azimuth_deg': -27, 'elevation_deg': -2.5, 'distance_m': 2.0},
+                                'target': [0.0, -0.25, 0.49], 'strength': 3.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['woofer-ring'],
+                                'ramp': {'axis': 'z', 'at_m': [0.33, 0.47], 'values': [0.0, 1.0]}}
+    return s
+
+
 def darkfield(name):
     """Dark field on black: no light on the faces; two tall strips behind at grazing angles, so only the edges and
     corners glow (cast acrylic pipes light to its edges); a soft backlight through the body for the colour, the inside
@@ -315,9 +370,12 @@ def main():
     for name, _ in COLOURS:
         made[f'hero-dark-{name}'] = hero(name, True)
     # round 31c: the studio set is bright field (it won its duel); the dark set stays as h7's record, unrendered
+    # round 31d's bright2 lost its duels to the 31c rig (NOTES.md: duels 10, 11, 11b), so the heroes stay on bright
     for name, _ in COLOURS:
-        made[f'hero-light-{name}'] = bright(name)
+        made[f'hero-light-{name}'] = bright_hero(name)
     made['lineup'] = lineup_bright()
+    for name in ('ember', 'fog', 'smoke'):
+        made[f'concept-31e-{name}'] = bright3(name)
     for name in ('ember', 'ice', 'smoke'):
         made[f'concept-bright-{name}'] = bright(name)
         made[f'concept-darkfield-{name}'] = darkfield(name)
