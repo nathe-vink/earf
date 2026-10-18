@@ -126,3 +126,24 @@ stands on a photographed rock**, not a textured plane.
 scattering, so the material's step rate does nothing; the cost goes with the box's size, its peak density and the
 noise's octaves. The box is now held to what the lens sees (x -400 to 2600 m, y 250 to 2800 m), with density 0.14 and
 4 + 3 octaves: 70 s down to about 45 s at the test size, with the clouds still reading as cloud.
+
+### Pass 4: 5.0 ("iterate"; 7.3 if fixed). The first pass after the concept change.
+
+The frame was r4. The critic: the idea works but reads as CG. The sky is washed grey-blue, the clouds are soft cotton
+with no sunlit tops, the rock is soft and crushes to black at the bottom, the light is flat with no visible speaker
+shadow, and the horizon runs through the cabinet-horn joint.
+
+Its sun azimuths are mirrored again (it read the sun at -135 as near the camera axis, and asked for -40, which in the
+engine's convention would be almost straight behind the camera). I took its meaning, not its number: raking sun from
+the camera's right front.
+
+What I did:
+1. **Light:** the sky turned to 354, so its sun and the lamp are at azimuth 60, 28 degrees up. The speaker's face gets
+   raking sun and its shadow falls back and left across the ledge; the sky behind is about 100 degrees from the sun.
+2. **Sky:** exposure 0 (was +0.3), finish saturation 0.12.
+3. **Camera:** 0.6 m, so the horizon clears the cabinet-horn joint; f/8.
+4. **Clouds:** deck lowered 50 m (top -140, more distance and haze over it), soft 0.5, detail 7, octaves 5 and 4.
+5. **Rock:** the cliff scan at 8k (was 4k) for texel density up close.
+6. **Shadows:** finish lift 0.03 in #3A3530, a warm rock-shadow colour.
+7. **Bounce:** warm #D9B49A, 5 degrees up, 0.8 (the rock's colour bounced into the clear base).
+8. **Birds:** 7 in a loose V, spread in depth.
