@@ -119,7 +119,8 @@ def bell_lights(s, lx, ly, h, watts=None):
         a = math.radians(90 + 120 * k)
         s['lights'][f'bell{len(s["lights"])}'] = {'type': 'point', 'position': [round(lx + 0.047 * math.cos(a), 4), round(ly + 0.047 * math.sin(a), 4),
                                                                           round(h + LAMP_STRIP_Z, 4)],
-                                                 'power_w': (watts or LAMP_W) / 3, 'radius_m': 0.02, 'color': 2700}
+                                                 'power_w': (watts or LAMP_W) / 3, 'radius_m': 0.02, 'color': 2700,
+                                                 'camera': False, 'transmission': False, 'specular': 0.0}
 
 
 DUSK_WB = 3300                    # one grade for both heroes (promo pass 2: 3800 K left the frame all red)

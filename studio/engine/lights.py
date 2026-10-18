@@ -311,6 +311,13 @@ def point(bpy, name, spec, centre):
     set_color(L, spec.get('color', 3000))
     ob = bpy.data.objects.new(name, L); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(spec['position']) if 'position' in spec else orbit_point(spec.get('orbit', {}), centre)
+    # a lamp inside a product (a practical's bulb) seen through its clear shade reads as a ball of light: `camera` and
+    # `transmission` False hide it from those rays (shadow rays still light the room through the clear part); left
+    # out, Cycles' defaults as before
+    if 'camera' in spec:
+        ob.visible_camera = bool(spec['camera'])
+    if spec.get('transmission') is False:
+        ob.visible_transmission = False
     lamp_shares(bpy, ob, spec)
     return ob
 

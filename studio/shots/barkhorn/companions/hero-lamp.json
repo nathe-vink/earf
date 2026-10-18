@@ -188,7 +188,10 @@
    ],
    "power_w": 7.0,
    "radius_m": 0.02,
-   "color": 2700
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
   },
   "bell2": {
    "type": "point",
@@ -199,7 +202,10 @@
    ],
    "power_w": 7.0,
    "radius_m": 0.02,
-   "color": 2700
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
   },
   "bell3": {
    "type": "point",
@@ -210,7 +216,10 @@
    ],
    "power_w": 7.0,
    "radius_m": 0.02,
-   "color": 2700
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
   }
  }
 }
