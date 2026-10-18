@@ -47,13 +47,17 @@ VIEWS.update({f'turn-{i:02d}': (f'turn23/turn-{{k}}-{i:02d}.json', False) for i 
 LINE = {'hero': 'site30/hero.json', 'room': 'room17/room-poison.json'}
 
 
-def recolour(sh, k):
-    """The shot with every copy of the speaker in colour k (the templates already are, but for the cutaway)."""
+def recolour(sh, k, sweep=False):
+    """The shot with every copy of the speaker in colour k (the templates already are, but for the cutaway), and with
+    `sweep` its paper in k's own tint, the look book's (the cutaway's template stood on Poison's mint for every colour)."""
     s = copy.deepcopy(sh)
     p = s['product']
     p['flavour'] = FLAVOUR[k]
     for inst in p.get('instances', []):
         inst['flavour'] = FLAVOUR[k]
+    look = os.path.join(SHOTS, 'lookbook21', f'look-{k}-on.json')
+    if sweep and s.get('set', {}).get('kind') == 'sweep' and os.path.exists(look):
+        s['set']['color'] = json.load(open(look))['set']['color']
     s['title'] = s.get('title', '') + f' (finals31, {k})'
     return s
 
@@ -83,7 +87,7 @@ def shots():
         path = os.path.join(SHOTS, tpl)
         if os.path.exists(path):
             sh = json.load(open(path))
-            out.append((name, recolour(sh, k) if k else sh))
+            out.append((name, recolour(sh, k, sweep=(v == 'inside')) if k else sh))
         else:
             out.append((name, built(name)))
     return out
@@ -94,12 +98,18 @@ def build():
     for name, sh in made:
         f = os.path.join(OUT_SHOTS, name + '.json')
         os.makedirs(os.path.dirname(f), exist_ok=True)
-        json.dump(sh, open(f, 'w'), indent=1)
+        text = json.dumps(sh, indent=1)
+        if not os.path.exists(f) or open(f).read() != text:  # an unchanged shot keeps its time, so its picture stays current
+            open(f, 'w').write(text)
     print(f'{len(made)} shots in', os.path.relpath(OUT_SHOTS, ROOT))
 
 
 def stale(name):
     png, shot = os.path.join(OUT, name + '.png'), os.path.join(OUT_SHOTS, name + '.json')
+    if name.startswith('turn/') and not os.path.exists(png):
+        # the turning frames stay out of git; the colour's sprite, made from them, is what ships
+        k = name.split('/')[1].split('-')[0]
+        return None if os.path.exists(os.path.join(OUT, f'turn-{k}.jpg')) else 'missing (and no sprite)'
     if not os.path.exists(png):
         return 'missing'
     t = os.path.getmtime(png)
@@ -176,7 +186,17 @@ def sheet():
         row.append(os.path.join(OUT, 'turn', f'{k}-00.png'))
         rows.append(row)
     H = 300
-    ims = [[Image.open(f).convert('RGB') if os.path.exists(f) else Image.new('RGB', (240, 300), (220, 40, 40)) for f in r] for r in rows]
+
+    def pic(f):
+        if os.path.exists(f):
+            return Image.open(f).convert('RGB')
+        k = os.path.basename(f).split('-')[0]                # a turning frame not kept: the sprite's first cell
+        sprite = os.path.join(OUT, f'turn-{k}.jpg')
+        if '/turn/' in f and os.path.exists(sprite):
+            sp = Image.open(sprite).convert('RGB')
+            return sp.crop((0, 0, sp.width // 6, sp.height // 4))
+        return Image.new('RGB', (240, 300), (220, 40, 40))
+    ims = [[pic(f) for f in r] for r in rows]
     ims = [[i.resize((int(i.width * H / i.height), H), Image.LANCZOS) for i in r] for r in ims]
     W = max(sum(i.width + 8 for i in r) for r in ims)
     S = Image.new('RGB', (W, (H + 8) * len(ims)), 'white')
