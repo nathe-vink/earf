@@ -25,37 +25,37 @@ CABINET = ['left', 'right', 'top', 'bottom', 'front-panel', 'back', 'brace*', 'r
 P = {
     # the arc: centres `pitch` apart along x, the middle `sag` metres farther from the camera than the ends; each copy
     # turned to face the lens, then `toe` degrees more toward the middle (0: every baffle square to the camera)
-    'pitch': 0.64, 'sag': 0.5, 'toe': 0.0, 'stagger': 1.2, 'x0': 0.12, 'turns': [3.0, -4.0, -2.0, 5.0, -3.0, 2.0, -5.0, 4.0],
+    'pitch': 0.72, 'sag': 0.5, 'toe': 0.0, 'stagger': 0.7, 'x0': -0.05, 'turns': [3.0, -4.0, -2.0, 5.0, -3.0, 2.0, -5.0, 4.0],
     # the camera: distance in front of the ends, height, lens; it looks level (verticals stay vertical), the frame
     # placed by `aim_z` (the height it centres on) and `shift_y`
-    'cam_dist': 13.0, 'cam_h': 2.0, 'lens': 75.0, 'aim_z': 0.8, 'shift_y': -0.03, 'fstop': 2.8, 'focus_y': 0.4,
+    'cam_dist': 13.5, 'cam_h': 2.2, 'lens': 70.0, 'aim_z': 0.8, 'shift_y': -0.03, 'fstop': 4.0, 'focus_y': 0.0,
     # the key: a small hard source behind the middle of the arc, low, aimed through the line at the floor in front
     'key_y': 14.0, 'key_z': 9.5, 'key_size': 0.8, 'key_w': 0.0, 'key_irr': 5.5, 'key_color': 5200, 'key_spread': 100,
     # or the key as a sun from behind the wall (the sweep casts no shadow): W/m2 (0: the disc above), elevation, size
-    'sun': 17.0, 'sun_el': 24.0, 'sun_angle': 1.5,
+    'sun': 23.0, 'sun_el': 24.0, 'sun_angle': 1.5,
     # cutters behind the row (only the sun meets them), each opening its speaker's shape seen from the sun, `cut_in`
     # metres inside its edges; false off
     'cutters': False, 'cut_in': 0.006,
     # side strips lighting the cabinets' edges (light-linked to the cabinets), W/m2; 0 off
-    'sides': 10.0, 'sides_r': 20.0,
+    'sides': 14.0, 'sides_r': 20.0,
     # the cyc: a ground row on the floor behind the line, washing the sweep's wall evenly
-    'cyc_irr': 16.0, 'cyc_z': 2.5, 'cyc_color': 5200,
+    'cyc_irr': 15.0, 'cyc_z': 3.0, 'cyc_color': 5200,
     # the top: a silk over the floor behind the line, so the floor between the line and the cove is paper, not a band
-    'top_irr': 9.0, 'top_y': 7.0,
+    'top_irr': 4.0, 'top_y': 7.0,
     # the over: a silk high over the floor in front of the line, lifting the shadows as a white ceiling would
-    'over_irr': 4.0, 'over_y': -5.0,
+    'over_irr': 6.0, 'over_y': -5.0,
     # the front fill: a large soft source over the camera
     'fill_irr': 3.5, 'fill_color': 5200, 'fill_size': [8.0, 2.0], 'fill_z': 2.0, 'fill_spec': 0.0,
     # the faces: a fill for the speakers alone (light-linked to the cabinet, lining and rings), 0 off
-    'face_irr': 6.0, 'edge': 3.0, 'smoke_kick': 8.0,
+    'face_irr': 5.5, 'edge': 6.0, 'smoke_kick': 45.0, 'smoke_at': [3.5, 1.0, 1.6],
     # the cones: a strip softbox above the camera light-linked to the cones, surrounds and caps (matte paper, so it
     # models them rather than glinting), W/m2; 0 off
-    'strip': 45.0, 'strip_z': 2.6,
+    'strip': 70.0, 'strip_z': 2.6,
     # the paper
-    'paper': '#EEECE7', 'tooth': 0.5, 'tooth_mm': 0.6, 'mottle': 0.02, 'contact': 0.6,
-    'sky': 0.4, 'depth': 12.0,
+    'paper': '#EEECE7', 'tooth': 1.6, 'tooth_mm': 0.6, 'mottle': 0.05, 'contact': 0.6,
+    'sky': 0.15, 'hdri': 'studio_small_03_1k', 'hdri_rot': 0.0, 'depth': 12.0,
     # the render
-    'exposure': -2.5, 'wb': 5150, 'tint': 4.0, 'samples': 192, 'transmission_bounces': 16,
+    'exposure': -2.5, 'wb': 5000, 'tint': 6.0, 'samples': 256, 'transmission_bounces': 16,
     'white_in': 228, 'white_out': 230, 'peak': 246, 'contrast': 0.18, 'clarity': 0.10, 'sharpen': 0.45, 'vibrance': 0.4,
 }
 
@@ -181,7 +181,7 @@ def shot(p, portrait=False):
         lights['edge'] = {'type': 'area', 'size_m': [4.0, 0.6], 'position': [0.0, -p['cam_dist'] + 4.0, 3.2],
                           'target': [0.0, 0.0, 0.9], 'irradiance': p['edge'], 'color': p['fill_color'], 'receivers': CABINET}
     if p['smoke_kick']:                 # edge light on the smoked cabinet alone (the last copy)
-        lights['smoke'] = {'type': 'area', 'size_m': [0.4, 2.5], 'position': [5.0, 2.0, 1.4], 'target': list(a[-1][:2]) + [0.8],
+        lights['smoke'] = {'type': 'area', 'size_m': [0.6, 2.5], 'position': p['smoke_at'], 'target': list(a[-1][:2]) + [0.8],
                            'irradiance': p['smoke_kick'], 'color': p['fill_color'],
                            'receivers': [f'{c}#{len(a) - 1}' for c in CABINET] + [f'waveguide#{len(a) - 1}']}
     if p['strip']:
@@ -196,7 +196,7 @@ def shot(p, portrait=False):
         'set': {'kind': 'sweep', 'color': p['paper'], 'width': 34.0, 'front': 16.0, 'depth': p['depth'], 'radius': 3.0,
                 'height': 16.0, 'cast_shadow': not p['sun'], 'contact': {'strength': p['contact'], 'distance_m': 0.08, 'core_strength': 0.4,
                                            'core_distance_m': 0.012}},
-        'materials': {'sweep': {'tooth': p['tooth'], 'tooth_mm': p['tooth_mm'], 'mottle': p['mottle'], 'roughness': 0.85}},
+        'materials': {'sweep': {'tooth': p['tooth'], 'tooth_mm': p['tooth_mm'], 'mottle': p['mottle'], 'roughness': 0.9}},
         'lights': lights,
         'render': {'samples': p['samples'], 'adaptive': 0.01, 'denoise': True, 'clamp': 10, 'bounces': 24,
                    'transmission_bounces': p['transmission_bounces'], 'transparent_bounces': 64,
@@ -208,7 +208,8 @@ def shot(p, portrait=False):
         'title': 'EARF: the eight Clouds (hero31)',
         'size': [1600, 2000] if portrait else [2560, 1280],
         'camera': camera(p),
-        'sky': {'kind': 'gradient', 'zenith': '#E9E8E5', 'horizon': '#ECEBE8', 'ground': '#8C8A86', 'strength': p['sky']},
+        'sky': ({'kind': 'hdri', 'file': p['hdri'], 'rotation_deg': p['hdri_rot'], 'strength': p['sky']} if p['hdri'] else
+                {'kind': 'gradient', 'zenith': '#E9E8E5', 'horizon': '#ECEBE8', 'ground': '#8C8A86', 'strength': p['sky']}),
     }
     return sh
 
@@ -277,10 +278,10 @@ Current settings (metres; the speakers' feet at z = 0, the line's middle at the 
   acrylic, in reflections, {sides} W/m2 (left) and {sides_r} W/m2 (right).
 - edge: a 4 x 0.6 m strip at (0, -{edge_y}, 3.2) light-linked to the cabinets' acrylic, in reflections (their top
   front edges and faces mirror it), {edge} W/m2.
-- smoke: a 0.4 x 2.5 m strip at (5, 2, 1.4) light-linked to the smoked speaker's acrylic and horn only, {smoke_kick} W/m2.
-- sky: a pale grey dome, strength {sky} (0: the silks are the only ambient).
+- smoke: a 0.6 x 2.5 m strip at {smoke_at} light-linked to the smoked speaker's acrylic and horn only, {smoke_kick} W/m2.
+{skyline}
 - set: a paper sweep 34 m wide, its wall {depth} m behind the line, a 3 m cove.
-- paper: {paper}, roughness 0.85, tooth {tooth} at {tooth_mm} mm, colour mottle {mottle}; a contact shadow {contact}.
+- paper: {paper}, roughness 0.9, tooth {tooth} at {tooth_mm} mm, colour mottle {mottle}; a contact shadow {contact}.
 - render: Cycles, {samples} samples, denoised, 24 bounces ({transmission_bounces} through clear parts), view Khronos PBR
   Neutral, exposure {exposure} EV, white balance {wb} K, tint {tint} (10 neutral, lower greener).
 - finish: white point {white_in} -> {white_out} with a soft shoulder to {peak}, contrast {contrast}, clarity {clarity},
@@ -295,7 +296,7 @@ def card(p, tag, size=(2560, 1280)):
                f"- key: a {p['key_size']} m disc softbox at (0, {p['key_y']}, {p['key_z']}) behind the line, aimed at (0, -2, 0), "
                f"{p['key_irr']} W/m2 at its target, {p['key_color']} K, beam spread {p['key_spread']} deg; it is the only light "
                f"that throws the colour.")
-    return CARD.format(tag=tag, w=size[0], h=size[1], fill_y=p['cam_dist'] + 3.0, face_y=p['cam_dist'] - 1.0, keyline=keyline, edge_y=p['cam_dist'] - 4.0,
+    return CARD.format(tag=tag, w=size[0], h=size[1], fill_y=p['cam_dist'] + 3.0, face_y=p['cam_dist'] - 1.0, keyline=keyline, skyline=(f"- sky: a photographed small studio with softboxes (Poly Haven {p['hdri']}, CC0), turned {p['hdri_rot']} deg, strength {p['sky']}: seen only in reflections and as soft ambient." if p['hdri'] else f"- sky: a pale grey dome, strength {p['sky']}."), edge_y=p['cam_dist'] - 4.0,
                        cutline=('- cutters: black cutters behind the row that only the key meets (bounce light and the sky pass them), one '
                                 'upright plane down to the floor at the foot of the cove, with an opening for each speaker the shape of its cabinet and horn seen from '
                                 'the sun, so the key reaches the floor in front only through the acrylic; the floor round the throws '
