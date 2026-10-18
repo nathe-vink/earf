@@ -28,8 +28,8 @@ LIGHT_ONES = ['ember', 'ice', 'fog']
 
 RENDER = {'samples': 80, 'adaptive': 0.015, 'denoise': True, 'clamp': 4, 'bounces': 16,
           'view': 'Khronos PBR Neutral', 'exposure': 0.0, 'white_balance_k': 6000, 'white_balance_tint': 0.0}
-FINISH = {'enabled': True, 'white_in': 235, 'white_out': 238, 'contrast': 0.10, 'clarity': 0.06,
-          'sharpen': 0.3, 'sharpen_px': 0.7}
+FINISH = {'enabled': True, 'white_in': 235, 'white_out': 238, 'contrast': 0.10, 'clarity': 0.03,
+          'sharpen': 0.12, 'sharpen_px': 0.7}
 
 
 def product(name, rotate=0.0, at=(0.0, 0.0)):
@@ -40,9 +40,9 @@ def product(name, rotate=0.0, at=(0.0, 0.0)):
 def seamless(dark):
     """A wide cove; dark, a near-black that only the glow lights; light, a pale warm grey. Both a little glossy, so the
     floor gives back a soft reflection of the speaker."""
-    return {'kind': 'sweep', 'color': '#1A1A1A' if dark else '#D9D5CF', 'width': 24.0, 'front': 14.0, 'depth': 5.6,
-            'radius': 5.0, 'height': 9.0, 'contact': {'strength': 0.35, 'distance_m': 0.08, 'core_strength': 0.4,
-                                                      'core_distance_m': 0.012}}
+    return {'kind': 'sweep', 'color': '#242424' if dark else '#D9D5CF', 'width': 24.0, 'front': 14.0, 'depth': 5.6,
+            'radius': 5.0, 'height': 9.0, 'contact': {'strength': 0.35, 'distance_m': 0.08, 'core_strength': 0.7,
+                                                      'core_distance_m': 0.008}}
 
 
 def strips(level=1.0, recv=('*#0',)):
@@ -53,11 +53,11 @@ def strips(level=1.0, recv=('*#0',)):
                        'target': [0.0, 0.0, 0.6], 'strength': 24.0 * level, 'diffuse': 0.35, 'specular': 1.0, 'receivers': list(recv),
                        'ramp': {'axis': 'z', 'at_m': [-0.4, 0.7, 2.2], 'values': [0.25, 1.0, 0.25]}},
         'strip-right': {'type': 'panel', 'size_m': [0.12, 3.2], 'orbit': {'azimuth_deg': 113, 'elevation_deg': 8, 'distance_m': 2.2},
-                        'target': [0.0, 0.0, 0.6], 'strength': 34.0 * level, 'diffuse': 0.35, 'specular': 1.0, 'receivers': list(recv),
+                        'target': [0.0, 0.0, 0.6], 'strength': 44.0 * level, 'diffuse': 0.35, 'specular': 1.0, 'receivers': list(recv),
                         'ramp': {'axis': 'z', 'at_m': [-0.4, 0.7, 2.2], 'values': [0.25, 1.0, 0.25]}},
         'strip-top': {'type': 'panel', 'size_m': [2.4, 0.4], 'position': [-0.2, -0.6, 2.6], 'target': [0.0, 0.0, 1.2],
-                      'strength': 34.0 * level, 'diffuse': 0.5, 'specular': 1.0, 'receivers': list(recv),
-                      'ramp': {'axis': 'x', 'at_m': [-1.2, 0.0, 1.2], 'values': [0.2, 1.0, 0.2]}},
+                      'strength': 18.0 * level, 'diffuse': 0.5, 'specular': 1.0, 'receivers': list(recv),
+                      'ramp': {'axis': 'x', 'at_m': [-1.2, 0.0, 1.2], 'values': [0.1, 1.0, 0.1]}},
     }
 
 
@@ -66,29 +66,33 @@ def hero(name, dark=True):
          'product': product(name, rotate=-36.0), 'set': seamless(dark),
          'camera': {'position': [0.0, -6.6, 0.95], 'target': [0.0, 0.0, 0.68], 'lens_mm': 60.0, 'level': True},
          'sky': {'kind': 'none'}, 'render': dict(RENDER), 'finish': dict(FINISH),
-         'materials': {'sweep': {'roughness': 0.3, 'specular': 0.06}}}
+         'materials': {'sweep': {'roughness': 0.08, 'specular': 0.04}}}
     L = {
         # the key: a big softbox high and to the left of the camera, the faces' long gradient
         'key': {'type': 'area', 'size_m': [2.4, 1.6], 'orbit': {'azimuth_deg': -55, 'elevation_deg': 32, 'distance_m': 3.4},
-                'target': [0.0, 0.0, 0.6], 'irradiance': 1.4 if dark else 1.5, 'color': '#FFF6EC', 'spread_deg': 70,
+                'target': [0.0, 0.0, 0.6], 'irradiance': 1.1 if dark else 1.5, 'color': '#FFF6EC', 'spread_deg': 70,
                 'camera': False},
         # a low soft fill from the right, so the shadow side keeps its colour
         'fill': {'type': 'area', 'size_m': [2.0, 2.0], 'orbit': {'azimuth_deg': 60, 'elevation_deg': 18, 'distance_m': 4.0},
-                 'target': [0.0, 0.0, 0.55], 'irradiance': 0.85 if dark else 0.7, 'color': '#F2F5FF', 'camera': False},
+                 'target': [0.0, 0.0, 0.55], 'irradiance': 1.4 if dark else 0.7, 'color': '#F2F5FF', 'camera': False},
         # the glow: a lamp behind the speaker facing the wall, a pool of light that fades to the edges of the frame
-        'glow': {'type': 'area', 'shape': 'DISK', 'size_m': [0.8, 0.8], 'position': [0.0, 0.45, 0.9],
-                 'target': [0.0, 4.0, 1.0], 'spread_deg': 75, 'power_w': 380.0 if dark else 0.0, 'color': '#FFF6EC', 'camera': False,
+        'glow': {'type': 'area', 'shape': 'DISK', 'size_m': [1.4, 1.4], 'position': [0.0, 0.45, 0.9],
+                 'target': [0.0, 4.0, 1.0], 'spread_deg': 110, 'power_w': 260.0 if dark else 0.0, 'color': '#FFF1E4', 'camera': False,
                  'specular': 0.0},
         # a card high in front, seen only in reflections: a long soft sheen down the faces and into the horn's mouth
-        'sheen': {'type': 'panel', 'size_m': [3.0, 1.4], 'position': [-0.9, -3.4, 2.5], 'target': [0.0, 0.0, 0.9],
-                  'strength': 0.45, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
-                  'ramp': {'axis': 'z', 'at_m': [2.6, 3.2], 'values': [0.0, 1.0]}},
+        'sheen': {'type': 'panel', 'size_m': [4.0, 2.4], 'position': [-0.9, -3.4, 2.5], 'target': [0.0, 0.0, 0.9],
+                  'strength': 1.6, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
+                  'ramp': {'axis': 'z', 'at_m': [1.4, 3.2], 'values': [0.15, 1.0]}},
+        # a small card in front of the horn, so its mouth mirrors a graded light and not the dark set
+        'horn-front': {'type': 'panel', 'size_m': [1.2, 0.6], 'position': [0.6, -2.2, 1.6], 'target': [0.0, 0.0, 1.18],
+                       'strength': 2.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
+                       'ramp': {'axis': 'x', 'at_m': [0.0, 0.6, 1.2], 'values': [0.15, 1.0, 0.15]}},
         'sheen-right': {'type': 'panel', 'size_m': [2.0, 1.2], 'position': [1.6, -2.6, 2.3], 'target': [0.0, 0.0, 0.7],
                         'strength': 3.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
                         'ramp': {'axis': 'z', 'at_m': [1.8, 2.9], 'values': [0.15, 1.0]}},
         # light through the horn from behind it, so its tinted walls glow rather than fall to black
-        'horn-back': {'type': 'panel', 'size_m': [0.7, 0.35], 'position': [0.0, 0.9, 1.2], 'target': [0.0, 0.0, 1.18],
-                      'strength': 4.0, 'diffuse': 1.0, 'specular': 0.0, 'receivers': ['*#0']},
+        'horn-back': {'type': 'panel', 'size_m': [0.9, 0.3], 'position': [0.0, 0.9, 1.05], 'target': [0.0, 0.0, 1.1],
+                      'strength': 6.0, 'diffuse': 1.0, 'specular': 0.0, 'receivers': ['*#0']},
         **strips(1.0 if dark else 0.7),
     }
     if not dark:

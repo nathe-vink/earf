@@ -33,8 +33,8 @@
   "contact": {
    "strength": 0.35,
    "distance_m": 0.08,
-   "core_strength": 0.4,
-   "core_distance_m": 0.012
+   "core_strength": 0.7,
+   "core_distance_m": 0.008
   }
  },
  "camera": {
@@ -74,14 +74,14 @@
   "white_in": 235,
   "white_out": 238,
   "contrast": 0.1,
-  "clarity": 0.06,
-  "sharpen": 0.3,
+  "clarity": 0.03,
+  "sharpen": 0.12,
   "sharpen_px": 0.7
  },
  "materials": {
   "sweep": {
-   "roughness": 0.3,
-   "specular": 0.06
+   "roughness": 0.08,
+   "specular": 0.04
   }
  },
  "lights": {
@@ -130,8 +130,8 @@
    "type": "area",
    "shape": "DISK",
    "size_m": [
-    0.8,
-    0.8
+    1.4,
+    1.4
    ],
    "position": [
     0.0,
@@ -143,17 +143,17 @@
     4.0,
     1.0
    ],
-   "spread_deg": 75,
+   "spread_deg": 110,
    "power_w": 0.0,
-   "color": "#FFF6EC",
+   "color": "#FFF1E4",
    "camera": false,
    "specular": 0.0
   },
   "sheen": {
    "type": "panel",
    "size_m": [
-    3.0,
-    1.4
+    4.0,
+    2.4
    ],
    "position": [
     -0.9,
@@ -165,7 +165,7 @@
     0.0,
     0.9
    ],
-   "strength": 0.45,
+   "strength": 1.6,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -174,12 +174,48 @@
    "ramp": {
     "axis": "z",
     "at_m": [
-     2.6,
+     1.4,
      3.2
     ],
     "values": [
-     0.0,
+     0.15,
      1.0
+    ]
+   }
+  },
+  "horn-front": {
+   "type": "panel",
+   "size_m": [
+    1.2,
+    0.6
+   ],
+   "position": [
+    0.6,
+    -2.2,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.18
+   ],
+   "strength": 2.0,
+   "diffuse": 0.0,
+   "specular": 1.0,
+   "receivers": [
+    "*#0"
+   ],
+   "ramp": {
+    "axis": "x",
+    "at_m": [
+     0.0,
+     0.6,
+     1.2
+    ],
+    "values": [
+     0.15,
+     1.0,
+     0.15
     ]
    }
   },
@@ -220,20 +256,20 @@
   "horn-back": {
    "type": "panel",
    "size_m": [
-    0.7,
-    0.35
+    0.9,
+    0.3
    ],
    "position": [
     0.0,
     0.9,
-    1.2
+    1.05
    ],
    "target": [
     0.0,
     0.0,
-    1.18
+    1.1
    ],
-   "strength": 4.0,
+   "strength": 6.0,
    "diffuse": 1.0,
    "specular": 0.0,
    "receivers": [
@@ -292,7 +328,7 @@
     0.0,
     0.6
    ],
-   "strength": 23.799999999999997,
+   "strength": 30.799999999999997,
    "diffuse": 0.35,
    "specular": 1.0,
    "receivers": [
@@ -328,7 +364,7 @@
     0.0,
     1.2
    ],
-   "strength": 23.799999999999997,
+   "strength": 12.6,
    "diffuse": 0.5,
    "specular": 1.0,
    "receivers": [
@@ -342,9 +378,9 @@
      1.2
     ],
     "values": [
-     0.2,
+     0.1,
      1.0,
-     0.2
+     0.1
     ]
    }
   },
