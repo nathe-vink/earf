@@ -35,7 +35,7 @@
      0.0
     ],
     "displace": 0.03,
-    "ripple": 0.01,
+    "ripple": 0.004,
     "relief": 0.5,
     "sparkle": 4.0,
     "res": "2k",
@@ -913,20 +913,6 @@
       98.1,
       0.5,
       "fir_sapling_medium:c"
-     ],
-     [
-      -3.3,
-      -3.6,
-      20,
-      1.4,
-      "grass_medium_01:mid_a"
-     ],
-     [
-      -3.0,
-      -3.9,
-      140,
-      1.2,
-      "grass_medium_01:small_b"
      ]
     ],
     "snow": 0.75,
@@ -947,82 +933,10 @@
      6.5,
      4.8
     ],
-    "window_emit": 28.0,
-    "lamp_w": 1500.0,
+    "window_emit": 45.0,
+    "lamp_w": 1800.0,
     "window_color": "#FF9A3C",
     "res": "1k"
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "pbr",
-    "texture": "snow_02",
-    "tex_scale": 6.0,
-    "position": [
-     -90,
-     320,
-     -7.699999999999999
-    ],
-    "scale": [
-     140,
-     50,
-     22
-    ],
-    "segments": 64
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "pbr",
-    "texture": "snow_02",
-    "tex_scale": 6.0,
-    "position": [
-     60,
-     360,
-     -10.5
-    ],
-    "scale": [
-     170,
-     60,
-     30
-    ],
-    "segments": 64
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "pbr",
-    "texture": "snow_02",
-    "tex_scale": 6.0,
-    "position": [
-     210,
-     300,
-     -6.3
-    ],
-    "scale": [
-     110,
-     50,
-     18
-    ],
-    "segments": 64
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "pbr",
-    "texture": "snow_02",
-    "tex_scale": 6.0,
-    "position": [
-     -260,
-     340,
-     -9.1
-    ],
-    "scale": [
-     130,
-     50,
-     26
-    ],
-    "segments": 64
    }
   ]
  },
@@ -1030,21 +944,21 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    4.0,
+    2.0,
     1.0
    ],
-   "orbit": {
-    "azimuth_deg": -45,
-    "elevation_deg": 3,
-    "distance_m": 4.0
-   },
    "target": [
     0.0,
     0.0,
-    0.5
+    0.8
    ],
-   "irradiance": 0.8,
+   "irradiance": 0.35,
    "color": "#C8D8EA",
+   "orbit": {
+    "azimuth_deg": -45,
+    "elevation_deg": 4,
+    "distance_m": 4.0
+   },
    "receivers": [
     "left",
     "right",
@@ -1065,21 +979,21 @@
   "back": {
    "type": "area",
    "size_m": [
-    2.0,
-    3.0
+    2.5,
+    2.0
    ],
-   "orbit": {
-    "azimuth_deg": 150,
-    "elevation_deg": 15,
-    "distance_m": 4.0
-   },
    "target": [
     0.0,
     0.0,
     0.8
    ],
-   "irradiance": 1.6,
+   "irradiance": 0.2,
    "color": "#D8E2F0",
+   "orbit": {
+    "azimuth_deg": 150,
+    "elevation_deg": 15,
+    "distance_m": 4.0
+   },
    "receivers": [
     "left",
     "right",
@@ -1096,6 +1010,28 @@
     "top-pad",
     "grip-*"
    ]
+  },
+  "throat": {
+   "type": "area",
+   "size_m": [
+    1.0,
+    0.6
+   ],
+   "target": [
+    0.0,
+    -0.1,
+    1.12
+   ],
+   "irradiance": 0.5,
+   "color": "#E6EEF8",
+   "orbit": {
+    "azimuth_deg": -12,
+    "elevation_deg": 8,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "waveguide*"
+   ]
   }
  },
  "render": {
@@ -1105,9 +1041,9 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": -0.6,
+  "exposure": -1.1,
   "white_balance_k": 5400,
-  "white_balance_tint": 10.0,
+  "white_balance_tint": 13.0,
   "look": "AgX - Base Contrast",
   "caustics_refractive": true
  },
@@ -1138,8 +1074,8 @@
  },
  "sky": {
   "kind": "hdri",
-  "polyhaven": "kloppenheim_02_puresky",
-  "rotation_deg": 279.0,
+  "polyhaven": "kiara_9_dusk",
+  "rotation_deg": 110.0,
   "strength": 1.0,
   "res": "4k"
  },
@@ -1147,8 +1083,8 @@
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.14,
-  "clarity": 0.04,
+  "contrast": 0.1,
+  "clarity": 0.06,
   "sharpen": 0.35,
   "sharpen_px": 0.6,
   "dream": {
@@ -1159,7 +1095,7 @@
    "lift": 0.0,
    "lift_color": "#000000",
    "vignette": 0.2,
-   "grain": 0.005
+   "grain": 0.01
   }
  },
  "haze": {
@@ -1171,7 +1107,7 @@
    60,
    20
   ],
-  "density": 0.003,
+  "density": 0.006,
   "anisotropy": 0.2,
   "color": "#C8D8EA"
  }
