@@ -282,9 +282,6 @@ MACRO_FIX = {
     'grip': {'camera.position': [0.45, -2.6, 0.8], 'lights.scrim.irradiance': 0.6,
              'lights.back-top.orbit': {'azimuth_deg': 190, 'elevation_deg': 6, 'distance_m': 2.0},
              'lights.back-top.target': [0.12, 0.0, 0.765], 'lights.back-top.irradiance': 30.0, 'lights.back-top.size_m': [0.4, 0.25]},
-    # just above the top face, the horn out of frame; a narrow strip mirrored in the corner's polished edge
-    'corner': {'camera.position': [1.3, -2.25, 0.95], 'camera.target': [0.10, -0.33, 0.80], 'camera.lens_mm': 280.0, 'lights.scrim.irradiance': 0.8,
-               'lights.front-strip.size_m': [0.12, 2.0], 'lights.front-strip.strength': 9.0},
 }
 
 
