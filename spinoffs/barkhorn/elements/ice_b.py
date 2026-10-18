@@ -7,6 +7,46 @@ The beach, the sea and the ice are studio/engine/kit_ext/ice_b_el.py; the sky is
 import math
 import common as C
 
+# --- the cave (the concept since pass 3: see ice_b.md) --------------------------------------------------------------
+CAVE_SKY = 'snowy_hillside'         # outside: snow under a clear winter sun (Poly Haven, CC0)
+CAVE_FLOOR = {'y0': 100.0, 'slope': 0.0, 'wiggle': 0.0, 'freq': 0.0, 'phase': 0.0, 'water_z': -5.0}
+
+
+def cave_props():
+    return [C.piece('ext', module='ice_b_el', fn='cave', y_range=[-6.2, 22.0], width=4.6, height=3.3,
+                    bend=[3.0, 9.0], scallop=[0.5, 0.06], thickness=[0.9, 2.2], hole=[13.5, 1.3, 2.6, 1.0],
+                    ice={'absorb': '#3E93DC', 'density': 1.2}),
+            C.piece('ext', module='ice_b_el', fn='beach', shore=CAVE_FLOOR, texture='gravelly_sand', res='4k',
+                    extent=[-6.0, -6.4, 14.0, 23.0], fine=[-3.0, -4.0, 3.0, 6.0], displace=0.006, relief=0.05,
+                    dark='#0A0A0B', light='#2A2A2B', tex_scale=1.25, spec=0.05, bump=1.2, wet_h=-1.0, damp_h=-0.5,
+                    damp_base=0.0, puddles=[0.45, 0.62], wet_rough=0.03, grain_m=0.003, glint_share=0.02)]
+
+
+def shot(az=167.0, sun_irr=4.0):
+    r0 = C.assets.hdri_sun(CAVE_SKY, 0.0)['azimuth_deg']
+    rot = round((r0 - az) % 360.0, 2)
+    sun = C.sun_from_sky(CAVE_SKY, rot, irradiance=sun_irr)
+    sk = C.sky(CAVE_SKY, rotation_deg=rot, strength=1.0, res='4k')
+    # the mouth's daylight, 6 m behind the speaker and just behind the camera: a soft panel where the opening is (the
+    # snowfield and sky through it), as a photographer would let it in or bounce it
+    mouth = {'type': 'area', 'position': [-0.6, -6.0, 1.5], 'size_m': [3.6, 2.6], 'target': [0.0, 0.0, 0.7],
+             'irradiance': 0.85, 'color': '#EAF1FF'}
+    s = C.shot('ice_b', cave_props(), C.camera(height=1.0, distance=5.0, azimuth=-15.0, lens=35.0,
+                                               target=(0.0, 0.0, 0.75), fstop=4.0),
+               sk, 'Ice: in a glacier ice cave', sun=sun, lights={'mouth': mouth}, rotate_z=12.0, position=(0.0, 0.0, -0.01), exposure=1.5,
+               fin=C.finish(contrast=0.06, clarity=0.05, sharpen=0.25, vignette=0.15),
+               haze={'box_m': [-5.0, -6.0, 0.0, 12.0, 21.5, 4.5], 'density': 0.008, 'anisotropy': 0.55, 'color': '#FFFFFF'})
+    s['render']['volume_bounces'] = 4
+    s['render']['bounces'] = 16
+    return s
+
+
+def portrait():
+    s = shot()
+    cam = s['camera']
+    return C.portrait_of(s, **C.camera(height=cam['position'][2], distance=6.2, azimuth=-15.0, lens=40.0,
+                                       target=tuple(cam['target']), fstop=cam['fstop']))
+
 SKY = 'umhlanga_sunrise'           # a sunrise over open sea, the sun on the horizon (Poly Haven, CC0)
 SUN_AZ = 169.5                     # the sun just behind the cabinet's upper left (from +y, a little +x)
 SHORE = {'y0': 0.2, 'slope': 0.05, 'wiggle': 0.55, 'freq': 0.45, 'phase': 0.7, 'water_z': -0.09}
@@ -17,25 +57,11 @@ def sand_z(x, y, s=SHORE):
     return -s['slope'] * max(0.0, yy - s['y0'])
 
 
-def sky_sun(az, res='1k'):
-    """The sky's rotation that puts its sun at azimuth `az`, and that sun as a lamp's settings. Worked out with
-    Cycles' own equirectangular convention (u = -atan2(y, x) / 2 pi + 0.5): assets.hdri_sun assumes atan2(y, -x),
-    which puts the lamp somewhere other than the sun the camera sees (round 31b, found on this set's first proof)."""
-    import numpy as np
-    s = C.assets.hdri_sun(SKY, 0.0, res)                       # its colour, elevation and peak are right; its azimuth is not
-    img = C.assets.read_hdr(C.assets.hdri(SKY, res))
-    H, W, _ = img.shape
-    lum = img @ np.array([0.2126, 0.7152, 0.0722], np.float32)
-    k = max(1, int(lum.size * 0.0005))
-    idx = np.argpartition(lum.ravel(), -k)[-k:]
-    w = lum.ravel()[idx]
-    rows, cols = np.unravel_index(idx, lum.shape)
-    u = (np.average(cols, weights=w) + 0.5) / W
-    phi = math.degrees((0.5 - u) * 2 * math.pi)                # the sun's angle from +x in the map
-    want = math.degrees(math.atan2(-math.cos(math.radians(az)), math.sin(math.radians(az))))
-    rot = (phi - want) % 360.0                                 # the world is the map turned by -rot
-    return round(rot, 2), {'azimuth_deg': az, 'elevation_deg': max(0.5, s['elevation_deg']), 'color': s['color'],
-                           'angle_deg': 0.53}
+def sky_sun(az):
+    """The sky's rotation that puts its sun at azimuth `az`, and the engine's sun lamp for it."""
+    r0 = C.assets.hdri_sun(SKY, 0.0)['azimuth_deg']
+    rot = round((r0 - az) % 360.0, 2)                         # turning the sky by +rot turns its sun by -rot
+    return rot, C.sun_from_sky(SKY, rot)
 
 
 def ext(fn, **k):
@@ -71,7 +97,7 @@ def props():
             *ICE]
 
 
-def shot(az=SUN_AZ, sun_irr=3.0):
+def beach_shot(az=SUN_AZ, sun_irr=3.0):
     rot, sun = sky_sun(az)
     sun['irradiance'] = sun_irr
     sk = C.sky(SKY, rotation_deg=rot, strength=1.0, res='4k')
@@ -86,8 +112,8 @@ def shot(az=SUN_AZ, sun_irr=3.0):
     return s
 
 
-def portrait():
-    s = shot()
+def beach_portrait():
+    s = beach_shot()
     cam = s['camera']
     return C.portrait_of(s, **C.camera(height=cam['position'][2], distance=4.6, azimuth=-12.0, lens=70.0,
                                        target=tuple(cam['target']), fstop=cam['fstop'], shift_y=-0.06))

@@ -158,6 +158,13 @@ def _sand_material(bpy, name, p, s):
                                 'To Min': 0.0, 'To Max': 1.0}, clamp=True).outputs['Result']
     damp = N('MapRange', inputs={'Value': height, 'From Min': p.get('damp_h', 0.16), 'From Max': p.get('wet_h', 0.05),
                                  'To Min': p.get('damp_base', 0.35), 'To Max': 1.0}, clamp=True).outputs['Result']
+    if p.get('puddles'):
+        # meltwater lying in the floor's hollows: soaked and mirror-like in patches
+        sc, th = p['puddles']
+        pn = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': sc, 'Detail': 5.0, 'Roughness': 0.6})
+        pud = N('MapRange', inputs={'Value': pn.outputs['Fac'], 'From Min': th, 'From Max': th + 0.04}, clamp=True).outputs['Result']
+        wet = N.math('MAXIMUM', wet, pud)
+        damp = N.math('MAXIMUM', damp, N('MapRange', inputs={'Value': pn.outputs['Fac'], 'From Min': th - 0.12, 'From Max': th}, clamp=True).outputs['Result'])
     if 'reach' in p:
         # the last wave's reach: soaked and mirror-like behind an irregular line across the beach (y' > reach), damp a
         # little before it, a line of spent foam left along it
@@ -661,3 +668,133 @@ def ice(bpy, name, p, kit):
         bmesh.ops.recalc_face_normals(bmc, faces=bmc.faces[:])
         obs += kit.finish(bpy, f'{name}-crack{c}', bmc, p, smooth=False, mat=air)
     return obs
+
+
+# --- the cave (concept B's other half: inside a blue glacier ice cave) ----------------------------------------------
+def _cave_ice_material(bpy, name, p, outer=False):
+    """Thick glacier ice seen from inside: wet and glossy where melt runs, refractive, deep blue by absorption. Its
+    outer face (under the snow) is frosted, so what comes through the ice is the daylight, diffused: the wall glows.
+    Diffuse and shadow rays pass straight through (tinted by the volume), so the daylight outside reaches the cave as
+    blue light without caustics. Absorption only: a scattering volume this thick cost minutes a proof."""
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); N = _N(nt)
+    out = N('OutputMaterial'); tc = N('TexCoord')
+    bs = N('BsdfPrincipled', inputs={'Base Color': (1, 1, 1, 1), 'Transmission Weight': 1.0, 'IOR': 1.31,
+                                     'Specular IOR Level': 0.5, 'Coat Weight': 0.0 if outer else p.get('wet', 0.5),
+                                     'Coat Roughness': 0.02, 'Coat IOR': 1.33})
+    rn = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 1.2, 'Detail': 6.0})
+    lo, hi = (p.get('outer_rough', [0.35, 0.6]) if outer else [0.03, p.get('frost', 0.2)])
+    N.link(N('MapRange', inputs={'Value': rn.outputs['Fac'], 'From Min': 0.4, 'From Max': 0.7, 'To Min': lo,
+                                 'To Max': hi}).outputs['Result'], bs.inputs['Roughness'])
+    pit = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 60.0, 'Detail': 4.0})
+    b2 = N('Bump', inputs={'Height': pit.outputs['Fac'], 'Strength': 0.08, 'Distance': 0.003})
+    N.link(b2.outputs['Normal'], bs.inputs['Normal'])
+    if outer:
+        # under the snow: the daylight comes through diffused, as through firn (a translucent face, lit from outside)
+        tl = N('BsdfTranslucent', inputs={'Color': _hex(p.get('firn', '#F2F6FA'))})
+        N.link(tl.outputs[0], out.inputs['Surface'])
+    else:
+        tr = N('BsdfTransparent', inputs={'Color': (0.95, 0.97, 0.99, 1)})
+        lp = N('LightPath')
+        passes = N.math('MAXIMUM', lp.outputs['Is Shadow Ray'], lp.outputs['Is Diffuse Ray'])
+        mix = N('MixShader', inputs={'Fac': passes, 1: bs.outputs[0], 2: tr.outputs[0]})
+        N.link(mix.outputs[0], out.inputs['Surface'])
+    ab = N('VolumeAbsorption', inputs={'Color': _hex(p.get('absorb', '#3E93DC')), 'Density': p.get('density', 1.4)})
+    N.link(ab.outputs[0], out.inputs['Volume'])
+    return m
+
+
+def cave(bpy, name, p, kit):
+    """A tunnel through glacier ice: an arch `width` x `height` (m) along y from `y_range`, its centreline bending by
+    `bend` [y_start, dx_at_end] beyond the speaker, its inner face scalloped by melt (`scallop` [cell m, depth m]),
+    the ice `thickness` [min, max] m thick, a `hole` [y, x, r] through the roof. One closed solid."""
+    y0, y1 = p.get('y_range', [-10.0, 16.0])
+    W, Hh = p.get('width', 4.6), p.get('height', 3.3)
+    dy = p.get('step', 0.05)
+    ys = np.arange(y0, y1 + 1e-9, dy)
+    nth = p.get('around', 260)
+    th = np.linspace(-0.22, math.pi + 0.22, nth)
+    by, bdx = p.get('bend', [3.0, 4.0])
+    cx = np.where(ys > by, bdx * ((ys - by) / (y1 - by)) ** 2, 0.0)
+    rnd = random.Random(p.get('seed', 7)); off = rnd.uniform(-50, 50)
+    TH, Y = np.meshgrid(th, ys)
+    CX = cx[:, None] * np.ones_like(TH)
+    c, s = np.cos(TH), np.sin(TH)
+    # a rounded arch with steep walls: a superellipse, the walls running a little below the floor
+    ex = 0.75
+    ux = np.sign(c) * np.abs(c) ** ex
+    uz = np.sign(s) * np.abs(s) ** 0.85
+    # its size wanders along the tunnel, and big lumps of melt-out on the faces
+    lump = np.vectorize(lambda a, b: noise.noise(Vector((a * 0.45 + off, b * 0.45, 0.3))))
+    lump2 = np.vectorize(lambda a, b: noise.noise(Vector((a * 1.3 + off, b * 1.3, 2.1))))
+    arc = TH * (W + Hh) / 2.0                                        # roughly metres round the arch
+    L = 1.0 + p.get('lumps', [0.14, 0.02])[0] * lump(Y, arc) + p.get('lumps', [0.14, 0.02])[1] * lump2(Y, arc)
+    wid = (W / 2) * (1.0 + 0.12 * np.vectorize(lambda a: noise.noise(Vector((a * 0.15 + off, 5.0, 0.0))))(Y))
+    hgt = Hh * (1.0 + 0.10 * np.vectorize(lambda a: noise.noise(Vector((a * 0.12 + off, 9.0, 0.0))))(Y))
+    IX = CX + wid * ux * L
+    IZ = hgt * uz * L
+    # normal direction (outward, into the ice), in the section's plane
+    nx_, nz_ = ux / (wid + 1e-9), uz / (hgt + 1e-9)
+    nn = np.hypot(nx_, nz_) + 1e-9; nx_, nz_ = nx_ / nn, nz_ / nn
+    # melt scallops: shallow cups in a jittered grid over (y, arc), deepest at their centres, sharp ridges between
+    cell, depth = p.get('scallop', [0.38, 0.05])
+    gy, ga = Y / cell, arc / cell
+    best = np.full(Y.shape, 9.0)
+    jr = np.random.RandomState(p.get('seed', 7))
+    J = jr.uniform(-0.5, 0.5, (2, 4096))
+    for di in (-1, 0, 1):
+        for dj in (-1, 0, 1):
+            ci, cj = np.floor(gy) + di, np.floor(ga) + dj
+            h = ((ci.astype(np.int64) * 73856093) ^ (cj.astype(np.int64) * 19349663)) % 4096
+            py, pa = ci + 0.5 + 0.8 * J[0][h], cj + 0.5 + 0.8 * J[1][h]
+            best = np.minimum(best, (gy - py) ** 2 + (ga - pa) ** 2)
+    cup = depth * (1.0 - np.clip(np.sqrt(best) / 0.75, 0, 1) ** 2)
+    IX += nx_ * cup; IZ += nz_ * cup
+    tmin, tmax = p.get('thickness', [0.9, 2.2])
+    T = tmin + (tmax - tmin) * np.clip(0.5 + lump(Y * 0.7 + 3.0, arc * 0.7), 0, 1)
+    if p.get('hole'):                                                # the roof thins toward the hole (a moulin's throat)
+        hy, hx, hry, hrx = p['hole']
+        qq = np.hypot((Y - hy) / (hry * 1.8), (IX - hx) / (hrx * 2.2))
+        T = T * (1.0 - 0.75 * np.exp(-qq ** 2) * (IZ > hgt * 0.4))
+    OX, OZ = IX + nx_ * T, IZ + nz_ * T
+    ny, nt = Y.shape
+    inner = np.stack([IX.ravel(), Y.ravel(), IZ.ravel()], 1)
+    outer = np.stack([OX.ravel(), Y.ravel(), OZ.ravel()], 1)
+    verts = np.concatenate([inner, outer]); n = len(inner)
+    # which faces are kept: all but the roof hole
+    keep = np.ones((ny - 1, nt - 1), bool)
+    if p.get('hole'):
+        hy, hx, hry, hrx = p['hole']                                   # its centre and its radii along y and x
+        fy = (Y[:-1, :-1] + Y[1:, 1:]) / 2; fx = (IX[:-1, :-1] + IX[1:, 1:]) / 2; fz = (IZ[:-1, :-1] + IZ[1:, 1:]) / 2
+        q = np.hypot((fy - hy) / hry, (fx - hx) / hrx) + 0.25 * np.vectorize(lambda a, b: noise.noise(Vector((a * 2.0, b * 2.0, 4.0))))(fy, fx)
+        keep &= ~((q < 1.0) & (fz > hgt[:-1, :-1] * 0.5))
+    jj, ii = np.nonzero(keep)
+    a = jj * nt + ii
+    fin = np.stack([a, a + nt, a + nt + 1, a + 1], 1)               # facing into the tunnel
+    fout = np.stack([a + n, a + 1 + n, a + nt + 1 + n, a + nt + n], 1)
+    side = []
+    K = np.pad(keep, 1, constant_values=False)
+    for j, i in zip(jj, ii):
+        v00, v01, v10, v11 = j * nt + i, j * nt + i + 1, (j + 1) * nt + i, (j + 1) * nt + i + 1
+        if not K[j + 1, i]:                                          # edge at theta i (v00-v10)
+            side.append([v00, v00 + n, v10 + n, v10])
+        if not K[j + 1, i + 2]:                                      # edge at theta i+1 (v01-v11)
+            side.append([v01, v11, v11 + n, v01 + n])
+        if not K[j, i + 1]:                                          # edge at row j (v00-v01)
+            side.append([v00, v01, v01 + n, v00 + n])
+        if not K[j + 2, i + 1]:                                      # edge at row j+1 (v10-v11)
+            side.append([v10, v10 + n, v11 + n, v11])
+    faces = np.concatenate([fin, fout, np.array(side, np.int64)])
+    me = bpy.data.meshes.new(name)
+    me.vertices.add(len(verts)); me.vertices.foreach_set('co', verts.astype(np.float32).ravel())
+    me.loops.add(faces.size); me.loops.foreach_set('vertex_index', faces.astype(np.int32).ravel())
+    me.polygons.add(len(faces)); me.polygons.foreach_set('loop_start', (np.arange(len(faces)) * 4).astype(np.int32))
+    me.polygons.foreach_set('loop_total', np.full(len(faces), 4, np.int32))
+    me.update(calc_edges=True); me.validate()
+    bm = bmesh.new(); bm.from_mesh(me); bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:]); bm.to_mesh(me); bm.free()
+    me.polygons.foreach_set('use_smooth', np.ones(len(me.polygons), bool))
+    me.materials.append(_cave_ice_material(bpy, name + '-ice', p.get('ice', {})))
+    me.materials.append(_cave_ice_material(bpy, name + '-ice-outer', p.get('ice', {}), outer=True))
+    mi = np.zeros(len(me.polygons), np.int32); mi[len(fin):len(fin) + len(fout)] = 1
+    me.polygons.foreach_set('material_index', mi)
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    return [ob]

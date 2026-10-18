@@ -59,3 +59,36 @@ backlight is the idea. B was flat and could be any grey beach. I went with A.
 |---|---|---|---|---|---|---|
 | 1 | r1 (half size, 128) | 5.5 | 7.5 | iterate | sand reads brown cork not black; sea smooth pale bands near sky's brightness; sun beside, not through, the speaker; glass-bead small ice and pieces cut by the frame; no wet reflections; no haze; horizon tangent to the cabinet top; big chunk lavender | Sand: albedo #0D0D0E-#2E2D2C, texture twice as fine, bump 1.0, displacement 6 mm, specular 0.05 (not 0.35: GGX sheen was what made it grey), damp only within 10 cm of the water (damp sand at grazing mirrors the sky), sparse glassy grains that glint. Sea: roughness 0.07, chop 0.9, absorption #2F4A48 at 6/m, crests broken along their length at two scales. Sun to azimuth 172.5, just off the cabinet's left edge. Removed ice 3, 4, 9; ice 7 moved to (2.0, 2.9) and enlarged. Shore starts 0.5 m behind the speaker so the wet band begins about 0.9 m behind it. Haze 0.002/m, 8 m deep, #F2C9A8, anisotropy 0.6. Camera to 0.70 m (the brief's floor; the critic asked 0.65). Ice absorption toward cyan (#4FAAD8 / #6CBCE2), coat roughness 0.03, big chunk to (-0.9, 2.6) with 3 cracks; cracks and bubbles now kept inside the finished chunk (two fins poked out of its top). |
 | 2 | r3 (half size, 128) | 5.5 | 7.2 | iterate | sun beside the speaker, not behind it, so neither acrylic nor ice glows; hard straight water/sand seam with no wet band; empty foreground, all the ice in the water; milky low-contrast sea of parallel ribbons; sand warm brown with glitter sparkles; washed-out sky; no contact at the base; horizon at half height | Sun to azimuth 169.5, behind the cabinet's upper left; big chunk to (-0.5, 3.4) in the glitter path. A wave's reach line 0.7 m in front of the speaker: soaked mirror-wet sand behind it (the speaker stands in its own reflection), damp before it, a broken lace of spent foam along it. Three chunks stranded in front (one in the sun's strip). Sea rebuilt on Blender's FFT ocean (two spectra, 53 m and 131 m, summed so neither tiles), calming over 7 m as it shoals, plus two breakers with whitewater; absorption #1E3533 at 10/m. Haze 0.0008. Sand #0A0A0B-#232324, relief 6 cm, glints at 3 mm grains, 2 %, softer. Exposure -0.6, AgX Medium High Contrast, contrast 0.10, vignette 0.18. Sink 15 mm. Camera 0.65 m, 65 mm, 6.5 m, f/4. |
+| 3 | r6 (half size, 128) | 5.5 | 7.6 | iterate | the cabinet a near-black silhouette against the bright sky (lum 37, red crushed); a hard straight wet/dry seam at the speaker's feet; a silky sea with no surf; brown sand; a flat black shadow slab; the blue ice reads grey glass | Not applied: see below. |
+
+### Three passes at 5.5: the concept, not the settings
+
+Three passes in a row gained nothing (5.5, 5.5, 5.5), though the frame changed a lot between them; the brief says
+to change the concept then. Each critic's first complaint traces to the same root: shooting into a sun on the
+horizon makes the speaker a silhouette, and every fix for that (a fill lamp, a sun through the side panel) fights the
+light the image is built on. The beach also asks for the hardest things to fake at once (a sea, surf, a shoreline).
+
+So I'm taking the brief's other concept B: **inside a blue glacier ice cave**. The daylight comes in at the mouth,
+behind the camera, and lights the speaker's front; the cave's walls glow blue with the light through the ice, so the
+speaker's blue acrylic sits in the same light as its setting (the owner: "too stark in contrast to the setting");
+the tunnel recedes into deeper blue behind it; a hole in the roof drops one shaft of daylight through the cave's
+mist. The ice material, the black sand and the haze carry over from the beach. The beach stays in the repo
+(`ice_b.py`'s `beach_shot`) as the frame to duel with.
+
+### Building the cave (proofs c1 to c9)
+
+- **Shell:** one closed solid of ice: an arch 4.6 m wide and 3.3 m high (a superellipse, walls running below the floor),
+  from the mouth 1.4 m behind the camera to a bend 22 m in that hides the far end; its size wanders along the tunnel;
+  broad lumps of melt-out; scallops 0.5 m across and 6 cm deep (a jittered grid of cups with sharp ridges between, as
+  melt carves them); the ice 0.9 to 2.2 m thick, thinning toward a hole in the roof; the hole's rim sealed so the
+  solid stays closed.
+- **Ice:** the inner face wet and refractive (IOR 1.31) under a coat; the outer face a translucent diffuser, like the
+  firn and snow over a real cave, so the daylight comes through the ice diffused and the walls glow; blue by
+  absorption only. A scattering volume this thick took six minutes a proof at 0.3 scale (c1); absorption alone takes
+  70 s and looks right. Ash bands as a varying volume drew scribbles on the walls and cost ray marching; dropped.
+- **Light:** `snowy_hillside` outside (snow all round, a clear winter sun at 20 degrees); the sun lamp from the engine's
+  `sun_from_sky`, at azimuth 167 so its beam drops through the roof hole into the mist and lands on the floor left of
+  the speaker. The mouth: its sky alone left the speaker's front black (c6, the mouth faces trees in the map), so a
+  soft panel stands where the opening is, 3.6 x 2.6 m, daylight #EAF1FF, 0.85 W/m2 at the speaker: the mouth's light,
+  as a photographer would let it in. The floor stops at the mouth so the snowfield's light comes in under it.
+- **Mist:** 0.008/m through the cave, so the beam shows.
