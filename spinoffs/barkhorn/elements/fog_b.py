@@ -73,15 +73,15 @@ def props():
                 soft=4.0, density=0.03, anisotropy=0.6, billow_size=6.0, billow_cut=0.55, billow_gain=3.0,
                 box=[-160.0, 4.3, -40.0, 200.0, 120.0, 4.0]),
         # grass tufts round the speaker and along the brow
-        C.scatter(['grass_medium_02', 'grass_medium_01', 'grass_bermuda_01'], 3000, [-9.0, -14.5, 11.0, 3.2],
-                  avoid=((0.0, 0.0, 3.0),), scale=(0.4, 1.6), seed=3),
-        C.scatter(['grass_medium_02', 'grass_bermuda_01'], 260, [-3.0, -3.0, 3.0, 3.2], avoid=((0.0, 0.0, 1.2), (0.6, 3.3, 0.9)),
+        C.scatter(['grass_medium_02', 'grass_medium_01'], 3000, [-9.0, -14.5, 11.0, 3.2],
+                  avoid=((0.0, 0.0, 3.2),), scale=(0.4, 1.6), seed=3),
+        C.scatter(['grass_medium_02', 'grass_medium_01'], 900, [-3.2, -3.2, 3.2, 3.2], avoid=((0.0, 0.0, 1.0), (0.6, 3.4, 0.8)),
                   scale=(0.4, 0.9), seed=11),
         # short turf close round the feet, so they stand on ground that shows
-        C.scatter(['grass_bermuda_01'], 18, [-1.1, -1.1, 1.1, 1.1], avoid=((0.0, 0.0, 0.42), (0.0, -0.45, 0.3)), scale=(0.15, 0.3), seed=7),
+        C.scatter(['grass_medium_02'], 60, [-1.1, -1.1, 1.1, 1.1], avoid=((0.0, 0.0, 0.42), (0.0, -0.45, 0.3)), scale=(0.2, 0.35), seed=7),
         C.scatter(['grass_medium_02'], 50, [-8.0, 3.1, 12.0, 3.6], avoid=((0.75, 3.3, 1.3),), scale=(1.0, 1.6), seed=5),
         # a greywacke outcrop at the brow, dark against the fog behind the clear cabinet
-        C.asset('boulder_01', (0.55, 3.4, -0.25), rotate=(0, 0, 165), scale=1.05),
+        C.asset('boulder_01', (0.6, 3.4, -0.2), rotate=(0, 0, 75), scale=1.1),
         C.scatter(['grass_medium_02'], 30, [-0.6, 2.6, 1.8, 3.9], avoid=((0.55, 3.4, 0.55),), scale=(0.6, 1.2), seed=13),
         C.asset('coast_rocks_05', (-2.6, 3.6, -0.35), rotate=(0, 0, 20), scale=0.6),
         C.asset('coast_rocks_05', (3.6, 3.8, -0.4), rotate=(0, 0, 140), scale=0.5),

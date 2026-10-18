@@ -263,8 +263,7 @@
     "shape": "scatter_assets",
     "models": [
      "grass_medium_02",
-     "grass_medium_01",
-     "grass_bermuda_01"
+     "grass_medium_01"
     ],
     "count": 3000,
     "area": [
@@ -277,7 +276,7 @@
      [
       0.0,
       0.0,
-      3.0
+      3.2
      ]
     ],
     "scale": [
@@ -292,25 +291,25 @@
     "shape": "scatter_assets",
     "models": [
      "grass_medium_02",
-     "grass_bermuda_01"
+     "grass_medium_01"
     ],
-    "count": 260,
+    "count": 900,
     "area": [
-     -3.0,
-     -3.0,
-     3.0,
+     -3.2,
+     -3.2,
+     3.2,
      3.2
     ],
     "avoid": [
      [
       0.0,
       0.0,
-      1.2
+      1.0
      ],
      [
       0.6,
-      3.3,
-      0.9
+      3.4,
+      0.8
      ]
     ],
     "scale": [
@@ -324,9 +323,9 @@
     "kind": "kit",
     "shape": "scatter_assets",
     "models": [
-     "grass_bermuda_01"
+     "grass_medium_02"
     ],
-    "count": 18,
+    "count": 60,
     "area": [
      -1.1,
      -1.1,
@@ -346,8 +345,8 @@
      ]
     ],
     "scale": [
-     0.15,
-     0.3
+     0.2,
+     0.35
     ],
     "seed": 7,
     "res": "1k"
@@ -384,16 +383,16 @@
     "shape": "asset",
     "model": "boulder_01",
     "position": [
-     0.55,
+     0.6,
      3.4,
-     -0.25
+     -0.2
     ],
     "rotate": [
      0,
      0,
-     165
+     75
     ],
-    "scale": 1.05,
+    "scale": 1.1,
     "res": "2k"
    },
    {
