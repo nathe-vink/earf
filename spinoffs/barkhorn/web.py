@@ -43,6 +43,15 @@ IMG = os.path.join(SITE, 'img')
 BRAND = os.path.join(HERE, 'brand')
 R30 = os.path.join(ROOT, 'renders', '2026-10-17', 'barkhorn', 'site30')
 TURN = os.path.join(ROOT, 'renders', '2026-10-15', 'barkhorn', 'turn23')
+# round 31: the final pictures (finals.py), the spotlight and the carousel (shoot31.py) and the dioramas (dioramas/)
+FIN = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'finals31')
+S31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'shoot31')
+U31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'uplight31')     # each colour lit from below: the reel
+D31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'diorama31')
+ST31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'studio31')    # the studio's: heroes, the lineup, macros
+C31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions')   # the record player and the lamp
+HABITAT = {'red': 'ember', 'orange': 'dust', 'amber': 'acid', 'green': 'poison', 'blue': 'ice', 'violet': 'haze',
+           'ice': 'fog', 'black': 'smoke'}
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 TITLE = 'EARF · Atmosphere'
 DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours named for things in the air. '
@@ -120,18 +129,44 @@ def make_images(sources=None):
     def one(path, fn):
         if path and os.path.exists(path):
             fn(path); made.append(os.path.basename(path))
-    one(os.path.join(R30, 'hero.png'), lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82),
-                                                  save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
+    def first(*paths):                                  # the final if it is there, else the round's picture
+        return next((p for p in paths if p and os.path.exists(p)), None)
+    one(first(os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png')),
+        lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82), save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
     for k in KEYS:
         for side in ('on', 'off'):
-            one(at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg'), lambda p, s=side: save(Image.open(p), f'{k}-{s}.jpg', 900, q=80))
-        for tag, name in (('back', f'back-{k}.png'), ('amp', f'detail-{k}.png')):
-            one(os.path.join(R30, name), lambda p, t=tag: save(Image.open(p), f'{k}-{t}.jpg', 880, q=82))
+            one(first(os.path.join(FIN, f'front-{side}-{k}.png'), at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg')),
+                lambda p, s=side: save(Image.open(p), f'{k}-{s}.jpg', 900, q=80))
+        for tag, fin, old in (('back', f'back-{k}.png', f'back-{k}.png'), ('amp', f'amp-{k}.png', f'detail-{k}.png')):
+            one(first(os.path.join(FIN, fin), os.path.join(R30, old)), lambda p, t=tag: save(Image.open(p), f'{k}-{t}.jpg', 880, q=82))
         for tag in ('side', 'back'):
-            one(at('r8', 'deck-assets', 'photos', f'hornc-{k}-{tag}.jpg'), lambda p, t=tag: save(Image.open(p), f'{k}-horn-{t}.jpg', q=84))
-        one(os.path.join(TURN, f'sprite-{k}.jpg'), lambda p: shutil.copy(p, os.path.join(IMG, f'turn-{k}.jpg')))
+            one(first(os.path.join(FIN, f'horn-{tag}-{k}.png'), at('r8', 'deck-assets', 'photos', f'hornc-{k}-{tag}.jpg')),
+                lambda p, t=tag: save(Image.open(p), f'{k}-horn-{t}.jpg', 1000, q=84))
+        one(first(os.path.join(FIN, f'turn-{k}.jpg'), os.path.join(TURN, f'sprite-{k}.jpg')),
+            lambda p: shutil.copy(p, os.path.join(IMG, f'turn-{k}.jpg')))
+        one(os.path.join(FIN, f'inside-{k}.png'), lambda p: save(Image.open(p), f'{k}-inside.jpg', 880, q=82))
+        h = HABITAT[k]
+        one(first(*[os.path.join(U31, f'{n}-{c}.{e}') for n in ('uplit', 'uplight', 'reel', 'frame') for c in (k, h) for e in ('png', 'jpg')]),
+            lambda p: save(Image.open(p), f'{k}-reel.jpg', 1400, q=84))
+        one(first(os.path.join(D31, f'{h}.png'), os.path.join(D31, f'{h}.jpg')), lambda p: save(Image.open(p), f'{k}-habitat.jpg', 1600, q=84))
+        one(first(os.path.join(D31, f'{h}-portrait.png'), os.path.join(D31, f'{h}-portrait.jpg')),
+            lambda p: save(Image.open(p), f'{k}-habitat-portrait.jpg', 1000, q=84))
+        for tag, names in (('studio', ('hero-dark', 'hero')), ('studio-light', ('hero-light',))):
+            one(first(*[os.path.join(ST31, f'{n}-{c}.{e}') for n in names for c in (h, k) for e in ('png', 'jpg')]),
+                lambda p, t=tag: (save(Image.open(p), f'{k}-{t}.jpg', 2400, q=84), save(Image.open(p), f'{k}-{t}-1200.jpg', 1200, q=82)))
     one(os.path.join(R30, 'inside.png'), lambda p: save(Image.open(p), 'inside.jpg', 880, q=82))
+    one(first(os.path.join(ST31, 'lineup.png'), os.path.join(ST31, 'lineup.jpg')),
+        lambda p: (save(Image.open(p), 'lineup.jpg', 2400, q=84), save(Image.open(p), 'lineup-1200.jpg', 1200, q=82)))
+    for tag in ('turntable', 'lamp'):
+        one(first(os.path.join(C31, f'hero-{tag}.png'), os.path.join(C31, f'hero-{tag}.jpg')),
+            lambda p, t=tag: save(Image.open(p), f'next-{t}.jpg', 1400, q=84))
+    for tag, names in (('facade', ('facade', 'night', 'opera')), ('facade-portrait', ('facade-portrait', 'night-portrait', 'opera-portrait'))):
+        one(first(*[os.path.join(U31, f'{n}.{e}') for n in names for e in ('png', 'jpg')]),
+            lambda p, t=tag: (save(Image.open(p), f'{t}.jpg', 2400, q=84), save(Image.open(p), f'{t}-1200.jpg', 1200, q=82)))
+    one(first(os.path.join(FIN, 'room.png')), lambda p: save(Image.open(p), 'room.jpg', 1800, q=84))
     for f in ('room.jpg', 'ga-front.png', 'ga-right.png'):
+        if f == 'room.jpg' and os.path.exists(os.path.join(FIN, 'room.png')):
+            continue
         one(at('r25', 'site', 'img', f), lambda p, f=f: shutil.copy(p, os.path.join(IMG, f)))
     # the icons, acrylic (icons_real.py's renders, each on its ground made even), a layer for light grounds and one for dark
     for k, num, name, icon, *_ in CLOUDS:
@@ -159,22 +194,28 @@ def image_meta():
     meta, panel = {}, {}
     for k in KEYS:
         views = {}
-        for v, n in (('on', f'{k}-on.jpg'), ('off', f'{k}-off.jpg'), ('back', f'{k}-back.jpg'), ('amp', f'{k}-amp.jpg'),
-                     ('horn-side', f'{k}-horn-side.jpg'), ('horn-back', f'{k}-horn-back.jpg')):
+        for v, n in (('on', f'{k}-on.jpg'), ('off', f'{k}-off.jpg'), ('studio', f'{k}-studio.jpg'), ('studio-light', f'{k}-studio-light.jpg'),
+                     ('back', f'{k}-back.jpg'), ('amp', f'{k}-amp.jpg'),
+                     ('horn-side', f'{k}-horn-side.jpg'), ('horn-back', f'{k}-horn-back.jpg'), ('inside', f'{k}-inside.jpg'),
+                     ('reel', f'{k}-reel.jpg'), ('habitat', f'{k}-habitat.jpg')):
+            if not os.path.exists(os.path.join(IMG, n)):
+                continue                                # round 31's pictures appear as they arrive
             w, h = size(n)
             views[v] = dict(src=f'img/{n}', w=w, h=h)
+        if 'inside' not in views:                       # the shared cutaway (Poison's) until a colour has its own
+            w, h = size('inside.jpg')
+            views['inside'] = dict(src='img/inside.jpg', w=w, h=h, shared=True)
         w, h = size(f'turn-{k}.jpg')
         views['turn'] = dict(src=f'img/turn-{k}.jpg', w=w // 6, h=h // 4)
         meta[k] = views
         corner = np.asarray(Image.open(os.path.join(IMG, f'{k}-on.jpg')).convert('RGB'))[3:19, 3:19].reshape(-1, 3).mean(0)
         panel[k] = '#%02X%02X%02X' % tuple(int(x) for x in corner)
-    w, h = size('inside.jpg')
-    return meta, dict(src='img/inside.jpg', w=w, h=h), panel
+    return meta, panel
 
 
 def body():
     """The page's head (fonts and style) and body, its pictures as they stand in site/img."""
-    meta, inside, panel = image_meta()
+    meta, panel = image_meta()
     spots = hero_spots()
     word = E.word_svg('currentColor').replace('role="img" aria-label="EARF"', 'aria-hidden="true"').replace('<title>EARF</title>', '')
     coin = {k: i for i, k in enumerate(KEYS)}                 # the coins' sheet is in the speakers' order
@@ -203,12 +244,93 @@ def body():
         f'<a class="more" href="#speaker-{k}">Up close</a></div></article>'
         for k, num, name, icon, tint, line, cover in CLOUDS)
     spec = ''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a, b in SPEC)
+    reel = habitats = closer = ''
+    if all('studio' in meta[k] for k in KEYS):
+        sw, sh = meta['red']['studio']['w'], meta['red']['studio']['h']
+        im = np.asarray(Image.open(os.path.join(IMG, 'red-studio.jpg')).convert('RGB'))
+        edge = np.concatenate([im[:6].reshape(-1, 3), im[-6:].reshape(-1, 3), im[:, :6].reshape(-1, 3), im[:, -6:].reshape(-1, 3)]).mean(0)
+        lineup = ''
+        if os.path.exists(os.path.join(IMG, 'lineup.jpg')):
+            lw, lh = Image.open(os.path.join(IMG, 'lineup.jpg')).size
+            lineup = ('    <figure class="lineup"><img src="img/lineup.jpg" srcset="img/lineup-1200.jpg 1200w, img/lineup.jpg 2400w" '
+                      f'sizes="(max-width: 1240px) 100vw, 1240px" width="{lw}" height="{lh}" loading="lazy" '
+                      'alt="All eight in a row in spectrum order, on a black floor that mirrors them">'
+                      '<figcaption>All eight, in spectrum order.</figcaption></figure>\n')
+        hid = ' aria-hidden="true"'
+        closer = (f'  <section class="band closer" id="closer" style="--closer:#%02X%02X%02X"><div class="wrap">\n' % tuple(int(x) for x in edge) +
+                  '    <div class="closer-head"><p class="eyebrow">Take a closer look</p><h2>Cast in colour, all the way through.</h2></div>\n'
+                  f'    <div class="closer-stage" style="aspect-ratio:{sw} / {sh}">' + ''.join(
+                      f'<img class="{"on" if i == 0 else ""}" src="img/{k}-studio.jpg" srcset="img/{k}-studio-1200.jpg 1200w, img/{k}-studio.jpg 2400w" '
+                      f'sizes="(max-width: 1240px) 100vw, 1240px" width="{sw}" height="{sh}" loading="lazy" '
+                      f'alt="{name} in the studio, cover off, the light coming through its acrylic"{"" if i == 0 else hid}>'
+                      for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</div>\n'
+                  '    <div class="picker">\n      <div class="dots" role="radiogroup" aria-label="Colour">' + ''.join(
+                      f'<button type="button" role="radio" aria-checked="{str(i == 0).lower()}" aria-label="{name}" tabindex="{0 if i == 0 else -1}">'
+                      f'<span class="coin-dot" style="--i:{coin[k]}"></span></button>'
+                      for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</div>\n'
+                  f'      <p class="picked" id="closer-cap" aria-live="polite"><b>{CLOUDS[0][2]}</b> {CLOUDS[0][5]}</p>\n    </div>\n'
+                  + lineup + '  </div></section>')
+    if all('reel' in meta[k] for k in KEYS):
+        rw, rh = meta['red']['reel']['w'], meta['red']['reel']['h']
+        first_ = CLOUDS[0]
+        facade = ''
+        if os.path.exists(os.path.join(IMG, 'facade.jpg')):
+            fw, fh = Image.open(os.path.join(IMG, 'facade.jpg')).size
+            portrait = ('<source media="(max-width: 700px)" srcset="img/facade-portrait-1200.jpg 1200w, img/facade-portrait.jpg 2400w">'
+                        if os.path.exists(os.path.join(IMG, 'facade-portrait.jpg')) else '')
+            facade = ('    <figure class="facade"><picture>' + portrait +
+                      f'<img src="img/facade.jpg" srcset="img/facade-1200.jpg 1200w, img/facade.jpg 2400w" sizes="(max-width: 1240px) 100vw, 1240px" '
+                      f'width="{fw}" height="{fh}" loading="lazy" alt="A concrete wall by a river at night, the eight standing along its foot '
+                      'on lights, their colours washing up the wall and running into one another"></picture></figure>\n')
+        reel = ('  <section class="band reelband" id="reel"><div class="wrap">\n' + facade +
+                '    <div class="head"><div><p class="eyebrow">Hold it to the light</p><h2>One speaker, eight slides.</h2>'
+                '<p>Each one, standing on a lamp. Turn the reel.</p></div></div>\n'
+                '    <div class="viewer">\n'
+                f'      <figure class="lens"><div class="lens-pic"><img id="reel-img" src="img/{first_[0]}-reel.jpg" width="{rw}" height="{rh}" '
+                f'alt="{first_[2]} standing on a light, its colour cast up the concrete wall behind it"></div>'
+                f'<figcaption id="reel-cap"><b>{first_[2]}</b> {first_[5]}</figcaption></figure>\n'
+                '      <div class="reel-side">\n'
+                '        <div class="reel" id="reel-disc" role="group" aria-label="The reel: one slide a colour">' + ''.join(
+                    f'<button type="button" class="slide" style="--i:{i};background-image:url(img/{k}-reel.jpg)" data-i="{i}" '
+                    f'aria-label="{name}" aria-pressed="{str(i == 0).lower()}"></button>'
+                    for i, (k, num, name, *_) in enumerate(CLOUDS)) +
+                '<span class="hub" aria-hidden="true"></span></div>\n'
+                '        <button type="button" class="btn lever" id="reel-next">Next slide</button>\n'
+                '      </div>\n    </div>\n  </div></section>')
+    if all('habitat' in meta[k] for k in KEYS):
+        hw, hh = meta['red']['habitat']['w'], meta['red']['habitat']['h']
+        tall = all(os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg')) for k in KEYS)
+        habitats = ('  <section class="band" id="habitats"><div class="wrap">\n'
+                    '    <div class="head"><div><p class="eyebrow">Natural habitats</p><h2>Each colour, in its own weather.</h2></div>'
+                    '<div class="steps"><button type="button" class="btn" id="hab-prev" aria-label="Previous">&larr;</button>'
+                    '<button type="button" class="btn" id="hab-next" aria-label="Next">&rarr;</button></div></div>\n'
+                    '    <ul class="habitats" id="hab" tabindex="0" aria-label="The eight in their habitats">' + ''.join(
+                        f'<li><a href="#speaker-{k}"><picture>'
+                        + (f'<source media="(max-width: 700px)" srcset="img/{k}-habitat-portrait.jpg">' if tall else '') +
+                        f'<img src="img/{k}-habitat.jpg" width="{hw}" height="{hh}" loading="lazy" '
+                        f'alt="{name} in a small made world of its own weather"></picture><span><b>{name}</b> {line}</span></a></li>'
+                        for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n  </div></section>')
+    pair = [('turntable', 'Cumulus', 'A record player. Belt drive, its motor in a pod of its own.',
+             'Cumulus, a record player in tinted acrylic, its platter on a plinth of overlapping circles'),
+            ('lamp', 'Bell', 'A lamp. The horn&rsquo;s flare, hung mouth down.',
+             'Bell, a table lamp whose tinted acrylic shade is the horn&rsquo;s flare turned over')]
+    figs = ''
+    if all(os.path.exists(os.path.join(IMG, f'next-{t}.jpg')) for t, *_ in pair):
+        figs = '\n    <div class="pair">' + ''.join(
+            '<figure><img src="img/next-{0}.jpg" width="{1}" height="{2}" loading="lazy" alt="{5}">'
+            '<figcaption><b>{3}</b> {4}</figcaption></figure>'.format(t, *Image.open(os.path.join(IMG, f'next-{t}.jpg')).size, n, d, alt)
+            for t, n, d, alt in pair) + '</div>'
+    nxt = ('  <section class="band"><div class="wrap next">\n    <p class="eyebrow">Next</p>\n'
+           '    <h2>The speakers would like some company.</h2>\n'
+           '    <p>A record player and a lamp, on the drawing board in the same eight colours, so a whole corner of the room can '
+           'match. Or clash, if you prefer.</p>' + figs + '\n  </div></section>')
     data = dict(
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
                      coin=coin[k], views=meta[k]) for k, num, name, icon, tint, line, cover in CLOUDS],
-        inside=inside, hues=E.HUES)
+        hues=E.HUES)
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec)
+                .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt)
                 .replace('__DATA__', json.dumps(data, separators=(',', ':'))))
     cut = page.index('</style>') + len('</style>')
     return page[:cut], page[cut:]
@@ -348,6 +470,69 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .about dd { margin: 0 }
 .about .more { margin-top: 10px; color: var(--card-ink); font-weight: 600; font-size: 15px; text-underline-offset: 4px }
 
+/* a closer look: one colour at a time on the studio's dark seamless (a launch page's), picked from the coins below */
+.closer { background: var(--closer, #0B0B0C); color: #F5F3EF; text-align: center }
+.band.closer, .band.closer + .band, .band.reelband, .band.reelband + .band { border-top: 0 }
+.closer .eyebrow { color: #9B978F }
+.closer-head { display: grid; justify-items: center; margin-bottom: 4px }
+.closer-head h2 { max-width: 20ch }
+.closer-stage { position: relative; max-width: 100%; margin: 0 auto;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent),
+  linear-gradient(transparent, #000 7%, #000 93%, transparent); mask-composite: intersect }
+.closer-stage img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; opacity: 0; transition: opacity 520ms ease }
+.closer-stage img.on { opacity: 1 }
+.picker { display: grid; justify-items: center; gap: 12px; margin-top: 6px }
+.dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px }
+.dots button { width: 44px; height: 44px; padding: 5px; border: 0; border-radius: 50%; background: transparent; cursor: pointer }
+.dots button[aria-checked="true"] { box-shadow: inset 0 0 0 2px #F5F3EF }
+.dots .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: url(img/coins-dark.jpg); mix-blend-mode: screen }
+.closer .picked { margin: 0; color: #9B978F; font-size: 15px } .closer .picked b { color: #F5F3EF; margin-right: 8px; font-weight: 600 }
+.closer button:focus-visible { outline-color: #F5F3EF }
+.lineup { margin: 56px 0 0; display: grid; gap: 12px }
+.lineup img { width: 100%; height: auto; display: block; max-width: 100% }
+.lineup figcaption { color: #9B978F; font-size: 15px }
+@media (max-width: 460px) { .dots { gap: 4px } .dots button { width: 38px; height: 38px; padding: 4px } }
+@media (prefers-reduced-motion: reduce) { .closer-stage img { transition: none } }
+.facade { margin: 0 0 56px }
+.facade img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
+.reelband { background: #0E0D0F; color: #ECE8E1 }
+.reelband .head p, .reelband .eyebrow { color: #A39E95 }
+.viewer { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; align-items: center }
+.lens { margin: 0; display: grid; gap: 12px }
+.lens-pic { border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 0 0 10px #1C1B1E, 0 30px 60px rgba(0, 0, 0, 0.5) }
+.lens-pic img { width: 100%; height: auto; display: block; transition: opacity 260ms ease, transform 420ms ease }
+.lens-pic img.out { opacity: 0; transform: scale(0.985) }
+.lens figcaption { font-size: 15px; color: #A39E95; margin-top: 14px } .lens figcaption b { color: #ECE8E1; margin-right: 8px }
+.reel-side { display: grid; justify-items: center; gap: 24px }
+.reel { --turn: 0; position: relative; width: 280px; height: 280px; border-radius: 50%; background: #F1EDE5;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12), 0 18px 40px rgba(0, 0, 0, 0.45);
+  transform: rotate(calc(var(--turn) * -45deg)); transition: transform 620ms cubic-bezier(0.3, 1.4, 0.5, 1) }
+.reel .slide { position: absolute; left: calc(50% - 22px); top: calc(50% - 15px); width: 44px; height: 30px; border: 0; padding: 0;
+  border-radius: 3px; background-size: cover; background-position: center; cursor: pointer;
+  transform: rotate(calc(var(--i) * 45deg)) translateY(-104px); box-shadow: 0 0 0 2px #F1EDE5, 0 0 0 3px rgba(0, 0, 0, 0.2) }
+.reel .slide[aria-pressed="true"] { box-shadow: 0 0 0 2px #F1EDE5, 0 0 0 4px #ECE8E1 }
+.reel .hub { position: absolute; left: calc(50% - 20px); top: calc(50% - 20px); width: 40px; height: 40px; border-radius: 50%;
+  background: #0E0D0F; box-shadow: inset 0 0 0 3px #CFC9BF }
+.reel::before { content: ""; position: absolute; left: calc(50% - 7px); top: -16px; border: 7px solid transparent;
+  border-bottom-color: #ECE8E1; transform: rotate(calc(var(--turn) * 45deg)); transform-origin: 7px 156px }
+.lever { color: #ECE8E1; border-color: #ECE8E1 }
+.lever:hover { box-shadow: inset 0 0 0 1px #ECE8E1 }
+@media (max-width: 860px) { .viewer { grid-template-columns: 1fr } .reel { width: 240px; height: 240px }
+  .reel .slide { transform: rotate(calc(var(--i) * 45deg)) translateY(-88px) } }
+@media (prefers-reduced-motion: reduce) { .reel, .lens-pic img { transition: none } }
+/* the habitats: one campaign picture at a time, snapping along a strip (the portraits on phones) */
+.steps { display: flex; gap: 8px }
+.steps .btn { padding: 10px 14px }
+.habitats { list-style: none; margin: 0; padding: 0 0 6px; display: grid; grid-auto-flow: column; grid-auto-columns: min(86%, 1080px);
+  gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain }
+.habitats::-webkit-scrollbar { display: none }
+.habitats li { scroll-snap-align: start; min-width: 0 }
+.habitats a { display: grid; gap: 10px; color: var(--ink); text-decoration: none; font-size: 15px }
+.habitats a span { color: var(--muted) } .habitats a b { color: var(--ink); font-weight: 600; margin-right: 6px }
+.habitats img { width: 100%; height: auto; display: block; border-radius: 4px }
+.habitats:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px }
+@media (max-width: 700px) { .habitats { grid-auto-columns: 84% } }
 .room figure { margin: 0; display: grid; gap: 12px }
 .room img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
 .room figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; font-size: 15px; color: var(--muted) }
@@ -361,6 +546,11 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .dwg figcaption { grid-column: 1 / -1; font: 500 12px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: #5E5A53 }
 .next { display: grid; gap: 14px }
 .next p { margin: 0; max-width: 60ch; color: var(--muted) }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 14px }
+.pair figure { margin: 0; display: grid; gap: 10px }
+.pair img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
+.pair figcaption { font-size: 15px; color: var(--muted) } .pair figcaption b { color: var(--ink); font-weight: 600; margin-right: 6px }
+@media (max-width: 720px) { .pair { grid-template-columns: 1fr } }
 .contact { display: grid; gap: 18px }
 .contact .addr { display: flex; flex-wrap: wrap; align-items: center; gap: 12px }
 .contact code { font: 500 clamp(20px, 3vw, 30px)/1.2 var(--mono); user-select: all; word-break: break-all }
@@ -468,6 +658,8 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
     <div class="wrap"><ul class="cast" aria-label="The eight, in spectrum order">__NAMES__</ul></div>
   </section>
 
+__CLOSER__
+
   <section class="band" id="turn"><div class="wrap">
     <div class="head">
       <div><p class="eyebrow">The horn</p><h2>The oldest amplifier is a shape.</h2>
@@ -492,6 +684,8 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
     <div class="cards show-off" id="cards">__CARDS__</div>
   </div></section>
 
+__REEL__
+__HABITATS__
   <section class="band room" id="room"><div class="wrap">
     <div class="head"><div><p class="eyebrow">At home</p><h2>A pair of Poison.</h2></div></div>
     <figure><img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy">
@@ -507,12 +701,7 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
     </div>
   </div></section>
 
-  <section class="band"><div class="wrap next">
-    <p class="eyebrow">Next</p>
-    <h2>The speakers would like some company.</h2>
-    <p>A record player and a lamp are on the drawing board, cast in the same eight colours, so a whole corner of the room
-      can match. Or clash, if you prefer.</p>
-  </div></section>
+__NEXT__
 
   <section class="band" id="contact"><div class="wrap contact">
     <p class="eyebrow">Enquiries</p>
@@ -563,6 +752,43 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
 <script>
 const D = __DATA__, BY = Object.fromEntries(D.clouds.map(c => [c.k, c]));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, TAU = Math.PI * 2;
+// the reel: one slide a colour; the lever turns it on a slide, a slide turns it to that slide (always forward, as a reel turns)
+const disc = document.getElementById('reel-disc');
+if (disc) {
+  const img = document.getElementById('reel-img'), cap = document.getElementById('reel-cap'), slides = [...disc.querySelectorAll('.slide')];
+  let at = 0, turn = 0;
+  const show = i => { const c = D.clouds[i], step = (i - at + 8) % 8; if (!step) return;
+    turn += step; at = i; disc.style.setProperty('--turn', turn);
+    slides.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+    const swap = () => { img.src = c.views.reel.src; img.alt = `${c.name} standing on a light, its colour cast up the concrete wall behind it`;
+      cap.innerHTML = `<b>${c.name}</b> ${c.line}`; img.classList.remove('out'); };
+    if (reduce) swap(); else { img.classList.add('out'); setTimeout(swap, 240); } };
+  document.getElementById('reel-next').addEventListener('click', () => show((at + 1) % 8));
+  slides.forEach(b => b.addEventListener('click', () => show(+b.dataset.i)));
+  document.getElementById('reel').addEventListener('keydown', e => { if (e.key === 'ArrowRight') show((at + 1) % 8); if (e.key === 'ArrowLeft') show((at + 7) % 8); });
+  let x0 = null; img.parentElement.addEventListener('pointerdown', e => { x0 = e.clientX; });
+  img.parentElement.addEventListener('pointerup', e => { if (x0 !== null && Math.abs(e.clientX - x0) > 40) show((at + (e.clientX < x0 ? 1 : 7)) % 8); x0 = null; });
+}
+// a closer look: the dots pick a colour and the pictures cross-fade; the arrow keys step through them, as in a radio group
+const closer = document.getElementById('closer');
+if (closer) {
+  const pics = [...closer.querySelectorAll('.closer-stage img')], dots = [...closer.querySelectorAll('.dots button')];
+  let at = 0;
+  const pick = (i, focus) => { at = i; const c = D.clouds[i];
+    pics.forEach((p, j) => { p.classList.toggle('on', j === i); if (j === i) p.removeAttribute('aria-hidden'); else p.setAttribute('aria-hidden', 'true'); });
+    dots.forEach((d, j) => { d.setAttribute('aria-checked', String(j === i)); d.tabIndex = j === i ? 0 : -1; if (j === i && focus) d.focus(); });
+    document.getElementById('closer-cap').innerHTML = `<b>${c.name}</b> ${c.line}`; };
+  dots.forEach((d, i) => d.addEventListener('click', () => pick(i)));
+  closer.querySelector('.dots').addEventListener('keydown', e => { const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: 7, ArrowUp: 7 }[e.key];
+    if (k) { e.preventDefault(); pick((at + k) % 8, true); } });
+}
+// the habitats' strip: the arrows move it a picture at a time
+const hab = document.getElementById('hab');
+if (hab) {
+  const step = d => { const li = hab.querySelector('li'); hab.scrollBy({ left: d * (li.offsetWidth + 20), behavior: reduce ? 'auto' : 'smooth' }); };
+  document.getElementById('hab-prev').addEventListener('click', () => step(-1));
+  document.getElementById('hab-next').addEventListener('click', () => step(1));
+}
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const dark = () => { const t = document.documentElement.dataset.theme; return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); e.innerHTML = html; return e; };
@@ -628,16 +854,20 @@ document.getElementById('copy').addEventListener('click', () => {
 const VIEWS = [
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
+  ['studio', 'In the studio', c => `${c.name} in the studio, the light coming through its acrylic.`],
+  ['studio-light', 'On pale grey', c => `${c.name} in the studio, on a pale ground.`],
   ['back', 'From behind', c => `From behind: the name cut into the back and filled with colour, grips in the sides, the amplifier below.`],
-  ['amp', 'The amplifier', c => `The built-in amplifier, a Hypex FusionAmp FA122. Connector positions are provisional.`],
+  ['amp', 'The amplifier', c => `The built-in amplifier, a Hypex FusionAmp FA122: analogue and AES in on XLRs with links out, RCA, S/PDIF, optical, and the mains switch.`],
   ['inside', 'Inside', c => `Inside, a corner cut away: the woofer's motor, the batts in their voile sleeves, a port.`],
   ['horn-side', 'Horn, side', c => `The horn in profile: the flare, the driver's pod, four slim posts.`],
   ['horn-back', 'Horn, behind', c => `The horn from behind, its cap twisted shut.`],
   ['turn', 'Turning', c => `Drag to spin it.`],
+  ['reel', 'Lit from below', c => `${c.name} on a light, its colour thrown up the wall behind it.`],
+  ['habitat', 'At home', c => `${c.name} in its own weather.`],
 ];
 const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs');
 let cur = null, view = 'on', turnFrame = 0, autoTurn = null;
-function src(c, v) { return v === 'inside' ? D.inside : c.views[v]; }
+function src(c, v) { return c.views[v]; }
 function showView(v, focus) {
   const c = BY[cur]; view = v;
   const s = src(c, v);
@@ -653,7 +883,7 @@ function showView(v, focus) {
   } else {
     const shot = el('div', { class: 'shot' });
     shot.appendChild(el('img', { src: s.src, width: s.w, height: s.h, alt: VIEWS.find(x => x[0] === v)[2](c) }));
-    if (v === 'inside' && cur !== 'green') shot.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
+    if (v === 'inside' && s.shared && cur !== 'green') shot.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
     stage.replaceChildren(shot);
   }
   document.getElementById('cap').textContent = VIEWS.find(x => x[0] === v)[2](c);
@@ -676,7 +906,7 @@ function renderPDP(k) {
   document.getElementById('swatches').replaceChildren(...D.clouds.map(o => { const li = el('li');
     const a = el('a', { href: `#speaker-${o.k}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
       `<span class="coin-dot" style="--i:${o.coin}"></span>`); li.appendChild(a); return li; }));
-  thumbs.replaceChildren(...VIEWS.map(([v, label], i) => { const s = src(c, v);
+  thumbs.replaceChildren(...VIEWS.filter(([v]) => c.views[v]).map(([v, label], i) => { const s = src(c, v);
     const b = el('button', { type: 'button', role: 'tab', id: `thumb-${i}`, 'data-v': v, 'aria-label': label, 'aria-controls': 'stage',
       class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
     b.addEventListener('click', () => showView(v)); return b; }));

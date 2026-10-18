@@ -23,14 +23,26 @@ if [ ! -d render/node_modules/three ] || [ ! -d render/node_modules/playwright-c
   (cd render && PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install --no-audit --no-fund --loglevel=error)
 fi
 
-# 2. Blender's bpy on the system Python, with numpy 1.
-if ! python3 -c "import bpy" >/dev/null 2>&1; then
-  log "pip install bpy 5.0.1 (about 350 MB, once)"
-  "${PIP[@]}" "bpy==5.0.1" "numpy>=1.26,<2.0"
+# 2. Blender's bpy, with numpy 1 and what the renderer's post needs (Pillow, SciPy), on a Python it has wheels for.
+#    bpy 5.0.1 is built for CPython 3.11 only, and a fresh container's python3 can be newer (3.13 on 2026-10-18), so it
+#    goes on python3.11 when python3 is not 3.11; studio/engine/render.py re-runs itself there when python3 has no bpy,
+#    so every command stays `python3 studio/engine/render.py ...`.
+BPY_PY=python3
+if ! python3 -c "import sys; sys.exit(0 if sys.version_info[:2] == (3, 11) else 1)" && command -v python3.11 >/dev/null 2>&1; then
+  BPY_PY=python3.11
 fi
-if ! python3 -c "import numpy, sys; sys.exit(0 if numpy.__version__.startswith('1.') else 1)" >/dev/null 2>&1; then
-  log "restoring numpy 1 for bpy (something installed numpy 2 on the system Python)"
-  "${PIP[@]}" "numpy>=1.26,<2.0"
+BPIP=(env PIP_BREAK_SYSTEM_PACKAGES=1 "$BPY_PY" -m pip install --quiet --disable-pip-version-check)
+if ! "$BPY_PY" -c "import bpy" >/dev/null 2>&1; then
+  log "pip install bpy 5.0.1 on $BPY_PY (about 350 MB, once)"
+  "${BPIP[@]}" "bpy==5.0.1" "numpy>=1.26,<2.0"
+fi
+if ! "$BPY_PY" -c "import numpy, sys; sys.exit(0 if numpy.__version__.startswith('1.') else 1)" >/dev/null 2>&1; then
+  log "restoring numpy 1 for bpy (something installed numpy 2 on $BPY_PY)"
+  "${BPIP[@]}" "numpy>=1.26,<2.0"
+fi
+if ! "$BPY_PY" -c "import PIL, scipy" >/dev/null 2>&1; then
+  log "pip install Pillow and SciPy on $BPY_PY (the renderer's finish)"
+  "${BPIP[@]}" "pillow" "scipy>=1.11,<1.14" "numpy>=1.26,<2.0"
 fi
 
 # 3. The CAD venv.
@@ -56,7 +68,7 @@ for f in Archivo-Regular.woff Archivo-Bold.woff ArchivoBlack-Regular.woff; do
 done
 
 # Quick check (imports only).
-python3 -c "import bpy, numpy; assert numpy.__version__.startswith('1.')" && log "bpy ok"
+"$BPY_PY" -c "import bpy, numpy; assert numpy.__version__.startswith('1.')" && log "bpy ok ($BPY_PY)"
 "$VENV/bin/python" -c "import build123d, ezdxf, uharfbuzz" && log "CAD venv ok ($VENV)"
 node -e "require('$ROOT/render/node_modules/three/package.json')" && log "render/ node modules ok"
 
