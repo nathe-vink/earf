@@ -348,7 +348,7 @@ def body():
         f'<a class="spot" href="#speaker-{k}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%">'
         f'<span class="spot-label"><span class="spot-ic">{icon_img(icon, name)}</span><b>{name}</b><span>{num}</span></span>'
         f'<span class="sr">{name}, Atmosphere {num}</span></a>'
-        for (k, num, name, icon, *_), s in zip(CLOUDS, spots))
+        for (k, num, name, icon, *_), s in sorted(zip(CLOUDS, spots), key=lambda cs: cs[1]['t'] + cs[1]['h']))   # the back rank first, so the front's links lie over it
     names = ''.join(f'<li><a href="#speaker-{k}"><span class="coin-dot" style="--i:{coin[k]}"></span>{name}</a></li>'
                     for k, num, name, *_ in CLOUDS)
     turn = ''.join(
