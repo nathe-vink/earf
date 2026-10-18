@@ -51,8 +51,6 @@ def shot():
                  lights=lights(), rotate_z=15.0, exposure=0.0,
                  haze={'box_m': [-9.0, -8.0, -0.2, 9.0, 13.0, 5.0], 'density': 0.006, 'anisotropy': 0.5, 'color': '#FFFFFF'},
                  fin=finish(bloom=0.2, bloom_px=36, threshold=0.85, vignette=0.15))
-    # neutral white balance: the lookbook base's 5600 K and +3 magenta tint turned the lava pink
-    s['render'].update(white_balance_k=6500, white_balance_tint=0.0)
     return s
 
 
