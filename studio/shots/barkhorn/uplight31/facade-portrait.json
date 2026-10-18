@@ -111,7 +111,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     1.7999999999999998,
+     1.95,
      0.0
     ],
     "size": [
@@ -121,10 +121,10 @@
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -152,10 +152,10 @@
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -183,10 +183,10 @@
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -222,17 +222,18 @@
     "shape": "box",
     "position": [
      0.0,
-     -3.48,
-     -0.04
+     -3.575,
+     -0.122
     ],
     "size": [
      60.0,
-     0.16,
-     0.04
+     0.35,
+     0.12
     ],
-    "material": "clay",
-    "color": "#8A8780",
-    "roughness": 0.25
+    "material": "pbr",
+    "texture": "granite_tile",
+    "res": "2k",
+    "ease": 0.01
    },
    {
     "kind": "kit",
@@ -248,8 +249,8 @@
      80.0,
      29.0
     ],
-    "ripple": 0.25,
-    "ripple_m": 0.6
+    "ripple": 0.35,
+    "ripple_m": 0.35
    },
    {
     "kind": "kit",
@@ -266,7 +267,25 @@
     ],
     "material": "glow",
     "color": "#FFC98A",
-    "emit": 1.2,
+    "emit": 3.0,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "position": [
+     0.0,
+     -60.0,
+     0.5
+    ],
+    "size": [
+     120.0,
+     0.5,
+     0.4
+    ],
+    "material": "glow",
+    "color": "#FFD2A0",
+    "emit": 1.5,
     "shadow": false
    },
    {
@@ -275,21 +294,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -14.399999999999999,
-     1.05,
+     -28.8,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -306,21 +325,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -12.0,
-     1.05,
+     -25.2,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -337,21 +356,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -9.6,
-     1.05,
+     -21.6,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -368,21 +387,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -7.199999999999999,
-     1.05,
+     -18.0,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -399,21 +418,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -4.8,
-     1.05,
+     -14.4,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -430,21 +449,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -2.4,
-     1.05,
+     -10.8,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -461,21 +480,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     0.0,
-     1.05,
+     -7.2,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -492,21 +511,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     2.4,
-     1.05,
+     -3.6,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -523,21 +542,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     4.8,
-     1.05,
+     0.0,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -554,21 +573,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     7.199999999999999,
-     1.05,
+     3.6,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -585,21 +604,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     9.6,
-     1.05,
+     7.2,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -616,21 +635,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     12.0,
-     1.05,
+     10.8,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -647,21 +666,21 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     14.399999999999999,
-     1.05,
+     14.4,
+     1.3499999999999999,
      0.0
     ],
     "size": [
-     0.7,
+     3.588,
      0.3,
      4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.6,
-    "vary": 0.35,
-    "vary_m": 1.6,
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
     "ties": [
      0.6,
      0.62
@@ -670,6 +689,130 @@
      0.336,
      0.334,
      0.396
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     18.0,
+     1.3499999999999999,
+     0.0
+    ],
+    "size": [
+     3.588,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.647,
+     0.836,
+     0.961
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     21.6,
+     1.3499999999999999,
+     0.0
+    ],
+    "size": [
+     3.588,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.976,
+     0.994,
+     0.79
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     25.2,
+     1.3499999999999999,
+     0.0
+    ],
+    "size": [
+     3.588,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.306,
+     0.176,
+     0.624
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     28.8,
+     1.3499999999999999,
+     0.0
+    ],
+    "size": [
+     3.588,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 1.0,
+    "bump": 2.4,
+    "vary": 0.5,
+    "vary_m": 3.5,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.546,
+     0.675,
+     0.094
     ]
    },
    {
@@ -687,8 +830,8 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.45,
-    "ease": 0.004
+    "roughness": 0.3,
+    "ease": 0.012
    },
    {
     "kind": "kit",
@@ -705,46 +848,7 @@
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.08,
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     -4.2,
-     -0.615,
-     0.0
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.037000000000000005,
-    "height": 0.03,
-    "material": "clay",
-    "color": "#1A1A1B",
-    "roughness": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     -4.2,
-     -0.615,
-     0.03
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.025,
-    "height": 0.002,
-    "material": "glow",
-    "color": "#FFF2DE",
-    "emit": 0.3,
+    "emit": 0.2,
     "shadow": false
    },
    {
@@ -762,8 +866,8 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.45,
-    "ease": 0.004
+    "roughness": 0.3,
+    "ease": 0.012
    },
    {
     "kind": "kit",
@@ -780,46 +884,7 @@
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.08,
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     -3.0,
-     -0.615,
-     0.0
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.037000000000000005,
-    "height": 0.03,
-    "material": "clay",
-    "color": "#1A1A1B",
-    "roughness": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     -3.0,
-     -0.615,
-     0.03
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.025,
-    "height": 0.002,
-    "material": "glow",
-    "color": "#FFF2DE",
-    "emit": 0.3,
+    "emit": 0.2,
     "shadow": false
    },
    {
@@ -837,8 +902,8 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.45,
-    "ease": 0.004
+    "roughness": 0.3,
+    "ease": 0.012
    },
    {
     "kind": "kit",
@@ -855,46 +920,7 @@
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.08,
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     -1.7999999999999998,
-     -0.615,
-     0.0
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.037000000000000005,
-    "height": 0.03,
-    "material": "clay",
-    "color": "#1A1A1B",
-    "roughness": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     -1.7999999999999998,
-     -0.615,
-     0.03
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.025,
-    "height": 0.002,
-    "material": "glow",
-    "color": "#FFF2DE",
-    "emit": 0.3,
+    "emit": 0.2,
     "shadow": false
    },
    {
@@ -912,8 +938,8 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.45,
-    "ease": 0.004
+    "roughness": 0.3,
+    "ease": 0.012
    },
    {
     "kind": "kit",
@@ -930,46 +956,7 @@
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.08,
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     -0.6,
-     -0.615,
-     0.0
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.037000000000000005,
-    "height": 0.03,
-    "material": "clay",
-    "color": "#1A1A1B",
-    "roughness": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     -0.6,
-     -0.615,
-     0.03
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.025,
-    "height": 0.002,
-    "material": "glow",
-    "color": "#FFF2DE",
-    "emit": 0.3,
+    "emit": 0.2,
     "shadow": false
    },
    {
@@ -987,8 +974,8 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.45,
-    "ease": 0.004
+    "roughness": 0.3,
+    "ease": 0.012
    },
    {
     "kind": "kit",
@@ -1005,46 +992,7 @@
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.08,
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     0.6,
-     -0.615,
-     0.0
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.037000000000000005,
-    "height": 0.03,
-    "material": "clay",
-    "color": "#1A1A1B",
-    "roughness": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     0.6,
-     -0.615,
-     0.03
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.025,
-    "height": 0.002,
-    "material": "glow",
-    "color": "#FFF2DE",
-    "emit": 0.3,
+    "emit": 0.2,
     "shadow": false
    },
    {
@@ -1062,8 +1010,8 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.45,
-    "ease": 0.004
+    "roughness": 0.3,
+    "ease": 0.012
    },
    {
     "kind": "kit",
@@ -1080,46 +1028,7 @@
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.08,
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     1.7999999999999998,
-     -0.615,
-     0.0
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.037000000000000005,
-    "height": 0.03,
-    "material": "clay",
-    "color": "#1A1A1B",
-    "roughness": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     1.7999999999999998,
-     -0.615,
-     0.03
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.025,
-    "height": 0.002,
-    "material": "glow",
-    "color": "#FFF2DE",
-    "emit": 0.3,
+    "emit": 0.2,
     "shadow": false
    },
    {
@@ -1137,8 +1046,8 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.45,
-    "ease": 0.004
+    "roughness": 0.3,
+    "ease": 0.012
    },
    {
     "kind": "kit",
@@ -1155,46 +1064,7 @@
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.08,
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     3.0,
-     -0.615,
-     0.0
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.037000000000000005,
-    "height": 0.03,
-    "material": "clay",
-    "color": "#1A1A1B",
-    "roughness": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     3.0,
-     -0.615,
-     0.03
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.025,
-    "height": 0.002,
-    "material": "glow",
-    "color": "#FFF2DE",
-    "emit": 0.3,
+    "emit": 0.2,
     "shadow": false
    },
    {
@@ -1212,8 +1082,8 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.45,
-    "ease": 0.004
+    "roughness": 0.3,
+    "ease": 0.012
    },
    {
     "kind": "kit",
@@ -1230,46 +1100,7 @@
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.08,
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     4.2,
-     -0.615,
-     0.0
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.037000000000000005,
-    "height": 0.03,
-    "material": "clay",
-    "color": "#1A1A1B",
-    "roughness": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "position": [
-     4.2,
-     -0.615,
-     0.03
-    ],
-    "rotate": [
-     -22,
-     0,
-     0
-    ],
-    "radius": 0.025,
-    "height": 0.002,
-    "material": "glow",
-    "color": "#FFF2DE",
-    "emit": 0.3,
+    "emit": 0.2,
     "shadow": false
    }
   ]
@@ -1302,24 +1133,6 @@
    "power_w": 202.5,
    "color": "#FFF2DE"
   },
-  "up0-horn": {
-   "type": "spot",
-   "position": [
-    -4.2,
-    -0.615,
-    0.035
-   ],
-   "target": [
-    -4.2,
-    -0.08,
-    1.1400000000000001
-   ],
-   "cone_deg": 16,
-   "blend": 0.5,
-   "radius_m": 0.01,
-   "power_w": 260.0,
-   "color": "#FFF2DE"
-  },
   "up1": {
    "type": "area",
    "size_m": [
@@ -1338,24 +1151,6 @@
    ],
    "spread_deg": 120,
    "power_w": 202.5,
-   "color": "#FFF2DE"
-  },
-  "up1-horn": {
-   "type": "spot",
-   "position": [
-    -3.0,
-    -0.615,
-    0.035
-   ],
-   "target": [
-    -3.0,
-    -0.08,
-    1.1400000000000001
-   ],
-   "cone_deg": 16,
-   "blend": 0.5,
-   "radius_m": 0.01,
-   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up2": {
@@ -1378,24 +1173,6 @@
    "power_w": 202.5,
    "color": "#FFF2DE"
   },
-  "up2-horn": {
-   "type": "spot",
-   "position": [
-    -1.7999999999999998,
-    -0.615,
-    0.035
-   ],
-   "target": [
-    -1.7999999999999998,
-    -0.08,
-    1.1400000000000001
-   ],
-   "cone_deg": 16,
-   "blend": 0.5,
-   "radius_m": 0.01,
-   "power_w": 260.0,
-   "color": "#FFF2DE"
-  },
   "up3": {
    "type": "area",
    "size_m": [
@@ -1414,24 +1191,6 @@
    ],
    "spread_deg": 120,
    "power_w": 202.5,
-   "color": "#FFF2DE"
-  },
-  "up3-horn": {
-   "type": "spot",
-   "position": [
-    -0.6,
-    -0.615,
-    0.035
-   ],
-   "target": [
-    -0.6,
-    -0.08,
-    1.1400000000000001
-   ],
-   "cone_deg": 16,
-   "blend": 0.5,
-   "radius_m": 0.01,
-   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up4": {
@@ -1454,24 +1213,6 @@
    "power_w": 202.5,
    "color": "#FFF2DE"
   },
-  "up4-horn": {
-   "type": "spot",
-   "position": [
-    0.6,
-    -0.615,
-    0.035
-   ],
-   "target": [
-    0.6,
-    -0.08,
-    1.1400000000000001
-   ],
-   "cone_deg": 16,
-   "blend": 0.5,
-   "radius_m": 0.01,
-   "power_w": 260.0,
-   "color": "#FFF2DE"
-  },
   "up5": {
    "type": "area",
    "size_m": [
@@ -1490,24 +1231,6 @@
    ],
    "spread_deg": 120,
    "power_w": 202.5,
-   "color": "#FFF2DE"
-  },
-  "up5-horn": {
-   "type": "spot",
-   "position": [
-    1.7999999999999998,
-    -0.615,
-    0.035
-   ],
-   "target": [
-    1.7999999999999998,
-    -0.08,
-    1.1400000000000001
-   ],
-   "cone_deg": 16,
-   "blend": 0.5,
-   "radius_m": 0.01,
-   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "up6": {
@@ -1530,24 +1253,6 @@
    "power_w": 202.5,
    "color": "#FFF2DE"
   },
-  "up6-horn": {
-   "type": "spot",
-   "position": [
-    3.0,
-    -0.615,
-    0.035
-   ],
-   "target": [
-    3.0,
-    -0.08,
-    1.1400000000000001
-   ],
-   "cone_deg": 16,
-   "blend": 0.5,
-   "radius_m": 0.01,
-   "power_w": 260.0,
-   "color": "#FFF2DE"
-  },
   "up7": {
    "type": "area",
    "size_m": [
@@ -1566,24 +1271,6 @@
    ],
    "spread_deg": 120,
    "power_w": 202.5,
-   "color": "#FFF2DE"
-  },
-  "up7-horn": {
-   "type": "spot",
-   "position": [
-    4.2,
-    -0.615,
-    0.035
-   ],
-   "target": [
-    4.2,
-    -0.08,
-    1.1400000000000001
-   ],
-   "cone_deg": 16,
-   "blend": 0.5,
-   "radius_m": 0.01,
-   "power_w": 260.0,
    "color": "#FFF2DE"
   },
   "moon": {
@@ -1615,8 +1302,8 @@
    0.85,
    16.0
   ],
-  "density": 0.007,
-  "anisotropy": 0.3
+  "density": 0.018,
+  "anisotropy": 0.55
  },
  "camera": {
   "position": [

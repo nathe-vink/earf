@@ -35,7 +35,7 @@ WARM = '#FFF2DE'
 # post: no white point, only a shoulder above 205 that rolls the hot glow inside a cabinet into 246 keeping its hue (PBR
 # Neutral alone bleaches a lit red toward white), a touch of clarity for the concrete's boards, a cored sharpen
 FINISH = {'enabled': True, 'white_in': 205, 'white_out': 205, 'peak': 246, 'contrast': 0.05, 'clarity': 0.1, 'sharpen': 0.3}
-LENS = 0.08                         # the plinth lens's glow: soft, never a clipped white line                    # the uplights' lamps: a warm white LED, 3500 K or so
+LENS = 0.2                         # the plinth lens's glow: soft, never a clipped white line                    # the uplights' lamps: a warm white LED, 3500 K or so
 
 
 def kit(fn, pos, **kw):
@@ -51,15 +51,16 @@ def fixture(x, y, lens_r=0.05, can_h=0.05, rotate=(0, 0, 0), glow=6.0):
              'material': 'glow', 'color': WARM, 'emit': glow, 'shadow': False}]
 
 
-def placement(kind, x=0.0, y=0.0, z0=0.0, power=1.0, horn=1.0):
+def placement(kind, x=0.0, y=0.0, z0=0.0, power=1.0, horn=0.0):
     """The lamp and its fitting for one speaker standing at (x, y) with its base at z0, by placement:
     under: the speaker on a low black plinth whose top is a frosted lens, a spot inside it shining straight up;
     front: a floor uplight a third of a metre in front, tilted back so its beam crosses the face and the horn and
            climbs the wall behind;
     graze: a floor uplight hard against the face, aimed almost straight up, grazing the front panel and the horn."""
     if kind == 'under':
-        props = [{'kind': 'kit', 'shape': 'box', 'position': [x, y, 0.0], 'size': [W + 0.10, D + 0.10, z0], 'material': 'clay',
-                  'color': '#141415', 'roughness': 0.45, 'ease': 0.004},
+        # the plinth runs on 25 cm in front of the speaker, a lip that holds the horn's emitter (below)
+        props = [{'kind': 'kit', 'shape': 'box', 'position': [x, y - LIP / 2, 0.0], 'size': [W + 0.10, D + 0.10 + LIP, z0],
+                  'material': 'clay', 'color': '#141415', 'roughness': 0.3, 'ease': 0.012},
                  {'kind': 'kit', 'shape': 'box', 'position': [x, y, z0 - 0.002], 'size': [W + 0.01, D + 0.01, 0.003],
                   'material': 'glow', 'color': WARM, 'emit': LENS, 'shadow': False}]
         # the lamp: a flat panel of LEDs under the lens, the speaker's footprint, on the lens 10 mm below the cabinet's bottom (its feet are 12 mm) (a flat lamp, so no
@@ -67,13 +68,13 @@ def placement(kind, x=0.0, y=0.0, z0=0.0, power=1.0, horn=1.0):
         # bottom panel into the batts)
         lamp = {'type': 'area', 'size_m': [W - 0.08, D - 0.08], 'position': [x, y, z0 + 0.002], 'target': [x, y, z0 + 3.0],
                 'spread_deg': 120, 'power_w': 450.0 * power, 'color': WARM}
-        # and the fitting's second emitter, in a small can on the floor in front: a narrow spot aimed up at the horn, which
-        # the cabinet hides from the lamp under it (the batts stop all of that light), so the horn's tinted resin glows
+        # and the fitting's second emitter, sunk in the plinth's lip: a narrow spot aimed up at the horn's front edge,
+        # which the cabinet hides from the lamp under it (the batts stop all of that light), so the horn's resin glows;
+        # its line clears the cabinet's front face
         if horn > 0:
-            fy = y - D / 2 - 0.40
-            props += fixture(x, fy, lens_r=0.025, can_h=0.03, rotate=(-22, 0, 0), glow=0.3)
-            lamps = {'': lamp, '-horn': {'type': 'spot', 'position': [x, fy, 0.035], 'target': [x, y - 0.08, z0 + 1.06],
-                                         'cone_deg': 16, 'blend': 0.5, 'radius_m': 0.01, 'power_w': 260.0 * horn, 'color': WARM}}
+            fy = y - D / 2 - LIP + 0.03
+            lamps = {'': lamp, '-horn': {'type': 'spot', 'position': [x, fy, z0 + 0.002], 'target': [x, y - 0.12, z0 + 1.08],
+                                         'cone_deg': 18, 'blend': 0.7, 'radius_m': 0.008, 'power_w': 420.0 * horn, 'color': WARM}}
             return props, lamps
     elif kind == 'front':
         fy = y - D / 2 - 0.34
@@ -91,6 +92,7 @@ def placement(kind, x=0.0, y=0.0, z0=0.0, power=1.0, horn=1.0):
 
 
 SLIDE = 'under'                     # the slides' placement, from the study (see the README's notes)
+LIP = 0.0                           # a lip on the plinth for a horn emitter (none: the horn's mouth faces forward and the cabinet's top hides its underside from any lamp in the plinth; the moon lights it)
 Z0 = 0.08                           # the under-lamp's plinth: the speaker stands on its lens
 WALL_Y = 1.0                        # the wall's face, a metre behind the speaker's centre
 
@@ -100,22 +102,22 @@ def frame(key, kind=SLIDE, size=(1600, 1600)):
     z0 = Z0 if kind == 'under' else 0.0
     props, lamps = placement(kind, z0=z0)
     if kind == 'under':                                   # a narrower spread for the slide: the pool centred over the speaker
-        lamps[''] = {**lamps[''], 'spread_deg': 60, 'power_w': 340.0}
+        lamps[''] = {**lamps[''], 'spread_deg': 45, 'power_w': 520.0}
     s = {'product': {'def': PRODUCT, 'flavour': FLAVOUR[key],
                      'instances': [{'flavour': FLAVOUR[key], 'position': [0, 0, z0], 'rotate_z': 0, 'hide': ['cloth-disc']}]},
          'set': {'kind': 'stage', 'props': [
              kit('wall', [0.0, WALL_Y + 0.25, 0.0], size=[9.0, 0.5, 7.0], **dict(CONCRETE, bump=3.5, tex_scale=1.0, vary=0.2)),
-             kit('paving', [0.0, -1.5, 0.0], size=[12.0, 9.0], texture='concrete_pavement', res='2k', wet=0.6, puddle_m=0.9, vary=0.2),
+             kit('paving', [0.0, -1.5, 0.0], size=[12.0, 9.0], texture='granite_tile', res='2k', wet=0.35, puddle_m=2.5, vary=0.2),
          ] + props},
          'sky': dict(NIGHT, strength=0.04),
          'lights': {
              **{'up' + k: v for k, v in lamps.items()},
              # moonlight: a faint cool wash from high in front, so the concrete's boards read where the lamp does not reach
-             'moon': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-2.2, 0.8, 5.0], 'target': [0.0, 0.0, 0.8],
-                      'irradiance': 0.55, 'color': '#D4DCF2'}},
+             'moon': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-1.0, -2.0, 5.0], 'target': [0.0, 0.0, 0.8],
+                      'irradiance': 0.35, 'color': '#D4DCF2'}},
          'haze': {'box_m': [-2.5, -0.6, -0.05, 2.5, WALL_Y - 0.02, 4.0], 'density': 0.028, 'anisotropy': 0.7},
-         'camera': {'position': [0.25, -3.6, 0.75], 'target': [0.0, 0.6, 1.05], 'lens_mm': 45.0, 'level': True},
-         'render': dict(RENDER, exposure=1.1),
+         'camera': {'position': [0.2, -3.6, 0.8], 'target': [0.0, 0.6, 1.15], 'lens_mm': 50.0, 'level': True},
+         'render': dict(RENDER, exposure=1.35),
          'finish': dict(FINISH),
          'size': list(size),
          'title': f'barkhorn, {NAME[key]}, uplit ({kind}) before a concrete wall'}
@@ -126,30 +128,33 @@ def facade(size=(2880, 1200), camera=None, exposure=1.0):
     """The night hero: the eight in a row on the quay before an opera house's concrete river front, each on its uplight.
     They stand 1.2 m out from the wall: each throws its own V, the fans meeting above the speakers (at 2.6 m they merged
     into one rainbow gradient and the eight were lost)."""
-    gap = 1.2                                             # the speakers' spacing
+    gap = 1.2                                             # the speakers' spacing (0.9 merged the washes into one gradient)
     xs = [(i - 3.5) * gap for i in range(8)]
     wall_y = 1.2                                          # the wall's face
     rnd = random.Random(31)
-    def pour(pos, size):                                  # one block of the wall, its own stretch of the texture
-        return kit('wall', pos, size=size, **dict(CONCRETE, vary=0.35, vary_m=1.6, bump=1.6,
+    def pour(pos, size):                                  # one pour of the wall, its own stretch of the texture
+        return kit('wall', pos, size=size, **dict(CONCRETE, tex_scale=1.0, vary=0.5, vary_m=3.5, bump=2.4,
                                                   tex_offset=[round(rnd.uniform(0, 1), 3), round(rnd.uniform(0, 1), 3), round(rnd.uniform(0, 1), 3)]))
     props = [
-        # the wall, board-formed concrete: a plinth course, shallow pilasters between pairs of speakers and far along the
-        # front, a deep cornice at 4.8 m, and above it the night sky (the frame has to say it is outdoors)
-        pour([0.0, wall_y + 0.6, 0.0], [60.0, 1.2, 5.6]),
+        # the wall, board-formed concrete: one face in pours 3.6 m wide, a 12 mm joint between them falling between
+        # speakers (no pilasters: their edges cut the washes into hard columns), a plinth course, a deep cornice at
+        # 4.8 m, and above it the night sky (the frame has to say it is outdoors)
+        pour([0.0, wall_y + 0.75, 0.0], [60.0, 1.2, 5.6]),
         pour([0.0, wall_y - 0.12, 0.0], [60.0, 0.24, 0.6]),
         pour([0.0, wall_y - 0.35, 4.8], [60.0, 0.7, 0.8]),
-        # the quay: wet granite flags, a wet granite coping catching the light, the river a step below
+        # the quay: wet granite flags, a granite kerb, the river just below
         kit('paving', [0.0, -0.4, 0.0], size=[60.0, 6.0], texture='granite_tile', res='2k', wet=0.6, puddle_m=0.4, vary=0.2),
-        {'kind': 'kit', 'shape': 'box', 'position': [0.0, -3.48, -0.04], 'size': [60.0, 0.16, 0.04], 'material': 'clay',
-         'color': '#8A8780', 'roughness': 0.25},
-        kit('water', [0.0, -18.0, -0.04], size=[80.0, 29.0], ripple=0.25, ripple_m=0.6),
-        # the city across the river, far behind the camera's back, is felt only as a warm glow low on the water
+        {'kind': 'kit', 'shape': 'box', 'position': [0.0, -3.575, -0.122], 'size': [60.0, 0.35, 0.12], 'material': 'pbr',
+         'texture': 'granite_tile', 'res': '2k', 'ease': 0.01},
+        kit('water', [0.0, -18.0, -0.04], size=[80.0, 29.0], ripple=0.35, ripple_m=0.35),
+        # the city across the river, behind the camera's back, felt only as warm glows low on the water, near and far
         {'kind': 'kit', 'shape': 'box', 'position': [0.0, -40.0, -0.4], 'size': [80.0, 0.5, 0.3], 'material': 'glow',
-         'color': '#FFC98A', 'emit': 1.2, 'shadow': False},
+         'color': '#FFC98A', 'emit': 3.0, 'shadow': False},
+        {'kind': 'kit', 'shape': 'box', 'position': [0.0, -60.0, 0.5], 'size': [120.0, 0.5, 0.4], 'material': 'glow',
+         'color': '#FFD2A0', 'emit': 1.5, 'shadow': False},
     ]
-    for i in range(-6, 7):                                # pilasters every two speakers, on along the front, up to the cornice
-        props.append(pour([i * 2 * gap, wall_y - 0.15, 0.0], [0.7, 0.3, 4.8]))
+    for i in range(-8, 9):                                # the pours
+        props.append(pour([i * 3.6, wall_y + 0.15, 0.0], [3.588, 0.3, 4.8]))
     lights, insts = {}, []
     for i, (k, x) in enumerate(zip(KEYS, xs)):
         pr, lamps = placement(SLIDE, x=x, y=0.0, z0=Z0, power=0.45)
@@ -164,8 +169,8 @@ def facade(size=(2880, 1200), camera=None, exposure=1.0):
          'set': {'kind': 'stage', 'props': props},
          'sky': dict(NIGHT, strength=0.12),
          'lights': lights,
-         'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.35, 16.0], 'density': 0.007, 'anisotropy': 0.3},
-         'camera': camera or {'position': [0.0, -9.4, 0.6], 'target': [0.0, 0.0, 1.3], 'lens_mm': 27.0, 'level': True},
+         'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.35, 16.0], 'density': 0.018, 'anisotropy': 0.55},
+         'camera': camera or {'position': [0.0, -9.4, 0.6], 'target': [0.0, 0.0, 1.1], 'lens_mm': 33.0, 'level': True},
          'render': dict(RENDER, samples=160, exposure=exposure),
          'finish': dict(FINISH),
          'size': list(size),
