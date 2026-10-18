@@ -26,7 +26,7 @@ FAR = [(-9.0, 15.0, 1.4), (-5.5, 20.0, 1.7), (4.5, 16.0, 1.3), (8.5, 18.5, 1.6),
 REDWOOD = '#8A4126'                # the bark's cinnamon red, which the dawn redwood's scan lacks
 SUN = {'azimuth_deg': -68.0, 'elevation_deg': 30.0, 'irradiance': 22.0, 'angle_deg': 0.6, 'color': '#FFE6B8'}
 CANOPY_Z = 16.0
-SUNLIT2 = [(0.0, 0.0, 0.8, 1.1), (-0.5, 6.0, 1.5, 1.2), (3.0, 7.0, 1.5, 1.0), (-4.0, 8.0, 2.0, 1.0)]
+SUNLIT2 = [(0.0, 0.0, 0.8, 1.1), (2.6, 4.0, 1.0, 0.6), (3.5, 6.5, 1.0, 0.5), (-1.75, 1.5, 3.0, 0.25), (0.7, -1.4, 0.1, 0.35)]
 SUNLIT = [(0.0, 0.0, 0.85, 0.75), (-1.0, 3.4, 0.0, 0.9), (2.0, 4.6, 0.0, 1.0)]   # where the sun gets through [x, y, z, r]
 
 
@@ -37,7 +37,7 @@ def gap_for(x, y, z, r, centre):
     gx, gy = x + d * math.sin(az), y - d * math.cos(az)
     return [round(gx - centre[0], 3), round(gy - centre[1], 3), r]
 LOG_A, LOG_B = (-4.6, 2.6, 0.3), (-0.75, 1.7, 0.26)
-LOG2_A, LOG2_B = (-3.2, 1.9, 0.22), (3.4, 2.3, 0.2)    # A2: the log across behind, its ends behind the trunk and the ferns     # the fallen log's axis: its foot (left) to its broken end
+LOG2_A, LOG2_B = (-1.2, 1.55, 0.22), (4.6, 5.4, 0.2)    # A2: the log across behind, its ends behind the trunk and the ferns     # the fallen log's axis: its foot (left) to its broken end
 
 
 def ext(fn, position=(0, 0, 0), **k):
@@ -72,12 +72,13 @@ def ferns(seed=3):
         k = 0
         while k < n:
             x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
-            if x * x + y * y < 0.75 ** 2 or _seg_dist(x, y, LOG2_A, LOG2_B) < 0.5 or math.hypot(x - 1.55, y + 0.55) < 0.25:
+            if x * x + y * y < 0.75 ** 2 or _seg_dist(x, y, LOG2_A, LOG2_B) < 0.5 or math.hypot(x - 0.7, y + 1.4) < 0.4:
                 continue
             pl.append([round(x, 3), round(y, 3), 0.0, round(rnd.uniform(s0, s1), 3), round(rnd.uniform(0, 360), 1),
                        rnd.choice([0, 1, 2, 3]), round(rnd.uniform(-12, 12), 1)])
             k += 1
-    pl.append([2.0, -2.6, 0.0, 1.2, 200, 2])            # a frond close to the lens at the right edge, in the blur
+    pl.append([2.0, -2.6, 0.0, 1.2, 200, 2])
+    pl.append([-1.3, 1.25, 0.0, 1.5, 40, 1])             # over the log's near end            # a frond close to the lens at the right edge, in the blur
     return [ext('plants', model='fern_02', place=pl, seed=seed)]
 
 
@@ -131,13 +132,24 @@ def shot():
                  end='acg:TreeEnd003', end_tint='#3A2A20', end_tint_mix=0.7),
              ext('strew', model='moss_01', on=['-moss'], density=3500, up=0.2, scale=[0.9, 2.2], patch=0.3,
                  patch_cut=0.2, seed=3),
-             # one fly agaric, small, at the fern edge to the right: the quiet accent
-             ext('toadstool', (1.55, -0.55, -0.008), height=0.14, cap=[0.07, 0.035], stem=0.014, lean=[0.012, 0.0], seed=3),
+             # two fly agarics in the lower right, in partial sun: the quiet accent
+             ext('toadstool', (0.62, -1.45, -0.008), height=0.15, cap=[0.075, 0.036], stem=0.015, lean=[0.012, 0.0], seed=3),
+             ext('toadstool', (0.78, -1.38, -0.008), height=0.09, cap=[0.045, 0.034], stem=0.011, lean=[-0.006, 0.0], seed=4),
+             # the floor in 3D near the speaker: bark crumbs, twigs and moss tufts, banked against its plinth
+             ext('strew', model='bark_debris_01', on=['prop0-kit'], density=2.0, up=0.5, scale=[0.22, 0.4], seed=31,
+                 within=[0.0, -0.3, 3.2], avoid=[[0.0, 0.0, 0.33]]),
+             ext('strew', model='dry_branches_medium_01', on=['prop0-kit'], density=0.35, up=0.5, scale=[0.4, 0.8], seed=32,
+                 within=[0.0, -0.5, 3.5], avoid=[[0.0, 0.0, 0.45]]),
+             ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.8, 1.4], patch=0.3,
+                 patch_cut=0.75, seed=33, within=[0.0, -0.3, 3.5], avoid=[[0.0, 0.0, 0.3]]),
+             ext('strew', model='moss_01', on=['prop0-kit'], density=12000, up=0.5, scale=[0.7, 1.3], seed=34,
+                 within=[0.0, 0.0, 0.42], avoid=[[0.0, 0.0, 0.31]]),
+             ext('darken', on=['prop0-kit'], value=0.68, rough=0.85),
              # the light: one gap in the canopy over the speaker, a few over the bank behind; light mist from 3 m back
-             ext('canopy', (0.0, 4.0, CANOPY_Z), size=[70.0, 70.0], gap=2.0, open=0.04,
+             ext('canopy', (0.0, 4.0, CANOPY_Z), size=[70.0, 70.0], gap=2.0, open=0.02,
                  holes=[gap_for(x, y, z, r, (0.0, 4.0)) for x, y, z, r in SUNLIT2]),
-             ext('mist', (0.0, 22.0, -0.2), size=[50.0, 38.0, 16.0], density=0.025, top=0.4, wisp=2.5, color='#F2F4EA',
-                 anisotropy=0.4)]
+             ext('mist', (0.0, 21.0, -0.2), size=[50.0, 37.0, 16.0], density=0.06, top=0.4, wisp=2.5, color='#F2F4EA',
+                 anisotropy=0.1)]
     props += ferns()
     # the bank behind: a mound of the same duff, ferns over its face, so the ground rises into the photographed forest
     bx, by, bz, ba, bb, bc = BANK
@@ -159,7 +171,7 @@ def shot():
     lights = {'reflector': area(35, 12, 3.0, 1.2, '#EEF0E0', (2.0, 1.5), (0.0, 0.0, 1.05)),
               'card': area(60, 45, 2.5, 1.2, '#F0F2E6', (1.0, 1.0), (0.0, 0.0, 1.1))}
     cam = camera(height=0.8, distance=6.4, azimuth=18.0, lens=75.0, target=(0.0, 0.0, 0.64), fstop=2.8)
-    return frame('poison', props, cam, sky(SKY2, rotation_deg=rot, strength=0.45, res='4k'),
+    return frame('poison', props, cam, sky(SKY2, rotation_deg=rot, strength=0.3, res='4k'),
                  'barkhorn, Poison, in a redwood rainforest', lights=lights,
                  sun=SUN, rotate_z=-20.0,
                  position=(0.0, 0.0, -0.022), fin=finish(contrast=0.08, clarity=0.06, vignette=0.2))

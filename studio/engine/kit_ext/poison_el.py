@@ -183,10 +183,10 @@ def toadstool(bpy, name, p, kit):
     dome[-1] = (0.0, H)
     cap = lathe(dome, 96)
     warts = bmesh.new()
-    for k in range(p.get('warts', 22)):
+    for k in range(p.get('warts', 40)):
         th = rnd.uniform(0.15, 1.3); ph = rnd.uniform(0, 2 * math.pi)
         r = R * math.cos(th) ** 0.8; z = z0 + 0.1 * CH + 0.9 * CH * math.sin(th) ** 1.2
-        s = R * rnd.uniform(0.03, 0.065)
+        s = R * rnd.uniform(0.018, 0.05)
         tmp = bmesh.new(); kit._sphere(tmp, (0, 0, 0), (s, s * rnd.uniform(0.7, 1.0), s * 0.5), 12)
         nrm = Vector((math.cos(ph) * math.cos(th), math.sin(ph) * math.cos(th), math.sin(th) * 1.4)).normalized()
         mt = Matrix.Translation(Vector((r * math.cos(ph), r * math.sin(ph), z))) @ nrm.to_track_quat('Z', 'Y').to_matrix().to_4x4()
@@ -194,9 +194,9 @@ def toadstool(bpy, name, p, kit):
             v.co = mt @ v.co
         me = bpy.data.meshes.new('_w'); tmp.to_mesh(me); tmp.free(); warts.from_mesh(me); bpy.data.meshes.remove(me)
     lx, ly = p.get('lean', [0.0, 0.0])
-    cream = _mat(bpy, f'{name}-cream', (0.78, 0.72, 0.6), 0.65, sss=0.3, sss_col=(0.004, 0.003, 0.002), bump=0.3, bump_size=0.002)
-    red = _mat(bpy, f'{name}-cap', (0.55, 0.035, 0.02), 0.38, sss=0.15, sss_col=(0.006, 0.002, 0.001), bump=0.15,
-               bump_size=0.004, coat=0.25)
+    cream = _mat(bpy, f'{name}-cream', (0.6, 0.55, 0.44), 0.7, sss=0.3, sss_col=(0.004, 0.003, 0.002), bump=0.3, bump_size=0.002)
+    red = _mat(bpy, f'{name}-cap', (0.36, 0.022, 0.012), 0.32, sss=0.1, sss_col=(0.006, 0.002, 0.001), bump=0.35,
+               bump_size=0.006, coat=0.5)
     out = []
     for nm, bm, mat in (('stem', stem, cream), ('ring', ring, cream), ('cap', cap, red), ('warts', warts, cream)):
         for v in bm.verts:
@@ -356,6 +356,15 @@ def strew(bpy, name, p, kit):
     for o in list(bpy.context.scene.objects):
         if o.type == 'MESH' and any(pre in o.name for pre in p['on']):
             obs.append(o)
+    for o in obs:
+        md = o.modifiers.new(name, 'NODES'); md.node_group = _strew_group(bpy, name, p, col, o.location)
+    return []
+
+
+def _strew_group(bpy, name, p, col, at):
+    """The geometry-node group strewing `col`'s plants for an object located at `at` (positions inside a modifier are
+    the object's own, so world points in `avoid` and `within` are moved into its frame)."""
+    ox, oy = at[0], at[1]
     ng = bpy.data.node_groups.new(name, 'GeometryNodeTree')
     ng.interface.new_socket('Geometry', in_out='INPUT', socket_type='NodeSocketGeometry')
     ng.interface.new_socket('Geometry', in_out='OUTPUT', socket_type='NodeSocketGeometry')
@@ -379,13 +388,23 @@ def strew(bpy, name, p, kit):
         sel = an.outputs['Boolean']
     for x, y, r in p.get('avoid', []):
         sub = N.new('ShaderNodeVectorMath'); sub.operation = 'DISTANCE'
-        Lk(pos.outputs['Position'], sub.inputs[0]); sub.inputs[1].default_value = (x, y, 0.0)
+        Lk(pos.outputs['Position'], sub.inputs[0]); sub.inputs[1].default_value = (x - ox, y - oy, 0.0)
         # distance in the plane: flatten z by comparing against a point at the same height
         mulz = N.new('ShaderNodeVectorMath'); mulz.operation = 'MULTIPLY'; mulz.inputs[1].default_value = (1, 1, 0)
         Lk(pos.outputs['Position'], mulz.inputs[0]); Lk(mulz.outputs['Vector'], sub.inputs[0])
         c3 = N.new('FunctionNodeCompare'); c3.data_type = 'FLOAT'; c3.operation = 'GREATER_THAN'; c3.inputs['B'].default_value = r
         Lk(sub.outputs['Value'], c3.inputs['A'])
         an = N.new('FunctionNodeBooleanMath'); an.operation = 'AND'; Lk(sel, an.inputs[0]); Lk(c3.outputs['Result'], an.inputs[1])
+        sel = an.outputs['Boolean']
+    if p.get('within'):                                   # only within [x, y, r] (in plan)
+        x, y, r = p['within']
+        mulz = N.new('ShaderNodeVectorMath'); mulz.operation = 'MULTIPLY'; mulz.inputs[1].default_value = (1, 1, 0)
+        Lk(pos.outputs['Position'], mulz.inputs[0])
+        dd = N.new('ShaderNodeVectorMath'); dd.operation = 'DISTANCE'; Lk(mulz.outputs['Vector'], dd.inputs[0])
+        dd.inputs[1].default_value = (x - ox, y - oy, 0.0)
+        c4 = N.new('FunctionNodeCompare'); c4.data_type = 'FLOAT'; c4.operation = 'LESS_THAN'; c4.inputs['B'].default_value = r
+        Lk(dd.outputs['Value'], c4.inputs['A'])
+        an = N.new('FunctionNodeBooleanMath'); an.operation = 'AND'; Lk(sel, an.inputs[0]); Lk(c4.outputs['Result'], an.inputs[1])
         sel = an.outputs['Boolean']
     Lk(sel, dist.inputs['Selection'])
     ci = N.new('GeometryNodeCollectionInfo'); ci.inputs['Collection'].default_value = col
@@ -409,6 +428,35 @@ def strew(bpy, name, p, kit):
     Lk(rz.outputs['Value'], rot.inputs['Rotation']); rot.inputs['Local Space'].default_value = True
     j = N.new('GeometryNodeJoinGeometry'); Lk(gi.outputs['Geometry'], j.inputs['Geometry']); Lk(rot.outputs['Instances'], j.inputs['Geometry'])
     Lk(j.outputs['Geometry'], go.inputs['Geometry'])
-    for o in obs:
-        md = o.modifiers.new(name, 'NODES'); md.node_group = ng
+    return ng
+
+
+# --- a grade on a photographed material ------------------------------------------------------------------------------
+def darken(bpy, name, p, kit):
+    """Multiply the base colour of every material on the objects whose names hold any of `on` by `value` (a wetter,
+    darker duff than the scan's), and scale their roughness by `rough` (wet ground is a little glossier)."""
+    done = set()
+    for o in bpy.context.scene.objects:
+        if o.type != 'MESH' or not any(k in o.name for k in p['on']):
+            continue
+        for m in o.data.materials:
+            if not m or not m.use_nodes or m.name in done:
+                continue
+            done.add(m.name)
+            nt = m.node_tree
+            b = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+            if b is None:
+                continue
+            for sock, val in (('Base Color', p.get('value', 0.7)), ('Roughness', p.get('rough', 1.0))):
+                s = b.inputs[sock]
+                if not s.links or val == 1.0:
+                    continue
+                src = s.links[0].from_socket
+                if sock == 'Base Color':
+                    mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'
+                    mx.inputs['Factor'].default_value = 1.0; mx.inputs['B'].default_value = (val, val, val, 1.0)
+                    nt.links.new(src, mx.inputs['A']); nt.links.new(mx.outputs['Result'], s)
+                else:
+                    mm = nt.nodes.new('ShaderNodeMath'); mm.operation = 'MULTIPLY'; mm.inputs[1].default_value = val
+                    nt.links.new(src, mm.inputs[0]); nt.links.new(mm.outputs['Value'], s)
     return []
