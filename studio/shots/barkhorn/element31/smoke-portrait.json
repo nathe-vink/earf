@@ -372,7 +372,7 @@
      1.0,
      2.4
     ],
-    "density": 3.5,
+    "density": 5.0,
     "seed": 11,
     "scale": 0.45,
     "cut": 0.38,
@@ -402,7 +402,7 @@
      1.55,
      2.4
     ],
-    "density": 2.975,
+    "density": 4.0,
     "seed": 12,
     "scale": 0.53,
     "cut": 0.38,
@@ -432,7 +432,7 @@
      2.1,
      2.4
     ],
-    "density": 2.5287499999999996,
+    "density": 3.2000000000000006,
     "seed": 13,
     "scale": 0.61,
     "cut": 0.38,
@@ -462,7 +462,7 @@
      2.6500000000000004,
      2.4
     ],
-    "density": 2.1494375,
+    "density": 2.5600000000000005,
     "seed": 14,
     "scale": 0.69,
     "cut": 0.38,
@@ -492,7 +492,7 @@
      3.2,
      2.4
     ],
-    "density": 1.8270218749999996,
+    "density": 2.0480000000000005,
     "seed": 15,
     "scale": 0.77,
     "cut": 0.38,
@@ -522,7 +522,7 @@
      3.75,
      2.4
     ],
-    "density": 1.5529685937499997,
+    "density": 1.6384000000000003,
     "seed": 16,
     "scale": 0.8500000000000001,
     "cut": 0.38,
@@ -552,7 +552,7 @@
      4.300000000000001,
      2.4
     ],
-    "density": 1.3200233046874998,
+    "density": 1.3107200000000006,
     "seed": 17,
     "scale": 0.9299999999999999,
     "cut": 0.38,
@@ -641,7 +641,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 2.0,
+   "irradiance": 4.0,
    "color": "#A9B4C2",
    "orbit": {
     "azimuth_deg": -20,
@@ -691,7 +691,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 7.0,
+   "irradiance": 14.0,
    "color": "#C9BBA8",
    "orbit": {
     "azimuth_deg": -25,
@@ -741,7 +741,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 42.0,
+   "irradiance": 55.0,
    "color": "#FFB978",
    "orbit": {
     "azimuth_deg": -150,
@@ -774,11 +774,11 @@
     0.0,
     0.8
    ],
-   "irradiance": 26.0,
-   "color": "#FFB978",
+   "irradiance": 45.0,
+   "color": "#FF8A40",
    "orbit": {
-    "azimuth_deg": 150,
-    "elevation_deg": 14,
+    "azimuth_deg": 144,
+    "elevation_deg": 12,
     "distance_m": 3.0
    },
    "receivers": [
@@ -801,11 +801,30 @@
    "position": [
     3.6,
     5.0,
-    0.25
+    0.3
    ],
-   "power_w": 80,
+   "power_w": 250,
    "color": "#FF6A20",
    "radius_m": 0.4
+  },
+  "emberglow": {
+   "type": "area",
+   "size_m": [
+    1.0,
+    1.0
+   ],
+   "position": [
+    3.6,
+    5.0,
+    0.06
+   ],
+   "target": [
+    3.6,
+    5.0,
+    2.0
+   ],
+   "power_w": 150,
+   "color": "#FF7A30"
   },
   "plumefill": {
    "type": "area",
@@ -823,7 +842,7 @@
     5.0,
     3.0
    ],
-   "irradiance": 5.0,
+   "irradiance": 8.0,
    "color": "#C9CED6",
    "receivers": [
     "prop7-kit",
@@ -843,7 +862,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 0.0,
+  "exposure": 0.3,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Smoke, woodsmoke at dawn (4:5)",
@@ -877,21 +896,21 @@
   "kind": "hdri",
   "polyhaven": "misty_pines",
   "rotation_deg": 0.0,
-  "strength": 0.15,
+  "strength": 0.35,
   "res": "4k"
  },
  "sun": {
   "azimuth_deg": 150.0,
   "elevation_deg": 24.0,
-  "irradiance": 30.0,
+  "irradiance": 40.0,
   "angle_deg": 0.5,
-  "color": "#FFB978"
+  "color": "#FFCC9A"
  },
  "finish": {
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.04,
+  "contrast": 0.1,
   "clarity": 0.0,
   "sharpen": 0.0,
   "sharpen_px": 0.6,
@@ -916,6 +935,6 @@
   ],
   "density": 0.018,
   "anisotropy": 0.7,
-  "color": "#D8D2CA"
+  "color": "#C4CAD2"
  }
 }

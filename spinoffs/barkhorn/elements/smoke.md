@@ -139,3 +139,23 @@ coordinator asked for a re-finish from the raw frames, with no re-render.
 
 The portrait (rendered by the coordinator's helper, 457212b) got the same re-finish. Both finals in `element31/` are now
 the re-finished frames.
+
+## Round C (the owner, 2026-10-18 17:30)
+
+The owner, verbatim: "Smoke's still looks bad. Doesn't look like a smokey environment and the speaker is too stark and
+crisp relative to the environment."
+
+The place stays a pine wood at dawn, now with a **smouldering burn pile** in frame, 3.6 m right and 5 m behind the
+speaker (`burnpile` in `kit_ext/smoke_el.py`: charred logs, ember chips, an ember light). Its smoke fills the wood:
+- a plume of seven noise cells that widen and drift left as they rise, with a cool fill on the plume alone so it reads
+  pale, not as a dark column;
+- a drifting layer at 2 to 5 m;
+- low wisps between the camera and the speaker;
+- a uniform haze through the whole scene, the camera inside it, so the smoke lies between the lens and the speaker and
+  lifts its blacks.
+
+Clarity and sharpening are off, so the speaker is no crisper than the set.
+
+| Pass | Image | Score | Top changes | What I did |
+|---|---|---|---|---|
+| C1 | c-p1 | 5.0 | All one sepia-orange (the smoke read as dust); the speaker's body as dark as the ground (31 against 29); the fire a placeholder of logs and dots; flat tonal range (p99 156); a muddy ground; waxy trunks | **Grade.** A cool grey haze (#C4CAD2), a paler sun (#FFCC9A, 40) and the sky at 0.35, so shadowed smoke goes blue-grey and the shafts stay warm. **Fire.** A 250 W ember light, plus a 150 W glow up from under the logs; the plume denser (5.0) with its fill at 8. **Speaker.** The sky fill to 4, the bounce to 14, the left kicker to 55, and an orange (#FF8A40) rim of 45 from the pile's side. **Exposure and contrast.** Exposure +0.3, contrast 0.10. **Not done.** The camera at 0.55 m: it is below the brief's eye level. |
