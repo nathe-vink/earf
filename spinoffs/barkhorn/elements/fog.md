@@ -259,3 +259,22 @@ What holds it back, in its words and mine:
 Scores, pass by pass: 5.0, 5.5, 5.5, then the concept change, then 5.0, 5.5, 5.5, 5.0; the final scored 6.5. The
 fixes above are concrete, and the critic puts them at 8.2. The next round should start with 1 (the far deck as a
 volume) and 2 (footing).
+
+## Round 2, for the record
+
+The coordinator asked for one more round on the final critic's cheap fixes. The rig is a31e7bc:
+- **Footing:** the speaker on the scan's flattest place (found by ray casts; level within 4.8 cm, off the crack).
+- **Birds:** varied in size and pose.
+- **Rock:** a grain bump (kit_ext `scan`).
+- **Bounce:** down from 0.8 to 0.3.
+- **Far domes:** broken with noise.
+
+**Landscape:** fog.png, 2400 x 1600, 256 samples, 3 h 02 min.
+
+**Portrait:** fog-portrait.png, 1600 x 2000, 256 samples, 79 min, by the helper session (r31-element-fog-portrait-r2 at
+d1002aa, merged here). The helper notes the speaker stands square on the slab with no gap, though the contact shadow
+is faint, and two of the six birds are edge-on dashes.
+
+These replace round 1's frames on this branch; round 1's are in main (0e6c7db, 008c243) and in this branch's history.
+Neither frame got a duel or a critic pass. Fog B won the blind duel against Fog A's round 1, 6.7 to 4.7, and is on the
+site, and the owner has asked for a San Francisco Fog (Fog C, by the Fog B session). So this concept stops here.
