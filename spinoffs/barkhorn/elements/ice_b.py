@@ -108,7 +108,7 @@ def props():
 def shot(az=SUN_AZ, sun_irr=3.0):
     rot, sun = sky_sun(az)
     sun['irradiance'] = sun_irr
-    sk = C.sky(SKY, rotation_deg=rot, strength=1.0, res='4k')
+    sk = C.sky(SKY, rotation_deg=rot, strength=1.0, res='8k')
     # a photographer's bounce: a white reflector beside the camera, giving the shaded front a little of the dawn back
     bounce = {'type': 'area', 'position': [-0.6, -3.0, 0.3], 'size_m': [2.5, 2.0], 'target': [0.0, 0.0, 0.7],
               'irradiance': 0.5, 'color': '#F6C9A0', 'specular': 0.0}
@@ -127,5 +127,5 @@ def shot(az=SUN_AZ, sun_irr=3.0):
 def portrait():
     s = shot()
     cam = s['camera']
-    return C.portrait_of(s, **C.camera(height=cam['position'][2], distance=4.6, azimuth=-12.0, lens=70.0,
-                                       target=tuple(cam['target']), fstop=cam['fstop'], shift_y=-0.06))
+    return C.portrait_of(s, **C.camera(height=cam['position'][2], distance=4.3, azimuth=-12.0, lens=55.0,
+                                       target=tuple(cam['target']), fstop=cam['fstop'], shift_x=-0.09, shift_y=-0.06))

@@ -133,3 +133,35 @@ resin of the waveguide. A card in front and a card behind, each lighting only th
 nothing (r10, r11): with refractive caustics off in the engine, no lamp reaches a surface seen through the resin. I
 took both out rather than keep lamps that do nothing. Lighting it would mean an engine change (caustics) or a change
 to the product's material, neither mine to make.
+| 7 | r14 (half size, 128) | 5.5 | 7.8 | iterate | the soaked foreground reads as a pale mirror or ice sheet, not black sand; the cabinet dark navy with no warm rim; the sea glassy, no surf white water; a seam where the calmed sea meets the shore; seven evenly scattered ice props, the near one competing; a glare column | Not applied: the stopping rule (below). |
+
+## Stop, the duel, the finals
+
+Passes 5 to 7 went 5.5, 5.5, 5.5: two passes in a row after the concept change gained under 0.5, so by the
+coordinator's rule the passes stop here. The critics had also begun to contradict each other: pass 6 wanted the sun
+in clear sky beside the speaker and the foreground wetter; pass 7 wanted the sun back behind the cabinet and the
+foreground dry.
+
+Every beach pass scored 5.5, so a blind duel chose the rig: pass 7's frame (r14) against pass 3's (r6, the earlier
+duel's winner over the cave). **r14 6.5, r6 5.5, prefer r14**: the wet shore runs unbroken from the waterline to the
+frame's edge (r6 had a hard straight seam with dark sand in front); the low sun beside the speaker lays a warm streak
+and the speaker's reflection across the wet sand (r6 had a black shadow wedge running at the camera); the sea has
+wave texture and highlights. For r6: its big ice block read as clear, lit ice, where r14's reads darker, like grey
+glass. Both: the cabinet's front is underlit.
+
+The finals are rendered from r14's rig, unchanged: 2400 x 1600 and 1600 x 2000, 512 samples, the sky at 8k. The
+portrait is re-framed, not cropped: 55 mm from 4.3 m, shifted left (-0.09) so the near chunk is whole and the speaker
+sits on the right third, the sky above it left for type.
+
+### What holds it back (honest)
+
+- **Blind score 5.5**, stable across seven passes and two concepts; the duels give the final rig 6.5 against the
+  runner-up. Nowhere near the brief's 8.5.
+- **The speaker against the sun.** Shooting into a sunrise makes the cabinet's front dark and cool; every critic
+  asked for it lit by the sunrise, and a stronger bounce reads as a studio light. The light that would carry it
+  (sun through the acrylic and the horn) is caustic light, which the engine does not render.
+- **The horn's throat** reads as a black blob: the driver seen through solid resin, which no lamp can reach without
+  caustics (r10, r11).
+- **The ground** reads as a mirror sheet more than black sand where it is soaked; dry, it read as brown dirt.
+- **The sea** reads as glassy swell more than North Atlantic surf; the breakers' white water hardly shows from 0.65 m.
+- **The ice** reads well close up (refraction, bubbles, cracks: the duels praised it), but the big block can go grey.
