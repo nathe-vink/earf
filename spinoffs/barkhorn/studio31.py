@@ -27,7 +27,7 @@ FLAVOUR = dict(COLOURS)
 LIGHT_ONES = ['ember', 'ice', 'fog']
 
 RENDER = {'samples': 80, 'adaptive': 0.015, 'denoise': True, 'clamp': 4, 'bounces': 16,
-          'view': 'Khronos PBR Neutral', 'exposure': 0.0, 'white_balance_k': 5800, 'white_balance_tint': 4.0}
+          'view': 'Khronos PBR Neutral', 'exposure': 0.0, 'white_balance_k': 5800, 'white_balance_tint': 0.0}
 FINISH = {'enabled': True, 'white_in': 235, 'white_out': 238, 'contrast': 0.10, 'clarity': 0.03,
           'sharpen': 0.12, 'sharpen_px': 0.7}
 
@@ -55,7 +55,7 @@ def strips(level=1.0, recv=('*#0',)):
         'strip-right': {'type': 'panel', 'size_m': [0.12, 3.2], 'orbit': {'azimuth_deg': 98, 'elevation_deg': 8, 'distance_m': 2.2},
                         'target': [0.0, 0.0, 0.6], 'strength': 50.0 * level, 'diffuse': 0.35, 'specular': 1.0, 'receivers': list(recv),
                         'ramp': {'axis': 'z', 'at_m': [-0.4, 0.7, 2.2], 'values': [0.25, 1.0, 0.25]}},
-        'strip-top': {'type': 'panel', 'size_m': [2.4, 0.4], 'position': [-0.2, -0.6, 2.6], 'target': [0.0, 0.0, 1.2],
+        'strip-top': {'type': 'panel', 'size_m': [2.4, 0.4], 'position': [-0.2, -1.0, 2.4], 'target': [0.0, 0.0, 1.2],
                       'strength': 18.0 * level, 'diffuse': 0.5, 'specular': 1.0, 'receivers': list(recv),
                       'ramp': {'axis': 'x', 'at_m': [-1.2, 0.0, 1.2], 'values': [0.1, 1.0, 0.1]}},
     }
@@ -66,7 +66,7 @@ def hero(name, dark=True):
          'product': product(name, rotate=-36.0), 'set': seamless(dark),
          'camera': {'position': [0.0, -6.6, 0.95], 'target': [0.0, 0.0, 0.68], 'lens_mm': 60.0, 'level': True},
          'sky': {'kind': 'none'}, 'render': dict(RENDER), 'finish': dict(FINISH),
-         'materials': {'sweep': {'roughness': 0.2, 'specular': 0.025}}}
+         'materials': {'sweep': {'roughness': 0.12, 'specular': 0.03}}}
     L = {
         # the key: a big softbox high and to the left of the camera, the faces' long gradient
         'key': {'type': 'area', 'size_m': [2.4, 1.6], 'orbit': {'azimuth_deg': -55, 'elevation_deg': 32, 'distance_m': 3.4},
@@ -76,31 +76,31 @@ def hero(name, dark=True):
         'fill': {'type': 'area', 'size_m': [2.0, 2.0], 'orbit': {'azimuth_deg': 60, 'elevation_deg': 18, 'distance_m': 4.0},
                  'target': [0.0, 0.0, 0.55], 'irradiance': 0.55 if dark else 0.7, 'color': '#F2F5FF', 'camera': False},
         # the glow: a lamp behind the speaker facing the wall, a pool of light that fades to the edges of the frame
-        'glow': {'type': 'area', 'shape': 'DISK', 'size_m': [2.0, 2.0], 'position': [0.0, 0.45, 1.15],
-                 'target': [0.0, 4.0, 1.5], 'spread_deg': 110, 'power_w': 300.0 if dark else 0.0, 'color': '#F4F4F6', 'camera': False,
+        'glow': {'type': 'area', 'shape': 'DISK', 'size_m': [2.0, 2.0], 'position': [0.0, 0.45, 0.9],
+                 'target': [0.0, 4.0, 1.5], 'spread_deg': 130, 'power_w': 300.0 if dark else 0.0, 'color': '#F6F2EC', 'camera': False,
                  'specular': 0.0},
         # a card high in front, seen only in reflections: a long soft sheen down the faces and into the horn's mouth
         'sheen': {'type': 'panel', 'size_m': [4.0, 2.4], 'position': [-0.9, -3.4, 2.5], 'target': [0.0, 0.0, 0.9],
-                  'strength': 1.6, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
-                  'ramp': {'axis': 'z', 'at_m': [1.4, 3.2], 'values': [0.15, 1.0]}},
+                  'strength': 0.8, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
+                  'ramp': {'axis': 'z', 'at_m': [1.4, 3.2], 'values': [0.05, 0.6]}},
         # a small card in front of the horn, so its mouth mirrors a graded light and not the dark set
         'horn-front': {'type': 'panel', 'size_m': [4.0, 2.6], 'position': [0.2, -2.8, 2.0], 'target': [0.0, 0.0, 1.18],
-                       'strength': 0.55, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
+                       'strength': 0.2, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
                        'ramp': {'axis': 'z', 'at_m': [0.9, 3.2], 'values': [0.0, 1.0]}},
         'sheen-right': {'type': 'panel', 'size_m': [2.0, 1.2], 'position': [1.6, -2.6, 2.3], 'target': [0.0, 0.0, 0.7],
                         'strength': 3.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
                         'ramp': {'axis': 'z', 'at_m': [1.8, 2.9], 'values': [0.15, 1.0]}},
         # light through the horn from behind it, so its tinted walls glow rather than fall to black
         'horn-back': {'type': 'panel', 'size_m': [0.9, 0.3], 'position': [0.0, 0.9, 1.05], 'target': [0.0, 0.0, 1.1],
-                      'strength': 10.0, 'diffuse': 1.0, 'specular': 0.0, 'receivers': ['*#0']},
+                      'strength': 8.0, 'diffuse': 1.0, 'specular': 0.0, 'receivers': ['*#0']},
         **strips(1.0 if dark else 0.7),
     }
     if not dark:
         # a pale room: a soft white dome, so the floor's gloss mirrors light and not a black void, and a broad wash on
         # the seamless, brightest behind the speaker and falling off to the sides
-        s['sky'] = {'kind': 'gradient', 'zenith': '#E9E6E1', 'horizon': '#E4E0DA', 'ground': '#BDB8B0', 'strength': 0.75}
+        s['sky'] = {'kind': 'gradient', 'zenith': '#E9E6E1', 'horizon': '#E4E0DA', 'ground': '#BDB8B0', 'strength': 1.0}
         L['wash'] = {'type': 'area', 'size_m': [6.0, 3.0], 'position': [0.0, -2.5, 4.2], 'target': [0.0, 3.0, 1.4],
-                     'irradiance': 0.4, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0}
+                     'irradiance': 0.9, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0}
     s['lights'] = L
     return s
 

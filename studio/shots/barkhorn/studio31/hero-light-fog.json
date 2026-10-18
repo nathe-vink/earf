@@ -56,7 +56,7 @@
   "zenith": "#E9E6E1",
   "horizon": "#E4E0DA",
   "ground": "#BDB8B0",
-  "strength": 0.75
+  "strength": 1.0
  },
  "render": {
   "samples": 80,
@@ -67,7 +67,7 @@
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
   "white_balance_k": 5800,
-  "white_balance_tint": 4.0
+  "white_balance_tint": 0.0
  },
  "finish": {
   "enabled": true,
@@ -80,8 +80,8 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.2,
-   "specular": 0.025
+   "roughness": 0.12,
+   "specular": 0.03
   }
  },
  "lights": {
@@ -136,16 +136,16 @@
    "position": [
     0.0,
     0.45,
-    1.15
+    0.9
    ],
    "target": [
     0.0,
     4.0,
     1.5
    ],
-   "spread_deg": 110,
+   "spread_deg": 130,
    "power_w": 0.0,
-   "color": "#F4F4F6",
+   "color": "#F6F2EC",
    "camera": false,
    "specular": 0.0
   },
@@ -165,7 +165,7 @@
     0.0,
     0.9
    ],
-   "strength": 1.6,
+   "strength": 0.8,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -178,8 +178,8 @@
      3.2
     ],
     "values": [
-     0.15,
-     1.0
+     0.05,
+     0.6
     ]
    }
   },
@@ -199,7 +199,7 @@
     0.0,
     1.18
    ],
-   "strength": 0.55,
+   "strength": 0.2,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -267,7 +267,7 @@
     0.0,
     1.1
    ],
-   "strength": 10.0,
+   "strength": 8.0,
    "diffuse": 1.0,
    "specular": 0.0,
    "receivers": [
@@ -354,8 +354,8 @@
    ],
    "position": [
     -0.2,
-    -0.6,
-    2.6
+    -1.0,
+    2.4
    ],
    "target": [
     0.0,
@@ -398,7 +398,7 @@
     3.0,
     1.4
    ],
-   "irradiance": 0.4,
+   "irradiance": 0.9,
    "color": "#FFF8F0",
    "camera": false,
    "specular": 0.0
