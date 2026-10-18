@@ -8,8 +8,8 @@ import math, os
 
 from common import area, camera, finish, piece, portrait_of, shot as frame, sky, sun_from_sky
 
-HDRI = 'evening_road_01_puresky'
-ROT = float(os.environ.get('DUSTB_ROT', 296.4))          # the sky's sun 14 degrees up at azimuth 115 (behind the speaker's right)
+HDRI = 'qwantani_late_afternoon_puresky'
+ROT = float(os.environ.get('DUSTB_ROT', 300.0))          # the sky's sun 19 degrees up at azimuth 114 (behind the speaker's right)
 SAND = dict(material='pbr', texture='red_sand', tex_scale=1.6, tint='#C0633A', tint_mix=0.6, res='4k', bump=0.8)
 STONY = dict(texture='red_mud_stones', tex_scale=1.5, tint='#A45232', tint_mix=1.0, mask=[5.0, 0.25], bump=1.0)
 CLIFF = dict(material='pbr', texture='rock_face', tex_scale=30.0, tint='#C04A24', tint_mix=0.92, res='4k',
@@ -91,7 +91,7 @@ def _cam(**k):
 
 
 def shot():
-    return frame('dust', props(), _cam(), sky(HDRI, ROT, strength=float(os.environ.get('DUSTB_SKY', 0.6)), res='4k'),
+    return frame('dust', props(), _cam(), sky(HDRI, ROT, strength=float(os.environ.get('DUSTB_SKY', 0.8)), res='4k'),
                  'barkhorn, Dust, Monument Valley in the afternoon', lights=lights(),
                  sun=sun_from_sky(HDRI, ROT, irradiance=float(os.environ.get('DUSTB_SUN', 9.0)), angle_deg=0.53, color='#FFC98E'),
                  fin=finish(contrast=0.08, clarity=0.05, saturation=0.04, vignette=0.12),
