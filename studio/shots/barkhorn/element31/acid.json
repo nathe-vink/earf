@@ -10,7 +10,7 @@
      0.0,
      -0.07300000000000001
     ],
-    "rotate_z": -20.0,
+    "rotate_z": 22.0,
     "hide": [
      "cloth-disc"
     ]
@@ -71,6 +71,9 @@
       "#6E2C12"
      ]
     ],
+    "specular": 0.15,
+    "rough_mul": 1.25,
+    "tex_scale": 0.9,
     "pools": [
      [
       -0.35,
@@ -104,17 +107,18 @@
     "module": "acid_el",
     "fn": "chimney",
     "position": [
-     -2.0,
-     4.6,
+     -1.1,
+     9.2,
      0.0
     ],
-    "height": 1.15,
-    "radius": 0.34,
+    "height": 1.25,
+    "radius": 0.42,
     "colors": [
      "#F4EA9A",
      "#EACB1E",
      "#C9A010"
     ],
+    "tiers": 4,
     "seed": 2
    },
    {
@@ -123,36 +127,18 @@
     "module": "acid_el",
     "fn": "chimney",
     "position": [
-     -1.6,
-     4.3,
-     0.0
-    ],
-    "height": 0.55,
-    "radius": 0.22,
-    "colors": [
-     "#F5F1DC",
-     "#EFE39A",
-     "#DCC646"
-    ],
-    "seed": 5
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "acid_el",
-    "fn": "chimney",
-    "position": [
+     1.6,
      2.2,
-     2.6,
      0.0
     ],
-    "height": 0.75,
-    "radius": 0.3,
+    "height": 0.45,
+    "radius": 0.26,
     "colors": [
      "#F5F1DC",
      "#EFE39A",
      "#DCC646"
     ],
+    "tiers": 2,
     "seed": 7
    },
    {
@@ -161,36 +147,18 @@
     "module": "acid_el",
     "fn": "chimney",
     "position": [
-     -7.5,
-     14.0,
+     0.6,
+     19.0,
      0.0
     ],
-    "height": 1.6,
+    "height": 1.0,
     "radius": 0.6,
-    "colors": [
-     "#F4EA9A",
-     "#EACB1E",
-     "#C9A010"
-    ],
-    "seed": 9
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "acid_el",
-    "fn": "chimney",
-    "position": [
-     11.0,
-     17.0,
-     0.0
-    ],
-    "height": 1.2,
-    "radius": 0.7,
     "colors": [
      "#D9A04A",
      "#B2642A",
      "#7E3A1A"
     ],
+    "tiers": 3,
     "seed": 11
    },
    {
@@ -199,45 +167,44 @@
     "module": "acid_el",
     "fn": "steam",
     "position": [
-     -2.0,
-     4.6,
-     1.0
+     -1.1,
+     9.2,
+     1.15
     ],
-    "height": 3.2,
-    "r0": 0.14,
-    "r1": 1.0,
+    "height": 4.5,
+    "r0": 0.12,
+    "r1": 1.4,
     "lean": [
-     0.9,
-     0.4
+     1.4,
+     0.6
     ],
-    "density": 5.0,
-    "anisotropy": 0.6,
+    "density": 7.0,
+    "anisotropy": 0.25,
     "seed": 1
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "acid_el",
-    "fn": "steam",
-    "position": [
-     -7.5,
-     14.0,
-     1.4
-    ],
-    "height": 5.0,
-    "r0": 0.3,
-    "r1": 2.0,
-    "lean": [
-     1.6,
-     0.5
-    ],
-    "density": 2.5,
-    "anisotropy": 0.6,
-    "seed": 2
    }
   ]
  },
- "lights": {},
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    1.5
+   ],
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 2.2,
+   "color": "#FFE6B0"
+  }
+ },
  "render": {
   "samples": 512,
   "adaptive": 0.02,
@@ -255,37 +222,37 @@
  ],
  "camera": {
   "position": [
-   -2.1323,
-   -6.2785,
-   0.7
+   -2.8794,
+   -8.6933,
+   0.5
   ],
   "target": [
-   -0.45,
+   -0.55,
    0.0,
    0.66
   ],
-  "lens_mm": 65.0,
+  "lens_mm": 85.0,
   "level": true,
-  "fstop": 5.6,
+  "fstop": 4.0,
   "focus": [
-   0.0,
-   -0.21,
+   -0.1,
+   -0.2,
    0.66
   ]
  },
  "sky": {
   "kind": "hdri",
-  "polyhaven": "qwantani_late_afternoon_puresky",
-  "rotation_deg": -160.0,
-  "strength": 0.8,
+  "polyhaven": "evening_road_01_puresky",
+  "rotation_deg": 166.0,
+  "strength": 1.0,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": -146.1,
-  "elevation_deg": 19.1,
-  "irradiance": 10.0,
+  "azimuth_deg": -114.6,
+  "elevation_deg": 14.3,
+  "irradiance": 7.0,
   "angle_deg": 0.53,
-  "color": "#FEE8C7"
+  "color": "#FEE5B6"
  },
  "finish": {
   "enabled": true,
@@ -314,8 +281,8 @@
    120,
    12
   ],
-  "density": 0.0008,
+  "density": 0.003,
   "anisotropy": 0.5,
-  "color": "#FFFFFF"
+  "color": "#F3E2C4"
  }
 }

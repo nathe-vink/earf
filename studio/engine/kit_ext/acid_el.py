@@ -224,6 +224,10 @@ def chimney(bpy, name, p, kit):
         t = j / rows
         z = H * t - 0.05
         base = R * (1 - 0.45 * t) * (1 + 0.5 * (1 - t) ** 5)       # a column, flared at its foot
+        tiers = p.get('tiers', 0)
+        if tiers:                                                    # stacked growths, each with a crusted lip
+            u = (t * tiers) % 1.0
+            base *= 0.86 + 0.22 * (u ** 2.2) * (1 if t < 0.97 else 0)
         if t > 0.8:                                                  # a knobbly rounded top
             base *= math.sqrt(max(0.0, 1 - ((t - 0.8) / 0.2) ** 2)) * 0.9 + 0.1 * (1 - t) / 0.2
         ring = []
@@ -246,7 +250,7 @@ def chimney(bpy, name, p, kit):
     c = p.get('colors', ['#F2EDCF', '#E9D33A', '#D9B62A'])
     mat = crust_material(bpy, {'texture': p.get('texture', 'rock_boulder_cracked'), 'res': p.get('res', '2k'), 'zone_scale': 1.6,
                                'noise_w': 1.4, 'zone_h': 1.0, 'zone_bias': 0.5, 'detail_gain': p.get('detail_gain', 2.2),
-                               'zones': [(0.0, c[0]), (0.45, c[1]), (1.0, c[2])]}, attribute=None, name=f'{name}-mat')
+                               'tex_scale': 0.5, 'zones': [(0.0, c[0]), (0.45, c[1]), (1.0, c[2])]}, attribute=None, name=f'{name}-mat')
     return kit.finish(bpy, name, bm, p, True, mat)
 
 
@@ -266,6 +270,7 @@ def steam(bpy, name, p, kit):
     vol = nt.nodes.new('ShaderNodeVolumePrincipled')
     vol.inputs['Color'].default_value = _hex(p.get('color', '#F4F1E6'))
     vol.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.55)
+    vol.inputs['Absorption Color'].default_value = (1.0, 1.0, 1.0, 1.0)  # water droplets scatter, they do not absorb
     tc = nt.nodes.new('ShaderNodeTexCoord')
     sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
 
