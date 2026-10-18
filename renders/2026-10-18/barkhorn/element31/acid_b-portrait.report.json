@@ -1,9 +1,9 @@
 {
  "shot": "studio/shots/barkhorn/element31/acid_b-portrait.json",
- "image": "renders/2026-10-18/barkhorn/element31/acid_b-portrait.png",
+ "image": "renders/2026-10-18/barkhorn/element31/acid_b-portrait.raw.png",
  "seconds": {
-  "build": 194.4,
-  "render": 5178.2
+  "build": 144.9,
+  "render": 6306.2
  },
  "samples": 512,
  "size": [
@@ -954,6 +954,48 @@
     891
    ],
    "depth_m": 5.983
+  },
+  "rating-plate-plate#0": {
+   "part": "rating-plate-plate",
+   "centre_px": [
+    802.7,
+    1052.2
+   ],
+   "box_px": [
+    784,
+    1040,
+    822,
+    1064
+   ],
+   "depth_m": 6.237
+  },
+  "rating-plate-print#0": {
+   "part": "rating-plate-print",
+   "centre_px": [
+    802.6,
+    1052.6
+   ],
+   "box_px": [
+    789,
+    1043,
+    816,
+    1062
+   ],
+   "depth_m": 6.237
+  },
+  "rating-plate-screws#0": {
+   "part": "rating-plate-screws",
+   "centre_px": [
+    802.4,
+    1052.2
+   ],
+   "box_px": [
+    784,
+    1050,
+    821,
+    1054
+   ],
+   "depth_m": 6.238
   },
   "rib-back-1#0": {
    "part": "rib-back-1",
