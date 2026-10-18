@@ -1,0 +1,53 @@
+{
+  "stage1": {"impression": "A clean, consistent high-key set: eight identical frames, the tints read true and the red, orange, blue and violet throw a convincing coloured pool on the floor. But the white seamless is a featureless void at 249-250 with no horizon, almost no contact shadow and no floor reflection, so the speaker floats; the water-clear and black frames are visibly weaker (the clear horn dissolves into the white, the black cabinet goes to a dense grey block with no edge light). It reads as very good product CG, not yet an Apple launch hero.", "score": 6.5},
+  "verdict": "iterate",
+  "blocking_9": [
+    "A grounded floor: a dense contact shadow under the plinth (lum_p5 under the foot below 120 in every frame) and a visible faint reflection, so the speaker has weight",
+    "A tonal separation between floor and wall (a soft gradient of at least 8 levels from the floor at the foot to the wall above the horn) instead of one flat 250 field",
+    "The water-clear frame holding its silhouette: every vertical edge and the horn outline drawn by a dark refracted flag line",
+    "The black frame lit from behind so its interior and edges read (cabinet interior median above 70, crush under 2%), matching the other seven in presence",
+    "No frame weaker than the rest: the coloured floor pool present in all eight, including clear and black"
+  ],
+  "defects": [
+    {"region": [2400, 640, 2700, 1180], "what": "water-clear: the horn and the cabinet's top edges vanish into the white background; only thin greenish edge lines hold the shape"},
+    {"region": [2440, 1080, 2700, 1180], "what": "water-clear: no pool, no shadow, no reflection on the floor; the speaker floats"},
+    {"region": [3560, 830, 3780, 1000], "what": "black: cabinet reads as a dense grey block, median 47 with 6% crushed; no back-light glow, no edge highlights on the cabinet verticals"},
+    {"region": [3480, 1080, 3820, 1170], "what": "black: no visible floor pool or reflection; only a thin dark line at the foot"},
+    {"region": [10, 40, 120, 580], "what": "an unexplained darker band down the left edge of every frame (239.7 vs 249.2 across the rest), an asymmetric fall-off with no matching right side"},
+    {"region": [350, 480, 700, 570], "what": "floor and wall are the same 250 white with no horizon or gradient; the speaker stands in a void"},
+    {"region": [420, 495, 620, 520], "what": "contact shadow under the plinth is a hairline; no occlusion spreading onto the floor"},
+    {"region": [2470, 790, 2620, 950], "what": "water-clear: the white woofer surround ring is the brightest, highest-contrast element in the frame and pulls the eye from the horn"},
+    {"region": [3080, 0, 3125, 1184], "what": "contact-sheet seams clip at 255 (5.7% clip in that strip); not an issue for the finals but the sheet itself shows hard white gutters"}
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "light", "problem": "The speaker has no weight: the contact shadow is a hairline and the floor directly beside the plinth is as bright as open floor.", "evidence": {"region": [420, 520, 620, 560], "measured": "floor under the foot lum_median 240, p5 226; open floor 250; no occlusion gradient"},
+     "change": {"setting": "overhead scrim size/height and floor material", "from": "large soft overhead scrim, floor same white as wall", "to": "reduce the overhead scrim to about half its area and raise it 0.5 m so it casts a defined soft shadow; give the floor a slightly lower albedo (about 0.80 vs the wall's 0.90) so the plinth's occlusion reads"},
+     "expected": "a soft dark band 10-25 px deep beneath the plinth in every frame, darkest at the foot", "accept": {"region": [420, 500, 620, 515], "metric": "lum_p5", "op": "<", "value": 120}},
+    {"id": "c2", "rank": 2, "kind": "set", "problem": "Floor and wall merge into one flat 250 field, so there is no depth and no place for the product to stand.", "evidence": {"region": [750, 20, 1020, 570], "measured": "wall 249.2 at top, floor 250.1 at bottom; lum_range under 2 in each"},
+     "change": {"setting": "background seamless / back light", "from": "evenly lit high-key seamless", "to": "let the seamless fall off by about 10 levels from the floor to the top of frame (light the floor and lower wall, flag the top 30% of the wall), keeping the floor near 248"},
+     "expected": "a gentle vertical gradient: floor ~248, wall above the horn ~236", "accept": {"region": [750, 20, 1020, 120], "metric": "lum_median", "op": "between", "value": [228, 242]}},
+    {"id": "c3", "rank": 3, "kind": "light", "problem": "The water-clear frame loses its silhouette against white; there is nothing dark for its edges to refract.", "evidence": {"region": [2400, 640, 2700, 800], "measured": "horn region visually almost the background value; edges only thin green lines"},
+     "change": {"setting": "black flags refracted in the vertical edges", "from": "flags at current width and distance", "to": "widen the two side flags and add a third high flag behind and above the horn so a dark line runs down every vertical edge and along the horn's outline; same rig for all eight"},
+     "expected": "clear horn and cabinet edges drawn by continuous dark lines; edge step of at least 80 levels across the cabinet's left vertical in the clear frame", "accept": {"region": [2480, 820, 2520, 860], "metric": "edge", "axis": "x", "op": ">", "value": 80}},
+    {"id": "c4", "rank": 4, "kind": "light", "problem": "The black frame is a dense grey block with crushed interior and no glow; it is the weakest of the eight.", "evidence": {"region": [3560, 830, 3780, 1000], "measured": "lum_median 47, crush_pct 6.1"},
+     "change": {"setting": "small lamp high behind aimed through the cabinet", "from": "same power for all colours", "to": "raise its power about 1.5 stops (keep the rig identical for all eight; the bright tints will gain glow too, check they do not clip) or add a second rim lamp low behind the cabinet"},
+     "expected": "black interior lifts to a smoky grey with readable parts, edges catch light", "accept": {"region": [3560, 830, 3780, 1000], "metric": "crush_pct", "op": "<", "value": 2}},
+    {"id": "c5", "rank": 5, "kind": "light", "problem": "The coloured floor pool, the set's signature, is absent in the clear and black frames and faint in green and yellow.", "evidence": {"region": [2440, 1080, 2700, 1180], "measured": "clear floor beside foot 250.9 flat; red pool r251 g238 is the only clearly tinted one"},
+     "change": {"setting": "lamp behind aimed through the cabinet (pool) and floor reflection", "from": "pool only from tinted shadow rays", "to": "aim the back lamp lower so its pool falls 20-40 cm in front of the plinth and add a faint floor reflection (gloss about 0.1-0.15 roughness, reflectance 5%) so even clear and black show a mirrored base"},
+     "expected": "every frame shows a pool or reflection below the plinth; red floor r-g gap grows above 20", "accept": {"region": [420, 520, 620, 560], "metric": "g_median", "op": "<", "value": 230}},
+    {"id": "c6", "rank": 6, "kind": "light", "problem": "An unexplained darker strip runs down the left edge of every frame, asymmetric and reading like an unlit cyc edge.", "evidence": {"region": [10, 40, 1030, 80], "measured": "x profile: first bin 239.7, rest 247.9-249.2"},
+     "change": {"setting": "seamless width / side fill", "from": "seamless edge or falloff visible at frame left", "to": "widen the seamless or add a matching fill so the left and right edges of the frame are within 2 levels (or make the fall-off symmetric as a deliberate vignette)"},
+     "expected": "left and right edge strips equal in value", "accept": {"region": [10, 40, 120, 200], "metric": "lum_median", "op": ">=", "value": 246}},
+    {"id": "c7", "rank": 7, "kind": "camera", "problem": "The speaker fills most of the frame height with tight headroom, leaving no room for a launch headline above it in a 2560 x 1440 hero.", "evidence": {"region": [330, 60, 700, 590], "measured": "product spans about y 90-505 of a 592 px panel (70% of height)"},
+     "change": {"setting": "camera distance / focal length", "from": "current framing", "to": "pull back (or lower the product in frame) so the speaker occupies about 55-60% of the height with the extra space above the horn for type; keep the framing identical in all eight"},
+     "expected": "clear negative space above the horn for a headline", "accept": null},
+    {"id": "c8", "rank": 8, "kind": "post", "problem": "The highlights on the horn's top and the white surround in the clear frame clip hard.", "evidence": {"region": [2440, 830, 2660, 1000], "measured": "clip_pct 2.44 in the clear frame's woofer area"},
+     "change": {"setting": "finish / tone mapping", "from": "current exposure and curve", "to": "apply a filmic shoulder (or pull highlights by about 1/3 stop in post) so specular cores hold detail; leave the background at 248-250"},
+     "expected": "clip under 0.5% on the product", "accept": {"region": [2440, 830, 2660, 1000], "metric": "clip_pct", "op": "<", "value": 0.5}}
+  ],
+  "out_of_scope": [
+    {"request": "Darken or tint the water-clear version's white woofer surround", "why": "it is a part of the speaker and fixed; handle its dominance with light (c3, c8) only"},
+    {"request": "A slightly denser tint for the black and clear sheets", "why": "the speaker's colours are fixed"}
+  ],
+  "score_if_fixed": 8.0
+}

@@ -344,6 +344,8 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         _cork(nt, b, p, normal)
     elif preset in ('plaster', 'sweep'):
         setin('Base Color', hex_lin(p['color'])); setin('Roughness', p['roughness'])
+        if preset == 'sweep' and 'specular' in p:     # a fainter floor reflection (studio31's glossy seamless): 0.5 is the default
+            setin('Specular IOR Level', p['specular'])
         if preset == 'sweep' and (p.get('contact', 0) > 0 or p.get('core', 0) > 0):
             _contact(nt, I, hex_lin(p['color']), p['contact'], p['contact_m'], p.get('core', 0.0), p.get('core_m', 0.025))
         if preset == 'plaster':
