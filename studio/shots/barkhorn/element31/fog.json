@@ -1,0 +1,316 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "birch-fog-clear",
+  "instances": [
+   {
+    "flavour": "birch-fog-clear",
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotate_z": -6.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "namaqualand_cliff_02",
+    "position": [
+     -3.72,
+     -3.11,
+     -6.875
+    ],
+    "rotate": [
+     0,
+     0,
+     0
+    ],
+    "scale": 1.0,
+    "res": "8k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "cloudvol",
+    "box": [
+     -400.0,
+     250.0,
+     -230.0,
+     2600.0,
+     2800.0,
+     -50.0
+    ],
+    "top": -140.0,
+    "amp": 110.0,
+    "scale": 220.0,
+    "detail": 7.0,
+    "erode": 18.0,
+    "soft": 0.5,
+    "density": 0.14,
+    "octaves": 5,
+    "billow_octaves": 4,
+    "anisotropy": 0.65
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "cloudsea",
+    "near": 2600.0,
+    "far": 40000.0,
+    "width": 90000.0,
+    "z": -170.0,
+    "billow": 260.0,
+    "height": 65.0,
+    "depth": 120.0,
+    "x": 3000.0,
+    "rows": 170,
+    "cols": 380,
+    "fan": 2.6,
+    "seed": 3,
+    "sss_r": 20.0,
+    "bump_size": 14.0,
+    "bump_dist": 5.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "bird",
+    "span": 1.0057254237224256,
+    "flap": 0.46,
+    "position": [
+     36.472309704905115,
+     69.3094034053246,
+     11.787878289687917
+    ],
+    "rotate": [
+     5.067899959985004,
+     0,
+     75.87015684850844
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "bird",
+    "span": 0.9664056635945264,
+    "flap": 0.8,
+    "position": [
+     38.63835928501908,
+     72.81080590100747,
+     11.935847157583774
+    ],
+    "rotate": [
+     -0.3711714266140351,
+     0,
+     82.39718497859491
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "bird",
+    "span": 0.9859402148089826,
+    "flap": 0.18,
+    "position": [
+     37.62098270334224,
+     64.60075760556617,
+     10.335378839213332
+    ],
+    "rotate": [
+     4.996144461702624,
+     0,
+     97.97176354887425
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "bird",
+    "span": 0.8899010530895095,
+    "flap": 0.56,
+    "position": [
+     40.22202786943824,
+     73.4094302455934,
+     12.852039079060324
+    ],
+    "rotate": [
+     -5.978701653569584,
+     0,
+     101.14214234172846
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "bird",
+    "span": 0.9023640956237795,
+    "flap": -0.43,
+    "position": [
+     41.57187377412148,
+     76.46889318524163,
+     9.44716620129631
+    ],
+    "rotate": [
+     5.537735867401002,
+     0,
+     91.17670406612432
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "bird",
+    "span": 1.0194576193126481,
+    "flap": -0.45,
+    "position": [
+     43.9055616017408,
+     78.2877032932829,
+     14.759877174780634
+    ],
+    "rotate": [
+     4.724900130917742,
+     0,
+     83.96366693561603
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "fog_el",
+    "fn": "bird",
+    "span": 0.9402974836805961,
+    "flap": -0.52,
+    "position": [
+     42.633123055265095,
+     70.78167656050812,
+     8.561630920923356
+    ],
+    "rotate": [
+     1.2373199688918524,
+     0,
+     75.1014935812307
+    ]
+   }
+  ]
+ },
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    2.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 0.8,
+   "color": "#D9B49A",
+   "orbit": {
+    "azimuth_deg": -60,
+    "elevation_deg": 5,
+    "distance_m": 2.5
+   }
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.0,
+  "look": "AgX - Medium High Contrast",
+  "volume_bounces": 6
+ },
+ "title": "barkhorn, Fog, above the clouds",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   -2.4473,
+   -6.3049,
+   0.6
+  ],
+  "target": [
+   0.1,
+   0.0,
+   0.7
+  ],
+  "lens_mm": 65.0,
+  "level": true,
+  "fstop": 8.0,
+  "focus": [
+   0.1,
+   -0.21,
+   0.7
+  ],
+  "clip_end": 60000.0
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "qwantani_puresky",
+  "rotation_deg": 354.0,
+  "strength": 1.0,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": 60.0,
+  "elevation_deg": 28.1,
+  "irradiance": 3.5,
+  "angle_deg": 0.53,
+  "color": "#FBFEF1"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.08,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": 0.12,
+   "lift": 0.03,
+   "lift_color": "#3A3530",
+   "vignette": 0.12
+  }
+ },
+ "haze": {
+  "box_m": [
+   -40000.0,
+   200.0,
+   -900.0,
+   40000.0,
+   45000.0,
+   300.0
+  ],
+  "density": 8e-05,
+  "anisotropy": 0.6,
+  "color": "#BFD3EA"
+ }
+}
