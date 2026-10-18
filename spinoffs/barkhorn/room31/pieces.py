@@ -59,6 +59,7 @@ def _box_uv(bm, x0, y0, z0, x1, y1, z1, u_axis='x', mirror=False, uoff=0.0, voff
     out = []
     for f in faces:
         face = bm.faces.new([vs[i] for i in f])
+        face.normal_update()                                     # a new face's normal is zero until updated
         n = face.normal
         for lp in face.loops:
             co = lp.vert.co
@@ -404,3 +405,27 @@ def recolour(bpy, name, p, kit):
             nt.links.new(out, b.inputs['Base Color'])
     print(f'room31 recolour {p["model"]}: {sorted(seen)}')
     return [root]
+
+
+# --- a sheer that diffuses -----------------------------------------------------------------------------------------------
+def sheer(bpy, name, p, kit):
+    """A linen sheer drawn across glazing: the kit's drape (`size`, `folds`, `amplitude`, `noise`; placed by `position`
+    (its top edge's centre) and `rotate`), in a cloth that scatters most of the light through it (a translucent
+    sheet: the sun becomes a soft glow) and lets `open` of it straight through (the weave's gaps: faint hard shadows),
+    `color` its linen."""
+    bm = bmesh.new(); kit._drape(bm, {**p, 'thickness': 0.0})
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    col = _lin(p.get('color', '#F3EEE4'))
+    tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = col
+    df = nt.nodes.new('ShaderNodeBsdfDiffuse'); df.inputs['Color'].default_value = col
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+    m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs['Fac'].default_value = p.get('reflect', 0.35)
+    nt.links.new(tl.outputs['BSDF'], m1.inputs[1]); nt.links.new(df.outputs['BSDF'], m1.inputs[2])
+    m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs['Fac'].default_value = p.get('open', 0.25)
+    nt.links.new(m1.outputs['Shader'], m2.inputs[1]); nt.links.new(tr.outputs['BSDF'], m2.inputs[2])
+    nt.links.new(m2.outputs['Shader'], out.inputs['Surface'])
+    ob = _obj(bpy, name, bm, [m], smooth=True)
+    ob.location = Vector(p.get('position', [0, 0, 0]))
+    ob.rotation_euler = [math.radians(a) for a in p.get('rotate', [0, 0, 0])]
+    return [ob]

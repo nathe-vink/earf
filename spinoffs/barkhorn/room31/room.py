@@ -68,17 +68,18 @@ def room_set(v):
         return round(y - cy, 3)
     # a run of tall French windows down the left wall, piers between, glass to 15 cm under the ceiling
     wins = [{'wall': 'left', 'along': along(yc), 'sill': 0.04, 'size': [1.45, 2.71], 'mullions': [2, 1], 'frame': '#2B2926'}
-            for yc in v.get('win_y', (0.2, -1.4, -3.0))]
+            for yc in v.get('win_y', (0.2, -1.4, -3.45))]
     props = [
         ext('floor', rect=[LEFT, BACK - DEPTH, RIGHT, BACK], texture=v['floor'], res='4k', rotate_deg=v['floor_rot'],
             rough_mul=v.get('floor_rough', 1.0), coat=v.get('floor_coat', 0.35), coat_rough=0.35, value=v.get('floor_value', 1.0),
             offset=[0.37, 0.11, 0.0]),
         ext('plaster', texture=v['plaster'], res='4k', color=v['wall'], tint_mix=v.get('wall_tint', 0.85),
             value=v.get('wall_value', 1.0), bump=v.get('wall_bump', 1.0), tex_scale=v.get('wall_tex_scale')),
-        ext('credenza', position=[CAB['x'], BACK - CAB['d'] / 2 - 0.012], size=[CAB['w'], CAB['d'], CAB['h']], doors=3,
+        ext('credenza', position=[CAB['x'], BACK - CAB['d'] / 2 - 0.012], size=[CAB['w'], CAB['d'], CAB['h']], doors=v.get('doors', 3),
             texture=v.get('veneer', 'walnut_veneer'), lift=v.get('veneer_lift', 1.3), grain_rot=v.get('grain_rot', 90.0)),
         ext('rug', position=v['rug_pos'], size=v['rug_size'], pile=v.get('rug_pile', 0.018), texture=v.get('rug', 'curly_teddy_natural'),
-            tint=v.get('rug_tint', '#E4DCCB'), tint_mix=v.get('rug_tint_mix', 0.5), displace=v.get('rug_displace', 0.006), res=v.get('rug_res', '2k'), value=v.get('rug_value', 1.0)),
+            tint=v.get('rug_tint', '#E4DCCB'), tint_mix=v.get('rug_tint_mix', 0.5), displace=v.get('rug_displace', 0.006), res=v.get('rug_res', '2k'), value=v.get('rug_value', 1.0),
+            tex_scale=v.get('rug_tex_scale')),
         ext('socket', position=[-v['socket_x'], BACK, 0.30]),
         ext('socket', position=[v['socket_x'], BACK, 0.30]),
         lead(-1, -v['socket_x']), lead(1, v['socket_x']),
@@ -93,8 +94,12 @@ def room_set(v):
         # the lounge chair, its black leather re-dyed cognac so it sits with the walnut and not against the pair
         ext('recolour', model=v.get('chair', 'modern_arm_chair_01'), position=v['chair_pos'], rotate=[0, 0, v['chair_rot']],
             match=['pillow'], color=v.get('leather', '#7A4A2C'), blend='MIX', mix=v.get('leather_mix', 0.8)),
+        # linen sheers drawn across the glazing (concept B): the sun through them becomes a broad soft source
+        *[ext('sheer', position=[LEFT + 0.1, yc, HEIGHT - 0.05], rotate=[0, 0, 90], size=[w, HEIGHT - 0.07], folds=int(w * 9),
+              amplitude=0.045, noise=0.35, seed=11 + i, res=140, open=v.get('sheer_open', 0.25), color='#F3EEE4')
+          for i, (yc, w) in enumerate(v.get('sheers', []))],
         # a linen sheer, half drawn, at the back of the glazing: the sun comes through it
-        kit('drape', position=[LEFT + 0.09, BACK - 0.33, HEIGHT - 0.06], rotate=[0, 0, 90], size=[0.55, HEIGHT - 0.08],
+        kit('drape', off=v.get('drape_off', False), position=[LEFT + 0.09, BACK - 0.33, HEIGHT - 0.06], rotate=[0, 0, 90], size=[0.55, HEIGHT - 0.08],
             folds=9, amplitude=0.035, noise=0.35, thickness=0.0, material='organza', color='#F1ECE2',
             alpha=v.get('sheer_alpha', 0.55), seed=5, res=120),
         ext('exterior', hdri=v['hdri'], rotation_deg=v['hdri_rot'], strength=v['ext_strength'], res='8k',
@@ -106,21 +111,33 @@ def room_set(v):
 
 
 DEFAULT = dict(
-    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=0.8, wall_tint=0.7,
-    wall_tex_scale=1.5, socket_x=1.78,
-    veneer='black_walnut_veneer_02', veneer_lift=0.85, rug_tint='#8E8170', rug_tint_mix=1.0, rug_pos=[0.0, -1.2], rug_size=[2.6, 2.0], rug_displace=0.006,
-    rug_pile=0.025, rug_res='4k', rug_value=0.45,
+    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=0.8,
+    wall_tint=0.7, wall_tex_scale=1.5, socket_x=1.78,
+    veneer='walnut_veneer_02', veneer_lift=0.85, grain_rot=90.0,
+    rug='poly_wool_herringbone', rug_tex_scale=0.35, rug_tint='#A89A86', rug_tint_mix=1.0, rug_pos=[0.0, -1.1],
+    rug_size=[2.4, 1.7], rug_displace=0.002, rug_pile=0.012, rug_res='4k', rug_value=0.5,
     chair='modern_arm_chair_01', chair_pos=[2.35, -1.6, 0.0], chair_rot=300.0, leather='#8A7460',
-    hdri='autumn_forest_04', hdri_rot=116.0, ext_strength=3.2, ext_blur=0.0015,
-    # the sun low from the front-left: it crosses both cabinets and lays their shadows, green where light came through
-    # the horns, on the plaster behind; warm sun, cool skylight in the shade
-    sun=dict(azimuth_deg=-68.0, elevation_deg=14.0, irradiance=30.0, angle_deg=0.6, color='#FFE2BC'),
-    sky_strength=0.45, fill=0.7, fill_color='#DCE6F4', bounce=0.2, floor_bounce=0.15, exposure=-0.9, wb_tint=0.0,
+    hdri='autumn_forest_04', hdri_rot=116.0, ext_strength=2.6, ext_blur=0.0,
+    # concept B (pass r7): linen sheers drawn across the glazing (all but its back corner, which keeps the view out); the
+    # late sun through them is a broad soft source from the left, a quarter of it straight through (soft shafts, the
+    # horns' green light on the plaster)
+    sheers=[(-0.25, 0.8), (-1.4, 1.7), (-3.45, 1.7)], drape_off=True, sheer_open=0.25,
+    sun=dict(azimuth_deg=-62.0, elevation_deg=14.0, irradiance=30.0, angle_deg=0.6, color='#FFE4C8'),
+    sky_strength=0.6, fill=0.45, fill_color='#DCE6F4', bounce=0.1, bounce_pos=[-2.0, -3.8, 1.8], floor_bounce=0.15,
+    exposure=-0.5, wb=5500, wb_tint=0.0,
 )
 
 
+# the portrait (for phones): the same room, the pair brought in round a two-door credenza so it fills a 4:5 frame
+PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=-0.2, books_x=0.24, vase_x=0.40, port_d=3.5,
+                port_lens=35, port_tz=1.0)
+
+
 def shot(v=None, portrait=False):
-    v = {**DEFAULT, **(v or {})}
+    global SPK_X
+    v = {**DEFAULT, **(PORTRAIT if portrait else {}), **(v or {})}
+    SPK_X = v.get('spk_x', 1.2)                               # the pair's spacing (the portrait brings them in)
+    CAB['w'] = v.get('cab_w', 1.62)
     s = {
         'title': 'barkhorn, Poison, at home (room 31)',
         'products': [
@@ -141,7 +158,7 @@ def shot(v=None, portrait=False):
                       'target': [0.0, 0.2, 0.9], 'irradiance': v['fill'], 'color': v.get('fill_color', '#EEF2F8')},
             # a warm bounce card beside the camera, as an interiors photographer would set one, so the horns' throats
             # read as resin and not as holes
-            'bounce': {'type': 'area', 'size_m': [1.6, 1.2], 'position': [0.0, SPK_Y - 4.6, 1.5],
+            'bounce': {'type': 'area', 'size_m': [1.6, 1.2], 'position': v.get('bounce_pos', [0.0, SPK_Y - 4.6, 1.5]),
                        'target': [0.0, SPK_Y, 1.15], 'irradiance': v.get('bounce', 0.35), 'color': '#FFF0DE'},
             # light the floor bounces up under the credenza (a real room's toe-kick is never a black hole)
             'floorbounce': {'type': 'area', 'size_m': [0.8, 0.3], 'position': [0.0, -1.0, 0.1], 'target': [0.0, 0.7, 0.05],

@@ -96,7 +96,7 @@
    },
    {
     "wall": "left",
-    "along": -0.45,
+    "along": -0.9,
     "sill": 0.04,
     "size": [
      1.45,
@@ -162,7 +162,7 @@
      0.56
     ],
     "doors": 3,
-    "texture": "black_walnut_veneer_02",
+    "texture": "walnut_veneer_02",
     "lift": 0.85,
     "grain_rot": 90.0
    },
@@ -173,19 +173,20 @@
     "fn": "rug",
     "position": [
      0.0,
-     -1.2
+     -1.1
     ],
     "size": [
-     2.6,
-     2.0
+     2.4,
+     1.7
     ],
-    "pile": 0.025,
-    "texture": "curly_teddy_natural",
-    "tint": "#8E8170",
+    "pile": 0.012,
+    "texture": "poly_wool_herringbone",
+    "tint": "#A89A86",
     "tint_mix": 1.0,
-    "displace": 0.006,
+    "displace": 0.002,
     "res": "4k",
-    "value": 0.45
+    "value": 0.5,
+    "tex_scale": 0.35
    },
    {
     "kind": "kit",
@@ -441,7 +442,89 @@
    },
    {
     "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "sheer",
+    "position": [
+     -1.9499999999999997,
+     -0.25,
+     2.85
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "size": [
+     0.8,
+     2.83
+    ],
+    "folds": 7,
+    "amplitude": 0.045,
+    "noise": 0.35,
+    "seed": 11,
+    "res": 140,
+    "open": 0.25,
+    "color": "#F3EEE4"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "sheer",
+    "position": [
+     -1.9499999999999997,
+     -1.4,
+     2.85
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "size": [
+     1.7,
+     2.83
+    ],
+    "folds": 15,
+    "amplitude": 0.045,
+    "noise": 0.35,
+    "seed": 12,
+    "res": 140,
+    "open": 0.25,
+    "color": "#F3EEE4"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "sheer",
+    "position": [
+     -1.9499999999999997,
+     -3.45,
+     2.85
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "size": [
+     1.7,
+     2.83
+    ],
+    "folds": 15,
+    "amplitude": 0.045,
+    "noise": 0.35,
+    "seed": 13,
+    "res": 140,
+    "open": 0.25,
+    "color": "#F3EEE4"
+   },
+   {
+    "kind": "kit",
     "shape": "drape",
+    "off": true,
     "position": [
      -1.9599999999999997,
      0.6199999999999999,
@@ -473,7 +556,7 @@
     "fn": "exterior",
     "hdri": "autumn_forest_04",
     "rotation_deg": 116.0,
-    "strength": 3.2,
+    "strength": 2.6,
     "res": "8k",
     "centre": [
      -3.05,
@@ -481,20 +564,20 @@
      1.4
     ],
     "radius": 60.0,
-    "blur": 0.0015
+    "blur": 0.0
    }
   ]
  },
  "sun": {
-  "azimuth_deg": -68.0,
+  "azimuth_deg": -62.0,
   "elevation_deg": 14.0,
   "irradiance": 30.0,
   "angle_deg": 0.6,
-  "color": "#FFE2BC"
+  "color": "#FFE4C8"
  },
  "sky": {
   "kind": "physical",
-  "strength": 0.45,
+  "strength": 0.6,
   "air": 1.0,
   "dust": 1.5
  },
@@ -524,7 +607,7 @@
     0.2,
     0.9
    ],
-   "irradiance": 0.7,
+   "irradiance": 0.45,
    "color": "#DCE6F4"
   },
   "bounce": {
@@ -534,16 +617,16 @@
     1.2
    ],
    "position": [
-    0.0,
-    -4.3,
-    1.5
+    -2.0,
+    -3.8,
+    1.8
    ],
    "target": [
     0.0,
     0.3,
     1.15
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.1,
    "color": "#FFF0DE"
   },
   "floorbounce": {
@@ -573,8 +656,8 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": -0.9,
-  "white_balance_k": 5600,
+  "exposure": -0.5,
+  "white_balance_k": 5500,
   "white_balance_tint": 0.0
  },
  "size": [
