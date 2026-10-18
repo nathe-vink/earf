@@ -1,0 +1,368 @@
+{
+ "stage1": {
+  "impression": "A calm, believable late-afternoon living room: squared camera, sun through tall glazing, the pair placed symmetrically around a walnut credenza, with the green cabinets lit from inside. It is close to editorial, but the sunlit plaster at the left is a flat, textureless field near white. The left cabinet sits duller than the right. Only the right speaker throws its coloured light, and that goes onto the wall, not into the frame's floor. The insides of the cabinets glow in a saturated lime that reads slightly CG.",
+  "score": 6.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Sunlit plaster keeps visible texture: no wall region larger than 100 px with lum_range under 12, and nothing on the wall above lum 235",
+  "Both cabinets lit equally by the sun: their interior medians within 15 levels of each other",
+  "Each speaker casts a visible green pool of transmitted light onto the floor inside the frame",
+  "The cover cloth reads its own colour: delta-E 2000 to #6F7F66 at or below 6",
+  "A calm wall zone for the heading 'A pair of Poison.' with no sun-patch edge crossing it"
+ ],
+ "defects": [
+  {
+   "region": [
+    160,
+    30,
+    480,
+    600
+   ],
+   "what": "Sunlit plaster flat and near white (median 241, range 6-8): no plaster texture, reads as a CG card"
+  },
+  {
+   "region": [
+    520,
+    40,
+    840,
+    250
+   ],
+   "what": "Sun patch at median 238 with 0.26% clipped; its hard edges cross where the heading would sit"
+  },
+  {
+   "region": [
+    260,
+    410,
+    420,
+    450
+   ],
+   "what": "Left cabinet's interior dimmer than the right's (median 77 vs 109); the pair does not read as equally lit"
+  },
+  {
+   "region": [
+    1210,
+    645,
+    1330,
+    690
+   ],
+   "what": "Right speaker's transmitted green falls behind it onto the wall and baseboard; no green pool on the floor in front of either speaker"
+  },
+  {
+   "region": [
+    1050,
+    470,
+    1170,
+    590
+   ],
+   "what": "Cover cloth measures RGB 86,136,94, delta-E 9.1 to #6F7F66: green spill from inside the cabinet makes it too saturated"
+  },
+  {
+   "region": [
+    1030,
+    410,
+    1190,
+    450
+   ],
+   "what": "Lit interior ribs and batts read lime (72,126,63), delta-E 27 to the #B2C9A2 reference: saturated, slightly emissive look"
+  },
+  {
+   "region": [
+    640,
+    440,
+    800,
+    490
+   ],
+   "what": "The clear Cumulus record player hardly separates from the lit wall behind it; it reads as a smudge"
+  },
+  {
+   "region": [
+    0,
+    680,
+    1000,
+    720
+   ],
+   "what": "A long hard diagonal sill-shadow edge runs across the whole floor in front of the product and pulls the eye out of frame left"
+  },
+  {
+   "region": [
+    0,
+    0,
+    150,
+    690
+   ],
+   "what": "Window strip with a thick pale frame and busy orange forest at the left edge competes with the left speaker"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The sun enters at an angle that lights the right cabinet more than the left and throws the transmitted green onto the back wall instead of onto the floor in frame, so the main idea (sun through both cabinets) only half reads.",
+   "evidence": {
+    "region": [
+     260,
+     410,
+     420,
+     450
+    ],
+    "measured": "left interior median 77 vs right [1030,410,1190,450] median 109; floor in front of right speaker [1010,690,1210,740] RGB 86,68,38, no green"
+   },
+   "change": {
+    "setting": "sun azimuth / elevation",
+    "from": "azimuth -62, elevation 18",
+    "to": "azimuth -105, elevation 13 (from the left and slightly behind the speakers, so the transmitted light falls forward and right onto the floor)"
+   },
+   "expected": "Both cabinets lit through, interiors within 15 levels of each other; a soft green pool on the floor beside and in front of each speaker",
+   "accept": {
+    "region": [
+     260,
+     410,
+     420,
+     450
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 95
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The sunlit plaster burns to a flat cream field with no texture, which is the biggest CG tell in the frame.",
+   "evidence": {
+    "region": [
+     160,
+     30,
+     480,
+     250
+    ],
+    "measured": "lum_median 240.9, lum_range 7.6; [160,270,230,600] median 243.6, range 5.8"
+   },
+   "change": {
+    "setting": "prop 1 plaster value / bump",
+    "from": "value 1.3, bump 1.0",
+    "to": "value 1.05, bump 2.0 (keep tex_scale 1.6)"
+   },
+   "expected": "Sunlit plaster around 220-230 with visible trowel texture, nothing over 235",
+   "accept": {
+    "region": [
+     160,
+     30,
+     480,
+     250
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The cover cloth is lit mostly by green light from inside the cabinet, so its colour is off and the hero colour is untrue.",
+   "evidence": {
+    "region": [
+     1050,
+     470,
+     1170,
+     590
+    ],
+    "measured": "RGB 86,136,94, delta-E 9.08 to #6F7F66"
+   },
+   "change": {
+    "setting": "lamp north irradiance",
+    "from": "0.8",
+    "to": "1.3 (same position and colour)"
+   },
+   "expected": "Neutral front light dominates the cover; the cloth reads grey-green near #6F7F66",
+   "accept": {
+    "region": [
+     1050,
+     470,
+     1170,
+     590
+    ],
+    "metric": "delta_e",
+    "hex": "#6F7F66",
+    "op": "<=",
+    "value": 6
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The lit interiors read as a saturated lime glow rather than light through tinted acrylic onto pale batts.",
+   "evidence": {
+    "region": [
+     1030,
+     410,
+     1190,
+     450
+    ],
+    "measured": "RGB 72,126,63, delta-E 27.1 to #B2C9A2"
+   },
+   "change": {
+    "setting": "render white_balance_k / finish",
+    "from": "4800 K, no hue correction",
+    "to": "5200 K plus a finish-stage green-hue saturation of -15% limited to the cabinet interiors' luminance band (100-200)"
+   },
+   "expected": "Interiors read paler and closer to the reference tint, with the batts' texture visible",
+   "accept": {
+    "region": [
+     1030,
+     410,
+     1190,
+     450
+    ],
+    "metric": "delta_e",
+    "hex": "#B2C9A2",
+    "op": "<=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "composition",
+   "problem": "The heading sits over the wall, but the wall's top band is broken by sun-patch edges, so a heading there would fight the light.",
+   "evidence": {
+    "region": [
+     150,
+     100,
+     1440,
+     140
+    ],
+    "measured": "profile drops from 240 to 129 at the patch edge at about x 850; the edge step is 12 px wide"
+   },
+   "change": {
+    "setting": "window 0 / window 1 sizes (the patches on the wall)",
+    "from": "size [1.45, 2.71] each",
+    "to": "lower the top of the window 1 opening to 2.2 m (size [1.45, 2.2]) so the sun patch on the wall ends below y about 120 px, leaving the top band in even shade for type"
+   },
+   "expected": "A calm, evenly shaded band at the top of the wall above both horns, range under 30 levels",
+   "accept": {
+    "region": [
+     520,
+     20,
+     1000,
+     110
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The clear record player is lost against the lit wall and reads as a smudge.",
+   "evidence": {
+    "region": [
+     640,
+     440,
+     800,
+     490
+    ],
+    "measured": "median 113, near the neutral wall behind it; no dark edge to hold it"
+   },
+   "change": {
+    "setting": "prop record player position (allowed to move)",
+    "from": "left of centre, in front of the bright patch",
+    "to": "move it 0.25 m right so it sits in front of the shadowed wall between the patches, and turn it 15 deg to show the platter's rim"
+   },
+   "expected": "The acrylic's edges read bright against a darker wall; it reads as an object at a glance",
+   "accept": {
+    "region": [
+     640,
+     440,
+     800,
+     490
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "A long hard sill-shadow edge cuts diagonally across the whole foreground floor and leads the eye out of the frame.",
+   "evidence": {
+    "region": [
+     0,
+     680,
+     1000,
+     720
+    ],
+    "measured": "visible hard step along about 1000 px of floor in the crop"
+   },
+   "change": {
+    "setting": "prop 11/12 sheer open",
+    "from": "open 0.15",
+    "to": "open 0.35 on prop 12 so the sheer softens the lower window's light on the floor"
+   },
+   "expected": "The floor light becomes a softer, diffused gradient; the speakers' green pools become the floor's brightest accents",
+   "accept": {
+    "region": [
+     0,
+     680,
+     400,
+     800
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The pale window frame and the bright orange forest at the far left compete with the left speaker for attention.",
+   "evidence": {
+    "region": [
+     20,
+     50,
+     110,
+     620
+    ],
+    "measured": "median 112, p95 164, warm orange high saturation at the frame edge"
+   },
+   "change": {
+    "setting": "window frame colour / exterior strength",
+    "from": "#5A564F, strength 5.0",
+    "to": "#3A3733, strength 4.0"
+   },
+   "expected": "The left edge settles into a darker frame that bounds the picture instead of pulling at it",
+   "accept": {
+    "region": [
+     20,
+     50,
+     110,
+     620
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 150
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The horn's throat (compression driver) reads as a black hole in the centre of each horn",
+   "why": "It is part of the speaker; lighting cannot open it without changing the part"
+  },
+  {
+   "request": "Check the cabinet acrylic's transmission colour and the batts' albedo against #B2C9A2; the interior's lime may be partly the material, not the light",
+   "why": "It is the speaker's colour and material, which are fixed"
+  }
+ ],
+ "score_if_fixed": 7.8
+}

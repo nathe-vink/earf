@@ -1,0 +1,92 @@
+{
+ "_note": "The Slab for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-concepts/t1/render/t1.glb",
+ "origin_mm": [
+  230.0,
+  180.0,
+  0.0
+ ],
+ "materials": {
+  "acrylic": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.025,
+   "roughness": 0.05
+  },
+  "aluminium": {
+   "preset": "metal",
+   "color": "#BFC1C2",
+   "roughness": 0.35
+  },
+  "arm": {
+   "preset": "gunmetal",
+   "color": "#2C2C2E"
+  },
+  "rubber": {
+   "preset": "rubber",
+   "color": "#161616"
+  },
+  "steel": {
+   "preset": "metal",
+   "color": "#CFCFCB",
+   "roughness": 0.18
+  }
+ },
+ "assign": [
+  {
+   "match": "plinth-0|plinth-1|plinth-2|platter",
+   "material": "acrylic"
+  },
+  {
+   "match": "motor",
+   "material": "aluminium"
+  },
+  {
+   "match": "arm",
+   "material": "arm"
+  },
+  {
+   "match": "feet",
+   "material": "rubber"
+  },
+  {
+   "match": "spindle",
+   "material": "steel"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#F2A29C",
+   "accent": "#7A1A1C"
+  },
+  "dust": {
+   "deep": "#F2B184",
+   "accent": "#8C3B14"
+  },
+  "acid": {
+   "deep": "#F2D06B",
+   "accent": "#9A6A12"
+  },
+  "poison": {
+   "deep": "#B2C9A2",
+   "accent": "#2E4A2C"
+  },
+  "ice": {
+   "deep": "#B5D9EE",
+   "accent": "#24557E"
+  },
+  "haze": {
+   "deep": "#BEADD8",
+   "accent": "#3F2A5E"
+  },
+  "fog": {
+   "deep": "#F7F8F7",
+   "accent": "#E7E6E1"
+  },
+  "smoke": {
+   "deep": "#8A888E",
+   "accent": "#141316"
+  }
+ }
+}

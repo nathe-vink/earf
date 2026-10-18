@@ -141,11 +141,13 @@ def make_images(sources=None):
             fn(path); made.append(os.path.basename(path))
     def first(*paths):                                  # the final if it is there, else the round's picture
         return next((p for p in paths if p and os.path.exists(p)), None)
-    hero = first(os.path.join(H31, 'hero.png'), os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png'))
+    hero = first(os.path.join(H31, 'hero.png'), os.path.join(H31, 'hero.jpg'), os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png'))
     one(hero, lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82), save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
     # the hero's own link boxes and its phone frame travel with it, and a picture without them leaves none behind
     for name, src in (('hero-spots.json', 'spots.json'), ('hero-portrait.jpg', 'hero-portrait.png')):
         theirs = os.path.join(os.path.dirname(hero), src) if hero else ''
+        if theirs and src.endswith('.png') and not os.path.exists(theirs):    # a frame over 5 MB ships as a JPG
+            theirs = theirs[:-4] + '.jpg'
         if theirs and os.path.exists(theirs):
             if name.endswith('.json'):
                 shutil.copy(theirs, os.path.join(IMG, name)); made.append(src)
@@ -184,9 +186,9 @@ def make_images(sources=None):
     for tag, names in (('facade', ('facade', 'night', 'opera')), ('facade-portrait', ('facade-portrait', 'night-portrait', 'opera-portrait'))):
         one(first(*[os.path.join(U31, f'{n}.{e}') for n in names for e in ('png', 'jpg')]),
             lambda p, t=tag: (save(Image.open(p), f'{t}.jpg', 2400, q=84), save(Image.open(p), f'{t}-1200.jpg', 1200, q=82)))
-    room = first(os.path.join(RM31, 'room.png'), os.path.join(FIN, 'room.png'))
+    room = first(os.path.join(RM31, 'room.png'), os.path.join(RM31, 'room.jpg'), os.path.join(FIN, 'room.png'))
     one(room, lambda p: save(Image.open(p), 'room.jpg', 1800, q=84))
-    port = os.path.join(os.path.dirname(room), 'room-portrait.png') if room else ''
+    port = first(*[os.path.join(os.path.dirname(room), f'room-portrait.{e}') for e in ('png', 'jpg')]) if room else ''
     if port and os.path.exists(port):                   # the room's phone frame travels with it, as the hero's does
         one(port, lambda p: save(Image.open(p), 'room-portrait.jpg', 1000, q=84))
     elif room and os.path.exists(os.path.join(IMG, 'room-portrait.jpg')):
@@ -727,8 +729,8 @@ __REEL__
 __HABITATS__
   <section class="band room" id="room"><div class="wrap">
     <div class="head"><div><p class="eyebrow">At home</p><h2>A pair of Poison.</h2></div></div>
-    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy"></picture>
-      <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 520 mm.</span></figcaption></figure>
+    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
+      <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 560 mm.</span></figcaption></figure>
   </div></section>
 
   <section class="band spec" id="spec"><div class="wrap">

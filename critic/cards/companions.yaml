@@ -1,0 +1,42 @@
+# The shot cards' fixed part for EARF's companions (barkhorn round 31): a record player and a lamp in the tinted cast
+# acrylic of the Atmosphere loudspeakers. critic/card.py joins this with the shot's settings; round.py stage --card.
+
+product: >
+  EARF's companions to its Atmosphere horn loudspeakers, made of the same tinted cast acrylic: Cumulus, a belt-drive
+  record player whose plinth is two cemented 20 mm sheets cut as three fused circles (the platter's, the arm's, the
+  motor's), the motor standing apart in its own pod in a hole in the plinth, a 25 mm acrylic platter, a Rega tonearm
+  and a blue Ortofon cartridge; and Bell, a table lamp whose shade is the speaker's horn flare hung mouth down, lit
+  from an opal sleeve at its throat, on a clear stem and a foot of two acrylic discs. The tall speaker is a Cloud:
+  20 mm tinted acrylic cabinet, a cast resin horn on top.
+
+products:
+  studio/products/barkhorn-turntable.json: >
+    Cumulus, a belt-drive record player in tinted cast acrylic: the plinth of three fused circles, the motor apart.
+  studio/products/barkhorn-lamp.json: >
+    Bell, a table lamp in tinted cast acrylic: the horn's flare as its shade, lit from its throat.
+
+fixed:
+  - >-
+    The products' geometry: every part's shape, size and placement, the plinth's outline, the shade's flare, the
+    speaker's cabinet and horn. They are the design.
+  - >-
+    The colour of each piece (the flavour) and that every piece of a scene shares it; you may ask for it to be
+    reproduced more faithfully (exposure, white balance), never for a different colour.
+  - >-
+    The bought components (tonearm, cartridge, motor) and their own colours.
+  - >-
+    What the shot's purpose below fixes about framing.
+
+shots:
+  companions-hero-turntable:
+    title: Cumulus beside a Cloud speaker
+    purpose: >
+      The record player's hero: Cumulus on a sideboard beside the speaker in the same colour, a record on it; read
+      first as a premium record player, second as part of the speaker's family. Landscape.
+    must_show: [the record player whole with its three circles readable, the speaker whole, the sideboard's top]
+  companions-hero-lamp:
+    title: Bell beside a Cloud speaker
+    purpose: >
+      The lamp's hero: Bell lit on a sideboard beside the speaker in the same colour; the lamp's glow carries the
+      frame. Landscape.
+    must_show: [the lamp whole and lit, the shade's colour, the speaker whole, the sideboard's top]

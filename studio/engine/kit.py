@@ -22,7 +22,7 @@ A kit piece is a prop in a set's `props`: {"kind": "kit", "shape": ..., "positio
   z1] or rising in a `plume` {"height", "spread": [r0, r1], "lean": [dx, dy], "taper", "power"} from the piece's
   position (embers rising, sparks, dust motes, snow, bubbles), `seed`;
 - thread: a fine line from `a` to `b` (world points), `radius` (the string a cloud hangs from);
-- ext: a piece a set builds itself, `module` (studio/engine/kit_ext/<module>.py) and `fn`, called as
+- ext: a piece a set builds itself, `module` (studio/engine/kit_ext/<module>.py) or `path` (a .py from the repo root) and `fn`, called as
   fn(bpy, name, p, kit) and returning its objects (it can use this module's helpers and materials).
 
 Photographic pieces (round 31b; studio/engine/assets.py, Poly Haven CC0, fetched and cached):
@@ -360,6 +360,9 @@ def _scatter(bm, p):
 
 def _ext(bpy, name, p):
     d = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'kit_ext')
+    if p.get('path'):                                    # a set's own module, by its path from the repo root (room31)
+        d, f = os.path.split(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', p['path']))
+        p = {**p, 'module': p.get('module', os.path.splitext(f)[0])}
     if d not in sys.path:
         sys.path.insert(0, d)
     mod = importlib.import_module(p['module'])
@@ -387,7 +390,10 @@ def finish(bpy, name, bm, p, smooth=True, mat=None):
 def piece_material(bpy, p):
     if p.get('material') == 'pbr':                                   # a photographed texture set (assets.py)
         import assets
-        return assets.pbr(bpy, p['texture'], p.get('res', '2k'), scale=p.get('tex_scale'), displace=p.get('displace', 0.0),
+        # the texture's resolution is `tex_res`; `res` means it too only when it reads as one ('2k'), since a tube's or a
+        # drape's `res` is its mesh resolution (a pbr tube with res 12 crashed here)
+        res = p.get('tex_res') or (p['res'] if isinstance(p.get('res'), str) else '2k')
+        return assets.pbr(bpy, p['texture'], res, scale=p.get('tex_scale'), displace=p.get('displace', 0.0),
                           tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0), rough_mul=p.get('rough_mul', 1.0),
                           bump=p.get('bump', 1.0), coords=p.get('coords', 'object'), emit=p.get('emit_map', 0.0))
     opts = {k: p[k] for k in ('roughness', 'alpha', 'emit', 'emit_color', 'tint2', 'grain', 'rib') if k in p}

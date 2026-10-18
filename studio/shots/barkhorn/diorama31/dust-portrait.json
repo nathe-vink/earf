@@ -1,0 +1,1185 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-orange",
+  "instances": [
+   {
+    "flavour": "cloud-orange",
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotate_z": 10.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "kit_scale": 6.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "sand",
+    "color": "#E2A46C",
+    "tint2": "#CF8A55",
+    "size": [
+     20.0,
+     16.0,
+     0.04
+    ],
+    "position": [
+     0.0,
+     0.0,
+     -0.04
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#F8C088",
+    "size": [
+     26.0,
+     0.05,
+     9.0
+    ],
+    "position": [
+     0.0,
+     7.6000000000000005,
+     -0.1
+    ],
+    "shadow": false,
+    "emit": 0.12
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "paper",
+    "color": "#F4B482",
+    "radius": 1.615,
+    "height": 0.01,
+    "position": [
+     3.0,
+     7.5200000000000005,
+     1.55
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ],
+    "emit": 0.18,
+    "segments": 128,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "paper",
+    "color": "#F8BE84",
+    "radius": 1.254,
+    "height": 0.01,
+    "position": [
+     3.0,
+     7.49,
+     1.55
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ],
+    "emit": 0.4,
+    "segments": 128,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "paper",
+    "color": "#FFC77E",
+    "radius": 0.95,
+    "height": 0.01,
+    "position": [
+     3.0,
+     7.460000000000001,
+     1.55
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ],
+    "emit": 0.8,
+    "segments": 128,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "paper",
+    "color": "#FFD496",
+    "radius": 0.817,
+    "height": 0.01,
+    "position": [
+     3.0,
+     7.430000000000001,
+     1.55
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ],
+    "emit": 1.05,
+    "segments": 128,
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "suede",
+    "color": "#C8714A",
+    "module": "dust",
+    "fn": "strata",
+    "position": [
+     -2.0,
+     6.4,
+     0.0
+    ],
+    "radius": 2.3,
+    "height": 1.9,
+    "layers": [
+     "#C8714A",
+     "#A8482E",
+     "#B5563A",
+     "#BF5F3E",
+     "#A94B31",
+     "#BC5A3A"
+    ],
+    "seed": 1,
+    "squash": 0.4,
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "suede",
+    "color": "#CD7A50",
+    "module": "dust",
+    "fn": "strata",
+    "position": [
+     3.9,
+     6.0,
+     0.0
+    ],
+    "radius": 0.55,
+    "height": 2.2,
+    "layers": [
+     "#CD7A50",
+     "#BF5F3E",
+     "#A8482E",
+     "#C06041",
+     "#A8482E",
+     "#BF5F3E"
+    ],
+    "seed": 2,
+    "squash": 0.85,
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "suede",
+    "color": "#D08058",
+    "module": "dust",
+    "fn": "strata",
+    "position": [
+     1.2,
+     7.2,
+     0.0
+    ],
+    "radius": 1.5,
+    "height": 1.15,
+    "layers": [
+     "#D08058",
+     "#C46A47",
+     "#BE6142",
+     "#C86B45"
+    ],
+    "seed": 4,
+    "squash": 0.45,
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "suede",
+    "color": "#C86B45",
+    "module": "dust",
+    "fn": "strata",
+    "position": [
+     6.4,
+     7.0,
+     0.0
+    ],
+    "radius": 1.6,
+    "height": 1.4,
+    "layers": [
+     "#C86B45",
+     "#A8482E",
+     "#BF5F3E",
+     "#B0502F"
+    ],
+    "seed": 3,
+    "squash": 0.4,
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "corduroy",
+    "color": "#D68650",
+    "module": "dust",
+    "fn": "dunes",
+    "size": [
+     18.0,
+     4.0
+    ],
+    "position": [
+     0.5,
+     3.4,
+     0.0
+    ],
+    "ridges": [
+     [
+      -1.1,
+      0.4,
+      0.6
+     ],
+     [
+      0.1,
+      0.55,
+      0.65
+     ],
+     [
+      1.2,
+      0.7,
+      0.65
+     ]
+    ],
+    "seed": 4,
+    "rib": "Y",
+    "grain": 1.4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "paper",
+    "color": "#C79A64",
+    "module": "dust",
+    "fn": "tumbleweed",
+    "radius": 0.3,
+    "count": 48,
+    "strand": 0.0026,
+    "seed": 5,
+    "position": [
+     -0.85,
+     0.4,
+     0.33499999999999996
+    ],
+    "rotate": [
+     12,
+     30,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "wool",
+    "color": "#E8955A",
+    "puffs": [
+     [
+      0.0,
+      0.2085,
+      0.1497
+     ],
+     [
+      0.2084,
+      0.3413,
+      0.2252
+     ],
+     [
+      0.4662,
+      0.2294,
+      0.1706
+     ]
+    ],
+    "depth": 0.8,
+    "position": [
+     1.05,
+     1.1,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "wool",
+    "color": "#E8955A",
+    "points": [
+     [
+      1.1,
+      1.1,
+      0.074
+     ],
+     [
+      1.2683,
+      1.1037,
+      0.0636
+     ],
+     [
+      1.4365,
+      1.1068,
+      0.0536
+     ],
+     [
+      1.6048,
+      1.109,
+      0.0438
+     ],
+     [
+      1.7731,
+      1.11,
+      0.0345
+     ],
+     [
+      1.9413,
+      1.1095,
+      0.0256
+     ],
+     [
+      2.1096,
+      1.1078,
+      0.0173
+     ],
+     [
+      2.2778,
+      1.1049,
+      0.0098
+     ],
+     [
+      2.4461,
+      1.1014,
+      0.004
+     ]
+    ],
+    "radius": [
+     0.091,
+     0.0794,
+     0.0679,
+     0.0567,
+     0.0457,
+     0.0349,
+     0.0245,
+     0.0146,
+     0.006
+    ],
+    "flat": 0.55,
+    "sides": 20
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "suede",
+    "color": "#A85A36",
+    "outline": [
+     [
+      -0.0125,
+      -0.0018
+     ],
+     [
+      -0.0618,
+      -0.0329
+     ],
+     [
+      -0.0085,
+      -0.0093
+     ],
+     [
+      0.0085,
+      -0.0093
+     ],
+     [
+      0.0618,
+      -0.0329
+     ],
+     [
+      0.0125,
+      -0.0018
+     ],
+     [
+      0.0125,
+      0.0018
+     ],
+     [
+      0.0618,
+      0.0329
+     ],
+     [
+      0.0085,
+      0.0093
+     ],
+     [
+      -0.0085,
+      0.0093
+     ],
+     [
+      -0.0618,
+      0.0329
+     ],
+     [
+      -0.0125,
+      0.0018
+     ]
+    ],
+    "depth": 0.004,
+    "ease": 0.001,
+    "position": [
+     2.5761,
+     1.035,
+     0.006
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "suede",
+    "color": "#A85A36",
+    "outline": [
+     [
+      -0.0125,
+      -0.0018
+     ],
+     [
+      -0.0618,
+      -0.0329
+     ],
+     [
+      -0.0085,
+      -0.0093
+     ],
+     [
+      0.0085,
+      -0.0093
+     ],
+     [
+      0.0618,
+      -0.0329
+     ],
+     [
+      0.0125,
+      -0.0018
+     ],
+     [
+      0.0125,
+      0.0018
+     ],
+     [
+      0.0618,
+      0.0329
+     ],
+     [
+      0.0085,
+      0.0093
+     ],
+     [
+      -0.0085,
+      0.0093
+     ],
+     [
+      -0.0618,
+      0.0329
+     ],
+     [
+      -0.0125,
+      0.0018
+     ]
+    ],
+    "depth": 0.004,
+    "ease": 0.001,
+    "position": [
+     2.7761,
+     1.125,
+     0.006
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "suede",
+    "color": "#A85A36",
+    "outline": [
+     [
+      -0.0125,
+      -0.0018
+     ],
+     [
+      -0.0618,
+      -0.0329
+     ],
+     [
+      -0.0085,
+      -0.0093
+     ],
+     [
+      0.0085,
+      -0.0093
+     ],
+     [
+      0.0618,
+      -0.0329
+     ],
+     [
+      0.0125,
+      -0.0018
+     ],
+     [
+      0.0125,
+      0.0018
+     ],
+     [
+      0.0618,
+      0.0329
+     ],
+     [
+      0.0085,
+      0.0093
+     ],
+     [
+      -0.0085,
+      0.0093
+     ],
+     [
+      -0.0618,
+      0.0329
+     ],
+     [
+      -0.0125,
+      0.0018
+     ]
+    ],
+    "depth": 0.004,
+    "ease": 0.001,
+    "position": [
+     2.9761,
+     1.035,
+     0.006
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "suede",
+    "color": "#A85A36",
+    "outline": [
+     [
+      -0.0125,
+      -0.0018
+     ],
+     [
+      -0.0618,
+      -0.0329
+     ],
+     [
+      -0.0085,
+      -0.0093
+     ],
+     [
+      0.0085,
+      -0.0093
+     ],
+     [
+      0.0618,
+      -0.0329
+     ],
+     [
+      0.0125,
+      -0.0018
+     ],
+     [
+      0.0125,
+      0.0018
+     ],
+     [
+      0.0618,
+      0.0329
+     ],
+     [
+      0.0085,
+      0.0093
+     ],
+     [
+      -0.0085,
+      0.0093
+     ],
+     [
+      -0.0618,
+      0.0329
+     ],
+     [
+      -0.0125,
+      0.0018
+     ]
+    ],
+    "depth": 0.004,
+    "ease": 0.001,
+    "position": [
+     3.1761,
+     1.125,
+     0.006
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "suede",
+    "color": "#A85A36",
+    "outline": [
+     [
+      -0.0125,
+      -0.0018
+     ],
+     [
+      -0.0618,
+      -0.0329
+     ],
+     [
+      -0.0085,
+      -0.0093
+     ],
+     [
+      0.0085,
+      -0.0093
+     ],
+     [
+      0.0618,
+      -0.0329
+     ],
+     [
+      0.0125,
+      -0.0018
+     ],
+     [
+      0.0125,
+      0.0018
+     ],
+     [
+      0.0618,
+      0.0329
+     ],
+     [
+      0.0085,
+      0.0093
+     ],
+     [
+      -0.0085,
+      0.0093
+     ],
+     [
+      -0.0618,
+      0.0329
+     ],
+     [
+      -0.0125,
+      0.0018
+     ]
+    ],
+    "depth": 0.004,
+    "ease": 0.001,
+    "position": [
+     3.3761,
+     1.035,
+     0.006
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "suede",
+    "color": "#A85A36",
+    "outline": [
+     [
+      -0.0125,
+      -0.0018
+     ],
+     [
+      -0.0618,
+      -0.0329
+     ],
+     [
+      -0.0085,
+      -0.0093
+     ],
+     [
+      0.0085,
+      -0.0093
+     ],
+     [
+      0.0618,
+      -0.0329
+     ],
+     [
+      0.0125,
+      -0.0018
+     ],
+     [
+      0.0125,
+      0.0018
+     ],
+     [
+      0.0618,
+      0.0329
+     ],
+     [
+      0.0085,
+      0.0093
+     ],
+     [
+      -0.0085,
+      0.0093
+     ],
+     [
+      -0.0618,
+      0.0329
+     ],
+     [
+      -0.0125,
+      0.0018
+     ]
+    ],
+    "depth": 0.004,
+    "ease": 0.001,
+    "position": [
+     3.5761,
+     1.125,
+     0.006
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "material": "suede",
+    "color": "#A85A36",
+    "outline": [
+     [
+      -0.0125,
+      -0.0018
+     ],
+     [
+      -0.0618,
+      -0.0329
+     ],
+     [
+      -0.0085,
+      -0.0093
+     ],
+     [
+      0.0085,
+      -0.0093
+     ],
+     [
+      0.0618,
+      -0.0329
+     ],
+     [
+      0.0125,
+      -0.0018
+     ],
+     [
+      0.0125,
+      0.0018
+     ],
+     [
+      0.0618,
+      0.0329
+     ],
+     [
+      0.0085,
+      0.0093
+     ],
+     [
+      -0.0085,
+      0.0093
+     ],
+     [
+      -0.0618,
+      0.0329
+     ],
+     [
+      -0.0125,
+      0.0018
+     ]
+    ],
+    "depth": 0.004,
+    "ease": 0.001,
+    "position": [
+     3.7761,
+     1.035,
+     0.006
+    ],
+    "rotate": [
+     90,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "corduroy",
+    "color": "#8E9A6C",
+    "points": [
+     [
+      2.75,
+      2.6,
+      -0.02
+     ],
+     [
+      2.75,
+      2.6,
+      0.425
+     ],
+     [
+      2.75,
+      2.6,
+      0.7565
+     ]
+    ],
+    "radius": 0.0935,
+    "rib": "Z",
+    "grain": 0.8,
+    "sides": 24
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "corduroy",
+    "color": "#8E9A6C",
+    "position": [
+     2.75,
+     2.6,
+     0.7565
+    ],
+    "scale": 0.0935,
+    "rib": "Z",
+    "grain": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "corduroy",
+    "color": "#8E9A6C",
+    "points": [
+     [
+      2.75,
+      2.6,
+      0.323
+     ],
+     [
+      2.6055,
+      2.6,
+      0.34
+     ],
+     [
+      2.563,
+      2.6,
+      0.425
+     ],
+     [
+      2.563,
+      2.6,
+      0.612
+     ]
+    ],
+    "radius": 0.06358,
+    "rib": "Z",
+    "grain": 0.8,
+    "sides": 20
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "corduroy",
+    "color": "#8E9A6C",
+    "position": [
+     2.563,
+     2.6,
+     0.612
+    ],
+    "scale": 0.06358,
+    "rib": "Z",
+    "grain": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "tube",
+    "material": "corduroy",
+    "color": "#8E9A6C",
+    "points": [
+     [
+      2.75,
+      2.6,
+      0.425
+     ],
+     [
+      2.8945,
+      2.6,
+      0.442
+     ],
+     [
+      2.937,
+      2.6,
+      0.527
+     ],
+     [
+      2.937,
+      2.6,
+      0.731
+     ]
+    ],
+    "radius": 0.06358,
+    "rib": "Z",
+    "grain": 0.8,
+    "sides": 20
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "corduroy",
+    "color": "#8E9A6C",
+    "position": [
+     2.937,
+     2.6,
+     0.731
+    ],
+    "scale": 0.06358,
+    "rib": "Z",
+    "grain": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "suede",
+    "color": "#B9603F",
+    "position": [
+     1.25,
+     -0.95,
+     0.0
+    ],
+    "scale": [
+     0.24,
+     0.19,
+     0.16
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "suede",
+    "color": "#C77048",
+    "position": [
+     1.55,
+     -0.75,
+     0.0
+    ],
+    "scale": [
+     0.13,
+     0.11,
+     0.085
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "material": "glow",
+    "color": "#FFD9A0",
+    "emit": 1.2,
+    "count": 45,
+    "radius": [
+     0.002,
+     0.0045
+    ],
+    "seed": 7,
+    "in": [
+     -1.2,
+     0.2,
+     0.3,
+     1.6,
+     2.0,
+     1.8
+    ],
+    "shadow": false
+   }
+  ]
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": -42,
+    "elevation_deg": 22,
+    "distance_m": 3.4
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.65
+   ],
+   "irradiance": 2.2,
+   "color": "#FFD6AA"
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 160.0,
+    "elevation_deg": 16,
+    "distance_m": 3.5
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 3.2,
+   "color": "#FFAE66"
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 6,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "barkhorn, Dust, golden hour in a suede desert (4:5)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -1.0951,
+   -3.7137,
+   0.9215
+  ],
+  "target": [
+   -0.1,
+   0.0,
+   0.72
+  ],
+  "lens_mm": 80,
+  "level": false,
+  "fstop": 5.6,
+  "miniature": 5,
+  "focus": [
+   0.0,
+   -0.12,
+   0.66
+  ],
+  "blades": 0
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F0B488",
+  "horizon": "#F6C899",
+  "ground": "#B8683F",
+  "strength": 0.35
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.08,
+  "clarity": 0.05,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "dream": {
+   "bloom": 0.3,
+   "bloom_px": 40,
+   "bloom_threshold": 0.78,
+   "saturation": 0.18,
+   "lift": 0.04,
+   "lift_color": "#5C2A1C",
+   "vignette": 0.22
+  }
+ },
+ "haze": {
+  "box_m": [
+   -12.0,
+   0.8,
+   -0.1,
+   12.0,
+   7.6,
+   8.0
+  ],
+  "density": 0.009,
+  "anisotropy": 0.6,
+  "color": "#FFD8B0"
+ },
+ "sun": {
+  "irradiance": 8.0,
+  "azimuth_deg": 152.0,
+  "elevation_deg": 9.0,
+  "angle_deg": 2.0,
+  "color": "#FFB574"
+ }
+}

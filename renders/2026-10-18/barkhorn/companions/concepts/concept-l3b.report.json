@@ -1,0 +1,105 @@
+{
+ "shot": "studio/shots/barkhorn/companions/concept-l3b.json",
+ "image": "renders/2026-10-18/barkhorn/companions/concepts/concept-l3b.png",
+ "seconds": {
+  "build": 0.3,
+  "render": 68.5
+ },
+ "samples": 48,
+ "size": [
+  900,
+  720
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "diffuser#0": {
+   "part": "diffuser",
+   "centre_px": [
+    450.0,
+    141.0
+   ],
+   "box_px": [
+    400,
+    136,
+    501,
+    147
+   ],
+   "depth_m": 1.418
+  },
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    450.0,
+    576.8
+   ],
+   "box_px": [
+    291,
+    505,
+    620,
+    667
+   ],
+   "depth_m": 1.418
+  },
+  "led#0": {
+   "part": "led",
+   "centre_px": [
+    450.0,
+    137.9
+   ],
+   "box_px": [
+    407,
+    134,
+    493,
+    142
+   ],
+   "depth_m": 1.418
+  },
+  "pod#0": {
+   "part": "pod",
+   "centre_px": [
+    450.0,
+    115.7
+   ],
+   "box_px": [
+    392,
+    93,
+    509,
+    141
+   ],
+   "depth_m": 1.418
+  },
+  "shade#0": {
+   "part": "shade",
+   "centre_px": [
+    450.0,
+    200.9
+   ],
+   "box_px": [
+    175,
+    90,
+    759,
+    365
+   ],
+   "depth_m": 1.418
+  },
+  "stem#0": {
+   "part": "stem",
+   "centre_px": [
+    450.0,
+    344.1
+   ],
+   "box_px": [
+    429,
+    131,
+    472,
+    563
+   ],
+   "depth_m": 1.418
+  }
+ }
+}

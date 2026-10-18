@@ -1,0 +1,374 @@
+{
+ "stage1": {
+  "impression": "A warm late-afternoon living room with convincing raking sun on the plaster, sensible restraint and clear space for type on the wall. The pair itself reads as CG, though: the cabinets are acid, almost fluorescent green with the interior reading as solid lime plastic blocks, the woofer discs are dead-flat matte circles, and a near-white popcorn-textured rug is the brightest thing in the frame, pulling the eye to the bottom edge. The credenza's veneer is streaky and stretched.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Cabinets read as tinted glass/acrylic, not fluorescent plastic: lit cabinet regions within dE2000 18 of #B2C9A2 with a blue channel above ~60, not near 0",
+  "Woofer cover shows light modelling (a gradient across the disc), not a flat fill",
+  "The rug (or whatever is in the foreground) is darker than the sunlit wall and has a believable, non-noisy pile",
+  "Credenza veneer shows real walnut figure with no stretched or streaked texture",
+  "The cabinets' green transmitted light lands visibly on the floor or wall beside each speaker, so they plainly sit in the sun",
+  "The exterior through the glazing reads as a sharp real view, not a soft low-res plate"
+ ],
+ "defects": [
+  {
+   "region": [
+    240,
+    400,
+    425,
+    685
+   ],
+   "what": "Left cabinet acid green, b_median 6-40; interior batts read as solid lime plastic blocks, not lit voile/polyester"
+  },
+  {
+   "region": [
+    1015,
+    400,
+    1200,
+    685
+   ],
+   "what": "Right cabinet: same oversaturated acid green"
+  },
+  {
+   "region": [
+    285,
+    480,
+    380,
+    580
+   ],
+   "what": "Woofer cover disc is uniformly flat (lum_range 3.0), reads as a CG circle"
+  },
+  {
+   "region": [
+    1035,
+    480,
+    1180,
+    600
+   ],
+   "what": "Right woofer disc equally flat"
+  },
+  {
+   "region": [
+    250,
+    720,
+    1150,
+    800
+   ],
+   "what": "Rug is the brightest object (lum_median 221 vs sun-lit wall 215) and its texture reads as a noisy popcorn pattern"
+  },
+  {
+   "region": [
+    480,
+    505,
+    960,
+    630
+   ],
+   "what": "Credenza walnut veneer reads as horizontally stretched streaks, not wood figure"
+  },
+  {
+   "region": [
+    20,
+    0,
+    90,
+    640
+   ],
+   "what": "Exterior forest view soft and low on detail; reads as a blurred backplate"
+  },
+  {
+   "region": [
+    430,
+    640,
+    520,
+    700
+   ],
+   "what": "No green transmitted light reaches the floor beside the speakers (114,94,65 is plain warm floor)"
+  },
+  {
+   "region": [
+    0,
+    680,
+    200,
+    760
+   ],
+   "what": "Window frame base corner crushed (crush 1.9%), slightly murky"
+  },
+  {
+   "region": [
+    1100,
+    40,
+    1440,
+    480
+   ],
+   "what": "The upper-right wall is busy with a large shadow trapezoid, a bright patch and a horn shadow cut by the edge, competing with the right speaker"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The cabinets render as fluorescent lime with almost no blue, so they read as plastic rather than as a $20k tinted acrylic and miss their reference colour.",
+   "evidence": {
+    "region": [
+     300,
+     630,
+     365,
+     660
+    ],
+    "measured": "RGB 89,130,51, dE2000 25.6 vs #B2C9A2; upper cabinet [250,410,420,450] RGB 40,80,6 (b 6), dE 47"
+   },
+   "change": {
+    "setting": "sun colour + render white_balance_k",
+    "from": "sun #FFE2BC, white_balance_k 5600",
+    "to": "sun #FFEAD4, white_balance_k 5000 (keep exposure -0.9); if still acid, add a -10% saturation on greens in the grade only"
+   },
+   "expected": "Cabinet lit areas move toward pale sage with blue around 70-90, and the wall keeps a warm but less orange cast.",
+   "accept": {
+    "region": [
+     300,
+     630,
+     365,
+     660
+    ],
+    "metric": "delta_e",
+    "hex": "#B2C9A2",
+    "op": "<=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "set",
+   "problem": "The rug is the brightest and noisiest surface in the frame and pulls the eye away from the pair to the bottom edge.",
+   "evidence": {
+    "region": [
+     250,
+     720,
+     1150,
+     800
+    ],
+    "measured": "lum_median 220.7 (sunlit wall 215.1), RGB 234,220,191; popcorn pile texture visible at 1x"
+   },
+   "change": {
+    "setting": "prop 3 rug",
+    "from": "texture curly_teddy_natural, value 0.45, tint #8E8170, size [2.6, 2.0]",
+    "to": "a low-pile flatweave wool texture, value 0.3, tint #7A6E60, size [2.2, 1.6], position [0.0, -1.5]"
+   },
+   "expected": "The rug drops to a mid-tone strip below the speakers and stops competing; the pair and wall become the brightest areas.",
+   "accept": {
+    "region": [
+     250,
+     730,
+     1150,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     120,
+     170
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The woofer covers are lit flat from the front, so they read as painted CG circles with no form.",
+   "evidence": {
+    "region": [
+     285,
+     480,
+     380,
+     580
+    ],
+    "measured": "lum_range 3.0, lum_p5 81.4 / p95 84.4; RGB 64,93,45, dE 7.8 vs #2E4A2C (too light)"
+   },
+   "change": {
+    "setting": "lamp bounce",
+    "from": "irradiance 0.2, position [0.0, -4.3, 1.5]",
+    "to": "irradiance 0.06, position [-2.0, -3.8, 1.8] (move the fill to the window side so it models from the left)"
+   },
+   "expected": "The disc darkens toward its reference and shows a gentle left-to-right gradient.",
+   "accept": {
+    "region": [
+     285,
+     480,
+     380,
+     580
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 10
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The credenza's walnut veneer reads as horizontally stretched streaks, which says 'render' in the middle of the frame.",
+   "evidence": {
+    "region": [
+     480,
+     505,
+     960,
+     630
+    ],
+    "measured": "2x crop shows long uniform horizontal streaks with no cathedral or straight-grain figure"
+   },
+   "change": {
+    "setting": "prop 2 credenza",
+    "from": "black_walnut_veneer_02, grain_rot 90.0",
+    "to": "grain_rot 0.0 (grain running horizontally at true scale, not stretched), or a different walnut veneer scan at 4k with UVs scaled per door"
+   },
+   "expected": "The doors show readable walnut grain with figure, no streaking.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The sun passes through the cabinets, but their green light barely shows on the floor, so the pair doesn't visibly sit in the light.",
+   "evidence": {
+    "region": [
+     430,
+     640,
+     520,
+     700
+    ],
+    "measured": "floor RGB 114,94,65, no green; the green patch shows only faintly on the wall by the vase [915,430,950,480]"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -68, elevation 14",
+    "to": "azimuth -72, elevation 20 (lands the transmitted pool on the floor just right of each cabinet, inside the frame)"
+   },
+   "expected": "A soft green-tinted pool on the floorboards right of each speaker, g_median above r_median there.",
+   "accept": {
+    "region": [
+     430,
+     650,
+     560,
+     700
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "asset",
+   "problem": "The view through the glazing is soft and low on detail and reads as a backplate.",
+   "evidence": {
+    "region": [
+     20,
+     0,
+     90,
+     640
+    ],
+    "measured": "2x crop: branches smeared, no fine twig detail"
+   },
+   "change": {
+    "setting": "prop 12 exterior",
+    "from": "blur 0.0015, strength 3.2",
+    "to": "blur 0.0, strength 2.6 (a touch less bright so the curtain edge holds)"
+   },
+   "expected": "Sharper tree detail outside without blowing the window.",
+   "accept": {
+    "region": [
+     20,
+     0,
+     90,
+     640
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "composition",
+   "problem": "The upper-right wall has a busy shadow trapezoid and a cut-off horn shadow, which pulls attention from the right speaker and unbalances the space for type.",
+   "evidence": {
+    "region": [
+     1100,
+     40,
+     1440,
+     480
+    ],
+    "measured": "shadow lum 105.6 against a sun patch of 192 at the right edge [1270,455,1440,480]; a partial horn silhouette at the edge"
+   },
+   "change": {
+    "setting": "window 2 / sun",
+    "from": "window 2 along -0.45 m (its frame throws the trapezoid)",
+    "to": "window 2 along -0.9 m, or close that bay with the drape, so the right-hand wall falls into one even shadow"
+   },
+   "expected": "One calm shadow area on the right wall behind the right speaker, with the left-to-centre sun patch left as the heading's field.",
+   "accept": {
+    "region": [
+     1100,
+     40,
+     1440,
+     300
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The base of the window frame in the bottom-left corner is crushed and murky.",
+   "evidence": {
+    "region": [
+     0,
+     680,
+     200,
+     760
+    ],
+    "measured": "crush_pct 1.86, lum_p5 28.1"
+   },
+   "change": {
+    "setting": "render grade",
+    "from": "no toe lift",
+    "to": "lift blacks so the floor shadow holds detail (toe +0.02)"
+   },
+   "expected": "The corner keeps some floorboard detail.",
+   "accept": {
+    "region": [
+     0,
+     680,
+     200,
+     760
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 0.5
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover a visible cloth weave or texture instead of a flat solid disc",
+   "why": "It is the speaker's material (cover cloth); fixed per the card."
+  },
+  {
+   "request": "Make the interior batts read as soft polyester in voile sleeves rather than solid lime blocks",
+   "why": "It is the speaker's internal material and shading; fixed. Only the light and grade (c1) may help."
+  },
+  {
+   "request": "Lower the acrylic's saturation at the material level if the grade cannot reach #B2C9A2",
+   "why": "It is the speaker's colour; fixed."
+  }
+ ],
+ "score_if_fixed": 7.4
+}

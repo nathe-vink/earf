@@ -1,0 +1,307 @@
+{
+ "stage1": {
+  "impression": "A tinted-purple acrylic horn speaker stands beside a veneer sideboard with a purple bell lamp on a flat lilac sweep. The speaker is cut off at the bottom of the frame, the lamp's glow lights nothing around it, and the even dome light flattens the wall, the wood and the product into a CG look.",
+  "score": 4.5
+ },
+ "blocking_9": [
+  "The speaker is whole in frame with floor visible below its base (now its front-panel box runs to y 1050, the frame edge; the strip [300,1035,560,1050] is cabinet at lum 16).",
+  "The lamp visibly lights its surroundings: the sideboard top beside the foot is now 112.6 against 118.2 at the far end, and the wall above the shade is 186.7, the same as the empty wall at 183.7, so the glow carries nothing.",
+  "The wall has a falloff: now 178.9 to 185.7 top to bottom and 177 to 186 across, about 8 levels in total, so it reads as a flat card; it should darken 25 to 40 levels away from the lamp.",
+  "The sideboard veneer reads as wood with figure and a lit-to-shade gradient: its centre door is one value (lum range 4.2), with contour-like rings.",
+  "Speaker and lamp separate from the set: the lilac sweep (rgb 181,179,201) has the same hue as the purple acrylic, so the product's colour does not pop.",
+  "Floor contact: the legs and the cabinet base have no contact shadow on the sweep."
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The speaker, a must-show 'whole', is cut by the frame's bottom edge, so its base and its floor contact are missing.",
+   "evidence": {
+    "region": [
+     300,
+     1035,
+     560,
+     1050
+    ],
+    "measured": "front-panel box [251,433,612,1050] runs to the frame edge; the bottom strip under it is cabinet, lum_median 16.1, rgb 27,10,54"
+   },
+   "change": {
+    "setting": "camera.lens_mm",
+    "from": 60,
+    "to": 50
+   },
+   "expected": "Everything scales about 0.83 toward the frame centre: the horn top moves to about y 205, the speaker base to about y 980, leaving roughly 50 to 70 px of lit sweep below the speaker, and the lamp and sideboard stay fully in frame.",
+   "accept": {
+    "region": [
+     300,
+     1035,
+     560,
+     1050
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 110
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The lamp's opal sleeve is a dim pink patch (median 194, p95 222, not reaching the shoulder) that lights neither the shade nor the sideboard top nor the wall, so the frame's hero reads as switched off.",
+   "evidence": {
+    "region": [
+     990,
+     310,
+     1040,
+     350
+    ],
+    "measured": "sleeve lum_median 194.1, p95 221.8; shade median 102.3; sideboard top by the foot [730,598,930,625] 112.6 against 118.2 at the far end [1150,598,1320,625]"
+   },
+   "change": {
+    "setting": "materials.led.strength",
+    "from": 35.2,
+    "to": "x4"
+   },
+   "expected": "The sleeve rolls into the shoulder (p95 about 240 to 248, still not clipped); the shade glows from the throat down, its median rising from 102 to about 130 to 150; a warm pool falls on the sideboard top round the foot, which becomes brighter than the far end of the top.",
+   "accept": {
+    "region": "part:shade",
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     200,
+     245
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The gradient dome at 0.7 lights the set evenly from every side, so the wall is one value and the lamp's glow has no darkness to read against.",
+   "evidence": {
+    "region": [
+     1250,
+     60,
+     1480,
+     300
+    ],
+    "measured": "wall lum 178.9 to 185.7 down the frame (profile 178.9, 180.0, 183.7, 185.7, 185.7), 177 to 186 across; region [1200,100,1450,300] range 7.9"
+   },
+   "change": {
+    "setting": "sky.strength",
+    "from": 0.7,
+    "to": 0.25
+   },
+   "expected": "The wall away from the lamp falls to about 140 to 160, the shadow sides of the speaker and the sideboard deepen, and the lamp becomes the brightest thing in the frame.",
+   "accept": {
+    "region": [
+     1250,
+     60,
+     1480,
+     300
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     135,
+     165
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "With the dome lowered, the key at 1.32 leaves the speaker's lit faces too dark to read its acrylic; the front panel is already at median 41 and the right side crushed at 16.6.",
+   "evidence": {
+    "region": "part:top",
+    "measured": "top lum_median 140.2, front-panel 41.4, right 16.6, bottom 11.4"
+   },
+   "change": {
+    "setting": "lights.key.irradiance",
+    "from": 1.32,
+    "to": 1.9
+   },
+   "expected": "The speaker's top and left side hold at about 135 to 165 after c3, so the key now models it against a darker room rather than the dome filling it.",
+   "accept": {
+    "region": "part:top",
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     130,
+     170
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The wall behind the shade does not show the lamp's spill: above the shade it is 186.7, as bright as the empty wall far from the lamp (183.7).",
+   "evidence": {
+    "region": [
+     960,
+     200,
+     1080,
+     270
+    ],
+    "measured": "lum_median 186.7, rgb 186,185,205: the same as the wall at [1250,250,1450,450], 183.7, rgb 183,182,203"
+   },
+   "change": {
+    "setting": "lights.wallglow",
+    "from": "(none)",
+    "to": {
+     "type": "area",
+     "size_m": [
+      0.4,
+      0.4
+     ],
+     "position": [
+      0.55,
+      0.4,
+      1.05
+     ],
+     "target": [
+      0.55,
+      2.7,
+      1.1
+     ],
+     "irradiance": 0.9,
+     "color": 2900,
+     "receivers": [
+      "sweep"
+     ]
+    }
+   },
+   "expected": "A soft warm pool about 0.8 m across on the wall behind and above the shade, about 20 to 35 levels brighter and visibly warmer than the wall at the frame's right edge, falling off smoothly, so the lamp appears to light the room.",
+   "accept": {
+    "region": [
+     960,
+     200,
+     1080,
+     270
+    ],
+    "metric": "r_median",
+    "op": "between",
+    "value": [
+     170,
+     215
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The lilac sweep shares the acrylic's hue, so the purple speaker and shade sink into the set instead of standing out from it, and the warm glow has no neutral ground to read against.",
+   "evidence": {
+    "region": [
+     1200,
+     100,
+     1450,
+     300
+    ],
+    "measured": "wall rgb 181,179,201 (b over r by 20); shade rgb 110,95,148; speaker left side 136,132,153: one hue family"
+   },
+   "change": {
+    "setting": "set.color",
+    "from": "#DCD4E6",
+    "to": "#D8D2CA"
+   },
+   "expected": "The wall reads as warm grey paper (b no higher than r) and the purple acrylic separates from it by hue.",
+   "accept": {
+    "region": [
+     1250,
+     60,
+     1480,
+     300
+    ],
+    "metric": "b_median",
+    "op": "between",
+    "value": [
+     125,
+     165
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The veneer doors are one flat value with faint contour-like rings, which reads as a procedural texture rather than sliced wood.",
+   "evidence": {
+    "region": [
+     1000,
+     670,
+     1085,
+     820
+    ],
+    "measured": "centre door lum_range 4.2 over [1000,660,1160,880]; front faces [720,640,1330,900] median 73.8, range 18.1"
+   },
+   "change": {
+    "setting": "set.props.0.grain",
+    "from": 0.2,
+    "to": 0.45
+   },
+   "expected": "Latewood lines and figure become visible on the doors as real veneer, a door's range rising to about 12 to 25 levels without stripes.",
+   "accept": {
+    "region": [
+     1000,
+     670,
+     1085,
+     820
+    ],
+    "metric": "lum_range",
+    "op": "between",
+    "value": [
+     10,
+     28
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Neither the sideboard's legs nor the speaker's base has a contact shadow, so both read as pasted onto the floor.",
+   "evidence": {
+    "region": [
+     780,
+     960,
+     880,
+     1040
+    ],
+    "measured": "floor round the front-left leg lum_median 128, p95 169.9, no dark core at the foot"
+   },
+   "change": {
+    "setting": "materials.sweep.contact",
+    "from": 0,
+    "to": 0.6
+   },
+   "expected": "A tight dark core of about 30 to 50 levels below the open floor appears under each leg foot and along the speaker's base edge, fading within about 5 cm.",
+   "accept": {
+    "region": [
+     780,
+     960,
+     880,
+     1040
+    ],
+    "metric": "lum_p5",
+    "op": "<",
+    "value": 70
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the speaker's front panel and cloth disc lighter and more transparent (median 41 and 39, with the woofer area a dark purple slab).",
+   "why": "The acrylic's tint and its clear coat are the product's finish and fixed; only light and exposure may lift them, and lifting them further would flatten the lamp's glow."
+  },
+  {
+   "request": "Bring the speaker and the sideboard closer, or turn the speaker toward the lamp, so the pair reads as one group.",
+   "why": "Placement is in scope but the speaker at x -0.42 already overlaps the sideboard's left edge in depth; moving it risks hiding the sideboard top, a must-show. Revisit after c1."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

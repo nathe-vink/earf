@@ -1,0 +1,79 @@
+{
+ "_note": "Bell, turned over for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-concepts/l3b/render/l3b.glb",
+ "origin_mm": [
+  200.0,
+  200.0,
+  0.0
+ ],
+ "materials": {
+  "acrylic": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.025,
+   "roughness": 0.05
+  },
+  "led": {
+   "preset": "emit",
+   "color": "#FFD9A8",
+   "strength": 0.0
+  },
+  "opal": {
+   "preset": "frosted",
+   "color": "#F6F3EE",
+   "absorb": "#F1E6D6",
+   "roughness": 0.5,
+   "radius": 0.01,
+   "clear": 0.05
+  }
+ },
+ "assign": [
+  {
+   "match": "foot|stem|pod|shade",
+   "material": "acrylic"
+  },
+  {
+   "match": "led",
+   "material": "led"
+  },
+  {
+   "match": "diffuser",
+   "material": "opal"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#F2A29C",
+   "accent": "#7A1A1C"
+  },
+  "dust": {
+   "deep": "#F2B184",
+   "accent": "#8C3B14"
+  },
+  "acid": {
+   "deep": "#F2D06B",
+   "accent": "#9A6A12"
+  },
+  "poison": {
+   "deep": "#B2C9A2",
+   "accent": "#2E4A2C"
+  },
+  "ice": {
+   "deep": "#B5D9EE",
+   "accent": "#24557E"
+  },
+  "haze": {
+   "deep": "#BEADD8",
+   "accent": "#3F2A5E"
+  },
+  "fog": {
+   "deep": "#F7F8F7",
+   "accent": "#E7E6E1"
+  },
+  "smoke": {
+   "deep": "#8A888E",
+   "accent": "#141316"
+  }
+ }
+}
