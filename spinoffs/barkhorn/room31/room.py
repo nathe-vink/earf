@@ -67,7 +67,7 @@ def room_set(v):
     def along(y):
         return round(y - cy, 3)
     # a run of tall French windows down the left wall, piers between, glass to 15 cm under the ceiling
-    wins = [{'wall': 'left', 'along': along(yc), 'sill': 0.04, 'size': [1.45, 2.71], 'mullions': [2, 1], 'frame': '#2B2926'}
+    wins = [{'wall': 'left', 'along': along(yc), 'sill': 0.04, 'size': [1.45, 2.71], 'mullions': [2, 1], 'frame': v.get('frame', '#5A564F')}
             for yc in v.get('win_y', (0.2, -1.4, -3.45))]
     props = [
         ext('floor', rect=[LEFT, BACK - DEPTH, RIGHT, BACK], texture=v['floor'], res='4k', rotate_deg=v['floor_rot'],
@@ -107,30 +107,31 @@ def room_set(v):
     ]
     return {'kind': 'room', 'size': [w, DEPTH, HEIGHT], 'center': [cx, cy],
             'floor': {'base': '#B89B78'}, 'wall': {'color': v['wall']}, 'ceiling': '#F2EFEA',
-            'skirting': {'h': 0.09, 'color': v['wall'], 't': 0.014}, 'frame': '#2B2926', 'windows': wins, 'props': props}
+            'skirting': {'h': 0.09, 'color': v['wall'], 't': 0.014}, 'frame': v.get('frame', '#5A564F'), 'windows': wins, 'props': props}
 
 
 DEFAULT = dict(
-    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=1.1,
-    wall_tint=0.7, wall_tex_scale=1.2, socket_x=1.78,
+    floor='wood_floor', floor_coat=0.15, floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=2.4,
+    wall_tint=0.5, wall_tex_scale=0.8, socket_x=1.78,
     veneer='walnut_veneer_02', veneer_lift=0.75, grain_rot=90.0,
-    rug='poly_wool_herringbone', rug_tex_scale=0.8, rug_tint='#8E8170', rug_tint_mix=1.0, rug_pos=[0.0, -1.0],
-    rug_size=[2.6, 1.6], rug_displace=0.006, rug_pile=0.018, rug_res='4k', rug_value=0.6,
-    chair='modern_arm_chair_01', chair_pos=[2.35, -1.6, 0.0], chair_rot=300.0, leather='#8A7460',
-    hdri='autumn_forest_04', hdri_rot=116.0, ext_strength=2.6, ext_blur=0.0,
+    rug='poly_wool_herringbone', rug_tex_scale=0.5, rug_tint='#7A6E60', rug_tint_mix=1.0, rug_pos=[0.0, -1.3],
+    rug_size=[2.6, 1.6], rug_displace=0.01, rug_pile=0.018, rug_res='4k', rug_value=0.45,
+    chair='modern_arm_chair_01', chair_pos=[2.0, -2.6, 0.0], chair_rot=300.0, leather='#8A7460',
+    hdri='autumn_forest_04', hdri_rot=116.0, ext_strength=2.2, ext_blur=0.003,
     # concept B (passes r7, r8): linen sheers drawn across the glazing but for two gaps, one where the late sun's beam to
     # each speaker comes in (and the back corner, which keeps the view out): the pair stands in two shafts of sun, the
     # rest of the room in the soft light the sheers make of the rest of it
-    sheers=[(-0.775, 0.75), (-2.95, 2.5)], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=0.42, vase_x=0.62,
-    sun=dict(azimuth_deg=-62.0, elevation_deg=14.0, irradiance=34.0, angle_deg=0.6, color='#FFE4C8'),
-    sky_strength=0.6, fill=0.8, fill_color='#D2E0F4', bounce=0.3, bounce_pos=[-2.0, -3.8, 1.8], floor_bounce=0.15,
-    exposure=-0.75, wb=5500, wb_tint=0.0,
+    sheers=[(-0.525, 0.45), (-2.735, 2.93)], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=0.42, vase_x=0.62,
+    sun=dict(azimuth_deg=-68.0, elevation_deg=17.0, irradiance=34.0, angle_deg=0.6, color='#FFE4C8'),
+    sky_strength=0.6, fill=1.0, fill_color='#D2E0F4', bounce=0.3, bounce_pos=[-2.0, -3.8, 1.8], floor_bounce=0.15,
+    exposure=-1.0, wb=4800, wb_tint=0.0,
 )
 
 
 # the portrait (for phones): the same room, the pair brought in round a two-door credenza so it fills a 4:5 frame
-PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=-0.2, books_x=0.24, vase_x=0.40, port_d=3.5,
-                port_lens=35, port_tz=1.0)
+PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=-0.18, books_x=0.25, vase_x=0.42, port_d=4.7,
+                port_lens=50, port_tz=0.9,
+                sheers=[(-0.53, 0.32), (-2.68, 3.1)])     # the gaps where the beams to the pair (now +-0.92) come in
 
 
 def shot(v=None, portrait=False):
