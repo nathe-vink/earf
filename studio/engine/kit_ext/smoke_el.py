@@ -151,7 +151,8 @@ def trunks(bpy, name, p, kit):
     for f in me.polygons:
         f.use_smooth = True
     me.materials.append(assets.pbr(bpy, p.get('texture', 'pine_bark'), p.get('res', '2k'), scale=p.get('tex_scale'),
-                                   bump=p.get('bump', 1.0), coords='uv', tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0)))
+                                   bump=p.get('bump', 1.0), coords='uv', tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0),
+                                   displace=p.get('displace', 0.0)))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     return [ob]
 
