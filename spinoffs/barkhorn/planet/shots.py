@@ -156,7 +156,9 @@ def shot(view):
         'camera': vw['camera'],
         'products': products(v),
         'set': {'kind': 'stage', 'props': props(v)},
-        'sky': {'kind': 'gradient', 'zenith': '#05070C', 'horizon': '#141824', 'ground': '#08080A', 'strength': v.get('sky', 1.0)},
+        # the night sky: near black, a faint warm city glow at the horizon (even at 0.05 a blue sky floods the facades)
+        'sky': {'kind': 'gradient', 'zenith': v.get('sky_zenith', '#05070C'), 'horizon': v.get('sky_horizon', '#141824'),
+                'ground': '#08080A', 'strength': v.get('sky', 1.0)},
         'lights': lights(v),
         'materials': {'led': {'strength': v.get('led', 22.0)}},
         'haze': {'box_m': [0.02, 0.02, 0.01, P.L - 0.02, P.D - 0.02, P.MEMBRANE - 0.06], 'density': v['haze'], 'anisotropy': 0.3,
@@ -196,7 +198,8 @@ VIEWS = {
                 'settings': {'exposure': 0.6, 'dj_glow': 0.03, 'spot_dj': 150.0, 'spot_records': 60.0}},
     'street': {'title': 'the street at night, through the window',
                'camera': {'position': [-6.5, -10.0, 1.5], 'target': [3.0, 0.5, 1.9], 'lens_mm': 32, 'level': True},
-               'settings': {'sky': 0.05, 'exposure': 0.6, 'wb': 4200, 'wb_tint': 0.0, 'across_glow': 0.08}},
+               'settings': {'sky': 0.012, 'sky_zenith': '#0A0C12', 'sky_horizon': '#3A3026', 'exposure': 0.6, 'wb': 4200,
+                            'wb_tint': 0.0, 'across_glow': 0.08}},
 }
 
 # the colour clock: the door's view at four hours, the membrane the only change (its glow a little up, so it reads)

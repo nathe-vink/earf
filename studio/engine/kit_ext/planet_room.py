@@ -837,6 +837,10 @@ def street(bpy, kit, p, objs):
             neon.box(x - t, y0, z1 - 2 * t, x + t, y1, z1); neon.box(x - t, y1 - 2 * t, (z0 + z1) / 2, x + t, y1, z1)
             neon.box(x - t, y0, (z0 + z1) / 2 - t, x + t, y1, (z0 + z1) / 2 + t)
             neon.box(x - t, y1 - 2 * t, z0, x + t, y1, (z0 + z1) / 2)
+    # the letters were laid along +y, which reads right to left from the street (x < 0): mirror the sign about its centre
+    for v in neon.bm.verts:
+        v.co.y = 2 * N['y'] - v.co.y
+    bmesh.ops.reverse_faces(neon.bm, faces=neon.bm.faces[:])
     objs.append(neon.object(bpy, emitter(bpy, 'neon', p.get('neon_color', '#FF5A3C'), p.get('neon', 18.0))))
 
 
