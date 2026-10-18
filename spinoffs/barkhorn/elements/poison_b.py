@@ -131,6 +131,7 @@ def shot_misty():
 
 
 LOGB = ((-0.75, 1.1, 0.24), (-2.9, -0.9, 0.24), 0.27, 0.3)
+CLUMP = (0.72, -1.9)               # the fly agaric clump at the front right (the 4:5 frame draws it and the stump in)
 ROCK = (-0.42, -2.25, 0.5)         # the mossy stump in the foreground: x, y, scale of the scan (0.84 x 0.77 x 0.29 m)   # the fallen log: its far end, its near end, radii
 
 
@@ -151,8 +152,9 @@ def poisons():
     AG = [  # two at the speaker's feet
           (-0.42, -0.45, 0.075, 'convex', 1, (0.012, -0.01), 0.0), (-0.3, -0.58, 0.03, 'button', 3, (0, 0), 0.0),
           # a tight, overlapping clump at the right nearer the lens, at every age
-          (0.66, -1.85, 0.095, 'convex', 21, (-0.025, -0.015), 0.0), (0.78, -1.78, 0.07, 'young', 22, (0.02, 0.012), 0.0),
-          (0.6, -1.97, 0.032, 'button', 23, (0, 0), 0.0), (0.86, -1.9, 0.115, 'plane', 24, (0.03, -0.015), 0.35)]
+          *[(round(CLUMP[0] + dx, 3), round(CLUMP[1] + dy, 3), *rest) for dx, dy, *rest in [
+              (-0.06, 0.05, 0.095, 'convex', 21, (-0.025, -0.015), 0.0), (0.06, 0.12, 0.07, 'young', 22, (0.02, 0.012), 0.0),
+              (-0.12, -0.07, 0.032, 'button', 23, (0, 0), 0.0), (0.14, 0.0, 0.115, 'plane', 24, (0.03, -0.015), 0.35)]]]
     for x, y, R, age, sd, lean, torn in AG:
         P.append(extb('amanita', (x, y, -0.018 if age != 'button' else -0.01), cap=R, age=age, seed=sd, lean=list(lean), torn=torn))
     # death caps, olive, half in the ferns at the right behind the speaker's cluster
@@ -187,7 +189,7 @@ def ferns_b(seed=3):
         k = 0
         while k < n:
             x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
-            if x * x + y * y < 0.8 ** 2 or (-0.9 < x < 1.1 and -0.8 < y < 0.0) or math.hypot(x - 0.72, y + 1.9) < 0.45 or (-1.9 < x < -0.8 and 1.0 < y < 1.8) or (-2.8 < x < -0.4 and -1.0 < y < 0.2) or math.hypot(x - ROCK[0], y - ROCK[1]) < 0.55:
+            if x * x + y * y < 0.8 ** 2 or (-0.9 < x < 1.1 and -0.8 < y < 0.0) or math.hypot(x - CLUMP[0], y - CLUMP[1]) < 0.45 or (-1.9 < x < -0.8 and 1.0 < y < 1.8) or (-2.8 < x < -0.4 and -1.0 < y < 0.2) or math.hypot(x - ROCK[0], y - ROCK[1]) < 0.55:
                 continue
             pl.append([round(x, 3), round(y, 3), 0.0, round(rnd.uniform(s0, s1), 3), round(rnd.uniform(0, 360), 1),
                        rnd.choice([0, 1, 2, 3]), round(rnd.uniform(-12, 12), 1)])
@@ -196,7 +198,8 @@ def ferns_b(seed=3):
 
 
 SUN_B = {'azimuth_deg': -75.0, 'elevation_deg': 30.0, 'irradiance': 30.0, 'angle_deg': 0.6, 'color': '#FFE2AE'}
-SUNLIT_B = [(0.0, 0.0, 0.75, 0.9), (0.74, -1.88, 0.15, 0.14), (-0.38, -2.3, 0.5, 0.22), (-3.4, 3.6, 1.6, 0.25), (-2.0, 7.0, 4.0, 0.6),
+def sunlit_b():
+    return [(0.0, 0.0, 0.75, 0.9), (CLUMP[0] + 0.02, CLUMP[1] + 0.02, 0.15, 0.14), (ROCK[0] + 0.04, ROCK[1] - 0.05, 0.5, 0.22), (-3.4, 3.6, 1.6, 0.25), (-2.0, 7.0, 4.0, 0.6),
             (-3.5, 10.0, 5.0, 0.6), (1.0, 12.0, 5.0, 0.55), (2.5, 6.5, 0.8, 0.5)]
 
 
@@ -211,15 +214,15 @@ def shot():
              ext('darken', on=['prop0-kit'], value=0.5, rough=0.85),
              # redwood sorrel in patches over the floor, coming close to the lens, and moss cushions round the bases
              extb('sorrel', on=['prop0-kit'], density=320, up=0.6, patch=0.6, patch_cut=0.55, scale=[0.8, 1.25], seed=51,
-                  size=0.075, within=[0.0, -1.0, 5.0], avoid=[[0.0, 0.0, 0.42], [0.72, -1.9, 0.22], [-0.42, -2.25, 0.4]]),
+                  size=0.075, within=[0.0, -1.0, 5.0], avoid=[[0.0, 0.0, 0.42], [*CLUMP, 0.22], [ROCK[0], ROCK[1], 0.4]]),
              ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=52,
-                 within=[0.72, -1.9, 0.28], avoid=[[0.0, 0.0, 0.32]]),
+                 within=[*CLUMP, 0.28], avoid=[[0.0, 0.0, 0.32]]),
              ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=53,
                  within=[-0.35, -0.5, 0.22], avoid=[[0.0, 0.0, 0.32]]),
              ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=54,
                  within=[0.42, -0.38, 0.18], avoid=[[0.0, 0.0, 0.32]]),
              ext('canopy', (0.0, 4.0, CANOPY_Z), size=[220.0, 220.0], gap=1.2, open=0.05,
-                 holes=[gap_for(x, y, z, r, (0.0, 4.0), SUN_B) for x, y, z, r in SUNLIT_B]),
+                 holes=[gap_for(x, y, z, r, (0.0, 4.0), SUN_B) for x, y, z, r in sunlit_b()]),
              ext('mist', (0.0, 20.1, -0.2), size=[50.0, 37.8, 18.0], density=0.09, top=0.35, wisp=2.5, color='#F2F4EA',
                  anisotropy=0.7),
              ext('mist', (0.0, -3.0, -0.2), size=[20.0, 8.4, 6.0], density=0.015, top=0.5, color='#F2F4EA', anisotropy=0.7),
@@ -256,5 +259,17 @@ def shot():
 
 
 def portrait():
-    return portrait_of(shot(), **camera(height=0.55, distance=4.6, azimuth=8.0, lens=60.0, target=(-0.1, -0.1, 0.62),
-                                        focus=(0.0, -0.45, 0.4), fstop=5.6, shift_y=0.08))
+    """The 4:5 frame: higher and longer, the stump and the agaric clump drawn in toward the speaker so both stay in
+    a frame this narrow (from 4.6 m the landscape's spread of them is twice the speaker's height)."""
+    global ROCK, CLUMP
+    keep = ROCK, CLUMP
+    ROCK, CLUMP = PORTRAIT_ROCK, PORTRAIT_CLUMP
+    try:
+        s = shot()
+    finally:
+        ROCK, CLUMP = keep
+    return portrait_of(s, **camera(**PORTRAIT_CAM))
+
+
+PORTRAIT_ROCK, PORTRAIT_CLUMP = (-0.42, -1.35, 0.5), (0.48, -1.3)
+PORTRAIT_CAM = dict(height=1.0, distance=4.7, azimuth=4.0, lens=92.0, target=(0.02, -0.6, 0.5), focus=(0.0, -0.9, 0.3), fstop=8.0)
