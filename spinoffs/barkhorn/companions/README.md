@@ -14,7 +14,7 @@ file and its CAD are untouched. The Cloud is built here only so that it can stan
 | size | 483 W x 373 D x 135 H (arm at rest) | 432 across the rim, 480 tall, foot 230 |
 | acrylic | plinth 2 x 20 mm, platter 25 mm, pod 3 x 20 mm, feet 20 mm | foot 2 x 20 mm, shade formed from 5 mm (tinted 4x denser), stem tube 30 x 3 |
 | weight | about 2.4 kg turning (platter and hub), about 9 kg in all | about 3.3 kg |
-| parts list | **$2,245**, one off | **$563** + the LED strip (price not found), one off |
+| parts list | **$2,775**, one off | **$563** + the LED strip (price not found), one off |
 | product file | `turntable.py` | `lamp.py` |
 | build | `out-turntable/` (cut files, drawings, parts list, checks) | `out-lamp/` |
 
@@ -86,8 +86,9 @@ and whether it is sophisticated but witty.
 - **Speed** comes from Rega's 24 V motor and Neo PSU MK2: 33/45 by a button, trimmed in 0.01 rpm steps, and the
   speed changes without moving the belt. The pulley is turned to the motor's measured speed. If it runs at 250 rpm,
   the belt face is 39.48 across for a belt on the 300 rim, which is close to 40.
-- **The arm and cartridge** are Rega's RB330 at Rega's 222 mm and an Ortofon 2M Blue. The 2M Blue is moving magnet,
-  so any phono stage works with it. Its body is blue, which is Ortofon's colour and not ours (see the open questions).
+- **The arm and cartridge** are Rega's RB330 at Rega's 222 mm and an Ortofon 2M Black (round 31b; the 2M Blue
+  first drawn read as a stray blue accent on every colour, the lead's note). Moving magnet, so any phono stage; black
+  in every colour. The 2M Red (red body) could ride on Ember.
 - **The feet** are three 50 mm acrylic discs on M8 brass studs, each turned to level the platter, with Sorbothane
   under them. They are placed so the triangle holds the platter's centre.
 - **The mark** is EARF, 44 wide, laser-etched in the arm's circle in front of the arm and filled with the colour,
@@ -96,15 +97,15 @@ and whether it is sophisticated but witty.
 | bought | source | price |
 |---|---|---|
 | Rega RB330 tonearm | [Safe and Sound HQ](https://www.safeandsoundhq.com/products/rega-rb330-tonearm) | $675 |
-| Ortofon 2M Blue | [Upscale Audio](https://upscaleaudio.com/collections/ortofon) | $219.99 |
+| Ortofon 2M Black | [Upscale Audio](https://upscaleaudio.com/collections/cartridges) | $749.99 |
 | Rega 24 V motor upgrade kit | [HiFi Gear](https://www.hifigear.co.uk/rega-neo-mk2.html) | GBP 150 (~$200) |
 | Rega Neo PSU MK2 (US, 60 Hz) | [Audio Advisor](https://www.audioadvisor.com/products/rega-neo-psu-mk2-60hz-turntable-psu-power-supply-black) | $445 |
 | flat belt, 5 x 0.6, ~975 | a belt maker, cut to length | ~$25 (estimate) |
 | sintered bronze bushes 10 x 14 x 12, carbide ball 6, PTFE pad | McMaster-Carr or a bearing supplier | ~$16 (estimate) |
 | Sorbothane feet (3) and pod pads (3) | Isolate It / Sorbothane Inc. | ~$45 (estimate) |
 
-The acrylic is $239 of the $2,245 and the turned parts (bearing, hub, spindle, pulley) $311. The rest is bought, and
-the arm, the cartridge and the Neo are $1,340 of that.
+The acrylic is $239 of the $2,775 and the turned parts (bearing, hub, spindle, pulley) $311. The rest is bought, and
+the arm, the cartridge and the Neo are $1,870 of that.
 
 ![Cumulus beside Ember](../../../renders/2026-10-18/barkhorn/companions/hero-turntable.png)
 
@@ -180,8 +181,8 @@ system `python3` and fails here. That is worth a line in setup.sh, but I didn't 
 2. **Recycled acrylic.** The formed shade and the 25 mm platter both need the casting partner (round 17's
    Plastiglas de México or Madreperla) to make the eight tints in 5 mm at four times the density and in 25 mm.
    Ask both.
-3. **The cartridge's blue.** The 2M Blue's body is Ortofon's blue in every colour. Options: an Ortofon 2M Black
-   (black body, dearer; not priced here), an Audio-Technica VM540ML (dark), or keep it and let the label say Ortofon.
+3. **The cartridge.** Now the 2M Black ($749.99): black in every colour. A 2M Red on Ember only, or a moving coil
+   (Hana) on all, are the alternatives.
 4. **A dust cover?** None is drawn. A cover in clear acrylic hinged on the arm's circle is possible, but it would
    need a fourth circle in the plinth.
 5. **The arm at rest** leaves the cartridge just past the plinth's front-right edge, as Rega's lift puts it. Should
