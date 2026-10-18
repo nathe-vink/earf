@@ -26,88 +26,170 @@
     "module": "ember_el",
     "fn": "terrain",
     "size": [
-     16.0,
-     12.0
+     22.0,
+     16.0
     ],
     "position": [
      0.0,
-     2.0,
+     3.0,
      0.0
     ],
     "cell": 0.02,
-    "relief": 0.05,
+    "relief": 0.14,
     "flat": [
      0.0,
      0.0,
      0.6
     ],
-    "ropes": {
-     "amp": 0.0,
-     "wave": 0.06,
-     "dir": 70.0,
-     "lobes": 0.06
-    },
     "channels": [
      {
       "points": [
        [
-        -7.5,
-        2.4
+        -9.0,
+        6.0
        ],
        [
-        -4.0,
-        3.4
+        -4.5,
+        4.4
        ],
        [
         -1.5,
-        3.2
+        3.4
        ],
        [
         1.0,
+        3.0
+       ],
+       [
+        3.6,
         3.6
        ],
        [
-        3.5,
-        3.3
-       ],
-       [
-        7.5,
-        4.0
+        8.0,
+        5.2
        ]
       ],
-      "width": 0.9,
+      "width": 0.8,
       "depth": 0.35,
-      "bank": 0.35
+      "bank": 0.5
      },
      {
       "points": [
        [
-        -2.4,
+        -3.2,
+        -1.4
+       ],
+       [
+        -2.2,
+        -0.9
+       ],
+       [
+        -1.3,
+        -0.95
+       ],
+       [
+        -0.7,
+        -0.6
+       ]
+      ],
+      "width": 0.05,
+      "depth": 0.09,
+      "bank": 0.06
+     },
+     {
+      "points": [
+       [
+        -1.3,
+        -0.95
+       ],
+       [
+        -1.5,
+        -0.2
+       ],
+       [
+        -1.2,
+        0.6
+       ],
+       [
+        -0.6,
+        1.3
+       ],
+       [
+        -0.6,
+        2.6
+       ]
+      ],
+      "width": 0.04,
+      "depth": 0.09,
+      "bank": 0.048
+     },
+     {
+      "points": [
+       [
+        0.7,
+        0.55
+       ],
+       [
+        1.4,
+        0.7
+       ],
+       [
+        2.1,
+        0.3
+       ],
+       [
+        3.2,
+        0.5
+       ]
+      ],
+      "width": 0.04,
+      "depth": 0.09,
+      "bank": 0.048
+     },
+     {
+      "points": [
+       [
+        1.4,
+        0.7
+       ],
+       [
+        1.6,
+        1.6
+       ],
+       [
+        1.3,
+        2.7
+       ]
+      ],
+      "width": 0.03,
+      "depth": 0.09,
+      "bank": 0.036
+     },
+     {
+      "points": [
+       [
+        0.4,
         -1.6
        ],
        [
-        -1.6,
-        -1.05
+        0.9,
+        -2.4
        ],
        [
-        -0.9,
-        -0.85
-       ],
-       [
-        -0.5,
-        -0.55
+        1.9,
+        -2.9
        ]
       ],
-      "width": 0.09,
-      "depth": 0.3,
-      "bank": 0.1
+      "width": 0.07,
+      "depth": 0.09,
+      "bank": 0.084
      }
     ],
     "lava_below": true,
     "rock": "dark_rock_02",
-    "displace": 0.012,
+    "displace": 0.03,
     "albedo": 0.09,
-    "rough_mul": 1.0
+    "rough_mul": 0.85
    },
    {
     "kind": "kit",
@@ -115,13 +197,13 @@
     "module": "ember_el",
     "fn": "lava_surface",
     "size": [
-     16.0,
-     12.0
+     22.0,
+     16.0
     ],
     "position": [
      0.0,
-     2.0,
-     -0.11
+     3.0,
+     -0.06
     ],
     "cell": 0.05,
     "lava": "acg:Lava001",
@@ -136,121 +218,74 @@
     "kind": "kit",
     "shape": "ext",
     "module": "ember_el",
-    "fn": "rock",
-    "model": "mountainside",
+    "fn": "terrain",
+    "size": [
+     90.0,
+     50.0
+    ],
     "position": [
-     0.5,
-     6.2,
-     -0.6
-    ],
-    "rotate": [
      0.0,
-     0.0,
-     4.0
+     36.0,
+     -0.25
     ],
-    "scale": 1.15,
-    "albedo": 0.03,
-    "saturation": 0.0,
-    "rough_mul": 0.9
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "ember_el",
-    "fn": "rock",
-    "model": "rock_face_01",
-    "position": [
-     -5.0,
-     2.2,
-     -0.3
-    ],
-    "rotate": [
+    "cell": 0.12,
+    "relief": 0.6,
+    "flat": [
      0.0,
-     0.0,
-     -62.0
+     -200.0,
+     1.0
     ],
-    "scale": 1.5,
-    "albedo": 0.015,
-    "saturation": 0.0,
-    "rough_mul": 0.8
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "ember_el",
-    "fn": "rock",
-    "model": "rock_face_02",
-    "position": [
-     5.4,
-     3.0,
-     -0.3
-    ],
-    "rotate": [
-     0.0,
-     0.0,
-     55.0
-    ],
-    "scale": 1.8,
-    "albedo": 0.03,
-    "saturation": 0.0,
-    "rough_mul": 0.9
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "ember_el",
-    "fn": "fall",
-    "points": [
+    "cliff": {
+     "y0": 34.0,
+     "rise": 12.0,
+     "height": 3.5,
+     "rough": 1.0
+    },
+    "pools": [
      [
-      -3.0,
-      4.6,
-      4.6
-     ],
-     [
-      -2.95,
-      4.3,
-      3.9
-     ],
-     [
-      -3.0,
-      4.05,
-      2.9
-     ],
-     [
-      -2.9,
-      3.85,
-      1.8
-     ],
-     [
-      -2.95,
-      3.65,
-      0.8
-     ],
-     [
-      -3.0,
-      3.35,
-      0.0
+      -7.5,
+      26.0,
+      1.2,
+      0.3
      ]
     ],
-    "radius": [
-     0.12,
-     0.16,
-     0.15,
-     0.19,
-     0.22,
-     0.36
+    "channels": [
+     {
+      "points": [
+       [
+        14.0,
+        16.0
+       ],
+       [
+        5.0,
+        14.5
+       ],
+       [
+        -4.0,
+        16.0
+       ],
+       [
+        -16.0,
+        14.0
+       ]
+      ],
+      "width": 0.5,
+      "depth": 0.2,
+      "bank": 0.6,
+      "lava": "flow"
+     }
     ],
-    "flat": 0.8,
-    "lava": "acg:Lava001",
-    "scale": [
-     0.8,
-     0.8,
-     2.6
-    ],
-    "strength": 45.0,
-    "gain": 2.6,
-    "crust_rough": 0.85,
-    "crust_spec": 0.2
+    "flow": "acg:Lava001",
+    "flow_emit": 40.0,
+    "flow_gain": 2.2,
+    "flow_scale": 2.5,
+    "molten": "acg:Lava004",
+    "molten_emit": 30.0,
+    "molten_scale": 3.0,
+    "rock": "dark_rock_02",
+    "displace": 0.05,
+    "albedo": 0.09,
+    "rough_mul": 0.85
    },
    {
     "kind": "kit",
@@ -258,15 +293,32 @@
     "module": "ember_el",
     "fn": "steam",
     "box": [
-     -4.5,
-     2.6,
+     -6.0,
+     2.4,
      -0.1,
-     4.0,
+     5.0,
      4.6,
-     1.6
+     1.4
     ],
-    "density": 1.0,
+    "density": 0.9,
     "scale": 0.8,
+    "anisotropy": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "steam",
+    "box": [
+     -10.5,
+     23.5,
+     0.0,
+     -3.5,
+     28.5,
+     9.0
+    ],
+    "density": 0.25,
+    "scale": 2.5,
     "anisotropy": 0.45
    },
    {
@@ -275,41 +327,13 @@
     "module": "ember_el",
     "fn": "sparks_mixed",
     "area": [
-     -3.4,
-     2.8,
-     -2.2,
+     -2.0,
+     3.0,
+     0.5,
      3.6
     ],
-    "count": 8,
-    "height": 2.2,
-    "streak": [
-     0.01,
-     0.12
-    ],
-    "radius": [
-     0.001,
-     0.004
-    ],
-    "drift": [
-     0.3,
-     -0.1
-    ],
-    "emit": 16.0,
-    "seed": 4
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "ember_el",
-    "fn": "sparks_mixed",
-    "area": [
-     -1.6,
-     -1.2,
-     -0.6,
-     -0.4
-    ],
-    "count": 2,
-    "height": 1.4,
+    "count": 6,
+    "height": 1.8,
     "streak": [
      0.01,
      0.08
@@ -319,11 +343,11 @@
      0.003
     ],
     "drift": [
-     0.4,
+     0.3,
      0.1
     ],
     "emit": 16.0,
-    "seed": 9
+    "seed": 4
    }
   ]
  },
@@ -337,14 +361,14 @@
    "position": [
     0.15,
     0.9,
-    0.9
+    0.5
    ],
    "target": [
     0.0,
     -0.6,
-    0.0
+    0.3
    ],
-   "irradiance": 2.4,
+   "irradiance": 2.0,
    "color": "#FF5A18"
   },
   "horn": {
@@ -363,41 +387,52 @@
     -0.2,
     1.12
    ],
-   "irradiance": 3.0,
+   "irradiance": 2.4,
    "color": "#FF5A18"
   },
-  "crack": {
+  "crack_l": {
    "type": "point",
    "position": [
-    -0.9,
-    -0.85,
-    0.15
+    -1.25,
+    -0.4,
+    0.12
    ],
-   "power_w": 60,
+   "power_w": 40,
    "color": "#FF6A22",
-   "radius_m": 0.3
+   "radius_m": 0.2
   },
-  "steam": {
+  "crack_r": {
    "type": "point",
    "position": [
-    2.0,
-    3.1,
-    0.4
+    1.0,
+    0.6,
+    0.12
+   ],
+   "power_w": 30,
+   "color": "#FF6A22",
+   "radius_m": 0.2
+  },
+  "river": {
+   "type": "point",
+   "position": [
+    1.0,
+    3.2,
+    0.5
    ],
    "power_w": 120,
    "color": "#FF6A22",
    "radius_m": 0.3
   },
-  "fall": {
+  "vent": {
    "type": "point",
    "position": [
-    -2.2,
-    2.85,
-    0.4
+    -7.5,
+    26.0,
+    1.0
    ],
-   "power_w": 20,
+   "power_w": 3000,
    "color": "#FF6A22",
-   "radius_m": 0.4
+   "radius_m": 0.8
   }
  },
  "render": {
@@ -408,9 +443,11 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
+  "white_balance_k": 4500,
+  "white_balance_tint": 10,
   "look": "AgX - Base Contrast"
  },
- "title": "barkhorn, Ember, a volcanic cavern",
+ "title": "barkhorn, Ember, a lava field at blue hour",
  "size": [
   2400,
   1600
@@ -428,7 +465,7 @@
   ],
   "lens_mm": 60.0,
   "level": true,
-  "fstop": 2.0,
+  "fstop": 2.8,
   "focus": [
    0.0,
    -0.21,
@@ -438,8 +475,8 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
-  "rotation_deg": 90.0,
-  "strength": 0.25,
+  "rotation_deg": 0.0,
+  "strength": 0.3,
   "res": "4k"
  },
  "finish": {
@@ -457,17 +494,17 @@
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.25
+   "vignette": 0.2
   }
  },
  "haze": {
   "box_m": [
-   -12.0,
+   -45.0,
    -10.0,
    -0.5,
-   12.0,
-   12.0,
-   12.0
+   45.0,
+   62.0,
+   14.0
   ],
   "density": 0.0015,
   "anisotropy": 0.4,
