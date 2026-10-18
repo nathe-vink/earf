@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 30**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 31**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -78,7 +78,110 @@ circles, triangles and rectangles, some with shapes cut through them as the R's 
 them in their own acrylic; renders the eight together for the site's hero, their covers off, each from behind with its
 amplifier close, and Poison cut open; puts the FA122's connectors on the amplifier's plate (their places provisional);
 builds the site's home page and a page for each speaker, its header globe spinning and its loader's coins in acrylic;
-and puts the site up at www.earf.world, kept out of search engines until launch.
+and puts the site up at www.earf.world, kept out of search engines until launch. Round 31 writes every line of the site again with no price on it, puts the
+FA122's plate as it really is, renders every view of every colour again with the product as it stands (the grips, the
+R's hole, each colour's own cutaway), and makes the cloth read as cloth; it builds a record player and a lamp in the
+acrylic, and starts the pictures for a launch, each passed by a critic to a $20,000 product's bar: the studio, the
+speakers lit from below and on a night facade, and each Cloud in its element, photographed in a real place.
+
+## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)
+
+| the owner's note | what changes |
+|---|---|
+| "the sites copy needs a lot of work. It's a lot of AI slop, using my words verbatim, and dumb things like "watch the horns turn" and stating the obvious like "eight horned speakers in colored acrylic." The brand needs to be sophisticated, but witty. Also remove pricing for now and make it a contact for details type of thing." | **Every line of the site written again** by `web.py`, the site's builder, now in the repository: "Weather for the living room."; "Pick your poison.", with a line for each colour ("The part of the fire that stays up late", "Settles in nicely", "Now you see it"); "The oldest amplifier is a shape." **No price anywhere**: "Price on request", each pair made to order, and an enquiry ("Prices, pairs and partnerships."). |
+| "I allowed hypex.nl" | **The FA122's plate as it is**, from Hypex's drawing and photographs. Round 30's places were provisional and its XLRs mirrored (below). |
+| "we need to make sure all of the speaker renders are good to go and then replace them wherever they appear with the finals. I noticed some of them don't have handles, some of them are using poison for the dissection shot, etc." | **Every picture final** (`finals.py`): every view of every colour rendered again with the product as it stands, then put on the site and in the look book (below). |
+| "Record player and lighting for one. All acrylic." | **The companions** (`companions/`, in their own session). **Cumulus** is a belt-drive record player whose plinth is drawn from circles, as the icons are; its motor stands apart in a hole in the plinth. **Bell** is a lamp: the horn's flare hung mouth down. Both are built to the fab kit's standard in the eight colours, and are now photographed beside a Cloud in a room. |
+| "what would the speakers look like in a black room when a spotlight shining down on them, or light passing through them as they pass by on a carousel of sorts, so it casts each color" | The spotlight stills and the carousel loop were made first, then turned down (the next two rows). |
+| "I was thinking more sleek imagery akin to Apple product images, when they announce a new product and it has a dedicated webpage" | **The studio** (in progress): each colour alone on a seamless, the eight as a lineup, and macros, put through the critic for campaign pictures (below). |
+| "I was expecting that to function more like one of this things you put film in and flip through, where users could cycle through the colors and see how light passes through each one"; then "You're taking my View-Master and carousel ideas too literally. I was just using those as metaphors" | **The light section** on the site, in place of the reel. The page scrolls through one pinned frame, each colour lit from below and cross-fading into the next, with the coins marking the way; under reduced motion the coins simply pick a colour. It appears once its pictures are in. |
+| "Could be cool to see what the speakers look like with a light placed under them. Imagine the outside wall of a cement opera house, like the one in Chicago on the river, where the speakers are placed on lights casting upwards on the building at night, casting their color upwards on the wall, blending light together." | **Uplit** (in progress): each colour standing on a light, and the night facade, with the eight below a concrete wall on a river and their colours blending up it. |
+| "Would also be good to be able to see any color in a room vs just poison, but have the rooms be suited to the color ... Could look like a little themed diorama"; then "cuter, more dreamlike. Tilt shift", and a place for each colour | **The dioramas**, one for each colour, shot tilt-shift. They were turned down (next row). |
+| "Smoke is too hard to see and the diorama looks cheap, like a bad video game. I was hoping for more texture in a lot of these. The speakers are too stark in contrast to the setting too. Tilt shift may have been a bad direction. Lighting in general in a lot of them is off. I don't like the strings in the acid rain. Maybe don't think about them so much like dioramas, and think more about placing them in there element" | **In their element** (round 31b, in progress): each Cloud photographed at real scale in a real place on earth, built from scanned assets (below). |
+| "Continue to do critic passes until you feel it's in a good enough place for a promotional images for a $20K product. Install any skills or software you need to make it happen." | **A critic for campaign pictures** (`critic/PROMPT-promo.md`), and passes on every new picture until each gets there (below). The speaker's cloth and lining, which three critics named, are made again. |
+
+![Every final: each colour's seven views and the first of its turning frames](../../renders/2026-10-18/barkhorn/finals31/sheet.jpg)
+
+### Every picture final
+
+- **Why.** The site's pictures had been rendered round by round, so they were out of date in different ways:
+  - the front views came from round 21 and the turning horns from round 23, before the 240 grips were made standard (round 24) and before the R of the mark on the back had its hole (round 29);
+  - the backs and the plate came from round 30, with the plate's connectors provisional;
+  - one cutaway, Poison's, stood in for every colour.
+- **What.** `finals.py` takes each view's template (the shot tuned in its round) and renders it again for all eight colours, with the product as it stands (`studio/products/barkhorn-cloud.json`, its model rebuilt from the CAD). The views:
+  - the front from three-quarters, cover on and off (round 21's look book);
+  - the horn close, from the side and from behind (round 21);
+  - the speaker from behind, and its plate close (round 30);
+  - the cutaway, now in each colour on that colour's own paper;
+  - the horn turning, in 24 frames of 15° (round 23), shipped as one sprite for each colour.
+
+  The hero (the eight on their arc) and the room (a pair of Poison) were rendered again too.
+- **Checked.** `finals.py check` lists any picture that is missing, any older than its shot or the model, any view that shows a side but has no grip in frame, and any picture of the wrong colour. All 250 pass.
+- **Rendered** by eight sessions at once, one for each colour, in under two hours of Cycles a colour on four cores. A front view takes about 16 minutes at 128 samples, and all 24 turning frames about half an hour at 64 samples.
+- **The rating plate** beside the amplifier showed in the first finals as a blank grey tile (the orange session's find). It is now laser-marked as it would be:
+  - the maker, the product, its model and serial number;
+  - the FA122's ratings, and where it was designed;
+  - the CE, UKCA, FCC and WEEE marks;
+  - its two black pan heads.
+
+  These are render pieces only: the part, the drawings and the checks are unchanged.
+- **Where.** Every speaker picture on the site (`web.py --images`), and the look book's eight colour pages: front views with their grips, and the horn from the side and from behind (version 49).
+
+### The amplifier's plate
+
+The plate now follows Hypex's drawing and photographs (hypex.nl reached at last). Every place was measured off the photograph square on, and agrees with the drawing to 0.3 mm.
+
+- **Size and fixing:** 120 × 315, with ten 4.5 holes 5 in from the edges.
+- **Analogue:** the XLR in, its PUSH latch above, and its link.
+- **Digital:**
+  - the AES pair below, turned half round;
+  - the RCAs in a column (unbalanced left and right, S/PDIF in and out);
+  - mini-USB and Toslink.
+- **Controls and print:**
+  - the four status lights and Select, their labels on the slant;
+  - the grey label strips, and the white print (Ncore, Hypex, FA122, the safety marks, the caution, the ratings);
+  - the rating sticker.
+- **The rest:**
+  - ten vent slots and the module's screws;
+  - the mains entry: the C14 on its side, beside its rocker.
+
+These are render pieces only: the part's solid and the drawings are unchanged.
+
+### The cloth and the lining
+
+Three of the campaign critics named the speaker's own surfaces:
+
+- **The cover read as brushed metal.** Its heather was drawn out in one direction only, so from a few metres it was a field of vertical streaks. Now the warp's heather runs along the warp and the weft's along the weft, crossing as a cloth's do, with soft slubs and a fabric's sheen.
+- **The lining read as moulded clay.** Its clouds are gentler (3 cm), and the batts are lumpy where they are stuffed into their sleeves (a soft relief 7 cm across).
+- **The black front edge of the top** is the edge itself. Seen end-on through about 400 mm of tint, it stays dark even at 32 light bounces, so the fix is a light placed to catch it, not a shader.
+
+### Pictures for a launch (in progress)
+
+- **The critic** (`critic/PROMPT-promo.md`, with `critic/measure.py`) is the studio's prescriptive critic (critic v2) turned to campaign pictures.
+  - A fresh context sees only the picture and its card, and scores it blind against what a $20,000 product's launch would print.
+  - It then lists what to change, each with a test that shows the change is done.
+  - Passes go on until two in a row reach 8.5. Then a blind duel, the new picture beside the best so far, keeps the winner.
+  - The records are in `critic/rounds/2026-10-18/` and the "Promotional images" table of `critic/LOG.md`.
+- **First passes:** the room 4.5, Ice's front view 5.5, the hero 5.5, each place in its element 4 to 6 over its first two passes, and the companions' heroes 4.5.
+- **The studio.** Seven passes on a dark hero of Ember held at 5.0 to 5.5. Every pass names something light can soften but not remove: the horn's mirror gloss and dark throat, and the lining seen through the clear sides. So the concept changes, not the settings:
+  - the cover goes on, which hides the woofer's dark cone;
+  - the speaker is shot the two ways glass is photographed, each judged by a blind duel against the dark hero:
+    - bright-field on white, the iMac G3's way: the background shines through the tint, and black cards out of frame trace the edges dark;
+    - dark-field on black: only the edges are lit, and the lining falls to silhouette.
+- **In their element.** Each Cloud is shown at real scale in a real place, built from scanned assets (`studio/engine/assets.py`: Poly Haven's skies, textures and models and ambientCG's textures, all CC0, fetched on demand and cached out of git). The camera is a photographer's at eye level, and a sun lamp matches the sky's own sun (`assets.py sun`). There is one session for each colour, and a second concept for five of them, judged by duel. The sessions fixed the engine as they went:
+  - scanned plants keep their leaves cut out;
+  - the sky's sun is found where Cycles shows it (it had been reported 180° round);
+  - the places keep their sky's colour (the look book's white balance had turned Ember's lava salmon).
+- **The room, the hero and the catalogue** are each being lit again in their own sessions. The site takes each as it lands: `web.py` prefers round 31's hero, room and in-their-element pictures once they are in the repository, with their phone frames below 700 px.
+
+### The site's deployments
+
+Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), so www.earf.world still serves the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main goes up again as the allowance frees.
+
+### Open
+
+- **The horn's finish.** Every studio pass so far names the polished horn's mirror and its dark throat. Would the owner consider a satin (bead-blasted) horn, at least as an option? It would change the product, so it waits for the owner.
+- **The companions' questions** are in `companions/README.md`: the names; the casting partner for the formed shade and the 25 mm platter; the cartridge's blue body; a dust cover; where the arm rests; a listed dimmer; the bearing; and the prices (about $5,000 and $1,400 at the speakers' multiple).
 
 ## Round 30: the icons in acrylic, the site's home and speaker pages, hosted, and the back made real (the owner's notes of 2026-10-17 and 18)
 
