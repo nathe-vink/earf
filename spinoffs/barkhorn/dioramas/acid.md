@@ -20,6 +20,12 @@ speaker stands in its own pool.
   joke. No felt, no fabric, no paper landscape: those are the other sets'.
 - **The joke:** a paper cocktail umbrella, lemon and white, stuck in a pool of acid. The sour, served.
 
+## The earth setting
+
+The owner, through the coordinator: stay on the theme of earth, each speaker in its own atmosphere; story elements are
+subtle nods, not the subject. This set is a place: acid rain falling on a wet plain with rolling hills behind it,
+under its cloud. The umbrella is the one nod, small and to one side.
+
 ## Concepts (why this one)
 
 The first proofs tried three grounds under the same rain: a pale lime paper sweep (p1: flat, a hard sweep line, the
