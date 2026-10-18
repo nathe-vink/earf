@@ -269,8 +269,8 @@ def macro_bright(key, name, rotate, cam, target, lens):
 MACRO_FIX = {
     # turned so the cap and the mouth's rolled lip both face the camera, the cabinet mostly out of frame; the bell's top
     # given a dark edge by a flag overhead; the right flag matte (its glint was a square chip in the throat)
-    'horn': {'product.instances.0.rotate_z': 80.0, 'camera.position': [1.0, -2.3, 1.45], 'camera.target': [0.0, 0.02, 1.22],
-             'camera.lens_mm': 120.0, 'lights.scrim.irradiance': 0.6, 'set.flags.1.glossy': False,
+    'horn': {'product.instances.0.rotate_z': 80.0, 'camera.position': [1.0, -2.3, 1.45], 'camera.target': [0.05, 0.02, 1.08],
+             'camera.lens_mm': 125.0, 'lights.scrim.irradiance': 0.6, 'set.flags.1.glossy': False,
              'set.flags.2': {'center_m': [0.0, 0.0, 2.3], 'size_m': [1.6, 0.6], 'normal': [0.0, 0.0, -1.0], 'glossy': True}},
     # on the woofer's axis and centred; a strip whose reflection sweeps the ring, a smaller, higher key for the cone and cap
     'woofer': {'camera.position': [0.3, -3.0, 0.55], 'camera.target': [0.0, -0.2, 0.49], 'camera.lens_mm': 200.0,
