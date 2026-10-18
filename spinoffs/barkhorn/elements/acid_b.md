@@ -98,3 +98,7 @@ back), millimetres across, in clear water; the old splash pieces gone. A near ra
 | 1 | new, critic | 4.0 | rings dull smudges with no bright crest; splashes on rock; no rain in the air; glassy between impacts. Cusped, varied crests at 1.5 mm, chatter, a 2 cm depth margin, the near rain layer |
 | duel 2 | water 2 vs water 1 | 6.5 vs 5.5 | water 2's reflection calmer and readable, its jets read as drops at 1/60 s |
 | 2 | water 2, critic | 4.5 | wants ~300 rings /m2 and the reflection broken; the duel's judge wanted it calmer. Middle: 90 /m2, crests to 3.5 mm, more chatter (water 3) |
+
+The first full-size render of water 3 died at the end of its 93 minutes on the container's 14 GB memory limit (the
+ring map at 1.5 mm a pixel on top of 400,000 streaks). The map is now 2.5 mm a pixel (the crests still several pixels
+wide at that distance, the proof unchanged) and the far curtain 200,000 streaks.

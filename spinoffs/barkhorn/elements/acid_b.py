@@ -39,7 +39,7 @@ def props(cam):
         # standing water in the hollows, ringed by the drops
         ext('puddle', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], z=-0.11, ring=0.2, ripple=3.0, keep=1.0, roughness=0.02, big_rings=1.0, ripple_m=0.0012,
             # near the camera, the rain's own impacts: rings at every age, a few still splashing, only where there is water
-            impacts={'area': [-2.6, -7.2, 2.6, 1.2], 'density': 90, 'px_m': 0.0015, 'r_max': 0.08, 'amp_m': 0.0035,
+            impacts={'area': [-2.6, -7.2, 2.6, 1.2], 'density': 90, 'px_m': 0.0025, 'r_max': 0.08, 'amp_m': 0.0035,
                      'sharp': 3.0, 'chatter_m': 0.0001, 'margin_m': 0.02, 'splash_age': 0.08}, seed=9),
         # black boulders: one out of focus close at the left, a couple behind on the field
         ext('rock', model='rock_09', position=[-2.5, -2.4, -0.05], rotate=[0, 0, 40], scale=1.1, darken=0.5,
@@ -73,7 +73,7 @@ def props(cam):
         ext('rain', camera=cam, count=150, near=2.5, far=5.0, length=[0.08, 0.18], radius=[0.0006, 0.001],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.15, 0.35], scatter=0.7, rough=0.25, seed=13),
         # and the curtain beyond, too fine to count
-        ext('rain', camera=cam, count=300000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
+        ext('rain', camera=cam, count=200000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.08, scatter=0.9, rough=0.25, clear=0.1, seed=23),
     ]
 
