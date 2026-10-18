@@ -177,3 +177,7 @@ went round; the reply is in `critic_ice_b/final.json`.
 
 Render times (CPU, this container): landscape 2400 x 1600 at 512 samples, 92 min; proofs at half size and 128
 samples, 7 to 10 min; at 0.3 and 32 samples, about 1 min.
+
+Portrait 1600 x 2000 at 512 samples: 76 min. Its near-left chunk just touches the frame's left edge, and the
+speaker's reflection carries a green-gold streak (the low sun through the blue acrylic onto the wet sand: the
+speaker's own light on the ground, as the brief asks, though greener than the acrylic reads).
