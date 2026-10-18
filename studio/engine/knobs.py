@@ -21,6 +21,7 @@ KNOBS = [
     ('camera.focus', 'm [x, y, z] or "target"', None, 'the plane of focus passes through this point'),
     ('camera.miniature', 'scale k', (1, 60), 'tilt-shift: the depth of field of the same f-number on a model at 1:k, so the world reads as a miniature (12 to 20 for a tabletop diorama)'),
     ('camera.blades', 'count', (0, 16), 'aperture blades: 0 round bokeh, 5 to 9 polygons'),
+    ('camera.clip_end', 'm', (10, 100000), 'the far clip: nothing beyond it renders (300 by default; raise it for terrain kilometres off)'),
     ('camera.anamorphic', 'ratio', (0.5, 2.0), 'bokeh stretched (2: tall ovals, as an anamorphic lens)'),
     ('camera.polariser.strength', '0 to 1', (0, 1), 'a polarising filter on the lens: 1 removes the glare a dielectric (the lacquer, a plastic, a waxed floor) reflects across the pass axis, completely at Brewster\'s angle (56 degrees off the surface\'s normal), not at all head-on or at grazing angles; colour under the glare comes back, highlights there dim with it; exposure is made good'),
     ('camera.polariser.angle_deg', 'deg', (0, 180), 'the filter\'s pass axis in the frame, from horizontal: 90 cuts the glare on faces tilted toward or away from the camera (a roof slope, a floor, a top), 0 on faces turned to the side (a side face, a plinth\'s side); one angle cannot clear both'),
