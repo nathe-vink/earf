@@ -28,11 +28,11 @@ def props():
         ext('litter', area=[-0.5, -9.0, 0.5, 6.0], clods=900, pebbles=160, straws=400, avoid=[[0.0, 0.0, 0.42]], seed=3,
             texture='farm_soil'),
         # beyond it, the field running on to the hills
-        ext('plane', rows=True, period=ROW, size=[6000.0, 6000.0], position=[0.0, 3000.0, -0.03], colors={'flower': '#62558E', 'leaf': '#6B775A', 'soil': '#7A6A58'}),
+        ext('plane', rows=True, period=ROW, size=[6000.0, 6000.0], position=[0.0, 3000.0, -0.03], colors={'flower': '#6E5A9E', 'leaf': '#6B775A', 'soil': '#7A6A58'}),
         # the lavender: rows either side of the path, the first sharp, the far ones fading into haze
         ext('field', rows=[-ROW * 9.5, ROW * 9.5, ROW], span=[-11.0, 400.0], step=0.8, near=30.0, detail=140,
             clear=[[0.0, 0.0, 0.62]], seed=7,
-            colors={'flower': '#62558E', 'flower2': '#8676A8', 'leaf': '#6B775A', 'leaf2': '#8C9478', 'stem': '#5E6B47'}),
+            colors={'flower': '#6E5A9E', 'flower2': '#9078B8', 'leaf': '#6B775A', 'leaf2': '#8C9478', 'stem': '#5E6B47'}),
         # a lone oak out in the field, and a line of them along a far track: the plateau's own landmarks
         asset('island_tree_01', [30.0, 240.0, 0.0], rotate=(0, 0, 40), scale=1.0, res='1k'),
         scatter(['island_tree_01', 'island_tree_02', 'island_tree_03'], 28, [-420.0, 780.0, 420.0, 830.0], avoid=(), scale=(0.8, 1.25),
@@ -44,24 +44,24 @@ def props():
 def lights():
     return {
         # a white card under the lens throws a little of the eastern sky back onto the speaker's face, as a photographer would
-        'bounce': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': -10, 'elevation_deg': 6, 'distance_m': 3.0},
-                   'target': [0.0, 0.0, 0.7], 'irradiance': 1.6, 'color': '#D8D0F0', 'receivers': SPEAKER},
+        'bounce': {'type': 'area', 'size_m': [3.0, 2.0], 'orbit': {'azimuth_deg': -10, 'elevation_deg': 12, 'distance_m': 3.0},
+                   'target': [0.0, 0.0, 0.7], 'irradiance': 4.5, 'color': '#E2D8F4', 'receivers': SPEAKER},
         # the afterglow behind, through the acrylic and along its edges
-        'glow': {'type': 'area', 'size_m': [2.0, 1.2], 'orbit': {'azimuth_deg': 178, 'elevation_deg': 6, 'distance_m': 3.0},
-                 'target': [0.0, 0.0, 0.8], 'irradiance': 1.4, 'color': '#FFC8A0', 'camera': False, 'receivers': SPEAKER},
+        'glow': {'type': 'area', 'size_m': [2.0, 1.2], 'orbit': {'azimuth_deg': 178, 'elevation_deg': 2, 'distance_m': 4.0},
+                 'target': [0.0, 0.0, 0.8], 'irradiance': 2.0, 'color': '#FFC8A0', 'camera': False, 'receivers': SPEAKER},
     }
 
 
 def shot():
-    cam = camera(height=1.0, distance=9.5, azimuth=0.0, lens=85, target=(0.0, 0.0, 0.66), fstop=4.0, shift_y=0.06)
+    cam = camera(height=1.0, distance=9.5, azimuth=0.0, lens=85, target=(0.0, 0.0, 0.66), fstop=2.8, shift_y=0.06)
     cam['clip_end'] = 20000.0                      # the hills are kilometres off
-    return frame('haze', props(), cam, sky(SKY, ROT, strength=1.0, res='4k'), 'barkhorn, Haze, lavender at dusk', exposure=-1.3,
+    return frame('haze', props(), cam, sky(SKY, ROT, strength=0.26, res='4k'), 'barkhorn, Haze, lavender at dusk', exposure=0.0,
                  lights=lights(), sun=dict(SUN),
-                 haze={'box_m': [-8000.0, 8.0, 0.0, 8000.0, 8000.0, 80.0], 'density': 0.0003, 'anisotropy': 0.3,
+                 haze={'box_m': [-8000.0, 8.0, 0.0, 8000.0, 8000.0, 80.0], 'density': 0.0005, 'anisotropy': 0.3,
                        'color': '#B8A4D8'},
                  fin=finish(contrast=0.25, clarity=0.04, bloom=0.4, bloom_px=40, threshold=0.85, vignette=0.1),
-                 rotate_z=18.0, position=(0.0, 0.0, -0.015), samples=512,
-                 white_balance=(5600, 3))                  # daylight balance: the dusk stays warm, the violet stays true
+                 rotate_z=18.0, position=(0.0, 0.0, -0.025), samples=512,
+                 white_balance=(5000, 6))                  # daylight balance: the dusk stays warm, the violet stays true
 
 
 def portrait():

@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.015
+     -0.025
     ],
     "rotate_z": 18.0,
     "hide": [
@@ -79,7 +79,7 @@
      -0.03
     ],
     "colors": {
-     "flower": "#62558E",
+     "flower": "#6E5A9E",
      "leaf": "#6B775A",
      "soil": "#7A6A58"
     }
@@ -110,8 +110,8 @@
     ],
     "seed": 7,
     "colors": {
-     "flower": "#62558E",
-     "flower2": "#8676A8",
+     "flower": "#6E5A9E",
+     "flower2": "#9078B8",
      "leaf": "#6B775A",
      "leaf2": "#8C9478",
      "stem": "#5E6B47"
@@ -163,12 +163,12 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    1.6,
-    1.2
+    3.0,
+    2.0
    ],
    "orbit": {
     "azimuth_deg": -10,
-    "elevation_deg": 6,
+    "elevation_deg": 12,
     "distance_m": 3.0
    },
    "target": [
@@ -176,8 +176,8 @@
     0.0,
     0.7
    ],
-   "irradiance": 1.6,
-   "color": "#D8D0F0",
+   "irradiance": 4.5,
+   "color": "#E2D8F4",
    "receivers": [
     "[!p]*",
     "po*"
@@ -191,15 +191,15 @@
    ],
    "orbit": {
     "azimuth_deg": 178,
-    "elevation_deg": 6,
-    "distance_m": 3.0
+    "elevation_deg": 2,
+    "distance_m": 4.0
    },
    "target": [
     0.0,
     0.0,
     0.8
    ],
-   "irradiance": 1.4,
+   "irradiance": 2.0,
    "color": "#FFC8A0",
    "camera": false,
    "receivers": [
@@ -215,9 +215,9 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": -1.3,
-  "white_balance_k": 5600,
-  "white_balance_tint": 3,
+  "exposure": 0.0,
+  "white_balance_k": 5000,
+  "white_balance_tint": 6,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Haze, lavender at dusk (4:5)",
@@ -252,7 +252,7 @@
   "kind": "hdri",
   "polyhaven": "kiara_9_dusk",
   "rotation_deg": -128.0,
-  "strength": 1.0,
+  "strength": 0.26,
   "res": "4k"
  },
  "sun": {
@@ -289,7 +289,7 @@
    8000.0,
    80.0
   ],
-  "density": 0.0003,
+  "density": 0.0005,
   "anisotropy": 0.3,
   "color": "#B8A4D8"
  }

@@ -198,11 +198,11 @@ def field(bpy, name, p, kit):
                 ob = bpy.data.objects.new(f'{name}-{i}-{int(y * 10)}', me)
                 bpy.context.scene.collection.objects.link(ob)
                 ob.location = (px, py, -0.01)
-                ob.rotation_euler = (rnd.uniform(-0.05, 0.05), rnd.uniform(-0.05, 0.05), rnd.uniform(0, 2 * math.pi))
-                s = rnd.uniform(0.85, 1.12)
+                ob.rotation_euler = (rnd.uniform(-0.12, 0.12), rnd.uniform(-0.12, 0.12), rnd.uniform(0, 2 * math.pi))
+                s = rnd.uniform(0.75, 1.25)
                 ob.scale = (s * rnd.uniform(0.95, 1.05), s, s * rnd.uniform(0.92, 1.06))
                 obs.append(ob)
-            y += step * rnd.uniform(0.85, 1.15)
+            y += step * rnd.uniform(0.75, 1.3)
     return obs
 
 
