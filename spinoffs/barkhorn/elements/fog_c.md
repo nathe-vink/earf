@@ -49,3 +49,10 @@ water, the fog). The headland is `fog_b_el.terrain`. Built with `python3 spinoff
 
 | Pass | Score | Top changes | What I did |
 |---|---|---|---|
+
+## Stopped (2026-10-18)
+
+The owner called off concept C before the first critic pass: "Forget the SF fog idea. If we can't make it look like a
+real image of the real bridge or real sutro tower, it will look too obviously fake." The pass-1 render was stopped
+and nothing was scored. Fog keeps concept B on the site. The proof (p0) is in
+`renders/2026-10-18/barkhorn/proofs31/element-fog-c-p0.jpg`, and the rig is here for the record.
