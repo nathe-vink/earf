@@ -281,10 +281,13 @@ def _ripple_image(bpy, name, p, impacts):
     W, H = int((x1 - x0) / px), int((y1 - y0) / px)
     h = np.zeros((H, W), np.float32)
     rmax, amp = im.get('r_max', 0.12), im.get('amp_m', 0.0006)
+    sharp = im.get('sharp', 3.0)                          # crests as narrow ridges over broad troughs, not a sine
+    rnd = random.Random(im.get('seed', 4))
     for x, y, age, k in impacts:
         R = max(0.004, rmax * k * age ** 0.7)
-        lam = 0.011 + 0.008 * age                         # the rings spread out as they travel
-        reach = R + 2.5 * lam
+        lam = rnd.uniform(0.008, 0.016) * (1.0 + 0.6 * age)   # each drop's own wavelength, spreading as it travels
+        crests = rnd.choice([1.0, 1.6, 2.2, 2.8])          # how many crests its packet carries
+        reach = R + (crests + 1.0) * lam
         cx, cy = (x - x0) / px, (y - y0) / px
         r = int(reach / px) + 1
         ia, ib = max(0, int(cy) - r), min(H, int(cy) + r + 1)
@@ -294,9 +297,10 @@ def _ripple_image(bpy, name, p, impacts):
         yy, xx = np.mgrid[ia:ib, ja:jb]
         d = np.hypot((xx - cx) * px, (yy - cy) * px)
         q = (d - R) / lam
-        env = np.exp(-(q / 1.1) ** 2) * (q < 1.2)         # the leading crest highest, two or three behind it
-        a = amp * k * (1.0 - age) ** 1.6 / (1.0 + R / 0.03)
-        h[ia:ib, ja:jb] += (a * env * np.cos(2 * np.pi * q)).astype(np.float32)
+        env = np.exp(-(np.maximum(q, 0) / 0.5) ** 2 - (np.minimum(q, 0) / crests) ** 2) * (q < 1.0)
+        ridge = (0.5 + 0.5 * np.cos(2 * np.pi * q)) ** sharp - 0.5 ** sharp * 1.4
+        a = amp * k * rnd.uniform(0.5, 1.4) * (1.0 - age) ** 1.4 / (1.0 + R / 0.04)
+        h[ia:ib, ja:jb] += (a * env * ridge).astype(np.float32)
     img = bpy.data.images.new(f'{name}-rings', W, H, alpha=True, float_buffer=True)
     rgba = np.zeros((H, W, 4), np.float32); rgba[..., 0] = h; rgba[..., 1] = h; rgba[..., 2] = h; rgba[..., 3] = 1.0
     img.colorspace_settings.name = 'Non-Color'
@@ -397,6 +401,16 @@ def puddle(bpy, name, p, kit):
         nt.links.new(tx.outputs['Color'], ia.inputs[0])
         tot = nt.nodes.new('ShaderNodeMath'); tot.operation = 'ADD'
         nt.links.new(mo.outputs[0], tot.inputs[0]); nt.links.new(ia.outputs[0], tot.inputs[1])
+        # and everywhere the chatter of drops too small to ring: 2 to 8 mm wavelets, a few hundredths of a millimetre
+        ch = p['impacts'].get('chatter_m', 0.0)
+        if ch:
+            tc2 = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+            nz.inputs['Scale'].default_value = 1.0 / 0.005; nz.inputs['Detail'].default_value = 3.0
+            nt.links.new(tc2.outputs['Object'], nz.inputs['Vector'])
+            cm = nt.nodes.new('ShaderNodeMath'); cm.operation = 'MULTIPLY'; cm.inputs[1].default_value = ch
+            nt.links.new(nz.outputs['Fac'], cm.inputs[0])
+            t2 = nt.nodes.new('ShaderNodeMath'); t2.operation = 'ADD'
+            nt.links.new(tot.outputs[0], t2.inputs[0]); nt.links.new(cm.outputs[0], t2.inputs[1]); tot = t2
         bp.inputs['Strength'].default_value = 1.0; bp.inputs['Distance'].default_value = 1.0
         height = tot.outputs[0]
         # the youngest impacts are still splashing
