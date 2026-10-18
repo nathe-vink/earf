@@ -68,7 +68,7 @@ def room_set(v):
     def along(y):
         return round(y - cy, 3)
     # a run of tall French windows down the left wall, piers between, glass to 15 cm under the ceiling
-    wins = [{'wall': 'left', 'along': along(yc), 'sill': 0.04, 'size': [1.45, 2.71], 'mullions': [2, 1], 'frame': v.get('frame', '#5A564F')}
+    wins = [{'wall': 'left', 'along': along(yc), 'sill': 0.04, 'size': [1.45, 2.71], 'mullions': [2, 1], 'frame': v.get('frame', '#3A3733')}
             for yc in v.get('win_y', (0.2, -1.4, -3.45))]
     props = [
         ext('floor', rect=[LEFT, BACK - DEPTH, RIGHT, BACK], texture=v['floor'], res='4k', rotate_deg=v['floor_rot'],
@@ -97,7 +97,7 @@ def room_set(v):
             match=['pillow'], color=v.get('leather', '#7A4A2C'), blend='MIX', mix=v.get('leather_mix', 0.8)),
         # linen sheers drawn across the glazing (concept B): the sun through them becomes a broad soft source
         *[ext('sheer', position=[LEFT + 0.1, yc, HEIGHT - 0.05], rotate=[0, 0, 90], size=[w, HEIGHT - 0.07], folds=int(w * 9),
-              amplitude=0.045, noise=0.35, seed=11 + i, res=140, open=v.get('sheer_open', 0.25), color='#F3EEE4')
+              amplitude=0.045, noise=0.35, seed=11 + i, res=140, open=(v.get('sheer_opens') or [v.get('sheer_open', 0.25)] * 9)[i], color='#F3EEE4')
           for i, (yc, w) in enumerate(v.get('sheers', []))],
         # a linen sheer, half drawn, at the back of the glazing: the sun comes through it
         kit('drape', off=v.get('drape_off', False), position=[LEFT + 0.09, BACK - 0.33, HEIGHT - 0.06], rotate=[0, 0, 90], size=[0.55, HEIGHT - 0.08],
@@ -108,33 +108,33 @@ def room_set(v):
     ]
     return {'kind': 'room', 'size': [w, DEPTH, HEIGHT], 'center': [cx, cy],
             'floor': {'base': '#B89B78'}, 'wall': {'color': v['wall']}, 'ceiling': '#F2EFEA',
-            'skirting': {'h': 0.09, 'color': v['wall'], 't': 0.014}, 'frame': v.get('frame', '#5A564F'), 'windows': wins, 'props': props}
+            'skirting': {'h': 0.09, 'color': v['wall'], 't': 0.014}, 'frame': v.get('frame', '#3A3733'), 'windows': wins, 'props': props}
 
 
 DEFAULT = dict(
-    floor='wood_floor', floor_coat=0.15, floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=1.0,
+    floor='wood_floor', floor_coat=0.15, floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.05, wall_bump=2.0,
     wall_tint=0.5, wall_tex_scale=1.6, socket_x=1.78,
     veneer='walnut_veneer_02', veneer_lift=0.75, grain_rot=90.0,
     rug='poly_wool_herringbone', rug_tex_scale=0.25, rug_tint='#8A7A64', rug_tint_mix=1.0, rug_pos=[0.45, -1.25],
     rug_size=[2.6, 1.6], rug_displace=0.004, rug_pile=0.016, rug_res='4k', rug_value=0.75,
     chair='modern_arm_chair_01', chair_pos=[-1.68, -0.5, 0.0], chair_rot=235.0, leather='#8A7460',
-    hdri='autumn_forest_04', hdri_rot=100.0, ext_strength=5.0, ext_blur=0.0008, ext_tint='#FFE9D2',
+    hdri='autumn_forest_04', hdri_rot=100.0, ext_strength=4.0, ext_blur=0.0008, ext_tint='#FFE9D2',
     # concept C (pass r10): the window corner. The camera, still squared to the back wall, stands toward the glazing, so
     # the left wall recedes in the frame with its view out and the lounge chair by the glass; the pair, moved 0.35 m
     # clear of the window, stands in the low sun (az -76, el 11) through the open back bays; linen sheers over the
     # front bays soften the rest
-    sheers=[(-0.79, 0.86), (-2.92, 2.56)], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=0.42, vase_x=0.62,
+    sheers=[(-0.85, 0.7), (-2.92, 2.56)], sheer_opens=[0.15, 0.35], drape_off=True, sheer_open=0.15, tt_x=0.18, books_x=0.6, vase_x=-0.6,
     sun=dict(azimuth_deg=-62.0, elevation_deg=18.0, irradiance=40.0, angle_deg=0.6, color='#FFE4C8'),
-    sky_strength=1.0, fill=0.8, fill_color='#D2E0F4', fill_pos=[1.6, -3.6, 2.2], bounce=0.7, bounce_pos=[-0.6, -3.6, 1.35],
+    sky_strength=1.0, fill=1.3, fill_color='#D2E0F4', fill_pos=[1.6, -3.6, 2.2], bounce=0.7, bounce_pos=[-0.6, -3.6, 1.35],
     bounce_size=[2.4, 1.2], floor_bounce=0.55, fb_pos=[0.0, -0.6, 0.08], rug_off=True, chair_off=True,
-    exposure=-1.0, wb=4800, cam_x=0.0, cam_d=5.06, pair_x=0.0, lens=40, cam_tz=0.855, wb_tint=0.0,
+    exposure=-1.0, wb=5200, cam_x=0.0, cam_d=5.06, pair_x=0.0, lens=40, cam_tz=0.855, wb_tint=0.0,
 )
 
 
 # the portrait (for phones): the same room, the pair brought in round a two-door credenza so it fills a 4:5 frame
-PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=-0.18, books_x=0.25, vase_x=0.42, port_d=4.7,
+PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=0.08, books_x=0.38, vase_x=-0.4, port_d=4.7,
                 port_lens=50, port_tz=0.9,
-                sheers=[(-0.53, 0.32), (-2.68, 3.1)])     # the gaps where the beams to the pair (now +-0.92) come in
+                sheers=[(-0.79, 0.56), (-2.85, 2.7)])     # the gaps where the beams to the pair (now +-0.92) come in
 
 
 def shot(v=None, portrait=False):

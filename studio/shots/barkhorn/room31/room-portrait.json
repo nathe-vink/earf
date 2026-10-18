@@ -32,7 +32,7 @@
     {
      "flavour": "fog",
      "position": [
-      -0.18,
+      0.08,
       0.708,
       0.56
      ],
@@ -64,7 +64,7 @@
    "color": "#E8E2D8",
    "t": 0.014
   },
-  "frame": "#5A564F",
+  "frame": "#3A3733",
   "windows": [
    {
     "wall": "left",
@@ -78,7 +78,7 @@
      2,
      1
     ],
-    "frame": "#5A564F"
+    "frame": "#3A3733"
    },
    {
     "wall": "left",
@@ -92,7 +92,7 @@
      2,
      1
     ],
-    "frame": "#5A564F"
+    "frame": "#3A3733"
    },
    {
     "wall": "left",
@@ -106,7 +106,7 @@
      2,
      1
     ],
-    "frame": "#5A564F"
+    "frame": "#3A3733"
    }
   ],
   "props": [
@@ -143,8 +143,8 @@
     "res": "4k",
     "color": "#E8E2D8",
     "tint_mix": 0.5,
-    "value": 1.3,
-    "bump": 1.0,
+    "value": 1.05,
+    "bump": 2.0,
     "tex_scale": 1.6
    },
    {
@@ -367,7 +367,7 @@
     "path": "spinoffs/barkhorn/room31/pieces.py",
     "fn": "books",
     "position": [
-     0.25,
+     0.38,
      0.71,
      0.56
     ],
@@ -407,7 +407,7 @@
     "shape": "asset",
     "model": "ceramic_vase_02",
     "position": [
-     0.42,
+     -0.4,
      0.75,
      0.56
     ],
@@ -449,7 +449,7 @@
     "fn": "sheer",
     "position": [
      -1.9499999999999997,
-     -0.53,
+     -0.79,
      2.85
     ],
     "rotate": [
@@ -458,10 +458,10 @@
      90
     ],
     "size": [
-     0.32,
+     0.56,
      2.83
     ],
-    "folds": 2,
+    "folds": 5,
     "amplitude": 0.045,
     "noise": 0.35,
     "seed": 11,
@@ -476,7 +476,7 @@
     "fn": "sheer",
     "position": [
      -1.9499999999999997,
-     -2.68,
+     -2.85,
      2.85
     ],
     "rotate": [
@@ -485,15 +485,15 @@
      90
     ],
     "size": [
-     3.1,
+     2.7,
      2.83
     ],
-    "folds": 27,
+    "folds": 24,
     "amplitude": 0.045,
     "noise": 0.35,
     "seed": 12,
     "res": 140,
-    "open": 0.15,
+    "open": 0.35,
     "color": "#F3EEE4"
    },
    {
@@ -531,7 +531,7 @@
     "fn": "exterior",
     "hdri": "autumn_forest_04",
     "rotation_deg": 100.0,
-    "strength": 5.0,
+    "strength": 4.0,
     "res": "8k",
     "centre": [
      -3.05,
@@ -583,7 +583,7 @@
     0.2,
     0.9
    ],
-   "irradiance": 0.8,
+   "irradiance": 1.3,
    "color": "#D2E0F4"
   },
   "bounce": {
@@ -633,7 +633,7 @@
   "bounces": 12,
   "view": "Khronos PBR Neutral",
   "exposure": -1.0,
-  "white_balance_k": 4800,
+  "white_balance_k": 5200,
   "white_balance_tint": 0.0
  },
  "size": [

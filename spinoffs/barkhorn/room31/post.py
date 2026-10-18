@@ -8,7 +8,8 @@ engine (render.py) and before the critic, so the critic judges what ships.
   above 200 added back;
 - grain: fine luminance noise, `grain` levels (sRGB, 1 sigma) at mid-grey and less in the deep shadows and highlights,
   the same seed every time, so a frame and its re-render match.
-No colour moves: every operation is on luminance or a neutral gain in linear light.
+- green trim: saturation in the greens eased by `trim` in the mid-tones (the lit cabinets' lime toward their sage).
+Nothing else moves colour: every other operation is on luminance or a neutral gain in linear light.
 """
 import argparse
 
@@ -25,8 +26,28 @@ def srgb(a):
     return np.where(a <= 0.0031308, a * 12.92, 1.055 * a ** (1 / 2.4) - 0.055)
 
 
-def finish(img, grain=1.4, vignette=0.22, bloom=0.05, seed=31):
+def green_trim(a, amount):
+    """Saturation in the greens (hue 75-165 deg) eased by `amount` in the mid-tones (luminance 90-210 of 255), as a
+    retoucher trims a colour the grade has pushed past its swatch (the cabinets' lime toward their sage)."""
+    mx = a.max(-1); mn = a.min(-1); c = mx - mn
+    r, g, b = a[..., 0], a[..., 1], a[..., 2]
+    h = np.zeros_like(mx)
+    m = c > 1e-6
+    hr = np.where(mx == r, ((g - b) / np.maximum(c, 1e-6)) % 6, 0)
+    hg = np.where(mx == g, (b - r) / np.maximum(c, 1e-6) + 2, 0)
+    hb = np.where(mx == b, (r - g) / np.maximum(c, 1e-6) + 4, 0)
+    h = np.where(mx == r, hr, np.where(mx == g, hg, hb)) * 60.0
+    Y = a @ np.array([0.2126, 0.7152, 0.0722], np.float32)
+    wh = np.clip(1 - np.abs(h - 120) / 45.0, 0, 1) ** 0.5
+    wl = np.clip((Y * 255 - 90) / 30, 0, 1) * np.clip((210 - Y * 255) / 30, 0, 1)
+    k = (amount * wh * wl * m)[..., None]
+    return a + (Y[..., None] - a) * k
+
+
+def finish(img, grain=1.4, vignette=0.22, bloom=0.05, seed=31, trim=0.0):
     a = np.asarray(img.convert('RGB'), np.float32) / 255.0
+    if trim > 0:
+        a = np.clip(green_trim(a, trim), 0, 1)
     H, W, _ = a.shape
     L = lin(a)
     # vignette: stops of fall-off by normalised radius (corner = 1)
@@ -57,8 +78,9 @@ def main():
     ap.add_argument('--grain', type=float, default=1.4)
     ap.add_argument('--vignette', type=float, default=0.22)
     ap.add_argument('--bloom', type=float, default=0.05)
+    ap.add_argument('--trim', type=float, default=0.15)
     a = ap.parse_args()
-    finish(Image.open(a.src), a.grain, a.vignette, a.bloom).save(a.dst, optimize=True)
+    finish(Image.open(a.src), a.grain, a.vignette, a.bloom, trim=a.trim).save(a.dst, optimize=True)
     print(a.dst)
 
 
