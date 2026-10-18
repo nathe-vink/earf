@@ -19,3 +19,22 @@ Seven passes on the dark hero scored 5.5, 5.0, 5.5, 5.5, 5.0, 5.0, 5.0 (the ligh
 contradict each other on the floor (a faint smear vs a crisp mirror), the size, the strips' aim and key against fill.
 What every pass names and none can fix with light is the product: the horn's mirror gloss and its dark throat, and the
 internals seen through clear sides, listed as out of scope each time. The finals are rendered from h7's settings.
+
+## Round 31c: concepts, by duel
+
+The coordinator called the plateau and asked for two classic ways of shooting coloured clear acrylic, cover on, from
+the look book's three-quarter direction: bright field on white (the iMac G3, the Cube) and dark field on black. Blind
+duels (`critic/ab/PROMPT-DUEL.txt`, random order, 1280 proofs, Ember), replies in `critic/duels/`:
+
+| duel | A | B | scores | verdict |
+|---|---|---|---|---|
+| 1 | bright field, cover on | h7 | 4.0 / 6.0 | h7 |
+| 2 | h7 | dark field, cover on | 5.0 / 2.5 | h7 |
+| 3 | h7 | bright field, cover off | 4.8 / 5.6 | bright field |
+
+**For the record: both cover-on duels read the cover's flat cloth disc as "a placeholder"** (duel 1: "a flat,
+unshaded red disc with no cone, surround or dust cap"; duel 2, the black cloth: "a hole or missing part"). The
+catalogue's cover-on views face the same reader.
+
+Bright field with the cover off is the studio set from here (the coordinator: the eight heroes, the lineup and the
+macros all from its rig, named hero-light-<colour>); hero-dark-ember.png stays as the record of the h7 rig.
