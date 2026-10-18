@@ -567,6 +567,14 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .macros figure { margin: 0 } .macros img { width: 100%; height: auto; display: block; max-width: 100% }
 .macros figcaption { font-size: 14px; line-height: 1.4; margin-top: 8px; color: #9B978F } .closer.light .macros figcaption { color: #6B675F }
 @media (max-width: 900px) { .macros { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+.closer.light .dots .coin-dot { background-image: url(img/coins-light.jpg); mix-blend-mode: multiply }
+.closer.light .dots button[aria-checked="true"] { box-shadow: inset 0 0 0 2px #1A1917 }
+/* a bright field falls off to grey at its corners: feather the frames into the band */
+.closer.light .closer-stage, .closer.light .lineup img {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 5%, #000 95%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent), linear-gradient(180deg, transparent, #000 5%, #000 95%, transparent);
+  mask-composite: intersect }
 .lineup { margin: 56px 0 0; display: grid; gap: 12px }
 .lineup img { width: 100%; height: auto; display: block; max-width: 100% }
 .lineup figcaption { color: #9B978F; font-size: 15px }
