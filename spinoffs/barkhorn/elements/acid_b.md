@@ -81,3 +81,20 @@ same finish. The horn's hue was already on Acid's #E9B320 (its (g-b)/(r-b) 0.744
 lightness, not its hue), so the shift neutralises the sky without moving the horn green. A blind duel preferred the
 re-graded frame, 6.2 to 5.9 (`critic-acid_b/duel-refinish.json`); the finals carry it. `acid_b.raw.png` stays the frame
 as rendered.
+
+## Fix round: the splashes (the owner, 2026-10-18 evening: "The acid rain splashes from dropping into the water are a little off for some reason.")
+
+At 1:1 the first finals' puddle carried too many crowns, all one tulip shape at one phase, bright from a half-transparent
+"glow" water, their beads floating above the rims; almost no rings (four procedural layers read as wind chop); no splash
+in a ring of its own; some at the rock's edge. Fixed at source (`acid_rain_el.puddle`, `impacts`): one list of impacts
+near the camera at random ages, only where a raycast finds water at least 2 cm deep; their rings baked into the water's
+normals at 1.5 mm a pixel (cusped crests, each drop its own wavelength and crest count, fading as they spread) with fine
+drop-chatter everywhere; only the youngest 8 % still splashing, phases spread (crown, jet with a bead, droplets falling
+back), millimetres across, in clear water; the old splash pieces gone. A near rain layer (150 streaks at 2.5 to 5 m).
+
+| Water pass | Proof | Blind | Notes and what I did |
+|---|---|---|---|
+| duel 1 | new (45 /m2, 3 mm map) vs the finals' water | 5.5 vs 3.5 | the old crowns read as stamped sprites; the new rings too regular |
+| 1 | new, critic | 4.0 | rings dull smudges with no bright crest; splashes on rock; no rain in the air; glassy between impacts. Cusped, varied crests at 1.5 mm, chatter, a 2 cm depth margin, the near rain layer |
+| duel 2 | water 2 vs water 1 | 6.5 vs 5.5 | water 2's reflection calmer and readable, its jets read as drops at 1/60 s |
+| 2 | water 2, critic | 4.5 | wants ~300 rings /m2 and the reflection broken; the duel's judge wanted it calmer. Middle: 90 /m2, crests to 3.5 mm, more chatter (water 3) |
