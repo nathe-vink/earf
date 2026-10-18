@@ -25,6 +25,19 @@ A kit piece is a prop in a set's `props`: {"kind": "kit", "shape": ..., "positio
 - ext: a piece a set builds itself, `module` (studio/engine/kit_ext/<module>.py) and `fn`, called as
   fn(bpy, name, p, kit) and returning its objects (it can use this module's helpers and materials).
 
+Photographic pieces (round 31b; studio/engine/assets.py, Poly Haven CC0, fetched and cached):
+- ground: a patch of real ground, `texture` (a Poly Haven texture id, e.g. aerial_rocks_02) laid at its real size
+  (`tex_scale` metres a tile overrides), `size` [w, d] metres, `displace` metres of true displacement by its height map,
+  `relief` metres of broad undulation (level within `flat` [x, y, r], the product's footprint by default; false for
+  none), `res` ('1k' to '8k'), `tint` and `tint_mix` to shift its colour;
+- asset: a scanned model, `model` (a Poly Haven model id, e.g. boulder_01), placed by `position`, `rotate` (degrees)
+  and `scale`, with its own materials;
+- scatter_assets: `count` copies of `models` over `area` [x0, y0, x1, y1], none inside an `avoid` circle [x, y, r],
+  sized at random within `scale` [min, max], turned at random (`spin`, `tilt_deg`), standing at `z`;
+- and `"material": "pbr"` with `texture` on any other shape (tex_scale, displace, tint, tint_mix, rough_mul, bump,
+  coords 'object' or 'uv'; an ambientCG set by 'acg:<id>', e.g. 'acg:Lava004', its emission map glowing at
+  `emit_map`).
+
 Every piece but a thread is placed by `position`, `rotate` and `scale`; a tube's points, a scatter's box and a drape are
 in the piece's own frame.
 
@@ -372,8 +385,32 @@ def finish(bpy, name, bm, p, smooth=True, mat=None):
 
 
 def piece_material(bpy, p):
+    if p.get('material') == 'pbr':                                   # a photographed texture set (assets.py)
+        import assets
+        return assets.pbr(bpy, p['texture'], p.get('res', '2k'), scale=p.get('tex_scale'), displace=p.get('displace', 0.0),
+                          tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0), rough_mul=p.get('rough_mul', 1.0),
+                          bump=p.get('bump', 1.0), coords=p.get('coords', 'object'), emit=p.get('emit_map', 0.0))
     opts = {k: p[k] for k in ('roughness', 'alpha', 'emit', 'emit_color', 'tint2', 'grain', 'rib') if k in p}
     return material(bpy, p.get('material', 'felt'), p.get('color', '#D9D4CB'), opts)
+
+
+def _photographic(bpy, name, p):
+    """The photographic pieces (assets.py, Poly Haven): a patch of textured ground, a scanned model, or many."""
+    import assets
+    shape = p['shape']
+    if shape == 'ground':
+        ob = assets.ground(bpy, name, p['texture'], tuple(p.get('size', [8.0, 8.0])), p.get('res', '2k'),
+                           tuple(p.get('position', [0, 0, 0])), p.get('cells'), p.get('displace', 0.03), p.get('tint'),
+                           p.get('tint_mix', 0.0), p.get('tex_scale'), p.get('rough_mul', 1.0), p.get('bump', 1.0), p.get('relief'),
+                           tuple(p.get('flat', [0.0, 0.0, 0.9])) if p.get('flat') is not False else None)
+        ob.rotation_euler.z = math.radians(p.get('rotate', [0, 0, 0])[2] if isinstance(p.get('rotate'), list) else p.get('rotate', 0))
+        return [ob]
+    if shape == 'asset':
+        return [assets.place(bpy, p['model'], p.get('res', '2k'), tuple(p.get('position', [0, 0, 0])),
+                             tuple(p.get('rotate', [0, 0, 0])), p.get('scale', 1.0), name)]
+    return assets.scatter(bpy, p['models'], p.get('res', '2k'), p.get('count', 20), tuple(p.get('area', [-3, -3, 3, 3])),
+                          [tuple(a) for a in p.get('avoid', [])], tuple(p.get('scale', [0.8, 1.2])), p.get('z', 0.0),
+                          p.get('seed', 1), p.get('spin', True), p.get('tilt_deg', 0.0))
 
 
 def piece(bpy, name, p):
@@ -381,6 +418,8 @@ def piece(bpy, name, p):
     shape = p.get('shape', 'sphere')
     if shape == 'ext':
         return _ext(bpy, name, p)
+    if shape in ('ground', 'asset', 'scatter_assets'):
+        return _photographic(bpy, name, p)
     bm = bmesh.new()
     smooth = True
     if shape == 'sphere':
