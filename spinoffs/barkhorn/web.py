@@ -43,15 +43,19 @@ IMG = os.path.join(SITE, 'img')
 BRAND = os.path.join(HERE, 'brand')
 R30 = os.path.join(ROOT, 'renders', '2026-10-17', 'barkhorn', 'site30')
 TURN = os.path.join(ROOT, 'renders', '2026-10-15', 'barkhorn', 'turn23')
-# round 31: the final pictures (finals.py), the spotlight and the carousel (shoot31.py) and the dioramas (dioramas/)
+# round 31: the final pictures (finals.py), the spotlight and the carousel (shoot31.py), and round 31b's: each colour
+# in its element (elements/), the hero and the room made again to the promotional critic's bar (hero31.py, room31/)
 FIN = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'finals31')
 S31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'shoot31')
 U31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'uplight31')     # each colour lit from below: the reel
-D31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'diorama31')
+E31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'element31')     # each colour on location, in its element
+H31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'hero31')        # the eight on their arc, relit
+RM31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'room31')       # the pair at home, photographed
 ST31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'studio31')    # the studio's: heroes, the lineup, macros
 C31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions')   # the record player and the lamp
 HABITAT = {'red': 'ember', 'orange': 'dust', 'amber': 'acid', 'green': 'poison', 'blue': 'ice', 'violet': 'haze',
            'ice': 'fog', 'black': 'smoke'}
+ELEMENT = dict(HABITAT)       # which concept each colour shows in its element: A (<name>), or B (<name>_b) once it wins
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 TITLE = 'EARF · Atmosphere'
 DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours named for things in the air. '
@@ -104,7 +108,13 @@ def layer(im, ground, dark):
 
 def hero_spots():
     """Where each Cloud stands in the hero, as fractions of the frame: its middle, its sides and its top and foot,
-    projected from hero.py's arc through the engine's level camera (render.py: looking level, the lens shifted)."""
+    projected from hero.py's arc through the engine's level camera (render.py: looking level, the lens shifted). A hero
+    that brings its own boxes (round 31b's hero31/spots.json, copied beside the picture as img/hero-spots.json) uses
+    those instead, so the links follow whatever arc and camera made the picture."""
+    own = os.path.join(IMG, 'hero-spots.json')
+    if os.path.exists(own):
+        d = json.load(open(own))
+        return d['landscape'] if isinstance(d, dict) else d
     R, CY, STEP, n = 5.0, -4.6, 0.92, 8
     C, T, lens, sensor, W, H = (0.0, -9.6, 1.75), (0.0, -0.4, 0.55), 46.0, 36.0, 2560, 1280
     tilt = math.atan2(T[2] - C[2], T[1] - C[1])
@@ -131,8 +141,18 @@ def make_images(sources=None):
             fn(path); made.append(os.path.basename(path))
     def first(*paths):                                  # the final if it is there, else the round's picture
         return next((p for p in paths if p and os.path.exists(p)), None)
-    one(first(os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png')),
-        lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82), save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
+    hero = first(os.path.join(H31, 'hero.png'), os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png'))
+    one(hero, lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82), save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
+    # the hero's own link boxes and its phone frame travel with it, and a picture without them leaves none behind
+    for name, src in (('hero-spots.json', 'spots.json'), ('hero-portrait.jpg', 'hero-portrait.png')):
+        theirs = os.path.join(os.path.dirname(hero), src) if hero else ''
+        if theirs and os.path.exists(theirs):
+            if name.endswith('.json'):
+                shutil.copy(theirs, os.path.join(IMG, name)); made.append(src)
+            else:
+                one(theirs, lambda p: save(Image.open(p), name, 1200, q=82))
+        elif hero and os.path.exists(os.path.join(IMG, name)):
+            os.remove(os.path.join(IMG, name))
     for k in KEYS:
         for side in ('on', 'off'):
             one(first(os.path.join(FIN, f'front-{side}-{k}.png'), at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg')),
@@ -148,8 +168,9 @@ def make_images(sources=None):
         h = HABITAT[k]
         one(first(*[os.path.join(U31, f'{n}-{c}.{e}') for n in ('uplit', 'uplight', 'reel', 'frame') for c in (k, h) for e in ('png', 'jpg')]),
             lambda p: save(Image.open(p), f'{k}-reel.jpg', 1400, q=84))
-        one(first(os.path.join(D31, f'{h}.png'), os.path.join(D31, f'{h}.jpg')), lambda p: save(Image.open(p), f'{k}-habitat.jpg', 1600, q=84))
-        one(first(os.path.join(D31, f'{h}-portrait.png'), os.path.join(D31, f'{h}-portrait.jpg')),
+        e = ELEMENT[k]                                  # the concept the colour shows in its element
+        one(first(os.path.join(E31, f'{e}.png'), os.path.join(E31, f'{e}.jpg')), lambda p: save(Image.open(p), f'{k}-habitat.jpg', 1600, q=84))
+        one(first(os.path.join(E31, f'{e}-portrait.png'), os.path.join(E31, f'{e}-portrait.jpg')),
             lambda p: save(Image.open(p), f'{k}-habitat-portrait.jpg', 1000, q=84))
         for tag, names in (('studio', ('hero-dark', 'hero')), ('studio-light', ('hero-light',))):
             one(first(*[os.path.join(ST31, f'{n}-{c}.{e}') for n in names for c in (h, k) for e in ('png', 'jpg')]),
@@ -163,9 +184,15 @@ def make_images(sources=None):
     for tag, names in (('facade', ('facade', 'night', 'opera')), ('facade-portrait', ('facade-portrait', 'night-portrait', 'opera-portrait'))):
         one(first(*[os.path.join(U31, f'{n}.{e}') for n in names for e in ('png', 'jpg')]),
             lambda p, t=tag: (save(Image.open(p), f'{t}.jpg', 2400, q=84), save(Image.open(p), f'{t}-1200.jpg', 1200, q=82)))
-    one(first(os.path.join(FIN, 'room.png')), lambda p: save(Image.open(p), 'room.jpg', 1800, q=84))
+    room = first(os.path.join(RM31, 'room.png'), os.path.join(FIN, 'room.png'))
+    one(room, lambda p: save(Image.open(p), 'room.jpg', 1800, q=84))
+    port = os.path.join(os.path.dirname(room), 'room-portrait.png') if room else ''
+    if port and os.path.exists(port):                   # the room's phone frame travels with it, as the hero's does
+        one(port, lambda p: save(Image.open(p), 'room-portrait.jpg', 1000, q=84))
+    elif room and os.path.exists(os.path.join(IMG, 'room-portrait.jpg')):
+        os.remove(os.path.join(IMG, 'room-portrait.jpg'))
     for f in ('room.jpg', 'ga-front.png', 'ga-right.png'):
-        if f == 'room.jpg' and os.path.exists(os.path.join(FIN, 'room.png')):
+        if f == 'room.jpg' and room:
             continue
         one(at('r25', 'site', 'img', f), lambda p, f=f: shutil.copy(p, os.path.join(IMG, f)))
     # the icons, acrylic (icons_real.py's renders, each on its ground made even), a layer for light grounds and one for dark
@@ -282,33 +309,36 @@ def body():
                       f'<img src="img/facade.jpg" srcset="img/facade-1200.jpg 1200w, img/facade.jpg 2400w" sizes="(max-width: 1240px) 100vw, 1240px" '
                       f'width="{fw}" height="{fh}" loading="lazy" alt="A concrete wall by a river at night, the eight standing along its foot '
                       'on lights, their colours washing up the wall and running into one another"></picture></figure>\n')
-        reel = ('  <section class="band reelband" id="reel"><div class="wrap">\n' + facade +
-                '    <div class="head"><div><p class="eyebrow">Hold it to the light</p><h2>One speaker, eight slides.</h2>'
-                '<p>Each one, standing on a lamp. Turn the reel.</p></div></div>\n'
-                '    <div class="viewer">\n'
-                f'      <figure class="lens"><div class="lens-pic"><img id="reel-img" src="img/{first_[0]}-reel.jpg" width="{rw}" height="{rh}" '
-                f'alt="{first_[2]} standing on a light, its colour cast up the concrete wall behind it"></div>'
-                f'<figcaption id="reel-cap"><b>{first_[2]}</b> {first_[5]}</figcaption></figure>\n'
-                '      <div class="reel-side">\n'
-                '        <div class="reel" id="reel-disc" role="group" aria-label="The reel: one slide a colour">' + ''.join(
-                    f'<button type="button" class="slide" style="--i:{i};background-image:url(img/{k}-reel.jpg)" data-i="{i}" '
-                    f'aria-label="{name}" aria-pressed="{str(i == 0).lower()}"></button>'
-                    for i, (k, num, name, *_) in enumerate(CLOUDS)) +
-                '<span class="hub" aria-hidden="true"></span></div>\n'
-                '        <button type="button" class="btn lever" id="reel-next">Next slide</button>\n'
-                '      </div>\n    </div>\n  </div></section>')
+        coins = ''.join(f'<li><button type="button" aria-label="{name}" aria-current="{str(i == 0).lower()}">'
+                        f'<span class="coin-dot" style="--i:{coin[k]}"></span></button></li>'
+                        for i, (k, num, name, *_) in enumerate(CLOUDS))
+        reel = ('  <section class="band lightband" id="light">\n'
+                '    <div class="wrap"><div class="head"><div><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2>'
+                '<p>Cast acrylic carries light to its edges, so a lamp underneath turns the whole cabinet into weather. Keep '
+                'scrolling for all eight.</p></div></div></div>\n'
+                '    <div class="light-run" id="light-run" style="--n:8">\n'
+                '      <div class="light-stage"><div class="wrap light-grid">\n'
+                '        <div class="light-pic" role="img" aria-label="Each of the eight speakers standing on a light, one after another">' + ''.join(
+                    f'<img src="img/{k}-reel.jpg" width="{rw}" height="{rh}" alt="" loading="lazy"{" style=opacity:1" if i == 0 else ""}>'
+                    for i, (k, *_) in enumerate(CLOUDS)) + '</div>\n'
+                f'        <div class="light-text"><p class="light-name" id="light-name" aria-live="polite">{first_[2]}</p>'
+                f'<p class="light-line" id="light-line">{first_[5]}</p>'
+                f'<ol class="light-dots" aria-label="The eight colours">{coins}</ol></div>\n'
+                '      </div></div>\n    </div>\n'
+                + ('    <div class="wrap">\n' + facade + '    </div>\n' if facade else '') +
+                '  </section>')
     if all('habitat' in meta[k] for k in KEYS):
         hw, hh = meta['red']['habitat']['w'], meta['red']['habitat']['h']
         tall = all(os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg')) for k in KEYS)
         habitats = ('  <section class="band" id="habitats"><div class="wrap">\n'
-                    '    <div class="head"><div><p class="eyebrow">Natural habitats</p><h2>Each colour, in its own weather.</h2></div>'
+                    '    <div class="head"><div><p class="eyebrow">In their element</p><h2>Each colour, in its own weather.</h2></div>'
                     '<div class="steps"><button type="button" class="btn" id="hab-prev" aria-label="Previous">&larr;</button>'
                     '<button type="button" class="btn" id="hab-next" aria-label="Next">&rarr;</button></div></div>\n'
                     '    <ul class="habitats" id="hab" tabindex="0" aria-label="The eight in their habitats">' + ''.join(
                         f'<li><a href="#speaker-{k}"><picture>'
                         + (f'<source media="(max-width: 700px)" srcset="img/{k}-habitat-portrait.jpg">' if tall else '') +
                         f'<img src="img/{k}-habitat.jpg" width="{hw}" height="{hh}" loading="lazy" '
-                        f'alt="{name} in a small made world of its own weather"></picture><span><b>{name}</b> {line}</span></a></li>'
+                        f'alt="{name}, on location in its own weather"></picture><span><b>{name}</b> {line}</span></a></li>'
                         for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n  </div></section>')
     pair = [('turntable', 'Cumulus', 'A record player. Belt drive, its motor in a pod of its own.',
              'Cumulus, a record player in tinted acrylic, its platter on a plinth of overlapping circles'),
@@ -328,7 +358,16 @@ def body():
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
                      coin=coin[k], views=meta[k]) for k, num, name, icon, tint, line, cover in CLOUDS],
         hues=E.HUES)
+    # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
+    # give way on phones to the names under it, the boxes being the landscape frame's
+    tall = lambda f: os.path.exists(os.path.join(IMG, f))
+    hero_tall = ('<source media="(max-width: 700px)" srcset="img/hero-portrait.jpg">' if tall('hero-portrait.jpg') else '')
+    room_tall = ('<source media="(max-width: 700px)" srcset="img/room-portrait.jpg">' if tall('room-portrait.jpg') else '')
+    if hero_tall:
+        hotspots = hotspots.replace('class="spot"', 'class="spot wide-only"')
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
+                .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
+                .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt)
                 .replace('__DATA__', json.dumps(data, separators=(',', ':'))))
@@ -405,7 +444,9 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .hero { padding-block: 0 28px }
 .hero-pic { position: relative }
 .hero-photo { position: relative; aspect-ratio: 2 / 1; max-width: 100%; background: #ECE7DD; overflow: hidden }
-.hero-photo > img { display: block; width: 100%; height: 100%; object-fit: cover }
+.hero-photo > picture { display: block; width: 100%; height: 100% }
+.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover }
+@media (max-width: 700px) { .hero-photo.has-tall { aspect-ratio: 4 / 5 } }
 .hero-title { position: absolute; left: 0; right: 0; top: 0; z-index: 1; color: var(--on-photo); pointer-events: none }
 .hero-title .wrap { padding-block: clamp(18px, 2.6vw, 44px) 0 }
 .hero-title .eyebrow { color: color-mix(in srgb, var(--on-photo) 68%, transparent) }
@@ -436,6 +477,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   .hero-title h1 { font-size: clamp(32px, 8vw, 44px) }
   .spot-label { display: none }
 }
+@media (max-width: 700px) { .spot.wide-only { display: none } }
 
 /* the horns turning */
 .horns { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
@@ -472,7 +514,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 
 /* a closer look: one colour at a time on the studio's dark seamless (a launch page's), picked from the coins below */
 .closer { background: var(--closer, #0B0B0C); color: #F5F3EF; text-align: center }
-.band.closer, .band.closer + .band, .band.reelband, .band.reelband + .band { border-top: 0 }
+.band.closer, .band.closer + .band, .band.lightband, .band.lightband + .band { border-top: 0 }
 .closer .eyebrow { color: #9B978F }
 .closer-head { display: grid; justify-items: center; margin-bottom: 4px }
 .closer-head h2 { max-width: 20ch }
@@ -496,31 +538,28 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 @media (prefers-reduced-motion: reduce) { .closer-stage img { transition: none } }
 .facade { margin: 0 0 56px }
 .facade img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
-.reelband { background: #0E0D0F; color: #ECE8E1 }
-.reelband .head p, .reelband .eyebrow { color: #A39E95 }
-.viewer { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; align-items: center }
-.lens { margin: 0; display: grid; gap: 12px }
-.lens-pic { border-radius: 14px; overflow: hidden; background: #000; box-shadow: 0 0 0 10px #1C1B1E, 0 30px 60px rgba(0, 0, 0, 0.5) }
-.lens-pic img { width: 100%; height: auto; display: block; transition: opacity 260ms ease, transform 420ms ease }
-.lens-pic img.out { opacity: 0; transform: scale(0.985) }
-.lens figcaption { font-size: 15px; color: #A39E95; margin-top: 14px } .lens figcaption b { color: #ECE8E1; margin-right: 8px }
-.reel-side { display: grid; justify-items: center; gap: 24px }
-.reel { --turn: 0; position: relative; width: 280px; height: 280px; border-radius: 50%; background: #F1EDE5;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12), 0 18px 40px rgba(0, 0, 0, 0.45);
-  transform: rotate(calc(var(--turn) * -45deg)); transition: transform 620ms cubic-bezier(0.3, 1.4, 0.5, 1) }
-.reel .slide { position: absolute; left: calc(50% - 22px); top: calc(50% - 15px); width: 44px; height: 30px; border: 0; padding: 0;
-  border-radius: 3px; background-size: cover; background-position: center; cursor: pointer;
-  transform: rotate(calc(var(--i) * 45deg)) translateY(-104px); box-shadow: 0 0 0 2px #F1EDE5, 0 0 0 3px rgba(0, 0, 0, 0.2) }
-.reel .slide[aria-pressed="true"] { box-shadow: 0 0 0 2px #F1EDE5, 0 0 0 4px #ECE8E1 }
-.reel .hub { position: absolute; left: calc(50% - 20px); top: calc(50% - 20px); width: 40px; height: 40px; border-radius: 50%;
-  background: #0E0D0F; box-shadow: inset 0 0 0 3px #CFC9BF }
-.reel::before { content: ""; position: absolute; left: calc(50% - 7px); top: -16px; border: 7px solid transparent;
-  border-bottom-color: #ECE8E1; transform: rotate(calc(var(--turn) * 45deg)); transform-origin: 7px 156px }
-.lever { color: #ECE8E1; border-color: #ECE8E1 }
-.lever:hover { box-shadow: inset 0 0 0 1px #ECE8E1 }
-@media (max-width: 860px) { .viewer { grid-template-columns: 1fr } .reel { width: 240px; height: 240px }
-  .reel .slide { transform: rotate(calc(var(--i) * 45deg)) translateY(-88px) } }
-@media (prefers-reduced-motion: reduce) { .reel, .lens-pic img { transition: none } }
+/* lit from below: a pinned frame the page scrolls through, each colour cross-fading into the next; the coins mark the way */
+.lightband { background: #0B0A0C; color: #ECE8E1; padding-bottom: 0 }
+.lightband .head p, .lightband .eyebrow { color: #A39E95 }
+.light-run { --n: 8; height: calc(var(--n) * 55vh + 45vh); position: relative }
+.light-stage { position: sticky; top: calc(var(--header) + env(safe-area-inset-top, 0px)); height: calc(100vh - var(--header));
+  display: grid; align-items: center }
+.light-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(24px, 4vw, 64px); align-items: center; width: 100% }
+.light-pic { position: relative; aspect-ratio: 1 / 1; max-width: 100%; width: min(100%, calc(100vh - var(--header) - 96px)); justify-self: center;
+  border-radius: 6px; overflow: hidden; background: #000 }
+.light-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; will-change: opacity }
+.light-text { display: grid; gap: 10px; align-content: center; min-width: 0 }
+.light-name { margin: 0; font-size: clamp(40px, 6vw, 84px); line-height: 1; font-weight: 600; letter-spacing: -0.03em }
+.light-line { margin: 0; color: #A39E95; font-size: 18px; max-width: 30ch }
+.light-dots { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px }
+.light-dots button { width: 36px; height: 36px; padding: 4px; border: 0; border-radius: 50%; background: transparent; cursor: pointer }
+.light-dots button[aria-current="true"] { box-shadow: inset 0 0 0 2px #ECE8E1 }
+.light-dots .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: url(img/coins-dark.jpg); mix-blend-mode: screen }
+.lightband button:focus-visible { outline-color: #ECE8E1 }
+.lightband .facade { margin: 0; padding-block: 64px 72px }
+@media (max-width: 860px) { .light-grid { grid-template-columns: 1fr; gap: 14px } .light-pic { width: min(100%, calc(100vh - var(--header) - 230px)) }
+  .light-name { font-size: 40px } .light-dots { margin-top: 8px } }
+@media (prefers-reduced-motion: reduce) { .light-run { height: auto } .light-stage { position: static; height: auto; padding-block: 24px } }
 /* the habitats: one campaign picture at a time, snapping along a strip (the portraits on phones) */
 .steps { display: flex; gap: 8px }
 .steps .btn { padding: 10px 14px }
@@ -644,9 +683,9 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
   <section class="hero" id="top">
     <div class="hero-pic">
       <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Atmosphere</p><h1>Weather for the living room.</h1></div></div>
-      <div class="hero-photo">
-        <img src="img/hero.jpg" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
-          alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor">
+      <div class="hero-photo__HERO_CLASS__">
+        <picture>__HERO_TALL__<img src="img/hero.jpg" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
+          alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor"></picture>
         __HOTSPOTS__
       </div>
     </div>
@@ -688,7 +727,7 @@ __REEL__
 __HABITATS__
   <section class="band room" id="room"><div class="wrap">
     <div class="head"><div><p class="eyebrow">At home</p><h2>A pair of Poison.</h2></div></div>
-    <figure><img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy">
+    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy"></picture>
       <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 520 mm.</span></figcaption></figure>
   </div></section>
 
@@ -752,22 +791,32 @@ __NEXT__
 <script>
 const D = __DATA__, BY = Object.fromEntries(D.clouds.map(c => [c.k, c]));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, TAU = Math.PI * 2;
-// the reel: one slide a colour; the lever turns it on a slide, a slide turns it to that slide (always forward, as a reel turns)
-const disc = document.getElementById('reel-disc');
-if (disc) {
-  const img = document.getElementById('reel-img'), cap = document.getElementById('reel-cap'), slides = [...disc.querySelectorAll('.slide')];
-  let at = 0, turn = 0;
-  const show = i => { const c = D.clouds[i], step = (i - at + 8) % 8; if (!step) return;
-    turn += step; at = i; disc.style.setProperty('--turn', turn);
-    slides.forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
-    const swap = () => { img.src = c.views.reel.src; img.alt = `${c.name} standing on a light, its colour cast up the concrete wall behind it`;
-      cap.innerHTML = `<b>${c.name}</b> ${c.line}`; img.classList.remove('out'); };
-    if (reduce) swap(); else { img.classList.add('out'); setTimeout(swap, 240); } };
-  document.getElementById('reel-next').addEventListener('click', () => show((at + 1) % 8));
-  slides.forEach(b => b.addEventListener('click', () => show(+b.dataset.i)));
-  document.getElementById('reel').addEventListener('keydown', e => { if (e.key === 'ArrowRight') show((at + 1) % 8); if (e.key === 'ArrowLeft') show((at + 7) % 8); });
-  let x0 = null; img.parentElement.addEventListener('pointerdown', e => { x0 = e.clientX; });
-  img.parentElement.addEventListener('pointerup', e => { if (x0 !== null && Math.abs(e.clientX - x0) > 40) show((at + (e.clientX < x0 ? 1 : 7)) % 8); x0 = null; });
+// lit from below: scrolling through the run cross-fades the eight (each picture lies over the one before and fades in over
+// its share of the run); the coins say where you are and jump there. Under reduced motion the coins simply pick one.
+const run = document.getElementById('light-run');
+if (run) {
+  const pics = [...run.querySelectorAll('.light-pic img')], dots = [...run.querySelectorAll('.light-dots button')], last = pics.length - 1;
+  const name = document.getElementById('light-name'), line = document.getElementById('light-line');
+  let at = -1, queuedL = false;
+  const paint = f => {
+    pics.forEach((im, i) => { const o = i === 0 ? 1 : Math.min(1, Math.max(0, f - (i - 1))); im.style.opacity = o.toFixed(3); });
+    const i = Math.round(f);
+    if (i !== at) { at = i; const c = D.clouds[i]; name.textContent = c.name; line.textContent = c.line;
+      dots.forEach((d, j) => d.setAttribute('aria-current', String(j === i))); }
+  };
+  const progress = () => { const r = run.getBoundingClientRect(), span = r.height - innerHeight;
+    return Math.min(1, Math.max(0, -r.top / Math.max(1, span))) * last; };
+  if (reduce) {
+    paint(0);
+    dots.forEach((d, i) => d.addEventListener('click', () => paint(i)));
+  } else {
+    const tick = () => { queuedL = false; paint(progress()); };
+    addEventListener('scroll', () => { if (!queuedL) { queuedL = true; requestAnimationFrame(tick); } }, { passive: true });
+    addEventListener('resize', tick); tick();
+    dots.forEach((d, i) => d.addEventListener('click', () => {
+      const r = run.getBoundingClientRect(), span = r.height - innerHeight;
+      scrollTo({ top: scrollY + r.top + span * (i / last) + 1, behavior: 'smooth' }); }));
+  }
 }
 // a closer look: the dots pick a colour and the pictures cross-fade; the arrow keys step through them, as in a radio group
 const closer = document.getElementById('closer');
