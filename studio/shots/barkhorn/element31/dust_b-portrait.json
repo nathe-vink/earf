@@ -26,8 +26,8 @@
     "module": "dust_b_el",
     "fn": "terrain",
     "eye": [
-     -1.351,
-     -6.358
+     -2.287,
+     -10.76
     ],
     "heading": 78.0,
     "half_angle": 44.0,
@@ -48,10 +48,10 @@
     ],
     "ripples": [
      0.11,
-     0.25,
+     0.55,
      20.0,
-     6.0,
-     6.0
+     9.0,
+     5.0
     ],
     "swell2": [
      0.12,
@@ -63,8 +63,8 @@
      {
       "texture": "red_mud_stones",
       "tex_scale": 1.5,
-      "tint": "#B8603A",
-      "tint_mix": 0.8,
+      "tint": "#A45232",
+      "tint_mix": 1.0,
       "mask": [
        5.0,
        0.25
@@ -107,8 +107,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     312.2,
-     2977.2,
+     311.3,
+     2972.8,
      -3.0
     ],
     "rotate": [
@@ -142,14 +142,19 @@
       0.3
      ],
      "beds": [
-      18.0,
-      0.18
+      9.0,
+      0.45
      ],
      "streaks": [
-      7.0,
-      0.5
+      5.0,
+      0.3
      ],
-     "albedo": 1.9
+     "albedo": 1.9,
+     "cap": [
+      0.88,
+      0.92,
+      0.65
+     ]
     },
     "talus_mat": {
      "material": "pbr",
@@ -175,8 +180,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     1633.0,
-     3201.3,
+     1632.1,
+     3196.9,
      -3.0
     ],
     "rotate": [
@@ -210,14 +215,19 @@
       0.3
      ],
      "beds": [
-      18.0,
-      0.18
+      9.0,
+      0.45
      ],
      "streaks": [
-      7.0,
-      0.5
+      5.0,
+      0.3
      ],
-     "albedo": 1.9
+     "albedo": 1.9,
+     "cap": [
+      0.88,
+      0.92,
+      0.65
+     ]
     },
     "talus_mat": {
      "material": "pbr",
@@ -243,8 +253,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     3271.1,
-     4034.8,
+     3270.2,
+     4030.4,
      -3.0
     ],
     "rotate": [
@@ -271,14 +281,19 @@
       0.3
      ],
      "beds": [
-      18.0,
-      0.18
+      9.0,
+      0.45
      ],
      "streaks": [
-      7.0,
-      0.5
+      5.0,
+      0.3
      ],
-     "albedo": 1.9
+     "albedo": 1.9,
+     "cap": [
+      0.88,
+      0.92,
+      0.65
+     ]
     },
     "talus_mat": {
      "material": "pbr",
@@ -304,8 +319,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     -2805.9,
-     7699.1,
+     -2806.9,
+     7694.7,
      -3.0
     ],
     "rotate": [
@@ -332,14 +347,19 @@
       0.3
      ],
      "beds": [
-      18.0,
-      0.18
+      9.0,
+      0.45
      ],
      "streaks": [
-      7.0,
-      0.5
+      5.0,
+      0.3
      ],
-     "albedo": 1.9
+     "albedo": 1.9,
+     "cap": [
+      0.88,
+      0.92,
+      0.65
+     ]
     },
     "talus_mat": {
      "material": "pbr",
@@ -365,9 +385,9 @@
     "module": "dust_b_el",
     "fn": "prickly_pear",
     "position": [
-     1.05,
-     0.2,
-     -0.01
+     3.5,
+     1.7,
+     -0.02
     ],
     "size": 0.2,
     "pads": 22,
@@ -381,8 +401,8 @@
     "module": "dust_b_el",
     "fn": "yucca",
     "position": [
-     -1.6,
-     1.5,
+     -1.4,
+     2.4,
      -0.01
     ],
     "length": 0.6,
@@ -396,14 +416,14 @@
     "module": "dust_b_el",
     "fn": "sagebrush",
     "position": [
-     2.9,
-     4.2,
+     5.5,
+     9.5,
      -0.02
     ],
     "size": [
      1.0,
      0.9,
-     0.75
+     0.7
     ],
     "seed": 7
    },
@@ -415,8 +435,8 @@
     "diameter": 0.55,
     "seed": 11,
     "position": [
-     2.35,
-     3.7,
+     4.95,
+     9.0,
      0.27
     ],
     "snap": 0.03,
@@ -647,10 +667,10 @@
     0.0,
     0.6
    ],
-   "irradiance": 0.6,
+   "irradiance": 1.2,
    "color": "#F3D6BE",
    "orbit": {
-    "azimuth_deg": -30,
+    "azimuth_deg": -20,
     "elevation_deg": 8,
     "distance_m": 4.0
    }
@@ -675,7 +695,7 @@
   "position": [
    -1.1643,
    -5.4776,
-   0.5
+   0.4
   ],
   "target": [
    0.0,
@@ -684,7 +704,7 @@
   ],
   "lens_mm": 60.0,
   "level": true,
-  "fstop": 5.6,
+  "fstop": 4.0,
   "focus": [
    0.0,
    -0.21,
@@ -696,14 +716,14 @@
  },
  "sky": {
   "kind": "hdri",
-  "polyhaven": "kloppenheim_06_puresky",
-  "rotation_deg": 330.0,
+  "polyhaven": "evening_road_01_puresky",
+  "rotation_deg": 296.4,
   "strength": 0.6,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 92.4,
-  "elevation_deg": 20.8,
+  "azimuth_deg": 115.0,
+  "elevation_deg": 14.3,
   "irradiance": 9.0,
   "angle_deg": 0.53,
   "color": "#FFC98E"
@@ -735,8 +755,8 @@
    8000.0,
    500.0
   ],
-  "density": 2.5e-05,
+  "density": 0.00011,
   "anisotropy": 0.3,
-  "color": "#DCD9D6"
+  "color": "#C9D3DE"
  }
 }
