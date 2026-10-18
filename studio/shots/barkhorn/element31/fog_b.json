@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.015
+     -0.03
     ],
     "rotate_z": 10.0,
     "hide": [
@@ -88,7 +88,7 @@
      ]
     ],
     "grass": "#6B6A45",
-    "scrub": "#2A3320",
+    "scrub": "#222A1A",
     "floor": -140.0,
     "brow": 3.6,
     "steep": 10.0,
@@ -109,8 +109,8 @@
     "relief": 0.15,
     "relief_far": 0.008,
     "gullies": [
-     20.0,
-     140.0
+     28.0,
+     100.0
     ]
    },
    {
@@ -179,20 +179,20 @@
       30.0
      ]
     ],
-    "top": -48.0,
+    "top": -75.0,
     "heave": 14.0,
     "billows": [
      [
       160.0,
-      18.0
+      30.0
      ],
      [
       50.0,
-      9.0
+      14.0
      ],
      [
       12.0,
-      5.0
+      6.0
      ]
     ],
     "bank": 15.0,
@@ -200,11 +200,11 @@
     "rise": [
      1000.0,
      1800.0,
-     25.0
+     10.0
     ],
-    "soft": 3.0,
-    "density": 0.035,
-    "anisotropy": 0.65,
+    "soft": 1.0,
+    "density": 0.02,
+    "anisotropy": 0.8,
     "billow_size": 30.0,
     "billow_cut": 0.2,
     "haze": 0.0001,
@@ -317,7 +317,7 @@
     "models": [
      "grass_medium_02"
     ],
-    "count": 60,
+    "count": 70,
     "area": [
      -1.1,
      -1.1,
@@ -329,18 +329,41 @@
       0.0,
       0.0,
       0.42
-     ],
-     [
-      0.0,
-      -0.45,
-      0.3
      ]
     ],
     "scale": [
-     0.2,
-     0.35
+     0.3,
+     0.5
     ],
     "seed": 7,
+    "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter_assets",
+    "models": [
+     "grass_medium_02",
+     "grass_medium_01"
+    ],
+    "count": 70,
+    "area": [
+     -0.7,
+     -0.9,
+     0.7,
+     -0.3
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.9
+     ]
+    ],
+    "scale": [
+     0.3,
+     0.5
+    ],
+    "seed": 17,
     "res": "1k"
    },
    {
@@ -477,11 +500,11 @@
     0.0,
     0.6
    ],
-   "irradiance": 2.4,
-   "color": "#F4F3F0",
+   "irradiance": 0.9,
+   "color": "#E6E9EE",
    "orbit": {
-    "azimuth_deg": -22.0,
-    "elevation_deg": 8.0,
+    "azimuth_deg": -55.0,
+    "elevation_deg": 15.0,
     "distance_m": 2.5
    }
   }
@@ -493,7 +516,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 0.0,
+  "exposure": -0.35,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Fog: San Francisco fog over a Marin headland at dawn",
@@ -514,7 +537,7 @@
   ],
   "lens_mm": 85.0,
   "level": true,
-  "fstop": 2.8,
+  "fstop": 4.0,
   "focus": [
    0.0,
    -0.21,
@@ -528,7 +551,7 @@
   "kind": "hdri",
   "polyhaven": "syferfontein_6d_clear_puresky",
   "rotation_deg": 263.2,
-  "strength": 0.85,
+  "strength": 0.75,
   "res": "4k"
  },
  "sun": {
