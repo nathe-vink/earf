@@ -133,11 +133,11 @@ RIG = {
 # cards, which take their panel colour from these frames' foot, reading a dingy grey): the studio's warm pale paper of
 # round 31c's bright field, one neutral backdrop for all eight (no tint per colour), lit high-key by lamps that light
 # the paper alone (the speaker's own light is the rig's, as it won), to about #F2EFEA at the feet and #EDE9E3 on the wall
-# with no more than about ten levels to the corners. A tall dark strip just outside the frame behind-right (31c's) gives
-# the acrylic's edges a dark line to refract, so Smoke and Fog part from the pale ground.
+# with no more than about ten levels to the corners. Smoke and Fog part from the pale ground by the rig's own black
+# cards, which the side and the edges mirror (31c's tall dark strip was tried: its shadow drew a streak on the cove).
 PAPER = {
     'color': '#F7F0E8',
-    'flags': [{'center_m': [1.35, 2.1, 1.2], 'size_m': [0.3, 2.4], 'normal': [-0.45, -0.89, 0.0], 'glossy': True}],
+    'flags': [],
     'lights': {
         'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 3.2, 3.4], 'target': [-1.5, 6.0, 1.2],
                     'irradiance': 0.7, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
@@ -204,6 +204,14 @@ def framed(s, f):
             s['camera'][key] = F[key]
     s['set'].update(copy.deepcopy(F.get('set', {})))
     s['lights'].update(copy.deepcopy(F.get('lights', {})))
+    # a colour's exposure trim (Fog's -0.6 EV, for its white cloth) is the speaker's, not the paper's: the paper's lamps
+    # make it good, so every colour stands on the same paper
+    ev = s['render'].get('exposure', 0.0)
+    for l in s['lights'].values():
+        if l.get('receivers') == ['sweep'] and ev:
+            for key in ('irradiance', 'power_w'):
+                if key in l:
+                    l[key] = round(l[key] * 2 ** -ev, 4)
     if f:
         s['title'] = s['title'].replace('(catalogue31,', f'(catalogue31 {f},')
     return s
