@@ -10,10 +10,11 @@ import math, os
 
 from common import area, camera, finish, piece, portrait_of, shot as frame, sky, sun_from_sky
 
-HDRI, ROT = 'qwantani_sunset_puresky', float(os.environ.get('DUST_ROT', 264.0))           # a clear evening, the sky's sun 6 degrees up at azimuth 150
+HDRI, ROT = 'qwantani_sunset_puresky', float(os.environ.get('DUST_ROT', 324.0))           # a clear evening, the sky's sun 6 degrees up at azimuth 90 (from the right)
 SAND = dict(material='pbr', texture='aerial_beach_01', tex_scale=2.6, tint='#A9502A', tint_mix=1.0, res='4k',
-            rough_mul=1.0, bump=1.0)
-ROCK = dict(material='pbr', texture='cliff_side', tex_scale=3.0, tint='#8A4226', tint_mix=0.5, res='2k', vary=[30.0, 0.45])
+            rough_mul=1.0, bump=1.6)
+ROCK = dict(material='pbr', texture='cliff_side', tex_scale=3.0, tint='#8A4226', tint_mix=0.5, res='2k', vary=[30.0, 0.45],
+            displace=0.6, beds=[1.6, 0.22])
 WB = (float(os.environ.get('DUST_WB', 7200)), 10.0)    # a photographer's warm white balance at golden hour
 CAM = dict(height=0.6, distance=7.4, azimuth=-20.0, lens=65.0, target=(0.0, 0.0, 0.66), fstop=2.8, shift_x=0.1)
 
@@ -66,17 +67,17 @@ def props():
 
 def lights():
     # the sun on the sand in front bounces back into the speaker's face: a photographer's warm reflector, low
-    return {'bounce': area(-10, 6, 4.0, 2.0, '#F2B07E', (5.0, 1.5), (0.0, 0.0, 0.55))}
+    return {'bounce': area(-10, 4, 4.0, 1.5, '#F2B07E', (6.0, 2.0), (0.0, 0.0, 0.55))}
 
 
 def shot():
     return frame('dust', props(), camera(**CAM), sky(HDRI, ROT, strength=0.5, res='4k'),
                  'barkhorn, Dust, the Southwest at golden hour', lights=lights(),
-                 sun=dict(sun_from_sky(HDRI, ROT, irradiance=9.0, angle_deg=0.6), elevation_deg=11.0),
+                 sun=dict(sun_from_sky(HDRI, ROT, irradiance=15.0, angle_deg=0.6), elevation_deg=8.0),
                  fin=finish(contrast=0.05, clarity=0.04, saturation=0.0, vignette=0.12, bloom=0.08, threshold=0.95),
-                 haze={'box_m': [-320.0, -30.0, -1.0, 320.0, 320.0, 70.0], 'density': 0.0007, 'anisotropy': 0.35,
-                       'color': '#F4D2B0'},
-                 rotate_z=0.0, position=(0.0, 0.0, -0.008), white_balance=WB)
+                 haze={'box_m': [-320.0, -30.0, -1.0, 320.0, 320.0, 70.0], 'density': 0.0008, 'anisotropy': 0.5,
+                       'color': '#EED6C2'},
+                 rotate_z=0.0, position=(0.0, 0.0, -0.008), white_balance=WB, exposure=0.25)
 
 
 def portrait():

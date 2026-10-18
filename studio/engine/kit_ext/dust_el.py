@@ -149,12 +149,40 @@ def terrain(bpy, name, p, kit):
     return objs
 
 
+def _beds(mat, band, contrast, seed=0.0):
+    """Horizontal beds in the rock's colour: bands of uneven thickness, lighter and darker, wavering a little, so the
+    strata read through haze and at a distance."""
+    nt = mat.node_tree
+    bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    sock = bs.inputs['Base Color']
+    if not sock.links:
+        return
+    src = sock.links[0].from_socket
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    wv = nt.nodes.new('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.bands_direction = 'Z'
+    wv.inputs['Scale'].default_value = 1.0 / band; wv.inputs['Distortion'].default_value = 3.0
+    wv.inputs['Detail'].default_value = 3.0; wv.inputs['Detail Scale'].default_value = 0.4
+    nt.links.new(tc.outputs['Object'], wv.inputs['Vector'])
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / (band * 2.7)
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp
+    cr.elements[0].position = 0.25; cr.elements[0].color = (1 - contrast, 1 - contrast * 1.1, 1 - contrast * 1.2, 1)
+    cr.elements[1].position = 0.75; cr.elements[1].color = (1 + contrast * 0.3, 1 + contrast * 0.25, 1 + contrast * 0.2, 1)
+    mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MULTIPLY'
+    nt.links.new(wv.outputs['Fac'], mx.inputs[0]); nt.links.new(nz.outputs['Fac'], mx.inputs[1])
+    nt.links.new(mx.outputs['Value'], ramp.inputs['Fac'])
+    mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+    mul.inputs['Factor'].default_value = 1.0
+    nt.links.new(src, mul.inputs['A']); nt.links.new(ramp.outputs['Color'], mul.inputs['B'])
+    nt.links.new(mul.outputs['Result'], sock)
+
+
 def mesa(bpy, name, p, kit):
     R, H = p.get('radius', 20.0), p.get('height', 25.0)
     cliff, spread = p.get('cliff', 0.38), p.get('spread', 1.7)
     squash, wander = p.get('squash', 0.6), p.get('wander', 0.12)
     rnd = random.Random(p.get('seed', 1))
-    seg = p.get('segments', 480)
+    seg = p.get('segments', 900)
     ph = [rnd.uniform(0, 6.283) for _ in range(6)]
     off = Vector((rnd.uniform(-90, 90), rnd.uniform(-90, 90), 0))
 
@@ -182,7 +210,7 @@ def mesa(bpy, name, p, kit):
         t = j / nt
         rf = spread - (spread - 1.0) * (1 - (1 - t) ** 1.8)
         rings.append(ring(rf, H * cliff * t, rough=0.05 * (1 - t) + 0.02))
-    nc = p.get('cliff_rings', 48)                             # the cliff, near vertical, a slight batter, in ledges
+    nc = p.get('cliff_rings', 110)                             # the cliff, near vertical, a slight batter, in ledges
     band, ledge = p.get('band', 2.2), p.get('ledge', 0.025)
     for j in range(1, nc + 1):
         t = j / nc
@@ -205,6 +233,8 @@ def mesa(bpy, name, p, kit):
     objs = kit.finish(bpy, name, bm, p, smooth=True)
     if p.get('vary'):
         _vary(bpy, objs[0].data.materials[0], *p['vary'], tint=(0.55, 0.42, 0.38))
+    if p.get('beds'):
+        _beds(objs[0].data.materials[0], *p['beds'], seed=float(p.get('seed', 0)))
     return objs
 
 
@@ -268,8 +298,10 @@ def tumbleweed(bpy, name, p, kit):
                     sl.material and sl.material.name.endswith('-dust') for sl in hob.material_slots)):
                 break
             start = loc - Vector((0, 0, 0.001))
-        if hit:
-            ob.location.z = loc.z + R - p['snap']
+        if hit:                                               # its lowest stem, not its nominal radius, meets the sand
+            bpy.context.view_layer.update()
+            low = min((ob.matrix_world @ v.co).z for v in ob.data.vertices)
+            ob.location.z += loc.z - low - p['snap']
     return objs
 
 
