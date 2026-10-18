@@ -75,7 +75,7 @@ def look_lamp(colour, on=True):
              {'position': orbit(tgt, -24, 7, 1.6), 'target': tgt, 'lens_mm': 70, 'level': True})
     s['product'] = {'def': LAMP, 'flavour': colour, 'instances': [{'position': [0, 0, 0], 'rotate_z': 0}]}
     s['lights'] = lights(tgt)
-    s['materials'] = {'led': {'strength': LED if on else 0.0}}
+    s['materials'] = {'led': {'strength': LED * 4 if on else 0.0}}      # x4: round 1's critic on the hero (it read as off)
     return s
 
 
