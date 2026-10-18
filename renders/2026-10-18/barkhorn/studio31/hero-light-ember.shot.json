@@ -52,7 +52,8 @@
      -0.2,
      0.0
     ],
-    "glossy": false
+    "glossy": false,
+    "off": true
    },
    {
     "center_m": [
@@ -87,7 +88,8 @@
      -0.15,
      0.95,
      0.1
-    ]
+    ],
+    "reflect_only": true
    }
   ]
  },
@@ -135,7 +137,7 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.5
+   "roughness": 0.32
   }
  },
  "lights": {
@@ -259,20 +261,20 @@
   "back-top": {
    "type": "area",
    "size_m": [
-    1.6,
-    1.2
+    0.8,
+    0.8
    ],
    "orbit": {
-    "azimuth_deg": 180,
-    "elevation_deg": 5,
+    "azimuth_deg": 200,
+    "elevation_deg": 30,
     "distance_m": 2.5
    },
    "target": [
     0.0,
-    0.0,
-    0.45
+    -0.5,
+    0.0
    ],
-   "irradiance": 14.0,
+   "irradiance": 22.0,
    "color": "#FFF8F0",
    "camera": false
   }
