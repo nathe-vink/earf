@@ -21,7 +21,8 @@ SPEAKER_X = 0.0
 LIGHTS = {'negative': {'type': 'flag', 'size_m': [2.0, 1.6], 'orbit': {'azimuth_deg': -26.0, 'elevation_deg': 1.0,
                                                                      'distance_m': 3.2},
                        'target': [0.0, 0.0, 0.65], 'glossy': True},
-          'mistglow': C.area(165.0, 15.0, 2.5, 2.0, color='#F4F1EC', size=(1.2, 1.8), target=(0.0, 0.0, 0.65))}
+          'mistglow': {**C.area(165.0, 6.0, 2.8, 2.0, color='#F4F1EC', size=(1.2, 1.8), target=(0.0, 0.0, 0.65)),
+                       'specular': 0.1}}                 # its light, not its mirror image on the horn's top
 
 
 def _trunks():

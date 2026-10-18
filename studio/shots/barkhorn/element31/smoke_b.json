@@ -983,8 +983,8 @@
    ],
    "orbit": {
     "azimuth_deg": 165.0,
-    "elevation_deg": 15.0,
-    "distance_m": 2.5
+    "elevation_deg": 6.0,
+    "distance_m": 2.8
    },
    "target": [
     0.0,
@@ -992,7 +992,8 @@
     0.65
    ],
    "irradiance": 2.0,
-   "color": "#F4F1EC"
+   "color": "#F4F1EC",
+   "specular": 0.1
   }
  },
  "render": {
