@@ -62,3 +62,24 @@ blocks in direct sun, the horn throats crushed to black, the cabinets' black edg
 the set does. The two-in-a-row 8.5 the protocol asks for is out of reach without changing the speaker, so the finals
 were rendered from r13's settings with its fixes applied.
 | r14 | proofs/r14-post.png (main merged: the cover's new melange cloth and rolled edge; model rebuilt) | 6.5 | c1 sun from behind again (az -105); c2 trim 0.5; c3 fill 3.5 from the right; c4 a waxed floor sheen; c5 the chair back as a foreground corner; c6 vase out of the horn's green beam; c7 window frame darker | the finals were already rendering from this rig. Two passes in a row under +0.5 after the concept changes (r13, r14): the coordinator's stopping rule. Not applied |
+
+## Finals
+
+- `renders/2026-10-18/barkhorn/room31/room.jpg`: 2880 x 1620, 512 spp (adaptive 0.01) with the denoiser, render 8,382 s
+  (2 h 20 min on 4 cores), then the finish (`post.py`). The grained PNG came to 7.0 MB, over the 5 MB limit even
+  optimised, so the frame ships as a quality-92 JPG (4:4:4, 1.3 MB), as the brief allows.
+- `room-portrait`: rendered by a coordinator helper from f603e7d (pushed to `r31-room-portrait`).
+
+**Final critic** (blind, on the final itself, `critic-final.json`): **6.5**, score if fixed 8.0. Its changes: less fill
+into the cabinets, so they show the sun's gradient instead of an even glow; green trim 0.55; the heading wall a little
+darker; the left cabinet's top band in a mullion's shadow; a softer sun (0.9 deg) for the hard green-gold column the left
+horn's light makes on the credenza's middle door; the plinth gap lifted; the camera 0.35 m right so the jamb leaves.
+
+**Duels** (blind, side by side):
+- duel 2 (`duel-2.json`): the final against finals31/room.png, both at 2880: **6.5 against 5.0, the final preferred**;
+- duel 3 (`duel-3.json`): the final (at 1440) against r12, the best earlier frame and duel 1's winner: **6.5 against
+  6.0, the final preferred**.
+
+All three judges named the same artefact: the column of green-gold light on the middle door (real light, the left
+horn's beam through its resin, but hard-edged enough to read as an error). A softer sun would fix it; that costs a
+2 h 20 min re-render.

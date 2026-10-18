@@ -1,0 +1,360 @@
+{
+ "stage1": {
+  "impression": "A calm, believable late-afternoon room: the oak floor, the plaster and the autumn view through the glazing read as photographed, and the low raking sun ties the set together. The speakers break the spell. Their cabinets glow a flat, saturated neon green, as if lit from inside rather than by the sun passing through tinted acrylic. The pair also reads unevenly (left dim, right bright), and the dead-centre symmetrical layout on a near-white wall is pleasant but generic rather than art-directed.",
+  "score": 6.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Cabinet interiors read as tinted acrylic with a real light gradient (sunlit side to shaded side), not a uniform emissive green; cover cloth within dE2000 3.5 of #6F7F66 on both speakers",
+  "Both speakers carry the same light at the top band of the cabinet (median luminance within 25 levels of each other), so the pair reads as a pair",
+  "The wall behind the heading holds tone and texture (median 185-210, no clipping) instead of sitting at 225 near white",
+  "Light through the tinted horns and cabinets casts visibly green-tinted shadows and patches on the wall and credenza, with soft edges and no hard artificial column",
+  "One clear, art-directed idea: the sunbeam crossing the room and passing through the green cabinets, with a light falloff from left to right that leads the eye to the pair"
+ ],
+ "defects": [
+  {
+   "region": [
+    480,
+    800,
+    860,
+    1360
+   ],
+   "what": "left cabinet interior glows uniform saturated green (G 118 vs R 85, B 67); reads emissive and CG, little falloff"
+  },
+  {
+   "region": [
+    2030,
+    800,
+    2410,
+    1360
+   ],
+   "what": "right cabinet likewise neon; its top band is twice as bright as the left one (median 184 vs 95), so the pair looks unmatched"
+  },
+  {
+   "region": [
+    560,
+    1000,
+    760,
+    1150
+   ],
+   "what": "left cover cloth rgb 91,120,89, dE2000 5.8 against #6F7F66 (too green and light); right cover dE 6.6"
+  },
+  {
+   "region": [
+    700,
+    150,
+    1900,
+    500
+   ],
+   "what": "heading wall median 225, p95 233, clip 0.45%: near-white and flat, it pulls the eye from the product, and a light heading cannot sit on it"
+  },
+  {
+   "region": [
+    1400,
+    790,
+    1600,
+    880
+   ],
+   "what": "the horn's shadow on the wall is neutral grey (127,121,109), though it falls through green tinted resin, so the light and the object disagree"
+  },
+  {
+   "region": [
+    1300,
+    1020,
+    1500,
+    1250
+   ],
+   "what": "a hard vertical yellow-green column on the middle credenza door, sharp-sided next to a dark shadow; it reads as a render artefact, not soft coloured light"
+  },
+  {
+   "region": [
+    980,
+    1270,
+    1900,
+    1310
+   ],
+   "what": "the credenza's plinth gap is crushed (median 21) and blocky, a black slab under the furniture"
+  },
+  {
+   "region": [
+    0,
+    0,
+    300,
+    1300
+   ],
+   "what": "a heavy dark window jamb and frame slice down the left edge: a hard vertical bar that cuts the frame"
+  },
+  {
+   "region": [
+    1290,
+    760,
+    1330,
+    800
+   ],
+   "what": "green spill on the wall beside the vase is a small hard-edged patch, slightly odd in shape"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The cabinets look self-lit because the frontal fill lamps flood the interior evenly, which kills the transmitted-sun gradient.",
+   "evidence": {
+    "region": [
+     480,
+     800,
+     860,
+     1360
+    ],
+    "measured": "lum_median 108.6 with the lining flat across the cabinet; left liner strip 488-520 median 159, saturated rgb 132,172,109"
+   },
+   "change": {
+    "setting": "lamp `bounce` irradiance and lamp `north` irradiance",
+    "from": "bounce 0.7, north 2.2",
+    "to": "bounce 0.3, north 1.3"
+   },
+   "expected": "Cabinet interiors show the sun entering from the left and falling off to the right, with the shaded inner faces 30-40% darker than the sunlit ones; the green reads as tint, not glow.",
+   "accept": {
+    "region": [
+     480,
+     800,
+     860,
+     1360
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 170
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The greens are oversaturated against the reference, so the covers and lining drift from the true colour.",
+   "evidence": {
+    "region": [
+     560,
+     1000,
+     760,
+     1150
+    ],
+    "measured": "rgb 91,120,89; delta_e 5.84 vs #6F7F66 (right cover 6.61)"
+   },
+   "change": {
+    "setting": "finish: green trim",
+    "from": "0.3",
+    "to": "0.55"
+   },
+   "expected": "The cover cloth lands within dE 3.5 of #6F7F66 on both speakers, and the acrylic stays clearly Poison green but quieter.",
+   "accept": {
+    "region": [
+     560,
+     1000,
+     760,
+     1150
+    ],
+    "metric": "delta_e",
+    "hex": "#6F7F66",
+    "op": "<=",
+    "value": 3.5
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The wall behind the heading is nearly white and hot, so it competes with the speakers and gives the type no tone to sit on.",
+   "evidence": {
+    "region": [
+     700,
+     150,
+     1900,
+     500
+    ],
+    "measured": "lum_median 225.4, p95 233.4, clip_pct 0.45"
+   },
+   "change": {
+    "setting": "render exposure; prop 1 plaster value",
+    "from": "exposure -1.0, value 0.88",
+    "to": "exposure -1.25, value 0.80"
+   },
+   "expected": "The wall sits at warm mid-light with the plaster's texture visible; the speakers become the brightest coloured mass.",
+   "accept": {
+    "region": [
+     700,
+     150,
+     1900,
+     500
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     185,
+     210
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The pair reads unmatched because the sun lights the right cabinet's top and leaves the left one in a mullion shadow.",
+   "evidence": {
+    "region": [
+     520,
+     810,
+     820,
+     880
+    ],
+    "measured": "left top band median 95.5 vs right [2060,810,2360,880] median 183.7"
+   },
+   "change": {
+    "setting": "sun azimuth (or window 1 mullions)",
+    "from": "azimuth -68.0, window 1 mullions [2,1]",
+    "to": "azimuth -62.0 so both cabinets catch the beam at the same height; or window 1 mullions [1,1]"
+   },
+   "expected": "Both cabinet tops are lit alike, and the sun shapes both the same way.",
+   "accept": {
+    "region": [
+     520,
+     810,
+     820,
+     880
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The tinted horn casts a neutral grey shadow, so the light does not agree with the coloured material it passes through.",
+   "evidence": {
+    "region": [
+     1400,
+     790,
+     1600,
+     880
+    ],
+    "measured": "rgb 127,121,109 (no green bias) in the horn shadow"
+   },
+   "change": {
+    "setting": "render: transmitted (coloured) shadows through the horn resin and cabinet acrylic",
+    "from": "shadow rays opaque or neutral through the resin",
+    "to": "transparent shadows / caustics enabled for the resin and acrylic, filter glossy 0.5"
+   },
+   "expected": "A soft olive-green cast inside the horn's wall shadow, G over R by 10 or more levels.",
+   "accept": {
+    "region": [
+     1400,
+     790,
+     1600,
+     880
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 130
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The coloured light on the middle credenza door is a hard-sided vertical column that reads as an artefact.",
+   "evidence": {
+    "region": [
+     1250,
+     1100,
+     1500,
+     1150
+    ],
+    "measured": "edge step 73 levels; stripe region p95 202 against door median 92"
+   },
+   "change": {
+    "setting": "sun size",
+    "from": "0.5 deg",
+    "to": "0.9 deg (soften the transmitted beam's edges)"
+   },
+   "expected": "The green-gold patch on the door keeps its colour but gains a soft penumbra; the step width at its edge is above 200 px.",
+   "accept": {
+    "region": [
+     1250,
+     1100,
+     1500,
+     1150
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": ">=",
+    "value": 200
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The gap under the credenza is crushed to a black slab.",
+   "evidence": {
+    "region": [
+     980,
+     1270,
+     1900,
+     1310
+    ],
+    "measured": "lum_median 21.5, b_median 7"
+   },
+   "change": {
+    "setting": "lamp `floorbounce` irradiance",
+    "from": "0.55",
+    "to": "0.9"
+   },
+   "expected": "The plinth reads as recessed dark wood with a hint of floor bounce, not a black band.",
+   "accept": {
+    "region": [
+     980,
+     1270,
+     1900,
+     1310
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     32,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "camera",
+   "problem": "The dead-centre, squared frame with a heavy jamb at the left edge feels like a catalogue elevation, not an art-directed room.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     300,
+     1300
+    ],
+    "measured": "a dark vertical jamb bar at the left edge; the composition is symmetric about x 1440"
+   },
+   "change": {
+    "setting": "camera position x / aim",
+    "from": "position [0.0, -4.76, 1.05], aim [0.0, 0.3, 0.855]",
+    "to": "position [0.35, -4.76, 1.05], aim [0.35, 0.3, 0.855] (shift right, keep the verticals), so the jamb leaves the frame and the beam enters from the left edge"
+   },
+   "expected": "The sunbeam leads in from the left edge to the pair; the black bar is gone; the composition keeps open wall for the heading.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "None needed on the speaker itself; its colour is judged only through light and grade (c1, c2, c5).",
+   "why": "The speaker is fixed by the card."
+  }
+ ],
+ "score_if_fixed": 8.0
+}
