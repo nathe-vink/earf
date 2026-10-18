@@ -168,3 +168,23 @@ The sheet: `renders/2026-10-18/barkhorn/catalogue31/front-sheet.jpg` (the sixtee
 `finals31/sheet.jpg` (every view). Looked at side by side they read as one set: the same framing, light and paper
 falloff, each colour on a whisper of its own tint; Fog's white cloth holds its weave at -0.6 EV, Smoke's dark acrylic
 shows its lining and a surface on its side panel.
+
+## The gallery's frames (3:2 and 4:5)
+
+The owner, on the speaker pages: the 1:2 fronts "feel odd and out of place because they aren't the same proportions of
+the other images and feel cheap" (the gallery's stage is 3:2 on desktop, 4:5 on phones). The rig is reframed, not
+relit: the same camera position (the same perspective) and the same lamps, a new lens and lens shift per frame
+(`catalogue31.py`'s `FRAMES`; the engine fits the sensor's 36 mm to the frame's width, so the lens follows the
+frame's height-to-width ratio), each centred by its box in the frame:
+
+- **3:2** (`-wide`, 1920 x 1280, 32.3 mm): the speaker at 70 % of the height and 24 % of the width, centred (38 % each
+  side, 15 % above and below). Its wider view ran past the sweep's end and showed a dark, unlit third of paper on the
+  key side; the sweep is wider for it (40 m, 9 m tall) and a lamp of its own lifts that paper (`wall_left`, 4 W/m2).
+- **4:5** (`-tall`, 1440 x 1800, 60.5 mm): the speaker at 70 % of the height, centred across, a little low (16 % above,
+  14 % below).
+
+Each is about the 1:2's pixel count (12 and 14 minutes at proof size against 15). The 1:2 shots are unchanged.
+Proofs: `renders/2026-10-18/barkhorn/catalogue31/frame-{wide,tall}-blue-on.png`. `finals.py`'s views
+`front-on-wide`, `front-off-wide`, `front-on-tall`, `front-off-tall` render them as
+`finals31/front-{on,off}-{wide,tall}-<k>.png`; its `--views` now matches a view by its whole name, so `front-on`
+does not also take `front-on-wide`.
