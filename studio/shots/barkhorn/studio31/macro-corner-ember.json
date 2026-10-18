@@ -27,8 +27,8 @@
   "color": "#1A1A1A",
   "width": 24.0,
   "front": 14.0,
-  "depth": 4.0,
-  "radius": 3.4,
+  "depth": 5.6,
+  "radius": 5.0,
   "height": 9.0,
   "contact": {
    "strength": 0.35,
@@ -62,7 +62,7 @@
   "bounces": 16,
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
-  "white_balance_k": 5600,
+  "white_balance_k": 6000,
   "white_balance_tint": 0.0
  },
  "finish": {
@@ -77,7 +77,7 @@
  "materials": {
   "sweep": {
    "roughness": 0.3,
-   "specular": 0.035
+   "specular": 0.06
   }
  },
  "lights": {
@@ -88,7 +88,7 @@
     1.6
    ],
    "orbit": {
-    "azimuth_deg": -42,
+    "azimuth_deg": -55,
     "elevation_deg": 32,
     "distance_m": 3.4
    },
@@ -97,7 +97,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.9,
+   "irradiance": 1.4,
    "color": "#FFF6EC",
    "spread_deg": 70,
    "camera": false
@@ -118,7 +118,7 @@
     0.0,
     0.55
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.85,
    "color": "#F2F5FF",
    "camera": false
   },
@@ -137,10 +137,10 @@
    "target": [
     0.0,
     4.0,
-    1.4
+    1.0
    ],
-   "spread_deg": 100,
-   "power_w": 650.0,
+   "spread_deg": 75,
+   "power_w": 380.0,
    "color": "#FFF6EC",
    "camera": false,
    "specular": 0.0
@@ -161,7 +161,7 @@
     0.0,
     0.9
    ],
-   "strength": 1.2,
+   "strength": 0.45,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -170,7 +170,7 @@
    "ramp": {
     "axis": "z",
     "at_m": [
-     1.9,
+     2.6,
      3.2
     ],
     "values": [
@@ -229,7 +229,7 @@
     0.0,
     1.18
    ],
-   "strength": 16.0,
+   "strength": 4.0,
    "diffuse": 1.0,
    "specular": 0.0,
    "receivers": [
@@ -316,15 +316,15 @@
    ],
    "position": [
     -0.2,
-    -1.5,
-    2.8
+    -0.6,
+    2.6
    ],
    "target": [
     0.0,
     0.0,
     1.2
    ],
-   "strength": 24.0,
+   "strength": 34.0,
    "diffuse": 0.5,
    "specular": 1.0,
    "receivers": [
