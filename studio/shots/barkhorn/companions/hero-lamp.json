@@ -32,7 +32,7 @@
   "bounces": 12,
   "view": "Khronos PBR Neutral",
   "exposure": 0.75,
-  "white_balance_k": 3300
+  "white_balance_k": 3000
  },
  "materials": {
   "oak": {
@@ -40,7 +40,7 @@
    "roughness": 0.38
   },
   "led": {
-   "strength": 6.0
+   "strength": 3.5
   }
  },
  "set": {
@@ -129,8 +129,8 @@
    "instances": [
     {
      "position": [
-      -0.55,
-      0.5,
+      -0.35,
+      0.53,
       0
      ],
      "rotate_z": 12
@@ -154,7 +154,7 @@
  ],
  "sky": {
   "kind": "gradient",
-  "strength": 8.0,
+  "strength": 3.0,
   "zenith": "#1E2C4A",
   "horizon": "#6C82A8",
   "ground": "#2A2A30"
@@ -172,30 +172,30 @@
     "distance_m": 2.4
    },
    "target": [
-    -0.55,
+    -0.35,
     0.5,
     1.0
    ],
-   "irradiance": 0.3,
+   "irradiance": 0.12,
    "color": "#9FB2D6"
   },
   "foot_kick": {
    "type": "area",
    "size_m": [
-    0.4,
-    0.2
+    0.6,
+    0.15
    ],
    "position": [
-    0.9,
-    -0.3,
-    0.75
+    0.7,
+    -0.35,
+    0.72
    ],
    "target": [
     0.36,
     0.38,
     0.7000000000000001
    ],
-   "power_w": 4.0,
+   "power_w": 10.0,
    "color": 2700
   },
   "bell2": {
@@ -205,11 +205,11 @@
     0.427,
     1.121
    ],
-   "power_w": 7.0,
+   "power_w": 14.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
-   "transmission": false,
+   "transmission": true,
    "specular": 0.0
   },
   "bell3": {
@@ -219,11 +219,11 @@
     0.3565,
     1.121
    ],
-   "power_w": 7.0,
+   "power_w": 14.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
-   "transmission": false,
+   "transmission": true,
    "specular": 0.0
   },
   "bell4": {
@@ -233,11 +233,11 @@
     0.3565,
     1.121
    ],
-   "power_w": 7.0,
+   "power_w": 14.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
-   "transmission": false,
+   "transmission": true,
    "specular": 0.0
   }
  }

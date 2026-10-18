@@ -112,7 +112,7 @@ def room_shot(title, size, cam):
             'materials': {'oak': {'grain': 1.0, 'roughness': 0.38}}}
 
 
-def bell_lights(s, lx, ly, h, watts=None):
+def bell_lights(s, lx, ly, h, watts=None, transmission=False):
     """Bell's light: three small lamps just outside its opal sleeve at the strip's height (the sleeve's subsurface
     stops shadow rays, so lamps inside it lit only the table; an emitting strip that thin is all noise)."""
     for k in range(3):
@@ -120,7 +120,7 @@ def bell_lights(s, lx, ly, h, watts=None):
         s['lights'][f'bell{len(s["lights"])}'] = {'type': 'point', 'position': [round(lx + 0.047 * math.cos(a), 4), round(ly + 0.047 * math.sin(a), 4),
                                                                           round(h + LAMP_STRIP_Z, 4)],
                                                  'power_w': (watts or LAMP_W) / 3, 'radius_m': 0.04, 'color': 2700,
-                                                 'camera': False, 'transmission': False, 'specular': 0.0}
+                                                 'camera': False, 'transmission': transmission, 'specular': 0.0}
 
 
 DUSK_WB = 3300                    # one grade for both heroes (promo pass 2: 3800 K left the frame all red)
@@ -185,7 +185,10 @@ def hero_lamp(colour='haze'):
     void); Bell at 21 W so it pools on the walnut; the sleeve's own glow 12 (it clipped); 3100 K. Pass 3 (5.5,
     promo-hero-lamp-p3.json): the fill the window's blue (the wall went magenta); the grade one with Cumulus's
     (DUSK_WB); Bell's lamps hidden from the camera and softer, the sleeve's glow 6 (hot bulbs showed through it); a
-    warm kick on the foot; the camera from the right at 50 mm so the wall recedes; the dusk sky 8."""
+    warm kick on the foot; the camera from the right at 50 mm so the wall recedes; the dusk sky 8. Pass 4 (6.0,
+    promo-hero-lamp-p4.json): Bell's lamps seen again by transmission rays (hidden, they no longer lit through the
+    shade: the lamp read as off), 42 W; the sky 3 and the fill 0.12 so the room sits below the lamp; 3000 K; a
+    stronger kick on the foot; the speaker in so its horn is whole; the sleeve's glow 3.5."""
     lx, ly = 0.36, 0.38
     h = CAB_TOP
     s = room_shot(f'Bell beside {C.NAMES[colour]}', [1600, 1100],
@@ -195,17 +198,17 @@ def hero_lamp(colour='haze'):
     s['set'] = room(dusk=True)
     s['set']['props'][0]['res'] = '4k'
     s['set']['props'].append(WALL)
-    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.55, 0.50, 0], 'rotate_z': 12}]},
+    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.35, 0.53, 0], 'rotate_z': 12}]},
                      {'def': LAMP, 'flavour': colour, 'instances': [{'position': [lx, ly, h], 'rotate_z': 0}]}]
-    s['sky'] = dict(DUSK)
+    s['sky'] = dict(DUSK, strength=3.0)
     s['lights'] = {'fill': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': -55, 'elevation_deg': 20, 'distance_m': 2.4},
-                            'target': [-0.55, 0.5, 1.0], 'irradiance': 0.30, 'color': '#9FB2D6'},
+                            'target': [-0.35, 0.5, 1.0], 'irradiance': 0.12, 'color': '#9FB2D6'},
                    # a low warm kick from the right on the foot (pass 3: its discs went black)
-                   'foot_kick': {'type': 'area', 'size_m': [0.4, 0.2], 'position': [0.9, -0.3, 0.75], 'target': [lx, ly, h + 0.02],
-                                 'power_w': 4.0, 'color': 2700}}
-    bell_lights(s, lx, ly, h, watts=21.0)
-    s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 6.0}}
-    s['render']['white_balance_k'] = DUSK_WB
+                   'foot_kick': {'type': 'area', 'size_m': [0.6, 0.15], 'position': [0.7, -0.35, 0.72], 'target': [lx, ly, h + 0.02],
+                                 'power_w': 10.0, 'color': 2700}}
+    bell_lights(s, lx, ly, h, watts=42.0, transmission=True)
+    s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 3.5}}
+    s['render']['white_balance_k'] = 3000
     s['render']['exposure'] = 0.75
     return s
 
