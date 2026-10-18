@@ -39,8 +39,8 @@ def props(cam):
         # standing water in the hollows, ringed by the drops
         ext('puddle', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], z=-0.11, ring=0.2, ripple=3.0, keep=1.0, roughness=0.02, big_rings=1.0, ripple_m=0.0012,
             # near the camera, the rain's own impacts: rings at every age, a few still splashing, only where there is water
-            impacts={'area': [-3.0, -7.5, 4.0, 4.0], 'density': 120, 'px_m': 0.003, 'r_max': 0.12, 'amp_m': 0.0006,
-                     'splash_age': 0.05}, seed=9),
+            impacts={'area': [-3.0, -7.5, 4.0, 4.0], 'density': 45, 'px_m': 0.003, 'r_max': 0.08, 'amp_m': 0.0015,
+                     'splash_age': 0.08}, seed=9),
         # black boulders: one out of focus close at the left, a couple behind on the field
         ext('rock', model='rock_09', position=[-2.5, -2.4, -0.05], rotate=[0, 0, 40], scale=1.1, darken=0.5,
             film_rough=0.15),

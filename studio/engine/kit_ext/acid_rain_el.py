@@ -299,9 +299,10 @@ def _ripple_image(bpy, name, p, impacts):
         h[ia:ib, ja:jb] += (a * env * np.cos(2 * np.pi * q)).astype(np.float32)
     img = bpy.data.images.new(f'{name}-rings', W, H, alpha=True, float_buffer=True)
     rgba = np.zeros((H, W, 4), np.float32); rgba[..., 0] = h; rgba[..., 1] = h; rgba[..., 2] = h; rgba[..., 3] = 1.0
-    img.pixels.foreach_set(rgba.ravel())
     img.colorspace_settings.name = 'Non-Color'
-    img.pack()
+    img.pixels.foreach_set(rgba.ravel())
+    img.update()
+    print(f'{name}: ring map {W} x {H}, height {float(h.min()) * 1000:.2f} to {float(h.max()) * 1000:.2f} mm')
     return img, (x0, y0, x1 - x0, y1 - y0)
 
 
