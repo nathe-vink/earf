@@ -307,7 +307,8 @@ def mossy_log(bpy, name, p, kit):
         vv = [c] + [ring_pt(t, 2 * math.pi * i / seg, -0.004) for i in range(seg)]
         ff = [(0, 1 + i, 1 + (i + 1) % seg) for i in range(seg)]
         uu = [(0.5, 0.5)] + [(0.5 + 0.5 * math.cos(2 * math.pi * i / seg), 0.5 + 0.5 * math.sin(2 * math.pi * i / seg)) for i in range(seg)]
-        out.append(obj(f'{name}-{nm}', vv, ff, uu, assets.pbr(bpy, p.get('end', 'bark_brown_02'), '1k', scale=0.6, coords='uv',
+        out.append(obj(f'{name}-{nm}', vv, ff, uu, assets.pbr(bpy, p.get('end', 'acg:TreeEnd005'), '2k', scale=1.0, coords='uv',
+                                                             tint=p.get('end_tint'), tint_mix=p.get('end_tint_mix', 0.0),
                                                              name=f'{name}-{nm}-mat')))
     # the moss: where the surface faces up (th near 90 degrees in the log's frame, with the up direction found)
     up = (q.inverted() @ Vector((0, 0, 1))); th_up = math.atan2(up.y, up.x)
