@@ -25,7 +25,8 @@ def redwood(bpy, name, p, kit):
     R, H = p.get('radius', 1.2), p.get('height', 20.0); fl, foot = p.get('flare', 0.6), p.get('foot', 1.4)
     lobes, ph = p.get('lobes', 6), rnd.uniform(0, 6.28)
     seg = p.get('segments', 160)
-    zs = [-0.5] + [H * (k / 79) ** 1.7 for k in range(80)]
+    nr = p.get('rings', 80)
+    zs = [-0.5] + [H * (k / (nr - 1)) ** 1.7 for k in range(nr)]
     verts, faces, uvs = [], [], []
     for z in zs:
         e = math.exp(-max(z, 0.0) / foot)

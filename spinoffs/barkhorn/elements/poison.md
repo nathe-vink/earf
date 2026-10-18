@@ -41,8 +41,15 @@ Prairie Creek, Jedediah Smith and Del Norte Coast Redwoods State Parks, and Fern
 
 `studio/engine/assets.py` (47a08ef, on main as 9e9ac89): Poly Haven's plant glTFs mask their leaves with a JPG's alpha, which doesn't exist, so the leaves rendered as solid cards. Their own Alpha map is now wired in.
 
+## Concept A2 (from pass 4)
+
+Concept A1 was a deep misty grove built entirely from modelled trunks. Three passes scored 5.5, 5.5 and 4.5: the mist turned the modelled trunks into grey flats, which read as CG at once. A2 keeps the rainforest but lets a photograph carry the distance. Poly Haven's `mossy_forest`, a lush mossy rainforest, sits out of focus behind (rotation 180°). A modelled bank of moss and ferns rises 4–9 m back to hide the seam with it. In front stand one redwood with truly displaced bark at the left, the mossy log, the ferns, the duff and two fly agarics. It is lit by the sky's own sun (`sun_from_sky`) and a reflector. The A1 set stays in `poison.py` as `shot_misty()`.
+
 ## Critic passes (blind, a fresh subagent each, critic/PROMPT-promo.md)
 
 | Pass | Score | Verdict | Main changes asked | What I did |
 |---|---|---|---|---|
 | 1 | 5.5 | iterate | the sun through the acrylic; the horn crushed black; the log a flat hedge; toy agarics; heavy left ferns; no separation from the trunk; 65 mm f/2.8; more contrast | Sun to azimuth −150°, elevation 28°, with a canopy gap on the cabinet. A big reflector at the camera's right for the horn. The log turned end-on, moss on top only. Two agarics. Thinner left ferns and a near frond at the right. The central trunk 1.5 m back. Camera 65 mm f/2.8 at 6.2 m, 0.85 m high. Finish contrast 0.10, clarity 0.08, vignette 0.22. Then my own fixes: mist down to 0.055 (it greyed the trunks), white balance 5300 K, redwood tint, a trunk that blocked the sun moved, more ferns behind. |
+| 2 | 5.5 | iterate | The cabinet still in shade (lum 41) and the same value as the trunk behind; bark smooth; flat decal twigs; clone ferns; the log's end a clean disc | A sun-only render showed the backlight lit only the left panel: the lining stops it reaching the front. So the sun moved to front-left (azimuth −68°), the speaker turned −20° toward it, and the camera moved to +10°. The trunk behind moved aside, 11 trunks added in layers, mist 40 m deep and lit by more sky. All four fern plants with tilts. Bark at 0.8 m with bump 2.4. |
+| 3 | 4.5 | iterate | Mist erases the trunks into grey flats (the strongest CG tell); bark without relief; moss edge stepped; toy agarics; no glow through the acrylic | Three passes with no gain, so per the brief the concept changes (below). |
+

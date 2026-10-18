@@ -8,9 +8,18 @@ forest_leaves_02 on the ground, fern_02's ferns, moss_01's moss and dead_tree_tr
 """
 import math, random
 
-from common import area, asset, camera, finish, ground, piece, portrait_of, shot as frame, sky
+from common import area, asset, camera, finish, ground, piece, portrait_of, shot as frame, sky, sun_from_sky
 
 SKY = 'misty_pines'
+SKY2, SKY_ROT = 'mossy_forest', 180.0
+BANK = (0.5, 9.0, -0.9, 14.0, 4.0, 2.2)            # a mossy bank behind (x, y, z, half-width, half-depth, half-height)
+
+
+def bank_z(x, y):
+    """The bank's surface height at (x, y), or None off it."""
+    bx, by, bz, a, b, c = BANK
+    q = 1 - ((x - bx) / a) ** 2 - ((y - by) / b) ** 2
+    return bz + c * math.sqrt(q) if q > 0 else None
 # redwoods further back, fading into the mist: layers of trunks so the forest reads deep
 FAR = [(-9.0, 15.0, 1.4), (-5.5, 20.0, 1.7), (4.5, 16.0, 1.3), (8.5, 18.5, 1.6), (12.0, 13.0, 1.2), (-13.5, 21.0, 1.5),
        (-1.0, 26.0, 1.8), (6.0, 27.0, 1.5), (-7.5, 30.0, 1.6), (13.0, 26.0, 1.7), (-14.0, 11.0, 1.3)]
@@ -70,7 +79,8 @@ def ferns(seed=3):
     return [ext('plants', model='fern_02', place=pl, seed=seed)]
 
 
-def shot():
+def shot_misty():
+    """Concept A1 (passes 1-3: 5.5, 5.5, 4.5): a deep misty redwood grove of modelled trunks. Superseded."""
     props = [ground('forest_leaves_02', size=(16.0, 18.0), position=(0.0, 5.0, 0.0), displace=0.03, tint='#3A2A1E', tint_mix=0.15, relief=0.12,
                     res='4k', cells=640),
              # the redwoods, metres across, rising out of the frame
@@ -105,6 +115,46 @@ def shot():
                  'barkhorn, Poison, in a redwood rainforest', lights=lights, sun=sun, rotate_z=-20.0,
                  position=(0.0, 0.0, -0.015), fin=finish(contrast=0.10, clarity=0.08, vignette=0.22, saturation=0.08),
                  white_balance=(5300, 10))
+
+
+def shot():
+    """Concept A2: the forest itself photographed (Poly Haven's mossy_forest, a lush mossy rainforest, out of focus
+    behind), a modelled foreground in front of it: a redwood's buttress at the left, the mossy log, sword ferns, the
+    duff, two fly agarics; the sky's own sun, dappled."""
+    props = [ground('forest_leaves_02', size=(30.0, 30.0), position=(0.0, 8.0, 0.0), displace=0.03, tint='#3A2A1E',
+                    tint_mix=0.15, relief=0.15, res='4k', cells=900),
+             ext('redwood', (-2.9, 2.6, -0.1), radius=1.25, height=30.0, tint=REDWOOD, tint_mix=0.3, tex_scale=0.6,
+                 bump=1.6, displace=0.035, segments=420, rings=220, seed=1, flare=0.75, foot=1.5, turn=20),
+             ext('mossy_log', a=list(LOG_A), b=list(LOG_B), radius=0.42, radius_b=0.36, cover=0.55, res='2k',
+                 end='acg:TreeEnd003', end_tint='#3A2A20', end_tint_mix=0.7),
+             ext('strew', model='moss_01', on=['-moss'], density=3500, up=0.2, scale=[0.9, 2.2], patch=0.3,
+                 patch_cut=0.2, seed=3),
+             ext('toadstool', (0.95, -1.05, -0.008), height=0.2, cap=[0.11, 0.045], stem=0.02, lean=[0.012, 0.0], seed=3),
+             ext('toadstool', (1.12, -0.95, -0.008), height=0.09, cap=[0.045, 0.04], stem=0.013, lean=[0.0, 0.0], seed=4)]
+    props += ferns()
+    # the bank behind: a mound of the same duff, ferns over its face, so the ground rises into the photographed forest
+    bx, by, bz, ba, bb, bc = BANK
+    nb = len(props)
+    props.append(piece('sphere', material='pbr', texture='acg:Moss001', tex_scale=0.12, res='2k', position=[bx, by, bz],
+                       scale=[ba, bb, bc], segments=160))
+    props.append(ext('strew', model='moss_01', on=[f'prop{nb}-kit'], density=1500, up=0.3, scale=[1.5, 3.0], patch=0.8,
+                     patch_cut=0.3, seed=21))
+    rnd = random.Random(17); pl = []
+    while len(pl) < 170:
+        x, y = rnd.uniform(-9, 10), rnd.uniform(5.2, 9.5)
+        z = bank_z(x, y)
+        if z is None or z < 0.0:
+            continue
+        pl.append([round(x, 3), round(y, 3), round(z - 0.03, 3), round(rnd.uniform(1.3, 2.0), 3), round(rnd.uniform(0, 360), 1),
+                   rnd.choice([0, 1, 2, 3]), round(rnd.uniform(-15, 15), 1)])
+    props.append(ext('plants', model='fern_02', place=pl, seed=17))
+    rot = SKY_ROT
+    lights = {'reflector': area(35, 12, 3.0, 0.8, '#EEF0E0', (2.0, 1.5), (0.0, 0.0, 1.05))}
+    cam = camera(height=0.75, distance=6.2, azimuth=10.0, lens=65.0, target=(0.0, 0.0, 0.62), fstop=2.8)
+    return frame('poison', props, cam, sky(SKY2, rotation_deg=rot, strength=1.0, res='4k'),
+                 'barkhorn, Poison, in a redwood rainforest', lights=lights,
+                 sun=sun_from_sky(SKY2, rot, irradiance=4.0, color='#FFE9C4'), rotate_z=-20.0,
+                 position=(0.0, 0.0, -0.015), fin=finish(contrast=0.08, clarity=0.06, vignette=0.2))
 
 
 def portrait():
