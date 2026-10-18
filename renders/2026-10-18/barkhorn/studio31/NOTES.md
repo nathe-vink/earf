@@ -38,3 +38,7 @@ catalogue's cover-on views face the same reader.
 
 Bright field with the cover off is the studio set from here (the coordinator: the eight heroes, the lineup and the
 macros all from its rig, named hero-light-<colour>); hero-dark-ember.png stays as the record of the h7 rig.
+
+| pass | frame | size | score | top changes | what I did |
+|---|---|---|---|---|---|
+| b1 | concept-bright-ember | 1280 proof | 5.5 | mint cast; a flag's grey wedge on the left; no coloured light thrown; front face matte; woofer a hole; small; light contact | 5600 K tint 5; left flag moved in, background lamps 4 m wide; a graduated front strip; a lamp high behind; a bounce card facing the woofer; 70 mm; softer, longer contact |
