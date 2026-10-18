@@ -142,3 +142,30 @@ def lake(bpy, name, p, kit):
     nt.links.new(sc.outputs['Fac'], b2.inputs['Height']); nt.links.new(b1.outputs['Normal'], b2.inputs['Normal'])
     nt.links.new(b2.outputs['Normal'], b.inputs['Normal'])
     return kit.finish(bpy, name, bm, p, smooth=False, mat=m)
+
+
+def footprint(bpy, name, p, kit):
+    """A big furry footprint pressed in snow, lying flat: a broad sole and five round toes, `length` heel to toe,
+    `side` 1 for a right foot, -1 a left, `depth` thick."""
+    L = p.get('length', 0.4); side = p.get('side', 1)
+    W = L * 0.48
+    bm = bmesh.new()
+    sole = []
+    for i in range(28):
+        t = 2 * math.pi * i / 28
+        x, y = math.cos(t) * W / 2, math.sin(t) * L * 0.36
+        x *= 0.78 + 0.22 * (math.sin(t) + 1) / 2      # the heel narrower than the ball
+        x += side * 0.05 * L * math.sin(t)            # the ball turned out, as a foot is
+        sole.append((x, y - L * 0.08))
+    kit._extrude(bm, sole, p.get('depth', 0.006), 0.0)
+    for k, (tx, r) in enumerate([(-0.42, 0.065), (-0.21, 0.075), (0.0, 0.08), (0.21, 0.075), (0.44, 0.09)]):
+        cx = tx * W * side * 1.1; cy = L * 0.33 + L * 0.07 * (1 - abs(tx) * 1.8)
+        toe = bmesh.new()
+        kit._extrude(toe, [(cx + math.cos(2 * math.pi * i / 16) * r * L, cy + math.sin(2 * math.pi * i / 16) * r * L) for i in range(16)],
+                     p.get('depth', 0.006) * 0.7, 0.0)      # thinner than the sole, so no face lies on another
+        me = bpy.data.meshes.new('tmp'); toe.to_mesh(me); toe.free(); bm.from_mesh(me); bpy.data.meshes.remove(me)
+    # lay it flat: the outline was drawn in x-z, depth along y; turn y into z
+    for v in bm.verts:
+        v.co = Vector((v.co.x, v.co.z, v.co.y))
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    return kit.finish(bpy, name, bm, p, smooth=False)
