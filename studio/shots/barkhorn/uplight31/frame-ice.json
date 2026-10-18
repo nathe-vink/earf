@@ -35,18 +35,11 @@
      0.5,
      7.0
     ],
-    "color": "#A6A29A",
-    "board_m": 0.14,
-    "board_vary": 0.09,
-    "grain": 1.0,
-    "joint": 1.0,
-    "ties": [
-     0.6,
-     0.56
-    ],
-    "stain": 0.8,
-    "roughness": 0.88,
-    "relief": 0.55
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "bump": 1.2,
+    "vary": 0.22,
+    "vary_m": 3.5
    },
    {
     "kind": "kit",
@@ -62,13 +55,11 @@
      12.0,
      9.0
     ],
-    "flag": [
-     1.2,
-     0.6
-    ],
-    "color": "#4A4844",
-    "wet": 0.25,
-    "puddle_m": 1.5
+    "texture": "concrete_pavement",
+    "res": "2k",
+    "wet": 0.35,
+    "puddle_m": 1.5,
+    "vary": 0.2
    },
    {
     "kind": "kit",
@@ -109,7 +100,11 @@
   ]
  },
  "sky": {
-  "kind": "none"
+  "kind": "hdri",
+  "polyhaven": "kloppenheim_07_puresky",
+  "res": "2k",
+  "strength": 0.12,
+  "rotation_deg": 0.0
  },
  "lights": {
   "up": {

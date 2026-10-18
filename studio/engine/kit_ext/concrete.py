@@ -9,6 +9,9 @@
   leave them out), slow stains and drips (`stain`), `color`, `roughness`. `bevel` eases the block's edges.
 - paving: wet stone flags `size` [w, d] on the ground at `position`, flags `flag` [w, d] m, joints darker; `wet` (0 to 1)
   how much of it holds water (smooth, dark, mirroring), in puddles `puddle_m` across.
+- on a wall or paving, `texture` (a Poly Haven texture id: concrete_layers_02 is board-formed) uses the photographed
+  set instead, laid at its real size or `tex_scale` m a tile, `res`, `bump`, its repetition broken by a slow tone
+  variation `vary` (0.25) `vary_m` across; on paving, `wet` and `puddle_m` as above.
 - water: a river's surface `size` [w, d] at `position` (its z the water line): near black, a mirror broken by slow
   ripples (`ripple_m` long across x, `ripple` their strength), so lights on the far bank draw down into long streaks.
 """
@@ -216,6 +219,61 @@ def water_mat(bpy, p):
     return m
 
 
+def _photo(bpy, p, kind):
+    """A photographed texture set (assets.py, Poly Haven) under this module's breakers of repetition: a slow world-space
+    variation in tone and vertical streaks multiplied into its colour, so a 2 m tile laid across a 60 m wall does not
+    repeat to the eye; on paving, `wet` puddles (dark, smooth, mirroring) and a damp darkening over all."""
+    import assets
+    key = ('photo', kind) + tuple((k, str(p.get(k))) for k in ('texture', 'res', 'tex_scale', 'bump', 'vary', 'wet', 'puddle_m', 'tint', 'tint_mix', 'rough_mul'))
+    if key in _MATS:
+        return _MATS[key]
+    m = assets.pbr(bpy, p['texture'], p.get('res', '2k'), scale=p.get('tex_scale'), bump=p.get('bump', 1.0),
+                   tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0), rough_mul=p.get('rough_mul', 1.0), name=f'{kind}-{p["texture"]}')
+    nt = m.node_tree; g = _G(nt)
+    b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    pos, X, Y, Z = g.xyz()
+
+    def into(sock_name, fn):
+        sock = b.inputs[sock_name]
+        src = sock.links[0].from_socket if sock.is_linked else None
+        fn(src, sock)
+    vary = p.get('vary', 0.25)
+    blot = g.noise(pos, 1.0 / p.get('vary_m', 3.0), detail=3.0)
+    streak = g.noise(g.combine(g.math('MULTIPLY', X, 3.0), Y, g.math('MULTIPLY', Z, 0.15)), 1.0, detail=4.0)
+    tone = g.math('SUBTRACT', 1.0 + 0.5 * vary, g.math('ADD', g.math('MULTIPLY', g.ramp(blot, 0.3, 0.7), vary),
+                                                      g.math('MULTIPLY', g.ramp(streak, 0.45, 0.75), 0.6 * vary)))
+    puddle = None
+    if kind == 'paving' and p.get('wet', 0) > 0:
+        wet = p['wet']
+        pd = g.noise(pos, 1.0 / p.get('puddle_m', 1.2), detail=3.0)
+        puddle = g.ramp(pd, 0.62 - 0.25 * wet, 0.67 - 0.25 * wet)
+        tone = g.math('MULTIPLY', tone, g.math('SUBTRACT', 1.0 - 0.3 * wet, g.math('MULTIPLY', puddle, 0.2)))
+
+    def colour(src, sock):
+        mix = g.n('ShaderNodeMix', data_type='RGBA', blend_type='MULTIPLY'); mix.inputs['Factor'].default_value = 1.0
+        ins = [x for x in mix.inputs if x.type == 'RGBA']; outs = [x for x in mix.outputs if x.type == 'RGBA']
+        if src is not None:
+            g.link(src, ins[0])
+        else:
+            ins[0].default_value = sock.default_value
+        g.link(g.rgb(tone), ins[1]); g.link(outs[0], sock)
+    into('Base Color', colour)
+    if puddle is not None:
+        def rough(src, sock):
+            base = src if src is not None else sock.default_value
+            damp = g.math('MULTIPLY', base, 1.0 - 0.45 * p['wet']) if src is not None else base * (1.0 - 0.45 * p['wet'])
+            r = g.math('ADD', g.math('MULTIPLY', damp, g.math('SUBTRACT', 1.0, puddle)), g.math('MULTIPLY', puddle, 0.03))
+            g.link(r, sock)
+        into('Roughness', rough)
+        nsock = b.inputs['Normal']                       # water lies flat: the relief fades in the puddles
+        if nsock.is_linked:
+            nm = nsock.links[0].from_node
+            if 'Strength' in nm.inputs:
+                g.link(g.math('MULTIPLY', g.math('SUBTRACT', 1.0, puddle), p.get('bump', 1.0)), nm.inputs['Strength'])
+    _MATS[key] = m
+    return m
+
+
 def _block(bm, w, t, h):
     geom = bmesh.ops.create_cube(bm, size=1.0)
     for v in geom['verts']:
@@ -227,14 +285,14 @@ def wall(bpy, name, p, kit):
     bm = bmesh.new(); _block(bm, w, t, h)
     if p.get('bevel', 0) > 0:
         bmesh.ops.bevel(bm, geom=bm.edges[:], offset=p['bevel'], segments=2, affect='EDGES')
-    return kit.finish(bpy, name, bm, p, smooth=False, mat=concrete(bpy, p))
+    return kit.finish(bpy, name, bm, p, smooth=False, mat=_photo(bpy, p, 'wall') if p.get('texture') else concrete(bpy, p))
 
 
 def paving(bpy, name, p, kit):
     w, d = p.get('size', [10.0, 4.0])
     bm = bmesh.new(); _block(bm, w, d, p.get('thick', 0.1))
     bmesh.ops.translate(bm, vec=Vector((0, 0, -p.get('thick', 0.1))), verts=bm.verts[:])
-    return kit.finish(bpy, name, bm, p, smooth=False, mat=paving_mat(bpy, p))
+    return kit.finish(bpy, name, bm, p, smooth=False, mat=_photo(bpy, p, 'paving') if p.get('texture') else paving_mat(bpy, p))
 
 
 def water(bpy, name, p, kit):
