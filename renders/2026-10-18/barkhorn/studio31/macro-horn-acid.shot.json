@@ -14,7 +14,7 @@
      0.0,
      0
     ],
-    "rotate_z": 128.0,
+    "rotate_z": 80.0,
     "flavour": "cloud-amber",
     "hide": [
      "cloth-disc"
@@ -70,6 +70,23 @@
      -0.89,
      0.0
     ],
+    "glossy": false
+   },
+   {
+    "center_m": [
+     0.0,
+     0.0,
+     2.3
+    ],
+    "size_m": [
+     1.6,
+     0.6
+    ],
+    "normal": [
+     0.0,
+     0.0,
+     -1.0
+    ],
     "glossy": true
    }
   ],
@@ -95,16 +112,16 @@
  },
  "camera": {
   "position": [
-   1.2,
-   -2.5,
-   1.3
+   1.0,
+   -2.3,
+   1.45
   ],
   "target": [
    0.0,
    0.02,
-   1.1
+   1.22
   ],
-  "lens_mm": 150.0,
+  "lens_mm": 120.0,
   "level": false
  },
  "sky": {
@@ -199,7 +216,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 1.6,
+   "irradiance": 0.6,
    "color": "#FFFAF4",
    "camera": false
   },
