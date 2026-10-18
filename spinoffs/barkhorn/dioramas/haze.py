@@ -11,7 +11,7 @@ import math, random
 
 from common import finish, kit, portrait_of, shot as frame, tilt_shift
 
-SUN = (2.45, 5.35, 1.18, 0.8)                    # the sun: x, y, z of its centre, its radius (m)
+SUN = (2.45, 5.35, 1.1, 0.8)                    # the sun: x, y, z of its centre, its radius (m)
 FLOOR = '#8E78AA'
 SPEAKER = ['[!p]*', 'po*']                        # the speaker's parts: everything but the set's pieces (prop<i>-kit)
 
@@ -122,11 +122,11 @@ def props():
     hills = ['#4E3870', '#6E5494', '#8E74B0', '#AE92C4', '#D2AEC8', '#EBC3BA']
     P.append(flat(-5.0, -1.0, -1.0, 0.16, 0.06, 11, hills[0], waves=1.2, ends=(0, 0.5)))
     P.append(flat(-5.5, 1.3, 1.25, 0.34, 0.12, 21, hills[1], waves=2.0, ends=(0, 0.7), trees=[(-1.5, 0.08, 0.15, 0.15), (-1.08, 0.06, 0.1, 0.1)]))
-    P.append(flat(1.9, 6.0, 1.45, 0.30, 0.12, 22, hills[1], waves=1.6, ends=(0.6, 0), trees=[(3.0, 0.06, 0.07, 0.24), (3.2, 0.05, 0.06, 0.18)]))
-    P.append(flat(-6.0, 6.0, 2.5, 0.58, 0.16, 31, hills[2], waves=3.0, trees=[(-1.5, 0.06, 0.06, 0.2), (-1.33, 0.05, 0.05, 0.15), (1.3, 0.07, 0.12, 0.12)]))
+    P.append(flat(1.9, 6.0, 1.45, 0.30, 0.12, 22, hills[1], waves=1.6, ends=(0.6, 0)))
+    P.append(flat(-6.0, 6.0, 2.5, 0.58, 0.16, 31, hills[2], waves=3.0, trees=[(-1.5, 0.06, 0.06, 0.2), (-1.33, 0.05, 0.05, 0.15), (1.3, 0.07, 0.12, 0.12), (3.3, 0.05, 0.065, 0.22), (3.47, 0.04, 0.055, 0.16)]))
     P.append(flat(-6.5, 6.5, 3.6, 0.82, 0.2, 41, hills[3], waves=2.4, trees=[(-2.6, 0.05, 0.06, 0.18), (0.9, 0.05, 0.1, 0.1)]))
     # the far flats in tissue, so the sun behind them shows through their edges
-    P.append(flat(-6.5, 6.5, 4.7, 0.86, 0.2, 51, hills[4], waves=2.0, skew=-0.25, material='tissue'))
+    P.append(flat(-6.5, 6.5, 4.7, 0.8, 0.2, 51, hills[4], waves=2.0, skew=-0.25, material='tissue'))
     P.append(flat(-7.0, 7.0, 5.7, 0.55, 0.16, 61, hills[5], waves=1.6, material='tissue'))
     # the sun, a tissue disc lit from behind, sunk behind the flat at 4.7 and hung on two threads
     P.append(disc(sx, sy, sz, sr, 'tissue', '#FFC08A', emit=0.9, emit_color='#FFB070'))
@@ -160,7 +160,7 @@ def lights():
         'halo': {'type': 'point', 'position': [sx, sy + 0.9, sz], 'power_w': 120, 'color': '#FFB98A', 'radius_m': 0.4},
         # the evening's last light on the speaker's face, soft and lilac, and its glow from within
         'face': {'type': 'area', 'size_m': [1.6, 1.6], 'orbit': {'azimuth_deg': -45, 'elevation_deg': 28, 'distance_m': 4.0},
-                 'target': [0.0, 0.0, 0.7], 'irradiance': 3.2, 'color': '#E6D3F4', 'camera': False, 'receivers': SPEAKER},
+                 'target': [0.0, 0.0, 0.7], 'irradiance': 3.8, 'color': '#E6D3F4', 'camera': False, 'receivers': SPEAKER},
         'glow': {'type': 'area', 'size_m': [0.7, 0.32], 'position': [0.0, 0.66, 1.12], 'target': [0.0, 0.0, 1.1],
                  'irradiance': 4.0, 'color': '#FFC9A0', 'specular': 0, 'transmission': False, 'receivers': SPEAKER},
         # the sun's edge on the speaker's left side and top, from behind
@@ -169,6 +169,9 @@ def lights():
         # the sun through the horn, from behind and low, on the speaker alone
         'through': {'type': 'area', 'size_m': [0.8, 0.8], 'orbit': {'azimuth_deg': 165, 'elevation_deg': 14, 'distance_m': 3.0},
                     'target': [0.0, 0.0, 1.2], 'irradiance': 10.0, 'color': '#FFB27C', 'camera': False, 'receivers': SPEAKER},
+        # the sun grazing the floor, through the speaker's clear foot: violet light thrown forward onto the paper
+        'low': {'type': 'area', 'size_m': [0.9, 0.4], 'orbit': {'azimuth_deg': 168, 'elevation_deg': 6, 'distance_m': 2.2},
+                'target': [0.0, 0.0, 0.2], 'irradiance': 8.0, 'color': '#FFC090', 'camera': False, 'spread_deg': 45},
         # the dusk sky overhead, lilac
         'sky': {'type': 'area', 'size_m': [5.0, 4.0], 'orbit': {'azimuth_deg': -15, 'elevation_deg': 55, 'distance_m': 7.0},
                 'target': [0.0, 0.5, 0.4], 'irradiance': 0.4, 'color': '#C4B2E8', 'camera': False},
@@ -186,4 +189,8 @@ def shot():
 
 
 def portrait():
-    return portrait_of(shot(), lens=45)
+    # the sun stacked above the speaker: the camera comes round to the right and the speaker turns to face it
+    s = portrait_of(shot(), **tilt_shift(elevation=16, azimuth=-20, distance=8.6, lens=93, target=(0.45, 1.6, 1.0),
+                                         focus=(0.0, -0.2, 0.8), fstop=4.0, miniature=12, shift_y=-0.085))
+    s['product']['instances'][0]['rotate_z'] = -18.0
+    return s
