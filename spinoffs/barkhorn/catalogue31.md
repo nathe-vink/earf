@@ -215,3 +215,14 @@ the studio's warm pale paper (round 31c's bright field): one neutral backdrop fo
 - With the drivers merged (01267eb) and the model rebuilt.
 
 Proofs: `renders/2026-10-18/barkhorn/catalogue31/paper-{blue,ice,black}-off-wide.png`.
+
+### The detail views on the paper
+
+finals.py's horn-side, horn-back, back, amp and inside now come from `details31/<view>-<k>.json`, written by
+`catalogue31.py` from their own templates (horn21, site30): the camera and the light as each was tuned, the same paper
+(`#F7F0E8`) under it, lit by two lamps on the paper alone (the cove's wall and its gridded floor) set per view to the
+catalogue's paper (233 to 240 across the frame on the three views with paper in frame; the amp view is the plate close
+and shows almost none). The cutaway takes each colour's flavour; its old per-colour tint (finals.py's recolour, from
+lookbook21) now applies to the old template only. With the drivers: the horn views show the new HF driver through the
+pod, the cutaway the new woofer's motor. Proof: Ice's set, `catalogue31/paper-detail-*-blue.png` (half size, 1 to 3
+minutes each).
