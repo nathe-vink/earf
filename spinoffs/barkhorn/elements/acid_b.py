@@ -78,6 +78,8 @@ def shot():
     lights = {
         # a photographer's soft bounce from the camera's side, low: it lifts the speaker's shaded front a little
         'bounce': C.area(-35, 10, 3.5, 0.9, '#F1E6B8', size=(2.0, 2.0)),
+        # a small card low in front, as a photographer would hold one, into the horn's throat
+        'throat': C.area(-8, 4, 2.2, 0.5, '#F1E6B8', size=(0.5, 0.4), target=(0.0, 0.0, 1.15)),
         'fill': C.area(30, 8, 3.5, 0.2, '#F1E6B8', size=(1.2, 1.2)),
     }
     s = C.shot(NAME, props(cam), cam, C.sky(hdri, rot, strength=strength, res='4k'), 'barkhorn Acid, acid rain',

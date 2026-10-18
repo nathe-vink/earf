@@ -694,18 +694,37 @@
     2.0,
     2.0
    ],
-   "orbit": {
-    "azimuth_deg": -35,
-    "elevation_deg": 10,
-    "distance_m": 3.5
-   },
    "target": [
     0.0,
     0.0,
     0.7
    ],
    "irradiance": 0.9,
-   "color": "#F1E6B8"
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": -35,
+    "elevation_deg": 10,
+    "distance_m": 3.5
+   }
+  },
+  "throat": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.15
+   ],
+   "irradiance": 0.5,
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": -8,
+    "elevation_deg": 4,
+    "distance_m": 2.2
+   }
   },
   "fill": {
    "type": "area",
@@ -713,18 +732,18 @@
     1.2,
     1.2
    ],
-   "orbit": {
-    "azimuth_deg": 30,
-    "elevation_deg": 8,
-    "distance_m": 3.5
-   },
    "target": [
     0.0,
     0.0,
     0.7
    ],
    "irradiance": 0.2,
-   "color": "#F1E6B8"
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 8,
+    "distance_m": 3.5
+   }
   }
  },
  "render": {
