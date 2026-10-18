@@ -222,8 +222,8 @@
      80.0,
      29.0
     ],
-    "ripple": 0.12,
-    "ripple_m": 1.2
+    "ripple": 0.06,
+    "ripple_m": 0.4
    },
    {
     "kind": "kit",
@@ -1103,7 +1103,7 @@
     3.08
    ],
    "spread_deg": 90,
-   "power_w": 337.5,
+   "power_w": 252.00000000000003,
    "color": "#FFFFFF"
   },
   "up1": {
@@ -1123,7 +1123,7 @@
     3.08
    ],
    "spread_deg": 90,
-   "power_w": 337.5,
+   "power_w": 252.00000000000003,
    "color": "#FFFFFF"
   },
   "up2": {
@@ -1143,7 +1143,7 @@
     3.08
    ],
    "spread_deg": 90,
-   "power_w": 337.5,
+   "power_w": 252.00000000000003,
    "color": "#FFFFFF"
   },
   "up3": {
@@ -1163,7 +1163,7 @@
     3.08
    ],
    "spread_deg": 90,
-   "power_w": 337.5,
+   "power_w": 252.00000000000003,
    "color": "#FFFFFF"
   },
   "up4": {
@@ -1183,7 +1183,7 @@
     3.08
    ],
    "spread_deg": 90,
-   "power_w": 337.5,
+   "power_w": 252.00000000000003,
    "color": "#FFFFFF"
   },
   "up5": {
@@ -1203,7 +1203,7 @@
     3.08
    ],
    "spread_deg": 90,
-   "power_w": 337.5,
+   "power_w": 252.00000000000003,
    "color": "#FFFFFF"
   },
   "up6": {
@@ -1223,7 +1223,7 @@
     3.08
    ],
    "spread_deg": 90,
-   "power_w": 337.5,
+   "power_w": 252.00000000000003,
    "color": "#FFFFFF"
   },
   "up7": {
@@ -1243,26 +1243,26 @@
     3.08
    ],
    "spread_deg": 90,
-   "power_w": 448.875,
+   "power_w": 252.00000000000003,
    "color": "#FFFFFF"
   },
   "moon": {
    "type": "area",
    "size_m": [
-    10.0,
-    6.0
+    14.0,
+    8.0
    ],
    "position": [
-    4.0,
-    -5.0,
-    7.5
+    3.0,
+    -7.0,
+    5.0
    ],
    "target": [
     0.0,
     0.3,
     1.0
    ],
-   "irradiance": 0.1,
+   "irradiance": 0.3,
    "color": "#C4D0F0"
   }
  },
@@ -1275,7 +1275,7 @@
    0.27999999999999997,
    16.0
   ],
-  "density": 0.02,
+  "density": 0.035,
   "anisotropy": 0.7
  },
  "camera": {

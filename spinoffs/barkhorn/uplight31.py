@@ -124,7 +124,8 @@ def frame(key, kind=SLIDE, size=(1600, 1600)):
     return s
 
 
-def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=120, moon=0.22, pours=(3.6, 1.8)):
+def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=120, moon=0.22, pours=(3.6, 1.8),
+         moon_at=(4.0, -5.0, 7.5), moon_size=(10.0, 6.0), haze=0.02, kerb=(0.03, -0.06, 0.5), ripple=(0.12, 1.2)):
     """The night set both kinds of picture share: speakers in a row on a wet granite quay at the foot of an opera house's
     board-formed concrete river front, each on its uplight, the river at the quay's edge behind the camera's side.
 
@@ -146,8 +147,8 @@ def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=
         pour([0.0, wall_y - 0.35, 4.8], [60.0, 0.7, 0.8]),
         # the quay: wet granite flags with broad standing water, a wet granite kerb, the river just below
         kit('paving', [0.0, -1.3, 0.0], size=[60.0, 4.2], texture='granite_tile', res='2k', wet=0.65, puddle_m=1.2, puddle_edge=0.22, vary=0.2),
-        kit('paving', [0.0, -3.575, 0.0], size=[60.0, 0.35], thick=0.03, texture='granite_tile', res='2k', wet=0.5, puddle_m=0.5, vary=0.4),
-        kit('water', [0.0, -18.0, -0.06], size=[80.0, 29.0], ripple=0.12, ripple_m=1.2),
+        kit('paving', [0.0, -3.575, 0.0], size=[60.0, 0.35], thick=kerb[0], texture='granite_tile', res='2k', wet=kerb[2], puddle_m=0.5, vary=0.4),
+        kit('water', [0.0, -18.0, kerb[1]], size=[80.0, 29.0], ripple=ripple[0], ripple_m=ripple[1]),
         # the city across the river, behind the camera's back, felt only as warm glows low on the water, near and far
         {'kind': 'kit', 'shape': 'box', 'position': [0.0, -40.0, -0.4], 'size': [80.0, 0.5, 0.3], 'material': 'glow',
          'color': '#FFC98A', 'emit': 3.0, 'shadow': False},
@@ -166,13 +167,13 @@ def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=
             lights[f'up{i}{k_}'] = l_
         insts.append({'flavour': FLAVOUR[k], 'position': [x, 0.0, Z0], 'rotate_z': 0, 'hide': ['cloth-disc']})
     # moonlight, cool and faint, high over the river at the front right: it finds the horns and the stone
-    lights['moon'] = {'type': 'area', 'size_m': [10.0, 6.0], 'position': [4.0, -5.0, 7.5], 'target': [0.0, wall_y, 1.0],
+    lights['moon'] = {'type': 'area', 'size_m': list(moon_size), 'position': list(moon_at), 'target': [0.0, wall_y, 1.0],
                       'irradiance': moon, 'color': '#C4D0F0'}
     return {'product': {'def': PRODUCT, 'flavour': FLAVOUR[keys[0]], 'instances': insts},
             'set': {'kind': 'stage', 'props': props},
             'sky': dict(NIGHT, strength=0.12),
             'lights': lights,
-            'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.02, 16.0], 'density': 0.02, 'anisotropy': 0.7},
+            'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.02, 16.0], 'density': haze, 'anisotropy': 0.7},
             'camera': camera,
             'render': dict(RENDER, samples=160, exposure=exposure),
             'finish': dict(FINISH),
@@ -185,7 +186,8 @@ def facade(size=(2880, 1200), camera=None, exposure=1.0):
     return quay(KEYS, [(i - 3.5) * 1.2 for i in range(8)],
                 camera or {'position': [0.0, -9.4, 0.6], 'target': [0.0, 0.0, 1.1], 'lens_mm': 33.0, 'level': True},
                 size, exposure, 'barkhorn, the eight uplit along an opera house\'s concrete river front at night',
-                boost={'black': 1.33}, power=0.75, spread=90, moon=0.1)
+                power=0.56, spread=90, moon=0.3, moon_at=(3.0, -7.0, 5.0), moon_size=(14.0, 8.0), haze=0.035,
+                ripple=(0.06, 0.4))
 
 
 def slide(key, size=(1600, 1600)):
