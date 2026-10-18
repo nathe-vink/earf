@@ -6,14 +6,14 @@
  ],
  "camera": {
   "position": [
-   0.1237,
+   0.2437,
    -1.2815,
-   1.1634
+   1.1834
   ],
   "target": [
-   0.36,
+   0.48,
    0.39999999999999997,
-   0.74
+   0.76
   ],
   "lens_mm": 50,
   "level": true,
@@ -25,19 +25,22 @@
   ]
  },
  "render": {
-  "samples": 160,
+  "samples": 200,
   "adaptive": 0.015,
   "denoise": true,
   "clamp": 8,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.8,
-  "white_balance_k": 5600
+  "exposure": 0.2,
+  "white_balance_k": 3800
  },
  "materials": {
   "oak": {
    "grain": 1.0,
    "roughness": 0.38
+  },
+  "led": {
+   "strength": 25.0
   }
  },
  "set": {
@@ -175,21 +178,28 @@
      "rotate_z": -6
     }
    ]
+  },
+  {
+   "def": "studio/products/barkhorn-lamp.json",
+   "flavour": "ember",
+   "instances": [
+    {
+     "position": [
+      0.98,
+      0.5,
+      0.68
+     ],
+     "rotate_z": 0
+    }
+   ]
   }
  ],
  "sky": {
   "kind": "gradient",
-  "strength": 9.0,
-  "zenith": "#9FB8DA",
-  "horizon": "#D6EAF8",
-  "ground": "#8A8478"
- },
- "sun": {
-  "azimuth_deg": -55,
-  "elevation_deg": 38,
-  "irradiance": 3.0,
-  "angle_deg": 0.53,
-  "color": "#FFF0DC"
+  "strength": 6.0,
+  "zenith": "#1E2C4A",
+  "horizon": "#5A6E92",
+  "ground": "#2A2A30"
  },
  "lights": {
   "fill": {
@@ -199,36 +209,69 @@
     1.2
    ],
    "orbit": {
-    "azimuth_deg": 35,
-    "elevation_deg": 15,
-    "distance_m": 2.2
+    "azimuth_deg": 40,
+    "elevation_deg": 8,
+    "distance_m": 2.4
    },
    "target": [
-    0.36,
+    0.48,
     0.39999999999999997,
-    0.74
+    0.76
    ],
-   "irradiance": 0.35,
-   "color": "#EAF2FF"
+   "irradiance": 0.12,
+   "color": "#C9D6F0"
   },
   "key": {
    "type": "area",
    "size_m": [
-    1.2,
-    0.9
+    0.9,
+    0.7
    ],
    "orbit": {
-    "azimuth_deg": -25,
-    "elevation_deg": 35,
-    "distance_m": 1.6
+    "azimuth_deg": -30,
+    "elevation_deg": 45,
+    "distance_m": 1.4
    },
    "target": [
     0.36,
     0.39999999999999997,
     0.77
    ],
-   "irradiance": 1.6,
-   "color": "#FFF4E6"
+   "power_w": 20.0,
+   "color": 2900
+  },
+  "bell2": {
+   "type": "point",
+   "position": [
+    0.98,
+    0.547,
+    1.121
+   ],
+   "power_w": 4.666666666666667,
+   "radius_m": 0.004,
+   "color": 2700
+  },
+  "bell3": {
+   "type": "point",
+   "position": [
+    0.9393,
+    0.4765,
+    1.121
+   ],
+   "power_w": 4.666666666666667,
+   "radius_m": 0.004,
+   "color": 2700
+  },
+  "bell4": {
+   "type": "point",
+   "position": [
+    1.0207,
+    0.4765,
+    1.121
+   ],
+   "power_w": 4.666666666666667,
+   "radius_m": 0.004,
+   "color": 2700
   }
  }
 }

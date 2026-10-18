@@ -21,3 +21,8 @@ Frames: `renders/2026-10-18/barkhorn/companions/promo/`. Stop at two passes in a
 | Shot | Pass | Blind score | Verdict | The critic's top changes | What I did | Score if fixed |
 |---|---|---|---|---|---|---|
 | hero-turntable (room, Ember) | p1 | 5.0 | iterate | The record player the darkest thing in the frame (lum 12.7); the sun's long horn shadow fills the wall; the speaker a cropped red box; the walnut soft at 2k; the wall flat CG; denoiser smear | a softbox key on the player; sun 24/-72 to 38/-55; the cabinet at 4k; a Poly Haven plaster wall; samples 64 to 160; f/4 on the arm; the speaker moved and the camera reframed so its horn reads (the critic's position was inside the back wall); exposure +0.8 | 7.0 |
+| hero-lamp (room, dusk, Haze) | p1 | 5.0 | iterate | Denoiser smear (64 samples); the speaker a cropped slab that reads as a TV; no dusk in frame; the sleeve clipping cold; the cabinet front crushed; a magenta grade; the shadow band off the right edge | samples 64 to 200; the dusk sky 2.5 to 6; the strip's glow 60 to 25; fill 0.04 to 0.12, lower; exposure 0.75; 3800 K; the lamp 7 cm off the wall; the camera wider but not to 35 mm (that made the lamp 15 % of the frame): 40 mm, the speaker further left | 7.0 |
+
+After both first passes, the two heroes were made one set, one light and one grade (the lead: they sit side by side on
+the site): Cumulus's hero moved from morning sun to the same dusk, with Bell lit beside it on the cabinet and a warm
+softbox high at the left as its key. Its pass 2 in morning sun was stopped before it finished.
