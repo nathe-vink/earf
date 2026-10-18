@@ -7,17 +7,28 @@ The set is `dust.py`; the frames are `studio/shots/barkhorn/diorama31/dust.json`
 - "Dust should have something like a tumbleweed too, with the big flat desert plateaus in the back."
 - "It's important to stay on the theme of earth and placing the speakers in their respective atmospheres, though the
   yeti and witch ideas are fun, subtle nods."
+- "For the dioramas, they are looking lackluster and bleak so far. They don't need to be busy per se, but they look both
+  empty and cluttered at the same time. It's also hard to see the speakers themselves in some of them. ... All of them
+  should be looking at the speaker in a way that's more level with the speaker, with the speaker turned slightly in
+  either direction depending on the setting."
 
 ## Concept
 
-A desert at golden hour, built from suede, corduroy and sand. A big low paper sun, glowing in rings, sets behind a
-slim butte of cut suede on a paper sky. Corduroy dunes roll between, their ribs running along the crests, and the floor
-is sand. The real sun is low behind the speaker's right and in frame, so the orange acrylic glows amber at its edges and
-every piece throws a long shadow to the left. Beside the speaker is the icon in wool felt: three puffs at the fat end of
-a flat wedge thinning along the ground, with a line of roadrunner footprints running out of its point to the right.
-Something just went past (a nod, not the subject). To the speaker's left a raffia tumbleweed is mid-bounce, kicking up a
-little dust. Behind it all, broad flat-topped plateaus of cut suede recede into the warm haze. Motes hang in the light,
-and a little sage corduroy saguaro is the one accent.
+A desert at golden hour, built from suede, corduroy and sand, seen level with the speaker. Behind it, broad flat-topped
+plateaus of cut suede and one slim butte rise over the horizon into a warm haze. A big low paper sun, glowing in rings,
+sets between them, and the real sun comes from it, low behind the speaker's right. So the horn and the cabinet's acrylic
+glow amber and red, every piece throws a long shadow toward the camera's left, and corduroy dunes roll in between.
+
+Beside the speaker are three things, no more:
+- on its left, a raffia tumbleweed mid-bounce;
+- on its right, behind, the roadrunner's cloud in wool felt: the icon's three puffs on their flat wedge, a nod rather
+  than the subject;
+- a little sage corduroy saguaro, the one accent.
+
+Two soft suede stones frame the lower right corner, and motes hang in the light.
+
+(The first fifteen rounds were the high tilt-shift view the brief began with. The owner's note on level views, below,
+replaced it; the set kept its materials and light.)
 
 ## Rounds
 
@@ -70,12 +81,31 @@ the cloud carries the icon. After the owner's note it was reframed again so that
 tumbleweed is in it too: a 72 mm lens from azimuth 8 at 6.4 m, the speaker centred at about 33 % of the height, the
 tumbleweed to its left and the cloud to its right.
 
+After the owner's note on level views:
+
+21. **Level camera** (elevation 3.5 degrees, 60 mm, 4.9 m, focused on the front at f/5.6 over a miniature of 5), the
+    speaker at about 70 % of the frame's height, turned 10 degrees against a camera 15 degrees to its left (25 degrees
+    in all). The plateaus rebuilt taller (up to 2.2 m) so they rise over the horizon behind it. A front key from the
+    left, the sun (azimuth 152, 9 degrees) and a rim from behind the right. Kit scale 6 to match. At once a different
+    picture: the horn glows red against the sun. But the cloud's puffs sat behind the speaker's right edge, the
+    tumbleweed's dust was cut by the frame, and the blurred dune lip at the lower left read as a grey slab.
+22. **Cloud moved right and back, saguaro beyond it, the dune lip replaced by two suede stones at the lower right.** The
+    tumbleweed's little puffs read as eggs, so they went.
+23. (mid) **Haze thinned to 0.009** for depth in the plateaus. The speaker is crisp to its back corners and the horn
+    glows; accepted.
+
+Portrait (level): 80 mm from 3.85 m, the speaker at about 63 % of the height, the tumbleweed and the cloud cut by the two
+edges as soft framing.
+
 ## Choices and why
 
 - **The sun behind and to the right, in frame.** One idea of light: the low sun is the paper sun you see, so the long
   shadows and the glow on the acrylic are motivated by it.
 - **The paper sun is opaque paper glowing of its own, not tissue.** Lit from behind by the real sun lamp, tissue blew
   out to white. Rings of paper, each glowing less than the one inside it, make the halo the way a model-maker would.
-- **The camera from the front right.** From the left, the speaker's sunlit side faced away and it read flat.
+- **Level, from the speaker's left, with the sun behind its right.** The sun backlights the acrylic toward the lens,
+  so the horn glows; the key from the left keeps the front readable.
+- **Fewer, bigger pieces** (the owner: "empty and cluttered at the same time"): one backdrop (plateaus, sun), one
+  middle layer (dunes, saguaro), and the two flankers. The footprints fall below a level view and now sit out of frame.
 - **The haze only behind the speaker.** It gives the distance air without veiling the hero.
 - **No cover**, as the brief defaults.

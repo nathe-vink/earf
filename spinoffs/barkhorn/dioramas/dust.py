@@ -15,15 +15,15 @@ PUFF = '#E8955A'
 SUN = '#FFE3B0'
 SKY = '#F8C088'
 # the sun: low, behind the speaker's left (azimuth 0 is from the front), matched to the paper sun on the sky card
-SUN_AZ, SUN_EL = 122.0, 11.0
-PAPER_SUN = (0.9, 6.0, 1.05, 0.72)                # x, y, z, radius
+SUN_AZ, SUN_EL = 152.0, 9.0
+PAPER_SUN = (3.0, 7.4, 1.55, 0.95)                # x, y, z, radius
 
 
 def sky():
     """A paper sky card far behind, and the tissue sun on it, lit from within, with two rings of thinner tissue round
     it for its glow."""
     x, y, z, r = PAPER_SUN
-    out = [kit('box', 'paper', SKY, size=[18.0, 0.05, 7.0], position=[0.0, y + 0.2, -0.1], shadow=False, emit=0.12)]
+    out = [kit('box', 'paper', SKY, size=[26.0, 0.05, 9.0], position=[0.0, y + 0.2, -0.1], shadow=False, emit=0.12)]
     for k, (rr, c, e) in enumerate([(1.7, '#F4B482', 0.18), (1.32, '#F8BE84', 0.4), (1.0, '#FFC77E', 0.8), (0.86, '#FFD496', 1.05)]):
         out.append(kit('cylinder', 'paper', c, radius=r * rr, height=0.01, position=[x, y + 0.12 - 0.03 * k, z],
                        rotate=[90, 0, 0], emit=e, segments=128, shadow=False))
@@ -54,11 +54,9 @@ def strata(x, y, r, h, layers, seed, squash=0.7):
 
 
 def tumbleweed(x, y, r):
-    """A raffia tumbleweed mid-roll, lifted a hair off the sand on its bounce, a little dust kicked up behind it."""
+    """A raffia tumbleweed mid-roll, lifted a hair off the sand on its bounce."""
     out = [kit('ext', 'paper', '#C79A64', module='dust', fn='tumbleweed', radius=r, count=48, strand=0.0026, seed=5,
                position=[x, y, r + 0.035], rotate=[12, 30, 0])]
-    out.append(kit('puffs', 'wool', PUFF, puffs=[[-r * 1.15, r * 0.35, r * 0.42], [-r * 1.75, r * 0.3, r * 0.3],
-                                                 [-r * 2.2, r * 0.22, r * 0.2]], depth=0.8, position=[x, y + 0.05, 0.0]))
     return out
 
 
@@ -124,57 +122,59 @@ def _foot(L):
 
 
 def motes():
-    return [kit('scatter', 'glow', '#FFD9A0', emit=1.5, count=55, radius=[0.002, 0.005], seed=7,
-                **{'in': [-0.6, -0.2, 0.2, 1.6, 1.2, 1.6]}, shadow=False)]
+    return [kit('scatter', 'glow', '#FFD9A0', emit=1.2, count=45, radius=[0.002, 0.0045], seed=7,
+                **{'in': [-1.2, 0.2, 0.3, 1.6, 2.0, 1.8]}, shadow=False)]
 
 
 def props():
-    out = [kit('box', 'sand', SAND, tint2=SAND2, size=[16.0, 14.0, 0.04], position=[0.0, -2.0, -0.04])]
+    out = [kit('box', 'sand', SAND, tint2=SAND2, size=[20.0, 16.0, 0.04], position=[0.0, 0.0, -0.04])]
     out += sky()
-    # the mesas, far: rust and terracotta strata, the sun sinking behind the left one
-    # the plateaus: broad, flat-topped, sheer-sided, Monument Valley in cut suede, receding into the warm haze
-    out += [strata(-2.6, 5.5, 1.9, 1.05, ['#C8714A', RUST, '#B5563A', TERRA, '#A94B31'], 1, squash=0.38),
-            strata(1.75, 5.0, 0.42, 1.15, ['#CD7A50', TERRA, RUST, '#C06041', RUST], 2, squash=0.85),
-            strata(4.1, 5.9, 1.15, 0.85, ['#C86B45', RUST, TERRA, '#B0502F'], 3, squash=0.4),
-            strata(-0.2, 5.85, 0.9, 0.55, ['#D08058', '#C46A47', '#BE6142'], 4, squash=0.45)]
-    out += tumbleweed(-1.25, 0.5, 0.28)
-    out += cactus(2.55, 2.5, 0.7)
-    out += [kit('ext', 'corduroy', '#D68650', module='dust', fn='dunes', size=[14.0, 3.4], position=[0.5, 2.9, 0.0],
-                ridges=[[-0.9, 0.32, 0.55], [0.1, 0.42, 0.6], [1.0, 0.5, 0.6]], seed=4, rib='Y', grain=2.0),
-            kit('ext', 'corduroy', '#E09A62', module='dust', fn='dunes', size=[12.0, 1.8], position=[-0.5, -2.7, 0.0],
-                ridges=[[0.0, 0.3, 0.45]], seed=9, rib='Y', grain=2.0)]
-    out += streak(0.75, 0.15)
+    # the plateaus: broad, flat-topped, sheer-sided, Monument Valley in cut suede, rising over the horizon behind the
+    # speaker and receding into the warm haze; the slim butte stands in front of the setting sun
+    out += [strata(-2.0, 6.4, 2.3, 1.9, ['#C8714A', RUST, '#B5563A', TERRA, '#A94B31', '#BC5A3A'], 1, squash=0.4),
+            strata(3.9, 6.0, 0.55, 2.2, ['#CD7A50', TERRA, RUST, '#C06041', RUST, TERRA], 2, squash=0.85),
+            strata(1.2, 7.2, 1.5, 1.15, ['#D08058', '#C46A47', '#BE6142', '#C86B45'], 4, squash=0.45),
+            strata(6.4, 7.0, 1.6, 1.4, ['#C86B45', RUST, TERRA, '#B0502F'], 3, squash=0.4)]
+    # corduroy dunes between, their ribs along the crests
+    out += [kit('ext', 'corduroy', '#D68650', module='dust', fn='dunes', size=[18.0, 4.0], position=[0.5, 3.4, 0.0],
+                ridges=[[-1.1, 0.4, 0.6], [0.1, 0.55, 0.65], [1.2, 0.7, 0.65]], seed=4, rib='Y', grain=1.4)]
+    # beside the speaker: the tumbleweed bouncing in from the left, the roadrunner's cloud behind to the right
+    out += tumbleweed(-0.85, 0.4, 0.3)
+    out += streak(1.05, 1.1)
+    out += cactus(2.75, 2.6, 0.85)
+    # the near edge, soft: two suede stones at the lower right
+    out += [mound(1.25, -0.95, 0.0, 0.24, 0.19, 0.16, '#B9603F', material='suede'),
+            mound(1.55, -0.75, 0.0, 0.13, 0.11, 0.085, '#C77048', material='suede')]
     out += motes()
     return out
 
 
 def lights():
     return {
-        # warm bounce off the sand and sky into the front, so the face reads against the light
-        'fill': {'type': 'area', 'size_m': [3.0, 2.0], 'orbit': {'azimuth_deg': 10, 'elevation_deg': 18, 'distance_m': 5.0},
-                 'target': [0.0, 0.0, 0.7], 'irradiance': 1.3, 'color': '#FFD2A8'},
-        # the paper sun's own glow from behind, on the speaker's back edges
-        'rim': {'type': 'area', 'size_m': [2.0, 1.2], 'orbit': {'azimuth_deg': SUN_AZ + 10, 'elevation_deg': 20, 'distance_m': 4.5},
-                'target': [0.0, 0.0, 0.9], 'irradiance': 2.6, 'color': '#FFB070'},
+        # the key: warm light bounced off the sand onto the speaker's front
+        'key': {'type': 'area', 'size_m': [1.6, 1.6], 'orbit': {'azimuth_deg': -42, 'elevation_deg': 22, 'distance_m': 3.4},
+                'target': [0.0, 0.0, 0.65], 'irradiance': 2.2, 'color': '#FFD6AA'},
+        # the sun's own glow from behind on the speaker's back edges, through the acrylic
+        'rim': {'type': 'area', 'size_m': [1.6, 1.0], 'orbit': {'azimuth_deg': SUN_AZ + 8, 'elevation_deg': 16, 'distance_m': 3.5},
+                'target': [0.0, 0.0, 0.8], 'irradiance': 3.2, 'color': '#FFAE66'},
     }
 
 
 def shot():
-    st = {'kind': 'stage', 'kit_scale': 11.0, 'props': props()}
+    st = {'kind': 'stage', 'kit_scale': 6.0, 'props': props()}
     s = frame('dust', st, lights(),
-              tilt_shift(elevation=19, azimuth=20, distance=8.2, lens=62, target=(0.75, 0.6, 0.85),
-                         focus=(0.0, -0.15, 0.7), miniature=11),
+              tilt_shift(elevation=3.5, azimuth=-15, distance=4.9, lens=60, target=(0.12, 0.0, 0.66),
+                         focus=(0.0, -0.12, 0.66), fstop=5.6, miniature=5),
               'barkhorn, Dust, golden hour in a suede desert',
               sky={'kind': 'gradient', 'zenith': '#F0B488', 'horizon': '#F6C899', 'ground': '#B8683F', 'strength': 0.35},
               fin=finish(bloom=0.3, saturation=0.18, lift=0.04, lift_color='#5C2A1C', vignette=0.22),
-              rotate_z=16.0, haze={'box_m': [-9.0, 0.9, -0.1, 9.0, 6.0, 7.0], 'density': 0.012, 'anisotropy': 0.6,
+              rotate_z=10.0, haze={'box_m': [-12.0, 0.8, -0.1, 12.0, 7.6, 8.0], 'density': 0.009, 'anisotropy': 0.6,
                                     'color': '#FFD8B0'})
     s['sun'] = {'irradiance': 8.0, 'azimuth_deg': SUN_AZ, 'elevation_deg': SUN_EL, 'angle_deg': 2.0, 'color': '#FFB574'}
     return s
 
 
 def portrait():
-    """The 4:5 frame: the same set from the same side, nearer the speaker's axis, the sun above it and the streak and
-    footprints running out to the lower right."""
-    return portrait_of(shot(), **tilt_shift(elevation=20, azimuth=8, distance=6.4, lens=72, target=(-0.17, 0.6, 0.98),
-                                             focus=(0.0, -0.15, 0.7), miniature=11))
+    """The 4:5 frame: the same set and light, the camera nearer and the lens longer, the speaker taller in the frame."""
+    return portrait_of(shot(), **tilt_shift(elevation=3.0, azimuth=-15, distance=3.85, lens=80, target=(-0.1, 0.0, 0.72),
+                                             focus=(0.0, -0.12, 0.66), fstop=5.6, miniature=5))
