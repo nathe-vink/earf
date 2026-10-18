@@ -127,3 +127,8 @@ the reflection probe where the ring's face mirrors (low in front, toward the cam
 (8 washed it pale): duel 13 on Ice, both orders, **the card wins** (6.1 to 5.8 and 5.5 to 5.0; "a moulded part catching
 the light" against "a painted decal"). The heroes take it (bright_hero); the woofer and horn macros re-render on their
 rig unchanged (the card is placed for the hero's camera). The lineup is off the page (the coordinator) and not rendered.
+
+The drivers re-render (rig 3cff7ec, helpers d1 to d5) merged: the eight heroes and the woofer and horn macros. Checked
+side by side: identical framing; the paper measures the same in all eight (lum 249, R250 B246 at the upper right); every
+frame's shot.json matches its shot file and carries the ring card; Haze (re-run after a container restart) matches the
+rest. The woofer macro shows the 15PR400's ribbed surround and cone; the horn macro the HF driver's machined exit.
