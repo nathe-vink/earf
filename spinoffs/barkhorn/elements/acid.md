@@ -93,7 +93,8 @@ What holds it back, in the critics' words and mine:
 
 - Proofs: `--scale 0.3 --samples 32` about 1.5 to 2 minutes; critic proofs `--scale 0.5 --samples 128` about 8 to 12
   minutes (4 CPU cores).
-- Finals: 2400 x 1600 and 1600 x 2000, 512 samples, the denoiser on. Times below.
+- Finals: 2400 x 1600 and 1600 x 2000, 512 samples (adaptive), the denoiser on: the landscape 128 minutes (7643 s of
+  render), the portrait 100 minutes (5991 s). PNGs 3.7 MB and 3.0 MB; the raw frames are not committed.
 
 ## Software and environment
 
