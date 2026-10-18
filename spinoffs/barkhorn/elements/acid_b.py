@@ -63,14 +63,14 @@ def props(cam):
             scale=[1.0, 3.0], z=-0.3, seed=18, darken=0.75, film_rough=0.5, tilt_deg=15.0, avoid=SUN_FAR),
         # the rain, and where it lands
         ext('rain', camera=cam, count=65000, near=5.0, far=60.0, length=[0.08, 0.16], radius=[0.0008, 0.0014],
-            lean=[0.09, 0.02], lean_jitter_deg=3.0, z=[0.0, 30.0], opacity=[0.12, 0.45], scatter=0.9, rough=0.25, clear=0.5,
+            lean=[0.09, 0.02], lean_jitter_deg=3.0, z=[0.0, 30.0], opacity=[0.12, 0.5], scatter=0.9, rough=0.25, clear=0.1,
             avoid=[[0.0, 0.0, 0.4]], seed=3),
         # a few drops close to the lens, far out of focus
         ext('rain', camera=cam, count=30, near=1.5, far=4.0, length=[0.04, 0.08], radius=[0.0006, 0.001],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.15, 0.35], scatter=0.7, rough=0.25, seed=13),
         # and the curtain beyond, too fine to count
         ext('rain', camera=cam, count=300000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
-            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.08, scatter=0.9, rough=0.25, clear=0.3, seed=23),
+            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.08, scatter=0.9, rough=0.25, clear=0.1, seed=23),
         ext('splashes', area=[-3.0, -7.0, 3.5, 3.0], z=-0.11, count=900, radius=[0.003, 0.014], opacity=0.2,
             avoid=[[0.0, 0.0, 0.45]], seed=5),
     ]
