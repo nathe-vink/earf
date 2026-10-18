@@ -9,7 +9,7 @@ import math, os
 from common import area, camera, finish, piece, portrait_of, shot as frame, sky, sun_from_sky
 
 HDRI = 'kloppenheim_06_puresky'
-ROT = float(os.environ.get('DUSTB_ROT', 330.0))          # the sky's sun 21 degrees up at azimuth 92 (the speaker's right)
+ROT = float(os.environ.get('DUSTB_ROT', 312.0))          # the sky's sun 21 degrees up at azimuth 110 (a little behind the speaker's right)
 SAND = dict(material='pbr', texture='red_sand', tex_scale=1.6, tint='#C0633A', tint_mix=0.6, res='4k', bump=0.8)
 STONY = dict(texture='red_mud_stones', tex_scale=1.5, tint='#A45232', tint_mix=1.0, mask=[2.0, 0.4], bump=1.0)
 CLIFF = dict(material='pbr', texture='rock_face', tex_scale=15.0, tint='#C04A24', tint_mix=0.92, res='4k',
@@ -48,7 +48,7 @@ def props():
     out = [piece('ext', module='dust_b_el', fn='terrain', eye=[round(ex, 3), round(ey, 3)], heading=round(heading, 2),
                  half_angle=44.0, r0=1.2, r1=CLIP * 0.8, segments=460, flat=[0.0, 0.0, 2.2], swell=0.45,
                  swell_size=18.0, rim=60.0, vary=[40.0, 0.4], ripples=[0.11, 0.3, 20.0, 9.0, 4.0],
-                 swell2=[0.12, 5.0], swell3=[6.0, 500.0, 250.0], albedo=0.92, spec=0.05, mixes=[STONY], **SAND),
+                 swell2=[0.12, 5.0], swell3=[14.0, 380.0, 140.0], albedo=0.92, spec=0.05, mixes=[STONY], **SAND),
            piece('box', size=[600.0, 600.0, 0.1], position=[0.0, 0.0, -0.5], **SAND)]
     # the buttes, at their real size: the Mittens to the left and right of the horn, a long mesa beyond
     out += [butte(3000, -6, 230, 300, 1, turn=10, thumbs=[(185, 1.38, 30, 0.86)], squash=0.55),
@@ -86,7 +86,7 @@ def props():
 
 def lights():
     # a soft bounce off the sunlit sand into the speaker's front, as a reflector would give
-    return {'bounce': area(-30, 8, 4.0, 0.8, '#F3D6BE', (4.0, 2.0), (0.0, 0.0, 0.6))}
+    return {'bounce': area(-25, 4, 4.0, 2.6, '#F6C9A0', (6.0, 1.5), (0.0, 0.0, 0.6))}
 
 
 def _cam(**k):
