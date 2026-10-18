@@ -58,3 +58,31 @@ Concept A1 was a deep misty grove built entirely from modelled trunks. Three pas
 | 7 | 6.0 | iterate | The sun pool on the dirt, not the speaker; the horn crushed; shafts weak; flat fill and a softbox strip on the front; stamped moss mat; no log or agarics visible; the left trunk too big | Sun to −95°, elevation 50°: a sun-only render showed the left ferns shading the front at 38°. Pool 1.9 m across on the speaker. Reflector down to 1.2, warm bounce off, card 0.5, and a kicker behind-left for the horn. Mist 0.08. Five more trunks behind. The near trunk 1.5 m back. A mossy log 3–6 m behind at the right. Agarics on clear duff front-right. Moss thinned into irregular clumps. |
 | 8 | 5.8 | iterate | The horn a chrome blob (a white panel and a black void); the body dark (23); no shafts; the trunk a flat wall; the right edge lost; agarics hidden; a stick in front; centred | The pass-8 reflector and kicker mirrored in the horn as softboxes. The reflector is now diffuse only (3.0) and a dim scrim is seen only in reflections, so the horn shows mist, not a lamp. A warm rim behind-right. Sun −110°, elevation 45°. Shafts 7–12 m back at the left, and a sliver on the near trunk, now 6.4 m back with bark displaced 15 cm. Mist 0.13. Agarics on clear duff 0.7 m front-right, and no twigs in a 0.75 m zone in front. Camera azimuth +12° with shift_x −0.12, so the speaker sits right of centre with room for type at the left. |
 | 9 | 5.5 | iterate | The horn crushed against dark ferns (11.8); the sun pool's hot spot on the agarics (118), not the speaker; a flat trunk; toy agarics; the right side panel black; dark overall | Stopped here, per the coordinator's rule: two passes in a row after the concept change gained under 0.5 (6.0 → 5.8 → 5.5). |
+
+## Duels and the final rig
+
+Two blind duels, each with a fresh judge seeing both frames in random order (critic/ab/PROMPT-DUEL.txt):
+
+- **Proof 7 against proof 8:** proof 7 won, 6.0 to 4.5. Its horn reads as dark tinted glass where proof 8's is a pale glow with a black smudge, and its cabinet, woofer, grounding and bark are all better.
+- **Proof 7 against proof 9:** proof 7 won, 6.5 to 5.5. Its body is lit and solid green, the horn has a rim, the woofer has depth, there is a moss pad at its base, and the bark is warm. Proof 9 kept the better shafts.
+
+So the finals use the pass-7 rig (commit e1f7c16, restored as `shot()`), unchanged but for the portrait camera:
+
+- the same eye height (0.8 m) and side (+18°);
+- an 85 mm lens at 6.4 m, the frame raised by `shift_y` 0.12, so the redwood rises past the horn and the ferns fill the foot.
+
+## Where it stands, honestly
+
+The best blind score is **6.0** (pass 7; 6.5 in its duel), against a target of 8.5 that the coordinator has since set aside for every set. Nine passes, and a concept change at pass 4, have not taken it past that. What holds it back:
+
+- **The product in this light.** The bottle-green acrylic reads dark: its lining stops the light from behind. Light from the front lights it but flattens it, and every bounce that lifts it shows in the horn as a softbox. The horn's mouth mirrors whatever surrounds it, and in a dark forest that is dark. Passes 1 to 9 swung between those two failures.
+- **The ground.** A Poly Haven duff texture with strewn scans reads as CG at mid-distance. Real needle litter at true scale (millions of needles) is beyond this set.
+- **The modelled pieces.** The trunk, the log and the fly agarics read as models next to the scans. A scanned redwood bark with deep fissures and a scanned *Amanita* would help most. Poly Haven has neither.
+- **The background.** `mossy_forest` is a subtropical forest, not a redwood grove. At 4k it is soft when it is in focus.
+
+What would move it:
+
+- a scanned redwood (or a deep-fissured bark set with real height);
+- a scanned fly agaric;
+- a forest HDRI shot in a real redwood grove;
+- or the frame taken somewhere the acrylic can be backlit without the lining in the way (a clearing at dawn with the sun low behind, through thinner mist).
