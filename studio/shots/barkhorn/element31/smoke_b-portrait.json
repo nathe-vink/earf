@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.06
+     -0.09
     ],
     "rotate_z": -18.0,
     "hide": [
@@ -35,15 +35,17 @@
      18.0,
      0.0
     ],
-    "displace": 0.035,
-    "relief": 0.45,
+    "displace": 0.0,
+    "relief": 0.5,
     "res": "4k",
     "cells": 1500,
     "flat": [
      0.0,
      0.0,
      1.2
-    ]
+    ],
+    "procedural_relief": true,
+    "relief_bump": 1.2
    },
    {
     "kind": "kit",
@@ -55,133 +57,9 @@
      0.43
     ],
     "rotate_z": -18.0,
-    "height": 0.035,
-    "reach": 0.05,
+    "height": 0.03,
+    "reach": 0.06,
     "mat_object": "prop0-kit"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_b_el",
-    "fn": "dry_scatter",
-    "models": [
-     "grass_medium_01",
-     "grass_medium_02"
-    ],
-    "count": 4,
-    "area": [
-     -1.8499999999999999,
-     2.5,
-     -0.44999999999999996,
-     3.9000000000000004
-    ],
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      0.9
-     ]
-    ],
-    "scale": [
-     0.3,
-     1.1
-    ],
-    "z": -0.1,
-    "seed": 11,
-    "res": "1k"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_b_el",
-    "fn": "dry_scatter",
-    "models": [
-     "grass_medium_01",
-     "grass_medium_02"
-    ],
-    "count": 3,
-    "area": [
-     1.5,
-     2.0,
-     2.7,
-     3.2
-    ],
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      0.9
-     ]
-    ],
-    "scale": [
-     0.3,
-     1.1
-    ],
-    "z": -0.1,
-    "seed": 12,
-    "res": "1k"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_b_el",
-    "fn": "dry_scatter",
-    "models": [
-     "grass_medium_01",
-     "grass_medium_02"
-    ],
-    "count": 4,
-    "area": [
-     -3.5,
-     5.6,
-     -1.7000000000000002,
-     7.4
-    ],
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      0.9
-     ]
-    ],
-    "scale": [
-     0.3,
-     1.1
-    ],
-    "z": -0.1,
-    "seed": 13,
-    "res": "1k"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_b_el",
-    "fn": "dry_scatter",
-    "models": [
-     "grass_medium_01",
-     "grass_medium_02"
-    ],
-    "count": 3,
-    "area": [
-     -4.3,
-     0.19999999999999996,
-     -2.7,
-     1.8
-    ],
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      0.9
-     ]
-    ],
-    "scale": [
-     0.3,
-     1.1
-    ],
-    "z": -0.1,
-    "seed": 14,
-    "res": "1k"
    },
    {
     "kind": "kit",
@@ -827,16 +705,16 @@
     "fn": "smoke",
     "box": [
      -6.0,
-     2.5,
+     4.6,
      0.0,
      3.0,
-     3.5,
+     5.6,
      2.5
     ],
     "drift": 6.0,
     "height": 1.5,
     "thickness": 0.5,
-    "density": 16.0,
+    "density": 10.0,
     "lo": 0.4,
     "hi": 0.6,
     "scale": [
@@ -850,8 +728,8 @@
      -2.0
     ],
     "seed": 3,
-    "color": "#8C857D",
-    "absorb_color": "#A09890"
+    "color": "#A9ABAE",
+    "absorb_color": "#B8BBBE"
    },
    {
     "kind": "kit",
@@ -883,8 +761,8 @@
      0.0
     ],
     "seed": 7,
-    "color": "#9A9FA6",
-    "absorb_color": "#A09890"
+    "color": "#A9ABAE",
+    "absorb_color": "#B8BBBE"
    },
    {
     "kind": "kit",
@@ -898,12 +776,12 @@
     "height": 4.5,
     "lean": 3.5,
     "bend": 1.6,
-    "width": 0.4,
+    "width": 0.5,
     "spread": 0.35,
-    "density": 12.0,
+    "density": 25.0,
     "seed": 5,
     "color": "#A3A8AF",
-    "absorb_color": "#B0A89C"
+    "absorb_color": "#B8BBBE"
    },
    {
     "kind": "kit",
@@ -920,8 +798,8 @@
     ],
     "clear_y": 1.0,
     "full_y": 26.0,
-    "density": 0.07,
-    "floor": 0.06,
+    "density": 0.05,
+    "floor": 0.04,
     "ground_boost": 0.8,
     "ground_h": 4.0
    }
@@ -949,13 +827,13 @@
   "overhead": {
    "type": "flag",
    "size_m": [
-    3.0,
-    2.2
+    2.0,
+    2.0
    ],
    "orbit": {
     "azimuth_deg": -15.0,
-    "elevation_deg": 40.0,
-    "distance_m": 2.6
+    "elevation_deg": 75.0,
+    "distance_m": 1.8
    },
    "target": [
     0.0,
@@ -967,12 +845,12 @@
   "mistglow": {
    "type": "area",
    "size_m": [
-    1.2,
-    1.8
+    1.6,
+    2.2
    ],
    "orbit": {
-    "azimuth_deg": 160.0,
-    "elevation_deg": 14.0,
+    "azimuth_deg": 150.0,
+    "elevation_deg": 18.0,
     "distance_m": 2.8
    },
    "target": [
@@ -980,7 +858,7 @@
     0.0,
     0.65
    ],
-   "irradiance": 3.2,
+   "irradiance": 7.0,
    "color": "#F2EEE6",
    "specular": 0.1,
    "receivers": [
@@ -1006,8 +884,8 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 1.6,
-  "white_balance_k": 7000,
+  "exposure": 1.3,
+  "white_balance_k": 6800,
   "white_balance_tint": 10,
   "look": "AgX - Base Contrast"
  },
@@ -1041,10 +919,17 @@
  },
  "sky": {
   "kind": "hdri",
-  "polyhaven": "snow_field",
-  "rotation_deg": 200.0,
+  "polyhaven": "birchwood",
+  "rotation_deg": 135.0,
   "strength": 1.0,
   "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": -100.3,
+  "elevation_deg": 14.0,
+  "irradiance": 4.0,
+  "angle_deg": 2.0,
+  "color": "#FFE6C6"
  },
  "finish": {
   "enabled": true,
@@ -1060,7 +945,7 @@
    "bloom_threshold": 0.85,
    "saturation": 0.0,
    "lift": 0.02,
-   "lift_color": "#1A1612",
+   "lift_color": "#16181A",
    "vignette": 0.06
   }
  }

@@ -121,7 +121,7 @@ def birch_material(bpy, bark='bark_willow', res='2k', name='birch-bark', p_len=(
 
 def _trunk(bm, r0, height, lean, lean_dir, rnd, sides=28, step=0.2):
     """A tapered tube from z 0 (a little below the ground) to `height`, bending gently, its section a touch uneven."""
-    rings = []
+    rings, axis = [], []
     n = int(height / step) + 1
     ph = rnd.uniform(0, 100)
     dx, dy = math.cos(math.radians(lean_dir)), math.sin(math.radians(lean_dir))
@@ -132,6 +132,7 @@ def _trunk(bm, r0, height, lean, lean_dir, rnd, sides=28, step=0.2):
         bend = math.tan(math.radians(lean)) * z + 0.25 * math.sin(z * 0.45 + ph) * t
         cx = dx * bend + 0.06 * noise.noise(Vector((ph, z * 0.3, 0.0)))
         cy = dy * bend + 0.06 * noise.noise(Vector((ph, 0.0, z * 0.3)))
+        axis.append((z, cx, cy, r))
         ring = []
         for k in range(sides):
             a = 2 * math.pi * k / sides
@@ -142,10 +143,45 @@ def _trunk(bm, r0, height, lean, lean_dir, rnd, sides=28, step=0.2):
         for k in range(sides):
             bm.faces.new((a[k], a[(k + 1) % sides], b[(k + 1) % sides], b[k]))
     bm.faces.new(rings[-1])
+    return axis
+
+
+def _branch(bm, start, az, el, length, r0, rnd, sides=8, mat=1):
+    """A limb from `start`, `az`/`el` degrees, `length` long, tapering from `r0`, drooping a little as it goes."""
+    d = Vector((math.cos(math.radians(az)) * math.cos(math.radians(el)), math.sin(math.radians(az)) * math.cos(math.radians(el)),
+                math.sin(math.radians(el))))
+    side = d.cross(Vector((0, 0, 1))).normalized(); up = side.cross(d).normalized()
+    n = 6; rings = []
+    for i in range(n + 1):
+        t = i / n
+        c = Vector(start) + d * (length * t) - Vector((0, 0, 1)) * (0.12 * length * t * t)
+        r = r0 * (1.0 - 0.8 * t) + 0.002
+        rings.append([bm.verts.new(c + (side * math.cos(2 * math.pi * k / sides) + up * math.sin(2 * math.pi * k / sides)) * r)
+                      for k in range(sides)])
+    for a, b in zip(rings, rings[1:]):
+        for k in range(sides):
+            f = bm.faces.new((a[k], a[(k + 1) % sides], b[(k + 1) % sides], b[k])); f.material_index = mat
+    f = bm.faces.new(rings[-1][::-1]); f.material_index = mat
+
+
+def branch_material(bpy, name='birch-limb'):
+    """Birch limbs darken away from the trunk: a grey-brown, almost black bark, matte."""
+    m = bpy.data.materials.get(name)
+    if m:
+        return m
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; L = nt.links.new
+    bs = nt.nodes.get('Principled BSDF')
+    tc = _node(nt, 'ShaderNodeTexCoord', -900, 0)
+    n = _noise(nt, tc.outputs['Object'], -500, 0, (30.0, 30.0, 30.0), detail=4)
+    r = _ramp(nt, -250, 0, [(0.35, _lin('#2A2522')), (0.65, _lin('#5A524B'))])
+    L(n.outputs['Fac'], r.inputs['Fac']); L(r.outputs['Color'], bs.inputs['Base Color'])
+    bs.inputs['Roughness'].default_value = 0.85
+    return m
 
 
 def birches(bpy, name, p, kit):
     mat = birch_material(bpy, p.get('bark', 'bark_willow'))
+    limb = branch_material(bpy)
     rnd = random.Random(p.get('seed', 3))
     obs = []
     for i, t in enumerate(p['trunks']):
@@ -153,7 +189,16 @@ def birches(bpy, name, p, kit):
         lean = t[3] if len(t) > 3 else rnd.uniform(0, 3)
         ldir = t[4] if len(t) > 4 else rnd.uniform(0, 360)
         bm = bmesh.new()
-        _trunk(bm, r, p.get('height', 16.0) * rnd.uniform(0.9, 1.1), lean, ldir, rnd)
+        axis = _trunk(bm, r, p.get('height', 16.0) * rnd.uniform(0.9, 1.1), lean, ldir, rnd)
+        # limbs: a few broken stubs low down, longer limbs higher, most of them dead in a wood this close
+        H = p.get('height', 16.0)
+        for k in range(rnd.randint(*p.get('limbs', (3, 6)))):
+            z = rnd.uniform(1.5, 9.0)
+            az = rnd.uniform(0, 360)
+            _, cx, cy, rr = min(axis, key=lambda a: abs(a[0] - z))
+            lng = rnd.uniform(0.12, 0.45) if z < 4.5 else rnd.uniform(0.6, 2.2)
+            st = (cx + math.cos(math.radians(az)) * rr * 0.8, cy + math.sin(math.radians(az)) * rr * 0.8, z)
+            _branch(bm, st, az, rnd.uniform(25, 60), lng, rr * rnd.uniform(0.18, 0.32), rnd)
         for k in range(1, int(t[5]) if len(t) > 5 else 1):          # a clump: more stems from one foot, leaning apart
             sub = bmesh.new()
             a = ldir + 180 + rnd.uniform(-50, 50) * k
@@ -164,7 +209,7 @@ def birches(bpy, name, p, kit):
         me = bpy.data.meshes.new(f'{name}-{i}'); bm.to_mesh(me); bm.free()
         for f in me.polygons:
             f.use_smooth = True
-        me.materials.append(mat)
+        me.materials.append(mat); me.materials.append(limb)
         ob = bpy.data.objects.new(f'{name}-{i}', me); bpy.context.scene.collection.objects.link(ob)
         ob.location = (x, y, 0.0)
         obs.append(ob)
@@ -286,6 +331,22 @@ def snow(bpy, name, p, kit):
     sp = _node(nt, 'ShaderNodeMapRange', 350, 600, **{'From Min': 0.08, 'From Max': 0.02, 'To Min': 0.75, 'To Max': 0.25})
     L(vo.outputs['Distance'], sp.inputs['Value'])
     L(sp.outputs['Result'], bs.inputs['Roughness'])
+    if p.get('procedural_relief', False):
+        # the scan's height map carries its twigs' holes, which a low sun turns into rows of dark dots that tile:
+        # drop its displacement and normals for wind-worked snow of our own (ripples across the wind, fine grain)
+        out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+        for l in list(out.inputs['Displacement'].links):
+            nt.links.remove(l)
+        for l in list(bs.inputs['Normal'].links):
+            nt.links.remove(l)
+        rip = _noise(nt, tc.outputs['Object'], 100, 1200, tuple(p.get('ripple', (1.2, 4.0, 1.2))), detail=6, rough=0.55,
+                     distortion=0.6)
+        grain = _noise(nt, tc.outputs['Object'], 100, 1450, (25.0, 25.0, 25.0), detail=5)
+        hb = _node(nt, 'ShaderNodeMath', 350, 1300); hb.operation = 'MULTIPLY_ADD'
+        hb.inputs[1].default_value = 0.25
+        L(grain.outputs['Fac'], hb.inputs[0]); L(rip.outputs['Fac'], hb.inputs[2])
+        bmp = _node(nt, 'ShaderNodeBump', 550, 1300, Strength=p.get('relief_bump', 0.5), Distance=p.get('bump_dist', 0.05))
+        L(hb.outputs['Value'], bmp.inputs['Height']); L(bmp.outputs['Normal'], bs.inputs['Normal'])
     return [ob]
 
 
