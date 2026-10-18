@@ -1,0 +1,50 @@
+{
+ "date": "2026-10-18",
+ "new": "renders/2026-10-18/barkhorn/catalogue31/p11-blue-on.png",
+ "old": "renders/2026-10-18/barkhorn/catalogue31/p10-blue-on.png",
+ "new_score": 6.0,
+ "old_score": 5.7,
+ "prefer": "new",
+ "differences": [
+  {
+   "what": "A's backdrop is brighter at the top (lum median 230 vs 215) and falls off further toward the floor, so the sweep has more depth and the horn's rim and dark compression driver stand out more cleanly against it; B's upper backdrop is greyer and flatter",
+   "region": [
+    0,
+    0,
+    540,
+    260
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "A's floor is darker (lum median 175 vs 181), so the cabinet's dark base frame and its contact shadow read with more weight and the speaker feels grounded; in B the brighter floor lowers the contrast at the base and the product floats a little",
+   "region": [
+    80,
+    900,
+    460,
+    1080
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "In B the light on the right side panel is brighter and more even (lum 221 vs 207), which flattens the tinted acrylic's tonal gradation and its depth; A keeps a darker, more glass-like gradient down that panel",
+   "region": [
+    360,
+    480,
+    440,
+    950
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "The product itself (woofer disc, ports, horn, edge sharpness, grain level) is effectively identical in both, with the same high-frequency noise, so neither image wins on surface finish. Both share the same shortfalls: a flat matte woofer disc, white inner baffles that read like foam, and a soft horn edge",
+   "region": [
+    100,
+    250,
+    440,
+    960
+   ],
+   "favours": "A"
+  }
+ ]
+}

@@ -1,0 +1,91 @@
+{
+ "shot": "studio/shots/barkhorn/companions/concept-l3.json",
+ "image": "renders/2026-10-18/barkhorn/companions/concepts/concept-l3.png",
+ "seconds": {
+  "build": 0.3,
+  "render": 94.2
+ },
+ "samples": 48,
+ "size": [
+  900,
+  720
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    450.0,
+    576.8
+   ],
+   "box_px": [
+    298,
+    507,
+    613,
+    663
+   ],
+   "depth_m": 1.418
+  },
+  "led#0": {
+   "part": "led",
+   "centre_px": [
+    450.0,
+    241.5
+   ],
+   "box_px": [
+    407,
+    235,
+    493,
+    249
+   ],
+   "depth_m": 1.418
+  },
+  "pod#0": {
+   "part": "pod",
+   "centre_px": [
+    450.0,
+    261.6
+   ],
+   "box_px": [
+    392,
+    235,
+    509,
+    290
+   ],
+   "depth_m": 1.418
+  },
+  "shade#0": {
+   "part": "shade",
+   "centre_px": [
+    450.0,
+    159.4
+   ],
+   "box_px": [
+    194,
+    65,
+    735,
+    296
+   ],
+   "depth_m": 1.418
+  },
+  "stem#0": {
+   "part": "stem",
+   "centre_px": [
+    450.0,
+    418.2
+   ],
+   "box_px": [
+    429,
+    277,
+    472,
+    563
+   ],
+   "depth_m": 1.418
+  }
+ }
+}

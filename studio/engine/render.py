@@ -138,7 +138,7 @@ def main():
     cd = bpy.data.cameras.new('camera'); cam = bpy.data.objects.new('camera', cd); scene.collection.objects.link(cam)
     scene.camera = cam
     cd.sensor_fit = 'HORIZONTAL'; cd.sensor_width = cam_spec.get('sensor_mm', 36.0); cd.lens = cam_spec.get('lens_mm', 50.0)
-    cd.clip_start = 0.01; cd.clip_end = 300
+    cd.clip_start = 0.01; cd.clip_end = cam_spec.get('clip_end', cam_spec.get('clip_end_m', 300))     # round 31b: hills kilometres off (Acid B's shots name it clip_end_m)
     C = Vector(cam_spec['position']); T = Vector(cam_spec.get('target', centre))
     W, H = sh.get('size', [1600, 1000])
     if cam_spec.get('level', True):
@@ -247,10 +247,20 @@ def main():
     # short, the edge renders black (round 31's critics), so a shot may raise these
     cy.glossy_bounces = min(cy.max_bounces, R.get('glossy_bounces', 8))
     cy.transmission_bounces = min(cy.max_bounces, R.get('transmission_bounces', 8))
+    cy.transparent_max_bounces = max(cy.transparent_max_bounces, R.get('transparent_bounces', 0))
     cy.volume_bounces = R.get('volume_bounces', 2)      # a material with a volume (frosted) scatters inside it
+    if 'volume_biased' in R:                            # big heterogeneous volumes (fog, cloud) march faster biased
+        cy.volume_biased = R['volume_biased']
+    if 'volume_step_rate' in R:
+        cy.volume_step_rate = R['volume_step_rate']
+    if 'volume_max_steps' in R:
+        cy.volume_max_steps = R['volume_max_steps']
     cy.sample_clamp_indirect = R.get('clamp', 10.0)
     cy.blur_glossy = R.get('filter_glossy', 0.5)
-    cy.caustics_reflective = False; cy.caustics_refractive = False
+    # caustics off by default (noise); a shot may turn them on so light reaches what stands behind clear parts (round
+    # 31b: the lining inside a tinted acrylic cabinet, lit by the sky through the acrylic)
+    cy.caustics_reflective = bool(R.get('caustics_reflective', False))
+    cy.caustics_refractive = bool(R.get('caustics_refractive', False))
     if a.threads:
         scene.render.threads_mode = 'FIXED'; scene.render.threads = a.threads
     scene.render.resolution_x = int(W * a.scale); scene.render.resolution_y = int(H * a.scale)

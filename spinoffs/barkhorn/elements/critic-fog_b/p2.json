@@ -1,0 +1,14 @@
+{"stage1": {"impression": "A believable misty headland: the grass scans, the boulder and the far ridges all read as real, and the fog has real depth behind the hills. But the light is flat and grey, with no dawn sun. The speaker looks parked against a rock rather than standing at the brow of a cliff. The left half of the clear cabinet dissolves into the bright fog wall. A dark mass of foreground grass takes up the bottom third, and the chrome-looking horn is the brightest, most CG-reading thing in the frame.", "score": 6.0},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "change": {"setting": "sun lamp irradiance / azimuth_deg", "from": "3.0, -150", "to": "7.0, -135 (sky matched)"}, "accept": {"region": [0, 560, 1200, 800], "metric": "lum_p95", "op": ">=", "value": 130}},
+  {"id": "c2", "change": {"setting": "boulder_01 position / scale", "from": "[0.55, 2.45, -0.12], 1.1", "to": "[0.1, 3.4, -0.2], 1.5"}, "accept": {"region": [300, 340, 330, 520], "metric": "lum_median", "op": "<=", "value": 110}},
+  {"id": "c3", "change": {"setting": "fog billows / edge softness / wisps billow_cut", "from": "[[160,12],[50,5],[15,1.5]] / 5.0 / 0.42", "to": "[[160,18],[50,9],[15,3]] / 2.5 / 0.55"}, "accept": {"region": [0, 280, 300, 450], "metric": "lum_range", "op": ">=", "value": 170}},
+  {"id": "c4", "change": {"setting": "bermuda tufts by the feet", "from": "count 40, scale [0.3, 0.5]", "to": "count 18, scale [0.15, 0.3], a 0.25 m clear ring in front"}, "accept": {"region": [330, 545, 520, 580], "metric": "lum_p95", "op": ">=", "value": 160}},
+  {"id": "c5", "change": {"setting": "camera", "from": "z 1.15, target z 0.66", "to": "z 0.95, target z 0.80, 1.2 m further back"}, "accept": null},
+  {"id": "c6", "change": {"setting": "bounce", "from": "0.75, #F3E6C8, 1.2 m", "to": "0.4, #D8DEE6, 2.4 m"}, "accept": {"region": [320, 340, 380, 540], "metric": "b_median", "op": ">=", "value": 150}},
+  {"id": "c7", "change": {"setting": "finish", "from": "saturation 0, lift 0, vignette 0.22", "to": "saturation 0.08, warm split-tone, lift 0.02, vignette 0.15"}, "accept": {"region": [0, 120, 1200, 200], "metric": "r_median", "op": ">=", "value": 196}},
+  {"id": "c8", "change": {"setting": "gullies / haze", "from": "[16,160] / 0.00025", "to": "[24,120] / 0.0004"}, "accept": {"region": [560, 180, 900, 270], "metric": "lum_range", "op": ">=", "value": 75}}],
+ "out_of_scope": [{"request": "The horn reads as polished chrome", "why": "Its material is the speaker's; only its light can change"}],
+ "score_if_fixed": 7.6,
+ "_note": "Condensed from the critic's reply: score, impression, changes and accept tests verbatim; problems, evidence and defects are in fog_b.md."}

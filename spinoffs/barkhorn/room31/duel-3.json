@@ -1,0 +1,73 @@
+{
+ "order": {
+  "A": "room31 final (scaled)",
+  "B": "r12-post"
+ },
+ "reply": {
+  "A": 6.5,
+  "B": 6.0,
+  "prefer": "A",
+  "differences": [
+   {
+    "what": "A's left woofer grille is lit evenly and shows a fine fabric/brushed texture with a clean rim; in B a hard window-mullion shadow cuts the grille in half and the disc reads as flat painted plastic",
+    "region": [
+     255,
+     455,
+     405,
+     600
+    ],
+    "favours": "A"
+   },
+   {
+    "what": "A's wall plaster texture is crisp and the light is warm and even; B's wall is softer and grainy in the shaded areas, with smeared, denoised-looking texture",
+    "region": [
+     600,
+     150,
+     800,
+     300
+    ],
+    "favours": "A"
+   },
+   {
+    "what": "In A the turntable and books sit in light, so the clear platter, gold spindle and book spines read; in B the turntable sits in shade and turns into a murky green-grey blur against a grey wall",
+    "region": [
+     650,
+     440,
+     960,
+     495
+    ],
+    "favours": "A"
+   },
+   {
+    "what": "A has a hard vertical green-and-yellow caustic streak running down the middle credenza door that looks like a render artifact; B's credenza is clean",
+    "region": [
+     640,
+     480,
+     800,
+     640
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "B's sunlit window patches on the wall make a stronger, more editorial light composition that frames the left speaker; A's light is a flat wash with one diagonal shadow edge",
+    "region": [
+     480,
+     30,
+     860,
+     480
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "Both have a green caustic spill on the wall and floor behind the right speaker; it is milder in A",
+    "region": [
+     1200,
+     420,
+     1440,
+     700
+    ],
+    "favours": "A"
+   }
+  ]
+ }
+}

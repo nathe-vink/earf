@@ -1,0 +1,378 @@
+{
+ "stage1": {
+  "impression": "A calm, believable living room with one sun raking across a plaster wall. The shadows agree with each other and the wood and plaster read as real materials, so the setting is close to editorial. What gives it away as a render: the window is darker than the sunlit interior, the foreground rug is a dead grey slab, the cabinets cast grey shadows instead of green light, and the woofer discs read as flat painted circles with black holes in the horns above them. The pair reads at a glance, but the frame is static and symmetrical, and the heading area is cut by a hard diagonal shadow.",
+  "score": 6.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The exterior through the glazing must read brighter than the interior wall that is in shadow (window lum_median >= 160 against the wall's ~94); now it is 92, which is physically inverted for a sunny afternoon",
+  "Sun passing through the tinted cabinets must leave visible green light on the wall or floor beside each speaker; the cabinet shadow on the wall is neutral grey now",
+  "The foreground rug must read as a real warm wool at the specified tint, not a cool grey noise slab (dE2000 15 against #7A6E60)",
+  "The two speakers must render as an identical pair: the right disc is 17 levels brighter than the left",
+  "The horn throats must show tone, not crushed black (88% crushed)",
+  "The heading's area of wall must be a clean, even field, not crossed by a hard light/shadow edge"
+ ],
+ "defects": [
+  {
+   "region": [
+    25,
+    50,
+    100,
+    600
+   ],
+   "what": "Exterior through the window is darker (lum 92) than the sunlit interior wall (228): the exposure is inverted and the window reads as a dim backdrop, not a sunny afternoon"
+  },
+  {
+   "region": [
+    150,
+    735,
+    1290,
+    810
+   ],
+   "what": "The rug is a cool grey (rgb 82,85,90), coarse, concrete-like slab, dE 15 from its #7A6E60 tint; its sunlit band is neutral grey (162,165,166) under a warm sun; it is a dead foreground band"
+  },
+  {
+   "region": [
+    1240,
+    400,
+    1440,
+    620
+   ],
+   "what": "The right cabinet's shadow on the wall is neutral grey (r63 g59 b60): no green transmitted light, although the brief is sun passing through the cabinets"
+  },
+  {
+   "region": [
+    310,
+    290,
+    370,
+    350
+   ],
+   "what": "Left horn throat crushed to black (88% crushed); same on the right [1070,290,1130,350]: reads as a hole"
+  },
+  {
+   "region": [
+    1060,
+    480,
+    1160,
+    580
+   ],
+   "what": "Right woofer disc lum 103 against the left's 86: the pair is lit unequally; both discs are flat (range 5.6) and too light against #2E4A2C"
+  },
+  {
+   "region": [
+    650,
+    60,
+    1000,
+    250
+   ],
+   "what": "The heading area is split by the diagonal window shadow (p5 100, p95 227); type set here would straddle a hard edge"
+  },
+  {
+   "region": [
+    0,
+    0,
+    30,
+    810
+   ],
+   "what": "A thin sliver of sheer and window frame at the left edge, cut by the frame edge, reads as an accident"
+  },
+  {
+   "region": [
+    1220,
+    640,
+    1440,
+    740
+   ],
+   "what": "The right floor falls to lum 41 and is muddy; the frame weights to the left"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1440,
+    810
+   ],
+   "what": "Rigidly symmetrical frontal composition with no foreground depth; reads as a configurator view more than a photographed room"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The window is darker than the room it lights, the single strongest render tell.",
+   "evidence": {
+    "region": [
+     25,
+     50,
+     100,
+     600
+    ],
+    "measured": "lum_median 92.3 vs sunlit wall 228 and the wall in shadow 94"
+   },
+   "change": {
+    "setting": "prop 14 exterior hdri strength (and sky strength)",
+    "from": "strength 2.2; sky strength 0.6",
+    "to": "strength 6.0; sky strength 1.0"
+   },
+   "expected": "The trees and sky read as a bright, slightly hazy afternoon exterior, brighter than any shadowed interior surface, a little below the sunlit wall",
+   "accept": {
+    "region": [
+     25,
+     50,
+     100,
+     600
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     150,
+     215
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The rug reads as a cool grey slab of coarse noise and deadens the bottom of the frame.",
+   "evidence": {
+    "region": [
+     250,
+     745,
+     1150,
+     805
+    ],
+    "measured": "rgb median 82,85,90 (blue-biased), dE2000 15.1 against #7A6E60, sunlit band neutral 162,165,166"
+   },
+   "change": {
+    "setting": "prop 3 rug",
+    "from": "texture poly_wool_herringbone, value 0.45, tex_scale 0.5, displace 0.01",
+    "to": "a finer flat-woven wool (or the same texture at tex_scale 1.6), value 0.75, displace 0.004, tint #7A6E60 kept, tint_mix 1.0"
+   },
+   "expected": "A warm oatmeal wool with a fine visible weave; its sunlit band warm like the floor's, its shadowed part a warm mid-brown, not blue-grey",
+   "accept": {
+    "region": [
+     250,
+     770,
+     1150,
+     805
+    ],
+    "metric": "delta_e",
+    "hex": "#7A6E60",
+    "op": "<=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The sun does not visibly pass through the tinted cabinets: their shadows are neutral grey with no green light.",
+   "evidence": {
+    "region": [
+     1300,
+     520,
+     1420,
+     600
+    ],
+    "measured": "r63 g59 b60, no green; only a one-pixel green line at the cabinet base"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -68, elevation 17, irradiance 34",
+    "to": "azimuth -76, elevation 11, irradiance 40, so the beam runs more nearly along the back wall through the open upper and side bays of each cabinet (above and beside the opaque woofer) and throws green-tinted patches onto the wall and floor to the right of each speaker"
+   },
+   "expected": "Visible green-tinted light pools on the wall and the floor right of each cabinet, the image's signature",
+   "accept": {
+    "region": [
+     1240,
+     420,
+     1440,
+     620
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 85
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The pair is lit unequally: the right speaker is brighter, so it no longer reads as one pair.",
+   "evidence": {
+    "region": [
+     1060,
+     480,
+     1160,
+     580
+    ],
+    "measured": "lum_median 102.8 vs left disc [280,480,380,580] 86.2; dE vs #2E4A2C 13.8 right, 7.7 left"
+   },
+   "change": {
+    "setting": "lamp north",
+    "from": "position [3.2,-2.2,1.6], irradiance 1.0",
+    "to": "position [0.8,-4.0,2.4] (centred on the pair), irradiance 0.6"
+   },
+   "expected": "The two discs within 4 levels of each other and darker, nearer the cover's deep green",
+   "accept": {
+    "region": [
+     1060,
+     480,
+     1160,
+     580
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     78,
+     92
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The horn throats are crushed black holes that read as voids, not tinted resin.",
+   "evidence": {
+    "region": [
+     310,
+     290,
+     370,
+     350
+    ],
+    "measured": "lum_median 0.0, crush_pct 88"
+   },
+   "change": {
+    "setting": "lamp bounce",
+    "from": "position [-2.0,-3.8,1.8], size [1.6,1.2], irradiance 0.3",
+    "to": "position [-0.6,-3.6,1.35], size [2.4,1.2], irradiance 0.7, target [0,0.3,1.15]"
+   },
+   "expected": "A soft fill reaching into each horn so the throat shows deep green gradation and the phase plug or driver edge reads",
+   "accept": {
+    "region": [
+     310,
+     290,
+     370,
+     350
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "composition",
+   "problem": "The heading's wall area is split by the hard diagonal window shadow, so type would straddle a light edge.",
+   "evidence": {
+    "region": [
+     650,
+     60,
+     1000,
+     250
+    ],
+    "measured": "p5 100.8, p95 227.2, range 126; the upper-left wall [170,60,590,250] is even (range 7.8, lum 228)"
+   },
+   "change": {
+    "setting": "heading placement (layout)",
+    "from": "over the centre wall",
+    "to": "over the upper-left lit wall, x 170-590, y 60-250, set in a dark ink"
+   },
+   "expected": "The heading sits on an even, warm, light field with the speaker below it",
+   "accept": {
+    "region": [
+     170,
+     60,
+     590,
+     250
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 20
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The right third of the floor is muddy and the frame has no foreground depth.",
+   "evidence": {
+    "region": [
+     1220,
+     640,
+     1440,
+     740
+    ],
+    "measured": "lum_median 56.8 (41 at the floor's edge) vs centre floor 111"
+   },
+   "change": {
+    "setting": "lamp floorbounce, plus the edge of prop 10's armchair",
+    "from": "floorbounce position [0,-1.0,0.1], irradiance 0.15; armchair at [2.0,-2.6] out of frame",
+    "to": "floorbounce position [0.9,-1.2,0.1], irradiance 0.25; armchair moved to [2.1,-3.6] so only its arm enters the lower right corner, softly out of focus"
+   },
+   "expected": "The right floor lifts to the mid-60s or higher; one soft foreground element gives depth without competing with the speaker",
+   "accept": {
+    "region": [
+     1250,
+     640,
+     1440,
+     680
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The sliver of sheer and window frame at the left edge reads as an accidental cut.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     30,
+     810
+    ],
+    "measured": "seen: a pale strip, then the dark frame edge, then the window"
+   },
+   "change": {
+    "setting": "prop 11 sheer",
+    "from": "open 0.15",
+    "to": "open 0.0 (drawn to fully cover the window jamb at the frame edge), or crop 24 px off the left in the finish and re-centre"
+   },
+   "expected": "A clean left edge: the window starts with a deliberate soft sheer, not a sliver",
+   "accept": {
+    "region": [
+     0,
+     100,
+     20,
+     600
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 40
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover a visible cloth weave and a slight sag or tension at its edge",
+   "why": "The disc reads as a flat painted circle (lum range 5.6 across it), a strong CG tell, but it is the speaker's material and is fixed"
+  },
+  {
+   "request": "Soften the thick black outline on the cabinet edges, so they read as the green edges of 20 mm cast acrylic",
+   "why": "The edge colour comes from the speaker's acrylic material, which is fixed"
+  },
+  {
+   "request": "Lighten the horn resin toward its specified deep tint",
+   "why": "The horn measures lighter than #4C6A36 (dE 17.9). Part of that is light, which c4 and c5 address. The rest is the material, which is fixed"
+  }
+ ],
+ "score_if_fixed": 7.8
+}

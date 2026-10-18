@@ -40,7 +40,8 @@ def stage(a):
     shotfile = src.with_suffix('.shot.json')
     card = d / f'card-{a.tag}.md'
     subprocess.run([sys.executable, str(ROOT / 'critic' / 'card.py'), a.shot_id, '--shot', str(shotfile), '--image', str(img),
-                    '--report', str(src.with_suffix('.report.json')), '--out', str(card)] + (['--reshoot'] if a.reshoot else []),
+                    '--report', str(src.with_suffix('.report.json')), '--out', str(card)] + (['--reshoot'] if a.reshoot else [])
+                   + (['--card', a.card] if a.card else []),
                    check=True)
     tool = d / 'measure.py'
     shutil.copy(ROOT / 'critic' / 'measure.py', tool)
@@ -226,6 +227,7 @@ def main():
     ap = argparse.ArgumentParser(); sub = ap.add_subparsers(dest='cmd', required=True)
     s = sub.add_parser('stage'); s.add_argument('image'); s.add_argument('--shot-id', required=True); s.add_argument('--tag', required=True); s.add_argument('--stage')
     s.add_argument('--reshoot', action='store_true', help="a reshoot round: the card shows the first looks the blind score has held at")
+    s.add_argument('--card', help="the cards' fixed part for another product line (default critic/cards/earmilk.yaml)")
     v = sub.add_parser('save'); v.add_argument('reply'); v.add_argument('--shot-id', required=True); v.add_argument('--version', required=True); v.add_argument('--round', type=int, required=True)
     c = sub.add_parser('check'); c.add_argument('image'); c.add_argument('reply')
     pc = sub.add_parser('precheck'); pc.add_argument('reply'); pc.add_argument('--shot-id', required=True)

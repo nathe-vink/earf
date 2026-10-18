@@ -1,0 +1,51 @@
+{
+ "subject": "Smoke in its element, concept A (woodsmoke at dawn in a pine wood) against concept B (a misty birch wood, high-key)",
+ "date": "2026-10-18",
+ "prompt": "critic/ab/PROMPT-DUEL.txt, its second paragraph worded for two candidate pictures of the same page",
+ "frames": {
+  "A": "renders/2026-10-18/barkhorn/element31/smoke.png (r31-element-smoke 0c14bb3)",
+  "B": "renders/2026-10-18/barkhorn/element31/smoke_b.png (r31-element-smoke-b 660c7e5)"
+ },
+ "judges": [
+  {
+   "shown_as_A": "B",
+   "shown_as_B": "A",
+   "scores": {
+    "B": 4.5,
+    "A": 6.5
+   },
+   "prefer": "A",
+   "notes": "Prefers A: the three-quarter camera shows the horn's flare, the driver behind it, the side port and the cabinet's depth; a clean horn interior; a dark contact shadow and warm light through the clear base; mulch that reads as real at 3x; backlight, god rays and a crisp rim. B: a straight-on, flat horn; the throat mottled like denoiser residue; no contact shadow at the snow; smeared snow with a horizontal seam; flat shadowless light; the clear panels wash into the white; a grey smudge upper left; a small product over empty snow. A against: a heavy sepia grade hides the tint; the front very dark, woofer and ports murky; smooth CG trunks."
+  },
+  {
+   "shown_as_A": "A",
+   "shown_as_B": "B",
+   "scores": {
+    "A": 6.5,
+    "B": 3.5
+   },
+   "prefer": "A",
+   "notes": "Prefers A: a smooth horn interior; the cabinet on the forest floor with a dark contact shadow, ports intact; a warm light-pipe glow down the acrylic edges and the beam on the horn's top; shafts and layered fog give depth; mulch texture and dappled light; three-quarter view on the left third. B: the throat blotchy black noise; sunk in snow with the snow line cutting both ports and no contact shadow; flat overcast light; brushed snow; straight-on and flat; a murky grey smudge left; CG birches with hard cut-offs; inconsistent acrylic and a floating fragment; a clay woofer. A against: underexposed (cabinet ~33, merging with the ground ~27); the heavy amber grade hides the acrylic's tint."
+  },
+  {
+   "shown_as_A": "B",
+   "shown_as_B": "A",
+   "scores": {
+    "B": 4.0,
+    "A": 6.5
+   },
+   "prefer": "A",
+   "notes": "Prefers A: the three-quarter camera shows depth, side panel, rear driver and internals; backlit shafts, dappled pools and a warm sweep on the horn; a bright rim glow and strong silhouette; a clean horn; the base on the ground with a contact shadow; the product on the left third with trunks receding. B: the clear shell dissolves into the snow (228 v 242 luma); mottled throat; a seam and brushed snow; base and ports buried without occlusion; trunks cut off flat on the snow; an empty grey fog wall left. A against: the cabinet nearly crushed (median ~25, p5 ~6); a monochrome sepia grade hides the tint; featureless trunks."
+  }
+ ],
+ "agreed": "All three judges marked B down for its mottled horn throat, the cabinet sunk in the snow with no contact shadow, flat light and brushed snow. They marked A down for its dark, near-crushed cabinet and a heavy amber/sepia grade that hides the smoked tint; both are finish-level, so a re-grade from the raw is the next step for A.",
+ "result": {
+  "A_mean": 6.5,
+  "B_mean": 4.0,
+  "wins": {
+   "A": 3,
+   "B": 0
+  },
+  "kept": "A"
+ }
+}

@@ -1,0 +1,351 @@
+{
+ "stage1": {
+  "impression": "A clean, quiet catalogue still: a tinted blue acrylic horn speaker on a pale cool sweep, with a sensible three-quarter view and room above for type. It still reads as CG. The cabinet looks like a dark blue box rather than glowing glass, the compression driver is a black hole in the horn, the cover and lining read as flat plastic, and the sweep has two grey smudges (left behind, right beside the cabinet) and blotchy denoise in the gradients.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The tinted acrylic must read as lit glass: edges and side faces glowing blue (side face lum_median about 90-120, not 67), with blue light passing through onto the sweep in front of the cabinet",
+  "The compression driver must have shape: a specular line or falloff on its body, not 73% crushed black",
+  "The sweep must be one smooth falloff with no grey bands: no step deeper than about 25 levels outside the contact shadow",
+  "No denoise blotching in the sweep gradients or on the cover at full size",
+  "Cover cloth and lining must read as real textile and fibre (out of scope here, being reworked)"
+ ],
+ "defects": [
+  {
+   "region": [
+    230,
+    310,
+    330,
+    400
+   ],
+   "what": "Compression driver at the horn throat is a featureless black void (73% crushed, median 0.4)"
+  },
+  {
+   "region": [
+    380,
+    560,
+    420,
+    880
+   ],
+   "what": "The cabinet's right side face is dull navy (median 67, r 18); the acrylic reads opaque, not translucent glass"
+  },
+  {
+   "region": [
+    100,
+    480,
+    120,
+    900
+   ],
+   "what": "The left front post is dark and unlit (median 82); there is no glow along the 20 mm edges"
+  },
+  {
+   "region": [
+    440,
+    820,
+    540,
+    960
+   ],
+   "what": "A grey shadow band on the sweep right of the cabinet (median 158 against 221 just above), reading as a smudge rather than a shadow"
+  },
+  {
+   "region": [
+    0,
+    650,
+    90,
+    790
+   ],
+   "what": "A darker grey band on the sweep left of and behind the speaker (median 164 against 208 below it), reading like a horizon or seam on a seamless sweep"
+  },
+  {
+   "region": [
+    150,
+    1000,
+    400,
+    1060
+   ],
+   "what": "No blue light thrown onto the floor by the tinted acrylic; the floor in front is neutral grey (r 176, b 199, the same as the open sweep)"
+  },
+  {
+   "region": [
+    0,
+    560,
+    540,
+    1000
+   ],
+   "what": "Blotchy, watercolour-like denoise artefacts in the sweep gradients"
+  },
+  {
+   "region": [
+    150,
+    600,
+    310,
+    760
+   ],
+   "what": "The cover disc reads as a flat matte plastic plate with denoise mottling (out of scope: the cloth is being reworked)"
+  },
+  {
+   "region": [
+    190,
+    840,
+    350,
+    920
+   ],
+   "what": "The lining and inner blocks read as flat white CG boxes (out of scope: the lining shaders are being reworked)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    540,
+    120
+   ],
+   "what": "The sweep's top is cooler and darker than specified (rgb 188/203/213 against #D9DFE4, \u0394E 6.3)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The cabinet reads as a dark opaque box; light never passes through the tinted acrylic, so the colour, the one thing this frame sells, is muddy navy.",
+   "evidence": {
+    "region": [
+     380,
+     560,
+     420,
+     880
+    ],
+    "measured": "lum_median 67, r 18 g 78 b 107; left post [100,480,120,900] median 82"
+   },
+   "change": {
+    "setting": "lights.edge power",
+    "from": "0.2 W",
+    "to": "1.5 W (keep receivers and diffuse 0.0)"
+   },
+   "expected": "The edges and side faces glow ice blue; the side face lifts to about 95-115 with blue still dominant",
+   "accept": {
+    "region": [
+     380,
+     560,
+     420,
+     880
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     88,
+     120
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The tinted acrylic throws no coloured light onto the floor, so the product does not belong to the set, and the frame misses the effect that sells tinted acrylic.",
+   "evidence": {
+    "region": [
+     150,
+     1000,
+     400,
+     1060
+    ],
+    "measured": "r 176 g 190 b 199, the same as the open floor at [0,1000,90,1080] (r 166 g 179 b 188)"
+   },
+   "change": {
+    "setting": "new lights.back",
+    "from": "none",
+    "to": "area 1.2 x 1.0 m, orbit az 180 el 25 at 1.8 m, aimed at [0.0, -0.4, 0.0], irradiance 2.0 W/m2 at its target, diffuse 1.0, colour #FFF8F0, no receiver limit, so it shines through the cabinet onto the floor in front"
+   },
+   "expected": "A soft blue pool on the sweep just in front of the cabinet's base, a touch cooler than the open floor; the backlit acrylic brightens. This suits all eight colours (a red pool for Ember, a green one for Poison)",
+   "accept": {
+    "region": [
+     150,
+     1000,
+     400,
+     1060
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 165
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The compression driver is a black hole in the horn, so the horn's focal point has no form.",
+   "evidence": {
+    "region": [
+     230,
+     310,
+     330,
+     400
+    ],
+    "measured": "lum_median 0.4, p95 39.9, crush 73%"
+   },
+   "change": {
+    "setting": "lights.horn size, position, irradiance",
+    "from": "[0.9, 0.25] m at [1.4, -1.6, 1.75], 1.0 W/m2",
+    "to": "[1.4, 0.4] m at [1.0, -1.2, 1.55], 2.0 W/m2 (specular 0.8 unchanged)"
+   },
+   "expected": "A long soft specular line runs along the driver can and the phase plug, so the driver reads as black metal with a shape",
+   "accept": {
+    "region": [
+     230,
+     310,
+     330,
+     400
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The key casts a hard grey band across the sweep to the right of the cabinet that reads as a smudge.",
+   "evidence": {
+    "region": [
+     440,
+     820,
+     540,
+     960
+    ],
+    "measured": "lum_median 158, p5 132, against 221 at [440,720,540,820]"
+   },
+   "change": {
+    "setting": "lights.key size and spread_deg",
+    "from": "[1.0, 1.4] m, spread 50",
+    "to": "[1.8, 2.2] m, spread 70 (irradiance unchanged)"
+   },
+   "expected": "The cast shadow softens into a gentle falloff; the band rises to about 185 or more with no hard upper edge",
+   "accept": {
+    "region": [
+     440,
+     820,
+     540,
+     960
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 182
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The sweep has a grey band behind and left of the speaker that reads like a horizon on what should be a seamless sweep.",
+   "evidence": {
+    "region": [
+     0,
+     650,
+     90,
+     790
+    ],
+    "measured": "lum_median 164 against 208 below it at y 790-860 (profile 0,500-80,1080)"
+   },
+   "change": {
+    "setting": "lights.wall irradiance and lights.paper power",
+    "from": "1.4 W/m2; 110 W",
+    "to": "2.0 W/m2; 150 W"
+   },
+   "expected": "The curve fills in, and the sweep falls off smoothly from about 215 at the floor to about 195 at the top with no band",
+   "accept": {
+    "region": [
+     0,
+     650,
+     90,
+     790
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 190
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "Denoise blotching in the smooth gradients and on large flat surfaces gives the render away.",
+   "evidence": {
+    "region": [
+     0,
+     560,
+     540,
+     1000
+    ],
+    "measured": "Visible mottling in 2x crops of the sweep left of and behind the cabinet, and on the cover disc"
+   },
+   "change": {
+    "setting": "render samples",
+    "from": "128",
+    "to": "512 for the deliverable (keep grain 1.0)"
+   },
+   "expected": "Clean, continuous gradients on the sweep; the grain carries the texture instead of denoise patches",
+   "accept": {
+    "region": [
+     440,
+     400,
+     540,
+     600
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 6
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The sweep renders cooler and greyer than its specified colour, so the ice blue sits on blue-grey and loses separation in hue.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     540,
+     120
+    ],
+    "measured": "rgb 188/203/213, \u0394E2000 6.3 against #D9DFE4"
+   },
+   "change": {
+    "setting": "set.sweep colour / lights.wash colour",
+    "from": "#D9DFE4; wash #FFF8F0",
+    "to": "#DEE1E3 (less blue); wash #FFF5EA"
+   },
+   "expected": "A near-neutral pale sweep against which the ice blue reads as the only saturated colour in the frame",
+   "accept": {
+    "region": [
+     440,
+     400,
+     540,
+     600
+    ],
+    "metric": "delta_e",
+    "hex": "#DEE1E3",
+    "op": "<=",
+    "value": 3.0
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the cover a real woven cloth texture with visible weave and soft edge fall-off",
+   "why": "The cover's cloth is part of the speaker and is being reworked elsewhere; it currently reads as a flat matte plate"
+  },
+  {
+   "request": "Give the lining batts and voile sleeves fibrous texture and translucency",
+   "why": "The lining shaders are being reworked elsewhere; they read as flat white blocks"
+  },
+  {
+   "request": "Reconsider the visible internal clutter (ribs, ports, blocks) seen through the clear front",
+   "why": "This is the speaker's own construction and is fixed"
+  }
+ ],
+ "score_if_fixed": 6.8
+}

@@ -1,0 +1,126 @@
+{
+ "title": "companions concept l3b",
+ "size": [
+  900,
+  720
+ ],
+ "product": {
+  "def": "spinoffs/barkhorn/companions/out-concepts/l3b.json",
+  "flavour": "acid",
+  "instances": [
+   {
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": 0
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#E9DFC4",
+  "width": 6.0,
+  "front": 5.0,
+  "depth": 1.5,
+  "radius": 1.2,
+  "height": 4.0
+ },
+ "camera": {
+  "position": [
+   -0.666,
+   -1.252,
+   0.526
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.225
+  ],
+  "lens_mm": 60,
+  "level": true
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": -35,
+    "elevation_deg": 42,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.225
+   ],
+   "irradiance": 2.2,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 35,
+    "elevation_deg": 18,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.225
+   ],
+   "irradiance": 0.9,
+   "color": "#FFF7EA"
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    0.8
+   ],
+   "position": [
+    0.4,
+    1.6,
+    1.2
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.225
+   ],
+   "irradiance": 1.4,
+   "color": "#FFF7EA"
+  }
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#C4C2BE",
+  "horizon": "#CFCDC8",
+  "ground": "#5A5650",
+  "strength": 0.7
+ },
+ "render": {
+  "samples": 48,
+  "adaptive": 0.03,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "materials": {
+  "led": {
+   "strength": 40.0
+  }
+ }
+}

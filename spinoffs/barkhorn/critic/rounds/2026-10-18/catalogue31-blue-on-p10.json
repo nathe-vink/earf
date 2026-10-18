@@ -1,0 +1,339 @@
+{
+ "stage1": {
+  "impression": "A clean, well-separated studio catalogue shot: the blue horn reads beautifully, with real transmission and a crisp rim, and the cabinet's translucency and internals are legible. But it still reads as a render. The surfaces look smeared and painterly at full size, the pale lining blocks are the brightest thing on the speaker and pull the eye from the horn, the paper goes a muddy grey in the upper left, and the cabinet sits on the floor with almost no weight and none of its blue light thrown onto the paper.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Clean full-resolution surfaces: no denoiser smear or painterly banding on the horn interior, cloth disc or acrylic edges",
+  "The cabinet visibly grounded: a soft footprint shadow at least 15% darker than the open floor, extending 0.2-0.3 m around the base",
+  "The tinted acrylic throwing a visible blue (colour-matched) transmitted glow onto the paper in front of the base",
+  "An even, clean paper sweep with no dingy grey corner: upper-left within about 30 levels of upper-right",
+  "The horn as the brightest, first-read element; the lining band no longer the brightest area on the product",
+  "Lining and cover cloth reading as real textile (out of scope here, but they block a 9)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    120,
+    300
+   ],
+   "what": "Paper sweep goes a muddy grey in the upper left (lum 157-162) while the upper right is near white (235). The diagonal gradient reads as dirty, not designed"
+  },
+  {
+   "region": [
+    130,
+    955,
+    420,
+    990
+   ],
+   "what": "Footprint shadow too weak: just in front of the base the floor is 174 against 181 on open floor. Only a thin core line grounds the cabinet, so it looks light and slightly placed"
+  },
+  {
+   "region": [
+    150,
+    960,
+    420,
+    1040
+   ],
+   "what": "No coloured transmitted light on the paper: the floor is neutral grey (R171 G183 B190, the same as open floor), so the translucent blue acrylic casts no blue onto the ground"
+  },
+  {
+   "region": [
+    120,
+    480,
+    350,
+    540
+   ],
+   "what": "Upper lining band is the brightest area on the product (median 209, blue channel 251, 1.2% clipped). It competes with the horn and reads as a foam block"
+  },
+  {
+   "region": [
+    100,
+    270,
+    380,
+    450
+   ],
+   "what": "Denoiser smear / watercolour texture and soft banding in the horn's interior and around the throat"
+  },
+  {
+   "region": [
+    160,
+    600,
+    310,
+    760
+   ],
+   "what": "Cloth disc reads as a flat matte painted disc, with no weave or fibre (shader, out of scope)"
+  },
+  {
+   "region": [
+    360,
+    560,
+    425,
+    900
+   ],
+   "what": "Right side panel is heavy and dark for Ice (median 97, R50). It reads as dense navy glass rather than pale translucent blue"
+  },
+  {
+   "region": [
+    100,
+    900,
+    440,
+    960
+   ],
+   "what": "Bottom edges of the cabinet crush to near black navy (p5 lum 8 on the left face), so the base edge looks heavy"
+  },
+  {
+   "region": [
+    90,
+    262,
+    380,
+    280
+   ],
+   "what": "Horn bezel's top edge carries a dull grey line that reads as a dirty edge rather than a polished resin lip"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "Surfaces read as smeared and painterly (denoiser artefacts and banding), the main thing that says 'render'.",
+   "evidence": {
+    "region": [
+     100,
+     270,
+     380,
+     450
+    ],
+    "measured": "3x crop shows watercolour-like blotching on the horn interior and soft banding around the throat; the same smear is on the cloth disc and the acrylic edges"
+   },
+   "change": {
+    "setting": "render",
+    "from": "256 samples, half-size proof",
+    "to": "1024 samples at full size (1080 x 2160), with the denoiser on albedo+normal prefilter 'accurate' or blended at 50%; keep finish grain 1.5"
+   },
+   "expected": "Fine, photographic micro-detail on the resin and acrylic, no blotches; the grain sits on real detail instead of over smear.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The translucent blue cabinet throws no coloured light onto the paper, so the product's best material quality never touches the set.",
+   "evidence": {
+    "region": [
+     170,
+     990,
+     380,
+     1040
+    ],
+    "measured": "floor in front of base R171 G183 B190, the same balance as the open floor at left (R178 G188 B193)"
+   },
+   "change": {
+    "setting": "lights.back receivers",
+    "from": "speaker parts only",
+    "to": "add 'sweep' (and raise lights.back elevation from 20 to 30 so the light passes through the cabinet and lands 0.1-0.4 m in front of the base)"
+   },
+   "expected": "A soft blue-tinted glow on the paper just in front of and beside the base. For the sister colours the glow takes each tint (neutral for Fog, dark for Smoke).",
+   "accept": {
+    "region": [
+     170,
+     965,
+     380,
+     1010
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 160
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "set",
+   "problem": "The cabinet has almost no footprint shadow, so it lacks weight.",
+   "evidence": {
+    "region": [
+     130,
+     960,
+     420,
+     985
+    ],
+    "measured": "lum_median 174 against 181 on open floor at [170,990,380,1040]: only 4% darker beyond a thin core"
+   },
+   "change": {
+    "setting": "set contact shadow",
+    "from": "strength 0.9, distance_m 0.22",
+    "to": "strength 1.0, distance_m 0.32 (core unchanged); and lower lights.pool from 1.5 to 1.0 W/m2 so it stops washing out the footprint"
+   },
+   "expected": "A soft shadow about 0.3 m deep around the base, darkest at the contact line, fading into the paper.",
+   "accept": {
+    "region": [
+     130,
+     960,
+     420,
+     985
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 155
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The upper-left paper is a muddy grey against a near-white right, which looks dingy on a narrow colour card.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     100,
+     150
+    ],
+    "measured": "lum_median 162 against 235 at [440,0,540,150]; the left-edge profile rises 157 to 210 down the frame"
+   },
+   "change": {
+    "setting": "lights.paper",
+    "from": "power 140 W aimed at [-0.5, 2.2, 1.6]",
+    "to": "power 210 W aimed at [-0.8, 2.4, 2.4]"
+   },
+   "expected": "The sweep falls off gently from right to left. The upper left lands at 195-215, keeping some separation behind the lit left face without going grey.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     100,
+     150
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     195,
+     218
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The upper lining band is the brightest area on the speaker and pulls the eye away from the horn.",
+   "evidence": {
+    "region": [
+     120,
+     480,
+     350,
+     540
+    ],
+    "measured": "lum_median 209, b_median 251, clip 1.2%; horn interior [100,290,200,420] is only 146"
+   },
+   "change": {
+    "setting": "lights.back receivers / irradiance",
+    "from": "includes 'lining-*', 3.0 W/m2",
+    "to": "remove 'lining-*' from lights.back and lights.kick receivers; back irradiance 3.0 to 2.4"
+   },
+   "expected": "The lining reads as soft white behind the acrylic, a step below the horn's highlights, with nothing clipped.",
+   "accept": {
+    "region": [
+     120,
+     480,
+     350,
+     540
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.1
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The right side panel is heavy, dense navy rather than pale translucent Ice.",
+   "evidence": {
+    "region": [
+     360,
+     560,
+     425,
+     900
+    ],
+    "measured": "lum_median 97, R50 G108 B142"
+   },
+   "change": {
+    "setting": "lights.sidesheen",
+    "from": "peak radiance 0.4",
+    "to": "peak radiance 0.8 (and lights.kick 1.8 to 2.2 W/m2)"
+   },
+   "expected": "The side panel brightens to a translucent mid blue with a soft vertical gradient, still clearly the shadow side.",
+   "accept": {
+    "region": [
+     360,
+     560,
+     425,
+     900
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     112,
+     140
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The base edges crush to near black navy, which makes the bottom of the cabinet heavy.",
+   "evidence": {
+    "region": [
+     105,
+     560,
+     125,
+     900
+    ],
+    "measured": "left face lum_p5 8, range 190"
+   },
+   "change": {
+    "setting": "set.flags.0 (floor black card)",
+    "from": "2.4 x 3.2 m at [1.3, 1.4, 0.005]",
+    "to": "shrink to 1.6 x 2.4 m and move to [1.6, 1.8, 0.005] so the lower edges pick up some paper reflection"
+   },
+   "expected": "The lower edges keep a dark line but open to deep blue instead of black.",
+   "accept": {
+    "region": [
+     105,
+     560,
+     125,
+     900
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 25
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the cover cloth a visible weave and fibre",
+   "why": "It reads as a flat painted disc. The cloth shader is being reworked elsewhere."
+  },
+  {
+   "request": "Give the white lining batts textile texture (voile sleeve, quilting)",
+   "why": "They read as smooth pale foam blocks, the main thing that cheapens the cabinet's interior. The lining shaders are being reworked elsewhere."
+  },
+  {
+   "request": "Clean up the dull grey line on the horn's top lip",
+   "why": "It is part of the speaker's resin model and material."
+  },
+  {
+   "request": "Lighten the dark mass at the horn's throat",
+   "why": "53% crushed, but the card fixes it as the resin's own depth."
+  }
+ ],
+ "score_if_fixed": 7.6
+}

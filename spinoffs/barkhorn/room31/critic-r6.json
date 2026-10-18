@@ -1,0 +1,364 @@
+{
+ "stage1": {
+  "impression": "A calm, believable sunlit living room: the raking late sun on the plaster, the window light and the walnut credenza nearly read as a photograph, and the frame is squared, symmetrical and leaves room for type. But the speakers sit outside the sun's story. Their fronts are flat and unlit, the acrylic reads as saturated lime plastic with a flat matte disc, and none of their green light reaches the wall or floor. The near-white, textureless rug is the brightest and largest shape in the frame and pulls the eye away from the product.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Sunlight visibly passes through at least one cabinet and throws green-tinted light onto the wall or floor inside the frame (g_median > r_median in that pool)",
+  "The rug reads as a real woven textile in its specified tint (delta_e to #A69882 < 8, visible herringbone) and is no longer the brightest mass in the frame",
+  "Sun shadows on the wall are open, not crushed: the darkest cast shadow beside a speaker has lum_median >= 60 and blue channel above 25",
+  "The right speaker's left edge separates from the wall behind it (no merging into the vase/credenza shadow)",
+  "The speaker fronts carry some directional modelling from the scene light (a gradient across the cabinet face), not flat even fill"
+ ],
+ "defects": [
+  {
+   "region": [
+    200,
+    712,
+    1250,
+    810
+   ],
+   "what": "Rug renders almost white (median RGB 220,214,203, lum 215; delta_e 17.2 vs its tint #A69882), with no visible herringbone or pile. It reads as a flat card and is the largest bright shape in the frame."
+  },
+  {
+   "region": [
+    955,
+    430,
+    1012,
+    615
+   ],
+   "what": "Vase and credenza cast shadow on the wall is crushed and dirty (lum_median 33, RGB 47,31,9). It swallows the right speaker's left silhouette edge."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1440,
+    810
+   ],
+   "what": "The sun at azimuth -72 throws the cabinets' transmitted light behind the credenza or off-frame right, so the brief's 'sun passing through both cabinets' does not read anywhere in the frame."
+  },
+  {
+   "region": [
+    1015,
+    395,
+    1205,
+    690
+   ],
+   "what": "Cabinet faces are evenly lit with no directional gradient. The interior reads as bright saturated lime blocks (RGB 61,106,30; delta_e 35 vs #B2C9A2 reference) rather than white batts seen through tinted acrylic."
+  },
+  {
+   "region": [
+    1035,
+    455,
+    1185,
+    600
+   ],
+   "what": "Cover disc is a perfectly flat field (lum_range 2.7) with no cloth weave, and lighter than its #2E4A2C reference (delta_e 11.3). It reads as CG."
+  },
+  {
+   "region": [
+    235,
+    395,
+    425,
+    690
+   ],
+   "what": "Left speaker identical in treatment: flat front, no sun modelling, no light cast onto the floor."
+  },
+  {
+   "region": [
+    0,
+    690,
+    1440,
+    725
+   ],
+   "what": "Hard dark shadow band across the floor just in front of the speakers' feet. It reads as a step or seam and cuts the speakers off from the foreground."
+  },
+  {
+   "region": [
+    100,
+    0,
+    175,
+    665
+   ],
+   "what": "Curtain is a uniform bright vertical strip with little fold shading. It competes with the left speaker at the frame edge."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The idea of the frame, sun crossing the room and passing through both cabinets, is invisible: their transmitted light lands behind the credenza or outside the frame.",
+   "evidence": {
+    "region": [
+     1240,
+     430,
+     1400,
+     610
+    ],
+    "measured": "wall right of the right speaker is neutral warm (RGB 163,147,127), with no green pool anywhere on wall or floor. At az -72 and a 0.65 m speaker-to-wall gap, the shadow offset is about 2 m sideways"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -72.0, elevation 20.0",
+    "to": "azimuth -55.0, elevation 16.0 (check the beam still enters through window 0 and reaches both cabinets; adjust window 0 'along' if the mullion blocks it)"
+   },
+   "expected": "Each speaker throws a green-tinted transmitted shape about 0.9 m to its right on the back wall: the left one above the credenza's left half, the right one on the wall at about x 1230-1420 px, 0-1 m high.",
+   "accept": {
+    "region": [
+     1240,
+     440,
+     1400,
+     640
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 150
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Light through tinted acrylic and resin must cast coloured light, but transmitted shadows render as opaque brown-black.",
+   "evidence": {
+    "region": [
+     955,
+     430,
+     1012,
+     615
+    ],
+    "measured": "shadow RGB 47,31,9, lum 33: no green component anywhere in cast shadows"
+   },
+   "change": {
+    "setting": "render",
+    "from": "default caustics (refractive caustics off / shadow rays blocked by transmission)",
+    "to": "enable refractive caustics with filter_glossy 0.5, or give the cabinet and horn materials light-path shadow transparency carrying their transmission colour"
+   },
+   "expected": "Cast shadows of the cabinets and horns carry a visible green tint on the wall and floor; the vase shadow stays neutral.",
+   "accept": {
+    "region": [
+     1240,
+     440,
+     1400,
+     640
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 150
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The rug is rendered near white and textureless, so it reads as a flat card and is the strongest mass in the frame.",
+   "evidence": {
+    "region": [
+     400,
+     740,
+     1100,
+     800
+    ],
+    "measured": "lum_median 214.6, RGB 220,214,203, delta_e 17.2 vs tint #A69882, lum profile flat at 210-219"
+   },
+   "change": {
+    "setting": "prop 3 (rug)",
+    "from": "value 0.75, tint_mix 0.9, displace 0.002, tex_scale 0.6",
+    "to": "value 0.45, tint_mix 1.0, displace 0.004, tex_scale 0.35 (so the herringbone reads at this distance)"
+   },
+   "expected": "Rug sits in its oatmeal tint, darker than the sunlit wall, with visible weave and sun stripes catching the pile.",
+   "accept": {
+    "region": [
+     400,
+     740,
+     1100,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     120,
+     165
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "Sun shadows are crushed to near black with almost no blue, harder than a white-walled sunlit room allows, and they eat the right speaker's silhouette.",
+   "evidence": {
+    "region": [
+     960,
+     450,
+     1005,
+     600
+    ],
+    "measured": "lum_median 32.8, b_median 9 against sunlit wall 191 (about a 6:1 ratio)"
+   },
+   "change": {
+    "setting": "sky strength and lamp `bounce`",
+    "from": "sky strength 0.45; bounce irradiance 0.06",
+    "to": "sky strength 0.7; bounce irradiance 0.25 (keep the colour #FFF0DE)"
+   },
+   "expected": "Shadows open to a warm grey with detail, the right speaker's edge separates from the wall, and the sun stays clearly dominant.",
+   "accept": {
+    "region": [
+     960,
+     450,
+     1005,
+     600
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     60,
+     95
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The vase sits where its shadow and the credenza's shadow fall straight onto the right speaker's edge.",
+   "evidence": {
+    "region": [
+     955,
+     430,
+     1012,
+     615
+    ],
+    "measured": "darkest wall area in frame, abutting the right cabinet edge at x 1015"
+   },
+   "change": {
+    "setting": "prop 9 (vase) and prop 2 (credenza)",
+    "from": "vase at [0.58, 0.75]; credenza width 1.62 m",
+    "to": "vase at [0.2, 0.78] (books stay right); credenza width 1.5 m to open the gap to the speakers"
+   },
+   "expected": "A clean lit-wall gap of at least 40 px between the credenza end and the right cabinet.",
+   "accept": {
+    "region": [
+     975,
+     450,
+     1010,
+     600
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 90
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The speaker fronts are evenly fill-lit with no directional modelling, so they read as flat cut-outs against a richly lit room.",
+   "evidence": {
+    "region": [
+     1030,
+     420,
+     1060,
+     600
+    ],
+    "measured": "cabinet face flat (cover disc lum_range 2.7); the north lamp lights the fronts head-on"
+   },
+   "change": {
+    "setting": "lamp `north`",
+    "from": "position [3.2, -2.2, 1.6], irradiance 0.7",
+    "to": "position [3.4, -0.6, 1.8], irradiance 0.45 (more raking, less frontal)"
+   },
+   "expected": "A soft gradient across each cabinet face and a visible edge highlight on the side panels facing the window.",
+   "accept": {
+    "region": [
+     1035,
+     455,
+     1185,
+     600
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The acrylic and interior read as oversaturated lime in the grade, against the cooler reference colour.",
+   "evidence": {
+    "region": [
+     1030,
+     420,
+     1060,
+     600
+    ],
+    "measured": "RGB 61,106,30, delta_e 35.2 vs #B2C9A2. The warm white balance at 5300 K pushes the greens yellow"
+   },
+   "change": {
+    "setting": "render white_balance_k / exposure",
+    "from": "5300 K, exposure -0.9",
+    "to": "5700 K, exposure -0.8"
+   },
+   "expected": "Green shifts away from yellow-lime toward the specified sage, and the sunlit wall stays warm.",
+   "accept": {
+    "region": [
+     1030,
+     420,
+     1060,
+     600
+    ],
+    "metric": "delta_e",
+    "hex": "#B2C9A2",
+    "op": "<",
+    "value": 28
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The curtain is a flat uniform bright strip at the frame edge that competes with the left speaker.",
+   "evidence": {
+    "region": [
+     100,
+     0,
+     175,
+     665
+    ],
+    "measured": "near-uniform bright vertical band beside the dark window frame"
+   },
+   "change": {
+    "setting": "prop 11 (drape)",
+    "from": "folds 9, amplitude 0.035, alpha 0.55",
+    "to": "folds 14, amplitude 0.06, alpha 0.4"
+   },
+   "expected": "Visible fold shading and the sun glowing through the organza; the curtain recedes.",
+   "accept": {
+    "region": [
+     100,
+     100,
+     175,
+     600
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 60
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover disc a visible cloth weave and bring its value toward #2E4A2C / #6F7F66",
+   "why": "It is part of the speaker; it currently reads as a flat CG disc (lum_range 2.7, delta_e 11)."
+  },
+  {
+   "request": "Make the interior batts read as white polyester in voile sleeves rather than solid lime blocks",
+   "why": "This is the speaker's own materials; the interior is the least photographic part of the frame."
+  }
+ ],
+ "score_if_fixed": 7.6
+}

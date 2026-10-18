@@ -225,6 +225,11 @@ def flag(bpy, name, spec, centre):
     ob.data.materials.append(m)
     ob.visible_camera = False
     ob.visible_glossy = bool(spec.get('glossy', False))
+    if spec.get('see_through'):
+        # a cutter only its lamps' shadow rays meet: bounce light, the sky and rays through clear parts pass it, so it
+        # soaks up nothing (barkhorn's hero31: cutters behind a row of acrylic speakers, the key reaching the floor only
+        # through them)
+        ob.visible_diffuse = False; ob.visible_transmission = False; ob.visible_volume_scatter = False
     ob['engine_light'] = True
     return ob
 
@@ -311,6 +316,13 @@ def point(bpy, name, spec, centre):
     set_color(L, spec.get('color', 3000))
     ob = bpy.data.objects.new(name, L); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(spec['position']) if 'position' in spec else orbit_point(spec.get('orbit', {}), centre)
+    # a lamp inside a product (a practical's bulb) seen through its clear shade reads as a ball of light: `camera` and
+    # `transmission` False hide it from those rays (shadow rays still light the room through the clear part); left
+    # out, Cycles' defaults as before
+    if 'camera' in spec:
+        ob.visible_camera = bool(spec['camera'])
+    if spec.get('transmission') is False:
+        ob.visible_transmission = False
     lamp_shares(bpy, ob, spec)
     return ob
 
@@ -335,7 +347,7 @@ def sun(bpy, spec):
 def world(bpy, sky, sun_spec=None):
     """The world: a gradient dome (zenith, horizon, ground), a physical sky matched to the sun, a photographed
     environment (kind 'hdri': sky.file names one in studio/assets/hdri, Poly Haven CC0, turned by sky.rotation_deg
-    about the vertical), or black."""
+    about the vertical; sky.grade {horizon, zenith, height_deg} lays a graduated colour filter over it), or black."""
     W = bpy.data.worlds.new('world'); bpy.context.scene.world = W
     W.use_nodes = True; nt = W.node_tree; nt.nodes.clear()
     out = nt.nodes.new('ShaderNodeOutputWorld'); bg = nt.nodes.new('ShaderNodeBackground')
@@ -356,7 +368,24 @@ def world(bpy, sky, sun_spec=None):
         tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping')
         mp.inputs['Rotation'].default_value = (0.0, 0.0, math.radians(sky.get('rotation_deg', 0.0)))
         nt.links.new(tc.outputs['Generated'], mp.inputs['Vector']); nt.links.new(mp.outputs['Vector'], env.inputs['Vector'])
-        nt.links.new(env.outputs['Color'], bg.inputs['Color'])
+        col = env.outputs['Color']
+        g = sky.get('grade')
+        if g:
+            # a graduated filter over a photographed sky: its colour multiplied by `horizon` at the horizon, fading to
+            # `zenith` (default white, no change) by `height_deg` up; below the horizon it stays at `horizon`
+            sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Generated'], sep.inputs['Vector'])
+            mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = 0.0
+            mr.inputs['From Max'].default_value = math.sin(math.radians(g.get('height_deg', 25.0)))
+            nt.links.new(sep.outputs['Z'], mr.inputs['Value'])
+            ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp
+            cr.elements[0].color = (*_hex_lin(g.get('horizon', '#FFFFFF')), 1)
+            cr.elements[1].color = (*_hex_lin(g.get('zenith', '#FFFFFF')), 1)
+            nt.links.new(mr.outputs['Result'], ramp.inputs['Fac'])
+            mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+            mul.inputs['Factor'].default_value = 1.0
+            nt.links.new(col, mul.inputs['A']); nt.links.new(ramp.outputs['Color'], mul.inputs['B'])
+            col = mul.outputs['Result']
+        nt.links.new(col, bg.inputs['Color'])
     elif kind == 'physical':
         tx = nt.nodes.new('ShaderNodeTexSky'); tx.sky_type = 'MULTIPLE_SCATTERING'; tx.sun_disc = False
         s = sun_spec or {}

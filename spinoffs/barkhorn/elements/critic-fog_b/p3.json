@@ -1,0 +1,14 @@
+{"stage1": {"impression": "The light is soft and believable, and the grass looks photographic, but the 'fog' is a beige haze over everything, so it does not read as a sea of fog below the headland. The hills across the water dissolve into mush, and the upper third is a flat, dead sky. The speaker stands against a big lumpy boulder that reads as a stage prop. Its clear body looks dull olive-grey, its lower cabinet is lost in the grass, and the whole image reads as a well-made CG landscape rather than a campaign photograph.", "score": 5.5},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "change": {"setting": "fog sea haze / soft / marine layer / density", "from": "0.0004 / 2.5 / +44 / 0.06", "to": "0.00008 / 0.8 / +22 / 0.09"}, "accept": {"region": [600, 300, 1200, 420], "metric": "lum_range", "op": ">=", "value": 60}},
+  {"id": "c2", "change": {"setting": "bounce", "from": "0.4, #D8DEE6, az -60, el 8, 2.4 m", "to": "1.1, #E8E4DC, az -35, el 12, 3.0 m"}, "accept": {"region": [330, 380, 510, 560], "metric": "lum_median", "op": "between", "value": [95, 130]}},
+  {"id": "c3", "change": {"setting": "boulder_01", "from": "[0.75, 3.3, -0.2], 1.3", "to": "[0.4, 3.5, -0.3], 1.0, long face along the brow, 30 tufts round its base"}, "accept": {"region": [185, 380, 300, 480], "metric": "lum_median", "op": ">", "value": 120}},
+  {"id": "c4", "change": {"setting": "main grass", "from": "scale [0.4, 1.6] everywhere", "to": "none within 1.2 m (the bermuda stays), scale [0.4, 0.9] within 3 m"}, "accept": {"region": [340, 545, 505, 575], "metric": "lum_p95", "op": ">", "value": 150}},
+  {"id": "c5", "change": {"setting": "camera.fstop", "from": "5.6", "to": "2.8"}, "accept": null},
+  {"id": "c6", "change": {"setting": "sky", "from": "syferfontein_6d_clear_puresky", "to": "a dawn HDRI with thin high cloud, strength 0.8"}, "accept": {"region": [0, 0, 1200, 200], "metric": "lum_range", "op": ">=", "value": 50}},
+  {"id": "c7", "change": {"setting": "finish", "from": "lift 0.02, vignette 0.15", "to": "lift 0.04, vignette 0.10, +0.3 EV grad on the bottom 30%"}, "accept": {"region": [0, 560, 1200, 800], "metric": "lum_median", "op": "between", "value": [52, 70]}},
+  {"id": "c8", "change": {"setting": "hill tops", "from": "0-65 m", "to": "0-40 m"}, "accept": {"region": [520, 250, 700, 290], "metric": "lum_range", "op": "<", "value": 25}}],
+ "out_of_scope": [{"request": "The woofer surround reads as a bright CG ring", "why": "a fixed part"}, {"request": "The acrylic looks yellow-olive", "why": "partly the fixed material"}],
+ "score_if_fixed": 7.0,
+ "_note": "Condensed: score, impression, settings and accept tests verbatim."}

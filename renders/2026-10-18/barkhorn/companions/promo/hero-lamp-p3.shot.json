@@ -1,0 +1,216 @@
+{
+ "title": "Bell beside Haze",
+ "size": [
+  1600,
+  1100
+ ],
+ "camera": {
+  "position": [
+   0.3,
+   -1.25,
+   0.9
+  ],
+  "target": [
+   0.2,
+   0.45,
+   0.98
+  ],
+  "lens_mm": 40,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   0.36,
+   0.18,
+   0.98
+  ]
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.015,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.75,
+  "white_balance_k": 3100
+ },
+ "materials": {
+  "oak": {
+   "grain": 1.0,
+   "roughness": 0.38
+  },
+  "led": {
+   "strength": 12.0
+  }
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   5.6,
+   4.6,
+   2.8
+  ],
+  "center": [
+   0.4,
+   -1.55
+  ],
+  "floor": {
+   "plank_w": 0.19,
+   "plank_l": 1.8,
+   "base": "#B08A60",
+   "dark": "#97724A",
+   "light": "#C49D70",
+   "plank_contrast": 1.1
+  },
+  "wall": {
+   "color": "#EEE9E1"
+  },
+  "ceiling": "#F3F0EA",
+  "skirting": {
+   "h": 0.11,
+   "color": "#ECE8E1"
+  },
+  "windows": [
+   {
+    "wall": "left",
+    "along": 0.9,
+    "sill": 0.45,
+    "size": [
+     1.5,
+     2.0
+    ],
+    "mullions": [
+     1,
+     2
+    ]
+   }
+  ],
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "modern_wooden_cabinet",
+    "res": "4k",
+    "position": [
+     1.25,
+     0.47,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "beige_wall_001",
+    "res": "4k",
+    "color": "#E6E0D6",
+    "size": [
+     5.4,
+     0.008,
+     2.78
+    ],
+    "position": [
+     0.4,
+     0.738,
+     0.005
+    ]
+   }
+  ]
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-violet",
+   "instances": [
+    {
+     "position": [
+      -0.55,
+      0.5,
+      0
+     ],
+     "rotate_z": 12
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-lamp.json",
+   "flavour": "haze",
+   "instances": [
+    {
+     "position": [
+      0.36,
+      0.38,
+      0.68
+     ],
+     "rotate_z": 0
+    }
+   ]
+  }
+ ],
+ "sky": {
+  "kind": "gradient",
+  "strength": 6.0,
+  "zenith": "#1E2C4A",
+  "horizon": "#5A6E92",
+  "ground": "#2A2A30"
+ },
+ "lights": {
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": -55,
+    "elevation_deg": 20,
+    "distance_m": 2.4
+   },
+   "target": [
+    -0.55,
+    0.5,
+    1.0
+   ],
+   "irradiance": 0.3,
+   "color": "#E4D6E8"
+  },
+  "bell1": {
+   "type": "point",
+   "position": [
+    0.36,
+    0.427,
+    1.121
+   ],
+   "power_w": 7.0,
+   "radius_m": 0.02,
+   "color": 2700
+  },
+  "bell2": {
+   "type": "point",
+   "position": [
+    0.3193,
+    0.3565,
+    1.121
+   ],
+   "power_w": 7.0,
+   "radius_m": 0.02,
+   "color": 2700
+  },
+  "bell3": {
+   "type": "point",
+   "position": [
+    0.4007,
+    0.3565,
+    1.121
+   ],
+   "power_w": 7.0,
+   "radius_m": 0.02,
+   "color": 2700
+  }
+ }
+}

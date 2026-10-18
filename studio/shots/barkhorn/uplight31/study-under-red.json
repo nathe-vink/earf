@@ -1,0 +1,206 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-red",
+  "instances": [
+   {
+    "flavour": "cloud-red",
+    "position": [
+     0,
+     0,
+     0.08
+    ],
+    "rotate_z": 0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     0.0,
+     1.25,
+     0.0
+    ],
+    "size": [
+     9.0,
+     0.5,
+     7.0
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 1.0,
+    "bump": 3.5,
+    "vary": 0.2,
+    "vary_m": 3.5,
+    "ties": [
+     0.6,
+     0.62
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "paving",
+    "position": [
+     0.0,
+     -1.5,
+     0.0
+    ],
+    "size": [
+     12.0,
+     9.0
+    ],
+    "texture": "granite_tile",
+    "res": "2k",
+    "wet": 0.35,
+    "puddle_m": 2.5,
+    "vary": 0.2
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "size": [
+     0.66,
+     0.53,
+     0.08
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.45,
+    "ease": 0.012
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "position": [
+     0.0,
+     0.0,
+     0.078
+    ],
+    "size": [
+     0.5700000000000001,
+     0.44,
+     0.003
+    ],
+    "material": "glow",
+    "color": "#FFFFFF",
+    "emit": 0.08,
+    "shadow": false
+   }
+  ]
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "kloppenheim_07_puresky",
+  "res": "2k",
+  "strength": 0.04,
+  "rotation_deg": 0.0
+ },
+ "lights": {
+  "up": {
+   "type": "area",
+   "size_m": [
+    0.48000000000000004,
+    0.35
+   ],
+   "position": [
+    0.0,
+    0.0,
+    0.082
+   ],
+   "target": [
+    0.0,
+    0.0,
+    3.08
+   ],
+   "spread_deg": 45,
+   "power_w": 520.0,
+   "color": "#FFFFFF"
+  },
+  "moon": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    2.0
+   ],
+   "position": [
+    -1.0,
+    -2.0,
+    5.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 0.35,
+   "color": "#D4DCF2"
+  }
+ },
+ "haze": {
+  "box_m": [
+   -2.5,
+   -0.6,
+   -0.05,
+   2.5,
+   0.98,
+   4.0
+  ],
+  "density": 0.028,
+  "anisotropy": 0.7
+ },
+ "camera": {
+  "position": [
+   0.2,
+   -3.6,
+   0.8
+  ],
+  "target": [
+   0.0,
+   0.6,
+   1.15
+  ],
+  "lens_mm": 50.0,
+  "level": true
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 1.35,
+  "white_balance_k": 5600,
+  "white_balance_tint": 0.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 205,
+  "white_out": 205,
+  "peak": 246,
+  "contrast": 0.05,
+  "clarity": 0.1,
+  "sharpen": 0.3
+ },
+ "size": [
+  1200,
+  1200
+ ],
+ "title": "barkhorn, Ember, uplit (under) before a concrete wall"
+}

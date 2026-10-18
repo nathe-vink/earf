@@ -1,0 +1,80 @@
+{
+ "date": "2026-10-18",
+ "new": "renders/2026-10-18/barkhorn/companions/promo/hero-turntable-p4.png",
+ "old": "renders/2026-10-18/barkhorn/companions/promo/hero-turntable-p3.png",
+ "new_score": 5.0,
+ "old_score": 6.0,
+ "prefer": "old",
+ "differences": [
+  {
+   "what": "Turntable is larger in frame and evenly lit; the red acrylic plinth reads as glowing, clear material with a clean edge line, while in B the lower plinth and arm board sink into a murky magenta-red with little edge definition",
+   "region": [
+    270,
+    500,
+    1080,
+    820
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "B has a cropped speaker cabinet at the left edge with a hot magenta-violet glow and bright vertical light panels that pull the eye off the product; A's left side is clean wall and cabinet",
+   "region": [
+    0,
+    0,
+    190,
+    1100
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "B's red-magenta colour cast drowns the walnut and turns the record and tonearm muddy; A holds a warm but more neutral grade where the walnut grain and black arm separate from the red acrylic",
+   "region": [
+    420,
+    510,
+    1230,
+    900
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "B's plaster wall carries a denoiser smear and painterly blotches, plus a dark speck at top left; A's wall is smoother, with less visible artifacting",
+   "region": [
+    150,
+    0,
+    1250,
+    500
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "Tonearm, counterweight and arm rest are crisper with better form shading in B; in A they are soft and slightly blurred at 3x",
+   "region": [
+    960,
+    510,
+    1230,
+    760
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "B's lower camera, wall shadow and moodier light give more depth and atmosphere; A's flat frontal warm light reads as a flatter catalogue shot, with too much slatted cabinet front taking the bottom third",
+   "region": [
+    0,
+    850,
+    1600,
+    1100
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "A's lamp is cut by the top frame edge and its shade is big enough to compete with the turntable; in B it is smaller and balanced against the speaker",
+   "region": [
+    1100,
+    0,
+    1600,
+    700
+   ],
+   "favours": "B"
+  }
+ ]
+}

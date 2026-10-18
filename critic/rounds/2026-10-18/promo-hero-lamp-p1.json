@@ -1,0 +1,346 @@
+{
+ "stage1": {
+  "impression": "A violet horn-shaped lamp on a walnut sideboard throws a big arched shadow across a pink-washed wall, and the shape and the shadow make a real graphic idea. But it reads as CG. The wall and the left object look smeared by the denoiser, like an oil painting. A magenta cast covers everything. The cropped purple slab on the left reads as a TV, not a loudspeaker, and the sideboard front falls into black. Nothing says dusk, and the throat glows cold blue-white against a warm room.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "No denoiser smearing: the wall gradient and the shadow arc show fine, even grain or none at all, with no painterly blotches (wall 1200-1600 x 100-500, left object 0-240 x 50-560)",
+  "The loudspeaker reads at once as a tall acrylic horn, with its whole silhouette or a deliberate crop, not a dark slab cut by the frame edge",
+  "Dusk is visible: a cool blue window or sky light in frame or on the objects, against the lamp's warm light",
+  "The lamp is the brightest and most luminous thing in the frame: the wall above the shade is not brighter than the shade's glow, and the throat does not clip",
+  "Shadows keep detail: the sideboard front and the lower left are not crushed (crush_pct under 25)",
+  "The colour balance reads as warm lamplight through violet acrylic, not an overall magenta grade on a white wall"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    1600,
+    760
+   ],
+   "what": "Denoiser smearing: the wall gradient and the shadow arc have a blotchy, painterly look (64 samples)"
+  },
+  {
+   "region": [
+    0,
+    50,
+    240,
+    560
+   ],
+   "what": "The loudspeaker is cut by the frame and reads as a purple TV or monitor; its blotchy reflections look like a render"
+  },
+  {
+   "region": [
+    0,
+    560,
+    300,
+    1100
+   ],
+   "what": "The left cabinet and the speaker's base are an unreadable dark purple mass (crush 41%)"
+  },
+  {
+   "region": [
+    320,
+    960,
+    1600,
+    1100
+   ],
+   "what": "The slatted front of the sideboard is crushed to black (crush 70.5%, median lum 2)"
+  },
+  {
+   "region": [
+    740,
+    270,
+    860,
+    340
+   ],
+   "what": "The opal sleeve clips (19.5%) and reads blue-white (B 247 > R 218), against the warm 2700 K spec and the warm wall"
+  },
+  {
+   "region": [
+    500,
+    0,
+    1100,
+    240
+   ],
+   "what": "The wall above the shade is the brightest area in the frame (median lum 199) and pulls the eye above the product"
+  },
+  {
+   "region": [
+    500,
+    0,
+    1600,
+    700
+   ],
+   "what": "The white wall (#EEE9E1) renders saturated pink (R245 G186 B194): the whole frame reads as a magenta grade"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1600,
+    1100
+   ],
+   "what": "No window or dusk sky is visible: the dusk story does not read"
+  },
+  {
+   "region": [
+    1250,
+    560,
+    1600,
+    780
+   ],
+   "what": "The violet shadow band on the right runs off-frame and ends abruptly: a large, distracting shape"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The image is visibly denoised to mush: the wall, the shadow arc and the speaker's acrylic look painted.",
+   "evidence": {
+    "region": [
+     1200,
+     100,
+     1600,
+     500
+    ],
+    "measured": "Seen at 1:1: blotchy low-frequency patches on a flat wall; render.samples is 64"
+   },
+   "change": {
+    "setting": "render.samples",
+    "from": "64",
+    "to": "512 (keep the denoiser, fed albedo and normal passes)"
+   },
+   "expected": "Smooth, continuous wall gradients and the shadow arc's penumbra; the acrylic's reflections become crisp shapes instead of smudges",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The loudspeaker, the context piece, is cut down to a dark slab at the frame edge that reads as a TV.",
+   "evidence": {
+    "region": [
+     0,
+     50,
+     240,
+     560
+    ],
+    "measured": "Only about 240 px of its width is in frame; median lum 21, crush 11%"
+   },
+   "change": {
+    "setting": "camera.lens_mm, camera.position, camera.target, products.0.instances.0.position",
+    "from": "50 mm; [0.5471,-1.3303,1.1082]; [0.36,0.45,0.92]; speaker [-0.36,0.36,0]",
+    "to": "35 mm; [0.25,-1.80,1.05]; [0.10,0.45,0.95]; speaker [-0.30,0.50,0], so the speaker's full horn stands, softly defocused, in the left third and the lamp sits on the right third"
+   },
+   "expected": "The speaker's silhouette, from bell to stand, reads at a glance, and the lamp keeps hero scale and focus",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "Nothing in the frame says dusk: the 'room at dusk' is only lamplight on a pink wall.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1600,
+     1100
+    ],
+    "measured": "No window in frame; the sky's cool light hardly registers (left region B median 33, all near black)"
+   },
+   "change": {
+    "setting": "sky.strength (plus set.windows framing)",
+    "from": "2.5",
+    "to": "6.0, and frame part of the left window (along 0.9) behind the speaker so a blue-dusk pane and a cool rim on the speaker's acrylic are visible"
+   },
+   "expected": "A warm/cool contrast: a blue rim and sky on the left, the warm lamp pool on the right; the speaker's edges glow cool",
+   "accept": {
+    "region": [
+     0,
+     50,
+     300,
+     560
+    ],
+    "metric": "b_median",
+    "op": ">",
+    "value": 90
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The lamp's throat clips and reads cold blue-white, so it looks like a fluorescent tube, not a warm glow.",
+   "evidence": {
+    "region": [
+     740,
+     270,
+     860,
+     340
+    ],
+    "measured": "clip_pct 19.5; R 218 G 209 B 247"
+   },
+   "change": {
+    "setting": "materials.led",
+    "from": "strength 60",
+    "to": "strength 25"
+   },
+   "expected": "The sleeve shows a soft opal gradient with no flat white block, and stays the brightest object in the frame",
+   "accept": {
+    "region": [
+     740,
+     270,
+     860,
+     340
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 3
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The sideboard's slatted front and the lower left are crushed to black, which reads as a cheap render.",
+   "evidence": {
+    "region": [
+     320,
+     960,
+     1600,
+     1100
+    ],
+    "measured": "crush_pct 70.5, lum_median 2.1"
+   },
+   "change": {
+    "setting": "lights.fill.irradiance",
+    "from": "0.04",
+    "to": "0.12 (keep its cool colour, and drop elevation_deg from 20 to 8 so it reaches the cabinet front)"
+   },
+   "expected": "The walnut slats show grain and separation in deep shadow; the room stays low-key",
+   "accept": {
+    "region": [
+     320,
+     960,
+     1600,
+     1100
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 25
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The wall above the shade is brighter than the shade, so the eye goes to empty wall.",
+   "evidence": {
+    "region": [
+     500,
+     0,
+     1100,
+     240
+    ],
+    "measured": "lum_median 199 against 126 on the shade's flare (560-1060 x 380-510)"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "0.9",
+    "to": "0.75"
+   },
+   "expected": "The wall hot spot falls below the shade's glow; the shade becomes the luminous centre",
+   "accept": {
+    "region": [
+     500,
+     0,
+     1100,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     140,
+     175
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The off-white wall renders as saturated pink, so the whole image reads as a magenta grade rather than violet light on a warm-white room.",
+   "evidence": {
+    "region": [
+     500,
+     0,
+     1100,
+     240
+    ],
+    "measured": "R 245 G 186 B 194 on a wall specified as #EEE9E1"
+   },
+   "change": {
+    "setting": "render.white_balance_k",
+    "from": "3400",
+    "to": "3800"
+   },
+   "expected": "The wall away from the shade's tint reads warm cream; violet stays in the shade, its shadow and its transmitted light",
+   "accept": {
+    "region": [
+     1200,
+     100,
+     1600,
+     500
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 125
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The right half of the shade's shadow runs off the frame as a heavy violet band that competes with the lamp.",
+   "evidence": {
+    "region": [
+     1250,
+     560,
+     1600,
+     780
+    ],
+    "measured": "Seen: a hard dark band cut by the frame edge"
+   },
+   "change": {
+    "setting": "products.1.instances.0.position",
+    "from": "[0.36, 0.45, 0.68]",
+    "to": "[0.36, 0.38, 0.68] (7 cm off the wall, so the shadow arc grows softer and wider)"
+   },
+   "expected": "A softer, more diffuse arch of shadow that frames the lamp without a hard band at the edge",
+   "accept": {
+    "region": [
+     880,
+     560,
+     1250,
+     760
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 130
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The opal sleeve shows through the shade as a hard rectangular block",
+   "why": "The sleeve and the shade are product parts; only the LED output (c4) can change"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

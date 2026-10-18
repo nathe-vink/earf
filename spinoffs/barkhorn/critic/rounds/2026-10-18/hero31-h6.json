@@ -1,0 +1,331 @@
+{
+ "stage1": {
+  "impression": "A clean, well-judged range shot: eight tinted acrylic speakers on pale paper, lit from behind so they cast coloured light toward the lens, with generous calm space above for type. Two things undo it. A hard horizontal line runs across the floor just behind the front feet and reads as a table edge or a seam, and the coloured throws are pale and washed out, so the main idea lands softly. The row also reads as a catalogue lineup more than a photograph: the black unit is a dead hole, the clear one is grey, and the cabinet faces look slightly plastic.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "No hard horizontal light edge across the floor: the paper should read as one continuous surface from the cove to the bottom of the frame",
+  "The coloured throws are saturated and luminous, clearly the brightest coloured thing on the floor, not pastel smears",
+  "The smoked-black and water-clear units read as tinted acrylic with visible inner structure and edge light, not a black hole and a grey box",
+  "The row reads as a composed arc with depth (the middle clearly recedes, light overlap in the throws), not a flat police lineup",
+  "The acrylic faces show real material cues (edge glow on the 20 mm walls, specular breakup), without studio-flat CG sheen"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    375,
+    1280,
+    390
+   ],
+   "what": "Hard 1 px horizontal light edge across the entire floor (step about 63 levels, 239 behind to 190 in front): the cutter's shadow line reads as a ledge or table edge, and the end speakers look as if they stand in front of it"
+  },
+  {
+   "region": [
+    0,
+    420,
+    1280,
+    600
+   ],
+   "what": "The coloured throws are pastel. White light through the clear parts dominates them, the red throw is nearly neutral (217/211/209) and the green is barely tinted"
+  },
+  {
+   "region": [
+    1075,
+    220,
+    1190,
+    440
+   ],
+   "what": "The smoked-black unit is crushed (median luminance 24, p95 47): a silhouette with no acrylic read"
+  },
+  {
+   "region": [
+    920,
+    210,
+    1030,
+    420
+   ],
+   "what": "The water-clear unit reads as a grey box with a stark white ring. It looks dirty, not crystalline"
+  },
+  {
+   "region": [
+    400,
+    370,
+    900,
+    395
+   ],
+   "what": "Where the middle speakers stand on the bright floor band they lose their contact shadows and weight, and look as if they hover on the band"
+  },
+  {
+   "region": [
+    90,
+    280,
+    1190,
+    440
+   ],
+   "what": "The cabinet faces are flat and slightly muddy, without edge glow on the thick acrylic walls. They read as CG plastic"
+  },
+  {
+   "region": [
+    0,
+    520,
+    1280,
+    640
+   ],
+   "what": "Large empty grey floor at the bottom. It is dull mid-grey (median 206), not the paper's colour"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "set",
+   "problem": "The cutter's bottom edge throws a razor-sharp shadow line across the whole floor that reads as a table edge.",
+   "evidence": {
+    "region": [
+     20,
+     340,
+     40,
+     420
+    ],
+    "measured": "edge step -62.9 at y\u2248380, 10-90 width 1 px; floor behind 238.7, floor in front 190.2"
+   },
+   "change": {
+    "setting": "cutters",
+    "from": "plane square to the sun with a free bottom edge that shadows the floor from y\u2248380 forward",
+    "to": "run the cutter plane down to the floor (bottom edge at z = 0, about 0.3 m behind the speakers' feet along the arc) so the key reaches no paper anywhere except through the acrylic, and the boundary hides behind the cabinets; widen key to 3.0 deg across to soften what remains"
+   },
+   "expected": "The floor reads as one continuous surface with no horizontal step. The luminance change from cove to front is a smooth gradient of under 20 levels between the speakers.",
+   "accept": {
+    "region": [
+     1200,
+     340,
+     1280,
+     440
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 25
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The over silk fills the throws and washes their colour to pastel, so the image's one idea (colour through acrylic) lands weakly.",
+   "evidence": {
+    "region": [
+     360,
+     490,
+     440,
+     525
+    ],
+    "measured": "orange throw RGB 250/218/187; blue throw r_median 214; red throw 217/211/209, nearly neutral"
+   },
+   "change": {
+    "setting": "key / over / exposure",
+    "from": "key 22.0 W/m2, over 10.0 W/m2, exposure -2.55 EV",
+    "to": "key 34 W/m2, over 6.0 W/m2, exposure -2.95 EV (holds the paper's white), vibrance 0.3 -> 0.4"
+   },
+   "expected": "The throws are clearly coloured and luminous against a paper that stays near 215 to 225. The orange and blue throws lose about 20 levels in their complementary channel.",
+   "accept": {
+    "region": [
+     670,
+     485,
+     740,
+     515
+    ],
+    "metric": "r_median",
+    "op": "<",
+    "value": 195
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "Once the seam is gone, the front floor must sit at paper value, not dull grey, or the frame turns dingy.",
+   "evidence": {
+    "region": [
+     1200,
+     400,
+     1280,
+     440
+    ],
+    "measured": "floor in front of the row, median 190.2; bottom of frame median 206"
+   },
+   "change": {
+    "setting": "top / over / finish",
+    "from": "top 3.0 W/m2 at y = 7.0, over 10.0 W/m2 at y = -2.5",
+    "to": "move the over silk to y = -5.0 and set it to 6.0 W/m2 (with c2), raise top to 4.5 W/m2, white point 228 -> 230"
+   },
+   "expected": "The front floor between throws sits at 210 to 222, warm paper, and the colour throws pop above it.",
+   "accept": {
+    "region": [
+     1200,
+     400,
+     1280,
+     440
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     208,
+     224
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The smoked-black unit is a crushed silhouette with no sign that it is tinted acrylic.",
+   "evidence": {
+    "region": [
+     1090,
+     300,
+     1170,
+     420
+    ],
+    "measured": "lum_median 24.5, p95 46.7, crush 0.44 %"
+   },
+   "change": {
+    "setting": "sides",
+    "from": "right strip 12.0 W/m2 at (6, -3, 1.4)",
+    "to": "right strip 20 W/m2 moved to (7, -1, 1.6), plus a 0.4 x 2.5 m strip light-linked to the black cabinet's acrylic only at (5, 2, 1.4), 8 W/m2, giving edge light on its walls and horn"
+   },
+   "expected": "The black cabinet shows its walls, ribs and horn rim in smoky grey highlights while it stays the darkest object.",
+   "accept": {
+    "region": [
+     1090,
+     300,
+     1170,
+     420
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 75
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The cabinets' faces are flat and muddy, without the edge glow of thick cast acrylic, so they read as CG plastic.",
+   "evidence": {
+    "region": [
+     660,
+     270,
+     740,
+     390
+    ],
+    "measured": "blue cabinet lum_median 74, p95 143; faces evenly lit by the face box, no bright edges visible in the crops"
+   },
+   "change": {
+    "setting": "face / key",
+    "from": "face 4 x 2 m at 8.0 W/m2, no reflection",
+    "to": "face 6 W/m2 and allowed in reflections as a narrow 4 x 0.6 m strip at height 3.2 m, so each top front edge picks up a crisp line; key elevation 20 -> 16 deg so more sun runs through the walls' thickness"
+   },
+   "expected": "Each cabinet shows a bright rim on its 20 mm edges and a gradient across its face. The interior reads through more clearly.",
+   "accept": {
+    "region": [
+     660,
+     270,
+     740,
+     390
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 170
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "composition",
+   "problem": "The row reads as a flat lineup. The arc barely registers and every speaker sits at nearly the same size and height.",
+   "evidence": {
+    "region": [
+     90,
+     200,
+     1190,
+     440
+    ],
+    "measured": "feet run from y\u2248440 at the ends to y\u2248400 in the middle, only 40 px of depth; cabinet widths 100-115 px across the row"
+   },
+   "change": {
+    "setting": "arrangement",
+    "from": "arc depth 1.4 m, turn +15 deg toward the middle",
+    "to": "arc depth 2.6 m, centres 0.9 m apart, turn +22 deg toward the middle"
+   },
+   "expected": "A clearly curved arc whose middle units recede. The throws fan toward the lens and overlap slightly, which gives depth.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The camera sits high and far away, so the products are small (about 18 % of frame height) and the bottom 20 % is empty grey floor.",
+   "evidence": {
+    "region": [
+     0,
+     540,
+     1280,
+     640
+    ],
+    "measured": "median 206, no content; speakers span y 205-440 of 640"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "(0, -15.0, 2.6), 70 mm, extra shift -0.015",
+    "to": "(0, -13.0, 2.0), 75 mm, extra shift +0.03 so the throws end about 8 % above the bottom edge and the top fifth stays clear for the title"
+   },
+   "expected": "The speakers fill about 25 % of the height, the throws reach close to the bottom edge, and the top-left stays clean for type.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The middle speakers stand on the brightest strip of floor and lose their contact shadow, so they look weightless.",
+   "evidence": {
+    "region": [
+     560,
+     385,
+     620,
+     405
+    ],
+    "measured": "floor directly beside the green and blue feet at about 230 to 239, with no darkening under the cabinet edge in the crop"
+   },
+   "change": {
+    "setting": "paper contact shadow",
+    "from": "0.35",
+    "to": "0.6"
+   },
+   "expected": "A thin dark line of occlusion under each cabinet foot, about 30 to 50 levels below the surrounding paper.",
+   "accept": {
+    "region": [
+     560,
+     398,
+     620,
+     404
+    ],
+    "metric": "lum_p5",
+    "op": "<",
+    "value": 170
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the water-clear unit's woofer ring less stark white, and its lining less grey",
+   "why": "The ring and the white batts are parts and colours of the speaker, which are fixed. Only the light on them can change."
+  },
+  {
+   "request": "Let more coloured light, and less white light, through the cabinets (the clear parts now dominate the throws)",
+   "why": "This depends on the cabinet's construction (where the opaque batts and clear parts sit), which is fixed."
+  }
+ ],
+ "score_if_fixed": 7.6
+}
