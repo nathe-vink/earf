@@ -247,7 +247,10 @@ def main():
     cy.volume_bounces = R.get('volume_bounces', 2)      # a material with a volume (frosted) scatters inside it
     cy.sample_clamp_indirect = R.get('clamp', 10.0)
     cy.blur_glossy = R.get('filter_glossy', 0.5)
-    cy.caustics_reflective = False; cy.caustics_refractive = False
+    cy.caustics_reflective = False
+    # refractive caustics off by default (noise); a shot may turn them on so light reaches what stands behind clear
+    # parts (round 31b: the lining inside a tinted acrylic cabinet, lit by the sky through the acrylic)
+    cy.caustics_refractive = bool(R.get('caustics_refractive', False))
     if a.threads:
         scene.render.threads_mode = 'FIXED'; scene.render.threads = a.threads
     scene.render.resolution_x = int(W * a.scale); scene.render.resolution_y = int(H * a.scale)
