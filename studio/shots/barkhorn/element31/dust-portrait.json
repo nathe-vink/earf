@@ -1,0 +1,333 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-orange",
+  "instances": [
+   {
+    "flavour": "cloud-orange",
+    "position": [
+     0.0,
+     0.0,
+     -0.008
+    ],
+    "rotate_z": 0.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "terrain",
+    "eye": [
+     -2.052,
+     -5.638
+    ],
+    "heading": 70.0,
+    "half_angle": 42.0,
+    "r0": 1.2,
+    "r1": 292.0,
+    "segments": 460,
+    "flat": [
+     0.0,
+     0.0,
+     2.2
+    ],
+    "swell": 0.35,
+    "swell_size": 11.0,
+    "rim": 1.6,
+    "vary": [
+     14.0,
+     0.55
+    ],
+    "material": "pbr",
+    "texture": "aerial_beach_01",
+    "tex_scale": 2.6,
+    "tint": "#B9592A",
+    "tint_mix": 0.8,
+    "res": "4k",
+    "rough_mul": 1.0,
+    "bump": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     700.0,
+     700.0,
+     0.1
+    ],
+    "position": [
+     0.0,
+     0.0,
+     -0.45
+    ],
+    "material": "pbr",
+    "texture": "aerial_beach_01",
+    "tex_scale": 2.6,
+    "tint": "#B9592A",
+    "tint_mix": 0.8,
+    "res": "4k",
+    "rough_mul": 1.0,
+    "bump": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "mesa",
+    "position": [
+     141.34,
+     199.15,
+     -0.5
+    ],
+    "radius": 34,
+    "height": 24,
+    "seed": 1,
+    "squash": 0.45,
+    "cliff": 0.4,
+    "wander": 0.22,
+    "material": "pbr",
+    "texture": "cliff_side",
+    "tex_scale": 19.0,
+    "tint": "#8E4428",
+    "tint_mix": 0.5,
+    "res": "2k",
+    "vary": [
+     30.0,
+     0.45
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "mesa",
+    "position": [
+     16.69,
+     208.54,
+     -0.5
+    ],
+    "radius": 7,
+    "height": 22,
+    "seed": 2,
+    "squash": 0.9,
+    "cliff": 0.45,
+    "wander": 0.22,
+    "material": "pbr",
+    "texture": "cliff_side",
+    "tex_scale": 19.0,
+    "tint": "#8E4428",
+    "tint_mix": 0.5,
+    "res": "2k",
+    "vary": [
+     30.0,
+     0.45
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "mesa",
+    "position": [
+     -36.78,
+     277.24,
+     -0.5
+    ],
+    "radius": 40,
+    "height": 14,
+    "seed": 3,
+    "squash": 0.35,
+    "cliff": 0.4,
+    "wander": 0.22,
+    "material": "pbr",
+    "texture": "cliff_side",
+    "tex_scale": 19.0,
+    "tint": "#8E4428",
+    "tint_mix": 0.5,
+    "res": "2k",
+    "vary": [
+     30.0,
+     0.45
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "mesa",
+    "position": [
+     93.71,
+     257.48,
+     -0.5
+    ],
+    "radius": 26,
+    "height": 9,
+    "seed": 4,
+    "squash": 0.4,
+    "cliff": 0.5,
+    "wander": 0.22,
+    "material": "pbr",
+    "texture": "cliff_side",
+    "tex_scale": 19.0,
+    "tint": "#8E4428",
+    "tint_mix": 0.5,
+    "res": "2k",
+    "vary": [
+     30.0,
+     0.45
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "tumbleweed",
+    "diameter": 0.62,
+    "seed": 11,
+    "position": [
+     1.35,
+     1.1,
+     0.24
+    ],
+    "rotate": [
+     8,
+     14,
+     30
+    ],
+    "color": "#B6976F"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "dust",
+    "size": [
+     3.2,
+     1.6,
+     0.9
+    ],
+    "position": [
+     2.6,
+     1.6,
+     -0.02
+    ],
+    "density": 1.0,
+    "wisp": 0.5,
+    "color": "#E9BC94"
+   }
+  ]
+ },
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": -15,
+    "elevation_deg": 6,
+    "distance_m": 4.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.55
+   ],
+   "irradiance": 0.5,
+   "color": "#F2B07E"
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0,
+  "look": "AgX - Base Contrast"
+ },
+ "title": "barkhorn, Dust, the Southwest at golden hour (4:5)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -1.7785,
+   -4.8864,
+   0.78
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.66
+  ],
+  "lens_mm": 55.0,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   -0.21,
+   0.66
+  ],
+  "shift_x": 0.1,
+  "shift_y": 0.0
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "qwantani_sunset_puresky",
+  "rotation_deg": 84.0,
+  "strength": 0.5,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": 150.0,
+  "elevation_deg": 11.0,
+  "irradiance": 9.0,
+  "angle_deg": 0.6,
+  "color": "#FE9E29"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.05,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.08,
+   "bloom_px": 30,
+   "bloom_threshold": 0.95,
+   "saturation": 0.06,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.12
+  }
+ },
+ "haze": {
+  "box_m": [
+   -320.0,
+   -30.0,
+   -1.0,
+   320.0,
+   320.0,
+   70.0
+  ],
+  "density": 0.0011,
+  "anisotropy": 0.6,
+  "color": "#F4D2B0"
+ }
+}
