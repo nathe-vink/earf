@@ -17,7 +17,7 @@ from common import piece
 
 CLUSTER = (-1.15, 1.3)              # at the left redwood's foot (outside its buttresses), left of the speaker, ~8 m from the lens
 # (dx, dy, cap radius, age, seed, lean, torn)
-AGARICS = [(0.0, 0.0, 0.085, 'plane', 61, (0.02, -0.01), 0.0),
+AGARICS = [(0.0, 0.0, 0.085, 'convex', 61, (0.02, -0.01), 0.0),
            (0.13, -0.08, 0.065, 'convex', 62, (0.05, -0.02), 0.0),       # tilted out of the clump
            (-0.1, -0.1, 0.045, 'young', 63, (-0.01, 0.0), 0.35),          # its margin bitten
            (0.06, -0.18, 0.024, 'button', 64, (0.0, 0.0), 0.0)]
@@ -77,7 +77,7 @@ def shot():
                           seed=sd, bells=int(14 * h)))
     # A's flaws: a softer sun edge for the horn's shadow across the woofer ring; the right side lifted
     s['sun'] = {**s['sun'], 'angle_deg': 2.0}
-    s['lights']['card'] = {**s['lights']['card'], 'irradiance': 1.6}
+    s['lights']['card'] = {**s['lights']['card'], 'irradiance': 2.4}
     s['title'] = 'barkhorn, Poison A2, the redwood floor with its poisons'
     return s
 

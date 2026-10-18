@@ -19,3 +19,4 @@ All of it is a patch over `poison.py`'s shot (`poison_a2.py`). A's own file is u
 
 | Pass | Score | Verdict | Main changes asked | What I did |
 |---|---|---|---|---|
+| 1 | 5.5 | iterate | No visible shafts or mist behind; the horn lost against the dark; the near ground outshines the speaker; a hard-edged moss mat at the plinth and strip-like moss; smeared duff; the agarics toy-like; the right side falls dark; a staged stick | In scope only (A2 is dueled against A, so A's set and light stay): the right side's card 1.6 → 2.4 and the largest cap convex, not plane. The rest (a new sun and mist, the ground, the plinth's moss, the stick) is A's own set and was in A's duel, so it is left as is |
