@@ -69,3 +69,19 @@ behind the driver and one front-left, both linked to it, moved the crush from 53
 |---|---|---|---|---|
 | 6 | p6 (`p6-blue-on.png`), through-light, f/6.3 | 5.5 | key on the hidden side, so the seen faces are dark; a cyan cast on the paper; thin contact; denoise smearing; grey top-left | key back to -35 degrees; paper at a third of the look book's tint; denser contact; more wall light; more backlight; **256 samples** (every critic named the denoiser's smearing) |
 | 7 | p7 (`p7-blue-on.png`), 256 samples | **6.0** | the top-right corner dissolves into a flat near-white paper; a cyan cast; no coloured pool on the floor; the top pad as bright as the paper; no falloff to the top | the paper falls off behind the right side; warmer paper lights; a diffuse-only backlight on the paper for the pool; key lower; less floor wash; horn light into the throat; grain 1.5 |
+| 8 | p8 (`p8-blue-on.png`) | 6.0 | no contact core (the wash fills it); a lopsided paper; the horn's rim lost on near-white; the top band hot; no sheen on the front | less wash, a denser contact; the wall's glow centred; less fill; the top line cooler; a long graduated sheen panel for the front |
+| 9 | p9 (`p9-blue-on.png`) | 5.5 | the paper still lopsided (dark left, near-white right); no coloured pool; the front's sheen stops a third down; the top band clips; thin contact | see the duel below; then a continuous scrim, a cooler top line, a wider contact, contrast 0.2, the key gridded to 50 degrees, the paper lamp a little up |
+
+From pass 7 on, the single scores sit inside their own noise (5.5 to 6.0) and the critics contradict each other on the
+paper (pass 7: darker behind the right side; pass 8: centre the glow; pass 9: even it out). A blind duel is more
+sensitive (two frames side by side), so from here the duel decides which way to go:
+
+- **duel 2:** p9 against p7 (the first 6.0): **p9 wins, 6.0 to 5.5**: the neutral grey paper separates the silhouette,
+  the horn's throat shows the phase plug and vanes with a crisp specular, the horn's rim has a moulded highlight, the
+  disc has more range; p7's floor was cleaner. p9 is the best Ice frame so far (`critic/best.json`).
+
+**Smoke**, pass 1 (`s1-black-on.png`, the p13 rig): **5.5**: the side panel a dead black slab (it mirrors the black
+flag), the paper's top-left muddy, little weight at the right-back corner, the horn's bowl a void with thin streaks,
+the floor cooler than the wall. Smoke needs the flag's mirror to carry some light where the clear colours want black:
+a faint graduated sheen in front of the side flag (`sidesheen`, 0.4 peak; at the side's 68 degree incidence a clear
+colour barely shows it), and the wall, pool, horn light and the fill's and ambient's colour as it asked.

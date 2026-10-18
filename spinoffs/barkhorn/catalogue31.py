@@ -34,7 +34,7 @@ COLOURS = {
     'green':  dict(flavour='eucalyptus-y2k-green', sweep='#D6D9D4', ev=0.0),
     'blue':   dict(flavour='cloud-blue',           sweep='#DBDFE2', ev=0.0),
     'violet': dict(flavour='cloud-violet',         sweep='#D9D7DC', ev=0.0),
-    'ice':    dict(flavour='birch-fog-clear',      sweep='#DADCDC', ev=0.0),
+    'ice':    dict(flavour='birch-fog-clear',      sweep='#DADCDC', ev=-0.6),
     'black':  dict(flavour='cloud-black',          sweep='#D5D4D3', ev=0.0),
 }
 
@@ -44,6 +44,8 @@ CABINET = ['right', 'left', 'front-panel', 'top', 'bottom', 'back']
 SPEAKER = CABINET + ['lining-*', 'rib-*', 'brace*', 'land-*', 'waveguide*', 'hf-*', 'grip-*', 'post*', 'port*', 'woofer*',
                      'cloth-disc', 'amp*', 'feet*', 'tie-rod*', 'top-pad', 'cap-o-ring', 'cable-glands', 'lead-*', 'mark-back',
                      'rating-plate*', 'back-*']
+# the speaker less its lining: the lamps through and beside it, so the white batts are not the brightest thing on it
+SHELL = [p for p in SPEAKER if p != 'lining-*']
 HORN = ['waveguide', 'waveguide-cap']
 
 RIG = {
@@ -51,13 +53,13 @@ RIG = {
     'camera': {'position': [1.2, -2.5, 1.0], 'target': [0.0, 0.05, 0.52], 'lens_mm': 90.0, 'level': True,
                'shift_x': -0.0245, 'shift_y': -0.015,
                'fstop': 6.3, 'focus': [0.28, -0.21, 0.6]},
-    'sky': {'kind': 'gradient', 'zenith': '#2A2A2A', 'horizon': '#2E2E2E', 'ground': '#1A1A1A', 'strength': 0.15},
+    'sky': {'kind': 'gradient', 'zenith': '#2B2A28', 'horizon': '#2F2D2B', 'ground': '#1B1A19', 'strength': 0.15},
     'set': {'kind': 'sweep', 'width': 18.0, 'front': 5.0, 'depth': 5.5, 'radius': 2.8, 'height': 5.5,
-            'contact': {'strength': 0.8, 'distance_m': 0.18, 'core_strength': 0.9, 'core_distance_m': 0.008},
+            'contact': {'strength': 0.9, 'distance_m': 0.32, 'core_strength': 0.95, 'core_distance_m': 0.015},
             'flags': [
                 # the side panel's mirror (it looks behind-right and down, azimuth 158 to 161): black on the floor
                 # there and standing behind it, seen only in reflections, so the side reads a deep clean colour
-                {'center_m': [1.3, 1.4, 0.005], 'size_m': [2.4, 3.2], 'normal': [0.0, 0.0, 1.0], 'reflect_only': True,
+                {'center_m': [1.6, 1.8, 0.005], 'size_m': [1.6, 2.4], 'normal': [0.0, 0.0, 1.0], 'reflect_only': True,
                  'color': '#060606'},
                 {'center_m': [1.8, 2.7, 1.3], 'size_m': [3.0, 2.6], 'normal': [-0.37, -0.93, 0.0], 'reflect_only': True,
                  'color': '#060606'},
@@ -69,30 +71,39 @@ RIG = {
             ]},
     'lights': {
         'key': {'type': 'area', 'size_m': [1.8, 2.2], 'orbit': {'azimuth_deg': -35, 'elevation_deg': 22, 'distance_m': 1.5},
-                'target': [-0.55, 0.0, 0.9], 'irradiance': 5.2, 'color': '#FFF5E8', 'spread_deg': 70},
+                'target': [-0.55, 0.0, 0.9], 'irradiance': 5.2, 'color': '#FFF5E8', 'spread_deg': 50},
         'fill': {'type': 'area', 'size_m': [2.0, 2.0], 'orbit': {'azimuth_deg': 40, 'elevation_deg': 15, 'distance_m': 4.0},
-                 'target': [0.0, 0.0, 0.6], 'irradiance': 1.6, 'color': '#FFF8F0', 'specular': 0.3},
+                 'target': [0.0, 0.0, 0.6], 'irradiance': 1.1, 'color': '#FFF2E6', 'specular': 0.3},
         # through-light: a softbox behind the speaker, so the light that sells tinted acrylic, the light through it,
         # is in the picture: a rim on every edge, the horn's resin lit from behind; linked to the speaker, since the
         # paper's gloss drew it as a streak beside the cabinet
         'back': {'type': 'area', 'size_m': [1.2, 1.0], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 20, 'distance_m': 2.0},
-                 'target': [0.0, -0.3, 0.3], 'irradiance': 3.0, 'color': '#FFF8F0',
-                 'receivers': SPEAKER},
+                 'target': [0.0, -0.3, 0.3], 'irradiance': 2.4, 'color': '#FFF8F0',
+                 'receivers': SHELL},
         # the same light on the paper alone, diffuse only (so its gloss draws no streak): what crosses the tinted
         # acrylic lands on the floor in front of the base, coloured
         'pool': {'type': 'area', 'size_m': [1.2, 1.0], 'orbit': {'azimuth_deg': 160, 'elevation_deg': 35, 'distance_m': 2.0},
-                 'target': [0.1, -0.4, 0.0], 'irradiance': 2.5, 'color': '#FFF8F0', 'specular': 0.0, 'receivers': ['sweep']},
+                 'target': [0.1, -0.4, 0.0], 'irradiance': 1.0, 'color': '#FFF8F0', 'specular': 0.0, 'receivers': ['sweep']},
         # the camera-side face lit through: a kicker on the speaker alone
         'kick': {'type': 'area', 'size_m': [1.2, 1.8], 'orbit': {'azimuth_deg': 100, 'elevation_deg': 20, 'distance_m': 1.8},
-                 'target': [0.28, 0.0, 0.6], 'irradiance': 1.8, 'color': '#FFF8F0', 'receivers': SPEAKER},
+                 'target': [0.28, 0.0, 0.6], 'irradiance': 2.0, 'color': '#FFF8F0', 'receivers': SHELL},
         # the front's acrylic mirrors the floor front-left (azimuth -27, 4 to 20 degrees down): a graduated card
         # lying there, seen only in reflections, a soft sheen up the lower front
         'scrim': {'type': 'panel', 'size_m': [1.6, 3.0], 'position': [-0.75, -2.2, 0.004], 'target': [-0.75, -2.0, 2.0],
-                  'strength': 0.5, 'color': '#FFFFFF', 'diffuse': 0.0,
-                  'ramp': {'axis': 'y', 'at_m': [-3.6, -1.2], 'values': [1.0, 0.0]}},
+                  'strength': 0.9, 'color': '#FFFFFF', 'diffuse': 0.0,
+                  'ramp': {'axis': 'y', 'at_m': [-3.6, -1.6], 'values': [1.0, 0.25]}},
+        # a long soft sheen down the front's acrylic, so it reads as a glossy slab and not a tinted outline
+        'sheen': {'type': 'panel', 'size_m': [0.4, 2.0], 'position': [-1.4, -1.6, 0.6], 'target': [0.0, 0.0, 0.5],
+                  'strength': 0.6, 'color': '#FFFFFF', 'diffuse': 0.0,
+                  'ramp': {'axis': 'z', 'at_m': [-0.4, 1.6], 'values': [1.0, 0.2]}},
         # the top's 20 mm edge mirrors front-left, level: a white card far off, a crisp line along the top
         'topline': {'type': 'panel', 'size_m': [1.8, 0.5], 'position': [-1.0, -2.1, 0.95], 'target': [0.0, -0.1, 0.9],
-                    'strength': 4.0, 'color': '#FFFFFF', 'diffuse': 0.0},
+                    'strength': 1.8, 'color': '#FFFFFF', 'diffuse': 0.0},
+        # a faint graduated sheen in front of the side's black flag: a clear colour keeps its deep side, a smoked one
+        # shows a surface instead of a black slab
+        'sidesheen': {'type': 'panel', 'size_m': [0.8, 2.0], 'position': [1.1, 2.3, 0.6], 'target': [0.28, 0.0, 0.5],
+                      'strength': 0.6, 'color': '#FFFFFF', 'diffuse': 0.0,
+                      'ramp': {'axis': 'z', 'at_m': [-0.4, 1.6], 'values': [0.15, 1.0]}},
         # a 1 cm strip standing in the plane the near vertical edge mirrors (through the camera's mirror image and that
         # edge), so its reflection is a line on the edge at every height
         'edge': {'type': 'area', 'size_m': [0.06, 1.2], 'position': [0.42, 0.135, 0.6], 'target': [0.28, -0.21, 0.6],
@@ -100,20 +111,20 @@ RIG = {
         # the horn's upper rim mirrors up and toward the camera
         'rim': {'type': 'area', 'size_m': [1.4, 0.3], 'position': [0.3, -0.5, 2.0], 'target': [0.05, 0.0, 1.2],
                 'power_w': 12, 'color': '#FFFFFF', 'diffuse': 0.1, 'receivers': HORN},
-        'horn': {'type': 'area', 'size_m': [1.4, 0.4], 'position': [0.8, -1.4, 1.35],
-                 'target': [0.05, 0.0, 1.12], 'irradiance': 2.6, 'color': '#FFF8F0', 'spread_deg': 30, 'specular': 1.0},
-        'paper': {'type': 'area', 'size_m': [0.5, 0.5], 'position': [-0.35, 0.75, 0.5], 'target': [-0.5, 2.2, 1.6],
-                  'power_w': 150, 'color': '#FFF0E2', 'receivers': ['sweep'], 'spread_deg': 140},
+        'horn': {'type': 'area', 'size_m': [1.4, 0.7], 'position': [0.8, -1.4, 1.35],
+                 'target': [0.05, 0.0, 1.12], 'irradiance': 2.6, 'color': '#FFF8F0', 'spread_deg': 40, 'specular': 1.0},
+        'paper': {'type': 'area', 'size_m': [0.5, 0.5], 'position': [-0.35, 0.75, 0.5], 'target': [-0.8, 2.4, 2.4],
+                  'power_w': 210, 'color': '#FFF0E2', 'receivers': ['sweep'], 'spread_deg': 140},
         # the paper on the key side, so it falls off gently and does not go grey
-        'wall': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-1.5, 1.0, 3.5], 'target': [-3.2, 5.0, 2.0],
-                 'irradiance': 1.6, 'color': '#FFF0E2', 'receivers': ['sweep']},
+        'wall': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-1.5, 1.0, 3.5], 'target': [-1.2, 5.0, 2.6],
+                 'irradiance': 1.8, 'color': '#FFF0E2', 'receivers': ['sweep']},
         'wash': {'type': 'area', 'size_m': [4.0, 1.5], 'position': [0.4, -1.4, 3.0], 'target': [0.0, -0.4, 0.0],
-                 'irradiance': 1.0, 'color': '#FFF0E2', 'receivers': ['sweep']},
+                 'irradiance': 0.5, 'color': '#FFF0E2', 'receivers': ['sweep']},
     },
     'render': {'samples': 256, 'adaptive': 0.01, 'denoise': True, 'clamp': 8, 'bounces': 32,
                'glossy_bounces': 16, 'transmission_bounces': 32, 'view': 'Khronos PBR Neutral', 'exposure': 0.0,
                'white_balance_k': 5600, 'white_balance_tint': 3.0},
-    'finish': {'enabled': True, 'white_in': 236, 'white_out': 236, 'contrast': 0.10, 'clarity': 0.05,
+    'finish': {'enabled': True, 'white_in': 236, 'white_out': 236, 'contrast': 0.2, 'clarity': 0.05,
                'sharpen': 0.3, 'sharpen_px': 0.7, 'grain': 1.5, 'grain_px': 1.0},
 }
 

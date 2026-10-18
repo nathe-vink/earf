@@ -1,0 +1,347 @@
+{
+ "stage1": {
+  "impression": "A clean, well-proportioned catalogue render of a blue acrylic horn speaker on a grey seamless: the horn and cabinet silhouette read at once and the tint is attractive. But it still reads as CG. The sweep is a dull, lopsided grey (dark left, near-white right), the floor carries none of the blue light that should pass through the acrylic, the lower front panel goes flat and murky, and the cloth disc and lining read as matte plastic, so it looks like a cutaway model rather than a photograph of a $20,000 object.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Sweep evenly lit across the frame: left and right background within about 25 levels of each other, with a gentle top-to-floor falloff, not a side-to-side wedge",
+  "The tinted acrylic visibly throws blue light onto the paper in front of and beside the feet",
+  "A continuous glossy gradient reflection down the front panel so the acrylic reads as thick, polished cast material from top to base",
+  "Cloth disc and lining read as real textile and fibre (out of scope here, but it blocks a 9)",
+  "Full-resolution final at 1080 x 2160 with no noise in the dark interior"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    300,
+    80,
+    760
+   ],
+   "what": "Left sweep is dull grey (lum median 169 to 194) while the right is near white (237 to 240): a lopsided wedge that reads as a light falling off, not as a designed sweep"
+  },
+  {
+   "region": [
+    450,
+    300,
+    540,
+    960
+   ],
+   "what": "Right sweep sits at 237 to 240 against white_in 236, close to blown; no tone left in the paper"
+  },
+  {
+   "region": [
+    150,
+    960,
+    350,
+    1010
+   ],
+   "what": "Floor in front of the base is neutral grey (r 166, g 179, b 188), the same cast as the rest of the paper: no blue transmitted light from the acrylic, so the speaker sits on the floor rather than in it"
+  },
+  {
+   "region": [
+    125,
+    480,
+    135,
+    940
+   ],
+   "what": "Front panel's reflection stops a third of the way down (212 at the top, 113 to 117 at the bottom): the lower panel goes murky and flat"
+  },
+  {
+   "region": [
+    125,
+    485,
+    345,
+    545
+   ],
+   "what": "Top band of the front panel is hot (b 251, 0.9 % clipped) next to the murky lower half"
+  },
+  {
+   "region": [
+    140,
+    580,
+    320,
+    780
+   ],
+   "what": "Cloth disc is a flat matte blue disc (lum range 29) with no weave or edge definition; reads as plastic (fixed: cloth shader being reworked)"
+  },
+  {
+   "region": [
+    120,
+    800,
+    345,
+    930
+   ],
+   "what": "Lining batts and ports read as smooth white CG blocks (fixed: lining shader being reworked)"
+  },
+  {
+   "region": [
+    120,
+    940,
+    440,
+    960
+   ],
+   "what": "Contact shadow is a thin dark line (60 at the base, 169 a few pixels below) with little soft spread toward camera; the base reads slightly light on its feet"
+  },
+  {
+   "region": [
+    200,
+    300,
+    330,
+    420
+   ],
+   "what": "Horn throat crushes to black (38 % below threshold); fixed by the card as the resin's own depth"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The sweep falls from near white on the right to dull grey on the left, so the background reads as an uneven, unplanned wedge instead of a calm seamless.",
+   "evidence": {
+    "region": [
+     0,
+     300,
+     80,
+     500
+    ],
+    "measured": "left lum median 169, right [460,300,540,500] 237: a 68-level difference across the frame"
+   },
+   "change": {
+    "setting": "lights.paper power",
+    "from": "100 W",
+    "to": "220 W"
+   },
+   "expected": "Left sweep lifts to about 200 to 210 so the background reads as one even paper with a gentle falloff; within 25 to 30 levels of the right.",
+   "accept": {
+    "region": [
+     0,
+     300,
+     80,
+     500
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     198,
+     215
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The key's spill lands on the right side of the sweep and pushes it close to white, which flattens the right silhouette and leaves the paper without tone.",
+   "evidence": {
+    "region": [
+     450,
+     560,
+     540,
+     760
+    ],
+    "measured": "lum median 239.5, p95 243.6 against white_in 236"
+   },
+   "change": {
+    "setting": "lights.key spread_deg",
+    "from": "70",
+    "to": "50"
+   },
+   "expected": "Right sweep settles at about 220 to 228; the cabinet's right edge holds against paper with some tone instead of near white.",
+   "accept": {
+    "region": [
+     450,
+     560,
+     540,
+     760
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     215,
+     230
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The blue acrylic throws no coloured light onto the paper, so the speaker does not belong to its ground and the tint's best quality (light passing through it) is never shown.",
+   "evidence": {
+    "region": [
+     150,
+     960,
+     350,
+     1010
+    ],
+    "measured": "floor in front of the base r 166, g 179, b 188, the same neutral cast as the paper at [0,880,90,960] (r 182, b 199)"
+   },
+   "change": {
+    "setting": "lights.back receivers and elevation",
+    "from": "cabinet parts only, el 20",
+    "to": "add 'sweep' to receivers, el 32, irradiance 3.0 to 3.6 W/m2"
+   },
+   "expected": "The back light passes through the side and front acrylic and lays a soft blue pool on the paper in front of and to the right of the feet; works for all eight tints because each casts its own colour.",
+   "accept": {
+    "region": [
+     150,
+     960,
+     350,
+     1010
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 152
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The front panel's reflection dies a third of the way down, so the lower cabinet reads murky and flat and the acrylic loses its thickness and polish.",
+   "evidence": {
+    "region": [
+     125,
+     480,
+     135,
+     940
+    ],
+    "measured": "falloff profile 212, 207, 197, 113, 166, 166, 145, 117: highlight collapses below the top third"
+   },
+   "change": {
+    "setting": "lights.scrim peak radiance and ramp",
+    "from": "0.5, ramp y [-3.6, -1.2] values [1.0, 0.0]",
+    "to": "0.9, ramp y [-3.6, -1.6] values [1.0, 0.25]"
+   },
+   "expected": "A continuous soft gradient runs down the front panel from bright at the top to about 150 at the base, so the panel reads as one sheet of glossy cast acrylic.",
+   "accept": {
+    "region": [
+     125,
+     880,
+     345,
+     930
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 140
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The top band of the front panel is clipping in blue while the rest of the panel is dark, which reads as a hot CG highlight.",
+   "evidence": {
+    "region": [
+     125,
+     485,
+     345,
+     545
+    ],
+    "measured": "b median 251, clip 0.89 %"
+   },
+   "change": {
+    "setting": "lights.topline peak radiance",
+    "from": "2.6",
+    "to": "1.8"
+   },
+   "expected": "The top band keeps its bright edge but holds blue detail, clip under 0.2 %.",
+   "accept": {
+    "region": [
+     125,
+     485,
+     345,
+     545
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The contact shadow is a thin line with little soft spread, so the 1.3 m cabinet does not feel heavy on the paper.",
+   "evidence": {
+    "region": [
+     200,
+     930,
+     260,
+     1080
+    ],
+    "measured": "profile 60 at the base then 169 to 175 within a few pixels; floor further out 191 to 193"
+   },
+   "change": {
+    "setting": "set contact shadow",
+    "from": "strength 0.9, distance_m 0.12",
+    "to": "strength 0.9, distance_m 0.22 (core unchanged)"
+   },
+   "expected": "A soft occlusion spreads 2 to 4 cm-equivalent in front of the base, darkening the floor just below the feet to about 150 to 165 and fading to the paper.",
+   "accept": {
+    "region": [
+     150,
+     960,
+     350,
+     985
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     148,
+     168
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "With the sweep evened out, the frame will sit at uniform mid-grey and read low in contrast; it needs a touch more separation in the product without lifting the paper to white.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     540,
+     1080
+    ],
+    "measured": "image lum p50 183.6, p99 242.0; product mid-tones bunched at 88 to 115"
+   },
+   "change": {
+    "setting": "finish contrast",
+    "from": "0.15",
+    "to": "0.22"
+   },
+   "expected": "The product's mid-tones open up slightly; the paper stays under 236.",
+   "accept": {
+    "region": [
+     450,
+     560,
+     540,
+     760
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 238
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the cloth disc a visible weave, a softer edge and some light falloff across its surface",
+   "why": "It reads as a flat matte plastic disc (lum range 29 over [140,580,320,780]); the cover's cloth is the speaker itself and its shader is being reworked elsewhere"
+  },
+  {
+   "request": "Give the lining batts and voile sleeves fibre texture and translucency",
+   "why": "They read as smooth white CG blocks through the acrylic; the lining shader is being reworked elsewhere"
+  },
+  {
+   "request": "Open up the horn throat's black mass",
+   "why": "The card fixes it as the tinted resin's own depth"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

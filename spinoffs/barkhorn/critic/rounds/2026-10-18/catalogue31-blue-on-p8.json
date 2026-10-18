@@ -1,0 +1,305 @@
+{
+ "stage1": {
+  "impression": "A clean, quiet catalogue render: the ice-blue resin horn is the best thing in the frame, glowing and well edged, and the cabinet's tint reads true. But it still reads as CG: the cabinet barely touches the paper (a soft, shallow shadow with no dark core), the top of the cabinet and the horn's right rim dissolve into a near-white background, the paper falls off in an uneven diagonal from a grey top-left corner, and the flat matte cloth disc and blocky white lining look like untextured placeholders.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "A grounded contact: a dark core line under the cabinet's front edge and a shadow that falls off over about 10 cm, so the speaker has visible weight",
+  "The cabinet's top face and the horn's right rim separate from the paper by at least 15 levels of luminance",
+  "The paper reads as one even, deliberate gradient, with no grey wedge in one corner",
+  "The cloth disc and the lining show real textile micro-texture (out of scope here, but it holds the image under 9)",
+  "The acrylic front panel carries at least one long, soft specular sheen so it reads as a glossy 20 mm slab rather than a tinted outline"
+ ],
+ "defects": [
+  {
+   "region": [
+    180,
+    945,
+    330,
+    975
+   ],
+   "what": "Contact shadow weak: the paper right under the front edge measures lum 176 against 194 to 211 just below it; no dark core, so the cabinet looks set on, not standing"
+  },
+  {
+   "region": [
+    0,
+    0,
+    160,
+    200
+   ],
+   "what": "Grey wedge in the top-left corner (lum about 175) against 236 at top right: an uneven diagonal falloff that reads as an unlit corner of the sweep, not a choice"
+  },
+  {
+   "region": [
+    440,
+    300,
+    540,
+    600
+   ],
+   "what": "Background behind the horn's right rim and the cabinet's right side is 242, near white; the horn's bright rim and the cabinet's top edge merge into it"
+  },
+  {
+   "region": [
+    100,
+    465,
+    440,
+    490
+   ],
+   "what": "Cabinet top face almost invisible: pale against pale paper, only a thin grey line marks the top-front edge"
+  },
+  {
+   "region": [
+    120,
+    480,
+    350,
+    560
+   ],
+   "what": "Lining inside the top band clips in the blue channel (b 250, clip 0.77 percent): a flat, blown white"
+  },
+  {
+   "region": [
+    130,
+    570,
+    335,
+    800
+   ],
+   "what": "Cloth disc is a flat, uniform matte blue (lum range 20) with no weave: reads as a plastic disc (out of scope)"
+  },
+  {
+   "region": [
+    180,
+    820,
+    300,
+    910
+   ],
+   "what": "Lining batts read as smooth white boxes, no fibre or voile texture (out of scope)"
+  },
+  {
+   "region": [
+    104,
+    560,
+    330,
+    900
+   ],
+   "what": "Front acrylic face has no broad sheen; the slab reads only through its dark edges"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The cabinet floats: the overhead wash fills in its contact shadow and the shadow has no core.",
+   "evidence": {
+    "region": [
+     180,
+     952,
+     320,
+     965
+    ],
+    "measured": "lum_median 176.5 directly under the front edge vs 194 to 211 further down (profile x 220-240); no pixel under 135 except the feet"
+   },
+   "change": {
+    "setting": "lights.wash irradiance; set.contact shadow",
+    "from": "wash 1.0 W/m2; contact shadow strength 0.8, distance 0.18, core_strength 0.9, core_distance_m 0.008",
+    "to": "wash 0.5 W/m2; contact shadow strength 1.0, distance 0.12, core_strength 1.0, core_distance_m 0.015"
+   },
+   "expected": "A dark line 3 to 5 px tall under the cabinet's front edge (lum about 110 to 140) falling back to the paper value within about 30 px; the speaker sits with weight",
+   "accept": {
+    "region": [
+     180,
+     952,
+     320,
+     965
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     120,
+     150
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The paper's falloff is a lopsided diagonal: a grey top-left corner and a near-white right side that swallows the horn's rim.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     120,
+     120
+    ],
+    "measured": "top-left lum_median 174.9; top-right [400,0,540,120] 236.4; right of horn [440,300,540,600] 241.9"
+   },
+   "change": {
+    "setting": "lights.wall aim and lights.paper power",
+    "from": "wall aimed at [-3.2, 5.0, 2.0]; paper 150 W",
+    "to": "wall aimed at [0.0, 5.0, 2.4] (centred behind the speaker); paper 100 W"
+   },
+   "expected": "One soft top-to-bottom gradient, the corners within 20 levels of each other at about 200 to 220, the right of the horn a few levels darker than now so the rim separates",
+   "accept": {
+    "region": [
+     0,
+     0,
+     120,
+     120
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     195,
+     218
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The horn's right rim and the cabinet's right side merge with a near-white background.",
+   "evidence": {
+    "region": [
+     440,
+     300,
+     540,
+     600
+    ],
+    "measured": "lum_median 241.9, range 3.9: flat near white right against the horn rim and the cabinet's right top edge"
+   },
+   "change": {
+    "setting": "lights.fill irradiance",
+    "from": "1.6 W/m2",
+    "to": "1.1 W/m2 (fill reaches the paper on the camera side; the kick still models the cabinet's right panel)"
+   },
+   "expected": "Background right of the speaker at about 220 to 228, the horn's rim and the cabinet's right edge reading as a clear silhouette",
+   "accept": {
+    "region": [
+     440,
+     300,
+     540,
+     600
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     215,
+     230
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The top band of the cabinet clips: the topline panel reflects too hot and blows the lining behind the front panel to flat white, while the top face itself stays invisible.",
+   "evidence": {
+    "region": [
+     120,
+     480,
+     350,
+     560
+    ],
+    "measured": "b_median 250, clip_pct 0.77"
+   },
+   "change": {
+    "setting": "lights.topline peak radiance and position",
+    "from": "4.0 at [-1.0, -2.1, 0.95]",
+    "to": "2.6 at [-1.0, -2.1, 1.25], so it reads as a line on the top face's front edge rather than a wash on the top band"
+   },
+   "expected": "No clipping in the top band; a thin bright line along the cabinet's top-front edge that defines the top face",
+   "accept": {
+    "region": [
+     120,
+     480,
+     350,
+     560
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.1
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The front acrylic face carries no broad specular sheen, so the 20 mm slab reads as an outline rather than glossy cast acrylic.",
+   "evidence": {
+    "region": [
+     104,
+     560,
+     122,
+     900
+    ],
+    "measured": "left front edge lum_median 113.8; the face itself shows only the interior through it, no reflection gradient"
+   },
+   "change": {
+    "setting": "add a panel (reflection only)",
+    "from": "none",
+    "to": "panel [0.4, 2.0] m at [-1.4, -1.6, 0.6], aimed at [0.0, 0.0, 0.5], peak radiance 0.6, diffuse 0.0, ramp along z from 1.0 at the bottom to 0.2 at the top, colour #FFFFFF"
+   },
+   "expected": "A soft, graded vertical sheen over the left third of the front panel, raising the face a few levels without hiding the interior",
+   "accept": {
+    "region": [
+     125,
+     600,
+     170,
+     900
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The image is slightly flat in the mid-tones; the blue sits pale against pale paper.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     540,
+     1080
+    ],
+    "measured": "lum_p50 203, p99 243.7: most of the frame sits in the top quarter of the range"
+   },
+   "change": {
+    "setting": "finish contrast",
+    "from": "0.1",
+    "to": "0.15"
+   },
+   "expected": "Slightly deeper blues in the cabinet and horn with the paper unchanged at its highlights",
+   "accept": {
+    "region": [
+     140,
+     600,
+     320,
+     780
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     92,
+     102
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the cloth disc a visible woven textile (weave, slight sheen variation, soft edge roll)",
+   "why": "It reads as a flat plastic disc (lum range 20 over the disc); the cover's cloth shader is being reworked elsewhere"
+  },
+  {
+   "request": "Give the lining batts fibre and voile texture with soft compression at the ribs",
+   "why": "They read as smooth white boxes; the lining shader is being reworked elsewhere"
+  }
+ ],
+ "score_if_fixed": 7.3
+}

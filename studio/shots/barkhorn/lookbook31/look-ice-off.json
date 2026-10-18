@@ -27,9 +27,9 @@
  },
  "sky": {
   "kind": "gradient",
-  "zenith": "#2A2A2A",
-  "horizon": "#2E2E2E",
-  "ground": "#1A1A1A",
+  "zenith": "#2B2A28",
+  "horizon": "#2F2D2B",
+  "ground": "#1B1A19",
   "strength": 0.15
  },
  "set": {
@@ -40,21 +40,21 @@
   "radius": 2.8,
   "height": 5.5,
   "contact": {
-   "strength": 0.8,
-   "distance_m": 0.18,
-   "core_strength": 0.9,
-   "core_distance_m": 0.008
+   "strength": 0.9,
+   "distance_m": 0.32,
+   "core_strength": 0.95,
+   "core_distance_m": 0.015
   },
   "flags": [
    {
     "center_m": [
-     1.3,
-     1.4,
+     1.6,
+     1.8,
      0.005
     ],
     "size_m": [
-     2.4,
-     3.2
+     1.6,
+     2.4
     ],
     "normal": [
      0.0,
@@ -140,7 +140,7 @@
    ],
    "irradiance": 5.2,
    "color": "#FFF5E8",
-   "spread_deg": 70
+   "spread_deg": 50
   },
   "fill": {
    "type": "area",
@@ -158,8 +158,8 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.6,
-   "color": "#FFF8F0",
+   "irradiance": 1.1,
+   "color": "#FFF2E6",
    "specular": 0.3
   },
   "back": {
@@ -178,7 +178,7 @@
     -0.3,
     0.3
    ],
-   "irradiance": 3.0,
+   "irradiance": 2.4,
    "color": "#FFF8F0",
    "receivers": [
     "right",
@@ -187,7 +187,6 @@
     "top",
     "bottom",
     "back",
-    "lining-*",
     "rib-*",
     "brace*",
     "land-*",
@@ -226,7 +225,7 @@
     -0.4,
     0.0
    ],
-   "irradiance": 2.5,
+   "irradiance": 1.0,
    "color": "#FFF8F0",
    "specular": 0.0,
    "receivers": [
@@ -249,7 +248,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 1.8,
+   "irradiance": 2.0,
    "color": "#FFF8F0",
    "receivers": [
     "right",
@@ -258,7 +257,6 @@
     "top",
     "bottom",
     "back",
-    "lining-*",
     "rib-*",
     "brace*",
     "land-*",
@@ -297,18 +295,49 @@
     -2.0,
     2.0
    ],
-   "strength": 0.5,
+   "strength": 0.9,
    "color": "#FFFFFF",
    "diffuse": 0.0,
    "ramp": {
     "axis": "y",
     "at_m": [
      -3.6,
-     -1.2
+     -1.6
     ],
     "values": [
      1.0,
-     0.0
+     0.25
+    ]
+   }
+  },
+  "sheen": {
+   "type": "panel",
+   "size_m": [
+    0.4,
+    2.0
+   ],
+   "position": [
+    -1.4,
+    -1.6,
+    0.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "strength": 0.6,
+   "color": "#FFFFFF",
+   "diffuse": 0.0,
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     -0.4,
+     1.6
+    ],
+    "values": [
+     1.0,
+     0.2
     ]
    }
   },
@@ -328,9 +357,40 @@
     -0.1,
     0.9
    ],
-   "strength": 4.0,
+   "strength": 1.8,
    "color": "#FFFFFF",
    "diffuse": 0.0
+  },
+  "sidesheen": {
+   "type": "panel",
+   "size_m": [
+    0.8,
+    2.0
+   ],
+   "position": [
+    1.1,
+    2.3,
+    0.6
+   ],
+   "target": [
+    0.28,
+    0.0,
+    0.5
+   ],
+   "strength": 0.6,
+   "color": "#FFFFFF",
+   "diffuse": 0.0,
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     -0.4,
+     1.6
+    ],
+    "values": [
+     0.15,
+     1.0
+    ]
+   }
   },
   "edge": {
    "type": "area",
@@ -388,7 +448,7 @@
    "type": "area",
    "size_m": [
     1.4,
-    0.4
+    0.7
    ],
    "position": [
     0.8,
@@ -402,7 +462,7 @@
    ],
    "irradiance": 2.6,
    "color": "#FFF8F0",
-   "spread_deg": 30,
+   "spread_deg": 40,
    "specular": 1.0
   },
   "paper": {
@@ -417,11 +477,11 @@
     0.5
    ],
    "target": [
-    -0.5,
-    2.2,
-    1.6
+    -0.8,
+    2.4,
+    2.4
    ],
-   "power_w": 150,
+   "power_w": 210,
    "color": "#FFF0E2",
    "receivers": [
     "sweep"
@@ -440,11 +500,11 @@
     3.5
    ],
    "target": [
-    -3.2,
+    -1.2,
     5.0,
-    2.0
+    2.6
    ],
-   "irradiance": 1.6,
+   "irradiance": 1.8,
    "color": "#FFF0E2",
    "receivers": [
     "sweep"
@@ -466,7 +526,7 @@
     -0.4,
     0.0
    ],
-   "irradiance": 1.0,
+   "irradiance": 0.5,
    "color": "#FFF0E2",
    "receivers": [
     "sweep"
@@ -482,7 +542,7 @@
   "glossy_bounces": 16,
   "transmission_bounces": 32,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.0,
+  "exposure": -0.6,
   "white_balance_k": 5600,
   "white_balance_tint": 3.0
  },
@@ -490,7 +550,7 @@
   "enabled": true,
   "white_in": 236,
   "white_out": 236,
-  "contrast": 0.1,
+  "contrast": 0.2,
   "clarity": 0.05,
   "sharpen": 0.3,
   "sharpen_px": 0.7,
