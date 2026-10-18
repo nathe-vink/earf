@@ -374,3 +374,53 @@ def steam(bpy, name, p, kit):
     nt.links.new(vol.outputs['Volume'], out.inputs['Volume'])
     q = {**p}; q.pop('position', None)
     return kit.finish(bpy, name, bm, q, smooth=False, mat=m)
+
+
+def basalt(bpy, m, albedo=0.12, saturation=0.25, rough_mul=1.0):
+    """A copy of a scanned rock's material regraded to black basalt: its colour desaturated to `saturation` and scaled
+    to `albedo`, its roughness scaled by `rough_mul`; the scan's own detail (colour variation, normal, roughness) stays."""
+    m = m.copy(); nt = m.node_tree
+    bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+    if bs is None:
+        return m
+    sock = bs.inputs['Base Color']
+    if sock.links:
+        src = sock.links[0].from_socket
+        hs = nt.nodes.new('ShaderNodeHueSaturation'); hs.inputs['Saturation'].default_value = saturation
+        nt.links.new(src, hs.inputs['Color'])
+        mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+        mul.inputs['Factor'].default_value = 1.0; mul.inputs['B'].default_value = (albedo, albedo, albedo, 1.0)
+        nt.links.new(hs.outputs['Color'], mul.inputs['A']); nt.links.new(mul.outputs['Result'], sock)
+    else:
+        c = sock.default_value
+        sock.default_value = (c[0] * albedo, c[1] * albedo, c[2] * albedo, 1.0)
+    r = bs.inputs['Roughness']
+    if rough_mul != 1.0:
+        mm = nt.nodes.new('ShaderNodeMath'); mm.operation = 'MULTIPLY'; mm.inputs[1].default_value = rough_mul
+        mm.use_clamp = True
+        if r.links:
+            nt.links.new(r.links[0].from_socket, mm.inputs[0])
+        else:
+            mm.inputs[0].default_value = r.default_value
+        nt.links.new(mm.outputs['Value'], r)
+    return m
+
+
+def rock(bpy, name, p, kit):
+    """A scanned rock (Poly Haven `model`), placed by `position`, `rotate` (degrees) and `scale`, its materials regraded
+    to basalt (`albedo`, `saturation`, `rough_mul`)."""
+    import assets
+    root = assets.place(bpy, p['model'], p.get('res', '2k'), tuple(p.get('position', [0, 0, 0])),
+                        tuple(p.get('rotate', [0, 0, 0])), p.get('scale', 1.0), name)
+    done = {}
+    stack = [root]
+    while stack:
+        o = stack.pop(); stack += list(o.children)
+        if o.type == 'MESH':
+            for i, m in enumerate(o.data.materials):
+                if m is None:
+                    continue
+                if m.name not in done:
+                    done[m.name] = basalt(bpy, m, p.get('albedo', 0.12), p.get('saturation', 0.25), p.get('rough_mul', 1.0))
+                o.data.materials[i] = done[m.name]
+    return [root]
