@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     0.0
+     -0.003
     ],
     "rotate_z": 15.0,
     "hide": [
@@ -76,31 +76,12 @@
      {
       "points": [
        [
-        -3.2,
-        -1.4
+        -2.6,
+        -2.4
        ],
        [
-        -2.2,
-        -0.9
-       ],
-       [
-        -1.3,
-        -0.95
-       ],
-       [
-        -0.7,
-        -0.6
-       ]
-      ],
-      "width": 0.05,
-      "depth": 0.09,
-      "bank": 0.06
-     },
-     {
-      "points": [
-       [
-        -1.3,
-        -0.95
+        -1.9,
+        -1.6
        ],
        [
         -1.5,
@@ -164,32 +145,15 @@
       "width": 0.03,
       "depth": 0.09,
       "bank": 0.036
-     },
-     {
-      "points": [
-       [
-        0.4,
-        -1.6
-       ],
-       [
-        0.9,
-        -2.4
-       ],
-       [
-        1.9,
-        -2.9
-       ]
-      ],
-      "width": 0.07,
-      "depth": 0.09,
-      "bank": 0.084
      }
     ],
     "lava_below": true,
     "rock": "dark_rock_02",
     "displace": 0.03,
-    "albedo": 0.09,
-    "rough_mul": 0.85
+    "albedo": 0.06,
+    "rough_mul": 0.75,
+    "rock_tint": "#2A2A2A",
+    "rock_tint_mix": 0.6
    },
    {
     "kind": "kit",
@@ -208,8 +172,8 @@
     "cell": 0.05,
     "lava": "acg:Lava001",
     "scale": 2.2,
-    "strength": 40.0,
-    "gain": 2.2,
+    "strength": 80.0,
+    "gain": 2.6,
     "ripple": 0.012,
     "crust_rough": 0.85,
     "crust_spec": 0.2
@@ -284,8 +248,10 @@
     "molten_scale": 3.0,
     "rock": "dark_rock_02",
     "displace": 0.05,
-    "albedo": 0.09,
-    "rough_mul": 0.85
+    "albedo": 0.06,
+    "rough_mul": 0.75,
+    "rock_tint": "#2A2A2A",
+    "rock_tint_mix": 0.6
    },
    {
     "kind": "kit",
@@ -294,13 +260,13 @@
     "fn": "steam",
     "box": [
      -6.0,
-     2.4,
+     1.6,
      -0.1,
      5.0,
      4.6,
-     1.4
+     1.8
     ],
-    "density": 0.9,
+    "density": 1.4,
     "scale": 0.8,
     "anisotropy": 0.45
    },
@@ -327,13 +293,13 @@
     "module": "ember_el",
     "fn": "sparks_mixed",
     "area": [
-     -2.0,
+     -3.0,
+     2.4,
      3.0,
-     0.5,
-     3.6
+     3.8
     ],
-    "count": 6,
-    "height": 1.8,
+    "count": 30,
+    "height": 2.0,
     "streak": [
      0.01,
      0.08
@@ -368,49 +334,68 @@
     -0.6,
     0.3
    ],
-   "irradiance": 2.0,
+   "irradiance": 3.0,
    "color": "#FF5A18"
   },
   "horn": {
    "type": "area",
    "size_m": [
-    0.6,
-    0.3
+    0.9,
+    0.5
    ],
    "position": [
     0.1,
-    0.75,
-    1.3
+    0.8,
+    1.25
    ],
    "target": [
     0.0,
     -0.2,
     1.12
    ],
-   "irradiance": 2.4,
+   "irradiance": 3.0,
    "color": "#FF5A18"
   },
   "crack_l": {
    "type": "point",
    "position": [
-    -1.25,
+    -1.5,
     -0.4,
     0.12
    ],
-   "power_w": 40,
+   "power_w": 120,
    "color": "#FF6A22",
-   "radius_m": 0.2
+   "radius_m": 0.15
   },
   "crack_r": {
    "type": "point",
    "position": [
-    1.0,
-    0.6,
+    1.2,
+    0.55,
     0.12
    ],
-   "power_w": 30,
+   "power_w": 90,
    "color": "#FF6A22",
-   "radius_m": 0.2
+   "radius_m": 0.15
+  },
+  "face": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.3
+   ],
+   "position": [
+    -1.2,
+    -1.6,
+    0.15
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 0.6,
+   "color": "#FF6A22"
   },
   "river": {
    "type": "point",
@@ -443,7 +428,7 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
-  "white_balance_k": 4500,
+  "white_balance_k": 4800,
   "white_balance_tint": 10,
   "look": "AgX - Base Contrast"
  },
@@ -476,7 +461,7 @@
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
   "rotation_deg": 0.0,
-  "strength": 0.3,
+  "strength": 0.15,
   "res": "4k"
  },
  "finish": {
@@ -506,7 +491,7 @@
    62.0,
    14.0
   ],
-  "density": 0.0015,
+  "density": 0.003,
   "anisotropy": 0.4,
   "color": "#FFFFFF"
  }
