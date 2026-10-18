@@ -293,12 +293,12 @@
     "module": "ember_el",
     "fn": "sparks_mixed",
     "area": [
-     -3.0,
-     2.4,
-     3.0,
-     3.8
+     1.2,
+     2.6,
+     3.4,
+     3.6
     ],
-    "count": 30,
+    "count": 12,
     "height": 2.0,
     "streak": [
      0.01,
@@ -357,26 +357,42 @@
    "color": "#FF5A18"
   },
   "crack_l": {
-   "type": "point",
-   "position": [
-    -1.5,
-    -0.4,
-    0.12
+   "type": "area",
+   "size_m": [
+    0.12,
+    1.4
    ],
-   "power_w": 120,
-   "color": "#FF6A22",
-   "radius_m": 0.15
+   "position": [
+    -1.4,
+    -0.2,
+    0.03
+   ],
+   "target": [
+    -1.4,
+    -0.2,
+    1.0
+   ],
+   "irradiance": 0.5,
+   "color": "#FF6A22"
   },
   "crack_r": {
-   "type": "point",
-   "position": [
-    1.2,
-    0.55,
+   "type": "area",
+   "size_m": [
+    1.4,
     0.12
    ],
-   "power_w": 90,
-   "color": "#FF6A22",
-   "radius_m": 0.15
+   "position": [
+    1.7,
+    0.6,
+    0.03
+   ],
+   "target": [
+    1.7,
+    0.6,
+    1.0
+   ],
+   "irradiance": 0.5,
+   "color": "#FF6A22"
   },
   "face": {
    "type": "area",

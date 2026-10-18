@@ -52,7 +52,7 @@ def props():
         piece('ext', module='ember_el', fn='steam', box=[VENT[0] - 3.0, VENT[1] - 2.5, 0.0, VENT[0] + 4.0, VENT[1] + 2.5, 9.0],
               density=0.25, scale=2.5, anisotropy=0.45),
         # a handful of embers off the river
-        piece('ext', module='ember_el', fn='sparks_mixed', area=[-3.0, 2.4, 3.0, 3.8], count=30, height=2.0,
+        piece('ext', module='ember_el', fn='sparks_mixed', area=[1.2, 2.6, 3.4, 3.6], count=12, height=2.0,
               streak=[0.01, 0.08], radius=[0.001, 0.003], drift=[0.3, 0.1], emit=16.0, seed=4),
     ]
     return P
@@ -64,8 +64,8 @@ def lights():
         'through': lamp([0.15, 0.9, 0.5], [0.0, -0.6, 0.3], 3.0, (0.6, 1.2)),
         'horn': lamp([0.1, 0.8, 1.25], [0.0, -0.2, 1.12], 3.0, (0.9, 0.5)),
         # the cracks beside its feet, low
-        'crack_l': point([-1.5, -0.4, 0.12], 120, LAVA_LIGHT, 0.15),
-        'crack_r': point([1.2, 0.55, 0.12], 90, LAVA_LIGHT, 0.15),
+        'crack_l': lamp([-1.4, -0.2, 0.03], [-1.4, -0.2, 1.0], 0.5, (0.12, 1.4), '#FF6A22'),
+        'crack_r': lamp([1.7, 0.6, 0.03], [1.7, 0.6, 1.0], 0.5, (1.4, 0.12), '#FF6A22'),
         # the cracks' glow on the speaker's face, low from the front left (a lava-lit bounce, not a key)
         'face': lamp([-1.2, -1.6, 0.15], [0.0, 0.0, 0.6], 0.6, (1.2, 0.3), '#FF6A22'),
         # the river's glow in the steam over it
@@ -86,4 +86,7 @@ def shot():
 
 
 def portrait():
-    return portrait_of(shot())
+    # the 4:5 frame: a longer lens from the same place, so the speaker keeps its size with sky above it for type
+    cam = camera(height=0.95, distance=6.5, azimuth=22.0, lens=92.0, target=(0.0, 0.0, 0.9), fstop=2.8,
+                 focus=(0.0, -0.21, 0.66))
+    return portrait_of(shot(), **cam)
