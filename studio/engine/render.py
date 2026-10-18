@@ -248,6 +248,12 @@ def main():
     cy.glossy_bounces = min(cy.max_bounces, R.get('glossy_bounces', 8))
     cy.transmission_bounces = min(cy.max_bounces, R.get('transmission_bounces', 8))
     cy.volume_bounces = R.get('volume_bounces', 2)      # a material with a volume (frosted) scatters inside it
+    if 'volume_biased' in R:                            # big heterogeneous volumes (fog, cloud) march faster biased
+        cy.volume_biased = R['volume_biased']
+    if 'volume_step_rate' in R:
+        cy.volume_step_rate = R['volume_step_rate']
+    if 'volume_max_steps' in R:
+        cy.volume_max_steps = R['volume_max_steps']
     cy.sample_clamp_indirect = R.get('clamp', 10.0)
     cy.blur_glossy = R.get('filter_glossy', 0.5)
     cy.caustics_reflective = False; cy.caustics_refractive = False
