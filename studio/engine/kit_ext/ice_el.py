@@ -350,7 +350,11 @@ def snowfield(bpy, name, p, kit):
             if abs(lx) <= w / 2 and abs(ly) <= d / 2:
                 continue                                              # inside the cabinet: the field's own level
             fall = 0.07 + 0.25 * (0.5 + 0.5 * noise.noise(Vector((lx * 3.0, ly * 3.0, 4.2))))
+            fall *= 1.0 + 0.8 * max(0.0, ly / max(d / 2, 1e-6))        # the lee bank behind runs further
             if dist < fall:
                 t = 1.0 - dist / fall
-                v.co.z += h * (t ** 1.6) * (0.75 + 0.5 * noise.noise(Vector((lx * 9.0, ly * 9.0, 1.3))))
+                # wind from the front: a scoop hollowed under the front face, banked up behind and at the back corners
+                side = max(-1.0, min(1.0, ly / max(d / 2, 1e-6)))
+                k = 0.45 * side + 0.55 if side > -0.6 else -0.6
+                v.co.z += h * k * (t ** 1.6) * (0.75 + 0.5 * noise.noise(Vector((lx * 9.0, ly * 9.0, 1.3))))
     return [ob]
