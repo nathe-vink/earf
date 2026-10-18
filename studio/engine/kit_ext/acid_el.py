@@ -7,7 +7,8 @@
   at a shallow edge and deepens to green (`acid_colors` by depth, `acid_deep`, `acid_edge`). `water` the pools' level, `pools` [[x, y, depth, sigma], ...] dug in, `flat`
   [x, y, r] level ground where the speaker stands, `texture` (Poly Haven id), `seed`.
 - chimney: a lumpy sulphur or salt chimney, `height`, `radius`, `colors` [salt, sulphur, deep], `texture`, `seed`.
-- steam: a soft plume of steam (a volume), `size` [rx, ry, rz], `density`, `seed`.
+- steam: a plume of steam rising from a vent (a volume): `height`, widening `r0` to `r1`, leaning `lean`, `density`,
+  `wisp` (the noise band that makes its wisps), `seed`.
 """
 import math, random
 
@@ -116,7 +117,7 @@ def acid_material(bpy, p):
     dep.inputs['From Max'].default_value = p.get('acid_deep', 0.09)
     nt.links.new(at.outputs['Fac'], dep.inputs['Value'])
     ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp
-    stops = p.get('acid_colors', [(0.0, '#DCE08A'), (0.35, '#B4C84A'), (1.0, '#6E9426')])
+    stops = p.get('acid_colors', [(0.0, '#D6DE80'), (0.35, '#A9C450'), (0.7, '#6E9A3A'), (1.0, '#4E7E46')])
     while len(cr.elements) < len(stops):
         cr.elements.new(0.5)
     for e, (pos, col) in zip(cr.elements, stops):
@@ -124,17 +125,17 @@ def acid_material(bpy, p):
     nt.links.new(dep.outputs['Result'], ramp.inputs['Fac'])
     nt.links.new(ramp.outputs['Color'], bs.inputs['Base Color'])
     edge = nt.nodes.new('ShaderNodeMapRange'); edge.inputs['From Min'].default_value = 0.0
-    edge.inputs['From Max'].default_value = p.get('acid_edge', 0.012); edge.inputs['To Min'].default_value = 0.0
+    edge.inputs['From Max'].default_value = p.get('acid_edge', 0.06); edge.inputs['To Min'].default_value = p.get('acid_clear', 0.12)
     nt.links.new(at.outputs['Fac'], edge.inputs['Value'])
     nt.links.new(edge.outputs['Result'], bs.inputs['Alpha'])
     bs.inputs['Roughness'].default_value = p.get('acid_roughness', 0.03)
     bs.inputs['IOR'].default_value = 1.34
-    bs.inputs['Subsurface Weight'].default_value = 0.35
+    bs.inputs['Subsurface Weight'].default_value = p.get('acid_milk', 0.12)
     bs.inputs['Subsurface Radius'].default_value = (0.03, 0.05, 0.015)
     tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
-    nz.inputs['Scale'].default_value = 2.5; nz.inputs['Detail'].default_value = 5.0
+    nz.inputs['Scale'].default_value = p.get('ripple_scale', 1.6); nz.inputs['Detail'].default_value = 5.0
     nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
-    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.035; bp.inputs['Distance'].default_value = 0.01
+    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = p.get('ripple', 0.09); bp.inputs['Distance'].default_value = 0.01
     nt.links.new(nz.outputs['Fac'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], bs.inputs['Normal'])
     return m
 
@@ -171,6 +172,19 @@ def crust_material(bpy, p, attribute='acid_d', name='acid-crust'):
     nt.links.new(nz.outputs['Fac'], mix.inputs[0])
     add = nt.nodes.new('ShaderNodeMath'); add.operation = 'ADD'
     nt.links.new(dn.outputs['Result'], add.inputs[0]); nt.links.new(mix.outputs['Value'], add.inputs[1])
+    if p.get('plates', 0.0) > 0:                                   # crust plates: each cell its own shade of the zone
+        vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = 1.0 / p.get('plate_m', 1.2)
+        nt.links.new(tc.outputs['Object'], vo.inputs['Vector'])
+        pm = nt.nodes.new('ShaderNodeMath'); pm.operation = 'MULTIPLY_ADD'
+        pm.inputs[1].default_value = p['plates']; pm.inputs[2].default_value = -0.5 * p['plates']
+        nt.links.new(vo.outputs['Distance'], pm.inputs[0])
+        sep = nt.nodes.new('ShaderNodeSeparateColor'); nt.links.new(vo.outputs['Color'], sep.inputs['Color'])
+        pc = nt.nodes.new('ShaderNodeMath'); pc.operation = 'MULTIPLY_ADD'
+        pc.inputs[1].default_value = p['plates']; pc.inputs[2].default_value = -0.5 * p['plates']
+        nt.links.new(sep.outputs['Red'], pc.inputs[0])
+        a2 = nt.nodes.new('ShaderNodeMath'); a2.operation = 'ADD'
+        nt.links.new(add.outputs['Value'], a2.inputs[0]); nt.links.new(pc.outputs['Value'], a2.inputs[1])
+        add = a2
     ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp
     stops = p.get('zones', [(0.0, '#EAE6CF'), (0.12, '#F0E58A'), (0.3, '#E2C52A'), (0.55, '#CFA82A'),
                             (0.72, '#B8681F'), (0.9, '#8C3F18')])
@@ -192,7 +206,7 @@ def crust_material(bpy, p, attribute='acid_d', name='acid-crust'):
     wet.inputs['From Max'].default_value = 0.03; wet.inputs['To Min'].default_value = 0.25; wet.inputs['To Max'].default_value = 1.0
     nt.links.new(at.outputs['Fac'], wet.inputs['Value'])
     rl = next((l for l in nt.links if l.to_socket == bs.inputs['Roughness']), None)
-    if rl:
+    if rl and attribute:
         rm = nt.nodes.new('ShaderNodeMath'); rm.operation = 'MULTIPLY'
         nt.links.new(rl.from_socket, rm.inputs[0]); nt.links.new(wet.outputs['Result'], rm.inputs[1])
         nt.links.new(rm.outputs['Value'], bs.inputs['Roughness'])
@@ -237,45 +251,59 @@ def chimney(bpy, name, p, kit):
 
 
 def steam(bpy, name, p, kit):
-    """A plume of steam: a soft volume whose density thins to its edge and breaks up in noise."""
-    rx, ry, rz = p.get('size', [1.0, 1.0, 2.5])
+    """A plume of steam rising from a vent: a cone of volume that widens from `r0` to `r1` over `height`, leans
+    downwind by `lean` [dx, dy] at its top, thins out at its top, and breaks into wisps in a distorted noise."""
+    H = p.get('height', 3.0); r0, r1 = p.get('r0', 0.18), p.get('r1', 1.1)
+    lx, ly = p.get('lean', [0.6, 0.0])
     bm = bmesh.new()
-    bmesh.ops.create_icosphere(bm, subdivisions=3, radius=1.0)
-    for v in bm.verts:
-        v.co = Vector((v.co.x * rx, v.co.y * ry, (v.co.z + 1) * rz * 0.5))
+    g = bmesh.ops.create_cube(bm, size=1.0)
+    x0, x1 = min(-r1, -r1 + lx) - 0.1, max(r1, r1 + lx) + 0.1
+    y0, y1 = min(-r1, -r1 + ly) - 0.1, max(r1, r1 + ly) + 0.1
+    for v in g['verts']:
+        v.co = Vector((x0 if v.co.x < 0 else x1, y0 if v.co.y < 0 else y1, 0.0 if v.co.z < 0 else H))
     m = bpy.data.materials.new(f'{name}-steam'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     out = nt.nodes.new('ShaderNodeOutputMaterial')
     vol = nt.nodes.new('ShaderNodeVolumePrincipled')
     vol.inputs['Color'].default_value = _hex(p.get('color', '#F4F1E6'))
     vol.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.55)
     tc = nt.nodes.new('ShaderNodeTexCoord')
-    # density: 1 at the axis, 0 at the skin, thinning upward, broken by noise
     sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
-    sc = nt.nodes.new('ShaderNodeVectorMath'); sc.operation = 'MULTIPLY'
-    sc.inputs[1].default_value = (1 / rx, 1 / ry, 0.0)
-    nt.links.new(tc.outputs['Object'], sc.inputs[0])
-    ln = nt.nodes.new('ShaderNodeVectorMath'); ln.operation = 'LENGTH'; nt.links.new(sc.outputs['Vector'], ln.inputs[0])
-    rad = nt.nodes.new('ShaderNodeMapRange'); rad.inputs['From Min'].default_value = 1.0; rad.inputs['From Max'].default_value = 0.0
-    nt.links.new(ln.outputs['Value'], rad.inputs['Value'])
-    up = nt.nodes.new('ShaderNodeMapRange'); up.inputs['From Min'].default_value = rz; up.inputs['From Max'].default_value = 0.0
-    nt.links.new(sep.outputs['Z'], up.inputs['Value'])
-    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = p.get('noise_scale', 2.6)
-    nz.inputs['Detail'].default_value = 10.0; nz.inputs['Roughness'].default_value = 0.65
-    nz.inputs['Distortion'].default_value = p.get('distortion', 1.2)
-    st = nt.nodes.new('ShaderNodeVectorMath'); st.operation = 'MULTIPLY'; st.inputs[1].default_value = (1.0, 1.0, 0.45)
-    nt.links.new(tc.outputs['Object'], st.inputs[0])                # stretched upward: it rises
+
+    def M(op, a, b=None, c=None):
+        n = nt.nodes.new('ShaderNodeMath'); n.operation = op
+        for i, v in enumerate((a, b, c)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[i].default_value = v
+            else:
+                nt.links.new(v, n.inputs[i])
+        return n.outputs['Value']
+
+    def S(v, lo, hi):                                  # smoothstep
+        n = nt.nodes.new('ShaderNodeMapRange'); n.interpolation_type = 'SMOOTHSTEP'
+        n.inputs['From Min'].default_value = lo; n.inputs['From Max'].default_value = hi
+        nt.links.new(v, n.inputs['Value']); return n.outputs['Result']
+    zn = M('DIVIDE', sep.outputs['Z'], H)
+    lean_t = M('POWER', zn, 1.5)
+    dx = M('SUBTRACT', sep.outputs['X'], M('MULTIPLY', lean_t, lx))
+    dy = M('SUBTRACT', sep.outputs['Y'], M('MULTIPLY', lean_t, ly))
+    rad = M('MULTIPLY_ADD', zn, r1 - r0, r0)
+    dist = M('DIVIDE', M('SQRT', M('ADD', M('MULTIPLY', dx, dx), M('MULTIPLY', dy, dy))), rad)
+    radial = M('SUBTRACT', 1.0, S(dist, 0.25, 1.0))
+    up = M('MULTIPLY', S(zn, 0.0, 0.06), M('SUBTRACT', 1.0, S(zn, 0.45, 1.0)))
+    st = nt.nodes.new('ShaderNodeVectorMath'); st.operation = 'MULTIPLY'; st.inputs[1].default_value = (1.0, 1.0, 0.55)
+    nt.links.new(tc.outputs['Object'], st.inputs[0])
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = p.get('noise_scale', 2.2)
+    nz.inputs['Detail'].default_value = 12.0; nz.inputs['Roughness'].default_value = 0.62
+    nz.inputs['Distortion'].default_value = p.get('distortion', 1.8)
+    nz.noise_dimensions = '4D'
+    nz.inputs['W'].default_value = p.get('seed', 1) * 3.7
     nt.links.new(st.outputs['Vector'], nz.inputs['Vector'])
-    nr = nt.nodes.new('ShaderNodeMapRange'); nr.inputs['From Min'].default_value = 0.5; nr.inputs['From Max'].default_value = 0.8
-    nt.links.new(nz.outputs['Fac'], nr.inputs['Value'])
-    m1 = nt.nodes.new('ShaderNodeMath'); m1.operation = 'MULTIPLY'
-    nt.links.new(rad.outputs['Result'], m1.inputs[0]); nt.links.new(up.outputs['Result'], m1.inputs[1])
-    m2 = nt.nodes.new('ShaderNodeMath'); m2.operation = 'MULTIPLY'
-    nt.links.new(m1.outputs['Value'], m2.inputs[0]); nt.links.new(nr.outputs['Result'], m2.inputs[1])
-    sq = nt.nodes.new('ShaderNodeMath'); sq.operation = 'POWER'; sq.inputs[1].default_value = 1.6
-    nt.links.new(m2.outputs['Value'], sq.inputs[0])
-    m3 = nt.nodes.new('ShaderNodeMath'); m3.operation = 'MULTIPLY'; m3.inputs[1].default_value = p.get('density', 1.5)
-    nt.links.new(sq.outputs['Value'], m3.inputs[0])
-    nt.links.new(m3.outputs['Value'], vol.inputs['Density'])
+    lo, hi = p.get('wisp', (0.44, 0.62))
+    wisps = S(nz.outputs['Fac'], lo, hi)
+    d = M('MULTIPLY', M('MULTIPLY', M('MULTIPLY', radial, up), wisps), p.get('density', 8.0))
+    nt.links.new(d, vol.inputs['Density'])
     nt.links.new(vol.outputs['Volume'], out.inputs['Volume'])
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     me.materials.append(m)
