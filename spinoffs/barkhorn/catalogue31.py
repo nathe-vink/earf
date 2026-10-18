@@ -221,6 +221,40 @@ def framed(s, f):
     return s
 
 
+# The detail views (finals.py's horn-side, horn-back, back, amp and inside) on the same paper (the coordinator: every
+# product picture in one studio look): each from its own template, its camera and its light as they were tuned, the
+# paper set under it and lit by two lamps on the paper alone (the cove's wall and its floor), their strength set per
+# view (their cameras see the cove differently) to the catalogue's paper: about 240 at the floor, 236 on the wall.
+DETAILS = {'horn-side': 'horn21/horn-{k}-side.json', 'horn-back': 'horn21/horn-{k}-back.json',
+           'back': 'site30/back-{k}.json', 'amp': 'site30/detail-{k}.json', 'inside': 'site30/inside.json'}
+DETAILS_OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'details31')
+DETAIL_PAPER = {
+    'd-wall': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [0.0, -0.8, 3.2], 'target': [0.0, 1.5, 1.4],
+               'irradiance': 1.0, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+    'd-floor': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [0.0, -1.8, 3.5], 'target': [0.0, -0.5, 0.0],
+                'irradiance': 1.0, 'spread_deg': 60, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+}
+DETAIL_GAIN = {'horn-side': {'d-wall': 0.35, 'd-floor': 0.15}, 'horn-back': {'d-wall': 0.35, 'd-floor': 0.15},
+               'back': {'d-wall': 0.35, 'd-floor': 0.15}, 'amp': {'d-wall': 0.35, 'd-floor': 0.15},
+               'inside': {'d-wall': 0.35, 'd-floor': 0.15}}
+
+
+def detail(view, k):
+    """Detail view `view` of colour k on the paper."""
+    s = json.load(open(os.path.join(ROOT, 'studio', 'shots', 'barkhorn', DETAILS[view].format(k=k))))
+    fl = COLOURS[k]['flavour']
+    s['product']['flavour'] = fl                                   # the cutaway's template is one colour's
+    for inst in s['product'].get('instances', []):
+        inst['flavour'] = fl
+    s['set']['color'] = PAPER['color']
+    for n, l in DETAIL_PAPER.items():
+        l = copy.deepcopy(l)
+        l['irradiance'] = round(l['irradiance'] * DETAIL_GAIN[view][n], 4)
+        s['lights'][n] = l
+    s['title'] = f'barkhorn, {view} (details31, {k}, on the paper)'
+    return s
+
+
 NAMES = {'red': 'Ember (red)', 'orange': 'Dust (orange)', 'amber': 'Acid (golden yellow)', 'green': 'Poison (bottle green)',
          'blue': 'Ice (a translucent blue)', 'violet': 'Haze (violet)', 'ice': 'Fog (water-clear)', 'black': 'Smoke (smoked black)'}
 ROUNDS = os.path.join(HERE, 'critic', 'rounds', '2026-10-18')
@@ -315,6 +349,11 @@ def write():
                 name = f'look-{k}-{"on" if cover else "off"}' + (f'-{f}' if f else '') + '.json'
                 json.dump(framed(shot(k, cover), f), open(os.path.join(OUT, name), 'w'), indent=1)
     print(f'{len(COLOURS) * 2 * len(FRAMES)} shots in', os.path.relpath(OUT, ROOT))
+    os.makedirs(DETAILS_OUT, exist_ok=True)
+    for k in COLOURS:
+        for view in DETAILS:
+            json.dump(detail(view, k), open(os.path.join(DETAILS_OUT, f'{view}-{k}.json'), 'w'), indent=1)
+    print(f'{len(COLOURS) * len(DETAILS)} shots in', os.path.relpath(DETAILS_OUT, ROOT))
 
 
 def main():

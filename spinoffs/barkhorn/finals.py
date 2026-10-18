@@ -11,9 +11,9 @@ Here each view is its template shot, the one tuned in its round, rendered again 
 
 - front-on, front-off: the three-quarter view from the front, cover on and off (lookbook31, relit by catalogue31.py);
   front-on-wide, front-off-wide (3:2) and front-on-tall, front-off-tall (4:5): the same, framed for the gallery's stages;
-- horn-side, horn-back: the horn close, from the side and from behind (horn21);
-- back, amp: the speaker from behind, and the amplifier's plate close (site30);
-- inside: the cutaway, now in each colour (site30's inside, Poison's alone until now);
+- horn-side, horn-back: the horn close, from the side and from behind (horn21, on the paper: details31);
+- back, amp: the speaker from behind, and the amplifier's plate close (site30, on the paper: details31);
+- inside: the cutaway, now in each colour (site30's inside, Poison's alone until now; on the paper: details31);
 - turn-00 ... turn-23: the horn turning, 15 degrees a frame (turn23), made into each colour's sprite;
 
 and the line's own: the hero (the eight on an arc) and the room (a pair of Poison, room17).
@@ -43,9 +43,9 @@ TURN = 24
 VIEWS = {'front-on': ('lookbook31/look-{k}-on.json', True), 'front-off': ('lookbook31/look-{k}-off.json', True),
          'front-on-wide': ('lookbook31/look-{k}-on-wide.json', True), 'front-off-wide': ('lookbook31/look-{k}-off-wide.json', True),
          'front-on-tall': ('lookbook31/look-{k}-on-tall.json', True), 'front-off-tall': ('lookbook31/look-{k}-off-tall.json', True),
-         'horn-side': ('horn21/horn-{k}-side.json', False), 'horn-back': ('horn21/horn-{k}-back.json', False),
-         'back': ('site30/back-{k}.json', True), 'amp': ('site30/detail-{k}.json', False),
-         'inside': ('site30/inside.json', False)}
+         'horn-side': ('details31/horn-side-{k}.json', False), 'horn-back': ('details31/horn-back-{k}.json', False),
+         'back': ('details31/back-{k}.json', True), 'amp': ('details31/amp-{k}.json', False),
+         'inside': ('details31/inside-{k}.json', False)}
 VIEWS.update({f'turn-{i:02d}': (f'turn23/turn-{{k}}-{i:02d}.json', False) for i in range(TURN)})
 LINE = {'hero': 'site30/hero.json', 'room': 'room17/room-poison.json'}
 
@@ -90,7 +90,7 @@ def shots():
         path = os.path.join(SHOTS, tpl)
         if os.path.exists(path):
             sh = json.load(open(path))
-            out.append((name, recolour(sh, k, sweep=(v == 'inside')) if k else sh))
+            out.append((name, recolour(sh, k, sweep=(tpl == 'site30/inside.json')) if k else sh))   # the old cutaway's own tint
         else:
             out.append((name, built(name)))
     return out
