@@ -1,0 +1,301 @@
+{
+ "shot": "studio/shots/barkhorn/companions/detail-turntable.json",
+ "image": "renders/2026-10-18/barkhorn/companions/detail-turntable.png",
+ "seconds": {
+  "build": 2.0,
+  "render": 275.1
+ },
+ "samples": 64,
+ "size": [
+  1200,
+  900
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "arm#0": {
+   "part": "arm",
+   "centre_px": [
+    1476.3,
+    35.9
+   ],
+   "box_px": [
+    835,
+    -156,
+    2202,
+    292
+   ],
+   "depth_m": 0.803
+  },
+  "ball#0": {
+   "part": "ball",
+   "centre_px": [
+    1306.2,
+    614.5
+   ],
+   "box_px": [
+    1285,
+    591,
+    1327,
+    638
+   ],
+   "depth_m": 0.63
+  },
+  "bearing-housing#0": {
+   "part": "bearing-housing",
+   "centre_px": [
+    1306.2,
+    514.1
+   ],
+   "box_px": [
+    1109,
+    316,
+    1497,
+    738
+   ],
+   "depth_m": 0.63
+  },
+  "belt#0": {
+   "part": "belt",
+   "centre_px": [
+    1275.5,
+    287.7
+   ],
+   "box_px": [
+    81,
+    73,
+    2276,
+    733
+   ],
+   "depth_m": 0.623
+  },
+  "bushes#0": {
+   "part": "bushes",
+   "centre_px": [
+    1306.2,
+    492.9
+   ],
+   "box_px": [
+    1258,
+    384,
+    1355,
+    605
+   ],
+   "depth_m": 0.63
+  },
+  "cartridge#0": {
+   "part": "cartridge",
+   "centre_px": [
+    2153.1,
+    91.8
+   ],
+   "box_px": [
+    2065,
+    37,
+    2241,
+    149
+   ],
+   "depth_m": 0.703
+  },
+  "foot-1-disc#0": {
+   "part": "foot-1-disc",
+   "centre_px": [
+    1684.5,
+    940.5
+   ],
+   "box_px": [
+    1467,
+    783,
+    1895,
+    1121
+   ],
+   "depth_m": 0.495
+  },
+  "foot-2-disc#0": {
+   "part": "foot-2-disc",
+   "centre_px": [
+    1939.1,
+    571.5
+   ],
+   "box_px": [
+    1781,
+    471,
+    2094,
+    683
+   ],
+   "depth_m": 0.665
+  },
+  "foot-3-disc#0": {
+   "part": "foot-3-disc",
+   "centre_px": [
+    964.2,
+    440.9
+   ],
+   "box_px": [
+    815,
+    358,
+    1111,
+    532
+   ],
+   "depth_m": 0.757
+  },
+  "foot-pads#0": {
+   "part": "foot-pads",
+   "centre_px": [
+    1268.3,
+    691.6
+   ],
+   "box_px": [
+    360,
+    427,
+    2076,
+    1149
+   ],
+   "depth_m": 0.634
+  },
+  "mark#0": {
+   "part": "mark",
+   "centre_px": [
+    1323.6,
+    162.7
+   ],
+   "box_px": [
+    1265,
+    145,
+    1380,
+    181
+   ],
+   "depth_m": 0.822
+  },
+  "motor#0": {
+   "part": "motor",
+   "centre_px": [
+    249.6,
+    480.9
+   ],
+   "box_px": [
+    -26,
+    243,
+    515,
+    759
+   ],
+   "depth_m": 0.575
+  },
+  "platter-disc#0": {
+   "part": "platter-disc",
+   "centre_px": [
+    1306.2,
+    278.8
+   ],
+   "box_px": [
+    182,
+    35,
+    2272,
+    760
+   ],
+   "depth_m": 0.63
+  },
+  "platter-hub#0": {
+   "part": "platter-hub",
+   "centre_px": [
+    1306.2,
+    278.8
+   ],
+   "box_px": [
+    1145,
+    178,
+    1464,
+    390
+   ],
+   "depth_m": 0.63
+  },
+  "plinth-lower-stack#0": {
+   "part": "plinth-lower-stack",
+   "centre_px": [
+    1267.7,
+    429.2
+   ],
+   "box_px": [
+    -329,
+    65,
+    2422,
+    1416
+   ],
+   "depth_m": 0.659
+  },
+  "pod-1-stack#0": {
+   "part": "pod-1-stack",
+   "centre_px": [
+    249.6,
+    624.5
+   ],
+   "box_px": [
+    -120,
+    359,
+    601,
+    952
+   ],
+   "depth_m": 0.575
+  },
+  "pod-pads#0": {
+   "part": "pod-pads",
+   "centre_px": [
+    217.6,
+    807.4
+   ],
+   "box_px": [
+    -74,
+    689,
+    496,
+    948
+   ],
+   "depth_m": 0.578
+  },
+  "pulley#0": {
+   "part": "pulley",
+   "centre_px": [
+    249.6,
+    349.0
+   ],
+   "box_px": [
+    61,
+    272,
+    433,
+    435
+   ],
+   "depth_m": 0.575
+  },
+  "spindle#0": {
+   "part": "spindle",
+   "centre_px": [
+    1306.2,
+    363.4
+   ],
+   "box_px": [
+    1271,
+    121,
+    1341,
+    611
+   ],
+   "depth_m": 0.63
+  },
+  "thrust-pad#0": {
+   "part": "thrust-pad",
+   "centre_px": [
+    1306.2,
+    635.7
+   ],
+   "box_px": [
+    1258,
+    614,
+    1354,
+    659
+   ],
+   "depth_m": 0.63
+  }
+ }
+}
