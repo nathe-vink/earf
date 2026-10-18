@@ -748,11 +748,11 @@ def street(bpy, kit, p, objs):
     """Outside: the long street's sidewalk and road (y < 0), the side street (x < 0), the building's facade and flats
     above, and the block across the street."""
     L, D, T = P.L, P.D, P.WALL_T
-    sw = Mesh('sidewalk'); sw.box(-3.9, -3.9, -0.2, L + 40.0, -T, 0.0); sw.box(-60.0, -3.9, -0.2, -16.0, -T, 0.0); sw.box(-19.9, -T, -0.2, -16.0, D + 12.0, 0.0); sw.box(-3.9, -3.9, -0.2, -T, D + 12.0, 0.0)
+    sw = Mesh('sidewalk'); sw.box(-3.9, -3.9, -0.2, L + 40.0, -T, 0.0); sw.box(-60.0, -3.9, -0.2, -16.0, -T, 0.0); sw.box(-19.9, -T, -0.2, -16.0, D + 12.0, 0.0); sw.box(-3.9, -T, -0.2, -T, D + 12.0, 0.0)   # no overlaps: coplanar faces render black
     objs.append(sw.object(bpy, _pbr(bpy, kit, 'concrete_pavement', res='2k', tint='#77746F', tint_mix=0.3)))
-    curb = Mesh('curb'); curb.box(-4.05, -4.05, -0.2, L + 40.0, -3.9, 0.0); curb.box(-60.0, -4.05, -0.2, -16.0, -3.9, 0.0); curb.box(-4.05, -4.05, -0.2, -3.9, D + 12.0, 0.0)
+    curb = Mesh('curb'); curb.box(-4.05, -4.05, -0.2, L + 40.0, -3.9, 0.0); curb.box(-60.0, -4.05, -0.2, -16.0, -3.9, 0.0); curb.box(-4.05, -3.9, -0.2, -3.9, D + 12.0, 0.0)
     objs.append(curb.object(bpy, principled(bpy, 'curb', '#8A8781', rough=0.8)))
-    rd = Mesh('road'); rd.box(-60.0, -16.0, -0.35, L + 40.0, -4.05, -0.15); rd.box(-16.0, -16.0, -0.35, -4.05, D + 40.0, -0.15)
+    rd = Mesh('road'); rd.box(-60.0, -16.0, -0.35, L + 40.0, -4.05, -0.15); rd.box(-16.0, -4.05, -0.35, -4.05, D + 40.0, -0.15)
     objs.append(rd.object(bpy, _pbr(bpy, kit, 'asphalt_02', res='2k', tint='#3A3A3C', tint_mix=0.4, rough_mul=p.get('road_rough', 0.4))))
     across = Mesh('sidewalk-across'); across.box(-60.0, -20.0, -0.2, L + 40.0, -16.0, 0.0)
     objs.append(across.object(bpy, _pbr(bpy, kit, 'concrete_pavement', res='2k', tint='#77746F', tint_mix=0.3)))

@@ -80,7 +80,7 @@
     {
      "flavour": "birch-fog-clear",
      "position": [
-      3.42,
+      4.525,
       8.919,
       0.45
      ],
@@ -92,7 +92,7 @@
     {
      "flavour": "birch-fog-clear",
      "position": [
-      8.93,
+      7.675,
       8.919,
       0.45
      ],
@@ -297,9 +297,9 @@
     "fn": "room",
     "clock": "sunset",
     "membrane": 0.004,
-    "panel_glow": 0.9,
-    "shelf_glow": 0.15,
-    "backpanel_glow": 0.04,
+    "panel_glow": 1.4,
+    "shelf_glow": 0.08,
+    "backpanel_glow": 0.02,
     "niche_glow": 0.03,
     "slat_glow": 0.2,
     "slat_led": 3.0,
@@ -310,7 +310,7 @@
     "membrane_white": 0.45,
     "dj_glow": 0.008,
     "dj_color": "#F2D6B0",
-    "panel_foot": 0.35
+    "panel_foot": 0.2
    },
    {
     "kind": "kit",
@@ -907,9 +907,9 @@
   "spk0": {
    "type": "area",
    "position": [
-    12.972,
-    2.058,
-    3.6500000000000004
+    12.709,
+    1.519,
+    2.5
    ],
    "target": [
     12.27,
@@ -917,10 +917,10 @@
     0.7
    ],
    "size_m": [
-    0.7,
-    0.7
+    0.45,
+    0.45
    ],
-   "irradiance": 12.0,
+   "irradiance": 10.0,
    "color": 3000
   },
   "wash0": {
@@ -944,9 +944,9 @@
   "spk1": {
    "type": "area",
    "position": [
-    12.972,
-    7.086,
-    3.6500000000000004
+    12.709,
+    7.625,
+    2.5
    ],
    "target": [
     12.27,
@@ -954,10 +954,10 @@
     0.7
    ],
    "size_m": [
-    0.7,
-    0.7
+    0.45,
+    0.45
    ],
-   "irradiance": 12.0,
+   "irradiance": 10.0,
    "color": 3000
   },
   "wash1": {
@@ -981,9 +981,9 @@
   "spk2": {
    "type": "area",
    "position": [
-    16.53,
-    1.838,
-    3.6500000000000004
+    16.919,
+    1.381,
+    2.5
    ],
    "target": [
     17.567999999999998,
@@ -991,10 +991,10 @@
     0.7
    ],
    "size_m": [
-    0.7,
-    0.7
+    0.45,
+    0.45
    ],
-   "irradiance": 12.0,
+   "irradiance": 10.0,
    "color": 3000
   },
   "wash2": {
@@ -1018,9 +1018,9 @@
   "spk3": {
    "type": "area",
    "position": [
-    16.53,
-    7.306,
-    3.6500000000000004
+    16.919,
+    7.763,
+    2.5
    ],
    "target": [
     17.567999999999998,
@@ -1028,10 +1028,10 @@
     0.7
    ],
    "size_m": [
-    0.7,
-    0.7
+    0.45,
+    0.45
    ],
-   "irradiance": 12.0,
+   "irradiance": 10.0,
    "color": 3000
   },
   "wash3": {
@@ -1055,17 +1055,17 @@
   "fog4": {
    "type": "spot",
    "position": [
-    3.42,
+    4.525,
     8.799,
     1.8699999999999999
    ],
    "target": [
-    3.42,
+    4.525,
     8.668999999999999,
     1.05
    ],
-   "power_w": 320.0,
-   "cone_deg": 30,
+   "power_w": 300.0,
+   "cone_deg": 40,
    "blend": 0.7,
    "radius_m": 0.02,
    "color": 3000
@@ -1073,17 +1073,17 @@
   "fog5": {
    "type": "spot",
    "position": [
-    8.929999999999998,
+    7.675,
     8.799,
     1.8699999999999999
    ],
    "target": [
-    8.929999999999998,
+    7.675,
     8.668999999999999,
     1.05
    ],
-   "power_w": 320.0,
-   "cone_deg": 30,
+   "power_w": 300.0,
+   "cone_deg": 40,
    "blend": 0.7,
    "radius_m": 0.02,
    "color": 3000
@@ -1208,9 +1208,9 @@
     2.6,
     0.9
    ],
-   "power_w": 60.0,
-   "cone_deg": 45,
-   "blend": 1.0,
+   "power_w": 30.0,
+   "cone_deg": 25,
+   "blend": 0.8,
    "radius_m": 0.04,
    "color": 3200
   },
@@ -1226,9 +1226,9 @@
     4.57,
     0.9
    ],
-   "power_w": 60.0,
-   "cone_deg": 45,
-   "blend": 1.0,
+   "power_w": 30.0,
+   "cone_deg": 25,
+   "blend": 0.8,
    "radius_m": 0.04,
    "color": 3200
   },
@@ -1244,9 +1244,9 @@
     6.5,
     0.9
    ],
-   "power_w": 60.0,
-   "cone_deg": 45,
-   "blend": 1.0,
+   "power_w": 30.0,
+   "cone_deg": 25,
+   "blend": 0.8,
    "radius_m": 0.04,
    "color": 3200
   },
@@ -1509,7 +1509,7 @@
     4.049,
     0.873
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1523,7 +1523,7 @@
     3.9785,
     0.873
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1537,7 +1537,7 @@
     3.9785,
     0.873
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1551,7 +1551,7 @@
     5.199,
     0.873
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1565,7 +1565,7 @@
     5.1285,
     0.873
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1579,7 +1579,7 @@
     5.1285,
     0.873
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1593,7 +1593,7 @@
     0.417,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1607,7 +1607,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1621,7 +1621,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1635,7 +1635,7 @@
     0.417,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1649,7 +1649,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1663,7 +1663,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1677,7 +1677,7 @@
     0.417,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1691,7 +1691,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1705,7 +1705,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1719,7 +1719,7 @@
     0.417,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1733,7 +1733,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1747,7 +1747,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 20.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1802,7 +1802,7 @@
    9.124,
    3.64
   ],
-  "density": 0.008,
+  "density": 0.012,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1814,7 +1814,7 @@
   "bounces": 10,
   "view": "Khronos PBR Neutral",
   "look": "None",
-  "exposure": 0.3,
+  "exposure": -0.1,
   "white_balance_k": 3300,
   "white_balance_tint": -10.0
  }

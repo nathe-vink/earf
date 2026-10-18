@@ -1,0 +1,365 @@
+{
+ "stage1": {
+  "impression": "A long row of stools in front of a rainbow of glowing bar panels, under a back-bar of coloured shelves. The colour idea reads at once, but the image reads as an architectural CG walkthrough, not a photograph. The panels are flat, even sheets of colour; the bottles are one model cloned many times; the right half of the room (white wall, blotchy bright ceiling, pale reflective floor) looks like a lit gallery in daytime, not a calm listening bar at night; and the stools in front of the hero panels are nearly black silhouettes smeared by the denoiser.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The eight panels must be the brightest, most saturated thing in the frame. Today the end wall (median 211) and the floor (median 166) are brighter than every panel (103 to 145).",
+  "The room must read as night. The end wall, ceiling and right floor should sit at least 1.5 stops below the panels, with no clipping on the ceiling.",
+  "The panels need to read as lit cast acrylic, with a clear vertical falloff and some luminous variation, not flat vinyl. Bottom-to-top ratio about 0.35, not the 0.6 measured.",
+  "No repeated assets. The back-bar needs varied bottle shapes, glass colours and labels.",
+  "No denoiser smearing on labels, stool wood or leather. It needs a full-resolution final with enough samples.",
+  "The stools must show shape and wood grain, not crushed silhouettes, and the frame edges must not slice a stool or a pendant awkwardly."
+ ],
+ "defects": [
+  {
+   "region": [
+    830,
+    100,
+    990,
+    300
+   ],
+   "what": "End wall is a near-white, evenly lit surface (median 211, p95 232), brighter than every panel. It reads as daytime gallery, not a night bar."
+  },
+  {
+   "region": [
+    850,
+    0,
+    1150,
+    120
+   ],
+   "what": "Ceiling has blotchy hot pools (p95 237, 1.3 % clipped) with no clear source. Reads as CG light leak."
+  },
+  {
+   "region": [
+    850,
+    600,
+    1200,
+    800
+   ],
+   "what": "Right floor is pale grey and glossy (median 166), washing out the lower right and pulling the eye away from the bar."
+  },
+  {
+   "region": [
+    0,
+    0,
+    830,
+    320
+   ],
+   "what": "Back-bar bottles are a handful of models repeated with identical cream-and-stripe labels. Obvious cloning."
+  },
+  {
+   "region": [
+    0,
+    0,
+    830,
+    320
+   ],
+   "what": "Denoiser smearing: labels and shelf edges are waxy and blotchy, with no glass refraction detail."
+  },
+  {
+   "region": [
+    0,
+    340,
+    1040,
+    760
+   ],
+   "what": "Panels are flat uniform fields (lum_range 7 to 12 in a 100 px patch) with hard hairline seams. They read as painted board or vinyl, not back-lit acrylic."
+  },
+  {
+   "region": [
+    120,
+    600,
+    360,
+    780
+   ],
+   "what": "Foreground stool legs crushed to near black (median 10.6, b_median 1). No wood grain, smeared texture on the seats."
+  },
+  {
+   "region": [
+    0,
+    570,
+    25,
+    680
+   ],
+   "what": "A stool sliced by the left frame edge: an awkward tangent."
+  },
+  {
+   "region": [
+    310,
+    0,
+    460,
+    80
+   ],
+   "what": "The near Bell pendant is cropped by the top edge and its glass shade crowds the shelves."
+  },
+  {
+   "region": [
+    1040,
+    330,
+    1200,
+    460
+   ],
+   "what": "Lounge chairs have glossy, plastic-looking, over-wrinkled leather with CG specular. They read as stock models."
+  },
+  {
+   "region": [
+    600,
+    560,
+    1000,
+    800
+   ],
+   "what": "The panels' coloured spill on the floor is weak and broken. Little sense of the panels lighting the floor in front of them."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "material",
+   "problem": "The end wall is the brightest large surface in the frame and competes with the panels.",
+   "evidence": {
+    "region": [
+     830,
+     100,
+     990,
+     300
+    ],
+    "measured": "lum_median 211, p95 232, rgb 225/210/183, against the panels at 103 to 145"
+   },
+   "change": {
+    "setting": "end/side wall material (walls may change)",
+    "from": "near-white plaster, albedo about 0.8",
+    "to": "dark warm lime plaster or board-formed concrete, albedo 0.18 to 0.22, roughness 0.8, subtle trowel texture"
+   },
+   "expected": "The wall falls to a dim warm grey. The bar panels and shelves become the light in the room.",
+   "accept": {
+    "region": [
+     830,
+     100,
+     990,
+     300
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     100
+    ]
+   }
+  },
+  {
+   "region_note": "",
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Hot, blotchy pools on the ceiling and over-bright sources at the right make the room read as daytime and look like a CG light leak.",
+   "evidence": {
+    "region": [
+     850,
+     0,
+     1150,
+     120
+    ],
+    "measured": "lum_median 170, p95 237, clip 1.32 %, while the membrane is set to only 0.004"
+   },
+   "change": {
+    "setting": "on each Fog speaker 2 x spot, and lounge Bells",
+    "from": "Fog spots 320 W, cone 30 deg; lounge Bells 60 W",
+    "to": "Fog spots 110 W, cone 24 deg, aimed down at the speaker, not up the wall; lounge Bells 30 W"
+   },
+   "expected": "The ceiling falls to an even dark tone with no clipping. The right half recedes into night.",
+   "accept": {
+    "region": [
+     850,
+     0,
+     1150,
+     120
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.05
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The pale, glossy floor at the right is the second-brightest field in the frame and drags the eye out of the bar.",
+   "evidence": {
+    "region": [
+     850,
+     600,
+     1200,
+     800
+    ],
+    "measured": "lum_median 166, p95 236, against the floor by the bar at median 32"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "light grey polished concrete",
+    "to": "dark honed charcoal concrete, albedo 0.12, roughness 0.35 with a roughness map (scuffs and trowel marks), so it carries soft coloured reflections of the panels"
+   },
+   "expected": "The floor reads dark and continuous, holding soft coloured streaks of the panel glow.",
+   "accept": {
+    "region": [
+     850,
+     600,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The panels are flat and too dim to be the hero, and the specified bottom-to-top grade barely shows.",
+   "evidence": {
+    "region": [
+     20,
+     345,
+     80,
+     760
+    ],
+    "measured": "red panel profile 106 to 64 top to bottom (ratio 0.6); orange patch lum_range 8.9; panels median 103 to 145"
+   },
+   "change": {
+    "setting": "bar panels emission and grade",
+    "from": "0.9, graded from 0.35 at the foot",
+    "to": "1.4, graded from 0.2 at the foot (keep the spectrum order and colours)"
+   },
+   "expected": "The panels glow brighter at the top and fall away towards the floor, reading as back-lit acrylic. Top band median about 150 to 180, foot about 45.",
+   "accept": {
+    "region": [
+     110,
+     350,
+     380,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     145,
+     190
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "asset",
+   "problem": "The back-bar is stocked with obviously cloned bottles and labels.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     830,
+     320
+    ],
+    "measured": "seen: about 4 bottle shapes with the same cream striped label repeated across all shelves"
+   },
+   "change": {
+    "setting": "back-bar bottle props",
+    "from": "a few repeated models with one label",
+    "to": "a set of at least 12 distinct bottles (Japanese whisky, gin, amaro, decanters) with varied glass tints, fill levels and labels, randomised rotation, some gaps on the shelves"
+   },
+   "expected": "The shelves read as a real, curated back-bar. No two neighbouring bottles are identical.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The denoiser smears fine detail (labels, wood grain, leather), which marks the frame as a render.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     830,
+     320
+    ],
+    "measured": "seen at 2x: waxy labels and blotchy shelf faces; this proof is at scale 0.5"
+   },
+   "change": {
+    "setting": "render",
+    "from": "samples 256, adaptive 0.02, scale 0.5",
+    "to": "full 2400 x 1600, samples 1024, adaptive 0.01, denoise with albedo and normal passes, then add 1 to 2 % fine film grain in post"
+   },
+   "expected": "Labels, grain and leather texture resolve crisply. No blotching.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The foreground stools are crushed silhouettes with no form, and the floor in front of the bar barely carries the panels' colour.",
+   "evidence": {
+    "region": [
+     120,
+     600,
+     360,
+     780
+    ],
+    "measured": "lum_median 10.6, rgb 26/7/1, crush 0.26 %"
+   },
+   "change": {
+    "setting": "haze in the room's air, plus a camera-side fill",
+    "from": "haze density 0.008; no fill",
+    "to": "haze density 0.014, anisotropy 0.45; add a large dim warm area fill (2700 K, 3 W/m2 at the stools) from camera left, low"
+   },
+   "expected": "The stools show turned-wood form and a rim of panel colour. The haze carries a soft coloured glow in front of the bar.",
+   "accept": {
+    "region": [
+     120,
+     600,
+     360,
+     780
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     16,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "camera",
+   "problem": "The frame edges slice a stool at the left and the near Bell pendant at the top, so the composition feels accidental.",
+   "evidence": {
+    "region": [
+     0,
+     570,
+     25,
+     680
+    ],
+    "measured": "seen: a stool sliver at the left edge; the pendant shade cut at y 0"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [1.6, 4.6, 1.05], target [7.0, 8.4, 0.75], 35 mm",
+    "to": "position [2.0, 4.4, 0.95], target [7.4, 8.4, 0.8], 32 mm, so the first stool sits whole inside the left third and the near pendant sits clear of the top edge"
+   },
+   "expected": "Clean edges, the full spectrum run of eight panels visible, and the first stool complete as a foreground anchor.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the panel faces visible internal depth (edge glow, slight thickness, soft seams instead of hairlines)",
+   "why": "The panels and their construction are part of the fixed bar design. Only their glow level may change."
+  },
+  {
+   "request": "Replace the lounge chairs' leather with a matte aniline and less wrinkling",
+   "why": "Upholstery material may change, so this is allowed, but it ranks below the top eight. Do it in the next pass: roughness 0.55, softer normal map."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

@@ -31,11 +31,11 @@ DEFAULT = dict(
     # wall's spots three arches; the glasses unlit; the spectrum uneven
     # round 3's (listening-r1, door-r3): the membrane still the brightest field at any glow the eye can see it by, so
     # it is held to a glimmer in the views (the clock's own frames bring it up), at the warm 'sunset' hour, not magenta
-    clock='sunset', membrane=0.004, membrane_white=0.45, dj_glow=0.008, dj_color='#F2D6B0', panel_glow=0.9, panel_foot=0.35,
-    shelf_glow=0.15, backpanel_glow=0.04, niche_glow=0.03, slat_glow=0.2, slat_led=3.0, record_glow=0.0, neon=18.0,
-    windows_lit=0.35, street=True, spk_irr=12.0, wash=90.0, spot_fog=320.0, spot_bar=140.0, spot_dj=70.0,
-    spot_records=60.0, bell_w=60.0, pendant_w=25.0, street_lamp=600.0, haze=0.008,
-    exposure=0.3, wb=3300, wb_tint=-10.0,         # round 5: 3000 K at -25 overshot to green and bright; between the two
+    clock='sunset', membrane=0.004, membrane_white=0.45, dj_glow=0.008, dj_color='#F2D6B0', panel_glow=1.4, panel_foot=0.2,
+    shelf_glow=0.08, backpanel_glow=0.02, niche_glow=0.03, slat_glow=0.2, slat_led=3.0, record_glow=0.0, neon=18.0,
+    windows_lit=0.35, street=True, spk_irr=10.0, wash=90.0, spot_fog=300.0, spot_bar=140.0, spot_dj=70.0,
+    spot_records=30.0, bell_w=35.0, pendant_w=25.0, street_lamp=600.0, haze=0.012,
+    exposure=-0.1, wb=3300, wb_tint=-10.0,         # round 5: 3000 K at -25 overshot to green and bright; between the two
     view='Khronos PBR Neutral', look='None', samples=256,
 )
 
@@ -99,8 +99,8 @@ def lights(v):
             continue
         fx, fy = math.sin(math.radians(rot)), -math.cos(math.radians(rot))      # the speaker's front
         # a broad soft lamp (round 4: a narrow spot overshot onto the wall behind and left the cabinet dark)
-        L[f'spk{k}'] = {'type': 'area', 'position': [round(x + 1.6 * fx, 3), round(y + 1.6 * fy, 3), P.MEMBRANE - 0.05],
-                        'target': [x, y, 0.70], 'size_m': [0.7, 0.7], 'irradiance': v['spk_irr'], 'color': 3000}
+        L[f'spk{k}'] = {'type': 'area', 'position': [round(x + 1.0 * fx, 3), round(y + 1.0 * fy, 3), 2.5],
+                        'target': [x, y, 0.70], 'size_m': [0.45, 0.45], 'irradiance': v['spk_irr'], 'color': 3000}
         # the wash: a floor uplight in the corner behind, grazing both walls in the pair's complementary colour
         cx = P.LOUNGE_X0 + 0.25 if role == 'front' else P.L - 0.15
         cy = 0.15 if y < P.D / 2 else P.D - 0.15
@@ -112,7 +112,7 @@ def lights(v):
     for k, (role, colour, x, y, z, rot) in enumerate(P.speakers()):
         if role == 'backbar':
             L[f'fog{k}'] = {'type': 'spot', 'position': [x, y - 0.12, P.NICHE_Z0 + P.NICHE_H - 0.03], 'target': [x, y - 0.25, z + 0.6],
-                            'power_w': v['spot_fog'], 'cone_deg': 30, 'blend': 0.7, 'radius_m': 0.02, 'color': 3000}
+                            'power_w': v['spot_fog'], 'cone_deg': 40, 'blend': 0.7, 'radius_m': 0.02, 'color': 3000}
     # pinholes onto the bar top, between the pendants
     for i, x in enumerate(P.bar_pendants()[:-1]):
         L[f'bar{i}'] = {'type': 'spot', 'position': [x + 0.7, P.BAR_FRONT + 0.05, P.MEMBRANE - 0.02],
@@ -124,7 +124,7 @@ def lights(v):
     if v.get('spot_records', 0) > 0:                                 # a wash down the record wall
         for k, yy in enumerate((2.6, 4.57, 6.5)):
             L[f'rec{k}'] = {'type': 'spot', 'position': [P.L - 2.4, yy, P.MEMBRANE - 0.02], 'target': [P.L - 0.4, yy, 0.9],
-                            'power_w': v['spot_records'], 'cone_deg': 45, 'blend': 1.0, 'radius_m': 0.04, 'color': 3200}
+                            'power_w': v['spot_records'], 'cone_deg': 25, 'blend': 0.8, 'radius_m': 0.04, 'color': 3200}
     # Bell: three small lamps just outside each lamp's opal sleeve (companions/shots.py's bell_lights)
     def bell(lx, ly, h, watts, tag):
         for k in range(3):
@@ -172,9 +172,9 @@ STREET_LAMPS = (-7.0, 6.5, 20.0)
 VIEWS = {
     'door': {'title': 'the whole room at night, from the door',
              'camera': {'position': [2.20, 3.60, 1.35], 'target': [P.L, 4.7, 1.25], 'lens_mm': 30, 'level': True},
-             'settings': {'panel_glow': 0.6}},
+             'settings': {'panel_glow': 0.9}},
     'bar': {'title': 'the bar front lit, at eye level',
-            'camera': {'position': [1.60, 4.60, 1.05], 'target': [7.0, 8.4, 0.75], 'lens_mm': 35, 'level': True}},
+            'camera': {'position': [1.10, 4.50, 0.95], 'target': [7.4, 8.4, 0.8], 'lens_mm': 32, 'level': True}},
     'listening': {'title': 'the listening corner, a pair either side of the lounge',
                   # turned round after round 2 (the chairs' backs hid the Ice pair): from the DJ's side of the lounge,
                   # the Ember pair either side of it, the chairs facing the camera, the bar glowing beyond
@@ -183,14 +183,18 @@ VIEWS = {
                   'camera': {'position': [14.75, 1.85, 1.20], 'target': [17.7, 1.45, 0.92], 'lens_mm': 32, 'level': True,
                              'fstop': 4.0, 'focus': [17.57, 0.78, 0.9]}},
     'backbar': {'title': 'the back-bar, the Fog pair among the lit shelves',
-                'camera': {'position': [4.20, 6.20, 1.70], 'target': [3.42, 8.9, 1.2], 'lens_mm': 35, 'level': True,
-                           'fstop': 2.8, 'focus': [3.42, 8.72, 1.65]}},
+                # concept changed after three passes at 4.0 to 4.5 (one speaker in a niche over a dead counter): the
+                # pair from across the room, rising above the bar among the shelves, the spectrum front below
+                'camera': {'position': [(P.NICHES[0][0] + P.NICHES[1][0] + P.NICHES[1][1]) / 2, 3.60, 1.75],
+                           'target': [(P.NICHES[0][0] + P.NICHES[1][0] + P.NICHES[1][1]) / 2, P.D, 1.25], 'lens_mm': 30,
+                           'level': True}},
     'records': {'title': 'the record wall and the DJ desk with Cumulus',
                 'camera': {'position': [16.5, 3.9, 1.30], 'target': [17.89, 4.42, 1.0], 'lens_mm': 45, 'level': True,
-                           'fstop': 4.0, 'focus': [17.89, 4.42, 1.0]}},
+                           'fstop': 4.0, 'focus': [17.89, 4.42, 1.0]},
+                'settings': {'exposure': 1.3, 'dj_glow': 0.03, 'spot_dj': 150.0, 'spot_records': 60.0}},
     'street': {'title': 'the street at night, through the window',
                'camera': {'position': [-6.5, -10.0, 1.5], 'target': [3.0, 0.5, 1.9], 'lens_mm': 32, 'level': True},
-               'settings': {'sky': 0.25}},
+               'settings': {'sky': 0.05, 'exposure': 0.6, 'wb': 4200, 'wb_tint': 0.0, 'across_glow': 0.08}},
 }
 
 # the colour clock: the door's view at four hours, the membrane the only change (its glow a little up, so it reads)
@@ -200,13 +204,24 @@ for hour, label in (('opening', '17:00'), ('sunset', '19:30'), ('late', '22:30')
                               'settings': {'clock': hour, 'membrane': 0.08}}
 
 
-def write(names=None):
-    os.makedirs(OUT, exist_ok=True)
+FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.10, 'clarity': 0.06, 'sharpen': 0.3,
+          'sharpen_px': 0.7}
+
+
+def write(names=None, final=False):
+    """The proofs' shots (OUT/VIEW.json), or with final the finals' (OUT/final/VIEW.json): 256 samples, the finish."""
+    out = os.path.join(OUT, 'final') if final else OUT
+    os.makedirs(out, exist_ok=True)
     for n in names or VIEWS:
-        p = os.path.join(OUT, f'{n}.json')
-        json.dump(shot(n), open(p, 'w'), indent=1)
+        s = shot(n)
+        if final:
+            s['render'].update({'samples': 256, 'adaptive': 0.01})
+            s['finish'] = dict(FINISH)
+        p = os.path.join(out, f'{n}.json')
+        json.dump(s, open(p, 'w'), indent=1)
         print(p)
 
 
 if __name__ == '__main__':
-    write(sys.argv[1:] or None)
+    args = [a for a in sys.argv[1:] if a != '--final']
+    write(args or None, final='--final' in sys.argv)

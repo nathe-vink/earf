@@ -48,7 +48,7 @@ SHELVES_Z = [1.32, 1.72, 2.12, 2.52, 2.92]       # shelf tops above the counter:
 SHELF_T = 0.010
 WORKING_SHELVES = 2              # the lowest two warm white (labels read); the rest tinted for display
 SHELF_TOP_Z = 3.30               # the back-bar's head
-NICHES = [(3.05, 0.74), (BAR_X1 - 1.79, 0.74)]   # (x0, width) of the two Fog niches
+NICHES = [(4.155, 0.74), (7.305, 0.74)]         # (x0, width) of the two Fog niches: bays 3 and 6, 3.15 m apart (round 6)
 NICHE_Z0 = 0.45                  # the niche's floor: the Fog horns at a seated guest's eye (about 1.5 m on a bar stool)
 NICHE_H = 1.45
 

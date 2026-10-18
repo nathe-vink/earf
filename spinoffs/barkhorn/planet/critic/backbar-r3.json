@@ -1,0 +1,369 @@
+{
+ "stage1": {
+  "impression": "A dim back-bar of procedurally labelled bottles with one cream-and-glass speaker standing in a dark recess at centre, and a flat brown floor taking the bottom quarter. The lit shelf backs outshine the product, the clear acrylic reads as a dark frame around a white board rather than glowing material, and the bottles' repeated banded labels and uniform shapes read as game assets. It is a layout proof, not a photograph.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speaker is the brightest, clearest thing in the frame: its region's median luminance is above the shelf backs', not 23 against 105-120 as now",
+  "The clear-white acrylic reads as lit, translucent material, with light passing through its edges and the batts glowing, not as a dark frame",
+  "Bottles are varied, believable assets with real labels, glass refraction and liquid, with no repeated label pattern",
+  "Both speakers of the Fog pair are in frame, and the foreground is the bar top, not a quarter-frame of dead floor",
+  "One coherent warm colour temperature across the shelves (now cool-blue left, warm-red right)",
+  "The floor has real material detail and reflects the lit shelves and the speaker",
+  "Atmosphere: haze that shows the spot beams and separates the planes"
+ ],
+ "defects": [
+  {
+   "region": [
+    470,
+    350,
+    700,
+    660
+   ],
+   "what": "the speaker body is underlit (median 22.8) and darker than the shelf backs around it; the woofer reads as a black hole"
+  },
+  {
+   "region": [
+    455,
+    175,
+    715,
+    335
+   ],
+   "what": "the acrylic top reads as a smoky glass box with a dark blob inside; there is no edge glow or transmitted light"
+  },
+  {
+   "region": [
+    50,
+    30,
+    390,
+    180
+   ],
+   "what": "left shelf backs are cool blue-white (b 131 > r 116), brighter than the hero"
+  },
+  {
+   "region": [
+    880,
+    30,
+    1190,
+    180
+   ],
+   "what": "right shelf backs are warm (r 134, b 85), so the two sides disagree in white balance"
+  },
+  {
+   "region": [
+    0,
+    620,
+    1200,
+    800
+   ],
+   "what": "the floor is a flat, featureless brown field (lum range 19, median 21) taking about 22% of the frame"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    560
+   ],
+   "what": "bottles repeat the same banded red and cream labels and a few silhouettes; they read as CG"
+  },
+  {
+   "region": [
+    490,
+    100,
+    740,
+    330
+   ],
+   "what": "the niche's back wall has speckle texture like noise or dirt, and is brighter (median 73) than the speaker in front of it"
+  },
+  {
+   "region": [
+    415,
+    0,
+    780,
+    40
+   ],
+   "what": "a red neon strip at the top edge is cut by the frame and pulls the eye out of the image"
+  },
+  {
+   "region": [
+    740,
+    100,
+    870,
+    560
+   ],
+   "what": "the right niche edge and the dark vertical post crowd the speaker; the pair's second speaker is not visible"
+  },
+  {
+   "region": [
+    460,
+    580,
+    720,
+    680
+   ],
+   "what": "the speaker's base sits in black with no contact shadow or bounce visible; its weight and floor contact do not read"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero speaker is the darkest object in the middle of the frame and reads as a silhouette, not as glowing acrylic.",
+   "evidence": {
+    "region": [
+     470,
+     350,
+     700,
+     660
+    ],
+    "measured": "lum_median 22.8, mean 48.4; woofer area 540,460-640,590 median 15.9; shelf backs 105-120"
+   },
+   "change": {
+    "setting": "on each Fog speaker 2 x spot (and Fog niches)",
+    "from": "2 x spot 320 W, cone 30 deg; Fog niches 0.03",
+    "to": "2 x spot 650 W, cone 40 deg, aimed at the cabinet's mid-height from 30 deg above and either side; plus a soft area lamp at the niche's floor, behind the speaker, 10 W, so light passes up through the clear acrylic's edges"
+   },
+   "expected": "The cabinet reads cream-white and translucent, its edges glowing, the speaker's median luminance near 55-70.",
+   "accept": {
+    "region": [
+     470,
+     350,
+     700,
+     660
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The edge-lit shelves out-shine the product and pull the eye to the bottles.",
+   "evidence": {
+    "region": [
+     50,
+     30,
+     390,
+     180
+    ],
+    "measured": "lum_median 120.1 left, 105.1 right (880,30-1190,180), against the speaker's 22.8"
+   },
+   "change": {
+    "setting": "shelves; back-bar back panel",
+    "from": "shelves 0.15; back panel 0.04",
+    "to": "shelves 0.08; back panel 0.02"
+   },
+   "expected": "The shelf backs sit about a stop below the speaker, so the speaker reads first.",
+   "accept": {
+    "region": [
+     50,
+     30,
+     390,
+     180
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The left shelves are cool blue while the right are warm red-orange, two white balances in one room.",
+   "evidence": {
+    "region": [
+     50,
+     30,
+     390,
+     180
+    ],
+    "measured": "left r116 g120 b131; right (880,30-1190,180) r134 g99 b85"
+   },
+   "change": {
+    "setting": "shelves emission colour (per bay)",
+    "from": "cool white on the left bays, warm or red-tinted on the right",
+    "to": "one 2700 K warm white for every shelf's edge light; keep coloured light only from the speakers' own acrylic"
+   },
+   "expected": "Both sides of the back-bar share one warm white; the blue cast on the left is gone.",
+   "accept": {
+    "region": [
+     50,
+     30,
+     390,
+     180
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 95
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The frame shows one speaker and a quarter-frame of dead floor instead of the pair seen from a bar stool across the bar top.",
+   "evidence": {
+    "region": [
+     0,
+     620,
+     1200,
+     800
+    ],
+    "measured": "floor fills 22% of the frame, lum_range 19; the second Fog speaker is out of frame"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [4.2, 6.2, 1.7], target [3.42, 8.9, 1.2], 35 mm, f/2.8",
+    "to": "position [3.42 + half the pair's spacing, 6.6, 1.45] centred between the two Fog niches, target z 1.1, level, 28 mm, f/4, focus on the nearer Fog speaker; place it so the honed stone bar top crosses the bottom 12-15% of the frame, out of focus, with two props (a rocks glass, a coupe) on it"
+   },
+   "expected": "Both Fog speakers are in frame as the subject, the bar top is the foreground, and there is depth from foreground to back-bar.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The floor is a uniform brown with no texture or reflection, so nothing sits on it.",
+   "evidence": {
+    "region": [
+     0,
+     620,
+     1200,
+     800
+    ],
+    "measured": "lum_median 21.1, lum_range 19.0, profile 12-22 with no structure"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "matte flat brown",
+    "to": "dark honed concrete with fine aggregate and pores, roughness 0.35 with a roughness map, so it carries soft reflections of the shelves and the speaker; if c4 frames the bar top in the foreground this matters less"
+   },
+   "expected": "Soft reflections of the speaker and the shelf glow on the floor; visible micro-texture.",
+   "accept": {
+    "region": [
+     0,
+     620,
+     1200,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "asset",
+   "problem": "The bottles are a small set of procedural shapes with repeated banded labels and read as a game asset.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     560
+    ],
+    "measured": "seen: the same red and cream bands repeat on more than 20 bottles; the glass shows no refraction of the lit back"
+   },
+   "change": {
+    "setting": "the back-bar's bottle props",
+    "from": "procedural bottles with banded labels",
+    "to": "15-20 distinct modelled bottles (whisky, gin, amaro, sake) with paper labels in a few type styles, real glass (IOR 1.5, thickness), liquid at varied fills, and a few back-lit through their liquid; fewer per shelf, spaced like a curated kissa shelf"
+   },
+   "expected": "The shelves read as a real, curated bar; the glass refracts the lit back panel.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "There is no atmosphere: the spot beams and planes do not separate, and the frame reads flat.",
+   "evidence": {
+    "region": [
+     760,
+     520,
+     1200,
+     700
+    ],
+    "measured": "lum_median 9.0, lum_p5 7.8: the lower back-bar is a flat black"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "density 0.008, anisotropy 0.3",
+    "to": "density 0.018, anisotropy 0.5"
+   },
+   "expected": "The Fog spots show soft beams, the shadows lift slightly, and the back-bar separates from the speakers.",
+   "accept": {
+    "region": [
+     760,
+     520,
+     1200,
+     700
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     13,
+     25
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "composition",
+   "problem": "A cut-off red neon strip at the top edge and a speckled niche wall distract from the speaker.",
+   "evidence": {
+    "region": [
+     490,
+     100,
+     740,
+     330
+    ],
+    "measured": "niche back median 72.9, brighter than the speaker, with visible specks; red strip at 415,0-780,40"
+   },
+   "change": {
+    "setting": "niche wall material and the red strip above the niche",
+    "from": "speckled plaster; red strip lit",
+    "to": "a clean, matte warm-grey plaster with no specks; turn off the red strip above the Fog niches or crop it out with c4"
+   },
+   "expected": "A calm, even field behind the acrylic top, darker than the speaker, with nothing red at the frame edge.",
+   "accept": {
+    "region": [
+     490,
+     100,
+     740,
+     330
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     55
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the horn inside the clear top read as a designed form rather than a dark blob",
+   "why": "The horn is the speaker's own part (and its shape is fixed); only light can help it, through c1"
+  },
+  {
+   "request": "Make the cabinet's frame and battens read less like a dark cage around a white board",
+   "why": "The cabinet's construction and the Fog colour are fixed; c1's transmitted light is the in-scope fix"
+  }
+ ],
+ "score_if_fixed": 6.5
+}
