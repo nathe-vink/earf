@@ -48,6 +48,43 @@ def _vary(bpy, mat, size, amount, tint=(0.62, 0.36, 0.25)):
     nt.links.new(mul.outputs['Result'], sock)
 
 
+def _dual(bpy, mat, scale_mul, rot_deg, mask_size):
+    """A second sampling of every image in the material, at `scale_mul` the size and turned `rot_deg` about z, blended
+    with the first through a noise mask `mask_size` metres across: two ripple fields of different wavelength and
+    direction, so the ground does not read as one print."""
+    nt = mat.node_tree
+    imgs = [n for n in nt.nodes if n.type == 'TEX_IMAGE']
+    if not imgs:
+        return
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    mp = nt.nodes.new('ShaderNodeMapping')
+    src_map = next((n for n in nt.nodes if n.type == 'MAPPING' and n is not mp), None)
+    sc = src_map.inputs['Scale'].default_value if src_map else (1, 1, 1)
+    mp.inputs['Scale'].default_value = (sc[0] / scale_mul, sc[1] / scale_mul, sc[2] / scale_mul)
+    mp.inputs['Rotation'].default_value = (0.0, 0.0, math.radians(rot_deg))
+    mp.inputs['Location'].default_value = (13.7, 5.3, 0.0)
+    nt.links.new(tc.outputs['Object'], mp.inputs['Vector'])
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / mask_size
+    nz.inputs['Detail'].default_value = 2.0
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    mask = nt.nodes.new('ShaderNodeMapRange'); mask.inputs['From Min'].default_value = 0.4; mask.inputs['From Max'].default_value = 0.6
+    nt.links.new(nz.outputs['Fac'], mask.inputs['Value'])
+    for n in imgs:
+        outs = [l for l in nt.links if l.from_node is n and l.from_socket.name == 'Color']
+        if not outs:
+            continue
+        m = nt.nodes.new('ShaderNodeTexImage'); m.image = n.image; m.projection = n.projection
+        m.projection_blend = n.projection_blend; m.interpolation = n.interpolation
+        nt.links.new(mp.outputs['Vector'], m.inputs['Vector'])
+        mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'
+        nt.links.new(mask.outputs['Result'], mix.inputs['Factor'])
+        nt.links.new(n.outputs['Color'], mix.inputs['A']); nt.links.new(m.outputs['Color'], mix.inputs['B'])
+        for l in outs:
+            to = l.to_socket
+            nt.links.remove(l)
+            nt.links.new(mix.outputs['Result'], to)
+
+
 def terrain(bpy, name, p, kit):
     ex, ey = p.get('eye', [0.0, -5.0])
     head, half = math.radians(p.get('heading', 90.0)), math.radians(p.get('half_angle', 40.0))
@@ -84,6 +121,8 @@ def terrain(bpy, name, p, kit):
             f.normal_flip()
     q = dict(p); q.pop('position', None)
     objs = kit.finish(bpy, name, bm, q)
+    if p.get('dual'):
+        _dual(bpy, objs[0].data.materials[0], *p['dual'])
     if p.get('vary'):
         _vary(bpy, objs[0].data.materials[0], *p['vary'])
     return objs

@@ -39,12 +39,17 @@
      0.0,
      2.2
     ],
-    "swell": 0.35,
-    "swell_size": 11.0,
+    "swell": 0.6,
+    "swell_size": 16.0,
     "rim": 1.6,
     "vary": [
      14.0,
      0.55
+    ],
+    "dual": [
+     1.55,
+     27.0,
+     9.0
     ],
     "material": "pbr",
     "texture": "aerial_beach_01",
@@ -95,9 +100,9 @@
     "wander": 0.22,
     "material": "pbr",
     "texture": "cliff_side",
-    "tex_scale": 19.0,
-    "tint": "#8E4428",
-    "tint_mix": 0.5,
+    "tex_scale": 8.0,
+    "tint": "#7A3A22",
+    "tint_mix": 0.4,
     "res": "2k",
     "vary": [
      30.0,
@@ -122,9 +127,9 @@
     "wander": 0.22,
     "material": "pbr",
     "texture": "cliff_side",
-    "tex_scale": 19.0,
-    "tint": "#8E4428",
-    "tint_mix": 0.5,
+    "tex_scale": 8.0,
+    "tint": "#7A3A22",
+    "tint_mix": 0.4,
     "res": "2k",
     "vary": [
      30.0,
@@ -149,9 +154,9 @@
     "wander": 0.22,
     "material": "pbr",
     "texture": "cliff_side",
-    "tex_scale": 19.0,
-    "tint": "#8E4428",
-    "tint_mix": 0.5,
+    "tex_scale": 8.0,
+    "tint": "#7A3A22",
+    "tint_mix": 0.4,
     "res": "2k",
     "vary": [
      30.0,
@@ -176,9 +181,9 @@
     "wander": 0.22,
     "material": "pbr",
     "texture": "cliff_side",
-    "tex_scale": 19.0,
-    "tint": "#8E4428",
-    "tint_mix": 0.5,
+    "tex_scale": 8.0,
+    "tint": "#7A3A22",
+    "tint_mix": 0.4,
     "res": "2k",
     "vary": [
      30.0,
@@ -195,8 +200,11 @@
     "position": [
      1.35,
      1.1,
-     0.24
+     0.2
     ],
+    "stems": 46,
+    "branches": 8,
+    "twigs": 6,
     "rotate": [
      8,
      14,
@@ -219,9 +227,28 @@
      1.6,
      -0.02
     ],
-    "density": 1.0,
+    "density": 0.8,
     "wisp": 0.5,
     "color": "#E9BC94"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "dust",
+    "size": [
+     30.0,
+     14.0,
+     0.6
+    ],
+    "position": [
+     6.0,
+     16.0,
+     -0.05
+    ],
+    "density": 0.5,
+    "wisp": 1.8,
+    "color": "#EDC29A"
    }
   ]
  },
@@ -229,12 +256,12 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    3.0,
-    1.0
+    4.0,
+    1.5
    ],
    "orbit": {
-    "azimuth_deg": -15,
-    "elevation_deg": 6,
+    "azimuth_deg": -10,
+    "elevation_deg": 10,
     "distance_m": 4.0
    },
    "target": [
@@ -242,7 +269,7 @@
     0.0,
     0.55
    ],
-   "irradiance": 0.5,
+   "irradiance": 1.2,
    "color": "#F2B07E"
   }
  },
@@ -254,8 +281,6 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
-  "white_balance_k": 5600,
-  "white_balance_tint": 3.0,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Dust, the Southwest at golden hour",
@@ -288,7 +313,7 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "qwantani_sunset_puresky",
-  "rotation_deg": 84.0,
+  "rotation_deg": 264.0,
   "strength": 0.5,
   "res": "4k"
  },
@@ -311,7 +336,7 @@
    "bloom": 0.08,
    "bloom_px": 30,
    "bloom_threshold": 0.95,
-   "saturation": 0.06,
+   "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
    "vignette": 0.12
@@ -326,8 +351,8 @@
    320.0,
    70.0
   ],
-  "density": 0.0011,
-  "anisotropy": 0.6,
+  "density": 0.0007,
+  "anisotropy": 0.35,
   "color": "#F4D2B0"
  }
 }
