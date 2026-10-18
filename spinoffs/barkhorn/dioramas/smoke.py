@@ -109,7 +109,7 @@ def track(x0=-8.0, x1=8.0):
     return p
 
 
-def plume(stack, s=0.0046, light='#C4C2C1', dark='#908F91'):
+def plume(stack, s=0.0046, light='#ADABAA', dark='#878688'):
     """The icon's plume in grey wool, rising from the stack: a small puff of two circles joined into a big one of three,
     drifting left to right. Each circle is a billow, a ball with smaller balls bunched round its rim (a cauliflower, as
     wool teased into a puff is), paler as the smoke thins and rises."""
@@ -135,8 +135,8 @@ def plume(stack, s=0.0046, light='#C4C2C1', dark='#908F91'):
             out.append(kit('sphere', 'wool', col, position=[round(X + px, 4), round(Y + py, 4), round(Z + pz, 4)],
                            scale=[rr, rr * 0.9, rr]))
     # the first breath out of the stack, into the small puff
-    for k, (dx, dz, r) in enumerate([(0.0, 0.03, 0.04), (0.02, 0.09, 0.05), (0.05, 0.15, 0.06), (0.09, 0.22, 0.075)]):
-        out.append(kit('sphere', 'wool', dark, position=[x0 + dx, y0, z0 + dz], scale=[r, r * 0.9, r]))
+    for k, (dx, dz, r) in enumerate([(0.0, 0.03, 0.04), (0.02, 0.09, 0.05), (0.045, 0.15, 0.06)]):
+        out.append(kit('sphere', 'wool', dark, position=[x0 + dx, y0 + 0.03, z0 + dz], scale=[r, r * 0.9, r]))
     return out
 
 
@@ -179,17 +179,48 @@ def wisp(x, y, z, k=1.0, seed=0, ring=False):
     return out
 
 
-def town():
-    rnd = random.Random(7)
-    out = [mound(0.0, 4.6, -0.55, 7.5, 1.6, 0.9, '#141317', 'wool')]
-    xs = [-4.6, -3.6, -2.75, -1.9, -0.95, 0.0, 0.85, 1.8, 2.7, 3.6, 4.5]
-    for i, x in enumerate(xs):
-        w = rnd.uniform(0.62, 0.85); h = rnd.uniform(0.7, 1.25); roof = rnd.uniform(0.25, 0.42)
-        y = 4.15 + rnd.uniform(-0.15, 0.15)
-        lit = rnd.sample(range(6), rnd.randint(1, 3)); ch = rnd.choice([0.25, 0.7])
-        out += house(x, y, w, h, roof=roof, color=(CARD, CARD2)[i % 2], lit=lit, chimney=ch, seed=i)
-        cx = x + (ch - 0.5) * w
-        top = h + roof * (1 - abs(cx - x) / (w / 2)) + 0.16
+def pine(x, y, z, h, color=CARD, seed=0):
+    """A card fir: three tiers of zigzag cut from black card on a stub of trunk, standing at (x, y, z)."""
+    rnd = random.Random(seed)
+    w = h * rnd.uniform(0.42, 0.5)
+    pts = [[-0.05 * w, 0.0], [-0.05 * w, 0.12 * h]]
+    tiers = [(0.12, 0.5, 1.0), (0.4, 0.75, 0.74), (0.64, 1.0, 0.48)]
+    left = []
+    for z0, z1, k in tiers:
+        left += [[-w / 2 * k, z0 * h], [-w * 0.16 * k, (z0 + 0.06) * h]]
+    pts += left + [[0.0, h]] + [[-px, pz] for px, pz in reversed(left)] + [[0.05 * w, 0.12 * h], [0.05 * w, 0.0]]
+    # each tier's left corner then its notch going up; mirrored for the right side
+    return [lacquer('extrude', color, outline=[[round(a, 4), round(b, 4)] for a, b in pts], depth=0.02 * h / 0.6,
+                    ease=0.004, position=[x, y, z], rotate=[0, 0, rnd.uniform(-20, 20)])]
+
+
+def ridge_z(x, cx, cz, sx, sz):
+    t = (x - cx) / sx
+    return cz + sz * math.sqrt(max(0.0, 1 - t * t))
+
+
+def land():
+    """A night valley the line runs through: four ridges of charcoal wool and felt, a little paler as they recede, a
+    forest edge of black card firs along each."""
+    rnd = random.Random(11)
+    ridges = [(-1.5, 2.9, -0.35, 4.2, 0.9, 0.95, '#0E0E11', 'wool'), (2.6, 3.4, -0.4, 4.0, 1.0, 1.2, '#101014', 'wool'),
+              (-0.5, 4.6, -0.6, 6.5, 1.2, 1.75, '#131319', 'felt'), (0.5, 6.0, -0.8, 8.0, 1.0, 2.3, '#191A22', 'felt')]
+    out = []
+    for i, (cx, cy, cz, sx, sy, sz, col, mat) in enumerate(ridges):
+        out.append(mound(cx, cy, cz, sx, sy, sz, col, mat))
+        n = int(sx * 4.5)
+        for k in range(n):
+            x = cx - sx * 0.85 + 1.7 * sx * (k + rnd.uniform(0.0, 0.9)) / n
+            if rnd.random() < 0.15:
+                continue
+            yy = cy - sy * rnd.uniform(0.15, 0.4)
+            # the ridge's surface where the tree stands, a little in front of the crest
+            t = (yy - cy) / sy
+            zc = cz + sz * math.sqrt(max(0.0, 1 - ((x - cx) / sx) ** 2 - t * t)) - 0.03
+            if zc < 0.05:
+                continue
+            h = rnd.uniform(0.4, 0.75) * (1.0 + 0.25 * i)
+            out += pine(round(x, 3), round(yy, 3), round(zc, 3), round(h, 3), (CARD, CARD2)[k % 2], seed=31 * i + k)
     return out
 
 
@@ -219,7 +250,7 @@ def star(r, inner=0.45):
 
 
 def sky():
-    mx, my, mz = -0.55, 5.4, 1.85
+    mx, my, mz = -0.55, 5.4, 1.97
     out = [kit('scatter', 'glow', '#FFF1D6', emit=5.0, count=160, radius=[0.006, 0.016], seed=5,
                **{'in': [-8, 6.6, 1.4, 8, 6.75, 7.0]}),
            # the paper moon on its thread, a crescent cut from tissue and lit from within
@@ -254,14 +285,20 @@ def shot():
     # the ground: soot-black velvet laid over the set, softly rumpled (it rests on the sweep's floor, which it hides)
     props = [kit('drape', 'velvet', '#24232A', orient='lay', size=[16.0, 9.5], folds=3, amplitude=0.006, noise=0.7,
                  thickness=0.004, position=[0.0, 1.2, -0.004], res=220, seed=11)]
-    props += train + plume((sx * TOY, sy, sz * TOY), s=0.0039) + town() + signal_box() + sky()
+    smoke = plume((sx * TOY, sy, sz * TOY), s=0.0039)
+    props += smoke + train + land() + signal_box() + sky()
+    # the moon's full light on the plume and the speaker alone (Cycles light linking, by the pieces' object names); the
+    # land has a weaker share, so the wool hills stay charcoal rather than turning to moonlit snow
+    keyed = [f'prop{i}-kit' for i in range(1, 1 + len(smoke))]
     st = {'kind': 'sweep', 'color': '#14151B', 'width': 18.0, 'front': 10.0, 'depth': 7.0, 'radius': 2.2, 'height': 9.0,
           'kit_scale': 11.0, 'props': props}
     shell = ['left', 'right', 'top', 'bottom', 'front-panel', 'back', 'waveguide', 'waveguide-cap', 'woofer-ring', 'post-*',
              'grip-*', 'port-frame-*']
     lights = {
         'moon': {'type': 'area', 'size_m': [2.5, 2.5], 'orbit': {'azimuth_deg': -112, 'elevation_deg': 32, 'distance_m': 5.5},
-                 'target': [0.0, 0.8, 0.8], 'irradiance': 2.5, 'color': '#DCE2EF'},
+                 'target': [0.0, 0.8, 0.8], 'irradiance': 2.0, 'color': '#DCE2EF', 'receivers': shell + keyed},
+        'moonset': {'type': 'area', 'size_m': [2.5, 2.5], 'orbit': {'azimuth_deg': -112, 'elevation_deg': 32, 'distance_m': 5.5},
+                    'target': [0.0, 0.8, 0.8], 'irradiance': 0.6, 'color': '#DCE2EF'},
         # reflection cards (no diffuse light): the gloss of the smoked acrylic, its front and its left side
         'sheen': {'type': 'area', 'size_m': [3.0, 3.0], 'orbit': {'azimuth_deg': 32, 'elevation_deg': 20, 'distance_m': 4.0},
                   'target': [0.6, 0.0, 0.7], 'irradiance': 15.0, 'color': '#C8D0E4', 'receivers': shell, 'diffuse': 0.0},
@@ -273,8 +310,8 @@ def shot():
                     'irradiance': 1.2, 'color': '#5A6688', 'receivers': ['sweep']},
         'fill': {'type': 'area', 'size_m': [3.0, 2.0], 'orbit': {'azimuth_deg': -25, 'elevation_deg': 30, 'distance_m': 6.5},
                  'target': [0.5, 0.0, 0.7], 'irradiance': 0.3, 'color': '#B0B8CC'},
-        'firebox': point([-0.9, RAIL_Y - 0.1, 0.75], 45, '#FF9F55', 0.15),
-        'town': point([0.0, 3.9, 1.6], 30, WARM, 0.4),
+        'firebox': point([-0.93, RAIL_Y - 0.12, 0.5], 5, '#FF9F55', 0.04),
+        
     }
     cam = tilt_shift(elevation=16, azimuth=-18, distance=6.7, lens=52, target=(0.3, 0.45, 0.62), focus=(0.6, -0.15, 0.7),
                      miniature=8, shift_y=0.07)
