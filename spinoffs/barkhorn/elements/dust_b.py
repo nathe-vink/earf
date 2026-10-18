@@ -11,8 +11,8 @@ from common import area, camera, finish, piece, portrait_of, shot as frame, sky,
 HDRI = 'kloofendal_48d_partly_cloudy_puresky'
 ROT = float(os.environ.get('DUSTB_ROT', 350.7))          # the sky's sun 48 degrees up at azimuth 65 (the speaker's right)
 SAND = dict(material='pbr', texture='red_sand', tex_scale=1.6, tint='#C0633A', tint_mix=0.6, res='4k', bump=0.8)
-STONY = dict(texture='red_mud_stones', tex_scale=1.5, tint='#B8603A', tint_mix=0.6, mask=[5.0, 0.35], bump=1.0)
-CLIFF = dict(material='pbr', texture='rock_face', tex_scale=30.0, tint='#B8452A', tint_mix=0.75, res='4k',
+STONY = dict(texture='red_mud_stones', tex_scale=1.5, tint='#B8603A', tint_mix=0.8, mask=[5.0, 0.25], bump=1.0)
+CLIFF = dict(material='pbr', texture='rock_face', tex_scale=30.0, tint='#B5482A', tint_mix=0.9, res='4k',
              vary=[180.0, 0.3], beds=[22.0, 0.1], streaks=[7.0, 0.5])
 TALUS = dict(material='pbr', texture='red_mud_stones', tex_scale=25.0, tint='#A85E44', tint_mix=0.55, res='2k',
              vary=[120.0, 0.3])
@@ -51,8 +51,8 @@ def props():
                  swell2=[0.12, 5.0], albedo=0.92, spec=0.05, mixes=[STONY], **SAND),
            piece('box', size=[600.0, 600.0, 0.1], position=[0.0, 0.0, -0.5], **SAND)]
     # the buttes, at their real size: the Mittens to the left and right of the horn, a long mesa beyond
-    out += [butte(3000, -11, 230, 300, 1, turn=10, thumbs=[(185, 1.6, 30, 0.86)], squash=0.55),
-            butte(3600, 13, 260, 290, 2, turn=-15, thumbs=[(-5, 1.55, 32, 0.84)], squash=0.5),
+    out += [butte(3000, -6, 230, 300, 1, turn=10, thumbs=[(185, 1.38, 30, 0.86)], squash=0.55),
+            butte(3600, 15, 260, 290, 2, turn=-15, thumbs=[(-5, 1.35, 32, 0.84)], squash=0.5),
             butte(5200, 27, 900, 320, 3, turn=5, squash=0.3, spread=1.6),
             butte(7800, -2, 1100, 260, 4, turn=0, squash=0.25, spread=1.5)]
     # the near ground's plants: prickly pear beside the speaker, a yucca behind it, sagebrush, the tumbleweed

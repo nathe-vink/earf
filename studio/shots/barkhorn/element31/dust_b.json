@@ -64,10 +64,10 @@
       "texture": "red_mud_stones",
       "tex_scale": 1.5,
       "tint": "#B8603A",
-      "tint_mix": 0.6,
+      "tint_mix": 0.8,
       "mask": [
        5.0,
-       0.35
+       0.25
       ],
       "bump": 1.0
      }
@@ -107,8 +107,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     467.1,
-     2957.0,
+     723.5,
+     2904.8,
      -3.0
     ],
     "rotate": [
@@ -122,7 +122,7 @@
     "thumbs": [
      [
       185,
-      1.6,
+      1.38,
       30,
       0.86
      ]
@@ -134,8 +134,8 @@
      "material": "pbr",
      "texture": "rock_face",
      "tex_scale": 30.0,
-     "tint": "#B8452A",
-     "tint_mix": 0.75,
+     "tint": "#B5482A",
+     "tint_mix": 0.9,
      "res": "4k",
      "vary": [
       180.0,
@@ -169,8 +169,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     1958.5,
-     3013.1,
+     2062.7,
+     2942.8,
      -3.0
     ],
     "rotate": [
@@ -184,7 +184,7 @@
     "thumbs": [
      [
       -5,
-      1.55,
+      1.35,
       32,
       0.84
      ]
@@ -196,8 +196,8 @@
      "material": "pbr",
      "texture": "rock_face",
      "tex_scale": 30.0,
-     "tint": "#B8452A",
-     "tint_mix": 0.75,
+     "tint": "#B5482A",
+     "tint_mix": 0.9,
      "res": "4k",
      "vary": [
       180.0,
@@ -251,8 +251,8 @@
      "material": "pbr",
      "texture": "rock_face",
      "tex_scale": 30.0,
-     "tint": "#B8452A",
-     "tint_mix": 0.75,
+     "tint": "#B5482A",
+     "tint_mix": 0.9,
      "res": "4k",
      "vary": [
       180.0,
@@ -306,8 +306,8 @@
      "material": "pbr",
      "texture": "rock_face",
      "tex_scale": 30.0,
-     "tint": "#B8452A",
-     "tint_mix": 0.75,
+     "tint": "#B5482A",
+     "tint_mix": 0.9,
      "res": "4k",
      "vary": [
       180.0,
@@ -552,12 +552,12 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "kloofendal_48d_partly_cloudy_puresky",
-  "rotation_deg": 300.0,
+  "rotation_deg": 350.7,
   "strength": 1.0,
   "res": "8k"
  },
  "sun": {
-  "azimuth_deg": 115.7,
+  "azimuth_deg": 65.0,
   "elevation_deg": 47.9,
   "irradiance": 3.0,
   "angle_deg": 0.53,
