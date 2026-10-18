@@ -111,7 +111,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     1.25,
+     1.05,
      0.0
     ],
     "size": [
@@ -142,7 +142,7 @@
     "fn": "wall",
     "position": [
      0.0,
-     0.15000000000000002,
+     -0.04999999999999999,
      4.8
     ],
     "size": [
@@ -182,8 +182,8 @@
     ],
     "texture": "granite_tile",
     "res": "2k",
-    "wet": 0.7,
-    "puddle_m": 1.0,
+    "wet": 0.8,
+    "puddle_m": 0.32,
     "vary": 0.2
    },
    {
@@ -203,9 +203,9 @@
     "thick": 0.03,
     "texture": "granite_tile",
     "res": "2k",
-    "wet": 1.0,
+    "wet": 0.5,
     "puddle_m": 0.5,
-    "vary": 0.3
+    "vary": 0.4
    },
    {
     "kind": "kit",
@@ -266,8 +266,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -28.8,
-     0.65,
+     -27.0,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -297,8 +297,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -25.2,
-     0.65,
+     -23.4,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -328,8 +328,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -21.6,
-     0.65,
+     -19.8,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -359,8 +359,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -18.0,
-     0.65,
+     -16.2,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -390,8 +390,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -14.4,
-     0.65,
+     -12.6,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -421,8 +421,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -10.8,
-     0.65,
+     -9.0,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -452,8 +452,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -7.2,
-     0.65,
+     -5.4,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -483,8 +483,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -3.6,
-     0.65,
+     -1.8,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -514,8 +514,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     0.0,
-     0.65,
+     1.8,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -545,8 +545,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     3.6,
-     0.65,
+     5.4,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -576,8 +576,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     7.2,
-     0.65,
+     9.0,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -607,8 +607,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     10.8,
-     0.65,
+     12.6,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -638,8 +638,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     14.4,
-     0.65,
+     16.2,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -669,8 +669,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     18.0,
-     0.65,
+     19.8,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -700,8 +700,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     21.6,
-     0.65,
+     23.4,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -731,8 +731,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     25.2,
-     0.65,
+     27.0,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -762,8 +762,8 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     28.8,
-     0.65,
+     30.6,
+     0.44999999999999996,
      0.0
     ],
     "size": [
@@ -802,7 +802,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.3,
+    "roughness": 0.2,
     "ease": 0.012
    },
    {
@@ -838,7 +838,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.3,
+    "roughness": 0.2,
     "ease": 0.012
    },
    {
@@ -874,7 +874,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.3,
+    "roughness": 0.2,
     "ease": 0.012
    },
    {
@@ -910,7 +910,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.3,
+    "roughness": 0.2,
     "ease": 0.012
    },
    {
@@ -946,7 +946,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.3,
+    "roughness": 0.2,
     "ease": 0.012
    },
    {
@@ -982,7 +982,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.3,
+    "roughness": 0.2,
     "ease": 0.012
    },
    {
@@ -1018,7 +1018,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.3,
+    "roughness": 0.2,
     "ease": 0.012
    },
    {
@@ -1054,7 +1054,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.3,
+    "roughness": 0.2,
     "ease": 0.012
    },
    {
@@ -1101,8 +1101,8 @@
     0.0,
     3.08
    ],
-   "spread_deg": 120,
-   "power_w": 225.0,
+   "spread_deg": 90,
+   "power_w": 337.5,
    "color": "#FFFFFF"
   },
   "up1": {
@@ -1121,8 +1121,8 @@
     0.0,
     3.08
    ],
-   "spread_deg": 120,
-   "power_w": 225.0,
+   "spread_deg": 90,
+   "power_w": 337.5,
    "color": "#FFFFFF"
   },
   "up2": {
@@ -1141,8 +1141,8 @@
     0.0,
     3.08
    ],
-   "spread_deg": 120,
-   "power_w": 225.0,
+   "spread_deg": 90,
+   "power_w": 337.5,
    "color": "#FFFFFF"
   },
   "up3": {
@@ -1161,8 +1161,8 @@
     0.0,
     3.08
    ],
-   "spread_deg": 120,
-   "power_w": 225.0,
+   "spread_deg": 90,
+   "power_w": 337.5,
    "color": "#FFFFFF"
   },
   "up4": {
@@ -1181,8 +1181,8 @@
     0.0,
     3.08
    ],
-   "spread_deg": 120,
-   "power_w": 225.0,
+   "spread_deg": 90,
+   "power_w": 337.5,
    "color": "#FFFFFF"
   },
   "up5": {
@@ -1201,8 +1201,8 @@
     0.0,
     3.08
    ],
-   "spread_deg": 120,
-   "power_w": 225.0,
+   "spread_deg": 90,
+   "power_w": 337.5,
    "color": "#FFFFFF"
   },
   "up6": {
@@ -1221,8 +1221,8 @@
     0.0,
     3.08
    ],
-   "spread_deg": 120,
-   "power_w": 225.0,
+   "spread_deg": 90,
+   "power_w": 337.5,
    "color": "#FFFFFF"
   },
   "up7": {
@@ -1241,8 +1241,8 @@
     0.0,
     3.08
    ],
-   "spread_deg": 120,
-   "power_w": 315.0,
+   "spread_deg": 90,
+   "power_w": 448.875,
    "color": "#FFFFFF"
   },
   "moon": {
@@ -1252,16 +1252,16 @@
     6.0
    ],
    "position": [
-    5.0,
-    -3.0,
-    8.0
+    4.0,
+    -6.0,
+    6.0
    ],
    "target": [
     0.0,
-    0.5,
-    2.0
+    0.3,
+    1.2
    ],
-   "irradiance": 0.22,
+   "irradiance": 0.1,
    "color": "#C4D0F0"
   }
  },
@@ -1271,11 +1271,11 @@
    -20.0,
    -0.5,
    25.0,
-   0.48,
+   0.27999999999999997,
    16.0
   ],
-  "density": 0.007,
-  "anisotropy": 0.55
+  "density": 0.014,
+  "anisotropy": 0.65
  },
  "camera": {
   "position": [
