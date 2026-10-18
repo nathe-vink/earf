@@ -1,0 +1,13 @@
+{"stage1": {"impression": "A quiet pastel sunrise beach with glacier ice and the speaker set dead centre. It reads as a careful render, not a photograph. The speaker is evenly lit from the front in cool neutral light while the sun sits hidden behind it. Neither the speaker nor the ice glows with light coming through it. The sea is a smeared, painterly plane with no surf. A heavy brown-black trapezoid shadow fills the bottom sixth of the frame, and the 'black sand' reads as brown dirt.", "score": 5.5},
+ "verdict": "iterate", "score_if_fixed": 7.0,
+ "changes": [
+  {"id": "c1", "change": {"setting": "sun + sky", "to": "azimuth 150, elevation 3.5, sun disk in clear sky right of the speaker"}},
+  {"id": "c2", "change": {"setting": "lights.bounce", "to": "0.5, #F6C9A0, specular 0, at z 0.3"}},
+  {"id": "c3", "change": {"setting": "sea", "to": "crest 1 at 8 m, 0.55 high; chop 2.2; roughness 0.04"}},
+  {"id": "c4", "change": {"setting": "sand", "to": "#08080A-#1C1D20, specular 0.18, bump 2.5"}},
+  {"id": "c5", "change": {"setting": "wet sand", "to": "roughness 0.05-0.2 by noise; soaked below 0.04"}},
+  {"id": "c6", "change": {"setting": "wash reach", "to": "3.0 m in front, wobble 1.2"}},
+  {"id": "c7", "change": {"setting": "exposure, white_in", "to": "-0.75, 250"}},
+  {"id": "c8", "change": {"setting": "haze", "to": "0.002 from y 15 m"}}
+ ],
+ "note": "abridged by the set's author from the critic's full reply"}
