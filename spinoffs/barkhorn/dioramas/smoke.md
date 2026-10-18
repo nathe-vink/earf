@@ -1,5 +1,15 @@
 # Smoke: the night train (round 31)
 
+The owner, on the proofs of all eight sets (verbatim, as the coordinator relayed it):
+
+> "For the dioramas, they are looking lackluster and bleak so far. They don't need to be busy per se, but they look
+> both empty and cluttered at the same time. It's also hard to see the speakers themselves in some of them. ... All of
+> them should be looking at the speaker in a way that's more level with the speaker, with the speaker turned slightly
+> in either direction depending on the setting."
+
+And earlier: "It's important to stay on the theme of earth and placing the speakers in their respective atmospheres,
+though the yeti and witch ideas are fun, subtle nods."
+
 `smoke.py` builds the set; `python3 spinoffs/barkhorn/dioramas/build.py smoke` writes
 `studio/shots/barkhorn/diorama31/smoke.json` and `smoke-portrait.json`.
 
@@ -9,8 +19,9 @@ A toy steam train made of black lacquered card runs along a card track behind th
 windows lit warm. Its stack gives off the Smoke icon in grey wool: the small puff of two circles, joined into the big puff
 of three, drifting from left to right. Behind the train stand a row of card houses on a charcoal wool hill, with lit
 windows and chimneys. Over the roofs hang a crescent moon cut from tissue on a thread, and paper stars, against
-pin-prick stars on a dark card sky. The ground is soot-black velvet. Seen from above through a tilt-shift lens, the
-speaker is the sharp band, and the train, the plume and the town melt into soft blur and bokeh.
+pin-prick stars on a dark card sky. The ground is soot-black velvet. The camera stands level with the speaker,
+at the cabinet's middle. The speaker fills about 72 % of the frame's height, turned 20 degrees, and is crisp. The train,
+the plume and the valley soften behind it at a model's depth of field (miniature 5).
 
 - **Light, one idea: moonlight and lit windows.** The moon's light comes from the back left. Its full strength is linked
   to the plume and the speaker alone, so it rims the plume and rakes the speaker's left side. A weaker share falls on
@@ -83,7 +94,23 @@ Rework for the earth setting (s1 to s7, after the coordinator's note):
   sitting inside the puff. Moved below it, at 45 W, it lit the whole set orange. At 5 W and 4 cm, just above the stack,
   it gives a warm glow under the plume, as from a firebox.
 
-Portrait proofs:
+Level with the speaker (L1 to L8, after the owner's note):
+
+- **L1.** The camera at 0.85 m, looking level at a 65 mm lens from 5 m. The speaker is 72 % of the frame's height,
+  turned +20 degrees, with the engine moved right so the plume rises behind its horn. The reflection cards, still sized
+  for the high view, now filled whole panels: the cabinet went white.
+- **L2 to L4.** Taking the moon's key off the shell and cutting the back rims changed nothing. Toggling the lights one
+  at a time on a crop found the cause: the two reflection cards.
+- **L5 to L6.** The cards became narrow strips (0.5 and 0.35 m wide), aimed where the level camera sees the front and
+  the left side mirrored. Now the box reads as dark smoked glass, with one highlight band down the front. I tried a
+  card fir and wool drifts as foreground at the frame's edges.
+- **L7 to L8.** I removed the fir, which notched a lit window at the right edge. I kept the left rim narrow, because a
+  wide one washed the side out again. A full-size crop of the speaker is crisp and glossy, with the windows glowing
+  warm through the acrylic at its base and its right edge.
+- **Q1 (portrait).** Azimuth +2 on a 70 mm lens from 4 m. The moon, the engine's plume and the speaker share the
+  frame, and the speaker is 63 % of its height. The reflection cards follow the camera (azimuths 40 and -142).
+
+Earlier portrait proofs, from the high view:
 
 - **q1.** Lens 40. The speaker was 20 % of the frame.
 - **q2.** Lens 60. The speaker was 30 %, with too much floor.
@@ -94,13 +121,22 @@ Portrait proofs:
 
 ## Final settings
 
-- **Landscape.** 2400 × 1600, 256 samples. Camera elevation 16°, azimuth -18°, distance 6.7 m, 52 mm, f/2.8 at
-  miniature 8, shift_y 0.07, focused on the speaker's front face.
-- **Portrait.** 1600 × 2000, 256 samples. Elevation 20°, azimuth -14°, distance 6.0 m, 78 mm, shift -0.055 / 0.13.
-- **Speaker.** At (0.6, 0, 0), turned +6°, cover off.
+- **Landscape.** 2400 × 1600, 256 samples. Camera elevation 1.5° (at z 0.85 m), azimuth -6°, distance 5.0 m, 65 mm,
+  f/2.8 at miniature 5, focused on the speaker's front.
+- **Portrait.** 1600 × 2000, 256 samples. Elevation 1.5°, azimuth +2°, distance 4.0 m, 70 mm, shift_y 0.02.
+- **Speaker.** At (0.6, 0, 0), turned +20°, cover off.
+- **Lights.**
+  - The moon, 2.0 W/m², linked to the plume.
+  - The moon's share on the land, 0.6.
+  - A key on the shell, 0.5.
+  - Two reflection strips on the shell.
+  - Two back rims on the shell.
+  - A sky glow on the sweep.
+  - A cool fill, 0.3.
+  - The firebox, 3 W.
 - **Kit.** kit_scale 11.
-- **Finish.** Bloom 0.35 (threshold 0.7), saturation 0.1, lift 0.04 (`#1E2030`), vignette 0.25, exposure +1.0.
-- **Render times.** Listed in the report to the coordinator and in each `.report.json`.
+- **Finish.** Bloom 0.35 (threshold 0.7), saturation 0.12, lift 0.04 (`#1E2030`), vignette 0.25, exposure +1.0.
+- **Render times.** Listed in each `.report.json` and in the report to the coordinator.
 
 ## Environment notes (not the set)
 

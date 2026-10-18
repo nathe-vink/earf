@@ -250,7 +250,7 @@ def star(r, inner=0.45):
 
 
 def sky():
-    mx, my, mz = -0.55, 5.4, 1.97
+    mx, my, mz = -1.25, 5.4, 1.95
     out = [kit('scatter', 'glow', '#FFF1D6', emit=5.0, count=160, radius=[0.006, 0.016], seed=5,
                **{'in': [-8, 6.6, 1.4, 8, 6.75, 7.0]}),
            # the paper moon on its thread, a crescent cut from tissue and lit from within
@@ -278,15 +278,27 @@ def tuft(x, y, r, seed, color='#1F1E23'):
 TOY = 0.62               # the train's scale against the speaker
 
 
+XF = -0.8                # the engine's front (before it is made a toy)
+SPEAKER = (0.6, 0.0, 0.0)
+
+
+def foreground():
+    """Out-of-focus pieces at the frame's edge, between the camera and the speaker: a drift of settled charcoal wool in
+    the left corner."""
+    return tuft(-0.62, -1.9, 0.36, 3, '#24232A') + tuft(-0.25, -2.1, 0.2, 4, '#24232A')
+
+
 def shot():
-    loco, stack = locomotive(-1.75)
-    train = scaled(track() + loco + carriage(-0.15) + carriage(1.45) + carriage(3.05) + carriage(4.65) + carriage(-4.0), TOY, (0.0, RAIL_Y, 0.0))
+    loco, stack = locomotive(XF)
+    train = scaled(track() + loco + carriage(XF + 1.6) + carriage(XF + 3.2) + carriage(XF + 4.8) + carriage(XF + 6.4), TOY,
+                   (0.0, RAIL_Y, 0.0))
     sx, sy, sz = stack
+    sx, sz = sx * TOY, sz * TOY
     # the ground: soot-black velvet laid over the set, softly rumpled (it rests on the sweep's floor, which it hides)
-    props = [kit('drape', 'velvet', '#24232A', orient='lay', size=[16.0, 9.5], folds=3, amplitude=0.006, noise=0.7,
-                 thickness=0.004, position=[0.0, 1.2, -0.004], res=220, seed=11)]
-    smoke = plume((sx * TOY, sy, sz * TOY), s=0.0039)
-    props += smoke + train + land() + signal_box() + sky()
+    props = [kit('drape', 'velvet', '#24232A', orient='lay', size=[16.0, 12.0], folds=3, amplitude=0.006, noise=0.7,
+                 thickness=0.004, position=[0.0, 0.0, -0.004], res=240, seed=11)]
+    smoke = plume((sx, sy, sz), s=0.0039)
+    props += smoke + train + land() + signal_box() + sky() + foreground()
     # the moon's full light on the plume and the speaker alone (Cycles light linking, by the pieces' object names); the
     # land has a weaker share, so the wool hills stay charcoal rather than turning to moonlit snow
     keyed = [f'prop{i}-kit' for i in range(1, 1 + len(smoke))]
@@ -294,40 +306,47 @@ def shot():
           'kit_scale': 11.0, 'props': props}
     shell = ['left', 'right', 'top', 'bottom', 'front-panel', 'back', 'waveguide', 'waveguide-cap', 'woofer-ring', 'post-*',
              'grip-*', 'port-frame-*']
+    tgt = [SPEAKER[0], 0.0, 0.75]
     lights = {
         'moon': {'type': 'area', 'size_m': [2.5, 2.5], 'orbit': {'azimuth_deg': -112, 'elevation_deg': 32, 'distance_m': 5.5},
-                 'target': [0.0, 0.8, 0.8], 'irradiance': 2.0, 'color': '#DCE2EF', 'receivers': shell + keyed},
+                 'target': [0.0, 0.8, 0.8], 'irradiance': 2.0, 'color': '#DCE2EF', 'receivers': keyed},
+        # the speaker's own share of the moon: enough to show the smoked panels, not to light the lining behind them
+        'key': {'type': 'area', 'size_m': [2.0, 2.0], 'orbit': {'azimuth_deg': -70, 'elevation_deg': 25, 'distance_m': 4.0},
+                'target': tgt, 'irradiance': 0.5, 'color': '#DCE2EF', 'receivers': shell},
         'moonset': {'type': 'area', 'size_m': [2.5, 2.5], 'orbit': {'azimuth_deg': -112, 'elevation_deg': 32, 'distance_m': 5.5},
                     'target': [0.0, 0.8, 0.8], 'irradiance': 0.6, 'color': '#DCE2EF'},
-        # reflection cards (no diffuse light): the gloss of the smoked acrylic, its front and its left side
-        'sheen': {'type': 'area', 'size_m': [3.0, 3.0], 'orbit': {'azimuth_deg': 32, 'elevation_deg': 20, 'distance_m': 4.0},
-                  'target': [0.6, 0.0, 0.7], 'irradiance': 15.0, 'color': '#C8D0E4', 'receivers': shell, 'diffuse': 0.0},
-        'rim_l': {'type': 'area', 'size_m': [1.6, 3.0], 'orbit': {'azimuth_deg': -150, 'elevation_deg': 16, 'distance_m': 3.5},
-                  'target': [0.6, 0.0, 0.8], 'irradiance': 25.0, 'color': '#D2DBF2', 'receivers': shell, 'diffuse': 0.0},
-        'rim_r': {'type': 'area', 'size_m': [1.2, 3.0], 'orbit': {'azimuth_deg': 140, 'elevation_deg': 24, 'distance_m': 3.0},
-                  'target': [0.6, 0.0, 0.8], 'irradiance': 20.0, 'color': '#D2DBF2', 'receivers': shell},
+        # reflection cards (no diffuse light) where the level camera sees them in the smoked acrylic: the front, the
+        # left side; and the moon behind the speaker, rimming its edges and its horn against the night
+        'sheen': {'type': 'area', 'size_m': [0.5, 2.4], 'orbit': {'azimuth_deg': 52, 'elevation_deg': 10, 'distance_m': 4.0},
+                  'target': tgt, 'irradiance': 0.9, 'color': '#C8D0E4', 'receivers': shell, 'diffuse': 0.0},
+        'rim_l': {'type': 'area', 'size_m': [0.3, 3.0], 'orbit': {'azimuth_deg': -134, 'elevation_deg': 8, 'distance_m': 3.5},
+                  'target': tgt, 'irradiance': 2.0, 'color': '#D2DBF2', 'receivers': shell, 'diffuse': 0.0},
+        'rim_r': {'type': 'area', 'size_m': [1.2, 3.0], 'orbit': {'azimuth_deg': 150, 'elevation_deg': 24, 'distance_m': 3.0},
+                  'target': tgt, 'irradiance': 4.0, 'color': '#D2DBF2', 'receivers': shell},
+        'back': {'type': 'area', 'size_m': [2.0, 1.0], 'orbit': {'azimuth_deg': -170, 'elevation_deg': 40, 'distance_m': 3.0},
+                 'target': [SPEAKER[0], 0.0, 1.1], 'irradiance': 3.0, 'color': '#D2DBF2', 'receivers': shell},
         'skyglow': {'type': 'area', 'size_m': [12.0, 0.5], 'position': [0.0, 5.6, 1.3], 'target': [0.0, 7.0, 2.6],
                     'irradiance': 1.2, 'color': '#5A6688', 'receivers': ['sweep']},
-        'fill': {'type': 'area', 'size_m': [3.0, 2.0], 'orbit': {'azimuth_deg': -25, 'elevation_deg': 30, 'distance_m': 6.5},
-                 'target': [0.5, 0.0, 0.7], 'irradiance': 0.3, 'color': '#B0B8CC'},
-        'firebox': point([-0.93, RAIL_Y - 0.12, 0.5], 5, '#FF9F55', 0.04),
-        
+        'fill': {'type': 'area', 'size_m': [3.0, 2.0], 'orbit': {'azimuth_deg': -20, 'elevation_deg': 15, 'distance_m': 6.5},
+                 'target': tgt, 'irradiance': 0.3, 'color': '#B0B8CC'},
+        'firebox': point([sx + 0.05, RAIL_Y - 0.12, sz + 0.05], 3, '#FF9F55', 0.04),
     }
-    cam = tilt_shift(elevation=16, azimuth=-18, distance=6.7, lens=52, target=(0.3, 0.45, 0.62), focus=(0.6, -0.15, 0.7),
-                     miniature=8, shift_y=0.07)
+    cam = tilt_shift(elevation=1.5, azimuth=-6, distance=5.0, lens=65, target=(0.25, 0.0, 0.72),
+                     focus=(SPEAKER[0], -0.2, 0.75), miniature=5)
     return frame('smoke', st, lights, cam, 'barkhorn, Smoke, the night train',
                  sky={'kind': 'gradient', 'zenith': '#07080C', 'horizon': '#0B0C12', 'ground': '#060608', 'strength': 0.2},
-                 fin=finish(bloom=0.35, bloom_px=40, threshold=0.7, saturation=0.1, lift=0.04, lift_color='#1E2030',
+                 fin=finish(bloom=0.35, bloom_px=40, threshold=0.7, saturation=0.12, lift=0.04, lift_color='#1E2030',
                             vignette=0.25),
-                 exposure=1.0,
-                 position=(0.6, 0.0, 0.0), rotate_z=6.0)
+                 exposure=1.0, position=SPEAKER, rotate_z=20.0)
 
 
 def portrait():
-    """The 4:5 frame: the same set and light, the camera a little further round and on a longer lens, so the moon, the
-    plume and the speaker stack up the narrower frame."""
+    """The 4:5 frame: the same set and light, the camera a little round to the right on a longer lens, so the moon and
+    the engine fit beside the speaker in the narrower frame; the reflection cards follow the camera."""
     sh = shot()
     c = sh['camera']
-    cam = tilt_shift(elevation=20, azimuth=-14, distance=6.0, lens=78, target=(0.3, 0.6, 0.62), focus=tuple(c['focus']),
-                     fstop=c['fstop'], miniature=c['miniature'], shift_x=-0.055, shift_y=0.13)
+    cam = tilt_shift(elevation=1.5, azimuth=2, distance=4.0, lens=70, target=(0.4, 0.0, 0.85), focus=tuple(c['focus']),
+                     fstop=c['fstop'], miniature=c['miniature'], shift_y=0.02)
+    sh['lights']['sheen']['orbit']['azimuth_deg'] = 40
+    sh['lights']['rim_l']['orbit']['azimuth_deg'] = -142
     return portrait_of(sh, **cam)
