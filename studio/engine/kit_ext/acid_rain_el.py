@@ -61,18 +61,26 @@ def _glimpse_only(ob):
             setattr(ob, attr, False)
 
 
-def _spindle(bm, a, b, r, sides=6):
-    """A drop's trace from a (top) to b: a thin spindle, full width over its middle, tapering to points at both ends."""
+def _spindle(bm, a, b, r, op=1.0, sides=6, layers=None):
+    """A drop's trace from a (top) to b: a thin spindle, full width over its middle, tapering to points at both ends.
+    With `layers` (the bmesh's float layers 'rain_op' and 'rain_t'), each vertex carries the streak's opacity and how
+    far it is from an end (0 at the tips, 1 in the middle), so the material fades a streak out toward its ends."""
     a, b = Vector(a), Vector(b)
     axis = (b - a).normalized()
     up = Vector((0, 0, 1)) if abs(axis.z) < 0.9 else Vector((1, 0, 0))
     u = axis.cross(up).normalized(); v = axis.cross(u).normalized()
     top = bm.verts.new(a); bot = bm.verts.new(b)
     rings = []
+    tv = []
     for t, k in ((0.12, 0.7), (0.5, 1.0), (0.88, 0.85)):
         c = a.lerp(b, t)
         rings.append([bm.verts.new(c + (u * math.cos(2 * math.pi * i / sides) + v * math.sin(2 * math.pi * i / sides)) * r * k)
                       for i in range(sides)])
+        tv.append(1.0 - abs(t - 0.5) * 2)
+    if layers:
+        lo, lt = layers
+        for vert, tt in [(top, 0.0), (bot, 0.0)] + [(x, tv[i]) for i, ring in enumerate(rings) for x in ring]:
+            vert[lo] = op; vert[lt] = tt
     for i in range(sides):
         j = (i + 1) % sides
         bm.faces.new((top, rings[0][i], rings[0][j]))
@@ -81,8 +89,31 @@ def _spindle(bm, a, b, r, sides=6):
         bm.faces.new((rings[-1][j], rings[-1][i], bot))
 
 
+def _rain_water(bpy, name, rough, scatter):
+    """The streaks' water, its opacity per vertex: the streak's own (rain_op) times its fade toward the ends."""
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    gl = nt.nodes.new('ShaderNodeBsdfGlass'); gl.inputs['IOR'].default_value = 1.333; gl.inputs['Roughness'].default_value = rough
+    tl = nt.nodes.new('ShaderNodeBsdfTranslucent')
+    ms = nt.nodes.new('ShaderNodeMixShader'); ms.inputs['Fac'].default_value = scatter
+    nt.links.new(gl.outputs[0], ms.inputs[1]); nt.links.new(tl.outputs[0], ms.inputs[2])
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent'); mx = nt.nodes.new('ShaderNodeMixShader')
+    ao = nt.nodes.new('ShaderNodeAttribute'); ao.attribute_name = 'rain_op'
+    at = nt.nodes.new('ShaderNodeAttribute'); at.attribute_name = 'rain_t'
+    pw = nt.nodes.new('ShaderNodeMath'); pw.operation = 'POWER'; pw.inputs[1].default_value = 0.8
+    nt.links.new(at.outputs['Fac'], pw.inputs[0])
+    mu = nt.nodes.new('ShaderNodeMath'); mu.operation = 'MULTIPLY'
+    nt.links.new(ao.outputs['Fac'], mu.inputs[0]); nt.links.new(pw.outputs[0], mu.inputs[1])
+    nt.links.new(mu.outputs[0], mx.inputs['Fac'])
+    nt.links.new(tr.outputs[0], mx.inputs[1]); nt.links.new(ms.outputs[0], mx.inputs[2])
+    nt.links.new(mx.outputs[0], out.inputs['Surface'])
+    return m
+
+
 def rain(bpy, name, p, kit):
-    """Rain streaks through the camera's view (see the module's notes)."""
+    """Rain streaks through the camera's view (see the module's notes). `opacity` [min, max] is drawn per streak
+    (a number for all alike); `clear` metres: no streak whose lower end is nearer the ground than this (a streak
+    ending on the rock reads as a pin standing in it)."""
     sc = bpy.context.scene
     sc.cycles.transparent_max_bounces = max(sc.cycles.transparent_max_bounces, 128)
     cam = p['camera']
@@ -95,10 +126,14 @@ def rain(bpy, name, p, kit):
     near, far = p.get('near', 1.2), p.get('far', 30.0)
     z0, z1 = p.get('z', [0.0, 6.0])
     l0, l1 = p.get('length', [0.04, 0.15]); r0, r1 = p.get('radius', [0.0005, 0.0011])
+    op = p.get('opacity', 0.35)
+    o0, o1 = (op, op) if isinstance(op, (int, float)) else op
+    clear = p.get('clear', 0.0)
     lx, ly = p.get('lean', [0.08, 0.0])
     fall = Vector((lx, ly, -1.0)).normalized()
     avoid = [tuple(a) for a in p.get('avoid', [])]
     bm = bmesh.new()
+    layers = (bm.verts.layers.float.new('rain_op'), bm.verts.layers.float.new('rain_t'))
     n = 0
     for _ in range(p.get('count', 9000) * 12):
         if n >= p.get('count', 9000):
@@ -111,16 +146,16 @@ def rain(bpy, name, p, kit):
         # within the frame's height at that depth (the level camera's lens shifted onto the target), above the ground
         zc = C.z + (T.z - C.z) * d / max(0.1, (Vector((T.x, T.y, 0)) - Vector((C.x, C.y, 0))).length)
         c.z = zc + math.tan(vhalf) * d * rnd.uniform(-1, 1)
-        if not z0 < c.z < z1:
+        L = rnd.uniform(l0, l1); r = rnd.uniform(r0, r1)
+        if not z0 < c.z < z1 or c.z - L / 2 < clear:
             continue
         if any(math.hypot(c.x - ax, c.y - ay) < ar for ax, ay, ar in avoid):
             continue
-        L = rnd.uniform(l0, l1); r = rnd.uniform(r0, r1)
         # a bigger drop falls faster and is longer in the frame; the far ones a touch thicker, so they hold a pixel
         r *= 1.0 + 0.6 * max(0.0, (d - 8.0) / far)
-        _spindle(bm, c - fall * L / 2, c + fall * L / 2, r)
+        _spindle(bm, c - fall * L / 2, c + fall * L / 2, r, rnd.uniform(o0, o1) ** 1.5 if o1 > o0 else o0, layers=layers)
         n += 1
-    ob = _object(bpy, name, bm, _water(bpy, f'{name}-water', p.get('opacity', 0.35), p.get('rough', 0.0), scatter=p.get('scatter', 0.5)))
+    ob = _object(bpy, name, bm, _rain_water(bpy, f'{name}-water', p.get('rough', 0.0), p.get('scatter', 0.5)))
     _glimpse_only(ob)
     print(f'{name}: {n} rain streaks')
     return [ob]
@@ -176,7 +211,7 @@ def splashes(bpy, name, p, kit):
     return [ob]
 
 
-def _ripples(nt, scale, speed_seed, width):
+def _ripples(nt, scale, speed_seed, width, keep_share=0.65):
     """A height field of ripple rings: one ring in each Voronoi cell, at a random radius (its age), fading as it grows."""
     tc = nt.nodes.new('ShaderNodeTexCoord')
     vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.feature = 'F1'; vo.voronoi_dimensions = '2D'
@@ -205,7 +240,7 @@ def _ripples(nt, scale, speed_seed, width):
     ring2 = math_('MULTIPLY', math_('EXPONENT', math_('MULTIPLY', math_('MULTIPLY', off2, off2), -1.0)), 0.45)
     fade = math_('POWER', math_('SUBTRACT', 1.0, age), 1.5)
     # some cells have no drop in them at the moment
-    keep = math_('GREATER_THAN', sep.outputs['Green'], 0.35)
+    keep = math_('GREATER_THAN', sep.outputs['Green'], 1.0 - keep_share)
     return math_('MULTIPLY', math_('MULTIPLY', math_('ADD', ring, ring2), fade), keep)
 
 
@@ -225,10 +260,17 @@ def puddle(bpy, name, p, kit):
     b.inputs['Transmission Weight'].default_value = 1.0
     rings = p.get('rings', 30.0)                              # per square metre
     big = p.get('ring', 0.12)                                 # the largest ring's width (m)
-    h1 = _ripples(nt, 1.0 / big, 1.0, 0.035)
-    h2 = _ripples(nt, 1.0 / (big * 0.55), 2.0, 0.04)
+    keep = p.get('keep', 0.65)
+    h1 = _ripples(nt, 1.0 / big, 1.0, 0.035, keep)
+    h2 = _ripples(nt, 1.0 / (big * 0.55), 2.0, 0.04, keep)
+    h3 = _ripples(nt, 1.0 / (big * 0.3), 3.0, 0.05, keep)
+    h4 = _ripples(nt, 1.0 / (big * 0.14), 4.0, 0.06, keep)
     add = nt.nodes.new('ShaderNodeMath'); add.operation = 'ADD'
     nt.links.new(h1, add.inputs[0]); nt.links.new(h2, add.inputs[1])
+    add2 = nt.nodes.new('ShaderNodeMath'); add2.operation = 'ADD'
+    nt.links.new(add.outputs['Value'], add2.inputs[0]); nt.links.new(h3, add2.inputs[1])
+    add3 = nt.nodes.new('ShaderNodeMath'); add3.operation = 'ADD'
+    nt.links.new(add2.outputs['Value'], add3.inputs[0]); nt.links.new(h4, add3.inputs[1]); add = add3
     bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = p.get('ripple', 0.5)
     bp.inputs['Distance'].default_value = p.get('ripple_m', 0.0015)
     nt.links.new(add.outputs['Value'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
@@ -302,6 +344,9 @@ def ridge(bpy, name, p, kit):
             x = x0 - W / 2 + W * i / nx; y = y0 + D * j / ny
             prof = math.sin(math.pi * min(1.0, j / ny * 1.6)) if j / ny < 0.625 else max(0.0, 1.0 - (j / ny - 0.625) / 0.375) * 1.0
             hgt = H * max(0.0, 0.25 + noise.fractal(Vector((x / sp, y / sp * 0.5, 0)) + o, 0.55, 2.0, 6)) * prof
+            for gx, gw in p.get('gaps', []):                  # a low pass where the light comes through
+                hgt *= 1.0 - 0.85 * math.exp(-((x - gx) / gw) ** 2)
+            hgt += p.get('jag', 0.0) * noise.ridged_multi_fractal(Vector((x / 9.0, y / 9.0, 3.0)) + o, 0.8, 2.0, 4, 0.0, 2.0) * min(1.0, hgt / max(1.0, 0.3 * H))
             row.append(bm.verts.new((x, y, z0 + hgt)))
         grid.append(row)
     for j in range(ny):
@@ -361,6 +406,14 @@ def _wet(obs, p):
                 nt.links.new(lk[0].from_socket, mul.inputs['A']); nt.links.new(mul.outputs['Result'], bs.inputs['Base Color'])
             bs.inputs['Coat Weight'].default_value = p.get('film', 1.0)
             bs.inputs['Coat Roughness'].default_value = p.get('film_rough', 0.06)
+            if p.get('film_vary'):                         # the film pools: pits dull, crests and flats glossy
+                lo, hi = p['film_vary']
+                tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+                nz.inputs['Scale'].default_value = 1.0 / p.get('film_size', 0.25); nz.inputs['Detail'].default_value = 6.0
+                nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+                mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = 0.35
+                mr.inputs['From Max'].default_value = 0.65; mr.inputs['To Min'].default_value = lo; mr.inputs['To Max'].default_value = hi
+                nt.links.new(nz.outputs['Fac'], mr.inputs['Value']); nt.links.new(mr.outputs['Result'], bs.inputs['Coat Roughness'])
             bs.inputs['Coat IOR'].default_value = 1.333
 
 

@@ -29,3 +29,4 @@ of the speaker's top lands about 5 m in front of it).
 
 | Pass | Frame | Score | Top changes | What I did |
 |---|---|---|---|---|
+| 1 | c1 (80 mm, 9.2 m, haze 0.005) | 5.0 | speaker backlit to dull ochre (bounce 0.25 -> 1.1 + fill); rock a grey rolling sea (darker, tint, less swell); flat beige sky; a sparkle cluster upper right; seam band; puddles too still; low contrast; soft hills | All eight applied. The sparkles were near drops refracting the sun as round bokeh: the streaks' glass made rough (0.25), so each glint spreads along its streak. Rock displacement 3 -> 7 cm (the texture's own cracks make it craggy), coat 0.5 -> 0.3. The hills moved to 320 m, which the 300 m clip end cut off: engine change (camera.clip_end_m). Haze kept under 22 m so the sky above shows. The yellow-green from white balance 7500 K, tint -18 (tint < 0 is green, checked). |

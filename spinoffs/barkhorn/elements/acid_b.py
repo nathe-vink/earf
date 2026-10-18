@@ -11,7 +11,10 @@ import common as C
 
 NAME = 'acid_b'
 V = os.environ.get('ACID_B_VARIANT', 'a')                 # the concept proofs: a backlit gap, b a side-back sun
-SKY = {'a': ('belfast_sunset_puresky', 83.0, 0.4), 'b': ('kloppenheim_01_puresky', -40.0, 0.55)}[V]
+SKY = {'a': ('belfast_sunset_puresky', 68.0, 0.45), 'b': ('kloppenheim_01_puresky', -40.0, 0.55)}[V]
+# the sun's line from the speaker (azimuth 165): nothing stands on it to shade the speaker
+SUN_LINE = [[1.3, 4.85, 2.5], [2.34, 8.73, 2.5], [3.38, 12.61, 2.5], [4.42, 16.49, 2.5], [5.46, 20.37, 2.5], [6.5, 24.25, 2.5], [7.54, 28.13, 2.5], [8.58, 32.01, 2.5], [9.62, 35.89, 2.5], [10.66, 39.77, 2.5], [11.7, 43.65, 2.5], [12.74, 47.53, 2.5]]
+SUN_FAR = [[round(0.268 * t, 1), round(t, 1), 6.0 + 0.04 * t] for t in range(45, 160, 8)]
 CAM = dict(height=0.85, distance=9.2, azimuth=-12.0, lens=80.0, target=(0.0, 0.0, 0.62), fstop=3.5)
 
 
@@ -23,17 +26,18 @@ def props(cam):
     feet = [0.0, 0.0, 0.5]
     return [
         # the lava field: black rock, wet, broadly undulating so the rain pools in its hollows
-        ext('wet_ground', texture='dark_rock', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], cells=1700, displace=0.03,
-            relief=False, flat=[0.0, 0.0, 0.7], res='4k', tex_scale=1.4, bump=2.0, rough_mul=0.8, darken=0.5, film=0.5, tint='#2B2721', tint_mix=0.55,
-            film_rough=0.28, lumps=[[2.6, 0.12, 'billow'], [0.9, 0.03, 'ridged'], [0.35, 0.025, 'fbm'], [0.12, 0.008, 'fbm'], [9.0, 0.14]],
+        ext('wet_ground', texture='dark_rock', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], cells=1700, displace=0.07,
+            relief=False, flat=[0.0, 0.0, 0.7], res='4k', tex_scale=1.4, bump=2.0, rough_mul=0.8, darken=0.72, film=0.3, tint='#1E1D17', tint_mix=0.7,
+            film_rough=0.33, film_vary=[0.1, 0.45], lumps=[[2.6, 0.06, 'billow'], [1.1, 0.04, 'fbm'], [0.9, 0.03, 'ridged'], [0.3, 0.02, 'fbm'], [0.12, 0.008, 'fbm'],
+                   [9.0, 0.05]],
             dips=[[-0.2, -1.2, 1.2, 0.2], [-0.55, -2.7, 1.5, 0.22], [-0.85, -4.1, 1.6, 0.22], [-1.1, -5.4, 1.4, 0.2],
                   [2.6, 2.4, 1.6, 0.18]], seed=2),
         # beyond it, the same field on toward the hills, coarse (it is far and in the haze)
         ext('wet_ground', texture='dark_rock_02', size=[560.0, 230.0], position=[0.0, 125.0, -0.12], cells=600,
             displace=0.0, relief=False, flat=[0.0, 0.0, 26.0], res='2k', tex_scale=5.0, rough_mul=0.5,
-            darken=0.5, film=0.6, film_rough=0.2, tint='#2B2721', tint_mix=0.55, lumps=[[2.5, 0.35, 'ridged'], [7.0, 0.5, 'billow'], [25.0, 1.2]], seed=3),
+            darken=0.72, film=0.6, film_rough=0.35, tint='#1E1D17', tint_mix=0.7, lumps=[[2.5, 0.35, 'ridged'], [7.0, 0.5, 'billow'], [25.0, 1.2]], seed=3),
         # standing water in the hollows, ringed by the drops
-        ext('puddle', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], z=-0.11, ring=0.14, ripple=0.6, ripple_m=0.0012),
+        ext('puddle', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], z=-0.11, ring=0.2, ripple=2.0, keep=1.0, roughness=0.04, ripple_m=0.0012),
         # black boulders: one out of focus close at the left, a couple behind on the field
         ext('rock', model='rock_09', position=[-2.5, -2.4, -0.05], rotate=[0, 0, 40], scale=1.1, darken=0.5,
             film_rough=0.15),
@@ -43,14 +47,23 @@ def props(cam):
             film_rough=0.12),
         # loose blocks of lava over the field, thinning toward the hills
         ext('rocks', models=['rock_09', 'moon_rock_01', 'moon_rock_04', 'rock_07'], count=160, area=[-22.0, 3.0, 26.0, 45.0],
-            avoid=[[0.0, 0.0, 3.5]], scale=[0.25, 1.4], z=-0.08, seed=8, darken=0.75, film_rough=0.14, tilt_deg=15.0),
+            avoid=[[0.0, 0.0, 3.5]] + SUN_LINE, scale=[0.25, 1.4], z=-0.08, seed=8, darken=0.75, film_rough=0.35, tilt_deg=15.0),
         # low volcanic hills far off, in the rain
-        ext('ridge', position=[0.0, 170.0, -1.0], width=520.0, depth=58.0, height=11.0, spacing=150.0, seed=21,
-            film=0.2, film_rough=0.45),
+        ext('ridge', position=[0.0, 220.0, -1.0], width=700.0, depth=70.0, height=15.0, spacing=150.0, seed=21, jag=2.0,
+            gaps=[[60.0, 45.0]], darken=0.75, film=0.2, film_rough=0.45),
+        ext('rocks', models=['rock_09', 'moon_rock_01', 'moon_rock_04'], count=220, area=[-60.0, 45.0, 90.0, 150.0],
+            scale=[1.0, 3.0], z=-0.3, seed=18, darken=0.75, film_rough=0.35, tilt_deg=15.0, avoid=SUN_FAR),
         # the rain, and where it lands
-        ext('rain', camera=cam, count=70000, near=1.0, far=60.0, length=[0.05, 0.16], radius=[0.0006, 0.0012],
-            lean=[0.09, 0.02], z=[0.0, 14.0], opacity=0.55, scatter=0.7, avoid=[[0.0, 0.0, 0.4]], seed=3),
-        ext('splashes', area=[-3.5, -3.0, 3.5, 6.0], z=-0.11, count=160, radius=[0.004, 0.011], opacity=0.6,
+        ext('rain', camera=cam, count=60000, near=3.0, far=60.0, length=[0.05, 0.16], radius=[0.0003, 0.0006],
+            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.2, 0.45], scatter=0.7, rough=0.25, clear=0.25,
+            avoid=[[0.0, 0.0, 0.4]], seed=3),
+        # a few drops close to the lens, far out of focus
+        ext('rain', camera=cam, count=160, near=1.0, far=3.0, length=[0.06, 0.15], radius=[0.0006, 0.001],
+            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.3, 0.6], scatter=0.7, rough=0.25, seed=13),
+        # and the curtain beyond, too fine to count
+        ext('rain', camera=cam, count=150000, near=15.0, far=120.0, length=[0.08, 0.16], radius=[0.0004, 0.0006],
+            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.12, scatter=0.7, rough=0.25, clear=0.3, seed=23),
+        ext('splashes', area=[-3.0, -7.0, 3.5, 3.0], z=-0.11, count=1500, radius=[0.004, 0.011], opacity=0.6,
             avoid=[[0.0, 0.0, 0.45]], seed=5),
     ]
 
@@ -58,24 +71,27 @@ def props(cam):
 def shot():
     hdri, rot, strength = SKY
     cam = C.camera(**CAM)
-    sun = C.sun_from_sky(hdri, rot, irradiance=3.0, angle_deg=2.0, color='#F4D98A')
+    cam['clip_end_m'] = 1500.0
+    sun = C.sun_from_sky(hdri, rot, irradiance=6.5, angle_deg=2.0, color='#F4D98A')
     lights = {
         # a photographer's soft bounce from the camera's side, low: it lifts the speaker's shaded front a little
-        'bounce': C.area(-30, 8, 3.5, 0.25, '#E9E2C4', size=(1.2, 1.2)),
+        'bounce': C.area(-35, 10, 3.5, 0.6, '#F1E6B8', size=(2.0, 2.0)),
+        'fill': C.area(30, 8, 3.5, 0.2, '#F1E6B8', size=(1.2, 1.2)),
     }
     s = C.shot(NAME, props(cam), cam, C.sky(hdri, rot, strength=strength, res='4k'), 'barkhorn Acid, acid rain',
-               lights=lights, sun=sun, rotate_z=16.0, exposure=-0.55,
-               haze={'density': 0.005, 'anisotropy': 0.6, 'color': '#DCDD9A', 'box_m': [-300, -15, -2, 300, 232, 50]},
-               fin=C.finish(contrast=0.1, clarity=0.07, sharpen=0.25, vignette=0.14))
-    s['render']['white_balance_k'] = 6400
-    s['render']['white_balance_tint'] = -6.0
+               lights=lights, sun=sun, rotate_z=16.0, exposure=-0.35, look='AgX - Medium High Contrast',
+               haze={'density': 0.006, 'anisotropy': 0.45, 'color': '#C8CC6A', 'box_m': [-500, -15, -2, 500, 420, 22]},
+               fin=C.finish(contrast=0.22, clarity=0.07, sharpen=0.25, vignette=0.14))
+    s['render']['white_balance_k'] = 6800
+    s['render']['white_balance_tint'] = -28.0
     return s
 
 
 def portrait():
     s = shot()
     p = C.portrait_of(s)
-    cam = C.camera(**{**CAM, 'distance': 5.0, 'lens': 45.0})
+    cam = C.camera(**{**CAM, 'distance': 6.0, 'lens': 85.0})
+    cam['clip_end_m'] = 1500.0
     p['camera'] = cam
     for pr in p['set']['props']:
         if pr.get('fn') == 'rain':
