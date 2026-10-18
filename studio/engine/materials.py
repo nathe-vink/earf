@@ -24,6 +24,26 @@ PRESET_DEFAULTS = {
     'paper_cone': dict(color='#2A2A2A', roughness=0.85, fibre_strength=0.12, ribs=0.0, ribs_count=14),
     'coated_cone': dict(color='#1C1C1C', roughness=0.45, coat=0.4, coat_roughness=0.3),
     'dome':       dict(color='#151515', roughness=0.4, sheen=0.3),
+    # round 31's drivers, as the parts are (spinoffs/barkhorn/drivers31.md). A driver's radial pattern is read in its
+    # piece's own bounding box (Generated coordinates: a revolved piece's box is centred on its axis), `axis` the
+    # CAD's axis it faces along (x, y or z); its fine grain in the object's own space, metres.
+    # treated paper: felted fibre (`fibre` at `fibre_mm`), faint radial streaks from the pulp's flow in the mould
+    # (`streaks`, `streak_n` round), a slow drift in its colour (`vary`), a low sheen and a soft lobe off the dope
+    'treated_paper': dict(color='#2A2826', roughness=0.62, specular=0.35, sheen=0.35, coat=0.12, coat_roughness=0.45,
+                          fibre=0.22, fibre_mm=0.35, streaks=0.10, streak_n=90.0, vary=0.06, axis='y'),
+    # cloth doped with damping compound (a pro woofer's multi-roll surround): a rubbery semi-gloss that puts a
+    # highlight along each roll, the weave just showing through (`weave` at `weave_mm`)
+    'doped_cloth': dict(color='#1E1D1C', roughness=0.42, specular=0.5, coat=0.45, coat_roughness=0.22, sheen=0.2,
+                        weave=0.12, weave_mm=0.45, vary=0.04, axis='y'),
+    # die-cast aluminium in black e-coat: a satin gloss over a fine cast grain (`grain` at `grain_mm`) and a slow
+    # waviness of the casting (`wave` at `wave_mm`)
+    'ecoat':      dict(color='#1B1B1C', roughness=0.38, specular=0.5, coat=0.25, coat_roughness=0.3, grain=0.18, grain_mm=0.3,
+                       wave=0.04, wave_mm=6.0),
+    # black oxide steel (screws, a motor's cup): a dark metal with a soft oily sheen
+    'black_oxide': dict(color='#3A3936', roughness=0.33, metallic=0.85, grain=0.05, grain_mm=0.2),
+    # cast acrylic tinted opaque, polished: the colour in the body (a little light enters it), a gloss face that
+    # mirrors the lights as sharp shapes, polished edges (the mesh's own ease catches them)
+    'opaque_acrylic': dict(color='#3070B0', roughness=0.03, ior=1.49, subsurface=0.12, radius=0.002, specular=0.5),
     'plastic':    dict(color='#202020', roughness=0.45, specular=0.5),
     'gloss_plastic': dict(color='#101010', roughness=0.15, coat=0.6, coat_roughness=0.05),
     'birch':      dict(color='#EAD8B0', roughness=0.55),
@@ -323,6 +343,15 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         setin('Base Color', hex_lin(p['color'])); setin('Roughness', p['roughness'])
         n = _bump_noise(nt, 0.0004, p['fibre_strength'])
         nt.links.new(n, I['Normal'])
+    elif preset in ('treated_paper', 'doped_cloth', 'ecoat', 'black_oxide'):
+        _driver_finish(nt, b, p, preset, normal)
+    elif preset == 'opaque_acrylic':
+        setin('Base Color', hex_lin(p['color'])); setin('Roughness', p['roughness']); setin('IOR', p['ior'])
+        setin('Specular IOR Level', p['specular'])
+        if p['subsurface'] > 0:
+            setin('Subsurface Weight', p['subsurface']); setin('Subsurface Scale', p['radius'])
+            setin('Subsurface Radius', tuple(max(0.1, v) for v in hex_lin(p['color'])[:3]))
+        if normal is not None: nt.links.new(normal, I['Normal'])
     elif preset == 'coated_cone':
         setin('Base Color', hex_lin(p['color'])); setin('Roughness', p['roughness']); setin('Coat Weight', p['coat']); setin('Coat Roughness', p['coat_roughness'])
     elif preset == 'dome':
@@ -408,6 +437,105 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
 # read (space), the press (press, sheets: each panel its own pressing) and the pressed finish (plastic, flake,
 # mottle, specks, specks2, wax, milk_plastic, milk_colour); the bark and stone shaders read them, the rest ignore them
 ANY_PRESET = {'space', 'press', 'sheets', 'plastic', 'flake', 'mottle', 'specks', 'specks2', 'wax', 'milk_plastic', 'milk_colour'}
+
+
+def _driver_finish(nt, b, p, preset, normal_in=None):
+    """Round 31's driver finishes (see PRESET_DEFAULTS): treated paper, doped cloth, black e-coat, black oxide."""
+    node, math_, mix, smooth = _nodes(nt)
+    I = b.inputs
+    tc = node('ShaderNodeTexCoord')
+    col = hex_lin(p['color'])
+
+    def noise(vec, scale, detail=4.0, rough=0.55):
+        tx = node('ShaderNodeTexNoise'); tx.inputs['Scale'].default_value = scale; tx.inputs['Detail'].default_value = detail
+        tx.inputs['Roughness'].default_value = rough
+        nt.links.new(vec, tx.inputs['Vector'])
+        return tx.outputs['Fac']
+
+    def stretch(vec, sc):
+        mp = node('ShaderNodeMapping'); mp.inputs['Scale'].default_value = sc
+        nt.links.new(vec, mp.inputs['Vector'])
+        return mp.outputs['Vector']
+
+    def bump(h, strength, dist, n_in):
+        bn = node('ShaderNodeBump'); bn.inputs['Strength'].default_value = strength; bn.inputs['Distance'].default_value = dist
+        nt.links.new(h, bn.inputs['Height'])
+        if n_in is not None: nt.links.new(n_in, bn.inputs['Normal'])
+        return bn.outputs['Normal']
+
+    def tint(fac, amount, base):
+        # base colour times (1 - amount .. 1 + amount) as fac runs 0 .. 1
+        mr = node('ShaderNodeMapRange'); nt.links.new(fac, mr.inputs['Value'])
+        mr.inputs['From Min'].default_value = 0.3; mr.inputs['From Max'].default_value = 0.7
+        mr.inputs['To Min'].default_value = 1 - amount; mr.inputs['To Max'].default_value = 1 + amount
+        comb = node('ShaderNodeCombineColor')
+        for ch in ('Red', 'Green', 'Blue'): nt.links.new(mr.outputs['Result'], comb.inputs[ch])
+        return mix(1.0, base, comb.outputs['Color'], 'MULTIPLY')
+
+    def radial():
+        # (unit direction round the axis) and r (0 at the axis, 1 at the piece's rim) from the piece's own box
+        sep = node('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Generated'], sep.inputs['Vector'])
+        a, c = {'x': ('Y', 'Z'), 'y': ('X', 'Z'), 'z': ('X', 'Y')}[p.get('axis', 'y')]
+        u = math_('SUBTRACT', sep.outputs[a], 0.5); v = math_('SUBTRACT', sep.outputs[c], 0.5)
+        r = math_('MULTIPLY', math_('SQRT', math_('ADD', math_('MULTIPLY', u, u), math_('MULTIPLY', v, v))), 2.0)
+        inv = math_('DIVIDE', 2.0, math_('MAXIMUM', r, 1e-4))
+        return math_('MULTIPLY', u, inv), math_('MULTIPLY', v, inv), r
+
+    obj = tc.outputs['Object']
+    base = col
+    n = normal_in
+    if preset == 'treated_paper':
+        cu, cv, r = radial()
+        k = p['streak_n'] / (2 * math.pi)
+        vec = node('ShaderNodeCombineXYZ')
+        nt.links.new(math_('MULTIPLY', cu, k), vec.inputs['X']); nt.links.new(math_('MULTIPLY', cv, k), vec.inputs['Y'])
+        nt.links.new(math_('MULTIPLY', r, 1.5), vec.inputs['Z'])
+        streak = noise(vec.outputs['Vector'], 1.0, 3.0, 0.6)
+        base = tint(streak, p['streaks'], base)
+        base = tint(noise(obj, 1.0 / 0.07, 2.0), p['vary'], base)
+        fib = noise(obj, 1000.0 / p['fibre_mm'], 6.0, 0.65)
+        base = tint(fib, p['vary'] * 0.8, base)
+        n = bump(fib, p['fibre'], p['fibre_mm'] / 1000 * 0.4, n)
+        n = bump(streak, p['fibre'] * 0.4, 0.0004, n)
+        rr = node('ShaderNodeMapRange'); nt.links.new(streak, rr.inputs['Value'])
+        rr.inputs['To Min'].default_value = p['roughness'] + 0.05; rr.inputs['To Max'].default_value = p['roughness'] - 0.05
+        nt.links.new(rr.outputs['Result'], I['Roughness'])
+    elif preset == 'doped_cloth':
+        wv = node('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.inputs['Scale'].default_value = 1000.0 / p['weave_mm']
+        wv.inputs['Distortion'].default_value = 0.6
+        nt.links.new(obj, wv.inputs['Vector'])
+        wv2 = node('ShaderNodeTexWave'); wv2.wave_type = 'BANDS'; wv2.inputs['Scale'].default_value = 1000.0 / p['weave_mm']
+        wv2.inputs['Distortion'].default_value = 0.6
+        nt.links.new(stretch(obj, (0.0, 1.0, 1.0)), wv2.inputs['Vector'])
+        wsum = math_('MULTIPLY', math_('ADD', wv.outputs['Fac'], wv2.outputs['Fac']), 0.5)
+        n = bump(wsum, p['weave'], p['weave_mm'] / 1000 * 0.3, n)
+        base = tint(noise(obj, 1.0 / 0.05, 2.0), p['vary'], base)
+        I['Roughness'].default_value = p['roughness']
+    elif preset in ('ecoat', 'black_oxide'):
+        g = noise(obj, 1000.0 / p['grain_mm'], 5.0, 0.6)
+        n = bump(g, p['grain'], p['grain_mm'] / 1000 * 0.3, n)
+        if p.get('wave', 0) > 0:
+            n = bump(noise(obj, 1000.0 / p['wave_mm'], 2.0), p['wave'], p['wave_mm'] / 1000 * 0.2, n)
+        rr = node('ShaderNodeMapRange'); nt.links.new(g, rr.inputs['Value'])
+        rr.inputs['To Min'].default_value = p['roughness'] - 0.04; rr.inputs['To Max'].default_value = p['roughness'] + 0.04
+        nt.links.new(rr.outputs['Result'], I['Roughness'])
+    if isinstance(base, tuple):
+        I['Base Color'].default_value = base
+    else:
+        nt.links.new(base, I['Base Color'])
+    if preset != 'black_oxide':
+        I['Specular IOR Level'].default_value = p['specular']
+        if p.get('coat', 0) > 0:
+            I['Coat Weight'].default_value = p['coat']; I['Coat Roughness'].default_value = p['coat_roughness']
+            if n is not None: nt.links.new(n, I['Coat Normal'])
+        if p.get('sheen', 0) > 0:
+            I['Sheen Weight'].default_value = p['sheen']; I['Sheen Roughness'].default_value = 0.4
+    else:
+        I['Metallic'].default_value = p['metallic']
+    if not I['Roughness'].is_linked:
+        I['Roughness'].default_value = p['roughness']
+    if n is not None:
+        nt.links.new(n, I['Normal'])
 
 
 def object_space(nt):

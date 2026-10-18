@@ -35,6 +35,74 @@ def _arc(c, rad, a0, a1, n=16):
     return [(c[0] + rad * math.cos(a0 + (a1 - a0) * i / n), c[1] + rad * math.sin(a0 + (a1 - a0) * i / n)) for i in range(n + 1)]
 
 
+def _radial_box(r0, r1, w, a0, a1, th):
+    """A block from radius r0 to r1, `w` wide across, from a0 to a1 deep (a grows backwards), turned to angle th."""
+    from build123d import Box
+    b = Pos((r0 + r1) / 2, 0, -(a0 + a1) / 2) * Box(r1 - r0, w, a1 - a0)
+    return Rot(0, 0, math.degrees(th)) * b
+
+
+def _cast_frame(frame, spec, fo, ft, out):
+    """What a render sees of a cast basket that the outline leaves out (round 31, from FaitalPRO's photograph and
+    drawing of the 15PR400): the flange's slotted holes (`bolt_slot`, length radially by width) on `bolt_d`, the cooling
+    fins cast round the motor (`fins`, standing `fin_h` off the magnet's radius), and, as pieces of their own, the
+    gasket behind the flange (`gasket_t`), the button-head screws in the slots (`screw`: head across, head height) and
+    the push terminals on the lower spoke (`terminals`: depth, radius)."""
+    from build123d import Cylinder
+    n, bd = spec.get('bolts', 0), spec.get('bolt_d', 0)
+    ph = spec.get('bolt_phase', 0.0)
+    if n and bd:
+        sl, sw_ = spec.get('bolt_slot', (spec.get('bolt_hole', 6.5),) * 2)
+        for k in range(n):
+            th = 2 * math.pi * (k + ph) / n
+            slot = _radial_box(bd / 2 - (sl - sw_) / 2, bd / 2 + (sl - sw_) / 2, sw_, -1, ft + 1, th)
+            for e in (-1, 1):
+                rr = bd / 2 + e * (sl - sw_) / 2
+                slot = slot + Pos(rr * math.cos(th), rr * math.sin(th), -ft / 2) * Cylinder(sw_ / 2, ft + 2)
+            frame = frame - slot
+        if spec.get('screw'):
+            hd, hh = spec['screw']
+            heads = []
+            for k in range(n):
+                th = 2 * math.pi * (k + ph) / n
+                c = (bd / 2 * math.cos(th), bd / 2 * math.sin(th))
+                # ISO 7380: a low dome on a short skirt, its hex socket a third of the head across
+                hp = [(0.0, -hh), (0.18 * hd, -hh), (0.42 * hd, -0.45 * hh), (0.5 * hd, -0.18 * hh), (0.5 * hd, 0.0), (0.0, 0.0)]
+                head = _revolve_profile(hp) - Pos(0, 0, hh - 0.6 * hh / 2) * Cylinder(0.2 * hd, 0.6 * hh * 2)
+                shank = Pos(0, 0, -ft / 2 - 0.02) * Cylinder(min(3.0, sw_ / 2 - 0.2), ft - 0.1)
+                heads.append(Pos(c[0], c[1], 0.0) * (head + shank))
+            out['screws'] = heads[0]
+            for h in heads[1:]:
+                out['screws'] = out['screws'] + h
+    if spec.get('gasket_t'):
+        g = spec['gasket_t']; ri = spec.get('cutout', 2 * fo - 30) / 2 + 1.0
+        out['gasket'] = _revolve_profile([(ri, ft + 0.05), (fo - 0.8, ft + 0.05), (fo - 0.8, ft + g - 0.05), (ri, ft + g - 0.05)])
+        for k in range(n):
+            th = 2 * math.pi * (k + ph) / n
+            out['gasket'] = out['gasket'] - Pos(bd / 2 * math.cos(th), bd / 2 * math.sin(th), -ft - g / 2) * Cylinder(4.5, g + 1)
+    if spec.get('fins'):
+        nf, fh = spec['fins'], spec.get('fin_h', 12.0)
+        md, D, mh = spec['magnet_d'] / 2, spec['depth'], spec['magnet_h']
+        for k in range(nf):
+            th = 2 * math.pi * (k + 0.5) / nf
+            # each fin tapers toward the back, as the casting's draft and the drawing's 150 at the rear
+            fin = _radial_box(md - 1.0, md + fh, 3.0, D - mh - 6, D - 3, th)
+            cut = _radial_box(md + fh * 0.55, md + fh + 2, 6.0, D - 18, D + 1, th)
+            frame = frame + (fin - cut)
+    if spec.get('terminals'):
+        ta, tr = spec['terminals']
+        th = -math.pi / 2                                    # the lower spoke: the lead comes up from below
+        blk = _radial_box(tr - 9.0, tr - 3.0, 14.0, ta - 16, ta + 16, th)
+        frame = frame + blk
+        posts = None
+        for da in (-10.0, 10.0):
+            pp = _revolve_profile([(0.0, 0.0), (3.5, 0.0), (3.5, 8.0), (3.0, 8.0), (3.0, 10.0), (0.0, 10.0)])
+            pp = Rot(0, 0, math.degrees(th)) * (Pos(tr - 3.0, 0, -(ta + da)) * Rot(0, -90, 0) * pp)
+            posts = pp if posts is None else posts + pp
+        out['terminals'] = posts
+    return frame
+
+
 def cone_driver(spec, detail=24):
     """Local solids for a cone driver: (r, a) profiles revolved, the flange's front at a = 0, a growing into the box.
     `detail` is the points round the surround's roll (4 for line drawings, where every profile point draws a circle)."""
@@ -65,11 +133,14 @@ def cone_driver(spec, detail=24):
         half = math.pi / n - max(10.0, 0.05 * spec['frame_od']) / r_mid / 2
         R = fo + 10.0
         if a1 > a0 + 5 and half > 0.05:
+            ph = spec.get('spoke_phase', 0.0) * 2 * math.pi / n
             for i in range(n):
-                th = 2 * math.pi * i / n             # windows at 0, 60, ...: spokes up and down, where the sheets cut
+                th = 2 * math.pi * i / n + ph        # windows at 0, 60, ...: spokes up and down, where the sheets cut
                 pts = [(0.0, 0.0)] + [(R * math.cos(th - half + 2 * half * k / 8), R * math.sin(th - half + 2 * half * k / 8)) for k in range(9)]
                 wedge = Pos(0, 0, -a1) * extrude(make_face(Polyline(*pts, close=True)), amount=a1 - a0)
                 frame = frame - wedge
+    if detail > 6:
+        frame = _cast_frame(frame, spec, fo, ft, out)
     out['frame'] = frame
     # surround: a half roll, outer edge glued to the flange's front (or its step, `seat` behind) at r_sur, inner edge to
     # the cone at r_cone
@@ -77,8 +148,18 @@ def cone_driver(spec, detail=24):
     nd = detail
     outer = [(c[0] + rr * math.cos(th), seat - rh * math.sin(th)) for th in [math.pi * i / nd for i in range(nd + 1)]]   # a < 0: forward
     inner = [(c[0] + (rr - t) * math.cos(th), seat - (rh - t) * math.sin(th)) for th in [math.pi * (nd - i) / nd for i in range(nd + 1)]]
-    out['surround'] = _revolve_profile([(r_sur + 1.0, seat)] + outer[1:-1] + [(r_cone - 1.0, seat), (r_cone - 1.0, seat + t * 0.6)]
-                                       + inner[1:-1] + [(r_sur + 1.0, seat + t * 0.6)])
+    if spec.get('waves') and detail > 6:
+        # an accordion surround (round 31: the 15PR400's four waves of doped polycotton, Faital's datasheet): `waves`
+        # shallow rolls across the same width, each standing `wave_h` proud, in a sheet `t` thick
+        nw, wh = spec['waves'], spec.get('wave_h', min(0.45 * rh, 4.0))
+        us = [i / (nw * 12) for i in range(nw * 12 + 1)]
+        top = [(r_sur - (r_sur - r_cone) * u, seat - wh * 0.5 * (1 - math.cos(2 * math.pi * nw * u))) for u in us]
+        bot = [(r, a + t * 0.6) for (r, a) in reversed(top)]
+        out['surround'] = _revolve_profile([(r_sur + 1.0, seat)] + top + [(r_cone - 1.0, seat), (r_cone - 1.0, seat + t * 0.6)]
+                                           + bot + [(r_sur + 1.0, seat + t * 0.6)])
+    else:
+        out['surround'] = _revolve_profile([(r_sur + 1.0, seat)] + outer[1:-1] + [(r_cone - 1.0, seat), (r_cone - 1.0, seat + t * 0.6)]
+                                           + inner[1:-1] + [(r_sur + 1.0, seat + t * 0.6)])
     # cone: straight-sided (metal) or a slight curve (paper), from the roll's inner edge to the voice coil
     rc_in = cap_r * 1.08
     if spec.get('cone') == 'paper' and detail > 6:
@@ -183,7 +264,48 @@ def compression_driver(spec, detail=24):
         out['motor'] = _revolve_profile([(0.0, ft), (bo, ft), (bo, ft + bd - 5), (bo - 5, ft + bd), (0.0, ft + bd)])
     # the phase plug seen down the exit: a cone inside the throat, so a render looking into the horn finds a driver
     pp = re_ * 0.85
-    out['plug'] = _revolve_profile([(0.0, 1.0), (pp, ft * 0.9), (0.0, ft * 0.9)])
+    if detail <= 6:
+        out['plug'] = _revolve_profile([(0.0, 1.0), (pp, ft * 0.9), (0.0, ft * 0.9)])
+        return out, dict(r_exit=re_)
+    # round 31: what the eye finds at the bottom of the throat (B&C's photographs and drawing of the DE1085TN): the
+    # exit's bore with a bright machined chamfer at its mouth, and the phase plug's face in it, a domed bullet ringed by
+    # its annular slots (dark gaps between the plug's rings), so it reads as a driver and not a hole
+    from build123d import Cylinder
+    ch = min(1.5, 0.3 * ft)
+    sk = 0.3                                        # the bright skin's thickness, the frame bored over it
+    out['frame'] = _revolve_profile([(re_ + ch + sk + 0.03, 0.0), (fo, 0.0), (fo, ft), (re_ + sk + 0.03, ft), (re_ + sk + 0.03, ch)])
+    out['exit'] = _revolve_profile([(re_, ft), (re_, ch), (re_ + ch, 0.0), (re_ + ch + sk, 0.0), (re_ + sk, ch), (re_ + sk, ft)])
+    rings = spec.get('plug_rings', 3)
+    a_face, a_back = ft * 0.55, ft + 6.0
+    prof = [(0.0, a_face - 0.18 * re_), (0.3 * re_, a_face - 0.12 * re_), (0.42 * re_, a_face)]
+    plug = _revolve_profile(prof + [(0.42 * re_, a_back), (0.0, a_back)])
+    r0 = 0.42 * re_
+    for k in range(rings):                          # the rings between the slots, each a little further back
+        ri = r0 + 0.035 * re_ + k * (re_ - r0) / rings
+        ro = min(ri + (re_ - r0) / rings - 0.08 * re_, re_ - 0.25)
+        aa = a_face + 0.6 + 0.7 * k
+        plug = plug + _revolve_profile([(ri, aa), (ro, aa + 0.15), (ro, a_back), (ri, a_back)])
+    out['plug'] = plug
+    # the body: black, a bright band of the motor's plate round its middle, the cast heat sink's fins across the back,
+    # chrome push terminals at its sides (red for +); all inside the 154 x 86 envelope
+    L = ft + bd
+    gb0, gb1 = ft + 0.42 * bd, ft + 0.55 * bd
+    body = out['motor'] - _revolve_profile([(bo - 0.8, gb0), (bo + 1, gb0), (bo + 1, gb1), (bo - 0.8, gb1)])
+    out['band'] = _revolve_profile([(bo - 0.75, gb0 + 0.05), (bo - 0.05, gb0 + 0.05), (bo - 0.05, gb1 - 0.05), (bo - 0.75, gb1 - 0.05)])
+    from build123d import Box
+    nf, fw = 9, 2.2
+    for k in range(nf - 1):                          # grooves between the fins, across the back
+        y = (k - (nf - 2) / 2) * (0.7 * bo / (nf - 1)) * 2
+        body = body - Pos(0, y, -(L - 4.0)) * Box(1.5 * bo, 0.7 * bo / (nf - 1) * 2 - fw, 8.0 + 0.01)
+    posts = None
+    for e in (-1, 1):
+        pz = L - 13.0
+        pocket = Pos(e * (bo - 9.0), 0, -(pz + 7.0)) * Cylinder(5.5, 14.0)
+        body = body - pocket
+        post = Pos(e * (bo - 9.0), 0, -(L - 12.0)) * _revolve_profile([(0.0, 0.0), (3.8, 0.0), (3.8, 9.0), (3.2, 9.0), (3.2, 10.5), (0.0, 10.5)])
+        posts = post if posts is None else posts + post
+    out['motor'] = body
+    out['terminals'] = posts
     return out, dict(r_exit=re_)
 
 
@@ -229,7 +351,10 @@ def driver(role, spec, centre, axis=(0, -1, 0), recess=0.0, detail=24, ring=None
 # the render finishes a driver's pieces get, unless the product names others
 DRIVER_FINISH = {'frame': 'driver-frame', 'motor': 'driver-motor', 'magnet': 'driver-magnet', 'cone': 'driver-cone',
                  'surround': 'driver-surround', 'cap': 'driver-cap', 'coil': 'driver-coil', 'spider': 'driver-spider',
-                 'dome': 'driver-dome', 'plug': 'driver-plug', 'ring': 'driver-ring'}
+                 'dome': 'driver-dome', 'plug': 'driver-plug', 'ring': 'driver-ring',
+                 # round 31's pieces: the screws, the gasket, the terminals, the HF driver's exit chamfer and band
+                 'screws': 'driver-screw', 'gasket': 'driver-gasket', 'terminals': 'driver-terminal', 'exit': 'driver-bright',
+                 'band': 'driver-bright'}
 
 
 def driver_part(name, ref, spec, centre, axis=(0, -1, 0), recess=0.0, detail=24, ring=None, finishes=None, **kw):
