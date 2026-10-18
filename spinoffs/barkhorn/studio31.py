@@ -124,9 +124,10 @@ def bright(name):
     and the colour glows like stained glass; black flags just outside the frame either side, which each vertical edge
     refracts as a crisp dark line; a big scrim overhead for the top; a white card low in front, so the horn's throat
     mirrors a gradient and not black."""
-    s = {'title': f'barkhorn, {name}, bright field', 'size': [2560, 1440], 'product': covered(name),
-         'set': {'kind': 'sweep', 'color': '#F4F3F1', 'width': 24.0, 'front': 14.0, 'depth': 4.0, 'radius': 3.0, 'height': 9.0,
-                 'contact': {'strength': 0.3, 'distance_m': 0.06, 'core_strength': 0.6, 'core_distance_m': 0.01},
+    # cover off: the duel against h7 (round 31c) read the cover's flat disc as a placeholder
+    s = {'title': f'barkhorn, {name}, bright field', 'size': [2560, 1440], 'product': product(name),
+         'set': {'kind': 'sweep', 'color': '#F3F1EE', 'width': 24.0, 'front': 14.0, 'depth': 4.0, 'radius': 3.0, 'height': 9.0,
+                 'contact': {'strength': 0.45, 'distance_m': 0.12, 'core_strength': 0.8, 'core_distance_m': 0.012},
                  'flags': [{'center_m': [-2.0, 0.2, 1.6], 'size_m': [1.2, 1.8], 'normal': [1.0, -0.2, 0.0], 'glossy': True},
                            {'center_m': [1.6, 1.2, 1.6], 'size_m': [1.2, 1.8], 'normal': [-0.8, -0.6, 0.0], 'glossy': True}],
                  'bounces': [{'center_m': [0.9, -1.9, 0.35], 'size_m': [1.6, 0.6], 'normal': [-0.45, 0.85, 0.35]}]},
@@ -137,15 +138,15 @@ def bright(name):
     s['lights'] = {
         # the background: two broad lamps on the cove behind, out of frame, lifting it to a clean high-key white
         'bg-left': {'type': 'area', 'size_m': [3.0, 3.0], 'position': [-2.6, 1.2, 2.4], 'target': [0.0, 4.0, 1.4],
-                    'irradiance': 2.4, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0},
+                    'irradiance': 1.8, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
         'bg-right': {'type': 'area', 'size_m': [3.0, 3.0], 'position': [2.6, 1.2, 2.4], 'target': [0.0, 4.0, 1.4],
-                     'irradiance': 2.4, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0},
+                     'irradiance': 1.8, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
         # a big scrim overhead, a little forward: the top and the horn's crown
         'scrim': {'type': 'area', 'size_m': [3.0, 2.4], 'position': [0.3, -0.6, 3.2], 'target': [0.0, 0.0, 0.8],
                   'irradiance': 1.6, 'color': '#FFFAF4', 'camera': False},
         # a soft frontal key from the camera's side, low in strength: the faces carry their colour, not a white sheet
         'key': {'type': 'area', 'size_m': [2.4, 2.4], 'orbit': {'azimuth_deg': 5, 'elevation_deg': 20, 'distance_m': 4.5},
-                'target': [0.0, 0.0, 0.6], 'irradiance': 1.3, 'color': '#FFFAF4', 'camera': False, 'specular': 0.3},
+                'target': [0.0, 0.0, 0.6], 'irradiance': 2.0, 'color': '#FFFAF4', 'camera': False, 'specular': 0.3},
     }
     return s
 
