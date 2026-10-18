@@ -2,8 +2,8 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/finals31/inside-violet.json",
  "image": "/home/user/earf/renders/2026-10-18/barkhorn/finals31/inside-violet.png",
  "seconds": {
-  "build": 19.1,
-  "render": 506.0
+  "build": 25.1,
+  "render": 520.9
  },
  "samples": 128,
  "size": [
@@ -913,8 +913,8 @@
    ],
    "depth_m": 2.801
   },
-  "rating-plate#0": {
-   "part": "rating-plate",
+  "rating-plate-plate#0": {
+   "part": "rating-plate-plate",
    "centre_px": [
     755.0,
     868.5
@@ -924,6 +924,34 @@
     844,
     773,
     894
+   ],
+   "depth_m": 2.755
+  },
+  "rating-plate-print#0": {
+   "part": "rating-plate-print",
+   "centre_px": [
+    755.4,
+    869.0
+   ],
+   "box_px": [
+    743,
+    851,
+    768,
+    888
+   ],
+   "depth_m": 2.755
+  },
+  "rating-plate-screws#0": {
+   "part": "rating-plate-screws",
+   "centre_px": [
+    756.0,
+    868.4
+   ],
+   "box_px": [
+    739,
+    859,
+    774,
+    878
    ],
    "depth_m": 2.755
   },
