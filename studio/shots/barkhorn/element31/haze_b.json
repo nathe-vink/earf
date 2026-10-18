@@ -63,6 +63,19 @@
       "density": 0.0007,
       "color": "#D9CCEB",
       "anisotropy": 0.7
+     },
+     {
+      "box": [
+       -150.0,
+       8.0,
+       -60.0,
+       200.0,
+       199.0,
+       20.0
+      ],
+      "density": 0.0009,
+      "color": "#CFC3E6",
+      "anisotropy": 0.4
      }
     ]
    },
@@ -75,7 +88,7 @@
      -6.0,
      -8.5,
      6.0,
-     3.0
+     6.5
     ],
     "avoid": [
      [
@@ -94,7 +107,7 @@
       1.0
      ]
     ],
-    "count": 6000,
+    "count": 7500,
     "children": 12,
     "length": [
      0.15,
@@ -114,10 +127,10 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#4E3E2C",
-    "color2": "#3A2E22",
-    "tip": "#8A7050",
-    "value_jitter": 0.2,
+    "color": "#3A2E22",
+    "color2": "#2A2119",
+    "tip": "#A07E58",
+    "value_jitter": 0.3,
     "rough": 0.0,
     "rough2": 0.0,
     "rough_end": 0.02,
@@ -174,10 +187,10 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#4E3E2C",
-    "color2": "#3A2E22",
-    "tip": "#8A7050",
-    "value_jitter": 0.2,
+    "color": "#3A2E22",
+    "color2": "#2A2119",
+    "tip": "#A07E58",
+    "value_jitter": 0.3,
     "rough": 0.0,
     "rough2": 0.0,
     "rough_end": 0.02,
@@ -213,8 +226,8 @@
     "count": 2500,
     "children": 12,
     "length": [
-     0.06,
-     0.22
+     0.05,
+     0.16
     ],
     "ground": {
      "area": [
@@ -230,10 +243,10 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#4E3E2C",
-    "color2": "#3A2E22",
-    "tip": "#8A7050",
-    "value_jitter": 0.2,
+    "color": "#3A2E22",
+    "color2": "#2A2119",
+    "tip": "#A07E58",
+    "value_jitter": 0.3,
     "rough": 0.0,
     "rough2": 0.0,
     "rough_end": 0.02,
@@ -288,10 +301,10 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#4E3E2C",
-    "color2": "#3A2E22",
-    "tip": "#8A7050",
-    "value_jitter": 0.2,
+    "color": "#3A2E22",
+    "color2": "#2A2119",
+    "tip": "#A07E58",
+    "value_jitter": 0.3,
     "rough": 0.0,
     "rough2": 0.0,
     "rough_end": 0.02,
@@ -305,20 +318,20 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    1.0,
-    1.0
+    2.0,
+    1.5
    ],
    "target": [
     0.0,
     0.0,
     0.7
    ],
-   "irradiance": 16.0,
+   "irradiance": 40.0,
    "color": "#F5D6BC",
    "orbit": {
     "azimuth_deg": -25.0,
-    "elevation_deg": 25.0,
-    "distance_m": 2.5
+    "elevation_deg": 15.0,
+    "distance_m": 2.0
    }
   }
  },
@@ -330,8 +343,8 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": -3.2,
-  "white_balance_k": 5000,
-  "white_balance_tint": 15,
+  "white_balance_k": 5400,
+  "white_balance_tint": 20,
   "look": "AgX - Medium High Contrast"
  },
  "title": "Haze in its element: ranges at dusk",
@@ -370,10 +383,10 @@
  },
  "sun": {
   "azimuth_deg": 163.5,
-  "elevation_deg": 6.0,
-  "irradiance": 12.0,
-  "angle_deg": 0.53,
-  "color": "#FFC88A"
+  "elevation_deg": 4.0,
+  "irradiance": 22.0,
+  "angle_deg": 4.0,
+  "color": "#FFB878"
  },
  "finish": {
   "enabled": true,
