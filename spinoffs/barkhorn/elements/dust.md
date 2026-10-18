@@ -99,6 +99,12 @@ The blind critics never scored it above 6.0, and the duel judge gave it 6.6. It 
 - **The sky.** It is a South African pure sky with a warm graduated filter, and it reads pale and flat. A real Southwest sunset sky (an HDRI shot there) would agree with the place.
 - **The acrylic.** It glows only when the sun is behind it (pass 8). From the side three-quarter light that won the duel, the body reads amber but more opaque. The choice between drama (p8) and coherence (p7) is the owner's to make if they want; p8's rig is in the history (`b9d9c4f`).
 
+## Render times
+
+- Landscape 2400 x 1600, 512 samples: 81 min (build 1 min).
+- Portrait 1600 x 2000, 512 samples: 55 min.
+- Proofs (0.5 scale, 128 samples): about 8 min each.
+
 ## Software and engine changes
 
 - **bpy 5.0.1 on python3.11:** this container's python3 is 3.13, for which bpy 5.0.1 is not published (main's setup now handles it).
