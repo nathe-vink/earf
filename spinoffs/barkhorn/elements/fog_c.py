@@ -48,7 +48,7 @@ def props():
         # the headland: coastal grass, level where the speaker stands, falling to the water behind it
         C.ground('sparse_grass', size=(26.0, 18.6), position=(0.0, -5.7, 0.0), displace=0.02, relief=0.12,
                  res='2k', tint='#5F5A3A', tint_mix=0.3, cells=900),
-        C.piece('ext', module='fog_b_el', fn='terrain', hills=[[*at(-6.0, 620.0), 96.0, 400.0, 200.0, 12.0], [*at(-32.0, 480.0), 105.0, 300.0, 220.0, 40.0]],
+        C.piece('ext', module='fog_b_el', fn='terrain', hills=[[*at(-6.0, 620.0), 92.0, 400.0, 200.0, 12.0]],
                 grass='#5F5E40', scrub='#2A3320', floor=WATER - 5.0, brow=3.6, steep=10.0, drop=120.0, wide=60.0,
                 y_range=[2.6, 1500.0], x_spread=[0.9, 1.1], x_margin=60.0, cols=400, row_ratio=0.006, min_row=0.3,
                 relief=0.15, relief_far=0.01, gullies=[10.0, 120.0]),
