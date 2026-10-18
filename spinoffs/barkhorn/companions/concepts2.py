@@ -14,7 +14,9 @@ Quick blockouts for the owner to pick from, each by day in three colours and lit
 - R3 Float: the slab raised 30 mm on four clear posts over a 10 mm lit base that glows round its edge, the platter
   above a ring of light (the Hotaru's idea, without its magnets).
 - L1 Lantern (the owner liked it), L4 Cylinder, L5 Sphere, L6 Shag: a fountain of 3 mm acrylic rods from a lit core,
-  their tips glowing (the seventies fibre-optic lamp, in EARF's acrylic).
+  their tips glowing (the seventies fibre-optic lamp, in EARF's acrylic), and L7 Fringe (the coordinator's: the literal
+  shag lamp, a few hundred 2.5 mm strands hanging in a loose fringe from a crown round a lit core, as 70s Lucite
+  fringe lamps).
 
     .venv-fab/bin/python spinoffs/barkhorn/companions/concepts2.py      # the models and their shots
     PY=python3.11 spinoffs/barkhorn/companions/concepts2.py --render    # render them all small and make the sheet
@@ -132,8 +134,26 @@ def lamp(kind):
                 Part('neck', K.cyl('z', c, 84, 20, 70) - K.cyl('z', c, 76, 19, 71), Machined('cast-acrylic'), finish='acrylic'),
                 Part('foot', K.cyl('z', c, 170, 0, 20), Sheet('cast-acrylic', 20), finish='acrylic'),
                 Part('core', Pos(c[0], c[1], 200) * Sphere(45), Bought('x'), finish='glow')]
-    # L6 Shag: 3 mm rods fanned out of a lit core in a turned foot, their polished tips glowing
     from build123d import Pos, Rot, Sphere, Compound
+    if kind == 'l7':                              # L7 Fringe: a crown disc on a clear stem, a few hundred 2.5 mm
+        rnd = random.Random(7)                    # strands hanging from it in a loose fringe round a lit opal core,
+        top = 430.0                               # the light carried down each strand to its polished tip
+        strands, tips = [], []
+        for i in range(320):
+            r = 150.0 * math.sqrt(rnd.uniform(0.18, 1.0))
+            a = rnd.uniform(0, 2 * math.pi)
+            L = rnd.uniform(150, 250) * (0.75 + 0.25 * r / 150.0)
+            x, y = c[0] + r * math.cos(a), c[1] + r * math.sin(a)
+            tr = Pos(x, y, top) * Rot(rnd.uniform(-4, 4), rnd.uniform(-4, 4), 0)
+            strands.append(tr * K.cyl('z', (0, 0), 2.5, -L, 0))
+            tips.append(tr * Pos(0, 0, -L) * Sphere(1.8))
+        return [Part('foot', K.cyl('z', c, 200, 0, 20), Sheet('cast-acrylic', 20), finish='acrylic'),
+                Part('stem', K.cyl('z', c, 24, 20, top) - K.cyl('z', c, 18, 19, top + 1), Machined('cast-acrylic'), finish='acrylic'),
+                Part('crown', K.cyl('z', c, 320, top, top + 15), Sheet('cast-acrylic', 15), finish='acrylic'),
+                Part('core', Pos(c[0], c[1], top - 70) * Sphere(55), Bought('x'), finish='glow'),
+                Part('strands', Compound(children=strands), Machined('cast-acrylic'), finish='acrylic-dense'),
+                Part('tips', Compound(children=tips), Bought('x'), finish='glow')]
+    # L6 Shag: 3 mm rods fanned out of a lit core in a turned foot, their polished tips glowing
     rnd = random.Random(31)
     rods, tips = [], []
     for i in range(260):
@@ -152,13 +172,14 @@ def lamp(kind):
 
 
 CONCEPTS = {'r1': ('R1 Slab', 'turntable'), 'r2': ('R2 Sandwich', 'turntable'), 'r3': ('R3 Float', 'turntable'),
-            'l1': ('L1 Lantern', 'lamp'), 'l4': ('L4 Cylinder', 'lamp'), 'l5': ('L5 Sphere', 'lamp'), 'l6': ('L6 Shag', 'lamp')}
+            'l1': ('L1 Lantern', 'lamp'), 'l4': ('L4 Cylinder', 'lamp'), 'l5': ('L5 Sphere', 'lamp'), 'l6': ('L6 Shag', 'lamp'),
+            'l7': ('L7 Fringe', 'lamp')}
 MATERIALS = dict(C.MATERIALS, clear={'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#F4F6F5', 'radius': 0.05, 'roughness': 0.04})
 
 
 def shot(key, colour, dusk):
     tt = CONCEPTS[key][1] == 'turntable'
-    H = 0.16 if tt else 0.4
+    H = 0.16 if tt else (0.46 if key == 'l7' else 0.4)
     tgt = [0.0, 0.0, round(H * 0.5, 3)]
     el, az, dist = (26, -28, 1.15) if tt else (10, -24, 1.55)
     cam = [round(dist * math.cos(math.radians(el)) * math.sin(math.radians(az)), 3),
@@ -201,7 +222,8 @@ def build():
 def render_all():
     py = os.environ.get('PY', 'python3')
     os.makedirs(RENDERS, exist_ok=True)
-    for key in CONCEPTS:
+    only = [a for a in sys.argv[2:] if a in CONCEPTS] or list(CONCEPTS)
+    for key in only:
         for v in DAY + ['dusk']:
             name = f'concept-{key}-{v}'
             subprocess.run([py, os.path.join(ROOT, 'studio', 'engine', 'render.py'), os.path.join(SHOTS, name + '.json'),

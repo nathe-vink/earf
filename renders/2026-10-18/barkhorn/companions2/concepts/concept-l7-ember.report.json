@@ -1,0 +1,105 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/companions2/concept-l7-ember.json",
+ "image": "/home/user/earf/renders/2026-10-18/barkhorn/companions2/concepts/concept-l7-ember.png",
+ "seconds": {
+  "build": 46.3,
+  "render": 21.9
+ },
+ "samples": 48,
+ "size": [
+  450,
+  360
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "core#0": {
+   "part": "core",
+   "centre_px": [
+    225.0,
+    116.1
+   ],
+   "box_px": [
+    190,
+    87,
+    261,
+    148
+   ],
+   "depth_m": 1.526
+  },
+  "crown#0": {
+   "part": "crown",
+   "centre_px": [
+    225.0,
+    78.0
+   ],
+   "box_px": [
+    126,
+    71,
+    335,
+    87
+   ],
+   "depth_m": 1.526
+  },
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    225.0,
+    288.1
+   ],
+   "box_px": [
+    162,
+    264,
+    292,
+    316
+   ],
+   "depth_m": 1.526
+  },
+  "stem#0": {
+   "part": "stem",
+   "centre_px": [
+    225.0,
+    182.5
+   ],
+   "box_px": [
+    217,
+    81,
+    233,
+    286
+   ],
+   "depth_m": 1.526
+  },
+  "strands#0": {
+   "part": "strands",
+   "centre_px": [
+    225.0,
+    142.5
+   ],
+   "box_px": [
+    129,
+    78,
+    331,
+    228
+   ],
+   "depth_m": 1.527
+  },
+  "tips#0": {
+   "part": "tips",
+   "centre_px": [
+    225.0,
+    174.5
+   ],
+   "box_px": [
+    129,
+    133,
+    332,
+    229
+   ],
+   "depth_m": 1.527
+  }
+ }
+}
