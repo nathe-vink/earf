@@ -1,0 +1,37 @@
+{
+  "stage1": {"impression": "A moody, convincing dawn mood: the fog pouring between distant ridges and the backlit grass have real atmosphere, and the depth from foreground to distance works. The product is the weak point. The clear cabinet stands against bright fog, so it reads as a grey, low-contrast box with a flat white woofer ring. Its base is lost in grass with no visible contact, and the sparse, clumpy tufts on bare dirt and the tan dune-like hills read more as a desert render than a headland.", "score": 5.5},
+  "verdict": "iterate",
+  "blocking_9": [
+    "The cabinet (y 335-590) must stand against dark grass, not bright fog: the background directly beside the cabinet should be lum_median <= 90, while the horn can stay against the fog",
+    "The cabinet's outer edges need a clear silhouette: an edge step of at least 50 lum at the left and right cabinet edges",
+    "The feet must visibly stand on ground with a contact shadow, with no grass blades crossing the base",
+    "The near ground must read as a dense coastal grass meadow, not single tufts on bare dirt, with no repeated clump shapes",
+    "The far hills must read as grassy Marin-like headlands at kilometre scale, not tan sand dunes",
+    "The acrylic must catch the low sun as rim light or edge glow, so it reads as clear cast acrylic rather than grey glass"
+  ],
+  "defects": [
+    {"region": [318, 335, 525, 520], "what": "Clear cabinet silhouetted against bright fog (bg lum ~180-203): it washes out and reads grey; the left edge step is only 20 lum"},
+    {"region": [330, 530, 515, 600], "what": "Base hidden behind grass tufts; no contact shadow or ground bounce visible, so the speaker looks planted behind the grass rather than on the ground"},
+    {"region": [385, 390, 505, 525], "what": "White woofer ring reads as flat, untextured CG white with no light falloff; the front face sits in shadow (lum_median 66) with no fill"},
+    {"region": [0, 560, 1200, 800], "what": "Near ground: sparse, evenly spaced, similar grass clumps on bare brown dirt; repetitive and desert-like rather than a headland meadow"},
+    {"region": [0, 160, 1200, 320], "what": "Hills across the water are tan and smooth like sand dunes (measured RGB 122,118,96); they lose kilometre scale and read as a miniature"},
+    {"region": [0, 0, 1200, 140], "what": "Top band of the sky is flat and featureless (lum range 30); acceptable as room for type, but slightly dead"},
+    {"region": [0, 480, 320, 540], "what": "Thin, bright wisp band right at the brow line flattens the grass edge into a hard light/dark seam"}
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "set", "problem": "The clear cabinet is framed against bright fog, which the card itself says makes clear acrylic disappear.", "evidence": {"region": [290, 400, 318, 500], "measured": "fog beside the cabinet lum_median 203; fog right of it [525,340,700,500] lum_median 182; cabinet left-edge step only -20 lum"}, "change": {"setting": "terrain: the brow distance behind the speaker", "from": "1.95 m", "to": "28 m"}, "expected": "Dark sunlit grass fills the background behind the cabinet", "accept": {"region": [525, 380, 700, 560], "metric": "lum_median", "op": "<=", "value": 90}},
+    {"id": "c2", "rank": 2, "kind": "set", "problem": "The speaker's base is hidden in tufts and has no visible contact with the ground.", "evidence": {"region": [330, 530, 515, 600], "measured": "base region lum_median 52 with grass blades crossing the plinth"}, "change": {"setting": "grass tufts", "from": "no exclusion", "to": "no tufts within 0.7 m; short turf 0.7-1.2 m; speaker z -0.015"}, "expected": "Feet visible on short turf with a contact shadow", "accept": {"region": [330, 575, 515, 600], "metric": "lum_p5", "op": "<", "value": 20}},
+    {"id": "c3", "rank": 3, "kind": "light", "problem": "The sun sits almost straight behind the speaker; no rim light on the acrylic.", "evidence": {"region": [330, 340, 515, 590], "measured": "cabinet lum_median 66"}, "change": {"setting": "sun azimuth_deg / sky rotation_deg", "from": "-160 / 214.2", "to": "-125 / 249.2"}, "expected": "Warm edge glow on the left acrylic edge and horn rim", "accept": {"region": [318, 340, 335, 590], "metric": "lum_p95", "op": ">=", "value": 200}},
+    {"id": "c4", "rank": 4, "kind": "light", "problem": "The front face has no fill.", "evidence": {"region": [385, 390, 505, 525], "measured": "woofer area lum_median 21.5"}, "change": {"setting": "other lights", "from": "none", "to": "a warm bounce card 1.2 x 1.2 m, 2.5 m camera-left, 0.6 m high, 0.25 x the sun's irradiance, #F3E6C8"}, "expected": "Front cabinet lifts to 85-110 median", "accept": {"region": [330, 340, 515, 590], "metric": "lum_median", "op": "between", "value": [80, 115]}},
+    {"id": "c5", "rank": 5, "kind": "asset", "problem": "Sparse repeated tufts on bare dirt.", "evidence": {"region": [0, 560, 1200, 800], "measured": "lum_median 48, range 74"}, "change": {"setting": "grass tufts and near ground", "from": "count 1100; sparse_grass tint #8A7B55 at 0.2", "to": "count 3500 with a third scan, clumped, scale [0.4, 1.6]; a denser turf texture, tint #5F5A3A at 0.3"}, "expected": "A continuous meadow", "accept": {"region": [0, 650, 1200, 800], "metric": "lum_range", "op": ">=", "value": 80}},
+    {"id": "c6", "rank": 6, "kind": "material", "problem": "Hills read as tan dunes.", "evidence": {"region": [640, 190, 900, 260], "measured": "RGB 122,118,96"}, "change": {"setting": "terrain colours and gullies", "from": "#7A6C4A / #23281C / [18, 170]", "to": "#6B6A45 / #2A3320, scrub in the gullies / [26, 120]"}, "expected": "Olive-gold slopes with dark scrub", "accept": {"region": [640, 190, 900, 260], "metric": "b_median", "op": "<", "value": 92}},
+    {"id": "c7", "rank": 7, "kind": "set", "problem": "A bright wisp band on the brow line makes a hard seam.", "evidence": {"region": [0, 500, 300, 540], "measured": "lum_median 195"}, "change": {"setting": "wisps top / density", "from": "0.5 / 0.035", "to": "-2.0 / 0.025"}, "expected": "Softer transition", "accept": {"region": [600, 170, 1100, 300], "metric": "lum_range", "op": ">=", "value": 75}},
+    {"id": "c8", "rank": 8, "kind": "post", "problem": "Finish slightly flat and milky.", "evidence": {"region": [0, 0, 1200, 800], "measured": "p1 16, p99 218"}, "change": {"setting": "finish contrast / vignette / clarity", "from": "0.05 / 0.15 / 0.04", "to": "0.10 / 0.22 / 0.06"}, "expected": "Richer blacks", "accept": {"region": [0, 0, 1200, 140], "metric": "clip_pct", "op": "<", "value": 0.5}}
+  ],
+  "out_of_scope": [
+    {"request": "Less stark white woofer surround / lining", "why": "Fixed parts of the speaker; only light can model them"},
+    {"request": "The horn's interior reflections read as a dark warped blob", "why": "The horn's shape is fixed; rotate_z could be tested within range"}
+  ],
+  "score_if_fixed": 7.6,
+  "_note": "Saved from the critic's reply; evidence and expected fields of c1-c8 shortened, the changes and accept tests verbatim."
+}

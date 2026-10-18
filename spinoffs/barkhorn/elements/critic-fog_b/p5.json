@@ -1,0 +1,14 @@
+{"stage1": {"impression": "A quiet, well-composed idea: a lone speaker on a grassy brow above a fog sea at dawn, with good scanned grass. But the frame is washed out and high-key. The fog reads as a flat white smear rather than a moving marine layer, the far hills are soft, featureless CG displacement, and the clear cabinet disappears against the white fog band. The speaker is front-lit grey-white while the scene is backlit, so it looks pasted in. The foreground grass glitters like sequins. It is a competent render that still reads as CG.", "score": 5.5},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "change": {"setting": "fog top / density / marine layer", "from": "-48 / 0.035 / +25", "to": "-75 / 0.02 / +10"}, "accept": {"region": [530, 340, 600, 470], "metric": "lum_median", "op": "<=", "value": 170}},
+  {"id": "c2", "change": {"setting": "billows / soft / anisotropy", "from": "[[160,18],[50,9],[12,5]] / 3.0 / 0.65", "to": "[[160,30],[50,14],[12,6]] / 1.0 / 0.8"}, "accept": {"region": [600, 330, 1150, 460], "metric": "lum_range", "op": ">=", "value": 60}},
+  {"id": "c3", "change": {"setting": "bounce", "from": "2.4, az -22, el 8", "to": "0.9, az -55, el 15, #E6E9EE"}, "accept": {"region": [400, 345, 500, 380], "metric": "lum_median", "op": "between", "value": [95, 125]}},
+  {"id": "c4", "change": {"setting": "exposure / sky strength", "from": "0 / 0.85", "to": "-0.35 / 0.75"}, "accept": {"region": [0, 0, 1200, 170], "metric": "lum_median", "op": "between", "value": [190, 212]}},
+  {"id": "c5", "change": {"setting": "gullies / scrub", "from": "[20,140] / #2A3320", "to": "[35,90] + a nearer ridge layer / #222A1A"}, "accept": {"region": [700, 160, 1150, 300], "metric": "lum_range", "op": ">=", "value": 60}},
+  {"id": "c6", "change": {"setting": "speaker z / near tufts", "from": "-0.015 / 60 at [0.2,0.35]", "to": "-0.03 / 140 at [0.3,0.5], half in front"}, "accept": {"region": [320, 545, 520, 580], "metric": "lum_p95", "op": "<=", "value": 110}},
+  {"id": "c7", "change": {"setting": "grass material", "from": "default", "to": "roughness 0.6, specular 0.3"}, "accept": {"region": [0, 600, 1200, 800], "metric": "lum_p95", "op": "<=", "value": 85}},
+  {"id": "c8", "change": {"setting": "fstop", "from": "2.8", "to": "4.0"}, "accept": {"region": [900, 120, 920, 220], "metric": "edge", "axis": "y", "op": "<=", "value": 35}}],
+ "out_of_scope": [{"request": "horn reads as chrome", "why": "fixed material"}, {"request": "the white liner", "why": "fixed parts"}],
+ "score_if_fixed": 7.0,
+ "_note": "Condensed: score, impression, settings and accept tests verbatim."}
