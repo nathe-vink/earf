@@ -71,3 +71,4 @@ floor and the horn's crisp specular streaks; the proof's softer light read milky
 | m | macro-woofer-ice | 5.0 | ring and cone flat, no specular sweep; framed off-centre with a violet edge stripe and a clipped sliver |
 | m | macro-grip-poison | 5.0 | the slot a dark hole (nothing behind it); the top face blown into the white; horn and posts cropped at the top |
 | m | macro-corner-ember | 5.5 | no single subject (the horn's underside crowds it); the polished edge grey, no line; right face dead |
+| m | macro-amp-dust (h3, rig 1769c6a) | 5.5 | the plate lit flat like a card; the edge glows at red clip; an empty block below; dim beside a white hero. Proofed its light changes (raking key, dimmer back lamp, +0.35 EV, a strip on the bevel) and a tighter frame: each turned the orange a murky brown, so the final stands as rendered |
