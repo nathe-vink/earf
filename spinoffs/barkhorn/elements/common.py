@@ -124,10 +124,11 @@ def finish(contrast=0.05, clarity=0.04, sharpen=0.25, saturation=0.0, bloom=0.0,
 
 def shot(name, props, camera, sky, title, lights=None, sun=None, size=LANDSCAPE, samples=512, fin=None, haze=None,
          rotate_z=15.0, position=(0.0, 0.0, 0.0), view='AgX', look='AgX - Base Contrast', exposure=0.0, cover=False,
-         clamp=10.0):
+         clamp=10.0, white_balance=None):
     """A frame: the speaker in `name`'s colour at `position`, turned `rotate_z` degrees (positive turns its front
     toward +x), cover off unless `cover`, standing in `props` (kit pieces), under `sky`, lit by the sky, `sun` and
-    `lights`, seen by `camera`."""
+    `lights`, seen by `camera`. No white balance unless `white_balance` (kelvin, tint; 10 is neutral tint) asks for one:
+    the photographed sky's own colour stands (the look book's 5600 K and tint 3 turned lava pink)."""
     key, flavour, _ = COLOURS[name.split('_')[0]]
     s = copy.deepcopy(json.load(open(BASE)))
     inst = {'flavour': flavour, 'position': list(position), 'rotate_z': rotate_z}
@@ -145,6 +146,9 @@ def shot(name, props, camera, sky, title, lights=None, sun=None, size=LANDSCAPE,
     s['title'] = title
     s['sky'] = sky
     s['render'] = {**s['render'], 'samples': samples, 'exposure': exposure, 'clamp': clamp, 'view': view}
+    s['render'].pop('white_balance_k', None); s['render'].pop('white_balance_tint', None)
+    if white_balance:
+        s['render']['white_balance_k'], s['render']['white_balance_tint'] = white_balance
     if look:
         s['render']['look'] = look
     s['finish'] = fin or finish()
