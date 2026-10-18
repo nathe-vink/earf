@@ -48,7 +48,7 @@ def props():
         # the headland: coastal grass, level where the speaker stands, falling to the water behind it
         C.ground('sparse_grass', size=(26.0, 18.6), position=(0.0, -5.7, 0.0), displace=0.02, relief=0.12,
                  res='2k', tint='#5F5A3A', tint_mix=0.3, cells=900),
-        C.piece('ext', module='fog_b_el', fn='terrain', hills=[[*at(-10.0, 600.0), 82.0, 380.0, 200.0, 15.0]],
+        C.piece('ext', module='fog_b_el', fn='terrain', hills=[[*at(-6.0, 620.0), 96.0, 400.0, 200.0, 12.0]],
                 grass='#5F5E40', scrub='#2A3320', floor=WATER - 5.0, brow=3.6, steep=10.0, drop=120.0, wide=60.0,
                 y_range=[2.6, 1500.0], x_spread=[0.9, 1.1], x_margin=60.0, cols=400, row_ratio=0.006, min_row=0.3,
                 relief=0.15, relief_far=0.01, gullies=[10.0, 120.0]),
@@ -66,7 +66,7 @@ def props():
         # the fog: under the deck in the Gate, higher over the ocean, a wall rolling over Twin Peaks; haze above
         C.piece('ext', module='fog_c_el', fn='fog', top=WATER + 50.0, heave=8.0,
                 billows=[[220.0, 18.0], [70.0, 8.0], [20.0, 3.0]], wall=[16.0, 7800.0, 230.0, 14.0, 2500.0],
-                ocean=[16.0, 95.0, 1300.0], ocean_width=20.0, soft=6.0, density=0.03, anisotropy=0.7, billow_size=40.0, billow_cut=0.25,
+                ocean=[6.0, 90.0, 1100.0], ocean_width=20.0, soft=6.0, density=0.03, anisotropy=0.7, billow_size=40.0, billow_cut=0.25,
                 haze=0.00012, haze_height=300.0, box=[-11000.0, 150.0, WATER - 5.0, 11000.0, 15000.0, 700.0]),
         # grass round the speaker
         C.scatter(['grass_medium_02', 'grass_medium_01'], 3000, [-9.0, -14.5, 11.0, 3.2],
