@@ -56,3 +56,40 @@ Blind side-by-side duels (`critic/ab/PROMPT-DUEL.txt`, fresh judges, neutral nam
 So the finals are p11's rig (commit 9f992f4) with one defect fix and no other change: the three flags shade only the
 mist glow (`lights`), so the negative flag no longer throws the sun's ruler-straight shadow across the foreground that
 both p11's critic and its duel judge marked. The portrait is the same set on an 80 mm lens from 5.4 m.
+
+## Finals
+
+- `renders/2026-10-18/barkhorn/element31/smoke_b.png`: 2400 x 1600, 512 samples, denoised, 4 h 41 min on 4 CPUs (this
+  session), 3.1 MB.
+- `smoke_b-portrait.png`: 1600 x 2000, 512 samples, 3 h 36 min (the coordinator's helper session, on 6e95bdd; merged
+  from r31-element-smoke-b-portrait).
+- Blind pass on the landscape final (`smoke_b-critic/final.json`): **5.5**, "iterate".
+
+## An honest note
+
+The frame does what the concept asks at a glance: a black speaker sharp against a pale birch wood, high-key, with room
+for type. Every critic said so, and the thumbnail read the owner asked for is there. What holds it at 5.5 is the same
+handful of things, in every pass since the overcast light was dropped:
+
+- **The sun barely shows.** A low sun through mist that thick is mostly extinguished before it reaches the snow, so
+  there are no long trunk shadows to model the ground and tie the speaker to it. A stronger, lower sun, or a thinner
+  mist near the ground, is the next lever (the last critic asked for a sun from -125 degrees at 9 degrees, 9.0).
+- **Contact.** The speaker sits in a soft lip of snow but casts little occlusion in such diffuse light; it can read as
+  set on top.
+- **The snow and the bark are close but not photographic.** ambientCG's Snow003 reads as snow at a distance and as
+  brushed streaks near the lens. The birches are procedural; Poly Haven has no birch bark, and a scanned silver-birch
+  bark would help most.
+- **The woodsmoke never became a visible element.** Thin volume sheets and a plume read as haze or a smudge. A legible
+  backlit ribbon of smoke behind the speaker remains the open idea, and it is the one that would carry the line.
+- **The smoked tint.** Through the front the acrylic reads near neutral; light from behind lifts the cabinet's
+  interior, but the horn's resin blows white under any backlight, so it takes none.
+
+Render time is the constraint here: a half-scale, 128-sample proof with the volumes took about 24 minutes, so each pass
+cost close to an hour with its tests.
+
+## Software and assets
+
+No new software. Assets (all CC0, fetched to the ignored cache): Poly Haven `snow_field`, `birchwood` (HDRIs), `snow_02`,
+`bark_willow` (normals), `grass_medium_01` and `_02`, `dry_branches_medium_01` (the last three tried and dropped);
+ambientCG `Snow003`. No engine core changes; the set's own pieces are `studio/engine/kit_ext/smoke_b_el.py` (birches
+with limbs, smoke sheets, a plume, graded mist, snow, a snow lip, dry scatter).
