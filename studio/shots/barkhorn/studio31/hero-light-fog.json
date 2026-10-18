@@ -66,8 +66,8 @@
   "bounces": 16,
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
-  "white_balance_k": 6000,
-  "white_balance_tint": 0.0
+  "white_balance_k": 5800,
+  "white_balance_tint": 4.0
  },
  "finish": {
   "enabled": true,
@@ -80,8 +80,8 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.08,
-   "specular": 0.04
+   "roughness": 0.2,
+   "specular": 0.025
   }
  },
  "lights": {
@@ -130,22 +130,22 @@
    "type": "area",
    "shape": "DISK",
    "size_m": [
-    1.4,
-    1.4
+    2.0,
+    2.0
    ],
    "position": [
     0.0,
     0.45,
-    0.9
+    1.15
    ],
    "target": [
     0.0,
     4.0,
-    1.0
+    1.5
    ],
    "spread_deg": 110,
    "power_w": 0.0,
-   "color": "#FFF1E4",
+   "color": "#F4F4F6",
    "camera": false,
    "specular": 0.0
   },
@@ -186,36 +186,34 @@
   "horn-front": {
    "type": "panel",
    "size_m": [
-    1.2,
-    0.6
+    4.0,
+    2.6
    ],
    "position": [
-    0.6,
-    -2.2,
-    1.6
+    0.2,
+    -2.8,
+    2.0
    ],
    "target": [
     0.0,
     0.0,
     1.18
    ],
-   "strength": 2.0,
+   "strength": 0.55,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
     "*#0"
    ],
    "ramp": {
-    "axis": "x",
+    "axis": "z",
     "at_m": [
-     0.0,
-     0.6,
-     1.2
+     0.9,
+     3.2
     ],
     "values": [
-     0.15,
-     1.0,
-     0.15
+     0.0,
+     1.0
     ]
    }
   },
@@ -269,7 +267,7 @@
     0.0,
     1.1
    ],
-   "strength": 6.0,
+   "strength": 10.0,
    "diffuse": 1.0,
    "specular": 0.0,
    "receivers": [
@@ -292,8 +290,8 @@
     0.0,
     0.6
    ],
-   "strength": 16.799999999999997,
-   "diffuse": 0.35,
+   "strength": 11.2,
+   "diffuse": 0.15,
    "specular": 1.0,
    "receivers": [
     "*#0"
@@ -319,7 +317,7 @@
     3.2
    ],
    "orbit": {
-    "azimuth_deg": 113,
+    "azimuth_deg": 98,
     "elevation_deg": 8,
     "distance_m": 2.2
    },
@@ -328,7 +326,7 @@
     0.0,
     0.6
    ],
-   "strength": 30.799999999999997,
+   "strength": 35.0,
    "diffuse": 0.35,
    "specular": 1.0,
    "receivers": [
