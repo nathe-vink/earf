@@ -156,9 +156,16 @@ Every frame comes from the engine, on the look book's sweep in its colour (lookb
 the same tinted-acrylic material as the cabinets: clear cast resin absorbing toward the colour after 25 mm.
 
 - `look-turntable-<colour>.png` and `look-lamp-<colour>.png`: each product in each of the eight colours, the lamp lit
-  (`shots.py`'s LED strength 22). `look-*-sheet.png` shows the eight together.
+  (strip strength 88, raised four times after the critic said the hero's lamp read as off). On a bright studio sweep
+  a lit lamp shows as its glowing sleeve, as real lamps photographed on a lit set do; the hero shows it carrying a
+  dim room. `look-*-sheet.png` shows the eight together.
 - `hero-turntable.png`: Cumulus, a record on it, on a walnut sideboard beside an Ember Cloud.
   `hero-lamp.png`: Bell, lit, beside a Haze Cloud, the studio turned down.
+- **The critic** (`critic/PROMPT.md`, fresh context, `critic/cards/companions.yaml`) judged both heroes: 4.5 each
+  blind. Its first round is applied to both (`critic/LOG.md` here; replies in `critic/rounds/2026-10-18/`). On
+  Cumulus its camera changes cropped the speaker and left the record player as small, so I reframed it: the sideboard
+  forward, the speaker back, a close 35 mm view. A second round is not run yet; the lamp hero's wall glow is broad
+  and orange, and both heroes' record player and lamp could still be larger in frame.
 - `detail-turntable.png`: the motor's pod in its ring, the belt to the rim (Ice).
   `detail-lamp.png`: from under the rim, the opal sleeve lit, the collar and cap (Acid).
 
