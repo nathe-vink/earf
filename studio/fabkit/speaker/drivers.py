@@ -170,7 +170,7 @@ def cone_driver(spec, detail=24):
     out['cone'] = _revolve_profile(prof + back)
     # dust cap: convex (forward) or inverted, seated where the cone meets the coil
     ch = spec.get('cap_h', 0.28 * cap_r)
-    nc = 12 if detail > 6 else 3
+    nc = 40 if detail > 6 else 3        # round 31: fine enough that the dome's apex catches no pinpoint
     if spec.get('cap') == 'inverted':
         cap = [(cap_r * (1 - u), seat + cone_depth - 2 + ch * math.sin(math.pi / 2 * u)) for u in [i / nc for i in range(nc + 1)]]
     else:
