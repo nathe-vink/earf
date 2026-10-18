@@ -16,8 +16,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import common as C                                        # noqa: E402
 
 SKY = 'qwantani_dusk_2_puresky'
-SKY_ROT = 244.3                                           # its afterglow behind the speaker (azimuth 174)
-SUN_AZ, SUN_EL = 164.5, 1.5
+SKY_ROT = 247.3                                           # its afterglow behind the speaker (azimuth 174)
+SUN_AZ, SUN_EL = 161.5, 1.5                       # the disc in clear sky right of the horn
 CAM = dict(height=1.0, distance=10.0, azimuth=-15.0, lens=85.0, fstop=5.6)
 
 RIDGE = {'area': [-10.0, -13.0, 9.0, 7.0], 'cell': 0.02, 'crest_y': 1.4, 'drop': 5.0, 'relief': 0.10, 'flat_r': 0.8,
@@ -30,6 +30,11 @@ BOUNCE = C.area(-30.0, 10.0, 3.5, 7.0, '#F2DCCB', size=(3.0, 2.0))
 
 
 STRAW = dict(ground=RIDGE, color='#5A4834', color2='#33291F', tip='#7A6448', value_jitter=0.3)
+
+
+def GRADE(full, eye=(-2.5882, -9.6593, 1.0)):
+    return {'at': [0.0, 0.0], 'r0': 0.4, 'r1': 2.2, 'eye': list(eye), 'full': full, 'clear': 0.02, 'floor': 0.08,
+            'dens_min': 0.45}
 
 
 def ext(fn, **k):
@@ -69,14 +74,15 @@ def props():
                             'anisotropy': 0.8}]),
         ext('sundisk', azimuth=SUN_AZ, elevation=SUN_EL, distance=296.0, eye=[-2.6, -9.7, 1.0], diameter_deg=0.6,
             emit=18.0, color='#FFC296'),
-        ext('grass', area=[-6.0, -8.5, 6.0, 3.0], avoid=[[0.0, -0.3, 2.2], [-0.5, -2.0, 2.2], [-2.6, -9.7, 1.0]], count=6000, children=12,
-            length=[0.15, 0.5], **STRAW, seed=3, patchy=0.75, clump=0.3, clump_r=0.05),
-        ext('grass', area=[-6.0, -8.5, 6.0, 3.0], avoid=[[0.0, -0.3, 2.2], [-0.5, -2.0, 2.2], [-2.6, -9.7, 1.0]], count=2500, children=6,
-            length=[0.15, 0.45], **STRAW, seed=8, patchy=0.75, root_mm=1.8, tip_mm=0.35, random=0.2, rough=0.05),
-        ext('grass', area=[-2.3, -2.6, 2.3, 2.0], within=[0.0, -0.3, 2.3], avoid=[[0.0, 0.0, 0.5]], count=2500,
-            children=12, length=[0.06, 0.22], **STRAW, seed=5, patchy=0.9),
-        ext('grass', area=[-0.8, -0.8, 0.8, 0.8], within=[0.0, 0.0, 0.8], avoid=[[0.0, 0.0, 0.33]], count=900, children=10,
-            length=[0.06, 0.2], **STRAW, seed=6, patchy=1.0, cell=0.04),
+        # the grass grades down toward the speaker's feet, lowest in the corridor toward the camera, like grass
+        # trodden on the way in: no cleared ring, and its base and ports in view
+        ext('grass', area=[-6.0, -8.5, 6.0, 3.0], avoid=[[0.0, 0.0, 0.36], [-2.6, -9.7, 1.0]], count=7500, children=12,
+            length=[0.15, 0.5], **STRAW, seed=3, patchy=0.75, clump=0.3, clump_r=0.05, cell=0.05, grade=GRADE(0.5)),
+        ext('grass', area=[-6.0, -8.5, 6.0, 3.0], avoid=[[0.0, 0.0, 0.36], [-2.6, -9.7, 1.0]], count=3000, children=6,
+            length=[0.15, 0.45], **STRAW, seed=8, patchy=0.75, root_mm=1.8, tip_mm=0.35, random=0.2, rough=0.05,
+            cell=0.05, grade=GRADE(0.45)),
+        ext('grass', area=[-1.4, -1.6, 1.4, 1.2], within=[0.0, -0.2, 1.4], avoid=[[0.0, 0.0, 0.36]], count=1200,
+            children=10, length=[0.02, 0.07], **STRAW, seed=6, patchy=1.0, cell=0.04),
     ]
 
 
@@ -94,9 +100,15 @@ def portrait():
     s = C.portrait_of(shot())
     s['camera'] = C.camera(height=1.0, distance=7.5, azimuth=-15.0, lens=105.0, fstop=5.6, target=(0.0, 0.0, 1.26),
                            shift_x=-0.12)
+    # from this closer camera the horn is wider: the sun and the sky turn 1 deg further so the disc keeps clear sky
+    s['sun']['azimuth_deg'] = SUN_AZ - 1.0
+    s['sky']['rotation_deg'] = SKY_ROT + 1.0
     for p in s['set']['props']:
         if p.get('fn') == 'sundisk':
             p['eye'] = s['camera']['position']
+            p['azimuth'] = SUN_AZ - 1.0
         if p.get('fn') == 'grass':
             p['avoid'] = [a if a[1] > -5 else [*s['camera']['position'][:2], 1.0] for a in p['avoid']]
+            if p.get('grade'):
+                p['grade'] = GRADE(p['grade']['full'], tuple(s['camera']['position']))
     return s

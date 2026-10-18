@@ -126,3 +126,22 @@ to 27); portrait: 74.7 min. Both on four CPU cores. The portrait is re-framed, n
   which stayed the same.
 - **The sun disc touches the horn's top edge** in the final, and the frame is milky (the critic's c2 and c5). These
   are fixable in one more pass, but they would not move the score past the three above.
+
+## After the A/B duel (2026-10-18, a last round at the coordinator's request)
+
+Haze B beat Haze A in the coordinator's three-judge blind duel (2 to 1, mean 6.2 against 5.9) and went on Haze's page.
+All three judges named two faults, both fixed here, and nothing else changed:
+
+- **The base and ports were hidden in the grass.** The grass now grades down toward the speaker's feet (`grade` in
+  `haze_b_el.grass`: the strands' length and density by vertex groups, shortest in the corridor toward the camera, where
+  a blade taller than the sight line to the foot would hide the base; feathered at its sides, so there is no ring).
+  The cleared ring and the denser ring at the feet are gone; a low trodden cover (2 to 7 cm) stays round the feet.
+- **The sun disc sat on the horn's top edge.** Sun, disc and sky turned 3 deg (azimuth 161.5, sky 247.3), so the disc
+  stands in clear haze right of the horn: about 100 px clear in the landscape, about 110 px in the portrait (whose
+  closer camera widens the horn, so its sun and sky turn 1 deg further).
+- The horn's throat is the product's own interior and stays as it is.
+
+Re-rendered in strips at 512 samples: landscape 100 min, portrait 67 min. Blind duel of the new landscape against the
+previous final, two judges, one in each order: new 7.2 / old 6.4, and new 6.5 / old 5.8; both preferred the new frame
+(the base and ports reading, the sun clear of the horn). One judge found the trodden patch in front a little staged.
+The new frames replace the old.
