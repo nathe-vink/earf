@@ -1,0 +1,379 @@
+{
+ "stage1": {
+  "impression": "A calm, well-composed late-sun living room. The light holds together: the sun comes from the left, and window patches and speaker shadows rake across the back wall. The pair reads as a pair at a glance. But it still reads as high-end archviz rather than a photograph. The cabinets sit darker and more olive than their sunlit setting, with little light visibly passing through them. The rug is a flat grey slab across the foreground, the plaster and credenza are CG-clean, and the left third of the wall burns almost to white while the right falls into dull shade.",
+  "score": 6.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Sunlight visibly passes through both cabinets: the acrylic glows and throws a readable green-tinted pool on the wall or floor beside each speaker",
+  "The cabinets are no darker than their surroundings (cabinet lum_median >= 75 against a shaded wall of about 100) and their colour reads as cool sage, not olive",
+  "The heading area of the wall (500-960 x 40-260) is calm enough to set type over, and the wall goes from hot left to shaded right by no more than about 1.5 stops",
+  "The foreground floor or rug has real pile and micro-texture and does not read as one flat grey plane",
+  "The plaster and credenza show real surface texture (trowel marks, grain variation), not uniform CG surfaces",
+  "The horn throats keep detail (crush under 12%)"
+ ],
+ "defects": [
+  {
+   "region": [
+    1030,
+    270,
+    1200,
+    380
+   ],
+   "what": "The horn throat crushes to black (22.6% crushed pixels), a dead hole in the hero object"
+  },
+  {
+   "region": [
+    250,
+    410,
+    410,
+    600
+   ],
+   "what": "The left cabinet is murky (lum median 48) and olive (blue median 12), darker than everything around it, and it does not glow with the sun"
+  },
+  {
+   "region": [
+    1040,
+    410,
+    1190,
+    600
+   ],
+   "what": "The right cabinet is also dull (lum median 65, blue 31); the woofer cover reads as a flat matte disc"
+  },
+  {
+   "region": [
+    1205,
+    400,
+    1275,
+    480
+   ],
+   "what": "Light through the cabinet throws almost no green onto the wall (r 165 > g 149): the brief's sun through the cabinets barely reads"
+  },
+  {
+   "region": [
+    300,
+    30,
+    450,
+    200
+   ],
+   "what": "The upper-left wall runs at 234 and is nearly clipped, while the upper-right wall sits at about 100: a 2.4-stop slide across the heading wall"
+  },
+  {
+   "region": [
+    250,
+    715,
+    1200,
+    810
+   ],
+   "what": "The rug is a flat, uniform grey slab with a crisp CG edge, cut by the frame. It is the largest dead mass in the image and reads as render"
+  },
+  {
+   "region": [
+    480,
+    485,
+    965,
+    660
+   ],
+   "what": "The credenza's veneer is clean and uniform, catalogue-CG; the turntable is small and lost against the busy wall shadow"
+  },
+  {
+   "region": [
+    500,
+    40,
+    960,
+    260
+   ],
+   "what": "The heading area is busy with the horn shadow and sun patches (lum range 118)"
+  },
+  {
+   "region": [
+    90,
+    0,
+    155,
+    640
+   ],
+   "what": "A dark jamb column and a hard bright curtain edge on the far left pull the eye out of frame"
+  },
+  {
+   "region": [
+    205,
+    540,
+    235,
+    640
+   ],
+   "what": "The socket and lead read as a pasted-on flat white plate at this scale (required by the owner; re-routing allowed)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The sun barely reaches the cabinet fronts, so the tinted acrylic does not glow and casts almost no green light, and the product reads darker than its setting.",
+   "evidence": {
+    "region": [
+     250,
+     410,
+     410,
+     600
+    ],
+    "measured": "left cabinet lum_median 47.6 and right 65.2, against the wall at 119-234; wall at 1205-1275 x 400-480 r 165 / g 149, so no green transmission"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -62.0, elevation 14.0, irradiance 30.0",
+    "to": "azimuth -48.0, elevation 12.0, irradiance 34.0"
+   },
+   "expected": "Both cabinet fronts take raking sun, the acrylic lights from within, and a green-tinted transmitted pool lands on the wall and floor to the right of each speaker; cabinet medians reach about 75-95",
+   "accept": {
+    "region": [
+     250,
+     410,
+     410,
+     600
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 75
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The cabinets render olive instead of the reference cool sage, because there is no cool fill: their blue channel collapses.",
+   "evidence": {
+    "region": [
+     1040,
+     410,
+     1190,
+     600
+    ],
+    "measured": "rgb median 44/75/31 (left cabinet 32/56/12); the reference light through 25 mm is #B2C9A2, sage with a real blue component"
+   },
+   "change": {
+    "setting": "lamp north",
+    "from": "irradiance 0.45, color #DCE6F4",
+    "to": "irradiance 0.8, color #D2E0F4"
+   },
+   "expected": "The shadow sides take a cool skylight fill, the cabinets move from olive toward sage, and the shaded right wall lifts",
+   "accept": {
+    "region": [
+     1040,
+     410,
+     1190,
+     600
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 42
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The upper-left wall nearly clips while the right half sits in dull shade, so the heading wall is unbalanced.",
+   "evidence": {
+    "region": [
+     300,
+     30,
+     450,
+     200
+    ],
+    "measured": "lum_median 233.9 on the upper left against 101.9 at 1050-1250 x 30-120; x-profile 236 -> 96"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "-0.5",
+    "to": "-0.75 (with c2's fill lifting the right)"
+   },
+   "expected": "The upper-left wall holds tone near 205-215 and the right stays at about 95 or above: under 1.3 stops across the heading",
+   "accept": {
+    "region": [
+     300,
+     30,
+     450,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 215
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The horn throats crush to black and read as holes.",
+   "evidence": {
+    "region": [
+     1030,
+     270,
+     1200,
+     380
+    ],
+    "measured": "crush_pct 22.63, lum_p5 0.0"
+   },
+   "change": {
+    "setting": "lamp bounce",
+    "from": "irradiance 0.1",
+    "to": "irradiance 0.3 (same position and target)"
+   },
+   "expected": "The phase plug and throat walls show shape inside the tinted horn; the mouth stays deep green",
+   "accept": {
+    "region": [
+     1030,
+     270,
+     1200,
+     380
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The rug is a flat grey slab that fills the foreground, cut by the frame, with no pile and a CG edge.",
+   "evidence": {
+    "region": [
+     250,
+     720,
+     1200,
+     805
+    ],
+    "measured": "lum_range 76 and rgb 129/121/109: one uniform grey across 950 px; the crop shows no pile and a razor edge"
+   },
+   "change": {
+    "setting": "prop 3 rug",
+    "from": "position [0.0, -1.1], size [2.4, 1.7], tint #A89A86, value 0.5, displace 0.002, pile 0.012, tex_scale 0.35",
+    "to": "position [0.0, -0.75], size [2.6, 1.6], tint #8E8170, value 0.6, displace 0.006, pile 0.018, tex_scale 0.8"
+   },
+   "expected": "The rug sits further back and lower in frame, warmer and darker, with visible pile and a soft edge. More sunlit plank floor shows in the foreground for depth",
+   "accept": {
+    "region": [
+     250,
+     760,
+     1200,
+     805
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The plaster is a smooth CG surface; in raking sun a real wall shows trowel texture.",
+   "evidence": {
+    "region": [
+     1050,
+     30,
+     1250,
+     120
+    ],
+    "measured": "lum_range 6.1 in a shaded patch under raking light: no micro-texture"
+   },
+   "change": {
+    "setting": "prop 1 plaster",
+    "from": "bump 0.8, tex_scale 1.5",
+    "to": "bump 1.6, tex_scale 0.9"
+   },
+   "expected": "The sun patches and the speakers' shadows rake over visible, fine trowel texture; still calm enough for type",
+   "accept": {
+    "region": [
+     1050,
+     30,
+     1250,
+     120
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 10
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The far-left jamb and curtain edge make a hard dark and bright column that pulls the eye out of frame.",
+   "evidence": {
+    "region": [
+     0,
+     640,
+     180,
+     800
+    ],
+    "measured": "lum_range 123 with crush 0.45%; the left crop shows a black jamb slot beside a near-white sheer"
+   },
+   "change": {
+    "setting": "prop 12 sheer",
+    "from": "open 0.25",
+    "to": "open 0.1 (the sheer covers the jamb; the light filters through it)"
+   },
+   "expected": "A soft, luminous sheer edge on the left with no black slot, framing the room gently",
+   "accept": {
+    "region": [
+     90,
+     0,
+     155,
+     640
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The credenza's veneer reads uniform, and the turntable is small against the busy horn shadow.",
+   "evidence": {
+    "region": [
+     480,
+     500,
+     960,
+     630
+    ],
+    "measured": "lum_median 91, r/g/b 122/86/56, a uniform panel; the turntable is lost at about 130 px wide"
+   },
+   "change": {
+    "setting": "prop 2 credenza and the record player",
+    "from": "credenza lift 0.85, grain_rot 90; record player left of centre",
+    "to": "credenza lift 0.75 with a satin, slightly varied sheen; move the record player 0.15 m right, toward the frame's centre line, clear of the horn's shadow"
+   },
+   "expected": "The credenza reads as oiled walnut; the turntable sits as a clear, quiet centre accent against a cleaner patch of wall",
+   "accept": {
+    "region": [
+     480,
+     500,
+     960,
+     630
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     80,
+     100
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover visible cloth weave or depth so it does not read as a flat matte disc",
+   "why": "It is the speaker's cover material, a fixed part; it can only be helped by light (c1, c2)"
+  },
+  {
+   "request": "A lighter horn tint so the throat shows more detail",
+   "why": "The horn's tint is the speaker's fixed colour; the fill light (c4) is the only lever"
+  }
+ ],
+ "score_if_fixed": 7.5
+}

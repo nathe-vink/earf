@@ -111,20 +111,20 @@ def room_set(v):
 
 
 DEFAULT = dict(
-    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=0.8,
-    wall_tint=0.7, wall_tex_scale=1.5, socket_x=1.78,
-    veneer='walnut_veneer_02', veneer_lift=0.85, grain_rot=90.0,
-    rug='poly_wool_herringbone', rug_tex_scale=0.35, rug_tint='#A89A86', rug_tint_mix=1.0, rug_pos=[0.0, -1.1],
-    rug_size=[2.4, 1.7], rug_displace=0.002, rug_pile=0.012, rug_res='4k', rug_value=0.5,
+    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=1.1,
+    wall_tint=0.7, wall_tex_scale=1.2, socket_x=1.78,
+    veneer='walnut_veneer_02', veneer_lift=0.75, grain_rot=90.0,
+    rug='poly_wool_herringbone', rug_tex_scale=0.8, rug_tint='#8E8170', rug_tint_mix=1.0, rug_pos=[0.0, -1.0],
+    rug_size=[2.6, 1.6], rug_displace=0.006, rug_pile=0.018, rug_res='4k', rug_value=0.6,
     chair='modern_arm_chair_01', chair_pos=[2.35, -1.6, 0.0], chair_rot=300.0, leather='#8A7460',
     hdri='autumn_forest_04', hdri_rot=116.0, ext_strength=2.6, ext_blur=0.0,
-    # concept B (pass r7): linen sheers drawn across the glazing (all but its back corner, which keeps the view out); the
-    # late sun through them is a broad soft source from the left, a quarter of it straight through (soft shafts, the
-    # horns' green light on the plaster)
-    sheers=[(-0.25, 0.8), (-1.4, 1.7), (-3.45, 1.7)], drape_off=True, sheer_open=0.25,
-    sun=dict(azimuth_deg=-62.0, elevation_deg=14.0, irradiance=30.0, angle_deg=0.6, color='#FFE4C8'),
-    sky_strength=0.6, fill=0.45, fill_color='#DCE6F4', bounce=0.1, bounce_pos=[-2.0, -3.8, 1.8], floor_bounce=0.15,
-    exposure=-0.5, wb=5500, wb_tint=0.0,
+    # concept B (passes r7, r8): linen sheers drawn across the glazing but for two gaps, one where the late sun's beam to
+    # each speaker comes in (and the back corner, which keeps the view out): the pair stands in two shafts of sun, the
+    # rest of the room in the soft light the sheers make of the rest of it
+    sheers=[(-0.775, 0.75), (-2.95, 2.5)], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=0.42, vase_x=0.62,
+    sun=dict(azimuth_deg=-62.0, elevation_deg=14.0, irradiance=34.0, angle_deg=0.6, color='#FFE4C8'),
+    sky_strength=0.6, fill=0.8, fill_color='#D2E0F4', bounce=0.3, bounce_pos=[-2.0, -3.8, 1.8], floor_bounce=0.15,
+    exposure=-0.75, wb=5500, wb_tint=0.0,
 )
 
 
@@ -160,6 +160,12 @@ def shot(v=None, portrait=False):
             # read as resin and not as holes
             'bounce': {'type': 'area', 'size_m': [1.6, 1.2], 'position': v.get('bounce_pos', [0.0, SPK_Y - 4.6, 1.5]),
                        'target': [0.0, SPK_Y, 1.15], 'irradiance': v.get('bounce', 0.35), 'color': '#FFF0DE'},
+            # a kicker hidden behind each speaker, as an interiors photographer would hide one (and what the sunlit plaster
+            # behind would bounce): it lights the batts through the acrylic, so the cabinets glow as the material does
+            **{f'kick{k}': {'type': 'area', 'size_m': [0.42, 0.7], 'position': [sx * SPK_X, SPK_Y + 0.32, 0.62],
+                            'target': [sx * SPK_X, SPK_Y - 1.0, 0.62], 'irradiance': v.get('kick', 0.0), 'color': '#FFF2E0',
+                            'specular': 0, 'transmission': False}
+               for k, sx in (('L', -1), ('R', 1)) if v.get('kick', 0) > 0},
             # light the floor bounces up under the credenza (a real room's toe-kick is never a black hole)
             'floorbounce': {'type': 'area', 'size_m': [0.8, 0.3], 'position': [0.0, -1.0, 0.1], 'target': [0.0, 0.7, 0.05],
                             'irradiance': v.get('floor_bounce', 0.0), 'color': '#FFE8CC'},
