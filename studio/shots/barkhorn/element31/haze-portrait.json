@@ -23,7 +23,7 @@
    {
     "kind": "kit",
     "shape": "ground",
-    "texture": "brown_mud_dry",
+    "texture": "farm_soil",
     "size": [
      14.0,
      22.0
@@ -33,8 +33,8 @@
      5.0,
      0.0
     ],
-    "displace": 0.012,
-    "res": "2k",
+    "displace": 0.015,
+    "res": "4k",
     "cells": 700,
     "relief": null
    },
@@ -170,7 +170,7 @@
     "shape": "asset",
     "model": "island_tree_01",
     "position": [
-     16.0,
+     52.0,
      240.0,
      0.0
     ],
@@ -210,12 +210,12 @@
     "shape": "ext",
     "module": "haze_el",
     "fn": "sun",
-    "azimuth_deg": 187.0,
+    "azimuth_deg": 188.0,
     "elevation_deg": 2.4,
     "distance": 20000.0,
     "diameter_deg": 0.55,
-    "strength": 35.0,
-    "color": "#FF9A55"
+    "strength": 45.0,
+    "color": "#FF7A3A"
    }
   ]
  },
@@ -236,8 +236,107 @@
     0.0,
     0.7
    ],
-   "irradiance": 2.2,
+   "irradiance": 1.5,
    "color": "#F0CDB2",
+   "receivers": [
+    "[!p]*",
+    "po*"
+   ]
+  },
+  "through": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 188,
+    "elevation_deg": 14,
+    "distance_m": 2.5
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 6.0,
+   "color": "#FFB070",
+   "camera": false,
+   "receivers": [
+    "[!p]*",
+    "po*"
+   ]
+  },
+  "rim_l": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": -140,
+    "elevation_deg": 6,
+    "distance_m": 2.2
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 5.0,
+   "color": "#FFB98A",
+   "camera": false,
+   "specular": 0,
+   "receivers": [
+    "[!p]*",
+    "po*"
+   ]
+  },
+  "rim_r": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": 145,
+    "elevation_deg": 6,
+    "distance_m": 2.2
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 4.0,
+   "color": "#F5B0A0",
+   "camera": false,
+   "specular": 0,
+   "receivers": [
+    "[!p]*",
+    "po*"
+   ]
+  },
+  "card": {
+   "type": "panel",
+   "size_m": [
+    1.5,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -2.0,
+    1.15
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.15
+   ],
+   "strength": 0.5,
+   "color": "#C9B3C9",
+   "diffuse": 0,
+   "specular": 1,
    "receivers": [
     "[!p]*",
     "po*"
@@ -287,29 +386,29 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "the_sky_is_on_fire",
-  "rotation_deg": -158.0,
-  "strength": 1.0,
+  "rotation_deg": -157.0,
+  "strength": 0.85,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 187.0,
+  "azimuth_deg": 188.0,
   "elevation_deg": 2.4,
-  "irradiance": 8.0,
-  "angle_deg": 1.0,
+  "irradiance": 22.0,
+  "angle_deg": 0.6,
   "color": "#FEA450"
  },
  "finish": {
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.05,
+  "contrast": 0.18,
   "clarity": 0.04,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.15,
+   "bloom": 0.3,
    "bloom_px": 40,
-   "bloom_threshold": 0.9,
+   "bloom_threshold": 0.85,
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
@@ -323,10 +422,10 @@
    0.0,
    8000.0,
    8000.0,
-   300.0
+   45.0
   ],
-  "density": 0.00025,
-  "anisotropy": 0.35,
-  "color": "#D8CCEA"
+  "density": 0.0004,
+  "anisotropy": 0.45,
+  "color": "#E6C9D6"
  }
 }
