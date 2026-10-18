@@ -1,5 +1,5 @@
 {
- "title": "barkhorn, the eight Clouds in a row",
+ "title": "barkhorn, the eight Clouds in a row (bright field)",
  "size": [
   2880,
   1200
@@ -108,35 +108,59 @@
  },
  "set": {
   "kind": "sweep",
-  "color": "#0F0F11",
-  "width": 30.0,
-  "front": 14.0,
-  "depth": 5.6,
+  "color": "#F3F1EE",
+  "width": 44.0,
+  "front": 20.0,
+  "depth": 6.0,
   "radius": 5.0,
   "height": 9.0,
   "contact": {
-   "strength": 0.35,
-   "distance_m": 0.08,
-   "core_strength": 0.7,
-   "core_distance_m": 0.008
-  }
+   "strength": 0.8,
+   "distance_m": 0.35,
+   "core_strength": 0.9,
+   "core_distance_m": 0.04
+  },
+  "flags": [],
+  "bounces": [
+   {
+    "center_m": [
+     0.0,
+     -2.6,
+     0.6
+    ],
+    "size_m": [
+     9.0,
+     1.0
+    ],
+    "normal": [
+     0.0,
+     0.95,
+     0.15
+    ]
+   }
+  ]
  },
  "camera": {
   "position": [
    0.0,
    -14.0,
-   1.15
+   0.85
   ],
   "target": [
    0.0,
    0.0,
-   0.56
+   0.6
   ],
   "lens_mm": 64.0,
   "level": true
  },
  "sky": {
-  "kind": "none"
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
  },
  "render": {
   "samples": 80,
@@ -146,8 +170,8 @@
   "bounces": 16,
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
-  "white_balance_k": 5800,
-  "white_balance_tint": 0.0
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
  },
  "finish": {
   "enabled": true,
@@ -160,132 +184,105 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.14
+   "roughness": 0.5
   }
  },
  "lights": {
-  "key": {
+  "bg-left": {
    "type": "area",
    "size_m": [
     8.0,
+    3.0
+   ],
+   "position": [
+    -4.5,
+    3.2,
+    3.4
+   ],
+   "target": [
+    -3.0,
+    6.0,
+    1.0
+   ],
+   "irradiance": 3.0,
+   "color": "#FFF4E8",
+   "camera": false,
+   "specular": 0.0
+  },
+  "bg-right": {
+   "type": "area",
+   "size_m": [
+    8.0,
+    3.0
+   ],
+   "position": [
+    4.5,
+    3.2,
+    3.4
+   ],
+   "target": [
+    3.0,
+    6.0,
+    1.0
+   ],
+   "irradiance": 4.2,
+   "color": "#FFF4E8",
+   "camera": false,
+   "specular": 0.0
+  },
+  "scrim": {
+   "type": "area",
+   "size_m": [
+    9.0,
     1.6
    ],
    "position": [
-    -1.4,
-    -3.6,
+    0.0,
+    0.4,
     2.8
    ],
    "target": [
     0.0,
     0.0,
-    0.6
+    0.8
    ],
-   "irradiance": 1.0,
-   "color": "#FFF6EC",
-   "spread_deg": 80,
-   "camera": false,
-   "receivers": [
-    "*#0",
-    "*#1",
-    "*#2",
-    "*#3",
-    "*#4",
-    "*#5",
-    "*#6",
-    "*#7"
-   ]
+   "irradiance": 1.6,
+   "color": "#FFFAF4",
+   "camera": false
   },
-  "back": {
+  "key": {
    "type": "area",
    "size_m": [
-    9.0,
-    0.6
-   ],
-   "position": [
-    0.0,
-    1.5,
-    0.45
-   ],
-   "target": [
-    0.0,
-    -2.0,
-    0.42
-   ],
-   "irradiance": 6.0,
-   "color": "#FFF4E6",
-   "spread_deg": 90,
-   "camera": false,
-   "specular": 0.0
-  },
-  "glow": {
-   "type": "area",
-   "size_m": [
-    7.0,
-    0.3
-   ],
-   "position": [
-    0.0,
-    0.6,
-    0.3
-   ],
-   "target": [
-    0.0,
-    4.0,
+    6.0,
     1.6
    ],
-   "spread_deg": 110,
-   "power_w": 2400.0,
-   "color": "#FFF1E2",
-   "camera": false,
-   "specular": 0.0
-  },
-  "strip-top": {
-   "type": "panel",
-   "size_m": [
-    9.0,
-    0.4
-   ],
-   "position": [
-    0.0,
-    0.35,
-    3.1
-   ],
    "target": [
     0.0,
     0.0,
-    0.9
+    0.6
    ],
-   "strength": 3.0,
-   "diffuse": 0.2,
+   "irradiance": 3.2,
+   "color": "#FFFAF4",
+   "camera": false,
    "specular": 1.0,
-   "receivers": [
-    "*#0",
-    "*#1",
-    "*#2",
-    "*#3",
-    "*#4",
-    "*#5",
-    "*#6",
-    "*#7"
+   "position": [
+    -1.6,
+    -3.4,
+    3.0
    ]
   },
-  "sheen": {
+  "front-strip": {
    "type": "panel",
    "size_m": [
     9.0,
-    1.4
-   ],
-   "position": [
-    -0.6,
-    -3.6,
-    2.6
+    0.5
    ],
    "target": [
     0.0,
     0.0,
-    0.9
+    0.6
    ],
-   "strength": 1.5,
+   "strength": 4.0,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -301,14 +298,39 @@
    "ramp": {
     "axis": "z",
     "at_m": [
-     2.0,
-     3.3
+     1.65,
+     2.15
     ],
     "values": [
-     0.15,
+     0.0,
      1.0
     ]
-   }
+   },
+   "position": [
+    0.0,
+    -3.0,
+    1.9
+   ]
+  },
+  "back-top": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    1.2
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.45
+   ],
+   "irradiance": 10.0,
+   "color": "#FFF8F0",
+   "camera": false,
+   "position": [
+    0.0,
+    2.5,
+    0.8
+   ]
   }
  }
 }

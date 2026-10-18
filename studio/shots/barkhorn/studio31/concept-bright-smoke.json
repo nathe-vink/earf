@@ -25,27 +25,27 @@
  "set": {
   "kind": "sweep",
   "color": "#F3F1EE",
-  "width": 24.0,
-  "front": 14.0,
-  "depth": 4.0,
-  "radius": 3.0,
+  "width": 44.0,
+  "front": 20.0,
+  "depth": 6.0,
+  "radius": 5.0,
   "height": 9.0,
   "contact": {
-   "strength": 1.0,
-   "distance_m": 0.6,
-   "core_strength": 1.0,
-   "core_distance_m": 0.025
+   "strength": 0.8,
+   "distance_m": 0.35,
+   "core_strength": 0.9,
+   "core_distance_m": 0.04
   },
   "flags": [
    {
     "center_m": [
      -1.4,
      0.6,
-     1.6
+     1.2
     ],
     "size_m": [
      1.2,
-     1.8
+     1.4
     ],
     "normal": [
      1.0,
@@ -121,8 +121,8 @@
   "bounces": 16,
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
-  "white_balance_k": 5750,
-  "white_balance_tint": 2.0
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
  },
  "finish": {
   "enabled": true,
@@ -147,13 +147,13 @@
    ],
    "position": [
     -2.6,
-    1.2,
-    2.4
+    3.2,
+    3.4
    ],
    "target": [
     -1.5,
-    4.0,
-    1.4
+    6.0,
+    1.2
    ],
    "irradiance": 3.0,
    "color": "#FFF4E8",
@@ -168,13 +168,13 @@
    ],
    "position": [
     2.6,
-    1.2,
-    2.4
+    3.2,
+    3.4
    ],
    "target": [
     -0.9,
-    4.0,
-    0.8
+    6.0,
+    1.0
    ],
    "irradiance": 4.2,
    "color": "#FFF4E8",
@@ -204,12 +204,12 @@
   "key": {
    "type": "area",
    "size_m": [
-    2.4,
-    2.4
+    1.6,
+    1.6
    ],
    "orbit": {
     "azimuth_deg": -30,
-    "elevation_deg": 30,
+    "elevation_deg": 38,
     "distance_m": 4.5
    },
    "target": [
@@ -217,7 +217,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 2.0,
+   "irradiance": 3.2,
    "color": "#FFFAF4",
    "camera": false,
    "specular": 1.0
@@ -259,20 +259,20 @@
   "back-top": {
    "type": "area",
    "size_m": [
-    1.2,
-    1.6
+    1.6,
+    1.2
    ],
    "orbit": {
     "azimuth_deg": 180,
-    "elevation_deg": 15,
+    "elevation_deg": 8,
     "distance_m": 2.5
    },
    "target": [
     0.0,
     0.0,
-    0.55
+    0.45
    ],
-   "irradiance": 6.0,
+   "irradiance": 10.0,
    "color": "#FFF8F0",
    "camera": false
   }

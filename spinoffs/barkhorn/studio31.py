@@ -126,34 +126,34 @@ def bright(name):
     mirrors a gradient and not black."""
     # cover off: the duel against h7 (round 31c) read the cover's flat disc as a placeholder
     s = {'title': f'barkhorn, {name}, bright field', 'size': [2560, 1440], 'product': product(name),
-         'set': {'kind': 'sweep', 'color': '#F3F1EE', 'width': 24.0, 'front': 14.0, 'depth': 4.0, 'radius': 3.0, 'height': 9.0,
-                 'contact': {'strength': 1.0, 'distance_m': 0.6, 'core_strength': 1.0, 'core_distance_m': 0.025},
-                 'flags': [{'center_m': [-1.4, 0.6, 1.6], 'size_m': [1.2, 1.8], 'normal': [1.0, -0.2, 0.0], 'glossy': True},
+         'set': {'kind': 'sweep', 'color': '#F3F1EE', 'width': 44.0, 'front': 20.0, 'depth': 6.0, 'radius': 5.0, 'height': 9.0,
+                 'contact': {'strength': 0.8, 'distance_m': 0.35, 'core_strength': 0.9, 'core_distance_m': 0.04},
+                 'flags': [{'center_m': [-1.4, 0.6, 1.2], 'size_m': [1.2, 1.4], 'normal': [1.0, -0.2, 0.0], 'glossy': True},
                            {'center_m': [1.0, 2.1, 1.15], 'size_m': [0.9, 2.0], 'normal': [-0.45, -0.89, 0.0], 'glossy': True}],
                  'bounces': [{'center_m': [0.4, -2.2, 0.6], 'size_m': [2.0, 1.0], 'normal': [-0.15, 0.95, 0.1]}]},
          'camera': dict(CAM34), 'sky': {'kind': 'gradient', 'zenith': '#F2F1EF', 'horizon': '#EEEDEB', 'ground': '#CFCCC8',
                                        'strength': 0.6, 'visible': False},
-         'render': dict(RENDER, white_balance_k=5750, white_balance_tint=2.0), 'finish': dict(FINISH),
+         'render': dict(RENDER, white_balance_k=5900, white_balance_tint=7.0), 'finish': dict(FINISH),
          'materials': {'sweep': {'roughness': 0.5}}}
     s['lights'] = {
         # the background: two broad lamps on the cove behind, out of frame, lifting it to a clean high-key white
-        'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 1.2, 2.4], 'target': [-1.5, 4.0, 1.4],
+        'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 3.2, 3.4], 'target': [-1.5, 6.0, 1.2],
                     'irradiance': 3.0, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
-        'bg-right': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [2.6, 1.2, 2.4], 'target': [-0.9, 4.0, 0.8],
+        'bg-right': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [2.6, 3.2, 3.4], 'target': [-0.9, 6.0, 1.0],
                      'irradiance': 4.2, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
         # a big scrim overhead, a little forward: the top and the horn's crown
         'scrim': {'type': 'area', 'size_m': [2.0, 1.6], 'position': [0.1, 0.4, 2.8], 'target': [0.0, 0.0, 0.8],
                   'irradiance': 1.6, 'color': '#FFFAF4', 'camera': False},
         # a soft frontal key from the camera's side, low in strength: the faces carry their colour, not a white sheet
-        'key': {'type': 'area', 'size_m': [2.4, 2.4], 'orbit': {'azimuth_deg': -30, 'elevation_deg': 30, 'distance_m': 4.5},
-                'target': [0.0, 0.0, 0.6], 'irradiance': 2.0, 'color': '#FFFAF4', 'camera': False, 'specular': 1.0},
+        'key': {'type': 'area', 'size_m': [1.6, 1.6], 'orbit': {'azimuth_deg': -30, 'elevation_deg': 38, 'distance_m': 4.5},
+                'target': [0.0, 0.0, 0.6], 'irradiance': 3.2, 'color': '#FFFAF4', 'camera': False, 'specular': 1.0},
         # a graduated strip the front face mirrors, so it reads as polished cast acrylic
         'front-strip': {'type': 'panel', 'size_m': [0.4, 2.0], 'orbit': {'azimuth_deg': -25, 'elevation_deg': 22, 'distance_m': 3.0},
                         'target': [0.0, 0.0, 0.6], 'strength': 4.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
                         'ramp': {'axis': 'z', 'at_m': [0.2, 1.8], 'values': [0.0, 1.0]}},
         # a smaller, harder lamp high behind, so the tinted acrylic throws its colour forward onto the seamless
-        'back-top': {'type': 'area', 'size_m': [1.2, 1.6], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 15, 'distance_m': 2.5},
-                     'target': [0.0, 0.0, 0.55], 'irradiance': 6.0, 'color': '#FFF8F0', 'camera': False},
+        'back-top': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 8, 'distance_m': 2.5},
+                     'target': [0.0, 0.0, 0.45], 'irradiance': 10.0, 'color': '#FFF8F0', 'camera': False},
     }
     return s
 
@@ -243,19 +243,59 @@ def lineup():
     return s
 
 
+def macro_bright(key, name, rotate, cam, target, lens):
+    """A detail in the bright-field studio (round 31c): the hero's light, the camera close."""
+    s = bright(name)
+    s['title'] = f'barkhorn, {name}, detail: {key} (bright field)'
+    s['size'] = [1600, 1600]
+    s['product'] = product(name, rotate=rotate)
+    s['camera'] = {'position': cam, 'target': target, 'lens_mm': lens, 'level': False}
+    return s
+
+
+def lineup_bright():
+    """The eight in a row in the bright-field studio: the hero's light stretched along the row, the flags and the
+    background lamps moved out to its ends."""
+    s = bright('ember')
+    s['title'] = 'barkhorn, the eight Clouds in a row (bright field)'
+    s['size'] = [2880, 1200]
+    xs = [(i - 3.5) * GAP for i in range(8)]
+    s['product'] = {'def': PRODUCT, 'flavour': COLOURS[0][1],
+                    'instances': [{'position': [x, 0, 0], 'rotate_z': -24.0, 'flavour': fl, 'hide': ['cloth-disc']}
+                                  for x, (n, fl) in zip(xs, COLOURS)]}
+    s['camera'] = {'position': [0.0, -14.0, 0.85], 'target': [0.0, 0.0, 0.6], 'lens_mm': 64.0, 'level': True}
+    st = s['set']
+    st['flags'] = []
+    st['bounces'] = [{'center_m': [0.0, -2.6, 0.6], 'size_m': [9.0, 1.0], 'normal': [0.0, 0.95, 0.15]}]
+    recv = [f'*#{i}' for i in range(8)]
+    L = s['lights']
+    L['bg-left'].update(size_m=[8.0, 3.0], position=[-4.5, 3.2, 3.4], target=[-3.0, 6.0, 1.0])
+    L['bg-right'].update(size_m=[8.0, 3.0], position=[4.5, 3.2, 3.4], target=[3.0, 6.0, 1.0])
+    L['scrim'].update(size_m=[9.0, 1.6], position=[0.0, 0.4, 2.8])
+    L['key'].update(size_m=[6.0, 1.6], orbit=None, position=[-1.6, -3.4, 3.0], target=[0.0, 0.0, 0.6])
+    L['key'].pop('orbit')
+    L['back-top'].update(size_m=[9.0, 1.2], orbit=None, position=[0.0, 2.5, 0.8], target=[0.0, 0.0, 0.45])
+    L['back-top'].pop('orbit')
+    L['front-strip'].update(size_m=[9.0, 0.5], orbit=None, position=[0.0, -3.0, 1.9], target=[0.0, 0.0, 0.6], receivers=recv,
+                            ramp={'axis': 'z', 'at_m': [1.65, 2.15], 'values': [0.0, 1.0]})
+    L['front-strip'].pop('orbit')
+    return s
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     made = {}
     for name, _ in COLOURS:
         made[f'hero-dark-{name}'] = hero(name, True)
-    for name in LIGHT_ONES:
-        made[f'hero-light-{name}'] = hero(name, False)
-    made['lineup'] = lineup()
+    # round 31c: the studio set is bright field (it won its duel); the dark set stays as h7's record, unrendered
+    for name, _ in COLOURS:
+        made[f'hero-light-{name}'] = bright(name)
+    made['lineup'] = lineup_bright()
     for name in ('ember', 'ice', 'smoke'):
         made[f'concept-bright-{name}'] = bright(name)
         made[f'concept-darkfield-{name}'] = darkfield(name)
     for m in MACROS:
-        made[f'macro-{m[0]}-{m[1]}'] = macro(*m)
+        made[f'macro-{m[0]}-{m[1]}'] = macro_bright(*m)
     for n, sh in made.items():
         json.dump(sh, open(os.path.join(OUT, n + '.json'), 'w'), indent=1)
     print(len(made), 'shots in', os.path.relpath(OUT, ROOT))
