@@ -42,11 +42,23 @@ def woodsmoke(bpy, name, p, kit):
         nz.inputs['Roughness'].default_value = p.get('roughness', 0.62)
     nz.inputs['Distortion'].default_value = p.get('distortion', 0.35)
     nt.links.new(mp.outputs['Vector'], nz.inputs['Vector'])
+    fac = nz.outputs['Fac']
+    if p.get('detail_weight'):
+        # a second, finer octave (curling wisps over the billows), added about its mean
+        nz2 = nt.nodes.new('ShaderNodeTexNoise')
+        nz2.inputs['Scale'].default_value = 1.0 / p.get('detail_scale', 0.2)
+        nz2.inputs['Detail'].default_value = 4.0; nz2.inputs['Distortion'].default_value = 1.2
+        nt.links.new(mp.outputs['Vector'], nz2.inputs['Vector'])
+        sub = nt.nodes.new('ShaderNodeMath'); sub.operation = 'SUBTRACT'; sub.inputs[1].default_value = 0.5
+        nt.links.new(nz2.outputs['Fac'], sub.inputs[0])
+        add = nt.nodes.new('ShaderNodeMath'); add.operation = 'MULTIPLY_ADD'; add.inputs[1].default_value = p['detail_weight']
+        nt.links.new(sub.outputs[0], add.inputs[0]); nt.links.new(fac, add.inputs[2])
+        fac = add.outputs[0]
     ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp
     cut = p.get('cut', 0.5); soft = p.get('soft', 0.18)
     cr.elements[0].position = cut; cr.elements[0].color = (0, 0, 0, 1)
     cr.elements[1].position = min(0.999, cut + soft); cr.elements[1].color = (1, 1, 1, 1)
-    nt.links.new(nz.outputs['Fac'], ramp.inputs['Fac'])
+    nt.links.new(fac, ramp.inputs['Fac'])
     # fade toward the top and the sides (generated coords run 0..1 across the box)
     gen = tc.outputs['Generated']
     sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(gen, sep.inputs['Vector'])
