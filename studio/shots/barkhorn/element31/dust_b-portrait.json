@@ -719,7 +719,12 @@
   "polyhaven": "qwantani_late_afternoon_puresky",
   "rotation_deg": 300.0,
   "strength": 0.8,
-  "res": "4k"
+  "res": "4k",
+  "grade": {
+   "horizon": "#B4C8EA",
+   "zenith": "#C9D8F2",
+   "height_deg": 14.0
+  }
  },
  "sun": {
   "azimuth_deg": 113.9,

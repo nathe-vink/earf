@@ -91,7 +91,8 @@ def _cam(**k):
 
 
 def shot():
-    return frame('dust', props(), _cam(), sky(HDRI, ROT, strength=float(os.environ.get('DUSTB_SKY', 0.8)), res='4k'),
+    return frame('dust', props(), _cam(), dict(sky(HDRI, ROT, strength=float(os.environ.get('DUSTB_SKY', 0.8)), res='4k'),
+                      grade={'horizon': '#B4C8EA', 'zenith': '#C9D8F2', 'height_deg': 14.0}),
                  'barkhorn, Dust, Monument Valley in the afternoon', lights=lights(),
                  sun=sun_from_sky(HDRI, ROT, irradiance=float(os.environ.get('DUSTB_SUN', 9.0)), angle_deg=0.53, color='#FFC98E'),
                  fin=finish(contrast=0.08, clarity=0.05, saturation=0.04, vignette=0.12),
