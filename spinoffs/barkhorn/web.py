@@ -884,7 +884,7 @@ __HABITATS__
   <section class="band room" id="room"><div class="wrap">
     <div class="head"><div><p class="eyebrow">At home</p><h2>A pair in Poison.</h2></div></div>
     <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
-      <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 560 mm.</span></figcaption></figure>
+      <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>The sideboard between them is 560 mm high.</span></figcaption></figure>
   </div></section>
 
   <section class="band spec" id="spec"><div class="wrap">
