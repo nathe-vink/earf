@@ -1,0 +1,195 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "eucalyptus-y2k-green",
+  "instances": [
+   {
+    "flavour": "eucalyptus-y2k-green",
+    "position": [
+     0,
+     0,
+     0.08
+    ],
+    "rotate_z": 0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     0.0,
+     1.25,
+     0.0
+    ],
+    "size": [
+     9.0,
+     0.5,
+     7.0
+    ],
+    "color": "#A6A29A",
+    "board_m": 0.14,
+    "board_vary": 0.09,
+    "grain": 1.0,
+    "joint": 1.0,
+    "ties": [
+     0.6,
+     0.56
+    ],
+    "stain": 0.8,
+    "roughness": 0.88,
+    "relief": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "paving",
+    "position": [
+     0.0,
+     -1.5,
+     0.0
+    ],
+    "size": [
+     12.0,
+     9.0
+    ],
+    "flag": [
+     1.2,
+     0.6
+    ],
+    "color": "#4A4844",
+    "wet": 0.25,
+    "puddle_m": 1.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "size": [
+     0.66,
+     0.53,
+     0.08
+    ],
+    "material": "clay",
+    "color": "#141415",
+    "roughness": 0.45,
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "position": [
+     0.0,
+     0.0,
+     0.078
+    ],
+    "size": [
+     0.6200000000000001,
+     0.49,
+     0.003
+    ],
+    "material": "glow",
+    "color": "#FFF2DE",
+    "emit": 1.2,
+    "shadow": false
+   }
+  ]
+ },
+ "sky": {
+  "kind": "none"
+ },
+ "lights": {
+  "up": {
+   "type": "spot",
+   "position": [
+    0.0,
+    0.0,
+    0.084
+   ],
+   "target": [
+    0.0,
+    0.05,
+    3.08
+   ],
+   "cone_deg": 100,
+   "blend": 0.5,
+   "radius_m": 0.12,
+   "power_w": 40000.0,
+   "color": "#FFF2DE"
+  },
+  "moon": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    2.0
+   ],
+   "position": [
+    -2.5,
+    -6.0,
+    6.0
+   ],
+   "target": [
+    0.0,
+    1.0,
+    1.2
+   ],
+   "irradiance": 0.3,
+   "color": "#D4DCF2"
+  }
+ },
+ "haze": {
+  "box_m": [
+   -6.0,
+   -6.0,
+   -0.05,
+   6.0,
+   0.98,
+   6.5
+  ],
+  "density": 0.012,
+  "anisotropy": 0.3
+ },
+ "camera": {
+  "position": [
+   0.3,
+   -2.45,
+   0.6
+  ],
+  "target": [
+   0.04,
+   0.5,
+   1.75
+  ],
+  "lens_mm": 22.0,
+  "level": true
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.6,
+  "white_balance_k": 5600,
+  "white_balance_tint": 0.0
+ },
+ "size": [
+  1600,
+  1600
+ ],
+ "title": "barkhorn, Poison, uplit (under) before a concrete wall"
+}
