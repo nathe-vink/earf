@@ -55,7 +55,8 @@ pass 9's rig with pass 6's standing depth (the hollow 16 cm deep, the speaker at
 
 - `renders/2026-10-18/barkhorn/element31/acid_b.png` (2400 x 1600, 512 samples, denoised): 98 min render + 3 min build
   on the container's CPU. 3.7 MB.
-- `acid_b-portrait.png` (1600 x 2000, the same set re-framed: 85 mm from 6 m, the same height and light).
+- `acid_b-portrait.png` (1600 x 2000, 512 samples, the same set re-framed: 85 mm from 6 m, the same height and light):
+  86 min render + 3 min build. 3.0 MB. Both finals carry the re-grade below.
 
 The blind critic on the landscape final: **6.5** ("a strong idea that reads at once ... the mood and the reflection
 work, but it still reads as CG"), `critic-acid_b/pass-final.json`.
