@@ -204,3 +204,29 @@ contact or cast shadow in frame, the rock is soft up close, and the birds are sp
 0.5. Pass 6 gained 0 and pass 7 lost 0.5, so I stopped here.
 
 Scores, pass by pass: 5.0, 5.5, 5.5 (then the concept change), 5.0, 5.5, 5.5, 5.0.
+
+## The duel and the finals
+
+**Blind duel** (critic/ab/PROMPT-DUEL.txt, a fresh agent, the frames named A and B with the key kept elsewhere):
+
+| Frame | Rig | Score |
+|---|---|---|
+| A | pass 6 (r6): low backlight, speaker on the left third | 5.8 |
+| B | pass 5 (r5): raking sun from the front right, deep blue sky | **6.4, preferred** |
+
+The judge preferred B for:
+- the woofer and tweeter reading as real drivers;
+- a clean white interior behind clear edges;
+- warm, key-lit rock with grain;
+- a deeper sky that separates the silhouette;
+- a stronger hero layout.
+
+A's softer clouds were the one thing in its favour.
+
+**The finals' rig** is pass 5's (`fog.py` as at dcbb4ff), with one change: the birds moved up and right, off the horn,
+which pass 5's critic flagged as a defect. The 4:5 frame keeps the same place and turns, on a 100 mm lens aimed a
+little higher; the speaker fills 42 % of its height.
+
+**Samples:** the finals render at 256 samples with the denoiser, not the brief's 512 to 1024. The near cloud deck is a
+procedural volume: at 128 samples a half-size proof took 23 minutes, so 512 at full size would be about 6 hours a frame
+on this 4-core machine. 256 is about 3 hours, and the denoiser cleans the volume's noise.
