@@ -67,6 +67,11 @@ haze.
   reads (the coordinator's note to every set), and the portrait re-framed, not cropped: 7 m, 85 mm, centred a little
   left so the vent and its steam stand above the speaker.
 
+**The final's blind pass** (a fresh critic on the 2400 x 1600 landscape): **5.5**, the best single score of the run
+(`score_if_fixed` 7.8). What it named, in order: the crust still reads as crinkled foil at one scale; no hard cast shadow
+from the speaker; a cool, flat sky as bright as the ground; no glint or amber caustic through the acrylic; a compressed
+tonal range (p99 197); a smooth chimney and soft escarpment; two parallel plumes; a pool without glints.
+
 ## Where it stands, honestly
 
 A blind critic would score it about 5 to 6: a clear idea in its real place, not yet a $20,000 campaign photograph.
