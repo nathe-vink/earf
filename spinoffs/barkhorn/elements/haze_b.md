@@ -49,3 +49,23 @@ standing out from it.
 |---|---|---|---|---|---|---|
 | 1 | 0.5, 128 | 5.5 | 7.5 | iterate | sun not behind the speaker, so nothing glows; tall grass veils its base; nearest range a smooth mound with toy trees; ranges merge into one wash; set as lilac as the speaker (white balance 4800 K, tint 6); a weak white sun; a murky front (bounce 3.5 at 3.5 m, warmer); flat grass | All eight: sun, disk and sky turned to sit at the horn's left shoulder (azimuth 166.6, sky 246.4), sun 14, disk 40 and warmer, bloom 0.2; tall grass kept 4 m clear on the camera side, short grass 4 to 15 cm round the feet; trees off the nearest range, which now carries dry grass at its true scale (darkened, a first try left it a pale dune); haze 0.0035 to 4 m and 0.0004 above, anisotropy 0.6/0.8; white balance 4800 K / 6; bounce as prescribed; grass with bleached tips and ±15 % per strand, clarity 0.1 |
 | 2 | 0.5, 128 | 5.5 | 7.0 | iterate | nothing glows through the acrylic: the cabinet dark and pasted on (sun behind the horn, 24; bounce 7); grass pale mauve hair (darker, warmer straw, varied strands); white balance 5000 K / 0; sky blown (strength 0.75); hills a miniature (haze 0.0055, shrubs off range 2); contact at the feet (denser short grass); sun disk clipped (18, bloom 0.3) | The same score twice, so the systemic faults first. The critic's sun azimuth (172) pointed the wrong way: the horn is 2 degrees right of the disk, so the sun went to 164.5, elevation 1.5, where the horn hides it and rims its top. All the rest as prescribed; the grass now four systems (fine, coarse, short, a ring at the feet) in a darker straw (#5A4834/#33291F, bleached tips, ±30 % per strand); a first try at coarse grass (0.7 m) towered over the frame and was cut to 0.45 m |
+| 3 | 0.5, 128 | 5.5 | 7.5 | iterate | the acrylic does not glow (sun 40, bounce 11); a cleared ring round the feet; the sun tangent to the horn; ranges collapse into one band; a flat pink sky; the hills smooth CG mounds with miniature trees; the grass an even hair system; a smear in the horn | **Changed the concept, not the settings**: three passes at 5.5, and every critic named the same faults in the modelled ranges and the sky. See below. |
+
+### The concept changed after pass 3
+
+Three blind critics in a row scored 5.5 whatever the light did, and each named the modelled ranges (smooth mounds,
+miniature trees, one band of haze) and the plain sky. Those were the parts I had built, and no setting was going to
+make a noise heightfield read as a mountain range. So the ranges are now photographed: Poly Haven `kiara_9_dusk`
+(CC0, 8k for proofs and finals), real mountains at dusk with the sun just gone behind them, turned so its glow sits
+left of the speaker (rotation -118, sun azimuth 168, elevation 4.2, matched by `sun_from_sky` at irradiance 2.5). What
+stays modelled is only what the camera is close to: the near ridge, the dry grass and the speaker. A single veil of
+lavender haze (0.0012/m, anisotropy 0.75) between them and the photograph puts the violet in the ranges and a glow
+round the sun.
+
+Two lessons on the way, both about the haze box:
+- **The camera's clip (300 m) must hold the box's far wall.** With the wall at 290 to 300 m, rays angled more than a
+  couple of degrees off the axis reached it beyond the clip, never found their exit and took no haze, which left a
+  hard vertical seam down the frame. The wall now stands at 200 m. (The passes 1 to 3 boxes ran to 300 m, so their
+  haze was cut the same way wherever no hill stopped the ray first.)
+- **The bounce card stands beside the camera now** (11.5 m out, irradiance 10), as a reflector would, not in the
+  frame's left third.
