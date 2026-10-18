@@ -92,3 +92,14 @@ and 9 duels the ceiling these judges hold to is the product as it stands (the in
 horn's black driver, smooth uniform materials), named out of scope in nearly every reply. Next round, if wanted, from
 the set pass: a denser contact shadow and a floor a shade darker than the wall; flags for the clear frame's edges; more
 back light for the black frame; a 10-level fall-off up the wall; about 15 % more headroom.
+
+## Round 31d: the heroes' rig after the set's pass (`bright2` in studio31.py)
+
+Flags seen only in reflections (no shadow on the cove), wider, plus one high behind the horn: the water-clear frame's
+edges and horn are drawn. Contact denser and tighter (0.8 over 0.35 m, core 0.8 at 3 cm). The background lamps moved
+out and aimed low, the dome's strength cut from 0.6 to 0.22: the frame's corners now within 6 levels (the grey corner
+boxes the site saw are gone at source, 228 -> 239 against 245), the wall falls about 5 levels toward the top (245 at the
+top, 250 on the floor; the finish's shoulder compresses the whites, so the wall can't drop further without going grey).
+Back lamp 22 -> 30 and a low soft bank behind lighting the speaker alone (30), so Smoke reads as smoky acrylic with its
+internals, Ember unclipped. 60 mm and the target raised: about 57 % of the height, room above for type. Proofs: Ember,
+Fog, Smoke at 0.3 and 0.5. The lineup and macros keep the round-31c rig.
