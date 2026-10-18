@@ -18,6 +18,15 @@ Runs on the system Python with `bpy` (Blender 5). Lengths in metres, z up, the p
 import argparse, json, math, os, sys, time
 from pathlib import Path
 
+if __name__ == '__main__':
+    import importlib.util, shutil
+    if importlib.util.find_spec('bpy') is None:
+        # bpy 5.0.1 is built for CPython 3.11 only; under a newer python3 (a fresh container's 3.13) the renderer runs
+        # itself again on python3.11, where studio/setup.sh puts it
+        _py = shutil.which('python3.11')
+        if _py and os.path.realpath(_py) != os.path.realpath(sys.executable):
+            os.execv(_py, [_py] + sys.argv)
+
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(HERE))
