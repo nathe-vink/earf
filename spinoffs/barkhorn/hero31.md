@@ -5,9 +5,45 @@ cabinet throws its own colour onto the floor in front of it. Built by `hero31.py
 `studio/shots/barkhorn/hero31/`; the template it replaces (`site30/hero.json`, 5.5 with the blind promotional critic,
 `critic/rounds/2026-10-18/promo-hero-r1.json`) is kept as it was.
 
-## The set
+## The set (as the final stands)
 
-## Engine change
+- **The eight** in spectrum order on a gentle arc (middle 0.5 m back), in two staggered ranks: Ember, Acid, Ice and
+  Fog in front, Dust, Poison, Haze and Smoke 0.7 m behind in the gaps, centres 0.72 m apart across, so each throw runs
+  in its own lane. Each faces the lens, then sits a few degrees off true, as if set down by hand. Covers off.
+- **The key** is a sun from straight behind, 24 degrees up, 1.5 degrees across, 5200 K. The paper casts no shadow
+  (`set.cast_shadow`), so the sun reaches the floor over the wall and its shadows run parallel. The engine's resin
+  passes shadow rays tinted, so each horn lays a saturated pool of its colour, and the cabinet's clear parts a paler
+  one. The batts are opaque, so the rest of each throw is shadow.
+- **The set**: pale paper (#EEECE7, a fine tooth and a faint mottle) on a sweep 34 m wide, its wall 12 m back. A
+  30 x 5 m softbox faces the wall (the cyc), with silks over the floor behind the line (top) and in front of it (over).
+  A small photographed studio (Poly Haven `studio_small_03`, CC0, already in `studio/assets/hdri`) shows only in the
+  acrylic's reflections and lends a little ambient.
+- **The speakers' own light**, linked to their parts: a low softbox from the camera for the faces and linings (no
+  reflection); tall strips either side for the acrylic's edges; a narrow high strip the top edges mirror; a strip for
+  the cones and the horn drivers; and an edge light on the smoked unit alone.
+- **The camera**: 70 mm at f/4 from 13.5 m, 2.2 m up, looking level (verticals true), focused on the front rank.
+- **The finish**: PBR Neutral, 5000 K, tint 6; white point 228 -> 230 with a shoulder to 246; contrast 0.18, clarity
+  0.10, sharpening 0.45, vibrance 0.4.
+- **Kept as options** in `hero31.py`, from the passes: `cutters` (the key reaching the floor only through the acrylic,
+  h6), an area key in place of the sun (`sun: 0`), a straight diagonal line (`diag`, tried for the phone frame).
+
+## Engine changes (each in its own commit, each off by default)
+
+- `materials.py`: the sweep's paper takes `tooth` / `tooth_mm` and `mottle` / `mottle_m`.
+- `render.py`: `render.transmission_bounces`, `glossy_bounces`, `transparent_bounces`, `caustics_refractive` and
+  `caustics_reflective` (main later made the first two settable too; the merge keeps one copy).
+- `sets.py`: `set.cast_shadow: false` on a sweep.
+- `lights.py`: a flag can be `see_through` (only its lamps' shadow rays meet it).
+
+## What the critics kept naming that is the product's
+
+- The batts are opaque, so most of each throw is grey shadow; only the horns and the cabinets' clear parts throw
+  colour (every pass from h2).
+- The horn throats read as black blobs: the compression driver seen through the thick tinted throat. Light linked to
+  the drivers at 70 W/m2 does not open them (h3 to h8).
+- The acrylic's edges seen edge-on render near-black. At 32 transmission bounces they look the same as at 8 (crops in
+  this round). It is the long path through the tinted sheet, as in real tinted acrylic, not a bounce cutoff.
+- The smoked unit's tint swallows its interior unless a light is aimed at it alone.
 
 ## Passes
 

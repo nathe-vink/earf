@@ -6,7 +6,10 @@ site30/hero.json (the template, kept as it is) scored 5.5 with the blind promoti
 pass of the critic is a change to `P` and a render, and the site's link boxes come from the same arc and camera.
 
     python3 spinoffs/barkhorn/hero31.py build [--portrait] [--set key=value ...]   writes studio/shots/barkhorn/hero31/
-    python3 spinoffs/barkhorn/hero31.py spots [--portrait]                         the eight link boxes, % of the frame
+    python3 spinoffs/barkhorn/hero31.py spots [--portrait] [--report IMG.report.json]
+                                                                 the eight link boxes, % of the frame (projected, or
+                                                                 read off a rendered frame)
+    python3 spinoffs/barkhorn/hero31.py card --tag h9                              the critic's card, current settings
 
 Notes and the critic's passes: hero31.md.
 """
@@ -304,6 +307,23 @@ def card(p, tag, size=(2560, 1280)):
                        **{k: v for k, v in p.items()})
 
 
+def spots_from_report(report):
+    """The eight link boxes read off a rendered frame's report (each copy's parts' boxes in the frame, the horn
+    included), in the form web.hero_spots() gives: left, width, top, height as % of the frame. Exact where spots() is
+    a projection of the arc (they agree within about 1 %)."""
+    r = json.load(open(report))
+    W, H = r['size']
+    boxes = {}
+    for k, v in r['parts_2d'].items():
+        if '#' not in k or not v.get('box_px'):
+            continue
+        i, b = int(k.split('#')[1]), v['box_px']
+        B = boxes.setdefault(i, [1e9, 1e9, -1e9, -1e9])
+        B[:] = [min(B[0], b[0]), min(B[1], b[1]), max(B[2], b[2]), max(B[3], b[3])]
+    return [dict(l=round(x0 / W * 100, 2), w=round((x1 - x0) / W * 100, 2), t=round(y0 / H * 100, 2),
+                 h=round((y1 - y0) / H * 100, 2)) for x0, y0, x1, y1 in (boxes[i] for i in sorted(boxes))]
+
+
 def parse_sets(sets, over=None):
     p = {**copy.deepcopy(P), **(over or {})}
     for kv in sets or []:
@@ -315,6 +335,7 @@ def parse_sets(sets, over=None):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('what', choices=['build', 'spots', 'card'])
+    ap.add_argument('--report', help='spots: read the boxes off this rendered frame\'s report instead')
     ap.add_argument('--tag', default='h')
     ap.add_argument('--portrait', action='store_true')
     ap.add_argument('--set', action='append')
@@ -328,6 +349,8 @@ def main():
         print(os.path.relpath(f, ROOT))
     elif a.what == 'card':
         print(card(p, a.tag, (1600, 2000) if a.portrait else (2560, 1280)))
+    elif a.report:
+        print(json.dumps(spots_from_report(a.report), indent=1))
     else:
         print(json.dumps(spots(p, (1600, 2000) if a.portrait else (2560, 1280)), indent=1))
 
