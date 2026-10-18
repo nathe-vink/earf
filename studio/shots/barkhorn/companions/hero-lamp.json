@@ -6,7 +6,7 @@
  ],
  "set": {
   "kind": "sweep",
-  "color": "#DCD4E6",
+  "color": "#D8D2CA",
   "width": 9.0,
   "front": 5.0,
   "depth": 1.5,
@@ -26,7 +26,8 @@
     ],
     "wood": "veneer",
     "color": "#6E4B33",
-    "turntable": false
+    "turntable": false,
+    "grain": 0.45
    }
   ]
  },
@@ -41,7 +42,7 @@
    0.0,
    0.7
   ],
-  "lens_mm": 60,
+  "lens_mm": 50,
   "level": true
  },
  "sky": {
@@ -49,7 +50,7 @@
   "zenith": "#C4C2BE",
   "horizon": "#CFCDC8",
   "ground": "#5A5650",
-  "strength": 0.7
+  "strength": 0.25
  },
  "render": {
   "samples": 64,
@@ -109,7 +110,7 @@
     0.0,
     0.7
    ],
-   "irradiance": 1.32,
+   "irradiance": 1.9,
    "color": "#FFF3E1"
   },
   "fill": {
@@ -168,11 +169,36 @@
    ],
    "irradiance": 0.72,
    "color": "#FFF7EA"
+  },
+  "wallglow": {
+   "type": "area",
+   "size_m": [
+    0.4,
+    0.4
+   ],
+   "position": [
+    0.55,
+    0.4,
+    1.05
+   ],
+   "target": [
+    0.55,
+    2.7,
+    1.1
+   ],
+   "irradiance": 0.9,
+   "color": 2900,
+   "receivers": [
+    "sweep"
+   ]
   }
  },
  "materials": {
   "led": {
-   "strength": 35.2
+   "strength": 140.8
+  },
+  "sweep": {
+   "contact": 0.6
   }
  }
 }

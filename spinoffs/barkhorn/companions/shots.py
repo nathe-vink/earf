@@ -111,16 +111,24 @@ def hero_turntable(colour='ember'):
 
 
 def hero_lamp(colour='haze'):
-    """Bell, lit, on the sideboard beside the Cloud in its colour, the studio turned down so the lamp carries."""
+    """Bell, lit, on the sideboard beside the Cloud in its colour, the studio turned down so the lamp carries. Round
+    1's critic (critic/rounds/2026-10-18/companions-hero-lamp-e1-r1.json, 4.5): a 50 mm lens so the speaker stands
+    whole, the strip four times brighter, the dome down to 0.25 and the key up, a warm pool on the wall behind the
+    shade, a warm grey sweep so the violet separates, the veneer's grain up, contact shadows."""
     tgt = [0.1, 0.0, 0.7]
     sx, h = 0.55, 0.56
     s = base(f'Bell beside {C.NAMES[colour]}', [1500, 1050], colour,
-             {'position': orbit(tgt, -18, 9, 3.9), 'target': tgt, 'lens_mm': 60, 'level': True})
+             {'position': orbit(tgt, -18, 9, 3.9), 'target': tgt, 'lens_mm': 50, 'level': True}, sweep='#D8D2CA')
+    s['sky']['strength'] = 0.25
     s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.42, 0.04, 0], 'rotate_z': 0}]},
                      {'def': LAMP, 'flavour': colour, 'instances': [{'position': [sx, 0.0, h], 'rotate_z': 0}]}]
-    s['set']['props'] = [sideboard(sx, 0.9)]
+    sb = sideboard(sx, 0.9); sb['grain'] = 0.45
+    s['set']['props'] = [sb]
     s['lights'] = lights(tgt, scale=0.6, dist=4.5)
-    s['materials'] = {'led': {'strength': LED * 1.6}}
+    s['lights']['key']['irradiance'] = 1.9
+    s['lights']['wallglow'] = {'type': 'area', 'size_m': [0.4, 0.4], 'position': [0.55, 0.4, 1.05], 'target': [0.55, 2.7, 1.1],
+                               'irradiance': 0.9, 'color': 2900, 'receivers': ['sweep']}
+    s['materials'] = {'led': {'strength': round(LED * 1.6 * 4, 1)}, 'sweep': {'contact': 0.6}}
     s['render']['exposure'] = 0.2
     return s
 
