@@ -664,12 +664,12 @@
     "material": "pbr",
     "texture": "red_mud_stones",
     "tex_scale": 0.3,
-    "tint": "#8E4A30",
+    "tint": "#9C5A3C",
     "tint_mix": 0.6,
-    "count": 900,
+    "count": 700,
     "radius": [
-     0.008,
-     0.03
+     0.004,
+     0.014
     ],
     "seed": 17,
     "in": [
@@ -678,7 +678,7 @@
      -0.012,
      3.5,
      4.0,
-     -0.004
+     -0.007
     ]
    },
    {
@@ -687,169 +687,22 @@
     "material": "pbr",
     "texture": "red_mud_stones",
     "tex_scale": 0.3,
-    "tint": "#7E412A",
+    "tint": "#8A4C32",
     "tint_mix": 0.6,
-    "count": 160,
+    "count": 45,
     "radius": [
-     0.03,
-     0.07
+     0.02,
+     0.045
     ],
     "seed": 18,
     "in": [
      -4.0,
      -4.0,
-     -0.03,
+     -0.04,
      5.0,
      6.0,
-     -0.01
+     -0.025
     ]
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "position": [
-     1.7925,
-     1.0,
-     -0.02
-    ],
-    "scale": [
-     0.7150000000000001,
-     0.55,
-     0.07
-    ],
-    "material": "pbr",
-    "texture": "red_sand",
-    "tex_scale": 1.6,
-    "tint": "#C0633A",
-    "tint_mix": 0.6,
-    "res": "4k",
-    "bump": 0.8
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "position": [
-     -1.425,
-     1.5,
-     -0.02
-    ],
-    "scale": [
-     0.65,
-     0.5,
-     0.07
-    ],
-    "material": "pbr",
-    "texture": "red_sand",
-    "tex_scale": 1.6,
-    "tint": "#C0633A",
-    "tint_mix": 0.6,
-    "res": "4k",
-    "bump": 0.8
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "position": [
-     3.145,
-     4.2,
-     -0.02
-    ],
-    "scale": [
-     0.9099999999999999,
-     0.7,
-     0.07
-    ],
-    "material": "pbr",
-    "texture": "red_sand",
-    "tex_scale": 1.6,
-    "tint": "#C0633A",
-    "tint_mix": 0.6,
-    "res": "4k",
-    "bump": 0.8
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "position": [
-     -2.955,
-     6.5,
-     -0.02
-    ],
-    "scale": [
-     0.9099999999999999,
-     0.7,
-     0.07
-    ],
-    "material": "pbr",
-    "texture": "red_sand",
-    "tex_scale": 1.6,
-    "tint": "#C0633A",
-    "tint_mix": 0.6,
-    "res": "4k",
-    "bump": 0.8
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "position": [
-     2.41,
-     -3.0,
-     -0.02
-    ],
-    "scale": [
-     0.78,
-     0.6,
-     0.07
-    ],
-    "material": "pbr",
-    "texture": "red_sand",
-    "tex_scale": 1.6,
-    "tint": "#C0633A",
-    "tint_mix": 0.6,
-    "res": "4k",
-    "bump": 0.8
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "position": [
-     -3.825,
-     3.5,
-     -0.02
-    ],
-    "scale": [
-     0.65,
-     0.5,
-     0.07
-    ],
-    "material": "pbr",
-    "texture": "red_sand",
-    "tex_scale": 1.6,
-    "tint": "#C0633A",
-    "tint_mix": 0.6,
-    "res": "4k",
-    "bump": 0.8
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "position": [
-     6.78,
-     12.0,
-     -0.02
-    ],
-    "scale": [
-     1.04,
-     0.8,
-     0.07
-    ],
-    "material": "pbr",
-    "texture": "red_sand",
-    "tex_scale": 1.6,
-    "tint": "#C0633A",
-    "tint_mix": 0.6,
-    "res": "4k",
-    "bump": 0.8
    }
   ]
  },

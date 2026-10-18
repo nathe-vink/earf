@@ -76,15 +76,11 @@ def props():
             piece('ext', module='dust_b_el', fn='prickly_pear', position=[-4.0, 3.5, -0.01], size=0.2, pads=14, seed=27,
                   color='#677A52', color2='#7F8460'),
             piece('ext', module='dust_b_el', fn='prickly_pear', position=[2.2, -3.0, -0.01], size=0.24, pads=26, seed=13, color='#677A52', color2='#7F8460')]
-    # the ground's small things: pebbles scattered near the camera, low wind mounds of sand at the plant bases
-    out += [piece('scatter', material='pbr', texture='red_mud_stones', tex_scale=0.3, tint='#8E4A30', tint_mix=0.6,
-                  count=900, radius=[0.008, 0.03], seed=17, **{'in': [-3.5, -4.5, -0.012, 3.5, 4.0, -0.004]}),
-            piece('scatter', material='pbr', texture='red_mud_stones', tex_scale=0.3, tint='#7E412A', tint_mix=0.6,
-                  count=160, radius=[0.03, 0.07], seed=18, **{'in': [-4.0, -4.0, -0.03, 5.0, 6.0, -0.01]})]
-    for x, y, r in ((1.6, 1.0, 0.55), (-1.6, 1.5, 0.5), (2.9, 4.2, 0.7), (-3.2, 6.5, 0.7), (2.2, -3.0, 0.6),
-                    (-4.0, 3.5, 0.5), (6.5, 12.0, 0.8)):
-        # a mound on the plant's lee side (the wind from the west, -x), a little sand piled at its foot
-        out.append(piece('sphere', position=[x + r * 0.35, y, -0.02], scale=[r * 1.3, r, 0.07], **SAND))
+    # the ground's small things: grit and pebbles near the camera, mostly sunk in the sand
+    out += [piece('scatter', material='pbr', texture='red_mud_stones', tex_scale=0.3, tint='#9C5A3C', tint_mix=0.6,
+                  count=700, radius=[0.004, 0.014], seed=17, **{'in': [-3.5, -4.5, -0.012, 3.5, 4.0, -0.007]}),
+            piece('scatter', material='pbr', texture='red_mud_stones', tex_scale=0.3, tint='#8A4C32', tint_mix=0.6,
+                  count=45, radius=[0.02, 0.045], seed=18, **{'in': [-4.0, -4.0, -0.04, 5.0, 6.0, -0.025]})]
     return out
 
 
