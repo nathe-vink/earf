@@ -272,12 +272,6 @@ MACRO_FIX = {
     'horn': {'product.instances.0.rotate_z': 80.0, 'camera.position': [1.0, -2.3, 1.45], 'camera.target': [0.05, 0.02, 1.08],
              'camera.lens_mm': 125.0, 'lights.scrim.irradiance': 0.6, 'set.flags.1.glossy': False,
              'set.flags.2': {'center_m': [0.0, 0.0, 2.3], 'size_m': [1.6, 0.6], 'normal': [0.0, 0.0, -1.0], 'glossy': True}},
-    # on the woofer's axis and centred; a strip whose reflection sweeps the ring, a smaller, higher key for the cone and cap
-    'woofer': {'camera.position': [0.3, -3.0, 0.55], 'camera.target': [0.0, -0.2, 0.49], 'camera.lens_mm': 200.0,
-               'lights.front-strip.orbit': {'azimuth_deg': 5, 'elevation_deg': 35, 'distance_m': 3.0},
-               'lights.front-strip.size_m': [0.8, 1.6], 'lights.front-strip.strength': 6.0,
-               'lights.key.orbit': {'azimuth_deg': -40, 'elevation_deg': 55, 'distance_m': 4.5},
-               'lights.key.size_m': [0.8, 0.8], 'lights.key.irradiance': 6.0, 'lights.back-top.irradiance': 14.0},
     # level through the slot, the top face out of frame; a small lamp behind it on the camera's line, so the cut glows
     'grip': {'camera.position': [0.45, -2.6, 0.8], 'lights.scrim.irradiance': 0.6,
              'lights.back-top.orbit': {'azimuth_deg': 190, 'elevation_deg': 6, 'distance_m': 2.0},
