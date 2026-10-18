@@ -26,16 +26,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'lookbook31')
 
-# the colours by key (finals.py's keys), their flavour, the sweep's tint and an exposure trim (EV)
+# the colours by key (finals.py's keys), their flavour and an exposure trim (EV); one paper for all eight (PAPER)
 COLOURS = {
-    'red':    dict(flavour='cloud-red',            sweep='#DDD7D6', ev=0.0),
-    'orange': dict(flavour='cloud-orange',         sweep='#DDD8D3', ev=0.0),
-    'amber':  dict(flavour='cloud-amber',          sweep='#DBD8D0', ev=0.0),
-    'green':  dict(flavour='eucalyptus-y2k-green', sweep='#D6D9D4', ev=0.0),
-    'blue':   dict(flavour='cloud-blue',           sweep='#DBDFE2', ev=0.0),
-    'violet': dict(flavour='cloud-violet',         sweep='#D9D7DC', ev=0.0),
-    'ice':    dict(flavour='birch-fog-clear',      sweep='#DADCDC', ev=-0.6),
-    'black':  dict(flavour='cloud-black',          sweep='#D5D4D3', ev=0.0),
+    'red':    dict(flavour='cloud-red',            ev=0.0),
+    'orange': dict(flavour='cloud-orange',         ev=0.0),
+    'amber':  dict(flavour='cloud-amber',          ev=0.0),
+    'green':  dict(flavour='eucalyptus-y2k-green', ev=0.0),
+    'blue':   dict(flavour='cloud-blue',           ev=0.0),
+    'violet': dict(flavour='cloud-violet',         ev=0.0),
+    'ice':    dict(flavour='birch-fog-clear',      ev=-0.6),
+    'black':  dict(flavour='cloud-black',          ev=0.0),
 }
 
 # the lamps that draw lines (edge, rim) light only these, so the paper's gloss never mirrors them
@@ -129,6 +129,34 @@ RIG = {
 }
 
 
+# The paper (the coordinator, after a full-site critic pass: four studio looks across the product pictures, and the home
+# cards, which take their panel colour from these frames' foot, reading a dingy grey): the studio's warm pale paper of
+# round 31c's bright field, one neutral backdrop for all eight (no tint per colour), lit high-key by lamps that light
+# the paper alone (the speaker's own light is the rig's, as it won), to about #F2EFEA at the feet and #EDE9E3 on the wall
+# with no more than about ten levels to the corners. A tall dark strip just outside the frame behind-right (31c's) gives
+# the acrylic's edges a dark line to refract, so Smoke and Fog part from the pale ground.
+PAPER = {
+    'color': '#F7F0E8',
+    'flags': [{'center_m': [1.35, 2.1, 1.2], 'size_m': [0.3, 2.4], 'normal': [-0.45, -0.89, 0.0], 'glossy': True}],
+    'lights': {
+        'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 3.2, 3.4], 'target': [-1.5, 6.0, 1.2],
+                    'irradiance': 0.7, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+        'bg-right': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [2.6, 3.2, 3.4], 'target': [-0.9, 6.0, 1.0],
+                     'irradiance': 1.1, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+        # the cove's far left and its upper wall, which every frame sees past the speaker's key side
+        'wall_left': {'type': 'area', 'size_m': [10.0, 5.0], 'position': [-6.0, 0.5, 5.5], 'target': [-8.0, 5.5, 4.7],
+                      'irradiance': 4.5, 'color': '#FFF0E2', 'specular': 0.0, 'receivers': ['sweep']},
+        'bg-high': {'type': 'area', 'size_m': [6.0, 3.0], 'position': [0.0, 1.0, 6.5], 'target': [-1.5, 5.5, 5.0],
+                    'irradiance': 0.2, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+        'floor': {'type': 'area', 'size_m': [6.0, 4.0], 'position': [0.0, -2.0, 4.5], 'target': [0.0, 0.5, 0.0],
+                  'irradiance': 0.7, 'spread_deg': 50, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+    },
+    # the tinted look's paper lamps, retuned for the pale paper: the glow behind and the key side's wall are off (they
+    # drove the wall past white), the floor's wash a little down
+    'tune': {'paper': {'power_w': 0.0}, 'wall': {'irradiance': 0.0}, 'wash': {'irradiance': 0.5}},
+}
+
+
 def shot(k, cover):
     c = COLOURS[k]
     s = copy.deepcopy(RIG)
@@ -136,7 +164,11 @@ def shot(k, cover):
     if not cover:
         inst['hide'] = ['cloth-disc']
     s['product'] = {'def': 'studio/products/barkhorn-cloud.json', 'flavour': c['flavour'], 'instances': [inst]}
-    s['set']['color'] = c['sweep']
+    s['set']['color'] = PAPER['color']
+    s['set']['flags'] += copy.deepcopy(PAPER['flags'])
+    s['lights'].update(copy.deepcopy(PAPER['lights']))
+    for n, kv in PAPER['tune'].items():
+        s['lights'][n].update(kv)
     s['render']['exposure'] = c['ev']
     s['title'] = f'barkhorn, cover {"on" if cover else "off"} (catalogue31, {k})'
     return s
@@ -155,9 +187,9 @@ FRAMES = {
     # side, which only it sees, lifted by a lamp of its own (it read as a dirty grey third of the frame)
     'wide': {'size': [1920, 1280], 'lens_mm': 32.3, 'shift_x': -0.011, 'shift_y': 0.025,
              'set': {'width': 40.0, 'height': 9.0},
-             'lights': {'wall_left': {'type': 'area', 'size_m': [5.0, 3.0], 'position': [-3.0, 1.0, 3.8],
-                                      'target': [-4.5, 5.5, 1.8], 'irradiance': 4.0, 'color': '#FFF0E2',
-                                      'receivers': ['sweep']}}},
+             'lights': {'wall_far': {'type': 'area', 'size_m': [8.0, 4.0], 'position': [-8.0, 0.5, 6.0],
+                                     'target': [-11.5, 5.5, 5.5], 'irradiance': 3.0, 'color': '#FFF0E2',
+                                     'specular': 0.0, 'receivers': ['sweep']}}},
     'tall': {'size': [1440, 1800], 'lens_mm': 60.5, 'shift_x': -0.027, 'shift_y': 0.012},
 }
 
