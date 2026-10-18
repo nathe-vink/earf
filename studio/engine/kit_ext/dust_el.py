@@ -145,6 +145,7 @@ def terrain(bpy, name, p, kit):
     fx, fy, fr = p.get('flat', [0.0, 0.0, 2.5])
     swell, ssize, rim = p.get('swell', 0.25), p.get('swell_size', 9.0), p.get('rim', 1.5)
     s2, s2size = p.get('swell2', [0.0, 5.0])
+    s3 = p.get('swell3')
     step = 2 * half / seg
     radii, r = [], r0
     while r < r1:
@@ -166,6 +167,9 @@ def terrain(bpy, name, p, kit):
             n2 = noise.noise(Vector((x / s2size, y / (s2size * 1.8), 4.1)) + off)
             far = _smooth((rr - 0.88 * r1) / (0.12 * r1))
             z = t * swell * n + t2 * s2 * n2 + far * rim
+            if s3:                                            # long low rises far off, so the horizon is not a line
+                a3, size3, start3 = s3
+                z += a3 * _smooth((rr - start3) / start3) * noise.noise(Vector((x / size3, y / size3, 7.7)) + off)
             row.append(bm.verts.new((x, y, z)))
         rows.append(row)
     for a, b in zip(rows, rows[1:]):

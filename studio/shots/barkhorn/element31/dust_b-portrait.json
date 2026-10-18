@@ -26,8 +26,8 @@
     "module": "dust_b_el",
     "fn": "terrain",
     "eye": [
-     -2.287,
-     -10.76
+     -1.663,
+     -7.825
     ],
     "heading": 78.0,
     "half_angle": 44.0,
@@ -48,14 +48,19 @@
     ],
     "ripples": [
      0.11,
-     0.55,
+     0.35,
      20.0,
      9.0,
-     5.0
+     3.0
     ],
     "swell2": [
      0.12,
      5.0
+    ],
+    "swell3": [
+     8.0,
+     600.0,
+     400.0
     ],
     "albedo": 0.92,
     "spec": 0.05,
@@ -66,8 +71,8 @@
       "tint": "#A45232",
       "tint_mix": 1.0,
       "mask": [
-       5.0,
-       0.25
+       2.0,
+       0.4
       ],
       "bump": 1.0
      }
@@ -107,8 +112,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     311.3,
-     2972.8,
+     311.9,
+     2975.7,
      -3.0
     ],
     "rotate": [
@@ -133,7 +138,7 @@
     "cliff_mat": {
      "material": "pbr",
      "texture": "rock_face",
-     "tex_scale": 30.0,
+     "tex_scale": 15.0,
      "tint": "#C04A24",
      "tint_mix": 0.92,
      "res": "4k",
@@ -143,11 +148,11 @@
      ],
      "beds": [
       9.0,
-      0.45
+      0.7
      ],
      "streaks": [
       5.0,
-      0.3
+      0.5
      ],
      "albedo": 1.9,
      "cap": [
@@ -180,8 +185,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     1632.1,
-     3196.9,
+     1632.7,
+     3199.8,
      -3.0
     ],
     "rotate": [
@@ -206,7 +211,7 @@
     "cliff_mat": {
      "material": "pbr",
      "texture": "rock_face",
-     "tex_scale": 30.0,
+     "tex_scale": 15.0,
      "tint": "#C04A24",
      "tint_mix": 0.92,
      "res": "4k",
@@ -216,11 +221,11 @@
      ],
      "beds": [
       9.0,
-      0.45
+      0.7
      ],
      "streaks": [
       5.0,
-      0.3
+      0.5
      ],
      "albedo": 1.9,
      "cap": [
@@ -253,8 +258,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     3270.2,
-     4030.4,
+     3270.8,
+     4033.3,
      -3.0
     ],
     "rotate": [
@@ -272,7 +277,7 @@
     "cliff_mat": {
      "material": "pbr",
      "texture": "rock_face",
-     "tex_scale": 30.0,
+     "tex_scale": 15.0,
      "tint": "#C04A24",
      "tint_mix": 0.92,
      "res": "4k",
@@ -282,11 +287,11 @@
      ],
      "beds": [
       9.0,
-      0.45
+      0.7
      ],
      "streaks": [
       5.0,
-      0.3
+      0.5
      ],
      "albedo": 1.9,
      "cap": [
@@ -319,8 +324,8 @@
     "module": "dust_b_el",
     "fn": "butte",
     "position": [
-     -2806.9,
-     7694.7,
+     -2806.2,
+     7697.7,
      -3.0
     ],
     "rotate": [
@@ -338,7 +343,7 @@
     "cliff_mat": {
      "material": "pbr",
      "texture": "rock_face",
-     "tex_scale": 30.0,
+     "tex_scale": 15.0,
      "tint": "#C04A24",
      "tint_mix": 0.92,
      "res": "4k",
@@ -348,11 +353,11 @@
      ],
      "beds": [
       9.0,
-      0.45
+      0.7
      ],
      "streaks": [
       5.0,
-      0.3
+      0.5
      ],
      "albedo": 1.9,
      "cap": [
@@ -385,11 +390,11 @@
     "module": "dust_b_el",
     "fn": "prickly_pear",
     "position": [
-     2.3,
-     2.2,
+     4.3,
+     6.0,
      -0.02
     ],
-    "size": 0.2,
+    "size": 0.22,
     "pads": 22,
     "seed": 3,
     "color": "#677A52",
@@ -695,7 +700,7 @@
   "position": [
    -1.1643,
    -5.4776,
-   0.4
+   0.5
   ],
   "target": [
    0.0,
@@ -704,34 +709,34 @@
   ],
   "lens_mm": 60.0,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 5.6,
   "focus": [
    0.0,
    -0.21,
    0.66
   ],
-  "shift_x": 0.08,
+  "shift_x": 0.17,
   "shift_y": 0.0,
   "clip_end": 12000.0
  },
  "sky": {
   "kind": "hdri",
-  "polyhaven": "qwantani_late_afternoon_puresky",
-  "rotation_deg": 300.0,
+  "polyhaven": "kloofendal_48d_partly_cloudy_puresky",
+  "rotation_deg": 0.7,
   "strength": 0.8,
   "res": "4k",
   "grade": {
-   "horizon": "#B4C8EA",
-   "zenith": "#C9D8F2",
-   "height_deg": 14.0
+   "horizon": "#D2DCEE",
+   "zenith": "#FFFFFF",
+   "height_deg": 12.0
   }
  },
  "sun": {
-  "azimuth_deg": 113.9,
-  "elevation_deg": 19.1,
-  "irradiance": 9.0,
+  "azimuth_deg": 55.0,
+  "elevation_deg": 24.0,
+  "irradiance": 8.0,
   "angle_deg": 0.53,
-  "color": "#FFC98E"
+  "color": "#FFD3A0"
  },
  "finish": {
   "enabled": true,
@@ -760,7 +765,7 @@
    8000.0,
    300.0
   ],
-  "density": 2e-05,
+  "density": 4e-05,
   "anisotropy": 0.3,
   "color": "#BFCDE0"
  }

@@ -8,15 +8,15 @@ import math, os
 
 from common import area, camera, finish, piece, portrait_of, shot as frame, sky, sun_from_sky
 
-HDRI = 'qwantani_late_afternoon_puresky'
-ROT = float(os.environ.get('DUSTB_ROT', 300.0))          # the sky's sun 19 degrees up at azimuth 114 (behind the speaker's right)
+HDRI = 'kloofendal_48d_partly_cloudy_puresky'
+ROT = float(os.environ.get('DUSTB_ROT', 0.7))            # the sky's sun at azimuth 55 (front right), 48 degrees up
 SAND = dict(material='pbr', texture='red_sand', tex_scale=1.6, tint='#C0633A', tint_mix=0.6, res='4k', bump=0.8)
-STONY = dict(texture='red_mud_stones', tex_scale=1.5, tint='#A45232', tint_mix=1.0, mask=[5.0, 0.25], bump=1.0)
-CLIFF = dict(material='pbr', texture='rock_face', tex_scale=30.0, tint='#C04A24', tint_mix=0.92, res='4k',
-             vary=[180.0, 0.3], beds=[9.0, 0.45], streaks=[5.0, 0.3], albedo=1.9, cap=[0.88, 0.92, 0.65])
+STONY = dict(texture='red_mud_stones', tex_scale=1.5, tint='#A45232', tint_mix=1.0, mask=[2.0, 0.4], bump=1.0)
+CLIFF = dict(material='pbr', texture='rock_face', tex_scale=15.0, tint='#C04A24', tint_mix=0.92, res='4k',
+             vary=[180.0, 0.3], beds=[9.0, 0.7], streaks=[5.0, 0.5], albedo=1.9, cap=[0.88, 0.92, 0.65])
 TALUS = dict(material='pbr', texture='red_mud_stones', tex_scale=25.0, tint='#A85E44', tint_mix=0.55, res='2k',
              vary=[120.0, 0.3], albedo=1.3, beds=[9.0, 0.4])
-CAM = dict(height=0.4, distance=11.0, azimuth=-12.0, lens=85.0, target=(0.0, 0.0, 0.66), fstop=4.0, shift_x=0.08)
+CAM = dict(height=0.5, distance=8.0, azimuth=-12.0, lens=60.0, target=(0.0, 0.0, 0.66), fstop=5.6, shift_x=0.17)
 CLIP = 12000.0
 
 
@@ -47,8 +47,8 @@ def props():
     heading = math.degrees(math.atan2(ty - ey, tx - ex))
     out = [piece('ext', module='dust_b_el', fn='terrain', eye=[round(ex, 3), round(ey, 3)], heading=round(heading, 2),
                  half_angle=44.0, r0=1.2, r1=CLIP * 0.8, segments=460, flat=[0.0, 0.0, 2.2], swell=0.45,
-                 swell_size=18.0, rim=60.0, vary=[14.0, 0.35], ripples=[0.11, 0.55, 20.0, 9.0, 5.0],
-                 swell2=[0.12, 5.0], albedo=0.92, spec=0.05, mixes=[STONY], **SAND),
+                 swell_size=18.0, rim=60.0, vary=[14.0, 0.35], ripples=[0.11, 0.35, 20.0, 9.0, 3.0],
+                 swell2=[0.12, 5.0], swell3=[8.0, 600.0, 400.0], albedo=0.92, spec=0.05, mixes=[STONY], **SAND),
            piece('box', size=[600.0, 600.0, 0.1], position=[0.0, 0.0, -0.5], **SAND)]
     # the buttes, at their real size: the Mittens to the left and right of the horn, a long mesa beyond
     out += [butte(3000, -6, 230, 300, 1, turn=10, thumbs=[(185, 1.38, 30, 0.86)], squash=0.55),
@@ -56,7 +56,7 @@ def props():
             butte(5200, 27, 900, 320, 3, turn=5, squash=0.3, spread=1.6),
             butte(8200, -32, 1100, 260, 4, turn=0, squash=0.25, spread=1.5)]
     # the near ground's plants: prickly pear beside the speaker, a yucca behind it, sagebrush, the tumbleweed
-    out += [piece('ext', module='dust_b_el', fn='prickly_pear', position=[2.3, 2.2, -0.02], size=0.2, pads=22, seed=3, color='#677A52', color2='#7F8460'),
+    out += [piece('ext', module='dust_b_el', fn='prickly_pear', position=[4.3, 6.0, -0.02], size=0.22, pads=22, seed=3, color='#677A52', color2='#7F8460'),
             piece('ext', module='dust_b_el', fn='yucca', position=[-1.4, 2.4, -0.01], length=0.6, width=0.022, leaves=64,
                   seed=5),
             piece('ext', module='dust_b_el', fn='sagebrush', position=[5.5, 9.5, -0.02], size=[1.0, 0.9, 0.7], seed=7),
@@ -92,11 +92,12 @@ def _cam(**k):
 
 def shot():
     return frame('dust', props(), _cam(), dict(sky(HDRI, ROT, strength=float(os.environ.get('DUSTB_SKY', 0.8)), res='4k'),
-                      grade={'horizon': '#B4C8EA', 'zenith': '#C9D8F2', 'height_deg': 14.0}),
+                      grade={'horizon': '#D2DCEE', 'zenith': '#FFFFFF', 'height_deg': 12.0}),
                  'barkhorn, Dust, Monument Valley in the afternoon', lights=lights(),
-                 sun=sun_from_sky(HDRI, ROT, irradiance=float(os.environ.get('DUSTB_SUN', 9.0)), angle_deg=0.53, color='#FFC98E'),
+                 sun=dict(sun_from_sky(HDRI, ROT, irradiance=float(os.environ.get('DUSTB_SUN', 8.0)), angle_deg=0.53, color='#FFD3A0'),
+                          elevation_deg=float(os.environ.get('DUSTB_EL', 24.0))),
                  fin=finish(contrast=0.08, clarity=0.05, saturation=0.04, vignette=0.12),
-                 haze={'box_m': [-8000.0, -60.0, -5.0, 8000.0, 8000.0, 300.0], 'density': 0.00002,
+                 haze={'box_m': [-8000.0, -60.0, -5.0, 8000.0, 8000.0, 300.0], 'density': 0.00004,
                        'anisotropy': 0.3, 'color': '#BFCDE0'},
                  rotate_z=20.0, position=(0.0, 0.0, -0.012), exposure=float(os.environ.get('DUSTB_EXP', 0.0)))
 
