@@ -62,8 +62,8 @@ def props(cam):
         ext('rocks', models=['rock_09', 'moon_rock_01', 'moon_rock_04'], count=220, area=[-60.0, 45.0, 90.0, 150.0],
             scale=[1.0, 3.0], z=-0.3, seed=18, darken=0.75, film_rough=0.5, tilt_deg=15.0, avoid=SUN_FAR),
         # the rain, and where it lands
-        ext('rain', camera=cam, count=45000, near=5.0, far=60.0, length=[0.08, 0.16], radius=[0.0008, 0.0014],
-            lean=[0.09, 0.02], lean_jitter_deg=3.0, z=[0.0, 30.0], opacity=[0.04, 0.25], scatter=0.9, rough=0.25, clear=0.5,
+        ext('rain', camera=cam, count=65000, near=5.0, far=60.0, length=[0.08, 0.16], radius=[0.0008, 0.0014],
+            lean=[0.09, 0.02], lean_jitter_deg=3.0, z=[0.0, 30.0], opacity=[0.12, 0.45], scatter=0.9, rough=0.25, clear=0.5,
             avoid=[[0.0, 0.0, 0.4]], seed=3),
         # a few drops close to the lens, far out of focus
         ext('rain', camera=cam, count=30, near=1.5, far=4.0, length=[0.04, 0.08], radius=[0.0006, 0.001],
