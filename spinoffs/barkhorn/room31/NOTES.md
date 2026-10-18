@@ -12,22 +12,28 @@ real living room, photographed as a design magazine or a luxury house would shoo
   room's own floor and walls.
 - `card.py` writes the critic's card from a shot; `critic-rN.json` are the critics' replies, verbatim.
 
-## The concept
+## The concept (as shipped)
 
 References looked at first (Kinfolk and NORM-style interiors: toned plaster, bare walls, window light raking across
-them, oak and walnut, a few real objects). One light idea: low late-afternoon sun (elevation 18 degrees) through a run
-of tall French windows down the left wall, from in front of the pair (azimuth -58), so both speakers stand in it alike
-(a sun from behind them could not reach the right one past the left one's shadow, or past the back wall) and each lays
-its shadow, green where the light came through its horn and cabinet, on the plaster and floor behind it. A sun-free
-window off to the right, out of frame, fills the shade side. The view out is a photographed autumn wood (Poly Haven
-`autumn_forest_04`) on a plate only the camera sees, so it shows a real place without lighting the room twice.
+them, oak and walnut, a few real objects). One light idea: low late-afternoon sun (azimuth -68, elevation 14) through
+a run of tall French windows down the left wall, from in front of the pair, so both speakers stand in it alike and
+each lays its shadow, green where the light came through its horn and cabinet, on the plaster and floor beside it.
+Linen sheers drawn over the front bays turn the rest of the sun into a soft glow; the back bay stays open, for the
+view out and for the beams that reach the pair. A cool, sun-free fill from the right (a window out of frame) and a
+low bounce card by the camera open the shade. The view out is a photographed autumn wood (Poly Haven
+`autumn_forest_04`, turned so its own sun agrees with ours) on a plate only the camera and the gloss see.
 
 Camera: 1.05 m high, squared to the back wall, 40 mm, level with a small rise of the lens (verticals straight); each
-speaker about half the frame's height; the wall above for the heading.
+speaker about half the frame's height; the wall above for the heading. The portrait (1600 x 2000, for phones) is the
+same room with the pair brought in to +-0.92 m round a two-door credenza, 50 mm from 4.1 m, the sun 2 degrees further
+round so it still reaches both speakers.
 
-Assets (all CC0): Poly Haven `laminate_floor_02` (oak boards), `beige_wall_001` (plaster), `walnut_veneer`,
-`curly_teddy_natural` (the rug's pile), `modern_arm_chair_01` (the lounge chair), `ceramic_vase_02`,
-`autumn_forest_04`. The record player is EARF's own Cumulus in Fog (from `r31-companions`, built here, not committed).
+Set: oiled wide-plank oak (Poly Haven `wood_floor`), plaster (`beige_wall_001`, tinted warm white), a walnut credenza
+built here with the veneer (`walnut_veneer_02`) laid on across its doors, Cumulus in Fog on it with a vase
+(`ceramic_vase_02`) and three cloth-bound books (invented titles), the wall sockets and the mains leads, the sheers.
+Out of the landscape after r10: the rug and the lounge chair (`modern_arm_chair_01`, re-dyed); see r10 and r11.
+
+Finish (`post.py`): a green trim 0.3 in the greens' mid-tones, vignette 0.1 stop, bloom 0.03, luminance grain 1.4.
 
 ## Passes
 
@@ -47,3 +53,11 @@ Assets (all CC0): Poly Haven `laminate_floor_02` (oak boards), `beige_wall_001` 
 | r12 | proofs/r12-post.png | 6.3 | c1 sun from behind (az -100) again; c2 caustics for green shadows; c3 sunlit plaster flat near white; c4 the same veneer figure on every door; c5 the white socket plates the brightest small things; c6 props bracketing a centred record player; c7 a shadow-gap skirting; c8 trim and vignette lighter | c1 and c2 not taken (backlight tried twice; the engine has no refractive caustics, and the cabinets' tinted shadows come through the volume where no batt stops them). c3 wall value 0.88; c4 one flitch laid on across the doors; c5 socket plates in a plaster tone; c6 record player centred, books left, vase right; c8 trim 0.1, vignette 0.18 |
 
 **Duel 1** (blind, `duel-1.json`): r12 against finals31/room.png, both at 1440 x 810: **7.0 against 5.0, the new frame preferred.**
+| r13 | proofs/r13-post.png | 6.5 | c1 green trim 0.3 (the cabinets neon); c2 a mullion's shadow splitting the left cover; c3 sun 48, 0.5 deg; c4 fill 2.2 on the shaded right; c5 the left horn's shadow behind the record player; c6 the window base crushed; c7 vignette 0.1 | c1, c3, c4, c6 (#5A5650), c7 as given; c2: the back bay's vertical bar taken out and the sun moved to az -68 el 14, the sheers' gap re-aimed (checked in a proof: both covers clear); c5 left (moving the pair apart would crowd the frame's edges) |
+
+**Stopping.** Twelve passes on room 31's frames scored 6.0 to 6.5, through three concepts (hard sun across the room; sheers
+with the pair in two shafts of sun; the window corner), while the duel against the frame being replaced went 7.0 to
+5.0. Every critic named the same speaker items, out of scope here: the woofer cover as a flat disc, the batts as lime
+blocks in direct sun, the horn throats crushed to black, the cabinets' black edges. Those now cap the score more than
+the set does. The two-in-a-row 8.5 the protocol asks for is out of reach without changing the speaker, so the finals
+were rendered from r13's settings with its fixes applied.

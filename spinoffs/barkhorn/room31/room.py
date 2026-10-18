@@ -68,8 +68,9 @@ def room_set(v):
     def along(y):
         return round(y - cy, 3)
     # a run of tall French windows down the left wall, piers between, glass to 15 cm under the ceiling
-    wins = [{'wall': 'left', 'along': along(yc), 'sill': 0.04, 'size': [1.45, 2.71], 'mullions': [2, 1], 'frame': v.get('frame', '#3A3733')}
-            for yc in v.get('win_y', (0.2, -1.4, -3.45))]
+    wins = [{'wall': 'left', 'along': along(yc), 'sill': 0.04, 'size': [1.45, 2.71], 'mullions': m,
+             'frame': v.get('frame', '#5A5650')}
+            for yc, m in zip(v.get('win_y', (0.2, -1.4, -3.45)), v.get('win_mullions', ([1, 1], [2, 1], [2, 1])))]
     props = [
         ext('floor', rect=[LEFT, BACK - DEPTH, RIGHT, BACK], texture=v['floor'], res='4k', rotate_deg=v['floor_rot'],
             rough_mul=v.get('floor_rough', 1.0), coat=v.get('floor_coat', 0.35), coat_rough=0.35, value=v.get('floor_value', 1.0),
@@ -108,7 +109,7 @@ def room_set(v):
     ]
     return {'kind': 'room', 'size': [w, DEPTH, HEIGHT], 'center': [cx, cy],
             'floor': {'base': '#B89B78'}, 'wall': {'color': v['wall']}, 'ceiling': '#F2EFEA',
-            'skirting': {'h': 0.09, 'color': v['wall'], 't': 0.014}, 'frame': v.get('frame', '#3A3733'), 'windows': wins, 'props': props}
+            'skirting': {'h': 0.09, 'color': v['wall'], 't': 0.014}, 'frame': v.get('frame', '#5A5650'), 'windows': wins, 'props': props}
 
 
 DEFAULT = dict(
@@ -123,9 +124,9 @@ DEFAULT = dict(
     # the left wall recedes in the frame with its view out and the lounge chair by the glass; the pair, moved 0.35 m
     # clear of the window, stands in the low sun (az -76, el 11) through the open back bays; linen sheers over the
     # front bays soften the rest
-    sheers=[(-0.85, 0.7), (-2.92, 2.56)], sheer_opens=[0.15, 0.35], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=-0.55, vase_x=0.62,
-    sun=dict(azimuth_deg=-62.0, elevation_deg=18.0, irradiance=40.0, angle_deg=0.6, color='#FFE4C8'),
-    sky_strength=1.0, fill=1.3, fill_color='#D2E0F4', fill_pos=[1.6, -3.6, 2.2], bounce=0.7, bounce_pos=[-0.6, -3.6, 1.35],
+    sheers=[(-0.66, 0.22), (-2.73, 2.95)], sheer_opens=[0.15, 0.35], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=-0.55, vase_x=0.62,
+    sun=dict(azimuth_deg=-68.0, elevation_deg=14.0, irradiance=48.0, angle_deg=0.5, color='#FFE4C8'),
+    sky_strength=1.0, fill=2.2, fill_color='#DCE4EE', fill_pos=[1.6, -3.6, 2.2], bounce=0.7, bounce_pos=[-0.6, -3.6, 1.35],
     bounce_size=[2.4, 1.2], floor_bounce=0.55, fb_pos=[0.0, -0.6, 0.08], rug_off=True, chair_off=True,
     exposure=-1.0, wb=5200, cam_x=0.0, cam_d=5.06, pair_x=0.0, lens=40, cam_tz=0.855, wb_tint=0.0,
 )
@@ -135,7 +136,7 @@ DEFAULT = dict(
 PORTRAIT = dict(spk_x=0.92, cab_w=1.1, doors=2, socket_x=1.46, tt_x=0.08, books_x=0.38, vase_x=-0.4, port_d=4.1,
                 port_lens=50, port_tz=0.62,
                 # the sun a little further round for this pair, and the sheers' gaps where its beams come in
-                sun=dict(azimuth_deg=-66.0, elevation_deg=18.0, irradiance=40.0, angle_deg=0.6, color='#FFE4C8'),
+                sun=dict(azimuth_deg=-66.0, elevation_deg=18.0, irradiance=48.0, angle_deg=0.5, color='#FFE4C8'),
                 sheers=[(-0.62, 0.38), (-2.7, 3.0)])     # the gaps where the beams to the pair (now +-0.92) come in
 
 
