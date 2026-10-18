@@ -11,56 +11,77 @@ from common import finish, kit, mound, portrait_of, shot as frame, tilt_shift
 
 SAND, SAND2 = '#E2A46C', '#CF8A55'
 APRICOT, RUST, TERRA = '#E8A46E', '#A8482E', '#BF5F3E'
-PUFF = '#F4D2AE'
+PUFF = '#E8955A'
 SUN = '#FFE3B0'
-SKY = '#F2B888'
+SKY = '#F8C088'
 # the sun: low, behind the speaker's left (azimuth 0 is from the front), matched to the paper sun on the sky card
-SUN_AZ, SUN_EL = -150.0, 13.0
-PAPER_SUN = (-2.0, 4.6, 1.15, 1.25)                # x, y, z, radius
+SUN_AZ, SUN_EL = 122.0, 11.0
+PAPER_SUN = (0.9, 6.0, 1.05, 0.72)                # x, y, z, radius
 
 
 def sky():
-    """A paper sky card far behind, and the tissue sun on it, lit from within."""
+    """A paper sky card far behind, and the tissue sun on it, lit from within, with two rings of thinner tissue round
+    it for its glow."""
     x, y, z, r = PAPER_SUN
-    out = [kit('box', 'paper', SKY, size=[16.0, 0.05, 6.0], position=[0.0, y + 0.12, -0.1])]
-    out.append(kit('cylinder', 'tissue', SUN, radius=r, height=0.02, position=[x, y, z], rotate=[90, 0, 0],
-                   emit=5.0, segments=96))
-    out.append(kit('cylinder', 'tissue', '#FFF0D0', radius=r * 0.82, height=0.02, position=[x, y - 0.03, z],
-                   rotate=[90, 0, 0], emit=7.0, segments=96))
+    out = [kit('box', 'paper', SKY, size=[18.0, 0.05, 7.0], position=[0.0, y + 0.2, -0.1], shadow=False, emit=0.12)]
+    for k, (rr, c, e) in enumerate([(1.7, '#F4B482', 0.18), (1.32, '#F8BE84', 0.4), (1.0, '#FFC77E', 0.8), (0.86, '#FFD496', 1.05)]):
+        out.append(kit('cylinder', 'paper', c, radius=r * rr, height=0.01, position=[x, y + 0.12 - 0.03 * k, z],
+                       rotate=[90, 0, 0], emit=e, segments=128, shadow=False))
     return out
 
 
-def mesa(x, y, w, h, colors, seed, squash=0.8):
-    """A butte of stacked suede layers, each a turned slab a little narrower than the one below."""
+def mesa(x, y, w, h, colors, seed, squash=0.75):
+    """A mesa of stacked suede layers: a flared talus at the foot, then near-vertical cliff bands with a small step at
+    each, a flat top."""
     rnd = random.Random(seed)
-    out, z, r = [], -0.02, w
-    n = len(colors)
-    for i, c in enumerate(colors):
-        t = h / n * rnd.uniform(0.85, 1.15)
-        r1 = r * (0.93 if i < n - 1 else 0.9)
-        prof = [[0, 0], [r, 0], [r * 0.99, t * 0.3], [r1 * 1.01, t * 0.85], [r1 * 0.97, t], [0, t]]
+    out = [kit('lathe', 'suede', colors[0], position=[x, y, -0.02], scale=[1.0, squash, 1.0], segments=72,
+               profile=[[0, 0], [w * 1.55, 0], [w * 1.35, h * 0.06], [w * 1.12, h * 0.16], [w * 1.02, h * 0.24], [0, h * 0.24]])]
+    z, r = h * 0.22, w
+    bands = colors[1:]
+    for i, c in enumerate(bands):
+        t = (h * 0.78) / len(bands) * rnd.uniform(0.8, 1.2)
+        prof = [[0, 0], [r, 0], [r * 0.985, t * 0.92], [r * 0.97, t], [0, t]]
         out.append(kit('lathe', 'suede', c, profile=[[round(a, 4), round(b, 4)] for a, b in prof],
-                       position=[x, y, z], scale=[1.0, squash, 1.0], segments=72))
-        z += t * 0.98
-        r = r1 * rnd.uniform(0.94, 0.99)
+                       position=[x, y, round(z, 4)], scale=[1.0, squash, 1.0], segments=72))
+        z += t * 0.99
+        r *= rnd.uniform(0.93, 0.985)
+    return out
+
+
+def strata(x, y, r, h, layers, seed, squash=0.7):
+    return kit('ext', 'suede', layers[0], module='dust', fn='strata', position=[x, y, 0.0], radius=r, height=h,
+               layers=layers, seed=seed, squash=squash, ease=0.004)
+
+
+def cactus(x, y, h, color='#8E9A6C'):
+    """The one accent: a little saguaro of sage corduroy, its ribs running up, two arms."""
+    r = h * 0.11
+    out = [kit('tube', 'corduroy', color, points=[[x, y, -0.02], [x, y, h * 0.5], [x, y, h - r]], radius=r, rib='Z',
+               grain=0.8, sides=24)]
+    out.append(kit('sphere', 'corduroy', color, position=[x, y, h - r], scale=r, rib='Z', grain=0.8))
+    for side, z0, top in ((-1, 0.38, 0.72), (1, 0.5, 0.86)):
+        pts = [[x, y, h * z0], [x + side * h * 0.17, y, h * (z0 + 0.02)], [x + side * h * 0.22, y, h * (z0 + 0.12)],
+               [x + side * h * 0.22, y, h * top]]
+        out.append(kit('tube', 'corduroy', color, points=pts, radius=r * 0.68, rib='Z', grain=0.8, sides=20))
+        out.append(kit('sphere', 'corduroy', color, position=[x + side * h * 0.22, y, h * top], scale=r * 0.68, rib='Z', grain=0.8))
     return out
 
 
 def dune(x, y, sx, sy, sz, color, rot=0.0):
-    return mound(x, y, -sz * 0.35, sx, sy, sz, color, material='corduroy', rotate=[0, 0, rot], rib='X')
+    return mound(x, y, -sz * 0.35, sx, sy, sz, color, material='corduroy', rotate=[0, 0, rot], rib='X', grain=2.5)
 
 
 def streak(x0, y0):
     """The icon: three felt puffs (the Fog cloud's circles, small) at the tall end of a flat felt wedge that thins away
     along the ground; footprints run on from its point."""
     out = []
-    s = 0.0012                                       # metres an icon unit
+    s = 0.0021                                       # metres an icon unit
     # the icon's circles (marks.CLOUD at 0.62, moved left 174) and its wedge (-285..356 along the ground, 140 tall)
     circles = [(-179 * 0.62 - 174, 35 * 0.62, 115 * 0.62), (-19 * 0.62 - 174, -67 * 0.62, 173 * 0.62),
                (179 * 0.62 - 174, 19 * 0.62, 131 * 0.62)]
     ground = 121
     puffs = [[round((cx + 285) * s, 4), round((ground - cy) * s, 4), round(r * s, 4)] for cx, cy, r in circles]
-    out.append(kit('puffs', 'felt', PUFF, puffs=puffs, depth=0.8, position=[x0, y0, 0.0]))
+    out.append(kit('puffs', 'wool', PUFF, puffs=puffs, depth=0.8, position=[x0, y0, 0.0]))
     # the wedge: a soft felt rope lying on the ground, fat under the puffs and thinning to a point
     L = (356 + 285) * s
     pts, rad = [], []
@@ -68,12 +89,12 @@ def streak(x0, y0):
         t = i / 8
         pts.append([round(x0 + 0.05 + L * t, 4), round(y0 + 0.01 * math.sin(t * 3), 4), round(0.07 * (1 - t) ** 1.2 + 0.004, 4)])
         rad.append(round(0.085 * (1 - t) ** 1.1 + 0.006, 4))
-    out.append(kit('tube', 'felt', PUFF, points=pts, radius=rad, flat=0.55, sides=20))
+    out.append(kit('tube', 'wool', PUFF, points=pts, radius=rad, flat=0.55, sides=20))
     # footprints: a roadrunner's X, two toes forward and two back, pressed in a line toward the right
     x = x0 + L + 0.18
     for i in range(7):
         side = 0.045 if i % 2 else -0.045
-        out.append(kit('extrude', 'suede', '#B86A42', outline=_foot(0.055), depth=0.004, ease=0.001,
+        out.append(kit('extrude', 'suede', '#A85A36', outline=_foot(0.07), depth=0.004, ease=0.001,
                        position=[round(x, 4), round(y0 - 0.02 + side, 4), 0.006], rotate=[90, 0, 0]))
         x += 0.2
     return out
@@ -94,22 +115,27 @@ def _foot(L):
 
 
 def motes():
-    return [kit('scatter', 'glow', '#FFD9A0', emit=2.5, count=160, radius=[0.003, 0.008], seed=7,
-                **{'in': [-1.6, -0.9, 0.15, 1.8, 1.4, 1.9]}, shadow=False)]
+    return [kit('scatter', 'glow', '#FFD9A0', emit=1.5, count=55, radius=[0.002, 0.005], seed=7,
+                **{'in': [-0.6, -0.2, 0.2, 1.6, 1.2, 1.6]}, shadow=False)]
 
 
 def props():
     out = [kit('box', 'sand', SAND, tint2=SAND2, size=[16.0, 14.0, 0.04], position=[0.0, -2.0, -0.04])]
     out += sky()
     # the mesas, far: rust and terracotta strata, the sun sinking behind the left one
-    out += mesa(-1.2, 3.6, 1.15, 1.25, [RUST, TERRA, '#B4553A', RUST, '#9E4330'], 1)
-    out += mesa(2.6, 3.4, 1.5, 0.9, [TERRA, '#C96A44', RUST, TERRA], 2, squash=0.7)
-    out += mesa(0.9, 4.1, 0.7, 0.55, ['#C86B45', TERRA, '#D07A4E'], 3)
-    # corduroy dunes, middle distance and a soft lip in the foreground
-    out += [dune(-2.6, 1.6, 1.8, 0.9, 0.5, '#D3814C', 12), dune(1.9, 1.8, 2.2, 1.0, 0.42, '#DB8E58', -8),
-            dune(0.2, 2.6, 2.4, 0.8, 0.38, '#C9744A', 4), dune(-0.9, -2.9, 2.6, 0.9, 0.36, '#E19A63', 6),
-            dune(3.2, -1.6, 1.4, 0.8, 0.3, '#D8894F', -20)]
-    out += streak(0.55, -0.35)
+    out += [strata(-1.5, 5.6, 1.15, 0.72, ['#C8714A', RUST, '#B5563A', TERRA], 1, squash=0.45),
+            strata(1.75, 5.0, 0.42, 1.15, ['#CD7A50', TERRA, RUST, '#C06041', RUST], 2, squash=0.85),
+            strata(4.0, 5.4, 0.8, 0.5, ['#C86B45', RUST, TERRA], 3, squash=0.5)]
+    out += cactus(2.55, 2.5, 0.7)
+    out += [kit('ext', 'corduroy', '#D68650', module='dust', fn='dunes', size=[14.0, 3.4], position=[0.5, 2.9, 0.0],
+                ridges=[[-0.9, 0.32, 0.55], [0.1, 0.42, 0.6], [1.0, 0.5, 0.6]], seed=4, rib='Y', grain=2.0),
+            kit('ext', 'corduroy', '#E09A62', module='dust', fn='dunes', size=[12.0, 1.8], position=[-0.5, -2.7, 0.0],
+                ridges=[[0.0, 0.3, 0.45]], seed=9, rib='Y', grain=2.0)]
+    # a few suede pebbles in the near foreground, melting out of focus
+    out += [mound(-1.15, -2.0, 0.0, 0.22, 0.17, 0.13, '#B9603F', material='suede'),
+            mound(-0.78, -2.25, 0.0, 0.12, 0.1, 0.08, '#C77048', material='suede'),
+            mound(-1.5, -2.35, 0.0, 0.1, 0.08, 0.06, '#A9553A', material='suede')]
+    out += streak(0.75, 0.15)
     out += motes()
     return out
 
@@ -117,24 +143,25 @@ def props():
 def lights():
     return {
         # warm bounce off the sand and sky into the front, so the face reads against the light
-        'fill': {'type': 'area', 'size_m': [3.0, 2.0], 'orbit': {'azimuth_deg': -25, 'elevation_deg': 18, 'distance_m': 5.0},
-                 'target': [0.0, 0.0, 0.7], 'irradiance': 0.7, 'color': '#FFD2A8'},
+        'fill': {'type': 'area', 'size_m': [3.0, 2.0], 'orbit': {'azimuth_deg': 10, 'elevation_deg': 18, 'distance_m': 5.0},
+                 'target': [0.0, 0.0, 0.7], 'irradiance': 1.3, 'color': '#FFD2A8'},
         # the paper sun's own glow from behind, on the speaker's back edges
         'rim': {'type': 'area', 'size_m': [2.0, 1.2], 'orbit': {'azimuth_deg': SUN_AZ + 10, 'elevation_deg': 20, 'distance_m': 4.5},
-                'target': [0.0, 0.0, 0.9], 'irradiance': 1.2, 'color': '#FFC080'},
+                'target': [0.0, 0.0, 0.9], 'irradiance': 2.6, 'color': '#FFB070'},
     }
 
 
 def shot():
     st = {'kind': 'stage', 'kit_scale': 11.0, 'props': props()}
     s = frame('dust', st, lights(),
-              tilt_shift(elevation=22, azimuth=-20, distance=8.0, lens=65, target=(0.35, 0.3, 0.7),
+              tilt_shift(elevation=19, azimuth=20, distance=8.2, lens=62, target=(0.75, 0.6, 0.85),
                          focus=(0.0, -0.15, 0.7), miniature=11),
               'barkhorn, Dust, golden hour in a suede desert',
               sky={'kind': 'gradient', 'zenith': '#F0B488', 'horizon': '#F6C899', 'ground': '#B8683F', 'strength': 0.35},
               fin=finish(bloom=0.3, saturation=0.18, lift=0.04, lift_color='#5C2A1C', vignette=0.22),
-              rotate_z=-14.0)
-    s['sun'] = {'irradiance': 4.5, 'azimuth_deg': SUN_AZ, 'elevation_deg': SUN_EL, 'angle_deg': 2.0, 'color': '#FFB574'}
+              rotate_z=16.0, haze={'box_m': [-9.0, -12.0, -0.1, 9.0, 6.0, 7.0], 'density': 0.006, 'anisotropy': 0.6,
+                                    'color': '#FFD8B0'})
+    s['sun'] = {'irradiance': 8.0, 'azimuth_deg': SUN_AZ, 'elevation_deg': SUN_EL, 'angle_deg': 2.0, 'color': '#FFB574'}
     return s
 
 
