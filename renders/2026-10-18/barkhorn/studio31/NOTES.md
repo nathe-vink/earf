@@ -118,3 +118,12 @@ flag lays a dark reflected streak down each side face that models it as glass, w
 for the water-clear edges) lose; one also saw a hard grey band low on 31e's side panels (the low back bank). So 31c
 stands unchanged as the rig for the drivers re-render. The faint grey wedge at the frames' upper left is 31c's own (the
 site blends its edges into #FAF9F5); a fix for it would need its own duel.
+
+## The drivers as made (main 01267eb, 2026-10-18)
+
+The 15PR400 woofer, the HF driver's machined exit, the ring in polished opaque acrylic. On the 31c rig the ring mirrors
+only the white set and reads flat (the drivers session's note, confirmed in a proof of Ice). A graduated card placed by
+the reflection probe where the ring's face mirrors (low in front, toward the camera), lighting the ring alone, strength 3
+(8 washed it pale): duel 13 on Ice, both orders, **the card wins** (6.1 to 5.8 and 5.5 to 5.0; "a moulded part catching
+the light" against "a painted decal"). The heroes take it (bright_hero); the woofer and horn macros re-render on their
+rig unchanged (the card is placed for the hero's camera). The lineup is off the page (the coordinator) and not rendered.

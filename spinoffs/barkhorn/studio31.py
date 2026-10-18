@@ -203,6 +203,18 @@ def bright3(name):
     return s
 
 
+def bright_hero(name):
+    """The heroes on the 31c rig with the drivers as made (2026-10-18): the woofer's ring is now polished opaque acrylic,
+    and on the pale set it mirrors only white and reads as a flat painted band. A graduated card where the ring's face
+    mirrors (low in front, toward the camera, placed by the reflection probe for the hero's camera) gives it a soft sheen
+    from top to bottom; it lights the ring alone. Won two blind duels on Ice against the ring without it (duels 13, 13b)."""
+    s = bright(name)
+    s['lights']['ring-card'] = {'type': 'panel', 'size_m': [1.2, 0.4], 'orbit': {'azimuth_deg': -27, 'elevation_deg': -2.5, 'distance_m': 2.0},
+                                'target': [0.0, -0.25, 0.49], 'strength': 3.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['woofer-ring'],
+                                'ramp': {'axis': 'z', 'at_m': [0.33, 0.47], 'values': [0.0, 1.0]}}
+    return s
+
+
 def darkfield(name):
     """Dark field on black: no light on the faces; two tall strips behind at grazing angles, so only the edges and
     corners glow (cast acrylic pipes light to its edges); a soft backlight through the body for the colour, the inside
@@ -360,7 +372,7 @@ def main():
     # round 31c: the studio set is bright field (it won its duel); the dark set stays as h7's record, unrendered
     # round 31d's bright2 lost its duels to the 31c rig (NOTES.md: duels 10, 11, 11b), so the heroes stay on bright
     for name, _ in COLOURS:
-        made[f'hero-light-{name}'] = bright(name)
+        made[f'hero-light-{name}'] = bright_hero(name)
     made['lineup'] = lineup_bright()
     for name in ('ember', 'fog', 'smoke'):
         made[f'concept-31e-{name}'] = bright3(name)
