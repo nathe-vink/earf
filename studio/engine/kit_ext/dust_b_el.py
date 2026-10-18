@@ -89,7 +89,26 @@ def _rock_mat(bpy, spec, name, seed):
         _streaks(m, *spec['streaks'], seed=float(seed) * 13.1)
     if spec.get('albedo', 1.0) != 1.0:
         D._albedo(m, spec['albedo'])
+    if spec.get('cap'):
+        _cap(m, *spec['cap'])
     return m
+
+
+def _cap(mat, z0, z1, k):
+    """The caprock: the base colour multiplied toward `k` from height z0 to z1 (object space, metres) and above."""
+    nt = mat.node_tree; bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    sock = bs.inputs['Base Color']
+    if not sock.links:
+        return
+    src = sock.links[0].from_socket
+    tc = nt.nodes.new('ShaderNodeTexCoord'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+    nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
+    mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = z0; mr.inputs['From Max'].default_value = z1
+    nt.links.new(sep.outputs['Z'], mr.inputs['Value'])
+    mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+    mul.inputs['B'].default_value = (k, k * 0.95, k * 0.92, 1.0)
+    nt.links.new(mr.outputs['Result'], mul.inputs['Factor'])
+    nt.links.new(src, mul.inputs['A']); nt.links.new(mul.outputs['Result'], sock)
 
 
 # --- butte ---------------------------------------------------------------------------------------------------------
@@ -109,7 +128,7 @@ def butte(bpy, name, p, kit):
 
     def flute(th_, z):
         # joints and buttresses: angular, a few metres deep, constant up the face (as joints are), a little ragged
-        a = noise.noise(Vector((math.cos(th_) * 9, math.sin(th_) * 9, 0.2)) + off)
+        a = noise.noise(Vector((math.cos(th_) * 6, math.sin(th_) * 6, 0.2)) + off) * 1.4
         b = noise.noise(Vector((math.cos(th_) * 26, math.sin(th_) * 26, z / H * 0.6)) + off)
         c = noise.noise(Vector((math.cos(th_) * 70, math.sin(th_) * 70, z / H * 1.5)) + off)
         # joints read as sharp grooves: fold the mid band so its troughs are narrow and its ridges broad
@@ -152,7 +171,11 @@ def butte(bpy, name, p, kit):
         q = {k: v for k, v in p.items() if k not in ('position', 'rotate', 'scale')}
         return kit.finish(bpy, nm, bm, q, smooth=True, mat=mat)
 
-    cliff_m = _rock_mat(bpy, p['cliff_mat'], f'{name}-cliff', p.get('seed', 1))
+    cm = dict(p['cliff_mat'])
+    if cm.get('cap'):                                       # the caprock band, given as shares of the height
+        z0, z1, k = cm['cap']
+        cm['cap'] = [pos.z + H * z0, pos.z + H * z1, k]
+    cliff_m = _rock_mat(bpy, cm, f'{name}-cliff', p.get('seed', 1))
     talus_m = _rock_mat(bpy, p['talus_mat'], f'{name}-talus', p.get('seed', 1) + 7)
     # the cliff: from a little inside the talus top (hidden) up to the rim, nearly vertical
     cliff, nc = [], 40
@@ -161,6 +184,11 @@ def butte(bpy, name, p, kit):
         t = j / nc
         cliff.append(ring(1.0 - 0.025 * t, z0 + (H - z0) * t))
     cap = ring(0.995, H * 1.002, fl=1.0)
+    # a broken rim: notches of 5 to 15 m where the caprock has fallen away
+    for i, (x, y, z) in enumerate(cap):
+        t = 2 * math.pi * i / seg
+        n = noise.noise(Vector((math.cos(t) * 11, math.sin(t) * 11, 3.3)) + off)
+        cap[i] = (x, y, z - max(0.0, n) * 28.0 * (H / 300.0))
     cliff.append(cap)
     objs = mesh(cliff, True, cliff_m, f'{name}-cliff')
     # the talus: concave, steep under the cliff and spreading out to the plain, gullied
@@ -300,13 +328,13 @@ def sagebrush(bpy, name, p, kit):
     bm_w, bm_l = bmesh.new(), bmesh.new()
     tips = []
     for k in range(p.get('stems', 14)):
-        a = rnd.uniform(0, 2 * math.pi); r0 = rnd.uniform(0, 0.12) * w
+        a = rnd.uniform(0, 2 * math.pi); r0 = rnd.uniform(0, 0.3) * w
         base = Vector((math.cos(a) * r0, math.sin(a) * r0, -0.02))
-        top = Vector((math.cos(a) * w * rnd.uniform(0.15, 0.45), math.sin(a) * d * rnd.uniform(0.15, 0.45), h * rnd.uniform(0.55, 0.9)))
+        top = Vector((math.cos(a) * w * rnd.uniform(0.25, 0.5), math.sin(a) * d * rnd.uniform(0.25, 0.5), h * rnd.uniform(0.45, 0.85)))
         mid = base.lerp(top, 0.5) + Vector((rnd.gauss(0, 0.05), rnd.gauss(0, 0.05), 0))
         kit._tube(bm_w, [list(base), list(mid), list(top)], [0.012, 0.008, 0.004], 1.0, 0.0, 6, 3)
         for j in range(6):
-            s = base.lerp(top, rnd.uniform(0.4, 0.95))
+            s = base.lerp(top, rnd.uniform(0.15, 0.95))
             e = s + Vector((rnd.gauss(0, 0.18) * w, rnd.gauss(0, 0.18) * d, rnd.uniform(0.05, 0.2) * h))
             kit._tube(bm_w, [list(s), list(e)], [0.004, 0.0015], 1.0, 0.0, 5, 2)
             tips.append(e)
@@ -314,8 +342,8 @@ def sagebrush(bpy, name, p, kit):
     for _ in range(p.get('leaves', 7000)):
         c = rnd.choice(tips)
         v = c + Vector((rnd.gauss(0, 0.11), rnd.gauss(0, 0.11), rnd.gauss(0, 0.08)))
-        ex = ((v.x / (w * 0.5)) ** 2 + (v.y / (d * 0.5)) ** 2 + ((v.z - h * 0.5) / (h * 0.55)) ** 2)
-        if ex > 1.0 or v.z < 0.05:
+        ex = ((v.x / (w * 0.55)) ** 2 + (v.y / (d * 0.55)) ** 2 + ((v.z - h * 0.35) / (h * 0.7)) ** 2)
+        if ex > 1.0 or v.z < 0.03:
             continue
         g = bmesh.ops.create_icosphere(bm_l, subdivisions=1, radius=1.0)
         q = Vector((rnd.gauss(0, 1), rnd.gauss(0, 1), rnd.gauss(0, 1))).to_track_quat('Z', 'Y').to_matrix()
