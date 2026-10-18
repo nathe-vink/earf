@@ -9,7 +9,7 @@ import math, os
 from common import area, camera, finish, piece, portrait_of, shot as frame, sky, sun_from_sky
 
 HDRI = 'kloppenheim_06_puresky'
-ROT = float(os.environ.get('DUSTB_ROT', 312.0))          # the sky's sun 21 degrees up at azimuth 110 (a little behind the speaker's right)
+ROT = float(os.environ.get('DUSTB_ROT', 330.0))          # the sky's sun 21 degrees up at azimuth 92 (the speaker's right)
 SAND = dict(material='pbr', texture='red_sand', tex_scale=1.6, tint='#C0633A', tint_mix=0.6, res='4k', bump=0.8)
 STONY = dict(texture='red_mud_stones', tex_scale=1.5, tint='#A45232', tint_mix=1.0, mask=[2.0, 0.4], bump=1.0)
 CLIFF = dict(material='pbr', texture='rock_face', tex_scale=15.0, tint='#C04A24', tint_mix=0.92, res='4k',
@@ -86,7 +86,7 @@ def props():
 
 def lights():
     # a soft bounce off the sunlit sand into the speaker's front, as a reflector would give
-    return {'bounce': area(-25, 4, 4.0, 2.6, '#F6C9A0', (6.0, 1.5), (0.0, 0.0, 0.6))}
+    return {'bounce': area(-25, 4, 4.0, 6.0, '#F6C9A0', (6.0, 1.5), (0.0, 0.0, 0.6))}
 
 
 def _cam(**k):

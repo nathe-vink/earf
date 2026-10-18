@@ -718,7 +718,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 2.6,
+   "irradiance": 6.0,
    "color": "#F6C9A0",
    "orbit": {
     "azimuth_deg": -25,
@@ -768,12 +768,12 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "kloppenheim_06_puresky",
-  "rotation_deg": 312.0,
+  "rotation_deg": 330.0,
   "strength": 0.6,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 110.4,
+  "azimuth_deg": 92.4,
   "elevation_deg": 20.8,
   "irradiance": 9.0,
   "angle_deg": 0.53,
