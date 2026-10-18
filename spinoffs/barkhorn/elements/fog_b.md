@@ -50,3 +50,12 @@
 | Pass | Score | Top changes | What I did |
 |---|---|---|---|
 | 1 | 5.5 | c1: the cabinet stood against bright fog, so move the brow back to 28 m. c2: the feet were hidden in tufts; clear them. c3: sun more to the side (az -125). c4: a warm bounce from camera-left. c5: a dense meadow, not tufts on dirt. c6: olive hills, sharper gullies. c7: wisps lower. c8: contrast 0.10, vignette 0.22. | All taken, except c1 adapted: the brow moved to 12.6 m, not 28. At 28 m the brow hides the fog sea entirely (proofs p1 to p6), but at 12.6 m the cabinet stands against the grass and the horn against the hills, with the fog between them and over the ridges. Grass 3500 tufts of three scans, short turf round the feet (z -0.015). Also: biased volumes (step rate 4), about 1.6x faster. |
+
+Between passes 1 and 2 (0.3-scale checks q1 to q4):
+- q1: pass 1's changes as given. The meadow was right, but the fog vanished: the brow at 12.6 m hid the fog sea, and
+  the sharper gullies raised Alpine peaks above the marine layer.
+- q2, q3: softer hills and a higher layer did not bring it back. An overhead debug view showed the fog sea gone flat:
+  biased volume marching (step rate 4) smears the billows over an 8 km box. Back to unbiased.
+- q4: back to the near brow (2.65 m), so the fog shows from eye level. Pass 1's c1 asked for a dark ground behind the
+  cabinet, and a greywacke outcrop at the brow (`boulder_01`, about 1 m tall, flanked by `coast_rocks_05`) gives it
+  one: the cabinet stands against rock, the horn against the hills and the fog pouring over them.
