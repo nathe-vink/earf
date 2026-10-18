@@ -45,13 +45,15 @@ def props():
     p = []
     p += sun(2.45, 0.42, 0.58, emit=3.0)
     # clouds: one at the speaker's depth on the left (crisp, its felt and seam legible), one behind on the right above
-    # the sun, and a small one far off
-    p += plush(-0.89, 0.6, 1.43, 0.00105, rz=10, fuzz=30000)
+    # the sun, a small one far off, one by the lens, one high
+    p += plush(-0.7, 0.66, 1.45, 0.00105, rz=10, fuzz=30000)
     # the joke: a balsa ladder up from the fog to that cloud, as if someone had just gone up to hang it
-    p.append(kit('ext', 'card', '#D8BC94', module='fog', fn='ladder', a=[-0.6, 0.78, -0.02], b=[-0.78, 0.66, 1.24],
+    p.append(kit('ext', 'card', '#D8BC94', module='fog', fn='ladder', a=[-0.42, 0.84, -0.02], b=[-0.59, 0.72, 1.26],
                  width=0.15, step=0.1, strip=0.013, across=[1, 0.3, 0]))
     p += plush(2.23, 1.26, 1.45, 0.0014, rz=-6, fuzz=0)
     p += plush(1.1, 1.65, 1.62, 0.0008, rz=4, fuzz=0)
+    p += plush(-1.97, -2.42, 2.33, 0.0011, rz=24, fuzz=0, top=7.0)          # close to the lens, top left: a soft blur
+    p += plush(0.13, 1.36, 2.56, 0.0012, rz=-8, fuzz=0, top=7.0)            # high up: above the landscape, in the 4:5
     # cotton wool: a drift round the speaker's feet (more at the front left), a few islands, the bank on the horizon the
     # sun sinks into, and soft lumps close to the lens
     p += wool([[-0.62, -0.3, 0.08, 0.3], [-0.3, -0.48, 0.04, 0.16], [-0.98, -0.05, 0.06, 0.24], [-0.75, 0.32, 0.05, 0.2],
@@ -98,4 +100,8 @@ def shot():
 
 
 def portrait():
-    return portrait_of(shot(), lens=58)
+    # the same set from the same place on a longer lens, aimed higher: the horn still meets the sky, the ladder's cloud
+    # and the sun both stay in the narrower frame, and the cloud by the lens falls outside it
+    cam = tilt_shift(elevation=16, azimuth=-22, distance=8.2, lens=96, target=(0.42, 0.35, 1.12), focus=(0.0, 0.05, 0.75),
+                     fstop=11, miniature=11)
+    return portrait_of(shot(), **cam)

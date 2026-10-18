@@ -56,3 +56,19 @@ cotton it cast a hard-edged wedge up the sky); a broad neutral sky fill from the
 - b1 (mid proof): the dawn burnt the fog on the right to flat white; the near cotton was all below the frame.
 - a12, a13: the fog light-linked out of the dawn and given its own gentle backlight; cotton moved into the bottom corners;
   the far cloud's shadow smudge on the sky removed by bringing it forward.
+- b2 (mid proof, with a full-size crop of the speaker): the speaker crisp edge to edge at f/11 at 1:11, the horn's rim
+  and the back corners included; the fog shows through the clear cabinet. Missing: a strong tilt-shift cue, nothing
+  close enough to the lens to melt.
+- a14, a15: a felt cloud hung close to the lens in the top left corner (about 40 px of blur at full size); the ladder's
+  cloud brought 0.2 m toward the speaker so it fits the 4:5 frame too.
+- p1 to p3 (4:5): the default (same camera, 58 mm) made the speaker a quarter of the frame. A closer camera put the horn
+  back against the fog, so the portrait keeps the landscape's place and angle on a 96 mm lens, aimed higher; the cloud by
+  the lens then falls outside it, and one more cloud hung high (above the landscape's frame) fills the tall sky.
+
+## Composition
+
+- Landscape: the speaker a little left of centre, 48 % of the frame's height, its front turned 16 degrees to the camera.
+  The ladder and its cloud on the left third, the sun low on the right third with a cloud above it, a small cloud far
+  off between. The fog's horizon falls at the cabinet's top, so the horn is seen against the sky.
+- Portrait: the same, narrower and taller; the speaker 34 % of the height in the lower half, the clouds climbing the
+  sky on their threads.
