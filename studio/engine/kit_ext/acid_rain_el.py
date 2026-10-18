@@ -131,6 +131,7 @@ def rain(bpy, name, p, kit):
     clear = p.get('clear', 0.0)
     lx, ly = p.get('lean', [0.08, 0.0])
     fall = Vector((lx, ly, -1.0)).normalized()
+    jit = math.tan(math.radians(p.get('lean_jitter_deg', 0.0)))
     avoid = [tuple(a) for a in p.get('avoid', [])]
     bm = bmesh.new()
     layers = (bm.verts.layers.float.new('rain_op'), bm.verts.layers.float.new('rain_t'))
@@ -153,7 +154,10 @@ def rain(bpy, name, p, kit):
             continue
         # a bigger drop falls faster and is longer in the frame; the far ones a touch thicker, so they hold a pixel
         r *= 1.0 + 0.6 * max(0.0, (d - 8.0) / far)
-        _spindle(bm, c - fall * L / 2, c + fall * L / 2, r, rnd.uniform(o0, o1) ** 1.5 if o1 > o0 else o0, layers=layers)
+        f = fall
+        if jit:                                            # gusts: each drop's fall a few degrees off the mean
+            f = (fall + Vector((rnd.uniform(-jit, jit), rnd.uniform(-jit, jit), 0.0))).normalized()
+        _spindle(bm, c - f * L / 2, c + f * L / 2, r, rnd.uniform(o0, o1) ** 1.5 if o1 > o0 else o0, layers=layers)
         n += 1
     ob = _object(bpy, name, bm, _rain_water(bpy, f'{name}-water', p.get('rough', 0.0), p.get('scatter', 0.5)))
     _glimpse_only(ob)
@@ -263,6 +267,13 @@ def puddle(bpy, name, p, kit):
     keep = p.get('keep', 0.65)
     h1 = _ripples(nt, 1.0 / big, 1.0, 0.035, keep)
     h2 = _ripples(nt, 1.0 / (big * 0.55), 2.0, 0.04, keep)
+    kb = p.get('big_rings', 1.0)                         # the large, old rings shallower than the fresh small ones
+    if kb != 1.0:
+        scaled = []
+        for h in (h1, h2):
+            mn = nt.nodes.new('ShaderNodeMath'); mn.operation = 'MULTIPLY'; mn.inputs[1].default_value = kb
+            nt.links.new(h, mn.inputs[0]); scaled.append(mn.outputs['Value'])
+        h1, h2 = scaled
     h3 = _ripples(nt, 1.0 / (big * 0.3), 3.0, 0.05, keep)
     h4 = _ripples(nt, 1.0 / (big * 0.14), 4.0, 0.06, keep)
     add = nt.nodes.new('ShaderNodeMath'); add.operation = 'ADD'
