@@ -25,38 +25,38 @@ CABINET = ['left', 'right', 'top', 'bottom', 'front-panel', 'back', 'brace*', 'r
 P = {
     # the arc: centres `pitch` apart along x, the middle `sag` metres farther from the camera than the ends; each copy
     # turned to face the lens, then `toe` degrees more toward the middle (0: every baffle square to the camera)
-    'pitch': 0.85, 'sag': 1.4, 'toe': 15.0,
+    'pitch': 0.64, 'sag': 0.5, 'toe': 0.0, 'stagger': 1.2, 'x0': 0.12, 'turns': [3.0, -4.0, -2.0, 5.0, -3.0, 2.0, -5.0, 4.0],
     # the camera: distance in front of the ends, height, lens; it looks level (verticals stay vertical), the frame
     # placed by `aim_z` (the height it centres on) and `shift_y`
-    'cam_dist': 15.0, 'cam_h': 2.6, 'lens': 70.0, 'aim_z': 0.8, 'shift_y': -0.015,
+    'cam_dist': 13.0, 'cam_h': 2.0, 'lens': 75.0, 'aim_z': 0.8, 'shift_y': -0.03, 'fstop': 2.8, 'focus_y': 0.4,
     # the key: a small hard source behind the middle of the arc, low, aimed through the line at the floor in front
     'key_y': 14.0, 'key_z': 9.5, 'key_size': 0.8, 'key_w': 0.0, 'key_irr': 5.5, 'key_color': 5200, 'key_spread': 100,
     # or the key as a sun from behind the wall (the sweep casts no shadow): W/m2 (0: the disc above), elevation, size
-    'sun': 22.0, 'sun_el': 20.0, 'sun_angle': 1.5,
+    'sun': 17.0, 'sun_el': 24.0, 'sun_angle': 1.5,
     # cutters behind the row (only the sun meets them), each opening its speaker's shape seen from the sun, `cut_in`
     # metres inside its edges; false off
-    'cutters': True, 'cut_in': 0.006,
+    'cutters': False, 'cut_in': 0.006,
     # side strips lighting the cabinets' edges (light-linked to the cabinets), W/m2; 0 off
-    'sides': 10.0, 'sides_r': 12.0,
+    'sides': 10.0, 'sides_r': 20.0,
     # the cyc: a ground row on the floor behind the line, washing the sweep's wall evenly
-    'cyc_irr': 30.0, 'cyc_z': 2.5, 'cyc_color': 5200,
+    'cyc_irr': 16.0, 'cyc_z': 2.5, 'cyc_color': 5200,
     # the top: a silk over the floor behind the line, so the floor between the line and the cove is paper, not a band
-    'top_irr': 3.0, 'top_y': 7.0,
+    'top_irr': 9.0, 'top_y': 7.0,
     # the over: a silk high over the floor in front of the line, lifting the shadows as a white ceiling would
-    'over_irr': 10.0,
+    'over_irr': 4.0, 'over_y': -5.0,
     # the front fill: a large soft source over the camera
     'fill_irr': 3.5, 'fill_color': 5200, 'fill_size': [8.0, 2.0], 'fill_z': 2.0, 'fill_spec': 0.0,
     # the faces: a fill for the speakers alone (light-linked to the cabinet, lining and rings), 0 off
-    'face_irr': 8.0,
+    'face_irr': 6.0, 'edge': 3.0, 'smoke_kick': 8.0,
     # the cones: a strip softbox above the camera light-linked to the cones, surrounds and caps (matte paper, so it
     # models them rather than glinting), W/m2; 0 off
     'strip': 45.0, 'strip_z': 2.6,
     # the paper
-    'paper': '#EEECE7', 'tooth': 0.5, 'tooth_mm': 0.6, 'mottle': 0.02, 'contact': 0.35,
-    'sky': 0.0, 'depth': 12.0,
+    'paper': '#EEECE7', 'tooth': 0.5, 'tooth_mm': 0.6, 'mottle': 0.02, 'contact': 0.6,
+    'sky': 0.4, 'depth': 12.0,
     # the render
-    'exposure': -2.55, 'wb': 5150, 'tint': 4.0, 'samples': 192, 'transmission_bounces': 16,
-    'white_in': 228, 'white_out': 234, 'peak': 246, 'contrast': 0.18, 'clarity': 0.10, 'sharpen': 0.45, 'vibrance': 0.3,
+    'exposure': -2.5, 'wb': 5150, 'tint': 4.0, 'samples': 192, 'transmission_bounces': 16,
+    'white_in': 228, 'white_out': 230, 'peak': 246, 'contrast': 0.18, 'clarity': 0.10, 'sharpen': 0.45, 'vibrance': 0.4,
 }
 
 
@@ -72,8 +72,12 @@ def arc(p):
     out = []
     for i in range(n):
         x = (i - (n - 1) / 2) * p['pitch']
-        y = p['sag'] * (1 - (x / half) ** 2)
+        y = p['sag'] * (1 - (x / half) ** 2) + (p['stagger'] if i % 2 else 0.0)   # every other one a step back
+        if i % 2:                       # the back rank spread by its extra distance, so each lands in its gap in the frame
+            x *= (y - cam_y) / (p['sag'] * (1 - (x / half) ** 2) - cam_y)
+        x += p['x0']
         rz = math.degrees(math.atan2(-x, y - cam_y)) + (p['toe'] * (1 if x < 0 else -1) if x else 0)
+        rz += p['turns'][i] if p.get('turns') else 0.0    # each set down by hand: a few degrees off true
         out.append((x, y, rz))
     return out
 
@@ -83,17 +87,17 @@ def cutters(p, a):
     in front only through the acrylic: the floor round the throws lies in the even light of the silks, the cabinets'
     grey shadows sink into it, and the colour that passes is all that reads (a photographer's cutters).
 
-    One plane square to the sun, behind the whole row; each speaker's opening is its cabinet's and its horn's boxes
-    projected along the sun onto it (`cut_in` metres inside them, so no white light slips past an edge). The plane is
+    One upright plane at the foot of the cove, down to the floor (the sun's rays are parallel, so an opening projected
+    along them works at any distance); each speaker's opening is its cabinet's and its
+    horn's boxes projected along the sun onto it (`cut_in` metres inside them, so no white light slips past an edge). The plane is
     cut into pieces round the openings: a full-height piece between neighbours, the shoulders beside the cabinet under
-    the wider horn, and a piece over each horn. The floor behind the plane is sunlit (its rays cross no cutter): with the
-    wall lit to match it reads as one pale field behind the row, the floor in front a little lower in its shade."""
+    the wider horn, a piece over each horn and one under each foot (the floor between the plane and the speaker). Only the strip of floor behind the plane, at the cove, is sunlit (its rays
+    cross no cutter), so the line where the sun stops is the cove's own."""
     e = math.radians(p['sun_el'])
-    v = (0.0, -math.sin(e), math.cos(e))                 # the plane's up; its across is world x; its normal faces the sun
-    n_ = (0.0, math.cos(e), math.sin(e))
-    y_far = max(y for _, y, _ in a)
-    C = (0.0, y_far + 0.45 + 1.6 * math.tan(e), 0.0)     # behind the farthest back at every height up to 1.6 m
-    S = lambda P: (P[1] - C[1]) * v[1] + (P[2] - C[2]) * v[2]    # a point's height in the plane, along the sun
+    v = (0.0, 0.0, 1.0)                                  # an upright plane just behind the back rank, facing the sun's way
+    n_ = (0.0, 1.0, 0.0)
+    C = (0.0, p['depth'] - 3.4, 0.0)                     # at the foot of the cove: the floor in front of it all in shade
+    S = lambda P: P[2] + (C[1] - P[1]) * math.tan(e)     # where the sun's ray through a point crosses the plane
     k = p['cut_in']
     ops = []
     for x, y, rz in a:
@@ -118,13 +122,13 @@ def cutters(p, a):
         out[name] = {'type': 'flag', 'size_m': [round(u1 - u0, 4), round(s1 - s0, 4)],
                      'position': [round(c, 4) for c in P], 'target': [round(P[j] + n_[j], 4) for j in range(3)],
                      'lights': ['sun'], 'see_through': True}
-    lo_s, hi_s = 0.1 / math.cos(e), 9.0                  # from 0.1 m up: a cutter that ran into the floor would print a
-                                                         # line in the paper's contact shadow (it is geometry to the AO)
+    lo_s, hi_s = 0.0, 9.0                                # down to the floor, so its foot hides behind the back rank
     for i, (cab, horn) in enumerate(ops):
         l = min(cab[0], horn[0]); r = max(cab[1], horn[1])
         prev_r = max(ops[i - 1][0][1], ops[i - 1][1][1]) if i else l - 9.0
         piece(f'cut{i}gap', prev_r - 0.01, l + 0.01, lo_s, hi_s)          # between this speaker and the last
         piece(f'cut{i}top', l, r, horn[3], hi_s)                          # over the horn
+        piece(f'cut{i}foot', l, r, lo_s, cab[2] + 0.01)                   # under the foot: the floor behind it
         if horn[0] < cab[0]:
             piece(f'cut{i}sl', horn[0], cab[0] + 0.005, lo_s, horn[2] + 0.005)   # beside the cabinet, under the horn
         if horn[1] > cab[1]:
@@ -137,7 +141,8 @@ def cutters(p, a):
 
 def camera(p):
     return {'position': [0.0, -p['cam_dist'], p['cam_h']], 'target': [0.0, 0.0, p['aim_z']], 'lens_mm': p['lens'],
-            'level': True, **({'shift_y': p['shift_y']} if p['shift_y'] else {})}
+            'level': True, **({'shift_y': p['shift_y']} if p['shift_y'] else {}),
+            **({'fstop': p['fstop'], 'focus': [0.0, p['focus_y'], 0.7]} if p.get('fstop') else {})}
 
 
 def shot(p, portrait=False):
@@ -154,7 +159,7 @@ def shot(p, portrait=False):
                 'irradiance': p['cyc_irr'], 'color': p['cyc_color'], 'spread_deg': 120, 'transmission': False},
         'top': {'type': 'area', 'size_m': [24.0, 6.0], 'position': [0.0, p['top_y'], 8.0], 'target': [0.0, p['top_y'] + 0.5, 0.0],
                 'irradiance': p['top_irr'], 'color': p['cyc_color'], 'spread_deg': 90, 'transmission': False},
-        'over': {'type': 'area', 'size_m': [16.0, 8.0], 'position': [0.0, -2.5, 8.0], 'target': [0.0, -2.5, 0.0],
+        'over': {'type': 'area', 'size_m': [16.0, 8.0], 'position': [0.0, p['over_y'], 8.0], 'target': [0.0, p['over_y'], 0.0],
                  'irradiance': p['over_irr'], 'color': p['cyc_color'], 'spread_deg': 90, 'transmission': False},
         'fill': {'type': 'area', 'size_m': p['fill_size'], 'position': [0.0, -p['cam_dist'] - 3.0, p['fill_z']],
                  'target': [0.0, 0.0, 0.7], 'irradiance': p['fill_irr'], 'color': p['fill_color'],
@@ -162,7 +167,8 @@ def shot(p, portrait=False):
     })
     if p['sides']:                      # two tall strips either side, lighting the cabinets' edges and corners
         for nm, sx, irr in (('side_l', -1, p['sides']), ('side_r', 1, p['sides_r'] or p['sides'])):
-            lights[nm] = {'type': 'area', 'size_m': [0.6, 3.0], 'position': [sx * 6.0, -3.0, 1.4], 'target': [0.0, 0.0, 0.7],
+            lights[nm] = {'type': 'area', 'size_m': [0.6, 3.0], 'position': [sx * 6.0, -3.0, 1.4] if sx < 0 else [7.0, -1.0, 1.6],
+                          'target': [0.0, 0.0, 0.7],
                           'irradiance': irr, 'color': p['fill_color'], 'receivers': CABINET}
     if p['cutters'] and p['sun']:
         lights.update(cutters(p, a))
@@ -171,6 +177,13 @@ def shot(p, portrait=False):
                           'target': [0.0, 0.0, 0.7], 'irradiance': p['face_irr'], 'color': p['fill_color'],
                           'receivers': CABINET + ['lining-*', 'woofer-ring'],
                           'specular': 0}
+    if p['edge']:                       # a narrow strip high in front that the cabinets' top front edges and faces mirror
+        lights['edge'] = {'type': 'area', 'size_m': [4.0, 0.6], 'position': [0.0, -p['cam_dist'] + 4.0, 3.2],
+                          'target': [0.0, 0.0, 0.9], 'irradiance': p['edge'], 'color': p['fill_color'], 'receivers': CABINET}
+    if p['smoke_kick']:                 # edge light on the smoked cabinet alone (the last copy)
+        lights['smoke'] = {'type': 'area', 'size_m': [0.4, 2.5], 'position': [5.0, 2.0, 1.4], 'target': list(a[-1][:2]) + [0.8],
+                           'irradiance': p['smoke_kick'], 'color': p['fill_color'],
+                           'receivers': [f'{c}#{len(a) - 1}' for c in CABINET] + [f'waveguide#{len(a) - 1}']}
     if p['strip']:
         lights['strip'] = {'type': 'area', 'size_m': [9.0, 0.5], 'position': [0.0, -4.0, p['strip_z']],
                            'target': [0.0, 0.0, 0.62], 'irradiance': p['strip'], 'color': p['fill_color'],
@@ -243,22 +256,28 @@ which surfaces a lamp lights), the camera (height, distance, lens, framing), the
 each speaker) and the finish (exposure, white point, contrast). The frame is {w} x {h}; this proof is at half size.
 
 Current settings (metres; the speakers' feet at z = 0, the line's middle at the origin, the camera toward -y):
-- arrangement: centres {pitch} m apart on an arc whose middle is {sag} m farther from the camera than its ends; each
-  speaker turned to face the lens, then {toe} deg more toward the middle.
+- arrangement: centres {pitch} m apart across, on an arc whose middle is {sag} m farther from the camera than its ends,
+  every other speaker (orange, green, violet, smoke) {stagger} m farther back, so the eight stand in two staggered
+  ranks; each turned to face the lens, then {toe} deg more toward the middle, then a few degrees off true as if set
+  down by hand ({turns}).
 - camera: at (0, -{cam_dist}, {cam_h}), {lens} mm lens on a 36 mm sensor, looking level (verticals vertical), the frame
-  centred on height {aim_z} m by lens shift, extra shift {shift_y} frame heights.
+  centred on height {aim_z} m by lens shift, extra shift {shift_y} frame heights; f/{fstop}, focused 0.7 m up at
+  y = {focus_y} (between the ranks).
 {keyline}
 - cyc: a 30 x 5 m softbox facing the wall from 7 m in front of it, centred {cyc_z} m up, washing the wall and the cove, {cyc_irr} W/m2, {cyc_color} K.
 - top: a 24 x 6 m silk at height 8 m over y = {top_y}, aimed down, {top_irr} W/m2 (the floor behind the line and the cove).
-- over: a 16 x 8 m silk at height 8 m over y = -2.5 (the floor in front of the line), aimed down, {over_irr} W/m2.
+- over: a 16 x 8 m silk at height 8 m over y = {over_y} (the floor in front of the line), aimed down, {over_irr} W/m2.
 - fill: an {fill_size} m softbox at (0, -{fill_y}, {fill_z}) behind the camera, aimed at the line, {fill_irr} W/m2, in
   reflections at a share of {fill_spec}.
 - face: a 4 x 2 m softbox at (0, -{face_y}, 2.6) light-linked to the cabinets, linings and rings only, no reflection,
   {face_irr} W/m2.
 - strip: a 9 x 0.5 m strip at (0, -4, {strip_z}) light-linked to the woofer cones, surrounds and caps and the horn's
   compression driver, {strip} W/m2.
-{cutline}- sides: two 0.6 x 3 m strips at (-6, -3, 1.4) and (6, -3, 1.4) aimed at the line, light-linked to the cabinets'
+{cutline}- sides: two 0.6 x 3 m strips at (-6, -3, 1.4) and (7, -1, 1.6) aimed at the line, light-linked to the cabinets'
   acrylic, in reflections, {sides} W/m2 (left) and {sides_r} W/m2 (right).
+- edge: a 4 x 0.6 m strip at (0, -{edge_y}, 3.2) light-linked to the cabinets' acrylic, in reflections (their top
+  front edges and faces mirror it), {edge} W/m2.
+- smoke: a 0.4 x 2.5 m strip at (5, 2, 1.4) light-linked to the smoked speaker's acrylic and horn only, {smoke_kick} W/m2.
 - sky: a pale grey dome, strength {sky} (0: the silks are the only ambient).
 - set: a paper sweep 34 m wide, its wall {depth} m behind the line, a 3 m cove.
 - paper: {paper}, roughness 0.85, tooth {tooth} at {tooth_mm} mm, colour mottle {mottle}; a contact shadow {contact}.
@@ -276,9 +295,9 @@ def card(p, tag, size=(2560, 1280)):
                f"- key: a {p['key_size']} m disc softbox at (0, {p['key_y']}, {p['key_z']}) behind the line, aimed at (0, -2, 0), "
                f"{p['key_irr']} W/m2 at its target, {p['key_color']} K, beam spread {p['key_spread']} deg; it is the only light "
                f"that throws the colour.")
-    return CARD.format(tag=tag, w=size[0], h=size[1], fill_y=p['cam_dist'] + 3.0, face_y=p['cam_dist'] - 1.0, keyline=keyline,
+    return CARD.format(tag=tag, w=size[0], h=size[1], fill_y=p['cam_dist'] + 3.0, face_y=p['cam_dist'] - 1.0, keyline=keyline, edge_y=p['cam_dist'] - 4.0,
                        cutline=('- cutters: black cutters behind the row that only the key meets (bounce light and the sky pass them), one '
-                                'plane square to the sun with an opening for each speaker the shape of its cabinet and horn seen from '
+                                'upright plane down to the floor at the foot of the cove, with an opening for each speaker the shape of its cabinet and horn seen from '
                                 'the sun, so the key reaches the floor in front only through the acrylic; the floor round the throws '
                                 'is lit by the silks alone.\n') if p['cutters'] else '',
                        **{k: v for k, v in p.items()})
