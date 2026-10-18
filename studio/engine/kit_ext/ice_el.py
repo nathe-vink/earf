@@ -331,8 +331,21 @@ def snowfield(bpy, name, p, kit):
     unevenly, level with the field beyond."""
     import assets
     ob = assets.ground(bpy, name, 'snow_02', tuple(p.get('size', [26, 26])), p.get('res', '2k'), tuple(p.get('position', [0, 0, 0])),
-                       p.get('cells'), 0.0, None, 0.0, None, 1.0, 1.0, p.get('relief'),
-                       tuple(p.get('flat', [0.0, 0.0, 0.9])) if p.get('flat') is not False else None)
+                       p.get('cells'), 0.0, None, 0.0, None, 1.0, 1.0, None, None)
+    relief = p.get('relief')
+    if relief:
+        # broad undulation, as assets.ground lays it, but measured from the terrain's own height at the speaker: its
+        # level footprint then sits flush in the slope, not in a hollow whose edge reads as a dark patch on the snow
+        from mathutils import noise
+        fx, fy, fr = p.get('flat', [0.0, 0.0, 0.9])
+        def n(x, y):
+            return noise.noise(Vector((x * 0.35, y * 0.35, 0.7)))
+        ox, oy = ob.location.x, ob.location.y
+        n0 = n(fx - ox, fy - oy)
+        for v in ob.data.vertices:
+            q = min(1.0, max(0.0, (math.hypot(v.co.x + ox - fx, v.co.y + oy - fy) - fr) / fr))
+            t = q * q * (3 - 2 * q)
+            v.co.z += relief * t * (n(v.co.x, v.co.y) - n0)
     mat = _snow_pbr(bpy, f'{name}-snow', p.get('res', '2k'), p.get('displace', 0.03), p.get('ripple', 0.012), p.get('sparkle', 1.0))
     ob.data.materials[0] = mat
     bank = p.get('bank')
