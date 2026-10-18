@@ -16,9 +16,9 @@ One long concrete room, lit by its own acrylic. You come in by a plain black doo
 room opens down its length: on the left the bar, a single 8.4 m spectrum of eight back-lit panels in the Atmosphere
 colours (Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke), under a dark honed stone top; behind it the back-bar, its
 bottles on edge-lit acrylic shelves that take the colour of the panel below them, with a Fog pair of speakers standing
-among them in two lit niches, horns at a seated guest's eye. On the right, four upholstered booths along the long street
-window, an Ember Bell on each table. At the far end, behind chest-high frosted Fog screens, the listening lounge: twelve
-low chairs facing the record wall, an Atmosphere pair in each corner on low Smoke plinths (Ember in front, Ice either side
+among them in two lit niches 3.15 m apart, horns at a seated guest's eye. On the right, four upholstered booths along the long street
+window, an Ember Bell on each table. At the far end, open to the bar, the listening lounge: ten
+low chairs facing the record wall, an Ember Bell on each of its two side tables, an Atmosphere pair in each corner on low Smoke plinths (Ember in front, Ice either side
 of the record wall), each grazed from behind in its complementary colour; the record wall runs floor to ceiling, its
 cubbies of uneven depth a diffuser, the DJ desk set into it with Cumulus against a dim Ice glow. Overhead, the whole
 ceiling is a back-lit acoustic membrane that keeps time: Fog and Ice at opening, Acid and Dust at sunset, Ember and Haze
@@ -60,7 +60,8 @@ From the brief:
 
 - **Site:** a Hayes Valley corner storefront, 30 x 60 ft (1,800 sq ft), 14 ft to the slab, a concrete shell; one long
   street window (9.2 m here) and a plain door on the side street.
-- **Capacity:** 49, Group B, so no Place of Assembly permit. **40 seats**: 12 at the bar, 16 in four booths, 12 in the lounge.
+- **Capacity:** 49, Group B, so no Place of Assembly permit. **38 seats** (the brief's "about 40"): 12 at the bar, 16 in four
+  booths, 10 in the lounge (two chairs that stood in front of the Ice pair were taken out in round 6).
 - **Use:** quiet, kissa-style listening early, the bar staff playing records; a DJ at the record wall late.
 - **Products:** two Atmosphere pairs in the lounge's corners on low Smoke plinths; a Fog pair in back-bar niches; Cumulus
   at the DJ desk; Bell over the bar and on the booth tables.
@@ -79,8 +80,13 @@ Mine, where the brief left a choice open (all reversible in `plan.py` or `shots.
   that does not exist yet.
 - **The Fog niches' floor at 450 mm**, so the horns sit at a bar-stool guest's eye (about 1.5 m), as Gold Line flips its
   Altecs.
-- **The screens** between the bar and the lounge are chest high (1350), frosted, thermoformed Fog (research move 12),
-  so the lounge reads from the door but the bar's talk is broken.
+- **No screens** between the bar and the lounge. I first drew chest-high frosted Fog screens there (research move 12);
+  in round 2 they hid the Ember pair and read as two brown boxes, so they came out (`plan.SCREENS = False` puts them
+  back). The lounge is open to the bar.
+- **The Fog niches** sit in the back-bar's third and sixth bays, 3.15 m apart (first drawn 5.5 m apart, at the bar's
+  two ends, where no camera could hold both).
+- **Bell on the lounge's two side tables** too, in Ember (the brief names the bar and the booth tables only): without
+  them the low chairs were silhouettes.
 - **The back-bar's display shelves take the colour of the bar panel below them**, bay by bay; its back panel is Fog
   white, softly lit, so the bottles read in silhouette.
 - **Complementary washes** behind each corner pair (research move 11): Dust behind Ice, Ice behind Ember.
@@ -124,6 +130,8 @@ New from the mockup:
 
 - Is the spectrum bar the bar, or one colour (say Smoke, lit) with the spectrum kept for the back-bar's shelves? Every
   view shows how strongly the eight colours read.
-- Should the screens stay chest high, or rise to the membrane (a quieter lounge, a hidden one)?
+- Should screens between the bar and the lounge come back (a quieter lounge, but they hid the Ember pair)?
+- Should Bell have a pendant version (drawn here as its shade on a cord), and Bell on the lounge's side tables?
+- People: no figures are in these views (no scanned people were to hand); every critic asked for some.
 
 <!-- PASSES -->

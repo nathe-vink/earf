@@ -19,6 +19,15 @@ views rendered from one state of the model and shots.
 
 | 4 | listening | 4.5 | 7.0 | the camera must face the record wall (the card); the pair cut at the frame's edges; ceiling brightest; haze veiling; chairs the Ember's own hue | camera back toward the record wall from the centre aisle, 24 mm; the pairs lit by 0.7 m soft area lamps (6 W/m2 at the cabinet) instead of spots that overshot onto the wall; haze 0.004; membrane 0.006; chairs re-dyed darker, each turned a few degrees |
 | 4 | door | 4.5 | 6.5 | still a red-magenta cast (floor r/g 2.2); the pairs hidden behind chairs; the ceiling speckled; the recess a grey hole; a table on the axis | **measured the tint: in this build a higher tint adds magenta** (0, 10, 25 took the floor's g from 25 to 23 to 20); 3000 K with tint -25 takes the floor's r/g to 1.5; standing eye 1.6 m at 32 mm; panels 0.4 in this view; washes 250 W; the recess 0.008; the side tables off the aisle. The rest of round 4 (rendered at tint 10) was not judged |
+| 5 | listening | 4.5 | 6.5 | (facing the record wall from the aisle) the pair cut at the edges behind chairs; leather plastic; cyan alcove; walls lit like day | **three passes at 4.5: the concept changed** to a three-quarter view of one Ice speaker beside the record wall; two chairs in front of the Ice pair taken out |
+| 5 | door | 4.5 | 6.5 | too bright and green at 3000 K / -25; ceiling hotspots from the washes; the pairs small | 3300 K / -10, exposure down; washes 90 W aimed lower. The door view held at 4.5 to 5.0 for three passes; it stays as the establishing view (the critic: "a tighter companion shot should carry the product") |
+| 5 | bar | 4.5 | 7.0 | too bright for night; panels clipped and flat; a bright wall right of the back-bar; floor hotspot | exposure down a stop, panels brighter (graded 0.35 to 1); niches and back panel down |
+| 5 | back-bar | 4.0 | 6.0 | labels read as twine on every bottle; too many bottles; shelves outshine the speaker; two white balances | labels: a block and two lines of type; gaps 18 %; shelves 0.15; Fog spot 320 W |
+| 6 | listening | **5.0** | 7.5 | (the new concept) the room lit like dusk, not night; no colour spill from the speaker; the record wall too bright and busy; flat walls | exposure -0.1 overall; record-wall spots 30 W at 25 deg |
+| 6 | bar | 4.5 | 6.5 | the end wall and floor beside it brighter than the panels; clones; crushed stools; Ember cut | the lamps on the pairs tightened (0.45 m, 1 m away); Fog spots 110 W; camera so all eight panels read |
+| 6 | back-bar | 4.0 | 6.5 | the speaker the darkest thing; shelves outshine it; one speaker over dead floor | **three passes at 4.0 to 4.5: the concept changed**: the pair from across the room above the bar; the niches moved to bays 3 and 6 (3.15 m apart); shelves 0.08 |
+
+Then the finals (the shots in `studio/shots/barkhorn/planet32/final/`, 256 samples, the finish), each judged blind once more.
 
 Lessons kept in the code:
 
@@ -26,4 +35,6 @@ Lessons kept in the code:
 - AgX desaturates emissive colour near white; the brand colours need Khronos PBR Neutral;
 - in this build a higher white-balance tint adds magenta; the room's grade is 3000 K at tint -25 (measured);
 - a 10 mm gap round the closed door let the street lamp in as fireflies the denoiser smears into a blob;
-- a haze box coplanar with the membrane draws a curved band; it stops 60 mm below.
+- a haze box coplanar with the membrane draws a curved band; it stops 60 mm below;
+- two sidewalk boxes overlapping on the same face rendered black (the CLAUDE.md rule): the street's boxes meet, never overlap;
+- the pairs need a small soft lamp close to them (0.45 m, 1 m off): a narrow spot overshot onto the wall, a big panel lit the whole corner.
