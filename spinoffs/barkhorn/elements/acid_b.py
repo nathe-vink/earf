@@ -5,7 +5,7 @@ depth), with crowns and rings where it lands. No strings. The pieces are studio/
 
     python3 spinoffs/barkhorn/elements/build.py acid_b
 """
-import os
+import json, os
 
 import common as C
 
@@ -94,6 +94,9 @@ def shot():
         # a card behind and to the right, toward the sun, to rim the cabinet's right edge
         'rim': C.area(130, 5, 3.0, 9.0, '#F1E6B8', size=(1.5, 1.5), target=(0.0, 0.0, 0.5)),
     }
+    # the rim card lights the speaker alone: at 3 m behind it, low, it also lit a bright patch of the rock beside it
+    parts = sorted(json.load(open(os.path.join(C.ROOT, 'spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.json')))['parts'])
+    lights['rim']['receivers'] = parts
     s = C.shot(NAME, props(cam), cam, C.sky(hdri, rot, strength=strength, res='4k'), 'barkhorn Acid, acid rain',
                lights=lights, sun=sun, white_balance=(5700, -6.0), rotate_z=16.0, position=(0.0, 0.0, -0.15), exposure=-0.1, look='AgX - Base Contrast',
                haze={'density': 0.0018, 'anisotropy': 0.5, 'color': '#A9AE84', 'box_m': [-700, -15, -2, 700, 900, 20]},
