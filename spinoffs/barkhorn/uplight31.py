@@ -29,9 +29,10 @@ PRODUCT = 'studio/products/barkhorn-cloud.json'
 W, D, H = 0.56, 0.43, 1.19          # the speaker's footprint and height with its horn, metres (the CAD's box)
 RENDER = {'samples': 128, 'adaptive': 0.02, 'denoise': True, 'clamp': 10, 'bounces': 12, 'view': 'Khronos PBR Neutral',
           'exposure': 0.6, 'white_balance_k': 5600, 'white_balance_tint': 0.0}
-CONCRETE = {'texture': 'concrete_layers_02', 'res': '4k', 'bump': 1.2, 'vary': 0.22, 'vary_m': 3.5}   # board-formed, photographed (Poly Haven CC0)
+CONCRETE = {'texture': 'concrete_layers_02', 'res': '4k', 'tex_scale': 1.4, 'bump': 1.2, 'vary': 0.22, 'vary_m': 3.5, 'ties': [0.6, 0.62]}   # board-formed, photographed (Poly Haven CC0)
 NIGHT = {'kind': 'hdri', 'polyhaven': 'kloppenheim_07_puresky', 'res': '2k', 'strength': 0.6, 'rotation_deg': 0.0}   # an overcast night sky: the ambient and what the water mirrors
-WARM = '#FFF2DE'                    # the uplights' lamps: a warm white LED, 3500 K or so
+WARM = '#FFF2DE'
+LENS = 0.35                         # the plinth lens's glow: soft, never a clipped white line                    # the uplights' lamps: a warm white LED, 3500 K or so
 
 
 def kit(fn, pos, **kw):
@@ -56,10 +57,13 @@ def placement(kind, x=0.0, y=0.0, z0=0.0, power=1.0):
     if kind == 'under':
         props = [{'kind': 'kit', 'shape': 'box', 'position': [x, y, 0.0], 'size': [W + 0.10, D + 0.10, z0], 'material': 'clay',
                   'color': '#141415', 'roughness': 0.45, 'ease': 0.004},
-                 {'kind': 'kit', 'shape': 'box', 'position': [x, y, z0 - 0.002], 'size': [W + 0.06, D + 0.06, 0.003],
-                  'material': 'glow', 'color': WARM, 'emit': 1.2, 'shadow': False}]
-        lamp = {'type': 'spot', 'position': [x, y, z0 + 0.004], 'target': [x, y + 0.05, z0 + 3.0], 'cone_deg': 100, 'blend': 0.5,
-                'radius_m': 0.12, 'power_w': 40000.0 * power, 'color': WARM}
+                 {'kind': 'kit', 'shape': 'box', 'position': [x, y, z0 - 0.002], 'size': [W + 0.04, D + 0.04, 0.003],
+                  'material': 'glow', 'color': WARM, 'emit': LENS, 'shadow': False}]
+        # the lamp: a flat panel of LEDs under the lens, the speaker's footprint, on the lens 10 mm below the cabinet's bottom (its feet are 12 mm) (a flat lamp, so no
+        # part of the light starts inside the cabinet: a round lamp of any size this close would reach through the
+        # bottom panel into the batts)
+        lamp = {'type': 'area', 'size_m': [W - 0.08, D - 0.08], 'position': [x, y, z0 + 0.002], 'target': [x, y, z0 + 3.0],
+                'spread_deg': 120, 'power_w': 450.0 * power, 'color': WARM}
     elif kind == 'front':
         fy = y - D / 2 - 0.34
         props = fixture(x, fy, rotate=(-14, 0, 0))
@@ -88,23 +92,23 @@ def frame(key, kind=SLIDE, size=(1600, 1600)):
                      'instances': [{'flavour': FLAVOUR[key], 'position': [0, 0, z0], 'rotate_z': 0, 'hide': ['cloth-disc']}]},
          'set': {'kind': 'stage', 'props': [
              kit('wall', [0.0, WALL_Y + 0.25, 0.0], size=[9.0, 0.5, 7.0], **CONCRETE),
-             kit('paving', [0.0, -1.5, 0.0], size=[12.0, 9.0], texture='concrete_pavement', res='2k', wet=0.35, puddle_m=1.5, vary=0.2),
+             kit('paving', [0.0, -1.5, 0.0], size=[12.0, 9.0], texture='concrete_pavement', res='2k', wet=0.7, puddle_m=0.8, vary=0.2),
          ] + props},
-         'sky': dict(NIGHT, strength=0.12),
+         'sky': dict(NIGHT, strength=0.04),
          'lights': {
              'up': lamp,
              # moonlight: a faint cool wash from high in front, so the concrete's boards read where the lamp does not reach
              'moon': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-2.5, -6.0, 6.0], 'target': [0.0, WALL_Y, 1.2],
-                      'irradiance': 0.3, 'color': '#D4DCF2'}},
-         'haze': {'box_m': [-6.0, -6.0, -0.05, 6.0, WALL_Y - 0.02, 6.5], 'density': 0.012, 'anisotropy': 0.3},
-         'camera': {'position': [0.3, -2.45, 0.6], 'target': [0.04, 0.5, 1.75], 'lens_mm': 22.0, 'level': True},
-         'render': dict(RENDER),
+                      'irradiance': 0.06, 'color': '#D4DCF2'}},
+         'haze': {'box_m': [-6.0, -6.0, -0.05, 6.0, WALL_Y - 0.02, 6.5], 'density': 0.03, 'anisotropy': 0.3},
+         'camera': {'position': [0.25, -3.5, 0.85], 'target': [0.0, 0.6, 1.4], 'lens_mm': 35.0, 'level': True},
+         'render': dict(RENDER, exposure=1.0),
          'size': list(size),
          'title': f'barkhorn, {NAME[key]}, uplit ({kind}) before a concrete wall'}
     return s
 
 
-def facade(size=(2880, 1200), camera=None, exposure=2.4):
+def facade(size=(2880, 1200), camera=None, exposure=1.0):
     """The night hero: the eight in a row on the quay before an opera house's concrete river front, each on its uplight.
     They stand 2.5 m out from the wall, not 1 m as in the slides: the light that leaks up through each shell fans out,
     so further out its wash on the wall is broader and taller and meets its neighbours' (a proof at 1 m gave eight thin
@@ -119,10 +123,10 @@ def facade(size=(2880, 1200), camera=None, exposure=2.4):
         kit('wall', [0.0, wall_y - 0.12, 0.0], size=[60.0, 0.24, 0.6], **CONCRETE),
         kit('wall', [0.0, wall_y - 0.3, 11.0], size=[60.0, 0.6, 1.6], **CONCRETE),
         # the quay: wet flags, a stone kerb, the river a step below
-        kit('paving', [0.0, -0.4, 0.0], size=[60.0, 6.0], texture='granite_tile', res='2k', wet=0.8, puddle_m=1.0, vary=0.2),
-        {'kind': 'kit', 'shape': 'box', 'position': [0.0, -3.48, -0.45], 'size': [60.0, 0.16, 0.45], 'material': 'clay',
+        kit('paving', [0.0, -0.4, 0.0], size=[60.0, 6.0], texture='granite_tile', res='2k', wet=1.0, puddle_m=2.5, vary=0.2),
+        {'kind': 'kit', 'shape': 'box', 'position': [0.0, -3.48, -0.15], 'size': [60.0, 0.16, 0.15], 'material': 'clay',
          'color': '#3A3936', 'roughness': 0.6},
-        kit('water', [0.0, -18.0, -0.4], size=[80.0, 29.0], ripple=0.22, ripple_m=1.4),
+        kit('water', [0.0, -18.0, -0.15], size=[80.0, 29.0], ripple=0.1, ripple_m=1.4),
         # the city across the river, far behind the camera's back, is felt only as a warm glow low on the water
         {'kind': 'kit', 'shape': 'box', 'position': [0.0, -40.0, -0.4], 'size': [80.0, 0.5, 0.3], 'material': 'glow',
          'color': '#FFC98A', 'emit': 0.6, 'shadow': False},
@@ -137,13 +141,13 @@ def facade(size=(2880, 1200), camera=None, exposure=2.4):
         insts.append({'flavour': FLAVOUR[k], 'position': [x, 0.0, Z0], 'rotate_z': 0, 'hide': ['cloth-disc']})
     # moonlight, cool and faint, high over the river
     lights['moon'] = {'type': 'area', 'size_m': [10.0, 6.0], 'position': [-14.0, -30.0, 22.0], 'target': [0.0, wall_y, 3.0],
-                      'irradiance': 0.08, 'color': '#C4D0F0'}
+                      'irradiance': 0.03, 'color': '#C4D0F0'}
     s = {'product': {'def': PRODUCT, 'flavour': FLAVOUR[KEYS[0]], 'instances': insts},
          'set': {'kind': 'stage', 'props': props},
-         'sky': dict(NIGHT, strength=0.07),
+         'sky': dict(NIGHT, strength=0.035),
          'lights': lights,
-         'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.35, 16.0], 'density': 0.006, 'anisotropy': 0.3},
-         'camera': camera or {'position': [0.9, -16.0, 1.0], 'target': [0.0, 0.0, 1.9], 'lens_mm': 30.0, 'level': True},
+         'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.35, 16.0], 'density': 0.012, 'anisotropy': 0.3},
+         'camera': camera or {'position': [0.4, -11.0, 0.7], 'target': [0.4, 0.0, 1.6], 'lens_mm': 32.0, 'level': True},
          'render': dict(RENDER, samples=160, exposure=exposure),
          'size': list(size),
          'title': 'barkhorn, the eight uplit along an opera house\'s concrete river front at night'}
@@ -159,7 +163,7 @@ def main():
         for k in ('red', 'ice'):
             made[f'study-{kind}-{k}'] = frame(k, kind, size=(1200, 1200))
     made['facade'] = facade()
-    made['facade-portrait'] = facade((1440, 1800), {'position': [0.6, -11.5, 1.5], 'target': [0.0, 0.0, 3.6], 'lens_mm': 26.0, 'level': True}, 2.9)
+    made['facade-portrait'] = facade((1440, 1800), {'position': [0.6, -11.5, 1.5], 'target': [0.0, 0.0, 3.6], 'lens_mm': 26.0, 'level': True}, 1.3)
     for n, s in made.items():
         json.dump(s, open(os.path.join(OUT, n + '.json'), 'w'), indent=1)
     print(len(made), 'shots in', os.path.relpath(OUT, ROOT))

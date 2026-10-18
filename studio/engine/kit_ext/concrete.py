@@ -11,7 +11,7 @@
   how much of it holds water (smooth, dark, mirroring), in puddles `puddle_m` across.
 - on a wall or paving, `texture` (a Poly Haven texture id: concrete_layers_02 is board-formed) uses the photographed
   set instead, laid at its real size or `tex_scale` m a tile, `res`, `bump`, its repetition broken by a slow tone
-  variation `vary` (0.25) `vary_m` across; on paving, `wet` and `puddle_m` as above.
+  variation `vary` (0.25) `vary_m` across, form ties' holes on a grid `ties` [dx, dz] m; on paving, `wet` and `puddle_m` as above.
 - water: a river's surface `size` [w, d] at `position` (its z the water line): near black, a mirror broken by slow
   ripples (`ripple_m` long across x, `ripple` their strength), so lights on the far bank draw down into long streaks.
 """
@@ -224,7 +224,7 @@ def _photo(bpy, p, kind):
     variation in tone and vertical streaks multiplied into its colour, so a 2 m tile laid across a 60 m wall does not
     repeat to the eye; on paving, `wet` puddles (dark, smooth, mirroring) and a damp darkening over all."""
     import assets
-    key = ('photo', kind) + tuple((k, str(p.get(k))) for k in ('texture', 'res', 'tex_scale', 'bump', 'vary', 'wet', 'puddle_m', 'tint', 'tint_mix', 'rough_mul'))
+    key = ('photo', kind) + tuple((k, str(p.get(k))) for k in ('texture', 'res', 'tex_scale', 'bump', 'vary', 'vary_m', 'ties', 'wet', 'puddle_m', 'tint', 'tint_mix', 'rough_mul'))
     if key in _MATS:
         return _MATS[key]
     m = assets.pbr(bpy, p['texture'], p.get('res', '2k'), scale=p.get('tex_scale'), bump=p.get('bump', 1.0),
@@ -242,6 +242,14 @@ def _photo(bpy, p, kind):
     streak = g.noise(g.combine(g.math('MULTIPLY', X, 3.0), Y, g.math('MULTIPLY', Z, 0.15)), 1.0, detail=4.0)
     tone = g.math('SUBTRACT', 1.0 + 0.5 * vary, g.math('ADD', g.math('MULTIPLY', g.ramp(blot, 0.3, 0.7), vary),
                                                       g.math('MULTIPLY', g.ramp(streak, 0.45, 0.75), 0.6 * vary)))
+    holes = None
+    tx, tz = p.get('ties') or (0, 0)
+    if tx > 0 and tz > 0:                                # the form ties' holes, on their grid, sunk and dark
+        hx = g.math('SUBTRACT', g.math('FRACT', g.math('DIVIDE', X, tx)), 0.5)
+        hz = g.math('SUBTRACT', g.math('FRACT', g.math('DIVIDE', g.math('ADD', Z, tz * 0.25), tz)), 0.5)
+        d = g.math('SQRT', g.math('ADD', g.math('POWER', g.math('MULTIPLY', hx, tx), 2.0), g.math('POWER', g.math('MULTIPLY', hz, tz), 2.0)))
+        holes = g.math('SUBTRACT', 1.0, g.ramp(d, 0.009, 0.015))
+        tone = g.math('MULTIPLY', tone, g.math('SUBTRACT', 1.0, g.math('MULTIPLY', holes, 0.55)))
     puddle = None
     if kind == 'paving' and p.get('wet', 0) > 0:
         wet = p['wet']
@@ -270,6 +278,13 @@ def _photo(bpy, p, kind):
             nm = nsock.links[0].from_node
             if 'Strength' in nm.inputs:
                 g.link(g.math('MULTIPLY', g.math('SUBTRACT', 1.0, puddle), p.get('bump', 1.0)), nm.inputs['Strength'])
+    if holes is not None:                                # the holes' cones: a bump chained over the texture's normal
+        nsock = b.inputs['Normal']
+        bn = g.n('ShaderNodeBump'); bn.inputs['Strength'].default_value = 0.8; bn.inputs['Distance'].default_value = 0.004
+        g.link(g.math('MULTIPLY', holes, -1.0), bn.inputs['Height'])
+        if nsock.is_linked:
+            g.link(nsock.links[0].from_socket, bn.inputs['Normal'])
+        g.link(bn.outputs['Normal'], nsock)
     _MATS[key] = m
     return m
 

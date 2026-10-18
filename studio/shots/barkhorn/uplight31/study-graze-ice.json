@@ -37,9 +37,14 @@
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
+    "tex_scale": 1.4,
     "bump": 1.2,
     "vary": 0.22,
-    "vary_m": 3.5
+    "vary_m": 3.5,
+    "ties": [
+     0.6,
+     0.62
+    ]
    },
    {
     "kind": "kit",
@@ -57,8 +62,8 @@
     ],
     "texture": "concrete_pavement",
     "res": "2k",
-    "wet": 0.35,
-    "puddle_m": 1.5,
+    "wet": 0.7,
+    "puddle_m": 0.8,
     "vary": 0.2
    },
    {
@@ -106,7 +111,7 @@
   "kind": "hdri",
   "polyhaven": "kloppenheim_07_puresky",
   "res": "2k",
-  "strength": 0.12,
+  "strength": 0.04,
   "rotation_deg": 0.0
  },
  "lights": {
@@ -144,7 +149,7 @@
     1.0,
     1.2
    ],
-   "irradiance": 0.3,
+   "irradiance": 0.06,
    "color": "#D4DCF2"
   }
  },
@@ -157,21 +162,21 @@
    0.98,
    6.5
   ],
-  "density": 0.012,
+  "density": 0.03,
   "anisotropy": 0.3
  },
  "camera": {
   "position": [
-   0.3,
-   -2.45,
-   0.6
+   0.25,
+   -3.5,
+   0.85
   ],
   "target": [
-   0.04,
-   0.5,
-   1.75
+   0.0,
+   0.6,
+   1.4
   ],
-  "lens_mm": 22.0,
+  "lens_mm": 35.0,
   "level": true
  },
  "render": {
@@ -181,7 +186,7 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.6,
+  "exposure": 1.0,
   "white_balance_k": 5600,
   "white_balance_tint": 0.0
  },
