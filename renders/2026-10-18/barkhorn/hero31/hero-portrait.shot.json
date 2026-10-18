@@ -1,9 +1,9 @@
 {
  "sun": {
   "azimuth_deg": 180,
-  "elevation_deg": 24.0,
-  "irradiance": 23.0,
-  "angle_deg": 1.5,
+  "elevation_deg": 26.0,
+  "irradiance": 32.0,
+  "angle_deg": 1.0,
   "color": 5200
  },
  "product": {
@@ -126,9 +126,9 @@
  },
  "materials": {
   "sweep": {
-   "tooth": 1.6,
-   "tooth_mm": 0.6,
-   "mottle": 0.05,
+   "tooth": 2.2,
+   "tooth_mm": 0.9,
+   "mottle": 0.06,
    "roughness": 0.9
   }
  },
@@ -142,14 +142,14 @@
    "position": [
     0.0,
     5.0,
-    4.5
+    3.0
    ],
    "target": [
     0.0,
     12.0,
-    4.5
+    3.0
    ],
-   "irradiance": 15.0,
+   "irradiance": 24.0,
    "color": 5200,
    "spread_deg": 120,
    "transmission": false
@@ -170,7 +170,7 @@
     7.5,
     0.0
    ],
-   "irradiance": 4.0,
+   "irradiance": 6.0,
    "color": 5200,
    "spread_deg": 90,
    "transmission": false
@@ -183,15 +183,15 @@
    ],
    "position": [
     0.0,
-    -5.0,
+    -3.0,
     8.0
    ],
    "target": [
     0.0,
-    -5.0,
+    -3.0,
     0.0
    ],
-   "irradiance": 6.0,
+   "irradiance": 3.5,
    "color": 5200,
    "spread_deg": 90,
    "transmission": false
@@ -285,14 +285,14 @@
    "position": [
     0.0,
     -6.0,
-    2.6
+    3.2
    ],
    "target": [
     0.0,
     0.0,
     0.7
    ],
-   "irradiance": 5.5,
+   "irradiance": 9.0,
    "color": 5200,
    "receivers": [
     "left",
@@ -346,16 +346,16 @@
     2.5
    ],
    "position": [
-    3.5,
-    1.0,
-    1.6
+    4.0,
+    0.5,
+    2.0
    ],
    "target": [
     1.975,
     0.9,
     0.8
    ],
-   "irradiance": 45.0,
+   "irradiance": 75.0,
    "color": 5200,
    "receivers": [
     "left#7",
@@ -409,20 +409,20 @@
   "transparent_bounces": 64,
   "view": "Khronos PBR Neutral",
   "exposure": -2.5,
-  "white_balance_k": 5000,
-  "white_balance_tint": 6.0
+  "white_balance_k": 5250,
+  "white_balance_tint": 3.0
  },
  "finish": {
   "enabled": true,
   "white_in": 228,
   "white_out": 230,
   "peak": 246,
-  "contrast": 0.18,
+  "contrast": 0.22,
   "clarity": 0.1,
   "sharpen": 0.45,
   "sharpen_px": 0.7,
   "dream": {
-   "saturation": 0.4
+   "saturation": 0.55
   }
  },
  "title": "EARF: the eight Clouds (hero31)",
@@ -439,11 +439,10 @@
   "target": [
    0.0,
    0.0,
-   0.15
+   -0.25
   ],
   "lens_mm": 50.0,
   "level": true,
-  "shift_y": -0.03,
   "fstop": 4.0,
   "focus": [
    0.0,
