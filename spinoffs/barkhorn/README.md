@@ -181,7 +181,7 @@ Every push to round 31's twenty-odd working branches built a Vercel preview, unt
 
 ### Open
 
-- **The horn's finish.** Every studio pass so far names the polished horn's mirror and its dark throat. Would the owner consider a satin (bead-blasted) horn, at least as an option? It would change the product, so it waits for the owner.
+- **The horn's finish and tint.** Every studio pass names the polished horn's mirror, and every session's critics the dark mass at its throat. The catalogue session found what that mass is: the tinted resin's own depth where the throat is thickest, not the driver behind it (hidden, the driver changes nothing, and no lamp moves it). The studio's critics also see the horn's red pinker than the cabinet's. Would the owner consider a satin (bead-blasted) horn, a lighter tint in the horn's resin, or a thinner wall at the throat, at least as options? Each changes the product, so they wait for the owner.
 - **The companions' questions** are in `companions/README.md`: the names; the casting partner for the formed shade and the 25 mm platter; the cartridge's blue body; a dust cover; where the arm rests; a listed dimmer; the bearing; and the prices (about $5,000 and $1,400 at the speakers' multiple).
 
 ## Round 30: the icons in acrylic, the site's home and speaker pages, hosted, and the back made real (the owner's notes of 2026-10-17 and 18)
