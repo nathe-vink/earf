@@ -359,6 +359,20 @@
    },
    {
     "kind": "kit",
+    "shape": "cylinder",
+    "material": "sand",
+    "color": "#8E8A85",
+    "tint2": "#5E5A56",
+    "radius": 1.15,
+    "height": 0.025,
+    "position": [
+     3.6,
+     5.0,
+     -0.01
+    ]
+   },
+   {
+    "kind": "kit",
     "shape": "ext",
     "module": "smoke_el",
     "fn": "woodsmoke",
@@ -372,7 +386,7 @@
      1.0,
      2.4
     ],
-    "density": 5.0,
+    "density": 1.8,
     "seed": 11,
     "scale": 0.45,
     "cut": 0.38,
@@ -402,7 +416,7 @@
      1.55,
      2.4
     ],
-    "density": 4.0,
+    "density": 1.53,
     "seed": 12,
     "scale": 0.53,
     "cut": 0.38,
@@ -432,7 +446,7 @@
      2.1,
      2.4
     ],
-    "density": 3.2000000000000006,
+    "density": 1.3005,
     "seed": 13,
     "scale": 0.61,
     "cut": 0.38,
@@ -462,7 +476,7 @@
      2.6500000000000004,
      2.4
     ],
-    "density": 2.5600000000000005,
+    "density": 1.1054249999999999,
     "seed": 14,
     "scale": 0.69,
     "cut": 0.38,
@@ -492,7 +506,7 @@
      3.2,
      2.4
     ],
-    "density": 2.0480000000000005,
+    "density": 0.9396112499999998,
     "seed": 15,
     "scale": 0.77,
     "cut": 0.38,
@@ -522,7 +536,7 @@
      3.75,
      2.4
     ],
-    "density": 1.6384000000000003,
+    "density": 0.7986695624999999,
     "seed": 16,
     "scale": 0.8500000000000001,
     "cut": 0.38,
@@ -552,7 +566,7 @@
      4.300000000000001,
      2.4
     ],
-    "density": 1.3107200000000006,
+    "density": 0.6788691281249999,
     "seed": 17,
     "scale": 0.9299999999999999,
     "cut": 0.38,
@@ -582,7 +596,7 @@
      8.0,
      4.0
     ],
-    "density": 0.35,
+    "density": 0.5,
     "seed": 9,
     "scale": 1.2,
     "cut": 0.45,
@@ -641,8 +655,8 @@
     0.0,
     0.6
    ],
-   "irradiance": 4.0,
-   "color": "#A9B4C2",
+   "irradiance": 2.0,
+   "color": "#B8B4AE",
    "orbit": {
     "azimuth_deg": -20,
     "elevation_deg": 5,
@@ -739,13 +753,13 @@
    "target": [
     0.0,
     0.0,
-    0.8
+    0.9
    ],
-   "irradiance": 55.0,
+   "irradiance": 95.0,
    "color": "#FFB978",
    "orbit": {
     "azimuth_deg": -150,
-    "elevation_deg": 22,
+    "elevation_deg": 10,
     "distance_m": 3.0
    },
    "receivers": [
@@ -766,19 +780,19 @@
   "kicker_r": {
    "type": "area",
    "size_m": [
-    0.6,
-    2.4
+    1.0,
+    0.5
    ],
    "target": [
     0.0,
     0.0,
-    0.8
+    0.4
    ],
-   "irradiance": 45.0,
+   "irradiance": 120.0,
    "color": "#FF8A40",
    "orbit": {
     "azimuth_deg": 144,
-    "elevation_deg": 12,
+    "elevation_deg": 2,
     "distance_m": 3.0
    },
    "receivers": [
@@ -833,25 +847,25 @@
     6.0
    ],
    "position": [
-    0.6000000000000001,
-    -4.0,
-    4.0
+    -1.4,
+    -6.0,
+    2.5
    ],
    "target": [
     3.0,
     5.0,
     3.0
    ],
-   "irradiance": 8.0,
+   "irradiance": 22.0,
    "color": "#C9CED6",
    "receivers": [
-    "prop7-kit",
     "prop8-kit",
     "prop9-kit",
     "prop10-kit",
     "prop11-kit",
     "prop12-kit",
-    "prop13-kit"
+    "prop13-kit",
+    "prop14-kit"
    ]
   }
  },
@@ -872,8 +886,8 @@
  ],
  "camera": {
   "position": [
-   -2.4625,
-   -6.7658,
+   -2.1205,
+   -5.8261,
    0.7
   ],
   "target": [
@@ -883,7 +897,7 @@
   ],
   "lens_mm": 65,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 2.8,
   "focus": [
    0.0,
    -0.21,
@@ -896,13 +910,13 @@
   "kind": "hdri",
   "polyhaven": "misty_pines",
   "rotation_deg": 0.0,
-  "strength": 0.35,
+  "strength": 0.7,
   "res": "4k"
  },
  "sun": {
   "azimuth_deg": 150.0,
-  "elevation_deg": 24.0,
-  "irradiance": 40.0,
+  "elevation_deg": 18.0,
+  "irradiance": 75.0,
   "angle_deg": 0.5,
   "color": "#FFCC9A"
  },
@@ -910,7 +924,7 @@
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.1,
+  "contrast": 0.15,
   "clarity": 0.0,
   "sharpen": 0.0,
   "sharpen_px": 0.6,
@@ -921,7 +935,7 @@
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.25
+   "vignette": 0.18
   }
  },
  "haze": {
@@ -933,8 +947,8 @@
    30.0,
    14.0
   ],
-  "density": 0.018,
+  "density": 0.012,
   "anisotropy": 0.7,
-  "color": "#C4CAD2"
+  "color": "#BCC4CE"
  }
 }

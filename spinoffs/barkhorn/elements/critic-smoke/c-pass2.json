@@ -1,0 +1,353 @@
+{
+ "stage1": {
+  "impression": "A moody, sepia-washed misty wood with a speaker at left and a glowing log pile behind it: the mood is good and there is plenty of room for type, but it reads as fog, not smoke, and the 'plume' over the fire reads as a dark tree trunk lit orange at its base. The logs are smooth CG cylinders with sprite embers, the trunks lack bark detail, and the speaker is a dark, flat, slightly cool block that sits in front of the air rather than inside it. A competent atmospheric render that still says CG.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The smoke must read as woodsmoke from the burn pile: a visible pale grey plume rising and drifting, distinct from the general haze, not a dark column",
+  "The burn pile must look photographed: charred, split, barky logs on an ash bed, embers that are small, dense and varied, a faint live smoke source at the base",
+  "The speaker must share the scene's light: warm fire rim on its fire-facing edge, warm backlight through the tint, no cool cast the ground does not have, and a light veil of the same smoke in front of it",
+  "One dawn light world with a warm/cool split: warm sun shafts readable as distinct rays, cooler grey smoke in the shade, instead of a uniform sepia wash",
+  "Tonal range with a real black and a near-white highlight (currently p1 35, p99 188, nothing below 30 or above 190)",
+  "Trunk bark with visible micro-detail at the nearest trees; no smooth CG cylinders"
+ ],
+ "defects": [
+  {
+   "region": [
+    630,
+    50,
+    800,
+    440
+   ],
+   "what": "The plume over the burn pile reads as a dark tree trunk with orange underlight, not as pale smoke (lum_median 98, RGB 134/90/62; delta E 44 against the plume's #E4E2DE)"
+  },
+  {
+   "region": [
+    585,
+    430,
+    840,
+    520
+   ],
+   "what": "Logs are smooth uniform cylinders with no char, cracks or bark; embers are round sprite dots of equal size; no ash bed"
+  },
+  {
+   "region": [
+    340,
+    360,
+    530,
+    600
+   ],
+   "what": "Speaker body is flat and dull (lum_median 52, p95 76) with a cooler cast (b 43) than the ground beside it (b 31): reads as pasted, not veiled"
+  },
+  {
+   "region": [
+    522,
+    360,
+    538,
+    600
+   ],
+   "what": "The fire-facing right edge carries almost no fire rim (r_median 86, lum_median 65)"
+  },
+  {
+   "region": [
+    820,
+    50,
+    980,
+    400
+   ],
+   "what": "Sun shafts do not read as rays: the bright haze is a flat wall (lum_range 23, x profile 175 to 183)"
+  },
+  {
+   "region": [
+    0,
+    650,
+    1200,
+    800
+   ],
+   "what": "Bottom 19% of the frame is undifferentiated dark leaf litter (lum_median 47, range 29), dead weight under a small product"
+  },
+  {
+   "region": [
+    0,
+    0,
+    100,
+    520
+   ],
+   "what": "Nearest trunks are smooth soft columns with no visible bark texture"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Global sepia wash with no warm/cool split; haze set to cool grey #C4CAD2 does not read anywhere (sky region RGB 171/148/129)"
+  },
+  {
+   "region": [
+    400,
+    222,
+    545,
+    335
+   ],
+   "what": "Horn mouth's interior catches a hard flat grey-white reflection that reads like a screen rather than lining seen through tint (lighting, not shape)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "set",
+   "problem": "The plume, the frame's whole idea ('Where there's smoke'), does not read: the column over the fire is darker than the haze and reads as a trunk.",
+   "evidence": {
+    "region": [
+     640,
+     100,
+     780,
+     300
+    ],
+    "measured": "lum_median 97.9, RGB 134/90/62, delta E 44.3 vs #E4E2DE; background haze beside it lum 179"
+   },
+   "change": {
+    "setting": "Burn pile plume density and cool fill",
+    "from": "density 5.0 falling 0.8 per cell; cool fill 8.0",
+    "to": "density 1.8 falling 0.25 per cell (thinner, scatters instead of absorbs), albedo kept #E4E2DE, cool fill 22.0, and move the 6 x 6 m fill to camera side so the plume is front-lit against the dark trunk behind it"
+   },
+   "expected": "A pale grey, soft-edged plume rising from the pile and bending left, clearly brighter and cooler than the trunk behind it.",
+   "accept": {
+    "region": [
+     640,
+     100,
+     780,
+     300
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speaker sits as a dull, slightly cool block in front of the air instead of glowing through its tint inside it.",
+   "evidence": {
+    "region": [
+     340,
+     360,
+     530,
+     600
+    ],
+    "measured": "lum_median 52, p95 76, RGB 64/49/43 against ground 64/44/31"
+   },
+   "change": {
+    "setting": "Speaker lights: sky fill and warm kicker",
+    "from": "sky fill 4.0 #A9B4C2; kicker 55 #FFB978",
+    "to": "sky fill 2.0 #B8B4AE; kicker 95 #FFB978, placed lower (about 0.9 m) so it passes through the tint and lights the lining from inside"
+   },
+   "expected": "The white lining and woofer glow warm through the smoked acrylic; body brighter and warmer, no blue cast against the ground.",
+   "accept": {
+    "region": [
+     340,
+     360,
+     530,
+     600
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 100
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The fire 3.6 m to the right puts no light on the speaker's facing edge, so it does not belong to the fire.",
+   "evidence": {
+    "region": [
+     522,
+     360,
+     538,
+     600
+    ],
+    "measured": "r_median 86, lum_median 65"
+   },
+   "change": {
+    "setting": "Speaker lights: fire-coloured rim",
+    "from": "45 #FF8A40",
+    "to": "120 #FF8A40, sized 1 x 0.5 m at log height (0.4 m) so it falls off up the cabinet"
+   },
+   "expected": "A warm orange rim on the right edge brightest at the base, fading toward the top.",
+   "accept": {
+    "region": [
+     522,
+     360,
+     538,
+     600
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "asset",
+   "problem": "The burn pile reads as CG: smooth cylinder logs and equal round ember sprites.",
+   "evidence": {
+    "region": [
+     585,
+     430,
+     840,
+     520
+    ],
+    "measured": "seen at 3x crop: no char crackle, no bark, no ash; embers identical dots"
+   },
+   "change": {
+    "setting": "Burn pile logs and embers",
+    "from": "smooth charred logs, ember glow dots",
+    "to": "photoscanned split and barked logs with alligator char, a grey-white ash bed under them, ember emission driven by a crackle-pattern mask in the char cracks, plus 20 cm of thin low smoke rising from the ash"
+   },
+   "expected": "A believable smouldering pile with glowing cracks and ash, the source of the plume.",
+   "accept": {
+    "region": [
+     600,
+     480,
+     840,
+     520
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "One flat sepia wash: no warm sun/cool shade split, so the dawn and the cool haze never read.",
+   "evidence": {
+    "region": [
+     80,
+     50,
+     220,
+     300
+    ],
+    "measured": "RGB 171/148/129 in the shaded haze; card haze is #C4CAD2"
+   },
+   "change": {
+    "setting": "Sky strength and uniform haze",
+    "from": "sky 0.35; haze density 0.018 #C4CAD2",
+    "to": "sky 0.7; haze density 0.012 #BCC4CE, so shade goes cool grey while the sun shafts stay #FFCC9A"
+   },
+   "expected": "Shadowed haze between trunks cools toward neutral grey; warmth stays in the shafts and near the fire.",
+   "accept": {
+    "region": [
+     80,
+     50,
+     220,
+     300
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 142
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The sun shafts through the canopy do not read as rays; the bright haze is a flat wall.",
+   "evidence": {
+    "region": [
+     820,
+     50,
+     980,
+     400
+    ],
+    "measured": "lum_range 23; x profile 175 to 183"
+   },
+   "change": {
+    "setting": "Sun lamp and canopy layers",
+    "from": "irradiance 40, elevation 24, two canopy layers",
+    "to": "irradiance 75, elevation 18, canopy gaps 40% larger and fewer, drifting layer 0.35 to 0.5 so shafts carve visible beams"
+   },
+   "expected": "Distinct diagonal beams falling from upper right into the smoke, alternating bright and dim bands.",
+   "accept": {
+    "region": [
+     820,
+     50,
+     980,
+     400
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "Tonal range is compressed: no black, no highlight, so the image looks hazy-flat rather than hazy-deep.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "p1 35.4, p99 187.7, clip 0%"
+   },
+   "change": {
+    "setting": "Render look and Finish contrast",
+    "from": "AgX base contrast, finish contrast 0.10",
+    "to": "AgX medium high contrast, finish contrast 0.15, vignette 0.25 to 0.18"
+   },
+   "expected": "Deepest trunk/ground darks near 20, shaft and plume highlights near 210 without clipping.",
+   "accept": {
+    "region": [
+     0,
+     650,
+     1200,
+     800
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "camera",
+   "problem": "The product is small and a fifth of the frame is empty dark ground.",
+   "evidence": {
+    "region": [
+     0,
+     650,
+     1200,
+     800
+    ],
+    "measured": "lum_median 47, range 29; speaker spans about 395 px of 800"
+   },
+   "change": {
+    "setting": "Camera",
+    "from": "7.2 m, 0.7 m height, 65 mm",
+    "to": "6.2 m, 0.55 m height, 65 mm, f/2.8, shift_x kept, shift_y +0.04"
+   },
+   "expected": "Speaker about 460 px tall, less foreground, fire and plume still right of it, smoke wisps in front softened by shallower focus.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "None on the speaker's shape, colour or parts",
+   "why": "Fixed by the card; the horn's hard grey interior reflection is handled by lighting (c2), not by changing the object"
+  }
+ ],
+ "score_if_fixed": 7.3
+}
