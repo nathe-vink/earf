@@ -15,7 +15,7 @@ FOR = {
     'listening': 'the listening corner: one of the Ice pair that stand either side of the record wall, the lounge\'s low chairs before it, the record wall beyond.',
     'backbar': 'the back-bar seen from across the room: the Fog pair of speakers in their lit niches, rising above the '
                'bar among edge-lit acrylic shelves of bottles, the bar front below.',
-    'records': 'the record wall and the DJ desk set into it, with Cumulus (EARF\'s acrylic record player) on the desk.',
+    'records': 'the record wall and the DJ desk set into it (the record player on it is a stand-in), one of the Ice pair beside it.',
     'street': 'the street at night: the corner storefront from across the street, the room glowing through its one long '
               'window, a plain door with one small neon sign.',
     'clock': 'the colour clock: the same view at one of four hours, the ceiling\'s colour the only change.',

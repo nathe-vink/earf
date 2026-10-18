@@ -189,9 +189,11 @@ VIEWS = {
                            'target': [(P.NICHES[0][0] + P.NICHES[1][0] + P.NICHES[1][1]) / 2, P.D, 1.25], 'lens_mm': 30,
                            'level': True}},
     'records': {'title': 'the record wall and the DJ desk with Cumulus',
-                'camera': {'position': [16.5, 3.9, 1.30], 'target': [17.89, 4.42, 1.0], 'lens_mm': 45, 'level': True,
-                           'fstop': 4.0, 'focus': [17.89, 4.42, 1.0]},
-                'settings': {'exposure': 1.3, 'dj_glow': 0.03, 'spot_dj': 150.0, 'spot_records': 60.0}},
+                # the record wall and the DJ desk the subject, the player small and soft (the companions are being
+                # redesigned: a stand-in, never the hero), one of the Ice pair in at the left
+                'camera': {'position': [15.6, 4.7, 1.5], 'target': [P.L, 2.7, 1.2], 'lens_mm': 26, 'level': True,
+                           'fstop': 4.0, 'focus': [P.L - 0.45, 2.6, 1.4]},
+                'settings': {'exposure': 0.6, 'dj_glow': 0.03, 'spot_dj': 150.0, 'spot_records': 60.0}},
     'street': {'title': 'the street at night, through the window',
                'camera': {'position': [-6.5, -10.0, 1.5], 'target': [3.0, 0.5, 1.9], 'lens_mm': 32, 'level': True},
                'settings': {'sky': 0.05, 'exposure': 0.6, 'wb': 4200, 'wb_tint': 0.0, 'across_glow': 0.08}},
