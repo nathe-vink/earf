@@ -392,8 +392,9 @@ def snow_lip(bpy, name, p, kit):
             # a rounded rectangle: the superellipse through the footprint, pushed out by `off`
             ca, sa = math.cos(a), math.sin(a)
             e = off * (1.0 + 0.6 * noise.noise(Vector((ca * 3.0, sa * 3.0, 1.7))))   # a broken edge, not a plinth
-            x = math.copysign(abs(ca) ** 0.25, ca) * (w / 2 + e)
-            y = math.copysign(abs(sa) ** 0.25, sa) * (d / 2 + e)
+            k_ = p.get('squareness', 0.25)                         # 0.25 a rounded box, 1 an ellipse (a tree's foot)
+            x = math.copysign(abs(ca) ** k_, ca) * (w / 2 + e)
+            y = math.copysign(abs(sa) ** k_, sa) * (d / 2 + e)
             n = noise.noise(Vector((x * 9, y * 9, 0.3)))
             row.append(bm.verts.new((x, y, max(0.0, z * (1 + 0.35 * n)) - 0.004)))
         rows.append(row)
