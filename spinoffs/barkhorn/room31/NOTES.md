@@ -109,3 +109,8 @@ which takes the column off its credenza.
 
 Duels: r12 vs finals31 7.0 to 5.0; final vs finals31 6.5 to 5.0; final vs r12 6.5 to 6.0; final vs softer-sun final
 6.8 to 6.5.
+
+**Portrait final** (blind, `critic-portrait.json`): **6.5**, score if fixed 8.0. Its top notes: the green pool on the
+floor too faint; the trim to 0.55; the left cover in a window bar's shadow while the right is lit (pair unmatched);
+the pair at about 37% of the frame's height, with empty floor below (a 60 mm lens from 3.5 m would bring it to about
+half); the plinth gap black.
