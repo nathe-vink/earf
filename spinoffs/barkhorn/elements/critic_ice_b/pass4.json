@@ -1,0 +1,13 @@
+{"stage1": {"impression": "An ice-cave scene with a strong premise, but it reads as CG. The walls are smooth glossy blobs like a melted plastic sculpt, with no bubbles, cracks or layering, and the right half of the frame is a dead navy mass. The speaker looks pasted on. It is lit flat and pale by a frontal source, washed milky by the haze, has no contact shadow and no reflection, and it is not glowing with the cave's light. The bottom third is featureless black floor.", "score": 5.0},
+ "verdict": "iterate", "score_if_fixed": 7.0,
+ "changes": [
+  {"id": "c1", "change": {"setting": "cave.thickness, sky strength, sun", "to": "[0.35, 1.0]; 2.5; 6.0"}, "accept": {"region": [860, 50, 1200, 450], "metric": "lum_median", "op": ">=", "value": 50}},
+  {"id": "c2", "change": {"setting": "lights.mouth, haze", "to": "0.35 raking from [-3.0, -3.5, 1.1], 1.5 x 2.0; haze 0.004 near, 0.012 far"}},
+  {"id": "c3", "change": {"setting": "puddle under the speaker, sink", "to": "1.2 x 0.6 m puddle from the front edge toward the camera; sink 0.02"}},
+  {"id": "c4", "change": {"setting": "camera", "to": "50 mm, 0.8 m, 3.6 m, speaker on the right third"}},
+  {"id": "c5", "change": {"setting": "ice", "to": "roughness 0.08-0.35, scallops jittered 0.3-0.8 m 0.04 deep, lumps [0.14, 0.04], bubbles scatter ~2/m, fractures"}},
+  {"id": "c6", "change": {"setting": "sky, sun colour, haze", "to": "sun #FFE4C4, anisotropy 0.75, mist column 0.015 under the hole"}},
+  {"id": "c7", "change": {"setting": "floor", "to": "albedo #141416-#34343A, specular 0.3, roughness 0.4"}, "accept": {"region": [0, 650, 1200, 800], "metric": "lum_range", "op": ">=", "value": 15}},
+  {"id": "c8", "change": {"setting": "finish", "to": "contrast 0.14, clarity 0.12, vignette 0.22, bloom 0.08 at 0.85, 40 px"}}
+ ],
+ "note": "abridged by the set's author from the critic's full reply"}

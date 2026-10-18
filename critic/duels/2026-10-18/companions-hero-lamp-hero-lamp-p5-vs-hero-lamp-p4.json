@@ -1,0 +1,60 @@
+{
+ "date": "2026-10-18",
+ "new": "renders/2026-10-18/barkhorn/companions/promo/hero-lamp-p5.png",
+ "old": "renders/2026-10-18/barkhorn/companions/promo/hero-lamp-p4.png",
+ "new_score": 5.0,
+ "old_score": 6.0,
+ "prefer": "old",
+ "differences": [
+  {
+   "what": "B's diffuser has a clipped white hotspot blob bleeding past the cylinder edge and a stray bright patch under it; A's diffuser reads as an even, contained glow",
+   "region": [
+    740,
+    330,
+    940,
+    450
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "B's base shows the internal knob/screw mechanism through the clear acrylic and a pale pink ghost disc/halo on the table under the plinth; A's base is a clean dark stacked disc that sits on the wood",
+   "region": [
+    670,
+    900,
+    1010,
+    1040
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "B's companion speaker is larger and further into frame with a hard specular streak and busy interior, competing with the hero; A's companion is cropped and recessive",
+   "region": [
+    0,
+    180,
+    520,
+    960
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "B's wall is brighter and the lamp reads as lit from within with warm pink spill; A is darker and muddier overall, shade underside and wall lose separation",
+   "region": [
+    540,
+    100,
+    1500,
+    620
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "B's shade reads more as tinted glass with visible transmission and rim highlight; A's shade is denser and closer to opaque purple",
+   "region": [
+    540,
+    330,
+    1140,
+    615
+   ],
+   "favours": "B"
+  }
+ ]
+}

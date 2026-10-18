@@ -1,0 +1,336 @@
+{
+ "stage1": {
+  "impression": "A red cast-acrylic horn speaker stands beside a walnut sideboard carrying a small red acrylic turntable, all on a flat pink paper sweep under even, shadowless light. The speaker dominates and runs into the bottom edge, the turntable that should be the hero is a small object mid-frame, and the backdrop, floor and sideboard front are each one value, so the scene reads as a clean CG layout rather than a photograph.",
+  "score": 4.5
+ },
+ "blocking_9": [
+  "The turntable is the clear hero. It is at least 25 % of the frame width (it is about 290 of 1500 px now), and its three circles and its record are lit as separate forms.",
+  "The speaker is shown whole, with floor below its base. Its base is at y 1046 of 1050 now, and the bottom strip [0,1025,1500,1050] has p5 119.7 from speaker pixels.",
+  "The lighting has direction. The backdrop falls off at least 15 levels top to bottom (it is 197.5 to 202.3 now), and the sideboard front falls off across its width (88 to 85 now).",
+  "The sideboard and speaker have real contact shadows. The floor under the sideboard is 189.5 against 201 for the open floor; it should be at least 40 levels darker at the legs.",
+  "The record and the plinth tops show a soft graduated highlight. Platter p95 is 95 and plinth p95 is 113 now, so the gloss acrylic reads as dull plastic.",
+  "The sideboard veneer reads as fine real wood, not wide drawn wavy lines."
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "composition",
+   "problem": "The speaker is too close to the camera: it fills the frame height, its base touches the bottom edge and it outweighs the turntable that the frame is for.",
+   "evidence": {
+    "region": [
+     0,
+     1025,
+     1500,
+     1050
+    ],
+    "measured": "bottom strip lum_p5 119.7 (speaker pixels, against floor at 198); front-panel box [264,403,618,1023] and left side to y 1046; platter-disc box [884,504,1073,539] is about 190 px wide"
+   },
+   "change": {
+    "setting": "products.0.instances.0.position",
+    "from": [
+     -0.42,
+     0.04,
+     0
+    ],
+    "to": [
+     -0.5,
+     0.45,
+     0
+    ]
+   },
+   "expected": "The speaker stands about 0.4 m further back, beside and behind the sideboard. It reads about 10 % smaller, its base lifts into the frame with floor below it, and the turntable becomes the nearest and first-read object.",
+   "accept": {
+    "region": [
+     0,
+     1025,
+     1500,
+     1050
+    ],
+    "metric": "lum_p5",
+    "op": ">",
+    "value": 170
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The turntable is about 19 % of the frame width, too small to be a hero, and the frame leaves wide empty paper on the right and above.",
+   "evidence": {
+    "region": [
+     820,
+     453,
+     1114,
+     582
+    ],
+    "measured": "the turntable spans about 290 x 130 px of the 1500 x 1050 frame; top-right backdrop [1150,0,1500,300] is empty paper at 199"
+   },
+   "change": {
+    "setting": "camera.lens_mm",
+    "from": 62,
+    "to": 72
+   },
+   "expected": "A tighter frame (about 1.16x). The turntable grows to about 340 px wide, and with c1 the speaker still fits whole with the horn top clear of the top edge.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1500,
+     40
+    ],
+    "metric": "lum_p5",
+    "op": ">",
+    "value": 170
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The gradient dome at 0.7 fills every shadow, so the backdrop is one value and the floor under the sideboard is barely darker than the open floor.",
+   "evidence": {
+    "region": [
+     1150,
+     0,
+     1500,
+     300
+    ],
+    "measured": "backdrop profile y 197.5, 197.5, 197.5, 198.5, 199.5, 200.3, 201.3, 202.3 (range 13); floor under sideboard [700,960,1290,1000] median 189.5 against open floor 201 to 202"
+   },
+   "change": {
+    "setting": "sky.strength",
+    "from": 0.7,
+    "to": 0.25
+   },
+   "expected": "The lamps shape the set. The backdrop darkens away from the wash by 15 to 35 levels, and contact shadows under the sideboard legs and speaker base deepen to below 160.",
+   "accept": {
+    "region": [
+     1150,
+     0,
+     1500,
+     300
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": "between",
+    "value": [
+     12,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The key is a 2.5 x 2 m area as wide as the set, so it gives no modelling: the sideboard front is one brown value and casts no shaped shadow.",
+   "evidence": {
+    "region": [
+     650,
+     600,
+     1330,
+     860
+    ],
+    "measured": "sideboard front median 86.4, p5 to p95 56.6 to 90.6, profile y 88.2 to 85.6, profile x near flat"
+   },
+   "change": {
+    "setting": "lights.key.size_m",
+    "from": [
+     2.5,
+     2
+    ],
+    "to": [
+     1.2,
+     1.0
+    ]
+   },
+   "expected": "A softbox-sized key from the left gives the sideboard front a left-to-right falloff of 10 to 30 levels, a defined shadow behind the turntable on the sideboard top, and a shadow from the speaker on the floor.",
+   "accept": {
+    "region": [
+     850,
+     650,
+     1150,
+     780
+    ],
+    "metric": "falloff",
+    "axis": "x",
+    "op": "between",
+    "value": [
+     8,
+     30
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "With the dome cut and the key made smaller, the product would fall dark. The red must stay at its present reproduction.",
+   "evidence": {
+    "region": [
+     264,
+     403,
+     618,
+     1023
+    ],
+    "measured": "front-panel median 64.9, rgb [147,44,37]; waveguide median 62.2, rgb [186,29,34]"
+   },
+   "change": {
+    "setting": "lights.key.irradiance",
+    "from": 2.2,
+    "to": 3.2
+   },
+   "expected": "The speaker's front and the horn keep their luminance at about 60 to 75 while the shadows round them deepen, so contrast comes from the light falloff, not from losing exposure.",
+   "accept": {
+    "region": "part:front-panel",
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The record and the acrylic plinth tops mirror only the pink sweep, so the hero's gloss surfaces read dull and the three circles do not separate.",
+   "evidence": {
+    "region": [
+     884,
+     504,
+     1073,
+     539
+    ],
+    "measured": "platter-disc median 30.2, p95 95.1, mirrors sweep 63.5 % and lamps 0.9 %; plinth-lower-stack median 38.4, p95 113.5"
+   },
+   "change": {
+    "setting": "lights.tt_card",
+    "from": "(none)",
+    "to": {
+     "type": "panel",
+     "size_m": [
+      1.0,
+      0.4
+     ],
+     "position": [
+      0.5,
+      -0.55,
+      1.25
+     ],
+     "target": [
+      0.5,
+      -0.02,
+      0.66
+     ],
+     "strength": 4.0,
+     "color": "#FFFFFF",
+     "ramp": {
+      "axis": "y",
+      "at_m": [
+       -0.75,
+       -0.35
+      ],
+      "values": [
+       0,
+       1
+      ]
+     },
+     "diffuse": false
+    }
+   },
+   "expected": "A soft graduated sheen across the back half of the record and along the top edges of each plinth circle, with the record's p95 near 130 to 180 and none of its surface clipping.",
+   "accept": {
+    "region": "part:platter-disc",
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     115,
+     200
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The plinth's top edges carry no highlight, so the three fused circles merge into one dark red mass.",
+   "evidence": {
+    "region": [
+     824,
+     493,
+     1114,
+     570
+    ],
+    "measured": "plinth-lower-stack p95 113.5, median 38.4"
+   },
+   "change": {
+    "setting": "lights.tt_card.strength",
+    "from": 4.0,
+    "to": 4.0
+   },
+   "expected": "The same card from c6, tuned so that the plinth's top rims each carry a highlight that separates platter, arm and motor circles, without washing the red out.",
+   "accept": {
+    "region": "part:plinth-lower-stack",
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     140,
+     215
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The sideboard veneer's figure is coarse and wavy, like drawn lines, which cheapens the frame beside the precise acrylic.",
+   "evidence": {
+    "region": [
+     700,
+     620,
+     900,
+     760
+    ],
+    "measured": "door face median about 86, with a few wide wavy grain bands about 30 to 60 px apart"
+   },
+   "change": {
+    "setting": "set.props.0.figure_m",
+    "from": 0.022,
+    "to": 0.01
+   },
+   "expected": "A finer, denser ring figure, about twice as many bands per door, that reads as sliced walnut veneer while the door's tone stays near 80 to 95.",
+   "accept": {
+    "region": [
+     700,
+     620,
+     900,
+     760
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     100
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the horn's compression driver and its plug read as a part, not a black hole in the horn.",
+   "why": "hf-plug, hf-motor and hf-frame are at luminance 0.2 to 1.1, a pure black blob at the horn's centre that reads as a void. They are a bought component seen through the waveguide, whose shape and colour are fixed."
+  },
+  {
+   "request": "Give the woofer's cloth disc texture or depth.",
+   "why": "cloth-disc is a flat 50.5 red disc across 73,000 px, the largest single shape in the frame, and it reads as a paper circle. Its material is the product's finish and fixed."
+  },
+  {
+   "request": "Tint the sweep less pink.",
+   "why": "The backdrop reads (213,196,191) and tints the clear acrylic's see-through areas (the speaker's left side reads (168,135,130)). It can be changed through set.color, but the pink seems to be the chosen tone-on-tone set, so I leave it to the art direction."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

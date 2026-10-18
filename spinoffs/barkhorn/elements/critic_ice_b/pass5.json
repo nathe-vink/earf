@@ -1,0 +1,13 @@
+{"stage1": {"impression": "A strong idea: a blue acrylic horn speaker standing in a pool of meltwater in a glacier tunnel, with light at the far end. The cave doesn't read as ice, though. The walls look like grey-lilac chrome or molten plastic, with no light glowing through them. The brightest things in the frame are a white floor patch and the tunnel's end, while the speaker sits dark, blue on navy, against the right wall. It reads as a well-made CG set rather than a photograph from Vatnajokull.", "score": 5.5},
+ "verdict": "iterate", "score_if_fixed": 7.8,
+ "changes": [
+  {"id": "c1", "change": {"setting": "cave ice", "to": "thickness [0.35, 0.9], absorption 0.9 + blue scatter 0.6, roughness 0.12-0.35, coat only on the bottom 0.4 m"}, "accept": {"region": [0, 0, 400, 480], "metric": "delta_e", "hex": "#3E93DC", "op": "<", "value": 14}},
+  {"id": "c2", "change": {"setting": "sun", "to": "elevation 62, beam landing y 6-9 behind-left of the speaker"}, "accept": {"region": [80, 450, 560, 600], "metric": "lum_median", "op": "<", "value": 80}},
+  {"id": "c3", "change": {"setting": "lights.mouth", "to": "3.0 x 2.6 m, 0.9 W/m2"}, "accept": {"region": [620, 320, 870, 650], "metric": "lum_median", "op": "between", "value": [55, 85]}},
+  {"id": "c4", "change": {"setting": "lights.rim", "to": "0.6 x 1.4 m at [1.6, 1.8, 1.2] to [0.3, 0, 0.8], 0.5, #CFE6FF"}},
+  {"id": "c5", "change": {"setting": "mist, haze", "to": "column 0.03 narrowed to the beam; haze 0.006 #DCEBFF anisotropy 0.7"}},
+  {"id": "c6", "change": {"setting": "scallops, lumps", "to": "0.25-0.6 m, 6 cm; lumps [0.08, 0.015]"}},
+  {"id": "c7", "change": {"setting": "pool", "to": "1.6 x 0.9 m, feathered edge, ripples"}},
+  {"id": "c8", "change": {"setting": "camera", "to": "70 mm from about [-1.5, -5.6, 0.85]"}}
+ ],
+ "note": "abridged by the set's author from the critic's full reply"}

@@ -1,0 +1,18 @@
+{
+  "stage1": {"impression": "A strong, simple idea: a symmetrical lavender row leading to the speaker under a soft pink dusk sky. The lavender, soil and sky read as photographic, but the speaker looks pasted: its lower body and woofer go murky near-black, the horn is a crushed black blob in a pink glass box, no violet light through the acrylic, and the sun disc is a dull moon dimmer than a brighter sky glow at the right edge, so the light comes from two places.", "score": 6.0},
+  "verdict": "iterate",
+  "blocking_9": ["one sun: the sky's glow and the disc in the same place, the disc the brightest thing in the sky", "the body reads as lit violet acrylic (lower-body median >= 55)", "the horn holds detail (crush < 15%)", "grounding: contact shadow and violet light on the soil", "the horizon not tangent to the cabinet's top"],
+  "changes": [
+    {"id": "c1", "change": {"setting": "sky rotation", "from": "-157", "to": "so the HDRI's glow sits behind the disc (it is at the right edge)"}, "accept": {"region": [1050, 300, 1200, 360], "metric": "lum_median", "op": "<", "value": 215}},
+    {"id": "c2", "change": {"setting": "back light; reflector", "from": "5; 1.0", "to": "9 at elevation 18; 2.2 #E8C8D8"}, "accept": {"region": [505, 430, 700, 690], "metric": "lum_median", "op": "between", "value": [50, 85]}},
+    {"id": "c3", "change": {"setting": "reflection card", "from": "0.25 #9C88B0", "to": "0.8 #C8B0D0"}, "accept": {"region": [545, 330, 640, 400], "metric": "crush_pct", "op": "<", "value": 15}},
+    {"id": "c4", "change": {"setting": "sun disc emission", "from": "15", "to": "60"}, "accept": {"region": [190, 305, 210, 323], "metric": "lum_p95", "op": ">=", "value": 250}},
+    {"id": "c5", "change": {"setting": "feet and caustics", "from": "6 mm", "to": "15 mm, a ring of displaced soil, violet caustic or gobo on the path"}, "accept": {"region": [520, 700, 690, 740], "metric": "b_median", "op": ">", "value": 34}},
+    {"id": "c6", "change": {"setting": "camera height", "from": "0.7 m, shift 0.08", "to": "0.45 m, shift 0.12"}, "accept": null},
+    {"id": "c7", "change": {"setting": "exposure; vignette", "from": "0; 0.15", "to": "+0.25 (sky -0.3 EV graduated); 0.1"}, "accept": {"region": [430, 690, 770, 800], "metric": "lum_median", "op": "between", "value": [38, 55]}},
+    {"id": "c8", "change": {"setting": "rows; haze", "from": "160 m; 0.00022", "to": "400 m; 0.0004"}, "accept": {"region": [0, 445, 480, 470], "metric": "b_median", "op": ">", "value": 135}}
+  ],
+  "out_of_scope": [{"request": "the horn box's pink rim and magenta base edge read toy-like", "why": "the speaker's own finish"}],
+  "score_if_fixed": 7.8,
+  "_note": "Condensed from the critic's reply."
+}

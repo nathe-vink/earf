@@ -154,35 +154,62 @@ Three of the campaign critics named the speaker's own surfaces:
 - **The cover read as brushed metal.** Its heather was drawn out in one direction only, so from a few metres it was a field of vertical streaks. Now the warp's heather runs along the warp and the weft's along the weft, crossing as a cloth's do, with soft slubs and a fabric's sheen.
 - **The lining read as moulded clay.** Its clouds are gentler (3 cm), and the batts are lumpy where they are stuffed into their sleeves (a soft relief 7 cm across).
 - **The black front edge of the top** is the edge itself. Seen end-on through about 400 mm of tint, it stays dark even at 32 light bounces, so the fix is a light placed to catch it, not a shader.
-- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light.
+- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light. The room's critics still read its face as one flat matt tone under raking sun, so the cloth is a melange now: each yarn's heather and the slubs stronger, and a faint unevenness 60 mm across where the cloth is stretched over the frame (`mottle`). Under the same raking light the disc's face varies a quarter more (p5 to p95 of its luminance 3.6 to 4.5).
+
+### The companions
+
+**Cumulus**, the record player, and **Bell**, the lamp, are built (`companions/README.md`): each to the fab kit's standard (cut files, drawings, parts list, checks) and in the eight colours, a proposal until the owner signs it.
+
+- **Cumulus** is belt-driven: its plinth is drawn from circles, as the icons are, and its motor stands apart in a pod of its own. The cartridge is now Ortofon's 2M Black ($749.99; a 2M Red on Ember the alternative), so its parts list comes to $2,775 one off.
+- **Bell** is the horn's flare hung mouth down over a clear stem: $563 in parts plus its LED strip.
+- **Pictures:** a hero of each in one room at dusk, with the Cloud beside it (each 6.0 in its blind duel), a look frame in every colour, and two details. Both are on the home page under "The speakers would like some company." The critics' remaining notes (the wall outshines the product, the grade goes one colour, the record reads as smoked glass) point to a deeper room, not more passes.
+
+![Cumulus and Bell](../../renders/2026-10-18/barkhorn/companions/hero-turntable.png)
 
 ### Pictures for a launch (in progress)
 
 - **The critic** (`critic/PROMPT-promo.md`, with `critic/measure.py`) is the studio's prescriptive critic (critic v2) turned to campaign pictures.
   - A fresh context sees only the picture and its card, and scores it blind against what a $20,000 product's launch would print.
   - It then lists what to change, each with a test that shows the change is done.
-  - Passes go on until two in a row reach 8.5. Then a blind duel, the new picture beside the best so far, keeps the winner.
-  - The records are in `critic/rounds/2026-10-18/` and the "Promotional images" table of `critic/LOG.md`.
-- **First passes:** the room 4.5, Ice's front view 5.5, the hero 5.5, each place in its element 4 to 6 over its first two passes, and the companions' heroes 4.5.
-- **The studio.** Seven passes on a dark hero of Ember held at 5.0 to 5.5. Every pass names something light can soften but not remove: the horn's mirror gloss and dark throat, and the lining seen through the clear sides. So the concept changes, not the settings:
-  - the cover goes on, which hides the woofer's dark cone;
-  - the speaker is shot the two ways glass is photographed, each judged by a blind duel against the dark hero:
-    - bright-field on white, the iMac G3's way: the background shines through the tint, and black cards out of frame trace the edges dark;
-    - dark-field on black: only the edges are lit, and the lining falls to silhouette.
-- **In their element.** Each Cloud is shown at real scale in a real place, built from scanned assets (`studio/engine/assets.py`: Poly Haven's skies, textures and models and ambientCG's textures, all CC0, fetched on demand and cached out of git). The camera is a photographer's at eye level, and a sun lamp matches the sky's own sun (`assets.py sun`). There is one session for each colour, and a second concept for five of them, judged by duel. The sessions fixed the engine as they went:
+  - Each set's passes, the critics' replies and a proof of every pass are with its notes (`elements/<set>.md` and the folders beside it, `renders/2026-10-18/barkhorn/proofs31/`). The scores, set by set, are in the "Promotional images" table of `critic/LOG.md`.
+- **Where the scores settled.** The bar was two passes in a row at 8.5. No set came near it: over about 150 passes the blind scores held between 4.5 and 7.0, and the critics named the same things in every set, things light can soften but not remove (Open, below). So from 08:30 UTC each set stopped once two passes in a row after a change of concept gained less than half a point. It then rendered its finals from its best rig and put them to a blind duel against the runner-up.
+- **The studio.** Seven passes on a dark hero of Ember held at 5.0 to 5.5, so the concept changed:
+  - bright field on white, the iMac G3's way, beat the dark hero in a blind duel (5.6 to 4.8); dark field on black, and the cover on, lost theirs;
+  - five passes on bright field held at 5.5, and its finals are rendering: each colour alone, the eight as a lineup, and five macros (the corner, the amplifier, the horn, the woofer, a grip).
+- **In their element.** Each Cloud is shown at real scale in a real place, built from scanned assets (`studio/engine/assets.py`: Poly Haven's skies, textures and models and ambientCG's textures, all CC0, fetched on demand and cached out of git). The camera is a photographer's at eye level, and a sun lamp matches the sky's own sun (`assets.py sun`). One session for each colour, and a second concept for five of them, judged by duel:
+
+  | Cloud | Concept A | Concept B | On its page |
+  |---|---|---|---|
+  | Ember | a lava field at blue hour, its crust cracked to the glow | | rendering |
+  | Dust | the Southwest at golden hour (6.0) | | A |
+  | Acid | the acid spring at Dallol, sulphur and steam (5.5) | acid rain over wet black lava | A, until the duel |
+  | Poison | a redwood rainforest (6.5) | | A |
+  | Ice | snow country at blue hour, a cabin's window far behind (7.0) | Diamond Beach at sunrise (5.8) | A, by a blind duel (2 to 1) |
+  | Haze | a lavender field at dusk (6.0) | layered hills at blue hour | A, until the duel |
+  | Fog | a summit above a sea of cloud | San Francisco's fog | rendering |
+  | Smoke | woodsmoke at dawn in a pine wood (6.5) | a misty birch wood, high-key | A, until the duel |
+
+  The score is a fresh critic's on the final itself. The sessions fixed the engine as they went:
   - scanned plants keep their leaves cut out;
   - the sky's sun is found where Cycles shows it (it had been reported 180° round);
-  - the places keep their sky's colour (the look book's white balance had turned Ember's lava salmon).
-- **The room, the hero and the catalogue** are each being lit again in their own sessions. The site takes each as it lands: `web.py` prefers round 31's hero, room and in-their-element pictures once they are in the repository, with their phone frames below 700 px.
+  - the places keep their sky's colour (the look book's white balance had turned Ember's lava salmon);
+  - a sky can be graded (`sky.grade`), and the camera can see past 300 m (`camera.clip_end`).
+- **The room, the hero and the catalogue** are each lit again in their own sessions:
+  - the room (the Poison pair at home, with Cumulus) rose from 4.5 to 6.5 over fourteen passes, and its finals are rendering;
+  - the hero (the eight together) held at 6.0 over eight passes and three changes of approach; its finals are rendering;
+  - the catalogue (each colour's front view) reached 6.0, and its rig has won two duels in a row.
+
+  The site takes each as it lands: `web.py` prefers round 31's hero, room and in-their-element pictures once they are in the repository, with their phone frames below 700 px. Each speaker's page shows its own place ("At home"); the home page shows all eight in a strip once the last is in.
+- **Render helpers.** A final takes two to three hours on one session's four cores, so the slow ones are split. A helper session renders the frames it is given from the set's own commit, pushes them to its own branch, and stops: the portraits of Ice, Ember, Fog, Smoke and the room, the hero's phone frame, and the studio's queue across three more.
 
 ### The site's deployments
 
-Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), so www.earf.world still serves the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main goes up again as the allowance frees.
+Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 to 08:17 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), and www.earf.world kept the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main deployed again at 08:18 (b394ba1), with every colour's finals.
 
 ### Open
 
-- **The horn's finish.** Every studio pass so far names the polished horn's mirror and its dark throat. Would the owner consider a satin (bead-blasted) horn, at least as an option? It would change the product, so it waits for the owner.
-- **The companions' questions** are in `companions/README.md`: the names; the casting partner for the formed shade and the 25 mm platter; the cartridge's blue body; a dust cover; where the arm rests; a listed dimmer; the bearing; and the prices (about $5,000 and $1,400 at the speakers' multiple).
+- **The horn's finish and tint.** Every studio pass names the polished horn's mirror, and every session's critics the dark mass at its throat. The catalogue session found what that mass is: the tinted resin's own depth where the throat is thickest, not the driver behind it (hidden, the driver changes nothing, and no lamp moves it). The studio's critics also see the horn's red pinker than the cabinet's. Would the owner consider a satin (bead-blasted) horn, a lighter tint in the horn's resin, or a thinner wall at the throat, at least as options? Each changes the product, so they wait for the owner.
+- **The companions' questions** are in `companions/README.md`: the names; the casting partner for the formed shade and the 25 mm platter; the cartridge (the session moved it from the 2M Blue to the 2M Black, $749.99, which is easily reversed); a dust cover; where the arm rests; a listed dimmer; the bearing; and the prices (about $5,000 and $1,400 at the speakers' multiple).
 
 ## Round 30: the icons in acrylic, the site's home and speaker pages, hosted, and the back made real (the owner's notes of 2026-10-17 and 18)
 
