@@ -177,7 +177,7 @@ Three of the campaign critics named the speaker's own surfaces:
 
 ### The site's deployments
 
-Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), so www.earf.world still serves the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main goes up again as the allowance frees.
+Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 to 08:17 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), and www.earf.world kept the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main deployed again at 08:18 (b394ba1), with every colour's finals.
 
 ### Open
 
