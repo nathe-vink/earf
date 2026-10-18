@@ -165,3 +165,15 @@ sits on the right third, the sky above it left for type.
 - **The ground** reads as a mirror sheet more than black sand where it is soaked; dry, it read as brown dirt.
 - **The sea** reads as glassy swell more than North Atlantic surf; the breakers' white water hardly shows from 0.65 m.
 - **The ice** reads well close up (refraction, bubbles, cracks: the duels praised it), but the big block can go grey.
+
+### The final, judged blind
+
+The landscape final at full size, one more fresh critic: **5.8** (7.6 if fixed), the highest single blind score
+of the set. It sees a calm pastel sunrise with a strong central silhouette and a believable warm glint on the wet
+ground, but a well-lit CG set: the sea gel-like with no real foam, the ground pale wet concrete rather than black sand,
+the ice sitting like props, and the speaker a dark navy block the sun never passes through. Its first three changes
+(dry black sand in front, the sun grazing the cabinet's right edge, more bounce) are the same tug of war the passes
+went round; the reply is in `critic_ice_b/final.json`.
+
+Render times (CPU, this container): landscape 2400 x 1600 at 512 samples, 92 min; proofs at half size and 128
+samples, 7 to 10 min; at 0.3 and 32 samples, about 1 min.
