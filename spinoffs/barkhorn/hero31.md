@@ -62,5 +62,25 @@ cabinet throws its own colour onto the floor in front of it. Built by `hero31.py
 | d2 (duel) | final v1 vs finals31/hero.png, both 1280 | 5.5 vs 5.0 | **final preferred** | — | for: the cones' detail, the crisp coloured throws, clean horn throats, even row with margins; against: the template's warm graded backdrop, its side faces |
 | d3 (duel) | final v1 vs proofs/p2.png (h2, 6.5) | 6.5 vs 6.0 | **final preferred** | — | for: sharpness, the product filling the frame, the smooth sweep, the clear unit reading as glass; against: p2's longer raking throws and glowing bodies |
 | q1 (phone) | hero-portrait.png v1 (scaled to 800) | 6.0 | iterate | nearer 60 mm camera, centres 0.68 m (less overlap); cyc 24 at 3 m; face 9 raised over the front horns, smoke 75; warmer balance; sun 31; over 3.5 nearer; vibrance 0.55, contrast 0.22 | the light and colour taken. The camera and spacing cannot both hold: eight at 0.68 m need a frame far wider than 4:5 from 6.2 m, and fitting them (0.56 m from 9 m) left small speakers on empty paper (tried, q8). So the cluster stays as delivered, the content lifted a little, sun 26 so the throws fill the lower half |
+| q2 (phone v2) | hero-portrait.png v2 (scaled to 800) | 6.0 | iterate | cabinet fronts dark; grey shadow bars dense; red pool cut at the left edge; back-rank horns crowded; cove band; top third empty | logged; the phone frame ships as v2 |
+| h10 (final v2) | hero31/hero.png v2 (full size, 512 samples, scaled to 1280) | 6.0 | iterate | a face-on catalogue row; speakers small, the lower third empty; colour a strip at the end of grey shadows; cove seam; black throats; no tooth; smoked slab; a dark rim on the green's edge | logged; v2 ships (below) |
+| d4 (duel) | final v1 vs final v2, both 1280 | 6.0 vs 6.6 | **v2 preferred** | — | for v2: the warm white paper (v1's was blue-grey), darker crisper shadows giving weight, more saturated and separated pools, a highlight on the smoked horn, the metal reading as metal |
 
 ## Finals
+
+- `renders/2026-10-18/barkhorn/hero31/hero.png`: 2560 x 1280, 512 samples, denoised, 10 841 s (3 h 1 min) on 4 cores;
+  2.8 MB; with `hero.report.json` and `hero.shot.json` (the raw frame is not committed).
+- `renders/2026-10-18/barkhorn/hero31/hero-portrait.png`: 1600 x 2000, 512 samples, 1 h 42 min on the coordinator's
+  render helper (r31-hero-portrait, from this branch's shot); 2.7 MB.
+- `spots.json` and `spots-portrait.json`: each speaker's box, left, width, top and height as % of the frame, in
+  `web.hero_spots()`'s form, read off each frame's report (`hero31.py spots --report`). In the phone frame the back
+  rank stands half behind the front, so neighbouring boxes overlap: layer the front rank (indices 0, 2, 4, 6) on top.
+- Blind scores: the landscape 6.0 (v1 and v2), the phone frame 6.0 (v1 and v2). In blind duels v2 beat v1 (6.6 to
+  6.0), and v1 beat the template finals31/hero.png (5.5 to 5.0) and the best proof p2 (6.5 to 6.0).
+- **Not at the bar.** The stop rule (two passes at 8.5) was never near: eleven blind passes on this hero scored 5.5
+  to 6.5 through three approaches (coloured shadows, cutters, staggered ranks) and every lighting and colour
+  prescription the critics made. What every critic names first and no set can change is the product as modelled:
+  the opaque batts that turn most of each throw grey, the black horn throats, the dark edges of tinted acrylic seen
+  edge-on, the smoked unit's tint swallowing its interior. The critics also pull against each other (shadows deeper
+  in one pass, lighter in the next; the eye at 1.15 m in one, nearer and higher in the next), a sign the set is near
+  what this model allows.
