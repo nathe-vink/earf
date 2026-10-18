@@ -299,6 +299,39 @@ def pbr(bpy, aid, res='2k', scale=None, displace=0.0, tint=None, tint_mix=0.0, r
     return m
 
 
+def _alpha_maps(bpy, aid, res, objs):
+    """Poly Haven's glTFs for plants cut their leaves out with an alpha mask but point the base colour at a JPG, which
+    has no alpha, so the leaf cards render solid. Where a material takes its alpha from a JPG's alpha, wire in the
+    asset's own Alpha map instead (fetched once)."""
+    mats = {m for o in objs if o.type == 'MESH' for m in o.data.materials if m and m.use_nodes}
+    fix = []
+    for m in mats:
+        for l in m.node_tree.links:
+            n = l.from_node
+            if (l.from_socket.name == 'Alpha' and n.type == 'TEX_IMAGE' and n.image
+                    and n.image.filepath.lower().endswith(('.jpg', '.jpeg'))):
+                fix.append((m, l))
+    if not fix:
+        return
+    f = files(aid).get('Alpha', {})
+    r = _pick_res(f.keys(), res) if f else None
+    e = f[r].get('png') or f[r].get('jpg') if r else None
+    if not e:
+        return
+    path = os.path.join(CACHE, 'models', f'{aid}_{r}', 'textures', os.path.basename(e['url']))
+    if not os.path.exists(path):
+        _get(e['url'], path)
+    img = bpy.data.images.load(path, check_existing=True); img.colorspace_settings.name = 'Non-Color'
+    for m, l in fix:
+        nt = m.node_tree; src = l.from_node; to = l.to_socket
+        a = nt.nodes.new('ShaderNodeTexImage'); a.image = img; a.location = (src.location.x, src.location.y - 300)
+        a.interpolation = src.interpolation; a.extension = src.extension
+        for i in src.inputs:                                 # the same coordinates as the colour it pairs with
+            for ll in i.links:
+                nt.links.new(ll.from_socket, a.inputs[i.name])
+        nt.links.remove(l); nt.links.new(a.outputs['Color'], to)
+
+
 def place(bpy, aid, res='2k', location=(0, 0, 0), rotation_deg=(0, 0, 0), scale=1.0, name=None):
     """Import a scanned model (fetched once) under one empty, placed and turned (degrees) and scaled; return the empty.
     The model's own materials come with it."""
@@ -306,6 +339,7 @@ def place(bpy, aid, res='2k', location=(0, 0, 0), rotation_deg=(0, 0, 0), scale=
     before = set(bpy.data.objects)
     bpy.ops.import_scene.gltf(filepath=path)
     new = [o for o in bpy.data.objects if o not in before]
+    _alpha_maps(bpy, aid, res, new)
     root = bpy.data.objects.new(name or aid, None); bpy.context.scene.collection.objects.link(root)
     for o in new:
         if o.parent is None:
