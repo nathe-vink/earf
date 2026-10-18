@@ -272,10 +272,6 @@ MACRO_FIX = {
     'horn': {'product.instances.0.rotate_z': 80.0, 'camera.position': [1.0, -2.3, 1.45], 'camera.target': [0.05, 0.02, 1.08],
              'camera.lens_mm': 125.0, 'lights.scrim.irradiance': 0.6, 'set.flags.1.glossy': False,
              'set.flags.2': {'center_m': [0.0, 0.0, 2.3], 'size_m': [1.6, 0.6], 'normal': [0.0, 0.0, -1.0], 'glossy': True}},
-    # level through the slot, the top face out of frame; a small lamp behind it on the camera's line, so the cut glows
-    'grip': {'camera.position': [0.45, -2.6, 0.8], 'lights.scrim.irradiance': 0.6,
-             'lights.back-top.orbit': {'azimuth_deg': 190, 'elevation_deg': 6, 'distance_m': 2.0},
-             'lights.back-top.target': [0.12, 0.0, 0.765], 'lights.back-top.irradiance': 30.0, 'lights.back-top.size_m': [0.4, 0.25]},
 }
 
 

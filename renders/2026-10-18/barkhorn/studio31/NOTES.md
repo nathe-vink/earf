@@ -76,3 +76,7 @@ floor and the horn's crisp specular streaks; the proof's softer light read milky
 | duel 6 | macro-corner-ember: reframed (horn out, 280 mm) vs first (h3) | | **first wins, 5.0 to 4.0**: the reframe cut the horn to a sliver and lost the shell's refraction, the most photographic surface; the first stands, and its shot is restored |
 | m2 | macro-woofer-ice, reframed (h5) | 4.5 | duel 7 against the first: **first wins, 5.5 to 4.5** (it sits the driver inside the enclosure's frame with margin; the reframe crowds the ring to the left edge). The first stands, its shot restored |
 | m2 | macro-grip-poison, reframed (h5) | 3.5 | a neon bloom on the right edge from the lamp behind the slot; the slot still a black hole; two empty panels below. Duel 8 against the first decides |
+| duel 8 | macro-grip-poison: first vs reframed (h5) | | **first wins, 5.5 to 3.5**: the reframe's lamp through the slot bloomed the right edge to neon and left the slot black; the first stands, its shot restored |
+
+So of the macro reframes only the horn's held (duel 5); the woofer, grip and corner keep their first finals. The
+module's MACRO_FIX now carries only the horn's change, and every final's shot.json matches its shot file.
