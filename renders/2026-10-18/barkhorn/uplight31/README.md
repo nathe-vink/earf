@@ -40,7 +40,7 @@ Fresh, blind critics under `critic/PROMPT-promo.md`, staged by `spinoffs/barkhor
 
 | Frame | Passes (blind score) |
 |---|---|
-| facade | 4.0, 5.5, 5.0, 5.0, 4.5, 5.0, 5.5 (first full size), 5.5, then the final (pass 10) |
+| facade | 4.0, 5.5, 5.0, 5.0, 4.5, 5.0, 5.5 (first full size), 5.5, **6.5** (the final, pass 10) |
 | uplit-red (the slides' critic frame) | 3.5, 4.0, 4.5, 3.5, 4.5 (own set), 4.5 (the quay), 6.5 (first full size), 5.5 |
 
 The bar (two passes in a row at 8.5) was not reached. The scores settled at 5 to 6.5 and swung about a point between
