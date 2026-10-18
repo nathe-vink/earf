@@ -15,7 +15,7 @@ of concepts.py, picked: the plinth drawn as the Atmosphere icons are drawn, of c
 - **The bearing** is turned: a brass housing, flanged into a pocket in the top sheet, through both; two sintered
   bronze bushes; a hardened, ground stainless spindle on a 6 mm carbide ball and a PTFE pad. Brass is what you see
   of it through the plinth.
-- **Bought:** Rega's RB330 arm (its lift on its own base), an Ortofon 2M Blue, Rega's 24 V motor driven by its Neo
+- **Bought:** Rega's RB330 arm (its lift on its own base), an Ortofon 2M Black, Rega's 24 V motor driven by its Neo
   PSU MK2 (33/45 by a button, trimmed in 0.01 rpm steps), a flat belt, Sorbothane under three levelling feet.
 
 The frame is the kit's: x across from the left seen from the front, y back from the front, z up from the shelf.
@@ -249,7 +249,7 @@ def parts(P):
         Part('foot-pads', fpad, Bought('sorbothane-feet'), finish='rubber', group='feet'),
         Part('arm', arm, Bought('rega-rb330'), finish='arm', group='arm',
              notes=['its nut under the plinth; its height set with Rega\'s spacers to the cartridge\'s VTA']),
-        Part('cartridge', cart, Bought('ortofon-2m-blue'), finish='cartridge', group='arm'),
+        Part('cartridge', cart, Bought('ortofon-2m-black'), finish='cartridge', group='arm'),
         Part('mark', mark, Bought('laser-etch-small'), finish='accent'),
         Part('neo-psu', None, Bought('rega-neo-psu-mk2')),
         Part('feet-studs', None, Bought('feet-studs')),
@@ -297,7 +297,7 @@ NOTES = [
     'Speed: Rega\'s 24 V motor driven by the Neo PSU MK2 (33/45 by a button, 0.01 rpm trim); the pulley turned to the '
     'motor\'s measured speed so the Neo trims from the middle of its range; a flat belt on the platter\'s rim.',
     'Arm: Rega RB330, 222 from the spindle (Rega geometry), its nut under the plinth through a 24 hole; an Ortofon 2M '
-    'Blue. Level the platter on the three feet (each turns on its M8 stud) before setting the arm.',
+    'Black. Level the platter on the three feet (each turns on its M8 stud) before setting the arm.',
     'The mark: EARF 44 wide laser-etched in the arm\'s circle in front of the arm and filled with the colour, deeper.',
 ]
 

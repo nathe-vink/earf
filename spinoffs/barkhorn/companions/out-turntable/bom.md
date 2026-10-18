@@ -20,7 +20,7 @@
 | foot-1, foot-2, foot-3 | cut | 3 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 50 x 50 | 1.19 |
 | foot-pads | buy | 1 | Isolate It (or alike) Sorbothane hemispheres or discs, 44 across, 6 tall, Shore 50 or 70 (chosen by the loaded weight, about 2 kg a foot), a set of 3, bonded under the plinth's feet |  | 30.00 |
 | arm | buy | 1 | Rega RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's centre to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift |  | 675.00 |
-| cartridge | buy | 1 | Ortofon 2M Blue moving-magnet cartridge (nude elliptical stylus, 5.5 mV), 1/2 in mount |  | 220.00 |
+| cartridge | buy | 1 | Ortofon 2M Black moving-magnet cartridge (nude Shibata stylus), black body, 1/2 in mount |  | 750.00 |
 | mark | buy | 1 | Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: EARF 44 wide, the etch filled with the colour, deeper |  | 15.00 |
 | neo-psu | buy | 1 | Rega Neo PSU MK2: DSP-generated drive for Rega's 24 V motor, 33/45 by a button, fine speed trim (0.01 rpm steps) on the back; US 60 Hz 115-120 V version |  | 445.00 |
 | feet-studs | buy | 1 | Three M8 brass threaded inserts bonded with epoxy into the plinth's bottom sheet (12.5 holes, 15 deep), three M8 x 30 brass studs and lock nuts: the feet turn on them to level the platter |  | 14.00 |
@@ -30,9 +30,9 @@
 
 | | USD |
 |---|---|
-| buy | 1,695 |
+| buy | 2,225 |
 | cut | 239 |
 | lathe | 311 |
-| total | 2,245 |
+| total | 2,775 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

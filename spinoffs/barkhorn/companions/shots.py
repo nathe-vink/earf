@@ -22,6 +22,8 @@ CLOUD = 'studio/products/barkhorn-cloud.json'
 # the turntable's spindle in the engine's frame (its CAD point less the product file's origin, metres), and the
 # platter's top: a record goes there
 SPINDLE = (round((218.0 - 241.6) / 1000, 4), round((170.0 - 186.5) / 1000, 4)); PLATTER_TOP = 0.095
+LAMP_STRIP_Z = 0.441                                               # the strip's middle above the lamp's foot
+LAMP_W = 14.0                                                     # its light, watts as Cycles counts them (tuned by eye)
 LED = 22.0                                                         # the strip's emission when the lamp is on
 
 
@@ -84,53 +86,77 @@ def sideboard(x, w=1.0, h=0.56):
             'turntable': False}
 
 
+# --- the heroes (round 31b: the lead session and the owner: the companion the subject, 40-50 % of the frame, the speaker
+# as context behind it, partly cropped and softer; the setting real, with texture; Bell switched on) ------------------
+CAB = (1.25, 0.47)              # Poly Haven's modern_wooden_cabinet (2.44 x 0.52 x 0.68), its centre on the floor
+CAB_TOP = 0.68
+
+
+def room(dusk=False):
+    """A living room: oak boards, plaster, a tall window in the left wall the sun comes through (or blue dusk), the
+    back wall 0.75 m behind the companions, and the scanned walnut cabinet against it."""
+    r = {'kind': 'room', 'size': [5.6, 4.6, 2.8], 'center': [0.4, -1.55],
+         'floor': {'plank_w': 0.19, 'plank_l': 1.8, 'base': '#B08A60', 'dark': '#97724A', 'light': '#C49D70', 'plank_contrast': 1.1},
+         'wall': {'color': '#EEE9E1'}, 'ceiling': '#F3F0EA', 'skirting': {'h': 0.11, 'color': '#ECE8E1'},
+         'windows': [{'wall': 'left', 'along': 0.9, 'sill': 0.45, 'size': [1.5, 2.0], 'mullions': [1, 2]}],
+         'props': [{'kind': 'kit', 'shape': 'asset', 'model': 'modern_wooden_cabinet', 'res': '2k',
+                    'position': [CAB[0], CAB[1], 0.0], 'rotate': [0, 0, 0]}]}
+    return r
+
+
+def room_shot(title, size, cam):
+    return {'title': title, 'size': size, 'camera': cam,
+            'render': {'samples': 64, 'adaptive': 0.015, 'denoise': True, 'clamp': 8, 'bounces': 12, 'view': 'Khronos PBR Neutral',
+                       'exposure': 0.0, 'white_balance_k': 5600},
+            'materials': {'oak': {'grain': 1.0, 'roughness': 0.38}}}
+
+
 def hero_turntable(colour='ember'):
-    """Cumulus on a low sideboard beside the Cloud in its colour, a record on it. Round 1's critic
-    (critic/rounds/2026-10-18/companions-hero-turntable-e1-r1.json, 4.5): the dome down to 0.25, a smaller and
-    stronger key, a graded card over the record, a finer veneer. Its camera changes (the speaker 0.41 back, a 72 mm
-    lens) cropped the speaker and left the record player as small, so e2 brings the sideboard 0.4 forward, keeps the
-    speaker 0.45 back, and frames close and wide (35 mm, 2.45 m) so the record player leads by perspective."""
-    sx, sy, h = 0.5, -0.4, 0.56
-    tgt = [0.2, -0.2, 0.56]
-    s = base(f'Cumulus beside {C.NAMES[colour]}', [1500, 1050], colour,
-             {'position': orbit(tgt, -14, 16, 2.45), 'target': tgt, 'lens_mm': 35, 'level': True})
-    s['sky']['strength'] = 0.25
-    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.45, 0.45, 0], 'rotate_z': 0}]},
-                     {'def': TT, 'flavour': colour, 'instances': [{'position': [sx, sy - 0.02, h], 'rotate_z': -8}]}]
-    rx = sx + SPINDLE[0] * math.cos(math.radians(-8)) - SPINDLE[1] * math.sin(math.radians(-8))
-    ry = sy - 0.02 + SPINDLE[0] * math.sin(math.radians(-8)) + SPINDLE[1] * math.cos(math.radians(-8))
-    sb = sideboard(sx); sb['position'] = [sx, sy]; sb['figure_m'] = 0.01
-    s['set']['props'] = [sb] + record(round(rx, 4), round(ry, 4), h + PLATTER_TOP, colour)
-    s['lights'] = lights(tgt, dist=4.5)
-    s['lights']['key'].update({'size_m': [1.2, 1.0], 'irradiance': 3.2})
-    s['lights']['glow'] = {'type': 'area', 'size_m': [0.7, 0.32], 'position': [-0.45, 1.11, 1.12], 'target': [-0.45, 0.45, 1.1],
-                           'irradiance': 1.6, 'color': '#FFF1DC', 'specular': 0, 'transmission': False}
-    s['lights']['tt_card'] = {'type': 'panel', 'size_m': [1.0, 0.4], 'position': [0.5, -0.95, 1.25], 'target': [0.5, -0.42, 0.66],
-                              'strength': 4.0, 'color': '#FFFFFF', 'ramp': {'axis': 'y', 'at_m': [-1.15, -0.75], 'values': [0, 1]},
-                              'diffuse': False}
+    """Cumulus on the walnut cabinet in morning sun from the left window, a record on it; the Cloud in its colour
+    behind it at the left, out of focus."""
+    tx, ty = 0.36, 0.42
+    h = CAB_TOP
+    tgt = [tx, ty - 0.02, h + 0.06]
+    s = room_shot(f'Cumulus beside {C.NAMES[colour]}', [1600, 1100],
+                  {'position': orbit(tgt, 6, 20, 1.6), 'target': tgt, 'lens_mm': 58, 'level': True, 'fstop': 2.8,
+                   'focus': [tx, ty - 0.05, h + 0.09]})
+    s['set'] = room()
+    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.36, 0.36, 0], 'rotate_z': 10}]},
+                     {'def': TT, 'flavour': colour, 'instances': [{'position': [tx, ty, h], 'rotate_z': -6}]}]
+    rx = tx + SPINDLE[0] * math.cos(math.radians(-6)) - SPINDLE[1] * math.sin(math.radians(-6))
+    ry = ty + SPINDLE[0] * math.sin(math.radians(-6)) + SPINDLE[1] * math.cos(math.radians(-6))
+    s['set']['props'] += record(round(rx, 4), round(ry, 4), h + PLATTER_TOP, colour)
+    s['sky'] = {'kind': 'gradient', 'strength': 9.0, 'zenith': '#9FB8DA', 'horizon': '#D6EAF8', 'ground': '#8A8478'}
+    s['sun'] = {'azimuth_deg': -72, 'elevation_deg': 24, 'irradiance': 3.0, 'angle_deg': 0.53, 'color': '#FFF0DC'}
+    s['lights'] = {'fill': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 35, 'elevation_deg': 15, 'distance_m': 2.2},
+                            'target': tgt, 'irradiance': 0.35, 'color': '#EAF2FF'}}
     return s
 
 
 def hero_lamp(colour='haze'):
-    """Bell, lit, on the sideboard beside the Cloud in its colour, the studio turned down so the lamp carries. Round
-    1's critic (critic/rounds/2026-10-18/companions-hero-lamp-e1-r1.json, 4.5): a 50 mm lens so the speaker stands
-    whole, the strip four times brighter, the dome down to 0.25 and the key up, a warm pool on the wall behind the
-    shade, a warm grey sweep so the violet separates, the veneer's grain up, contact shadows."""
-    tgt = [0.1, 0.0, 0.7]
-    sx, h = 0.55, 0.56
-    s = base(f'Bell beside {C.NAMES[colour]}', [1500, 1050], colour,
-             {'position': orbit(tgt, -18, 9, 3.9), 'target': tgt, 'lens_mm': 50, 'level': True}, sweep='#D8D2CA')
-    s['sky']['strength'] = 0.25
-    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.42, 0.04, 0], 'rotate_z': 0}]},
-                     {'def': LAMP, 'flavour': colour, 'instances': [{'position': [sx, 0.0, h], 'rotate_z': 0}]}]
-    sb = sideboard(sx, 0.9); sb['grain'] = 0.45
-    s['set']['props'] = [sb]
-    s['lights'] = lights(tgt, scale=0.6, dist=4.5)
-    s['lights']['key']['irradiance'] = 1.9
-    s['lights']['wallglow'] = {'type': 'area', 'size_m': [0.4, 0.4], 'position': [0.55, 0.4, 1.05], 'target': [0.55, 2.7, 1.1],
-                               'irradiance': 0.9, 'color': 2900, 'receivers': ['sweep']}
-    s['materials'] = {'led': {'strength': round(LED * 1.6 * 4, 1)}, 'sweep': {'contact': 0.6}}
-    s['render']['exposure'] = 0.2
+    """Bell, lit, on the walnut cabinet at dusk: the room lit by it alone but for the blue of the window; the Cloud
+    in its colour behind it at the left, out of focus."""
+    lx, ly = 0.36, 0.45
+    h = CAB_TOP
+    tgt = [lx, ly, h + 0.24]
+    s = room_shot(f'Bell beside {C.NAMES[colour]}', [1600, 1100],
+                  {'position': orbit(tgt, 6, 6, 1.8), 'target': tgt, 'lens_mm': 50, 'level': True, 'fstop': 2.8,
+                   'focus': [lx, ly - 0.2, h + 0.3]})
+    s['set'] = room(dusk=True)
+    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.36, 0.36, 0], 'rotate_z': 10}]},
+                     {'def': LAMP, 'flavour': colour, 'instances': [{'position': [lx, ly, h], 'rotate_z': 0}]}]
+    s['sky'] = {'kind': 'gradient', 'strength': 2.5, 'zenith': '#1E2C4A', 'horizon': '#5A6E92', 'ground': '#2A2A30'}
+    s['lights'] = {'fill': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 40, 'elevation_deg': 20, 'distance_m': 2.4},
+                            'target': tgt, 'irradiance': 0.04, 'color': '#C9D6F0'}}
+    # the strip's light: three small lamps just outside the opal sleeve, at the strip's height (the sleeve's subsurface stops shadow rays, so lamps inside it lit only the table) (an
+    # emitting strip that thin is all noise to a path tracer; its glow stays on the strip itself)
+    for k in range(3):
+        a = math.radians(90 + 120 * k)
+        s['lights'][f'strip{k}'] = {'type': 'point', 'position': [round(lx + 0.047 * math.cos(a), 4), round(ly + 0.047 * math.sin(a), 4), h + LAMP_STRIP_Z],
+                                    'power_w': LAMP_W / 3, 'radius_m': 0.004, 'color': 2700}
+    s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 60.0}}
+    s['render']['white_balance_k'] = 3400
+    s['render']['exposure'] = 0.9
     return s
 
 

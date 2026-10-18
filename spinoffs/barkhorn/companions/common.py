@@ -44,7 +44,7 @@ MATERIALS = {
     'arm': {'preset': 'gunmetal', 'color': '#2C2C2E'},
     'black': {'preset': 'satin_paint', 'color': '#18181A', 'roughness': 0.5, 'specular': 0.3},
     'rubber': {'preset': 'rubber', 'color': '#161616'},
-    'cartridge': {'preset': 'gloss_plastic', 'color': '#1D4FA0'},
+    'cartridge': {'preset': 'gloss_plastic', 'color': '#121213'},
     'cord': {'preset': 'glass', 'color': '#F2F2F0', 'roughness': 0.15},
     'pcb': {'preset': 'satin_paint', 'color': '#1E3A2A', 'roughness': 0.5},
     'cork': {'preset': 'cork', 'color': '#B08A64'},
