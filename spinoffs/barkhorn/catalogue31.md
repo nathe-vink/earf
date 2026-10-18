@@ -188,3 +188,30 @@ Proofs: `renders/2026-10-18/barkhorn/catalogue31/frame-{wide,tall}-blue-on.png`.
 `front-on-wide`, `front-off-wide`, `front-on-tall`, `front-off-tall` render them as
 `finals31/front-{on,off}-{wide,tall}-<k>.png`; its `--views` now matches a view by its whole name, so `front-on`
 does not also take `front-on-wide`.
+
+## The paper (one backdrop for the site)
+
+The coordinator, after a full-site critic pass: the product pictures carried four studio looks (a warm hero, a white
+studio band, this sweep in grey with a 44-level vignette, the details pastel per colour), and the home cards take
+their panel colour from these frames' foot, so they read a dingy grey (#8B908F to #ABA3A1). The catalogue moves onto
+the studio's warm pale paper (round 31c's bright field): one neutral backdrop for all eight, no tint per colour.
+
+- **The speaker's light is the rig's, as it won.** Only the paper changed: `#F7F0E8` (the studio's `#F3F1EE`, warmed so
+  it renders warm under the rig's white balance and not faintly green), lit high-key by lamps linked to the paper alone:
+  31c's two broad lamps on the cove behind, a gridded overhead lamp for the floor, a lamp for the far left and the
+  upper wall that every frame sees, and for the 3:2 two more (its far-left wall and the foot of its cove). The tinted
+  look's paper lamps are retuned (the glow behind and the key-side wall off: they drove the wall past white).
+- **Measured** (proofs, cover off, 3:2): the floor at the feet 241 to 243 (RGB about 246/242/235, `#F2EFEA` asked), the
+  wall 240 to 241 (242/236/226, `#EDE9E3` asked), the corners and edges 236 to 244: within eight levels across the
+  frame. The 4:5 at quarter size: 229 to 242.
+- **One paper for every colour:** a colour's exposure trim (Fog's -0.6 EV, for its white cloth) is made good on the
+  paper's lamps, so Fog stands on the same paper as the others (it had gone grey).
+- **Smoke and Fog part from the ground** by the rig's own black cards, which the side and the edges mirror. 31c's tall
+  dark strip was tried and dropped: its shadow drew a streak on the cove.
+- **The cabinets against the approved finals** (90eaf89, same light; ΔE 2000, median colour of the part): through the
+  front, Ice 0.2, Fog 0.5, Smoke 1.2; Smoke's side 0.8; Ice's side 5.6 and Fog's 12.6 lighter, as the side now looks
+  through to bright paper instead of grey. Fog's acrylic keeps its faint cool green (the water-clear material's own);
+  the paper under it is neutral.
+- With the drivers merged (01267eb) and the model rebuilt.
+
+Proofs: `renders/2026-10-18/barkhorn/catalogue31/paper-{blue,ice,black}-off-wide.png`.
