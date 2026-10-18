@@ -103,7 +103,7 @@ def _albedo(mat, k, spec=None):
 
 def _ripples(mat, wavelength, strength, dir_deg, wander, patch):
     """Wind ripples in the shader: a sine wave across `dir_deg`, its
-    crests wandering by a noise distortion (`wander`) and its wavelength drifting 0.85 to 1.2x by a slow noise, fading out in patches
+    crests wandering by a noise distortion (`wander`) and its wavelength drifting by a slow noise, fading out in patches
     `patch` metres across where the wind has scoured the sand smooth; chained after the texture's own normal map."""
     nt = mat.node_tree
     bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
@@ -114,7 +114,7 @@ def _ripples(mat, wavelength, strength, dir_deg, wander, patch):
     # the wavelength drifts: scale the coordinates by 0.8 to 1.25 in slow patches
     dn = nt.nodes.new('ShaderNodeTexNoise'); dn.inputs['Scale'].default_value = 1.0 / (patch * 1.7)
     nt.links.new(tc.outputs['Object'], dn.inputs['Vector'])
-    dr = nt.nodes.new('ShaderNodeMapRange'); dr.inputs['To Min'].default_value = 0.85; dr.inputs['To Max'].default_value = 1.2
+    dr = nt.nodes.new('ShaderNodeMapRange'); dr.inputs['To Min'].default_value = 0.8; dr.inputs['To Max'].default_value = 1.25
     nt.links.new(dn.outputs['Fac'], dr.inputs['Value'])
     sc = nt.nodes.new('ShaderNodeVectorMath'); sc.operation = 'SCALE'
     nt.links.new(mp.outputs['Vector'], sc.inputs[0]); nt.links.new(dr.outputs['Result'], sc.inputs['Scale'])
@@ -126,7 +126,7 @@ def _ripples(mat, wavelength, strength, dir_deg, wander, patch):
     # scoured patches: the ripples fade where a slow noise is low
     pn = nt.nodes.new('ShaderNodeTexNoise'); pn.inputs['Scale'].default_value = 1.0 / patch
     nt.links.new(tc.outputs['Object'], pn.inputs['Vector'])
-    pr = nt.nodes.new('ShaderNodeMapRange'); pr.inputs['From Min'].default_value = 0.42; pr.inputs['From Max'].default_value = 0.58
+    pr = nt.nodes.new('ShaderNodeMapRange'); pr.inputs['From Min'].default_value = 0.38; pr.inputs['From Max'].default_value = 0.55
     nt.links.new(pn.outputs['Fac'], pr.inputs['Value'])
     mul = nt.nodes.new('ShaderNodeMath'); mul.operation = 'MULTIPLY'
     nt.links.new(wv.outputs['Fac'], mul.inputs[0]); nt.links.new(pr.outputs['Result'], mul.inputs[1])

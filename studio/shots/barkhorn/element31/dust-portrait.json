@@ -43,16 +43,22 @@
     "swell_size": 16.0,
     "rim": 1.6,
     "vary": [
-     20.0,
+     12.0,
      0.4
     ],
-    "duals": [],
+    "duals": [
+     [
+      2.3,
+      33.0,
+      7.0
+     ]
+    ],
     "ripples": [
-     0.09,
-     0.32,
-     30.0,
-     2.5,
-     15.0
+     0.12,
+     0.28,
+     12.0,
+     7.0,
+     3.5
     ],
     "swell2": [
      0.15,
@@ -62,9 +68,9 @@
     "spec": 0.05,
     "material": "pbr",
     "texture": "red_sand",
-    "tex_scale": 0.6,
-    "tint": "#B4704A",
-    "tint_mix": 0.7,
+    "tex_scale": 1.6,
+    "tint": "#B8876A",
+    "tint_mix": 0.55,
     "res": "4k",
     "rough_mul": 1.0,
     "bump": 0.8
@@ -84,9 +90,9 @@
     ],
     "material": "pbr",
     "texture": "red_sand",
-    "tex_scale": 0.6,
-    "tint": "#B4704A",
-    "tint_mix": 0.7,
+    "tex_scale": 1.6,
+    "tint": "#B8876A",
+    "tint_mix": 0.55,
     "res": "4k",
     "rough_mul": 1.0,
     "bump": 0.8
@@ -116,17 +122,17 @@
     "material": "pbr",
     "texture": "cliff_side",
     "tex_scale": 3.0,
-    "tint": "#6E321C",
-    "tint_mix": 0.6,
+    "tint": "#8A4226",
+    "tint_mix": 0.5,
     "res": "2k",
     "vary": [
      30.0,
      0.45
     ],
-    "displace": 4.0,
+    "displace": 2.5,
     "beds": [
      1.6,
-     0.9
+     0.5
     ]
    },
    {
@@ -154,17 +160,17 @@
     "material": "pbr",
     "texture": "cliff_side",
     "tex_scale": 3.0,
-    "tint": "#6E321C",
-    "tint_mix": 0.6,
+    "tint": "#8A4226",
+    "tint_mix": 0.5,
     "res": "2k",
     "vary": [
      30.0,
      0.45
     ],
-    "displace": 4.0,
+    "displace": 2.5,
     "beds": [
      1.6,
-     0.9
+     0.5
     ]
    },
    {
@@ -192,17 +198,17 @@
     "material": "pbr",
     "texture": "cliff_side",
     "tex_scale": 3.0,
-    "tint": "#6E321C",
-    "tint_mix": 0.6,
+    "tint": "#8A4226",
+    "tint_mix": 0.5,
     "res": "2k",
     "vary": [
      30.0,
      0.45
     ],
-    "displace": 4.0,
+    "displace": 2.5,
     "beds": [
      1.6,
-     0.9
+     0.5
     ]
    },
    {
@@ -230,17 +236,17 @@
     "material": "pbr",
     "texture": "cliff_side",
     "tex_scale": 3.0,
-    "tint": "#6E321C",
-    "tint_mix": 0.6,
+    "tint": "#8A4226",
+    "tint_mix": 0.5,
     "res": "2k",
     "vary": [
      30.0,
      0.45
     ],
-    "displace": 4.0,
+    "displace": 2.5,
     "beds": [
      1.6,
-     0.9
+     0.5
     ]
    },
    {
@@ -248,15 +254,15 @@
     "shape": "ext",
     "module": "dust_el",
     "fn": "tumbleweed",
-    "diameter": 0.55,
+    "diameter": 0.6,
     "seed": 11,
     "position": [
-     4.5,
-     4.0,
+     2.4,
+     1.3,
      0.27
     ],
     "snap": 0.02,
-    "stems": 40,
+    "stems": 30,
     "branches": 8,
     "twigs": 6,
     "rotate": [
@@ -264,12 +270,7 @@
      14,
      30
     ],
-    "scale": [
-     1.0,
-     1.0,
-     0.9
-    ],
-    "color": "#A89070"
+    "color": "#8C7454"
    },
    {
     "kind": "kit",
@@ -277,18 +278,36 @@
     "module": "dust_el",
     "fn": "dust",
     "size": [
-     10.0,
-     4.0,
-     1.5
+     2.6,
+     1.2,
+     0.7
     ],
     "position": [
+     3.4,
+     1.6,
+     -0.02
+    ],
+    "density": 0.08,
+    "wisp": 0.4,
+    "color": "#E9BC94"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "dust",
+    "size": [
+     9.0,
      4.0,
-     14.0,
+     1.2
+    ],
+    "position": [
+     5.5,
+     11.0,
      -0.05
     ],
-    "density": 0.15,
+    "density": 0.05,
     "wisp": 1.5,
-    "anisotropy": 0.7,
     "color": "#EDC29A"
    },
    {
@@ -302,13 +321,31 @@
      1.5
     ],
     "position": [
-     9.0,
-     22.0,
+     -6.0,
+     20.0,
      -0.05
     ],
-    "density": 0.15,
+    "density": 0.04,
     "wisp": 2.0,
-    "anisotropy": 0.7,
+    "color": "#EDC29A"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "dust_el",
+    "fn": "dust",
+    "size": [
+     12.0,
+     5.0,
+     0.8
+    ],
+    "position": [
+     9.0,
+     27.0,
+     -0.05
+    ],
+    "density": 0.04,
+    "wisp": 2.0,
     "color": "#EDC29A"
    }
   ]
@@ -317,19 +354,19 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    10.0,
-    2.0
+    8.0,
+    3.0
    ],
    "target": [
     0.0,
     0.0,
     0.55
    ],
-   "irradiance": 5.0,
+   "irradiance": 2.2,
    "color": "#F2B07E",
    "orbit": {
     "azimuth_deg": -25,
-    "elevation_deg": 3,
+    "elevation_deg": 6,
     "distance_m": 4.0
    }
   }
@@ -342,7 +379,7 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.5,
-  "white_balance_k": 6200.0,
+  "white_balance_k": 7800.0,
   "white_balance_tint": 10.0,
   "look": "AgX - Base Contrast"
  },
@@ -353,8 +390,8 @@
  ],
  "camera": {
   "position": [
-   -1.7785,
-   -4.8864,
+   -1.9153,
+   -5.2623,
    0.6
   ],
   "target": [
@@ -362,7 +399,7 @@
    0.0,
    0.66
   ],
-  "lens_mm": 55.0,
+  "lens_mm": 68.0,
   "level": true,
   "fstop": 2.8,
   "focus": [
@@ -370,24 +407,24 @@
    -0.21,
    0.66
   ],
-  "shift_x": 0.1,
-  "shift_y": 0.03
+  "shift_x": 0.04,
+  "shift_y": 0.0
  },
  "sky": {
   "kind": "hdri",
   "polyhaven": "qwantani_sunset_puresky",
-  "rotation_deg": 264.0,
+  "rotation_deg": 296.0,
   "strength": 0.45,
   "res": "4k",
   "grade": {
    "horizon": "#F4B98C",
-   "zenith": "#A8AEC2",
-   "height_deg": 20.0
+   "zenith": "#C9C3CF",
+   "height_deg": 25.0
   }
  },
  "sun": {
-  "azimuth_deg": 150.0,
-  "elevation_deg": 7.0,
+  "azimuth_deg": 118.0,
+  "elevation_deg": 6.0,
   "irradiance": 24.0,
   "angle_deg": 0.5,
   "color": "#FE9E29"
@@ -396,14 +433,14 @@
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.18,
+  "contrast": 0.12,
   "clarity": 0.04,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.07,
+   "bloom": 0.12,
    "bloom_px": 30,
-   "bloom_threshold": 0.95,
+   "bloom_threshold": 0.9,
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
@@ -417,10 +454,10 @@
    -1.0,
    320.0,
    320.0,
-   70.0
+   400.0
   ],
-  "density": 0.0005,
-  "anisotropy": 0.4,
+  "density": 0.0008,
+  "anisotropy": 0.6,
   "color": "#E8DCD0"
  }
 }

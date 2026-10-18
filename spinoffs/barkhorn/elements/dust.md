@@ -74,3 +74,33 @@ A tumbleweed has come to rest to its right.
 | 6 | p6 (0.5 / 128) | **5.5** | The ripples one even procedural print (the top cue); a bright band at y 480; weak contact shadow; the tumbleweed floating without a shadow; waxy mesas (range 27); an empty pale sky; sand as saturated as the acrylic. Prescribed: real grain under varied ripples, broken-up wisps, feet 15 mm with less bounce, the tumbleweed grounded in the focal plane, dustier sand #B8876A, the mesa turned 45 with deeper displacement, the sun lower, a cooler zenith. | Six passes at 5.5 to 6.0: the ground asset itself was the problem (one tiled photo of beach ripples). Rebuilt the ground: Poly Haven `red_sand` for grain and colour, with wind ripples made in the shader (`_ripples`: a 0.12 m wave whose crests wander by noise, its wavelength drifting, fading out in patches). A saw profile darkened the whole flat in the grazing sun, and a plain sine read as corduroy; a sine with strong distortion reads as sand. The dust sheet replaced by three separate patches; the mesa turned 45 degrees with displacement 2.5 and bed contrast 0.5; feet 15 mm; bounce 2.2; the tumbleweed at (2.4, 1.3) resting on the sand; the zenith cooler; exposure +0.5. A lower sun (4.5 degrees, azimuth 105) put the foreground in a swell's shadow, so the sun stays at 118 and 6. |
 | 7 | p7 (0.5 / 128) | **6.0** | The body dark and opaque (lum 63), darker than the sand: a side three-quarter sun does not pass through it toward the lens; a black woofer and a crushed base; 7800 K makes it all one hue; ripples one orientation; the right mesa washed flat, the left dark (inconsistent haze); a ghostly tumbleweed; a flat pale sky. Prescribed: sun at 150 / 7, bounce 5.0 low on 10 x 2 m, 6200 K with contrast 0.18, wandering ripples with smooth patches, haze 0.0005 / 0.4, a 90 mm camera, a dense tumbleweed back at (4.5, 4.0), zenith #A8AEC2 by 20 degrees. | All but the camera (the 85 to 90 mm view was tried in pass 5: soft and hazy). Sun at 150: the sun stands in frame between the buttes, now reading as a sun rather than the old "moon" since the grade and the white balance are right. The acrylic glows and throws orange into its shadow. Ripple drift 0.6 to 1.6x, 6 m patches, bump 0.3. Tumbleweed 0.55 m with 40 stems (70 made a solid glass-like ball). Sand tint #B4704A at 0.7 (6200 K paled it). |
 | 8 | p8 (0.5 / 128) | **6.0** | Foreground sand like quilted stucco; the tumbleweed floating, a stray shadow falling right; a cracked-mud pattern in the midground (the second texture sampling); flat buttes (left range 9.5); no visible dust; a dark band at the bottom-left; a milky bloom. Prescribed: a 0.08 m wave with long crests and little wander, red_sand at 0.6 m, the tumbleweed bedded and squashed, darker rock with bed contrast 0.9 and displacement 4 m, two glowing dust veils at 14 and 22 m, shift_y 0.03, bloom 0.07. | All made. The stray shadow was the tumbleweed's dust puff (a volume casts a shadow), so the puff went. The second sampling dropped. Ripples 0.09 m at bump 0.32 (0.15 left the sand smooth). |
+| 9 | p9 (0.5 / 128) | **5.5** | Buttes jagged cardboard with sawtooth fringes (the 4 m displacement); the two dust veils a flat bright band with a hard lower edge; the tumbleweed floating, its shadow wrong; ripples too even and too faint; a studio-flat face; a washed sky. | Stopped here, per the coordinator's rule (two passes in a row gaining under 0.5 after a concept change: 6.0, 6.0, 5.5). |
+
+## Stopping, the duel and the finals
+
+The best blind scores were 6.0, at passes 2, 3, 7 and 8. A blind duel (critic/ab/PROMPT-DUEL.txt, fresh judge, random order) set p8 against p7:
+
+- **p7 won, 6.6 to 6.0.** The judge's reasons:
+  - one coherent sun, with the speaker's and the tumbleweed's shadows agreeing;
+  - a saturated amber body with readable structure and edge light (p8's backlit face went milky pink);
+  - crisp ripples from the foreground to the midground;
+  - a sharp tumbleweed sitting on the sand;
+  - one warm grade.
+- p8 won on drama: the sun in frame, and the coloured light through the body in its long shadow.
+
+The finals are the p7 rig, with one change: the haze volume reaches 400 m up instead of 70. In the portrait, the box's top showed as a hard line across the sky. The portrait is re-framed: 68 mm at 5.6 m, the speaker centred at about 36 % of the height, the tumbleweed and two buttes in frame. Proof: `renders/2026-10-18/barkhorn/proofs31/element-dust-portrait-proof.jpg`.
+
+### What holds it back (honestly)
+
+The blind critics never scored it above 6.0, and the duel judge gave it 6.6. It reads as a well-lit, coherent render of a real place, not yet as a photograph. In the critics' own words:
+
+- **The mesas.** They are modelled turned forms in a tiled rock texture, and they read as soft cut-outs through the haze. No Poly Haven asset is a Monument Valley butte. A photogrammetry scan of a real butte, or an 8k photographed backplate of the valley, would lift this most.
+- **The sand.** Shader-made ripples over a photographed grain read far better than the tiled beach photo did. They are still a little even; a scanned ripple field, or a displacement map from a real dune, would settle it.
+- **The sky.** It is a South African pure sky with a warm graduated filter, and it reads pale and flat. A real Southwest sunset sky (an HDRI shot there) would agree with the place.
+- **The acrylic.** It glows only when the sun is behind it (pass 8). From the side three-quarter light that won the duel, the body reads amber but more opaque. The choice between drama (p8) and coherence (p7) is the owner's to make if they want; p8's rig is in the history (`b9d9c4f`).
+
+## Software and engine changes
+
+- **bpy 5.0.1 on python3.11:** this container's python3 is 3.13, for which bpy 5.0.1 is not published (main's setup now handles it).
+- **`studio/engine/lights.py` and `knobs.py`:** `sky.grade`, a graduated colour filter over a photographed sky. Optional and backward compatible; in its own commit.
+- **`studio/engine/kit_ext/dust_el.py`:** this set's pieces: `terrain`, `mesa`, `tumbleweed` and `dust`, plus shader helpers for patch variation, a second sampling, wind ripples, bed banding and albedo.
