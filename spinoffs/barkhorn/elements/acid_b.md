@@ -50,3 +50,26 @@ blind duel between pass 6 and pass 9 (both 6.0).
 Duel (blind, critic/ab/PROMPT-DUEL.txt): pass 9 beat pass 6, 6.0 to 5.0 (`critic-acid_b/duel-p6-p9.json`). Its one
 point for pass 6: there the speaker stands; in pass 9 the water line cuts its base and it looks sunk. So the finals are
 pass 9's rig with pass 6's standing depth (the hollow 16 cm deep, the speaker at z -0.09, about 2 cm in the water).
+
+## Finals
+
+- `renders/2026-10-18/barkhorn/element31/acid_b.png` (2400 x 1600, 512 samples, denoised): 98 min render + 3 min build
+  on the container's CPU. 3.7 MB.
+- `acid_b-portrait.png` (1600 x 2000, the same set re-framed: 85 mm from 6 m, the same height and light).
+
+The blind critic on the landscape final: **6.5** ("a strong idea that reads at once ... the mood and the reflection
+work, but it still reads as CG"), `critic-acid_b/pass-final.json`.
+
+## What holds it back (honest note)
+
+- The speaker is lit by reflector cards more than by the storm: every critic wanted either more front fill (to see
+  the gold) or less (to agree with a sun behind it). With the sun 2.6 deg up behind, the acrylic only glows at its
+  edges; the front needs cards, and the cards read as a studio.
+- The near lava reads as soft, rounded dough at full size: the forms are noise displacement on a photographed rock
+  texture; real basalt's fractured edges and vesicles would need scanned ground or modelled clinker.
+- Backlit rain is invisible against a bright sky and reads as pins against dark ground; the streaks are spindles with a
+  translucent term, not refracting drops, so they never sparkle toward the sun the way real ones do.
+- The splash crowns read as bright glassy cups at 2400 px (they are 2 to 20 mm, a few px at 9 m; the transmission
+  of a thin crown wall makes them bright).
+- The bright horizon band is the photographed sky's own low break (Poly Haven's `belfast_sunset_puresky`); no CC0 sky
+  had a dark storm deck with a low sun, so the deck is that sky dimmed (strength 0.13), not a storm.
