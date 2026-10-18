@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.01
+     -0.025
     ],
     "rotate_z": -18.0,
     "hide": [
@@ -51,30 +51,26 @@
     "module": "smoke_b_el",
     "fn": "dry_scatter",
     "models": [
-     "grass_medium_01"
+     "grass_medium_01",
+     "grass_medium_02"
     ],
-    "count": 70,
+    "count": 7,
     "area": [
-     -5.0,
-     -4.0,
-     5.0,
-     9.0
+     -1.8499999999999999,
+     2.5,
+     -0.44999999999999996,
+     3.9000000000000004
     ],
     "avoid": [
      [
       0.0,
       0.0,
-      0.75
-     ],
-     [
-      -0.6,
-      -3.0,
-      1.6
+      0.9
      ]
     ],
     "scale": [
-     0.7,
-     1.3
+     0.4,
+     1.4
     ],
     "z": -0.04,
     "seed": 11,
@@ -82,31 +78,158 @@
    },
    {
     "kind": "kit",
-    "shape": "scatter_assets",
+    "shape": "ext",
+    "module": "smoke_b_el",
+    "fn": "dry_scatter",
     "models": [
-     "dry_branches_medium_01"
+     "grass_medium_01",
+     "grass_medium_02"
     ],
-    "count": 3,
+    "count": 6,
     "area": [
-     -3.0,
-     -3.5,
-     3.5,
-     3.0
+     1.5,
+     2.0,
+     2.7,
+     3.2
     ],
     "avoid": [
      [
       0.0,
       0.0,
-      0.8
+      0.9
      ]
     ],
     "scale": [
-     0.2,
-     0.3
+     0.4,
+     1.4
     ],
-    "seed": 4,
-    "res": "1k",
-    "z": -0.01
+    "z": -0.04,
+    "seed": 12,
+    "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_b_el",
+    "fn": "dry_scatter",
+    "models": [
+     "grass_medium_01",
+     "grass_medium_02"
+    ],
+    "count": 7,
+    "area": [
+     -3.5,
+     5.6,
+     -1.7000000000000002,
+     7.4
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.9
+     ]
+    ],
+    "scale": [
+     0.4,
+     1.4
+    ],
+    "z": -0.04,
+    "seed": 13,
+    "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_b_el",
+    "fn": "dry_scatter",
+    "models": [
+     "grass_medium_01",
+     "grass_medium_02"
+    ],
+    "count": 4,
+    "area": [
+     1.9,
+     3.9000000000000004,
+     2.9,
+     4.9
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.9
+     ]
+    ],
+    "scale": [
+     0.4,
+     1.4
+    ],
+    "z": -0.04,
+    "seed": 14,
+    "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_b_el",
+    "fn": "dry_scatter",
+    "models": [
+     "grass_medium_01",
+     "grass_medium_02"
+    ],
+    "count": 4,
+    "area": [
+     -0.14999999999999997,
+     5.6000000000000005,
+     1.05,
+     6.8
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.9
+     ]
+    ],
+    "scale": [
+     0.4,
+     1.4
+    ],
+    "z": -0.04,
+    "seed": 15,
+    "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_b_el",
+    "fn": "dry_scatter",
+    "models": [
+     "grass_medium_01",
+     "grass_medium_02"
+    ],
+    "count": 7,
+    "area": [
+     -4.0,
+     0.0,
+     4.0,
+     8.0
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.9
+     ]
+    ],
+    "scale": [
+     0.4,
+     1.4
+    ],
+    "z": -0.04,
+    "seed": 16,
+    "res": "1k"
    },
    {
     "kind": "kit",
@@ -115,12 +238,12 @@
     "fn": "birches",
     "trunks": [
      [
-      1.35,
-      1.6,
+      2.1,
+      2.6,
       0.095,
       2.5,
       100,
-      2
+      1
      ],
      [
       -1.15,
@@ -739,13 +862,6 @@
       4.4,
       6,
       3
-     ],
-     [
-      -2.2,
-      -4.4,
-      0.1,
-      1.0,
-      180
      ]
     ],
     "height": 17.0,
@@ -758,17 +874,17 @@
     "module": "smoke_b_el",
     "fn": "smoke",
     "box": [
-     -12.0,
-     3.0,
+     -6.0,
+     2.5,
      0.0,
-     6.0,
-     4.4,
-     3.5
+     3.0,
+     3.5,
+     2.5
     ],
     "drift": 6.0,
-    "height": 0.9,
-    "thickness": 0.7,
-    "density": 8.0,
+    "height": 1.1,
+    "thickness": 0.4,
+    "density": 14.0,
     "lo": 0.4,
     "hi": 0.6,
     "scale": [
@@ -778,11 +894,11 @@
     ],
     "distortion": 1.4,
     "fade_x": [
-     4.0,
+     3.0,
      -2.0
     ],
     "seed": 3,
-    "color": "#9A9FA6",
+    "color": "#B8B2AA",
     "absorb_color": "#A09890"
    },
    {
@@ -844,12 +960,12 @@
   "negative": {
    "type": "flag",
    "size_m": [
-    3.0,
-    2.4
+    2.0,
+    1.6
    ],
    "orbit": {
     "azimuth_deg": -26.0,
-    "elevation_deg": 4.0,
+    "elevation_deg": 1.0,
     "distance_m": 3.2
    },
    "target": [
@@ -858,6 +974,25 @@
     0.65
    ],
    "glossy": true
+  },
+  "mistglow": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.8
+   ],
+   "orbit": {
+    "azimuth_deg": 165.0,
+    "elevation_deg": 15.0,
+    "distance_m": 2.5
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.65
+   ],
+   "irradiance": 2.0,
+   "color": "#F4F1EC"
   }
  },
  "render": {
@@ -867,7 +1002,9 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 1.1,
+  "exposure": 1.55,
+  "white_balance_k": 7000,
+  "white_balance_tint": 10,
   "look": "AgX - Base Contrast"
  },
  "title": "Smoke: Where there's smoke. (B) (4:5)",
@@ -907,7 +1044,7 @@
  },
  "finish": {
   "enabled": true,
-  "white_in": 240,
+  "white_in": 228,
   "white_out": 240,
   "contrast": 0.04,
   "clarity": 0.05,
@@ -918,8 +1055,8 @@
    "bloom_px": 30,
    "bloom_threshold": 0.92,
    "saturation": 0.0,
-   "lift": 0.0,
-   "lift_color": "#000000",
+   "lift": 0.02,
+   "lift_color": "#1A1612",
    "vignette": 0.06
   }
  }
