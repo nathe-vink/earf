@@ -61,3 +61,4 @@ with the pair in two shafts of sun; the window corner), while the duel against t
 blocks in direct sun, the horn throats crushed to black, the cabinets' black edges. Those now cap the score more than
 the set does. The two-in-a-row 8.5 the protocol asks for is out of reach without changing the speaker, so the finals
 were rendered from r13's settings with its fixes applied.
+| r14 | proofs/r14-post.png (main merged: the cover's new melange cloth and rolled edge; model rebuilt) | 6.5 | c1 sun from behind again (az -105); c2 trim 0.5; c3 fill 3.5 from the right; c4 a waxed floor sheen; c5 the chair back as a foreground corner; c6 vase out of the horn's green beam; c7 window frame darker | the finals were already rendering from this rig. Two passes in a row under +0.5 after the concept changes (r13, r14): the coordinator's stopping rule. Not applied |
