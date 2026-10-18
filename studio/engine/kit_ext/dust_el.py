@@ -85,12 +85,29 @@ def _dual(bpy, mat, scale_mul, rot_deg, mask_size):
             nt.links.new(mix.outputs['Result'], to)
 
 
+def _albedo(mat, k, spec=None):
+    """Scale a material's base colour by `k` (a lighter photographed texture brought down to a darker sand), and set its
+    specular level (`spec`: dry sand glares less than the texture's default at a grazing angle)."""
+    nt = mat.node_tree
+    bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    if spec is not None:
+        bs.inputs['Specular IOR Level'].default_value = spec
+    sock = bs.inputs['Base Color']
+    if not sock.links:
+        return
+    src = sock.links[0].from_socket
+    mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+    mul.inputs['Factor'].default_value = 1.0; mul.inputs['B'].default_value = (k, k, k, 1.0)
+    nt.links.new(src, mul.inputs['A']); nt.links.new(mul.outputs['Result'], sock)
+
+
 def terrain(bpy, name, p, kit):
     ex, ey = p.get('eye', [0.0, -5.0])
     head, half = math.radians(p.get('heading', 90.0)), math.radians(p.get('half_angle', 40.0))
     r0, r1, seg = p.get('r0', 1.5), p.get('r1', 290.0), p.get('segments', 420)
     fx, fy, fr = p.get('flat', [0.0, 0.0, 2.5])
     swell, ssize, rim = p.get('swell', 0.25), p.get('swell_size', 9.0), p.get('rim', 1.5)
+    s2, s2size = p.get('swell2', [0.0, 5.0])
     step = 2 * half / seg
     radii, r = [], r0
     while r < r1:
@@ -108,8 +125,10 @@ def terrain(bpy, name, p, kit):
             t = _smooth((d - fr) / (fr * 2.5))                  # level under the speaker, swelling beyond
             n = noise.noise(Vector((x / ssize, y / ssize, 0.3)) + off)
             n += 0.35 * noise.noise(Vector((x / (ssize * 0.37), y / (ssize * 0.37), 1.7)) + off)
+            t2 = _smooth((d - fr * 0.7) / fr)                 # small swells start nearer the speaker
+            n2 = noise.noise(Vector((x / s2size, y / (s2size * 1.8), 4.1)) + off)
             far = _smooth((rr - 0.88 * r1) / (0.12 * r1))
-            z = t * swell * n + far * rim
+            z = t * swell * n + t2 * s2 * n2 + far * rim
             row.append(bm.verts.new((x, y, z)))
         rows.append(row)
     for a, b in zip(rows, rows[1:]):
@@ -121,8 +140,10 @@ def terrain(bpy, name, p, kit):
             f.normal_flip()
     q = dict(p); q.pop('position', None)
     objs = kit.finish(bpy, name, bm, q)
-    if p.get('dual'):
-        _dual(bpy, objs[0].data.materials[0], *p['dual'])
+    for dl in p.get('duals', [p['dual']] if p.get('dual') else []):
+        _dual(bpy, objs[0].data.materials[0], *dl)
+    if p.get('albedo', 1.0) != 1.0 or 'spec' in p:
+        _albedo(objs[0].data.materials[0], p.get('albedo', 1.0), p.get('spec'))
     if p.get('vary'):
         _vary(bpy, objs[0].data.materials[0], *p['vary'])
     return objs
@@ -161,10 +182,15 @@ def mesa(bpy, name, p, kit):
         t = j / nt
         rf = spread - (spread - 1.0) * (1 - (1 - t) ** 1.8)
         rings.append(ring(rf, H * cliff * t, rough=0.05 * (1 - t) + 0.02))
-    nc = 14                                                   # the cliff, near vertical, a slight batter
+    nc = p.get('cliff_rings', 48)                             # the cliff, near vertical, a slight batter, in ledges
+    band, ledge = p.get('band', 2.2), p.get('ledge', 0.025)
     for j in range(1, nc + 1):
         t = j / nc
-        rings.append(ring(1.0 - 0.06 * t, H * (cliff + (1 - cliff) * t), flute=0.09, rough=0.02))
+        z = H * (cliff + (1 - cliff) * t)
+        zw = z + band * (0.45 * math.sin(z * 0.61 + ph[3]) + 0.3 * math.sin(z * 1.37 + ph[4]))   # beds of uneven thickness
+        f = (zw / band) % 1.0                                 # each bed overhangs the softer one below it
+        step = ledge * (f ** 3 - 0.5)
+        rings.append(ring((1.0 - 0.06 * t) * (1 + step), z, flute=0.09, rough=0.02))
     rings.append(ring(0.9, H * 1.004, flute=0.03))           # the caprock's rim, eased over
     bm = bmesh.new()
     vrows = [[bm.verts.new(v) for v in r] for r in rings]
@@ -230,7 +256,21 @@ def tumbleweed(bpy, name, p, kit):
     cr.elements[0].position = 0.3; cr.elements[0].color = kit._mix(p.get('color', '#B39572'), '#FFFFFF', 0.15)
     cr.elements[1].position = 0.75; cr.elements[1].color = kit._mix(p.get('color', '#B39572'), '#5A4030', 0.45)
     nt.links.new(nz.outputs['Fac'], ramp.inputs['Fac']); nt.links.new(ramp.outputs['Color'], b.inputs['Base Color'])
-    return kit.finish(bpy, name, bm, p, smooth=True, mat=m)
+    objs = kit.finish(bpy, name, bm, p, smooth=True, mat=m)
+    if p.get('snap'):                                         # rest on whatever ground lies under it, bedded `snap` m
+        ob = objs[0]
+        dg = bpy.context.evaluated_depsgraph_get()
+        x, y = ob.location.x, ob.location.y
+        start = Vector((x, y, 50.0))
+        for _ in range(20):                                   # skip its own stems and any volume boxes
+            hit, loc, nrm, idx, hob, mtx = bpy.context.scene.ray_cast(dg, start, Vector((0, 0, -1)))
+            if not hit or (hob is not ob and hob.type == 'MESH' and not any(
+                    sl.material and sl.material.name.endswith('-dust') for sl in hob.material_slots)):
+                break
+            start = loc - Vector((0, 0, 0.001))
+        if hit:
+            ob.location.z = loc.z + R - p['snap']
+    return objs
 
 
 def dust(bpy, name, p, kit):

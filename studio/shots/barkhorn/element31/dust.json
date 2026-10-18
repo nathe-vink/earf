@@ -26,8 +26,8 @@
     "module": "dust_el",
     "fn": "terrain",
     "eye": [
-     -2.052,
-     -5.638
+     -2.531,
+     -6.954
     ],
     "heading": 70.0,
     "half_angle": 42.0,
@@ -43,19 +43,32 @@
     "swell_size": 16.0,
     "rim": 1.6,
     "vary": [
-     14.0,
-     0.55
+     5.0,
+     0.5
     ],
-    "dual": [
-     1.55,
-     27.0,
-     9.0
+    "duals": [
+     [
+      1.55,
+      27.0,
+      9.0
+     ],
+     [
+      0.6,
+      -19.0,
+      3.5
+     ]
     ],
+    "swell2": [
+     0.15,
+     5.0
+    ],
+    "albedo": 0.85,
+    "spec": 0.2,
     "material": "pbr",
     "texture": "aerial_beach_01",
     "tex_scale": 2.6,
-    "tint": "#B9592A",
-    "tint_mix": 0.8,
+    "tint": "#A9502A",
+    "tint_mix": 1.0,
     "res": "4k",
     "rough_mul": 1.0,
     "bump": 1.0
@@ -76,8 +89,8 @@
     "material": "pbr",
     "texture": "aerial_beach_01",
     "tex_scale": 2.6,
-    "tint": "#B9592A",
-    "tint_mix": 0.8,
+    "tint": "#A9502A",
+    "tint_mix": 1.0,
     "res": "4k",
     "rough_mul": 1.0,
     "bump": 1.0
@@ -88,21 +101,22 @@
     "module": "dust_el",
     "fn": "mesa",
     "position": [
-     141.34,
-     199.15,
+     135.25,
+     213.54,
      -0.5
     ],
-    "radius": 34,
-    "height": 24,
+    "radius": 30,
+    "height": 19,
     "seed": 1,
     "squash": 0.45,
     "cliff": 0.4,
     "wander": 0.22,
+    "ledge": 0.014,
     "material": "pbr",
     "texture": "cliff_side",
-    "tex_scale": 8.0,
-    "tint": "#7A3A22",
-    "tint_mix": 0.4,
+    "tex_scale": 3.0,
+    "tint": "#8A4226",
+    "tint_mix": 0.5,
     "res": "2k",
     "vary": [
      30.0,
@@ -115,21 +129,22 @@
     "module": "dust_el",
     "fn": "mesa",
     "position": [
-     16.69,
-     208.54,
+     28.78,
+     215.86,
      -0.5
     ],
-    "radius": 7,
-    "height": 22,
+    "radius": 6,
+    "height": 17,
     "seed": 2,
     "squash": 0.9,
     "cliff": 0.45,
     "wander": 0.22,
+    "ledge": 0.014,
     "material": "pbr",
     "texture": "cliff_side",
-    "tex_scale": 8.0,
-    "tint": "#7A3A22",
-    "tint_mix": 0.4,
+    "tex_scale": 3.0,
+    "tint": "#8A4226",
+    "tint_mix": 0.5,
     "res": "2k",
     "vary": [
      30.0,
@@ -142,21 +157,22 @@
     "module": "dust_el",
     "fn": "mesa",
     "position": [
-     -36.78,
-     277.24,
+     -12.58,
+     280.87,
      -0.5
     ],
-    "radius": 40,
-    "height": 14,
+    "radius": 36,
+    "height": 11,
     "seed": 3,
     "squash": 0.35,
     "cliff": 0.4,
     "wander": 0.22,
+    "ledge": 0.014,
     "material": "pbr",
     "texture": "cliff_side",
-    "tex_scale": 8.0,
-    "tint": "#7A3A22",
-    "tint_mix": 0.4,
+    "tex_scale": 3.0,
+    "tint": "#8A4226",
+    "tint_mix": 0.5,
     "res": "2k",
     "vary": [
      30.0,
@@ -169,21 +185,22 @@
     "module": "dust_el",
     "fn": "mesa",
     "position": [
-     93.71,
-     257.48,
+     99.6,
+     259.12,
      -0.5
     ],
-    "radius": 26,
-    "height": 9,
+    "radius": 22,
+    "height": 7,
     "seed": 4,
     "squash": 0.4,
     "cliff": 0.5,
     "wander": 0.22,
+    "ledge": 0.014,
     "material": "pbr",
     "texture": "cliff_side",
-    "tex_scale": 8.0,
-    "tint": "#7A3A22",
-    "tint_mix": 0.4,
+    "tex_scale": 3.0,
+    "tint": "#8A4226",
+    "tint_mix": 0.5,
     "res": "2k",
     "vary": [
      30.0,
@@ -198,10 +215,11 @@
     "diameter": 0.62,
     "seed": 11,
     "position": [
-     1.35,
-     1.1,
-     0.2
+     3.2,
+     4.5,
+     0.27
     ],
+    "snap": 0.04,
     "stems": 46,
     "branches": 8,
     "twigs": 6,
@@ -218,17 +236,17 @@
     "module": "dust_el",
     "fn": "dust",
     "size": [
-     3.2,
-     1.6,
-     0.9
+     2.6,
+     1.2,
+     0.7
     ],
     "position": [
-     2.6,
-     1.6,
+     4.6,
+     4.9,
      -0.02
     ],
-    "density": 0.8,
-    "wisp": 0.5,
+    "density": 0.35,
+    "wisp": 0.4,
     "color": "#E9BC94"
    },
    {
@@ -239,15 +257,15 @@
     "size": [
      30.0,
      14.0,
-     0.6
+     1.0
     ],
     "position": [
      6.0,
      16.0,
      -0.05
     ],
-    "density": 0.5,
-    "wisp": 1.8,
+    "density": 0.2,
+    "wisp": 3.0,
     "color": "#EDC29A"
    }
   ]
@@ -256,12 +274,12 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    4.0,
+    5.0,
     1.5
    ],
    "orbit": {
     "azimuth_deg": -10,
-    "elevation_deg": 10,
+    "elevation_deg": 6,
     "distance_m": 4.0
    },
    "target": [
@@ -269,7 +287,7 @@
     0.0,
     0.55
    ],
-   "irradiance": 1.2,
+   "irradiance": 2.0,
    "color": "#F2B07E"
   }
  },
@@ -281,6 +299,8 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
+  "white_balance_k": 7200.0,
+  "white_balance_tint": 10.0,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Dust, the Southwest at golden hour",
@@ -290,18 +310,18 @@
  ],
  "camera": {
   "position": [
-   -2.0521,
-   -5.6382,
-   0.78
+   -2.5309,
+   -6.9537,
+   0.6
   ],
   "target": [
    0.0,
    0.0,
    0.66
   ],
-  "lens_mm": 50.0,
+  "lens_mm": 65.0,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 2.8,
   "focus": [
    0.0,
    -0.21,
