@@ -10,9 +10,9 @@ import math, os
 
 from common import area, camera, finish, piece, portrait_of, shot as frame, sky, sun_from_sky
 
-HDRI, ROT = 'qwantani_sunset_puresky', float(os.environ.get('DUST_ROT', 289.0))           # a clear evening, the sky's sun 6 degrees up at azimuth 125 (behind the speaker's right)
-SAND = dict(material='pbr', texture='aerial_beach_01', tex_scale=2.6, tint='#B8632F', tint_mix=1.0, res='4k',
-            rough_mul=1.0, bump=2.2)
+HDRI, ROT = 'qwantani_sunset_puresky', float(os.environ.get('DUST_ROT', 296.0))           # a clear evening, the sky's sun 6 degrees up at azimuth 118 (behind the speaker's right)
+SAND = dict(material='pbr', texture='aerial_beach_01', tex_scale=3.4, tint='#B06540', tint_mix=0.85, res='4k',
+            rough_mul=1.0, bump=1.4)
 ROCK = dict(material='pbr', texture='cliff_side', tex_scale=3.0, tint='#8A4226', tint_mix=0.5, res='2k', vary=[30.0, 0.45],
             displace=1.5, beds=[1.6, 0.35])
 WB = (float(os.environ.get('DUST_WB', 7800)), 10.0)    # a photographer's warm white balance at golden hour
@@ -33,9 +33,9 @@ def at(dist, ang, cam=CAM):
     return round(ex + dist * math.cos(h), 2), round(ey + dist * math.sin(h), 2)
 
 
-def plateau(dist, ang, radius, height, seed, squash=0.55, cliff=0.4, wander=0.22):
+def plateau(dist, ang, radius, height, seed, squash=0.55, cliff=0.4, wander=0.22, turn=0.0):
     x, y = at(dist, ang)
-    return piece('ext', module='dust_el', fn='mesa', position=[x, y, -0.5], radius=radius, height=height, seed=seed,
+    return piece('ext', module='dust_el', fn='mesa', position=[x, y, -0.5], rotate=[0, 0, turn], radius=radius, height=height, seed=seed,
                  squash=squash, cliff=cliff, wander=wander, ledge=0.014, **ROCK)
 
 
@@ -46,37 +46,37 @@ def props():
     out = [piece('ext', module='dust_el', fn='terrain', eye=[round(ex, 3), round(ey, 3)], heading=round(heading, 2),
                  half_angle=42.0, r0=1.2, r1=292.0, segments=460, flat=[0.0, 0.0, 2.2], swell=0.6, swell_size=16.0,
                  rim=1.6, vary=[5.0, 0.5], duals=[[1.55, 6.0, 9.0], [0.6, -4.0, 3.5]],
-                 swell2=[0.15, 5.0], albedo=0.85, spec=0.2, **SAND),
+                 swell2=[0.15, 5.0], albedo=0.88, spec=0.05, **SAND),
            # under everything, out of the camera's sight: ground for the light to bounce off on every side
            piece('box', size=[700.0, 700.0, 0.1], position=[0.0, 0.0, -0.45], **SAND)]
     # the plateaus: a broad mesa to the right, a slim butte and a long low mesa to the left, one more far off
-    out += [plateau(260, 12, 30, 19, 1, squash=0.45),
+    out += [plateau(260, 12, 30, 19, 1, squash=0.45, turn=20.0),
             plateau(225, -9, 6, 17, 2, squash=0.9, cliff=0.45),
             plateau(288, -22, 36, 11, 3, squash=0.35),
             plateau(285, 1, 22, 7, 4, squash=0.4, cliff=0.5)]
     # the tumbleweed, rolling past farther back on the gust, its dust trailing behind it
-    out += [piece('ext', module='dust_el', fn='tumbleweed', diameter=0.62, seed=11, position=[2.6, 3.0, 0.27], snap=0.04,
+    out += [piece('ext', module='dust_el', fn='tumbleweed', diameter=0.6, seed=11, position=[2.7, 3.2, 0.27], snap=-0.05,
                   stems=30, branches=8, twigs=6, rotate=[8, 14, 30], color='#8C7454'),
-            piece('ext', module='dust_el', fn='dust', size=[2.6, 1.2, 0.7], position=[3.9, 3.4, -0.02], density=0.12,
+            piece('ext', module='dust_el', fn='dust', size=[2.6, 1.2, 0.7], position=[3.8, 3.5, -0.02], density=0.1,
                   wisp=0.4, color='#E9BC94'),
             # wisps of dust blowing low across the flat behind, lit from behind by the sun
-            piece('ext', module='dust_el', fn='dust', size=[40.0, 12.0, 0.9], position=[4.0, 13.0, -0.05], density=0.16,
-                  wisp=5.0, color='#EDC29A')]
+            piece('ext', module='dust_el', fn='dust', size=[40.0, 12.0, 0.9], position=[4.0, 13.0, -0.05], density=0.07,
+                  wisp=2.0, color='#EDC29A')]
     return out
 
 
 def lights():
     # the sun on the sand in front bounces back into the speaker's face: a photographer's warm reflector, low
-    return {'bounce': area(-10, 4, 4.0, 1.5, '#F2B07E', (6.0, 2.0), (0.0, 0.0, 0.55))}
+    return {'bounce': area(-25, 6, 4.0, 3.2, '#F2B07E', (8.0, 3.0), (0.0, 0.0, 0.55))}
 
 
 def shot():
-    return frame('dust', props(), camera(**CAM), sky(HDRI, ROT, strength=0.3, res='4k'),
+    return frame('dust', props(), camera(**CAM), dict(sky(HDRI, ROT, strength=0.45, res='4k'), grade={'horizon': '#F7C49A', 'zenith': '#F2EEF2', 'height_deg': 30.0}),
                  'barkhorn, Dust, the Southwest at golden hour', lights=lights(),
                  sun=dict(sun_from_sky(HDRI, ROT, irradiance=20.0, angle_deg=0.6), elevation_deg=6.0),
                  fin=finish(contrast=0.12, clarity=0.04, saturation=0.0, vignette=0.18, bloom=0.12, threshold=0.9),
-                 haze={'box_m': [-320.0, -30.0, -1.0, 320.0, 320.0, 70.0], 'density': 0.0009, 'anisotropy': 0.6,
-                       'color': '#EED6C2'},
+                 haze={'box_m': [-320.0, -30.0, -1.0, 320.0, 320.0, 70.0], 'density': 0.0008, 'anisotropy': 0.6,
+                       'color': '#E8DCD0'},
                  rotate_z=0.0, position=(0.0, 0.0, -0.008), white_balance=WB, exposure=0.25)
 
 
