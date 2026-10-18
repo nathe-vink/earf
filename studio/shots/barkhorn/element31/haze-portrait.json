@@ -49,7 +49,7 @@
      0.5,
      6.0
     ],
-    "clods": 900,
+    "clods": 450,
     "pebbles": 160,
     "straws": 400,
     "avoid": [
@@ -79,7 +79,7 @@
      -0.03
     ],
     "colors": {
-     "flower": "#6E5A9E",
+     "flower": "#7A5FB0",
      "leaf": "#6B775A",
      "soil": "#7A6A58"
     }
@@ -110,29 +110,12 @@
     ],
     "seed": 7,
     "colors": {
-     "flower": "#6E5A9E",
-     "flower2": "#9078B8",
+     "flower": "#7A5FB0",
+     "flower2": "#9A7CC4",
      "leaf": "#6B775A",
      "leaf2": "#8C9478",
      "stem": "#5E6B47"
     }
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "island_tree_01",
-    "position": [
-     30.0,
-     240.0,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     40
-    ],
-    "scale": 1.0,
-    "res": "1k"
    },
    {
     "kind": "kit",
@@ -163,12 +146,12 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    3.0,
-    2.0
+    4.0,
+    3.0
    ],
    "orbit": {
     "azimuth_deg": -10,
-    "elevation_deg": 12,
+    "elevation_deg": 25,
     "distance_m": 3.0
    },
    "target": [
@@ -176,7 +159,7 @@
     0.0,
     0.7
    ],
-   "irradiance": 4.5,
+   "irradiance": 2.0,
    "color": "#E2D8F4",
    "receivers": [
     "[!p]*",
@@ -215,9 +198,9 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 0.0,
-  "white_balance_k": 5000,
-  "white_balance_tint": 6,
+  "exposure": 0.35,
+  "white_balance_k": 5600,
+  "white_balance_tint": 10,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Haze, lavender at dusk (4:5)",
@@ -252,7 +235,7 @@
   "kind": "hdri",
   "polyhaven": "kiara_9_dusk",
   "rotation_deg": -128.0,
-  "strength": 0.26,
+  "strength": 0.12,
   "res": "4k"
  },
  "sun": {
@@ -283,13 +266,13 @@
  "haze": {
   "box_m": [
    -8000.0,
-   8.0,
+   25.0,
    0.0,
    8000.0,
    8000.0,
-   80.0
+   40.0
   ],
-  "density": 0.0005,
+  "density": 0.0009,
   "anisotropy": 0.3,
   "color": "#B8A4D8"
  }
