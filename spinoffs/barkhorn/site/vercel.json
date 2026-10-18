@@ -27,5 +27,12 @@
         }
       ]
     }
-  ]
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "r31-*": false,
+      "r32-*": false,
+      "claude/*": false
+    }
+  }
 }
