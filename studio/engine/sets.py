@@ -46,6 +46,22 @@ def plane(bpy, name, corners, mat=None, uv=True):
     return _obj(bpy, name, me, mat)
 
 
+# --- haze (round 31) -------------------------------------------------------------------------------------------------
+def haze(bpy, spec):
+    """A box of haze the light shows in: a scattering volume with no surface, so a spot's beam reads as a cone of light
+    and the light through a tinted part as a coloured shaft. `box_m` [x0, y0, z0, x1, y1, z1] (make it hold the camera,
+    or its walls show), `density` (per metre: 0.02 a faint haze, 0.1 a stage's smoke), `anisotropy` (how much it
+    scatters forward, 0 to 0.9), `color`."""
+    x0, y0, z0, x1, y1, z1 = spec.get('box_m', [-8.0, -10.0, 0.0, 8.0, 8.0, 6.0])
+    m = bpy.data.materials.new('haze'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); v = nt.nodes.new('ShaderNodeVolumeScatter')
+    v.inputs['Density'].default_value = spec.get('density', 0.03)
+    v.inputs['Anisotropy'].default_value = spec.get('anisotropy', 0.3)
+    v.inputs['Color'].default_value = M.hex_lin(spec.get('color', '#FFFFFF'))
+    nt.links.new(v.outputs['Volume'], out.inputs['Volume'])
+    return box(bpy, 'haze', x0, y0, z0, x1, y1, z1, m)
+
+
 # --- sweep ---------------------------------------------------------------------------------------------------------
 def sweep(bpy, spec, mats):
     """A cove: floor from y = -front to the curve, the curve of `radius`, the wall up to `height`, `width` across."""
@@ -67,8 +83,30 @@ def sweep(bpy, spec, mats):
                                          'contact_m': ct.get('distance_m', 0.05), 'core': ct.get('core_strength', 0.0),
                                          'core_m': ct.get('core_distance_m', 0.025), **mats.get('sweep', {})})
     ob = _obj(bpy, 'sweep', me, mat)
+    objs = [ob] + props(bpy, spec, mats)               # round 31: props on a sweep too (the carousel's plinth)
     cards(bpy, spec)
-    return [ob]
+    return objs
+
+
+def props(bpy, spec, mats):
+    """A set's `props`, its kit pieces' fibres and grain at the set's `kit_scale` (round 31)."""
+    try:
+        from . import kit as K
+    except ImportError:
+        import kit as K
+    K.SCALE = spec.get('kit_scale', 1.0)
+    objs = []
+    for i, p in enumerate(spec.get('props', [])):
+        if p and not p.get('off') and p.get('kind'):
+            objs += prop(bpy, f'prop{i}-{p["kind"]}', p, mats)
+    return objs
+
+
+def stage(bpy, spec, mats):
+    """A set that is only its props (round 31: a diorama builds its own ground and sky from kit pieces)."""
+    objs = props(bpy, spec, mats)
+    cards(bpy, spec)
+    return objs
 
 
 def _card(bpy, name, f, color, glossy=False):
@@ -465,8 +503,15 @@ def _cable(bpy, name, P, r, mat, n=10):
 def prop(bpy, name, p, mats):
     """Props, each at `position` [x, y] (its centre on the floor), turned `rotate_z` degrees: rug, table, books,
     sideboard (with a turntable), vase (with branches), lamp, sofa (`seats` 1: one seat), armchair, curtain, frame,
-    cable (a lead through `points`, with a moulded plug at its first end)."""
+    cable (a lead through `points`, with a moulded plug at its first end), plinth (round, round 31), kit (round 31:
+    a diorama's felt, paper, cotton or gloss piece, placed in 3D; kit.py)."""
     import random
+    if p['kind'] == 'kit':                               # round 31: the dioramas' felt, paper and cotton (kit.py)
+        try:
+            from . import kit as K
+        except ImportError:
+            import kit as K
+        return K.piece(bpy, name, p)
     kind = p['kind']; x, y = p['position']; rot = math.radians(p.get('rotate_z', 0))
     rnd = random.Random(p.get('seed', 7))
     made = []
@@ -622,6 +667,11 @@ def prop(bpy, name, p, mats):
                 if run >= L:
                     break
             made.append(_cable(bpy, name + '-plug', _smooth(head, 4), D / 2, m, n=14))
+    elif kind == 'plinth':
+        # round 31: a round plinth (the carousel the eight ride on), `radius` and `height`, in satin paint of `color`
+        m = M.make(bpy, name, 'satin_paint', {'color': p.get('color', '#E8E4DC'), 'roughness': p.get('roughness', 0.45),
+                                              'specular': 0.35})
+        made.append(_cyl(bpy, name, p.get('radius', 1.5), p.get('height', 0.1), m, n=160))
     elif kind == 'frame':
         # a framed print on a wall: position [x, y] is its centre, z its centre height, it faces -y before rotate_z
         w, hh = p.get('size', [0.6, 0.8]); z = p.get('z', 1.5)

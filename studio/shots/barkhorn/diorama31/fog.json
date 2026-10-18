@@ -1,0 +1,682 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "birch-fog-clear",
+  "instances": [
+   {
+    "flavour": "birch-fog-clear",
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotate_z": -14.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#C5CFD7",
+  "width": 14.0,
+  "front": 9.0,
+  "depth": 2.7,
+  "radius": 1.2,
+  "height": 6.0,
+  "kit_scale": 11.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "felt",
+    "color": "#CBD3D8",
+    "position": [
+     -2.1,
+     1.7,
+     -0.25
+    ],
+    "scale": [
+     1.7,
+     0.9,
+     0.8
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "felt",
+    "color": "#D3D9DD",
+    "position": [
+     1.9,
+     2.0,
+     -0.3
+    ],
+    "scale": [
+     2.0,
+     1.0,
+     0.9
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "felt",
+    "color": "#C3CCD2",
+    "position": [
+     0.1,
+     2.45,
+     -0.45
+    ],
+    "scale": [
+     2.6,
+     0.7,
+     1.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "felt",
+    "color": "#F3F4F4",
+    "puffs": [
+     [
+      -0.2506,
+      -0.112,
+      0.161
+     ],
+     [
+      -0.0266,
+      0.0308,
+      0.2422
+     ],
+     [
+      0.2506,
+      -0.0896,
+      0.1834
+     ]
+    ],
+    "depth": 0.55,
+    "position": [
+     -1.15,
+     0.55,
+     2.2
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E9E6DF",
+    "a": [
+     -1.30036,
+     0.55,
+     2.23612
+    ],
+    "b": [
+     -1.30036,
+     0.55,
+     4.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E9E6DF",
+    "a": [
+     -0.9996399999999999,
+     0.55,
+     2.2791280000000005
+    ],
+    "b": [
+     -0.9996399999999999,
+     0.55,
+     4.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "felt",
+    "color": "#F3F4F4",
+    "puffs": [
+     [
+      -0.3043,
+      -0.136,
+      0.1955
+     ],
+     [
+      -0.0323,
+      0.0374,
+      0.2941
+     ],
+     [
+      0.3043,
+      -0.1088,
+      0.2227
+     ]
+    ],
+    "depth": 0.55,
+    "position": [
+     1.0,
+     1.15,
+     2.65
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E9E6DF",
+    "a": [
+     0.81742,
+     1.15,
+     2.69386
+    ],
+    "b": [
+     0.81742,
+     1.15,
+     4.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E9E6DF",
+    "a": [
+     1.18258,
+     1.15,
+     2.7460839999999997
+    ],
+    "b": [
+     1.18258,
+     1.15,
+     4.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "felt",
+    "color": "#ECEEEF",
+    "puffs": [
+     [
+      -0.2148,
+      -0.096,
+      0.138
+     ],
+     [
+      -0.0228,
+      0.0264,
+      0.2076
+     ],
+     [
+      0.2148,
+      -0.0768,
+      0.1572
+     ]
+    ],
+    "depth": 0.55,
+    "position": [
+     -0.15,
+     1.9,
+     3.15
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E9E6DF",
+    "a": [
+     -0.27888,
+     1.9,
+     3.18096
+    ],
+    "b": [
+     -0.27888,
+     1.9,
+     4.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E9E6DF",
+    "a": [
+     -0.02112,
+     1.9,
+     3.217824
+    ],
+    "b": [
+     -0.02112,
+     1.9,
+     4.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "felt",
+    "color": "#F3F4F4",
+    "puffs": [
+     [
+      -0.1701,
+      -0.076,
+      0.1092
+     ],
+     [
+      -0.0181,
+      0.0209,
+      0.1643
+     ],
+     [
+      0.1701,
+      -0.0608,
+      0.1245
+     ]
+    ],
+    "depth": 0.55,
+    "position": [
+     1.85,
+     0.2,
+     1.85
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E9E6DF",
+    "a": [
+     1.74794,
+     0.2,
+     1.8744640000000001
+    ],
+    "b": [
+     1.74794,
+     0.2,
+     4.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#E9E6DF",
+    "a": [
+     1.9520600000000001,
+     0.2,
+     1.9037400000000002
+    ],
+    "b": [
+     1.9520600000000001,
+     0.2,
+     4.6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "cotton",
+    "color": "#FAFAF7",
+    "puffs": [
+     [
+      -1.7,
+      0.0099,
+      0.0743
+     ],
+     [
+      -1.5467,
+      0.047,
+      0.0952
+     ],
+     [
+      -1.3933,
+      0.0468,
+      0.1292
+     ],
+     [
+      -1.24,
+      0.0609,
+      0.164
+     ],
+     [
+      -1.0867,
+      0.0427,
+      0.1444
+     ],
+     [
+      -0.9333,
+      0.0724,
+      0.1614
+     ],
+     [
+      -0.78,
+      0.0653,
+      0.1332
+     ],
+     [
+      -0.6267,
+      0.0448,
+      0.1384
+     ],
+     [
+      -0.4733,
+      0.0256,
+      0.1132
+     ],
+     [
+      -0.32,
+      0.0406,
+      0.06
+     ]
+    ],
+    "depth": 0.8,
+    "position": [
+     0,
+     -0.38,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "cotton",
+    "color": "#FAFAF7",
+    "puffs": [
+     [
+      0.3,
+      0.0462,
+      0.087
+     ],
+     [
+      0.5,
+      0.0263,
+      0.1097
+     ],
+     [
+      0.7,
+      0.0711,
+      0.1705
+     ],
+     [
+      0.9,
+      0.0736,
+      0.1769
+     ],
+     [
+      1.1,
+      0.0742,
+      0.2003
+     ],
+     [
+      1.3,
+      0.0701,
+      0.1698
+     ],
+     [
+      1.5,
+      0.0549,
+      0.1563
+     ],
+     [
+      1.7,
+      0.053,
+      0.1384
+     ],
+     [
+      1.9,
+      0.046,
+      0.0789
+     ]
+    ],
+    "depth": 0.8,
+    "position": [
+     0,
+     0.5,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "cotton",
+    "color": "#FAFAF7",
+    "puffs": [
+     [
+      0.45,
+      0.007,
+      0.0493
+     ],
+     [
+      0.55,
+      0.0203,
+      0.073
+     ],
+     [
+      0.65,
+      0.0374,
+      0.0801
+     ],
+     [
+      0.75,
+      0.0174,
+      0.1117
+     ],
+     [
+      0.85,
+      0.0289,
+      0.0999
+     ],
+     [
+      0.95,
+      0.0567,
+      0.102
+     ],
+     [
+      1.05,
+      0.0458,
+      0.0896
+     ],
+     [
+      1.15,
+      0.0311,
+      0.0648
+     ],
+     [
+      1.25,
+      0.0229,
+      0.0534
+     ]
+    ],
+    "depth": 0.8,
+    "position": [
+     0,
+     -0.7,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "cotton",
+    "color": "#FAFAF7",
+    "puffs": [
+     [
+      -2.4,
+      0.0209,
+      0.0788
+     ],
+     [
+      -2.1857,
+      0.0471,
+      0.1301
+     ],
+     [
+      -1.9714,
+      0.0497,
+      0.1821
+     ],
+     [
+      -1.7571,
+      0.0926,
+      0.2276
+     ],
+     [
+      -1.5429,
+      0.0865,
+      0.1963
+     ],
+     [
+      -1.3286,
+      0.0685,
+      0.1761
+     ],
+     [
+      -1.1143,
+      0.0381,
+      0.1283
+     ],
+     [
+      -0.9,
+      0.0201,
+      0.0974
+     ]
+    ],
+    "depth": 0.8,
+    "position": [
+     0,
+     1.0,
+     0
+    ]
+   }
+  ]
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    2.6,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": -38,
+    "elevation_deg": 38,
+    "distance_m": 5.5
+   },
+   "target": [
+    0.0,
+    0.3,
+    1.0
+   ],
+   "irradiance": 3.2,
+   "color": "#FFF2E2"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 48,
+    "elevation_deg": 14,
+    "distance_m": 6.0
+   },
+   "target": [
+    0.0,
+    0.3,
+    0.9
+   ],
+   "irradiance": 0.9,
+   "color": "#EAF0FF"
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 165,
+    "elevation_deg": 30,
+    "distance_m": 4.5
+   },
+   "target": [
+    0.0,
+    0.5,
+    1.6
+   ],
+   "irradiance": 1.4,
+   "color": "#FFF2E2"
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 6,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "barkhorn, Fog, under felt clouds",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   -1.9629,
+   -5.949,
+   3.4472
+  ],
+  "target": [
+   0.1,
+   0.4,
+   0.75
+  ],
+  "lens_mm": 60,
+  "level": false,
+  "fstop": 2.8,
+  "miniature": 11.0,
+  "focus": [
+   0.0,
+   -0.2,
+   0.7
+  ],
+  "blades": 0
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#DDE4EA",
+  "horizon": "#E4E8EC",
+  "ground": "#9AA3AA",
+  "strength": 0.6
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.08,
+  "clarity": 0.05,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "dream": {
+   "bloom": 0.15,
+   "bloom_px": 40,
+   "bloom_threshold": 0.78,
+   "saturation": 0.08,
+   "lift": 0.03,
+   "lift_color": "#9FB0C0",
+   "vignette": 0.12
+  }
+ }
+}

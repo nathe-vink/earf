@@ -119,6 +119,10 @@ def main():
         St.sweep(bpy, st, mats)
     elif st.get('kind') == 'room':
         St.room(bpy, st, mats)
+    elif st.get('kind') == 'stage':
+        St.stage(bpy, st, mats)                          # round 31: a diorama's own ground and sky, from kit pieces
+    if (sh.get('haze') or {}).get('density', 0) > 0:
+        St.haze(bpy, sh['haze'])                         # round 31: a box of haze, so a spot's beam shows
 
     # --- camera --------------------------------------------------------------------------------------------------
     cam_spec = sh['camera']
@@ -142,7 +146,11 @@ def main():
         cam.rotation_euler.rotate_axis('Z', math.radians(cam_spec['roll_deg']))
     cd.shift_x += cam_spec.get('shift_x', 0.0); cd.shift_y += cam_spec.get('shift_y', 0.0)
     if cam_spec.get('fstop', 0) > 0:
-        cd.dof.use_dof = True; cd.dof.aperture_fstop = cam_spec['fstop']
+        # `miniature` k: the depth of field a camera has on a model at 1:k, the tilt-shift look (the aperture k times
+        # wider, so the same f-number on a k-times-smaller world: round 31's dioramas)
+        cd.dof.use_dof = True; cd.dof.aperture_fstop = cam_spec['fstop'] / cam_spec.get('miniature', 1.0)
+        cd.dof.aperture_blades = cam_spec.get('blades', 0)
+        cd.dof.aperture_ratio = cam_spec.get('anamorphic', 1.0)
         F = cam_spec.get('focus', 'target')
         F = T if F == 'target' else Vector(F)
         cd.dof.focus_distance = (F - C).dot((T - C).normalized())

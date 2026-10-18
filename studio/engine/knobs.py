@@ -19,6 +19,9 @@ KNOBS = [
     ('camera.roll_deg', 'deg', (-10, 10), 'roll about the view axis'),
     ('camera.fstop', 'f-number', (0, 32), 'depth of field; 0 for none (all sharp)'),
     ('camera.focus', 'm [x, y, z] or "target"', None, 'the plane of focus passes through this point'),
+    ('camera.miniature', 'scale k', (1, 60), 'tilt-shift: the depth of field of the same f-number on a model at 1:k, so the world reads as a miniature (12 to 20 for a tabletop diorama)'),
+    ('camera.blades', 'count', (0, 16), 'aperture blades: 0 round bokeh, 5 to 9 polygons'),
+    ('camera.anamorphic', 'ratio', (0.5, 2.0), 'bokeh stretched (2: tall ovals, as an anamorphic lens)'),
     ('camera.polariser.strength', '0 to 1', (0, 1), 'a polarising filter on the lens: 1 removes the glare a dielectric (the lacquer, a plastic, a waxed floor) reflects across the pass axis, completely at Brewster\'s angle (56 degrees off the surface\'s normal), not at all head-on or at grazing angles; colour under the glare comes back, highlights there dim with it; exposure is made good'),
     ('camera.polariser.angle_deg', 'deg', (0, 180), 'the filter\'s pass axis in the frame, from horizontal: 90 cuts the glare on faces tilted toward or away from the camera (a roof slope, a floor, a top), 0 on faces turned to the side (a side face, a plinth\'s side); one angle cannot clear both'),
     # exposure and colour
@@ -48,6 +51,13 @@ KNOBS = [
     ('finish.clarity_px', 'px at 1350 wide', (5, 80), 'the radius clarity works at'),
     ('finish.sharpen', '0 to 1', (0, 1), 'an unsharp mask on luminance, cored and clamped to each pixel\'s 3 x 3 neighbours, so edges get crisper without halos'),
     ('finish.sharpen_px', 'px at 1350 wide', (0.3, 2), 'the sharpening radius'),
+    ('finish.dream.bloom', '0 to 1', (0, 1), 'a glow round the highlights (embers, a sun, a lit window), as a diffusion filter gives (round 31)'),
+    ('finish.dream.bloom_px', 'px at 1350 wide', (5, 200), 'how far the glow spreads'),
+    ('finish.dream.bloom_threshold', '0 to 1', (0, 1), 'the brightness (sRGB) above which a pixel glows'),
+    ('finish.dream.saturation', '-0.5 to 0.6', (-0.5, 0.6), 'a vibrance: muted colours gain the most, strong ones little'),
+    ('finish.dream.lift', '0 to 0.2', (0, 0.2), 'the blacks raised toward finish.dream.lift_color, a print\'s soft shadows'),
+    ('finish.dream.lift_color', 'hex', None, 'the colour lifted blacks take (the world\'s shadow colour)'),
+    ('finish.dream.vignette', '0 to 0.6', (0, 0.6), 'the corners darkened by up to this share, smoothly'),
     ('finish.sharpen_core', 'levels', (0, 8), 'a difference under this many levels is noise and is not sharpened'),
     ('finish.dodge', '[{parts, lift_ev, below, knee, feather_px}]', None, 'a retoucher\'s masked lift on named parts (part names or globs from the mask): pixels of those parts darker than `below` (sRGB) gain up to `lift_ev` stops, fading to none over `knee` levels above it, the mask feathered over `feather_px` so nothing else moves; for matte detail no lamp can reach without lighting its neighbours'),
     # sun and sky
@@ -98,7 +108,8 @@ KNOBS = [
     ('glints.*.size_m', 'm', (0.005, 1), 'the glint lamp\'s diameter: larger is a softer, wider highlight'),
     ('glints.*.power_w', 'W', (0, 200), 'the glint lamp\'s power'),
     # set
-    ('set.kind', 'choice', ('room', 'sweep', 'none'), 'what surrounds the product'),
+    ('set.kind', 'choice', ('room', 'sweep', 'stage', 'none'), 'what surrounds the product (stage: only its props, a diorama\'s own ground and sky built from kit pieces)'),
+    ('set.kit_scale', 'k', (1, 40), 'the kit pieces\' fibres, weave and grain this many times their real size, so a set built at full size reads as a model at 1:k (match camera.miniature)'),
     ('set.*', 'see the set\'s own keys', None, 'room: floor, walls, window, skirting, props; sweep: color, radius, depth, width'),
     ('set.color', 'hex', None, 'sweep: its colour (the paper\'s)'),
     ('set.width', 'm', (2, 30), 'sweep: width across'),

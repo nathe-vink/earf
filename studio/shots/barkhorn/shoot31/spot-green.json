@@ -1,0 +1,113 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "eucalyptus-y2k-green",
+  "instances": [
+   {
+    "flavour": "eucalyptus-y2k-green",
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": -18,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#4A4A50",
+  "width": 14.0,
+  "front": 8.0,
+  "depth": 6.0,
+  "radius": 2.0,
+  "height": 7.0
+ },
+ "lights": {
+  "spot": {
+   "type": "spot",
+   "position": [
+    0.0,
+    -0.45,
+    4.2
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "cone_deg": 24,
+   "blend": 0.35,
+   "radius_m": 0.04,
+   "power_w": 4800.0,
+   "color": "#FFF3E2"
+  },
+  "breath": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": -10,
+    "elevation_deg": 12,
+    "distance_m": 5.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 0.09,
+   "color": "#E8EEFF"
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 6,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "barkhorn, green, under a spotlight",
+ "size": [
+  1200,
+  1600
+ ],
+ "camera": {
+  "position": [
+   0.8,
+   -3.7,
+   1.45
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.8
+  ],
+  "lens_mm": 50.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "none"
+ },
+ "haze": {
+  "box_m": [
+   -6.0,
+   -8.0,
+   -0.05,
+   6.0,
+   5.5,
+   6.5
+  ],
+  "density": 0.025,
+  "anisotropy": 0.25
+ }
+}

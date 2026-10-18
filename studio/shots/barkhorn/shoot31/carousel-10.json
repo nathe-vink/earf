@@ -1,0 +1,190 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-red",
+  "instances": [
+   {
+    "flavour": "cloud-red",
+    "position": [
+     0.2861,
+     -1.3289,
+     0.1
+    ],
+    "rotate_z": 8.438,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-orange",
+    "position": [
+     1.5663,
+     -0.5616,
+     0.1
+    ],
+    "rotate_z": 53.438,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-amber",
+    "position": [
+     1.9289,
+     0.8861,
+     0.1
+    ],
+    "rotate_z": 98.438,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "eucalyptus-y2k-green",
+    "position": [
+     1.1616,
+     2.1663,
+     0.1
+    ],
+    "rotate_z": 143.438,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-blue",
+    "position": [
+     -0.2861,
+     2.5289,
+     0.1
+    ],
+    "rotate_z": 188.438,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-violet",
+    "position": [
+     -1.5663,
+     1.7616,
+     0.1
+    ],
+    "rotate_z": 233.438,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "birch-fog-clear",
+    "position": [
+     -1.9289,
+     0.3139,
+     0.1
+    ],
+    "rotate_z": 278.438,
+    "hide": [
+     "cloth-disc"
+    ]
+   },
+   {
+    "flavour": "cloud-black",
+    "position": [
+     -1.1616,
+     -0.9663,
+     0.1
+    ],
+    "rotate_z": 323.438,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#E7E2D8",
+  "width": 40.0,
+  "front": 14.0,
+  "depth": 22.0,
+  "radius": 0.4,
+  "height": 0.6,
+  "props": [
+   {
+    "kind": "plinth",
+    "position": [
+     0.0,
+     0.6
+    ],
+    "radius": 2.7,
+    "height": 0.1,
+    "color": "#F2EEE7"
+   }
+  ]
+ },
+ "lights": {
+  "fill": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    3.0
+   ],
+   "orbit": {
+    "azimuth_deg": -15,
+    "elevation_deg": 22,
+    "distance_m": 10.0
+   },
+   "target": [
+    0.0,
+    0.6,
+    0.6
+   ],
+   "irradiance": 0.2,
+   "color": "#F4F6FF"
+  }
+ },
+ "render": {
+  "samples": 48,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 6,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "barkhorn, the carousel, frame 10 of 32",
+ "size": [
+  1280,
+  720
+ ],
+ "camera": {
+  "position": [
+   0.5,
+   -7.8,
+   4.3
+  ],
+  "target": [
+   0.0,
+   -0.3,
+   0.1
+  ],
+  "lens_mm": 33.0,
+  "level": false
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#BFC3C8",
+  "horizon": "#D2D2D0",
+  "ground": "#6A665F",
+  "strength": 0.35
+ },
+ "sun": {
+  "azimuth_deg": 172.0,
+  "elevation_deg": 15.0,
+  "irradiance": 10.0,
+  "size_deg": 0.5,
+  "color": "#FFF0DA"
+ }
+}

@@ -52,7 +52,17 @@ lists included (`glints.0` adds the first glint).
   openings, reveals, mullions and sills, skirting, wainscot, a ceiling, an oak floor by plank, plaster walls) and props
   (rug, table, books, sideboard with a turntable, vase with branches, floor lamp, sofa, sheer curtain, framed print, and
   a `cable`: a lead through `points`, `d` across, rounded through its bends and carried without twisting, a moulded
-  `plug` [length, across] on its first end, as a powered speaker's mains lead to the wall).
+  `plug` [length, across] on its first end, as a powered speaker's mains lead to the wall), and a round `plinth`
+  (`radius`, `height`, `color`); a sweep takes props too, and a `stage` is a set of props alone (a diorama's own ground
+  and sky). A `kit` prop is a diorama's piece, placed in 3D (`kit.py`): a ball, a cloud of balls, a cylinder or cone,
+  a box, a cut-out, a turned form (`lathe`), a rope or ribbon along a curve (`tube`), a sheet of cloth in folds,
+  hanging or lying (`drape`), many small pieces in a box or a rising plume (`scatter`: embers, motes, snow), a thread,
+  or a piece of a set's own (`ext`, from `kit_ext/`). Its materials are a model-maker's: felt, wool, cotton wool,
+  velvet, suede, corduroy, satin, silk, tulle, organza, paper, card, tissue, clay, sand, flock, foil, glass, frosted
+  glass, resin, gloss, and `glow` (a light: embers, windows). The set's `kit_scale` sizes their fibres, weave and grain
+  for a model at 1:k.
+- **haze:** a box of haze the light shows in (`box_m`, `density` per metre, `anisotropy`, `color`), so a spot's beam
+  reads as a cone of light and the light through a tinted part as a coloured shaft. Make the box hold the camera.
 - **product:** which product file, which flavour, how many copies where (`instances`), and:
   - `hide`: parts left out, by name pattern (on the product block for every copy, or on one instance for that copy);
   - `options`: the product's options this copy is fitted with (`"options": ["cloth"]` on an instance, or on the block

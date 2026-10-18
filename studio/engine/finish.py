@@ -152,6 +152,43 @@ def sharpen(rgb, spec):
     return l2s(lin) * 255
 
 
+DREAM = {'bloom': 0.0, 'bloom_px': 40.0, 'bloom_threshold': 0.75, 'saturation': 0.0, 'lift': 0.0,
+         'lift_color': '#000000', 'vignette': 0.0}
+
+
+def dream(rgb, spec):
+    """The dioramas' finish (round 31), on a float sRGB frame (0 to 255): a glow round the highlights (those above
+    `bloom_threshold`, spread over `bloom_px` and `bloom_px` / 4, added back in linear light at `bloom`), a vibrance
+    (`saturation`: each pixel's chroma raised by that share, less the stronger it already is), the blacks lifted toward
+    `lift_color` by `lift` (the shadows of a print, not of a screen) and a smooth `vignette`."""
+    d = {**DREAM, **(spec or {})}
+    lin = s2l(np.clip(rgb, 0, 255) / 255)
+    h, w = lin.shape[:2]; k = w / 1350
+    if d['bloom']:
+        y = l2s(lin @ W)
+        t = d['bloom_threshold']
+        m = np.clip((y - t) / max(1e-6, 1 - t), 0, 1) ** 1.5
+        hi = lin * m[..., None]
+        glow = sum(wt * np.stack([gaussian_filter(hi[..., c], d['bloom_px'] * k * f) for c in range(3)], -1)
+                   for wt, f in ((0.6, 0.25), (0.4, 1.0)))
+        lin = lin + d['bloom'] * glow
+    out = l2s(np.clip(lin, 0, 1))
+    if d['saturation']:
+        y = out @ W
+        ch = out - y[..., None]
+        c = np.sqrt((ch ** 2).sum(-1))
+        g = 1 + d['saturation'] * (1 - np.clip(c / 0.5, 0, 1))
+        out = np.clip(y[..., None] + ch * g[..., None], 0, 1)
+    if d['lift']:
+        hx = d['lift_color'].lstrip('#'); lc = np.array([int(hx[i:i + 2], 16) / 255 for i in (0, 2, 4)])
+        out = np.clip(out + d['lift'] * (1 - out) * lc / max(lc.max(), 1e-6), 0, 1)   # the shadows lifted in its hue
+    if d['vignette']:
+        yy, xx = np.mgrid[0:h, 0:w]
+        r = np.sqrt(((xx - w / 2) / (w / 2)) ** 2 + ((yy - h / 2) / (h / 2)) ** 2) / np.sqrt(2)
+        out = out * (1 - d['vignette'] * np.clip((r - 0.35) / 0.65, 0, 1) ** 2)[..., None]
+    return out * 255
+
+
 def _save(rgb, path):
     Image.fromarray(np.clip(np.rint(rgb), 0, 255).astype(np.uint8)).save(path)
 
@@ -168,7 +205,8 @@ def post(raw_png, out_png, fin=None, ret=None, swatch_png=None, legend=None, mas
         if f.get('dodge') and mask_png and Path(mask_png).exists() and mask_legend:
             mask = (np.asarray(Image.open(mask_png).convert('RGB'))[..., 0].astype(int),
                     {int(k): v for k, v in mask_legend.items()})
-        _save(tone(a, f, mask), out_png)
+        t_ = tone(a, f, mask)
+        _save(dream(t_, f['dream']) if f.get('dream') else t_, out_png)
         src = out_png
     else:
         src = raw_png
@@ -182,6 +220,8 @@ def post(raw_png, out_png, fin=None, ret=None, swatch_png=None, legend=None, mas
         _save(sharpen(b, f), out_png)
         g = f['white_out'] / f['white_in']
         rep['finish'] = {k: f[k] for k in ('white_in', 'white_out', 'peak', 'contrast', 'clarity', 'sharpen', 'sharpen_px')}
+        if f.get('dream'):
+            rep['finish']['dream'] = f['dream']
         if f.get('dodge'):
             rep['finish']['dodge'] = f['dodge']
         rep['finish']['gain'] = round(g, 4)
