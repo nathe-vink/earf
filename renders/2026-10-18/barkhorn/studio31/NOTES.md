@@ -52,3 +52,5 @@ to be real set bugs (a flag's shadow, the sweep's end, a flag reaching below the
 fixed; the score did not move, and every pass names the same out-of-scope items: the busy internals seen through the
 clear sides, the horn's black driver, the horn's colour against the cabinet's. That is these judges' ceiling for this
 product as it stands, not the light's. The finals are rendered from b5's rig.
+
+Finals: the first five heroes showed a grey wedge in the top-left corner, the left flag's shadow on the cove (gone with the flag off, the left edge still traced by the sweep's own falloff); the flag is off and those five and Haze are rendered again after the rest.
