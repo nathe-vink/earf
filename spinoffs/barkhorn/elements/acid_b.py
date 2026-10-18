@@ -70,8 +70,8 @@ def props(cam):
             thin_below=[1.0, 0.7],
             avoid=[[0.0, 0.0, 0.4]], seed=3),
         # a few drops close to the lens, far out of focus
-        ext('rain', camera=cam, count=150, near=2.5, far=5.0, length=[0.08, 0.18], radius=[0.0006, 0.001],
-            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.15, 0.35], scatter=0.7, rough=0.25, seed=13),
+        ext('rain', camera=cam, count=60, near=2.5, far=5.0, length=[0.06, 0.12], radius=[0.0005, 0.0008],
+            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.08, 0.2], scatter=0.7, rough=0.25, seed=13),
         # and the curtain beyond, too fine to count
         ext('rain', camera=cam, count=200000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.08, scatter=0.9, rough=0.25, clear=0.1, seed=23),

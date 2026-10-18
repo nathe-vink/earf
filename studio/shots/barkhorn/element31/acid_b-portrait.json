@@ -834,16 +834,16 @@
      ],
      "clip_end_m": 1500.0
     },
-    "count": 150,
+    "count": 60,
     "near": 2.5,
     "far": 5.0,
     "length": [
-     0.08,
-     0.18
+     0.06,
+     0.12
     ],
     "radius": [
-     0.0006,
-     0.001
+     0.0005,
+     0.0008
     ],
     "lean": [
      0.09,
@@ -854,8 +854,8 @@
      30.0
     ],
     "opacity": [
-     0.15,
-     0.35
+     0.08,
+     0.2
     ],
     "scatter": 0.7,
     "rough": 0.25,
@@ -1027,9 +1027,12 @@
     "grip-left",
     "grip-right",
     "hf-adaptor",
+    "hf-band",
+    "hf-exit",
     "hf-frame",
     "hf-motor",
     "hf-plug",
+    "hf-terminals",
     "land-bottom",
     "land-left",
     "land-right",
@@ -1061,7 +1064,9 @@
     "post-4",
     "post-sleeves",
     "post-sockets",
-    "rating-plate",
+    "rating-plate-plate",
+    "rating-plate-print",
+    "rating-plate-screws",
     "rib-back-1",
     "rib-back-2",
     "rib-bottom",
@@ -1079,11 +1084,14 @@
     "woofer-coil",
     "woofer-cone",
     "woofer-frame",
+    "woofer-gasket",
     "woofer-magnet",
     "woofer-motor",
     "woofer-ring",
+    "woofer-screws",
     "woofer-spider",
-    "woofer-surround"
+    "woofer-surround",
+    "woofer-terminals"
    ]
   }
  },
