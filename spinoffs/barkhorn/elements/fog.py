@@ -31,7 +31,7 @@ def props():
     # (the volume's box is held to what the lens sees, with a margin toward the sun, and its noise kept light: a
     # procedural volume is traced by null scattering, so its cost goes with its size, its peak density and its noise)
     p.append(piece('ext', module='fog_el', fn='cloudvol', box=[-400.0, 250.0, -230.0, 2600.0, 2800.0, -50.0],
-                   top=-140.0, amp=160.0, scale=380.0, detail=7.0, erode=26.0, soft=0.7, density=0.14, color='#FFF6EC',
+                   top=-140.0, amp=160.0, scale=380.0, detail=7.0, erode=26.0, soft=0.7, density=0.14,
                    octaves=5, billow_octaves=4, anisotropy=0.65))
     p.append(piece('ext', module='fog_el', fn='cloudsea', near=2600.0, far=40000.0, width=120000.0, z=-170.0,
                    billow=140.0, height=45.0, depth=120.0, x=0.0, lean=0.4, rows=220, cols=480, fan=2.6, seed=3,
@@ -46,7 +46,7 @@ def shot():
     s = frame('fog', props(), cam, sky(SKY, ROT, strength=1.0, res='4k'), 'barkhorn, Fog, above the clouds',
               sun=sun_from_sky(SKY, ROT, irradiance=3.5, color='#FFE2BE'),
               lights={'bounce': area(-15, 10, 2.0, 1.1, '#E8D6C4', (2.0, 2.0), (0.0, 0.0, 0.6))},   # a warm reflector just off the lens, low
-              haze={'box_m': [-20000.0, 200.0, -900.0, 50000.0, 40000.0, 300.0], 'density': 0.00024, 'anisotropy': 0.7,
+              haze={'box_m': [-20000.0, 200.0, -900.0, 50000.0, 40000.0, 300.0], 'density': 0.00014, 'anisotropy': 0.7,
                     'color': '#C9D6E6'},
               rotate_z=-6.0, fin=finish(contrast=0.08, clarity=0.08, vignette=0.12, saturation=0.12, lift=0.03, lift_color='#3A3530'), exposure=0.0,
               look='AgX - Medium High Contrast')

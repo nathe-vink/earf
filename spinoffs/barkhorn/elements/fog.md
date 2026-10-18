@@ -190,3 +190,6 @@ What I did:
 6. **Clouds:** bigger, irregular heaps near (scale 380, amp 160, soft 0.7, erode 26); haze up to 2.4e-4.
 7. **Cloud colour:** the volume's scattering colour #FFF6EC, so sunlit tops carry the rock's warmth.
 8. **Birds:** pushed out to 120 to 160 m, spans to 1.4 m, so they fall soft.
+- (Before pass 7: the warm scattering tint #FFF6EC turned the whole cloud sea brown, because the tint compounds at
+  every scattering event, and haze at 2.4e-4 greyed the sky. Both reverted, to white and 1.4e-4, before the critic
+  saw the frame.)
