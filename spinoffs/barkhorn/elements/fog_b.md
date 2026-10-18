@@ -49,3 +49,4 @@
 
 | Pass | Score | Top changes | What I did |
 |---|---|---|---|
+| 1 | 5.5 | c1: the cabinet stood against bright fog, so move the brow back to 28 m. c2: the feet were hidden in tufts; clear them. c3: sun more to the side (az -125). c4: a warm bounce from camera-left. c5: a dense meadow, not tufts on dirt. c6: olive hills, sharper gullies. c7: wisps lower. c8: contrast 0.10, vignette 0.22. | All taken, except c1 adapted: the brow moved to 12.6 m, not 28. At 28 m the brow hides the fog sea entirely (proofs p1 to p6), but at 12.6 m the cabinet stands against the grass and the horn against the hills, with the fog between them and over the ridges. Grass 3500 tufts of three scans, short turf round the feet (z -0.015). Also: biased volumes (step rate 4), about 1.6x faster. |
