@@ -68,7 +68,9 @@ were rendered from r13's settings with its fixes applied.
 - `renders/2026-10-18/barkhorn/room31/room.jpg`: 2880 x 1620, 512 spp (adaptive 0.01) with the denoiser, render 8,382 s
   (2 h 20 min on 4 cores), then the finish (`post.py`). The grained PNG came to 7.0 MB, over the 5 MB limit even
   optimised, so the frame ships as a quality-92 JPG (4:4:4, 1.3 MB), as the brief allows.
-- `room-portrait`: rendered by a coordinator helper from f603e7d (pushed to `r31-room-portrait`).
+- `renders/2026-10-18/barkhorn/room31/room-portrait.png`: 1600 x 2000, 512 spp with the denoiser, render 6,518 s
+  (1 h 49 min), rendered by a coordinator helper from 493b58f (its sun softened to 0.9 deg, below) and merged from
+  `r31-room-portrait` (7696d54); 4.3 MB.
 
 **Final critic** (blind, on the final itself, `critic-final.json`): **6.5**, score if fixed 8.0. Its changes: less fill
 into the cabinets, so they show the sun's gradient instead of an even glow; green trim 0.55; the heading wall a little
@@ -83,3 +85,32 @@ horn's light makes on the credenza's middle door; the plinth gap lifted; the cam
 All three judges named the same artefact: the column of green-gold light on the middle door (real light, the left
 horn's beam through its resin, but hard-edged enough to read as an error). A softer sun would fix it; that costs a
 2 h 20 min re-render.
+
+**The softer sun, tried.** All three judges flagged the column, so the landscape was rendered again with the sun at
+0.9 deg and more floor bounce under the credenza (8,266 s). Blind critic on it (`critic-final2.json`): 6.5 again.
+Blind duel against the 12:23 final (`duel-4.json`): **6.8 for the 12:23 final against 6.5**, preferred for its
+crisper sun on the wall and floor. So `room.jpg` stays the 12:23 frame, and `room.json` is set back to it
+(0.5 deg, floor bounce 0.55). The portrait, rendered from 493b58f, keeps its 0.9 deg sun (`PORTRAIT` in room.py),
+which takes the column off its credenza.
+
+## Scores, pass by pass
+
+| pass | blind score |
+|---|---|
+| r1 (finals31, the frame replaced) | 4.5 |
+| r2, r3 | 6.0, 6.0 |
+| r4 | 6.5 |
+| r5, r6 | 6.0, 6.0 |
+| r7, r8, r9 (concept B) | 6.5, 6.5, 6.5 |
+| r10 (concept C) | 6.0 |
+| r11, r12, r13, r14 (B, centred) | 6.5, 6.3, 6.5, 6.5 |
+| landscape final | 6.5 |
+| landscape final, softer sun (not shipped) | 6.5 |
+
+Duels: r12 vs finals31 7.0 to 5.0; final vs finals31 6.5 to 5.0; final vs r12 6.5 to 6.0; final vs softer-sun final
+6.8 to 6.5.
+
+**Portrait final** (blind, `critic-portrait.json`): **6.5**, score if fixed 8.0. Its top notes: the green pool on the
+floor too faint; the trim to 0.55; the left cover in a window bar's shadow while the right is lit (pair unmatched);
+the pair at about 37% of the frame's height, with empty floor below (a 60 mm lens from 3.5 m would bring it to about
+half); the plinth gap black.
