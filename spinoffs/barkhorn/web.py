@@ -2,7 +2,7 @@
 notes, so any session can rebuild the site).
 
 One page, two views by its address: the home page (#top, and its sections #turn, #atmosphere, #room, #spec, #contact)
-and a speaker's page (#speaker-red ... #speaker-black). It is written as it is hosted: a whole document, with what a
+and a speaker's page (#speaker-ember ... #speaker-smoke, by name; the colour keys still answer). It is written as it is hosted: a whole document, with what a
 browser and a link preview need, a bar saying it is a preview, and kept out of search engines until launch (a meta
 tag, an X-Robots-Tag header on every response and a robots.txt that disallows everything), into site/ for Vercel,
 which deploys it on every push to main.
@@ -28,7 +28,7 @@ price is shown anywhere; a pair is quoted on request.
                                                         (r25/site/img) and the coins' renders (r46/coins) where it has
                                                         them; a picture whose source is not to hand is kept as it is
 """
-import argparse, json, math, os, shutil, subprocess, sys
+import argparse, base64, io, json, math, os, re, shutil, subprocess, sys
 import numpy as np
 from PIL import Image
 
@@ -71,9 +71,10 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
 }
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 COMPANIONS_SHOWN = False      # Cumulus and Bell stay off the page while their second designs are drawn (the owner, 2026-10-18)
+LINEUP_SHOWN = False          # the studio's eight in a row repeated the hero (the site critic, 2026-10-18); it stays in the look book
 TITLE = 'EARF · Atmosphere'
-DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours named for things in the air. '
-        'A concept from EARF, not yet for sale.')
+DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours from Ember to Smoke. '
+        'In development at EARF, not yet for sale.')
 
 CLOUDS = [  # key, number, name, icon, the acrylic, its line, its cover (the look book's)
     ('red', '01', 'Ember', 'ember', 'Translucent red', 'The last light of the fire.', 'Oxblood'),
@@ -85,10 +86,11 @@ CLOUDS = [  # key, number, name, icon, the acrylic, its line, its cover (the loo
     ('ice', '07', 'Fog', 'fog', 'Water-clear', 'Water-clear. Almost not there.', 'White'),
     ('black', '08', 'Smoke', 'smoke', 'Smoked black', 'Smoked glass, for after dark.', 'Black'),
 ]
-SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabinet'), ('Depth', '420 mm'),
+SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabinet'),
+        ('Depth', '423 mm overall, 420 mm at the cabinet'),
         ('Weight', 'About 72 kg; 62 kg with the horn lifted off'),
         ('Woofer', "15-inch, with two ports in the front's lower corners"), ('Horn driver', '2-inch compression driver'),
-        ('Horn', "Cast resin, the cabinet's full depth, 420 mm"),
+        ('Horn', "Cast resin, the cabinet's full depth, its cap 3 mm proud"),
         ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels, crossed at 800 Hz'),
         ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
         ('Lining', 'Recycled polyester batts in white voile, 100 mm at the top and the bottom'),
@@ -99,7 +101,7 @@ MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn abov
           ('horn', 'acid', "The Acid horn from the side, its driver's pod and the flare",
            'The horn: cast resin, its driver in a pod whose cap twists off.'),
           ('woofer', 'ice', 'The 15-inch woofer through an Ice cabinet', 'The 15-inch woofer, behind the cloth when the cover&rsquo;s on.'),
-          ('grip', 'poison', 'A grip cut into the side of a Poison cabinet', 'A grip on each side, for the 72 kg.')]
+          ]   # the grip (Poison) left the row of details with the lineup: four read as a set
 KEYS = [c[0] for c in CLOUDS]
 MARK = {key: col for key, line, num, name, col in M.SPEAKERS if line == 'Cloud'}
 HUE = {'red': 0, 'orange': 1, 'amber': 2, 'green': 3, 'blue': 4, 'violet': 5}   # the painter's wheel, from red
@@ -241,10 +243,16 @@ def make_images(sources=None):
     for k in KEYS:
         for side in ('on', 'off'):
             one(first(os.path.join(FIN, f'front-{side}-{k}.png'), at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg')),
-                lambda p, s=side: (save(Image.open(p), f'{k}-{s}.jpg', 900, q=80),    # the cards' tall frame
-                                   # and the gallery's, its backdrop carried on to the stage's shapes (3:2, and 4:5 on phones)
-                                   save(widen(Image.open(p), 1.5), f'{k}-{s}-wide.jpg', 1800, q=84),
-                                   save(widen(Image.open(p), 0.8), f'{k}-{s}-tall.jpg', 1000, q=84)))
+                lambda p, s=side: save(Image.open(p), f'{k}-{s}.jpg', 900, q=80))    # the cards' tall frame
+            # the gallery's, at the stage's shapes (3:2, and 4:5 on phones): the fronts rendered at those shapes when they are
+            # in, else the tall front with its backdrop carried on past its sides
+            for shape, ar, px in (('wide', 1.5, 1800), ('tall', 0.8, 1000)):
+                own = first(*[os.path.join(FIN, f'front-{side}-{shape}-{k}.{e}') for e in ('png', 'jpg')])
+                if own:
+                    one(own, lambda p, s=side, sh=shape, w=px: save(Image.open(p), f'{k}-{s}-{sh}.jpg', w, q=84))
+                else:
+                    one(first(os.path.join(FIN, f'front-{side}-{k}.png')),
+                        lambda p, s=side, sh=shape, a=ar, w=px: save(widen(Image.open(p), a), f'{k}-{s}-{sh}.jpg', w, q=84))
         for tag, fin, old in (('back', f'back-{k}.png', f'back-{k}.png'), ('amp', f'amp-{k}.png', f'detail-{k}.png')):
             one(first(os.path.join(FIN, fin), os.path.join(R30, old)), lambda p, t=tag: save(Image.open(p), f'{k}-{t}.jpg', 880, q=82))
         for tag in ('side', 'back'):
@@ -255,11 +263,12 @@ def make_images(sources=None):
         one(os.path.join(FIN, f'inside-{k}.png'), lambda p: save(Image.open(p), f'{k}-inside.jpg', 880, q=82))
         h = HABITAT[k]
         one(first(*[os.path.join(U31, f'{n}-{c}.{e}') for n in ('uplit', 'uplight', 'reel', 'frame') for c in (k, h) for e in ('png', 'jpg')]),
-            lambda p: save(Image.open(p), f'{k}-reel.jpg', 1400, q=84))
+            lambda p: save(Image.open(p), f'{k}-reel.jpg', 1600, q=82))     # shown at up to 58vw: 2x at 1440
         e = ELEMENT[k]                                  # the concept the colour shows in its element
-        one(first(os.path.join(E31, f'{e}.png'), os.path.join(E31, f'{e}.jpg')), lambda p: save(Image.open(p), f'{k}-habitat.jpg', 1600, q=84))
+        one(first(os.path.join(E31, f'{e}.png'), os.path.join(E31, f'{e}.jpg')),        # the strip shows it 1080 wide: 2x, and a 1x
+            lambda p: (save(Image.open(p), f'{k}-habitat.jpg', 2400, q=82), save(Image.open(p), f'{k}-habitat-1200.jpg', 1200, q=82)))
         one(first(os.path.join(E31, f'{e}-portrait.png'), os.path.join(E31, f'{e}-portrait.jpg')),
-            lambda p: save(Image.open(p), f'{k}-habitat-portrait.jpg', 1000, q=84))
+            lambda p: save(Image.open(p), f'{k}-habitat-portrait.jpg', 1200, q=82))
         for tag, names in (('studio', ('hero-dark', 'hero')), ('studio-light', ('hero-light',))):
             one(first(*[os.path.join(ST31, f'{n}-{c}.{e}') for n in names for c in (h, k) for e in ('png', 'jpg')]),
                 lambda p, t=tag: (lambda im: (save(im, f'{k}-{t}.jpg', 2400, q=84), save(im, f'{k}-{t}-1200.jpg', 1200, q=82)))(
@@ -269,7 +278,7 @@ def make_images(sources=None):
         lambda p: (lambda im: (save(im, 'lineup.jpg', 2400, q=84), save(im, 'lineup-1200.jpg', 1200, q=82)))(field(Image.open(p), 0.25, 0.07, 0.06)))
     for m, c, *_ in MACROS:                             # the studio's details, each in the colour it was shot in
         one(first(*[os.path.join(ST31, f'macro-{m}-{c}.{e}') for e in ('png', 'jpg')]),
-            lambda p, m=m: save(Image.open(p), f'macro-{m}.jpg', 1200, q=84))
+            lambda p, m=m: save(Image.open(p), f'macro-{m}.jpg', 720, q=84))    # a quarter of the column: 2x at 1440
     for tag in ('turntable', 'lamp'):
         one(first(os.path.join(C31, f'hero-{tag}.png'), os.path.join(C31, f'hero-{tag}.jpg')),
             lambda p, t=tag: save(Image.open(p), f'next-{t}.jpg', 1400, q=84))
@@ -277,7 +286,7 @@ def make_images(sources=None):
         one(first(*[os.path.join(U31, f'{n}.{e}') for n in names for e in ('png', 'jpg')]),
             lambda p, t=tag: (save(Image.open(p), f'{t}.jpg', 2400, q=84), save(Image.open(p), f'{t}-1200.jpg', 1200, q=82)))
     room = first(os.path.join(RM31, 'room.png'), os.path.join(RM31, 'room.jpg'), os.path.join(FIN, 'room.png'))
-    one(room, lambda p: save(Image.open(p), 'room.jpg', 1800, q=84))
+    one(room, lambda p: (save(Image.open(p), 'room.jpg', 2880, q=82), save(Image.open(p), 'room-1440.jpg', 1440, q=82)))   # full bleed: 2x at 1440
     port = first(*[os.path.join(os.path.dirname(room), f'room-portrait.{e}') for e in ('png', 'jpg')]) if room else ''
     if port and os.path.exists(port):                   # the room's phone frame travels with it, as the hero's does
         one(port, lambda p: save(Image.open(p), 'room-portrait.jpg', 1000, q=84))
@@ -381,34 +390,45 @@ def body():
     """The page's head (fonts and style) and body, its pictures as they stand in site/img."""
     meta, panel = image_meta()
     spots = hero_spots()
+    with Image.open(os.path.join(IMG, 'globe-spin-light.webp')) as sp:     # the loader's first frame, inline (a few KB)
+        fw, fh = sp.width // 10, sp.height // 6
+        buf = io.BytesIO(); sp.crop((0, 0, fw, fh)).save(buf, 'WEBP', quality=90, method=6)
+    still = 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
     word = E.word_svg('currentColor').replace('role="img" aria-label="EARF"', 'aria-hidden="true"').replace('<title>EARF</title>', '')
     coin = {k: i for i, k in enumerate(KEYS)}                 # the coins' sheet is in the speakers' order
     icon_img = lambda icon, name, cls='': (f'<img class="ic only-light {cls}" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'
                                            f'<img class="ic only-dark {cls}" src="img/icon-{icon}-dark.webp" alt="" width="256" height="256">')
     icon_paper = lambda icon: f'<img class="ic" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'   # on a pale pill in either theme
+    rank = lambda boxes: {i: 2 + r for r, i in enumerate(sorted(range(len(boxes)), key=lambda i: boxes[i]['t'] + boxes[i]['h']))}
+    zs = rank(spots)                                    # in number order for the keyboard, the front rank's boxes over the back's
     hotspots = ''.join(
-        f'<a class="spot" href="#speaker-{k}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%">'
+        f'<a class="spot" href="#speaker-{name.lower()}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%;z-index:{zs[i]}">'
         f'<span class="spot-label"><span class="spot-ic">{icon_paper(icon)}</span><b>{name}</b><span>{num}</span></span>'
         f'<span class="sr">{name}, Atmosphere {num}</span></a>'
-        for (k, num, name, icon, *_), s in sorted(zip(CLOUDS, spots), key=lambda cs: cs[1]['t'] + cs[1]['h']))   # the back rank first, so the front's links lie over it
-    names = ''.join(f'<li><a href="#speaker-{k}"><span class="coin-dot" style="--i:{coin[k]}"></span>{name}</a></li>'
+        for i, ((k, num, name, icon, *_), s) in enumerate(zip(CLOUDS, spots)))
+    names = ''.join(f'<li><a href="#speaker-{name.lower()}"><span class="coin-dot" style="--i:{coin[k]}"></span>{name}</a></li>'
                     for k, num, name, *_ in CLOUDS)
     turn = ''.join(
         f'<li><div class="spin" data-k="{k}" role="img" aria-label="{name}\'s horn; drag to turn it" '
-        f'style="background-image:url(img/turn-{k}.jpg);aspect-ratio:{meta[k]["turn"]["w"]} / {meta[k]["turn"]["h"]}"></div>'
-        f'<a href="#speaker-{k}">{name}</a></li>' for k, num, name, *_ in CLOUDS)
+        f'data-bg="img/turn-{k}.jpg" style="aspect-ratio:{meta[k]["turn"]["w"]} / {meta[k]["turn"]["h"]}"></div>'
+        f'<a href="#speaker-{name.lower()}">{name}</a></li>' for k, num, name, *_ in CLOUDS)
     on = meta['red']['on'].get('card', meta['red']['on']); w, h = on['w'], on['h']        # the cards keep the tall frame
     cards = ''.join(
         f'<article class="card" style="--panel:{panel[k]}">'
-        f'<a class="photo" href="#speaker-{k}" aria-label="{name}, up close">'
+        f'<a class="photo" href="#speaker-{name.lower()}" aria-label="{name}, up close">'
         f'<img class="on" src="img/{k}-on.jpg" width="{w}" height="{h}" alt="{name} with its cloth cover on" loading="lazy">'
         f'<img class="off" src="img/{k}-off.jpg" width="{w}" height="{h}" alt="{name} with its cover off, the woofer showing" loading="lazy"></a>'
         f'<div class="about"><p class="num">Atmosphere {num}</p>'
         f'<h3 class="named">{name}<span class="card-ic">{icon_img(icon, name)}</span></h3><p class="line">{line}</p>'
         f'<dl><dt>Acrylic</dt><dd>{tint}</dd><dt>Cover</dt><dd>{cover}</dd></dl>'
-        f'<a class="more" href="#speaker-{k}">Up close</a></div></article>'
+        f'<a class="more" href="#speaker-{name.lower()}">Up close</a></div></article>'
         for k, num, name, icon, tint, line, cover in CLOUDS)
-    spec = ''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a, b in SPEC)
+    nb = lambda t: re.sub(r'(\d) (mm|kg|Hz)\b', '\\1\u00a0\\2', t)      # a number never parts from its unit
+    spec = ''.join(f'<dt>{a}</dt><dd>{nb(b)}</dd>' for a, b in SPEC)
+    dwg = ''                                            # the two views drawn at one scale: each as wide as its share of the row
+    for f, alt in (('ga-front.png', 'The speaker drawn from the front'), ('ga-right.png', 'The speaker drawn from the right')):
+        gw, gh = Image.open(os.path.join(IMG, f)).size
+        dwg += f'<img src="img/{f}" width="{gw}" height="{gh}" style="flex:{gw / gh:.4f} 1 0" alt="{alt}" loading="lazy">'
     reel = habitats = closer = ''
     sk = next((t for t in ('studio-light', 'studio') if all(t in meta[k] for k in KEYS)), None)   # round 31's bright field won
     if sk:
@@ -417,7 +437,7 @@ def body():
         edge = np.concatenate([im[:6].reshape(-1, 3), im[-6:].reshape(-1, 3), im[:, :6].reshape(-1, 3), im[:, -6:].reshape(-1, 3)]).mean(0)
         light = edge.mean() > 150                       # a pale ground takes dark type
         lineup = ''
-        if os.path.exists(os.path.join(IMG, 'lineup.jpg')):
+        if LINEUP_SHOWN and os.path.exists(os.path.join(IMG, 'lineup.jpg')):
             lw, lh = Image.open(os.path.join(IMG, 'lineup.jpg')).size
             lineup = ('    <figure class="lineup"><img src="img/lineup.jpg" srcset="img/lineup-1200.jpg 1200w, img/lineup.jpg 2400w" '
                       f'sizes="(max-width: 1240px) 100vw, 1240px" width="{lw}" height="{lh}" loading="lazy" '
@@ -470,7 +490,7 @@ def body():
                 '        <div class="light-glow" aria-hidden="true"></div>\n'
                 '        <figure class="light-pic">' + ''.join(
                     f'<img src="img/{k}-reel.jpg" width="{rw}" height="{rh}" alt="{name} standing on a light, its colour thrown up the wall behind it"'
-                    f'{" class=on" if i == 0 else " loading=lazy"} decoding="async">' for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</figure>\n'
+                    f'{" class=on" if i == 0 else ""} loading="lazy" decoding="async">' for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</figure>\n'
                 f'        <div class="light-text"><div class="light-intro">{intro}</div>\n'
                 f'          <div class="light-colour"><p class="num" id="light-num">Atmosphere {first_[1]}</p>'
                 f'<p class="light-name" id="light-name">{first_[2]}</p><p class="light-line" id="light-line">{first_[5]}</p>\n'
@@ -485,9 +505,10 @@ def body():
                     '    <div class="head"><div><p class="eyebrow">In their element</p><h2>Each colour, out in the world.</h2></div></div>\n'
                     '    <div class="hab-frame">\n'
                     '    <ul class="habitats" id="hab" tabindex="0" aria-label="The eight in their habitats">' + ''.join(
-                        f'<li><a href="#speaker-{k}"><picture>'
+                        f'<li><a href="#speaker-{name.lower()}"><picture>'
                         + (f'<source media="(max-width: 700px)" srcset="img/{k}-habitat-portrait.jpg">' if tall else '') +
-                        f'<img src="img/{k}-habitat.jpg" width="{hw}" height="{hh}" loading="lazy" '
+                        f'<img src="img/{k}-habitat.jpg" srcset="img/{k}-habitat-1200.jpg 1200w, img/{k}-habitat.jpg {hw}w" '
+                        f'sizes="(max-width: 700px) 84vw, min(86vw, 1080px)" width="{hw}" height="{hh}" loading="lazy" '
                         f'alt="{name}, on location"></picture><span><b>{name}</b> {line}</span></a></li>'
                         for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n'
                     f'    <button type="button" class="nav prev" id="hab-prev" aria-label="Previous">{CHEV_L}</button>'
@@ -506,7 +527,11 @@ def body():
     nxt = ('  <section class="band"><div class="wrap next">\n    <p class="eyebrow">Next</p>\n'
            '    <h2>In good company.</h2>\n'
            '    <p>A record player and a lamp are on the drawing board, cast in the same eight colours.</p>' + figs +
-           '\n  </div></section>')
+           '\n  </div></section>') if COMPANIONS_SHOWN else ''
+    goes_sec = ('    <section aria-labelledby="goes-title">\n'
+                '      <div class="goes-head"><h2 id="goes-title">Good company</h2><span id="goes-note"></span></div>\n'
+                '      <div class="goes" id="goes" aria-live="polite"></div>\n'
+                '    </section>\n') if COMPANIONS_SHOWN else ''
     data = dict(
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
                      coin=coin[k], views=meta[k], place=PLACES.get(ELEMENT[k], 'on location'))
@@ -522,16 +547,17 @@ def body():
     if hero_tall and tall('hero-spots-portrait.json'):    # the phone frame's own boxes: the back rank first, so the front's lie over it
         ps = json.load(open(os.path.join(IMG, 'hero-spots-portrait.json')))
         ps = ps['portrait'] if isinstance(ps, dict) else ps
+        zp = rank(ps)
         hotspots += ''.join(
-            f'<a class="spot tall-only" href="#speaker-{k}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%">'
+            f'<a class="spot tall-only" href="#speaker-{name.lower()}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%;z-index:{zp[i]}">'
             f'<span class="sr">{name}, Atmosphere {num}</span></a>'
-            for (k, num, name, *_), s in sorted(zip(CLOUDS, ps), key=lambda cs: cs[1]['t'] + cs[1]['h']))
+            for i, ((k, num, name, *_), s) in enumerate(zip(CLOUDS, ps)))
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
-                .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec)
-                .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt)
-                .replace('__DATA__', json.dumps(data, separators=(',', ':'))))
+                .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
+                .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt).replace('__GOES__', goes_sec)
+                .replace('__STILL__', still).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
     cut = page.index('</style>') + len('</style>')
     return page[:cut], page[cut:]
 
@@ -542,29 +568,21 @@ PAGE = r"""
 <style>
 /* layout: a showroom in one column of bands; the speakers themselves carry the colour, the page stays paper and ink */
 :root {
-  --paper: #F2EFEA; --page: #E9E5DE; --ink: #1C1A18; --muted: #5E5A53; --rule: #CFC9BF; --card-ink: #1A1917;
+  --paper: #ECE8E1; --page: #F4F1EC; --ink: #1C1A18; --muted: #5E5A53; --rule: #D6D0C6; --card-ink: #1A1917;
   --ring: rgba(0, 0, 0, 0.25); --on-photo: #1C1A18; --veil: rgba(242, 239, 234, 0.82);
   --blend: multiply;
   --sans: 'Instrument Sans', 'Helvetica Neue', Arial, sans-serif; --mono: 'IBM Plex Mono', 'Courier New', monospace;
   --header: 64px;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --paper: #1A1917; --page: #141311; --ink: #ECE8E1; --muted: #A39E95; --rule: #34312C; --ring: rgba(255, 255, 255, 0.45);
-  --veil: rgba(242, 239, 234, 0.82); --blend: screen; color-scheme: dark } }
-:root[data-theme="dark"] { --paper: #1A1917; --page: #141311; --ink: #ECE8E1; --muted: #A39E95; --rule: #34312C;
-  --ring: rgba(255, 255, 255, 0.45); --veil: rgba(242, 239, 234, 0.82); --blend: screen; color-scheme: dark }
+:root { color-scheme: light }                     /* one theme by choice: every photograph here stands on a pale ground */
 .only-dark { display: none !important }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .only-dark { display: block !important }
-  :root:not([data-theme="light"]) .only-light { display: none !important } }
-:root[data-theme="dark"] .only-dark { display: block !important }
-:root[data-theme="dark"] .only-light { display: none !important }
 * { box-sizing: border-box }
 body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--sans); font-size: 17px; line-height: 1.55 }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--page) }
 .wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px)) }
 .band { padding-block: 72px }
-.band + .band { border-top: 1px solid var(--rule) }
+.band + .band { border-top: 0 }
 section[id] { scroll-margin-top: calc(var(--header) + 16px) }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
@@ -579,10 +597,6 @@ header.top .wrap { display: flex; align-items: center; justify-content: space-be
 .brand .globe { width: 42px; height: 42px; flex: none; background-size: 1000% 600%; background-position: 0 0;
   background-image: url(img/globe-spin-light.webp);
   background-image: image-set(url(img/globe-spin-light.avif) type("image/avif"), url(img/globe-spin-light.webp) type("image/webp")) }
-:root[data-theme="dark"] .brand .globe { background-image: url(img/globe-spin-dark.webp);
-  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand .globe { background-image: url(img/globe-spin-dark.webp);
-  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) } }
 .brand svg { display: block; height: 22px; width: auto }
 nav ul { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 0; list-style: none }
 nav a { color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 500 }
@@ -601,20 +615,18 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .ic { width: 100%; height: 100%; object-fit: contain }
 .coin-dot { width: 22px; height: 22px; flex: none; display: inline-block; background: url(img/coins-light.jpg) calc(var(--i) * 100% / 7) 0 / 800% 100%;
   mix-blend-mode: var(--blend) }
-:root[data-theme="dark"] .coin-dot { background-image: url(img/coins-dark.jpg) }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .coin-dot { background-image: url(img/coins-dark.jpg) } }
 
 /* the hero: the eight on their arc; the title on the photograph's paper sky, in its ink whatever the theme */
 .hero { padding-block: 0 28px }
 .hero-pic { position: relative }
-.hero-photo { position: relative; aspect-ratio: 2 / 1; max-width: 100%; background: #ECE7DD; overflow: hidden }
+.hero-photo { position: relative; aspect-ratio: 2 / 1; max-width: 100%; background: #F1EDE8; overflow: hidden }
 .hero-photo > picture { display: block; width: 100%; height: 100% }
 .hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover }
 @media (max-width: 700px) { .hero-photo.has-tall { aspect-ratio: 4 / 5 } }
 .hero-title { position: absolute; left: 0; right: 0; top: 0; z-index: 1; color: var(--on-photo); pointer-events: none }
 .hero-title .wrap { padding-block: clamp(18px, 2.6vw, 44px) 0 }
 .hero-title .eyebrow { color: color-mix(in srgb, var(--on-photo) 68%, transparent) }
-.hero-title h1 { font-size: clamp(30px, 3.6vw, 58px); max-width: none }
+.hero-title h1 { font-size: clamp(34px, 5vw, 80px); max-width: none }
 .hero-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding-block: 24px 0 }
 .hero-foot .lede { margin: 0 }
 .acts { display: flex; flex-wrap: wrap; gap: 10px }
@@ -661,7 +673,8 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .photo .off { opacity: 0 }
 .show-off .photo .on { opacity: 0 }
 .show-off .photo .off { opacity: 1 }
-.about { padding: 14px 16px 18px; display: grid; gap: 4px; align-content: start; min-width: 0 }
+.about { padding: 14px 16px 18px; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: 4px; min-width: 0 }
+.photo { color: var(--card-ink) }
 .about .num { margin: 0; display: flex; align-items: center; gap: 8px; font: 500 12px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase }
 .about h3.named { display: flex; align-items: center; gap: 0.3em }
 .card-ic { width: 1.15em; height: 1.15em; flex: none; display: block }
@@ -669,10 +682,10 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .card .card-ic .only-light { display: block !important }
 .about h3 { margin: 0; font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
 .about .line { margin: 0 0 8px; font-size: 15px }
-.about dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: 13px; border-top: 1px solid rgba(26, 25, 23, .25); padding-top: 8px }
-.about dt { font: 500 11px/1.6 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; opacity: .7 }
+.about dl { margin: 0; display: grid; grid-template-columns: auto 1fr; align-content: start; gap: 2px 12px; font-size: 13px; border-top: 1px solid rgba(26, 25, 23, .25); padding-top: 8px }
+.about dt { font: 500 12px/1.5 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; opacity: .82 }
 .about dd { margin: 0 }
-.about .more { margin-top: 10px; color: var(--card-ink); font-weight: 600; font-size: 15px; text-underline-offset: 4px }
+.about .more { margin-top: 10px; align-self: end; justify-self: start; color: var(--card-ink); font-weight: 600; font-size: 15px; text-underline-offset: 4px }
 
 /* a closer look: one colour at a time on the studio's dark seamless (a launch page's), picked from the coins below */
 .closer { background: var(--closer, #0B0B0C); color: #F5F3EF; text-align: center }
@@ -695,7 +708,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .closer button:focus-visible { outline-color: #F5F3EF }
 .closer.light { color: #1A1917 } .closer.light .eyebrow, .closer.light .picked, .closer.light .lineup figcaption { color: #6B675F }
 .closer.light .picked b { color: #1A1917 } .closer.light button:focus-visible { outline-color: #1A1917 }
-.macros { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; text-align: left }
+.macros { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; text-align: left }
 .macros figure { margin: 0 } .macros img { width: 100%; height: auto; display: block; max-width: 100% }
 .macros figcaption { font-size: 14px; line-height: 1.4; margin-top: 8px; color: #9B978F } .closer.light .macros figcaption { color: #6B675F }
 @media (max-width: 900px) { .macros { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
@@ -787,30 +800,34 @@ header.top.on-dark .brand, header.top.on-dark nav a { color: #ECE8E1 }
 header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.webp);
   background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) }
 /* the habitats: one campaign picture at a time, snapping along a strip (the portraits on phones) */
-.hab-frame { position: relative; container-type: inline-size; --col: min(86cqw, 1080px); --mid: calc(var(--col) / 3) }
+#habitats { overflow-x: clip }
+#habitats > .wrap { container-type: inline-size }
+.hab-frame { position: relative; --col: min(86cqw, 1080px); --mid: calc(var(--col) / 3); margin-right: calc(50cqw - 50vw) }
 .hab-frame .nav { top: var(--mid); transition: opacity .2s ease }
 .hab-frame .nav.prev { left: 14px } .hab-frame .nav.next { right: auto; left: calc(var(--col) - 58px) }
 .hab-frame .nav[aria-disabled="true"] { opacity: 0; pointer-events: none }
-.habitats { list-style: none; margin: 0; padding: 0 0 6px; display: grid; grid-auto-flow: column; grid-auto-columns: min(86%, 1080px);
-  gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain }
+.habitats { list-style: none; margin: 0; padding: 0 0 6px; display: grid; grid-auto-flow: column; grid-auto-columns: var(--col);
+  gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; padding-right: 96px;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 96px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 96px), transparent) }
 .habitats::-webkit-scrollbar { display: none }
 .habitats li { scroll-snap-align: start; min-width: 0 }
 .habitats a { display: grid; gap: 10px; color: var(--ink); text-decoration: none; font-size: 15px }
 .habitats a span { color: var(--muted) } .habitats a b { color: var(--ink); font-weight: 600; margin-right: 6px }
 .habitats img { width: 100%; height: auto; display: block; border-radius: 4px }
 .habitats:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px }
-@media (max-width: 700px) { .habitats { grid-auto-columns: 84% } .hab-frame { --col: 84cqw; --mid: calc(var(--col) * 0.625) } }
-.room figure { margin: 0; display: grid; gap: 12px }
-.room img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
-.room figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; font-size: 15px; color: var(--muted) }
+@media (max-width: 700px) { .hab-frame { --col: 84cqw; --mid: calc(var(--col) * 0.625) }
+  .habitats { padding-right: 40px; -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 40px), transparent) } }
+.room figure { margin: 0; display: grid; gap: 14px }
+.room img { width: 100%; height: auto; display: block; max-width: 100% }
+.room figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; font-size: 15px; color: var(--muted); width: 100% }
 .spec-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: start }
 .spec dl, .facts { margin: 0; display: grid; grid-template-columns: 150px minmax(0, 1fr); border-top: 2px solid var(--ink) }
 .spec dt, .spec dd, .facts dt, .facts dd { padding: 10px 0; border-bottom: 1px solid var(--rule) }
 .spec dt, .facts dt { font: 500 13px/1.5 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
 .spec dd, .facts dd { margin: 0 }
-.dwg { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #F7F5F1; border-radius: 4px; padding: 14px; margin: 0 }
-.dwg img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; max-width: 100% }
-.dwg figcaption { grid-column: 1 / -1; font: 500 12px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: #5E5A53 }
+.dwg { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 20px; background: #F7F5F1; border-radius: 4px; padding: 18px; margin: 0; max-width: 620px }
+.dwg img { min-width: 0; width: 0; height: auto; display: block; mix-blend-mode: multiply }
+.dwg figcaption { flex: 1 0 100%; font: 500 12px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: #5E5A53 }
 .next { display: grid; gap: 14px }
 .next p { margin: 0; max-width: 60ch; color: var(--muted) }
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 14px }
@@ -906,16 +923,16 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 
 /* the loader: the acrylic globe turns while the first photograph comes in, then gives way and the photograph rises in */
 .splash { position: fixed; inset: 0; z-index: 50; background: var(--page); display: grid; place-items: center;
-  transition: opacity .55s cubic-bezier(.2, .7, .2, 1), visibility .55s }
-.splash.gone { opacity: 0; visibility: hidden }
-.splash .globe { width: 64px; height: 64px; background: url(img/globe-spin-light.webp) 0 0 / 1000% 600% no-repeat;
+  animation: splash-in .3s ease .45s both }
+@keyframes splash-in { from { opacity: 0 } to { opacity: 1 } }
+.splash.gone { animation: splash-out .25s ease both }
+@keyframes splash-out { from { opacity: var(--o, 1) } to { opacity: 0; visibility: hidden } }
+.splash .globe { grid-area: 1 / 1; width: 42px; height: 42px }       /* the header's own frames (84 px), so sharp at 2x */
+.splash .still { background: url("__STILL__") center / contain no-repeat }   /* the first frame, inline: never a blank screen */
+.splash .spin { background: url(img/globe-spin-light.webp) 0 0 / 1000% 600% no-repeat;
   background-image: image-set(url(img/globe-spin-light.avif) type("image/avif"), url(img/globe-spin-light.webp) type("image/webp")) }
-:root[data-theme="dark"] .splash .globe { background-image: url(img/globe-spin-dark.webp);
-  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .splash .globe { background-image: url(img/globe-spin-dark.webp);
-  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) } }
-.hero-photo img { transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform 1.6s cubic-bezier(.2, .7, .2, 1) }
-html.opening .hero-photo img { opacity: 0; transform: scale(1.03) }
+.hero-photo img { transition: opacity .5s ease }
+html.opening .hero-photo img { opacity: 0 }
 /* the cursor: a dot where the pointer is and a ring that follows it, opening over anything to press, tinted with the
    speaker it leads to; the dot takes the colour of the text beneath it, so it reads on paper, photographs and the dark */
 .cur { position: fixed; left: 0; top: 0; z-index: 70; pointer-events: none; border-radius: 50%; opacity: 0; transition: opacity .25s ease }
@@ -932,7 +949,7 @@ html.cursor, html.cursor * { cursor: none !important }
   border: solid var(--cur, var(--ink)); border-width: 0 0 1.5px 1.5px }
 .cur-ring.drag::before { left: 8px; transform: rotate(45deg) }
 .cur-ring.drag::after { right: 8px; transform: rotate(-135deg) }
-@media (prefers-reduced-motion: reduce) { .splash { display: none } html.opening .hero-photo img { opacity: 1; transform: none } }
+@media (prefers-reduced-motion: reduce) { .splash { display: none } html.opening .hero-photo img { opacity: 1 } }
 
 @media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)) } .spec-grid { grid-template-columns: 1fr }
   .pdp { grid-template-columns: 1fr } .buy { position: static } .others ul { grid-template-columns: repeat(4, minmax(0, 1fr)) } }
@@ -945,15 +962,16 @@ html.cursor, html.cursor * { cursor: none !important }
 }
 @media (max-width: 700px) { .stage { aspect-ratio: 4 / 5 } .nav { width: 40px; height: 40px } .nav.prev { left: 8px } .nav.next { right: 8px }
   .count { right: 8px; bottom: 8px } .stage .tag { left: 8px; bottom: 8px } }
-@media (max-width: 460px) { .cards { gap: 12px } .about h3 { font-size: 21px } .spec dl, .facts { grid-template-columns: 104px minmax(0, 1fr) }
+@media (max-width: 460px) { .cards { gap: 12px } .about h3 { font-size: 21px } .about dl { display: none }
+  .spec dl, .facts { grid-template-columns: minmax(0, 1fr) } .spec dt, .facts dt { padding: 10px 0 0; border-bottom: 0 }
+  .spec dd, .facts dd { padding: 2px 0 10px } .swatches { gap: 6px } .swatches a { width: 36px; height: 36px }
   nav li.wide { display: none } }
 @media (prefers-reduced-motion: reduce) { .photo img, .spot-label, .thumb { transition: none } .stage .in { animation: none } }
 </style>
 
-<div class="splash" role="progressbar" aria-label="Loading"><span class="globe"></span></div>
+<div class="splash" role="progressbar" aria-label="Loading"><span class="globe still"></span><span class="globe spin"></span></div>
 <script>document.documentElement.classList.add('opening')</script>
-<noscript><style>.splash { display: none } html.opening .hero-photo img { opacity: 1; transform: none }</style></noscript>
-<div class="draft"><div class="wrap"><span>Preview of earf.world &middot; a concept, not yet for sale</span></div></div>
+<noscript><style>.splash { display: none } html.opening .hero-photo img { opacity: 1 }</style></noscript>
 <header class="top"><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home"><span class="globe" aria-hidden="true"></span>__WORD__</a>
   <nav aria-label="Pages"><ul>
@@ -967,14 +985,13 @@ html.cursor, html.cursor * { cursor: none !important }
     <div class="hero-pic">
       <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Atmosphere</p><h1>Something in the air.</h1></div></div>
       <div class="hero-photo__HERO_CLASS__">
-        <picture>__HERO_TALL__<img src="img/hero.jpg" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
+        <picture>__HERO_TALL__<img src="img/hero.jpg" fetchpriority="high" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
           alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor"></picture>
         __HOTSPOTS__
       </div>
     </div>
     <div class="wrap hero-foot">
-      <p class="lede">Atmosphere is a horn loudspeaker cast in tinted acrylic, in eight colours named for what hangs in
-        the air.</p>
+      <p class="lede">Atmosphere is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke.</p>
       <div class="acts"><a class="btn solid" href="#atmosphere">The colours</a><a class="btn" href="#contact">Enquire</a></div>
     </div>
     <div class="wrap"><ul class="cast" aria-label="The eight, in spectrum order">__NAMES__</ul></div>
@@ -1007,17 +1024,17 @@ __CLOSER__
 
 __REEL__
 __HABITATS__
-  <section class="band room" id="room"><div class="wrap">
-    <div class="head"><div><p class="eyebrow">At home</p><h2>A pair in Poison.</h2></div></div>
-    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
-      <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>The sideboard between them is 560 mm high.</span></figcaption></figure>
-  </div></section>
+  <section class="band room" id="room">
+    <div class="wrap"><div class="head"><div><p class="eyebrow">At home</p><h2>A pair in Poison.</h2></div></div></div>
+    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" srcset="img/room-1440.jpg 1440w, img/room.jpg 2880w" sizes="100vw" width="2880" height="1620" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
+      <figcaption class="wrap"><span>Covers on, by a tall window.</span><span>Each stands 1293&nbsp;mm tall and 560&nbsp;mm wide.</span></figcaption></figure>
+  </section>
 
   <section class="band spec" id="spec"><div class="wrap">
     <div class="head"><div><p class="eyebrow">Details</p><h2>The particulars</h2></div></div>
     <div class="spec-grid">
       <dl>__SPEC__</dl>
-      <figure class="dwg"><img src="img/ga-front.png" alt="The speaker drawn from the front" loading="lazy"><img src="img/ga-right.png" alt="The speaker drawn from the right" loading="lazy">
+      <figure class="dwg">__DWG__
         <figcaption>From the fabrication drawings</figcaption></figure>
     </div>
   </div></section>
@@ -1030,7 +1047,7 @@ __NEXT__
     <p>Every pair is made to order, so we quote rather than list. Write for prices and lead times, or if you&rsquo;d like to
       make, stock or collaborate.</p>
     <div class="addr"><code id="addr">hello@earf.world</code><button type="button" class="btn" id="copy">Copy address</button></div>
-    <small id="copy-note">The inbox opens soon. Until then, this address won&rsquo;t reach us.</small>
+    <small id="copy-note">The inbox opens at launch.</small>
   </div></section>
 </main>
 
@@ -1059,11 +1076,7 @@ __NEXT__
         <dl class="facts" id="facts"></dl>
       </aside>
     </div>
-    <section aria-labelledby="goes-title">
-      <div class="goes-head"><h2 id="goes-title">Good company</h2><span id="goes-note"></span></div>
-      <div class="goes" id="goes" aria-live="polite"></div>
-    </section>
-    <section class="others" aria-labelledby="others-title">
+__GOES__    <section class="others" aria-labelledby="others-title">
       <div class="goes-head"><h2 id="others-title">The other seven</h2><span>Same speaker, a different air</span></div>
       <ul id="others"></ul>
     </section>
@@ -1072,11 +1085,12 @@ __NEXT__
 
 <footer><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home">__WORD__</a>
-  <p>Atmosphere horn loudspeakers &middot; Concept renders, not yet for sale &middot; &copy; 2026 EARF</p>
+  <p>Atmosphere horn loudspeakers &middot; In development, not yet for sale; the pictures are renders &middot; &copy; 2026 EARF</p>
 </div></footer>
 
 <script>
 const D = __DATA__, BY = Object.fromEntries(D.clouds.map(c => [c.k, c]));
+const SLUG = Object.fromEntries(D.clouds.map(c => [c.name.toLowerCase(), c.k])), keyOf = w => SLUG[w] || (BY[w] ? w : null);
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, TAU = Math.PI * 2;
 // lit from below: scrolling picks the colour (a quarter of a screen each) and time plays the change; the coins are a
 // radio group that switch the lamp and move the run to that colour; the header darkens over the band
@@ -1163,7 +1177,6 @@ if (hab) {
   hab.addEventListener('scroll', ends, { passive: true }); addEventListener('resize', ends); ends();
 }
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
-const dark = () => { const t = document.documentElement.dataset.theme; return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); e.innerHTML = html; return e; };
 
 // the header's globe: still; it spins once as the page opens, on hover or focus, and when the page changes
@@ -1184,6 +1197,9 @@ document.querySelectorAll('.brand').forEach(b => { b.addEventListener('mouseente
 
 // the horns turn once as they cross the screen, a frame every 15 degrees; dragged, they turn by hand
 const TILES = [...document.querySelectorAll('#horns .spin')], N = 24, C = 6, R = 4;
+const lend = t => { if (t.dataset.bg) { t.style.backgroundImage = `url(${t.dataset.bg})`; delete t.dataset.bg; } };
+if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { lend(e.target); io.unobserve(e.target); } }),
+  { rootMargin: '900px 0px' }); TILES.forEach(t => io.observe(t)); } else TILES.forEach(lend);
 const frameAt = (k) => `${(k % C) * 100 / (C - 1)}% ${Math.floor(k / C) * 100 / (R - 1)}%`;
 const drag = new Map();
 function turnUpdate() {
@@ -1216,9 +1232,9 @@ on.addEventListener('click', () => { on.setAttribute('aria-pressed', 'true'); of
 off.addEventListener('click', () => { off.setAttribute('aria-pressed', 'true'); on.setAttribute('aria-pressed', 'false'); cards.classList.add('show-off'); });
 document.getElementById('copy').addEventListener('click', () => {
   const note = document.getElementById('copy-note'), text = document.getElementById('addr').textContent;
-  const done = () => { note.textContent = 'Copied. The inbox opens soon.'; };
+  const done = () => { note.textContent = 'Copied. The inbox opens at launch.'; };
   const pickText = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('addr'));
-    const s = getSelection(); s.removeAllRanges(); s.addRange(r); note.textContent = 'Selected. Copy it with your keyboard.'; };
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); note.textContent = 'Selected.'; };
   try { navigator.clipboard.writeText(text).then(done, pickText); } catch (e) { pickText(); }
 });
 
@@ -1300,10 +1316,10 @@ function renderPDP(k) {
   document.getElementById('facts').innerHTML = [
     ['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Cast resin, tinted to match'],
     ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`],
-    ['Amplifier', 'Hypex FusionAmp FA122, built in'], ['Inputs', 'XLR, RCA, AES, S/PDIF, optical'], ['Size', '1293 high, 625 wide, 420 deep (mm)'],
+    ['Amplifier', 'Hypex FusionAmp FA122, built in'], ['Inputs', 'XLR, RCA, AES, S/PDIF, optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'],
     ['Weight', 'About 72 kg']].map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('');
   document.getElementById('swatches').replaceChildren(...D.clouds.map(o => { const li = el('li');
-    const a = el('a', { href: `#speaker-${o.k}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
+    const a = el('a', { href: `#speaker-${o.name.toLowerCase()}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
       `<span class="coin-dot" style="--i:${o.coin}"></span>`); li.appendChild(a); return li; }));
   thumbs.replaceChildren(...shown(c).map((v, i) => { const s = src(c, v), label = VIEWS.find(x => x[0] === v)[1];
     const b = el('button', { type: 'button', role: 'tab', id: `thumb-${i}`, 'data-v': v, 'aria-label': label, 'aria-controls': 'stage',
@@ -1311,7 +1327,7 @@ function renderPDP(k) {
     b.addEventListener('click', () => showView(v)); return b; }));
   document.getElementById('others').replaceChildren(...D.clouds.filter(o => o.k !== k).map(o => { const li = el('li');
     const f = o.views.off.card || o.views.off;
-    li.appendChild(el('a', { href: `#speaker-${o.k}` }, `<img src="${f.src}" alt="" loading="lazy" width="${f.w}" height="${f.h}"><span>${o.name}</span>`)); return li; }));
+    li.appendChild(el('a', { href: `#speaker-${o.name.toLowerCase()}` }, `<img src="${f.src}" alt="" loading="lazy" width="${f.w}" height="${f.h}"><span>${o.name}</span>`)); return li; }));
   showView(shown(c)[0]);                              // each speaker opens on its photograph in its element
   goesWith(c);
 }
@@ -1356,6 +1372,7 @@ function goes(c) {
 }
 const GOODS = { player: 'Record player', lamp: 'Lamp' };
 function goesWith(c) {
+  if (!document.getElementById('goes')) return;       // off the page while the companions are redrawn
   document.getElementById('goes-note').textContent = c.hue === null ? `No hue of its own, so it pairs by lightness. Sketches, for now.`
     : `Paired by the colour wheel. Sketches, for now.`;
   document.getElementById('goes').replaceChildren(...goes(c).map(([id, way, col, cname, why]) => el('figure', { class: 'good' },
@@ -1366,7 +1383,7 @@ function goesWith(c) {
 const home = document.getElementById('home'), pdp = document.getElementById('pdp');
 let last = null;
 function route() {
-  const h = location.hash.slice(1), m = /^speaker-([a-z]+)$/.exec(h), k = m && BY[m[1]] ? m[1] : null;
+  const h = location.hash.slice(1), m = /^speaker-([a-z]+)$/.exec(h), k = m ? keyOf(m[1]) : null;
   const page = k ? 'speaker' : 'home';
   if (k) {
     const was = last; home.hidden = true; pdp.hidden = false; renderPDP(k);
@@ -1382,26 +1399,23 @@ function route() {
 }
 addEventListener('hashchange', route);
 
-// the loader as the page opens: the six coloured coins uncovered by a rolling coin, Smoke's on light pages and Fog's on dark
-// the loader: the acrylic globe turns while the hero's photograph comes in; a page that is quick shows nothing at all.
-// Once the photograph is ready the globe finishes its turn, the veil lifts and the photograph rises in
+// the loader: the acrylic globe turns while the hero's photograph comes in. It waits 450 ms before it shows at all (CSS),
+// so a quick page never sees it; the moment the photograph is decoded it fades in 250 ms and the photograph fades up
 function opening(then) {
   const box = document.querySelector('.splash'), root = document.documentElement, hero = document.querySelector('.hero-photo img');
   let finished = false;
-  const done = quick => { if (finished) return; finished = true;
-    if (box) { if (quick) box.remove(); else { box.classList.add('gone'); setTimeout(() => box.remove(), 700); } }
+  const done = () => { if (finished) return; finished = true;
+    if (box) { const o = parseFloat(getComputedStyle(box).opacity) || 0;
+      if (o < 0.02) box.remove(); else { box.style.setProperty('--o', o); box.classList.add('gone'); setTimeout(() => box.remove(), 320); } }
     requestAnimationFrame(() => root.classList.remove('opening')); then && then(); };
-  if (!box || reduce || !hero || location.hash.startsWith('#speaker-')) { done(true); return; }
-  const g = box.querySelector('.globe'), t0 = performance.now(), TURN = 1600;
-  let ready = false;
-  (hero.decode ? hero.decode() : Promise.resolve()).catch(() => {}).then(() => { ready = true; });
-  setTimeout(() => { if (ready) done(true); }, 220);                 // ready at once: no loader
-  setTimeout(() => done(false), 4000);                                // never longer than this
+  if (!box || reduce || !hero || location.hash.startsWith('#speaker-')) { done(); return; }
+  (hero.decode ? hero.decode() : Promise.resolve()).catch(() => {}).then(done);
+  setTimeout(done, 4500);                                             // never longer than this
+  const g = box.querySelector('.spin'), t0 = performance.now(), TURN = 1600;
   (function turn(now) {
     if (finished) return;
-    const t = now - t0, p = (t % TURN) / TURN, e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2, i = Math.round(e * 60) % 60;
+    const p = ((now - t0) % TURN) / TURN, e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2, i = Math.round(e * 60) % 60;
     g.style.backgroundPosition = `${(i % 10) * 100 / 9}% ${Math.floor(i / 10) * 100 / 5}%`;
-    if (ready && t > 220 && (TURN - (t % TURN)) < 40) { done(false); return; }   // let the turn finish, then go
     requestAnimationFrame(turn);
   })(t0);
 }
@@ -1413,7 +1427,7 @@ if (matchMedia('(pointer: fine)').matches && !reduce) {
   const root = document.documentElement, dot = el('div', { class: 'cur cur-dot', 'aria-hidden': 'true' }), ring = el('div', { class: 'cur cur-ring', 'aria-hidden': 'true' });
   document.body.append(dot, ring);
   let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null;
-  const speakerOf = a => { const k = a && (a.dataset.k || ((/#speaker-([a-z]+)/.exec(a.getAttribute('href') || '') || [])[1])); return k && BY[k] ? BY[k].col : null; };
+  const speakerOf = a => { const k = a && (a.dataset.k || keyOf((/#speaker-([a-z]+)/.exec(a.getAttribute('href') || '') || [])[1])); return k && BY[k] ? BY[k].col : null; };
   addEventListener('pointermove', e => {
     if (e.pointerType && e.pointerType !== 'mouse') return;
     x = e.clientX; y = e.clientY; root.classList.add('cursor');
@@ -1451,8 +1465,8 @@ HEAD = f"""<!doctype html>
 <title>{TITLE}</title>
 <meta name="description" content="{DESC}">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#F2EFEA" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121114" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4F1EC">
+<meta name="color-scheme" content="light">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
