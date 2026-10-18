@@ -187,6 +187,22 @@ def bright2(name):
     return s
 
 
+def bright3(name):
+    """Round 31e: the 31c rig and framing (which won its duels against 31d's) with only the two changes the 31d duels
+    credited: the flags seen only in reflections (no shadow on the cove), wider, and one high behind the horn, so the
+    water-clear frame's edges are drawn; and the low soft bank behind lighting the speaker alone, so Smoke reads."""
+    s = bright(name)
+    s['set']['flags'] = [
+        {'center_m': [-1.5, 0.6, 1.2], 'size_m': [1.4, 2.6], 'normal': [1.0, -0.2, 0.0], 'reflect_only': True},
+        {'center_m': [1.35, 2.1, 1.2], 'size_m': [0.6, 2.6], 'normal': [-0.45, -0.89, 0.0], 'reflect_only': True},
+        {'center_m': [0.0, 1.6, 2.2], 'size_m': [2.4, 0.8], 'normal': [0.0, -0.8, -0.6], 'reflect_only': True},
+    ]
+    s['lights']['back-low'] = {'type': 'area', 'size_m': [1.2, 0.8], 'orbit': {'azimuth_deg': 175, 'elevation_deg': 8, 'distance_m': 2.0},
+                               'target': [0.0, 0.0, 0.45], 'irradiance': 30.0, 'color': '#FFF8F0', 'camera': False, 'receivers': ['*#0']}
+    s['title'] = f'barkhorn, {name}, bright field (round 31e)'
+    return s
+
+
 def darkfield(name):
     """Dark field on black: no light on the faces; two tall strips behind at grazing angles, so only the edges and
     corners glow (cast acrylic pipes light to its edges); a soft backlight through the body for the colour, the inside
@@ -346,6 +362,8 @@ def main():
     for name, _ in COLOURS:
         made[f'hero-light-{name}'] = bright(name)
     made['lineup'] = lineup_bright()
+    for name in ('ember', 'fog', 'smoke'):
+        made[f'concept-31e-{name}'] = bright3(name)
     for name in ('ember', 'ice', 'smoke'):
         made[f'concept-bright-{name}'] = bright(name)
         made[f'concept-darkfield-{name}'] = darkfield(name)
