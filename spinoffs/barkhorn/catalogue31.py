@@ -189,6 +189,10 @@ FRAMES = {
              'set': {'width': 40.0, 'height': 9.0},
              'lights': {'wall_far': {'type': 'area', 'size_m': [8.0, 4.0], 'position': [-8.0, 0.5, 6.0],
                                      'target': [-11.5, 5.5, 5.5], 'irradiance': 3.0, 'color': '#FFF0E2',
+                                     'specular': 0.0, 'receivers': ['sweep']},
+                        # and the foot of the cove's curve far to the left, at the frame's edge (a grey dip to 205)
+                        'cove_far': {'type': 'area', 'size_m': [6.0, 3.0], 'position': [-6.0, 0.0, 3.0],
+                                     'target': [-8.6, 4.0, 0.7], 'irradiance': 4.5, 'color': '#FFF0E2',
                                      'specular': 0.0, 'receivers': ['sweep']}}},
     'tall': {'size': [1440, 1800], 'lens_mm': 60.5, 'shift_x': -0.027, 'shift_y': 0.012},
 }

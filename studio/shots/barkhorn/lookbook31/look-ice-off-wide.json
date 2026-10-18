@@ -670,6 +670,29 @@
    "receivers": [
     "sweep"
    ]
+  },
+  "cove_far": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    3.0
+   ],
+   "position": [
+    -6.0,
+    0.0,
+    3.0
+   ],
+   "target": [
+    -8.6,
+    4.0,
+    0.7
+   ],
+   "irradiance": 6.8207,
+   "color": "#FFF0E2",
+   "specular": 0.0,
+   "receivers": [
+    "sweep"
+   ]
   }
  },
  "render": {
