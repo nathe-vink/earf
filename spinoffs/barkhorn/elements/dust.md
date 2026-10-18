@@ -104,3 +104,25 @@ The blind critics never scored it above 6.0, and the duel judge gave it 6.6. It 
 - **bpy 5.0.1 on python3.11:** this container's python3 is 3.13, for which bpy 5.0.1 is not published (main's setup now handles it).
 - **`studio/engine/lights.py` and `knobs.py`:** `sky.grade`, a graduated colour filter over a photographed sky. Optional and backward compatible; in its own commit.
 - **`studio/engine/kit_ext/dust_el.py`:** this set's pieces: `terrain`, `mesa`, `tumbleweed` and `dust`, plus shader helpers for patch variation, a second sampling, wind ripples, bed banding and albedo.
+
+## The final, judged
+
+A fresh blind critic on the landscape final itself (2400 x 1600, 512 samples) scored it **6.0**, the same as the best
+proofs. Its blocking list repeats what is above:
+- the mesas flat and crumbly-edged (range 14 inside the right one);
+- a grey-lavender sky (b 174 at the top);
+- one even ripple field;
+- the acrylic not glowing from this light (cabinet sides at 63 to 69);
+- a cast shadow at 0.79 of the open sand (the bounce lamp fills it);
+- a sphere-perfect tumbleweed with gold glints.
+
+Its top fixes:
+- darker, more banded rock with less forward haze;
+- a warmer, stronger sky grade;
+- clean caprock ledges in place of noise displacement;
+- the bounce linked to the speaker alone, with a stronger sun;
+- more varied ripples with smooth ground;
+- a low dust layer in the middle distance;
+- a lopsided matte tumbleweed.
+
+It estimates 7.8 with these. I have not made them: the coordinator's stopping rule had already applied. They are the clearest list of where a next round would start.
