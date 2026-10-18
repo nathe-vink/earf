@@ -26,8 +26,8 @@ FAR = [(-9.0, 15.0, 1.4), (-5.5, 20.0, 1.7), (4.5, 16.0, 1.3), (8.5, 18.5, 1.6),
 REDWOOD = '#8A4126'                # the bark's cinnamon red, which the dawn redwood's scan lacks
 SUN = {'azimuth_deg': -68.0, 'elevation_deg': 30.0, 'irradiance': 22.0, 'angle_deg': 0.6, 'color': '#FFE6B8'}
 CANOPY_Z = 16.0
-SUN_A2 = {'azimuth_deg': -95.0, 'elevation_deg': 50.0, 'irradiance': 32.0, 'angle_deg': 0.6, 'color': '#FFE6B8'}
-SUNLIT2 = [(0.0, 0.1, 0.8, 0.95), (2.0, 6.0, 4.0, 0.5), (3.5, 9.0, 5.0, 0.55), (5.5, 12.0, 5.0, 0.5), (2.5, 6.5, 0.8, 0.6),
+SUN_A2 = {'azimuth_deg': -110.0, 'elevation_deg': 45.0, 'irradiance': 32.0, 'angle_deg': 0.6, 'color': '#FFE6B8'}
+SUNLIT2 = [(0.0, 0.1, 0.8, 0.95), (-2.0, 7.0, 4.0, 0.75), (-3.5, 10.0, 5.0, 0.75), (-1.0, 12.0, 5.0, 0.7), (2.5, 6.5, 0.8, 0.6), (-4.6, 6.4, 3.0, 0.5),
            (-1.85, 1.6, 2.5, 0.4)]
 BACK = [(9.0, 18.0, 1.3), (6.0, 22.0, 1.1), (12.0, 26.0, 1.5), (3.0, 29.0, 1.2), (14.0, 15.0, 1.1), (4.5, 11.0, 1.2), (8.0, 15.0, 1.5), (-4.5, 17.0, 1.4), (4.0, 24.0, 1.6), (10.0, 20.0, 1.3), (-7.0, 26.0, 1.5),
         (1.0, 34.0, 1.6)]
@@ -77,7 +77,7 @@ def ferns(seed=3):
         k = 0
         while k < n:
             x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
-            if x * x + y * y < 0.75 ** 2 or _seg_dist(x, y, LOG2_A, LOG2_B) < 0.5 or math.hypot(x - 0.7, y + 1.4) < 0.4:
+            if x * x + y * y < 0.75 ** 2 or _seg_dist(x, y, (1.4, 3.0), (5.2, 6.2)) < 0.55 or math.hypot(x - 0.7, y + 0.72) < 0.45:
                 continue
             pl.append([round(x, 3), round(y, 3), 0.0, round(rnd.uniform(s0, s1), 3), round(rnd.uniform(0, 360), 1),
                        rnd.choice([0, 1, 2, 3]), round(rnd.uniform(-12, 12), 1)])
@@ -131,16 +131,16 @@ def shot():
     duff, two fly agarics; the sky's own sun, dappled."""
     props = [ground('forest_leaves_02', size=(30.0, 30.0), position=(0.0, 8.0, 0.0), displace=0.03, tint='#3A2A1E',
                     tint_mix=0.15, relief=0.15, res='4k', cells=900),
-             ext('redwood', (-3.7, 4.1, -0.1), radius=1.25, height=30.0, tint=REDWOOD, tint_mix=0.3, tex_scale=1.4,
-                 bump=1.6, displace=0.09, segments=420, rings=220, seed=1, flare=0.75, foot=1.5, turn=20),
+             ext('redwood', (-4.6, 6.4, -0.1), radius=1.25, height=30.0, tint=REDWOOD, tint_mix=0.3, tex_scale=1.4,
+                 bump=1.6, displace=0.15, segments=420, rings=220, seed=1, flare=0.75, foot=1.5, turn=20),
              # two fly agarics in the lower right, in partial sun: the quiet accent
-             ext('toadstool', (0.85, -0.95, -0.008), height=0.15, cap=[0.075, 0.036], stem=0.015, lean=[0.012, 0.0], seed=3),
-             ext('toadstool', (1.0, -0.86, -0.008), height=0.09, cap=[0.045, 0.034], stem=0.011, lean=[-0.006, 0.0], seed=4),
+             ext('toadstool', (0.62, -0.75, -0.008), height=0.15, cap=[0.075, 0.036], stem=0.015, lean=[0.012, 0.0], seed=3),
+             ext('toadstool', (0.76, -0.68, -0.008), height=0.09, cap=[0.045, 0.034], stem=0.011, lean=[-0.006, 0.0], seed=4),
              # the floor in 3D near the speaker: bark crumbs, twigs and moss tufts, banked against its plinth
              ext('strew', model='bark_debris_01', on=['prop0-kit'], density=2.0, up=0.5, scale=[0.22, 0.4], seed=31,
                  within=[0.0, -0.3, 3.2], avoid=[[0.0, 0.0, 0.33]]),
              ext('strew', model='dry_branches_medium_01', on=['prop0-kit'], density=0.35, up=0.5, scale=[0.4, 0.8], seed=32,
-                 within=[0.0, -0.5, 3.5], avoid=[[0.0, 0.0, 0.45]]),
+                 within=[0.0, -0.5, 3.5], avoid=[[0.0, 0.0, 0.45], [0.0, -0.9, 0.75]]),
              ext('strew', model='moss_01', on=['prop0-kit'], density=6000, up=0.5, scale=[0.8, 1.8], patch=0.25,
                  patch_cut=0.85, seed=33, within=[0.0, -0.3, 3.5], avoid=[[0.0, 0.0, 0.3]]),
              ext('strew', model='moss_01', on=['prop0-kit'], density=2500, up=0.5, scale=[0.7, 1.3], patch=0.08,
@@ -154,7 +154,7 @@ def shot():
              # the light: one gap in the canopy over the speaker, a few over the bank behind; light mist from 3 m back
              ext('canopy', (0.0, 4.0, CANOPY_Z), size=[220.0, 220.0], gap=1.2, open=0.05,
                  holes=[gap_for(x, y, z, r, (0.0, 4.0), SUN_A2) for x, y, z, r in SUNLIT2]),
-             ext('mist', (0.0, 21.0, -0.2), size=[50.0, 37.0, 18.0], density=0.08, top=0.4, wisp=2.5, color='#F2F4EA',
+             ext('mist', (0.0, 21.0, -0.2), size=[50.0, 37.0, 18.0], density=0.13, top=0.6, wisp=2.5, color='#F2F4EA',
                  anisotropy=0.65),
              # redwoods further back, stepping into the mist
              *[ext('redwood', (x, y, -0.1), radius=r, height=40.0, tint=REDWOOD, tint_mix=0.3, tex_scale=1.4, bump=1.6,
@@ -179,11 +179,13 @@ def shot():
     rot = SKY_ROT
     # the sun from behind-left lights the mist in shafts and rims the speaker; its face is opened by bounces a
     # photographer would set: a big reflector at the camera's left, low, and a warm bounce above-front for the horn
-    lights = {'reflector': {**area(-35, 10, 2.8, 1.2, '#EEF0E0', (2.0, 1.5), (0.0, 0.0, 0.7)), 'specular': 0.3},
-              'card': {**area(60, 45, 2.5, 0.5, '#F0F2E6', (2.0, 2.0), (0.0, 0.0, 1.1)), 'specular': 0.3},
-              # a small kicker behind-left of the horn, as a patch of sunlit mist would give
-              'kicker': area(-150, 15, 1.8, 0.8, '#FFE6B8', (0.6, 0.6), (0.0, 0.0, 1.15))}
-    cam = camera(height=0.8, distance=6.4, azimuth=18.0, lens=75.0, target=(0.0, 0.0, 0.64), fstop=2.8)
+    # the speaker's face is opened by a reflector at the camera's left (diffuse only: a white card's reflection would
+    # read as a softbox in the acrylic); the horn mirrors a broad, dim scrim of sunlit mist above-front (its
+    # reflection only), and a warm strip behind-right rims the body's right edge
+    lights = {'reflector': {**area(-35, 10, 2.8, 3.0, '#EEF0E0', (2.0, 1.5), (0.0, 0.0, 0.7)), 'specular': 0.0},
+              'scrim': {**area(-10, 30, 4.0, 0.5, '#D8DCC8', (4.0, 2.5), (0.0, 0.0, 1.15)), 'diffuse': 0.0},
+              'rim': {**area(140, 10, 2.0, 1.5, '#FFE6B8', (0.6, 1.4), (0.0, 0.0, 1.0)), 'specular': 0.4}}
+    cam = camera(height=0.8, distance=6.4, azimuth=12.0, lens=75.0, target=(0.0, 0.0, 0.64), fstop=2.8, shift_x=-0.12)
     return frame('poison', props, cam, sky(SKY2, rotation_deg=rot, strength=0.3, res='4k'),
                  'barkhorn, Poison, in a redwood rainforest', lights=lights,
                  sun=SUN_A2, rotate_z=-20.0,
