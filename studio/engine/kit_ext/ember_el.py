@@ -55,7 +55,7 @@ def _fbm(x, y, scale, octaves=4, seed=0.0):
     return out
 
 
-LAVA_RAMP = [(0.0, '#000000'), (0.18, '#3A0200'), (0.42, '#C21E00'), (0.7, '#FF6A08'), (0.9, '#FFB23A'),
+LAVA_RAMP = [(0.0, '#000000'), (0.3, '#200100'), (0.5, '#B01800'), (0.72, '#FF5A06'), (0.86, '#FFB040'),
              (1.0, '#FFE6A8')]
 
 
@@ -65,7 +65,7 @@ def _lin(h):
 
 
 def lava_material(bpy, aid='acg:Lava004', res='2k', scale=2.0, strength=4.0, crust=0.08, ramp=None, gain=1.0,
-                  coords='Object', name='lava'):
+                  coords='Object', name='lava', rough=None, specular=None):
     """Lava from an ambientCG set, with its colour held: the set's emission map's brightness drives a ramp from black
     crust through deep red and orange to a yellow-white core (`ramp` [(pos, hex), ...], the brightness times `gain`),
     emitted at `strength`; the crust's own colour map, darkened to `crust`, is all that reflects (so lamps near the lava
@@ -101,8 +101,12 @@ def lava_material(bpy, aid='acg:Lava004', res='2k', scale=2.0, strength=4.0, cru
         el = els.new(pos); el.color = _lin(hx)
     nt.links.new(g.outputs['Value'], cr.inputs['Fac'])
     nt.links.new(cr.outputs['Color'], bs.inputs['Emission Color']); bs.inputs['Emission Strength'].default_value = strength
-    if 'rough' in maps:
+    if rough is not None:                                         # a matte crust: cooled lava is not glassy
+        bs.inputs['Roughness'].default_value = rough
+    elif 'rough' in maps:
         nt.links.new(tex('rough', False).outputs['Color'], bs.inputs['Roughness'])
+    if specular is not None and 'Specular IOR Level' in bs.inputs:
+        bs.inputs['Specular IOR Level'].default_value = specular
     if 'nor_gl' in maps:
         nm = nt.nodes.new('ShaderNodeNormalMap'); nt.links.new(tex('nor_gl', False).outputs['Color'], nm.inputs['Color'])
         nt.links.new(nm.outputs['Normal'], bs.inputs['Normal'])
@@ -116,7 +120,8 @@ def fall(bpy, name, p, kit):
     bm = bmesh.new()
     kit._tube(bm, p['points'], p.get('radius', 0.3), p.get('flat', 0.25), 0.0, p.get('sides', 20), p.get('samples', 12))
     mat = lava_material(bpy, p.get('lava', 'acg:Lava004'), p.get('lava_res', '2k'), p.get('scale', 1.2),
-                        p.get('strength', 4.0), gain=p.get('gain', 1.0), name=f'{name}-lava')
+                        p.get('strength', 4.0), gain=p.get('gain', 1.0), name=f'{name}-lava',
+                        rough=p.get('crust_rough'), specular=p.get('crust_spec'))
     return kit.finish(bpy, name, bm, p, mat=mat)
 
 
@@ -294,7 +299,8 @@ def lava_surface(bpy, name, p, kit):
         v.co.x *= w; v.co.y *= d
         v.co.z = rip * noise.noise(Vector((v.co.x * 1.3, v.co.y * 1.3, 2.2)))
     mat = lava_material(bpy, p.get('lava', 'acg:Lava001'), p.get('lava_res', '2k'), p.get('scale', 1.5),
-                        p.get('strength', 8.0), gain=p.get('gain', 1.0), crust=p.get('crust', 0.08), name=f'{name}-lava')
+                        p.get('strength', 8.0), gain=p.get('gain', 1.0), crust=p.get('crust', 0.08), name=f'{name}-lava',
+                        rough=p.get('crust_rough'), specular=p.get('crust_spec'))
     return kit.finish(bpy, name, bm, p, mat=mat)
 
 
