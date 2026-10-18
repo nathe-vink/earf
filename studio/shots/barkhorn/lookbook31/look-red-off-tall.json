@@ -1,0 +1,579 @@
+{
+ "size": [
+  1440,
+  1800
+ ],
+ "camera": {
+  "position": [
+   1.2,
+   -2.5,
+   1.0
+  ],
+  "target": [
+   0.0,
+   0.05,
+   0.52
+  ],
+  "lens_mm": 60.5,
+  "level": true,
+  "shift_x": -0.027,
+  "shift_y": 0.012,
+  "fstop": 6.3,
+  "focus": [
+   0.28,
+   -0.21,
+   0.6
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#2B2A28",
+  "horizon": "#2F2D2B",
+  "ground": "#1B1A19",
+  "strength": 0.15
+ },
+ "set": {
+  "kind": "sweep",
+  "width": 18.0,
+  "front": 5.0,
+  "depth": 5.5,
+  "radius": 2.8,
+  "height": 5.5,
+  "contact": {
+   "strength": 0.9,
+   "distance_m": 0.32,
+   "core_strength": 0.95,
+   "core_distance_m": 0.015
+  },
+  "flags": [
+   {
+    "center_m": [
+     1.6,
+     1.8,
+     0.005
+    ],
+    "size_m": [
+     1.6,
+     2.4
+    ],
+    "normal": [
+     0.0,
+     0.0,
+     1.0
+    ],
+    "reflect_only": true,
+    "color": "#060606"
+   },
+   {
+    "center_m": [
+     1.8,
+     2.7,
+     1.3
+    ],
+    "size_m": [
+     3.0,
+     2.6
+    ],
+    "normal": [
+     -0.37,
+     -0.93,
+     0.0
+    ],
+    "reflect_only": true,
+    "color": "#060606"
+   },
+   {
+    "center_m": [
+     1.6,
+     -1.2,
+     1.2
+    ],
+    "size_m": [
+     2.0,
+     2.0
+    ],
+    "normal": [
+     -0.8,
+     0.6,
+     0.0
+    ],
+    "reflect_only": true,
+    "color": "#060606"
+   },
+   {
+    "center_m": [
+     0.0,
+     -0.6,
+     2.6
+    ],
+    "size_m": [
+     2.5,
+     2.0
+    ],
+    "normal": [
+     0.0,
+     0.3,
+     -1.0
+    ],
+    "reflect_only": true,
+    "color": "#080808"
+   }
+  ],
+  "color": "#DDD7D6"
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    1.8,
+    2.2
+   ],
+   "orbit": {
+    "azimuth_deg": -35,
+    "elevation_deg": 22,
+    "distance_m": 1.5
+   },
+   "target": [
+    -0.55,
+    0.0,
+    0.9
+   ],
+   "irradiance": 5.2,
+   "color": "#FFF5E8",
+   "spread_deg": 50
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 40,
+    "elevation_deg": 15,
+    "distance_m": 4.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 1.1,
+   "color": "#FFF2E6",
+   "specular": 0.3
+  },
+  "back": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 180,
+    "elevation_deg": 20,
+    "distance_m": 2.0
+   },
+   "target": [
+    0.0,
+    -0.3,
+    0.3
+   ],
+   "irradiance": 2.4,
+   "color": "#FFF8F0",
+   "receivers": [
+    "right",
+    "left",
+    "front-panel",
+    "top",
+    "bottom",
+    "back",
+    "rib-*",
+    "brace*",
+    "land-*",
+    "waveguide*",
+    "hf-*",
+    "grip-*",
+    "post*",
+    "port*",
+    "woofer*",
+    "cloth-disc",
+    "amp*",
+    "feet*",
+    "tie-rod*",
+    "top-pad",
+    "cap-o-ring",
+    "cable-glands",
+    "lead-*",
+    "mark-back",
+    "rating-plate*",
+    "back-*"
+   ]
+  },
+  "pool": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 160,
+    "elevation_deg": 35,
+    "distance_m": 2.0
+   },
+   "target": [
+    0.1,
+    -0.4,
+    0.0
+   ],
+   "irradiance": 1.0,
+   "color": "#FFF8F0",
+   "specular": 0.0,
+   "receivers": [
+    "sweep"
+   ]
+  },
+  "kick": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.8
+   ],
+   "orbit": {
+    "azimuth_deg": 100,
+    "elevation_deg": 20,
+    "distance_m": 1.8
+   },
+   "target": [
+    0.28,
+    0.0,
+    0.6
+   ],
+   "irradiance": 2.0,
+   "color": "#FFF8F0",
+   "receivers": [
+    "right",
+    "left",
+    "front-panel",
+    "top",
+    "bottom",
+    "back",
+    "rib-*",
+    "brace*",
+    "land-*",
+    "waveguide*",
+    "hf-*",
+    "grip-*",
+    "post*",
+    "port*",
+    "woofer*",
+    "cloth-disc",
+    "amp*",
+    "feet*",
+    "tie-rod*",
+    "top-pad",
+    "cap-o-ring",
+    "cable-glands",
+    "lead-*",
+    "mark-back",
+    "rating-plate*",
+    "back-*"
+   ]
+  },
+  "scrim": {
+   "type": "panel",
+   "size_m": [
+    1.6,
+    3.0
+   ],
+   "position": [
+    -0.75,
+    -2.2,
+    0.004
+   ],
+   "target": [
+    -0.75,
+    -2.0,
+    2.0
+   ],
+   "strength": 0.9,
+   "color": "#FFFFFF",
+   "diffuse": 0.0,
+   "ramp": {
+    "axis": "y",
+    "at_m": [
+     -3.6,
+     -1.6
+    ],
+    "values": [
+     1.0,
+     0.25
+    ]
+   }
+  },
+  "sheen": {
+   "type": "panel",
+   "size_m": [
+    0.4,
+    2.0
+   ],
+   "position": [
+    -1.4,
+    -1.6,
+    0.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.5
+   ],
+   "strength": 0.6,
+   "color": "#FFFFFF",
+   "diffuse": 0.0,
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     -0.4,
+     1.6
+    ],
+    "values": [
+     1.0,
+     0.2
+    ]
+   }
+  },
+  "topline": {
+   "type": "panel",
+   "size_m": [
+    1.8,
+    0.5
+   ],
+   "position": [
+    -1.0,
+    -2.1,
+    0.95
+   ],
+   "target": [
+    0.0,
+    -0.1,
+    0.9
+   ],
+   "strength": 1.8,
+   "color": "#FFFFFF",
+   "diffuse": 0.0
+  },
+  "sidesheen": {
+   "type": "panel",
+   "size_m": [
+    0.8,
+    2.0
+   ],
+   "position": [
+    1.1,
+    2.3,
+    0.6
+   ],
+   "target": [
+    0.28,
+    0.0,
+    0.5
+   ],
+   "strength": 0.6,
+   "color": "#FFFFFF",
+   "diffuse": 0.0,
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     -0.4,
+     1.6
+    ],
+    "values": [
+     0.15,
+     1.0
+    ]
+   }
+  },
+  "edge": {
+   "type": "area",
+   "size_m": [
+    0.06,
+    1.2
+   ],
+   "position": [
+    0.42,
+    0.135,
+    0.6
+   ],
+   "target": [
+    0.28,
+    -0.21,
+    0.6
+   ],
+   "power_w": 0.2,
+   "color": "#FFFFFF",
+   "diffuse": 0.0,
+   "receivers": [
+    "right",
+    "left",
+    "front-panel",
+    "top",
+    "bottom",
+    "back"
+   ]
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    1.4,
+    0.3
+   ],
+   "position": [
+    0.3,
+    -0.5,
+    2.0
+   ],
+   "target": [
+    0.05,
+    0.0,
+    1.2
+   ],
+   "power_w": 12,
+   "color": "#FFFFFF",
+   "diffuse": 0.1,
+   "receivers": [
+    "waveguide",
+    "waveguide-cap"
+   ]
+  },
+  "horn": {
+   "type": "area",
+   "size_m": [
+    1.4,
+    0.7
+   ],
+   "position": [
+    0.8,
+    -1.4,
+    1.35
+   ],
+   "target": [
+    0.05,
+    0.0,
+    1.12
+   ],
+   "irradiance": 2.6,
+   "color": "#FFF8F0",
+   "spread_deg": 40,
+   "specular": 1.0
+  },
+  "paper": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    -0.35,
+    0.75,
+    0.5
+   ],
+   "target": [
+    -0.8,
+    2.4,
+    2.4
+   ],
+   "power_w": 210,
+   "color": "#FFF0E2",
+   "receivers": [
+    "sweep"
+   ],
+   "spread_deg": 140
+  },
+  "wall": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    2.0
+   ],
+   "position": [
+    -1.5,
+    1.0,
+    3.5
+   ],
+   "target": [
+    -1.2,
+    5.0,
+    2.6
+   ],
+   "irradiance": 1.8,
+   "color": "#FFF0E2",
+   "receivers": [
+    "sweep"
+   ]
+  },
+  "wash": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    1.5
+   ],
+   "position": [
+    0.4,
+    -1.4,
+    3.0
+   ],
+   "target": [
+    0.0,
+    -0.4,
+    0.0
+   ],
+   "irradiance": 0.5,
+   "color": "#FFF0E2",
+   "receivers": [
+    "sweep"
+   ]
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 32,
+  "glossy_bounces": 16,
+  "transmission_bounces": 32,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 236,
+  "white_out": 236,
+  "contrast": 0.2,
+  "clarity": 0.05,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "grain": 1.5,
+  "grain_px": 1.0
+ },
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-red",
+  "instances": [
+   {
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": 0,
+    "flavour": "cloud-red",
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "title": "barkhorn, cover off (catalogue31 tall, red)"
+}

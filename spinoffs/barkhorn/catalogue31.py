@@ -142,6 +142,41 @@ def shot(k, cover):
     return s
 
 
+# the gallery's other stages (the owner, round 31: the 1:2 fronts "feel odd and out of place" beside the 3:2 and 4:5
+# pictures): the same rig and the same light from the same camera position (so the same perspective), reframed by lens
+# and lens shift only. The engine fits the sensor's 36 mm to the frame's width, so a frame of another height-to-width
+# ratio needs the lens scaled to hold the speaker at its share of the height; each was then centred by its box in the
+# frame (render.py's parts_2d): the 1:2 at 65 % of the height (16/17 % margins left and right, 24 % above, 11 % below);
+# the 3:2 at 70 % of the height and 24 % of the width, centred (38 % each side, 15 % above and below); the 4:5 at 70 %
+# of the height, centred across, a little low (16 % above, 14 % below), for phones
+FRAMES = {
+    '': {'size': [1080, 2160]},
+    # the 3:2 sees far more of the set: the sweep wider and taller (its end showed at 18 m), and the paper on the key
+    # side, which only it sees, lifted by a lamp of its own (it read as a dirty grey third of the frame)
+    'wide': {'size': [1920, 1280], 'lens_mm': 32.3, 'shift_x': -0.011, 'shift_y': 0.025,
+             'set': {'width': 40.0, 'height': 9.0},
+             'lights': {'wall_left': {'type': 'area', 'size_m': [5.0, 3.0], 'position': [-3.0, 1.0, 3.8],
+                                      'target': [-4.5, 5.5, 1.8], 'irradiance': 4.0, 'color': '#FFF0E2',
+                                      'receivers': ['sweep']}}},
+    'tall': {'size': [1440, 1800], 'lens_mm': 60.5, 'shift_x': -0.027, 'shift_y': 0.012},
+}
+
+
+def framed(s, f):
+    """Shot s reframed for the frame `f` ('' the 1:2, 'wide' 3:2, 'tall' 4:5)."""
+    F = FRAMES[f]
+    s = copy.deepcopy(s)
+    s['size'] = list(F['size'])
+    for key in ('lens_mm', 'shift_x', 'shift_y'):
+        if key in F:
+            s['camera'][key] = F[key]
+    s['set'].update(copy.deepcopy(F.get('set', {})))
+    s['lights'].update(copy.deepcopy(F.get('lights', {})))
+    if f:
+        s['title'] = s['title'].replace('(catalogue31,', f'(catalogue31 {f},')
+    return s
+
+
 NAMES = {'red': 'Ember (red)', 'orange': 'Dust (orange)', 'amber': 'Acid (golden yellow)', 'green': 'Poison (bottle green)',
          'blue': 'Ice (a translucent blue)', 'violet': 'Haze (violet)', 'ice': 'Fog (water-clear)', 'black': 'Smoke (smoked black)'}
 ROUNDS = os.path.join(HERE, 'critic', 'rounds', '2026-10-18')
@@ -232,8 +267,10 @@ def write():
     os.makedirs(OUT, exist_ok=True)
     for k in COLOURS:
         for cover in (True, False):
-            json.dump(shot(k, cover), open(os.path.join(OUT, f'look-{k}-{"on" if cover else "off"}.json'), 'w'), indent=1)
-    print(f'{len(COLOURS) * 2} shots in', os.path.relpath(OUT, ROOT))
+            for f in FRAMES:
+                name = f'look-{k}-{"on" if cover else "off"}' + (f'-{f}' if f else '') + '.json'
+                json.dump(framed(shot(k, cover), f), open(os.path.join(OUT, name), 'w'), indent=1)
+    print(f'{len(COLOURS) * 2 * len(FRAMES)} shots in', os.path.relpath(OUT, ROOT))
 
 
 def main():
