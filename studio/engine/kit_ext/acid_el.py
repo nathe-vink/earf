@@ -54,6 +54,10 @@ def height(x, y, p):
     W = p.get('water', -0.04)
     d = h - W
     h += 0.018 * math.exp(-(d / 0.022) ** 2) * (1 - _smooth(30.0, 60.0, r))   # salt rims where the acid has dried
+    st = p.get('shore_step', 0.0)
+    if st:                                    # a step at the shore: the crust stands clear of the acid, the pools sink
+        d = h - W
+        h += st * math.tanh(d / (st * 0.5))
     return h
 
 
@@ -214,7 +218,8 @@ def crust_material(bpy, p, attribute='acid_d', name='acid-crust'):
     nt.links.new(mul.outputs['Result'], bs.inputs['Base Color'])
     # damp near the acid: smoother, darker
     wet = nt.nodes.new('ShaderNodeMapRange'); wet.inputs['From Min'].default_value = 0.0
-    wet.inputs['From Max'].default_value = 0.03; wet.inputs['To Min'].default_value = 0.25; wet.inputs['To Max'].default_value = 1.0
+    wet.inputs['From Max'].default_value = p.get('wet_h', 0.03); wet.inputs['To Min'].default_value = p.get('wet_rough', 0.25)
+    wet.inputs['To Max'].default_value = 1.0
     nt.links.new(at.outputs['Fac'], wet.inputs['Value'])
     bs.inputs['Specular IOR Level'].default_value = p.get('specular', 0.3)
     rl = next((l for l in nt.links if l.to_socket == bs.inputs['Roughness']), None)
@@ -318,7 +323,7 @@ def steam(bpy, name, p, kit):
     st = nt.nodes.new('ShaderNodeVectorMath'); st.operation = 'MULTIPLY'; st.inputs[1].default_value = (1.0, 1.0, 0.55)
     nt.links.new(tc.outputs['Object'], st.inputs[0])
     nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = p.get('noise_scale', 2.2)
-    nz.inputs['Detail'].default_value = 12.0; nz.inputs['Roughness'].default_value = 0.62
+    nz.inputs['Detail'].default_value = 14.0; nz.inputs['Roughness'].default_value = 0.68
     nz.inputs['Distortion'].default_value = p.get('distortion', 1.8)
     nz.noise_dimensions = '4D'
     nz.inputs['W'].default_value = p.get('seed', 1) * 3.7
