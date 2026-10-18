@@ -59,6 +59,15 @@ the horns dark (true to the cabinet), eight identical copies in a row, and a ren
 - `facade.png` (2880 x 1200, 6.5) and `facade-portrait.png` (1440 x 1800, 6.0): the portrait is a three-quarter view
   down the row (a head-on 4:5 of the whole row is about 12 m tall: a band of sky or a slab of black water).
 
+## The real drivers (2026-10-18, evening)
+
+Every frame here was rendered again on main's real drivers (01267eb: the FaitalPRO 15PR400 as made, the HF driver's
+machined exit and phase plug, the ring in opaque polished acrylic), nothing else changed: the model rebuilt from
+`spinoffs/barkhorn/cloud.py`, no uplight31 shot overrides any material. The facade here (256 samples, 99 min), the eight
+slides and the portrait on helper sessions (r31-uplight-d1 to d4, r31-uplight-facade-portrait-d; 384 and 256 samples,
+29 to 44 min and 55 min). `sheet.jpg`: the eight side by side. Smoke's frame stays as dark as before (mean 0.102
+against 0.100).
+
 ## Times (4 CPU cores, Cycles)
 
 facade 2880 x 1200 at 256 samples: 79 to 85 min. uplit 1600 x 1600 at 384 samples: 41 to 44 min. facade-portrait
