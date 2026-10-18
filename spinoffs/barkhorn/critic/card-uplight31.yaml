@@ -1,0 +1,45 @@
+# The uplit pictures' shot cards (round 31, spinoffs/barkhorn/uplight31.py), for critic/card.py --card.
+
+product: >
+  barkhorn Cloud, an active two-way loudspeaker: a box of tinted cast acrylic (about 560 mm wide, 430 deep, 800 tall)
+  with a 10 in woofer behind a ring on its front and two ports below it, lined inside with white polyester batts in
+  sheer voile sleeves on its bottom, sides, top and back, and on top, on four posts, a horn cast in the same tinted
+  resin. Eight colours, the Atmosphere line: Ember red, Dust orange, Acid golden yellow, Poison bottle green, Ice blue,
+  Haze violet, Fog water-clear, Smoke black.
+
+fixed:
+  - >-
+    The product's geometry, its lining, its drivers and the horn's shape (set by acoustic simulation). The batts stop
+    light as real batts do; the frame shows what light really does through this cabinet, so never ask for the lining
+    to be thinner, lighter or removed, or for light to pass where the cabinet would stop it.
+  - >-
+    The colours: you may ask for a colour to be reproduced more accurately (exposure, white balance), never for a
+    different colour.
+  - >-
+    One light per speaker, an uplight: the speaker stands on a low black plinth whose top is a frosted lens with the
+    lamp inside it shining straight up (the placement chosen by a study: under it, in front, grazing the face). Its
+    power, cone and colour temperature are yours; its place under the speaker is not. The faint cool moonlight is the
+    only other light.
+  - >-
+    What the shot's purpose below fixes about framing.
+
+shots:
+  uplight-frame:
+    title: One speaker on its uplight before a concrete wall, at night (a slide in a flip-through viewer)
+    purpose: >-
+      One of eight slides a website's viewer flips through like a View-Master reel, one per colour: the same camera,
+      lamp and set in all eight, so only the colour changes. The speaker stands on a light a metre in front of a
+      board-formed concrete wall in the dark, and the light rises through it and lays its colour on the wall above
+      and behind. It should read as a real night photograph, the colour on the wall the subject as much as the speaker.
+    must_show: [the speaker whole on its lit plinth, its colour on the wall above and behind it, the concrete reading as board-formed concrete, a dark night set]
+    fixed:
+      - >-
+        Anything that would differ between the eight slides: a change must suit every colour, Smoke black and Fog
+        clear included (Smoke passes little light, Fog passes almost white).
+  uplight-facade:
+    title: The eight on their uplights along an opera house's concrete river front, at night
+    purpose: >-
+      The night hero: a monumental board-formed concrete wall at night, an opera house by a river; the eight speakers
+      in a row on the quay at its foot, each on its own uplight, their coloured light rising up the wall in tall washes
+      that blend where they overlap; the wet quay and the river reflecting it. Cinematic and quiet, no people.
+    must_show: [all eight speakers whole on their lights, the eight washes rising and blending on the wall, the wall reading as monumental board-formed concrete, the wet paving or river reflecting the light]
