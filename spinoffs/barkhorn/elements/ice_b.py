@@ -56,7 +56,7 @@ def cave_portrait():
                                        target=tuple(cam['target']), fstop=cam['fstop']))
 
 SKY = 'umhlanga_sunrise'           # a sunrise over open sea, the sun on the horizon (Poly Haven, CC0)
-SUN_AZ = 168.0                     # the sun behind the cabinet's left half (from +y, a little +x)
+SUN_AZ = 162.0                     # the sun in clear sky right of the speaker, over the ice (from +y and +x)
 SHORE = {'y0': 0.2, 'slope': 0.05, 'wiggle': 0.55, 'freq': 0.45, 'phase': 0.7, 'water_z': -0.09}
 
 
@@ -95,11 +95,11 @@ ICE = [
 
 
 def props():
-    return [ext('beach', texture='gravelly_sand', res='4k', displace=0.006, relief=0.06, dark='#0B0B0D', light='#26282B',
-                tex_scale=1.25, wet_h=0.07, damp_h=0.1, damp_base=0.0, spec=0.05, reach=[-1.6, 0.3], damp_reach=1.0,
-                reach_wobble=1.8, residue_w=0.2, grain_m=0.003, glint_share=0.03, bump=1.5, wet_jitter=0.06,
-                wet_rough=0.06),
-            ext('sea', rough=0.07, chop=1.2, absorb='#1E3533', density=10.0, lace_w=0.3, crests=[[6.0, 0.30, 0.45, 2.2, 1.0, 0.02], [14.0, 0.45, 0.8, 3.6, 0.9, -0.04]],
+    return [ext('beach', texture='gravelly_sand', res='4k', displace=0.006, relief=0.06, dark='#08080A', light='#1C1D20',
+                tex_scale=1.25, wet_h=0.07, damp_h=0.1, damp_base=0.0, spec=0.1, reach=[-3.0, 0.3], damp_reach=1.0,
+                reach_wobble=1.2, residue_w=0.2, grain_m=0.003, glint_share=0.03, bump=2.5, wet_jitter=0.06,
+                wet_rough=0.06, wet_rough_var=[0.05, 0.2]),
+            ext('sea', rough=0.04, chop=2.2, absorb='#1E3533', density=10.0, lace_w=0.3, crests=[[8.0, 0.55, 0.5, 2.6, 1.0, 0.02], [14.0, 0.45, 0.8, 3.6, 0.9, -0.04]],
                 ocean={'layers': [{'size': 53.0, 'scale': 0.9, 'seed': 3}, {'size': 131.0, 'scale': 0.7, 'seed': 9}],
                        'shoal_m': 7.0, 'foam_coverage': 0.5}, **{'break': 1.6}),
             *ICE]
@@ -110,16 +110,17 @@ def shot(az=SUN_AZ, sun_irr=3.0):
     sun['irradiance'] = sun_irr
     sk = C.sky(SKY, rotation_deg=rot, strength=1.0, res='4k')
     # a photographer's bounce: a white reflector beside the camera, giving the shaded front a little of the dawn back
-    bounce = {'type': 'area', 'position': [-0.6, -3.0, 0.9], 'size_m': [2.5, 2.0], 'target': [0.0, 0.0, 0.7],
-              'irradiance': 1.5, 'color': '#FFE6CC', 'specular': 0.3}
+    bounce = {'type': 'area', 'position': [-0.6, -3.0, 0.3], 'size_m': [2.5, 2.0], 'target': [0.0, 0.0, 0.7],
+              'irradiance': 0.5, 'color': '#F6C9A0', 'specular': 0.0}
     s = C.shot('ice_b', props(), C.camera(height=0.65, distance=6.5, azimuth=-12.0, lens=65.0, target=(0.0, 0.0, 0.62),
                                           fstop=5.6),
-               sk, 'Ice: Diamond Beach at sunrise', sun=sun, lights={'bounce': bounce}, rotate_z=10.0, position=(0.0, 0.0, -0.015), exposure=-0.6, look='AgX - Medium High Contrast',
+               sk, 'Ice: Diamond Beach at sunrise', sun=sun, lights={'bounce': bounce}, rotate_z=10.0, position=(0.0, 0.0, -0.015), exposure=-0.75, look='AgX - Medium High Contrast',
                fin=C.finish(contrast=0.10, clarity=0.04, sharpen=0.25, vignette=0.12, lift=0.03, lift_color='#1A2230'),
-               haze={'box_m': [-420.0, -12.0, -1.0, 420.0, 420.0, 8.0], 'density': 0.0008, 'anisotropy': 0.6,
+               haze={'box_m': [-420.0, 15.0, -1.0, 420.0, 420.0, 8.0], 'density': 0.002, 'anisotropy': 0.6,
                      'color': '#F2C9A8'})
     s['render']['volume_bounces'] = 4
     s['render']['bounces'] = 16
+    s['finish']['white_in'] = 250
     return s
 
 

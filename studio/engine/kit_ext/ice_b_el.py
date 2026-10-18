@@ -214,7 +214,14 @@ def _sand_material(bpy, name, p, s):
               clamp=True).outputs['Result']
     glint = N.math('CEIL', N.math('SUBTRACT', glint, 0.001))
     r = N('Mix', data_type='FLOAT', inputs={'Factor': glint, 'A': r, 'B': p.get('glint_rough', 0.25)}).outputs[0]
-    r = N('Mix', data_type='FLOAT', inputs={'Factor': wet, 'A': r, 'B': p.get('wet_rough', 0.06)}).outputs[0]
+    wr = p.get('wet_rough', 0.06)
+    if p.get('wet_rough_var'):
+        # the drained film is uneven: mirror in the hollows, grain showing through on the rises
+        wv = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 2.2, 'Detail': 6.0, 'Roughness': 0.6})
+        lo_, hi_ = p['wet_rough_var']
+        wr = N('MapRange', inputs={'Value': wv.outputs['Fac'], 'From Min': 0.4, 'From Max': 0.62, 'To Min': lo_, 'To Max': hi_},
+               clamp=True).outputs['Result']
+    r = N('Mix', data_type='FLOAT', inputs={'Factor': wet, 'A': r, 'B': wr}).outputs[0]
     r = N('Mix', data_type='FLOAT', inputs={'Factor': residue, 'A': r, 'B': 0.55}).outputs[0]
     N.link(r, bs.inputs['Roughness'])
     N.link(N('Mix', data_type='FLOAT', inputs={'Factor': glint, 'A': p.get('spec', 0.35), 'B': 0.8}).outputs[0],

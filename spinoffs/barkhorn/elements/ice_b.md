@@ -120,3 +120,16 @@ proven, the better one kept; the brief's half-point rule did its job by forcing 
 - Sand cooler and grainier: #0B0B0D-#26282B, bump 1.5, glints 3 %. Wet roughness 0.06 (the mirror band was as bright
   as the sky).
 - The big chunk to (-0.9, 3.0) at absorption 3.4/m, bluer. Shadows lifted 0.03 toward #1A2230; vignette 0.12.
+
+| pass | image | score | if fixed | verdict | top changes | what I did |
+|---|---|---|---|---|---|---|
+| 6 (beach again) | r9 (half size, 128) | 5.5 | 7.0 | iterate | the sun hidden behind the speaker so nothing visibly backlit; front lit neutral like a studio; sea smeared, no surf; brown dry sand; the wet band a pale studio floor; a looming shadow trapezoid; a clipped green line on the cabinet top | Sun to azimuth 162: in clear sky right of the speaker, its glitter path down the sea and the wet sand (150 put it out of frame, r12; its elevation stays at the sky's own 1.9). The bounce now a weak warm ground bounce (0.5, #F6C9A0, no reflections, 0.3 m up). Breaker at 8 m, 0.55 m high; chop 2.2; sea roughness 0.04. Sand #08080A-#1C1D20, specular 0.1, bump 2.5. Wet film roughness varies 0.05-0.2 by noise. The wash reaches 3 m in front, wobble 1.2 m. Exposure -0.75, white_in 250. Haze 0.002 beyond 15 m. |
+
+The coordinator's stopping rule since 08:20 (scores across every session sit at 4.5 to 6): after a concept change,
+stop when two passes in a row gain under 0.5. Passes 4 to 6 went 5.0, 5.5, 5.5; pass 7 decides.
+
+On the horn's throat (the coordinator's note): what reads black is the compression driver seen through the solid
+resin of the waveguide. A card in front and a card behind, each lighting only the waveguide and the driver, changed
+nothing (r10, r11): with refractive caustics off in the engine, no lamp reaches a surface seen through the resin. I
+took both out rather than keep lamps that do nothing. Lighting it would mean an engine change (caustics) or a change
+to the product's material, neither mine to make.

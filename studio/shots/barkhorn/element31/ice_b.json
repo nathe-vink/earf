@@ -37,25 +37,29 @@
     "res": "4k",
     "displace": 0.006,
     "relief": 0.06,
-    "dark": "#0B0B0D",
-    "light": "#26282B",
+    "dark": "#08080A",
+    "light": "#1C1D20",
     "tex_scale": 1.25,
     "wet_h": 0.07,
     "damp_h": 0.1,
     "damp_base": 0.0,
-    "spec": 0.05,
+    "spec": 0.1,
     "reach": [
-     -1.6,
+     -3.0,
      0.3
     ],
     "damp_reach": 1.0,
-    "reach_wobble": 1.8,
+    "reach_wobble": 1.2,
     "residue_w": 0.2,
     "grain_m": 0.003,
     "glint_share": 0.03,
-    "bump": 1.5,
+    "bump": 2.5,
     "wet_jitter": 0.06,
-    "wet_rough": 0.06
+    "wet_rough": 0.06,
+    "wet_rough_var": [
+     0.05,
+     0.2
+    ]
    },
    {
     "kind": "kit",
@@ -70,17 +74,17 @@
      "phase": 0.7,
      "water_z": -0.09
     },
-    "rough": 0.07,
-    "chop": 1.2,
+    "rough": 0.04,
+    "chop": 2.2,
     "absorb": "#1E3533",
     "density": 10.0,
     "lace_w": 0.3,
     "crests": [
      [
-      6.0,
-      0.3,
-      0.45,
-      2.2,
+      8.0,
+      0.55,
+      0.5,
+      2.6,
       1.0,
       0.02
      ],
@@ -351,7 +355,7 @@
    "position": [
     -0.6,
     -3.0,
-    0.9
+    0.3
    ],
    "size_m": [
     2.5,
@@ -362,9 +366,9 @@
     0.0,
     0.7
    ],
-   "irradiance": 1.5,
-   "color": "#FFE6CC",
-   "specular": 0.3
+   "irradiance": 0.5,
+   "color": "#F6C9A0",
+   "specular": 0.0
   }
  },
  "render": {
@@ -374,7 +378,7 @@
   "clamp": 10.0,
   "bounces": 16,
   "view": "AgX",
-  "exposure": -0.6,
+  "exposure": -0.75,
   "look": "AgX - Medium High Contrast",
   "volume_bounces": 4
  },
@@ -406,12 +410,12 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "umhlanga_sunrise",
-  "rotation_deg": 246.0,
+  "rotation_deg": 252.0,
   "strength": 1.0,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 168.0,
+  "azimuth_deg": 162.0,
   "elevation_deg": 1.9,
   "irradiance": 3.0,
   "angle_deg": 0.53,
@@ -419,7 +423,7 @@
  },
  "finish": {
   "enabled": true,
-  "white_in": 240,
+  "white_in": 250,
   "white_out": 240,
   "contrast": 0.1,
   "clarity": 0.04,
@@ -438,13 +442,13 @@
  "haze": {
   "box_m": [
    -420.0,
-   -12.0,
+   15.0,
    -1.0,
    420.0,
    420.0,
    8.0
   ],
-  "density": 0.0008,
+  "density": 0.002,
   "anisotropy": 0.6,
   "color": "#F2C9A8"
  }
