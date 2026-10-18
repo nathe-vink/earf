@@ -25,7 +25,7 @@
   ]
  },
  "render": {
-  "samples": 200,
+  "samples": 256,
   "adaptive": 0.015,
   "denoise": true,
   "clamp": 8,
@@ -107,7 +107,7 @@
     "shape": "box",
     "material": "pbr",
     "texture": "beige_wall_001",
-    "res": "2k",
+    "res": "4k",
     "color": "#E6E0D6",
     "size": [
      5.4,
@@ -187,7 +187,7 @@
     1.121
    ],
    "power_w": 4.666666666666667,
-   "radius_m": 0.004,
+   "radius_m": 0.02,
    "color": 2700
   },
   "bell2": {
@@ -198,7 +198,7 @@
     1.121
    ],
    "power_w": 4.666666666666667,
-   "radius_m": 0.004,
+   "radius_m": 0.02,
    "color": 2700
   },
   "bell3": {
@@ -209,7 +209,7 @@
     1.121
    ],
    "power_w": 4.666666666666667,
-   "radius_m": 0.004,
+   "radius_m": 0.02,
    "color": 2700
   }
  }

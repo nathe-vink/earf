@@ -23,7 +23,7 @@ CLOUD = 'studio/products/barkhorn-cloud.json'
 # platter's top: a record goes there
 SPINDLE = (round((218.0 - 241.6) / 1000, 4), round((170.0 - 186.5) / 1000, 4)); PLATTER_TOP = 0.095
 LAMP_STRIP_Z = 0.441                                               # the strip's middle above the lamp's foot
-HERO_SAMPLES = 200                                                # the heroes (promo passes: 64 smeared)
+HERO_SAMPLES = 256                                                # the heroes (promo passes: 64 smeared)
 LAMP_W = 14.0                                                     # its light, watts as Cycles counts them (tuned by eye)
 LED = 22.0                                                         # the strip's emission when the lamp is on
 
@@ -112,59 +112,62 @@ def room_shot(title, size, cam):
             'materials': {'oak': {'grain': 1.0, 'roughness': 0.38}}}
 
 
-def bell_lights(s, lx, ly, h):
+def bell_lights(s, lx, ly, h, watts=None):
     """Bell's light: three small lamps just outside its opal sleeve at the strip's height (the sleeve's subsurface
     stops shadow rays, so lamps inside it lit only the table; an emitting strip that thin is all noise)."""
     for k in range(3):
         a = math.radians(90 + 120 * k)
         s['lights'][f'bell{len(s["lights"])}'] = {'type': 'point', 'position': [round(lx + 0.047 * math.cos(a), 4), round(ly + 0.047 * math.sin(a), 4),
                                                                           round(h + LAMP_STRIP_Z, 4)],
-                                                 'power_w': LAMP_W / 3, 'radius_m': 0.004, 'color': 2700}
+                                                 'power_w': (watts or LAMP_W) / 3, 'radius_m': 0.02, 'color': 2700}
 
 
+DUSK_WB = 4300                    # one grade for both heroes (promo pass 2: 3800 K left the frame all red)
+WALL_DUSK = '#B9AEA2'             # the wall a stop down (pass 2: it outshone the record player)
+# the window's cool light from the left (pass 2: dusk did not read)
+WINDOW_FILL = {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': -70, 'elevation_deg': 12, 'distance_m': 2.4},
+               'irradiance': 0.35, 'color': '#9FB4E0'}
 DUSK = {'kind': 'gradient', 'strength': 6.0, 'zenith': '#1E2C4A', 'horizon': '#5A6E92', 'ground': '#2A2A30'}
 
 
-def hero_turntable(colour='ember', speaker=(-0.32, 0.52, 10), cam=(-8, 14, 1.75, 50)):
+# a real plastered wall over the room's back wall, a hair in front of it (promo pass 1: the plain wall read as CG)
+WALL = {'kind': 'kit', 'shape': 'box', 'material': 'pbr', 'texture': 'beige_wall_001', 'res': '4k', 'color': '#E6E0D6',
+        'size': [5.4, 0.008, 2.78], 'position': [0.4, 0.738, 0.005]}
+
+
+def hero_turntable(colour='ember'):
     """Cumulus on the walnut cabinet at dusk, a record on it, Bell lit beside it in the same colour, the window's blue
-    at the left on the Cloud behind, out of focus: the same room, light and grade as Bell's hero (the lead: one set,
-    one light, one grade). Promo pass 1 (critic/rounds/2026-10-18/promo-hero-turntable-p1.json, 5.0, in morning sun):
-    a softbox key on the record player, the cabinet at 4k, a real plaster wall, more samples, f/4 on the arm, the
-    speaker placed so its horn reads."""
+    from the left, the Cloud behind, out of focus: the same room, light and grade as Bell's hero (the lead: one set,
+    one light, one grade). Promo pass 1 (5.0, in morning sun): a key on the player, the cabinet at 4k, a plaster
+    wall, f/4 on the arm. Pass 2 (5.5, critic/rounds/2026-10-18/promo-hero-turntable-p2.json): the camera near eye
+    level and longer (70 mm) so the player fills about half the width; a smaller, stronger, lower key on it; Bell
+    nearer and dimmer so it lights the walnut by the arm and not the wall; its lamps softer (it clipped); the
+    speaker further back; a cool fill from the window and 4300 K so dusk reads; the wall a stop darker."""
     tx, ty = 0.36, 0.42
     h = CAB_TOP
-    tgt = [tx + 0.12, ty - 0.02, h + 0.08]
-    az, el, d, lens = cam
     s = room_shot(f'Cumulus beside {C.NAMES[colour]}', [1600, 1100],
-                  {'position': orbit(tgt, az, el, d), 'target': tgt, 'lens_mm': lens, 'level': True, 'fstop': 4.0,
-                   'focus': [0.42, 0.40, 0.80]})
+                  {'position': [0.40, -1.08, 1.16], 'target': [0.45, 0.42, 0.78], 'lens_mm': 60, 'level': True, 'fstop': 2.8,
+                   'focus': [0.36, 0.30, 0.80]})
     s['render']['samples'] = HERO_SAMPLES
     s['set'] = room(dusk=True)
     s['set']['props'][0]['res'] = '4k'
-    s['set']['props'].append(WALL)
-    bx, by = 0.98, 0.5
-    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': list(speaker[:2]) + [0], 'rotate_z': speaker[2]}]},
+    s['set']['props'].append(dict(WALL, color=WALL_DUSK))
+    bx, by = 0.86, 0.56
+    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.6, 0.5, 0], 'rotate_z': 12}]},
                      {'def': TT, 'flavour': colour, 'instances': [{'position': [tx, ty, h], 'rotate_z': -6}]},
                      {'def': LAMP, 'flavour': colour, 'instances': [{'position': [bx, by, h], 'rotate_z': 0}]}]
     rx = tx + SPINDLE[0] * math.cos(math.radians(-6)) - SPINDLE[1] * math.sin(math.radians(-6))
     ry = ty + SPINDLE[0] * math.sin(math.radians(-6)) + SPINDLE[1] * math.cos(math.radians(-6))
     s['set']['props'] += record(round(rx, 4), round(ry, 4), h + PLATTER_TOP, colour)
     s['sky'] = dict(DUSK)
-    s['lights'] = {'fill': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 40, 'elevation_deg': 8, 'distance_m': 2.4},
-                            'target': tgt, 'irradiance': 0.12, 'color': '#C9D6F0'},
-                   # a warm softbox high at the left, as a ceiling pendant off frame would be: the record player's key
-                   'key': {'type': 'area', 'size_m': [0.9, 0.7], 'orbit': {'azimuth_deg': -30, 'elevation_deg': 45, 'distance_m': 1.4},
-                           'target': [tx, ty - 0.02, h + 0.09], 'power_w': 20.0, 'color': 2900}}
-    bell_lights(s, bx, by, h)
+    s['lights'] = {'window': dict(WINDOW_FILL, target=[tx, ty, h + 0.1]),
+                   'key': {'type': 'area', 'size_m': [0.6, 0.4], 'orbit': {'azimuth_deg': -20, 'elevation_deg': 25, 'distance_m': 1.1},
+                           'target': [tx, ty, h + 0.06], 'power_w': 70.0, 'color': 2900}}
+    bell_lights(s, bx, by, h, watts=9.0)
     s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 25.0}}
-    s['render']['white_balance_k'] = 3800
-    s['render']['exposure'] = 0.2
+    s['render']['white_balance_k'] = DUSK_WB
+    s['render']['exposure'] = -0.3
     return s
-
-
-# a real plastered wall over the room's back wall, a hair in front of it (promo pass 1: the plain wall read as CG)
-WALL = {'kind': 'kit', 'shape': 'box', 'material': 'pbr', 'texture': 'beige_wall_001', 'res': '2k', 'color': '#E6E0D6',
-        'size': [5.4, 0.008, 2.78], 'position': [0.4, 0.738, 0.005]}
 
 
 def hero_lamp(colour='haze'):
