@@ -1,7 +1,58 @@
-# Ice: a frozen grotto, in glass and wool (round 31)
+# Ice: a cabin beyond the frozen pond, in glass, wool and balsa (round 31)
 
-"Keeps its cool." The ice-blue speaker (`cloud-blue`, cover off) stands on a frozen lake in a grotto of cast-glass
-shards, the lake lit from beneath. Set: `ice.py`. Its own kit pieces: `studio/engine/kit_ext/ice.py`.
+The owner, verbatim (relayed by the coordinator during the round):
+
+- "Ice could have a snow covered wood cabin in the back, or maybe the speaker is in the abominable snowman's cave home."
+- "It's important to stay on the theme of earth and placing the speakers in their respective atmospheres, though the
+  yeti and witch ideas are fun, subtle nods."
+
+"Keeps its cool." The final has the ice-blue speaker (`cloud-blue`, cover off) on a frozen pond lit from beneath, in a
+snowy clearing at night. A balsa log cabin stands soft in the distance, with cotton snow on its roof and a warm window.
+Felt pines stand behind it, with wool hills beyond. The yeti is only a nod: a trail of big snowy footprints crosses the
+ice past the speaker toward the cabin. The first concept, the natural ice grotto, is kept as a landscape alternate with
+the same footprints (`ICE_WORLD=grotto`, `ice-grotto.json`). Set: `ice.py`, with `WORLD` choosing. Its own kit pieces:
+`studio/engine/kit_ext/ice.py`.
+
+## The final, and why the cabin
+
+Both directions came out well (k06 against g01). The cabin is the owner's own picture. It is also more plainly an earth
+setting, a place in the snow rather than a set of crystals. Its warm window gives the cold frame one accent and a
+story, and the footprints lead the eye from the speaker to the door. The grotto is cooler and more abstract. It is the
+better object study, but the cabin is the better campaign image.
+
+- **Materials.** These were the cabin world's materials:
+  - balsa logs, interlocked, with plank gables;
+  - a thick cotton snow blanket on the roof;
+  - a card window frame and chimney;
+  - three-tier felt pines with cotton caps;
+  - a felt snow blanket over the clearing;
+  - wool hills;
+  - the rimed glass pond with cotton banks;
+  - paper snowflakes on threads.
+- **The icon.** The cabin's front eave carries the icon's three icicles (the middle longest) among smaller ones. The
+  grotto alternate keeps the icon as a silver-bar mobile.
+- **Light.** The pond's under-glow is the one idea, as in the grotto. The window is the warm counterpoint, with a
+  point lamp on the snow in front of it.
+- **The nod.** The earmuffed snowman I had made way for the yeti's footprints, to keep one joke per surface.
+
+## Rounds after the direction changed
+
+12. w-cabin against w-grotto (first proofs). The cabin was cut by the frame's left edge, and the trees were too near
+    and too big. The snowfield's mounds left a hard ellipse edge and a navy gap where the bed showed through.
+13. k02 and k03: the pond became a rectangle of rimed glass. The snow is four felt boards round it, their seams under
+    cotton banks. The cabin moved to the upper left, inside the frame, and the pines moved back and got smaller.
+14. k04 and k05: the speaker's feet were cut by the frame's bottom, so the target came nearer and lower (0.1, 0.3,
+    0.88). The footprints grew to 0.46 m.
+15. k06 (mid): the footprints' toes floated off the sole, so the toes moved in, a little thinner than the sole so that
+    no face lies on another. The eave icicles grew, and the left snowflake moved off the cabin's corner.
+16. Portrait kq01 and kq02: at 70 mm the speaker was a quarter of the frame. At 90 mm, aimed left, the cabin sits upper
+    left, the speaker lower right and the footprints lead in from below.
+
+---
+
+The first concept, the grotto, follows as it was written before the direction changed.
+
+# The alternate: a frozen grotto, in glass and wool
 
 ## The concept
 
