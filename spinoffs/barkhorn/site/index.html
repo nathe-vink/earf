@@ -265,17 +265,43 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 /* a speaker's page */
 .crumbs { padding-block: 22px 0; font-size: 15px; color: var(--muted) }
 .crumbs a { color: var(--ink); text-underline-offset: 4px }
-.pdp { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); gap: 44px; align-items: start; padding-block: 18px 64px }
+.pdp { display: grid; grid-template-columns: minmax(0, 1.62fr) minmax(0, 0.82fr); gap: 40px; align-items: start; padding-block: 18px 64px }
 .gallery { display: grid; gap: 12px; min-width: 0 }
-.stage { --h: min(78vh, 780px); position: relative; height: var(--h); display: grid; place-items: center }
-.stage .shot { position: relative; display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-width: 0 }
-.stage img { max-width: 100%; max-height: var(--h); width: auto; height: auto; display: block; border-radius: 6px }
-.stage .spin { width: min(100%, calc(var(--h) * var(--ar))); border-radius: 6px }
+/* the pictures, one at a time on a stage the photograph's shape (3:2, and 4:5 on phones), each carried to the stage's
+   edges on its own ground: the colours down its sides, or above and below it */
+.frame { position: relative; min-width: 0 }
+.stage { position: relative; aspect-ratio: 3 / 2; width: 100%; max-width: 100%; container-type: size; display: grid; place-items: center;
+  overflow: hidden; border-radius: 6px; background: var(--paper); touch-action: pan-y; -webkit-user-select: none; user-select: none }
+.stage:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
+.stage > * { grid-area: 1 / 1 }
+.stage .fill, .stage .fill img { width: 100%; height: 100%; display: block; object-fit: cover }
+.stage .fit { width: min(100cqw, calc(100cqh * var(--ar))); max-width: 100%; aspect-ratio: var(--ar); height: auto; display: block; border-radius: 0;
+  -webkit-user-drag: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%, #000 97%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent),
+  linear-gradient(transparent, #000 3%, #000 97%, transparent); mask-composite: intersect }
+.stage .fit.cut { align-self: end;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%);
+  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%) }
+.stage .blur { width: 100%; height: 100%; background: center / cover no-repeat; filter: blur(28px) saturate(1.1); transform: scale(1.15) }
+.stage .in { animation: g-in 0.24s ease-out }
+@keyframes g-in { from { opacity: 0 } }
 .stage .tag { position: absolute; left: 12px; bottom: 12px; font: 500 12px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--on-photo); background: var(--veil); border-radius: 999px; padding: 7px 10px }
-.thumbs { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px }
-.thumb { position: relative; aspect-ratio: 4 / 5; border-radius: 4px; overflow: hidden; border: 1px solid var(--rule); padding: 0; cursor: pointer;
-  background-color: var(--paper) }
+.nav { position: absolute; top: 50%; translate: 0 -50%; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; padding: 0;
+  display: grid; place-items: center; color: var(--on-photo); background: var(--veil); cursor: pointer; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.14) }
+.nav.prev { left: 12px } .nav.next { right: 12px }
+.nav svg { width: 18px; height: 18px; display: block }
+.nav:hover { box-shadow: inset 0 0 0 1.5px var(--on-photo), 0 1px 8px rgba(0, 0, 0, 0.14) }
+.nav:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+.count { position: absolute; right: 12px; bottom: 12px; z-index: 2; font: 500 12px/1 var(--mono); letter-spacing: 0.08em; color: var(--on-photo);
+  background: var(--veil); border-radius: 999px; padding: 7px 10px; pointer-events: none }
+.thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(56px, 84px); gap: 8px; overflow-x: auto; scrollbar-width: none;
+  padding: 4px; margin: -4px; position: relative; scroll-snap-type: x proximity }
+.thumbs::-webkit-scrollbar { display: none }
+.thumb { aspect-ratio: 1; border-radius: 4px; border: 1px solid var(--rule); padding: 0; cursor: pointer; background-color: var(--paper);
+  scroll-snap-align: start; opacity: 0.8; transition: opacity 0.15s }
+.thumb:hover, .thumb[aria-selected="true"] { opacity: 1 }
 .thumb[aria-selected="true"] { outline: 2px solid var(--ink); outline-offset: 2px }
 .cap { margin: 0; color: var(--muted); font-size: 15px; max-width: 62ch }
 .buy { position: sticky; top: calc(var(--header) + 24px); display: grid; gap: 18px; min-width: 0; background: var(--page) }
@@ -285,8 +311,8 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .buy .line { margin: 0; font-size: 18px }
 .price { margin: 0; font-size: 20px; font-weight: 600 }
 .price span { font-weight: 400; color: var(--muted); font-size: 16px }
-.swatches { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none }
-.swatches a { display: block; width: 48px; height: 48px; border-radius: 50%; position: relative }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none }
+.swatches a { display: block; width: 40px; height: 40px; border-radius: 50%; position: relative }
 .swatches a[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 3px }
 .swatches .coin-dot { width: 100%; height: 100%; display: block }
 .pick { margin: -6px 0 0; font-size: 15px; color: var(--muted) }
@@ -324,14 +350,14 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
   .horns { grid-template-columns: repeat(2, minmax(0, 1fr)) }
   nav ul { gap: 4px 14px } nav a { font-size: 14px }
   .band { padding-block: 52px }
-  .thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)) }
-  .stage { --h: min(70vh, 118vw) }
   .goes { grid-template-columns: 1fr } .good .art { aspect-ratio: 16 / 9 }
   .brand svg { height: 18px } .brand .globe { width: 36px; height: 36px }
 }
+@media (max-width: 700px) { .stage { aspect-ratio: 4 / 5 } .nav { width: 40px; height: 40px } .nav.prev { left: 8px } .nav.next { right: 8px }
+  .count { right: 8px; bottom: 8px } .stage .tag { left: 8px; bottom: 8px } }
 @media (max-width: 460px) { .cards { gap: 12px } .about h3 { font-size: 21px } .spec dl, .facts { grid-template-columns: 104px minmax(0, 1fr) }
   nav li.wide { display: none } }
-@media (prefers-reduced-motion: reduce) { .photo img, .spot-label { transition: none } }
+@media (prefers-reduced-motion: reduce) { .photo img, .spot-label, .thumb { transition: none } .stage .in { animation: none } }
 </style>
 </head>
 <body>
@@ -430,9 +456,14 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
     <p class="crumbs"><a href="#atmosphere">Atmosphere</a> / <span id="p-crumb"></span></p>
     <div class="pdp">
       <section class="gallery" aria-label="Pictures">
-        <div class="stage" id="stage" role="tabpanel" aria-labelledby="thumb-0"></div>
-        <div class="thumbs" id="thumbs" role="tablist" aria-label="Views"></div>
-        <p class="cap" id="cap"></p>
+        <div class="frame">
+          <div class="stage" id="stage" role="tabpanel" aria-labelledby="thumb-0" tabindex="0"></div>
+          <button type="button" class="nav prev" id="g-prev" aria-label="Previous picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11.5 3.5 6 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="nav next" id="g-next" aria-label="Next picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 3.5 12 9l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="count" id="g-count" aria-hidden="true"></span>
+        </div>
+        <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures of this speaker"></div>
+        <p class="cap" id="cap" aria-live="polite"></p>
       </section>
       <aside class="buy" aria-label="This speaker">
         <p class="num"><span class="pic" id="p-icon"></span><span id="p-num"></span></p>
@@ -462,7 +493,7 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
 </div></footer>
 
 <script>
-const D = {"clouds":[{"k":"red","num":"01","name":"Ember","icon":"ember","tint":"Translucent red","line":"The part of the fire that stays up late.","cover":"Oxblood","col":"#D2382F","hue":0,"coin":0,"views":{"on":{"src":"img/red-on.jpg","w":900,"h":1800},"off":{"src":"img/red-off.jpg","w":900,"h":1800},"back":{"src":"img/red-back.jpg","w":880,"h":1100},"amp":{"src":"img/red-amp.jpg","w":880,"h":1100},"horn-side":{"src":"img/red-horn-side.jpg","w":1000,"h":750},"horn-back":{"src":"img/red-horn-back.jpg","w":1000,"h":750},"inside":{"src":"img/red-inside.jpg","w":880,"h":1100},"habitat":{"src":"img/red-habitat.jpg","w":1600,"h":1067},"turn":{"src":"img/turn-red.jpg","w":480,"h":432}}},{"k":"orange","num":"02","name":"Dust","icon":"dust","tint":"Translucent orange","line":"Settles in nicely.","cover":"Rust","col":"#E5732A","hue":1,"coin":1,"views":{"on":{"src":"img/orange-on.jpg","w":900,"h":1800},"off":{"src":"img/orange-off.jpg","w":900,"h":1800},"back":{"src":"img/orange-back.jpg","w":880,"h":1100},"amp":{"src":"img/orange-amp.jpg","w":880,"h":1100},"horn-side":{"src":"img/orange-horn-side.jpg","w":1000,"h":750},"horn-back":{"src":"img/orange-horn-back.jpg","w":1000,"h":750},"inside":{"src":"img/orange-inside.jpg","w":880,"h":1100},"habitat":{"src":"img/orange-habitat.jpg","w":1600,"h":1067},"turn":{"src":"img/turn-orange.jpg","w":480,"h":432}}},{"k":"amber","num":"03","name":"Acid","icon":"acid","tint":"Translucent golden yellow","line":"A yellow with opinions.","cover":"Ochre","col":"#E9B320","hue":2,"coin":2,"views":{"on":{"src":"img/amber-on.jpg","w":900,"h":1800},"off":{"src":"img/amber-off.jpg","w":900,"h":1800},"back":{"src":"img/amber-back.jpg","w":880,"h":1100},"amp":{"src":"img/amber-amp.jpg","w":880,"h":1100},"horn-side":{"src":"img/amber-horn-side.jpg","w":1000,"h":750},"horn-back":{"src":"img/amber-horn-back.jpg","w":1000,"h":750},"inside":{"src":"img/amber-inside.jpg","w":880,"h":1100},"habitat":{"src":"img/amber-habitat.jpg","w":1600,"h":1067},"turn":{"src":"img/turn-amber.jpg","w":480,"h":432}}},{"k":"green","num":"04","name":"Poison","icon":"poison","tint":"Translucent bottle green","line":"Green, and not the healthy kind.","cover":"Bottle green","col":"#4F7F3A","hue":3,"coin":3,"views":{"on":{"src":"img/green-on.jpg","w":900,"h":1800},"off":{"src":"img/green-off.jpg","w":900,"h":1800},"back":{"src":"img/green-back.jpg","w":880,"h":1100},"amp":{"src":"img/green-amp.jpg","w":880,"h":1100},"horn-side":{"src":"img/green-horn-side.jpg","w":1000,"h":750},"horn-back":{"src":"img/green-horn-back.jpg","w":1000,"h":750},"inside":{"src":"img/green-inside.jpg","w":880,"h":1100},"habitat":{"src":"img/green-habitat.jpg","w":1600,"h":1067},"turn":{"src":"img/turn-green.jpg","w":480,"h":432}}},{"k":"blue","num":"05","name":"Ice","icon":"ice","tint":"Translucent ice blue","line":"Keeps its cool.","cover":"Deep blue","col":"#4A90C8","hue":4,"coin":4,"views":{"on":{"src":"img/blue-on.jpg","w":900,"h":1800},"off":{"src":"img/blue-off.jpg","w":900,"h":1800},"back":{"src":"img/blue-back.jpg","w":880,"h":1100},"amp":{"src":"img/blue-amp.jpg","w":880,"h":1100},"horn-side":{"src":"img/blue-horn-side.jpg","w":1000,"h":750},"horn-back":{"src":"img/blue-horn-back.jpg","w":1000,"h":750},"inside":{"src":"img/blue-inside.jpg","w":880,"h":1100},"habitat":{"src":"img/blue-habitat.jpg","w":1600,"h":1067},"turn":{"src":"img/turn-blue.jpg","w":480,"h":432}}},{"k":"violet","num":"06","name":"Haze","icon":"haze","tint":"Translucent violet","line":"Dusk, kept indoors.","cover":"Deep violet","col":"#6C4BA3","hue":5,"coin":5,"views":{"on":{"src":"img/violet-on.jpg","w":900,"h":1800},"off":{"src":"img/violet-off.jpg","w":900,"h":1800},"back":{"src":"img/violet-back.jpg","w":880,"h":1100},"amp":{"src":"img/violet-amp.jpg","w":880,"h":1100},"horn-side":{"src":"img/violet-horn-side.jpg","w":1000,"h":750},"horn-back":{"src":"img/violet-horn-back.jpg","w":1000,"h":750},"inside":{"src":"img/violet-inside.jpg","w":880,"h":1100},"habitat":{"src":"img/violet-habitat.jpg","w":1600,"h":1067},"turn":{"src":"img/turn-violet.jpg","w":480,"h":432}}},{"k":"ice","num":"07","name":"Fog","icon":"fog","tint":"Water-clear","line":"Now you see it.","cover":"White","col":"#F6F8F8","hue":null,"coin":6,"views":{"on":{"src":"img/ice-on.jpg","w":900,"h":1800},"off":{"src":"img/ice-off.jpg","w":900,"h":1800},"back":{"src":"img/ice-back.jpg","w":880,"h":1100},"amp":{"src":"img/ice-amp.jpg","w":880,"h":1100},"horn-side":{"src":"img/ice-horn-side.jpg","w":1000,"h":750},"horn-back":{"src":"img/ice-horn-back.jpg","w":1000,"h":750},"inside":{"src":"img/ice-inside.jpg","w":880,"h":1100},"habitat":{"src":"img/ice-habitat.jpg","w":1600,"h":1067},"turn":{"src":"img/turn-ice.jpg","w":480,"h":432}}},{"k":"black","num":"08","name":"Smoke","icon":"smoke","tint":"Smoked black","line":"Where there's smoke.","cover":"Black","col":"#34323A","hue":null,"coin":7,"views":{"on":{"src":"img/black-on.jpg","w":900,"h":1800},"off":{"src":"img/black-off.jpg","w":900,"h":1800},"back":{"src":"img/black-back.jpg","w":880,"h":1100},"amp":{"src":"img/black-amp.jpg","w":880,"h":1100},"horn-side":{"src":"img/black-horn-side.jpg","w":1000,"h":750},"horn-back":{"src":"img/black-horn-back.jpg","w":1000,"h":750},"inside":{"src":"img/black-inside.jpg","w":880,"h":1100},"habitat":{"src":"img/black-habitat.jpg","w":1600,"h":1067},"turn":{"src":"img/turn-black.jpg","w":480,"h":432}}}],"hues":["#D2382F","#E5732A","#E9B320","#4F7F3A","#4A90C8","#6C4BA3"]}, BY = Object.fromEntries(D.clouds.map(c => [c.k, c]));
+const D = {"clouds":[{"k":"red","num":"01","name":"Ember","icon":"ember","tint":"Translucent red","line":"The part of the fire that stays up late.","cover":"Oxblood","col":"#D2382F","hue":0,"coin":0,"views":{"on":{"src":"img/red-on.jpg","w":900,"h":1800,"bg":"e0cfc8decbc5e0cdc7ddcac4dccac4e2d0c9dfcdc6e0cec9ccbab6baa5a2e5d3cdd5c3bf"},"off":{"src":"img/red-off.jpg","w":900,"h":1800,"bg":"e0cfc8decbc5e0cdc7ddcac4dcc9c4e2d0c9e0cdc6e0cec9ccbab7baa5a2e5d3ced4c3bf"},"back":{"src":"img/red-back.jpg","w":880,"h":1100,"bg":"ddcac4ddcbc5dfcec7decbc5e1cec8ddccc5ddcbc6d8c3bec5b1aec3aea9e2d0cad2c3bd"},"amp":{"src":"img/red-amp.jpg","w":880,"h":1100,"bg":"3e18142905023218143f1c19441d186a0c07460502831d1785201a9b241d8c2f298a332b","edge":"busy"},"horn-side":{"src":"img/red-horn-side.jpg","w":1000,"h":750,"bg":"decbc5ddcac4decdc6e0cfc8e0cfc8dfcec7dfccc6e0cfc8e1cfc9deccc8e2d0c9e2d0c9","edge":"cut"},"horn-back":{"src":"img/red-horn-back.jpg","w":1000,"h":750,"bg":"decbc5ddcac4dfcdc6e0cfc8e0cfc8dfcdc6ddcac4dfcdc6dfccc6dac5c0e1cfc9e1cfc9","edge":"cut"},"inside":{"src":"img/red-inside.jpg","w":880,"h":1100,"bg":"dbc8c2dccbc4dfcdc9dfccc6e1cec8decdc6dfcdc9dbc9c5c6b4b0c3b0ace2d0c9e2d0c9","edge":"cut"},"habitat":{"src":"img/red-habitat.jpg","w":1600,"h":1067,"bg":"48445b3a242d3a20291f192415141e4c455c3e222a3f22285a2524391d21534c6528161e","edge":"busy","tall":{"src":"img/red-habitat-portrait.jpg","w":1000,"h":1250}},"turn":{"src":"img/turn-red.jpg","w":480,"h":432,"bg":"e0cdc7dfccc6e0cfc8e1d0c9e0cfc8e0cdc7dfccc6e0cfc8e1d0c9dfcec8e2d0cae2d0ca","edge":"cut"}},"place":"on a lava field at blue hour, the crust cracked to its glow"},{"k":"orange","num":"02","name":"Dust","icon":"dust","tint":"Translucent orange","line":"Settles in nicely.","cover":"Rust","col":"#E5732A","hue":1,"coin":1,"views":{"on":{"src":"img/orange-on.jpg","w":900,"h":1800,"bg":"dfd5c1ddd2bedfd4c2dcd1bddad0bedfd7c4ddd4c0ddd5c2c9c0afb9ac9be3dbc8d3cbb8"},"off":{"src":"img/orange-off.jpg","w":900,"h":1800,"bg":"dfd5c1ddd2bedfd4c2dcd1bddad1bedfd7c4ddd4c0ddd5c2c9c0afb9ac9be3dbc8d2cab8"},"back":{"src":"img/orange-back.jpg","w":880,"h":1100,"bg":"dcd1bdddd2bedfd4c2ddd2bee0d5c1ddd2bfddd2c0d8cbb8c5b8a7c2b5a4e2d7c3d1c9b7"},"amp":{"src":"img/orange-amp.jpg","w":880,"h":1100,"bg":"4022102b0f023420123f26134628136b230448140183310f8534129b39138d441b8a451e","edge":"busy"},"horn-side":{"src":"img/orange-horn-side.jpg","w":1000,"h":750,"bg":"ddd2bedcd1bdded3bfdfd5c3ded6c3ded3c0ddd2bedfd4c2dfd7c4dcd4c1e1d6c2e1d6c2","edge":"cut"},"horn-back":{"src":"img/orange-horn-back.jpg","w":1000,"h":750,"bg":"ddd2bedcd1bdded3bfded5c3ded5c2ded3bfddd1beded3bfded2bfdccdbae1d6c2e1d6c2","edge":"cut"},"inside":{"src":"img/orange-inside.jpg","w":880,"h":1100,"bg":"dacfbbdbd0bcdfd4c2ddd2bee0d5c2ddd2c0ddd3c1dacfbdc5b9a9c2b7a5e0d6c3e0d6c3","edge":"cut"},"habitat":{"src":"img/orange-habitat.jpg","w":1600,"h":1067,"bg":"ac9e94c7ac97b97646a053279d5127bfaea4d4baa7d8b396c27c48af6a3ab7aba5a85c2c","edge":"busy","tall":{"src":"img/orange-habitat-portrait.jpg","w":1000,"h":1250}},"turn":{"src":"img/turn-orange.jpg","w":480,"h":432,"bg":"dfd4c0ded3bfe0d5c1e0d5c3e0d5c3dfd4c0ded3bfe0d5c3e1d6c4ded4c2e2d7c3e2d7c3","edge":"cut"}},"place":"on rippled sand in the Southwest at golden hour"},{"k":"amber","num":"03","name":"Acid","icon":"acid","tint":"Translucent golden yellow","line":"A yellow with opinions.","cover":"Ochre","col":"#E9B320","hue":2,"coin":2,"views":{"on":{"src":"img/amber-on.jpg","w":900,"h":1800,"bg":"ded9b9dcd6b6ded8b8dbd5b5dad4b5dfdabcddd8b8ddd8b9cac5a7b9b292e3debfd3cfb0"},"off":{"src":"img/amber-off.jpg","w":900,"h":1800,"bg":"ded9b9dcd6b6ded8b8dbd5b5dad3b5dfdabcddd8b8ddd8b9cac5a7b9b292e3debfd2ceb0"},"back":{"src":"img/amber-back.jpg","w":880,"h":1100,"bg":"dbd5b5dcd6b6ddd7badcd6b6dfd9badbd5b8dbd6b8d9d0afc6bd9fc1bb9be1dbbbd1cdaf"},"amp":{"src":"img/amber-amp.jpg","w":880,"h":1100,"bg":"40320e2b1e0334290f4132114736116c400548290083510c86530e9b5e0f8d66128b6415","edge":"busy"},"horn-side":{"src":"img/amber-horn-side.jpg","w":1000,"h":750,"bg":"dcd6b6dbd5b5ddd7b7ddd8baddd8baded8b8dcd6b6ded8badfdabcdbd6b8e0dabae0daba","edge":"cut"},"horn-back":{"src":"img/amber-horn-back.jpg","w":1000,"h":750,"bg":"dcd6b6dbd5b5ddd7b7ded8baddd8baddd7b8dcd6b6ded8b8ded8b8ddd4b3e0dabae0daba","edge":"cut"},"inside":{"src":"img/amber-inside.jpg","w":880,"h":1100,"bg":"d9d3b3dad4b7ddd8baddd7b7dfd9badcd6b9dcd7b9d9d3b6c5bea2c1ba9de0dabbe0dabb","edge":"cut"},"habitat":{"src":"img/amber-habitat.jpg","w":1600,"h":1067,"bg":"83806aa0997cb5b09230312b1c1d1eaca497cdbcabd6cbb938372e24242197917e97917e","edge":"busy","tall":{"src":"img/amber-habitat-portrait.jpg","w":1000,"h":1250}},"turn":{"src":"img/turn-amber.jpg","w":480,"h":432,"bg":"ded8b8ddd7b7dfd9b9e0dabaded8bbdfd9b9ddd7b7dfd9b9dfdabcddd8bae1dbbbe1dbbb","edge":"cut"}},"place":"in acid rain on black lava"},{"k":"green","num":"04","name":"Poison","icon":"poison","tint":"Translucent bottle green","line":"Green, and not the healthy kind.","cover":"Bottle green","col":"#4F7F3A","hue":3,"coin":3,"views":{"on":{"src":"img/green-on.jpg","w":900,"h":1800,"bg":"cbdecac6dcc7c8ddcac5dac7c6dac5cce0cbc8dec8c9decab4cab8a1b6a3d0e3cfbfd3c0"},"off":{"src":"img/green-off.jpg","w":900,"h":1800,"bg":"cbdecac6dcc7c8ddcac5dac7c5d9c5cce0cbc8dec8c9ddcab4cab8a1b6a3d0e3cfbfd2bf"},"back":{"src":"img/green-back.jpg","w":880,"h":1100,"bg":"c8dbc7c8dbc7caddcac6dcc7cadecac7dbc7c8dbc8bed3c0acc1b0a9beabcde0ccbed1be"},"amp":{"src":"img/green-amp.jpg","w":880,"h":1100,"bg":"1a29180614021726161b2d1b1d2f1a1333070a1e0321441925481c2a522137582e39592f","edge":"busy"},"horn-side":{"src":"img/green-horn-side.jpg","w":1000,"h":750,"bg":"c7dcc8c5dbc6c7ddc8c9decbc9decbc9ddc9c8dcc8cbdecaccdfccc9dcc9cbe0cbcbe0cb","edge":"cut"},"horn-back":{"src":"img/green-horn-back.jpg","w":1000,"h":750,"bg":"c7dcc7c5dbc6c7ddc8c9decbc9decbc9dcc8c6dbc7c9dcc8c9dcc8c1d6c4cbdfcbcbdfcb","edge":"cut"},"inside":{"src":"img/green-inside.jpg","w":880,"h":1100,"bg":"c5d9c4c7dac6c9ddcac7dcc8cadfcac9dcc8c9dcc9c3d8c5aec3b2aabfaccde0cccde0cc","edge":"cut"},"habitat":{"src":"img/green-habitat.jpg","w":1600,"h":1067,"bg":"321d10362013392314382d164d46302a261a16170c1a1d101d220f0f10061f170e1f170e","edge":"busy","tall":{"src":"img/green-habitat-portrait.jpg","w":1000,"h":1250}},"turn":{"src":"img/turn-green.jpg","w":480,"h":432,"bg":"c8dec9c7ddc8c9dfcacadfcbc9decbc8dec9c7ddc8cbdecbccdfcccaddcacbe1cccbe1cc","edge":"cut"}},"place":"on a redwood forest floor, among ferns"},{"k":"blue","num":"05","name":"Ice","icon":"ice","tint":"Translucent ice blue","line":"Keeps its cool.","cover":"Deep blue","col":"#4A90C8","hue":4,"coin":4,"views":{"on":{"src":"img/blue-on.jpg","w":900,"h":1800,"bg":"c6dde5c3d9e4c5dbe6c2d8e3c1d7e3c7dfe7c4dbe6c5dbe6b2c9d49db6c3cbe2eabbd1dc"},"off":{"src":"img/blue-off.jpg","w":900,"h":1800,"bg":"c6dde5c3d9e4c5dbe6c2d8e3c1d7e3c7dfe7c4dbe6c5dbe6b2c9d49db6c3cbe2eabbd0db"},"back":{"src":"img/blue-back.jpg","w":880,"h":1100,"bg":"c2d8e3c2d8e3c5dbe6c2dae5c6dde6c3d9e4c3d9e4bbd2e0a8bfcda7beccc8dfe7bacfd9"},"amp":{"src":"img/blue-amp.jpg","w":880,"h":1100,"bg":"16303c031b26152a3519323f1a36440a4567042a421c587e205b80246895376b85386983","edge":"busy"},"horn-side":{"src":"img/blue-horn-side.jpg","w":1000,"h":750,"bg":"c3d9e4c2d8e3c4dae5c5dbe6c5dbe6c5dbe6c3d9e4c5dbe6c7dde7c3d9e4c7dee7c7dee7","edge":"cut"},"horn-back":{"src":"img/blue-horn-back.jpg","w":1000,"h":750,"bg":"c3d9e4c2d8e3c4dae5c5dbe6c5dbe6c4dae5c2d9e3c4dae5c3d9e5bdd4e2c7dde6c7dde6","edge":"cut"},"inside":{"src":"img/blue-inside.jpg","w":880,"h":1100,"bg":"c0d6e1c1d7e2c5dbe6c3dbe5c6dde6c4dae4c4dae5c0d6e2aac2d0a7beccc7dee6c7dee6","edge":"cut"},"habitat":{"src":"img/blue-habitat.jpg","w":1600,"h":1067,"bg":"3647603a4c6634445e697a985e6d8b9ea1aaa2a1aa5c6f8f6c7c9b62728ea7acb8647594","edge":"busy","tall":{"src":"img/blue-habitat-portrait.jpg","w":1000,"h":1250}},"turn":{"src":"img/turn-blue.jpg","w":480,"h":432,"bg":"c5dbe6c4dae5c6dce7c6dce7c6dce7c5dbe6c4dae5c6dce7c7dde8c5dbe6c8dee8c8dee8","edge":"cut"}},"place":"in snow country at blue hour"},{"k":"violet","num":"06","name":"Haze","icon":"haze","tint":"Translucent violet","line":"Dusk, kept indoors.","cover":"Deep violet","col":"#6C4BA3","hue":5,"coin":5,"views":{"on":{"src":"img/violet-on.jpg","w":900,"h":1800,"bg":"cfccdfccc9dececbe0cbc8ddcac7dbd0cfe1cdcbdfcdcbe0bab8cea6a3bad4d1e4c3c2d4"},"off":{"src":"img/violet-off.jpg","w":900,"h":1800,"bg":"cfccdfccc9dececbe0cbc8ddcac7dbd0cfe1cdcbdfcecce0bab8cda6a3bad4d1e4c3c2d4"},"back":{"src":"img/violet-back.jpg","w":880,"h":1100,"bg":"cbc8dcccc9ddcdcadfccc9decfcce0ccc9ddccc9dec4c0d7b1afc5b0acc3d1cee1c3c0d1"},"amp":{"src":"img/violet-amp.jpg","w":880,"h":1100,"bg":"1d1a2e0a031a1a172a211c32221c3620094612022c321e5934215b3c2768483968483966","edge":"busy"},"horn-side":{"src":"img/violet-horn-side.jpg","w":1000,"h":750,"bg":"ccc9dccbc8ddcdcaddcfccdfceccdfcecbdeccc9dcceccdfcfcee0cccbddd0cde0d0cde0","edge":"cut"},"horn-back":{"src":"img/violet-horn-back.jpg","w":1000,"h":750,"bg":"ccc9dccbc8ddcdcaddceccdfceccdfcdcaddccc9dccdcaddcdcadec7c4d9cfcde0cfcde0","edge":"cut"},"inside":{"src":"img/violet-inside.jpg","w":880,"h":1100,"bg":"c9c6dacbc8dbcecbe0cdcadfcfcce0cdcadecdcadfc9c7dcb3b1c7b0acc3d0cde0d0cde0","edge":"cut"},"habitat":{"src":"img/violet-habitat.jpg","w":1600,"h":1067,"bg":"d8c4c3d0bfc5bda7b2846f86b99c90e7d2cde9d3d0baa6b295808a9e8178f0dcd8a98d84","edge":"busy","tall":{"src":"img/violet-habitat-portrait.jpg","w":1000,"h":1250}},"turn":{"src":"img/turn-violet.jpg","w":480,"h":432,"bg":"cecbdecdcadfcfccdfcfccdfceccdfcecbdecdcaddcfccdfcfcee0cdccded1cee1d1cee1","edge":"cut"}},"place":"before layered hills in a hazy evening light"},{"k":"ice","num":"07","name":"Fog","icon":"fog","tint":"Water-clear","line":"Now you see it.","cover":"White","col":"#F6F8F8","hue":null,"coin":6,"views":{"on":{"src":"img/ice-on.jpg","w":900,"h":1800,"bg":"bfd5ddbcd3dbbed5ddbbd2dabad1d9c0d7dfbdd4dcbed5ddacc2cd99b0bbc6dae3b9ced6"},"off":{"src":"img/ice-off.jpg","w":900,"h":1800,"bg":"bfd5debcd3dbbed5ddbbd2dabad1d9c0d7dfbcd4dcbed5deacc2cd99b0bbc6dae3b8cdd4"},"back":{"src":"img/ice-back.jpg","w":880,"h":1100,"bg":"bbd2dabbd2dabed5ddbcd2dcbfd6debcd3dbbcd3dbbad1d9a8bec9a2b8c3c1d8e0b5cad1"},"amp":{"src":"img/ice-amp.jpg","w":880,"h":1100,"bg":"343838111817212c2e2e383b333d405e696c2e37357081867385898699a08e95938e9593","edge":"busy"},"horn-side":{"src":"img/ice-horn-side.jpg","w":1000,"h":750,"bg":"bbd2dabad1d9bcd3dbbed5ddbed5ddbfd4dcbcd3dbbfd5ddc0d6dfbed4dcc0d7dfc0d7df","edge":"cut"},"horn-back":{"src":"img/ice-horn-back.jpg","w":1000,"h":750,"bg":"bbd2dabad1d9bcd3dbbed5ddbed5ddbed4dcbcd3dbbed5ddbfd6debed4dcbfd6debfd6de","edge":"cut"},"inside":{"src":"img/ice-inside.jpg","w":880,"h":1100,"bg":"b9d0d8bad1d9bdd4dcbcd2ddbfd6debcd3dbbcd3dbbbd2daa7bdc8a2b8c3c0d7dfc0d7df","edge":"cut"},"habitat":{"src":"img/ice-habitat.jpg","w":1600,"h":1067,"bg":"b1b1aa7d7a6fc3beab3c3b2823251e9a9f9b595e5d9c97862e31241b1d15b8bcb7b8bcb7","edge":"busy","tall":{"src":"img/ice-habitat-portrait.jpg","w":1000,"h":1250}},"turn":{"src":"img/turn-ice.jpg","w":480,"h":432,"bg":"bdd4dcbcd3dbbfd6debfd6debed5ddbed5ddbdd4dcbfd6dec0d7dfbed5ddc0d7dfc0d7df","edge":"cut"}},"place":"on a headland above the fog at dawn"},{"k":"black","num":"08","name":"Smoke","icon":"smoke","tint":"Smoked black","line":"Where there's smoke.","cover":"Black","col":"#34323A","hue":null,"coin":7,"views":{"on":{"src":"img/black-on.jpg","w":900,"h":1800,"bg":"cdd2cecacfcbccd1cdc9cecac7ccc8cfd4cfccd1ccccd1ceb7bcbba2a6a6d2d7d3c1c6c2"},"off":{"src":"img/black-off.jpg","w":900,"h":1800,"bg":"cdd2cecacfcbccd1cdc9cecac7ccc8cfd4cfccd1ccccd1ceb7bcbba2a6a6d2d7d3c0c5c2"},"back":{"src":"img/black-back.jpg","w":880,"h":1100,"bg":"c9cdcac9cecaccd1cdcacfcbcdd1cecacfcbcacfccc1c5c4adb3b3acb0afcfd3d0c0c5c1"},"amp":{"src":"img/black-amp.jpg","w":880,"h":1100,"bg":"10141600020314181917191b17181a01020601010312131714151917181c191c23212226","edge":"busy"},"horn-side":{"src":"img/black-horn-side.jpg","w":1000,"h":750,"bg":"c9cecac8cdc9cbd0cccdd2ceccd1cdccd0cccacfcbcdd1cdced3cfcbd0ccced3cfced3cf","edge":"cut"},"horn-back":{"src":"img/black-horn-back.jpg","w":1000,"h":750,"bg":"cacfcbc8cdc9cbd0cccdd2ceccd1cdcbd0cccacdcacbd0cccacfcbc4c9c5cdd2cecdd2ce","edge":"cut"},"inside":{"src":"img/black-inside.jpg","w":880,"h":1100,"bg":"c7cbc8c8cdc9ccd1cdcbcfcccdd2cecacfcbcbd0ccc7cbcab0b5b5acb0afcfd2cfcfd2cf","edge":"cut"},"habitat":{"src":"img/black-habitat.jpg","w":1600,"h":1067,"bg":"553e26523a2246301c4b331d402b199c8f869a85767b5e46291b122a1c129b8572291c12","edge":"busy","tall":{"src":"img/black-habitat-portrait.jpg","w":1000,"h":1250}},"turn":{"src":"img/turn-black.jpg","w":480,"h":432,"bg":"ccd1cdcacfcbcdd2cecdd2cecdd2ceccd1cdcacfcbcdd2ceced3cfccd1cdcfd4d0cfd4d0","edge":"cut"}},"place":"in a pine wood at dawn, in shafts of woodsmoke"}],"hues":["#D2382F","#E5732A","#E9B320","#4F7F3A","#4A90C8","#6C4BA3"]}, BY = Object.fromEntries(D.clouds.map(c => [c.k, c]));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, TAU = Math.PI * 2;
 // lit from below: scrolling through the run cross-fades the eight (each picture lies over the one before and fades in over
 // its share of the run); the coins say where you are and jump there. Under reduced motion the coins simply pick one.
@@ -572,46 +603,73 @@ document.getElementById('copy').addEventListener('click', () => {
   try { navigator.clipboard.writeText(text).then(done, pickText); } catch (e) { pickText(); }
 });
 
-// a speaker's page
+// a speaker's page: its pictures as a shop shows them, the photograph in its element first, then the rest one at a time
+// (the arrows, a swipe, the arrow keys, or the strip of thumbnails)
 const VIEWS = [
+  ['habitat', 'In its element', c => `${c.name} ${c.place}.`],
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
+  ['studio-light', 'In the studio', c => `${c.name} in the studio, on a pale ground.`],
   ['studio', 'In the studio', c => `${c.name} in the studio, the light coming through its acrylic.`],
-  ['studio-light', 'On pale grey', c => `${c.name} in the studio, on a pale ground.`],
   ['back', 'From behind', c => `From behind: the name cut into the back and filled with colour, grips in the sides, the amplifier below.`],
   ['amp', 'The amplifier', c => `The built-in amplifier, a Hypex FusionAmp FA122: analogue and AES in on XLRs with links out, RCA, S/PDIF, optical, and the mains switch.`],
-  ['inside', 'Inside', c => `Inside, a corner cut away: the woofer's motor, the batts in their voile sleeves, a port.`],
   ['horn-side', 'Horn, side', c => `The horn in profile: the flare, the driver's pod, four slim posts.`],
   ['horn-back', 'Horn, behind', c => `The horn from behind, its cap twisted shut.`],
-  ['turn', 'Turning', c => `Drag to spin it.`],
+  ['inside', 'Inside', c => `Inside, a corner cut away: the woofer's motor, the batts in their voile sleeves, a port.`],
   ['reel', 'Lit from below', c => `${c.name} on a light, its colour thrown up the wall behind it.`],
-  ['habitat', 'At home', c => `${c.name} in its own weather.`],
+  ['turn', 'Turning', c => `Drag to spin it.`],
 ];
-const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs');
-let cur = null, view = 'on', turnFrame = 0, autoTurn = null;
+const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs'), phone = matchMedia('(max-width: 700px)');
+let cur = null, view = 'habitat', turnFrame = 0, autoTurn = null;
 function src(c, v) { return c.views[v]; }
-function showView(v, focus) {
-  const c = BY[cur]; view = v;
-  const s = src(c, v);
-  cancelAnimationFrame(autoTurn);
-  if (v === 'turn') {
-    const sp = el('div', { class: 'spin', role: 'img', 'aria-label': `${c.name}'s horn; drag to spin it`,
-      style: `background-image:url(${s.src});aspect-ratio:${s.w} / ${s.h};--ar:${(s.w / s.h).toFixed(4)}` });
-    stage.replaceChildren(sp);
-    turnFrame = 0; sp.style.backgroundPosition = frameAt(0);
-    draggable(sp, (d, start, base) => { if (start) return turnFrame; turnFrame = ((base - d) % N + N) % N; sp.style.backgroundPosition = frameAt(turnFrame); });
-    if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
-      sp.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }
-  } else {
-    const shot = el('div', { class: 'shot' });
-    shot.appendChild(el('img', { src: s.src, width: s.w, height: s.h, alt: VIEWS.find(x => x[0] === v)[2](c) }));
-    if (v === 'inside' && s.shared && cur !== 'green') shot.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
-    stage.replaceChildren(shot);
-  }
-  document.getElementById('cap').textContent = VIEWS.find(x => x[0] === v)[2](c);
-  thumbs.querySelectorAll('button').forEach(b => { const sel = b.dataset.v === v; b.setAttribute('aria-selected', String(sel)); b.tabIndex = sel ? 0 : -1;
-    if (sel) stage.setAttribute('aria-labelledby', b.id); if (sel && focus) b.focus(); });
+const say = (c, v) => VIEWS.find(x => x[0] === v)[2](c);
+const shown = c => VIEWS.map(x => x[0]).filter(v => c.views[v] && !(v === 'studio' && c.views['studio-light']));   // the bright studio won
+// the stage's ground for a picture: its sides' colours when it is narrower than the stage, its top's and bottom's when wider
+// (a close-up has a blurred copy of itself instead, and one cut off at the foot sits on the stage's foot under its top's colour)
+function ground(v) {
+  const s = src(BY[cur], v);
+  if (!s || !s.bg || s.edge === 'busy') return '';
+  const c = s.bg.match(/.{6}/g).map(h => '#' + h), stops = cs => cs.map((x, i) => `${x} ${10 + 20 * i}%`).join(', ');
+  if (v === 'habitat') return c[10];
+  return s.w / s.h <= stage.clientWidth / Math.max(1, stage.clientHeight)
+    ? `linear-gradient(${stops(c.slice(0, 5))}) left / 51% 100% no-repeat, linear-gradient(${stops(c.slice(5, 10))}) right / 51% 100% no-repeat`
+    : s.edge === 'cut' ? c[10] : `linear-gradient(${c[10]} 50%, ${c[11]} 50%)`;
 }
+new ResizeObserver(() => { if (cur) stage.style.background = ground(view); }).observe(stage);
+function showView(v, focus) {
+  const c = BY[cur], list = shown(c), i = list.indexOf(v); view = v;
+  const s = src(c, v), ar = (s.w / s.h).toFixed(4);
+  cancelAnimationFrame(autoTurn);
+  let pic;
+  if (v === 'turn') {
+    pic = el('div', { class: 'fit spin' + (s.edge === 'cut' ? ' cut' : ''), role: 'img', 'aria-label': `${c.name}'s horn; drag to spin it`, style: `background-image:url(${s.src});--ar:${ar}` });
+    turnFrame = 0; pic.style.backgroundPosition = frameAt(0);
+    draggable(pic, (d, start, base) => { if (start) return turnFrame; turnFrame = ((base - d) % N + N) % N; pic.style.backgroundPosition = frameAt(turnFrame); });
+    if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
+      pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }
+  } else if (v === 'habitat') {
+    pic = el('picture', { class: 'fill' }, (s.tall ? `<source media="(max-width: 700px)" srcset="${s.tall.src}" width="${s.tall.w}" height="${s.tall.h}">` : '')
+      + `<img src="${s.src}" width="${s.w}" height="${s.h}" alt="" draggable="false">`);
+    pic.querySelector('img').alt = say(c, v);
+  } else {
+    pic = el('img', { class: 'fit' + (s.edge === 'cut' ? ' cut' : ''), src: s.src, width: s.w, height: s.h, alt: say(c, v), draggable: 'false', style: `--ar:${ar}` });
+  }
+  if (!reduce) pic.classList.add('in');
+  stage.replaceChildren(pic);
+  if (s.edge === 'busy') stage.prepend(el('div', { class: 'blur', 'aria-hidden': 'true', style: `background-image:url(${s.src})` }));
+  if (v === 'inside' && s.shared && cur !== 'green') stage.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
+  stage.style.background = ground(v);
+  document.getElementById('cap').textContent = say(c, v);
+  document.getElementById('g-count').textContent = `${i + 1} / ${list.length}`;
+  thumbs.querySelectorAll('button').forEach(b => { const sel = b.dataset.v === v; b.setAttribute('aria-selected', String(sel)); b.tabIndex = sel ? 0 : -1;
+    if (!sel) return;
+    stage.setAttribute('aria-labelledby', b.id);
+    thumbs.scrollTo({ left: b.offsetLeft - (thumbs.clientWidth - b.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    if (focus) b.focus({ preventScroll: true }); });
+  for (const n of [list[(i + 1) % list.length], list[(i + list.length - 1) % list.length]]) {   // the neighbours load while this one is looked at
+    const t = src(c, n); if (n !== 'turn') new Image().src = (n === 'habitat' && phone.matches && t.tall ? t.tall : t).src; }
+}
+function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
 function renderPDP(k) {
   const c = BY[k], first = cur === null; cur = k;
   document.getElementById('p-crumb').textContent = c.name;
@@ -628,19 +686,29 @@ function renderPDP(k) {
   document.getElementById('swatches').replaceChildren(...D.clouds.map(o => { const li = el('li');
     const a = el('a', { href: `#speaker-${o.k}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
       `<span class="coin-dot" style="--i:${o.coin}"></span>`); li.appendChild(a); return li; }));
-  thumbs.replaceChildren(...VIEWS.filter(([v]) => c.views[v]).map(([v, label], i) => { const s = src(c, v);
+  thumbs.replaceChildren(...shown(c).map((v, i) => { const s = src(c, v), label = VIEWS.find(x => x[0] === v)[1];
     const b = el('button', { type: 'button', role: 'tab', id: `thumb-${i}`, 'data-v': v, 'aria-label': label, 'aria-controls': 'stage',
       class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
     b.addEventListener('click', () => showView(v)); return b; }));
   document.getElementById('others').replaceChildren(...D.clouds.filter(o => o.k !== k).map(o => { const li = el('li');
     li.appendChild(el('a', { href: `#speaker-${o.k}` }, `<img src="${o.views.off.src}" alt="" loading="lazy" width="${o.views.off.w}" height="${o.views.off.h}"><span>${o.name}</span>`)); return li; }));
-  showView(first ? 'on' : view);
+  showView(shown(c)[0]);                              // each speaker opens on its photograph in its element
   goesWith(c);
 }
-thumbs.addEventListener('keydown', e => {
-  const i = VIEWS.findIndex(x => x[0] === view);
-  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); showView(VIEWS[(i + (e.key === 'ArrowRight' ? 1 : VIEWS.length - 1)) % VIEWS.length][0], true); }
-});
+document.getElementById('g-prev').addEventListener('click', () => go(-1));
+document.getElementById('g-next').addEventListener('click', () => go(1));
+const keys = (e, focus) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(e.key === 'ArrowRight' ? 1 : -1, focus); }
+  else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); const l = shown(BY[cur]); showView(l[e.key === 'Home' ? 0 : l.length - 1], focus); }
+};
+thumbs.addEventListener('keydown', e => keys(e, true));
+stage.addEventListener('keydown', e => keys(e, false));
+// a swipe across the stage turns the page; on the turning horn a drag spins it instead
+let sx = null, sy = 0;
+stage.addEventListener('pointerdown', e => { if (view !== 'turn' && e.isPrimary) { sx = e.clientX; sy = e.clientY; } });
+stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+  if (Math.abs(dx) > 40 && Math.abs(dx) > 1.2 * Math.abs(dy)) go(dx < 0 ? 1 : -1); });
+stage.addEventListener('pointercancel', () => { sx = null; });
 document.getElementById('p-turn').addEventListener('click', () => { showView('turn'); stage.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' }); });
 
 // what goes with a colour (round 25): never another speaker, but the things round it, by the painter's wheel

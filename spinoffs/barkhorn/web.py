@@ -59,6 +59,16 @@ ELEMENT = dict(HABITAT)       # which concept each colour shows in its element: 
 ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a blind duel, 2 to 1 (6.2 to 5.9)
 ELEMENT['amber'] = 'acid_b'   # acid rain on black lava beat the acid spring at Dallol in a blind duel, 2 to 1 (6.3 to 5.4)
 ELEMENT['ice'] = 'fog_b'      # the headland above the fog at dawn beat the summit above a sea of cloud in a blind duel, 3 to 0 (6.7 to 4.7)
+PLACES = {  # where each concept stands: the speaker page leads with it ("Ember on a lava field at blue hour.")
+    'ember': 'on a lava field at blue hour, the crust cracked to its glow',
+    'dust': 'on rippled sand in the Southwest at golden hour',
+    'acid': 'by the acid springs of Dallol', 'acid_b': 'in acid rain on black lava',
+    'poison': 'on a redwood forest floor, among ferns',
+    'ice': 'in snow country at blue hour', 'ice_b': 'on a black-sand beach among icebergs at sunrise',
+    'haze': 'in a lavender field at dusk', 'haze_b': 'before layered hills in a hazy evening light',
+    'fog': 'on a summit above a sea of cloud', 'fog_b': 'on a headland above the fog at dawn',
+    'smoke': 'in a pine wood at dawn, in shafts of woodsmoke', 'smoke_b': 'in a misty birch wood',
+}
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 TITLE = 'EARF · Atmosphere'
 DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours named for things in the air. '
@@ -233,6 +243,22 @@ def image_meta():
     """The pictures as they stand in site/img: each speaker's views (src, w, h), the inside shot, and each card's panel
     colour (the photograph's corner)."""
     size = lambda n: Image.open(os.path.join(IMG, n)).size
+
+    def ground(n, box=None):
+        """The colours round a picture's edge, so the stage can carry its ground past it: five down the left side, five
+        down the right, then the top's and the bottom's (the top's again where the subject runs off the bottom), as hex;
+        and how its edges run: 'busy' for a close-up whose subject runs off the sides (a blurred copy of it fills the
+        stage instead), 'cut' for one whose subject runs off the bottom (it sits on the stage's foot)."""
+        im = Image.open(os.path.join(IMG, n)).convert('RGB')
+        a = np.asarray(im.crop(box) if box else im).astype(np.float32)
+        h, lum = a.shape[0], a.mean(2)
+        side = lambda e: [np.median(e[h * i // 5:h * (i + 1) // 5].reshape(-1, 3), 0) for i in range(5)]
+        top, bot = a[:8].reshape(-1, 3), a[-8:].reshape(-1, 3)
+        cut = lum[-8:].std() > 20
+        busy = np.concatenate([lum[:, :8].ravel(), lum[:, -8:].ravel()]).std() > 14 or lum[:8].std() > 8
+        hexes = ''.join('%02x%02x%02x' % tuple(int(round(float(x))) for x in c)
+                        for c in side(a[:, :8]) + side(a[:, -8:]) + [np.median(top, 0), np.median(top if cut else bot, 0)])
+        return dict(bg=hexes, **({'edge': 'busy'} if busy else {'edge': 'cut'} if cut else {}))
     meta, panel = {}, {}
     for k in KEYS:
         views = {}
@@ -243,12 +269,15 @@ def image_meta():
             if not os.path.exists(os.path.join(IMG, n)):
                 continue                                # round 31's pictures appear as they arrive
             w, h = size(n)
-            views[v] = dict(src=f'img/{n}', w=w, h=h)
+            views[v] = dict(src=f'img/{n}', w=w, h=h, **ground(n))
         if 'inside' not in views:                       # the shared cutaway (Poison's) until a colour has its own
             w, h = size('inside.jpg')
-            views['inside'] = dict(src='img/inside.jpg', w=w, h=h, shared=True)
+            views['inside'] = dict(src='img/inside.jpg', w=w, h=h, **ground('inside.jpg'), shared=True)
+        if 'habitat' in views and os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg')):
+            w, h = size(f'{k}-habitat-portrait.jpg')    # its phone frame, for the stage's phone shape
+            views['habitat']['tall'] = dict(src=f'img/{k}-habitat-portrait.jpg', w=w, h=h)
         w, h = size(f'turn-{k}.jpg')
-        views['turn'] = dict(src=f'img/turn-{k}.jpg', w=w // 6, h=h // 4)
+        views['turn'] = dict(src=f'img/turn-{k}.jpg', w=w // 6, h=h // 4, **ground(f'turn-{k}.jpg', (0, 0, w // 6, h // 4)))
         meta[k] = views
         corner = np.asarray(Image.open(os.path.join(IMG, f'{k}-on.jpg')).convert('RGB'))[3:19, 3:19].reshape(-1, 3).mean(0)
         panel[k] = '#%02X%02X%02X' % tuple(int(x) for x in corner)
@@ -379,7 +408,8 @@ def body():
            'match. Or clash, if you prefer.</p>' + figs + '\n  </div></section>')
     data = dict(
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
-                     coin=coin[k], views=meta[k]) for k, num, name, icon, tint, line, cover in CLOUDS],
+                     coin=coin[k], views=meta[k], place=PLACES.get(ELEMENT[k], 'in its own weather'))
+                for k, num, name, icon, tint, line, cover in CLOUDS],
         hues=E.HUES)
     # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
     # give way on phones to the names under it, the boxes being the landscape frame's
@@ -646,17 +676,43 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 /* a speaker's page */
 .crumbs { padding-block: 22px 0; font-size: 15px; color: var(--muted) }
 .crumbs a { color: var(--ink); text-underline-offset: 4px }
-.pdp { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); gap: 44px; align-items: start; padding-block: 18px 64px }
+.pdp { display: grid; grid-template-columns: minmax(0, 1.62fr) minmax(0, 0.82fr); gap: 40px; align-items: start; padding-block: 18px 64px }
 .gallery { display: grid; gap: 12px; min-width: 0 }
-.stage { --h: min(78vh, 780px); position: relative; height: var(--h); display: grid; place-items: center }
-.stage .shot { position: relative; display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; min-width: 0 }
-.stage img { max-width: 100%; max-height: var(--h); width: auto; height: auto; display: block; border-radius: 6px }
-.stage .spin { width: min(100%, calc(var(--h) * var(--ar))); border-radius: 6px }
+/* the pictures, one at a time on a stage the photograph's shape (3:2, and 4:5 on phones), each carried to the stage's
+   edges on its own ground: the colours down its sides, or above and below it */
+.frame { position: relative; min-width: 0 }
+.stage { position: relative; aspect-ratio: 3 / 2; width: 100%; max-width: 100%; container-type: size; display: grid; place-items: center;
+  overflow: hidden; border-radius: 6px; background: var(--paper); touch-action: pan-y; -webkit-user-select: none; user-select: none }
+.stage:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px }
+.stage > * { grid-area: 1 / 1 }
+.stage .fill, .stage .fill img { width: 100%; height: 100%; display: block; object-fit: cover }
+.stage .fit { width: min(100cqw, calc(100cqh * var(--ar))); max-width: 100%; aspect-ratio: var(--ar); height: auto; display: block; border-radius: 0;
+  -webkit-user-drag: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%, #000 97%, transparent);
+  -webkit-mask-composite: source-in; mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent),
+  linear-gradient(transparent, #000 3%, #000 97%, transparent); mask-composite: intersect }
+.stage .fit.cut { align-self: end;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%);
+  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent), linear-gradient(transparent, #000 3%) }
+.stage .blur { width: 100%; height: 100%; background: center / cover no-repeat; filter: blur(28px) saturate(1.1); transform: scale(1.15) }
+.stage .in { animation: g-in 0.24s ease-out }
+@keyframes g-in { from { opacity: 0 } }
 .stage .tag { position: absolute; left: 12px; bottom: 12px; font: 500 12px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--on-photo); background: var(--veil); border-radius: 999px; padding: 7px 10px }
-.thumbs { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 8px }
-.thumb { position: relative; aspect-ratio: 4 / 5; border-radius: 4px; overflow: hidden; border: 1px solid var(--rule); padding: 0; cursor: pointer;
-  background-color: var(--paper) }
+.nav { position: absolute; top: 50%; translate: 0 -50%; z-index: 2; width: 44px; height: 44px; border-radius: 50%; border: 0; padding: 0;
+  display: grid; place-items: center; color: var(--on-photo); background: var(--veil); cursor: pointer; box-shadow: 0 1px 8px rgba(0, 0, 0, 0.14) }
+.nav.prev { left: 12px } .nav.next { right: 12px }
+.nav svg { width: 18px; height: 18px; display: block }
+.nav:hover { box-shadow: inset 0 0 0 1.5px var(--on-photo), 0 1px 8px rgba(0, 0, 0, 0.14) }
+.nav:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px }
+.count { position: absolute; right: 12px; bottom: 12px; z-index: 2; font: 500 12px/1 var(--mono); letter-spacing: 0.08em; color: var(--on-photo);
+  background: var(--veil); border-radius: 999px; padding: 7px 10px; pointer-events: none }
+.thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(56px, 84px); gap: 8px; overflow-x: auto; scrollbar-width: none;
+  padding: 4px; margin: -4px; position: relative; scroll-snap-type: x proximity }
+.thumbs::-webkit-scrollbar { display: none }
+.thumb { aspect-ratio: 1; border-radius: 4px; border: 1px solid var(--rule); padding: 0; cursor: pointer; background-color: var(--paper);
+  scroll-snap-align: start; opacity: 0.8; transition: opacity 0.15s }
+.thumb:hover, .thumb[aria-selected="true"] { opacity: 1 }
 .thumb[aria-selected="true"] { outline: 2px solid var(--ink); outline-offset: 2px }
 .cap { margin: 0; color: var(--muted); font-size: 15px; max-width: 62ch }
 .buy { position: sticky; top: calc(var(--header) + 24px); display: grid; gap: 18px; min-width: 0; background: var(--page) }
@@ -666,8 +722,8 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .buy .line { margin: 0; font-size: 18px }
 .price { margin: 0; font-size: 20px; font-weight: 600 }
 .price span { font-weight: 400; color: var(--muted); font-size: 16px }
-.swatches { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none }
-.swatches a { display: block; width: 48px; height: 48px; border-radius: 50%; position: relative }
+.swatches { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none }
+.swatches a { display: block; width: 40px; height: 40px; border-radius: 50%; position: relative }
 .swatches a[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 3px }
 .swatches .coin-dot { width: 100%; height: 100%; display: block }
 .pick { margin: -6px 0 0; font-size: 15px; color: var(--muted) }
@@ -705,14 +761,14 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
   .horns { grid-template-columns: repeat(2, minmax(0, 1fr)) }
   nav ul { gap: 4px 14px } nav a { font-size: 14px }
   .band { padding-block: 52px }
-  .thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)) }
-  .stage { --h: min(70vh, 118vw) }
   .goes { grid-template-columns: 1fr } .good .art { aspect-ratio: 16 / 9 }
   .brand svg { height: 18px } .brand .globe { width: 36px; height: 36px }
 }
+@media (max-width: 700px) { .stage { aspect-ratio: 4 / 5 } .nav { width: 40px; height: 40px } .nav.prev { left: 8px } .nav.next { right: 8px }
+  .count { right: 8px; bottom: 8px } .stage .tag { left: 8px; bottom: 8px } }
 @media (max-width: 460px) { .cards { gap: 12px } .about h3 { font-size: 21px } .spec dl, .facts { grid-template-columns: 104px minmax(0, 1fr) }
   nav li.wide { display: none } }
-@media (prefers-reduced-motion: reduce) { .photo img, .spot-label { transition: none } }
+@media (prefers-reduced-motion: reduce) { .photo img, .spot-label, .thumb { transition: none } .stage .in { animation: none } }
 </style>
 
 <div class="draft"><div class="wrap"><span>Preview of earf.world &middot; a concept, not yet for sale</span></div></div>
@@ -802,9 +858,14 @@ __NEXT__
     <p class="crumbs"><a href="#atmosphere">Atmosphere</a> / <span id="p-crumb"></span></p>
     <div class="pdp">
       <section class="gallery" aria-label="Pictures">
-        <div class="stage" id="stage" role="tabpanel" aria-labelledby="thumb-0"></div>
-        <div class="thumbs" id="thumbs" role="tablist" aria-label="Views"></div>
-        <p class="cap" id="cap"></p>
+        <div class="frame">
+          <div class="stage" id="stage" role="tabpanel" aria-labelledby="thumb-0" tabindex="0"></div>
+          <button type="button" class="nav prev" id="g-prev" aria-label="Previous picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11.5 3.5 6 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button type="button" class="nav next" id="g-next" aria-label="Next picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 3.5 12 9l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="count" id="g-count" aria-hidden="true"></span>
+        </div>
+        <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures of this speaker"></div>
+        <p class="cap" id="cap" aria-live="polite"></p>
       </section>
       <aside class="buy" aria-label="This speaker">
         <p class="num"><span class="pic" id="p-icon"></span><span id="p-num"></span></p>
@@ -944,46 +1005,73 @@ document.getElementById('copy').addEventListener('click', () => {
   try { navigator.clipboard.writeText(text).then(done, pickText); } catch (e) { pickText(); }
 });
 
-// a speaker's page
+// a speaker's page: its pictures as a shop shows them, the photograph in its element first, then the rest one at a time
+// (the arrows, a swipe, the arrow keys, or the strip of thumbnails)
 const VIEWS = [
+  ['habitat', 'In its element', c => `${c.name} ${c.place}.`],
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
+  ['studio-light', 'In the studio', c => `${c.name} in the studio, on a pale ground.`],
   ['studio', 'In the studio', c => `${c.name} in the studio, the light coming through its acrylic.`],
-  ['studio-light', 'On pale grey', c => `${c.name} in the studio, on a pale ground.`],
   ['back', 'From behind', c => `From behind: the name cut into the back and filled with colour, grips in the sides, the amplifier below.`],
   ['amp', 'The amplifier', c => `The built-in amplifier, a Hypex FusionAmp FA122: analogue and AES in on XLRs with links out, RCA, S/PDIF, optical, and the mains switch.`],
-  ['inside', 'Inside', c => `Inside, a corner cut away: the woofer's motor, the batts in their voile sleeves, a port.`],
   ['horn-side', 'Horn, side', c => `The horn in profile: the flare, the driver's pod, four slim posts.`],
   ['horn-back', 'Horn, behind', c => `The horn from behind, its cap twisted shut.`],
-  ['turn', 'Turning', c => `Drag to spin it.`],
+  ['inside', 'Inside', c => `Inside, a corner cut away: the woofer's motor, the batts in their voile sleeves, a port.`],
   ['reel', 'Lit from below', c => `${c.name} on a light, its colour thrown up the wall behind it.`],
-  ['habitat', 'At home', c => `${c.name} in its own weather.`],
+  ['turn', 'Turning', c => `Drag to spin it.`],
 ];
-const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs');
-let cur = null, view = 'on', turnFrame = 0, autoTurn = null;
+const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs'), phone = matchMedia('(max-width: 700px)');
+let cur = null, view = 'habitat', turnFrame = 0, autoTurn = null;
 function src(c, v) { return c.views[v]; }
-function showView(v, focus) {
-  const c = BY[cur]; view = v;
-  const s = src(c, v);
-  cancelAnimationFrame(autoTurn);
-  if (v === 'turn') {
-    const sp = el('div', { class: 'spin', role: 'img', 'aria-label': `${c.name}'s horn; drag to spin it`,
-      style: `background-image:url(${s.src});aspect-ratio:${s.w} / ${s.h};--ar:${(s.w / s.h).toFixed(4)}` });
-    stage.replaceChildren(sp);
-    turnFrame = 0; sp.style.backgroundPosition = frameAt(0);
-    draggable(sp, (d, start, base) => { if (start) return turnFrame; turnFrame = ((base - d) % N + N) % N; sp.style.backgroundPosition = frameAt(turnFrame); });
-    if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
-      sp.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }
-  } else {
-    const shot = el('div', { class: 'shot' });
-    shot.appendChild(el('img', { src: s.src, width: s.w, height: s.h, alt: VIEWS.find(x => x[0] === v)[2](c) }));
-    if (v === 'inside' && s.shared && cur !== 'green') shot.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
-    stage.replaceChildren(shot);
-  }
-  document.getElementById('cap').textContent = VIEWS.find(x => x[0] === v)[2](c);
-  thumbs.querySelectorAll('button').forEach(b => { const sel = b.dataset.v === v; b.setAttribute('aria-selected', String(sel)); b.tabIndex = sel ? 0 : -1;
-    if (sel) stage.setAttribute('aria-labelledby', b.id); if (sel && focus) b.focus(); });
+const say = (c, v) => VIEWS.find(x => x[0] === v)[2](c);
+const shown = c => VIEWS.map(x => x[0]).filter(v => c.views[v] && !(v === 'studio' && c.views['studio-light']));   // the bright studio won
+// the stage's ground for a picture: its sides' colours when it is narrower than the stage, its top's and bottom's when wider
+// (a close-up has a blurred copy of itself instead, and one cut off at the foot sits on the stage's foot under its top's colour)
+function ground(v) {
+  const s = src(BY[cur], v);
+  if (!s || !s.bg || s.edge === 'busy') return '';
+  const c = s.bg.match(/.{6}/g).map(h => '#' + h), stops = cs => cs.map((x, i) => `${x} ${10 + 20 * i}%`).join(', ');
+  if (v === 'habitat') return c[10];
+  return s.w / s.h <= stage.clientWidth / Math.max(1, stage.clientHeight)
+    ? `linear-gradient(${stops(c.slice(0, 5))}) left / 51% 100% no-repeat, linear-gradient(${stops(c.slice(5, 10))}) right / 51% 100% no-repeat`
+    : s.edge === 'cut' ? c[10] : `linear-gradient(${c[10]} 50%, ${c[11]} 50%)`;
 }
+new ResizeObserver(() => { if (cur) stage.style.background = ground(view); }).observe(stage);
+function showView(v, focus) {
+  const c = BY[cur], list = shown(c), i = list.indexOf(v); view = v;
+  const s = src(c, v), ar = (s.w / s.h).toFixed(4);
+  cancelAnimationFrame(autoTurn);
+  let pic;
+  if (v === 'turn') {
+    pic = el('div', { class: 'fit spin' + (s.edge === 'cut' ? ' cut' : ''), role: 'img', 'aria-label': `${c.name}'s horn; drag to spin it`, style: `background-image:url(${s.src});--ar:${ar}` });
+    turnFrame = 0; pic.style.backgroundPosition = frameAt(0);
+    draggable(pic, (d, start, base) => { if (start) return turnFrame; turnFrame = ((base - d) % N + N) % N; pic.style.backgroundPosition = frameAt(turnFrame); });
+    if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
+      pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }
+  } else if (v === 'habitat') {
+    pic = el('picture', { class: 'fill' }, (s.tall ? `<source media="(max-width: 700px)" srcset="${s.tall.src}" width="${s.tall.w}" height="${s.tall.h}">` : '')
+      + `<img src="${s.src}" width="${s.w}" height="${s.h}" alt="" draggable="false">`);
+    pic.querySelector('img').alt = say(c, v);
+  } else {
+    pic = el('img', { class: 'fit' + (s.edge === 'cut' ? ' cut' : ''), src: s.src, width: s.w, height: s.h, alt: say(c, v), draggable: 'false', style: `--ar:${ar}` });
+  }
+  if (!reduce) pic.classList.add('in');
+  stage.replaceChildren(pic);
+  if (s.edge === 'busy') stage.prepend(el('div', { class: 'blur', 'aria-hidden': 'true', style: `background-image:url(${s.src})` }));
+  if (v === 'inside' && s.shared && cur !== 'green') stage.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
+  stage.style.background = ground(v);
+  document.getElementById('cap').textContent = say(c, v);
+  document.getElementById('g-count').textContent = `${i + 1} / ${list.length}`;
+  thumbs.querySelectorAll('button').forEach(b => { const sel = b.dataset.v === v; b.setAttribute('aria-selected', String(sel)); b.tabIndex = sel ? 0 : -1;
+    if (!sel) return;
+    stage.setAttribute('aria-labelledby', b.id);
+    thumbs.scrollTo({ left: b.offsetLeft - (thumbs.clientWidth - b.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
+    if (focus) b.focus({ preventScroll: true }); });
+  for (const n of [list[(i + 1) % list.length], list[(i + list.length - 1) % list.length]]) {   // the neighbours load while this one is looked at
+    const t = src(c, n); if (n !== 'turn') new Image().src = (n === 'habitat' && phone.matches && t.tall ? t.tall : t).src; }
+}
+function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
 function renderPDP(k) {
   const c = BY[k], first = cur === null; cur = k;
   document.getElementById('p-crumb').textContent = c.name;
@@ -1000,19 +1088,29 @@ function renderPDP(k) {
   document.getElementById('swatches').replaceChildren(...D.clouds.map(o => { const li = el('li');
     const a = el('a', { href: `#speaker-${o.k}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
       `<span class="coin-dot" style="--i:${o.coin}"></span>`); li.appendChild(a); return li; }));
-  thumbs.replaceChildren(...VIEWS.filter(([v]) => c.views[v]).map(([v, label], i) => { const s = src(c, v);
+  thumbs.replaceChildren(...shown(c).map((v, i) => { const s = src(c, v), label = VIEWS.find(x => x[0] === v)[1];
     const b = el('button', { type: 'button', role: 'tab', id: `thumb-${i}`, 'data-v': v, 'aria-label': label, 'aria-controls': 'stage',
       class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
     b.addEventListener('click', () => showView(v)); return b; }));
   document.getElementById('others').replaceChildren(...D.clouds.filter(o => o.k !== k).map(o => { const li = el('li');
     li.appendChild(el('a', { href: `#speaker-${o.k}` }, `<img src="${o.views.off.src}" alt="" loading="lazy" width="${o.views.off.w}" height="${o.views.off.h}"><span>${o.name}</span>`)); return li; }));
-  showView(first ? 'on' : view);
+  showView(shown(c)[0]);                              // each speaker opens on its photograph in its element
   goesWith(c);
 }
-thumbs.addEventListener('keydown', e => {
-  const i = VIEWS.findIndex(x => x[0] === view);
-  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); showView(VIEWS[(i + (e.key === 'ArrowRight' ? 1 : VIEWS.length - 1)) % VIEWS.length][0], true); }
-});
+document.getElementById('g-prev').addEventListener('click', () => go(-1));
+document.getElementById('g-next').addEventListener('click', () => go(1));
+const keys = (e, focus) => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); go(e.key === 'ArrowRight' ? 1 : -1, focus); }
+  else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); const l = shown(BY[cur]); showView(l[e.key === 'Home' ? 0 : l.length - 1], focus); }
+};
+thumbs.addEventListener('keydown', e => keys(e, true));
+stage.addEventListener('keydown', e => keys(e, false));
+// a swipe across the stage turns the page; on the turning horn a drag spins it instead
+let sx = null, sy = 0;
+stage.addEventListener('pointerdown', e => { if (view !== 'turn' && e.isPrimary) { sx = e.clientX; sy = e.clientY; } });
+stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
+  if (Math.abs(dx) > 40 && Math.abs(dx) > 1.2 * Math.abs(dy)) go(dx < 0 ? 1 : -1); });
+stage.addEventListener('pointercancel', () => { sx = null; });
 document.getElementById('p-turn').addEventListener('click', () => { showView('turn'); stage.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' }); });
 
 // what goes with a colour (round 25): never another speaker, but the things round it, by the painter's wheel
