@@ -260,8 +260,6 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
-  "white_balance_k": 5600,
-  "white_balance_tint": 3.0,
   "look": "AgX - Base Contrast",
   "volume_bounces": 2
  },
@@ -295,7 +293,7 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "qwantani_puresky",
-  "rotation_deg": 169.0,
+  "rotation_deg": 349.0,
   "strength": 1.0,
   "res": "4k"
  },

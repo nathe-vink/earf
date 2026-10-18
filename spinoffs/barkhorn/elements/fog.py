@@ -7,7 +7,7 @@ below, a sea of cloud runs to the horizon, lit from the side by a low sun; a few
 """
 from common import area, asset, camera, finish, ground, piece, portrait_of, scatter, shot as frame, sky, sun_from_sky
 
-SKY, ROT = 'qwantani_puresky', 169.0             # the sun 28 degrees up at the front right (az 65): the sky behind at its bluest
+SKY, ROT = 'qwantani_puresky', 349.0             # the sun 28 degrees up at the front right (az 65): the sky behind at its bluest
 
 
 def birds(cx, y, cz, n=6, span=0.9, seed=2):
