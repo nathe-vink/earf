@@ -79,7 +79,7 @@
      -0.03
     ],
     "colors": {
-     "flower": "#5A4A9E",
+     "flower": "#62558E",
      "leaf": "#6B775A",
      "soil": "#7A6A58"
     }
@@ -110,84 +110,12 @@
     ],
     "seed": 7,
     "colors": {
-     "flower": "#5A4A9E",
-     "flower2": "#8466BC",
+     "flower": "#62558E",
+     "flower2": "#8676A8",
      "leaf": "#6B775A",
      "leaf2": "#8C9478",
      "stem": "#5E6B47"
     }
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "haze_el",
-    "fn": "hills",
-    "size": [
-     3000.0,
-     300.0
-    ],
-    "position": [
-     0.0,
-     600.0,
-     -0.5
-    ],
-    "height": 10.0,
-    "texture": "aerial_grass_rock",
-    "seed": 2,
-    "tint": "#5E5470",
-    "tint_mix": 0.35,
-    "cells": 400,
-    "scale": 500.0,
-    "octaves": 3,
-    "rough": 0.03
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "haze_el",
-    "fn": "hills",
-    "size": [
-     6000.0,
-     800.0
-    ],
-    "position": [
-     200.0,
-     1700.0,
-     -2.0
-    ],
-    "height": 40.0,
-    "texture": "aerial_grass_rock",
-    "seed": 5,
-    "tint": "#5E5470",
-    "tint_mix": 0.35,
-    "cells": 400,
-    "scale": 700.0,
-    "octaves": 3,
-    "rough": 0.03
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "haze_el",
-    "fn": "hills",
-    "size": [
-     12000.0,
-     1500.0
-    ],
-    "position": [
-     -500.0,
-     4200.0,
-     -6.0
-    ],
-    "height": 110.0,
-    "texture": "aerial_grass_rock",
-    "seed": 9,
-    "tint": "#5E5470",
-    "tint_mix": 0.35,
-    "cells": 400,
-    "scale": 1200.0,
-    "octaves": 3,
-    "rough": 0.03
    },
    {
     "kind": "kit",
@@ -228,18 +156,6 @@
     ],
     "seed": 4,
     "res": "1k"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "haze_el",
-    "fn": "sun",
-    "azimuth_deg": 176.0,
-    "elevation_deg": 3.4,
-    "distance": 20000.0,
-    "diameter_deg": 0.55,
-    "strength": 60.0,
-    "color": "#FF6A2A"
    }
   ]
  },
@@ -251,8 +167,8 @@
     1.2
    ],
    "orbit": {
-    "azimuth_deg": -20,
-    "elevation_deg": 8,
+    "azimuth_deg": -10,
+    "elevation_deg": 6,
     "distance_m": 3.0
    },
    "target": [
@@ -260,107 +176,32 @@
     0.0,
     0.7
    ],
-   "irradiance": 1.2,
-   "color": "#E8C8D8",
+   "irradiance": 1.6,
+   "color": "#D8D0F0",
    "receivers": [
     "[!p]*",
     "po*"
    ]
   },
-  "through": {
+  "glow": {
    "type": "area",
    "size_m": [
-    1.6,
-    2.4
+    2.0,
+    1.2
    ],
    "orbit": {
-    "azimuth_deg": 176,
-    "elevation_deg": 18,
-    "distance_m": 2.5
+    "azimuth_deg": 178,
+    "elevation_deg": 6,
+    "distance_m": 3.0
    },
    "target": [
     0.0,
     0.0,
     0.8
    ],
-   "irradiance": 9.0,
-   "color": "#FFA860",
+   "irradiance": 1.4,
+   "color": "#FFC8A0",
    "camera": false,
-   "receivers": [
-    "[!p]*",
-    "po*"
-   ]
-  },
-  "rim_l": {
-   "type": "area",
-   "size_m": [
-    0.6,
-    1.6
-   ],
-   "orbit": {
-    "azimuth_deg": -140,
-    "elevation_deg": 6,
-    "distance_m": 2.2
-   },
-   "target": [
-    0.0,
-    0.0,
-    0.7
-   ],
-   "irradiance": 3.0,
-   "color": "#FFB98A",
-   "camera": false,
-   "specular": 0,
-   "receivers": [
-    "[!p]*",
-    "po*"
-   ]
-  },
-  "rim_r": {
-   "type": "area",
-   "size_m": [
-    0.6,
-    1.6
-   ],
-   "orbit": {
-    "azimuth_deg": 145,
-    "elevation_deg": 6,
-    "distance_m": 2.2
-   },
-   "target": [
-    0.0,
-    0.0,
-    0.7
-   ],
-   "irradiance": 2.5,
-   "color": "#F5B0A0",
-   "camera": false,
-   "specular": 0,
-   "receivers": [
-    "[!p]*",
-    "po*"
-   ]
-  },
-  "card": {
-   "type": "panel",
-   "size_m": [
-    1.5,
-    1.0
-   ],
-   "position": [
-    0.0,
-    -2.0,
-    1.15
-   ],
-   "target": [
-    0.0,
-    0.0,
-    1.15
-   ],
-   "strength": 0.35,
-   "color": "#C8B0D0",
-   "diffuse": 0,
-   "specular": 1,
    "receivers": [
     "[!p]*",
     "po*"
@@ -374,7 +215,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 0.25,
+  "exposure": -1.3,
   "white_balance_k": 5600,
   "white_balance_tint": 3,
   "look": "AgX - Base Contrast"
@@ -388,7 +229,7 @@
   "position": [
    0.0,
    -9.5,
-   0.55
+   1.0
   ],
   "target": [
    0.0,
@@ -404,22 +245,22 @@
    0.66
   ],
   "shift_x": 0.0,
-  "shift_y": 0.12,
+  "shift_y": 0.06,
   "clip_end": 20000.0
  },
  "sky": {
   "kind": "hdri",
-  "polyhaven": "the_sky_is_on_fire",
-  "rotation_deg": -165.0,
-  "strength": 0.55,
+  "polyhaven": "kiara_9_dusk",
+  "rotation_deg": -128.0,
+  "strength": 1.0,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 176.0,
-  "elevation_deg": 4.5,
-  "irradiance": 15.0,
-  "angle_deg": 0.6,
-  "color": "#FF9A40"
+  "azimuth_deg": 178.0,
+  "elevation_deg": 1.5,
+  "irradiance": 2.0,
+  "angle_deg": 3.0,
+  "color": "#FFC08A"
  },
  "finish": {
   "enabled": true,
