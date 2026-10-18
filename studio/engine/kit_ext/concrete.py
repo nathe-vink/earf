@@ -11,7 +11,7 @@
   how much of it holds water (smooth, dark, mirroring), in puddles `puddle_m` across.
 - on a wall or paving, `texture` (a Poly Haven texture id: concrete_layers_02 is board-formed) uses the photographed
   set instead, laid at its real size or `tex_scale` m a tile, `res`, `bump`, its repetition broken by a slow tone
-  variation `vary` (0.25) `vary_m` across, form ties' holes on a grid `ties` [dx, dz] m; on paving, `wet` and `puddle_m` as above.
+  variation `vary` (0.25) `vary_m` across, form ties' holes on a grid `ties` [dx, dz] m, `tex_offset` [u, v, w] (in tiles) shifting this block's stretch of it; on paving, `wet` and `puddle_m` as above.
 - water: a river's surface `size` [w, d] at `position` (its z the water line): near black, a mirror broken by slow
   ripples (`ripple_m` long across x, `ripple` their strength), so lights on the far bank draw down into long streaks.
 """
@@ -224,13 +224,17 @@ def _photo(bpy, p, kind):
     variation in tone and vertical streaks multiplied into its colour, so a 2 m tile laid across a 60 m wall does not
     repeat to the eye; on paving, `wet` puddles (dark, smooth, mirroring) and a damp darkening over all."""
     import assets
-    key = ('photo', kind) + tuple((k, str(p.get(k))) for k in ('texture', 'res', 'tex_scale', 'bump', 'vary', 'vary_m', 'ties', 'wet', 'puddle_m', 'tint', 'tint_mix', 'rough_mul'))
+    key = ('photo', kind) + tuple((k, str(p.get(k))) for k in ('texture', 'res', 'tex_scale', 'tex_offset', 'bump', 'vary', 'vary_m', 'ties', 'wet', 'puddle_m', 'tint', 'tint_mix', 'rough_mul'))
     if key in _MATS:
         return _MATS[key]
     m = assets.pbr(bpy, p['texture'], p.get('res', '2k'), scale=p.get('tex_scale'), bump=p.get('bump', 1.0),
                    tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0), rough_mul=p.get('rough_mul', 1.0), name=f'{kind}-{p["texture"]}')
     nt = m.node_tree; g = _G(nt)
     b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    if p.get('tex_offset'):                              # this block's own stretch of the texture (no two blocks alike)
+        mp = next(n for n in nt.nodes if n.type == 'MAPPING')
+        ox, oy, oz = (list(p['tex_offset']) + [0, 0, 0])[:3]
+        mp.inputs['Location'].default_value = (ox, oy, oz)
     pos, X, Y, Z = g.xyz()
 
     def into(sock_name, fn):

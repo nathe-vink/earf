@@ -15,7 +15,7 @@ on the wall, blending light together").
     python3 spinoffs/barkhorn/uplight31.py               ->  studio/shots/barkhorn/uplight31/*.json
     python3 studio/engine/render.py studio/shots/barkhorn/uplight31/uplit-red.json --out renders/2026-10-18/barkhorn/uplight31/uplit-red.png
 """
-import copy, json, os
+import copy, json, os, random
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
@@ -32,7 +32,7 @@ RENDER = {'samples': 128, 'adaptive': 0.02, 'denoise': True, 'clamp': 10, 'bounc
 CONCRETE = {'texture': 'concrete_layers_02', 'res': '4k', 'tex_scale': 1.4, 'bump': 1.2, 'vary': 0.22, 'vary_m': 3.5, 'ties': [0.6, 0.62]}   # board-formed, photographed (Poly Haven CC0)
 NIGHT = {'kind': 'hdri', 'polyhaven': 'kloppenheim_07_puresky', 'res': '2k', 'strength': 0.6, 'rotation_deg': 0.0}   # an overcast night sky: the ambient and what the water mirrors
 WARM = '#FFF2DE'
-LENS = 0.35                         # the plinth lens's glow: soft, never a clipped white line                    # the uplights' lamps: a warm white LED, 3500 K or so
+LENS = 0.08                         # the plinth lens's glow: soft, never a clipped white line                    # the uplights' lamps: a warm white LED, 3500 K or so
 
 
 def kit(fn, pos, **kw):
@@ -57,7 +57,7 @@ def placement(kind, x=0.0, y=0.0, z0=0.0, power=1.0):
     if kind == 'under':
         props = [{'kind': 'kit', 'shape': 'box', 'position': [x, y, 0.0], 'size': [W + 0.10, D + 0.10, z0], 'material': 'clay',
                   'color': '#141415', 'roughness': 0.45, 'ease': 0.004},
-                 {'kind': 'kit', 'shape': 'box', 'position': [x, y, z0 - 0.002], 'size': [W + 0.04, D + 0.04, 0.003],
+                 {'kind': 'kit', 'shape': 'box', 'position': [x, y, z0 - 0.002], 'size': [W + 0.01, D + 0.01, 0.003],
                   'material': 'glow', 'color': WARM, 'emit': LENS, 'shadow': False}]
         # the lamp: a flat panel of LEDs under the lens, the speaker's footprint, on the lens 10 mm below the cabinet's bottom (its feet are 12 mm) (a flat lamp, so no
         # part of the light starts inside the cabinet: a round lamp of any size this close would reach through the
@@ -88,20 +88,22 @@ def frame(key, kind=SLIDE, size=(1600, 1600)):
     """One slide: the speaker on its light, a metre in front of the wall, a breath of moonlight so the room is a place."""
     z0 = Z0 if kind == 'under' else 0.0
     props, lamp = placement(kind, z0=z0)
+    if kind == 'under':                                   # a narrower spread for the slide: the pool centred over the speaker
+        lamp = {**lamp, 'spread_deg': 75, 'power_w': 520.0}
     s = {'product': {'def': PRODUCT, 'flavour': FLAVOUR[key],
                      'instances': [{'flavour': FLAVOUR[key], 'position': [0, 0, z0], 'rotate_z': 0, 'hide': ['cloth-disc']}]},
          'set': {'kind': 'stage', 'props': [
-             kit('wall', [0.0, WALL_Y + 0.25, 0.0], size=[9.0, 0.5, 7.0], **CONCRETE),
-             kit('paving', [0.0, -1.5, 0.0], size=[12.0, 9.0], texture='concrete_pavement', res='2k', wet=0.7, puddle_m=0.8, vary=0.2),
+             kit('wall', [0.0, WALL_Y + 0.25, 0.0], size=[9.0, 0.5, 7.0], **dict(CONCRETE, bump=2.2, tex_scale=1.0, vary=0.12)),
+             kit('paving', [0.0, -1.5, 0.0], size=[12.0, 9.0], texture='concrete_pavement', res='2k', wet=0.85, puddle_m=0.25, vary=0.2),
          ] + props},
          'sky': dict(NIGHT, strength=0.04),
          'lights': {
              'up': lamp,
              # moonlight: a faint cool wash from high in front, so the concrete's boards read where the lamp does not reach
-             'moon': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-2.5, -6.0, 6.0], 'target': [0.0, WALL_Y, 1.2],
-                      'irradiance': 0.06, 'color': '#D4DCF2'}},
-         'haze': {'box_m': [-6.0, -6.0, -0.05, 6.0, WALL_Y - 0.02, 6.5], 'density': 0.03, 'anisotropy': 0.3},
-         'camera': {'position': [0.25, -3.5, 0.85], 'target': [0.0, 0.6, 1.4], 'lens_mm': 35.0, 'level': True},
+             'moon': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [-3.0, 0.6, 9.0], 'target': [0.0, 0.0, 0.8],
+                      'irradiance': 0.18, 'color': '#D4DCF2'}},
+         'haze': {'box_m': [-2.5, -0.6, -0.05, 2.5, WALL_Y - 0.02, 4.0], 'density': 0.012, 'anisotropy': 0.55},
+         'camera': {'position': [0.25, -3.6, 0.75], 'target': [0.0, 0.6, 1.25], 'lens_mm': 45.0, 'level': True},
          'render': dict(RENDER, exposure=1.0),
          'size': list(size),
          'title': f'barkhorn, {NAME[key]}, uplit ({kind}) before a concrete wall'}
@@ -116,38 +118,42 @@ def facade(size=(2880, 1200), camera=None, exposure=1.0):
     gap = 1.2                                             # the speakers' spacing
     xs = [(i - 3.5) * gap for i in range(8)]
     wall_y = 2.6                                          # the wall's face
+    rnd = random.Random(31)
+    def pour(pos, size):                                  # one block of the wall, its own stretch of the texture
+        return kit('wall', pos, size=size, **dict(CONCRETE, vary=0.35, vary_m=1.6, bump=1.6,
+                                                  tex_offset=[round(rnd.uniform(0, 1), 3), round(rnd.uniform(0, 1), 3), round(rnd.uniform(0, 1), 3)]))
     props = [
-        # the wall, one pour of board-formed concrete: a plinth course, shallow pilasters between pairs of speakers and
-        # far along the front, a deep cornice band at 11 m, the wall going on up out of the frame
-        kit('wall', [0.0, wall_y + 0.6, 0.0], size=[60.0, 1.2, 24.0], **CONCRETE),
-        kit('wall', [0.0, wall_y - 0.12, 0.0], size=[60.0, 0.24, 0.6], **CONCRETE),
-        kit('wall', [0.0, wall_y - 0.3, 11.0], size=[60.0, 0.6, 1.6], **CONCRETE),
-        # the quay: wet flags, a stone kerb, the river a step below
-        kit('paving', [0.0, -0.4, 0.0], size=[60.0, 6.0], texture='granite_tile', res='2k', wet=1.0, puddle_m=2.5, vary=0.2),
+        # the wall, board-formed concrete: a plinth course, shallow pilasters between pairs of speakers and far along the
+        # front, a deep cornice at 4.8 m, and above it the night sky (the frame has to say it is outdoors)
+        pour([0.0, wall_y + 0.6, 0.0], [60.0, 1.2, 5.6]),
+        pour([0.0, wall_y - 0.12, 0.0], [60.0, 0.24, 0.6]),
+        pour([0.0, wall_y - 0.35, 4.8], [60.0, 0.7, 0.8]),
+        # the quay: wet granite flags, a wet granite coping catching the light, the river a step below
+        kit('paving', [0.0, -0.4, 0.0], size=[60.0, 6.0], texture='granite_tile', res='2k', wet=0.8, puddle_m=1.2, vary=0.2),
         {'kind': 'kit', 'shape': 'box', 'position': [0.0, -3.48, -0.15], 'size': [60.0, 0.16, 0.15], 'material': 'clay',
-         'color': '#3A3936', 'roughness': 0.6},
+         'color': '#6A6862', 'roughness': 0.35},
         kit('water', [0.0, -18.0, -0.15], size=[80.0, 29.0], ripple=0.1, ripple_m=1.4),
         # the city across the river, far behind the camera's back, is felt only as a warm glow low on the water
         {'kind': 'kit', 'shape': 'box', 'position': [0.0, -40.0, -0.4], 'size': [80.0, 0.5, 0.3], 'material': 'glow',
          'color': '#FFC98A', 'emit': 0.6, 'shadow': False},
     ]
-    for i in range(-6, 7):                                # pilasters every two speakers, on along the front
-        props.append(kit('wall', [i * 2 * gap, wall_y - 0.15, 0.0], size=[0.7, 0.3, 11.0], **CONCRETE))
+    for i in range(-6, 7):                                # pilasters every two speakers, on along the front, up to the cornice
+        props.append(pour([i * 2 * gap, wall_y - 0.15, 0.0], [0.7, 0.3, 4.8]))
     lights, insts = {}, []
     for i, (k, x) in enumerate(zip(KEYS, xs)):
-        pr, lamp = placement(SLIDE, x=x, y=0.0, z0=Z0)
+        pr, lamp = placement(SLIDE, x=x, y=0.0, z0=Z0, power=0.71)
         props += pr
         lights[f'up{i}'] = lamp
         insts.append({'flavour': FLAVOUR[k], 'position': [x, 0.0, Z0], 'rotate_z': 0, 'hide': ['cloth-disc']})
     # moonlight, cool and faint, high over the river
-    lights['moon'] = {'type': 'area', 'size_m': [10.0, 6.0], 'position': [-14.0, -30.0, 22.0], 'target': [0.0, wall_y, 3.0],
-                      'irradiance': 0.03, 'color': '#C4D0F0'}
+    lights['moon'] = {'type': 'area', 'size_m': [10.0, 6.0], 'position': [10.0, -12.0, 16.0], 'target': [0.0, wall_y, 3.0],
+                      'irradiance': 0.09, 'color': '#C4D0F0'}
     s = {'product': {'def': PRODUCT, 'flavour': FLAVOUR[KEYS[0]], 'instances': insts},
          'set': {'kind': 'stage', 'props': props},
-         'sky': dict(NIGHT, strength=0.035),
+         'sky': dict(NIGHT, strength=0.06),
          'lights': lights,
          'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.35, 16.0], 'density': 0.012, 'anisotropy': 0.3},
-         'camera': camera or {'position': [0.4, -11.0, 0.7], 'target': [0.4, 0.0, 1.6], 'lens_mm': 32.0, 'level': True},
+         'camera': camera or {'position': [0.0, -9.4, 0.6], 'target': [0.0, 0.0, 1.3], 'lens_mm': 27.0, 'level': True},
          'render': dict(RENDER, samples=160, exposure=exposure),
          'size': list(size),
          'title': 'barkhorn, the eight uplit along an opera house\'s concrete river front at night'}

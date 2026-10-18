@@ -37,9 +37,9 @@
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
-    "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
+    "tex_scale": 1.0,
+    "bump": 2.2,
+    "vary": 0.12,
     "vary_m": 3.5,
     "ties": [
      0.6,
@@ -62,8 +62,8 @@
     ],
     "texture": "concrete_pavement",
     "res": "2k",
-    "wet": 0.7,
-    "puddle_m": 0.8,
+    "wet": 0.85,
+    "puddle_m": 0.25,
     "vary": 0.2
    },
    {
@@ -140,43 +140,43 @@
     2.0
    ],
    "position": [
-    -2.5,
-    -6.0,
-    6.0
+    -3.0,
+    0.6,
+    9.0
    ],
    "target": [
     0.0,
-    1.0,
-    1.2
+    0.0,
+    0.8
    ],
-   "irradiance": 0.06,
+   "irradiance": 0.18,
    "color": "#D4DCF2"
   }
  },
  "haze": {
   "box_m": [
-   -6.0,
-   -6.0,
+   -2.5,
+   -0.6,
    -0.05,
-   6.0,
+   2.5,
    0.98,
-   6.5
+   4.0
   ],
-  "density": 0.03,
-  "anisotropy": 0.3
+  "density": 0.012,
+  "anisotropy": 0.55
  },
  "camera": {
   "position": [
    0.25,
-   -3.5,
-   0.85
+   -3.6,
+   0.75
   ],
   "target": [
    0.0,
    0.6,
-   1.4
+   1.25
   ],
-  "lens_mm": 35.0,
+  "lens_mm": 45.0,
   "level": true
  },
  "render": {

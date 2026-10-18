@@ -117,17 +117,22 @@
     "size": [
      60.0,
      1.2,
-     24.0
+     5.6
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.012,
+     0.112,
+     0.393
     ]
    },
    {
@@ -148,12 +153,17 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.684,
+     0.139,
+     0.112
     ]
    },
    {
@@ -163,23 +173,28 @@
     "fn": "wall",
     "position": [
      0.0,
-     2.3000000000000003,
-     11.0
+     2.25,
+     4.8
     ],
     "size": [
      60.0,
-     0.6,
-     1.6
+     0.7,
+     0.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.232,
+     0.758,
+     0.147
     ]
    },
    {
@@ -198,8 +213,8 @@
     ],
     "texture": "granite_tile",
     "res": "2k",
-    "wet": 1.0,
-    "puddle_m": 2.5,
+    "wet": 0.8,
+    "puddle_m": 1.2,
     "vary": 0.2
    },
    {
@@ -216,8 +231,8 @@
      0.15
     ],
     "material": "clay",
-    "color": "#3A3936",
-    "roughness": 0.6
+    "color": "#6A6862",
+    "roughness": 0.35
    },
    {
     "kind": "kit",
@@ -267,17 +282,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.741,
+     0.662,
+     0.137
     ]
    },
    {
@@ -293,17 +313,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.536,
+     0.448,
+     0.413
     ]
    },
    {
@@ -319,17 +344,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.996,
+     0.093,
+     0.02
     ]
    },
    {
@@ -345,17 +375,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.94,
+     0.403,
+     0.198
     ]
    },
    {
@@ -371,17 +406,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.33,
+     0.365,
+     0.955
     ]
    },
    {
@@ -397,17 +437,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.21,
+     0.217,
+     0.585
     ]
    },
    {
@@ -423,17 +468,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.547,
+     0.954,
+     0.839
     ]
    },
    {
@@ -449,17 +499,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.356,
+     0.204,
+     0.836
     ]
    },
    {
@@ -475,17 +530,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.989,
+     0.03,
+     0.735
     ]
    },
    {
@@ -501,17 +561,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.868,
+     0.651,
+     0.218
     ]
    },
    {
@@ -527,17 +592,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.797,
+     0.73,
+     0.194
     ]
    },
    {
@@ -553,17 +623,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.641,
+     0.219,
+     0.041
     ]
    },
    {
@@ -579,17 +654,22 @@
     "size": [
      0.7,
      0.3,
-     11.0
+     4.8
     ],
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 1.4,
-    "bump": 1.2,
-    "vary": 0.22,
-    "vary_m": 3.5,
+    "bump": 1.6,
+    "vary": 0.35,
+    "vary_m": 1.6,
     "ties": [
      0.6,
      0.62
+    ],
+    "tex_offset": [
+     0.336,
+     0.334,
+     0.396
     ]
    },
    {
@@ -619,13 +699,13 @@
      0.078
     ],
     "size": [
-     0.6000000000000001,
-     0.47,
+     0.5700000000000001,
+     0.44,
      0.003
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.35,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -655,13 +735,13 @@
      0.078
     ],
     "size": [
-     0.6000000000000001,
-     0.47,
+     0.5700000000000001,
+     0.44,
      0.003
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.35,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -691,13 +771,13 @@
      0.078
     ],
     "size": [
-     0.6000000000000001,
-     0.47,
+     0.5700000000000001,
+     0.44,
      0.003
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.35,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -727,13 +807,13 @@
      0.078
     ],
     "size": [
-     0.6000000000000001,
-     0.47,
+     0.5700000000000001,
+     0.44,
      0.003
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.35,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -763,13 +843,13 @@
      0.078
     ],
     "size": [
-     0.6000000000000001,
-     0.47,
+     0.5700000000000001,
+     0.44,
      0.003
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.35,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -799,13 +879,13 @@
      0.078
     ],
     "size": [
-     0.6000000000000001,
-     0.47,
+     0.5700000000000001,
+     0.44,
      0.003
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.35,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -835,13 +915,13 @@
      0.078
     ],
     "size": [
-     0.6000000000000001,
-     0.47,
+     0.5700000000000001,
+     0.44,
      0.003
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.35,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -871,13 +951,13 @@
      0.078
     ],
     "size": [
-     0.6000000000000001,
-     0.47,
+     0.5700000000000001,
+     0.44,
      0.003
     ],
     "material": "glow",
     "color": "#FFF2DE",
-    "emit": 0.35,
+    "emit": 0.08,
     "shadow": false
    }
   ]
@@ -886,7 +966,7 @@
   "kind": "hdri",
   "polyhaven": "kloppenheim_07_puresky",
   "res": "2k",
-  "strength": 0.035,
+  "strength": 0.06,
   "rotation_deg": 0.0
  },
  "lights": {
@@ -907,7 +987,7 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 450.0,
+   "power_w": 319.5,
    "color": "#FFF2DE"
   },
   "up1": {
@@ -927,7 +1007,7 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 450.0,
+   "power_w": 319.5,
    "color": "#FFF2DE"
   },
   "up2": {
@@ -947,7 +1027,7 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 450.0,
+   "power_w": 319.5,
    "color": "#FFF2DE"
   },
   "up3": {
@@ -967,7 +1047,7 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 450.0,
+   "power_w": 319.5,
    "color": "#FFF2DE"
   },
   "up4": {
@@ -987,7 +1067,7 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 450.0,
+   "power_w": 319.5,
    "color": "#FFF2DE"
   },
   "up5": {
@@ -1007,7 +1087,7 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 450.0,
+   "power_w": 319.5,
    "color": "#FFF2DE"
   },
   "up6": {
@@ -1027,7 +1107,7 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 450.0,
+   "power_w": 319.5,
    "color": "#FFF2DE"
   },
   "up7": {
@@ -1047,7 +1127,7 @@
     3.08
    ],
    "spread_deg": 120,
-   "power_w": 450.0,
+   "power_w": 319.5,
    "color": "#FFF2DE"
   },
   "moon": {
@@ -1057,16 +1137,16 @@
     6.0
    ],
    "position": [
-    -14.0,
-    -30.0,
-    22.0
+    10.0,
+    -12.0,
+    16.0
    ],
    "target": [
     0.0,
     2.6,
     3.0
    ],
-   "irradiance": 0.03,
+   "irradiance": 0.09,
    "color": "#C4D0F0"
   }
  },
