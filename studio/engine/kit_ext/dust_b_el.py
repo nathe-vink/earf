@@ -87,6 +87,8 @@ def _rock_mat(bpy, spec, name, seed):
         D._beds(m, *spec['beds'], seed=float(seed))
     if spec.get('streaks'):
         _streaks(m, *spec['streaks'], seed=float(seed) * 13.1)
+    if spec.get('albedo', 1.0) != 1.0:
+        D._albedo(m, spec['albedo'])
     return m
 
 
@@ -208,11 +210,11 @@ def prickly_pear(bpy, name, p, kit):
                     yy = side * S * 0.07 * math.sqrt(max(0.0, 1 - u * u - vv * vv)) * 0.98
                     a = c + M @ Vector((u * ww * 0.92, yy, vv * h * 0.92))
                     nrm = (M @ Vector((u * 0.4, side, vv * 0.3))).normalized()
-                    D_ = 0.0028
+                    D_ = 0.004
                     g2 = bmesh.ops.create_icosphere(bm_ar, subdivisions=1, radius=1.0)
                     for v in g2['verts']:
                         v.co = a + v.co * D_
-                    for _ in range(rnd.randint(0, 3)):
+                    for _ in range(rnd.randint(1, 4)):
                         d = (nrm + Vector((rnd.gauss(0, 0.5), rnd.gauss(0, 0.5), rnd.gauss(0, 0.5) + 0.2))).normalized()
                         L = rnd.uniform(0.012, 0.035)
                         g3 = bmesh.ops.create_cone(bm_sp, cap_ends=False, segments=5, radius1=0.0007, radius2=0.0, depth=L)
@@ -245,8 +247,8 @@ def prickly_pear(bpy, name, p, kit):
         if c.z < h * 0.5:
             continue
         add_pad(c, M, w, h)
-    mats = [_principled(bpy, f'{name}-pad', p.get('color', '#73885E'), rough=0.42, sss=0.12, spec=0.45, kit=kit),
-            _principled(bpy, f'{name}-areole', '#6A5A44', rough=0.9, kit=kit),
+    mats = [_principled(bpy, f'{name}-pad', p.get('color', '#73885E'), rough=0.62, sss=0.1, spec=0.35, kit=kit),
+            _principled(bpy, f'{name}-areole', '#4E4234', rough=0.95, kit=kit),
             _principled(bpy, f'{name}-spine', p.get('spine', '#E9DFC6'), rough=0.35, sss=0.4, spec=0.5, kit=kit)]
     _noise_tint(mats[0], S * 0.6, p.get('color', '#73885E'), p.get('color2', '#8C8F6A'), kit=kit)
     objs = []
