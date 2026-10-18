@@ -125,7 +125,8 @@ def frame(key, kind=SLIDE, size=(1600, 1600)):
 
 
 def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=120, moon=0.22, pours=(3.6, 1.8),
-         moon_at=(4.0, -5.0, 7.5), moon_size=(10.0, 6.0), haze=0.02, kerb=(0.03, -0.06, 0.5), ripple=(0.12, 1.2)):
+         moon_at=(4.0, -5.0, 7.5), moon_size=(10.0, 6.0), haze=0.02, kerb=(0.03, -0.06, 0.5), ripple=(0.12, 1.2),
+         wall_h=5.6):
     """The night set both kinds of picture share: speakers in a row on a wet granite quay at the foot of an opera house's
     board-formed concrete river front, each on its uplight, the river at the quay's edge behind the camera's side.
 
@@ -143,12 +144,12 @@ def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=
         # the wall, board-formed concrete: one face in pours 3.6 m wide, a 12 mm joint between them falling between
         # speakers (no pilasters: their edges cut the washes into hard columns; no plinth course: its top drew a lit line), a deep cornice at
         # 4.8 m, and above it the night sky (the frame has to say it is outdoors)
-        pour([0.0, wall_y + 0.75, 0.0], [60.0, 1.2, 5.6]),
-        pour([0.0, wall_y - 0.35, 4.8], [60.0, 0.7, 0.8]),
+        pour([0.0, wall_y + 0.75, 0.0], [200.0, 1.2, wall_h]),
+        pour([0.0, wall_y - 0.35, wall_h - 0.8], [200.0, 0.7, 0.8]),
         # the quay: wet granite flags with broad standing water, a wet granite kerb, the river just below
-        kit('paving', [0.0, -1.3, 0.0], size=[60.0, 4.2], texture='granite_tile', res='2k', wet=0.65, puddle_m=1.2, puddle_edge=0.22, vary=0.2),
-        kit('paving', [0.0, -3.575, 0.0], size=[60.0, 0.35], thick=kerb[0], texture='granite_tile', res='2k', wet=kerb[2], puddle_m=0.5, vary=0.4),
-        kit('water', [0.0, -18.0, kerb[1]], size=[80.0, 29.0], ripple=ripple[0], ripple_m=ripple[1]),
+        kit('paving', [0.0, -1.3, 0.0], size=[200.0, 4.2], texture='granite_tile', res='2k', wet=0.65, puddle_m=1.2, puddle_edge=0.22, vary=0.2),
+        kit('paving', [0.0, -3.575, 0.0], size=[200.0, 0.35], thick=kerb[0], texture='granite_tile', res='2k', wet=kerb[2], puddle_m=0.5, vary=0.4),
+        kit('water', [0.0, -18.0, kerb[1]], size=[240.0, 29.0], ripple=ripple[0], ripple_m=ripple[1]),
         # the city across the river, behind the camera's back, felt only as warm glows low on the water, near and far
         {'kind': 'kit', 'shape': 'box', 'position': [0.0, -40.0, -0.4], 'size': [80.0, 0.5, 0.3], 'material': 'glow',
          'color': '#FFC98A', 'emit': 3.0, 'shadow': False},
@@ -156,8 +157,8 @@ def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=
          'color': '#FFD2A0', 'emit': 1.5, 'shadow': False},
     ]
     pw, p0 = pours
-    for i in range(-int(30 / pw), int(30 / pw) + 1):      # the pours, a 4 mm joint between them
-        props.append(pour([round(p0 + i * pw, 3), wall_y + 0.15, 0.0], [pw - 0.004, 0.3, 4.8]))
+    for i in range(-int(100 / pw), int(100 / pw) + 1):      # the pours, a 4 mm joint between them
+        props.append(pour([round(p0 + i * pw, 3), wall_y + 0.15, 0.0], [pw - 0.004, 0.3, wall_h - 0.8]))
     lights, insts = {}, []
     for i, (k, x) in enumerate(zip(keys, xs)):
         pr, lamps = placement(SLIDE, x=x, y=0.0, z0=Z0, power=power * (boost or {}).get(k, 1.0))
@@ -181,13 +182,14 @@ def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=
             'title': title}
 
 
-def facade(size=(2880, 1200), camera=None, exposure=1.0):
-    """The night hero: the eight in a row on the quay, 1.2 m apart (0.9 merged their columns)."""
+def facade(size=(2880, 1200), camera=None, exposure=1.0, wall_h=5.6):
+    """The night hero: the eight in a row on the quay, 1.2 m apart (0.9 merged their columns). The portrait's frame is
+    tall enough to show the sky over a 5.6 m wall, so it takes a taller wall (`wall_h`), its cornice out of frame."""
     return quay(KEYS, [(i - 3.5) * 1.2 for i in range(8)],
                 camera or {'position': [0.0, -9.4, 0.6], 'target': [0.0, 0.0, 1.1], 'lens_mm': 33.0, 'level': True},
                 size, exposure, 'barkhorn, the eight uplit along an opera house\'s concrete river front at night',
                 power=0.56, spread=90, moon=0.3, moon_at=(3.0, -7.0, 5.0), moon_size=(14.0, 8.0), haze=0.035,
-                ripple=(0.06, 0.4))
+                ripple=(0.06, 0.4), wall_h=wall_h)
 
 
 def slide(key, size=(1600, 1600)):
@@ -207,7 +209,8 @@ def main():
         for k in ('red', 'ice'):
             made[f'study-{kind}-{k}'] = frame(k, kind, size=(1200, 1200))
     made['facade'] = facade()
-    made['facade-portrait'] = facade((1440, 1800), {'position': [0.6, -11.5, 1.5], 'target': [0.0, 0.0, 3.6], 'lens_mm': 26.0, 'level': True}, 1.3)
+    made['facade-portrait'] = facade((1440, 1800), {'position': [-5.6, -3.4, 0.8], 'target': [-0.4, 0.4, 1.7], 'lens_mm': 24.0, 'level': True},
+                                      wall_h=12.0)
     for n, s in made.items():
         json.dump(s, open(os.path.join(OUT, n + '.json'), 'w'), indent=1)
     print(len(made), 'shots in', os.path.relpath(OUT, ROOT))
