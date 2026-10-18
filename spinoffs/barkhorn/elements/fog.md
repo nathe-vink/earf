@@ -53,3 +53,24 @@ from the side, with one peak standing out of it far off. A skein of birds crosse
 - c5 to c7: rescaled deck, clip distance, haze cap. It reads as a summit above a sea of cloud.
 
 ## Critic passes
+
+### Pass 1: 5.0 ("iterate"; 7.3 if fixed)
+
+The frame was r1. Main's `hdri_sun` fix landed after this pass: in r1 the sky's own sun was at azimuth -115 while
+the sun lamp shone from 65, so there were two suns. The critic read that as "flat light, no shadow".
+
+The critic: the speaker is crisp and believable, but the world reads as CG. Its changes, and what I did:
+
+1. **The cloud sea is smooth foam; make it a volume.** Done: `cloudvol`, a scattering volume from 250 m to 3.2 km
+   whose top is a 2D noise heightfield (220 m heaps, 110 m of amplitude), eroded by a 3D noise into billows, with 6
+   volume bounces so it stays white. The domed slab now carries only the far distance, from 2.8 km.
+2. **No sun shadow; put the sun behind the speaker on the camera's left.** Done: the sky turned to 189, which puts its
+   sun and the lamp at azimuth -135, 28 degrees up. The shadow now runs forward and right, and the edges catch a rim.
+   Bounce reflector lowered from 0.5 to 0.25.
+3. **The ground ends in a straight tabletop edge.** Done: 0.15 m of relief and the ground ends 3.2 m back. I tried
+   scanned cliffs as the drop; they intersected the ledge and showed flat cut tops, so I removed them.
+4. **The boulder crowds the cabinet.** Done: moved to the camera's left with clear air before the cabinet, scaled 0.75.
+5. **The near rock is a smeared decal.** Done: 4k texture, 7 cm of true displacement, a denser mesh.
+6. **The peak floats.** Removed.
+7. **The birds form a column.** Done: 11 birds in a loose diagonal in the open sky, upper right, at about 60 m.
+8. **Flat tonality.** Done: exposure +0.3, AgX Medium High Contrast, finish contrast 0.08.

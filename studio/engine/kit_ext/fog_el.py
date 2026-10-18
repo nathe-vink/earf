@@ -106,3 +106,62 @@ def bird(bpy, name, p, kit):
     m = bpy.data.materials.new(name); m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
     kit._set(b, 'Base Color', kit.M.hex_lin(p.get('color', '#26282C'))); kit._set(b, 'Roughness', 0.8)
     return kit.finish(bpy, name, bm, p, False, m)
+
+
+def cloudvol(bpy, name, p, kit):
+    """The near part of the cloud deck as real cloud: a scattering volume in a box (`box` [x0, y0, z0, x1, y1, z1]) whose
+    top is a heightfield of soft noise (`top` metres mean height, `amp` metres up and down, `scale` metres across the
+    big heaps), eaten into billows and wisps by a finer noise (`detail` metres, `erode` metres of reach) and soft over
+    `soft` metres; `density` per metre inside, white, scattering forward (`anisotropy`)."""
+    x0, y0, z0, x1, y1, z1 = p['box']
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); v = nt.nodes.new('ShaderNodeVolumePrincipled')
+    v.inputs['Color'].default_value = kit.M.hex_lin(p.get('color', '#FFFFFF'))
+    v.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.6)
+    tc = nt.nodes.new('ShaderNodeTexCoord'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+    nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
+    def node(kind, **inputs):
+        n = nt.nodes.new(kind)
+        for k, val in inputs.items():
+            n.inputs[k].default_value = val
+        return n
+    # the top: a 2D noise over x, y
+    xy = nt.nodes.new('ShaderNodeCombineXYZ'); nt.links.new(sep.outputs['X'], xy.inputs['X']); nt.links.new(sep.outputs['Y'], xy.inputs['Y'])
+    n2 = nt.nodes.new('ShaderNodeTexNoise'); n2.noise_dimensions = '2D'
+    n2.inputs['Scale'].default_value = 1.0 / p.get('scale', 300.0); n2.inputs['Detail'].default_value = 6.0
+    if 'Roughness' in n2.inputs:
+        n2.inputs['Roughness'].default_value = 0.55
+    nt.links.new(xy.outputs['Vector'], n2.inputs['Vector'])
+    top = nt.nodes.new('ShaderNodeMath'); top.operation = 'MULTIPLY_ADD'
+    top.inputs[1].default_value = p.get('amp', 40.0) * 3.0; top.inputs[2].default_value = p.get('top', -70.0) - p.get('amp', 40.0) * 1.5
+    nt.links.new(n2.outputs['Fac'], top.inputs[0])
+    # the billows: a 3D noise that pushes the surface in and out
+    n3 = nt.nodes.new('ShaderNodeTexNoise'); n3.inputs['Scale'].default_value = 1.0 / p.get('detail', 18.0)
+    n3.inputs['Detail'].default_value = 5.0
+    if 'Roughness' in n3.inputs:
+        n3.inputs['Roughness'].default_value = 0.6
+    n3.inputs['Distortion'].default_value = p.get('distort', 0.4)
+    nt.links.new(tc.outputs['Object'], n3.inputs['Vector'])
+    er = nt.nodes.new('ShaderNodeMath'); er.operation = 'MULTIPLY_ADD'
+    er.inputs[1].default_value = p.get('erode', 20.0) * 2.0; er.inputs[2].default_value = -p.get('erode', 20.0)
+    nt.links.new(n3.outputs['Fac'], er.inputs[0])
+    # depth below the (billowed) top
+    d = nt.nodes.new('ShaderNodeMath'); d.operation = 'SUBTRACT'
+    nt.links.new(top.outputs['Value'], d.inputs[0]); nt.links.new(sep.outputs['Z'], d.inputs[1])
+    d2 = nt.nodes.new('ShaderNodeMath'); d2.operation = 'ADD'
+    nt.links.new(d.outputs['Value'], d2.inputs[0]); nt.links.new(er.outputs['Value'], d2.inputs[1])
+    sm = nt.nodes.new('ShaderNodeMapRange'); sm.interpolation_type = 'SMOOTHSTEP'
+    sm.inputs['From Min'].default_value = 0.0; sm.inputs['From Max'].default_value = p.get('soft', 12.0)
+    sm.inputs['To Max'].default_value = p.get('density', 0.05)
+    nt.links.new(d2.outputs['Value'], sm.inputs['Value'])
+    nt.links.new(sm.outputs['Result'], v.inputs['Density'])
+    nt.links.new(v.outputs['Volume'], out.inputs['Volume'])
+    m.cycles.volume_step_rate = p.get('step', 1.0)
+    bm = bmesh.new()
+    g = bmesh.ops.create_cube(bm, size=1.0)
+    for vv in g['verts']:
+        vv.co = Vector(((x0 + x1) / 2 + vv.co.x * (x1 - x0), (y0 + y1) / 2 + vv.co.y * (y1 - y0), (z0 + z1) / 2 + vv.co.z * (z1 - z0)))
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    me.materials.append(m)
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    return [ob]
