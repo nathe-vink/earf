@@ -118,6 +118,8 @@ def save(im, name, width=None, q=82):
     return name, im.size
 
 
+CHEV_L = '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M11.5 3.5 6 9l5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+CHEV_R = '<svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 3.5 12 9l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 FIELD = (250, 249, 246)      # the studio's bright field, as its frames' edges measure (the median of the eight heroes')
 
 
@@ -132,6 +134,37 @@ def field(im, top, bottom, side, ground=FIELD):
         return 0.5 - 0.5 * np.cos(np.pi * t)
     m = (ramp(h, top, bottom)[:, None] * ramp(w, side, side)[None, :])[..., None]
     return Image.fromarray((a * m + np.float32(ground) * (1 - m)).round().clip(0, 255).astype(np.uint8))
+
+
+def widen(im, ar, band=120, decay=300.0, vsig=40.0):
+    """A studio frame made wider (to `ar`, width over height) by carrying its backdrop on past each side: the colour and
+    the horizontal slope of a band at each edge, smoothed hard down the frame so no row streaks, run outwards with the
+    slope levelling off, and grain like the frame's own laid over the new parts. The gallery's stage then holds a tall
+    frame edge to edge instead of beside a blurred copy of itself."""
+    from scipy.ndimage import gaussian_filter, gaussian_filter1d
+    a = np.asarray(im.convert('RGB')).astype(np.float32)
+    h, w = a.shape[:2]
+    W = int(round(h * ar))
+    if W <= w:
+        return im.convert('RGB')
+    padL = (W - w) // 2; padR = W - w - padL
+    sm = gaussian_filter(a, sigma=(3, 3, 0))
+    t = np.arange(band, dtype=np.float32); tm = t.mean(); den = float(((t - tm) ** 2).sum())
+    def edge(xs, pad):                                  # xs: the band's columns from the edge inwards
+        seg = sm[:, xs]
+        slope_in = ((seg - seg.mean(1, keepdims=True)) * (t - tm)[None, :, None]).sum(1) / den
+        e = gaussian_filter1d(seg.mean(1) - slope_in * tm, vsig, axis=0)
+        s = gaussian_filter1d(-slope_in, vsig, axis=0)
+        d = np.arange(1, pad + 1, dtype=np.float32)
+        return e[:, None, :] + s[:, None, :] * (decay * (1 - np.exp(-d / decay)))[None, :, None]
+    left = edge(np.arange(band), padL)[:, ::-1]
+    right = edge(np.arange(w - 1, w - 1 - band, -1), padR)
+    out = np.concatenate([left, a, right], axis=1)
+    sig = float((a[:, :band] - sm[:, :band]).std())
+    g = gaussian_filter(np.random.default_rng(7).normal(0, 1, (h, W)).astype(np.float32), 0.7)
+    mask = np.ones((h, W), np.float32); mask[:, padL:padL + w] = 0
+    out += (g / (g.std() + 1e-6) * sig * mask)[..., None]
+    return Image.fromarray(out.clip(0, 255).round().astype(np.uint8))
 
 
 def cutout(im, ground):
@@ -208,7 +241,10 @@ def make_images(sources=None):
     for k in KEYS:
         for side in ('on', 'off'):
             one(first(os.path.join(FIN, f'front-{side}-{k}.png'), at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg')),
-                lambda p, s=side: save(Image.open(p), f'{k}-{s}.jpg', 900, q=80))
+                lambda p, s=side: (save(Image.open(p), f'{k}-{s}.jpg', 900, q=80),    # the cards' tall frame
+                                   # and the gallery's, its backdrop carried on to the stage's shapes (3:2, and 4:5 on phones)
+                                   save(widen(Image.open(p), 1.5), f'{k}-{s}-wide.jpg', 1800, q=84),
+                                   save(widen(Image.open(p), 0.8), f'{k}-{s}-tall.jpg', 1000, q=84)))
         for tag, fin, old in (('back', f'back-{k}.png', f'back-{k}.png'), ('amp', f'amp-{k}.png', f'detail-{k}.png')):
             one(first(os.path.join(FIN, fin), os.path.join(R30, old)), lambda p, t=tag: save(Image.open(p), f'{k}-{t}.jpg', 880, q=82))
         for tag in ('side', 'back'):
@@ -328,6 +364,11 @@ def image_meta():
         if 'habitat' in views and os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg')):
             w, h = size(f'{k}-habitat-portrait.jpg')    # its phone frame, for the stage's phone shape
             views['habitat']['tall'] = dict(src=f'img/{k}-habitat-portrait.jpg', w=w, h=h)
+        for v in ('on', 'off'):                         # the cover frames widened to the stage's shapes: they fill it, as the habitat does
+            if v in views and all(os.path.exists(os.path.join(IMG, f'{k}-{v}-{s}.jpg')) for s in ('wide', 'tall')):
+                (w, h), (tw, th) = size(f'{k}-{v}-wide.jpg'), size(f'{k}-{v}-tall.jpg')
+                card = dict(src=views[v]['src'], w=views[v]['w'], h=views[v]['h'])     # the tall frame stays for the small cards
+                views[v] = dict(src=f'img/{k}-{v}-wide.jpg', w=w, h=h, fill=True, tall=dict(src=f'img/{k}-{v}-tall.jpg', w=tw, h=th), card=card)
         w, h = size(f'turn-{k}.jpg')
         views['turn'] = dict(src=f'img/turn-{k}.jpg', w=w // 6, h=h // 4, **ground(f'turn-{k}.jpg', (0, 0, w // 6, h // 4)))
         meta[k] = views
@@ -344,9 +385,10 @@ def body():
     coin = {k: i for i, k in enumerate(KEYS)}                 # the coins' sheet is in the speakers' order
     icon_img = lambda icon, name, cls='': (f'<img class="ic only-light {cls}" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'
                                            f'<img class="ic only-dark {cls}" src="img/icon-{icon}-dark.webp" alt="" width="256" height="256">')
+    icon_paper = lambda icon: f'<img class="ic" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'   # on a pale pill in either theme
     hotspots = ''.join(
         f'<a class="spot" href="#speaker-{k}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%">'
-        f'<span class="spot-label"><span class="spot-ic">{icon_img(icon, name)}</span><b>{name}</b><span>{num}</span></span>'
+        f'<span class="spot-label"><span class="spot-ic">{icon_paper(icon)}</span><b>{name}</b><span>{num}</span></span>'
         f'<span class="sr">{name}, Atmosphere {num}</span></a>'
         for (k, num, name, icon, *_), s in sorted(zip(CLOUDS, spots), key=lambda cs: cs[1]['t'] + cs[1]['h']))   # the back rank first, so the front's links lie over it
     names = ''.join(f'<li><a href="#speaker-{k}"><span class="coin-dot" style="--i:{coin[k]}"></span>{name}</a></li>'
@@ -355,14 +397,14 @@ def body():
         f'<li><div class="spin" data-k="{k}" role="img" aria-label="{name}\'s horn; drag to turn it" '
         f'style="background-image:url(img/turn-{k}.jpg);aspect-ratio:{meta[k]["turn"]["w"]} / {meta[k]["turn"]["h"]}"></div>'
         f'<a href="#speaker-{k}">{name}</a></li>' for k, num, name, *_ in CLOUDS)
-    w, h = meta['red']['on']['w'], meta['red']['on']['h']
+    on = meta['red']['on'].get('card', meta['red']['on']); w, h = on['w'], on['h']        # the cards keep the tall frame
     cards = ''.join(
         f'<article class="card" style="--panel:{panel[k]}">'
         f'<a class="photo" href="#speaker-{k}" aria-label="{name}, up close">'
         f'<img class="on" src="img/{k}-on.jpg" width="{w}" height="{h}" alt="{name} with its cloth cover on" loading="lazy">'
         f'<img class="off" src="img/{k}-off.jpg" width="{w}" height="{h}" alt="{name} with its cover off, the woofer showing" loading="lazy"></a>'
-        f'<div class="about"><p class="num"><span class="card-ic">{icon_img(icon, name)}</span>Atmosphere {num}</p>'
-        f'<h3>{name}</h3><p class="line">{line}</p>'
+        f'<div class="about"><p class="num">Atmosphere {num}</p>'
+        f'<h3 class="named">{name}<span class="card-ic">{icon_img(icon, name)}</span></h3><p class="line">{line}</p>'
         f'<dl><dt>Acrylic</dt><dd>{tint}</dd><dt>Cover</dt><dd>{cover}</dd></dl>'
         f'<a class="more" href="#speaker-{k}">Up close</a></div></article>'
         for k, num, name, icon, tint, line, cover in CLOUDS)
@@ -389,7 +431,7 @@ def body():
                 f'loading="lazy" alt="{alt}"><figcaption>{cap}</figcaption></figure></li>' for m, c, alt, cap in MACROS) + '</ul>\n')
         hid = ' aria-hidden="true"'
         closer = (f'  <section class="band closer{" light" if light else ""}" id="closer" style="--closer:#%02X%02X%02X"><div class="wrap">\n' % tuple(int(x) for x in edge) +
-                  '    <div class="closer-head"><p class="eyebrow">Take a closer look</p><h2>Cast in colour, all the way through.</h2></div>\n'
+                  '    <div class="closer-head"><p class="eyebrow">In the studio</p><h2>Cast in colour, all the way through.</h2></div>\n'
                   f'    <div class="closer-stage" style="aspect-ratio:{sw} / {sh}">' + ''.join(
                       f'<img class="{"on" if i == 0 else ""}" src="img/{k}-{sk}.jpg" srcset="img/{k}-{sk}-1200.jpg 1200w, img/{k}-{sk}.jpg 2400w" '
                       f'sizes="(max-width: 1240px) 100vw, 1240px" width="{sw}" height="{sh}" loading="lazy" '
@@ -418,8 +460,7 @@ def body():
                         for i, (k, num, name, *_) in enumerate(CLOUDS))
         reel = ('  <section class="band lightband" id="light">\n'
                 '    <div class="wrap"><div class="head"><div><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2>'
-                '<p>Cast acrylic carries light to its edges, so a lamp underneath turns the whole cabinet into weather. Keep '
-                'scrolling for all eight.</p></div></div></div>\n'
+                '<p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with colour.</p></div></div></div>\n'
                 '    <div class="light-run" id="light-run" style="--n:8">\n'
                 '      <div class="light-stage"><div class="wrap light-grid">\n'
                 '        <div class="light-pic" role="img" aria-label="Each of the eight speakers standing on a light, one after another">' + ''.join(
@@ -435,15 +476,17 @@ def body():
         hw, hh = meta['red']['habitat']['w'], meta['red']['habitat']['h']
         tall = all(os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg')) for k in KEYS)
         habitats = ('  <section class="band" id="habitats"><div class="wrap">\n'
-                    '    <div class="head"><div><p class="eyebrow">In their element</p><h2>Each colour, in its own weather.</h2></div>'
-                    '<div class="steps"><button type="button" class="btn" id="hab-prev" aria-label="Previous">&larr;</button>'
-                    '<button type="button" class="btn" id="hab-next" aria-label="Next">&rarr;</button></div></div>\n'
+                    '    <div class="head"><div><p class="eyebrow">In their element</p><h2>Each colour, out in the world.</h2></div></div>\n'
+                    '    <div class="hab-frame">\n'
                     '    <ul class="habitats" id="hab" tabindex="0" aria-label="The eight in their habitats">' + ''.join(
                         f'<li><a href="#speaker-{k}"><picture>'
                         + (f'<source media="(max-width: 700px)" srcset="img/{k}-habitat-portrait.jpg">' if tall else '') +
                         f'<img src="img/{k}-habitat.jpg" width="{hw}" height="{hh}" loading="lazy" '
-                        f'alt="{name}, on location in its own weather"></picture><span><b>{name}</b> {line}</span></a></li>'
-                        for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n  </div></section>')
+                        f'alt="{name}, on location"></picture><span><b>{name}</b> {line}</span></a></li>'
+                        for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n'
+                    f'    <button type="button" class="nav prev" id="hab-prev" aria-label="Previous">{CHEV_L}</button>'
+                    f'<button type="button" class="nav next" id="hab-next" aria-label="Next">{CHEV_R}</button>\n'
+                    '    </div>\n  </div></section>')
     pair = [('turntable', 'Cumulus', 'A record player. Belt drive, its motor in a pod of its own.',
              'Cumulus, a record player in tinted acrylic, its platter on a plinth of overlapping circles'),
             ('lamp', 'Bell', 'A lamp. The horn&rsquo;s flare, hung mouth down.',
@@ -460,7 +503,7 @@ def body():
            '\n  </div></section>')
     data = dict(
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
-                     coin=coin[k], views=meta[k], place=PLACES.get(ELEMENT[k], 'in its own weather'))
+                     coin=coin[k], views=meta[k], place=PLACES.get(ELEMENT[k], 'on location'))
                 for k, num, name, icon, tint, line, cover in CLOUDS],
         hues=E.HUES)
     # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
@@ -576,8 +619,6 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   pointer-events: none }
 .spot-label > span:last-child { font: 500 12px/1 var(--mono); letter-spacing: 0.08em; opacity: .7 }
 .spot-ic { width: 26px; height: 26px; display: block }
-.spot-ic .only-dark { display: none !important }
-.spot-ic .only-light { display: block !important }
 .spot:hover .spot-label, .spot:focus-visible .spot-label { opacity: 1; transform: translate(-50%, 0) }
 .spot:focus-visible { outline: 2px solid var(--on-photo); outline-offset: 2px }
 .cast { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 18px; margin: 22px 0 0; padding: 18px 0 0; list-style: none;
@@ -616,7 +657,8 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .show-off .photo .off { opacity: 1 }
 .about { padding: 14px 16px 18px; display: grid; gap: 4px; align-content: start; min-width: 0 }
 .about .num { margin: 0; display: flex; align-items: center; gap: 8px; font: 500 12px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase }
-.card-ic { width: 34px; height: 34px; flex: none; display: block }
+.about h3.named { display: flex; align-items: center; gap: 0.3em }
+.card-ic { width: 1.15em; height: 1.15em; flex: none; display: block }
 .card .card-ic .only-dark { display: none !important }
 .card .card-ic .only-light { display: block !important }
 .about h3 { margin: 0; font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
@@ -689,8 +731,10 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   .light-name { font-size: 40px } .light-dots { margin-top: 8px } }
 @media (prefers-reduced-motion: reduce) { .light-run { height: auto } .light-stage { position: static; height: auto; padding-block: 24px } }
 /* the habitats: one campaign picture at a time, snapping along a strip (the portraits on phones) */
-.steps { display: flex; gap: 8px }
-.steps .btn { padding: 10px 14px }
+.hab-frame { position: relative; container-type: inline-size; --col: min(86cqw, 1080px); --mid: calc(var(--col) / 3) }
+.hab-frame .nav { top: var(--mid); transition: opacity .2s ease }
+.hab-frame .nav.prev { left: 14px } .hab-frame .nav.next { right: auto; left: calc(var(--col) - 58px) }
+.hab-frame .nav[aria-disabled="true"] { opacity: 0; pointer-events: none }
 .habitats { list-style: none; margin: 0; padding: 0 0 6px; display: grid; grid-auto-flow: column; grid-auto-columns: min(86%, 1080px);
   gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain }
 .habitats::-webkit-scrollbar { display: none }
@@ -699,7 +743,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .habitats a span { color: var(--muted) } .habitats a b { color: var(--ink); font-weight: 600; margin-right: 6px }
 .habitats img { width: 100%; height: auto; display: block; border-radius: 4px }
 .habitats:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px }
-@media (max-width: 700px) { .habitats { grid-auto-columns: 84% } }
+@media (max-width: 700px) { .habitats { grid-auto-columns: 84% } .hab-frame { --col: 84cqw; --mid: calc(var(--col) * 0.625) } }
 .room figure { margin: 0; display: grid; gap: 12px }
 .room img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
 .room figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; font-size: 15px; color: var(--muted) }
@@ -804,11 +848,35 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .others img { width: 100%; height: auto; aspect-ratio: 900 / 1827; object-fit: cover; border-radius: 4px; display: block; max-width: 100% }
 .others a:hover span { text-decoration: underline; text-underline-offset: 4px }
 
-/* the loader and the cursor */
-.splash { position: fixed; inset: 0; z-index: 50; background: var(--page); display: grid; place-items: center; cursor: pointer }
-.splash canvas { width: min(460px, 86vw); height: 86px }
-.trail { position: fixed; inset: 0; z-index: 60; pointer-events: none; width: 100vw; height: 100vh }
-html.no-cursor, html.no-cursor * { cursor: none !important }
+/* the loader: the acrylic globe turns while the first photograph comes in, then gives way and the photograph rises in */
+.splash { position: fixed; inset: 0; z-index: 50; background: var(--page); display: grid; place-items: center;
+  transition: opacity .55s cubic-bezier(.2, .7, .2, 1), visibility .55s }
+.splash.gone { opacity: 0; visibility: hidden }
+.splash .globe { width: 64px; height: 64px; background: url(img/globe-spin-light.webp) 0 0 / 1000% 600% no-repeat;
+  background-image: image-set(url(img/globe-spin-light.avif) type("image/avif"), url(img/globe-spin-light.webp) type("image/webp")) }
+:root[data-theme="dark"] .splash .globe { background-image: url(img/globe-spin-dark.webp);
+  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .splash .globe { background-image: url(img/globe-spin-dark.webp);
+  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) } }
+.hero-photo img { transition: opacity .9s cubic-bezier(.2, .7, .2, 1), transform 1.6s cubic-bezier(.2, .7, .2, 1) }
+html.opening .hero-photo img { opacity: 0; transform: scale(1.03) }
+/* the cursor: a dot where the pointer is and a ring that follows it, opening over anything to press, tinted with the
+   speaker it leads to; the dot takes the colour of the text beneath it, so it reads on paper, photographs and the dark */
+.cur { position: fixed; left: 0; top: 0; z-index: 70; pointer-events: none; border-radius: 50%; opacity: 0; transition: opacity .25s ease }
+html.cursor .cur { opacity: 1 }
+html.cursor, html.cursor * { cursor: none !important }
+.cur-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: var(--cur, var(--ink)) }
+.cur-ring { width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--cur, var(--ink)) 38%, transparent);
+  transition: width .32s cubic-bezier(.2, .7, .2, 1), height .32s cubic-bezier(.2, .7, .2, 1), margin .32s cubic-bezier(.2, .7, .2, 1),
+    background-color .3s ease, box-shadow .3s ease, opacity .25s ease }
+.cur-ring.on { width: 54px; height: 54px; margin: -27px 0 0 -27px; background: color-mix(in srgb, var(--tint, var(--ink)) 20%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tint, var(--ink)) 70%, transparent) }
+.cur-ring.drag::before, .cur-ring.drag::after { content: ""; position: absolute; top: 50%; width: 6px; height: 6px; margin-top: -3px;
+  border: solid var(--cur, var(--ink)); border-width: 0 0 1.5px 1.5px }
+.cur-ring.drag::before { left: 8px; transform: rotate(45deg) }
+.cur-ring.drag::after { right: 8px; transform: rotate(-135deg) }
+@media (prefers-reduced-motion: reduce) { .splash { display: none } html.opening .hero-photo img { opacity: 1; transform: none } }
 
 @media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)) } .spec-grid { grid-template-columns: 1fr }
   .pdp { grid-template-columns: 1fr } .buy { position: static } .others ul { grid-template-columns: repeat(4, minmax(0, 1fr)) } }
@@ -826,6 +894,9 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
 @media (prefers-reduced-motion: reduce) { .photo img, .spot-label, .thumb { transition: none } .stage .in { animation: none } }
 </style>
 
+<div class="splash" role="progressbar" aria-label="Loading"><span class="globe"></span></div>
+<script>document.documentElement.classList.add('opening')</script>
+<noscript><style>.splash { display: none } html.opening .hero-photo img { opacity: 1; transform: none }</style></noscript>
 <div class="draft"><div class="wrap"><span>Preview of earf.world &middot; a concept, not yet for sale</span></div></div>
 <header class="top"><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home"><span class="globe" aria-hidden="true"></span>__WORD__</a>
@@ -838,7 +909,7 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
 <main id="home">
   <section class="hero" id="top">
     <div class="hero-pic">
-      <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Atmosphere</p><h1>Weather for the living room.</h1></div></div>
+      <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Atmosphere</p><h1>Something in the air.</h1></div></div>
       <div class="hero-photo__HERO_CLASS__">
         <picture>__HERO_TALL__<img src="img/hero.jpg" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
           alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor"></picture>
@@ -848,7 +919,7 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
     <div class="wrap hero-foot">
       <p class="lede">Atmosphere is a horn loudspeaker cast in tinted acrylic, in eight colours named for what hangs in
         the air.</p>
-      <div class="acts"><a class="btn solid" href="#atmosphere">Choose a colour</a><a class="btn" href="#contact">Enquire</a></div>
+      <div class="acts"><a class="btn solid" href="#atmosphere">The colours</a><a class="btn" href="#contact">Enquire</a></div>
     </div>
     <div class="wrap"><ul class="cast" aria-label="The eight, in spectrum order">__NAMES__</ul></div>
   </section>
@@ -861,14 +932,13 @@ __CLOSER__
         <p>Long before there were amplifiers, a horn was how a small sound filled a large room: the gramophone&rsquo;s, the
           megaphone&rsquo;s, a cupped hand&rsquo;s. Ours is cast in resin tinted to match its cabinet, and its driver lives in a
           pod whose cap twists off by hand.</p></div>
-      <p class="hint" id="turn-hint">Drag to turn</p>
     </div>
     <ul class="horns" id="horns">__TURN__</ul>
   </div></section>
 
   <section class="band" id="atmosphere"><div class="wrap">
     <div class="head">
-      <div><p class="eyebrow">Atmosphere</p><h2>Choose your weather.</h2>
+      <div><p class="eyebrow">The colours</p><h2>Choose your atmosphere.</h2>
         <p>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The lining shows through the walls,
           so we dressed it in white voile.</p></div>
       <div class="seg" role="group" aria-label="The speakers' covers">
@@ -929,7 +999,7 @@ __NEXT__
         <p class="price">Price on request <span>&middot; each pair made to order</span></p>
         <ul class="swatches" id="swatches" aria-label="Colour"></ul>
         <p class="pick">Colour: <b id="p-pick"></b></p>
-        <div class="acts"><a class="btn solid" href="#contact">Enquire about a pair</a><button type="button" class="btn" id="p-turn">Spin the horn</button></div>
+        <div class="acts"><a class="btn solid" href="#contact">Enquire about a pair</a></div>
         <dl class="facts" id="facts"></dl>
       </aside>
     </div>
@@ -938,7 +1008,7 @@ __NEXT__
       <div class="goes" id="goes" aria-live="polite"></div>
     </section>
     <section class="others" aria-labelledby="others-title">
-      <div class="goes-head"><h2 id="others-title">The other seven</h2><span>Same speaker, different weather</span></div>
+      <div class="goes-head"><h2 id="others-title">The other seven</h2><span>Same speaker, a different air</span></div>
       <ul id="others"></ul>
     </section>
   </div>
@@ -995,9 +1065,12 @@ if (closer) {
 // the habitats' strip: the arrows move it a picture at a time
 const hab = document.getElementById('hab');
 if (hab) {
+  const prev = document.getElementById('hab-prev'), next = document.getElementById('hab-next');
   const step = d => { const li = hab.querySelector('li'); hab.scrollBy({ left: d * (li.offsetWidth + 20), behavior: reduce ? 'auto' : 'smooth' }); };
-  document.getElementById('hab-prev').addEventListener('click', () => step(-1));
-  document.getElementById('hab-next').addEventListener('click', () => step(1));
+  const ends = () => { prev.setAttribute('aria-disabled', String(hab.scrollLeft < 8));
+    next.setAttribute('aria-disabled', String(hab.scrollLeft > hab.scrollWidth - hab.clientWidth - 8)); };
+  prev.addEventListener('click', () => step(-1)); next.addEventListener('click', () => step(1));
+  hab.addEventListener('scroll', ends, { passive: true }); addEventListener('resize', ends); ends();
 }
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const dark = () => { const t = document.documentElement.dataset.theme; return t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; };
@@ -1046,7 +1119,6 @@ function draggable(t, onFrames) {
 TILES.forEach(t => draggable(t, (d, start, base) => {
   if (start) return drag.get(t) || 0;
   drag.set(t, base - d); turnUpdate(); }));
-if (reduce) document.getElementById('turn-hint').textContent = 'Drag to turn';
 
 // the cards' covers
 const on = document.getElementById('cover-on'), off = document.getElementById('cover-off'), cards = document.getElementById('cards');
@@ -1074,7 +1146,7 @@ const VIEWS = [
   ['horn-back', 'Horn, behind', c => `The horn from behind, its cap twisted shut.`],
   ['inside', 'Inside', c => `Inside, a corner cut away: the woofer's motor, the batts in their voile sleeves, a port.`],
   ['reel', 'Lit from below', c => `${c.name} on a light, its colour thrown up the wall behind it.`],
-  ['turn', 'Turning', c => `Drag to spin it.`],
+  ['turn', 'Turning', c => `${c.name}'s horn, all the way round.`],
 ];
 const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs'), phone = matchMedia('(max-width: 700px)');
 let cur = null, view = 'habitat', turnFrame = 0, autoTurn = null;
@@ -1085,7 +1157,7 @@ const shown = c => VIEWS.map(x => x[0]).filter(v => c.views[v] && !(v === 'studi
 // (a close-up has a blurred copy of itself instead, and one cut off at the foot sits on the stage's foot under its top's colour)
 function ground(v) {
   const s = src(BY[cur], v);
-  if (!s || !s.bg || s.edge === 'busy') return '';
+  if (!s || !s.bg || s.edge === 'busy' || s.fill) return '';
   const c = s.bg.match(/.{6}/g).map(h => '#' + h), stops = cs => cs.map((x, i) => `${x} ${10 + 20 * i}%`).join(', ');
   if (v === 'habitat') return c[10];
   return s.w / s.h <= stage.clientWidth / Math.max(1, stage.clientHeight)
@@ -1104,7 +1176,7 @@ function showView(v, focus) {
     draggable(pic, (d, start, base) => { if (start) return turnFrame; turnFrame = ((base - d) % N + N) % N; pic.style.backgroundPosition = frameAt(turnFrame); });
     if (!reduce) { const t0 = performance.now(); (function f(now) { const p = Math.min(1, (now - t0) / 2600); turnFrame = Math.round(p * N) % N;
       pic.style.backgroundPosition = frameAt(turnFrame); if (p < 1) autoTurn = requestAnimationFrame(f); })(t0); }
-  } else if (v === 'habitat') {
+  } else if (v === 'habitat' || s.fill) {
     pic = el('picture', { class: 'fill' }, (s.tall ? `<source media="(max-width: 700px)" srcset="${s.tall.src}" width="${s.tall.w}" height="${s.tall.h}">` : '')
       + `<img src="${s.src}" width="${s.w}" height="${s.h}" alt="" draggable="false">`);
     pic.querySelector('img').alt = say(c, v);
@@ -1124,7 +1196,7 @@ function showView(v, focus) {
     thumbs.scrollTo({ left: b.offsetLeft - (thumbs.clientWidth - b.offsetWidth) / 2, behavior: reduce ? 'auto' : 'smooth' });
     if (focus) b.focus({ preventScroll: true }); });
   for (const n of [list[(i + 1) % list.length], list[(i + list.length - 1) % list.length]]) {   // the neighbours load while this one is looked at
-    const t = src(c, n); if (n !== 'turn') new Image().src = (n === 'habitat' && phone.matches && t.tall ? t.tall : t).src; }
+    const t = src(c, n); if (n !== 'turn') new Image().src = (phone.matches && t.tall ? t.tall : t).src; }
 }
 function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
 function renderPDP(k) {
@@ -1148,7 +1220,8 @@ function renderPDP(k) {
       class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
     b.addEventListener('click', () => showView(v)); return b; }));
   document.getElementById('others').replaceChildren(...D.clouds.filter(o => o.k !== k).map(o => { const li = el('li');
-    li.appendChild(el('a', { href: `#speaker-${o.k}` }, `<img src="${o.views.off.src}" alt="" loading="lazy" width="${o.views.off.w}" height="${o.views.off.h}"><span>${o.name}</span>`)); return li; }));
+    const f = o.views.off.card || o.views.off;
+    li.appendChild(el('a', { href: `#speaker-${o.k}` }, `<img src="${f.src}" alt="" loading="lazy" width="${f.w}" height="${f.h}"><span>${o.name}</span>`)); return li; }));
   showView(shown(c)[0]);                              // each speaker opens on its photograph in its element
   goesWith(c);
 }
@@ -1166,7 +1239,6 @@ stage.addEventListener('pointerdown', e => { if (view !== 'turn' && e.isPrimary)
 stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e.clientX - sx, dy = e.clientY - sy; sx = null;
   if (Math.abs(dx) > 40 && Math.abs(dx) > 1.2 * Math.abs(dy)) go(dx < 0 ? 1 : -1); });
 stage.addEventListener('pointercancel', () => { sx = null; });
-document.getElementById('p-turn').addEventListener('click', () => { showView('turn'); stage.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' }); });
 
 // what goes with a colour (round 25): never another speaker, but the things round it, by the painter's wheel
 const CH = D.clouds.filter(c => c.hue !== null).sort((a, b) => a.hue - b.hue), hue = h => CH[((h % 6) + 6) % 6];
@@ -1221,66 +1293,63 @@ function route() {
 addEventListener('hashchange', route);
 
 // the loader as the page opens: the six coloured coins uncovered by a rolling coin, Smoke's on light pages and Fog's on dark
-const SHEET = { light: new Image(), dark: new Image() };
-SHEET.light.src = 'img/coins-light.jpg'; SHEET.dark.src = 'img/coins-dark.jpg';
-function loader(then) {
-  if (reduce) { then && then(); return; }
-  const box = el('div', { class: 'splash', role: 'progressbar', 'aria-label': 'Loading' }), cv = document.createElement('canvas');
-  box.appendChild(cv); document.body.appendChild(box);
-  const t0 = performance.now(), GO = 2.0, HOLD = 0.35; let done = false;
-  const end = () => { if (done) return; done = true; box.remove(); then && then(); };
-  box.addEventListener('click', end); addEventListener('keydown', end, { once: true });
-  (function frame(now) {
-    if (done) return;
-    const t = (now - t0) / 1000, x = Math.min(1, t / GO), e = 1 - Math.pow(1 - x, 2.2), dpr = Math.min(2, devicePixelRatio || 1), r = cv.getBoundingClientRect();
-    cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr);
-    const c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const W = r.width, H = r.height, rad = Math.min(H * 0.34, W / 19), s = 2.7 * rad, x0 = W / 2 - 3 * s, bx = x0 + 6 * s * e;
-    const dk = dark(), sheet = dk ? SHEET.dark : SHEET.light, ok = sheet.complete && sheet.naturalWidth > 0, tile = 2 * rad / 0.864;
-    c.fillStyle = css('--page'); c.fillRect(0, 0, W, H);
-    const coin = (j, cx) => { if (ok) c.drawImage(sheet, 128 * j, 0, 128, 128, cx - tile / 2, H / 2 - tile / 2, tile, tile);
-      else { c.fillStyle = j < 6 ? D.hues[j] : css('--ink'); c.beginPath(); c.arc(cx, H / 2, rad, 0, TAU); c.fill(); } };
-    c.globalCompositeOperation = ok ? (dk ? 'screen' : 'multiply') : 'source-over';
-    c.save(); c.beginPath(); c.rect(0, 0, bx, H); c.clip();
-    for (let k = 0; k < 6; k++) coin(D.clouds[k].coin, x0 + k * s);
-    c.restore();
-    coin(dk ? 6 : 7, bx);
-    c.globalCompositeOperation = 'source-over';
-    if (t > GO + HOLD) end(); else requestAnimationFrame(frame);
+// the loader: the acrylic globe turns while the hero's photograph comes in; a page that is quick shows nothing at all.
+// Once the photograph is ready the globe finishes its turn, the veil lifts and the photograph rises in
+function opening(then) {
+  const box = document.querySelector('.splash'), root = document.documentElement, hero = document.querySelector('.hero-photo img');
+  let finished = false;
+  const done = quick => { if (finished) return; finished = true;
+    if (box) { if (quick) box.remove(); else { box.classList.add('gone'); setTimeout(() => box.remove(), 700); } }
+    requestAnimationFrame(() => root.classList.remove('opening')); then && then(); };
+  if (!box || reduce || !hero || location.hash.startsWith('#speaker-')) { done(true); return; }
+  const g = box.querySelector('.globe'), t0 = performance.now(), TURN = 1600;
+  let ready = false;
+  (hero.decode ? hero.decode() : Promise.resolve()).catch(() => {}).then(() => { ready = true; });
+  setTimeout(() => { if (ready) done(true); }, 220);                 // ready at once: no loader
+  setTimeout(() => done(false), 4000);                                // never longer than this
+  (function turn(now) {
+    if (finished) return;
+    const t = now - t0, p = (t % TURN) / TURN, e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2, i = Math.round(e * 60) % 60;
+    g.style.backgroundPosition = `${(i % 10) * 100 / 9}% ${Math.floor(i / 10) * 100 / 5}%`;
+    if (ready && t > 220 && (TURN - (t % TURN)) < 40) { done(false); return; }   // let the turn finish, then go
+    requestAnimationFrame(turn);
   })(t0);
 }
 
-// the cursor's trail (round 22), on a mouse
-const fine = matchMedia('(pointer: fine)').matches && !reduce;
-const trailOn = fine;
-if (fine) {
-  const cv = el('canvas', { class: 'trail', 'aria-hidden': 'true' }), hist = []; let hover = 0, hoverTo = 0, inside = false;
-  document.body.appendChild(cv); document.documentElement.classList.add('no-cursor');
-  addEventListener('pointermove', e => { const now = performance.now() / 1000; hist.push([now, e.clientX, e.clientY]); inside = true;
-    while (hist.length > 2 && hist[1][0] < now - 1) hist.shift();
-    hoverTo = e.target.closest && e.target.closest('a, button, .spin') ? 1 : 0; });
-  document.documentElement.addEventListener('pointerleave', () => { inside = false; });
-  const at = tt => { if (tt <= hist[0][0]) return hist[0];
-    for (let i = hist.length - 1; i > 0; i--) if (hist[i - 1][0] <= tt) { const a = hist[i - 1], b = hist[i], f = Math.min(1, (tt - a[0]) / Math.max(1e-6, b[0] - a[0]));
-      return [0, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; }
-    return hist.at(-1); };
-  (function tick() {
-    const dpr = Math.min(2, devicePixelRatio || 1), W = innerWidth, H = innerHeight;
-    if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
-    const c = cv.getContext('2d'); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, W, H);
-    hover += (hoverTo - hover) * 0.25;
-    if (trailOn && inside && hist.length) {
-      const now = performance.now() / 1000, r = 7;
-      for (let k = 6; k >= 1; k--) { const p = at(now - k * 0.07); c.fillStyle = D.hues[k - 1]; c.beginPath(); c.arc(p[1], p[2], r, 0, TAU); c.fill(); }
-      const p = at(now); c.fillStyle = css('--ink'); c.beginPath(); c.arc(p[1], p[2], r + 5 * hover, 0, TAU); c.fill();
-    }
+// the cursor, on a mouse: a dot exactly where the pointer is, in the colour of the text beneath it, and a ring that follows
+// a beat behind; over anything to press the ring opens, tinted with the speaker it leads to, and over a horn that turns
+// it shows which way it goes
+if (matchMedia('(pointer: fine)').matches && !reduce) {
+  const root = document.documentElement, dot = el('div', { class: 'cur cur-dot', 'aria-hidden': 'true' }), ring = el('div', { class: 'cur cur-ring', 'aria-hidden': 'true' });
+  document.body.append(dot, ring);
+  let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null;
+  const speakerOf = a => { const k = a && (a.dataset.k || ((/#speaker-([a-z]+)/.exec(a.getAttribute('href') || '') || [])[1])); return k && BY[k] ? BY[k].col : null; };
+  addEventListener('pointermove', e => {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
+    x = e.clientX; y = e.clientY; root.classList.add('cursor');
+    if (e.target === under || !e.target.closest) return;
+    under = e.target;
+    const ink = getComputedStyle(under).color, hit = under.closest('a, button, [role="tab"], .spin, #stage, summary, label');
+    root.style.setProperty('--cur', ink);
+    ring.style.setProperty('--tint', speakerOf(hit && (hit.closest('[data-k]') || hit)) || ink);
+    ring.classList.toggle('on', !!hit);
+    ring.classList.toggle('drag', !!(under.closest('.spin') || (under.closest('#stage') && view === 'turn')));
+  }, { passive: true });
+  addEventListener('pointerdown', () => { scTo = 0.84; }); addEventListener('pointerup', () => { scTo = 1; });
+  root.addEventListener('pointerleave', () => root.classList.remove('cursor'));
+  addEventListener('blur', () => root.classList.remove('cursor'));
+  (function tick(now) {
+    const dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000)); last = now;
+    const f = 1 - Math.exp(-dt * 18); rx += (x - rx) * f; ry += (y - ry) * f; sc += (scTo - sc) * (1 - Math.exp(-dt * 26));
+    dot.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    ring.style.transform = `translate3d(${rx.toFixed(1)}px, ${ry.toFixed(1)}px, 0) scale(${sc.toFixed(3)})`;
     requestAnimationFrame(tick);
-  })();
+  })(last);
 }
 
 route();
 turnUpdate();
-loader(spinGlobe);
+opening(spinGlobe);
 </script>
 """
 
