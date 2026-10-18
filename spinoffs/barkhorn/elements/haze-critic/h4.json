@@ -1,0 +1,16 @@
+{
+  "stage1": {"impression": "Strong simple idea, violet speaker in the path under a pink dusk sky with room for type, but still CG: the horn pod blown to milky pink, the cabinet front muddy purple-black lit apart from the backlit world, uniform round clods, a flat pale horizon band with no hills or receding rows.", "score": 6.0},
+  "verdict": "iterate",
+  "changes": [
+    {"id": "c1", "change": {"setting": "back light", "from": "9 at 18 deg", "to": "3.5 at 10 deg"}, "accept": {"region": [535, 360, 705, 450], "metric": "clip_pct", "op": "<", "value": 3}},
+    {"id": "c2", "change": {"setting": "reflector; card", "from": "1.2 #E8C8D8; 0.35", "to": "3.0 #D8C0E8; 0.6"}, "accept": {"region": [560, 520, 690, 730], "metric": "lum_median", "op": "between", "value": [48, 80]}},
+    {"id": "c3", "change": {"setting": "camera", "from": "0.55 m, 9.5 m, shift 0.12", "to": "1.05 m, 10.5 m, shift 0.05"}, "accept": null},
+    {"id": "c4", "change": {"setting": "haze", "from": "0.0003, 80 m, #B8A4D8", "to": "0.00018, 140 m, #A894D0; darker hills"}, "accept": {"region": [400, 495, 800, 545], "metric": "lum_range", "op": ">", "value": 40}},
+    {"id": "c5", "change": {"setting": "white balance", "from": "5600 / 3", "to": "5000 / 10"}, "accept": {"region": [0, 0, 1200, 300], "metric": "b_median", "op": ">=", "value": 185}},
+    {"id": "c6", "change": {"setting": "disc; sky", "from": "60; 0.55", "to": "25; 0.48; bloom threshold 0.92"}, "accept": {"region": [760, 380, 840, 430], "metric": "clip_pct", "op": "<", "value": 15}},
+    {"id": "c7", "change": {"setting": "path dressing", "from": "uniform clods", "to": "fewer, 0.3-1.6x, crumbs, ruts, dried stems"}, "accept": null},
+    {"id": "c8", "change": {"setting": "sun azimuth", "from": "176", "to": "180"}, "accept": {"region": [340, 690, 480, 790], "metric": "lum_median", "op": "between", "value": [30, 42]}}
+  ],
+  "score_if_fixed": 7.6,
+  "_note": "Condensed from the critic's reply."
+}

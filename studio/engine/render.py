@@ -138,7 +138,7 @@ def main():
     cd = bpy.data.cameras.new('camera'); cam = bpy.data.objects.new('camera', cd); scene.collection.objects.link(cam)
     scene.camera = cam
     cd.sensor_fit = 'HORIZONTAL'; cd.sensor_width = cam_spec.get('sensor_mm', 36.0); cd.lens = cam_spec.get('lens_mm', 50.0)
-    cd.clip_start = 0.01; cd.clip_end = 300
+    cd.clip_start = 0.01; cd.clip_end = cam_spec.get('clip_end', 300)     # round 31b: hills kilometres off
     C = Vector(cam_spec['position']); T = Vector(cam_spec.get('target', centre))
     W, H = sh.get('size', [1600, 1000])
     if cam_spec.get('level', True):
@@ -243,6 +243,8 @@ def main():
     if cy.use_denoising:
         cy.denoiser = 'OPENIMAGEDENOISE'; cy.denoising_input_passes = 'RGB_ALBEDO_NORMAL'
     cy.max_bounces = R.get('bounces', 12); cy.diffuse_bounces = min(cy.max_bounces, R.get('diffuse_bounces', 6))
+    # light trapped in a thick sheet (20 mm acrylic, seen through its edge) bounces many times before it gets out; cut
+    # short, the edge renders black (round 31's critics), so a shot may raise these
     cy.glossy_bounces = min(cy.max_bounces, R.get('glossy_bounces', 8))
     cy.transmission_bounces = min(cy.max_bounces, R.get('transmission_bounces', 8))
     cy.transparent_max_bounces = max(cy.transparent_max_bounces, R.get('transparent_bounces', 0))
