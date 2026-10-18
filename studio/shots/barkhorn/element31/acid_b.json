@@ -196,7 +196,21 @@
     "keep": 1.0,
     "roughness": 0.02,
     "big_rings": 1.0,
-    "ripple_m": 0.0012
+    "ripple_m": 0.0012,
+    "impacts": {
+     "area": [
+      -3.0,
+      -7.5,
+      4.0,
+      4.0
+     ],
+     "density": 120,
+     "px_m": 0.003,
+     "r_max": 0.12,
+     "amp_m": 0.0006,
+     "splash_age": 0.05
+    },
+    "seed": 9
    },
    {
     "kind": "kit",
@@ -893,60 +907,6 @@
     "rough": 0.25,
     "clear": 0.1,
     "seed": 23
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "acid_rain_el",
-    "fn": "splashes",
-    "area": [
-     -3.5,
-     -8.0,
-     4.0,
-     4.0
-    ],
-    "z": -0.11,
-    "count": 900,
-    "radius": [
-     0.002,
-     0.012
-    ],
-    "opacity": 0.1,
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      3.0
-     ]
-    ],
-    "seed": 15
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "acid_rain_el",
-    "fn": "splashes",
-    "area": [
-     -2.0,
-     -3.5,
-     2.5,
-     1.5
-    ],
-    "z": -0.11,
-    "count": 700,
-    "radius": [
-     0.002,
-     0.02
-    ],
-    "opacity": 0.15,
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      0.45
-     ]
-    ],
-    "seed": 5
    }
   ]
  },

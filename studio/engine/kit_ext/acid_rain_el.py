@@ -20,6 +20,8 @@ import math, random
 import bmesh
 from mathutils import Vector
 
+FLOAT_BEADS = False   # round 31b's first finals had the crowns' beads hanging above their tips; they sit on them
+
 
 def _water(bpy, name, opacity=1.0, rough=0.0, tint=(1.0, 1.0, 1.0), scatter=0.0):
     """Clear water: refracting and reflecting (IOR 1.33), mixed with nothing by `opacity` (a streak is a drop's trace,
@@ -190,10 +192,10 @@ def _crown(bm, c, R, h, spikes, rnd):
         if rnd.random() < 0.7:
             a = 2 * math.pi * i / seg
             br = R * rnd.uniform(0.12, 0.2)
-            up = h * rnd.uniform(0.25, 0.8)
+            up = 0.0 if not FLOAT_BEADS else h * rnd.uniform(0.25, 0.8)   # beads on the crown's tips
             geom = bmesh.ops.create_icosphere(bm, subdivisions=1, radius=br)
             for v in geom['verts']:
-                v.co += Vector((c[0] + R * 1.25 * math.cos(a), c[1] + R * 1.25 * math.sin(a), c[2] + h * 1.3 + up))
+                v.co += Vector((c[0] + R * 1.18 * math.cos(a), c[1] + R * 1.18 * math.sin(a), c[2] + h * 1.25 + up))
 
 
 def splashes(bpy, name, p, kit):
@@ -251,10 +253,89 @@ def _ripples(nt, scale, speed_seed, width, keep_share=0.65):
     return math_('MULTIPLY', math_('MULTIPLY', math_('ADD', ring, ring2), fade), keep)
 
 
+def _impacts(p, water_at, rnd):
+    """The rain's impacts on the water in `impacts['area']` [x0, y0, x1, y1]: `density` per square metre visible at
+    once, each at a random age (0 the instant it lands, 1 when its rings have died away), kept only where there is
+    water (`water_at(x, y)`). A still at 1/60 s catches most of them as rings, a few as splashes."""
+    im = p['impacts']
+    x0, y0, x1, y1 = im['area']
+    n = int(im.get('density', 120) * (x1 - x0) * (y1 - y0))
+    out = []
+    for _ in range(n * 3):
+        if len(out) >= n:
+            break
+        x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
+        if water_at(x, y):
+            out.append((x, y, rnd.random(), rnd.uniform(0.6, 1.4)))   # x, y, age, the drop's size
+    return out
+
+
+def _ripple_image(bpy, name, p, impacts):
+    """A height map (metres) of the impacts' rings at `px_m` a pixel: each a packet of two or three crests a
+    wavelength apart (1 to 2 cm, capillary waves), its radius growing with age to `r_max`, its height falling as the
+    packet spreads and dies. Returned as a float image for the water's normals, with its frame [x0, y0, w, h]."""
+    import numpy as np
+    im = p['impacts']
+    x0, y0, x1, y1 = im['area']
+    px = im.get('px_m', 0.003)
+    W, H = int((x1 - x0) / px), int((y1 - y0) / px)
+    h = np.zeros((H, W), np.float32)
+    rmax, amp = im.get('r_max', 0.12), im.get('amp_m', 0.0006)
+    for x, y, age, k in impacts:
+        R = max(0.004, rmax * k * age ** 0.7)
+        lam = 0.011 + 0.008 * age                         # the rings spread out as they travel
+        reach = R + 2.5 * lam
+        cx, cy = (x - x0) / px, (y - y0) / px
+        r = int(reach / px) + 1
+        ia, ib = max(0, int(cy) - r), min(H, int(cy) + r + 1)
+        ja, jb = max(0, int(cx) - r), min(W, int(cx) + r + 1)
+        if ia >= ib or ja >= jb:
+            continue
+        yy, xx = np.mgrid[ia:ib, ja:jb]
+        d = np.hypot((xx - cx) * px, (yy - cy) * px)
+        q = (d - R) / lam
+        env = np.exp(-(q / 1.1) ** 2) * (q < 1.2)         # the leading crest highest, two or three behind it
+        a = amp * k * (1.0 - age) ** 1.6 / (1.0 + R / 0.03)
+        h[ia:ib, ja:jb] += (a * env * np.cos(2 * np.pi * q)).astype(np.float32)
+    img = bpy.data.images.new(f'{name}-rings', W, H, alpha=True, float_buffer=True)
+    rgba = np.zeros((H, W, 4), np.float32); rgba[..., 0] = h; rgba[..., 1] = h; rgba[..., 2] = h; rgba[..., 3] = 1.0
+    img.pixels.foreach_set(rgba.ravel())
+    img.colorspace_settings.name = 'Non-Color'
+    img.pack()
+    return img, (x0, y0, x1 - x0, y1 - y0)
+
+
+def _splash(bm, x, y, z, age, k, rnd):
+    """What a drop looks like a moment after it lands, by its age: a crown thrown up (the first few milliseconds), then
+    a jet rising from the crater with a bead on top, then only a droplet or two falling back. Millimetres across."""
+    if age < 0.012:                                       # the crown
+        R = 0.0025 * k + 0.004 * (age / 0.012)
+        _crown(bm, (x, y, z), R, R * rnd.uniform(0.8, 1.3), rnd.choice([7, 8, 9, 10, 11]), rnd)
+    elif age < 0.03:                                      # the jet
+        hgt = 0.006 + 0.012 * k * rnd.random()
+        geom = bmesh.ops.create_cone(bm, cap_ends=True, segments=8, radius1=0.0014 * k, radius2=0.0007 * k, depth=hgt)
+        for v in geom['verts']:
+            v.co += Vector((x, y, z + hgt / 2))
+        geom = bmesh.ops.create_icosphere(bm, subdivisions=2, radius=0.0013 * k)
+        for v in geom['verts']:
+            v.co += Vector((x, y, z + hgt + 0.002 * rnd.random()))
+    else:                                                 # droplets falling back
+        for _ in range(rnd.choice([1, 1, 2, 3])):
+            geom = bmesh.ops.create_icosphere(bm, subdivisions=2, radius=rnd.uniform(0.0006, 0.0013) * k)
+            off = Vector((rnd.uniform(-0.012, 0.012), rnd.uniform(-0.012, 0.012), rnd.uniform(0.002, 0.02)))
+            for v in geom['verts']:
+                v.co += Vector((x, y, z)) + off
+
+
 def puddle(bpy, name, p, kit):
+    """Still water at level `z` (see the module's notes). With `impacts`, the rain's rings near the camera are one
+    list of impacts at random ages, baked into the water's normals, and the youngest of them are the splashes, so
+    every splash sits in its own ring and their phases are spread as a still would catch them; beyond that area the
+    procedural rings carry on. `ground` names the ground piece, so impacts land only where there is water."""
     w, d = p.get('size', [8.0, 8.0])
     cx, cy, _ = p.get('position', [0, 0, 0])
     z = p.get('z', 0.004)
+    rnd = random.Random(p.get('seed', 9))
     bm = bmesh.new()
     bmesh.ops.create_grid(bm, x_segments=1, y_segments=1, size=0.5)
     for v in bm.verts:
@@ -265,7 +346,6 @@ def puddle(bpy, name, p, kit):
     b.inputs['Roughness'].default_value = p.get('roughness', 0.015)
     b.inputs['IOR'].default_value = 1.333
     b.inputs['Transmission Weight'].default_value = 1.0
-    rings = p.get('rings', 30.0)                              # per square metre
     big = p.get('ring', 0.12)                                 # the largest ring's width (m)
     keep = p.get('keep', 0.65)
     h1 = _ripples(nt, 1.0 / big, 1.0, 0.035, keep)
@@ -287,12 +367,57 @@ def puddle(bpy, name, p, kit):
     nt.links.new(add2.outputs['Value'], add3.inputs[0]); nt.links.new(h4, add3.inputs[1]); add = add3
     bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = p.get('ripple', 0.5)
     bp.inputs['Distance'].default_value = p.get('ripple_m', 0.0015)
-    nt.links.new(add.outputs['Value'], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
-    _ = rings
+    height = add.outputs['Value']
+    obs = []
+    if p.get('impacts'):
+        ground = bpy.data.objects.get(p.get('ground', 'prop0-kit'))
+        def water_at(x, y):
+            if ground is None:
+                return True
+            hit, loc, *_ = ground.ray_cast(ground.matrix_world.inverted() @ Vector((x, y, 2.0)), Vector((0, 0, -1)))
+            return (not hit) or (ground.matrix_world @ loc).z < z - p['impacts'].get('margin_m', 0.012)
+        imp = _impacts(p, water_at, rnd)
+        img, (fx, fy, fw, fh) = _ripple_image(bpy, name, p, imp)
+        tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping')
+        mp.inputs['Scale'].default_value = (1.0 / fw, 1.0 / fh, 1.0)
+        mp.inputs['Location'].default_value = (-fx / fw, -fy / fh, 0.0)
+        nt.links.new(tc.outputs['Object'], mp.inputs['Vector'])
+        tx = nt.nodes.new('ShaderNodeTexImage'); tx.image = img; tx.extension = 'CLIP'; tx.interpolation = 'Cubic'
+        nt.links.new(mp.outputs['Vector'], tx.inputs['Vector'])
+        # inside the area the impacts' own rings (metres), outside it the procedural ones (scaled to metres)
+        sc = nt.nodes.new('ShaderNodeMath'); sc.operation = 'MULTIPLY'
+        sc.inputs[1].default_value = p.get('ripple', 0.5) * p.get('ripple_m', 0.0015)
+        nt.links.new(height, sc.inputs[0])
+        inv = nt.nodes.new('ShaderNodeMath'); inv.operation = 'SUBTRACT'; inv.inputs[0].default_value = 1.0
+        nt.links.new(tx.outputs['Alpha'], inv.inputs[1])
+        mo = nt.nodes.new('ShaderNodeMath'); mo.operation = 'MULTIPLY'
+        nt.links.new(sc.outputs[0], mo.inputs[0]); nt.links.new(inv.outputs[0], mo.inputs[1])
+        ia = nt.nodes.new('ShaderNodeMath'); ia.operation = 'MULTIPLY'; ia.inputs[1].default_value = p['impacts'].get('gain', 1.0)
+        nt.links.new(tx.outputs['Color'], ia.inputs[0])
+        tot = nt.nodes.new('ShaderNodeMath'); tot.operation = 'ADD'
+        nt.links.new(mo.outputs[0], tot.inputs[0]); nt.links.new(ia.outputs[0], tot.inputs[1])
+        bp.inputs['Strength'].default_value = 1.0; bp.inputs['Distance'].default_value = 1.0
+        height = tot.outputs[0]
+        # the youngest impacts are still splashing
+        young = p['impacts'].get('splash_age', 0.06)
+        sb = bmesh.new()
+        ns = 0
+        for x, y, age, k in imp:
+            if age < young:
+                _splash(sb, x, y, z, age / young * 0.06, k, rnd)
+                ns += 1
+        if ns:
+            sob = _object(bpy, f'{name}-splashes', sb, _water(bpy, f'{name}-splash-water', 1.0))
+            _glimpse_only(sob)
+            obs.append(sob)
+        else:
+            sb.free()
+        print(f'{name}: {len(imp)} impacts, {ns} still splashing')
+    nt.links.new(height, bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b.inputs['Normal'])
     ob = _object(bpy, name, bm, m, smooth=False)
     if p.get('shadow') is False:
         ob.visible_shadow = False
-    return [ob]
+    return [ob] + obs
 
 
 def wet_ground(bpy, name, p, kit):
