@@ -84,3 +84,16 @@ after a concept change. The critics' notes in the last three passes swung back a
 dark, so a bounce of 40; pass 7: the speaker front-lit by that bounce), which says the light on the speaker, not a
 setting, is what holds the image down. Five frames scored 5.5 (passes 1, 2, 3, 5, 6), so the best rig was chosen by
 blind duels between them before the finals.
+
+### The duels
+
+Blind, by the duel prompt (`critic/ab/PROMPT-DUEL.txt`, run by hand so `critic/best.json` stays as it is), proofs at
+0.5 scale:
+
+| Duel | A | B | Scores | Preferred | What decided it |
+|---|---|---|---|---|---|
+| 1 | pass 6 (photographed ranges) | pass 3 (modelled ranges) | 5.0 / 6.2 | pass 3 | the cabinet lifted and legible, the horn rimmed with light, one continuous grass layer; pass 6's murky cabinet, a seam and a boxy shadow in its grass. Pass 6 won only on its crisper ridge and sky |
+| 2 | pass 5 | pass 6 | 5.0 / 5.8 | pass 6 | the cast shadow grounding the speaker, a cleaner stem bed, warmer backlit grass |
+
+So the order is pass 3, then pass 6, then pass 5, and the finals are rendered from pass 3's rig (`haze_b.py` is back at
+that version; the photographed version is in git at b761a8d). Pass 6 is the runner-up.
