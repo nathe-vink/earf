@@ -1,0 +1,9 @@
+{"A": 4.8, "B": 5.6, "prefer": "B", "differences": [
+{"what": "Background in A is a flat, near-white haze; trunks read as smooth plastic columns with no canopy or bark, so the set looks like a CG backdrop. B has dappled canopy light, visible god-rays and bark texture on the near trunks, which gives depth and a believable forest", "region": [600, 0, 1200, 400], "favours": "B"},
+{"what": "A's contrast is low and milky across the frame and the scene lacks a clear tonal anchor; B has proper darks and a lit middle ground that leads the eye to the product", "region": [0, 0, 1200, 800], "favours": "B"},
+{"what": "In A the regular radiating shadow stripes on the ground repeat like a pattern and look synthetic; B's light pool is more irregular and natural", "region": [550, 520, 1200, 700], "favours": "B"},
+{"what": "B's foreground shadow band has an unexplained hard, straight upper edge, like a wall offscreen, which reads as an error", "region": [150, 680, 1200, 800], "favours": "A"},
+{"what": "The cabinet is darker and lower-contrast in B (median luminance 25 vs 31, 3.7% crushed vs 0.2%); A shows the tinted clear panels, the internal bracing and the woofer surround more legibly", "region": [330, 350, 535, 615], "favours": "A"},
+{"what": "The waveguide on top has a brighter, cleaner rim highlight against the darker set in B, so its silhouette separates better; in A it nearly dissolves into the bright haze", "region": [375, 220, 545, 335], "favours": "B"},
+{"what": "Neither frame grounds the product: there is no clear contact shadow or occlusion under the base, so it looks pasted onto the forest floor; this is slightly worse in A, where the ground behind it is bright", "region": [320, 590, 545, 625], "favours": "B"}
+]}
