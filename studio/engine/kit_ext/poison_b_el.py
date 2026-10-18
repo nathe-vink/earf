@@ -213,8 +213,11 @@ def amanita(bpy, name, p, kit):
         nw = p.get('warts', {'button': 150, 'young': 110, 'convex': 85, 'plane': 65, 'old': 40}[age])
         for k in range(nw):
             t = 1 - rnd.random() ** 1.6                   # nearer the top more often
+            th0 = rnd.uniform(0, 2 * math.pi)
+            if noise.noise(Vector((math.cos(th0) * 2, math.sin(th0) * 2, t * 3 + ph[0]))) > 0.15 and age in ('plane', 'old', 'convex'):
+                continue                                  # the rain has washed this patch of veil off
             i = min(len(pts) - 2, int(t * (len(pts) - 1)))
-            th = rnd.uniform(0, 2 * math.pi)
+            th = th0
             (ra, za), (rb, zb) = pts[i], pts[i + 1]
             u = rnd.random(); r = (ra + (rb - ra) * u) * wob(th, 0); z = za + (zb - za) * u
             nr, nz = (zb - za), -(rb - ra); L = math.hypot(nr, nz) or 1; nr, nz = nr / L, nz / L
@@ -281,14 +284,25 @@ def _amanita_mats(bpy, name, sp, R, Hs):
         b.inputs['Subsurface Weight'].default_value = 0.12
     else:
         # olive-green to yellowish at the margin, with dark radial fibrils
-        col = _ramp(nt, mix.outputs['Value'], [(0.1, '#4A4E22'), (0.5, '#6F7034'), (0.9, '#9A9654'), (1.2, '#C2BE84')])
+        col = _ramp(nt, mix.outputs['Value'], [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'), (1.2, '#A3A06A')])
         b.inputs['Subsurface Weight'].default_value = 0.08
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)
     b.inputs['Roughness'].default_value = 0.55
     b.inputs['Coat Weight'].default_value = 0.15; b.inputs['Coat Roughness'].default_value = 0.25
     fib = _noise(nt, 1.0 / (R * 0.06), 6.0, stretch=(1.0, 1.0, 1.0))
-    _bump(nt, b, fib.outputs['Fac'], 0.25, R * 0.004)
+    n1 = _bump(nt, b, fib.outputs['Fac'], 0.25, R * 0.004)
+    # the striate margin: fine radial grooves in the outer fifth of the cap
+    gr = nt.nodes.new('ShaderNodeTexGradient'); gr.gradient_type = 'RADIAL'
+    nt.links.new(tc.outputs['Object'], gr.inputs['Vector'])
+    wv = nt.nodes.new('ShaderNodeMath'); wv.operation = 'SINE'
+    mul = nt.nodes.new('ShaderNodeMath'); mul.operation = 'MULTIPLY'; mul.inputs[1].default_value = 2 * math.pi * 90
+    nt.links.new(gr.outputs['Fac'], mul.inputs[0]); nt.links.new(mul.outputs['Value'], wv.inputs[0])
+    edge = nt.nodes.new('ShaderNodeMapRange'); edge.inputs['From Min'].default_value = 0.78; edge.inputs['From Max'].default_value = 0.98
+    nt.links.new(dv.outputs['Value'], edge.inputs['Value'])
+    st = nt.nodes.new('ShaderNodeMath'); st.operation = 'MULTIPLY'
+    nt.links.new(wv.outputs['Value'], st.inputs[0]); nt.links.new(edge.outputs['Result'], st.inputs[1])
+    _bump(nt, b, st.outputs['Value'], 0.35 if sp == 'muscaria' else 0.0, R * 0.003, prev=n1)
     out['cap'] = m
     # warts: cream, dirty, crumbly
     m, nt, b = _node_mat(bpy, f'{name}-wartmat')
@@ -334,7 +348,7 @@ def _coil_path(p):
     for i in range(n + 1):
         t = i / n
         th = -2 * math.pi * turns * t
-        r = r_out + (r_in - r_out) * t
+        r = (r_out + (r_in - r_out) * t) * (1 + 0.07 * math.sin(3 * th + 0.7) + 0.04 * math.sin(5 * th))
         z = p.get('girth', 0.02) * 0.82 + p.get('girth', 0.02) * 1.5 * max(0.0, t - 0.5) / 0.5   # inner turns ride up onto the outer
         pts.append(Vector((r * math.cos(th), r * math.sin(th), z)))
     hx, hy, hz = p.get('head', [0.05, -0.06, 0.16])
@@ -443,17 +457,17 @@ def _viper_mat(bpy, name, p, g):
     nt.links.new(geo.outputs['Normal'], sep.inputs['Vector'])
     # facing: -1 belly, 0 flank, +1 back
     nzc = sep.outputs['Z']
-    base = _ramp(nt, nzc, [(0.0, p.get('belly', '#B9C46A')), (0.38, p.get('stripe', '#D8E2A0')),
-                           (0.47, p.get('green', '#3E8A1E')), (0.75, p.get('green', '#3E8A1E')), (1.0, p.get('green2', '#2F7416'))])
+    base = _ramp(nt, nzc, [(0.0, p.get('belly', '#A8B064')), (0.38, p.get('stripe', '#C8D290')),
+                           (0.47, p.get('green', '#3E7A22')), (0.75, p.get('green', '#3A7020')), (1.0, p.get('green2', '#2E5A18'))])
     # the ramp works on 0..1; map z from [-1, 1]
     mp = nt.nodes.new('ShaderNodeMapRange'); mp.inputs['From Min'].default_value = -1.0; mp.inputs['From Max'].default_value = 1.0
     nt.links.new(nzc, mp.inputs['Value'])
     nt.links.new(mp.outputs['Result'], base.node.inputs['Fac'])
     # the scales
     tc = nt.nodes.new('ShaderNodeTexCoord')
-    vor = nt.nodes.new('ShaderNodeTexVoronoi'); vor.feature = 'F1'; vor.inputs['Scale'].default_value = 1.0 / (g * 0.24)
+    vor = nt.nodes.new('ShaderNodeTexVoronoi'); vor.feature = 'F1'; vor.inputs['Scale'].default_value = 1.0 / (g * 0.17)
     nt.links.new(tc.outputs['Object'], vor.inputs['Vector'])
-    vor2 = nt.nodes.new('ShaderNodeTexVoronoi'); vor2.feature = 'DISTANCE_TO_EDGE'; vor2.inputs['Scale'].default_value = 1.0 / (g * 0.24)
+    vor2 = nt.nodes.new('ShaderNodeTexVoronoi'); vor2.feature = 'DISTANCE_TO_EDGE'; vor2.inputs['Scale'].default_value = 1.0 / (g * 0.17)
     nt.links.new(tc.outputs['Object'], vor2.inputs['Vector'])
     # darker in the seams between scales, each scale's own shade a little different
     seam = nt.nodes.new('ShaderNodeMapRange'); seam.inputs['From Min'].default_value = 0.0; seam.inputs['From Max'].default_value = 0.08
@@ -497,7 +511,9 @@ def _viper_mat(bpy, name, p, g):
     n1 = _bump(nt, b, dome.outputs['Value'], 1.0, g * 0.035)
     b.inputs['Roughness'].default_value = 0.45
     b.inputs['Coat Weight'].default_value = 0.1; b.inputs['Coat Roughness'].default_value = 0.2
-    b.inputs['Subsurface Weight'].default_value = 0.05
+    b.inputs['Subsurface Weight'].default_value = 0.2
+    b.inputs['Subsurface Radius'].default_value = (0.002, 0.004, 0.0008)
+    b.inputs['Sheen Weight'].default_value = 0.15
     return m
 
 
@@ -675,3 +691,87 @@ def moss_pad(bpy, name, p, kit):
         v.co = Vector((v.co.x * R * k, v.co.y * R * k, max(v.co.z, -0.2) * R * 0.35))
     m = assets.pbr(bpy, 'acg:Moss004', '2k', scale=0.25, displace=0.008, name=f'{name}-moss')
     return [_obj(bpy, name, bm, m, p)]
+
+
+# --- redwood sorrel ----------------------------------------------------------------------------------------------
+def _heart(n=40):
+    """A heart's outline (the classic curve), its point at the origin, its notch along +y, about 1 long."""
+    pts = []
+    for i in range(n):
+        t = 2 * math.pi * i / n
+        x = 16 * math.sin(t) ** 3
+        y = 13 * math.cos(t) - 5 * math.cos(2 * t) - 2 * math.cos(3 * t) - math.cos(4 * t)
+        pts.append((x / 34.0, (y + 17) / 34.0))
+    return pts
+
+
+def _sorrel_plant(bm, rnd, size):
+    """One redwood sorrel plant: `leaves` trifoliate leaves on petioles from one point, each leaflet a folded heart."""
+    heart = _heart()
+    for k in range(rnd.randint(3, 6)):
+        a = rnd.uniform(0, 2 * math.pi); h = size * rnd.uniform(0.55, 1.1)
+        lean = rnd.uniform(0.2, 0.5)
+        top = Vector((math.cos(a) * h * lean, math.sin(a) * h * lean, h))
+        _join(bm, lambda t, top=top: _tube_simple(t, [Vector((0, 0, 0)), top * 0.5 + Vector((0, 0, h * 0.05)), top], size * 0.012))
+        L = size * rnd.uniform(0.36, 0.5); droop = rnd.uniform(0.05, 0.3)
+        for j in range(3):
+            phi = a + 2 * math.pi * j / 3 + rnd.uniform(-0.15, 0.15)
+            d = Vector((math.cos(phi), math.sin(phi), -droop)).normalized()
+            side = Vector((-math.sin(phi), math.cos(phi), 0))
+            nrm = side.cross(d).normalized()
+            if nrm.z < 0:
+                nrm = -nrm
+            fold = rnd.uniform(0.15, 0.35)
+            def leaflet(t, d=d, side=side, nrm=nrm, fold=fold):
+                c = t.verts.new(top + d * L * 0.45 + nrm * L * 0.02)
+                ring = []
+                for x, y in heart:
+                    p = top + d * (y * L) + side * (x * L) + nrm * (abs(x) * L * fold)
+                    ring.append(t.verts.new(p))
+                for i in range(len(ring)):
+                    t.faces.new((c, ring[i], ring[(i + 1) % len(ring)]))
+            _join(bm, leaflet)
+
+
+def _tube_simple(bm, pts, r, sides=5):
+    rings = []
+    for i, p in enumerate(pts):
+        d = (pts[min(i + 1, len(pts) - 1)] - pts[max(i - 1, 0)]).normalized()
+        a = d.cross(Vector((1, 0, 0)) if abs(d.x) < 0.9 else Vector((0, 1, 0))).normalized(); b = d.cross(a)
+        rings.append([bm.verts.new(p + (a * math.cos(2 * math.pi * k / sides) + b * math.sin(2 * math.pi * k / sides)) * r) for k in range(sides)])
+    for ra, rb in zip(rings, rings[1:]):
+        for k in range(sides):
+            bm.faces.new((ra[k], ra[(k + 1) % sides], rb[(k + 1) % sides], rb[k]))
+
+
+def sorrel(bpy, name, p, kit):
+    """A carpet of redwood sorrel (Oxalis oregana) strewn over the objects whose names hold any of `on`: `variants`
+    plants `size` tall (m) made once into a collection, instanced `density` per square metre in patches (`patch`
+    metres, `patch_cut`), within and avoiding circles as poison_el's strew. Leaves a soft green, paler at the midrib,
+    light through them."""
+    import importlib, sys, os
+    rnd = random.Random(p.get('seed', 1))
+    col = bpy.data.collections.new(f'{name}-plants')
+    m, nt, b = _node_mat(bpy, f'{name}-leaf')
+    nz = _noise(nt, 1.0 / 0.03, 3.0)
+    nt.links.new(_ramp(nt, nz.outputs['Fac'], [(0.3, '#3F6A22'), (0.6, '#52822C'), (0.8, '#6A9238')]), b.inputs['Base Color'])
+    b.inputs['Roughness'].default_value = 0.55; b.inputs['Subsurface Weight'].default_value = 0.25
+    b.inputs['Subsurface Radius'].default_value = (0.002, 0.004, 0.001)
+    if 'Transmission Weight' in b.inputs:
+        b.inputs['Transmission Weight'].default_value = 0.15
+    vn = _noise(nt, 1.0 / 0.004, 5.0); _bump(nt, b, vn.outputs['Fac'], 0.2, 0.0003)
+    for v in range(p.get('variants', 6)):
+        bm = bmesh.new(); _sorrel_plant(bm, rnd, p.get('size', 0.1) * rnd.uniform(0.8, 1.2))
+        me = bpy.data.meshes.new(f'{name}-v{v}'); bm.to_mesh(me); bm.free()
+        for f in me.polygons:
+            f.use_smooth = True
+        me.materials.append(m)
+        ob = bpy.data.objects.new(f'{name}-v{v}', me); col.objects.link(ob)
+    d = os.path.dirname(os.path.abspath(__file__))
+    if d not in sys.path:
+        sys.path.insert(0, d)
+    pe = importlib.import_module('poison_el')
+    for o in list(bpy.context.scene.objects):
+        if o.type == 'MESH' and any(k in o.name for k in p['on']):
+            md = o.modifiers.new(name, 'NODES'); md.node_group = pe._strew_group(bpy, name, p, col, o.location)
+    return []

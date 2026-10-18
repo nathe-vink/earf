@@ -150,14 +150,13 @@ def poisons():
     rnd = random.Random(41)
     AG = [  # two at the speaker's feet
           (-0.42, -0.45, 0.075, 'convex', 1, (0.012, -0.01), 0.0), (-0.3, -0.58, 0.03, 'button', 3, (0, 0), 0.0),
-          # one clump at the right, nearer the lens, at every age
-          (0.62, -1.85, 0.09, 'convex', 21, (-0.018, -0.012), 0.0), (0.78, -1.75, 0.06, 'young', 22, (0.015, 0.008), 0.0),
-          (0.52, -2.0, 0.032, 'button', 23, (0, 0), 0.0), (0.92, -1.92, 0.115, 'plane', 24, (0.025, -0.012), 0.3),
-          (0.7, -2.08, 0.045, 'young', 25, (-0.012, -0.018), 0.0)]
+          # a tight, overlapping clump at the right nearer the lens, at every age
+          (0.66, -1.85, 0.095, 'convex', 21, (-0.025, -0.015), 0.0), (0.78, -1.78, 0.07, 'young', 22, (0.02, 0.012), 0.0),
+          (0.6, -1.97, 0.032, 'button', 23, (0, 0), 0.0), (0.86, -1.9, 0.115, 'plane', 24, (0.03, -0.015), 0.35)]
     for x, y, R, age, sd, lean, torn in AG:
-        P.append(extb('amanita', (x, y, -0.006), cap=R, age=age, seed=sd, lean=list(lean), torn=torn))
+        P.append(extb('amanita', (x, y, -0.018 if age != 'button' else -0.01), cap=R, age=age, seed=sd, lean=list(lean), torn=torn))
     # death caps, olive, half in the ferns at the right behind the speaker's cluster
-    for x, y, R, age, sd in [(0.36, -0.5, 0.055, 'convex', 11), (0.5, -0.38, 0.04, 'young', 12)]:
+    for x, y, R, age, sd in [(0.36, -0.42, 0.06, 'convex', 11), (0.47, -0.33, 0.045, 'young', 12)]:
         P.append(extb('amanita', (x, y, -0.006), cap=R, age=age, seed=sd, species='phalloides'))
     # a mossy stump (a Poly Haven scan) in the foreground at the left, the viper coiled on its top, its head raised
     # toward the speaker; the frog on the moss at the stump's foot
@@ -165,11 +164,15 @@ def poisons():
     P.append(asset('tree_stump_02', (rx, ry, -0.03), rotate=(0, 0, 35), scale=rs, res='2k'))
     P.append(extb('viper', (rx + 0.02, ry + 0.02, 0.3), drop=True, rotate=[0, 0, 20], head=[0.07, -0.1, 0.15], look=-35,
                   girth=0.024, r_out=0.13, r_in=0.05, turns=2.1))
-    P.append(extb('dartfrog', (rx + 0.28, ry - 0.12, 0.4), rotate=[0, 0, 170], size=0.042, drop=True))
+    P.append(extb('dartfrog', (rx + 0.2, ry - 0.2, 0.4), rotate=[0, 0, 170], size=0.045, drop=True))
     # foxglove spires behind at the left, nightshade at the right
-    P += [extb('foxglove', (-1.2, 0.5, -0.01), height=1.35, lean=[0.05, 0.0], side=-100, seed=1, bells=24),
-          extb('foxglove', (1.35, 1.25, -0.01), height=1.15, lean=[0.03, 0.0], side=-110, seed=3, bells=22),
-          ]
+    # foxgloves in a group at the left behind the stump, nightshade at the right
+    # (kept out of the sun's path to the speaker, which crosses x -1.3 at y -0.35)
+    P += [extb('foxglove', (-1.15, 1.25, -0.01), height=1.35, lean=[0.05, 0.0], side=-100, seed=1, bells=26),
+          extb('foxglove', (-1.45, 1.5, -0.01), height=1.0, lean=[-0.04, 0.02], side=-80, seed=2, bells=20),
+          extb('foxglove', (-0.95, 1.6, -0.01), height=1.15, lean=[0.02, -0.03], side=-110, seed=4, bells=22),
+          extb('foxglove', (-1.7, 1.2, -0.01), height=0.85, lean=[0.03, 0.0], side=-95, seed=5, bells=18),
+          extb('nightshade', (1.05, -0.7, -0.01), height=0.45, lean=[-0.06, -0.03], seed=5, berries=7)]
     return P
 
 
@@ -184,7 +187,7 @@ def ferns_b(seed=3):
         k = 0
         while k < n:
             x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
-            if x * x + y * y < 0.8 ** 2 or (-0.9 < x < 1.1 and -0.8 < y < 0.0) or math.hypot(x - 0.72, y + 1.9) < 0.45 or math.hypot(x - ROCK[0], y - ROCK[1]) < 0.55:
+            if x * x + y * y < 0.8 ** 2 or (-0.9 < x < 1.1 and -0.8 < y < 0.0) or math.hypot(x - 0.72, y + 1.9) < 0.45 or (-1.9 < x < -0.8 and 1.0 < y < 1.8) or (-2.8 < x < -0.4 and -1.0 < y < 0.2) or math.hypot(x - ROCK[0], y - ROCK[1]) < 0.55:
                 continue
             pl.append([round(x, 3), round(y, 3), 0.0, round(rnd.uniform(s0, s1), 3), round(rnd.uniform(0, 360), 1),
                        rnd.choice([0, 1, 2, 3]), round(rnd.uniform(-12, 12), 1)])
@@ -192,8 +195,8 @@ def ferns_b(seed=3):
     return [ext('plants', model='fern_02', place=pl, seed=seed)]
 
 
-SUN_B = {'azimuth_deg': -105.0, 'elevation_deg': 32.0, 'irradiance': 30.0, 'angle_deg': 0.6, 'color': '#FFE2AE'}
-SUNLIT_B = [(0.0, 0.0, 0.7, 1.0), (-0.05, -0.45, 0.05, 0.6), (0.72, -1.9, 0.1, 0.32), (-0.42, -2.25, 0.35, 0.28), (-2.0, 7.0, 4.0, 0.6),
+SUN_B = {'azimuth_deg': -75.0, 'elevation_deg': 30.0, 'irradiance': 30.0, 'angle_deg': 0.6, 'color': '#FFE2AE'}
+SUNLIT_B = [(0.0, 0.0, 0.75, 0.9), (0.74, -1.88, 0.15, 0.14), (-0.38, -2.3, 0.5, 0.22), (-3.4, 3.6, 1.6, 0.25), (-2.0, 7.0, 4.0, 0.6),
             (-3.5, 10.0, 5.0, 0.6), (1.0, 12.0, 5.0, 0.55), (2.5, 6.5, 0.8, 0.5)]
 
 
@@ -201,11 +204,20 @@ def shot():
     props = [ground('forest_leaves_02', size=(30.0, 30.0), position=(0.0, 8.0, 0.0), displace=0.03, tint='#3A2A1E',
                     tint_mix=0.15, relief=0.15, res='4k', cells=900),
              ext('redwood', (-3.4, 3.6, -0.1), radius=1.25, height=30.0, tint=REDWOOD, tint_mix=0.3, tex_scale=1.4,
-                 bump=1.6, displace=0.12, segments=420, rings=220, seed=1, flare=0.75, foot=1.5, turn=20),
+                 bump=1.6, displace=0.18, segments=420, rings=220, seed=1, flare=0.75, foot=1.5, turn=20),
              # the floor in 3D near the speaker: bark crumbs, twigs and moss in irregular cushions
              ext('strew', model='bark_debris_01', on=['prop0-kit'], density=2.0, up=0.5, scale=[0.22, 0.4], seed=31,
                  within=[0.0, -0.3, 3.2], avoid=[[0.0, 0.0, 0.33], [0.0, -0.55, 0.5]]),
              ext('darken', on=['prop0-kit'], value=0.5, rough=0.85),
+             # redwood sorrel in patches over the floor, coming close to the lens, and moss cushions round the bases
+             extb('sorrel', on=['prop0-kit'], density=320, up=0.6, patch=0.6, patch_cut=0.55, scale=[0.8, 1.25], seed=51,
+                  size=0.075, within=[0.0, -1.0, 5.0], avoid=[[0.0, 0.0, 0.42], [0.72, -1.9, 0.22], [-0.42, -2.25, 0.4]]),
+             ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=52,
+                 within=[0.72, -1.9, 0.28], avoid=[[0.0, 0.0, 0.32]]),
+             ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=53,
+                 within=[-0.35, -0.5, 0.22], avoid=[[0.0, 0.0, 0.32]]),
+             ext('strew', model='moss_01', on=['prop0-kit'], density=9000, up=0.5, scale=[0.9, 1.8], seed=54,
+                 within=[0.42, -0.38, 0.18], avoid=[[0.0, 0.0, 0.32]]),
              ext('canopy', (0.0, 4.0, CANOPY_Z), size=[220.0, 220.0], gap=1.2, open=0.05,
                  holes=[gap_for(x, y, z, r, (0.0, 4.0), SUN_B) for x, y, z, r in SUNLIT_B]),
              ext('mist', (0.0, 20.1, -0.2), size=[50.0, 37.8, 18.0], density=0.09, top=0.35, wisp=2.5, color='#F2F4EA',
@@ -235,7 +247,8 @@ def shot():
     lights = {'reflector': {**area(-35, 8, 2.5, 2.0, '#EEF0E0', (2.0, 1.2), (0.0, -0.3, 0.5)), 'specular': 0.0},
               'scrim': {**area(-10, 30, 3.5, 0.5, '#D8DCC8', (2.0, 1.0), (0.0, 0.0, 1.15)), 'diffuse': 0.0},
               'scrim2': {**area(-40, 55, 2.5, 0.4, '#D8DCC8', (0.5, 1.5), (0.0, 0.0, 1.2)), 'diffuse': 0.0},
-              'rim': {**area(140, 22, 2.0, 1.5, '#FFE6B8', (0.6, 1.8), (0.0, 0.0, 1.2)), 'specular': 0.4}}
+              'rim': {**area(140, 22, 2.0, 1.5, '#FFE6B8', (0.6, 1.8), (0.0, 0.0, 1.0)), 'specular': 0.4},
+              'horn_back': area(165, 30, 1.8, 3.0, '#FFE6B8', (1.0, 0.6), (0.0, 0.0, 1.15))}
     cam = camera(height=0.5, distance=4.6, azimuth=4.0, lens=50.0, target=(0.05, -0.3, 0.6), fstop=4.0)
     return frame('poison', props, cam, sky(SKY2, rotation_deg=SKY_ROT, strength=0.3, res='4k'),
                  'barkhorn, Poison B, the poisonous forest', lights=lights, sun=SUN_B, rotate_z=-18.0,
