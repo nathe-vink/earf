@@ -105,7 +105,7 @@ its `.report.json` and `.shot.json`, from pass 3's rig at 512 samples, denoised.
 single two-hour render, so the finals render in eight horizontal strips with the finish off, each strip saved as it
 lands (a restart resumes at the next), then stitched (32 px overlaps, aligned and feathered) and finished once over the
 whole frame: `haze_b_strips.py`. Landscape: 99.3 min of rendering (the sky's strips about 2 min each, the grass's 16
-to 27). The portrait is re-framed, not cropped: 105 mm from 7.5 m, the speaker on the right, the sky above for type.
+to 27); portrait: 74.7 min. Both on four CPU cores. The portrait is re-framed, not cropped: 105 mm from 7.5 m, the speaker on the right, the sky above for type.
 
 **The blind critic on the landscape final: 5.5** ("a competent atmospheric CG render, not a photograph"; if fixed, 7.3).
 
