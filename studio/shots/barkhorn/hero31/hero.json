@@ -1,8 +1,8 @@
 {
  "sun": {
   "azimuth_deg": 180,
-  "elevation_deg": 24.0,
-  "irradiance": 23.0,
+  "elevation_deg": 30.0,
+  "irradiance": 32.0,
   "angle_deg": 1.5,
   "color": 5200
  },
@@ -126,9 +126,9 @@
  },
  "materials": {
   "sweep": {
-   "tooth": 1.6,
-   "tooth_mm": 0.6,
-   "mottle": 0.05,
+   "tooth": 2.2,
+   "tooth_mm": 0.9,
+   "mottle": 0.06,
    "roughness": 0.9
   }
  },
@@ -142,14 +142,14 @@
    "position": [
     0.0,
     5.0,
-    3.0
+    2.0
    ],
    "target": [
     0.0,
     12.0,
-    3.0
+    2.0
    ],
-   "irradiance": 15.0,
+   "irradiance": 21.0,
    "color": 5200,
    "spread_deg": 120,
    "transmission": false
@@ -191,7 +191,7 @@
     -5.0,
     0.0
    ],
-   "irradiance": 6.0,
+   "irradiance": 3.0,
    "color": 5200,
    "spread_deg": 90,
    "transmission": false
@@ -346,16 +346,16 @@
     2.5
    ],
    "position": [
-    3.5,
-    1.0,
-    1.6
+    4.0,
+    0.5,
+    2.0
    ],
    "target": [
     2.6006666666666667,
     0.7,
     0.8
    ],
-   "irradiance": 45.0,
+   "irradiance": 80.0,
    "color": 5200,
    "receivers": [
     "left#7",
@@ -409,8 +409,8 @@
   "transparent_bounces": 64,
   "view": "Khronos PBR Neutral",
   "exposure": -2.5,
-  "white_balance_k": 5000,
-  "white_balance_tint": 6.0
+  "white_balance_k": 5250,
+  "white_balance_tint": 3.0
  },
  "finish": {
   "enabled": true,

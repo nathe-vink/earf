@@ -35,30 +35,30 @@ P = {
     # the key: a small hard source behind the middle of the arc, low, aimed through the line at the floor in front
     'key_y': 14.0, 'key_z': 9.5, 'key_size': 0.8, 'key_w': 0.0, 'key_irr': 5.5, 'key_color': 5200, 'key_spread': 100,
     # or the key as a sun from behind the wall (the sweep casts no shadow): W/m2 (0: the disc above), elevation, size
-    'sun': 23.0, 'sun_el': 24.0, 'sun_angle': 1.5,
+    'sun': 32.0, 'sun_el': 30.0, 'sun_angle': 1.5,
     # cutters behind the row (only the sun meets them), each opening its speaker's shape seen from the sun, `cut_in`
     # metres inside its edges; false off
     'cutters': False, 'cut_in': 0.006,
     # side strips lighting the cabinets' edges (light-linked to the cabinets), W/m2; 0 off
     'sides': 14.0, 'sides_r': 20.0,
     # the cyc: a ground row on the floor behind the line, washing the sweep's wall evenly
-    'cyc_irr': 15.0, 'cyc_z': 3.0, 'cyc_color': 5200,
+    'cyc_irr': 21.0, 'cyc_z': 2.0, 'cyc_color': 5200,
     # the top: a silk over the floor behind the line, so the floor between the line and the cove is paper, not a band
     'top_irr': 4.0, 'top_y': 7.0,
     # the over: a silk high over the floor in front of the line, lifting the shadows as a white ceiling would
-    'over_irr': 6.0, 'over_y': -5.0,
+    'over_irr': 3.0, 'over_y': -5.0,
     # the front fill: a large soft source over the camera
     'fill_irr': 3.5, 'fill_color': 5200, 'fill_size': [8.0, 2.0], 'fill_z': 2.0, 'fill_spec': 0.0,
     # the faces: a fill for the speakers alone (light-linked to the cabinet, lining and rings), 0 off
-    'face_irr': 5.5, 'edge': 6.0, 'smoke_kick': 45.0, 'smoke_at': [3.5, 1.0, 1.6],
+    'face_irr': 5.5, 'face_z': 2.6, 'edge': 6.0, 'smoke_kick': 80.0, 'smoke_at': [4.0, 0.5, 2.0],
     # the cones: a strip softbox above the camera light-linked to the cones, surrounds and caps (matte paper, so it
     # models them rather than glinting), W/m2; 0 off
     'strip': 70.0, 'strip_z': 2.6,
     # the paper
-    'paper': '#EEECE7', 'tooth': 1.6, 'tooth_mm': 0.6, 'mottle': 0.05, 'contact': 0.6,
+    'paper': '#EEECE7', 'tooth': 2.2, 'tooth_mm': 0.9, 'mottle': 0.06, 'contact': 0.6,
     'sky': 0.15, 'hdri': 'studio_small_03_1k', 'hdri_rot': 0.0, 'depth': 12.0,
     # the render
-    'exposure': -2.5, 'wb': 5000, 'tint': 6.0, 'samples': 256, 'transmission_bounces': 16,
+    'exposure': -2.5, 'wb': 5250, 'tint': 3.0, 'samples': 256, 'transmission_bounces': 16,
     'white_in': 228, 'white_out': 230, 'peak': 246, 'contrast': 0.18, 'clarity': 0.10, 'sharpen': 0.45, 'vibrance': 0.4,
 }
 
@@ -176,7 +176,7 @@ def shot(p, portrait=False):
     if p['cutters'] and p['sun']:
         lights.update(cutters(p, a))
     if p['face_irr']:
-        lights['face'] = {'type': 'area', 'size_m': [4.0, 2.0], 'position': [0.0, -p['cam_dist'] + 1.0, 2.6],
+        lights['face'] = {'type': 'area', 'size_m': [4.0, 2.0], 'position': [0.0, -p['cam_dist'] + 1.0, p['face_z']],
                           'target': [0.0, 0.0, 0.7], 'irradiance': p['face_irr'], 'color': p['fill_color'],
                           'receivers': CABINET + ['lining-*', 'woofer-ring'],
                           'specular': 0}
@@ -273,7 +273,7 @@ Current settings (metres; the speakers' feet at z = 0, the line's middle at the 
 - over: a 16 x 8 m silk at height 8 m over y = {over_y} (the floor in front of the line), aimed down, {over_irr} W/m2.
 - fill: an {fill_size} m softbox at (0, -{fill_y}, {fill_z}) behind the camera, aimed at the line, {fill_irr} W/m2, in
   reflections at a share of {fill_spec}.
-- face: a 4 x 2 m softbox at (0, -{face_y}, 2.6) light-linked to the cabinets, linings and rings only, no reflection,
+- face: a 4 x 2 m softbox at (0, -{face_y}, {face_z}) light-linked to the cabinets, linings and rings only, no reflection,
   {face_irr} W/m2.
 - strip: a 9 x 0.5 m strip at (0, -4, {strip_z}) light-linked to the woofer cones, surrounds and caps and the horn's
   compression driver, {strip} W/m2.
@@ -358,8 +358,9 @@ def main():
 # the phone frame (1600 x 2000; on a phone the title sits above the picture, not over it): the same two ranks drawn
 # closer together (the back rank half hidden behind the front), from nearer and higher, so each speaker is as big
 # as a narrow frame allows and the throws fan down the lower half
-PORTRAIT = {'pitch': 0.5, 'stagger': 0.9, 'x0': 0.0, 'sag': 0.3, 'cam_dist': 7.0, 'cam_h': 2.8, 'lens': 50.0, 'aim_z': 0.15,
-            'cyc_z': 4.5}
+PORTRAIT = {'pitch': 0.5, 'stagger': 0.9, 'x0': 0.0, 'sag': 0.3, 'cam_dist': 7.0, 'cam_h': 2.8, 'lens': 50.0, 'aim_z': -0.25,
+            'shift_y': 0.0, 'cyc_z': 3.0, 'cyc_irr': 24.0, 'top_irr': 6.0, 'face_irr': 9.0, 'face_z': 3.2, 'smoke_kick': 75.0,
+            'over_irr': 3.5, 'over_y': -3.0, 'vibrance': 0.55, 'contrast': 0.22, 'sun_el': 26.0, 'sun_angle': 1.0}
 
 if __name__ == '__main__':
     main()
