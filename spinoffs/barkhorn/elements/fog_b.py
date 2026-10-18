@@ -101,4 +101,9 @@ def shot():
 
 
 def portrait():
-    return C.portrait_of(shot(), lens=40.0, shift_x=0.0)
+    """The 4:5 frame: the same set and light, the camera nearer on the same line so the speaker keeps its height."""
+    cam = C.camera(**{**CAM, 'distance': 5.8}, fstop=5.6, shift_y=0.06)
+    cam['clip_end_m'] = 12000.0
+    s = C.portrait_of(shot())
+    s['camera'] = cam
+    return s

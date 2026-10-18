@@ -433,18 +433,18 @@
     1.2,
     1.2
    ],
-   "orbit": {
-    "azimuth_deg": -60.0,
-    "elevation_deg": 8.0,
-    "distance_m": 2.5
-   },
    "target": [
     0.0,
     0.0,
     0.6
    ],
    "irradiance": 0.75,
-   "color": "#F3E6C8"
+   "color": "#F3E6C8",
+   "orbit": {
+    "azimuth_deg": -60.0,
+    "elevation_deg": 8.0,
+    "distance_m": 2.5
+   }
   }
  },
  "render": {

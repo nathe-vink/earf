@@ -433,18 +433,18 @@
     1.2,
     1.2
    ],
-   "orbit": {
-    "azimuth_deg": -60.0,
-    "elevation_deg": 8.0,
-    "distance_m": 2.5
-   },
    "target": [
     0.0,
     0.0,
     0.6
    ],
    "irradiance": 0.75,
-   "color": "#F3E6C8"
+   "color": "#F3E6C8",
+   "orbit": {
+    "azimuth_deg": -60.0,
+    "elevation_deg": 8.0,
+    "distance_m": 2.5
+   }
   }
  },
  "render": {
@@ -464,8 +464,8 @@
  ],
  "camera": {
   "position": [
-   -2.4588,
-   -9.1763,
+   -1.5012,
+   -5.6024,
    1.15
   ],
   "target": [
@@ -482,9 +482,8 @@
    0.66
   ],
   "shift_x": 0.0,
-  "shift_y": 0.0,
-  "clip_end_m": 12000.0,
-  "lens": 40.0
+  "shift_y": 0.06,
+  "clip_end_m": 12000.0
  },
  "sky": {
   "kind": "hdri",
