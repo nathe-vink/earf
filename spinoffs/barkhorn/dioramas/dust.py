@@ -131,10 +131,6 @@ def props():
                 ridges=[[-0.9, 0.32, 0.55], [0.1, 0.42, 0.6], [1.0, 0.5, 0.6]], seed=4, rib='Y', grain=2.0),
             kit('ext', 'corduroy', '#E09A62', module='dust', fn='dunes', size=[12.0, 1.8], position=[-0.5, -2.7, 0.0],
                 ridges=[[0.0, 0.3, 0.45]], seed=9, rib='Y', grain=2.0)]
-    # a few suede pebbles in the near foreground, melting out of focus
-    out += [mound(-1.15, -2.0, 0.0, 0.22, 0.17, 0.13, '#B9603F', material='suede'),
-            mound(-0.78, -2.25, 0.0, 0.12, 0.1, 0.08, '#C77048', material='suede'),
-            mound(-1.5, -2.35, 0.0, 0.1, 0.08, 0.06, '#A9553A', material='suede')]
     out += streak(0.75, 0.15)
     out += motes()
     return out
@@ -159,11 +155,14 @@ def shot():
               'barkhorn, Dust, golden hour in a suede desert',
               sky={'kind': 'gradient', 'zenith': '#F0B488', 'horizon': '#F6C899', 'ground': '#B8683F', 'strength': 0.35},
               fin=finish(bloom=0.3, saturation=0.18, lift=0.04, lift_color='#5C2A1C', vignette=0.22),
-              rotate_z=16.0, haze={'box_m': [-9.0, -12.0, -0.1, 9.0, 6.0, 7.0], 'density': 0.006, 'anisotropy': 0.6,
+              rotate_z=16.0, haze={'box_m': [-9.0, 0.9, -0.1, 9.0, 6.0, 7.0], 'density': 0.012, 'anisotropy': 0.6,
                                     'color': '#FFD8B0'})
     s['sun'] = {'irradiance': 8.0, 'azimuth_deg': SUN_AZ, 'elevation_deg': SUN_EL, 'angle_deg': 2.0, 'color': '#FFB574'}
     return s
 
 
 def portrait():
-    return portrait_of(shot(), lens=55)
+    """The 4:5 frame: the same set from the same side, nearer the speaker's axis, the sun above it and the streak and
+    footprints running out to the lower right."""
+    return portrait_of(shot(), **tilt_shift(elevation=20, azimuth=6, distance=7.5, lens=95, target=(0.42, 0.7, 1.08),
+                                             focus=(0.0, -0.15, 0.7), miniature=11))

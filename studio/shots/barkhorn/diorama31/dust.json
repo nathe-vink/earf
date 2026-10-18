@@ -411,54 +411,6 @@
    },
    {
     "kind": "kit",
-    "shape": "sphere",
-    "material": "suede",
-    "color": "#B9603F",
-    "position": [
-     -1.15,
-     -2.0,
-     0.0
-    ],
-    "scale": [
-     0.22,
-     0.17,
-     0.13
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "suede",
-    "color": "#C77048",
-    "position": [
-     -0.78,
-     -2.25,
-     0.0
-    ],
-    "scale": [
-     0.12,
-     0.1,
-     0.08
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "suede",
-    "color": "#A9553A",
-    "position": [
-     -1.5,
-     -2.35,
-     0.0
-    ],
-    "scale": [
-     0.1,
-     0.08,
-     0.06
-    ]
-   },
-   {
-    "kind": "kit",
     "shape": "puffs",
     "material": "wool",
     "color": "#E8955A",
@@ -1158,13 +1110,13 @@
  "haze": {
   "box_m": [
    -9.0,
-   -12.0,
+   0.9,
    -0.1,
    9.0,
    6.0,
    7.0
   ],
-  "density": 0.006,
+  "density": 0.012,
   "anisotropy": 0.6,
   "color": "#FFD8B0"
  },
