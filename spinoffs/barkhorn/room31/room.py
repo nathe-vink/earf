@@ -26,7 +26,7 @@ LEFT = -2.05                     # the glazed left wall's face (x)
 RIGHT = 3.75
 DEPTH = 7.0
 HEIGHT = 2.9
-SPK_X, SPK_Y, TOE = 1.2, 0.30, 4.0          # the pair: centres at +-x, toe-in (deg)
+SPK_X, SPK_Y, TOE = 1.2, 0.30, 6.0          # the pair: centres at +-x, toe-in (deg)
 CAB = dict(x=-0.0, w=1.62, d=0.44, h=0.56)  # the credenza (back to the wall)
 
 
@@ -76,7 +76,7 @@ def room_set(v):
         ext('plaster', texture=v['plaster'], res='4k', color=v['wall'], tint_mix=v.get('wall_tint', 0.85),
             value=v.get('wall_value', 1.0), bump=v.get('wall_bump', 1.0), tex_scale=v.get('wall_tex_scale')),
         ext('credenza', position=[CAB['x'], BACK - CAB['d'] / 2 - 0.012], size=[CAB['w'], CAB['d'], CAB['h']], doors=3,
-            texture=v.get('veneer', 'walnut_veneer'), lift=v.get('veneer_lift', 1.3)),
+            texture=v.get('veneer', 'walnut_veneer'), lift=v.get('veneer_lift', 1.3), grain_rot=v.get('grain_rot', 90.0)),
         ext('rug', position=v['rug_pos'], size=v['rug_size'], pile=v.get('rug_pile', 0.018), texture=v.get('rug', 'curly_teddy_natural'),
             tint=v.get('rug_tint', '#E4DCCB'), tint_mix=v.get('rug_tint_mix', 0.5), displace=v.get('rug_displace', 0.006), res=v.get('rug_res', '2k'), value=v.get('rug_value', 1.0)),
         ext('socket', position=[-v['socket_x'], BACK, 0.30]),
@@ -106,16 +106,16 @@ def room_set(v):
 
 
 DEFAULT = dict(
-    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=0.45,
-    wall_tex_scale=2.0, socket_x=1.78,
-    veneer_lift=0.85, rug_tint='#9C8E78', rug_tint_mix=1.0, rug_pos=[0.0, -1.2], rug_size=[2.6, 2.0], rug_displace=0.006,
-    rug_pile=0.025, rug_res='4k', rug_value=0.62,
+    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=0.8, wall_tint=0.7,
+    wall_tex_scale=1.5, socket_x=1.78,
+    veneer='black_walnut_veneer_02', veneer_lift=0.85, rug_tint='#8E8170', rug_tint_mix=1.0, rug_pos=[0.0, -1.2], rug_size=[2.6, 2.0], rug_displace=0.006,
+    rug_pile=0.025, rug_res='4k', rug_value=0.45,
     chair='modern_arm_chair_01', chair_pos=[2.35, -1.6, 0.0], chair_rot=300.0, leather='#8A7460',
-    hdri='autumn_forest_04', hdri_rot=40.0, ext_strength=1.6, ext_blur=0.0015,
+    hdri='autumn_forest_04', hdri_rot=116.0, ext_strength=3.2, ext_blur=0.0015,
     # the sun low from the front-left: it crosses both cabinets and lays their shadows, green where light came through
     # the horns, on the plaster behind; warm sun, cool skylight in the shade
-    sun=dict(azimuth_deg=-62.0, elevation_deg=14.0, irradiance=30.0, angle_deg=0.6, color='#FFD6A0'),
-    sky_strength=0.45, fill=0.45, fill_color='#DCE6F4', bounce=0.2, floor_bounce=0.15, exposure=-0.55, wb_tint=0.0,
+    sun=dict(azimuth_deg=-68.0, elevation_deg=14.0, irradiance=30.0, angle_deg=0.6, color='#FFE2BC'),
+    sky_strength=0.45, fill=0.7, fill_color='#DCE6F4', bounce=0.2, floor_bounce=0.15, exposure=-0.9, wb_tint=0.0,
 )
 
 

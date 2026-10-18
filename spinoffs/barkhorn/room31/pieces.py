@@ -76,11 +76,15 @@ def _box_uv(bm, x0, y0, z0, x1, y1, z1, u_axis='x', mirror=False, uoff=0.0, voff
 
 
 # --- materials ---------------------------------------------------------------------------------------------------
-def walnut(bpy, tex='walnut_veneer', lift=1.25, coat=0.9, coat_rough=0.22, res='4k', name='walnut-veneer'):
-    """Scanned walnut veneer under a satin lacquer: the scan's colour lifted by `lift`, a clear coat over it."""
+def walnut(bpy, tex='walnut_veneer', lift=1.25, coat=0.9, coat_rough=0.22, res='4k', name='walnut-veneer', grain_rot=0.0):
+    """Scanned walnut veneer under a satin lacquer: the scan's colour lifted by `lift`, a clear coat over it; the scan
+    turned `grain_rot` degrees on the faces so its grain runs along them."""
     A = _assets()
     m = A.pbr(bpy, tex, res, coords='uv', name=name)
     nt = m.node_tree; b = _principled(m)
+    if grain_rot:
+        mp = next(n for n in nt.nodes if n.type == 'MAPPING')
+        mp.inputs['Rotation'].default_value = (0.0, 0.0, math.radians(grain_rot))
     lk = next((l for l in nt.links if l.to_socket == b.inputs['Base Color']), None)
     if lk and lift != 1.0:
         mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
@@ -108,7 +112,7 @@ def credenza(bpy, name, p, kit):
     x, y = p['position'][:2]; w, d, h = p.get('size', [1.6, 0.45, 0.56])
     ph, pin = p.get('plinth', [0.09, 0.03])
     n = p.get('doors', 3); gap = p.get('gap', 0.003); top_t = p.get('top', 0.025); side_t = 0.02
-    wal = walnut(bpy, p.get('texture', 'walnut_veneer'), p.get('lift', 1.25), res=p.get('res', '4k'))
+    wal = walnut(bpy, p.get('texture', 'walnut_veneer'), p.get('lift', 1.25), res=p.get('res', '4k'), grain_rot=p.get('grain_rot', 0.0))
     black = _plain(bpy, name + '-plinth', p.get('plinth_color', '#2B1D14'), rough=0.6, spec=0.3)
     shadow = _plain(bpy, name + '-inner', '#2A1A10', rough=0.8, spec=0.2)
     objs = []

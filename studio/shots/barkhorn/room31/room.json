@@ -12,7 +12,7 @@
       0.3,
       0.0
      ],
-     "rotate_z": 4.0
+     "rotate_z": 6.0
     },
     {
      "flavour": "eucalyptus-y2k-green",
@@ -21,7 +21,7 @@
       0.3,
       0.0
      ],
-     "rotate_z": -4.0
+     "rotate_z": -6.0
     }
    ]
   },
@@ -142,10 +142,10 @@
     "texture": "beige_wall_001",
     "res": "4k",
     "color": "#E8E2D8",
-    "tint_mix": 0.85,
+    "tint_mix": 0.7,
     "value": 1.3,
-    "bump": 0.45,
-    "tex_scale": 2.0
+    "bump": 0.8,
+    "tex_scale": 1.5
    },
    {
     "kind": "kit",
@@ -162,8 +162,9 @@
      0.56
     ],
     "doors": 3,
-    "texture": "walnut_veneer",
-    "lift": 0.85
+    "texture": "black_walnut_veneer_02",
+    "lift": 0.85,
+    "grain_rot": 90.0
    },
    {
     "kind": "kit",
@@ -180,11 +181,11 @@
     ],
     "pile": 0.025,
     "texture": "curly_teddy_natural",
-    "tint": "#9C8E78",
+    "tint": "#8E8170",
     "tint_mix": 1.0,
     "displace": 0.006,
     "res": "4k",
-    "value": 0.62
+    "value": 0.45
    },
    {
     "kind": "kit",
@@ -251,28 +252,28 @@
       0.0036
      ],
      [
-      -1.223,
-      0.6292,
+      -1.2345,
+      0.6282,
       0.0036
      ],
      [
-      -1.2197,
-      0.5813,
+      -1.2295,
+      0.5805,
       0.06
      ],
      [
-      -1.219,
-      0.5713,
+      -1.2284,
+      0.5705,
       0.26
      ],
      [
-      -1.218,
-      0.5574,
+      -1.227,
+      0.5566,
       0.4
      ],
      [
-      -1.2146,
-      0.5092,
+      -1.2219,
+      0.5086,
       0.419
      ]
     ],
@@ -326,28 +327,28 @@
       0.0036
      ],
      [
-      1.223,
-      0.6292,
+      1.2345,
+      0.6282,
       0.0036
      ],
      [
-      1.2197,
-      0.5813,
+      1.2295,
+      0.5805,
       0.06
      ],
      [
-      1.219,
-      0.5713,
+      1.2284,
+      0.5705,
       0.26
      ],
      [
-      1.218,
-      0.5574,
+      1.227,
+      0.5566,
       0.4
      ],
      [
-      1.2146,
-      0.5092,
+      1.2219,
+      0.5086,
       0.419
      ]
     ],
@@ -471,8 +472,8 @@
     "path": "spinoffs/barkhorn/room31/pieces.py",
     "fn": "exterior",
     "hdri": "autumn_forest_04",
-    "rotation_deg": 40.0,
-    "strength": 1.6,
+    "rotation_deg": 116.0,
+    "strength": 3.2,
     "res": "8k",
     "centre": [
      -3.05,
@@ -485,11 +486,11 @@
   ]
  },
  "sun": {
-  "azimuth_deg": -62.0,
+  "azimuth_deg": -68.0,
   "elevation_deg": 14.0,
   "irradiance": 30.0,
   "angle_deg": 0.6,
-  "color": "#FFD6A0"
+  "color": "#FFE2BC"
  },
  "sky": {
   "kind": "physical",
@@ -523,7 +524,7 @@
     0.2,
     0.9
    ],
-   "irradiance": 0.45,
+   "irradiance": 0.7,
    "color": "#DCE6F4"
   },
   "bounce": {
@@ -572,7 +573,7 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": -0.55,
+  "exposure": -0.9,
   "white_balance_k": 5600,
   "white_balance_tint": 0.0
  },
