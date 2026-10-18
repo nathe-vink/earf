@@ -66,3 +66,32 @@ landmarks, so one stands out in the field.
 | h5 | 5.5 (iterate; 7.5 if fixed) | the sky blown white; the body crushed dark; the horn far brighter than the body; instanced-looking lavender, too blue; a seam at the far field; weak contact; foreground too sharp | Sky down to 0.26 with exposure back to 0 (the lights on the speaker now count against the sky, not under it); the bounce card larger and stronger (4.5); the afterglow card lower and further (elevation 2, 4 m); white balance 5000 K / 6; haze 0.0005; feet 25 mm; f/2.8; lavender redder and more varied in size (0.75-1.25), lean (7 degrees) and spacing (0.6-1.0 m). |
 | h6 | 5.5 (iterate; 7.5 if fixed) | the sky still near white; navy lavender; a hard seam where the field meets the haze; the speaker lit by studio cards (head clips); weak contact; repeated clods; the lone tree beside the head | Sky 0.12 with exposure +0.35; white balance 5600 K / 10; lavender redder (#7A5FB0); the bounce card softer and higher (2.0, elevation 25, 4 x 3 m); the haze from 25 m, 0.0009, 40 m tall; clods halved; the lone tree removed. |
 | h7 | 6.0 (iterate; 7.6 if fixed) | the horn a clipped lightbox; no violet on the soil; a black path; a flat cream upper sky; studio lines on the edges; bloom on the horn; the tree line repeats; a seam at the far field | The afterglow card 0.6 and 4 x 2 m; a faint violet pool on the path in front of the feet (a lamp lighting only the set, unseen in the acrylic); the soil tinted drier; the bounce card 8 x 4 m at 5 m, 1.2; bloom 0.12 over 0.92; sky 0.10; haze from 12 m at 0.0012; 14 trees at 800 m in three models, sized 0.6-1.5. No graduated filter: the engine's finish has none. |
+| h8 | 5.5 (iterate; 7.5 if fixed) | the cabinet crushed into the lavender's value; the horn pink against a navy body; a hard step at the far field; no colour on the path; the lower half crushed | Not applied: the stopping rule. |
+
+## Stopping, and the duel
+
+Eight blind passes held between 5.5 and 6.0 across both lights: the sunset (h1 to h4: 5.5, 6.0, 6.0, 6.0) and the
+afterglow (h5 to h8: 5.5, 5.5, 6.0, 5.5). By the coordinator's rule of 2026-10-18 (after a concept change, stop when
+the passes stop gaining), I stopped. The two 6.0 rigs met in a blind duel (`critic/ab/PROMPT-DUEL.txt`, fresh judge,
+frames unnamed): **the sunset (pass 4's rig) won, 6.0 to 5.0.** The judge liked its warm backlit sky with a visible sun,
+the lavender stems against the sky from the low camera, and the warm graze on the soil; it liked the afterglow's
+clearer horn but found its ground crushed and its blue dusk underexposed. The finals are rendered from the sunset rig
+(`haze.py` as at pass 4; the afterglow rig is kept in the history, commit 12d8dcc).
+
+## Honestly: where it stands, and what holds it back
+
+A blind critic scores this frame about 6: it reads as a real place (the lavender, the soil and the sky hold up), but
+not yet as a photograph a luxury house would run. What holds it back, by the critics' agreement:
+
+- **The speaker's light.** With the sun behind, its face is in shade, and every light I add to model it (the bounce,
+  the back light, the grazing glows) reads as a studio card: the horn pod blows to milky pink and the cabinet goes muddy,
+  or the reverse. The horn's dark throat (the waveguide seen through the acrylic) reads as a blob in every pass. A real
+  photographer would scrim the sun and bounce it from a big reflector; the engine's lamps can't make a reflector's
+  falloff look like one, and refractive caustics through the lined cabinet would be noise.
+- **No violet on the ground.** The acrylic's colour cast onto the soil never reads at this distance.
+- **The far field.** The modelled rows meet the haze in a visible step; a denser haze flattens the sky.
+- **The lavender.** Modelled (no scanned lavender exists), it reads as plants but slightly regular and blue.
+
+What I'd try next: a sky with the sun itself in frame and a few degrees higher (so the front gets real skylight), a
+photographed lavender scan if one can be had under CC0, a speaker-sized silk scrim between the sun and the speaker, and
+the camera turned 20 degrees so the sun rims one side rather than sitting behind.
