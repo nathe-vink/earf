@@ -46,3 +46,7 @@ after a concept change when the passes stop gaining half a point) the set has pl
 the last four passes score 6.0 and the critics' prescriptions now pull against each other from pass to pass (the
 reflector up, then down, then up; rain over the ground fewer, then more). Finals render from the best rig, chosen by a
 blind duel between pass 6 and pass 9 (both 6.0).
+
+Duel (blind, critic/ab/PROMPT-DUEL.txt): pass 9 beat pass 6, 6.0 to 5.0 (`critic-acid_b/duel-p6-p9.json`). Its one
+point for pass 6: there the speaker stands; in pass 9 the water line cuts its base and it looks sunk. So the finals are
+pass 9's rig with pass 6's standing depth (the hollow 16 cm deep, the speaker at z -0.09, about 2 cm in the water).

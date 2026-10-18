@@ -30,7 +30,7 @@ def props(cam):
             relief=False, flat=[0.0, 0.0, 0.7], res='4k', tex_scale=0.8, bump=3.0, rough_mul=0.8, darken=0.75, film=0.45, tint='#121210', tint_mix=0.85,
             film_rough=0.33, film_vary=[0.06, 0.16], lumps=[[2.6, 0.06, 'billow'], [1.1, 0.04, 'fbm'], [0.9, 0.03, 'ridged'], [0.3, 0.02, 'fbm'], [0.12, 0.008, 'fbm'],
                    [9.0, 0.05]],
-            dips=[[0.0, 0.0, 1.1, 0.22], [-0.2, -1.2, 1.2, 0.2], [-0.55, -2.7, 1.5, 0.22], [-0.85, -4.1, 1.6, 0.22], [-1.1, -5.4, 1.4, 0.2],
+            dips=[[0.0, 0.0, 1.1, 0.16], [-0.2, -1.2, 1.2, 0.2], [-0.55, -2.7, 1.5, 0.22], [-0.85, -4.1, 1.6, 0.22], [-1.1, -5.4, 1.4, 0.2],
                   [2.6, 2.4, 1.6, 0.18]], seed=2),
         # beyond it, the same field on to the horizon, coarse (it is far and in the haze)
         ext('wet_ground', texture='dark_rock', size=[900.0, 700.0], position=[0.0, 345.0, -0.12], cells=700,
@@ -98,7 +98,7 @@ def shot():
     parts = sorted(json.load(open(os.path.join(C.ROOT, 'spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.json')))['parts'])
     lights['rim']['receivers'] = parts
     s = C.shot(NAME, props(cam), cam, C.sky(hdri, rot, strength=strength, res='4k'), 'barkhorn Acid, acid rain',
-               lights=lights, sun=sun, white_balance=(5700, -6.0), rotate_z=16.0, position=(0.0, 0.0, -0.15), exposure=-0.1, look='AgX - Base Contrast',
+               lights=lights, sun=sun, white_balance=(5700, -6.0), rotate_z=16.0, position=(0.0, 0.0, -0.09), exposure=-0.1, look='AgX - Base Contrast',
                haze={'density': 0.0018, 'anisotropy': 0.5, 'color': '#A9AE84', 'box_m': [-700, -15, -2, 700, 900, 20]},
                fin=C.finish(contrast=0.15, clarity=0.07, sharpen=0.35, vignette=0.14))
     return s
