@@ -167,3 +167,26 @@ What I did:
 7. **Bounce:** down to 0.4, azimuth -30, 15 degrees up: a lift only.
 8. **Composition:** the speaker on the left third (target x 0.45), camera at 0.5 m, so the horizon falls below the
    cabinet's top and the right of the frame is open sky for type.
+
+### Pass 6: 5.5 ("iterate"; 7.5 if fixed)
+
+The frame was r6 (low sun behind on the left, speaker on the left third). It is the first frame without the blue bar
+at the right horizon: a 190 km haze box had left a hole in the haze there (likely float precision), cured by holding
+the box to 70 x 40 km.
+
+The critic: a strong idea with room for type, but the speaker straddles a crevice and the lip hides its base; the
+backlight leaves the foreground rock a muddy near-black slab and the lining a dull taupe; the near clouds are
+even-sized CG cotton, neutral white under a warm sun. No gain on pass 5: the first of the two passes the stopping rule
+counts.
+
+What I did:
+1. **Footing:** the cliff moved to x -4.00, z -6.90, so the flat block lies under the whole base.
+2. **Camera:** up to 0.85 m (not the critic's 1.05, which would put the horizon through the horn), focused on the
+   speaker's front face, so the footing shows over the lip.
+3. **Sun:** swung 65 degrees toward the camera's left. `qwantani_late_afternoon_puresky` turned 119, so its sun and the
+   lamp are at azimuth -65, 19 degrees up, raking the speaker's front and the rock faces.
+4. **Bounce:** a warm #E8D6C4 reflector just off the lens, low, at 1.1.
+5. **Rock:** finish clarity 0.08. A scan detail layer would take an engine change; left for later.
+6. **Clouds:** bigger, irregular heaps near (scale 380, amp 160, soft 0.7, erode 26); haze up to 2.4e-4.
+7. **Cloud colour:** the volume's scattering colour #FFF6EC, so sunlit tops carry the rock's warmth.
+8. **Birds:** pushed out to 120 to 160 m, spans to 1.4 m, so they fall soft.
