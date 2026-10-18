@@ -153,7 +153,8 @@ def lights():
         'moon': {'type': 'area', 'size_m': [3.0, 3.0], 'position': [-1.0, -0.5, 5.5], 'target': [0.0, 0.5, 0.0],
                  'irradiance': 1.4, 'color': '#EEF5FF', 'receivers': ['prop*']},
         # the silver rims from behind, on the speaker's edges and the shards' tops
-        'rim': area(165, 28, 4.0, 5.0, '#F2F8FF', (2.0, 0.8), (0.0, 0.2, 1.1)),
+        'rim': {**area(165, 28, 4.0, 5.0, '#F2F8FF', (2.0, 0.8), (0.0, 0.2, 1.1)), 'receivers': PRODUCT},
+        'rim_set': {**area(175, 48, 6.5, 2.6, '#E8F3FF', (4.0, 2.0), (0.0, 1.0, 0.3)), 'receivers': ['prop*']},
         'rim2': {**area(-145, 20, 4.0, 2.4, '#CFE8FF', (1.0, 1.4), (0.0, 0.2, 0.9)), 'receivers': PRODUCT},
         # behind the shards, low: light through the glass wall
         'wall': {'type': 'area', 'size_m': [9.0, 1.5], 'position': [0.0, 4.8, 0.8], 'target': [0.0, 0.0, 1.0],
@@ -177,4 +178,7 @@ def shot():
 
 
 def portrait():
-    return portrait_of(shot(), lens=46)
+    land = shot()
+    t = [0.45, 0.2, 0.98]
+    # the same camera position, aimed a little right and up so the snowman and the icon both stay in the tall frame
+    return portrait_of(land, lens_mm=80, target=t)
