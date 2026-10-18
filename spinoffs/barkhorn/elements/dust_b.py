@@ -77,9 +77,9 @@ def props():
                   color='#677A52', color2='#7F8460'),
             piece('ext', module='dust_b_el', fn='prickly_pear', position=[2.2, -3.0, -0.01], size=0.24, pads=26, seed=13, color='#677A52', color2='#7F8460')]
     # the ground's small things: grit and pebbles near the camera, mostly sunk in the sand
-    out += [piece('scatter', material='pbr', texture='red_mud_stones', tex_scale=0.3, tint='#9C5A3C', tint_mix=0.6,
+    out += [piece('scatter', material='pbr', texture='red_mud_stones', tex_scale=0.3, tint='#B07050', tint_mix=0.85,
                   count=700, radius=[0.004, 0.014], seed=17, **{'in': [-3.5, -4.5, -0.012, 3.5, 4.0, -0.007]}),
-            piece('scatter', material='pbr', texture='red_mud_stones', tex_scale=0.3, tint='#8A4C32', tint_mix=0.6,
+            piece('scatter', material='pbr', texture='red_mud_stones', tex_scale=0.3, tint='#9A5A3E', tint_mix=0.85,
                   count=45, radius=[0.02, 0.045], seed=18, **{'in': [-4.0, -4.0, -0.04, 5.0, 6.0, -0.025]})]
     return out
 
