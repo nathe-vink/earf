@@ -84,3 +84,14 @@ cabinet throws its own colour onto the floor in front of it. Built by `hero31.py
   edge-on, the smoked unit's tint swallowing its interior. The critics also pull against each other (shadows deeper
   in one pass, lighter in the next; the eye at 1.15 m in one, nearer and higher in the next), a sign the set is near
   what this model allows.
+
+### The real drivers (v3, 2026-10-18 evening)
+
+The drivers were made real on main (01267eb: the FaitalPRO 15PR400 woofer as made, the HF driver's machined exit and
+phase plug, an opaque polished acrylic ring). The hero was rendered again with the same rig, finish, camera and
+arrangement; the one change is the cone and driver strip's links, which now also take the new parts (`hf-exit`,
+`hf-band`, `woofer-gasket`). The landscape was rendered as four horizontal bands with 32 px overlaps on four of the
+coordinator's helpers (finish off, 512 samples each, 22.6 to 38 min), then crossfaded and finished once
+(`hero31.py stitch`). The overlaps agree within 0.5 levels on average (p99 2 to 3, no bias), so no seam shows. The
+top band's faint blotches are the paper's designed mottle and the wall's gradient: its low-frequency spread matches
+v2's (sd 3.75, range 15). The link boxes read off the full-frame report are identical to v2's.
