@@ -1,0 +1,93 @@
+{
+ "order": {
+  "A": "finals31/room.png",
+  "B": "room31 final"
+ },
+ "reply": {
+  "A": 5.0,
+  "B": 6.5,
+  "prefer": "B",
+  "differences": [
+   {
+    "what": "Low sun gives B real light with direction: raking shadows across the floor and a hard window shadow on the plaster. A has flat, even interior light that reads as a CG layout render.",
+    "region": [
+     0,
+     0,
+     2880,
+     1620
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "In B the green acrylic carcass glows and refracts, so the internal bracing, ports and depth are legible. In A the carcass is murky, dark olive with muddy internals.",
+    "region": [
+     446,
+     518,
+     878,
+     1382
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "B's set textures hold up at crop: oak floor grain, walnut sideboard veneer, plaster wall, legible book spines. In A the floor and rug are plain, and the chair's cushions are blocky untextured slabs.",
+    "region": [
+     940,
+     900,
+     1950,
+     1300
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "On B's sideboard, the middle door has an unexplained vertical band of pink and green light, a caustic/refraction artifact that looks like a render error.",
+    "region": [
+     1280,
+     1000,
+     1600,
+     1270
+    ],
+    "favours": "A"
+   },
+   {
+    "what": "B's horn face shows the plaster's bump pattern refracted through the green, which reads as a mottled, dirty surface. A's horn is cleaner glass with a crisp rim.",
+    "region": [
+     450,
+     525,
+     870,
+     760
+    ],
+    "favours": "A"
+   },
+   {
+    "what": "B's wall has large, ambiguous shadow shapes (a giant vase/turntable silhouette and a window shadow cut off at the top right) that compete with the product. A's wall is calm, with framed art that supports the palette.",
+    "region": [
+     1340,
+     750,
+     2880,
+     1000
+    ],
+    "favours": "A"
+   },
+   {
+    "what": "B's camera is frontal and symmetric, and the speakers fill the frame as heroes. In A the speakers are small in a wide room, with a big dull rug in the foreground eating the frame.",
+    "region": [
+     180,
+     1220,
+     2170,
+     1620
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "B shows wall sockets with visible black power cables next to each speaker, utility clutter a homepage shot would remove.",
+    "region": [
+     410,
+     1080,
+     480,
+     1280
+    ],
+    "favours": "A"
+   }
+  ]
+ }
+}

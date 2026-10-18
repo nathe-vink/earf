@@ -1,0 +1,347 @@
+{
+ "stage1": {
+  "impression": "A calm, believable late-afternoon living room: the warm sun patches on the plaster, the window-bar shadows across the oak and the walnut credenza all hold together, and the pair reads at a glance at about half the frame's height. What gives it away as CG is the cabinets: they glow a neon, self-lit green that is brighter and more saturated than anything else the sun touches. The left speaker's cover is also cut in half by a hard shadow, so the two speakers no longer match, and the horn shadows on the wall make dull grey blobs that clutter the centre behind the turntable.",
+  "score": 6.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Cabinet acrylic reads as the real tint, not neon: side panels within delta E 2000 of 10 of #B2C9A2, with the inner batts no brighter than the sunlit plaster",
+  "The pair is lit as a pair: both woofer covers evenly lit, with no hard window-bar shadow splitting either one (left and right cover medians within 15 levels of each other)",
+  "Sun visibly passes through the cabinets: a green-tinted transmitted patch on the wall or floor beside each speaker that reads at a glance, not only a faint smear at the right",
+  "No grey shadow blobs on the wall behind the turntable and vase; the centre of the wall is clean for the heading",
+  "Shaded wall at right lifted so the right half of the frame does not sink to mid-grey (median 95 or more), and no crushed blacks at the window base"
+ ],
+ "defects": [
+  {
+   "region": [
+    245,
+    400,
+    430,
+    690
+   ],
+   "what": "Left cabinet's ribs and batts glow saturated neon green (RGB 115/165/88, delta E 15.3 against #B2C9A2); they look self-lit rather than lit by the sun"
+  },
+  {
+   "region": [
+    1015,
+    400,
+    1205,
+    690
+   ],
+   "what": "Right cabinet has the same neon green (116/178/90, delta E 14.3)"
+  },
+  {
+   "region": [
+    330,
+    455,
+    405,
+    600
+   ],
+   "what": "A hard vertical window-bar shadow splits the left woofer cover: right half lum 50 against left half 113, while the right speaker's cover is evenly lit at 125, so the pair does not match"
+  },
+  {
+   "region": [
+    595,
+    385,
+    860,
+    475
+   ],
+   "what": "The left horn's shadow lands as a dark grey blob on the wall behind the turntable and vase; it clutters the centre and is untinted"
+  },
+  {
+   "region": [
+    1265,
+    385,
+    1420,
+    485
+   ],
+   "what": "The right horn's shadow is an opaque grey blob (RGB 68/61/54) with only a faint green fringe; tinted resin should cast a tinted shadow"
+  },
+  {
+   "region": [
+    1200,
+    0,
+    1440,
+    400
+   ],
+   "what": "Shaded wall at the upper right sinks to lum 80, a muddy grey-brown that drags the right third down"
+  },
+  {
+   "region": [
+    0,
+    620,
+    230,
+    700
+   ],
+   "what": "Window frame base and sill crush to black (11.9% crushed)"
+  },
+  {
+   "region": [
+    100,
+    0,
+    160,
+    640
+   ],
+   "what": "A thin dark sliver of wall and window frame at the left edge reads as a cropping accident, not as framing"
+  },
+  {
+   "region": [
+    1230,
+    640,
+    1330,
+    675
+   ],
+   "what": "The only green light thrown into the room is a dim smear on the floor right of the right speaker (lum 44); the left speaker throws none"
+  },
+  {
+   "region": [
+    236,
+    395,
+    430,
+    690
+   ],
+   "what": "Cabinet edges render as heavy black outlines that frame each speaker like a drawn box (speaker material, see out_of_scope)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "Both cabinets read as neon, self-lit green, which is the clearest sign that this is a render.",
+   "evidence": {
+    "region": [
+     245,
+     410,
+     260,
+     600
+    ],
+    "measured": "RGB median 115/165/88, delta E 2000 15.27 against #B2C9A2; right side panel [1022,410,1035,600] delta E 14.32"
+   },
+   "change": {
+    "setting": "finish: green trim",
+    "from": "0.1",
+    "to": "0.3 (and lower the bloom threshold's effect on greens: bloom 0.05 -> 0.03)"
+   },
+   "expected": "Side panels move toward a pale sage (about 140/175/120); the batts read as white fabric seen through tinted acrylic, not as a light source",
+   "accept": {
+    "region": [
+     245,
+     410,
+     260,
+     600
+    ],
+    "metric": "delta_e",
+    "hex": "#B2C9A2",
+    "op": "<",
+    "value": 10
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "A window-bar shadow splits the left woofer cover in half, so the pair is lit unequally.",
+   "evidence": {
+    "region": [
+     330,
+     480,
+     395,
+     580
+    ],
+    "measured": "lum_median 49.6 (RGB 23/60/28) against 113 on the cover's left half and 124.5 on the right speaker's cover [1040,480,1170,580]"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -62.0 deg, elevation 18.0 deg",
+    "to": "azimuth -70.0 deg, elevation 14.0 deg (re-check that no mullion shadow edge falls on either cover; if one does, move window 2 along the wall by 0.2 m)"
+   },
+   "expected": "Both covers evenly lit, medians within 15 levels; the sun rakes more across the room, so its beam passes through the cabinets and the horn shadows drop and move right, off the centre of the wall",
+   "accept": {
+    "region": [
+     330,
+     480,
+     395,
+     580
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 95
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The brief's idea, sun passing through both cabinets, barely shows: only a dim green smear at the right and nothing from the left speaker.",
+   "evidence": {
+    "region": [
+     1230,
+     645,
+     1320,
+     672
+    ],
+    "measured": "lum_median 43.6, RGB 55/43/16 (barely green); the wall beside the right speaker [1210,400,1260,470] is a neutral 111/101/90"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "irradiance 40.0 W/m2, size 0.6 deg",
+    "to": "irradiance 48 W/m2, size 0.5 deg (with c2's angle), so that a crisp, saturated transmitted patch lands on the floor and wall beside each speaker"
+   },
+   "expected": "A readable green transmitted patch beside each speaker, on the floor or the lower wall, green-dominant (g above r by 15 or more)",
+   "accept": {
+    "region": [
+     1205,
+     560,
+     1320,
+     680
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 105
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The shaded right of the wall sinks to a muddy grey, so the frame is lopsided and the right speaker stands against dull mid-grey.",
+   "evidence": {
+    "region": [
+     1200,
+     50,
+     1430,
+     250
+    ],
+    "measured": "lum_median 80.0 (RGB 86/79/70) against 224.9 in the sun patch [560,150,820,350]"
+   },
+   "change": {
+    "setting": "lamp north",
+    "from": "irradiance 1.3, colour #D2E0F4",
+    "to": "irradiance 2.2, colour #DCE4EE"
+   },
+   "expected": "Shade lifts by about 0.5 stop and keeps a slightly cool cast against the warm sun, so the light keeps its contrast without going muddy",
+   "accept": {
+    "region": [
+     1200,
+     50,
+     1430,
+     250
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     95,
+     120
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The left horn's shadow lands as a grey blob behind the turntable and vase, cluttering the one place the eye rests between the speakers.",
+   "evidence": {
+    "region": [
+     600,
+     390,
+     700,
+     440
+    ],
+    "measured": "lum_median 108.6 inside the blob against about 225 in the surrounding sun patch; the shape reads as an unexplained form"
+   },
+   "change": {
+    "setting": "prop 9 (vase) and the speakers",
+    "from": "vase at [0.62, 0.75, 0.56]; speakers at x +/-1.2",
+    "to": "after c2, if the horn shadow still crosses the credenza top, move the speakers to x +/-1.3 and the vase to [0.55, 0.75, 0.56] so the shadow falls off the credenza run"
+   },
+   "expected": "The wall directly behind the turntable is lit and calm; the horn shadows fall to the right of each speaker",
+   "accept": {
+    "region": [
+     600,
+     390,
+     700,
+     440
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 160
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The base of the window frame and the sill crush to pure black at the lower left.",
+   "evidence": {
+    "region": [
+     0,
+     640,
+     230,
+     700
+    ],
+    "measured": "crush_pct 11.91, lum_p5 0.0"
+   },
+   "change": {
+    "setting": "window frames (windows 0 to 2)",
+    "from": "frame #3A3733",
+    "to": "frame #5A5650 with a satin finish, so it picks up the sky and floor bounce"
+   },
+   "expected": "The frame reads as dark bronze-grey metal with visible edges, not as a hole",
+   "accept": {
+    "region": [
+     0,
+     640,
+     230,
+     700
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 3
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The corners are heavy enough at the lower left that the floor and window base go dead.",
+   "evidence": {
+    "region": [
+     0,
+     720,
+     300,
+     810
+    ],
+    "measured": "foreground floor lum_p5 54.9 across [0,720,1440,810]; the lower-left corner is the darkest area outside the window"
+   },
+   "change": {
+    "setting": "finish: vignette",
+    "from": "0.18 stops",
+    "to": "0.10 stops"
+   },
+   "expected": "The floor's grain and the window-bar shadows stay legible to the corners",
+   "accept": {
+    "region": [
+     0,
+     720,
+     1440,
+     810
+    ],
+    "metric": "lum_p5",
+    "op": ">",
+    "value": 62
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the horn's tinted resin transmit light, so it casts a green-tinted shadow instead of an opaque grey one",
+   "why": "This is the horn's material (part of the speaker). It is fixed, but whoever owns the speaker's shading model should check its transmission"
+  },
+  {
+   "request": "Soften the near-black outline on the acrylic cabinet edges",
+   "why": "This is the cabinet's edge material and thickness, which belong to the speaker. In the image they draw a black box around each speaker and read as CG"
+  }
+ ],
+ "score_if_fixed": 7.8
+}
