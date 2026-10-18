@@ -2,8 +2,8 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/finals31/back-amber.json",
  "image": "/home/user/earf/renders/2026-10-18/barkhorn/finals31/back-amber.png",
  "seconds": {
-  "build": 16.2,
-  "render": 454.8
+  "build": 18.7,
+  "render": 462.0
  },
  "samples": 128,
  "size": [
@@ -969,8 +969,8 @@
    ],
    "depth_m": 2.823
   },
-  "rating-plate#0": {
-   "part": "rating-plate",
+  "rating-plate-plate#0": {
+   "part": "rating-plate-plate",
    "centre_px": [
     435.9,
     720.4
@@ -982,6 +982,34 @@
     739
    ],
    "depth_m": 2.578
+  },
+  "rating-plate-print#0": {
+   "part": "rating-plate-print",
+   "centre_px": [
+    435.9,
+    721.0
+   ],
+   "box_px": [
+    415,
+    707,
+    457,
+    735
+   ],
+   "depth_m": 2.577
+  },
+  "rating-plate-screws#0": {
+   "part": "rating-plate-screws",
+   "centre_px": [
+    436.1,
+    720.6
+   ],
+   "box_px": [
+    408,
+    717,
+    464,
+    724
+   ],
+   "depth_m": 2.576
   },
   "rib-back-1#0": {
    "part": "rib-back-1",
