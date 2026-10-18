@@ -163,7 +163,13 @@ def terrain(bpy, name, p, kit):
     c = p.get('cliff')
     if c:
         rise = _smooth(c['y0'], c['y0'] + c['rise'], Y + 0.6 * _fbm(X, Y, 3.0, 2, 5.0))
-        Z = Z + rise * (c['height'] + c.get('rough', 0.4) * _fbm(X, Y, 1.2, 5, 9.0))
+        zc = rise * (c['height'] + c.get('rough', 0.4) * _fbm(X, Y, 1.2, 5, 9.0))
+        if c.get('layers'):                                       # stacked flows: ledges and steep risers
+            L = c['layers'] * (1 + 0.15 * _fbm(X, Y, 6.0, 2, 11.0))
+            k = zc / L
+            fl = np.floor(k); fr = k - fl
+            zc = (fl + _smooth(c.get('riser', 0.65), 1.0, fr)) * L
+        Z = Z + zc
     lava = np.zeros(X.shape, dtype=np.int8)                 # 0 rock, 1 flow, 2 molten
     for ch in p.get('channels', []):
         dist, _ = _seg_dist(X, Y, ch['points'])
@@ -269,6 +275,8 @@ def columns(bpy, name, p, kit):
     me.materials.append(assets.pbr(bpy, p.get('rock', 'dark_rock_02'), p.get('res', '2k'), scale=p.get('rock_scale'),
                                    displace=p.get('displace', 0.02), tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0),
                                    rough_mul=p.get('rough_mul', 1.0), name=f'{name}-rock'))
+    if p.get('albedo'):
+        darken(me.materials[0], p['albedo'])
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     return [ob]
 
@@ -314,6 +322,19 @@ def sparks(bpy, name, p, kit):
     q = {**p, 'material': 'glow', 'color': p.get('color', '#FF8A30'), 'emit': p.get('emit', 25.0), 'shadow': False}
     q.pop('position', None)
     return kit.finish(bpy, name, bm, q, mat=kit.piece_material(bpy, q))
+
+
+def sparks_mixed(bpy, name, p, kit):
+    """Sparks in three generations: a few young bright yellow ones, more orange, and dim deep-red ones dying, each set
+    its own `sparks` piece with its share of `count` and its own seed."""
+    out = []
+    for i, (share, col, emit, scale) in enumerate(((0.2, '#FFC060', 1.6, 1.3), (0.45, '#FF7A22', 1.0, 1.0),
+                                                   (0.35, '#E0300A', 0.45, 0.7))):
+        q = {**p, 'count': max(1, int(p.get('count', 40) * share)), 'color': col, 'emit': p.get('emit', 20.0) * emit,
+             'seed': p.get('seed', 1) * 10 + i,
+             'streak': [v * scale for v in p.get('streak', [0.01, 0.06])]}
+        out += sparks(bpy, f'{name}-{i}', q, kit)
+    return out
 
 
 def steam(bpy, name, p, kit):

@@ -91,8 +91,8 @@
     "lava_below": true,
     "rock": "dark_rock",
     "displace": 0.03,
-    "albedo": 0.25,
-    "rough_mul": 0.55
+    "albedo": 0.1,
+    "rough_mul": 0.9
    },
    {
     "kind": "kit",
@@ -122,11 +122,11 @@
     "fn": "terrain",
     "size": [
      80.0,
-     52.0
+     40.0
     ],
     "position": [
      -8.0,
-     34.5,
+     28.5,
      -0.25
     ],
     "cell": 0.12,
@@ -137,11 +137,32 @@
      1.0
     ],
     "cliff": {
-     "y0": 24.0,
-     "rise": 9.0,
+     "y0": 30.0,
+     "rise": 6.0,
      "height": 6.0,
-     "rough": 0.4
+     "rough": 1.2,
+     "layers": 1.1
     },
+    "falls": [
+     {
+      "points": [
+       [
+        -5.0,
+        37.0
+       ],
+       [
+        -4.8,
+        34.0
+       ],
+       [
+        -5.0,
+        31.5
+       ]
+      ],
+      "width": 0.55,
+      "notch": 0.6
+     }
+    ],
     "channels": [
      {
       "points": [
@@ -168,40 +189,24 @@
       "lava": "flow"
      }
     ],
-    "falls": [
-     {
-      "points": [
-       [
-        -5.0,
-        32.0
-       ],
-       [
-        -5.3,
-        28.0
-       ],
-       [
-        -5.0,
-        25.5
-       ],
-       [
-        -4.8,
-        24.0
-       ]
-      ],
-      "width": 0.28,
-      "notch": 0.3
-     }
+    "pools": [
+     [
+      -5.0,
+      31.0,
+      1.6,
+      0.25
+     ]
     ],
     "flow": "acg:Lava001",
     "flow_emit": 10.0,
     "flow_scale": 2.5,
     "molten": "acg:Lava004",
-    "molten_emit": 6.0,
+    "molten_emit": 14.0,
     "molten_scale": 3.0,
     "rock": "dark_rock",
     "displace": 0.06,
-    "albedo": 0.25,
-    "rough_mul": 0.55
+    "albedo": 0.1,
+    "rough_mul": 0.9
    },
    {
     "kind": "kit",
@@ -209,89 +214,146 @@
     "module": "ember_el",
     "fn": "steam",
     "box": [
-     -6.5,
-     -1.6,
+     -4.0,
+     1.2,
      -0.1,
-     4.5,
-     4.8,
-     2.2
+     0.5,
+     3.8,
+     2.6
     ],
-    "density": 2.0,
-    "scale": 0.9,
+    "density": 2.5,
+    "scale": 0.7,
     "anisotropy": 0.45
    },
    {
     "kind": "kit",
     "shape": "ext",
     "module": "ember_el",
-    "fn": "sparks",
-    "area": [
-     -2.6,
-     -1.3,
-     1.8,
-     3.0
+    "fn": "steam",
+    "box": [
+     -9.0,
+     28.0,
+     0.0,
+     -1.0,
+     33.0,
+     6.0
     ],
-    "count": 50,
-    "height": 1.2,
+    "density": 0.8,
+    "scale": 2.0,
+    "anisotropy": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "sparks_mixed",
+    "area": [
+     -2.8,
+     0.8,
+     1.6,
+     3.2
+    ],
+    "count": 22,
+    "height": 1.6,
     "streak": [
-     0.012,
-     0.07
+     0.008,
+     0.09
     ],
     "radius": [
      0.0008,
-     0.0024
+     0.003
     ],
     "drift": [
      0.35,
      0.15
     ],
-    "emit": 14.0,
-    "color": "#FF6A1A",
+    "emit": 16.0,
     "seed": 4
    }
   ]
  },
  "lights": {
-  "seam": {
+  "back": {
    "type": "area",
    "size_m": [
-    1.6,
-    0.4
+    2.0,
+    1.4
    ],
    "orbit": {
     "azimuth_deg": 165,
-    "elevation_deg": 8,
-    "distance_m": 1.5
+    "elevation_deg": 30,
+    "distance_m": 1.2
    },
    "target": [
     0.0,
     0.0,
-    0.6
+    0.9
    ],
-   "irradiance": 9.0,
+   "irradiance": 2.0,
    "color": "#FF5A1A"
   },
-  "pool": {
+  "under": {
+   "type": "area",
+   "size_m": [
+    1.5,
+    0.2
+   ],
+   "orbit": {
+    "azimuth_deg": 165,
+    "elevation_deg": 3,
+    "distance_m": 0.5
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.4
+   ],
+   "irradiance": 0.8,
+   "color": "#FF5A1A"
+  },
+  "seam_l": {
    "type": "point",
    "position": [
-    -0.7,
-    -0.85,
-    0.35
+    -1.75,
+    1.1,
+    0.6
    ],
-   "power_w": 160,
+   "power_w": 25,
    "color": "#FF6A22",
-   "radius_m": 0.4
+   "radius_m": 0.3
   },
   "seam_r": {
    "type": "point",
    "position": [
     1.6,
     2.9,
-    0.4
+    0.6
    ],
-   "power_w": 90,
+   "power_w": 25,
    "color": "#FF6A22",
-   "radius_m": 0.4
+   "radius_m": 0.3
+  },
+  "fall_low": {
+   "type": "point",
+   "position": [
+    -5.0,
+    30.2,
+    1.0
+   ],
+   "power_w": 2500,
+   "color": "#FF6A22",
+   "radius_m": 0.6
+  },
+  "fall_high": {
+   "type": "point",
+   "position": [
+    -5.0,
+    31.0,
+    4.0
+   ],
+   "power_w": 1500,
+   "color": "#FF6A22",
+   "radius_m": 0.6
   }
  },
  "render": {
@@ -322,7 +384,7 @@
   ],
   "lens_mm": 60.0,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 2.0,
   "focus": [
    0.0,
    -0.21,
@@ -333,7 +395,7 @@
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
   "rotation_deg": 0.0,
-  "strength": 0.35,
+  "strength": 0.2,
   "res": "4k"
  },
  "finish": {
@@ -363,7 +425,7 @@
    60.0,
    12.0
   ],
-  "density": 0.003,
+  "density": 0.0012,
   "anisotropy": 0.4,
   "color": "#FFFFFF"
  }
