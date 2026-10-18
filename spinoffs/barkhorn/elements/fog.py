@@ -1,9 +1,8 @@
 """Fog, concept A: on a summit above a sea of clouds (round 31b; BRIEF.md is the direction, fog.md the notes).
 
 The owner's picture made real: "the speaker sitting on thick ... clouds, with blue skies in the backdrop, a flock of
-birds in the distance out of focus". The clear speaker stands on a lichened granite summit in the morning; behind it a
-dark boulder, so the clear cabinet reads against rock while the horn stands against the blue; beyond the ledge, far
-below, a sea of cloud runs to the horizon, lit from the side by a low sun; a few birds cross it far off.
+birds in the distance out of focus". The clear speaker stands on the top of a scanned sandstone cliff in the morning
+sun; beyond the edge, far below, a sea of cloud runs to the horizon; a few birds cross the blue far off.
 """
 from common import area, asset, camera, finish, ground, piece, portrait_of, scatter, shot as frame, sky, sun_from_sky
 
@@ -25,22 +24,16 @@ def birds(cx, y, cz, n=6, span=0.9, seed=2):
 
 def props():
     p = []
-    # the summit: dark weathered rock, level where the speaker stands, rolling over a brow 6 m behind it and falling
-    # away; small stones dropped across it
-    p.append(piece('ext', module='fog_el', fn='summit', texture='dark_rock', res='4k', size=[34.0, 26.0],
-                   position=[1.0, 7.0, 0.0], displace=0.12, relief=0.3, cells=1300, brow=6.0, drop=5.0, fall=10.0,
-                   stones={'model': 'stone_01', 'count': 260, 'scale': [0.25, 1.1], 'clear': 0.55,
-                           'area': [-5.0, -3.5, 7.0, 6.5], 'seed': 7}))
-    # outcrops down the falling ridge, their tops below the summit, partly lost in the haze
-    for x, y, z, sc, rz in ((-16.0, 34.0, -26.0, 2.6, 40), (21.0, 46.0, -34.0, 3.2, -110), (-4.0, 60.0, -44.0, 3.6, 170)):
-        p.append(asset('mountainside', position=(x, y, z), rotate=(0, 0, rz), scale=sc, res='2k'))
-    # one boulder for scale, camera-left, bedded into the rock
-    p.append(asset('boulder_01', position=(-1.4, 1.9, -0.18), rotate=(0, 0, 200), scale=0.75))
+    # the summit: a scanned cliff top (Poly Haven, real scale); its flattest spot near the top, at (3.72, 3.11, 6.91) in
+    # the scan, brought to the origin, the speaker's feet 35 mm into it (its stone is uneven by a few cm under them)
+    p.append(asset('namaqualand_cliff_02', position=(-3.72, -3.11, -6.875), rotate=(0, 0, 0), scale=1.0, res='4k'))
     # the sea of cloud: near, real cloud (a volume with billows and wisps); far, a heaped deck out to the horizon
-    p.append(piece('ext', module='fog_el', fn='cloudvol', box=[-3000.0, 250.0, -170.0, 6000.0, 3200.0, -10.0],
-                   top=-90.0, amp=110.0, scale=220.0, detail=12.0, erode=18.0, soft=1.2, density=0.18,
-                   anisotropy=0.65))
-    p.append(piece('ext', module='fog_el', fn='cloudsea', near=2800.0, far=40000.0, width=90000.0, z=-120.0,
+    # (the volume's box is held to what the lens sees, with a margin toward the sun, and its noise kept light: a
+    # procedural volume is traced by null scattering, so its cost goes with its size, its peak density and its noise)
+    p.append(piece('ext', module='fog_el', fn='cloudvol', box=[-400.0, 250.0, -170.0, 2600.0, 2800.0, -10.0],
+                   top=-90.0, amp=110.0, scale=220.0, detail=12.0, erode=18.0, soft=1.2, density=0.14,
+                   octaves=4, billow_octaves=3, anisotropy=0.65))
+    p.append(piece('ext', module='fog_el', fn='cloudsea', near=2600.0, far=40000.0, width=90000.0, z=-120.0,
                    billow=260.0, height=65.0, depth=120.0, x=3000.0, rows=170, cols=380, fan=2.6, seed=3,
                    sss_r=20.0, bump_size=14.0, bump_dist=5.0))
     # a loose flock far off in the open sky, upper right
@@ -49,11 +42,11 @@ def props():
 
 
 def shot():
-    cam = camera(height=0.6, distance=6.8, azimuth=-22.0, lens=65.0, target=(0.1, 0.0, 0.7), fstop=4.0)
+    cam = camera(height=0.82, distance=6.8, azimuth=-22.0, lens=65.0, target=(0.1, 0.0, 0.7), fstop=4.0)
     s = frame('fog', props(), cam, sky(SKY, ROT, strength=1.0, res='4k'), 'barkhorn, Fog, above the clouds',
               sun=sun_from_sky(SKY, ROT, irradiance=3.5),
-              lights={'bounce': area(-60, 18, 2.5, 0.8, '#F2EEE6', (2.0, 2.0), (0.0, 0.0, 0.6))},
-              haze={'box_m': [-40000.0, 200.0, -900.0, 40000.0, 45000.0, 300.0], 'density': 0.00012, 'anisotropy': 0.6,
+              lights={'bounce': area(-60, 18, 2.5, 0.5, '#F2EAE0', (2.0, 2.0), (0.0, 0.0, 0.6))},
+              haze={'box_m': [-40000.0, 200.0, -900.0, 40000.0, 45000.0, 300.0], 'density': 0.00008, 'anisotropy': 0.6,
                     'color': '#BFD3EA'},
               rotate_z=-6.0, fin=finish(contrast=0.08, vignette=0.12), exposure=0.3,
               look='AgX - Medium High Contrast')

@@ -128,7 +128,7 @@ def cloudvol(bpy, name, p, kit):
     # the top: a 2D noise over x, y
     xy = nt.nodes.new('ShaderNodeCombineXYZ'); nt.links.new(sep.outputs['X'], xy.inputs['X']); nt.links.new(sep.outputs['Y'], xy.inputs['Y'])
     n2 = nt.nodes.new('ShaderNodeTexNoise'); n2.noise_dimensions = '2D'
-    n2.inputs['Scale'].default_value = 1.0 / p.get('scale', 300.0); n2.inputs['Detail'].default_value = 6.0
+    n2.inputs['Scale'].default_value = 1.0 / p.get('scale', 300.0); n2.inputs['Detail'].default_value = p.get('octaves', 6.0)
     if 'Roughness' in n2.inputs:
         n2.inputs['Roughness'].default_value = 0.55
     nt.links.new(xy.outputs['Vector'], n2.inputs['Vector'])
@@ -137,7 +137,7 @@ def cloudvol(bpy, name, p, kit):
     nt.links.new(n2.outputs['Fac'], top.inputs[0])
     # the billows: a 3D noise that pushes the surface in and out
     n3 = nt.nodes.new('ShaderNodeTexNoise'); n3.inputs['Scale'].default_value = 1.0 / p.get('detail', 18.0)
-    n3.inputs['Detail'].default_value = 5.0
+    n3.inputs['Detail'].default_value = p.get('billow_octaves', 5.0)
     if 'Roughness' in n3.inputs:
         n3.inputs['Roughness'].default_value = 0.6
     n3.inputs['Distortion'].default_value = p.get('distort', 0.4)

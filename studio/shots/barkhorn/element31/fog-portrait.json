@@ -22,110 +22,20 @@
   "props": [
    {
     "kind": "kit",
-    "shape": "ext",
-    "module": "fog_el",
-    "fn": "summit",
-    "texture": "dark_rock",
-    "res": "4k",
-    "size": [
-     34.0,
-     26.0
-    ],
-    "position": [
-     1.0,
-     7.0,
-     0.0
-    ],
-    "displace": 0.12,
-    "relief": 0.3,
-    "cells": 1300,
-    "brow": 6.0,
-    "drop": 5.0,
-    "fall": 10.0,
-    "stones": {
-     "model": "stone_01",
-     "count": 260,
-     "scale": [
-      0.25,
-      1.1
-     ],
-     "clear": 0.55,
-     "area": [
-      -5.0,
-      -3.5,
-      7.0,
-      6.5
-     ],
-     "seed": 7
-    }
-   },
-   {
-    "kind": "kit",
     "shape": "asset",
-    "model": "mountainside",
+    "model": "namaqualand_cliff_02",
     "position": [
-     -16.0,
-     34.0,
-     -26.0
+     -3.72,
+     -3.11,
+     -6.875
     ],
     "rotate": [
      0,
      0,
-     40
+     0
     ],
-    "scale": 2.6,
-    "res": "2k"
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mountainside",
-    "position": [
-     21.0,
-     46.0,
-     -34.0
-    ],
-    "rotate": [
-     0,
-     0,
-     -110
-    ],
-    "scale": 3.2,
-    "res": "2k"
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mountainside",
-    "position": [
-     -4.0,
-     60.0,
-     -44.0
-    ],
-    "rotate": [
-     0,
-     0,
-     170
-    ],
-    "scale": 3.6,
-    "res": "2k"
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "boulder_01",
-    "position": [
-     -1.4,
-     1.9,
-     -0.18
-    ],
-    "rotate": [
-     0,
-     0,
-     200
-    ],
-    "scale": 0.75,
-    "res": "2k"
+    "scale": 1.0,
+    "res": "4k"
    },
    {
     "kind": "kit",
@@ -133,11 +43,11 @@
     "module": "fog_el",
     "fn": "cloudvol",
     "box": [
-     -3000.0,
+     -400.0,
      250.0,
      -170.0,
-     6000.0,
-     3200.0,
+     2600.0,
+     2800.0,
      -10.0
     ],
     "top": -90.0,
@@ -146,7 +56,9 @@
     "detail": 12.0,
     "erode": 18.0,
     "soft": 1.2,
-    "density": 0.18,
+    "density": 0.14,
+    "octaves": 4,
+    "billow_octaves": 3,
     "anisotropy": 0.65
    },
    {
@@ -154,7 +66,7 @@
     "shape": "ext",
     "module": "fog_el",
     "fn": "cloudsea",
-    "near": 2800.0,
+    "near": 2600.0,
     "far": 40000.0,
     "width": 90000.0,
     "z": -120.0,
@@ -387,8 +299,8 @@
     0.0,
     0.6
    ],
-   "irradiance": 0.8,
-   "color": "#F2EEE6"
+   "irradiance": 0.5,
+   "color": "#F2EAE0"
   }
  },
  "render": {
@@ -411,7 +323,7 @@
   "position": [
    -2.4473,
    -6.3049,
-   0.6
+   0.82
   ],
   "target": [
    0.1,
@@ -470,7 +382,7 @@
    45000.0,
    300.0
   ],
-  "density": 0.00012,
+  "density": 8e-05,
   "anisotropy": 0.6,
   "color": "#BFD3EA"
  }

@@ -101,3 +101,28 @@ grey. Its changes, and what I did:
    tinted through `common.asset`, so its colour is unchanged.
 
 Out of scope, as the critic noted: the woofer's black and the acrylic's clarity are the product's.
+
+### Pass 3: 5.5 ("iterate"; 7.5 if fixed). Concept change.
+
+The frame was r3. The critic: clean and legible, but "a careful CG render": the summit is a uniform grey slab with
+repeated pale pebbles, the brow cuts the clouds in a straight line, the sky is milky, and the clouds are soft. (Its sun
+azimuths use another convention than the engine's: it read the sun as behind the camera when it was behind the speaker
+on the left. Its point stands, though: the bounce card made the speaker look front-lit.)
+
+**Three passes: 5.0, 5.5, 5.5.** All three critics flagged the same thing: the modelled ground (a texture on a plane,
+however displaced) and its edge read as CG. Per the protocol I changed the concept, not the settings: **the speaker now
+stands on a photographed rock**, not a textured plane.
+
+- I searched the scanned rocks for a standing place: ray casts over each scan, looking for a disc 0.9 m across within
+  12 cm of level near its top. Only `namaqualand_cliff_02` has one, at (3.72, 3.11, 6.91) in the scan. Its top is a
+  narrow ridge about 1.3 m deep, falling away 1.6 m in front and ending behind.
+- The scan is moved so that spot is at the origin, sunk 3.5 cm. The speaker stands on a real ridge of sandstone with
+  real colour and form, and beyond it the sea of cloud fills the band behind.
+- Dropped with the plane: the stones, the outcrops and the boulder.
+- Kept from the critic's list: haze density down to 8e-5 (a bluer sky); bounce card down to 0.5 (less front light);
+  camera at 0.82 m, so the line of sight clears the 3 cm lip in front of the speaker's feet.
+
+**Render cost.** The cloud volume is about 85 % of the time. In Blender 5 a procedural volume is traced by null
+scattering, so the material's step rate does nothing; the cost goes with the box's size, its peak density and the
+noise's octaves. The box is now held to what the lens sees (x -400 to 2600 m, y 250 to 2800 m), with density 0.14 and
+4 + 3 octaves: 70 s down to about 45 s at the test size, with the clouds still reading as cloud.
