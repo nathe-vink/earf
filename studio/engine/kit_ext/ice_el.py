@@ -269,7 +269,7 @@ def _snow_pbr(bpy, name, res='2k', displace=0.03, ripple=0.012, sparkle=1.0):
         nt.links.new(vec, n.inputs['Vector']); return n.outputs['Color']
     nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 0.12; nz.inputs['Detail'].default_value = 3
     nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
-    fac = nt.nodes.new('ShaderNodeMapRange'); fac.inputs['From Min'].default_value = 0.42; fac.inputs['From Max'].default_value = 0.58
+    fac = nt.nodes.new('ShaderNodeMapRange'); fac.inputs['From Min'].default_value = 0.3; fac.inputs['From Max'].default_value = 0.7   # a gentle blend: no blotches
     nt.links.new(nz.outputs['Fac'], fac.inputs['Value'])
 
     def mix(a, b, kind='RGBA'):
@@ -288,7 +288,7 @@ def _snow_pbr(bpy, name, res='2k', displace=0.03, ripple=0.012, sparkle=1.0):
     # glitter: a sparse field of tiny facets tilted at random, mirror-smooth
     vor = nt.nodes.new('ShaderNodeTexVoronoi'); vor.inputs['Scale'].default_value = 900.0
     nt.links.new(tc.outputs['Object'], vor.inputs['Vector'])
-    glint = nt.nodes.new('ShaderNodeMapRange'); glint.inputs['From Min'].default_value = 0.975; glint.inputs['From Max'].default_value = 1.0
+    glint = nt.nodes.new('ShaderNodeMapRange'); glint.inputs['From Min'].default_value = 0.96; glint.inputs['From Max'].default_value = 1.0
     glint.inputs['To Min'].default_value = 0.0; glint.inputs['To Max'].default_value = sparkle
     nt.links.new(vor.outputs['Color'], glint.inputs['Value'])
     bs.inputs['Coat Roughness'].default_value = 0.02; bs.inputs['Coat IOR'].default_value = 1.31

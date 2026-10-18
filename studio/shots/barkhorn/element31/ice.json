@@ -46,7 +46,7 @@
      0.56,
      0.42,
      -10.0,
-     0.035
+     0.06
     ]
    },
    {
@@ -915,25 +915,18 @@
       "fir_sapling_medium:c"
      ],
      [
-      -2.3,
-      -4.6,
+      -3.3,
+      -3.6,
       20,
-      2.2,
-      "grass_medium_01:large_a"
+      1.4,
+      "grass_medium_01:mid_a"
      ],
      [
-      -2.0,
-      -4.9,
+      -3.0,
+      -3.9,
       140,
-      1.8,
-      "grass_medium_01:mid_b"
-     ],
-     [
-      -2.65,
-      -4.25,
-      260,
-      2.4,
-      "grass_medium_01:large_c"
+      1.2,
+      "grass_medium_01:small_b"
      ]
     ],
     "snow": 0.75,
@@ -955,9 +948,81 @@
      4.8
     ],
     "window_emit": 28.0,
-    "lamp_w": 1000.0,
+    "lamp_w": 1500.0,
     "window_color": "#FF9A3C",
     "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "pbr",
+    "texture": "snow_02",
+    "tex_scale": 6.0,
+    "position": [
+     -90,
+     320,
+     -7.699999999999999
+    ],
+    "scale": [
+     140,
+     50,
+     22
+    ],
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "pbr",
+    "texture": "snow_02",
+    "tex_scale": 6.0,
+    "position": [
+     60,
+     360,
+     -10.5
+    ],
+    "scale": [
+     170,
+     60,
+     30
+    ],
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "pbr",
+    "texture": "snow_02",
+    "tex_scale": 6.0,
+    "position": [
+     210,
+     300,
+     -6.3
+    ],
+    "scale": [
+     110,
+     50,
+     18
+    ],
+    "segments": 64
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "pbr",
+    "texture": "snow_02",
+    "tex_scale": 6.0,
+    "position": [
+     -260,
+     340,
+     -9.1
+    ],
+    "scale": [
+     130,
+     50,
+     26
+    ],
+    "segments": 64
    }
   ]
  },
@@ -978,7 +1043,7 @@
     0.0,
     0.5
    ],
-   "irradiance": 0.25,
+   "irradiance": 0.8,
    "color": "#C8D8EA",
    "receivers": [
     "left",
@@ -1000,12 +1065,12 @@
   "back": {
    "type": "area",
    "size_m": [
-    3.0,
-    2.0
+    2.0,
+    3.0
    ],
    "orbit": {
-    "azimuth_deg": 165,
-    "elevation_deg": 12,
+    "azimuth_deg": 150,
+    "elevation_deg": 15,
     "distance_m": 4.0
    },
    "target": [
@@ -1013,7 +1078,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 0.6,
+   "irradiance": 1.6,
    "color": "#D8E2F0",
    "receivers": [
     "left",
@@ -1040,7 +1105,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": -1.4,
+  "exposure": -0.6,
   "white_balance_k": 5400,
   "white_balance_tint": 10.0,
   "look": "AgX - Base Contrast",
@@ -1073,8 +1138,8 @@
  },
  "sky": {
   "kind": "hdri",
-  "polyhaven": "kiara_9_dusk",
-  "rotation_deg": 275.0,
+  "polyhaven": "kloppenheim_02_puresky",
+  "rotation_deg": 279.0,
   "strength": 1.0,
   "res": "4k"
  },
@@ -1094,7 +1159,7 @@
    "lift": 0.0,
    "lift_color": "#000000",
    "vignette": 0.2,
-   "grain": 0.01
+   "grain": 0.005
   }
  },
  "haze": {
@@ -1106,7 +1171,7 @@
    60,
    20
   ],
-  "density": 0.006,
+  "density": 0.003,
   "anisotropy": 0.2,
   "color": "#C8D8EA"
  }
