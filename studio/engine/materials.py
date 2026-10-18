@@ -29,8 +29,8 @@ PRESET_DEFAULTS = {
     # CAD's axis it faces along (x, y or z); its fine grain in the object's own space, metres.
     # treated paper: felted fibre (`fibre` at `fibre_mm`), faint radial streaks from the pulp's flow in the mould
     # (`streaks`, `streak_n` round), a slow drift in its colour (`vary`), a low sheen and a soft lobe off the dope
-    'treated_paper': dict(color='#2A2826', roughness=0.62, specular=0.35, sheen=0.35, coat=0.12, coat_roughness=0.45,
-                          fibre=0.22, fibre_mm=0.35, streaks=0.10, streak_n=90.0, vary=0.06, axis='y'),
+    'treated_paper': dict(color='#242220', roughness=0.72, specular=0.3, sheen=0.4, coat=0.05, coat_roughness=0.5,
+                          fibre=0.3, fibre_mm=0.35, streaks=0.05, streak_n=70.0, vary=0.06, axis='y'),
     # cloth doped with damping compound (a pro woofer's multi-roll surround): a rubbery semi-gloss that puts a
     # highlight along each roll, the weave just showing through (`weave` at `weave_mm`)
     'doped_cloth': dict(color='#1E1D1C', roughness=0.42, specular=0.5, coat=0.45, coat_roughness=0.22, sheen=0.2,
@@ -496,7 +496,6 @@ def _driver_finish(nt, b, p, preset, normal_in=None):
         fib = noise(obj, 1000.0 / p['fibre_mm'], 6.0, 0.65)
         base = tint(fib, p['vary'] * 0.8, base)
         n = bump(fib, p['fibre'], p['fibre_mm'] / 1000 * 0.4, n)
-        n = bump(streak, p['fibre'] * 0.4, 0.0004, n)
         rr = node('ShaderNodeMapRange'); nt.links.new(streak, rr.inputs['Value'])
         rr.inputs['To Min'].default_value = p['roughness'] + 0.05; rr.inputs['To Max'].default_value = p['roughness'] - 0.05
         nt.links.new(rr.outputs['Result'], I['Roughness'])

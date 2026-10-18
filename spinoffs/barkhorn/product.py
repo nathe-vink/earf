@@ -2072,10 +2072,10 @@ PRODUCT = Product(
                # round 31 (spinoffs/barkhorn/drivers31.md): the drivers as FaitalPRO and B&C make them. Treated paper with
                # its fibre and streaks, the doped cloth surround, the cap doped glossier; the baskets and bodies die-cast in
                # black e-coat; the screws black oxide; the motor's steel in black, its neodymium nickel-plated
-               'driver-frame': {'preset': 'ecoat', 'color': '#1B1B1C'}, 'driver-cone': {'preset': 'treated_paper', 'color': '#2A2826'},
+               'driver-frame': {'preset': 'ecoat', 'color': '#1B1B1C'}, 'driver-cone': {'preset': 'treated_paper', 'color': '#242220'},
                'driver-surround': {'preset': 'doped_cloth', 'color': '#1E1D1C'},
-               'driver-cap': {'preset': 'treated_paper', 'color': '#262422', 'roughness': 0.5, 'coat': 0.3, 'coat_roughness': 0.3,
-                              'streaks': 0.04},
+               'driver-cap': {'preset': 'treated_paper', 'color': '#22201F', 'roughness': 0.6, 'coat': 0.1, 'coat_roughness': 0.4,
+                              'streaks': 0.02},
                'driver-motor': {'preset': 'ecoat', 'color': '#1D1D1E', 'roughness': 0.34},
                'driver-magnet': {'preset': 'metal', 'color': '#B9B6AE', 'roughness': 0.3},
                'driver-coil': {'preset': 'metal', 'color': '#B87333'}, 'driver-spider': {'preset': 'rubber', 'color': '#C8B88A'},

@@ -55,11 +55,11 @@
   },
   "driver-cap": {
    "preset": "treated_paper",
-   "color": "#262422",
-   "roughness": 0.5,
-   "coat": 0.3,
-   "coat_roughness": 0.3,
-   "streaks": 0.04
+   "color": "#22201F",
+   "roughness": 0.6,
+   "coat": 0.1,
+   "coat_roughness": 0.4,
+   "streaks": 0.02
   },
   "driver-coil": {
    "preset": "metal",
@@ -67,7 +67,7 @@
   },
   "driver-cone": {
    "preset": "treated_paper",
-   "color": "#2A2826"
+   "color": "#242220"
   },
   "driver-frame": {
    "preset": "ecoat",
