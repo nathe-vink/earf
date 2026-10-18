@@ -165,3 +165,69 @@ def cloudvol(bpy, name, p, kit):
     me.materials.append(m)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     return [ob]
+
+
+def _desaturate(root, sat, val):
+    """A scanned model's colour taken toward the grey of the rock it lies on (a Hue/Saturation node before its base
+    colour)."""
+    seen = set()
+    for o in [root] + list(root.children_recursive):
+        for slot in getattr(o, 'material_slots', []):
+            m = slot.material
+            if not m or m.name in seen or not m.use_nodes:
+                continue
+            seen.add(m.name)
+            nt = m.node_tree
+            b = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+            if not b or not b.inputs['Base Color'].links:
+                continue
+            src = b.inputs['Base Color'].links[0].from_socket
+            hs = nt.nodes.new('ShaderNodeHueSaturation')
+            hs.inputs['Saturation'].default_value = sat; hs.inputs['Value'].default_value = val
+            nt.links.new(src, hs.inputs['Color']); nt.links.new(hs.outputs['Color'], b.inputs['Base Color'])
+
+
+def summit(bpy, name, p, kit):
+    """A summit of real rock: a patch of a Poly Haven texture (assets.ground, `texture` at `res`, `size`, `displace`,
+    `relief`) that is level where the speaker stands and rolls over a brow `brow` metres behind it (y), falling `drop`
+    metres over `fall` metres beyond, so the eye goes over the edge to what lies below. Stones (`stones`: a model id,
+    `count`, `scale` [min, max], kept `clear` metres from the speaker, `area` [x0, y0, x1, y1]) are dropped onto it,
+    each resting where a ray from above meets the rock."""
+    import assets
+    w, d = p.get('size', [30.0, 24.0])
+    cx, cy, cz = p.get('position', [0.0, 0.0, 0.0])
+    ob = assets.ground(bpy, name, p['texture'], (w, d), p.get('res', '2k'), (cx, cy, cz), p.get('cells'),
+                       p.get('displace', 0.05), p.get('tint'), p.get('tint_mix', 0.0), p.get('tex_scale'),
+                       p.get('rough_mul', 1.0), p.get('bump', 1.0), p.get('relief'), (0.0, 0.0, p.get('flat_r', 0.9)))
+    brow, drop, fall = p.get('brow', 6.0), p.get('drop', 4.0), p.get('fall', 10.0)
+    for v in ob.data.vertices:
+        y = v.co.y + cy
+        if y > brow:
+            t = min(1.0, (y - brow) / fall)
+            v.co.z -= drop * (t * t * (3 - 2 * t)) * (1.0 + 0.6 * max(0.0, (y - brow - fall) / fall))
+    ob.data.update()
+    obs = [ob]
+    st = p.get('stones')
+    if st:
+        bpy.context.view_layer.update()
+        dg = bpy.context.evaluated_depsgraph_get()
+        rnd = random.Random(st.get('seed', 5))
+        root = assets.place(bpy, st['model'], st.get('res', '1k'), location=(0, 0, -1000))
+        _desaturate(root, st.get('saturation', 0.25), st.get('value', 0.8))
+        x0, y0, x1, y1 = st.get('area', [-6, -3, 6, 6])
+        made, tries = 0, 0
+        while made < st.get('count', 200) and tries < st.get('count', 200) * 20:
+            tries += 1
+            x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
+            if x * x + y * y < st.get('clear', 0.5) ** 2:
+                continue
+            hit, loc, nrm, idx, hob, mx = bpy.context.scene.ray_cast(dg, Vector((x, y, 50.0)), Vector((0, 0, -1)))
+            if not hit or hob.name != ob.name:
+                continue
+            s = rnd.uniform(*st.get('scale', [0.3, 1.0]))
+            assets.instance(bpy, root, (x, y, loc.z - 0.01 * s), (rnd.uniform(-20, 20), rnd.uniform(-20, 20), rnd.uniform(0, 360)), s)
+            made += 1
+        root.hide_render = True
+        for o in root.children_recursive:
+            o.hide_render = True
+    return obs

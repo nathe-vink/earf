@@ -74,3 +74,30 @@ The critic: the speaker is crisp and believable, but the world reads as CG. Its 
 6. **The peak floats.** Removed.
 7. **The birds form a column.** Done: 11 birds in a loose diagonal in the open sky, upper right, at about 60 m.
 8. **Flat tonality.** Done: exposure +0.3, AgX Medium High Contrast, finish contrast 0.08.
+
+### Pass 2: 5.5 ("iterate"; 7.8 if fixed)
+
+The frame was r2. The pass-1 accept tests on r2: 5 of 8 passed (cloud range, clear silhouette, rock range, horizon, birds).
+The shadow test missed because the shadow falls right of its test region; the edge and highlight tests missed narrowly.
+
+The critic: a clean idea, and the horn reads beautifully against the sky. But the plateau ends in a tabletop edge with
+the clouds directly behind it, the clouds look smeared, the ground is a uniform speckled decal, and the lining reads
+grey. Its changes, and what I did:
+
+1. **A believable far edge.** Done: `summit`, my own ground. It is level at the speaker, rolls over a brow 6 m behind
+   it and falls 5 m over the next 10 m. Three `mountainside` scans (scale 2.6 to 3.6) stand as outcrops down the
+   falling ridge, 34 to 60 m out.
+2. **Lower camera, longer lens.** Done in part: 0.6 m (the brief's eye-level band starts at about 0.7; the critic asked
+   for 0.42), 65 mm, 6.8 m back. The horizon now crosses the cabinet at mid-height, so the cabinet's top and the whole
+   horn stand against sky.
+3. **The lining reads grey.** Done: the bounce card at azimuth -60, 18 degrees up, 2.5 m away, 2 x 2 m, irradiance
+   0.8, warm white.
+4. **Crisper billows.** Done: soft 1.2, density 0.18, detail 12, erode 18.
+5. **Aerial perspective.** Done: haze only beyond 200 m, density 1.2e-4, #BFD3EA; the far deck runs out to 40 km.
+6. **The ground is a uniform decal.** Done: `dark_rock` at 4k, 12 cm of displacement, 0.3 m of relief. 260 scanned
+   `stone_01` pebbles are dropped onto the rock by ray cast, desaturated toward its grey, and none sits within 0.55 m
+   of the speaker.
+7. **The boulder looks imported.** Done in part: bedded 18 cm into the rock and moved left. A scan's colour can't be
+   tinted through `common.asset`, so its colour is unchanged.
+
+Out of scope, as the critic noted: the woofer's black and the acrylic's clarity are the product's.
