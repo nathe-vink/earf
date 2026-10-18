@@ -110,3 +110,11 @@ made the speaker read small in an empty field; one also named the new wall-to-fl
 fall-off. 31d's flags drew Fog's edges and its back bank gave Smoke presence, and those were noted in its favour. The
 31c heroes and rig are restored (bright2 stays in the module for the record). For the drivers re-render: the 31c rig;
 the flags-in-reflection and the low back bank are candidates to try at 31c's framing, proofed and dueled first.
+
+Round 31e (31c's rig and framing with only 31d's two credited changes: the reflection-only flags and the low back bank),
+proofed on Ember, Fog and Smoke at 0.5 scale, 48 samples, against 31c at the same settings, dueled blind twice with the
+order swapped: **31c wins both**, 6.0 to 5.5 and 7.0 to 6.5. Both judges preferred 31c's side panels: its glossy right
+flag lays a dark reflected streak down each side face that models it as glass, which the reflection-only flags (placed
+for the water-clear edges) lose; one also saw a hard grey band low on 31e's side panels (the low back bank). So 31c
+stands unchanged as the rig for the drivers re-render. The faint grey wedge at the frames' upper left is 31c's own (the
+site blends its edges into #FAF9F5); a fix for it would need its own duel.
