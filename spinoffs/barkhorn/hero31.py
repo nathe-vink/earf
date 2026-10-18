@@ -308,7 +308,7 @@ def parse_sets(sets, over=None):
     p = {**copy.deepcopy(P), **(over or {})}
     for kv in sets or []:
         k, v = kv.split('=', 1)
-        p[k] = json.loads(v) if v[:1] in '[{0123456789-.tf' else v
+        p[k] = json.loads(v) if v[:1] in '[{0123456789-.tfn' else v
     return p
 
 
@@ -332,10 +332,11 @@ def main():
         print(json.dumps(spots(p, (1600, 2000) if a.portrait else (2560, 1280)), indent=1))
 
 
-# the phone frame (1600 x 2000, the title above it on a phone, not over it): the eight on a straight line receding to the
-# right, each facing the lens, from higher and nearer, so each is bigger than in a row across a narrow frame and the
-# throws run down the frame toward the viewer
-PORTRAIT = {'diag': [-1.9, -2.4, 0.56, 0.75], 'cam_dist': 8.5, 'cam_h': 3.4, 'lens': 40.0, 'aim_z': 0.0, 'shift_y': 0.0, 'toe': 0.0}
+# the phone frame (1600 x 2000; on a phone the title sits above the picture, not over it): the same two ranks drawn
+# closer together (the back rank half hidden behind the front), from nearer and higher, so each speaker is as big
+# as a narrow frame allows and the throws fan down the lower half
+PORTRAIT = {'pitch': 0.5, 'stagger': 0.9, 'x0': 0.0, 'sag': 0.3, 'cam_dist': 7.0, 'cam_h': 2.8, 'lens': 50.0, 'aim_z': 0.15,
+            'cyc_z': 4.5}
 
 if __name__ == '__main__':
     main()
