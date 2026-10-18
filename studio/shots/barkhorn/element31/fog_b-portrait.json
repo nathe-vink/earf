@@ -26,11 +26,11 @@
     "texture": "sparse_grass",
     "size": [
      26.0,
-     26.5
+     16.7
     ],
     "position": [
      0.0,
-     -0.75,
+     -5.75,
      0.0
     ],
     "displace": 0.02,
@@ -90,12 +90,12 @@
     "grass": "#6B6A45",
     "scrub": "#2A3320",
     "floor": -140.0,
-    "brow": 12.6,
+    "brow": 2.65,
     "steep": 10.0,
     "drop": 110.0,
     "wide": 50.0,
     "y_range": [
-     11.5,
+     1.6,
      6500.0
     ],
     "x_spread": [
@@ -109,8 +109,8 @@
     "relief": 0.15,
     "relief_far": 0.008,
     "gullies": [
-     12.0,
-     150.0
+     16.0,
+     160.0
     ]
    },
    {
@@ -187,8 +187,8 @@
       40.0
      ]
     ],
-    "top": -32.0,
-    "heave": 6.0,
+    "top": -48.0,
+    "heave": 8.0,
     "billows": [
      [
       160.0,
@@ -203,12 +203,12 @@
       1.5
      ]
     ],
-    "bank": 18.0,
-    "bank_size": 450.0,
+    "bank": 34.0,
+    "bank_size": 200.0,
     "rise": [
-     950.0,
-     1600.0,
-     62.0
+     1000.0,
+     1800.0,
+     44.0
     ],
     "soft": 5.0,
     "density": 0.06,
@@ -219,7 +219,7 @@
     "haze_height": 170.0,
     "box": [
      -3500.0,
-     13.0,
+     3.5,
      -170.0,
      4500.0,
      7000.0,
@@ -231,7 +231,7 @@
     "shape": "ext",
     "module": "fog_b_el",
     "fn": "fog",
-    "top": 0.6,
+    "top": 0.5,
     "heave": 4.0,
     "billows": [
      [
@@ -244,17 +244,17 @@
      ]
     ],
     "soft": 4.0,
-    "density": 0.025,
+    "density": 0.03,
     "anisotropy": 0.6,
     "billow_size": 6.0,
     "billow_cut": 0.42,
     "billow_gain": 3.0,
     "box": [
-     -45.0,
-     13.2,
+     -160.0,
+     3.3,
      -40.0,
-     70.0,
-     100.0,
+     200.0,
+     120.0,
      4.0
     ]
    },
@@ -266,12 +266,12 @@
      "grass_medium_01",
      "grass_bermuda_01"
     ],
-    "count": 3500,
+    "count": 3000,
     "area": [
      -9.0,
      -13.0,
      11.0,
-     12.2
+     2.3
     ],
     "avoid": [
      [
@@ -320,18 +320,18 @@
     "models": [
      "grass_medium_02"
     ],
-    "count": 60,
+    "count": 50,
     "area": [
      -8.0,
-     11.8,
-     14.0,
-     12.6
+     2.2,
+     12.0,
+     2.65
     ],
     "avoid": [
      [
-      0.0,
-      0.0,
-      0.9
+      0.6,
+      2.4,
+      1.0
      ]
     ],
     "scale": [
@@ -340,6 +340,57 @@
     ],
     "seed": 5,
     "res": "1k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "boulder_01",
+    "position": [
+     0.55,
+     2.45,
+     -0.12
+    ],
+    "rotate": [
+     0,
+     0,
+     75
+    ],
+    "scale": 1.1,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "coast_rocks_05",
+    "position": [
+     -2.6,
+     2.7,
+     -0.35
+    ],
+    "rotate": [
+     0,
+     0,
+     20
+    ],
+    "scale": 0.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "coast_rocks_05",
+    "position": [
+     3.4,
+     2.9,
+     -0.4
+    ],
+    "rotate": [
+     0,
+     0,
+     140
+    ],
+    "scale": 0.5,
+    "res": "2k"
    },
    {
     "kind": "kit",
@@ -404,9 +455,7 @@
   "bounces": 12,
   "view": "AgX",
   "exposure": 0.0,
-  "look": "AgX - Base Contrast",
-  "volume_biased": true,
-  "volume_step_rate": 4.0
+  "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Fog: San Francisco fog over a Marin headland at dawn (4:5)",
  "size": [
