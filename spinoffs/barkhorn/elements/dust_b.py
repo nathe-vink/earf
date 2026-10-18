@@ -56,7 +56,7 @@ def props():
             butte(5200, 27, 900, 320, 3, turn=5, squash=0.3, spread=1.6),
             butte(8200, -32, 1100, 260, 4, turn=0, squash=0.25, spread=1.5)]
     # the near ground's plants: prickly pear beside the speaker, a yucca behind it, sagebrush, the tumbleweed
-    out += [piece('ext', module='dust_b_el', fn='prickly_pear', position=[3.5, 1.7, -0.02], size=0.2, pads=22, seed=3, color='#677A52', color2='#7F8460'),
+    out += [piece('ext', module='dust_b_el', fn='prickly_pear', position=[2.3, 2.2, -0.02], size=0.2, pads=22, seed=3, color='#677A52', color2='#7F8460'),
             piece('ext', module='dust_b_el', fn='yucca', position=[-1.4, 2.4, -0.01], length=0.6, width=0.022, leaves=64,
                   seed=5),
             piece('ext', module='dust_b_el', fn='sagebrush', position=[5.5, 9.5, -0.02], size=[1.0, 0.9, 0.7], seed=7),
@@ -95,8 +95,8 @@ def shot():
                  'barkhorn, Dust, Monument Valley in the afternoon', lights=lights(),
                  sun=sun_from_sky(HDRI, ROT, irradiance=float(os.environ.get('DUSTB_SUN', 9.0)), angle_deg=0.53, color='#FFC98E'),
                  fin=finish(contrast=0.08, clarity=0.05, saturation=0.04, vignette=0.12),
-                 haze={'box_m': [-8000.0, -60.0, -5.0, 8000.0, 8000.0, 500.0], 'density': 0.00011,
-                       'anisotropy': 0.3, 'color': '#C9D3DE'},
+                 haze={'box_m': [-8000.0, -60.0, -5.0, 8000.0, 8000.0, 350.0], 'density': 0.00005,
+                       'anisotropy': 0.3, 'color': '#BFCDE0'},
                  rotate_z=20.0, position=(0.0, 0.0, -0.012), exposure=float(os.environ.get('DUSTB_EXP', 0.0)))
 
 
