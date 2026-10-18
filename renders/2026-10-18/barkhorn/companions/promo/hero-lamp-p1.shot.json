@@ -1,0 +1,198 @@
+{
+ "title": "Bell beside Haze",
+ "size": [
+  1600,
+  1100
+ ],
+ "camera": {
+  "position": [
+   0.5471,
+   -1.3303,
+   1.1082
+  ],
+  "target": [
+   0.36,
+   0.45,
+   0.92
+  ],
+  "lens_mm": 50,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   0.36,
+   0.25,
+   0.98
+  ]
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.015,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.9,
+  "white_balance_k": 3400
+ },
+ "materials": {
+  "oak": {
+   "grain": 1.0,
+   "roughness": 0.38
+  },
+  "led": {
+   "strength": 60.0
+  }
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   5.6,
+   4.6,
+   2.8
+  ],
+  "center": [
+   0.4,
+   -1.55
+  ],
+  "floor": {
+   "plank_w": 0.19,
+   "plank_l": 1.8,
+   "base": "#B08A60",
+   "dark": "#97724A",
+   "light": "#C49D70",
+   "plank_contrast": 1.1
+  },
+  "wall": {
+   "color": "#EEE9E1"
+  },
+  "ceiling": "#F3F0EA",
+  "skirting": {
+   "h": 0.11,
+   "color": "#ECE8E1"
+  },
+  "windows": [
+   {
+    "wall": "left",
+    "along": 0.9,
+    "sill": 0.45,
+    "size": [
+     1.5,
+     2.0
+    ],
+    "mullions": [
+     1,
+     2
+    ]
+   }
+  ],
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "modern_wooden_cabinet",
+    "res": "2k",
+    "position": [
+     1.25,
+     0.47,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0
+    ]
+   }
+  ]
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-violet",
+   "instances": [
+    {
+     "position": [
+      -0.36,
+      0.36,
+      0
+     ],
+     "rotate_z": 10
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-lamp.json",
+   "flavour": "haze",
+   "instances": [
+    {
+     "position": [
+      0.36,
+      0.45,
+      0.68
+     ],
+     "rotate_z": 0
+    }
+   ]
+  }
+ ],
+ "sky": {
+  "kind": "gradient",
+  "strength": 2.5,
+  "zenith": "#1E2C4A",
+  "horizon": "#5A6E92",
+  "ground": "#2A2A30"
+ },
+ "lights": {
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": 40,
+    "elevation_deg": 20,
+    "distance_m": 2.4
+   },
+   "target": [
+    0.36,
+    0.45,
+    0.92
+   ],
+   "irradiance": 0.04,
+   "color": "#C9D6F0"
+  },
+  "strip0": {
+   "type": "point",
+   "position": [
+    0.36,
+    0.497,
+    1.121
+   ],
+   "power_w": 4.666666666666667,
+   "radius_m": 0.004,
+   "color": 2700
+  },
+  "strip1": {
+   "type": "point",
+   "position": [
+    0.3193,
+    0.4265,
+    1.121
+   ],
+   "power_w": 4.666666666666667,
+   "radius_m": 0.004,
+   "color": 2700
+  },
+  "strip2": {
+   "type": "point",
+   "position": [
+    0.4007,
+    0.4265,
+    1.121
+   ],
+   "power_w": 4.666666666666667,
+   "radius_m": 0.004,
+   "color": 2700
+  }
+ }
+}
