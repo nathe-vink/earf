@@ -86,26 +86,27 @@ def sideboard(x, w=1.0, h=0.56):
 
 def hero_turntable(colour='ember'):
     """Cumulus on a low sideboard beside the Cloud in its colour, a record on it. Round 1's critic
-    (critic/rounds/2026-10-18/companions-hero-turntable-e1-r1.json, 4.5): the speaker back 0.41 so the record player
-    leads, a longer lens, the dome down to 0.25, a smaller and stronger key, a graded card over the record, a finer
-    veneer."""
-    tgt = [0.1, 0.0, 0.64]
-    sx, h = 0.5, 0.56
+    (critic/rounds/2026-10-18/companions-hero-turntable-e1-r1.json, 4.5): the dome down to 0.25, a smaller and
+    stronger key, a graded card over the record, a finer veneer. Its camera changes (the speaker 0.41 back, a 72 mm
+    lens) cropped the speaker and left the record player as small, so e2 brings the sideboard 0.4 forward, keeps the
+    speaker 0.45 back, and frames close and wide (35 mm, 2.45 m) so the record player leads by perspective."""
+    sx, sy, h = 0.5, -0.4, 0.56
+    tgt = [0.2, -0.2, 0.56]
     s = base(f'Cumulus beside {C.NAMES[colour]}', [1500, 1050], colour,
-             {'position': orbit(tgt, -20, 12, 4.1), 'target': tgt, 'lens_mm': 72, 'level': True})
+             {'position': orbit(tgt, -14, 16, 2.45), 'target': tgt, 'lens_mm': 35, 'level': True})
     s['sky']['strength'] = 0.25
-    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.5, 0.45, 0], 'rotate_z': 0}]},
-                     {'def': TT, 'flavour': colour, 'instances': [{'position': [sx, -0.02, h], 'rotate_z': -8}]}]
+    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.45, 0.45, 0], 'rotate_z': 0}]},
+                     {'def': TT, 'flavour': colour, 'instances': [{'position': [sx, sy - 0.02, h], 'rotate_z': -8}]}]
     rx = sx + SPINDLE[0] * math.cos(math.radians(-8)) - SPINDLE[1] * math.sin(math.radians(-8))
-    ry = -0.02 + SPINDLE[0] * math.sin(math.radians(-8)) + SPINDLE[1] * math.cos(math.radians(-8))
-    sb = sideboard(sx); sb['figure_m'] = 0.01
+    ry = sy - 0.02 + SPINDLE[0] * math.sin(math.radians(-8)) + SPINDLE[1] * math.cos(math.radians(-8))
+    sb = sideboard(sx); sb['position'] = [sx, sy]; sb['figure_m'] = 0.01
     s['set']['props'] = [sb] + record(round(rx, 4), round(ry, 4), h + PLATTER_TOP, colour)
     s['lights'] = lights(tgt, dist=4.5)
     s['lights']['key'].update({'size_m': [1.2, 1.0], 'irradiance': 3.2})
-    s['lights']['glow'] = {'type': 'area', 'size_m': [0.7, 0.32], 'position': [-0.5, 1.11, 1.12], 'target': [-0.5, 0.45, 1.1],
+    s['lights']['glow'] = {'type': 'area', 'size_m': [0.7, 0.32], 'position': [-0.45, 1.11, 1.12], 'target': [-0.45, 0.45, 1.1],
                            'irradiance': 1.6, 'color': '#FFF1DC', 'specular': 0, 'transmission': False}
-    s['lights']['tt_card'] = {'type': 'panel', 'size_m': [1.0, 0.4], 'position': [0.5, -0.55, 1.25], 'target': [0.5, -0.02, 0.66],
-                              'strength': 4.0, 'color': '#FFFFFF', 'ramp': {'axis': 'y', 'at_m': [-0.75, -0.35], 'values': [0, 1]},
+    s['lights']['tt_card'] = {'type': 'panel', 'size_m': [1.0, 0.4], 'position': [0.5, -0.95, 1.25], 'target': [0.5, -0.42, 0.66],
+                              'strength': 4.0, 'color': '#FFFFFF', 'ramp': {'axis': 'y', 'at_m': [-1.15, -0.75], 'values': [0, 1]},
                               'diffuse': False}
     return s
 
