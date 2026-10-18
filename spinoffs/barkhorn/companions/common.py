@@ -25,8 +25,12 @@ NAMES = {c[0]: c[1] for c in COLOURS}
 SPEAKER_FLAVOUR = {c[0]: c[2] for c in COLOURS}
 SWEEP = {c[0]: c[5] for c in COLOURS}
 
+# the light a lit piece gives off in each colour (v2, round 31c: edge-lit acrylic glows in its own colour), saturated
+GLOW = {'ember': '#FF4A3A', 'dust': '#FF8A3A', 'acid': '#FFC93A', 'poison': '#6BD45A', 'ice': '#4FB8FF',
+        'haze': '#9A6BFF', 'fog': '#FFF4E4', 'smoke': '#C8C0D8'}
+
 # the engine's flavours: one per colour, the tokens the materials below read
-VARIANTS = {k: {'deep': deep, 'accent': acc} for k, _, _, deep, acc, _ in COLOURS}
+VARIANTS = {k: {'deep': deep, 'accent': acc, 'glow': GLOW[k]} for k, _, _, deep, acc, _ in COLOURS}
 
 # render materials by finish (studio/engine/materials.py presets). The tinted sheet is the Clouds' cabinet: clear cast
 # resin in the engine, polished (0.05), the tint a volume absorbed along the path (`deep` after `radius`), so a thin
@@ -49,6 +53,8 @@ MATERIALS = {
     'pcb': {'preset': 'satin_paint', 'color': '#1E3A2A', 'roughness': 0.5},
     'cork': {'preset': 'cork', 'color': '#B08A64'},
     'led': {'preset': 'emit', 'color': '#FFD9A8', 'strength': 0.0},
+    # an edge or a tip lit through the acrylic (v2): the colour's glow, off unless a shot turns it up
+    'glow': {'preset': 'emit', 'color': '$glow', 'strength': 0.0},
     'etch': {'preset': 'satin_paint', 'color': '#EEEDEA', 'roughness': 0.85, 'specular': 0.15},
 }
 

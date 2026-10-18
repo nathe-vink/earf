@@ -1,0 +1,110 @@
+{
+ "title": "L5 Sphere in Ember",
+ "size": [
+  900,
+  720
+ ],
+ "product": {
+  "def": "spinoffs/barkhorn/companions/out-concepts2/l5.json",
+  "flavour": "ember",
+  "instances": [
+   {
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": 0
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAD6D2",
+  "width": 6.0,
+  "front": 5.0,
+  "depth": 1.5,
+  "radius": 1.2,
+  "height": 4.0
+ },
+ "camera": {
+  "position": [
+   -0.621,
+   -1.394,
+   0.469
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.2
+  ],
+  "lens_mm": 60,
+  "level": true
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": -35,
+    "elevation_deg": 42,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.2
+   ],
+   "irradiance": 2.2,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 35,
+    "elevation_deg": 18,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.2
+   ],
+   "irradiance": 0.9,
+   "color": "#FFF7EA"
+  }
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#C4C2BE",
+  "horizon": "#CFCDC8",
+  "ground": "#5A5650",
+  "strength": 0.7
+ },
+ "materials": {
+  "glow": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F4F6F5",
+   "radius": 0.05,
+   "roughness": 0.04
+  }
+ },
+ "render": {
+  "samples": 48,
+  "adaptive": 0.03,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600
+ }
+}

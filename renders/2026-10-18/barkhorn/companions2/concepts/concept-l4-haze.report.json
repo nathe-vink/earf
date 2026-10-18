@@ -1,0 +1,77 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/companions2/concept-l4-haze.json",
+ "image": "/home/user/earf/renders/2026-10-18/barkhorn/companions2/concepts/concept-l4-haze.png",
+ "seconds": {
+  "build": 0.1,
+  "render": 11.9
+ },
+ "samples": 48,
+ "size": [
+  450,
+  360
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "cap#0": {
+   "part": "cap",
+   "centre_px": [
+    225.0,
+    108.2
+   ],
+   "box_px": [
+    161,
+    101,
+    294,
+    117
+   ],
+   "depth_m": 1.526
+  },
+  "core#0": {
+   "part": "core",
+   "centre_px": [
+    225.0,
+    199.7
+   ],
+   "box_px": [
+    206,
+    129,
+    245,
+    274
+   ],
+   "depth_m": 1.526
+  },
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    225.0,
+    273.4
+   ],
+   "box_px": [
+    156,
+    249,
+    299,
+    303
+   ],
+   "depth_m": 1.526
+  },
+  "tube#0": {
+   "part": "tube",
+   "centre_px": [
+    225.0,
+    189.8
+   ],
+   "box_px": [
+    162,
+    106,
+    292,
+    289
+   ],
+   "depth_m": 1.526
+  }
+ }
+}
