@@ -14,28 +14,33 @@ CAVE_FLOOR = {'y0': 100.0, 'slope': 0.0, 'wiggle': 0.0, 'freq': 0.0, 'phase': 0.
 
 def cave_props():
     return [C.piece('ext', module='ice_b_el', fn='cave', y_range=[-6.2, 22.0], width=4.6, height=3.3,
-                    bend=[3.0, 9.0], scallop=[0.5, 0.06], thickness=[0.9, 2.2], hole=[13.5, 1.3, 2.6, 1.0],
-                    ice={'absorb': '#3E93DC', 'density': 1.2}),
+                    bend=[3.0, 9.0], scallop=[0.5, 0.04], scallop_jitter=[0.6, 1.6], lumps=[0.14, 0.04],
+                    thickness=[0.8, 1.8], hole=[13.5, 1.3, 2.6, 1.0],
+                    ice={'absorb': '#3E93DC', 'density': 1.4, 'scatter': 0.15, 'rough': [0.06, 0.3]}),
             C.piece('ext', module='ice_b_el', fn='beach', shore=CAVE_FLOOR, texture='gravelly_sand', res='4k',
                     extent=[-6.0, -6.4, 14.0, 23.0], fine=[-3.0, -4.0, 3.0, 6.0], displace=0.006, relief=0.05,
-                    dark='#0A0A0B', light='#2A2A2B', tex_scale=1.25, spec=0.05, bump=1.2, wet_h=-1.0, damp_h=-0.5,
-                    damp_base=0.0, puddles=[0.45, 0.62], wet_rough=0.03, grain_m=0.003, glint_share=0.02)]
+                    dark='#141416', light='#34343A', tex_scale=1.25, spec=0.2, dry_rough=0.45, bump=1.2, wet_h=-1.0,
+                    damp_h=-0.5, damp_base=0.0, puddles=[0.45, 0.66], pool=[-0.05, -0.5, 0.62, 0.36], wet_rough=0.03,
+                    grain_m=0.003, glint_share=0.02),
+            # thicker mist where the beam falls from the roof hole
+            C.piece('ext', module='ice_b_el', fn='mist', box_m=[-1.6, 4.0, 0.0, 2.2, 14.0, 3.6], density=0.012,
+                    anisotropy=0.75)]
 
 
-def shot(az=167.0, sun_irr=4.0):
+def shot(az=167.0, sun_irr=3.0):
     r0 = C.assets.hdri_sun(CAVE_SKY, 0.0)['azimuth_deg']
     rot = round((r0 - az) % 360.0, 2)
-    sun = C.sun_from_sky(CAVE_SKY, rot, irradiance=sun_irr)
-    sk = C.sky(CAVE_SKY, rotation_deg=rot, strength=1.0, res='4k')
+    sun = C.sun_from_sky(CAVE_SKY, rot, irradiance=sun_irr, color='#FFE4C4')
+    sk = C.sky(CAVE_SKY, rotation_deg=rot, strength=2.5, res='4k')
     # the mouth's daylight, 6 m behind the speaker and just behind the camera: a soft panel where the opening is (the
     # snowfield and sky through it), as a photographer would let it in or bounce it
-    mouth = {'type': 'area', 'position': [-0.6, -6.0, 1.5], 'size_m': [3.6, 2.6], 'target': [0.0, 0.0, 0.7],
-             'irradiance': 0.85, 'color': '#EAF1FF'}
-    s = C.shot('ice_b', cave_props(), C.camera(height=1.0, distance=5.0, azimuth=-15.0, lens=35.0,
-                                               target=(0.0, 0.0, 0.75), fstop=4.0),
-               sk, 'Ice: in a glacier ice cave', sun=sun, lights={'mouth': mouth}, rotate_z=12.0, position=(0.0, 0.0, -0.01), exposure=1.5,
-               fin=C.finish(contrast=0.06, clarity=0.05, sharpen=0.25, vignette=0.15),
-               haze={'box_m': [-5.0, -6.0, 0.0, 12.0, 21.5, 4.5], 'density': 0.008, 'anisotropy': 0.55, 'color': '#FFFFFF'})
+    mouth = {'type': 'area', 'position': [-1.8, -3.5, 1.2], 'size_m': [1.5, 2.0], 'target': [0.0, 0.0, 0.7],
+             'irradiance': 0.35, 'color': '#EAF1FF'}
+    s = C.shot('ice_b', cave_props(), C.camera(height=0.8, distance=4.3, azimuth=-15.0, lens=50.0,
+                                               target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=-0.12, shift_y=-0.02),
+               sk, 'Ice: in a glacier ice cave', sun=sun, lights={'mouth': mouth}, rotate_z=12.0, position=(0.0, 0.0, -0.02), exposure=0.7,
+               fin=C.finish(contrast=0.14, clarity=0.12, sharpen=0.25, vignette=0.22, bloom=0.08, threshold=0.85, bloom_px=40),
+               haze={'box_m': [-5.0, -6.0, 0.0, 12.0, 21.5, 4.5], 'density': 0.004, 'anisotropy': 0.55, 'color': '#FFFFFF'})
     s['render']['volume_bounces'] = 4
     s['render']['bounces'] = 16
     return s

@@ -92,3 +92,7 @@ mist. The ice material, the black sand and the haze carry over from the beach. T
   soft panel stands where the opening is, 3.6 x 2.6 m, daylight #EAF1FF, 0.85 W/m2 at the speaker: the mouth's light,
   as a photographer would let it in. The floor stops at the mouth so the snowfield's light comes in under it.
 - **Mist:** 0.008/m through the cave, so the beam shows.
+
+| pass | image | score | if fixed | verdict | top changes | what I did |
+|---|---|---|---|---|---|---|
+| 4 (cave 1) | c9 (half size, 128) | 5.0 | 7.0 | iterate | walls glossy plastic blobs, no inner structure; right wall dead navy; speaker pale, flat-lit, hazed and pasted on, no contact or reflection; crushed black floor; speaker small; the hole and tunnel end a neutral white patch | Ice rougher (0.06-0.3), scallops jittered 0.6-1.6x and 4 cm deep, finer lumps; a little even scatter (0.15/m: 2/m with thin walls turned the cave to white marble, c10-c11, so the thickness went back to 0.8-1.8 m, where the long path makes the blue); sky strength 2.5; sun warmer #FFE4C4, 3.0. Mouth light now a raking 1.5 x 2 m panel camera-left at 0.35 W/m2. A pool of meltwater under the speaker's front, ragged-edged, reflecting it; sunk 2 cm. Floor lighter (#141416-#34343A), specular 0.2, rougher grains glinting. Camera 50 mm, 0.8 m, 4.3 m, the speaker on the right third. Haze 0.004 through the cave, a mist column 0.012 where the beam falls. Grade: contrast 0.14, clarity 0.12, vignette 0.22, bloom 0.08. |

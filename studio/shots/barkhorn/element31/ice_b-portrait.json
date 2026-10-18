@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.01
+     -0.02
     ],
     "rotate_z": 12.0,
     "hide": [
@@ -37,11 +37,19 @@
     ],
     "scallop": [
      0.5,
-     0.06
+     0.04
+    ],
+    "scallop_jitter": [
+     0.6,
+     1.6
+    ],
+    "lumps": [
+     0.14,
+     0.04
     ],
     "thickness": [
-     0.9,
-     2.2
+     0.8,
+     1.8
     ],
     "hole": [
      13.5,
@@ -51,7 +59,12 @@
     ],
     "ice": {
      "absorb": "#3E93DC",
-     "density": 1.2
+     "density": 1.4,
+     "scatter": 0.15,
+     "rough": [
+      0.06,
+      0.3
+     ]
     }
    },
    {
@@ -83,21 +96,44 @@
     ],
     "displace": 0.006,
     "relief": 0.05,
-    "dark": "#0A0A0B",
-    "light": "#2A2A2B",
+    "dark": "#141416",
+    "light": "#34343A",
     "tex_scale": 1.25,
-    "spec": 0.05,
+    "spec": 0.2,
+    "dry_rough": 0.45,
     "bump": 1.2,
     "wet_h": -1.0,
     "damp_h": -0.5,
     "damp_base": 0.0,
     "puddles": [
      0.45,
-     0.62
+     0.66
+    ],
+    "pool": [
+     -0.05,
+     -0.5,
+     0.62,
+     0.36
     ],
     "wet_rough": 0.03,
     "grain_m": 0.003,
     "glint_share": 0.02
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "mist",
+    "box_m": [
+     -1.6,
+     4.0,
+     0.0,
+     2.2,
+     14.0,
+     3.6
+    ],
+    "density": 0.012,
+    "anisotropy": 0.75
    }
   ]
  },
@@ -105,20 +141,20 @@
   "mouth": {
    "type": "area",
    "position": [
-    -0.6,
-    -6.0,
-    1.5
+    -1.8,
+    -3.5,
+    1.2
    ],
    "size_m": [
-    3.6,
-    2.6
+    1.5,
+    2.0
    ],
    "target": [
     0.0,
     0.0,
     0.7
    ],
-   "irradiance": 0.85,
+   "irradiance": 0.35,
    "color": "#EAF1FF"
   }
  },
@@ -129,7 +165,7 @@
   "clamp": 10.0,
   "bounces": 16,
   "view": "AgX",
-  "exposure": 1.5,
+  "exposure": 0.7,
   "look": "AgX - Base Contrast",
   "volume_bounces": 4
  },
@@ -142,12 +178,12 @@
   "position": [
    -1.6047,
    -5.9887,
-   1.0
+   0.8
   ],
   "target": [
    0.0,
    0.0,
-   0.75
+   0.7
   ],
   "lens_mm": 40.0,
   "level": true,
@@ -155,39 +191,41 @@
   "focus": [
    0.0,
    -0.21,
-   0.75
-  ]
+   0.7
+  ],
+  "shift_x": -0.12,
+  "shift_y": -0.02
  },
  "sky": {
   "kind": "hdri",
   "polyhaven": "snowy_hillside",
   "rotation_deg": 246.9,
-  "strength": 1.0,
+  "strength": 2.5,
   "res": "4k"
  },
  "sun": {
   "azimuth_deg": 167.0,
   "elevation_deg": 19.9,
-  "irradiance": 4.0,
+  "irradiance": 3.0,
   "angle_deg": 0.53,
-  "color": "#FEE6DF"
+  "color": "#FFE4C4"
  },
  "finish": {
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.06,
-  "clarity": 0.05,
+  "contrast": 0.14,
+  "clarity": 0.12,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.0,
-   "bloom_px": 30,
-   "bloom_threshold": 0.92,
+   "bloom": 0.08,
+   "bloom_px": 40,
+   "bloom_threshold": 0.85,
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.15
+   "vignette": 0.22
   }
  },
  "haze": {
@@ -199,7 +237,7 @@
    21.5,
    4.5
   ],
-  "density": 0.008,
+  "density": 0.004,
   "anisotropy": 0.55,
   "color": "#FFFFFF"
  }

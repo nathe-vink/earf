@@ -165,6 +165,17 @@ def _sand_material(bpy, name, p, s):
         pud = N('MapRange', inputs={'Value': pn.outputs['Fac'], 'From Min': th, 'From Max': th + 0.04}, clamp=True).outputs['Result']
         wet = N.math('MAXIMUM', wet, pud)
         damp = N.math('MAXIMUM', damp, N('MapRange', inputs={'Value': pn.outputs['Fac'], 'From Min': th - 0.12, 'From Max': th}, clamp=True).outputs['Result'])
+    if p.get('pool'):
+        # one shallow pool of meltwater: an ellipse [cx, cy, rx, ry] with a ragged edge, soaked to a mirror
+        cx, cy, rx, ry = p['pool']
+        ex = N.math('DIVIDE', N.math('SUBTRACT', sep.outputs['X'], cx), rx)
+        ey = N.math('DIVIDE', N.math('SUBTRACT', sep.outputs['Y'], cy), ry)
+        rr = N.math('SQRT', N.math('ADD', N.math('MULTIPLY', ex, ex), N.math('MULTIPLY', ey, ey)))
+        en = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 3.0, 'Detail': 6.0})
+        rr = N.math('ADD', rr, N.math('MULTIPLY', N.math('SUBTRACT', en.outputs['Fac'], 0.5), p.get('pool_rag', 1.1)))
+        pool = N('MapRange', inputs={'Value': rr, 'From Min': 1.0, 'From Max': 0.9}, clamp=True).outputs['Result']
+        wet = N.math('MAXIMUM', wet, pool)
+        damp = N.math('MAXIMUM', damp, N('MapRange', inputs={'Value': rr, 'From Min': 1.35, 'From Max': 1.0}, clamp=True).outputs['Result'])
     if 'reach' in p:
         # the last wave's reach: soaked and mirror-like behind an irregular line across the beach (y' > reach), damp a
         # little before it, a line of spent foam left along it
@@ -682,7 +693,7 @@ def _cave_ice_material(bpy, name, p, outer=False):
                                      'Specular IOR Level': 0.5, 'Coat Weight': 0.0 if outer else p.get('wet', 0.5),
                                      'Coat Roughness': 0.02, 'Coat IOR': 1.33})
     rn = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 1.2, 'Detail': 6.0})
-    lo, hi = (p.get('outer_rough', [0.35, 0.6]) if outer else [0.03, p.get('frost', 0.2)])
+    lo, hi = (p.get('outer_rough', [0.35, 0.6]) if outer else p.get('rough', [0.08, 0.35]))
     N.link(N('MapRange', inputs={'Value': rn.outputs['Fac'], 'From Min': 0.4, 'From Max': 0.7, 'To Min': lo,
                                  'To Max': hi}).outputs['Result'], bs.inputs['Roughness'])
     pit = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 60.0, 'Detail': 4.0})
@@ -699,8 +710,31 @@ def _cave_ice_material(bpy, name, p, outer=False):
         mix = N('MixShader', inputs={'Fac': passes, 1: bs.outputs[0], 2: tr.outputs[0]})
         N.link(mix.outputs[0], out.inputs['Surface'])
     ab = N('VolumeAbsorption', inputs={'Color': _hex(p.get('absorb', '#3E93DC')), 'Density': p.get('density', 1.4)})
+    if p.get('scatter', 0) > 0:
+        # bubbles through the old ice: a milky, even scattering (homogeneous, so Cycles samples it without marching)
+        sc = N('VolumeScatter', inputs={'Color': (1, 1, 1, 1), 'Density': p['scatter'], 'Anisotropy': 0.6})
+        ab = N('AddShader', inputs={0: ab.outputs[0], 1: sc.outputs[0]})
     N.link(ab.outputs[0], out.inputs['Volume'])
     return m
+
+
+def mist(bpy, name, p, kit):
+    """A box of mist, `box_m` [x0, y0, z0, x1, y1, z1], `density` per metre, `anisotropy`: thicker mist where a beam
+    falls, on top of the shot's haze."""
+    x0, y0, z0, x1, y1, z1 = p['box_m']
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); N = _N(nt)
+    out = N('OutputMaterial')
+    v = N('VolumeScatter', inputs={'Color': _hex(p.get('color', '#FFFFFF')), 'Density': p.get('density', 0.01),
+                                    'Anisotropy': p.get('anisotropy', 0.7)})
+    N.link(v.outputs[0], out.inputs['Volume'])
+    bm = bmesh.new()
+    vs = [bm.verts.new(v) for v in ((x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0),
+                                    (x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1))]
+    for f in ((0, 3, 2, 1), (4, 5, 6, 7), (0, 1, 5, 4), (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)):
+        bm.faces.new([vs[i] for i in f])
+    obs = kit.finish(bpy, name, bm, {'position': [0, 0, 0]}, smooth=False, mat=m)
+    obs[0].visible_shadow = False
+    return obs
 
 
 def cave(bpy, name, p, kit):
@@ -741,12 +775,13 @@ def cave(bpy, name, p, kit):
     best = np.full(Y.shape, 9.0)
     jr = np.random.RandomState(p.get('seed', 7))
     J = jr.uniform(-0.5, 0.5, (2, 4096))
+    S = jr.uniform(*p.get('scallop_jitter', [1.0, 1.0]), 4096)          # each cup's own size
     for di in (-1, 0, 1):
         for dj in (-1, 0, 1):
             ci, cj = np.floor(gy) + di, np.floor(ga) + dj
             h = ((ci.astype(np.int64) * 73856093) ^ (cj.astype(np.int64) * 19349663)) % 4096
             py, pa = ci + 0.5 + 0.8 * J[0][h], cj + 0.5 + 0.8 * J[1][h]
-            best = np.minimum(best, (gy - py) ** 2 + (ga - pa) ** 2)
+            best = np.minimum(best, ((gy - py) ** 2 + (ga - pa) ** 2) / S[h] ** 2)
     cup = depth * (1.0 - np.clip(np.sqrt(best) / 0.75, 0, 1) ** 2)
     IX += nx_ * cup; IZ += nz_ * cup
     tmin, tmax = p.get('thickness', [0.9, 2.2])
