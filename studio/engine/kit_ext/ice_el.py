@@ -288,7 +288,7 @@ def _snow_pbr(bpy, name, res='2k', displace=0.03, ripple=0.012, sparkle=1.0):
     # glitter: a sparse field of tiny facets tilted at random, mirror-smooth
     vor = nt.nodes.new('ShaderNodeTexVoronoi'); vor.inputs['Scale'].default_value = 900.0
     nt.links.new(tc.outputs['Object'], vor.inputs['Vector'])
-    glint = nt.nodes.new('ShaderNodeMapRange'); glint.inputs['From Min'].default_value = 0.985; glint.inputs['From Max'].default_value = 1.0
+    glint = nt.nodes.new('ShaderNodeMapRange'); glint.inputs['From Min'].default_value = 0.975; glint.inputs['From Max'].default_value = 1.0
     glint.inputs['To Min'].default_value = 0.0; glint.inputs['To Max'].default_value = sparkle
     nt.links.new(vor.outputs['Color'], glint.inputs['Value'])
     bs.inputs['Coat Roughness'].default_value = 0.02; bs.inputs['Coat IOR'].default_value = 1.31
@@ -308,8 +308,15 @@ def _snow_pbr(bpy, name, res='2k', displace=0.03, ripple=0.012, sparkle=1.0):
     nt.links.new(tc.outputs['Object'], wave.inputs['Vector'])
     dp = nt.nodes.new('ShaderNodeDisplacement'); dp.inputs['Scale'].default_value = displace; dp.inputs['Midlevel'].default_value = 0.5
     nt.links.new(disp, dp.inputs['Height'])
-    dw = nt.nodes.new('ShaderNodeDisplacement'); dw.inputs['Scale'].default_value = ripple; dw.inputs['Midlevel'].default_value = 0.5
-    nt.links.new(wave.outputs['Fac'], dw.inputs['Height'])
+    # ripples only where the wind scoured: a broad noise masks them
+    pm = nt.nodes.new('ShaderNodeTexNoise'); pm.inputs['Scale'].default_value = 0.35; pm.inputs['Detail'].default_value = 2
+    nt.links.new(tc.outputs['Object'], pm.inputs['Vector'])
+    pr = nt.nodes.new('ShaderNodeMapRange'); pr.inputs['From Min'].default_value = 0.55; pr.inputs['From Max'].default_value = 0.7
+    nt.links.new(pm.outputs['Fac'], pr.inputs['Value'])
+    wm = nt.nodes.new('ShaderNodeMath'); wm.operation = 'MULTIPLY'
+    nt.links.new(wave.outputs['Fac'], wm.inputs[0]); nt.links.new(pr.outputs['Result'], wm.inputs[1])
+    dw = nt.nodes.new('ShaderNodeDisplacement'); dw.inputs['Scale'].default_value = ripple; dw.inputs['Midlevel'].default_value = 0.0
+    nt.links.new(wm.outputs['Value'], dw.inputs['Height'])
     ad = nt.nodes.new('ShaderNodeVectorMath'); ad.operation = 'ADD'
     nt.links.new(dp.outputs['Displacement'], ad.inputs[0]); nt.links.new(dw.outputs['Displacement'], ad.inputs[1])
     nt.links.new(ad.outputs['Vector'], out.inputs['Displacement'])
