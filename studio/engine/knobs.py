@@ -35,6 +35,10 @@ KNOBS = [
     ('render.clamp', 'radiance', (0, 100), 'indirect clamp against fireflies; 0 for none'),
     ('render.bounces', 'count', (4, 32), 'light bounces'),
     ('render.denoise', 'bool', None, 'OpenImageDenoise'),
+    ('render.glossy_bounces', 'count', (1, 64), 'reflection depth (8 by default, never above render.bounces)'),
+    ('render.transmission_bounces', 'count', (1, 64), 'refraction depth (8 by default, never above render.bounces): nested clear walls need more'),
+    ('render.caustics_refractive', 'bool', None, 'light refracted through clear and tinted parts reaches diffuse surfaces (coloured light on the floor); off by default'),
+    ('render.caustics_reflective', 'bool', None, 'light mirrored by glossy parts reaches diffuse surfaces; off by default'),
     # the retouch (retouch.py): the paints matched to their swatches in the finished frame, as a retoucher does
     ('retouch.enabled', 'bool', None, 'retouch the frame: each paint a flavour colours (body, accent, insert) matched to its swatch per copy, read off its lit face; the raw frame is kept beside it and the tests read the retouched one'),
     ('retouch.match', '0 to 1', (0, 1), 'the share of a colour paint\'s hue and chroma error taken out (1: its lit face reads as the swatch in hue and chroma, as the swatch looks under the light the copy\'s white shows)'),
@@ -58,6 +62,8 @@ KNOBS = [
     ('finish.dream.lift', '0 to 0.2', (0, 0.2), 'the blacks raised toward finish.dream.lift_color, a print\'s soft shadows'),
     ('finish.dream.lift_color', 'hex', None, 'the colour lifted blacks take (the world\'s shadow colour)'),
     ('finish.dream.vignette', '0 to 0.6', (0, 0.6), 'the corners darkened by up to this share, smoothly'),
+    ('finish.grain', 'sRGB levels', (0, 6), 'film grain applied last: monochrome, this standard deviation in the midtones, less toward black and white, the same seed every render (0 none)'),
+    ('finish.grain_px', 'px at 1350 wide', (0.5, 3), 'the grain\'s size'),
     ('finish.sharpen_core', 'levels', (0, 8), 'a difference under this many levels is noise and is not sharpened'),
     ('finish.dodge', '[{parts, lift_ev, below, knee, feather_px}]', None, 'a retoucher\'s masked lift on named parts (part names or globs from the mask): pixels of those parts darker than `below` (sRGB) gain up to `lift_ev` stops, fading to none over `knee` levels above it, the mask feathered over `feather_px` so nothing else moves; for matte detail no lamp can reach without lighting its neighbours'),
     # sun and sky
