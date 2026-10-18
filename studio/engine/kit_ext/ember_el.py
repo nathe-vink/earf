@@ -120,6 +120,21 @@ def fall(bpy, name, p, kit):
     return kit.finish(bpy, name, bm, p, mat=mat)
 
 
+def darken(m, albedo):
+    """Scale a material's base colour by `albedo` (a photographed rock set is mid-grey; basalt is near-black, ~0.04):
+    a multiply between whatever feeds the Principled BSDF's Base Color and the socket."""
+    nt = m.node_tree
+    bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    sock = bs.inputs['Base Color']
+    if not sock.links:
+        return m
+    src = sock.links[0].from_socket
+    mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+    mul.inputs['Factor'].default_value = 1.0; mul.inputs['B'].default_value = (albedo, albedo, albedo, 1.0)
+    nt.links.new(src, mul.inputs['A']); nt.links.new(mul.outputs['Result'], sock)
+    return m
+
+
 def terrain(bpy, name, p, kit):
     import assets
     w, d = p.get('size', [16.0, 16.0])
@@ -132,6 +147,18 @@ def terrain(bpy, name, p, kit):
     fx, fy, fr = p.get('flat', [0.0, 0.0, 0.8])
     level = _smooth(fr, fr * 2.2, np.hypot(X - fx, Y - fy))
     Z = p.get('relief', 0.08) * _fbm(X, Y, 2.5, 4, 1.0) * level
+    # pahoehoe: ropes and folds across the flow, in patches, as cooling skin wrinkles
+    rp = p.get('ropes')
+    if rp:
+        a = math.radians(rp.get('dir', 0.0))
+        u = X * math.cos(a) + Y * math.sin(a)                       # along the flow
+        v = -X * math.sin(a) + Y * math.cos(a)
+        bend = 0.25 * _fbm(X, Y, 1.0, 2, 31.0)                      # the ropes arc, as lobes do
+        ropes = np.sin(2 * math.pi * (u + bend + 0.08 * v * v / max(rp.get('lobe', 1.0), 1e-3)) / rp.get('wave', 0.12))
+        patch = np.clip(0.5 + 1.5 * _fbm(X, Y, 1.6, 2, 37.0), 0, 1)
+        Z = Z + rp.get('amp', 0.015) * ropes * patch * level
+        # lobes: the flow's toes, bulging plates of a few centimetres
+        Z = Z + rp.get('lobes', 0.06) * np.clip(_fbm(X, Y, 0.7, 3, 41.0), 0, None) * level
     # the cliff behind
     c = p.get('cliff')
     if c:
@@ -143,12 +170,14 @@ def terrain(bpy, name, p, kit):
         wd = ch['width'] * (1 + 0.25 * _fbm(X, Y, 1.5, 2, 13.0))
         s = _smooth(wd, wd + ch.get('bank', 0.25), dist)
         Z = np.minimum(Z, -ch['depth'] * (1 - s) + Z * s)
-        lava = np.where((dist < wd) & (lava == 0), 1 if ch.get('lava', 'flow') == 'flow' else 2, lava)
+        if not p.get('lava_below'):
+            lava = np.where((dist < wd) & (lava == 0), 1 if ch.get('lava', 'flow') == 'flow' else 2, lava)
     for (px, py, r, dep) in p.get('pools', []):
         dist = np.hypot(X - px, Y - py) * (1 + 0.15 * _fbm(X, Y, 0.8, 2, 17.0))
         s = _smooth(r, r + 0.3, dist)
         Z = np.minimum(Z, -dep * (1 - s) + Z * s)
-        lava = np.where(dist < r, 2, lava)
+        if not p.get('lava_below'):
+            lava = np.where(dist < r, 2, lava)
     for f in p.get('falls', []):
         dist, _ = _seg_dist(X, Y, f['points'])
         wd = f['width'] * (1 + 0.3 * _fbm(X, Y, 0.7, 2, 21.0))
@@ -174,7 +203,10 @@ def terrain(bpy, name, p, kit):
     res = p.get('res', '2k')
     me.materials.append(assets.pbr(bpy, p.get('rock', 'dark_rock'), p.get('rock_res', res), scale=p.get('rock_scale'),
                                    displace=p.get('displace', 0.03), tint=p.get('rock_tint'),
-                                   tint_mix=p.get('rock_tint_mix', 0.0), name=f'{name}-rock'))
+                                   tint_mix=p.get('rock_tint_mix', 0.0), rough_mul=p.get('rough_mul', 1.0),
+                                   name=f'{name}-rock'))
+    if p.get('albedo'):
+        darken(me.materials[0], p['albedo'])
     me.materials.append(lava_material(bpy, p.get('flow', 'acg:Lava001'), p.get('lava_res', res), p.get('flow_scale', 1.5),
                                       p.get('flow_emit', 4.0), gain=p.get('flow_gain', 1.0), name=f'{name}-flow'))
     me.materials.append(lava_material(bpy, p.get('molten', 'acg:Lava004'), p.get('lava_res', res), p.get('molten_scale', 2.0),
@@ -239,3 +271,85 @@ def columns(bpy, name, p, kit):
                                    rough_mul=p.get('rough_mul', 1.0), name=f'{name}-rock'))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     return [ob]
+
+
+def lava_surface(bpy, name, p, kit):
+    """A level surface of lava under carved rock (terrain with `lava_below`): `size` [w, d] at `position`, gently
+    domed and rippled (`ripple` metres), so the rock's own banks make its shorelines where they dip below it."""
+    import bmesh
+    w, d = p.get('size', [10.0, 10.0]); cell = p.get('cell', 0.05)
+    nx, ny = int(w / cell), int(d / cell)
+    bm = bmesh.new()
+    bmesh.ops.create_grid(bm, x_segments=nx, y_segments=ny, size=0.5)
+    rip = p.get('ripple', 0.01)
+    for v in bm.verts:
+        v.co.x *= w; v.co.y *= d
+        v.co.z = rip * noise.noise(Vector((v.co.x * 1.3, v.co.y * 1.3, 2.2)))
+    mat = lava_material(bpy, p.get('lava', 'acg:Lava001'), p.get('lava_res', '2k'), p.get('scale', 1.5),
+                        p.get('strength', 8.0), gain=p.get('gain', 1.0), crust=p.get('crust', 0.08), name=f'{name}-lava')
+    return kit.finish(bpy, name, bm, p, mat=mat)
+
+
+def sparks(bpy, name, p, kit):
+    """Sparks lifting off lava, as a camera at 1/30 s sees them: short glowing streaks along rising, drifting paths,
+    `count` of them over `area` [x0, y0, x1, y1] (where the lava is), most low and near the heat, a few high; sizes
+    varied, lengths `streak` [min, max] metres, `emit` their strength, `color`."""
+    import bmesh, random
+    from mathutils import Matrix
+    rnd = random.Random(p.get('seed', 1))
+    x0, y0, x1, y1 = p['area']
+    bm = bmesh.new()
+    for _ in range(p.get('count', 60)):
+        h = p.get('height', 2.5) * rnd.random() ** 2.2
+        x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
+        lx, ly = p.get('drift', [0.3, 0.1])
+        c = Vector((x + lx * h * h * 0.3 + 0.15 * math.sin(h * 3 + x), y + ly * h * h * 0.3, 0.05 + h))
+        dirv = Vector((lx * h * 0.6 + rnd.uniform(-0.3, 0.3), ly * h * 0.6 + rnd.uniform(-0.3, 0.3), 1.0)).normalized()
+        L = rnd.uniform(*p.get('streak', [0.01, 0.06])) * (1.0 - 0.5 * h / max(p.get('height', 2.5), 1e-3))
+        r = rnd.uniform(*p.get('radius', [0.0008, 0.0025]))
+        geom = bmesh.ops.create_cone(bm, cap_ends=True, segments=6, radius1=r * 0.6, radius2=r, depth=L)
+        rot = dirv.to_track_quat('Z', 'Y').to_matrix()
+        bmesh.ops.rotate(bm, verts=geom['verts'], cent=Vector((0, 0, 0)), matrix=rot)
+        bmesh.ops.translate(bm, vec=c, verts=geom['verts'])
+    q = {**p, 'material': 'glow', 'color': p.get('color', '#FF8A30'), 'emit': p.get('emit', 25.0), 'shadow': False}
+    q.pop('position', None)
+    return kit.finish(bpy, name, bm, q, mat=kit.piece_material(bpy, q))
+
+
+def steam(bpy, name, p, kit):
+    """Steam over lava: a box (`box` [x0, y0, z0, x1, y1, z1]) of scattering volume whose density is billowing noise
+    (`scale` metres), thinning with height and toward the box's sides, so it has no edges; `density` at its thickest,
+    `color`, `anisotropy`."""
+    import bmesh
+    x0, y0, z0, x1, y1, z1 = p['box']
+    bm = bmesh.new()
+    geom = bmesh.ops.create_cube(bm, size=1.0)
+    for v in geom['verts']:
+        v.co = Vector(((v.co.x + 0.5) * (x1 - x0) + x0, (v.co.y + 0.5) * (y1 - y0) + y0, (v.co.z + 0.5) * (z1 - z0) + z0))
+    m = bpy.data.materials.new(f'{name}-steam'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); vol = nt.nodes.new('ShaderNodeVolumePrincipled')
+    vol.inputs['Color'].default_value = _lin(p.get('color', '#FFFFFF'))
+    vol.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.4)
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / p.get('scale', 0.8)
+    nz.inputs['Detail'].default_value = 6.0
+    if 'Roughness' in nz.inputs:
+        nz.inputs['Roughness'].default_value = 0.6
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    # billows: noise pushed through a ramp so it has gaps; times a falloff from the box's centre line and with height
+    cr = nt.nodes.new('ShaderNodeValToRGB'); cr.color_ramp.elements[0].position = 0.45; cr.color_ramp.elements[1].position = 0.75
+    nt.links.new(nz.outputs['Fac'], cr.inputs['Fac'])
+    gen = nt.nodes.new('ShaderNodeTexGradient'); gen.gradient_type = 'SPHERICAL'
+    mp = nt.nodes.new('ShaderNodeMapping')
+    cx, cy, cz = (x0 + x1) / 2, (y0 + y1) / 2, z0
+    mp.inputs['Location'].default_value = (-cx, -cy, -cz)
+    mp.inputs['Scale'].default_value = (2.0 / (x1 - x0), 2.0 / (y1 - y0), 1.0 / (z1 - z0))
+    tcw = nt.nodes.new('ShaderNodeTexCoord')
+    nt.links.new(tcw.outputs['Object'], mp.inputs['Vector']); nt.links.new(mp.outputs['Vector'], gen.inputs['Vector'])
+    mul = nt.nodes.new('ShaderNodeMath'); mul.operation = 'MULTIPLY'
+    nt.links.new(cr.outputs['Color'], mul.inputs[0]); nt.links.new(gen.outputs['Fac'], mul.inputs[1])
+    dens = nt.nodes.new('ShaderNodeMath'); dens.operation = 'MULTIPLY'; dens.inputs[1].default_value = p.get('density', 0.3)
+    nt.links.new(mul.outputs['Value'], dens.inputs[0]); nt.links.new(dens.outputs['Value'], vol.inputs['Density'])
+    nt.links.new(vol.outputs['Volume'], out.inputs['Volume'])
+    q = {**p}; q.pop('position', None)
+    return kit.finish(bpy, name, bm, q, smooth=False, mat=m)

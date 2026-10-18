@@ -26,339 +26,272 @@
     "module": "ember_el",
     "fn": "terrain",
     "size": [
-     18.0,
-     14.0
+     16.0,
+     13.0
     ],
     "position": [
      0.0,
-     2.0,
+     2.5,
      0.0
     ],
-    "cell": 0.03,
-    "rock": "dark_rock",
-    "displace": 0.03,
-    "rock_tint": "#0C0B0A",
-    "rock_tint_mix": 0.6,
-    "relief": 0.1,
+    "cell": 0.02,
+    "relief": 0.12,
     "flat": [
      0.0,
      0.0,
-     0.75
+     0.6
     ],
+    "ropes": {
+     "amp": 0.01,
+     "wave": 0.1,
+     "dir": 70.0,
+     "lobes": 0.09
+    },
     "channels": [
      {
       "points": [
        [
-        2.4,
-        4.3
+        5.0,
+        6.5
        ],
        [
-        1.9,
-        3.6
+        2.6,
+        3.7
        ],
        [
-        0.6,
-        2.2
+        0.9,
+        2.45
        ],
        [
         -1.0,
-        1.7
+        2.05
        ],
        [
-        -3.2,
-        0.9
+        -3.4,
+        2.7
        ],
        [
-        -6.5,
-        -0.4
+        -7.5,
+        3.3
        ]
       ],
-      "width": 0.42,
-      "depth": 0.12,
-      "bank": 0.35,
-      "lava": "flow"
+      "width": 0.5,
+      "depth": 0.35,
+      "bank": 0.45
      }
     ],
     "pools": [
      [
-      -1.55,
-      -0.65,
+      -0.95,
+      -0.95,
       0.55,
-      0.1
-     ],
-     [
-      2.55,
-      4.55,
-      0.65,
-      0.1
+      0.35
      ]
     ],
-    "flow": "acg:Lava001",
-    "flow_emit": 9.0,
-    "flow_scale": 1.6,
-    "molten": "acg:Lava004",
-    "molten_emit": 10.0,
-    "molten_scale": 2.0
+    "lava_below": true,
+    "rock": "dark_rock",
+    "displace": 0.03,
+    "albedo": 0.25,
+    "rough_mul": 0.55
    },
    {
     "kind": "kit",
     "shape": "ext",
     "module": "ember_el",
-    "fn": "columns",
-    "area": [
-     -9.0,
-     5.3,
-     9.0,
-     9.5
+    "fn": "lava_surface",
+    "size": [
+     16.0,
+     10.0
     ],
-    "r": 0.45,
-    "r_jitter": [
-     0.75,
+    "position": [
+     0.0,
+     2.5,
+     -0.05
+    ],
+    "cell": 0.05,
+    "lava": "acg:Lava001",
+    "scale": 1.3,
+    "strength": 12.0,
+    "gain": 1.25,
+    "ripple": 0.012
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "terrain",
+    "size": [
+     80.0,
+     52.0
+    ],
+    "position": [
+     -8.0,
+     34.5,
+     -0.25
+    ],
+    "cell": 0.12,
+    "relief": 0.5,
+    "flat": [
+     0.0,
+     -200.0,
      1.0
     ],
-    "heights": [
-     2.4,
-     6.0
+    "cliff": {
+     "y0": 24.0,
+     "rise": 9.0,
+     "height": 6.0,
+     "rough": 0.4
+    },
+    "channels": [
+     {
+      "points": [
+       [
+        12.0,
+        13.0
+       ],
+       [
+        2.0,
+        15.5
+       ],
+       [
+        -8.0,
+        14.0
+       ],
+       [
+        -22.0,
+        16.5
+       ]
+      ],
+      "width": 0.6,
+      "depth": 0.2,
+      "bank": 0.6,
+      "lava": "flow"
+     }
     ],
-    "rough": 1.2,
-    "steps": 0.0,
-    "gaps": [
-     [
-      2.6,
-      5.4,
-      1.0
-     ]
+    "falls": [
+     {
+      "points": [
+       [
+        -5.0,
+        32.0
+       ],
+       [
+        -5.3,
+        28.0
+       ],
+       [
+        -5.0,
+        25.5
+       ],
+       [
+        -4.8,
+        24.0
+       ]
+      ],
+      "width": 0.28,
+      "notch": 0.3
+     }
     ],
-    "rock": "dark_rock_02",
-    "displace": 0.015,
-    "tint": "#0C0B0A",
-    "tint_mix": 0.65,
-    "seed": 3
+    "flow": "acg:Lava001",
+    "flow_emit": 10.0,
+    "flow_scale": 2.5,
+    "molten": "acg:Lava004",
+    "molten_emit": 6.0,
+    "molten_scale": 3.0,
+    "rock": "dark_rock",
+    "displace": 0.06,
+    "albedo": 0.25,
+    "rough_mul": 0.55
    },
    {
     "kind": "kit",
     "shape": "ext",
     "module": "ember_el",
-    "fn": "fall",
-    "points": [
-     [
-      2.6,
-      5.4,
-      6.5
-     ],
-     [
-      2.62,
-      5.15,
-      4.8
-     ],
-     [
-      2.66,
-      5.05,
-      3.2
-     ],
-     [
-      2.6,
-      5.0,
-      1.8
-     ],
-     [
-      2.62,
-      4.95,
-      0.8
-     ],
-     [
-      2.55,
-      4.75,
-      0.02
-     ]
+    "fn": "steam",
+    "box": [
+     -6.5,
+     -1.6,
+     -0.1,
+     4.5,
+     4.8,
+     2.2
     ],
-    "radius": [
-     0.3,
-     0.32,
-     0.34,
-     0.36,
-     0.4,
-     0.5
-    ],
-    "flat": 0.25,
-    "lava": "acg:Lava004",
-    "scale": 1.2,
-    "strength": 10.0
+    "density": 2.0,
+    "scale": 0.9,
+    "anisotropy": 0.45
    },
    {
     "kind": "kit",
-    "shape": "scatter",
-    "material": "glow",
-    "color": "#FF7A1E",
-    "position": [
-     -1.55,
-     -0.65,
-     0.0
+    "shape": "ext",
+    "module": "ember_el",
+    "fn": "sparks",
+    "area": [
+     -2.6,
+     -1.3,
+     1.8,
+     3.0
     ],
-    "count": 30,
+    "count": 50,
+    "height": 1.2,
+    "streak": [
+     0.012,
+     0.07
+    ],
     "radius": [
-     0.002,
-     0.005
+     0.0008,
+     0.0024
     ],
-    "seed": 1,
+    "drift": [
+     0.35,
+     0.15
+    ],
     "emit": 14.0,
-    "shadow": false,
-    "plume": {
-     "height": 2.8,
-     "spread": [
-      0.25,
-      1.1
-     ],
-     "lean": [
-      0.4,
-      0.3
-     ],
-     "taper": 0.4,
-     "power": 1.6
-    }
-   },
-   {
-    "kind": "kit",
-    "shape": "scatter",
-    "material": "glow",
-    "color": "#FF7A1E",
-    "position": [
-     -0.9,
-     1.75,
-     0.0
-    ],
-    "count": 30,
-    "radius": [
-     0.002,
-     0.005
-    ],
-    "seed": 2,
-    "emit": 14.0,
-    "shadow": false,
-    "plume": {
-     "height": 2.8,
-     "spread": [
-      0.25,
-      1.1
-     ],
-     "lean": [
-      0.5,
-      0.4
-     ],
-     "taper": 0.4,
-     "power": 1.6
-    }
-   },
-   {
-    "kind": "kit",
-    "shape": "scatter",
-    "material": "glow",
-    "color": "#FF7A1E",
-    "position": [
-     1.7,
-     3.4,
-     0.0
-    ],
-    "count": 30,
-    "radius": [
-     0.002,
-     0.005
-    ],
-    "seed": 3,
-    "emit": 14.0,
-    "shadow": false,
-    "plume": {
-     "height": 2.8,
-     "spread": [
-      0.25,
-      1.1
-     ],
-     "lean": [
-      0.3,
-      0.5
-     ],
-     "taper": 0.4,
-     "power": 1.6
-    }
-   },
-   {
-    "kind": "kit",
-    "shape": "scatter",
-    "material": "glow",
-    "color": "#FF7A1E",
-    "position": [
-     2.62,
-     5.6,
-     0.0
-    ],
-    "count": 30,
-    "radius": [
-     0.002,
-     0.005
-    ],
-    "seed": 4,
-    "emit": 14.0,
-    "shadow": false,
-    "plume": {
-     "height": 2.8,
-     "spread": [
-      0.25,
-      1.1
-     ],
-     "lean": [
-      0.6,
-      0.3
-     ],
-     "taper": 0.4,
-     "power": 1.6
-    }
+    "color": "#FF6A1A",
+    "seed": 4
    }
   ]
  },
  "lights": {
+  "seam": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    0.4
+   ],
+   "orbit": {
+    "azimuth_deg": 165,
+    "elevation_deg": 8,
+    "distance_m": 1.5
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 9.0,
+   "color": "#FF5A1A"
+  },
   "pool": {
    "type": "point",
    "position": [
-    -1.35,
-    -0.65,
-    0.5
+    -0.7,
+    -0.85,
+    0.35
    ],
-   "power_w": 70,
-   "color": "#FF6A20",
+   "power_w": 160,
+   "color": "#FF6A22",
    "radius_m": 0.4
   },
-  "river": {
+  "seam_r": {
    "type": "point",
    "position": [
-    0.4,
-    2.0,
+    1.6,
+    2.9,
     0.4
    ],
-   "power_w": 40,
-   "color": "#FF6A20",
-   "radius_m": 0.4
-  },
-  "fall_low": {
-   "type": "point",
-   "position": [
-    2.5,
-    4.5,
-    0.6
-   ],
    "power_w": 90,
-   "color": "#FF6A20",
-   "radius_m": 0.5
-  },
-  "fall_high": {
-   "type": "point",
-   "position": [
-    2.5,
-    4.6,
-    1.8
-   ],
-   "power_w": 60,
-   "color": "#FF6A20",
-   "radius_m": 0.5
+   "color": "#FF6A22",
+   "radius_m": 0.4
   }
  },
  "render": {
@@ -378,29 +311,29 @@
  ],
  "camera": {
   "position": [
-   -1.4494,
-   -5.4092,
-   1.0
+   2.4349,
+   -6.0267,
+   0.95
   ],
   "target": [
    0.0,
    0.0,
-   0.7
+   0.66
   ],
-  "lens_mm": 50.0,
+  "lens_mm": 60.0,
   "level": true,
   "fstop": 4.0,
   "focus": [
    0.0,
    -0.21,
-   0.7
+   0.66
   ]
  },
  "sky": {
   "kind": "hdri",
   "polyhaven": "qwantani_dusk_2_puresky",
   "rotation_deg": 0.0,
-  "strength": 0.18,
+  "strength": 0.35,
   "res": "4k"
  },
  "finish": {
@@ -412,9 +345,9 @@
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.2,
-   "bloom_px": 36,
-   "bloom_threshold": 0.85,
+   "bloom": 0.18,
+   "bloom_px": 34,
+   "bloom_threshold": 0.88,
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
@@ -423,15 +356,15 @@
  },
  "haze": {
   "box_m": [
-   -9.0,
-   -8.0,
-   -0.2,
-   9.0,
-   13.0,
-   5.0
+   -40.0,
+   -10.0,
+   -0.5,
+   30.0,
+   60.0,
+   12.0
   ],
-  "density": 0.006,
-  "anisotropy": 0.5,
+  "density": 0.003,
+  "anisotropy": 0.4,
   "color": "#FFFFFF"
  }
 }
