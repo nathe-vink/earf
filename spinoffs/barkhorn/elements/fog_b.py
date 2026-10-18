@@ -38,9 +38,9 @@ def hills():
 
 def pours():
     s, a, b = at(8.0, 1400.0), at(-12.0, 880.0), at(21.0, 1180.0)
-    return [[*s, 220.0, 320.0, LOOK - 180.0, 45.0],    # through the saddle
-            [*a, 160.0, 240.0, LOOK - 180.0, 30.0],    # over the ridge behind the speaker
-            [*b, 140.0, 220.0, LOOK - 180.0, 26.0]]
+    return [[*s, 260.0, 380.0, LOOK - 180.0, 60.0],    # through the saddle
+            [*a, 220.0, 300.0, LOOK - 180.0, 45.0],    # over the ridge behind the speaker
+            [*b, 200.0, 280.0, LOOK - 180.0, 40.0]]
 
 
 def sky_rot(sun_bearing):
@@ -50,7 +50,7 @@ def sky_rot(sun_bearing):
 
 
 import os
-SUN_BEARING = float(os.environ.get('FOG_B_SUN', -70.0))
+SUN_BEARING = float(os.environ.get('FOG_B_SUN', -45.0))
 
 
 def props():
@@ -65,7 +65,7 @@ def props():
                 relief=0.15, relief_far=0.008, gullies=[12.0, 150.0]),
         # the fog: a sea of it below, pouring through the saddle, a thin haze above
         C.piece('ext', module='fog_b_el', fn='fog', hills=H, floor=FLOOR, pours=pours(), top=-32.0, heave=6.0,
-                billows=[[160.0, 12.0], [50.0, 5.0], [15.0, 1.5]], bank=18.0, bank_size=450.0, rise=[1000.0, 1700.0, 40.0],
+                billows=[[160.0, 12.0], [50.0, 5.0], [15.0, 1.5]], bank=18.0, bank_size=450.0, rise=[950.0, 1600.0, 62.0],
                 soft=5.0, density=0.06, anisotropy=0.65, billow_size=30.0, billow_cut=0.2, haze=0.00025, haze_height=170.0,
                 box=[-3500.0, 13.0, -170.0, 4500.0, 7000.0, 320.0]),
         # wisps rising up the cliff just behind the brow
