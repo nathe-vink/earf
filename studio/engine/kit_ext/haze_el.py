@@ -298,3 +298,58 @@ def sun(bpy, name, p, kit):
     for attr in ('visible_diffuse', 'visible_glossy', 'visible_transmission', 'visible_volume_scatter'):
         setattr(ob, attr, False)                           # the sun lamp does its lighting; the disc is only seen
     return [ob]
+
+
+def litter(bpy, name, p, kit):
+    """The path's litter, lying on the soil inside `area` [x0, y0, x1, y1], clear of `avoid` circles: `clods` of the soil
+    (lumpy, flattened, half sunk, in the soil's own texture), `pebbles` (small, rounder, paler) and `straws` (dry cut
+    stems lying flat)."""
+    import assets
+    rnd = random.Random(p.get('seed', 1))
+    x0, y0, x1, y1 = p.get('area', [-0.5, -5.0, 0.5, 5.0])
+    avoid = p.get('avoid', [])
+
+    def spot():
+        while True:
+            x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
+            if not any((x - ax) ** 2 + (y - ay) ** 2 < ar ** 2 for ax, ay, ar in avoid):
+                return x, y
+
+    out = []
+    for kind, n in (('clods', p.get('clods', 600)), ('pebbles', p.get('pebbles', 300))):
+        bm = bmesh.new()
+        off = Vector((rnd.uniform(0, 99), rnd.uniform(0, 99), 0))
+        for _ in range(n):
+            x, y = spot()
+            if kind == 'clods':
+                r = rnd.uniform(0.005, 0.03) * (1 if rnd.random() < 0.85 else 1.6); sq = rnd.uniform(0.45, 0.7); bumpy = 0.35
+            else:
+                r = rnd.uniform(0.003, 0.012); sq = rnd.uniform(0.55, 0.8); bumpy = 0.12
+            g = bmesh.ops.create_icosphere(bm, subdivisions=2, radius=1.0)
+            a = rnd.uniform(0, 6.28); ax_ = rnd.uniform(0.7, 1.3)
+            for v in g['verts']:
+                k = 1.0 + bumpy * noise.noise(v.co * 1.7 + off + Vector((x * 37, y * 37, 0)))
+                lx, ly, lz = v.co.x * r * k * ax_, v.co.y * r * k / ax_, v.co.z * r * k * sq
+                v.co = Vector((x + lx * math.cos(a) - ly * math.sin(a), y + lx * math.sin(a) + ly * math.cos(a), lz + r * sq * 0.25))
+        me = bpy.data.meshes.new(f'{name}-{kind}'); bm.to_mesh(me); bm.free()
+        for f in me.polygons:
+            f.use_smooth = True
+        if kind == 'clods':
+            me.materials.append(assets.pbr(bpy, p.get('texture', 'farm_soil'), p.get('res', '2k'), scale=0.4, coords='object',
+                                           name=f'{name}-clod-mat'))
+        else:
+            me.materials.append(_mat(bpy, f'{name}-pebble', '#7A6C5E', 0.75, 0.0, 0.0, vary='#9C8E7C'))
+        ob = bpy.data.objects.new(f'{name}-{kind}', me); bpy.context.scene.collection.objects.link(ob)
+        out.append(ob)
+    bm = bmesh.new()
+    for _ in range(p.get('straws', 200)):
+        x, y = spot()
+        a = rnd.uniform(0, 6.28); L = rnd.uniform(0.04, 0.16); c = Vector((x, y, 0.004))
+        dvec = Vector((math.cos(a), math.sin(a), rnd.uniform(-0.02, 0.06)))
+        pts = [c + dvec * (L * (k / 3 - 0.5)) + Vector((0, 0, 0.002 * math.sin(k))) for k in range(4)]
+        _tube(bm, pts, 0.0012, 0.0008, 4)
+    me = bpy.data.meshes.new(f'{name}-straws'); bm.to_mesh(me); bm.free()
+    me.materials.append(_mat(bpy, f'{name}-straw', '#8C7A56', 0.7, 0.1, 0.4, vary='#B8A27A'))
+    ob = bpy.data.objects.new(f'{name}-straws', me); bpy.context.scene.collection.objects.link(ob)
+    out.append(ob)
+    return out

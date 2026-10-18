@@ -33,10 +33,34 @@
      5.0,
      0.0
     ],
-    "displace": 0.015,
+    "displace": 0.035,
     "res": "4k",
     "cells": 700,
     "relief": null
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_el",
+    "fn": "litter",
+    "area": [
+     -0.5,
+     -9.0,
+     0.5,
+     6.0
+    ],
+    "clods": 900,
+    "pebbles": 160,
+    "straws": 400,
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.42
+     ]
+    ],
+    "seed": 3,
+    "texture": "farm_soil"
    },
    {
     "kind": "kit",
@@ -170,7 +194,7 @@
     "shape": "asset",
     "model": "island_tree_01",
     "position": [
-     52.0,
+     30.0,
      240.0,
      0.0
     ],
@@ -211,11 +235,11 @@
     "module": "haze_el",
     "fn": "sun",
     "azimuth_deg": 188.0,
-    "elevation_deg": 2.4,
+    "elevation_deg": 3.4,
     "distance": 20000.0,
     "diameter_deg": 0.55,
-    "strength": 45.0,
-    "color": "#FF7A3A"
+    "strength": 15.0,
+    "color": "#FF6A2A"
    }
   ]
  },
@@ -236,7 +260,7 @@
     0.0,
     0.7
    ],
-   "irradiance": 1.5,
+   "irradiance": 1.0,
    "color": "#F0CDB2",
    "receivers": [
     "[!p]*",
@@ -246,12 +270,12 @@
   "through": {
    "type": "area",
    "size_m": [
-    1.2,
-    2.0
+    1.6,
+    2.4
    ],
    "orbit": {
     "azimuth_deg": 188,
-    "elevation_deg": 14,
+    "elevation_deg": 10,
     "distance_m": 2.5
    },
    "target": [
@@ -259,8 +283,8 @@
     0.0,
     0.8
    ],
-   "irradiance": 6.0,
-   "color": "#FFB070",
+   "irradiance": 5.0,
+   "color": "#FFA860",
    "camera": false,
    "receivers": [
     "[!p]*",
@@ -283,7 +307,7 @@
     0.0,
     0.7
    ],
-   "irradiance": 5.0,
+   "irradiance": 3.0,
    "color": "#FFB98A",
    "camera": false,
    "specular": 0,
@@ -308,7 +332,7 @@
     0.0,
     0.7
    ],
-   "irradiance": 4.0,
+   "irradiance": 2.5,
    "color": "#F5B0A0",
    "camera": false,
    "specular": 0,
@@ -333,8 +357,8 @@
     0.0,
     1.15
    ],
-   "strength": 0.5,
-   "color": "#C9B3C9",
+   "strength": 0.25,
+   "color": "#9C88B0",
    "diffuse": 0,
    "specular": 1,
    "receivers": [
@@ -352,7 +376,7 @@
   "view": "AgX",
   "exposure": 0.0,
   "white_balance_k": 5600,
-  "white_balance_tint": 3.0,
+  "white_balance_tint": 3,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Haze, lavender at dusk",
@@ -364,7 +388,7 @@
   "position": [
    0.0,
    -9.5,
-   1.0
+   0.7
   ],
   "target": [
    0.0,
@@ -380,33 +404,33 @@
    0.66
   ],
   "shift_x": 0.0,
-  "shift_y": 0.06,
+  "shift_y": 0.08,
   "clip_end": 20000.0
  },
  "sky": {
   "kind": "hdri",
   "polyhaven": "the_sky_is_on_fire",
   "rotation_deg": -157.0,
-  "strength": 0.85,
+  "strength": 0.55,
   "res": "4k"
  },
  "sun": {
   "azimuth_deg": 188.0,
-  "elevation_deg": 2.4,
-  "irradiance": 22.0,
+  "elevation_deg": 4.5,
+  "irradiance": 15.0,
   "angle_deg": 0.6,
-  "color": "#FEA450"
+  "color": "#FF9A40"
  },
  "finish": {
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.18,
+  "contrast": 0.25,
   "clarity": 0.04,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.3,
+   "bloom": 0.4,
    "bloom_px": 40,
    "bloom_threshold": 0.85,
    "saturation": 0.0,
@@ -422,10 +446,10 @@
    0.0,
    8000.0,
    8000.0,
-   45.0
+   80.0
   ],
-  "density": 0.0004,
-  "anisotropy": 0.45,
-  "color": "#E6C9D6"
+  "density": 0.00022,
+  "anisotropy": 0.3,
+  "color": "#B8A4D8"
  }
 }
