@@ -83,6 +83,8 @@ def sweep(bpy, spec, mats):
                                          'contact_m': ct.get('distance_m', 0.05), 'core': ct.get('core_strength', 0.0),
                                          'core_m': ct.get('core_distance_m', 0.025), **mats.get('sweep', {})})
     ob = _obj(bpy, 'sweep', me, mat)
+    if spec.get('cast_shadow') is False:               # the paper casts no shadow: a sun behind the wall reaches the floor
+        ob.visible_shadow = False
     objs = [ob] + props(bpy, spec, mats)               # round 31: props on a sweep too (the carousel's plinth)
     cards(bpy, spec)
     return objs

@@ -1,0 +1,60 @@
+{
+ "date": "2026-10-18",
+ "new": "renders/2026-10-18/barkhorn/catalogue31/p12-blue-on.png",
+ "old": "renders/2026-10-18/barkhorn/catalogue31/p11-blue-on.png",
+ "new_score": 5.0,
+ "old_score": 5.5,
+ "prefer": "old",
+ "differences": [
+  {
+   "what": "B is about a third of a stop darker overall; the backdrop and floor go a muddier grey and the scene loses the airy, clean-studio feel A has",
+   "region": [
+    0,
+    0,
+    540,
+    1080
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "Floor in front of and around the base is noticeably greyer and heavier in B (median luminance ~157 vs ~174), so the product sits in a dimmer, less inviting set",
+   "region": [
+    0,
+    900,
+    540,
+    1080
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "The dark teal reflection band on the right side panel starts with a hard horizontal edge in B (around y 680) that reads as a rendering seam; in A it fades in more gradually from the top of the panel",
+   "region": [
+    360,
+    560,
+    435,
+    760
+   ],
+   "favours": "A"
+  },
+  {
+   "what": "Top lid edge has a few clipped highlights in A (0.5% of the strip) where B holds detail, a minor point in B's favour",
+   "region": [
+    100,
+    460,
+    440,
+    560
+   ],
+   "favours": "B"
+  },
+  {
+   "what": "Horn and blue waveguide read slightly richer and more luminous in A; in B the blue goes a touch flatter",
+   "region": [
+    85,
+    260,
+    380,
+    460
+   ],
+   "favours": "A"
+  }
+ ]
+}

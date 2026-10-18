@@ -247,6 +247,7 @@ def main():
     # short, the edge renders black (round 31's critics), so a shot may raise these
     cy.glossy_bounces = min(cy.max_bounces, R.get('glossy_bounces', 8))
     cy.transmission_bounces = min(cy.max_bounces, R.get('transmission_bounces', 8))
+    cy.transparent_max_bounces = max(cy.transparent_max_bounces, R.get('transparent_bounces', 0))
     cy.volume_bounces = R.get('volume_bounces', 2)      # a material with a volume (frosted) scatters inside it
     if 'volume_biased' in R:                            # big heterogeneous volumes (fog, cloud) march faster biased
         cy.volume_biased = R['volume_biased']
@@ -256,9 +257,9 @@ def main():
         cy.volume_max_steps = R['volume_max_steps']
     cy.sample_clamp_indirect = R.get('clamp', 10.0)
     cy.blur_glossy = R.get('filter_glossy', 0.5)
-    cy.caustics_reflective = False
-    # refractive caustics off by default (noise); a shot may turn them on so light reaches what stands behind clear
-    # parts (round 31b: the lining inside a tinted acrylic cabinet, lit by the sky through the acrylic)
+    # caustics off by default (noise); a shot may turn them on so light reaches what stands behind clear parts (round
+    # 31b: the lining inside a tinted acrylic cabinet, lit by the sky through the acrylic)
+    cy.caustics_reflective = bool(R.get('caustics_reflective', False))
     cy.caustics_refractive = bool(R.get('caustics_refractive', False))
     if a.threads:
         scene.render.threads_mode = 'FIXED'; scene.render.threads = a.threads

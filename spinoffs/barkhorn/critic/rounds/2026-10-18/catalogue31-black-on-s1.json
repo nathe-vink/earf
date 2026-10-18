@@ -1,0 +1,260 @@
+{
+ "stage1": {
+  "impression": "A clean, competent studio render of a smoked acrylic cabinet with a horn on top, on a grey sweep; the silhouette reads, but the whole frame is flat grey-on-black and still says CG. The right side panel is a dead black slab, the horn's bowl is a near-black void with stray streaks, the top-left of the paper is muddy, and the speaker carries little weight on the floor.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The right side panel must show the smoked acrylic as a material: a soft vertical gradient reflection, not a crushed black slab (crush_pct under 8 in [372,520,428,860])",
+  "The paper must read as one clean, even field for a colour card: top-left corner no darker than about 160, left-to-right ramp under about 55 levels",
+  "The speaker must sit with weight: a readable contact and cast shadow at the front and right-back corners, not a bright floor right up to the cabinet's right edge",
+  "The horn bowl must show its form with a broad soft reflection rather than a void with thin streaks",
+  "The cloth disc and lining must read as real textiles at full size (out of scope here, reworked elsewhere)",
+  "A single coherent colour temperature across wall, floor and product (no warm wall / cool floor / blue side panel split)"
+ ],
+ "defects": [
+  {
+   "region": [
+    370,
+    490,
+    430,
+    880
+   ],
+   "what": "Right side panel crushed to black (median 6, 21% crushed), slight blue cast (b 16 vs r 5); reads as a dead slab, not tinted acrylic"
+  },
+  {
+   "region": [
+    0,
+    0,
+    80,
+    200
+   ],
+   "what": "Top-left paper muddy grey (median 133) against 217 at the top-right; looks like a dirty vignette rather than a lit sweep"
+  },
+  {
+   "region": [
+    430,
+    900,
+    540,
+    960
+   ],
+   "what": "Floor beside the right-back of the cabinet is bright (median 218); no cast shadow, the speaker looks set down lightly"
+  },
+  {
+   "region": [
+    120,
+    940,
+    360,
+    975
+   ],
+   "what": "Front contact shadow soft and light (median 153 vs ~190 open floor)"
+  },
+  {
+   "region": [
+    140,
+    300,
+    340,
+    430
+   ],
+   "what": "Horn bowl near-black (42% crushed) with thin radiating streaks across it; form is lost apart from the rim"
+  },
+  {
+   "region": [
+    130,
+    580,
+    330,
+    790
+   ],
+   "what": "Woofer cover reads as a flat matte black disc with no cloth texture"
+  },
+  {
+   "region": [
+    0,
+    1000,
+    540,
+    1080
+   ],
+   "what": "Floor slightly cool (r 179, b 184) while the wall is warm (r 187, b 185)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The right side panel reflects the black card set.flags.1 and shows nothing of the material, so a third of the product is a dead black slab.",
+   "evidence": {
+    "region": [
+     372,
+     520,
+     428,
+     860
+    ],
+    "measured": "lum_median 6.4, crush_pct 21.0, p95 96.6 (only the edge streak and grip are lit)"
+   },
+   "change": {
+    "setting": "new panel lights.sidesheen (in front of set.flags.1, which stays as the dark surround)",
+    "from": "none",
+    "to": "panel [0.8, 2.0] m at [1.1, 2.3, 0.6], aimed at [0.28, 0.0, 0.5], peak radiance 0.4, diffuse 0.0, ramp {'axis': 'z', 'at_m': [-0.4, 1.6], 'values': [0.15, 1.0]}, color #FFFFFF"
+   },
+   "expected": "A soft vertical gradient on the side panel, dark at the foot and lifting toward the top, so the smoked acrylic reads as glossy tinted material with the dark rib and grip still visible.",
+   "accept": {
+    "region": [
+     372,
+     520,
+     428,
+     860
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 8
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The paper falls off from 219 at right to 134 at left, leaving a murky top-left corner that reads as dirt in a narrow colour-card crop.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     80,
+     200
+    ],
+    "measured": "lum_median 132.9 vs 216.8 at [460,0,540,200]; x profile at y=150 from 134 to 219"
+   },
+   "change": {
+    "setting": "lights.wall",
+    "from": "position [-1.5, 1.0, 3.5], aimed at [0.0, 5.0, 2.4], irradiance 1.6",
+    "to": "position [-1.5, 1.0, 3.5], aimed at [-1.2, 5.0, 2.6], irradiance 1.8"
+   },
+   "expected": "The left of the wall lifts to about 165-180 while the right stays near 210-218, keeping a gentle light-behind-the-dark-side gradient for separation.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     80,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     160,
+     190
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The backlit pool and wash fill in the shadows on the floor, so the speaker has no weight at its right-back corner and only a pale contact at the front.",
+   "evidence": {
+    "region": [
+     430,
+     915,
+     520,
+     960
+    ],
+    "measured": "lum_median 218 right next to the cabinet's corner; front contact [120,940,360,975] median 153 vs open floor ~190"
+   },
+   "change": {
+    "setting": "lights.pool irradiance and set contact shadow distance",
+    "from": "pool 2.5 W/m2; contact shadow distance_m 0.12",
+    "to": "pool 1.5 W/m2; contact shadow distance_m 0.2"
+   },
+   "expected": "A soft cast shadow spreading from the cabinet's right-back corner and a deeper contact at the front edge, so the speaker sits down on the paper.",
+   "accept": {
+    "region": [
+     440,
+     920,
+     520,
+     960
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 195
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The horn bowl is a near-black void; the narrow lights.horn gives only thin streaks and the rim, so the bowl's curvature does not read.",
+   "evidence": {
+    "region": [
+     140,
+     300,
+     340,
+     430
+    ],
+    "measured": "lum_median 7.9, crush_pct 42.3, p95 79"
+   },
+   "change": {
+    "setting": "lights.horn",
+    "from": "area [1.4, 0.4] m, spread_deg 30, irradiance 2.6",
+    "to": "area [1.6, 1.0] m, spread_deg 45, irradiance 2.6"
+   },
+   "expected": "A broad soft reflection sweeps across the upper and side walls of the bowl, showing its shape, while the throat's fixed dark mass stays dark.",
+   "accept": {
+    "region": [
+     140,
+     300,
+     340,
+     430
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 30
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The floor is cooler than the wall and the dark side panel goes blue, so the set reads as two light temperatures.",
+   "evidence": {
+    "region": [
+     0,
+     1000,
+     540,
+     1080
+    ],
+    "measured": "r 179, g 184, b 184 on the floor vs r 187, b 185 on the wall [0,0,540,200]"
+   },
+   "change": {
+    "setting": "lights.fill color and sky",
+    "from": "fill #FFF8F0; sky #2A2A2A",
+    "to": "fill #FFF2E6; sky #2B2A28"
+   },
+   "expected": "Floor and wall share one slightly warm neutral; the side panel loses its blue cast.",
+   "accept": {
+    "region": [
+     0,
+     1000,
+     540,
+     1080
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 183
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover a visible cloth weave and soft edge sheen",
+   "why": "The cover's cloth shader is being reworked elsewhere (card); it reads as a flat matte black disc"
+  },
+  {
+   "request": "Remove the thin radiating streaks inside the horn bowl",
+   "why": "They appear to come from the tinted resin shader or its internal geometry, which is part of the speaker"
+  },
+  {
+   "request": "Make the lining read as white polyester in voile through the smoke",
+   "why": "Lining shaders are being reworked elsewhere; it currently reads as flat grey panels"
+  }
+ ],
+ "score_if_fixed": 6.8
+}
