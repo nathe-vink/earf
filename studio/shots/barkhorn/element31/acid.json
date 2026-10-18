@@ -32,7 +32,6 @@
     "terrace": 0.03,
     "displace": 0.014,
     "grain_w": 0.6,
-    "bump": 0.3,
     "flat": [
      0.0,
      0.0,
@@ -74,12 +73,9 @@
       "#6E2C12"
      ]
     ],
-    "specular": 0.02,
-    "roughness_min": 0.95,
-    "tex_scale": 1.4,
-    "wet_h": 0.008,
-    "wet_rough": 0.5,
-    "shore_step": 0.025,
+    "specular": 0.08,
+    "roughness_min": 0.8,
+    "tex_scale": 0.7,
     "acid_colors": [
      [
       0.0,
@@ -101,13 +97,13 @@
     "acid_milk": 0.2,
     "acid_edge": 0.12,
     "acid_deep": 0.12,
-    "ripple": 0.07,
+    "ripple": 0.14,
     "pools": [
      [
-      -0.3,
-      -2.7,
-      0.25,
-      1.15
+      -0.35,
+      -1.95,
+      0.2,
+      0.62
      ],
      [
       2.4,
@@ -139,12 +135,12 @@
      9.2,
      0.0
     ],
-    "height": 0.9,
-    "radius": 0.4,
+    "height": 1.25,
+    "radius": 0.42,
     "colors": [
-     "#F4EDC4",
-     "#EAC81E",
-     "#D9822A"
+     "#F4EA9A",
+     "#EACB1E",
+     "#C9A010"
     ],
     "seed": 2
    },
@@ -176,7 +172,7 @@
     "position": [
      -1.1,
      9.2,
-     0.8
+     1.12
     ],
     "height": 4.5,
     "r0": 0.1,
@@ -199,14 +195,14 @@
      19.0,
      0.5
     ],
-    "height": 3.0,
-    "r0": 0.12,
-    "r1": 0.7,
+    "height": 4.0,
+    "r0": 0.15,
+    "r1": 1.0,
     "lean": [
-     0.2,
-     1.2
+     1.5,
+     0.6
     ],
-    "density": 3.0,
+    "density": 6.0,
     "anisotropy": 0.6,
     "seed": 3
    },
@@ -235,18 +231,37 @@
     2.0,
     1.5
    ],
-   "orbit": {
-    "azimuth_deg": -40,
-    "elevation_deg": 12,
-    "distance_m": 3.0
-   },
    "target": [
     0.0,
     0.0,
     0.7
    ],
-   "irradiance": 0.8,
-   "color": "#FFE6B0"
+   "irradiance": 1.6,
+   "color": "#FFE6B0",
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   }
+  },
+  "throat": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.5
+   ],
+   "target": [
+    0.05,
+    -0.05,
+    1.12
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1D6",
+   "orbit": {
+    "azimuth_deg": 14,
+    "elevation_deg": 4,
+    "distance_m": 2.2
+   }
   }
  },
  "render": {
@@ -287,14 +302,14 @@
  "sky": {
   "kind": "hdri",
   "polyhaven": "quarry_01_puresky",
-  "rotation_deg": 204.0,
-  "strength": 0.7,
+  "rotation_deg": 179.0,
+  "strength": 0.8,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": -150.0,
+  "azimuth_deg": -125.0,
   "elevation_deg": 10.1,
-  "irradiance": 14.0,
+  "irradiance": 12.0,
   "angle_deg": 0.53,
   "color": "#FEDA8F"
  },
@@ -313,20 +328,20 @@
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.3
+   "vignette": 0.25
   }
  },
  "haze": {
   "box_m": [
    -300,
-   15,
+   -30,
    -3,
    300,
    300,
    200
   ],
-  "density": 0.003,
+  "density": 0.0012,
   "anisotropy": 0.5,
-  "color": "#F2DFC0"
+  "color": "#F6EAD6"
  }
 }
