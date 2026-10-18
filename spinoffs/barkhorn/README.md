@@ -182,12 +182,12 @@ Three of the campaign critics named the speaker's own surfaces:
   |---|---|---|---|
   | Ember | a lava field at blue hour, its crust cracked to the glow | | rendering |
   | Dust | the Southwest at golden hour (6.0) | | A |
-  | Acid | the acid spring at Dallol, sulphur and steam (5.5) | acid rain over wet black lava | A, until the duel |
+  | Acid | the acid spring at Dallol, sulphur and steam (5.5) | acid rain over wet black lava (6.5) | B, by a blind duel (2 to 1), once its portrait is in |
   | Poison | a redwood rainforest (6.5) | | A |
   | Ice | snow country at blue hour, a cabin's window far behind (7.0) | Diamond Beach at sunrise (5.8) | A, by a blind duel (2 to 1) |
   | Haze | a lavender field at dusk (6.0) | layered hills at blue hour (5.5) | B, by a blind duel (2 to 1) |
-  | Fog | a summit above a sea of cloud | San Francisco's fog | rendering |
-  | Smoke | woodsmoke at dawn in a pine wood (6.5) | a misty birch wood, high-key | A, until the duel |
+  | Fog | a summit above a sea of cloud (6.5) | San Francisco's fog | A (B rendering) |
+  | Smoke | woodsmoke at dawn in a pine wood (6.5) | a misty birch wood, high-key (5.5) | A, by a blind duel (3 to 0) |
 
   The score is a fresh critic's on the final itself. The sessions fixed the engine as they went:
   - scanned plants keep their leaves cut out;
