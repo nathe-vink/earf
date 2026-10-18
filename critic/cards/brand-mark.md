@@ -29,7 +29,9 @@ rendered on paper and on dark, the flat files traced from those renders, and the
 (round 30, `brand/icons-r30.png`) the speakers' eight icons as the owner picked them after eight passes, rendered in
 their own acrylic on paper and on dark, with their traced and solid files and the site loader's coins; sheet 18 (round
 30, `brand/icon-options-r30.png`) the last pass's options, Smoke's and the skull's, each in one colour and in its
-acrylic, the owner's picks framed.
+acrylic, the owner's picks framed. Round 31 changes nothing in the set: its pictures are the speakers' (every view
+final, and pictures for a launch), each judged on its own card by the campaign critic (`critic/PROMPT-promo.md`; the
+cards and replies in `spinoffs/barkhorn/critic/rounds/2026-10-18/` and in each picture's session).
 
 ## The owner's requirements, in their own words (fixed)
 
