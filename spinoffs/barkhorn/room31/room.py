@@ -78,7 +78,7 @@ def room_set(v):
             value=v.get('wall_value', 1.0), bump=v.get('wall_bump', 1.0), tex_scale=v.get('wall_tex_scale')),
         ext('credenza', position=[PX + CAB['x'], BACK - CAB['d'] / 2 - 0.012], size=[CAB['w'], CAB['d'], CAB['h']], doors=v.get('doors', 3),
             texture=v.get('veneer', 'walnut_veneer'), lift=v.get('veneer_lift', 1.3), grain_rot=v.get('grain_rot', 90.0)),
-        ext('rug', position=v['rug_pos'], size=v['rug_size'], pile=v.get('rug_pile', 0.018), texture=v.get('rug', 'curly_teddy_natural'),
+        ext('rug', off=v.get('rug_off', False), position=v['rug_pos'], size=v['rug_size'], pile=v.get('rug_pile', 0.018), texture=v.get('rug', 'curly_teddy_natural'),
             tint=v.get('rug_tint', '#E4DCCB'), tint_mix=v.get('rug_tint_mix', 0.5), displace=v.get('rug_displace', 0.006), res=v.get('rug_res', '2k'), value=v.get('rug_value', 1.0),
             tex_scale=v.get('rug_tex_scale')),
         ext('socket', position=[PX - v['socket_x'], BACK, 0.30]),
@@ -93,7 +93,7 @@ def room_set(v):
         kit('asset', model=v.get('vase', 'ceramic_vase_02'), position=[PX + v.get('vase_x', 0.58), BACK - 0.20, CAB['h']], rotate=[0, 0, 20],
             scale=v.get('vase_scale', 1.0)),
         # the lounge chair, its black leather re-dyed cognac so it sits with the walnut and not against the pair
-        ext('recolour', model=v.get('chair', 'modern_arm_chair_01'), position=v['chair_pos'], rotate=[0, 0, v['chair_rot']],
+        ext('recolour', off=v.get('chair_off', False), model=v.get('chair', 'modern_arm_chair_01'), position=v['chair_pos'], rotate=[0, 0, v['chair_rot']],
             match=['pillow'], color=v.get('leather', '#7A4A2C'), blend='MIX', mix=v.get('leather_mix', 0.8)),
         # linen sheers drawn across the glazing (concept B): the sun through them becomes a broad soft source
         *[ext('sheer', position=[LEFT + 0.1, yc, HEIGHT - 0.05], rotate=[0, 0, 90], size=[w, HEIGHT - 0.07], folds=int(w * 9),
@@ -104,7 +104,7 @@ def room_set(v):
             folds=9, amplitude=0.035, noise=0.35, thickness=0.0, material='organza', color='#F1ECE2',
             alpha=v.get('sheer_alpha', 0.55), seed=5, res=120),
         ext('exterior', hdri=v['hdri'], rotation_deg=v['hdri_rot'], strength=v['ext_strength'], res='8k',
-            centre=[LEFT - 1.0, -1.0, 1.4], radius=60.0, blur=v.get('ext_blur', 0.004)),
+            centre=[LEFT - 1.0, -1.0, 1.4], radius=60.0, blur=v.get('ext_blur', 0.004), tint=v.get('ext_tint')),
     ]
     return {'kind': 'room', 'size': [w, DEPTH, HEIGHT], 'center': [cx, cy],
             'floor': {'base': '#B89B78'}, 'wall': {'color': v['wall']}, 'ceiling': '#F2EFEA',
@@ -112,22 +112,22 @@ def room_set(v):
 
 
 DEFAULT = dict(
-    floor='wood_floor', floor_coat=0.15, floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=2.4,
-    wall_tint=0.5, wall_tex_scale=0.8, socket_x=1.78,
+    floor='wood_floor', floor_coat=0.15, floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=1.0,
+    wall_tint=0.5, wall_tex_scale=1.6, socket_x=1.78,
     veneer='walnut_veneer_02', veneer_lift=0.75, grain_rot=90.0,
     rug='poly_wool_herringbone', rug_tex_scale=0.25, rug_tint='#8A7A64', rug_tint_mix=1.0, rug_pos=[0.45, -1.25],
     rug_size=[2.6, 1.6], rug_displace=0.004, rug_pile=0.016, rug_res='4k', rug_value=0.75,
     chair='modern_arm_chair_01', chair_pos=[-1.68, -0.5, 0.0], chair_rot=235.0, leather='#8A7460',
-    hdri='autumn_forest_04', hdri_rot=116.0, ext_strength=6.0, ext_blur=0.003,
+    hdri='autumn_forest_04', hdri_rot=100.0, ext_strength=5.0, ext_blur=0.0008, ext_tint='#FFE9D2',
     # concept C (pass r10): the window corner. The camera, still squared to the back wall, stands toward the glazing, so
     # the left wall recedes in the frame with its view out and the lounge chair by the glass; the pair, moved 0.35 m
     # clear of the window, stands in the low sun (az -76, el 11) through the open back bays; linen sheers over the
     # front bays soften the rest
-    sheers=[(-2.6, 3.2)], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=0.42, vase_x=0.62,
-    sun=dict(azimuth_deg=-76.0, elevation_deg=11.0, irradiance=40.0, angle_deg=0.6, color='#FFE4C8'),
-    sky_strength=1.0, fill=0.6, fill_color='#D2E0F4', fill_pos=[0.8, -4.0, 2.4], bounce=0.7, bounce_pos=[-0.6, -3.6, 1.35],
-    bounce_size=[2.4, 1.2], floor_bounce=0.25, fb_pos=[0.9, -1.2, 0.1],
-    exposure=-1.0, wb=4800, cam_x=-0.2, cam_d=4.65, pair_x=0.35, lens=35, cam_tz=0.9, wb_tint=0.0,
+    sheers=[(-0.79, 0.86), (-2.92, 2.56)], drape_off=True, sheer_open=0.15, tt_x=0.0, books_x=0.42, vase_x=0.62,
+    sun=dict(azimuth_deg=-62.0, elevation_deg=18.0, irradiance=40.0, angle_deg=0.6, color='#FFE4C8'),
+    sky_strength=1.0, fill=0.8, fill_color='#D2E0F4', fill_pos=[1.6, -3.6, 2.2], bounce=0.7, bounce_pos=[-0.6, -3.6, 1.35],
+    bounce_size=[2.4, 1.2], floor_bounce=0.55, fb_pos=[0.0, -0.6, 0.08], rug_off=True, chair_off=True,
+    exposure=-1.0, wb=4800, cam_x=0.0, cam_d=5.06, pair_x=0.0, lens=40, cam_tz=0.855, wb_tint=0.0,
 )
 
 
@@ -172,7 +172,7 @@ def shot(v=None, portrait=False):
                             'specular': 0, 'transmission': False}
                for k, sx in (('L', -1), ('R', 1)) if v.get('kick', 0) > 0},
             # light the floor bounces up under the credenza (a real room's toe-kick is never a black hole)
-            'floorbounce': {'type': 'area', 'size_m': [0.8, 0.3], 'position': v.get('fb_pos', [0.0, -1.0, 0.1]), 'target': [0.0, 0.7, 0.05],
+            'floorbounce': {'type': 'area', 'size_m': [0.8, 0.3], 'position': v.get('fb_pos', [0.0, -1.0, 0.1]), 'target': [PX, 0.8, 0.04],
                             'irradiance': v.get('floor_bounce', 0.0), 'color': '#FFE8CC'},
         },
         'render': {'samples': 128, 'adaptive': 0.02, 'denoise': True, 'clamp': 10, 'bounces': 12,
