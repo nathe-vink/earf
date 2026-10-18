@@ -334,7 +334,7 @@ def sparks_mixed(bpy, name, p, kit):
     """Sparks in three generations: a few young bright yellow ones, more orange, and dim deep-red ones dying, each set
     its own `sparks` piece with its share of `count` and its own seed."""
     out = []
-    for i, (share, col, emit, scale) in enumerate(((0.2, '#FFC060', 1.6, 1.3), (0.45, '#FF7A22', 1.0, 1.0),
+    for i, (share, col, emit, scale) in enumerate(((0.2, '#FF9A30', 1.2, 1.3), (0.45, '#FF6A18', 1.0, 1.0),
                                                    (0.35, '#E0300A', 0.45, 0.7))):
         q = {**p, 'count': max(1, int(p.get('count', 40) * share)), 'color': col, 'emit': p.get('emit', 20.0) * emit,
              'seed': p.get('seed', 1) * 10 + i,

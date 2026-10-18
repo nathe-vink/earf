@@ -35,7 +35,7 @@ def props():
               crust_rough=0.85, crust_spec=0.2),
         # the crater's walls: scanned rock faces regraded to basalt, towering behind and closing in at the sides
         rock('mountainside', (0.5, 6.2, -0.6), (0.0, 0.0, 4.0), 1.15),
-        rock('rock_face_01', (-5.0, 2.2, -0.3), (0.0, 0.0, -62.0), 1.5, albedo=0.02),
+        rock('rock_face_01', (-5.0, 2.2, -0.3), (0.0, 0.0, -62.0), 1.5, albedo=0.015, rough_mul=0.8),
         rock('rock_face_02', (5.4, 3.0, -0.3), (0.0, 0.0, 55.0), 1.8),
         # the lava fall pouring down the back wall into the river
         piece('ext', module='ember_el', fn='fall', points=FALL, radius=[0.12, 0.16, 0.15, 0.19, 0.22, 0.36], flat=0.8,
@@ -45,9 +45,9 @@ def props():
         piece('ext', module='ember_el', fn='steam', box=[-4.5, 2.6, -0.1, 4.0, 4.6, 1.6], density=1.0, scale=0.8,
               anisotropy=0.45),
         # sparks lifting off the lava
-        piece('ext', module='ember_el', fn='sparks_mixed', area=[-3.6, 2.6, -1.6, 3.8], count=16, height=2.2,
+        piece('ext', module='ember_el', fn='sparks_mixed', area=[-3.4, 2.8, -2.2, 3.6], count=8, height=2.2,
               streak=[0.01, 0.12], radius=[0.001, 0.004], drift=[0.3, -0.1], emit=16.0, seed=4),
-        piece('ext', module='ember_el', fn='sparks_mixed', area=[-1.6, -1.2, -0.6, -0.4], count=5, height=1.4,
+        piece('ext', module='ember_el', fn='sparks_mixed', area=[-1.6, -1.2, -0.6, -0.4], count=2, height=1.4,
               streak=[0.01, 0.08], radius=[0.001, 0.003], drift=[0.4, 0.1], emit=16.0, seed=9),
     ]
     return P
@@ -63,21 +63,21 @@ def lamp(position, target, irradiance, size, color='#FF5A18'):
 def lights():
     L = {
         # hidden behind the cabinet: the lava's light coming through the acrylic
-        'through': lamp([0.15, 1.0, 0.1], [0.0, 0.0, 0.7], 2.4, (0.6, 1.2)),
-        'horn': lamp([0.1, 0.75, 1.2], [0.0, -0.2, 1.12], 1.2, (0.6, 0.3)),
+        'through': lamp([0.15, 0.9, 0.9], [0.0, -0.6, 0.0], 2.4, (0.6, 1.2)),
+        'horn': lamp([0.1, 0.75, 1.3], [0.0, -0.2, 1.12], 3.0, (0.6, 0.3)),
         # the crack in front, low: the lava's light rising onto the cabinet's foot
-        'crack': point([-0.9, -0.85, 0.15], 200, LAVA_LIGHT, 0.3),
+        'crack': point([-0.9, -0.85, 0.15], 60, LAVA_LIGHT, 0.3),
         # the river and the fall, lighting the walls from their foot
-        'river_l': point([-1.0, 3.6, 0.25], 350, LAVA_LIGHT, 0.3),
-        'river_r': point([2.2, 3.8, 0.25], 350, LAVA_LIGHT, 0.3),
-        'fall': point([FALL[-1][0] + 0.8, FALL[-1][1] - 0.5, 0.4], 80, LAVA_LIGHT, 0.4),
+        # the river's glow in the steam over it, behind the speaker's right (lights the steam, not the wall)
+        'steam': point([2.0, 3.1, 0.4], 120, LAVA_LIGHT, 0.3),
+        'fall': point([FALL[-1][0] + 0.8, FALL[-1][1] - 0.5, 0.4], 20, LAVA_LIGHT, 0.4),
     }
     return L
 
 
 def shot():
     cam = camera(height=0.95, distance=6.5, azimuth=22.0, lens=60.0, target=(0.0, 0.0, 0.66), fstop=2.0)
-    return frame('ember', props(), cam, sky(SKY, rotation_deg=0.0, strength=0.07), 'barkhorn, Ember, a volcanic cavern',
+    return frame('ember', props(), cam, sky(SKY, rotation_deg=90.0, strength=0.25), 'barkhorn, Ember, a volcanic cavern',
                  lights=lights(), rotate_z=15.0, exposure=0.0,
                  haze={'box_m': [-12.0, -10.0, -0.5, 12.0, 12.0, 12.0], 'density': 0.0015, 'anisotropy': 0.4, 'color': '#FFFFFF'},
                  fin=finish(bloom=0.18, bloom_px=34, threshold=0.88, vignette=0.25))
