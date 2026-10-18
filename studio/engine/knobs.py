@@ -39,6 +39,7 @@ KNOBS = [
     ('render.denoise', 'bool', None, 'OpenImageDenoise'),
     ('render.glossy_bounces', 'count', (1, 64), 'reflection depth (8 by default, never above render.bounces)'),
     ('render.transmission_bounces', 'count', (1, 64), 'refraction depth (8 by default, never above render.bounces): nested clear walls need more'),
+    ('render.transparent_bounces', 'count', (8, 256), 'transparent bounces, at least this many (shadow rays through stacked clear parts)'),
     ('render.caustics_refractive', 'bool', None, 'light refracted through clear and tinted parts reaches diffuse surfaces (coloured light on the floor); off by default'),
     ('render.caustics_reflective', 'bool', None, 'light mirrored by glossy parts reaches diffuse surfaces; off by default'),
     # the retouch (retouch.py): the paints matched to their swatches in the finished frame, as a retoucher does
@@ -104,6 +105,7 @@ KNOBS = [
     ('lights.*.receivers', '[part names, * wildcards]', None, 'light linking: the lamp lights only these parts (a kick for a face that must not light the floor beside it); absent, it lights everything'),
     ('lights.*.density', '0 to 1', (0.0, 1.0), 'a flag\'s density: 1 a solid flag, 0.4 a net that lets 60 % of the light through'),
     ('lights.*.lights', '[lamp names]', None, 'a flag that shades only these lamps (every other lamp sees through it); absent, it shades them all'),
+    ('lights.*.see_through', 'bool', None, 'a flag that only shadow rays meet: bounce light, the sky and rays through clear parts pass it (a cutter that soaks up nothing)'),
     ('lights.*.shadow_on_set', '0 to 1', (0.0, 1.0), 'the lamp\'s shadow on the set at this fraction of its density (1 real, 0.5 half as dark), its light and shadows on the product unchanged: a copy of the lamp the product does not block lights the set with the rest (a lamp without receivers)'),
     ('lights.*.power_w', 'W', (0, 50000), 'lamp power (Cycles watts); light on the subject falls with distance squared'),
     ('lights.*.irradiance', 'W/m2', (0, 50), 'area lamp: the light it puts on a surface facing it at its target (replaces power_w; about 3 renders a white near 230 at exposure 0)'),
@@ -132,6 +134,7 @@ KNOBS = [
     ('set.contact.core_strength', '0 to 0.9', (0, 0.9), 'sweep: a second contact term, tight, multiplied with the first: the dark line where the base meets the floor (0 off)'),
     ('set.contact.core_distance_m', 'm', (0.003, 0.05), 'sweep: how far the tight contact term reaches (0.025: the core within about a centimetre of the base)'),
     ('set.height', 'm', (1, 10), 'sweep: the back wall\'s height'),
+    ('set.cast_shadow', 'bool', None, 'sweep: false and the paper casts no shadow, so a sun from behind the wall lights the floor in front of it (a distant key with parallel shadows)'),
     ('set.size', 'm [w, d, h]', None, 'room: width (x), depth (y), height'),
     ('set.center', 'm [x, y]', None, 'room: the floor\'s centre'),
     ('set.floor.*', 'see materials oak', None, 'room: the floor\'s material overrides'),
@@ -185,6 +188,10 @@ PRESET_UNITS = {
     'contact_m': ('m', (0.005, 0.3), 'how far the wide contact shadow reaches'),
     'core': ('0 to 0.9', (0.0, 0.9), 'the sweep\'s tight contact term, multiplied with the wide one'),
     'core_m': ('m', (0.003, 0.05), 'how far the tight contact term reaches'),
+    'tooth': ('bump', (0.0, 0.6), 'the sweep paper\'s grain: a bump of fine noise (0 off)'),
+    'tooth_mm': ('mm', (0.2, 3.0), 'the paper grain\'s size'),
+    'mottle': ('0 to 0.1', (0.0, 0.1), 'the sweep paper\'s colour drift, broad and in fibres (0 off)'),
+    'mottle_m': ('m', (0.05, 2.0), 'the broad drift\'s size'),
 }
 
 
