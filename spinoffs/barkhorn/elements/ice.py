@@ -87,4 +87,7 @@ def shot():
 
 
 def portrait():
-    return portrait_of(shot(), lens_mm=80)
+    # the same place and light, the camera re-framed for 4:5: the same eye height and line, a longer lens so the speaker
+    # stands as tall in the frame, aimed so the cabin's window stays in the left of the frame and the sky above
+    cam = camera(height=0.45, distance=8.0, azimuth=-14, lens=120, target=(-0.32, 0.0, 0.9), fstop=2.8)
+    return portrait_of(shot(), **cam)
