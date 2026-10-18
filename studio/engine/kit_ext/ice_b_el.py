@@ -158,9 +158,34 @@ def _sand_material(bpy, name, p, s):
                                 'To Min': 0.0, 'To Max': 1.0}, clamp=True).outputs['Result']
     damp = N('MapRange', inputs={'Value': height, 'From Min': p.get('damp_h', 0.16), 'From Max': p.get('wet_h', 0.05),
                                  'To Min': p.get('damp_base', 0.35), 'To Max': 1.0}, clamp=True).outputs['Result']
+    if 'reach' in p:
+        # the last wave's reach: soaked and mirror-like behind an irregular line across the beach (y' > reach), damp a
+        # little before it, a line of spent foam left along it
+        r0, rw = p['reach']
+        wob = N('TexNoise', inputs={'Vector': N('Mapping', inputs={'Vector': tc.outputs['Object'], 'Scale': (1.0, 0.2, 1.0)}).outputs[0],
+                                    'Scale': 0.7, 'Detail': 5.0, 'Roughness': 0.6})
+        wob2 = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 2.6, 'Detail': 6.0, 'Roughness': 0.65})
+        ry = N.math('ADD', sep.outputs['Y'], N.math('MULTIPLY', N.math('SUBTRACT', wob.outputs['Fac'], 0.5), p.get('reach_wobble', 1.8)))
+        ry = N.math('ADD', ry, N.math('MULTIPLY', N.math('SUBTRACT', wob2.outputs['Fac'], 0.5), 0.35))
+        rd = N.math('SUBTRACT', ry, r0)                                    # metres beyond the reach line (+ wet side)
+        rwet = N('MapRange', inputs={'Value': rd, 'From Min': 0.0, 'From Max': rw}, clamp=True).outputs['Result']
+        rdamp = N('MapRange', inputs={'Value': rd, 'From Min': -0.6, 'From Max': 0.0, 'To Min': 0.0, 'To Max': 1.0}, clamp=True).outputs['Result']
+        wet = N.math('MAXIMUM', wet, rwet)
+        damp = N.math('MAXIMUM', damp, rdamp)
+        fl = N('TexVoronoi', feature='DISTANCE_TO_EDGE', inputs={'Vector': tc.outputs['Object'], 'Scale': 40.0})
+        fl2 = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 9.0, 'Detail': 6.0})
+        band = N.math('SUBTRACT', 1.0, N.math('ABSOLUTE', N.math('DIVIDE', N.math('ADD', rd, 0.03), p.get('residue_w', 0.14))), clamp=True)
+        lace = N('MapRange', inputs={'Value': fl.outputs['Distance'], 'From Min': 0.08, 'From Max': 0.0}).outputs['Result']
+        lace = N.math('MULTIPLY', lace, N('MapRange', inputs={'Value': fl2.outputs['Fac'], 'From Min': 0.4, 'From Max': 0.6}).outputs['Result'])
+        gaps = N('MapRange', inputs={'Value': N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 1.5, 'Detail': 3.0}).outputs['Fac'],
+                                     'From Min': 0.42, 'From Max': 0.55}).outputs['Result']
+        residue = N.math('MULTIPLY', N.math('MULTIPLY', band, lace), N.math('MULTIPLY', gaps, p.get('residue', 0.9)), clamp=True)
+    else:
+        residue = 0.0
     darken = N('Mix', data_type='RGBA', blend_type='MULTIPLY',
                inputs={'Factor': N.math('MULTIPLY', damp, 0.75), 'A': ramp.outputs['Color'], 'B': (0.45, 0.45, 0.47, 1.0)})
-    N.link(darken.outputs[2], bs.inputs['Base Color'])
+    foamed = N('Mix', data_type='RGBA', inputs={'Factor': residue, 'A': darken.outputs[2], 'B': _hex('#C9CFCF')})
+    N.link(foamed.outputs[2], bs.inputs['Base Color'])
     rough_img = N('RGBToBW', inputs={'Color': img('rough', False)}).outputs[0]
     dry_r = N.math('ADD', N.math('MULTIPLY', rough_img, 0.2), p.get('dry_rough', 0.82))
     damp_r = N('MapRange', inputs={'Value': damp, 'From Min': 0.0, 'From Max': 1.0, 'To Min': 1.0, 'To Max': 0.45}).outputs['Result']
@@ -170,8 +195,9 @@ def _sand_material(bpy, name, p, s):
     glint = N('MapRange', inputs={'Value': gv.outputs['Color'], 'From Min': 1.0 - p.get('glint_share', 0.04), 'From Max': 1.0},
               clamp=True).outputs['Result']
     glint = N.math('CEIL', N.math('SUBTRACT', glint, 0.001))
-    r = N('Mix', data_type='FLOAT', inputs={'Factor': glint, 'A': r, 'B': 0.12}).outputs[0]
+    r = N('Mix', data_type='FLOAT', inputs={'Factor': glint, 'A': r, 'B': p.get('glint_rough', 0.25)}).outputs[0]
     r = N('Mix', data_type='FLOAT', inputs={'Factor': wet, 'A': r, 'B': p.get('wet_rough', 0.06)}).outputs[0]
+    r = N('Mix', data_type='FLOAT', inputs={'Factor': residue, 'A': r, 'B': 0.55}).outputs[0]
     N.link(r, bs.inputs['Roughness'])
     N.link(N('Mix', data_type='FLOAT', inputs={'Factor': glint, 'A': p.get('spec', 0.35), 'B': 0.8}).outputs[0],
            bs.inputs['Specular IOR Level'])
@@ -208,6 +234,50 @@ def beach(bpy, name, p, kit):
         return Z + relief * t * U * np.clip((Z - s['water_z'] - 0.03) / 0.15, 0, 1)
     ob = _grid_object(bpy, name, xs, ys, zfn, _sand_material(bpy, name + '-mat', p, s))
     return [ob]
+
+
+def _ocean(bpy, X, Y, oc):
+    """Blender's FFT ocean (Tessendorf) sampled at the grid's points: its displacement (dx, dy, dz) and foam, two
+    spectra of different sizes summed so neither one's tiling shows."""
+    me = bpy.data.meshes.new('ocean-probe')
+    pts = np.stack([X.ravel(), Y.ravel(), np.zeros(X.size)], 1).astype(np.float32)
+    ny, nx = X.shape
+    I, J = np.meshgrid(np.arange(nx - 1), np.arange(ny - 1)); a = (J * nx + I).ravel()
+    faces = np.stack([a, a + 1, a + nx + 1, a + nx], 1)
+    me.vertices.add(len(pts)); me.vertices.foreach_set('co', pts.ravel())
+    me.loops.add(faces.size); me.loops.foreach_set('vertex_index', faces.astype(np.int32).ravel())
+    me.polygons.add(len(faces)); me.polygons.foreach_set('loop_start', (np.arange(len(faces)) * 4).astype(np.int32))
+    me.polygons.foreach_set('loop_total', np.full(len(faces), 4, np.int32))
+    me.update(calc_edges=True)
+    ob = bpy.data.objects.new('ocean-probe', me); bpy.context.scene.collection.objects.link(ob)
+    for i, layer in enumerate(oc.get('layers', [{'size': 53.0, 'scale': 0.8, 'seed': 3}, {'size': 131.0, 'scale': 0.6, 'seed': 9}])):
+        m = ob.modifiers.new(f'ocean{i}', 'OCEAN')
+        m.geometry_mode = 'DISPLACE'; m.resolution = oc.get('resolution', 14); m.spatial_size = int(layer['size'])
+        m.wave_scale = layer['scale']; m.choppiness = layer.get('chop', 1.1); m.wind_velocity = layer.get('wind', 9.0)
+        m.wave_alignment = layer.get('align', 0.6); m.wave_direction = math.radians(layer.get('dir', -90.0))
+        m.random_seed = layer['seed']; m.time = layer.get('time', 7.0); m.damping = 0.4
+        if i == 0:
+            m.use_foam = True; m.foam_layer_name = 'foam'; m.foam_coverage = oc.get('foam_coverage', 0.35)
+    dg = bpy.context.evaluated_depsgraph_get(); e = ob.evaluated_get(dg); em = e.to_mesh()
+    co = np.zeros(len(pts) * 3, np.float32); em.vertices.foreach_get('co', co); co = co.reshape(-1, 3)
+    foam = np.zeros(len(pts), np.float32)
+    if 'foam' in em.attributes:
+        a = em.attributes['foam']
+        if a.domain == 'POINT' and a.data_type == 'FLOAT':
+            a.data.foreach_get('value', foam)
+        else:
+            tmp = np.zeros(len(a.data) * (4 if 'COLOR' in a.data_type else 1), np.float32)
+            a.data.foreach_get('color' if 'COLOR' in a.data_type else 'value', tmp)
+            vals = tmp[0::4] if 'COLOR' in a.data_type else tmp
+            if a.domain == 'CORNER':
+                vi = np.zeros(len(em.loops), np.int32); em.loops.foreach_get('vertex_index', vi)
+                np.maximum.at(foam, vi, vals)
+            else:
+                foam = vals[:len(pts)]
+    e.to_mesh_clear(); bpy.data.objects.remove(ob); bpy.data.meshes.remove(me)
+    d = co - pts
+    sh = X.shape
+    return d[:, 0].reshape(sh), d[:, 1].reshape(sh), d[:, 2].reshape(sh), foam.reshape(sh)
 
 
 def _sea_material(bpy, name, p, s):
@@ -261,12 +331,14 @@ def _waves(X, Y, s, p):
     dist = yy - (s['y0'] + (-s['water_z']) / s['slope'])                  # metres out from the still waterline
     Z = np.zeros_like(X); F = np.zeros_like(X)
     rx = random.Random(p.get('seed', 5))
-    for c, H, wf, wb, fa in p.get('crests', [[5.5, 0.10, 0.5, 2.2, 0.85], [13.0, 0.22, 0.9, 4.0, 0.7],
-                                               [27.0, 0.30, 1.4, 6.0, 0.45], [48.0, 0.30, 2.0, 9.0, 0.25]]):
+    for crest in p.get('crests', [[5.5, 0.10, 0.5, 2.2, 0.85], [13.0, 0.22, 0.9, 4.0, 0.7],
+                                   [27.0, 0.30, 1.4, 6.0, 0.45], [48.0, 0.30, 2.0, 9.0, 0.25]]):
+        c, H, wf, wb, fa = crest[:5]
+        skew = crest[5] if len(crest) > 5 else 0.0                       # a crest running at an angle to the shore
         o = rx.uniform(-100, 100)
         along = np.vectorize(lambda x: noise.noise(Vector((x * 0.07 + o, o, 0.5))) + 0.6 * noise.noise(Vector((x * 0.31 + o, 2 * o, 0.5))))(X[0])[None, :]
-        h = H * np.clip(0.75 + 0.9 * along, 0.2, 1.6)
-        d = dist - c - 1.2 * along
+        h = H * np.clip(0.65 + p.get('break', 1.2) * along, 0.1, 1.8)
+        d = dist - c - 1.2 * along - skew * X
         w = np.where(d < 0, wf, wb)
         Z += h * np.exp(-(d / w) ** 2)
         # whitewater: on the crest's front and spilling down its back, broken along the shore
@@ -274,6 +346,50 @@ def _waves(X, Y, s, p):
         F = np.maximum(F, fa * f)
     near = np.clip((dist + 0.1) / 1.5, 0, 1)                              # the water lies flat where it meets the sand
     return Z * near, F * near
+
+
+def _ocean(bpy, X, Y, oc):
+    """Blender's FFT ocean (Tessendorf) sampled at the grid's points: its displacement (dx, dy, dz) and foam, two
+    spectra of different sizes summed so neither one's tiling shows."""
+    me = bpy.data.meshes.new('ocean-probe')
+    pts = np.stack([X.ravel(), Y.ravel(), np.zeros(X.size)], 1).astype(np.float32)
+    ny, nx = X.shape
+    I, J = np.meshgrid(np.arange(nx - 1), np.arange(ny - 1)); a = (J * nx + I).ravel()
+    faces = np.stack([a, a + 1, a + nx + 1, a + nx], 1)
+    me.vertices.add(len(pts)); me.vertices.foreach_set('co', pts.ravel())
+    me.loops.add(faces.size); me.loops.foreach_set('vertex_index', faces.astype(np.int32).ravel())
+    me.polygons.add(len(faces)); me.polygons.foreach_set('loop_start', (np.arange(len(faces)) * 4).astype(np.int32))
+    me.polygons.foreach_set('loop_total', np.full(len(faces), 4, np.int32))
+    me.update(calc_edges=True)
+    ob = bpy.data.objects.new('ocean-probe', me); bpy.context.scene.collection.objects.link(ob)
+    for i, layer in enumerate(oc.get('layers', [{'size': 53.0, 'scale': 0.8, 'seed': 3}, {'size': 131.0, 'scale': 0.6, 'seed': 9}])):
+        m = ob.modifiers.new(f'ocean{i}', 'OCEAN')
+        m.geometry_mode = 'DISPLACE'; m.resolution = oc.get('resolution', 14); m.spatial_size = int(layer['size'])
+        m.wave_scale = layer['scale']; m.choppiness = layer.get('chop', 1.1); m.wind_velocity = layer.get('wind', 9.0)
+        m.wave_alignment = layer.get('align', 0.6); m.wave_direction = math.radians(layer.get('dir', -90.0))
+        m.random_seed = layer['seed']; m.time = layer.get('time', 7.0); m.damping = 0.4
+        if i == 0:
+            m.use_foam = True; m.foam_layer_name = 'foam'; m.foam_coverage = oc.get('foam_coverage', 0.35)
+    dg = bpy.context.evaluated_depsgraph_get(); e = ob.evaluated_get(dg); em = e.to_mesh()
+    co = np.zeros(len(pts) * 3, np.float32); em.vertices.foreach_get('co', co); co = co.reshape(-1, 3)
+    foam = np.zeros(len(pts), np.float32)
+    if 'foam' in em.attributes:
+        a = em.attributes['foam']
+        if a.domain == 'POINT' and a.data_type == 'FLOAT':
+            a.data.foreach_get('value', foam)
+        else:
+            tmp = np.zeros(len(a.data) * (4 if 'COLOR' in a.data_type else 1), np.float32)
+            a.data.foreach_get('color' if 'COLOR' in a.data_type else 'value', tmp)
+            vals = tmp[0::4] if 'COLOR' in a.data_type else tmp
+            if a.domain == 'CORNER':
+                vi = np.zeros(len(em.loops), np.int32); em.loops.foreach_get('vertex_index', vi)
+                np.maximum.at(foam, vi, vals)
+            else:
+                foam = vals[:len(pts)]
+    e.to_mesh_clear(); bpy.data.objects.remove(ob); bpy.data.meshes.remove(me)
+    d = co - pts
+    sh = X.shape
+    return d[:, 0].reshape(sh), d[:, 1].reshape(sh), d[:, 2].reshape(sh), foam.reshape(sh)
 
 
 def _sea_material(bpy, name, p, s):
@@ -333,6 +449,14 @@ def sea(bpy, name, p, kit):
     ys = _axis(y0, y1, y0, 14.0, p.get('cell', 0.04), 1.05)
     X, Y = np.meshgrid(xs, ys)
     Z, F = _waves(X, Y, s, p)
+    oc = p.get('ocean')
+    if oc:
+        DX, DY, DZ, OF = _ocean(bpy, X, Y, oc)
+        yy = Y + s['wiggle'] * np.sin(X * s['freq'] + s['phase'])
+        dist = yy - (s['y0'] + (-s['water_z']) / s['slope'])
+        k = np.clip((dist + 0.2) / oc.get('shoal_m', 6.0), 0, 1) ** 1.5      # the sea calms as it shoals onto the beach
+        X = X + DX * k; Y = Y + DY * k; Z = Z + DZ * k
+        F = np.maximum(F, np.clip(OF * oc.get('foam_gain', 1.0), 0, 1) * k)
     Z = Z + s['water_z']
     nx, ny = len(xs), len(ys)
     top = np.stack([X.ravel(), Y.ravel(), Z.ravel()], 1)
