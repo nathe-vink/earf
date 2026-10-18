@@ -193,3 +193,14 @@ What I did:
 - (Before pass 7: the warm scattering tint #FFF6EC turned the whole cloud sea brown, because the tint compounds at
   every scattering event, and haze at 2.4e-4 greyed the sky. Both reverted, to white and 1.4e-4, before the critic
   saw the frame.)
+
+### Pass 7: 5.0 ("iterate"; 7.2 if fixed). Stop.
+
+The frame was r7: the sun on the speaker's front from the camera's left, `qwantani_late_afternoon_puresky`. The critic:
+calm but flat and grey. The sky is a neutral grey wash, the speaker is evenly lit with no sun modelling, there is no
+contact or cast shadow in frame, the rock is soft up close, and the birds are specks.
+
+**The stopping rule** (the coordinator's, from 08:20): after a concept change, stop when two passes in a row gain under
+0.5. Pass 6 gained 0 and pass 7 lost 0.5, so I stopped here.
+
+Scores, pass by pass: 5.0, 5.5, 5.5 (then the concept change), 5.0, 5.5, 5.5, 5.0.
