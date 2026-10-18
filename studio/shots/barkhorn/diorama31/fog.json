@@ -10,7 +10,7 @@
      0.0,
      0.0
     ],
-    "rotate_z": -14.0,
+    "rotate_z": -6.0,
     "hide": [
      "cloth-disc"
     ]
@@ -19,601 +19,644 @@
  },
  "set": {
   "kind": "sweep",
-  "color": "#C5CFD7",
-  "width": 14.0,
-  "front": 9.0,
-  "depth": 2.7,
-  "radius": 1.2,
-  "height": 6.0,
-  "kit_scale": 11.0,
+  "color": "#98A8B9",
+  "width": 16.0,
+  "front": 10.0,
+  "depth": 2.6,
+  "radius": 0.5,
+  "height": 7.0,
+  "kit_scale": 12.0,
   "props": [
    {
     "kind": "kit",
-    "shape": "sphere",
-    "material": "felt",
-    "color": "#CBD3D8",
+    "shape": "cylinder",
+    "material": "tissue",
+    "color": "#FFE4CC",
+    "radius": 0.58,
+    "height": 0.01,
     "position": [
-     -2.1,
-     1.7,
-     -0.25
-    ],
-    "scale": [
-     1.7,
-     0.9,
-     0.8
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "felt",
-    "color": "#D3D9DD",
-    "position": [
-     1.9,
-     2.0,
-     -0.3
-    ],
-    "scale": [
-     2.0,
-     1.0,
-     0.9
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "felt",
-    "color": "#C3CCD2",
-    "position": [
-     0.1,
      2.45,
-     -0.45
+     2.5500000000000003,
+     0.42
     ],
-    "scale": [
-     2.6,
-     0.7,
-     1.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "puffs",
-    "material": "felt",
-    "color": "#F3F4F4",
-    "puffs": [
-     [
-      -0.2506,
-      -0.112,
-      0.161
-     ],
-     [
-      -0.0266,
-      0.0308,
-      0.2422
-     ],
-     [
-      0.2506,
-      -0.0896,
-      0.1834
-     ]
-    ],
-    "depth": 0.55,
-    "position": [
-     -1.15,
-     0.55,
-     2.2
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E9E6DF",
-    "a": [
-     -1.30036,
-     0.55,
-     2.23612
-    ],
-    "b": [
-     -1.30036,
-     0.55,
-     4.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E9E6DF",
-    "a": [
-     -0.9996399999999999,
-     0.55,
-     2.2791280000000005
-    ],
-    "b": [
-     -0.9996399999999999,
-     0.55,
-     4.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "puffs",
-    "material": "felt",
-    "color": "#F3F4F4",
-    "puffs": [
-     [
-      -0.3043,
-      -0.136,
-      0.1955
-     ],
-     [
-      -0.0323,
-      0.0374,
-      0.2941
-     ],
-     [
-      0.3043,
-      -0.1088,
-      0.2227
-     ]
-    ],
-    "depth": 0.55,
-    "position": [
-     1.0,
-     1.15,
-     2.65
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E9E6DF",
-    "a": [
-     0.81742,
-     1.15,
-     2.69386
-    ],
-    "b": [
-     0.81742,
-     1.15,
-     4.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E9E6DF",
-    "a": [
-     1.18258,
-     1.15,
-     2.7460839999999997
-    ],
-    "b": [
-     1.18258,
-     1.15,
-     4.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "puffs",
-    "material": "felt",
-    "color": "#ECEEEF",
-    "puffs": [
-     [
-      -0.2148,
-      -0.096,
-      0.138
-     ],
-     [
-      -0.0228,
-      0.0264,
-      0.2076
-     ],
-     [
-      0.2148,
-      -0.0768,
-      0.1572
-     ]
-    ],
-    "depth": 0.55,
-    "position": [
-     -0.15,
-     1.9,
-     3.15
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E9E6DF",
-    "a": [
-     -0.27888,
-     1.9,
-     3.18096
-    ],
-    "b": [
-     -0.27888,
-     1.9,
-     4.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E9E6DF",
-    "a": [
-     -0.02112,
-     1.9,
-     3.217824
-    ],
-    "b": [
-     -0.02112,
-     1.9,
-     4.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "puffs",
-    "material": "felt",
-    "color": "#F3F4F4",
-    "puffs": [
-     [
-      -0.1701,
-      -0.076,
-      0.1092
-     ],
-     [
-      -0.0181,
-      0.0209,
-      0.1643
-     ],
-     [
-      0.1701,
-      -0.0608,
-      0.1245
-     ]
-    ],
-    "depth": 0.55,
-    "position": [
-     1.85,
-     0.2,
-     1.85
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E9E6DF",
-    "a": [
-     1.74794,
-     0.2,
-     1.8744640000000001
-    ],
-    "b": [
-     1.74794,
-     0.2,
-     4.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "thread",
-    "material": "paper",
-    "color": "#E9E6DF",
-    "a": [
-     1.9520600000000001,
-     0.2,
-     1.9037400000000002
-    ],
-    "b": [
-     1.9520600000000001,
-     0.2,
-     4.6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "puffs",
-    "material": "cotton",
-    "color": "#FAFAF7",
-    "puffs": [
-     [
-      -1.7,
-      0.0099,
-      0.0743
-     ],
-     [
-      -1.5467,
-      0.047,
-      0.0952
-     ],
-     [
-      -1.3933,
-      0.0468,
-      0.1292
-     ],
-     [
-      -1.24,
-      0.0609,
-      0.164
-     ],
-     [
-      -1.0867,
-      0.0427,
-      0.1444
-     ],
-     [
-      -0.9333,
-      0.0724,
-      0.1614
-     ],
-     [
-      -0.78,
-      0.0653,
-      0.1332
-     ],
-     [
-      -0.6267,
-      0.0448,
-      0.1384
-     ],
-     [
-      -0.4733,
-      0.0256,
-      0.1132
-     ],
-     [
-      -0.32,
-      0.0406,
-      0.06
-     ]
-    ],
-    "depth": 0.8,
-    "position": [
+    "rotate": [
+     90,
      0,
-     -0.38,
+     0
+    ],
+    "emit": 3.0,
+    "segments": 96
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "felt",
+    "color": "#F5F5F3",
+    "module": "fog",
+    "fn": "plush",
+    "size": 0.00105,
+    "stitch": "#DADDE0",
+    "position": [
+     -0.89,
+     0.6,
+     1.43
+    ],
+    "rotate": [
+     0,
+     0,
+     10
+    ],
+    "fuzz": 30000,
+    "fibre": 0.005
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#A8A39A",
+    "a": [
+     -1.066822232053342,
+     0.5688214696999027,
+     1.46675
+    ],
+    "b": [
+     -1.066822232053342,
+     0.5688214696999027,
+     5.5
+    ],
+    "radius": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#A8A39A",
+    "a": [
+     -0.696632997696053,
+     0.6340958196849017,
+     1.5003499999999999
+    ],
+    "b": [
+     -0.696632997696053,
+     0.6340958196849017,
+     5.5
+    ],
+    "radius": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "card",
+    "color": "#D8BC94",
+    "module": "fog",
+    "fn": "ladder",
+    "a": [
+     -0.6,
+     0.78,
+     -0.02
+    ],
+    "b": [
+     -0.78,
+     0.66,
+     1.24
+    ],
+    "width": 0.15,
+    "step": 0.1,
+    "strip": 0.013,
+    "across": [
+     1,
+     0.3,
      0
     ]
    },
    {
     "kind": "kit",
-    "shape": "puffs",
+    "shape": "ext",
+    "material": "felt",
+    "color": "#F5F5F3",
+    "module": "fog",
+    "fn": "plush",
+    "size": 0.0014,
+    "stitch": "#DADDE0",
+    "position": [
+     2.23,
+     1.26,
+     1.45
+    ],
+    "rotate": [
+     0,
+     0,
+     -6
+    ],
+    "fuzz": 0,
+    "fibre": 0.005
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#A8A39A",
+    "a": [
+     1.9919114582488353,
+     1.2850241141062761,
+     1.4989999999999999
+    ],
+    "b": [
+     1.9919114582488353,
+     1.2850241141062761,
+     5.5
+    ],
+    "radius": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#A8A39A",
+    "a": [
+     2.490365832207414,
+     1.2326344483165284,
+     1.5438
+    ],
+    "b": [
+     2.490365832207414,
+     1.2326344483165284,
+     5.5
+    ],
+    "radius": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "felt",
+    "color": "#F5F5F3",
+    "module": "fog",
+    "fn": "plush",
+    "size": 0.0008,
+    "stitch": "#DADDE0",
+    "position": [
+     1.1,
+     1.65,
+     1.62
+    ],
+    "rotate": [
+     0,
+     0,
+     4
+    ],
+    "fuzz": 0,
+    "fibre": 0.005
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#A8A39A",
+    "a": [
+     0.9635332379244561,
+     1.6404573143918035,
+     1.6480000000000001
+    ],
+    "b": [
+     0.9635332379244561,
+     1.6404573143918035,
+     5.5
+    ],
+    "radius": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "thread",
+    "material": "paper",
+    "color": "#A8A39A",
+    "a": [
+     1.2492355819188699,
+     1.660435568472121,
+     1.6736000000000002
+    ],
+    "b": [
+     1.2492355819188699,
+     1.660435568472121,
+     5.5
+    ],
+    "radius": 0.002
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
     "material": "cotton",
-    "color": "#FAFAF7",
+    "color": "#FBFBFA",
+    "module": "fog",
+    "fn": "wool",
     "puffs": [
      [
-      0.3,
-      0.0462,
-      0.087
+      -0.62,
+      -0.3,
+      0.08,
+      0.3
      ],
      [
-      0.5,
-      0.0263,
-      0.1097
+      -0.3,
+      -0.48,
+      0.04,
+      0.16
      ],
      [
-      0.7,
-      0.0711,
-      0.1705
+      -0.98,
+      -0.05,
+      0.06,
+      0.24
      ],
      [
-      0.9,
-      0.0736,
-      0.1769
+      -0.75,
+      0.32,
+      0.05,
+      0.2
      ],
      [
+      -1.2,
+      -0.35,
+      0.04,
+      0.16
+     ],
+     [
+      -0.45,
+      -0.62,
+      0.02,
+      0.1
+     ],
+     [
+      0.42,
+      -0.42,
+      0.02,
+      0.1
+     ],
+     [
+      0.66,
+      -0.18,
+      0.03,
+      0.14
+     ],
+     [
+      0.6,
+      0.35,
+      0.05,
+      0.2
+     ],
+     [
+      0.1,
+      0.48,
+      0.05,
+      0.22
+     ]
+    ],
+    "fuzz": 0,
+    "fibre": 0.03,
+    "tear": 0.5,
+    "squash": 0.55,
+    "seed": 1
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#FBFBFA",
+    "module": "fog",
+    "fn": "wool",
+    "puffs": [
+     [
+      -1.9,
       1.1,
-      0.0742,
-      0.2003
+      0.05,
+      0.3
      ],
      [
+      -1.55,
       1.3,
-      0.0701,
-      0.1698
+      0.04,
+      0.22
      ],
      [
-      1.5,
-      0.0549,
-      0.1563
-     ],
+      -2.25,
+      0.9,
+      0.04,
+      0.2
+     ]
+    ],
+    "fuzz": 0,
+    "fibre": 0.03,
+    "tear": 0.45,
+    "squash": 0.55,
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#FBFBFA",
+    "module": "fog",
+    "fn": "wool",
+    "puffs": [
      [
-      1.7,
-      0.053,
-      0.1384
+      1.55,
+      0.95,
+      0.05,
+      0.26
      ],
      [
       1.9,
-      0.046,
-      0.0789
-     ]
-    ],
-    "depth": 0.8,
-    "position": [
-     0,
-     0.5,
-     0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "puffs",
-    "material": "cotton",
-    "color": "#FAFAF7",
-    "puffs": [
-     [
-      0.45,
-      0.007,
-      0.0493
-     ],
-     [
-      0.55,
-      0.0203,
-      0.073
-     ],
-     [
-      0.65,
-      0.0374,
-      0.0801
-     ],
-     [
-      0.75,
-      0.0174,
-      0.1117
-     ],
-     [
-      0.85,
-      0.0289,
-      0.0999
-     ],
-     [
-      0.95,
-      0.0567,
-      0.102
-     ],
-     [
-      1.05,
-      0.0458,
-      0.0896
-     ],
-     [
       1.15,
-      0.0311,
-      0.0648
+      0.04,
+      0.22
      ],
      [
       1.25,
-      0.0229,
-      0.0534
+      1.2,
+      0.04,
+      0.16
      ]
     ],
-    "depth": 0.8,
-    "position": [
-     0,
-     -0.7,
-     0
-    ]
+    "fuzz": 0,
+    "fibre": 0.03,
+    "tear": 0.45,
+    "squash": 0.55,
+    "seed": 5
    },
    {
     "kind": "kit",
-    "shape": "puffs",
+    "shape": "ext",
     "material": "cotton",
-    "color": "#FAFAF7",
+    "color": "#FBFBFA",
+    "module": "fog",
+    "fn": "wool",
     "puffs": [
      [
-      -2.4,
-      0.0209,
-      0.0788
+      3.2,
+      2.2,
+      0.06,
+      0.42
      ],
      [
-      -2.1857,
-      0.0471,
-      0.1301
+      2.6,
+      2.3,
+      0.06,
+      0.44
      ],
      [
-      -1.9714,
-      0.0497,
-      0.1821
+      2.0,
+      2.2,
+      0.05,
+      0.36
      ],
      [
-      -1.7571,
-      0.0926,
-      0.2276
+      1.4,
+      2.3,
+      0.05,
+      0.34
      ],
      [
-      -1.5429,
-      0.0865,
-      0.1963
+      0.7,
+      2.2,
+      0.05,
+      0.3
      ],
      [
-      -1.3286,
-      0.0685,
-      0.1761
+      0.0,
+      2.3,
+      0.05,
+      0.36
      ],
      [
-      -1.1143,
-      0.0381,
-      0.1283
+      -0.7,
+      2.25,
+      0.05,
+      0.32
      ],
      [
-      -0.9,
-      0.0201,
-      0.0974
+      -1.4,
+      2.3,
+      0.05,
+      0.38
+     ],
+     [
+      -2.1,
+      2.2,
+      0.05,
+      0.34
+     ],
+     [
+      -2.8,
+      2.3,
+      0.05,
+      0.4
+     ],
+     [
+      -3.5,
+      2.2,
+      0.05,
+      0.36
+     ],
+     [
+      -4.2,
+      2.3,
+      0.05,
+      0.4
      ]
     ],
-    "depth": 0.8,
+    "fuzz": 0,
+    "fibre": 0.03,
+    "tear": 0.4,
+    "squash": 0.55,
+    "seed": 2
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#FBFBFA",
+    "module": "fog",
+    "fn": "wool",
+    "puffs": [
+     [
+      -1.55,
+      -0.95,
+      0.06,
+      0.3
+     ],
+     [
+      -1.2,
+      -1.15,
+      0.05,
+      0.22
+     ],
+     [
+      -1.85,
+      -0.7,
+      0.05,
+      0.2
+     ],
+     [
+      0.75,
+      -1.25,
+      0.05,
+      0.24
+     ],
+     [
+      1.1,
+      -1.1,
+      0.06,
+      0.3
+     ],
+     [
+      1.45,
+      -0.85,
+      0.05,
+      0.22
+     ],
+     [
+      1.9,
+      -0.6,
+      0.06,
+      0.28
+     ],
+     [
+      2.2,
+      -0.25,
+      0.05,
+      0.22
+     ]
+    ],
+    "fuzz": 0,
+    "fibre": 0.03,
+    "tear": 0.4,
+    "squash": 0.55,
+    "seed": 3
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "cotton",
+    "color": "#FFFFFF",
+    "module": "fog",
+    "fn": "mist",
+    "box": [
+     -5.0,
+     -1.2,
+     0.0,
+     5.0,
+     2.58,
+     0.56
+    ],
+    "height": 0.44,
+    "density": 2.6,
+    "billow": 0.5,
+    "clump": 0.85,
+    "step": 3.0
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "felt",
+    "color": "#DCE2E8",
+    "size": [
+     12.0,
+     6.4,
+     0.012
+    ],
     "position": [
-     0,
-     1.0,
-     0
+     0.0,
+     -1.0,
+     0.0
     ]
    }
   ]
  },
  "lights": {
-  "key": {
+  "dawn": {
    "type": "area",
    "size_m": [
     2.6,
-    2.0
+    1.6
    ],
-   "orbit": {
-    "azimuth_deg": -38,
-    "elevation_deg": 38,
-    "distance_m": 5.5
-   },
+   "position": [
+    2.2,
+    2.2,
+    1.5
+   ],
    "target": [
     0.0,
-    0.3,
-    1.0
+    0.1,
+    0.7
    ],
    "irradiance": 3.2,
-   "color": "#FFF2E2"
+   "color": "#FFD8B8",
+   "receivers": [
+    "[!sz]*",
+    "s[!w]*"
+   ]
   },
-  "fill": {
+  "dawnfog": {
    "type": "area",
    "size_m": [
     3.0,
     2.0
    ],
+   "position": [
+    2.2,
+    2.2,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.1,
+    0.3
+   ],
+   "irradiance": 1.4,
+   "color": "#FFDCC4",
+   "receivers": [
+    "zz*"
+   ]
+  },
+  "glow": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    1.0
+   ],
+   "position": [
+    2.0,
+    0.6,
+    0.55
+   ],
+   "target": [
+    2.2,
+    2.6,
+    0.5
+   ],
+   "power_w": 160,
+   "color": "#FFDCC4",
+   "receivers": [
+    "sweep"
+   ]
+  },
+  "sky": {
+   "type": "area",
+   "size_m": [
+    5.0,
+    5.0
+   ],
    "orbit": {
-    "azimuth_deg": 48,
-    "elevation_deg": 14,
+    "azimuth_deg": -35,
+    "elevation_deg": 50,
     "distance_m": 6.0
    },
    "target": [
     0.0,
-    0.3,
-    0.9
-   ],
-   "irradiance": 0.9,
-   "color": "#EAF0FF"
-  },
-  "rim": {
-   "type": "area",
-   "size_m": [
-    2.0,
-    1.0
-   ],
-   "orbit": {
-    "azimuth_deg": 165,
-    "elevation_deg": 30,
-    "distance_m": 4.5
-   },
-   "target": [
     0.0,
-    0.5,
-    1.6
+    0.8
    ],
-   "irradiance": 1.4,
-   "color": "#FFF2E2"
+   "irradiance": 4.2,
+   "color": "#F4F4F3"
   }
  },
  "render": {
@@ -623,43 +666,43 @@
   "clamp": 6,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.0,
+  "exposure": 0.3,
   "white_balance_k": 5600,
   "white_balance_tint": 3.0
  },
- "title": "barkhorn, Fog, under felt clouds",
+ "title": "barkhorn, Fog, above the fog",
  "size": [
   2400,
   1600
  ],
  "camera": {
   "position": [
-   -1.9629,
-   -5.949,
-   3.4472
+   -2.5608,
+   -6.7801,
+   2.9451
   ],
   "target": [
-   0.1,
-   0.4,
-   0.75
+   0.32,
+   0.35,
+   0.74
   ],
-  "lens_mm": 60,
+  "lens_mm": 70,
   "level": false,
-  "fstop": 2.8,
-  "miniature": 11.0,
+  "fstop": 11,
+  "miniature": 11,
   "focus": [
    0.0,
-   -0.2,
-   0.7
+   0.05,
+   0.75
   ],
   "blades": 0
  },
  "sky": {
   "kind": "gradient",
   "zenith": "#DDE4EA",
-  "horizon": "#E4E8EC",
-  "ground": "#9AA3AA",
-  "strength": 0.6
+  "horizon": "#E8E8EA",
+  "ground": "#B9C2CA",
+  "strength": 0.5
  },
  "finish": {
   "enabled": true,
@@ -670,13 +713,13 @@
   "sharpen": 0.3,
   "sharpen_px": 0.7,
   "dream": {
-   "bloom": 0.15,
+   "bloom": 0.22,
    "bloom_px": 40,
    "bloom_threshold": 0.78,
-   "saturation": 0.08,
-   "lift": 0.03,
-   "lift_color": "#9FB0C0",
-   "vignette": 0.12
+   "saturation": 0.1,
+   "lift": 0.04,
+   "lift_color": "#A8B6C4",
+   "vignette": 0.18
   }
  }
 }
