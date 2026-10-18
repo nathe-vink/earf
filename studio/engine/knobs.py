@@ -95,6 +95,7 @@ KNOBS = [
     ('lights.*.orbit.elevation_deg', 'deg', (-30, 90), 'see orbit'),
     ('lights.*.orbit.distance_m', 'm', (0.2, 20), 'see orbit'),
     ('lights.*.target', 'm [x, y, z]', None, 'the point the lamp faces (default the product\'s centre)'),
+    ('lights.*.volume', 'true/false', None, 'false: the lamp does not show in haze or mist (a bounce or backlight off camera that would draw its shape in the fog); absent, as before'),
     ('lights.*.receivers', '[part names, * wildcards]', None, 'light linking: the lamp lights only these parts (a kick for a face that must not light the floor beside it); absent, it lights everything'),
     ('lights.*.density', '0 to 1', (0.0, 1.0), 'a flag\'s density: 1 a solid flag, 0.4 a net that lets 60 % of the light through'),
     ('lights.*.lights', '[lamp names]', None, 'a flag that shades only these lamps (every other lamp sees through it); absent, it shades them all'),

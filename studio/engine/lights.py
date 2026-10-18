@@ -264,6 +264,8 @@ def lamp_shares(bpy, ob, spec):
     full strength: a fill at specular 0.1 mirrored at its whole radiance (03's waveguide band), a lamp at specular 0 laid a
     pale plate across 08b's bowl, and every glint lamp lit its part as well as glinting on it. Returns the twins' names
     (in ob['engine_twins']); the default since 2026-10-10 04:00 (EARMILK_LAMP_SHARES=0 keeps the old rendering)."""
+    if spec.get('volume') is False:                      # a lamp the haze does not show (a bounce off camera)
+        ob.visible_volume_scatter = False
     if os.environ.get('EARMILK_LAMP_SHARES', '1') != '1':
         return []
     d, s = _share(spec.get('diffuse', 1.0)), _share(spec.get('specular', 1.0))
