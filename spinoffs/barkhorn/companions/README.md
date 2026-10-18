@@ -153,22 +153,52 @@ shade ($139, with a tenth of a $900 buck, spread over a first run of ten).
 
 ## The renders
 
-Every frame comes from the engine, on the look book's sweep in its colour (lookbook21's key, fill and wash), with
-the same tinted-acrylic material as the cabinets: clear cast resin absorbing toward the colour after 25 mm.
+The look book's frames come from the engine on the look book's sweep in each colour (lookbook21's key, fill and
+wash), with the cabinets' own tinted-acrylic material: clear cast resin absorbing toward the colour after 25 mm.
 
 - `look-turntable-<colour>.png` and `look-lamp-<colour>.png`: each product in each of the eight colours, the lamp lit
-  (strip strength 88, raised four times after the critic said the hero's lamp read as off). On a bright studio sweep
-  a lit lamp shows as its glowing sleeve, as real lamps photographed on a lit set do; the hero shows it carrying a
-  dim room. `look-*-sheet.png` shows the eight together.
-- `hero-turntable.png`: Cumulus, a record on it, on a walnut sideboard beside an Ember Cloud.
-  `hero-lamp.png`: Bell, lit, beside a Haze Cloud, the studio turned down.
-- **The critic** (`critic/PROMPT.md`, fresh context, `critic/cards/companions.yaml`) judged both heroes: 4.5 each
-  blind. Its first round is applied to both (`critic/LOG.md` here; replies in `critic/rounds/2026-10-18/`). On
-  Cumulus its camera changes cropped the speaker and left the record player as small, so I reframed it: the sideboard
-  forward, the speaker back, a close 35 mm view. A second round is not run yet; the lamp hero's wall glow is broad
-  and orange, and both heroes' record player and lamp could still be larger in frame.
-- `detail-turntable.png`: the motor's pod in its ring, the belt to the rim (Ice).
-  `detail-lamp.png`: from under the rim, the opal sleeve lit, the collar and cap (Acid).
+  (strip strength 88). On a bright studio sweep a lit lamp shows as its glowing sleeve, as real lamps photographed on
+  a lit set do. `look-*-sheet.png` shows the eight together. Cumulus wears the black 2M Black in all eight.
+- `detail-turntable.png`: the motor's pod in its ring, the belt to the rim (Ice). `detail-lamp.png`: from under the
+  rim, the opal sleeve lit, the collar and cap (Acid).
+
+**The heroes (round 31b).** The lead and the owner asked for campaign images for a $20,000 line: the companion the
+subject, the speaker as context, a real setting with texture, Bell switched on. Both are now in one room at dusk:
+oak boards, a Poly Haven plaster wall (beige_wall_001, 4k), a window at the left with the dusk sky outside, and Poly
+Haven's scanned walnut cabinet (modern_wooden_cabinet, 4k) under the companion. Cumulus has Bell lit beside it.
+Bell's light is three small lamps just outside its opal sleeve (an emitting strip that thin is all noise), hidden from
+the camera and from reflections; `studio/engine/lights.py` gained that switch for point lamps.
+
+They were judged by `critic/PROMPT-promo.md`, each pass a fresh blind critic given only the image, a short card
+(`promo.py stage`), `critic/measure.py` and the prompt's text. Every pass's changes were applied unless they would put
+the speaker inside the wall or change the product; `critic/LOG.md` here has every pass, and the replies are in
+`critic/rounds/2026-10-18/promo-*.json`. The coordinator's stopping rule replaced 8.5 (no session reached it): stop
+after two passes in a row gaining under half a point, then duel the best two blind.
+
+| hero | passes (blind scores) | final | the duel |
+|---|---|---|---|
+| Cumulus | 5.0 (morning sun), 5.5, 5.5, 5.5 | `hero-turntable.png` (pass 3) | pass 3 beat pass 4, 6.0 to 5.0 |
+| Bell | 5.0, 5.5, 5.5, 6.0, LAMP_P5 | `hero-lamp.png` (LAMP_FINAL) | LAMP_DUEL |
+
+Honestly: neither is at the bar the owner set. The critics' last notes, for whoever takes them on: the wall still
+outshines Cumulus and the grade is one warm red; the lower plinth crushes; the record reads as smoked glass (a vinyl
+groove material would help); and the speaker beside each companion is either cropped to a coloured block or out of the
+frame. The room is a box with one window; a deeper room (a corner, a second wall receding) is the next step.
+
+**Final paths for the site** (`renders/2026-10-18/barkhorn/companions/`):
+
+| colour | record player | lamp |
+|---|---|---|
+| Ember | `look-turntable-ember.png` | `look-lamp-ember.png` |
+| Dust | `look-turntable-dust.png` | `look-lamp-dust.png` |
+| Acid | `look-turntable-acid.png` | `look-lamp-acid.png` |
+| Poison | `look-turntable-poison.png` | `look-lamp-poison.png` |
+| Ice | `look-turntable-ice.png` | `look-lamp-ice.png` |
+| Haze | `look-turntable-haze.png` | `look-lamp-haze.png` |
+| Fog | `look-turntable-fog.png` | `look-lamp-fog.png` |
+| Smoke | `look-turntable-smoke.png` | `look-lamp-smoke.png` |
+| heroes | `hero-turntable.png` (Ember) | `hero-lamp.png` (Haze) |
+| details | `detail-turntable.png` (Ice) | `detail-lamp.png` (Acid) |
 
 The renderer's Python: the bpy wheel (5.0.1) is built for Python 3.11, and this container's `python3` is 3.13, so I
 ran the renders with `python3.11` (`PY=python3.11 render_all.sh`). `studio/setup.sh` pins `bpy==5.0.1` on the
