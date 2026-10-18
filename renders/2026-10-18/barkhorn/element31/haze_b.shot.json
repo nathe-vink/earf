@@ -1,0 +1,514 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-violet",
+  "instances": [
+   {
+    "flavour": "cloud-violet",
+    "position": [
+     0.0,
+     0.0,
+     -0.008
+    ],
+    "rotate_z": 10.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "ridge",
+    "texture": "withered_grass",
+    "res": "4k",
+    "displace": 0.025,
+    "tint": "#5E4E48",
+    "tint_mix": 0.35,
+    "value": 0.5,
+    "area": [
+     -10.0,
+     -13.0,
+     9.0,
+     7.0
+    ],
+    "cell": 0.02,
+    "crest_y": 1.4,
+    "drop": 5.0,
+    "relief": 0.1,
+    "flat_r": 0.8,
+    "slope_front": 0.02
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "hills",
+    "layers": [
+     {
+      "d": 25.0,
+      "crest": -1.202,
+      "amp": 0.9,
+      "front": 8.0,
+      "back": 5.0,
+      "height": 3.5000000000000004,
+      "half_width": 21.7,
+      "x": 6.85,
+      "seed": 2.3,
+      "feature": 10.5,
+      "fuzz": 0.0,
+      "fuzz_feature": 1.0,
+      "nx": 700,
+      "ny": 70,
+      "texture": "withered_grass",
+      "tex_scale": 0.4,
+      "tint": "#5A4C44",
+      "tint_mix": 0.5,
+      "folds": 0.35,
+      "value": 0.4
+     },
+     {
+      "d": 50.0,
+      "crest": -1.41,
+      "amp": 1.6,
+      "front": 16.0,
+      "back": 10.0,
+      "height": 7.000000000000001,
+      "half_width": 37.2,
+      "x": 13.6,
+      "seed": 4.0,
+      "feature": 18.0,
+      "fuzz": 0.0,
+      "fuzz_feature": 1.5,
+      "nx": 700,
+      "ny": 70
+     },
+     {
+      "d": 90.0,
+      "crest": -1.444,
+      "amp": 2.6,
+      "front": 28.8,
+      "back": 18.0,
+      "height": 12.600000000000001,
+      "half_width": 62.0,
+      "x": 24.4,
+      "seed": 5.699999999999999,
+      "feature": 30.0,
+      "fuzz": 0.0,
+      "fuzz_feature": 2.3,
+      "nx": 450,
+      "ny": 50,
+      "trees": {
+       "models": [
+        "searsia_lucida",
+        "island_tree_01",
+        "searsia_burchellii"
+       ],
+       "count": 120,
+       "scale": [
+        0.1,
+        0.22
+       ],
+       "down": 0.7
+      }
+     },
+     {
+      "d": 150.0,
+      "crest": -0.955,
+      "amp": 3.4,
+      "front": 48.0,
+      "back": 30.0,
+      "height": 21.000000000000004,
+      "half_width": 99.2,
+      "x": 40.6,
+      "seed": 7.3999999999999995,
+      "feature": 48.0,
+      "fuzz": 0.0,
+      "fuzz_feature": 3.5,
+      "nx": 450,
+      "ny": 50
+     },
+     {
+      "d": 215.0,
+      "crest": 1.393,
+      "amp": 5.0,
+      "front": 68.8,
+      "back": 43.0,
+      "height": 30.1,
+      "half_width": 139.5,
+      "x": 58.15,
+      "seed": 9.1,
+      "feature": 67.5,
+      "fuzz": 0.0,
+      "fuzz_feature": 4.8,
+      "nx": 450,
+      "ny": 50
+     },
+     {
+      "d": 255.0,
+      "crest": 6.088,
+      "amp": 4.0,
+      "front": 81.60000000000001,
+      "back": 51.0,
+      "height": 35.7,
+      "half_width": 164.3,
+      "x": 68.95,
+      "seed": 10.8,
+      "feature": 79.5,
+      "fuzz": 0.0,
+      "fuzz_feature": 5.6000000000000005,
+      "nx": 450,
+      "ny": 50
+     }
+    ],
+    "texture": "rocky_terrain_02",
+    "res": "2k",
+    "tex_scale": 9.0,
+    "tint": "#3E3A3C",
+    "tint_mix": 0.6,
+    "folds": 0.25
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "haze",
+    "boxes": [
+     {
+      "box": [
+       -160.0,
+       3.0,
+       -60.0,
+       220.0,
+       300.0,
+       4.0
+      ],
+      "density": 0.0055,
+      "color": "#E2D4F0",
+      "anisotropy": 0.6
+     },
+     {
+      "box": [
+       -160.0,
+       3.0,
+       4.0,
+       220.0,
+       300.0,
+       30.0
+      ],
+      "density": 0.0004,
+      "color": "#E2D4F0",
+      "anisotropy": 0.8
+     }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "sundisk",
+    "azimuth": 161.5,
+    "elevation": 1.5,
+    "distance": 296.0,
+    "eye": [
+     -2.6,
+     -9.7,
+     1.0
+    ],
+    "diameter_deg": 0.6,
+    "emit": 18.0,
+    "color": "#FFC296"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "grass",
+    "area": [
+     -6.0,
+     -8.5,
+     6.0,
+     3.0
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.36
+     ],
+     [
+      -2.6,
+      -9.7,
+      1.0
+     ]
+    ],
+    "count": 7500,
+    "children": 12,
+    "length": [
+     0.15,
+     0.5
+    ],
+    "ground": {
+     "area": [
+      -10.0,
+      -13.0,
+      9.0,
+      7.0
+     ],
+     "cell": 0.02,
+     "crest_y": 1.4,
+     "drop": 5.0,
+     "relief": 0.1,
+     "flat_r": 0.8,
+     "slope_front": 0.02
+    },
+    "color": "#5A4834",
+    "color2": "#33291F",
+    "tip": "#7A6448",
+    "value_jitter": 0.3,
+    "seed": 3,
+    "patchy": 0.75,
+    "clump": 0.3,
+    "clump_r": 0.05,
+    "cell": 0.05,
+    "grade": {
+     "at": [
+      0.0,
+      0.0
+     ],
+     "r0": 0.4,
+     "r1": 2.2,
+     "eye": [
+      -2.5882,
+      -9.6593,
+      1.0
+     ],
+     "full": 0.5,
+     "clear": 0.02,
+     "floor": 0.08,
+     "dens_min": 0.45
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "grass",
+    "area": [
+     -6.0,
+     -8.5,
+     6.0,
+     3.0
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.36
+     ],
+     [
+      -2.6,
+      -9.7,
+      1.0
+     ]
+    ],
+    "count": 3000,
+    "children": 6,
+    "length": [
+     0.15,
+     0.45
+    ],
+    "ground": {
+     "area": [
+      -10.0,
+      -13.0,
+      9.0,
+      7.0
+     ],
+     "cell": 0.02,
+     "crest_y": 1.4,
+     "drop": 5.0,
+     "relief": 0.1,
+     "flat_r": 0.8,
+     "slope_front": 0.02
+    },
+    "color": "#5A4834",
+    "color2": "#33291F",
+    "tip": "#7A6448",
+    "value_jitter": 0.3,
+    "seed": 8,
+    "patchy": 0.75,
+    "root_mm": 1.8,
+    "tip_mm": 0.35,
+    "random": 0.2,
+    "rough": 0.05,
+    "cell": 0.05,
+    "grade": {
+     "at": [
+      0.0,
+      0.0
+     ],
+     "r0": 0.4,
+     "r1": 2.2,
+     "eye": [
+      -2.5882,
+      -9.6593,
+      1.0
+     ],
+     "full": 0.45,
+     "clear": 0.02,
+     "floor": 0.08,
+     "dens_min": 0.45
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "haze_b_el",
+    "fn": "grass",
+    "area": [
+     -1.4,
+     -1.6,
+     1.4,
+     1.2
+    ],
+    "within": [
+     0.0,
+     -0.2,
+     1.4
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.36
+     ]
+    ],
+    "count": 1200,
+    "children": 10,
+    "length": [
+     0.02,
+     0.07
+    ],
+    "ground": {
+     "area": [
+      -10.0,
+      -13.0,
+      9.0,
+      7.0
+     ],
+     "cell": 0.02,
+     "crest_y": 1.4,
+     "drop": 5.0,
+     "relief": 0.1,
+     "flat_r": 0.8,
+     "slope_front": 0.02
+    },
+    "color": "#5A4834",
+    "color2": "#33291F",
+    "tip": "#7A6448",
+    "value_jitter": 0.3,
+    "seed": 6,
+    "patchy": 1.0,
+    "cell": 0.04
+   }
+  ]
+ },
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    2.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 7.0,
+   "color": "#F2DCCB",
+   "orbit": {
+    "azimuth_deg": -30.0,
+    "elevation_deg": 10.0,
+    "distance_m": 3.5
+   }
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": -1.0,
+  "white_balance_k": 5000,
+  "white_balance_tint": 0,
+  "look": "AgX - Medium High Contrast"
+ },
+ "title": "Haze in its element: layered hills at dusk",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   -2.5882,
+   -9.6593,
+   1.0
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.09
+  ],
+  "lens_mm": 85.0,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.21,
+   1.09
+  ],
+  "shift_x": -0.16,
+  "shift_y": 0.0
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "qwantani_dusk_2_puresky",
+  "rotation_deg": 247.3,
+  "strength": 0.75,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": 161.5,
+  "elevation_deg": 1.5,
+  "irradiance": 24.0,
+  "angle_deg": 0.6,
+  "color": "#FFB48C"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.04,
+  "clarity": 0.1,
+  "sharpen": 0.2,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.3,
+   "bloom_px": 40,
+   "bloom_threshold": 0.8,
+   "saturation": 0.12,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.12
+  }
+ }
+}

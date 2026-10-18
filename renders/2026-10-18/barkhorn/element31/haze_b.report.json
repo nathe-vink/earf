@@ -1,0 +1,49 @@
+{
+ "shot": "studio/shots/barkhorn/element31/haze_b.json",
+ "image": "renders/2026-10-18/barkhorn/element31/haze_b.png",
+ "seconds": {
+  "render_total": 5999.6
+ },
+ "samples": 512,
+ "size": [
+  2400,
+  1600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "strips": 8,
+ "strip_seconds": [
+  96.1,
+  120.2,
+  202.3,
+  592.1,
+  1048.5,
+  1040.8,
+  1554.4,
+  1345.2
+ ],
+ "finish": {
+  "white_in": 240,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.04,
+  "clarity": 0.1,
+  "sharpen": 0.2,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.3,
+   "bloom_px": 40,
+   "bloom_threshold": 0.8,
+   "saturation": 0.12,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.12
+  },
+  "gain": 1.0
+ },
+ "note": "rendered in horizontal strips (resumable across container restarts), stitched raw, finished once"
+}

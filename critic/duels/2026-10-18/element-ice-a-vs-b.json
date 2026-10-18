@@ -1,0 +1,50 @@
+{
+ "subject": "Ice in its element, concept A (snow country at blue hour) against concept B (Diamond Beach at sunrise)",
+ "date": "2026-10-18",
+ "prompt": "critic/ab/PROMPT-DUEL.txt, its second paragraph worded for two candidate pictures of the same page",
+ "frames": {
+  "A": "renders/2026-10-18/barkhorn/element31/ice.png (r31-element-ice e94f679, before the dark patch was fixed)",
+  "B": "renders/2026-10-18/barkhorn/element31/ice_b.png"
+ },
+ "judges": [
+  {
+   "shown_as_A": "A",
+   "shown_as_B": "B",
+   "scores": {
+    "A": 6.0,
+    "B": 7.0
+   },
+   "prefer": "B",
+   "notes": "B: rim lines, sky reflection, horn glow, full range; seams at y~1172/1225; front face shadowed ~42; throat crushed with lime fringes; ice chunks even. A: flat matt cabinet, compressed range p1 35/p99 189, base sunk in drift, cabin story, grain 2x, empty foreground."
+  },
+  {
+   "shown_as_A": "B",
+   "shown_as_B": "A",
+   "scores": {
+    "B": 5.5,
+    "A": 7.0
+   },
+   "prefer": "A",
+   "notes": "Prefers Ice A. iceB: throat crushed black with ripple refraction and neon-green fringes; backlit near silhouette (body ~37); chartreuse glints; sun glare beside cabinet; but richer set, stands on feet. iceA: base sunk, dark patch left of cabinet, flat low-contrast grade, cabin story."
+  },
+  {
+   "shown_as_A": "A",
+   "shown_as_B": "B",
+   "scores": {
+    "A": 6.5,
+    "B": 5.0
+   },
+   "prefer": "A",
+   "notes": "B: front murky navy ~39; horn swirls with yellow-green fringe; staged procedural ice chunks; gel-like swells; sun glare pulls eye; mottled yellow-green speckle in reflection. B wins: warm/cool backlight, silhouette, whole product on feet. A: base buried, dark parallelogram left of base, dead bottom fifth."
+  }
+ ],
+ "result": {
+  "A_mean": 6.5,
+  "B_mean": 5.83,
+  "wins": {
+   "A": 2,
+   "B": 1
+  },
+  "kept": "A"
+ }
+}

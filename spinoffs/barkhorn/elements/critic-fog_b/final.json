@@ -1,0 +1,14 @@
+{"stage1": {"impression": "A quiet, believable dawn headland. The fog sea, the far ridges and the scanned grass get close to a photograph, and the grass blades catch convincing rim light. But the speaker reads as a pale beige box with a chrome mirror on top rather than water-clear acrylic and resin. Its base is swallowed by grass, so it does not visibly stand anywhere. A dark wall of foreground grass takes the bottom third, and a smeared band of elevated fog runs across the sky like a CG volume layer.", "score": 6.0},
+ "verdict": "iterate",
+ "blocking_9": ["plinth and feet visible with a contact shadow", "the clear material reads as clear: backlight through the acrylic edges and the horn", "the upper fog deck reads as weather, not a smear", "one clear dawn light event, a sun glow in the fog", "the foreground grass not a dark, sharp mass"],
+ "changes": [
+  {"id": "c1", "change": {"setting": "near tufts", "to": "clear the plinth's front"}},
+  {"id": "c2", "change": {"setting": "sun / bounce", "from": "az -150, 3.0 / 0.75", "to": "az -165, 4.5 / 0.4"}},
+  {"id": "c3", "change": {"setting": "marine layer / billows", "from": "+44 / [[160,12],[50,5],[15,1.5]]", "to": "+22 / [[160,18],[50,8],[15,2.5]]"}},
+  {"id": "c4", "change": {"setting": "fstop", "from": "5.6", "to": "2.8"}},
+  {"id": "c5", "change": {"setting": "near grass scale", "from": "[0.4,1.6]", "to": "[0.3,1.0] in front"}},
+  {"id": "c6", "change": {"setting": "boulder_01", "from": "[0.55,2.45,-0.12] 1.1", "to": "[0.95,2.6,-0.2] 1.0"}},
+  {"id": "c7", "change": {"setting": "finish", "from": "contrast 0.1, sat 0, vignette 0.22", "to": "0.14, 0.08, 0.12"}}],
+ "out_of_scope": [{"request": "the horn reads as polished chrome, not clear resin (its IOR, thickness, roughness)", "why": "the speaker's material"}, {"request": "the lining reads beige and flat", "why": "part of the speaker"}],
+ "score_if_fixed": 7.5,
+ "_note": "Condensed; the blind pass on the landscape final, not acted on (the passes had stopped)."}

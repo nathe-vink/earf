@@ -94,11 +94,53 @@ speakers lit from below and on a night facade, and each Cloud in its element, ph
 | "Record player and lighting for one. All acrylic." | **The companions** (`companions/`, in their own session). **Cumulus** is a belt-drive record player whose plinth is drawn from circles, as the icons are; its motor stands apart in a hole in the plinth. **Bell** is a lamp: the horn's flare hung mouth down. Both are built to the fab kit's standard in the eight colours, and are now photographed beside a Cloud in a room. |
 | "what would the speakers look like in a black room when a spotlight shining down on them, or light passing through them as they pass by on a carousel of sorts, so it casts each color" | The spotlight stills and the carousel loop were made first, then turned down (the next two rows). |
 | "I was thinking more sleek imagery akin to Apple product images, when they announce a new product and it has a dedicated webpage" | **The studio** (in progress): each colour alone on a seamless, the eight as a lineup, and macros, put through the critic for campaign pictures (below). |
-| "I was expecting that to function more like one of this things you put film in and flip through, where users could cycle through the colors and see how light passes through each one"; then "You're taking my View-Master and carousel ideas too literally. I was just using those as metaphors" | **The light section** on the site, in place of the reel. The page scrolls through one pinned frame, each colour lit from below and cross-fading into the next, with the coins marking the way; under reduced motion the coins simply pick a colour. It appears once its pictures are in. |
+| "I was expecting that to function more like one of this things you put film in and flip through, where users could cycle through the colors and see how light passes through each one"; then "You're taking my View-Master and carousel ideas too literally. I was just using those as metaphors" | **The light section** on the site, in place of the reel: one pinned room the page scrolls through, a colour at a time, the coins marking the way. Made again after the owner's later note (below). |
 | "Could be cool to see what the speakers look like with a light placed under them. Imagine the outside wall of a cement opera house, like the one in Chicago on the river, where the speakers are placed on lights casting upwards on the building at night, casting their color upwards on the wall, blending light together." | **Uplit** (in progress): each colour standing on a light, and the night facade, with the eight below a concrete wall on a river and their colours blending up it. |
 | "Would also be good to be able to see any color in a room vs just poison, but have the rooms be suited to the color ... Could look like a little themed diorama"; then "cuter, more dreamlike. Tilt shift", and a place for each colour | **The dioramas**, one for each colour, shot tilt-shift. They were turned down (next row). |
 | "Smoke is too hard to see and the diorama looks cheap, like a bad video game. I was hoping for more texture in a lot of these. The speakers are too stark in contrast to the setting too. Tilt shift may have been a bad direction. Lighting in general in a lot of them is off. I don't like the strings in the acid rain. Maybe don't think about them so much like dioramas, and think more about placing them in there element" | **In their element** (round 31b, in progress): each Cloud photographed at real scale in a real place on earth, built from scanned assets (below). |
 | "Continue to do critic passes until you feel it's in a good enough place for a promotional images for a $20K product. Install any skills or software you need to make it happen." | **A critic for campaign pictures** (`critic/PROMPT-promo.md`), and passes on every new picture until each gets there (below). The speaker's cloth and lining, which three critics named, are made again. |
+| "The website copy is a little too witty. It should be cheeky, but reserved. "World" class." | **The copy, reserved**: a tagline for each colour ("The last light of the fire.", "Bottle green, with a hint of menace.", "Water-clear. Almost not there."), "A pair in Poison.", "In good company." |
+| "The Fog icon doesn't really come through on the background. The spinning globe has a square background that comes through when not on solid black or white." | **The icons and the header's globe cut out to transparent pictures** (`web.py` `cutout`): each icon from its paper and night renders, Fog's edges darkened from its night render so it reads on paper; the globe as an AVIF and WebP sheet, so it no longer needs the blend mode Safari drops inside the frosted header. |
+| "The good company section isn't completed yet. Get rid of the rug option." | **Two companions, no rug**, shown as sketches until their second designs are built (next rows). |
+| "The hero images on the product detail pages are blurred for some reason." | **Fixed**: the close-ups' blurred fill was painting over the photograph once its fade ended (a transform's stacking order); it now sits behind, and the photograph in its element never has one. |
+| "The acid rain splashes from dropping into the water are a little off for some reason." "Poison isn't reading as poisonous. Needs shrooms around it, or a snake, or both." | **Acid's rain lands as rings** in the water's surface, with small crowns only where it is deep enough, and a near layer of falling rain (blind, the new water beat the old 5.5 to 3.5). **Poison B**: fly agarics at every age, death caps, a green pit viper coiled on a mossy stump, a dart frog, foxgloves and nightshade. Both in finals and duels. |
+| "I'm not loving the record player and lamp. I want a squared record player similar to a debut or orbit but with a clear body and matching cover." "the brian eno one and the audio technica hotaru are acrylic I think and look really cool when backlit, but are way too expensive." "The lamp, I liked the squared on you had. Or cylindrical could be cool. I like spherical too. I also am a fan of shag lamps." | **Companions v2, blocked out for the owner's pick** (`companions/concepts2.py`, `renders/2026-10-18/barkhorn/companions2/concepts/sheet.png`): record players R1 Slab, R2 Sandwich and R3 Float; lamps L1 Lantern, L4 Cylinder, L5 Sphere, L6 Shag (the seventies fibre-optic fountain) and L7 Fringe (the literal shag: a fringe of hanging acrylic strands). |
+| "One the detail pages, what do you think about moving the icon from the left of atmosphere, so the text and left align, and making it bigger and putting it to the right of the speaker name?" | **Done**, on the speaker's page and then on the colour cards. |
+| "For fog, what if it was set in a classic foggy SF setting, overlooking the golden gate and the city from marin headlands"; then "Forget the SF fog idea. If we can't make it look like a real image of the real bridge or real sutro tower, it will look too obviously fake." | **Fog C was built and then stopped**: the Golden Gate, the city and Sutro Tower from the Marin Headlands, in proofs only. Fog keeps its headland above the fog. |
+| "Image 2 and 3 for each speaker feel odd and out of place because they aren't the same proportions of the other images and feel cheap." | **The cover-on and cover-off frames fill the stage** as the others do: each studio frame's backdrop is carried on past its sides to 3:2, and to 4:5 on phones (`web.py` `widen`), instead of standing narrow beside a blurred copy of itself. The fronts are to be rendered again at those shapes with the new drivers. |
+| "On the choose your weather section, we can change the position of the icons there as well." "The icons in the hover tooltip on the hero image for poison and smoke and fog are off." "The "in their element" pagination arrows aren't centered and look cheap." | **The cards' icons beside the names**; **the hero's labels take the paper icons in either theme** (in dark mode they took the night ones, white on a pale pill); **the strip's arrows are chevrons on the photograph in view**, at its middle, the first hidden at the start and the last at the end. |
+| "The put a light under it section needs a critic pass. It's too sparse and slow. I like the interaction idea, but it doesn't feel good in practice and needs refinement." | **Made again after its critic** (5 of 10, then 8 after one pass): scrolling picks the colour, a quarter screen each, and time plays the change, the lamp going off and the next coming on, so no frame mixes two colours; the photograph large and feathered into the band, each colour's light spilling past it onto the page; the coins a radio group; the run 2.9 screens, not 4.85. |
+| "I feel like we can update the initial loading state (if any) and cursor with something higher quality now." | **The loader**: the rendered acrylic globe turns only while the hero's photograph comes in, then the photograph rises in. **The cursor**: a dot at the pointer in the colour of the text beneath it, and a ring a beat behind that opens over anything to press, tinted with the speaker it leads to. |
+| "It's still a little too "check this out bro" with the copy that explains the web interaction. That should be intuitive and implied. What's stated should be about the speakers, not the site. Also not sure if "weather" is right because some of them aren't weather." | **No instructions and no weather**: "Drag to turn", "Keep scrolling", "Drag to spin it" and "Spin the horn" gone; "Something in the air.", "Choose your atmosphere.", "Each colour, out in the world.", "Same speaker, a different air". |
+| "The drivers in the images are starting to look really fake relative to everything else." | **The drivers made real** (round 31c, in its own session, `r31-drivers`): the woofer as the FaitalPRO 15PR400 it is (its cone, surround, cap, flange bolts, basket and motor), the woofer's ring as the polished opaque acrylic the spec calls for rather than satin paint, and the horn driver's exit; then every picture that shows the woofer large is rendered again. **Merged 2026-10-18** (`spinoffs/barkhorn/drivers31.md`): a four-wave accordion surround, treated-paper cone, eight-spoke black e-coat frame with slotted flange holes and button heads, cooling fins, push terminals; the horn driver's machined exit, ringed phase plug in dark anodised aluminium, band, fins and terminals. Old against new, blind: the hero 5.5 to 5.0, the woofer macro 5.5 to 4.5. The drawings and datasheet numbers are unchanged (FaitalPRO's own drawing gives a 374 mm bolt circle and 857 cm² Sd against the repo's 375 and 805: a question for the owner). The catalogue, studio heroes, element finals and Planet EARF are being rendered again on it. |
+
+### The site, a full critic pass (2026-10-18, evening)
+
+A fresh critic walked the whole site at desk, laptop, tablet and phone widths, in both themes, and scored it 6 of 10
+against a $20K launch. The best parts held: the light section (8.5), the room in Poison (8) and the horn (7.5). What it found
+on the site's side is done (`web.py`, pushed 5224e82):
+- **Status.** One honest footer line ("In development, not yet for sale; the pictures are renders") in place of the black preview bar and two
+  disclaimers. The inbox note says it opens at launch: making hello@earf.world live is the owner's to set up.
+- **Copy.** "Eight colours from Ember to Smoke" (no "what hangs in the air", which was weather by another name). The room's caption is "Covers on, by a tall window", with the
+  speaker's size.
+- **Companions.** Off the page entirely until the owner picks: no one-sentence band and no sketches.
+- **Loader.** Unseen on a quick page (it waits 450 ms before it shows). It leaves 250 ms after the hero decodes, its first frame inline,
+  the header's frames at their sharp size.
+- **One light theme** by choice: every photograph stands on a pale ground. The page is the hero's own paper (#F4F1EC),
+  so there's no step under it.
+- **Links by name** (`#speaker-ember` … `#speaker-smoke`; the colour keys still answer). The hero's links tab in number order.
+- **Layout.**
+  - Bands are parted by space, not hairlines, and the H1 has its own size.
+  - The studio's lineup is off (it repeated the hero), leaving four details. The room runs full bleed.
+  - The habitats' strip runs to the window's edge and fades there.
+- **The spec.** Its two drawings at one scale; "423 mm overall, 420 mm at the cabinet" (the drawing and the table had disagreed);
+  terms over values on phones.
+- **Weight.** 2.35 MB before the first scroll on a desk (it was 5.9) and 1.44 MB on a phone (5.2): the horns' sprites load as their
+  band comes near. The habitats are 2400 px with 1200 px versions, the light run's 1600 px.
+
+On the pictures' side, the critic found four studio looks (the hero warm, the studio white, the catalogue a grey sweep, the
+detail views pastel, with Fog's blue matching Ice's). The catalogue and the detail views are being rendered again on one warm
+pale paper, with the new drivers.
 
 ![Every final: each colour's seven views and the first of its turning frames](../../renders/2026-10-18/barkhorn/finals31/sheet.jpg)
 
@@ -154,26 +196,56 @@ Three of the campaign critics named the speaker's own surfaces:
 - **The cover read as brushed metal.** Its heather was drawn out in one direction only, so from a few metres it was a field of vertical streaks. Now the warp's heather runs along the warp and the weft's along the weft, crossing as a cloth's do, with soft slubs and a fabric's sheen.
 - **The lining read as moulded clay.** Its clouds are gentler (3 cm), and the batts are lumpy where they are stuffed into their sleeves (a soft relief 7 cm across).
 - **The black front edge of the top** is the edge itself. Seen end-on through about 400 mm of tint, it stays dark even at 32 light bounces, so the fix is a light placed to catch it, not a shader.
-- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light.
+- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light. The room's critics still read its face as one flat matt tone under raking sun, so the cloth is a melange now: each yarn's heather and the slubs stronger, and a faint unevenness 60 mm across where the cloth is stretched over the frame (`mottle`). Under the same raking light the disc's face varies a quarter more (p5 to p95 of its luminance 3.6 to 4.5).
+
+### The companions
+
+**Cumulus**, the record player, and **Bell**, the lamp, are built (`companions/README.md`): each to the fab kit's standard (cut files, drawings, parts list, checks) and in the eight colours, a proposal until the owner signs it.
+
+- **Cumulus** is belt-driven: its plinth is drawn from circles, as the icons are, and its motor stands apart in a pod of its own. The cartridge is now Ortofon's 2M Black ($749.99; a 2M Red on Ember the alternative), so its parts list comes to $2,775 one off.
+- **Bell** is the horn's flare hung mouth down over a clear stem: $563 in parts plus its LED strip.
+- **Pictures:** a hero of each in one room at dusk, with the Cloud beside it (each 6.0 in its blind duel), a look frame in every colour, and two details. Both are on the home page under "The speakers would like some company." The critics' remaining notes (the wall outshines the product, the grade goes one colour, the record reads as smoked glass) point to a deeper room, not more passes.
+
+![Cumulus and Bell](../../renders/2026-10-18/barkhorn/companions/hero-turntable.png)
 
 ### Pictures for a launch (in progress)
 
 - **The critic** (`critic/PROMPT-promo.md`, with `critic/measure.py`) is the studio's prescriptive critic (critic v2) turned to campaign pictures.
   - A fresh context sees only the picture and its card, and scores it blind against what a $20,000 product's launch would print.
   - It then lists what to change, each with a test that shows the change is done.
-  - Passes go on until two in a row reach 8.5. Then a blind duel, the new picture beside the best so far, keeps the winner.
-  - The records are in `critic/rounds/2026-10-18/` and the "Promotional images" table of `critic/LOG.md`.
-- **First passes:** the room 4.5, Ice's front view 5.5, the hero 5.5, each place in its element 4 to 6 over its first two passes, and the companions' heroes 4.5.
-- **The studio.** Seven passes on a dark hero of Ember held at 5.0 to 5.5. Every pass names something light can soften but not remove: the horn's mirror gloss and dark throat, and the lining seen through the clear sides. So the concept changes, not the settings:
-  - the cover goes on, which hides the woofer's dark cone;
-  - the speaker is shot the two ways glass is photographed, each judged by a blind duel against the dark hero:
-    - bright-field on white, the iMac G3's way: the background shines through the tint, and black cards out of frame trace the edges dark;
-    - dark-field on black: only the edges are lit, and the lining falls to silhouette.
-- **In their element.** Each Cloud is shown at real scale in a real place, built from scanned assets (`studio/engine/assets.py`: Poly Haven's skies, textures and models and ambientCG's textures, all CC0, fetched on demand and cached out of git). The camera is a photographer's at eye level, and a sun lamp matches the sky's own sun (`assets.py sun`). There is one session for each colour, and a second concept for five of them, judged by duel. The sessions fixed the engine as they went:
+  - Each set's passes, the critics' replies and a proof of every pass are with its notes (`elements/<set>.md` and the folders beside it, `renders/2026-10-18/barkhorn/proofs31/`). The scores, set by set, are in the "Promotional images" table of `critic/LOG.md`.
+- **Where the scores settled.** The bar was two passes in a row at 8.5. No set came near it: over about 150 passes the blind scores held between 4.5 and 7.0, and the critics named the same things in every set, things light can soften but not remove (Open, below). So from 08:30 UTC each set stopped once two passes in a row after a change of concept gained less than half a point. It then rendered its finals from its best rig and put them to a blind duel against the runner-up.
+- **The studio.** Seven passes on a dark hero of Ember held at 5.0 to 5.5, so the concept changed:
+  - bright field on white, the iMac G3's way, beat the dark hero in a blind duel (5.6 to 4.8); dark field on black, and the cover on, lost theirs;
+  - five passes on bright field held at 5.5, and its finals are rendering: each colour alone, the eight as a lineup, and five macros (the corner, the amplifier, the horn, the woofer, a grip).
+- **In their element.** Each Cloud is shown at real scale in a real place, built from scanned assets (`studio/engine/assets.py`: Poly Haven's skies, textures and models and ambientCG's textures, all CC0, fetched on demand and cached out of git). The camera is a photographer's at eye level, and a sun lamp matches the sky's own sun (`assets.py sun`). One session for each colour, and a second concept for five of them, judged by duel:
+
+  | Cloud | Concept A | Concept B | On its page |
+  |---|---|---|---|
+  | Ember | a lava field at blue hour, its crust cracked to the glow (5.5) | | A |
+  | Dust | the Southwest at golden hour (6.0) | the owner's note: true Route 66 country, its mesas and buttes, saguaro, a blue sky (in passes) | A |
+  | Acid | the acid spring at Dallol, sulphur and steam (5.5) | acid rain over wet black lava (6.5) | B, by a blind duel (2 to 1) |
+  | Poison | a redwood rainforest (6.5) | | A |
+  | Ice | snow country at blue hour, a cabin's window far behind (7.0) | Diamond Beach at sunrise (5.8) | A, by a blind duel (2 to 1) |
+  | Haze | a lavender field at dusk (6.0) | layered hills at blue hour (5.5) | B, by a blind duel (2 to 1), then rendered again with its base in view and the sun clear of the horn (a duel, 2 to 0) |
+  | Fog | a summit above a sea of cloud (6.5) | San Francisco's fog: a headland at dawn above the fog (6.0) | B, by a blind duel (3 to 0); a third concept, the Golden Gate from the Marin Headlands, was stopped by the owner (above) |
+  | Smoke | woodsmoke at dawn in a pine wood (6.5) | a misty birch wood, high-key (5.5) | A, by a blind duel (3 to 0), then re-finished from its raw (a duel, 6.4 to 6.0); the owner finds it neither smoky enough nor soft enough, so a third concept is in passes |
+
+  The score is a fresh critic's on the final itself. The sessions fixed the engine as they went:
   - scanned plants keep their leaves cut out;
   - the sky's sun is found where Cycles shows it (it had been reported 180° round);
-  - the places keep their sky's colour (the look book's white balance had turned Ember's lava salmon).
-- **The room, the hero and the catalogue** are each being lit again in their own sessions. The site takes each as it lands: `web.py` prefers round 31's hero, room and in-their-element pictures once they are in the repository, with their phone frames below 700 px.
+  - the places keep their sky's colour (the look book's white balance had turned Ember's lava salmon);
+  - a sky can be graded (`sky.grade`), and the camera can see past 300 m (`camera.clip_end`).
+- **The room, the hero and the catalogue** are each lit again in their own sessions:
+  - the room (the Poison pair at home, with Cumulus) rose from 4.5 to 6.5 over fourteen passes; its final is on the home page with a phone frame of its own (a re-render with a softer sun lost a blind duel to it, 6.5 to 6.8);
+  - the hero (the eight together) held at 6.0 over eight passes and three changes of approach; its finals are rendering;
+  - the catalogue (each colour's front view) reached 6.0, and its rig has won two duels in a row.
+
+  The site takes each as it lands: `web.py` prefers round 31's hero, room and in-their-element pictures once they are in the repository, with their phone frames below 700 px. The home page shows all eight in a strip.
+- **The speaker's page, after the owner's note** ("I want the landscape photos to be the hero for each speaker ... Then users can paginate through all of the other images the way they would shopping online for a product"). Each speaker's page now opens on its photograph in its element (its phone frame on phones), captioned with where it stands, and pages through the rest as a shop does: arrows, a count, a swipe, the arrow keys and a strip of thumbnails. The stage keeps the photograph's shape (3:2, and 4:5 on phones), and every other picture is carried to its edges on its own ground, so the tall product shots stand in a seamless field rather than a box.
+- **Render helpers.** A final takes two to three hours on one session's four cores, so the slow ones are split. A helper session renders the frames it is given from the set's own commit, pushes them to its own branch, and stops: the portraits of Ice, Ember, Fog, Smoke and the room, the hero's phone frame, the studio's queue across five more, one strip of Ember's landscape (rendered in four strips on two boxes, stitched, then finished once), and one box for each catalogue colour and each pair of uplit frames. Twelve of them, started at 13:45, never ran: the commits they were given had not reached GitHub when they were made. They were found and started again at 15:55, from full commit names.
+- **The look book** (version 50): a page for each colour in its element, Cumulus and Bell, the round-31 room with its bars measured again (the sideboard 560 mm), and the red Cloud's name, Ember, wherever Flare was left. The Bark and Crag pages, set aside since round 17, are hidden rather than shown last. Version 51 swaps in Haze's re-render and Fog's headland.
+- **Planet EARF** (round 32), the owner's acrylic listening bar in San Francisco, has begun in its own session on the `r32-planet` branch, where the brief and its sourced research are in `planet/`.
 
 ### The site's deployments
 
@@ -181,8 +253,8 @@ Every push to round 31's twenty-odd working branches built a Vercel preview, unt
 
 ### Open
 
-- **The horn's finish.** Every studio pass so far names the polished horn's mirror and its dark throat. Would the owner consider a satin (bead-blasted) horn, at least as an option? It would change the product, so it waits for the owner.
-- **The companions' questions** are in `companions/README.md`: the names; the casting partner for the formed shade and the 25 mm platter; the cartridge's blue body; a dust cover; where the arm rests; a listed dimmer; the bearing; and the prices (about $5,000 and $1,400 at the speakers' multiple).
+- **The horn's finish and tint.** Every studio pass names the polished horn's mirror, and every session's critics the dark mass at its throat. The catalogue session found what that mass is: the tinted resin's own depth where the throat is thickest, not the driver behind it (hidden, the driver changes nothing, and no lamp moves it). The studio's critics also see the horn's red pinker than the cabinet's. Would the owner consider a satin (bead-blasted) horn, a lighter tint in the horn's resin, or a thinner wall at the throat, at least as options? Each changes the product, so they wait for the owner.
+- **The companions' questions** are in `companions/README.md`: the names; the casting partner for the formed shade and the 25 mm platter; the cartridge (the session moved it from the 2M Blue to the 2M Black, $749.99, which is easily reversed); a dust cover; where the arm rests; a listed dimmer; the bearing; and the prices (about $5,000 and $1,400 at the speakers' multiple).
 
 ## Round 30: the icons in acrylic, the site's home and speaker pages, hosted, and the back made real (the owner's notes of 2026-10-17 and 18)
 

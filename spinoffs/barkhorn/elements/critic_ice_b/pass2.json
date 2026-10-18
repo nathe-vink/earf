@@ -1,0 +1,14 @@
+{"stage1": {"impression": "A calm, pastel sunrise shoreline with a translucent blue cabinet on dark sand and glacier ice in the wash. The idea of a speaker in its element comes across. But the frame reads as CG. The sea is a milky, low-contrast stack of ribbon-like crests. The water meets the sand in a hard, ruler-straight line. The foreground is 40% empty brown sand with glitter-like sparkles. And the sun sits beside the speaker, not behind it, so nothing glows: neither the acrylic nor the ice carries the light that is the whole point.", "score": 5.5},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "change": {"setting": "sky rotation and sun azimuth", "to": "3 deg toward the speaker, sun behind the cabinet's upper-left quarter; ice[0] to (-0.5, 3.4)"}, "accept": {"region": [500, 320, 560, 420], "metric": "r_median", "op": ">", "value": 110}},
+  {"id": "c2", "change": {"setting": "sand wetness / shore", "to": "soaked below 0.15, damp to 0.35, wet rough 0.02, slope from 0.2 m, lace 0.5"}, "accept": {"region": [750, 590, 1150, 640], "metric": "lum_range", "op": ">", "value": 45}},
+  {"id": "c3", "change": {"setting": "foreground ice", "to": "a 0.45 m clear chunk at (-1.5,-1.6) in the sun strip; others at (1.3,-0.9), (2.6,-2.0)"}, "accept": {"region": [150, 620, 450, 780], "metric": "lum_p95", "op": ">", "value": 120}},
+  {"id": "c4", "change": {"setting": "haze, sea", "to": "haze 0.0008; absorption #1E3533 density 10; crests broken 40%, far crests not parallel"}, "accept": {"region": [750, 420, 1150, 540], "metric": "lum_range", "op": ">", "value": 90}},
+  {"id": "c5", "change": {"setting": "sand", "to": "albedo #08090A-#1C1C1D, softer sparkle, relief 0.06"}, "accept": {"region": [850, 650, 1150, 780], "metric": "lum_median", "op": "between", "value": [22, 36]}},
+  {"id": "c6", "change": {"setting": "exposure, contrast, vignette, look", "to": "-0.6, 0.10, 0.18, AgX Medium High Contrast"}, "accept": {"region": [0, 0, 1200, 150], "metric": "lum_median", "op": "between", "value": [130, 165]}},
+  {"id": "c7", "change": {"setting": "speaker.sink", "to": "0.015"}, "accept": {"region": [500, 600, 710, 615], "metric": "lum_p5", "op": "<", "value": 20}},
+  {"id": "c8", "change": {"setting": "camera", "to": "0.6 m, 65 mm, 6.5 m, f/4"}}
+ ],
+ "score_if_fixed": 7.2,
+ "note": "abridged by the set's author from the critic's full reply"}

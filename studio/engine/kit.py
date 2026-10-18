@@ -22,7 +22,7 @@ A kit piece is a prop in a set's `props`: {"kind": "kit", "shape": ..., "positio
   z1] or rising in a `plume` {"height", "spread": [r0, r1], "lean": [dx, dy], "taper", "power"} from the piece's
   position (embers rising, sparks, dust motes, snow, bubbles), `seed`;
 - thread: a fine line from `a` to `b` (world points), `radius` (the string a cloud hangs from);
-- ext: a piece a set builds itself, `module` (studio/engine/kit_ext/<module>.py) and `fn`, called as
+- ext: a piece a set builds itself, `module` (studio/engine/kit_ext/<module>.py) or `path` (a .py from the repo root) and `fn`, called as
   fn(bpy, name, p, kit) and returning its objects (it can use this module's helpers and materials).
 
 Photographic pieces (round 31b; studio/engine/assets.py, Poly Haven CC0, fetched and cached):
@@ -360,6 +360,9 @@ def _scatter(bm, p):
 
 def _ext(bpy, name, p):
     d = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'kit_ext')
+    if p.get('path'):                                    # a set's own module, by its path from the repo root (room31)
+        d, f = os.path.split(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', p['path']))
+        p = {**p, 'module': p.get('module', os.path.splitext(f)[0])}
     if d not in sys.path:
         sys.path.insert(0, d)
     mod = importlib.import_module(p['module'])

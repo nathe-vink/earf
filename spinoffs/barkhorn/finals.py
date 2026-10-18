@@ -9,7 +9,7 @@ the back and the plate in round 30, the plate's connectors provisional; one cuta
 Here each view is its template shot, the one tuned in its round, rendered again with the product as it stands now
 (studio/products/barkhorn-cloud.json, its model rebuilt from the CAD), for all eight colours:
 
-- front-on, front-off: the three-quarter view from the front, cover on and off (lookbook21);
+- front-on, front-off: the three-quarter view from the front, cover on and off (lookbook31, relit by catalogue31.py);
 - horn-side, horn-back: the horn close, from the side and from behind (horn21);
 - back, amp: the speaker from behind, and the amplifier's plate close (site30);
 - inside: the cutaway, now in each colour (site30's inside, Poison's alone until now);
@@ -39,7 +39,7 @@ FLAVOUR = {'red': 'cloud-red', 'orange': 'cloud-orange', 'amber': 'cloud-amber',
 KEYS = list(FLAVOUR)
 TURN = 24
 # each view: its template (a shot per colour, or one shot made each colour's), and whether it shows a side, so a grip
-VIEWS = {'front-on': ('lookbook21/look-{k}-on.json', True), 'front-off': ('lookbook21/look-{k}-off.json', True),
+VIEWS = {'front-on': ('lookbook31/look-{k}-on.json', True), 'front-off': ('lookbook31/look-{k}-off.json', True),
          'horn-side': ('horn21/horn-{k}-side.json', False), 'horn-back': ('horn21/horn-{k}-back.json', False),
          'back': ('site30/back-{k}.json', True), 'amp': ('site30/detail-{k}.json', False),
          'inside': ('site30/inside.json', False)}

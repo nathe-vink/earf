@@ -1,0 +1,373 @@
+{
+ "stage1": {
+  "impression": "A calm, believable modernist living room in low warm sun, the pair reads at a glance and the frame leaves the wall open for type. It still reads as a good CG interior rather than a photograph: the rug is a flat grey slab, the plaster looks smeared, under the credenza is a black void, and the main idea, sun passing through the green cabinets, never lands, because no green light reaches the wall or floor. The foreground armchair, seen from the back and touching the left speaker, pulls the eye away from the product.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Visible green transmitted light from at least one speaker (horn or cabinet) falling on the wall or floor, so the 'sun through the cabinets' idea reads without a caption",
+  "Rug reads as a real warm wool textile with pile and a soft shadow edge, not as neutral grey felt (rug region median RGB currently 102/101/100)",
+  "No crushed void under the credenza (current band median lum 10.6, RGB 22/8/2)",
+  "Armchair no longer touches or overlaps the left speaker's silhouette, and no longer dominates the left third with its back to camera",
+  "Plaster with real fine texture and no denoiser smear; window exterior with real branch detail instead of painterly mush",
+  "The two speakers' covers within about 5 dE of each other where they are not in deliberate sun (now 44/83/52 vs 68/111/74)"
+ ],
+ "defects": [
+  {
+   "region": [
+    470,
+    735,
+    1440,
+    810
+   ],
+   "what": "Rug renders neutral grey (R102 G101 B100) despite its #8A7A64 tint; reads as flat felt or concrete; its hard cut along the bottom edge makes a dull grey band across the foreground"
+  },
+  {
+   "region": [
+    655,
+    636,
+    1110,
+    662
+   ],
+   "what": "Crushed black band under the credenza (lum median 10.6); the credenza looks like it floats on a void"
+  },
+  {
+   "region": [
+    1110,
+    420,
+    1440,
+    610
+   ],
+   "what": "Speaker shadows on the wall are grey-brown (R87 G82 B60), with no green transmission from the tinted horn or cabinet; the brief's 'sun passing through both cabinets' does not read"
+  },
+  {
+   "region": [
+    0,
+    370,
+    420,
+    810
+   ],
+   "what": "Armchair seen from behind, large and cropped by the frame; its back leg is tangent to the left speaker's base at x\u2248415-432; it competes with the hero"
+  },
+  {
+   "region": [
+    280,
+    0,
+    1440,
+    480
+   ],
+   "what": "Plaster bump reads as blotchy, smeared mottling (denoiser or over-strong bump) rather than fine trowelled texture"
+  },
+  {
+   "region": [
+    40,
+    0,
+    180,
+    700
+   ],
+   "what": "Exterior trees look soft and painterly, low in detail; cool sky (B>R) against a warm low sun inside"
+  },
+  {
+   "region": [
+    1360,
+    630,
+    1440,
+    720
+   ],
+   "what": "Floor right of the right speaker falls to lum 48, a muddy dark corner"
+  },
+  {
+   "region": [
+    1140,
+    400,
+    1180,
+    690
+   ],
+   "what": "The right speaker's lit side panel is a bright vertical green slab, against a dim front; the two speakers read differently lit (cover dE 3.5 left vs 12.4 right against #2E4A2C)"
+  },
+  {
+   "region": [
+    455,
+    465,
+    590,
+    600
+   ],
+   "what": "Hard mullion-shadow stripes across the left cover disc read as banding at a glance"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The sun does not visibly pass through the speakers: their shadows on the wall are grey-brown, with no green caustic or transmitted colour, so the frame's one idea is missing.",
+   "evidence": {
+    "region": [
+     1360,
+     420,
+     1430,
+     600
+    ],
+    "measured": "wall right of the right speaker median RGB 87/82/60 (g < r); left of the credenza 64/51/40; no green anywhere on wall or floor"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -76.0, elevation 11.0, irradiance 40",
+    "to": "azimuth -62, elevation 18, irradiance 40 (so the beam passes through each horn and the upper cabinet onto the wall at about 0.9-1.4 m behind and right of each speaker)"
+   },
+   "expected": "A tinted green patch, the horn's silhouette in coloured light, on the wall to the right of each speaker, plus a green glow on the floor behind the cabinet bases",
+   "accept": {
+    "region": [
+     1360,
+     300,
+     1440,
+     600
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 95
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The rug renders neutral grey and flat, a dead band across the foreground that reads as CG.",
+   "evidence": {
+    "region": [
+     520,
+     745,
+     1400,
+     805
+    ],
+    "measured": "median RGB 102/101/100, lum range 42.9; tint #8A7A64 at mix 1.0 is not reaching the shader"
+   },
+   "change": {
+    "setting": "prop 3 (rug)",
+    "from": "tint #8A7A64 apparently ignored, value 0.75, displace 0.004, size [2.6, 1.6] at [0.45, -1.25]",
+    "to": "fix the tint so it applies (or swap to a warm oatmeal wool texture), value 0.85, displace 0.008, pile 0.02; move to [0.35, -0.9] so its whole front edge is in frame, or drop the rug"
+   },
+   "expected": "A warm oatmeal wool with visible pile and soft sun streaks, R > B by about 25 levels",
+   "accept": {
+    "region": [
+     520,
+     745,
+     1400,
+     805
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 88
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "Under the credenza is a crushed black void, so the piece floats on darkness.",
+   "evidence": {
+    "region": [
+     660,
+     640,
+     1100,
+     660
+    ],
+    "measured": "lum median 10.6, RGB 22/8/2"
+   },
+   "change": {
+    "setting": "lamp floorbounce",
+    "from": "irradiance 0.25, position [0.9, -1.2, 0.1], target [0.0, 0.7, 0.05]",
+    "to": "irradiance 0.55, position [0.35, -0.6, 0.08], target [0.35, 0.8, 0.04]"
+   },
+   "expected": "The recess under the credenza reads as a dark but legible shadow with floorboards visible",
+   "accept": {
+    "region": [
+     660,
+     640,
+     1100,
+     660
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     20,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "composition",
+   "problem": "The armchair, seen from the back, fills the lower left, is cut by the frame and touches the left speaker's base, competing with the hero.",
+   "evidence": {
+    "region": [
+     0,
+     370,
+     420,
+     810
+    ],
+    "measured": "the chair spans x 0-415 and its leg meets the speaker edge at x\u2248415-432; 0.76% crushed pixels"
+   },
+   "change": {
+    "setting": "prop 10 (armchair)",
+    "from": "position [-1.68, -0.5, 0.0], rotate 235",
+    "to": "position [-1.75, -0.05, 0.0], rotate 215 (three-quarter profile facing the speakers), keeping at least 0.25 m clear of the left speaker"
+   },
+   "expected": "The chair reads as a quiet side element, with a clear wall gap of 40 px or more between it and the left speaker",
+   "accept": {
+    "region": [
+     405,
+     560,
+     430,
+     680
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 120
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The plaster reads as blotchy smeared mottling, not a real trowelled wall, and that is the area the heading sits on.",
+   "evidence": {
+    "region": [
+     650,
+     150,
+     900,
+     400
+    ],
+    "measured": "lum median 221.5, range 12.8; at 2x zoom the texture shows soft irregular blobs typical of over-scaled bump plus denoising"
+   },
+   "change": {
+    "setting": "prop 1 (plaster)",
+    "from": "bump 2.4, tex_scale 0.8",
+    "to": "bump 1.0, tex_scale 1.6 (finer grain); render samples 128 to 256 so the denoiser smears less"
+   },
+   "expected": "A fine, even plaster tooth that stays quiet under type",
+   "accept": {
+    "region": [
+     650,
+     150,
+     900,
+     400
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The right foreground floor and the corner beside the right speaker sink to mud, so the right speaker sits in a dim pool while the left is lit.",
+   "evidence": {
+    "region": [
+     1360,
+     640,
+     1440,
+     700
+    ],
+    "measured": "lum median 48.4 against 108 beside the left speaker"
+   },
+   "change": {
+    "setting": "lamp north",
+    "from": "position [0.8, -4.0, 2.4], irradiance 0.6",
+    "to": "position [1.6, -3.6, 2.2], irradiance 0.8 (same colour #D2E0F4)"
+   },
+   "expected": "The right floor and the right cabinet's front lift by about half a stop, so the two speakers read as a matched pair",
+   "accept": {
+    "region": [
+     1360,
+     640,
+     1440,
+     700
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     65,
+     95
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "asset",
+   "problem": "The exterior through the glazing is soft and painterly, low in detail, which gives the render away at full-page size.",
+   "evidence": {
+    "region": [
+     45,
+     100,
+     170,
+     400
+    ],
+    "measured": "median RGB 155/152/161; at 2x zoom the branches are smeared and blobby"
+   },
+   "change": {
+    "setting": "prop 13 (exterior)",
+    "from": "blur 0.003, strength 6.0",
+    "to": "blur 0.0008 (let the f/5.6 lens defocus it), strength 5.0; or swap to a sharper backplate"
+   },
+   "expected": "Branches resolve as fine twigs, slightly defocused by the lens instead of smeared",
+   "accept": {
+    "region": [
+     45,
+     100,
+     170,
+     400
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The exterior reads cool and blue against the warm low sun, two colour worlds.",
+   "evidence": {
+    "region": [
+     45,
+     100,
+     170,
+     400
+    ],
+    "measured": "b_median 161 > r_median 155, while the sunlit wall is 211/194/175"
+   },
+   "change": {
+    "setting": "prop 13 strength plus a local grade in the finish",
+    "from": "neutral",
+    "to": "warm the window region by about 300 K (or rotate the HDRI rotation_deg 116 to about 100 so the sun side of the trees faces the camera)"
+   },
+   "expected": "The view outside shares the warm late-afternoon key with the room",
+   "accept": {
+    "region": [
+     45,
+     100,
+     170,
+     400
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 160
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The cabinet's front reads as a dark green box (top band RGB 22/62/20) with little of the light-through-acrylic glow its reference colour #B2C9A2 promises",
+   "why": "That is the speaker's material and lining, which are fixed; only the light (c1) can help it"
+  },
+  {
+   "request": "The horn reads paler and more olive than its deep tint (dE 14.9 against #4C6A36), because the bright wall shows through it",
+   "why": "The horn's tint is fixed; the wall value behind it is a set choice that could be lowered, but the horn itself must not change"
+  }
+ ],
+ "score_if_fixed": 7.5
+}

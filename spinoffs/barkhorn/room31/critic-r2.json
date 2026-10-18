@@ -1,0 +1,394 @@
+{
+ "stage1": {
+  "impression": "A calm, warm late-afternoon living room. The wall plaster, the window-shadow geometry and the floor read convincingly, and the green light thrown onto the wall behind the credenza and at the right edge is a good, real-feeling moment. The pair itself reads as flat, front-lit green boxes, though: the cabinets do not glow with the sun, the cover discs look like matte stickers, and the horn throats are dead black holes. The bright teddy rug is the loudest surface in the frame and the cropped dark chair pulls the eye, so it reads as a high-end archviz render rather than a magazine photograph.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Visible sun transmission through both cabinets from the camera: a lit, glowing edge or interior on each cabinet and green coloured light on the floor or wall beside each speaker",
+  "The horn throats read as shaped resin with tonal detail, not as pure black voids (crush under 40% in the throat)",
+  "Shading across each woofer cover (a light-to-shadow gradient, lum_range over 15), so it reads as cloth over a form and not as a flat disc",
+  "The rug no longer the brightest, largest mass in the frame: the speakers win the first glance",
+  "A clean right edge: no half-cropped dark chair mass competing with the right speaker",
+  "Final-sample render with no denoiser smear in the rug pile or the wall texture at 2880 px"
+ ],
+ "defects": [
+  {
+   "region": [
+    310,
+    290,
+    370,
+    350
+   ],
+   "what": "left horn throat is pure black (lum median 0, crush 96%): reads as a hole"
+  },
+  {
+   "region": [
+    1060,
+    290,
+    1140,
+    350
+   ],
+   "what": "right horn throat, the same black void"
+  },
+  {
+   "region": [
+    1050,
+    470,
+    1170,
+    590
+   ],
+   "what": "right woofer cover dead flat (lum_range 3.7): reads as a sticker, no cloth or form"
+  },
+  {
+   "region": [
+    270,
+    470,
+    390,
+    590
+   ],
+   "what": "left woofer cover nearly flat (lum_range 8.2)"
+  },
+  {
+   "region": [
+    235,
+    395,
+    435,
+    690
+   ],
+   "what": "left cabinet lit flat from the front; no sun glow through the acrylic, no batts lit from within"
+  },
+  {
+   "region": [
+    1005,
+    395,
+    1205,
+    690
+   ],
+   "what": "right cabinet lit flat from the front; no sun glow"
+  },
+  {
+   "region": [
+    0,
+    725,
+    1440,
+    810
+   ],
+   "what": "rug is the brightest large surface (median 235); pile texture reads noisy and blotchy; it fills the bottom eighth and pulls the eye down"
+  },
+  {
+   "region": [
+    1260,
+    470,
+    1440,
+    760
+   ],
+   "what": "armchair half-cropped by the frame, dark leather block (lum median 41) competing with the right speaker"
+  },
+  {
+   "region": [
+    1010,
+    640,
+    1210,
+    725
+   ],
+   "what": "no green light cast on the floor by either speaker; the floor beside the right speaker is a neutral warm tone"
+  },
+  {
+   "region": [
+    540,
+    430,
+    720,
+    500
+   ],
+   "what": "turntable reads small and grey, with a stray blue cartridge highlight; reads as an afterthought at hero scale"
+  },
+  {
+   "region": [
+    0,
+    0,
+    70,
+    600
+   ],
+   "what": "exterior through the glazing slightly soft and smeared at this scale (acceptable, watch at 2880)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The sun lights the speakers from the front-left, so its transmitted light falls behind them, out of sight, and the cabinets read flat instead of glowing.",
+   "evidence": {
+    "region": [
+     1050,
+     470,
+     1170,
+     590
+    ],
+    "measured": "cover lum_range 3.7 (right), 8.2 (left); green transmitted light only on the wall at 560-830 x 380-470 and 1250-1440 x 380-470; floor beside the speakers neutral (r160 g128 b86)"
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -58.0, elevation 18.0, irradiance 14.0",
+    "to": "azimuth -100.0 (from the left and slightly behind the speakers' plane, through window 1), elevation 14.0, irradiance 16.0; if the left speaker shadows the right, move the speakers to y 0.15 and check that both cabinets take the sun"
+   },
+   "expected": "Each cabinet shows a sunlit left side and an inner glow through the acrylic and batts toward the camera; a green-tinted pool falls on the floor to the right of each speaker; the covers get a left-to-right gradient.",
+   "accept": {
+    "region": [
+     1050,
+     470,
+     1170,
+     590
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The horn throats crush to pure black, so the horn (the product's signature form) reads as a void.",
+   "evidence": {
+    "region": [
+     310,
+     290,
+     370,
+     350
+    ],
+    "measured": "lum median 0.0, p95 1.6, crush 95.7%"
+   },
+   "change": {
+    "setting": "add lamp `bounce`",
+    "from": "none",
+    "to": "area 1.6 x 1.2 m at [0.0, -4.3, 1.5], target [0.0, 0.3, 1.15], irradiance 0.35, colour #FFF0DE (a warm bounce card at the camera, as a photographer would place one)"
+   },
+   "expected": "The throat shows the curvature of the dark-green resin into its centre, with the deepest point near black but with gradation around it.",
+   "accept": {
+    "region": [
+     310,
+     290,
+     370,
+     350
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 40
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "set",
+   "problem": "The rug is the brightest and largest mass in the frame and its pile reads noisy, so it pulls the eye away from the pair.",
+   "evidence": {
+    "region": [
+     200,
+     740,
+     1200,
+     800
+    ],
+    "measured": "lum median 235.5, p95 242 (brighter than the cabinets at around 110 and equal to the sunlit wall at 234)"
+   },
+   "change": {
+    "setting": "prop 3 (rug)",
+    "from": "tint #CFC2A8, tint_mix 0.7, displace 0.006, position [0.0, -1.55], size [3.0, 2.3]",
+    "to": "tint #A89A82, tint_mix 0.8, displace 0.003, position [0.0, -1.85], size [2.6, 2.0] (a flatter, darker wool rug pulled toward the camera so less of it shows)"
+   },
+   "expected": "The rug becomes a mid-tone ground under the frame, darker than the sunlit wall, with a calm pile.",
+   "accept": {
+    "region": [
+     200,
+     740,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     165,
+     200
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "composition",
+   "problem": "The half-cropped dark armchair is a heavy, unresolved shape at the right edge, competing with the right speaker.",
+   "evidence": {
+    "region": [
+     1300,
+     540,
+     1440,
+     620
+    ],
+    "measured": "lum median 41, the darkest large mass in the frame; the arm cuts the frame edge"
+   },
+   "change": {
+    "setting": "prop 10 (armchair)",
+    "from": "position [1.85, -1.05, 0.0], rotate z 200",
+    "to": "position [2.45, -1.6, 0.0], rotate z 215 (only the walnut arm and a sliver of seat enter the frame), or remove it"
+   },
+   "expected": "The right edge carries a light walnut accent at most; the right speaker has clear air around it.",
+   "accept": {
+    "region": [
+     1300,
+     540,
+     1440,
+     620
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 90
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The shadow sides of the cabinets and the bottom acrylic sit dark and muddy, so the tint reads darker and more olive than the specified colour.",
+   "evidence": {
+    "region": [
+     1050,
+     590,
+     1150,
+     640
+    ],
+    "measured": "rgb (69, 89, 45), delta E 39.9 against #B2C9A2; cover through the front delta E 8.3 against #6F7F66"
+   },
+   "change": {
+    "setting": "lamp `north`",
+    "from": "irradiance 0.6, position [3.7, -1.2, 1.4]",
+    "to": "irradiance 1.0, position [3.2, -2.2, 1.6] (a broader cool fill from the room's right)"
+   },
+   "expected": "The cabinets' lower interiors lift and the batts show through as pale green, closer to the reference tint, without flattening the sun side.",
+   "accept": {
+    "region": [
+     1050,
+     590,
+     1150,
+     640
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     100,
+     140
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The record player reads as a small grey smudge with a stray blue highlight, and the credenza top is underdressed between the two heroes.",
+   "evidence": {
+    "region": [
+     540,
+     430,
+     720,
+     500
+    ],
+    "measured": "visual crop: the platter is barely legible and the blue cartridge highlight is the only saturated non-green accent"
+   },
+   "change": {
+    "setting": "prop 2 / the record player position",
+    "from": "the record player at the left third of the credenza, in wall shade",
+    "to": "move it to x -0.15 so the sun from c1 grazes its clear acrylic; move the vase to x 0.55 and the books to x 0.35 to balance"
+   },
+   "expected": "The clear acrylic plinth catches a sharp edge highlight that echoes the speakers' material; the centre reads as one composed still life.",
+   "accept": {
+    "region": [
+     540,
+     430,
+     720,
+     500
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 200
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The rug and the fine plaster texture show denoiser smear at 128 samples, which says 'render' at full page.",
+   "evidence": {
+    "region": [
+     0,
+     725,
+     1440,
+     810
+    ],
+    "measured": "visual crop: blotchy, painterly pile clusters"
+   },
+   "change": {
+    "setting": "render",
+    "from": "samples 128, adaptive 0.02",
+    "to": "samples 512, adaptive 0.01 for the delivered 2880 frame"
+   },
+   "expected": "The pile and plaster resolve into fine, real micro-texture without blotches.",
+   "accept": {
+    "region": [
+     200,
+     740,
+     1200,
+     800
+    ],
+    "metric": "lum_p5",
+    "op": ">",
+    "value": 120
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The sunlit wall patch at the left is near white and outshines the product.",
+   "evidence": {
+    "region": [
+     300,
+     60,
+     500,
+     200
+    ],
+    "measured": "lum median 233.9, range 3.9 (flat, near clip)"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "-0.2",
+    "to": "-0.35 (after c1 to c5 have lifted the speakers)"
+   },
+   "expected": "The sun patches hold plaster texture; the speakers are now the brightest saturated objects.",
+   "accept": {
+    "region": [
+     300,
+     60,
+     500,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     205,
+     225
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover cloth a visible weave or fibre micro-texture",
+   "why": "The cover's material is part of the speaker, which is fixed; under any light it reads as a flat sticker (lum_range 3.7)."
+  },
+  {
+   "request": "Show some detail or a phase plug in the horn throat if the driver geometry is a flat black disc",
+   "why": "The horn's parts are fixed; c2 can only light what is modelled."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

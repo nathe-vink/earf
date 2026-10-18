@@ -1,0 +1,357 @@
+{
+ "stage1": {
+  "impression": "A calm, symmetrical living-room frame with believable plaster, a good oak floor with low raking sun stripes and a warm late-afternoon mood. The pair reads at a glance and sits at a sensible scale. The light passing through the cabinets doesn't hold together, though. The green transmitted light lands as odd flat patches (a pale vertical smear on the credenza's middle door, a hard green rectangle behind the vase) instead of a coloured pool on the floor. The cabinets glow a slightly neon lime, and the set is sparse enough that it still reads as a well-made render rather than a magazine photograph.",
+  "score": 6.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The sun visibly passes through both cabinets and throws a soft green-tinted pool onto the oak floor beside or in front of each speaker. No green light lands as a hard patch on the credenza or the wall behind the vase.",
+  "The credenza doors read as one continuous veneer, with no isolated pale vertical smear on a single door (lum_range across the doors under about 90).",
+  "Both speakers sit in comparable light, so the pair reads as a pair. Right now the left one stands against a sunlit wall (lum ~230) and the right one against shade (lum ~84).",
+  "The cover cloth reads as its true colour (delta E 2000 to #6F7F66 under 4) and not as a saturated lime green.",
+  "The speakers are grounded by a visible floor reflection or bounce of their own green, plus a contact shadow.",
+  "There is one depth layer in front of the speakers (an out-of-focus foreground element or a rug edge), so the frame stops reading as a stage flat."
+ ],
+ "defects": [
+  {
+   "region": [
+    640,
+    500,
+    800,
+    630
+   ],
+   "what": "A pale yellow-green vertical light band on the credenza's middle door only, with a soft curved shadow edge. It reads as a stain or texture error, not sunlight."
+  },
+  {
+   "region": [
+    925,
+    410,
+    965,
+    485
+   ],
+   "what": "A flat, hard-edged pale green rectangle on the wall behind the vase. It looks pasted on."
+  },
+  {
+   "region": [
+    900,
+    395,
+    935,
+    485
+   ],
+   "what": "The vase's left side carries a lime green cast that reads like a CG emission edge."
+  },
+  {
+   "region": [
+    260,
+    460,
+    400,
+    600
+   ],
+   "what": "The left cover cloth is too saturated green: RGB 91/120/88 against reference #6F7F66, delta E 5.9."
+  },
+  {
+   "region": [
+    1040,
+    460,
+    1180,
+    600
+   ],
+   "what": "The right cover cloth is also off and brighter than the left one: RGB 109/141/106, delta E 6.6. The pair is not matched."
+  },
+  {
+   "region": [
+    1200,
+    380,
+    1440,
+    520
+   ],
+   "what": "The wall around the right speaker is in deep shade (median 84) while the wall at the left speaker is sunlit (median 230). This creates an asymmetric pair."
+  },
+  {
+   "region": [
+    240,
+    688,
+    430,
+    720
+   ],
+   "what": "The floor at the left speaker's base shows no green bounce or reflection (R 107 > G 91). The cabinet looks set down, not lit into the room."
+  },
+  {
+   "region": [
+    1020,
+    688,
+    1210,
+    720
+   ],
+   "what": "The floor at the right speaker's base shows no green bounce or reflection (R 124 > G 99)."
+  },
+  {
+   "region": [
+    235,
+    400,
+    1200,
+    640
+   ],
+   "what": "The cabinet interiors glow a uniform neon lime, so they read more as an emissive CG material than as sunlit tinted acrylic."
+  },
+  {
+   "region": [
+    100,
+    0,
+    150,
+    640
+   ],
+   "what": "The window jamb is a wide flat cold blue-grey slab at the left edge with no texture. It is dead space in the frame."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1440,
+    810
+   ],
+   "what": "The set is sparse and staged: a wall, a credenza and two speakers, with nothing in the foreground. There is little depth from front to back."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "Sun through the cabinets lands as odd green patches on the credenza and wall instead of as a coloured pool on the floor, so the brief's key idea (sun passing through both cabinets) doesn't read.",
+   "evidence": {
+    "region": [
+     640,
+     390,
+     970,
+     630
+    ],
+    "measured": "Credenza middle door lum_range 133.5 with a pale vertical band. A flat green patch behind the vase. The floor in front of the speakers is plain warm wood (430-1000 x 690-760: R 168, G 125, B 88)."
+   },
+   "change": {
+    "setting": "sun",
+    "from": "azimuth -68.0 deg, elevation 14.0 deg",
+    "to": "azimuth -105 deg (from the left and slightly behind the speakers' plane), elevation 20 deg, size 0.5 deg, irradiance 55 W/m2"
+   },
+   "expected": "Each cabinet's shadow and transmitted green light falls forward and to the right of it on the oak floor, as a soft green-gold pool inside the frame. The credenza doors and the wall behind the vase lose their green patches.",
+   "accept": {
+    "region": [
+     640,
+     500,
+     800,
+     630
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 95
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The cover cloth and cabinet greens read as saturated lime, not as the specified colour.",
+   "evidence": {
+    "region": [
+     260,
+     460,
+     400,
+     600
+    ],
+    "measured": "Mean RGB 91/120/88, delta E 2000 = 5.94 to #6F7F66. Right cover delta E 6.61."
+   },
+   "change": {
+    "setting": "finish: green trim",
+    "from": "0.3",
+    "to": "0.5 (and white_balance_k 5200 -> 5400 if the greens still read cool)"
+   },
+   "expected": "The covers read as a grey-green cloth and the acrylic reads as tinted glass, not neon.",
+   "accept": {
+    "region": [
+     260,
+     460,
+     400,
+     600
+    ],
+    "metric": "delta_e",
+    "hex": "#6F7F66",
+    "op": "<",
+    "value": 4.0
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The pair sits in unequal light: the left speaker stands against sunlit wall and the right against deep shade, so they don't read as a matched pair.",
+   "evidence": {
+    "region": [
+     1210,
+     420,
+     1300,
+     520
+    ],
+    "measured": "Wall right of the right speaker lum_median 84.1. Wall left of the left speaker (150-230 x 100-600) lum_median 229.7."
+   },
+   "change": {
+    "setting": "lamp north",
+    "from": "irradiance 2.2, position [1.6, -3.6, 2.2]",
+    "to": "irradiance 3.5, position [2.6, -2.8, 2.2], target [1.2, 0.6, 1.0]. This acts as a soft fill from the right so the shaded side reads as open shade, not a hole."
+   },
+   "expected": "The shaded wall at the right speaker lifts to a quiet mid-tone while the sun stays clearly from the left.",
+   "accept": {
+    "region": [
+     1210,
+     420,
+     1300,
+     520
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     110,
+     150
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The speakers don't ground into the floor. There is no green reflection or bounce at their bases.",
+   "evidence": {
+    "region": [
+     240,
+     688,
+     430,
+     720
+    ],
+    "measured": "R 107, G 91, B 62. The floor right at the base carries none of the cabinet's colour."
+   },
+   "change": {
+    "setting": "prop 0 (floor) coat / coat_rough",
+    "from": "coat 0.15, coat_rough 0.35",
+    "to": "coat 0.3, coat_rough 0.22 (an oiled-and-waxed oak sheen)"
+   },
+   "expected": "A soft, blurred green reflection 2 to 4 cm deep under each cabinet, plus a darker contact line at the feet.",
+   "accept": {
+    "region": [
+     240,
+     688,
+     430,
+     720
+    ],
+    "metric": "g_median",
+    "op": ">",
+    "value": 100
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The frame has no foreground layer, so it reads as a flat stage set rather than a photographed room.",
+   "evidence": {
+    "region": [
+     0,
+     690,
+     1440,
+     810
+    ],
+    "measured": "The bottom band is empty floor. Nothing sits between the camera and the speakers."
+   },
+   "change": {
+    "setting": "prop 10 (arm chair)",
+    "from": "off, position [-1.68, -0.5, 0.0], rotate 235",
+    "to": "on, position [-2.0, -2.2, 0.0], rotate 215, so only its arm and a cushion enter the lower-left corner, out of focus at f/5.6. It must not overlap the left speaker."
+   },
+   "expected": "A soft-edged foreground cue in the lower-left corner adds depth and room scale while the speakers stay clear.",
+   "accept": {
+    "region": [
+     0,
+     650,
+     200,
+     810
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 95
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The green patch on the wall and vase reads as pasted on, because the vase sits right in the transmitted beam.",
+   "evidence": {
+    "region": [
+     900,
+     395,
+     970,
+     485
+    ],
+    "measured": "A hard-edged pale green rectangle behind the vase and a lime edge on the vase's left side."
+   },
+   "change": {
+    "setting": "prop 9 (vase)",
+    "from": "position [0.62, 0.75, 0.56]",
+    "to": "position [0.5, 0.78, 0.56] (check after c1; drop this change if c1 already clears the patch)"
+   },
+   "expected": "The vase reads white-warm with no green cast.",
+   "accept": {
+    "region": [
+     870,
+     400,
+     930,
+     485
+    ],
+    "metric": "r_median",
+    "op": ">",
+    "value": 200
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The left window jamb is a wide flat blue-grey slab that reads as untextured CG.",
+   "evidence": {
+    "region": [
+     100,
+     0,
+     150,
+     620
+    ],
+    "measured": "A uniform cold grey with no texture, contrasting with the warm wall and the exterior."
+   },
+   "change": {
+    "setting": "window frame colour",
+    "from": "#5A5650",
+    "to": "#3E3A35 with a slight satin roughness (0.45), so it reads as powder-coated metal and recedes"
+   },
+   "expected": "The jamb becomes a dark, thin framing line instead of a pale slab.",
+   "accept": {
+    "region": [
+     100,
+     0,
+     150,
+     620
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 80
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The cabinet's interior batts and ribs glow a uniform neon lime under fill light.",
+   "why": "That is the speaker's own material and colour. Only the light and the grade (c1, c2) may change how it reads."
+  },
+  {
+   "request": "The horn measures delta E 18.4 to #4C6A36 at its lit upper edge, and its throat crushes to black (14% crush).",
+   "why": "The horn is part of the speaker. Its tint and the black driver throat are fixed. Light can only lift it a little."
+  }
+ ],
+ "score_if_fixed": 7.8
+}

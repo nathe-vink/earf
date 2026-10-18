@@ -1,0 +1,455 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-blue",
+  "instances": [
+   {
+    "flavour": "cloud-blue",
+    "position": [
+     0.0,
+     0.0,
+     -0.015
+    ],
+    "rotate_z": 10.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "beach",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "texture": "gravelly_sand",
+    "res": "4k",
+    "displace": 0.006,
+    "relief": 0.06,
+    "dark": "#08080A",
+    "light": "#1C1D20",
+    "tex_scale": 1.25,
+    "wet_h": 0.07,
+    "damp_h": 0.1,
+    "damp_base": 0.0,
+    "spec": 0.1,
+    "reach": [
+     -3.0,
+     0.3
+    ],
+    "damp_reach": 1.0,
+    "reach_wobble": 1.2,
+    "residue_w": 0.2,
+    "grain_m": 0.003,
+    "glint_share": 0.03,
+    "bump": 2.5,
+    "wet_jitter": 0.06,
+    "wet_rough": 0.06,
+    "wet_rough_var": [
+     0.05,
+     0.2
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "sea",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "rough": 0.04,
+    "chop": 2.2,
+    "absorb": "#1E3533",
+    "density": 10.0,
+    "lace_w": 0.3,
+    "crests": [
+     [
+      8.0,
+      0.55,
+      0.5,
+      2.6,
+      1.0,
+      0.02
+     ],
+     [
+      14.0,
+      0.45,
+      0.8,
+      3.6,
+      0.9,
+      -0.04
+     ]
+    ],
+    "ocean": {
+     "layers": [
+      {
+       "size": 53.0,
+       "scale": 0.9,
+       "seed": 3
+      },
+      {
+       "size": 131.0,
+       "scale": 0.7,
+       "seed": 9
+      }
+     ],
+     "shoal_m": 7.0,
+     "foam_coverage": 0.5
+    },
+    "break": 1.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     -0.9,
+     3.0,
+     -0.198
+    ],
+    "rotate": [
+     0,
+     0,
+     20
+    ],
+    "size": [
+     1.15,
+     0.95,
+     0.88
+    ],
+    "seed": 11,
+    "ice_kind": "blue",
+    "facets": 8,
+    "cracks": 3,
+    "ice": {
+     "density": 3.4
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     1.95,
+     4.1,
+     -0.2825
+    ],
+    "rotate": [
+     0,
+     0,
+     -35
+    ],
+    "size": [
+     0.75,
+     0.62,
+     0.52
+    ],
+    "seed": 23,
+    "ice_kind": "clear",
+    "cracks": 1
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     -2.85,
+     4.0,
+     -0.2249
+    ],
+    "rotate": [
+     0,
+     0,
+     60
+    ],
+    "size": [
+     0.62,
+     0.55,
+     0.42
+    ],
+    "seed": 31,
+    "ice_kind": "milky",
+    "cracks": 0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     2.0,
+     2.9,
+     -0.1925
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ],
+    "size": [
+     0.45,
+     0.38,
+     0.3
+    ],
+    "seed": 55,
+    "ice_kind": "clear",
+    "facets": 8,
+    "cracks": 1
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     -1.2,
+     -1.7,
+     -0.03
+    ],
+    "rotate": [
+     0,
+     0,
+     35
+    ],
+    "size": [
+     0.48,
+     0.4,
+     0.34
+    ],
+    "seed": 61,
+    "ice_kind": "clear",
+    "facets": 9,
+    "cracks": 1
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     1.3,
+     -0.9,
+     -0.025
+    ],
+    "rotate": [
+     0,
+     0,
+     -20
+    ],
+    "size": [
+     0.3,
+     0.25,
+     0.21
+    ],
+    "seed": 62,
+    "ice_kind": "blue",
+    "facets": 9,
+    "cracks": 1
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "ice_b_el",
+    "fn": "ice",
+    "shore": {
+     "y0": 0.2,
+     "slope": 0.05,
+     "wiggle": 0.55,
+     "freq": 0.45,
+     "phase": 0.7,
+     "water_z": -0.09
+    },
+    "position": [
+     2.25,
+     -1.9,
+     -0.025
+    ],
+    "rotate": [
+     0,
+     0,
+     70
+    ],
+    "size": [
+     0.36,
+     0.3,
+     0.24
+    ],
+    "seed": 63,
+    "ice_kind": "clear",
+    "facets": 10,
+    "cracks": 0
+   }
+  ]
+ },
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "position": [
+    -0.6,
+    -3.0,
+    0.3
+   ],
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.7
+   ],
+   "irradiance": 0.5,
+   "color": "#F6C9A0",
+   "specular": 0.0
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 16,
+  "view": "AgX",
+  "exposure": -0.75,
+  "look": "AgX - Medium High Contrast",
+  "volume_bounces": 4
+ },
+ "title": "Ice: Diamond Beach at sunrise",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   -1.3514,
+   -6.358,
+   0.65
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.62
+  ],
+  "lens_mm": 65.0,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.21,
+   0.62
+  ]
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "umhlanga_sunrise",
+  "rotation_deg": 252.0,
+  "strength": 1.0,
+  "res": "8k"
+ },
+ "sun": {
+  "azimuth_deg": 162.0,
+  "elevation_deg": 1.9,
+  "irradiance": 3.0,
+  "angle_deg": 0.53,
+  "color": "#FE8A00"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 250,
+  "white_out": 240,
+  "contrast": 0.1,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": 0.0,
+   "lift": 0.03,
+   "lift_color": "#1A2230",
+   "vignette": 0.12
+  }
+ },
+ "haze": {
+  "box_m": [
+   -420.0,
+   15.0,
+   -1.0,
+   420.0,
+   420.0,
+   8.0
+  ],
+  "density": 0.002,
+  "anisotropy": 0.6,
+  "color": "#F2C9A8"
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "order": {
+  "A": "final 2 (softer sun)",
+  "B": "final 1 (12:23)"
+ },
+ "reply": {
+  "A": 6.5,
+  "B": 6.8,
+  "prefer": "B",
+  "differences": [
+   {
+    "what": "Sun shadows on the wall are crisper and better defined in B (horn and pole shadows right of the right speaker, the window-mullion shadow band); in A they are softer and mushier, so the late-sun light reads less convincingly",
+    "region": [
+     1650,
+     500,
+     2000,
+     700
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "The cast shadows behind the vase and turntable on the wall have harder edges in B, giving clearer depth between the sideboard props and the wall",
+    "region": [
+     930,
+     530,
+     1400,
+     680
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "The long window shadow lines across the floor are a little sharper in B, so the parquet looks more like it is in direct sun",
+    "region": [
+     100,
+     880,
+     2000,
+     1125
+    ],
+    "favours": "B"
+   },
+   {
+    "what": "The upper wall's window-frame shadow edge is softer in A, a gentler gradient that is slightly more flattering but less legible",
+    "region": [
+     700,
+     0,
+     2000,
+     380
+    ],
+    "favours": "A"
+   }
+  ]
+ }
+}

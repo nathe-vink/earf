@@ -7,7 +7,7 @@
   "ts": {"Re": 5.1, "Le_mH": 0.75, "Fs": 35, "Qms": 6.0, "Qes": 0.34, "Qts": 0.32, "Vas_l": 223, "Sd_cm2": 805, "Xmax_mm": 5.75, "Pe_w": 400, "sens_db": 99.0, "sens_ref": "1W", "nominal_ohm": 8},
   "geom": {"kind": "cone", "frame_od": 393.0, "flange_t": 10.0, "cutout": 356.0, "depth": 165.0, "sd_cm2": 805.0, "surround_w": 24.0, "roll_h": 10.0,
            "roll_seat": 10.0, "magnet_d": 125.0, "magnet_h": 52.0, "cone": "paper", "cap": "convex", "cap_d": 100.0, "cap_h": 14.0, "bolt_d": 375.0, "bolts": 8, "bolt_hole": 6.5,
-           "_proportioned": "flange_t, surround_w, roll_h, roll_seat (the roll's top level with the flange, as a pro woofer's: confirm on the driver before a grille is fitted), magnet, cap, bolt circle"}},
+           "_proportioned": "flange_t, surround_w, roll_h, roll_seat (the roll's top level with the flange, as a pro woofer's: confirm on the driver before a grille is fitted), magnet, cap, bolt circle", "spokes": 8, "bolt_slot": [9.5, 7.4], "screw": [10.5, 3.3], "waves": 4, "wave_h": 2.5, "fins": 24, "fin_h": 12.0, "_round31": "as FaitalPRO draws and photographs it (spinoffs/barkhorn/drivers31.md): eight spokes, eight slots 9.5 x 7.4, the surround an accordion of four waves, the basket finned round the motor to 150 across at the back; the screws M6 button heads (ISO 7380, 10.5 x 3.3)"}},
 
  "bms-4550-16": {"kind": "compression", "maker": "BMS", "model": "4550-16 compression driver, 1 in exit, polyester diaphragm, 16 ohm",
   "usd": 154, "supplier": "Toutlehautparleur (EUR 142)", "price_date": "2026-10-10", "url": "https://en.toutlehautparleur.com/compression-driver-bms-4550-16-ohm-1-inch-exit.html",

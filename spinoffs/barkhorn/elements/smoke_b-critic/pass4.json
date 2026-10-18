@@ -1,0 +1,12 @@
+{"stage1": {"impression": "A calm, high-key misty birch wood that reads at thumbnail size: black speaker against white mist, plenty of room for type on the left. Up close it still reads as CG. The snow looks like crumpled white satin with swirly brush streaks. A hard horizontal crease runs across the whole foreground. The speaker sits on the snow with no contact shadow and no cast shadow, so it looks pasted in. The smoked acrylic reads as flat grey glass with no light passing through it, and nothing in the frame shows the low sun the card describes.", "score": 5.5},
+ "verdict": "iterate",
+ "changes": [
+  {"id": "c1", "change": {"setting": "snow", "to": "finer texture, bump 0.6, relief 0.8, displace 0.04, sparkle, blue subsurface"}, "accept": {"region": [300, 680, 1200, 760], "metric": "lum_range", "op": "between", "value": [18, 40]}},
+  {"id": "c2", "change": {"setting": "the foreground crease", "to": "smooth falloff, or the shadow broken and diagonal"}, "accept": {"region": [300, 640, 1200, 665], "metric": "lum_p5", "op": ">=", "value": 222}},
+  {"id": "c3", "change": {"setting": "speaker z, snow_lip", "to": "z -0.12; lip 0.05 / 0.14, drift-like edge"}, "accept": {"region": [790, 582, 980, 598], "metric": "lum_median", "op": "<=", "value": 215}},
+  {"id": "c4", "change": {"setting": "sun lamp", "to": "irradiance 9.0, angle 4.0"}, "accept": {"region": [975, 565, 1200, 605], "metric": "lum_median", "op": "<=", "value": 222}},
+  {"id": "c5", "change": {"setting": "lights.mistglow", "to": "irradiance 14, elevation 28"}, "accept": {"region": [812, 360, 955, 400], "metric": "lum_p95", "op": ">=", "value": 95}},
+  {"id": "c6", "change": {"setting": "the trunk behind the horn", "to": "moved left or removed"}, "accept": {"region": [800, 60, 960, 225], "metric": "lum_p5", "op": ">=", "value": 205}},
+  {"id": "c7", "change": {"setting": "lights.bounce", "to": "#E6E8EA, 0.6 x 0.5 m at azimuth 35"}, "accept": {"region": [950, 360, 990, 500], "metric": "edge", "axis": "x", "op": "<=", "value": 95}},
+  {"id": "c8", "change": {"setting": "trunk bases", "to": "sunk, a snow collar and tree well each"}, "accept": {"region": [495, 520, 550, 535], "metric": "lum_median", "op": "<=", "value": 225}}],
+ "score_if_fixed": 7.5, "note": "condensed when saved"}

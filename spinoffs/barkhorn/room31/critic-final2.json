@@ -1,0 +1,341 @@
+{
+ "stage1": {
+  "impression": "A warm, well-observed late-sun interior: plaster, oak floor and window light are convincing, and the green light passing through the cabinets onto the credenza and floor is the right idea. But it is staged like a configurator. The frontal symmetry, the dead-centre credenza and the flat back wall give it no foreground and no air. The cabinet interiors read as saturated neon-green CG plastic rather than tinted cast acrylic over white batts, and the walnut credenza looks like a printed laminate.",
+  "score": 6.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Cabinet interiors read as tinted acrylic over white batts, near the reference #B2C9A2 (delta_e2000 < 10 in the side-rib regions), not as neon-green plastic (now 12.5 to 21.6)",
+  "Depth from foreground to background: one real out-of-focus foreground element, and visible air in the sunbeam",
+  "Credenza reads as real oiled walnut (grain relief, sheen variation), not as a flat printed veneer",
+  "No crushed void at the window sill trench (crush_pct in the left strip near 0)",
+  "Speakers hold the eye ahead of the credenza sun stripe and the wall: the speaker fronts are no darker than the floor, and the wall does not approach clipping",
+  "Composition has a point of view (a weighted asymmetry or a lead-in), not catalogue symmetry around the credenza"
+ ],
+ "defects": [
+  {
+   "region": [
+    490,
+    800,
+    860,
+    1360
+   ],
+   "what": "Left cabinet interior (ribs, batts, port block) reads as a saturated green plastic toy; delta_e2000 to #B2C9A2 is 12.5 at the rib and 21.6 at the port block"
+  },
+  {
+   "region": [
+    2030,
+    800,
+    2400,
+    1360
+   ],
+   "what": "Same on the right cabinet; the port block at 2080-2200 x 1270-1330 is near clipping in green (g 209)"
+  },
+  {
+   "region": [
+    960,
+    990,
+    1930,
+    1270
+   ],
+   "what": "Walnut credenza doors look like a flat printed decal: no pore relief, uniform sheen, and too-perfect cathedral grain repeated across three doors"
+  },
+  {
+   "region": [
+    1420,
+    1000,
+    1530,
+    1270
+   ],
+   "what": "The sun stripe on the centre door (r238 g190 b151, twice the surrounding door's luminance) with a yellow-green fringe is the brightest mid-frame object and reads as a stain or reflection rather than as light through the speaker"
+  },
+  {
+   "region": [
+    0,
+    1150,
+    300,
+    1450
+   ],
+   "what": "Window sill floor trench is a pure black slot; crush_pct 0.78 in the left strip"
+  },
+  {
+   "region": [
+    2150,
+    0,
+    2880,
+    500
+   ],
+   "what": "Hard dark wedge at the top right of the wall (median 104 against the wall's 225) splits the wall diagonally and pulls the eye to the corner"
+  },
+  {
+   "region": [
+    1330,
+    750,
+    1700,
+    950
+   ],
+   "what": "Left horn's shadow on the wall behind the turntable and vase is a large ambiguous dark blob crowding the props"
+  },
+  {
+   "region": [
+    0,
+    0,
+    2880,
+    1620
+   ],
+   "what": "Frontal, perfectly symmetric staging with no foreground and everything sharp at f/5.6; no atmosphere in the sunbeams, so it reads as an archviz render"
+  },
+  {
+   "region": [
+    1000,
+    400,
+    1800,
+    750
+   ],
+   "what": "Heading wall near clipping (median 225, p95 233, clip 0.69%) while the speaker covers sit at 110-130, so the wall outshines the product"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The cabinet interiors read as oversaturated neon green, not as light through tinted acrylic over white batts, which makes the hero look like CG plastic.",
+   "evidence": {
+    "region": [
+     495,
+     930,
+     515,
+     1180
+    ],
+    "measured": "rib median rgb 127/168/104, delta_e2000 12.5 to #B2C9A2; port block 600-720 x 1270-1330 delta_e 21.6; right port block g 209"
+   },
+   "change": {
+    "setting": "finish: green trim",
+    "from": "0.3",
+    "to": "0.5, applied to mid-tones and highlights of greens"
+   },
+   "expected": "Interior ribs and batts read paler and milkier, closer to #B2C9A2, with the tint kept in the 20 mm walls and edges",
+   "accept": {
+    "region": [
+     495,
+     930,
+     515,
+     1180
+    ],
+    "metric": "delta_e",
+    "hex": "#B2C9A2",
+    "op": "<",
+    "value": 9.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The wall outshines the product: the speakers sit a stop below the wall, and the heading wall is close to clipping.",
+   "evidence": {
+    "region": [
+     1000,
+     400,
+     1800,
+     750
+    ],
+    "measured": "wall median 225, p95 233, clip 0.69%; speaker covers 520-820 x 820-1180 median 110, 2080-2380 median 130"
+   },
+   "change": {
+    "setting": "render.exposure and lamp `bounce`",
+    "from": "exposure -1.0; bounce irradiance 0.7",
+    "to": "exposure -1.2; bounce irradiance 1.4, target [0, 0.3, 0.8]"
+   },
+   "expected": "Wall drops to about 210 with plaster texture kept, and the speaker fronts hold about 115-135 so they read as the brightest coloured objects",
+   "accept": {
+    "region": [
+     1000,
+     400,
+     1800,
+     750
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 222
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "composition",
+   "problem": "Catalogue symmetry around a dead-centre credenza with no foreground gives the image no point of view and no depth.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     2880,
+     1620
+    ],
+    "measured": "seen: mirror-symmetric staging, all planes sharp at f/5.6, empty foreground floor"
+   },
+   "change": {
+    "setting": "prop 10 (modern_arm_chair_01) and camera",
+    "from": "chair off; camera x 0.0, f/5.6",
+    "to": "chair on at [-1.55, -2.6, 0.0] rotate 200 so its arm and back enter the lower-left corner, out of focus; camera x 0.3 (still squared, verticals straight), f/4"
+   },
+   "expected": "A soft dark foreground edge at lower left leads into the left speaker. The frame weights left toward the window and light, and the right speaker sits against the open wall.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The walnut credenza reads as printed laminate and its three doors repeat the same cathedral grain.",
+   "evidence": {
+    "region": [
+     960,
+     990,
+     1930,
+     1270
+    ],
+    "measured": "seen: uniform sheen and no pore relief; door median lum 97-114 with identical grain figures"
+   },
+   "change": {
+    "setting": "prop 2 credenza texture",
+    "from": "walnut_veneer_02, grain_rot 90, one map",
+    "to": "add a 0.3 mm pore bump from the texture's roughness, oiled finish roughness 0.45 with a 0.15 variation map, and offset the UVs per door so no figure repeats"
+   },
+   "expected": "Door faces show fine pore texture and soft sheen variation in the sun stripe. Each door's figure is different.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "A crushed black slot at the window sill reads as a hole in the set.",
+   "evidence": {
+    "region": [
+     0,
+     1150,
+     300,
+     1450
+    ],
+    "measured": "left strip crush_pct 0.78; trench is a pure black void"
+   },
+   "change": {
+    "setting": "window sill floor trench",
+    "from": "black open trench",
+    "to": "a linear floor grille in the frame colour #5A5650 at 60% open area, with a mid-grey base 30 mm below"
+   },
+   "expected": "The sill reads as a heating-grille detail with visible slats, and no pixels below 10",
+   "accept": {
+    "region": [
+     0,
+     1150,
+     300,
+     1450
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 0.1
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "There is no atmosphere: the sunbeam is invisible in the air, so the room has no depth and the light through the cabinets is not felt.",
+   "evidence": {
+    "region": [
+     300,
+     300,
+     1500,
+     1300
+    ],
+    "measured": "seen: air between window and wall is perfectly clear and the beams show only where they land"
+   },
+   "change": {
+    "setting": "room volume",
+    "from": "none",
+    "to": "homogeneous scatter volume filling the room, density 0.004, anisotropy 0.6"
+   },
+   "expected": "Faint warm shafts from the window, with a green tint behind each cabinet. Background contrast drops slightly and the shafts separate the planes.",
+   "accept": {
+    "region": [
+     600,
+     100,
+     2300,
+     600
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 115
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The hard dark wedge at the top right of the wall cuts the wall diagonally and draws the eye to the corner.",
+   "evidence": {
+    "region": [
+     2150,
+     0,
+     2880,
+     500
+    ],
+    "measured": "median 104 against the wall's 225 inside the sun patch"
+   },
+   "change": {
+    "setting": "lamp `north`",
+    "from": "irradiance 2.2",
+    "to": "irradiance 3.5, position [2.4, -3.6, 2.4]"
+   },
+   "expected": "The shadow wedge still reads as shade but opens to about 125-140, so the wall reads as one plane with a sun patch",
+   "accept": {
+    "region": [
+     2150,
+     0,
+     2880,
+     500
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     120,
+     145
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The left horn's shadow lands as a dark blob behind the turntable and vase, crowding the props and confusing their silhouettes.",
+   "evidence": {
+    "region": [
+     1330,
+     750,
+     1700,
+     950
+    ],
+    "measured": "p5 102 against p95 228 inside the prop group; the shadow overlaps the vase's left edge"
+   },
+   "change": {
+    "setting": "prop 9 vase and prop 8 books",
+    "from": "vase at [0.62, 0.75, 0.56]; books at [-0.55, 0.71, 0.56]",
+    "to": "vase at [0.48, 0.75, 0.56] (fully in sun, clear of the shadow); books at [-0.62, 0.71, 0.56]"
+   },
+   "expected": "The vase reads against lit plaster, and the shadow falls on bare wall between the turntable and the vase",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the interior batts visibly white or quilted (voile sleeves) behind the tint, rather than reading as solid green blocks",
+   "why": "This is the speaker's own interior construction and material; it is fixed by the card. Only the grade and the light (c1, c2) are adjusted here."
+  },
+  {
+   "request": "Hide or simplify the port block and bracing visible through the acrylic, which clutter the silhouette",
+   "why": "These are the speaker's parts; fixed."
+  }
+ ],
+ "score_if_fixed": 8.0
+}

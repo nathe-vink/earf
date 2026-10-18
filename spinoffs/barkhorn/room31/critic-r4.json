@@ -1,0 +1,396 @@
+{
+ "stage1": {
+  "impression": "A warm, symmetrical golden-hour living room. The pair of green horn speakers reads at a glance and the green light thrown on the wall behind the credenza is a lovely, true detail. But it still reads as a careful CG interior. The sunlit wall, curtain and rug all flatten into the same featureless cream. The walnut credenza has smeared, stretched grain. The view out of the window is a dark, muddy strip. The product's greens are pushed to a neon lime by the very orange light.",
+  "score": 6.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Sunlit plaster shows real surface texture under the raking sun (lum_range >= 10 inside the sun patch [560,60,820,330]) instead of a flat 2.7 range",
+  "Highlights are not all stacked on one tone-mapper shoulder: the sunlit wall, curtain and rug must separate (wall sun median ~195-210, curtain and rug distinct)",
+  "The product reads close to its reference colour: the cover cloth disc within dE 6 of #6F7F66 on the shaded speaker, and the cabinet interior a pale tinted green, not lime (b_median > 70)",
+  "The credenza veneer reads as real walnut: continuous grain without horizontal smear bands",
+  "The window/exterior reads as a bright daylit outside (median >= 110), not a dark strip at the left edge",
+  "A calm, evenly lit wall area for the heading 'A pair of Poison.' that is not crossed by a hard light/shadow edge"
+ ],
+ "defects": [
+  {
+   "region": [
+    560,
+    60,
+    820,
+    330
+   ],
+   "what": "Sunlit plaster is dead flat (lum_range 2.7). No plaster grain under a 14 deg raking sun, so it reads as CG paint"
+  },
+  {
+   "region": [
+    110,
+    50,
+    210,
+    600
+   ],
+   "what": "Curtain (median 227), sunlit wall (222) and rug (221) all sit on the same highlight plateau: the tone-mapping shoulder compresses every sunlit surface to one value"
+  },
+  {
+   "region": [
+    480,
+    500,
+    965,
+    635
+   ],
+   "what": "Walnut credenza grain is stretched into horizontal streaks/bands (vertical profile swings 154-170 in regular stripes). Reads as a smeared texture, not veneer"
+  },
+  {
+   "region": [
+    0,
+    0,
+    100,
+    650
+   ],
+   "what": "The exterior through the glazing is a dark, muddy brown strip (median 56-61) beside a 222 sunlit wall. Implausible for the sun-side windows, and it makes a heavy black bar at the frame edge"
+  },
+  {
+   "region": [
+    280,
+    480,
+    380,
+    580
+   ],
+   "what": "Cover disc reads saturated yellow-green (100,122,64), dE 9.6 from the cloth reference #6F7F66 (right disc dE 10.5). The warm sun and the grade shift the product colour"
+  },
+  {
+   "region": [
+    300,
+    600,
+    360,
+    640
+   ],
+   "what": "Cabinet interior glows neon lime (100,131,48), dE 25 from the #B2C9A2 reference; right speaker dE 35. The batts read as lime blocks, not pale voile"
+  },
+  {
+   "region": [
+    235,
+    275,
+    290,
+    370
+   ],
+   "what": "The two horns read differently: left median 115 vs right 145, dE 11 vs 22 to #4C6A36. The pair does not look identical"
+  },
+  {
+   "region": [
+    300,
+    700,
+    1300,
+    810
+   ],
+   "what": "The rug is the brightest mass in the lower third (median 221) and pulls the eye down away from the speakers. Its front edge is cropped by the frame bottom"
+  },
+  {
+   "region": [
+    480,
+    30,
+    960,
+    230
+   ],
+   "what": "The heading zone is split by a hard sun/shadow edge near x 850 (lum_range 106). Type set over the wall would straddle it"
+  },
+  {
+   "region": [
+    600,
+    450,
+    760,
+    480
+   ],
+   "what": "The turntable is tiny, glassy and nearly lost against the green wall caustic. It reads as clutter rather than a hero prop"
+  },
+  {
+   "region": [
+    1220,
+    540,
+    1240,
+    640
+   ],
+   "what": "The right mains lead and socket sit tight to the speaker edge in the shadow. Fine, but the cable has a CG-uniform look"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "Every sunlit surface sits on the same tone-mapper shoulder, so the wall, curtain and rug lose all texture and separation.",
+   "evidence": {
+    "region": [
+     560,
+     60,
+     820,
+     330
+    ],
+    "measured": "sun-patch wall median 221.7, lum_range 2.7; curtain median 226.8; rug median 220.7"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "-0.55",
+    "to": "-0.95"
+   },
+   "expected": "The sunlit wall drops to ~195-205 and comes off the shoulder so plaster and pile detail resolve. Shadows deepen slightly (fill lamps in c6 compensate).",
+   "accept": {
+    "region": [
+     560,
+     60,
+     820,
+     330
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     190,
+     210
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The plaster shows no relief under a grazing sun, the clearest 'render' tell in the frame.",
+   "evidence": {
+    "region": [
+     560,
+     60,
+     820,
+     330
+    ],
+    "measured": "lum_range 2.7, p5 220.0, p95 222.7"
+   },
+   "change": {
+    "setting": "prop 1 (plaster) bump / tex_scale / tint_mix",
+    "from": "bump 0.45, tex_scale 2.0, tint_mix 0.85",
+    "to": "bump 1.2, tex_scale 1.0 (finer real-scale trowel marks), tint_mix 0.6 so the scan's own tonal variation shows"
+   },
+   "expected": "Visible soft trowel texture and slight tonal mottling in the sun patch. The edges of the window-light shapes pick up a fine grain.",
+   "accept": {
+    "region": [
+     560,
+     60,
+     820,
+     330
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 10
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The sun is so orange that the product's greens go lime and the cloth reads yellow-green, so the colour is not true.",
+   "evidence": {
+    "region": [
+     280,
+     480,
+     380,
+     580
+    ],
+    "measured": "left cover disc (100,122,64), dE 9.6 vs #6F7F66; interior (100,131,48), dE 25 vs #B2C9A2; sunlit wall b_median 173 vs r 248"
+   },
+   "change": {
+    "setting": "sun colour and render.white_balance_k",
+    "from": "#FFD6A0, 5600 K",
+    "to": "#FFE2BC, white balance set so the sunlit wall renders a warm cream (r-b gap about 50 rather than 75)"
+   },
+   "expected": "Still late afternoon, but the product greens move back toward their reference: the cover disc dE < 6, the interior a paler, cooler green.",
+   "accept": {
+    "region": [
+     280,
+     480,
+     380,
+     580
+    ],
+    "metric": "delta_e",
+    "hex": "#6F7F66",
+    "op": "<",
+    "value": 6
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The exterior through the glazing is a dark brown bar, which contradicts the bright sun pouring in and weighs down the left edge.",
+   "evidence": {
+    "region": [
+     20,
+     0,
+     90,
+     620
+    ],
+    "measured": "median 60.7, p95 129.4, against an interior sunlit wall at 222"
+   },
+   "change": {
+    "setting": "prop 12 (exterior) strength / rotation_deg",
+    "from": "strength 1.6, rotation 40",
+    "to": "strength 3.2, rotation chosen so that sunlit foliage and some sky fill the visible pane, not the shaded trunks"
+   },
+   "expected": "A daylit, airy view outside (median ~110-140) that explains the sunlight, gives depth and lightens the left edge.",
+   "accept": {
+    "region": [
+     20,
+     0,
+     90,
+     620
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 105
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The walnut credenza grain is stretched into horizontal bands, so the veneer reads as a smeared CG texture.",
+   "evidence": {
+    "region": [
+     820,
+     520,
+     950,
+     620
+    ],
+    "measured": "vertical profile alternates 154/170/153 in regular bands; visible horizontal streaks across all three doors"
+   },
+   "change": {
+    "setting": "prop 2 (credenza) texture",
+    "from": "walnut_veneer, current UV scale",
+    "to": "a real high-resolution walnut veneer scan mapped at true scale (about 0.6 m per tile), grain running continuously across the three doors (sequence-matched), with a slight clearcoat sheen"
+   },
+   "expected": "Continuous fine cathedral or straight grain with no banding. The credenza reads as furniture photographed, not textured.",
+   "accept": {
+    "region": [
+     820,
+     520,
+     950,
+     620
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": "<",
+    "value": 10
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The two speakers of the pair are lit very differently, so they read as two colours.",
+   "evidence": {
+    "region": [
+     1015,
+     275,
+     1060,
+     370
+    ],
+    "measured": "right horn median 145 dE 21.8 vs left horn 115 dE 11.3 to #4C6A36; right interior dE 35 vs left 25"
+   },
+   "change": {
+    "setting": "speakers toe-in / lamp north",
+    "from": "toe-in [4, -4]; north irradiance 0.45",
+    "to": "toe-in [6, -6] so both faces take the sun at a similar angle; north irradiance 0.7 to lift the shaded speaker's open shadows after the c1 exposure cut"
+   },
+   "expected": "Both horns within about 10 levels of each other in median, so the pair reads as identical.",
+   "accept": {
+    "region": [
+     235,
+     275,
+     290,
+     370
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     125,
+     150
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The rug is the brightest mass in the bottom of the frame and pulls the eye from the speakers.",
+   "evidence": {
+    "region": [
+     300,
+     720,
+     1100,
+     800
+    ],
+    "measured": "median 220.7, as bright as the sunlit wall"
+   },
+   "change": {
+    "setting": "prop 3 (rug) value / tint",
+    "from": "value 0.62, tint #9C8E78",
+    "to": "value 0.45, tint #8E8170 (an oatmeal wool, a stop darker than the wall)"
+   },
+   "expected": "The rug settles a stop below the wall and becomes a base, not a competing highlight.",
+   "accept": {
+    "region": [
+     300,
+     720,
+     1100,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     165,
+     195
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "composition",
+   "problem": "The heading's zone on the wall is split by a hard sun/shadow edge, so type over the wall would straddle it.",
+   "evidence": {
+    "region": [
+     480,
+     30,
+     960,
+     230
+    ],
+    "measured": "lum_range 106 (median 221, p5 116); edge at x ~850"
+   },
+   "change": {
+    "setting": "sun azimuth",
+    "from": "-62 deg",
+    "to": "about -68 deg, so the window-light patch spans the upper centre of the wall (x 480-960) and the shadow edge moves right of x 1000"
+   },
+   "expected": "A continuous lit field across the upper centre for the heading, with the window shadows still raking across the right side.",
+   "accept": {
+    "region": [
+     480,
+     30,
+     960,
+     230
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 30
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the cover cloth a visible woven texture; the disc reads as a flat painted circle (right disc lum_range 3.4)",
+   "why": "The cover is part of the speaker and the card fixes its parts and materials"
+  },
+  {
+   "request": "Make the internal batts and voile read as soft white textile rather than lime blocks beyond what lighting can do",
+   "why": "The cabinet's interior lining is part of the fixed speaker"
+  }
+ ],
+ "score_if_fixed": 8.0
+}

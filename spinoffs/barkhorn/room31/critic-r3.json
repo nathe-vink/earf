@@ -1,0 +1,371 @@
+{
+ "stage1": {
+  "impression": "A calm, symmetrical, credible room. The plaster, the walnut, the laminate and the warm raking sun on the wall get close to a design-magazine interior, and the pair reads at once as two green objects at a good scale. But the light is flat: sun and shade on the wall are only about half a stop apart. The idea of sun passing through green acrylic never shows, because no green light falls anywhere in the room. The near-white rug, the brightest mass in the frame, pulls the eye to the empty foreground, and a blue stripe across it gives the render away.",
+  "score": 6.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Visible green transmitted light from at least one cabinet or horn on the back wall or floor, in frame, reading as a coloured patch at a glance",
+  "Sun-to-shade ratio on the back wall of at least 2.5 stops (lit median about 220, shade median 130 or lower), so the late sun reads as real sun",
+  "The foreground rug no brighter than the lit wall, with a real pile edge and no stripe artefact",
+  "No crushed black holes in non-product shadows (credenza toe-kick above 14 median)",
+  "Plaster relief at a real scale: fine trowel texture, not oversized orange-peel bump",
+  "Cool skylight in the shade areas against the warm sun, rather than the same warm cast everywhere"
+ ],
+ "defects": [
+  {
+   "region": [
+    160,
+    735,
+    1280,
+    810
+   ],
+   "what": "Rug renders near-white (lum median 239, brighter than the lit wall's 220) despite tint #A89A82. It is a flat slab with a hard edge and a thin blue line running diagonally across it, a texture or reflection artefact."
+  },
+  {
+   "region": [
+    500,
+    640,
+    950,
+    660
+   ],
+   "what": "Credenza toe-kick is a crushed black void (lum median 4.6, crush 15%)."
+  },
+  {
+   "region": [
+    440,
+    640,
+    600,
+    720
+   ],
+   "what": "Floor beside the left cabinet shows no green transmitted light (r 121 > g 101). The sun-through-cabinet idea in the brief is not visible anywhere."
+  },
+  {
+   "region": [
+    1210,
+    420,
+    1340,
+    600
+   ],
+   "what": "The right cabinet's wall shadow is neutral grey with no tint, so the speaker reads as opaque and not as tinted acrylic in sun."
+  },
+  {
+   "region": [
+    500,
+    60,
+    1400,
+    240
+   ],
+   "what": "Lit wall median 220 against shaded wedge median 158: about 0.5 stop. The sun is too weak against the fill for a late-afternoon photograph, and the image looks flat and evenly lit like CG."
+  },
+  {
+   "region": [
+    190,
+    0,
+    1440,
+    640
+   ],
+   "what": "Plaster bump reads as oversized stucco relief at this distance. It is the most 'rendered' surface in the frame."
+  },
+  {
+   "region": [
+    0,
+    0,
+    150,
+    700
+   ],
+   "what": "Glazed left wall is a cold blue-grey dead strip (lum median 77) with a flat inner reveal. The smeared tree HDRI with bright sky blotches draws the eye at the frame edge."
+  },
+  {
+   "region": [
+    1340,
+    470,
+    1440,
+    810
+   ],
+   "what": "Half a chair cut by the frame edge. The saturated tan cushion competes with the right speaker."
+  },
+  {
+   "region": [
+    230,
+    270,
+    430,
+    380
+   ],
+   "what": "Horn throat crushes to pure black (17% crush). This is product, see out_of_scope; fill could open it slightly."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The brief's central idea, late sun passing through both cabinets, is invisible: no green light lands anywhere in the frame.",
+   "evidence": {
+    "region": [
+     440,
+     640,
+     600,
+     720
+    ],
+    "measured": "floor beside the left speaker r121 g101 b76, no green. Right speaker's wall shadow [1210,420,1340,600] r215 g197 b171, neutral. With azimuth -75 and elevation 16, the horn shadows land about 2.4 m to the right of each horn, behind the right cabinet or out of frame."
+   },
+   "change": {
+    "setting": "sun azimuth / elevation",
+    "from": "azimuth -75, elevation 16",
+    "to": "azimuth -62, elevation 14 (more from the camera side, so the left horn's transmitted light lands on the back wall above the credenza, around x -0.1 m, z 0.6-1.0 m)"
+   },
+   "expected": "A soft-edged pale-green patch from the left horn, and a green-edged one from the right horn near the right frame edge, on the plaster above and right of the credenza. The cabinets' side faces glow brighter.",
+   "accept": {
+    "region": [
+     520,
+     330,
+     820,
+     450
+    ],
+    "metric": "delta_e",
+    "hex": "#C4CFA4",
+    "op": "<",
+    "value": 14
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Sun and shade are only about half a stop apart, so the light looks like an evenly filled render, not late sun.",
+   "evidence": {
+    "region": [
+     1000,
+     60,
+     1400,
+     200
+    ],
+    "measured": "shaded wall median 158 against lit wall [500,60,860,240] median 220. Floor sun/shade 155/99 (profile 440-1000)."
+   },
+   "change": {
+    "setting": "sun irradiance; lamp north irradiance; lamp bounce irradiance; sky strength; render exposure",
+    "from": "sun 16, north 1.0, bounce 0.35, sky 0.6, exposure -0.2",
+    "to": "sun 30, north 0.45, bounce 0.2, sky 0.45, exposure -0.55 (keep lit wall at the same value)"
+   },
+   "expected": "Lit wall stays about 215-230. Shade falls to about 110-130, a contrast of about 1.5-2 stops in the 8-bit output, so the sun shafts read as sun.",
+   "accept": {
+    "region": [
+     1000,
+     60,
+     1400,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The rug is the brightest mass in the frame and pulls the eye into the empty foreground, and a blue stripe across it reads as an artefact.",
+   "evidence": {
+    "region": [
+     160,
+     745,
+     1280,
+     800
+    ],
+    "measured": "lum median 239, r249 g238 b219, against lit wall 220. A thin blue diagonal line is visible in the crop."
+   },
+   "change": {
+    "setting": "prop 3 rug",
+    "from": "tint #A89A82, tint_mix 0.8, pile 0.018, displace 0.003, res 2k",
+    "to": "tint #9C8E78, tint_mix 1.0, pile 0.025, displace 0.006, res 4k. Remove the blue stripe: check the texture for a seam or stripe channel and rotate or offset it out of frame. Move the rug back 0.3 m (position y -1.2) so its front edge is cut by the frame and no hard slab edge shows."
+   },
+   "expected": "Rug reads as warm oatmeal wool about 25-40 levels below the lit wall, with visible pile and no line.",
+   "accept": {
+    "region": [
+     160,
+     760,
+     1280,
+     805
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     160,
+     205
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The shadows are as warm as the sunlit areas. A real late-afternoon room has warm sun and cool skylight in the shade, and here that split is missing.",
+   "evidence": {
+    "region": [
+     1000,
+     60,
+     1400,
+     200
+    ],
+    "measured": "shade r166 g157 b142 (warm, b-r -24). Lit r233 g219 b194."
+   },
+   "change": {
+    "setting": "sun colour; lamp north colour; render white_balance_tint",
+    "from": "sun #FFE6C4, north #EEF2F8, tint 4.0",
+    "to": "sun #FFD6A0, north #DCE6F4, tint 0.0"
+   },
+   "expected": "Shade goes to neutral or slightly cool (b about equal to r). Sun patches go clearly amber.",
+   "accept": {
+    "region": [
+     1000,
+     60,
+     1400,
+     200
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 115
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The plaster relief is oversized for a wall 5.7 m from the camera and reads as CG stucco.",
+   "evidence": {
+    "region": [
+     500,
+     60,
+     860,
+     240
+    ],
+    "measured": "visible blotchy relief at 1440 px. Lit-wall p5-p95 spread 64 levels inside a uniformly lit area, mostly from bump."
+   },
+   "change": {
+    "setting": "prop 1 plaster bump (and texture scale)",
+    "from": "bump 1.0",
+    "to": "bump 0.45, texture tiled 1.5x finer"
+   },
+   "expected": "A fine, chalky lime-plaster surface. The lit wall's internal spread drops, and type over the wall becomes cleaner.",
+   "accept": {
+    "region": [
+     560,
+     80,
+     840,
+     220
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 45
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The credenza's toe-kick is a pure black hole that no real room photograph would show.",
+   "evidence": {
+    "region": [
+     500,
+     640,
+     950,
+     660
+    ],
+    "measured": "lum median 4.6, crush 15%."
+   },
+   "change": {
+    "setting": "prop 2 credenza lift (plinth set-back) and a low floor bounce",
+    "from": "lift 0.85, no floor-level fill",
+    "to": "lift 0.85 with the plinth set back no more than 40 mm; add a small warm area lamp (0.8 x 0.3 m, irradiance 0.15, #FFE8CC) on the floor at [0, -1.0, 0.1] aimed at [0, 0.7, 0.05]"
+   },
+   "expected": "The toe-kick reads as dark walnut in shadow, not void.",
+   "accept": {
+    "region": [
+     500,
+     640,
+     950,
+     660
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The glazed left edge is a cold dead strip with a smeared exterior, which pulls the eye off the pair.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     150,
+     700
+    ],
+    "measured": "lum median 77, blue-grey reveal. HDRI blur 0.004 smears branches with bright sky blotches."
+   },
+   "change": {
+    "setting": "prop 11 exterior; window frame",
+    "from": "strength 2.2, blur 0.004, rotation 0; frame #2B2926",
+    "to": "strength 1.6, blur 0.0015, rotation 40 deg (a denser, darker part of the forest behind the glass); add a linen sheer curtain, half drawn, on window 2's frame-side jamb"
+   },
+   "expected": "The edge reads as a real window with a soft sheer catching sun, framing the room without a bright blotch.",
+   "accept": {
+    "region": [
+     20,
+     0,
+     110,
+     620
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 175
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "composition",
+   "problem": "A half-cropped chair with a saturated tan cushion competes with the right speaker for attention.",
+   "evidence": {
+    "region": [
+     1340,
+     470,
+     1440,
+     810
+    ],
+    "measured": "cushion r about 170 g 100: the most saturated non-product colour in the frame, at the edge."
+   },
+   "change": {
+    "setting": "prop 10 chair",
+    "from": "position [1.95, -1.25, 0.0], colour #7A4A2C mix 0.8",
+    "to": "position [2.35, -1.6, 0.0] (only the arm and leg in frame), colour #8A7460 mix 0.8"
+   },
+   "expected": "The chair becomes a quiet edge cue for scale. The right speaker regains the eye.",
+   "accept": {
+    "region": [
+     1360,
+     480,
+     1440,
+     640
+    ],
+    "metric": "r_median",
+    "op": "<",
+    "value": 150
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The woofer cover's disc reads as a flat painted circle through the front panel (measured r70 g99 b64; delta E 12.9 against cloth #6F7F66).",
+   "why": "This is the speaker's cover and colour, which are fixed. Light can only help: c2's lower fill and c1's side sun should give it some cloth modelling."
+  },
+  {
+   "request": "The horn throat crushes to pure black (17% of the horn region).",
+   "why": "It is the speaker's own geometry. Do not change it. A little frontal fill from the camera-side sun in c1 may open it."
+  }
+ ],
+ "score_if_fixed": 7.4
+}
