@@ -173,7 +173,7 @@ def _sand_material(bpy, name, p, s):
         rr = N.math('SQRT', N.math('ADD', N.math('MULTIPLY', ex, ex), N.math('MULTIPLY', ey, ey)))
         en = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 3.0, 'Detail': 6.0})
         rr = N.math('ADD', rr, N.math('MULTIPLY', N.math('SUBTRACT', en.outputs['Fac'], 0.5), p.get('pool_rag', 1.1)))
-        pool = N('MapRange', inputs={'Value': rr, 'From Min': 1.0, 'From Max': 0.9}, clamp=True).outputs['Result']
+        pool = N('MapRange', inputs={'Value': rr, 'From Min': 1.0, 'From Max': 0.78}, clamp=True).outputs['Result']
         wet = N.math('MAXIMUM', wet, pool)
         damp = N.math('MAXIMUM', damp, N('MapRange', inputs={'Value': rr, 'From Min': 1.35, 'From Max': 1.0}, clamp=True).outputs['Result'])
     if 'reach' in p:
@@ -187,7 +187,7 @@ def _sand_material(bpy, name, p, s):
         ry = N.math('ADD', ry, N.math('MULTIPLY', N.math('SUBTRACT', wob2.outputs['Fac'], 0.5), 0.35))
         rd = N.math('SUBTRACT', ry, r0)                                    # metres beyond the reach line (+ wet side)
         rwet = N('MapRange', inputs={'Value': rd, 'From Min': 0.0, 'From Max': rw}, clamp=True).outputs['Result']
-        rdamp = N('MapRange', inputs={'Value': rd, 'From Min': -0.6, 'From Max': 0.0, 'To Min': 0.0, 'To Max': 1.0}, clamp=True).outputs['Result']
+        rdamp = N('MapRange', inputs={'Value': rd, 'From Min': -p.get('damp_reach', 0.6), 'From Max': 0.0, 'To Min': 0.0, 'To Max': 1.0}, clamp=True).outputs['Result']
         wet = N.math('MAXIMUM', wet, rwet)
         damp = N.math('MAXIMUM', damp, rdamp)
         fl = N('TexVoronoi', feature='DISTANCE_TO_EDGE', inputs={'Vector': tc.outputs['Object'], 'Scale': 40.0})
@@ -690,8 +690,12 @@ def _cave_ice_material(bpy, name, p, outer=False):
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear(); N = _N(nt)
     out = N('OutputMaterial'); tc = N('TexCoord')
     bs = N('BsdfPrincipled', inputs={'Base Color': (1, 1, 1, 1), 'Transmission Weight': 1.0, 'IOR': 1.31,
-                                     'Specular IOR Level': 0.5, 'Coat Weight': 0.0 if outer else p.get('wet', 0.5),
-                                     'Coat Roughness': 0.02, 'Coat IOR': 1.33})
+                                     'Specular IOR Level': 0.5, 'Coat Roughness': 0.02, 'Coat IOR': 1.33})
+    if not outer:
+        # meltwater runs down and films the lowest part of the walls only
+        sz = N('SeparateXYZ', inputs={'Vector': tc.outputs['Object']})
+        N.link(N('MapRange', inputs={'Value': sz.outputs['Z'], 'From Min': p.get('wet_to', 0.4), 'From Max': 0.1,
+                                     'To Min': 0.0, 'To Max': p.get('wet', 0.6)}, clamp=True).outputs['Result'], bs.inputs['Coat Weight'])
     rn = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 1.2, 'Detail': 6.0})
     lo, hi = (p.get('outer_rough', [0.35, 0.6]) if outer else p.get('rough', [0.08, 0.35]))
     N.link(N('MapRange', inputs={'Value': rn.outputs['Fac'], 'From Min': 0.4, 'From Max': 0.7, 'To Min': lo,
@@ -702,6 +706,20 @@ def _cave_ice_material(bpy, name, p, outer=False):
     if outer:
         # under the snow: the daylight comes through diffused, as through firn (a translucent face, lit from outside)
         tl = N('BsdfTranslucent', inputs={'Color': _hex(p.get('firn', '#F2F6FA'))})
+        if p.get('layers', True):
+            # the firn behind the ice is uneven (denser and thinner in patches) and crossed by old ash layers, gently
+            # folded: seen through the ice they give the walls depth and the glacier its banding
+            pn = N('TexNoise', inputs={'Vector': tc.outputs['Object'], 'Scale': 0.9, 'Detail': 8.0, 'Roughness': 0.62})
+            patch = N('MapRange', inputs={'Value': pn.outputs['Fac'], 'From Min': 0.3, 'From Max': 0.7, 'To Min': 0.35,
+                                          'To Max': 1.0}).outputs['Result']
+            wv = N('TexWave', wave_type='BANDS', bands_direction='Z', inputs={'Vector': tc.outputs['Object'],
+                   'Scale': p.get('band_scale', 0.45), 'Distortion': 2.5, 'Detail': 2.0, 'Detail Scale': 0.5})
+            band = N('MapRange', inputs={'Value': wv.outputs['Fac'], 'From Min': 0.9, 'From Max': 0.98,
+                                         'To Min': 1.0, 'To Max': p.get('ash', 0.12)}).outputs['Result']
+            k = N.math('MULTIPLY', patch, band)
+            col = N('Mix', data_type='RGBA', blend_type='MULTIPLY', inputs={'Factor': 1.0, 'A': _hex(p.get('firn', '#F2F6FA')),
+                                                                             'B': N('CombineXYZ', inputs={'X': k, 'Y': k, 'Z': k}).outputs[0]})
+            N.link(col.outputs[2], tl.inputs['Color'])
         N.link(tl.outputs[0], out.inputs['Surface'])
     else:
         tr = N('BsdfTransparent', inputs={'Color': (0.95, 0.97, 0.99, 1)})
@@ -712,7 +730,7 @@ def _cave_ice_material(bpy, name, p, outer=False):
     ab = N('VolumeAbsorption', inputs={'Color': _hex(p.get('absorb', '#3E93DC')), 'Density': p.get('density', 1.4)})
     if p.get('scatter', 0) > 0:
         # bubbles through the old ice: a milky, even scattering (homogeneous, so Cycles samples it without marching)
-        sc = N('VolumeScatter', inputs={'Color': (1, 1, 1, 1), 'Density': p['scatter'], 'Anisotropy': 0.6})
+        sc = N('VolumeScatter', inputs={'Color': _hex(p.get('scatter_color', '#FFFFFF')), 'Density': p['scatter'], 'Anisotropy': 0.6})
         ab = N('AddShader', inputs={0: ab.outputs[0], 1: sc.outputs[0]})
     N.link(ab.outputs[0], out.inputs['Volume'])
     return m

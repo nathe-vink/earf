@@ -96,3 +96,27 @@ mist. The ice material, the black sand and the haze carry over from the beach. T
 | pass | image | score | if fixed | verdict | top changes | what I did |
 |---|---|---|---|---|---|---|
 | 4 (cave 1) | c9 (half size, 128) | 5.0 | 7.0 | iterate | walls glossy plastic blobs, no inner structure; right wall dead navy; speaker pale, flat-lit, hazed and pasted on, no contact or reflection; crushed black floor; speaker small; the hole and tunnel end a neutral white patch | Ice rougher (0.06-0.3), scallops jittered 0.6-1.6x and 4 cm deep, finer lumps; a little even scatter (0.15/m: 2/m with thin walls turned the cave to white marble, c10-c11, so the thickness went back to 0.8-1.8 m, where the long path makes the blue); sky strength 2.5; sun warmer #FFE4C4, 3.0. Mouth light now a raking 1.5 x 2 m panel camera-left at 0.35 W/m2. A pool of meltwater under the speaker's front, ragged-edged, reflecting it; sunk 2 cm. Floor lighter (#141416-#34343A), specular 0.2, rougher grains glinting. Camera 50 mm, 0.8 m, 4.3 m, the speaker on the right third. Haze 0.004 through the cave, a mist column 0.012 where the beam falls. Grade: contrast 0.14, clarity 0.12, vignette 0.22, bloom 0.08. |
+| 5 (cave 2) | c13 (half size, 128) | 5.5 | 7.8 | iterate | walls read as grey-lilac chrome or molten plastic, specular, no glow; right wall a navy void; the sun a white floor patch and a blown tunnel end, no shaft; speaker underlit (33); no edge against the wall; pool a cut-out; scallops repeat | Tried (c14-c17): firn behind the ice with patches and ash bands; a high-sun sky (pizzo_pernice_puresky) for a steep beam; thin ice with blue scatter (bleached it again); thick ice under a brighter sky (a bright subway tube); none convincing. Held a duel before going further (below). |
+
+### Duel: beach or cave
+
+A blind duel (critic/ab/PROMPT-DUEL.txt, run by hand so as not to touch `critic/best.json`) between the cave's best
+(c13, pass 5) and the beach's best (r6, pass 3): **beach 6.0, cave 4.5, prefer the beach.** The judge read the
+backlit beach as a clean silhouette with a rim, and the ice chunks held up at 3x (refraction, bubbles, highlights);
+the cave's walls as glossy blue plastic with repeating lumps, its product dissolving blue into blue. Against the beach:
+the straight water/sand seam with dry sand in front, colour fringing at the cabinet's edges, the dark front, the heavy
+shadow. So the beach it is, after all; the cave stays in `ice_b.py` (`cave_shot`) and `ice_b_el.cave`. Two concepts
+proven, the better one kept; the brief's half-point rule did its job by forcing the comparison.
+
+### Back on the beach: pass 3's list
+
+- Sun at azimuth 168, behind the cabinet's left half (pass 3 asked "+8 deg", the wrong way for this frame: at 175 the
+  sun walked off to the left, r7).
+- A photographer's bounce beside the camera: a 2.5 x 2 m white reflector, 1.5 W/m2 at the speaker, #FFE6CC, its
+  reflections at 0.3, so the front reads in the backlight.
+- The wash reaches 1.6 m in front of the speaker with a wobbling, lacy edge and damp sand grading over a metre before
+  it: the speaker stands inside one wet surface, the dry sand only in the foreground.
+- Breakers at 6 m (0.3 m high) and 14 m (0.45 m), whitewater 1.0 and 0.9, ocean foam coverage 0.5, chop 1.2; f/5.6.
+- Sand cooler and grainier: #0B0B0D-#26282B, bump 1.5, glints 3 %. Wet roughness 0.06 (the mirror band was as bright
+  as the sky).
+- The big chunk to (-0.9, 3.0) at absorption 3.4/m, bluer. Shadows lifted 0.03 toward #1A2230; vignette 0.12.
