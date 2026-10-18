@@ -42,3 +42,4 @@ macros all from its rig, named hero-light-<colour>); hero-dark-ember.png stays a
 | pass | frame | size | score | top changes | what I did |
 |---|---|---|---|---|---|
 | b1 | concept-bright-ember | 1280 proof | 5.5 | mint cast; a flag's grey wedge on the left; no coloured light thrown; front face matte; woofer a hole; small; light contact | 5600 K tint 5; left flag moved in, background lamps 4 m wide; a graduated front strip; a lamp high behind; a bounce card facing the woofer; 70 mm; softer, longer contact |
+| b2 | concept-bright-ember | 1280 proof | 5.5 | cabinet brick-red, not glowing; right face milky (mirrors the sweep); thin contact; cool white; driver blob | background lamp aimed through the cabinet's line of sight, 2.8; back lamp 5 at 175/38; right flag where the right face mirrors; contact 0.8 over 0.45 m; camera down to 0.75 m; white balance by measure (5100 K turned it blue, 6600 K yellow; 6100 K tint 4 gives 250/250/244) |

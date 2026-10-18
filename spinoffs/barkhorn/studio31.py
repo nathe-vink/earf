@@ -109,7 +109,7 @@ def hero(name, dark=True):
 # not the knobs). Both cover on (the product's own state: the cloth hides the woofer's dark cone) and both from the
 # look book's three-quarter direction (camera about 26 degrees off the speaker's axis), the speaker about 62 % of the
 # frame's height. Each is one of the classic ways glass and clear acrylic are photographed.
-CAM34 = {'position': [2.85, -5.85, 0.98], 'target': [0.0, 0.0, 0.64], 'lens_mm': 70.0, 'level': True}
+CAM34 = {'position': [2.85, -5.85, 0.75], 'target': [0.0, 0.0, 0.66], 'lens_mm': 70.0, 'level': True}
 
 
 def covered(name):
@@ -127,20 +127,20 @@ def bright(name):
     # cover off: the duel against h7 (round 31c) read the cover's flat disc as a placeholder
     s = {'title': f'barkhorn, {name}, bright field', 'size': [2560, 1440], 'product': product(name),
          'set': {'kind': 'sweep', 'color': '#F3F1EE', 'width': 24.0, 'front': 14.0, 'depth': 4.0, 'radius': 3.0, 'height': 9.0,
-                 'contact': {'strength': 0.6, 'distance_m': 0.25, 'core_strength': 0.8, 'core_distance_m': 0.012},
+                 'contact': {'strength': 0.8, 'distance_m': 0.45, 'core_strength': 0.8, 'core_distance_m': 0.012},
                  'flags': [{'center_m': [-1.4, 0.6, 1.6], 'size_m': [1.2, 1.8], 'normal': [1.0, -0.2, 0.0], 'glossy': True},
-                           {'center_m': [1.6, 1.2, 1.6], 'size_m': [1.2, 1.8], 'normal': [-0.8, -0.6, 0.0], 'glossy': True}],
+                           {'center_m': [1.0, 2.1, 0.8], 'size_m': [0.9, 2.0], 'normal': [-0.45, -0.89, 0.0], 'glossy': True}],
                  'bounces': [{'center_m': [0.4, -2.2, 0.6], 'size_m': [2.0, 1.0], 'normal': [-0.15, 0.95, 0.1]}]},
          'camera': dict(CAM34), 'sky': {'kind': 'gradient', 'zenith': '#F2F1EF', 'horizon': '#EEEDEB', 'ground': '#CFCCC8',
                                        'strength': 0.6, 'visible': False},
-         'render': dict(RENDER, white_balance_k=5600, white_balance_tint=5.0), 'finish': dict(FINISH),
+         'render': dict(RENDER, white_balance_k=6100, white_balance_tint=4.0), 'finish': dict(FINISH),
          'materials': {'sweep': {'roughness': 0.5}}}
     s['lights'] = {
         # the background: two broad lamps on the cove behind, out of frame, lifting it to a clean high-key white
         'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 1.2, 2.4], 'target': [-1.5, 4.0, 1.4],
                     'irradiance': 1.8, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
-        'bg-right': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [2.6, 1.2, 2.4], 'target': [0.0, 4.0, 1.4],
-                     'irradiance': 1.8, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
+        'bg-right': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [2.6, 1.2, 2.4], 'target': [-0.9, 4.0, 0.8],
+                     'irradiance': 2.8, 'color': '#FFF4E8', 'camera': False, 'specular': 0.0},
         # a big scrim overhead, a little forward: the top and the horn's crown
         'scrim': {'type': 'area', 'size_m': [3.0, 2.4], 'position': [0.3, -0.6, 3.2], 'target': [0.0, 0.0, 0.8],
                   'irradiance': 1.6, 'color': '#FFFAF4', 'camera': False},
@@ -152,8 +152,8 @@ def bright(name):
                         'target': [0.0, 0.0, 0.6], 'strength': 3.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
                         'ramp': {'axis': 'z', 'at_m': [0.2, 1.8], 'values': [0.0, 1.0]}},
         # a smaller, harder lamp high behind, so the tinted acrylic throws its colour forward onto the seamless
-        'back-top': {'type': 'area', 'size_m': [0.6, 0.6], 'orbit': {'azimuth_deg': 160, 'elevation_deg': 50, 'distance_m': 3.5},
-                     'target': [0.0, 0.0, 0.6], 'irradiance': 3.0, 'color': '#FFF8F0', 'camera': False},
+        'back-top': {'type': 'area', 'size_m': [0.6, 0.6], 'orbit': {'azimuth_deg': 175, 'elevation_deg': 38, 'distance_m': 3.5},
+                     'target': [0.0, 0.0, 0.6], 'irradiance': 5.0, 'color': '#FFF8F0', 'camera': False},
     }
     return s
 
