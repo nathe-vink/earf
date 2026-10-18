@@ -62,9 +62,9 @@ def shot():
     s = frame('ice', props(), cam, sky(SKY, SKY_ROT, strength=1.0, res='4k'), 'barkhorn, Ice, snow country at blue hour',
                  lights=lights(), rotate_z=TURN, position=(0.0, 0.0, -0.08), exposure=-1.3, samples=512,
                  haze={'box_m': [-40, -12, -1, 40, 60, 20], 'density': 0.009, 'anisotropy': 0.2, 'color': '#C8D8EA'},
-                 fin=finish(contrast=0.10, clarity=0.06, sharpen=0.2, vignette=0.2))
+                 fin=finish(contrast=0.10, clarity=0.06, sharpen=0.2, vignette=0.2),
+                 white_balance=(WB_K, 10.0))          # the white point a photographer sets at blue hour: the snow cold, not grey
     s['render']['caustics_refractive'] = True   # the sky's light reaches the lining through the acrylic (render.py)
-    s['render']['white_balance_k'] = WB_K       # the white point a photographer sets at blue hour: the snow cold, not grey
     return s
 
 
