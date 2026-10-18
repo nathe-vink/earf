@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   -6.5,
-   -10.0,
-   1.5
+   5.9,
+   -15.2,
+   1.55
   ],
   "target": [
-   3.0,
-   0.5,
-   1.9
+   5.9,
+   0.0,
+   1.75
   ],
-  "lens_mm": 32,
+  "lens_mm": 50,
   "level": true
  },
  "products": [
@@ -305,6 +305,7 @@
     "across_glow": 0.08,
     "dj_glow": 0.008,
     "dj_color": "#F2D6B0",
+    "road_rough": 0.12,
     "panel_foot": 0.2
    },
    {
@@ -761,7 +762,7 @@
     "model": "street_lamp_01",
     "res": "1k",
     "position": [
-     6.5,
+     11.4,
      -3.7,
      0.0
     ],
@@ -777,7 +778,7 @@
     "model": "street_lamp_01",
     "res": "1k",
     "position": [
-     20.0,
+     24.0,
      -3.7,
      0.0
     ],
@@ -1763,7 +1764,7 @@
   "street1": {
    "type": "point",
    "position": [
-    6.5,
+    11.4,
     -3.7,
     3.3
    ],
@@ -1774,7 +1775,7 @@
   "street2": {
    "type": "point",
    "position": [
-    20.0,
+    24.0,
     -3.7,
     3.3
    ],

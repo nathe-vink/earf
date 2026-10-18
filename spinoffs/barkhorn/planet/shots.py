@@ -170,7 +170,7 @@ def shot(view):
 
 
 EYE = 1.60
-STREET_LAMPS = (-7.0, 6.5, 20.0)
+STREET_LAMPS = (-7.0, 11.4, 24.0)      # one just past the window's end, clear of the shopfront
 VIEWS = {
     'door': {'title': 'the whole room at night, from the door',
              'camera': {'position': [2.20, 3.60, 1.35], 'target': [P.L, 4.7, 1.25], 'lens_mm': 30, 'level': True},
@@ -197,9 +197,11 @@ VIEWS = {
                            'fstop': 4.0, 'focus': [P.L - 0.45, 2.6, 1.4]},
                 'settings': {'exposure': 0.6, 'dj_glow': 0.03, 'spot_dj': 150.0, 'spot_records': 60.0}},
     'street': {'title': 'the street at night, through the window',
-               'camera': {'position': [-6.5, -10.0, 1.5], 'target': [3.0, 0.5, 1.9], 'lens_mm': 32, 'level': True},
+               # from across the road (reframed after the first final read as a massing model): the lit shopfront
+               # filling the frame, the flats above cropped at the cornice, the wet road carrying its reflection
+               'camera': {'position': [5.9, -15.2, 1.55], 'target': [5.9, 0.0, 1.75], 'lens_mm': 50, 'level': True},
                'settings': {'sky': 0.012, 'sky_zenith': '#0A0C12', 'sky_horizon': '#3A3026', 'exposure': 0.6, 'wb': 4200,
-                            'wb_tint': 0.0, 'across_glow': 0.08}},
+                            'wb_tint': 0.0, 'across_glow': 0.08, 'road_rough': 0.12}},
 }
 
 # the colour clock: the door's view at four hours, the membrane the only change (its glow a little up, so it reads)
