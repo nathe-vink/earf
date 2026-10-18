@@ -1,0 +1,24 @@
+{
+ "stage1": {"impression": "A moody, coherent idea: an amber speaker standing in the rain on wet dark rock, mirrored in a puddle, under a sulphurous haze. But the frame is flat and murky: the speaker is backlit to a dull ochre-brown and is the darkest thing in the upper frame, the rock field reads as a grey rolling CG surface (almost like a sea), and a cluster of defocused specular sparkles in the upper right pulls the eye away. It reads as a careful render, not a photograph.", "score": 5.0},
+ "verdict": "iterate",
+ "blocking_9": [
+  "The cabinet reads as luminous golden-yellow acrylic with light passing through it, not as dark ochre: front-face median luminance at least 95 with a visible glow on the rim",
+  "The rock reads as black, wet volcanic basalt, darker than the puddles and tinted by the yellow-green storm light, with no regular rolling-wave pattern in the mid field",
+  "No unexplained bright sparkle cluster in the sky or hills",
+  "The light has a direction: a visible break in the sky behind the speaker that the rain streaks catch, with sky range well above 27 levels",
+  "No pale horizontal band between the near rock and the far field at y 335-375",
+  "Puddles show ripple rings and splashes at proof size, and the reflection is broken by them"
+ ],
+ "changes": [
+  {"id": "c1", "rank": 1, "kind": "light", "problem": "The speaker is backlit and reads as dark ochre.", "change": {"setting": "Bounce", "from": "1.2 m, 0.25", "to": "2.0 m from camera left 35 deg, 1.0 m high, 1.1, #F1E6B8; plus a 1.2 m fill from camera right at 0.5"}, "accept": {"region": [520, 340, 690, 560], "metric": "lum_median", "op": "between", "value": [90, 125]}},
+  {"id": "c2", "rank": 2, "kind": "set", "problem": "A cluster of white defocused sparkles in the upper right.", "change": {"setting": "glints in the sun's path", "from": "wet blocks and far field", "to": "remove them / rougher film"}, "accept": {"region": [900, 170, 1200, 290], "metric": "lum_range", "op": "<", "value": 28}},
+  {"id": "c3", "rank": 3, "kind": "material", "problem": "The rock is neutral mid grey and reads as a rolling sea.", "change": {"setting": "Ground", "from": "darken 50 %, #2B2721 at 55 %, swells 14 cm", "to": "darken 72 %, #1E1D17 at 70 %, swells 5 cm, more broken noise"}, "accept": {"region": [0, 380, 480, 520], "metric": "lum_median", "op": "between", "value": [35, 52]}},
+  {"id": "c4", "rank": 4, "kind": "light", "problem": "The sky is a flat beige wash, no break.", "change": {"setting": "Sky / Haze", "from": "strength 0.4, haze 0.005", "to": "break behind and 10 deg right of the horn, strength 0.55, haze 0.003"}, "accept": {"region": [0, 0, 1200, 180], "metric": "lum_range", "op": ">=", "value": 50}},
+  {"id": "c5", "rank": 5, "kind": "set", "problem": "A pale band where the near ground meets the far field.", "change": {"setting": "far field", "from": "sheen", "to": "blend, film roughness 0.5"}, "accept": {"region": [0, 335, 480, 375], "metric": "lum_median", "op": "<", "value": 95}},
+  {"id": "c6", "rank": 6, "kind": "set", "problem": "Puddles read as still mirrors.", "change": {"setting": "Puddles / Splashes", "from": "rings to 14 cm, 160 crowns", "to": "ripples tripled, rings 3 to 20 cm, 450 crowns"}, "accept": {"region": [510, 660, 690, 800], "metric": "lum_range", "op": ">=", "value": 55}},
+  {"id": "c7", "rank": 7, "kind": "post", "problem": "Low contrast and olive.", "change": {"setting": "Render / Finish", "from": "exposure -0.55, Base Contrast, contrast 0.1, 6400 K tint -6", "to": "exposure -0.35, Medium High Contrast, contrast 0.18, 6000 K, tint -10"}, "accept": {"region": [0, 0, 1200, 180], "metric": "b_median", "op": "<", "value": 120}},
+  {"id": "c8", "rank": 8, "kind": "set", "problem": "The left hill is a smooth soft ridge.", "change": {"setting": "Hills", "from": "170 m, 11 m", "to": "further, jagged silhouette, carried by haze"}, "accept": {"region": [0, 180, 480, 330], "metric": "lum_range", "op": "<", "value": 32}}
+ ],
+ "score_if_fixed": 7.3,
+ "note": "abridged from the critic's reply (problems and accept tests kept verbatim; evidence and defects in the session log)"
+}
