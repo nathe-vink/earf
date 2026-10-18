@@ -93,11 +93,22 @@ def sun_from_sky(polyhaven, rotation_deg=0.0, irradiance=4.0, angle_deg=0.53, co
             'angle_deg': angle_deg, 'color': color or s['color']}
 
 
-def area(azimuth, elevation, distance, irradiance, color='#FFFFFF', size=(2.0, 2.0), target=(0.0, 0.0, 0.7)):
+def area(azimuth, elevation, distance, irradiance, color='#FFFFFF', size=(2.0, 2.0), target=(0.0, 0.0, 0.7), centre=None):
     """An area lamp on an orbit round the speaker: on location, a reflector or a bounce a photographer would bring,
-    never a studio key. Keep it motivated by the scene's light, and soft."""
-    return {'type': 'area', 'size_m': list(size), 'orbit': {'azimuth_deg': azimuth, 'elevation_deg': elevation, 'distance_m': distance},
-            'target': list(target), 'irradiance': irradiance, 'color': color}
+    never a studio key. Keep it motivated by the scene's light, and soft.
+
+    The engine orbits a lamp round the product's centre, whatever its `target`. For a lamp at a feature away from the
+    speaker (a lava fall's glow, a window), give `centre`: the lamp is then placed on the same orbit round that point
+    (azimuth 0 toward -y, +90 toward +x, as the engine's), and aimed at `target`."""
+    lamp = {'type': 'area', 'size_m': list(size), 'target': list(target), 'irradiance': irradiance, 'color': color}
+    if centre is None:
+        lamp['orbit'] = {'azimuth_deg': azimuth, 'elevation_deg': elevation, 'distance_m': distance}
+    else:
+        az, el = math.radians(azimuth), math.radians(elevation)
+        lamp['position'] = [round(centre[0] + distance * math.sin(az) * math.cos(el), 4),
+                            round(centre[1] - distance * math.cos(az) * math.cos(el), 4),
+                            round(centre[2] + distance * math.sin(el), 4)]
+    return lamp
 
 
 def point(position, power_w, color='#FFB070', radius=0.05):

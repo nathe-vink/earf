@@ -150,6 +150,7 @@ P = dict(
                face_t=dict(bark=1.0, cork=3.0),
                alternatives=False,             # the round 2 and 3 covers the owner did not pick, back as options
                disc_t=12.0, disc_stock='mdf',  # the cloth disc's frame, over the woofer alone, in front of the ring
+               disc_edge_r=5.0,                # the frame's face edge rounded, and the cloth taken round it
                disc_magnet=dict(d=15.0, t=3.0, n=4, r=207.5, pocket=15.2)),
                # its magnets, on a circle between the woofer's rebate and the ring's edge (round 13, r7: four steel discs in
                # the ring's back over four magnets in the panel hold the ring; the disc's magnets hold to the same discs
@@ -1737,7 +1738,12 @@ def disc_and_face(P, wz, alt):
                     notes=[f'{"sprayed black" if ds == "mdf" else "cast acrylic, black" if "acrylic" in ds else "pressed black"}; its face edge rounded; {mg["n"]} magnets ({mg["d"]:g} x '
                            f'{mg["t"]:g}) {fixed} into the pockets behind it, each holding to a steel disc in the ring\'s back through '
                            f'{r["t"] - mg["t"] - 0.2:g} of {"MDF" if r["stock"] == "mdf" else "the ring"}']))
-    out.append(Part('cloth-disc', cyl('y', (cx, wz), r['od'] + 1.0, yr - dt - 0.5, yr), Bought('grille-cloth'), finish='disc',
+    # the cloth as it lies: flat across the face and rolled round the frame's rounded edge (a sharp-edged cylinder read as
+    # a placeholder in round 31's duels)
+    cloth = cyl('y', (cx, wz), r['od'] + 1.0, yr - dt - 0.5, yr)
+    if cv.get('disc_edge_r'):
+        cloth = cloth.fillet(cv['disc_edge_r'], [e for e in cloth.edges() if abs(e.center().Y - (yr - dt - 0.5)) < 0.01])
+    out.append(Part('cloth-disc', cloth, Bought('grille-cloth'), finish='disc',
                     option=disc_opt, notes=[f'Ø{r["od"] + 1:g}: stretched across the frame\'s face and round its edge, '
                                                 + ('glued behind' if 'hdpe' not in ds else 'held behind on an adhesive transfer tape made for '
                                                    'low-surface-energy plastics (3M 300LSE kind)')
