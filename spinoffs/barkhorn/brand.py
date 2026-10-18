@@ -23,7 +23,7 @@ import marks as M                                         # noqa: E402
 
 OUT = os.path.join(HERE, 'brand')
 PAPER, INK = '#F2EFEA', M.INK
-CLOUDS = [(name, colour) for key, line, num, name, colour in M.SPEAKERS if line == 'Cloud']   # the spectrum, Flare to Smoke
+CLOUDS = [(name, colour) for key, line, num, name, colour in M.SPEAKERS if line == 'Cloud']   # the spectrum, Ember to Smoke
 PAPER_SET = [c for n, c in CLOUDS if n != 'Fog']          # Fog's white is lost on paper; it shows on ink
 INK_SET = [c for n, c in CLOUDS if n != 'Smoke']          # and Smoke's black on ink
 

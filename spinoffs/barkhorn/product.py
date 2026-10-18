@@ -579,7 +579,7 @@ def parts(P):
     out.append(woofer)
     plate = box(cx - amp['plate_w'] / 2, D - 3.0, az - amp['plate_h'] / 2, cx + amp['plate_w'] / 2, D, az + amp['plate_h'] / 2)
     module = box(cx - amp['cutout_w'] / 2 + 4, D - amp['depth'], az - amp['cutout_h'] / 2 + 6, cx + amp['cutout_w'] / 2 - 4, D - 3.0, az + amp['cutout_h'] / 2 - 6)
-    out.append(Part('amp-plate', plate.fuse(module), Bought(P['amp']), finish='amp'))
+    out.append(Part('amp-plate', plate.fuse(module), Bought(P['amp']), finish='amp', pieces=amp_plate_pieces(amp, cx, D, az)))
     later = amp_compartment(P, ribs, wz, wood)       # round 13's parts, numbered after the ones the drawings have long had
 
     # the waveguide (the form chosen in P['horn']), its face flush with the cabinet's front and its mouth's lower rim
@@ -1149,6 +1149,98 @@ def tube_along(pts, d):
     return out
 
 
+def amp_plate_pieces(amp, cx, D, az):
+    """Round 30 (the owner: "We probably also need to have the back of the speakers, like the hypex module, and the
+    interior, look as real as possible"): the FA122's plate as a photograph would show it, for the render only (the
+    part's solid stays the plain plate and module, for the drawings and the checks). The black anodised plate, 3 thick,
+    held by ten screws in its 12 margin; the inputs the retailers list (analogue: an XLR in, its XLR link out, an RCA in;
+    digital: AES in and out on XLRs, S/PDIF coaxial in and out, Toslink in; USB for the filter software), a status light,
+    the IEC C14 mains inlet beside its rocker switch, and the plate's white print beside each. Their places are
+    provisional: Hypex's drawing (hypex.nl) could not be reached from here, so they follow plate amplifiers generally,
+    the analogue pair above the digital, the small jacks in a row, the mains at the foot. Returns {piece: (solid,
+    finish)}."""
+    from build123d import Compound
+    at = lambda u, v: (cx + u, az + v)
+    rr = lambda w, h, r, u, v: rounded_rect(w, h, r, cx=cx + u, cy=az + v)
+    slab = lambda outline, y0, y1: prism(outline, 'y', y0, y1)
+    hole = lambda u, v, d, y0, y1: cyl('y', at(u, v), d, y0, y1)
+    hexagon = lambda u, v, af: [(cx + u + af / math.sqrt(3) * math.cos(math.radians(30 + 60 * k)),
+                                 az + v + af / math.sqrt(3) * math.sin(math.radians(30 + 60 * k))) for k in range(6)]
+    XLR = [(-27, 112, 'f'), (27, 112, 'm'), (-27, 70, 'f'), (27, 70, 'm')]     # in and link; AES in and out
+    PINS = [(-4.8, 2.0), (4.8, 2.0), (0.0, -5.2)]
+    RCA = [(-39, 30), (-13, 30), (13, 30)]                                      # analogue in; S/PDIF in and out
+    OPT, USB, LED, IEC, SW = (39, 30), (-27, -22), (27, -22), (-14, -115), (30, -115)
+    SCREWS = [(u, v) for u in (-54, 54) for v in (-151.5, -50.5, 50.5, 151.5)] + [(0, -151.5), (0, 151.5)]
+    pw, ph = amp['plate_w'], amp['plate_h']
+
+    plate = slab(rr(pw, ph, 2.0, 0, 0), D - 3.0, D)
+    for u, v, _ in XLR:
+        plate -= hole(u, v, 21.0, D - 4, D + 1)
+    for u, v in RCA:
+        plate -= hole(u, v, 9.6, D - 4, D + 1)
+    for (w, h), (u, v) in (((9.6, 10.6), OPT), ((9.0, 6.0), USB), ((27.6, 20.2), IEC), ((13.2, 19.4), SW)):
+        plate -= slab(rr(w, h, 0.8, u, v), D - 4, D + 1)
+    plate -= hole(*LED, 3.4, D - 4, D + 1)
+    module = box(cx - amp['cutout_w'] / 2 + 4, D - amp['depth'], az - amp['cutout_h'] / 2 + 6,
+                 cx + amp['cutout_w'] / 2 - 4, D - 3.0, az + amp['cutout_h'] / 2 - 6)
+
+    black, metal, gold, screws, light = [], [], [], [], []
+    head = lambda u, v, d, y0, y1: (hole(u, v, d, y0, y1)
+                                    - box(cx + u - d * 0.3, y1 - 0.8, az + v - 0.45, cx + u + d * 0.3, y1 + 0.1, az + v + 0.45)
+                                    - box(cx + u - 0.45, y1 - 0.8, az + v - d * 0.3, cx + u + 0.45, y1 + 0.1, az + v + d * 0.3))
+    for u, v in SCREWS:                               # pan heads, cross recessed
+        screws.append(head(u, v, 7.6, D, D + 1.6).fuse(hole(u, v, 6.4, D + 1.5, D + 2.2)))
+    for u, v, sex in XLR:                             # Neutrik D-size flanges, 26 x 31, two M3 heads on the diagonal
+        black.append(slab(rr(26.0, 31.0, 3.0, u, v), D, D + 2.0) - hole(u, v, 21.0, D - 1, D + 3))
+        for su, sv in ((-9.5, 12.0), (9.5, -12.0)):
+            screws.append(head(u + su, v + sv, 5.4, D + 2.0, D + 2.5))
+        if sex == 'f':                                # a socket: its insert near the face, three holes, the latch above
+            ins = hole(u, v, 20.9, D - 7, D - 1.5)
+            for pu, pv in PINS:
+                ins -= hole(u + pu, v + pv, 3.2, D - 5, D - 1.4)
+            black.append(ins)
+            metal.append(box(cx + u - 3.0, D + 2.0, az + v + 11.0, cx + u + 3.0, D + 2.7, az + v + 14.2))
+        else:                                         # a plug: the metal shell's mouth, three pins standing in it
+            metal.append(hole(u, v, 20.9, D - 9, D + 1.9) - hole(u, v, 19.4, D - 10, D + 2))
+            black.append(hole(u, v, 19.3, D - 11, D - 9))
+            for pu, pv in PINS:
+                metal.append(hole(u + pu, v + pv, 1.6, D - 9, D - 2.6))
+    for u, v in RCA:                                  # gold sockets on nickel nuts, black insulators
+        metal.append(slab(hexagon(u, v, 11.0), D, D + 2.0) - hole(u, v, 8.0, D - 1, D + 3))
+        gold.append(hole(u, v, 8.4, D - 2, D + 9.0) - hole(u, v, 6.6, D - 3, D + 9.1))
+        black.append(hole(u, v, 6.5, D - 2, D + 8.2) - hole(u, v, 3.4, D + 4.5, D + 8.3))
+        gold.append(hole(u, v, 3.3, D + 4.8, D + 8.0) - hole(u, v, 1.8, D + 4.7, D + 8.1))
+    u, v = OPT                                        # Toslink: a square port, its mouth keyed
+    black.append(slab(rr(9.4, 10.4, 0.6, u, v), D - 6, D + 3.0) - slab(rr(5.4, 5.4, 0.5, u, v - 0.6), D - 3, D + 3.1))
+    u, v = USB                                        # mini-B in its window, set back
+    trap = lambda w, h: [(cx + u - w / 2, az + v + h / 2), (cx + u + w / 2, az + v + h / 2),
+                         (cx + u + w / 2 - 0.9, az + v - h / 2), (cx + u - w / 2 + 0.9, az + v - h / 2)]
+    metal.append(slab(trap(7.7, 4.0), D - 8, D - 1.2) - slab(trap(6.8, 3.1), D - 7, D - 1.1))
+    black.append(box(cx + u - 2.3, D - 7, az + v - 0.2, cx + u + 2.3, D - 2.6, az + v + 0.6))
+    black.append(slab(rr(9.0, 6.0, 0.8, u, v), D - 9, D - 8))
+    light.append(hole(*LED, 3.0, D - 2, D + 0.6))
+    u, v = IEC                                        # C14 inlet: its flange, the plug's keyed mouth, three blades
+    mouth = [(cx + u - 12.2, az + v - 8.0), (cx + u + 12.2, az + v - 8.0), (cx + u + 12.2, az + v + 4.0),
+             (cx + u + 8.2, az + v + 8.0), (cx + u - 8.2, az + v + 8.0), (cx + u - 12.2, az + v + 4.0)]
+    black.append(slab(rr(31.0, 24.0, 1.5, u, v), D, D + 2.6).fuse(slab(rr(27.4, 19.8, 1.2, u, v), D - 18, D))
+                 - slab(mouth, D - 9, D + 2.7))
+    for bu, bv in ((-7.0, -2.5), (7.0, -2.5), (0.0, 3.0)):
+        metal.append(box(cx + u + bu - 1.0, D - 9, az + bv + v - 2.0, cx + u + bu + 1.0, D - 1.5, az + bv + v + 2.0))
+    u, v = SW                                         # a rocker in its bezel, rocked to I
+    black.append(slab(rr(15.0, 21.0, 1.2, u, v), D, D + 2.0) - slab(rr(11.6, 17.6, 0.8, u, v), D - 1, D + 2.1))
+    black.append(slab(rr(11.6, 17.6, 0.8, u, v), D - 6, D - 5))
+    black.append(prism([(D - 5, az + v - 8.6), (D + 1.4, az + v - 8.6), (D + 3.4, az + v + 8.6), (D - 5, az + v + 8.6)],
+                       'x', cx + u - 5.6, cx + u + 5.6))
+    print_ = [box(cx + u - w / 2, D, az + v - 0.8, cx + u + w / 2, D + 0.05, az + v + 0.8) for u, v, w in (
+        (-27, 131.5, 8), (27, 131.5, 12), (-27, 89.5, 13), (27, 89.5, 15), (-39, 19.5, 7), (-13, 19.5, 9), (13, 19.5, 9),
+        (39, 19.5, 7), (-27, -30.5, 7), (27, -30.5, 9), (-14, -99.0, 22), (30, -101.5, 6))]
+    print_.append(box(cx - 13, D, az - 143.0, cx + 13, D + 0.05, az - 139.0))       # the maker's name, as a bar
+    return {'plate': (plate, 'amp'), 'module': (module, 'amp'), 'housings': (Compound(children=black), 'gland'),
+            'metal': (Compound(children=metal), 'rod'), 'gold': (Compound(children=gold), 'brass'),
+            'screws': (Compound(children=screws), 'screw'), 'light': (Compound(children=light), 'etch'),
+            'print': (Compound(children=print_), 'print')}
+
+
 def amp_compartment(P, ribs, wz, wood):
     """Round 13 (the reality check's r2, r5, r8 and r12). The amplifier in a sealed compartment of its own, as Hypex
     asks, so the box stays airtight and the mains electronics are enclosed in metal: a pan of 1.5 mm aluminium round the
@@ -1699,7 +1791,7 @@ VARIANTS.update({
                    'bark': 'clear_resin', 'disc': '#24557E',
                    'materials': {'bark': {'deep': '#B5D9EE', 'radius': 0.025, 'roughness': 0.05}, 'horn': {'roughness': 0.03}}},
     # round 19 (the owner: "What if we did a full spectrum, red orange yellow green blue purple white and black"): a red
-    # one (Flare since round 21; Ember until then) and Smoke made black ("Smoke was meant to be the black one"), a deep smoked tint the
+    # one (Ember; Flare from round 21 until round 30) and Smoke made black ("Smoke was meant to be the black one"), a deep smoked tint the
     # lining still shows faintly through (round 10's grey, birch-y2k-smoke, retired from the line)
     'cloud-red': {**BIRCH, 'horn_preset': 'clear_resin', 'horn': '#FFFFFF', 'horn_deep': '#C8262B', 'horn_cloud': 0.0,
                   'bark': 'clear_resin', 'disc': '#7A1A1C',

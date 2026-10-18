@@ -8,10 +8,10 @@ round 24b's discs in one colour, seamed):
     brand/mark/earf-globe-colour.svg      the acrylic, the six speakers' tints together
     brand/mark/earf-globe-black.svg       the discs in one ink, for paper, print, an etch or an emboss
     brand/mark/earf-globe-white.svg       the discs in one ink, out of dark grounds and photographs
-    brand/mark/earf-globe-01-flare.svg    to 08-smoke: the discs in each speaker's colour, flat, each shown on the ground
-                                          where it holds 3:1 (Flare, Poison, Haze, Smoke on light; Dust, Acid, Ice, Fog on dark)
+    brand/mark/earf-globe-01-ember.svg    to 08-smoke: the discs in each speaker's colour, flat, each shown on the ground
+                                          where it holds 3:1 (Ember, Poison, Haze, Smoke on light; Dust, Acid, Ice, Fog on dark)
     brand/mark/earf-lockup-<colour|colour-ink|black|white>.svg   the globe beside EARF
-    brand/mark/earf-wordmark-<black|white|01-flare ... 08-smoke>.svg   EARF alone, its letters solid (round 29; in
+    brand/mark/earf-wordmark-<black|white|01-ember ... 08-smoke>.svg   EARF alone, its letters solid (round 29; in
                                           colour, word_real.py's acrylic: earf-wordmark-render and -colour)
     and a PNG of each, transparent: the globes 1024 px square, the lockups 2048 px wide
 

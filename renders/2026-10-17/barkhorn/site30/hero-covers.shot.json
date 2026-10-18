@@ -1,0 +1,353 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-red",
+  "instances": [
+   {
+    "flavour": "cloud-red",
+    "position": [
+     -3.002,
+     -0.6015,
+     0.0
+    ],
+    "rotate_z": 36.898
+   },
+   {
+    "flavour": "cloud-orange",
+    "position": [
+     -2.2197,
+     -0.1197,
+     0.0
+    ],
+    "rotate_z": 26.356
+   },
+   {
+    "flavour": "cloud-amber",
+    "position": [
+     -1.3625,
+     0.2108,
+     0.0
+    ],
+    "rotate_z": 15.814
+   },
+   {
+    "flavour": "eucalyptus-y2k-green",
+    "position": [
+     -0.4594,
+     0.3789,
+     0.0
+    ],
+    "rotate_z": 5.271
+   },
+   {
+    "flavour": "cloud-blue",
+    "position": [
+     0.4594,
+     0.3789,
+     0.0
+    ],
+    "rotate_z": -5.271
+   },
+   {
+    "flavour": "cloud-violet",
+    "position": [
+     1.3625,
+     0.2108,
+     0.0
+    ],
+    "rotate_z": -15.814
+   },
+   {
+    "flavour": "birch-fog-clear",
+    "position": [
+     2.2197,
+     -0.1197,
+     0.0
+    ],
+    "rotate_z": -26.356
+   },
+   {
+    "flavour": "cloud-black",
+    "position": [
+     3.002,
+     -0.6015,
+     0.0
+    ],
+    "rotate_z": -36.898
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#ECE7DD",
+  "width": 18.0,
+  "front": 10.0,
+  "depth": 8.0,
+  "radius": 2.5,
+  "height": 7.0
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    2.4,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": 180,
+    "elevation_deg": 27,
+    "distance_m": 6.5
+   },
+   "target": [
+    0.0,
+    0.2,
+    0.6
+   ],
+   "irradiance": 8.0,
+   "color": "#FFF1DE"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    3.0
+   ],
+   "orbit": {
+    "azimuth_deg": 12,
+    "elevation_deg": 16,
+    "distance_m": 9.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 0.8,
+   "color": "#FFF7EA"
+  },
+  "wash": {
+   "type": "area",
+   "size_m": [
+    9.0,
+    1.5
+   ],
+   "position": [
+    0.0,
+    -2.5,
+    3.6
+   ],
+   "target": [
+    0.0,
+    0.4,
+    1.0
+   ],
+   "irradiance": 0.3,
+   "color": "#FFF7EA"
+  },
+  "glow0": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    -3.3983,
+    -0.0737,
+    1.12
+   ],
+   "target": [
+    -3.002,
+    -0.6015,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  },
+  "glow1": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    -2.5127,
+    0.4717,
+    1.12
+   ],
+   "target": [
+    -2.2197,
+    -0.1197,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  },
+  "glow2": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    -1.5424,
+    0.8458,
+    1.12
+   ],
+   "target": [
+    -1.3625,
+    0.2108,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  },
+  "glow3": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    -0.52,
+    1.0361,
+    1.12
+   ],
+   "target": [
+    -0.4594,
+    0.3789,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  },
+  "glow4": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    0.52,
+    1.0361,
+    1.12
+   ],
+   "target": [
+    0.4594,
+    0.3789,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  },
+  "glow5": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    1.5424,
+    0.8458,
+    1.12
+   ],
+   "target": [
+    1.3625,
+    0.2108,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  },
+  "glow6": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    2.5127,
+    0.4717,
+    1.12
+   ],
+   "target": [
+    2.2197,
+    -0.1197,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  },
+  "glow7": {
+   "type": "area",
+   "size_m": [
+    0.7,
+    0.32
+   ],
+   "position": [
+    3.3983,
+    -0.0737,
+    1.12
+   ],
+   "target": [
+    3.002,
+    -0.6015,
+    1.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF1DC",
+   "specular": 0,
+   "transmission": false
+  }
+ },
+ "render": {
+  "samples": 160,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 12,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.3,
+  "white_balance_k": 5600,
+  "white_balance_tint": 3.0
+ },
+ "title": "EARF: the eight Clouds",
+ "size": [
+  2560,
+  1280
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -9.6,
+   1.75
+  ],
+  "target": [
+   0.0,
+   -0.4,
+   0.55
+  ],
+  "lens_mm": 46.0,
+  "level": true
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#C4C2BE",
+  "horizon": "#CFCDC8",
+  "ground": "#5A5650",
+  "strength": 0.7
+ }
+}

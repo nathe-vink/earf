@@ -6,7 +6,7 @@ it). The brand is **EARF**, its mark the acrylic globe beside the name built of 
 "Let's go with the acrylic globe"; round 11's B3 globe of circles before it, and Dogs Barking before that, round 10);
 barkhorn stays the project's name in this repository.
 
-Status: **concept, round 29**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
+Status: **concept, round 30**. The proportions follow the photograph. The sizes are scaled from its turntable (about 450
 wide), and the horn from the cabinet (round 4). The horn runs the cabinet's full depth on a 2 in driver (round 5).
 Decided by the owner: no wood (the cabinet is pressed recycled HDPE), the solid neck round the throat, and a port in
 each bottom corner (round 6). The disc takes a colour that suits each cabinet, the woofer's ring the same colour, and a
@@ -73,7 +73,145 @@ the parallels' slivers past the outer ring in every one-colour version, keeping 
 out of the spin, and runs the equator's edge unbroken where it meets the meridians. Round 28e draws the colour line in
 one weight and makes the render on light grounds livelier again, still see-through. Round 29 gives the R's bowl a hole,
 70 in, and makes EARF in acrylic, rendered as the real thing with its flat colour files traced from it, and in one
-colour.
+colour. Round 30 names the red Ember again; draws every icon but Fog again, over eight passes, as a pictogram of a few
+circles, triangles and rectangles, some with shapes cut through them as the R's bowl is or laid on them, and renders
+them in their own acrylic; renders the eight together for the site's hero, their covers off, each from behind with its
+amplifier close, and Poison cut open; puts the FA122's connectors on the amplifier's plate (their places provisional);
+builds the site's home page and a page for each speaker, its header globe spinning and its loader's coins in acrylic;
+and puts the site up at www.earf.world, kept out of search engines until launch.
+
+## Round 30: the icons in acrylic, the site's home and speaker pages, hosted, and the back made real (the owner's notes of 2026-10-17 and 18)
+
+| the owner's note | what changes |
+|---|---|
+| "the little symbols we have for each speaker color. I like the idea but they look really low fidelity relative to everything else" | **The icons in acrylic** (`icons_real.py`): each icon's shapes cut from its own speaker's 20 mm acrylic and laid on one another where they overlap, rendered as EARF and the globe are, on paper and on dark. Flat colour files are traced from the renders, and solid one-colour files merge every shape. |
+| "I don't like some of the icons. Like the smoke, haze, and dust. Haze is close but not quite there. Dust could be more like a flat triangle with circles toward the tail of it, like a little dust cloud that roadrunner would kick up. Smoke could be more like billowing upward from a downward pointing triangle. Try and think of that way these things move in the real world. The flare is also kind of lackluster" | Four icons drawn again as they move: a burst for the red, Dust the cloud a roadrunner kicks up, Haze a sun veiled by drifting bands, Smoke billowing up from a downward triangle. Then, after the next notes, drawn again (below). |
+| "They aren't reading as contiguous shapes like the fog cloud does, for example. The haze is almost there but I would move the circle more into the haze"; then "No they need to be more connected. Also thinking that flare might not be a good atmosphere option. Also fewer shapes" | Every piece made to overlap the next, then the drawings thrown out for fewer, bigger pieces. **The red is Ember again**, the owner's pick over keeping Flare or taking Afterglow: what the air carries off a fire, so it pairs with Smoke (it was the red's name in round 19). Renamed everywhere (`marks.py` and all it feeds: the marks, the globe files, the letters, the icons, the site). |
+| "I think it's important for the shape to look good as a single shape. That's why cloud was so good. four independent shapes that collectively make a whole, then broken down and presented as their overlapping acrylic parts. Poison, ice and haze are kind of exceptions to that. Also acid might be too simple, but maybe not"; "I'm also open to alternatives to poison air and ice"; "We can also try something else, where we cut shapes out of the acrylic like we did for the R"; "As long as we're still using the core geometric shapes" | **Every icon one silhouette** (`icons.py`), as Fog's three circles on a bar are: a few circles, triangles and rectangles, overlapping enough to fuse, some with the same shapes cut through them (`CUTS`). |
+| "I'm not loving them. We're on the right path, but I feel like they're looking too contrived"; "And not quite representative enough of their theme in minimalistic terms"; "Should we do something more like wavelengths or spectrum or something more about light and less about atmosphere, and update the symbolism accordingly? I just kind of liked the earth theming though." | **The earth theme kept**, and each icon drawn again as a pictogram of what its atmosphere is, as plain as Fog's cloud. Five more passes of options, each shown in one colour and in acrylic, the owner picking row by row (the last pass below). |
+| "For haze, let's do 3 rectangles, one above the two that are there, same spacing"; "Haze doesn't translate well when flat. Maybe subtract the parts that overlay the circle?" | **Haze**, the sun behind three bars. A shape may now lie on the rest (`INSETS`): one more sheet in the acrylic, and in one colour cut out where it crosses the rest and kept beyond, so Haze still reads flat. |
+| "Ember still isn't quite right"; "Ember B is better" | **Ember**, flames: three triangles standing on a bar, the middle one tallest, overlapping. |
+| "Acid needs something so that it doesn't look like a water drop when flattened"; "The two circle cutouts is the leader" | **Acid**, the drop with two bubbles cut out of it. |
+| "A mix between A and B, where the plume moves left to right would be good"; "Almost like a train smoke stack shape"; "Close with smoke K but they need to be joined more. Same with L, joined and fewer circles overall"; "L2 is good for smoke" | **Smoke**, a plume drifting left to right as smoke leaves a train's stack: a small puff of two circles joined into a big one of three. |
+| "For the skull, why is the triangle cutout smaller on the green original version?"; "Can we do the original skull but move the eyes and nose up so the triangle isn't cutting through both pieces of acrylic" | **Poison**, the first skull, its nose raised clear of the jaw so it is cut through the head's sheet alone, its eyes raised a little less. The green original's triangle was small because it was rendered before cut pieces drew their rounding inside the drawing: every edge lay 4 mm out, every hole 4 mm in. Every render since matches its drawing. |
+| "I think we need to nail the home page, like a hero image that shows the whole cast of speakers in a creative way, and then the cool 360 view. And then we need a product detail page where users can choose a color and explore some more shots." | **The hero**: the eight on an arc in spectrum order, lit from behind, so each lays its colour on the floor in front of it. **The site** (draft, version 14): a home page (the hero, each speaker in it a link to its page, then the horns turning) and a page for each speaker (its colour chosen from eight acrylic coins, a gallery of eight views). |
+| "For the lineup hero image, we should do no covers on the speakers, and default to no covers on the grid view" | **The hero rendered again with every cover off**, each woofer in its coloured ring, and the home page's cards open with their covers off. |
+| "Can you start building and hosting the website in parallel"; "i got earf.world on my vercel account"; "I renamed the repo to earf and created the vercel project" | **The site is up at www.earf.world**, deployed from this repository (now `nathe-vink/earf`) on every push to main; earf.world redirects to it. It is kept out of search engines until launch and says it is a preview. |
+| "We probably also need to have the back of the speakers, like the hypex module, and the interior, look as real as possible." | **The amplifier's plate** carries the FA122's connectors (`product.amp_plate_pieces`); their places are provisional until Hypex's drawing can be read. **Rendered**: each Cloud from behind and its amplifier close, and Poison cut open with its cover off. |
+| "Also can we have the globe on the website header spin, or when should we use that?" | **It spins as a moment, never as a loop**: once as the page opens, on hover or focus, and when you move between pages, and never for a visitor who asks for reduced motion. Otherwise it stands still. |
+| "And should the circle loading indicator use the acrylic coins instead of flat circles?" | **Yes, on the site**: the loader's coins are rendered discs of the speakers' acrylic, uncovered by a rolling Smoke coin (a Fog coin on dark pages). Flat circles stay for anything drawn under about 24 px, such as a button's busy dot, where a render's rim and depth are lost. |
+
+![The icons' last pass: Smoke's options and the skulls, each in one colour and in acrylic, the owner's picks framed](brand/icon-options-r30.png)
+
+![All eight in acrylic on paper and on dark, the flat files traced from them, in one colour, and the loader's coins](brand/icons-r30.png)
+
+![The hero, covers off; each Cloud from behind over its amplifier close; and Poison cut open](../../renders/2026-10-17/barkhorn/site30.jpg)
+
+### The icons in acrylic
+
+- **The object.** Each icon is drawn 800 units across (`icons.py`), its shapes circles, triangles and rectangles,
+  some cut through by more of them (`CUTS`) or laid on them (`INSETS`). Each shape is a piece of its speaker's own 20 mm cast acrylic, the icon 400 mm across: half EARF's scale, so the
+  rounded rims still catch the light when an icon is seen small. Every edge is rounded over 4 mm. Where shapes overlap,
+  the pieces lie on one another, each on the lowest sheet clear of every earlier piece it overlaps, so the colour
+  deepens there, as round 23 meant by "stacked clear acrylic".
+- **The acrylic.** The six hues take the wordmark's (0.9 through, scattering 5 mm, chroma times 1.2). Fog's is
+  water-clear and shows by its edges. Smoke's face is its colour to the 0.75: at 0.3 to 0.45 it rendered mid grey and
+  read as plastic. On dark the hues' rims glow at 1 and their faces at 0.15. Fog's faces glow at 0.06, and Smoke's not
+  at all, its rims at 0.8 in the grey its lines take on ink. At the hues' 0.15 both had glowed milky grey.
+- **The icons, to the end.** The owner's test is Fog: a few shapes that together make one good silhouette, then shown
+  as the overlapping pieces they are. After the third pass the owner found them "too contrived" and "not quite
+  representative enough of their theme in minimalistic terms", so each became a pictogram of its atmosphere in as few
+  shapes as it will take, chosen pass by pass from sheets that show every option in one colour and in acrylic:
+  - **Ember**, flames: three triangles standing on a bar, the middle one tallest, overlapping as a campfire's do.
+  - **Dust**, the streak a roadrunner kicks up: Fog's three circles, small, trailing a flat wedge along the ground.
+  - **Acid**, a drop (a circle and its "tongue", a triangle whose sides touch the circle, `tongue`) with two bubbles
+    cut out of it, so that flat it is not a drop of water.
+  - **Poison**, a skull: a circle over a rectangle, its eyes, nose and the gaps between its teeth cut out. The nose is
+    raised 63 so its foot is 18 clear of the jaw's top and it is cut through the head's sheet alone; the eyes are raised
+    43, so the nose's point sits between their lower edges as it did. (Raising the eyes the whole 63 set them high.)
+  - **Ice**, icicles: three triangles hanging from a bar.
+  - **Haze**, the sun behind three bars of haze, the bars laid on it (below).
+  - **Fog**, the cloud mark, as it was.
+  - **Smoke**, a plume drifting left to right as smoke leaves a train's stack: two small circles low on the left joined
+    into three big ones, each neighbour overlapping the next (the narrowest neck half the smaller circle's width).
+
+  Tried and left: the red as a burst, a flame with its heart cut out, a heart stacked in the flame, embers as diamonds;
+  Smoke as a map pin, a snowman of equal puffs, an ice-cream cone, beads, a puff of seven circles, puffs in clusters of
+  circles, a funnel with puffs, three circles each bigger ("doesn't look like a smoke cloud"); the skull with no nose,
+  with nose slits, with three separate teeth, on a narrower jaw with a triangle nose or teeth alone, and with its
+  eyes raised as far as its nose; Haze's bands cut through the sun; round 23's crossbones and snowflake.
+- **Insets.** A shape laid on the rest (`icons.INSETS`, Haze's bars) is one more piece in the acrylic, on the sheet in
+  front of the sun, so in colour the sun shows through the bars. In one colour the bars are cut out where they cross
+  the sun and kept beyond it (the two shapes' symmetric difference), so the flat icon reads as the sun behind haze
+  rather than one black blot.
+- **Cut pieces.** A piece with shapes cut through it is built as a filled flat curve in Blender, its holes even-odd,
+  extruded to the sheet and rounded over 4 mm (`word_real._cut`). The curve is drawn in by the rounding, so the
+  rounding's widest reach lies on the drawing, as the bevel of an uncut piece keeps it. Every icon is built this way
+  now, the uncut ones too, so all eight are made alike.
+- **Files** (`brand/icons/`): `icon-<name>-render.png` and `-render-night.png`, the renders on their grounds made even;
+  `-colour.svg`, traced from the paper render, each region under one, two or three sheets in the colour the render
+  shows there; `-black`, `-white` and `-own.svg`, every shape merged into one (Haze's bars cut out of its sun). `brand/icon-<name>.svg`, round 23's
+  flat style, now carries the new shapes too, the cut ones as paths.
+- **Time.** An icon 800 px across at 96 samples takes about a minute on 4 CPUs.
+
+### The back, the amplifier and the inside
+
+- **The plate.** The FA122's real size has been in the CAD since round 13: 315 by 120, 55 deep, in a 291 by 96
+  cutout. What it shows on its face is new. The inputs and outputs are the ones retailers list: analogue XLR in with
+  an XLR link out, an RCA in; AES in and out on XLRs, S/PDIF coaxial in and out, Toslink in; USB for the filter
+  software; and the IEC C14 inlet with its rocker switch. Ten pan-head screws sit in the 12 margin, with white print beside each connector.
+  These are render pieces only (`product.amp_plate_pieces`): the part's solid, and so the drawings, the checks and the
+  parts list, are unchanged.
+- **Provisional.** Where each connector sits is not known yet. Hypex's drawing and manual are on hypex.nl, which this
+  environment cannot reach, and the retailers' pages with photographs were blocked too. So the plate follows plate
+  amplifiers generally: the analogue pair above the digital pair, the small jacks in a row, the mains at the foot. It is
+  rebuilt to match as soon as the drawing or a photograph of the plate can be read.
+- **Rendered** (`renders/2026-10-17/barkhorn/site30/`): `back-<colour>`, each Cloud from behind on its look-book sweep;
+  `detail-<colour>`, the plate close, from a little to the side and above; `inside`, Poison with its front right quarter
+  cut away (the engine's cutaway) and its cover off, so the woofer's cone and motor, the white batts in their voile
+  sleeves between the ribs, and a port show as they would in the hand. In the first render of it the cloth disc stood
+  whole in front of the cut, a flat disc in the air.
+
+### The hero
+
+`renders/2026-10-17/barkhorn/site30/hero.png`, 2560 by 1280. The eight stand on an arc that bows away from the camera,
+in spectrum order: Ember, Dust, Acid, Poison, Ice, Haze, then Fog and Smoke. The key light is straight behind them and
+low, so each cabinet's acrylic throws its colour on the floor toward the camera. The engine's resin lets shadow rays
+through, tinted, so this costs no caustics. Every cover is off (the owner: "For the lineup hero image, we should do no
+covers on the speakers"), so each woofer shows in its coloured ring. It took 36 minutes at 160 samples, sharing the
+machine; the first render, covers on, is kept as `hero-covers.png` (18 minutes). The site's title sits on the sweep above
+the eight, and each speaker in the picture is a link to its page.
+
+### The site (draft, version 14)
+
+- **The home page.** The hero comes first: hover over a speaker for its name and icon; click for its page. Then the
+  eight horns turning as the page scrolls (round 23's sprites); drag one to turn it by hand. Then the eight cards,
+  covers off first and on at a button, each with its acrylic icon; the room; the specification; and contact.
+- **A speaker's page** (`#speaker-red` to `#speaker-black`): a gallery of eight views (cover on, cover off, from
+  behind, the amplifier, inside, the horn from the side and from behind, and the horn turning, which turns once as it
+  opens and can be dragged); its number, name and price; its colour chosen from eight acrylic coins; its facts; what
+  goes with its colour (round 25's idea); and the other seven.
+- **The header's globe** is round 28's render, still. It spins once, for 1.5 s, eased, as the page opens, on hover or
+  focus, and when you move between pages. For a reader the mark should stand still: a logo that spins all the time
+  reads as a loading indicator and pulls the eye from the words. The full spin belongs where it is the subject: the
+  intro, a video's ident, a social avatar, a waiting or empty page. It never spins under reduced motion.
+- **The loader**: the six coloured coins, uncovered by a rolling Smoke coin on light pages and a Fog coin on dark. The
+  coins are rendered (`icons_real.py --coin`), each 76 mm across so its rim still shows at the 20 px or so a loader
+  draws it. On the page they are layers that take the page's colour: multiply on light grounds, screen on dark.
+
+### Hosting: www.earf.world
+
+- **Where.** The owner's Vercel project `earf`, linked to this repository, serves `spinoffs/barkhorn/site/` at
+  www.earf.world; earf.world redirects to it (308). Every push to main deploys it to production.
+- **What.** The draft above made a whole document: a title and description, the favicons (the globe's small black cut,
+  white on dark tabs, and the colour globe for the home screen), a link preview with the hero, and a bar across the top
+  that says it is a preview of a concept, not yet for sale. Images are cached for an hour.
+- **Kept out of search engines** until launch, three ways: a `noindex, nofollow` meta tag, the same as an
+  `X-Robots-Tag` header on every response (`vercel.json`), and a `robots.txt` that disallows everything.
+- **The repository** is `nathe-vink/earf` now (the owner renamed it from earmilk); GitHub redirects the old address.
+- **Every push deploys**, even one that leaves the site as it was. An Ignored Build Step in the project's settings
+  (`git diff HEAD^ HEAD --quiet -- .`) would skip those. The Vercel connector here can read the project but not change
+  it, so that is the owner's to set (question 12).
 
 ## Round 29: the R's hole, and EARF in acrylic and in one colour (the owner's notes of 2026-10-17)
 
@@ -3379,13 +3517,20 @@ line is called Atmosphere.
 5. **The colour pairs** (round 24). A section of their own on the site, as drafted, or on each speaker's page? And
    which comes first to pair with, the record player or the lamp?
 6. **The feet** (round 24). Which to sell (castors, spikes, isolation feet), and at what price?
-7. **earf.world** (rounds 21 to 24). When to buy the domain ($3.99 for the first year, $38.10 a year after)? Show the
-   price on it?
-8. **The other names** (round 19). Flare is chosen; keep Dust, Acid, Poison, Ice, Haze, Fog and Smoke? Acid usually
-   names a sharper, greener yellow.
+7. **earf.world** (rounds 21 to 30). The site is up at www.earf.world as a preview, out of search engines (round 30).
+   When does it launch (the noindex comes off), and which mail provider should take hello@earf.world?
+8. **The other names** (round 19). Ember is chosen (round 30; Flare from round 21). Keep Dust, Acid, Poison, Ice,
+   Haze, Fog and Smoke? Acid usually names a sharper, greener yellow.
 9. **The recycled acrylic partner** (round 17; "Not yet", round 21). Plastiglas de México (Chemcast EcoGreen) and
    Madreperla (Green Cast), for the eight tints at 20 mm, when the design settles.
+10. **The icons on the speaker** (round 30). The icons are settled. Should each speaker carry its own, on the back
+    beside EARF or on the box and in the manual, or should they stay on the site and in print?
+11. **The amplifier's plate** (round 30). Its connectors are placed provisionally. Hypex's drawing (on hypex.nl) or a
+    photograph of the plate would fix them: allow hypex.nl, www.hypex.nl, audiophonics.fr and www.parts-express.com in
+    this environment's network settings, or send a photograph.
+12. **Deploys** (round 30). Set the Vercel project's Ignored Build Step to `git diff HEAD^ HEAD --quiet -- .`, so a
+    push that leaves `spinoffs/barkhorn/site/` as it was does not deploy?
 
-Still left out of the renders: the amplifier plate's own face. Its connectors are known (an IEC C14 inlet, XLR in
-and out, an RCA output, AES, S/PDIF coaxial and optical inputs, and USB for setup), but not where each sits, so it
-shows as a plain black plate until Hypex's drawing is to hand (their site could not be reached from this session).
+The amplifier plate's face is in the renders since round 30, its connectors where plate amplifiers generally put them
+(the analogue XLRs above the digital, the small jacks in a row, the mains at the foot). Where each really sits waits
+on Hypex's drawing (question 11).

@@ -72,10 +72,10 @@ R = 0.4                                                  # the globe's radius in
 T = E.THICK * R                                          # each disc's thickness, the mark's slab (0.05 of the radius)
 GAP = 0.0005                                             # the slots' clearance each side
 SEG = 360                                                # a disc's segments round
-NAMES = ['flare', 'ice', 'acid', 'haze', 'poison', 'dust']           # earth.RING's order: N, equator, S, meridians 30, 90, 150
-ACRYLIC = {'flare': '#F2A29C', 'dust': '#F2B184', 'acid': '#F2D06B', 'poison': '#B2C9A2', 'ice': '#B5D9EE',
+NAMES = ['ember', 'ice', 'acid', 'haze', 'poison', 'dust']           # earth.RING's order: N, equator, S, meridians 30, 90, 150
+ACRYLIC = {'ember': '#F2A29C', 'dust': '#F2B184', 'acid': '#F2D06B', 'poison': '#B2C9A2', 'ice': '#B5D9EE',
            'haze': '#BEADD8'}                            # the Cloud cabinets' tints after `DEPTH` (product.py's Clouds)
-HORN = {'flare': '#C8262B', 'dust': '#E0661C', 'acid': '#F2B705', 'poison': '#4C6A36', 'ice': '#3C86C2',
+HORN = {'ember': '#C8262B', 'dust': '#E0661C', 'acid': '#F2B705', 'poison': '#4C6A36', 'ice': '#3C86C2',
         'haze': '#5E3F8F'}                               # round 28d: the Clouds' horns, the speakers' own colour (product.py)
 DEPTH, POLISH = 0.025, 0.05                              # their depth (m) and roughness, polished cast acrylic
 MARK_DEPTH = 0.02                                        # the globe's: a little deeper, so a face holds its colour on paper

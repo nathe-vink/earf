@@ -3,7 +3,7 @@
  "model": "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb",
  "origin_mm": [
   280.0,
-  211.4,
+  214.5,
   -12.0
  ],
  "materials": {
@@ -67,6 +67,12 @@
    "preset": "rubber",
    "color": "#151515"
   },
+  "etch": {
+   "preset": "satin_paint",
+   "color": "#ECEBE7",
+   "roughness": 0.85,
+   "specular": 0.15
+  },
   "foot": {
    "preset": "plastic",
    "color": "#1C1C1C",
@@ -94,6 +100,12 @@
    "roughness": 0.6,
    "specular": 0.25
   },
+  "print": {
+   "preset": "satin_paint",
+   "color": "#EDEBE5",
+   "roughness": 0.9,
+   "specular": 0.05
+  },
   "ring": {
    "preset": "satin_paint",
    "color": "$disc",
@@ -117,7 +129,7 @@
  },
  "assign": [
   {
-   "match": "amp-plate|amp-box|rating-plate",
+   "match": "amp-plate-plate|amp-plate-module|amp-box|rating-plate",
    "material": "amp"
   },
   {
@@ -125,7 +137,7 @@
    "material": "bark"
   },
   {
-   "match": "post-sockets|tie-rod-insert",
+   "match": "amp-plate-gold|post-sockets|tie-rod-insert",
    "material": "brass"
   },
   {
@@ -173,11 +185,15 @@
    "material": "driver-surround"
   },
   {
+   "match": "amp-plate-light",
+   "material": "etch"
+  },
+  {
    "match": "feet-base",
    "material": "foot"
   },
   {
-   "match": "cable-glands",
+   "match": "amp-plate-housings|cable-glands",
    "material": "gland"
   },
   {
@@ -193,15 +209,19 @@
    "material": "mark-tint"
   },
   {
+   "match": "amp-plate-print",
+   "material": "print"
+  },
+  {
    "match": "woofer-ring",
    "material": "ring"
   },
   {
-   "match": "post-1|post-2|post-3|post-4|tie-rod-rod|feet-stem",
+   "match": "amp-plate-metal|post-1|post-2|post-3|post-4|tie-rod-rod|feet-stem",
    "material": "rod"
   },
   {
-   "match": "back-screws|port-screws",
+   "match": "amp-plate-screws|back-screws|port-screws",
    "material": "screw"
   },
   {

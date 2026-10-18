@@ -14,7 +14,7 @@ spinning disc silhouette that looks like a coin spinning. It can flash each colo
 - The globe: a sphere's three parallels (40 N, the equator, 40 S) and three meridians (60 apart), its axis leaning
   23.4 degrees, as the Earth's does and a desk globe's stand holds it, and tipped 16 degrees toward us (22 until round
   27f), so the parallels open into ovals and the far side shows through behind the near. Six rings, one for each
-  colour Cloud, drawn in spectrum order: the parallels warm, north to south (Flare, Dust, Acid), the meridians cool,
+  colour Cloud, drawn in spectrum order: the parallels warm, north to south (Ember, Dust, Acid), the meridians cool,
   west to east (Poison, Ice, Haze). Nothing black or white is in it; Smoke and Fog are the black-only and white-only marks.
 - Lines: the six ovals, the far halves lighter and under the near, so even in one colour the near side reads in front
   (the even version, every line one weight, tangles in one colour). Tubes (round 23): the even lines as tubes of
@@ -69,7 +69,7 @@ KEEP = 1.0                                               # the one-colour discs'
                                                          # owner, "missing segments to the left and right of the butt";
                                                          # at 1.5 it dropped the green disc's rim either side of it)
 CLOUDS = [(name, colour) for key, line, num, name, colour in M.SPEAKERS if line == 'Cloud']
-HUES = [c for n, c in CLOUDS if n not in ('Fog', 'Smoke')]          # Flare Dust Acid Poison Ice Haze, the spectrum
+HUES = [c for n, c in CLOUDS if n not in ('Fog', 'Smoke')]          # Ember Dust Acid Poison Ice Haze, the spectrum
 NAMES = [n for n, c in CLOUDS if n not in ('Fog', 'Smoke')]
 _C = dict(CLOUDS)
 # the rings' colours, ring by ring (the parallels north to south, then the meridians at 30, 90 and 150). Round 24 (the
@@ -78,8 +78,8 @@ _C = dict(CLOUDS)
 # be blue and green. Rearrange discs accordingly"): the meridian facing us, the largest disc, is green, the land, and the equator,
 # the widest band, blue, the sea; red north and yellow south; of the two side meridians, the one that shows larger is
 # orange and the one that shows less violet. The loader, the cursor and the coin's flashes keep the spectrum (HUES)
-RING = [_C['Flare'], _C['Ice'], _C['Acid'], _C['Haze'], _C['Poison'], _C['Dust']]
-RING_NAMES = ['Flare', 'Ice', 'Acid', 'Haze', 'Poison', 'Dust']
+RING = [_C['Ember'], _C['Ice'], _C['Acid'], _C['Haze'], _C['Poison'], _C['Dust']]
+RING_NAMES = ['Ember', 'Ice', 'Acid', 'Haze', 'Poison', 'Dust']
 # the acrylic. Round 24 tinted every disc and laid them in a fixed order, which read as six overlapping ovals; the owner
 # (round 25): "The acrylic is meant to be a transparent version of the discs but it looks very different", and "Push it
 # further". So the acrylic is the discs' own mosaic, see-through: wherever you look through the globe, the discs crossed
@@ -1056,13 +1056,13 @@ def rails_html():
 THEMES = [
     ('Clouds', 'Until now', 'Cloud 05 &middot; Ice', 'Things in the sky. The cloud mark stays the line&rsquo;s sign, with the '
      'eight icons under it.', None),
-    ('Atmosphere', 'Chosen (round 24)', 'Atmosphere 05 &middot; Ice', 'The same eight names, as what the air holds: light (Flare, Haze), '
+    ('Atmosphere', 'Chosen (round 24)', 'Atmosphere 05 &middot; Ice', 'The same eight names, as what the air holds: fire and light (Ember, Haze), '
      'what it carries (Dust, Fog, Smoke, Poison) and what falls through it (Acid, Ice). The globe already draws one.', None),
     ('Elements', 'Sharper', 'Element 05 &middot; Ice', 'The same eight, read as the elements and their dangers: fire, earth, '
-     'water and air, acid and poison. The icons work as hazard signs, which is where the crossbones and the drop come '
+     'water and air, acid and poison. The icons work as hazard signs, which is where the skull and the drop come '
      'from.', None),
     ('Elements, literally', 'Furthest', 'Element 27 &middot; Cobalt', 'Each speaker named for a chemical element of its '
-     'colour, and numbered by its atomic number. The icons fit half (Sulfur&rsquo;s drop, Chlorine&rsquo;s crossbones, '
+     'colour, and numbered by its atomic number. The icons fit half (Sulfur&rsquo;s drop, Chlorine&rsquo;s skull, '
      'Iodine&rsquo;s haze, Carbon&rsquo;s smoke); the rest would be redrawn.',
      [('Neon', 10), ('Sodium', 11), ('Sulfur', 16), ('Chlorine', 17), ('Cobalt', 27), ('Iodine', 53), ('Magnesium', 12),
       ('Carbon', 6)]),
@@ -1242,10 +1242,12 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
   </section>
 
   <section class="win" aria-label="Theme">
-    <div class="bar"><b>Theme &mdash; Atmosphere, with an icon for each speaker from the marks&rsquo; own circles, bars and triangles</b></div>
-    <p class="lead">Each icon is made as the cloud mark is: a few circles, bars and triangles, all filled, then every
-      outline drawn over them, like stacked clear acrylic. Poison is two crossing bars with circles at the ends; Acid is
-      a circle with a triangle on top.</p>
+    <div class="bar"><b>Theme &mdash; Atmosphere, with an icon for each speaker from the marks&rsquo; own circles, triangles and rectangles</b></div>
+    <p class="lead">Each icon is one shape made as the cloud mark is: a few circles, triangles and rectangles that
+      together make one silhouette, some with the same shapes cut through them as the R&rsquo;s bowl is; all filled,
+      then every outline drawn over them, like stacked clear acrylic. Ember is flames on a bar, Dust the streak a
+      runner kicks up, Acid a drop with two bubbles cut out, Poison a skull, Ice icicles, Haze the sun behind three bars
+      of haze (cut out of it where the icon is one colour), Smoke a plume drifting from a small puff into a big one.</p>
     __THEME__
   </section>
 
@@ -1277,7 +1279,7 @@ body.capture { padding: 0; overflow: hidden } body.capture main { display: none 
       <h3>Why it reads as the Earth</h3>
       <ul>
         <li>The axis leans 23.4&deg;, as the Earth's does and as a desk globe's stand holds it. It also tips 16&deg; toward you (22&deg; until round 27f), so the parallels open into ovals and the far halves show behind the near ones.</li>
-        <li>The colours (round 25): blue and green lead, as the Earth's sea and land. The meridian facing you, the largest disc, is Poison green; the equator, the widest band, is Ice blue; north Flare red and south Acid yellow; of the side meridians, the one that shows more is Dust orange and the one that shows less Haze violet. Round 24 had violet facing you and the primaries on the parallels.</li>
+        <li>The colours (round 25): blue and green lead, as the Earth's sea and land. The meridian facing you, the largest disc, is Poison green; the equator, the widest band, is Ice blue; north Ember red and south Acid yellow; of the side meridians, the one that shows more is Dust orange and the one that shows less Haze violet. Round 24 had violet facing you and the primaries on the parallels.</li>
         <li>Discs in colour are flush (round 24b): no seams, no outline, no light. The globe is its six discs alone (round 25): no fill completes the circle where no disc reaches the rim, so its outline is the discs' own, the green disc's oval with the others' tips reaching past it. The strokes belong to the one-colour versions: there the seams are gaps in the ground, and the outline stays whole.</li>
         <li>Acrylic (round 25) is the discs themselves, see-through, stacked as tinted sheets, each disc a slab a twentieth of the radius thick, its side, where it faces you, a deeper tone of its tint, as a polished acrylic edge looks. The green meridian facing you is the backing, as in the discs. One disc in front shows its own flat colour; where two cross they make one colour darker than either, whichever is in front, as two filters do: red over violet crimson, blue over violet indigo, and the opposite pairs smoky, blue over orange taupe and yellow over violet brown. Where no disc lies in front, the rings' far halves show through the green a little deeper than it, so each ring closes. Where a disc is, the ground takes nothing, so paper and ink match. Stacked in OKLab (a and b averaged, the lightness the darkest sheet's and lower for each sheet more and the less their hues agree); drawn per pixel on the graphics card (without WebGL, the flush discs). No edges (a cage of hoops, the critic found). In one colour (round 27) it keeps the ball: in black or white the discs cancel where they cross, as two films do in one ink, so every crossing shows without a tint; in a speaker's own colour the discs are stacked sheets of that speaker's acrylic held up to the light, lighter at the rim, deeper where more cross.</li>
         <li>Lines are even, every line one weight, the far halves under the near. Round 22's lighter far halves (in <code>brand/earth-lines-*.svg</code>) remain for one colour at small sizes, where even lines tangle.</li>
@@ -1846,7 +1848,7 @@ function drawCursor(ctx, W, H, t, o, at) {
 
 // round 25, the coin (the owner: "The coin was still supposed to flash between all colors first"): it spins on its
 // edge, each half turn showing a new face: the six colours in turn, round the colour wheel from yellow to green (Acid,
-// Dust, Flare, Haze, Ice, Poison), and then the globe, whose facing disc is green, so the last colour runs into it. After the
+// Dust, Ember, Haze, Ice, Poison), and then the globe, whose facing disc is green, so the last colour runs into it. After the
 // brand critic's first round: the colours at one steady speed, `half` seconds each (slowing all the way had crammed the
 // first into flickers and dragged the last), then it lands on the globe, slowing over a quarter turn (`land`; its speed
 // at the start the colours' own). At 0.34 s a half turn the faces flash under three times a second (WCAG 2.3.1: each

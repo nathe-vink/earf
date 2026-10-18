@@ -3,7 +3,7 @@
 Round 24 cut the globe open, its layers a driver. The owner: "The speaker cross section is too big and has too much
 detail. I was thinking more like a death star with a slightly bigger divot. These don't feel minimal and polished
 enough." So: a sphere in Ice blue with the equator's trench in Poison green (the outside, blue and green), and in its
-northern half a dish, a little bigger than the Death Star's, that is a driver seen from the front: its surround Flare
+northern half a dish, a little bigger than the Death Star's, that is a driver seen from the front: its surround Ember
 red, its cone Dust orange and its dust cap Acid yellow (the inside, yellow, orange and red, as the Earth's core). The
 dish is concave, so its rings sit a little off centre, toward the sphere's middle. Flat colour, no strokes. The
 one-colour versions keep the strokes, as the globe's do: the trench and the rings' edges drawn as gaps in the ground.
@@ -38,7 +38,7 @@ DISH = dict(at=(0.32, 0.34), ang=21.0, depth=0.55)      # its centre's direction
 CUTS = dict(full=dict(ang=21.0, depth=0.55),             # the dish sized by eye for each cut: at the small sizes larger
             mid=dict(ang=21.0, depth=0.42),              # and shallower, so its rings stay a pixel or more apart
             small=dict(ang=24.0, depth=0.42))
-RINGS = [(1.0, C['Flare']), (0.70, C['Dust']), (0.40, C['Acid'])]   # surround, cone and dust cap, of the dish's radius
+RINGS = [(1.0, C['Ember']), (0.70, C['Dust']), (0.40, C['Acid'])]   # surround, cone and dust cap, of the dish's radius
 CAP = (0.15, C['Haze'])                                  # the variant's small cap at the centre
 TRENCH = dict(elev=14.0, half=0.045)                     # the equator seen from a little above; its half width, of the radius
 LEAN = 8.0                                               # the whole turned a little (round 25's second critic: 18 put the

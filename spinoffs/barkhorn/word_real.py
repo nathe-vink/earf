@@ -9,7 +9,7 @@ So EARF is built as a sign: each of its thirteen shapes (marks.py's WORDMARK, th
 from the Clouds' own 20 mm tinted cast acrylic, as the globe's discs are, the word 980 mm across on a cap height of
 300, each piece's edges rounded over (ROUND) and polished, and the pieces laid on one another as a layered sign is made
 (LAYER): the stems and the A's first leg at the back; the bars, the R's bowl and the A's second leg on them; the A's
-crossbar and the R's leg in front. A colour per letter (LETTERS): the E red (Flare), the A yellow (Acid), the R blue
+crossbar and the R's leg in front. A colour per letter (LETTERS): the E red (Ember), the A yellow (Acid), the R blue
 (Ice, the globe's equator), the F green (Poison); the R, with the most sheets over one another, in the lighter of the
 two cool hues, so its overlaps stay clear. It is rendered with globe_real.py's acrylic, room and lights, its presets
 too (LIGHTS on paper; DARK on night, each piece's rim glowing its colour and its faces faint), square on and
@@ -39,7 +39,7 @@ SHEET = G.T                                              # the Clouds' 20 mm cas
 GAP = 0.0002                                             # between two sheets laid one on the other
 ROUND = 0.004                                            # each piece's edges rounded over, polished
 MARGIN = 40                                              # wordmark units clear round the word in a render
-LETTERS = ['flare', 'acid', 'ice', 'poison']             # E, A, R, F: a colour per letter
+LETTERS = ['ember', 'acid', 'ice', 'poison']             # E, A, R, F: a colour per letter
 LETTER = [0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3]         # which letter each shape of WORDMARK belongs to
 LAYER = [0, 1, 1, 1, 0, 1, 2, 0, 1, 2, 0, 1, 1]          # each shape's sheet, counted from the back
 SEG = 192                                                # a round edge's segments
@@ -60,13 +60,16 @@ def _outline(p):
     return list(p[1:]), None
 
 
-def piece(bpy, name, p, layer):
+def piece(bpy, name, p, layer, centre=(M.WORDMARK_W / 2, 150)):
     """One shape as a piece of sheet, SHEET deep toward the camera at its layer (the camera looks along +y), a ring's hole
-    through it, its edges rounded over ROUND (a bevel of four segments on every edge sharper than 30 degrees)."""
+    through it, its edges rounded over ROUND (a bevel of four segments on every edge sharper than 30 degrees); `centre`
+    the point of its drawing (units, y down) that goes to the world's origin. A ('shape', polygon) is cut (_cut)."""
+    if p[0] == 'shape':
+        return _cut(bpy, name, p[1], layer, centre)
     import bmesh
     pts, hole = _outline(p)
     y1 = -layer * (SHEET + GAP)                          # its back face; its front SHEET nearer the camera
-    w = lambda x, y, yy: (bm.verts.new(((x - M.WORDMARK_W / 2) * UNIT, yy, (150 - y) * UNIT)))
+    w = lambda x, y, yy: (bm.verts.new(((x - centre[0]) * UNIT, yy, (centre[1] - y) * UNIT)))
     me = bpy.data.meshes.new(name)
     bm = bmesh.new()
     back = [w(x, y, y1) for x, y in pts]
@@ -101,28 +104,65 @@ def piece(bpy, name, p, layer):
     return ob
 
 
-def build(bpy, body, clear, scatter=0.012, neon=(0.0, 0.0)):
-    """The thirteen pieces, each letter in its acrylic (`body`: globe_real._body's (face, scatter) colours by name): the
-    faces square to the camera one material, the rim (the sides and the rounding) another, which on dark grounds
-    (`neon`) gives off its colour at the first strength and the faces at the second, as the globe's rims do."""
+def _cut(bpy, name, g, layer, centre):
+    """A shapely polygon, holes and all (a piece with shapes cut through it, as icons.py's CUTS: round 30), as a piece
+    of sheet placed as `piece` places one: filled as a flat curve (its holes even-odd), extruded to SHEET and rounded
+    over ROUND, the curve drawn in by ROUND so the rounding's widest reach lies on the drawing, as `piece`'s bevel keeps
+    it, the holes' edges too."""
+    cu = bpy.data.curves.new(name, 'CURVE')
+    cu.dimensions, cu.fill_mode = '2D', 'BOTH'
+    cu.extrude, cu.bevel_depth, cu.bevel_resolution, cu.offset = SHEET / 2 - ROUND, ROUND, 3, -ROUND
+    for ring in [g.exterior] + list(g.interiors):
+        pts = list(ring.coords)[:-1]
+        sp = cu.splines.new('POLY')
+        sp.points.add(len(pts) - 1)
+        for i, (x, y) in enumerate(pts):
+            sp.points[i].co = ((x - centre[0]) * UNIT, (centre[1] - y) * UNIT, 0.0, 1.0)
+        sp.use_cyclic_u = True
+    ob = bpy.data.objects.new(name + '-curve', cu)
+    bpy.context.scene.collection.objects.link(ob)
+    ob.rotation_euler = (math.pi / 2, 0, 0)              # the curve's plane upright, square to the camera
+    ob.location = (0, -layer * (SHEET + GAP) - SHEET / 2, 0)
+    me = bpy.data.meshes.new_from_object(ob.evaluated_get(bpy.context.evaluated_depsgraph_get()))
+    me.transform(ob.matrix_world)
+    bpy.data.objects.remove(ob)
+    bpy.data.curves.remove(cu)
+    out = bpy.data.objects.new(name, me)
+    bpy.context.scene.collection.objects.link(out)
+    me.shade_smooth()
+    me.set_sharp_from_angle(angle=math.radians(25))
+    return out
+
+
+def word_items():
+    """The wordmark as pieces: [(shape, layer, colour name), ...]."""
+    return [(p, LAYER[i], LETTERS[LETTER[i]]) for i, p in enumerate(M.WORDMARK)]
+
+
+def build(bpy, body, clear, scatter=0.012, neon=(0.0, 0.0), items=None, centre=(M.WORDMARK_W / 2, 150), glows=None):
+    """The pieces (`items`, word_items' by default), each in its acrylic (`body`: (face, scatter) colours by colour
+    name, as globe_real._body gives them): the faces square to the camera one material, the rim (the sides and the
+    rounding) another, which on dark grounds (`neon`) gives off its colour (or `glows`' for its name) at the first
+    strength and the faces at the second, as the globe's rims do."""
     import materials as Mt
     lit = max(neon) > 0
+    items = items or word_items()
 
     def acrylic(name, k, see):
         face, deep = body[k]
         return Mt.make(bpy, name, 'cast_resin', {'color': face, 'deep': deep, 'radius': scatter, 'roughness': G.POLISH,
                                                   'cloud': 0.0, 'fibre': 0.0, 'clear': see})
     mats = {}
-    for k in LETTERS:
+    for k in dict.fromkeys(k for _, _, k in items):
         f = acrylic(f'acrylic-{k}', k, clear)
         r = acrylic(f'rim-{k}', k, min(clear, 0.25)) if lit else f
         if lit:
-            G._emit(f, E._C[k.title()], neon[1]); G._emit(r, E._C[k.title()], neon[0])
+            g = (glows or {}).get(k, E._C[k.title()])
+            G._emit(f, g, neon[1]); G._emit(r, g, neon[0])
         mats[k] = (f, r)
     obs = []
-    for i, p in enumerate(M.WORDMARK):
-        k = LETTERS[LETTER[i]]
-        ob = piece(bpy, f'piece-{i:02d}-{k}', p, LAYER[i])
+    for i, (p, layer, k) in enumerate(items):
+        ob = piece(bpy, f'piece-{i:02d}-{k}', p, layer, centre)
         me = ob.data
         me.materials.append(mats[k][0]); me.materials.append(mats[k][1])
         for f in me.polygons:
@@ -131,15 +171,16 @@ def build(bpy, body, clear, scatter=0.012, neon=(0.0, 0.0)):
     return obs
 
 
-def frame():
-    """A render's frame in wordmark units, (width, height): the word and MARGIN round it."""
-    return M.WORDMARK_W + 2 * MARGIN, 300 + 2 * MARGIN
+def frame(size=None):
+    """A render's frame in units, (width, height): the word (or a drawing `size` = (w, h)) and MARGIN round it."""
+    w, h = size or (M.WORDMARK_W, 300)
+    return w + 2 * MARGIN, h + 2 * MARGIN
 
 
-def stage(bpy, a):
+def stage(bpy, a, size=None):
     """globe_real's stage (the ground a backdrop of exactly its colour, the room, the key and the fill), its camera
-    framing the word, square on and orthographic."""
-    fw, fh = frame()
+    framing the word (or a drawing `size` across, centred on the origin), square on and orthographic."""
+    fw, fh = frame(size)
     G.stage(bpy, a.ground, a.px, 1.0, a.samples, a.env, a.adaptive, a.key, a.fill, tuple(a.shine), a.bounces)
     scene = bpy.context.scene
     scene.camera.data.ortho_scale = fw * UNIT

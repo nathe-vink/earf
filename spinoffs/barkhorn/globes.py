@@ -154,7 +154,7 @@ def rose():
 
 
 def layers(turns=8, r0=0.0):
-    """One groove from the centre out, eight turns, each the band of a Cloud from the core (Flare) to space (Smoke)."""
+    """One groove from the centre out, eight turns, each the band of a Cloud from the core (Ember) to space (Smoke)."""
     T = turns * TAU
     t = np.linspace(0, T, int(turns * math.pi * 1.0 / STEP) + 1)
     r = r0 + (1 - r0) * t / T

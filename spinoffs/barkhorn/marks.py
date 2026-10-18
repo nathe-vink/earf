@@ -187,10 +187,11 @@ SPEAKERS = [
     ('manzanita', 'Bark', '03', 'Manzanita', '#A33D27'),
     ('striped', 'Bark', '04', 'Striped Maple', '#D9E3CF'),
     # the Clouds in spectrum order (round 19, the owner: "What if we did a full spectrum, red orange yellow green blue
-    # purple white and black"): a red one added (Flare, the owner's pick in round 21; Ember until then), Smoke made black
+    # purple white and black"): a red one added (Ember; Flare from round 21, the owner's pick, until round 30, when the
+    # owner chose Ember again, as fitting the line better than a flash of light), Smoke made black
     # ("Smoke was meant to be the black one"; round 10's grey retired), all numbered again in that order; Acid and Haze
     # since round 17, Dust and Ice since round 18
-    ('red', 'Cloud', '01', 'Flare', '#D2382F'),
+    ('red', 'Cloud', '01', 'Ember', '#D2382F'),
     ('orange', 'Cloud', '02', 'Dust', '#E5732A'),
     ('amber', 'Cloud', '03', 'Acid', '#E9B320'),
     ('green', 'Cloud', '04', 'Poison', '#4F7F3A'),
