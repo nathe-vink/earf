@@ -1,0 +1,340 @@
+{
+ "stage1": {
+  "impression": "A back-bar of glowing white and red shelves with a single clear speaker in a pale niche, seen over a flat dark counter that fills the bottom quarter and cuts the speaker off at its woofer. The brightest thing in the frame is the shelving, not the product. The bottles are visibly the same few models with plain CG labels, and nothing has depth of field or haze, so this reads as a competent architectural render, not a photograph of a bar at night.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speaker must be the brightest, highest-contrast element: its horn and cabinet must read above the shelves (today the horn median is 108 and the shelf lips 195).",
+  "The speaker must be seen whole, or at least down to its base, and the pair should both be in frame or clearly implied. Today one speaker is visible and the counter cuts it at the woofer.",
+  "The clear-white acrylic must separate from its niche: a darker niche field and a rim or top light that draws the acrylic's edges.",
+  "The bottles must not repeat. Use several bottle models and labels with printed texture and wear, with no clone rows.",
+  "The foreground counter must carry the scene: a real honed-stone micro-texture, reflections of the shelves, a prop such as a glass, and shallow depth of field so it isn't a flat dead slab.",
+  "Atmosphere: a faint haze so the shelf light has volume and the frame has depth."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    625,
+    1200,
+    800
+   ],
+   "what": "The counter top is a flat, featureless dark slab taking 22% of the frame (lum median 55, range 65). It has no texture or props and reflects nothing legible."
+  },
+  {
+   "region": [
+    520,
+    590,
+    760,
+    635
+   ],
+   "what": "The counter edge crops the speaker through its woofer, so its base and stance are hidden and it reads as a box on a shelf."
+  },
+  {
+   "region": [
+    495,
+    240,
+    760,
+    635
+   ],
+   "what": "The clear-white speaker sits on a pale grey niche (niche lum ~70, horn ~108) with little separation. The acrylic edges barely draw."
+  },
+  {
+   "region": [
+    40,
+    60,
+    470,
+    210
+   ],
+   "what": "The white shelves are the brightest field in the frame (lip median 195, area p95 200) and pull the eye off the product. They are cool-blue (b 209 vs r 184) against the warm right side."
+  },
+  {
+   "region": [
+    40,
+    0,
+    1200,
+    600
+   ],
+   "what": "The same few bottle models are repeated across every shelf, with flat untextured labels. It reads as CG at once."
+  },
+  {
+   "region": [
+    855,
+    0,
+    1200,
+    80
+   ],
+   "what": "A Bell pendant's glass is cropped at the top-right corner as a vague grey disc. It distracts."
+  },
+  {
+   "region": [
+    0,
+    60,
+    50,
+    120
+   ],
+   "what": "A dark lamp shade is cropped at the left edge. It's a stray tangent."
+  },
+  {
+   "region": [
+    0,
+    590,
+    1200,
+    625
+   ],
+   "what": "A crushed black band at the shelf base and counter join (65% crushed). It has no detail."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "No depth of field and no haze. Everything is equally sharp, as in a render."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The counter fills the bottom quarter and crops the speaker at its woofer, and only one of the Fog pair is in frame.",
+   "evidence": {
+    "region": [
+     0,
+     625,
+     1200,
+     800
+    ],
+    "measured": "The counter spans y 625-800 (22% of the frame), lum median 55. The speaker's cabinet is cut at y ~632."
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [3.7, 6.1, 1.52], target [3.3, 9.144, 1.45], 28 mm",
+    "to": "a standing bartender-side eye line: raise to z 1.75 and aim down to target z 0.95, pan the target so both Fog niches sit either side of centre, lens 35 mm, f/2.8 focused on the nearer Fog speaker's horn"
+   },
+   "expected": "Both Fog speakers are visible down to their bases. The counter becomes a thin, slightly soft foreground band of about 10-12% of the frame height, the cropped pendant and the left lamp leave the frame, and the shelves fall gently out of focus behind the speakers.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The shelves outshine the product. The white shelf lips are the brightest thing in the frame.",
+   "evidence": {
+    "region": [
+     50,
+     190,
+     470,
+     210
+    ],
+    "measured": "Lip lum median 195.1, while the speaker's horn region median is 107.6."
+   },
+   "change": {
+    "setting": "shelves (emission)",
+    "from": "0.9",
+    "to": "0.35"
+   },
+   "expected": "The shelves glow as a background rhythm, about 40% darker, with the bottles silhouetted and lit through their glass. The speaker becomes the brightest form.",
+   "accept": {
+    "region": [
+     50,
+     190,
+     470,
+     210
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     110,
+     145
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The clear-white acrylic dissolves into a pale niche, so the speaker's silhouette doesn't separate.",
+   "evidence": {
+    "region": [
+     495,
+     250,
+     520,
+     620
+    ],
+    "measured": "Niche field lum median 70.7. Horn region median 107.6. Acrylic edge step only 13 levels over 11 px."
+   },
+   "change": {
+    "setting": "Fog niches (emission) and spot on each Fog speaker",
+    "from": "niches 0.12, spot 60 W",
+    "to": "niches 0.04, spot 180 W as a narrow top-back rim (place it behind and above the speaker, aimed at the horn's rim and the cabinet edges)"
+   },
+   "expected": "A dark niche, with the acrylic's edges and horn rim drawn in bright lines and the speaker the clear hero of its niche.",
+   "accept": {
+    "region": [
+     495,
+     250,
+     520,
+     620
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 40
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "asset",
+   "problem": "The bottles repeat as clones with flat labels, the strongest 'render' tell in the frame.",
+   "evidence": {
+    "region": [
+     40,
+     60,
+     470,
+     580
+    ],
+    "measured": "Seen: about six bottle models repeated across five shelves, with untextured solid-colour labels."
+   },
+   "change": {
+    "setting": "small props: back-bar bottles",
+    "from": "a handful of procedural bottle models with plain labels",
+    "to": "at least 20 distinct bottle shapes, randomly varied fill levels, labels with printed type, paper texture and slight wear, a few gaps and a few short bottles, with no two neighbours alike"
+   },
+   "expected": "The shelves read as a real kissa back-bar, varied and quiet.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The honed stone counter is a smooth, dead slab with no micro-detail.",
+   "evidence": {
+    "region": [
+     0,
+     640,
+     1200,
+     800
+    ],
+    "measured": "lum range 65, a smooth gradient profile (27.8-33.1 down the counter), with no grain."
+   },
+   "change": {
+    "setting": "bar top material (honed dark stone; finish only, colour kept)",
+    "from": "uniform roughness",
+    "to": "a fine honed-granite albedo speckle (\u00b16%) and roughness variation 0.35-0.55 with faint wipe marks, so the shelves' glow smears into a soft reflection"
+   },
+   "expected": "The counter reads as real stone, with a soft warm-and-cool reflection of the shelves near its back edge.",
+   "accept": {
+    "region": [
+     0,
+     640,
+     1200,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 85
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The foreground has no human scale or story, and the counter is empty.",
+   "evidence": {
+    "region": [
+     0,
+     640,
+     1200,
+     800
+    ],
+    "measured": "Seen: no props on the counter."
+   },
+   "change": {
+    "setting": "small props",
+    "from": "none",
+    "to": "one tumbler with a large clear ice cube and an amber pour, at the lower left third on the counter, and a folded paper menu beside it, both out of focus at f/2.8"
+   },
+   "expected": "A soft foreground layer that gives depth and the kissa mood, and leaves the speakers clear.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The air is empty, so the shelf light has no volume and the frame lacks depth.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     600
+    ],
+    "measured": "Seen: hard, equal clarity from the counter to the back panel."
+   },
+   "change": {
+    "setting": "haze in the air",
+    "from": "none",
+    "to": "a homogeneous volume, density 0.008, anisotropy 0.3"
+   },
+   "expected": "A faint glow around the shelf lights and the rim light, with slightly lifted blacks in the far shelves.",
+   "accept": {
+    "region": [
+     0,
+     590,
+     1200,
+     625
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 35
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The left shelves read cold blue beside the warm right, so the light doesn't feel like one room.",
+   "evidence": {
+    "region": [
+     50,
+     60,
+     460,
+     300
+    ],
+    "measured": "r 162, g 175, b 185 on the left. r 162, g 126, b 109 on the right."
+   },
+   "change": {
+    "setting": "render white_balance_k",
+    "from": "4300",
+    "to": "3700 (warmer render), and tint the shelf LED slightly warm (about 3500 K)"
+   },
+   "expected": "The shelves' white goes to a warm neutral and the whole frame reads as one warm night interior.",
+   "accept": {
+    "region": [
+     50,
+     60,
+     460,
+     300
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 165
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The white batts through the clear cabinet read as a cardboard box with a frame. A treatment that reads as acoustic fill would help the speaker look like $20,000.",
+   "why": "This is the product's construction and colour, which the card fixes."
+  },
+  {
+   "request": "The horn's dark throat shape reads as a bulbous black blob against the clear horn.",
+   "why": "This is the speaker's horn shape, which is fixed."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

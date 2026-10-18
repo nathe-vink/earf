@@ -1,0 +1,378 @@
+{
+ "stage1": {
+  "impression": "A clean, well-built CG interior: the spectrum bar front and the colour-coded back-bar give an immediate idea, and the polished floor's reflections help. But the panels read as flat painted plastic rather than lit acrylic, the bright lavender ceiling and the equally bright back-bar shelves compete with the bar front, the stools chop the spectrum into fragments, and the empty, uniform floor and lack of any life or haze keep it reading as a render, not a magazine photograph.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The bar front must be the brightest, most saturated thing in the frame, clearly above the back-bar shelves and the ceiling (panels lum_median about 140-160 against shelves about 80 or less and ceiling about 55 or less)",
+  "The panels must read as lit cast acrylic: a soft gradient across their height, a bright seam at each joint, light spilling onto the floor and stool legs, not a uniform flat fill (falloff within each panel of 8-15%)",
+  "Equal perceived brightness across the spectrum: red and violet currently fall 30-35 lum below yellow",
+  "A camera position where all eight panels read as one continuous band, with no stool cut by the frame edge and the Smoke panel legible against the steel column",
+  "Real surface micro-detail on the floor and stone top, plus faint haze, so the room has air and depth",
+  "Signs of use (glasses, a menu, a coat, or one or two people) so the bar looks open, not like a showroom model"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    440,
+    800,
+    680
+   ],
+   "what": "Bar panels are perfectly uniform fills (orange panel 145.7-146.8 top to bottom): they read as paint, not back-lit acrylic"
+  },
+  {
+   "region": [
+    20,
+    450,
+    90,
+    600
+   ],
+   "what": "Red panel noticeably dimmer (lum 109) than yellow (165) and blue (148): the spectrum is uneven"
+  },
+  {
+   "region": [
+    800,
+    0,
+    1200,
+    200
+   ],
+   "what": "Ceiling membrane is a flat, bright lavender plane (lum 104, range 22) taking a quarter of the frame and casting purple over the whole room"
+  },
+  {
+   "region": [
+    100,
+    60,
+    680,
+    390
+   ],
+   "what": "Back-bar shelves as bright as the bar front (lum 105-130): they compete for the hero and the white shelf backs look like a lit retail display"
+  },
+  {
+   "region": [
+    90,
+    450,
+    860,
+    720
+   ],
+   "what": "Stools occlude and slice the panels; the foreground stool is cut by the left frame edge"
+  },
+  {
+   "region": [
+    0,
+    540,
+    40,
+    800
+   ],
+   "what": "Half a stool cut by the left frame edge, a black mass in the corner"
+  },
+  {
+   "region": [
+    700,
+    600,
+    1200,
+    800
+   ],
+   "what": "Large dead area of polished floor with no detail (lum range 11), CG-smooth"
+  },
+  {
+   "region": [
+    790,
+    345,
+    900,
+    470
+   ],
+   "what": "Steel column ends the spectrum in a dark block; the Smoke panel is not legible"
+  },
+  {
+   "region": [
+    0,
+    260,
+    110,
+    400
+   ],
+   "what": "Espresso machine at the left edge cut by the frame, a distracting half-object"
+  },
+  {
+   "region": [
+    0,
+    400,
+    830,
+    440
+   ],
+   "what": "The stone bar top is empty and featureless: no glasses, no menu, no sign of use"
+  },
+  {
+   "region": [
+    900,
+    200,
+    1200,
+    470
+   ],
+   "what": "Lounge area and record wall are murky (lum median 36) and the blue screen is the brightest thing back there, pulling the eye off the bar"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The ceiling membrane is a bright, flat lavender plane that competes with the bar front and tints the room purple.",
+   "evidence": {
+    "region": [
+     800,
+     0,
+     1200,
+     200
+    ],
+    "measured": "lum_median 104.3, range 22.2, b_median 130 > r_median 112"
+   },
+   "change": {
+    "setting": "membrane (emission strength)",
+    "from": "0.2",
+    "to": "0.08"
+   },
+   "expected": "The ceiling drops to a dim, quiet plane about half its current value, so the bar front becomes the brightest band in the frame.",
+   "accept": {
+    "region": [
+     800,
+     0,
+     1200,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     45,
+     65
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The back-bar shelves are as bright as the bar panels, so the hierarchy is split between two walls of colour.",
+   "evidence": {
+    "region": [
+     300,
+     120,
+     460,
+     380
+    ],
+    "measured": "lum_median 107.9 (p95 170.3), against bar panels 129-165"
+   },
+   "change": {
+    "setting": "shelves and back-bar back panel (emission strength)",
+    "from": "shelves 0.9, back panel 0.18",
+    "to": "shelves 0.55, back panel 0.08"
+   },
+   "expected": "Bottles glow on their edge-lit shelves against a darker back, so the back-bar reads as a supporting layer about 40-50% below the bar front.",
+   "accept": {
+    "region": [
+     300,
+     120,
+     460,
+     380
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     65,
+     85
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The spectrum is uneven: red and violet are much dimmer than yellow, blue and white.",
+   "evidence": {
+    "region": [
+     20,
+     450,
+     90,
+     600
+    ],
+    "measured": "red lum_median 109.3; orange 145.7, yellow 164.8, green 133.5, blue 148.4, violet 128.8, fog 144.4"
+   },
+   "change": {
+    "setting": "bar panels (per-panel emission strength, base 1.1)",
+    "from": "1.1 on every panel",
+    "to": "Ember 1.55, Dust 1.15, Acid 0.95, Poison 1.2, Ice 1.1, Haze 1.3, Fog 1.0, Smoke 1.1"
+   },
+   "expected": "Every panel reads at a similar brightness (lum_median about 140-155), so the band reads as an even spectrum.",
+   "accept": {
+    "region": [
+     20,
+     450,
+     90,
+     600
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     135,
+     155
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "Each panel is a perfectly uniform fill, which reads as painted plastic rather than lit cast acrylic.",
+   "evidence": {
+    "region": [
+     200,
+     445,
+     240,
+     520
+    ],
+    "measured": "vertical profile 145.7, 146.7, 146.8, 146.8: zero falloff"
+   },
+   "change": {
+    "setting": "bar panels (emission distribution)",
+    "from": "uniform emission across each panel",
+    "to": "emission ramp from 1.0 at the bottom LED strip to 0.85 at the top, with a 10 mm bright seam (1.4x) at each panel joint"
+   },
+   "expected": "A soft vertical gradient (top 10-15% darker than the base) and thin bright joints, giving the panels depth and an acrylic glow.",
+   "accept": {
+    "region": [
+     200,
+     445,
+     240,
+     520
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": "between",
+    "value": [
+     0.08,
+     0.18
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The stools slice the spectrum into fragments, the left frame edge cuts a stool and the espresso machine, and the ceiling takes a quarter of the frame.",
+   "evidence": {
+    "region": [
+     0,
+     260,
+     120,
+     800
+    ],
+    "measured": "corner stool crush_pct 26.8; ceiling region 800-1200 x 0-200 is flat lavender"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [1.3, 3.1, 1.45], target [7.2, 7.4, 0.95], 26 mm",
+    "to": "position [2.4, 3.6, 1.2], target [7.6, 7.6, 0.8], 32 mm"
+   },
+   "expected": "A lower, slightly more frontal view where the bar front fills the lower half as one continuous band and the stools fall between panels rather than across them; less ceiling, no half-objects at the left edge, the Smoke panel visible before the steel column.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The floor is a large, CG-smooth dark mirror with no micro-detail, a dead area in the lower right.",
+   "evidence": {
+    "region": [
+     700,
+     600,
+     1200,
+     800
+    ],
+    "measured": "lum_median 42.5, lum_range 11.1: almost no texture"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "uniform polished dark floor",
+    "to": "honed dark concrete with fine aggregate, roughness 0.18-0.32 varied by a large-scale noise, a faint bump at 0.2 mm"
+   },
+   "expected": "Reflections break up softly and the floor shows real grain; local contrast rises in the dead area.",
+   "accept": {
+    "region": [
+     700,
+     600,
+     1200,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 22
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "There is no air in the room: the depth to the lounge and record wall is flat and the pendant cones and panel glow do not carry.",
+   "evidence": {
+    "region": [
+     900,
+     200,
+     1200,
+     470
+    ],
+    "measured": "lum_median 36.5 with crushed blacks (6.6%)"
+   },
+   "change": {
+    "setting": "haze in the air",
+    "from": "none",
+    "to": "a homogeneous volume over the whole room, density 0.004, anisotropy 0.3"
+   },
+   "expected": "Faint glow around the Bell pendants and the panels, the back of the room recedes, blacks lift slightly.",
+   "accept": {
+    "region": [
+     950,
+     220,
+     1200,
+     340
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The bar top is empty and nobody is there, so the frame reads as a showroom model rather than an open bar.",
+   "evidence": {
+    "region": [
+     0,
+     395,
+     830,
+     440
+    ],
+    "measured": "seen: an unbroken stone top with no objects"
+   },
+   "change": {
+    "setting": "small props / people",
+    "from": "none",
+    "to": "four rocks glasses and two coupes spaced along the bar top over the orange, green and violet panels, a menu card by the third stool, a coat over the fifth stool; optionally one seated patron, back to camera, at the far (Fog) end"
+   },
+   "expected": "Small highlights on glass break the long top, and the room reads as in use; glasses pick up the panels' colours.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Replace the steel column at the end of the bar, or set it back, so the spectrum does not end in a dark block",
+   "why": "Part of the room's design as proposed; only the camera can work around it"
+  },
+  {
+   "request": "Fewer stools, or stools set farther apart, so they do not cut across the panels",
+   "why": "The layout is fixed; the camera change (c5) is the fix within scope"
+  }
+ ],
+ "score_if_fixed": 7.5
+}

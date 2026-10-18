@@ -25,10 +25,12 @@ PENDANT_Z = P.BAR_TOP_Z + P.TOP_T + 0.78 - 0.279      # a pendant's origin: its 
 PENDANT_HIDE = ['foot-lower-stack', 'cover', 'stem', 'knob', 'dimmer', 'bumpons', 'cord']
 
 DEFAULT = dict(
-    clock='late', membrane=0.30, panel_glow=1.1, shelf_glow=0.9, backpanel_glow=0.18, niche_glow=0.12, slat_glow=0.25,
-    slat_led=10.0, record_glow=4.0, neon=18.0, windows_lit=0.35, street=True,
-    spot_speaker=160.0, spot_fog=40.0, spot_bar=18.0, spot_dj=25.0, spot_records=0.0, bell_w=12.0, pendant_w=10.0, street_lamp=900.0,
-    exposure=0.0, wb=4300, view='AgX', look='None', samples=256,
+    # round 1's critics (critic/*-r1.json): the ceiling and the shelves outshone the bar and the products; no air
+    clock='late', membrane=0.09, membrane_white=0.45, dj_glow=0.05, dj_color='#F2D6B0', panel_glow=0.8, shelf_glow=0.5,
+    backpanel_glow=0.08, niche_glow=0.05, slat_glow=0.25, slat_led=10.0, record_glow=0.0, neon=18.0, windows_lit=0.35,
+    street=True, spot_speaker=900.0, wash=120.0, spot_fog=150.0, spot_bar=18.0, spot_dj=90.0, spot_records=150.0,
+    bell_w=35.0, pendant_w=18.0, street_lamp=600.0, haze=0.004,
+    exposure=0.5, wb=4000, view='AgX', look='None', samples=256,
 )
 
 
@@ -36,7 +38,8 @@ def room_piece(v):
     keys = ('clock', 'membrane', 'panel_glow', 'shelf_glow', 'backpanel_glow', 'niche_glow', 'slat_glow', 'slat_led',
             'record_glow', 'neon', 'windows_lit', 'street', 'floor_tex', 'floor_tint', 'floor_tint_mix', 'floor_coat',
             'wall', 'booth_color', 'absorber', 'rug_tex', 'rug_tint', 'membrane_white', 'last_dim', 'flat_glow',
-            'across_glow', 'backpanel_color')
+            'across_glow', 'backpanel_color', 'dj_glow', 'facade', 'dj_color', 'membrane_tint', 'road_rough',
+            'joint_glow', 'props', 'glasses_x')
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_room', 'fn': 'room', **{k: v[k] for k in keys if k in v}}
 
 
@@ -48,6 +51,10 @@ def props(v):
     for x, y, f in P.CHAIRS:                                          # the lounge's low chairs
         out.append({'kind': 'kit', 'shape': 'asset', 'model': 'mid_century_lounge_chair', 'res': '1k',
                     'position': [x, y, 0.012], 'rotate': [0, 0, v.get('chair_rot0', -90.0) + f]})
+    if v['street']:                                                   # the street lamps along the curb (CC0)
+        for x in STREET_LAMPS:
+            out.append({'kind': 'kit', 'shape': 'asset', 'model': 'street_lamp_01', 'res': '1k', 'position': [x, -3.7, 0.0],
+                        'rotate': [0, 0, v.get('lamp_rot', 0.0)]})
     # the pendants' cords, from each shade's cap up to the membrane
     for x in P.bar_pendants():
         y = P.BAR_FRONT + 0.20
@@ -79,10 +86,17 @@ def lights(v):
     for k, (role, colour, x, y, z, rot) in enumerate(P.speakers()):
         if role == 'backbar':
             continue
-        L[f'spk{k}'] = {'type': 'spot', 'position': [round(x + 0.35 * math.sin(math.radians(rot)), 3),
-                                                      round(y - 0.35 * math.cos(math.radians(rot)), 3), P.MEMBRANE - 0.02],
-                        'target': [x, y, 0.75], 'power_w': v['spot_speaker'], 'cone_deg': 28, 'blend': 0.6,
+        fx, fy = math.sin(math.radians(rot)), -math.cos(math.radians(rot))      # the speaker's front
+        L[f'spk{k}'] = {'type': 'spot', 'position': [round(x + 1.8 * fx, 3), round(y + 1.8 * fy, 3), P.MEMBRANE - 0.02],
+                        'target': [x, y, 0.85], 'power_w': v['spot_speaker'], 'cone_deg': 18, 'blend': 0.6,
                         'radius_m': 0.03, 'color': 3000}
+        # the wash: a floor uplight in the corner behind, grazing both walls in the pair's complementary colour
+        cx = P.LOUNGE_X0 + 0.25 if role == 'front' else P.L - 0.15
+        cy = 0.15 if y < P.D / 2 else P.D - 0.15
+        if v.get('wash', 0) > 0:
+            L[f'wash{k}'] = {'type': 'spot', 'position': [round(x - 0.25 * fx, 3), round(y - 0.25 * fy, 3), 0.18],
+                             'target': [cx, cy, 2.6], 'power_w': v['wash'], 'cone_deg': 70, 'blend': 0.9, 'radius_m': 0.05,
+                             'color': P.COLOURS[P.WASH[role]]}
     # a pinhole in each Fog niche's head, onto the speaker
     for k, (role, colour, x, y, z, rot) in enumerate(P.speakers()):
         if role == 'backbar':
@@ -94,8 +108,8 @@ def lights(v):
                         'target': [x + 0.7, P.BAR_FRONT + 0.1, P.BAR_TOP_Z], 'power_w': v['spot_bar'], 'cone_deg': 30,
                         'blend': 0.7, 'radius_m': 0.02, 'color': 2900}
     # the DJ desk's own light
-    L['dj'] = {'type': 'spot', 'position': [P.L - 0.6, P.D / 2, P.DJ['recess_z'] - 0.02], 'target': [P.L - 0.45, P.D / 2, P.DJ['desk_z']],
-               'power_w': v['spot_dj'], 'cone_deg': 70, 'blend': 0.8, 'radius_m': 0.05, 'color': 3000}
+    L['dj'] = {'type': 'spot', 'position': [P.L - 0.42, P.D / 2 - 0.15, P.DJ['recess_z'] - 0.03],
+               'target': [P.L - 0.40, P.D / 2 - 0.15, P.DJ['desk_z']], 'power_w': v['spot_dj'], 'cone_deg': 35, 'blend': 0.8, 'radius_m': 0.05, 'color': 3000}
     if v.get('spot_records', 0) > 0:                                 # a wash down the record wall
         for k, yy in enumerate((2.6, 4.57, 6.5)):
             L[f'rec{k}'] = {'type': 'spot', 'position': [P.L - 1.4, yy, P.MEMBRANE - 0.02], 'target': [P.L - 0.4, yy, 1.4],
@@ -114,9 +128,9 @@ def lights(v):
         bell(x0 + P.BOOTH_LEN / 2, 0.37, P.TABLE['h'], v['bell_w'], f'booth{i}-')
     # the street lamps (outside, along the curb), 3000 K LED
     if v['street']:
-        for k, x in enumerate((-6.0, 7.0, 21.0)):
-            L[f'street{k}'] = {'type': 'point', 'position': [x, -4.4, 7.2], 'power_w': v['street_lamp'], 'radius_m': 0.15,
-                               'color': 3000}
+        for k, x in enumerate(STREET_LAMPS):
+            L[f'street{k}'] = {'type': 'point', 'position': [x, -3.7 + v.get('lamp_dy', 0.0), v.get('lamp_z', 3.30)], 'power_w': v['street_lamp'], 'radius_m': 0.15,
+                               'color': 2700}
     return L
 
 
@@ -132,6 +146,8 @@ def shot(view):
         'sky': {'kind': 'gradient', 'zenith': '#05070C', 'horizon': '#141824', 'ground': '#08080A', 'strength': v.get('sky', 1.0)},
         'lights': lights(v),
         'materials': {'led': {'strength': v.get('led', 22.0)}},
+        'haze': {'box_m': [-0.1, -0.1, 0.0, P.L + 0.1, P.D + 0.1, P.MEMBRANE], 'density': v['haze'], 'anisotropy': 0.3,
+                 'color': '#FFFFFF'} if v['haze'] > 0 and view != 'street' else {},
         'render': {'samples': v['samples'], 'adaptive': 0.02, 'denoise': True, 'clamp': 10, 'bounces': 10,
                    'view': v['view'], 'look': v['look'], 'exposure': v['exposure'], 'white_balance_k': v['wb'], 'white_balance_tint': 0.0},
     }
@@ -139,19 +155,23 @@ def shot(view):
 
 
 EYE = 1.60
+STREET_LAMPS = (-7.0, 6.5, 20.0)
 VIEWS = {
     'door': {'title': 'the whole room at night, from the door',
-             'camera': {'position': [0.55, 3.55, EYE], 'target': [P.L, 5.0, 1.35], 'lens_mm': 18, 'level': True}},
+             'camera': {'position': [1.60, 3.70, 1.35], 'target': [P.L, 4.6, 1.05], 'lens_mm': 24, 'level': True}},
     'bar': {'title': 'the bar front lit, at eye level',
-            'camera': {'position': [1.30, 3.10, 1.45], 'target': [7.2, 7.4, 0.95], 'lens_mm': 26, 'level': True}},
+            'camera': {'position': [2.40, 3.60, 1.20], 'target': [7.6, 7.6, 0.8], 'lens_mm': 32, 'level': True}},
     'listening': {'title': 'the listening corner, a pair either side of the lounge',
-                  'camera': {'position': [11.70, P.D / 2, 1.20], 'target': [P.L, P.D / 2, 1.25], 'lens_mm': 22, 'level': True}},
+                  'camera': {'position': [12.50, P.D / 2, EYE], 'target': [P.L, P.D / 2, 1.15], 'lens_mm': 18, 'level': True}},
     'backbar': {'title': 'the back-bar, the Fog pair among the lit shelves',
-                'camera': {'position': [3.70, 6.10, 1.52], 'target': [3.30, P.D, 1.45], 'lens_mm': 28, 'level': True}},
+                'camera': {'position': [4.20, 6.20, 1.70], 'target': [3.42, 8.9, 1.2], 'lens_mm': 35, 'level': True,
+                           'fstop': 2.8, 'focus': [3.42, 8.72, 1.65]}},
     'records': {'title': 'the record wall and the DJ desk with Cumulus',
-                'camera': {'position': [15.6, 3.2, 1.55], 'target': [P.L, 4.9, 1.15], 'lens_mm': 32, 'level': True}},
+                'camera': {'position': [16.5, 3.9, 1.30], 'target': [17.89, 4.42, 1.0], 'lens_mm': 45, 'level': True,
+                           'fstop': 4.0, 'focus': [17.89, 4.42, 1.0]}},
     'street': {'title': 'the street at night, through the window',
-               'camera': {'position': [6.2, -14.5, 1.65], 'target': [6.2, 0.0, 2.6], 'lens_mm': 30, 'level': True}},
+               'camera': {'position': [-6.5, -10.0, 1.5], 'target': [3.0, 0.5, 1.9], 'lens_mm': 32, 'level': True},
+               'settings': {'sky': 0.25}},
 }
 
 

@@ -74,10 +74,12 @@ PAIRS = {
     'back': {'colour': 'ice', 'x': L - CORNER_OFF - 0.10},               # either side of the record wall, facing the bar
 }
 # the low chairs: (x, y, facing deg); 12 in the lounge, in two rows facing the record wall, plus the side pair
-CHAIRS = [(13.25, 2.35, 0), (13.25, 3.55, 0), (13.25, 5.55, 0), (13.25, 6.75, 0),
-          (14.85, 2.95, 0), (14.85, 4.55, 0), (14.85, 6.15, 0),
-          (12.55, 1.25, 30), (12.55, 7.85, -30), (16.10, 1.35, 75), (16.10, 7.75, -75), (14.90, 0.95, 90)]
-SIDE_TABLES = [(13.25, 4.55), (14.85, 3.75), (14.85, 5.35)]
+CHAIRS = [(13.30, 2.00, 0), (13.30, 3.30, 0), (13.30, 5.85, 0), (13.30, 7.15, 0),
+          (15.00, 2.40, 0), (15.00, 3.80, 0), (15.00, 5.35, 0), (15.00, 6.75, 0),
+          (14.20, 0.95, 90), (15.80, 0.95, 90), (14.20, 8.19, -90), (15.80, 8.19, -90)]
+SIDE_TABLES = [(13.30, D / 2), (15.00, D / 2)]
+# the complementary wash behind each pair (research, move 11: Holl's St Ignatius): Dust behind Ice, Ice behind Ember
+WASH = {'front': 'ice', 'back': 'dust'}
 
 # the tinted slats over dark absorber: on the lounge's street wall (y = 0) only, so no two acrylic walls face
 SLATS = dict(x0=LOUNGE_X0 + 0.15, x1=L - 1.45, z0=0.30, z1=3.30, w=0.075, pitch=0.150, t=0.012, gap=0.075,

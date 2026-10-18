@@ -1,0 +1,324 @@
+{
+ "stage1": {
+  "impression": "A moody night scene: warm record shelves frame a big saturated-blue recess, and a small acrylic turntable sits on a black gloss desk. The glossy reflection of the turntable is the best thing in it. But the hero takes up less than a fifth of the frame and is the same blue as the flat backdrop behind it, the lower third is a dead black slab, and the repeated record spines and the textureless glowing box read as CG, not a photographed interior.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Cumulus must separate from its background in hue and value: the recess behind it must not be the same saturated blue as the acrylic",
+  "The desk front and the lower third must hold detail (not 75% crushed to black)",
+  "The turntable must be lit by its own motivated pool of light, with a crisp highlight on the platter and arm, and must fill a larger share of the frame",
+  "The recess wall needs a real material (plaster, fabric, wood) with micro-texture and a falloff, not a flat emissive field",
+  "The record wall needs variation in light and in spines (no visible repetition), plus atmosphere that gives depth"
+ ],
+ "defects": [
+  {
+   "region": [
+    240,
+    600,
+    1100,
+    800
+   ],
+   "what": "desk front crushed to black: no material, edge or reflection reads, so a third of the frame is dead"
+  },
+  {
+   "region": [
+    420,
+    120,
+    1100,
+    520
+   ],
+   "what": "recess backdrop is a flat, single-hue cyan-blue field (R about 2) with no texture, so it reads as an emissive CG panel"
+  },
+  {
+   "region": [
+    590,
+    450,
+    800,
+    520
+   ],
+   "what": "Cumulus is small (about 200 px of 1200) and tinted the same blue as the backdrop, so its silhouette and colour are lost"
+  },
+  {
+   "region": [
+    520,
+    280,
+    900,
+    480
+   ],
+   "what": "the desk lamp's cone lands on the back wall above the turntable rather than on it"
+  },
+  {
+   "region": [
+    20,
+    0,
+    300,
+    720
+   ],
+   "what": "record spines repeat with near-identical colours and spacing; the shelves are lit evenly with no falloff"
+  },
+  {
+   "region": [
+    340,
+    440,
+    520,
+    520
+   ],
+   "what": "the mixer is a plain grey box with flat matte plastic, which reads as a placeholder"
+  },
+  {
+   "region": [
+    230,
+    0,
+    1110,
+    110
+   ],
+   "what": "the soffit's underside has black slot lines and a hard, plain edge; the shelf above is cut off awkwardly by the frame"
+  },
+  {
+   "region": [
+    1165,
+    0,
+    1200,
+    800
+   ],
+   "what": "a sliver of the right-hand shelving at the frame edge is a distracting tangent"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The recess glows the same saturated blue as Cumulus, so the product disappears into it.",
+   "evidence": {
+    "region": [
+     420,
+     120,
+     1100,
+     520
+    ],
+    "measured": "lum_median 56, r_median 2, g 67, b 110: a monochrome cyan field; the product region's medians (r 5, g 70, b 96) are almost identical"
+   },
+   "change": {
+    "setting": "DJ recess emission (strength and colour)",
+    "from": "0.12, saturated blue",
+    "to": "0.05, warm neutral (about 3000 K, a dark amber-grey), so the Ice blue acrylic is the only cool element in the recess"
+   },
+   "expected": "The backdrop turns a dark warm grey and the turntable reads as the one blue object, lit through its acrylic",
+   "accept": {
+    "region": [
+     420,
+     120,
+     1100,
+     450
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 20
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The desk lamp lights the wall above the turntable, not the turntable.",
+   "evidence": {
+    "region": [
+     560,
+     330,
+     800,
+     470
+    ],
+    "measured": "the wall cone is brighter (lum_median 89) than the product (lum_median 59 in 590,460-800,520)"
+   },
+   "change": {
+    "setting": "DJ desk lamp (watts, aim, beam)",
+    "from": "60 W, falling on the back wall",
+    "to": "90 W, aimed straight down on the platter, beam about 35 degrees with a soft edge, so the pool sits on the desk around Cumulus and grazes the arm"
+   },
+   "expected": "A bright pool on the desk and platter, a crisp highlight on the arm and plinth edge, and the wall falling off darker above",
+   "accept": {
+    "region": [
+     590,
+     460,
+     800,
+     520
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 140
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The hero takes up less than a fifth of the frame width and is centred in a sea of backdrop and black desk.",
+   "evidence": {
+    "region": [
+     590,
+     450,
+     800,
+     520
+    ],
+    "measured": "turntable spans about 200 x 70 px of 1200 x 800"
+   },
+   "change": {
+    "setting": "camera position, target, lens",
+    "from": "[15.6, 3.2, 1.55] at [18.288, 4.9, 1.15], 32 mm",
+    "to": "[16.5, 3.9, 1.30] at the turntable's centre, 45 mm, keeping a vertical strip of the record wall on the left and the soffit's edge just in frame"
+   },
+   "expected": "Cumulus spans about 35-40% of the frame width on the lower third line, with the record wall as context and the desk front reduced to a band",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The desk front is a crushed black slab with no material.",
+   "evidence": {
+    "region": [
+     240,
+     600,
+     1100,
+     800
+    ],
+    "measured": "lum_median 2.1, crush_pct 75"
+   },
+   "change": {
+    "setting": "DJ desk front material (and grade)",
+    "from": "featureless gloss black",
+    "to": "dark smoked oak or satin lacquer with a visible grain, roughness 0.35, so it picks up the warm record wall and the lamp's spill; raise the exposure from 0.5 to 0.7 if needed"
+   },
+   "expected": "The desk front reads as a dark surface with a soft gradient and a lit top edge, not a void",
+   "accept": {
+    "region": [
+     240,
+     600,
+     1100,
+     800
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 30
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The recess wall is a flat emissive field with no texture, which says render.",
+   "evidence": {
+    "region": [
+     420,
+     120,
+     1100,
+     450
+    ],
+    "measured": "lum_range 46 over the whole field, coming only from the lamp cone; crop shows no micro-detail"
+   },
+   "change": {
+    "setting": "recess wall material",
+    "from": "smooth flat glow",
+    "to": "lime plaster or acoustic felt with a fine bump (2-3 mm scale) lit by grazing light from the recess's top edge, so it falls off top to bottom"
+   },
+   "expected": "Visible fine texture and a vertical gradient on the recess wall",
+   "accept": {
+    "region": [
+     420,
+     120,
+     1100,
+     450
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">",
+    "value": 0
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The record wall is lit evenly with no falloff, which exposes the repeated spines.",
+   "evidence": {
+    "region": [
+     20,
+     20,
+     230,
+     700
+    ],
+    "measured": "lum_median 39 with even bands top to bottom; spines repeat in colour and spacing"
+   },
+   "change": {
+    "setting": "record wall's top strip; shelves",
+    "from": "top strip 0.0, shelves 0.9",
+    "to": "top strip 0.5, shelves 0.5, so light rakes down the spines and falls off toward the floor; randomise the spine colour and lean on the shelves (set dressing)"
+   },
+   "expected": "Bright tops of the spines with darker lower shelves; no visible tiling",
+   "accept": {
+    "region": [
+     20,
+     20,
+     230,
+     160
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 60
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "There is no atmosphere, and the beams and depth read flat.",
+   "evidence": {
+    "region": [
+     420,
+     120,
+     1100,
+     520
+    ],
+    "measured": "the lamp cone has a hard planar shape on the wall with no beam in the air"
+   },
+   "change": {
+    "setting": "haze in the air",
+    "from": "none",
+    "to": "volume scatter density 0.004, anisotropy 0.3, in the recess and the room"
+   },
+   "expected": "A faint visible beam from the desk lamp and a softening into the background",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The mixer is a plain grey box that reads as a placeholder, and the desk lacks the props that make it a working DJ booth.",
+   "evidence": {
+    "region": [
+     340,
+     440,
+     520,
+     520
+    ],
+    "measured": "lum_median 26, flat matte surface, no detail"
+   },
+   "change": {
+    "setting": "small props / mixer material",
+    "from": "matte grey box",
+    "to": "brushed dark aluminium with a fine anisotropic sheen; add a record sleeve leaning against the recess wall and headphones beside the mixer, kept clear of Cumulus"
+   },
+   "expected": "A believable working booth without competing with the turntable",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Cumulus's tint against an Ice blue room: a clear or Fog acrylic Cumulus would read better here",
+   "why": "The product's colour is fixed; the change above solves the separation through the room's light instead"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

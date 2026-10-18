@@ -1,0 +1,352 @@
+{
+ "stage1": {
+  "impression": "A flat, blue-grey night facade with a long lit window. The bar inside reads as a strip of rainbow colour and a wall of bottles, small and far back. The facade, sidewalk and street are smooth untextured CG with the same blue value everywhere. The street lamp gives off no light, the upper windows are black holes or flat beige cards, there is a void at the left edge and a blown smear at the right edge. There is no hero: nothing in the window reads as a loudspeaker, and the frame is two-thirds dead wall and asphalt. It reads as a game level, not a photograph.",
+  "score": 3.5
+ },
+ "verdict": "rethink",
+ "blocking_9": [
+  "The frame's subject must read at a glance: the window and the room's acrylic glow should fill at least 40% of the frame width at eye level, not about 50% of the width in a strip 18% of the frame tall",
+  "At least one Atmosphere speaker has to be recognisable through the glass, glowing in its own tint",
+  "The door and its one small neon sign, which the card names as part of the frame, must be in the frame and readable",
+  "The street lamp has to light the street: a visible warm pool on the sidewalk and road, and a lit lantern",
+  "The facade, sidewalk and road need real material: concrete with weathering, pavers with joints, wet or worn asphalt with spill from the window. No flat CG planes",
+  "The upper windows need believable interiors (curtains, depth, varied warm and cool) or must be cropped out",
+  "No voids or render artefacts at the frame edges",
+  "Window glass needs a reflection layer (the street, the lamp) so it reads as glass and not as an open hole"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    95,
+    470
+   ],
+   "what": "Pure black void left of the building, lum median 4.9: unmodelled neighbour or sky"
+  },
+  {
+   "region": [
+    1140,
+    470,
+    1200,
+    540
+   ],
+   "what": "Blown, smeared white-blue light at the right edge (5.2% clipped, range 239): a cropped car or neon with denoiser smear"
+  },
+  {
+   "region": [
+    120,
+    250,
+    1180,
+    300
+   ],
+   "what": "Facade is a flat untextured plane: lum range 12 across 1000 px, uniform blue (r22 g42 b61)"
+  },
+  {
+   "region": [
+    240,
+    0,
+    1180,
+    240
+   ],
+   "what": "Upper windows are crushed black boxes (82% crushed) or flat featureless beige cards (1040-1100 x 120-240, median 147), with odd white wedges at their sills"
+  },
+  {
+   "region": [
+    700,
+    260,
+    750,
+    340
+   ],
+   "what": "The street lamp's lantern is unlit (p95 72) and casts no pool: sidewalk under it 42.9 vs open road 42.8"
+  },
+  {
+   "region": [
+    240,
+    320,
+    820,
+    360
+   ],
+   "what": "The ceiling membrane reads magenta-pink (r114 g94 b109) and flat, like a painted soffit"
+  },
+  {
+   "region": [
+    250,
+    370,
+    630,
+    470
+   ],
+   "what": "The back-bar bottles read as a repeated wallpaper texture; the cabinets look like copies of each other"
+  },
+  {
+   "region": [
+    270,
+    470,
+    820,
+    520
+   ],
+   "what": "No speaker is identifiable; the bar front and the furniture are tiny dark silhouettes, 10% crushed"
+  },
+  {
+   "region": [
+    0,
+    540,
+    1200,
+    800
+   ],
+   "what": "The asphalt is a smooth blue gradient with painted-on cracks, no spill from the window, no reflections, no grain at scale"
+  },
+  {
+   "region": [
+    60,
+    580,
+    1150,
+    620
+   ],
+   "what": "Curb and sidewalk are clean CG extrusions with a uniform tile grid, no wear, no kerb shadow from the window light"
+  },
+  {
+   "region": [
+    0,
+    470,
+    100,
+    640
+   ],
+   "what": "The building's left corner and sidewalk end in a hard cutaway with a black wedge; the set stops in frame"
+  },
+  {
+   "region": [
+    230,
+    315,
+    830,
+    535
+   ],
+   "what": "The glass has no reflections, so the window reads as an open hole"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The window and room are a small strip in a frame of dead facade and asphalt, and the door with its neon is not in shot, so the frame does not do what the card says it is for.",
+   "evidence": {
+    "region": [
+     230,
+     315,
+     830,
+     535
+    ],
+    "measured": "Window is 600 x 220 px of a 1200 x 800 frame (about 14% of the area); rows 0-310 and 540-800 carry nothing; no neon or door anywhere in frame"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [1.2, -13.2, 1.6], at [6.4, 0.0, 2.3], 28 mm",
+    "to": "position about [3.0, -9.5, 1.5], at [4.5, 0.5, 1.9], 40 mm, framed so the door and neon (x 0 end) sit at the left third and the window runs to the right edge, the frame cut at the first-floor sill line"
+   },
+   "expected": "Window and room glow fill at least 35% of the frame area; door and neon are readable at the left; the upper storey and the left void leave the frame.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Nothing in the room glows like acrylic, so the speakers, the product, are invisible from the street.",
+   "evidence": {
+    "region": [
+     270,
+     470,
+     820,
+     520
+    ],
+    "measured": "lum median 61, 10% crushed; no tinted cabinet distinguishable; window brightness is carried by the bottle shelves (median 112), not by the speakers"
+   },
+   "change": {
+    "setting": "shelves; back-bar back panel; spots on each corner speaker; spots on each Fog speaker",
+    "from": "shelves 0.9, back-bar 0.18, corner spots 500 W, Fog spots 60 W",
+    "to": "shelves 0.45, back-bar 0.12, corner spots 900 W aimed through the cabinets, Fog spots 150 W; and keep a speaker in the window's sightline from the new camera"
+   },
+   "expected": "At least one Atmosphere cabinet reads as a coloured glowing column through the glass, brighter and more saturated than the bottle wall.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The street lamp and the window give the street no light, so the room does not reach out to the viewer and the ground looks pasted.",
+   "evidence": {
+    "region": [
+     620,
+     560,
+     830,
+     600
+    ],
+    "measured": "Sidewalk under the lamp has median 42.9, the same as the open road (42.8); the lantern's p95 is 72"
+   },
+   "change": {
+    "setting": "street lamps; plus a wet or damp road material",
+    "from": "160 W, dry matte asphalt",
+    "to": "street lamps 600 W at about 2700 K, with the lantern glass emissive; asphalt roughness lowered to about 0.35 with damp patches so the window and lamp streak on it"
+   },
+   "expected": "A warm pool on the sidewalk under the lamp at least 1.6x the road's brightness, and coloured streaks of the window in the road.",
+   "accept": {
+    "region": [
+     620,
+     560,
+     830,
+     600
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The facade, sidewalk and curb are flat CG planes with no material, which says 'render' at once.",
+   "evidence": {
+    "region": [
+     120,
+     250,
+     1180,
+     300
+    ],
+    "measured": "lum range 12 across 1060 px; single hue r22 g42 b61"
+   },
+   "change": {
+    "setting": "street materials (facade, sidewalk, curb)",
+    "from": "untextured blue-grey plaster, uniform tile grid",
+    "to": "board-formed or weathered concrete with staining and a real-scale bump; pavers with dirty joints and variation; a chipped granite curb"
+   },
+   "expected": "Visible micro-texture and tonal variation on the facade; under the window's spill it varies by more than 25 levels.",
+   "accept": {
+    "region": [
+     120,
+     250,
+     1180,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The ceiling membrane reads as a flat magenta soffit, and its colour fights the spectrum bar.",
+   "evidence": {
+    "region": [
+     240,
+     320,
+     820,
+     360
+    ],
+    "measured": "r114 g94 b109: green is 15-20 below red and blue"
+   },
+   "change": {
+    "setting": "membrane; render.white_balance_k",
+    "from": "membrane 0.2, white balance 4300 K",
+    "to": "membrane 0.14, and either a neutral-warm membrane or white balance 4800 K so the membrane reads warm white"
+   },
+   "expected": "The membrane reads warm neutral, with g within 5 of r and b at or below g.",
+   "accept": {
+    "region": [
+     240,
+     320,
+     820,
+     360
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 100
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The frame edges show the set ending: a black void at the left and a clipped, smeared light source at the right.",
+   "evidence": {
+    "region": [
+     1140,
+     470,
+     1200,
+     540
+    ],
+    "measured": "5.2% clipped, lum range 239; the left strip 0-95 has median 4.9"
+   },
+   "change": {
+    "setting": "street set",
+    "from": "an unmodelled neighbour and a stray bright object at the right edge",
+    "to": "remove or fully frame the right-edge light source; model a neighbouring building or a dim lit street depth at the left (after c1 most of this may leave the frame)"
+   },
+   "expected": "No clipping at the frame edges and no pure-black voids.",
+   "accept": {
+    "region": [
+     1140,
+     470,
+     1200,
+     540
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The glass has no reflection, so the window reads as an open hole and not as a pane seen from across a street.",
+   "evidence": {
+    "region": [
+     230,
+     315,
+     830,
+     535
+    ],
+    "measured": "Seen in the crop: no mirrored street, lamp or opposite facade on the glass"
+   },
+   "change": {
+    "setting": "window glass material",
+    "from": "fully clear, no reflection",
+    "to": "IOR 1.5 glass with about 8% reflection of the street, the lamp and a faint opposite facade, plus a thin, nearly invisible smudge layer"
+   },
+   "expected": "A soft reflection of the lamp and street across the lower glass; the room still reads clearly.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The upper windows are black holes and flat beige cards, which read as a game level.",
+   "evidence": {
+    "region": [
+     240,
+     0,
+     1180,
+     240
+    ],
+    "measured": "Dark windows 82% crushed; lit ones flat at median 147 with no internal variation"
+   },
+   "change": {
+    "setting": "upper-floor windows",
+    "from": "black and flat-emissive panes",
+    "to": "crop them out with c1, or give them curtains, blinds and a dim interior with varied 2700-4000 K light, most of them dark but with reflections"
+   },
+   "expected": "No featureless rectangles above the storefront.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Atmosphere speakers larger or brighter in tint so they read from the street",
+   "why": "The speakers' shape and colour are fixed. Only their lighting and the camera can make them read (c1, c2)."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

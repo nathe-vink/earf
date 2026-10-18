@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   11.7,
+   12.5,
    4.572,
-   1.2
+   1.6
   ],
   "target": [
    18.288,
    4.572,
-   1.25
+   1.15
   ],
-  "lens_mm": 22,
+  "lens_mm": 18,
   "level": true
  },
  "products": [
@@ -272,17 +272,20 @@
     "module": "planet_room",
     "fn": "room",
     "clock": "late",
-    "membrane": 0.3,
-    "panel_glow": 1.1,
-    "shelf_glow": 0.9,
-    "backpanel_glow": 0.18,
-    "niche_glow": 0.12,
+    "membrane": 0.09,
+    "panel_glow": 0.8,
+    "shelf_glow": 0.5,
+    "backpanel_glow": 0.08,
+    "niche_glow": 0.05,
     "slat_glow": 0.25,
     "slat_led": 10.0,
-    "record_glow": 4.0,
+    "record_glow": 0.0,
     "neon": 18.0,
     "windows_lit": 0.35,
-    "street": true
+    "street": true,
+    "membrane_white": 0.45,
+    "dj_glow": 0.05,
+    "dj_color": "#F2D6B0"
    },
    {
     "kind": "kit",
@@ -482,8 +485,8 @@
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
-     13.25,
-     2.35,
+     13.3,
+     2.0,
      0.012
     ],
     "rotate": [
@@ -498,8 +501,8 @@
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
-     13.25,
-     3.55,
+     13.3,
+     3.3,
      0.012
     ],
     "rotate": [
@@ -514,8 +517,8 @@
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
-     13.25,
-     5.55,
+     13.3,
+     5.85,
      0.012
     ],
     "rotate": [
@@ -530,7 +533,71 @@
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
-     13.25,
+     13.3,
+     7.15,
+     0.012
+    ],
+    "rotate": [
+     0,
+     0,
+     -90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     15.0,
+     2.4,
+     0.012
+    ],
+    "rotate": [
+     0,
+     0,
+     -90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     15.0,
+     3.8,
+     0.012
+    ],
+    "rotate": [
+     0,
+     0,
+     -90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     15.0,
+     5.35,
+     0.012
+    ],
+    "rotate": [
+     0,
+     0,
+     -90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     15.0,
      6.75,
      0.012
     ],
@@ -546,121 +613,105 @@
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
-     14.85,
-     2.95,
-     0.012
-    ],
-    "rotate": [
-     0,
-     0,
-     -90.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
-    "position": [
-     14.85,
-     4.55,
-     0.012
-    ],
-    "rotate": [
-     0,
-     0,
-     -90.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
-    "position": [
-     14.85,
-     6.15,
-     0.012
-    ],
-    "rotate": [
-     0,
-     0,
-     -90.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
-    "position": [
-     12.55,
-     1.25,
-     0.012
-    ],
-    "rotate": [
-     0,
-     0,
-     -60.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
-    "position": [
-     12.55,
-     7.85,
-     0.012
-    ],
-    "rotate": [
-     0,
-     0,
-     -120.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
-    "position": [
-     16.1,
-     1.35,
-     0.012
-    ],
-    "rotate": [
-     0,
-     0,
-     -15.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
-    "position": [
-     16.1,
-     7.75,
-     0.012
-    ],
-    "rotate": [
-     0,
-     0,
-     -165.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "mid_century_lounge_chair",
-    "res": "1k",
-    "position": [
-     14.9,
+     14.2,
      0.95,
      0.012
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     15.8,
+     0.95,
+     0.012
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     14.2,
+     8.19,
+     0.012
+    ],
+    "rotate": [
+     0,
+     0,
+     -180.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     15.8,
+     8.19,
+     0.012
+    ],
+    "rotate": [
+     0,
+     0,
+     -180.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     -7.0,
+     -3.7,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     6.5,
+     -3.7,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     20.0,
+     -3.7,
+     0.0
     ],
     "rotate": [
      0,
@@ -783,74 +834,146 @@
   "spk0": {
    "type": "spot",
    "position": [
-    12.424,
-    0.934,
+    13.06,
+    2.237,
     3.68
    ],
    "target": [
     12.27,
     0.62,
-    0.75
+    0.85
    ],
-   "power_w": 160.0,
-   "cone_deg": 28,
+   "power_w": 900.0,
+   "cone_deg": 18,
    "blend": 0.6,
    "radius_m": 0.03,
    "color": 3000
+  },
+  "wash0": {
+   "type": "spot",
+   "position": [
+    12.16,
+    0.395,
+    0.18
+   ],
+   "target": [
+    11.35,
+    0.15,
+    2.6
+   ],
+   "power_w": 120.0,
+   "cone_deg": 70,
+   "blend": 0.9,
+   "radius_m": 0.05,
+   "color": "#4A90C8"
   },
   "spk1": {
    "type": "spot",
    "position": [
-    12.424,
-    8.21,
+    13.06,
+    6.907,
     3.68
    ],
    "target": [
     12.27,
     8.524000000000001,
-    0.75
+    0.85
    ],
-   "power_w": 160.0,
-   "cone_deg": 28,
+   "power_w": 900.0,
+   "cone_deg": 18,
    "blend": 0.6,
    "radius_m": 0.03,
    "color": 3000
   },
+  "wash1": {
+   "type": "spot",
+   "position": [
+    12.16,
+    8.749,
+    0.18
+   ],
+   "target": [
+    11.35,
+    8.994,
+    2.6
+   ],
+   "power_w": 120.0,
+   "cone_deg": 70,
+   "blend": 0.9,
+   "radius_m": 0.05,
+   "color": "#4A90C8"
+  },
   "spk2": {
    "type": "spot",
    "position": [
-    17.341,
-    0.886,
+    16.4,
+    1.99,
     3.68
    ],
    "target": [
     17.567999999999998,
     0.62,
-    0.75
+    0.85
    ],
-   "power_w": 160.0,
-   "cone_deg": 28,
+   "power_w": 900.0,
+   "cone_deg": 18,
    "blend": 0.6,
    "radius_m": 0.03,
    "color": 3000
   },
+  "wash2": {
+   "type": "spot",
+   "position": [
+    17.73,
+    0.43,
+    0.18
+   ],
+   "target": [
+    18.138,
+    0.15,
+    2.6
+   ],
+   "power_w": 120.0,
+   "cone_deg": 70,
+   "blend": 0.9,
+   "radius_m": 0.05,
+   "color": "#E5732A"
+  },
   "spk3": {
    "type": "spot",
    "position": [
-    17.341,
-    8.258,
+    16.4,
+    7.154,
     3.68
    ],
    "target": [
     17.567999999999998,
     8.524000000000001,
-    0.75
+    0.85
    ],
-   "power_w": 160.0,
-   "cone_deg": 28,
+   "power_w": 900.0,
+   "cone_deg": 18,
    "blend": 0.6,
    "radius_m": 0.03,
    "color": 3000
+  },
+  "wash3": {
+   "type": "spot",
+   "position": [
+    17.73,
+    8.714,
+    0.18
+   ],
+   "target": [
+    18.138,
+    8.994,
+    2.6
+   ],
+   "power_w": 120.0,
+   "cone_deg": 70,
+   "blend": 0.9,
+   "radius_m": 0.05,
+   "color": "#E5732A"
   },
   "fog4": {
    "type": "spot",
@@ -864,7 +987,7 @@
     8.668999999999999,
     1.05
    ],
-   "power_w": 40.0,
+   "power_w": 150.0,
    "cone_deg": 40,
    "blend": 0.7,
    "radius_m": 0.02,
@@ -882,7 +1005,7 @@
     8.668999999999999,
     1.05
    ],
-   "power_w": 40.0,
+   "power_w": 150.0,
    "cone_deg": 40,
    "blend": 0.7,
    "radius_m": 0.02,
@@ -981,20 +1104,74 @@
   "dj": {
    "type": "spot",
    "position": [
-    17.688,
-    4.572,
-    2.03
+    17.868,
+    4.422,
+    2.02
    ],
    "target": [
-    17.838,
-    4.572,
+    17.888,
+    4.422,
     0.94
    ],
-   "power_w": 25.0,
-   "cone_deg": 70,
+   "power_w": 90.0,
+   "cone_deg": 35,
    "blend": 0.8,
    "radius_m": 0.05,
    "color": 3000
+  },
+  "rec0": {
+   "type": "spot",
+   "position": [
+    16.888,
+    2.6,
+    3.68
+   ],
+   "target": [
+    17.888,
+    2.6,
+    1.4
+   ],
+   "power_w": 150.0,
+   "cone_deg": 60,
+   "blend": 0.8,
+   "radius_m": 0.04,
+   "color": 3200
+  },
+  "rec1": {
+   "type": "spot",
+   "position": [
+    16.888,
+    4.57,
+    3.68
+   ],
+   "target": [
+    17.888,
+    4.57,
+    1.4
+   ],
+   "power_w": 150.0,
+   "cone_deg": 60,
+   "blend": 0.8,
+   "radius_m": 0.04,
+   "color": 3200
+  },
+  "rec2": {
+   "type": "spot",
+   "position": [
+    16.888,
+    6.5,
+    3.68
+   ],
+   "target": [
+    17.888,
+    6.5,
+    1.4
+   ],
+   "power_w": 150.0,
+   "cone_deg": 60,
+   "blend": 0.8,
+   "radius_m": 0.04,
+   "color": 3200
   },
   "pend0-0": {
    "type": "point",
@@ -1003,7 +1180,7 @@
     7.147,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1017,7 +1194,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1031,7 +1208,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1045,7 +1222,7 @@
     7.147,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1059,7 +1236,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1073,7 +1250,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1087,7 +1264,7 @@
     7.147,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1101,7 +1278,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1115,7 +1292,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1129,7 +1306,7 @@
     7.147,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1143,7 +1320,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1157,7 +1334,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1171,7 +1348,7 @@
     7.147,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1185,7 +1362,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1199,7 +1376,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1213,7 +1390,7 @@
     7.147,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1227,7 +1404,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1241,7 +1418,7 @@
     7.0765,
     2.052
    ],
-   "power_w": 3.3333333333333335,
+   "power_w": 6.0,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1255,7 +1432,7 @@
     0.417,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1269,7 +1446,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1283,7 +1460,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1297,7 +1474,7 @@
     0.417,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1311,7 +1488,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1325,7 +1502,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1339,7 +1516,7 @@
     0.417,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1353,7 +1530,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1367,7 +1544,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1381,7 +1558,7 @@
     0.417,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1395,7 +1572,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1409,7 +1586,7 @@
     0.3465,
     1.181
    ],
-   "power_w": 4.0,
+   "power_w": 11.666666666666666,
    "radius_m": 0.04,
    "color": 2700,
    "camera": false,
@@ -1419,41 +1596,54 @@
   "street0": {
    "type": "point",
    "position": [
-    -6.0,
-    -4.4,
-    7.2
+    -7.0,
+    -3.7,
+    3.3
    ],
-   "power_w": 900.0,
+   "power_w": 600.0,
    "radius_m": 0.15,
-   "color": 3000
+   "color": 2700
   },
   "street1": {
    "type": "point",
    "position": [
-    7.0,
-    -4.4,
-    7.2
+    6.5,
+    -3.7,
+    3.3
    ],
-   "power_w": 900.0,
+   "power_w": 600.0,
    "radius_m": 0.15,
-   "color": 3000
+   "color": 2700
   },
   "street2": {
    "type": "point",
    "position": [
-    21.0,
-    -4.4,
-    7.2
+    20.0,
+    -3.7,
+    3.3
    ],
-   "power_w": 900.0,
+   "power_w": 600.0,
    "radius_m": 0.15,
-   "color": 3000
+   "color": 2700
   }
  },
  "materials": {
   "led": {
    "strength": 22.0
   }
+ },
+ "haze": {
+  "box_m": [
+   -0.1,
+   -0.1,
+   0.0,
+   18.388,
+   9.244,
+   3.7
+  ],
+  "density": 0.004,
+  "anisotropy": 0.3,
+  "color": "#FFFFFF"
  },
  "render": {
   "samples": 256,
@@ -1463,8 +1653,8 @@
   "bounces": 10,
   "view": "AgX",
   "look": "None",
-  "exposure": 0.0,
-  "white_balance_k": 4300,
+  "exposure": 0.5,
+  "white_balance_k": 4000,
   "white_balance_tint": 0.0
  }
 }

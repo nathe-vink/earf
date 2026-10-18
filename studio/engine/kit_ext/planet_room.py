@@ -89,7 +89,7 @@ def emitter(bpy, name, color, strength, two_sided=True):
     return m
 
 
-def lit_acrylic(bpy, name, color, glow, deep=None, rough=0.04):
+def lit_acrylic(bpy, name, color, glow, deep=None, rough=0.04, ramp=None):
     """Back-lit tinted cast acrylic over a white liner: its colour glows from within, evenly (the liner diffuses the
     LEDs 75 mm behind it), under a polished face that mirrors the room. Emission plus a clear coat: the light the
     panel sends into the room is its colour's."""
@@ -108,7 +108,14 @@ def lit_acrylic(bpy, name, color, glow, deep=None, rough=0.04):
     nt.links.new(gr.outputs['Fac'], mr.inputs['Value'])
     mul = nt.nodes.new('ShaderNodeMath'); mul.operation = 'MULTIPLY'; mul.inputs[1].default_value = glow
     nt.links.new(mr.outputs['Result'], mul.inputs[0])
-    _set(b, 'Emission Color', lin(color)); nt.links.new(mul.outputs['Value'], b.inputs['Emission Strength'])
+    out = mul.outputs['Value']
+    if ramp:                                             # brighter at the LED strip (bottom) than at the top: (bottom, top)
+        sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Generated'], sep.inputs['Vector'])
+        rz = nt.nodes.new('ShaderNodeMapRange'); rz.inputs['To Min'].default_value = ramp[0]; rz.inputs['To Max'].default_value = ramp[1]
+        nt.links.new(sep.outputs['Z'], rz.inputs['Value'])
+        m2 = nt.nodes.new('ShaderNodeMath'); m2.operation = 'MULTIPLY'
+        nt.links.new(out, m2.inputs[0]); nt.links.new(rz.outputs['Result'], m2.inputs[1]); out = m2.outputs['Value']
+    _set(b, 'Emission Color', lin(color)); nt.links.new(out, b.inputs['Emission Strength'])
     _M[name] = m
     return m
 
@@ -209,12 +216,15 @@ class Mesh:
         fa = self.bm.faces.new([self.bm.verts.new(p) for p in pts]); fa.normal_update()
         return fa
 
-    def object(self, bpy, mat, smooth=False, coll=None):
+    def object(self, bpy, mat, smooth=False, bevel=0.0, seg=3):
         me = bpy.data.meshes.new(self.name); self.bm.to_mesh(me); self.bm.free()
         for f in me.polygons:
-            f.use_smooth = smooth
+            f.use_smooth = smooth or bevel > 0
         me.materials.append(mat)
         ob = bpy.data.objects.new(self.name, me); bpy.context.scene.collection.objects.link(ob)
+        if bevel > 0:                                    # an upholstered or eased edge
+            md = ob.modifiers.new('bevel', 'BEVEL'); md.width = bevel; md.segments = seg; md.limit_method = 'ANGLE'
+            md.harden_normals = False
         return ob
 
 
@@ -259,9 +269,17 @@ def _pbr(bpy, kit, tex, **k):
 def shell(bpy, kit, p, objs):
     L, D, H, T = P.L, P.D, P.SLAB, P.WALL_T
     floor = Mesh('floor'); floor.box(-T, -T, -0.2, L + T, D + T, 0.0)
-    fm = _pbr(bpy, kit, p.get('floor_tex', 'concrete_floor_worn_001'), res='4k', tint=p.get('floor_tint', '#6B6862'),
-              tint_mix=p.get('floor_tint_mix', 0.55), rough_mul=0.55)
-    _set(next(n for n in fm.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), 'Coat Weight', p.get('floor_coat', 0.35))
+    fm = _pbr(bpy, kit, p.get('floor_tex', 'concrete_floor_02'), res='4k', tint=p.get('floor_tint', '#6B6862'),
+              tint_mix=p.get('floor_tint_mix', 0.35), rough_mul=p.get('floor_rough', 0.8))
+    fb = next(n for n in fm.node_tree.nodes if n.type == 'BSDF_PRINCIPLED')
+    _set(fb, 'Coat Weight', p.get('floor_coat', 0.3))
+    # the sealer's sheen, worn in a broad pattern: its roughness from 0.06 (fresh) to 0.35 (scuffed), finer scuffs over it
+    nt = fm.node_tree
+    tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+    nz.inputs['Scale'].default_value = 0.6; nz.inputs['Detail'].default_value = 10.0
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.06; cr.inputs['To Max'].default_value = 0.35
+    nt.links.new(nz.outputs['Fac'], cr.inputs['Value']); nt.links.new(cr.outputs['Result'], fb.inputs['Coat Roughness'])
     objs.append(floor.object(bpy, fm))
     # the walls: concrete, painted out dark inside (the room's light comes from its acrylic, not its walls)
     walls = Mesh('walls')
@@ -288,8 +306,9 @@ def ceiling(bpy, kit, p, objs):
     L, D, z, g = P.L, P.D, P.MEMBRANE, P.MEMBRANE_GAP
     a, b = P.CLOCK[p.get('clock', 'late')]
     s = p.get('membrane', 0.35)
-    ca, cb = (_mixhex(P.COLOURS[a], '#FFFFFF', p.get('membrane_white', 0.25)),
-              _mixhex(P.COLOURS[b], '#FFFFFF', p.get('membrane_white', 0.25)))
+    wt = p.get('membrane_tint', '#FFE6C8')                          # the membrane's white: warm, so the room's grade holds
+    ca, cb = (_mixhex(P.COLOURS[a], wt, p.get('membrane_white', 0.25)),
+              _mixhex(P.COLOURS[b], wt, p.get('membrane_white', 0.25)))
     if a == 'smoke':                                               # last call: the membrane dimmed to a warm grey
         ca = cb = _mixhex('#6E6A66', '#000000', 0.0)
         s *= p.get('last_dim', 0.25)
@@ -336,11 +355,19 @@ def bar(bpy, kit, p, objs):
         pan = Mesh(f'bar-panel-{c}')
         # a 3 mm reveal between panels, the panel from the toe-kick to the top's underside
         pan.box(a + 0.0015, yF, P.KICK, a + P.PANEL_W - 0.0015, yF + P.PANEL_T, zt - 0.006)
-        g = glow * {'fog': 0.55, 'smoke': 0.45, 'acid': 0.8, 'ice': 1.0, 'poison': 1.25, 'haze': 1.3}.get(c, 1.0)
+        # each colour's LEDs set so the eight read alike in brightness (measured on the round-1 proof)
+        g = glow * {'ember': 1.41, 'dust': 1.05, 'acid': 0.69, 'poison': 1.36, 'ice': 1.0, 'haze': 1.53, 'fog': 0.50,
+                    'smoke': 0.45}[c]
         col = P.COLOURS[c] if c not in ('fog',) else '#F2F0EA'
         deep = {'smoke': '#141316', 'fog': '#DAD8D2'}.get(c, P.COLOURS[c])
         emit_col = {'smoke': '#5A5660'}.get(c, col)
-        objs.append(pan.object(bpy, lit_acrylic(bpy, f'bar-acrylic-{c}', emit_col, g, deep=deep)))
+        objs.append(pan.object(bpy, lit_acrylic(bpy, f'bar-acrylic-{c}', emit_col, g, deep=deep, ramp=(1.0, 0.82))))
+    # the joints: the white liner seen through each 3 mm reveal, brighter than the tinted faces either side
+    jt = Mesh('bar-joints')
+    for i in range(len(P.PANELS) + 1):
+        a = x0 + i * P.PANEL_W
+        jt.box(a - 0.0015, yF + 0.004, P.KICK, a + 0.0015, yF + 0.012, zt - 0.006)
+    objs.append(jt.object(bpy, emitter(bpy, 'bar-joint', '#FFF4E6', glow * p.get('joint_glow', 1.3))))
     # the frame behind: the liner's returns, the cavity's body, the counter
     body = Mesh('bar-body')
     body.box(x0, yF + P.PANEL_T, 0.0, P.BAR_X1, yF + P.BAR_DEPTH, zt - 0.006)
@@ -362,6 +389,35 @@ def bar(bpy, kit, p, objs):
     objs.append(fr.object(bpy, principled(bpy, 'bronze', '#8A6A44', rough=0.3, metal=1.0), smooth=True))
 
 
+def label_mat(bpy, name, paper, rnd):
+    """A bottle's label: paper, with lines of printed type in bands and a block of colour, so it reads as print."""
+    if name in _M:
+        return _M[name]
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; b = nt.nodes['Principled BSDF']
+    ink = rnd.choice(['#1E1C1A', '#6E1E18', '#2A3550', '#7A5A2A', '#101010'])
+    tc = nt.nodes.new('ShaderNodeTexCoord'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+    nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
+    # the lines of type: thin bands up the label, broken into words by a fine noise around it
+    wv = nt.nodes.new('ShaderNodeTexWave'); wv.wave_type = 'BANDS'; wv.bands_direction = 'Z'
+    wv.inputs['Scale'].default_value = rnd.uniform(28, 55); wv.inputs['Distortion'].default_value = 0.0
+    nt.links.new(tc.outputs['Object'], wv.inputs['Vector'])
+    th = nt.nodes.new('ShaderNodeMath'); th.operation = 'GREATER_THAN'; th.inputs[1].default_value = 0.78
+    nt.links.new(wv.outputs['Fac'], th.inputs[0])
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 140.0
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    w = nt.nodes.new('ShaderNodeMath'); w.operation = 'GREATER_THAN'; w.inputs[1].default_value = 0.42
+    nt.links.new(nz.outputs['Fac'], w.inputs[0])
+    tw = nt.nodes.new('ShaderNodeMath'); tw.operation = 'MULTIPLY'
+    nt.links.new(th.outputs['Value'], tw.inputs[0]); nt.links.new(w.outputs['Value'], tw.inputs[1])
+    mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'
+    mix.inputs['A'].default_value = lin(paper); mix.inputs['B'].default_value = lin(ink)
+    nt.links.new(tw.outputs['Value'], mix.inputs['Factor'])
+    nt.links.new(mix.outputs['Result'], b.inputs['Base Color'])
+    _set(b, 'Roughness', 0.62); _set(b, 'Specular IOR Level', 0.35)
+    _M[name] = m
+    return m
+
+
 def _bottle_meshes(bpy):
     """Four bottles (a whisky square-shouldered, a tall gin, a squat cognac, a long-neck wine/amaro) as lathed bodies,
     labels and caps, shared by every copy."""
@@ -374,6 +430,18 @@ def _bottle_meshes(bpy):
                    (0.0, 0.215)],
         'amaro': [(0.0, 0.0), (0.036, 0.0), (0.037, 0.004), (0.037, 0.19), (0.030, 0.225), (0.0135, 0.26),
                   (0.0125, 0.335), (0.0, 0.335)],
+        'vodka': [(0.0, 0.0), (0.033, 0.0), (0.034, 0.004), (0.034, 0.26), (0.026, 0.285), (0.012, 0.30), (0.011, 0.345),
+                  (0.0, 0.345)],
+        'tequila': [(0.0, 0.0), (0.048, 0.0), (0.049, 0.004), (0.049, 0.14), (0.046, 0.17), (0.022, 0.19), (0.018, 0.235),
+                    (0.0, 0.235)],
+        'flask': [(0.0, 0.0), (0.030, 0.0), (0.052, 0.04), (0.056, 0.09), (0.046, 0.14), (0.016, 0.17), (0.014, 0.22),
+                  (0.0, 0.22)],
+        'bitters': [(0.0, 0.0), (0.028, 0.0), (0.029, 0.004), (0.029, 0.11), (0.020, 0.13), (0.010, 0.14), (0.010, 0.17),
+                    (0.0, 0.17)],
+        'japanese': [(0.0, 0.0), (0.041, 0.0), (0.042, 0.004), (0.042, 0.215), (0.040, 0.235), (0.020, 0.25),
+                     (0.015, 0.265), (0.0145, 0.30), (0.0, 0.30)],
+        'mezcal': [(0.0, 0.0), (0.040, 0.0), (0.043, 0.02), (0.043, 0.17), (0.030, 0.20), (0.014, 0.215), (0.0135, 0.27),
+                   (0.0, 0.27)],
     }
     out = {}
     for k, prof in kinds.items():
@@ -459,7 +527,7 @@ def backbar(bpy, kit, p, objs):
         if key not in glass:
             glass[key] = principled(bpy, f'bottle-glass-{c}-{k}', c, rough=0.02, trans=1.0, ior=1.45)
         return glass[key]
-    labels = [principled(bpy, f'label-{i}', c, rough=0.6) for i, c in
+    labels = [label_mat(bpy, f'label-{i}', c, rnd) for i, c in
               enumerate(['#EFE8DA', '#D9C9A6', '#E6DCC8', '#7A2A22', '#E9E3D3', '#2F3B33', '#C8A15A', '#F4F1EA',
                          '#CDBB98', '#F0EBE0'])]
     caps = [principled(bpy, 'cap-black', '#151413', rough=0.4), principled(bpy, 'cap-gold', '#B08A4E', rough=0.3, metal=1.0),
@@ -499,48 +567,58 @@ def backbar(bpy, kit, p, objs):
                     body, label, cap, r = bodies[k]
                     if x + 2 * r > s1 - 0.02:
                         break
-                    cx = x + r; cy = y0 + 0.10 + rnd.uniform(-0.01, 0.02) + (0.16 if rnd.random() < 0.35 else 0.0)
+                    if rnd.random() < 0.06:                                         # a gap where a bottle is out
+                        x += rnd.uniform(0.06, 0.12); continue
+                    cx = x + r * 1.1; cy = y0 + 0.10 + rnd.uniform(-0.01, 0.02) + (0.16 if rnd.random() < 0.35 else 0.0)
                     gcol = rnd.choice(spirits) if k != 'gin' else rnd.choice(['#EEF2EE', '#E2EEF0', '#F2EEE6'])
                     gm = glass_mat(gcol, k)
+                    rot = rnd.uniform(-0.45, 0.45) + math.pi * 0.35                  # the label toward the room
+                    sr, sh = rnd.uniform(0.9, 1.1), rnd.uniform(0.88, 1.12)        # no two bottles alike
                     for me, mm in ((body, gm), (label, rnd.choice(labels)), (cap, rnd.choice(caps))):
                         ob = bpy.data.objects.new(f'{me.name}@{li}.{i}.{x:.2f}', me)
-                        ob.location = (cx, cy, z); ob.rotation_euler.z = rnd.uniform(-0.5, 0.5) + math.pi * 1.5
+                        ob.location = (cx, cy, z); ob.rotation_euler.z = rot
+                        ob.scale = (sr, sr, sh)
                         bpy.context.scene.collection.objects.link(ob)
                         if not me.materials:
                             me.materials.append(mm)
                         ob.material_slots[0].link = 'OBJECT'; ob.material_slots[0].material = mm
                         objs.append(ob)
-                    x += 2 * r + rnd.uniform(0.012, 0.04)
+                    x += 2.2 * r + rnd.uniform(0.010, 0.035)
 
 
 def booths(bpy, kit, p, objs):
     up = kit.material(bpy, 'velvet', p.get('booth_color', '#3B2A2A'), {'grain': 1.0})
-    bench = Mesh('booth-benches'); tops = Mesh('booth-tables'); legs = Mesh('booth-legs')
-    liner = Mesh('booth-liner')
+    base = Mesh('booth-bases'); seats = Mesh('booth-seats'); backs = Mesh('booth-backs')
+    tops = Mesh('booth-tables'); legs = Mesh('booth-legs'); liner = Mesh('booth-liner')
     yW = 0.0
     for x0 in P.BOOTHS:
         x1 = x0 + P.BOOTH_LEN
         for side in (0, 1):
             bx0, bx1 = (x0, x0 + P.BENCH_D) if side == 0 else (x1 - P.BENCH_D, x1)
-            yb0, yb1 = yW + 0.08, yW + P.BOOTH_DEPTH
-            bench.box(bx0 + 0.02, yb0, 0.06, bx1 - 0.02, yb1, P.BENCH_SEAT - 0.08)               # the base
-            bench.box(bx0, yb0, P.BENCH_SEAT - 0.08, bx1, yb1, P.BENCH_SEAT)                      # the seat cushion
-            back = (bx0, bx0 + 0.16) if side == 1 else (bx1 - 0.16, bx1)
-            back = (bx1 - 0.16, bx1) if side == 0 else (bx0, bx0 + 0.16)
-            # the backs face the table
-            bxb0, bxb1 = (bx0, bx0 + 0.16) if side == 0 else (bx1 - 0.16, bx1)
-            bench.box(bxb0, yb0, P.BENCH_SEAT, bxb1, yb1, P.BENCH_BACK)
+            yb0, yb1 = yW + 0.10, yW + P.BOOTH_DEPTH
+            base.box(bx0 + 0.03, yb0, 0.0, bx1 - 0.03, yb1, P.BENCH_SEAT - 0.11)              # a Smoke plinth
+            seats.box(bx0 + 0.01, yb0 + 0.01, P.BENCH_SEAT - 0.11, bx1 - 0.01, yb1 - 0.01, P.BENCH_SEAT)
+            # the back: vertical channels, each its own stuffed roll, the frame a hard shell behind them
+            sx0, sx1 = (bx0, bx0 + 0.07) if side == 0 else (bx1 - 0.07, bx1)
+            base.box(sx0, yb0, P.BENCH_SEAT - 0.11, sx1, yb1, P.BENCH_BACK + 0.02)
+            cx0, cx1 = (sx1, sx1 + 0.09) if side == 0 else (sx0 - 0.09, sx0)
+            n = 9; w = (yb1 - yb0) / n
+            for k in range(n):
+                backs.box(cx0, yb0 + k * w + 0.004, P.BENCH_SEAT + 0.02, cx1, yb0 + (k + 1) * w - 0.004, P.BENCH_BACK)
         # the table between, a Smoke acrylic top on a blackened steel pedestal
         tx0, tx1 = x0 + P.BENCH_D + 0.08, x1 - P.BENCH_D - 0.08
         tops.box(tx0, yW + 0.15, P.TABLE['h'] - 0.025, tx1, yW + 0.15 + P.TABLE['d'], P.TABLE['h'])
         cx, cy = (tx0 + tx1) / 2, yW + 0.15 + P.TABLE['d'] / 2
         _cyl(legs.bm, cx, cy, 0.0, 0.04, P.TABLE['h'] - 0.025, seg=20)
         legs.box(cx - 0.22, cy - 0.30, 0.0, cx + 0.22, cy + 0.30, 0.012)
-    liner.box(P.BOOTHS[0] - 0.05, 0.0, 0.0, P.BOOTHS[-1] + P.BOOTH_LEN + 0.05, 0.08, P.WINDOW['sill'])
-    objs.append(bench.object(bpy, up))
-    objs.append(tops.object(bpy, principled(bpy, 'smoke-acrylic', '#0E0D10', rough=0.06, coat=1.0, coat_rough=0.03)))
+    liner.box(P.BOOTHS[0] - 0.05, 0.0, 0.0, P.BOOTHS[-1] + P.BOOTH_LEN + 0.05, 0.10, P.WINDOW['sill'])
+    smoke = principled(bpy, 'smoke-acrylic', '#0E0D10', rough=0.06, coat=1.0, coat_rough=0.03)
+    objs.append(base.object(bpy, smoke, bevel=0.006))
+    objs.append(seats.object(bpy, up, bevel=0.035, seg=4))
+    objs.append(backs.object(bpy, up, bevel=0.04, seg=4))
+    objs.append(tops.object(bpy, smoke, bevel=0.004))
     objs.append(legs.object(bpy, principled(bpy, 'blackened-steel', '#1C1B1A', rough=0.42, metal=0.85), smooth=True))
-    objs.append(liner.object(bpy, principled(bpy, 'smoke-acrylic', '#0E0D10', rough=0.06, coat=1.0, coat_rough=0.03)))
+    objs.append(liner.object(bpy, smoke))
 
 
 def lounge(bpy, kit, p, objs):
@@ -609,7 +687,8 @@ def record_wall(bpy, kit, p, objs):
         ya, yb = y0 + ci * cell, y0 + (ci + 1) * cell
         depth = rnd.choice([0.30, 0.36, 0.42, 0.48, 0.55])
         xf = L - depth
-        boards.box(xf, ya, 0.0, L, ya + 0.018, P.REC_Z1)
+        in_dj_col = dj['y0'] - 0.01 < ya < dj['y1'] - 0.01
+        boards.box(xf, ya, dj['recess_z'] if in_dj_col else 0.0, L, ya + 0.018, P.REC_Z1)
         for ri in range(nrows + 1):
             z = 0.05 + ri * cell
             in_dj = dj['y0'] < (ya + yb) / 2 < dj['y1'] and z < dj['recess_z']
@@ -630,7 +709,8 @@ def record_wall(bpy, kit, p, objs):
                 sx = xf + 0.012 + rnd.uniform(0.0, 0.012)
                 sleeves.box(sx, s, z, sx + 0.31, s + t, z + h, col=col)
                 s += t + 0.0003
-        boards.box(xf, yb - 0.018, 0.0, L, yb, P.REC_Z1)
+        in_dj_col = dj['y0'] + 0.01 < yb < dj['y1'] + 0.01
+        boards.box(xf, yb - 0.018, dj['recess_z'] if in_dj_col else 0.0, L, yb, P.REC_Z1)
         if ci == ncols - 1:
             pass
     boards.box(L - 0.02, y0, 0.0, L, y0 + ncols * cell, P.REC_Z1)                  # the back
@@ -666,13 +746,13 @@ def street(bpy, kit, p, objs):
     """Outside: the long street's sidewalk and road (y < 0), the side street (x < 0), the building's facade and flats
     above, and the block across the street."""
     L, D, T = P.L, P.D, P.WALL_T
-    sw = Mesh('sidewalk'); sw.box(-12.0, -3.9, -0.2, L + 12.0, -T, 0.0); sw.box(-3.9, -3.9, -0.2, -T, D + 12.0, 0.0)
+    sw = Mesh('sidewalk'); sw.box(-3.9, -3.9, -0.2, L + 40.0, -T, 0.0); sw.box(-60.0, -3.9, -0.2, -16.0, -T, 0.0); sw.box(-19.9, -T, -0.2, -16.0, D + 12.0, 0.0); sw.box(-3.9, -3.9, -0.2, -T, D + 12.0, 0.0)
     objs.append(sw.object(bpy, _pbr(bpy, kit, 'concrete_pavement', res='2k', tint='#77746F', tint_mix=0.3)))
-    curb = Mesh('curb'); curb.box(-12.0, -4.05, -0.2, L + 12.0, -3.9, 0.0); curb.box(-4.05, -4.05, -0.2, -3.9, D + 12.0, 0.0)
+    curb = Mesh('curb'); curb.box(-4.05, -4.05, -0.2, L + 40.0, -3.9, 0.0); curb.box(-60.0, -4.05, -0.2, -16.0, -3.9, 0.0); curb.box(-4.05, -4.05, -0.2, -3.9, D + 12.0, 0.0)
     objs.append(curb.object(bpy, principled(bpy, 'curb', '#8A8781', rough=0.8)))
-    rd = Mesh('road'); rd.box(-40.0, -16.0, -0.35, L + 40.0, -4.05, -0.15); rd.box(-16.0, -16.0, -0.35, -4.05, D + 40.0, -0.15)
-    objs.append(rd.object(bpy, _pbr(bpy, kit, 'asphalt_02', res='2k', tint='#3A3A3C', tint_mix=0.4, rough_mul=0.7)))
-    across = Mesh('sidewalk-across'); across.box(-40.0, -20.0, -0.2, L + 40.0, -16.0, 0.0)
+    rd = Mesh('road'); rd.box(-60.0, -16.0, -0.35, L + 40.0, -4.05, -0.15); rd.box(-16.0, -16.0, -0.35, -4.05, D + 40.0, -0.15)
+    objs.append(rd.object(bpy, _pbr(bpy, kit, 'asphalt_02', res='2k', tint='#3A3A3C', tint_mix=0.4, rough_mul=p.get('road_rough', 0.4))))
+    across = Mesh('sidewalk-across'); across.box(-60.0, -20.0, -0.2, L + 40.0, -16.0, 0.0)
     objs.append(across.object(bpy, _pbr(bpy, kit, 'concrete_pavement', res='2k', tint='#77746F', tint_mix=0.3)))
     # the building: a three-storey corner building, stucco, the shop below; the flats' windows
     fac = Mesh('facade')
@@ -680,7 +760,7 @@ def street(bpy, kit, p, objs):
     fac.box(-T, -T, H0, L + T, D + T, H1)                              # the floors above (a solid block)
     fac.box(-T - 0.02, -T - 0.02, H0 - 0.35, L + T + 0.02, -T + 0.15, H0 + 0.15)   # a cornice over the shop
     fac.box(-T - 0.02, -T - 0.02, H0 - 0.35, -T + 0.15, D + T, H0 + 0.15)
-    objs.append(fac.object(bpy, _pbr(bpy, kit, 'white_stucco', res='2k', tint='#7D8580', tint_mix=0.55)))
+    objs.append(fac.object(bpy, _pbr(bpy, kit, 'white_stucco', res='2k', tint=p.get('facade', '#56605C'), tint_mix=0.75)))
     # the shop's own face below the cornice: painted smoke black, a skin over the shell's solid parts
     skin = Mesh('shopskin'); W, Dr = P.WINDOW, P.DOOR
     skin.box(-T - 0.005, -T - 0.005, 0.0, W['x0'], -T, H0 - 0.35)
@@ -703,7 +783,7 @@ def street(bpy, kit, p, objs):
         for yw in [1.5 + 2.4 * k for k in range(3)]:
             (wins_lit if rnd.random() < lit_share else wins_dark).box(-T - 0.02, yw, z0, -T - 0.01, yw + 1.2, z0 + 1.9)
     objs.append(wins_dark.object(bpy, principled(bpy, 'dark-glass', '#0A0B0D', rough=0.03, spec=0.6)))
-    objs.append(wins_lit.object(bpy, emitter(bpy, 'lit-blind', '#FFC98A', p.get('flat_glow', 0.6))))
+    objs.append(wins_lit.object(bpy, emitter(bpy, 'lit-blind', '#FFC98A', p.get('flat_glow', 0.35))))
     objs.append(frames.object(bpy, principled(bpy, 'sill-paint', '#D8D4CA', rough=0.6)))
     # the block across the long street: a row of storefronts and flats, some windows lit
     acr = Mesh('across'); acr_w = Mesh('across-lit'); acr_d = Mesh('across-dark')
@@ -718,8 +798,21 @@ def street(bpy, kit, p, objs):
                 (acr_w if rnd.random() < lit_share * 0.8 else acr_d).box(xw, -20.02, z0, xw + 1.1, -20.0, z0 + 1.8)
         (acr_w if rnd.random() < 0.6 else acr_d).box(xb + 0.6, -20.02, 0.4, xb + w - 0.8, -20.0, 3.2)
         xb += w
+    # our side of the street: the neighbours beyond the back wall, and the block across the side street
+    for (xa, xb_, ya, yb) in ((L + T, L + 40.0, -T, D + 12.0), (-60.0, -19.9, -T, D + 12.0)):
+        xx = xa
+        while xx < xb_:
+            w = rnd.uniform(6.5, 10.0); h = rnd.uniform(8.5, 13.5)
+            acr.box(xx, ya, 0.0, min(xx + w - 0.12, xb_), yb, h)
+            for storey in range(int((h - 4.0) / 3.4)):
+                z0 = 4.6 + storey * 3.4
+                for k in range(int((w - 1) / 2.2)):
+                    xw = xx + 0.8 + k * 2.2
+                    (acr_w if rnd.random() < lit_share * 0.7 else acr_d).box(xw, ya - 0.02, z0, xw + 1.1, ya, z0 + 1.8)
+            (acr_w if rnd.random() < 0.5 else acr_d).box(xx + 0.6, ya - 0.02, 0.4, xx + w - 0.8, ya, 3.0)
+            xx += w
     objs.append(acr.object(bpy, _pbr(bpy, kit, 'white_stucco_02', res='1k', tint='#8C8780', tint_mix=0.5)))
-    objs.append(acr_w.object(bpy, emitter(bpy, 'across-lit', '#FFCB90', p.get('across_glow', 0.8))))
+    objs.append(acr_w.object(bpy, emitter(bpy, 'across-lit', '#FFC488', p.get('across_glow', 0.22))))
     objs.append(acr_d.object(bpy, principled(bpy, 'dark-glass', '#0A0B0D', rough=0.03, spec=0.6)))
     # the small neon EARF sign over the door: four letters as glowing tubes on a bracket (a stand-in for the
     # wordmark's own tubes)
@@ -745,6 +838,44 @@ def street(bpy, kit, p, objs):
     objs.append(neon.object(bpy, emitter(bpy, 'neon', p.get('neon_color', '#FF5A3C'), p.get('neon', 18.0))))
 
 
+def glassware(bpy, kit, p, objs):
+    """Signs of use: rocks glasses with a pour and a cube of ice, coupes, folded menus, on the bar and the booth tables."""
+    rnd = random.Random(11)
+    glass = principled(bpy, 'tumbler-glass', '#FFFFFF', rough=0.01, trans=1.0, ior=1.5)
+    pours = [principled(bpy, f'pour-{c}', c, rough=0.0, trans=1.0, ior=1.36) for c in ('#C8741E', '#B5561A', '#E8D7A8')]
+    ice = principled(bpy, 'ice', '#FFFFFF', rough=0.12, trans=1.0, ior=1.31)
+    paper = principled(bpy, 'menu-card', '#EDE6D8', rough=0.75, bump=(0.004, 0.06, 0.0004))
+    rocks = [(0, 0), (0.041, 0), (0.0425, 0.09), (0.0385, 0.09), (0.037, 0.016), (0, 0.016)]
+    coupe = [(0, 0), (0.038, 0), (0.038, 0.004), (0.006, 0.010), (0.0045, 0.100), (0.030, 0.113), (0.056, 0.140),
+             (0.0535, 0.140), (0.028, 0.117), (0, 0.111)]
+    zt = P.BAR_TOP_Z + P.TOP_T
+    yb = P.BAR_FRONT - 0.13
+    spots = [(x, yb + rnd.uniform(-0.04, 0.04), zt, rnd.choice(['rocks', 'rocks', 'coupe'])) for x in p.get('glasses_x', [
+        3.42, 3.62, 5.65, 7.32, 7.55, 9.05])]
+    for x0 in P.BOOTHS:                                               # two on each booth table, by the lamp
+        cx = x0 + P.BOOTH_LEN / 2
+        spots += [(cx - 0.18, 0.62, P.TABLE['h'], 'rocks'), (cx + 0.16, 0.95, P.TABLE['h'], 'coupe')]
+    gl = Mesh('glasses'); lq = Mesh('pours'); ic = Mesh('ice-cubes')
+    for x, y, z, kind in spots:
+        _lathe(gl.bm, rocks if kind == 'rocks' else coupe, seg=40, z0=z, cx=x, cy=y)
+        if kind == 'rocks':
+            h = rnd.uniform(0.035, 0.055)
+            _cyl(lq.bm, x, y, z + 0.0165, 0.0366, h - 0.0165, seg=40)
+            g = bmesh.ops.create_cube(ic.bm, size=0.042)
+            a = rnd.uniform(0, 1.2)
+            for v in g['verts']:
+                vx, vy, vz = v.co
+                v.co = Vector((x + vx * math.cos(a) - vy * math.sin(a), y + vx * math.sin(a) + vy * math.cos(a),
+                               z + 0.0165 + 0.021 + vz + 0.006))
+    objs.append(gl.object(bpy, glass, smooth=True))
+    objs.append(lq.object(bpy, pours[0], smooth=True))
+    objs.append(ic.object(bpy, ice, bevel=0.004))
+    mn = Mesh('menus')
+    for x, y, z in [(4.08, yb - 0.02, zt), (6.95, yb, zt)] + [(x0 + P.BOOTH_LEN / 2 - 0.05, 1.12, P.TABLE['h']) for x0 in P.BOOTHS[1::2]]:
+        mn.box(x - 0.075, y - 0.11, z + 0.0005, x + 0.075, y + 0.11, z + 0.0035)
+    objs.append(mn.object(bpy, paper, bevel=0.001))
+
+
 def room(bpy, name, p, kit):
     objs = []
     shell(bpy, kit, p, objs)
@@ -755,6 +886,8 @@ def room(bpy, name, p, kit):
     booths(bpy, kit, p, objs)
     lounge(bpy, kit, p, objs)
     record_wall(bpy, kit, p, objs)
+    if p.get('props', True):
+        glassware(bpy, kit, p, objs)
     if p.get('street', True):
         street(bpy, kit, p, objs)
     return objs

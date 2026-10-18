@@ -1,0 +1,372 @@
+{
+ "stage1": {
+  "impression": "A wide, clean, believable bar interior at night. The spectrum bar front and the lit shelves carry the left side, and the record wall pulls the eye to the back. But it reads as an architectural CG walkthrough, not a magazine photograph: a flat mauve ceiling fills the top third, the floor is a smooth grey plane, the right half sinks into black, and there is no clear hero. Any tinted acrylic speaker is either lost in the dark back corners or reads as two brushed-steel columns.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Atmosphere speakers must read at a glance as tinted, light-passing acrylic. Now the corner speakers are crushed (region 460-520 x 320-400, median lum 3.9, crush 43%) and the two front columns read as brushed steel.",
+  "The ceiling membrane must stop being the largest, brightest field in the frame (top 120 px median lum 106 against a frame median of 43).",
+  "The right half (booths, window) needs readable shadow detail, not 37% crushed black.",
+  "The floor and upholstery need real micro-texture and varied reflections. The floor reads as one smooth CG plane.",
+  "The frame needs life and scale: glasses, a menu or a coat, maybe one figure, and some air (haze) to give depth from front to back.",
+  "The composition needs one idea, not a corridor survey from 18 mm with the ceiling taking a third of the frame."
+ ],
+ "defects": [
+  {
+   "region": [
+    460,
+    320,
+    520,
+    400
+   ],
+   "what": "Back-left corner, where a corner speaker should be, is crushed to black; no speaker reads"
+  },
+  {
+   "region": [
+    740,
+    320,
+    790,
+    400
+   ],
+   "what": "Back-right corner speaker position nearly black, median lum 7.5"
+  },
+  {
+   "region": [
+    430,
+    400,
+    510,
+    480
+   ],
+   "what": "Left front column reads as brushed stainless steel, not clear or tinted acrylic; no light passes through it"
+  },
+  {
+   "region": [
+    675,
+    400,
+    755,
+    480
+   ],
+   "what": "Right front column reads as metal with a violet reflection; it hides the record-wall seating"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    300
+   ],
+   "what": "Ceiling membrane is a flat, featureless mauve field filling a third of the frame; its colour fights the 4300 K warmth"
+  },
+  {
+   "region": [
+    870,
+    430,
+    1200,
+    750
+   ],
+   "what": "Booths crushed (median lum 5, 37% crushed); the upholstery has no texture"
+  },
+  {
+   "region": [
+    300,
+    600,
+    900,
+    800
+   ],
+   "what": "Floor is a uniform smooth grey (lum range 20) with soft, even reflections and no aggregate or wear: reads as CG"
+  },
+  {
+   "region": [
+    880,
+    200,
+    1200,
+    420
+   ],
+   "what": "The street window shows flat pale rectangles and dark glass; no street depth, so it reads as a backdrop"
+  },
+  {
+   "region": [
+    0,
+    400,
+    470,
+    460
+   ],
+   "what": "Bar top is empty: no glasses, no menus, no sign of use"
+  },
+  {
+   "region": [
+    500,
+    320,
+    720,
+    400
+   ],
+   "what": "Spot pools on the record wall are the strongest accents at the back but light records, not the products"
+  },
+  {
+   "region": [
+    580,
+    375,
+    650,
+    410
+   ],
+   "what": "The cyan screen (R 1, G 65, B 108) is a saturated digital blue that competes with the acrylic colours"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The corner Atmosphere speakers, the reason for the room, are invisible in black corners while their spots light the record wall instead.",
+   "evidence": {
+    "region": [
+     460,
+     320,
+     520,
+     400
+    ],
+    "measured": "lum_median 3.9, crush_pct 42.7; right corner [740,320,790,400] lum_median 7.5"
+   },
+   "change": {
+    "setting": "spots on each corner speaker (aim, size) and a grazing back light",
+    "from": "500 W, pooling on the record wall",
+    "to": "re-aim each spot down onto its cabinet's top and horn, 15 deg cone, 300 W, plus a 40 W warm area lamp behind each cabinet at floor level, so the light passes through the tinted acrylic and pools in its colour on the floor"
+   },
+   "expected": "Both corner speakers read as glowing tinted silhouettes with a coloured pool on the floor; the record-wall pools dim to a secondary accent.",
+   "accept": {
+    "region": [
+     460,
+     320,
+     520,
+     400
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The two Fog speakers in the middle distance read as brushed-steel columns, because they are lit only by reflection and nothing passes through them.",
+   "evidence": {
+    "region": [
+     675,
+     400,
+     755,
+     470
+    ],
+    "measured": "lum_median 26.6, neutral grey with a single violet streak; no inner glow or white batts visible"
+   },
+   "change": {
+    "setting": "Fog niches and spots on each Fog speaker",
+    "from": "niches 0.12, spots 60 W",
+    "to": "niches 0.45 as a back light behind each cabinet, spots 150 W from above at a 20 deg cone"
+   },
+   "expected": "The clear acrylic shows the white batts and the horn through it, with a bright rim on the edges, and stops reading as metal.",
+   "accept": {
+    "region": [
+     675,
+     400,
+     755,
+     470
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "At 18 mm and 1.6 m the frame is a corridor survey: the ceiling takes a third of it, and the products are tiny at the vanishing point.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     300
+    ],
+    "measured": "the top 300 px is membrane; the speakers occupy under 2% of the frame"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [0.55, 3.55, 1.6], lens 18 mm, target z 1.35",
+    "to": "position [2.5, 3.8, 1.25], lens 28 mm, target [18.288, 4.6, 1.0]"
+   },
+   "expected": "The ceiling drops to a band under 20% of the frame, the record wall and the speakers grow about 1.6x, and the bar front still leads in from the left.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The membrane is the brightest large field and casts a cool mauve that flattens the room and fights the warm grade.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     120
+    ],
+    "measured": "lum_median 106 (frame median 43); R130 G98 B112, mauve"
+   },
+   "change": {
+    "setting": "membrane",
+    "from": "0.2 ('late')",
+    "to": "0.09 and a warmer white (about 3000 K), so the room is lit from below by its acrylic"
+   },
+   "expected": "The ceiling becomes a dim warm field, darker than the bar front and shelves, and the hierarchy moves to the products.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     120
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The booths on the right are crushed black, so half the frame is dead weight.",
+   "evidence": {
+    "region": [
+     870,
+     430,
+     1200,
+     750
+    ],
+    "measured": "lum_median 5.3, crush_pct 36.5"
+   },
+   "change": {
+    "setting": "each booth Bell",
+    "from": "12 W",
+    "to": "35 W, and raise the street lamps 160 to 300 W for a soft cool rim through the window"
+   },
+   "expected": "The booth backs and tables show warm pools and upholstery texture; the right side reads as an intimate second zone.",
+   "accept": {
+    "region": [
+     870,
+     430,
+     1200,
+     750
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 12
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The floor is a smooth uniform grey plane with soft, even reflections, the clearest sign of a render.",
+   "evidence": {
+    "region": [
+     300,
+     600,
+     900,
+     800
+    ],
+    "measured": "lum_range 20.4, median 40, no visible aggregate or wear"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "smooth uniform glossy grey",
+    "to": "honed dark terrazzo or polished concrete with fine aggregate, a roughness map varying 0.15 to 0.4, faint scuffs along the bar"
+   },
+   "expected": "The reflections of the bar panels break up and smear naturally; the floor shows grain at full size.",
+   "accept": {
+    "region": [
+     300,
+     600,
+     900,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The room has no air: the depth from door to record wall is carried only by perspective.",
+   "evidence": {
+    "region": [
+     440,
+     300,
+     800,
+     480
+    ],
+    "measured": "the back wall has the same contrast as the foreground; the spot cones are invisible"
+   },
+   "change": {
+    "setting": "haze in the air",
+    "from": "none",
+    "to": "a uniform volume, density 0.004, anisotropy 0.6"
+   },
+   "expected": "The spot cones onto the speakers become faint visible shafts, and the back of the room recedes with slightly lifted blacks.",
+   "accept": {
+    "region": [
+     460,
+     320,
+     520,
+     400
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The bar is unused and lifeless, and there is no scale cue.",
+   "evidence": {
+    "region": [
+     0,
+     400,
+     470,
+     470
+    ],
+    "measured": "an empty dark bar top; no glasses, menu or people anywhere in the frame"
+   },
+   "change": {
+    "setting": "small props / people",
+    "from": "none",
+    "to": "three or four rocks glasses and a folded menu on the bar top near stools 3 to 5, a coat over one stool, optionally one seated figure in a record-wall chair, out of focus"
+   },
+   "expected": "The room reads as a working listening bar; the glasses catch the panel colours as small highlights.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Fog speakers' cabinet material read unmistakably as cast acrylic and not steel, if lighting alone (c2) does not do it",
+   "why": "The speaker's material and finish are fixed. If the model's shader is wrong for clear acrylic, that is a product-model fix, not a picture fix."
+  },
+  {
+   "request": "Move the two Fog speakers so they do not block the record-wall seating",
+   "why": "The room's layout is fixed."
+  },
+  {
+   "request": "Swap the saturated cyan on the screen for a warmer image",
+   "why": "Screen content may count as part of the room's design; confirm before changing it."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
