@@ -459,7 +459,7 @@ def body():
         glow = {'red': ('235 67 66', 1.0), 'orange': ('235 94 45', 1.0), 'amber': ('235 154 36', 1.0), 'green': ('136 234 131', 0.57),
                 'blue': ('73 174 235', 0.98), 'violet': ('143 112 235', 0.72), 'ice': ('218 234 235', 1.0), 'black': ('146 181 235', 0.28)}
         coins = ''.join(f'<button type="button" role="radio" aria-checked="{str(i == 0).lower()}" tabindex="{0 if i == 0 else -1}" '
-                        f'aria-label="{name}" data-glow="{glow[k][0]}" data-a="{glow[k][1]}"><span class="coin-dot" style="--i:{coin[k]}"></span></button>'
+                        f'aria-label="{name}" data-k="{k}" data-glow="{glow[k][0]}" data-a="{glow[k][1]}"><span class="coin-dot" style="--i:{coin[k]}"></span></button>'
                         for i, (k, num, name, *_) in enumerate(CLOUDS))
         intro = ('<p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2>'
                  '<p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with colour.</p>')
@@ -470,7 +470,7 @@ def body():
                 '        <div class="light-glow" aria-hidden="true"></div>\n'
                 '        <figure class="light-pic">' + ''.join(
                     f'<img src="img/{k}-reel.jpg" width="{rw}" height="{rh}" alt="{name} standing on a light, its colour thrown up the wall behind it"'
-                    f'{"" if i == 0 else " loading=lazy"} decoding="async">' for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</figure>\n'
+                    f'{" class=on" if i == 0 else " loading=lazy"} decoding="async">' for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</figure>\n'
                 f'        <div class="light-text"><div class="light-intro">{intro}</div>\n'
                 f'          <div class="light-colour"><p class="num" id="light-num">Atmosphere {first_[1]}</p>'
                 f'<p class="light-name" id="light-name">{first_[2]}</p><p class="light-line" id="light-line">{first_[5]}</p>\n'
@@ -719,7 +719,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
    the page; only the photograph's slow push follows the scroll itself */
 @property --glow { syntax: '<color>'; inherits: true; initial-value: transparent }
 @property --glow2 { syntax: '<color>'; inherits: true; initial-value: transparent }
-.lightband { background: #0B0C10; color: #ECE8E1; padding-block: 0 }
+.lightband { --ink: #ECE8E1; background: #0B0C10; color: #ECE8E1; padding-block: 0 clamp(56px, 8vw, 112px) }
 .lightband .eyebrow, .lightband .num { color: #A39E95 }
 .light-head { display: none }
 .light-run { position: relative; height: calc(100svh - var(--header) + 8 * 25svh) }
@@ -744,11 +744,11 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .light-intro p:last-child, .light-head p:last-child { margin: 14px 0 0; color: #A39E95; font-size: 17px; line-height: 1.55; max-width: 34ch }
 .light-colour .num { margin: 0 0 12px; font: 500 13px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase }
 .light-name { margin: 0; font-size: clamp(56px, 6.6vw, 96px); line-height: .95; font-weight: 600; letter-spacing: -0.035em }
-.light-line { margin: 12px 0 0; color: #A39E95; font-size: 18px; line-height: 1.45; max-width: 30ch }
-.light-name, .light-line { transition: opacity .42s cubic-bezier(.16, 1, .3, 1), translate .42s cubic-bezier(.16, 1, .3, 1) }
-.light-colour.swap .light-name, .light-colour.swap .light-line { opacity: 0; translate: 0 8px; transition-duration: .12s }
+.light-line { margin: 12px 0 0; color: #A39E95; font-size: 18px; line-height: 1.45; max-width: 30ch; min-height: calc(2 * 1.45em) }
+.light-name, .light-line, .light-colour .num { transition: opacity .42s cubic-bezier(.16, 1, .3, 1), translate .42s cubic-bezier(.16, 1, .3, 1) }
+.light-colour.swap .light-name, .light-colour.swap .light-line, .light-colour.swap .num { opacity: 0; translate: 0 8px; transition-duration: .12s }
 .light-coins { position: relative; display: flex; gap: 4px; margin: 28px 0 0 -7px }
-.light-coins button { width: 44px; height: 44px; padding: 7px; border: 0; border-radius: 50%; background: transparent; cursor: pointer; flex: none }
+.light-coins button { width: 44px; height: 44px; padding: 7px; border: 0; border-radius: 50%; background: transparent; color: #ECE8E1; cursor: pointer; flex: none }
 .light-coins .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: url(img/coins-dark.jpg); mix-blend-mode: screen }
 .light-coins .ring { position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 2px #ECE8E1;
   translate: calc(var(--at, 0) * 48px) 0; transition: translate .36s cubic-bezier(.2, .8, .2, 1); pointer-events: none }
@@ -776,13 +776,13 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 }
 @media (prefers-reduced-motion: reduce) {
   .light-run { height: auto } .light-stage { position: relative; top: 0; transition: none }
-  .light-pic img, .light-pic img.on { transition: opacity .15s linear; scale: 1 }
+  .light-pic img, .light-pic img.on, .light-pic.wake img.on { transition: opacity .15s linear; scale: 1 }
   .light-name, .light-line, .light-coins .ring { transition: none }
   .lightband .facade { opacity: 1; transition: none }
 }
 /* the header over the dark band */
 header.top { transition: background-color .3s ease, border-color .3s ease }
-header.top.on-dark { background: rgb(11 12 16 / .72); backdrop-filter: blur(20px); border-bottom-color: rgb(255 255 255 / .06) }
+header.top.on-dark { background: rgb(11 12 16 / .92); backdrop-filter: blur(20px); border-bottom-color: rgb(255 255 255 / .06) }
 header.top.on-dark .brand, header.top.on-dark nav a { color: #ECE8E1 }
 header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.webp);
   background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) }
@@ -1114,9 +1114,14 @@ if (run) {
     addEventListener('scroll', () => { if (!queuedL) { queuedL = true; requestAnimationFrame(tickL); } }, { passive: true });
     addEventListener('resize', tickL);
   }
-  // the room starts dark; when it is well in view the first lamp comes up slowly
-  new IntersectionObserver((es, ob) => { if (!es.some(e => e.isIntersecting)) return; ob.disconnect(); woke = true;
-    fig.classList.add('wake'); show(reduce ? 0 : zoneAt()); setTimeout(() => fig.classList.remove('wake'), 1300); }, { threshold: 0.35 }).observe(stageL);
+  // Ember is lit in the page itself (without script, and under reduced motion); on the moving path the room starts dark
+  // and, when it is well in view, the first lamp comes up slowly
+  if (reduce) { at = 0; light(0, false); woke = true; }
+  else {
+    pics[0].classList.remove('on');
+    new IntersectionObserver((es, ob) => { if (!es.some(e => e.isIntersecting)) return; ob.disconnect(); woke = true;
+      fig.classList.add('wake'); show(zoneAt()); setTimeout(() => fig.classList.remove('wake'), 1300); }, { threshold: 0.35 }).observe(stageL);
+  }
   const jump = i => { show(i); if (reduce || !woke) return;
     const r = run.getBoundingClientRect(), s = span(), pinned = r.top <= pinTop() + 1 && r.bottom >= innerHeight - 1;
     quiet = true; clearTimeout(quietT);
@@ -1131,7 +1136,7 @@ if (run) {
   if (fac) new IntersectionObserver((es, ob) => { if (es.some(e => e.isIntersecting)) { fac.classList.add('seen'); ob.disconnect(); } }, { threshold: 0.35 }).observe(fac);
   const band = document.getElementById('light'), bar = document.querySelector('header.top');
   if (band && bar) { const over = () => { const r = band.getBoundingClientRect(), h = bar.getBoundingClientRect().bottom;
-      bar.classList.toggle('on-dark', r.top < h - 8 && r.bottom > h); };
+      bar.classList.toggle('on-dark', r.top <= h + 1 && r.bottom > h); };
     addEventListener('scroll', over, { passive: true }); over(); }
 }
 // a closer look: the dots pick a colour and the pictures cross-fade; the arrow keys step through them, as in a radio group
