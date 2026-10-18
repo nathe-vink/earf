@@ -126,7 +126,8 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   .hero-title h1 { font-size: clamp(32px, 8vw, 44px) }
   .spot-label { display: none }
 }
-@media (max-width: 700px) { .spot.wide-only { display: none } }
+.spot.tall-only { display: none }
+@media (max-width: 700px) { .spot.wide-only { display: none } .hero-photo.has-tall .spot.tall-only { display: block } }
 
 /* the horns turning */
 .horns { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }

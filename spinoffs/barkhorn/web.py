@@ -145,7 +145,7 @@ def make_images(sources=None):
     hero = first(os.path.join(H31, 'hero.png'), os.path.join(H31, 'hero.jpg'), os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png'))
     one(hero, lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82), save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
     # the hero's own link boxes and its phone frame travel with it, and a picture without them leaves none behind
-    for name, src in (('hero-spots.json', 'spots.json'), ('hero-portrait.jpg', 'hero-portrait.png')):
+    for name, src in (('hero-spots.json', 'spots.json'), ('hero-portrait.jpg', 'hero-portrait.png'), ('hero-spots-portrait.json', 'spots-portrait.json')):
         theirs = os.path.join(os.path.dirname(hero), src) if hero else ''
         if theirs and src.endswith('.png') and not os.path.exists(theirs):    # a frame over 5 MB ships as a JPG
             theirs = theirs[:-4] + '.jpg'
@@ -368,6 +368,13 @@ def body():
     room_tall = ('<source media="(max-width: 700px)" srcset="img/room-portrait.jpg">' if tall('room-portrait.jpg') else '')
     if hero_tall:
         hotspots = hotspots.replace('class="spot"', 'class="spot wide-only"')
+    if hero_tall and tall('hero-spots-portrait.json'):    # the phone frame's own boxes: the back rank first, so the front's lie over it
+        ps = json.load(open(os.path.join(IMG, 'hero-spots-portrait.json')))
+        ps = ps['portrait'] if isinstance(ps, dict) else ps
+        hotspots += ''.join(
+            f'<a class="spot tall-only" href="#speaker-{k}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%">'
+            f'<span class="sr">{name}, Atmosphere {num}</span></a>'
+            for (k, num, name, *_), s in sorted(zip(CLOUDS, ps), key=lambda cs: cs[1]['t'] + cs[1]['h']))
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
@@ -480,7 +487,8 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   .hero-title h1 { font-size: clamp(32px, 8vw, 44px) }
   .spot-label { display: none }
 }
-@media (max-width: 700px) { .spot.wide-only { display: none } }
+.spot.tall-only { display: none }
+@media (max-width: 700px) { .spot.wide-only { display: none } .hero-photo.has-tall .spot.tall-only { display: block } }
 
 /* the horns turning */
 .horns { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
