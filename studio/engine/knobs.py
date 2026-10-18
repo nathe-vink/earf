@@ -72,6 +72,8 @@ KNOBS = [
     ('sky.kind', 'choice', ('gradient', 'physical', 'hdri', 'none'), 'the world: a gradient dome, a physical sky matched to the sun, a photographed environment (hdri), or black'),
     ('sky.file', 'choice', ('studio_small_03_1k', 'lebombo_1k', 'st_fagans_interior_1k', 'empty_warehouse_01_1k'),
      'hdri: the environment (studio/assets/hdri, Poly Haven CC0): a small photo studio with softboxes; a sunlit apartment; a museum interior with windows; an empty warehouse'),
+    ('sky.polyhaven', 'id', None, 'hdri: any Poly Haven environment by id (studio/engine/assets.py fetches and caches it; search with `assets.py search hdris WORD`)'),
+    ('sky.res', 'choice', ('1k', '2k', '4k', '8k'), 'hdri: the resolution fetched (4k where the sky shows behind a set; 8k where it is in focus)'),
     ('sky.rotation_deg', 'deg', (0, 360), 'hdri: turns the environment about the vertical, so its brightest part (a window, a softbox) faces where it should'),
     ('sky.strength', 'x', (0, 20), 'the sky\'s brightness'),
     ('sky.zenith', 'hex', None, 'gradient sky: colour overhead'),
