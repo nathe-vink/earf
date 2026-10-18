@@ -2,8 +2,8 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/finals31/inside-red.json",
  "image": "/home/user/earf/renders/2026-10-18/barkhorn/finals31/inside-red.png",
  "seconds": {
-  "build": 18.4,
-  "render": 557.7
+  "build": 26.7,
+  "render": 589.7
  },
  "samples": 128,
  "size": [
@@ -913,8 +913,8 @@
    ],
    "depth_m": 2.801
   },
-  "rating-plate#0": {
-   "part": "rating-plate",
+  "rating-plate-plate#0": {
+   "part": "rating-plate-plate",
    "centre_px": [
     755.0,
     868.5
@@ -924,6 +924,34 @@
     844,
     773,
     894
+   ],
+   "depth_m": 2.755
+  },
+  "rating-plate-print#0": {
+   "part": "rating-plate-print",
+   "centre_px": [
+    755.4,
+    869.0
+   ],
+   "box_px": [
+    743,
+    851,
+    768,
+    888
+   ],
+   "depth_m": 2.755
+  },
+  "rating-plate-screws#0": {
+   "part": "rating-plate-screws",
+   "centre_px": [
+    756.0,
+    868.4
+   ],
+   "box_px": [
+    739,
+    859,
+    774,
+    878
    ],
    "depth_m": 2.755
   },
