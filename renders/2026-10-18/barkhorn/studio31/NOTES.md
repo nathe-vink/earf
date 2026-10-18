@@ -61,3 +61,13 @@ Finals: the first five heroes showed a grey wedge in the top-left corner, the le
 Duel 4: f1's changes proofed (contact core, a compact pool at 52 deg, wider right flag, softer scrim) against the f1
 final downscaled to the same size: **the final won, 6.5 to 5.5**. The judge preferred its saturated red spill on the
 floor and the horn's crisp specular streaks; the proof's softer light read milky and pink. The finals keep rig 1769c6a.
+
+## Passes on the finals (bright field, rig 1769c6a)
+
+| pass | frame | score | top items |
+|---|---|---|---|
+| n2 | lineup (final, with n1's changes) | **6.5** | contact still faint; floor flat 248; grey patches in both bottom corners (the bounce card's reflection ends); black unit's edges weak; cabinets milky |
+| m | macro-horn-acid | 5.5 | an overview, not a detail (cabinet strip, lip at the edge, cap edge-on); the bell's top dissolves into the white; flat mouth; a flag's square glint |
+| m | macro-woofer-ice | 5.0 | ring and cone flat, no specular sweep; framed off-centre with a violet edge stripe and a clipped sliver |
+| m | macro-grip-poison | 5.0 | the slot a dark hole (nothing behind it); the top face blown into the white; horn and posts cropped at the top |
+| m | macro-corner-ember | 5.5 | no single subject (the horn's underside crowds it); the polished edge grey, no line; right face dead |
