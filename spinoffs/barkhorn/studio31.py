@@ -131,11 +131,11 @@ def bright(name):
                  'flags': [{'center_m': [-1.4, 0.6, 1.2], 'size_m': [1.2, 1.4], 'normal': [1.0, -0.2, 0.0], 'glossy': False,
                             'off': True},   # its shadow on the cove read as a grey wedge in the corner (the finals),
                            {'center_m': [1.35, 2.1, 1.2], 'size_m': [0.3, 2.4], 'normal': [-0.45, -0.89, 0.0], 'glossy': True}],
-                 'bounces': [{'center_m': [0.4, -2.2, 0.6], 'size_m': [2.0, 1.0], 'normal': [-0.15, 0.95, 0.1]}]},
+                 'bounces': [{'center_m': [0.4, -2.2, 0.6], 'size_m': [2.0, 1.0], 'normal': [-0.15, 0.95, 0.1], 'reflect_only': True}]},
          'camera': dict(CAM34), 'sky': {'kind': 'gradient', 'zenith': '#F2F1EF', 'horizon': '#EEEDEB', 'ground': '#CFCCC8',
                                        'strength': 0.6, 'visible': False},
          'render': dict(RENDER, white_balance_k=5900, white_balance_tint=7.0), 'finish': dict(FINISH),
-         'materials': {'sweep': {'roughness': 0.5}}}
+         'materials': {'sweep': {'roughness': 0.32}}}
     s['lights'] = {
         # the background: two broad lamps on the cove behind, out of frame, lifting it to a clean high-key white
         'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 3.2, 3.4], 'target': [-1.5, 6.0, 1.2],
@@ -152,9 +152,10 @@ def bright(name):
         'front-strip': {'type': 'panel', 'size_m': [0.4, 2.0], 'orbit': {'azimuth_deg': -25, 'elevation_deg': 22, 'distance_m': 3.0},
                         'target': [0.0, 0.0, 0.6], 'strength': 4.0, 'diffuse': 0.0, 'specular': 1.0, 'receivers': ['*#0'],
                         'ramp': {'axis': 'z', 'at_m': [0.2, 1.8], 'values': [0.0, 1.0]}},
-        # a smaller, harder lamp high behind, so the tinted acrylic throws its colour forward onto the seamless
-        'back-top': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 5, 'distance_m': 2.5},
-                     'target': [0.0, 0.0, 0.45], 'irradiance': 14.0, 'color': '#FFF8F0', 'camera': False},
+        # a small lamp high behind, aimed through the cabinet at the floor in front: the tinted acrylic throws a pool of
+        # its colour forward onto the seamless (the lineup's pass n1, and every hero pass, asked for it)
+        'back-top': {'type': 'area', 'size_m': [0.8, 0.8], 'orbit': {'azimuth_deg': 200, 'elevation_deg': 30, 'distance_m': 2.5},
+                     'target': [0.0, -0.5, 0.0], 'irradiance': 22.0, 'color': '#FFF8F0', 'camera': False},
     }
     return s
 
@@ -264,18 +265,23 @@ def lineup_bright():
     s['product'] = {'def': PRODUCT, 'flavour': COLOURS[0][1],
                     'instances': [{'position': [x, 0, 0], 'rotate_z': -24.0, 'flavour': fl, 'hide': ['cloth-disc']}
                                   for x, (n, fl) in zip(xs, COLOURS)]}
-    s['camera'] = {'position': [0.0, -14.0, 0.85], 'target': [0.0, 0.0, 0.6], 'lens_mm': 64.0, 'level': True}
+    s['camera'] = {'position': [0.0, -14.0, 0.85], 'target': [0.0, 0.0, 0.6], 'lens_mm': 58.0, 'level': True}
     st = s['set']
     st['flags'] = []
-    st['bounces'] = [{'center_m': [0.0, -2.6, 0.6], 'size_m': [9.0, 1.0], 'normal': [0.0, 0.95, 0.15]}]
+    # cards seen only in reflections (no shadow: the first, as a plain card, laid a grey band on the floor), the second
+    # high in front for the horns' shoulders (the black one crushed to zero without it)
+    st['bounces'] = [{'center_m': [0.0, -2.6, 0.6], 'size_m': [9.0, 1.0], 'normal': [0.0, 0.95, 0.15], 'reflect_only': True},
+                     {'center_m': [0.0, -1.6, 2.6], 'size_m': [9.0, 1.4], 'normal': [0.0, 0.55, -0.83], 'reflect_only': True}]
+    st.update(radius=9.0, depth=11.0, contact={'strength': 0.8, 'distance_m': 0.45, 'core_strength': 1.0, 'core_distance_m': 0.03})
+    s['materials'] = {'sweep': {'roughness': 0.32}}
     recv = [f'*#{i}' for i in range(8)]
     L = s['lights']
-    L['bg-left'].update(size_m=[8.0, 3.0], position=[-4.5, 3.2, 3.4], target=[-3.0, 6.0, 1.0])
-    L['bg-right'].update(size_m=[8.0, 3.0], position=[4.5, 3.2, 3.4], target=[3.0, 6.0, 1.0])
+    L['bg-left'].update(size_m=[8.0, 3.0], position=[-4.5, 3.2, 3.4], target=[-3.0, 6.0, 0.4])
+    L['bg-right'].update(size_m=[8.0, 3.0], position=[4.5, 3.2, 3.4], target=[3.0, 6.0, 0.4])
     L['scrim'].update(size_m=[9.0, 1.6], position=[0.0, 0.4, 2.8])
     L['key'].update(size_m=[6.0, 1.6], orbit=None, position=[-1.6, -3.4, 3.0], target=[0.0, 0.0, 0.6])
     L['key'].pop('orbit')
-    L['back-top'].update(size_m=[9.0, 1.2], orbit=None, position=[0.0, 2.5, 0.8], target=[0.0, 0.0, 0.45])
+    L['back-top'].update(size_m=[9.0, 1.2], orbit=None, position=[0.0, 3.0, 2.0], target=[0.0, -0.6, 0.0], irradiance=16.0)
     L['back-top'].pop('orbit')
     L['front-strip'].update(size_m=[9.0, 0.5], orbit=None, position=[0.0, -3.0, 1.9], target=[0.0, 0.0, 0.6], receivers=recv,
                             ramp={'axis': 'z', 'at_m': [1.65, 2.15], 'values': [0.0, 1.0]})

@@ -54,3 +54,4 @@ clear sides, the horn's black driver, the horn's colour against the cabinet's. T
 product as it stands, not the light's. The finals are rendered from b5's rig.
 
 Finals: the first five heroes showed a grey wedge in the top-left corner, the left flag's shadow on the cove (gone with the flag off, the left edge still traced by the sweep's own falloff); the flag is off and those five and Haze are rendered again after the rest.
+| n1 | lineup (final, 2880) | full | **6.0** | the front bounce card cast a grey band and a cool grey foreground; no contact; a horizon line; the black horn crushed; no coloured light on the floor; tight margins | bounce cards reflection-only (no shadow) plus a high one for the horns' shoulders; cove radius 9, background lamps aimed at its foot; the back bank high behind and aimed through the cabinets onto the floor in front (each throws a pool of its own colour); 58 mm; floor roughness 0.32 for a faint reflection. Rendered again |
