@@ -35,7 +35,7 @@ WARM = '#FFFFFF'                    # the uplights: a neutral white, so the acry
 # post: no white point, only a shoulder above 205 that rolls the hot glow inside a cabinet into 246 keeping its hue (PBR
 # Neutral alone bleaches a lit red toward white), a touch of clarity for the concrete's boards, a cored sharpen
 FINISH = {'enabled': True, 'white_in': 205, 'white_out': 205, 'peak': 246, 'contrast': 0.05, 'clarity': 0.1, 'sharpen': 0.3}
-LENS = 0.2                         # the plinth lens's glow: soft, never a clipped white line                    # the uplights' lamps: a warm white LED, 3500 K or so
+LENS = 0.08                         # the plinth lens's glow: soft, never a clipped white line                    # the uplights' lamps: a warm white LED, 3500 K or so
 
 
 def kit(fn, pos, **kw):
@@ -60,7 +60,7 @@ def placement(kind, x=0.0, y=0.0, z0=0.0, power=1.0, horn=0.0):
     if kind == 'under':
         # the plinth runs on 25 cm in front of the speaker, a lip that holds the horn's emitter (below)
         props = [{'kind': 'kit', 'shape': 'box', 'position': [x, y - LIP / 2, 0.0], 'size': [W + 0.10, D + 0.10 + LIP, z0],
-                  'material': 'clay', 'color': '#141415', 'roughness': 0.2, 'ease': 0.012},
+                  'material': 'clay', 'color': '#141415', 'roughness': 0.45, 'ease': 0.012},
                  {'kind': 'kit', 'shape': 'box', 'position': [x, y, z0 - 0.002], 'size': [W + 0.01, D + 0.01, 0.003],
                   'material': 'glow', 'color': WARM, 'emit': LENS, 'shadow': False}]
         # the lamp: a flat panel of LEDs under the lens, the speaker's footprint, on the lens 10 mm below the cabinet's bottom (its feet are 12 mm) (a flat lamp, so no
@@ -136,7 +136,7 @@ def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=
     wall_y = 0.3                                          # the wall's face (the plinths' backs are at 0.265)
     rnd = random.Random(31)
     def pour(pos, size):                                  # one pour of the wall, its own stretch of the texture
-        return kit('wall', pos, size=size, **dict(CONCRETE, tex_scale=2.0, vary=0.6, vary_m=6.0, bump=3.5,
+        return kit('wall', pos, size=size, **dict(CONCRETE, tex_scale=2.0, vary=0.6, vary_m=6.0, bump=1.8,
                                                   tex_offset=[round(rnd.uniform(0, 1), 3), round(rnd.uniform(0, 1), 3), round(rnd.uniform(0, 1), 3)]))
     props = [
         # the wall, board-formed concrete: one face in pours 3.6 m wide, a 12 mm joint between them falling between
@@ -145,7 +145,7 @@ def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=
         pour([0.0, wall_y + 0.75, 0.0], [60.0, 1.2, 5.6]),
         pour([0.0, wall_y - 0.35, 4.8], [60.0, 0.7, 0.8]),
         # the quay: wet granite flags with broad standing water, a wet granite kerb, the river just below
-        kit('paving', [0.0, -1.3, 0.0], size=[60.0, 4.2], texture='granite_tile', res='2k', wet=0.8, puddle_m=0.32, vary=0.2),
+        kit('paving', [0.0, -1.3, 0.0], size=[60.0, 4.2], texture='granite_tile', res='2k', wet=0.65, puddle_m=1.2, puddle_edge=0.22, vary=0.2),
         kit('paving', [0.0, -3.575, 0.0], size=[60.0, 0.35], thick=0.03, texture='granite_tile', res='2k', wet=0.5, puddle_m=0.5, vary=0.4),
         kit('water', [0.0, -18.0, -0.06], size=[80.0, 29.0], ripple=0.12, ripple_m=1.2),
         # the city across the river, behind the camera's back, felt only as warm glows low on the water, near and far
@@ -166,13 +166,13 @@ def quay(keys, xs, camera, size, exposure, title, boost=None, power=0.5, spread=
             lights[f'up{i}{k_}'] = l_
         insts.append({'flavour': FLAVOUR[k], 'position': [x, 0.0, Z0], 'rotate_z': 0, 'hide': ['cloth-disc']})
     # moonlight, cool and faint, high over the river at the front right: it finds the horns and the stone
-    lights['moon'] = {'type': 'area', 'size_m': [10.0, 6.0], 'position': [4.0, -6.0, 6.0], 'target': [0.0, wall_y, 1.2],
+    lights['moon'] = {'type': 'area', 'size_m': [10.0, 6.0], 'position': [4.0, -5.0, 7.5], 'target': [0.0, wall_y, 1.0],
                       'irradiance': moon, 'color': '#C4D0F0'}
     return {'product': {'def': PRODUCT, 'flavour': FLAVOUR[keys[0]], 'instances': insts},
             'set': {'kind': 'stage', 'props': props},
             'sky': dict(NIGHT, strength=0.12),
             'lights': lights,
-            'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.02, 16.0], 'density': 0.014, 'anisotropy': 0.65},
+            'haze': {'box_m': [-25.0, -20.0, -0.5, 25.0, wall_y - 0.02, 16.0], 'density': 0.02, 'anisotropy': 0.7},
             'camera': camera,
             'render': dict(RENDER, samples=160, exposure=exposure),
             'finish': dict(FINISH),
@@ -191,8 +191,8 @@ def facade(size=(2880, 1200), camera=None, exposure=1.0):
 def slide(key, size=(1600, 1600)):
     """One slide: a speaker alone on the quay, the same set, camera and lamp for all eight (round 31, pass 6: the
     slides moved into the facade's world after five passes in a set of their own never passed 4.5)."""
-    return quay([key], [0.0], {'position': [0.15, -5.0, 0.7], 'target': [0.0, 0.2, 0.85], 'lens_mm': 50.0, 'level': True},
-                size, 1.0, f'barkhorn, {NAME[key]}, uplit on the quay before a concrete wall', power=0.41, moon=0.4,
+    return quay([key], [0.0], {'position': [0.15, -5.0, 0.7], 'target': [0.0, 0.2, 0.95], 'lens_mm': 58.0, 'level': True},
+                size, 1.0, f'barkhorn, {NAME[key]}, uplit on the quay before a concrete wall', power=0.3, moon=0.5,
                 pours=(4.8, 0.0))
 
 

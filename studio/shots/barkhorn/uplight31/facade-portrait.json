@@ -122,7 +122,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -153,7 +153,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -182,8 +182,9 @@
     ],
     "texture": "granite_tile",
     "res": "2k",
-    "wet": 0.8,
-    "puddle_m": 0.32,
+    "wet": 0.65,
+    "puddle_m": 1.2,
+    "puddle_edge": 0.22,
     "vary": 0.2
    },
    {
@@ -278,7 +279,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -309,7 +310,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -340,7 +341,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -371,7 +372,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -402,7 +403,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -433,7 +434,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -464,7 +465,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -495,7 +496,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -526,7 +527,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -557,7 +558,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -588,7 +589,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -619,7 +620,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -650,7 +651,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -681,7 +682,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -712,7 +713,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -743,7 +744,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -774,7 +775,7 @@
     "texture": "concrete_layers_02",
     "res": "4k",
     "tex_scale": 2.0,
-    "bump": 3.5,
+    "bump": 1.8,
     "vary": 0.6,
     "vary_m": 6.0,
     "ties": [
@@ -802,7 +803,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.2,
+    "roughness": 0.45,
     "ease": 0.012
    },
    {
@@ -820,7 +821,7 @@
     ],
     "material": "glow",
     "color": "#FFFFFF",
-    "emit": 0.2,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -838,7 +839,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.2,
+    "roughness": 0.45,
     "ease": 0.012
    },
    {
@@ -856,7 +857,7 @@
     ],
     "material": "glow",
     "color": "#FFFFFF",
-    "emit": 0.2,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -874,7 +875,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.2,
+    "roughness": 0.45,
     "ease": 0.012
    },
    {
@@ -892,7 +893,7 @@
     ],
     "material": "glow",
     "color": "#FFFFFF",
-    "emit": 0.2,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -910,7 +911,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.2,
+    "roughness": 0.45,
     "ease": 0.012
    },
    {
@@ -928,7 +929,7 @@
     ],
     "material": "glow",
     "color": "#FFFFFF",
-    "emit": 0.2,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -946,7 +947,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.2,
+    "roughness": 0.45,
     "ease": 0.012
    },
    {
@@ -964,7 +965,7 @@
     ],
     "material": "glow",
     "color": "#FFFFFF",
-    "emit": 0.2,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -982,7 +983,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.2,
+    "roughness": 0.45,
     "ease": 0.012
    },
    {
@@ -1000,7 +1001,7 @@
     ],
     "material": "glow",
     "color": "#FFFFFF",
-    "emit": 0.2,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -1018,7 +1019,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.2,
+    "roughness": 0.45,
     "ease": 0.012
    },
    {
@@ -1036,7 +1037,7 @@
     ],
     "material": "glow",
     "color": "#FFFFFF",
-    "emit": 0.2,
+    "emit": 0.08,
     "shadow": false
    },
    {
@@ -1054,7 +1055,7 @@
     ],
     "material": "clay",
     "color": "#141415",
-    "roughness": 0.2,
+    "roughness": 0.45,
     "ease": 0.012
    },
    {
@@ -1072,7 +1073,7 @@
     ],
     "material": "glow",
     "color": "#FFFFFF",
-    "emit": 0.2,
+    "emit": 0.08,
     "shadow": false
    }
   ]
@@ -1253,13 +1254,13 @@
    ],
    "position": [
     4.0,
-    -6.0,
-    6.0
+    -5.0,
+    7.5
    ],
    "target": [
     0.0,
     0.3,
-    1.2
+    1.0
    ],
    "irradiance": 0.1,
    "color": "#C4D0F0"
@@ -1274,8 +1275,8 @@
    0.27999999999999997,
    16.0
   ],
-  "density": 0.014,
-  "anisotropy": 0.65
+  "density": 0.02,
+  "anisotropy": 0.7
  },
  "camera": {
   "position": [

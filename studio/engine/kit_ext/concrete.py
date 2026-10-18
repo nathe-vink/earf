@@ -11,7 +11,7 @@
   how much of it holds water (smooth, dark, mirroring), in puddles `puddle_m` across.
 - on a wall or paving, `texture` (a Poly Haven texture id: concrete_layers_02 is board-formed) uses the photographed
   set instead, laid at its real size or `tex_scale` m a tile, `res`, `bump`, its repetition broken by a slow tone
-  variation `vary` (0.25) `vary_m` across, form ties' holes on a grid `ties` [dx, dz] m, `tex_offset` [u, v, w] (in tiles) shifting this block's stretch of it; on paving, `wet` and `puddle_m` as above.
+  variation `vary` (0.25) `vary_m` across, form ties' holes on a grid `ties` [dx, dz] m, `tex_offset` [u, v, w] (in tiles) shifting this block's stretch of it; on paving, `wet` and `puddle_m` as above, `puddle_edge` (0.05) how softly the water's edge feathers into damp stone.
 - water: a river's surface `size` [w, d] at `position` (its z the water line): near black, a mirror broken by slow
   ripples (`ripple_m` long across x, `ripple` their strength), so lights on the far bank draw down into long streaks.
 """
@@ -224,7 +224,7 @@ def _photo(bpy, p, kind):
     variation in tone and vertical streaks multiplied into its colour, so a 2 m tile laid across a 60 m wall does not
     repeat to the eye; on paving, `wet` puddles (dark, smooth, mirroring) and a damp darkening over all."""
     import assets
-    key = ('photo', kind) + tuple((k, str(p.get(k))) for k in ('texture', 'res', 'tex_scale', 'tex_offset', 'bump', 'vary', 'vary_m', 'ties', 'wet', 'puddle_m', 'tint', 'tint_mix', 'rough_mul'))
+    key = ('photo', kind) + tuple((k, str(p.get(k))) for k in ('texture', 'res', 'tex_scale', 'tex_offset', 'bump', 'vary', 'vary_m', 'ties', 'wet', 'puddle_m', 'puddle_edge', 'tint', 'tint_mix', 'rough_mul'))
     if key in _MATS:
         return _MATS[key]
     m = assets.pbr(bpy, p['texture'], p.get('res', '2k'), scale=p.get('tex_scale'), bump=p.get('bump', 1.0),
@@ -258,7 +258,8 @@ def _photo(bpy, p, kind):
     if kind == 'paving' and p.get('wet', 0) > 0:
         wet = p['wet']
         pd = g.noise(pos, 1.0 / p.get('puddle_m', 1.2), detail=3.0)
-        puddle = g.ramp(pd, 0.62 - 0.25 * wet, 0.67 - 0.25 * wet)
+        soft = p.get('puddle_edge', 0.05)                # how far the water's edge feathers into damp stone (noise units)
+        puddle = g.ramp(pd, 0.645 - 0.25 * wet - soft / 2, 0.645 - 0.25 * wet + soft / 2)
         tone = g.math('MULTIPLY', tone, g.math('SUBTRACT', 1.0 - 0.3 * wet, g.math('MULTIPLY', puddle, 0.2)))
 
     def colour(src, sock):
