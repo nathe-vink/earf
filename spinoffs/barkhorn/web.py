@@ -43,15 +43,19 @@ IMG = os.path.join(SITE, 'img')
 BRAND = os.path.join(HERE, 'brand')
 R30 = os.path.join(ROOT, 'renders', '2026-10-17', 'barkhorn', 'site30')
 TURN = os.path.join(ROOT, 'renders', '2026-10-15', 'barkhorn', 'turn23')
-# round 31: the final pictures (finals.py), the spotlight and the carousel (shoot31.py) and the dioramas (dioramas/)
+# round 31: the final pictures (finals.py), the spotlight and the carousel (shoot31.py), and round 31b's: each colour
+# in its element (elements/), the hero and the room made again to the promotional critic's bar (hero31.py, room31/)
 FIN = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'finals31')
 S31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'shoot31')
 U31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'uplight31')     # each colour lit from below: the reel
-D31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'diorama31')
+E31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'element31')     # each colour on location, in its element
+H31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'hero31')        # the eight on their arc, relit
+RM31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'room31')       # the pair at home, photographed
 ST31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'studio31')    # the studio's: heroes, the lineup, macros
 C31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions')   # the record player and the lamp
 HABITAT = {'red': 'ember', 'orange': 'dust', 'amber': 'acid', 'green': 'poison', 'blue': 'ice', 'violet': 'haze',
            'ice': 'fog', 'black': 'smoke'}
+ELEMENT = dict(HABITAT)       # which concept each colour shows in its element: A (<name>), or B (<name>_b) once it wins
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 TITLE = 'EARF · Atmosphere'
 DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours named for things in the air. '
@@ -104,7 +108,13 @@ def layer(im, ground, dark):
 
 def hero_spots():
     """Where each Cloud stands in the hero, as fractions of the frame: its middle, its sides and its top and foot,
-    projected from hero.py's arc through the engine's level camera (render.py: looking level, the lens shifted)."""
+    projected from hero.py's arc through the engine's level camera (render.py: looking level, the lens shifted). A hero
+    that brings its own boxes (round 31b's hero31/spots.json, copied beside the picture as img/hero-spots.json) uses
+    those instead, so the links follow whatever arc and camera made the picture."""
+    own = os.path.join(IMG, 'hero-spots.json')
+    if os.path.exists(own):
+        d = json.load(open(own))
+        return d['landscape'] if isinstance(d, dict) else d
     R, CY, STEP, n = 5.0, -4.6, 0.92, 8
     C, T, lens, sensor, W, H = (0.0, -9.6, 1.75), (0.0, -0.4, 0.55), 46.0, 36.0, 2560, 1280
     tilt = math.atan2(T[2] - C[2], T[1] - C[1])
@@ -131,8 +141,18 @@ def make_images(sources=None):
             fn(path); made.append(os.path.basename(path))
     def first(*paths):                                  # the final if it is there, else the round's picture
         return next((p for p in paths if p and os.path.exists(p)), None)
-    one(first(os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png')),
-        lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82), save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
+    hero = first(os.path.join(H31, 'hero.png'), os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png'))
+    one(hero, lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82), save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
+    # the hero's own link boxes and its phone frame travel with it, and a picture without them leaves none behind
+    for name, src in (('hero-spots.json', 'spots.json'), ('hero-portrait.jpg', 'hero-portrait.png')):
+        theirs = os.path.join(os.path.dirname(hero), src) if hero else ''
+        if theirs and os.path.exists(theirs):
+            if name.endswith('.json'):
+                shutil.copy(theirs, os.path.join(IMG, name)); made.append(src)
+            else:
+                one(theirs, lambda p: save(Image.open(p), name, 1200, q=82))
+        elif hero and os.path.exists(os.path.join(IMG, name)):
+            os.remove(os.path.join(IMG, name))
     for k in KEYS:
         for side in ('on', 'off'):
             one(first(os.path.join(FIN, f'front-{side}-{k}.png'), at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg')),
@@ -148,8 +168,9 @@ def make_images(sources=None):
         h = HABITAT[k]
         one(first(*[os.path.join(U31, f'{n}-{c}.{e}') for n in ('uplit', 'uplight', 'reel', 'frame') for c in (k, h) for e in ('png', 'jpg')]),
             lambda p: save(Image.open(p), f'{k}-reel.jpg', 1400, q=84))
-        one(first(os.path.join(D31, f'{h}.png'), os.path.join(D31, f'{h}.jpg')), lambda p: save(Image.open(p), f'{k}-habitat.jpg', 1600, q=84))
-        one(first(os.path.join(D31, f'{h}-portrait.png'), os.path.join(D31, f'{h}-portrait.jpg')),
+        e = ELEMENT[k]                                  # the concept the colour shows in its element
+        one(first(os.path.join(E31, f'{e}.png'), os.path.join(E31, f'{e}.jpg')), lambda p: save(Image.open(p), f'{k}-habitat.jpg', 1600, q=84))
+        one(first(os.path.join(E31, f'{e}-portrait.png'), os.path.join(E31, f'{e}-portrait.jpg')),
             lambda p: save(Image.open(p), f'{k}-habitat-portrait.jpg', 1000, q=84))
         for tag, names in (('studio', ('hero-dark', 'hero')), ('studio-light', ('hero-light',))):
             one(first(*[os.path.join(ST31, f'{n}-{c}.{e}') for n in names for c in (h, k) for e in ('png', 'jpg')]),
@@ -163,9 +184,15 @@ def make_images(sources=None):
     for tag, names in (('facade', ('facade', 'night', 'opera')), ('facade-portrait', ('facade-portrait', 'night-portrait', 'opera-portrait'))):
         one(first(*[os.path.join(U31, f'{n}.{e}') for n in names for e in ('png', 'jpg')]),
             lambda p, t=tag: (save(Image.open(p), f'{t}.jpg', 2400, q=84), save(Image.open(p), f'{t}-1200.jpg', 1200, q=82)))
-    one(first(os.path.join(FIN, 'room.png')), lambda p: save(Image.open(p), 'room.jpg', 1800, q=84))
+    room = first(os.path.join(RM31, 'room.png'), os.path.join(FIN, 'room.png'))
+    one(room, lambda p: save(Image.open(p), 'room.jpg', 1800, q=84))
+    port = os.path.join(os.path.dirname(room), 'room-portrait.png') if room else ''
+    if port and os.path.exists(port):                   # the room's phone frame travels with it, as the hero's does
+        one(port, lambda p: save(Image.open(p), 'room-portrait.jpg', 1000, q=84))
+    elif room and os.path.exists(os.path.join(IMG, 'room-portrait.jpg')):
+        os.remove(os.path.join(IMG, 'room-portrait.jpg'))
     for f in ('room.jpg', 'ga-front.png', 'ga-right.png'):
-        if f == 'room.jpg' and os.path.exists(os.path.join(FIN, 'room.png')):
+        if f == 'room.jpg' and room:
             continue
         one(at('r25', 'site', 'img', f), lambda p, f=f: shutil.copy(p, os.path.join(IMG, f)))
     # the icons, acrylic (icons_real.py's renders, each on its ground made even), a layer for light grounds and one for dark
@@ -304,14 +331,14 @@ def body():
         hw, hh = meta['red']['habitat']['w'], meta['red']['habitat']['h']
         tall = all(os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg')) for k in KEYS)
         habitats = ('  <section class="band" id="habitats"><div class="wrap">\n'
-                    '    <div class="head"><div><p class="eyebrow">Natural habitats</p><h2>Each colour, in its own weather.</h2></div>'
+                    '    <div class="head"><div><p class="eyebrow">In their element</p><h2>Each colour, in its own weather.</h2></div>'
                     '<div class="steps"><button type="button" class="btn" id="hab-prev" aria-label="Previous">&larr;</button>'
                     '<button type="button" class="btn" id="hab-next" aria-label="Next">&rarr;</button></div></div>\n'
                     '    <ul class="habitats" id="hab" tabindex="0" aria-label="The eight in their habitats">' + ''.join(
                         f'<li><a href="#speaker-{k}"><picture>'
                         + (f'<source media="(max-width: 700px)" srcset="img/{k}-habitat-portrait.jpg">' if tall else '') +
                         f'<img src="img/{k}-habitat.jpg" width="{hw}" height="{hh}" loading="lazy" '
-                        f'alt="{name} in a small made world of its own weather"></picture><span><b>{name}</b> {line}</span></a></li>'
+                        f'alt="{name}, on location in its own weather"></picture><span><b>{name}</b> {line}</span></a></li>'
                         for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n  </div></section>')
     pair = [('turntable', 'Cumulus', 'A record player. Belt drive, its motor in a pod of its own.',
              'Cumulus, a record player in tinted acrylic, its platter on a plinth of overlapping circles'),
@@ -331,7 +358,16 @@ def body():
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
                      coin=coin[k], views=meta[k]) for k, num, name, icon, tint, line, cover in CLOUDS],
         hues=E.HUES)
+    # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
+    # give way on phones to the names under it, the boxes being the landscape frame's
+    tall = lambda f: os.path.exists(os.path.join(IMG, f))
+    hero_tall = ('<source media="(max-width: 700px)" srcset="img/hero-portrait.jpg">' if tall('hero-portrait.jpg') else '')
+    room_tall = ('<source media="(max-width: 700px)" srcset="img/room-portrait.jpg">' if tall('room-portrait.jpg') else '')
+    if hero_tall:
+        hotspots = hotspots.replace('class="spot"', 'class="spot wide-only"')
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
+                .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
+                .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt)
                 .replace('__DATA__', json.dumps(data, separators=(',', ':'))))
@@ -408,7 +444,9 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .hero { padding-block: 0 28px }
 .hero-pic { position: relative }
 .hero-photo { position: relative; aspect-ratio: 2 / 1; max-width: 100%; background: #ECE7DD; overflow: hidden }
-.hero-photo > img { display: block; width: 100%; height: 100%; object-fit: cover }
+.hero-photo > picture { display: block; width: 100%; height: 100% }
+.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover }
+@media (max-width: 700px) { .hero-photo.has-tall { aspect-ratio: 4 / 5 } }
 .hero-title { position: absolute; left: 0; right: 0; top: 0; z-index: 1; color: var(--on-photo); pointer-events: none }
 .hero-title .wrap { padding-block: clamp(18px, 2.6vw, 44px) 0 }
 .hero-title .eyebrow { color: color-mix(in srgb, var(--on-photo) 68%, transparent) }
@@ -439,6 +477,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   .hero-title h1 { font-size: clamp(32px, 8vw, 44px) }
   .spot-label { display: none }
 }
+@media (max-width: 700px) { .spot.wide-only { display: none } }
 
 /* the horns turning */
 .horns { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
@@ -644,9 +683,9 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
   <section class="hero" id="top">
     <div class="hero-pic">
       <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Atmosphere</p><h1>Weather for the living room.</h1></div></div>
-      <div class="hero-photo">
-        <img src="img/hero.jpg" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
-          alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor">
+      <div class="hero-photo__HERO_CLASS__">
+        <picture>__HERO_TALL__<img src="img/hero.jpg" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
+          alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor"></picture>
         __HOTSPOTS__
       </div>
     </div>
@@ -688,7 +727,7 @@ __REEL__
 __HABITATS__
   <section class="band room" id="room"><div class="wrap">
     <div class="head"><div><p class="eyebrow">At home</p><h2>A pair of Poison.</h2></div></div>
-    <figure><img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy">
+    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy"></picture>
       <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 520 mm.</span></figcaption></figure>
   </div></section>
 

@@ -93,7 +93,9 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .hero { padding-block: 0 28px }
 .hero-pic { position: relative }
 .hero-photo { position: relative; aspect-ratio: 2 / 1; max-width: 100%; background: #ECE7DD; overflow: hidden }
-.hero-photo > img { display: block; width: 100%; height: 100%; object-fit: cover }
+.hero-photo > picture { display: block; width: 100%; height: 100% }
+.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover }
+@media (max-width: 700px) { .hero-photo.has-tall { aspect-ratio: 4 / 5 } }
 .hero-title { position: absolute; left: 0; right: 0; top: 0; z-index: 1; color: var(--on-photo); pointer-events: none }
 .hero-title .wrap { padding-block: clamp(18px, 2.6vw, 44px) 0 }
 .hero-title .eyebrow { color: color-mix(in srgb, var(--on-photo) 68%, transparent) }
@@ -124,6 +126,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   .hero-title h1 { font-size: clamp(32px, 8vw, 44px) }
   .spot-label { display: none }
 }
+@media (max-width: 700px) { .spot.wide-only { display: none } }
 
 /* the horns turning */
 .horns { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
@@ -331,8 +334,8 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
     <div class="hero-pic">
       <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Atmosphere</p><h1>Weather for the living room.</h1></div></div>
       <div class="hero-photo">
-        <img src="img/hero.jpg" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
-          alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor">
+        <picture><img src="img/hero.jpg" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
+          alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor"></picture>
         <a class="spot" href="#speaker-red" style="left:2.54%;top:28.59%;width:9.66%;height:38.34%"><span class="spot-label"><span class="spot-ic"><img class="ic only-light " src="img/icon-ember-light.jpg" alt="" width="256" height="256"><img class="ic only-dark " src="img/icon-ember-dark.jpg" alt="" width="256" height="256"></span><b>Ember</b><span>01</span></span><span class="sr">Ember, Atmosphere 01</span></a><a class="spot" href="#speaker-orange" style="left:15.5%;top:27.99%;width:9.17%;height:36.39%"><span class="spot-label"><span class="spot-ic"><img class="ic only-light " src="img/icon-dust-light.jpg" alt="" width="256" height="256"><img class="ic only-dark " src="img/icon-dust-dark.jpg" alt="" width="256" height="256"></span><b>Dust</b><span>02</span></span><span class="sr">Dust, Atmosphere 02</span></a><a class="spot" href="#speaker-amber" style="left:27.83%;top:27.61%;width:8.86%;height:35.17%"><span class="spot-label"><span class="spot-ic"><img class="ic only-light " src="img/icon-acid-light.jpg" alt="" width="256" height="256"><img class="ic only-dark " src="img/icon-acid-dark.jpg" alt="" width="256" height="256"></span><b>Acid</b><span>03</span></span><span class="sr">Acid, Atmosphere 03</span></a><a class="spot" href="#speaker-green" style="left:39.76%;top:27.42%;width:8.71%;height:34.57%"><span class="spot-label"><span class="spot-ic"><img class="ic only-light " src="img/icon-poison-light.jpg" alt="" width="256" height="256"><img class="ic only-dark " src="img/icon-poison-dark.jpg" alt="" width="256" height="256"></span><b>Poison</b><span>04</span></span><span class="sr">Poison, Atmosphere 04</span></a><a class="spot" href="#speaker-blue" style="left:51.53%;top:27.42%;width:8.71%;height:34.57%"><span class="spot-label"><span class="spot-ic"><img class="ic only-light " src="img/icon-ice-light.jpg" alt="" width="256" height="256"><img class="ic only-dark " src="img/icon-ice-dark.jpg" alt="" width="256" height="256"></span><b>Ice</b><span>05</span></span><span class="sr">Ice, Atmosphere 05</span></a><a class="spot" href="#speaker-violet" style="left:63.32%;top:27.61%;width:8.86%;height:35.17%"><span class="spot-label"><span class="spot-ic"><img class="ic only-light " src="img/icon-haze-light.jpg" alt="" width="256" height="256"><img class="ic only-dark " src="img/icon-haze-dark.jpg" alt="" width="256" height="256"></span><b>Haze</b><span>06</span></span><span class="sr">Haze, Atmosphere 06</span></a><a class="spot" href="#speaker-ice" style="left:75.34%;top:27.99%;width:9.17%;height:36.39%"><span class="spot-label"><span class="spot-ic"><img class="ic only-light " src="img/icon-fog-light.jpg" alt="" width="256" height="256"><img class="ic only-dark " src="img/icon-fog-dark.jpg" alt="" width="256" height="256"></span><b>Fog</b><span>07</span></span><span class="sr">Fog, Atmosphere 07</span></a><a class="spot" href="#speaker-black" style="left:87.8%;top:28.59%;width:9.66%;height:38.34%"><span class="spot-label"><span class="spot-ic"><img class="ic only-light " src="img/icon-smoke-light.jpg" alt="" width="256" height="256"><img class="ic only-dark " src="img/icon-smoke-dark.jpg" alt="" width="256" height="256"></span><b>Smoke</b><span>08</span></span><span class="sr">Smoke, Atmosphere 08</span></a>
       </div>
     </div>
@@ -374,7 +377,7 @@ html.no-cursor, html.no-cursor * { cursor: none !important }
 
   <section class="band room" id="room"><div class="wrap">
     <div class="head"><div><p class="eyebrow">At home</p><h2>A pair of Poison.</h2></div></div>
-    <figure><img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy">
+    <figure><picture><img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy"></picture>
       <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 520 mm.</span></figcaption></figure>
   </div></section>
 
