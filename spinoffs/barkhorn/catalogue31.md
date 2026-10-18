@@ -148,3 +148,23 @@ to 1.0, the horn light's specular to 0.5, a darker floor under the cabinet (wash
 tooth (a material on the sweep: an engine change, not made here). A coloured pool needs either refractive caustics
 (noisy at these samples) or light linking that lets the backlight reach the paper through the acrylic without its
 glossy streak; neither was worth a re-render of all sixteen.
+
+All sixteen finals, merged from the helpers' branches (`r31-catalogue-<k>`) and this session's (Ice, Smoke), at
+1080 x 2160, 256 samples; `finals.py check` passes them (a grip in frame, the right colour; its other 42 "stale" are
+the other views, older than this container's model rebuild by file time only), and every PNG is 2.4 to 2.7 MB:
+
+| colour | cover on | cover off |
+|---|---|---|
+| Ember (red) | 44 min, 2.61 MB | 43 min, 2.56 MB |
+| Dust (orange) | 63 min, 2.64 MB | 64 min, 2.60 MB |
+| Acid (amber) | 69 min, 2.62 MB | 67 min, 2.60 MB |
+| Poison (green) | 66 min, 2.55 MB | 68 min, 2.51 MB |
+| Ice (blue) | 65 min, 2.60 MB | 66 min, 2.57 MB |
+| Haze (violet) | 42 min, 2.54 MB | 40 min, 2.51 MB |
+| Fog (ice) | 70 min, 2.55 MB | 67 min, 2.57 MB |
+| Smoke (black) | 50 min, 2.42 MB | 49 min, 2.42 MB |
+
+The sheet: `renders/2026-10-18/barkhorn/catalogue31/front-sheet.jpg` (the sixteen, cover on above, off below) and
+`finals31/sheet.jpg` (every view). Looked at side by side they read as one set: the same framing, light and paper
+falloff, each colour on a whisper of its own tint; Fog's white cloth holds its weave at -0.6 EV, Smoke's dark acrylic
+shows its lining and a surface on its side panel.
