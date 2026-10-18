@@ -71,6 +71,18 @@ So the finals use the pass-7 rig (commit e1f7c16, restored as `shot()`), unchang
 - the same eye height (0.8 m) and side (+18°);
 - an 85 mm lens at 6.4 m, the frame raised by `shift_y` 0.12, so the redwood rises past the horn and the ferns fill the foot.
 
+## The final
+
+- **Landscape:** `renders/2026-10-18/barkhorn/element31/poison.png`, 2400 × 1600 at 512 samples with the denoiser, 68 min on 4 CPU threads. Clean at full size: no noise, no fireflies.
+- **Portrait:** `poison-portrait.png`, 1600 × 2000 at 512 samples.
+- **A last blind critic pass on the landscape final: 6.5.** Its remaining notes:
+  - the horn is near black against a dark forest (median 5);
+  - the moss round the plinth reads as a mat;
+  - the mist is too thin for the shafts to read;
+  - the foreground duff is brighter than the cabinet's side;
+  - the fly agarics are hidden in the ferns;
+  - a branch in front of the plinth reads as staged.
+
 ## Where it stands, honestly
 
 The best blind score is **6.0** (pass 7; 6.5 in its duel), against a target of 8.5 that the coordinator has since set aside for every set. Nine passes, and a concept change at pass 4, have not taken it past that. What holds it back:
