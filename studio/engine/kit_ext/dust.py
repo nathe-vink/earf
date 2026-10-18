@@ -7,6 +7,9 @@
 - strata: a mesa of cut suede, irregular slabs stacked with an inset at each: `radius` (m), `height` (m), `layers`
   [colour, ...] from the foot up (the first is the talus, wider and low), `squash` (y over x), `seed`. Returns one object
   per layer (each its own colour).
+- tumbleweed: a loose ball of tangled raffia, as a model-maker winds one: `count` strands, each a soft curve wandering
+  through random points in a ball of `radius`, most near its shell so it reads hollow and airy; `strand` the strands'
+  radius, `seed`.
 """
 import math, random
 
@@ -94,3 +97,26 @@ def strata(bpy, name, p, kit):
         objs += kit.finish(bpy, f'{name}-{i}', bm, q, smooth=True)
         z += t * 0.995
     return objs
+
+
+def tumbleweed(bpy, name, p, kit):
+    R, n, sr = p.get('radius', 0.25), p.get('count', 90), p.get('strand', 0.0035)
+    rnd = random.Random(p.get('seed', 1))
+
+    def point():
+        while True:
+            v = Vector((rnd.uniform(-1, 1), rnd.uniform(-1, 1), rnd.uniform(-1, 1)))
+            if 0.05 < v.length <= 1.0:
+                break
+        r = R * (0.55 + 0.45 * rnd.random() ** 0.5)          # mostly toward the shell
+        return v.normalized() * r
+
+    bm = bmesh.new()
+    for _ in range(n):
+        a = point()
+        pts = [a]
+        for _ in range(rnd.randint(3, 5)):                   # each strand curls on round the ball
+            b = point()
+            pts.append((pts[-1] * 0.45 + b * 0.55).normalized() * b.length)
+        kit._tube(bm, [list(q) for q in pts], sr * rnd.uniform(0.7, 1.3), 1.0, 0.0, 6, 6)
+    return kit.finish(bpy, name, bm, p)

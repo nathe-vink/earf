@@ -148,20 +148,21 @@
     "module": "dust",
     "fn": "strata",
     "position": [
-     -1.5,
-     5.6,
+     -2.6,
+     5.5,
      0.0
     ],
-    "radius": 1.15,
-    "height": 0.72,
+    "radius": 1.9,
+    "height": 1.05,
     "layers": [
      "#C8714A",
      "#A8482E",
      "#B5563A",
-     "#BF5F3E"
+     "#BF5F3E",
+     "#A94B31"
     ],
     "seed": 1,
-    "squash": 0.45,
+    "squash": 0.38,
     "ease": 0.004
    },
    {
@@ -197,20 +198,95 @@
     "module": "dust",
     "fn": "strata",
     "position": [
-     4.0,
-     5.4,
+     4.1,
+     5.9,
      0.0
     ],
-    "radius": 0.8,
-    "height": 0.5,
+    "radius": 1.15,
+    "height": 0.85,
     "layers": [
      "#C86B45",
      "#A8482E",
-     "#BF5F3E"
+     "#BF5F3E",
+     "#B0502F"
     ],
     "seed": 3,
-    "squash": 0.5,
+    "squash": 0.4,
     "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "suede",
+    "color": "#D08058",
+    "module": "dust",
+    "fn": "strata",
+    "position": [
+     -0.2,
+     5.85,
+     0.0
+    ],
+    "radius": 0.9,
+    "height": 0.55,
+    "layers": [
+     "#D08058",
+     "#C46A47",
+     "#BE6142"
+    ],
+    "seed": 4,
+    "squash": 0.45,
+    "ease": 0.004
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "material": "paper",
+    "color": "#C79A64",
+    "module": "dust",
+    "fn": "tumbleweed",
+    "radius": 0.28,
+    "count": 48,
+    "strand": 0.0026,
+    "seed": 5,
+    "position": [
+     -1.25,
+     0.5,
+     0.31500000000000006
+    ],
+    "rotate": [
+     12,
+     30,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "puffs",
+    "material": "wool",
+    "color": "#E8955A",
+    "puffs": [
+     [
+      -0.322,
+      0.098,
+      0.11760000000000001
+     ],
+     [
+      -0.49000000000000005,
+      0.084,
+      0.084
+     ],
+     [
+      -0.6160000000000001,
+      0.06160000000000001,
+      0.05600000000000001
+     ]
+    ],
+    "depth": 0.8,
+    "position": [
+     -1.25,
+     0.55,
+     0.0
+    ]
    },
    {
     "kind": "kit",
@@ -1062,16 +1138,16 @@
  ],
  "camera": {
   "position": [
-   1.1567,
-   -6.3091,
-   3.6452
+   0.667,
+   -5.3555,
+   3.1689
   ],
   "target": [
-   0.42,
-   0.7,
-   1.08
+   -0.17,
+   0.6,
+   0.98
   ],
-  "lens_mm": 95,
+  "lens_mm": 72,
   "level": false,
   "fstop": 2.8,
   "miniature": 11,

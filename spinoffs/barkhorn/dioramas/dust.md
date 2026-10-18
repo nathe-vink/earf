@@ -2,6 +2,12 @@
 
 The set is `dust.py`; the frames are `studio/shots/barkhorn/diorama31/dust.json` and `dust-portrait.json`.
 
+## The owner, verbatim (relayed by the coordinator during the rounds)
+
+- "Dust should have something like a tumbleweed too, with the big flat desert plateaus in the back."
+- "It's important to stay on the theme of earth and placing the speakers in their respective atmospheres, though the
+  yeti and witch ideas are fun, subtle nods."
+
 ## Concept
 
 A desert at golden hour, built from suede, corduroy and sand. A big low paper sun, glowing in rings, sets behind a
@@ -9,7 +15,9 @@ slim butte of cut suede on a paper sky. Corduroy dunes roll between, their ribs 
 is sand. The real sun is low behind the speaker's right and in frame, so the orange acrylic glows amber at its edges and
 every piece throws a long shadow to the left. Beside the speaker is the icon in wool felt: three puffs at the fat end of
 a flat wedge thinning along the ground, with a line of roadrunner footprints running out of its point to the right.
-Something just went past. Motes hang in the light, and a little sage corduroy saguaro is the one accent.
+Something just went past (a nod, not the subject). To the speaker's left a raffia tumbleweed is mid-bounce, kicking up a
+little dust. Behind it all, broad flat-topped plateaus of cut suede recede into the warm haze. Motes hang in the light,
+and a little sage corduroy saguaro is the one accent.
 
 ## Rounds
 
@@ -45,10 +53,22 @@ Proofs at `--scale 0.3 --samples 24` (about 45 s each, 30 s before the haze) unl
 15. **Haze only behind the speaker** (its box starts at y = 0.9, thicker at 0.012): the hero is clear and saturated,
     while the distance keeps its air. Accepted.
 
+After the owner's note (a tumbleweed and big flat plateaus in the back):
+
+16. **A raffia tumbleweed** (`tumbleweed` in `kit_ext/dust.py`: about fifty soft strands wandering through a hollow
+    ball) mid-bounce to the speaker's left, three wool puffs of dust behind it. **Broad plateaus** replace the long low
+    mesa: a wide one on the left, a smaller one far back, one to the right, with the slim butte in front of the sun.
+    At 110 strands the tumbleweed read as a sponge.
+17. (mid) **48 thinner strands:** now it reads as raffia. It sat a little far behind the focus.
+18. to 20. **Placing it:** nearer it slid to the frame edge, then it touched the speaker's silhouette. It settled at
+    (-1.25, 0.5), with a clear gap to the left of the speaker. The right plateau was pulled in from the frame edge.
+
 Portrait: `portrait_of` at a 55 mm lens left the speaker at 18 % of the height (the 4:5 frame sees much taller). Rebuilt
 at 95 mm from azimuth 6, 7.5 m: the speaker at about 38 %, the big sun above it, the butte to its right. The longer lens
 gives a shallower field, so the background melts more than in the landscape. The footprints fall outside this frame;
-the cloud carries the icon.
+the cloud carries the icon. After the owner's note it was reframed again so that the
+tumbleweed is in it too: a 72 mm lens from azimuth 8 at 6.4 m, the speaker centred at about 33 % of the height, the
+tumbleweed to its left and the cloud to its right.
 
 ## Choices and why
 

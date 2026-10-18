@@ -53,6 +53,15 @@ def strata(x, y, r, h, layers, seed, squash=0.7):
                layers=layers, seed=seed, squash=squash, ease=0.004)
 
 
+def tumbleweed(x, y, r):
+    """A raffia tumbleweed mid-roll, lifted a hair off the sand on its bounce, a little dust kicked up behind it."""
+    out = [kit('ext', 'paper', '#C79A64', module='dust', fn='tumbleweed', radius=r, count=48, strand=0.0026, seed=5,
+               position=[x, y, r + 0.035], rotate=[12, 30, 0])]
+    out.append(kit('puffs', 'wool', PUFF, puffs=[[-r * 1.15, r * 0.35, r * 0.42], [-r * 1.75, r * 0.3, r * 0.3],
+                                                 [-r * 2.2, r * 0.22, r * 0.2]], depth=0.8, position=[x, y + 0.05, 0.0]))
+    return out
+
+
 def cactus(x, y, h, color='#8E9A6C'):
     """The one accent: a little saguaro of sage corduroy, its ribs running up, two arms."""
     r = h * 0.11
@@ -123,9 +132,12 @@ def props():
     out = [kit('box', 'sand', SAND, tint2=SAND2, size=[16.0, 14.0, 0.04], position=[0.0, -2.0, -0.04])]
     out += sky()
     # the mesas, far: rust and terracotta strata, the sun sinking behind the left one
-    out += [strata(-1.5, 5.6, 1.15, 0.72, ['#C8714A', RUST, '#B5563A', TERRA], 1, squash=0.45),
+    # the plateaus: broad, flat-topped, sheer-sided, Monument Valley in cut suede, receding into the warm haze
+    out += [strata(-2.6, 5.5, 1.9, 1.05, ['#C8714A', RUST, '#B5563A', TERRA, '#A94B31'], 1, squash=0.38),
             strata(1.75, 5.0, 0.42, 1.15, ['#CD7A50', TERRA, RUST, '#C06041', RUST], 2, squash=0.85),
-            strata(4.0, 5.4, 0.8, 0.5, ['#C86B45', RUST, TERRA], 3, squash=0.5)]
+            strata(4.1, 5.9, 1.15, 0.85, ['#C86B45', RUST, TERRA, '#B0502F'], 3, squash=0.4),
+            strata(-0.2, 5.85, 0.9, 0.55, ['#D08058', '#C46A47', '#BE6142'], 4, squash=0.45)]
+    out += tumbleweed(-1.25, 0.5, 0.28)
     out += cactus(2.55, 2.5, 0.7)
     out += [kit('ext', 'corduroy', '#D68650', module='dust', fn='dunes', size=[14.0, 3.4], position=[0.5, 2.9, 0.0],
                 ridges=[[-0.9, 0.32, 0.55], [0.1, 0.42, 0.6], [1.0, 0.5, 0.6]], seed=4, rib='Y', grain=2.0),
@@ -164,5 +176,5 @@ def shot():
 def portrait():
     """The 4:5 frame: the same set from the same side, nearer the speaker's axis, the sun above it and the streak and
     footprints running out to the lower right."""
-    return portrait_of(shot(), **tilt_shift(elevation=20, azimuth=6, distance=7.5, lens=95, target=(0.42, 0.7, 1.08),
+    return portrait_of(shot(), **tilt_shift(elevation=20, azimuth=8, distance=6.4, lens=72, target=(-0.17, 0.6, 0.98),
                                              focus=(0.0, -0.15, 0.7), miniature=11))
