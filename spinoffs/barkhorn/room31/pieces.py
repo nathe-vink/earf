@@ -106,10 +106,10 @@ def credenza(bpy, name, p, kit):
     """A walnut credenza: `position` [x, y] its centre on the floor (back to the wall), `size` [w, d, h], `doors` its
     door count (bookmatched leaves, 3 mm reveals), on a black plinth `plinth` [h, inset]; `texture` the veneer."""
     x, y = p['position'][:2]; w, d, h = p.get('size', [1.6, 0.45, 0.56])
-    ph, pin = p.get('plinth', [0.09, 0.05])
+    ph, pin = p.get('plinth', [0.09, 0.03])
     n = p.get('doors', 3); gap = p.get('gap', 0.003); top_t = p.get('top', 0.025); side_t = 0.02
     wal = walnut(bpy, p.get('texture', 'walnut_veneer'), p.get('lift', 1.25), res=p.get('res', '4k'))
-    black = _plain(bpy, name + '-plinth', '#141210', rough=0.6, spec=0.3)
+    black = _plain(bpy, name + '-plinth', p.get('plinth_color', '#2B1D14'), rough=0.6, spec=0.3)
     shadow = _plain(bpy, name + '-inner', '#2A1A10', rough=0.8, spec=0.2)
     objs = []
     x0, x1 = x - w / 2, x + w / 2; yb = y + d / 2; yf = y - d / 2
@@ -181,6 +181,11 @@ def rug(bpy, name, p, kit):
               displace=p.get('displace', 0.004), tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0),
               bump=p.get('bump', 1.0), coords='object', name=name + '-mat')
     b = _principled(m)
+    if p.get('value', 1.0) != 1.0:                             # the wool's own value (COLOR tint keeps the scan's)
+        nt = m.node_tree; lk = next((l for l in nt.links if l.to_socket == b.inputs['Base Color']), None)
+        mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+        mul.inputs['Factor'].default_value = 1.0; v = p['value']; mul.inputs['B'].default_value = (v, v, v, 1.0)
+        nt.links.new(lk.from_socket, mul.inputs['A']); nt.links.new(mul.outputs['Result'], b.inputs['Base Color'])
     b.inputs['Sheen Weight'].default_value = p.get('sheen', 0.6); b.inputs['Sheen Roughness'].default_value = 0.5
     b.inputs['Specular IOR Level'].default_value = 0.15
     ob = _obj(bpy, name, bm, [m], smooth=True)
@@ -361,3 +366,37 @@ def plaster(bpy, name, p, kit):
                 ob.data.materials.append(m); n += 1
     print(f'room31 plaster: {n} wall slots')
     return []
+
+
+# --- a scanned model, recoloured ----------------------------------------------------------------------------------------
+def recolour(bpy, name, p, kit):
+    """A scanned model (`model`, a Poly Haven id) placed as the kit's `asset` places it, with the base colour of its
+    materials whose names contain `match` multiplied toward `color` (a black leather re-dyed cognac, say) by `mix`, and
+    their roughness scaled by `rough_mul`."""
+    A = _assets()
+    root = A.place(bpy, p['model'], p.get('res', '2k'), tuple(p.get('position', [0, 0, 0])), tuple(p.get('rotate', [0, 0, 0])),
+                   p.get('scale', 1.0), name)
+    seen = set()
+    for o in [root] + list(root.children_recursive):
+        if o.type != 'MESH':
+            continue
+        for m in o.data.materials:
+            if not m or m.name in seen or not any(k in m.name.lower() for k in p.get('match', ['leather'])):
+                continue
+            seen.add(m.name)
+            nt = m.node_tree; b = _principled(m)
+            lk = next((l for l in nt.links if l.to_socket == b.inputs['Base Color']), None)
+            mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = p.get('blend', 'COLOR')
+            mx.inputs['Factor'].default_value = p.get('mix', 1.0); mx.inputs['B'].default_value = _lin(p['color'])
+            if lk:
+                nt.links.new(lk.from_socket, mx.inputs['A'])
+            else:
+                mx.inputs['A'].default_value = b.inputs['Base Color'].default_value
+            out = mx.outputs['Result']
+            if p.get('value', 1.0) != 1.0:
+                mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+                mul.inputs['Factor'].default_value = 1.0; v = p['value']; mul.inputs['B'].default_value = (v, v, v, 1.0)
+                nt.links.new(out, mul.inputs['A']); out = mul.outputs['Result']
+            nt.links.new(out, b.inputs['Base Color'])
+    print(f'room31 recolour {p["model"]}: {sorted(seen)}')
+    return [root]

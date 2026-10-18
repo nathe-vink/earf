@@ -32,7 +32,7 @@
     {
      "flavour": "fog",
      "position": [
-      -0.3,
+      -0.15,
       0.708,
       0.56
      ],
@@ -68,7 +68,7 @@
   "windows": [
    {
     "wall": "left",
-    "along": 2.55,
+    "along": 2.75,
     "sill": 0.04,
     "size": [
      1.45,
@@ -82,7 +82,7 @@
    },
    {
     "wall": "left",
-    "along": 0.95,
+    "along": 1.15,
     "sill": 0.04,
     "size": [
      1.45,
@@ -96,7 +96,7 @@
    },
    {
     "wall": "left",
-    "along": -0.65,
+    "along": -0.45,
     "sill": 0.04,
     "size": [
      1.45,
@@ -144,7 +144,8 @@
     "color": "#E8E2D8",
     "tint_mix": 0.85,
     "value": 1.3,
-    "bump": 1.0
+    "bump": 0.45,
+    "tex_scale": 2.0
    },
    {
     "kind": "kit",
@@ -171,18 +172,19 @@
     "fn": "rug",
     "position": [
      0.0,
-     -1.55
+     -1.2
     ],
     "size": [
-     3.0,
-     2.3
+     2.6,
+     2.0
     ],
-    "pile": 0.018,
+    "pile": 0.025,
     "texture": "curly_teddy_natural",
-    "tint": "#CFC2A8",
-    "tint_mix": 0.7,
+    "tint": "#9C8E78",
+    "tint_mix": 1.0,
     "displace": 0.006,
-    "res": "2k"
+    "res": "4k",
+    "value": 0.62
    },
    {
     "kind": "kit",
@@ -362,7 +364,7 @@
     "path": "spinoffs/barkhorn/room31/pieces.py",
     "fn": "books",
     "position": [
-     0.42,
+     0.35,
      0.71,
      0.56
     ],
@@ -374,8 +376,8 @@
       0.032,
       "#3E4A57",
       "#D9D2C2",
-      "IRVING PENN",
-      "PHAIDON"
+      "ROOMS IN LATE LIGHT",
+      "HALDEN"
      ],
      [
       0.27,
@@ -383,8 +385,8 @@
       0.026,
       "#C9BBA2",
       "#3A332C",
-      "Charlotte Perriand",
-      "TASCHEN"
+      "On Listening",
+      "NORTH PRESS"
      ],
      [
       0.24,
@@ -393,7 +395,7 @@
       "#7A3A2C",
       "#E8DCC8",
       "The Shape of Sound",
-      "MIT"
+      "ESSAYS"
      ]
     ]
    },
@@ -402,7 +404,7 @@
     "shape": "asset",
     "model": "ceramic_vase_02",
     "position": [
-     0.6,
+     0.58,
      0.75,
      0.56
     ],
@@ -415,19 +417,53 @@
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
     "model": "modern_arm_chair_01",
     "position": [
-     1.85,
-     -1.05,
+     2.35,
+     -1.6,
      0.0
     ],
     "rotate": [
      0,
      0,
-     200.0
+     300.0
     ],
-    "scale": 1.0
+    "match": [
+     "pillow"
+    ],
+    "color": "#8A7460",
+    "blend": "MIX",
+    "mix": 0.8
+   },
+   {
+    "kind": "kit",
+    "shape": "drape",
+    "position": [
+     -1.9599999999999997,
+     0.6199999999999999,
+     2.84
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "size": [
+     0.55,
+     2.82
+    ],
+    "folds": 9,
+    "amplitude": 0.035,
+    "noise": 0.35,
+    "thickness": 0.0,
+    "material": "organza",
+    "color": "#F1ECE2",
+    "alpha": 0.55,
+    "seed": 5,
+    "res": 120
    },
    {
     "kind": "kit",
@@ -435,8 +471,8 @@
     "path": "spinoffs/barkhorn/room31/pieces.py",
     "fn": "exterior",
     "hdri": "autumn_forest_04",
-    "rotation_deg": 0.0,
-    "strength": 2.2,
+    "rotation_deg": 40.0,
+    "strength": 1.6,
     "res": "8k",
     "centre": [
      -3.05,
@@ -444,20 +480,20 @@
      1.4
     ],
     "radius": 60.0,
-    "blur": 0.004
+    "blur": 0.0015
    }
   ]
  },
  "sun": {
-  "azimuth_deg": -58.0,
-  "elevation_deg": 18.0,
-  "irradiance": 14.0,
+  "azimuth_deg": -62.0,
+  "elevation_deg": 14.0,
+  "irradiance": 30.0,
   "angle_deg": 0.6,
-  "color": "#FFE6C4"
+  "color": "#FFD6A0"
  },
  "sky": {
   "kind": "physical",
-  "strength": 0.6,
+  "strength": 0.45,
   "air": 1.0,
   "dust": 1.5
  },
@@ -478,17 +514,55 @@
     2.4
    ],
    "position": [
-    3.7,
-    -1.2,
-    1.4
+    3.2,
+    -2.2,
+    1.6
    ],
    "target": [
     0.0,
     0.2,
     0.9
    ],
-   "irradiance": 0.6,
-   "color": "#EEF2F8"
+   "irradiance": 0.45,
+   "color": "#DCE6F4"
+  },
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.2
+   ],
+   "position": [
+    0.0,
+    -4.3,
+    1.5
+   ],
+   "target": [
+    0.0,
+    0.3,
+    1.15
+   ],
+   "irradiance": 0.2,
+   "color": "#FFF0DE"
+  },
+  "floorbounce": {
+   "type": "area",
+   "size_m": [
+    0.8,
+    0.3
+   ],
+   "position": [
+    0.0,
+    -1.0,
+    0.1
+   ],
+   "target": [
+    0.0,
+    0.7,
+    0.05
+   ],
+   "irradiance": 0.15,
+   "color": "#FFE8CC"
   }
  },
  "render": {
@@ -498,9 +572,9 @@
   "clamp": 10,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": -0.2,
+  "exposure": -0.55,
   "white_balance_k": 5600,
-  "white_balance_tint": 4.0
+  "white_balance_tint": 0.0
  },
  "size": [
   1600,
@@ -509,15 +583,15 @@
  "camera": {
   "position": [
    0.0,
-   -5.9,
+   -3.6,
    1.05
   ],
   "target": [
    0.0,
    0.3,
-   1.05
+   1.25
   ],
-  "lens_mm": 40,
+  "lens_mm": 35,
   "level": true,
   "fstop": 5.6,
   "focus": [

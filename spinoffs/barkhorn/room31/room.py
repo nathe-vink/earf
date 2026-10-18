@@ -68,30 +68,35 @@ def room_set(v):
         return round(y - cy, 3)
     # a run of tall French windows down the left wall, piers between, glass to 15 cm under the ceiling
     wins = [{'wall': 'left', 'along': along(yc), 'sill': 0.04, 'size': [1.45, 2.71], 'mullions': [2, 1], 'frame': '#2B2926'}
-            for yc in v.get('win_y', (0.0, -1.6, -3.2))]
+            for yc in v.get('win_y', (0.2, -1.4, -3.0))]
     props = [
         ext('floor', rect=[LEFT, BACK - DEPTH, RIGHT, BACK], texture=v['floor'], res='4k', rotate_deg=v['floor_rot'],
             rough_mul=v.get('floor_rough', 1.0), coat=v.get('floor_coat', 0.35), coat_rough=0.35, value=v.get('floor_value', 1.0),
             offset=[0.37, 0.11, 0.0]),
         ext('plaster', texture=v['plaster'], res='4k', color=v['wall'], tint_mix=v.get('wall_tint', 0.85),
-            value=v.get('wall_value', 1.0), bump=v.get('wall_bump', 1.0)),
+            value=v.get('wall_value', 1.0), bump=v.get('wall_bump', 1.0), tex_scale=v.get('wall_tex_scale')),
         ext('credenza', position=[CAB['x'], BACK - CAB['d'] / 2 - 0.012], size=[CAB['w'], CAB['d'], CAB['h']], doors=3,
             texture=v.get('veneer', 'walnut_veneer'), lift=v.get('veneer_lift', 1.3)),
-        ext('rug', position=[0.0, -1.55], size=[3.0, 2.3], pile=0.018, texture=v.get('rug', 'curly_teddy_natural'),
-            tint=v.get('rug_tint', '#E4DCCB'), tint_mix=v.get('rug_tint_mix', 0.5), displace=0.006, res='2k'),
+        ext('rug', position=v['rug_pos'], size=v['rug_size'], pile=v.get('rug_pile', 0.018), texture=v.get('rug', 'curly_teddy_natural'),
+            tint=v.get('rug_tint', '#E4DCCB'), tint_mix=v.get('rug_tint_mix', 0.5), displace=v.get('rug_displace', 0.006), res=v.get('rug_res', '2k'), value=v.get('rug_value', 1.0)),
         ext('socket', position=[-v['socket_x'], BACK, 0.30]),
         ext('socket', position=[v['socket_x'], BACK, 0.30]),
         lead(-1, -v['socket_x']), lead(1, v['socket_x']),
-        ext('books', position=[0.42, BACK - 0.24, CAB['h']], seed=4, books=[
+        ext('books', position=[v.get('books_x', 0.35), BACK - 0.24, CAB['h']], seed=4, books=[
             # invented titles and imprints (no real books or publishers on a campaign prop)
             [0.31, 0.24, 0.032, '#3E4A57', '#D9D2C2', 'ROOMS IN LATE LIGHT', 'HALDEN'],
             [0.27, 0.21, 0.026, '#C9BBA2', '#3A332C', 'On Listening', 'NORTH PRESS'],
             [0.24, 0.19, 0.022, '#7A3A2C', '#E8DCC8', 'The Shape of Sound', 'ESSAYS'],
         ]),
-        kit('asset', model=v.get('vase', 'ceramic_vase_02'), position=[0.60, BACK - 0.20, CAB['h']], rotate=[0, 0, 20],
+        kit('asset', model=v.get('vase', 'ceramic_vase_02'), position=[v.get('vase_x', 0.58), BACK - 0.20, CAB['h']], rotate=[0, 0, 20],
             scale=v.get('vase_scale', 1.0)),
-        kit('asset', model=v.get('chair', 'modern_arm_chair_01'), position=v['chair_pos'], rotate=[0, 0, v['chair_rot']],
-            scale=1.0),
+        # the lounge chair, its black leather re-dyed cognac so it sits with the walnut and not against the pair
+        ext('recolour', model=v.get('chair', 'modern_arm_chair_01'), position=v['chair_pos'], rotate=[0, 0, v['chair_rot']],
+            match=['pillow'], color=v.get('leather', '#7A4A2C'), blend='MIX', mix=v.get('leather_mix', 0.8)),
+        # a linen sheer, half drawn, at the back of the glazing: the sun comes through it
+        kit('drape', position=[LEFT + 0.09, BACK - 0.33, HEIGHT - 0.06], rotate=[0, 0, 90], size=[0.55, HEIGHT - 0.08],
+            folds=9, amplitude=0.035, noise=0.35, thickness=0.0, material='organza', color='#F1ECE2',
+            alpha=v.get('sheer_alpha', 0.55), seed=5, res=120),
         ext('exterior', hdri=v['hdri'], rotation_deg=v['hdri_rot'], strength=v['ext_strength'], res='8k',
             centre=[LEFT - 1.0, -1.0, 1.4], radius=60.0, blur=v.get('ext_blur', 0.004)),
     ]
@@ -101,12 +106,16 @@ def room_set(v):
 
 
 DEFAULT = dict(
-    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, socket_x=1.78,
-    veneer_lift=0.85, rug_tint='#CFC2A8', rug_tint_mix=0.7,
-    chair='modern_arm_chair_01', chair_pos=[1.85, -1.05, 0.0], chair_rot=200.0,
-    hdri='autumn_forest_04', hdri_rot=0.0, ext_strength=2.2,
-    sun=dict(azimuth_deg=-58.0, elevation_deg=18.0, irradiance=14.0, angle_deg=0.6, color='#FFE6C4'),
-    sky_strength=0.6, fill=0.6, exposure=-0.2,
+    floor='laminate_floor_02', floor_rot=90.0, plaster='beige_wall_001', wall='#E8E2D8', wall_value=1.3, wall_bump=0.45,
+    wall_tex_scale=2.0, socket_x=1.78,
+    veneer_lift=0.85, rug_tint='#9C8E78', rug_tint_mix=1.0, rug_pos=[0.0, -1.2], rug_size=[2.6, 2.0], rug_displace=0.006,
+    rug_pile=0.025, rug_res='4k', rug_value=0.62,
+    chair='modern_arm_chair_01', chair_pos=[2.35, -1.6, 0.0], chair_rot=300.0, leather='#8A7460',
+    hdri='autumn_forest_04', hdri_rot=40.0, ext_strength=1.6, ext_blur=0.0015,
+    # the sun low from the front-left: it crosses both cabinets and lays their shadows, green where light came through
+    # the horns, on the plaster behind; warm sun, cool skylight in the shade
+    sun=dict(azimuth_deg=-62.0, elevation_deg=14.0, irradiance=30.0, angle_deg=0.6, color='#FFD6A0'),
+    sky_strength=0.45, fill=0.45, fill_color='#DCE6F4', bounce=0.2, floor_bounce=0.15, exposure=-0.55, wb_tint=0.0,
 )
 
 
@@ -119,7 +128,7 @@ def shot(v=None, portrait=False):
              'instances': [{'flavour': 'eucalyptus-y2k-green', 'position': [-SPK_X, SPK_Y, 0.0], 'rotate_z': TOE},
                            {'flavour': 'eucalyptus-y2k-green', 'position': [SPK_X, SPK_Y, 0.0], 'rotate_z': -TOE}]},
             {'def': 'studio/products/barkhorn-turntable.json', 'flavour': v.get('tt_flavour', 'fog'),
-             'instances': [{'flavour': v.get('tt_flavour', 'fog'), 'position': [-0.30, BACK - 0.012 - CAB['d'] / 2 - 0.01, CAB['h']],
+             'instances': [{'flavour': v.get('tt_flavour', 'fog'), 'position': [v.get('tt_x', -0.15), BACK - 0.012 - CAB['d'] / 2 - 0.01, CAB['h']],
                             'rotate_z': 0.0}]},
         ],
         'set': room_set(v),
@@ -128,8 +137,15 @@ def shot(v=None, portrait=False):
         'lights': {
             'key': {'off': True}, 'fill': {'off': True}, 'wash': {'off': True},
             # the sun-free window off to the right, out of frame: the shade side's soft light
-            'north': {'type': 'area', 'size_m': [2.2, 2.4], 'position': [RIGHT - 0.05, -1.2, 1.4],
-                      'target': [0.0, 0.2, 0.9], 'irradiance': v['fill'], 'color': '#EEF2F8'},
+            'north': {'type': 'area', 'size_m': [2.2, 2.4], 'position': v.get('fill_pos', [RIGHT - 0.55, -2.2, 1.6]),
+                      'target': [0.0, 0.2, 0.9], 'irradiance': v['fill'], 'color': v.get('fill_color', '#EEF2F8')},
+            # a warm bounce card beside the camera, as an interiors photographer would set one, so the horns' throats
+            # read as resin and not as holes
+            'bounce': {'type': 'area', 'size_m': [1.6, 1.2], 'position': [0.0, SPK_Y - 4.6, 1.5],
+                       'target': [0.0, SPK_Y, 1.15], 'irradiance': v.get('bounce', 0.35), 'color': '#FFF0DE'},
+            # light the floor bounces up under the credenza (a real room's toe-kick is never a black hole)
+            'floorbounce': {'type': 'area', 'size_m': [0.8, 0.3], 'position': [0.0, -1.0, 0.1], 'target': [0.0, 0.7, 0.05],
+                            'irradiance': v.get('floor_bounce', 0.0), 'color': '#FFE8CC'},
         },
         'render': {'samples': 128, 'adaptive': 0.02, 'denoise': True, 'clamp': 10, 'bounces': 12,
                    'view': 'Khronos PBR Neutral', 'exposure': v['exposure'], 'white_balance_k': v.get('wb', 5600),
@@ -141,7 +157,9 @@ def shot(v=None, portrait=False):
                        'fstop': 5.6, 'focus': [0.0, SPK_Y - 0.21, 0.7]}
     else:
         s['size'] = [1600, 2000]
-        s['camera'] = {'position': [0.0, SPK_Y - 6.2, 1.05], 'target': [0.0, SPK_Y, 1.05], 'lens_mm': 40, 'level': True,
+        # for phones: the pair across the frame, the wall above for the heading, the floor and rug below
+        s['camera'] = {'position': [0.0, SPK_Y - v.get('port_d', 3.9), 1.05], 'target': [0.0, SPK_Y, v.get('port_tz', 1.25)],
+                       'lens_mm': v.get('port_lens', 35), 'level': True,
                        'fstop': 5.6, 'focus': [0.0, SPK_Y - 0.21, 0.7]}
     return s
 
