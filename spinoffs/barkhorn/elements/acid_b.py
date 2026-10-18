@@ -37,7 +37,10 @@ def props(cam):
             displace=0.0, relief=False, flat=[0.0, 0.0, 26.0], res='2k', tex_scale=3.0, rough_mul=0.5,
             darken=0.72, film=0.4, film_rough=0.18, tint='#1E1D17', tint_mix=0.7, lumps=[[2.5, 0.3, 'ridged'], [7.0, 0.4, 'billow'], [25.0, 0.5]], seed=3),
         # standing water in the hollows, ringed by the drops
-        ext('puddle', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], z=-0.11, ring=0.2, ripple=3.0, keep=1.0, roughness=0.02, big_rings=1.0, ripple_m=0.0012),
+        ext('puddle', size=[40.0, 44.0], position=[0.0, 14.0, 0.0], z=-0.11, ring=0.2, ripple=3.0, keep=1.0, roughness=0.02, big_rings=1.0, ripple_m=0.0012,
+            # near the camera, the rain's own impacts: rings at every age, a few still splashing, only where there is water
+            impacts={'area': [-2.6, -7.2, 2.6, 1.2], 'density': 90, 'px_m': 0.0025, 'r_max': 0.08, 'amp_m': 0.0035,
+                     'sharp': 3.0, 'chatter_m': 0.0001, 'margin_m': 0.02, 'splash_age': 0.08}, seed=9),
         # black boulders: one out of focus close at the left, a couple behind on the field
         ext('rock', model='rock_09', position=[-2.5, -2.4, -0.05], rotate=[0, 0, 40], scale=1.1, darken=0.5,
             film_rough=0.15),
@@ -67,15 +70,11 @@ def props(cam):
             thin_below=[1.0, 0.7],
             avoid=[[0.0, 0.0, 0.4]], seed=3),
         # a few drops close to the lens, far out of focus
-        ext('rain', camera=cam, count=30, near=1.5, far=4.0, length=[0.04, 0.08], radius=[0.0006, 0.001],
-            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.15, 0.35], scatter=0.7, rough=0.25, seed=13),
+        ext('rain', camera=cam, count=60, near=2.5, far=5.0, length=[0.06, 0.12], radius=[0.0005, 0.0008],
+            lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.08, 0.2], scatter=0.7, rough=0.25, seed=13),
         # and the curtain beyond, too fine to count
-        ext('rain', camera=cam, count=300000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
+        ext('rain', camera=cam, count=200000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.08, scatter=0.9, rough=0.25, clear=0.1, seed=23),
-        ext('splashes', area=[-3.5, -8.0, 4.0, 4.0], z=-0.11, count=900, radius=[0.002, 0.012], opacity=0.1,
-            avoid=[[0.0, 0.0, 3.0]], seed=15),
-        ext('splashes', area=[-2.0, -3.5, 2.5, 1.5], z=-0.11, count=700, radius=[0.002, 0.02], opacity=0.15,
-            avoid=[[0.0, 0.0, 0.45]], seed=5),
     ]
 
 
