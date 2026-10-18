@@ -293,7 +293,7 @@ def make_images(sources=None):
 
 def image_meta():
     """The pictures as they stand in site/img: each speaker's views (src, w, h), the inside shot, and each card's panel
-    colour (the photograph's corner)."""
+    colour (the photograph's foot, where the panel meets it)."""
     size = lambda n: Image.open(os.path.join(IMG, n)).size
 
     def ground(n, box=None):
@@ -331,7 +331,7 @@ def image_meta():
         w, h = size(f'turn-{k}.jpg')
         views['turn'] = dict(src=f'img/turn-{k}.jpg', w=w // 6, h=h // 4, **ground(f'turn-{k}.jpg', (0, 0, w // 6, h // 4)))
         meta[k] = views
-        corner = np.asarray(Image.open(os.path.join(IMG, f'{k}-on.jpg')).convert('RGB'))[3:19, 3:19].reshape(-1, 3).mean(0)
+        corner = np.asarray(Image.open(os.path.join(IMG, f'{k}-on.jpg')).convert('RGB'))[-18:-3].reshape(-1, 3).mean(0)   # where the photograph meets its panel
         panel[k] = '#%02X%02X%02X' % tuple(int(x) for x in corner)
     return meta, panel
 
