@@ -178,7 +178,7 @@ after two passes in a row gaining under half a point, then duel the best two bli
 | hero | passes (blind scores) | final | the duel |
 |---|---|---|---|
 | Cumulus | 5.0 (morning sun), 5.5, 5.5, 5.5 | `hero-turntable.png` (pass 3) | pass 3 beat pass 4, 6.0 to 5.0 |
-| Bell | 5.0, 5.5, 5.5, 6.0, LAMP_P5 | `hero-lamp.png` (LAMP_FINAL) | LAMP_DUEL |
+| Bell | 5.0, 5.5, 5.5, 6.0, 5.0 | `hero-lamp.png` (pass 4) | pass 4 beat pass 5, 6.0 to 5.0 |
 
 Honestly: neither is at the bar the owner set. The critics' last notes, for whoever takes them on: the wall still
 outshines Cumulus and the grade is one warm red; the lower plinth crushes; the record reads as smoked glass (a vinyl
