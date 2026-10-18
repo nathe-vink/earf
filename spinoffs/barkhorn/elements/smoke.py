@@ -37,7 +37,7 @@ def plume(n=10):
     for k in range(n):
         t = k / (n - 1)
         w = 0.7 + 3.2 * t ** 1.3
-        out.append(smoke((PILE[0] - 2.6 * t ** 1.6, PILE[1] - 0.4 * t, 0.1 + 0.95 * k), (w, w, 2.2), 7.0 * 0.8 ** k,
+        out.append(smoke((PILE[0] - 2.6 * t ** 1.6, PILE[1] - 0.4 * t, 0.1 + 0.95 * k), (w, w, 2.2), 12.0 * 0.7 ** k,
                          11 + k, scale=0.35 + 0.5 * t, cut=0.42 + 0.12 * t, soft=0.22, anisotropy=0.45,
                          fade=[0.42, 0.42, 0.4], floor=0.2 * (1 - t), rise=2.2 - 0.8 * t, color='#A9A6A1',
                          detail_scale=0.12 + 0.1 * t, detail_weight=0.35 + 0.25 * t))
@@ -88,7 +88,7 @@ def shot():
                     res='2k', tint='#4A3626', tint_mix=0.3),
              scatter(['dry_branches_medium_01'], 5, [-5.0, 4.0, 7.0, 12.0], avoid=[(0.0, 0.0, 2.5)], seed=4, res='1k', z=-0.015),
              # the smoke hangs between the trunks; beyond it the photographed wood shows through the mist
-             smoke((0.5, 7.5, 0.0), (30.0, 19.0, 12.0), 0.09, 1, scale=4.0, cut=0.4, soft=0.3, anisotropy=0.85,
+             smoke((0.5, 7.5, 0.0), (30.0, 19.0, 12.0), 0.04, 1, scale=4.0, cut=0.4, soft=0.3, anisotropy=0.85,
                    fade=[0.12, 0.33, 0.4], floor=0.06, ground=0.18, ground_h=1.6),
              # the crowns overhead, out of frame: the sun comes down through their gaps in shafts
              piece('ext', module='smoke_el', fn='canopy', size=[120.0, 200.0], z=13.0, position=[0.0, 70.0], scale=1.4,
@@ -98,7 +98,6 @@ def shot():
     props += trees()
     # the burn pile, 3 m behind and right of the speaker, and its plume: a dense column that leans off toward the left
     props += [piece('ext', module='smoke_el', fn='burnpile', position=[PILE[0], PILE[1], 0.0], radius=0.9, seed=3, ember=90.0),
-              *flames(),
               # the bed of grey-white ash the pile has burnt down into
               piece('cylinder', material='sand', color='#8E8A85', tint2='#5E5A56', radius=1.15, height=0.025,
                     position=[PILE[0], PILE[1], -0.01])]
@@ -115,12 +114,12 @@ def shot():
     cam = camera(height=0.7, distance=6.2, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=2.8, shift_x=0.14)
     lights = {
         # the open sky behind the camera, cool, lifting the shadow side: the woofer and lining just read in the tint
-        'skyfill': {**area(-20, 5, 2.4, 4.0, '#9EA8B6', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
+        'skyfill': {**area(-20, 5, 2.4, 6.0, '#9EA8B6', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
         # the sunlit litter and the sky bounce into its face: low, broad and cool-neutral
         'bounce': {**area(-25, 12, 2.0, 8.0, '#B4AEA6', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
         # the sun's light off the smoke behind, thin warm rims down both edges and over the top
-        'kicker': {**area(-150, 10, 3.0, 55.0, '#FFB978', (1.0, 2.4), (0.0, 0.0, 0.9)), 'receivers': SHELL},
-        'kicker_r': {**area(144, 2, 3.0, 120.0, '#FF8A40', (1.0, 0.5), (0.0, 0.0, 0.4)), 'receivers': SHELL},
+        'kicker': {**area(-150, 10, 3.0, 30.0, '#FFC79A', (1.0, 2.4), (0.0, 0.0, 0.9)), 'receivers': SHELL},
+        'kicker_r': {**area(144, 2, 3.0, 50.0, '#FF8A40', (1.0, 0.5), (0.0, 0.0, 0.4)), 'receivers': SHELL},
         # the pile's embers, under the plume
         'embers': point([PILE[0], PILE[1], 0.35], 140, '#FF5A14', 0.3),
         'emberglow': {'type': 'area', 'size_m': [1.0, 1.0], 'position': [PILE[0], PILE[1], 0.06], 'target': [PILE[0], PILE[1], 2.0],
@@ -133,7 +132,7 @@ def shot():
     return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.7), 'barkhorn, Smoke, woodsmoke at dawn',
                  sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.02), samples=512, exposure=0.3,
                  # the whole air hazed with the pile's smoke, the camera inside it, so the speaker sits in the same air
-                 haze={'box_m': [-15.0, -15.0, 0.0, 18.0, 30.0, 14.0], 'density': 0.006, 'anisotropy': 0.7,
+                 haze={'box_m': [-15.0, -15.0, 0.0, 18.0, 30.0, 14.0], 'density': 0.003, 'anisotropy': 0.7,
                        'color': '#BCC4CE'},
                  # no clarity and no sharpening: the speaker as soft as the set around it
                  fin=finish(contrast=0.15, clarity=0.0, sharpen=0.0, bloom=0.06, bloom_px=40, threshold=0.85,
