@@ -34,3 +34,43 @@ lava's orange from below and the dusk sky's blue from above. Campaign touchstone
 | 7 | e7: the cavern after pass 6's changes (fill out, sky in the opening, horn lit through, fewer embers) | 4.5 | iterate | the speaker lit only from behind (lower front 26, the floor beside it 48); a clipped hotspot on the horn (2.4 %); the fall reads as foil; the slab as a plank; the river as thin threads; the floor brown leather; the sky a flat card | Six passes at 4.5 to 5.0. The coordinator (who sees every session at 4.5 to 6.0, so the critic is harsh for all) asked for a return to the open field at blue hour (p2 and p3 had the best sense of place), with no fall, incandescent cracks, one river and a distant vent, then two more passes; if neither gains 0.5, finals from the best rig, a duel and an honest note |
 | 8 | e8: **back to the open field at blue hour** (the coordinator's call): no fall, cracks and a river in black crust, a far ridge and vent, white balance 4500 K | 5.0 | iterate | basalt reads as grey-violet plaster (R48 G33 B48); lava a decal (p95 155); the speaker dimmer than the sky (33 vs 107); a rectangular pit at the bottom and a straight lit ledge at left; the ridge a soft cut-out; little steam; score_if_fixed 7.5 | The pit and the ledge's crack removed; basalt neutral and darker; lava strength 80 with gain; the lamps through the acrylic x3, the foot points 120 W low in the cracks; the speaker sunk 3 mm; the sky 0.15 at 4800 K; steam x3 behind the speaker, 30 embers; haze 0.003 for the ridge |
 | 9 | e9: the field after pass 8's changes (neutral darker basalt, lava strength 80, no pit or ledge, the face lit low from the cracks, more steam and embers, sky 0.15 at 4800 K) | 5.0 | iterate | lava reads as sequins (speckled, no continuous core); the cabinet dark (31); a pale pink-white side panel (203); two spotlight pools on the rock from the crack lamps; the ridge a flat cut-out; the sky grainy and magenta; embers even; score_if_fixed 7.3 | Two passes on the field without a 0.5 gain: by the coordinator's stopping rule, finals from the best rig after a blind duel |
+
+## The duel and the final rig
+
+A blind duel (critic/ab/PROMPT-DUEL.txt, a fresh agent, frames in random order) between pass 9 and pass 8 preferred
+pass 9, 5.5 to 5.0: its warm haze and lava bounce tie the speaker and the ground into one scene, and pass 8 still had the
+rectangular pit and the stepped ledge. It favoured pass 8 for a clearer sky and ridge and a crisper cabinet. The finals
+are pass 9's rig with two defect fixes from pass 9's critic, checked in a proof: the two crack lamps, which threw oval
+spotlight pools on the rock, now lie flat in their cracks as thin area lamps, and the embers are twelve, rising off the
+river's right-hand seam, not thirty spread over the frame. The portrait is the same set and light from the same place
+on a 92 mm lens, the speaker about 42 % of the height with sky above it for type.
+
+## Where it stands, honestly
+
+Nine blind passes: 4.5, 5.0, 4.5 (an open lava field), 4.5, 4.5, 4.5, 4.5 (a volcanic cavern of scanned rock), 5.0,
+5.0 (the open field again, at blue hour). The bar was 8.5; the critic scored every one of the eight colours' sessions
+between 4.5 and 6.0, so it is harsh for all, but this is still a 5: competent, and still read as CG. What holds it back,
+as the critics agree pass after pass:
+
+- **The lava.** Built from tileable ambientCG textures through an emission ramp, it reads as speckle, sequins or a decal,
+  not as molten rock with crust rafts, incandescent seams and a heat gradient. Real lava photography or a simulated
+  flow (a crust-plate mask with open channels, displacement, a proper blackbody ramp) is the next step, and the biggest.
+- **The rock.** A photographed basalt texture on a heightfield reads as plaster or leather at this distance; it lacks
+  ropy pahoehoe and fractured a'a relief at real scale. A scanned pahoehoe surface would do more than any setting.
+- **The speaker's glow.** Its dense red acrylic transmits little, so the cabinet reads dark with the woofer black;
+  lamps hidden behind it light its edges more than its body. The acrylic is the product and fixed; only the light can
+  help.
+- **The distance.** The far ridge is a heightfield silhouette with little relief, and the dusk sky (qwantani_dusk_2) is
+  more lavender than blue even graded to 4800 K.
+
+## Final settings
+
+- Landscape 2400 x 1600 and portrait 1600 x 2000, 512 samples, the denoiser, Cycles on the CPU (python3.11, bpy 5.0.1).
+- Camera: 0.95 m, 6.5 m from the speaker, azimuth +22, f/2.8; 60 mm (landscape), 92 mm (portrait). Speaker turned 15,
+  sunk 3 mm.
+- Ground: dark_rock_02 (Poly Haven), albedo x0.06 neutralised, 30 mm displacement; lava: ambientCG Lava001 through a
+  black-red-orange-yellow ramp, strength 80, gain 2.6, a matte crust (roughness 0.85).
+- Sky: qwantani_dusk_2_puresky at 0.15; white balance 4800 K; haze 0.003; AgX, base contrast; bloom 0.18, vignette 0.2.
+- Lamps: soft orange lamps hidden behind the cabinet and the horn; a low lamp from the front left as if from the
+  cracks; thin lamps lying in the two cracks by the speaker; one in the steam over the river; one at the far vent.
+- Render times: see below.
