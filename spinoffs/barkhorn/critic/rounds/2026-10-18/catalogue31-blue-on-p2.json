@@ -1,0 +1,377 @@
+{
+ "stage1": {
+  "impression": "A clean, competent studio render of a tinted blue acrylic horn speaker on a pale blue sweep; the horn's resin glows convincingly but the cabinet reads as a dark navy box, the driver is a black hole with a pasted-looking white oval beside it, and the cloth disc reads as flat matte plastic. The sweep breaks into a visible hard horizon on the right, the floor is a dull grey darker than the wall, and the speaker barely sits on it: no real contact shadow, so it reads as CG rather than a photograph.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Seamless sweep: no visible horizon line where floor meets wall (10-90% transition wider than about 90 px at proof size)",
+  "Floor reads as lit paper in the sweep colour (median about 180-200), not dull grey 145",
+  "A real contact shadow under the plinth edge, darker than the open floor by 30+ levels, instead of the current brighter rim",
+  "Cabinet acrylic reads as translucent Ice blue with light through it, not crushed navy (side panel red channel 3, median lum 37)",
+  "Compression driver modelled by light (throat crush under 30%) and no hot disk reflection floating in the horn",
+  "Even background tone behind the speaker: left side not a muddy grey (134) against a near-white right (233)",
+  "Woofer cover cloth and lining shaders read as fabric and batting (out of scope here, but blocks a 9)"
+ ],
+ "defects": [
+  {
+   "region": [
+    470,
+    800,
+    540,
+    880
+   ],
+   "what": "Hard horizon on the sweep: wall 237 drops to floor 174 within about 40 px; reads as a table edge, not a curve"
+  },
+  {
+   "region": [
+    100,
+    1020,
+    450,
+    1080
+   ],
+   "what": "Floor underexposed grey (median 147) on a #D3E0E9 sweep; darker than the wall, looks like a separate surface"
+  },
+  {
+   "region": [
+    120,
+    1003,
+    420,
+    1012
+   ],
+   "what": "No contact shadow: floor right under the base is brighter (159) than open floor (147); speaker floats"
+  },
+  {
+   "region": [
+    0,
+    400,
+    60,
+    800
+   ],
+   "what": "Left background muddy grey (median 134) while right is near white (233); uneven, dirty-looking backdrop"
+  },
+  {
+   "region": [
+    380,
+    560,
+    450,
+    800
+   ],
+   "what": "Cabinet right side crushed to navy (lum 37, R 3): acrylic does not read as translucent Ice"
+  },
+  {
+   "region": [
+    200,
+    250,
+    350,
+    370
+   ],
+   "what": "Horn throat / driver 50% crushed to black, a void with no form"
+  },
+  {
+   "region": [
+    178,
+    300,
+    225,
+    330
+   ],
+   "what": "Hot white oval (lum 196, 2.5% clipped) left of the driver: a lamp disk mirrored in the horn, reads pasted on"
+  },
+  {
+   "region": [
+    130,
+    580,
+    320,
+    780
+   ],
+   "what": "Woofer cover a flat uniform disc (lum range 26), reads as matte plastic, no cloth texture"
+  },
+  {
+   "region": [
+    0,
+    900,
+    540,
+    1080
+   ],
+   "what": "Mottled denoise/grain texture on the floor, slightly blotchy at crop"
+  },
+  {
+   "region": [
+    55,
+    195,
+    460,
+    1005
+   ],
+   "what": "Product fills about 75% of the width with only 75 px of floor below: too tight for a narrow colour-card crop and leaves little air"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The floor is dull grey and darker than the wall, so the sweep reads as two surfaces and the paper colour is lost.",
+   "evidence": {
+    "region": [
+     100,
+     1020,
+     450,
+     1080
+    ],
+    "measured": "floor lum_median 147 (RGB 131/150/162) vs wall 233 at [470,300,540,800]"
+   },
+   "change": {
+    "setting": "lights.wash",
+    "from": "irradiance 0.9 W/m2, aimed at [0.0, 1.6, 0.6]",
+    "to": "irradiance 1.7 W/m2, aimed at [0.0, 0.4, 0.0]"
+   },
+   "expected": "Front floor rises to about 180-195 in the sweep's pale blue, closer to the wall tone.",
+   "accept": {
+    "region": [
+     100,
+     1020,
+     450,
+     1080
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     175,
+     200
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "set",
+   "problem": "The sweep shows a hard horizon on the right where the wall's brightness drops sharply onto the floor.",
+   "evidence": {
+    "region": [
+     490,
+     760,
+     540,
+     900
+    ],
+    "measured": "edge width_10_90 43 px; 237 at y 800-830 to 174 at y 840-870"
+   },
+   "change": {
+    "setting": "set (sweep) curve radius and lights.paper",
+    "from": "curve radius 1.5, paper power 420 W",
+    "to": "curve radius 2.8, paper power 260 W"
+   },
+   "expected": "A long, soft gradient from floor to wall with no visible line; wall settles near 210-222 instead of clipping at 237.",
+   "accept": {
+    "region": [
+     490,
+     760,
+     540,
+     900
+    ],
+    "metric": "edge",
+    "axis": "y",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "set",
+   "problem": "The speaker has no contact shadow; the floor right under the base is brighter than the open floor, so it floats.",
+   "evidence": {
+    "region": [
+     120,
+     1003,
+     420,
+     1012
+    ],
+    "measured": "lum_median 159 under the base vs 147 open floor"
+   },
+   "change": {
+    "setting": "set.contact shadow",
+    "from": "strength 0.35, distance 0.08, core_strength 0.5, core_distance 0.012",
+    "to": "strength 0.6, distance 0.15, core_strength 0.85, core_distance 0.02"
+   },
+   "expected": "A soft dark pool under the plinth with a darker core line at the edge, 30+ levels below the open floor after c1.",
+   "accept": {
+    "region": [
+     120,
+     1003,
+     420,
+     1012
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 145
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The camera-side face of the cabinet is crushed to navy, so the Ice acrylic does not read as translucent.",
+   "evidence": {
+    "region": [
+     380,
+     560,
+     450,
+     800
+    ],
+    "measured": "lum_median 37, RGB 3/44/66"
+   },
+   "change": {
+    "setting": "lights.fill",
+    "from": "irradiance 0.45 W/m2, orbit az 15 el 12",
+    "to": "irradiance 0.9 W/m2, orbit az 40 el 15"
+   },
+   "expected": "The side panel opens to a readable blue with the batts visible behind it, median about 60-80.",
+   "accept": {
+    "region": [
+     380,
+     560,
+     450,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     85
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "A hot white oval floats in the horn left of the driver: the horn lamp's disk mirrored in the resin, which reads pasted on.",
+   "evidence": {
+    "region": [
+     178,
+     300,
+     225,
+     330
+    ],
+    "measured": "lum_median 196, clip 2.55%, in an otherwise mid-blue horn (135)"
+   },
+   "change": {
+    "setting": "lights.horn",
+    "from": "shape DISK 0.4 x 0.4 m at [1.15, -2.4, 1.25], spread 12",
+    "to": "rectangle 0.9 x 0.25 m at [1.6, -2.0, 1.45], spread 30, irradiance unchanged"
+   },
+   "expected": "The reflection becomes a long soft streak along the horn's flare instead of a round hot spot; no clipping in that area.",
+   "accept": {
+    "region": [
+     178,
+     300,
+     225,
+     330
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 170
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The compression driver is a black void with no form, half the throat region crushed.",
+   "evidence": {
+    "region": [
+     200,
+     250,
+     350,
+     370
+    ],
+    "measured": "crush_pct 50, lum_median 3"
+   },
+   "change": {
+    "setting": "lights.flank",
+    "from": "power 6 W, area 0.15 x 1.2 m",
+    "to": "power 14 W, area 0.3 x 1.2 m, receivers add the driver body"
+   },
+   "expected": "A clear specular edge traces the driver's dome and phase plug; it stays black but has shape.",
+   "accept": {
+    "region": [
+     200,
+     250,
+     350,
+     370
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 30
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The left background is a muddy grey against a near-white right, making the backdrop look dirty and uneven.",
+   "evidence": {
+    "region": [
+     0,
+     400,
+     60,
+     800
+    ],
+    "measured": "lum_median 134 vs 233 at [470,300,540,800]"
+   },
+   "change": {
+    "setting": "lights.paper",
+    "from": "position [0.05, 0.75, 0.12], aimed at [0.0, 2.2, 1.6]",
+    "to": "position [-0.35, 0.75, 0.12], aimed at [-0.5, 2.2, 1.6], spread 140"
+   },
+   "expected": "Left wall lifts to about 185-215 so the backdrop falls off gently toward the key side rather than going grey.",
+   "accept": {
+    "region": [
+     0,
+     400,
+     60,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     180,
+     218
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "camera",
+   "problem": "The product fills about 75% of the frame width with little floor below, too tight for the narrow colour-card crop and leaving no air.",
+   "evidence": {
+    "region": [
+     55,
+     195,
+     460,
+     1005
+    ],
+    "measured": "product spans x 55-460 of 540, base at y 1005 of 1080"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "lens 104.6 mm, shift_y -0.051",
+    "to": "lens 90 mm, same position, shift_y -0.035"
+   },
+   "expected": "Product spans about 62-65% of the width with roughly 12% of floor below the base; all eight colours keep the same framing.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the woofer cover cloth a visible weave and soft edge roll",
+   "why": "It reads as a flat matte plastic disc (lum range 26); the cover's cloth shader is being reworked elsewhere"
+  },
+  {
+   "request": "Make the lining batts read as fibrous polyester in voile",
+   "why": "The lining shader is being reworked elsewhere; currently smooth grey blocks"
+  }
+ ],
+ "score_if_fixed": 7.2
+}

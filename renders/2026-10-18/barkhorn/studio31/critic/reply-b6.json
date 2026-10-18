@@ -1,0 +1,63 @@
+{
+  "stage1": {"impression": "A clean, high-key studio shot of a red tinted-acrylic cabinet with a glossy horn on top. The red caustic spilling onto the floor is lovely and true to the material. But the speaker barely touches the floor because the contact shadow is almost gone, the white field is flat with no depth from floor to wall, the right-hand edges dissolve into grey haze, and the lower bays read milky pink rather than glowing. It reads as a competent CG product render, not yet a launch photograph.", "score": 6.0},
+  "verdict": "iterate",
+  "blocking_9": [
+    "A real contact shadow: a dark, tight core under the plinth edge (lum_median <= 200 in the 15 px under the base), fading over about 0.5 m, so the product sits with weight",
+    "Both vertical silhouettes traced by a crisp dark line; the right edge currently fades over 14 px with only a 60-level step",
+    "Saturated transmitted colour in the open acrylic areas (green channel under 110 in the lower side bay), not a milky pink from front light washing over the faces",
+    "A soft, readable tonal gradient in the seamless (floor slightly brighter than the wall above the product, or a gentle top falloff) so the white has depth instead of reading as a 249 flat fill",
+    "The final at 2560 x 1440 and full samples, free of denoiser smearing on the thin edge lines and the horn posts"
+  ],
+  "defects": [
+    {"region": [520, 628, 760, 690], "what": "Contact shadow very weak: median 219 right under the base and 241 just below, against 250 for the floor; the product looks set down on light rather than on the floor"},
+    {"region": [755, 270, 790, 620], "what": "Right silhouette edge is soft and grey (edge step 60, 10-90 width 14 px); no dark line traces it, so the cabinet dissolves into the background"},
+    {"region": [715, 515, 765, 605], "what": "Lower side bay is milky and desaturated (RGB 233/164/160); front light is washing the acrylic instead of letting light pass through it"},
+    {"region": [525, 540, 640, 600], "what": "Lower front bay is pinkish (g 115) with internals (a white box, cables, a port) washed flat; reads as clutter"},
+    {"region": [800, 0, 1280, 720], "what": "Seamless is a dead-flat 249 to 251 with a range near 1; there's no falloff, horizon or depth, so it reads as an empty CG void"},
+    {"region": [515, 340, 535, 520], "what": "Front-left vertical edge has a hard, clipped specular line (4.8 percent clipped), a studio-CG tell"},
+    {"region": [500, 110, 715, 250], "what": "Horn shows broad, smooth, plasticky gradients with a hard white rim on its top edge; its throat is crushed to black (4.6 percent crushed)"}
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "set",
+     "problem": "The speaker floats: the contact shadow is nearly absent, and core_strength 0.9 is above the 0.8 limit where the card says strengths go negative, which may be lifting the core.",
+     "evidence": {"region": [540, 628, 740, 645], "measured": "lum_median 218.7 (floor 250); 15 px lower median 240.9; profile under base bins 236.7 to 241.7"},
+     "change": {"setting": "set.contact.core_strength / core_distance_m / distance_m", "from": "0.9 / 0.08 / 0.7", "to": "0.8 / 0.12 / 0.5"},
+     "expected": "A dark, tight core under the base edge (median about 190 to 205, red-tinted) fading to the floor within about 50 px",
+     "accept": {"region": [540, 628, 740, 645], "metric": "lum_median", "op": "between", "value": [180, 205]}},
+    {"id": "c2", "rank": 2, "kind": "light",
+     "problem": "The front key and scrim wash the acrylic faces with white, so the colour reads milky pink instead of glowing like stained glass.",
+     "evidence": {"region": [720, 520, 760, 600], "measured": "RGB median 233/164/160; front bay 525-640 x 540-600 g 115"},
+     "change": {"setting": "lights.key.irradiance and lights.scrim.irradiance", "from": "4.0 and 1.6", "to": "2.4 and 1.0"},
+     "expected": "The faces carry less reflected white, colour comes from light passing through, and the side bay's green channel drops below 120 while the red stays above 200",
+     "accept": {"region": [720, 520, 760, 600], "metric": "g_median", "op": "<", "value": 120}},
+    {"id": "c3", "rank": 3, "kind": "light",
+     "problem": "The right silhouette has no dark edge line; the glossy flag is too far and too narrow to show in refraction along the back-right edge.",
+     "evidence": {"region": [755, 400, 785, 420], "measured": "edge step 60.1, 10-90 width 14 px (left edge: step -181, width 0)"},
+     "change": {"setting": "set.flags[1] center_m / size_m / normal", "from": "[1.35, 2.1, 1.2] / [0.3, 2.4] / [-0.45, -0.89, 0]", "to": "[0.95, 1.3, 0.9] / [0.5, 2.2] / [-0.6, -0.8, 0]"},
+     "expected": "A thin, near-black line traces the right-rear vertical edge from plinth to top, matching the left edge",
+     "accept": {"region": [755, 400, 785, 420], "metric": "edge", "axis": "x", "op": ">", "value": 120}},
+    {"id": "c4", "rank": 4, "kind": "light",
+     "problem": "The seamless is a flat 249 everywhere: there's no depth between the floor and the wall, and no tonal room for the type.",
+     "evidence": {"region": [1000, 0, 1100, 720], "measured": "profile y bins 249.0 to 250.9; right top lum_range 0.9"},
+     "change": {"setting": "lights.bg-left / bg-right target z and irradiance; finish.white_in", "from": "target z 1.2 / 1.0, irradiance 3.6, white_in 235", "to": "target z 0.4 / 0.4, irradiance 3.2, white_in 240"},
+     "expected": "The upper wall falls gently to about 236 to 240 at the top of the frame while the floor stays about 248, so the white reads as a lit room",
+     "accept": {"region": [1000, 0, 1280, 120], "metric": "lum_median", "op": "between", "value": [232, 242]}},
+    {"id": "c5", "rank": 5, "kind": "light",
+     "problem": "The front-left vertical edge carries a hard, clipped specular line that reads as CG.",
+     "evidence": {"region": [515, 340, 535, 520], "measured": "clip_pct 4.83, lum_p95 194.7 with clipped core"},
+     "change": {"setting": "lights.front-strip.strength", "from": "4.0", "to": "2.5"},
+     "expected": "A graduated edge highlight that peaks under 245, with no clipped pixels",
+     "accept": {"region": [515, 340, 535, 520], "metric": "clip_pct", "op": "<", "value": 0.5}},
+    {"id": "c6", "rank": 6, "kind": "light",
+     "problem": "The lower bay internals are lit flat from the front and read as clutter, with no back light to silhouette them.",
+     "evidence": {"region": [525, 540, 640, 600], "measured": "lum_median 138, g 115, internals flat pink-white"},
+     "change": {"setting": "lights.back-top orbit azimuth / target", "from": "200 deg, target [0, -0.5, 0.0]", "to": "180 deg, elevation 22, target [0, 0, 0.35]"},
+     "expected": "The lower bay glows from behind, the internals read as darker silhouettes inside a saturated red, and the floor caustic stays",
+     "accept": {"region": [525, 540, 640, 600], "metric": "g_median", "op": "<", "value": 100}}
+  ],
+  "out_of_scope": [
+    {"request": "Hide or tidy the visible internals in the lower bay (white box, cables, port tubes)", "why": "They are parts of the speaker seen through clear acrylic; the shape and parts are fixed"},
+    {"request": "Soften the horn's very smooth, plasticky surface and lift its black throat", "why": "The horn's shape and its compression driver are fixed (set by acoustic simulation); only light on them may change"}
+  ],
+  "score_if_fixed": 7.4
+}
