@@ -265,7 +265,7 @@ def mossy_log(bpy, name, p, kit):
     R0, R1 = p.get('radius', 0.45), p.get('radius_b', p.get('radius', 0.45) * 0.85)
     L = (b - a).length; ax = (b - a).normalized()
     q = ax.to_track_quat('Z', 'Y').to_matrix()
-    seg, nl = 96, max(8, int(L / 0.05))
+    seg, nl = 200, max(8, int(L / 0.022))                # fine, so the moss's edge is ragged rather than stepped
     def ring_pt(t, th, extra=0.0):
         r = R0 + (R1 - R0) * t
         bumpy = 1 + 0.035 * noise.noise(Vector((math.cos(th) * 2, math.sin(th) * 2, t * L * 1.5))) + 0.015 * math.sin(19 * th)
@@ -315,7 +315,8 @@ def mossy_log(bpy, name, p, kit):
     cover = p.get('cover', 0.55)
     def keep(t, th):
         d = math.cos(th - th_up)
-        n = 0.25 * noise.noise(Vector((math.cos(th) * 3, math.sin(th) * 3, t * L * 2.5)))
+        n = (0.25 * noise.noise(Vector((math.cos(th) * 3, math.sin(th) * 3, t * L * 2.5)))
+             + 0.1 * noise.noise(Vector((math.cos(th) * 14, math.sin(th) * 14, t * L * 12))))
         return d + n > 1.0 - 2 * cover and 0.03 < t < 0.97
     v, f, u = tube(p.get('pile', 0.012), keep)
     out.append(obj(f'{name}-moss', v, f, u, assets.pbr(bpy, p.get('moss', 'acg:Moss004'), p.get('res', '2k'),
