@@ -31,10 +31,10 @@
   "radius": 3.0,
   "height": 9.0,
   "contact": {
-   "strength": 0.8,
-   "distance_m": 0.45,
-   "core_strength": 0.8,
-   "core_distance_m": 0.012
+   "strength": 1.0,
+   "distance_m": 0.6,
+   "core_strength": 1.0,
+   "core_distance_m": 0.025
   },
   "flags": [
    {
@@ -58,7 +58,7 @@
     "center_m": [
      1.0,
      2.1,
-     0.8
+     1.15
     ],
     "size_m": [
      0.9,
@@ -121,8 +121,8 @@
   "bounces": 16,
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
-  "white_balance_k": 6100,
-  "white_balance_tint": 4.0
+  "white_balance_k": 5750,
+  "white_balance_tint": 2.0
  },
  "finish": {
   "enabled": true,
@@ -155,7 +155,7 @@
     4.0,
     1.4
    ],
-   "irradiance": 1.8,
+   "irradiance": 3.0,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -176,7 +176,7 @@
     4.0,
     0.8
    ],
-   "irradiance": 2.8,
+   "irradiance": 4.2,
    "color": "#FFF4E8",
    "camera": false,
    "specular": 0.0
@@ -184,13 +184,13 @@
   "scrim": {
    "type": "area",
    "size_m": [
-    3.0,
-    2.4
+    2.0,
+    1.6
    ],
    "position": [
-    0.3,
-    -0.6,
-    3.2
+    0.1,
+    0.4,
+    2.8
    ],
    "target": [
     0.0,
@@ -220,7 +220,7 @@
    "irradiance": 2.0,
    "color": "#FFFAF4",
    "camera": false,
-   "specular": 0.6
+   "specular": 1.0
   },
   "front-strip": {
    "type": "panel",
@@ -230,7 +230,7 @@
    ],
    "orbit": {
     "azimuth_deg": -25,
-    "elevation_deg": 10,
+    "elevation_deg": 22,
     "distance_m": 3.0
    },
    "target": [
@@ -238,7 +238,7 @@
     0.0,
     0.6
    ],
-   "strength": 3.0,
+   "strength": 4.0,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -259,20 +259,20 @@
   "back-top": {
    "type": "area",
    "size_m": [
-    0.6,
-    0.6
+    1.2,
+    1.6
    ],
    "orbit": {
-    "azimuth_deg": 175,
-    "elevation_deg": 38,
-    "distance_m": 3.5
+    "azimuth_deg": 180,
+    "elevation_deg": 15,
+    "distance_m": 2.5
    },
    "target": [
     0.0,
     0.0,
-    0.6
+    0.55
    ],
-   "irradiance": 5.0,
+   "irradiance": 6.0,
    "color": "#FFF8F0",
    "camera": false
   }
