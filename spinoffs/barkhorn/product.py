@@ -1149,6 +1149,53 @@ def tube_along(pts, d):
     return out
 
 
+def rating_plate_pieces(cx, D, az, pw):
+    """The rating plate beside the amplifier (round 13's part: 70 x 40 x 1, black anodised aluminium, two M3 screws),
+    laser-marked, for the render only (round 31: the finals showed it as a blank grey tile, which read as a fault). In
+    white, left to right as one faces the back: the maker; the product; its model and serial number; the ratings, the
+    FA122's own (its plate's); where it was designed; and the marks, CE, UKCA, FCC and the WEEE bin. Its two black pan
+    heads either end. Returns {piece: (solid, finish)}, as amp_plate_pieces does."""
+    from build123d import Align, Compound, Plane, Text, extrude
+    FONT, BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+    rx, rz, y = cx + pw + 55.0, az + 80.0, D + 1.0          # the plate's middle on the back's outer face; +u to one's left
+    prn = []
+
+    def text(st, u, v, size=1.7, bold=False, wmax=50.0):
+        """Print from (u, v) rightward as one reads it, `size` mm tall (smaller if it would pass `wmax`)."""
+        fp = BOLD if bold else FONT
+        w = Text(st, font_size=size, font_path=fp).bounding_box().size.X
+        if w > wmax:
+            size *= wmax / w
+        sk = Text(st, font_size=size, font_path=fp, align=(Align.MIN, Align.CENTER))
+        return extrude(Plane(origin=(rx + u, y, rz + v), x_dir=(-1, 0, 0), z_dir=(0, 1, 0)) * sk, amount=0.05)
+
+    def bar(u0, v0, u1, v1, wd=0.4):
+        """A printed stroke between two points."""
+        L = math.hypot(u1 - u0, v1 - v0); nu, nv = -(v1 - v0) / L * wd / 2, (u1 - u0) / L * wd / 2
+        return prism([(rx + u0 + nu, rz + v0 + nv), (rx + u1 + nu, rz + v1 + nv), (rx + u1 - nu, rz + v1 - nv),
+                      (rx + u0 - nu, rz + v0 - nv)], 'y', y, y + 0.05)
+    L = 25.0                                               # the text's left edge, clear of the left screw
+    prn.append(text('EARF', L, 13.2, size=4.2, bold=True))
+    prn.append(text('ATMOSPHERE  ·  HORN LOUDSPEAKER, ACTIVE', L, 7.4))
+    prn.append(text('MODEL AT-1        S/N  AT1-26-000127', L, 4.1))
+    prn.append(text('100-120V~ / 200-240V~    50-60 Hz    350 W MAX', L, 0.8))
+    prn.append(text('DESIGNED IN SAN FRANCISCO, CALIFORNIA', L, -2.5))
+    prn.append(bar(L, -5.6, -25.0, -5.6, 0.25))
+    prn.append(text('CE', L, -11.4, size=4.0))
+    prn.append(text('UKCA', L - 9.0, -11.4, size=3.0, bold=True))
+    prn.append(text('FCC', L - 21.0, -11.4, size=3.4, bold=True))
+    u0, v0 = -10.6, -11.2                                  # the WEEE bin: its body, lid and wheel, crossed out, a bar under
+    prn += [bar(u0 + 1.8, v0 + 2.2, u0 + 1.4, v0 - 2.4), bar(u0 - 1.8, v0 + 2.2, u0 - 1.4, v0 - 2.4), bar(u0 + 1.4, v0 - 2.4, u0 - 1.4, v0 - 2.4),
+            bar(u0 + 2.3, v0 + 2.3, u0 - 2.3, v0 + 2.3), bar(u0 + 0.6, v0 + 2.9, u0 - 0.6, v0 + 2.9),
+            bar(u0 + 2.7, v0 + 3.3, u0 - 2.7, v0 - 3.3), bar(u0 - 2.7, v0 + 3.3, u0 + 2.7, v0 - 3.3), bar(u0 + 2.4, v0 - 4.4, u0 - 2.4, v0 - 4.4, 0.8)]
+    plate = box(rx - 35.0, D, rz - 20.0, rx + 35.0, y, rz + 20.0)
+    heads = [cyl('y', (rx + u, rz), 5.6, y, y + 1.6) for u in (31.0, -31.0)]
+    for u in (31.0, -31.0):
+        plate -= cyl('y', (rx + u, rz), 3.2, D - 1, y + 1)
+    C = lambda xs: Compound(children=xs)
+    return {'plate': (plate, 'amp'), 'print': (C(prn), 'print'), 'screws': (C(heads), 'screw')}
+
+
 def amp_plate_pieces(amp, cx, D, az):
     """The FA122's plate as it is (round 31: Hypex's drawing and photographs, read once hypex.nl could be reached; round
     30 had placed the connectors provisionally, the XLRs mirrored), for the render only: the part's solid stays the
@@ -1456,6 +1503,7 @@ def amp_compartment(P, ribs, wz, wood):
     out.append(Part('cable-glands', Compound(children=glands + top_glands), Bought('cable-glands'), finish='gland', inside=True))
     pw = amp['plate_w'] / 2
     out.append(Part('rating-plate', box(cx + pw + 20, D, az + 60, cx + pw + 90, D + 1.0, az + 100), Bought('rating-plate'), finish='amp',
+                    pieces=rating_plate_pieces(cx, D, az, pw),
                     notes=['beside the amplifier, 70 x 40: the model, the serial number, the ratings, the marks (CE, UKCA, FCC, the '
                            'WEEE bin) and the maker\'s address, laser-marked; two M3 screws into inserts']))
     return out
