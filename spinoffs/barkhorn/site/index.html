@@ -181,6 +181,12 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .dots .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: url(img/coins-dark.jpg); mix-blend-mode: screen }
 .closer .picked { margin: 0; color: #9B978F; font-size: 15px } .closer .picked b { color: #F5F3EF; margin-right: 8px; font-weight: 600 }
 .closer button:focus-visible { outline-color: #F5F3EF }
+.closer.light { color: #1A1917 } .closer.light .eyebrow, .closer.light .picked, .closer.light .lineup figcaption { color: #6B675F }
+.closer.light .picked b { color: #1A1917 } .closer.light button:focus-visible { outline-color: #1A1917 }
+.macros { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; text-align: left }
+.macros figure { margin: 0 } .macros img { width: 100%; height: auto; display: block; max-width: 100% }
+.macros figcaption { font-size: 14px; line-height: 1.4; margin-top: 8px; color: #9B978F } .closer.light .macros figcaption { color: #6B675F }
+@media (max-width: 900px) { .macros { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 .lineup { margin: 56px 0 0; display: grid; gap: 12px }
 .lineup img { width: 100%; height: auto; display: block; max-width: 100% }
 .lineup figcaption { color: #9B978F; font-size: 15px }

@@ -81,6 +81,13 @@ SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabi
         ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
         ('Lining', 'Recycled polyester batts in white voile, 100 mm at the top and the bottom'),
         ('Price', 'On request: each pair is made to order')]
+MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn above it',
+           'The corner: two 20 mm walls, cast in one colour and cemented.'),
+          ('amp', 'dust', "Hypex's FA122 amplifier on the back of a Dust cabinet", 'The amplifier, built in: Hypex&rsquo;s FA122.'),
+          ('horn', 'acid', "The Acid horn from the side, its driver's pod and the flare",
+           'The horn: cast resin, its driver in a pod whose cap twists off.'),
+          ('woofer', 'ice', 'The 15-inch woofer through an Ice cabinet', 'The 15-inch woofer, behind the cloth when the cover&rsquo;s on.'),
+          ('grip', 'poison', 'A grip cut into the side of a Poison cabinet', 'A grip on each side, for the 72 kg.')]
 KEYS = [c[0] for c in CLOUDS]
 MARK = {key: col for key, line, num, name, col in M.SPEAKERS if line == 'Cloud'}
 HUE = {'red': 0, 'orange': 1, 'amber': 2, 'green': 3, 'blue': 4, 'violet': 5}   # the painter's wheel, from red
@@ -182,6 +189,9 @@ def make_images(sources=None):
     one(os.path.join(R30, 'inside.png'), lambda p: save(Image.open(p), 'inside.jpg', 880, q=82))
     one(first(os.path.join(ST31, 'lineup.png'), os.path.join(ST31, 'lineup.jpg')),
         lambda p: (save(Image.open(p), 'lineup.jpg', 2400, q=84), save(Image.open(p), 'lineup-1200.jpg', 1200, q=82)))
+    for m, c, *_ in MACROS:                             # the studio's details, each in the colour it was shot in
+        one(first(*[os.path.join(ST31, f'macro-{m}-{c}.{e}') for e in ('png', 'jpg')]),
+            lambda p, m=m: save(Image.open(p), f'macro-{m}.jpg', 1200, q=84))
     for tag in ('turntable', 'lamp'):
         one(first(os.path.join(C31, f'hero-{tag}.png'), os.path.join(C31, f'hero-{tag}.jpg')),
             lambda p, t=tag: save(Image.open(p), f'next-{t}.jpg', 1400, q=84))
@@ -276,24 +286,32 @@ def body():
         for k, num, name, icon, tint, line, cover in CLOUDS)
     spec = ''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a, b in SPEC)
     reel = habitats = closer = ''
-    if all('studio' in meta[k] for k in KEYS):
-        sw, sh = meta['red']['studio']['w'], meta['red']['studio']['h']
-        im = np.asarray(Image.open(os.path.join(IMG, 'red-studio.jpg')).convert('RGB'))
+    sk = next((t for t in ('studio-light', 'studio') if all(t in meta[k] for k in KEYS)), None)   # round 31's bright field won
+    if sk:
+        sw, sh = meta['red'][sk]['w'], meta['red'][sk]['h']
+        im = np.asarray(Image.open(os.path.join(IMG, f'red-{sk}.jpg')).convert('RGB'))
         edge = np.concatenate([im[:6].reshape(-1, 3), im[-6:].reshape(-1, 3), im[:, :6].reshape(-1, 3), im[:, -6:].reshape(-1, 3)]).mean(0)
+        light = edge.mean() > 150                       # a pale ground takes dark type
         lineup = ''
         if os.path.exists(os.path.join(IMG, 'lineup.jpg')):
             lw, lh = Image.open(os.path.join(IMG, 'lineup.jpg')).size
             lineup = ('    <figure class="lineup"><img src="img/lineup.jpg" srcset="img/lineup-1200.jpg 1200w, img/lineup.jpg 2400w" '
                       f'sizes="(max-width: 1240px) 100vw, 1240px" width="{lw}" height="{lh}" loading="lazy" '
-                      'alt="All eight in a row in spectrum order, on a black floor that mirrors them">'
+                      + ('alt="All eight in a row in spectrum order on a white floor, each throwing its colour onto it">' if light else
+                         'alt="All eight in a row in spectrum order, on a black floor that mirrors them">') +
                       '<figcaption>All eight, in spectrum order.</figcaption></figure>\n')
+        if all(os.path.exists(os.path.join(IMG, f'macro-{m}.jpg')) for m, *_ in MACROS):
+            lineup += ('    <ul class="macros" aria-label="Details">' + ''.join(
+                f'<li><figure><img src="img/macro-{m}.jpg" width="{Image.open(os.path.join(IMG, f"macro-{m}.jpg")).width}" '
+                f'height="{Image.open(os.path.join(IMG, f"macro-{m}.jpg")).height}" '
+                f'loading="lazy" alt="{alt}"><figcaption>{cap}</figcaption></figure></li>' for m, c, alt, cap in MACROS) + '</ul>\n')
         hid = ' aria-hidden="true"'
-        closer = (f'  <section class="band closer" id="closer" style="--closer:#%02X%02X%02X"><div class="wrap">\n' % tuple(int(x) for x in edge) +
+        closer = (f'  <section class="band closer{" light" if light else ""}" id="closer" style="--closer:#%02X%02X%02X"><div class="wrap">\n' % tuple(int(x) for x in edge) +
                   '    <div class="closer-head"><p class="eyebrow">Take a closer look</p><h2>Cast in colour, all the way through.</h2></div>\n'
                   f'    <div class="closer-stage" style="aspect-ratio:{sw} / {sh}">' + ''.join(
-                      f'<img class="{"on" if i == 0 else ""}" src="img/{k}-studio.jpg" srcset="img/{k}-studio-1200.jpg 1200w, img/{k}-studio.jpg 2400w" '
+                      f'<img class="{"on" if i == 0 else ""}" src="img/{k}-{sk}.jpg" srcset="img/{k}-{sk}-1200.jpg 1200w, img/{k}-{sk}.jpg 2400w" '
                       f'sizes="(max-width: 1240px) 100vw, 1240px" width="{sw}" height="{sh}" loading="lazy" '
-                      f'alt="{name} in the studio, cover off, the light coming through its acrylic"{"" if i == 0 else hid}>'
+                      f'alt="{name} in the studio{" on white" if light else ""}, the light coming through its acrylic"{"" if i == 0 else hid}>'
                       for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</div>\n'
                   '    <div class="picker">\n      <div class="dots" role="radiogroup" aria-label="Colour">' + ''.join(
                       f'<button type="button" role="radio" aria-checked="{str(i == 0).lower()}" aria-label="{name}" tabindex="{0 if i == 0 else -1}">'
@@ -543,6 +561,12 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .dots .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: url(img/coins-dark.jpg); mix-blend-mode: screen }
 .closer .picked { margin: 0; color: #9B978F; font-size: 15px } .closer .picked b { color: #F5F3EF; margin-right: 8px; font-weight: 600 }
 .closer button:focus-visible { outline-color: #F5F3EF }
+.closer.light { color: #1A1917 } .closer.light .eyebrow, .closer.light .picked, .closer.light .lineup figcaption { color: #6B675F }
+.closer.light .picked b { color: #1A1917 } .closer.light button:focus-visible { outline-color: #1A1917 }
+.macros { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; text-align: left }
+.macros figure { margin: 0 } .macros img { width: 100%; height: auto; display: block; max-width: 100% }
+.macros figcaption { font-size: 14px; line-height: 1.4; margin-top: 8px; color: #9B978F } .closer.light .macros figcaption { color: #6B675F }
+@media (max-width: 900px) { .macros { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 .lineup { margin: 56px 0 0; display: grid; gap: 12px }
 .lineup img { width: 100%; height: auto; display: block; max-width: 100% }
 .lineup figcaption { color: #9B978F; font-size: 15px }
