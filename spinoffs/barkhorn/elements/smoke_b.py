@@ -26,6 +26,9 @@ LIGHTS = {'negative': {'type': 'flag', 'size_m': [2.6, 2.0], 'orbit': {'azimuth_
           'overhead': {'type': 'flag', 'size_m': [2.0, 2.0], 'orbit': {'azimuth_deg': -15.0, 'elevation_deg': 75.0,
                                                                       'distance_m': 1.8},
                        'target': [0.0, 0.0, 1.0], 'glossy': True},
+          # a white card low on the right, catching the sun and filling the horn's throat, as on location
+          'bounce': {'type': 'flag', 'color': '#FFFFFF', 'size_m': [0.9, 0.7], 'orbit': {'azimuth_deg': 22.0,
+                     'elevation_deg': 12.0, 'distance_m': 1.6}, 'target': [0.0, 0.0, 1.13], 'glossy': True},
           'mistglow': {**C.area(150.0, 18.0, 2.8, 7.0, color='#F2EEE6', size=(1.6, 2.2), target=(0.0, 0.0, 0.65)),
                        'specular': 0.1,                  # its light, not its mirror image
                        # the cabinet alone: through the horn's resin it blew the horn out white (pass 2; even a
@@ -55,9 +58,8 @@ def _trunks():
 
 def props():
     return [
-        C.piece('ext', module='smoke_b_el', fn='snow', texture='snow_02', size=[60.0, 60.0], position=[0.0, 18.0, 0.0],
-                displace=0.0, relief=0.5, res='4k', cells=1500, flat=[0.0, 0.0, 1.2],
-                procedural_relief=True, relief_bump=1.2),
+        C.piece('ext', module='smoke_b_el', fn='snow', texture='acg:Snow003', size=[60.0, 60.0], position=[0.0, 18.0, 0.0],
+                displace=0.02, tex_scale=1.6, bump=1.5, relief=0.5, res='2k', cells=1500, flat=[0.0, 0.0, 1.2]),
         # snow banked a little against the speaker's foot (critic pass 1, c2)
         C.piece('ext', module='smoke_b_el', fn='snow_lip', size=[0.56, 0.43], rotate_z=ROT, height=0.03, reach=0.06,
                 mat_object='prop0-kit'),
@@ -73,8 +75,8 @@ def props():
                 thickness=0.9, density=6.0, lo=0.4, hi=0.6, scale=[0.3, 0.5, 1.5], distortion=1.4,
                 fade_x=[8.0, 0.0], seed=7, color='#A9ABAE', absorb_color='#B8BBBE'),
         # and its source: a column of woodsmoke rising behind the clump on the left, bent over toward the speaker
-        C.piece('ext', module='smoke_b_el', fn='plume', base=[-2.66, 7.3], height=4.5, lean=3.5, bend=1.6, width=0.5,
-                spread=0.35, density=25.0, seed=5, color='#A3A8AF', absorb_color='#B8BBBE'),
+        C.piece('ext', module='smoke_b_el', fn='plume', base=[-4.2, 8.0], height=4.5, lean=3.5, bend=1.6, width=0.5,
+                spread=0.35, density=12.0, seed=5, color='#C4C8CE', absorb_color='#B8BBBE', anisotropy=0.5),
         C.piece('ext', module='smoke_b_el', fn='mist', box=[-45.0, -14.0, 0.0, 45.0, 95.0, 30.0], clear_y=1.0,
                 full_y=26.0, density=0.05, floor=0.04, ground_boost=0.8, ground_h=4.0),
     ]
