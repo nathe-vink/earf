@@ -35,7 +35,7 @@ def plume(n=7):
     out = []
     for k in range(n):
         w = 1.0 + 0.55 * k
-        out.append(smoke((PILE[0] - 0.22 * k ** 1.5, PILE[1] - 0.1 * k, 0.15 + 1.15 * k), (w, w, 2.4), 7.0 * 0.8 ** k,
+        out.append(smoke((PILE[0] - 0.22 * k ** 1.5, PILE[1] - 0.1 * k, 0.15 + 1.15 * k), (w, w, 2.4), 3.5 * 0.85 ** k,
                          11 + k, scale=0.45 + 0.08 * k, cut=0.38, soft=0.35, anisotropy=0.3,
                          fade=[0.4, 0.4, 0.4], floor=0.3, rise=1.8, color='#E4E2DE'))
     return out
@@ -85,7 +85,10 @@ def shot():
     props += [
               # where the plume flattens and drifts: a layer across the wood at 2 to 5 m, thinning toward the camera
               smoke((-1.0, 3.0, 1.6), (16.0, 8.0, 4.0), 0.35, 9, scale=1.2, cut=0.45, soft=0.3, anisotropy=0.75,
-                    fade=[0.3, 0.4, 0.5], floor=0.02, rise=0.6, color='#CFCBC6')]
+                    fade=[0.3, 0.4, 0.5], floor=0.02, rise=0.6, color='#CFCBC6'),
+              # low wisps drifting between the camera and the speaker, veiling its lower half a little
+              smoke((0.0, -1.6, 0.0), (9.0, 3.0, 1.8), 0.45, 13, scale=0.8, cut=0.48, soft=0.3, anisotropy=0.6,
+                    fade=[0.3, 0.35, 0.6], floor=0.02, rise=0.5, color='#D6D0C8')]
     cam = camera(height=0.7, distance=7.2, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=0.14)
     lights = {
         # the open sky behind the camera, cool, lifting the shadow side: the woofer and lining just read in the tint
@@ -99,7 +102,7 @@ def shot():
         'embers': point([PILE[0], PILE[1], 0.25], 80, '#FF6A20', 0.4),
         # the open sky behind the camera on the plume's face (it would be a dark column lit from behind alone)
         'plumefill': {'type': 'area', 'size_m': [6.0, 6.0], 'position': [PILE[0] - 3.0, PILE[1] - 9.0, 4.0],
-                      'target': [PILE[0] - 0.6, PILE[1], 3.0], 'irradiance': 1.2, 'color': '#C9CED6',
+                      'target': [PILE[0] - 0.6, PILE[1], 3.0], 'irradiance': 5.0, 'color': '#C9CED6',
                       'receivers': plume_names},
     }
     return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.15), 'barkhorn, Smoke, woodsmoke at dawn',
