@@ -69,6 +69,25 @@ like a wall offscreen" (`critic-smoke/duel-p7-vs-p6.json`).
 The portrait was re-framed, not cropped: 5.5 m away on the same 65 mm lens, the speaker 42 % of the frame's height, with
 the shafts through the crowns above it.
 
+## The final, and its blind pass
+
+`renders/2026-10-18/barkhorn/element31/smoke.png`: 2400 × 1600 at 512 samples, 3 h 11 min (11,434 s) on 4 CPU cores.
+The portrait (`smoke-portrait.png`, 1600 × 2000, 512 samples) went to the coordinator's render helper, which runs it on
+its own box from this branch.
+
+A blind critic on the final at full size scored it **6.5** ("a very good render, not yet a photograph"), the best of the
+run; the half-size proofs at 128 samples had scored 5.0 to 5.5. Its top changes, not made:
+1. Real bark on the trunks (displacement, bump 8, lichen).
+2. A brighter bounce, so the woofer and lining read.
+3. A left rim to match the right.
+4. A cooler white balance (about 500 K) against the single orange cast.
+5. A firmer contact shadow.
+6. Denser far smoke, to hide the photo plate's leaves.
+7. A floating branch stub at the top centre.
+8. Grain and a little clarity.
+
+It estimated 7.6 with all eight (`critic-smoke/final.json`).
+
 ## An honest note: where it stands and what holds it back
 
 The blind critics scored seven passes from 5.0 to 5.5 (scale: 6 is "a competent render that still reads as CG"). The
