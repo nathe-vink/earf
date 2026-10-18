@@ -277,6 +277,40 @@
    "irradiance": 22.0,
    "color": "#FFF8F0",
    "camera": false
+  },
+  "ring-card": {
+   "type": "panel",
+   "size_m": [
+    1.2,
+    0.4
+   ],
+   "orbit": {
+    "azimuth_deg": -27,
+    "elevation_deg": -2.5,
+    "distance_m": 2.0
+   },
+   "target": [
+    0.0,
+    -0.25,
+    0.49
+   ],
+   "strength": 3.0,
+   "diffuse": 0.0,
+   "specular": 1.0,
+   "receivers": [
+    "woofer-ring"
+   ],
+   "ramp": {
+    "axis": "z",
+    "at_m": [
+     0.33,
+     0.47
+    ],
+    "values": [
+     0.0,
+     1.0
+    ]
+   }
   }
  }
 }
