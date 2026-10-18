@@ -10,12 +10,12 @@ import math, os
 
 from common import area, camera, finish, piece, portrait_of, shot as frame, sky, sun_from_sky
 
-HDRI, ROT = 'qwantani_sunset_puresky', float(os.environ.get('DUST_ROT', 296.0))           # a clear evening, the sky's sun 6 degrees up at azimuth 118 (behind the speaker's right)
-SAND = dict(material='pbr', texture='red_sand', tex_scale=1.6, tint='#B8876A', tint_mix=0.55, res='4k',
+HDRI, ROT = 'qwantani_sunset_puresky', float(os.environ.get('DUST_ROT', 264.0))           # a clear evening, the sky's sun 6 degrees up at azimuth 150 (behind the speaker's right)
+SAND = dict(material='pbr', texture='red_sand', tex_scale=1.6, tint='#B4704A', tint_mix=0.7, res='4k',
             rough_mul=1.0, bump=0.8)
 ROCK = dict(material='pbr', texture='cliff_side', tex_scale=3.0, tint='#8A4226', tint_mix=0.5, res='2k', vary=[30.0, 0.45],
             displace=2.5, beds=[1.6, 0.5])
-WB = (float(os.environ.get('DUST_WB', 7800)), 10.0)    # a photographer's warm white balance at golden hour
+WB = (float(os.environ.get('DUST_WB', 6200)), 10.0)    # a photographer's warm white balance at golden hour
 CAM = dict(height=0.6, distance=7.4, azimuth=-20.0, lens=65.0, target=(0.0, 0.0, 0.66), fstop=2.8, shift_x=0.1)
 
 
@@ -45,7 +45,7 @@ def props():
     heading = math.degrees(math.atan2(ty - ey, tx - ex))
     out = [piece('ext', module='dust_el', fn='terrain', eye=[round(ex, 3), round(ey, 3)], heading=round(heading, 2),
                  half_angle=42.0, r0=1.2, r1=292.0, segments=460, flat=[0.0, 0.0, 2.2], swell=0.35, swell_size=16.0,
-                 rim=1.6, vary=[12.0, 0.4], duals=[[2.3, 33.0, 7.0]], ripples=[0.12, 0.28, 12.0, 7.0, 3.5],
+                 rim=1.6, vary=[12.0, 0.4], duals=[[2.3, 33.0, 7.0]], ripples=[0.12, 0.3, 12.0, 7.0, 6.0],
                  swell2=[0.15, 5.0], albedo=0.95, spec=0.05, **SAND),
            # under everything, out of the camera's sight: ground for the light to bounce off on every side
            piece('box', size=[700.0, 700.0, 0.1], position=[0.0, 0.0, -0.45], **SAND)]
@@ -55,9 +55,9 @@ def props():
             plateau(288, -22, 36, 11, 3, squash=0.35),
             plateau(285, 1, 22, 7, 4, squash=0.4, cliff=0.5)]
     # the tumbleweed, rolling past farther back on the gust, its dust trailing behind it
-    out += [piece('ext', module='dust_el', fn='tumbleweed', diameter=0.6, seed=11, position=[2.4, 1.3, 0.27], snap=0.02,
-                  stems=30, branches=8, twigs=6, rotate=[8, 14, 30], color='#8C7454'),
-            piece('ext', module='dust_el', fn='dust', size=[2.6, 1.2, 0.7], position=[3.4, 1.6, -0.02], density=0.08,
+    out += [piece('ext', module='dust_el', fn='tumbleweed', diameter=0.55, seed=11, position=[4.5, 4.0, 0.27], snap=0.02,
+                  stems=40, branches=8, twigs=6, rotate=[8, 14, 30], color='#A89070'),
+            piece('ext', module='dust_el', fn='dust', size=[2.6, 1.2, 0.7], position=[5.4, 4.3, -0.02], density=0.08,
                   wisp=0.4, color='#E9BC94'),
             # a few patches of dust lifting off the flat behind, at different depths, lit from behind
             piece('ext', module='dust_el', fn='dust', size=[9.0, 4.0, 1.2], position=[5.5, 11.0, -0.05], density=0.05,
@@ -71,15 +71,15 @@ def props():
 
 def lights():
     # the sun on the sand in front bounces back into the speaker's face: a photographer's warm reflector, low
-    return {'bounce': area(-25, 6, 4.0, 2.2, '#F2B07E', (8.0, 3.0), (0.0, 0.0, 0.55))}
+    return {'bounce': area(-25, 3, 4.0, 5.0, '#F2B07E', (10.0, 2.0), (0.0, 0.0, 0.55))}
 
 
 def shot():
-    return frame('dust', props(), camera(**CAM), dict(sky(HDRI, ROT, strength=0.45, res='4k'), grade={'horizon': '#F4B98C', 'zenith': '#C9C3CF', 'height_deg': 25.0}),
+    return frame('dust', props(), camera(**CAM), dict(sky(HDRI, ROT, strength=0.45, res='4k'), grade={'horizon': '#F4B98C', 'zenith': '#A8AEC2', 'height_deg': 20.0}),
                  'barkhorn, Dust, the Southwest at golden hour', lights=lights(),
-                 sun=dict(sun_from_sky(HDRI, ROT, irradiance=24.0, angle_deg=0.5), elevation_deg=6.0),
-                 fin=finish(contrast=0.12, clarity=0.04, saturation=0.0, vignette=0.18, bloom=0.12, threshold=0.9),
-                 haze={'box_m': [-320.0, -30.0, -1.0, 320.0, 320.0, 70.0], 'density': 0.0008, 'anisotropy': 0.6,
+                 sun=dict(sun_from_sky(HDRI, ROT, irradiance=24.0, angle_deg=0.5), elevation_deg=7.0),
+                 fin=finish(contrast=0.18, clarity=0.04, saturation=0.0, vignette=0.18, bloom=0.12, threshold=0.9),
+                 haze={'box_m': [-320.0, -30.0, -1.0, 320.0, 320.0, 70.0], 'density': 0.0005, 'anisotropy': 0.4,
                        'color': '#E8DCD0'},
                  rotate_z=0.0, position=(0.0, 0.0, -0.015), white_balance=WB, exposure=0.5)
 
