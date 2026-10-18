@@ -27,7 +27,7 @@
     "fn": "ridge",
     "texture": "withered_grass",
     "res": "4k",
-    "displace": 0.025,
+    "displace": 0.06,
     "tint": "#5E4E48",
     "tint_mix": 0.35,
     "value": 0.5,
@@ -59,9 +59,9 @@
        200.0,
        80.0
       ],
-      "density": 0.0012,
+      "density": 0.0007,
       "color": "#D9CCEB",
-      "anisotropy": 0.75
+      "anisotropy": 0.7
      }
     ]
    },
@@ -113,13 +113,16 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#5A4834",
-    "color2": "#33291F",
-    "tip": "#7A6448",
-    "value_jitter": 0.3,
+    "color": "#4E3E2C",
+    "color2": "#3A2E22",
+    "tip": "#8A7050",
+    "value_jitter": 0.2,
+    "rough": 0.0,
+    "rough2": 0.0,
+    "rough_end": 0.02,
     "seed": 3,
-    "patchy": 0.75,
-    "clump": 0.3,
+    "patchy": 0.9,
+    "clump": 0.4,
     "clump_r": 0.05
    },
    {
@@ -170,16 +173,18 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#5A4834",
-    "color2": "#33291F",
-    "tip": "#7A6448",
-    "value_jitter": 0.3,
+    "color": "#4E3E2C",
+    "color2": "#3A2E22",
+    "tip": "#8A7050",
+    "value_jitter": 0.2,
+    "rough": 0.0,
+    "rough2": 0.0,
+    "rough_end": 0.02,
     "seed": 8,
     "patchy": 0.75,
     "root_mm": 1.8,
     "tip_mm": 0.35,
-    "random": 0.2,
-    "rough": 0.05
+    "random": 0.2
    },
    {
     "kind": "kit",
@@ -224,10 +229,13 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#5A4834",
-    "color2": "#33291F",
-    "tip": "#7A6448",
-    "value_jitter": 0.3,
+    "color": "#4E3E2C",
+    "color2": "#3A2E22",
+    "tip": "#8A7050",
+    "value_jitter": 0.2,
+    "rough": 0.0,
+    "rough2": 0.0,
+    "rough_end": 0.02,
     "seed": 5,
     "patchy": 0.9
    },
@@ -251,14 +259,14 @@
      [
       0.0,
       0.0,
-      0.33
+      0.36
      ]
     ],
-    "count": 900,
+    "count": 450,
     "children": 10,
     "length": [
-     0.06,
-     0.2
+     0.03,
+     0.1
     ],
     "ground": {
      "area": [
@@ -274,10 +282,13 @@
      "flat_r": 0.8,
      "slope_front": 0.02
     },
-    "color": "#5A4834",
-    "color2": "#33291F",
-    "tip": "#7A6448",
-    "value_jitter": 0.3,
+    "color": "#4E3E2C",
+    "color2": "#3A2E22",
+    "tip": "#8A7050",
+    "value_jitter": 0.2,
+    "rough": 0.0,
+    "rough2": 0.0,
+    "rough_end": 0.02,
     "seed": 6,
     "patchy": 1.0,
     "cell": 0.04
@@ -288,21 +299,21 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    3.0,
+    2.0,
     2.0
    ],
    "orbit": {
-    "azimuth_deg": -12.0,
+    "azimuth_deg": -25.0,
     "elevation_deg": 10.0,
-    "distance_m": 11.5
+    "distance_m": 6.0
    },
    "target": [
     0.0,
     0.0,
     0.7
    ],
-   "irradiance": 10.0,
-   "color": "#F2DCCB"
+   "irradiance": 16.0,
+   "color": "#F5D6BC"
   }
  },
  "render": {
@@ -312,7 +323,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": -2.2,
+  "exposure": -2.6,
   "white_balance_k": 5000,
   "white_balance_tint": 15,
   "look": "AgX - Medium High Contrast"
@@ -353,21 +364,21 @@
  },
  "sun": {
   "azimuth_deg": 167.8,
-  "elevation_deg": 4.2,
-  "irradiance": 2.5,
+  "elevation_deg": 6.0,
+  "irradiance": 6.0,
   "angle_deg": 0.53,
-  "color": "#FED4A0"
+  "color": "#FFC88A"
  },
  "finish": {
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.04,
+  "contrast": 0.1,
   "clarity": 0.1,
   "sharpen": 0.2,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.2,
+   "bloom": 0.08,
    "bloom_px": 40,
    "bloom_threshold": 0.8,
    "saturation": 0.12,

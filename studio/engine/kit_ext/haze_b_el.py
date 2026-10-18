@@ -310,9 +310,9 @@ def grass(bpy, name, p, kit):
     st.child_radius = p.get('clump_r', 0.06); st.child_roundness = 0.6
     st.clump_factor = p.get('clump', -0.4)                            # a tuft fanning out from its root
     st.clump_shape = 0.2
-    st.roughness_1 = p.get('rough', 0.04); st.roughness_1_size = 0.6
+    st.roughness_1 = p.get('rough', 0.04); st.roughness_1_size = p.get('rough_size', 0.6)
     st.roughness_endpoint = p.get('rough_end', 0.05)
-    st.roughness_2 = 0.03; st.roughness_2_size = 1.0
+    st.roughness_2 = p.get('rough2', 0.03); st.roughness_2_size = 1.0
     st.kink = 'NO'
     st.radius_scale = 1.0
     st.root_radius = p.get('root_mm', 0.9) / 1000.0

@@ -69,3 +69,7 @@ Two lessons on the way, both about the haze box:
   haze was cut the same way wherever no hill stopped the ray first.)
 - **The bounce card stands beside the camera now** (11.5 m out, irradiance 10), as a reflector would, not in the
   frame's left third.
+
+| Pass | Scale, samples | Blind score | If fixed | Verdict | Top changes | What I did |
+|---|---|---|---|---|---|---|
+| 4 | 0.5, 128 | 5.0 | 6.8 | iterate | "the photographed ranges and sky read as real"; but the speaker flat and pasted on (no rim); sky blown above the ridge; the grass curly CG hair, pale as frost; a uniform veil flattens the photo's own layers; dull lining (bounce 16 at 6 m); no footing; a dark band of ridge through the grass; milky overall (contrast 0.10, bloom 0.08) | Agreed at full size on the grass: its noise roughness curled every blade. Straw now stiff (no roughness along the blade), darker (#4E3E2C/#3A2E22, tips #8A7050), denser; the sun from the photograph's azimuth (168; the critic's 155 would have been the camera's right) at elevation 6 to clear the ridge, irradiance 6, warmer; exposure -2.6 for the sky; veil 0.0007; bounce as prescribed at azimuth -25 to keep it out of the line of sight; a shorter, thinner ring at the feet; ridge displacement 0.06; contrast and bloom as prescribed |
