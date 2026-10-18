@@ -13,7 +13,7 @@ import common as C
 SKY = 'syferfontein_6d_clear_puresky'
 
 # the view: the camera's place and the compass direction it looks along (the engine's azimuth: 0 from -y, 90 from +x)
-CAM = dict(height=1.15, distance=9.5, azimuth=-15.0, lens=85.0)
+CAM = dict(height=1.0, distance=9.5, azimuth=-15.0, lens=85.0)
 LOOK = 180.0 + CAM['azimuth']
 
 
@@ -29,18 +29,17 @@ FLOOR = -140.0
 def hills():
     a = at(-6.0, 950.0); b = at(17.0, 1250.0); c = at(-26.0, 2600.0); d = at(33.0, 2300.0); e = at(8.0, 1500.0)
     look = LOOK - 180.0
-    return [[*a, 152.0, 520.0, 190.0, look + 8.0],      # the ridge behind the speaker's horn
-            [*b, 145.0, 430.0, 210.0, look - 12.0],     # the ridge right of the sun
-            [*e, 118.0, 260.0, 160.0, look],            # the saddle between them, low, the fog pours over it
+    return [[*a, 170.0, 520.0, 190.0, look + 8.0],      # the ridge behind the speaker's horn
+            [*b, 175.0, 430.0, 210.0, look - 12.0],     # the ridge right of the sun
+            [*e, 128.0, 260.0, 160.0, look],            # the saddle between them, low, the fog pours over it
             [*c, 205.0, 900.0, 420.0, look + 20.0],     # far hills, hazy
             [*d, 185.0, 800.0, 380.0, look - 25.0]]
 
 
 def pours():
     s, a, b = at(8.0, 1400.0), at(-12.0, 880.0), at(21.0, 1180.0)
-    return [[*s, 260.0, 380.0, LOOK - 180.0, 60.0],    # through the saddle
-            [*a, 220.0, 300.0, LOOK - 180.0, 45.0],    # over the ridge behind the speaker
-            [*b, 200.0, 280.0, LOOK - 180.0, 40.0]]
+    return [[*s, 200.0, 380.0, LOOK - 180.0, 55.0],    # through the saddle, under the sun
+            [*b, 150.0, 300.0, LOOK - 180.0, 30.0]]    # a smaller tongue over the right-hand ridge
 
 
 def sky_rot(sun_bearing):
@@ -50,7 +49,7 @@ def sky_rot(sun_bearing):
 
 
 import os
-SUN_BEARING = float(os.environ.get('FOG_B_SUN', -30.0))
+SUN_BEARING = float(os.environ.get('FOG_B_SUN', 9.0))
 
 
 def props():
@@ -64,13 +63,13 @@ def props():
                 y_range=[2.6, 6500.0], x_spread=[0.55, 1.05], x_margin=40.0, cols=560, row_ratio=0.004, min_row=0.3,
                 relief=0.15, relief_far=0.008, gullies=[20.0, 140.0]),
         # the fog: a sea of it below, pouring through the saddle, a thin haze above
-        C.piece('ext', module='fog_b_el', fn='fog', hills=H, floor=FLOOR, pours=pours(), top=-48.0, heave=8.0,
-                billows=[[160.0, 18.0], [50.0, 9.0], [15.0, 3.0]], bank=34.0, bank_size=200.0, rise=[1000.0, 1800.0, 32.0],
-                soft=1.2, density=0.08, anisotropy=0.65, billow_size=30.0, billow_cut=0.2, haze=0.0001, haze_height=170.0,
+        C.piece('ext', module='fog_b_el', fn='fog', hills=H, floor=FLOOR, pours=pours(), top=-48.0, heave=14.0,
+                billows=[[160.0, 18.0], [50.0, 9.0], [12.0, 5.0]], bank=15.0, bank_size=200.0, rise=[1000.0, 1800.0, 25.0],
+                soft=3.0, density=0.035, anisotropy=0.8, billow_size=30.0, billow_cut=0.2, haze=0.0001, haze_height=170.0,
                 box=[-3500.0, 4.4, -170.0, 4500.0, 7000.0, 320.0]),
         # wisps rising up the cliff just behind the brow
-        C.piece('ext', module='fog_b_el', fn='fog', top=0.5, heave=4.0, billows=[[22.0, 5.0], [7.0, 1.5]],
-                soft=4.0, density=0.03, anisotropy=0.6, billow_size=6.0, billow_cut=0.55, billow_gain=3.0,
+        C.piece('ext', module='fog_b_el', fn='fog', top=1.0, heave=4.0, billows=[[22.0, 5.0], [7.0, 1.5]],
+                soft=4.0, density=0.04, anisotropy=0.6, billow_size=6.0, billow_cut=0.45, billow_gain=3.0,
                 box=[-160.0, 4.3, -40.0, 200.0, 120.0, 4.0]),
         # grass tufts round the speaker and along the brow
         C.scatter(['grass_medium_02', 'grass_medium_01'], 3000, [-9.0, -14.5, 11.0, 3.2],
@@ -81,7 +80,7 @@ def props():
         C.scatter(['grass_medium_02'], 60, [-1.1, -1.1, 1.1, 1.1], avoid=((0.0, 0.0, 0.42), (0.0, -0.45, 0.3)), scale=(0.2, 0.35), seed=7),
         C.scatter(['grass_medium_02'], 50, [-8.0, 3.1, 12.0, 3.6], avoid=((0.75, 3.3, 1.3),), scale=(1.0, 1.6), seed=5),
         # a greywacke outcrop at the brow, dark against the fog behind the clear cabinet
-        C.asset('boulder_01', (0.6, 3.4, -0.2), rotate=(0, 0, 75), scale=1.1),
+        C.asset('coast_rocks_05', (-0.4, 3.5, -0.55), rotate=(0, 0, 200), scale=1.3),
         C.scatter(['grass_medium_02'], 30, [-0.6, 2.6, 1.8, 3.9], avoid=((0.55, 3.4, 0.55),), scale=(0.6, 1.2), seed=13),
         C.asset('coast_rocks_05', (-2.6, 3.6, -0.35), rotate=(0, 0, 20), scale=0.6),
         C.asset('coast_rocks_05', (3.6, 3.8, -0.4), rotate=(0, 0, 140), scale=0.5),
@@ -95,11 +94,11 @@ def shot():
     cam = C.camera(**CAM, fstop=2.8, shift_x=0.15)
     cam['clip_end_m'] = 12000.0
     rot = sky_rot(SUN_BEARING)
-    s = C.shot('fog_b', props(), cam, C.sky(SKY, rotation_deg=rot, strength=1.0, res='4k'),
+    s = C.shot('fog_b', props(), cam, C.sky(SKY, rotation_deg=rot, strength=0.85, res='4k'),
                   'barkhorn, Fog: San Francisco fog over a Marin headland at dawn',
-                  sun=C.sun_from_sky(SKY, rot, irradiance=7.0), rotate_z=10.0, position=(0.0, 0.0, -0.015),
-                  lights={'bounce': C.area(-35.0, 12.0, 2.5, 1.1, color='#E8E4DC', size=(3.0, 3.0), target=(0.0, 0.0, 0.6))},
-                  samples=512, fin=C.finish(contrast=0.10, clarity=0.06, saturation=0.08, lift=0.035, lift_color='#3A3428', vignette=0.12))
+                  sun=C.sun_from_sky(SKY, rot, irradiance=7.0, color='#FFDDB0'), rotate_z=10.0, position=(0.0, 0.0, -0.015),
+                  lights={'bounce': C.area(-22.0, 8.0, 2.5, 2.4, color='#F4F3F0', size=(3.0, 3.0), target=(0.0, 0.0, 0.6))},
+                  samples=512, fin=C.finish(contrast=0.16, clarity=0.06, saturation=0.08, lift=0.012, lift_color='#3A3428', vignette=0.12))
     return s
 
 
