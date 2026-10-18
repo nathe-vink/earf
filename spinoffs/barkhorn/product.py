@@ -2079,7 +2079,8 @@ PRODUCT = Product(
                'driver-motor': {'preset': 'ecoat', 'color': '#1D1D1E', 'roughness': 0.34},
                'driver-magnet': {'preset': 'metal', 'color': '#B9B6AE', 'roughness': 0.3},
                'driver-coil': {'preset': 'metal', 'color': '#B87333'}, 'driver-spider': {'preset': 'rubber', 'color': '#C8B88A'},
-               'driver-plug': {'preset': 'ecoat', 'color': '#202022', 'roughness': 0.3, 'grain': 0.08},
+               # the phase plug machined aluminium, dark anodised, so it catches the light at the bottom of the throat
+               'driver-plug': {'preset': 'metal', 'color': '#6A6B6E', 'roughness': 0.28},
                'driver-screw': {'preset': 'black_oxide'}, 'driver-gasket': {'preset': 'rubber', 'color': '#121212', 'roughness': 0.85},
                'driver-terminal': {'preset': 'metal', 'color': '#D4D4D2', 'roughness': 0.15},
                'driver-bright': {'preset': 'metal', 'color': '#C9CACB', 'roughness': 0.22, 'anisotropic': 0.5},
