@@ -97,3 +97,32 @@ Blind, by the duel prompt (`critic/ab/PROMPT-DUEL.txt`, run by hand so `critic/b
 
 So the order is pass 3, then pass 6, then pass 5, and the finals are rendered from pass 3's rig (`haze_b.py` is back at
 that version; the photographed version is in git at b761a8d). Pass 6 is the runner-up.
+
+## Finals
+
+`renders/2026-10-18/barkhorn/element31/haze_b.png` (2400 x 1600) and `haze_b-portrait.png` (1600 x 2000), each with
+its `.report.json` and `.shot.json`, from pass 3's rig at 512 samples, denoised. The container restarted twice under a
+single two-hour render, so the finals render in eight horizontal strips with the finish off, each strip saved as it
+lands (a restart resumes at the next), then stitched (32 px overlaps, aligned and feathered) and finished once over the
+whole frame: `haze_b_strips.py`. Landscape: 99.3 min of rendering (the sky's strips about 2 min each, the grass's 16
+to 27). The portrait is re-framed, not cropped: 105 mm from 7.5 m, the speaker on the right, the sky above for type.
+
+**The blind critic on the landscape final: 5.5** ("a competent atmospheric CG render, not a photograph"; if fixed, 7.3).
+
+### What holds it at 5.5, honestly
+
+- **The speaker's light.** Every critic, in every pass and both concepts, found the cabinet either flat and front-lit
+  (with a reflector) or dark and murky (without one), and never glowing. The cabinet is violet acrylic lined white
+  inside, so a sun behind it cannot shine through it; only the horn's resin and the cabinet's edges can carry the
+  backlight. A backlit dusk is the brief's light, and in it this speaker reads dark unless it is filled from the
+  front. The answer is probably a side light (the low sun raking across the cabinet's visible side), which moves the
+  sun out of the frame and breaks the icon's "sun behind the haze"; that is a change to the concept for the owner to
+  choose.
+- **The grass reads as CG hair.** Hair-strand grass, however coloured or stiffened, was called fur by most critics.
+  Scanned grass models were tried first and read as weeds. A photogrammetric dry-grass asset at this scale is not in
+  the CC0 toolkit.
+- **The modelled ranges.** The nearest range reads as a smooth mound, and the ranges' haze as one band. Photographed
+  ranges (passes 4 to 7) fixed that ("the ranges and sky read as real") but lost the duel on the speaker and the grass,
+  which stayed the same.
+- **The sun disc touches the horn's top edge** in the final, and the frame is milky (the critic's c2 and c5). These
+  are fixable in one more pass, but they would not move the score past the three above.
