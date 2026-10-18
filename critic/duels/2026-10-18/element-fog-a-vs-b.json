@@ -1,0 +1,51 @@
+{
+ "subject": "Fog in its element, concept A (a summit above a sea of cloud, round 1's final) against concept B (San Francisco's fog: a headland at dawn above the fog)",
+ "date": "2026-10-18",
+ "prompt": "critic/ab/PROMPT-DUEL.txt, its second paragraph worded for two candidate pictures of the same page",
+ "frames": {
+  "A": "renders/2026-10-18/barkhorn/element31/fog.png (r31-element-fog ba3d100, on main)",
+  "B": "renders/2026-10-18/barkhorn/element31/fog_b.png (r31-element-fog-b 5b179cb)"
+ },
+ "judges": [
+  {
+   "shown_as_A": "B",
+   "shown_as_B": "A",
+   "scores": {
+    "B": 7.0,
+    "A": 4.5
+   },
+   "prefer": "B",
+   "notes": "Prefers B: a low warm sun, fog layered over the ridgelines and a natural lens falloff that read as a location photograph; crisp fractured rock and grass that hold at 3x; the cabinet's edges glowing; a low three-quarter view on the left third. A: the foreground slabs smeared and streaked at 3x with a torn patch; a flat gradient sky; stamped clip-art birds; a dead-centre front view with the cloud sea's straight horizon cutting the cabinet; the horn throat a black blob. B against: the base and ports hidden in grass, the front under-exposed (median luma about 68) so the tint looks muddy olive, a near-black foreground band."
+  },
+  {
+   "shown_as_A": "A",
+   "shown_as_B": "B",
+   "scores": {
+    "A": 4.0,
+    "B": 6.5
+   },
+   "prefer": "B",
+   "notes": "Prefers B: the low sun rakes and rims the cabinet in the scene's own light; sun-raked fractured facets on the boulder; real aerial perspective in the fog and ridges; the cabinet reads as thick tinted cast acrylic. A: lit flat and pasted in; smeared, UV-stretched foreground rock; a soft displaced cloud plane under a plain gradient sky; clip-art birds; a melted dark horn throat. B against: the horn reads as polished chrome; the front in shade with the cone crushed black and grass across it; the base buried in grass; a heavy dark foreground."
+  },
+  {
+   "shown_as_A": "B",
+   "shown_as_B": "A",
+   "scores": {
+    "B": 6.5,
+    "A": 5.5
+   },
+   "prefer": "B",
+   "notes": "Prefers B: grass, rock and fog that read as photographed; layered fog and ridges with atmospheric depth; the product sharing the scene's warm low haze with grass passing in front of it; a defined driver ring. A: a smeared, game-texture ledge right up to the base; a flat sky with clip-art birds; a crisp cool-white product on a soft ledge that reads pasted in; a melted horn throat; a crescent reflection on the cone; the cloud-sea line cutting the cabinet. B against: the plinth and ports buried in grass; a mirror-chrome horn; a dim cabinet against bright fog; a heavy dark foreground; a few grass tufts that seem to hover on the right horizon."
+  }
+ ],
+ "agreed": "All three judges preferred B for its photographic light, the fog's layered depth and set textures that hold at 3x, and marked A down for its smeared foreground rock, flat gradient sky, clip-art birds, the cloud sea's straight horizon cutting the cabinet and a melted horn throat. All three marked B down for the base and ports buried in grass, a dim cabinet against the bright fog and a heavy dark foreground; two read its horn as chrome.",
+ "result": {
+  "A_mean": 4.67,
+  "B_mean": 6.67,
+  "wins": {
+   "A": 0,
+   "B": 3
+  },
+  "kept": "B"
+ }
+}

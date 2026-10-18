@@ -186,7 +186,7 @@ Three of the campaign critics named the speaker's own surfaces:
   | Poison | a redwood rainforest (6.5) | | A |
   | Ice | snow country at blue hour, a cabin's window far behind (7.0) | Diamond Beach at sunrise (5.8) | A, by a blind duel (2 to 1) |
   | Haze | a lavender field at dusk (6.0) | layered hills at blue hour (5.5) | B, by a blind duel (2 to 1), then rendered again with its base in view and the sun clear of the horn (a duel, 2 to 0) |
-  | Fog | a summit above a sea of cloud (6.5) | San Francisco's fog | A (B rendering) |
+  | Fog | a summit above a sea of cloud (6.5) | San Francisco's fog: a headland at dawn above the fog (6.0) | B, by a blind duel (3 to 0); a third concept, the Golden Gate from the Marin Headlands, is in passes |
   | Smoke | woodsmoke at dawn in a pine wood (6.5) | a misty birch wood, high-key (5.5) | A, by a blind duel (3 to 0), then re-finished from its raw (a duel, 6.4 to 6.0) |
 
   The score is a fresh critic's on the final itself. The sessions fixed the engine as they went:
