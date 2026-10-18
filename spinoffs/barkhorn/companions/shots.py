@@ -119,7 +119,7 @@ def bell_lights(s, lx, ly, h, watts=None):
         a = math.radians(90 + 120 * k)
         s['lights'][f'bell{len(s["lights"])}'] = {'type': 'point', 'position': [round(lx + 0.047 * math.cos(a), 4), round(ly + 0.047 * math.sin(a), 4),
                                                                           round(h + LAMP_STRIP_Z, 4)],
-                                                 'power_w': (watts or LAMP_W) / 3, 'radius_m': 0.02, 'color': 2700,
+                                                 'power_w': (watts or LAMP_W) / 3, 'radius_m': 0.04, 'color': 2700,
                                                  'camera': False, 'transmission': False, 'specular': 0.0}
 
 
@@ -128,7 +128,7 @@ WALL_DUSK = '#B9AEA2'             # the wall a stop down (pass 2: it outshone th
 # the window's cool light from the left (pass 2: dusk did not read)
 WINDOW_FILL = {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': -70, 'elevation_deg': 12, 'distance_m': 2.4},
                'irradiance': 0.35, 'color': '#9FB4E0'}
-DUSK = {'kind': 'gradient', 'strength': 6.0, 'zenith': '#1E2C4A', 'horizon': '#5A6E92', 'ground': '#2A2A30'}
+DUSK = {'kind': 'gradient', 'strength': 8.0, 'zenith': '#1E2C4A', 'horizon': '#6C82A8', 'ground': '#2A2A30'}
 
 
 # a real plastered wall over the room's back wall, a hair in front of it (promo pass 1: the plain wall read as CG)
@@ -182,11 +182,14 @@ def hero_lamp(colour='haze'):
     blue reads, the strip's own glow down (the sleeve clipped cold), the fill up and lower, exposure 0.75, white
     balance 3800 K (the wall went magenta), the lamp 7 cm off the wall. Pass 2 (5.5, promo-hero-lamp-p2.json): the
     camera below the rim so the shade's lit inside reads; a fill from the window side on the speaker (it was a blue
-    void); Bell at 21 W so it pools on the walnut; the sleeve's own glow 12 (it clipped); 3100 K."""
+    void); Bell at 21 W so it pools on the walnut; the sleeve's own glow 12 (it clipped); 3100 K. Pass 3 (5.5,
+    promo-hero-lamp-p3.json): the fill the window's blue (the wall went magenta); the grade one with Cumulus's
+    (DUSK_WB); Bell's lamps hidden from the camera and softer, the sleeve's glow 6 (hot bulbs showed through it); a
+    warm kick on the foot; the camera from the right at 50 mm so the wall recedes; the dusk sky 8."""
     lx, ly = 0.36, 0.38
     h = CAB_TOP
     s = room_shot(f'Bell beside {C.NAMES[colour]}', [1600, 1100],
-                  {'position': [0.30, -1.25, 0.90], 'target': [0.20, 0.45, 0.98], 'lens_mm': 40, 'level': True, 'fstop': 2.8,
+                  {'position': [0.95, -1.10, 1.00], 'target': [0.30, 0.45, 1.00], 'lens_mm': 50, 'level': True, 'fstop': 2.8,
                    'focus': [lx, ly - 0.2, h + 0.3]})
     s['render']['samples'] = HERO_SAMPLES
     s['set'] = room(dusk=True)
@@ -196,9 +199,12 @@ def hero_lamp(colour='haze'):
                      {'def': LAMP, 'flavour': colour, 'instances': [{'position': [lx, ly, h], 'rotate_z': 0}]}]
     s['sky'] = dict(DUSK)
     s['lights'] = {'fill': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': -55, 'elevation_deg': 20, 'distance_m': 2.4},
-                            'target': [-0.55, 0.5, 1.0], 'irradiance': 0.30, 'color': '#E4D6E8'}}
+                            'target': [-0.55, 0.5, 1.0], 'irradiance': 0.30, 'color': '#9FB2D6'},
+                   # a low warm kick from the right on the foot (pass 3: its discs went black)
+                   'foot_kick': {'type': 'area', 'size_m': [0.4, 0.2], 'position': [0.9, -0.3, 0.75], 'target': [lx, ly, h + 0.02],
+                                 'power_w': 4.0, 'color': 2700}}
     bell_lights(s, lx, ly, h, watts=21.0)
-    s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 12.0}}
+    s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 6.0}}
     s['render']['white_balance_k'] = DUSK_WB
     s['render']['exposure'] = 0.75
     return s

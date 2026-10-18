@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   0.3,
-   -1.25,
-   0.9
+   0.95,
+   -1.1,
+   1.0
   ],
   "target": [
-   0.2,
+   0.3,
    0.45,
-   0.98
+   1.0
   ],
-  "lens_mm": 40,
+  "lens_mm": 50,
   "level": true,
   "fstop": 2.8,
   "focus": [
@@ -40,7 +40,7 @@
    "roughness": 0.38
   },
   "led": {
-   "strength": 12.0
+   "strength": 6.0
   }
  },
  "set": {
@@ -154,9 +154,9 @@
  ],
  "sky": {
   "kind": "gradient",
-  "strength": 6.0,
+  "strength": 8.0,
   "zenith": "#1E2C4A",
-  "horizon": "#5A6E92",
+  "horizon": "#6C82A8",
   "ground": "#2A2A30"
  },
  "lights": {
@@ -177,9 +177,28 @@
     1.0
    ],
    "irradiance": 0.3,
-   "color": "#E4D6E8"
+   "color": "#9FB2D6"
   },
-  "bell1": {
+  "foot_kick": {
+   "type": "area",
+   "size_m": [
+    0.4,
+    0.2
+   ],
+   "position": [
+    0.9,
+    -0.3,
+    0.75
+   ],
+   "target": [
+    0.36,
+    0.38,
+    0.7000000000000001
+   ],
+   "power_w": 4.0,
+   "color": 2700
+  },
+  "bell2": {
    "type": "point",
    "position": [
     0.36,
@@ -187,21 +206,7 @@
     1.121
    ],
    "power_w": 7.0,
-   "radius_m": 0.02,
-   "color": 2700,
-   "camera": false,
-   "transmission": false,
-   "specular": 0.0
-  },
-  "bell2": {
-   "type": "point",
-   "position": [
-    0.3193,
-    0.3565,
-    1.121
-   ],
-   "power_w": 7.0,
-   "radius_m": 0.02,
+   "radius_m": 0.04,
    "color": 2700,
    "camera": false,
    "transmission": false,
@@ -210,12 +215,26 @@
   "bell3": {
    "type": "point",
    "position": [
+    0.3193,
+    0.3565,
+    1.121
+   ],
+   "power_w": 7.0,
+   "radius_m": 0.04,
+   "color": 2700,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bell4": {
+   "type": "point",
+   "position": [
     0.4007,
     0.3565,
     1.121
    ],
    "power_w": 7.0,
-   "radius_m": 0.02,
+   "radius_m": 0.04,
    "color": 2700,
    "camera": false,
    "transmission": false,
