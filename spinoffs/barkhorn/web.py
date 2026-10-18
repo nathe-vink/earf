@@ -455,22 +455,28 @@ def body():
                       f'<img src="img/facade.jpg" srcset="img/facade-1200.jpg 1200w, img/facade.jpg 2400w" sizes="(max-width: 1240px) 100vw, 1240px" '
                       f'width="{fw}" height="{fh}" loading="lazy" alt="A concrete wall by a river at night, the eight standing along its foot '
                       'on lights, their colours washing up the wall and running into one another"></picture></figure>\n')
-        coins = ''.join(f'<li><button type="button" aria-label="{name}" aria-current="{str(i == 0).lower()}">'
-                        f'<span class="coin-dot" style="--i:{coin[k]}"></span></button></li>'
+        # each colour's light as it falls on the wall in its photograph (sampled), and how bright that photograph really is
+        glow = {'red': ('235 67 66', 1.0), 'orange': ('235 94 45', 1.0), 'amber': ('235 154 36', 1.0), 'green': ('136 234 131', 0.57),
+                'blue': ('73 174 235', 0.98), 'violet': ('143 112 235', 0.72), 'ice': ('218 234 235', 1.0), 'black': ('146 181 235', 0.28)}
+        coins = ''.join(f'<button type="button" role="radio" aria-checked="{str(i == 0).lower()}" tabindex="{0 if i == 0 else -1}" '
+                        f'aria-label="{name}" data-glow="{glow[k][0]}" data-a="{glow[k][1]}"><span class="coin-dot" style="--i:{coin[k]}"></span></button>'
                         for i, (k, num, name, *_) in enumerate(CLOUDS))
+        intro = ('<p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2>'
+                 '<p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with colour.</p>')
         reel = ('  <section class="band lightband" id="light">\n'
-                '    <div class="wrap"><div class="head"><div><p class="eyebrow">Lit from below</p><h2>Put a light under it.</h2>'
-                '<p>Cast acrylic carries light to its edges, so a lamp underneath fills the whole cabinet with colour.</p></div></div></div>\n'
-                '    <div class="light-run" id="light-run" style="--n:8">\n'
-                '      <div class="light-stage"><div class="wrap light-grid">\n'
-                '        <div class="light-pic" role="img" aria-label="Each of the eight speakers standing on a light, one after another">' + ''.join(
-                    f'<img src="img/{k}-reel.jpg" width="{rw}" height="{rh}" alt="" loading="lazy"{" style=opacity:1" if i == 0 else ""}>'
-                    for i, (k, *_) in enumerate(CLOUDS)) + '</div>\n'
-                f'        <div class="light-text"><p class="light-name" id="light-name" aria-live="polite">{first_[2]}</p>'
-                f'<p class="light-line" id="light-line">{first_[5]}</p>'
-                f'<ol class="light-dots" aria-label="The eight colours">{coins}</ol></div>\n'
-                '      </div></div>\n    </div>\n'
-                + ('    <div class="wrap">\n' + facade + '    </div>\n' if facade else '') +
+                f'    <div class="wrap light-head">{intro}</div>\n'           # on phones the heading stands above the run
+                '    <div class="light-run" id="light-run">\n'
+                '      <div class="light-stage">\n'
+                '        <div class="light-glow" aria-hidden="true"></div>\n'
+                '        <figure class="light-pic">' + ''.join(
+                    f'<img src="img/{k}-reel.jpg" width="{rw}" height="{rh}" alt="{name} standing on a light, its colour thrown up the wall behind it"'
+                    f'{"" if i == 0 else " loading=lazy"} decoding="async">' for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</figure>\n'
+                f'        <div class="light-text"><div class="light-intro">{intro}</div>\n'
+                f'          <div class="light-colour"><p class="num" id="light-num">Atmosphere {first_[1]}</p>'
+                f'<p class="light-name" id="light-name">{first_[2]}</p><p class="light-line" id="light-line">{first_[5]}</p>\n'
+                f'            <div class="light-coins" role="radiogroup" aria-label="The eight colours"><span class="ring" aria-hidden="true"></span>{coins}</div></div>\n'
+                '        </div>\n      </div>\n    </div>\n'
+                + facade +
                 '  </section>')
     if all('habitat' in meta[k] for k in KEYS):
         hw, hh = meta['red']['habitat']['w'], meta['red']['habitat']['h']
@@ -708,28 +714,78 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 @media (prefers-reduced-motion: reduce) { .closer-stage img { transition: none } }
 .facade { margin: 0 0 56px }
 .facade img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
-/* lit from below: a pinned frame the page scrolls through, each colour cross-fading into the next; the coins mark the way */
-.lightband { background: #0B0A0C; color: #ECE8E1; padding-bottom: 0 }
-.lightband .head p, .lightband .eyebrow { color: #A39E95 }
-.light-run { --n: 8; height: calc(var(--n) * 55vh + 45vh); position: relative }
-.light-stage { position: sticky; top: calc(var(--header) + env(safe-area-inset-top, 0px)); height: calc(100vh - var(--header));
-  display: grid; align-items: center }
-.light-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); gap: clamp(24px, 4vw, 64px); align-items: center; width: 100% }
-.light-pic { position: relative; aspect-ratio: 1 / 1; max-width: 100%; width: min(100%, calc(100vh - var(--header) - 96px)); justify-self: center;
-  border-radius: 6px; overflow: hidden; background: #000 }
-.light-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; will-change: opacity }
-.light-text { display: grid; gap: 10px; align-content: center; min-width: 0 }
-.light-name { margin: 0; font-size: clamp(40px, 6vw, 84px); line-height: 1; font-weight: 600; letter-spacing: -0.03em }
-.light-line { margin: 0; color: #A39E95; font-size: 18px; max-width: 30ch }
-.light-dots { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px }
-.light-dots button { width: 36px; height: 36px; padding: 4px; border: 0; border-radius: 50%; background: transparent; cursor: pointer }
-.light-dots button[aria-current="true"] { box-shadow: inset 0 0 0 2px #ECE8E1 }
-.light-dots .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: url(img/coins-dark.jpg); mix-blend-mode: screen }
-.lightband button:focus-visible { outline-color: #ECE8E1 }
-.lightband .facade { margin: 0; padding-block: 64px 72px }
-@media (max-width: 860px) { .light-grid { grid-template-columns: 1fr; gap: 14px } .light-pic { width: min(100%, calc(100vh - var(--header) - 230px)) }
-  .light-name { font-size: 40px } .light-dots { margin-top: 8px } }
-@media (prefers-reduced-motion: reduce) { .light-run { height: auto } .light-stage { position: static; height: auto; padding-block: 24px } }
+/* lit from below: the run pins one room. Scrolling picks the colour, a quarter of a screen each, and time plays the change
+   (the lamp goes off, the next comes on: no frame mixes two colours); the colour's light spills past the photograph onto
+   the page; only the photograph's slow push follows the scroll itself */
+@property --glow { syntax: '<color>'; inherits: true; initial-value: transparent }
+@property --glow2 { syntax: '<color>'; inherits: true; initial-value: transparent }
+.lightband { background: #0B0C10; color: #ECE8E1; padding-block: 0 }
+.lightband .eyebrow, .lightband .num { color: #A39E95 }
+.light-head { display: none }
+.light-run { position: relative; height: calc(100svh - var(--header) + 8 * 25svh) }
+.light-stage { position: sticky; top: calc(var(--header) + env(safe-area-inset-top, 0px)); height: calc(100svh - var(--header));
+  display: grid; grid-template-columns: min(58vw, calc(100svh - var(--header))) minmax(0, 1fr); grid-template-rows: 100%;
+  overflow: hidden; isolation: isolate; transition: --glow .9s ease, --glow2 .9s ease }
+.light-stage.dip { transition-duration: .16s }
+.light-glow { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 62vw 80% at calc(min(58vw, 100svh - var(--header)) / 2) 58%, var(--glow), var(--glow2) 40%, transparent 72%) }
+.light-pic { grid-column: 1; position: relative; margin: 0; width: 100%; height: 100%; max-width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 86%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 86%, transparent);
+  mask-composite: intersect }
+.light-pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; scale: var(--push, 1);
+  transition: opacity .16s cubic-bezier(.4, 0, 1, 1) }
+.light-pic img.on { opacity: 1; transition: opacity .56s cubic-bezier(.16, 1, .3, 1) }
+.light-pic.wake img.on { transition-duration: 1.1s }
+.light-text { grid-column: 2; display: flex; flex-direction: column; justify-content: space-between; min-width: 0;
+  padding: clamp(40px, 9vh, 88px) max(16px, calc((100vw - 1240px) / 2 + 16px)) clamp(40px, 9vh, 88px) clamp(24px, 4vw, 56px) }
+.light-intro h2 { font-size: clamp(30px, 3.2vw, 46px) }
+.light-intro p:last-child, .light-head p:last-child { margin: 14px 0 0; color: #A39E95; font-size: 17px; line-height: 1.55; max-width: 34ch }
+.light-colour .num { margin: 0 0 12px; font: 500 13px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase }
+.light-name { margin: 0; font-size: clamp(56px, 6.6vw, 96px); line-height: .95; font-weight: 600; letter-spacing: -0.035em }
+.light-line { margin: 12px 0 0; color: #A39E95; font-size: 18px; line-height: 1.45; max-width: 30ch }
+.light-name, .light-line { transition: opacity .42s cubic-bezier(.16, 1, .3, 1), translate .42s cubic-bezier(.16, 1, .3, 1) }
+.light-colour.swap .light-name, .light-colour.swap .light-line { opacity: 0; translate: 0 8px; transition-duration: .12s }
+.light-coins { position: relative; display: flex; gap: 4px; margin: 28px 0 0 -7px }
+.light-coins button { width: 44px; height: 44px; padding: 7px; border: 0; border-radius: 50%; background: transparent; cursor: pointer; flex: none }
+.light-coins .coin-dot { width: 100%; height: 100%; display: block; border-radius: 50%; background-image: url(img/coins-dark.jpg); mix-blend-mode: screen }
+.light-coins .ring { position: absolute; left: 0; top: 0; width: 44px; height: 44px; border-radius: 50%; box-shadow: inset 0 0 0 2px #ECE8E1;
+  translate: calc(var(--at, 0) * 48px) 0; transition: translate .36s cubic-bezier(.2, .8, .2, 1); pointer-events: none }
+.light-coins button:focus-visible { outline: 2px solid #ECE8E1; outline-offset: 2px }
+.lightband .facade { margin: 0; opacity: .15; transition: opacity 1.2s ease;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent) }
+.lightband .facade.seen { opacity: 1 }
+.lightband .facade img { width: 100%; height: auto; display: block; border-radius: 0; max-width: 100% }
+@media (max-width: 860px) {
+  .light-head { display: block; padding-block: 56px 24px }
+  .light-head h2 { font-size: clamp(30px, 8vw, 40px) }
+  .light-intro { display: none }
+  .light-stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) }
+  .light-glow { background: radial-gradient(ellipse 90vw 60% at 50% 48%, var(--glow), var(--glow2) 45%, transparent 80%) }
+  .light-pic { grid-column: 1; height: min(125vw, calc(100svh - var(--header) - 200px));
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 84%, transparent); -webkit-mask-composite: source-over;
+    mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 84%, transparent); mask-composite: add }
+  .light-pic img { object-position: 50% 55% }
+  .light-text { grid-column: 1; justify-content: end; padding: 0 max(16px, env(safe-area-inset-right, 0px)) 20px max(16px, env(safe-area-inset-left, 0px)) }
+  .light-colour .num { display: none }
+  .light-name { font-size: 40px; line-height: 1 }
+  .light-line { font-size: 17px; line-height: 1.4; margin-top: 8px; min-height: calc(2 * 1.4em) }
+  .light-coins { margin: 14px 0 0; justify-content: space-between; gap: 0 }
+  .light-coins .ring { translate: calc(var(--at, 0) * (100vw - 32px - 44px) / 7) 0 }
+}
+@media (prefers-reduced-motion: reduce) {
+  .light-run { height: auto } .light-stage { position: relative; top: 0; transition: none }
+  .light-pic img, .light-pic img.on { transition: opacity .15s linear; scale: 1 }
+  .light-name, .light-line, .light-coins .ring { transition: none }
+  .lightband .facade { opacity: 1; transition: none }
+}
+/* the header over the dark band */
+header.top { transition: background-color .3s ease, border-color .3s ease }
+header.top.on-dark { background: rgb(11 12 16 / .72); backdrop-filter: blur(20px); border-bottom-color: rgb(255 255 255 / .06) }
+header.top.on-dark .brand, header.top.on-dark nav a { color: #ECE8E1 }
+header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.webp);
+  background-image: image-set(url(img/globe-spin-dark.avif) type("image/avif"), url(img/globe-spin-dark.webp) type("image/webp")) }
 /* the habitats: one campaign picture at a time, snapping along a strip (the portraits on phones) */
 .hab-frame { position: relative; container-type: inline-size; --col: min(86cqw, 1080px); --mid: calc(var(--col) / 3) }
 .hab-frame .nav { top: var(--mid); transition: opacity .2s ease }
@@ -1022,32 +1078,61 @@ __NEXT__
 <script>
 const D = __DATA__, BY = Object.fromEntries(D.clouds.map(c => [c.k, c]));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches, TAU = Math.PI * 2;
-// lit from below: scrolling through the run cross-fades the eight (each picture lies over the one before and fades in over
-// its share of the run); the coins say where you are and jump there. Under reduced motion the coins simply pick one.
+// lit from below: scrolling picks the colour (a quarter of a screen each) and time plays the change; the coins are a
+// radio group that switch the lamp and move the run to that colour; the header darkens over the band
 const run = document.getElementById('light-run');
 if (run) {
-  const pics = [...run.querySelectorAll('.light-pic img')], dots = [...run.querySelectorAll('.light-dots button')], last = pics.length - 1;
-  const name = document.getElementById('light-name'), line = document.getElementById('light-line');
-  let at = -1, queuedL = false;
-  const paint = f => {
-    pics.forEach((im, i) => { const o = i === 0 ? 1 : Math.min(1, Math.max(0, f - (i - 1))); im.style.opacity = o.toFixed(3); });
-    const i = Math.round(f);
-    if (i !== at) { at = i; const c = D.clouds[i]; name.textContent = c.name; line.textContent = c.line;
-      dots.forEach((d, j) => d.setAttribute('aria-current', String(j === i))); }
-  };
-  const progress = () => { const r = run.getBoundingClientRect(), span = r.height - innerHeight;
-    return Math.min(1, Math.max(0, -r.top / Math.max(1, span))) * last; };
-  if (reduce) {
-    paint(0);
-    dots.forEach((d, i) => d.addEventListener('click', () => paint(i)));
-  } else {
-    const tick = () => { queuedL = false; paint(progress()); };
-    addEventListener('scroll', () => { if (!queuedL) { queuedL = true; requestAnimationFrame(tick); } }, { passive: true });
-    addEventListener('resize', tick); tick();
-    dots.forEach((d, i) => d.addEventListener('click', () => {
-      const r = run.getBoundingClientRect(), span = r.height - innerHeight;
-      scrollTo({ top: scrollY + r.top + span * (i / last) + 1, behavior: 'smooth' }); }));
+  const stageL = run.querySelector('.light-stage'), fig = run.querySelector('.light-pic'), pics = [...fig.querySelectorAll('img')];
+  const coins = [...run.querySelectorAll('.light-coins button')], group = run.querySelector('.light-coins'), colour = run.querySelector('.light-colour');
+  const nameEl = document.getElementById('light-name'), lineEl = document.getElementById('light-line'), numEl = document.getElementById('light-num');
+  const N = pics.length, OFF = reduce ? 0 : 160, ON = reduce ? 150 : 560;
+  let at = -1, want = 0, busy = false, woke = false, quiet = false, quietT = 0, queuedL = false;
+  const glowOf = i => { const b = coins[i], a = 0.30 * +b.dataset.a; return [`rgb(${b.dataset.glow} / ${a.toFixed(3)})`, `rgb(${b.dataset.glow} / ${(a * 0.45).toFixed(3)})`]; };
+  const light = (i, dim) => { const [g1, g2] = glowOf(i); stageL.classList.toggle('dip', dim);
+    stageL.style.setProperty('--glow', dim ? 'transparent' : g1); stageL.style.setProperty('--glow2', dim ? 'transparent' : g2); };
+  const mark = i => { group.style.setProperty('--at', i); coins.forEach((b, j) => { b.setAttribute('aria-checked', String(j === i)); b.tabIndex = j === i ? 0 : -1; }); };
+  function show(i) {                                  // one switch at a time, then straight to the latest
+    want = i; mark(i);
+    if (busy || i === at) return;
+    busy = true; const prev = at; at = i;
+    if (prev >= 0) { pics[prev].classList.remove('on'); light(prev, true); colour.classList.add('swap'); }
+    setTimeout(() => {
+      const c = D.clouds[i]; nameEl.textContent = c.name; lineEl.textContent = c.line; numEl.textContent = `Atmosphere ${c.num}`;
+      colour.classList.remove('swap'); pics[i].classList.add('on'); light(i, false);
+      setTimeout(() => { busy = false; if (want !== at) show(want); }, ON);
+    }, prev >= 0 ? OFF : 0);
   }
+  const pinTop = () => parseFloat(getComputedStyle(stageL).top) || 0;
+  const span = () => Math.max(1, run.offsetHeight - stageL.offsetHeight);
+  const zoneAt = () => { const y = pinTop() - run.getBoundingClientRect().top, s = span();
+    fig.style.setProperty('--push', (1 + 0.06 * Math.min(1, Math.max(0, y / s))).toFixed(4));
+    let i = Math.min(N - 1, Math.max(0, Math.floor(y / (s / N))));
+    if (i !== want) { const edge = (i > want ? i : i + 1) * s / N; if (Math.abs(y - edge) < 16) i = want; }   // a little hysteresis
+    return i; };
+  const tickL = () => { queuedL = false; const i = zoneAt(); if (woke && !quiet && i !== want) show(i); };
+  if (!reduce) {
+    addEventListener('scroll', () => { if (!queuedL) { queuedL = true; requestAnimationFrame(tickL); } }, { passive: true });
+    addEventListener('resize', tickL);
+  }
+  // the room starts dark; when it is well in view the first lamp comes up slowly
+  new IntersectionObserver((es, ob) => { if (!es.some(e => e.isIntersecting)) return; ob.disconnect(); woke = true;
+    fig.classList.add('wake'); show(reduce ? 0 : zoneAt()); setTimeout(() => fig.classList.remove('wake'), 1300); }, { threshold: 0.35 }).observe(stageL);
+  const jump = i => { show(i); if (reduce || !woke) return;
+    const r = run.getBoundingClientRect(), s = span(), pinned = r.top <= pinTop() + 1 && r.bottom >= innerHeight - 1;
+    quiet = true; clearTimeout(quietT);
+    scrollTo({ top: scrollY + r.top - pinTop() + (i + 0.5) * s / N, behavior: pinned ? 'instant' : 'smooth' });
+    const done = () => { quiet = false; removeEventListener('scrollend', done); };
+    if (pinned) quietT = setTimeout(done, 80); else { addEventListener('scrollend', done, { once: true }); quietT = setTimeout(done, 1400); } };
+  coins.forEach((b, i) => b.addEventListener('click', () => jump(i)));
+  group.addEventListener('keydown', e => { const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    const i = k ? (want + k + N) % N : e.key === 'Home' ? 0 : e.key === 'End' ? N - 1 : -1;
+    if (i < 0) return; e.preventDefault(); jump(i); coins[i].focus(); });
+  const fac = document.querySelector('.lightband .facade');
+  if (fac) new IntersectionObserver((es, ob) => { if (es.some(e => e.isIntersecting)) { fac.classList.add('seen'); ob.disconnect(); } }, { threshold: 0.35 }).observe(fac);
+  const band = document.getElementById('light'), bar = document.querySelector('header.top');
+  if (band && bar) { const over = () => { const r = band.getBoundingClientRect(), h = bar.getBoundingClientRect().bottom;
+      bar.classList.toggle('on-dark', r.top < h - 8 && r.bottom > h); };
+    addEventListener('scroll', over, { passive: true }); over(); }
 }
 // a closer look: the dots pick a colour and the pictures cross-fade; the arrow keys step through them, as in a radio group
 const closer = document.getElementById('closer');
