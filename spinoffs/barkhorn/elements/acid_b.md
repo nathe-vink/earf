@@ -73,3 +73,10 @@ work, but it still reads as CG"), `critic-acid_b/pass-final.json`.
   of a thin crown wall makes them bright).
 - The bright horizon band is the photographed sky's own low break (Poly Haven's `belfast_sunset_puresky`); no CC0 sky
   had a dark storm deck with a low sun, so the deck is that sky dimmed (strength 0.13), not a storm.
+
+Re-graded on the coordinator's note (the judges of the A/B duel read the grade as olive, the acrylic as mustard):
+`acid_b_grade.py` takes the raw frame through a linear white-balance shift (green x 0.95, blue x 1.06) and then the
+same finish. The horn's hue was already on Acid's #E9B320 (its (g-b)/(r-b) 0.744 against 0.731; the mustard is its
+lightness, not its hue), so the shift neutralises the sky without moving the horn green. A blind duel preferred the
+re-graded frame, 6.2 to 5.9 (`critic-acid_b/duel-refinish.json`); the finals carry it. `acid_b.raw.png` stays the frame
+as rendered.
