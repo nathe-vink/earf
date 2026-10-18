@@ -75,3 +75,15 @@ behind it"):
 - The boulder goes; the speaker stands in the meadow at the brow.
 - Pass 4's prescriptions that fit are folded in: c1, c2, c3, c5, c6 and c8.
 | 5 (B2) | 5.5 | A "quiet, well-composed idea," but washed out and high-key. The fog is a flat white smear and the clear cabinet disappears against it. The hills are soft CG bumps. The speaker is front-filled while the scene is backlit. The grass glitters. Asks for: a lower, thinner fog sea with dark land showing behind the cabinet, bigger billows and a sharper fog edge, a weak sky fill only, exposure -0.35, deeper gullies, the feet sunk in grass, f/4. | Down 0.5 from pass 4, the first pass after the concept change. Took c1 to c4, c6 and c8. c5's gullies at 28/100, not 35/90: 26/120 raised Alpine peaks in q1. c7 not taken: there is no setting for the scans' own grass material, so the glitter is left for the finals' higher sample count. |
+| 6 (B2) | 4.5 | "The ridges read as a grainy, sepia, stucco-like procedural surface," jagged rather than Marin. The fog is a flat milky band right behind the cabinet. The speaker is grey and flat-filled, and the grass glitters. | **Stopped.** The two passes after the concept change each gained under 0.5 (5.5, then 4.5), the coordinator's stopping rule. |
+
+## The stop, the duel and the finals
+
+- **Best rig: pass 2** (6.0). Pass 4 also scored 6.0. A blind duel of their proofs chose pass 2, 6.6 to 6.0
+  (`critic-fog_b/duel-p2-p4.json`):
+  - for pass 2: its clear layers (crisp ridges over a bright fog sea), the clean grass silhouettes on the brow, and
+    the rock framing the cabinet;
+  - for pass 4: richer backlit grass and a more legible base.
+- `fog_b.py` is restored to pass 2's rig (commit 19dc2e1). It rebuilds pass 2's shot exactly. The one change is the
+  camera's far clip, now under main's key `clip_end`.
+- Finals: 2400 x 1600 and 1600 x 2000 at 512 samples, denoised.

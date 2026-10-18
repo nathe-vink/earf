@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.03
+     -0.015
     ],
     "rotate_z": 10.0,
     "hide": [
@@ -26,11 +26,11 @@
     "texture": "sparse_grass",
     "size": [
      26.0,
-     18.6
+     16.7
     ],
     "position": [
      0.0,
-     -5.7,
+     -5.75,
      0.0
     ],
     "displace": 0.02,
@@ -49,7 +49,7 @@
      [
       148.6,
       938.3,
-      170.0,
+      152.0,
       520.0,
       190.0,
       -7.0
@@ -57,7 +57,7 @@
      [
       662.4,
       1060.1,
-      175.0,
+      145.0,
       430.0,
       210.0,
       -27.0
@@ -65,7 +65,7 @@
      [
       586.1,
       1380.8,
-      128.0,
+      118.0,
       260.0,
       160.0,
       -15.0
@@ -88,14 +88,14 @@
      ]
     ],
     "grass": "#6B6A45",
-    "scrub": "#222A1A",
+    "scrub": "#2A3320",
     "floor": -140.0,
-    "brow": 3.6,
+    "brow": 2.65,
     "steep": 10.0,
     "drop": 110.0,
     "wide": 50.0,
     "y_range": [
-     2.6,
+     1.6,
      6500.0
     ],
     "x_spread": [
@@ -109,8 +109,8 @@
     "relief": 0.15,
     "relief_far": 0.008,
     "gullies": [
-     28.0,
-     100.0
+     16.0,
+     160.0
     ]
    },
    {
@@ -122,7 +122,7 @@
      [
       148.6,
       938.3,
-      170.0,
+      152.0,
       520.0,
       190.0,
       -7.0
@@ -130,7 +130,7 @@
      [
       662.4,
       1060.1,
-      175.0,
+      145.0,
       430.0,
       210.0,
       -27.0
@@ -138,7 +138,7 @@
      [
       586.1,
       1380.8,
-      128.0,
+      118.0,
       260.0,
       160.0,
       -15.0
@@ -165,53 +165,61 @@
      [
       547.0,
       1288.7,
-      200.0,
+      260.0,
       380.0,
       -15.0,
-      55.0
+      60.0
+     ],
+     [
+      46.1,
+      878.8,
+      220.0,
+      300.0,
+      -15.0,
+      45.0
      ],
      [
       693.6,
       954.6,
-      150.0,
-      300.0,
+      200.0,
+      280.0,
       -15.0,
-      30.0
+      40.0
      ]
     ],
-    "top": -75.0,
-    "heave": 14.0,
+    "top": -48.0,
+    "heave": 8.0,
     "billows": [
      [
       160.0,
-      30.0
+      12.0
      ],
      [
       50.0,
-      14.0
+      5.0
      ],
      [
-      12.0,
-      6.0
+      15.0,
+      1.5
      ]
     ],
-    "bank": 15.0,
+    "bank": 34.0,
     "bank_size": 200.0,
     "rise": [
      1000.0,
      1800.0,
-     10.0
+     44.0
     ],
-    "soft": 1.0,
-    "density": 0.02,
-    "anisotropy": 0.8,
+    "soft": 5.0,
+    "density": 0.06,
+    "anisotropy": 0.65,
     "billow_size": 30.0,
     "billow_cut": 0.2,
-    "haze": 0.0001,
+    "haze": 0.00025,
     "haze_height": 170.0,
     "box": [
      -3500.0,
-     4.4,
+     3.5,
      -170.0,
      4500.0,
      7000.0,
@@ -223,7 +231,7 @@
     "shape": "ext",
     "module": "fog_b_el",
     "fn": "fog",
-    "top": 1.0,
+    "top": 0.5,
     "heave": 4.0,
     "billows": [
      [
@@ -236,14 +244,14 @@
      ]
     ],
     "soft": 4.0,
-    "density": 0.04,
+    "density": 0.03,
     "anisotropy": 0.6,
     "billow_size": 6.0,
-    "billow_cut": 0.45,
+    "billow_cut": 0.42,
     "billow_gain": 3.0,
     "box": [
      -160.0,
-     4.3,
+     3.3,
      -40.0,
      200.0,
      120.0,
@@ -255,20 +263,21 @@
     "shape": "scatter_assets",
     "models": [
      "grass_medium_02",
-     "grass_medium_01"
+     "grass_medium_01",
+     "grass_bermuda_01"
     ],
     "count": 3000,
     "area": [
      -9.0,
-     -14.5,
+     -13.0,
      11.0,
-     3.2
+     2.3
     ],
     "avoid": [
      [
       0.0,
       0.0,
-      3.2
+      0.75
      ]
     ],
     "scale": [
@@ -282,42 +291,9 @@
     "kind": "kit",
     "shape": "scatter_assets",
     "models": [
-     "grass_medium_02",
-     "grass_medium_01"
+     "grass_bermuda_01"
     ],
-    "count": 900,
-    "area": [
-     -3.2,
-     -3.2,
-     3.2,
-     3.2
-    ],
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      1.0
-     ],
-     [
-      0.6,
-      3.4,
-      0.8
-     ]
-    ],
-    "scale": [
-     0.4,
-     0.9
-    ],
-    "seed": 11,
-    "res": "1k"
-   },
-   {
-    "kind": "kit",
-    "shape": "scatter_assets",
-    "models": [
-     "grass_medium_02"
-    ],
-    "count": 70,
+    "count": 40,
     "area": [
      -1.1,
      -1.1,
@@ -342,48 +318,20 @@
     "kind": "kit",
     "shape": "scatter_assets",
     "models": [
-     "grass_medium_02",
-     "grass_medium_01"
-    ],
-    "count": 70,
-    "area": [
-     -0.7,
-     -0.9,
-     0.7,
-     -0.3
-    ],
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      0.9
-     ]
-    ],
-    "scale": [
-     0.3,
-     0.5
-    ],
-    "seed": 17,
-    "res": "1k"
-   },
-   {
-    "kind": "kit",
-    "shape": "scatter_assets",
-    "models": [
      "grass_medium_02"
     ],
     "count": 50,
     "area": [
      -8.0,
-     3.1,
+     2.2,
      12.0,
-     3.6
+     2.65
     ],
     "avoid": [
      [
-      0.75,
-      3.3,
-      1.3
+      0.6,
+      2.4,
+      1.0
      ]
     ],
     "scale": [
@@ -395,30 +343,20 @@
    },
    {
     "kind": "kit",
-    "shape": "scatter_assets",
-    "models": [
-     "grass_medium_02"
+    "shape": "asset",
+    "model": "boulder_01",
+    "position": [
+     0.55,
+     2.45,
+     -0.12
     ],
-    "count": 30,
-    "area": [
-     -0.6,
-     2.6,
-     1.8,
-     3.9
+    "rotate": [
+     0,
+     0,
+     75
     ],
-    "avoid": [
-     [
-      0.55,
-      3.4,
-      0.55
-     ]
-    ],
-    "scale": [
-     0.6,
-     1.2
-    ],
-    "seed": 13,
-    "res": "1k"
+    "scale": 1.1,
+    "res": "2k"
    },
    {
     "kind": "kit",
@@ -426,7 +364,7 @@
     "model": "coast_rocks_05",
     "position": [
      -2.6,
-     3.6,
+     2.7,
      -0.35
     ],
     "rotate": [
@@ -442,8 +380,8 @@
     "shape": "asset",
     "model": "coast_rocks_05",
     "position": [
-     3.6,
-     3.8,
+     3.4,
+     2.9,
      -0.4
     ],
     "rotate": [
@@ -492,19 +430,19 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    3.0,
-    3.0
+    1.2,
+    1.2
    ],
    "target": [
     0.0,
     0.0,
     0.6
    ],
-   "irradiance": 0.9,
-   "color": "#E6E9EE",
+   "irradiance": 0.75,
+   "color": "#F3E6C8",
    "orbit": {
-    "azimuth_deg": -55.0,
-    "elevation_deg": 15.0,
+    "azimuth_deg": -60.0,
+    "elevation_deg": 8.0,
     "distance_m": 2.5
    }
   }
@@ -516,7 +454,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": -0.35,
+  "exposure": 0.0,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Fog: San Francisco fog over a Marin headland at dawn (4:5)",
@@ -528,7 +466,7 @@
   "position": [
    -1.5012,
    -5.6024,
-   1.0
+   1.15
   ],
   "target": [
    0.0,
@@ -545,27 +483,27 @@
   ],
   "shift_x": 0.0,
   "shift_y": 0.06,
-  "clip_end_m": 12000.0
+  "clip_end": 12000.0
  },
  "sky": {
   "kind": "hdri",
   "polyhaven": "syferfontein_6d_clear_puresky",
-  "rotation_deg": 263.2,
-  "strength": 0.75,
+  "rotation_deg": 204.2,
+  "strength": 1.0,
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": 151.0,
+  "azimuth_deg": -150.0,
   "elevation_deg": 5.8,
-  "irradiance": 7.0,
+  "irradiance": 3.0,
   "angle_deg": 0.53,
-  "color": "#FFDDB0"
+  "color": "#FEEA98"
  },
  "finish": {
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.16,
+  "contrast": 0.1,
   "clarity": 0.06,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
@@ -573,10 +511,10 @@
    "bloom": 0.0,
    "bloom_px": 30,
    "bloom_threshold": 0.92,
-   "saturation": 0.08,
-   "lift": 0.012,
-   "lift_color": "#3A3428",
-   "vignette": 0.12
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.22
   }
  }
 }
