@@ -111,14 +111,14 @@
   "color": "#F3F1EE",
   "width": 52.0,
   "front": 20.0,
-  "depth": 6.0,
-  "radius": 5.0,
+  "depth": 11.0,
+  "radius": 9.0,
   "height": 9.0,
   "contact": {
    "strength": 0.8,
-   "distance_m": 0.7,
-   "core_strength": 0.9,
-   "core_distance_m": 0.08
+   "distance_m": 0.45,
+   "core_strength": 1.0,
+   "core_distance_m": 0.03
   },
   "flags": [],
   "bounces": [
@@ -136,7 +136,25 @@
      0.0,
      0.95,
      0.15
-    ]
+    ],
+    "reflect_only": true
+   },
+   {
+    "center_m": [
+     0.0,
+     -1.6,
+     2.6
+    ],
+    "size_m": [
+     9.0,
+     1.4
+    ],
+    "normal": [
+     0.0,
+     0.55,
+     -0.83
+    ],
+    "reflect_only": true
    }
   ]
  },
@@ -151,7 +169,7 @@
    0.0,
    0.6
   ],
-  "lens_mm": 64.0,
+  "lens_mm": 58.0,
   "level": true
  },
  "sky": {
@@ -184,7 +202,7 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.5
+   "roughness": 0.32
   }
  },
  "lights": {
@@ -202,7 +220,7 @@
    "target": [
     -3.0,
     6.0,
-    1.0
+    0.4
    ],
    "irradiance": 3.6,
    "color": "#FFF4E8",
@@ -223,7 +241,7 @@
    "target": [
     3.0,
     6.0,
-    1.0
+    0.4
    ],
    "irradiance": 3.6,
    "color": "#FFF4E8",
@@ -320,16 +338,16 @@
    ],
    "target": [
     0.0,
-    0.0,
-    0.45
+    -0.6,
+    0.0
    ],
-   "irradiance": 14.0,
+   "irradiance": 16.0,
    "color": "#FFF8F0",
    "camera": false,
    "position": [
     0.0,
-    2.5,
-    0.8
+    3.0,
+    2.0
    ]
   }
  }
