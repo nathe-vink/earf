@@ -10,3 +10,14 @@ The studio's critic (`critic/PROMPT.md`, verbatim) in a fresh context, given onl
 | 2026-10-18 | companions-hero-lamp | e1 | 1 | 4.5 | The speaker cut at the bottom; the lamp's glow lights nothing; the dome flattens the wall; the lilac sweep shares the acrylic's hue | c1 lens 60 to 50; c2 the strip x4; c3 dome 0.7 to 0.25; c4 key 1.32 to 1.9; c5 a warm pool on the wall behind the shade; c6 the sweep warm grey #D8D2CA; c7 veneer grain 0.2 to 0.45; c8 contact shadows 0.6 | out of scope: the speaker's front lighter (its tint is fixed); the pair moved closer (revisit after c1) | 7.0 |
 
 After round 1, Cumulus's hero was reframed by hand (e2): the critic's c1 and c2 together cropped the speaker at the left and left the record player at the same size, so the sideboard came 0.4 forward, the speaker stayed 0.45 back, and the camera went close and wide (35 mm at 2.45 m). Its light changes (c3 to c8) kept. Round 2 not run.
+
+## Round 31b: promotional passes (`critic/PROMPT-promo.md`)
+
+The owner, through the lead session: "Continue to do critic passes until you feel it's in a good enough place for
+promotional images for a $20K product." Each pass is a fresh, blind critic given only the image, a short card
+(`promo.py stage`), `critic/measure.py` and the prompt's text. Replies: `critic/rounds/2026-10-18/promo-*.json`.
+Frames: `renders/2026-10-18/barkhorn/companions/promo/`. Stop at two passes in a row of 8.5 or more.
+
+| Shot | Pass | Blind score | Verdict | The critic's top changes | What I did | Score if fixed |
+|---|---|---|---|---|---|---|
+| hero-turntable (room, Ember) | p1 | 5.0 | iterate | The record player the darkest thing in the frame (lum 12.7); the sun's long horn shadow fills the wall; the speaker a cropped red box; the walnut soft at 2k; the wall flat CG; denoiser smear | a softbox key on the player; sun 24/-72 to 38/-55; the cabinet at 4k; a Poly Haven plaster wall; samples 64 to 160; f/4 on the arm; the speaker moved and the camera reframed so its horn reads (the critic's position was inside the back wall); exposure +0.8 | 7.0 |

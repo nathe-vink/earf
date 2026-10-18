@@ -111,26 +111,41 @@ def room_shot(title, size, cam):
             'materials': {'oak': {'grain': 1.0, 'roughness': 0.38}}}
 
 
-def hero_turntable(colour='ember'):
+def hero_turntable(colour='ember', speaker=(-0.32, 0.52, 10), cam=(-8, 14, 1.75, 50)):
     """Cumulus on the walnut cabinet in morning sun from the left window, a record on it; the Cloud in its colour
-    behind it at the left, out of focus."""
+    behind it at the left, out of focus. Promo pass 1 (critic/rounds/2026-10-18/promo-hero-turntable-p1.json, 5.0):
+    a softbox key on the record player (it was the darkest thing in the frame), the sun higher and more frontal (its
+    long shadow of the horn filled the wall), the speaker further back so its horn reads, the cabinet at 4k, a real
+    plaster wall (Poly Haven beige_wall_001), more samples, f/4 focused on the arm and the platter's front."""
     tx, ty = 0.36, 0.42
     h = CAB_TOP
     tgt = [tx, ty - 0.02, h + 0.06]
+    az, el, d, lens = cam
     s = room_shot(f'Cumulus beside {C.NAMES[colour]}', [1600, 1100],
-                  {'position': orbit(tgt, 6, 20, 1.6), 'target': tgt, 'lens_mm': 58, 'level': True, 'fstop': 2.8,
-                   'focus': [tx, ty - 0.05, h + 0.09]})
+                  {'position': orbit(tgt, az, el, d), 'target': tgt, 'lens_mm': lens, 'level': True, 'fstop': 4.0,
+                   'focus': [0.42, 0.40, 0.80]})
+    s['render']['samples'] = 160
+    s['render']['exposure'] = 0.8
     s['set'] = room()
-    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.36, 0.36, 0], 'rotate_z': 10}]},
+    s['set']['props'][0]['res'] = '4k'
+    s['set']['props'].append(WALL)
+    s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': list(speaker[:2]) + [0], 'rotate_z': speaker[2]}]},
                      {'def': TT, 'flavour': colour, 'instances': [{'position': [tx, ty, h], 'rotate_z': -6}]}]
     rx = tx + SPINDLE[0] * math.cos(math.radians(-6)) - SPINDLE[1] * math.sin(math.radians(-6))
     ry = ty + SPINDLE[0] * math.sin(math.radians(-6)) + SPINDLE[1] * math.cos(math.radians(-6))
     s['set']['props'] += record(round(rx, 4), round(ry, 4), h + PLATTER_TOP, colour)
     s['sky'] = {'kind': 'gradient', 'strength': 9.0, 'zenith': '#9FB8DA', 'horizon': '#D6EAF8', 'ground': '#8A8478'}
-    s['sun'] = {'azimuth_deg': -72, 'elevation_deg': 24, 'irradiance': 3.0, 'angle_deg': 0.53, 'color': '#FFF0DC'}
+    s['sun'] = {'azimuth_deg': -55, 'elevation_deg': 38, 'irradiance': 3.0, 'angle_deg': 0.53, 'color': '#FFF0DC'}
     s['lights'] = {'fill': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 35, 'elevation_deg': 15, 'distance_m': 2.2},
-                            'target': tgt, 'irradiance': 0.35, 'color': '#EAF2FF'}}
+                            'target': tgt, 'irradiance': 0.35, 'color': '#EAF2FF'},
+                   'key': {'type': 'area', 'size_m': [1.2, 0.9], 'orbit': {'azimuth_deg': -25, 'elevation_deg': 35, 'distance_m': 1.6},
+                           'target': [tx, ty - 0.02, h + 0.09], 'irradiance': 1.6, 'color': '#FFF4E6'}}
     return s
+
+
+# a real plastered wall over the room's back wall, a hair in front of it (promo pass 1: the plain wall read as CG)
+WALL = {'kind': 'kit', 'shape': 'box', 'material': 'pbr', 'texture': 'beige_wall_001', 'res': '2k', 'color': '#E6E0D6',
+        'size': [5.4, 0.008, 2.78], 'position': [0.4, 0.738, 0.005]}
 
 
 def hero_lamp(colour='haze'):

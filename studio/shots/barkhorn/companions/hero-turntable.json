@@ -6,32 +6,32 @@
  ],
  "camera": {
   "position": [
-   0.5172,
-   -1.0953,
-   1.2872
+   0.1237,
+   -1.2815,
+   1.1634
   ],
   "target": [
    0.36,
    0.39999999999999997,
    0.74
   ],
-  "lens_mm": 58,
+  "lens_mm": 50,
   "level": true,
-  "fstop": 2.8,
+  "fstop": 4.0,
   "focus": [
-   0.36,
-   0.37,
-   0.77
+   0.42,
+   0.4,
+   0.8
   ]
  },
  "render": {
-  "samples": 64,
+  "samples": 160,
   "adaptive": 0.015,
   "denoise": true,
   "clamp": 8,
   "bounces": 12,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.0,
+  "exposure": 0.8,
   "white_balance_k": 5600
  },
  "materials": {
@@ -87,7 +87,7 @@
     "kind": "kit",
     "shape": "asset",
     "model": "modern_wooden_cabinet",
-    "res": "2k",
+    "res": "4k",
     "position": [
      1.25,
      0.47,
@@ -97,6 +97,24 @@
      0,
      0,
      0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "beige_wall_001",
+    "res": "2k",
+    "color": "#E6E0D6",
+    "size": [
+     5.4,
+     0.008,
+     2.78
+    ],
+    "position": [
+     0.4,
+     0.738,
+     0.005
     ]
    },
    {
@@ -136,8 +154,8 @@
    "instances": [
     {
      "position": [
-      -0.36,
-      0.36,
+      -0.32,
+      0.52,
       0
      ],
      "rotate_z": 10
@@ -167,8 +185,8 @@
   "ground": "#8A8478"
  },
  "sun": {
-  "azimuth_deg": -72,
-  "elevation_deg": 24,
+  "azimuth_deg": -55,
+  "elevation_deg": 38,
   "irradiance": 3.0,
   "angle_deg": 0.53,
   "color": "#FFF0DC"
@@ -192,6 +210,25 @@
    ],
    "irradiance": 0.35,
    "color": "#EAF2FF"
+  },
+  "key": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.9
+   ],
+   "orbit": {
+    "azimuth_deg": -25,
+    "elevation_deg": 35,
+    "distance_m": 1.6
+   },
+   "target": [
+    0.36,
+    0.39999999999999997,
+    0.77
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF4E6"
   }
  }
 }
