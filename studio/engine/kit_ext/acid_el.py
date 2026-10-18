@@ -185,6 +185,16 @@ def crust_material(bpy, p, attribute='acid_d', name='acid-crust'):
         a2 = nt.nodes.new('ShaderNodeMath'); a2.operation = 'ADD'
         nt.links.new(add.outputs['Value'], a2.inputs[0]); nt.links.new(pc.outputs['Value'], a2.inputs[1])
         add = a2
+    if p.get('grain_w', 0.0):                                      # the edges follow the crust's own relief
+        img = next((n for n in nt.nodes if n.type == 'TEX_IMAGE' and n.image and 'isp' in n.image.name), None)
+        src = img.outputs['Color'] if img else bw.outputs['Val']
+        gb = nt.nodes.new('ShaderNodeRGBToBW'); nt.links.new(src, gb.inputs['Color'])
+        gm = nt.nodes.new('ShaderNodeMath'); gm.operation = 'MULTIPLY_ADD'
+        gm.inputs[1].default_value = p['grain_w']; gm.inputs[2].default_value = -0.5 * p['grain_w']
+        nt.links.new(gb.outputs['Val'], gm.inputs[0])
+        a3 = nt.nodes.new('ShaderNodeMath'); a3.operation = 'ADD'
+        nt.links.new(add.outputs['Value'], a3.inputs[0]); nt.links.new(gm.outputs['Value'], a3.inputs[1])
+        add = a3
     ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp
     stops = p.get('zones', [(0.0, '#EAE6CF'), (0.12, '#F0E58A'), (0.3, '#E2C52A'), (0.55, '#CFA82A'),
                             (0.72, '#B8681F'), (0.9, '#8C3F18')])
@@ -248,9 +258,9 @@ def chimney(bpy, name, p, kit):
         bm.faces.new((rings[-1][i], rings[-1][(i + 1) % seg], top))
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
     c = p.get('colors', ['#F2EDCF', '#E9D33A', '#D9B62A'])
-    mat = crust_material(bpy, {'texture': p.get('texture', 'rock_boulder_cracked'), 'res': p.get('res', '2k'), 'zone_scale': 1.6,
+    mat = crust_material(bpy, {'texture': p.get('texture', 'acg:Ground093A'), 'res': p.get('res', '2k'), 'zone_scale': 1.6, 'grain_w': 0.6,
                                'noise_w': 1.4, 'zone_h': 1.0, 'zone_bias': 0.5, 'detail_gain': p.get('detail_gain', 2.2),
-                               'tex_scale': 0.5, 'zones': [(0.0, c[0]), (0.45, c[1]), (1.0, c[2])]}, attribute=None, name=f'{name}-mat')
+                               'tex_scale': 0.6, 'displace': 0.0, 'zones': [(0.0, c[0]), (0.45, c[1]), (1.0, c[2])]}, attribute=None, name=f'{name}-mat')
     return kit.finish(bpy, name, bm, p, True, mat)
 
 
