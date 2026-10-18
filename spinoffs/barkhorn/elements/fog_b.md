@@ -87,3 +87,30 @@ behind it"):
 - `fog_b.py` is restored to pass 2's rig (commit 19dc2e1). It rebuilds pass 2's shot exactly. The one change is the
   camera's far clip, now under main's key `clip_end`.
 - Finals: 2400 x 1600 and 1600 x 2000 at 512 samples, denoised.
+
+## Finals (2026-10-18)
+
+| Frame | File | Render | Blind score |
+|---|---|---|---|
+| Landscape 2400 x 1600 | `renders/2026-10-18/barkhorn/element31/fog_b.png` (4.6 MB) | 256 spp, denoised, 3 h 31 min in one piece on 4 cores (plus 7 min to build the scene) | **6.0** |
+| Portrait 1600 x 2000 | `renders/2026-10-18/barkhorn/element31/fog_b-portrait.png` (3.3 MB) | 256 spp, denoised, rendered on the coordinator's helper in four strips and finished once | (not scored separately) |
+
+256 samples, not 512: the coordinator advised it (Fog A's volumes held at 256), since 512 would have been 7 to 9 hours
+a frame. At full size the final shows no noise in the fog or the grass.
+
+**The honest note.** 6.0 blind, the same as the best proof. It reads as "a quiet, believable dawn headland": the
+critics consistently praise the fog sea, the ridges and the scanned grass. What holds it back:
+
+- **The speaker's own clear surfaces.** Every pass read the clear cabinet as a beige or grey box and the horn as
+  polished chrome rather than clear resin. Light can only move this so far (backlight through the edges, less front
+  fill), because the material is the product's. It may be worth a look at the horn's resin (IOR, thickness,
+  roughness) as a product question.
+- **The base.** The grass swallows the plinth; clearing the turf in front of the feet is the first fix.
+- **The fog high behind the ridges.** It reads as a band across the sky in places. A lower marine layer that pours
+  only through the saddles would read more as weather.
+- **The light.** Flat and grey rather than one dawn event. A stronger back-rim (sun 4.5 at about -165) is the
+  critic's main ask.
+- **Settings tried and lost.** Backlit with the sun in frame (B2) made the fog milky and the hills flat, 5.5 and 4.5.
+  Sharper gullies made Alps, not Marin.
+- **The next step, if wanted.** The final critic's c1 to c6 (clear the plinth, a stronger back-rim, a lower marine
+  layer, f/2.8, shorter near grass, the boulder moved right).
