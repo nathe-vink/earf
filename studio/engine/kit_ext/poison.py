@@ -9,11 +9,16 @@ from mathutils import Matrix, Vector
 from mathutils.geometry import tessellate_polygon
 
 
-def _new(bm, build):
-    """Run `build(bm)` and return the verts it made."""
-    before = set(bm.verts)
-    build(bm)
-    return [v for v in bm.verts if v not in before]
+def _new(bm, build, m=None):
+    """Run `build` on a fresh bmesh, move what it made by the matrix `m`, and join it into `bm` (one bmesh op on a
+    growing mesh costs its whole size each time; this keeps a fern's hundreds of leaflets fast)."""
+    import bpy
+    tmp = bmesh.new(); build(tmp)
+    if m is not None:
+        for v in tmp.verts:
+            v.co = m @ v.co
+    me = bpy.data.meshes.new('_part'); tmp.to_mesh(me); tmp.free()
+    bm.from_mesh(me); bpy.data.meshes.remove(me)
 
 
 def _place(verts, m):
@@ -55,11 +60,11 @@ def toadstool(bpy, name, p, kit):
     sprof = [(sr * 1.45, 0.0), (sr * 1.5, 0.03 * H), (sr * 1.25, 0.12 * H), (sr * 1.02, 0.35 * H), (sr * 0.9, 0.7 * H),
              (sr * 0.86, z0 + 0.02 * CH), (0.0, z0 + 0.05 * CH)]
     sprof = [(0.0, 0.0)] + sprof
-    vs = _new(stem, lambda b: kit._lathe(b, sprof, 40))
+    _new(stem, lambda b: kit._lathe(b, sprof, 40))
     # a ring (the skirt) under the cap, as the fly agaric has
     ring = [(0.0, 0.62 * H), (sr * 0.95, 0.62 * H), (sr * 1.55, 0.585 * H), (sr * 1.6, 0.575 * H), (sr * 0.9, 0.6 * H), (0.0, 0.6 * H)]
     if p.get('skirt', True):
-        vs += _new(stem, lambda b: kit._lathe(b, ring, 40))
+        _new(stem, lambda b: kit._lathe(b, ring, 40))
     # the cap: a dome from a rounded rim, its underside lifted to the stem
     cprof = [(0.0, z0 + 0.22 * CH), (sr * 1.05, z0 + 0.2 * CH), (R * 0.93, z0 + 0.02 * CH), (R * 0.985, z0 + 0.04 * CH)]
     dome = []
@@ -68,10 +73,10 @@ def toadstool(bpy, name, p, kit):
         dome.append((R * math.cos(th) ** 0.85, z0 + 0.08 * CH + 0.92 * CH * math.sin(th) ** 1.15))
     dome[-1] = (0.0, H)
     cprof += dome
-    vc = _new(cap, lambda b: kit._lathe(b, cprof, 72))
+    _new(cap, lambda b: kit._lathe(b, cprof, 72))
     # the gills: a darker disc just under the cap, lines of it raised
     gp = [(sr * 1.1, z0 + 0.195 * CH), (R * 0.9, z0 + 0.03 * CH), (R * 0.9, z0 + 0.025 * CH), (sr * 1.1, z0 + 0.185 * CH)]
-    vg = _new(gill, lambda b: kit._lathe(b, [(0.0, z0 + 0.19 * CH)] + gp[:2] + [(0.0, z0 + 0.03 * CH)], 72))
+    _new(gill, lambda b: kit._lathe(b, [(0.0, z0 + 0.19 * CH)] + gp[:2] + [(0.0, z0 + 0.03 * CH)], 72))
     # spots on the dome, along its normal
     n = p.get('spots', 9)
     sv = []
@@ -89,7 +94,7 @@ def toadstool(bpy, name, p, kit):
         s = R * rnd.uniform(0.07, 0.12)
         nrm = Vector((nr * math.cos(ph), nr * math.sin(ph), nz))
         m = _orient(nrm, c + nrm * s * 0.05, rnd.uniform(0, 6.28))
-        _place(_new(spots, lambda b: kit._sphere(b, (0, 0, 0), (s, s * rnd.uniform(0.75, 1.0), s * 0.28), 24)), m)
+        _new(spots, lambda b: kit._sphere(b, (0, 0, 0), (s, s * rnd.uniform(0.75, 1.0), s * 0.28), 24), m)
     lean = p.get('lean', [0.0, 0.0])
     for bm in (stem, cap, gill, spots):
         _lean(bm.verts, lean, H)
@@ -127,25 +132,25 @@ def foxglove(bpy, name, p, kit):
         L = size * 2.3
         d = (out * 0.8 + Vector((0, 0, -0.5))).normalized()   # mouth out and down; the tip at the stem
         m = _orient(-d, tip - (-d) * L)                          # local z from mouth to tip, toward the stem
-        _place(_new(bells, lambda b: kit._lathe(b, _bell(L, size), 28)), m)
+        _new(bells, lambda b: kit._lathe(b, _bell(L, size), 28), m)
         # the throat: a pale felt disc set inside the mouth, freckled
-        _place(_new(throat, lambda b: kit._lathe(b, [(0.0, 0.2 * L), (0.66 * size, 0.1 * L), (0.66 * size, 0.09 * L), (0.0, 0.19 * L)], 24)), m)
+        _new(throat, lambda b: kit._lathe(b, [(0.0, 0.2 * L), (0.66 * size, 0.1 * L), (0.66 * size, 0.09 * L), (0.0, 0.19 * L)], 24), m)
         for k in range(6):
             ph = rnd.uniform(0, 2 * math.pi); rr = rnd.uniform(0.15, 0.5) * size
             c = Vector((rr * math.cos(ph), rr * math.sin(ph), 0.1 * L + 0.11 * L * (1 - rr / (0.66 * size))))
-            _place(_new(freckles, lambda b: kit._sphere(b, (0, 0, 0), (size * 0.07, size * 0.07, size * 0.03), 10)), m @ Matrix.Translation(c))
+            _new(freckles, lambda b: kit._sphere(b, (0, 0, 0), (size * 0.07, size * 0.07, size * 0.03), 10), m @ Matrix.Translation(c))
     for i in range(p.get('buds', 6)):
         t = 0.9 + 0.1 * i / 6
         a = rnd.uniform(0, 6.28)
         c = axis(t) + Vector((math.cos(a), math.sin(a), 0)) * H * 0.008
         s = br * (0.4 - 0.04 * i)
-        _place(_new(buds, lambda b: kit._sphere(b, (0, 0, 0), (s * 0.8, s * 0.8, s * 1.2), 14)), Matrix.Translation(c))
+        _new(buds, lambda b: kit._sphere(b, (0, 0, 0), (s * 0.8, s * 0.8, s * 1.2), 14), Matrix.Translation(c))
     for i in range(p.get('leaves', 7)):
         a = 2 * math.pi * i / 7 + rnd.uniform(-0.3, 0.3)
         Ll = H * rnd.uniform(0.16, 0.24)
         dirv = Vector((math.cos(a), math.sin(a), 0.25)).normalized()
         m = _orient(dirv, dirv * Ll * 0.55, 0.0)
-        _place(_new(leaves, lambda b: kit._sphere(b, (0, 0, 0), (Ll * 0.22, Ll * 0.06, Ll * 0.6), 20)), m @ Matrix.Rotation(math.pi / 2, 4, 'Z'))
+        _new(leaves, lambda b: kit._sphere(b, (0, 0, 0), (Ll * 0.22, Ll * 0.06, Ll * 0.6), 20), m @ Matrix.Rotation(math.pi / 2, 4, 'Z'))
     parts = {('flock', p.get('leaf_color', '#2D4A2A'), (('tint2', '#3E5E34'),)): stem,
              ('velvet', p.get('bell_color', '#8A3C78'), ()): bells,
              ('clay', p.get('freckle_color', '#3A0C2E'), ()): freckles,
@@ -173,19 +178,19 @@ def nightshade(bpy, name, p, kit):
         kit._tube(stalk, [tuple(tip), tuple(tip + dirv * L * 0.5 + Vector((0, 0, 0.2 * L))), tuple(c + Vector((0, 0, br)))],
                   br * 0.1, 1.0, 0.0, 6, 6)
         r = br * rnd.uniform(0.85, 1.15)
-        _place(_new(berries, lambda b: kit._sphere(b, (0, 0, 0), (r, r, r * 0.95), 28)), Matrix.Translation(c))
+        _new(berries, lambda b: kit._sphere(b, (0, 0, 0), (r, r, r * 0.95), 28), Matrix.Translation(c))
         for k in range(5):
             ph = 2 * math.pi * k / 5 + a
             d = Vector((math.cos(ph), math.sin(ph), 0.9)).normalized()
             m = _orient(d, c + Vector((0, 0, r * 0.75)) + d * r * 0.25, 0.0)
-            _place(_new(calyx, lambda b: kit._sphere(b, (0, 0, 0), (r * 0.18, r * 0.05, r * 0.42), 10)), m)
+            _new(calyx, lambda b: kit._sphere(b, (0, 0, 0), (r * 0.18, r * 0.05, r * 0.42), 10), m)
     for i in range(2):
         a = rnd.uniform(0, 6.28)
         d = Vector((math.cos(a), math.sin(a), 0.35)).normalized()
         Ll = H * 0.45
         base = Vector((lx * 0.1, ly * 0.1, H * (0.35 + 0.25 * i)))
         m = _orient(d, base + d * Ll * 0.5, math.pi / 2)
-        _place(_new(leaves, lambda b: kit._sphere(b, (0, 0, 0), (Ll * 0.25, Ll * 0.04, Ll * 0.5), 18)), m)
+        _new(leaves, lambda b: kit._sphere(b, (0, 0, 0), (Ll * 0.25, Ll * 0.04, Ll * 0.5), 18), m)
     parts = {('felt', p.get('stalk_color', '#33472C'), ()): stalk,
              ('clay', p.get('berry_color', '#14091A'), (('roughness', 0.16),)): berries,
              ('felt', p.get('calyx_color', '#3E5A30'), ()): calyx,
@@ -413,3 +418,79 @@ def clumps(bpy, name, p, kit):
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
     q = dict(p); q['material'] = 'flock'; q['position'] = [0, 0, 0]
     return _mossify(p, kit, kit.finish(bpy, name, bm, q, True, kit.piece_material(bpy, q)))
+
+
+# --- the redwood forest (round 31, the owner's second direction) -----------------------------------------------------
+def trunk(bpy, name, p, kit):
+    """A redwood's trunk: `radius` at breast height, `height` tall, flaring at its foot into `lobes` buttresses (the
+    flare `flare` times the radius, dying away over `foot` metres); its bark the kit's corduroy (ribs along it), or any
+    `material`. `seed` turns the lobes."""
+    rnd = random.Random(p.get('seed', 1))
+    R, H = p.get('radius', 0.6), p.get('height', 9.0); fl, foot = p.get('flare', 0.7), p.get('foot', 0.8)
+    lobes, ph = p.get('lobes', 5), rnd.uniform(0, 6.28)
+    seg, nz = 72, 60
+    verts, faces = [], []
+    zs = [-0.3] + [H * (k / (nz - 1)) ** 1.8 for k in range(nz)]
+    for z in zs:
+        e = math.exp(-max(z, 0.0) / foot)
+        for i in range(seg):
+            th = 2 * math.pi * i / seg
+            lob = 0.5 + 0.5 * math.cos(lobes * th + ph + 0.4 * math.sin(3 * th))
+            r = R * (1.0 - 0.06 * z / H) * (1 + fl * e * (0.35 + 0.65 * lob ** 2)) * (1 + 0.025 * math.sin(11 * th + z * 2))
+            verts.append((r * math.cos(th), r * math.sin(th), z))
+    for j in range(len(zs) - 1):
+        for i in range(seg):
+            a, b = j * seg + i, j * seg + (i + 1) % seg
+            faces.append((a, b, b + seg, a + seg))
+    me = bpy.data.meshes.new(name); me.from_pydata(verts, [], faces)
+    bm = bmesh.new(); bm.from_mesh(me); bpy.data.meshes.remove(me)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    q = dict(p); q.setdefault('material', 'corduroy'); q.setdefault('rib', 'X')
+    return kit.finish(bpy, name, bm, q, True, kit.piece_material(bpy, q))
+
+
+def fern(bpy, name, p, kit):
+    """A fern: `fronds` felt fronds `length` long from one crown, arching out and down, each a rib with leaflets in
+    pairs, shrinking to a curled tip. `color`, `tint` (the leaflets' second green), `seed`, `rise` (how high they arch)."""
+    rnd = random.Random(p.get('seed', 2))
+    L = p.get('length', 0.6); n = p.get('fronds', 9); rise = p.get('rise', 0.55)
+    ribs, leaves, leaves2 = bmesh.new(), bmesh.new(), bmesh.new()
+    for f in range(n):
+        a = 2 * math.pi * f / n + rnd.uniform(-0.25, 0.25)
+        l = L * rnd.uniform(0.75, 1.1); up = rise * rnd.uniform(0.75, 1.15)
+        out = Vector((math.cos(a), math.sin(a), 0))
+        def at(t):
+            return out * (l * t) + Vector((0, 0, l * up * math.sin(math.pi * 0.85 * t) - l * 0.15 * t * t))
+        pts = [at(k / 10) for k in range(11)]
+        _new(ribs, lambda b: kit._tube(b, [tuple(v) for v in pts], [l * 0.012, l * 0.004], 1.0, 0.0, 6, 3))
+        side = out.cross(Vector((0, 0, 1))).normalized()
+        m_pairs = p.get('pairs', 14)
+        for k in range(1, m_pairs + 1):
+            t = 0.12 + 0.86 * k / (m_pairs + 1)
+            c = at(t); tan = (at(min(1, t + 0.02)) - at(t - 0.02)).normalized()
+            ln = l * 0.16 * math.sin(math.pi * min(1.0, (1.05 - t) * 1.1)) ** 0.7 + l * 0.015
+            for sgn in (1, -1):
+                d = (side * sgn * 0.9 + tan * 0.45 + Vector((0, 0, -0.15))).normalized()
+                m = _orient(d, c + d * ln * 0.5, 0.0)
+                nrm = tan.cross(d)
+                target = leaves if (k + (sgn > 0)) % 2 else leaves2
+                m = m @ Matrix.Rotation(math.atan2(nrm.z, 1.0) * 0.0, 4, 'Z')
+                _new(target, lambda b: kit._sphere(b, (0, 0, 0), (ln * 0.18, ln * 0.035, ln * 0.5), 12), m)
+    col, tint = p.get('color', '#3E6A2C'), p.get('tint', '#4C7A33')
+    parts = {('felt', col, ()): ribs, ('felt', col, (('grain', 0.7),)): leaves, ('felt', tint, (('grain', 0.7),)): leaves2}
+    return _objects(bpy, name, p, kit, parts)
+
+
+def potion(bpy, name, p, kit):
+    """A tiny potion bottle: a round glass flask `size` tall, a green liquid in it that glows a little, a cork."""
+    s = p.get('size', 0.08)
+    glass, liquid, cork = bmesh.new(), bmesh.new(), bmesh.new()
+    prof = [(0.0, 0.0), (0.3 * s, 0.0), (0.42 * s, 0.12 * s), (0.45 * s, 0.3 * s), (0.36 * s, 0.52 * s), (0.14 * s, 0.66 * s),
+            (0.12 * s, 0.85 * s), (0.15 * s, 0.9 * s), (0.0, 0.9 * s)]
+    kit._lathe(glass, prof, 40)
+    lp = [(0.0, 0.03 * s), (0.27 * s, 0.03 * s), (0.38 * s, 0.13 * s), (0.41 * s, 0.3 * s), (0.36 * s, 0.42 * s), (0.0, 0.42 * s)]
+    kit._lathe(liquid, lp, 40)
+    kit._lathe(cork, [(0.0, 0.8 * s), (0.11 * s, 0.8 * s), (0.13 * s, 1.02 * s), (0.0, 1.02 * s)], 24)
+    parts = {('glass', '#E6F2EA', ()): glass, ('resin', p.get('liquid', '#3BBF5A'), (('emit', 0.8), ('emit_color', '#6CFF8A'))): liquid,
+             ('suede', '#9C7A55', ()): cork}
+    return _objects(bpy, name, p, kit, parts)
