@@ -175,11 +175,13 @@ def hero_lamp(colour='haze'):
     of focus behind it. Promo pass 1 (critic/rounds/2026-10-18/promo-hero-lamp-p1.json, 5.0): more samples (the
     denoiser smeared the wall), 35 mm with the speaker whole in the left third, the dusk sky brighter so the window's
     blue reads, the strip's own glow down (the sleeve clipped cold), the fill up and lower, exposure 0.75, white
-    balance 3800 K (the wall went magenta), the lamp 7 cm off the wall."""
+    balance 3800 K (the wall went magenta), the lamp 7 cm off the wall. Pass 2 (5.5, promo-hero-lamp-p2.json): the
+    camera below the rim so the shade's lit inside reads; a fill from the window side on the speaker (it was a blue
+    void); Bell at 21 W so it pools on the walnut; the sleeve's own glow 12 (it clipped); 3100 K."""
     lx, ly = 0.36, 0.38
     h = CAB_TOP
     s = room_shot(f'Bell beside {C.NAMES[colour]}', [1600, 1100],
-                  {'position': [0.38, -1.30, 1.06], 'target': [0.18, 0.45, 0.95], 'lens_mm': 40, 'level': True, 'fstop': 2.8,
+                  {'position': [0.30, -1.25, 0.90], 'target': [0.20, 0.45, 0.98], 'lens_mm': 40, 'level': True, 'fstop': 2.8,
                    'focus': [lx, ly - 0.2, h + 0.3]})
     s['render']['samples'] = HERO_SAMPLES
     s['set'] = room(dusk=True)
@@ -188,11 +190,11 @@ def hero_lamp(colour='haze'):
     s['products'] = [{'def': CLOUD, 'flavour': C.SPEAKER_FLAVOUR[colour], 'instances': [{'position': [-0.55, 0.50, 0], 'rotate_z': 12}]},
                      {'def': LAMP, 'flavour': colour, 'instances': [{'position': [lx, ly, h], 'rotate_z': 0}]}]
     s['sky'] = dict(DUSK)
-    s['lights'] = {'fill': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 40, 'elevation_deg': 8, 'distance_m': 2.4},
-                            'target': [lx, ly, h + 0.24], 'irradiance': 0.12, 'color': '#C9D6F0'}}
-    bell_lights(s, lx, ly, h)
-    s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 25.0}}
-    s['render']['white_balance_k'] = 3800
+    s['lights'] = {'fill': {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': -55, 'elevation_deg': 20, 'distance_m': 2.4},
+                            'target': [-0.55, 0.5, 1.0], 'irradiance': 0.30, 'color': '#E4D6E8'}}
+    bell_lights(s, lx, ly, h, watts=21.0)
+    s['materials'] = {'oak': {'grain': 1.0, 'roughness': 0.38}, 'led': {'strength': 12.0}}
+    s['render']['white_balance_k'] = 3100
     s['render']['exposure'] = 0.75
     return s
 
