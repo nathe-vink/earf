@@ -95,7 +95,7 @@ def shot():
                  'barkhorn, Dust, Monument Valley in the afternoon', lights=lights(),
                  sun=sun_from_sky(HDRI, ROT, irradiance=float(os.environ.get('DUSTB_SUN', 9.0)), angle_deg=0.53, color='#FFC98E'),
                  fin=finish(contrast=0.08, clarity=0.05, saturation=0.04, vignette=0.12),
-                 haze={'box_m': [-8000.0, -60.0, -5.0, 8000.0, 8000.0, 350.0], 'density': 0.00005,
+                 haze={'box_m': [-8000.0, -60.0, -5.0, 8000.0, 8000.0, 300.0], 'density': 0.00002,
                        'anisotropy': 0.3, 'color': '#BFCDE0'},
                  rotate_z=20.0, position=(0.0, 0.0, -0.012), exposure=float(os.environ.get('DUSTB_EXP', 0.0)))
 
