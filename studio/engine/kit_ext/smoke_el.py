@@ -143,3 +143,40 @@ def trunks(bpy, name, p, kit):
                                    bump=p.get('bump', 1.0), coords='uv', tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0)))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     return [ob]
+
+
+def canopy(bpy, name, p, kit):
+    """The pine wood's crowns overhead, out of frame: a layer `size` [w, d] at height `z`, opaque where noise says there
+    are branches and open in gaps (`open` the share of sky, `scale` metres a clump), so a sun above cuts shafts through
+    the smoke below and dapples the floor. It casts shadows only; the camera never sees it."""
+    w, d = p.get('size', [60.0, 60.0])
+    me = bpy.data.meshes.new(name)
+    me.from_pydata([(-w / 2, -d / 2, 0), (w / 2, -d / 2, 0), (w / 2, d / 2, 0), (-w / 2, d / 2, 0)], [], [(0, 1, 2, 3)])
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    x, y = p.get('position', [0.0, 0.0])[:2]
+    ob.location = Vector((x, y, p.get('z', 14.0)))
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+    df = nt.nodes.new('ShaderNodeBsdfDiffuse'); df.inputs['Color'].default_value = kit.M.hex_lin(p.get('color', '#1C2016'))
+    mix = nt.nodes.new('ShaderNodeMixShader')
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / p.get('scale', 1.5)
+    nz.inputs['Detail'].default_value = 8.0
+    if 'Roughness' in nz.inputs:
+        nz.inputs['Roughness'].default_value = 0.7
+    mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Location'].default_value = (p.get('seed', 0) * 9.3, 0, 0)
+    nt.links.new(tc.outputs['Object'], mp.inputs['Vector']); nt.links.new(mp.outputs['Vector'], nz.inputs['Vector'])
+    ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp
+    o = p.get('open', 0.3)
+    cr.elements[0].color = (0, 0, 0, 1)                                                    # branches
+    cr.elements[1].color = (1, 1, 1, 1)                                                    # gaps
+    # noise sits around 0.5: put the step at the quantile that leaves `open` of the layer clear
+    cr.elements[0].position = 0.5 + (0.5 - o) * 0.22; cr.elements[1].position = cr.elements[0].position + 0.015
+    nt.links.new(nz.outputs['Fac'], ramp.inputs['Fac'])
+    nt.links.new(ramp.outputs['Color'], mix.inputs['Fac'])
+    nt.links.new(df.outputs['BSDF'], mix.inputs[1]); nt.links.new(tr.outputs['BSDF'], mix.inputs[2])
+    nt.links.new(mix.outputs['Shader'], out.inputs['Surface'])
+    me.materials.append(m)
+    ob.visible_camera = False
+    return [ob]
