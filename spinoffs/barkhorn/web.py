@@ -117,6 +117,22 @@ def save(im, name, width=None, q=82):
     return name, im.size
 
 
+FIELD = (250, 249, 246)      # the studio's bright field, as its frames' edges measure (the median of the eight heroes')
+
+
+def field(im, top, bottom, side, ground=FIELD):
+    """A bright-field frame's edges blended into one flat ground, over these fractions of its height and width: the
+    sweep falls off to grey at its corners, and the page's band behind it is one colour."""
+    a = np.asarray(im.convert('RGB')).astype(np.float32)
+    h, w = a.shape[:2]
+    def ramp(n, lo, hi):                                # 0 at each edge, 1 inside, a cosine between
+        i = np.arange(n, dtype=np.float32)
+        t = np.minimum(np.clip(i / max(1.0, lo * n), 0, 1), np.clip((n - 1 - i) / max(1.0, hi * n), 0, 1))
+        return 0.5 - 0.5 * np.cos(np.pi * t)
+    m = (ramp(h, top, bottom)[:, None] * ramp(w, side, side)[None, :])[..., None]
+    return Image.fromarray((a * m + np.float32(ground) * (1 - m)).round().clip(0, 255).astype(np.uint8))
+
+
 def layer(im, ground, dark):
     """A render as a layer for any page colour: on light grounds a multiply layer (the render over the ground it was
     made on, that ground made white); on dark a screen layer (the light the render adds to its ground)."""
@@ -196,10 +212,11 @@ def make_images(sources=None):
             lambda p: save(Image.open(p), f'{k}-habitat-portrait.jpg', 1000, q=84))
         for tag, names in (('studio', ('hero-dark', 'hero')), ('studio-light', ('hero-light',))):
             one(first(*[os.path.join(ST31, f'{n}-{c}.{e}') for n in names for c in (h, k) for e in ('png', 'jpg')]),
-                lambda p, t=tag: (save(Image.open(p), f'{k}-{t}.jpg', 2400, q=84), save(Image.open(p), f'{k}-{t}-1200.jpg', 1200, q=82)))
+                lambda p, t=tag: (lambda im: (save(im, f'{k}-{t}.jpg', 2400, q=84), save(im, f'{k}-{t}-1200.jpg', 1200, q=82)))(
+                    field(Image.open(p), 0.14, 0.05, 0.22) if t == 'studio-light' else Image.open(p)))
     one(os.path.join(R30, 'inside.png'), lambda p: save(Image.open(p), 'inside.jpg', 880, q=82))
-    one(first(os.path.join(ST31, 'lineup.png'), os.path.join(ST31, 'lineup.jpg')),
-        lambda p: (save(Image.open(p), 'lineup.jpg', 2400, q=84), save(Image.open(p), 'lineup-1200.jpg', 1200, q=82)))
+    one(first(os.path.join(ST31, 'lineup.png'), os.path.join(ST31, 'lineup.jpg')),       # its horizon kept below the horns
+        lambda p: (lambda im: (save(im, 'lineup.jpg', 2400, q=84), save(im, 'lineup-1200.jpg', 1200, q=82)))(field(Image.open(p), 0.25, 0.07, 0.06)))
     for m, c, *_ in MACROS:                             # the studio's details, each in the colour it was shot in
         one(first(*[os.path.join(ST31, f'macro-{m}-{c}.{e}') for e in ('png', 'jpg')]),
             lambda p, m=m: save(Image.open(p), f'macro-{m}.jpg', 1200, q=84))
