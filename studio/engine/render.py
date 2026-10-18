@@ -138,7 +138,7 @@ def main():
     cd = bpy.data.cameras.new('camera'); cam = bpy.data.objects.new('camera', cd); scene.collection.objects.link(cam)
     scene.camera = cam
     cd.sensor_fit = 'HORIZONTAL'; cd.sensor_width = cam_spec.get('sensor_mm', 36.0); cd.lens = cam_spec.get('lens_mm', 50.0)
-    cd.clip_start = 0.01; cd.clip_end = cam_spec.get('clip_end', 300)     # round 31b: a far horizon (km) needs more
+    cd.clip_start = 0.01; cd.clip_end = cam_spec.get('clip_end', 300)     # round 31b: hills kilometres off
     C = Vector(cam_spec['position']); T = Vector(cam_spec.get('target', centre))
     W, H = sh.get('size', [1600, 1000])
     if cam_spec.get('level', True):
@@ -250,7 +250,10 @@ def main():
     cy.volume_bounces = R.get('volume_bounces', 2)      # a material with a volume (frosted) scatters inside it
     cy.sample_clamp_indirect = R.get('clamp', 10.0)
     cy.blur_glossy = R.get('filter_glossy', 0.5)
-    cy.caustics_reflective = False; cy.caustics_refractive = False
+    cy.caustics_reflective = False
+    # refractive caustics off by default (noise); a shot may turn them on so light reaches what stands behind clear
+    # parts (round 31b: the lining inside a tinted acrylic cabinet, lit by the sky through the acrylic)
+    cy.caustics_refractive = bool(R.get('caustics_refractive', False))
     if a.threads:
         scene.render.threads_mode = 'FIXED'; scene.render.threads = a.threads
     scene.render.resolution_x = int(W * a.scale); scene.render.resolution_y = int(H * a.scale)

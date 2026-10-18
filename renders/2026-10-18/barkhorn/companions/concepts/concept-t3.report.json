@@ -1,0 +1,133 @@
+{
+ "shot": "studio/shots/barkhorn/companions/concept-t3.json",
+ "image": "renders/2026-10-18/barkhorn/companions/concepts/concept-t3.png",
+ "seconds": {
+  "build": 0.2,
+  "render": 69.7
+ },
+ "samples": 48,
+ "size": [
+  900,
+  720
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "arm#0": {
+   "part": "arm",
+   "centre_px": [
+    561.8,
+    238.7
+   ],
+   "box_px": [
+    392,
+    136,
+    750,
+    372
+   ],
+   "depth_m": 0.996
+  },
+  "arm-pillar#0": {
+   "part": "arm-pillar",
+   "centre_px": [
+    583.0,
+    283.8
+   ],
+   "box_px": [
+    481,
+    177,
+    690,
+    407
+   ],
+   "depth_m": 1.092
+  },
+  "column#0": {
+   "part": "column",
+   "centre_px": [
+    427.6,
+    407.4
+   ],
+   "box_px": [
+    339,
+    302,
+    521,
+    528
+   ],
+   "depth_m": 0.906
+  },
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    427.6,
+    483.3
+   ],
+   "box_px": [
+    181,
+    333,
+    709,
+    705
+   ],
+   "depth_m": 0.906
+  },
+  "motor-pillar#0": {
+   "part": "motor-pillar",
+   "centre_px": [
+    142.2,
+    382.1
+   ],
+   "box_px": [
+    63,
+    260,
+    225,
+    521
+   ],
+   "depth_m": 0.943
+  },
+  "platter#0": {
+   "part": "platter",
+   "centre_px": [
+    427.6,
+    309.5
+   ],
+   "box_px": [
+    146,
+    170,
+    755,
+    528
+   ],
+   "depth_m": 0.906
+  },
+  "pulley#0": {
+   "part": "pulley",
+   "centre_px": [
+    142.2,
+    291.7
+   ],
+   "box_px": [
+    107,
+    265,
+    179,
+    320
+   ],
+   "depth_m": 0.943
+  },
+  "spindle#0": {
+   "part": "spindle",
+   "centre_px": [
+    427.6,
+    276.8
+   ],
+   "box_px": [
+    418,
+    259,
+    438,
+    295
+   ],
+   "depth_m": 0.906
+  }
+ }
+}

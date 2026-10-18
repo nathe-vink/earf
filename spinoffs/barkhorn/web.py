@@ -56,6 +56,7 @@ C31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions')   # 
 HABITAT = {'red': 'ember', 'orange': 'dust', 'amber': 'acid', 'green': 'poison', 'blue': 'ice', 'violet': 'haze',
            'ice': 'fog', 'black': 'smoke'}
 ELEMENT = dict(HABITAT)       # which concept each colour shows in its element: A (<name>), or B (<name>_b) once it wins
+ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a blind duel, 2 to 1 (6.2 to 5.9)
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 TITLE = 'EARF · Atmosphere'
 DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours named for things in the air. '
@@ -141,11 +142,13 @@ def make_images(sources=None):
             fn(path); made.append(os.path.basename(path))
     def first(*paths):                                  # the final if it is there, else the round's picture
         return next((p for p in paths if p and os.path.exists(p)), None)
-    hero = first(os.path.join(H31, 'hero.png'), os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png'))
+    hero = first(os.path.join(H31, 'hero.png'), os.path.join(H31, 'hero.jpg'), os.path.join(FIN, 'hero.png'), os.path.join(R30, 'hero.png'))
     one(hero, lambda p: (save(Image.open(p), 'hero.jpg', 2400, q=82), save(Image.open(p), 'hero-1200.jpg', 1200, q=80)))
     # the hero's own link boxes and its phone frame travel with it, and a picture without them leaves none behind
-    for name, src in (('hero-spots.json', 'spots.json'), ('hero-portrait.jpg', 'hero-portrait.png')):
+    for name, src in (('hero-spots.json', 'spots.json'), ('hero-portrait.jpg', 'hero-portrait.png'), ('hero-spots-portrait.json', 'spots-portrait.json')):
         theirs = os.path.join(os.path.dirname(hero), src) if hero else ''
+        if theirs and src.endswith('.png') and not os.path.exists(theirs):    # a frame over 5 MB ships as a JPG
+            theirs = theirs[:-4] + '.jpg'
         if theirs and os.path.exists(theirs):
             if name.endswith('.json'):
                 shutil.copy(theirs, os.path.join(IMG, name)); made.append(src)
@@ -184,9 +187,9 @@ def make_images(sources=None):
     for tag, names in (('facade', ('facade', 'night', 'opera')), ('facade-portrait', ('facade-portrait', 'night-portrait', 'opera-portrait'))):
         one(first(*[os.path.join(U31, f'{n}.{e}') for n in names for e in ('png', 'jpg')]),
             lambda p, t=tag: (save(Image.open(p), f'{t}.jpg', 2400, q=84), save(Image.open(p), f'{t}-1200.jpg', 1200, q=82)))
-    room = first(os.path.join(RM31, 'room.png'), os.path.join(FIN, 'room.png'))
+    room = first(os.path.join(RM31, 'room.png'), os.path.join(RM31, 'room.jpg'), os.path.join(FIN, 'room.png'))
     one(room, lambda p: save(Image.open(p), 'room.jpg', 1800, q=84))
-    port = os.path.join(os.path.dirname(room), 'room-portrait.png') if room else ''
+    port = first(*[os.path.join(os.path.dirname(room), f'room-portrait.{e}') for e in ('png', 'jpg')]) if room else ''
     if port and os.path.exists(port):                   # the room's phone frame travels with it, as the hero's does
         one(port, lambda p: save(Image.open(p), 'room-portrait.jpg', 1000, q=84))
     elif room and os.path.exists(os.path.join(IMG, 'room-portrait.jpg')):
@@ -365,6 +368,13 @@ def body():
     room_tall = ('<source media="(max-width: 700px)" srcset="img/room-portrait.jpg">' if tall('room-portrait.jpg') else '')
     if hero_tall:
         hotspots = hotspots.replace('class="spot"', 'class="spot wide-only"')
+    if hero_tall and tall('hero-spots-portrait.json'):    # the phone frame's own boxes: the back rank first, so the front's lie over it
+        ps = json.load(open(os.path.join(IMG, 'hero-spots-portrait.json')))
+        ps = ps['portrait'] if isinstance(ps, dict) else ps
+        hotspots += ''.join(
+            f'<a class="spot tall-only" href="#speaker-{k}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%">'
+            f'<span class="sr">{name}, Atmosphere {num}</span></a>'
+            for (k, num, name, *_), s in sorted(zip(CLOUDS, ps), key=lambda cs: cs[1]['t'] + cs[1]['h']))
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
@@ -477,7 +487,8 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
   .hero-title h1 { font-size: clamp(32px, 8vw, 44px) }
   .spot-label { display: none }
 }
-@media (max-width: 700px) { .spot.wide-only { display: none } }
+.spot.tall-only { display: none }
+@media (max-width: 700px) { .spot.wide-only { display: none } .hero-photo.has-tall .spot.tall-only { display: block } }
 
 /* the horns turning */
 .horns { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px }
@@ -727,8 +738,8 @@ __REEL__
 __HABITATS__
   <section class="band room" id="room"><div class="wrap">
     <div class="head"><div><p class="eyebrow">At home</p><h2>A pair of Poison.</h2></div></div>
-    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a low sideboard with a record player, a lounge chair to the left" loading="lazy"></picture>
-      <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 520 mm.</span></figcaption></figure>
+    <figure><picture>__ROOM_TALL__<img src="img/room.jpg" width="1800" height="1012" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
+      <figcaption><span>Each speaker stands 1293 mm tall and 560 mm wide.</span><span>For scale, the sideboard is 560 mm.</span></figcaption></figure>
   </div></section>
 
   <section class="band spec" id="spec"><div class="wrap">

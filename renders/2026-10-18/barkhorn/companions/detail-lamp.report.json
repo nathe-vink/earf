@@ -1,0 +1,189 @@
+{
+ "shot": "studio/shots/barkhorn/companions/detail-lamp.json",
+ "image": "renders/2026-10-18/barkhorn/companions/detail-lamp.png",
+ "seconds": {
+  "build": 0.8,
+  "render": 208.2
+ },
+ "samples": 64,
+ "size": [
+  960,
+  1200
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "bumpons#0": {
+   "part": "bumpons",
+   "centre_px": [
+    480.0,
+    2048.4
+   ],
+   "box_px": [
+    30,
+    1828,
+    1052,
+    2485
+   ],
+   "depth_m": 0.335
+  },
+  "cap#0": {
+   "part": "cap",
+   "centre_px": [
+    480.0,
+    423.7
+   ],
+   "box_px": [
+    316,
+    312,
+    661,
+    512
+   ],
+   "depth_m": 0.526
+  },
+  "cord#0": {
+   "part": "cord",
+   "centre_px": [
+    421.3,
+    1115.8
+   ],
+   "box_px": [
+    338,
+    512,
+    498,
+    2006
+   ],
+   "depth_m": 0.471
+  },
+  "cover#0": {
+   "part": "cover",
+   "centre_px": [
+    480.0,
+    2018.9
+   ],
+   "box_px": [
+    153,
+    1842,
+    883,
+    2313
+   ],
+   "depth_m": 0.337
+  },
+  "dimmer#0": {
+   "part": "dimmer",
+   "centre_px": [
+    579.2,
+    1998.9
+   ],
+   "box_px": [
+    473,
+    1822,
+    700,
+    2218
+   ],
+   "depth_m": 0.298
+  },
+  "foot-lower-stack#0": {
+   "part": "foot-lower-stack",
+   "centre_px": [
+    480.0,
+    1930.3
+   ],
+   "box_px": [
+    -27,
+    1651,
+    1199,
+    2618
+   ],
+   "depth_m": 0.344
+  },
+  "hub#0": {
+   "part": "hub",
+   "centre_px": [
+    480.0,
+    489.7
+   ],
+   "box_px": [
+    316,
+    336,
+    661,
+    617
+   ],
+   "depth_m": 0.514
+  },
+  "knob#0": {
+   "part": "knob",
+   "centre_px": [
+    582.4,
+    1890.8
+   ],
+   "box_px": [
+    501,
+    1811,
+    669,
+    1981
+   ],
+   "depth_m": 0.303
+  },
+  "shade#0": {
+   "part": "shade",
+   "centre_px": [
+    480.0,
+    662.1
+   ],
+   "box_px": [
+    -337,
+    -279,
+    1574,
+    1025
+   ],
+   "depth_m": 0.485
+  },
+  "sleeve#0": {
+   "part": "sleeve",
+   "centre_px": [
+    480.0,
+    519.7
+   ],
+   "box_px": [
+    339,
+    379,
+    633,
+    640
+   ],
+   "depth_m": 0.509
+  },
+  "stem#0": {
+   "part": "stem",
+   "centre_px": [
+    480.0,
+    1071.2
+   ],
+   "box_px": [
+    407,
+    489,
+    557,
+    1928
+   ],
+   "depth_m": 0.428
+  },
+  "strip#0": {
+   "part": "strip",
+   "centre_px": [
+    480.0,
+    502.3
+   ],
+   "box_px": [
+    369,
+    415,
+    599,
+    578
+   ],
+   "depth_m": 0.512
+  }
+ }
+}

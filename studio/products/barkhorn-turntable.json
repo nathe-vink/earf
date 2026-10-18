@@ -1,0 +1,129 @@
+{
+ "_note": "Cumulus for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-turntable/render/barkhorn-turntable.glb",
+ "origin_mm": [
+  241.6,
+  186.5,
+  0.0
+ ],
+ "materials": {
+  "accent": {
+   "preset": "satin_paint",
+   "color": "$accent",
+   "roughness": 0.45,
+   "specular": 0.4
+  },
+  "acrylic": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.025,
+   "roughness": 0.05
+  },
+  "aluminium": {
+   "preset": "metal",
+   "color": "#BFC1C2",
+   "roughness": 0.35
+  },
+  "arm": {
+   "preset": "gunmetal",
+   "color": "#2C2C2E"
+  },
+  "black": {
+   "preset": "satin_paint",
+   "color": "#18181A",
+   "roughness": 0.5,
+   "specular": 0.3
+  },
+  "brass": {
+   "preset": "metal",
+   "color": "#C9A660",
+   "roughness": 0.28
+  },
+  "cartridge": {
+   "preset": "gloss_plastic",
+   "color": "#121213"
+  },
+  "rubber": {
+   "preset": "rubber",
+   "color": "#161616"
+  },
+  "steel": {
+   "preset": "metal",
+   "color": "#CFCFCB",
+   "roughness": 0.18
+  }
+ },
+ "assign": [
+  {
+   "match": "mark",
+   "material": "accent"
+  },
+  {
+   "match": "plinth-lower-stack|platter-disc|pod-1-stack|foot-1-disc|foot-2-disc|foot-3-disc",
+   "material": "acrylic"
+  },
+  {
+   "match": "pulley",
+   "material": "aluminium"
+  },
+  {
+   "match": "arm",
+   "material": "arm"
+  },
+  {
+   "match": "thrust-pad|motor",
+   "material": "black"
+  },
+  {
+   "match": "platter-hub|bearing-housing|bushes",
+   "material": "brass"
+  },
+  {
+   "match": "cartridge",
+   "material": "cartridge"
+  },
+  {
+   "match": "pod-pads|belt|foot-pads",
+   "material": "rubber"
+  },
+  {
+   "match": "spindle|ball",
+   "material": "steel"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#F2A29C",
+   "accent": "#7A1A1C"
+  },
+  "dust": {
+   "deep": "#F2B184",
+   "accent": "#8C3B14"
+  },
+  "acid": {
+   "deep": "#F2D06B",
+   "accent": "#9A6A12"
+  },
+  "poison": {
+   "deep": "#B2C9A2",
+   "accent": "#2E4A2C"
+  },
+  "ice": {
+   "deep": "#B5D9EE",
+   "accent": "#24557E"
+  },
+  "haze": {
+   "deep": "#BEADD8",
+   "accent": "#3F2A5E"
+  },
+  "fog": {
+   "deep": "#F7F8F7",
+   "accent": "#E7E6E1"
+  },
+  "smoke": {
+   "deep": "#8A888E",
+   "accent": "#141316"
+  }
+ }
+}
