@@ -31,7 +31,7 @@
      0.0
     ],
     "size": [
-     60.0,
+     200.0,
      1.2,
      5.6
     ],
@@ -62,7 +62,7 @@
      4.8
     ],
     "size": [
-     60.0,
+     200.0,
      0.7,
      0.8
     ],
@@ -93,7 +93,7 @@
      0.0
     ],
     "size": [
-     60.0,
+     200.0,
      4.2
     ],
     "texture": "granite_tile",
@@ -114,7 +114,7 @@
      0.0
     ],
     "size": [
-     60.0,
+     200.0,
      0.35
     ],
     "thick": 0.03,
@@ -135,7 +135,7 @@
      -0.06
     ],
     "size": [
-     80.0,
+     240.0,
      29.0
     ],
     "ripple": 0.12,
@@ -183,7 +183,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -28.8,
+     -96.0,
      0.44999999999999996,
      0.0
     ],
@@ -214,7 +214,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -24.0,
+     -91.2,
      0.44999999999999996,
      0.0
     ],
@@ -245,7 +245,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -19.2,
+     -86.4,
      0.44999999999999996,
      0.0
     ],
@@ -276,7 +276,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -14.4,
+     -81.6,
      0.44999999999999996,
      0.0
     ],
@@ -307,7 +307,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -9.6,
+     -76.8,
      0.44999999999999996,
      0.0
     ],
@@ -338,7 +338,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     -4.8,
+     -72.0,
      0.44999999999999996,
      0.0
     ],
@@ -369,7 +369,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     0.0,
+     -67.2,
      0.44999999999999996,
      0.0
     ],
@@ -400,7 +400,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     4.8,
+     -62.4,
      0.44999999999999996,
      0.0
     ],
@@ -431,7 +431,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     9.6,
+     -57.6,
      0.44999999999999996,
      0.0
     ],
@@ -462,7 +462,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     14.4,
+     -52.8,
      0.44999999999999996,
      0.0
     ],
@@ -493,7 +493,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     19.2,
+     -48.0,
      0.44999999999999996,
      0.0
     ],
@@ -524,7 +524,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     24.0,
+     -43.2,
      0.44999999999999996,
      0.0
     ],
@@ -555,7 +555,7 @@
     "module": "concrete",
     "fn": "wall",
     "position": [
-     28.8,
+     -38.4,
      0.44999999999999996,
      0.0
     ],
@@ -578,6 +578,874 @@
      0.641,
      0.219,
      0.041
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     -33.6,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.336,
+     0.334,
+     0.396
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     -28.8,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.647,
+     0.836,
+     0.961
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     -24.0,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.976,
+     0.994,
+     0.79
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     -19.2,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.306,
+     0.176,
+     0.624
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     -14.4,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.546,
+     0.675,
+     0.094
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     -9.6,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.193,
+     0.921,
+     0.601
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     -4.8,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.695,
+     0.096,
+     0.399
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     0.0,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.91,
+     0.649,
+     0.992
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     4.8,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.197,
+     0.455,
+     0.801
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     9.6,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.445,
+     0.789,
+     0.562
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     14.4,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.118,
+     0.099,
+     0.983
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     19.2,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.119,
+     0.194,
+     0.335
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     24.0,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.713,
+     0.854,
+     0.476
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     28.8,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.498,
+     0.788,
+     0.278
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     33.6,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.372,
+     0.613,
+     0.636
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     38.4,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.038,
+     0.112,
+     0.138
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     43.2,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.725,
+     0.693,
+     0.973
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     48.0,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.768,
+     0.255,
+     0.765
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     52.8,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.985,
+     0.349,
+     0.011
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     57.6,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.375,
+     0.283,
+     0.176
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     62.4,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.045,
+     0.125,
+     0.865
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     67.2,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.05,
+     0.614,
+     0.207
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     72.0,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.193,
+     0.821,
+     0.299
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     76.8,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.184,
+     0.455,
+     0.695
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     81.6,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.524,
+     0.86,
+     0.401
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     86.4,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.524,
+     0.717,
+     0.462
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     91.2,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.717,
+     0.467,
+     0.134
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "concrete",
+    "fn": "wall",
+    "position": [
+     96.0,
+     0.44999999999999996,
+     0.0
+    ],
+    "size": [
+     4.796,
+     0.3,
+     4.8
+    ],
+    "texture": "concrete_layers_02",
+    "res": "4k",
+    "tex_scale": 2.0,
+    "bump": 1.8,
+    "vary": 0.6,
+    "vary_m": 6.0,
+    "ties": [
+     0.6,
+     0.62
+    ],
+    "tex_offset": [
+     0.123,
+     0.783,
+     0.745
     ]
    },
    {
