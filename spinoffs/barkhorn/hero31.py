@@ -19,40 +19,51 @@ OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'hero31')
 # spectrum order: Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke
 FLAVOURS = ['cloud-red', 'cloud-orange', 'cloud-amber', 'eucalyptus-y2k-green', 'cloud-blue', 'cloud-violet',
             'birch-fog-clear', 'cloud-black']
-W_M, H_M = 0.56, 1.33          # a Cloud's width and its height to the horn's top (README: 1293 cabinet and feet)
+W_M, H_M = 0.56, 1.33
+CABINET = ['left', 'right', 'top', 'bottom', 'front-panel', 'back', 'brace*', 'rib-*', 'land-*']          # a Cloud's width and its height to the horn's top (README: 1293 cabinet and feet)
 
 P = {
     # the arc: centres `pitch` apart along x, the middle `sag` metres farther from the camera than the ends; each copy
     # turned to face the lens, then `toe` degrees more toward the middle (0: every baffle square to the camera)
-    'pitch': 0.80, 'sag': 0.30, 'toe': 0.0,
+    'pitch': 0.85, 'sag': 0.9, 'toe': 12.0,
     # the camera: distance in front of the ends, height, lens; it looks level (verticals stay vertical), the frame
     # placed by `aim_z` (the height it centres on) and `shift_y`
-    'cam_dist': 11.0, 'cam_h': 2.4, 'lens': 53.0, 'aim_z': 0.8, 'shift_y': -0.05,
+    'cam_dist': 15.0, 'cam_h': 2.6, 'lens': 70.0, 'aim_z': 0.8, 'shift_y': -0.04,
     # the key: a small hard source behind the middle of the arc, low, aimed through the line at the floor in front
     'key_y': 14.0, 'key_z': 9.5, 'key_size': 0.8, 'key_w': 0.0, 'key_irr': 5.5, 'key_color': 5200, 'key_spread': 100,
+    # or the key as a sun from behind the wall (the sweep casts no shadow): W/m2 (0: the disc above), elevation, size
+    'sun': 17.0, 'sun_el': 22.0, 'sun_angle': 1.5,
+    # side strips lighting the cabinets' edges (light-linked to the cabinets), W/m2; 0 off
+    'sides': 6.0,
     # the cyc: a ground row on the floor behind the line, washing the sweep's wall evenly
-    'cyc_irr': 14.0, 'cyc_color': 5600,
+    'cyc_irr': 13.0, 'cyc_color': 5600,
     # the top: a silk over the floor behind the line, so the floor between the line and the cove is paper, not a band
-    'top_irr': 9.0, 'top_y': 8.0,
+    'top_irr': 11.0, 'top_y': 7.0,
+    # the over: a silk high over the floor in front of the line, lifting the shadows as a white ceiling would
+    'over_irr': 2.0,
     # the front fill: a large soft source over the camera
     'fill_irr': 3.5, 'fill_color': 5600, 'fill_size': [8.0, 2.0], 'fill_z': 2.0, 'fill_spec': 0.0,
     # the faces: a fill for the speakers alone (light-linked to the cabinet, lining and rings), 0 off
-    'face_irr': 8.0,
+    'face_irr': 4.0,
     # the cones: a strip softbox above the camera light-linked to the cones, surrounds and caps (matte paper, so it
     # models them rather than glinting), W/m2; 0 off
     'strip': 25.0,
     # the paper
-    'paper': '#EEECE7', 'tooth': 0.3, 'tooth_mm': 1.2, 'mottle': 0.04, 'contact': 0.35,
-    'sky': 0.4, 'depth': 17.0,
+    'paper': '#EEECE7', 'tooth': 0.4, 'tooth_mm': 2.5, 'mottle': 0.05, 'contact': 0.35,
+    'sky': 0.4, 'depth': 12.0,
     # the render
-    'exposure': -2.2, 'wb': 5400, 'samples': 128, 'transmission_bounces': 16,
-    'white_in': 228, 'white_out': 238, 'contrast': 0.08, 'clarity': 0.06,
+    'exposure': -2.4, 'wb': 5400, 'samples': 128, 'transmission_bounces': 16,
+    'white_in': 228, 'white_out': 234, 'peak': 246, 'contrast': 0.08, 'clarity': 0.06,
 }
 
 
 def arc(p):
-    """[(x, y, rotate_z)] for the eight, left to right."""
+    """[(x, y, rotate_z)] for the eight, left to right (or nearest first, on a diagonal)."""
     n = len(FLAVOURS)
+    if p.get('diag'):                   # a straight line receding from (x0, y0) by (dx, dy) a step, each facing the lens
+        x0, y0, dx, dy = p['diag']
+        pts = [(x0 + i * dx, y0 + i * dy) for i in range(n)]
+        return [(x, y, math.degrees(math.atan2(-x, y + p['cam_dist'])) + p['toe']) for x, y in pts]
     half = p['pitch'] * (n - 1) / 2
     cam_y = -p['cam_dist']
     out = []
@@ -73,33 +84,42 @@ def shot(p, portrait=False):
     a = arc(p)
     inst = [{'flavour': f, 'position': [round(x, 4), round(y, 4), 0.0], 'rotate_z': round(rz, 3), 'hide': ['cloth-disc']}
             for f, (x, y, rz) in zip(FLAVOURS, a)]
-    lights = {
+    lights = {} if p['sun'] else {
         'key': {'type': 'area', 'shape': 'DISK' if not p['key_w'] else 'RECTANGLE',
                 'size_m': [p['key_size'], p['key_size']] if not p['key_w'] else [p['key_w'], p['key_size']],
                 'position': [0.0, p['key_y'], p['key_z']], 'target': [0.0, -2.0, 0.0],
-                'irradiance': p['key_irr'], 'color': p['key_color'], 'spread_deg': p['key_spread'], 'transmission': False},
-        'cyc': {'type': 'area', 'size_m': [28.0, 0.4], 'position': [0.0, p['depth'] - 3.1, 0.3], 'target': [0.0, p['depth'], 3.0],
+                'irradiance': p['key_irr'], 'color': p['key_color'], 'spread_deg': p['key_spread'], 'transmission': False}}
+    lights.update({
+        'cyc': {'type': 'area', 'size_m': [30.0, 5.0], 'position': [0.0, p['depth'] - 7.0, 2.5], 'target': [0.0, p['depth'], 2.0],
                 'irradiance': p['cyc_irr'], 'color': p['cyc_color'], 'spread_deg': 120, 'transmission': False},
-        'top': {'type': 'area', 'size_m': [24.0, 12.0], 'position': [0.0, p['top_y'], 8.0], 'target': [0.0, p['top_y'] + 0.5, 0.0],
+        'top': {'type': 'area', 'size_m': [24.0, 6.0], 'position': [0.0, p['top_y'], 8.0], 'target': [0.0, p['top_y'] + 0.5, 0.0],
                 'irradiance': p['top_irr'], 'color': p['cyc_color'], 'spread_deg': 90, 'transmission': False},
+        'over': {'type': 'area', 'size_m': [16.0, 8.0], 'position': [0.0, -2.5, 8.0], 'target': [0.0, -2.5, 0.0],
+                 'irradiance': p['over_irr'], 'color': p['cyc_color'], 'spread_deg': 90, 'transmission': False},
         'fill': {'type': 'area', 'size_m': p['fill_size'], 'position': [0.0, -p['cam_dist'] - 3.0, p['fill_z']],
                  'target': [0.0, 0.0, 0.7], 'irradiance': p['fill_irr'], 'color': p['fill_color'],
                  'specular': p['fill_spec']},
-    }
+    })
+    if p['sides']:                      # two tall strips either side, lighting the cabinets' edges and corners
+        for nm, sx in (('side_l', -1), ('side_r', 1)):
+            lights[nm] = {'type': 'area', 'size_m': [0.6, 3.0], 'position': [sx * 6.0, -3.0, 1.4], 'target': [0.0, 0.0, 0.7],
+                          'irradiance': p['sides'], 'color': p['fill_color'], 'receivers': CABINET}
     if p['face_irr']:
         lights['face'] = {'type': 'area', 'size_m': [4.0, 2.0], 'position': [0.0, -p['cam_dist'] + 1.0, 2.6],
                           'target': [0.0, 0.0, 0.7], 'irradiance': p['face_irr'], 'color': p['fill_color'],
-                          'receivers': ['left', 'right', 'top', 'bottom', 'front-panel', 'back', 'brace*', 'rib-*', 'land-*',
-                                        'lining-*', 'woofer-ring'],
+                          'receivers': CABINET + ['lining-*', 'woofer-ring'],
                           'specular': 0}
     if p['strip']:
         lights['strip'] = {'type': 'area', 'size_m': [9.0, 0.5], 'position': [0.0, -4.0, 3.4],
                            'target': [0.0, 0.0, 0.62], 'irradiance': p['strip'], 'color': p['fill_color'],
-                           'receivers': ['woofer-cone', 'woofer-surround', 'woofer-cap']}
+                           'receivers': ['woofer-cone', 'woofer-surround', 'woofer-cap', 'hf-motor', 'hf-frame', 'hf-adaptor',
+                                         'hf-plug']}
     sh = {
+        **({'sun': {'azimuth_deg': 180, 'elevation_deg': p['sun_el'], 'irradiance': p['sun'], 'angle_deg': p['sun_angle'],
+                    'color': p['key_color']}} if p['sun'] else {}),
         'product': {'def': 'studio/products/barkhorn-cloud.json', 'flavour': FLAVOURS[0], 'instances': inst},
         'set': {'kind': 'sweep', 'color': p['paper'], 'width': 34.0, 'front': 16.0, 'depth': p['depth'], 'radius': 3.0,
-                'height': 16.0, 'contact': {'strength': p['contact'], 'distance_m': 0.08, 'core_strength': 0.4,
+                'height': 16.0, 'cast_shadow': not p['sun'], 'contact': {'strength': p['contact'], 'distance_m': 0.08, 'core_strength': 0.4,
                                            'core_distance_m': 0.012}},
         'materials': {'sweep': {'tooth': p['tooth'], 'tooth_mm': p['tooth_mm'], 'mottle': p['mottle'], 'roughness': 0.85}},
         'lights': lights,
@@ -107,7 +127,7 @@ def shot(p, portrait=False):
                    'transmission_bounces': p['transmission_bounces'], 'transparent_bounces': 64,
                    'view': 'Khronos PBR Neutral', 'exposure': p['exposure'], 'white_balance_k': p['wb'],
                    'white_balance_tint': 10.0},
-        'finish': {'enabled': True, 'white_in': p['white_in'], 'white_out': p['white_out'], 'contrast': p['contrast'],
+        'finish': {'enabled': True, 'white_in': p['white_in'], 'white_out': p['white_out'], 'peak': p['peak'], 'contrast': p['contrast'],
                    'clarity': p['clarity'], 'sharpen': 0.3, 'sharpen_px': 0.7},
         'title': 'EARF: the eight Clouds (hero31)',
         'size': [1600, 2000] if portrait else [2560, 1280],
@@ -164,32 +184,41 @@ Current settings (metres; the speakers' feet at z = 0, the line's middle at the 
   speaker turned to face the lens, then {toe} deg more toward the middle.
 - camera: at (0, -{cam_dist}, {cam_h}), {lens} mm lens on a 36 mm sensor, looking level (verticals vertical), the frame
   centred on height {aim_z} m by lens shift, extra shift {shift_y} frame heights.
-- key: a {key_size} m disc softbox at (0, {key_y}, {key_z}) behind the line, aimed at (0, -2, 0), {key_irr} W/m2 at its
-  target, {key_color} K, beam spread {key_spread} deg; it is the only light that throws the colour.
-- cyc: a 28 x 0.4 m strip on the floor at the foot of the cove, 3.1 m in front of the wall, washing it, {cyc_irr} W/m2, {cyc_color} K.
-- top: a 24 x 12 m silk at height 8 m over y = {top_y}, aimed down, {top_irr} W/m2 (the floor behind the line and the cove).
+{keyline}
+- cyc: a 30 x 5 m softbox facing the wall from 7 m in front of it, centred 2.5 m up, washing the wall and the cove, {cyc_irr} W/m2, {cyc_color} K.
+- top: a 24 x 6 m silk at height 8 m over y = {top_y}, aimed down, {top_irr} W/m2 (the floor behind the line and the cove).
+- over: a 16 x 8 m silk at height 8 m over y = -2.5 (the floor in front of the line), aimed down, {over_irr} W/m2.
 - fill: an {fill_size} m softbox at (0, -{fill_y}, {fill_z}) behind the camera, aimed at the line, {fill_irr} W/m2, in
   reflections at a share of {fill_spec}.
 - face: a 4 x 2 m softbox at (0, -{face_y}, 2.6) light-linked to the cabinets, linings and rings only, no reflection,
   {face_irr} W/m2.
-- strip: a 9 x 0.5 m strip at (0, -4, 3.4) light-linked to the woofer cones, surrounds and caps, {strip} W/m2.
+- strip: a 9 x 0.5 m strip at (0, -4, 3.4) light-linked to the woofer cones, surrounds and caps and the horn's
+  compression driver, {strip} W/m2.
+- sides: two 0.6 x 3 m strips at (-6, -3, 1.4) and (6, -3, 1.4) aimed at the line, light-linked to the cabinets'
+  acrylic, in reflections, {sides} W/m2 each.
 - sky: a pale grey dome, strength {sky} (soft ambient from above).
 - set: a paper sweep 34 m wide, its wall {depth} m behind the line, a 3 m cove.
 - paper: {paper}, roughness 0.85, tooth {tooth} at {tooth_mm} mm, colour mottle {mottle}; a contact shadow {contact}.
 - render: Cycles, {samples} samples, denoised, 24 bounces ({transmission_bounces} through clear parts), view Khronos PBR
   Neutral, exposure {exposure} EV, white balance {wb} K.
-- finish: white point {white_in} -> {white_out} with a soft shoulder to 251, contrast {contrast}, clarity {clarity},
+- finish: white point {white_in} -> {white_out} with a soft shoulder to {peak}, contrast {contrast}, clarity {clarity},
   sharpen 0.3.
 """
 
 
 def card(p, tag, size=(2560, 1280)):
-    return CARD.format(tag=tag, w=size[0], h=size[1], fill_y=p['cam_dist'] + 3.0, face_y=p['cam_dist'] - 1.0,
+    keyline = (f"- key: a sun from straight behind the line (the paper casts no shadow, so it reaches the floor), elevation "
+               f"{p['sun_el']} deg, {p['sun']} W/m2, {p['sun_angle']} deg across, {p['key_color']} K; it is the only light that "
+               f"throws the colour." if p['sun'] else
+               f"- key: a {p['key_size']} m disc softbox at (0, {p['key_y']}, {p['key_z']}) behind the line, aimed at (0, -2, 0), "
+               f"{p['key_irr']} W/m2 at its target, {p['key_color']} K, beam spread {p['key_spread']} deg; it is the only light "
+               f"that throws the colour.")
+    return CARD.format(tag=tag, w=size[0], h=size[1], fill_y=p['cam_dist'] + 3.0, face_y=p['cam_dist'] - 1.0, keyline=keyline,
                        **{k: v for k, v in p.items()})
 
 
-def parse_sets(sets):
-    p = copy.deepcopy(P)
+def parse_sets(sets, over=None):
+    p = {**copy.deepcopy(P), **(over or {})}
     for kv in sets or []:
         k, v = kv.split('=', 1)
         p[k] = json.loads(v) if v[:1] in '[{0123456789-.tf' else v
@@ -204,9 +233,7 @@ def main():
     ap.add_argument('--set', action='append')
     ap.add_argument('--name')
     a = ap.parse_args()
-    p = parse_sets(a.set)
-    if a.portrait:
-        p = {**p, **PORTRAIT, **{k: v for k, v in parse_sets(a.set).items() if k in (dict(kv.split('=', 1) for kv in a.set or []))}}
+    p = parse_sets(a.set, PORTRAIT if a.portrait else None)
     if a.what == 'build':
         os.makedirs(OUT, exist_ok=True)
         f = os.path.join(OUT, (a.name or ('hero-portrait' if a.portrait else 'hero')) + '.json')
@@ -218,8 +245,10 @@ def main():
         print(json.dumps(spots(p, (1600, 2000) if a.portrait else (2560, 1280)), indent=1))
 
 
-# the phone frame (1600 x 2000): the same line, nearer and higher, the title above and the throws below
-PORTRAIT = {}
+# the phone frame (1600 x 2000, the title above it on a phone, not over it): the eight on a straight line receding to the
+# right, each facing the lens, from higher and nearer, so each is bigger than in a row across a narrow frame and the
+# throws run down the frame toward the viewer
+PORTRAIT = {'diag': [-1.9, -2.4, 0.56, 0.75], 'cam_dist': 8.5, 'cam_h': 3.4, 'lens': 40.0, 'aim_z': 0.0, 'shift_y': 0.0, 'toe': 0.0}
 
 if __name__ == '__main__':
     main()
