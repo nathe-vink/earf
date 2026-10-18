@@ -4,13 +4,15 @@ The set is `dust.py`; the frames are `studio/shots/barkhorn/diorama31/dust.json`
 
 ## Concept
 
-A desert at golden hour, built from suede, corduroy and sand. A big low tissue-paper sun sinks behind a stack of suede
-mesas on a paper sky; corduroy dunes roll between; the floor is sand. The real sun is low behind the speaker's left, so
-the orange acrylic glows and throws orange light forward on the sand, and every piece casts a long shadow toward the
-camera. Beside the speaker, the icon in felt: three puffs at the fat end of a flat wedge thinning along the ground, and
-a line of roadrunner footprints running out of it to the right. Something just went past. Motes hang in the light.
+A desert at golden hour, built from suede, corduroy and sand. A big low paper sun, glowing in rings, sets behind a
+slim butte of cut suede on a paper sky. Corduroy dunes roll between, their ribs running along the crests, and the floor
+is sand. The real sun is low behind the speaker's right and in frame, so the orange acrylic glows amber at its edges and
+every piece throws a long shadow to the left. Beside the speaker is the icon in wool felt: three puffs at the fat end of
+a flat wedge thinning along the ground, with a line of roadrunner footprints running out of its point to the right.
+Something just went past. Motes hang in the light, and a little sage corduroy saguaro is the one accent.
 
 ## Rounds
+
 Proofs at `--scale 0.3 --samples 24` (about 45 s each, 30 s before the haze) unless marked mid (`0.5 / 64`, about 5 min).
 
 1. **First set.** Camera from the front left, sun behind the speaker's left, lathe mesas. Muddy and all one tone, no raking

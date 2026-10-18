@@ -1,9 +1,9 @@
 """Dust: golden hour in a suede desert (round 31; dust.md has the concept and the proof rounds).
 
-A sand floor, ribbed corduroy dunes and stacked suede mesas under a big low tissue-paper sun on a paper sky. The sun
-rakes in low from behind the speaker's left, so the orange acrylic glows and throws its colour on the sand. Beside the
-speaker, a felt dust cloud in the icon's shape (three puffs trailing a flat wedge) and a line of roadrunner footprints
-running off to the right: something just went past. Motes hang in the light.
+A sand floor, ribbed corduroy dunes and cut-suede mesas under a big low paper sun on a paper sky. The sun rakes in low
+from behind the speaker's right, so the orange acrylic glows and every piece throws a long shadow to the left. Beside
+the speaker sits the icon in wool felt (three puffs trailing a flat wedge), with roadrunner footprints running off to
+the right from its point: something just went past. Motes hang in the light; a sage corduroy saguaro is the one accent.
 """
 import math, random
 
