@@ -18,6 +18,7 @@ KNOBS = [
     ('camera.shift_y', 'frame heights', (-0.5, 0.5), 'extra vertical lens shift'),
     ('camera.roll_deg', 'deg', (-10, 10), 'roll about the view axis'),
     ('camera.fstop', 'f-number', (0, 32), 'depth of field; 0 for none (all sharp)'),
+    ('camera.clip_end', 'm', (1, 100000), 'the far clipping distance (default 300 m); raise it for a horizon kilometres away'),
     ('camera.focus', 'm [x, y, z] or "target"', None, 'the plane of focus passes through this point'),
     ('camera.miniature', 'scale k', (1, 60), 'tilt-shift: the depth of field of the same f-number on a model at 1:k, so the world reads as a miniature (12 to 20 for a tabletop diorama)'),
     ('camera.blades', 'count', (0, 16), 'aperture blades: 0 round bokeh, 5 to 9 polygons'),
