@@ -186,6 +186,12 @@ def dream(rgb, spec):
         yy, xx = np.mgrid[0:h, 0:w]
         r = np.sqrt(((xx - w / 2) / (w / 2)) ** 2 + ((yy - h / 2) / (h / 2)) ** 2) / np.sqrt(2)
         out = out * (1 - d['vignette'] * np.clip((r - 0.35) / 0.65, 0, 1) ** 2)[..., None]
+    if d.get('grain'):                                 # round 31b: film grain on luminance, finest in the highlights
+        rng = np.random.default_rng(int(d.get('grain_seed', 7)))
+        g = gaussian_filter(rng.standard_normal((h, w)), max(0.35, 0.5 * d.get('grain_px', 1.0) * k))
+        g /= max(g.std(), 1e-6)
+        y = out @ W
+        out = np.clip(out + (d['grain'] * g * (0.35 + 0.65 * np.sqrt(np.clip(1 - y, 0, 1))))[..., None], 0, 1)
     return out * 255
 
 
