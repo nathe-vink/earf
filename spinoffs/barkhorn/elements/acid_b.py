@@ -58,12 +58,12 @@ def props(cam):
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.1, 0.6], scatter=0.9, rough=0.25, clear=0.25,
             avoid=[[0.0, 0.0, 0.4]], seed=3),
         # a few drops close to the lens, far out of focus
-        ext('rain', camera=cam, count=200, near=0.8, far=3.0, length=[0.06, 0.15], radius=[0.0006, 0.001],
+        ext('rain', camera=cam, count=30, near=1.5, far=4.0, length=[0.04, 0.08], radius=[0.0006, 0.001],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=[0.15, 0.35], scatter=0.7, rough=0.25, seed=13),
         # and the curtain beyond, too fine to count
         ext('rain', camera=cam, count=300000, near=15.0, far=120.0, length=[0.06, 0.18], radius=[0.0006, 0.0009],
             lean=[0.09, 0.02], z=[0.0, 30.0], opacity=0.08, scatter=0.9, rough=0.25, clear=0.3, seed=23),
-        ext('splashes', area=[-3.0, -7.0, 3.5, 3.0], z=-0.11, count=3000, radius=[0.004, 0.01], opacity=0.5,
+        ext('splashes', area=[-3.0, -7.0, 3.5, 3.0], z=-0.11, count=3000, radius=[0.004, 0.01], opacity=0.25,
             avoid=[[0.0, 0.0, 0.45]], seed=5),
     ]
 
