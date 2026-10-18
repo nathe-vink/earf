@@ -190,8 +190,8 @@ def shot(p, portrait=False):
     if p['strip']:
         lights['strip'] = {'type': 'area', 'size_m': [9.0, 0.5], 'position': [0.0, -4.0, p['strip_z']],
                            'target': [0.0, 0.0, 0.62], 'irradiance': p['strip'], 'color': p['fill_color'],
-                           'receivers': ['woofer-cone', 'woofer-surround', 'woofer-cap', 'hf-motor', 'hf-frame', 'hf-adaptor',
-                                         'hf-plug']}
+                           'receivers': ['woofer-cone', 'woofer-surround', 'woofer-cap', 'woofer-gasket', 'hf-motor', 'hf-frame',
+                                         'hf-adaptor', 'hf-plug', 'hf-exit', 'hf-band']}
     sh = {
         **({'sun': {'azimuth_deg': 180, 'elevation_deg': p['sun_el'], 'irradiance': p['sun'], 'angle_deg': p['sun_angle'],
                     'color': p['key_color']}} if p['sun'] else {}),
