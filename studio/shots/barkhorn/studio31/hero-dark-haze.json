@@ -24,7 +24,7 @@
  },
  "set": {
   "kind": "sweep",
-  "color": "#151414",
+  "color": "#0E0D0D",
   "width": 24.0,
   "front": 14.0,
   "depth": 4.0,
@@ -46,9 +46,9 @@
   "target": [
    0.0,
    0.0,
-   0.6
+   0.72
   ],
-  "lens_mm": 72.0,
+  "lens_mm": 60.0,
   "level": true
  },
  "sky": {
@@ -76,7 +76,8 @@
  },
  "materials": {
   "sweep": {
-   "roughness": 0.35
+   "roughness": 0.2,
+   "specular": 0.06
   }
  },
  "lights": {
@@ -139,7 +140,7 @@
     1.7
    ],
    "spread_deg": 130,
-   "power_w": 520.0,
+   "power_w": 800.0,
    "color": "#FFF6EC",
    "camera": false,
    "specular": 0.0
@@ -160,7 +161,7 @@
     0.0,
     0.9
    ],
-   "strength": 5.0,
+   "strength": 2.2,
    "diffuse": 0.0,
    "specular": 1.0,
    "receivers": [
@@ -173,7 +174,7 @@
      3.2
     ],
     "values": [
-     0.15,
+     0.0,
      1.0
     ]
    }
@@ -212,6 +213,29 @@
     ]
    }
   },
+  "horn-back": {
+   "type": "panel",
+   "size_m": [
+    0.7,
+    0.35
+   ],
+   "position": [
+    0.0,
+    0.9,
+    1.2
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.18
+   ],
+   "strength": 10.0,
+   "diffuse": 1.0,
+   "specular": 0.0,
+   "receivers": [
+    "*#0"
+   ]
+  },
   "strip-left": {
    "type": "panel",
    "size_m": [
@@ -228,7 +252,7 @@
     0.0,
     0.6
    ],
-   "strength": 45.0,
+   "strength": 30.0,
    "diffuse": 0.35,
    "specular": 1.0,
    "receivers": [
@@ -251,11 +275,11 @@
   "strip-right": {
    "type": "panel",
    "size_m": [
-    0.25,
+    0.08,
     3.2
    ],
    "orbit": {
-    "azimuth_deg": 109.5,
+    "azimuth_deg": 113,
     "elevation_deg": 8,
     "distance_m": 2.2
    },
@@ -264,7 +288,7 @@
     0.0,
     0.6
    ],
-   "strength": 45.0,
+   "strength": 20.0,
    "diffuse": 0.35,
    "specular": 1.0,
    "receivers": [
@@ -291,16 +315,16 @@
     0.4
    ],
    "position": [
-    -0.3,
-    -0.6,
-    3.0
+    -0.2,
+    -1.5,
+    2.8
    ],
    "target": [
     0.0,
     0.0,
-    1.05
+    1.2
    ],
-   "strength": 18.0,
+   "strength": 24.0,
    "diffuse": 0.5,
    "specular": 1.0,
    "receivers": [
