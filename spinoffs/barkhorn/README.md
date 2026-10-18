@@ -154,7 +154,7 @@ Three of the campaign critics named the speaker's own surfaces:
 - **The cover read as brushed metal.** Its heather was drawn out in one direction only, so from a few metres it was a field of vertical streaks. Now the warp's heather runs along the warp and the weft's along the weft, crossing as a cloth's do, with soft slubs and a fabric's sheen.
 - **The lining read as moulded clay.** Its clouds are gentler (3 cm), and the batts are lumpy where they are stuffed into their sleeves (a soft relief 7 cm across).
 - **The black front edge of the top** is the edge itself. Seen end-on through about 400 mm of tint, it stays dark even at 32 light bounces, so the fix is a light placed to catch it, not a shader.
-- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light.
+- **The cover's disc read as "a placeholder"** in the studio's duels: it was drawn as a sharp-edged cylinder. Its frame's face edge is rounded and the cloth is taken round it, as the parts list always said, so the cloth now rolls round a 5 mm edge (`cover.disc_edge_r`) and its rim catches the light. The room's critics still read its face as one flat matt tone under raking sun, so the cloth is a melange now: each yarn's heather and the slubs stronger, and a faint unevenness 60 mm across where the cloth is stretched over the frame (`mottle`). Under the same raking light the disc's face varies a quarter more (p5 to p95 of its luminance 3.6 to 4.5).
 
 ### Pictures for a launch (in progress)
 
@@ -177,11 +177,11 @@ Three of the campaign critics named the speaker's own surfaces:
 
 ### The site's deployments
 
-Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), so www.earf.world still serves the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main goes up again as the allowance frees.
+Every push to round 31's twenty-odd working branches built a Vercel preview, until the plan's daily allowance ran out. From about 06:40 to 08:17 UTC, main's own pushes were refused ("Deployment rate limited — retry in 24 hours"), and www.earf.world kept the build of 06:00. `vercel.json` now turns automatic deployments off for `r31-*`, `r32-*` and `claude/*` branches, so only main deploys. Main deployed again at 08:18 (b394ba1), with every colour's finals.
 
 ### Open
 
-- **The horn's finish.** Every studio pass so far names the polished horn's mirror and its dark throat. Would the owner consider a satin (bead-blasted) horn, at least as an option? It would change the product, so it waits for the owner.
+- **The horn's finish and tint.** Every studio pass names the polished horn's mirror, and every session's critics the dark mass at its throat. The catalogue session found what that mass is: the tinted resin's own depth where the throat is thickest, not the driver behind it (hidden, the driver changes nothing, and no lamp moves it). The studio's critics also see the horn's red pinker than the cabinet's. Would the owner consider a satin (bead-blasted) horn, a lighter tint in the horn's resin, or a thinner wall at the throat, at least as options? Each changes the product, so they wait for the owner.
 - **The companions' questions** are in `companions/README.md`: the names; the casting partner for the formed shade and the 25 mm platter; the cartridge's blue body; a dust cover; where the arm rests; a listed dimmer; the bearing; and the prices (about $5,000 and $1,400 at the speakers' multiple).
 
 ## Round 30: the icons in acrylic, the site's home and speaker pages, hosted, and the back made real (the owner's notes of 2026-10-17 and 18)

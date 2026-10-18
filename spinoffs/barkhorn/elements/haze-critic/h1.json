@@ -1,0 +1,42 @@
+{
+  "stage1": {"impression": "A strong, legible concept — violet speaker standing in the path of a Provence lavender field at dusk, palette that tells you its colour — but it reads as a competent CG composite rather than a photograph: the sky is a flat pastel backplate with a dull, unclipped sun disc, the low sun supposedly behind the scene rim-lights nothing and casts no shadows toward camera, and the speaker is evenly front-lit, muddy and slightly detached, with a smeared low-detail path texture and a black-void horn throat.", "score": 5.5},
+  "verdict": "iterate",
+  "blocking_9": [
+    "One coherent sun: low backlight must rim-light lavender tips and the speaker's acrylic edges and throw long shadows toward camera; currently foreground (y 650-800) is as bright as midground and lighting is non-directional.",
+    "Sun must read as the sun: disc must clip and bloom with a warm glow gradient in the surrounding sky (currently lum 220 vs sky 203).",
+    "Speaker must glow as tinted acrylic with transmitted light, not read as a dark grey-violet box (front median lum 41).",
+    "Horn throat must show tone/colour, not a crushed black void (14% crushed).",
+    "Path must read as real dry soil at 1:1 scale with grit/pebbles/ruts, not a smeared brown texture.",
+    "Distant hills must sit in aerial haze close to sky value so the horizon reads as depth, not a pasted band.",
+    "No distracting asset errors (white/clipped lavender patch front-left, tree tangent to the horn silhouette)."
+  ],
+  "defects": [
+    {"region": [230, 230, 275, 270], "what": "Sun disc barely brighter than sky (median 220 vs 203), no clipping or glow."},
+    {"region": [0, 0, 1200, 300], "what": "Sky flat and low-contrast (lum_range 39), washed pastel."},
+    {"region": [0, 520, 1200, 800], "what": "Foreground lavender as bright as midground, no backlit rims, no long shadows."},
+    {"region": [300, 520, 440, 620], "what": "White near-clipped lavender patch front-left (p95 185)."},
+    {"region": [500, 400, 700, 670], "what": "Speaker body dark and muddy (median 41), evenly front-lit, no transmission glow or rim."},
+    {"region": [530, 285, 710, 390], "what": "Horn interior mirrors a black void (14.5% crushed)."},
+    {"region": [480, 680, 720, 800], "what": "No shadow toward the camera though the sun is behind."},
+    {"region": [380, 680, 900, 800], "what": "Path texture smeared and low-res."},
+    {"region": [0, 320, 1200, 380], "what": "Far hills too dark and distinct for km-distant haze: a seam."},
+    {"region": [755, 330, 805, 378], "what": "Lone tree tangent to the horn's right edge."},
+    {"region": [500, 280, 720, 680], "what": "Dead-centre, symmetric, light without direction across the frame."}
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "light", "change": {"setting": "Sun; Reflector", "from": "irradiance 8, angle 1, azimuth 187; reflector 2.2", "to": "irradiance 22, angle 0.6, azimuth 197; reflector 0.9"}, "accept": {"region": [0, 650, 300, 800], "metric": "lum_median", "op": "between", "value": [40, 58]}},
+    {"id": "c2", "rank": 2, "kind": "light", "change": {"setting": "Sun disc emission; sky strength; contrast and bloom", "from": "35; 1.0; 0.05; 0.15 over 0.9", "to": "120; 0.75; 0.18; 0.3 over 0.85"}, "accept": {"region": [230, 230, 275, 270], "metric": "lum_p95", "op": ">=", "value": 250}},
+    {"id": "c3", "rank": 3, "kind": "material", "change": {"setting": "a rim and transmission light behind the speaker", "from": "none", "to": "warm area #FFB070 1.2 x 2.0 m, 2.5 m behind on the sun's axis, 1.6 m high, irradiance about 6, camera-invisible"}, "accept": {"region": [500, 400, 700, 670], "metric": "lum_median", "op": "between", "value": [52, 80]}},
+    {"id": "c4", "rank": 4, "kind": "light", "change": {"setting": "a card the horn mirrors", "from": "none", "to": "camera-invisible reflection card #C9B3C9 1.5 x 1 m, 2 m in front at horn height"}, "accept": {"region": [530, 285, 710, 390], "metric": "crush_pct", "op": "<", "value": 3}},
+    {"id": "c5", "rank": 5, "kind": "set", "change": {"setting": "Haze", "from": "0.00025, #D8CCEA, anisotropy 0.35", "to": "0.0006, #E6C9D6, anisotropy 0.6"}, "accept": {"region": [100, 322, 400, 340], "metric": "lum_median", "op": "between", "value": [150, 185]}},
+    {"id": "c6", "rank": 6, "kind": "asset", "change": {"setting": "path ground", "from": "brown_mud_dry", "to": "finer dry soil with stones at 4k, real scale, displaced, shallow ruts; dry litter at the row edges"}, "accept": {"region": [380, 700, 900, 800], "metric": "lum_range", "op": ">", "value": 50}},
+    {"id": "c7", "rank": 7, "kind": "set", "change": {"setting": "the pale lavender front-left", "from": "white patch", "to": "the violet of the rest"}, "accept": {"region": [300, 520, 440, 620], "metric": "lum_p95", "op": "<", "value": 140}},
+    {"id": "c8", "rank": 8, "kind": "set", "change": {"setting": "island_tree_01", "from": "240 m, just right of the axis", "to": "240 m, about 35 m right, on the right third"}, "accept": {"region": [720, 320, 830, 378], "metric": "lum_range", "op": "<", "value": 70}}
+  ],
+  "out_of_scope": [
+    {"request": "The horn's front reflects swirly pink and black.", "why": "The horn is the speaker's; only what it reflects can change (c4)."},
+    {"request": "The body reads greyish, not a clear violet.", "why": "The tint is fixed; light through it is the fix (c3)."}
+  ],
+  "score_if_fixed": 7.5,
+  "_note": "Condensed from the critic's reply (problems and evidence shortened; changes and accept tests as given)."
+}

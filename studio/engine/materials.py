@@ -63,8 +63,8 @@ PRESET_DEFAULTS = {
     # a grille's acoustically transparent knit: the yarn's colour, heathered (each yarn a little lighter or darker, the
     # warp's along it and the weft's along it, so the streaks cross), a fine weave about `pitch_mm` (its relief only
     # reads close to), soft slubs `slub_mm` across (`slub` the swing), matt with a fabric's sheen
-    'cloth': dict(color='#DCD6C8', pitch_mm=1.2, heather=0.08, slub=0.035, slub_mm=7.0, roughness=0.88, sheen=0.85,
-                  sheen_roughness=0.35, bump=0.2),
+    'cloth': dict(color='#DCD6C8', pitch_mm=1.2, heather=0.14, slub=0.06, slub_mm=10.0, mottle=0.03, mottle_mm=60.0,
+                  roughness=0.88, sheen=0.85, sheen_roughness=0.35, bump=0.35),
     # a speaker's lining as seen through a clear wall (barkhorn's round 13): polyester batting in a sleeve of sheer
     # voile, a white fibre web, denser and thinner in soft clouds (`cloud` the swing, `cloud_m` metres across; thin, it
     # greys as the dark inside shows through), a fibrous relief (`fibre`, `fibre_mm`), light carried a few millimetres
@@ -1369,6 +1369,15 @@ def _cloth(nt, b, p, normal_in=None):
         sm.inputs['From Min'].default_value = 0.3; sm.inputs['From Max'].default_value = 0.7
         sm.inputs['To Min'].default_value = 1 - p['slub']; sm.inputs['To Max'].default_value = 1 + p['slub']
         shade = math_('MULTIPLY', shade, sm.outputs['Result'])
+    if p.get('mottle', 0.0):
+        # the cloth's tension over the frame: a broad, faint unevenness `mottle_mm` across, which is what a raking
+        # light finds on a stretched cloth (round 31: without it the disc read as one flat matt tone in sun)
+        mo = node('ShaderNodeTexNoise'); mo.inputs['Scale'].default_value = 1000.0 / p.get('mottle_mm', 60.0)
+        mo.inputs['Detail'].default_value = 1.5; nt.links.new(uv, mo.inputs['Vector'])
+        mm = node('ShaderNodeMapRange'); nt.links.new(mo.outputs['Fac'], mm.inputs['Value'])
+        mm.inputs['From Min'].default_value = 0.3; mm.inputs['From Max'].default_value = 0.7
+        mm.inputs['To Min'].default_value = 1 - p['mottle']; mm.inputs['To Max'].default_value = 1 + p['mottle']
+        shade = math_('MULTIPLY', shade, mm.outputs['Result'])
     g = node('ShaderNodeCombineColor')
     for ch in ('Red', 'Green', 'Blue'):
         nt.links.new(shade, g.inputs[ch])
