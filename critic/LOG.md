@@ -656,8 +656,8 @@ its finals from the best rig, and put them to a blind duel against the runner-up
 | Poison | A: a redwood rainforest | 5.5, 5.5, 4.5, 5.0, 5.5, 5.0, 6.0, 5.8, 5.5 | 6.5 | p7, 6.5 | the horn crushed against the ferns; the trunk flat; toy-like agarics |
 | Ice | A: snow country at blue hour | 5.5, 6.0, 6.5, 6.5, 6.0, 5.5, 7.0, 6.5, 7.0 | 7.0 | over B, 2 to 1 (6.5 to 5.8) | the base sunk in the drift; a dark patch beside it (fixed); a flat blue grade |
 | Ice | B: Diamond Beach at sunrise | 5.5, 5.5, 5.5, 5.0, 5.5, 5.5, 5.5 | 5.8 | beach over cave, 6.0 to 4.5 | backlit to dark navy; the throat crushed with green fringes; the wet sand a mirror |
-| Haze | A: a lavender field at dusk | 5.5, 6.0, 6.0, 6.0, 5.5, 5.5, 6.0, 5.5 | 6.0 | sunset over afterglow, 6.0 to 5.0 | the throat dark; the ground crushed at dusk; the lavender one height |
-| Haze | B: layered hills at blue hour | 5.5, 5.5, 5.5, 5.0, 5.5, 5.5, 4.5 | rendering | p3 over p6, 6.2 to 5.0 | nothing glows through the acrylic with the sun behind; a cleared ring round the feet |
+| Haze | A: a lavender field at dusk | 5.5, 6.0, 6.0, 6.0, 5.5, 5.5, 6.0, 5.5 | 6.0 | sunset over afterglow, 6.0 to 5.0; lost to B, 1 to 2 (5.9 to 6.2) | the throat dark; the ground crushed at dusk; the lavender one height; in the duel, the horn blown to pale pink by the sun behind it |
+| Haze | B: layered hills at blue hour | 5.5, 5.5, 5.5, 5.0, 5.5, 5.5, 4.5 | 5.5 | p3 over p6, 6.2 to 5.0; over A, 2 to 1 (6.2 to 5.9) | nothing glows through the acrylic with the sun behind; a cleared ring round the feet; in the duel, the base hidden in hair-like grass and the hazy sun on the horn's top edge |
 | Fog | A: a summit above a sea of cloud | 5.0, 5.5, 5.5, 5.0, 5.5, 5.5, 5.0 | rendering | p5 over p6, 6.4 to 5.8 | the cloud sea even-sized cotton; the near rock soft |
 | Fog | B: San Francisco's fog | 5.5, 6.0, 5.5, 6.0, 5.5 | in passes | | the fog a grey wall; the hills mush; flat light |
 | Smoke | A: woodsmoke at dawn in a pine wood | 5.0, 5.5, 5.5, 5.0, 5.5, 5.5, 5.0 | 6.5 | p6 over p7, 5.6 to 4.8 | the trunks smooth cylinders (the scanned pine is too big for the box); one sepia cast; a weak left rim |

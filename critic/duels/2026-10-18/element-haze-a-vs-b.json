@@ -1,0 +1,51 @@
+{
+ "subject": "Haze in its element, concept A (a lavender field at dusk) against concept B (layered hills at blue hour)",
+ "date": "2026-10-18",
+ "prompt": "critic/ab/PROMPT-DUEL.txt, its second paragraph worded for two candidate pictures of the same page",
+ "frames": {
+  "A": "renders/2026-10-18/barkhorn/element31/haze.png (r31-element-haze 2c71fb4)",
+  "B": "renders/2026-10-18/barkhorn/element31/haze_b.png (r31-element-haze-b e9ab599)"
+ },
+ "judges": [
+  {
+   "shown_as_A": "A",
+   "shown_as_B": "B",
+   "scores": {
+    "A": 5.2,
+    "B": 7.1
+   },
+   "prefer": "B",
+   "notes": "Prefers B: the violet horn reads as tinted cast acrylic with crisp rims; one tint across horn and cabinet; a brighter, readable cabinet against gold grass; right-third layout with copy space; layered haze depth. A wins: the lavender and path read as photography; base visible with a contact line; sun clear of the product. B: grass reads as CG hair, base hidden in it, the sun disc touches the horn's top."
+  },
+  {
+   "shown_as_A": "B",
+   "shown_as_B": "A",
+   "scores": {
+    "B": 5.0,
+    "A": 6.5
+   },
+   "prefer": "A",
+   "notes": "Prefers A: the whole cabinet, ports and a contact line on the soil path; copper rim light and the lavender bent through the clear side; rows lead to a centred product; backlit lavender reads photographic. But A's horn is blown to milky pink (R 255 over ~80% of its right half) and its lower corners sink near black (median ~37). B: a rich violet horn and a light pastel range with room for a headline; but the throat a smoky smear, base and ports hidden in hair-like grass, flat foggy front light (the cabinet as matte painted panels), the sun disc on the horn's top edge in line with the far ridge."
+  },
+  {
+   "shown_as_A": "B",
+   "shown_as_B": "A",
+   "scores": {
+    "B": 6.5,
+    "A": 6.0
+   },
+   "prefer": "B",
+   "notes": "Prefers B: the horn deep violet tinted acrylic with refraction through the flare; the product on the right third, the left half and top clean for copy; evenly exposed. A: the horn clipped (R 255 over ~70%, ~37 levels), a pale-pink pillow round a black throat, off the cabinet's tint; dead centre, so a spread's gutter runs through it; the front in its own shadow (~47); the lavender breaks into crossed leaf cards where it meets the path. A wins: the side panel's transparency, the full base and contact, a low backlight and depth. B: base buried in wiry grass; a uniform low-contrast haze; the sun disc on the horn's top edge."
+  }
+ ],
+ "agreed": "All three faulted A's horn, blown to pale pink in the backlight, and B's base, hidden in hair-like grass with the hazy sun sitting on the horn's top edge.",
+ "result": {
+  "A_mean": 5.9,
+  "B_mean": 6.2,
+  "wins": {
+   "A": 1,
+   "B": 2
+  },
+  "kept": "B"
+ }
+}

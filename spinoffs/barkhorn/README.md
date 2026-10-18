@@ -185,7 +185,7 @@ Three of the campaign critics named the speaker's own surfaces:
   | Acid | the acid spring at Dallol, sulphur and steam (5.5) | acid rain over wet black lava | A, until the duel |
   | Poison | a redwood rainforest (6.5) | | A |
   | Ice | snow country at blue hour, a cabin's window far behind (7.0) | Diamond Beach at sunrise (5.8) | A, by a blind duel (2 to 1) |
-  | Haze | a lavender field at dusk (6.0) | layered hills at blue hour | A, until the duel |
+  | Haze | a lavender field at dusk (6.0) | layered hills at blue hour (5.5) | B, by a blind duel (2 to 1) |
   | Fog | a summit above a sea of cloud | San Francisco's fog | rendering |
   | Smoke | woodsmoke at dawn in a pine wood (6.5) | a misty birch wood, high-key | A, until the duel |
 

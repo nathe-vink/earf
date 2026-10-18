@@ -56,6 +56,7 @@ C31 = os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions')   # 
 HABITAT = {'red': 'ember', 'orange': 'dust', 'amber': 'acid', 'green': 'poison', 'blue': 'ice', 'violet': 'haze',
            'ice': 'fog', 'black': 'smoke'}
 ELEMENT = dict(HABITAT)       # which concept each colour shows in its element: A (<name>), or B (<name>_b) once it wins
+ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a blind duel, 2 to 1 (6.2 to 5.9)
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 TITLE = 'EARF · Atmosphere'
 DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours named for things in the air. '
