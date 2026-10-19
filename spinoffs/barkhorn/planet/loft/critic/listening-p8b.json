@@ -1,0 +1,350 @@
+{
+ "stage1": {
+  "impression": "A murky, evenly dim brown-red box with no pools of light: the red speaker is the only thing that registers, and a side table with a Bell lamp sits right across its horn, so even the hero is cut in half. At 1:1 the concrete is blotchy noise with a red stain rather than formwork, the record wall is a regular barcode of stripes with no highlights, the frosted screen reads as a grey sheet with a dark ring artifact, and the leather chair is a flat dark shape. It reads as a competent but lifeless CG proof, not a night photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker seen whole and unobstructed, its horn and both cabinet modules readable at a glance (upper module lum_median >= 45, not 24)",
+  "Real pools of light with dark between them: the frame's lum_range per major region > 40, not the current 17 to 26 on wall and screen",
+  "Neutral surfaces neutral: concrete reads warm grey (r/b ratio under about 1.6), not orange-red (r 36 / b 12 now), so the speaker is the only saturated colour",
+  "Screen panel reads as a back-lit frosted panel with a soft, legible image, clearly brighter than the wall around it (median >= 50)",
+  "Board-formed concrete shows boards, tie holes and pour lines at 1:1; records show varied spines with small highlights",
+  "Signs of life (a record out of its sleeve, a glass with a highlight, a coat on the chair) and a full-resolution 2400 x 1600 frame with no denoiser blotch"
+ ],
+ "defects": [
+  {
+   "region": [
+    205,
+    310,
+    310,
+    480
+   ],
+   "what": "Side table and Bell lamp stand directly in front of the speaker's horn and lower module; the lamp's glass shade reads as a wire cone slicing across the horn"
+  },
+  {
+   "region": [
+    245,
+    228,
+    360,
+    295
+   ],
+   "what": "Upper speaker module almost invisible: lum_median 24, range 16.6, a dark smudge on the wall"
+  },
+  {
+   "region": [
+    65,
+    65,
+    275,
+    310
+   ],
+   "what": "Frosted screen barely brighter than the wall (median 28.2 vs 22.7) so it reads as a grey sheet; the image is a hard dark ring that looks like a shading artifact, not a fogged silhouette"
+  },
+  {
+   "region": [
+    285,
+    0,
+    465,
+    300
+   ],
+   "what": "Concrete is mottled noise with a red blotch from speaker spill; no board marks, tie holes or pour lines readable; flat (range 17.5, falloff 19 to 29.5 top to bottom)"
+  },
+  {
+   "region": [
+    470,
+    0,
+    720,
+    370
+   ],
+   "what": "Record wall reads as a repeated barcode: uniform stripes, no sleeve highlights, no gaps or records leaning; dark (median 19.3)"
+  },
+  {
+   "region": [
+    0,
+    220,
+    200,
+    480
+   ],
+   "what": "Leather chairs are flat dark silhouettes with no sheen or creasing (median 19.5), cut by the frame edge"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Global orange cast: neutral surfaces carry r_median about 2.5 to 3 times b_median; whole frame warm-red with no white point"
+  },
+  {
+   "region": [
+    250,
+    0,
+    340,
+    40
+   ],
+   "what": "Fir beam at the top is a vague dark wedge with no grain or checks"
+  },
+  {
+   "region": [
+    100,
+    430,
+    480,
+    480
+   ],
+   "what": "Floor has no polish or reflection of the speaker's glow; red light spill on the floor reads as a stain"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speaker is obstructed by the side table and Bell lamp and sits small in the middle of the frame.",
+   "evidence": {
+    "region": [
+     205,
+     310,
+     310,
+     480
+    ],
+    "measured": "table and lamp cover roughly the left third of the horn and lower module; speaker occupies about 7 % of the frame"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "position [14.35, 2.75, 1.05], target [16.3, 4.6, 1.35], 24 mm",
+    "to": "move the camera about 0.5 m toward y (left), e.g. position [14.6, 3.3, 1.1], target [16.3, 4.75, 1.0], 35 mm, so the side table and Bell sit to the left of the speaker with clear air between them and the speaker fills about a third of the frame height-wise from floor to top module, refocus on the horn at [16.15, 4.85, 0.75]"
+   },
+   "expected": "Speaker silhouette complete, both modules and the horn mouth unobstructed; Bell reads as a lit lamp beside it, not across it.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The upper speaker module and the speaker's acrylic do not glow; the hero is read only from its lower box.",
+   "evidence": {
+    "region": [
+     245,
+     228,
+     360,
+     295
+    ],
+    "measured": "lum_median 24.0, lum_range 16.6, r 44 g 19 b 14"
+   },
+   "change": {
+    "setting": "the lamps and pinholes on the speakers (on each Ember speaker 4 x area)",
+    "from": "12.0 W/m2 at the target, 2900 K",
+    "to": "add one area light behind/above each module aimed at the white batts so light passes through the tinted acrylic: upper module 30 W/m2, lower 20 W/m2, 2900 K; keep the front fill at 8 W/m2"
+   },
+   "expected": "Upper module reads as tinted red acrylic with visible batts and polished glowing edges.",
+   "accept": {
+    "region": [
+     245,
+     228,
+     360,
+     295
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The grade turns every neutral surface orange-red, so the speaker is not the only colour.",
+   "evidence": {
+    "region": [
+     285,
+     0,
+     465,
+     300
+    ],
+    "measured": "concrete r_median 36, g 20, b 12 (r/b = 3.0)"
+   },
+   "change": {
+    "setting": "render white_balance_k and source colour temperatures",
+    "from": "white_balance_k 3000; sconces/pendants 2400 K, record wall 2500 K",
+    "to": "white_balance_k 2600; raise the pendants and record wall to 2700 K, keep candles at 1900 K as the only deep-amber accents"
+   },
+   "expected": "Concrete reads warm grey under tungsten, fir reads honey-brown, the red is reserved for the speaker.",
+   "accept": {
+    "region": [
+     285,
+     0,
+     465,
+     300
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 20
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "No pools of light: every region is the same low grey, so the room reads flat and lifeless rather than cozy.",
+   "evidence": {
+    "region": [
+     285,
+     0,
+     465,
+     300
+    ],
+    "measured": "lum_range 17.5; profile top to bottom 19 to 29.5 with no peak; frame below_40_pct 90.2"
+   },
+   "change": {
+    "setting": "pendants and the record wall spots; haze",
+    "from": "pendants 3 x 60 W cone 50 deg; record wall 3 x 6 W cone 12 deg; haze 0.02",
+    "to": "aim one pendant spot (60 W, cone 35 deg) to graze the concrete beside the speaker from above, record wall spots to 25 W each, cone 20 deg, raking down the shelves; haze 0.035 so the beams carry"
+   },
+   "expected": "A grazing pool on the concrete that falls off downward and shows the board texture, lit bands down the record wall, dark between them.",
+   "accept": {
+    "region": [
+     285,
+     0,
+     465,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The frosted screen is too dim to read as a back-lit panel, and its image reads as a dark ring artifact.",
+   "evidence": {
+    "region": [
+     65,
+     65,
+     275,
+     310
+    ],
+    "measured": "lum_median 28.2 vs adjacent wall 22.7; lum_range 26.4"
+   },
+   "change": {
+    "setting": "the screens' images emission; frosted acrylic roughness",
+    "from": "emission 0.8",
+    "to": "emission 2.0, and raise the frosted acrylic's roughness so the image behind it blurs to a soft silhouette with no hard dark rim"
+   },
+   "expected": "Panel glows softly and evenly, clearly a light source in the room, image suggestive not graphic.",
+   "accept": {
+    "region": [
+     65,
+     65,
+     275,
+     310
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     90
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "Concrete reads as blotchy noise, not board-formed concrete.",
+   "evidence": {
+    "region": [
+     285,
+     0,
+     465,
+     300
+    ],
+    "measured": "3x crop shows uniform speckle, no board seams or tie holes; red spill blotch near 400,230"
+   },
+   "change": {
+    "setting": "the concrete's tone and sheen",
+    "from": "fine speckle, matte",
+    "to": "increase the board-grain bump and seam depth (boards about 150 mm, seams visible), add tie holes on a 600 mm grid and faint vertical staining, a slight sheen (roughness about 0.75) so the grazing pendant picks them up"
+   },
+   "expected": "At 1:1 the wall shows boards, seams and tie holes under the grazing light.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Records read as a repeated barcode and the room has little sign of life.",
+   "evidence": {
+    "region": [
+     470,
+     0,
+     720,
+     370
+    ],
+    "measured": "median 19.3, uniform striping in 2x crop, no highlights"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses, menus, candles, books",
+    "to": "on the record wall: several records pulled half out, two face-out sleeves, a few gaps and leaning stacks; a record out of its sleeve on the side table; a coat over the left chair; a lit candle in an amber votive on the side table"
+   },
+   "expected": "Record wall reads as a real, used collection; the frame has a sign of life near the speaker.",
+   "accept": {
+    "region": [
+     470,
+     0,
+     720,
+     370
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "Leather chairs and floor are flat dark shapes with no sheen; the floor does not reflect the speaker's glow.",
+   "evidence": {
+    "region": [
+     0,
+     220,
+     200,
+     480
+    ],
+    "measured": "chair lum_median 19.5, lum_range 34; floor (100,430,480,480) range 62.6 only from spill"
+   },
+   "change": {
+    "setting": "the floor's polish; leather finish",
+    "from": "matte floor; dull leather",
+    "to": "floor roughness to about 0.3 so it carries a soft reflection of the speaker; leather roughness about 0.45 with creasing so the sconce lays a highlight along the chair's back"
+   },
+   "expected": "Chair reads as worn leather with a rim highlight; a soft red reflection under the speaker grounds it.",
+   "accept": {
+    "region": [
+     0,
+     220,
+     200,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 55
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Bell lamp's shade reads as a wire or glass cone that looks like CG",
+   "why": "Bell is an EARF product and fixed; the fix is the camera (c1) so it no longer crosses the speaker"
+  },
+  {
+   "request": "Speaker's red saturation spills onto the wall as a red blotch",
+   "why": "The Ember tint is fixed; only the light behind it and the grade can be tuned"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
