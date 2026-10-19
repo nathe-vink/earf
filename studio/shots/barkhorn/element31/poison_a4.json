@@ -268,12 +268,12 @@
      [
       -17.61,
       -2.274,
-      0.26
+      0.2
      ],
      [
       -16.306,
       3.793,
-      0.3
+      0.18
      ]
     ]
    },
@@ -3177,7 +3177,7 @@
     "position": [
      -0.22,
      -1.34,
-     -0.03
+     -0.045
     ],
     "cap": 0.07,
     "age": "convex",
@@ -3187,9 +3187,10 @@
      -0.01
     ],
     "wash": 0.05,
-    "dull": 0.15,
+    "dull": 0.25,
     "needles": 2,
-    "torn": 0.2
+    "torn": 0.2,
+    "matte": true
    },
    {
     "kind": "kit",
@@ -3197,9 +3198,9 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     -0.06,
-     -1.29,
-     -0.03
+     -0.04999999999999999,
+     -1.28,
+     -0.045
     ],
     "cap": 0.06,
     "age": "convex",
@@ -3209,7 +3210,8 @@
      0.01
     ],
     "wash": 0.1,
-    "dull": 0.12
+    "dull": 0.22,
+    "matte": true
    },
    {
     "kind": "kit",
@@ -3217,9 +3219,9 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     -0.33999999999999997,
+     -0.36,
      -1.24,
-     -0.03
+     -0.045
     ],
     "cap": 0.075,
     "age": "old",
@@ -3229,8 +3231,9 @@
      0.015
     ],
     "wash": 0.0,
-    "dull": 0.25,
-    "torn": 0.4
+    "dull": 0.32,
+    "torn": 0.4,
+    "matte": true
    },
    {
     "kind": "kit",
@@ -3238,9 +3241,9 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     -0.15,
-     -1.46,
-     -0.03
+     0.18999999999999997,
+     -1.36,
+     -0.045
     ],
     "cap": 0.045,
     "age": "young",
@@ -3250,7 +3253,8 @@
      -0.01
     ],
     "wash": 0.2,
-    "dull": 0.2
+    "dull": 0.25,
+    "matte": true
    },
    {
     "kind": "kit",
@@ -3258,37 +3262,16 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     -0.27,
-     -1.5,
-     -0.015
+     -0.42000000000000004,
+     -1.46,
+     -0.02
     ],
     "cap": 0.025,
     "age": "button",
     "seed": 65,
     "warts": 280,
-    "dull": 0.15
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     0.03,
-     -1.4200000000000002,
-     0.04
-    ],
-    "cap": 0.05,
-    "age": "convex",
-    "seed": 66,
-    "rotate": [
-     0,
-     95,
-     200
-    ],
-    "height": 0.03,
-    "wash": 0.1,
-    "dull": 0.35
+    "dull": 0.2,
+    "matte": true
    },
    {
     "kind": "kit",
@@ -3356,14 +3339,14 @@
      4.9,
      -0.02
     ],
-    "height": 1.5,
+    "height": 1.55,
     "lean": [
      0.12,
      0.0
     ],
     "side": -60,
     "seed": 7,
-    "bells": 45,
+    "bells": 46,
     "bell": 0.026,
     "droop": 0.7,
     "crowd": 1.6,
@@ -3377,18 +3360,18 @@
     "module": "poison_b_el",
     "fn": "foxglove",
     "position": [
-     -0.17,
-     5.41,
-     0.04450229049357225
+     -0.32,
+     5.5,
+     0.1372468192123796
     ],
-    "height": 1.4,
+    "height": 1.2,
     "lean": [
      -0.03,
      0.0
     ],
     "side": -60,
     "seed": 2,
-    "bells": 42,
+    "bells": 36,
     "bell": 0.026,
     "droop": 0.7,
     "crowd": 1.6,
@@ -3402,68 +3385,18 @@
     "module": "poison_b_el",
     "fn": "foxglove",
     "position": [
-     0.35,
-     4.31,
+     0.42,
+     4.45,
      -0.02
     ],
-    "height": 1.1,
+    "height": 0.9,
     "lean": [
      0.03,
      0.0
     ],
     "side": -60,
     "seed": 4,
-    "bells": 33,
-    "bell": 0.026,
-    "droop": 0.7,
-    "crowd": 1.6,
-    "pedicel": 0.02,
-    "buds": 9,
-    "color": "#8C5A84"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "foxglove",
-    "position": [
-     0.62,
-     5.15,
-     -0.02
-    ],
-    "height": 1.25,
-    "lean": [
-     0.15,
-     0.0
-    ],
-    "side": -60,
-    "seed": 8,
-    "bells": 37,
-    "bell": 0.026,
-    "droop": 0.7,
-    "crowd": 1.6,
-    "pedicel": 0.02,
-    "buds": 9,
-    "color": "#8C5A84"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "foxglove",
-    "position": [
-     -0.45,
-     4.7,
-     -0.02
-    ],
-    "height": 0.95,
-    "lean": [
-     0.18,
-     0.0
-    ],
-    "side": -60,
-    "seed": 9,
-    "bells": 28,
+    "bells": 27,
     "bell": 0.026,
     "droop": 0.7,
     "crowd": 1.6,

@@ -269,7 +269,7 @@ def amanita(bpy, name, p, kit):
     for bm in bms.values():
         for v in bm.verts:
             t = max(0.0, min(1.5, v.co.z / top)); v.co.x += lx * t * t; v.co.y += ly * t * t
-    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0))
+    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0), p.get('matte', False))
     obs = []
     for k, bm in bms.items():
         if len(bm.verts):
@@ -279,7 +279,7 @@ def amanita(bpy, name, p, kit):
     return obs
 
 
-def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0):
+def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
     key = (sp,)
     out = {}
     # the cap: viscid (a wet, thin coat), red with orange toward the margin and blotchy, a little light through it
@@ -311,6 +311,8 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0):
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)
     b.inputs['Roughness'].default_value = 0.55
     b.inputs['Coat Weight'].default_value = 0.15; b.inputs['Coat Roughness'].default_value = 0.25
+    if matte:                                             # a dried cap: no viscid coat, a soft sheen at most
+        b.inputs['Roughness'].default_value = 0.68; b.inputs['Coat Weight'].default_value = 0.04
     fib = _noise(nt, 1.0 / (R * 0.06), 6.0, stretch=(1.0, 1.0, 1.0))
     n1 = _bump(nt, b, fib.outputs['Fac'], 0.25, R * 0.004)
     # the striate margin: fine radial grooves in the outer fifth of the cap
