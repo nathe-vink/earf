@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   14.5,
-   2.0,
-   1.0
-  ],
-  "target": [
-   16.35,
-   4.36,
+   14.1,
+   2.3,
    0.95
   ],
-  "lens_mm": 40,
+  "target": [
+   16.3,
+   4.5,
+   0.75
+  ],
+  "lens_mm": 35,
   "level": true,
   "fstop": 2.8,
   "focus": [
@@ -155,18 +155,19 @@
     "module": "planet_den",
     "fn": "room",
     "shelf_glow": 10.0,
-    "shade_glow": 0.05,
+    "shade_glow": 0.02,
     "pendant_glow": 0.5,
     "flame": 25.0,
-    "record_glow": 1.0,
+    "record_glow": 0.3,
     "vu": 2.0,
     "street": true,
     "windows_lit": 0.5,
-    "brick_tint": "#2A1D18",
+    "brick_tint": "#2A2624",
     "neighbour_plain": true,
     "niche_glow": 0.9,
-    "brick_mix": 0.6,
-    "flat_glow": 0.06
+    "brick_mix": 0.75,
+    "flat_glow": 0.06,
+    "console_lift": 0.55
    },
    {
     "kind": "kit",
@@ -610,8 +611,8 @@
     0.35,
     0.35
    ],
-   "irradiance": 10.0,
-   "color": 3200
+   "irradiance": 28.0,
+   "color": 3000
   },
   "spkb0": {
    "type": "area",
@@ -630,7 +631,7 @@
     0.3
    ],
    "irradiance": 6.0,
-   "color": 3200,
+   "color": 3000,
    "camera": false
   },
   "spk1": {
@@ -649,8 +650,8 @@
     0.35,
     0.35
    ],
-   "irradiance": 10.0,
-   "color": 3200
+   "irradiance": 28.0,
+   "color": 3000
   },
   "spkb1": {
    "type": "area",
@@ -669,7 +670,7 @@
     0.3
    ],
    "irradiance": 6.0,
-   "color": 3200,
+   "color": 3000,
    "camera": false
   },
   "niche2": {
@@ -868,10 +869,10 @@
    "target": [
     16.8,
     2.05,
-    0.6
+    1.2
    ],
-   "power_w": 9.0,
-   "cone_deg": 60,
+   "power_w": 4.0,
+   "cone_deg": 40.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -886,10 +887,10 @@
    "target": [
     16.8,
     3.05,
-    0.6
+    1.2
    ],
-   "power_w": 9.0,
-   "cone_deg": 60,
+   "power_w": 4.0,
+   "cone_deg": 40.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -904,10 +905,10 @@
    "target": [
     16.8,
     4.05,
-    0.6
+    1.2
    ],
-   "power_w": 9.0,
-   "cone_deg": 60,
+   "power_w": 4.0,
+   "cone_deg": 40.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -1250,7 +1251,7 @@
    6.05,
    3.32
   ],
-  "density": 0.012,
+  "density": 0.025,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1262,7 +1263,7 @@
   "bounces": 10,
   "view": "Khronos PBR Neutral",
   "look": "None",
-  "exposure": 0.0,
+  "exposure": -0.8,
   "white_balance_k": 2900,
   "white_balance_tint": 0.0
  }

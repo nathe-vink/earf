@@ -716,7 +716,8 @@ def record_wall(bpy, kit, p, objs):
     objs.append(st.object(bpy, emitter(bpy, 'record-strip', '#FFC27A', p.get('record_glow', 3.0))))
     # the console in the middle: a low walnut credenza (room 31's), back to the wall
     cobj = R31.credenza(bpy, 'console', {'position': [0.0, 0.0], 'size': [C['y1'] - C['y0'], C['d'], C['h']], 'doors': 4,
-                                          'texture': 'smoked_walnut_veneer', 'lift': 1.1, 'res': '2k'}, kit)
+                                          'texture': 'smoked_walnut_veneer', 'lift': p.get('console_lift', 1.1),
+                                          'res': '2k'}, kit)
     for ob in cobj:
         ob.rotation_euler.z = math.radians(-90); ob.location = (L - C['d'] / 2 - 0.02, W / 2, 0.0)
     objs += cobj

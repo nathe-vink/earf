@@ -1,0 +1,351 @@
+{
+ "stage1": {
+  "impression": "A clean, competent interior render, but it reads as CG and as a showroom by day, not a bar at night lit in pools. The red speaker is darker than the brick, the record wall and the sideboard around it, and it sits against a red-brown brick that matches its own hue, so it never becomes the hero. The brick has a repeating, blotchy look, the light is flat and even, the sconce shade is blown, and the plinth is cut off by the bottom edge of the frame.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker is the brightest, most saturated thing in the frame: its region's lum_median is above the brick's and the record wall's",
+  "The room reads as night: the background falls into darkness between pools of warm light, with no flat, even ambient",
+  "The brick does not compete with the speaker's red (desaturated, darker, and with no visible repetition in the soot patches)",
+  "The whole plinth and its contact with the floor sit inside the frame, with floor below it",
+  "No clipped practicals: the sconce shade holds detail",
+  "The record wall and sideboard sit at least a stop below the speaker"
+ ],
+ "defects": [
+  {
+   "region": [
+    260,
+    200,
+    550,
+    770
+   ],
+   "what": "The speaker is darker (lum median 62) than the brick behind it (106) and the record wall (142); it reads as a dark red cutout, not as lit acrylic"
+  },
+  {
+   "region": [
+    0,
+    0,
+    760,
+    700
+   ],
+   "what": "The brick's red-brown is the same hue family as the Ember red, so the speaker's colour does not separate; the dark soot blotches repeat in a visible pattern (tiling)"
+  },
+  {
+   "region": [
+    10,
+    60,
+    95,
+    140
+   ],
+   "what": "The sconce shade is blown: 20% of its pixels clip, with no detail in the fabric"
+  },
+  {
+   "region": [
+    780,
+    0,
+    1200,
+    520
+   ],
+   "what": "The record wall is the brightest large area (lum median 142, p95 233) and is busy; it pulls the eye away from the speaker"
+  },
+  {
+   "region": [
+    780,
+    540,
+    1200,
+    800
+   ],
+   "what": "The sideboard front is the brightest surface in the frame (lum median 169), flat and evenly lit, which reads as CG"
+  },
+  {
+   "region": [
+    240,
+    730,
+    560,
+    800
+   ],
+   "what": "The plinth is cropped by the bottom edge; you cannot see the speaker stand on the floor"
+  },
+  {
+   "region": [
+    0,
+    280,
+    140,
+    620
+   ],
+   "what": "The leather chair is a cut-off, unreadable shape at the left edge; it reads as an intrusion, not a chair turned toward the speaker"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "The light is flat across the frame, with no pools and no falloff into dark corners; the haze gives no depth"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speaker is the darkest object in the frame, so it cannot read as the hero or show light through its acrylic.",
+   "evidence": {
+    "region": [
+     260,
+     380,
+     550,
+     760
+    ],
+    "measured": "lum_median 61.9 against brick 106.1 [450,50,750,650] and record wall 141.7 [780,0,1200,520]"
+   },
+   "change": {
+    "setting": "lamps on each Ember speaker (4 x area, W/m2 at the target)",
+    "from": "10.0 W/m2, 3200 K",
+    "to": "28.0 W/m2, 3000 K"
+   },
+   "expected": "The cabinet glows red through the acrylic and its region reaches roughly 1.5 times its current luminance, with a red pool on the plinth and the floor.",
+   "accept": {
+    "region": [
+     260,
+     380,
+     550,
+     760
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 95
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The ambient level is high and even, so the room reads as daytime and nothing falls into shadow.",
+   "evidence": {
+    "region": [
+     450,
+     50,
+     750,
+     650
+    ],
+    "measured": "brick lum_median 106, p5 46; the y profile only falls from 142 to 78 top to bottom"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "0.0",
+    "to": "-0.8 (applied together with c1, so the speaker nets brighter while the room drops)"
+   },
+   "expected": "The brick drops to about lum 60 to 70, the corners go dark, and the light becomes pools around the sconce and the speaker.",
+   "accept": {
+    "region": [
+     450,
+     50,
+     750,
+     650
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The brick's red-brown matches the Ember's hue and its soot patches repeat visibly, so it competes with the speaker and reads as a texture.",
+   "evidence": {
+    "region": [
+     450,
+     50,
+     750,
+     650
+    ],
+    "measured": "r_median 134, g 100, b 105: a red cast in the same family as the speaker (r 119, g 43, b 56)"
+   },
+   "change": {
+    "setting": "brick material",
+    "from": "warm red-brown brick, bright albedo, large repeating soot blotches",
+    "to": "old soot-darkened brown-grey brick (albedo about 0.15, saturation halved), limewashed mortar, a non-repeating texture at least 2 m wide with brick-to-brick colour variation"
+   },
+   "expected": "The wall becomes a quiet, dark, neutral ground; the speaker is the only red in the frame.",
+   "accept": {
+    "region": [
+     450,
+     50,
+     750,
+     650
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The record wall is the brightest large area and pulls the eye from the speaker.",
+   "evidence": {
+    "region": [
+     780,
+     0,
+     1200,
+     520
+    ],
+    "measured": "lum_median 141.7, p95 233.4"
+   },
+   "change": {
+    "setting": "the record wall 3 x spot, and the record-wall strip emission",
+    "from": "9.0 W each; strip 1.0",
+    "to": "4.0 W each, cone 40 deg aimed at the middle shelf rows; strip 0.3"
+   },
+   "expected": "The record spines glow softly in a pool and fall off toward the top and the edge; the wall sits a stop or more below the speaker.",
+   "accept": {
+    "region": [
+     780,
+     0,
+     1200,
+     520
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 85
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The plinth is cut by the bottom edge and the chair is an unreadable sliver at the left, so the speaker does not stand on the floor and the 'chairs turned toward it' idea does not read.",
+   "evidence": {
+    "region": [
+     240,
+     730,
+     560,
+     800
+    ],
+    "measured": "the plinth runs into the frame edge at y 800; the chair is cropped at x 0 to 140"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [14.5, 2.0, 1.0], 40 mm, target [16.35, 4.36, 0.95]",
+    "to": "position [14.1, 2.3, 0.95], 35 mm, target [16.3, 4.5, 0.75]: step back and tilt down so the plinth sits about 12% above the bottom edge and a whole chair back and arm reads in the left foreground"
+   },
+   "expected": "The floor is visible under and in front of the plinth, the red glow pools on it, and one chair reads as a chair facing the speaker.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The sideboard front is the brightest surface in the frame and reads as flat, clean CG wood.",
+   "evidence": {
+    "region": [
+     780,
+     540,
+     1200,
+     800
+    ],
+    "measured": "lum_median 168.6, the highest region measured"
+   },
+   "change": {
+    "setting": "wood stain on the record wall's sideboard",
+    "from": "light natural walnut, satin",
+    "to": "dark oiled walnut (albedo about 0.08), low sheen, so it takes only grazing light"
+   },
+   "expected": "The sideboard recedes into the shadow at the right; the eye goes to the speaker first.",
+   "accept": {
+    "region": [
+     780,
+     540,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The sconce shade is blown and has no fabric detail.",
+   "evidence": {
+    "region": [
+     10,
+     60,
+     95,
+     140
+    ],
+    "measured": "clip_pct 20.2, r_median 252"
+   },
+   "change": {
+    "setting": "sconce shades emission strength",
+    "from": "0.05",
+    "to": "0.02 (the sconce point lamps stay at 4.0 W)"
+   },
+   "expected": "The shade glows warm with its weave and edge visible, and the wall still takes a pool of light below it.",
+   "accept": {
+    "region": [
+     10,
+     60,
+     95,
+     140
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 3
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The air gives no depth or shafts of light, so the frame stays flat front to back.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "brick lum_range 126 is spread evenly with no glow around the sources; the pools read only as uniform fill"
+   },
+   "change": {
+    "setting": "haze in the room's air (density per metre)",
+    "from": "0.012",
+    "to": "0.025"
+   },
+   "expected": "Soft glow around the sconce and the speaker's lamps, a visible cone from the record-wall spots, and the back corner falling into atmosphere.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     250,
+     300
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 150
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The hot-pink glow of the upper cabinet compartment, where the white batts show through the red acrylic, reads saturated and slightly synthetic",
+   "why": "It comes from the speaker's fixed construction (tinted acrylic over white batts); only the light on it may change, which c1 addresses"
+  },
+  {
+   "request": "The horn's streaky resin reflections of the brick",
+   "why": "The horn's shape and material are fixed; the reflections calm down once the brick darkens (c3)"
+  }
+ ],
+ "score_if_fixed": 7.5
+}

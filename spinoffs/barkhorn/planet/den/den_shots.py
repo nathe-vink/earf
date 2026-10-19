@@ -37,7 +37,7 @@ def room_piece(v):
             'road_rough', 'floor_tex', 'floor_tint', 'floor_mix', 'floor_coat', 'plaster', 'plaster_mix', 'ceiling',
             'brick_tint', 'rug_tex', 'rug_tint', 'rug_mix', 'rug_value', 'props', 'sign', 'cafe', 'no_glass',
             'glass_gloss', 'siding', 'neighbour', 'neighbour_plain', 'niche_glow', 'gold_glow', 'brick_scale', 'brick_mix', 'across_glow', 'flat_glow', 'shelf_color',
-            'niche_rim', 'brick_tex', 'brick_bump', 'rug_displace', 'rug_cell', 'transom_glow')
+            'niche_rim', 'console_lift', 'brick_tex', 'brick_bump', 'rug_displace', 'rug_cell', 'transom_glow')
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_den', 'fn': 'room', **{k: v[k] for k in keys if k in v}}
 
 
@@ -113,7 +113,8 @@ def lights(v):
     if v.get('spot_records', 0) > 0:
         for k, yy in enumerate((P.W / 2 - 1.0, P.W / 2, P.W / 2 + 1.0)):
             L[f'rec{k}'] = {'type': 'spot', 'position': [P.L - P.REC['depth'] - 0.06, yy, P.REC['z1'] - 0.03],
-                            'target': [P.L - 0.2, yy, 0.6], 'power_w': v['spot_records'], 'cone_deg': 60, 'blend': 0.9,
+                            'target': [P.L - 0.2, yy, v.get('rec_aim_z', 0.6)], 'power_w': v['spot_records'],
+                            'cone_deg': v.get('rec_cone', 60), 'blend': 0.9,
                             'radius_m': 0.03, 'color': 2500}
     # candles: a tiny warm point at each flame
     for k, (x, y, z) in enumerate(P.candle_spots()):
@@ -205,13 +206,15 @@ VIEWS = {
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (4.5): 40 mm from further back and lower, the speaker on the left third; the
                   # speaker lit harder and from behind, the sconce and the records down, the grade less orange
-                  'camera': {'position': [14.5, 2.0, 1.0], 'target': [16.35, 4.36, 0.95], 'lens_mm': 40, 'level': True,
+                  # after listening-r2 (5.5): back and lower on 35 mm so the plinth stands on floor and a chair reads
+                  'camera': {'position': [14.1, 2.3, 0.95], 'target': [16.3, 4.5, 0.75], 'lens_mm': 35, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, P.PAIR['y'][1], 0.9]},
-                  'settings': {'spk_irr': 10.0, 'spk_k': 3200, 'spk_back': 6.0, 'sconce_w': 4.0, 'shade_glow': 0.05,
-                               'wb': 2900, 'spot_records': 9.0, 'record_glow': 1.0, 'haze': 0.012,
+                  'settings': {'spk_irr': 28.0, 'spk_k': 3000, 'spk_back': 6.0, 'sconce_w': 4.0, 'shade_glow': 0.02,
+                               'wb': 2900, 'exposure': -0.8, 'spot_records': 4.0, 'rec_cone': 40.0, 'rec_aim_z': 1.2,
+                               'record_glow': 0.3, 'haze': 0.025, 'console_lift': 0.55,
                                # the lead: red acrylic on red brick is a hue clash; the brick much darker and aged, so
                                # the speaker's own light separates it
-                               'brick_tint': '#2A1D18', 'brick_mix': 0.6}},
+                               'brick_tint': '#2A2624', 'brick_mix': 0.75}},
 }
 
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.10, 'clarity': 0.06, 'sharpen': 0.3,
