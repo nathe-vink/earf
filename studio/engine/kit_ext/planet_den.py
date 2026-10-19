@@ -284,7 +284,7 @@ def shopfront(bpy, kit, p, objs):
         def circ(cx, cy, r):
             return [(cx + r * math.cos(t), cy + r * math.sin(t)) for t in (2 * math.pi * k / 72 for k in range(72))]
         bm = bmesh.new()
-        for sh in MK.WORDMARK:
+        for si, sh in enumerate(MK.WORDMARK):
             holes = []
             if sh[0] == 'rect':
                 a0, b0, a1, b1 = sh[1:5]; pts = [(a0, b0), (a1, b0), (a1, b1), (a0, b1)]
@@ -294,12 +294,13 @@ def shopfront(bpy, kit, p, objs):
                 pts, holes = circ(sh[1], sh[2], sh[3]), [circ(sh[1], sh[2], sh[4])]
             else:
                 pts = list(sh[1:])
-            loops = [[Vector((xg, yc + w / 2 - u * sc, z0 - v * sc)) for u, v in lp] for lp in [pts] + holes]
+            xs = xg - 0.00015 * si                        # each shape a hair apart: overlapping strokes z-fought as stripes
+            loops = [[Vector((xs, yc + w / 2 - u * sc, z0 - v * sc)) for u, v in lp] for lp in [pts] + holes]
             for tri in tessellate_polygon(loops):
                 flat = [v for lp in loops for v in lp]
                 f = bm.faces.new([bm.verts.new(flat[i]) for i in tri]); f.normal_update()
         me = bpy.data.meshes.new('gold-leaf'); bm.to_mesh(me); bm.free()
-        me.materials.append(principled(bpy, 'gold-leaf', '#D9A94E', rough=0.25, metal=1.0, emit='#E8B45A',
+        me.materials.append(principled(bpy, 'gold-leaf', '#C8922E', rough=0.25, metal=1.0, emit='#F0A838',
                                        strength=p.get('gold_glow', 0.25)))
         ob = bpy.data.objects.new('gold-leaf', me); bpy.context.scene.collection.objects.link(ob); objs.append(ob)
 
