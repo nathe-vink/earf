@@ -94,7 +94,7 @@ VIEWS = {
                             'transom_glow': 0.15, 'spk_irr': 9.0, 'spk_back': 18.0, 'spk_spread': 90.0,
                             'pendant_w': 90.0, 'pendant_glow': 0.3, 'inlay_glow': 0.6, 'haze': 0.025,
                             'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
-                            'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5, 'etch_glow': 0.0,
+                            'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5, 'etch_glow': 0.15,
                             'screen_window': 0.35, 'glass_gloss': 3.0, 'chair_dye': '#4A3A32'}},
 }
 S.VIEWS = VIEWS
