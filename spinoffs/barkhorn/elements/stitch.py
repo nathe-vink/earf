@@ -6,7 +6,7 @@ finish off (the finish's clarity and vignette must see the whole frame), e.g. fo
     python3.11 studio/engine/render.py SHOT --samples 512 --crop 0 0 1 0.51 --set finish.enabled=false --out top.png
     python3.11 studio/engine/render.py SHOT --samples 512 --crop 0 0.49 1 1 --set finish.enabled=false --out bottom.png
 
-and this joins them at the frame's middle (each strip's denoised edge falls in the overlap and is dropped) and runs the
+and this cross-fades them across the overlap (each strip's denoised edge rows are dropped) and runs the
 finish on the joined raw:
 
     python3.11 spinoffs/barkhorn/elements/stitch.py SHOT top.png bottom.png --out final.png
@@ -33,9 +33,17 @@ def main():
     t = np.asarray(Image.open(a.top).convert('RGB')); b = np.asarray(Image.open(a.bottom).convert('RGB'))
     assert t.shape[1] == W and b.shape[1] == W, (t.shape, b.shape, W)
     assert t.shape[0] + b.shape[0] > H, 'the strips must overlap'
-    mid = H // 2
-    # the top strip starts at row 0, the bottom one ends at row H
-    full = np.concatenate([t[:mid], b[mid - (H - b.shape[0]):]], axis=0)
+    # the top strip starts at row 0, the bottom one ends at row H; across their overlap (less a few rows at each
+    # strip's denoised edge) the two are cross-faded, not cut: where the frame is still noisy (haze lit by the sun) two
+    # renders settle into different grain, and a cut between them draws a line
+    y0, y1 = H - b.shape[0], t.shape[0]                   # the overlap, in frame rows
+    e = min(4, (y1 - y0) // 4)
+    f0, f1 = y0 + e, y1 - e
+    full = np.empty((H, W, 3))
+    full[:f0] = t[:f0]; full[f1:] = b[f1 - y0:]
+    w = ((np.arange(f0, f1) - f0 + 0.5) / (f1 - f0))[:, None, None]
+    full[f0:f1] = t[f0:f1] * (1 - w) + b[f0 - y0:f1 - y0] * w
+    full = np.clip(full + 0.5, 0, 255).astype(np.uint8)
     assert full.shape[:2] == (H, W), full.shape
     out = Path(a.out); raw = out.with_suffix('.raw.png')
     Image.fromarray(full).save(raw)
