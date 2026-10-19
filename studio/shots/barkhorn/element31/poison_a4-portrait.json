@@ -273,7 +273,7 @@
      [
       -16.306,
       3.793,
-      0.18
+      0.1
      ]
     ]
    },
@@ -3187,10 +3187,11 @@
      -0.01
     ],
     "wash": 0.05,
-    "dull": 0.25,
+    "dull": 0.38,
     "needles": 2,
     "torn": 0.2,
-    "matte": true
+    "matte": true,
+    "orange": true
    },
    {
     "kind": "kit",
@@ -3210,8 +3211,9 @@
      0.01
     ],
     "wash": 0.1,
-    "dull": 0.22,
-    "matte": true
+    "dull": 0.36,
+    "matte": true,
+    "orange": true
    },
    {
     "kind": "kit",
@@ -3231,9 +3233,10 @@
      0.015
     ],
     "wash": 0.0,
-    "dull": 0.32,
+    "dull": 0.45,
     "torn": 0.4,
-    "matte": true
+    "matte": true,
+    "orange": true
    },
    {
     "kind": "kit",
@@ -3253,8 +3256,9 @@
      -0.01
     ],
     "wash": 0.2,
-    "dull": 0.25,
-    "matte": true
+    "dull": 0.36,
+    "matte": true,
+    "orange": true
    },
    {
     "kind": "kit",
@@ -3270,7 +3274,7 @@
     "age": "button",
     "seed": 65,
     "warts": 280,
-    "dull": 0.2,
+    "dull": 0.3,
     "matte": true
    },
    {

@@ -15,11 +15,11 @@ from common import piece
 CLUSTER = (-0.22, -1.34)            # on the open duff at the left of the foreground, ~5.2 m from the lens
 # (dx, dy, cap radius, age, seed, extra amanita settings): caps 8-15 cm across, every age, one broken; no cap
 # lines up over another from the lens (proof 1's judges saw two caps on one stem)
-AGARICS = [(0.0, 0.0, 0.07, 'convex', 61, dict(lean=[0.015, -0.01], wash=0.05, dull=0.25, needles=2, torn=0.2, matte=True)),
-           (0.17, 0.06, 0.06, 'convex', 62, dict(lean=[0.03, 0.01], wash=0.1, dull=0.22, matte=True)),
-           (-0.14, 0.1, 0.075, 'old', 63, dict(lean=[-0.02, 0.015], wash=0.0, dull=0.32, torn=0.4, matte=True)),   # broken, rim torn
-           (0.41, -0.02, 0.045, 'young', 64, dict(lean=[0.0, -0.01], wash=0.2, dull=0.25, matte=True)),
-           (-0.2, -0.12, 0.025, 'button', 65, dict(warts=280, dull=0.2, matte=True))]   # set apart: no cap over a cap
+AGARICS = [(0.0, 0.0, 0.07, 'convex', 61, dict(lean=[0.015, -0.01], wash=0.05, dull=0.38, needles=2, torn=0.2, matte=True, orange=True)),
+           (0.17, 0.06, 0.06, 'convex', 62, dict(lean=[0.03, 0.01], wash=0.1, dull=0.36, matte=True, orange=True)),
+           (-0.14, 0.1, 0.075, 'old', 63, dict(lean=[-0.02, 0.015], wash=0.0, dull=0.45, torn=0.4, matte=True, orange=True)),   # broken, rim torn
+           (0.41, -0.02, 0.045, 'young', 64, dict(lean=[0.0, -0.01], wash=0.2, dull=0.36, matte=True, orange=True)),
+           (-0.2, -0.12, 0.025, 'button', 65, dict(warts=280, dull=0.3, matte=True))]   # set apart: no cap over a cap
 # a stand of foxgloves in the haze behind and right of the horn, 10-12 m out; the first caught in a shaft
 FOXGLOVES = [(0.1, 4.9, 1.55, 7), (-0.32, 5.5, 1.2, 2), (0.42, 4.45, 0.9, 4)]   # three, uneven heights and spacing
 
@@ -61,7 +61,7 @@ def shot():
         if p.get('fn') == 'canopy':
             fx, fy = FOXGLOVES[0][:2]
             p['holes'] = p['holes'] + [A.gap_for(cx, cy, 0.1, 0.2, (0.0, 4.0), A.SUN_A2),
-                                       A.gap_for(fx, fy, 1.0, 0.18, (0.0, 4.0), A.SUN_A2)]
+                                       A.gap_for(fx, fy, 1.0, 0.1, (0.0, 4.0), A.SUN_A2)]
     # the litter they push up through: moss in broken cushions, bark crumbs and twigs over their bases
     props.append(A.ext('strew', model='moss_01', on=['prop0-kit'], density=4000, up=0.5, scale=[0.6, 1.3], seed=65,
                        patch=0.06, patch_cut=0.3, within=[cx, cy, 0.38]))

@@ -351,6 +351,8 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
         mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MULTIPLY_ADD'
         nt.links.new(nz.outputs['Fac'], mx.inputs[0]); mx.inputs[1].default_value = 0.25; nt.links.new(hz.outputs['Value'], mx.inputs[2])
         cols = [(0.05, '#5A4A32'), (0.2, '#A39478'), (0.38, '#D6CCB2'), (1.0, '#E6DEC8')]
+        if matte:                                         # a dried stem: dirty ivory, soil climbing from the base
+            cols = [(0.05, '#3E3222'), (0.28, '#7E705A'), (0.5, '#AA9E84'), (1.0, '#BFB59C')]
         if k == 'volva' and sp != 'muscaria':
             cols = [(0.0, '#7A6A4E'), (0.25, '#CFC6AE'), (1.0, '#EDE8DA')]
         nt.links.new(_ramp(nt, mx.outputs['Value'], cols), b.inputs['Base Color'])
