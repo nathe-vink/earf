@@ -24,8 +24,8 @@ LAMP_STRIP_Z = 0.441             # Bell's strip above its foot (companions/shots
 SIDE_H = 0.50                    # the lounge's side tables' tops
 
 DEFAULT = dict(
-    sconce_w=10.0, pendant_w=45.0, pendant_cone=75.0, shelf_glow=10.0, shade_glow=0.12, niche_glow=0.35, pendant_glow=0.5, flame=25.0,
-    candle_w=0.6, bell_w=22.0, spk_irr=3.0, spot_niche=60.0, record_glow=2.0, spot_records=18.0, vu=2.0,
+    sconce_w=10.0, pendant_w=45.0, pendant_cone=75.0, shelf_glow=10.0, shade_glow=0.12, niche_glow=0.9, pendant_glow=0.5, flame=25.0,
+    candle_w=0.6, bell_w=22.0, spk_irr=3.0, spot_niche=220.0, record_glow=2.0, spot_records=18.0, vu=2.0,
     street_lamp=500.0, windows_lit=0.5, haze=0.006, street=True, neighbour_plain=True, flat_glow=0.06,
     exposure=0.0, wb=3700, wb_tint=0.0, view='Khronos PBR Neutral', look='None', samples=256,
 )
@@ -160,15 +160,15 @@ STREET_LAMPS = (-6.0, P.W + 9.0)
 VIEWS = {
     'street': {'title': 'the shopfront at night, from across the street',
                # three-quarter from across the street and up it, so the bays read as bays; the shopfront the subject
-               'camera': {'position': [-16.0, P.W + 6.5, 1.6], 'target': [0.0, P.W / 2 - 0.3, 2.2], 'lens_mm': 40,
+               'camera': {'position': [-11.5, P.W + 4.0, 1.5], 'target': [0.0, P.W / 2 - 0.4, 2.1], 'lens_mm': 35,
                           'level': True},
-               'settings': {'exposure': 0.4, 'wb': 3500, 'wet': True, 'road_rough': 0.12, 'street_lamp': 250.0}},
+               'settings': {'exposure': 0.4, 'wb': 3500, 'wet': True, 'road_rough': 0.12, 'street_lamp': 250.0, 'gold_glow': 0.06, 'siding': '#8E9384'}},
     'bar': {'title': 'the bar, from the window table',
             'settings': {'exposure': 0.8},
             'camera': {'position': [2.10, 3.10, 1.38], 'target': [9.6, 5.9, 1.05], 'lens_mm': 30, 'level': True,
                        'fstop': 5.6, 'focus': [6.0, 5.2, 1.1]}},
     'listening': {'title': 'the listening room, one of the Ember pair',
-                  'camera': {'position': [14.55, 2.35, 1.12], 'target': [16.3, 5.6, 0.95], 'lens_mm': 32, 'level': True,
+                  'camera': {'position': [15.0, 2.0, 1.12], 'target': [16.25, 5.6, 0.95], 'lens_mm': 30, 'level': True,
                              'fstop': 4.0, 'focus': [16.15, 5.75, 0.9]}},
 }
 
