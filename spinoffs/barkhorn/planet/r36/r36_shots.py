@@ -94,7 +94,7 @@ VIEWS = {
             # partition's opening
             'camera': {'position': [1.4, 2.75, 1.45], 'target': [17.0, 3.15, 1.15], 'lens_mm': 30, 'level': True,
                        'fstop': 5.6, 'focus': [8.0, 3.2, 1.1]},
-            'settings': {'exposure': 0.0}},
+            'settings': {'exposure': -0.5}},
     'listening-green': {'title': 'the listening zone, bottle green',
                         'camera': {'position': [11.25, 2.75, 1.35], 'target': [16.6, 3.05, 1.05], 'lens_mm': 32,
                                    'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
