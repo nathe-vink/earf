@@ -139,14 +139,14 @@ def shot():
               smoke((-1.0, 3.0, 1.6), (16.0, 8.0, 4.0), 0.5, 9, scale=1.2, cut=0.45, soft=0.3, anisotropy=0.75,
                     fade=[0.3, 0.4, 0.5], floor=0.02, rise=0.6, color='#CFCBC6'),
               # low wisps drifting between the camera and the speaker, veiling its lower half a little
-              smoke((0.0, -1.6, 0.0), (9.0, 3.0, 1.8), 0.45, 13, scale=0.8, cut=0.48, soft=0.3, anisotropy=0.6,
+              smoke((0.0, -1.6, 0.0), (9.0, 3.0, 1.8), 0.12, 13, scale=0.8, cut=0.48, soft=0.3, anisotropy=0.6,
                     fade=[0.3, 0.35, 0.6], floor=0.02, rise=0.5, color='#D6D0C8')]
     cam = camera(height=1.1, distance=6.4, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=0.14, shift_y=-0.05)
     lights = {
         # the open sky behind the camera, cool, lifting the shadow side: the woofer and lining just read in the tint
-        'skyfill': {**area(-20, 5, 2.4, 6.0, '#9EA8B6', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
+        'skyfill': {**area(-20, 5, 2.4, 3.0, '#9EA8B6', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
         # the sunlit litter and the sky bounce into its face: low, broad and cool-neutral
-        'bounce': {**area(-25, 12, 2.0, 8.0, '#B4AEA6', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
+        'bounce': {**area(-25, 12, 2.0, 4.0, '#B4AEA6', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
         # the sun's light off the smoke behind, thin warm rims down both edges and over the top
         'kicker': {**area(-150, 10, 3.0, 30.0, '#FFC79A', (1.0, 2.4), (0.0, 0.0, 0.9)), 'receivers': SHELL},
         'kicker_r': {**area(144, 2, 3.0, 50.0, '#FF8A40', (1.0, 0.5), (0.0, 0.0, 0.4)), 'receivers': SHELL},
@@ -166,7 +166,7 @@ def shot():
     return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.4), 'barkhorn, Smoke, woodsmoke at dawn',
                  sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.045), samples=512, exposure=0.3,
                  # the whole air hazed with the pile's smoke, the camera inside it, so the speaker sits in the same air
-                 haze={'box_m': [-15.0, -15.0, 0.0, 18.0, 30.0, 14.0], 'density': 0.003, 'anisotropy': 0.7,
+                 haze={'box_m': [-15.0, -15.0, 0.0, 18.0, 30.0, 14.0], 'density': 0.0, 'anisotropy': 0.7,
                        'color': '#BCC4CE'},
                  # no clarity and no sharpening: the speaker as soft as the set around it
                  fin=finish(contrast=0.15, clarity=0.0, sharpen=0.0, bloom=0.06, bloom_px=40, threshold=0.85,
