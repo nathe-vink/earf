@@ -91,3 +91,14 @@ as the critics agree pass after pass:
   steps, if the owner wants another round: lava close to the speaker, the lamps behind moved low and out of the horn's
   reflection, a smoother caldera rim lit by the vent, larger crust plates at f/5.6, and a three-quarter view with the
   speaker on the left third.
+
+## A2: the lava field refined (2026-10-19, the lead's round; it goes up only if it beats A in a blind duel)
+
+`ember_a2.py`: one main flow from the left foreground past the speaker's left with a broken core ribbon, plated crust,
+clinker and slabs, a volcanic cone with a crater and plume, a deeper blue hour. A fix on the way: `kit.finish` reads a
+piece's `scale` as the object's scale, so a lava piece's texture `scale` also blew the mesh up (A2's core lay buried
+under the crust); lava pieces now take `tex_scale`, and A, which still says `scale`, is unchanged.
+
+| Pass | Proof | Score | What it names |
+|---|---|---|---|
+| A2-1 | `proofs31/element-ember-a2-p1.jpg` (5123b2a) | 4.5 iterate (if fixed 7.0) | the lava glossy, like wet plastic, the core pink-white; a hard hotspot on the horn's right half and a strip down the cabinet's edge from the hidden lamps; the front still dark (median 19.5); the slab striated; no red pool at the base; few embers, no steam seen; the cone a soft dome, the sky a flat band |
