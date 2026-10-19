@@ -1,0 +1,430 @@
+{
+ "stage1": {
+  "impression": "A symmetrical, stage-like niche with two speakers glowing salmon-pink like neon signs, flanked by flat red panels, with smooth coral tub chairs and a white ping-pong-ball lamp in the foreground. The end-grain wall is a visibly repeating grid texture, the carpet and chairs are smooth CG surfaces, and the sides and ceiling fall into empty near-black. It reads as a game or home-cinema showroom render, not a photograph of a specific place, and a design magazine would not run it as one.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Speaker acrylic frames must stop reading as pink neon: speaker region clip_pct < 1 with the tint still reading as red cast acrylic, not as signage",
+  "End-grain block wall must read as real end grain (growth rings, varied block tone, irregular joints) with no visible texture repeat; wall region lum_range >= 30",
+  "Velvet chairs must show nap and a sheen falloff at their rolled edges instead of smooth plastic-looking colour",
+  "The Orb lamp must read as smoked acrylic glowing from within, not as a matte white ball lit from above",
+  "Pools of light on the carpet and between the chairs, with dark falloff between them: floor falloff, not a flat plane (current range 21)",
+  "The frame edges (left and right walls, ceiling and beams) need readable detail, not flat near-black at lum ~13 to 16 with a range of 5",
+  "A sign of life in the zone: a glass on the table, a record or sleeve, a coat or a bag on a chair",
+  "A full-resolution render without denoiser smear on the wall, the carpet and the speaker internals"
+ ],
+ "defects": [
+  {
+   "region": [
+    130,
+    70,
+    600,
+    330
+   ],
+   "what": "End-grain wall is a uniform square grid with the same horizontal wood-grain stripe repeating: tiled texture, flat (lum_range 17 in 300-420 x 80-300)"
+  },
+  {
+   "region": [
+    185,
+    195,
+    265,
+    315
+   ],
+   "what": "Left speaker's acrylic frame blows to pink-white, clip 7.7% in the frame region, so it reads as neon tube or signage"
+  },
+  {
+   "region": [
+    455,
+    195,
+    540,
+    315
+   ],
+   "what": "Right speaker same: pink-white neon frame, clip 4.4% in the speaker region"
+  },
+  {
+   "region": [
+    185,
+    150,
+    265,
+    200
+   ],
+   "what": "Top horn module (resin horn/cover zone) is a smeared red blur with no edge definition, likely denoiser"
+  },
+  {
+   "region": [
+    0,
+    330,
+    250,
+    480
+   ],
+   "what": "Tub chairs are smooth, evenly coloured coral surfaces with no velvet nap, pile direction or sheen at the rolled edges: reads as plastic"
+  },
+  {
+   "region": [
+    385,
+    390,
+    630,
+    480
+   ],
+   "what": "Foreground chair the same: smooth CG velvet, soft blurred top edge"
+  },
+  {
+   "region": [
+    270,
+    385,
+    320,
+    435
+   ],
+   "what": "Orb lamp reads as a matte grey-white ball (RGB 138/106/95), no smoke tint, no internal glow, no liner visible"
+  },
+  {
+   "region": [
+    240,
+    410,
+    345,
+    470
+   ],
+   "what": "Hexagonal table top is hot (p95 192) and flat; oak grain not legible"
+  },
+  {
+   "region": [
+    150,
+    330,
+    600,
+    400
+   ],
+   "what": "Carpet is a uniform flat plane (lum 42 to 49 across its depth): no pools of light, no wool texture"
+  },
+  {
+   "region": [
+    0,
+    40,
+    65,
+    330
+   ],
+   "what": "Left edge dead flat dark (lum_median 15.6, range 5.2): empty, no wall or detail"
+  },
+  {
+   "region": [
+    660,
+    40,
+    720,
+    330
+   ],
+   "what": "Right edge similarly empty and dark"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    40
+   ],
+   "what": "Ceiling band empty (lum_median 12.8): no Douglas fir beams or concrete readable"
+  },
+  {
+   "region": [
+    175,
+    100,
+    295,
+    200
+   ],
+   "what": "Altar spot makes a hard-edged hotspot cone on the red panel above each speaker, read as a stage wash"
+  },
+  {
+   "region": [
+    185,
+    310,
+    265,
+    350
+   ],
+   "what": "Oak plinths read as flat brown boxes with no grain or edge highlight"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Everything is red: chairs, panels, speakers and walls all warm red, so the speaker is not the one saturated note; denoiser smear throughout at this proof scale"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers' acrylic frames are blown to pink-white and read as neon signage rather than tinted cast acrylic.",
+   "evidence": {
+    "region": [
+     195,
+     205,
+     260,
+     310
+    ],
+    "measured": "lum_p95 199.9, clip_pct 7.66, RGB median 156/82/79; whole speaker region clip 4.0% (left), 4.4% (right)"
+   },
+   "change": {
+    "setting": "lamps on each Ember speaker (4 x area)",
+    "from": "14.0 W/m2 at the target, 2900 K",
+    "to": "6.0 W/m2 at the target, 2900 K, and raise the altar spots from 40.0 W to 55.0 W so the cabinets are lit from outside and the acrylic shows edge glow rather than a lit-from-within tube"
+   },
+   "expected": "Frames keep a deep red tint with only thin bright polished edges; the woofer and batts stay legible; the speaker reads as a translucent object, not a sign.",
+   "accept": {
+    "region": [
+     195,
+     205,
+     260,
+     310
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The end-grain block wall is a visibly tiling grid texture with flat tone, the single biggest 'render' tell.",
+   "evidence": {
+    "region": [
+     300,
+     80,
+     420,
+     300
+    ],
+    "measured": "lum_range 17.1, lum_median 44.7; the same horizontal grain stripe repeats every block row"
+   },
+   "change": {
+    "setting": "end-grain block finish (material finish of the niche lining)",
+    "from": "one wood-grain map tiled across a regular grid",
+    "to": "end-grain texture (growth rings and radial checks) per block, with random per-block rotation, offset and a +/-15% value and hue jitter; joints darker and slightly irregular (1 to 2 mm); roughness 0.7 with a slight oil sheen"
+   },
+   "expected": "The wall reads as hand-laid end-grain blocks with variation, no repeat visible at 1:1, and enough tonal variation to carry the warm light.",
+   "accept": {
+    "region": [
+     300,
+     80,
+     420,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Orb lamp on the table reads as a matte white ball lit from above, not a smoked acrylic lamp glowing from within, and the table under it is hot.",
+   "evidence": {
+    "region": [
+     270,
+     385,
+     320,
+     435
+    ],
+    "measured": "RGB median 138/106/95, lum_median 112; table top 240-345 x 410-470 p95 191.6"
+   },
+   "change": {
+    "setting": "each Orb (lamp W and liner glow) and the Domes' downlights",
+    "from": "Orb 6.0 W, glow 0.6; Domes' downlights 320.0 W",
+    "to": "Orb 10.0 W, glow 1.6; Domes' downlights 200.0 W, so the Orb is the table's key light and the downlights no longer flatten it"
+   },
+   "expected": "The Orb shows a dark smoked shell with a warm glowing frosted core; a soft pool of amber light on the oak top; the table no longer hot-spotted.",
+   "accept": {
+    "region": [
+     240,
+     410,
+     345,
+     470
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 175
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The velvet tub chairs read as smooth, evenly coloured plastic shells, not velvet.",
+   "evidence": {
+    "region": [
+     385,
+     390,
+     630,
+     480
+    ],
+    "measured": "lum_range 73.5, but smooth gradient with no texture; colour RGB 106/34/34 (delta E 3.7 to oxblood, so colour is fine; surface is wrong)"
+   },
+   "change": {
+    "setting": "velvet finish on the tub chairs",
+    "from": "plain diffuse red",
+    "to": "velvet: sheen 1.0 with sheen tint 0.5, roughness 0.9, a fine pile normal map, and a slight darkening of the face-on areas so the rolled rims catch a lighter grazing sheen"
+   },
+   "expected": "The rims of the chairs glow lighter where the light grazes them and the faces go deeper oxblood, the signature of velvet; the zone reads as a rich colour, not as coral plastic.",
+   "accept": {
+    "region": [
+     385,
+     390,
+     630,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The frame's edges and ceiling are empty near-black, so the room has no context (no concrete, fir beams or steel), and the zone floats like a stage set.",
+   "evidence": {
+    "region": [
+     0,
+     40,
+     65,
+     330
+    ],
+    "measured": "lum_median 15.6, lum_range 5.2; ceiling 0-720 x 0-40 lum_median 12.8"
+   },
+   "change": {
+    "setting": "a new low wall-grazing source, or the Domes' downlights re-aimed, plus haze",
+    "from": "no light on the side walls or the beams; haze 0.012 per m",
+    "to": "two 15 W 2700 K grazers washing the side walls and one 20 W uplight onto the nearest Douglas fir beam; haze 0.025 per m so the altar spots show soft beams"
+   },
+   "expected": "Board-formed concrete or fir faintly readable at the frame's edges and a beam visible overhead, holding shadow detail while staying dark.",
+   "accept": {
+    "region": [
+     0,
+     40,
+     65,
+     330
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The carpet is a flat even plane with no pools of light and dark between the seats.",
+   "evidence": {
+    "region": [
+     150,
+     330,
+     600,
+     400
+    ],
+    "measured": "falloff along y 41.6 to 49.4 to 44.8; lum_range 21.5"
+   },
+   "change": {
+    "setting": "the Domes' downlights' cone, and the altar spots' aim",
+    "from": "cone 46.0 deg",
+    "to": "cone 28 deg, aimed on the tables and chair seats; tilt the altar spots so their lower edge spills a pool on the carpet in front of each plinth"
+   },
+   "expected": "Distinct pools of light on the tables and the carpet before each speaker with darker carpet between, giving depth and the 'pools of light' look.",
+   "accept": {
+    "region": [
+     150,
+     330,
+     600,
+     400
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "There is no sign of life in the listening zone; it reads as an empty showroom.",
+   "evidence": {
+    "region": [
+     240,
+     380,
+     345,
+     470
+    ],
+    "measured": "only the Orb and an indistinct dark object on the table"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props only at the counter (glasses, coat, candles) and none in the zone",
+    "to": "a rocks glass with whisky and a coaster beside the Orb, a record sleeve leaning on the right chair's arm, a folded jacket over the left chair's back"
+   },
+   "expected": "The zone reads as occupied a moment ago, with small highlights in the glass picking up the Orb.",
+   "accept": {
+    "region": [
+     240,
+     380,
+     345,
+     470
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "Detail is smeared by the denoiser at proof scale (horn module, wall, carpet), and the altar spots make hard stage-like cones on the red panels.",
+   "evidence": {
+    "region": [
+     175,
+     100,
+     295,
+     300
+    ],
+    "measured": "falloff along y 28.9 / 32.0 / 44.5 / 39.6 / 46.5 / 33.5 / 57.4 / 33.6: banded hot and cold bands instead of a smooth fall-off"
+   },
+   "change": {
+    "setting": "render and the altar spots",
+    "from": "proof at scale 0.3, denoise on; altar spots cone 40.0 deg with a hard edge",
+    "to": "judge at full 2400 x 1600 with samples 512; altar spots given a soft edge (blend 0.6) and cone 50 deg so the panel shows a smooth fall-off from top to bottom"
+   },
+   "expected": "Crisp edges on the speaker internals and the blocks; a smooth graded pool on each panel rather than a theatrical cone.",
+   "accept": {
+    "region": [
+     175,
+     100,
+     295,
+     300
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 170
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the speaker the only saturated colour in the frame",
+   "why": "The card fixes the oxblood zone (chairs, carpet, limewashed walls, red panels) as the design, so the speaker cannot be the only saturated note; the light changes above help it stand out by brightness and translucency instead."
+  },
+  {
+   "request": "Change the speakers' pink-red frames or their translucent tint",
+   "why": "EARF's product (shape, colour, parts) is fixed; only its lighting can change."
+  },
+  {
+   "request": "Break the dead-centre symmetric composition with a different niche layout",
+   "why": "The altar and niche layout are fixed design; a camera move off-axis (for example 0.6 m to the left with a 40 mm lens) is allowed but moves every region, so it is offered here without a pixel test."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

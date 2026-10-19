@@ -25,9 +25,10 @@ S.BELL_TABLES = ()
 DEFAULT = dict(S.DEFAULT, **dict(
     colourway='green', pendant_w=320.0, pendant_cone=46.0, dome_w=9.0, dome_glow=1.1, sphere_w=3.0, sphere_glow=1.1,
     disc_col='#FF5A3A', disc_glow=0.8, disc_lamp=60.0, name_glow=0.25, niche_strip=4.0, sink_glow=6.0,
-    screen_glow=0.5, screen_tint='#FFA060', screen_gap=0.04, screen_rough=0.22, etch_glow=0.01, etch_frost=0.3,
-    rw_w=30.0, rw_cone=34.0, altar_w=70.0, altar_cone=28.0, spk_irr=5.0, spk_back=40.0, spk_spread=90.0,
-    spk_link=True, spk_k=2900, candle_w=3.0, flame=60.0, haze=0.012, wb=3000, exposure=0.0, view='AgX',
+    screen_glow=1.0, screen_tint='#FFA060', screen_gap=0.04, screen_rough=0.22, etch_glow=0.01, etch_frost=0.3,
+    rw_w=14.0, rw_cone=22.0, altar_w=70.0, altar_cone=28.0, spk_irr=5.0, spk_back=40.0, spk_spread=90.0,
+    spk_link=True, spk_k=2900, candle_w=3.0, flame=60.0, haze=0.005, wb=3000, exposure=0.0, view='AgX',
+    look='AgX - Medium High Contrast',
     menu_color='#8A6E4E'))
 S.DEFAULT = DEFAULT
 KEYS = ('colourway', 'dome_w', 'dome_glow', 'sphere_w', 'sphere_glow', 'lamp_deep', 'disc_col', 'disc_glow',
@@ -105,9 +106,12 @@ VIEWS = {
             # down the room's axis: the racetrack counter and the record wall on the left, the banquette and its screens
             # on the right, the Domes low over the zinc, the Ember pair on its altar at the far end, framed by the
             # partition's opening
-            'camera': {'position': [1.4, 2.75, 1.45], 'target': [17.0, 3.15, 1.15], 'lens_mm': 30, 'level': True,
-                       'fstop': 5.6, 'focus': [8.0, 3.2, 1.1]},
-            'settings': {'exposure': -0.5}},
+            # after the two critics on p1 (4.5, 4.5): one orange wood everywhere, the ceiling over the floor under a haze
+            # veil, the record wall the brightest, the lamps dull (placeholders then), the altar small: nearer on 35 mm;
+            # less haze; a higher-contrast look; the oak darker; the record wall's spots down; the screens up
+            'camera': {'position': [4.5, 2.7, 1.35], 'target': [17.0, 3.1, 1.15], 'lens_mm': 35, 'level': True,
+                       'fstop': 5.6, 'focus': [12.0, 3.1, 1.1]},
+            'settings': {'exposure': -0.3}},
     'listening-green': {'title': 'the listening zone, bottle green',
                         'camera': {'position': [11.25, 2.45, 1.35], 'target': [16.6, 3.25, 1.2], 'lens_mm': 28,
                                    'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},

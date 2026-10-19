@@ -1,0 +1,405 @@
+{
+ "stage1": {
+  "impression": "A long, warm, timber-lined bar seen down its axis, with the red horn pair glowing in a green-curtained alcove at the far end. It is well composed but it reads as CG: every surface is the same soft orange-brown wood (the walls, the ceiling, the counter front and the furniture), the light is flat, the ceiling is brighter than the floor, the pendants look like unlit grey plastic and the record wall reads as a printed bookcase texture. The magazine would not publish it as a specific place. It reads as a generic warm hotel bar; the zinc, the concrete, the steel and the acrylic that would make it Planet EARF are not legible.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The shell has to read as its own materials. Board-formed concrete with tie holes and board grain must be visible on the right wall and the end wall, and the Douglas fir beams must stand apart from a darker soffit, not the same orange wood as every other surface.",
+  "The light has to be a set of practicals with real contrast: pools on the zinc and the tables at 120 or more, with the shadows between them at 15 to 30, and the ceiling darker than the lit surfaces below it (top band median under 30).",
+  "The Dome pendants and the Orbs must visibly glow as smoked acrylic, with a brighter rim edge and a darker smoked body, not read as matte grey shades or stones.",
+  "The Ember pair must be the brightest saturated object and read at a glance (the altar region's median 60 or more, red cabinet clearly through-lit), with the green zone kept as a dark supporting ground.",
+  "The record wall must read as records (square sleeve spines, depth, shadow between shelves) and sit lower in value than the altar.",
+  "The frosted screens must glow evenly as backlit frosted acrylic set in the concrete, not read as a dark framed print.",
+  "Full-resolution delivery (2400 x 1600) with no denoiser smear on the wood grain and the books, and some sign of life (the coat, the coupe and the record out of its sleeve) legible."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    120
+   ],
+   "what": "The ceiling is a uniform orange plank surface, brighter (median 45) than the floor (20). It reads as a lit-from-below CG ceiling, and the beams do not separate from the soffit."
+  },
+  {
+   "region": [
+    0,
+    20,
+    180,
+    260
+   ],
+   "what": "The record wall is the brightest large area (median 80) and reads as a flat bookcase texture with even pink-red light. It competes with the altar."
+  },
+  {
+   "region": [
+    20,
+    140,
+    90,
+    180
+   ],
+   "what": "The near Dome pendant reads as a matte grey-white plastic shade (median 119, no rim glow, no smoked tint), lit from outside rather than glowing."
+  },
+  {
+   "region": [
+    130,
+    170,
+    180,
+    195
+   ],
+   "what": "The second Dome is the same: an opaque grey shade with no light coming from it."
+  },
+  {
+   "region": [
+    560,
+    90,
+    720,
+    260
+   ],
+   "what": "The right wall reads as flat grey-green plaster (lum_range 33). There is no concrete tie holes, board grain or pour lines."
+  },
+  {
+   "region": [
+    585,
+    105,
+    640,
+    240
+   ],
+   "what": "The frosted screen reads as a dark framed print on a wall (median 57) rather than a backlit frosted panel set flush in concrete."
+  },
+  {
+   "region": [
+    270,
+    170,
+    460,
+    310
+   ],
+   "what": "The altar is under-lit for a hero (median 46). The green curtains and the spots above each speaker add a second saturated colour at almost the same value as the red cabinets."
+  },
+  {
+   "region": [
+    300,
+    225,
+    340,
+    265
+   ],
+   "what": "The red cabinet reads as an outlined red box with a glowing edge but a dark, muddy face. The through-glow of the tinted acrylic is weak (median 49)."
+  },
+  {
+   "region": [
+    0,
+    260,
+    260,
+    480
+   ],
+   "what": "The counter front and the stools merge into one brown mass (median 25). The flutes are visible, but the zinc top reads as dark grey paint with no metallic sheen at its rounded edge."
+  },
+  {
+   "region": [
+    440,
+    240,
+    720,
+    480
+   ],
+   "what": "The Orbs on the tables read as grey stones, not glowing smoked crystal balls. The table tops and the banquette are the same orange wood as everything else."
+  },
+  {
+   "region": [
+    180,
+    320,
+    520,
+    480
+   ],
+   "what": "The floor is a dull, featureless dark (median 25) with no polish reflections of the pendants or the altar."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Overall flat tonality (p99 141, nothing near a highlight). Haze and lifted blacks give a grey veil, and the soft denoised look reads as render."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The pendants do not read as light sources and their pools are weak, so the room has no practical-led contrast.",
+   "evidence": {
+    "region": [
+     20,
+     140,
+     90,
+     180
+    ],
+    "measured": "The Dome body has a median of 119 with no rim glow. The bar pool at [20,290,140,310] has a median of 77 and a p95 of 175. The frame's p99 is only 141."
+   },
+   "change": {
+    "setting": "EARF's lamps: Dome liner glow / the Domes' downlights",
+    "from": "liner glow 0.6, downlights 320 W",
+    "to": "liner glow 2.0, downlights 450 W at the same 2400 K, cone 46 deg to 38 deg so the pools have edges"
+   },
+   "expected": "The Domes glow amber through the smoked shell with a brighter rim, and tight, bright pools sit on the zinc with dark between them.",
+   "accept": {
+    "region": [
+     20,
+     290,
+     140,
+     310
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 215
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The ceiling is brighter than the floor, which flattens the room and reads as fill light rather than practicals.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     120
+    ],
+    "measured": "The top band's median is 45.5, the y-profile peaks at 55 in the upper-middle bands, and the floor band is 20."
+   },
+   "change": {
+    "setting": "haze in the room's air density / render clamp / Domes' liner up-spill",
+    "from": "haze 0.012, clamp 10",
+    "to": "haze 0.005, clamp 10, and the Dome liners made smoked opaque upward so they spill nothing onto the ceiling"
+   },
+   "expected": "The ceiling falls to near black between the beams, and the beams catch only a little light from the pools below.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     120
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Ember pair is not the hero. The altar is no brighter than the ceiling, and the record wall outshines it.",
+   "evidence": {
+    "region": [
+     270,
+     170,
+     460,
+     310
+    ],
+    "measured": "The altar's median is 46 against the record wall's 80 at [0,20,180,260]. The cabinet faces have medians of 49 and 45."
+   },
+   "change": {
+    "setting": "on each Ember speaker area lamps / the altar spots",
+    "from": "14 W/m2, altar spots 40 W",
+    "to": "30 W/m2 at 2900 K, altar spots 70 W at 2500 K, cone 40 deg to 28 deg kept on the cabinets, not the curtains"
+   },
+   "expected": "The red cabinets glow through their acrylic with visible white batts, and the green behind them stays deep and dark.",
+   "accept": {
+    "region": [
+     300,
+     225,
+     340,
+     265
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 75
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The record wall is the brightest large surface and is evenly lit, which pulls the eye from the altar and reads as a bookcase texture.",
+   "evidence": {
+    "region": [
+     0,
+     20,
+     180,
+     260
+    ],
+    "measured": "The median is 80 and the p95 126, an even wash."
+   },
+   "change": {
+    "setting": "the record wall spots",
+    "from": "4 x 30 W, cone 34 deg",
+    "to": "4 x 14 W, cone 20 deg, aimed to graze so the sleeves show scallops of light and dark"
+   },
+   "expected": "The record wall drops below the altar in value, with visible scallops and shadow between the shelves.",
+   "accept": {
+    "region": [
+     0,
+     20,
+     180,
+     260
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The concrete reads as flat plaster, and the whole shell is one orange wood, so the room is not specific.",
+   "evidence": {
+    "region": [
+     560,
+     90,
+     720,
+     260
+    ],
+    "measured": "lum_range is 33 and the tone is uniform. There are no tie holes or board grain at 1:1, and the r/g/b medians of 65/49/39 match the timber."
+   },
+   "change": {
+    "setting": "the concrete's tone and sheen; the oak's stain",
+    "from": "a smooth warm grey, oak a mid orange stain",
+    "to": "a cooler mid-grey concrete with a strong board-grain bump and normal, visible tie holes and pour lines, roughness 0.85; oak stained darker (near espresso) so the fir beams and the oak separate"
+   },
+   "expected": "The right wall and the end wall read as board-formed concrete, warming under the 2700 K light, and the fir, oak and concrete become three distinct materials.",
+   "accept": {
+    "region": [
+     560,
+     90,
+     720,
+     260
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The frosted screens read as a dark framed print, not backlit frosted acrylic.",
+   "evidence": {
+    "region": [
+     585,
+     105,
+     640,
+     240
+    ],
+    "measured": "The median is 57, barely above the wall's 52."
+   },
+   "change": {
+    "setting": "the screens' images emission / how rough the frosted acrylic is",
+    "from": "0.5",
+    "to": "1.4, with frost roughness raised so the glow is even and the image soft"
+   },
+   "expected": "The screens glow softly and evenly as panels set in the concrete, at about twice the wall's value.",
+   "accept": {
+    "region": [
+     585,
+     105,
+     640,
+     240
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 95
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The zinc top and the floor have no sheen, so nothing reflects the practicals and the materials read as matte CG.",
+   "evidence": {
+    "region": [
+     180,
+     320,
+     520,
+     480
+    ],
+    "measured": "The floor's median is 25 and its p95 58, with no specular streaks under the pendants or the altar."
+   },
+   "change": {
+    "setting": "the floor's polish; the zinc's patina",
+    "from": "matte floor, dark grey zinc",
+    "to": "floor roughness down to about 0.3 with soft streaked reflections of the altar and the pendants; zinc a lighter, mottled patina, roughness 0.35, so the rounded edge carries a highlight line"
+   },
+   "expected": "A soft red streak of the altar on the floor, and a bright line along the zinc's rounded nosing.",
+   "accept": {
+    "region": [
+     290,
+     300,
+     440,
+     360
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "Lifted blacks and a flat tonal curve give a grey veil, and there are no true blacks or highlights.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "The frame's p1 is 11.8, its p99 141 and its clip 0 %. The y-profile spans only 20 to 56."
+   },
+   "change": {
+    "setting": "render view / look / exposure",
+    "from": "AgX, look None, exposure -0.5",
+    "to": "AgX, look Medium High Contrast, exposure -0.3, after c1 to c3 raise the practicals"
+   },
+   "expected": "Deep but detailed shadows, and practicals near but not at clipping. The frame's median stays in band.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     45
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Reduce the saturated green of the altar zone (curtains and seating) so the red pair is the only strong colour.",
+   "why": "The zone and its colour are fixed by the card. Only the light on it can change (c3 keeps the spots off the green)."
+  },
+  {
+   "request": "Make the banquette visibly curved, as the card describes, rather than straight.",
+   "why": "This is room geometry, fixed by the design. Flag it to the model's owner if the model does not match the proposal."
+  },
+  {
+   "request": "Thicker, more visibly smoked Dome and Orb shells.",
+   "why": "These are EARF products, so their shape and parts are fixed. Only the glow and light levels can change."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

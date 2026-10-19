@@ -1,0 +1,376 @@
+{
+ "stage1": {
+  "impression": "A symmetric, evenly lit CG room. The two red speakers glow salmon-pink like neon signage, and their frames clip, so they read as lit plastic, not cast acrylic. The back wall is an obvious repeating tile grid with no relief, and the velvet chairs, carpet and floor are flat, smooth CG surfaces under one even wash with no pools. It reads as a showroom render of a generic 'red room', not a photograph of a specific listening bar a magazine would publish.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Speaker acrylic reads as thick tinted cast acrylic (deep red body, glowing polished edges, clean reflections), not pink neon: clip_pct < 1 in each speaker region",
+  "End-grain niche wall shows real block-to-block variation in size, tone and relief with no visible repeat at 1:1",
+  "Light falls in pools: altar and table pools with dark between them, wall falloff top to bottom of at least 2:1 rather than flat",
+  "Velvet chairs and wool carpet show pile, sheen on the curves and soft wear instead of flat smooth shading",
+  "Orb lamp reads as smoked tinted acrylic with a frosted liner glowing inside, not an opaque white ball",
+  "Signs of life and specificity in frame (glass on the hex table, a record out of its sleeve, a coat on a chair) and a seated, slightly off-axis lens that says 'a photographer sat here'",
+  "Ceiling/shell (concrete, fir, steel) legible at the frame's top so the zone reads as a room within the bar"
+ ],
+ "defects": [
+  {
+   "region": [
+    185,
+    150,
+    265,
+    315
+   ],
+   "what": "Left speaker frame glows flat salmon-pink, clips (clip_pct 4.15); reads as neon/signage, no glass depth or edge glow"
+  },
+  {
+   "region": [
+    455,
+    150,
+    535,
+    315
+   ],
+   "what": "Right speaker same: clip_pct 4.85, pink plastic look, identical to the left (mirror copy feel)"
+  },
+  {
+   "region": [
+    185,
+    150,
+    265,
+    200
+   ],
+   "what": "Upper horn/top section is a blurry translucent red block; the horn's form is unreadable"
+  },
+  {
+   "region": [
+    130,
+    70,
+    600,
+    320
+   ],
+   "what": "End-grain wall is a regular tiling grid with uniform joints and no relief; lum_range only 19.7 and flat profile 43-46 top to bottom"
+  },
+  {
+   "region": [
+    130,
+    320,
+    600,
+    400
+   ],
+   "what": "Floor/carpet a smooth flat field (lum_range 23.4), no pile, no pools under the altar spots"
+  },
+  {
+   "region": [
+    0,
+    330,
+    250,
+    480
+   ],
+   "what": "Foreground velvet chairs flat CG shading, no pile or sheen, uniform saturated red"
+  },
+  {
+   "region": [
+    380,
+    380,
+    630,
+    480
+   ],
+   "what": "Right foreground chair same flat velvet; its back crops awkwardly into the frame"
+  },
+  {
+   "region": [
+    268,
+    385,
+    322,
+    435
+   ],
+   "what": "Orb lamp reads as an opaque matte white-grey ball (lum_median 111, near-neutral), not smoked acrylic with an inner glow"
+  },
+  {
+   "region": [
+    235,
+    420,
+    345,
+    480
+   ],
+   "what": "Hex table top bright and bare, no glass or prop, no visible oak grain"
+  },
+  {
+   "region": [
+    60,
+    30,
+    660,
+    70
+   ],
+   "what": "Ceiling/header band a featureless dark brown slab; the shell's materials are not legible"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Even, shadowless fill everywhere; dead symmetry; no haze visible in the spot beams"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers' acrylic is overlit from the front and clips to pink, so it reads as neon plastic.",
+   "evidence": {
+    "region": [
+     185,
+     150,
+     265,
+     315
+    ],
+    "measured": "clip_pct 4.15 (right 4.85), lum_p95 197, r 110 g 33 b 32 median with salmon highlights"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area (W/m2 at the target)",
+    "from": "14.0 W/m2, 2900 K",
+    "to": "5.0 W/m2, 2700 K, moved to graze from above/behind so the light enters the acrylic and exits at its polished edges"
+   },
+   "expected": "Deep oxblood cabinet body with glowing edges and a readable horn; no clipped pink frames.",
+   "accept": {
+    "region": [
+     185,
+     150,
+     265,
+     315
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The room is lit by one flat even wash, so there are no pools of light and dark between them.",
+   "evidence": {
+    "region": [
+     300,
+     70,
+     430,
+     320
+    ],
+    "measured": "y profile 43.0, 43.2, 46.6, 45.7, 44.4, 46.4, 43.6, 41.7: flat; floor lum_range 23.4"
+   },
+   "change": {
+    "setting": "the Domes' downlights 4 x spot",
+    "from": "320.0 W, cone 46 deg",
+    "to": "120 W, cone 28 deg, aimed at the hex tables and the plinths; raise the altar 2 x spot from 40 W to 70 W at cone 30 deg"
+   },
+   "expected": "Pools on the tables, the plinths and the carpet in front of the altar, the wall between the speakers falling into shadow.",
+   "accept": {
+    "region": [
+     130,
+     320,
+     600,
+     400
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The end-grain block wall tiles visibly as a regular grid with no relief.",
+   "evidence": {
+    "region": [
+     300,
+     60,
+     430,
+     300
+    ],
+    "measured": "lum_range 19.7, crop shows identical square joints repeating every block"
+   },
+   "change": {
+    "setting": "the end-grain blocks' finish",
+    "from": "one tiled texture, flat",
+    "to": "per-block random tone (+/-15 % value), random block offset and slight size jitter, growth-ring end-grain detail, 1-3 mm relief per block via bump/displacement, darker oiled joints"
+   },
+   "expected": "A hand-laid end-grain wall with visible variation and raking-light relief under the altar spots.",
+   "accept": {
+    "region": [
+     300,
+     60,
+     430,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The velvet chairs and wool carpet are smooth CG surfaces with no pile or sheen.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     250,
+     480
+    ],
+    "measured": "lum_range 81 mostly from edges; faces of the chair flat at r 86 g 32 b 30"
+   },
+   "change": {
+    "setting": "the velvet's and carpet's finish",
+    "from": "plain diffuse",
+    "to": "velvet with sheen (sheen 0.6-0.8, tint 0.5) and fine pile normal map, slight crushed-nap variation; carpet with a loop-pile bump and subtle wear lane in front of the seats"
+   },
+   "expected": "Bright rim sheen on the chair curves against darker faces; carpet reads as wool at 1:1.",
+   "accept": {
+    "region": [
+     0,
+     330,
+     250,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 125
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The smoked Orb reads as an opaque grey-white ball, not tinted acrylic with a glowing liner.",
+   "evidence": {
+    "region": [
+     268,
+     385,
+     322,
+     435
+    ],
+    "measured": "lum_median 111, near-neutral r 137 g 105 b 94, no inner gradient"
+   },
+   "change": {
+    "setting": "the Orb's glow and the frosted acrylic's roughness",
+    "from": "Orb 6.0 W, glow 0.6, frosted liner rough",
+    "to": "Orb 4.0 W, glow 0.9; outer smoked shell glossy (roughness ~0.02) with a clear specular reflection, liner roughness 0.5 so it glows warm inside the dark shell"
+   },
+   "expected": "A dark glossy smoked sphere with a warm glowing core and a sharp window highlight; table pool below it.",
+   "accept": {
+    "region": [
+     268,
+     385,
+     322,
+     435
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     95
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "camera",
+   "problem": "The dead-centre symmetric view with chair backs blocking the bottom third reads as a showroom render, not a photographer's seat.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     720,
+     480
+    ],
+    "measured": "foreground chair backs fill ~30 % of the frame; exact symmetry about x 360"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [11.25, 2.75, 1.35], lens 32 mm, f/4.0",
+    "to": "position about [12.6, 2.2, 1.15] (seated, off-axis toward the right speaker), lens 40 mm, f/2.8 focused on the left speaker; one chair arm and the hex table with props near in soft focus"
+   },
+   "expected": "A seated listener's view: the altar at two-thirds, the nearest chair and table soft in the foreground, believable depth of field.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "No sign of life; the hex table is bare and the room feels unused.",
+   "evidence": {
+    "region": [
+     235,
+     420,
+     345,
+     480
+    ],
+    "measured": "table top lum_median 80, bare surface"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props in the bar zones only",
+    "to": "on the near hex table: a rocks glass with ice and a record sleeve; a record out of its sleeve leaning on one plinth; a coat or scarf over one tub chair arm"
+   },
+   "expected": "The zone reads as used tonight; small highlights in the glass catch the Orb.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The air shows no atmosphere and the altar spots have no visible beams.",
+   "evidence": {
+    "region": [
+     175,
+     100,
+     295,
+     160
+    ],
+    "measured": "spot cones visible on the felt only; no volumetric beam in the air"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.012 per metre",
+    "to": "0.03 per metre"
+   },
+   "expected": "Soft visible cones from the altar spots and a gentle lift in the shadows without milking the blacks.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     45
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the room's surfaces neutral so that the speaker is the only saturated colour",
+   "why": "The card fixes the oxblood zone (chairs, carpet, walls) as the room's design. The red speakers then sink into the red room and lose hero status. That is a design question for the owner, not a render fix."
+  },
+  {
+   "request": "Clarify the speaker's upper horn section, which reads as a blurry red block",
+   "why": "This is the speaker's own shape and parts, which are fixed. Only the lighting on it may change (c1)."
+  },
+  {
+   "request": "Replace the identical mirrored pair or vary their toe-in",
+   "why": "The altar's layout and the Ember pair are fixed."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

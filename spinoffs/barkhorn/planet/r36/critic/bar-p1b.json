@@ -1,0 +1,393 @@
+{
+ "stage1": {
+  "impression": "A long, evenly hazed room that reads as a game-engine or archviz walkthrough, not a night photograph. Contrast is flat, the blacks are lifted to a grey veil and the practicals are dull. The timber, beams, zinc and seats are smooth, untextured surfaces, and the stools are visibly repeated copies. The Ember pair is tiny at the far end; their red edge glow reads as neon signage under green spill rather than as tinted cast acrylic. As shot it reads as a generic bar, not a specific place a design magazine would publish: the altar, the zinc racetrack and the record wall, which make it specific, are all too far away or too flat to read.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember pair must read at a glance as the hero: at least ~12% of the frame width each or clearly framed by the composition, with the light passing through visibly tinted acrylic and white batts, not an outlined red rectangle",
+  "Real tonal range: the practicals (Dome liners, Orbs, candles) are the brightest things in the frame (p99 of the frame > 200 with clip < 0.5%), and the deep shadows sit near lum_p5 6-10 instead of 17.6",
+  "Materials hold at 1:1: the zinc has a patinated, softly reflective top with the pendant pools mirrored in it; the oak has grain and flute shadows; the beams are Douglas fir with checks; board-formed concrete with tie holes is visible somewhere in frame",
+  "No visibly repeated furniture reading as copies (stool and chair variation in angle and position, people's traces)",
+  "Signs of life read in the frame: the coat, the record out of its sleeve, the candles and the half-drunk coupe are visible, not lost",
+  "A believable lens: the 30 mm down an axis 15 m long makes the room feel like a corridor; a photographer would come closer or go longer"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Global veil: frame lum_p5 17.6, p99 140.7, clip 0%. Nothing in frame is bright, so the haze plus exposure -0.5 and AgX give a flat, foggy, low-contrast CG look"
+  },
+  {
+   "region": [
+    295,
+    185,
+    435,
+    270
+   ],
+   "what": "Ember speakers about 40 px wide (~5.5% of the frame width) each; their perimeter glows red like a neon outline (edge step 27 over 1 px at x~327) and the cabinet body is not visible as tinted acrylic"
+  },
+  {
+   "region": [
+    300,
+    190,
+    440,
+    300
+   ],
+   "what": "Green altar spots and the green zone throw saturated green cones onto the back wall above each speaker; the green fights the speaker's red for the eye"
+  },
+  {
+   "region": [
+    20,
+    145,
+    180,
+    195
+   ],
+   "what": "The Dome pendants read as white opal plastic shades (median 128-131, p95 ~166), not smoked acrylic; dull as practicals and not glowing"
+  },
+  {
+   "region": [
+    495,
+    265,
+    720,
+    335
+   ],
+   "what": "The Orbs on the banquette tables are grey, unlit balls (median ~82-88); glow 0.6 is too low to read as a lamp"
+  },
+  {
+   "region": [
+    0,
+    260,
+    280,
+    330
+   ],
+   "what": "The zinc counter top is flat matte grey with clean circular light pools; no patina, no reflection, reads as a CG plane"
+  },
+  {
+   "region": [
+    0,
+    330,
+    260,
+    480
+   ],
+   "what": "The fluted counter front and the chairs are smooth and uniform, with no grain; the foreground chair is soft and cut by the frame edge"
+  },
+  {
+   "region": [
+    250,
+    300,
+    560,
+    480
+   ],
+   "what": "The floor is a uniform dark plane (lum_range 40), no polish, no reflection of the practicals"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    120
+   ],
+   "what": "The ceiling beams and boards are untextured, evenly lit planks with a game-asset look; they take a sixth of the frame with no information"
+  },
+  {
+   "region": [
+    0,
+    30,
+    175,
+    260
+   ],
+   "what": "The record wall is the brightest large area (median 81) and reads as flat repeating spines, drawing the eye away from the altar"
+  },
+  {
+   "region": [
+    255,
+    290,
+    330,
+    440
+   ],
+   "what": "The counter chairs are identical copies in a row, the same angle"
+  },
+  {
+   "region": [
+    585,
+    105,
+    640,
+    240
+   ],
+   "what": "The frosted screen (pressed hands) reads as a framed print on a wall, not frosted acrylic set flush in concrete with an even glow"
+  },
+  {
+   "region": [
+    450,
+    180,
+    540,
+    280
+   ],
+   "what": "A dead dark slab between the altar and the banquette (median 24, range 24): empty, no detail"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speakers are too small and too far away to read; the 30 mm down a 15 m axis makes a corridor, not a cozy room.",
+   "evidence": {
+    "region": [
+     295,
+     185,
+     435,
+     270
+    ],
+    "measured": "each speaker ~40 px of 720 width (5.5%); the altar region median 45.5"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "position [1.4, 2.75, 1.45], 30 mm, focus at [8.0, 3.2, 1.1]",
+    "to": "position about [7.5, 2.6, 1.2] (seated eye level, mid-room, still on axis past the counter's end), 40 mm, f/4 focused on the altar at about [16.0, 3.1, 1.0]; keep level"
+   },
+   "expected": "Each Ember speaker about 12-15% of the frame width, the zinc and the first two pendants still framing the left edge, the banquette and an Orb on the right, the ceiling under 12% of the frame",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speakers' light reads as a red neon outline, not light through tinted cast acrylic.",
+   "evidence": {
+    "region": [
+     300,
+     230,
+     330,
+     260
+    ],
+    "measured": "r_median 104 vs g 50; edge step 27.4 over 1 px; the cabinet body behind the outline at median ~48"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area at 2900 K; the altar 2 x spot",
+    "from": "4 x area 14.0 W/m2 at 2900 K; the altar spots 40.0 W, 2500 K, cone 40",
+    "to": "the area lamps at 6 W/m2 and moved behind and above the cabinet as a back/top light so light passes through the acrylic; the altar spots at 90 W, 2700 K, cone 28, aimed at the cabinets' faces"
+   },
+   "expected": "The whole cabinet glows evenly amber-red with the batts and the horn readable inside; no bright outline",
+   "accept": {
+    "region": [
+     295,
+     210,
+     335,
+     265
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "A global veil from the haze and the exposure flattens the frame; nothing is dark and nothing is bright.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_p5 17.6, p99 140.7, clip 0%"
+   },
+   "change": {
+    "setting": "haze density; render.look; render.exposure",
+    "from": "haze 0.012/m, look None, exposure -0.5",
+    "to": "haze 0.004/m, look 'AgX - Medium High Contrast', exposure -0.3"
+   },
+   "expected": "Deeper, still-detailed shadows and brighter pools; frame median about 32-40",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p5",
+    "op": "between",
+    "value": [
+     5,
+     12
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The practicals are dull: the Domes and the Orbs don't read as lamps, so the light has no believable source.",
+   "evidence": {
+    "region": [
+     495,
+     265,
+     720,
+     335
+    ],
+    "measured": "Orb regions median 82-88; Dome shades median ~130, p95 166"
+   },
+   "change": {
+    "setting": "EARF's lamps liner glow",
+    "from": "each Dome glow 0.6, each Orb glow 0.6 at 6.0 W",
+    "to": "each Dome glow 2.5, each Orb glow 3.0 at 10 W; the Domes' downlights 320 W to 220 W so the pools stay in range"
+   },
+   "expected": "The Dome liners and the Orbs become the brightest objects in their area (p95 of 210-240) without blowing out",
+   "accept": {
+    "region": [
+     20,
+     145,
+     90,
+     180
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     200,
+     245
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The zinc top reads as matte grey CG plastic.",
+   "evidence": {
+    "region": [
+     0,
+     260,
+     280,
+     330
+    ],
+    "measured": "median 45, flat mid-grey pools with hard round edges, no reflection"
+   },
+   "change": {
+    "setting": "the zinc's patina",
+    "from": "a smooth matte grey",
+    "to": "a darker blue-grey patinated zinc, roughness 0.25-0.35 with a cloudy roughness map (wipe marks, ring stains), so the Domes and the glasses reflect softly"
+   },
+   "expected": "Soft reflected highlights of the pendants and the glasses on the top; the pools elongate into reflections",
+   "accept": {
+    "region": [
+     0,
+     260,
+     280,
+     330
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 140
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The green spill above the speakers adds a second saturated colour cone that fights the red hero.",
+   "evidence": {
+    "region": [
+     300,
+     190,
+     440,
+     230
+    ],
+    "measured": "the green cones on the wall above each speaker are visible in the crop; the zone itself is fixed"
+   },
+   "change": {
+    "setting": "the altar's spots",
+    "from": "lighting the green panels above the cabinets (cone 40)",
+    "to": "re-aimed onto the cabinets and the plinth only (cone 28, see c2), so the green zone is lit by spill, not by hot cones"
+   },
+   "expected": "The green reads as a deep, quiet ground; the red cabinets carry the frame's saturation",
+   "accept": {
+    "region": [
+     300,
+     190,
+     440,
+     225
+    ],
+    "metric": "g_median",
+    "op": "<",
+    "value": 45
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The oak, the beams and the floor are untextured, repeated CG surfaces.",
+   "evidence": {
+    "region": [
+     250,
+     300,
+     560,
+     480
+    ],
+    "measured": "the floor lum_range 40.2; the ceiling lum_range 48.9 with uniform planks"
+   },
+   "change": {
+    "setting": "the oak's stain, the floor's polish (and the beams' material)",
+    "from": "smooth uniform finishes",
+    "to": "a dark oak with a visible grain map and roughness variation; the floor a satin polish at roughness 0.3 that picks up the pendant pools; the fir beams with checks and darker end grain"
+   },
+   "expected": "Elongated reflections of the practicals on the floor; grain legible at 1:1 on the counter front and the chairs",
+   "accept": {
+    "region": [
+     250,
+     300,
+     560,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The room looks staged and repeated, with no visible sign of life; the stools are identical copies at identical angles.",
+   "evidence": {
+    "region": [
+     255,
+     290,
+     330,
+     440
+    ],
+    "measured": "a row of identical counter chairs; the coat, the record, the coupe and the candles are not legible"
+   },
+   "change": {
+    "setting": "props and the seats' placement",
+    "from": "the chairs in a regular row; the props small and lost",
+    "to": "each counter chair rotated 5-20 degrees differently, one pulled out; the coat over the nearest chair in frame; the record out of its sleeve and the half-drunk coupe on the zinc in the foreground pool; the candles lit on the banquette tables"
+   },
+   "expected": "The frame reads as a room in use; no visibly identical copies",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Bigger or differently placed Ember speakers, or a speaker colour that sits apart from the green zone",
+   "why": "EARF's products and the zone colour are fixed; c1 and c6 address legibility with the camera and the light instead"
+  },
+  {
+   "request": "Smoked rather than opal-looking Dome covers",
+   "why": "The Dome is EARF's product; if the model's cover material doesn't read as smoked acrylic, that is a model or asset question for the owner, not a picture fix"
+  },
+  {
+   "request": "Board-formed concrete and blackened steel visible in this view",
+   "why": "The materials and layout are fixed; the card names them but they barely read here. Check that the model carries them; c1's camera move may bring the steel back bar and the concrete into frame"
+  }
+ ],
+ "score_if_fixed": 6.8
+}

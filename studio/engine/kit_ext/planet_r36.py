@@ -46,7 +46,7 @@ _M = {}
 # --- materials -----------------------------------------------------------------------------------------------------
 def dark_oak(bpy, vertical=False, name='oak-dark'):
     """Dark oak, oiled: the walnut scan darkened and cooled toward fumed oak."""
-    return D.walnut(bpy, vertical=vertical, coat=0.35, coat_rough=0.35, tint='#2B2018', mix=0.45, name='-' + name)
+    return D.walnut(bpy, vertical=vertical, coat=0.35, coat_rough=0.35, tint='#1C140E', mix=0.6, name='-' + name)
 
 
 def zinc(bpy):
