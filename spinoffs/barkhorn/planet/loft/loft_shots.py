@@ -60,10 +60,28 @@ def lamp_spots(v):
     return out + [list(b) for b in v.get('extra_bells', [])]
 
 
+MOON = True                              # EARF Moon (the companions' bar lamps, 2026-10-19): the working pick until the
+                                         # owner chooses; False puts back the plain placeholders
+
+
 def room_piece(v, _rp=room_piece):
     out = _rp(v)
-    out['table_lamps'] = lamp_spots(v)
+    moon = v.get('moon', MOON)
+    out['table_lamps'] = [] if moon else lamp_spots(v)
+    out['moon_pendants'] = moon                                       # the kit leaves out its frosted tubes
     return out
+
+
+def moon_pieces(v):
+    """EARF Moon: a table lamp wherever the plain lamp stood, a pendant over the bar at each downlight (its rim where
+    the tubes' rims were). Smoked acrylic: the Ember stays the frame's one colour."""
+    fl = v.get('moon_flavour', 'smoked')
+    y = LP.BAR_FRONT + 0.18
+    return [{'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'table', 'spots': lamp_spots(v), 'flavour': fl,
+             'lamp_w': v.get('moon_table_w', 6.0), 'lamp_k': 2700, 'shade_glow': v.get('moon_glow', 1.0)},
+            {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'pendant', 'flavour': fl,
+             'spots': [[x, round(y, 4), LP.PENDANT_RIM] for x in LP.PENDANTS], 'ceiling': LP.CEIL,
+             'lamp_w': v.get('moon_pendant_w', 14.0), 'lamp_k': 2700, 'shade_glow': v.get('moon_glow', 1.0)}]
 
 
 S.room_piece = room_piece
@@ -83,7 +101,8 @@ _props = S.props
 def props(v):
     """The den's props without its scanned bar stools and its banquette's chairs: the kit builds the booths and the
     stools and chairs after Fyrn (the owner, 2026-10-19)."""
-    return [o for o in _props(v) if o.get('model') not in ('bar_chair_round_01', v.get('chair_model', 'dining_chair_02'))]
+    out = [o for o in _props(v) if o.get('model') not in ('bar_chair_round_01', v.get('chair_model', 'dining_chair_02'))]
+    return out + (moon_pieces(v) if v.get('moon', MOON) else [])
 
 
 S.props = props
@@ -96,7 +115,7 @@ def lights(v):
     for k, l in L.items():                          # the spots are fittings, never bare discs to the camera (street-p14)
         if k.startswith(('rec', 'pend', 'niche', 'entry')):
             l['camera'] = False
-    for i, (x, y, z) in enumerate(lamp_spots(v)):
+    for i, (x, y, z) in enumerate([] if v.get('moon', MOON) else lamp_spots(v)):   # Moon carries its own lamps
         L[f'tlamp{i}'] = {'type': 'point', 'position': [x, y, round(z + 0.27, 4)], 'power_w': v['bell_w'],
                           'radius_m': 0.02, 'color': v.get('tlamp_k', 2700), 'camera': False}
     return L
@@ -106,20 +125,18 @@ S.lights = lights
 
 VIEWS = {
     'bar': {'title': 'the bar, down the room',
-            # the owner's seating (booths, stools after Fyrn) from p8. After the two critics on p9 (4.5, 4.5): the
-            # speaker a small red smudge: closer, by the stools on 40 mm, aimed at it, and lit harder; the screen out-
-            # shone it, cool: dimmer and warm; the shelf edges and the inlay read as LED strips and phone screens: down;
-            # the near booth crushed: its lamp up; the pendants clipped: their lamps down
-            # (p10, not judged: from the stools on 40 mm the frame became the lounge, the booths out, chairs and lamps
-            # across both speakers: back down the bar on 35 mm, nearer than p9)
-            'camera': {'position': [3.0, 2.4, 1.35], 'target': [16.15, 3.9, 1.0], 'lens_mm': 35, 'level': True,
-                       'fstop': 4.0, 'focus': [9.0, 3.0, 1.0]},
+            # EARF Moon in (the lead, 2026-10-19: the companions' bar lamps, smoked): a pendant at each downlight over
+            # the bar, a table lamp on each booth's table and the window table; a new look, so the count restarts.
+            # p9's frame (4.5, the best bar) with bar p9's two critics' shared light changes (as p10 had them): the
+            # speaker 50 W/m2; the screen 0.2 warm; the shelf edges 0.35; the inlay 1.0
+            'camera': {'position': [1.6, 2.3, 1.45], 'target': [17.0, 3.4, 1.2], 'lens_mm': 28, 'level': True,
+                       'fstop': 5.6, 'focus': [7.0, 3.0, 1.0]},
             'settings': {'exposure': 1.0, 'wb': 3000, 'shelf_glow': 0.35, 'niche_glow': 0.3, 'spot_niche': 400.0,
                          'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 700.0,
-                         'pendant_cone': 40.0, 'pendant_glow': 0.15, 'pendant_lamp': 1.5, 'shade_glow': 0.6,
-                         'inlay_glow': 1.0, 'haze': 0.015, 'screen_glow': 0.2, 'screen_tint': '#FFA060',
-                         'screen_gap': 0.04, 'screen_rough': 0.22, 'bell_w': 200.0, 'sconce_w': 25.0,
-                         'spot_records': 6.0, 'rec_cone': 40.0, 'record_glow': 0.3, 'candle_w': 2.4, 'tlamp_glow': 0.2,
+                         'pendant_cone': 40.0, 'shade_glow': 0.6, 'inlay_glow': 1.0, 'haze': 0.015,
+                         'screen_glow': 0.2, 'screen_tint': '#FFA060', 'screen_gap': 0.04, 'screen_rough': 0.22,
+                         'moon_table_w': 40.0, 'moon_pendant_w': 30.0, 'moon_glow': 1.0, 'sconce_w': 25.0,
+                         'spot_records': 6.0, 'rec_cone': 40.0, 'record_glow': 0.3, 'candle_w': 2.4,
                          'spk_irr': 50.0, 'spk_back': 90.0, 'spk_spread': 90.0, 'spk_link': True,
                          'chair_dye': '#4A3A32',
                          'chair_move': {'1': [0.0, -0.25, 0.0], '4': [0.0, 0.30, 0.0], '6': [0.30, 0.25, 0.0]}}},

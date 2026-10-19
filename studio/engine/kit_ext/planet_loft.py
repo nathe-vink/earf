@@ -374,7 +374,9 @@ def _bottles(bpy, p, objs, runs):
 # --- small things -------------------------------------------------------------------------------------------------
 def pendants(bpy, kit, p, objs):
     """Frosted acrylic cylinders over the bar: 180 mm across, 320 tall, 15 mm walls, a steel cap, a cloth cord; the
-    lamp inside lights the tube from within."""
+    lamp inside lights the tube from within. (The placeholder: with `moon_pendants` the shot hangs EARF Moon here.)"""
+    if p.get('moon_pendants'):
+        return
     tube = Mesh('pendant-tubes'); cap = Mesh('pendant-caps'); cord = Mesh('pendant-cords'); glow = Mesh('pendant-lamps')
     y = P.BAR_FRONT + 0.18; zr = P.PENDANT_RIM
     for x in P.PENDANTS:

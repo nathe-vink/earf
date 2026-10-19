@@ -1,0 +1,353 @@
+{
+ "stage1": {
+  "impression": "A believable night view from the kerb into a deep, warm, timber-and-concrete bar: the table-lamp pool in the foreground and the far listening room work in layers, and the palette is right (brown and black, one red accent). It still reads as CG. The frosted EARF letters are big, flat and grey-brown and look like an opaque vinyl sticker. The left pier is a flat beige slab. The glass carries almost no street reflection. The red Ember speaker at the far end is a small, soft pink box that you only find once you go looking for it, and the dancer lightbox is cut off at the right edge.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The frosted acrylic dancer lightbox, the frame's stated subject, must sit fully in frame and read at a glance. Today it is a 20 px sliver at x 700-720.",
+  "The Ember speaker must read as a horn loudspeaker (silhouette, tint, light through the acrylic) in its own clear window of the glass. It must not be a pink rectangle about 27 x 55 px that the egg chairs and stools half hide.",
+  "The shopfront glass has to behave like glass at night: faint reflections of the street lamps and the street, and the frosted name glowing softly on its polished edges instead of an opaque flat fill.",
+  "The blackened-steel shopfront (mullion, pier, sill) needs a near-black, unevenly sheened, sharp-edged metal read. The left pier is currently a flat beige band.",
+  "The frame median should move into 24-35 without lifting the blacks into grey, and the room needs pools of light separated by atmosphere.",
+  "Full-resolution craft check: at 0.3 scale the interior is soft throughout, so denoiser smear and texture tiling cannot yet be ruled out."
+ ],
+ "defects": [
+  {
+   "region": [
+    690,
+    110,
+    720,
+    240
+   ],
+   "what": "Dancer lightbox cut by the frame edge. Only a pale strip with a hint of figure shows."
+  },
+  {
+   "region": [
+    540,
+    240,
+    575,
+    305
+   ],
+   "what": "Ember speaker tiny and soft, partly occluded by chairs. It reads as a pink box with a white disc, not a horn speaker. 3.9% clipped inside it."
+  },
+  {
+   "region": [
+    0,
+    0,
+    18,
+    480
+   ],
+   "what": "Left pier/jamb is a flat, untextured beige band (lum_median 83.5, range 29), the brightest large surface in the frame. It reads as a CG plane."
+  },
+  {
+   "region": [
+    15,
+    80,
+    300,
+    195
+   ],
+   "what": "Frosted EARF letters are an opaque grey-brown fill with no edge glow and no diffusion of what is behind them. They read as a vinyl sticker or signage. The E is cropped by the left edge."
+  },
+  {
+   "region": [
+    330,
+    0,
+    352,
+    480
+   ],
+   "what": "Steel mullion splits the frame almost at its centre. It is a uniform dark bar with no sheen or edge highlight."
+  },
+  {
+   "region": [
+    100,
+    60,
+    330,
+    250
+   ],
+   "what": "Back-bar shelves' lit edges are uniform bright lines like an LED strip, more showroom than kissa."
+  },
+  {
+   "region": [
+    340,
+    0,
+    720,
+    130
+   ],
+   "what": "Fir beams carry thin, even orange edge lines. The ceiling reads as stripes rather than timber with checks and darker end grain."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No reflections on the shopfront glass from the street lamps or the street, so the glass is invisible except for the letters."
+  },
+  {
+   "region": [
+    130,
+    315,
+    160,
+    350
+   ],
+   "what": "Table-lamp drum 36.7% clipped. Acceptable for a practical, but the hot core has no gradation."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame's subject, the dancer lightbox, is cut off at the right edge, the mullion sits dead centre, and the speaker is too small to be the hero.",
+   "evidence": {
+    "region": [
+     690,
+     110,
+     720,
+     240
+    ],
+    "measured": "Lightbox occupies only the last 20 px of width (lum_median 76). The Ember speaker region [545,245,572,300] is about 0.4% of the frame."
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [-2.5, 2.7, 1.5], target [7.35, 4.44, 1.4], 40 mm",
+    "to": "position [-2.2, 2.3, 1.45], target [7.35, 3.6, 1.35], 40 mm. Swing right so the lightbox sits fully inside the right third, the mullion falls near the left third line, the EARF letters stay whole in the left pane, and the Ember speaker is seen through clear glass clear of the egg chairs."
+   },
+   "expected": "Lightbox fully in frame with its fogged dancer legible. Mullion off-centre. Speaker unobstructed and somewhat larger relative to its neighbours.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Ember speaker does not read as the hero. Its tint and the light through its acrylic are a flat pink smear with a clipped hot spot.",
+   "evidence": {
+    "region": [
+     545,
+     245,
+     572,
+     300
+    ],
+    "measured": "lum_median 66, lum_p95 192, clip_pct 3.9; r/g/b median 109/54/40 (pinkish-brown rather than a saturated ember red)"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area, W/m2; the lamps and pinholes on the speakers; record-wall spot",
+    "from": "22.0 W/m2, 2700 K; speaker pinhole/lamp as now; record wall 62 W",
+    "to": "30 W/m2 at 2700 K with the areas moved to graze the cabinet from both sides and behind (rim light on the silhouette). Halve the speaker's pinhole/lamp emission so it stops clipping. Record wall 62 \u2192 45 W so the speaker stands brighter than the wall behind it."
+   },
+   "expected": "The cabinet edges glow red through the cast acrylic with a readable silhouette, the white batts are visible inside, and there is no clipped core.",
+   "accept": {
+    "region": [
+     545,
+     245,
+     572,
+     300
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The frosted EARF name reads as an opaque flat sticker instead of etched/frosted acrylic on glass.",
+   "evidence": {
+    "region": [
+     60,
+     80,
+     300,
+     195
+    ],
+    "measured": "lum_median 27.8, lum_range 38: nearly flat fill, no edge glow, no visible diffusion of the shelves behind"
+   },
+   "change": {
+    "setting": "the window's frosted name emission and the frosted acrylic roughness",
+    "from": "emission 0.004, current roughness",
+    "to": "emission 0.0015 with roughness about 0.35 (thinner frost so the warm room diffuses through it) and a polished bevelled edge that picks up the street lamps"
+   },
+   "expected": "Letters read as a soft translucent frost with warm room colour through them and thin bright edges. The shelves behind show as blurred shapes.",
+   "accept": {
+    "region": [
+     60,
+     80,
+     300,
+     195
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The left pier is a flat beige plane, the largest bright surface in the frame. It pulls the eye and reads as CG.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     18,
+     480
+    ],
+    "measured": "lum_median 83.5, lum_range 29.4, r/g/b 102/79/72"
+   },
+   "change": {
+    "setting": "blackened steel patina of the shopfront; street lamps",
+    "from": "current steel finish; street lamps 3 x 260 W",
+    "to": "blackened steel with uneven roughness 0.35-0.6 and a brownish patina on the pier and mullion. Street lamps 260 \u2192 180 W, with one placed to throw a hard specular edge down the mullion."
+   },
+   "expected": "The pier reads near-black with a soft, uneven sheen and a sharp lit edge.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     18,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 45
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "Shopfront glass at night shows no reflections, so it does not read as glass and the image loses its 'from the kerb' truth.",
+   "evidence": {
+    "region": [
+     350,
+     140,
+     720,
+     480
+    ],
+    "measured": "No visible reflected street lamps or street features anywhere on the glass by eye. The floor area [350,320,720,480] has lum_median 18.8 with only the interior red reflection."
+   },
+   "change": {
+    "setting": "street props and glass reflectance",
+    "from": "street lamps only, nothing behind the camera",
+    "to": "add an opposite fa\u00e7ade with a few lit windows and a parked car behind the camera. Keep the glass at a real IOR 1.5 so they reflect at about 4% as faint shapes over the dark lower panes."
+   },
+   "expected": "Faint, clean, undistorted reflections in the darker lower glass, mostly in the lower third.",
+   "accept": {
+    "region": [
+     350,
+     380,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The frame sits just under the night-interior target, and the mid-room furniture (stools, bar front) drops into murk.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 20.8 (target 22-50), below_40_pct 86.6"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "1.7",
+    "to": "1.9"
+   },
+   "expected": "Frame median about 25-30 with blacks still holding. Stools and bar front legible.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     35
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The room lacks atmosphere between its pools. Pendants and niches do not separate in depth, and the back reads flat.",
+   "evidence": {
+    "region": [
+     440,
+     180,
+     535,
+     245
+    ],
+    "measured": "record-wall region lum_median 34.9, p95 162: hot spots on a dull field with no falloff halo"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.005 per metre",
+    "to": "0.012 per metre"
+   },
+   "expected": "Soft cones under the pendants and record-wall spots, more depth between the bar, the listening room and the back.",
+   "accept": {
+    "region": [
+     440,
+     180,
+     535,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     60
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The back-bar shelves' lit edges are bright uniform lines that read as LED strip display shelving.",
+   "evidence": {
+    "region": [
+     100,
+     60,
+     330,
+     250
+    ],
+    "measured": "thin continuous bright lines along each shelf, the same intensity end to end"
+   },
+   "change": {
+    "setting": "the shelves' lit edges",
+    "from": "0.25",
+    "to": "0.12"
+   },
+   "expected": "Shelf edges become a subtle glow that lets the bottles catch small highlights instead.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember speaker larger in frame by moving it nearer the window",
+   "why": "The listening room's layout and the speaker's position are fixed by the room's design. Only the camera may change."
+  },
+  {
+   "request": "Replace the egg chairs that partly hide the speaker",
+   "why": "The furniture and listening-room layout are fixed. The camera reframe in c1 should clear the sightline instead."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
