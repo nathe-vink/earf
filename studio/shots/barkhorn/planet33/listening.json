@@ -54,7 +54,7 @@
      ]
     },
     {
-     "flavour": "cloud-black",
+     "flavour": "birch-fog-clear",
      "position": [
       4.66,
       5.885,
@@ -66,7 +66,7 @@
      ]
     },
     {
-     "flavour": "cloud-black",
+     "flavour": "birch-fog-clear",
      "position": [
       9.06,
       5.885,
@@ -611,8 +611,9 @@
     0.35,
     0.35
    ],
-   "irradiance": 28.0,
-   "color": 3000
+   "irradiance": 20.0,
+   "color": 3000,
+   "spread_deg": 30.0
   },
   "spkb0": {
    "type": "area",
@@ -650,8 +651,9 @@
     0.35,
     0.35
    ],
-   "irradiance": 28.0,
-   "color": 3000
+   "irradiance": 20.0,
+   "color": 3000,
+   "spread_deg": 30.0
   },
   "spkb1": {
    "type": "area",
@@ -1251,7 +1253,7 @@
    6.05,
    3.32
   ],
-  "density": 0.025,
+  "density": 0.008,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },

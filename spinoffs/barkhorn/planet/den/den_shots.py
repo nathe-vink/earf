@@ -87,7 +87,7 @@ def lights(v):
             fx, fy = math.sin(math.radians(rot)), -math.cos(math.radians(rot))
             L[f'spk{k}'] = {'type': 'area', 'position': [round(x + 0.9 * fx, 3), round(y + 0.9 * fy, 3), P.CEIL - 0.2],
                             'target': [x, y, 0.75], 'size_m': [0.35, 0.35], 'irradiance': v['spk_irr'],
-                            'color': v.get('spk_k', 2700)}
+                            'color': v.get('spk_k', 2700), 'spread_deg': v.get('spk_spread', 180)}
             if v.get('spk_back', 0) > 0:                              # low behind the cabinet, lighting through it
                 L[f'spkb{k}'] = {'type': 'area', 'position': [round(x - 0.55 * fx, 3), round(y - 0.55 * fy, 3), 0.35],
                                  'target': [x, y, 0.65], 'size_m': [0.3, 0.3], 'irradiance': v['spk_back'],
@@ -227,9 +227,11 @@ VIEWS = {
                   # brick a foreground layer
                   'camera': {'position': [14.6, 2.0, 0.95], 'target': [16.3, 4.5, 0.75], 'lens_mm': 35, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, P.PAIR['y'][1], 0.9]},
-                  'settings': {'spk_irr': 28.0, 'spk_k': 3000, 'spk_back': 6.0, 'sconce_w': 4.0, 'shade_glow': 0.02,
-                               'wb': 2900, 'exposure': -0.8, 'spot_records': 4.0, 'rec_cone': 40.0, 'rec_aim_z': 1.2,
-                               'record_glow': 0.3, 'haze': 0.025, 'console_lift': 0.55,
+                  # (p7: 28 W/m2 in 0.025 haze veiled the frame milky) the lamp on each speaker held to a 30 deg
+                  # spread so it lights the cabinet, not the room; the haze back to 0.008
+                  'settings': {'spk_irr': 20.0, 'spk_spread': 30.0, 'spk_k': 3000, 'spk_back': 6.0, 'sconce_w': 4.0,
+                               'shade_glow': 0.02, 'wb': 2900, 'exposure': -0.8, 'spot_records': 4.0, 'rec_cone': 40.0,
+                               'rec_aim_z': 1.2, 'record_glow': 0.3, 'haze': 0.008, 'console_lift': 0.55,
                                # the lead: red acrylic on red brick is a hue clash; the brick much darker and aged, so
                                # the speaker's own light separates it
                                'brick_tint': '#3A2C25', 'brick_mix': 0.65}},
