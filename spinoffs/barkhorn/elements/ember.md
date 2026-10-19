@@ -104,3 +104,15 @@ under the crust); lava pieces now take `tex_scale`, and A, which still says `sca
 | A2-1 | `proofs31/element-ember-a2-p1.jpg` (5123b2a) | 4.5 iterate (if fixed 7.0) | the lava glossy, like wet plastic, the core pink-white; a hard hotspot on the horn's right half and a strip down the cabinet's edge from the hidden lamps; the front still dark (median 19.5); the slab striated; no red pool at the base; few embers, no steam seen; the cone a soft dome, the sky a flat band |
 | A2-2 | `proofs31/element-ember-a2-p2.jpg` (189231d) | 5.5 iterate (if fixed 7.0) | the speaker lights no ground round it, no contact shadow; the cabinet dim (median 25) under a bright horn; the rock right of it cold blue; the slab a smooth plane; embers thin straight dashes, no steam seen; the crater a pink sun; the sky the brightest area (median 82); dark blobs of slab at the bottom edge |
 | A2-3 | `proofs31/element-ember-a2-p3.jpg` (2acaff8) | 5.0 iterate (if fixed 7.3) | the horn a lightbox (median 98) four times the cabinet (24), the cabinet evenly red with no key from the lava's side; still no red pool at its foot (the rock there bluish); the foreground slab a smooth dark mass; the lava too far from the speaker, a set piece on the left; embers uniform dashes; the cone a silhouette with a blob of glow |
+| A2-4 | `proofs31/element-ember-a2-p4.jpg` (7875a80) | 5.0 iterate (if fixed 7.3) | the flow wet and glossy, its core a reflected sunset stripe; embers identical vertical dashes; no red pool or contact shadow (the red lamp at the foot does not show on rock of albedo 0.045); the cabinet front-lit and flat, the horn 2.6x brighter with a white smear; slabs and boulders smooth rounded shells; the sky a flat lavender wash; the crater a pink blob |
+
+**Duel, A2 against the live A (4193846's `ember.png`, scaled to 1200 x 800) with A2's best proof (p2, 5.5), shuffled
+blind: the live A 6.0, A2 5.5; the judge prefers the live A.** For A2: the lava a convincing glowing river with depth
+(A's reads as speckled confetti), a strong volcano silhouette with a lit summit and a leading line. For A: the horn's
+real glossy reflections against A2's flat emissive slab; the cabinet modelled by a side key against A2's flat front;
+warm light and a soft shadow at the foot against A2's crushed, cool base; fine cracked texture in A's foreground
+against A2's soft blobby blocks. **A stays live; A2 stops here** (the lead's cap: about five passes, up only if it wins).
+What A2 shows is worth carrying into a future round on A: one flow with a broken core and matte crust (passes 2 to 4
+stopped calling the lava speckle), a cone in place of the ridge. What it lost on is the speaker's light, which A had
+right and A2 changed: keep A's lamps behind and their reflections in the horn, light the foot from the lava's side
+rather than a red lamp (rock of albedo 0.045 shows none of it), and keep A's finer ground.
