@@ -13,8 +13,9 @@ Everything here is a working assumption, made for the owner to overturn.
 
 FT = 0.3048
 
-# --- the shell: a typical SF ground-floor storefront, 23 x 56 ft, 11 ft 2 in ceiling --------------------------------
-W = 7.00                         # wide (the frontage)
+# --- the shell: a typical SF ground-floor storefront, 20 x 56 ft, 11 ft 2 in ceiling --------------------------------
+W = 6.10                         # wide: a 20 ft frontage, common in the Mission (the lead, 2026-10-19: at 7 m the
+                                 # aisle between stools and chairs was 2.4 m, a runway; at 6.1 m it is about 1.5 m)
 L = 17.00                        # deep, the shopfront to the back wall
 CEIL = 3.40                      # the plaster ceiling
 WALL_T = 0.25                    # party walls (brick, plastered in the front, bare in the listening room)
@@ -23,7 +24,7 @@ WAINSCOT = 1.15                  # the walnut panelling's head on the plaster wa
 # --- the shopfront (x = 0): a recessed door on the right, the display window, a transom over both -------------------
 ENTRY = dict(y0=0.30, y1=1.60, depth=1.20)       # the recessed vestibule; the door at its back, x = depth
 DOOR = dict(y0=0.42, y1=1.48, h=2.30)            # the door itself (a half-glazed walnut door), in the vestibule's back
-WINDOW = dict(y0=1.85, y1=6.75, sill=0.55, head=2.50)     # the display window over a panelled bulkhead
+WINDOW = dict(y0=1.85, y1=W - 0.25, sill=0.55, head=2.50)     # the display window over a panelled bulkhead
 TRANSOM = dict(z0=2.62, z1=3.22)                 # the transom lights across the whole front, over the door and window
 CAFE = dict(z0=0.58, z1=1.45, rod=1.47)          # café curtains on a brass rod across the window's lower half
 SIGN = dict(z=1.80, w=1.10)                      # EARF's wordmark in gold leaf on the window, at eye height (centred)

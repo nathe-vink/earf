@@ -154,7 +154,7 @@ def plan_sheet(pg):
     pg.text(X(0.25), Y(-T) - 22, f'{sum(S.values())} seats; occupant load {P.CAPACITY} (Group B, under 50)', ha='left',
             va='center', size=7.1)
     pg.dim((X(0), Y(-T) - 5), (X(L), Y(-T) - 5), -4, f'{L * 1000:.0f}  (56 ft)')
-    pg.dim((X(L + T) + 3, Y(0)), (X(L + T) + 3, Y(W)), -4, f'{W * 1000:.0f}  (23 ft)')
+    pg.dim((X(L + T) + 3, Y(0)), (X(L + T) + 3, Y(W)), -4, f'{W * 1000:.0f}  (20 ft)')
     pg.dim((X(P.BAR_X0), Y(W + T) + 3), (X(P.BAR_X1), Y(W + T) + 3), 3, f'bar {(P.BAR_X1 - P.BAR_X0) * 1000:.0f}')
     # the legend
     lx0, ly0 = 22, 64

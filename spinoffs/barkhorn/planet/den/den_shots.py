@@ -165,11 +165,11 @@ VIEWS = {
                'settings': {'exposure': 0.4, 'wb': 3500, 'wet': True, 'road_rough': 0.12, 'street_lamp': 250.0, 'gold_glow': 0.06, 'siding': '#8E9384'}},
     'bar': {'title': 'the bar, from the window table',
             'settings': {'exposure': 0.8},
-            'camera': {'position': [2.10, 3.10, 1.38], 'target': [9.6, 5.9, 1.05], 'lens_mm': 30, 'level': True,
-                       'fstop': 5.6, 'focus': [6.0, 5.2, 1.1]}},
+            'camera': {'position': [2.10, 2.70, 1.32], 'target': [9.6, 5.0, 1.05], 'lens_mm': 30, 'level': True,
+                       'fstop': 5.6, 'focus': [6.0, 4.3, 1.1]}},
     'listening': {'title': 'the listening room, one of the Ember pair',
-                  'camera': {'position': [15.0, 2.0, 1.12], 'target': [16.25, 5.6, 0.95], 'lens_mm': 30, 'level': True,
-                             'fstop': 4.0, 'focus': [16.15, 5.75, 0.9]}},
+                  'camera': {'position': [15.0, 2.0, 1.12], 'target': [16.35, 5.0, 0.95], 'lens_mm': 30, 'level': True,
+                             'fstop': 4.0, 'focus': [16.15, P.PAIR['y'][1], 0.9]}},
 }
 
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.10, 'clarity': 0.06, 'sharpen': 0.3,

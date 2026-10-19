@@ -187,7 +187,7 @@ def shopfront(bpy, kit, p, objs):
     fr.box(x0 - 0.05, Wn['y0'] - 0.03, Wn['sill'] - 0.04, x1, Wn['y1'] + 0.03, Wn['sill'])   # the sill
     fr.box(x0, Wn['y0'], Wn['head'], x1, Wn['y1'], Tr['z0'])                   # the head
     fr.box(x0 - 0.06, -P.WALL_T, Tr['z0'] - 0.04, x1, W + P.WALL_T, Tr['z0'] + 0.04)        # the transom bar
-    for yy in [-P.WALL_T + 0.0, 1.15, 2.30, 3.45, 4.60, 5.75, W + P.WALL_T - 0.06]:
+    for yy in [-P.WALL_T + (W + 2 * P.WALL_T - 0.06) * k / 6 for k in range(7)]:
         fr.box(x0, yy, Tr['z0'], x1, yy + 0.06, Tr['z1'])                     # the transom's mullions
     fr.box(x0, -P.WALL_T, Tr['z1'], x1, W + P.WALL_T, H + 0.3)                 # the fascia over it
     # the bulkhead's raised panels
@@ -566,6 +566,8 @@ def glassware(bpy, kit, p, objs):
     spots = [(x, yb + rnd.uniform(-0.03, 0.03), zt, rnd.choice(['rocks', 'rocks', 'coupe'])) for x in (3.9, 4.75, 5.4, 7.1, 7.9, 9.4)]
     spots += [(cx - 0.12, T['y'] + 0.10, T['h'], 'rocks') for cx in P.TABLES] + \
              [(cx + 0.10, T['y'] + 0.16, T['h'], 'coupe') for cx in P.TABLES[1::2]]
+    wx, wy = P.WINDOW_TABLE                                           # two at the window table, a pour in each
+    spots += [(wx + 0.12, wy + 0.14, T['h'], 'rocks'), (wx - 0.06, wy - 0.18, T['h'], 'coupe')]
     spots += [(P.SIDE_TABLES[0][0] - 0.06, P.SIDE_TABLES[0][1] - 0.07, 0.50, 'rocks'),
               (P.SIDE_TABLES[1][0], P.SIDE_TABLES[1][1] + 0.08, 0.50, 'rocks')]
     gl = Mesh('glasses'); lq = Mesh('pours')

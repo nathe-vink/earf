@@ -21,7 +21,7 @@ go anywhere.
 ## The room
 
 You come in off the sidewalk into a recessed entry with a white mosaic floor, through a half-glazed door, and past an
-oxblood velvet curtain. The room is 7 m wide and 17 m deep under a dark plaster ceiling. On the left runs the bar,
+oxblood velvet curtain. The room is 6.1 m (20 ft) wide and 17 m deep under a dark plaster ceiling. On the left runs the bar,
 6.9 m of reeded walnut on an aged-brass kick, with an oiled walnut top, an oxblood leather armrest and a brass
 footrail, under three spun-brass pendants. Behind it is the back-bar: walnut, an antique mirror, and three shelves of
 bottles, each lit warm from a strip under its front edge. The Smoke pair stands in two walnut niches among the bottles,
@@ -55,7 +55,7 @@ panelled bulkhead, prism-glass transoms lit from inside, and EARF's wordmark in 
 
 ## Assumptions (each one the owner's to overturn)
 
-- **Site:** a mid-block ground floor, 7.0 x 17.0 m (23 x 56 ft, about 1,280 sq ft), 3.4 m ceiling, brick party walls,
+- **Site:** a mid-block ground floor, 6.1 x 17.0 m (20 x 56 ft, about 1,120 sq ft; first drawn 7 m wide, narrowed so the aisle between stools and chairs is about 1.5 m, not 2.4), 3.4 m ceiling, brick party walls,
   flats above. The site's neighbourhood is unnamed and the street has no landmarks.
 - **Capacity:** 29 seats (bar 10, banquette 10, window 2, listening room 7); occupant load 40, Group B, so no Place of
   Assembly permit.
@@ -79,7 +79,7 @@ What changes:
 
 - **No back-lit acrylic** means no CC1/CC2 plastics classification and none of the $10,000 to $31,000 back-lit front.
   Walnut joinery (a reeded front, a back-bar, wainscot, a record wall, bookshelves, a slat ceiling) is the larger line.
-- **Smaller:** about 30 % less floor area to lease and build out than round 32's 1,800 sq ft.
+- **Smaller:** about 38 % less floor area to lease and build out than round 32's 1,800 sq ft.
 - **Velvet curtains and upholstery** need a flame-retardant (NFPA 701 / CA TB 117-2013) rating.
 
 ## The owner's open questions
