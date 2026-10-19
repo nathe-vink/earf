@@ -427,14 +427,10 @@ class _patched:
             setattr(P, k, v)
 
 
-def room(bpy, name, p, kit):
-    objs = []
-    p = {**p, 'lounge_slats': False, 'sleeves_muted': True, 'cafe': False}
-    if p.get('screen_tint'):
-        _SCREEN_TINT['tint'] = p['screen_tint']                  # no café curtains: the room shows (street-r4)
-    shell(bpy, kit, p, objs)
-    screens(bpy, kit, p, objs)
-    wood = dict(walnut=lambda bpy, vertical=False, **k: fir(bpy, vertical=vertical),
+def patches(p):
+    """The den's builders in the loft's materials: walnut to fir, brass to steel, velvet to wool, the shades and the
+    sign frosted acrylic, the shopfront steel, no café curtains (round 36 shares it)."""
+    return dict(walnut=lambda bpy, vertical=False, **k: fir(bpy, vertical=vertical),
                 brass=lambda bpy, aged=True: steel(bpy),
                 leather=lambda bpy, *a, **k: dark_leather(bpy),
                 velvet=lambda bpy, colour, name: wool(bpy),
@@ -448,6 +444,16 @@ def room(bpy, name, p, kit):
                 # acid etch on a thin film, part clear, part a warm translucent scatter of the room's light behind it
                 sign_mat=lambda bpy, p: etch_mat(bpy, p),
                 _curtain=lambda *a, **k: None)
+
+
+def room(bpy, name, p, kit):
+    objs = []
+    p = {**p, 'lounge_slats': False, 'sleeves_muted': True, 'cafe': False}
+    if p.get('screen_tint'):
+        _SCREEN_TINT['tint'] = p['screen_tint']                  # no café curtains: the room shows (street-r4)
+    shell(bpy, kit, p, objs)
+    screens(bpy, kit, p, objs)
+    wood = patches(p)
     with _patched(**wood):
         D.shopfront(bpy, kit, p, objs)
         bar(bpy, kit, p, objs)
