@@ -228,6 +228,9 @@ def shopfront(bpy, kit, p, objs):
              (-0.09, Wn['y0'], Wn['head'])])
     if not p.get('no_glass'):
         objs.append(gl.object(bpy, thin_glass(bpy, p.get('glass_gloss', 1.0))))
+    if p.get('transom_glow', 0) > 0:                                # a strip in the soffit behind the transoms
+        ts = Mesh('transom-strip'); ts.box(0.05, 0.1, Tr['z1'] - 0.03, 0.09, W - 0.1, Tr['z1'] - 0.01)
+        objs.append(ts.object(bpy, emitter(bpy, 'transom-strip', '#FFC27A', p['transom_glow'])))
     tg = Mesh('transom-glass')
     tg.box(-0.10, -P.WALL_T, Tr['z0'] + 0.04, -0.09, W + P.WALL_T, Tr['z1'])
     objs.append(tg.object(bpy, principled(bpy, 'prism-glass', '#EFE8DA', rough=0.35, trans=1.0, ior=1.5)))
@@ -296,7 +299,7 @@ def shopfront(bpy, kit, p, objs):
                 flat = [v for lp in loops for v in lp]
                 f = bm.faces.new([bm.verts.new(flat[i]) for i in tri]); f.normal_update()
         me = bpy.data.meshes.new('gold-leaf'); bm.to_mesh(me); bm.free()
-        me.materials.append(principled(bpy, 'gold-leaf', '#D9A94E', rough=0.12, metal=1.0, emit='#E8B45A',
+        me.materials.append(principled(bpy, 'gold-leaf', '#D9A94E', rough=0.25, metal=1.0, emit='#E8B45A',
                                        strength=p.get('gold_glow', 0.25)))
         ob = bpy.data.objects.new('gold-leaf', me); bpy.context.scene.collection.objects.link(ob); objs.append(ob)
 
@@ -726,6 +729,29 @@ def record_wall(bpy, kit, p, objs):
     objs.append(vu.object(bpy, emitter(bpy, 'vu', '#FFB45A', p.get('vu', 2.0))))
 
 
+def blind_mat(bpy, name, colour, strength):
+    """A lit window behind a blind or a sheer: the glow uneven, brighter low where a lamp stands, in slats."""
+    if name in _M:
+        return _M[name]
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); em = nt.nodes.new('ShaderNodeEmission')
+    em.inputs['Color'].default_value = lin(colour)
+    tc = nt.nodes.new('ShaderNodeTexCoord'); wv = nt.nodes.new('ShaderNodeTexWave'); wv.bands_direction = 'Z'
+    wv.inputs['Scale'].default_value = 18.0
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 0.9
+    for n in (wv, nz):
+        nt.links.new(tc.outputs['Object'], n.inputs['Vector'])
+    mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['To Min'].default_value = 0.55; mr.inputs['To Max'].default_value = 1.0
+    nt.links.new(wv.outputs['Fac'], mr.inputs['Value'])
+    m2 = nt.nodes.new('ShaderNodeMapRange'); m2.inputs['To Min'].default_value = 0.2 * strength; m2.inputs['To Max'].default_value = 1.8 * strength
+    nt.links.new(nz.outputs['Fac'], m2.inputs['Value'])
+    mul = nt.nodes.new('ShaderNodeMath'); mul.operation = 'MULTIPLY'
+    nt.links.new(mr.outputs['Result'], mul.inputs[0]); nt.links.new(m2.outputs['Result'], mul.inputs[1])
+    nt.links.new(mul.outputs['Value'], em.inputs['Strength']); nt.links.new(em.outputs['Emission'], out.inputs['Surface'])
+    _M[name] = m
+    return m
+
+
 # --- the street ---------------------------------------------------------------------------------------------------
 def street(bpy, kit, p, objs):
     W, T = P.W, P.WALL_T
@@ -779,7 +805,7 @@ def street(bpy, kit, p, objs):
             trim.box(xf - bd - 0.02, yc - bw / 2 + 0.12, z0 + bh * 0.62, xf - bd + 0.06, yc + bw / 2 - 0.12, z0 + bh * 0.62 + 0.05)
     objs.append(trim.object(bpy, principled(bpy, 'trim-paint', '#E4DCCB', rough=0.55), bevel=0.006))
     objs.append(dark.object(bpy, principled(bpy, 'dark-glass', '#0A0B0D', rough=0.03, spec=0.6)))
-    objs.append(lit.object(bpy, emitter(bpy, 'lit-blind', '#FFC07A', p.get('flat_glow', 0.25))))
+    objs.append(lit.object(bpy, blind_mat(bpy, 'lit-blind', '#FFC07A', p.get('flat_glow', 0.25))))
     # the neighbours: an older shop each side, closed for the night (their windows dark, a light at the back of one)
     nb = Mesh('neighbours'); ng = Mesh('neighbour-glass'); nl = Mesh('neighbour-lit')
     for (ya, yb, h, col) in ((-T - 7.6, -T, 9.6, 0), (W + T, W + T + 8.2, 11.4, 1), (-T - 15.4, -T - 7.6, 8.4, 2),
@@ -793,11 +819,11 @@ def street(bpy, kit, p, objs):
             for k in range(int((yb - ya - 1.0) / 2.2)):
                 yy = ya + 0.8 + k * 2.2
                 (nl if rnd.random() < 0.35 else ng).box(xf + 0.03, yy, z0, xf + 0.05, yy + 1.1, z0 + 1.8)
-    nm = (principled(bpy, 'neighbour-plain', p.get('neighbour', '#7E7468'), rough=0.8) if p.get('neighbour_plain')
+    nm = (plaster(bpy, p, 'neighbour-stucco', p.get('neighbour', '#7E7468')) if p.get('neighbour_plain')
           else R._pbr(bpy, kit, 'white_stucco_02', res='1k', tint=p.get('neighbour', '#7E7468'), tint_mix=0.55))
     objs.append(nb.object(bpy, nm))
     objs.append(ng.object(bpy, principled(bpy, 'dark-glass', '#0A0B0D', rough=0.03, spec=0.6)))
-    objs.append(nl.object(bpy, emitter(bpy, 'neighbour-lit', '#FFB070', p.get('across_glow', 0.04))))
+    objs.append(nl.object(bpy, blind_mat(bpy, 'neighbour-lit', '#FFB070', p.get('across_glow', 0.04))))
     # the block across the street, behind the camera: a dark mass for the glass to mirror
     ac = Mesh('across'); ac.box(xf - SW - RD - 0.15 - 3.4 - 12.0, yA, 0.0, xf - SW - RD - 0.15 - 3.4, yB, 12.0)
     objs.append(ac.object(bpy, principled(bpy, 'across-dark', '#15141A', rough=0.8)))

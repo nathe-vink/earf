@@ -36,7 +36,8 @@ def room_piece(v):
     keys = ('shelf_glow', 'shade_glow', 'pendant_glow', 'flame', 'record_glow', 'vu', 'street', 'windows_lit', 'wet',
             'road_rough', 'floor_tex', 'floor_tint', 'floor_mix', 'floor_coat', 'plaster', 'plaster_mix', 'ceiling',
             'brick_tint', 'rug_tex', 'rug_tint', 'rug_mix', 'rug_value', 'props', 'sign', 'cafe', 'no_glass',
-            'glass_gloss', 'siding', 'neighbour', 'neighbour_plain', 'niche_glow', 'gold_glow', 'brick_scale', 'brick_mix', 'across_glow', 'flat_glow', 'shelf_color')
+            'glass_gloss', 'siding', 'neighbour', 'neighbour_plain', 'niche_glow', 'gold_glow', 'brick_scale', 'brick_mix', 'across_glow', 'flat_glow', 'shelf_color',
+            'niche_rim', 'brick_tex', 'brick_bump', 'rug_displace', 'rug_cell', 'transom_glow')
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_den', 'fn': 'room', **{k: v[k] for k in keys if k in v}}
 
 
