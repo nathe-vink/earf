@@ -182,8 +182,7 @@ def shell(bpy, kit, p, objs):
 def shopfront(bpy, kit, p, objs):
     W, H = P.W, P.CEIL
     E, Dr, Wn, Tr = P.ENTRY, P.DOOR, P.WINDOW, P.TRANSOM
-    paint = principled(bpy, 'storefront-paint', p.get('storefront_paint', P.STOREFRONT_PAINT), rough=0.38, coat=0.4, coat_rough=0.2,
-                       bump=(0.02, 0.04, 0.0005))
+    paint = storefront_mat(bpy, p)
     fr = Mesh('storefront')
     x0, x1 = -0.16, 0.0                                                     # the front's depth
     fr.box(x0, -P.WALL_T, 0.0, x1, E['y0'], Tr['z0'])                          # the right pier
@@ -300,9 +299,19 @@ def shopfront(bpy, kit, p, objs):
                 flat = [v for lp in loops for v in lp]
                 f = bm.faces.new([bm.verts.new(flat[i]) for i in tri]); f.normal_update()
         me = bpy.data.meshes.new('gold-leaf'); bm.to_mesh(me); bm.free()
-        me.materials.append(principled(bpy, 'gold-leaf', '#D4AF5A', rough=0.2, metal=1.0, emit='#F0A838',
-                                       strength=p.get('gold_glow', 0.25)))
+        me.materials.append(sign_mat(bpy, p))
         ob = bpy.data.objects.new('gold-leaf', me); bpy.context.scene.collection.objects.link(ob); objs.append(ob)
+
+
+def storefront_mat(bpy, p):
+    """The shopfront's woodwork (round 34's kit swaps in blackened steel)."""
+    return principled(bpy, 'storefront-paint', p.get('storefront_paint', P.STOREFRONT_PAINT), rough=0.38, coat=0.4,
+                      coat_rough=0.2, bump=(0.02, 0.04, 0.0005))
+
+
+def sign_mat(bpy, p):
+    """The wordmark on the window: gold leaf (round 34's kit swaps in a frosted etch)."""
+    return principled(bpy, 'gold-leaf', '#D4AF5A', rough=0.2, metal=1.0, emit='#F0A838', strength=p.get('gold_glow', 0.25))
 
 
 # --- the bar ------------------------------------------------------------------------------------------------------
@@ -621,12 +630,13 @@ def lounge(bpy, kit, p, objs):
     _curtain(cv, X0 + 0.22, W - 0.18 - P.CURTAIN['w'], W - 0.18, P.HEADER_Z - 0.02, seed=1.7)
     objs.append(cv.object(bpy, velvet(bpy, P.CURTAIN['colour'], 'velvet-oxblood'), smooth=True))
     # the slat ceiling: walnut over a black absorber
-    ab = Mesh('lounge-absorber'); ab.box(X0 + 0.10, 0.0, P.CEIL - 0.06, L, W, P.CEIL - 0.01)
-    objs.append(ab.object(bpy, kit.material(bpy, 'felt', '#141110')))
-    sl = Mesh('lounge-slats'); S = P.LOUNGE_CEILING; y = 0.02
-    while y + S['slat'] < W:
-        sl.box(X0 + 0.12, y, P.CEIL - 0.13, L - 0.01, y + S['slat'], P.CEIL - 0.07); y += S['pitch']
-    objs.append(sl.object(bpy, walnut(bpy)))
+    if p.get('lounge_slats', True):                                  # (round 34's beams take their place)
+        ab = Mesh('lounge-absorber'); ab.box(X0 + 0.10, 0.0, P.CEIL - 0.06, L, W, P.CEIL - 0.01)
+        objs.append(ab.object(bpy, kit.material(bpy, 'felt', '#141110')))
+        sl = Mesh('lounge-slats'); S = P.LOUNGE_CEILING; y = 0.02
+        while y + S['slat'] < W:
+            sl.box(X0 + 0.12, y, P.CEIL - 0.13, L - 0.01, y + S['slat'], P.CEIL - 0.07); y += S['pitch']
+        objs.append(sl.object(bpy, walnut(bpy)))
     # the plinths under the Ember pair (walnut)
     pl = Mesh('plinths')
     for role, colour, x, yy, z, rot in P.speakers():
