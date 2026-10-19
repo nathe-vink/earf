@@ -240,5 +240,5 @@ date, reverted). Before and after: `catalogue31/gland-notch-before-after.png`.
 keep-out notch cut in the same batt (lining-back-c) for the tie rod's anchor, 77 deep (its floor at the top's batts'
 depth, `H - T - t_top - g - 2`). The anchor's insert sits flush in the pad from below, so the notch now needs only the
 rod's tip and 10 to reach it: floor at `zpad - 10` (z 830). Full build: 0 clashes; lining-back-c's cut file, its nest and
-its area in the parts list (38 to 41 dm2) change, nothing else. Before and after (amp, Fog):
+its mass in the parts list (38 to 41 g) change, nothing else. Before and after (amp, Fog):
 `catalogue31/tie-notch-before-after.png`. The finals' back and amp views were rendered before this and still show it.
