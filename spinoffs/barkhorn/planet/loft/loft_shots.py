@@ -58,7 +58,8 @@ VIEWS = {
                          'niche_aim_z': 1.1, 'niche_fill': 6.0, 'pendant_w': 110.0, 'pendant_cone': 35.0, 'haze': 0.02}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (5.5): 28 mm from a little back and higher, the beams in, the speaker on the left third
-                  'camera': {'position': [14.3, 1.8, 1.15], 'target': [16.3, 4.6, 1.2], 'lens_mm': 28, 'level': True,
+                  # (p2: from 14.3, 1.8 a lounge chair filled the foreground) clear of the chairs
+                  'camera': {'position': [14.75, 2.6, 1.15], 'target': [16.3, 4.6, 1.2], 'lens_mm': 28, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, LP.PAIR['y'][1], 0.9]},
                   # listening-r1: the speaker's front lamp soft and low, the light mostly from behind through the acrylic;
                   # the chairs espresso; the record wall up; warmer and lower overall
@@ -76,7 +77,7 @@ VIEWS = {
                             'entry_w': 30.0, 'entry_cone': 100.0, 'transom_glow': 0.3, 'spk_irr': 30.0,
                             'pendant_w': 160.0, 'pendant_glow': 0.8, 'inlay_glow': 1.2, 'haze': 0.02,
                             'siding': '#8E9384', 'sky': 0.05, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
-                            'flat_glow': 0.12, 'across_glow': 0.10, 'linen_trans': 0.5, 'etch_glow': 0.10,
+                            'flat_glow': 0.12, 'across_glow': 0.10, 'linen_trans': 0.5, 'etch_glow': 0.35,
                             'screen_window': 0.55}},
 }
 S.VIEWS = VIEWS
