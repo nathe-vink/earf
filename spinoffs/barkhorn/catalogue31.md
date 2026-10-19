@@ -168,3 +168,85 @@ The sheet: `renders/2026-10-18/barkhorn/catalogue31/front-sheet.jpg` (the sixtee
 `finals31/sheet.jpg` (every view). Looked at side by side they read as one set: the same framing, light and paper
 falloff, each colour on a whisper of its own tint; Fog's white cloth holds its weave at -0.6 EV, Smoke's dark acrylic
 shows its lining and a surface on its side panel.
+
+## The gallery's frames (3:2 and 4:5)
+
+The owner, on the speaker pages: the 1:2 fronts "feel odd and out of place because they aren't the same proportions of
+the other images and feel cheap" (the gallery's stage is 3:2 on desktop, 4:5 on phones). The rig is reframed, not
+relit: the same camera position (the same perspective) and the same lamps, a new lens and lens shift per frame
+(`catalogue31.py`'s `FRAMES`; the engine fits the sensor's 36 mm to the frame's width, so the lens follows the
+frame's height-to-width ratio), each centred by its box in the frame:
+
+- **3:2** (`-wide`, 1920 x 1280, 32.3 mm): the speaker at 70 % of the height and 24 % of the width, centred (38 % each
+  side, 15 % above and below). Its wider view ran past the sweep's end and showed a dark, unlit third of paper on the
+  key side; the sweep is wider for it (40 m, 9 m tall) and a lamp of its own lifts that paper (`wall_left`, 4 W/m2).
+- **4:5** (`-tall`, 1440 x 1800, 60.5 mm): the speaker at 70 % of the height, centred across, a little low (16 % above,
+  14 % below).
+
+Each is about the 1:2's pixel count (12 and 14 minutes at proof size against 15). The 1:2 shots are unchanged.
+Proofs: `renders/2026-10-18/barkhorn/catalogue31/frame-{wide,tall}-blue-on.png`. `finals.py`'s views
+`front-on-wide`, `front-off-wide`, `front-on-tall`, `front-off-tall` render them as
+`finals31/front-{on,off}-{wide,tall}-<k>.png`; its `--views` now matches a view by its whole name, so `front-on`
+does not also take `front-on-wide`.
+
+## The paper (one backdrop for the site)
+
+The coordinator, after a full-site critic pass: the product pictures carried four studio looks (a warm hero, a white
+studio band, this sweep in grey with a 44-level vignette, the details pastel per colour), and the home cards take
+their panel colour from these frames' foot, so they read a dingy grey (#8B908F to #ABA3A1). The catalogue moves onto
+the studio's warm pale paper (round 31c's bright field): one neutral backdrop for all eight, no tint per colour.
+
+- **The speaker's light is the rig's, as it won.** Only the paper changed: `#F7F0E8` (the studio's `#F3F1EE`, warmed so
+  it renders warm under the rig's white balance and not faintly green), lit high-key by lamps linked to the paper alone:
+  31c's two broad lamps on the cove behind, a gridded overhead lamp for the floor, a lamp for the far left and the
+  upper wall that every frame sees, and for the 3:2 two more (its far-left wall and the foot of its cove). The tinted
+  look's paper lamps are retuned (the glow behind and the key-side wall off: they drove the wall past white).
+- **Measured** (proofs, cover off, 3:2): the floor at the feet 241 to 243 (RGB about 246/242/235, `#F2EFEA` asked), the
+  wall 240 to 241 (242/236/226, `#EDE9E3` asked), the corners and edges 236 to 244: within eight levels across the
+  frame. The 4:5 at quarter size: 229 to 242.
+- **One paper for every colour:** a colour's exposure trim (Fog's -0.6 EV, for its white cloth) is made good on the
+  paper's lamps, so Fog stands on the same paper as the others (it had gone grey).
+- **Smoke and Fog part from the ground** by the rig's own black cards, which the side and the edges mirror. 31c's tall
+  dark strip was tried and dropped: its shadow drew a streak on the cove.
+- **The cabinets against the approved finals** (90eaf89, same light; ΔE 2000, median colour of the part): through the
+  front, Ice 0.2, Fog 0.5, Smoke 1.2; Smoke's side 0.8; Ice's side 5.6 and Fog's 12.6 lighter, as the side now looks
+  through to bright paper instead of grey. Fog's acrylic keeps its faint cool green (the water-clear material's own);
+  the paper under it is neutral.
+- With the drivers merged (01267eb) and the model rebuilt.
+
+Proofs: `renders/2026-10-18/barkhorn/catalogue31/paper-{blue,ice,black}-off-wide.png`.
+
+### The detail views on the paper
+
+finals.py's horn-side, horn-back, back, amp and inside now come from `details31/<view>-<k>.json`, written by
+`catalogue31.py` from their own templates (horn21, site30): the camera and the light as each was tuned, the same paper
+(`#F7F0E8`) under it, lit by two lamps on the paper alone (the cove's wall and its gridded floor) set per view to the
+catalogue's paper (233 to 240 across the frame on the three views with paper in frame; the amp view is the plate close
+and shows almost none). The cutaway takes each colour's flavour; its old per-colour tint (finals.py's recolour, from
+lookbook21) now applies to the old template only. With the drivers: the horn views show the new HF driver through the
+pod, the cutaway the new woofer's motor. Proof: Ice's set, `catalogue31/paper-detail-*-blue.png` (half size, 1 to 3
+minutes each).
+
+**The gland's notch (round 31, approved by the lead):** the pale tab under the R of the back's EARF, on back and amp in
+every colour, was the notch cut in the back's upper batt (lining-back-c) for the HF lead's gland, 85 deep (its floor
+`max(60, t_top + 10)` under the top), seen through the tinted back. It is now sized from the gland: the M12 gland's 22
+mm body below the 20 mm pad, plus 10 for the lead to turn up into it (floor at z 808, 27 deep), behind the letters; the
+lead runs up the batt's inner face in the 10 between it and the top's batts, hidden from behind, and turns into the
+notch only at the top (product.py `lining()` and `lead-hf`). Full build: 0 clashes; lining-back-c's cut file, its nest
+and its area in the parts list change, nothing else (the rest of the rebuild was timestamps and the drawings' issue
+date, reverted). Before and after: `catalogue31/gland-notch-before-after.png`.
+
+**The tie rod's notch (round 31, the lead: "your call"):** the speck below the E of the back's EARF was the foot of the
+keep-out notch cut in the same batt (lining-back-c) for the tie rod's anchor, 77 deep (its floor at the top's batts'
+depth, `H - T - t_top - g - 2`). The anchor's insert sits flush in the pad from below, so the notch now needs only the
+rod's tip and 10 to reach it: floor at `zpad - 10` (z 830). Full build: 0 clashes; lining-back-c's cut file, its nest and
+its mass in the parts list (38 to 41 g) change, nothing else. Before and after (amp, Fog):
+`catalogue31/tie-notch-before-after.png`. The finals' back and amp views were rendered before this and still show it.
+
+**Where the two notches show (round 31, the lead asked):** Fog's front and detail frames rendered from the model before
+both fixes (7bc7768's parent) and after (ddfacf4), at proof size (0.5, 32 spp, the same seed), and differenced. Horn-back
+shows them: through the back, the old notches read as two pale tabs, above the E and A and above the R and F, and the new
+model shows only the gland's short tab (`catalogue31/notch-horn-back-ice-old-new-diff.png`: old, new, difference). The
+fronts (on and off, every frame) differ only in a thin strip at the top brace, a few dozen proof pixels, at most 55 of 255:
+the HF lead's run from the throat to the gland, which 7bc7768 rerouted, not a notch
+(`catalogue31/notch-front-off-wide-ice-old-new-diff.png`). Horn-side: nothing over 8 of 255. Inside: 4 pixels.
