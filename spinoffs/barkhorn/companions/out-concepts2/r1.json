@@ -1,0 +1,119 @@
+{
+ "_note": "R1 Slab for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-concepts2/r1/render/r1.glb",
+ "origin_mm": [
+  181.3,
+  170.0,
+  0.0
+ ],
+ "materials": {
+  "accent": {
+   "preset": "satin_paint",
+   "color": "$accent",
+   "roughness": 0.45,
+   "specular": 0.4
+  },
+  "acrylic": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.025,
+   "roughness": 0.05
+  },
+  "aluminium": {
+   "preset": "metal",
+   "color": "#BFC1C2",
+   "roughness": 0.35
+  },
+  "arm": {
+   "preset": "gunmetal",
+   "color": "#2C2C2E"
+  },
+  "glow": {
+   "preset": "emit",
+   "color": "$glow",
+   "strength": 0.0
+  },
+  "rubber": {
+   "preset": "rubber",
+   "color": "#161616"
+  },
+  "steel": {
+   "preset": "metal",
+   "color": "#CFCFCB",
+   "roughness": 0.18
+  }
+ },
+ "assign": [
+  {
+   "match": "label",
+   "material": "accent"
+  },
+  {
+   "match": "plinth|platter|pod|cover",
+   "material": "acrylic"
+  },
+  {
+   "match": "pulley",
+   "material": "aluminium"
+  },
+  {
+   "match": "arm",
+   "material": "arm"
+  },
+  {
+   "match": "edge",
+   "material": "glow"
+  },
+  {
+   "match": "feet",
+   "material": "rubber"
+  },
+  {
+   "match": "spindle",
+   "material": "steel"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#F2A29C",
+   "accent": "#7A1A1C",
+   "glow": "#FF4A3A"
+  },
+  "dust": {
+   "deep": "#F2B184",
+   "accent": "#8C3B14",
+   "glow": "#FF8A3A"
+  },
+  "acid": {
+   "deep": "#F2D06B",
+   "accent": "#9A6A12",
+   "glow": "#FFC93A"
+  },
+  "poison": {
+   "deep": "#B2C9A2",
+   "accent": "#2E4A2C",
+   "glow": "#6BD45A"
+  },
+  "ice": {
+   "deep": "#B5D9EE",
+   "accent": "#24557E",
+   "glow": "#4FB8FF"
+  },
+  "haze": {
+   "deep": "#BEADD8",
+   "accent": "#3F2A5E",
+   "glow": "#9A6BFF"
+  },
+  "fog": {
+   "deep": "#F7F8F7",
+   "accent": "#E7E6E1",
+   "glow": "#FFF4E4"
+  },
+  "smoke": {
+   "deep": "#8A888E",
+   "accent": "#141316",
+   "glow": "#C8C0D8"
+  }
+ }
+}

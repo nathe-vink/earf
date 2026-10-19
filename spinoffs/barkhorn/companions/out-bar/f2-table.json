@@ -1,0 +1,132 @@
+{
+ "_note": "F2 Column table for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-bar/f2-table/render/f2-table.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "materials": {
+  "body": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.025,
+   "roughness": 0.04
+  },
+  "brass": {
+   "preset": "metal",
+   "color": "#B8945A",
+   "roughness": 0.32
+  },
+  "edge": {
+   "preset": "emit",
+   "color": "$glow",
+   "strength": 0.0
+  },
+  "shade": {
+   "preset": "frosted",
+   "color": "$frost",
+   "absorb": "$deep",
+   "roughness": 0.5,
+   "radius": 0.02,
+   "clear": 0.1,
+   "glow": 0.0,
+   "glow_color": "$shade_glow"
+  }
+ },
+ "assign": [
+  {
+   "match": "shade",
+   "material": "body"
+  },
+  {
+   "match": "base|cap",
+   "material": "brass"
+  },
+  {
+   "match": "edge-top",
+   "material": "edge"
+  },
+  {
+   "match": "diffuser",
+   "material": "shade"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#F2A29C",
+   "frost": "#F2A29C",
+   "glow": "#FF4A3A",
+   "shade_glow": "#F2A29C"
+  },
+  "dust": {
+   "deep": "#F2B184",
+   "frost": "#F2B184",
+   "glow": "#FF8A3A",
+   "shade_glow": "#F2B184"
+  },
+  "acid": {
+   "deep": "#F2D06B",
+   "frost": "#F2D06B",
+   "glow": "#FFC93A",
+   "shade_glow": "#F2D06B"
+  },
+  "poison": {
+   "deep": "#B2C9A2",
+   "frost": "#B2C9A2",
+   "glow": "#6BD45A",
+   "shade_glow": "#B2C9A2"
+  },
+  "ice": {
+   "deep": "#B5D9EE",
+   "frost": "#B5D9EE",
+   "glow": "#4FB8FF",
+   "shade_glow": "#B5D9EE"
+  },
+  "haze": {
+   "deep": "#BEADD8",
+   "frost": "#BEADD8",
+   "glow": "#9A6BFF",
+   "shade_glow": "#BEADD8"
+  },
+  "fog": {
+   "deep": "#F7F8F7",
+   "frost": "#F7F8F7",
+   "glow": "#FFF4E4",
+   "shade_glow": "#F7F8F7"
+  },
+  "smoke": {
+   "deep": "#8A888E",
+   "frost": "#8A888E",
+   "glow": "#C8C0D8",
+   "shade_glow": "#8A888E"
+  },
+  "clear": {
+   "deep": "#F4F6F5",
+   "frost": "#F6F4F0",
+   "glow": "#FF9A40",
+   "shade_glow": "#FFB878"
+  },
+  "frosted": {
+   "deep": "#F2F2EF",
+   "frost": "#F4F2EE",
+   "glow": "#FF9A40",
+   "shade_glow": "#FFB878",
+   "materials": {
+    "body": {
+     "preset": "frosted",
+     "color": "#F4F2EE",
+     "absorb": "#EFE6D8",
+     "roughness": 0.5
+    }
+   }
+  },
+  "smoked": {
+   "deep": "#6E655C",
+   "frost": "#8E867E",
+   "glow": "#FF8A30",
+   "shade_glow": "#FFB878"
+  }
+ }
+}

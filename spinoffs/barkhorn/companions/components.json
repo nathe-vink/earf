@@ -1,47 +1,349 @@
 {
  "_note": "The companions' bought parts (round 31), on top of the kit's library. From web searches of 2026-10-18 (search-result snippets of retailers' and makers' pages; the pages could not be opened from this environment): confirm every figure and price on the maker's datasheet or the retailer's page before ordering. Prices in US dollars; a price in pounds is converted at about 1.33 and marked so. `estimate: true` is a price guessed from like parts, not a listing.",
-
  "_turntable": "Cumulus, the record player",
- "rega-rb330": {"kind": "tonearm", "maker": "Rega", "model": "RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's centre to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift",
-  "usd": 675, "supplier": "Safe and Sound HQ (US); Home Cinema Solutions $698", "price_date": "2026-10-18", "url": "https://www.safeandsoundhq.com/products/rega-rb330-tonearm",
-  "note": "the mounting hole and the plinth thickness it takes are in Rega's RB330 manual (arm mounting data; https://phonophono.de/mwdownloads/download/link/id/921), not read: confirm the 24 hole and the 40 mm of acrylic under its nut, or counterbore from below"},
- "ortofon-2m-black": {"kind": "cartridge", "maker": "Ortofon", "model": "2M Black moving-magnet cartridge (nude Shibata stylus), black body, 1/2 in mount",
-  "usd": 750, "supplier": "Upscale Audio ($749.99)", "price_date": "2026-10-18", "url": "https://upscaleaudio.com/collections/cartridges",
-  "note": "black so it reads as a part in every colour (the lead session, round 31: the 2M Blue's blue read as a stray accent); moving magnet, so any phono stage; the 2M Red (red body) could ride on Ember"},
- "rega-24v-motor": {"kind": "motor", "maker": "Rega", "model": "24 V low-vibration synchronous motor upgrade kit (motor, its board and mounting), for the Neo PSU",
-  "usd": 200, "supplier": "HiFi Gear (UK, GBP 150; converted)", "price_date": "2026-10-18", "url": "https://www.hifigear.co.uk/rega-neo-mk2.html",
-  "note": "the motor's size and shaft are not published in what was read: the pod's bore (56) and the pulley's bore wait on the motor in hand; sold through Rega dealers"},
- "rega-neo-psu-mk2": {"kind": "power", "maker": "Rega", "model": "Neo PSU MK2: DSP-generated drive for Rega's 24 V motor, 33/45 by a button, fine speed trim (0.01 rpm steps) on the back; US 60 Hz 115-120 V version",
-  "usd": 445, "supplier": "Audio Advisor (US)", "price_date": "2026-10-18", "url": "https://www.audioadvisor.com/products/rega-neo-psu-mk2-60hz-turntable-psu-power-supply-black",
-  "note": "the speed changes without moving the belt, so the pulley has one diameter; the box stands beside the record player (or under it, on the shelf)"},
- "flat-belt": {"kind": "drive", "maker": "any", "model": "Flat turntable belt, ground rubber or polyurethane, 5 wide x 0.6, about 975 long unstretched (1025 round the platter's rim and the 40 pulley, stretched 5 %)", "usd": 25, "estimate": true, "supplier": "a turntable belt maker (cut to length)", "price_date": "2026-10-18"},
- "bearing-bushes": {"kind": "bearing", "maker": "any", "model": "Oil-impregnated sintered bronze plain bushes 10 x 14 x 12, a pair (Oilite kind), reamed to a 0.01 running fit on the spindle after pressing", "usd": 8, "estimate": true, "supplier": "a bearing supplier (McMaster-Carr, Bearing Boys)", "price_date": "2026-10-18"},
- "carbide-ball": {"kind": "bearing", "maker": "any", "model": "Tungsten carbide ball, 6 mm, grade 10: the spindle's thrust point, seated in a cup at the spindle's foot", "usd": 5, "estimate": true, "supplier": "a bearing supplier", "price_date": "2026-10-18"},
- "thrust-pad": {"kind": "bearing", "maker": "any", "model": "Thrust pad, PTFE (or PEEK), 13.8 x 2, at the bottom of the housing's bore, under the ball", "usd": 3, "estimate": true, "supplier": "any", "price_date": "2026-10-18"},
- "bearing-oil": {"kind": "material", "maker": "any", "model": "Turntable bearing oil, 8 ml (a light synthetic oil, ISO VG 32 or as the bush maker says)", "usd": 15, "estimate": true, "supplier": "any hi-fi dealer", "price_date": "2026-10-18"},
- "sorbothane-feet": {"kind": "isolation", "maker": "Isolate It (or alike)", "model": "Sorbothane hemispheres or discs, 44 across, 6 tall, Shore 50 or 70 (chosen by the loaded weight, about 2 kg a foot), a set of 3, bonded under the plinth's feet", "usd": 30, "estimate": true, "supplier": "Isolate It / Sorbothane Inc.", "price_date": "2026-10-18"},
- "sorbothane-pod": {"kind": "isolation", "maker": "Isolate It (or alike)", "model": "Sorbothane discs 25 x 6, Shore 30, a set of 3, under the motor's pod (about 0.6 kg on them: soft, so the motor's hum stays in the pod)", "usd": 15, "estimate": true, "supplier": "Isolate It / Sorbothane Inc.", "price_date": "2026-10-18"},
- "feet-studs": {"kind": "hardware", "maker": "any", "model": "Three M8 brass threaded inserts bonded with epoxy into the plinth's bottom sheet (12.5 holes, 15 deep), three M8 x 30 brass studs and lock nuts: the feet turn on them to level the platter", "usd": 14, "estimate": true, "supplier": "any", "price_date": "2026-10-18"},
- "bearing-fixings": {"kind": "hardware", "maker": "any", "model": "Three M4 brass threaded inserts bonded with epoxy into 6 holes in the pocket's floor, three M4 x 10 black socket button heads: the bearing's flange", "usd": 5, "estimate": true, "supplier": "any", "price_date": "2026-10-18"},
- "acrylic-cement-small": {"kind": "material", "maker": "any", "model": "Two-part polymerising acrylic cement for cast sheet (Acrifix 1R 0192 kind), clear: the cemented layers (a 100 g kit does one piece)", "usd": 20, "estimate": true, "supplier": "a plastics fabricator's supplier", "price_date": "2026-10-18"},
- "laser-etch-small": {"kind": "service", "maker": "any", "model": "Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: EARF 44 wide, the etch filled with the colour, deeper", "usd": 15, "estimate": true, "supplier": "a laser-cutting shop with an engraver", "price_date": "2026-10-18"},
-
+ "rega-rb330": {
+  "kind": "tonearm",
+  "maker": "Rega",
+  "model": "RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's centre to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift",
+  "usd": 675,
+  "supplier": "Safe and Sound HQ (US); Home Cinema Solutions $698",
+  "price_date": "2026-10-18",
+  "url": "https://www.safeandsoundhq.com/products/rega-rb330-tonearm",
+  "note": "the mounting hole and the plinth thickness it takes are in Rega's RB330 manual (arm mounting data; https://phonophono.de/mwdownloads/download/link/id/921), not read: confirm the 24 hole and the 40 mm of acrylic under its nut, or counterbore from below"
+ },
+ "ortofon-2m-black": {
+  "kind": "cartridge",
+  "maker": "Ortofon",
+  "model": "2M Black moving-magnet cartridge (nude Shibata stylus), black body, 1/2 in mount",
+  "usd": 750,
+  "supplier": "Upscale Audio ($749.99)",
+  "price_date": "2026-10-18",
+  "url": "https://upscaleaudio.com/collections/cartridges",
+  "note": "black so it reads as a part in every colour (the lead session, round 31: the 2M Blue's blue read as a stray accent); moving magnet, so any phono stage; the 2M Red (red body) could ride on Ember"
+ },
+ "rega-24v-motor": {
+  "kind": "motor",
+  "maker": "Rega",
+  "model": "24 V low-vibration synchronous motor upgrade kit (motor, its board and mounting), for the Neo PSU",
+  "usd": 200,
+  "supplier": "HiFi Gear (UK, GBP 150; converted)",
+  "price_date": "2026-10-18",
+  "url": "https://www.hifigear.co.uk/rega-neo-mk2.html",
+  "note": "the motor's size and shaft are not published in what was read: the pod's bore (56) and the pulley's bore wait on the motor in hand; sold through Rega dealers"
+ },
+ "rega-neo-psu-mk2": {
+  "kind": "power",
+  "maker": "Rega",
+  "model": "Neo PSU MK2: DSP-generated drive for Rega's 24 V motor, 33/45 by a button, fine speed trim (0.01 rpm steps) on the back; US 60 Hz 115-120 V version",
+  "usd": 445,
+  "supplier": "Audio Advisor (US)",
+  "price_date": "2026-10-18",
+  "url": "https://www.audioadvisor.com/products/rega-neo-psu-mk2-60hz-turntable-psu-power-supply-black",
+  "note": "the speed changes without moving the belt, so the pulley has one diameter; the box stands beside the record player (or under it, on the shelf)"
+ },
+ "flat-belt": {
+  "kind": "drive",
+  "maker": "any",
+  "model": "Flat turntable belt, ground rubber or polyurethane, 5 wide x 0.6, about 975 long unstretched (1025 round the platter's rim and the 40 pulley, stretched 5 %)",
+  "usd": 25,
+  "estimate": true,
+  "supplier": "a turntable belt maker (cut to length)",
+  "price_date": "2026-10-18"
+ },
+ "bearing-bushes": {
+  "kind": "bearing",
+  "maker": "any",
+  "model": "Oil-impregnated sintered bronze plain bushes 10 x 14 x 12, a pair (Oilite kind), reamed to a 0.01 running fit on the spindle after pressing",
+  "usd": 8,
+  "estimate": true,
+  "supplier": "a bearing supplier (McMaster-Carr, Bearing Boys)",
+  "price_date": "2026-10-18"
+ },
+ "carbide-ball": {
+  "kind": "bearing",
+  "maker": "any",
+  "model": "Tungsten carbide ball, 6 mm, grade 10: the spindle's thrust point, seated in a cup at the spindle's foot",
+  "usd": 5,
+  "estimate": true,
+  "supplier": "a bearing supplier",
+  "price_date": "2026-10-18"
+ },
+ "thrust-pad": {
+  "kind": "bearing",
+  "maker": "any",
+  "model": "Thrust pad, PTFE (or PEEK), 13.8 x 2, at the bottom of the housing's bore, under the ball",
+  "usd": 3,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-18"
+ },
+ "bearing-oil": {
+  "kind": "material",
+  "maker": "any",
+  "model": "Turntable bearing oil, 8 ml (a light synthetic oil, ISO VG 32 or as the bush maker says)",
+  "usd": 15,
+  "estimate": true,
+  "supplier": "any hi-fi dealer",
+  "price_date": "2026-10-18"
+ },
+ "sorbothane-feet": {
+  "kind": "isolation",
+  "maker": "Isolate It (or alike)",
+  "model": "Sorbothane hemispheres or discs, 44 across, 6 tall, Shore 50 or 70 (chosen by the loaded weight, about 2 kg a foot), a set of 3, bonded under the plinth's feet",
+  "usd": 30,
+  "estimate": true,
+  "supplier": "Isolate It / Sorbothane Inc.",
+  "price_date": "2026-10-18"
+ },
+ "sorbothane-pod": {
+  "kind": "isolation",
+  "maker": "Isolate It (or alike)",
+  "model": "Sorbothane discs 25 x 6, Shore 30, a set of 3, under the motor's pod (about 0.6 kg on them: soft, so the motor's hum stays in the pod)",
+  "usd": 15,
+  "estimate": true,
+  "supplier": "Isolate It / Sorbothane Inc.",
+  "price_date": "2026-10-18"
+ },
+ "feet-studs": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Three M8 brass threaded inserts bonded with epoxy into the plinth's bottom sheet (12.5 holes, 15 deep), three M8 x 30 brass studs and lock nuts: the feet turn on them to level the platter",
+  "usd": 14,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-18"
+ },
+ "bearing-fixings": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Three M4 brass threaded inserts bonded with epoxy into 6 holes in the pocket's floor, three M4 x 10 black socket button heads: the bearing's flange",
+  "usd": 5,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-18"
+ },
+ "acrylic-cement-small": {
+  "kind": "material",
+  "maker": "any",
+  "model": "Two-part polymerising acrylic cement for cast sheet (Acrifix 1R 0192 kind), clear: the cemented layers (a 100 g kit does one piece)",
+  "usd": 20,
+  "estimate": true,
+  "supplier": "a plastics fabricator's supplier",
+  "price_date": "2026-10-18"
+ },
+ "laser-etch-small": {
+  "kind": "service",
+  "maker": "any",
+  "model": "Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: EARF 44 wide, the etch filled with the colour, deeper",
+  "usd": 15,
+  "estimate": true,
+  "supplier": "a laser-cutting shop with an engraver",
+  "price_date": "2026-10-18"
+ },
  "_lamp": "Bell, the lamp",
- "centric-warm-strip": {"kind": "led", "maker": "Waveform Lighting", "model": "CENTRIC WARM LED strip, 24 V, 95+ CRI, 2700 K at full and dimming warmer toward 2000 K (PN 3008.27), 450 lm a foot; 0.40 m a lamp (two turns round the hub, 64 across, cut at its marks)",
-  "usd": null, "supplier": "Waveform Lighting (US), sold by the reel", "price_date": "2026-10-18", "url": "https://store.waveformlighting.com/products/centric-warm-led-strip-lights",
-  "note": "datasheet CS_3008.27 (https://store.waveformlighting.com/cdn/shop/files/CS_3008.27.pdf): its watts a foot and its cut length not read; about 620 lm a lamp at full; the reel price not seen (the FilmGrade 16 ft reel is $109)"},
- "rotary-dimmer": {"kind": "control", "maker": "LEDSupply", "model": "Single Color Mini Rotary Dimmer, 12-24 V DC PWM, with an on/off switch at the end of its turn, 2.1 mm plug in; its board taken out of the housing and screwed into the foot's pocket, the knob replaced by the acrylic one",
-  "usd": 9, "supplier": "LEDSupply ($8.84)", "price_date": "2026-10-18", "url": "https://ledsupply.com/led-dimmers/mini-rotary-knob-dimmer",
-  "note": "not a listed part once out of its housing: for sale, a listed 24 V dimmer to fit the same pocket (an open question)"},
- "meanwell-gst25u24": {"kind": "power", "maker": "Mean Well", "model": "GST25U24-P1J wall-plug adapter, 24 V DC 1.04 A (25 W), level VI, its 2.1 mm plug on a 1.5 m lead; limited power source by one listing",
-  "usd": 18, "estimate": true, "supplier": "TRC Electronics", "price_date": "2026-10-18", "url": "https://www.trcelectronics.com/products/mean-well-gst25u24-p1j",
-  "note": "price not shown in what was read; the desktop GST25A24-P1J is $19.42 at IBS Electronics"},
- "clear-cord": {"kind": "wiring", "maker": "Satco / Nuvo", "model": "18/2 SPT-2 lamp cord, clear (80-2374), 8 ft: from the foot's back to a 2.1 mm in-line DC socket for the adapter, and on up the stem to the hub (low voltage only)",
-  "usd": 7, "supplier": "Lighting Supply ($6.97)", "price_date": "2026-10-18", "url": "https://lightingsupply.com/products/satco-nuvo-80-2374"},
- "dc-socket": {"kind": "wiring", "maker": "any", "model": "In-line 2.1 x 5.5 mm DC socket with strain relief, for the cord's end", "usd": 3, "estimate": true, "supplier": "any electronics distributor", "price_date": "2026-10-18"},
- "cord-grip": {"kind": "wiring", "maker": "any", "model": "Clear nylon strain-relief bush for 18/2 SPT-2 cord in a 9.5 hole (Heyco kind)", "usd": 2, "estimate": true, "supplier": "any", "price_date": "2026-10-18"},
- "bumpons-clear": {"kind": "hardware", "maker": "3M", "model": "Bumpon SJ5302 clear hemispherical bumpers 11 x 5, a set of 6 (under the foot)", "usd": 5, "estimate": true, "supplier": "any electronics distributor", "price_date": "2026-10-18"},
- "lamp-fixings": {"kind": "hardware", "maker": "any", "model": "The lamp's screws: three M4 x 12 black button heads and M4 brass inserts bonded in the hub's flange (the shade's collar), four M3 x 8 and inserts (the foot's cover), two M3 x 6 (the dimmer's board), black nylon washers", "usd": 6, "estimate": true, "supplier": "any", "price_date": "2026-10-18"},
- "thermal-tape": {"kind": "material", "maker": "any", "model": "The strip's own adhesive on the hub, and 3M 8810 thermally conductive tape at the hub's bore round the cord's exit", "usd": 4, "estimate": true, "supplier": "any", "price_date": "2026-10-18"},
- "felt-pad-ring": {"kind": "hardware", "maker": "any", "model": "Silicone ring gasket 1 mm, cut to the shade's collar (68 x 92), so the formed collar is clamped without stress", "usd": 3, "estimate": true, "supplier": "any", "price_date": "2026-10-18"}
+ "centric-warm-strip": {
+  "kind": "led",
+  "maker": "Waveform Lighting",
+  "model": "CENTRIC WARM LED strip, 24 V, 95+ CRI, 2700 K at full and dimming warmer toward 2000 K (PN 3008.27), 450 lm a foot; 0.40 m a lamp (two turns round the hub, 64 across, cut at its marks)",
+  "usd": null,
+  "supplier": "Waveform Lighting (US), sold by the reel",
+  "price_date": "2026-10-18",
+  "url": "https://store.waveformlighting.com/products/centric-warm-led-strip-lights",
+  "note": "datasheet CS_3008.27 (https://store.waveformlighting.com/cdn/shop/files/CS_3008.27.pdf): its watts a foot and its cut length not read; about 620 lm a lamp at full; the reel price not seen (the FilmGrade 16 ft reel is $109)"
+ },
+ "rotary-dimmer": {
+  "kind": "control",
+  "maker": "LEDSupply",
+  "model": "Single Color Mini Rotary Dimmer, 12-24 V DC PWM, with an on/off switch at the end of its turn, 2.1 mm plug in; its board taken out of the housing and screwed into the foot's pocket, the knob replaced by the acrylic one",
+  "usd": 9,
+  "supplier": "LEDSupply ($8.84)",
+  "price_date": "2026-10-18",
+  "url": "https://ledsupply.com/led-dimmers/mini-rotary-knob-dimmer",
+  "note": "not a listed part once out of its housing: for sale, a listed 24 V dimmer to fit the same pocket (an open question)"
+ },
+ "meanwell-gst25u24": {
+  "kind": "power",
+  "maker": "Mean Well",
+  "model": "GST25U24-P1J wall-plug adapter, 24 V DC 1.04 A (25 W), level VI, its 2.1 mm plug on a 1.5 m lead; limited power source by one listing",
+  "usd": 18,
+  "estimate": true,
+  "supplier": "TRC Electronics",
+  "price_date": "2026-10-18",
+  "url": "https://www.trcelectronics.com/products/mean-well-gst25u24-p1j",
+  "note": "price not shown in what was read; the desktop GST25A24-P1J is $19.42 at IBS Electronics"
+ },
+ "clear-cord": {
+  "kind": "wiring",
+  "maker": "Satco / Nuvo",
+  "model": "18/2 SPT-2 lamp cord, clear (80-2374), 8 ft: from the foot's back to a 2.1 mm in-line DC socket for the adapter, and on up the stem to the hub (low voltage only)",
+  "usd": 7,
+  "supplier": "Lighting Supply ($6.97)",
+  "price_date": "2026-10-18",
+  "url": "https://lightingsupply.com/products/satco-nuvo-80-2374"
+ },
+ "dc-socket": {
+  "kind": "wiring",
+  "maker": "any",
+  "model": "In-line 2.1 x 5.5 mm DC socket with strain relief, for the cord's end",
+  "usd": 3,
+  "estimate": true,
+  "supplier": "any electronics distributor",
+  "price_date": "2026-10-18"
+ },
+ "cord-grip": {
+  "kind": "wiring",
+  "maker": "any",
+  "model": "Clear nylon strain-relief bush for 18/2 SPT-2 cord in a 9.5 hole (Heyco kind)",
+  "usd": 2,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-18"
+ },
+ "bumpons-clear": {
+  "kind": "hardware",
+  "maker": "3M",
+  "model": "Bumpon SJ5302 clear hemispherical bumpers 11 x 5, a set of 6 (under the foot)",
+  "usd": 5,
+  "estimate": true,
+  "supplier": "any electronics distributor",
+  "price_date": "2026-10-18"
+ },
+ "lamp-fixings": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "The lamp's screws: three M4 x 12 black button heads and M4 brass inserts bonded in the hub's flange (the shade's collar), four M3 x 8 and inserts (the foot's cover), two M3 x 6 (the dimmer's board), black nylon washers",
+  "usd": 6,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-18"
+ },
+ "thermal-tape": {
+  "kind": "material",
+  "maker": "any",
+  "model": "The strip's own adhesive on the hub, and 3M 8810 thermally conductive tape at the hub's bore round the cord's exit",
+  "usd": 4,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-18"
+ },
+ "felt-pad-ring": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Silicone ring gasket 1 mm, cut to the shade's collar (68 x 92), so the formed collar is clamped without stress",
+  "usd": 3,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-18"
+ },
+ "_moon": "Moon, the bar lamps (round 32): a cordless table lamp and a pendant",
+ "moon-battery": {
+  "kind": "power",
+  "maker": "Samsung SDI",
+  "model": "INR18650-35E Li-ion cells, 3,500 mAh, two in parallel in a welded pack with its own protection board and an NTC (7.0 Ah at 3.6 V: about 25 Wh, 12 h at the 2 W bar setting)",
+  "usd": 14,
+  "estimate": true,
+  "supplier": "a battery pack assembler (two cells about $5 each)",
+  "price_date": "2026-10-19",
+  "note": "UN38.3 for shipping; IEC 62133 for the pack"
+ },
+ "moon-board": {
+  "kind": "control",
+  "maker": "to make (a contract PCB house)",
+  "model": "The table lamp's board: a USB-C and pogo-pin charger (TI BQ25895 kind), a capacitive touch dimmer on the brass finial (stepless, 2200 to 2700 K warm-dim mixing two LED channels), a low-battery blink, sealed in the foot's pocket",
+  "usd": 22,
+  "estimate": true,
+  "supplier": "a PCB assembler, about 500 off",
+  "price_date": "2026-10-19"
+ },
+ "moon-led-table": {
+  "kind": "led",
+  "maker": "Nichia or Seoul (to choose)",
+  "model": "A 30 mm round warm-dim LED board, two channels (2200 K and 2700 K, CRI 90+), about 2.5 W at full, 200 lm; a second 4-LED ring at the column's foot to light the column (0.3 W)",
+  "usd": 9,
+  "estimate": true,
+  "supplier": "an LED module house",
+  "price_date": "2026-10-19"
+ },
+ "moon-contacts": {
+  "kind": "power",
+  "maker": "Mill-Max (or alike)",
+  "model": "Two gold-plated spring-loaded contact pins in the tray, two flat gold rings in the foot's underside, and a 5 V tray of six (the staff's charging tray, its own product)",
+  "usd": 6,
+  "estimate": true,
+  "supplier": "Digi-Key",
+  "price_date": "2026-10-19"
+ },
+ "moon-seals": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Two EPDM O-rings (the column in the foot, the hub's lid), a silicone foot ring 110 x 3 (Shore 40, non-slip, wipeable), a USB-C port with a rubber plug: IP44",
+  "usd": 4,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-19"
+ },
+ "moon-driver": {
+  "kind": "power",
+  "maker": "Mean Well",
+  "model": "PCD-16-700B, constant current 700 mA, 16 to 24 V, phase-cut dimmable (TRIAC, leading and trailing edge: confirm leading), UL8750 Class 2, 84 x 57 x 29.5: in the canopy",
+  "usd": 18.29,
+  "supplier": "TRC Electronics",
+  "price_date": "2026-10-19",
+  "url": "https://www.trcelectronics.com/products/mean-well-pcd-16-700b"
+ },
+ "moon-cob": {
+  "kind": "led",
+  "maker": "Bridgelux",
+  "model": "Vero SE 10 COB, 2700 K, CRI 90, about 1,100 lm at 700 mA (confirm its forward voltage sits in the driver's 16 to 24 V), with an Ideal Chip-Lok holder, in the brass hub on its own heat sink",
+  "usd": 12,
+  "estimate": true,
+  "supplier": "Digi-Key",
+  "price_date": "2026-10-19"
+ },
+ "moon-cord": {
+  "kind": "wiring",
+  "maker": "any",
+  "model": "Black textile-braided 3-core 0.75 mm2 pendant cord, 3 m (cut to the drop), a cord grip in the canopy and a strain relief in the cap, and a mounting strap for a 4 in junction box",
+  "usd": 14,
+  "estimate": true,
+  "supplier": "a lighting supplier",
+  "price_date": "2026-10-19"
+ },
+ "moon-listing": {
+  "kind": "service",
+  "maker": "UL or Intertek (ETL)",
+  "model": "Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run",
+  "usd": null,
+  "supplier": "UL Solutions or Intertek",
+  "price_date": "2026-10-19",
+  "note": "quoted per design; about $8,000 to $15,000 is typical for a fixture, not confirmed"
+ },
+ "_crystal": "round 32d (crystal.py): the Dome pendant's bayonet and the Orb's seat; the rest is Moon's (moon-*). Estimates, to confirm.",
+ "dome-pins": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Three stainless dowel pins 4 x 8 (ISO 8734), pressed into the hub: the bayonet's pins",
+  "usd": 1.5,
+  "estimate": true,
+  "supplier": "McMaster-Carr or alike",
+  "price_date": "2026-10-19"
+ },
+ "dome-plunger": {
+  "kind": "hardware",
+  "maker": "Kipp or Misumi",
+  "model": "A stainless ball spring plunger M5, light force (about 10 N), threaded into the hub: the bayonet's detent, clicking into a dimple in the collar",
+  "usd": 4.5,
+  "estimate": true,
+  "supplier": "Misumi",
+  "price_date": "2026-10-19"
+ },
+ "orb-seat": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "A silicone seat ring 92 x 84 x 1.5 (Shore 40, black) in the base's cup: the ball rests on it, and it stops a nudge rolling it",
+  "usd": 1.5,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-19"
+ }
 }

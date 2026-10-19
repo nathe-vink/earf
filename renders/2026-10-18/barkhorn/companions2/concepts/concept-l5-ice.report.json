@@ -1,0 +1,77 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/companions2/concept-l5-ice.json",
+ "image": "/home/user/earf/renders/2026-10-18/barkhorn/companions2/concepts/concept-l5-ice.png",
+ "seconds": {
+  "build": 0.5,
+  "render": 14.1
+ },
+ "samples": 48,
+ "size": [
+  450,
+  360
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "core#0": {
+   "part": "core",
+   "centre_px": [
+    225.0,
+    180.0
+   ],
+   "box_px": [
+    196,
+    154,
+    255,
+    208
+   ],
+   "depth_m": 1.526
+  },
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    225.0,
+    273.4
+   ],
+   "box_px": [
+    171,
+    253,
+    282,
+    297
+   ],
+   "depth_m": 1.526
+  },
+  "globe#0": {
+   "part": "globe",
+   "centre_px": [
+    225.0,
+    173.8
+   ],
+   "box_px": [
+    132,
+    95,
+    327,
+    276
+   ],
+   "depth_m": 1.526
+  },
+  "neck#0": {
+   "part": "neck",
+   "centre_px": [
+    225.0,
+    256.2
+   ],
+   "box_px": [
+    198,
+    237,
+    253,
+    277
+   ],
+   "depth_m": 1.526
+  }
+ }
+}

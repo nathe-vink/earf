@@ -1,0 +1,86 @@
+{
+ "_note": "L7 Fringe for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-concepts2/l7/render/l7.glb",
+ "origin_mm": [
+  150.0,
+  150.0,
+  0.0
+ ],
+ "materials": {
+  "acrylic": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.025,
+   "roughness": 0.05
+  },
+  "acrylic-dense": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.006,
+   "roughness": 0.05
+  },
+  "glow": {
+   "preset": "emit",
+   "color": "$glow",
+   "strength": 0.0
+  }
+ },
+ "assign": [
+  {
+   "match": "foot|stem|crown",
+   "material": "acrylic"
+  },
+  {
+   "match": "strands",
+   "material": "acrylic-dense"
+  },
+  {
+   "match": "core|tips",
+   "material": "glow"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#F2A29C",
+   "accent": "#7A1A1C",
+   "glow": "#FF4A3A"
+  },
+  "dust": {
+   "deep": "#F2B184",
+   "accent": "#8C3B14",
+   "glow": "#FF8A3A"
+  },
+  "acid": {
+   "deep": "#F2D06B",
+   "accent": "#9A6A12",
+   "glow": "#FFC93A"
+  },
+  "poison": {
+   "deep": "#B2C9A2",
+   "accent": "#2E4A2C",
+   "glow": "#6BD45A"
+  },
+  "ice": {
+   "deep": "#B5D9EE",
+   "accent": "#24557E",
+   "glow": "#4FB8FF"
+  },
+  "haze": {
+   "deep": "#BEADD8",
+   "accent": "#3F2A5E",
+   "glow": "#9A6BFF"
+  },
+  "fog": {
+   "deep": "#F7F8F7",
+   "accent": "#E7E6E1",
+   "glow": "#FFF4E4"
+  },
+  "smoke": {
+   "deep": "#8A888E",
+   "accent": "#141316",
+   "glow": "#C8C0D8"
+  }
+ }
+}

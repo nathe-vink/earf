@@ -1,0 +1,189 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/companions2/concept-r3-haze.json",
+ "image": "/home/user/earf/renders/2026-10-18/barkhorn/companions2/concepts/concept-r3-haze.png",
+ "seconds": {
+  "build": 0.3,
+  "render": 36.1
+ },
+ "samples": 48,
+ "size": [
+  450,
+  360
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "arm#0": {
+   "part": "arm",
+   "centre_px": [
+    300.9,
+    143.7
+   ],
+   "box_px": [
+    241,
+    94,
+    376,
+    209
+   ],
+   "depth_m": 1.103
+  },
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    225.0,
+    221.9
+   ],
+   "box_px": [
+    46,
+    142,
+    424,
+    356
+   ],
+   "depth_m": 1.034
+  },
+  "base-edge#0": {
+   "part": "base-edge",
+   "centre_px": [
+    225.0,
+    221.9
+   ],
+   "box_px": [
+    45,
+    142,
+    424,
+    357
+   ],
+   "depth_m": 1.034
+  },
+  "cover#0": {
+   "part": "cover",
+   "centre_px": [
+    225.0,
+    149.7
+   ],
+   "box_px": [
+    54,
+    65,
+    413,
+    288
+   ],
+   "depth_m": 1.034
+  },
+  "edge#0": {
+   "part": "edge",
+   "centre_px": [
+    225.0,
+    190.3
+   ],
+   "box_px": [
+    53,
+    116,
+    414,
+    313
+   ],
+   "depth_m": 1.034
+  },
+  "feet#0": {
+   "part": "feet",
+   "centre_px": [
+    225.0,
+    229.2
+   ],
+   "box_px": [
+    70,
+    157,
+    393,
+    341
+   ],
+   "depth_m": 1.034
+  },
+  "label#0": {
+   "part": "label",
+   "centre_px": [
+    201.1,
+    171.8
+   ],
+   "box_px": [
+    157,
+    151,
+    247,
+    195
+   ],
+   "depth_m": 1.015
+  },
+  "platter#0": {
+   "part": "platter",
+   "centre_px": [
+    201.1,
+    178.7
+   ],
+   "box_px": [
+    73,
+    117,
+    346,
+    271
+   ],
+   "depth_m": 1.015
+  },
+  "plinth#0": {
+   "part": "plinth",
+   "centre_px": [
+    225.0,
+    190.3
+   ],
+   "box_px": [
+    54,
+    116,
+    413,
+    312
+   ],
+   "depth_m": 1.034
+  },
+  "posts#0": {
+   "part": "posts",
+   "centre_px": [
+    225.0,
+    208.6
+   ],
+   "box_px": [
+    78,
+    139,
+    383,
+    314
+   ],
+   "depth_m": 1.034
+  },
+  "pulley#0": {
+   "part": "pulley",
+   "centre_px": [
+    89.9,
+    172.6
+   ],
+   "box_px": [
+    81,
+    163,
+    99,
+    182
+   ],
+   "depth_m": 1.049
+  },
+  "spindle#0": {
+   "part": "spindle",
+   "centre_px": [
+    201.1,
+    166.6
+   ],
+   "box_px": [
+    198,
+    160,
+    204,
+    174
+   ],
+   "depth_m": 1.015
+  }
+ }
+}

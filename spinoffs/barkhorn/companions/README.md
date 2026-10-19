@@ -223,3 +223,206 @@ system `python3` and fails here. That is worth a line in setup.sh, but I didn't 
 7. **The bearing** is made, not bought. Should we ask Rega or Pro-Ject for their bearing as a spare, or keep ours?
 8. **Prices.** Neither has a selling price. At the speakers' multiple (round 15: $19,000 a pair against about $8,000
    of parts), Cumulus would sell for about $5,000 and Bell for about $1,400. These are for the owner to set.
+
+## Round 32: the bar lamps (Moon, recommended)
+
+The brief (the owner, 2026-10-19, through the coordinator): an acrylic table lamp and a hanging lamp for a bar, Planet
+EARF first, and for sale. Three families were blocked out (`bar_lamps.py`, the sheet at
+`renders/2026-10-19/barkhorn/barlamps/sheet.png`): F1 Block (rounded-square, squared), F2 Column (a lit cylinder),
+F3 Moon (a frosted dome on a tinted column, and its pendant). **Moon is recommended**, F1 Block the alternative if
+the owner wants the squared one.
+
+Why Moon, for a bar:
+- **It lights the table, not the eyes.** The light sits inside a frosted dome, above a seated guest's eye line in the
+  table lamp and up a 46 mm baffle in the pendant (cut-off about 46° from the vertical). Nobody sees an LED.
+- **It survives service.** The dome sheds a spill and the finial is round. The steel foot is sealed by O-rings
+  (IP44, wipeable) and weighs about 1.5 kg, so a sleeve or an elbow doesn't tip it. It charges on a staff tray of
+  six through gold rings, with no cable on the table.
+- **It sells.** The cordless mushroom is the form bars already buy (Poldina, Bellhop, Panthella Portable), so the
+  trade knows it. What is new is the material: a turned cast dome and a solid tinted column whose polished top
+  glows, in the eight Atmosphere colours plus clear, frosted and smoked. The pendant is the same dome hung mouth
+  down, so a room can be specified as one family.
+
+Built as two fab-kit products, `moon.py` (geometry, parts, notes), `moon_table.py` and `moon_pendant.py`; checks pass:
+
+    .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/moon_table.py --out spinoffs/barkhorn/companions/out-moon-table
+    .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/moon_pendant.py --out spinoffs/barkhorn/companions/out-moon-pendant
+
+| | table lamp | pendant |
+|---|---|---|
+| size | foot 120, 277 tall, about 1.9 kg | dome 200 across, disc 220, canopy 150 x 50, drop 600 (to cut) |
+| light | warm-dim board 2200 to 2700 K, 2.5 W, about 200 lm; touch dimmer on the finial | 2700 K CRI 90 COB (Bridgelux Vero SE 10) on a Mean Well PCD-16-700B in the canopy (phase-cut) |
+| power | 25 Wh (two 18650s), about 12 h at the bar setting; tray contacts or USB-C | mains, to be listed to UL 1598 |
+| BOM, one-off shop rates | **$583** (`out-moon-table/bom.md`) | **$780** plus the listing (`out-moon-pendant/bom.md`) |
+| BOM, a run of 200 (my estimate) | about $170 parts, $195 landed | about $180 parts, $205 landed, plus the listing spread over the run |
+| target retail | **$450 to $495** (trade at 30 % off) | **$695 to $750** |
+
+The one-off BOM is mostly the lathe (the turned dome alone is $212 in the table lamp and $344 in the pendant, and
+the brass canopy $229). At volume, four changes bring it down:
+- the domes cast in a mould and finished on the lathe, not turned from block;
+- the brass parts turned in a batch;
+- a spun canopy in place of a turned one;
+- the foot cut from steel bar.
+
+The run figures are my estimates, not quotes. At about $195 landed, $495 retail is about 2.5 times cost, thin once
+the trade discount is taken off. The dome is where the cost has to come out. The benchmarks are about $300 to $500 for
+a cordless bar lamp and $600 to $1,000 for a designer pendant; check them before setting a price. The prices are the
+owner's to set.
+
+**For Planet:** `studio/engine/kit_ext/earf_moon.py` places either lamp from its fab-kit model (the GLBs in
+`out-moon-*/render/`, committed for this) with materials in any flavour and its light set up as Planet's loft does
+(commit f7c99a4):
+- the lamp is a point light inside the dome, hidden from the camera, from transmission and from glossy rays;
+- the frosted dome glows by itself (`shade_glow`).
+
+    {"kind": "kit", "shape": "ext", "module": "earf_moon", "fn": "table", "spots": [[x, y, z_table]], "flavour": "smoked"}
+    {"kind": "kit", "shape": "ext", "module": "earf_moon", "fn": "pendant", "spots": [[x, y, z_rim]], "ceiling": 3.2, "flavour": "smoked"}
+
+Other parameters:
+- `lamp_w`: the power (default 4 for the table lamp, 14 for the pendant);
+- `lamp_k`: the colour temperature (2700);
+- `shade_glow`;
+- `materials`: overrides;
+- a spot can be `{"position", "flavour", "rotate_z"}`.
+
+`lift_shot.py`'s `glow:lamp_w=2` scales the lamp's power. The frames in `renders/2026-10-19/barkhorn/moon/` are made
+with this same piece (`moon_shots.py`), so they test exactly what Planet imports.
+
+The frames (`renders/2026-10-19/barkhorn/moon/`):
+
+![Moon](../../../renders/2026-10-19/barkhorn/moon/sheet.png)
+
+The critic (`critic/LOG.md`) ran three blind rounds on the smoked bar hero: 5.5, 5.5, then 6.0. Three rounds is the
+family's limit, so I stopped there. Open on the hero:
+- the smoked column still reads dark (its tint is dense);
+- the pendant's underside clips, and the pendant is out of focus at f/2.8;
+- the concrete shows no boards (the Poly Haven wall is smooth);
+- the grade is all orange at a 3600 K balance.
+
+A photographed hero would fix these. The shapes and finishes are fine.
+
+**Warmth** (the coordinator: the dome read lavender-white in the bar frames). The cause was the neutral tints' own
+glow, #FFB878: near white once a 3000 K balance takes it back, and pale enough to clip. It is now a warm ivory,
+#FF9A50, in the products' flavours (`bar_lamps.VARIANTS`, rebuilt), so Planet gets it by default. The bar frames
+also balance at 3600 K, as bar photography does, so 2700 K reads warm, not white.
+
+**F1b, Block lit low** (`f1b.py`, kept ready in case the owner picks the square):
+- the table lamp: F1 Block's tinted rounded-square block over a frosted lower sleeve, 22 to 130, with a hidden light
+  inside it at 100, so the frost glows and lights the table around the foot; a steel shadow line between the two;
+- the pendant: the same split, with a frosted band round the mouth, the block above, and the light 120 up inside
+  (a cut-off of about 32°).
+
+It is rendered in Moon's two bar frames (`renders/2026-10-19/barkhorn/f1b/`, beside Moon in `beside-moon.png`). These are blockouts: if the owner picks
+it, it gets Moon's treatment (fab-kit products, a BOM, a kit piece).
+
+Still open:
+- the listing cost;
+- the board (to make; a TI BQ25895-class charger with a touch dimmer);
+- whether bars want the tray of six as its own product;
+- the canopy in brass or blackened steel to match Planet's steel.
+
+## Round 32c: the frost set within the acrylic, a shape study
+
+The owner, on Moon beside Block: "I'm not sure I like the white section. Maybe if we do that for light dispersion it's
+set within the acrylic. Not sure what shape I like yet."
+
+**The treatment** (`study.py`): nothing white outside. Every visible surface of the shade is polished tinted cast
+acrylic. The diffuser is a frosted liner (an acid-etched or bead-blasted tube or cup) set 1 mm inside the shell.
+- Where a shade is open below (the domes, the cones, the pendants), a 3 mm tinted skin covers the liner's inside as
+  well, so the wall is tint, frost, tint.
+- The frost is seen only through acrylic, so the tint glows evenly from within and the source is never seen.
+- In manufacture this is a cast-in liner (the frosted part cast into the block) or a bonded three-layer wall; the
+  study doesn't choose yet.
+
+**The shapes**, each a cordless table lamp with a matching pendant:
+- **Dome:** Moon's dome on a column; the pendant's light is up a brass baffle.
+- **Block:** the rounded square.
+- **Column:** the cylinder.
+- **Sphere:** a ball on a column, and a ball open below.
+- **Cone:** mouth down, on a column and as the pendant. It is the classic bar shape, with the deepest cut-off.
+
+The pendants are open below, with the light up inside them (cut-offs about 20° to 35° from the vertical).
+The table lamps keep Moon's cordless foot.
+
+**Rendering:** Moon's bar frame, in smoked and in Ember (`renders/2026-10-19/barkhorn/study/sheet.png`).
+- In the render, the tint is cast denser than the Clouds' (a 5 mm depth for Ember, 8 mm for smoked) so it carries
+  the colour in walls 8 to 12 mm thick. The liner glows at 0.25.
+- A lamp close inside a closed form burned its liner white, so the block's, the column's and the sphere's lamps are
+  lower.
+
+These are blockouts. Whichever shape the owner picks gets Moon's full build.
+
+![The shape study](../../../renders/2026-10-19/barkhorn/study/sheet.png)
+
+## Round 32d: the pick, Dome and Orb
+
+The owner picked from the shape study: "I like the dome overhead lights, especially if the acrylic covers are easy to
+swap out, but I'm also a sucker for the spheres. For the table lamp though, I'd want the spheres to be squatted rather
+than raised, like a crystal ball." Both products keep round 32c's wall: tint, frost, tint, with nothing white outside.
+They are built as fab-kit products (`crystal.py`, `dome_pendant.py`, `orb_table.py`); both pass their checks.
+
+**Dome, the pendant, with covers that swap by hand.**
+- **The cover:** the tinted dome, 200 across. A brass collar is bonded into its crown, with three L-slots in it.
+- **The catch:** three pins on the fixture's brass hub make a quarter-turn bayonet (30°). To take the cover off, lift
+  it 5 mm, turn it and lower it. To fit one, push it up, turn it until the spring plunger clicks into its dimple, and
+  let go. The cover's weight holds each pin up in a notch at the end of its slot, so a knock can't turn it off. That
+  is more secure than a magnet over a bar, and it needs no tools.
+- **What stays up:** the COB (2700 K, 22 mm up a 46 mm bore, a cut-off of about 46°), the hub, the cord and the driver
+  in the canopy. A cover is never a live part, and the fixture is listed (UL 1598) with any cover.
+- **Spare covers** are sold separately in every tint.
+
+**Orb, the table lamp, a crystal ball.**
+- **The ball:** tinted, 160 across, sitting low in the cup of a short base, 180 tall overall. The base is a
+  blackened-steel drum 120 across under a brass ring; the ring is the touch (tap to switch, hold to dim, 2200 to
+  2700 K).
+- **The guts:** Moon's (a 25 Wh battery, the tray contacts or USB-C, IP44), sealed in the base. The LED shines up
+  through a sealed window into a brass-lined port under the ball.
+- **The ball lifts off**, because nothing in it is electrical, so Orbs swap colour just as Domes do. It rests on a
+  silicone ring in an 18 mm cup, enough to stop a nudge rolling it.
+- **The weight** is about 2.6 kg with the ball.
+- **Height:** at 180 it is below the brief's 250–300 mm, by the owner's choice (squat, not raised).
+
+| | Dome pendant | Orb table lamp |
+|---|---|---|
+| BOM, one-off shop rates | **$1,421** plus the listing (`out-dome-pendant/bom.md`) | **$1,190** (`out-orb-table/bom.md`) |
+| of which the three-layer cover | about $990 (three turned cups, the rim and the brass collar) | about $855 (three turned balls) |
+| BOM, a run of 200 (my estimate) | about $200 parts, $230 landed; a spare cover about $100 | about $200 parts, $225 landed; a spare ball about $100 |
+| target retail | **$795 to $895** with one cover; covers **$295 to $345** | **$595 to $695**; balls **$245 to $295** |
+
+The one-off price is the lathe turning three nested layers from block. In a run, the layers are cast or moulded and
+only finished on the lathe, and the frost is cast into the tinted block, which is the caster's question. The run
+figures are my estimates, not quotes. The covers are where the line earns: a bar that buys the fixtures once can
+change its colour by season. The prices are for the owner to set.
+
+**For Planet** (`studio/engine/kit_ext/earf_moon.py`, the same piece as Moon's): `fn` is `dome` (spots: the rim;
+`ceiling` stretches the cord) or `orb` (spots: the table).
+- The liner glows by itself (`shade_glow`, default 0.25), and the lamp is hidden as before (`lamp_w` defaults to 9 and
+  3).
+- `hide` takes a pattern of part names, so a spare cover can stand alone (`"hub|pins|cob|gland|cord|canopy"`).
+- `cover_drop` and `cover_turn` show the swap; `lamp: false` turns the light off.
+- The GLBs are committed in `out-dome-pendant/render/` and `out-orb-table/render/`.
+
+The frames (`crystal_shots.py`, `renders/2026-10-19/barkhorn/crystal/`) are made through that piece:
+- the bar hero in smoked and in Ember;
+- the swap (a Dome lowered off its fixture, three spare covers on the counter);
+- the catch, close.
+
+![Orb and Dome](../../../renders/2026-10-19/barkhorn/crystal/sheet.png)
+
+**Critic** (`critic/LOG.md`): three blind rounds on the smoked hero scored 5.0, 5.0 and 5.0. That is the family's
+limit, so I stopped. It is lower than Moon's 6.0.
+
+Two findings changed the products, not just the set:
+- The smoked tint was cast too light and read cream through the frost; it is now denser (`crystal.VARIANTS`).
+- The Orb's light sat below the ball's centre and drew a crescent in the frost; it is now centred (`ORB_LIGHT`, and
+  the kit piece).
+
+Open on the hero:
+- the grade is all red-orange at 3200 K, and the counter reads as red lacquer;
+- the smoked ball reads milky, with no hot core;
+- the base is dark;
+- the pendant's underside reads pale;
+- the wall is flat.
+
+Smoked is the hardest tint for this treatment: lit from within it glows a warm grey, not a colour. The Ember frame
+shows the idea better.

@@ -59,7 +59,11 @@ PRESET_DEFAULTS = {
     # frosted translucent resin or glass (a cast waveguide): a milky body that light crosses (subsurface scattering
     # `radius` metres deep, so a thin wall glows and a thick one deepens to `absorb`), a frosted surface over it
     # (`roughness`), and a little clear transmission (`clear`) so it reads as cast resin and not as paint
-    'frosted':    dict(color='#F2EEE6', absorb='#E9DFC9', roughness=0.45, ior=1.5, radius=0.025, clear=0.15),
+    # `glow` (W/m2-ish emission strength) and `glow_color`: a frosted diffuser lit from within gives off its own light, as a
+    # lamp's shade does. Cycles passes a hidden lamp's light through rough transmission only as noisy caustics, so the
+    # shade glows by itself and the lamp inside is hidden from camera and transmission (Planet, f7c99a4); 0 is unlit
+    'frosted':    dict(color='#F2EEE6', absorb='#E9DFC9', roughness=0.45, ior=1.5, radius=0.025, clear=0.15, glow=0.0,
+                       glow_color='#FFC890'),
     # cast translucent resin, as the photograph's waveguide: a milky body (`color`) that light crosses by random-walk
     # subsurface scattering, each channel's mean free path from `deep` (the colour it turns where thick or seen through
     # edge-on: red travels farthest, so thick resin goes amber), `radius` metres at its longest; cloudy (`cloud`: the
@@ -403,6 +407,8 @@ def make(bpy, name, preset, overrides=None, bevel_mm=0.0):
         dc = hex_lin(p['absorb'])
         setin('Subsurface Radius', (max(dc[0], 0.05), max(dc[1], 0.05), max(dc[2], 0.05)))   # deeper where the tint lets light through
         setin('Transmission Weight', p['clear'])
+        if p.get('glow', 0) > 0:
+            setin('Emission Color', hex_lin(p['glow_color'])); setin('Emission Strength', p['glow'])
         if preset == 'frosted_strata':
             nt.links.new(_strata(nt, p), I['Base Color'])
         elif preset == 'frosted_terrazzo':

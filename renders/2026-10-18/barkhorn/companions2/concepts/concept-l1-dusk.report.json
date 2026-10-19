@@ -1,0 +1,119 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/companions2/concept-l1-dusk.json",
+ "image": "/home/user/earf/renders/2026-10-18/barkhorn/companions2/concepts/concept-l1-dusk.png",
+ "seconds": {
+  "build": 0.1,
+  "render": 13.4
+ },
+ "samples": 48,
+ "size": [
+  450,
+  360
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    225.0,
+    273.4
+   ],
+   "box_px": [
+    168,
+    253,
+    285,
+    298
+   ],
+   "depth_m": 1.526
+  },
+  "core#0": {
+   "part": "core",
+   "centre_px": [
+    225.0,
+    197.2
+   ],
+   "box_px": [
+    203,
+    124,
+    248,
+    275
+   ],
+   "depth_m": 1.526
+  },
+  "panel-0#0": {
+   "part": "panel-0",
+   "centre_px": [
+    188.3,
+    197.9
+   ],
+   "box_px": [
+    168,
+    119,
+    211,
+    287
+   ],
+   "depth_m": 1.494
+  },
+  "panel-1#0": {
+   "part": "panel-1",
+   "centre_px": [
+    260.2,
+    191.7
+   ],
+   "box_px": [
+    238,
+    116,
+    285,
+    277
+   ],
+   "depth_m": 1.559
+  },
+  "panel-2#0": {
+   "part": "panel-2",
+   "centre_px": [
+    241.8,
+    202.1
+   ],
+   "box_px": [
+    206,
+    123,
+    276,
+    286
+   ],
+   "depth_m": 1.453
+  },
+  "panel-3#0": {
+   "part": "panel-3",
+   "centre_px": [
+    209.7,
+    188.0
+   ],
+   "box_px": [
+    177,
+    116,
+    241,
+    263
+   ],
+   "depth_m": 1.599
+  },
+  "panel-4#0": {
+   "part": "panel-4",
+   "centre_px": [
+    225.0,
+    116.1
+   ],
+   "box_px": [
+    168,
+    107,
+    285,
+    127
+   ],
+   "depth_m": 1.526
+  }
+ }
+}

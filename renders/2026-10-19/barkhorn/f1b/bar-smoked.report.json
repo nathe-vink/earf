@@ -1,0 +1,189 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/f1b/bar-smoked.json",
+ "image": "/home/user/earf/renders/2026-10-19/barkhorn/f1b/bar-smoked.png",
+ "seconds": {
+  "build": 0.4,
+  "render": 248.9
+ },
+ "samples": 256,
+ "size": [
+  900,
+  1000
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    292.6,
+    796.4
+   ],
+   "box_px": [
+    206,
+    767,
+    383,
+    830
+   ],
+   "depth_m": 1.106
+  },
+  "cap#0": {
+   "part": "cap",
+   "centre_px": [
+    292.6,
+    519.4
+   ],
+   "box_px": [
+    213,
+    511,
+    375,
+    527
+   ],
+   "depth_m": 1.106
+  },
+  "edge-top#0": {
+   "part": "edge-top",
+   "centre_px": [
+    292.6,
+    526.4
+   ],
+   "box_px": [
+    213,
+    525,
+    376,
+    528
+   ],
+   "depth_m": 1.106
+  },
+  "line#0": {
+   "part": "line",
+   "centre_px": [
+    292.6,
+    659.6
+   ],
+   "box_px": [
+    216,
+    650,
+    372,
+    670
+   ],
+   "depth_m": 1.106
+  },
+  "lower#0": {
+   "part": "lower",
+   "centre_px": [
+    292.6,
+    722.9
+   ],
+   "box_px": [
+    213,
+    654,
+    375,
+    802
+   ],
+   "depth_m": 1.106
+  },
+  "shade#0": {
+   "part": "shade",
+   "centre_px": [
+    292.6,
+    591.8
+   ],
+   "box_px": [
+    213,
+    525,
+    375,
+    666
+   ],
+   "depth_m": 1.106
+  },
+  "canopy#0": {
+   "part": "canopy",
+   "centre_px": [
+    607.0,
+    -445.3
+   ],
+   "box_px": [
+    543,
+    -515,
+    675,
+    -382
+   ],
+   "depth_m": 1.386
+  },
+  "cap#0.001": {
+   "part": "cap",
+   "centre_px": [
+    607.0,
+    107.4
+   ],
+   "box_px": [
+    504,
+    63,
+    720,
+    145
+   ],
+   "depth_m": 1.386
+  },
+  "cord#0": {
+   "part": "cord",
+   "centre_px": [
+    607.0,
+    -163.1
+   ],
+   "box_px": [
+    603,
+    -430,
+    611,
+    102
+   ],
+   "depth_m": 1.386
+  },
+  "line#0.001": {
+   "part": "line",
+   "centre_px": [
+    607.0,
+    211.1
+   ],
+   "box_px": [
+    506,
+    181,
+    717,
+    237
+   ],
+   "depth_m": 1.386
+  },
+  "lower#0.001": {
+   "part": "lower",
+   "centre_px": [
+    607.0,
+    240.0
+   ],
+   "box_px": [
+    504,
+    184,
+    720,
+    287
+   ],
+   "depth_m": 1.386
+  },
+  "shade#0.001": {
+   "part": "shade",
+   "centre_px": [
+    607.0,
+    161.5
+   ],
+   "box_px": [
+    504,
+    77,
+    720,
+    234
+   ],
+   "depth_m": 1.386
+  }
+ }
+}
