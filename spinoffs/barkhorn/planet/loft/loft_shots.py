@@ -156,13 +156,18 @@ VIEWS = {
                   # across the speaker; the listener's-seat concept (p9c, p9d, composition checks) lost both speakers
                   # behind the chairs. Shared: the screen well below the speaker (81 vs 39), the speaker lit harder, a
                   # stop darker, less orange, the records in pools, the sconce up, more haze, the base and a beam in
+                  # after the two critics on p9 (5.5, 5.0): no practical in frame, no pools; the screen a print below the
+                  # wall; the speaker 40; the record wall the brightest mass: a Moon table lamp on the side table, clear of
+                  # the speaker (left of it from here); the screen up; the speaker up; the records down to pools
                   'camera': {'position': [14.6, 2.5, 1.2], 'target': [16.3, 4.6, 1.15], 'lens_mm': 26, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, LP.PAIR['y'][1], 0.9]},
-                  'settings': {'spk_irr': 12.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 20.0, 'sconce_w': 25.0,
-                               'exposure': 0.0, 'wb': 3100, 'spot_records': 20.0, 'rec_cone': 18.0, 'rec_aim_z': 1.2,
+                  'settings': {'spk_irr': 18.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 20.0, 'sconce_w': 25.0,
+                               'exposure': 0.0, 'wb': 3100, 'spot_records': 10.0, 'rec_cone': 18.0, 'rec_aim_z': 1.2,
                                'fill_w': 40.0, 'fill_pos': [14.6, 3.2, 3.0], 'fill_target': [15.2, 3.4, 0.0],
-                               'record_glow': 0.1, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.12,
-                               'screen_tint': '#FFA060', 'flame': 60.0, 'candle_w': 1.5, 'haze': 0.025, 'spk_link': True}},
+                               'record_glow': 0.05, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.3,
+                               'screen_tint': '#FFA060', 'flame': 60.0, 'candle_w': 1.5, 'haze': 0.025, 'spk_link': True,
+                               'extra_bells': [[LP.LISTEN_TABLE[0] - 0.12, LP.LISTEN_TABLE[1] - 0.10, 0.495]],
+                               'moon_table_w': 60.0, 'moon_glow': 0.6}},
     'street': {'title': 'the shopfront window at night, from the kerb',
                # p7's light (4.75, the best street) with the review's lifted sources (pendants, lamps, records, candles
                # x3.6, the sconce x4.8, the entry x3, the niches x2.4, the speaker x2.4, the shelf edges x0.5), p10's
