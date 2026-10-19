@@ -55,9 +55,12 @@ def props(v):
         out.append({'kind': 'kit', 'shape': 'asset', 'model': v.get('chair_model', 'dining_chair_02'), 'res': '1k',
                     'position': [wx, wy + dy, 0.0], 'rotate': [0, 0, v.get('dining_rot0', 180.0) + a + 90 + 6 * k]})
     for x, y, f in P.CHAIRS:                                          # the lounge's low leather chairs, as scanned
-        out.append({'kind': 'kit', 'shape': 'asset', 'model': 'mid_century_lounge_chair', 'res': '1k',
-                    'position': [x, y, 0.008],
-                    'rotate': [0, 0, -90.0 + f + ((int(x * 10) * 7 + int(y * 10) * 3) % 7 - 3)]})
+        ch = {'kind': 'kit', 'shape': 'asset', 'model': 'mid_century_lounge_chair', 'res': '1k',
+              'position': [x, y, 0.008], 'rotate': [0, 0, -90.0 + f + ((int(x * 10) * 7 + int(y * 10) * 3) % 7 - 3)]}
+        if v.get('chair_dye'):                                         # re-dyed (room 31's recolour piece)
+            ch.update({'shape': 'ext', 'path': 'spinoffs/barkhorn/room31/pieces.py', 'fn': 'recolour',
+                       'match': ['mid_century'], 'blend': 'MULTIPLY', 'color': v['chair_dye'], 'mix': 1.0})
+        out.append(ch)
     if v['street']:                                                   # the street lamps along the curb (CC0)
         for y in STREET_LAMPS:
             out.append({'kind': 'kit', 'shape': 'asset', 'model': 'street_lamp_01', 'res': '1k',

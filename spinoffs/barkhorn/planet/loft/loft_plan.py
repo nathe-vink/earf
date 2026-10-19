@@ -48,3 +48,11 @@ INLAY = dict(w=0.06, set=0.06)                                       # 60 mm wid
 # the lamps: only the listening room keeps a sconce (on the concrete by the record wall); the screens light the banquette
 SCONCES_RIGHT = []
 SCONCES_LEFT_LOUNGE = [15.95]
+
+# the listening room's signs of life (listening-r1 c5): a steel side table by the chair nearest the left Ember speaker
+LISTEN_TABLE = (15.45, 4.35)
+
+
+def candle_spots():
+    """The den's candles, and one on the listening side table."""
+    return _D.candle_spots() + [(LISTEN_TABLE[0] + 0.07, LISTEN_TABLE[1] - 0.06, 0.495)]

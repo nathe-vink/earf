@@ -1,0 +1,391 @@
+{
+ "stage1": {
+  "impression": "A competent but plainly CG back-bar: the bright, neutral-white lit shelf edges read as LED strips in a nightclub or a liquor-store display, and the niche reads as a lit display case, so the speaker looks more like a product in a showroom than furniture in a room. The fir counter takes the bottom third and is a smooth, dull brown plane with no pool of light on it. The near glass is a blurred white block. The bottles are obvious repeats, the concrete has no board-form character at this scale, and the frame is darker than a published night interior (median 17).",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Lit shelf edges warm (about 2400 to 2700 K) and secondary, not the brightest neutral-white lines in the frame",
+  "Frame lum_median 24 to 40, with shadows that hold detail in the back-bar and the counter",
+  "A visible pool of pendant light on the fir counter, falling off naturally toward the camera",
+  "The Fog speaker reads at a glance as thick clear acrylic over white batts, with glowing edges and clean reflections, not a white box in a lit case",
+  "The near glass reads as a real rocks glass with liquid, ice or a believable highlight, plus at least one more sign of life (a record sleeve, a menu)",
+  "Bottles varied in shape, height, label and fill, with no repeated model visible",
+  "Concrete showing board-form grain, pour lines or tie holes at 1:1",
+  "Some atmosphere: faint visible haze in the niche spots' beams"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    305,
+    250
+   ],
+   "what": "Shelf lit edges are near-white (lum_median 184, R194 G182 B177) against a 2400 K room: they read as LED strip signage and pull the eye from the speaker"
+  },
+  {
+   "region": [
+    460,
+    75,
+    605,
+    250
+   ],
+   "what": "Same white LED-strip edges on the right-hand shelves"
+  },
+  {
+   "region": [
+    325,
+    120,
+    445,
+    250
+   ],
+   "what": "Niche back is a flat, evenly lit grey field behind the upper cabinet: reads as a display case or lightbox"
+  },
+  {
+   "region": [
+    340,
+    255,
+    435,
+    340
+   ],
+   "what": "White batts and woofer area are hot (lum_p95 228); the lower cabinet reads as a white box, and the acrylic's edges and thickness barely register"
+  },
+  {
+   "region": [
+    440,
+    345,
+    510,
+    395
+   ],
+   "what": "Near glass is a defocused white rectangle (crush 5.6 %, p95 175); it does not read as glass"
+  },
+  {
+   "region": [
+    0,
+    330,
+    720,
+    480
+   ],
+   "what": "Counter is a smooth, uniform dark plane (lum_median 26, range 35) with no pool of light and little grain; the front edge is mushy"
+  },
+  {
+   "region": [
+    0,
+    20,
+    300,
+    340
+   ],
+   "what": "Repeated bottle models with identical labels, a CG giveaway"
+  },
+  {
+   "region": [
+    0,
+    0,
+    300,
+    260
+   ],
+   "what": "Concrete behind the shelves is a mottled dark texture with no formwork boards, pour lines or tie holes"
+  },
+  {
+   "region": [
+    680,
+    0,
+    720,
+    55
+   ],
+   "what": "Pendant's frosted tube is cool white (B200 > R196) and clipping (3.5 %), so it does not match the warm room"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Labels and wall show denoiser smear; there is no visible haze (density 0.008)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The shelves' lit edges are the brightest, coolest lines in the frame and read as nightclub LED strips.",
+   "evidence": {
+    "region": [
+     10,
+     240,
+     290,
+     246
+    ],
+    "measured": "lum_median 184.3, R194 G182 B177 (neutral white in a 2400 K room)"
+   },
+   "change": {
+    "setting": "the shelves' lit edges (emission strength and colour)",
+    "from": "4.0, white",
+    "to": "1.2, 2400 K warm"
+   },
+   "expected": "The edges glow as warm, polished acrylic edges that sit under the speaker in the hierarchy, and the bottles pick up warm rim light.",
+   "accept": {
+    "region": [
+     10,
+     240,
+     290,
+     246
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     80,
+     140
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The frame is too dark for a published night interior; the back-bar's shadows are nearly empty.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_p50 17.2, below_40_pct 86.7"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "0.6",
+    "to": "1.1 (after c1 and c3 have removed the hot whites)"
+   },
+   "expected": "Frame median in the high 20s to low 30s, with the bottles, the concrete and the counter's grain readable.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The niche is lit like a display case: a flat grey back and 300 W spots blow the batts to white, so the clear acrylic's thickness and edges are lost.",
+   "evidence": {
+    "region": [
+     340,
+     255,
+     435,
+     340
+    ],
+    "measured": "lum_median 141, lum_p95 228; backdrop at [330,125,445,250] lum_median 52, flat"
+   },
+   "change": {
+    "setting": "in each niche 2 x spot (power) and the niches' frosted backs",
+    "from": "300 W, 2600 K; frosted back 0.3",
+    "to": "160 W, 2600 K, aimed to graze the cabinet's sides from above so the acrylic edges catch light; frosted back 0.12 with a top-to-bottom falloff"
+   },
+   "expected": "The speaker reads as a glowing clear block with bright edges against a darker, graded niche. The batts are bright but not glaring.",
+   "accept": {
+    "region": [
+     340,
+     255,
+     435,
+     340
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 205
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The fir counter takes a third of the frame but has no pool of light, so it reads as a flat dark plane.",
+   "evidence": {
+    "region": [
+     150,
+     340,
+     550,
+     420
+    ],
+    "measured": "lum_median 34.4; y-profile of [0,330,720,480] 28-34-19 with no defined pool"
+   },
+   "change": {
+    "setting": "pendants 3 x spot (power, cone) and the fir's finish",
+    "from": "60 W, cone 50 deg; satin",
+    "to": "110 W, cone 35 deg, with the nearest pendant's pool on the counter just left of the glass; fir finish a little glossier (oiled), so the pool shows grain and a soft sheen"
+   },
+   "expected": "A warm oval pool on the counter that falls to dark toward the lens and the edges, with the grain legible inside it.",
+   "accept": {
+    "region": [
+     150,
+     340,
+     550,
+     420
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     42,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The near glass is a blurred white block, and the frame has no sign of life.",
+   "evidence": {
+    "region": [
+     440,
+     345,
+     510,
+     395
+    ],
+    "measured": "white rectangular highlight, p95 175, crush 5.6 %, edge width 16 px (defocused)"
+   },
+   "change": {
+    "setting": "props (rocks glass) and camera focus",
+    "from": "empty glass at the near edge, out of focus",
+    "to": "a heavy-based rocks glass with two fingers of whisky and one large clear ice cube, moved about 25 cm farther in so it falls inside the depth of field (or f/2.8 to f/4), plus a record sleeve leaning on the counter and a folded menu"
+   },
+   "expected": "The glass reads as glass: an amber body, a caustic on the counter, and a small specular highlight instead of a white slab.",
+   "accept": {
+    "region": [
+     440,
+     345,
+     510,
+     395
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The back-bar bottles are visibly the same few models with identical labels.",
+   "evidence": {
+    "region": [
+     0,
+     20,
+     300,
+     340
+    ],
+    "measured": "seen: matching label bands and silhouettes repeat across shelves"
+   },
+   "change": {
+    "setting": "props (bottles on the back-bar)",
+    "from": "a few repeated bottle models",
+    "to": "at least 12 distinct shapes and heights, labels varied in tone and size, fill levels from 20 to 100 %, some smoked or green glass, spacing irregular, a few bottles turned"
+   },
+   "expected": "The shelves read as a working bar's stock, not an asset scatter.",
+   "accept": {
+    "region": [
+     0,
+     20,
+     300,
+     340
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The pendant at the top right is cool white and clipping, which breaks the single warm set of practicals.",
+   "evidence": {
+    "region": [
+     680,
+     0,
+     720,
+     55
+    ],
+    "measured": "lum_median 198, R196 G198 B200, clip_pct 3.5"
+   },
+   "change": {
+    "setting": "the pendants' frosted tubes and lamps (emission)",
+    "from": "tubes 0.35, lamps 4.0, neutral",
+    "to": "tubes 0.25 at 2400 K, lamps 2.5"
+   },
+   "expected": "The frosted tube glows warm and even, with no clipped area.",
+   "accept": {
+    "region": [
+     680,
+     0,
+     720,
+     55
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "There is no atmosphere: the dark areas are empty and the beams are invisible.",
+   "evidence": {
+    "region": [
+     600,
+     60,
+     720,
+     320
+    ],
+    "measured": "lum_p5 7.8; no visible beam from the niche or pendant spots"
+   },
+   "change": {
+    "setting": "haze in the room's air (density)",
+    "from": "0.008 per metre",
+    "to": "0.02 per metre"
+   },
+   "expected": "The spots draw faint cones, and the shadows lift slightly while keeping their depth.",
+   "accept": {
+    "region": [
+     600,
+     60,
+     720,
+     320
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 10
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Fog speaker read as the frame's one colour (a tint)",
+   "why": "The card fixes it as water-clear acrylic over white batts. Its presence has to come from light (c3), not colour."
+  },
+  {
+   "request": "Show the concrete's board-form grain, pour lines and tie holes",
+   "why": "This is a material-texture change (the scale and relief of the board marks). The card allows the concrete's tone and sheen but not its texture. It is a blocker for a 9, so the owner or modeller should decide."
+  },
+  {
+   "request": "Thicker, visibly flush-set acrylic shelves",
+   "why": "The shelves' thickness and mounting belong to the back-bar's design, which the card fixes."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

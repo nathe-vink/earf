@@ -752,7 +752,7 @@ def blind_mat(bpy, name, colour, strength):
     out = nt.nodes.new('ShaderNodeOutputMaterial'); em = nt.nodes.new('ShaderNodeEmission')
     em.inputs['Color'].default_value = lin(colour)
     tc = nt.nodes.new('ShaderNodeTexCoord'); wv = nt.nodes.new('ShaderNodeTexWave'); wv.bands_direction = 'Z'
-    wv.inputs['Scale'].default_value = 18.0
+    wv.inputs['Scale'].default_value = 6.0                           # (18 drew a moire at a distance)
     nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 0.9
     for n in (wv, nz):
         nt.links.new(tc.outputs['Object'], n.inputs['Vector'])

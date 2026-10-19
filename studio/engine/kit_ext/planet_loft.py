@@ -70,8 +70,8 @@ def fir(bpy, vertical=False, coat=0.0, coat_rough=0.4, tint=None, mix=None, name
     """Reclaimed Douglas fir, oiled: a weathered plank scan warmed toward honey; `vertical` runs the grain up."""
     key = f'fir-{vertical}-{tint}-{mix}'
     if key not in _M:
-        m = D._pbr(bpy, 'brown_planks_09', rot=(0, 90, 0) if vertical else None, tint=tint or '#8A5A34',
-                   tint_mix=mix if mix is not None else 0.4, scale=1.0, res='2k')
+        m = D._pbr(bpy, 'brown_planks_09', rot=(0, 90, 0) if vertical else None, tint=tint or '#6E4A2E',
+                   tint_mix=mix if mix is not None else 0.5, scale=1.0, res='2k')
         b = D._bsdf(m); R._set(b, 'Coat Weight', 0.25); R._set(b, 'Coat Roughness', 0.45)
         _M[key] = m
     return _M[key]
@@ -291,7 +291,7 @@ def backbar(bpy, kit, p, objs):
             sh.box(a + 0.015, y0 + 0.06, z - T, b - 0.015, W - 0.01, z)
             ed.box(a + 0.015, y0 + 0.058, z - T + 0.004, b - 0.015, y0 + 0.0605, z - 0.004)
     objs.append(sh.object(bpy, acrylic(bpy, 'clear', 'shelf-clear'), bevel=0.002))
-    objs.append(ed.object(bpy, emitter(bpy, 'shelf-edge', p.get('shelf_color', '#FFB878'), p.get('shelf_glow', 4.0))))
+    objs.append(ed.object(bpy, emitter(bpy, 'shelf-edge', p.get('shelf_color', '#FF9C50'), p.get('shelf_glow', 1.2))))
     _bottles(bpy, p, objs, runs(x0, x1))
 
 
@@ -346,10 +346,10 @@ def pendants(bpy, kit, p, objs):
         _cyl(cap.bm, x, y, zr + 0.32, 0.092, 0.02, seg=48)
         _cyl(cord.bm, x, y, zr + 0.34, 0.003, P.CEIL - LP.BEAM['d'] - zr - 0.34, seg=8)
         _cyl(glow.bm, x, y, zr + 0.18, 0.025, 0.06, seg=16)
-    objs.append(tube.object(bpy, acrylic(bpy, 'frosted', 'pendant-frosted', glow=p.get('pendant_glow', 0.35)), smooth=True))
+    objs.append(tube.object(bpy, acrylic(bpy, 'frosted', 'pendant-frosted', glow=p.get('pendant_glow', 0.25), glow_col='#FFA45A'), smooth=True))
     objs.append(cap.object(bpy, steel(bpy), smooth=True))
     objs.append(cord.object(bpy, principled(bpy, 'cord', '#1A1612', rough=0.7), smooth=True))
-    objs.append(glow.object(bpy, emitter(bpy, 'pendant-lamp', '#FFC27A', p.get('pendant_lamp', 4.0)), smooth=True))
+    objs.append(glow.object(bpy, emitter(bpy, 'pendant-lamp', '#FFB060', p.get('pendant_lamp', 2.5)), smooth=True))
 
 
 def partition(bpy, kit, p, objs):
@@ -395,23 +395,42 @@ def room(bpy, name, p, kit):
                 velvet=lambda bpy, colour, name: wool(bpy),
                 shade_mat=lambda bpy, p: acrylic(bpy, 'frosted', 'shade-frosted', glow=p.get('shade_glow', 0.4)),
                 storefront_mat=lambda bpy, p: steel(bpy),
-                sign_mat=lambda bpy, p: principled(bpy, 'frost-etch', '#E9E7E2', rough=0.7, spec=0.3,
-                                                    emit='#FFF0DC', strength=p.get('etch_glow', 0.05)),
+                sign_mat=lambda bpy, p: principled(bpy, 'frost-etch', '#E2D8CA', rough=0.7, spec=0.3,
+                                                    emit='#FFD2A0', strength=p.get('etch_glow', 0.05)),
                 _curtain=lambda *a, **k: None)
     with _patched(**wood):
         D.shopfront(bpy, kit, p, objs)
         bar(bpy, kit, p, objs)
         D.banquette(bpy, kit, p, objs)
-        with _patched(plan={'SCONCES_RIGHT': LP.SCONCES_RIGHT, 'SCONCES_LEFT_LOUNGE': LP.SCONCES_LEFT_LOUNGE}):
+        with _patched(plan={'SCONCES_RIGHT': LP.SCONCES_RIGHT, 'SCONCES_LEFT_LOUNGE': LP.SCONCES_LEFT_LOUNGE,
+                            'candle_spots': LP.candle_spots}):
             D.sconces(bpy, kit, p, objs)
+            if p.get('props', True):
+                D.candles(bpy, kit, p, objs)
         D.lounge(bpy, kit, p, objs)
         D.record_wall(bpy, kit, p, objs)
         if p.get('props', True):
-            D.candles(bpy, kit, p, objs)
             D.glassware(bpy, kit, p, objs)
         if p.get('street', True):
             D.street(bpy, kit, p, objs)
     backbar(bpy, kit, p, objs)
     pendants(bpy, kit, p, objs)
     partition(bpy, kit, p, objs)
+    listen_props(bpy, kit, p, objs)
     return objs
+
+
+def listen_props(bpy, kit, p, objs):
+    """By the chair nearest the left-hand Ember speaker: a small blackened-steel side table, a rocks glass with two
+    fingers of whisky, a candle in an amber votive (listening-r1 c5: signs of life)."""
+    x, y = LP.LISTEN_TABLE
+    st = Mesh('listen-table'); _cyl(st.bm, x, y, 0.0, 0.17, 0.012, seg=40); _cyl(st.bm, x, y, 0.012, 0.012, 0.47, seg=12)
+    _cyl(st.bm, x, y, 0.48, 0.20, 0.015, seg=48)
+    objs.append(st.object(bpy, steel(bpy), smooth=True))
+    z = 0.495
+    gl = Mesh('listen-glass'); lq = Mesh('listen-pour')
+    _lathe(gl.bm, [(0, 0), (0.041, 0), (0.0425, 0.09), (0.0385, 0.09), (0.037, 0.016), (0, 0.016)], seg=40, z0=z,
+           cx=x - 0.07, cy=y + 0.05)
+    _cyl(lq.bm, x - 0.07, y + 0.05, z + 0.0165, 0.0366, 0.03, seg=40)
+    objs.append(gl.object(bpy, principled(bpy, 'tumbler-glass', '#FFFFFF', rough=0.01, trans=1.0, ior=1.5), smooth=True))
+    objs.append(lq.object(bpy, principled(bpy, 'pour-den', '#B5601A', rough=0.0, trans=1.0, ior=1.36), smooth=True))

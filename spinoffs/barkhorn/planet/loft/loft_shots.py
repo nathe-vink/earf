@@ -50,26 +50,33 @@ VIEWS = {
             # the den's close corner (the lead's): from a stool at 65 mm, one of the Fog pair in its niche, a frosted
             # pendant over the counter, a glass near
             'camera': {'position': [7.2, 3.3, 1.35], 'target': [9.06, 5.9, 1.40], 'lens_mm': 35, 'level': True,
-                       'fstop': 2.8, 'focus': [LP.NICHES[1][0] + LP.NICHES[1][1] / 2, LP.BACKBAR_Y + 0.05, 1.3]},
-            'settings': {'exposure': 0.6, 'niche_glow': 0.3, 'spot_niche': 300.0, 'niche_cone': 40.0, 'niche_dy': 0.30, 'niche_aim_z': 0.9,
-                         'niche_fill': 10.0}},
+                       'fstop': 4.0, 'focus': [LP.NICHES[1][0] + LP.NICHES[1][1] / 2, LP.BACKBAR_Y + 0.05, 1.3]},
+            # after bar-r1 (4.5): the shelf edges warm and lower (kit), the niche softer and graded, its spots grazing;
+            # the pendants pooling on the fir; brighter; haze; the near glass in focus at f/4
+            'settings': {'exposure': 1.1, 'niche_glow': 0.12, 'spot_niche': 160.0, 'niche_cone': 30.0, 'niche_dy': 0.15,
+                         'niche_aim_z': 1.1, 'niche_fill': 6.0, 'pendant_w': 110.0, 'pendant_cone': 35.0, 'haze': 0.02}},
     'listening': {'title': 'the listening room, one of the Ember pair',
-                  'camera': {'position': [14.6, 2.0, 0.95], 'target': [16.3, 4.5, 0.75], 'lens_mm': 35, 'level': True,
+                  # after listening-r1 (5.5): 28 mm from a little back and higher, the beams in, the speaker on the left third
+                  'camera': {'position': [14.3, 1.8, 1.15], 'target': [16.3, 4.6, 1.2], 'lens_mm': 28, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, LP.PAIR['y'][1], 0.9]},
-                  'settings': {'spk_irr': 20.0, 'spk_spread': 30.0, 'spk_k': 3000, 'spk_back': 6.0, 'sconce_w': 4.0,
-                               'exposure': -0.3, 'spot_records': 4.0, 'rec_cone': 40.0, 'rec_aim_z': 1.2,
-                               'record_glow': 0.3, 'console_lift': 0.55}},
+                  # listening-r1: the speaker's front lamp soft and low, the light mostly from behind through the acrylic;
+                  # the chairs espresso; the record wall up; warmer and lower overall
+                  'settings': {'spk_irr': 6.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 12.0, 'sconce_w': 4.0,
+                               'exposure': -0.5, 'wb': 3800, 'spot_records': 10.0, 'rec_cone': 40.0, 'rec_aim_z': 1.2,
+                               'record_glow': 0.8, 'console_lift': 0.55, 'chair_dye': '#4A3A32'}},
     'street': {'title': 'the shopfront at night, from across the street',
-               # three-quarter from up the street on the bar's side, the dancer's lightbox in the window, the Edwardian
-               # bay over the shop
-               'camera': {'position': [-9.5, 7.5, 1.6], 'target': [0.0, 3.2, 2.2], 'lens_mm': 35, 'level': True,
-                          'fstop': 4.0, 'focus': [-0.09, 4.0, 1.8]},
-               'settings': {'exposure': 0.9, 'wb': 3300, 'wet': True, 'road_rough': 0.12, 'street_lamp': 150.0,
-                            'lamp_k': 3500, 'lamp_dx': 0.0, 'lamp_cam': 200.0, 'sign_w': 0.0, 'entry_w': 30.0,
-                            'entry_cone': 100.0, 'transom_glow': 0.4, 'spk_irr': 12.0, 'pendant_w': 90.0,
-                            'haze': 0.02, 'siding': '#8E9384', 'sky': 0.05, 'sky_zenith': '#1A2440',
-                            'sky_horizon': '#2A3550', 'flat_glow': 0.12, 'across_glow': 0.06, 'linen_trans': 0.5,
-                            'etch_glow': 0.15, 'screen_window': 1.4}},
+               # after street-r1 (3.5): closer and looking down the room past the dancer's lightbox, so the bar, the
+               # pendants and the right-hand Ember speaker read through the glass; the street lamps lower and off the
+               # facades; the room brighter; the lightbox calmer; the frosted name warm
+               'camera': {'position': [-7.5, 4.6, 1.55], 'target': [6.0, 3.4, 1.5], 'lens_mm': 40, 'level': True,
+                          'fstop': 4.0, 'focus': [0.0, 3.6, 1.6]},
+               'settings': {'exposure': 0.9, 'wb': 3300, 'wet': True, 'road_rough': 0.12, 'street_lamp': 55.0,
+                            'lamp_k': 3200, 'lamp_z': 6.0, 'lamp_dx': 0.0, 'lamp_cam': 60.0, 'sign_w': 0.0,
+                            'entry_w': 30.0, 'entry_cone': 100.0, 'transom_glow': 0.3, 'spk_irr': 30.0,
+                            'pendant_w': 160.0, 'pendant_glow': 0.8, 'inlay_glow': 1.2, 'haze': 0.02,
+                            'siding': '#8E9384', 'sky': 0.05, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
+                            'flat_glow': 0.12, 'across_glow': 0.10, 'linen_trans': 0.5, 'etch_glow': 0.10,
+                            'screen_window': 0.55}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot

@@ -1,0 +1,376 @@
+{
+ "stage1": {
+  "impression": "A clean, competent CG product shot rather than a photograph of a bar: one red translucent speaker on a pale plinth caught in a hard theatrical spotlight pool, beside a warm concrete wall, an orange leather chair and a dark record wall. The concrete is the most convincing surface; the speaker's acrylic reads salmon-pink and overlit, more like a lit display piece or plastic than thick cast acrylic, and the floor pool and wall hotspot make it a showroom, not a cozy night room. No beams, no props, no sign of life.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The floor pool under the speaker must stop reading as a stage spot: region [130,380,360,440] lum_median below 140 with a soft edge, not a hard ellipse",
+  "The wall right of the speaker must not be the brightest surface in the frame: [365,180,470,380] lum_median below 130",
+  "The Ember acrylic must read as deep, thick tinted acrylic (red dense in the body, glowing at polished edges), not washed pink: speaker [210,180,365,395] r_median/g_median ratio of 2 or more and lum_p95 below 190",
+  "Frame lum_median inside 22 to 50 (now 57.4)",
+  "Only one saturated colour: the leather chair must drop back to a dark, desaturated tan or black so the speaker is the only red-orange in frame",
+  "Fir beams or ceiling and at least one lived-in prop (a glass, a record out of its sleeve, a coat on the chair) visible, so it reads as a listening room in use rather than a product on a plinth",
+  "Practicals coherent and warm: the sconce currently renders near white, it should read as a 2400 K amber lamp"
+ ],
+ "defects": [
+  {
+   "region": [
+    130,
+    380,
+    360,
+    440
+   ],
+   "what": "Hard-edged, near-white spotlight ellipse on the floor (median 200, 2% clipped); falls from ~196 to ~54 in one profile bin. Reads as a stage spot or a showroom."
+  },
+  {
+   "region": [
+    365,
+    180,
+    470,
+    380
+   ],
+   "what": "Concrete beside and behind the speaker blown to a hot, almost neutral white wash (median 197), brighter than the speaker itself."
+  },
+  {
+   "region": [
+    210,
+    180,
+    365,
+    395
+   ],
+   "what": "Speaker acrylic overlit and pastel: salmon-pink panels with flat fill, interior parts read as pink plastic; the tint lacks depth and the edges do not glow more than the faces."
+  },
+  {
+   "region": [
+    205,
+    90,
+    340,
+    175
+   ],
+   "what": "Specular streak on the top panel is a small, smeared, plastic-looking highlight; the panel reads as soft and slightly wobbly rather than crisp polished acrylic."
+  },
+  {
+   "region": [
+    0,
+    120,
+    145,
+    450
+   ],
+   "what": "Leather lounge chair is a saturated orange-red that competes with the Ember tint; its surface is smooth and CG, with no creasing or grain at 1:1."
+  },
+  {
+   "region": [
+    140,
+    20,
+    200,
+    75
+   ],
+   "what": "Sconce shade renders cool white (5% clipped) rather than 2400 K amber; the lamp looks like a neutral LED fitting."
+  },
+  {
+   "region": [
+    480,
+    0,
+    720,
+    480
+   ],
+   "what": "Record wall and cabinet are mostly dark and slightly soft (median 23-25); sleeves read as vertical colour streaks, not individual spines; no highlights on records."
+  },
+  {
+   "region": [
+    200,
+    395,
+    375,
+    425
+   ],
+   "what": "Pale timber plinth is bright and close to raw pine, reading as unfinished; it pulls the eye down to the hotspot."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Overall image is soft with denoiser smoothing on concrete and timber at 1:1; no haze visible in the beams of light; frame is empty of props."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    100
+   ],
+   "what": "No ceiling or fir beams in frame despite the card's brief; low, level camera crops them out."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The pendant spot over the speaker makes a hard, near-white pool on the floor and a hot wash on the wall, turning the frame into a showroom.",
+   "evidence": {
+    "region": [
+     130,
+     380,
+     360,
+     440
+    ],
+    "measured": "lum_median 200.3, clip 2.0%; wall [365,180,470,380] median 197.5; profile y drops 196 to 54 across one bin"
+   },
+   "change": {
+    "setting": "pendants 3 x spot, 60.0 W, cone 50.0 deg",
+    "from": "60 W, cone 50 deg, hard",
+    "to": "25 W, cone 70 deg with blend about 0.6 (soft edge), aimed so the pool falls on the floor in front of the chair rather than on the wall behind the speaker"
+   },
+   "expected": "A warm, soft pool that falls off gradually, the wall behind the speaker dropping into mid-tone, and frame median falling toward 45.",
+   "accept": {
+    "region": [
+     130,
+     380,
+     360,
+     440
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     90,
+     140
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Ember speaker is overlit by its own area lamps, so the tinted acrylic washes out to pastel salmon and reads as plastic.",
+   "evidence": {
+    "region": [
+     210,
+     180,
+     365,
+     395
+    ],
+    "measured": "lum_median 119, lum_p95 205, clip 0.9%, rgb median 166/105/92 (R/G 1.58, pink rather than deep red)"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area, 20.0 W/m2 at the target, 3000 K",
+    "from": "4 x area at 20 W/m2, frontal",
+    "to": "2 x area at 8 W/m2, moved to graze from behind and above so light passes through the acrylic and catches its polished edges rather than lighting the front faces"
+   },
+   "expected": "Deeper, denser red in the faces with brighter edges; the cabinet reads as thick tinted acrylic with light through it; speaker still the brightest coloured object.",
+   "accept": {
+    "region": [
+     210,
+     180,
+     365,
+     395
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 190
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The leather chair is a saturated orange-red that competes with the speaker as a second colour.",
+   "evidence": {
+    "region": [
+     0,
+     150,
+     140,
+     330
+    ],
+    "measured": "rgb 104/67/52, delta_e 3.9 from #5A3A2A; visibly orange at full frame"
+   },
+   "change": {
+    "setting": "the leather's finish (materials' finish)",
+    "from": "saturated cognac, smooth",
+    "to": "dark, worn espresso or black leather, roughly #2E2420, roughness 0.45 with a creasing/grain normal map"
+   },
+   "expected": "The chair reads as a dark silhouette with a soft sheen; the speaker is the only saturated colour in the frame.",
+   "accept": {
+    "region": [
+     0,
+     150,
+     140,
+     330
+    ],
+    "metric": "r_median",
+    "op": "<",
+    "value": 70
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The frame is exposed slightly too bright and too neutral for a night room; the 2400 K practicals render near white.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame lum_median 57.4 (target 22-50); sconce [140,20,200,75] clip 5.1% and near neutral"
+   },
+   "change": {
+    "setting": "render white_balance_k and exposure",
+    "from": "white_balance_k 3300, exposure -0.3",
+    "to": "white_balance_k 3800 (lets the 2400-2700 K lamps go amber), exposure -0.5 after c1 and c2, AgX look 'Punchy' off, keep 'None'"
+   },
+   "expected": "Warm amber practicals, warm grey concrete, frame median about 40.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The room is empty of life; it reads as a product on a plinth rather than a listening room in use.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     720,
+     480
+    ],
+    "measured": "no glass, record, coat or book anywhere in frame"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none in this view",
+    "to": "a rocks glass with a little whisky on a small blackened-steel side table by the chair, a record out of its sleeve leaning against the cabinet base of the record wall, a wool coat or throw over the chair arm, one candle in an amber votive on the floor or cabinet"
+   },
+   "expected": "Small warm highlights (glass, votive) in the lower left and right, a sense that someone just stood up.",
+   "accept": {
+    "region": [
+     480,
+     270,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 70
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The record wall is dark and flat; the spines read as streaks and catch no highlights.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     270
+    ],
+    "measured": "lum_median 22.7, lum_p95 44.1"
+   },
+   "change": {
+    "setting": "the record wall 3 x spot, 4.0 W, 2500 K; record-wall strip 0.3",
+    "from": "3 x spot 4 W, strip 0.3",
+    "to": "3 x spot 10 W, cone 40 deg grazing down the shelves; strip 0.8 under each shelf lip"
+   },
+   "expected": "Graded pools down each bay with readable spines and small highlights on sleeves; still clearly secondary to the speaker.",
+   "accept": {
+    "region": [
+     480,
+     0,
+     720,
+     270
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     32,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The level, low camera crops out the fir beams and ceiling that the brief asks for, and centres the speaker like a catalogue shot.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     100
+    ],
+    "measured": "top of frame is bare concrete; no beams visible"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [14.6, 2.0, 0.95], target [16.3, 4.5, 0.75], 35 mm",
+    "to": "position about [14.3, 1.8, 1.15], target [16.3, 4.6, 1.2], 28 mm, verticals kept true (shift rather than tilt), speaker on the left-third line with the chair's back in the near foreground"
+   },
+   "expected": "Beams and ceiling along the top edge, the chair framing the speaker, more of the room's depth.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The plinth reads as raw pale pine and the concrete is slightly smooth and soft at 1:1.",
+   "evidence": {
+    "region": [
+     200,
+     395,
+     375,
+     425
+    ],
+    "measured": "plinth pale, near the floor hotspot; concrete [0,0,200,120] lum_range only 98 with smoothed grain"
+   },
+   "change": {
+    "setting": "the fir's stain; the concrete's tone and sheen; render denoise",
+    "from": "light natural fir, smooth concrete, denoise on at 256 samples",
+    "to": "fir stained to an aged honey-brown matching the beams; concrete with stronger board-grain bump and tie holes, roughness 0.85; render at 512 samples with denoise prefilter 'accurate' to keep grain"
+   },
+   "expected": "The plinth stops pulling the eye; concrete shows formwork grain and tie holes at 1:1.",
+   "accept": {
+    "region": [
+     200,
+     395,
+     375,
+     425
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 130
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The top panel floating above the cabinet on thin posts reads oddly and its soft highlight looks plastic",
+   "why": "It is part of the speaker's fixed shape; only its lighting (c2) may change."
+  },
+  {
+   "request": "A deeper, more saturated Ember red in the acrylic itself",
+   "why": "The speaker's colour is fixed; c2 changes only how it is lit."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
