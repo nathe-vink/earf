@@ -133,14 +133,15 @@ def etch_mat(bpy, p):
     m = bpy.data.materials.new('frost-etch'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     out = nt.nodes.new('ShaderNodeOutputMaterial')
     tp = nt.nodes.new('ShaderNodeBsdfTransparent')
-    tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = lin(p.get('etch_col', '#E8D9C4'))
+    tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = lin(p.get('etch_col', '#E8C8A0'))
     gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.35
     m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs['Fac'].default_value = p.get('etch_frost', 0.45)
     nt.links.new(tp.outputs[0], m1.inputs[1]); nt.links.new(tl.outputs[0], m1.inputs[2])
     m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs['Fac'].default_value = 0.05
     nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2])
     if p.get('etch_glow', 0) > 0:                  # the room's light caught in the etch (street-p8: dark grey without)
-        em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = lin('#FFD2A0')
+        em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = lin(p.get('etch_glow_col', '#FF9C55'))   # ~2400 K: under a
+        # 3200 K balance #FFD2A0 read cool blue (street-p9)
         em.inputs['Strength'].default_value = p['etch_glow']
         ad = nt.nodes.new('ShaderNodeAddShader')
         nt.links.new(m2.outputs[0], ad.inputs[0]); nt.links.new(em.outputs[0], ad.inputs[1]); m2 = ad
