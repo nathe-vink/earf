@@ -1,0 +1,189 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/study/s5-bar-ember.json",
+ "image": "/home/user/earf/renders/2026-10-19/barkhorn/study/s5-bar-ember.png",
+ "seconds": {
+  "build": 0.3,
+  "render": 109.9
+ },
+ "samples": 256,
+ "size": [
+  540,
+  600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "cap#0": {
+   "part": "cap",
+   "centre_px": [
+    175.6,
+    302.8
+   ],
+   "box_px": [
+    158,
+    297,
+    193,
+    308
+   ],
+   "depth_m": 1.106
+  },
+  "column#0": {
+   "part": "column",
+   "centre_px": [
+    175.6,
+    410.0
+   ],
+   "box_px": [
+    161,
+    349,
+    190,
+    473
+   ],
+   "depth_m": 1.106
+  },
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    175.6,
+    477.8
+   ],
+   "box_px": [
+    124,
+    460,
+    230,
+    498
+   ],
+   "depth_m": 1.106
+  },
+  "liner#0": {
+   "part": "liner",
+   "centre_px": [
+    175.6,
+    336.1
+   ],
+   "box_px": [
+    110,
+    308,
+    245,
+    367
+   ],
+   "depth_m": 1.106
+  },
+  "shade#0": {
+   "part": "shade",
+   "centre_px": [
+    175.6,
+    336.1
+   ],
+   "box_px": [
+    103,
+    304,
+    253,
+    372
+   ],
+   "depth_m": 1.106
+  },
+  "skin#0": {
+   "part": "skin",
+   "centre_px": [
+    175.6,
+    339.5
+   ],
+   "box_px": [
+    113,
+    311,
+    241,
+    371
+   ],
+   "depth_m": 1.106
+  },
+  "canopy#0": {
+   "part": "canopy",
+   "centre_px": [
+    364.2,
+    -283.4
+   ],
+   "box_px": [
+    326,
+    -326,
+    405,
+    -245
+   ],
+   "depth_m": 1.386
+  },
+  "cap#0.001": {
+   "part": "cap",
+   "centre_px": [
+    364.2,
+    48.8
+   ],
+   "box_px": [
+    342,
+    37,
+    388,
+    60
+   ],
+   "depth_m": 1.386
+  },
+  "cord#0": {
+   "part": "cord",
+   "centre_px": [
+    364.2,
+    -113.6
+   ],
+   "box_px": [
+    362,
+    -274,
+    366,
+    46
+   ],
+   "depth_m": 1.386
+  },
+  "liner#0.001": {
+   "part": "liner",
+   "centre_px": [
+    364.2,
+    105.6
+   ],
+   "box_px": [
+    306,
+    33,
+    428,
+    168
+   ],
+   "depth_m": 1.386
+  },
+  "shade#0.001": {
+   "part": "shade",
+   "centre_px": [
+    364.2,
+    106.1
+   ],
+   "box_px": [
+    299,
+    27,
+    436,
+    173
+   ],
+   "depth_m": 1.386
+  },
+  "skin#0.001": {
+   "part": "skin",
+   "centre_px": [
+    364.2,
+    108.8
+   ],
+   "box_px": [
+    308,
+    37,
+    425,
+    171
+   ],
+   "depth_m": 1.386
+  }
+ }
+}

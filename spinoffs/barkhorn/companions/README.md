@@ -320,3 +320,36 @@ Still open:
 - the board (to make; a TI BQ25895-class charger with a touch dimmer);
 - whether bars want the tray of six as its own product;
 - the canopy in brass or blackened steel to match Planet's steel.
+
+## Round 32c: the frost set within the acrylic, a shape study
+
+The owner, on Moon beside Block: "I'm not sure I like the white section. Maybe if we do that for light dispersion it's
+set within the acrylic. Not sure what shape I like yet."
+
+**The treatment** (`study.py`): nothing white outside. Every visible surface of the shade is polished tinted cast
+acrylic. The diffuser is a frosted liner (an acid-etched or bead-blasted tube or cup) set 1 mm inside the shell.
+- Where a shade is open below (the domes, the cones, the pendants), a 3 mm tinted skin covers the liner's inside as
+  well, so the wall is tint, frost, tint.
+- The frost is seen only through acrylic, so the tint glows evenly from within and the source is never seen.
+- In manufacture this is a cast-in liner (the frosted part cast into the block) or a bonded three-layer wall; the
+  study doesn't choose yet.
+
+**The shapes**, each a cordless table lamp with a matching pendant:
+- **Dome:** Moon's dome on a column; the pendant's light is up a brass baffle.
+- **Block:** the rounded square.
+- **Column:** the cylinder.
+- **Sphere:** a ball on a column, and a ball open below.
+- **Cone:** mouth down, on a column and as the pendant. It is the classic bar shape, with the deepest cut-off.
+
+The pendants are open below, with the light up inside them (cut-offs about 20° to 35° from the vertical).
+The table lamps keep Moon's cordless foot.
+
+**Rendering:** Moon's bar frame, in smoked and in Ember (`renders/2026-10-19/barkhorn/study/sheet.png`).
+- In the render, the tint is cast denser than the Clouds' (a 5 mm depth for Ember, 8 mm for smoked) so it carries
+  the colour in walls 8 to 12 mm thick. The liner glows at 0.25.
+- A lamp close inside a closed form burned its liner white, so the block's, the column's and the sphere's lamps are
+  lower.
+
+These are blockouts. Whichever shape the owner picks gets Moon's full build.
+
+![The shape study](../../../renders/2026-10-19/barkhorn/study/sheet.png)

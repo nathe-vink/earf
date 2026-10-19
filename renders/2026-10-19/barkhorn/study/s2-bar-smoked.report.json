@@ -1,0 +1,161 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/study/s2-bar-smoked.json",
+ "image": "/home/user/earf/renders/2026-10-19/barkhorn/study/s2-bar-smoked.png",
+ "seconds": {
+  "build": 0.3,
+  "render": 86.1
+ },
+ "samples": 256,
+ "size": [
+  540,
+  600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "cap#0": {
+   "part": "cap",
+   "centre_px": [
+    175.6,
+    304.2
+   ],
+   "box_px": [
+    128,
+    299,
+    225,
+    309
+   ],
+   "depth_m": 1.106
+  },
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    175.6,
+    477.8
+   ],
+   "box_px": [
+    124,
+    460,
+    230,
+    498
+   ],
+   "depth_m": 1.106
+  },
+  "liner#0": {
+   "part": "liner",
+   "centre_px": [
+    175.6,
+    389.0
+   ],
+   "box_px": [
+    139,
+    310,
+    213,
+    476
+   ],
+   "depth_m": 1.106
+  },
+  "shade#0": {
+   "part": "shade",
+   "centre_px": [
+    175.6,
+    389.0
+   ],
+   "box_px": [
+    128,
+    307,
+    225,
+    481
+   ],
+   "depth_m": 1.106
+  },
+  "canopy#0": {
+   "part": "canopy",
+   "centre_px": [
+    364.2,
+    -267.2
+   ],
+   "box_px": [
+    326,
+    -309,
+    405,
+    -229
+   ],
+   "depth_m": 1.386
+  },
+  "cap#0.001": {
+   "part": "cap",
+   "centre_px": [
+    364.2,
+    64.4
+   ],
+   "box_px": [
+    302,
+    38,
+    432,
+    87
+   ],
+   "depth_m": 1.386
+  },
+  "cord#0": {
+   "part": "cord",
+   "centre_px": [
+    364.2,
+    -97.3
+   ],
+   "box_px": [
+    362,
+    -258,
+    366,
+    62
+   ],
+   "depth_m": 1.386
+  },
+  "liner#0.001": {
+   "part": "liner",
+   "centre_px": [
+    364.2,
+    113.1
+   ],
+   "box_px": [
+    312,
+    52,
+    420,
+    166
+   ],
+   "depth_m": 1.386
+  },
+  "shade#0.001": {
+   "part": "shade",
+   "centre_px": [
+    364.2,
+    114.2
+   ],
+   "box_px": [
+    302,
+    46,
+    432,
+    172
+   ],
+   "depth_m": 1.386
+  },
+  "skin#0": {
+   "part": "skin",
+   "centre_px": [
+    364.2,
+    115.3
+   ],
+   "box_px": [
+    315,
+    53,
+    417,
+    170
+   ],
+   "depth_m": 1.386
+  }
+ }
+}

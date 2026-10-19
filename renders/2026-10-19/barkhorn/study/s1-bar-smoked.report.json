@@ -1,0 +1,203 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/study/s1-bar-smoked.json",
+ "image": "/home/user/earf/renders/2026-10-19/barkhorn/study/s1-bar-smoked.png",
+ "seconds": {
+  "build": 0.8,
+  "render": 90.4
+ },
+ "samples": 256,
+ "size": [
+  540,
+  600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "column#0": {
+   "part": "column",
+   "centre_px": [
+    175.6,
+    414.4
+   ],
+   "box_px": [
+    158,
+    358,
+    193,
+    474
+   ],
+   "depth_m": 1.106
+  },
+  "dome#0": {
+   "part": "dome",
+   "centre_px": [
+    175.6,
+    329.0
+   ],
+   "box_px": [
+    111,
+    302,
+    244,
+    358
+   ],
+   "depth_m": 1.106
+  },
+  "finial#0": {
+   "part": "finial",
+   "centre_px": [
+    175.6,
+    300.6
+   ],
+   "box_px": [
+    167,
+    297,
+    184,
+    304
+   ],
+   "depth_m": 1.106
+  },
+  "foot#0": {
+   "part": "foot",
+   "centre_px": [
+    175.6,
+    477.8
+   ],
+   "box_px": [
+    124,
+    460,
+    230,
+    498
+   ],
+   "depth_m": 1.106
+  },
+  "hub#0": {
+   "part": "hub",
+   "centre_px": [
+    175.6,
+    352.4
+   ],
+   "box_px": [
+    153,
+    346,
+    199,
+    360
+   ],
+   "depth_m": 1.106
+  },
+  "liner#0": {
+   "part": "liner",
+   "centre_px": [
+    175.6,
+    331.0
+   ],
+   "box_px": [
+    119,
+    308,
+    235,
+    355
+   ],
+   "depth_m": 1.106
+  },
+  "skin#0": {
+   "part": "skin",
+   "centre_px": [
+    175.6,
+    333.2
+   ],
+   "box_px": [
+    121,
+    311,
+    232,
+    357
+   ],
+   "depth_m": 1.106
+  },
+  "baffle#0": {
+   "part": "baffle",
+   "centre_px": [
+    364.2,
+    116.7
+   ],
+   "box_px": [
+    347,
+    98,
+    382,
+    134
+   ],
+   "depth_m": 1.386
+  },
+  "canopy#0": {
+   "part": "canopy",
+   "centre_px": [
+    364.2,
+    -229.3
+   ],
+   "box_px": [
+    326,
+    -269,
+    405,
+    -193
+   ],
+   "depth_m": 1.386
+  },
+  "cord#0": {
+   "part": "cord",
+   "centre_px": [
+    364.2,
+    -59.5
+   ],
+   "box_px": [
+    362,
+    -220,
+    366,
+    100
+   ],
+   "depth_m": 1.386
+  },
+  "dome#0.001": {
+   "part": "dome",
+   "centre_px": [
+    364.2,
+    134.0
+   ],
+   "box_px": [
+    296,
+    87,
+    440,
+    174
+   ],
+   "depth_m": 1.386
+  },
+  "liner#0.001": {
+   "part": "liner",
+   "centre_px": [
+    364.2,
+    135.7
+   ],
+   "box_px": [
+    302,
+    95,
+    432,
+    170
+   ],
+   "depth_m": 1.386
+  },
+  "skin#0.001": {
+   "part": "skin",
+   "centre_px": [
+    364.2,
+    137.8
+   ],
+   "box_px": [
+    305,
+    98,
+    429,
+    172
+   ],
+   "depth_m": 1.386
+  }
+ }
+}
