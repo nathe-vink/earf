@@ -1,0 +1,337 @@
+{
+ "stage1": {
+  "impression": "A quiet night shopfront: a warm window behind caf\u00e9 curtains, a lit transom and a recessed door, framed by a dark, almost featureless street. The idea is legible, but it reads as CG: glass with no reflections at all, a flat untextured street crushed to black, neutral grey upper-floor bays that are brighter than the shop, and gilt letters that read as matte olive vinyl. No product and no red anywhere in the frame, so the room's one colour is missing.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The shop glass reflects the street (street lamps, the opposite facade) as real plate glass does at night, so the window reads as glass and not as an open hole",
+  "The street and sidewalk carry a real, textured, slightly wet surface that picks up the window's warm glow and the street lamps, instead of a flat field at luminance 5",
+  "The upper floor sits below the shopfront in brightness, so the eye lands on the window first",
+  "The name reads as gold leaf (warm metallic gilt with an edge), not as flat olive paint",
+  "At least one Ember (red) speaker or its warm red light can be seen through the glass or the door, so the speakers stay the room's only colour",
+  "Signs of life: a figure or a coat and glasses near the window, and neighbours that are not dead black rectangles"
+ ],
+ "defects": [
+  {
+   "region": [
+    260,
+    330,
+    755,
+    595
+   ],
+   "what": "Shop glass has no reflection or sheen at all; reads as an open aperture"
+  },
+  {
+   "region": [
+    0,
+    640,
+    1200,
+    800
+   ],
+   "what": "Street and sidewalk are flat, untextured and crushed (median lum 4.9, 18% crushed); no curb detail, no sheen, no window spill"
+  },
+  {
+   "region": [
+    340,
+    0,
+    930,
+    100
+   ],
+   "what": "Upper-floor bays are neutral grey at median lum 69, about twice the transom (33); they pull the eye up and the shutters read as procedural stripes"
+  },
+  {
+   "region": [
+    458,
+    403,
+    590,
+    446
+   ],
+   "what": "Gold leaf reads as matte olive-khaki (RGB 168/152/90, dE2000 8.6 against #C9A44C); flat fill, no gilt edge, no glint"
+  },
+  {
+   "region": [
+    260,
+    600,
+    760,
+    660
+   ],
+   "what": "Bulkhead under the window is crushed (44% of pixels crushed); no form"
+  },
+  {
+   "region": [
+    1100,
+    345,
+    1200,
+    565
+   ],
+   "what": "Right neighbour's window is a dead black rectangle"
+  },
+  {
+   "region": [
+    0,
+    300,
+    100,
+    610
+   ],
+   "what": "Left neighbour's panel is a flat striped grey rectangle that reads as a texture card"
+  },
+  {
+   "region": [
+    260,
+    330,
+    755,
+    495
+   ],
+   "what": "Interior is soft and smeared (denoiser), the brick and the record shelves have no crisp detail; no speaker and no red visible"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "No people, no props on the street; the scene is empty and staged"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "material",
+   "problem": "The shopfront glass has no reflection, so the window reads as a hole in a model, not plate glass at night.",
+   "evidence": {
+    "region": [
+     260,
+     330,
+     755,
+     595
+    ],
+    "measured": "Window lum_p5 4.4 and curtains median 32.6 with no superimposed highlights; no street lamp or facade mirrored anywhere in the panes"
+   },
+   "change": {
+    "setting": "shopfront glass material (finish)",
+    "from": "glass with no visible reflection (fully transparent)",
+    "to": "plate glass, IOR 1.52, roughness 0.01, Fresnel reflection on, with the street lamps and a dim opposite facade present behind the camera to be reflected"
+   },
+   "expected": "Faint reflections of the street lamps and a soft cool-grey sheen across the lower panes over the curtains, lifting the darkest window values without hiding the room",
+   "accept": {
+    "region": [
+     260,
+     330,
+     755,
+     595
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 9
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The street and sidewalk are a flat, untextured, near-black field with no ground to stand the scene on.",
+   "evidence": {
+    "region": [
+     0,
+     640,
+     1200,
+     800
+    ],
+    "measured": "lum_median 4.9, lum_range 13.6, crush 18.3%; profile flat 3.5 to 6.5 from top to bottom"
+   },
+   "change": {
+    "setting": "the street's materials (sidewalk, curb, asphalt)",
+    "from": "smooth, uniform dark surface",
+    "to": "scanned concrete sidewalk with expansion joints and a granite curb, damp asphalt (roughness 0.25 to 0.4 with puddle mask) so the window's warm glow and the street lamps streak in it"
+   },
+   "expected": "Warm reflected streaks of the window and transom on the wet sidewalk below the shop, and visible pavement texture",
+   "accept": {
+    "region": [
+     250,
+     660,
+     780,
+     780
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The street lamps light the upper floor neutral grey and leave the street and bulkhead black, which inverts the hierarchy.",
+   "evidence": {
+    "region": [
+     340,
+     0,
+     930,
+     100
+    ],
+    "measured": "Upper bays median 69 (neutral R68 G70 B69) against transom 32.9 and street 4.9; bulkhead crush 44%"
+   },
+   "change": {
+    "setting": "street lamps 3 x point, 120 W, 3500 K",
+    "from": "3 x point 120 W, 3500 K, placed so they hit the upper facade",
+    "to": "2 x spot lamps at 4.5 m, aimed down at the sidewalk, 200 W, 3000 K, cone 70 deg, plus a dim 15 W point across the street for the bulkhead; nothing above the cornice"
+   },
+   "expected": "Upper floor falls to a soft dark secondary read; the sidewalk and bulkhead gain form; the window becomes the brightest element",
+   "accept": {
+    "region": [
+     340,
+     0,
+     930,
+     100
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The name reads as matte olive paint, not gold leaf.",
+   "evidence": {
+    "region": [
+     458,
+     403,
+     590,
+     446
+    ],
+    "measured": "Median RGB 168/152/90, dE2000 8.58 against #C9A44C; flat fill with no edge or glint"
+   },
+   "change": {
+    "setting": "the gold leaf 0.4 (emission)",
+    "from": "emission 0.4, flat olive tone",
+    "to": "emission 0.15 on a warm metallic gold (base #C9A44C, metallic 1, roughness 0.15) with a 1.5 mm dark outline, so it glints in the street lamps and reads against the warm room"
+   },
+   "expected": "Letters read warm gold with a darker edge and small highlights, a step brighter than the wall behind",
+   "accept": {
+    "region": [
+     458,
+     403,
+     590,
+     446
+    ],
+    "metric": "delta_e",
+    "hex": "#C9A44C",
+    "op": "<=",
+    "value": 4
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "No speaker and no red are visible, so the product the image exists to sell is missing and the room's one colour is absent.",
+   "evidence": {
+    "region": [
+     260,
+     330,
+     755,
+     595
+    ],
+    "measured": "Window median R77 G38 B15: an all-amber room with no red accent anywhere"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [-9.5, 7.5, 1.6], at [0.0, 3.2, 2.0], 40 mm",
+    "to": "move the camera along the street until the line of sight through the right-hand pane or the open door reaches one Ember speaker and its 2700 K lamps (about y 4.5 to 5.5), 50 mm, keeping the camera at 1.6 m; this also crops the dead neighbours and the upper floor"
+   },
+   "expected": "A small, clearly red glowing cabinet visible through the glass as the one colour accent; less dead space at left, right and top",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The neighbours are dead flat blocks: a black window at right and a striped card at left.",
+   "evidence": {
+    "region": [
+     1100,
+     345,
+     1200,
+     565
+    ],
+    "measured": "Right building lum_median 13.9, p5 0, crush 15.9%; left building median 4.7, crush 18.1%"
+   },
+   "change": {
+    "setting": "street set (neighbours' surfaces and windows)",
+    "from": "flat dark planes and one black window",
+    "to": "real neighbour facades (painted stucco or brick with texture), one dim lived-in window above at 2700 K, a dark closed shutter next door"
+   },
+   "expected": "Context that reads as a San Francisco street, still well below the shop's brightness",
+   "accept": {
+    "region": [
+     980,
+     0,
+     1200,
+     640
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 5
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The scene is empty, which makes it read as a staged model and not a working bar.",
+   "evidence": {
+    "region": [
+     260,
+     330,
+     755,
+     495
+    ],
+    "measured": "No figures or silhouettes in the window or the doorway; nothing on the sidewalk"
+   },
+   "change": {
+    "setting": "people (none now) and small props",
+    "from": "none",
+    "to": "two seated guests in silhouette above the curtain line at the bar, one figure in the doorway's light; a small A-frame menu board on the sidewalk"
+   },
+   "expected": "The room reads as open and lived in; scale is fixed by the figures",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The interior is soft and smeared by the denoiser, so the brick, the records and the lamps lack crisp detail.",
+   "evidence": {
+    "region": [
+     260,
+     330,
+     440,
+     495
+    ],
+    "measured": "Brick and record shelves seen at 2x crop show smeared texture and no fine edges"
+   },
+   "change": {
+    "setting": "render samples / denoise",
+    "from": "samples 256, adaptive 0.02, denoise on, clamp 10",
+    "to": "samples 1024, adaptive 0.01, denoise with albedo and normal passes, clamp 20; deliver at 2400 x 1600 and judge at full size"
+   },
+   "expected": "Crisp mortar lines, record spines and lamp edges through the glass",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember speakers visible from the street by moving them nearer the window",
+   "why": "The room's layout and the speakers' placement are fixed; only the camera may change to reveal them (c5)"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
