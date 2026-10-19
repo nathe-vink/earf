@@ -39,7 +39,7 @@ NEUTRAL = {'clear': ('#F4F6F5', '#F6F4F0', '#FF9A40'), 'frosted': ('#F2F2EF', '#
            'smoked': ('#6E655C', '#8E867E', '#FF8A30')}      # the glows amber: a 3000 K balance whitens a pale one
 VARIANTS = {k: {'deep': deep, 'frost': deep, 'glow': C.GLOW[k], 'shade_glow': deep} for k, _, _, deep, _, _ in C.COLOURS}
 for k, (deep, frost, glow) in NEUTRAL.items():
-    VARIANTS[k] = {'deep': deep, 'frost': frost, 'glow': glow, 'shade_glow': '#FFB878'}
+    VARIANTS[k] = {'deep': deep, 'frost': frost, 'glow': glow, 'shade_glow': '#FF9A50'}   # warm ivory at 2700 K (the coordinator: #FFB878 read lavender-white)
 VARIANTS['frosted']['materials'] = {'body': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#EFE6D8', 'roughness': 0.5}}
 
 MATERIALS = {
@@ -91,6 +91,29 @@ def family(key):
         pdiff = rsq(K, 151, 50, 54, 9.5)
         pcap = rsq(K, 180, H, H + 14, 24)
         pled = (0, 0, H - 20)
+    elif key == 'f1b':
+        # F1 with a frosted lower section that lights the table (round 32, kept alive for the owner, who liked the
+        # square): a steel base 120 sq x 22; a frosted rounded-square sleeve 110 sq, 22..130, walls 6, glowing with the
+        # light inside it at 110 (hidden); a 4 mm steel shadow line; the tinted block above, 134..250, walls 14, its
+        # polished top edge lit from below; a steel cap.
+        base = rsq(K, 120, 0, 22, 18)
+        low = rsq(K, 110, 22, 130, 16) - rsq(K, 98, 21, 131, 10)
+        line = rsq(K, 106, 130, 134, 14) - rsq(K, 90, 129, 135, 6)
+        shade = rsq(K, 110, 134, 250, 16) - rsq(K, 82, 133, 251, 4)
+        edge_top = rsq(K, 110.6, 249, 250.6, 16.3) - rsq(K, 81.4, 248, 252, 3.7)
+        cap = rsq(K, 110, 250, 262, 16) - rsq(K, 70, 249, 255, 6)
+        table = [Part('base', base, Machined('steel'), finish='steel'), Part('lower', low, Machined('cast-acrylic'), finish='shade'),
+                 Part('line', line, Machined('steel'), finish='steel'), Part('shade', shade, Machined('cast-acrylic'), finish='body'),
+                 Part('edge-top', edge_top, Bought('x'), finish='edge'), Part('cap', cap, Machined('steel'), finish='steel')]
+        tled = (0, 0, 100)
+        # pendant: the 180 sq block, a frosted band 0..60 at its mouth, a steel shadow line, the tinted block 64..170;
+        # open below, the light 120 up inside (cut-off about 32 deg from the vertical)
+        H = 170
+        pshade = rsq(K, 180, 64, H, 24) - rsq(K, 152, 63, H + 1, 10)
+        pedge = rsq(K, 180, 0, 60, 24) - rsq(K, 168, -1, 61, 18)          # the frosted band (finish shade)
+        pdiff = rsq(K, 176, 60, 64, 22) - rsq(K, 156, 59, 65, 12)         # the steel shadow line
+        pcap = rsq(K, 180, H, H + 14, 24)
+        pled = (0, 0, 120)
     elif key == 'f2':
         base = K.cyl('z', (0, 0), 120, 0, 28)
         shade = K.cyl('z', (0, 0), 110, 28, 228) - K.cyl('z', (0, 0), 86, 27, 229)
@@ -129,8 +152,15 @@ def family(key):
         pled = (0, 0, R - 25)
         H = R + 20
     cord = K.cyl('z', (0, 0), 6, H + 14, H + 600)
-    canopy = (rsq(K, 110, H + 600, H + 640, 14) if key == 'f1' else K.cyl('z', (0, 0), 110, H + 600, H + 640))
-    metal = 'steel' if key in ('f1', 'f3') else 'brass'
+    canopy = (rsq(K, 110, H + 600, H + 640, 14) if key in ('f1', 'f1b') else K.cyl('z', (0, 0), 110, H + 600, H + 640))
+    metal = 'steel' if key in ('f1', 'f1b', 'f3') else 'brass'
+    if key == 'f1b':
+        return table, tled, [Part('shade', pshade, Machined('cast-acrylic'), finish='body'),
+                             Part('lower', pedge, Machined('cast-acrylic'), finish='shade'),
+                             Part('line', pdiff, Machined('steel'), finish='steel'),
+                             Part('cap', pcap, Machined('steel'), finish='steel'),
+                             Part('cord', cord, Bought('x'), finish='cord'),
+                             Part('canopy', canopy, Machined('steel'), finish='steel')], pled
     pend = [Part('shade', pshade, Machined('cast-acrylic'), finish='body' if key != 'f3' else 'shade'),
             Part('edge', pedge, Bought('x'), finish='edge'),
             Part('diffuser', pdiff, Sheet('cast-acrylic', 4 if key != 'f3' else 20), finish='shade' if key != 'f3' else 'body'),
@@ -141,6 +171,7 @@ def family(key):
 
 
 FAMILIES = {'f1': 'F1 Block', 'f2': 'F2 Column', 'f3': 'F3 Moon'}
+EXTRA = {'f1b': 'F1b Block, lit low'}     # round 32b: built and rendered on its own (f1b.py), off the sheet
 VIEWS = [('bar', 'smoked'), ('bar', 'ember'), ('seamless', 'frosted'), ('seamless', 'haze')]
 PEND_Z = 1.30          # the pendant's lowest point above the floor in the shots
 TABLE_Z = 0.76         # the table's top

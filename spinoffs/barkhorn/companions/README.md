@@ -301,6 +301,20 @@ family's limit, so I stopped there. Open on the hero:
 
 A photographed hero would fix these. The shapes and finishes are fine.
 
+**Warmth** (the coordinator: the dome read lavender-white in the bar frames). The cause was the neutral tints' own
+glow, #FFB878: near white once a 3000 K balance takes it back, and pale enough to clip. It is now a warm ivory,
+#FF9A50, in the products' flavours (`bar_lamps.VARIANTS`, rebuilt), so Planet gets it by default. The bar frames
+also balance at 3600 K, as bar photography does, so 2700 K reads warm, not white.
+
+**F1b, Block lit low** (`f1b.py`, kept ready in case the owner picks the square):
+- the table lamp: F1 Block's tinted rounded-square block over a frosted lower sleeve, 22 to 130, with a hidden light
+  inside it at 100, so the frost glows and lights the table around the foot; a steel shadow line between the two;
+- the pendant: the same split, with a frosted band round the mouth, the block above, and the light 120 up inside
+  (a cut-off of about 32°).
+
+It is rendered in Moon's two bar frames (`renders/2026-10-19/barkhorn/f1b/`). These are blockouts: if the owner picks
+it, it gets Moon's treatment (fab-kit products, a BOM, a kit piece).
+
 Still open:
 - the listing cost;
 - the board (to make; a TI BQ25895-class charger with a touch dimmer);
