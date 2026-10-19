@@ -107,8 +107,10 @@ VIEWS = {
             # speaker a small red smudge: closer, by the stools on 40 mm, aimed at it, and lit harder; the screen out-
             # shone it, cool: dimmer and warm; the shelf edges and the inlay read as LED strips and phone screens: down;
             # the near booth crushed: its lamp up; the pendants clipped: their lamps down
-            'camera': {'position': [5.5, 2.5, 1.30], 'target': [16.15, 4.6, 0.95], 'lens_mm': 40, 'level': True,
-                       'fstop': 4.0, 'focus': [16.15, 4.85, 0.8]},
+            # (p10, not judged: from the stools on 40 mm the frame became the lounge, the booths out, chairs and lamps
+            # across both speakers: back down the bar on 35 mm, nearer than p9)
+            'camera': {'position': [3.0, 2.4, 1.35], 'target': [16.15, 3.9, 1.0], 'lens_mm': 35, 'level': True,
+                       'fstop': 4.0, 'focus': [9.0, 3.0, 1.0]},
             'settings': {'exposure': 1.0, 'wb': 3000, 'shelf_glow': 0.35, 'niche_glow': 0.3, 'spot_niche': 400.0,
                          'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 700.0,
                          'pendant_cone': 40.0, 'pendant_glow': 0.15, 'pendant_lamp': 1.5, 'shade_glow': 0.6,
