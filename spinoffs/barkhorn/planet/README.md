@@ -8,6 +8,48 @@ Status: **a proposal.** Every number and every choice below is a working assumpt
 look at; each is the owner's to overturn (the list is under "Assumptions"). The products are EARF's own, from their
 CAD and untouched.
 
+## Round 34: the owner's note, and the response
+
+The owner, 2026-10-19, after round 33 (`den/`, a cozy walnut-and-brass den that answered "cozier, warmer, smaller, no
+rainbow"):
+
+> "For the bar I still want a lot of acrylic features, just not rainbow everywhere. The brick is unlikely to happen in
+> SF, it's not common here. Cement walls, or cement looking walls would be cool, and I really like the idea of having
+> wall screens behind large acrylic panels that could display certain things, like suggestive hands pressed up against
+> fogged glass, the fogged silhouette of a woman dancing, alien/foreign objects like the movie arrival, etc. it's hard
+> to mix acrylic into a space and have it not feel cheap though. My favorite interior designs are always lots of
+> cement, some wood beams and features, and steal/iron features. Mixing acrylic into that tastefully is difficult.
+> Might require a better rendering pipeline or critic for intimate listening bar space. Dimly lit too, but not to the
+> point that it's hard to see."
+
+The response, round 34 (`loft/`). It keeps the den's footprint: a 20 ft (6.1 m) frontage, 17 m deep, about 30 seats.
+
+- **Materials:** board-formed concrete walls (a scan with tie holes and pour panels) and a polished concrete floor;
+  reclaimed Douglas fir beams under a fir plank deck; blackened steel for the shopfront, the back-bar, the frames, the
+  kick and the footrail. No brick anywhere.
+- **Acrylic, neutral only:** water-clear, frosted or smoked, always thick (25 to 30 mm) and set flush in steel or
+  concrete, so the one speaker in each frame stays the only colour. It appears as:
+  - the screens;
+  - a clear band inlaid along the bar top's front edge, lit from within;
+  - clear back-bar shelves with polished, edge-lit fronts;
+  - the niches' frosted backs;
+  - frosted cylinder pendants;
+  - a smoked partition at the listening room.
+- **The screens:** large frosted panels set flush into reveals in the concrete, each with a glowing image 100 mm behind
+  it, so the panel does the diffusing. They show hands pressed against fogged glass, an Arrival-like shell in fog, an
+  ink-ring logogram, and the fogged silhouette of a woman dancing. The dancer is in a two-faced lightbox in the
+  shopfront window, seen from the street and from the room. The images are `loft/screens.py`: shapes and shadows,
+  never explicit.
+- **A new critic for interiors:** `critic/PROMPT-interiors.md`. It judges whether the frame would pass as a photograph
+  in a design magazine, against a reference board in words: Japanese listening bars, Ando's concrete, Kuramata's and
+  Marcelis's acrylic, Brooklyn's listening rooms. Its explicit checks are premium acrylic, real concrete, timber and
+  steel at 1:1, dim but readable (numeric floors), cozy, and one colour.
+- **Pipeline:** scanned CC0 materials (Poly Haven and ambientCG), a thick-acrylic shader (rough transmission, volume
+  absorption, polished edges), and modelled shades in place of IES profiles (none were to hand). The view transform is
+  measured, AgX against Khronos PBR Neutral, before one is chosen.
+- **The products:** Fog at the bar and Ember in the listening room, as before. Bell is in Fog (opal white), so no frame
+  carries a second colour.
+
 <!-- VIEWS -->
 
 ## The concept
