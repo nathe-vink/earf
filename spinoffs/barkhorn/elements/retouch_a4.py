@@ -4,7 +4,7 @@
 2. the hot streak down the clear front corner over the woofer's right edge: only its smooth excess over the panel
    beside it is compressed, feathered, so the edge line stays.
 
-    python3.11 spinoffs/barkhorn/elements/retouch_a4.py IN.png OUT.png landscape|portrait [--mask MASK.png]
+    python3.11 spinoffs/barkhorn/elements/retouch_a4.py IN.png OUT.png landscape|portrait [--mask MASK.png] [--streak-only]
 """
 import argparse
 
@@ -52,7 +52,7 @@ def feathered_box(shape, box, f):
     return gaussian_filter(m, f)
 
 
-def retouch(a, frame):
+def retouch(a, frame, caps_on=True):
     P = FRAMES[frame]
     H, W = a.shape[:2]
     # 1. the caps
@@ -66,6 +66,8 @@ def retouch(a, frame):
     m = np.clip(gaussian_filter(key.astype(float), 1.2) * 1.4, 0, 1)
     h2 = (h + HUE_SHIFT) % 1.0
     caps = hsv_rgb(h2, np.clip(s * CHROMA, 0, 1), v * VALUE)
+    if not caps_on:                                       # the streak half alone
+        m = np.zeros_like(m)
     out = a * (1 - m[..., None]) + caps * m[..., None]
     # 2. the streak: the panel's level either side of the band, per row, is the floor; the band's smooth excess over
     # it is compressed (the fine edge line rides on top, untouched)
@@ -86,9 +88,10 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('src'); ap.add_argument('dst'); ap.add_argument('frame', choices=list(FRAMES))
     ap.add_argument('--mask')
+    ap.add_argument('--streak-only', action='store_true', help='leave the caps as rendered')
     a = ap.parse_args()
     img = np.asarray(Image.open(a.src).convert('RGB')).astype(float) / 255.0
-    out, m, mb = retouch(img, a.frame)
+    out, m, mb = retouch(img, a.frame, caps_on=not a.streak_only)
     Image.fromarray((out * 255 + 0.5).astype(np.uint8)).save(a.dst)
     if a.mask:
         Image.fromarray((np.stack([m, mb, np.zeros_like(m)], -1) * 255).astype(np.uint8)).save(a.mask)
