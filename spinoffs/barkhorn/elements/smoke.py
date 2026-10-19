@@ -13,6 +13,7 @@ from common import area, asset, point, camera, finish, ground, piece, scatter, s
 
 PILE = (5.0, 5.2)            # the burn pile (round C)
 PILE_D = (8.0, 9.0)          # round D2: the smoke's source, far back between the trunks
+FERN = ((-1.0, -0.45, 0.0), 80.0, 0.8)   # D3: the fern clump at the near left corner (position, turn, scale)
 SUN_A = {'azimuth_deg': 150.0, 'elevation_deg': 24.0, 'irradiance': 30.0, 'angle_deg': 0.5, 'color': '#FFB978'}
 SKY = 'misty_pines'           # a real pine wood in morning mist (Poly Haven, CC0)
 SUN = {'azimuth_deg': 150.0, 'elevation_deg': 18.0, 'irradiance': 75.0, 'angle_deg': 0.5, 'color': '#FFCC9A'}
@@ -132,12 +133,15 @@ def shot():
                    open=0.65, seed=5)]
     props += trees()
     # grounding: a fern clump just over the front corner nearest the camera, a few small twigs about the base
-    props += [asset('fern_02', (-0.75, -0.75, 0.0), (0, 0, 35), 0.5, res='1k'),
+    props += [asset('fern_02', FERN[0], (0, 0, FERN[1]), FERN[2], res='1k'),
               scatter(['dry_branches_medium_01'], 3, [-1.8, -1.6, 2.0, 1.2], avoid=[(0.0, 0.0, 0.9), (-0.75, -0.75, 0.8)],
                       seed=21, res='1k', z=-0.015, scale=(0.18, 0.28))]
     # the smoke's source, far back between the trunks: a small smouldering pile and its thin leaning column
     props += [piece('ext', module='smoke_el', fn='burnpile', position=[PILE_D[0], PILE_D[1], 0.0], radius=0.7, seed=3,
-                    ember=60.0, logs=10)]
+                    ember=0.0, logs=10)]
+    # D3: a fuller, backlit drift of the same woodsmoke crossing the far shafts at head height
+    props.append(smoke((3.0, 10.5, 1.2), (14.0, 3.5, 3.5), 1.0, 41, scale=1.3, cut=0.5, soft=0.3, anisotropy=0.8,
+                       fade=[0.3, 0.4, 0.45], floor=0.0, color='#C9CCD1', detail_scale=0.3, detail_weight=0.5))
     for k in range(8):
         t = k / 7
         w = 0.5 + 2.4 * t ** 1.3
@@ -146,7 +150,7 @@ def shot():
                            fade=[0.42, 0.42, 0.4], floor=0.1 * (1 - t), rise=2.2 - 0.8 * t, color='#C9CCD1',
                            detail_scale=0.12 + 0.1 * t, detail_weight=0.4 + 0.25 * t))
     cam = camera(height=1.0, distance=7.2, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=0.14,
-                 shift_y=-0.04)
+                 shift_y=0.0)
     lights = {
         'skyfill': {**area(-20, 5, 2.4, 2.0, '#A9B4C2', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
         'bounce': {**area(-25, 12, 2.0, 7.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
@@ -155,7 +159,6 @@ def shot():
         # a shaft of sun through a canopy gap onto the speaker, so it throws its own shadow across the needles
         'sungap': {'type': 'spot', 'position': [5.4, 9.36, 4.73], 'target': [0.0, 0.0, 0.3], 'power_w': 60000,
                    'cone_deg': 9.0, 'blend': 0.5, 'color': '#FFB978', 'radius_m': 0.15},
-        'embers': point([PILE_D[0], PILE_D[1], 0.3], 60, '#FF5A14', 0.3),
     }
     return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.15), 'barkhorn, Smoke, woodsmoke at dawn',
                  sun=SUN_A, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.03), samples=512, exposure=0.0,
