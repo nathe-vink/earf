@@ -45,3 +45,33 @@ What the judges still note:
 - The caps are the most saturated thing in the frame, and their spots are too even.
 - A small cap is cut at the frame's left edge.
 - They credited A4 again with losing A3's red sliver at the cabinet's foot.
+
+## The finals and the full-size duel (2026-10-19)
+
+The finals are on the new drivers, each stitched from two strips (cross-fade, finish applied once). The joins are clean at 100 %.
+- Landscape: `renders/2026-10-18/barkhorn/element31/poison_a4.png` (b8a5f2c), from strips d28aa12 and c908c5d.
+- Phone: `poison_a4-portrait.png` (89034b5), from strips ee61f11 and 2183eb9.
+
+**Read test on the finished frames, at 600 px:** both pass.
+- Landscape: "…ferns and purple foxgloves behind it, and small orange mushrooms in the foreground."
+- Phone: "…ferns, purple foxgloves and a few small orange-capped mushrooms around it."
+
+**Blind duel against A3 at full size, with fresh judges and the order swapped:**
+
+| Frame | Order | A3 | A4 | Preferred |
+|---|---|---|---|---|
+| Landscape | A4 first | 6.5 | 6.0 | A3 |
+| Landscape | A3 first | 6.5 | 6.0 | A3 |
+| Phone | A4 first | 7.0 | 6.5 | A3 |
+| Phone | A3 first | 6.5 | 6.0 | A3 |
+
+**A4 trails A3 by exactly 0.5 on both frames, on the margin.** All four judges preferred A3.
+
+What the judges said:
+- **The foreground agarics:** all four called them the most saturated thing in the frame, read as smooth CG props, and pulling the eye off the product.
+- **The foxgloves:** three called them too many or too bright, competing with the horn's height. One credited them as a vertical rhythm that balances the trunk.
+- **A3's quieter set:** what they preferred in A3 was its plain foreground, with the agarics tucked behind the fern.
+- **A point for A4:** one judge said A4's agarics hide A3's procedural-looking moss tufts.
+- **A shared flaw:** the bright reflection down the clear front corner, over the woofer's right edge, caps both frames.
+
+The trade, plainly: A3 is the better picture by half a point, and A4 is the one that says "poison" at a glance.
