@@ -66,9 +66,12 @@ VIEWS = {
                              'fstop': 2.8, 'focus': [16.15, LP.PAIR['y'][1], 0.9]},
                   # listening-r1: the speaker's front lamp soft and low, the light mostly from behind through the acrylic;
                   # the chairs espresso; the record wall up; warmer and lower overall
-                  'settings': {'spk_irr': 6.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 12.0, 'sconce_w': 4.0,
-                               'exposure': -0.5, 'wb': 3800, 'spot_records': 10.0, 'rec_cone': 40.0, 'rec_aim_z': 1.2,
-                               'record_glow': 0.8, 'console_lift': 0.55, 'chair_dye': '#4A3A32'}},
+                  # after listening-r2 (5.5): a stop darker, the screen dimmed below the speaker, the speaker lit three
+                  # times harder from front and behind, the candle up, the records lower and grazed, haze
+                  'settings': {'spk_irr': 18.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 36.0, 'sconce_w': 4.0,
+                               'exposure': -1.5, 'wb': 3800, 'spot_records': 8.0, 'rec_cone': 25.0, 'rec_aim_z': 1.2,
+                               'record_glow': 0.4, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.3,
+                               'flame': 60.0, 'candle_w': 1.5, 'haze': 0.02}},
     'street': {'title': 'the shopfront at night, from across the street',
                # after street-r2 (4.5): from the far curb, level and shifted up so the Edwardian bay is in, the right
                # Ember speaker in clear glass beside the name; 1.2 stops brighter, the street lamps up and one low

@@ -1,0 +1,365 @@
+{
+ "stage1": {
+  "impression": "A believable, well-composed corner: the board-formed concrete with tie holes and pour lines, the fir record wall and the leather chair back all read as real materials, and the lens and verticals are honest. But it is lit like a dusk showroom, not a night bar. The concrete and the large cool-grey frosted screen are evenly washed and twice as bright as the speaker. There is no visible practical and no pool of light. The red cabinet reads as uniform tinted jelly, without glowing polished edges, so the hero loses to the screen.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Frame lum_median within 22-50 (now 73.7) while the speaker region holds >= 45",
+  "Screen and concrete no brighter than the speaker: screen region median <= speaker median (now 112.7 vs 54.0)",
+  "Light falls off as pools: concrete vertical profile shows a lit pool and a dark ceiling and floor, not a flat 100-130 plateau",
+  "At least one visible warm practical in frame (a lit candle or a Bell on the side table) carrying the light story",
+  "Speaker's acrylic edges and inner batts glow from behind or inside, so the cabinet reads as thick polished cast acrylic rather than flat red tint",
+  "Record sleeves show varied spines and some out of order or leaning, not uniform stripes; a record out of its sleeve or a coat for life"
+ ],
+ "defects": [
+  {
+   "region": [
+    45,
+    15,
+    290,
+    295
+   ],
+   "what": "Frosted screen is the brightest large area in the frame (median 112.7), cooler than the room (b 98 vs concrete 75), and pulls the eye from the speaker; its image reads as a grey stain"
+  },
+  {
+   "region": [
+    300,
+    0,
+    490,
+    440
+   ],
+   "what": "Concrete wall evenly washed (profile 102-131 over most of its height, median 111), with no pool or falloff: showroom flood, not night practicals"
+  },
+  {
+   "region": [
+    220,
+    190,
+    380,
+    480
+   ],
+   "what": "Ember cabinet reads as uniform translucent red, with no bright polished edges or internal glow, and slightly gelatinous; it is darker than its surroundings (median 54)"
+  },
+  {
+   "region": [
+    220,
+    195,
+    355,
+    280
+   ],
+   "what": "Waveguide hovers on thin pins over the cabinet; the gap reads as floating (fixed product, see out_of_scope)"
+  },
+  {
+   "region": [
+    130,
+    420,
+    265,
+    480
+   ],
+   "what": "Amber votive on the side table looks unlit; no flame or highlight; the side table top is flat grey"
+  },
+  {
+   "region": [
+    495,
+    0,
+    720,
+    380
+   ],
+   "what": "Record sleeves read as regular vertical stripes of similar width and value, and the shelves are uniformly packed: looks procedural"
+  },
+  {
+   "region": [
+    0,
+    240,
+    160,
+    480
+   ],
+   "what": "Foreground chair back is a large dark smooth mass with little leather texture or rim light"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The frame is far too bright for a night interior.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 73.7, lum_mean 75.3, target 22-50"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "-0.5",
+    "to": "-1.5"
+   },
+   "expected": "Frame median falls to about 40-45; shadows still hold detail (lum_p5 about 8-10). Must be paired with c3 so the speaker stays >= 45.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     48
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frosted screen outshines the hero speaker and reads as a cool lightbox.",
+   "evidence": {
+    "region": [
+     45,
+     15,
+     290,
+     295
+    ],
+    "measured": "lum_median 112.7 vs speaker 54.0; b_median 98 vs concrete 75"
+   },
+   "change": {
+    "setting": "the screens' images emission strength",
+    "from": "0.8",
+    "to": "0.25"
+   },
+   "expected": "The screen becomes a soft, dim glow below the speaker's brightness, so the image reads as suggestive rather than as a sign.",
+   "accept": {
+    "region": [
+     45,
+     15,
+     290,
+     295
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The speaker is not lit as the hero; its acrylic does not glow or show edges.",
+   "evidence": {
+    "region": [
+     220,
+     190,
+     380,
+     480
+    ],
+    "measured": "lum_median 54.0, lum_p95 116; darker than the wall behind (111)"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area lamps",
+    "from": "6.0 W/m2 at the target, 2900 K",
+    "to": "18.0 W/m2 at the target, 2900 K, with one placed behind and below the cabinet as a rim/back light through the acrylic"
+   },
+   "expected": "After the exposure drop, the cabinet stays the brightest saturated object. Its polished edges and the white batts glow red through the tint.",
+   "accept": {
+    "region": [
+     220,
+     190,
+     380,
+     480
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The concrete is flooded evenly, with no pool of light.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     490,
+     440
+    ],
+    "measured": "falloff profile y bins 43,102,126,131,130,120,114,106; median 111"
+   },
+   "change": {
+    "setting": "pendants 3 x spot",
+    "from": "60.0 W, cone 50.0 deg",
+    "to": "35.0 W, cone 30 deg, aimed at the speaker and the side table, not the wall"
+   },
+   "expected": "The wall falls from a mid-height pool near the speaker to dark top and bottom; median about 35-50 after c1.",
+   "accept": {
+    "region": [
+     300,
+     0,
+     490,
+     440
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "No visible practical: the light has no source the reader can see, and the votive looks dead.",
+   "evidence": {
+    "region": [
+     130,
+     420,
+     265,
+     480
+    ],
+    "measured": "lum_median 62.6, lum_p95 113.6, no hot point; no flame visible in crop"
+   },
+   "change": {
+    "setting": "candles / Bell placement",
+    "from": "votive on the side table apparently unlit; no Bell in frame",
+    "to": "a lit candle in the amber votive (flame 25, point 0.6 W kept), plus a Bell table lamp on the side table at the left edge of the speaker, 22 W"
+   },
+   "expected": "A warm pool on the side table top and glasses with small highlights, which gives a visible source for the scene's light.",
+   "accept": {
+    "region": [
+     130,
+     420,
+     265,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The record wall is lit evenly; it should be a secondary, dimmer plane with grazing pools.",
+   "evidence": {
+    "region": [
+     495,
+     0,
+     720,
+     380
+    ],
+    "measured": "lum_median 45.9, lum_p95 129"
+   },
+   "change": {
+    "setting": "the record wall 3 x spot and record-wall strip",
+    "from": "10.0 W cone 40 deg; strip 0.8",
+    "to": "8.0 W cone 25 deg grazing from above; strip 0.4"
+   },
+   "expected": "Spines catch small highlights in pools, darker between them; the wall stays below the speaker in brightness.",
+   "accept": {
+    "region": [
+     495,
+     0,
+     720,
+     380
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     20,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The record shelves look procedural and the room lacks signs of life.",
+   "evidence": {
+    "region": [
+     495,
+     0,
+     720,
+     380
+    ],
+    "measured": "seen at 2x: uniform stripe widths, fully packed, nothing leaning or out"
+   },
+   "change": {
+    "setting": "props",
+    "from": "uniformly packed sleeves",
+    "to": "vary spine widths and values, leave gaps with a few sleeves leaning, one sleeve face-out on the cabinet top, a record out of its sleeve on the side table or cabinet, a coat over the chair arm"
+   },
+   "expected": "The record wall reads as a collection in use; the frame looks lived in.",
+   "accept": {
+    "region": [
+     495,
+     0,
+     720,
+     380
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The night air is too clean for pools of light to read; the frame looks clinical.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     490,
+     200
+    ],
+    "measured": "no visible beam or veil above the speaker; haze 0.008/m"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.008 per metre",
+    "to": "0.02 per metre"
+   },
+   "expected": "A faint veil in the pendant cones above the speaker and a softer upper wall, with no greying of the blacks.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 6
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Close or hide the gap between the waveguide and the cabinet, or thicken its pins",
+   "why": "Speaker shape and parts are fixed; the hovering reads oddly, but only light (a rim on the pins) can help"
+  },
+  {
+   "request": "Make the Ember tint deeper or less saturated",
+   "why": "Speaker colour is fixed; measured delta-E 16.9 vs a generic red is not a target"
+  },
+  {
+   "request": "Replace or recompose the screen's image",
+   "why": "The screens and what they show are fixed; only their brightness may change"
+  }
+ ],
+ "score_if_fixed": 7.5
+}
