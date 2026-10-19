@@ -140,12 +140,13 @@ def shot():
     props += [piece('ext', module='smoke_el', fn='burnpile', position=[PILE_D[0], PILE_D[1], 0.0], radius=0.7, seed=3,
                     ember=0.0, logs=10)]
     # D3: a fuller, backlit drift of the same woodsmoke crossing the far shafts at head height
-    props.append(smoke((3.0, 10.5, 1.2), (14.0, 3.5, 3.5), 1.0, 41, scale=1.3, cut=0.5, soft=0.3, anisotropy=0.8,
-                       fade=[0.3, 0.4, 0.45], floor=0.0, color='#C9CCD1', detail_scale=0.3, detail_weight=0.5))
+    props.append(smoke((4.0, 10.5, 1.5), (14.0, 3.5, 4.0), 2.5, 41, scale=0.8, cut=0.58, soft=0.2, anisotropy=0.8,
+                       fade=[0.3, 0.4, 0.45], floor=0.0, color='#C9CCD1', detail_scale=0.2, detail_weight=0.55,
+                       rise=1.5))
     for k in range(8):
         t = k / 7
         w = 0.5 + 2.4 * t ** 1.3
-        props.append(smoke((PILE_D[0] - 4.5 * t ** 1.4, PILE_D[1] - 0.3 * t, 0.1 + 0.9 * k), (w, w, 2.0), 18.0 * 0.75 ** k,
+        props.append(smoke((PILE_D[0] - 6.0 * t ** 1.2, PILE_D[1] - 0.3 * t, 0.1 + 0.9 * k), (w, w, 2.0), 30.0 * 0.78 ** k,
                            21 + k, scale=0.3 + 0.45 * t, cut=0.45 + 0.12 * t, soft=0.22, anisotropy=0.75,
                            fade=[0.42, 0.42, 0.4], floor=0.1 * (1 - t), rise=2.2 - 0.8 * t, color='#C9CCD1',
                            detail_scale=0.12 + 0.1 * t, detail_weight=0.4 + 0.25 * t))
