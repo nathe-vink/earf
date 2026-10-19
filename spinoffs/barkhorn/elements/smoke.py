@@ -76,9 +76,12 @@ def grounding():
     for lx, ly, half, along_x in ((0.0, -0.25, 0.36, True), (0.0, 0.25, 0.36, True), (-0.32, 0.0, 0.27, False),
                                   (0.32, 0.0, 0.27, False)):
         x, y = at(lx, ly)
-        sc = [half, 0.09, 0.05] if along_x else [0.09, half, 0.05]
-        out.append(piece('sphere', material='pbr', texture='forest_leaves_04', tex_res='2k', position=[x, y, -0.02],
-                         scale=sc, rotate=[0, 0, ROT], tint='#4A3626', tint_mix=0.3))
+        sc = [half, 0.13, 0.09] if along_x else [0.13, half, 0.09]
+        out.append(piece('sphere', material='pbr', texture='forest_leaves_04', tex_res='2k', position=[x, y, -0.03],
+                         scale=sc, rotate=[0, 0, ROT], tint='#2E2219', tint_mix=0.45))
+    # damp, darker duff in the cabinet's own shade: the contact shadow a photograph would show under the plinth line
+    out.append(piece('cylinder', material='pbr', texture='forest_leaves_04', tex_res='2k', radius=0.62, height=0.012,
+                     position=[0.0, 0.0, -0.004], scale=[1.0, 0.8, 1.0], rotate=[0, 0, ROT], tint='#15100C', tint_mix=0.7))
     out += [asset('fern_02', (-0.75, -0.75, 0.0), (0, 0, 35), 0.5, res='1k'),
             asset('pine_roots', (1.6, 1.2, -0.02), (0, 0, 120), 1.0, res='1k'),
             asset('tree_stump_01', (-2.2, 2.4, -0.05), (0, 0, 60), 0.9, res='1k'),
@@ -157,7 +160,7 @@ def shot():
                       'receivers': plume_names},
     }
     return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.4), 'barkhorn, Smoke, woodsmoke at dawn',
-                 sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.03), samples=512, exposure=0.3,
+                 sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.045), samples=512, exposure=0.3,
                  # the whole air hazed with the pile's smoke, the camera inside it, so the speaker sits in the same air
                  haze={'box_m': [-15.0, -15.0, 0.0, 18.0, 30.0, 14.0], 'density': 0.003, 'anisotropy': 0.7,
                        'color': '#BCC4CE'},
