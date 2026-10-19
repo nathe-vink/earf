@@ -1,0 +1,361 @@
+{
+ "stage1": {
+  "impression": "It reads as a believable layout for a long, narrow bar at night: warm pendants, the bar top pooled with light, a row of stools, and booths falling into shadow. At 1:1 it is clearly a render. The floor is covered in large, hard-edged, puddle-shaped blotches. The haze turns the back-bar into a flat grey fog, so the acrylic shelves read as plain glowing lines rather than thick polished acrylic. The frosted screen is a flat white rectangle. The hero, the red Ember speaker, is a pink sliver hidden behind the last stools, and the far end belongs to two black lounge chairs.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker must read as the hero at a glance: an unoccluded silhouette with its red tint and the light through its acrylic visible, not a pink sliver behind the stools",
+  "The floor must read as polished concrete with no large hard-edged blotches or puddle shapes",
+  "The back-bar must show its bottles, the steel and the thick shelf edges, not a grey veil of haze",
+  "The frosted screens must glow at the same warm, low key as the room, not as a flat bright white panel",
+  "The booths must hold shadow detail (crush below 10 % in the right-hand third)",
+  "Some sign of life near the camera (a glass, a menu or a coat in the foreground), and no props that read as glowing blue phones",
+  "Full resolution with no denoiser smear on the record wall and listening room"
+ ],
+ "defects": [
+  {
+   "region": [
+    200,
+    300,
+    460,
+    480
+   ],
+   "what": "Large irregular dark blotches with hard edges, like puddles or a contrasty stain map, across the concrete floor. They read as CG and not as shadows"
+  },
+  {
+   "region": [
+    0,
+    140,
+    290,
+    260
+   ],
+   "what": "The back-bar is washed to an even grey by haze. The acrylic shelves read as thin white light lines, the bottles are barely visible and the steel is lost"
+  },
+  {
+   "region": [
+    290,
+    235,
+    325,
+    285
+   ],
+   "what": "The Ember speaker is almost entirely hidden behind bar stools and a chair. Only a pink-red sliver shows, and its red is desaturated toward pink (dE2000 17 against #C0392B)"
+  },
+  {
+   "region": [
+    325,
+    240,
+    440,
+    310
+   ],
+   "what": "Two black lounge chairs fill the listening-room opening and become the visual end point instead of the speaker"
+  },
+  {
+   "region": [
+    560,
+    110,
+    620,
+    245
+   ],
+   "what": "The frosted screen is a flat, near-white rectangle (median 92, slightly cool with b > g) with no falloff or depth. It reads as a lit poster or monitor"
+  },
+  {
+   "region": [
+    470,
+    250,
+    720,
+    480
+   ],
+   "what": "The booths and the right wall are crushed (20 % crush, median 12). The leather and the fir caps are barely legible"
+  },
+  {
+   "region": [
+    90,
+    260,
+    330,
+    280
+   ],
+   "what": "Small objects on the bar top glow cyan and blue (they read as phones or screens), the only cool colour in the room besides the screen"
+  },
+  {
+   "region": [
+    320,
+    175,
+    420,
+    260
+   ],
+   "what": "The record wall and listening room are smeared by the denoiser and have no record detail"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    120
+   ],
+   "what": "The ceiling and beams are a flat brown with no fir grain, checks or end grain visible"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speaker is hidden behind the stools and chairs, so the frame has no hero.",
+   "evidence": {
+    "region": [
+     290,
+     235,
+     325,
+     285
+    ],
+    "measured": "speaker region is 35 x 50 px, mostly occluded by stool backs; lum_median 67, red only at the edges"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [1.6, 2.3, 1.45], target [17.0, 3.4, 1.2], 28 mm",
+    "to": "position [1.6, 1.9, 1.35], target [17.0, 2.6, 1.0], 35 mm, focus on the Ember speaker"
+   },
+   "expected": "The Ember sits in clear view down the aisle between the stools and the booths, about 1.5 times larger, with its whole silhouette visible and framed by the partition opening",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The concrete floor carries large, hard-edged, puddle-shaped blotches that read as a bad texture.",
+   "evidence": {
+    "region": [
+     200,
+     330,
+     440,
+     480
+    ],
+    "measured": "profile y bins 52.8/49.9/37.5/47.1/43.7/47.4/52.4/60.0: irregular dips with crisp boundaries rather than a smooth falloff"
+   },
+   "change": {
+    "setting": "floor material: stain map contrast and polish",
+    "from": "high-contrast blotch stain",
+    "to": "stain contrast reduced about 70 % and broken up at a smaller scale (0.2 to 0.5 m features, soft edges), roughness 0.35, so the pendants leave soft glossy streaks"
+   },
+   "expected": "An even warm-grey polished concrete with soft reflections of the pendants and stools, and no puddle shapes",
+   "accept": {
+    "region": [
+     200,
+     330,
+     440,
+     480
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "Haze greys the whole back-bar, so the acrylic, bottles and steel lose contrast.",
+   "evidence": {
+    "region": [
+     0,
+     140,
+     140,
+     250
+    ],
+    "measured": "lum_median 76, p5 23; it reads as an even grey veil with the bottles barely visible"
+   },
+   "change": {
+    "setting": "haze density",
+    "from": "0.015 per metre",
+    "to": "0.006 per metre"
+   },
+   "expected": "The back-bar steel goes near black, the bottles and shelf edges stand out, and the pendant cones are only faintly visible",
+   "accept": {
+    "region": [
+     0,
+     140,
+     140,
+     250
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The frosted screen is a flat, slightly cool white panel that outshines the room and competes with the speaker.",
+   "evidence": {
+    "region": [
+     560,
+     110,
+     620,
+     245
+    ],
+    "measured": "lum_median 92, r 103 / g 89 / b 93 (cooler than the 2400 K room)"
+   },
+   "change": {
+    "setting": "the screens' images emission",
+    "from": "1.2, neutral",
+    "to": "0.5, tinted toward 3000 K, with the frosted acrylic's roughness raised so the image softens at its edges"
+   },
+   "expected": "A soft, warm glowing panel, darker than the pendants and the bar top, with the hands still legible",
+   "accept": {
+    "region": [
+     560,
+     110,
+     620,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The Ember speaker's red is weak and pinkish, so the room's one colour does not land.",
+   "evidence": {
+    "region": [
+     295,
+     240,
+     320,
+     280
+    ],
+    "measured": "mean RGB 116/67/63, dE2000 17.1 against #C0392B"
+   },
+   "change": {
+    "setting": "on each Ember speaker, area lamps",
+    "from": "4 x 30 W/m2 at 2700 K",
+    "to": "4 x 45 W/m2 at 2700 K, plus the listening room's other lights lowered so the speaker is the brightest thing at the far end"
+   },
+   "expected": "The speaker's acrylic glows a saturated ember red with visible batts, and it is the frame's only saturated colour",
+   "accept": {
+    "region": [
+     290,
+     235,
+     325,
+     285
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The booths and right wall fall to crushed black, so the leather and fir are not readable.",
+   "evidence": {
+    "region": [
+     470,
+     250,
+     720,
+     480
+    ],
+    "measured": "lum_median 12.1, crush_pct 20.0"
+   },
+   "change": {
+    "setting": "table lamps (EARF Moon) and sconce",
+    "from": "table lamp 400 W, sconce 80 W",
+    "to": "table lamp 600 W, sconce 140 W, so each booth gets its own pool of light"
+   },
+   "expected": "Each booth shows a warm pool on its table, the tan leather is legible, and dark gaps remain between the booths",
+   "accept": {
+    "region": [
+     470,
+     250,
+     720,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 8
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Blue and cyan glowing objects on the bar read as phones, and no foreground prop says anyone is here.",
+   "evidence": {
+    "region": [
+     90,
+     260,
+     330,
+     280
+    ],
+    "measured": "seen: small cyan rectangles along the bar top; no foreground props"
+   },
+   "change": {
+    "setting": "props",
+    "from": "small glowing blue items on the bar; empty foreground",
+    "to": "replace them with rocks glasses and amber votives; add a half-full coupe and a folded menu on the nearest bar-top corner, and a coat over one stool"
+   },
+   "expected": "Warm small highlights along the bar and a sign of life near the lens, with no cool hues except the screen",
+   "accept": {
+    "region": [
+     90,
+     260,
+     330,
+     280
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The ceiling's fir beams are a flat brown with no grain, and the far end is denoiser-smeared.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     120
+    ],
+    "measured": "lum_range 38, p5 17 to p95 55: a flat, untextured band"
+   },
+   "change": {
+    "setting": "the fir's stain and render samples",
+    "from": "flat fir stain; 256 samples, adaptive 0.02",
+    "to": "fir with visible grain, checks and darker end grain, plus a grazing pendant spill onto the beams; 512 samples, adaptive 0.01 at full 2400 x 1600"
+   },
+   "expected": "The beams read as old Douglas fir with soft highlights on their faces, and the records at the far end hold sleeve detail",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     120
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 50
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move or remove the two black lounge chairs in the listening room that block the speaker",
+   "why": "The listening room's furniture and layout are fixed by the card. The camera move (c1) works around them instead"
+  },
+  {
+   "request": "A more saturated red for the Ember cabinet itself",
+   "why": "The speaker's colour is fixed. Only the light on and through it may change"
+  }
+ ],
+ "score_if_fixed": 6.8
+}
