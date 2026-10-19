@@ -77,9 +77,9 @@ VIEWS = {
                   # (p5, light-linked: the speaker glowed but the room fell to a median of 3) exposure up 1.9 stops,
                   # the linked lamps down by as much, the room lit by its own: the sconce, records, candle, a ceiling fill
                   'settings': {'spk_irr': 5.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 10.0, 'sconce_w': 15.0,
-                               'exposure': 0.4, 'wb': 3800, 'spot_records': 14.0, 'rec_cone': 25.0, 'rec_aim_z': 1.2,
+                               'exposure': 0.0, 'wb': 3800, 'spot_records': 14.0, 'rec_cone': 25.0, 'rec_aim_z': 1.2,
                                'fill_w': 40.0, 'fill_pos': [14.6, 3.2, 3.0], 'fill_target': [15.2, 3.4, 0.0],
-                               'record_glow': 0.4, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.3,
+                               'record_glow': 0.4, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.15,
                                'flame': 60.0, 'candle_w': 1.5, 'haze': 0.01,
                                # (p4: the tripled lamps flooded the corner, median 81 at -1.5) light-linked to the speaker
                                'spk_link': True}},
