@@ -144,6 +144,9 @@ def lights(v):
     bell(P.WINDOW_TABLE[0] - 0.12, P.WINDOW_TABLE[1] + 0.10, T['h'], v['bell_w'], 'bellW-')
     for i, (x, y) in enumerate(P.SIDE_TABLES[1:]):
         bell(x, y, SIDE_H, v['bell_w'], f'bellS{i}-')
+    if v.get('fill_w', 0) > 0:                                        # a dim warm fill, a ceiling bounce, where asked
+        L['fill'] = {'type': 'area', 'position': v['fill_pos'], 'target': v['fill_target'], 'size_m': [1.6, 1.6],
+                     'power_w': v['fill_w'], 'color': 2700, 'camera': False}
     if v.get('bounce', 0) > 0:                                        # a low warm bounce by the window table (bar-r1 c4)
         L['bounce'] = {'type': 'area', 'position': [2.4, 3.2, 0.25], 'target': [5.0, 3.9, 0.5], 'size_m': [1.0, 0.5],
                        'power_w': v['bounce'], 'color': 2500, 'camera': False}

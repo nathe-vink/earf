@@ -675,7 +675,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 18.0,
+   "irradiance": 5.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -698,7 +698,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 36.0,
+   "irradiance": 10.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -721,7 +721,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 18.0,
+   "irradiance": 5.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -744,7 +744,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 36.0,
+   "irradiance": 10.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -794,7 +794,7 @@
     5.8999999999999995,
     1.78
    ],
-   "power_w": 4.0,
+   "power_w": 15.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -865,7 +865,7 @@
     2.05,
     1.2
    ],
-   "power_w": 8.0,
+   "power_w": 14.0,
    "cone_deg": 25.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -883,7 +883,7 @@
     3.05,
     1.2
    ],
-   "power_w": 8.0,
+   "power_w": 14.0,
    "cone_deg": 25.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -901,7 +901,7 @@
     4.05,
     1.2
    ],
-   "power_w": 8.0,
+   "power_w": 14.0,
    "cone_deg": 25.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -1225,6 +1225,26 @@
    "transmission": false,
    "specular": 0.0
   },
+  "fill": {
+   "type": "area",
+   "position": [
+    14.6,
+    3.2,
+    3.0
+   ],
+   "target": [
+    15.2,
+    3.4,
+    0.0
+   ],
+   "size_m": [
+    1.6,
+    1.6
+   ],
+   "power_w": 40.0,
+   "color": 2700,
+   "camera": false
+  },
   "street0": {
    "type": "point",
    "position": [
@@ -1269,7 +1289,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "None",
-  "exposure": -1.5,
+  "exposure": 0.4,
   "white_balance_k": 3800,
   "white_balance_tint": 0.0
  }
