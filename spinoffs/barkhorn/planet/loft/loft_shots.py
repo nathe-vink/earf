@@ -173,7 +173,7 @@ VIEWS = {
                                'record_glow': 0.02, 'console_lift': 0.55, 'chair_dye': '#2E2A26', 'screen_lounge': 0.1,
                                'screen_tint': '#FFA060', 'flame': 60.0, 'candle_w': 4.0, 'haze': 0.025, 'spk_link': True,
                                'extra_bells': [[LP.LISTEN_TABLE[0] - 0.12, LP.LISTEN_TABLE[1] - 0.10, 0.495]],
-                               'moon_table_w': 45.0, 'moon_glow': 1.5}},
+                               'moon_table_w': 45.0, 'moon_glow': 1.0}},
     'street': {'title': 'the shopfront window at night, from the kerb',
                # p7's light (4.75, the best street) with the review's lifted sources (pendants, lamps, records, candles
                # x3.6, the sconce x4.8, the entry x3, the niches x2.4, the speaker x2.4, the shelf edges x0.5), p10's
