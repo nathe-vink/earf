@@ -186,3 +186,15 @@ A 512-sample full-size crop (d-p6) proved the grime seen at 128 samples was nois
 3.5.** Part of the gap is resolution (a downscaled 512-sample final against a 256-sample proof: "smeared horn, mushy
 woofer"). Two points are not: the plume read as "a ghostly half-formed figure", and the lumpy drifts and debris
 "muddy" the base, where A "sits cleanly with a believable contact shadow". This rig fails the gate (within 0.5 of A).
+
+## Round D2 (A's rig plus the owner's asks only)
+
+On A's rig: the camera at 1.0 m, a fern over the near front corner, three small twigs, and a sun shaft onto the speaker. Far back in the bright gap (8, 9) sits a small smouldering pile (charred logs and embers). A thin column of woodsmoke rises from it, backlit and leaning left. No drifts.
+
+| Proof | Stands? | Smoke? | Figure? |
+|---|---|---|---|
+| d2-p0 (k4) | stands | smoke | none |
+| d2-p1 (k5, 960 px, 256 spp), run 1 | stands | smoke, from the fire | none |
+| d2-p1, run 2 | stands | smoke, from the fire | none |
+
+**Duel at 720 px (both scaled down, order swapped across two judges): A won, 6.0 to 4.75** (5.0 v 6.5, 4.5 v 5.5). The gate is within 0.5, so this fails. Both judges read the glowing ember pile as "a forest fire next to a loudspeaker" that pulls the eye. That glow is the visible source the owner asked for. They also called the fern sparse and dropped in, the speaker too high in the frame with empty ground in front, and the cabinet softer. Part of the softness is 256 against 512 samples. One judge credited D2 for its grounding and its stronger, more atmospheric shafts. See `critic-smoke/d2-duel-vs-A-newdrivers.json`.

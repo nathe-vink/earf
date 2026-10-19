@@ -1,0 +1,6 @@
+{"setup": "720 px, both downscaled (D2 k5 960x640 256 spp; A final 595c55b 2400x1600). Two fresh judges, order swapped.",
+ "judge1": {"A_is": "D2", "A": 5.0, "B": 6.5, "prefer": "B",
+   "notes": ["ember patch and plume read as a forest fire, pull the eye", "D2 product softer/muddier, lower ports smeared", "D2 floor texture mushy", "ferns help grounding but sparse, look stuck on (favours D2)", "denser haze flattens product contrast"]},
+ "judge2": {"A_is": "A", "A": 5.5, "B": 4.5, "prefer": "A",
+   "notes": ["ember fire + smoke column reads as a forest fire next to a loudspeaker", "D2 product higher in frame, empty foreground, speaker reads smaller", "ferns sparse, dropped in, cover lower ports", "D2 cabinet darker, separates less", "D2 shafts and haze more atmospheric, cleaner rim on top (favours D2)"]},
+ "mean": {"D2": 4.75, "A": 6.0}, "gap": 1.25, "gate": "within 0.5: FAIL"}
