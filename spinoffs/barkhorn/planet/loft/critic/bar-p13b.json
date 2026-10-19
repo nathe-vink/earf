@@ -1,0 +1,370 @@
+{
+ "stage1": {
+  "impression": "A dim, warm-brown bar seen down the room. It reads as a dark CG walkthrough, not a magazine photograph. The right half is a dead wall of booths, and the one lit plane is a flat grey recess with a hard spotlight cone that looks like a gallery. The Ember speaker is a small red box half hidden behind a lounge chair. The concrete floor carries large blobby dark stains and a white wash, everything is soft with denoiser smear, and four identical lounge chairs and identical stools in a row give away the render.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker must read at a glance: whole silhouette unoccluded, red acrylic glowing, horn visible, region lum_median >= 60 with no chair in front of it",
+  "The booths, their high fir backs and the frosted screens above them must be legible: right half of the frame lum_median >= 22, not ~9-10",
+  "Pendants (EARF Moon) and fir beams must be in the frame, throwing pools on the bar top. At present neither the ceiling nor the pendants over the bar are visible (top 100 rows lum_range 19.5)",
+  "The floor must read as polished board-formed or ground concrete with reflected light pools, without the large blotchy stain shapes",
+  "No denoiser smear at the delivered size; wood grain, leather and concrete texture resolved at 1:1",
+  "Signs of life: glasses, bottles catching highlights on the back-bar, a coat or menu",
+  "The grey recess with its hard cone must stop being the brightest plane in the room (median 71 vs frame 24)"
+ ],
+ "defects": [
+  {
+   "region": [
+    240,
+    210,
+    285,
+    295
+   ],
+   "what": "Ember speaker small and partly occluded by a lounge chair's back. Horn reads as a white washing-machine porthole, and the cabinet edges are smeared"
+  },
+  {
+   "region": [
+    270,
+    230,
+    490,
+    340
+   ],
+   "what": "Four identical black lounge chairs in a row, one model copied. Reads as CG"
+  },
+  {
+   "region": [
+    0,
+    260,
+    250,
+    480
+   ],
+   "what": "Identical stools copied; soft, smeared wood with no grain"
+  },
+  {
+   "region": [
+    200,
+    340,
+    540,
+    480
+   ],
+   "what": "Floor has huge blobby dark stain shapes and a milky white wash. Not concrete at scale. Bright strip at y~340 (bin 137) like a glowing step edge"
+  },
+  {
+   "region": [
+    40,
+    95,
+    190,
+    240
+   ],
+   "what": "Flat grey recess lit by a hard-edged pendant cone and a second shade. Brightest surface in the frame (median 71), neutral grey, reads as a showroom or gallery wall. Lamp clips 10% in [80,110,110,135]"
+  },
+  {
+   "region": [
+    480,
+    90,
+    720,
+    480
+   ],
+   "what": "Booths and right wall nearly black (median 8.9-10.4). No frosted screens visible above the booths, no table lamps or candles reading"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    100
+   ],
+   "what": "Ceiling and beams invisible, a flat brown murk (range 19.5). No EARF Moon pendants over the bar in frame"
+  },
+  {
+   "region": [
+    300,
+    130,
+    445,
+    250
+   ],
+   "what": "Record wall dim and smeared. Its top strip reads as a cold blue-white line; spots make small hot vertical streaks"
+  },
+  {
+   "region": [
+    0,
+    100,
+    40,
+    240
+   ],
+   "what": "Back-bar shelves show only three thin lit lines. No bottles or acrylic shelf edges legible"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Overall denoiser smear and a plywood-like painterly wall texture, at proof scale 0.3"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame misses what it is for: no pendants or beams over the bar, the speaker is occluded, and half the frame is dead booth wall.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     100
+    ],
+    "measured": "top band lum_range 19.5, no pendant visible; speaker region partly covered by the chair at [270,230,380,340]"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [4.0, 2.0, 1.3], target [16.6, 3.3, 1.0], 40 mm, level",
+    "to": "position [3.5, 2.6, 1.25], target [16.6, 3.0, 1.15], 32 mm, vertical lens shift +0.08 to keep verticals true, focus on [11.0, 4.5, 1.0]"
+   },
+   "expected": "Two or three EARF Moon pendants and fir beams enter the top fifth of the frame. The Ember sits between the chairs on a clear line, and the bar top runs as a lit diagonal from lower left.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The booths and their frosted screens are black, so the right half carries no information.",
+   "evidence": {
+    "region": [
+     480,
+     90,
+     720,
+     480
+    ],
+    "measured": "lum_median 8.9 (wall) and 10.4 (booths), crush_pct 6.3"
+   },
+   "change": {
+    "setting": "the screens' images emission; EARF Moon table lamp; candles",
+    "from": "screens 0.5; table lamp 240 W; candles 4.5 W",
+    "to": "screens 1.6; table lamp 400 W; candles 8 W"
+   },
+   "expected": "Frosted screens glow as soft grey-warm panels above the booths. Tan leather and fir caps show in pools around each table lamp.",
+   "accept": {
+    "region": [
+     540,
+     240,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     20,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The grey recess with its hard cone is the brightest, most neutral plane and reads as a gallery wall, pulling the eye from the speaker.",
+   "evidence": {
+    "region": [
+     40,
+     95,
+     190,
+     240
+    ],
+    "measured": "lum_median 71, r/g/b 76/70/69 (cold grey), lamp clip 10% in [80,110,110,135]"
+   },
+   "change": {
+    "setting": "niche spots and niches' frosted backs",
+    "from": "2 x spot 400 W, cone 30 deg; frosted backs 0.3",
+    "to": "2 x spot 150 W, cone 50 deg; frosted backs 0.8"
+   },
+   "expected": "Even, softer glow in the recess, warmer and below the speaker's brightness, without a hard cone edge.",
+   "accept": {
+    "region": [
+     40,
+     95,
+     190,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     52
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "A lounge chair blocks the lower half of the Ember, so the hero is not read at a glance.",
+   "evidence": {
+    "region": [
+     240,
+     210,
+     285,
+     295
+    ],
+    "measured": "lum_median 61.6 but the chair's black back covers the horn's lower right; the red cabinet is about 45 px wide"
+   },
+   "change": {
+    "setting": "listening-room lounge chairs (small props placement)",
+    "from": "chair directly in front of the left Ember",
+    "to": "rotate it 30 deg toward the centre and slide it 0.6 m right, so the speaker's full height is clear"
+   },
+   "expected": "The full speaker silhouette is visible from base to top, with the red acrylic glowing against the dark partition.",
+   "accept": {
+    "region": [
+     240,
+     210,
+     285,
+     295
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The floor reads as a milky surface with giant ink-blot stains, not polished concrete.",
+   "evidence": {
+    "region": [
+     200,
+     340,
+     540,
+     480
+    ],
+    "measured": "lum_range 126, p5 11.9 vs p95 138; the profile's first bin 137 vs 40-55 below (a white strip)"
+   },
+   "change": {
+    "setting": "the floor's polish and concrete tone",
+    "from": "light grey with high-contrast stain map at large scale, matte",
+    "to": "mid-warm grey, stain map contrast cut 70% and scale reduced 4x, roughness 0.25 so the lamps and speaker reflect as soft pools"
+   },
+   "expected": "Floor reads as one continuous ground concrete with soft red and amber reflections, no blobs.",
+   "accept": {
+    "region": [
+     200,
+     360,
+     540,
+     480
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "No sign of life, and the back-bar and bar top are empty, so the room reads as a showroom.",
+   "evidence": {
+    "region": [
+     0,
+     100,
+     40,
+     240
+    ],
+    "measured": "lum_p95 66; no bottles or glass highlights; bar top [0,230,240,260] carries one coupe"
+   },
+   "change": {
+    "setting": "props and the shelves' lit edges",
+    "from": "lit edges 0.9; sparse glasses",
+    "to": "lit edges 2.0; two rocks glasses and a coupe with drinks along the bar top, a folded menu, a coat over the second stool, bottles filling the visible back-bar shelf"
+   },
+   "expected": "Small specular points along the bar and back-bar. The bar reads as in use.",
+   "accept": {
+    "region": [
+     0,
+     100,
+     40,
+     240
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 100
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The record wall is dim, with hot streaks and a cold top line, so it reads as a texture rather than records.",
+   "evidence": {
+    "region": [
+     300,
+     130,
+     445,
+     250
+    ],
+    "measured": "lum_median 22.9, p95 63.6; top strip visibly blue-white"
+   },
+   "change": {
+    "setting": "record wall spots and strip",
+    "from": "3 x spot 18 W, cone 40 deg; strip 0.3",
+    "to": "3 x spot 45 W, cone 60 deg; strip 0.5 at 2500 K (no blue)"
+   },
+   "expected": "Record spines legible in warm grazing light, with no cold line.",
+   "accept": {
+    "region": [
+     300,
+     130,
+     445,
+     250
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "Denoiser smear and painterly texture everywhere. Wood, leather and concrete show no grain.",
+   "evidence": {
+    "region": [
+     0,
+     260,
+     250,
+     480
+    ],
+    "measured": "stool and bar-front surfaces smooth and mottled at 2x crop"
+   },
+   "change": {
+    "setting": "render",
+    "from": "samples 256, adaptive 0.02, haze 0.015",
+    "to": "samples 1024 at full 2400 x 1600, adaptive 0.01, denoiser with albedo and normal passes; haze 0.025 for soft pools under the pendants"
+   },
+   "expected": "Grain and tie holes resolve at 1:1. Pools of light show a faint beam in the air.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Replace the four identical listening-room lounge chairs with varied models",
+   "why": "The listening room's furniture is part of the fixed room design. Repetition of one model reads as CG, so the owner should decide."
+  },
+  {
+   "request": "Make the Ember's horn read less like a white porthole",
+   "why": "The speaker's shape and parts are fixed. Only light on it may change."
+  },
+  {
+   "request": "Show the smoked acrylic partition between bar and listening room",
+   "why": "It is part of the fixed design. In this frame it is not legible as acrylic at all, which may be a modelling or material issue to check, not a picture fix."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

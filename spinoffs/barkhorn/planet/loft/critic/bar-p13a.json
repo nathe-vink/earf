@@ -1,0 +1,367 @@
+{
+ "stage1": {
+  "impression": "A dark brown box seen down its length, with a pink-red glowing object half hidden behind a lounge chair at the far end, a cool grey lit alcove on the left, and a row of identical walnut stools. At 1:1 the floor is mottled denoiser smear with blobby stool shadows and a hard white strip of light across the threshold. None of the walls, ceiling or furniture faces reads as concrete, fir or steel; it reads as a game interior, not a photograph.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The floor and walls hold real texture at 1:1 (board-formed concrete grain, tie holes, fir checks, steel patina) with no denoiser smear or blotching",
+  "The Ember speaker reads at a glance as a red tinted-acrylic cabinet with its horn, unobstructed, seen through a smoked partition that shows as a surface (a reflection or edge), not as pink neon",
+  "The right-hand booths and their frosted screens are legible (screen panels glowing softly, leather and fir caps catching light), not a lum-9 black block",
+  "The fir beams and the three Moon pendants over the bar are in frame and read; the ceiling is not a flat textureless band",
+  "The back-bar's clear acrylic shelves with lit edges and bottles read as the left wall's subject, warm, not an empty cool-grey alcove",
+  "No hard white light strip across the floor at the listening-room threshold; light falls off in pools",
+  "Signs of life (a glass on the bar, a coat on a stool, a record out) and less obvious repetition of identical stools and chairs",
+  "Delivered at full 2400 x 1600 with clean noise"
+ ],
+ "defects": [
+  {
+   "region": [
+    180,
+    340,
+    520,
+    480
+   ],
+   "what": "Floor is denoiser smear: blotchy, mottled patches and soft-edged blob shadows of the stools, no concrete texture"
+  },
+  {
+   "region": [
+    240,
+    318,
+    490,
+    345
+   ],
+   "what": "Hard cool-white strip of light across the floor at the listening-room threshold (p95 160 against 45 around it), reads as a stage spill"
+  },
+  {
+   "region": [
+    240,
+    210,
+    285,
+    295
+   ],
+   "what": "Speaker reads as pink/magenta neon (r98 g51 b54), haloed by haze, half hidden behind a lounge chair; horn barely legible"
+  },
+  {
+   "region": [
+    270,
+    225,
+    490,
+    340
+   ],
+   "what": "Smoked acrylic partition is invisible: no edge, no reflection, nothing between the bar and the listening room"
+  },
+  {
+   "region": [
+    490,
+    90,
+    640,
+    240
+   ],
+   "what": "Right-hand wall block is dead flat black (lum median 8.9, range 6.6): frosted screens above the booths do not glow at all"
+  },
+  {
+   "region": [
+    540,
+    240,
+    720,
+    480
+   ],
+   "what": "Booths unreadable (lum median 10.4); leather and fir caps show no form"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    90
+   ],
+   "what": "Ceiling is a flat featureless band (lum range 18); no fir beams, no pendants over the bar visible"
+  },
+  {
+   "region": [
+    40,
+    95,
+    190,
+    240
+   ],
+   "what": "Left alcove is an empty cool-grey box (r76 g70 b69) with one lamp; no acrylic shelves, bottles or Fog niche legible; the light cone has a CG-clean gradient"
+  },
+  {
+   "region": [
+    0,
+    260,
+    250,
+    480
+   ],
+   "what": "Four identical stools in a row, same model and spacing; rim-lit from the back so the walnut looks like smooth CG wood"
+  },
+  {
+   "region": [
+    270,
+    225,
+    490,
+    340
+   ],
+   "what": "Repeated identical black lounge chairs with matching side tables in the listening room"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Walls everywhere read as dark brown panelling; nothing reads as board-formed concrete or blackened steel"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The floor and walls are denoiser smear with blotchy patches, which reads instantly as a render.",
+   "evidence": {
+    "region": [
+     180,
+     340,
+     520,
+     480
+    ],
+    "measured": "Crop at 2x shows mottled blobs and soft blob shadows; no concrete grain anywhere"
+   },
+   "change": {
+    "setting": "render.samples / render.adaptive",
+    "from": "256 / 0.02",
+    "to": "1024 / 0.005 (and render the check at scale 0.5, not 0.3)"
+   },
+   "expected": "Floor shows continuous concrete texture and shadows with defined edges; no blotches at 1:1.",
+   "accept": {
+    "region": [
+     200,
+     360,
+     480,
+     470
+    ],
+    "metric": "lum_range",
+    "op": "between",
+    "value": [
+     40,
+     90
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The hero speaker is half hidden behind a lounge chair and is a small part of the frame.",
+   "evidence": {
+    "region": [
+     240,
+     210,
+     285,
+     295
+    ],
+    "measured": "Chair back covers the right third of the cabinet and the horn's lower half"
+   },
+   "change": {
+    "setting": "camera position",
+    "from": "[4.0, 2.0, 1.3], target [16.6, 3.3, 1.0]",
+    "to": "[4.0, 2.6, 1.2], target [16.6, 3.6, 1.15] (move left so the near chair slides right off the speaker)"
+   },
+   "expected": "The whole cabinet and horn are clear of the chair, framed between the chairs, and the camera now looks level so verticals stay true.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The ceiling, the fir beams and the pendants over the bar are not in frame, so the room reads as a dark box.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     90
+    ],
+    "measured": "lum_median 22.4, lum_range 18.1: a featureless band"
+   },
+   "change": {
+    "setting": "camera lens",
+    "from": "40 mm",
+    "to": "32 mm (with the level aim from c2)"
+   },
+   "expected": "Two or three beams and the Moon pendants enter the top third; the bar runs the full left side.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The booths' frosted screens and the booths are dead black on the right third.",
+   "evidence": {
+    "region": [
+     490,
+     90,
+     640,
+     240
+    ],
+    "measured": "lum_median 8.9, lum_range 6.6; booths [540,240,720,480] median 10.4"
+   },
+   "change": {
+    "setting": "the screens' images emission; table lamps (EARF Moon lamp in each table lamp)",
+    "from": "0.5; 240 W",
+    "to": "2.0; 400 W"
+   },
+   "expected": "The screens glow softly with their images readable through the frost; pools of warm light on each booth table pick out leather and fir caps.",
+   "accept": {
+    "region": [
+     490,
+     90,
+     640,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "A hard cool-white strip lies across the floor at the listening room's threshold.",
+   "evidence": {
+    "region": [
+     240,
+     318,
+     490,
+     345
+    ],
+    "measured": "p95 160.6 against p95 80 in the floor just in front; y-profile peaks at 112 then drops to 47"
+   },
+   "change": {
+    "setting": "lamps on each Ember speaker (4 x area, W/m2 at the target)",
+    "from": "50.0",
+    "to": "20.0, and record-wall spots 18 W -> 30 W to keep the listening room up"
+   },
+   "expected": "The threshold light falls off smoothly; no band brighter than the bar-top pools.",
+   "accept": {
+    "region": [
+     240,
+     318,
+     490,
+     345
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 110
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The grade neutralises the 2400 K practicals to grey and pushes the speaker's red to pink.",
+   "evidence": {
+    "region": [
+     40,
+     95,
+     190,
+     240
+    ],
+    "measured": "alcove r76 g70 b69 (grey); speaker r98 g51 b54 (pink)"
+   },
+   "change": {
+    "setting": "render.white_balance_k / render.look",
+    "from": "2600 / None",
+    "to": "3300 / AgX - Medium High Contrast"
+   },
+   "expected": "Practicals read warm amber, the alcove warm grey, the speaker a deeper red rather than pink.",
+   "accept": {
+    "region": [
+     40,
+     95,
+     190,
+     240
+    ],
+    "metric": "b_median",
+    "op": "<",
+    "value": 58
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The back-bar's acrylic shelves, bottles and Fog niche do not read; the left side is an empty lit box.",
+   "evidence": {
+    "region": [
+     40,
+     95,
+     190,
+     240
+    ],
+    "measured": "one lamp, a flat grey wall, no shelf edges or bottle highlights visible in the crop"
+   },
+   "change": {
+    "setting": "the shelves' lit edges emission; the niches' frosted backs emission; haze density",
+    "from": "0.9; 0.3; 0.015",
+    "to": "3.0; 1.0; 0.008"
+   },
+   "expected": "Glowing polished shelf edges in lines along the back-bar with bottle highlights; less veiling haze so the far end holds contrast.",
+   "accept": {
+    "region": [
+     0,
+     95,
+     200,
+     240
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 140
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Nothing says anyone is here, and the identical stools in a row read as copies.",
+   "evidence": {
+    "region": [
+     0,
+     260,
+     250,
+     480
+    ],
+    "measured": "four identical stools at equal spacing and angle; empty bar top"
+   },
+   "change": {
+    "setting": "props",
+    "from": "glasses, menus, candles placed off the visible bar",
+    "to": "two rocks glasses and a folded menu on the bar top in the near pool, a coat over the second stool, stools turned 5 to 15 degrees each, a record out of its sleeve on a listening-room side table"
+   },
+   "expected": "Signs of life in the foreground; the stool row breaks its repetition.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the walls read unmistakably as board-formed concrete (visible board grain, tie holes) rather than dark brown panelling",
+   "why": "The material's tone and sheen may change, but if the wall geometry and texture are not board-formed concrete in the model, that is a room-design or asset fix, not a setting"
+  },
+  {
+   "request": "Vary the listening-room lounge chairs and bar stools (different models or wear)",
+   "why": "The stools and listening room are fixed by the card"
+  },
+  {
+   "request": "Give the smoked acrylic partition a visible frame or reveal",
+   "why": "The partition's design is fixed; only lighting (a reflection of a pendant) can reveal it"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

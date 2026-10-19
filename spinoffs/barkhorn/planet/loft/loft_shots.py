@@ -136,15 +136,18 @@ VIEWS = {
             # grey veil; the stools copies: 40 mm from the aisle; the Moon lamps on the tables and the candles up;
             # 2600 K; the pendants' spots softer and wider; the screen, the edges, the records, the sconce up; the
             # stools turned and two pulled out
-            'camera': {'position': [4.0, 2.0, 1.30], 'target': [16.6, 3.3, 1.0], 'lens_mm': 40, 'level': True,
-                       'fstop': 4.0, 'focus': [12.0, 3.0, 1.0]},
-            'settings': {'exposure': 1.0, 'wb': 2600, 'shelf_glow': 0.9, 'niche_glow': 0.3, 'spot_niche': 400.0,
-                         'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 700.0,
+            # after the two critics on p13 (4.0, 4.5: every 40 mm move from the aisle has lost the bar's run and the
+            # pendants, p10, p11, p13): p12's camera again; the booths' screens and lamps up; the Ember's front lamps
+            # down (a hard strip across the threshold); the niches softer and wider; the shelf edges up; 2800 K
+            'camera': {'position': [1.6, 2.3, 1.45], 'target': [17.0, 3.4, 1.2], 'lens_mm': 28, 'level': True,
+                       'fstop': 5.6, 'focus': [7.0, 3.0, 1.0]},
+            'settings': {'exposure': 1.0, 'wb': 2800, 'shelf_glow': 1.5, 'niche_glow': 0.8, 'spot_niche': 200.0,
+                         'niche_cone': 50.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 700.0,
                          'pendant_cone': 55.0, 'pend_radius': 0.12, 'shade_glow': 0.6, 'inlay_glow': 1.0, 'haze': 0.015,
-                         'screen_glow': 0.5, 'screen_tint': '#FFA060', 'screen_gap': 0.04, 'screen_rough': 0.22,
-                         'moon_table_w': 240.0, 'moon_pendant_w': 90.0, 'moon_glow': 0.6, 'sconce_w': 80.0,
-                         'spot_records': 18.0, 'rec_cone': 40.0, 'record_glow': 0.3, 'candle_w': 4.5,
-                         'spk_irr': 50.0, 'spk_back': 90.0, 'spk_spread': 90.0, 'spk_link': True,
+                         'screen_glow': 1.2, 'screen_tint': '#FFA060', 'screen_gap': 0.04, 'screen_rough': 0.22,
+                         'moon_table_w': 400.0, 'moon_pendant_w': 90.0, 'moon_glow': 0.6, 'sconce_w': 80.0,
+                         'spot_records': 30.0, 'rec_cone': 40.0, 'record_glow': 0.3, 'candle_w': 4.5,
+                         'spk_irr': 30.0, 'spk_back': 90.0, 'spk_spread': 90.0, 'spk_link': True,
                          'chair_dye': '#4A3A32',
                          'chair_move': {'1': [0.0, -0.25, 0.0], '4': [0.0, 0.30, 0.0], '6': [0.30, 0.25, 0.0]}}},
     'listening': {'title': 'the listening room, one of the Ember pair',
