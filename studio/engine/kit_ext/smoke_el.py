@@ -239,3 +239,82 @@ def burnpile(bpy, name, p, kit):
               radius=[0.008, 0.025], seed=p.get('seed', 1), position=[x0, y0, z0],
               **{'in': [-R * 0.55, -R * 0.55, 0.0, R * 0.55, R * 0.55, 0.25]})
     return [ob] + kit.piece(bpy, name + '-embers', em)
+
+
+def ribbon(bpy, name, p, kit):
+    """A ribbon of smoke (incense, a cigar, a sculpted studio column): each of `strands` a scattering volume inside a
+    tube along a smooth curve through its `points` (world metres), `radii` one per point (or one), `density` per metre
+    at its core. Each strand is `layers` nested tubes, so the density steps up toward the core instead of stopping at a
+    hard wall; noise (`scale` metres, `cut`, `soft`, stretched upward by `rise`) tears the wider parts into curls,
+    `laminar` metres from each strand's start stay smooth (the unbroken thread above an incense stick). It thins out
+    between `fade` [z0, z1] (world z). `color`, `anisotropy` as woodsmoke's."""
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    vol = nt.nodes.new('ShaderNodeVolumePrincipled')
+    vol.inputs['Color'].default_value = kit.M.hex_lin(p.get('color', '#D8D8DA'))
+    vol.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.6)
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    mp = nt.nodes.new('ShaderNodeMapping')
+    mp.inputs['Scale'].default_value = (1.0, 1.0, 1.0 / p.get('rise', 2.0))
+    mp.inputs['Location'].default_value = (p.get('seed', 0) * 13.7, p.get('seed', 0) * 7.1, 0.0)
+    nt.links.new(tc.outputs['Object'], mp.inputs['Vector'])
+    nz = nt.nodes.new('ShaderNodeTexNoise')
+    nz.inputs['Scale'].default_value = 1.0 / p.get('scale', 0.05)
+    nz.inputs['Detail'].default_value = p.get('detail', 4.0)
+    nz.inputs['Distortion'].default_value = p.get('distortion', 0.6)
+    nt.links.new(mp.outputs['Vector'], nz.inputs['Vector'])
+    ramp = nt.nodes.new('ShaderNodeValToRGB'); cr = ramp.color_ramp
+    cut = p.get('cut', 0.4); soft = p.get('soft', 0.25)
+    cr.elements[0].position = cut; cr.elements[0].color = (0, 0, 0, 1)
+    cr.elements[1].position = min(0.999, cut + soft); cr.elements[1].color = (1, 1, 1, 1)
+    nt.links.new(nz.outputs['Fac'], ramp.inputs['Fac'])
+    # the laminar thread: no noise for its first metres (z above the strand's start, carried in the object's origin)
+    sep = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
+    lam = nt.nodes.new('ShaderNodeMapRange'); lam.clamp = True
+    lam.inputs['From Min'].default_value = p.get('laminar', 0.0)
+    lam.inputs['From Max'].default_value = p.get('laminar', 0.0) + p.get('laminar_blend', 0.12)
+    nt.links.new(sep.outputs['Z'], lam.inputs['Value'])
+    mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'FLOAT'
+    nt.links.new(lam.outputs['Result'], mix.inputs['Factor'])
+    mix.inputs['A'].default_value = 1.0
+    bw = nt.nodes.new('ShaderNodeRGBToBW'); nt.links.new(ramp.outputs['Color'], bw.inputs['Color'])
+    nt.links.new(bw.outputs['Val'], mix.inputs['B'])
+    # the fade toward the top, in world z
+    gz = nt.nodes.new('ShaderNodeNewGeometry')
+    wz = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(gz.outputs['Position'], wz.inputs['Vector'])
+    fd = nt.nodes.new('ShaderNodeMapRange'); fd.clamp = True
+    z0, z1 = p.get('fade', [10.0, 11.0])
+    fd.inputs['From Min'].default_value = z0; fd.inputs['From Max'].default_value = z1
+    fd.inputs['To Min'].default_value = 1.0; fd.inputs['To Max'].default_value = 0.0
+    nt.links.new(wz.outputs['Z'], fd.inputs['Value'])
+    m1 = nt.nodes.new('ShaderNodeMath'); m1.operation = 'MULTIPLY'
+    nt.links.new(mix.outputs['Result'], m1.inputs[0]); nt.links.new(fd.outputs['Result'], m1.inputs[1])
+    # the strand's density rides on the object's colour-free custom input: one material, density per object via
+    # Object Info's alpha would need the object's colour; simpler, each layer gets its own copy of the multiplier
+    dn = nt.nodes.new('ShaderNodeObjectInfo')
+    m2 = nt.nodes.new('ShaderNodeMath'); m2.operation = 'MULTIPLY'
+    nt.links.new(m1.outputs[0], m2.inputs[0]); nt.links.new(dn.outputs['Alpha'], m2.inputs[1])
+    m3 = nt.nodes.new('ShaderNodeMath'); m3.operation = 'MULTIPLY'; m3.inputs[1].default_value = 100.0
+    nt.links.new(m2.outputs[0], m3.inputs[0])
+    nt.links.new(m3.outputs[0], vol.inputs['Density'])
+    nt.links.new(vol.outputs['Volume'], out.inputs['Volume'])
+
+    obs = []
+    layers = p.get('layers', 3)
+    for si, s in enumerate(p['strands']):
+        pts = [Vector(v) for v in s['points']]
+        o = pts[0].copy()
+        radii = s.get('radii', p.get('radius', 0.01))
+        radii = radii if isinstance(radii, (list, tuple)) else [radii] * len(pts)
+        for li in range(layers):
+            f = 1.0 - li / layers
+            bm = bmesh.new()
+            kit._tube(bm, [tuple(v - o) for v in pts], [r * f for r in radii], 1.0, 0.0, 12, p.get('res', 10))
+            me = bpy.data.meshes.new(f'{name}-{si}-{li}'); bm.to_mesh(me); bm.free()
+            ob = bpy.data.objects.new(f'{name}-{si}-{li}', me); bpy.context.scene.collection.objects.link(ob)
+            ob.location = o
+            # density per metre at this layer: the core's share, carried in the object's colour alpha (x 100)
+            ob.color = (1, 1, 1, s.get('density', p.get('density', 40.0)) / layers / 100.0)
+            me.materials.append(m)
+            obs.append(ob)
+    return obs
