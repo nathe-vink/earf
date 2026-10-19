@@ -34,8 +34,8 @@
      -0.02
     ],
     "material": "gloss",
-    "color": "#060606",
-    "roughness": 0.05
+    "color": "#0B0B0B",
+    "roughness": 0.15
    },
    {
     "kind": "kit",
@@ -339,10 +339,10 @@
       "density": 7.0
      }
     ],
-    "layers": 4,
-    "scale": 0.05,
-    "cut": 0.47,
-    "soft": 0.22,
+    "layers": 6,
+    "scale": 0.07,
+    "cut": 0.44,
+    "soft": 0.3,
     "rise": 1.6,
     "laminar": 0.0,
     "laminar_blend": 0.05,
@@ -352,17 +352,17 @@
     ],
     "color": "#DADDE2",
     "anisotropy": 0.6,
-    "detail": 6.0,
+    "detail": 7.0,
     "distortion": 0.8,
     "seed": 5,
     "wobble": 0.35,
     "wobble_freq": 6.0,
     "break_scale": 0.45,
     "break_cut": 0.35,
-    "break_floor": 0.3,
+    "break_floor": 0.15,
     "fade_in": [
      0.12,
-     0.7
+     1.0
     ],
     "grid": true,
     "voxel": 0.012
@@ -381,7 +381,7 @@
      0.0
     ],
     "material": "clay",
-    "color": "#1C1B1A"
+    "color": "#2A2826"
    }
   ]
  },
@@ -397,7 +397,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 2.5,
+   "irradiance": 4.0,
    "color": "#C8CCD4",
    "orbit": {
     "azimuth_deg": -20,
@@ -447,7 +447,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 7.0,
+   "irradiance": 10.0,
    "color": "#C9C4BC",
    "orbit": {
     "azimuth_deg": -25,
@@ -497,7 +497,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 18.0,
+   "irradiance": 26.0,
    "color": "#F2EEE8",
    "orbit": {
     "azimuth_deg": -150,
@@ -530,7 +530,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 12.0,
+   "irradiance": 18.0,
    "color": "#F2EEE8",
    "orbit": {
     "azimuth_deg": 150,
@@ -608,7 +608,7 @@
     0.3,
     0.0
    ],
-   "irradiance": 1.2,
+   "irradiance": 3.0,
    "color": "#E8E6E2",
    "specular": 0.25
   },
@@ -624,8 +624,8 @@
     5.5,
     0.8
    ],
-   "power_w": 1400,
-   "cone_deg": 16.0,
+   "power_w": 3500,
+   "cone_deg": 22.0,
    "blend": 1.0,
    "color": "#D8D4CE",
    "radius_m": 0.3
@@ -648,8 +648,8 @@
  ],
  "camera": {
   "position": [
-   -2.0521,
-   -5.6382,
+   -1.7785,
+   -4.8864,
    0.6
   ],
   "target": [
@@ -664,7 +664,9 @@
    0.0,
    -0.21,
    0.9
-  ]
+  ],
+  "shift_x": 0.0,
+  "shift_y": -0.05
  },
  "sky": {
   "kind": "none",
