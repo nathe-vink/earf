@@ -1,7 +1,7 @@
 """Ember A2: the lava field at blue hour, refined (round 31b; ember.md for the notes and the critic passes).
 
 A's concept, camera and speaker, with what A's critics kept naming put right:
-- one main flow, not many cracks: an incandescent toe sweeping in from the left foreground and passing the speaker 2 to 3
+- one main flow, not many cracks: an incandescent toe sweeping in from the left foreground and passing the speaker about 2
   m off, a yellow-orange core in a dark-red skin cracked into plates, black crust at its edges; the rest of the field dark
   crust with a few dimmer glows at other scales; a low steam veil over the flow, lit from below;
 - the flow lights the cabinet's front and the ground round it, warm and low; the blue-hour sky is the cool fill; a warm
@@ -14,8 +14,8 @@ from common import camera, finish, piece, point, portrait_of, shot as frame, sky
 
 SKY = 'qwantani_dusk_2_puresky'
 LAVA_LIGHT = '#FF6A22'
-# the main flow: in from the left foreground, past the speaker's left 2 to 3 m off, away to the back left
-FLOW = [[0.2, -4.6], [-0.6, -2.6], [-1.5, -1.2], [-2.0, 0.6], [-2.6, 2.6], [-4.0, 4.6], [-6.5, 7.5]]
+# the main flow: in from the left foreground, past the speaker's left about 2 m off, away to the back left
+FLOW = [[0.3, -4.6], [-0.5, -2.6], [-1.5, -1.25], [-1.95, 0.6], [-2.5, 2.6], [-3.9, 4.6], [-6.5, 7.5]]
 FLOW_W = 0.75
 # a few dimmer glows at other scales: a thin crack to the right, a seam crossing far back
 
@@ -87,9 +87,9 @@ def props():
         piece('ext', module='ember_el', fn='steam', box=[-6.5, -5.0, -0.1, 0.8, 8.0, 1.0], density=6.0, scale=0.4,
               anisotropy=0.45),
         piece('ext', module='ember_el', fn='steam', box=[CONE[0] - 6.0, CONE[1] - 5.0, 9.0, CONE[0] + 9.0, CONE[1] + 5.0, 30.0],
-              density=0.8, scale=1.5, anisotropy=0.4),
+              density=1.5, scale=4.0, anisotropy=0.4),
         # a few embers lifting off the flow's core
-        piece('ext', module='ember_el', fn='sparks_mixed', area=[-2.4, -1.6, -1.2, 1.4], count=40, height=1.2,
+        piece('ext', module='ember_el', fn='sparks_mixed', area=[-2.1, -1.5, -0.9, 1.4], count=35, height=1.2,
               streak=[0.005, 0.06], radius=[0.001, 0.005], drift=[0.3, 0.1], emit=16.0, seed=4),
     ]
     return P
@@ -98,16 +98,16 @@ def props():
 def lights():
     return {
         # the flow's glow, low from the speaker's left: on the cabinet's front and the ground round it
-        'flow_near': lamp([-1.6, -1.2, 0.3], [0.0, -0.1, 0.6], 4.0, (0.4, 1.5), '#FF6A22', specular=0.0),
-        'flow_far': lamp([-2.1, 1.0, 0.15], [0.0, 0.3, 0.7], 1.0, (0.5, 2.0), '#FF6A22', specular=0.0),
+        'flow_near': lamp([-1.4, -0.5, 0.35], [0.0, -0.1, 0.6], 6.0, (0.4, 1.5), '#FF6A22', specular=0.0),
+        'flow_far': lamp([-1.7, 1.0, 0.15], [0.0, 0.3, 0.7], 1.0, (0.5, 2.0), '#FF6A22', specular=0.0),
         # the lava's light across the slab to the speaker's right, grazing
         'graze': lamp([-1.4, -0.6, 0.12], [1.5, -0.4, 0.0], 2.5, (0.4, 1.5), '#FF6A22', specular=0.0),
         # behind the speaker: the warm rim and the light through the acrylic
         # (no specular: their reflections in the horn and down the cabinet's edge read as hidden lamps)
         'through': lamp([-0.8, 1.0, 0.4], [0.0, 0.0, 0.6], 3.5, (2.0, 1.5), specular=0.0),
-        'horn': lamp([-0.4, 0.8, 1.2], [0.0, -0.1, 1.12], 1.0, (1.2, 0.6), specular=0.0),
+        'horn': lamp([-0.4, 0.8, 1.2], [0.0, -0.1, 1.12], 0.4, (1.2, 0.6), specular=0.0),
         # the cabinet's red light on the rock at its foot
-        'pool': lamp([0.0, -0.3, 0.3], [0.0, -0.45, 0.0], 2.0, (1.2, 0.6), '#C8281E', specular=0.0),
+        'pool': lamp([0.05, -0.55, 0.18], [0.05, -0.7, 0.0], 15.0, (0.8, 0.4), '#C8281E', specular=0.0),
         # the crater, lighting its plume from below
         'crater': point([CONE[0], CONE[1], 6.8], 15000, LAVA_LIGHT, 2.0),
     }
