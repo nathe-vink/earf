@@ -49,11 +49,12 @@ VIEWS = {
     'bar': {'title': 'the bar from a stool, close',
             # the den's close corner (the lead's): from a stool at 65 mm, one of the Fog pair in its niche, a frosted
             # pendant over the counter, a glass near
-            'camera': {'position': [7.2, 3.3, 1.35], 'target': [9.06, 5.9, 1.40], 'lens_mm': 35, 'level': True,
+            # (the lead) wider, the frame shifted up so a fir beam and the steel cornice read over the niche
+            'camera': {'position': [7.2, 3.3, 1.35], 'target': [9.06, 5.9, 1.90], 'lens_mm': 28, 'level': True,
                        'fstop': 4.0, 'focus': [LP.NICHES[1][0] + LP.NICHES[1][1] / 2, LP.BACKBAR_Y + 0.05, 1.3]},
             # after bar-r1 (4.5): the shelf edges warm and lower (kit), the niche softer and graded, its spots grazing;
             # the pendants pooling on the fir; brighter; haze; the near glass in focus at f/4
-            'settings': {'exposure': 1.1, 'niche_glow': 0.12, 'spot_niche': 160.0, 'niche_cone': 30.0, 'niche_dy': 0.15,
+            'settings': {'exposure': 1.1, 'niche_glow': 0.35, 'spot_niche': 160.0, 'niche_cone': 30.0, 'niche_dy': 0.15,
                          'niche_aim_z': 1.1, 'niche_fill': 6.0, 'pendant_w': 110.0, 'pendant_cone': 35.0, 'haze': 0.02}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (5.5): 28 mm from a little back and higher, the beams in, the speaker on the left third

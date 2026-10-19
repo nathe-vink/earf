@@ -31,7 +31,8 @@ SCREEN_FRAME = 0.025             # a blackened-steel angle round the reveal
 SCREENS = [
     ('banquette-a', 'right', 4.30, 5.90, 1.30, 2.70, 'hands'),       # over the banquette, between its tables
     ('banquette-b', 'right', 7.35, 8.95, 1.30, 2.70, 'ovoid'),
-    ('lounge', 'left', 12.95, 15.05, 0.90, 2.55, 'logogram'),       # the listening room's left wall (the brick's place)
+    ('lounge', 'left', 15.25, 16.85, 0.85, 2.45, 'logogram'),       # the listening room's left wall, behind the left
+                                                                     # Ember speaker (the lead: the acrylic in this frame too)
     ('window', 'window', 4.45, 5.75, 0.62, 2.42, 'dancer'),         # a lightbox in the shopfront, seen from both sides
 ]
 WINDOW_BOX = dict(x0=0.18, depth=0.26)                              # the window lightbox: panels at x0 and x0 + depth
@@ -47,12 +48,18 @@ INLAY = dict(w=0.06, set=0.06)                                       # 60 mm wid
 
 # the lamps: only the listening room keeps a sconce (on the concrete by the record wall); the screens light the banquette
 SCONCES_RIGHT = []
-SCONCES_LEFT_LOUNGE = [15.95]
+SCONCES_LEFT_LOUNGE = [14.55]
 
 # the listening room's signs of life (listening-r1 c5): a steel side table by the chair nearest the left Ember speaker
 LISTEN_TABLE = (15.45, 4.35)
 
 
+_den_candles = _D.candle_spots                   # held here: the kit points the den's plan at the function below
+
+
 def candle_spots():
     """The den's candles, and one on the listening side table."""
-    return _D.candle_spots() + [(LISTEN_TABLE[0] + 0.07, LISTEN_TABLE[1] - 0.06, 0.495)]
+    return _den_candles() + [(LISTEN_TABLE[0] + 0.07, LISTEN_TABLE[1] - 0.06, 0.495)]
+
+# the niches' backs are screens too (the lead, 2026-10-19): the shell behind the first, the hands behind the second
+NICHE_IMAGES = ['ovoid', 'hands']

@@ -207,9 +207,10 @@ def screens(bpy, kit, p, objs):
             yf = 0.0 if wall == 'right' else W                        # the wall's face
             pan.box(a0, yf - s * T, z0, a1, yf, z1)
             yi = yf - s * (T + G)
-            pts = [(a0, yi, z0), (a1, yi, z0), (a1, yi, z1), (a0, yi, z1)]
+            # u runs to the viewer's right: -x on the right-hand wall (seen looking -y), +x on the left (looking +y)
+            pts = [(a1, yi, z0), (a0, yi, z0), (a0, yi, z1), (a1, yi, z1)]
             if wall == 'left':
-                pts = [(a1, yi, z0), (a0, yi, z0), (a0, yi, z1), (a1, yi, z1)]
+                pts = [(a0, yi, z0), (a1, yi, z0), (a1, yi, z1), (a0, yi, z1)]
             objs.append(_quad_uv(bpy, f'screen-{nm}', pts, image_mat(bpy, img, st)))
             box.box(a0, yi - s * 0.02, z0, a1, yi - s * 0.01, z1)
             for (xa, xb, za, zb) in ((a0 - F, a1 + F, z0 - F, z0), (a0 - F, a1 + F, z1, z1 + F), (a0 - F, a0, z0, z1),
@@ -276,13 +277,16 @@ def backbar(bpy, kit, p, objs):
         up.box(n0, y0, 0.0, n1, W, P.NICHE_Z0)
     up.box(x0 - 0.02, y0 - 0.02, P.BACKBAR_TOP, x1 + 0.02, W, P.BACKBAR_TOP + 0.08)       # the cornice, a steel channel
     objs.append(up.object(bpy, steel(bpy), bevel=0.0015))
-    # the niches' backs: frosted acrylic over a soft glow
-    nb_ = Mesh('niche-frost'); ng = Mesh('niche-glow')
-    for n0, n1 in niches:
+    # the niches' backs: screens, a frosted panel with an image glowing behind it (the lead: the owner's signature in
+    # the bar's frame, refracted by the Fog speaker's clear acrylic in front of it)
+    nb_ = Mesh('niche-frost')
+    for k, (n0, n1) in enumerate(niches):
         nb_.box(n0, W - 0.045, P.NICHE_Z0, n1, W - 0.015, P.NICHE_Z0 + P.NICHE_H)
-        ng.box(n0 + 0.01, W - 0.008, P.NICHE_Z0 + 0.01, n1 - 0.01, W - 0.004, P.NICHE_Z0 + P.NICHE_H - 0.01)
+        img = LP.NICHE_IMAGES[k]; z0, z1 = P.NICHE_Z0 + 0.01, P.NICHE_Z0 + P.NICHE_H - 0.01
+        yi = W - 0.006
+        objs.append(_quad_uv(bpy, f'niche-screen-{k}', [(n0 + 0.01, yi, z0), (n1 - 0.01, yi, z0), (n1 - 0.01, yi, z1),
+                                                        (n0 + 0.01, yi, z1)], image_mat(bpy, img, p.get('niche_glow', 0.6))))
     objs.append(nb_.object(bpy, acrylic(bpy, 'frosted', 'niche-frosted')))
-    objs.append(ng.object(bpy, emitter(bpy, 'niche-glow', '#FFB474', p.get('niche_glow', 0.6))))
     # the shelves: 25 mm clear acrylic, their polished fronts edge-lit (a warm line in the edge)
     sh = Mesh('backbar-shelves'); ed = Mesh('backbar-shelf-edges')
     T = LP.ACRYLIC_SHELF_T
