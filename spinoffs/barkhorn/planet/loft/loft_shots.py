@@ -140,18 +140,22 @@ VIEWS = {
                # two lounge chairs on the sightline to the left Ember speaker moved aside, as a stylist would
                # (p11: the bar's far end hides the left Ember speaker from any kerb position that keeps the lightbox;
                # now the right-hand one, down the aisle through the lounge's opening, its two chairs moved aside)
-               'camera': {'position': [-3.0, 3.6, 1.6], 'target': [6.85, 4.4, 1.5], 'lens_mm': 35, 'level': True,
+               # after the two critics on p12 (4.5, 4.5): the speaker small against a mullion, the lightbox a flat sign,
+               # the name opaque grey card, no reflections, the speaker and the lamps clipping: 40 mm nearer, the speaker
+               # on the right third and the name on the left, the lightbox only an edge; the name fainter; the lamp
+               # behind the camera stronger (reflections); the speaker and the lamps down; less haze
+               'camera': {'position': [-2.4, 2.7, 1.5], 'target': [7.42, 4.61, 1.4], 'lens_mm': 40, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
                'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
                             'screen_glow': 0.4, 'screen_window': 0.22, 'screen_tint': '#FFA060', 'spot_niche': 288.0,
-                            'spk_link': True, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 90.0,
+                            'spk_link': True, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 250.0,
                             'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 45.0, 'entry_cone': 100.0,
-                            'transom_glow': 0.15, 'spk_irr': 43.0, 'spk_back': 72.0, 'spk_spread': 90.0,
+                            'transom_glow': 0.15, 'spk_irr': 28.0, 'spk_back': 90.0, 'spk_spread': 90.0,
                             'pendant_w': 324.0, 'pendant_glow': 0.32, 'pendant_lamp': 1.6, 'inlay_glow': 1.08,
-                            'bell_w': 79.0, 'sconce_w': 29.0, 'spot_records': 32.0, 'candle_w': 2.2, 'tlamp_glow': 0.14,
-                            'tlamp_bulb': 1.0, 'haze': 0.01, 'shelf_glow': 0.25, 'siding': '#8E9384', 'sky': 0.03,
+                            'bell_w': 50.0, 'sconce_w': 29.0, 'spot_records': 32.0, 'candle_w': 2.2, 'tlamp_glow': 0.08,
+                            'tlamp_bulb': 1.0, 'haze': 0.005, 'shelf_glow': 0.25, 'siding': '#8E9384', 'sky': 0.03,
                             'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05,
-                            'linen_trans': 0.5, 'etch_glow': 0.03, 'glass_gloss': 3.0, 'chair_dye': '#2B2119',
+                            'linen_trans': 0.5, 'etch_glow': 0.01, 'etch_frost': 0.3, 'glass_gloss': 3.0, 'chair_dye': '#2B2119',
                             'screen_gap': 0.06, 'screen_rough': 0.3,
                             'chair_move': {'2': [0.0, -0.5, 0.0], '5': [-0.5, -0.35, 0.0]}}},
 }

@@ -1,0 +1,353 @@
+{
+ "stage1": {
+  "impression": "A night shot from the street through a shopfront: a big frosted lightbox with a dancing silhouette on the left, a frosted EARF wordmark across the glass, and a warm, beamed room behind. The room in the middle distance is believable, but the foreground gives it away as CG. The lightbox is a flat grey poster that does not glow. The letters look like matte vinyl stickers with stray white rectangles floating over the A. The glass has no reflections at all, so it reads as an open hole. The red speaker, which should be the hero, is a 25-pixel red box squeezed against the right mullion that you only find by searching.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker reads at a glance as the hero: at least about 8% of the frame height, clear of every mullion and the wordmark, and its silhouette and the glow through its acrylic both legible",
+  "The frosted lightbox glows as a back-lit panel (median lum 80 or more, a soft hot-spot falloff, glowing polished edges or a flush reveal), not a flat grey print",
+  "The glass reads as glass: faint reflections of the street lamps and kerb on the pane, with the steel mullions catching a soft highlight",
+  "The frosted name reads as etched or sandblasted glass lit by the room behind it (translucent, with soft edges), not opaque grey cut-outs, and nothing stray floats in the letters",
+  "No dead black zones: the right-hand booth and the steel head of the shopfront hold detail",
+  "A sign of life in the near zone (a coat on a stool, a half-full glass, a record sleeve) and the full 2400 px delivery with no denoiser smear on the floor"
+ ],
+ "defects": [
+  {
+   "region": [
+    340,
+    170,
+    385,
+    220
+   ],
+   "what": "Two or three bright white rectangles float over the A of the wordmark (lum_p95 204), probably reflections or the pendant tubes showing through; they look like a compositing error"
+  },
+  {
+   "region": [
+    225,
+    140,
+    490,
+    225
+   ],
+   "what": "The frosted letters are a flat, opaque light grey (median 71) with hard edges, so they read as vinyl or a paper cut-out, not etched glass"
+  },
+  {
+   "region": [
+    0,
+    50,
+    235,
+    445
+   ],
+   "what": "The lightbox is a uniform mid-grey (median 56, p95 63.5, almost no gradient) and darker than the lit parts of the room behind it, so it reads as a printed poster or signage rather than a back-lit frosted panel; its frame shows no thickness or edge glow"
+  },
+  {
+   "region": [
+    486,
+    250,
+    514,
+    292
+   ],
+   "what": "The hero speaker is only about 28 x 42 px of a 720 x 480 frame, wedged against the right mullion at x about 515; it reads as a red box with a white dot, and the lamps on it clip at 7%"
+  },
+  {
+   "region": [
+    600,
+    260,
+    720,
+    420
+   ],
+   "what": "The right-hand booth zone is crushed: median lum 5.7, crush_pct 16.7"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    40
+   ],
+   "what": "The shopfront's steel head is near-black (median 10.9, crush 6.5%) with no sheen or edge highlight"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "The glass carries no reflections of the street, the lamps or the kerb, so the window reads as an open aperture"
+  },
+  {
+   "region": [
+    240,
+    300,
+    520,
+    480
+   ],
+   "what": "The floor and lower room look soft and smeary (denoiser), and the stools are mushy at proof scale"
+  },
+  {
+   "region": [
+    250,
+    190,
+    300,
+    250
+   ],
+   "what": "Thin diagonal light streaks (the shelves' lit edges seen through the glass) read as scratches or stray lines on the pane"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speaker is tiny and pinned against a mullion, so the frame has no hero.",
+   "evidence": {
+    "region": [
+     486,
+     250,
+     514,
+     292
+    ],
+    "measured": "Speaker about 28 x 42 px (5.8% of the frame width), its right edge touching the mullion at x about 515"
+   },
+   "change": {
+    "setting": "camera position, target and lens",
+    "from": "position [-3.0, 3.6, 1.6], target [6.85, 4.4, 1.5], lens 35 mm",
+    "to": "position about [-2.2, 3.0, 1.5], target on the far Ember speaker, lens 50 mm, framed so that one clear pane holds the speaker near the right third line and the lightbox keeps only the left fifth"
+   },
+   "expected": "The speaker fills about 10% of the frame height, sits in a clear pane with no mullion or letter over it, and its red tint and the glow through its acrylic read immediately.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frosted lightbox is a flat grey print, not a glowing back-lit acrylic panel.",
+   "evidence": {
+    "region": [
+     0,
+     50,
+     235,
+     445
+    ],
+    "measured": "lum_median 56.4, p95 63.5, lum_range 57.9; dimmer than the lit table (median 81)"
+   },
+   "change": {
+    "setting": "the screens' images emission and the frosted acrylic's roughness",
+    "from": "0.4; current roughness",
+    "to": "1.0, with the frost roughness lowered one step so the silhouette softens and the panel gains a gentle centre-weighted glow; let its polished edge show a brighter line"
+   },
+   "expected": "The panel glows warm and soft, brightest in the middle and falling off about 15% toward the edges; the silhouette is a soft shadow inside the light, and the panel is the second-brightest surface after the practicals.",
+   "accept": {
+    "region": [
+     20,
+     80,
+     215,
+     420
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     80,
+     120
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The frosted name reads as opaque grey stickers, with stray white rectangles inside it.",
+   "evidence": {
+    "region": [
+     225,
+     140,
+     490,
+     225
+    ],
+    "measured": "lum_median 70.9, uniform flat grey; the white blocks at [340,170,385,220] reach p95 204"
+   },
+   "change": {
+    "setting": "the window's frosted name emission and frost; find and remove the white rectangles (pendant tubes or reflection cards seen through or in front of the glass)",
+    "from": "emission 0.03, opaque frost",
+    "to": "emission 0.0 and a translucent sandblast (the room's light diffused through the letters, about 40% transmission), so the letters pick up the warm room behind them; remove the stray white rectangles"
+   },
+   "expected": "The letters read as etched glass, warm-tinted by the room behind, darker than now, with soft edges, and nothing bright floats inside them.",
+   "accept": {
+    "region": [
+     340,
+     170,
+     385,
+     220
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 120
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The glass shows no reflections, so the window reads as an opening and the shot loses its 'from the kerb' quality.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "No street-lamp or kerb reflections visible anywhere on the pane; the mullions have no highlight"
+   },
+   "change": {
+    "setting": "street lamps (and the glass's reflectivity)",
+    "from": "3 x point, 120 W, 3000 K",
+    "to": "about 250 W, placed behind and beside the camera so that one or two soft lamp reflections and a faint kerb-and-parked-car reflection land on the glass away from the speaker; give the steel mullions a soft raking highlight"
+   },
+   "expected": "Faint, cooler reflections on the pane (lum 15 to 30 above the background in their patches) and the steel frame edges catching a thin highlight.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     40
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The right-hand booth zone is crushed to black.",
+   "evidence": {
+    "region": [
+     600,
+     260,
+     720,
+     420
+    ],
+    "measured": "lum_median 5.7, crush_pct 16.7"
+   },
+   "change": {
+    "setting": "table lamps (the booth's lamp) and the record wall",
+    "from": "6 x point, 79 W; record wall 32 W",
+    "to": "booth lamp 120 W; record wall 50 W"
+   },
+   "expected": "The booth's leather and timber hold detail in a warm pool, with the area still clearly darker than the bar.",
+   "accept": {
+    "region": [
+     600,
+     260,
+     720,
+     420
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The speaker's own lamps clip, and its acrylic glow does not read past the white disc.",
+   "evidence": {
+    "region": [
+     486,
+     250,
+     514,
+     292
+    ],
+    "measured": "clip_pct 7.06, lum_p95 202.7, lum_median 82.3"
+   },
+   "change": {
+    "setting": "the area lamps on each Ember speaker and the pinholes on the speaker",
+    "from": "4 x area, 43 W/m2",
+    "to": "4 x area, 32 W/m2, plus a low warm grazing light from the floor so that light travels through the red acrylic rather than hitting its face"
+   },
+   "expected": "The speaker glows red through its body with no clipped face; median stays above 70.",
+   "accept": {
+    "region": [
+     486,
+     250,
+     514,
+     292
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Nothing in the near zone says anyone is here; the room reads as a showroom.",
+   "evidence": {
+    "region": [
+     240,
+     300,
+     520,
+     480
+    ],
+    "measured": "Only one small object on the near table; the near stools are empty and bare"
+   },
+   "change": {
+    "setting": "props",
+    "from": "glasses, menus, candles, bottles, books",
+    "to": "add a coat over the near stool, a half-finished rocks glass and a record out of its sleeve on the near table, and a candle in an amber votive at the bar's near end"
+   },
+   "expected": "A believable trace of life in the foreground room without clutter.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The frame sits at the bottom of the brightness band and the floor shows denoiser smear.",
+   "evidence": {
+    "region": [
+     240,
+     300,
+     520,
+     480
+    ],
+    "measured": "Frame lum_median 25.5, region median 27.2; the floor and stools are soft and smeary at proof scale"
+   },
+   "change": {
+    "setting": "render exposure and samples",
+    "from": "exposure 1.7, samples 256, adaptive 0.02",
+    "to": "exposure 1.9, samples 512, adaptive 0.01 at full 2400 x 1600"
+   },
+   "expected": "The frame median rises to about 30 to 38 while the shadows keep their depth, and the floor shows real texture instead of smear.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     42
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the dancer's silhouette less of a crisp cartoon cut-out (a more photographic, fogged figure)",
+   "why": "What the screens show is fixed by the card; only their brightness and the frost's roughness may change"
+  },
+  {
+   "request": "Move the shopfront mullion that sits next to the speaker",
+   "why": "The shopfront design is fixed; this has to be solved with the camera (c1)"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

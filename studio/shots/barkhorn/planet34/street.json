@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   -3.0,
-   3.6,
-   1.6
-  ],
-  "target": [
-   6.85,
-   4.4,
+   -2.4,
+   2.7,
    1.5
   ],
-  "lens_mm": 35,
+  "target": [
+   7.42,
+   4.61,
+   1.4
+  ],
+  "lens_mm": 40,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -114,11 +114,12 @@
     "screen_window": 0.22,
     "inlay_glow": 1.08,
     "pendant_lamp": 1.6,
-    "etch_glow": 0.03,
+    "etch_glow": 0.01,
     "menu_color": "#8A6E4E",
     "screen_tint": "#FFA060",
-    "tlamp_glow": 0.14,
+    "tlamp_glow": 0.08,
     "tlamp_bulb": 1.0,
+    "etch_frost": 0.3,
     "screen_gap": 0.06,
     "screen_rough": 0.3,
     "table_lamps": [
@@ -380,7 +381,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 43.0,
+   "irradiance": 28.0,
    "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
@@ -403,7 +404,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 72.0,
+   "irradiance": 90.0,
    "color": 2700,
    "camera": false,
    "receivers": [
@@ -426,7 +427,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 43.0,
+   "irradiance": 28.0,
    "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
@@ -449,7 +450,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 72.0,
+   "irradiance": 90.0,
    "color": 2700,
    "camera": false,
    "receivers": [
@@ -749,7 +750,7 @@
     2.0,
     4.0
    ],
-   "power_w": 90.0,
+   "power_w": 250.0,
    "radius_m": 0.15,
    "color": 3000
   },
@@ -778,7 +779,7 @@
     0.29,
     1.01
    ],
-   "power_w": 79.0,
+   "power_w": 50.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -790,7 +791,7 @@
     0.29,
     1.01
    ],
-   "power_w": 79.0,
+   "power_w": 50.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -802,7 +803,7 @@
     0.29,
     1.01
    ],
-   "power_w": 79.0,
+   "power_w": 50.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -814,7 +815,7 @@
     4.3999999999999995,
     1.01
    ],
-   "power_w": 79.0,
+   "power_w": 50.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -826,7 +827,7 @@
     2.17,
     0.77
    ],
-   "power_w": 79.0,
+   "power_w": 50.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -838,7 +839,7 @@
     3.9299999999999997,
     0.77
    ],
-   "power_w": 79.0,
+   "power_w": 50.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -853,7 +854,7 @@
    6.05,
    3.32
   ],
-  "density": 0.01,
+  "density": 0.005,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
