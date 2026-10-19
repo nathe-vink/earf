@@ -325,7 +325,10 @@ def lining(P, plen, ribs):
         zpad = top_boss(P)[4] if top_boss(P) else H - T
         zgl = zpad - P['amp_box']['gland'][1] - 10.0
         under_top += [(gx - 20, gx + 20, zgl, H - T + 1, gy - 12, y1 + 1),   # the HF lead's gland and its way in
-                      (tx - 10, tx + 10, H - T - t_top - g - 2, H - T + 1, min(ty - 9, yback - g), y1 + 1)]   # the tie rod's anchor
+                      # the tie rod's anchor: its insert sits in the pad (or the top) from below, flush, so only the
+                      # rod's tip and room to reach it, 10, below that (round 31: it was the top's batts' depth, H - T -
+                      # t_top - g - 2, a notch 77 deep in the back's upper batt whose foot showed below the mark's E)
+                      (tx - 10, tx + 10, zpad - 10.0, H - T + 1, min(ty - 9, yback - g), y1 + 1)]
         tb = top_boss(P)
         if tb:                                                # round 15: the pad under the top
             under_top.append((tb[0] - g, tb[2] + g, tb[4] - g, H - T + 1, tb[1] - g, tb[3] + g))
