@@ -1,0 +1,364 @@
+{
+ "stage1": {
+  "impression": "A quiet, warm, believable-in-layout night corner: record wall, a lounge chair, a small lamp and one red speaker glowing in the middle. But it reads as a competent CG render, not a photograph. The speaker looks like hot, uniformly lit red plastic rather than thick cast acrylic with polished glowing edges. The concrete is a flat, smooth grey-brown with no formwork grain, tie holes or pools of light. The record spines repeat as a procedural stripe pattern. The foreground chair is a dead black mass, and there is almost no sign of life.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember cabinet must read as thick cast acrylic: bright, polished glowing edges and clean specular reflections, with depth visible through the tint, instead of an evenly lit red box (cabinet lum_p95 - lum_median > 100 at the edges while the faces sit lower)",
+  "The board-formed concrete wall must show formwork grain, tie holes and a warm pool of light falling off, not a flat field (falloff across the wall > 25 lum units rather than the current 7)",
+  "The horn (the speaker's crown) must be legible as resin with a highlight along its rim, not a dark red blob (median 24 now; needs >= 40)",
+  "The foreground chair must show leather sheen and edge light rather than a 15-lum silhouette taking a quarter of the frame",
+  "Visible signs of life and the room's own practicals: a glass, a record out of its sleeve, a coat. The fir beams named on the card should be in frame or hinted at",
+  "Record spines with real variation (worn, printed, different whites and blacks, some leaning) instead of a repeated stripe texture",
+  "Delivered at full resolution with no denoiser smear on the speaker's internal parts or on the screen image"
+ ],
+ "defects": [
+  {
+   "region": [
+    240,
+    265,
+    370,
+    450
+   ],
+   "what": "Cabinet reads as glossy, evenly lit red plastic. Interior batts and the base block are tinted the same flat red, with no sense of 20+ mm wall thickness and no bright polished edges except a thin line at right"
+  },
+  {
+   "region": [
+    235,
+    192,
+    355,
+    262
+   ],
+   "what": "Horn is dark and muddy (median lum 24) with one small plastic-looking streak highlight at lower left (clip 0.24%), so the speaker's crown silhouette is weak"
+  },
+  {
+   "region": [
+    0,
+    235,
+    185,
+    480
+   ],
+   "what": "Leather chair is a near-black cutout (median 14.7) with no leather texture, seams or rim light; the dead foreground mass takes about 13% of the frame"
+  },
+  {
+   "region": [
+    300,
+    0,
+    470,
+    380
+   ],
+   "what": "Board-formed concrete is flat and smooth: only faint board lines, no tie holes or grain, uniform luminance top to bottom (profile 34 to 41)"
+  },
+  {
+   "region": [
+    70,
+    25,
+    300,
+    240
+   ],
+   "what": "Frosted screen panel reads as a soft, blurry print on a wall, with a low-contrast image (lum_range 22). It neither glows like back-lit frosted acrylic nor reads as a thick flush panel"
+  },
+  {
+   "region": [
+    480,
+    0,
+    720,
+    340
+   ],
+   "what": "Record spines are a repeating procedural stripe texture: same heights, no lean, no labels, no wear, so the wall looks like a texture"
+  },
+  {
+   "region": [
+    180,
+    350,
+    245,
+    380
+   ],
+   "what": "Table lamp dome is an opaque milky white, not smoked acrylic, and the side table has a votive but no glass or other life"
+  },
+  {
+   "region": [
+    370,
+    380,
+    480,
+    480
+   ],
+   "what": "Floor and plinth area is murky and featureless; speaker plinth has no contact shadow or floor reflection"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    120
+   ],
+   "what": "No ceiling or fir beams in frame although the card names beams overhead; upper band is empty wall"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The Ember reads as an evenly lit red plastic box, not thick cast acrylic: its faces are as bright as its edges and the horn is dark.",
+   "evidence": {
+    "region": [
+     240,
+     265,
+     370,
+     450
+    ],
+    "measured": "cabinet lum_median 47.3, p95 124, rgb median 92/35/30; horn [235,192,355,262] median 23.9, p95 39; right edge step 28 over 2 px only on one side"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area lamps",
+    "from": "4 x area, 10.0 W/m2 at the target, 2900 K, frontal fill",
+    "to": "2 x narrow strip area lamps as a raking key from upper left and a rim from behind right at 18 W/m2, 2900 K, aimed to graze the cabinet edges and the horn rim; drop the frontal fill to 4 W/m2"
+   },
+   "expected": "Cabinet edges glow brightly while the faces drop slightly darker and deeper, the horn gets a long clean rim highlight, and the acrylic reads thick.",
+   "accept": {
+    "region": [
+     235,
+     192,
+     355,
+     262
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The board-formed concrete is a flat, featureless field with no pool of light, which reads as a CG plaster wall.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     470,
+     380
+    ],
+    "measured": "profile y bins 33.8 to 40.7 (falloff about 7); lum_range 32.6"
+   },
+   "change": {
+    "setting": "concrete finish (tone, sheen) plus sconce point lamp",
+    "from": "smooth low-contrast concrete; sconce 1 x point 20 W",
+    "to": "concrete with stronger board grain bump and roughness variation, tie holes, faint staining, slight sheen (roughness 0.7 varied by +-0.15); sconce 35 W, moved close to the wall so it throws a grazing pool"
+   },
+   "expected": "Board grain and tie holes visible under raking warm light; a pool bright near the sconce falling off to the dark.",
+   "accept": {
+    "region": [
+     300,
+     0,
+     470,
+     380
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The foreground leather chair is a crushed silhouette with no material read.",
+   "evidence": {
+    "region": [
+     0,
+     235,
+     185,
+     480
+    ],
+    "measured": "lum_median 14.7, p5 10.6, p95 53"
+   },
+   "change": {
+    "setting": "table lamp (EARF Moon) 45 W plus a candle on the chair side",
+    "from": "lamp 45 W, nothing lighting the chair shell",
+    "to": "lamp 60 W, plus one candle (4 W, 1900 K) on the side table nearer the chair; chair leather given a 0.35 roughness sheen"
+   },
+   "expected": "A warm rim along the chair's top edge and arm, leather creases readable, median up to about 22 to 28 while the chair stays the darkest mass.",
+   "accept": {
+    "region": [
+     0,
+     235,
+     185,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     20,
+     32
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The frosted screen panel neither glows nor reads as a back-lit thick panel; its image is a blurry low-contrast print.",
+   "evidence": {
+    "region": [
+     70,
+     25,
+     300,
+     240
+    ],
+    "measured": "lum_median 38.5, lum_range 21.7, same level as the bare wall (38.5)"
+   },
+   "change": {
+    "setting": "the screens' images emission",
+    "from": "0.8",
+    "to": "1.6, with the frosted acrylic roughness lowered slightly so the image shows as soft but legible, and the panel's polished edge set to catch the glow"
+   },
+   "expected": "The panel glows evenly and clearly above the wall, its image reads as a fogged form, and its edges show a thin bright line.",
+   "accept": {
+    "region": [
+     70,
+     25,
+     300,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "asset",
+   "problem": "The record wall reads as a repeated stripe texture, the strongest single CG tell after the speaker.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     340
+    ],
+    "measured": "seen at 2x: identical sleeve heights, no lean, regular stripe rhythm in every cubby"
+   },
+   "change": {
+    "setting": "record wall props and record-wall spots",
+    "from": "uniform procedural sleeves; spots 25 W, 16 deg",
+    "to": "randomised sleeves (height +-3 mm, lean 0 to 8 deg in part-empty cubbies, varied spine colours and whites, a few face-out sleeves); spots 35 W so the top three rows get pools that fall off down the wall"
+   },
+   "expected": "The record wall reads as a real collection with pools of light at the top, falling off downward.",
+   "accept": {
+    "region": [
+     480,
+     0,
+     720,
+     340
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 100
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "Almost no sign of life, and the side table is bare apart from a votive.",
+   "evidence": {
+    "region": [
+     170,
+     340,
+     280,
+     440
+    ],
+    "measured": "seen: lamp and one votive only"
+   },
+   "change": {
+    "setting": "props",
+    "from": "votive only near the chair",
+    "to": "a rocks glass with whisky and a record out of its sleeve on the side table, a sleeve leaning against the cabinet base, a coat over the chair arm"
+   },
+   "expected": "The corner reads as used: small highlights in the glass and the vinyl, and the room reads as a bar, not a showroom.",
+   "accept": {
+    "region": [
+     170,
+     340,
+     280,
+     440
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The frame shows no beams and gives a quarter of its width to a black chair, so the speaker is not centred as the hero.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "upper band 0 to 120 is empty wall; chair takes about 13% of the frame at median 15"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [14.6, 2.5, 1.2], target [16.3, 4.6, 1.15], 26 mm",
+    "to": "position [14.3, 2.7, 1.05] (seated eye level), target [16.3, 4.6, 1.35], 32 mm, verticals kept level by shift rather than tilt so one fir beam enters the top of the frame and the chair is cut to its back edge"
+   },
+   "expected": "Speaker larger and nearer the left third, a beam with checks visible at the top, chair as a framing edge rather than a mass.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The floor and plinth are murky with no contact shadow or reflection anchoring the speaker.",
+   "evidence": {
+    "region": [
+     370,
+     380,
+     480,
+     480
+    ],
+    "measured": "lum_median 31.2, lum_range 14.4"
+   },
+   "change": {
+    "setting": "floor polish plus haze",
+    "from": "matte floor; haze 0.025",
+    "to": "a slightly polished floor (roughness 0.35) so the speaker throws a soft red reflection and a dark contact shadow; haze 0.035 so the speaker's glow and the lamp spill read in the air"
+   },
+   "expected": "A soft red reflection pooled under the plinth and a darker contact line; a hint of atmosphere around the lamp.",
+   "accept": {
+    "region": [
+     370,
+     380,
+     480,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 25
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember's batts and internal base block read white or less uniformly red",
+   "why": "The speaker's parts and tint are fixed; only the light on them may change (c1)."
+  },
+  {
+   "request": "Replace the opaque milky white dome of the table lamp with a visibly smoked acrylic dome",
+   "why": "EARF Moon is an EARF product and fixed. If the render shows it wrongly (milky instead of smoked), that is a model or material fidelity issue for the owner to check, not a critic change."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

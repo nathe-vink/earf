@@ -1,0 +1,369 @@
+{
+ "stage1": {
+  "impression": "A quiet, believable composition: the red acrylic cabinet glows and is clearly the hero, and the record wall gives the room a warm, lived-in edge. But the light is one even, milky veil with no pools. Walls, artwork and shelves all sit at the same mid-brown, the blacks are lifted, the wall panel reads as a dim print rather than a back-lit frosted screen, and at 1:1 the concrete reads as smooth plaster and the record spines as a repeated pattern, so it still looks like a competent CG proof rather than a night photograph.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Distinct pools of light (record wall, side table, speaker) with real dark between them: wall and shelf regions need a lum_range above about 90, not 20 to 70",
+  "Shadows deep but clean: frame lum_p5 at or below about 7, not a lifted 12 caused by haze and a flat tone curve",
+  "The frosted screen panel must read as a glowing, evenly diffused back-lit panel, not as a framed print on the wall",
+  "Board-formed concrete has to read at 1:1, with board grain, pour lines and tie holes; it currently reads as smooth plaster",
+  "Some sign of life: a glass on the side table, a record out of its sleeve, a coat",
+  "The fir beams overhead and the chairs turned toward the speaker, which the card says the frame is for, are not in the shot (one chair only, no beams)",
+  "Judged at full resolution (this proof is 720 x 480, scale 0.3); nothing at this size can show the material detail a 9 needs"
+ ],
+ "defects": [
+  {
+   "region": [
+    70,
+    25,
+    300,
+    235
+   ],
+   "what": "Frosted screen panel has median luminance 38.5 and a range of 21.5, the same as the wall around it. It reads as a dull framed print, not glowing acrylic"
+  },
+  {
+   "region": [
+    300,
+    20,
+    470,
+    250
+   ],
+   "what": "Concrete wall is flat: lum_range 20, smooth plaster-like, with no visible formwork grain or pools of light"
+  },
+  {
+   "region": [
+    480,
+    0,
+    720,
+    350
+   ],
+   "what": "Record wall is evenly lit with no spot pools (y profile 45/42/44/47/36/30/34/35). The record spines repeat as a CG texture pattern"
+  },
+  {
+   "region": [
+    0,
+    235,
+    185,
+    480
+   ],
+   "what": "Leather chair is a near-featureless dark mass (median 14.7, p95 53) filling a quarter of the frame. There is no rim light and no leather sheen"
+  },
+  {
+   "region": [
+    183,
+    352,
+    232,
+    385
+   ],
+   "what": "Table lamp dome reads near-white and pinkish (median 166) rather than smoked, yet throws only a small pool on the table (table p95 86)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Global milky veil: lum_p5 12.1 and no true blacks, from the haze and a flat AgX curve"
+  },
+  {
+   "region": [
+    235,
+    190,
+    375,
+    270
+   ],
+   "what": "Horn's top face is dark and muddy apart from one hard white specular streak at the left edge, which looks like a plastic highlight"
+  },
+  {
+   "region": [
+    180,
+    440,
+    470,
+    480
+   ],
+   "what": "Floor barely reads: no polish, no reflection of the speaker's red glow, so the speaker's plinth floats"
+  },
+  {
+   "region": [
+    480,
+    350,
+    720,
+    480
+   ],
+   "what": "Lower fir cabinet doors are uniform, smooth and dark, with no grain contrast or edge highlights"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The record wall has no pools of light: it is lit as evenly as the wall, so the room reads as flatly lit CG.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     350
+    ],
+    "measured": "y profile 45, 42, 44, 47, 36, 30, 34, 35; lum_range 70; p95 81"
+   },
+   "change": {
+    "setting": "the record wall 3 x spot, W",
+    "from": "25.0 W, cone 16.0 deg",
+    "to": "80.0 W, cone 22 deg, aimed at the upper three shelf rows so each throws a scalloped pool that falls off down the wall"
+   },
+   "expected": "Bright pools on the record spines (p95 about 140) with falloff to dark below, and visible scallops on the shelf faces",
+   "accept": {
+    "region": [
+     480,
+     0,
+     720,
+     350
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "region_note": "",
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Haze lays a uniform veil over the frame that lifts every shadow to the same grey-brown and removes the dark between the pools.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame lum_p5 12.1, lum_range 62; wall lum_p5 22.9"
+   },
+   "change": {
+    "setting": "haze in the room's air, density per metre",
+    "from": "0.025",
+    "to": "0.008"
+   },
+   "expected": "Deeper, cleaner shadows. Haze shows only in the cones of the spots and around the speaker, not across the wall",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 7
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The frosted screen panel does not glow. It reads as a framed print, so the room's back-lit acrylic idea is lost.",
+   "evidence": {
+    "region": [
+     70,
+     25,
+     300,
+     235
+    ],
+    "measured": "lum_median 38.5, lum_range 21.5, equal to the surrounding wall (37.7)"
+   },
+   "change": {
+    "setting": "the screens' images emission strength",
+    "from": "0.8",
+    "to": "2.4"
+   },
+   "expected": "The panel glows softly and evenly, about twice the brightness of the wall, with the dark form inside it still diffuse and soft",
+   "accept": {
+    "region": [
+     70,
+     25,
+     300,
+     235
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     110
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The tone curve is flat: mids and shadows sit within a narrow band, so nothing has depth.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame p5 12.1, p50 36.8, p95 74.0"
+   },
+   "change": {
+    "setting": "render look",
+    "from": "None",
+    "to": "AgX - Medium High Contrast (exposure 0.0 kept; re-check the median after c1 to c3)"
+   },
+   "expected": "Frame median stays about 30 to 40 while p95 rises and p5 falls: a low-key frame with real blacks",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     26,
+     42
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The speaker as a whole falls below the readability bar: its horn top is muddy except for one hard white streak.",
+   "evidence": {
+    "region": [
+     235,
+     190,
+     375,
+     450
+    ],
+    "measured": "lum_median 36.7 (target 45 or more); cabinet body alone 47.3; horn top dark with a single specular streak"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area, W/m2",
+    "from": "10.0 W/m2",
+    "to": "15.0 W/m2, with the upper lamp enlarged or moved so the horn gets a broad soft reflection, not a thin streak"
+   },
+   "expected": "Horn and cabinet both legible, with red light carried through the acrylic and a broad soft highlight on the horn",
+   "accept": {
+    "region": [
+     235,
+     190,
+     375,
+     450
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 47
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The table lamp dome reads as white plastic rather than smoked acrylic, while the light it throws on the table and chair is weak.",
+   "evidence": {
+    "region": [
+     183,
+     352,
+     232,
+     385
+    ],
+    "measured": "dome median 166 (r186 g162 b151); table [170,400,280,440] p95 86"
+   },
+   "change": {
+    "setting": "EARF Moon: the lamp in each table lamp / frosted domes' own glow",
+    "from": "45.0 W / 1.0",
+    "to": "90.0 W / 0.5"
+   },
+   "expected": "The dome darkens and reads as smoked with a bright rim. A clear warm pool forms on the side-table top and catches the chair's leather arm",
+   "accept": {
+    "region": [
+     170,
+     400,
+     280,
+     440
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "At 1:1 the concrete reads as smooth plaster, and the fir doors as flat dark veneer.",
+   "evidence": {
+    "region": [
+     300,
+     20,
+     470,
+     250
+    ],
+    "measured": "wall lum_range 20.2, p5 to p95 23 to 43; no board grain or tie holes visible in the crop"
+   },
+   "change": {
+    "setting": "concrete finish (tone, sheen, bump); fir stain",
+    "from": "smooth, matte, low bump",
+    "to": "board-grain bump strength about 2 to 3 times higher, horizontal pour lines, visible tie holes, slight sheen; fir doors with a lighter stain so the grain shows"
+   },
+   "expected": "Concrete shows formwork boards under the grazing light from the speaker and the record-wall spots",
+   "accept": {
+    "region": [
+     300,
+     20,
+     470,
+     250
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 32
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The room has no sign of life, and the dark chair back dominates the lower left.",
+   "evidence": {
+    "region": [
+     0,
+     235,
+     185,
+     480
+    ],
+    "measured": "chair median 14.7, a featureless mass covering about 24% of the frame; only a candle on the table"
+   },
+   "change": {
+    "setting": "props and camera",
+    "from": "an empty side table, one chair seen from behind",
+    "to": "a rocks glass with whisky beside the lamp, a record out of its sleeve leaning on the cabinet base, a coat over the chair arm; camera yawed about 5 deg right and lowered to a seated 1.05 m so the chair crops less and a second chair turned to the speaker enters"
+   },
+   "expected": "A lived-in frame with small highlights on the glass and the vinyl; the chair becomes framing rather than a void",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the EARF Moon dome itself darker or more smoked in its material",
+   "why": "The EARF product's colour and parts are fixed; only its light levels can change (handled in c6)"
+  },
+  {
+   "request": "Soften the speaker's saturated red tint toward a less signage-like red",
+   "why": "The speaker's colour is fixed by the card"
+  },
+  {
+   "request": "Show the fir beams overhead",
+   "why": "The camera must stay level, and the beams sit above this frame. Showing them needs a wider lens or a different camera position, which the owner should choose against the listening-room brief"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
