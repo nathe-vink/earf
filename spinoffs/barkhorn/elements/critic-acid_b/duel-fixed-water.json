@@ -1,0 +1,6 @@
+{"A": "the landscape final before the fix", "B": "the landscape with the fixed water (rig 99b2097, old drivers)",
+ "reply": {"A": 6.0, "B": 6.8, "prefer": "B", "differences": [
+  {"what": "A's splashes are oversized semi-transparent crown blobs, dense, like pasted sprites; B's small, sparse, sharp, at the rain's scale", "favours": "B"},
+  {"what": "B's reflection cleaner and continuous, amber columns with ripple breakup; A's broken by the splash ghosts", "favours": "B"},
+  {"what": "B's wide soft out-of-focus foreground streaks over the dark ground read as faint vertical bars", "favours": "A"},
+  {"what": "the same soft streaks near the cabinet's right edge", "favours": "A"}]}}

@@ -92,3 +92,43 @@ and 9 duels the ceiling these judges hold to is the product as it stands (the in
 horn's black driver, smooth uniform materials), named out of scope in nearly every reply. Next round, if wanted, from
 the set pass: a denser contact shadow and a floor a shade darker than the wall; flags for the clear frame's edges; more
 back light for the black frame; a 10-level fall-off up the wall; about 15 % more headroom.
+
+## Round 31d: the heroes' rig after the set's pass (`bright2` in studio31.py)
+
+Flags seen only in reflections (no shadow on the cove), wider, plus one high behind the horn: the water-clear frame's
+edges and horn are drawn. Contact denser and tighter (0.8 over 0.35 m, core 0.8 at 3 cm). The background lamps moved
+out and aimed low, the dome's strength cut from 0.6 to 0.22: the frame's corners now within 6 levels (the grey corner
+boxes the site saw are gone at source, 228 -> 239 against 245), the wall falls about 5 levels toward the top (245 at the
+top, 250 on the floor; the finish's shoulder compresses the whites, so the wall can't drop further without going grey).
+Back lamp 22 -> 30 and a low soft bank behind lighting the speaker alone (30), so Smoke reads as smoky acrylic with its
+internals, Ember unclipped. 60 mm and the target raised: about 57 % of the height, room above for type. Proofs: Ember,
+Fog, Smoke at 0.3 and 0.5. The lineup and macros keep the round-31c rig.
+
+Round 31d rendered (helpers h6 to h9) and dueled blind against 31c's set: **31c wins** in all three (Ember alone 6.0 to
+5.7; the set twice, with the order swapped, 6.5 to 6.0 both times). Every judge named the same cause: the extra headroom
+made the speaker read small in an empty field; one also named the new wall-to-floor horizon and the grey upper-left
+fall-off. 31d's flags drew Fog's edges and its back bank gave Smoke presence, and those were noted in its favour. The
+31c heroes and rig are restored (bright2 stays in the module for the record). For the drivers re-render: the 31c rig;
+the flags-in-reflection and the low back bank are candidates to try at 31c's framing, proofed and dueled first.
+
+Round 31e (31c's rig and framing with only 31d's two credited changes: the reflection-only flags and the low back bank),
+proofed on Ember, Fog and Smoke at 0.5 scale, 48 samples, against 31c at the same settings, dueled blind twice with the
+order swapped: **31c wins both**, 6.0 to 5.5 and 7.0 to 6.5. Both judges preferred 31c's side panels: its glossy right
+flag lays a dark reflected streak down each side face that models it as glass, which the reflection-only flags (placed
+for the water-clear edges) lose; one also saw a hard grey band low on 31e's side panels (the low back bank). So 31c
+stands unchanged as the rig for the drivers re-render. The faint grey wedge at the frames' upper left is 31c's own (the
+site blends its edges into #FAF9F5); a fix for it would need its own duel.
+
+## The drivers as made (main 01267eb, 2026-10-18)
+
+The 15PR400 woofer, the HF driver's machined exit, the ring in polished opaque acrylic. On the 31c rig the ring mirrors
+only the white set and reads flat (the drivers session's note, confirmed in a proof of Ice). A graduated card placed by
+the reflection probe where the ring's face mirrors (low in front, toward the camera), lighting the ring alone, strength 3
+(8 washed it pale): duel 13 on Ice, both orders, **the card wins** (6.1 to 5.8 and 5.5 to 5.0; "a moulded part catching
+the light" against "a painted decal"). The heroes take it (bright_hero); the woofer and horn macros re-render on their
+rig unchanged (the card is placed for the hero's camera). The lineup is off the page (the coordinator) and not rendered.
+
+The drivers re-render (rig 3cff7ec, helpers d1 to d5) merged: the eight heroes and the woofer and horn macros. Checked
+side by side: identical framing; the paper measures the same in all eight (lum 249, R250 B246 at the upper right); every
+frame's shot.json matches its shot file and carries the ring card; Haze (re-run after a container restart) matches the
+rest. The woofer macro shows the 15PR400's ribbed surround and cone; the horn macro the HF driver's machined exit.

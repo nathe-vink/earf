@@ -2,8 +2,8 @@
  "shot": "studio/shots/barkhorn/studio31/macro-horn-acid.json",
  "image": "renders/2026-10-18/barkhorn/studio31/macro-horn-acid.png",
  "seconds": {
-  "build": 18.0,
-  "render": 1575.5
+  "build": 17.5,
+  "render": 1215.5
  },
  "samples": 128,
  "size": [
@@ -479,6 +479,34 @@
    ],
    "depth_m": 2.574
   },
+  "hf-band#0": {
+   "part": "hf-band",
+   "centre_px": [
+    439.3,
+    709.6
+   ],
+   "box_px": [
+    339,
+    548,
+    534,
+    878
+   ],
+   "depth_m": 2.602
+  },
+  "hf-exit#0": {
+   "part": "hf-exit",
+   "centre_px": [
+    512.5,
+    715.9
+   ],
+   "box_px": [
+    467,
+    651,
+    557,
+    782
+   ],
+   "depth_m": 2.58
+  },
   "hf-frame#0": {
    "part": "hf-frame",
    "centre_px": [
@@ -510,16 +538,30 @@
   "hf-plug#0": {
    "part": "hf-plug",
    "centre_px": [
-    512.7,
-    715.9
+    505.4,
+    715.3
    ],
    "box_px": [
-    477,
-    664,
-    548,
-    768
+    460,
+    657,
+    550,
+    774
    ],
-   "depth_m": 2.58
+   "depth_m": 2.582
+  },
+  "hf-terminals#0": {
+   "part": "hf-terminals",
+   "centre_px": [
+    385.3,
+    705.0
+   ],
+   "box_px": [
+    292,
+    682,
+    475,
+    729
+   ],
+   "depth_m": 2.618
   },
   "land-bottom#0": {
    "part": "land-bottom",
@@ -1224,16 +1266,30 @@
   "woofer-frame#0": {
    "part": "woofer-frame",
    "centre_px": [
-    932.0,
-    2094.9
+    882.7,
+    2083.3
    ],
    "box_px": [
-    589,
-    1560,
+    489,
+    1544,
     1242,
     2703
    ],
-   "depth_m": 2.549
+   "depth_m": 2.563
+  },
+  "woofer-gasket#0": {
+   "part": "woofer-gasket",
+   "centre_px": [
+    1015.0,
+    2114.3
+   ],
+   "box_px": [
+    783,
+    1593,
+    1223,
+    2695
+   ],
+   "depth_m": 2.526
   },
   "woofer-magnet#0": {
    "part": "woofer-magnet",
@@ -1277,6 +1333,20 @@
    ],
    "depth_m": 2.519
   },
+  "woofer-screws#0": {
+   "part": "woofer-screws",
+   "centre_px": [
+    1028.5,
+    2117.5
+   ],
+   "box_px": [
+    807,
+    1637,
+    1230,
+    2649
+   ],
+   "depth_m": 2.522
+  },
   "woofer-spider#0": {
    "part": "woofer-spider",
    "centre_px": [
@@ -1294,16 +1364,30 @@
   "woofer-surround#0": {
    "part": "woofer-surround",
    "centre_px": [
-    1024.8,
-    2116.6
+    1017.7,
+    2114.9
    ],
    "box_px": [
     812,
     1650,
-    1219,
-    2630
+    1205,
+    2626
    ],
-   "depth_m": 2.523
+   "depth_m": 2.525
+  },
+  "woofer-terminals#0": {
+   "part": "woofer-terminals",
+   "centre_px": [
+    906.1,
+    2325.7
+   ],
+   "box_px": [
+    877,
+    2311,
+    935,
+    2341
+   ],
+   "depth_m": 2.573
   }
  },
  "finish": {

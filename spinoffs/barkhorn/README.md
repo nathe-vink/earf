@@ -114,6 +114,34 @@ speakers lit from below and on a night facade, and each Cloud in its element, ph
 | "It's still a little too "check this out bro" with the copy that explains the web interaction. That should be intuitive and implied. What's stated should be about the speakers, not the site. Also not sure if "weather" is right because some of them aren't weather." | **No instructions and no weather**: "Drag to turn", "Keep scrolling", "Drag to spin it" and "Spin the horn" gone; "Something in the air.", "Choose your atmosphere.", "Each colour, out in the world.", "Same speaker, a different air". |
 | "The drivers in the images are starting to look really fake relative to everything else." | **The drivers made real** (round 31c, in its own session, `r31-drivers`): the woofer as the FaitalPRO 15PR400 it is (its cone, surround, cap, flange bolts, basket and motor), the woofer's ring as the polished opaque acrylic the spec calls for rather than satin paint, and the horn driver's exit; then every picture that shows the woofer large is rendered again. **Merged 2026-10-18** (`spinoffs/barkhorn/drivers31.md`): a four-wave accordion surround, treated-paper cone, eight-spoke black e-coat frame with slotted flange holes and button heads, cooling fins, push terminals; the horn driver's machined exit, ringed phase plug in dark anodised aluminium, band, fins and terminals. Old against new, blind: the hero 5.5 to 5.0, the woofer macro 5.5 to 4.5. The drawings and datasheet numbers are unchanged (FaitalPRO's own drawing gives a 374 mm bolt circle and 857 cm² Sd against the repo's 375 and 805: a question for the owner). The catalogue, studio heroes, element finals and Planet EARF are being rendered again on it. |
 
+### The site, a full critic pass (2026-10-18, evening)
+
+A fresh critic walked the whole site at desk, laptop, tablet and phone widths, in both themes, and scored it 6 of 10
+against a $20K launch. The best parts held: the light section (8.5), the room in Poison (8) and the horn (7.5). What it found
+on the site's side is done (`web.py`, pushed 5224e82):
+- **Status.** One honest footer line ("In development, not yet for sale; the pictures are renders") in place of the black preview bar and two
+  disclaimers. The inbox note says it opens at launch: making hello@earf.world live is the owner's to set up.
+- **Copy.** "Eight colours from Ember to Smoke" (no "what hangs in the air", which was weather by another name). The room's caption is "Covers on, by a tall window", with the
+  speaker's size.
+- **Companions.** Off the page entirely until the owner picks: no one-sentence band and no sketches.
+- **Loader.** Unseen on a quick page (it waits 450 ms before it shows). It leaves 250 ms after the hero decodes, its first frame inline,
+  the header's frames at their sharp size.
+- **One light theme** by choice: every photograph stands on a pale ground. The page is the hero's own paper (#F4F1EC),
+  so there's no step under it.
+- **Links by name** (`#speaker-ember` … `#speaker-smoke`; the colour keys still answer). The hero's links tab in number order.
+- **Layout.**
+  - Bands are parted by space, not hairlines, and the H1 has its own size.
+  - The studio's lineup is off (it repeated the hero), leaving four details. The room runs full bleed.
+  - The habitats' strip runs to the window's edge and fades there.
+- **The spec.** Its two drawings at one scale; "423 mm overall, 420 mm at the cabinet" (the drawing and the table had disagreed);
+  terms over values on phones.
+- **Weight.** 2.35 MB before the first scroll on a desk (it was 5.9) and 1.44 MB on a phone (5.2): the horns' sprites load as their
+  band comes near. The habitats are 2400 px with 1200 px versions, the light run's 1600 px.
+
+On the pictures' side, the critic found four studio looks (the hero warm, the studio white, the catalogue a grey sweep, the
+detail views pastel, with Fog's blue matching Ice's). The catalogue and the detail views are being rendered again on one warm
+pale paper, with the new drivers.
+
 ![Every final: each colour's seven views and the first of its turning frames](../../renders/2026-10-18/barkhorn/finals31/sheet.jpg)
 
 ### Every picture final

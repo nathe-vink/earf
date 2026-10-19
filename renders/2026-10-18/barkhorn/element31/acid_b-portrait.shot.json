@@ -196,7 +196,24 @@
     "keep": 1.0,
     "roughness": 0.02,
     "big_rings": 1.0,
-    "ripple_m": 0.0012
+    "ripple_m": 0.0012,
+    "impacts": {
+     "area": [
+      -2.6,
+      -7.2,
+      2.6,
+      1.2
+     ],
+     "density": 90,
+     "px_m": 0.0025,
+     "r_max": 0.08,
+     "amp_m": 0.0035,
+     "sharp": 3.0,
+     "chatter_m": 0.0001,
+     "margin_m": 0.02,
+     "splash_age": 0.08
+    },
+    "seed": 9
    },
    {
     "kind": "kit",
@@ -817,16 +834,16 @@
      ],
      "clip_end_m": 1500.0
     },
-    "count": 30,
-    "near": 1.5,
-    "far": 4.0,
+    "count": 60,
+    "near": 2.5,
+    "far": 5.0,
     "length": [
-     0.04,
-     0.08
+     0.06,
+     0.12
     ],
     "radius": [
-     0.0006,
-     0.001
+     0.0005,
+     0.0008
     ],
     "lean": [
      0.09,
@@ -837,8 +854,8 @@
      30.0
     ],
     "opacity": [
-     0.15,
-     0.35
+     0.08,
+     0.2
     ],
     "scatter": 0.7,
     "rough": 0.25,
@@ -871,7 +888,7 @@
      ],
      "clip_end_m": 1500.0
     },
-    "count": 300000,
+    "count": 200000,
     "near": 15.0,
     "far": 120.0,
     "length": [
@@ -896,60 +913,6 @@
     "clear": 0.1,
     "seed": 23,
     "frame_h": 45.0
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "acid_rain_el",
-    "fn": "splashes",
-    "area": [
-     -3.5,
-     -8.0,
-     4.0,
-     4.0
-    ],
-    "z": -0.11,
-    "count": 900,
-    "radius": [
-     0.002,
-     0.012
-    ],
-    "opacity": 0.1,
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      3.0
-     ]
-    ],
-    "seed": 15
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "acid_rain_el",
-    "fn": "splashes",
-    "area": [
-     -2.0,
-     -3.5,
-     2.5,
-     1.5
-    ],
-    "z": -0.11,
-    "count": 700,
-    "radius": [
-     0.002,
-     0.02
-    ],
-    "opacity": 0.15,
-    "avoid": [
-     [
-      0.0,
-      0.0,
-      0.45
-     ]
-    ],
-    "seed": 5
    }
   ]
  },
@@ -1064,9 +1027,12 @@
     "grip-left",
     "grip-right",
     "hf-adaptor",
+    "hf-band",
+    "hf-exit",
     "hf-frame",
     "hf-motor",
     "hf-plug",
+    "hf-terminals",
     "land-bottom",
     "land-left",
     "land-right",
@@ -1098,7 +1064,9 @@
     "post-4",
     "post-sleeves",
     "post-sockets",
-    "rating-plate",
+    "rating-plate-plate",
+    "rating-plate-print",
+    "rating-plate-screws",
     "rib-back-1",
     "rib-back-2",
     "rib-bottom",
@@ -1116,11 +1084,14 @@
     "woofer-coil",
     "woofer-cone",
     "woofer-frame",
+    "woofer-gasket",
     "woofer-magnet",
     "woofer-motor",
     "woofer-ring",
+    "woofer-screws",
     "woofer-spider",
-    "woofer-surround"
+    "woofer-surround",
+    "woofer-terminals"
    ]
   }
  },
