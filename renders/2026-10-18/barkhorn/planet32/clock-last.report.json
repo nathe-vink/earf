@@ -1,0 +1,35 @@
+{
+ "shot": "studio/shots/barkhorn/planet32/final/clock-last.json",
+ "image": "renders/2026-10-18/barkhorn/planet32/clock-last.png",
+ "seconds": {
+  "render_total": 3712.5
+ },
+ "samples": 256,
+ "size": [
+  1800,
+  1200
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "strips": 3,
+ "strip_seconds": [
+  1249.6,
+  1222.0,
+  1240.9
+ ],
+ "finish": {
+  "white_in": 236,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.1,
+  "clarity": 0.06,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "gain": 1.0169
+ },
+ "note": "rendered in horizontal strips (resumable across container restarts), stitched raw, finished once"
+}
