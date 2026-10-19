@@ -1,0 +1,373 @@
+{
+ "stage1": {
+  "impression": "A dim, warm-ish room with a record wall, a frosted screen and a red glowing speaker. The light is flat and comes from nowhere: there are no pools, no practical lamps in frame and no highlights. The surfaces are smooth and smeared by the denoiser (the concrete has no board marks at 1:1, and the record spines are mush). The speaker reads as a lit red box with a sign hovering on rods above it, more display case than kissa. Competent CG, not a photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Light comes from visible or implied practicals: at least two distinct pools on the wall or bar with dark between them (back wall lum_range >= 55, not the current 30)",
+  "The speaker is the brightest, clearest object in the frame: region median >= 45 (now 30.7), with its acrylic edges glowing and the horn readable",
+  "Material detail survives at 1:1: board-form grain, tie holes and pour lines on the concrete, distinct record spines, no denoiser smear",
+  "The screen sits in the room's warm key rather than as a neutral grey-blue slab, and its image reads as a soft fogged form, not a dirty smudge",
+  "A believable photographer's frame: the speaker larger in frame, foreground chair composed rather than cut off at the edge, a sign of life (a glass with a highlight, a record out of its sleeve, a candle)",
+  "Real highlights: frame p99 well above the current 109, with specular glints on glasses, steel and vinyl"
+ ],
+ "defects": [
+  {
+   "region": [
+    245,
+    230,
+    365,
+    470
+   ],
+   "what": "Speaker underexposed (median 30.7, below the 45 target); its glow is an even red fill with no edge glow and no depth, so it reads as signage or a lightbox"
+  },
+  {
+   "region": [
+    245,
+    228,
+    360,
+    298
+   ],
+   "what": "The upper smoked-red panel looks like a separate sign floating on two thin rods; dull (median 23), no clean reflections"
+  },
+  {
+   "region": [
+    290,
+    0,
+    465,
+    400
+   ],
+   "what": "Concrete wall uniformly lit (y profile 34 to 43, range 30), smooth, no board grain or tie holes visible; no pools of light"
+  },
+  {
+   "region": [
+    0,
+    0,
+    60,
+    220
+   ],
+   "what": "Left wall brighter (median 49) than the back wall, an unexplained flat fill"
+  },
+  {
+   "region": [
+    65,
+    65,
+    278,
+    320
+   ],
+   "what": "Frosted screen reads cool neutral grey (R46 G41 B42) against a warm room; its image is a dark ring with spikes that reads as a stain or a burnt hole; frame edges soft (step 7.9 over 11 px)"
+  },
+  {
+   "region": [
+    470,
+    0,
+    720,
+    370
+   ],
+   "what": "Record spines smeared by the denoiser, with no individual sleeves or highlights; saturated spine colours compete faintly with the speaker"
+  },
+  {
+   "region": [
+    0,
+    220,
+    200,
+    480
+   ],
+   "what": "Leather chairs cropped awkwardly at the left edge, red-tinted and featureless (median 18), with no leather grain or sheen"
+  },
+  {
+   "region": [
+    205,
+    405,
+    300,
+    460
+   ],
+   "what": "The side table's glasses read as dark blocks, with no liquid and no specular highlights"
+  },
+  {
+   "region": [
+    240,
+    0,
+    470,
+    40
+   ],
+   "what": "Fir beams overhead barely legible (median 28.7), with no checks or end grain"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Low resolution (scale 0.3) and an overall soft, smeared look; no practicals bright anywhere (p99 109, clip 0%)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero speaker is too dark and too flat to carry the frame.",
+   "evidence": {
+    "region": [
+     245,
+     230,
+     365,
+     470
+    ],
+    "measured": "lum_median 30.7, p95 125; the upper panel median 23"
+   },
+   "change": {
+    "setting": "lamps: on each Ember speaker 4 x area, W/m2 at the target",
+    "from": "12.0 W/m2",
+    "to": "28.0 W/m2"
+   },
+   "expected": "The speaker becomes the brightest object, with its acrylic edges and white batts glowing; region median about 50 to 60",
+   "accept": {
+    "region": [
+     245,
+     230,
+     365,
+     470
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The room is lit by an even fill with no pools, so it reads as CG rather than a night interior.",
+   "evidence": {
+    "region": [
+     290,
+     0,
+     465,
+     400
+    ],
+    "measured": "back wall lum_range 30.2, y profile 33.6 to 43.1; the left wall median 49 is brighter than the back wall"
+   },
+   "change": {
+    "setting": "street lamps 2 x point / record wall 3 x spot",
+    "from": "street 500 W; record wall 8 W, cone 18 deg",
+    "to": "street 120 W; record wall 30 W, cone 24 deg, aimed to graze the shelf faces and spill a pool onto the concrete beside the speaker"
+   },
+   "expected": "Dark between pools, a visible grazing pool on the record wall and concrete, and the left-wall fill gone",
+   "accept": {
+    "region": [
+     290,
+     0,
+     465,
+     400
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The frosted screen is a cool grey slab that competes with the speaker, and its image reads as a stain.",
+   "evidence": {
+    "region": [
+     65,
+     65,
+     278,
+     320
+    ],
+    "measured": "lum_median 41.9, R46 G41 B42 (neutral to cool under 3000 K white balance), about as bright as the speaker"
+   },
+   "change": {
+    "setting": "the screens' images emission / frosted acrylic roughness",
+    "from": "0.8; current roughness",
+    "to": "0.4, with the screen content shifted to about 3200 K; frosted roughness up so the image blurs into a soft fogged form"
+   },
+   "expected": "The screen glows softly and evenly, warm-neutral, darker than the speaker, and the image reads as a fogged silhouette",
+   "accept": {
+    "region": [
+     65,
+     65,
+     278,
+     320
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     34
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The denoiser smears the concrete, the record spines and the leather, which says render at 1:1.",
+   "evidence": {
+    "region": [
+     470,
+     0,
+     720,
+     370
+    ],
+    "measured": "spines and shelf edges soft; concrete shows no board grain at a 2x crop"
+   },
+   "change": {
+    "setting": "render samples / denoise / proof scale",
+    "from": "256 samples, adaptive 0.02, denoise on, scale 0.3",
+    "to": "1024 samples, adaptive 0.01, denoiser with albedo and normal passes at high-quality prefilter, judged at scale 0.5 or more"
+   },
+   "expected": "Individual record sleeves, formwork grain and leather texture survive",
+   "accept": {
+    "region": [
+     470,
+     0,
+     720,
+     370
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The concrete and fir read as smooth CG surfaces with no scale cues.",
+   "evidence": {
+    "region": [
+     290,
+     0,
+     465,
+     400
+    ],
+    "measured": "p5 19.7 to p95 50.0 across the whole wall, uniform texture"
+   },
+   "change": {
+    "setting": "the concrete's tone and sheen / the stain of the fir",
+    "from": "current smooth concrete; dark fir",
+    "to": "stronger board-form relief (bump on 100 to 150 mm boards), tie holes, faint staining and a slight sheen so grazing light picks them out; fir a stain lighter, with checks and end grain"
+   },
+   "expected": "Grazing light from c2 reveals the formwork pattern; the beams read as old fir",
+   "accept": {
+    "region": [
+     240,
+     0,
+     470,
+     40
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 34
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "camera",
+   "problem": "The 24 mm frame keeps the speaker small and central and cuts the chair off at the edge, a showroom look.",
+   "evidence": {
+    "region": [
+     0,
+     220,
+     200,
+     480
+    ],
+    "measured": "chair cropped at x 0 with no form; the speaker occupies about 17% of the frame width"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "[14.35, 2.75, 1.05], 24 mm",
+    "to": "about 0.6 m closer and seated eye height 1.1 m, 35 mm, with the chair's back as a deliberate soft foreground in the lower left third"
+   },
+   "expected": "The speaker fills about a quarter to a third of the frame width, and the room reads closer and cozier",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "There is no sign of life and no small highlights; the glasses are dark blocks.",
+   "evidence": {
+    "region": [
+     205,
+     405,
+     300,
+     460
+    ],
+    "measured": "the table region reads as dark shapes, with no speculars"
+   },
+   "change": {
+    "setting": "props",
+    "from": "two empty dark glasses",
+    "to": "a rocks glass with amber liquid and ice, a candle in an amber votive on the side table (candle 3 W, 1900 K), and a record out of its sleeve leaning on the table or the chair"
+   },
+   "expected": "A warm local pool and small bright highlights on the glass and vinyl",
+   "accept": {
+    "region": [
+     205,
+     400,
+     300,
+     460
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 120
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The frame has no real highlights or depth in the blacks; the tonal range is compressed.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame p1 7.7, p50 37.8, p99 109.1, clip 0%"
+   },
+   "change": {
+    "setting": "render view / look / haze",
+    "from": "AgX, look None, exposure -0.2, haze 0.02",
+    "to": "AgX, look Medium High Contrast, exposure -0.2 kept, haze 0.04 so the speaker lamps and record spots bloom slightly"
+   },
+   "expected": "Deeper shadows with detail and brighter practicals and speculars; the frame median stays at 30 to 45",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 120
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The smoked-red top panel on two thin rods reads as a floating sign; it would read better seated flush or more substantial.",
+   "why": "It is part of the speaker's fixed shape and parts."
+  },
+  {
+   "request": "Desaturate the record spines so the speaker is the only colour.",
+   "why": "The record wall is part of the fixed room design; only its light may change."
+  },
+  {
+   "request": "Replace the screen's ring-and-spike image with a clearer fogged-hand or silhouette motif.",
+   "why": "What the screens show is fixed; only their brightness and the frosting change (c3)."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

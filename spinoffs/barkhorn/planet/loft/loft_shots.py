@@ -71,11 +71,15 @@ VIEWS = {
                   # speaker lit harder (linked) with a rim from behind; a neutral warm grey (3000 K); darker; pools
                   'camera': {'position': [14.35, 2.75, 1.05], 'target': [16.3, 4.6, 1.35], 'lens_mm': 24, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, LP.PAIR['y'][1], 0.9]},
-                  'settings': {'spk_irr': 12.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 20.0, 'sconce_w': 20.0,
-                               'exposure': -0.2, 'wb': 3000, 'spot_records': 8.0, 'rec_cone': 18.0, 'rec_aim_z': 1.2,
-                               'fill_w': 25.0, 'fill_pos': [14.6, 3.2, 3.0], 'fill_target': [15.2, 3.4, 0.0],
-                               'record_glow': 0.12, 'console_lift': 0.55, 'chair_dye': '#2B2119', 'screen_lounge': 0.12,
-                               'flame': 60.0, 'candle_w': 3.0, 'haze': 0.02, 'spk_link': True}},
+                  # after the two critics on p7 (4.5, 4.5: flat, sourceless, no practical in frame): a Bell lamp on the
+                  # side table in frame and the candle brighter; the hidden fill out; the speaker's back light up; the
+                  # screen lower and warm; the records in pools
+                  'settings': {'spk_irr': 12.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 34.0, 'sconce_w': 20.0,
+                               'exposure': -0.2, 'wb': 3000, 'spot_records': 6.0, 'rec_cone': 12.0, 'rec_aim_z': 1.2,
+                               'record_glow': 0.25, 'console_lift': 0.55, 'chair_dye': '#2B2119', 'screen_lounge': 0.08,
+                               'screen_tint': '#FFA060', 'flame': 80.0, 'candle_w': 6.0, 'haze': 0.02, 'spk_link': True,
+                               'extra_bells': [[LP.LISTEN_TABLE[0] + 0.08, LP.LISTEN_TABLE[1] + 0.10, 0.495]],
+                               'bell_w': 18.0}},
     'street': {'title': 'the shopfront window at night, from the kerb',
                # after the two critics on p6 (4.5, 4.5): 35 mm from the kerb, the dancer's lightbox on the left edge and
                # the right-hand Ember speaker seen over the lounge chairs, clear of the bar; the name frosted glass again;

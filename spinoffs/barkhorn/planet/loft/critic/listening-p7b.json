@@ -1,0 +1,357 @@
+{
+ "stage1": {
+  "impression": "A tidy, low-key render that a reader would not take for a photograph. The hero speaker reads as a flat pink-red emissive box, more like a lit sign than tinted cast acrylic. The cool grey screen on the left is the largest bright surface and pulls the eye away from it. The room has no visible practicals or pools of light: the record wall, concrete and ceiling share one even, sourceless wash. At 1:1 the concrete is smooth with no formwork, tie holes or pour lines, the records repeat as uniform procedural spines, the leather chair has a plastic sheen, and the fir beam is lost in murk. Nothing in the frame says anyone has been here.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speaker must read as thick tinted cast acrylic, with depth, internal refraction, bright polished edges and clean reflections, not a uniform emissive red; speaker body [250,300,360,470] lum_median >= 55 while r/g stays below 3:1, so it does not go neon",
+  "At least two visible warm practicals in frame (a Bell lamp or candle with a visible bright core and a pool of light on the side table or floor), and the light should fall off between pools; the record wall profile along y should drop by 40% or more from its lit top to its unlit lower part, not stay flat",
+  "The screen [65,70,275,320] must sit below the speaker in brightness and match the room's warm white, not read as a cool grey projection",
+  "The board-formed concrete must show board grain, tie holes and pour lines at 1:1; the fir beam overhead must be legible with its checks",
+  "The record spines must vary (sleeve colours, widths, some records tilted or pulled out), with no visible repeats",
+  "Signs of life: a record out of its sleeve, glasses on the side table that catch highlights, a coat on the chair",
+  "Delivered resolution (2400 x 1600) with no denoiser smear on the acrylic and the shelves"
+ ],
+ "defects": [
+  {
+   "region": [
+    250,
+    230,
+    360,
+    470
+   ],
+   "what": "Speaker reads as a flat, saturated pink-red glow with little depth: the cabinet walls look like lit signage panels, and the top horn and lid read as a dull, murky red box (lum_median 22.9 in [250,230,360,295])"
+  },
+  {
+   "region": [
+    65,
+    70,
+    275,
+    320
+   ],
+   "what": "The frosted screen is a large, cool, near-neutral panel (RGB 46,41,43 against the warm walls' 50,38,29), the second-strongest attractor in the frame; it reads as a projection screen hung on the wall, not a panel set flush into a reveal"
+  },
+  {
+   "region": [
+    470,
+    0,
+    720,
+    370
+   ],
+   "what": "The record wall is lit by an even wash (y profile 50 to 44, almost flat), as bright as the speaker; the spines are uniform and repetitive, and the shelf lit edges are not visible"
+  },
+  {
+   "region": [
+    290,
+    0,
+    465,
+    230
+   ],
+   "what": "The concrete is smooth and flat in tone (lum_range 23.7): no board grain, tie holes or pour lines are visible"
+  },
+  {
+   "region": [
+    240,
+    0,
+    460,
+    40
+   ],
+   "what": "The fir beam at the top is barely legible: a dark smudge with no grain or checks"
+  },
+  {
+   "region": [
+    0,
+    220,
+    200,
+    480
+   ],
+   "what": "The leather chairs read as glossy plastic shells with a red cast picked up from the speaker; the region is dark (median 18) with no rim light defining the form"
+  },
+  {
+   "region": [
+    200,
+    400,
+    300,
+    450
+   ],
+   "what": "The side table and votives are dim, with no visible flame core or pool of light on the table top; the glasses catch no highlights"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "There is no visible light source anywhere in the frame (clip 0.0%, p99 109), so the room looks lit by ambient fill rather than by practicals"
+  },
+  {
+   "region": [
+    480,
+    370,
+    720,
+    480
+   ],
+   "what": "The credenza's walnut is flat and its grain smeared, a typical denoiser-smoothed CG wood"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speaker is under-lit and reads as emissive signage rather than lit cast acrylic, and it misses the hero threshold.",
+   "evidence": {
+    "region": [
+     250,
+     230,
+     360,
+     470
+    ],
+    "measured": "lum_median 29.9 (target >= 45); top section [250,230,360,295] lum_median 22.9; body r/g 81/31"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area, 2900 K; plus a small grazing key",
+    "from": "4 x area, 12.0 W/m2 at the target",
+    "to": "two of the four areas raised to 30 W/m2 and moved to rake from behind and above (backlight through the acrylic, so the edges glow and the horn's interior gets depth), the other two kept at 12 W/m2 for front fill; add one narrow 2700 K spot (cone 20 deg, about 15 W) from the ceiling grazing the speaker's top and lid, so the polished edges catch a line highlight"
+   },
+   "expected": "The speaker becomes the brightest, most saturated object, with visible edge glow on the top lid and the frame, and depth in the cabinet; median about 50 to 65",
+   "accept": {
+    "region": [
+     250,
+     230,
+     360,
+     470
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 48
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frosted screen is the second-brightest large surface and slightly cool, so it competes with the speaker and breaks the one-colour rule.",
+   "evidence": {
+    "region": [
+     65,
+     70,
+     275,
+     320
+    ],
+    "measured": "lum_median 42.5, RGB 46/41/43 (b > g) against the warm walls' 50/38/29"
+   },
+   "change": {
+    "setting": "the screens' images emission strength",
+    "from": "0.8",
+    "to": "0.4, with the screen content's white balanced to about 2900 K (or the panel's emission tinted warm) and the frosted acrylic's roughness raised so that it glows evenly"
+   },
+   "expected": "The screen sits as a soft, warm, secondary glow below the speaker; its blue channel no longer exceeds green",
+   "accept": {
+    "region": [
+     65,
+     70,
+     275,
+     320
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     34
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The record wall is an even wash with no falloff, as bright as the hero, which flattens the room and steals focus.",
+   "evidence": {
+    "region": [
+     470,
+     0,
+     720,
+     370
+    ],
+    "measured": "y profile 50.1 to 43.8 (13% drop); lum_median 45.5, about equal to the speaker body's 43.3"
+   },
+   "change": {
+    "setting": "the record wall 3 x spot and record-wall strip",
+    "from": "3 x spot 8.0 W, cone 18 deg; strip 0.12; plus an apparent ambient wash",
+    "to": "3 x spot 6 W, cone 12 deg, aimed at the shelf's middle rows so that each makes its own pool; strip 0.25 under each shelf, so that the lit edges read as lines; cut any global fill or the world light that lights the wall evenly"
+   },
+   "expected": "Pools of light on the records with dark gaps between them; the wall's median drops to about 30 to 38 and the speaker becomes the clear hero",
+   "accept": {
+    "region": [
+     470,
+     0,
+     720,
+     370
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     38
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "There is no visible practical in frame: the light has no source, which is the strongest CG tell for a night interior.",
+   "evidence": {
+    "region": [
+     200,
+     400,
+     300,
+     450
+    ],
+    "measured": "votives on the side table lum_p95 99.7, no clipped core; frame clip_pct 0.0, p99 109"
+   },
+   "change": {
+    "setting": "Bell (5 lamps, 22.0 W) and candles (9 x point, 3.0 W, 1900 K)",
+    "from": "no Bell in frame; votives dim",
+    "to": "place one Bell lamp on the side table at about [16.0, 4.3, 0.55] m at 22 W, and raise the candle points near the table to 6 W, so that a visible bright core and a warm pool on the table top and the chair's arm appear"
+   },
+   "expected": "One or two small bright cores (a few hundred pixels near clipping, allowed as lamps) and a warm pool on the table top and the chair leather",
+   "accept": {
+    "region": [
+     200,
+     400,
+     300,
+     450
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 180
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The board-formed concrete reads as smooth painted plaster at 1:1.",
+   "evidence": {
+    "region": [
+     290,
+     0,
+     465,
+     230
+    ],
+    "measured": "lum_range 23.7, no visible board lines or tie holes"
+   },
+   "change": {
+    "setting": "the concrete's finish (tone and sheen)",
+    "from": "smooth, low-contrast tone",
+    "to": "board-grain bump strength doubled, with 140 mm horizontal board lines and tie holes at 600 mm, a faint staining map at 15% of the albedo variation, and roughness 0.85; add a 2700 K grazing wall wash (about 10 W, cone 30 deg) from the ceiling along the back wall, so the texture shows"
+   },
+   "expected": "Board grain and tie holes are visible in the raking light, and the tone varies across the wall",
+   "accept": {
+    "region": [
+     290,
+     0,
+     465,
+     230
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The chairs and the lower left foreground sink into murk and read as glossy plastic.",
+   "evidence": {
+    "region": [
+     0,
+     220,
+     200,
+     480
+    ],
+    "measured": "lum_median 18.0, lum_p5 7.7"
+   },
+   "change": {
+    "setting": "the leather's finish (a small prop-material change), and the sconce (1 x point, 20.0 W, 2400 K)",
+    "from": "glossy, roughness low; sconce 20 W",
+    "to": "leather roughness 0.55 with a fine grain bump and an aged, worn-edge map; sconce 30 W so it rims the chair's back"
+   },
+   "expected": "The chair's form reads through a soft rim, its leather grain visible, and the region's median about 24 to 30",
+   "accept": {
+    "region": [
+     0,
+     220,
+     200,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     32
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The room is empty of life, and the record spines are uniform and repetitive.",
+   "evidence": {
+    "region": [
+     470,
+     0,
+     720,
+     370
+    ],
+    "measured": "seen at 2x: spines of equal width and similar colours, all upright, none pulled out"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses, menus and candles only, records uniform",
+    "to": "randomise the spine widths (2 to 6 mm) and the sleeve colours from a muted palette; tilt about 10% of the records and pull two out; lean a sleeve against the credenza and put a record out of its sleeve on it; a rocks glass with ice on the side table; a coat over the chair's arm"
+   },
+   "expected": "The record wall reads as a real collection and the room as one in use",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The proof is too small and denoiser-smoothed to judge the acrylic, the wood and the concrete at 1:1.",
+   "evidence": {
+    "region": [
+     480,
+     370,
+     720,
+     480
+    ],
+    "measured": "720 x 480 proof (scale 0.3); the walnut grain on the credenza is smeared; lum_range 33"
+   },
+   "change": {
+    "setting": "render",
+    "from": "scale 0.3, samples 256, adaptive 0.02, denoise true",
+    "to": "a full 2400 x 1600 frame at 512 samples, adaptive 0.01, with the denoiser fed albedo and normal passes (or denoise off with the clamp at 10), and a light film-grain pass in post"
+   },
+   "expected": "The wood grain, the concrete and the acrylic's edges hold at 1:1 with no smear",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Change the Ember's tint toward a deeper, less pink red so it reads as cast resin rather than a lit panel",
+   "why": "The speaker's colour is fixed; light and exposure (c1) are the permitted lever"
+  },
+  {
+   "request": "Set the screen flush into a concrete reveal rather than hung on the wall",
+   "why": "The room's design and its screens are fixed as proposed; if the design already has a reveal, it is not visible from this camera"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

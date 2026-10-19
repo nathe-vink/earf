@@ -76,6 +76,7 @@ def products(v):
              for i in BELL_TABLES]
     lamps += [{'flavour': BELL, 'position': [P.WINDOW_TABLE[0] - 0.12, P.WINDOW_TABLE[1] + 0.10, T['h']], 'rotate_z': 0.0}]
     lamps += [{'flavour': BELL, 'position': [x, y, SIDE_H], 'rotate_z': 0.0} for x, y in P.SIDE_TABLES[1:]]
+    lamps += [{'flavour': BELL, 'position': list(b), 'rotate_z': 0.0} for b in v.get('extra_bells', [])]   # a lamp in frame
     tt = [{'flavour': 'smoke', 'position': [round(P.L - 0.30, 4), round(P.W / 2 - 0.30, 4), P.CONSOLE['h']], 'rotate_z': -90.0}]
     return [{'def': CLOUD, 'flavour': spk[0]['flavour'], 'instances': spk},
             {'def': LAMP, 'flavour': BELL, 'instances': lamps},
@@ -144,6 +145,8 @@ def lights(v):
     bell(P.WINDOW_TABLE[0] - 0.12, P.WINDOW_TABLE[1] + 0.10, T['h'], v['bell_w'], 'bellW-')
     for i, (x, y) in enumerate(P.SIDE_TABLES[1:]):
         bell(x, y, SIDE_H, v['bell_w'], f'bellS{i}-')
+    for i, (x, y, z) in enumerate(v.get('extra_bells', [])):
+        bell(x, y, z, v['bell_w'], f'bellX{i}-')
     if v.get('fill_w', 0) > 0:                                        # a dim warm fill, a ceiling bounce, where asked
         L['fill'] = {'type': 'area', 'position': v['fill_pos'], 'target': v['fill_target'], 'size_m': [1.6, 1.6],
                      'power_w': v['fill_w'], 'color': 2700, 'camera': False}
