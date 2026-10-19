@@ -198,3 +198,23 @@ On A's rig: the camera at 1.0 m, a fern over the near front corner, three small 
 | d2-p1, run 2 | stands | smoke, from the fire | none |
 
 **Duel at 720 px (both scaled down, order swapped across two judges): A won, 6.0 to 4.75** (5.0 v 6.5, 4.5 v 5.5). The gate is within 0.5, so this fails. Both judges read the glowing ember pile as "a forest fire next to a loudspeaker" that pulls the eye. That glow is the visible source the owner asked for. They also called the fern sparse and dropped in, the speaker too high in the frame with empty ground in front, and the cabinet softer. Part of the softness is 256 against 512 samples. One judge credited D2 for its grounding and its stronger, more atmospheric shafts. See `critic-smoke/d2-duel-vs-A-newdrivers.json`.
+
+## Round D3 (the coordinator's last pass: no glow, a natural clump, A's framing, a fair duel)
+
+Tests at 64 samples:
+- **t1:** the embers off. The dark column alone read as a figure.
+- **t2 and t3:** the source moved off frame right, plus a wispy drift across the far shafts. A read test said "no smoke: haze or light fog, no visible source".
+- **t4 and t5:** an unlit pile in the bright gap, then nearer in a sunlit patch. Each read as a dark lump or a log heap, and the smoke didn't show.
+
+Without a visible, faintly glowing source, this set's smoke reads as fog.
+
+The proof, d3-p0 (k6, 960 px, 512 samples), goes back to D2's column with the embers at 6 instead of 60, keeps the fern at the near-left corner, and uses A's framing (shift_y 0).
+
+| d3-p0 | Stands? | Smoke? | Figure? |
+|---|---|---|---|
+| run 1 | stands | smoke, from the orange glow | "could faintly suggest a standing figure" |
+| run 2 | stands | smoke, from the ember patch | "could be mistaken for a vague figure at a glance" |
+
+**Duel at 720 px, order swapped: A won, 5.65 to 4.25** (4.5 v 5.8, 4.0 v 5.5). This fails the gate. Both judges still call even a small orange glow "a forest fire", and both say the fern hides the base's lower-left corner. They credit D3 with stronger shafts and more depth, and with the ferns giving it a sense of place.
+
+This stops here, as the coordinator set: the best proofs go to the owner beside A. See `critic-smoke/d3-duel-vs-A-newdrivers.json`.
