@@ -269,7 +269,7 @@ def amanita(bpy, name, p, kit):
     for bm in bms.values():
         for v in bm.verts:
             t = max(0.0, min(1.5, v.co.z / top)); v.co.x += lx * t * t; v.co.y += ly * t * t
-    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False))
+    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0))
     obs = []
     for k, bm in bms.items():
         if len(bm.verts):
@@ -279,7 +279,7 @@ def amanita(bpy, name, p, kit):
     return obs
 
 
-def _amanita_mats(bpy, name, sp, R, Hs, orange=False):
+def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0):
     key = (sp,)
     out = {}
     # the cap: viscid (a wet, thin coat), red with orange toward the margin and blotchy, a little light through it
@@ -304,6 +304,9 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False):
         # olive-green to yellowish at the margin, with dark radial fibrils
         col = _ramp(nt, mix.outputs['Value'], [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'), (1.2, '#A3A06A')])
         b.inputs['Subsurface Weight'].default_value = 0.08
+    if dull:                                              # weathered: the red toward a brown, as an old cap goes
+        dm = nt.nodes.new('ShaderNodeMix'); dm.data_type = 'RGBA'; dm.inputs['Factor'].default_value = dull
+        nt.links.new(col, dm.inputs['A']); dm.inputs['B'].default_value = (*_hex('#4A2414'), 1); col = dm.outputs['Result']
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)
     b.inputs['Roughness'].default_value = 0.55
@@ -325,7 +328,8 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False):
     # warts: cream, dirty, crumbly
     m, nt, b = _node_mat(bpy, f'{name}-wartmat')
     nz = _noise(nt, 1.0 / (R * 0.03), 5.0)
-    nt.links.new(_ramp(nt, nz.outputs['Fac'], [(0.3, '#CFC09A'), (0.6, '#E4DABA'), (0.8, '#A89668')]), b.inputs['Base Color'])
+    nt.links.new(_ramp(nt, nz.outputs['Fac'], [(0.3, '#CFC09A'), (0.6, '#E4DABA'), (0.8, '#A89668')] if not dull
+                       else [(0.3, '#A89A78'), (0.6, '#BDB090'), (0.8, '#857452')]), b.inputs['Base Color'])
     b.inputs['Roughness'].default_value = 0.85; b.inputs['Subsurface Weight'].default_value = 0.1
     _bump(nt, b, nz.outputs['Fac'], 0.6, R * 0.003)
     out['warts'] = m
@@ -607,7 +611,8 @@ def _petal_mat(bpy, name, col, throat='#F2DCEB', spots='#5A1438'):
 
 def foxglove(bpy, name, p, kit):
     """A foxglove spire `height` tall: a stem bending by `lean`, `bells` tubular bells hung on one side down its upper
-    part (largest lowest), buds at the tip, a rosette of leaves at its foot."""
+    part (largest lowest), buds at the tip, a rosette of leaves at its foot. `droop` 0-1 hangs the bells' mouths down
+    (unset: out and down at 45 deg), `crowd` above 1 packs them toward the bottom, `pedicel` the stalk each hangs on (m)."""
     rnd = random.Random(p.get('seed', 3))
     H = p.get('height', 1.2); lx, ly = p.get('lean', [0.03, 0.0]); side = math.radians(p.get('side', -90))
     stem, bells, inner, buds, leaves = bmesh.new(), bmesh.new(), bmesh.new(), bmesh.new(), bmesh.new()
@@ -616,13 +621,14 @@ def foxglove(bpy, name, p, kit):
     kit._tube(stem, [tuple(axis(t)) for t in (0.0, 0.3, 0.6, 0.85, 1.0)], [H * 0.008, H * 0.0065, H * 0.005, H * 0.0035, H * 0.002], 1.0, 0.0, 10, 8)
     n = p.get('bells', 22); br = p.get('bell', 0.017)
     for i in range(n):
-        t = 0.42 + 0.48 * i / (n - 1)
+        t = 0.42 + 0.48 * (i / (n - 1)) ** p.get('crowd', 1.0)
         size = br * (1.0 - 0.5 * (i / n) ** 1.3)
         a = side + rnd.uniform(-0.8, 0.8)
         out = Vector((math.cos(a), math.sin(a), 0.0))
         L = size * 2.8
-        d = (out * 0.75 + Vector((0, 0, -0.65))).normalized()   # the mouth out and down
-        base = axis(t) + out * H * 0.004
+        dr = p.get('droop')
+        d = (out * 0.75 + Vector((0, 0, -0.65))).normalized() if dr is None else (out * (1 - dr) + Vector((0, 0, -dr))).normalized()
+        base = axis(t) + out * p.get('pedicel', H * 0.004)
         m = Matrix.Translation(base) @ (-d).to_track_quat('Z', 'Y').to_matrix().to_4x4()
         # a bell along local -z from its base at the stem (z 0) to its mouth (z -L): tubular, flared at the lip
         prof = [(0.0, 0.0), (size * 0.32, -L * 0.05), (size * 0.55, -L * 0.3), (size * 0.72, -L * 0.7), (size * 0.95, -L * 0.95),
