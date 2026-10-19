@@ -1,27 +1,27 @@
 {
- "title": "Planet EARF, the shopfront at night, from across the street (round 34)",
+ "title": "Planet EARF, the shopfront window at night, from the kerb (round 34)",
  "size": [
   2400,
   1600
  ],
  "camera": {
   "position": [
-   -9.0,
-   3.0,
-   1.6
+   -5.5,
+   3.5,
+   1.5
   ],
   "target": [
    0.0,
-   3.2,
-   2.9
+   3.6,
+   1.55
   ],
-  "lens_mm": 35,
+  "lens_mm": 50,
   "level": true,
   "fstop": 5.6,
   "focus": [
-   2.0,
-   3.0,
-   1.5
+   -0.09,
+   3.6,
+   1.6
   ]
  },
  "products": [
@@ -156,7 +156,7 @@
     "fn": "room",
     "shelf_glow": 1.0,
     "shade_glow": 0.4,
-    "pendant_glow": 0.4,
+    "pendant_glow": 0.3,
     "flame": 25.0,
     "record_glow": 1.0,
     "vu": 2.0,
@@ -168,6 +168,7 @@
     "rug_tint": "#4A4541",
     "rug_mix": 0.7,
     "rug_value": 0.9,
+    "glass_gloss": 2.0,
     "siding": "#8E9384",
     "neighbour_plain": true,
     "niche_glow": 0.6,
@@ -179,7 +180,7 @@
     "screen_window": 0.24,
     "inlay_glow": 0.6,
     "pendant_lamp": 2.5,
-    "etch_glow": 0.25
+    "etch_glow": 0.1
    },
    {
     "kind": "kit",
@@ -455,7 +456,7 @@
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
@@ -467,11 +468,19 @@
      0,
      0,
      -93.0
-    ]
+    ],
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#4A3A32",
+    "mix": 1.0
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
@@ -483,11 +492,19 @@
      0,
      0,
      -88.0
-    ]
+    ],
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#4A3A32",
+    "mix": 1.0
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
@@ -499,11 +516,19 @@
      0,
      0,
      -77.0
-    ]
+    ],
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#4A3A32",
+    "mix": 1.0
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
@@ -515,11 +540,19 @@
      0,
      0,
      -87.0
-    ]
+    ],
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#4A3A32",
+    "mix": 1.0
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
@@ -531,11 +564,19 @@
      0,
      0,
      -104.0
-    ]
+    ],
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#4A3A32",
+    "mix": 1.0
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
@@ -547,11 +588,19 @@
      0,
      0,
      -27.0
-    ]
+    ],
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#4A3A32",
+    "mix": 1.0
    },
    {
     "kind": "kit",
-    "shape": "asset",
+    "shape": "ext",
     "model": "mid_century_lounge_chair",
     "res": "1k",
     "position": [
@@ -563,7 +612,15 @@
      0,
      0,
      -147.0
-    ]
+    ],
+    "path": "spinoffs/barkhorn/room31/pieces.py",
+    "fn": "recolour",
+    "match": [
+     "mid_century"
+    ],
+    "blend": "MULTIPLY",
+    "color": "#4A3A32",
+    "mix": 1.0
    },
    {
     "kind": "kit",
@@ -623,9 +680,29 @@
     0.35,
     0.35
    ],
-   "irradiance": 10.0,
+   "irradiance": 18.0,
    "color": 2700,
-   "spread_deg": 180
+   "spread_deg": 90.0
+  },
+  "spkb0": {
+   "type": "area",
+   "position": [
+    16.593,
+    0.924,
+    0.35
+   ],
+   "target": [
+    16.15,
+    1.25,
+    0.65
+   ],
+   "size_m": [
+    0.3,
+    0.3
+   ],
+   "irradiance": 36.0,
+   "color": 2700,
+   "camera": false
   },
   "spk1": {
    "type": "area",
@@ -643,9 +720,29 @@
     0.35,
     0.35
    ],
-   "irradiance": 10.0,
+   "irradiance": 18.0,
    "color": 2700,
-   "spread_deg": 180
+   "spread_deg": 90.0
+  },
+  "spkb1": {
+   "type": "area",
+   "position": [
+    16.593,
+    5.176,
+    0.35
+   ],
+   "target": [
+    16.15,
+    4.85,
+    0.65
+   ],
+   "size_m": [
+    0.3,
+    0.3
+   ],
+   "irradiance": 36.0,
+   "color": 2700,
+   "camera": false
   },
   "niche2": {
    "type": "spot",
@@ -1126,22 +1223,22 @@
    "position": [
     -3.16,
     -6.0,
-    6.0
+    5.0
    ],
-   "power_w": 260.0,
+   "power_w": 75.0,
    "radius_m": 0.15,
-   "color": 3400
+   "color": 3000
   },
   "street1": {
    "type": "point",
    "position": [
     -3.16,
     15.1,
-    6.0
+    5.0
    ],
-   "power_w": 260.0,
+   "power_w": 75.0,
    "radius_m": 0.15,
-   "color": 3400
+   "color": 3000
   },
   "street-cam": {
    "type": "point",
@@ -1150,9 +1247,9 @@
     2.0,
     4.0
    ],
-   "power_w": 200.0,
+   "power_w": 60.0,
    "radius_m": 0.15,
-   "color": 3400
+   "color": 3000
   },
   "entry": {
    "type": "spot",
@@ -1182,7 +1279,7 @@
    6.05,
    3.32
   ],
-  "density": 0.035,
+  "density": 0.045,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1194,8 +1291,8 @@
   "bounces": 10,
   "view": "AgX",
   "look": "None",
-  "exposure": 2.1,
-  "white_balance_k": 3300,
+  "exposure": 1.7,
+  "white_balance_k": 3700,
   "white_balance_tint": 0.0
  }
 }

@@ -47,18 +47,17 @@ def room_piece(v):
 S.room_piece = room_piece
 
 VIEWS = {
-    'bar': {'title': 'the bar from a stool, close',
-            # the den's close corner (the lead's): from a stool at 65 mm, one of the Fog pair in its niche, a frosted
-            # pendant over the counter, a glass near
-            # (the lead) wider, the frame shifted up so a fir beam and the steel cornice read over the niche
-            # after bar-r2 (4.0): a step closer and higher on 35 mm, the niche's speaker larger, a beam still in
-            'camera': {'position': [7.6, 3.3, 1.55], 'target': [9.06, 5.9, 1.75], 'lens_mm': 35, 'level': True,
-                       'fstop': 4.0, 'focus': [LP.NICHES[1][0] + LP.NICHES[1][1] / 2, LP.BACKBAR_Y + 0.05, 1.3]},
-            # after bar-r1 (4.5): the shelf edges warm and lower (kit), the niche softer and graded, its spots grazing;
-            # the pendants pooling on the fir; brighter; haze; the near glass in focus at f/4
-            'settings': {'exposure': 1.45, 'niche_glow': 0.12, 'spot_niche': 220.0, 'niche_cone': 20.0, 'niche_dy': 0.32,
-                         'niche_aim_z': 1.2, 'niche_fill': 6.0, 'pendant_w': 180.0, 'pendant_cone': 24.0, 'haze': 0.02,
-                         'concrete_tint': '#A0998F', 'concrete_mix': 0.3}},
+    'bar': {'title': 'the bar, down the room',
+            # concept changed after three passes at 4.0 to 4.5 on the close corner (bar-r1 to r3; two critics: a Fog-only
+            # frame cannot carry the room's one colour): from the window table down the room's length, the bar and the
+            # back-bar on the left, the banquette's frosted screens on the right, the pendants, and an Ember speaker
+            # glowing at the far end through the smoked partition
+            'camera': {'position': [1.6, 2.6, 1.40], 'target': [17.0, 3.3, 1.30], 'lens_mm': 28, 'level': True,
+                       'fstop': 5.6, 'focus': [7.0, 3.3, 1.2]},
+            'settings': {'exposure': 1.0, 'shelf_glow': 0.35, 'niche_glow': 0.12, 'spot_niche': 160.0,
+                         'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 120.0,
+                         'pendant_cone': 30.0, 'pendant_glow': 0.15, 'haze': 0.02, 'screen_glow': 0.5,
+                         'spk_irr': 18.0, 'spk_back': 36.0, 'spk_spread': 90.0, 'chair_dye': '#4A3A32'}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (5.5): 28 mm from a little back and higher, the beams in, the speaker on the left third
                   # (p2: from 14.3, 1.8 a lounge chair filled the foreground) clear of the chairs
@@ -72,20 +71,20 @@ VIEWS = {
                                'exposure': -1.5, 'wb': 3800, 'spot_records': 8.0, 'rec_cone': 25.0, 'rec_aim_z': 1.2,
                                'record_glow': 0.4, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.3,
                                'flame': 60.0, 'candle_w': 1.5, 'haze': 0.02}},
-    'street': {'title': 'the shopfront at night, from across the street',
-               # after street-r2 (4.5): from the far curb, level and shifted up so the Edwardian bay is in, the right
-               # Ember speaker in clear glass beside the name; 1.2 stops brighter, the street lamps up and one low
-               # behind the camera grazing the pavement and riser; the lightbox, the name, the pendants and the Ember
-               # lamp scaled back for the exposure; more haze; focused 2 m inside
-               'camera': {'position': [-9.0, 3.0, 1.6], 'target': [0.0, 3.2, 2.9], 'lens_mm': 35, 'level': True,
-                          'fstop': 5.6, 'focus': [2.0, 3.0, 1.5]},
-               'settings': {'exposure': 2.1, 'wb': 3300, 'wet': True, 'road_rough': 0.12, 'street_lamp': 260.0,
-                            'lamp_k': 3400, 'lamp_z': 6.0, 'lamp_dx': 0.0, 'lamp_cam': 200.0, 'lamp_cam_z': 4.0,
+    'street': {'title': 'the shopfront window at night, from the kerb',
+               # concept changed after three passes at 3.5 to 4.5 on the whole facade (street-r1 to r3): the lead's
+               # fallback, tight on the lit window from the kerb at 50 mm: the dancer's lightbox, the frosted name, the
+               # glass and its reflections, and through a clear pane the right-hand Ember speaker, the frame's one colour
+               'camera': {'position': [-5.5, 3.5, 1.5], 'target': [0.0, 3.6, 1.55], 'lens_mm': 50, 'level': True,
+                          'fstop': 5.6, 'focus': [-0.09, 3.6, 1.6]},
+               'settings': {'exposure': 1.7, 'wb': 3700, 'wet': True, 'road_rough': 0.12, 'street_lamp': 75.0,
+                            'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 60.0, 'lamp_cam_z': 4.0,
                             'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 15.0, 'entry_cone': 100.0,
-                            'transom_glow': 0.15, 'spk_irr': 10.0, 'pendant_w': 90.0, 'pendant_glow': 0.4,
-                            'inlay_glow': 0.6, 'haze': 0.035, 'siding': '#8E9384', 'sky': 0.03,
-                            'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550', 'flat_glow': 0.06,
-                            'across_glow': 0.05, 'linen_trans': 0.5, 'etch_glow': 0.25, 'screen_window': 0.24}},
+                            'transom_glow': 0.15, 'spk_irr': 18.0, 'spk_back': 36.0, 'spk_spread': 90.0,
+                            'pendant_w': 90.0, 'pendant_glow': 0.3, 'inlay_glow': 0.6, 'haze': 0.045,
+                            'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
+                            'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5, 'etch_glow': 0.10,
+                            'screen_window': 0.24, 'glass_gloss': 2.0, 'chair_dye': '#4A3A32'}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot

@@ -10,14 +10,15 @@ sys.path.insert(0, HERE)
 import loft_shots as S                                               # noqa: E402
 
 FOR = {
-    'bar': 'the bar from a stool, close: one of the Fog pair (water-clear acrylic over white batts) standing in a '
-           'steel-lined niche in the back-bar, clear acrylic shelves of bottles either side, a frosted acrylic pendant '
-           'over the fir counter, a glass near.',
+    'bar': 'the bar, down the room from the window table: the fir-topped concrete bar and the steel back-bar with its '
+           'clear acrylic shelves on the left, the banquette and its two frosted screens (pressed hands, a shell in fog) '
+           'on the right, frosted acrylic pendants under fir beams, and at the far end, through a smoked acrylic '
+           'partition, one of the Ember pair glowing in the listening room.',
     'listening': 'the listening room at the back: one of the Ember pair beside the record wall, board-formed concrete '
                  'behind it, fir beams overhead, leather chairs turned toward it.',
-    'street': 'the shopfront at night from across the street: a blackened-steel shopfront in an ordinary San Francisco '
-              'building with an Edwardian bay above, the room glowing behind the glass, and in the window a frosted '
-              'acrylic lightbox showing the fogged silhouette of a woman dancing.',
+    'street': 'the shopfront window at night, from the kerb: the blackened-steel shopfront, the name frosted into the glass, '
+              'a frosted acrylic lightbox showing the fogged silhouette of a woman dancing, the warm room behind the glass '
+              'and, through a clear pane, one of the Ember pair glowing at the far end.',
 }
 
 CONTEXT = """**The project:** a design mockup of Planet EARF, a proposed listening bar in San Francisco: a narrow, deep

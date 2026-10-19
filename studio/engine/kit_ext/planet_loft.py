@@ -304,8 +304,9 @@ def _bottles(bpy, p, objs, runs):
     bodies = R._bottle_meshes(bpy)
     glass = {}
     spirits = ['#B5651D', '#C87A2A', '#8E4A1A', '#D49A3A', '#7A3A14', '#E8E4D8', '#5A2A12', '#A0521C', '#EEF0EC']
-    labels = [R.label_mat(bpy, f'label-loft-{i}', c, rnd) for i, c in
-              enumerate(['#EFE8DA', '#D9C9A6', '#E6DCC8', '#2A2420', '#E9E3D3', '#1F2A24', '#C8A15A', '#F4F1EA', '#3A3633'])]
+    labels = [R.label_mat(bpy, f'label-loft-{i}', c, rnd) for i, c in        # mostly dark and kraft (bar-r3 c2)
+              enumerate(['#2A2420', '#1F2A24', '#3A3633', '#B89A6E', '#8A6A44', '#141414', '#4A2E22', '#D9C9A6',
+                         '#2E3440', '#6E5A3E', '#1A1A1A', '#C8B48E', '#3E2A1E', '#5A5248', '#E6DCC8', '#24201C'])]
     caps = [principled(bpy, 'cap-black', '#151413', rough=0.4), principled(bpy, 'cap-gold', '#B08A4E', rough=0.3, metal=1.0),
             principled(bpy, 'cap-wood', '#6A4A30', rough=0.6)]
     levels = [P.BASE_H + 0.05] + P.SHELVES_Z

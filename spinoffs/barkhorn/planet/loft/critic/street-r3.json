@@ -1,0 +1,396 @@
+{
+ "stage1": {
+  "impression": "A dead-frontal, evenly lit elevation of a shopfront, with flat grey stucco, clean CG roller shutters and an upper bay lit as brightly as the bar, so it reads as dusk or an overcast day rather than night. The room behind the glass is warm but soft and mostly hidden behind the fluted lower panel. The frosted lightbox with the dancer is the one strong idea, but the pale blue EARF letters read as vinyl signage and no tinted speaker is visible, so the frame has no hero colour. It looks like an architectural visualisation elevation, not a magazine night photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Night hierarchy: the shopfront glow must be clearly the brightest thing, with the upper facade and neighbours falling to deep but detailed shadow (upper facade lum_median about 20 to 35, against a lit window of about 70 to 100)",
+  "Frame lum_median inside 22 to 50 (now 66.9)",
+  "One saturated colour: an Ember speaker or its red light must be legible through the glass (now none in frame)",
+  "The glass must behave like glass at night: faint reflections of the street lamps and of the opposite street, and a slight sheen, rather than perfectly transparent panes",
+  "The upper building and neighbours need real-world weathering (grime under sills, paint sheen variation, stains, cables or a downpipe) instead of clean CG surfaces and banded shutters",
+  "A believable photographer's viewpoint with a little street (kerb, wet or worn pavement, a pool of lamp light) and some sign of life in the window",
+  "Full-resolution render without denoiser softness inside the room"
+ ],
+ "defects": [
+  {
+   "region": [
+    110,
+    0,
+    640,
+    155
+   ],
+   "what": "The upper bay and siding are lit flat and as bright as the shop interior (median 95.3 vs 97.3), so it reads as day or dusk, not night"
+  },
+  {
+   "region": [
+    170,
+    10,
+    360,
+    120
+   ],
+   "what": "The roller shutters are clean CG slats with soft blotchy shading and regular banding, with no grime or wear"
+  },
+  {
+   "region": [
+    105,
+    150,
+    645,
+    185
+   ],
+   "what": "The bay's base and cornice are a smooth untextured grey extrusion, with no paint wear or dirt line"
+  },
+  {
+   "region": [
+    268,
+    312,
+    350,
+    338
+   ],
+   "what": "The frosted EARF letters are the brightest object outside the lamp (median 194), cold blue (R188 G195 B201) against a warm room, and read as applied vinyl signage"
+  },
+  {
+   "region": [
+    165,
+    278,
+    262,
+    362
+   ],
+   "what": "The lightbox is a neutral grey-white (R130 G127 B130) with no warmth and no visible thickness or edge glow; it reads as a flat printed panel"
+  },
+  {
+   "region": [
+    155,
+    365,
+    470,
+    420
+   ],
+   "what": "The fluted lower panel blocks most of the room; the clear panes show the room only as a soft, featureless warm blur"
+  },
+  {
+   "region": [
+    155,
+    270,
+    470,
+    420
+   ],
+   "what": "The glass carries no reflections of the street lamps or the street behind the camera"
+  },
+  {
+   "region": [
+    390,
+    265,
+    420,
+    285
+   ],
+   "what": "The pendant lamp clips (6.7 % of a small patch), acceptable as a practical but hard-edged"
+  },
+  {
+   "region": [
+    0,
+    0,
+    55,
+    125
+   ],
+   "what": "The neighbour's upper window is a pure black void (crush 16.7 % in the left strip), with no glass, curtain or reflection"
+  },
+  {
+   "region": [
+    0,
+    260,
+    75,
+    420
+   ],
+   "what": "The neighbour's left shutter repeats the same CG slat texture"
+  },
+  {
+   "region": [
+    600,
+    0,
+    720,
+    465
+   ],
+   "what": "The right neighbour is a blank, evenly lit stucco plane with no detail"
+  },
+  {
+   "region": [
+    0,
+    465,
+    720,
+    480
+   ],
+   "what": "There is almost no pavement: a 15 px strip, so the building floats with no street"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "A perfectly frontal, level elevation with an even flat light reads as an architectural drawing render, not a photograph; no colour anywhere but the warm interior"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The street lamps flood the whole facade evenly, so the upper building is as bright as the lit room and the frame reads as day or dusk.",
+   "evidence": {
+    "region": [
+     110,
+     0,
+     640,
+     155
+    ],
+    "measured": "upper facade lum_median 95.3; window interior lum_median 97.3; vertical profile bins 95, 95, 83, 39, 46, 80, 69, 25"
+   },
+   "change": {
+    "setting": "street lamps 3 x point",
+    "from": "260.0 W, 3400 K, lighting the facade evenly",
+    "to": "one or two lamps at 60 to 90 W, 3000 K, placed at kerb height off to one side so they make a pool on the pavement and a falloff up the facade, with the third removed"
+   },
+   "expected": "The upper facade drops to deep, warm-grey shadow with its detail just held; the shopfront becomes the brightest thing in the frame",
+   "accept": {
+    "region": [
+     110,
+     0,
+     640,
+     155
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     18,
+     38
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The frame is overexposed for a night street.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 66.9 (target 22 to 50)"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "2.1",
+    "to": "1.6 to 1.8 after c1, set so the room's clear panes keep a median of about 70 to 90"
+   },
+   "expected": "A frame median of about 35 to 45, with the window glow holding and the facade in shadow",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     48
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "No EARF speaker is visible, so the frame has no hero and no saturated colour, and the dead-frontal elevation reads as a drawing.",
+   "evidence": {
+    "region": [
+     265,
+     280,
+     470,
+     365
+    ],
+    "measured": "the clear panes show only a warm blur (R121 G91 B69); no red anywhere in the frame"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [-9.0, 3.0, 1.6], target [0.0, 3.2, 2.9], 35 mm, frontal",
+    "to": "position about [-8.0, 1.0, 1.55], 3 to 4 m to the right of centre, turned so the sightline through the right-hand clear pane (or the open door) lands on an Ember speaker and its lamps in the listening room; 40 mm; verticals kept true with shift, not tilt; bring in 1 to 1.5 m of pavement and kerb at the bottom and crop the bay to its lower half"
+   },
+   "expected": "A slight three-quarter view with depth in the reveals and the steel frame, a red Ember glow readable through the glass as the one saturated note, and the street grounding the building",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The frosted EARF name is the brightest and coldest object on the shopfront and reads as vinyl signage.",
+   "evidence": {
+    "region": [
+     268,
+     312,
+     350,
+     338
+    ],
+    "measured": "lum_median 194, R188 G195 B201 (blue-shifted) against the room's R121 G91 B69"
+   },
+   "change": {
+    "setting": "the window's frosted name emission; render.white_balance_k",
+    "from": "0.25; 3300 K",
+    "to": "0.08 to 0.12 so it is lit mostly from the room behind; 3600 to 3800 K so the neutrals stop going blue"
+   },
+   "expected": "The letters read as etched frost catching the room's warm light, a little brighter than the glass behind them, not white",
+   "accept": {
+    "region": [
+     268,
+     312,
+     350,
+     338
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     95,
+     145
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The lightbox is a flat, cold grey-white panel that reads as a print rather than thick frosted acrylic glowing from behind.",
+   "evidence": {
+    "region": [
+     165,
+     278,
+     262,
+     362
+    ],
+    "measured": "lum_median 127.9, R130 G127 B130 (neutral to violet), range 102; edge step 1 px with no glow at its border"
+   },
+   "change": {
+    "setting": "the screens' images emission; frosted acrylic roughness",
+    "from": "0.8; current roughness",
+    "to": "0.55 to 0.6, and make the frosted face slightly less rough so the image's soft gradient shows; let the polished edge of the panel catch light (a 1 to 2 px bright rim)"
+   },
+   "expected": "The panel glows a little less than the letters did, with an even soft falloff and a visible lit edge, like thick acrylic in a reveal",
+   "accept": {
+    "region": [
+     165,
+     278,
+     262,
+     362
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     85,
+     115
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The shopfront glass is perfectly transparent, which no glass is at night from across a lit street.",
+   "evidence": {
+    "region": [
+     155,
+     270,
+     470,
+     420
+    ],
+    "measured": "no reflected highlights; the clear panes' p95 of 196 comes from the interior only"
+   },
+   "change": {
+    "setting": "the shopfront glass finish",
+    "from": "clean, non-reflective",
+    "to": "real glass (IOR 1.5) with faint reflections of the street lamps and the opposite facade, plus a very slight smudge or dust roughness map at 2 to 5 % strength"
+   },
+   "expected": "One or two soft lamp reflections and ghosted street shapes across the panes, which sell the glass as a real surface",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The upper building and its neighbours are smooth CG surfaces with no weathering.",
+   "evidence": {
+    "region": [
+     105,
+     150,
+     645,
+     185
+    ],
+    "measured": "the cornice and bay base are a near-uniform grey (range 121 only because of the shadow line), with no texture at 2x"
+   },
+   "change": {
+    "setting": "the finish of the facade and neighbours",
+    "from": "clean paint and stucco, CG slat shutters",
+    "to": "old repainted siding with sheen variation, a dirt line under the sills and the cornice, a downpipe, a few cables and a meter box; a curtain or a dim lamp in the neighbour's black window"
+   },
+   "expected": "The building reads as an ordinary weathered San Francisco storefront; the black void at the top left gets detail",
+   "accept": {
+    "region": [
+     0,
+     0,
+     110,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 8
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "There is no sign of life in the window, and the clear panes show a blur.",
+   "evidence": {
+    "region": [
+     265,
+     280,
+     470,
+     365
+    ],
+    "measured": "lum_range 150, but no recognisable objects at 3x"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props deep in the room only",
+    "to": "a lit candle in an amber votive, two rocks glasses and a folded menu on the sill or counter just inside the clear panes, and a coat on a hook by the door; haze 0.035 up to 0.05 so the pendant beams read through the glass"
+   },
+   "expected": "Small warm highlights and recognisable objects in the near plane of the window; the frame reads as a bar open tonight",
+   "accept": {
+    "region": [
+     265,
+     280,
+     470,
+     365
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 180
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Lower or open the fluted panel across the bottom of the shopfront glass so more of the room shows",
+   "why": "It is part of the shopfront's design, which the card fixes"
+  },
+  {
+   "request": "Put an Ember speaker (or the Fog pair) in the window itself so the hero is visible from the street",
+   "why": "The room's layout is fixed; only the camera can bring a speaker into view (c3)"
+  }
+ ],
+ "score_if_fixed": 6.5
+}
