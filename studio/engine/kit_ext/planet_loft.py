@@ -482,8 +482,10 @@ def table_lamps(bpy, kit, p, objs):
         _lathe(shade.bm, [(r0, 0.0), (r1, 0.0), (r1, h), (r0, h)], seg=48, z0=z0, cx=x, cy=y)
         _cyl(bulb.bm, x, y, z + T['bulb_z'] - 0.02, 0.018, 0.04, seg=16)
     objs.append(base.object(bpy, steel(bpy), smooth=True))
-    objs.append(shade.object(bpy, acrylic(bpy, 'frosted', 'table-lamp-frosted', glow=p.get('tlamp_glow', 0.35),
-                                          glow_col='#FFB46A'), smooth=True))
+    sh = shade.object(bpy, acrylic(bpy, 'frosted', 'table-lamp-frosted', glow=p.get('tlamp_glow', 0.35),
+                                   glow_col='#FFB46A'), smooth=True)
+    sh.visible_shadow = False   # frosted glass passes most of the bulb's light; as rough transmission it blocked it all
+    objs.append(sh)             # but caustics, and the review street frame fell from a median of 30 to 6
     lamp = bulb.object(bpy, emitter(bpy, 'table-lamp-bulb', '#FFB060', p.get('tlamp_bulb', 2.0)), smooth=True)
     lamp.visible_camera = False                    # as the pendants': the bulb lights the drum, never seen as a shape
     objs.append(lamp)
