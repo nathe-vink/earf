@@ -51,16 +51,18 @@ def concrete(bpy, p, name='concrete-wall'):
 
 
 def floor_mat(bpy, p):
-    """Polished concrete: a trowelled scan under a sealer whose sheen is worn unevenly."""
+    """Honed concrete (the lead, 2026-10-19, after every critic named the floor's blotches): the trowelled scan's stains
+    blended well down toward one warm grey, under a soft sealer whose sheen is worn unevenly (no mirror polish, so no
+    hard puddles and less glossy noise for the denoiser to smear)."""
     if 'floor-polished' in _M:
         return _M['floor-polished']
     m = D._pbr(bpy, 'acg:' + p.get('floor_acg', 'Concrete044A'), tint=p.get('floor_tint', '#5E5852'),
-               tint_mix=p.get('floor_mix', 0.35), scale=2.4, res='2K')
-    b = D._bsdf(m); R._set(b, 'Coat Weight', p.get('floor_coat', 0.6))
+               tint_mix=p.get('floor_mix', 0.7), scale=2.4, res='2K')
+    b = D._bsdf(m); R._set(b, 'Coat Weight', p.get('floor_coat', 0.35))
     nt = m.node_tree; tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
     nz.inputs['Scale'].default_value = 0.7; nz.inputs['Detail'].default_value = 10.0
     nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
-    cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.08; cr.inputs['To Max'].default_value = 0.35
+    cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.30; cr.inputs['To Max'].default_value = 0.50
     nt.links.new(nz.outputs['Fac'], cr.inputs['Value']); nt.links.new(cr.outputs['Result'], b.inputs['Coat Roughness'])
     _M['floor-polished'] = m
     return m
