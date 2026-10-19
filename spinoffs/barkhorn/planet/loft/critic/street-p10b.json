@@ -1,0 +1,399 @@
+{
+ "stage1": {
+  "impression": "A night street view through a shopfront: EARF frosted on the glass, a big pale lightbox with a blurred dancer on the left, and a deep warm room fading off to the right. The mood is plausible, but the whole frame is one muddy sepia. The glass has no street reflections, so it reads as a hole rather than a pane. The mullions are smooth brown tubes, and at 1:1 the interior is soft and blotchy. Worst of all, I can't find a hero object: the only saturated colour is two red slivers peeking out behind dark lounge chairs.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker reads at a glance through the clear pane: its full silhouette is visible, no chair cuts across it, and its red glow and spill are the clear colour accent (red region r_median > 110 with r-g > 50)",
+  "The shopfront glass reads as glass: faint, clean reflections of the street and kerb lamps across the panes, with the interior still readable behind them",
+  "The blackened steel mullions and header read near black with an uneven brownish sheen and crisp edges, not as smooth mid-brown cylinders",
+  "The frosted EARF reads as acid-etched glass (soft, slightly translucent, light falling off across it), not a flat opaque vinyl sticker",
+  "The grade separates neutral materials from the warm light: concrete and steel read greyish while the lamps stay warm, not the whole frame in one brown wash (frame r/b median ratio currently 2.0)",
+  "Interior detail at full resolution with no denoiser smear: fir beams, the record wall and the floor show texture, not mush"
+ ],
+ "defects": [
+  {
+   "region": [
+    445,
+    235,
+    480,
+    295
+   ],
+   "what": "The Ember speaker is hidden behind a lounge chair; only a red sliver and some red spill show"
+  },
+  {
+   "region": [
+    565,
+    270,
+    595,
+    345
+   ],
+   "what": "Second red sliver and its floor reflection, also occluded by chairs; reads as a stray red light, not a speaker"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Frame lum_median 20.5, just under the 22 floor; 78 % of pixels below 40"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Monochrome sepia grade (r 28 / g 19 / b 14 median): no neutral surface anywhere, so the speaker's colour has nothing to read against"
+  },
+  {
+   "region": [
+    100,
+    40,
+    720,
+    460
+   ],
+   "what": "No reflections on the shopfront glass at all; the street lamps and the street behind the camera never appear, so the panes read as missing"
+  },
+  {
+   "region": [
+    95,
+    40,
+    115,
+    460
+   ],
+   "what": "Left mullion reads as a smooth mid-brown pipe (median 32), not blackened steel"
+  },
+  {
+   "region": [
+    365,
+    20,
+    390,
+    480
+   ],
+   "what": "Centre mullion is the same: smooth, light, rounded-looking, no patina, no sharp arris"
+  },
+  {
+   "region": [
+    125,
+    150,
+    355,
+    230
+   ],
+   "what": "EARF lettering is flat and uniform (median 74, little variation), opaque and pinkish; reads as a vinyl sticker"
+  },
+  {
+   "region": [
+    20,
+    75,
+    150,
+    425
+   ],
+   "what": "The lightbox is a large flat low-contrast slab (range 73) that takes the left fifth of the frame and pulls the eye away from the room"
+  },
+  {
+   "region": [
+    225,
+    315,
+    250,
+    340
+   ],
+   "what": "Bell shade clipped to a white rectangle with no form"
+  },
+  {
+   "region": [
+    470,
+    260,
+    670,
+    290
+   ],
+   "what": "Small clipped white squares on the chairs and table read like phone screens or LEDs, not lamps"
+  },
+  {
+   "region": [
+    380,
+    20,
+    720,
+    180
+   ],
+   "what": "Ceiling and beams are low contrast (lum_range 28) and soft, with denoiser blotching; the haze turns the back of the room to mud rather than atmosphere"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    40
+   ],
+   "what": "The concrete fascia over the shopfront is the only real texture in the frame, and it is cut off at the top edge"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero, the Ember speaker at the far end, is hidden behind the lounge chairs, so the frame has no subject.",
+   "evidence": {
+    "region": [
+     445,
+     235,
+     480,
+     295
+    ],
+    "measured": "Red pixels only in slivers about 15 px wide at x 455-470 and 575-590; the chair silhouettes at x 470-610 cover the cabinets"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [-3.0, 2.5, 1.6], target [6.85, 5.1, 1.55], 35 mm",
+    "to": "move the camera sideways in y (try 1.6 to 2.0) and raise it to z 1.7 so the line of sight to one Ember passes between the chairs, then re-aim so that speaker sits in the right-hand clear pane on the right third line; lens 40-50 mm so the speaker is at least 60 px tall in the 720 px proof. Keep the verticals level"
+   },
+   "expected": "One Ember cabinet fully visible from base to horn through clear glass, with no chair overlapping it, and the red read at once as an object",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Even where it shows, the Ember is too weak to be the frame's one colour; it reads as a stray red bulb.",
+   "evidence": {
+    "region": [
+     565,
+     270,
+     595,
+     300
+    ],
+    "measured": "r_median 62, g 31.5, b 24: dull brick, barely brighter than the surrounding brown room"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area",
+    "from": "70.0 W/m2 at 2700 K",
+    "to": "160-200 W/m2 at 2700 K, aimed so it lights through the cabinet from behind and the side and puts a soft red spill on the floor and wall around it"
+   },
+   "expected": "The speaker's tint glows through the acrylic with the white batts visible; it is the single saturated object in the frame",
+   "accept": {
+    "region": [
+     445,
+     235,
+     480,
+     295
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "set",
+   "problem": "The shopfront glass shows no reflections, so it reads as an empty opening and gives up the street-at-night story.",
+   "evidence": {
+    "region": [
+     380,
+     20,
+     720,
+     180
+    ],
+    "measured": "Upper interior is uniform dark (median 15.8, range 28) with no trace of the street lamps or a facade across the road"
+   },
+   "change": {
+    "setting": "street lamps / environment behind camera",
+    "from": "3 x point 120 W, nothing behind the camera for the glass to reflect",
+    "to": "put a dim facade plane behind and above the camera (lit windows, emission about 0.05-0.1, cool-neutral 3500-4000 K) and move one street lamp into the reflected view, so the glass picks up a faint, clean reflection across its upper third"
+   },
+   "expected": "A faint ghost of street lamps and a lit window over the top third of the glass, the interior still readable through it",
+   "accept": {
+    "region": [
+     380,
+     20,
+     720,
+     180
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The frame sits just under the brightness floor, and a single brown wash flattens every material.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 20.5; r/g/b medians 28/19/14"
+   },
+   "change": {
+    "setting": "render exposure / white_balance_k",
+    "from": "exposure 3.5, white_balance_k 3200",
+    "to": "exposure 3.8, white_balance_k 2700 (neutralise toward the lamps so concrete and steel go greyish while the 2400 K pendants still read warm)"
+   },
+   "expected": "Frame median about 25-30; neutral surfaces read near grey (b_median at least 0.65 of r_median); the lamps stay amber",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The mullions read as smooth mid-brown tubes, not blackened steel.",
+   "evidence": {
+    "region": [
+     365,
+     20,
+     390,
+     480
+    ],
+    "measured": "lum_median 27.9, p95 57.6, smooth gradient across the width with no sharp edge"
+   },
+   "change": {
+    "setting": "steel's patina",
+    "from": "current finish (light brown, uniform)",
+    "to": "base colour about #1a1714, roughness 0.35-0.6 varied with a mottled patina map, slight brown oxide at the edges, a hard 1 mm arris that catches one thin highlight from the street lamp"
+   },
+   "expected": "Near-black flat bars with a crisp edge highlight and an uneven sheen",
+   "accept": {
+    "region": [
+     365,
+     20,
+     390,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The frosted name reads as an opaque flat pink sticker, not etched glass.",
+   "evidence": {
+    "region": [
+     125,
+     150,
+     355,
+     230
+    ],
+    "measured": "lum_median 74 with little variation inside the letters; r/b 93/59 tinted pink"
+   },
+   "change": {
+    "setting": "the window's frosted name (emission) and frosted acrylic roughness",
+    "from": "emission 0.012, uniform",
+    "to": "emission 0.004-0.006 with a light transmission term (roughness about 0.5) so the room's lights blur through the letters, and the street lamp's light falling off left to right across them"
+   },
+   "expected": "Soft, slightly translucent letters that show blurred interior light through them, about 15-20 % less bright and no longer pink",
+   "accept": {
+    "region": [
+     125,
+     150,
+     355,
+     230
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     66
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "Bell and the small table lights clip to white rectangles with no form, which reads as CG or as phone screens.",
+   "evidence": {
+    "region": [
+     205,
+     310,
+     305,
+     390
+    ],
+    "measured": "clip_pct 1.2, p95 201; the shade is a flat white block"
+   },
+   "change": {
+    "setting": "Bell / table-lamp emission",
+    "from": "Bell none (the shade's emission blows out)",
+    "to": "lower the shade's emission about 40 % and add a small 2-4 W, 2400 K point inside each Bell, so the shade grades from a bright core to a warm rim and casts a pool on the table"
+   },
+   "expected": "Lamps bright but not blown, each with a visible warm pool on its table",
+   "accept": {
+    "region": [
+     205,
+     310,
+     305,
+     390
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The haze and low contrast turn the back of the room to mud and hide the fir and the record wall.",
+   "evidence": {
+    "region": [
+     470,
+     190,
+     570,
+     260
+    ],
+    "measured": "lum_p5 23.5 across the record wall: blacks lifted by the haze, detail smeared"
+   },
+   "change": {
+    "setting": "haze in the room's air / record-wall strip",
+    "from": "density 0.006, strip 1.0",
+    "to": "density 0.003, record-wall strip 1.5 with its spots at 12 W, so the shelves and spines read and the blacks between the pools return"
+   },
+   "expected": "Deeper blacks between the pools, the record spines legible, and atmosphere only in the light cones",
+   "accept": {
+    "region": [
+     470,
+     190,
+     570,
+     260
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 15
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move the lounge chairs in the listening room so they stop hiding the Ember pair",
+   "why": "The room's layout is fixed by the card; c1 solves this with the camera instead"
+  },
+  {
+   "request": "Make the lightbox panel smaller or move it so it stops taking the left fifth of the frame",
+   "why": "The screens and the shopfront are part of the fixed room design; only their brightness may change. Reframing in c1 can reduce how much of it is in frame"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

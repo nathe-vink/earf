@@ -1,0 +1,394 @@
+{
+ "stage1": {
+  "impression": "A moody night shopfront seen from the kerb, with a frosted dancer lightbox, EARF on the glass and a warm room going back to a lit record wall. The idea and the shadow layout work. But at 1:1 everything behind the glass is soft and smeary, the name on the glass reads as flat pinkish vinyl crossed by stray light bars, small blown white squares float in the dark like LEDs, and the speaker that should be the hero is a red sliver hidden behind lounge chairs. It reads as a competent but clearly CG mood frame, not a photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker must be readable at a glance through the clear pane: its full silhouette, its red tint and light through the acrylic. Right now it is mostly hidden by the lounge chairs (region [440,240,480,300] median 34, dE2000 26 against a red reference)",
+  "The room behind the glass must hold real detail (fir checks, concrete board grain, steel sheen), not denoiser smear and focus blur",
+  "The frosted name must read as acid-etched glass catching light, not opaque paint, and must not be crossed by unrelated bright lines",
+  "No blown floating white squares. Each practical must read as a lamp with a shade and a pool of light under it",
+  "A sign of life on the near side: a glass, a coat, a person's trace",
+  "Blackened steel mullions and fascia with an uneven patina and crisp edges. They are flat dark bars now (edge width 20 px at x 95-125)"
+ ],
+ "defects": [
+  {
+   "region": [
+    440,
+    240,
+    600,
+    320
+   ],
+   "what": "Ember pair almost entirely hidden behind lounge-chair backs. Only red slivers and spill show; the hero is not legible"
+  },
+  {
+   "region": [
+    380,
+    180,
+    720,
+    340
+   ],
+   "what": "Far room is soft and smeared (focus on the glass plus denoiser). Record wall and chairs have no texture at 1:1"
+  },
+  {
+   "region": [
+    130,
+    140,
+    360,
+    240
+   ],
+   "what": "Frosted 'EARF' reads as flat opaque pinkish-grey vinyl (median 71, uniform), not etched glass"
+  },
+  {
+   "region": [
+    195,
+    175,
+    370,
+    265
+   ],
+   "what": "Thin bright horizontal bars cut across the letters (lit shelf edges behind), reading as scratches or tape"
+  },
+  {
+   "region": [
+    395,
+    190,
+    445,
+    230
+   ],
+   "what": "Small blown white rectangles float in the dark (p95 213), reading as signage or screens, not lamps"
+  },
+  {
+   "region": [
+    470,
+    262,
+    570,
+    285
+   ],
+   "what": "Glowing white squares on the chair backs read as LEDs or phone screens (clipped)"
+  },
+  {
+   "region": [
+    220,
+    310,
+    255,
+    345
+   ],
+   "what": "Bell lamp shade clipped (7.8 % clip) to a featureless white square, with no warm pool on the table"
+  },
+  {
+   "region": [
+    20,
+    70,
+    150,
+    420
+   ],
+   "what": "Dancer lightbox glows flat, with a hard rectangular right edge and no polished-edge glow; it reads like a printed backdrop"
+  },
+  {
+   "region": [
+    90,
+    40,
+    120,
+    460
+   ],
+   "what": "Steel mullion soft-edged and featureless, no patina or sheen"
+  },
+  {
+   "region": [
+    370,
+    20,
+    390,
+    480
+   ],
+   "what": "Centre mullion is a plain dark bar that splits the frame without detail"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    60
+   ],
+   "what": "Fascia and ceiling go dark and empty (median 10.9). Beams barely read"
+  },
+  {
+   "region": [
+    540,
+    380,
+    620,
+    470
+   ],
+   "what": "Floor reflection streak smeared, no polish micro-detail"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero Ember speaker is blocked by the listening room's lounge chairs, so the frame has no readable hero.",
+   "evidence": {
+    "region": [
+     440,
+     240,
+     600,
+     320
+    ],
+    "measured": "Speaker region median 34 (target >=45); dE2000 26.2 against #B0302A; only red slivers visible between chair backs"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "position [-3.0, 2.5, 1.6], target [6.85, 5.1, 1.55]",
+    "to": "position [-3.0, 3.3, 1.7], target aimed at the Ember nearest the clear pane (about 1 m above its floor), adjusted so one full cabinet sits in a gap between chairs inside the clear pane, right of the centre mullion"
+   },
+   "expected": "One Ember cabinet visible top to bottom, red and glowing, about 60-90 px tall at proof scale, with nothing in front of it",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "Focus sits on the glass, so the whole room, including the speaker, falls into soft blur and the denoiser smears what is left.",
+   "evidence": {
+    "region": [
+     380,
+     180,
+     720,
+     340
+    ],
+    "measured": "Record wall and chairs show no texture at 5x crop. Edge widths are many px across"
+   },
+   "change": {
+    "setting": "camera focus / aperture",
+    "from": "f/5.6 focused at [0.0, 3.4, 1.6]",
+    "to": "f/8 focused at about x 7 m (mid-room), so the glass letters stay acceptably sharp and the far room holds detail"
+   },
+   "expected": "Record wall spines, chair seams and the Ember's edges become crisp. The letters stay legible",
+   "accept": {
+    "region": [
+     480,
+     190,
+     570,
+     260
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 140
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Ember's tint is too weak to be the frame's one colour, even where it shows.",
+   "evidence": {
+    "region": [
+     440,
+     240,
+     480,
+     300
+    ],
+    "measured": "Median RGB 48/30/23, a muddy brown, not red. dE2000 26 against #B0302A"
+   },
+   "change": {
+    "setting": "lamps: on each Ember speaker 4 x area",
+    "from": "70.0 W/m2 at the target",
+    "to": "160 W/m2 at the target, keeping 2700 K"
+   },
+   "expected": "Cabinet reads saturated red, with batts lit through the acrylic. Speaker region median >=45",
+   "accept": {
+    "region": [
+     440,
+     240,
+     480,
+     300
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "Bright practical shades and small screens clip into floating white squares that read as LEDs or signage.",
+   "evidence": {
+    "region": [
+     220,
+     310,
+     255,
+     345
+    ],
+    "measured": "clip_pct 7.84, p95 255; similar squares at [395,190,445,230] p95 213 and on the chair backs"
+   },
+   "change": {
+    "setting": "the sconce's frosted shade emission / the screens' images / the pendants' lamps",
+    "from": "sconce shade 0.4, screens 0.25, pendant lamps 0.4",
+    "to": "sconce shade 0.15, screens 0.12, pendant lamps 0.25; let the spots carry the light onto the tables"
+   },
+   "expected": "Shades glow warm with gradation instead of clipping, and pools of light show on the table tops",
+   "accept": {
+    "region": [
+     220,
+     310,
+     255,
+     345
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The frosted name looks like opaque painted vinyl, not acid-etched glass.",
+   "evidence": {
+    "region": [
+     130,
+     140,
+     360,
+     240
+    ],
+    "measured": "lum_median 71, flat pinkish-grey fill with no gradation"
+   },
+   "change": {
+    "setting": "the window's frosted name emission, plus frosted acrylic/glass roughness",
+    "from": "emission 0.012",
+    "to": "emission 0.004, roughness about 0.35, so the letters pick up street light and the room glow unevenly"
+   },
+   "expected": "Letters read as a soft translucent etch, brighter where room light sits behind them and darker elsewhere",
+   "accept": {
+    "region": [
+     130,
+     140,
+     360,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     58
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "Lit shelf edges behind the glass draw bright bars straight through the letters, so they look like scratches or tape.",
+   "evidence": {
+    "region": [
+     195,
+     175,
+     370,
+     265
+    ],
+    "measured": "Thin near-white horizontal lines crossing E-A-R-F; region p95 about 101 driven by the lines"
+   },
+   "change": {
+    "setting": "the shelves' lit edges",
+    "from": "0.1",
+    "to": "0.035"
+   },
+   "expected": "Shelf edges become faint warm lines in the background, not graphic marks on the letters",
+   "accept": {
+    "region": [
+     195,
+     175,
+     370,
+     265
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The frame is slightly under target and the ceiling and fascia fall into empty dark, with no atmosphere.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "Frame median 20.5 (target 22-50); top band [0,0,720,60] median 10.9; ceiling [380,0,720,180] median 15.6"
+   },
+   "change": {
+    "setting": "render exposure and haze density",
+    "from": "exposure 3.5, haze 0.006",
+    "to": "exposure 3.75, haze 0.012"
+   },
+   "expected": "Frame median about 26-32. Beams read, and a faint glow sits around the pendants and the record wall",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The near room shows no sign of life, and the steel shopfront is featureless.",
+   "evidence": {
+    "region": [
+     200,
+     300,
+     370,
+     420
+    ],
+    "measured": "Near table has a lamp and two small objects only. Mullion [90,40,120,460] edge width 20 px with no sheen"
+   },
+   "change": {
+    "setting": "props, and the steel's patina",
+    "from": "bare near table; uniform blackened steel",
+    "to": "a half-full rocks glass and a folded menu in the Bell's pool, a coat over the near chair; give the steel an uneven brownish patina with a soft specular from the street lamps along the mullion edges"
+   },
+   "expected": "The near zone reads lived-in, and the mullions show a thin highlight at their edges",
+   "accept": {
+    "region": [
+     90,
+     40,
+     120,
+     460
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 45
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move or lower the lounge chairs that block the Ember pair",
+   "why": "The listening room's layout is fixed by the card, so the camera has to find the gap instead"
+  },
+  {
+   "request": "Give the dancer lightbox a thicker panel with polished, glowing edges set into a reveal",
+   "why": "The shopfront and screens are fixed room design. Only their brightness and frost roughness may change"
+  },
+  {
+   "request": "Render at full 2400 x 1600 rather than a 0.3 proof before judging material grain",
+   "why": "Not a scene setting. Much of the softness at 1:1 may be proof scale"
+  }
+ ],
+ "score_if_fixed": 6.5
+}
