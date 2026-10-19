@@ -1,0 +1,362 @@
+{
+ "stage1": {
+  "impression": "A night shopfront seen square-on through a blackened-steel frame, with a warm, hazy room behind it. It reads as a clean architectural render, not a photograph: the EARF letters are flat opaque grey vinyl, the lightbox is an even beige screen with a cartoonish dancer cut-out, the glass reflects nothing of the street, and the lower half of the window is a wall of fir slats. The one coloured object, the Ember speaker, shows only as two washed-out pink blobs behind chairs at the far end, so there is no hero.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker reads at a glance through a clear pane: silhouette above the chairs, saturated red, light through its acrylic",
+  "The window glass behaves like glass: faint reflections of the street lamps and the kerb, with darker reflections over the dark steel",
+  "The frosted name reads as acid-etched glass (translucent, warm from the room behind, bright edges), not opaque grey vinyl",
+  "The lightbox glows unevenly from behind, with falloff, and the dancer is fogged into the diffusion rather than printed on it",
+  "The far end holds detail: the back wall and screens are not near-white, the haze does not flatten the record wall",
+  "Some sign of life seen from the kerb (a figure at the bar, glasses on the sill, a coat)",
+  "Full-resolution delivery (this proof is 720 x 480) with no denoiser smear on the record wall"
+ ],
+ "defects": [
+  {
+   "region": [
+    315,
+    250,
+    335,
+    270
+   ],
+   "what": "Ember speaker (left) shows only as a pale pink patch behind a chair (r231 g177 b162): desaturated, cut off, unreadable"
+  },
+  {
+   "region": [
+    460,
+    250,
+    495,
+    270
+   ],
+   "what": "Ember speaker (right) is the same: a pale pink sliver behind the chairs"
+  },
+  {
+   "region": [
+    215,
+    160,
+    415,
+    225
+   ],
+   "what": "EARF letters are uniform opaque neutral grey (138/138/139, lum_range low inside the glyphs): read as vinyl signage or a 2D overlay, not frosting in the glass"
+  },
+  {
+   "region": [
+    0,
+    85,
+    210,
+    280
+   ],
+   "what": "Lightbox is an even flat beige field (median 108, p95 114), cooler than the room; the dancer silhouette is a soft cut-out and reads as clip art"
+  },
+  {
+   "region": [
+    200,
+    60,
+    680,
+    285
+   ],
+   "what": "No reflections on the glass at all: the panes read as open holes"
+  },
+  {
+   "region": [
+    320,
+    185,
+    500,
+    270
+   ],
+   "what": "Far end near blown (p95 218), milky with haze; the record wall is smeared by the denoiser"
+  },
+  {
+   "region": [
+    440,
+    120,
+    460,
+    140
+   ],
+   "what": "Pendant lamp is a bare clipped white disc (18% clipped) with no bloom or fitting detail"
+  },
+  {
+   "region": [
+    400,
+    30,
+    560,
+    60
+   ],
+   "what": "Patchy stamped-looking texture on the steel transom, reads as a decal, not patina"
+  },
+  {
+   "region": [
+    0,
+    420,
+    720,
+    480
+   ],
+   "what": "Bottom sill and wall below crushed to near black (median 4.9, crush 17.7%); the steel has no edge or sheen"
+  },
+  {
+   "region": [
+    200,
+    285,
+    680,
+    415
+   ],
+   "what": "Lower half of the window is a uniform fence of fir slats, evenly lit, which blocks the room and reads as a backdrop"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    60
+   ],
+   "what": "The upper wall and fascia are flat and brown, with no material scale"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The speaker, the frame's only colour and its hero, is hidden behind chairs and too small at the far end.",
+   "evidence": {
+    "region": [
+     310,
+     245,
+     500,
+     275
+    ],
+    "measured": "two pink patches of about 20 x 20 and 30 x 20 px, both cut off at the top of the slat band at y 280"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "[-5.5, 3.5, 1.5] level at [0.0, 3.6, 1.55], 50 mm",
+    "to": "[-4.0, y aligned with one Ember speaker through the clear pane, 1.65], aimed at the speaker's mid-height, 65-75 mm, still level with true verticals"
+   },
+   "expected": "One Ember speaker stands clear above the chairs in a clear pane, about 8-12% of frame height, with the name and lightbox still in frame",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The far end is nearly blown and milky, which washes the Ember from red to pink.",
+   "evidence": {
+    "region": [
+     310,
+     180,
+     500,
+     280
+    ],
+    "measured": "lum_median 139.5, p95 218.5; speaker patch r231 g177 b162"
+   },
+   "change": {
+    "setting": "screens' images / niches' spot / haze density",
+    "from": "0.8 / 220 W / 0.045",
+    "to": "0.4 / 120 W / 0.025"
+   },
+   "expected": "The back wall drops to a warm mid-tone, the record wall gets edge detail, and the Ember's red saturates",
+   "accept": {
+    "region": [
+     310,
+     180,
+     500,
+     280
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 185
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Ember reads pink, not red: its own light is too strong and too white against the 3700 K balance.",
+   "evidence": {
+    "region": [
+     460,
+     250,
+     495,
+     270
+    ],
+    "measured": "r_median 228, g_median 174.5 (low saturation)"
+   },
+   "change": {
+    "setting": "area lamps on each Ember speaker",
+    "from": "18.0 W/m2, 2700 K",
+    "to": "9.0 W/m2, 2700 K, with the pinholes lowered to match"
+   },
+   "expected": "The cabinet reads as deep tinted red acrylic with glowing edges, not a pale pink patch",
+   "accept": {
+    "region": [
+     460,
+     250,
+     495,
+     270
+    ],
+    "metric": "g_median",
+    "op": "<=",
+    "value": 120
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The frosted name is an opaque neutral-grey fill, so it reads as vinyl signage.",
+   "evidence": {
+    "region": [
+     215,
+     160,
+     415,
+     225
+    ],
+    "measured": "r138 g138 b139, lum_p95 149.9: uniform and colourless against a warm room"
+   },
+   "change": {
+    "setting": "the window's frosted name (emission and frosted acrylic roughness)",
+    "from": "emission 0.1, opaque",
+    "to": "emission 0, transmissive frosted glass (roughness about 0.35, transmission 1) so the letters pick up the warm room behind, with a slightly brighter etched edge"
+   },
+   "expected": "The letters are warm, translucent and lighter where the room behind is bright, with an edge highlight",
+   "accept": {
+    "region": [
+     215,
+     160,
+     415,
+     225
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The glass reflects nothing, so the panes read as open holes in a render.",
+   "evidence": {
+    "region": [
+     200,
+     60,
+     680,
+     285
+    ],
+    "measured": "no visible reflection of the street lamps or the kerb anywhere on the panes"
+   },
+   "change": {
+    "setting": "shopfront glass and street lamps",
+    "from": "non-reflective glass; street lamps 75 W",
+    "to": "glass with IOR 1.52 and real Fresnel reflection, a dim opposite facade or parked car to reflect, street lamps 120 W"
+   },
+   "expected": "Faint street-lamp glints and soft reflections over the darker panes, without hiding the room",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The lightbox is a flat, cool field brighter than the room, which makes it read as a projection screen.",
+   "evidence": {
+    "region": [
+     0,
+     85,
+     210,
+     280
+    ],
+    "measured": "lum_median 108, p95 114 (almost no gradient), r118 b99"
+   },
+   "change": {
+    "setting": "screens' images (the lightbox) and frosted acrylic roughness",
+    "from": "0.8, as now",
+    "to": "0.5, with the frost rougher so the dancer fogs into the diffusion; warm the panel toward 2700 K"
+   },
+   "expected": "A softer, warmer glow with gentle falloff toward the frame, and a blurrier, more suggestive silhouette",
+   "accept": {
+    "region": [
+     0,
+     85,
+     210,
+     280
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     95
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The sill and the steel at the bottom are crushed, so the steel loses its edge and sheen.",
+   "evidence": {
+    "region": [
+     0,
+     420,
+     720,
+     480
+    ],
+    "measured": "lum_median 4.9, crush_pct 17.7"
+   },
+   "change": {
+    "setting": "street lamps and steel patina",
+    "from": "75 W; current patina",
+    "to": "120 W, raking from above left; the steel's sheen slightly higher (roughness lower by about 0.1)"
+   },
+   "expected": "A readable sill edge and uneven brownish sheen on the blackened steel",
+   "accept": {
+    "region": [
+     0,
+     420,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     10,
+     22
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Nothing alive is visible from the kerb.",
+   "evidence": {
+    "region": [
+     200,
+     60,
+     680,
+     285
+    ],
+    "measured": "seen: no figure, glass or coat in the window band"
+   },
+   "change": {
+    "setting": "props",
+    "from": "glasses, menus, candles not visible from the street",
+    "to": "a couple of rocks glasses and a candle votive on the window ledge in the frame, and a coat over a chair back in the mid-ground"
+   },
+   "expected": "Small highlights and a lived-in note in the foreground panes",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Lower or open the fir-slat band across the lower half of the window, which blocks the room and reads as a fence",
+   "why": "The shopfront and banquette are fixed room design"
+  },
+  {
+   "request": "Make the Ember speaker larger or move it toward the window",
+   "why": "The speaker and the room's layout are fixed; only the camera can bring it forward"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

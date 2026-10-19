@@ -1,0 +1,394 @@
+{
+ "stage1": {
+  "impression": "A coherent, warm, low-key night room with a believable one-point perspective down a long bar, and it has real mood. But it reads as a soft CG proof, not a photograph. A uniform haze veil flattens everything. The surfaces are smeared and stucco-like at 1:1, so there is no board-forming, no fir checks and no steel sheen. The pendants are flat white glowing cylinders, and the frosted screen on the right reads as a bright lightbox with a dark smudge. The hero speakers at the far end are two small pinkish slivers hidden behind lounge chairs, set against a near-white gallery-bright alcove that steals the eye.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker reads at a glance as the hero: a full silhouette unobstructed by the chairs, saturated red (r_median at least 1.8x g_median in its region), and clearly the most saturated thing in frame",
+  "The listening-room alcove reads as seen through smoked acrylic, darker than the speaker and not a white gallery (alcove wall median below the speaker median)",
+  "Pools of light from the pendants land on the fir bar top, and the bar top region median rises to about 40-60 with a visible falloff between pools",
+  "The haze veil is reduced so the blacks hold depth (frame lum_p1 around 3-5) while the shadows keep their detail",
+  "At delivered resolution and 1:1, the concrete shows formwork grain and tie holes, the fir shows checks and darker end grain, and the steel shows an uneven sheen; no denoiser smear on walls or floor",
+  "The frosted screen glows softly at about 2x the surrounding wall, not 3.5x, and its image reads as a hand or shell in fog, not a stain",
+  "The pendants show diffuse frosted acrylic with a warm 2400 K glow and polished edge highlights, not flat clipped white cutouts",
+  "Signs of life: a record out of its sleeve, a coat on the banquette, a half-drunk glass in a light pool"
+ ],
+ "defects": [
+  {
+   "region": [
+    290,
+    232,
+    316,
+    275
+   ],
+   "what": "Ember speaker (left) almost entirely hidden behind a lounge chair, reads as a pink sliver; r176/g119/b101 is washed, not Ember red"
+  },
+  {
+   "region": [
+    422,
+    232,
+    442,
+    275
+   ],
+   "what": "Second Ember speaker also mostly hidden behind a chair; the card wants one of the pair to read, and neither does"
+  },
+  {
+   "region": [
+    280,
+    172,
+    445,
+    290
+   ],
+   "what": "The listening-room alcove walls are near-white and the brightest large area in frame (median 124); the smoked partition does not read at all, so it looks like an open doorway to a gallery"
+  },
+  {
+   "region": [
+    590,
+    108,
+    645,
+    245
+   ],
+   "what": "Frosted screen at median 108.6, about 3.5x the wall around it, near-neutral grey (r119 g106 b100); reads as a lightbox, and the shell image reads as a dark stain or ghost"
+  },
+  {
+   "region": [
+    45,
+    75,
+    88,
+    142
+   ],
+   "what": "Pendant tube flat and clipped (1.32% clip, median 158), cooler than the room (r176 g154 b140); looks like an unlit emissive cylinder pasted in, with no frosted depth or edge glow"
+  },
+  {
+   "region": [
+    195,
+    145,
+    216,
+    183
+   ],
+   "what": "Second pendant, the same flat white cutout; a thin vertical rod appears to run from it down to the bar near x 205 (reads as a pole or an intersection)"
+  },
+  {
+   "region": [
+    0,
+    255,
+    300,
+    300
+   ],
+   "what": "Bar top dark (median 23.8) with no pendant pools; the pendants' light does not land on the bar"
+  },
+  {
+   "region": [
+    130,
+    260,
+    290,
+    285
+   ],
+   "what": "Folded menus on the bar glow bright white like phones or tablets"
+  },
+  {
+   "region": [
+    140,
+    190,
+    170,
+    265
+   ],
+   "what": "Fog speaker niche: a lit slot with a small white blob; the Fog speaker is not legible as an object"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "A global haze veil lifts the blacks (lum_p1 7.3) and flattens contrast; the room reads foggy rather than atmospheric"
+  },
+  {
+   "region": [
+    300,
+    300,
+    500,
+    480
+   ],
+   "what": "Floor speckled and smeared (denoiser or sample noise), with no clean polished reflection of the alcove"
+  },
+  {
+   "region": [
+    530,
+    80,
+    720,
+    330
+   ],
+   "what": "Right-hand concrete wall reads as mottled stucco with no formwork grain, tie holes or pour lines"
+  },
+  {
+   "region": [
+    0,
+    280,
+    300,
+    480
+   ],
+   "what": "Foreground stools and bar front a near-uniform dark brown mass (median 15.5); stool tops have no rim highlight, and the fluted bar front is soft"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    140
+   ],
+   "what": "Fir beams uniform and soft, with no checks, nail holes or end-grain darkening"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "Both Ember speakers are hidden behind the lounge chairs and are tiny at 28 mm, so the hero does not read.",
+   "evidence": {
+    "region": [
+     290,
+     232,
+     442,
+     275
+    ],
+    "measured": "Speaker regions are about 20-26 px wide and only partly visible; most of each is occluded by a chair back"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [1.6, 2.6, 1.4], target [17.0, 3.3, 1.3], 28 mm",
+    "to": "position [1.6, 2.0, 1.45], target [17.0, 3.9, 1.0] (sightline aimed at the gap beside the left Ember so the full cabinet clears the chairs), lens 35 mm; keep it level"
+   },
+   "expected": "One Ember speaker visible top to plinth between or beside the chairs, about 1.25x larger, and the bar still running down the left third",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The listening-room alcove is gallery-white and brighter than the speaker, which washes the red and kills the smoked-partition read.",
+   "evidence": {
+    "region": [
+     280,
+     172,
+     445,
+     290
+    ],
+    "measured": "Alcove median 123.8 with p95 215, against the speaker median 130.6; the speaker is barely separated from its surround"
+   },
+   "change": {
+    "setting": "on each Ember speaker area lamps; record wall spots",
+    "from": "4 x area 18.0 W/m2; record wall 3 x spot 9.0 W, cone 60 deg",
+    "to": "4 x area 9.0 W/m2; record wall 3 x spot 5.0 W, cone 40 deg; raise the speaker's internal pinhole or lamp glow instead, so the cabinet glows from within"
+   },
+   "expected": "Alcove walls fall to a median of about 60-75 while the speaker body holds about 100+, so the speaker becomes the brightest coloured object at the far end",
+   "accept": {
+    "region": [
+     330,
+     175,
+     420,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The Ember red is desaturated to pink-salmon by the 3300 K white balance and AgX's neutral look.",
+   "evidence": {
+    "region": [
+     290,
+     232,
+     316,
+     275
+    ],
+    "measured": "r176 g119 b101 (r/g 1.48); the rest of the room is already amber (bar r37 g21 b12), so the speaker is no more saturated than the room"
+   },
+   "change": {
+    "setting": "render white_balance_k / look",
+    "from": "white_balance_k 3300, look None",
+    "to": "white_balance_k 2900 (neutralises the 2400 K practicals somewhat so the room goes brown-neutral rather than orange), look 'AgX - Medium High Contrast'"
+   },
+   "expected": "Room surfaces go more neutral brown and the Ember reads as the frame's only saturated red",
+   "accept": {
+    "region": [
+     290,
+     232,
+     316,
+     275
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 170
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The frosted screen is a lightbox, 3.5x its wall and grey-neutral, so it reads as signage and the shell as a stain.",
+   "evidence": {
+    "region": [
+     590,
+     108,
+     645,
+     245
+    ],
+    "measured": "lum_median 108.6, p95 129, r119 g106 b100, against the adjacent wall at about 30"
+   },
+   "change": {
+    "setting": "the screens' images emission; frosted acrylic roughness",
+    "from": "0.5",
+    "to": "0.2, with the image warmed to about 2700 K and the frosted panel's roughness raised so the image is softer, plus a lit polished edge on the panel"
+   },
+   "expected": "Screen median about 55-70, a soft warm glow, and the image reading as a suggestion of form",
+   "accept": {
+    "region": [
+     590,
+     108,
+     645,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The pendants are flat clipped white cylinders, and their light does not pool on the bar top.",
+   "evidence": {
+    "region": [
+     45,
+     75,
+     88,
+     142
+    ],
+    "measured": "Tube median 158, 1.32% clipped, r176 g154 b140 (cooler than the room); bar top [0,255,300,300] median 23.8"
+   },
+   "change": {
+    "setting": "pendants' frosted tubes emission / pendants spots",
+    "from": "tubes 0.15, spots 3 x 120 W cone 30 deg",
+    "to": "tubes 0.06 tinted 2400 K, spots 3 x 180 W cone 24 deg aimed straight down onto the bar top"
+   },
+   "expected": "Tubes glow softly with no clipping; distinct oval pools on the fir bar top with dark between them",
+   "accept": {
+    "region": [
+     0,
+     255,
+     300,
+     300
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The haze is a global veil that lifts the blacks and flattens all contrast.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "Frame lum_p1 7.3, below_40 66%; the stools region p5 7.4 to p95 32.9 (range about 25) has no depth"
+   },
+   "change": {
+    "setting": "haze density",
+    "from": "0.02 per metre",
+    "to": "0.008 per metre"
+   },
+   "expected": "Deeper blacks with visible light shafts only under the pendants and spots; the frame median holds around 28-35",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 9
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "Surfaces have no material scale at 1:1: the concrete is stucco, the fir is uniform, and the floor is speckled.",
+   "evidence": {
+    "region": [
+     530,
+     80,
+     720,
+     330
+    ],
+    "measured": "Visual: no formwork lines or tie holes; the floor [300,300,500,480] is noisy, with no clean reflection of the alcove"
+   },
+   "change": {
+    "setting": "materials' finish; render samples / denoise",
+    "from": "current concrete and fir textures, 256 samples with denoise",
+    "to": "board-formed concrete with 150 mm board grain, tie holes on a 600 mm grid, and faint pour lines at a slight sheen; fir with checks and darker end grain; floor polish raised so it carries a soft reflection of the alcove; samples 512 at the delivered 2400 x 1600 so the denoiser does not smear"
+   },
+   "expected": "At 1:1 the walls read as concrete at real scale, the beams as old fir, and the floor shows a soft streak of the far light",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The menus glow like phones, and the room has little sign of life.",
+   "evidence": {
+    "region": [
+     130,
+     260,
+     290,
+     285
+    ],
+    "measured": "Visual: small bright white rectangles on the bar, much brighter than the bar top around them"
+   },
+   "change": {
+    "setting": "props",
+    "from": "white folded menus",
+    "to": "menus in uncoated kraft or dark card; add a record out of its sleeve on the bar near the camera, a coat over a banquette chair back, and a half-full rocks glass in a pendant pool"
+   },
+   "expected": "No bright specks on the bar, and the room reads as in use",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move or remove the lounge chairs that hide the Ember speakers",
+   "why": "The listening room's layout is fixed by the card; the camera (c1) should solve the sightline instead"
+  },
+  {
+   "request": "Make the smoked partition visibly darker or more reflective",
+   "why": "The acrylic is fixed as part of the room's design; the light change (c2) is the allowed route to make it read"
+  },
+  {
+   "request": "Check the vertical rod running from the pendant near x 205 down to the bar",
+   "why": "If it is part of the back-bar or the bar's design it is fixed; if it is a stray or intersecting object it is a model fix, not a light or camera change"
+  }
+ ],
+ "score_if_fixed": 7.5
+}

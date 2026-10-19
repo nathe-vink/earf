@@ -391,7 +391,7 @@ class _patched:
 
 def room(bpy, name, p, kit):
     objs = []
-    p = {**p, 'lounge_slats': False}
+    p = {**p, 'lounge_slats': False, 'cafe': False}                  # no café curtains: the room shows (street-r4)
     shell(bpy, kit, p, objs)
     screens(bpy, kit, p, objs)
     wood = dict(walnut=lambda bpy, vertical=False, **k: fir(bpy, vertical=vertical),
@@ -400,8 +400,9 @@ def room(bpy, name, p, kit):
                 velvet=lambda bpy, colour, name: wool(bpy),
                 shade_mat=lambda bpy, p: acrylic(bpy, 'frosted', 'shade-frosted', glow=p.get('shade_glow', 0.4)),
                 storefront_mat=lambda bpy, p: steel(bpy),
-                sign_mat=lambda bpy, p: principled(bpy, 'frost-etch', '#E2D8CA', rough=0.7, spec=0.3,
-                                                    emit='#FFD2A0', strength=p.get('etch_glow', 0.05)),
+                # the name as frosted acrylic, transmissive: it takes the room's light from behind (street-r4 c4)
+                sign_mat=lambda bpy, p: acrylic(bpy, 'frosted', 'frost-etch', glow=p.get('etch_glow', 0.0),
+                                                glow_col='#FFD2A0'),
                 _curtain=lambda *a, **k: None)
     with _patched(**wood):
         D.shopfront(bpy, kit, p, objs)

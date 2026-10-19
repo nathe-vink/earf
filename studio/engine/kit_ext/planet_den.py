@@ -583,7 +583,8 @@ def glassware(bpy, kit, p, objs):
     rnd = random.Random(12)
     glass = principled(bpy, 'tumbler-glass', '#FFFFFF', rough=0.01, trans=1.0, ior=1.5)
     pour = principled(bpy, 'pour-den', '#B5601A', rough=0.0, trans=1.0, ior=1.36)
-    paper = principled(bpy, 'menu-card', '#EDE6D8', rough=0.75, bump=(0.004, 0.06, 0.0004))
+    paper = principled(bpy, 'menu-card-' + p.get('menu_color', '#EDE6D8'), p.get('menu_color', '#EDE6D8'), rough=0.75,
+                      bump=(0.004, 0.06, 0.0004))
     rocks = [(0, 0), (0.041, 0), (0.0425, 0.09), (0.0385, 0.09), (0.037, 0.016), (0, 0.016)]
     coupe = [(0, 0), (0.038, 0), (0.038, 0.004), (0.006, 0.010), (0.0045, 0.100), (0.030, 0.113), (0.056, 0.140),
              (0.0535, 0.140), (0.028, 0.117), (0, 0.111)]

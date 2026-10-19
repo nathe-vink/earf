@@ -6,14 +6,14 @@
  ],
  "camera": {
   "position": [
-   -5.5,
-   3.5,
-   1.5
+   -4.0,
+   2.6,
+   1.65
   ],
   "target": [
    0.0,
-   3.6,
-   1.55
+   3.5,
+   1.65
   ],
   "lens_mm": 50,
   "level": true,
@@ -168,7 +168,7 @@
     "rug_tint": "#4A4541",
     "rug_mix": 0.7,
     "rug_value": 0.9,
-    "glass_gloss": 2.0,
+    "glass_gloss": 3.0,
     "siding": "#8E9384",
     "neighbour_plain": true,
     "niche_glow": 0.6,
@@ -176,11 +176,12 @@
     "flat_glow": 0.06,
     "linen_trans": 0.5,
     "transom_glow": 0.15,
-    "screen_glow": 0.8,
-    "screen_window": 0.24,
+    "screen_glow": 0.4,
+    "screen_window": 0.35,
     "inlay_glow": 0.6,
     "pendant_lamp": 2.5,
-    "etch_glow": 0.1
+    "etch_glow": 0.0,
+    "menu_color": "#8A6E4E"
    },
    {
     "kind": "kit",
@@ -680,9 +681,12 @@
     0.35,
     0.35
    ],
-   "irradiance": 18.0,
+   "irradiance": 9.0,
    "color": 2700,
-   "spread_deg": 90.0
+   "spread_deg": 90.0,
+   "receivers": [
+    "*#0"
+   ]
   },
   "spkb0": {
    "type": "area",
@@ -700,9 +704,12 @@
     0.3,
     0.3
    ],
-   "irradiance": 36.0,
+   "irradiance": 18.0,
    "color": 2700,
-   "camera": false
+   "camera": false,
+   "receivers": [
+    "*#0"
+   ]
   },
   "spk1": {
    "type": "area",
@@ -720,9 +727,12 @@
     0.35,
     0.35
    ],
-   "irradiance": 18.0,
+   "irradiance": 9.0,
    "color": 2700,
-   "spread_deg": 90.0
+   "spread_deg": 90.0,
+   "receivers": [
+    "*#1"
+   ]
   },
   "spkb1": {
    "type": "area",
@@ -740,9 +750,12 @@
     0.3,
     0.3
    ],
-   "irradiance": 36.0,
+   "irradiance": 18.0,
    "color": 2700,
-   "camera": false
+   "camera": false,
+   "receivers": [
+    "*#1"
+   ]
   },
   "niche2": {
    "type": "spot",
@@ -756,7 +769,7 @@
     5.665,
     1.05
    ],
-   "power_w": 220.0,
+   "power_w": 120.0,
    "cone_deg": 45,
    "blend": 0.8,
    "radius_m": 0.02,
@@ -774,7 +787,7 @@
     5.665,
     1.05
    ],
-   "power_w": 220.0,
+   "power_w": 120.0,
    "cone_deg": 45,
    "blend": 0.8,
    "radius_m": 0.02,
@@ -1225,7 +1238,7 @@
     -6.0,
     5.0
    ],
-   "power_w": 75.0,
+   "power_w": 120.0,
    "radius_m": 0.15,
    "color": 3000
   },
@@ -1236,7 +1249,7 @@
     15.1,
     5.0
    ],
-   "power_w": 75.0,
+   "power_w": 120.0,
    "radius_m": 0.15,
    "color": 3000
   },
@@ -1279,7 +1292,7 @@
    6.05,
    3.32
   ],
-  "density": 0.045,
+  "density": 0.025,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
