@@ -75,3 +75,26 @@ What the judges said:
 - **A shared flaw:** the bright reflection down the clear front corner, over the woofer's right edge, caps both frames.
 
 The trade, plainly: A3 is the better picture by half a point, and A4 is the one that says "poison" at a glance.
+
+## The post-only retouch (2026-10-19, one pass, `retouch_a4.py`; not applied)
+
+What it does, on the finished frames:
+- **The caps:** keyed by hue inside the foreground band and feathered. The hue moves toward scarlet (−8°), chroma ×0.8, value ×0.9.
+- **The hot streak on the clear front corner:** only its smooth excess over the panel beside it is halved, so the edge line stays.
+
+**Read test at 600 px:** both pass. The landscape judge saw "small red-capped mushrooms in front"; the phone judge saw "small pink mushrooms".
+
+**Blind duels at full size, order swapped:**
+
+| Against | Frame | Retouch first | Other first | Average |
+|---|---|---|---|---|
+| A4 as it stands | Landscape | 6.5 / 6.3 | 6.7 / 6.4 | **+0.25**, 2 of 2 prefer the retouch |
+| A4 as it stands | Phone | 6.8 / 7.1 | 6.6 / 6.4 | −0.05, split |
+| A3 | Landscape | 6.0 / 6.5 | 6.0 / 6.5 | −0.5 (A4 as it stands: −0.5) |
+| A3 | Phone | 6.0 / 6.5 | 6.5 / 7.0 | −0.5 (A4 as it stands: −0.5) |
+
+The two halves pull apart:
+- **The streak compression:** every judge comparing it with A4 preferred it (clearer glass, the surround's edge reads).
+- **The cap shift:** three of those four preferred A4's warmer orange-red. The retouched caps read pink, "candy" or "more synthetic".
+
+**The full retouch does not clearly beat A4 on both frames, so A4 stays as it is.** The streak half alone is the likely win, but it is untested.
