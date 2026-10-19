@@ -102,3 +102,4 @@ under the crust); lava pieces now take `tex_scale`, and A, which still says `sca
 | Pass | Proof | Score | What it names |
 |---|---|---|---|
 | A2-1 | `proofs31/element-ember-a2-p1.jpg` (5123b2a) | 4.5 iterate (if fixed 7.0) | the lava glossy, like wet plastic, the core pink-white; a hard hotspot on the horn's right half and a strip down the cabinet's edge from the hidden lamps; the front still dark (median 19.5); the slab striated; no red pool at the base; few embers, no steam seen; the cone a soft dome, the sky a flat band |
+| A2-2 | `proofs31/element-ember-a2-p2.jpg` (189231d) | 5.5 iterate (if fixed 7.0) | the speaker lights no ground round it, no contact shadow; the cabinet dim (median 25) under a bright horn; the rock right of it cold blue; the slab a smooth plane; embers thin straight dashes, no steam seen; the crater a pink sun; the sky the brightest area (median 82); dark blobs of slab at the bottom edge |
