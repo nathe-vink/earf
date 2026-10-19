@@ -85,7 +85,12 @@ def lights(v):
         if role == 'lounge':
             fx, fy = math.sin(math.radians(rot)), -math.cos(math.radians(rot))
             L[f'spk{k}'] = {'type': 'area', 'position': [round(x + 0.9 * fx, 3), round(y + 0.9 * fy, 3), P.CEIL - 0.2],
-                            'target': [x, y, 0.75], 'size_m': [0.35, 0.35], 'irradiance': v['spk_irr'], 'color': 2700}
+                            'target': [x, y, 0.75], 'size_m': [0.35, 0.35], 'irradiance': v['spk_irr'],
+                            'color': v.get('spk_k', 2700)}
+            if v.get('spk_back', 0) > 0:                              # low behind the cabinet, lighting through it
+                L[f'spkb{k}'] = {'type': 'area', 'position': [round(x - 0.55 * fx, 3), round(y - 0.55 * fy, 3), 0.35],
+                                 'target': [x, y, 0.65], 'size_m': [0.3, 0.3], 'irradiance': v['spk_back'],
+                                 'color': v.get('spk_k', 2700), 'camera': False}
         else:
             L[f'niche{k}'] = {'type': 'spot', 'position': [x, y - 0.10, P.NICHE_Z0 + P.NICHE_H - 0.04],
                               'target': [x, y - 0.22, z + v.get('niche_aim_z', 0.6)], 'power_w': v['spot_niche'],
@@ -177,8 +182,12 @@ VIEWS = {
             'camera': {'position': [3.4, 3.4, 1.25], 'target': [8.5, 5.6, 1.1], 'lens_mm': 40, 'level': True,
                        'fstop': 4.0, 'focus': [P.NICHES[1][0] + P.NICHES[1][1] / 2, P.BACKBAR_Y + 0.05, 1.3]}},
     'listening': {'title': 'the listening room, one of the Ember pair',
-                  'camera': {'position': [15.0, 2.0, 1.12], 'target': [16.35, 5.0, 0.95], 'lens_mm': 30, 'level': True,
-                             'fstop': 4.0, 'focus': [16.15, P.PAIR['y'][1], 0.9]}},
+                  # after listening-r1 (4.5): 40 mm from further back and lower, the speaker on the left third; the
+                  # speaker lit harder and from behind, the sconce and the records down, the grade less orange
+                  'camera': {'position': [14.5, 2.0, 1.0], 'target': [16.35, 4.36, 0.95], 'lens_mm': 40, 'level': True,
+                             'fstop': 2.8, 'focus': [16.15, P.PAIR['y'][1], 0.9]},
+                  'settings': {'spk_irr': 10.0, 'spk_k': 3200, 'spk_back': 6.0, 'sconce_w': 4.0, 'shade_glow': 0.05,
+                               'wb': 2900, 'spot_records': 9.0, 'record_glow': 1.0, 'haze': 0.012}},
 }
 
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.10, 'clarity': 0.06, 'sharpen': 0.3,

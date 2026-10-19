@@ -1,0 +1,367 @@
+{
+ "stage1": {
+  "impression": "A warm brick-and-records den with a red translucent speaker on a pale plinth, but everything is the same orange, so the 'only colour in the room' gets lost: the speaker reads as a dark maroon plastic box, darker than the brick behind it. The brick is a flat, visibly repeating photo texture, the chair and rug are smooth CG surfaces, and the plinth sits on the rug with almost no weight. It reads as a competent arch-viz render, not a magazine interior.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker must be the brightest saturated object in the frame and read as tinted, lit-through acrylic with the white batts visible, not as a dark maroon box (cabinet lum_median >= 55 while the brick behind it is lower)",
+  "The brick must read as real, non-repeating masonry with mortar depth, and it must not out-shine the hero",
+  "The grade must separate the speaker's red from the room's amber: the walls are currently b_median 30 / 23, monochrome orange",
+  "The sconce shade must not clip (42.7% clipped now)",
+  "The plinth needs a visible contact shadow and the rug needs pile, so the speaker has weight on the floor",
+  "The leather chair and the rug need real material micro-detail (grain, wear, fibre) instead of smooth CG shading"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    830,
+    640
+   ],
+   "what": "The brick texture tiles visibly (repeating brick patterns and identical chipped faces), with no mortar relief. It reads as wallpaper, and the corner seam at x~630 shows two textures with the same pattern."
+  },
+  {
+   "region": [
+    440,
+    260,
+    615,
+    375
+   ],
+   "what": "The horn reads as a dark red slab with a black hole and a streaky specular. It sits on thin posts above the cabinet and looks detached."
+  },
+  {
+   "region": [
+    445,
+    390,
+    670,
+    710
+   ],
+   "what": "The cabinet is darker (lum_median 27) than the wall behind it (80-91). The red goes almost black and the white batts don't read."
+  },
+  {
+   "region": [
+    300,
+    150,
+    350,
+    195
+   ],
+   "what": "The sconce shade is blown: 42.7% clipped, a flat white blob with no glow structure."
+  },
+  {
+   "region": [
+    0,
+    330,
+    335,
+    780
+   ],
+   "what": "The leather chair is smooth and plasticky with no grain, seams or wear, and the frame edge crops it awkwardly."
+  },
+  {
+   "region": [
+    0,
+    690,
+    680,
+    800
+   ],
+   "what": "The rug is a flat grey-brown plane with no pile or fibre, and the plinth casts almost no shadow on it."
+  },
+  {
+   "region": [
+    840,
+    0,
+    1200,
+    520
+   ],
+   "what": "The record wall's spines are bright and busy (p95 147) and pull the eye from the speaker. The spines repeat."
+  },
+  {
+   "region": [
+    885,
+    495,
+    1075,
+    590
+   ],
+   "what": "The amp/stand-in on the console is a black box with two flat glowing rectangles and reads as a placeholder."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "The whole frame is one amber hue (blue channel 10-30 everywhere), so there is no colour hierarchy and no depth separation."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero speaker is darker than its background, so the tinted acrylic doesn't glow and the batts don't read.",
+   "evidence": {
+    "region": [
+     470,
+     420,
+     600,
+     600
+    ],
+    "measured": "cabinet lum_median 27.4, r 56 / g 14 / b 1, against the brick wall's lum_median 91.3 and the right wall's 79.7"
+   },
+   "change": {
+    "setting": "lamps: on each Ember speaker 2 x area, W/m2 at the target",
+    "from": "3.0 W/m2, 2700 K",
+    "to": "10.0 W/m2, 3200 K, one aimed from upper camera-left to rake the front baffle and one behind/inside to backlight the acrylic"
+   },
+   "expected": "The cabinet glows red-through and the white batts show as pale pink shapes behind the tint. The cabinet becomes the brightest saturated mass in the frame.",
+   "accept": {
+    "region": [
+     470,
+     420,
+     600,
+     600
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The sconce over-lights the brick and its shade clips, so the wall out-shines the speaker.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     620,
+     300
+    ],
+    "measured": "upper-left wall lum_median 91.3, p95 142.6. Sconce shade [300,150,350,195] clip_pct 42.7"
+   },
+   "change": {
+    "setting": "lamps: sconces point W; the room's glowing surfaces: sconce shades",
+    "from": "10.0 W; shade emission 0.12",
+    "to": "4.0 W; shade emission 0.05"
+   },
+   "expected": "The brick drops to a dim warm pool around the sconce that falls off toward the corner, and the shade shows a soft gradient instead of white.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     620,
+     300
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The grade is monochrome amber, so the speaker's red has no colour contrast against the room.",
+   "evidence": {
+    "region": [
+     640,
+     0,
+     830,
+     600
+    ],
+    "measured": "right wall r 144 / g 66 / b 23. Left wall b_median 30. Floor b_median 5-11"
+   },
+   "change": {
+    "setting": "render: white_balance_k",
+    "from": "3700",
+    "to": "2900"
+   },
+   "expected": "The 2400-2700 K sources still read warm but less orange. The brick goes toward a dusty terracotta-brown and the speaker's crimson separates from it.",
+   "accept": {
+    "region": [
+     640,
+     0,
+     830,
+     600
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 38
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The brick is a flat, visibly tiling texture with no mortar depth, which says 'render'.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     830,
+     640
+    ],
+    "measured": "seen at 2x crop: identical brick faces repeat across both walls, there is no parallax or shadow in the mortar joints, and the albedo is uniform"
+   },
+   "change": {
+    "setting": "brick material",
+    "from": "the current tiled brick texture",
+    "to": "a high-res, non-repeating old-brick set (4K+, randomised per-brick UV offset and hue variation) with displacement or a normal map, mortar recessed 4-6 mm, roughness 0.85, albedo darkened about 20% and desaturated toward sooty red-brown"
+   },
+   "expected": "The brick shows raking-light relief under the sconce, uneven bricks and no repeat. The wall goes darker and quieter behind the speaker.",
+   "accept": {
+    "region": [
+     640,
+     0,
+     830,
+     600
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     45,
+     65
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The record wall is the brightest busy area and pulls the eye from the speaker.",
+   "evidence": {
+    "region": [
+     840,
+     0,
+     1200,
+     520
+    ],
+    "measured": "lum_p95 147.4, lum_range 130.5, the highest-contrast region in the frame"
+   },
+   "change": {
+    "setting": "lamps: the record wall spot W; record-wall strip emission",
+    "from": "18.0 W; strip 2.0",
+    "to": "9.0 W; strip 1.0"
+   },
+   "expected": "The spines read as a darker rhythmic texture in support, and the speaker leads.",
+   "accept": {
+    "region": [
+     840,
+     0,
+     1200,
+     520
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 115
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The chair leather and the rug are smooth CG surfaces with no micro-detail.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     335,
+     800
+    ],
+    "measured": "chair back [150,360,300,500] lum_median 32 with a smooth gradient and no grain. The rug shows no fibre structure at 2x"
+   },
+   "change": {
+    "setting": "leather and rug materials",
+    "from": "smooth shaders",
+    "to": "leather: cognac aniline with a pebble-grain normal map, roughness 0.45-0.65 by a wear mask, darker creases and seam piping. Rug: wool pile with a fibre normal/displacement about 6 mm and slight colour mottling"
+   },
+   "expected": "The chair reads as worn real leather catching the sconce in soft broken highlights, and the rug shows pile texture and soft shading.",
+   "accept": {
+    "region": [
+     0,
+     700,
+     400,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The plinth hardly grounds on the rug or floor, and there is no atmosphere to carry the light pools.",
+   "evidence": {
+    "region": [
+     380,
+     720,
+     420,
+     790
+    ],
+    "measured": "the profile beside the plinth's left edge is flat (55.2-56.3) with no contact darkening. The right side only falls 75 to 47 over 150 px"
+   },
+   "change": {
+    "setting": "haze in the room's air; the plinth's footing",
+    "from": "haze 0.006; the plinth's base sitting on top of the rug",
+    "to": "haze 0.012; the plinth's base sunk 3 mm into the rug's pile so the pile wraps it, and the speaker's back lamp left to throw red bounce onto the floor in front"
+   },
+   "expected": "A dark contact line under the plinth, a faint red bounce on the floor and rug beside it, and soft glow halos around the sconce and the speaker.",
+   "accept": {
+    "region": [
+     385,
+     735,
+     420,
+     770
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 42
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "camera",
+   "problem": "The composition is static: the speaker sits small and centred, and the cropped chair at left is the largest mass.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     335,
+     780
+    ],
+    "measured": "the chair takes about 28% of frame width as a clipped dark mass. The speaker spans only about 230 x 470 px of 1200 x 800"
+   },
+   "change": {
+    "setting": "camera: lens and position",
+    "from": "30 mm, [15.0, 2.0, 1.12]",
+    "to": "40 mm, camera pulled back about 0.5 m along x and lowered to 1.0 m, re-aimed so the speaker sits on the left-third line with the chair's arm and a sliver of seat as a soft-focus foreground at f/2.8"
+   },
+   "expected": "The speaker gets larger and leads the frame, the chair becomes a foreground layer that gives depth, and there is negative brick space for type on the right or above.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Close or visually anchor the gap between the horn and the cabinet: the horn on thin posts reads as detached and floating",
+   "why": "It is the speaker's shape and parts, which are fixed. Lighting the posts and the horn's edge can help only partly."
+  },
+  {
+   "request": "The horn's resin reads as a flat dark slab with a black hole",
+   "why": "The horn's shape and colour are fixed. Only the light on it (c1) can change, and the horn's shape is not a picture decision."
+  },
+  {
+   "request": "Replace the amp/Cumulus stand-in on the console with a real-looking unit",
+   "why": "Cumulus is an EARF product and fixed. If the stand-in is meant to be temporary, swap in the real model."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

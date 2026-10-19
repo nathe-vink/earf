@@ -150,8 +150,9 @@ def shell(bpy, kit, p, objs):
     br = Mesh('brick')
     br.box(P.LOUNGE_X0, W, 0.0, L + T, W + T, H)
     br.box(L, -T, 0.0, L + T, P.REC['y0'], P.REC['z1']); br.box(L, P.REC['y1'], 0.0, L + T, W, P.REC['z1'])
-    objs.append(br.object(bpy, _pbr(bpy, 'large_red_bricks', tint=p.get('brick_tint', '#4E3429'), tint_mix=p.get('brick_mix', 0.5),
-                                    scale=p.get('brick_scale', 0.8), res='2k')))
+    objs.append(br.object(bpy, _pbr(bpy, p.get('brick_tex', 'brick_wall_001'), tint=p.get('brick_tint', '#4A3026'),
+                                    tint_mix=p.get('brick_mix', 0.45), scale=p.get('brick_scale', 1.6),
+                                    bump=p.get('brick_bump', 1.6), rough_mul=1.1, res='2k')))
     rb = Mesh('books-back'); rb.box(P.BOOKS['x0'], -T, 0.0, L, 0.0, H)
     objs.append(rb.object(bpy, principled(bpy, 'dark-paint', '#1E1712', rough=0.8)))
     # the ceiling: plaster, painted a dark warm brown, with a plain crown
@@ -638,8 +639,8 @@ def lounge(bpy, kit, p, objs):
     objs += R31.rug(bpy, 'lounge-rug', {'position': [(Rg['x0'] + Rg['x1']) / 2, (Rg['y0'] + Rg['y1']) / 2],
                                         'size': [Rg['x1'] - Rg['x0'], Rg['y1'] - Rg['y0']], 'pile': 0.008,
                                         'texture': p.get('rug_tex', 'floral_jacquard'), 'tint': p.get('rug_tint', '#6A2E1E'),
-                                        'tint_mix': p.get('rug_mix', 0.45), 'tex_scale': 0.9, 'displace': 0.002,
-                                        'cell': 0.02, 'sheen': 0.5, 'value': p.get('rug_value', 0.8)}, kit)
+                                        'tint_mix': p.get('rug_mix', 0.45), 'tex_scale': 0.9, 'displace': p.get('rug_displace', 0.004),
+                                        'cell': p.get('rug_cell', 0.012), 'sheen': 0.5, 'value': p.get('rug_value', 0.8)}, kit)
     # the low side tables: walnut drums
     st = Mesh('side-tables')
     for x, yy in P.SIDE_TABLES:

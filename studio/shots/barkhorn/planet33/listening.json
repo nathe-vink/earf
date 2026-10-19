@@ -6,18 +6,18 @@
  ],
  "camera": {
   "position": [
-   15.0,
+   14.5,
    2.0,
-   1.12
+   1.0
   ],
   "target": [
    16.35,
-   5.0,
+   4.36,
    0.95
   ],
-  "lens_mm": 30,
+  "lens_mm": 40,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 2.8,
   "focus": [
    16.15,
    4.85,
@@ -155,10 +155,10 @@
     "module": "planet_den",
     "fn": "room",
     "shelf_glow": 10.0,
-    "shade_glow": 0.12,
+    "shade_glow": 0.05,
     "pendant_glow": 0.5,
     "flame": 25.0,
-    "record_glow": 2.0,
+    "record_glow": 1.0,
     "vu": 2.0,
     "street": true,
     "windows_lit": 0.5,
@@ -172,8 +172,8 @@
     "model": "bar_chair_round_01",
     "res": "1k",
     "position": [
-     3.745,
-     3.63,
+     3.715,
+     3.585,
      0.0
     ],
     "rotate": [
@@ -189,7 +189,7 @@
     "res": "1k",
     "position": [
      4.435,
-     3.63,
+     3.675,
      0.0
     ],
     "rotate": [
@@ -204,8 +204,8 @@
     "model": "bar_chair_round_01",
     "res": "1k",
     "position": [
-     5.125,
-     3.63,
+     5.155,
+     3.645,
      0.0
     ],
     "rotate": [
@@ -220,8 +220,8 @@
     "model": "bar_chair_round_01",
     "res": "1k",
     "position": [
-     5.815,
-     3.63,
+     5.8,
+     3.615,
      0.0
     ],
     "rotate": [
@@ -236,8 +236,8 @@
     "model": "bar_chair_round_01",
     "res": "1k",
     "position": [
-     6.505,
-     3.63,
+     6.52,
+     3.585,
      0.0
     ],
     "rotate": [
@@ -252,8 +252,8 @@
     "model": "bar_chair_round_01",
     "res": "1k",
     "position": [
-     7.195,
-     3.63,
+     7.165,
+     3.675,
      0.0
     ],
     "rotate": [
@@ -269,7 +269,7 @@
     "res": "1k",
     "position": [
      7.885,
-     3.63,
+     3.645,
      0.0
     ],
     "rotate": [
@@ -284,8 +284,8 @@
     "model": "bar_chair_round_01",
     "res": "1k",
     "position": [
-     8.575,
-     3.63,
+     8.605,
+     3.615,
      0.0
     ],
     "rotate": [
@@ -300,8 +300,8 @@
     "model": "bar_chair_round_01",
     "res": "1k",
     "position": [
-     9.265,
-     3.63,
+     9.25,
+     3.585,
      0.0
     ],
     "rotate": [
@@ -316,8 +316,8 @@
     "model": "bar_chair_round_01",
     "res": "1k",
     "position": [
-     9.955,
-     3.63,
+     9.97,
+     3.675,
      0.0
     ],
     "rotate": [
@@ -608,8 +608,28 @@
     0.35,
     0.35
    ],
-   "irradiance": 3.0,
-   "color": 2700
+   "irradiance": 10.0,
+   "color": 3200
+  },
+  "spkb0": {
+   "type": "area",
+   "position": [
+    16.593,
+    0.924,
+    0.35
+   ],
+   "target": [
+    16.15,
+    1.25,
+    0.65
+   ],
+   "size_m": [
+    0.3,
+    0.3
+   ],
+   "irradiance": 6.0,
+   "color": 3200,
+   "camera": false
   },
   "spk1": {
    "type": "area",
@@ -627,8 +647,28 @@
     0.35,
     0.35
    ],
-   "irradiance": 3.0,
-   "color": 2700
+   "irradiance": 10.0,
+   "color": 3200
+  },
+  "spkb1": {
+   "type": "area",
+   "position": [
+    16.593,
+    5.176,
+    0.35
+   ],
+   "target": [
+    16.15,
+    4.85,
+    0.65
+   ],
+   "size_m": [
+    0.3,
+    0.3
+   ],
+   "irradiance": 6.0,
+   "color": 3200,
+   "camera": false
   },
   "niche2": {
    "type": "spot",
@@ -673,7 +713,7 @@
     0.22,
     1.78
    ],
-   "power_w": 10.0,
+   "power_w": 4.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -685,7 +725,7 @@
     0.22,
     1.78
    ],
-   "power_w": 10.0,
+   "power_w": 4.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -697,7 +737,7 @@
     0.22,
     1.78
    ],
-   "power_w": 10.0,
+   "power_w": 4.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -709,7 +749,7 @@
     0.22,
     1.78
    ],
-   "power_w": 10.0,
+   "power_w": 4.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -721,7 +761,7 @@
     0.22,
     1.78
    ],
-   "power_w": 10.0,
+   "power_w": 4.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -733,7 +773,7 @@
     0.22,
     1.78
    ],
-   "power_w": 10.0,
+   "power_w": 4.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -745,7 +785,7 @@
     5.8999999999999995,
     1.78
    ],
-   "power_w": 10.0,
+   "power_w": 4.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -757,7 +797,7 @@
     5.8999999999999995,
     1.78
    ],
-   "power_w": 10.0,
+   "power_w": 4.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -828,7 +868,7 @@
     2.05,
     0.6
    ],
-   "power_w": 18.0,
+   "power_w": 9.0,
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -846,7 +886,7 @@
     3.05,
     0.6
    ],
-   "power_w": 18.0,
+   "power_w": 9.0,
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -864,7 +904,7 @@
     4.05,
     0.6
    ],
-   "power_w": 18.0,
+   "power_w": 9.0,
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -1208,7 +1248,7 @@
    6.05,
    3.32
   ],
-  "density": 0.006,
+  "density": 0.012,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1221,7 +1261,7 @@
   "view": "Khronos PBR Neutral",
   "look": "None",
   "exposure": 0.0,
-  "white_balance_k": 3700,
+  "white_balance_k": 2900,
   "white_balance_tint": 0.0
  }
 }
