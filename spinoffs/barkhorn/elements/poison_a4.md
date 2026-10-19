@@ -75,3 +75,37 @@ What the judges said:
 - **A shared flaw:** the bright reflection down the clear front corner, over the woofer's right edge, caps both frames.
 
 The trade, plainly: A3 is the better picture by half a point, and A4 is the one that says "poison" at a glance.
+
+## The post-only retouch (2026-10-19, one pass, `retouch_a4.py`; not applied)
+
+What it does, on the finished frames:
+- **The caps:** keyed by hue inside the foreground band and feathered. The hue moves toward scarlet (−8°), chroma ×0.8, value ×0.9.
+- **The hot streak on the clear front corner:** only its smooth excess over the panel beside it is halved, so the edge line stays.
+
+**Read test at 600 px:** both pass. The landscape judge saw "small red-capped mushrooms in front"; the phone judge saw "small pink mushrooms".
+
+**Blind duels at full size, order swapped:**
+
+| Against | Frame | Retouch first | Other first | Average |
+|---|---|---|---|---|
+| A4 as it stands | Landscape | 6.5 / 6.3 | 6.7 / 6.4 | **+0.25**, 2 of 2 prefer the retouch |
+| A4 as it stands | Phone | 6.8 / 7.1 | 6.6 / 6.4 | −0.05, split |
+| A3 | Landscape | 6.0 / 6.5 | 6.0 / 6.5 | −0.5 (A4 as it stands: −0.5) |
+| A3 | Phone | 6.0 / 6.5 | 6.5 / 7.0 | −0.5 (A4 as it stands: −0.5) |
+
+The two halves pull apart:
+- **The streak compression:** every judge comparing it with A4 preferred it (clearer glass, the surround's edge reads).
+- **The cap shift:** three of those four preferred A4's warmer orange-red. The retouched caps read pink, "candy" or "more synthetic".
+
+**The full retouch does not clearly beat A4 on both frames, so A4 stays as it is.** The streak half alone is the likely win, but it is untested.
+
+## The streak half alone (2026-10-19, `retouch_a4.py --streak-only`; applied)
+
+The caps are left as rendered. Only the corner streak is compressed (in the landscape the band is x 1140–1308; in the phone frame, x 760–878). The coordinator's rule for a non-owner improvement: it goes up only if it comes out ahead on both frames.
+
+| Frame | Streak first | A4 first | Average | Preferred |
+|---|---|---|---|---|
+| Landscape | 6.6 / 6.3 | 6.6 / 6.4 | **+0.25** | the streak fix, 2 of 2 |
+| Phone | 6.6 / 6.4 | 6.8 / 6.4 | **+0.3** | the streak fix, 2 of 2 |
+
+All four judges named the same change: the milky wash on the clear corner is gone, the surround's edge and the green read through, and the panel reads as clear acrylic rather than haze. **Applied over `poison_a4.png` and `poison_a4-portrait.png`.**
