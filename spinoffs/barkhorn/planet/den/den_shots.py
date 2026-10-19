@@ -218,14 +218,16 @@ VIEWS = {
                   # after listening-r1 (4.5): 40 mm from further back and lower, the speaker on the left third; the
                   # speaker lit harder and from behind, the sconce and the records down, the grade less orange
                   # after listening-r2 (5.5): back and lower on 35 mm so the plinth stands on floor and a chair reads
-                  'camera': {'position': [14.1, 2.3, 0.95], 'target': [16.3, 4.5, 0.75], 'lens_mm': 35, 'level': True,
+                  # (p6: from 14.1, 2.3 the camera stood behind a front-row chair) clear of the chairs, the one by the
+                  # brick a foreground layer
+                  'camera': {'position': [14.6, 2.0, 0.95], 'target': [16.3, 4.5, 0.75], 'lens_mm': 35, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, P.PAIR['y'][1], 0.9]},
                   'settings': {'spk_irr': 28.0, 'spk_k': 3000, 'spk_back': 6.0, 'sconce_w': 4.0, 'shade_glow': 0.02,
                                'wb': 2900, 'exposure': -0.8, 'spot_records': 4.0, 'rec_cone': 40.0, 'rec_aim_z': 1.2,
                                'record_glow': 0.3, 'haze': 0.025, 'console_lift': 0.55,
                                # the lead: red acrylic on red brick is a hue clash; the brick much darker and aged, so
                                # the speaker's own light separates it
-                               'brick_tint': '#2A2624', 'brick_mix': 0.75}},
+                               'brick_tint': '#3A2C25', 'brick_mix': 0.65}},
 }
 
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.10, 'clarity': 0.06, 'sharpen': 0.3,
