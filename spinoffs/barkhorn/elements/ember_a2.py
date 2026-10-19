@@ -31,7 +31,7 @@ def _core(pts, n=6, seed=3):
     for i in range(len(out)):
         f = i / (len(out) - 1)
         taper = min(1.0, 4 * f, 3 * (1 - f) + 0.3)
-        rad.append(round(0.045 * taper * rnd.uniform(0.55, 1.15), 4))
+        rad.append(round(0.028 * taper * rnd.uniform(0.55, 1.15), 4))
     return out, rad
 
 
@@ -45,31 +45,31 @@ CORE_RAMP = [(0.0, '#100000'), (0.3, '#6A0A00'), (0.55, '#E03A00'), (0.8, '#FF8A
 GLOWS = [[0.6, 4.2, 0.2, 0.3], [0.7, 7.2, 0.32, 0.3], [-1.0, 5.6, 0.14, 0.3], [1.15, 3.0, 0.1, 0.3]]
 
 
-def lamp(position, target, irradiance, size, color='#FF5A18'):
+def lamp(position, target, irradiance, size, color='#FF5A18', **kw):
     """A soft lamp placed by position (common.area orbits the speaker): a lava glow at its source."""
     return {'type': 'area', 'size_m': list(size), 'position': list(position), 'target': list(target),
-            'irradiance': irradiance, 'color': color}
+            'irradiance': irradiance, 'color': color, **kw}
 
 
 def props():
     rock = dict(rock='dark_rock_02', displace=0.03, albedo=0.045, rough_mul=0.85, rock_tint='#2A2A2A', rock_tint_mix=0.6)
-    avoid = [[0.0, 0.0, 1.0]] + [[x, y, 1.2] for x, y in FLOW] + [[x, y, 0.3] for x, y in CRACK] + [[x, y, r + 0.3] for x, y, r, _ in GLOWS]
+    avoid = [[0.0, 0.0, 1.0], [0.0, 1.8, 1.4]] + [[x, y, 1.2] for x, y in FLOW] + [[x, y, 0.3] for x, y in CRACK] + [[x, y, r + 0.3] for x, y, r, _ in GLOWS]
     P = [
         # the near field: pahoehoe ropes and lobes; the flow and the crack carved below a sheet of lava
         piece('ext', module='ember_el', fn='terrain', size=[24.0, 18.0], position=[0.0, 3.0, 0.0], cell=0.02,
-              relief=0.12, flat=[0.0, 0.0, 0.6], ropes={'amp': 0.012, 'wave': 0.09, 'dir': 60.0, 'lobes': 0.07},
+              relief=0.15, flat=[0.0, 0.0, 0.6], ropes={'amp': 0.006, 'wave': 0.12, 'dir': 60.0, 'lobes': 0.1},
               channels=[{'points': FLOW, 'width': FLOW_W, 'depth': 0.32, 'bank': 0.3},
                         {'points': CRACK, 'width': 0.07, 'depth': 0.3, 'bank': 0.1}],
               pools=GLOWS,
               lava_below=True, **rock),
         # the flow's skin: big crust plates, dark red, glowing in their cracks
         piece('ext', module='ember_el', fn='lava_surface', size=[24.0, 18.0], position=[0.0, 3.0, -0.2], cell=0.05,
-              lava='acg:Lava001', tex_scale=4.5, strength=30.0, gain=1.6, ripple=0.02, crust_rough=0.8, crust_spec=0.25),
+              lava='acg:Lava001', tex_scale=4.5, strength=30.0, gain=1.25, ripple=0.02, crust_rough=0.95, crust_spec=0.0),
         # its core: a ribbon of open, yellow-hot lava down the middle of the flow
         # (sunk into the skin so its ripples break the core's edges; its width swells and pinches along the flow)
         piece('ext', module='ember_el', fn='fall', points=[[x, y, -0.215] for x, y in CORE],
-              radius=CORE_R, flat=6.0, lava='acg:Lava004', tex_scale=1.2, strength=7.0, gain=2.4,
-              ramp=CORE_RAMP, samples=6),
+              radius=CORE_R, flat=6.0, lava='acg:Lava004', tex_scale=1.2, strength=4.0, gain=2.4,
+              ramp=CORE_RAMP, crust_rough=0.9, crust_spec=0.0, samples=6),
         # the dimmer glows out in the field, under the right-hand crust: the crack and the skylights
         piece('ext', module='ember_el', fn='lava_surface', size=[2.1, 11.6], position=[1.55, 3.2, -0.19], cell=0.05,
               lava='acg:Lava004', tex_scale=1.0, strength=5.0, gain=1.6, ripple=0.01, ramp=CORE_RAMP, crust_rough=0.8),
@@ -80,16 +80,16 @@ def props():
               area=[-6.0, -2.5, 6.0, 8.0], count=14, scale=[3.5, 7.0], avoid=avoid, z=-0.02, seed=9, tilt_deg=12),
         # the far field, and the volcano: a cone with shoulders, a crater glowing in its top
         piece('ext', module='ember_el', fn='terrain', size=[140.0, 70.0], position=[0.0, 45.0, -0.3], cell=0.15,
-              relief=0.5, flat=[0.0, -200.0, 1.0], cones=[[CONE[0], CONE[1], 24.0, 7.5, 4.0]],
+              relief=0.7, flat=[0.0, -200.0, 1.0], cones=[[CONE[0], CONE[1], 24.0, 7.5, 4.0]],
               channels=[{'points': SEAM, 'width': 0.35, 'depth': 0.2, 'bank': 0.5, 'lava': 'flow'}],
               flow='acg:Lava001', flow_emit=30.0, flow_gain=1.8, flow_scale=3.0, **{**rock, 'displace': 0.05}),
         # steam: a low veil over the flow, lit from below, and the volcano's plume
-        piece('ext', module='ember_el', fn='steam', box=[-6.5, -5.0, -0.1, 0.8, 8.0, 1.0], density=1.6, scale=0.7,
+        piece('ext', module='ember_el', fn='steam', box=[-6.5, -5.0, -0.1, 0.8, 8.0, 1.0], density=3.0, scale=0.4,
               anisotropy=0.45),
         piece('ext', module='ember_el', fn='steam', box=[CONE[0] - 6.0, CONE[1] - 5.0, 9.0, CONE[0] + 9.0, CONE[1] + 5.0, 30.0],
-              density=0.12, scale=4.0, anisotropy=0.4),
+              density=0.3, scale=4.0, anisotropy=0.4),
         # a few embers lifting off the flow's core
-        piece('ext', module='ember_el', fn='sparks_mixed', area=[-2.4, -1.6, -1.2, 1.4], count=10, height=1.8,
+        piece('ext', module='ember_el', fn='sparks_mixed', area=[-2.4, -1.6, -1.2, 1.4], count=24, height=1.2,
               streak=[0.01, 0.08], radius=[0.001, 0.003], drift=[0.3, 0.1], emit=16.0, seed=4),
     ]
     return P
@@ -98,11 +98,14 @@ def props():
 def lights():
     return {
         # the flow's glow, low from the speaker's left: on the cabinet's front and the ground round it
-        'flow_near': lamp([-1.3, -1.4, 0.15], [0.0, -0.1, 0.55], 1.8, (0.5, 2.0), '#FF6A22'),
-        'flow_far': lamp([-2.1, 1.0, 0.15], [0.0, 0.3, 0.7], 1.2, (0.5, 2.0), '#FF6A22'),
+        'flow_near': lamp([-1.6, -1.2, 0.3], [0.0, -0.1, 0.6], 4.0, (0.4, 1.5), '#FF6A22', specular=0.0),
+        'flow_far': lamp([-2.1, 1.0, 0.15], [0.0, 0.3, 0.7], 1.0, (0.5, 2.0), '#FF6A22', specular=0.0),
         # behind the speaker: the warm rim and the light through the acrylic
-        'through': lamp([0.15, 0.9, 0.5], [0.0, -0.6, 0.3], 2.0, (0.6, 1.2)),
-        'horn': lamp([0.1, 0.8, 1.25], [0.0, -0.2, 1.12], 2.0, (0.9, 0.5)),
+        # (no specular: their reflections in the horn and down the cabinet's edge read as hidden lamps)
+        'through': lamp([-0.8, 1.0, 0.4], [0.0, 0.0, 0.6], 1.6, (2.0, 1.5), specular=0.0),
+        'horn': lamp([-0.4, 0.8, 1.2], [0.0, -0.1, 1.12], 1.0, (1.2, 0.6), specular=0.0),
+        # the cabinet's red light on the rock at its foot
+        'pool': lamp([0.0, -0.3, 0.3], [0.0, -0.45, 0.0], 0.5, (0.5, 0.2), '#C8281E', specular=0.0),
         # the crater, lighting its plume from below
         'crater': point([CONE[0], CONE[1], 6.5], 20000, LAVA_LIGHT, 2.0),
     }
@@ -110,7 +113,7 @@ def lights():
 
 def shot():
     cam = camera(height=0.95, distance=6.5, azimuth=22.0, lens=60.0, target=(0.0, 0.0, 0.66), fstop=2.8)
-    return frame('ember', props(), cam, sky(SKY, rotation_deg=0.0, strength=0.12), 'barkhorn, Ember A2, a lava field at blue hour',
+    return frame('ember', props(), cam, sky(SKY, rotation_deg=0.0, strength=0.16), 'barkhorn, Ember A2, a lava field at blue hour',
                  lights=lights(), rotate_z=15.0, exposure=0.0, position=(0.0, 0.0, -0.003),
                  haze={'box_m': [-70.0, -10.0, -0.5, 70.0, 82.0, 35.0], 'density': 0.0025, 'anisotropy': 0.4,
                        'color': '#C8D6FF'},
