@@ -676,7 +676,10 @@
    ],
    "irradiance": 18.0,
    "color": 2900,
-   "spread_deg": 90.0
+   "spread_deg": 90.0,
+   "receivers": [
+    "*#0"
+   ]
   },
   "spkb0": {
    "type": "area",
@@ -696,7 +699,10 @@
    ],
    "irradiance": 36.0,
    "color": 2900,
-   "camera": false
+   "camera": false,
+   "receivers": [
+    "*#0"
+   ]
   },
   "spk1": {
    "type": "area",
@@ -716,7 +722,10 @@
    ],
    "irradiance": 18.0,
    "color": 2900,
-   "spread_deg": 90.0
+   "spread_deg": 90.0,
+   "receivers": [
+    "*#1"
+   ]
   },
   "spkb1": {
    "type": "area",
@@ -736,7 +745,10 @@
    ],
    "irradiance": 36.0,
    "color": 2900,
-   "camera": false
+   "camera": false,
+   "receivers": [
+    "*#1"
+   ]
   },
   "niche2": {
    "type": "spot",
@@ -1244,7 +1256,7 @@
    6.05,
    3.32
   ],
-  "density": 0.02,
+  "density": 0.01,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },

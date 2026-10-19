@@ -91,10 +91,14 @@ def lights(v):
             L[f'spk{k}'] = {'type': 'area', 'position': [round(x + 0.9 * fx, 3), round(y + 0.9 * fy, 3), P.CEIL - 0.2],
                             'target': [x, y, 0.75], 'size_m': [0.35, 0.35], 'irradiance': v['spk_irr'],
                             'color': v.get('spk_k', 2700), 'spread_deg': v.get('spk_spread', 180)}
+            if v.get('spk_link'):                                     # light-linked: it lights its own speaker alone
+                L[f'spk{k}']['receivers'] = [f'*#{k}']
             if v.get('spk_back', 0) > 0:                              # low behind the cabinet, lighting through it
                 L[f'spkb{k}'] = {'type': 'area', 'position': [round(x - 0.55 * fx, 3), round(y - 0.55 * fy, 3), 0.35],
                                  'target': [x, y, 0.65], 'size_m': [0.3, 0.3], 'irradiance': v['spk_back'],
                                  'color': v.get('spk_k', 2700), 'camera': False}
+                if v.get('spk_link'):
+                    L[f'spkb{k}']['receivers'] = [f'*#{k}']
         else:
             if v.get('niche_fill', 0) > 0:                            # a fill at the niche floor's front lip, up the cabinet
                 L[f'nfill{k}'] = {'type': 'area', 'position': [x, y - 0.33, P.NICHE_Z0 + 0.03], 'target': [x, y, z + 0.5],

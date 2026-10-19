@@ -70,7 +70,9 @@ VIEWS = {
                   'settings': {'spk_irr': 18.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 36.0, 'sconce_w': 4.0,
                                'exposure': -1.5, 'wb': 3800, 'spot_records': 8.0, 'rec_cone': 25.0, 'rec_aim_z': 1.2,
                                'record_glow': 0.4, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.3,
-                               'flame': 60.0, 'candle_w': 1.5, 'haze': 0.02}},
+                               'flame': 60.0, 'candle_w': 1.5, 'haze': 0.01,
+                               # (p4: the tripled lamps flooded the corner, median 81 at -1.5) light-linked to the speaker
+                               'spk_link': True}},
     'street': {'title': 'the shopfront window at night, from the kerb',
                # concept changed after three passes at 3.5 to 4.5 on the whole facade (street-r1 to r3): the lead's
                # fallback, tight on the lit window from the kerb at 50 mm: the dancer's lightbox, the frosted name, the
