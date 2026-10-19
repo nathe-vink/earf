@@ -139,3 +139,14 @@ coordinator asked for a re-finish from the raw frames, with no re-render.
 
 The portrait (rendered by the coordinator's helper, 457212b) got the same re-finish. Both finals in `element31/` are now
 the re-finished frames.
+
+## On the drivers made real (2026-10-19)
+
+Both finals rendered again on the drivers as made (the 15PR400 woofer, the DE1085TN's exit and phase plug, the opaque
+polished ring), on the same rig: eight helpers, four strips a frame at 512 samples with the finish off and 32 rows of
+overlap each side, stitched with feathered overlaps (landscape fd50f94, 9e2248d, b675fe4, 43d34af; phone 88004bf,
+0b71533, 226db37, de091a6; 13,900 s and 14,000 s of render). Then the same re-finish from the raw, with the same
+numbers (R x 0.84, B x 1.25, a 0.003 toe, a 0.7-stop dodge). The speaker's mask came from `render.py --masks-only
+--set set.kind=none --set finish.enabled=false`, so nothing stands in front of it. The cabinet lands where it did:
+mean luma 55.5 against 55, the ground below 37 against 38, grey-brown (62/54/51). The joins show no line at 3x, and
+the row-to-row grain sits at its neighbours' at every join.
