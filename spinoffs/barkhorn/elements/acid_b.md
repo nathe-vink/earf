@@ -111,3 +111,8 @@ re-graded). For the re-render on main's new drivers the near layer is thinned (6
 The landscape final on main's drivers (the 15PR400 woofer, the opaque polished ring; rig 9eac9d8): 2400 x 1600, 512
 samples, 81 min render + 1.5 min build, graded with `acid_b_grade.py`. The near drops thinned as planned; no bars over
 the ground. The portrait on the same rig is a helper's (branch r31-element-acid-b-portrait-d).
+
+The phone frame on the same rig (9eac9d8, new drivers, fixed water) was rendered by a helper session: branch
+r31-element-acid-b-portrait-d, commit 8cd83e0 (1600 x 2000, 512 samples, graded with `acid_b_grade.py`), merged to main
+with this landscape (main 35bf8ad, 7bd9d60). The `acid_b-portrait.png` on this branch is the first interim (old water,
+old drivers); main carries the current one.
