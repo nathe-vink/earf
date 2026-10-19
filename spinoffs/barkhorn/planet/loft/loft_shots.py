@@ -66,39 +66,31 @@ VIEWS = {
                          'spk_irr': 20.0, 'spk_back': 30.0, 'spk_spread': 90.0, 'spk_link': True,
                          'spot_records': 10.0, 'rec_cone': 40.0, 'chair_dye': '#4A3A32'}},
     'listening': {'title': 'the listening room, one of the Ember pair',
-                  # after listening-r1 (5.5): 28 mm from a little back and higher, the beams in, the speaker on the left third
-                  # (p2: from 14.3, 1.8 a lounge chair filled the foreground) clear of the chairs
-                  'camera': {'position': [14.75, 2.6, 1.15], 'target': [16.3, 4.6, 1.2], 'lens_mm': 28, 'level': True,
+                  # after the two critics on p6 (5.5, 5.0; mean 5.25): back and lower on 24 mm shifted up, the speaker
+                  # whole on the floor and the beams in; the screen and the records well below the speaker, the
+                  # speaker lit harder (linked) with a rim from behind; a neutral warm grey (3000 K); darker; pools
+                  'camera': {'position': [14.35, 2.75, 1.05], 'target': [16.3, 4.6, 1.35], 'lens_mm': 24, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, LP.PAIR['y'][1], 0.9]},
-                  # listening-r1: the speaker's front lamp soft and low, the light mostly from behind through the acrylic;
-                  # the chairs espresso; the record wall up; warmer and lower overall
-                  # after listening-r2 (5.5): a stop darker, the screen dimmed below the speaker, the speaker lit three
-                  # times harder from front and behind, the candle up, the records lower and grazed, haze
-                  # (p5, light-linked: the speaker glowed but the room fell to a median of 3) exposure up 1.9 stops,
-                  # the linked lamps down by as much, the room lit by its own: the sconce, records, candle, a ceiling fill
-                  'settings': {'spk_irr': 5.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 10.0, 'sconce_w': 15.0,
-                               'exposure': 0.0, 'wb': 3800, 'spot_records': 14.0, 'rec_cone': 25.0, 'rec_aim_z': 1.2,
-                               'fill_w': 40.0, 'fill_pos': [14.6, 3.2, 3.0], 'fill_target': [15.2, 3.4, 0.0],
-                               'record_glow': 0.4, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.15,
-                               'flame': 60.0, 'candle_w': 1.5, 'haze': 0.01,
-                               # (p4: the tripled lamps flooded the corner, median 81 at -1.5) light-linked to the speaker
-                               'spk_link': True}},
+                  'settings': {'spk_irr': 12.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 20.0, 'sconce_w': 20.0,
+                               'exposure': -0.2, 'wb': 3000, 'spot_records': 8.0, 'rec_cone': 18.0, 'rec_aim_z': 1.2,
+                               'fill_w': 25.0, 'fill_pos': [14.6, 3.2, 3.0], 'fill_target': [15.2, 3.4, 0.0],
+                               'record_glow': 0.12, 'console_lift': 0.55, 'chair_dye': '#2B2119', 'screen_lounge': 0.12,
+                               'flame': 60.0, 'candle_w': 3.0, 'haze': 0.02, 'spk_link': True}},
     'street': {'title': 'the shopfront window at night, from the kerb',
-               # concept changed after three passes at 3.5 to 4.5 on the whole facade (street-r1 to r3): the lead's
-               # fallback, tight on the lit window from the kerb at 50 mm: the dancer's lightbox, the frosted name, the
-               # glass and its reflections, and through a clear pane the right-hand Ember speaker, the frame's one colour
-               # after street-r4 (4.5): closer, lined up so the right-hand Ember speaker stands in a clear pane
-               'camera': {'position': [-4.0, 2.6, 1.65], 'target': [0.0, 3.5, 1.65], 'lens_mm': 50, 'level': True,
-                          'fstop': 5.6, 'focus': [-0.09, 3.6, 1.6]},
-               'settings': {'exposure': 1.7, 'wb': 3700, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
-                            'screen_glow': 0.4, 'spot_niche': 120.0, 'spk_link': True,
-                            'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 60.0, 'lamp_cam_z': 4.0,
-                            'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 15.0, 'entry_cone': 100.0,
-                            'transom_glow': 0.15, 'spk_irr': 9.0, 'spk_back': 18.0, 'spk_spread': 90.0,
-                            'pendant_w': 90.0, 'pendant_glow': 0.3, 'inlay_glow': 0.6, 'haze': 0.025,
-                            'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
-                            'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5, 'etch_glow': 0.15,
-                            'screen_window': 0.35, 'glass_gloss': 3.0, 'chair_dye': '#4A3A32'}},
+               # after the two critics on p6 (4.5, 4.5): 35 mm from the kerb, the dancer's lightbox on the left edge and
+               # the right-hand Ember speaker seen over the lounge chairs, clear of the bar; the name frosted glass again;
+               # the lightbox lower and warm; less haze; a cooler balance; the shelf edges down
+               'camera': {'position': [-3.0, 3.0, 1.65], 'target': [6.85, 4.74, 1.6], 'lens_mm': 35, 'level': True,
+                          'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
+               'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
+                            'screen_glow': 0.4, 'screen_window': 0.22, 'screen_tint': '#FFA060', 'spot_niche': 120.0,
+                            'spk_link': True, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 90.0,
+                            'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 15.0, 'entry_cone': 100.0,
+                            'transom_glow': 0.15, 'spk_irr': 18.0, 'spk_back': 30.0, 'spk_spread': 90.0,
+                            'pendant_w': 90.0, 'pendant_glow': 0.18, 'pendant_lamp': 1.6, 'inlay_glow': 0.6,
+                            'haze': 0.01, 'shelf_glow': 0.5, 'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440',
+                            'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5,
+                            'etch_glow': 0.03, 'glass_gloss': 3.0, 'chair_dye': '#2B2119'}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot

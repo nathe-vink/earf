@@ -1,0 +1,343 @@
+{
+ "stage1": {
+  "impression": "A night shopfront seen through glass, with a warm, hazy room behind it, a lightbox showing a dancer, and EARF on the pane. It reads as a competent CG mood render, not a photograph. The window's letters are flat, opaque grey slabs like vinyl in a game texture. The lightbox is a cool, even grey card with no frame depth. Haze and denoiser smear turn the room into a brown fog with no material detail at 1:1. The one coloured object, the Ember speaker, is a red sliver about 15 px wide, half hidden behind the end of the bar, so the hero cannot be read at a glance.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker must read at a glance through a clear pane: whole silhouette visible, not occluded by the bar end or a mullion, region lum_median >= 45 and visibly red, about 4% of the frame or more",
+  "The frosted name must read as acid-etched or frosted glass: translucent, showing the room softly through it, with a thin bright edge and tonal variation, not uniform opaque grey (now median 155 with p5-p95 nearly flat inside the letters)",
+  "The room behind the glass must show its materials at 1:1 (board-formed concrete, fir beams, steel): haze low enough that local contrast returns (back of room lum_range now 42)",
+  "The shopfront glass must behave like glass at night: faint reflections of the street lamps and kerb, a slight green edge, so the viewer knows they are outside",
+  "The lightbox must glow warm-neutral and sit flush in a deep blackened-steel reveal, not a cool grey card",
+  "Signs of life: a figure at the bar or a coat and glasses in the window seat, and a believable street foreground (pavement sheen at the bottom)"
+ ],
+ "defects": [
+  {
+   "region": [
+    470,
+    270,
+    500,
+    320
+   ],
+   "what": "Ember speaker is a tiny red sliver, half hidden behind the bar's end; hero unreadable"
+  },
+  {
+   "region": [
+    145,
+    160,
+    405,
+    245
+   ],
+   "what": "EARF letters flat opaque grey (median 155, r/g/b 158/155/151), no translucency, no edge light, read as vinyl or a CG overlay; the pendant strips show through only as lines behind them"
+  },
+  {
+   "region": [
+    0,
+    70,
+    165,
+    470
+   ],
+   "what": "Lightbox face cool grey (r/g/b 87/77/71) against a 2400 K room; even card-like glow, thin frame, the dancer silhouette very soft but acceptable"
+  },
+  {
+   "region": [
+    440,
+    170,
+    720,
+    380
+   ],
+   "what": "Back of room fogged flat (lum_range 42, p5 29.5): haze plus denoise erase chairs, record wall and concrete texture into brown mush"
+  },
+  {
+   "region": [
+    190,
+    260,
+    430,
+    470
+   ],
+   "what": "Bar front, table and banquette smeared by the denoiser; no grain in the concrete or fir, and the tufted leather reads as a low-poly cushion"
+  },
+  {
+   "region": [
+    425,
+    20,
+    445,
+    480
+   ],
+   "what": "Mullion splits the frame near the centre and cuts between the table vignette and the speaker"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No reflections on the shopfront glass at all; the street lamps (3 x 120 W) contribute nothing visible, so the outside-looking-in idea is lost"
+  },
+  {
+   "region": [
+    600,
+    100,
+    635,
+    130
+   ],
+   "what": "Bare bright pendant disc floats with no fixture; reads as a CG light sphere"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    40
+   ],
+   "what": "Header steel crushed and featureless (crush_pct 17.5): no patina or edge highlight"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero Ember speaker is almost entirely occluded and tiny, so the frame's only colour is a smudge.",
+   "evidence": {
+    "region": [
+     470,
+     270,
+     500,
+     320
+    ],
+    "measured": "red sliver about 15 x 40 px, r/g/b median 91/57/34 for the area, mostly hidden behind the end of the bar"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [-4.0, 2.6, 1.65], target [0.0, 3.5, 1.65], 50 mm",
+    "to": "move the camera along y toward the right-hand wall (about y 1.6 to 2.0) and aim at the Ember pair's x so the clear pane frames the speaker clear of the bar end and the mullion; lens 65 to 75 mm so it fills about 4 to 6% of the frame, with the lightbox kept as a left-edge frame element"
+   },
+   "expected": "Full Ember silhouette visible through clear glass, red tint readable at thumbnail size",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Haze flattens the room into brown fog and hides every material.",
+   "evidence": {
+    "region": [
+     440,
+     170,
+     720,
+     380
+    ],
+    "measured": "lum_range 42, lum_p5 29.5, lum_p95 71.4: lifted blacks, no local contrast"
+   },
+   "change": {
+    "setting": "haze density",
+    "from": "0.025 per metre",
+    "to": "0.008 per metre"
+   },
+   "expected": "Blacks deepen between the pools of light, and the record wall, chairs and concrete separate; lum_range in the back region rises above 70",
+   "accept": {
+    "region": [
+     440,
+     170,
+     720,
+     380
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Ember is not lit enough to be the brightest coloured thing in the frame.",
+   "evidence": {
+    "region": [
+     470,
+     260,
+     500,
+     320
+    ],
+    "measured": "lum_median 63.8, red barely above the surrounding warm brown (r 91 vs room r about 74)"
+   },
+   "change": {
+    "setting": "Ember speaker area lamps",
+    "from": "4 x area, 9.0 W/m2 at the target",
+    "to": "4 x area, 18 W/m2 at the target, plus the speaker's internal pinholes and lamps raised so the batts glow through the red acrylic"
+   },
+   "expected": "The speaker reads as glowing red cast acrylic; region lum_median 70 or more with clear red dominance",
+   "accept": {
+    "region": [
+     470,
+     260,
+     500,
+     320
+    ],
+    "metric": "r_median",
+    "op": ">=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The frosted name reads as opaque grey vinyl, not frosted glass.",
+   "evidence": {
+    "region": [
+     145,
+     160,
+     405,
+     245
+    ],
+    "measured": "lum_median 155, r/g/b 158/155/151, uniform fill; the room does not show through"
+   },
+   "change": {
+    "setting": "window's frosted name: emission and frost roughness",
+    "from": "emission 0.15, opaque diffuse look",
+    "to": "emission 0.03 to 0.05, rough transmission (roughness about 0.35) so the warm room glows softly through the letters, with a polished etched edge catching the street lamps"
+   },
+   "expected": "Letters read warm, slightly translucent and darker than now (median about 90 to 120) and carry the room's colour",
+   "accept": {
+    "region": [
+     145,
+     160,
+     405,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     85,
+     125
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The lightbox is a cool grey card that clashes with the 2400 K room and looks like signage.",
+   "evidence": {
+    "region": [
+     0,
+     70,
+     165,
+     470
+    ],
+    "measured": "r/g/b median 87/77/71 (cool against the room's 74/49/28), very even glow"
+   },
+   "change": {
+    "setting": "screens' images emission and white balance of the screen",
+    "from": "0.4, neutral-white",
+    "to": "0.25 with a 3000 K warm tint and a slight radial falloff to the panel edges; deepen the blackened-steel reveal so the acrylic sits flush"
+   },
+   "expected": "The panel reads as frosted acrylic glowing in a warm room, darker and quieter than the letters, without competing with the speaker",
+   "accept": {
+    "region": [
+     0,
+     70,
+     165,
+     470
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     68
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The glass has no reflections, so the frame does not read as shot from the kerb at night.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "no specular highlights from the street lamps anywhere on the pane; clip_pct 0.06 frame-wide"
+   },
+   "change": {
+    "setting": "street lamps and shopfront glass",
+    "from": "3 x point, 120 W, 3000 K, no visible reflection",
+    "to": "place at least one street lamp behind and above the camera so it reflects as a soft streak in the upper glass; give the glass a 4 to 6% Fresnel reflection of a dim street and pavement"
+   },
+   "expected": "Faint cool-warm reflections over the dark parts of the glass (upper right, lower edge) without hiding the room",
+   "accept": {
+    "region": [
+     0,
+     440,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "Denoiser smear removes all material texture at 1:1.",
+   "evidence": {
+    "region": [
+     190,
+     260,
+     430,
+     470
+    ],
+    "measured": "concrete bar front and banquette show no grain or tufting detail in a 2x crop; flat gradients"
+   },
+   "change": {
+    "setting": "render samples / denoise",
+    "from": "256 samples, adaptive 0.02, denoise on",
+    "to": "1024 samples, adaptive 0.01, denoise with albedo and normal passes (prefilter accurate), at the full 2400 x 1600; add 1 to 2% film grain in post"
+   },
+   "expected": "Board-form grain, fir checks and tufting visible at 1:1",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The room is empty of life, and the window table is a lone vignette.",
+   "evidence": {
+    "region": [
+     190,
+     300,
+     520,
+     470
+    ],
+    "measured": "one glass on the table; the bar stools and banquette are unoccupied"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glass on the window table only",
+    "to": "a second glass and a folded menu on the table, a coat over the banquette, bottles and a glass catching highlights on the bar near the Ember line of sight"
+   },
+   "expected": "Small highlights and signs of use make the room read lived-in",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember speaker larger or more saturated red in itself",
+   "why": "The speaker's shape and colour are fixed; only its light and its framing can change"
+  },
+  {
+   "request": "Move the bar end or the mullion that occludes the speaker",
+   "why": "The room's layout and the shopfront are fixed; solve it with the camera (c1)"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   14.75,
-   2.6,
-   1.15
+   14.35,
+   2.75,
+   1.05
   ],
   "target": [
    16.3,
    4.6,
-   1.2
+   1.35
   ],
-  "lens_mm": 28,
+  "lens_mm": 24,
   "level": true,
   "fstop": 2.8,
   "focus": [
@@ -158,7 +158,7 @@
     "shade_glow": 0.4,
     "pendant_glow": 0.25,
     "flame": 60.0,
-    "record_glow": 0.4,
+    "record_glow": 0.12,
     "vu": 2.0,
     "street": true,
     "windows_lit": 0.5,
@@ -171,7 +171,7 @@
     "flat_glow": 0.06,
     "console_lift": 0.55,
     "screen_glow": 0.8,
-    "screen_lounge": 0.15,
+    "screen_lounge": 0.12,
     "inlay_glow": 0.6,
     "pendant_lamp": 2.5,
     "etch_glow": 0.05,
@@ -470,7 +470,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#4A3A32",
+    "color": "#2B2119",
     "mix": 1.0
    },
    {
@@ -494,7 +494,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#4A3A32",
+    "color": "#2B2119",
     "mix": 1.0
    },
    {
@@ -518,7 +518,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#4A3A32",
+    "color": "#2B2119",
     "mix": 1.0
    },
    {
@@ -542,7 +542,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#4A3A32",
+    "color": "#2B2119",
     "mix": 1.0
    },
    {
@@ -566,7 +566,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#4A3A32",
+    "color": "#2B2119",
     "mix": 1.0
    },
    {
@@ -590,7 +590,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#4A3A32",
+    "color": "#2B2119",
     "mix": 1.0
    },
    {
@@ -614,7 +614,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#4A3A32",
+    "color": "#2B2119",
     "mix": 1.0
    },
    {
@@ -675,7 +675,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 5.0,
+   "irradiance": 12.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -698,7 +698,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 10.0,
+   "irradiance": 20.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -721,7 +721,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 5.0,
+   "irradiance": 12.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -744,7 +744,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 10.0,
+   "irradiance": 20.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -794,7 +794,7 @@
     5.8999999999999995,
     1.78
    ],
-   "power_w": 15.0,
+   "power_w": 20.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -865,8 +865,8 @@
     2.05,
     1.2
    ],
-   "power_w": 14.0,
-   "cone_deg": 25.0,
+   "power_w": 8.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -883,8 +883,8 @@
     3.05,
     1.2
    ],
-   "power_w": 14.0,
-   "cone_deg": 25.0,
+   "power_w": 8.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -901,8 +901,8 @@
     4.05,
     1.2
    ],
-   "power_w": 14.0,
-   "cone_deg": 25.0,
+   "power_w": 8.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -914,7 +914,7 @@
     0.84,
     0.775
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -926,7 +926,7 @@
     0.84,
     0.775
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -938,7 +938,7 @@
     0.84,
     0.775
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -950,7 +950,7 @@
     4.18,
     0.775
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -962,7 +962,7 @@
     4.029999999999999,
     1.155
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -974,7 +974,7 @@
     4.029999999999999,
     1.155
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -986,7 +986,7 @@
     4.029999999999999,
     1.155
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -998,7 +998,7 @@
     3.13,
     0.535
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -1010,7 +1010,7 @@
     4.29,
     0.53
    ],
-   "power_w": 1.5,
+   "power_w": 3.0,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -1241,7 +1241,7 @@
     1.6,
     1.6
    ],
-   "power_w": 40.0,
+   "power_w": 25.0,
    "color": 2700,
    "camera": false
   },
@@ -1277,7 +1277,7 @@
    6.05,
    3.32
   ],
-  "density": 0.01,
+  "density": 0.02,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1289,8 +1289,8 @@
   "bounces": 10,
   "view": "AgX",
   "look": "None",
-  "exposure": 0.0,
-  "white_balance_k": 3800,
+  "exposure": -0.2,
+  "white_balance_k": 3000,
   "white_balance_tint": 0.0
  }
 }

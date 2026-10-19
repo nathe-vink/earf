@@ -1,0 +1,375 @@
+{
+ "stage1": {
+  "impression": "A night shopfront seen from the kerb: steel mullions, a big flat-grey EARF in the glass, a grey lightbox showing a dancer's silhouette on the left, and a hazy amber room behind. The lettering and the lightbox are the brightest, most graphic things in the frame and they read as shop signage and vinyl, not frosted glass. The room behind is soft and murky, the glass carries no street reflections, and the speaker that should be the hero is a tiny red sliver half hidden behind the bar. It reads as a competent CG shopfront, not a photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker reads at a glance: silhouette and red glow clearly visible through a clear pane, at least ~4% of frame width, unoccluded by the bar",
+  "The frosted name reads as acid-etched glass (translucent, darker than the room's highlights, no internal banding), not flat grey vinyl that outshines the room",
+  "The lightbox glows warm and soft, below the speaker in brightness, not a cool grey sign panel",
+  "The glass shows faint believable reflections of the street (lamps, opposite facade), so it reads as photographed through a window",
+  "The interior holds contrast and detail through the haze: concrete, fir and bar edges legible at 1:1",
+  "Blackened-steel mullions show a soft uneven sheen and patina rather than flat near-black bars"
+ ],
+ "defects": [
+  {
+   "region": [
+    145,
+    160,
+    405,
+    245
+   ],
+   "what": "Frosted EARF letters are flat neutral grey (RGB median 158/155/151, lum median 155), the brightest large element in the frame; read as opaque vinyl signage"
+  },
+  {
+   "region": [
+    145,
+    160,
+    405,
+    245
+   ],
+   "what": "Horizontal banding/stripes inside the letters where shelf light lines show through; looks like a texture artefact"
+  },
+  {
+   "region": [
+    478,
+    282,
+    490,
+    315
+   ],
+   "what": "Ember speaker visible only as a ~12 x 33 px red sliver, mostly occluded by the bar end; not the hero"
+  },
+  {
+   "region": [
+    0,
+    70,
+    160,
+    465
+   ],
+   "what": "Dancer lightbox is a cool, neutral grey panel (lum median 79, RGB 87/77/72), larger and brighter than the speaker; reads as a backlit sign"
+  },
+  {
+   "region": [
+    440,
+    180,
+    720,
+    470
+   ],
+   "what": "Heavy haze flattens the back of the room (lum_range 48, p5 21 to p95 69); chairs, record wall and concrete are mush at 1:1"
+  },
+  {
+   "region": [
+    0,
+    40,
+    720,
+    470
+   ],
+   "what": "Glass shows no reflections of the street at all; the window reads as an absent pane"
+  },
+  {
+   "region": [
+    120,
+    40,
+    132,
+    480
+   ],
+   "what": "Steel mullion is a flat dark bar (lum median 12) with no sheen or edge highlight"
+  },
+  {
+   "region": [
+    160,
+    260,
+    360,
+    280
+   ],
+   "what": "Shelf lit edges read as thin floating light bars (p95 170) cutting through the letters"
+  },
+  {
+   "region": [
+    600,
+    105,
+    632,
+    128
+   ],
+   "what": "Ceiling lamp clips at 25.7% of its box; acceptable as a practical but hard-edged"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    40
+   ],
+   "what": "Top fascia crushed (17.5% crush) with no detail in the steel"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero Ember speaker is almost entirely hidden behind the bar end and reads as a red smear.",
+   "evidence": {
+    "region": [
+     478,
+     282,
+     490,
+     315
+    ],
+    "measured": "visible red area ~12 x 33 px (0.1% of frame), r_median 132, partially occluded"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "position [-4.0, 2.6, 1.65], target [0.0, 3.5, 1.65], 50 mm",
+    "to": "position [-3.0, 1.9, 1.45], target aimed down the room's axis at the listening room (approx [17.0, 3.2, 1.0]), 50 mm, focus at ~[0.0, 3.0, 1.5]; place the speaker in a clear pane between mullions, off the bar's sightline"
+   },
+   "expected": "The Ember cabinet's full silhouette and red glow visible through clear glass, roughly 30-40 px wide at proof scale, unoccluded.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frosted name is the brightest, most neutral thing in the frame and reads as grey vinyl signage that competes with the speaker.",
+   "evidence": {
+    "region": [
+     145,
+     160,
+     405,
+     245
+    ],
+    "measured": "lum_median 155, RGB 158/155/151, banded"
+   },
+   "change": {
+    "setting": "the window's frosted name emission; frosted acrylic/glass roughness",
+    "from": "emission 0.15, current roughness",
+    "to": "emission 0.0 (lit only by the room behind and street spill), transmission up with roughness ~0.35 so the room's warm light diffuses through the letters; remove the banding"
+   },
+   "expected": "Letters read as acid-etched glass: translucent warm, lum median ~80-110, no stripe pattern.",
+   "accept": {
+    "region": [
+     145,
+     160,
+     405,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     110
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The dancer lightbox is a large cool-grey panel brighter than the speaker, reading as a backlit sign.",
+   "evidence": {
+    "region": [
+     0,
+     70,
+     160,
+     465
+    ],
+    "measured": "lum_median 79, RGB 87/77/72 against a room at ~47"
+   },
+   "change": {
+    "setting": "the screens' images emission (this lightbox)",
+    "from": "0.4",
+    "to": "0.2, with the frosted acrylic roughness raised so the silhouette stays fogged and the glow falls off toward the frame edges"
+   },
+   "expected": "A soft, low glow that sits behind the room's practicals; silhouette still legible.",
+   "accept": {
+    "region": [
+     0,
+     70,
+     160,
+     465
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     60
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The haze flattens the back of the room into an orange fog with no material detail.",
+   "evidence": {
+    "region": [
+     440,
+     180,
+     720,
+     470
+    ],
+    "measured": "lum_range 47.9, p5 21, p95 69"
+   },
+   "change": {
+    "setting": "haze density",
+    "from": "0.025 per metre",
+    "to": "0.010 per metre"
+   },
+   "expected": "Back of room holds contrast: record wall, chairs and concrete readable; deeper darks between pools.",
+   "accept": {
+    "region": [
+     440,
+     180,
+     720,
+     470
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The glass carries no reflections, so the frame doesn't read as a photograph through a shop window.",
+   "evidence": {
+    "region": [
+     0,
+     40,
+     720,
+     470
+    ],
+    "measured": "no reflected street lamps, facades or kerb visible anywhere in the glazing"
+   },
+   "change": {
+    "setting": "street lamps and the street behind the camera",
+    "from": "3 x point 120 W, 3000 K, nothing to reflect",
+    "to": "keep the street lamps, add a dim opposite facade/parked car plane behind the camera so the glass picks up faint (5-10%) reflections, plus one or two reflected street-lamp highlights in the upper panes"
+   },
+   "expected": "Faint ghosted reflections in the glass at low contrast, especially in the dark upper panes.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     40
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 8
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The overall grade is monochrome orange so the room's neutrals don't stay neutral and the red speaker doesn't separate.",
+   "evidence": {
+    "region": [
+     500,
+     330,
+     650,
+     470
+    ],
+    "measured": "RGB median 58/37/21 on concrete/floor"
+   },
+   "change": {
+    "setting": "white_balance_k",
+    "from": "3700",
+    "to": "3200"
+   },
+   "expected": "Concrete reads warm grey rather than orange; Ember red becomes the only saturated colour.",
+   "accept": {
+    "region": [
+     500,
+     330,
+     650,
+     470
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 28
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The shelves' lit edges read as thin floating light bars slicing through the window name.",
+   "evidence": {
+    "region": [
+     160,
+     260,
+     360,
+     280
+    ],
+    "measured": "p95 170 on 1-2 px lines, range 151"
+   },
+   "change": {
+    "setting": "the shelves' lit edges emission",
+    "from": "1.0",
+    "to": "0.5"
+   },
+   "expected": "Edges glow as soft lines that support the back-bar rather than graphic stripes.",
+   "accept": {
+    "region": [
+     160,
+     260,
+     360,
+     280
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "Blackened-steel mullions and fascia are flat dark bars with no sheen or patina.",
+   "evidence": {
+    "region": [
+     120,
+     40,
+     132,
+     480
+    ],
+    "measured": "lum_median 12, no edge highlight"
+   },
+   "change": {
+    "setting": "the steel's patina/finish",
+    "from": "current flat near-black",
+    "to": "roughness varied 0.35-0.6 with a brownish patina map, so street light catches a soft uneven sheen on the mullion faces and a crisp edge highlight"
+   },
+   "expected": "Mullions show a soft vertical sheen and readable edges.",
+   "accept": {
+    "region": [
+     120,
+     40,
+     132,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     16,
+     35
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember speaker larger or brighter in itself",
+   "why": "The speaker's shape, colour and parts are fixed; visibility must come from camera and light (c1)."
+  },
+  {
+   "request": "Move the bar or the listening room to clear the sightline",
+   "why": "The room's layout is fixed by the card; solved by moving the camera instead."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

@@ -1,0 +1,371 @@
+{
+ "stage1": {
+  "impression": "A good-looking corner with a real idea in it: the red speaker set against board-formed concrete, a frosted image panel and a full record wall. But it reads as an evenly filled CG room, not a night photograph. The concrete wall is the same brightness from top to bottom, there is no visible practical lamp and no pool of light, the frosted panel is the brightest thing in the frame and upstages the speaker, and the whole room has an orange cast. The Ember's acrylic reads as glowing pink plastic with a white core rather than thick polished cast acrylic, the record spines are too uniform and too evenly lit, and the chair is a dark mass with no shape.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speaker is the brightest and most saturated object, and the screen panel sits clearly below it (screen lum_median at most 60, speaker cabinet lum_median at least 50)",
+  "The room holds a warm-grey neutral: the concrete reads grey under warm light, not orange (wall delta_e to #5A5048 under 8)",
+  "Light falls in visible pools from practicals in or just outside the frame, with falloff on the walls and the record wall instead of even fill",
+  "Frame lum_median inside 22 to 50",
+  "The speaker is framed whole, with its base on the floor, and the overhead fir and the chair's form read",
+  "Signs of life and finer surface detail at full size: a record out of its sleeve, a drink, uneven spines, and a frosted panel that diffuses evenly with a polished edge"
+ ],
+ "defects": [
+  {
+   "region": [
+    40,
+    15,
+    295,
+    300
+   ],
+   "what": "The frosted screen panel is the brightest large surface (lum_median 81.6), a flat white lightbox that pulls the eye off the speaker and reads as a display panel, with no visible edge or reveal detail"
+  },
+  {
+   "region": [
+    300,
+    0,
+    490,
+    300
+   ],
+   "what": "The concrete wall is evenly lit top to bottom (profile 56 to 63, no falloff) and orange (RGB 83/56/31, delta_e 11.9 to warm grey #5A5048)"
+  },
+  {
+   "region": [
+    495,
+    0,
+    720,
+    380
+   ],
+   "what": "The record wall is lit flat and bright (lum_median 66). The spines repeat in uniform widths and colours, with no lean, gaps or pulled records"
+  },
+  {
+   "region": [
+    228,
+    290,
+    372,
+    470
+   ],
+   "what": "The Ember cabinet reads as pink, near-opaque plastic. The edges don't glow distinctly and there are no clean reflections. Median 42, under the 45 target"
+  },
+  {
+   "region": [
+    222,
+    195,
+    352,
+    278
+   ],
+   "what": "The horn's single specular smear (lower left) reads as a plastic highlight. The horn is darker than the cabinet and loses its silhouette against the screen"
+  },
+  {
+   "region": [
+    220,
+    440,
+    380,
+    480
+   ],
+   "what": "The bottom of the frame cuts off the speaker's base and plinth, so the hero does not stand on the floor"
+  },
+  {
+   "region": [
+    0,
+    240,
+    160,
+    480
+   ],
+   "what": "The leather chair is a near-black blob (median 16.2) with no rim, seam or leather sheen"
+  },
+  {
+   "region": [
+    130,
+    420,
+    260,
+    470
+   ],
+   "what": "The side table and candle give almost no pool of light. The candle barely reads as a source"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    30
+   ],
+   "what": "No fir beams or ceiling in frame, though the card says the frame is for them"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The screen panel outshines the speaker and reads as a lightbox.",
+   "evidence": {
+    "region": [
+     40,
+     15,
+     295,
+     300
+    ],
+    "measured": "lum_median 81.6 against the speaker cabinet's 42.1"
+   },
+   "change": {
+    "setting": "the screens' images (emission strength)",
+    "from": "0.8",
+    "to": "0.35"
+   },
+   "expected": "The panel drops to a soft glow behind the speaker and the image reads as suggestive rather than displayed. The speaker becomes the brightest object.",
+   "accept": {
+    "region": [
+     40,
+     15,
+     295,
+     300
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     38,
+     58
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Ember is under-lit for the hero and its acrylic shows no edge glow or crisp highlights.",
+   "evidence": {
+    "region": [
+     228,
+     290,
+     372,
+     470
+    ],
+    "measured": "lum_median 42.1 (target 45 or more), lum_p95 118"
+   },
+   "change": {
+    "setting": "on each Ember speaker, 4 x area",
+    "from": "5.0 W/m2 at the target, 2900 K",
+    "to": "9.0 W/m2, 2900 K, with one of the four moved high and behind as a back/top light to rim the horn and the cabinet's top edges"
+   },
+   "expected": "The cabinet rises to about 55 to 65 median, the horn's outline separates from the panel, and the polished edges carry thin bright lines.",
+   "accept": {
+    "region": [
+     228,
+     290,
+     372,
+     470
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The room is orange rather than neutral, so the speaker's red does not stand alone as the frame's only colour.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     490,
+     300
+    ],
+    "measured": "RGB median 83/56/31, delta_e2000 11.9 to warm grey #5A5048"
+   },
+   "change": {
+    "setting": "render white_balance_k",
+    "from": "3800",
+    "to": "3000"
+   },
+   "expected": "The concrete reads warm grey, the fir stays honey, and the red separates from the room.",
+   "accept": {
+    "region": [
+     300,
+     0,
+     490,
+     300
+    ],
+    "metric": "delta_e",
+    "hex": "#5A5048",
+    "op": "<",
+    "value": 8
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The light is even fill rather than pools from practicals: the walls show no falloff and the frame is too bright for a night room.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     490,
+     300
+    ],
+    "measured": "vertical profile 56.4 to 62.7 (flat); frame lum_p50 57.3, above the 22 to 50 band"
+   },
+   "change": {
+    "setting": "render exposure, plus the pendants",
+    "from": "exposure 0.4; pendants 60 W, cone 50 deg",
+    "to": "exposure 0.0; pendants 60 W, cone 30 deg, aimed at the side table and the floor in front of the speaker"
+   },
+   "expected": "The wall darkens toward the top and the corners, with pools on the floor and table. The frame median lands at about 38 to 45.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     48
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The record wall is flat-lit and competes with the speaker.",
+   "evidence": {
+    "region": [
+     495,
+     0,
+     720,
+     380
+    ],
+    "measured": "lum_median 66.0, higher than the speaker"
+   },
+   "change": {
+    "setting": "the record wall 3 x spot, and the record-wall strip",
+    "from": "14.0 W, cone 25 deg; strip 0.4",
+    "to": "8.0 W, cone 18 deg; strip 0.15"
+   },
+   "expected": "Scallops of light fall down the shelves, with darker gaps between, and the wall sits a stop below the speaker.",
+   "accept": {
+    "region": [
+     495,
+     0,
+     720,
+     380
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     32,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "camera",
+   "problem": "The hero is cut off at its base, and the beams and the chair's form, which the frame is for, are missing.",
+   "evidence": {
+    "region": [
+     220,
+     440,
+     380,
+     480
+    ],
+    "measured": "the speaker's plinth runs off the bottom edge; no ceiling in the frame"
+   },
+   "change": {
+    "setting": "camera position, lens",
+    "from": "[14.75, 2.6, 1.15], 28 mm, level",
+    "to": "[14.35, 2.75, 1.05], 24 mm, level with about 8% vertical shift up so the fir beams enter the top edge; focus stays on the speaker"
+   },
+   "expected": "The speaker stands whole on the floor with a strip of polished floor below it. Beams show at the top, verticals stay true, and the chair back frames the left edge.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "No sign of life, and the side-table pool is too weak for a cozy, lived-in read.",
+   "evidence": {
+    "region": [
+     130,
+     420,
+     260,
+     470
+    ],
+    "measured": "lum_median 34.9, lum_p95 61.5; only one rocks glass and a votive"
+   },
+   "change": {
+    "setting": "props, candles, Bell",
+    "from": "rocks glass and a votive on the table; candle 1.5 W",
+    "to": "add a Bell lamp on the side table at a low setting, raise the table candle to 2.5 W, add a poured rocks glass with ice, a record sleeve leaned against the speaker's plinth, and a few pulled or leaning records and one gap on the record wall"
+   },
+   "expected": "A warm pool on the table rakes the chair's leather and adds a life detail. The record wall loses its repeated look.",
+   "accept": {
+    "region": [
+     130,
+     420,
+     260,
+     470
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The frosted panel and the concrete read as smooth CG surfaces, and the chair has no material.",
+   "evidence": {
+    "region": [
+     0,
+     240,
+     160,
+     480
+    ],
+    "measured": "chair lum_median 16.2 with lum_range 47, no highlight; panel flat with no edge glow"
+   },
+   "change": {
+    "setting": "the frosted acrylic's roughness, the concrete's sheen, and haze",
+    "from": "current roughness and sheen; haze 0.01",
+    "to": "frosted roughness up about 30% so the image diffuses further, a polished 30 mm edge on the panel set in a blackened-steel reveal, the concrete's sheen up a touch so the tie holes and pour lines catch the light, haze 0.02"
+   },
+   "expected": "The panel glows evenly with a lit edge line. The concrete shows its board grain, the chair picks up a rim highlight from the lamp in c7, and the air gains slight depth.",
+   "accept": {
+    "region": [
+     0,
+     240,
+     160,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 70
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember's cabinet read more transparent and less pink-opaque (the white batts glow salmon through the red)",
+   "why": "The speaker's colour, acrylic and white batts are fixed by the card. Only the light on it may change (c2)."
+  },
+  {
+   "request": "Change the image on the screen to something less like a dark smudge",
+   "why": "The screens and what they show are fixed by the room's design."
+  },
+  {
+   "request": "Render at the delivered 2400 x 1600 to judge the materials at 1:1",
+   "why": "This proof is at scale 0.3, so judgements of fine texture are provisional. It is not a change to the frame itself."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

@@ -410,8 +410,10 @@ def room(bpy, name, p, kit):
                 storefront_mat=lambda bpy, p: steel(bpy),
                 # the name frosted into the glass: a warm translucent white lit from the room (as transmissive acrylic
                 # the thin strokes refracted into dark stripes, street-p5)
-                sign_mat=lambda bpy, p: principled(bpy, 'frost-etch-warm', '#D8CCBA', rough=0.6, spec=0.3, sss=0.3,
-                                                    emit='#FFCC94', strength=p.get('etch_glow', 0.15)),
+                # frosted transmission again (street-p6, both critics): the stripes it drew before came from marks.py's
+                # overlapping strokes, which the brand's clean outlines no longer have
+                sign_mat=lambda bpy, p: acrylic(bpy, 'frosted', 'frost-etch', glow=p.get('etch_glow', 0.03),
+                                                glow_col='#FFCC94'),
                 _curtain=lambda *a, **k: None)
     with _patched(**wood):
         D.shopfront(bpy, kit, p, objs)
