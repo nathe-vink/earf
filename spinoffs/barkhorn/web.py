@@ -11,8 +11,9 @@ which deploys it on every push to main.
   and by hand; the eight cards, covers off first, each with its acrylic icon; the room; the particulars; enquiries.
 - A speaker's page: a gallery of eight views, its colour picked from the acrylic coins, its particulars, what goes
   with its colour (round 25's idea, sketches for now) and the other seven.
-- The header's globe spins once as the page opens, on hover or focus, and when the page changes, never under reduced
-  motion; the loader is the acrylic coins rolling.
+- The header's globe keeps turning, never under reduced motion. The page opens on it: the acrylic globe large in the
+  middle of a plain ground, turning, which flies and shrinks into its place at the top left as the ground is drawn in
+  behind it, and goes on turning there (the owner, 2026-10-19).
 
 The owner, of round 30's words: "the sites copy needs a lot of work. It's a lot of AI slop, using my words verbatim,
 and dumb things like 'watch the horns turn' and stating the obvious like 'eight horned speakers in colored acrylic.'
@@ -333,6 +334,14 @@ def make_images(sources=None):
             im.save(os.path.join(IMG, f'globe-spin-{tag}.avif'), quality=60)
             im.save(os.path.join(IMG, f'globe-spin-{tag}.webp'), quality=70, alpha_quality=80, method=6)
             made.append(f'globe-spin-{tag}')
+    # the opening's globe: the same render's turn (brand/mark/earf-globe-render-spin.webm, 120 frames in 4 s), cropped to
+    # the globe at 360 px, as VP9 and H.264 tagged BT.709, and its first frame; made once with ffmpeg into brand/site:
+    #   -vf "crop=492:492:112:112,scale=360:360:flags=lanczos:out_color_matrix=bt709" (-crf 34 VP9, -crf 23 x264)
+    for name in ('globe-turn.webm', 'globe-turn.mp4', 'globe-turn-poster.jpg'):
+        src = os.path.join(BRAND, 'site', name)
+        if os.path.exists(src):
+            shutil.copy(src, os.path.join(IMG, name))
+            made.append(name)
     # the coins, in the icons' order, one sheet for each ground (round 30's renders, at 800 px on E.PAPER and E.NIGHT)
     order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
     for tag, ground, dark in (('paper', (242, 238, 232), False), ('night', (17, 16, 19), True)):
@@ -404,6 +413,8 @@ def body():
         fw, fh = sp.width // 10, sp.height // 6
         buf = io.BytesIO(); sp.crop((0, 0, fw, fh)).save(buf, 'WEBP', quality=90, method=6)
     still = 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
+    pf = os.path.join(IMG, 'globe-turn-poster.jpg')                         # the opening globe's first frame, inline
+    poster = ('data:image/jpeg;base64,' + base64.b64encode(open(pf, 'rb').read()).decode()) if os.path.exists(pf) else still
     word = E.word_svg('currentColor').replace('role="img" aria-label="EARF"', 'aria-hidden="true"').replace('<title>EARF</title>', '')
     coin = {k: i for i, k in enumerate(KEYS)}                 # the coins' sheet is in the speakers' order
     icon_img = lambda icon, name, cls='': (f'<img class="ic only-light {cls}" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'
@@ -567,7 +578,7 @@ def body():
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt).replace('__GOES__', goes_sec)
-                .replace('__STILL__', still).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
+                .replace('__STILL__', still).replace('__POSTER__', poster).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
     cut = page.index('</style>') + len('</style>')
     return page[:cut], page[cut:]
 
@@ -931,16 +942,15 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .others img { width: 100%; height: auto; aspect-ratio: 900 / 1827; object-fit: cover; border-radius: 4px; display: block; max-width: 100% }
 .others a:hover span { text-decoration: underline; text-underline-offset: 4px }
 
-/* the loader: the acrylic globe turns while the first photograph comes in, then gives way and the photograph rises in */
-.splash { position: fixed; inset: 0; z-index: 50; background: var(--page); display: grid; place-items: center;
-  animation: splash-in .3s ease .45s both }
-@keyframes splash-in { from { opacity: 0 } to { opacity: 1 } }
-.splash.gone { animation: splash-out .25s ease both }
-@keyframes splash-out { from { opacity: var(--o, 1) } to { opacity: 0; visibility: hidden } }
-.splash .globe { grid-area: 1 / 1; width: 42px; height: 42px }       /* the header's own frames (84 px), so sharp at 2x */
-.splash .still { background: url("__STILL__") center / contain no-repeat }   /* the first frame, inline: never a blank screen */
-.splash .spin { background: url(img/globe-spin-light.webp) 0 0 / 1000% 600% no-repeat;
-  background-image: image-set(url(img/globe-spin-light.avif) type("image/avif"), url(img/globe-spin-light.webp) type("image/webp")) }
+/* the opening: the acrylic globe large in the middle of a plain ground, turning, flies and shrinks onto the header's
+   globe while the ground, a circle on the globe, closes in behind it. The ground is the render's own paper as its film
+   decodes (#F1ECE7), so the film's edge never shows; shown only when the page's first script asks for it */
+.splash, .flyer { display: none }
+html.intro .splash { display: block; position: fixed; inset: 0; z-index: 50; background: #F1ECE7 }
+html.intro .flyer { --big: min(36vmin, 200px); display: block; position: fixed; z-index: 51; left: 50%; top: 50%;
+  width: var(--big); height: var(--big); margin: calc(var(--big) / -2) 0 0 calc(var(--big) / -2) }
+.flyer video { display: block; width: 100%; height: 100%; object-fit: cover; clip-path: circle(50%); background: #F1ECE7 }
+html.intro .brand .globe { visibility: hidden }                       /* the flying globe lands on it, then hands over */
 .hero-photo img { transition: opacity .5s ease }
 html.opening .hero-photo img { opacity: 0 }
 /* the cursor: a dot where the pointer is and a ring that follows it, opening over anything to press, tinted with the
@@ -959,7 +969,7 @@ html.cursor, html.cursor * { cursor: none !important }
   border: solid var(--cur, var(--ink)); border-width: 0 0 1.5px 1.5px }
 .cur-ring.drag::before { left: 8px; transform: rotate(45deg) }
 .cur-ring.drag::after { right: 8px; transform: rotate(-135deg) }
-@media (prefers-reduced-motion: reduce) { .splash { display: none } html.opening .hero-photo img { opacity: 1 } }
+@media (prefers-reduced-motion: reduce) { html.intro .splash, html.intro .flyer { display: none } html.opening .hero-photo img { opacity: 1 } }
 
 @media (max-width: 1000px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)) } .spec-grid { grid-template-columns: 1fr }
   .pdp { grid-template-columns: 1fr } .buy { position: static } .others ul { grid-template-columns: repeat(4, minmax(0, 1fr)) } }
@@ -979,9 +989,11 @@ html.cursor, html.cursor * { cursor: none !important }
 @media (prefers-reduced-motion: reduce) { .photo img, .spot-label, .thumb { transition: none } .stage .in { animation: none } }
 </style>
 
-<div class="splash" role="progressbar" aria-label="Loading"><span class="globe still"></span><span class="globe spin"></span></div>
-<script>document.documentElement.classList.add('opening')</script>
-<noscript><style>.splash { display: none } html.opening .hero-photo img { opacity: 1 }</style></noscript>
+<div class="splash" aria-hidden="true"></div>
+<div class="flyer" role="progressbar" aria-label="Loading"><video muted playsinline loop autoplay preload="auto" poster="__POSTER__" aria-hidden="true" tabindex="-1"><source src="img/globe-turn.webm" type='video/webm; codecs="vp9"'><source src="img/globe-turn.mp4" type="video/mp4"></video></div>
+<script>(function (d) { d.classList.add('opening');
+  if (!location.hash.startsWith('#speaker-') && !matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('intro'); })(document.documentElement)</script>
+<noscript><style>html.opening .hero-photo img { opacity: 1 }</style></noscript>
 <header class="top"><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home"><span class="globe" aria-hidden="true"></span>__WORD__</a>
   <nav aria-label="Pages"><ul>
@@ -1189,21 +1201,16 @@ if (hab) {
 const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 const el = (tag, attrs = {}, html = '') => { const e = document.createElement(tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); e.innerHTML = html; return e; };
 
-// the header's globe: still; it spins once as the page opens, on hover or focus, and when the page changes
-const GLOBES = [...document.querySelectorAll('.brand .globe')];
-let spinning = false;
-function spinGlobe() {
-  if (reduce || spinning) return;
-  spinning = true;
-  const t0 = performance.now(), T = 1500, N = 60;
-  (function f(now) {
-    const p = Math.min(1, (now - t0) / T), e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-    const i = Math.round(e * N) % N;
-    GLOBES.forEach(g => { g.style.backgroundPosition = `${(i % 10) * 100 / 9}% ${Math.floor(i / 10) * 100 / 5}%`; });
-    if (p < 1) requestAnimationFrame(f); else spinning = false;
-  })(t0);
-}
-document.querySelectorAll('.brand').forEach(b => { b.addEventListener('mouseenter', spinGlobe); b.addEventListener('focus', spinGlobe); });
+// the header's globe keeps turning: a turn every 4 s through its 60 frames, on one clock, which the opening's globe sets
+// as it lands so the turn carries on from the film's own angle; still under reduced motion
+const GLOBES = [...document.querySelectorAll('.brand .globe')], GLOBE_TURN = 4000;
+let turn0 = performance.now(), globeAt = -1;
+const setTurn = sec => { turn0 = performance.now() - (sec * 1000) % GLOBE_TURN; };
+if (!reduce) (function globeTurn(now) {
+  const i = Math.floor((((now - turn0) % GLOBE_TURN) + GLOBE_TURN) % GLOBE_TURN / GLOBE_TURN * 60) % 60;
+  if (i !== globeAt) { globeAt = i; GLOBES.forEach(g => { g.style.backgroundPosition = `${(i % 10) * 100 / 9}% ${Math.floor(i / 10) * 100 / 5}%`; }); }
+  requestAnimationFrame(globeTurn);
+})(turn0);
 
 // the horns turn once as they cross the screen, a frame every 15 degrees; dragged, they turn by hand
 const TILES = [...document.querySelectorAll('#horns .spin')], N = 24, C = 6, R = 4;
@@ -1404,30 +1411,42 @@ function route() {
     if (target && h !== 'top') target.scrollIntoView(); else if (was === 'speaker' || h === 'top') scrollTo(0, 0);
     ask();
   }
-  if (last !== null && last !== page + (k || '')) spinGlobe();
   last = page === 'speaker' ? 'speaker' : 'home';
 }
 addEventListener('hashchange', route);
 
-// the loader: the acrylic globe turns while the hero's photograph comes in. It waits 450 ms before it shows at all (CSS),
-// so a quick page never sees it; the moment the photograph is decoded it fades in 250 ms and the photograph fades up
-function opening(then) {
-  const box = document.querySelector('.splash'), root = document.documentElement, hero = document.querySelector('.hero-photo img');
+// the opening: the acrylic globe turns large in the middle of its ground until the hero's photograph is decoded (at
+// least 0.9 s, so it is seen, and never more than 4.5 s), then flies and shrinks onto the header's globe while the
+// ground, a circle centred on it, closes in behind it; the photograph fades up beneath as it goes, and the header's
+// globe takes over at the film's angle
+function opening() {
+  const root = document.documentElement, splash = document.querySelector('.splash'), flyer = document.querySelector('.flyer');
+  const film = flyer && flyer.querySelector('video'), hero = document.querySelector('.hero-photo img');
+  const target = document.querySelector('header.top .brand .globe');
   let finished = false;
   const done = () => { if (finished) return; finished = true;
-    if (box) { const o = parseFloat(getComputedStyle(box).opacity) || 0;
-      if (o < 0.02) box.remove(); else { box.style.setProperty('--o', o); box.classList.add('gone'); setTimeout(() => box.remove(), 320); } }
-    requestAnimationFrame(() => root.classList.remove('opening')); then && then(); };
-  if (!box || reduce || !hero || location.hash.startsWith('#speaker-')) { done(); return; }
-  (hero.decode ? hero.decode() : Promise.resolve()).catch(() => {}).then(done);
-  setTimeout(done, 4500);                                             // never longer than this
-  const g = box.querySelector('.spin'), t0 = performance.now(), TURN = 1600;
-  (function turn(now) {
+    if (film && film.currentTime) setTurn(film.currentTime);
+    if (splash) splash.remove(); if (flyer) flyer.remove();
+    root.classList.remove('intro'); requestAnimationFrame(() => root.classList.remove('opening')); };
+  if (!root.classList.contains('intro') || !splash || !flyer || !target || !hero || reduce) { done(); return; }
+  if (film && film.play) film.play().catch(() => {});
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const ready = (hero.decode ? hero.decode() : Promise.resolve()).catch(() => {});
+  Promise.race([Promise.all([ready, wait(900)]), wait(4500)]).then(() => {
     if (finished) return;
-    const p = ((now - t0) % TURN) / TURN, e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2, i = Math.round(e * 60) % 60;
-    g.style.backgroundPosition = `${(i % 10) * 100 / 9}% ${Math.floor(i / 10) * 100 / 5}%`;
-    requestAnimationFrame(turn);
-  })(t0);
+    const a = flyer.getBoundingClientRect(), b = target.getBoundingClientRect();
+    const ax = a.left + a.width / 2, ay = a.top + a.height / 2, bx = b.left + b.width / 2, by = b.top + b.height / 2;
+    const R = Math.hypot(Math.max(ax, innerWidth - ax), Math.max(ay, innerHeight - ay)) + 2, T = 1000;
+    const easing = 'cubic-bezier(.7, 0, .2, 1)';
+    root.classList.remove('opening');                                 // the photograph fades up as the ground goes
+    if (!flyer.animate || !b.width) { done(); return; }
+    flyer.animate([{ transform: 'none' }, { transform: `translate(${bx - ax}px, ${by - ay}px) scale(${b.width / a.width})` }],
+      { duration: T, easing, fill: 'forwards' });
+    splash.animate([{ clipPath: `circle(${R}px at ${ax}px ${ay}px)` }, { clipPath: `circle(${b.width / 2}px at ${bx}px ${by}px)` }],
+      { duration: T, easing, fill: 'forwards' }).finished.then(done, done);
+    setTimeout(done, T + 400);                                        // in case an animation never reports
+  });
+  setTimeout(done, 7000);                                             // never longer than this
 }
 
 // the cursor, on a mouse: a dot exactly where the pointer is, in the colour of the text beneath it, and a ring that follows
@@ -1463,7 +1482,7 @@ if (matchMedia('(pointer: fine)').matches && !reduce) {
 
 route();
 turnUpdate();
-opening(spinGlobe);
+opening();
 </script>
 """
 
