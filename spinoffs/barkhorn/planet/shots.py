@@ -116,7 +116,7 @@ def lights(v):
     # pinholes onto the bar top, between the pendants
     for i, x in enumerate(P.bar_pendants()[:-1]):
         L[f'bar{i}'] = {'type': 'spot', 'position': [x + 0.7, P.BAR_FRONT + 0.05, P.MEMBRANE - 0.02],
-                        'target': [x + 0.7, P.BAR_FRONT + 0.1, P.BAR_TOP_Z], 'power_w': v['spot_bar'], 'cone_deg': 30,
+                        'target': [x + 0.7, P.BAR_FRONT + 0.1, P.BAR_TOP_Z], 'power_w': v['spot_bar'], 'cone_deg': v.get('bar_cone', 30),
                         'blend': 0.7, 'radius_m': 0.02, 'color': 2900}
     # the DJ desk's own light
     L['dj'] = {'type': 'spot', 'position': [P.L - 0.42, P.D / 2 - 0.15, P.DJ['recess_z'] - 0.03],
@@ -176,7 +176,11 @@ VIEWS = {
              'camera': {'position': [2.20, 3.60, 1.35], 'target': [P.L, 4.7, 1.25], 'lens_mm': 30, 'level': True},
              'settings': {'panel_glow': 0.9}},
     'bar': {'title': 'the bar front lit, at eye level',
-            'camera': {'position': [1.10, 4.50, 0.95], 'target': [7.4, 8.4, 0.8], 'lens_mm': 32, 'level': True}},
+            'camera': {'position': [1.10, 4.50, 0.95], 'target': [7.4, 8.4, 0.8], 'lens_mm': 32, 'level': True},
+            # after the final's critic (critic/bar-final.json, 5.0): the Fog speaker in its niche lit (it read as a blank
+            # screen), the pinholes kept on the bar top (a floor hotspot), the shadows lifted, the panels a little lower
+            'settings': {'niche_glow': 0.15, 'spot_fog': 600.0, 'spot_bar': 70.0, 'bar_cone': 22.0, 'wb': 3700,
+                         'wb_tint': -4.0, 'exposure': 0.15, 'panel_glow': 1.1, 'shelf_glow': 0.05}},
     'listening': {'title': 'the listening corner, a pair either side of the lounge',
                   # turned round after round 2 (the chairs' backs hid the Ice pair): from the DJ's side of the lounge,
                   # the Ember pair either side of it, the chairs facing the camera, the bar glowing beyond

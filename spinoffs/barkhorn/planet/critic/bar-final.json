@@ -1,0 +1,390 @@
+{
+ "stage1": {
+  "impression": "A long night bar whose spectrum of glowing panels is a strong, graphic idea, and the receding row of stools gives real depth. It still reads as a CG interior: the panels are flat, evenly lit coloured rectangles; the foreground stools are heavy, near-black silhouettes that block the hero; the floor is a muddy brown-black that barely picks up the panels' colour; a white hotspot on the floor at right pulls the eye; and the back-bar is a wall of near-identical bottles under a blank grey ceiling.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The spectrum must read as light coming through cast acrylic, with internal depth, a soft bloom and a visible grade, not as flat painted rectangles (per-panel lum_range inside the panel above the stools under 20 now)",
+  "The floor must carry each panel's colour as a coloured reflection and spill pool in front of it; now the floor under the green and yellow panels measures b_median 2 and lum_median 29",
+  "The foreground stools must stop blotting out the red and orange panels: the first stool covers about 40% of the red panel",
+  "No specular hotspot brighter than the panels anywhere in the frame (the floor glare at 1650-1950 x 1050-1400 has p95 242, against panel tops of about 135)",
+  "Shadows must hold detail: the bottom of the frame is 10% crushed with blue at 1, a dead orange-black",
+  "The back-bar must stop reading as one bottle model repeated by the hundred",
+  "The ceiling and right wall need a reason to exist (the membrane at 0.004 reads as a blank grey slab)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    640,
+    1860,
+    1400
+   ],
+   "what": "Bar panels read as flat emissive rectangles: even colour, hard 1 px seams between panels, no depth or bloom from the acrylic"
+  },
+  {
+   "region": [
+    0,
+    940,
+    430,
+    1600
+   ],
+   "what": "The nearest stool is a near-black silhouette that covers most of the red panel and the lower left corner"
+  },
+  {
+   "region": [
+    480,
+    900,
+    900,
+    1500
+   ],
+   "what": "Second stool silhouette across the orange panel"
+  },
+  {
+   "region": [
+    1650,
+    1050,
+    1950,
+    1400
+   ],
+   "what": "White specular streak on the floor from a pendant or spot, the brightest thing in the lower frame (p95 242)"
+  },
+  {
+   "region": [
+    0,
+    1450,
+    1500,
+    1600
+   ],
+   "what": "Floor crushed and colourless: lum_median 21, crush 10%, b_median 1"
+  },
+  {
+   "region": [
+    880,
+    1300,
+    1200,
+    1500
+   ],
+   "what": "Floor in front of the yellow and green panels shows almost none of their colour (b 2, lum 29)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1500,
+    640
+   ],
+   "what": "Back-bar packed with repeated copies of the same bottle and label; busy, competes with the panels"
+  },
+  {
+   "region": [
+    1500,
+    0,
+    2400,
+    400
+   ],
+   "what": "Ceiling and upper right wall a flat warm grey with no detail or gradient (lum_range 43)"
+  },
+  {
+   "region": [
+    1600,
+    730,
+    1850,
+    900
+   ],
+   "what": "Violet and smoke panels clip in blue (0.7% and 0.3%); the violet reads as screen blue-purple"
+  },
+  {
+   "region": [
+    330,
+    400,
+    600,
+    610
+   ],
+   "what": "Clear acrylic speaker in the back-bar niche is murky and nearly invisible; reads as a fogged box"
+  },
+  {
+   "region": [
+    2200,
+    700,
+    2400,
+    900
+   ],
+   "what": "Lounge chairs at right overlap each other in depth, cluttering the background"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "composition",
+   "problem": "The two nearest stools are black silhouettes that cover the red and orange panels, the start of the spectrum the frame exists to show.",
+   "evidence": {
+    "region": [
+     0,
+     780,
+     900,
+     1600
+    ],
+    "measured": "stool tops and legs sit at lum about 10-25 over panels at 110-135; the first stool covers about 40% of the red panel"
+   },
+   "change": {
+    "setting": "set: stool positions (camera fixed)",
+    "from": "evenly spaced stools from the frame edge",
+    "to": "remove the first two stools nearest the camera, or slide every stool 0.9 m further along the bar, so the red and orange panels are clear from top to floor"
+   },
+   "expected": "The red and orange panels read whole; the stools start at the yellow panel and recede as a rhythm instead of a wall",
+   "accept": {
+    "region": [
+     40,
+     800,
+     400,
+     1250
+    ],
+    "metric": "lum_p5",
+    "op": ">",
+    "value": 60
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The floor neither reflects nor catches the panels' colour, so the bar floats and the spectrum stops at the kick rail.",
+   "evidence": {
+    "region": [
+     880,
+     1300,
+     1200,
+     1500
+    ],
+    "measured": "lum_median 29, b_median 2, under a panel at lum 140"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "dark, low-sheen brown-black concrete",
+    "to": "mid-grey polished, sealed concrete: base albedo about 0.25, roughness 0.18-0.25 with a fine noise variation and faint aggregate, so it carries a soft coloured reflection of each panel 0.5-1 m out"
+   },
+   "expected": "A soft coloured stripe of each panel's hue on the floor in front of it, fading toward the camera",
+   "accept": {
+    "region": [
+     900,
+     1250,
+     1200,
+     1400
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The panels read as flat, painted emissive cards rather than light through tinted acrylic.",
+   "evidence": {
+    "region": [
+     20,
+     700,
+     400,
+     950
+    ],
+    "measured": "lum_range 17.6 inside the red panel; panel seams step 83 levels in 1 px"
+   },
+   "change": {
+    "setting": "bar panels' glow 1.4 (graded 0.2 to 1)",
+    "from": "1.4, gradient 0.2 at the foot to 1.0 at the top, uniform across the width",
+    "to": "1.1, with a non-uniform LED falloff: brighter at the top edge and about 0.35 at the foot, plus a slight brightening at each panel's vertical edges; add a thin 2-3 mm dark reveal between panels with a faint bright edge where the acrylic edge glows"
+   },
+   "expected": "Each panel shows visible graded depth (top to foot ratio about 2.5:1) and reads as cast acrylic with edges, not a flat card",
+   "accept": {
+    "region": [
+     450,
+     700,
+     900,
+     1250
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 0.4
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "A white specular streak on the floor at right is brighter than the panels and draws the eye away from the bar.",
+   "evidence": {
+    "region": [
+     1650,
+     1050,
+     1950,
+     1400
+    ],
+    "measured": "p95 242 against panel tops of about 135"
+   },
+   "change": {
+    "setting": "bar-top pinholes 5 x spot 140 W / Bell pendants 25 W",
+    "from": "pinhole spots at 140 W, cone 30, hitting the open floor",
+    "to": "pinholes at 70 W, aimed onto the bar top only (cone 22); Bell pendants at 18 W"
+   },
+   "expected": "No hotspot on the floor; the brightest floor value comes from the panels' reflection",
+   "accept": {
+    "region": [
+     1650,
+     1050,
+     1950,
+     1400
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 160
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "post",
+   "problem": "The shadows are crushed to a colourless orange-black, and the 3300 K balance turns every neutral muddy brown.",
+   "evidence": {
+    "region": [
+     0,
+     1450,
+     1500,
+     1600
+    ],
+    "measured": "lum_median 21, crush 10.4%, b_median 1"
+   },
+   "change": {
+    "setting": "render white_balance_k / exposure",
+    "from": "3300 K, tint -10, exposure -0.1",
+    "to": "3700 K, tint -4, exposure +0.15, with a gentle toe lift so the floor's blacks sit near 12-15 rather than 2"
+   },
+   "expected": "The floor and stool legs hold texture; neutrals read as warm grey, not brown",
+   "accept": {
+    "region": [
+     0,
+     1450,
+     1500,
+     1600
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The back-bar is a dense wall of identical bottles that reads as instanced CG and competes with the spectrum below.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1500,
+     640
+    ],
+    "measured": "seen: the same bottle and label model repeated across every shelf; lum_p95 97.5 spread evenly over the whole wall"
+   },
+   "change": {
+    "setting": "props: back-bar bottles; shelves 0.08",
+    "from": "every shelf full of one bottle model",
+    "to": "cut the bottles by about 60%, mix 5-6 distinct shapes and heights, and leave gaps with a few records or glassware; shelves 0.05 so the back-bar sits a stop under the panels"
+   },
+   "expected": "The back-bar reads as a curated, quieter layer behind the hero",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1500,
+     640
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 85
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The ceiling and right wall are a blank, even grey slab with nothing to read.",
+   "evidence": {
+    "region": [
+     1700,
+     0,
+     2400,
+     380
+    ],
+    "measured": "lum_median 68.5, range 43, no gradient"
+   },
+   "change": {
+    "setting": "membrane 0.004 / haze density 0.012",
+    "from": "membrane 0.004, wall lit flatly",
+    "to": "membrane 0.0025; add a soft grazing wash down the right wall from the record-wall spots (30 W, cone 35); haze 0.018 so the pendants' cones read faintly"
+   },
+   "expected": "The upper right falls off into soft darkness with one gentle wash, and depth reads through faint haze",
+   "accept": {
+    "region": [
+     1700,
+     0,
+     2400,
+     380
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The violet and smoke panels clip in blue and read as screen colour rather than tinted acrylic.",
+   "evidence": {
+    "region": [
+     1600,
+     730,
+     1690,
+     900
+    ],
+    "measured": "b_median 251, clip 0.71%"
+   },
+   "change": {
+    "setting": "grade: blue-channel highlight rolloff",
+    "from": "linear to clip",
+    "to": "a highlight shoulder on blue and violet hues only, keeping peak blue under 235 without shifting their hue"
+   },
+   "expected": "The violet panel holds tone across its face; no clipped blue",
+   "accept": {
+    "region": [
+     1600,
+     730,
+     1690,
+     900
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.05
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the clear acrylic speaker in the back-bar niche read more clearly (it is murky and nearly invisible)",
+   "why": "Its material and colour are a fixed product; only the light on it may change (a dedicated back light from the Fog niche at 0.05 could help)"
+  },
+  {
+   "request": "Different panel colours or order to calm the spectrum",
+   "why": "The eight panels in spectrum order are a fixed part of the room's design"
+  }
+ ],
+ "score_if_fixed": 7.3
+}
