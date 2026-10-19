@@ -29,3 +29,28 @@ What the judges said:
 If the foxgloves should go, set `FOXGLOVES = []`: a one-line change.
 
 The rig for the finals is unchanged from the duel.
+
+## The finals and the full-size duel (2026-10-19)
+
+The finals are on the new drivers, each stitched from two strips with the cross-fade and the finish applied once:
+- landscape: `renders/2026-10-18/barkhorn/element31/poison_a3.png` (7722559)
+- phone: `poison_a3-portrait.png` (7b31cf0)
+
+The duel against A (ced5a42 and 6f58121), blind, at full size, with fresh judges and the order swapped:
+
+| Frame | Order | A | A3 | Preferred |
+|---|---|---|---|---|
+| Landscape | A3 first | 6.1 | 6.4 | A3 |
+| Landscape | A first | 6.0 | 6.6 | A3 |
+| Phone | A3 first | 6.5 | 7.0 | A3 |
+| Phone | A first | 6.5 | 6.2 | A |
+
+**A3 is ahead on both frames:** by 0.45 on the landscape and 0.1 on the phone frame. Three judges of four preferred it, so under the 0.5 rule A3 goes up.
+
+What the judges said:
+- **The brighter cabinet:** three judges credited it (body median 55–57 against 42–43). It comes from A's bounce turned into the woofer bay.
+- **The foxgloves:** three judges credited them as a colour counterpoint and a depth cue. One still called them wobbly CG stalks.
+- **The agarics:** all four called them a scale or story cue, but too saturated against the cabinet's left foot, pulling the eye off it. Two of the four called them toy-like.
+- **A shared flaw:** one judge named the vertical bright streak through the clear corner over the woofer as a render artefact. It is a reflection in the product's clear sheet, in A too.
+
+**Do the poisons read at the site's sizes?** No, in both frames. I checked the landscape as the 1200 px hero and the 600 px card, and the phone frame at 640 px. The agarics come to a few orange pixels at the fern stand's foot, and the foxgloves to faint violet spires in the haze. Neither reads as a poison at a glance; only a close look finds them. A3 is the better picture, but it does not on its own answer the owner's "Poison isn't reading as poisonous".
