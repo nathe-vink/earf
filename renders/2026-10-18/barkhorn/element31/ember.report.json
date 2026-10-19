@@ -8,7 +8,9 @@
  "samples": 512,
  "denoise": "OpenImageDenoise",
  "engine": "Cycles (CPU), bpy 5.0.1 on python3.11",
- "method": "rendered as four horizontal strips (render.py --crop 0 y0 1 y1, finish off), stitched top to bottom, then studio/engine/finish.py apply run once on the whole frame with the shot's finish, so bloom and vignette are continuous. Strips 0 to 2 rendered in this session; strip 3 by a helper session (r31-element-ember-strip3, 0b0ef28) from the same commit (3d757bf).",
+ "rig_commit": "01267eb4a12e4e25d6ffed04851578b25bd517c2",
+ "note": "re-rendered for the real drivers (the FaitalPRO 15PR400 woofer as made, the HF driver with its machined exit and phase plug, the ring in opaque polished acrylic); the set, light, camera and finish are the final rig of 2026-10-18, unchanged",
+ "method": "four horizontal strips (render.py --crop 0 y0 1 y1, finish off), stitched top to bottom, then studio/engine/finish.py apply once on the whole frame with the shot's finish",
  "strips": [
   {
    "crop": [
@@ -17,7 +19,8 @@
     1,
     0.25
    ],
-   "render_s": 1153
+   "render_s": 1102,
+   "by": "this session"
   },
   {
    "crop": [
@@ -26,7 +29,8 @@
     1,
     0.5
    ],
-   "render_s": 4373
+   "render_s": 6600,
+   "by": "helper, r31-element-ember-dstrip1 b7dde6e"
   },
   {
    "crop": [
@@ -35,7 +39,8 @@
     1,
     0.75
    ],
-   "render_s": 3348
+   "render_s": 5040,
+   "by": "helper, r31-element-ember-dstrip2 908bce4"
   },
   {
    "crop": [
@@ -44,11 +49,10 @@
     1,
     1
    ],
-   "render_s": 4041,
-   "by": "helper session"
+   "render_s": 1800,
+   "by": "helper, r31-element-ember-dstrip3 e383daf"
   }
  ],
- "render_s_total": 12915,
  "finish": {
   "enabled": true,
   "white_in": 240,
@@ -66,6 +70,5 @@
    "lift_color": "#000000",
    "vignette": 0.2
   }
- },
- "rig_commit": "3d757bf5e91613c6603c88d0bb046f0776677792"
+ }
 }
