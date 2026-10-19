@@ -37,7 +37,7 @@ def room_piece(v):
             'road_rough', 'floor_tex', 'floor_tint', 'floor_mix', 'floor_coat', 'plaster', 'plaster_mix', 'ceiling',
             'brick_tint', 'rug_tex', 'rug_tint', 'rug_mix', 'rug_value', 'props', 'sign', 'cafe', 'no_glass',
             'glass_gloss', 'siding', 'neighbour', 'neighbour_plain', 'niche_glow', 'gold_glow', 'brick_scale', 'brick_mix', 'across_glow', 'flat_glow', 'shelf_color',
-            'niche_rim', 'console_lift', 'storefront_paint', 'brick_tex', 'brick_bump', 'rug_displace', 'rug_cell', 'transom_glow')
+            'niche_rim', 'console_lift', 'storefront_paint', 'linen_trans', 'brick_tex', 'brick_bump', 'rug_displace', 'rug_cell', 'transom_glow')
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_den', 'fn': 'room', **{k: v[k] for k in keys if k in v}}
 
 
@@ -192,11 +192,16 @@ VIEWS = {
                # after street-r2 (4.5): looking down the room so one Ember speaker glows over the café curtains on the
                # right third; the street lamps up, one raking from behind the camera; gilt without glow; the transom
                # soft; the vestibule lit wider; a bottle-green shopfront (the warm room's cool counter-note)
-               'camera': {'position': [-8.5, 3.0, 1.45], 'target': [0.0, 3.37, 1.9], 'lens_mm': 50, 'level': True},
-               'settings': {'exposure': 0.9, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 300.0,
-                            'lamp_k': 4000, 'lamp_dx': 0.0, 'lamp_cam': 500.0, 'gold_glow': 0.0, 'sign_w': 15.0,
-                            'entry_w': 30.0, 'entry_cone': 100.0, 'transom_glow': 0.5, 'spk_irr': 12.0,
-                            'storefront_paint': '#1F2B24', 'sconce_w': 25.0, 'pendant_w': 90.0, 'haze': 0.02,
+               # after street-r3 (4.5): three-quarter from up the street on the bar's side, 40 mm f/2.8 on the glass,
+               # pavement in front, the line of sight through the window to the right-hand Ember speaker; the gilt
+               # brighter, the café curtains translucent, the lamps softer, the records down, the pendants up
+               'camera': {'position': [-9.5, 7.5, 1.6], 'target': [0.0, 3.2, 2.0], 'lens_mm': 40, 'level': True,
+                          'fstop': 2.8, 'focus': [-0.09, 3.6, 1.8]},
+               'settings': {'exposure': 0.9, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
+                            'lamp_k': 3500, 'lamp_dx': 0.0, 'lamp_cam': 200.0, 'gold_glow': 0.4, 'sign_w': 15.0,
+                            'linen_trans': 0.5, 'spot_records': 9.0, 'record_glow': 1.0,
+                            'entry_w': 30.0, 'entry_cone': 100.0, 'transom_glow': 0.5, 'spk_irr': 12.0, 'pendant_w': 130.0,
+                            'storefront_paint': '#1F2B24', 'sconce_w': 25.0, 'haze': 0.04,
                             'siding': '#8E9384', 'sky': 0.05, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
                             'flat_glow': 0.12, 'across_glow': 0.06}},
     'bar': {'title': 'the bar, from the window table',

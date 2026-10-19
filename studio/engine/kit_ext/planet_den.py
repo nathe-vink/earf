@@ -259,8 +259,8 @@ def shopfront(bpy, kit, p, objs):
             xa = 0.06 + 0.018 * math.sin(k * 1.9); xb = 0.06 + 0.018 * math.sin((k + 1) * 1.9)
             cu.quad([(xa, ya, C['z0']), (xb, yb, C['z0']), (xb, yb, C['z1']), (xa, ya, C['z1'])])
         if 'linen' not in _M:
-            m = principled(bpy, 'linen', '#E6D8BE', rough=0.85, sss=0.0, sheen=0.4)
-            R._set(_bsdf(m), 'Transmission Weight', 0.35)
+            m = principled(bpy, 'linen', '#E8D9BE', rough=0.85, sss=0.0, sheen=0.4)
+            R._set(_bsdf(m), 'Transmission Weight', p.get('linen_trans', 0.35))
             _M['linen'] = m
         objs.append(cu.object(bpy, _M['linen'], smooth=True))
         rod = Mesh('cafe-rod'); _cyl(rod.bm, 0.06, C['rod'], Wn['y0'], 0.008, Wn['y1'] - Wn['y0'], seg=12, axis='y')
@@ -300,7 +300,7 @@ def shopfront(bpy, kit, p, objs):
                 flat = [v for lp in loops for v in lp]
                 f = bm.faces.new([bm.verts.new(flat[i]) for i in tri]); f.normal_update()
         me = bpy.data.meshes.new('gold-leaf'); bm.to_mesh(me); bm.free()
-        me.materials.append(principled(bpy, 'gold-leaf', '#C9A24A', rough=0.18, metal=1.0, emit='#F0A838',
+        me.materials.append(principled(bpy, 'gold-leaf', '#D4AF5A', rough=0.2, metal=1.0, emit='#F0A838',
                                        strength=p.get('gold_glow', 0.25)))
         ob = bpy.data.objects.new('gold-leaf', me); bpy.context.scene.collection.objects.link(ob); objs.append(ob)
 
@@ -764,7 +764,11 @@ def street(bpy, kit, p, objs):
     SW = 3.4; RD = 12.0
     yA, yB = -40.0, W + 40.0
     sw = Mesh('sidewalk'); sw.box(xf - SW, yA, -0.15, xf, yB, 0.0)
-    objs.append(sw.object(bpy, R._pbr(bpy, kit, 'concrete_pavement', res='2k', tint='#77746F', tint_mix=0.3)))
+    swm = R._pbr(bpy, kit, 'concrete_pavement', res='2k', tint='#77746F', tint_mix=0.3)
+    if p.get('wet'):                                                  # the sidewalk wet too, a sheen in its low spots
+        swm = swm.copy(); swm.name = 'pavement-wet-den'; R._set(_bsdf(swm), 'Coat Weight', 0.8)
+        R._set(_bsdf(swm), 'Coat Roughness', 0.25)
+    objs.append(sw.object(bpy, swm))
     cb = Mesh('curb'); cb.box(xf - SW - 0.15, yA, -0.15, xf - SW, yB, 0.0)
     objs.append(cb.object(bpy, principled(bpy, 'curb', '#8A8781', rough=0.8)))
     rd = Mesh('road'); rd.box(xf - SW - 0.15 - RD, yA, -0.30, xf - SW - 0.15, yB, -0.15)

@@ -6,17 +6,23 @@
  ],
  "camera": {
   "position": [
-   -8.5,
-   3.0,
-   1.45
+   -9.5,
+   7.5,
+   1.6
   ],
   "target": [
    0.0,
-   3.37,
-   1.9
+   3.2,
+   2.0
   ],
-  "lens_mm": 50,
-  "level": true
+  "lens_mm": 40,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   -0.09,
+   3.6,
+   1.8
+  ]
  },
  "products": [
   {
@@ -48,7 +54,7 @@
      ]
     },
     {
-     "flavour": "cloud-black",
+     "flavour": "birch-fog-clear",
      "position": [
       4.66,
       5.885,
@@ -60,7 +66,7 @@
      ]
     },
     {
-     "flavour": "cloud-black",
+     "flavour": "birch-fog-clear",
      "position": [
       9.06,
       5.885,
@@ -152,7 +158,7 @@
     "shade_glow": 0.12,
     "pendant_glow": 0.5,
     "flame": 25.0,
-    "record_glow": 2.0,
+    "record_glow": 1.0,
     "vu": 2.0,
     "street": true,
     "windows_lit": 0.5,
@@ -161,10 +167,11 @@
     "siding": "#8E9384",
     "neighbour_plain": true,
     "niche_glow": 0.9,
-    "gold_glow": 0.0,
+    "gold_glow": 0.4,
     "across_glow": 0.06,
     "flat_glow": 0.12,
     "storefront_paint": "#1F2B24",
+    "linen_trans": 0.5,
     "transom_glow": 0.5
    },
    {
@@ -775,7 +782,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 90.0,
+   "power_w": 130.0,
    "cone_deg": 75.0,
    "blend": 0.6,
    "radius_m": 0.04,
@@ -793,7 +800,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 90.0,
+   "power_w": 130.0,
    "cone_deg": 75.0,
    "blend": 0.6,
    "radius_m": 0.04,
@@ -811,7 +818,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 90.0,
+   "power_w": 130.0,
    "cone_deg": 75.0,
    "blend": 0.6,
    "radius_m": 0.04,
@@ -829,7 +836,7 @@
     2.05,
     0.6
    ],
-   "power_w": 18.0,
+   "power_w": 9.0,
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -847,7 +854,7 @@
     3.05,
     0.6
    ],
-   "power_w": 18.0,
+   "power_w": 9.0,
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -865,7 +872,7 @@
     4.05,
     0.6
    ],
-   "power_w": 18.0,
+   "power_w": 9.0,
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -1184,9 +1191,9 @@
     -6.0,
     5.6
    ],
-   "power_w": 300.0,
+   "power_w": 120.0,
    "radius_m": 0.15,
-   "color": 4000
+   "color": 3500
   },
   "street1": {
    "type": "point",
@@ -1195,9 +1202,9 @@
     15.1,
     5.6
    ],
-   "power_w": 300.0,
+   "power_w": 120.0,
    "radius_m": 0.15,
-   "color": 4000
+   "color": 3500
   },
   "street-cam": {
    "type": "point",
@@ -1206,9 +1213,9 @@
     1.0,
     5.6
    ],
-   "power_w": 500.0,
+   "power_w": 200.0,
    "radius_m": 0.15,
-   "color": 4000
+   "color": 3500
   },
   "entry": {
    "type": "spot",
@@ -1256,7 +1263,7 @@
    6.05,
    3.32
   ],
-  "density": 0.02,
+  "density": 0.04,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },

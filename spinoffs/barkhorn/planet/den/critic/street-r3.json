@@ -1,0 +1,377 @@
+{
+ "stage1": {
+  "impression": "A dead-frontal elevation of a dark blue-grey shopfront at night, with a warm room behind the glass. It reads as an architectural CG massing render, not a photograph: the facade is untextured and evenly lit, the glass has no reflection, the caf\u00e9 curtains come out cold grey instead of glowing, and the name on the glass is a muddy olive-black that looks pasted on. No speaker or other product can be seen, the brightest thing in the frame is the record wall at the back, and the bottom fifth falls into flat black with no street to stand on.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The gold-leaf EARF reads as gold catching light (letter median lum 110-170, warm), not as dark olive (now lum 16, RGB 23/16/0)",
+  "The caf\u00e9 curtains glow warm from the room behind (r_median well above b_median), not cold grey from the street (now RGB 54/43/43)",
+  "The glass shows a faint reflection of the street and the lamps, so it reads as glass",
+  "The facade and pavement have real material texture (painted timber or enamel with grain, stone or asphalt with wet sheen) instead of flat untextured blue",
+  "An oblique, eye-level camera that shows the pavement and some of the building above, so it reads as a photo taken from across a street rather than an elevation drawing",
+  "The name, not the record wall, is the first read: the record wall stops clipping and drops below the letters in visual weight",
+  "At least a glimpse of an Ember speaker's red through the glass, since the speakers are the room's only colour and the brand's product",
+  "Shadow detail in the lower facade and the door recess (not crushed to lum 9 / 17 % crush)"
+ ],
+ "defects": [
+  {
+   "region": [
+    395,
+    385,
+    615,
+    452
+   ],
+   "what": "Gold-leaf letters render near black-olive (median lum 16, RGB 23/16/0, delta E 53 against #C9A24A gold); they read as a dark sticker, not gilding"
+  },
+  {
+   "region": [
+    130,
+    515,
+    900,
+    660
+   ],
+   "what": "Caf\u00e9 curtains are neutral blue-grey (RGB 54/43/43), lit from the front by the 4000 K street lamps, not backlit warm; the folds repeat evenly like a procedural texture"
+  },
+  {
+   "region": [
+    600,
+    400,
+    740,
+    510
+   ],
+   "what": "Record wall is the hottest area (median 196, 3 % clipped), pulls the eye away from the name and blows out the sleeve detail"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    130
+   ],
+   "what": "Fascia and soffit are flat, untextured blue-grey bands; no signage depth, no building above; reads as CG massing"
+  },
+  {
+   "region": [
+    0,
+    660,
+    950,
+    800
+   ],
+   "what": "Stallriser and pavement crushed to near black (median lum 9, R channel 0); no ground plane, no reflection, the shopfront floats"
+  },
+  {
+   "region": [
+    115,
+    280,
+    905,
+    665
+   ],
+   "what": "Shopfront glass has no reflection or sheen at all, so the panes read as open holes"
+  },
+  {
+   "region": [
+    1120,
+    270,
+    1200,
+    800
+   ],
+   "what": "Right-hand door reveal crushed (17.5 % crush), shapes lost"
+  },
+  {
+   "region": [
+    80,
+    140,
+    1200,
+    245
+   ],
+   "what": "Transom panes dull red-brown (median 37) with flat strip reflections; the 'transom lit' in the brief does not read"
+  },
+  {
+   "region": [
+    120,
+    290,
+    370,
+    510
+   ],
+   "what": "Interior walnut and back-bar are smooth CG with little falloff; there is haze (0.02) but no depth or pools of light can be seen"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Dead-frontal, symmetric elevation: the camera is level and square to the glass, so there is no perspective or depth of field and it looks like an architectural drawing"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "material",
+   "problem": "The name in gold leaf, the idea of the frame, reads as a dark olive sticker.",
+   "evidence": {
+    "region": [
+     400,
+     390,
+     415,
+     448
+    ],
+    "measured": "lum_median 16.3, RGB 23/16/0; delta E 53 against #C9A24A over the wordmark"
+   },
+   "change": {
+    "setting": "the gold leaf emission strength (plus the gold leaf's metallic material)",
+    "from": "emission 0.0; reads as dark, low-reflectance metal",
+    "to": "make it a true metallic gold (metallic 1, roughness 0.2, base #D4AF5A) and give it emission 0.4 so it holds at night; or aim one street lamp to graze the glass"
+   },
+   "expected": "Letters read as warm gold, clearly brighter than the room behind them, with a slight sheen gradient across each letter.",
+   "accept": {
+    "region": [
+     400,
+     390,
+     415,
+     448
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     110,
+     175
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The caf\u00e9 curtains are cold grey and front-lit, which kills the 'room glowing warm behind caf\u00e9 curtains' idea.",
+   "evidence": {
+    "region": [
+     140,
+     520,
+     900,
+     655
+    ],
+    "measured": "RGB median 54/43/43, lum_median 46, almost flat falloff 49 to 40"
+   },
+   "change": {
+    "setting": "curtain fabric material (and street lamps)",
+    "from": "opaque grey fabric, street lamps 300 W 4000 K",
+    "to": "translucent cream linen, base #E8D9BE, transmission/translucency 0.5, with irregular fold widths; street lamps 120 W, 3500 K"
+   },
+   "expected": "The curtains glow amber-cream from behind, brighter at the top where the pendants are, and the folds show light through the thin parts.",
+   "accept": {
+    "region": [
+     140,
+     520,
+     900,
+     655
+    ],
+    "metric": "b_median",
+    "op": "<",
+    "value": 35
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The square-on, level elevation reads as an architectural drawing, not a photograph from across the street, and shows no ground or building above.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "facade edges parallel to the frame; bottom 140 px lum 9; top 130 px a flat soffit"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [-8.5, 3.0, 1.45], target [0.0, 3.37, 1.9], 50 mm",
+    "to": "position [-9.5, -1.5, 1.6], target [0.0, 3.2, 2.0], 40 mm, vertical lines kept vertical (shift rather than tilt), f/2.8 focused on the glass so the far kerb softens"
+   },
+   "expected": "A three-quarter view with the door recess turned toward the camera, a strip of pavement in the foreground and a storey of the building above the fascia; the room behind the glass gains depth.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The record wall is the brightest, clipped area and competes with the name.",
+   "evidence": {
+    "region": [
+     600,
+     400,
+     740,
+     510
+    ],
+    "measured": "lum_median 196, clip_pct 3.04"
+   },
+   "change": {
+    "setting": "the record wall lamps (3 x spot) and the record-wall strip",
+    "from": "18.0 W, strip 2.0",
+    "to": "9.0 W, strip 1.0"
+   },
+   "expected": "The record wall drops to a warm mid-tone with readable sleeves and sits behind the name.",
+   "accept": {
+    "region": [
+     600,
+     400,
+     740,
+     510
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The street and the stallriser fall into black, so the shopfront has no ground and floats.",
+   "evidence": {
+    "region": [
+     0,
+     660,
+     950,
+     800
+    ],
+    "measured": "lum_median 9.0, R median 0, crush 3.2 %"
+   },
+   "change": {
+    "setting": "the street's material",
+    "from": "flat dark paving",
+    "to": "wet concrete sidewalk with a granite kerb, roughness 0.25 and puddles, so it reflects the window's warm glow and the street lamps"
+   },
+   "expected": "A warm streak of the shop's light on the pavement and a cool rim from the street lamps; the lower frame holds detail.",
+   "accept": {
+    "region": [
+     0,
+     660,
+     950,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     18,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The shopfront glass has no reflection, so the panes read as empty openings.",
+   "evidence": {
+    "region": [
+     140,
+     290,
+     370,
+     510
+    ],
+    "measured": "no specular gradient on the glass; the interior's lum_range of 37 is all from the room"
+   },
+   "change": {
+    "setting": "shopfront glazing material",
+    "from": "fully transparent, no reflection",
+    "to": "glass IOR 1.52 with a faint reflection of the street (a dim cool streetscape and one lamp highlight in the upper left pane)"
+   },
+   "expected": "A soft cool sheen across the upper left of the glass and a small lamp highlight; the room still reads through it.",
+   "accept": {
+    "region": [
+     120,
+     290,
+     370,
+     400
+    ],
+    "metric": "b_median",
+    "op": ">",
+    "value": 10
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The facade, fascia and stallriser are untextured flat blue planes that say CG.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     130
+    ],
+    "measured": "lum_median 16.8, a smooth range with no texture detail; R median 6"
+   },
+   "change": {
+    "setting": "facade surfaces (the street's building)",
+    "from": "flat blue-grey matte",
+    "to": "satin painted timber, deep green-black #1E2622, with panel mouldings, brush grain, slight wear and a gloss of 0.4, so the street lamps leave a soft graded highlight"
+   },
+   "expected": "The facade reads as painted wood with a highlight falling off along its length, not as a flat colour.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     130
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 60
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The brief's 'transom lit' and the room's pools of light do not read: the transom is dull and the interior is evenly brown.",
+   "evidence": {
+    "region": [
+     80,
+     140,
+     1200,
+     245
+    ],
+    "measured": "lum_median 37.3, lum_p95 116"
+   },
+   "change": {
+    "setting": "pendants and room haze",
+    "from": "pendants 90 W, haze 0.02",
+    "to": "pendants 130 W, haze 0.04, so the pendants' cones show in the air and light the transom's ceiling from below"
+   },
+   "expected": "The transom glows a warm gradient and visible cones of light read through the main panes.",
+   "accept": {
+    "region": [
+     80,
+     140,
+     1200,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     90
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Show an Ember speaker through the glass",
+   "why": "The product is the brand's hero, but the room's layout and the speakers' positions are fixed. If the new camera (c3) cannot frame one through the record-wall opening or the door, the owner has to decide whether the shot needs one."
+  },
+  {
+   "request": "A storey of the ordinary San Francisco building above the fascia (bay window, cornice)",
+   "why": "The shopfront design is fixed, and the building above may not be modelled. That is an asset/set addition for the owner to approve."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
