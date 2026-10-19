@@ -16,3 +16,16 @@ This is the coordinator's brief of 2026-10-19, applied as a patch over A's shot 
 
 | Order | A | A3 | Preferred |
 |---|---|---|---|
+| A3 first | 6.2 | 6.0 | A |
+| A first | 6.5 | 6.2 | A |
+
+**A3 trails A by 0.25 on average, within the 0.5 margin, so A3 goes to finals.**
+
+What the judges said:
+- **The foxgloves:** both called them a fault. In the defocus they smear into lilac streaks without florets.
+- **The agarics:** one judge called them stock CG props at the product's foot. The other did not mention them.
+- **The brighter cabinet:** both noted it (body median 56 against 43). One judge preferred it as fresher and more saleable. The other preferred A's darker, richer look.
+
+If the foxgloves should go, set `FOXGLOVES = []`: a one-line change.
+
+The rig for the finals is unchanged from the duel.
