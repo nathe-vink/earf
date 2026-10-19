@@ -1,0 +1,354 @@
+{
+ "stage1": {
+  "impression": "A tidy, warm corner of a concrete listening room, but it reads as a CG mockup, not a night photograph. The red speaker glows as one flat pink box, not as thick tinted acrylic. The light is an even ambient wash with no practical in frame and no pools of light. The walls and the record wall are as bright as the hero or brighter, the record spines repeat like a texture, and the concrete looks smooth and plastered rather than board-formed.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speaker must be the brightest and most saturated thing in the room: speaker region [235,190,375,450] lum_median >= 50, while the record wall [480,0,720,340] and the walls [300,0,470,260] sit at or below 45",
+  "At least one practical (Bell, a candle, a pendant) must be visible in frame and make a pool of light that falls off visibly on the table and floor",
+  "The fir beams overhead and the board-formed concrete grain, tie holes and pour lines must read in frame, since the card says the frame is for them",
+  "The frosted screen must glow evenly from inside, brighter than the wall around it, and not look like a framed print on the wall",
+  "The record wall needs varied, believable sleeves and spines (different widths, colours, worn sleeves, a few pulled out) instead of a repeated stripe texture",
+  "Some sign of life: a record out of its sleeve, a glass with liquid in it, a coat or throw on the chair",
+  "The speaker's acrylic must show thickness: polished edges brighter than the faces, clean reflections, and no blob highlight on the horn lid"
+ ],
+ "defects": [
+  {
+   "region": [
+    235,
+    190,
+    375,
+    450
+   ],
+   "what": "Speaker reads as flat emissive pink. Its median of 40.8 is below the room walls (54), and there is little edge glow to show the thickness of the cast acrylic"
+  },
+  {
+   "region": [
+    245,
+    240,
+    275,
+    262
+   ],
+   "what": "A soft white blob highlight on the horn lid's lower-left corner looks like plastic"
+  },
+  {
+   "region": [
+    480,
+    0,
+    720,
+    340
+   ],
+   "what": "The record wall is evenly lit from top to bottom (profile 68 to 71, no falloff from 18 deg spots), brighter than the hero (median 62.4), and the sleeve spines repeat like a tiled stripe texture"
+  },
+  {
+   "region": [
+    300,
+    0,
+    470,
+    260
+   ],
+   "what": "The concrete wall is smooth and low in contrast (lum_range 31): no formwork grain, tie holes or pour lines at this scale"
+  },
+  {
+   "region": [
+    75,
+    25,
+    295,
+    280
+   ],
+   "what": "The screen behind its frosted panel reads as a framed print, matte and as bright as the wall (median 49 vs 54), with no glow from inside"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    120
+   ],
+   "what": "The top band is the brightest part of the room (median 55) but shows no ceiling and no fir beams. The ambient is flat and comes from nowhere"
+  },
+  {
+   "region": [
+    0,
+    235,
+    180,
+    480
+   ],
+   "what": "The leather chair is a dark, nearly featureless mass (median 21.8) with no sheen or stitching to read as leather"
+  },
+  {
+   "region": [
+    170,
+    380,
+    280,
+    480
+   ],
+   "what": "The side table holds one dark glass and no lit practical. The candle or Bell that would make a pool of light is missing"
+  },
+  {
+   "region": [
+    480,
+    0,
+    720,
+    30
+   ],
+   "what": "The record wall is cut by the frame's top edge and right edge and crowds the right third"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The room's ambient and the record wall are brighter than the speaker, so the hero does not read first and the room has no pools of light.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     340
+    ],
+    "measured": "Record wall lum_median 62.4 and walls 54.1, against the speaker at 40.8. The record wall's vertical profile is flat (68 to 71)."
+   },
+   "change": {
+    "setting": "record wall 3 x spot W; record-wall strip emission; sconces point W",
+    "from": "spots 20.0 W, strip 0.1, sconce 25.0 W",
+    "to": "spots 9.0 W aimed at the middle shelves only, strip 0.03, sconce 12.0 W"
+   },
+   "expected": "The record wall drops to about 35 to 42 with a visible fall-off toward the top and bottom, the walls to about 38 to 45, and the speaker becomes the brightest mass.",
+   "accept": {
+    "region": [
+     480,
+     0,
+     720,
+     340
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speaker is lit flat from the front, so the acrylic reads as pink plastic with no edge glow and its median is below 45.",
+   "evidence": {
+    "region": [
+     235,
+     190,
+     375,
+     450
+    ],
+    "measured": "lum_median 40.8 (target >= 45). The horn lid [238,192,355,262] has median 32.9 and a 0.2 % clipped blob highlight."
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area W/m2 and placement",
+    "from": "12.0 W/m2 at the target, 2900 K, frontal",
+    "to": "18.0 W/m2: two lamps raked from above and behind at about 45 deg to light the polished edges and the horn through the acrylic, two lamps as small 6.0 W/m2 front fills, 2700 K; enlarge the lamp facing the horn lid so its reflection is a long soft gradient, not a blob"
+   },
+   "expected": "The speaker region's median reaches 50 to 60, the polished edges read as bright lines against the faces, and the horn-lid highlight becomes a soft streak.",
+   "accept": {
+    "region": [
+     235,
+     190,
+     375,
+     450
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "There is no practical in frame, so the light has no visible source and the side table has no pool of light.",
+   "evidence": {
+    "region": [
+     170,
+     380,
+     280,
+     480
+    ],
+    "measured": "Side table and floor lum_p95 82, with no highlight above 130 in the lower half apart from the speaker."
+   },
+   "change": {
+    "setting": "Bell (table lamps) and candles",
+    "from": "Bell none; no candle on the listening-room side table",
+    "to": "Bell on the side table, lit at about 3 W, 2400 K, plus one candle in an amber votive (1.5 W, 1900 K) beside the glass"
+   },
+   "expected": "A warm pool on the table top and the floor beneath it that falls off within about half a metre, and a lit practical that explains the room's light.",
+   "accept": {
+    "region": [
+     170,
+     380,
+     280,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The frame shows neither the fir beams nor the ceiling. The record wall is cut at its top and right edges, and the eye level crops the room into a flat wall.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     120
+    ],
+    "measured": "The top band (median 55) is plain wall. The record wall runs off the top and right edges."
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [14.6, 2.5, 1.2], target [16.3, 4.6, 1.15], 26 mm",
+    "to": "position [14.2, 2.2, 1.05] (seated), target [16.3, 4.6, 1.35] with vertical shift so verticals stay true, 28 mm; take in the beams and the top of the record wall, and keep the speaker on the left-third line"
+   },
+   "expected": "The fir beams read across the top of the frame, the record wall becomes a framed element, and the speaker stays the hero at seated height.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The frosted screen does not glow. It reads as a matte framed print.",
+   "evidence": {
+    "region": [
+     75,
+     25,
+     295,
+     280
+    ],
+    "measured": "lum_median 49.2 against the surrounding wall at 54.5, lum_range 32."
+   },
+   "change": {
+    "setting": "the screens' images emission; frosted acrylic roughness",
+    "from": "0.8; current roughness",
+    "to": "1.6; roughness about 0.6, so the panel diffuses evenly with a faint bright polished edge at its frame"
+   },
+   "expected": "The panel glows evenly, above the wall it hangs on, and the ring image sits softly behind the frost.",
+   "accept": {
+    "region": [
+     90,
+     40,
+     280,
+     270
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 62
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The concrete reads as smooth plaster, without the formwork boards, tie holes and pour lines of board-formed concrete.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     470,
+     260
+    ],
+    "measured": "lum_range 31.1, lum_p5 32 to lum_p95 64: almost no surface variation."
+   },
+   "change": {
+    "setting": "concrete's tone and sheen",
+    "from": "uniform tone, low relief",
+    "to": "board-grain bump at about 2x strength, boards 100 to 150 mm with offset joints, tie holes on a 600 mm grid, faint darker pour lines and staining, roughness varied 0.6 to 0.85"
+   },
+   "expected": "The wall shows grain under raking light from the sconce and the speaker.",
+   "accept": {
+    "region": [
+     300,
+     0,
+     470,
+     260
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The room looks staged and empty, with no sign of life, and the record sleeves repeat.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     340
+    ],
+    "measured": "Seen at 3x: spines repeat in identical stripe groups. The only prop is one dark glass on the table."
+   },
+   "change": {
+    "setting": "props",
+    "from": "one rocks glass; uniform sleeves",
+    "to": "a whisky in the rocks glass, a record out of its sleeve leaning against the speaker's plinth or on the chair, a coat or wool throw over the chair's arm; vary the sleeves (worn spines, a few pulled out or face-out, gaps)"
+   },
+   "expected": "The room reads as lived in and the record wall reads as a collection, not a texture.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The air is clean and the light has no depth, so the spots and the speaker's glow make no atmosphere.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "Frame lum_median 50.4, at the top of the 22 to 50 band. Horizontal wall profile 67 to 45 to 61 with no beam structure."
+   },
+   "change": {
+    "setting": "haze density; exposure",
+    "from": "0.025 per metre; exposure 0.0",
+    "to": "0.05 per metre; exposure -0.3 to bring the frame into the band once c1 to c5 are in"
+   },
+   "expected": "A faint glow around the practicals and the speaker, and a frame median of about 32 to 42.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     44
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the speaker's interior batts read less flat and pink, or change the tint so the box looks less like a uniform red glow",
+   "why": "The speaker's parts and colour are fixed. Only its light (c2) may change."
+  },
+  {
+   "request": "Thicken or re-edge the speaker's acrylic cabinet so it reads as thicker cast material",
+   "why": "The speaker's shape is fixed."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

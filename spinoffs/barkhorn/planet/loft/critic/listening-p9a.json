@@ -1,0 +1,365 @@
+{
+ "stage1": {
+  "impression": "A competent, tidy CG interior: the red acrylic speaker clearly reads as the hero and is the only colour in the frame, but it reads as flat red plastic. The batts and driver ring are uniform pink-red slabs, the edges don't glow, and the horn has a plasticky specular blob. The room is lit evenly from somewhere out of frame, with no practical in view and no pools of light. The concrete, the walnut-looking shelving and the record spines are smooth and repetitive, and the 'frosted screen' reads as a framed grey print. It looks like a showroom render, not a night photograph of a bar.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "At least one practical visible in frame (Bell, candle or sconce) making a falloff pool on the side table or wall, so the light reads as the room's own",
+  "The frosted screen panel visibly glowing (median well above the surrounding wall) and diffusing its image evenly, not reading as a print",
+  "Speaker acrylic showing thickness: bright polished edges, light passing through the walls, and batts and driver visible behind tinted acrylic rather than as flat red planes",
+  "Wall and shelf lighting with real contrast: dark gaps between pools, frame median about 32-42, walls not one flat grey-brown",
+  "Board-formed concrete reading at 1:1 (board grain, tie holes, pour lines) without denoiser blotching",
+  "Record wall with variety (pulled records, uneven spines, a sleeve out) and fir character rather than uniform dark walnut veneer",
+  "Leather chair with a believable soft sheen instead of a dark smooth blob",
+  "Delivered at full 2400 x 1600; this 0.3 proof is too soft to judge micro-texture"
+ ],
+ "defects": [
+  {
+   "region": [
+    70,
+    25,
+    295,
+    280
+   ],
+   "what": "Frosted screen reads as a framed matte print: median 49 against the wall's 54, so it doesn't glow; the frame edge looks like a picture frame"
+  },
+  {
+   "region": [
+    240,
+    270,
+    370,
+    445
+   ],
+   "what": "Speaker interior batts and driver surround render as flat, uniformly lit pink-red planes; no sense of thick acrylic with depth or glowing edges"
+  },
+  {
+   "region": [
+    240,
+    190,
+    355,
+    265
+   ],
+   "what": "Plasticky white specular blob on the horn at about (255, 245); the speaker region median is 39.8, under the 45 target"
+  },
+  {
+   "region": [
+    0,
+    0,
+    470,
+    300
+   ],
+   "what": "Concrete walls flat and evenly lit (lum_range 32 in 300-470 x 0-300); board texture faint and blotchy, like denoiser smear; no tie holes legible"
+  },
+  {
+   "region": [
+    480,
+    0,
+    720,
+    340
+   ],
+   "what": "Record spines are a repeated stripe pattern with uniform heights; the shelving reads as walnut veneer, not fir; lighting is even across all cubbies"
+  },
+  {
+   "region": [
+    480,
+    350,
+    720,
+    480
+   ],
+   "what": "Cabinet doors are smooth CG veneer with a flat sheen"
+  },
+  {
+   "region": [
+    0,
+    240,
+    180,
+    480
+   ],
+   "what": "Leather chair is a dark smooth mass (median 21.6) with no grain or sheen, reading as plastic"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No practical light source visible; the light direction is unmotivated (bright left edge median 63.5); the room reads as a showroom rather than night"
+  },
+  {
+   "region": [
+    170,
+    380,
+    280,
+    480
+   ],
+   "what": "Side table and glass are underlit and lack a pool of light; the glass highlight is small and grey"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "No practical is visible and there is no pool of light, so the light doesn't read as the room's own.",
+   "evidence": {
+    "region": [
+     170,
+     400,
+     280,
+     440
+    ],
+    "measured": "side table top lum_p95 70.7, median 39.8; no light source in frame"
+   },
+   "change": {
+    "setting": "Bell (table lamp) on the side table",
+    "from": "none",
+    "to": "one Bell lit, about 6 W, 2400 K, placed on the side table beside the glass"
+   },
+   "expected": "A warm pool on the tabletop and the lower speaker base with natural falloff onto the floor; the glass catches a bright highlight; the frame gets a motivated practical.",
+   "accept": {
+    "region": [
+     170,
+     400,
+     280,
+     440
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 115
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frosted screen doesn't glow and reads as a grey framed print.",
+   "evidence": {
+    "region": [
+     110,
+     60,
+     260,
+     250
+    ],
+    "measured": "panel median about 49, darker than the adjacent wall at 54; lum_range 32"
+   },
+   "change": {
+    "setting": "the screens' images (emission)",
+    "from": "0.8",
+    "to": "2.0, with the frosted acrylic's roughness raised so the image diffuses evenly"
+   },
+   "expected": "The panel reads as a soft, evenly backlit frosted surface clearly brighter than the wall, with the image suggestive behind the frost.",
+   "accept": {
+    "region": [
+     110,
+     60,
+     260,
+     250
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     100
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The hero speaker is under target brightness and its acrylic doesn't show light passing through or glowing edges.",
+   "evidence": {
+    "region": [
+     240,
+     190,
+     370,
+     450
+    ],
+    "measured": "lum_median 39.8 (target 45 or more); edge at x 340-380 a 1 px step with no edge glow"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area",
+    "from": "12.0 W/m2",
+    "to": "20.0 W/m2, with one lamp moved behind and below so it grazes the acrylic walls and lights their polished edges from inside"
+   },
+   "expected": "The cabinet glows from within; the edges show bright rims; the batts read as white behind red tint; the speaker region median reaches 45 or more without clipping.",
+   "accept": {
+    "region": [
+     240,
+     190,
+     370,
+     450
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 46
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The frame is lit flat and sits at the top of the brightness band, so it reads as daylight-ish rather than night.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame lum_p50 50.4, lum_mean 52.5; walls lum_range only about 32"
+   },
+   "change": {
+    "setting": "render exposure and view look",
+    "from": "exposure 0.0, look None",
+    "to": "exposure -0.4, AgX look Medium High Contrast; also lower the street lamps from 500 W to 250 W and the sconces from 25 W to 15 W to remove the even fill"
+   },
+   "expected": "A lower-key frame with darker gaps between pools, while the practicals and the speaker hold.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     32,
+     42
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The record wall is lit evenly across every cubby; it needs pools and darker gaps.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     340
+    ],
+    "measured": "lum_range 94.6, median 62.4, even across the cubbies"
+   },
+   "change": {
+    "setting": "the record wall 3 x spot",
+    "from": "20.0 W, cone 18 deg; record-wall strip 0.1",
+    "to": "35.0 W, cone 14 deg, aimed at alternating cubbies; record-wall strip 0.0"
+   },
+   "expected": "Defined pools on some cubbies with darker cubbies between; spines catch highlights.",
+   "accept": {
+    "region": [
+     480,
+     0,
+     720,
+     340
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 115
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The board-formed concrete is smooth and blotchy, with no legible board grain or tie holes.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     470,
+     300
+    ],
+    "measured": "lum_range 32.0, p5 32 / p95 64; texture reads as soft noise"
+   },
+   "change": {
+    "setting": "concrete finish",
+    "from": "current low-contrast bump and albedo variation",
+    "to": "stronger board-grain bump with 150 mm board lines, visible tie-hole grid, slight staining and a low sheen so grazing light picks out relief; denoise with albedo and normal passes to avoid smear"
+   },
+   "expected": "The concrete reads as board-formed at 1:1, warming under the 2400 K light, with grazing relief.",
+   "accept": {
+    "region": [
+     300,
+     0,
+     470,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 42
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The leather chair is a featureless dark mass that reads as plastic.",
+   "evidence": {
+    "region": [
+     0,
+     240,
+     180,
+     480
+    ],
+    "measured": "lum_median 21.6, p95 68; no sheen or grain visible"
+   },
+   "change": {
+    "setting": "leather finish",
+    "from": "smooth, near-uniform dark",
+    "to": "aged brown leather with grain bump, roughness 0.45-0.6 varying with wear, and lighter wear on the edges and arm"
+   },
+   "expected": "A soft broad sheen along the chair's edge facing the speaker and Bell; it reads as leather.",
+   "accept": {
+    "region": [
+     0,
+     240,
+     180,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The record wall is repetitive and the room shows little sign of life.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     340
+    ],
+    "measured": "seen: identical striped spines of uniform height in every cubby; only one glass in frame"
+   },
+   "change": {
+    "setting": "props",
+    "from": "uniform filled cubbies, one glass",
+    "to": "vary the spine heights and colours, pull a few records part-out, lean one sleeve on the lower cabinet, add a record out of its sleeve on the side table, and drape a coat over the chair arm"
+   },
+   "expected": "Breaks the stripe repetition and adds lived-in cues.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Reduce the plasticky look of the speaker's resin horn and red cast acrylic (its surface finish and tint)",
+   "why": "The speaker's shape, colour and parts are fixed; only its lighting (c3) can be changed"
+  },
+  {
+   "request": "Make the record wall's shelving read as Douglas fir rather than dark walnut",
+   "why": "The stain of the fir may change under material finish, but if the record wall is specified as a different timber that is a room-design matter; confirm the specified material before restaining"
+  }
+ ],
+ "score_if_fixed": 7.5
+}
