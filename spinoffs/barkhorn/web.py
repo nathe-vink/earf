@@ -13,7 +13,9 @@ which deploys it on every push to main.
   with its colour (round 25's idea, sketches for now) and the other seven.
 - The header's globe keeps turning, never under reduced motion. The page opens on it: the acrylic globe large in the
   middle of a plain ground, turning, which flies and shrinks into its place at the top left as the ground is drawn in
-  behind it, and goes on turning there (the owner, 2026-10-19).
+  behind it, and goes on turning there (the owner, 2026-10-19). The opening follows the system's setting: paper and the
+  paper render by day, near-black and the night render (its glowing edges) when the system is dark; the page beneath
+  stays paper either way, one theme by choice.
 
 The owner, of round 30's words: "the sites copy needs a lot of work. It's a lot of AI slop, using my words verbatim,
 and dumb things like 'watch the horns turn' and stating the obvious like 'eight horned speakers in colored acrylic.'
@@ -335,9 +337,11 @@ def make_images(sources=None):
             im.save(os.path.join(IMG, f'globe-spin-{tag}.webp'), quality=70, alpha_quality=80, method=6)
             made.append(f'globe-spin-{tag}')
     # the opening's globe: the same render's turn (brand/mark/earf-globe-render-spin.webm, 120 frames in 4 s), cropped to
-    # the globe at 360 px, as VP9 and H.264 tagged BT.709, and its first frame; made once with ffmpeg into brand/site:
+    # the globe at 360 px, as VP9 and H.264 tagged BT.709, and its first frame as decoded (WebP, q80); made once with
+    # ffmpeg into brand/site, and the same again from the night render (earf-globe-render-night-spin.webm) for a dark system:
     #   -vf "crop=492:492:112:112,scale=360:360:flags=lanczos:out_color_matrix=bt709" (-crf 34 VP9, -crf 23 x264)
-    for name in ('globe-turn.webm', 'globe-turn.mp4', 'globe-turn-poster.jpg'):
+    for name in ('globe-turn.webm', 'globe-turn.mp4', 'globe-turn-poster.webp',
+                 'globe-turn-night.webm', 'globe-turn-night.mp4', 'globe-turn-night-poster.webp'):
         src = os.path.join(BRAND, 'site', name)
         if os.path.exists(src):
             shutil.copy(src, os.path.join(IMG, name))
@@ -413,8 +417,9 @@ def body():
         fw, fh = sp.width // 10, sp.height // 6
         buf = io.BytesIO(); sp.crop((0, 0, fw, fh)).save(buf, 'WEBP', quality=90, method=6)
     still = 'data:image/webp;base64,' + base64.b64encode(buf.getvalue()).decode()
-    pf = os.path.join(IMG, 'globe-turn-poster.jpg')                         # the opening globe's first frame, inline
-    poster = ('data:image/jpeg;base64,' + base64.b64encode(open(pf, 'rb').read()).decode()) if os.path.exists(pf) else still
+    inline = lambda name: (('data:image/webp;base64,' + base64.b64encode(open(os.path.join(IMG, name), 'rb').read()).decode())
+                           if os.path.exists(os.path.join(IMG, name)) else still)
+    poster, poster_night = inline('globe-turn-poster.webp'), inline('globe-turn-night-poster.webp')   # the opening's first frames
     word = E.word_svg('currentColor').replace('role="img" aria-label="EARF"', 'aria-hidden="true"').replace('<title>EARF</title>', '')
     coin = {k: i for i, k in enumerate(KEYS)}                 # the coins' sheet is in the speakers' order
     icon_img = lambda icon, name, cls='': (f'<img class="ic only-light {cls}" src="img/icon-{icon}-light.webp" alt="" width="256" height="256">'
@@ -578,12 +583,17 @@ def body():
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt).replace('__GOES__', goes_sec)
-                .replace('__STILL__', still).replace('__POSTER__', poster).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
+                .replace('__STILL__', still).replace('__POSTER__', poster).replace('__POSTER_NIGHT__', poster_night).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
     cut = page.index('</style>') + len('</style>')
     return page[:cut], page[cut:]
 
 
 PAGE = r"""
+<script>(function (d) { d.classList.add('opening');      // the opening's choice, made before anything paints: whether it plays, and by day or night
+  if (location.hash.startsWith('#speaker-') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  d.classList.add('intro');
+  if (matchMedia('(prefers-color-scheme: dark)').matches) { d.classList.add('night'); document.querySelector('meta[name="theme-color"]').content = '#100F12'; }
+})(document.documentElement)</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap">
 <style>
@@ -944,9 +954,12 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 
 /* the opening: the acrylic globe large in the middle of a plain ground, turning, flies and shrinks onto the header's
    globe while the ground, a circle on the globe, closes in behind it. The ground is the render's own paper as its film
-   decodes (#F1ECE7), so the film's edge never shows; shown only when the page's first script asks for it */
+   decodes (#F1ECE7), or on a dark system the night render's black (#100F12), so the film's edge never shows; shown only
+   when the page's first script asks for it */
 .splash, .flyer { display: none }
+html.intro.night { background: #100F12 }                              /* so nothing pale shows before the ground is drawn */
 html.intro .splash { display: block; position: fixed; inset: 0; z-index: 50; background: #F1ECE7 }
+html.intro.night .splash, html.night .flyer video { background: #100F12 }
 html.intro .flyer { --big: min(36vmin, 200px); display: block; position: fixed; z-index: 51; left: 50%; top: 50%;
   width: var(--big); height: var(--big); margin: calc(var(--big) / -2) 0 0 calc(var(--big) / -2) }
 .flyer video { display: block; width: 100%; height: 100%; object-fit: cover; clip-path: circle(50%); background: #F1ECE7 }
@@ -990,9 +1003,12 @@ html.cursor, html.cursor * { cursor: none !important }
 </style>
 
 <div class="splash" aria-hidden="true"></div>
-<div class="flyer" role="progressbar" aria-label="Loading"><video muted playsinline loop autoplay preload="auto" poster="__POSTER__" aria-hidden="true" tabindex="-1"><source src="img/globe-turn.webm" type='video/webm; codecs="vp9"'><source src="img/globe-turn.mp4" type="video/mp4"></video></div>
-<script>(function (d) { d.classList.add('opening');
-  if (!location.hash.startsWith('#speaker-') && !matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('intro'); })(document.documentElement)</script>
+<div class="flyer" role="progressbar" aria-label="Loading"><video muted playsinline loop autoplay preload="auto" aria-hidden="true" tabindex="-1"></video></div>
+<script>(function (d, v) { if (!d.classList.contains('intro')) return;     // the day's film or the night's, and only that one fetched
+  const night = d.classList.contains('night'), f = night ? 'globe-turn-night' : 'globe-turn';
+  v.poster = night ? '__POSTER_NIGHT__' : '__POSTER__';
+  v.innerHTML = `<source src="img/${f}.webm" type='video/webm; codecs="vp9"'><source src="img/${f}.mp4" type="video/mp4">`;
+})(document.documentElement, document.querySelector('.flyer video'))</script>
 <noscript><style>html.opening .hero-photo img { opacity: 1 }</style></noscript>
 <header class="top"><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home"><span class="globe" aria-hidden="true"></span>__WORD__</a>
@@ -1418,16 +1434,23 @@ addEventListener('hashchange', route);
 // the opening: the acrylic globe turns large in the middle of its ground until the hero's photograph is decoded (at
 // least 0.9 s, so it is seen, and never more than 4.5 s), then flies and shrinks onto the header's globe while the
 // ground, a circle centred on it, closes in behind it; the photograph fades up beneath as it goes, and the header's
-// globe takes over at the film's angle
+// globe takes over at the film's angle, the flyer fading off it (briefly by day, the same render; longer by night, when
+// the glowing night globe gives way to the day's)
 function opening() {
   const root = document.documentElement, splash = document.querySelector('.splash'), flyer = document.querySelector('.flyer');
   const film = flyer && flyer.querySelector('video'), hero = document.querySelector('.hero-photo img');
-  const target = document.querySelector('header.top .brand .globe');
-  let finished = false;
+  const target = document.querySelector('header.top .brand .globe'), night = root.classList.contains('night');
+  let finished = false, landed = false;
   const done = () => { if (finished) return; finished = true;
     if (film && film.currentTime) setTurn(film.currentTime);
     if (splash) splash.remove(); if (flyer) flyer.remove();
-    root.classList.remove('intro'); requestAnimationFrame(() => root.classList.remove('opening')); };
+    if (night) { const tc = document.querySelector('meta[name="theme-color"]'); if (tc) tc.content = '#F4F1EC'; }
+    root.classList.remove('intro', 'night'); if (target) target.style.visibility = '';
+    requestAnimationFrame(() => root.classList.remove('opening')); };
+  const land = () => { if (finished || landed) return; landed = true;   // the ground is behind the globe now, all of it
+    if (film && film.currentTime) setTurn(film.currentTime);
+    target.style.visibility = 'visible'; splash.remove();
+    flyer.animate([{ opacity: 1 }, { opacity: 0 }], { duration: night ? 300 : 120, easing: 'ease-out', fill: 'forwards' }).finished.then(done, done); };
   if (!root.classList.contains('intro') || !splash || !flyer || !target || !hero || reduce) { done(); return; }
   if (film && film.play) film.play().catch(() => {});
   const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -1443,8 +1466,8 @@ function opening() {
     flyer.animate([{ transform: 'none' }, { transform: `translate(${bx - ax}px, ${by - ay}px) scale(${b.width / a.width})` }],
       { duration: T, easing, fill: 'forwards' });
     splash.animate([{ clipPath: `circle(${R}px at ${ax}px ${ay}px)` }, { clipPath: `circle(${b.width / 2}px at ${bx}px ${by}px)` }],
-      { duration: T, easing, fill: 'forwards' }).finished.then(done, done);
-    setTimeout(done, T + 400);                                        // in case an animation never reports
+      { duration: T, easing, fill: 'forwards' }).finished.then(land, done);
+    setTimeout(done, T + 800);                                        // in case an animation never reports
   });
   setTimeout(done, 7000);                                             // never longer than this
 }
