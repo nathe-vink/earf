@@ -730,6 +730,23 @@ def record_wall(bpy, kit, p, objs):
     bkl = Mesh('dj-backlight'); bkl.box(L - 0.03, dj['y0'], dj['desk_z'], L - 0.01, dj['y1'], dj['recess_z'])
     objs.append(bkl.object(bpy, lit_acrylic(bpy, 'dj-acrylic', p.get('dj_color', P.COLOURS['ice']), p.get('dj_glow', 0.6),
                                             deep='#1A1816', rough=0.3)))
+    if p.get('covers', False):
+        # the recess's back hung with records face out, a grid of 12 in sleeves (the records view: a dead plane before)
+        cv = Mesh('dj-covers'); rc = random.Random(19); sz = 0.315; gap = 0.03
+        nz_ = int((dj['recess_z'] - dj['desk_z'] - 0.1) // (sz + gap)); ny_ = int((dj['y1'] - dj['y0'] - 0.05) // (sz + gap))
+        oy = dj['y0'] + (dj['y1'] - dj['y0'] - ny_ * (sz + gap) + gap) / 2
+        oz = dj['desk_z'] + 0.12 + (dj['recess_z'] - dj['desk_z'] - 0.12 - nz_ * (sz + gap) + gap) / 2
+        pal = ['#C23B22', '#EDE7DA', '#2B4C7E', '#E3B23C', '#1A1A1A', '#5B7F4A', '#D8D2C4', '#8A2D3B', '#E46A2E', '#6D8FA6']
+        for iz in range(nz_):
+            for iy in range(ny_):
+                y = oy + iy * (sz + gap); z = oz + iz * (sz + gap)
+                c = lin(rc.choice(pal))
+                cv.box(L - 0.045, y, z, L - 0.035, y + sz, z + sz, col=c)
+                # a second colour, a band or a block, as a sleeve's design
+                y2 = y + rc.uniform(0.02, 0.15); z2 = z + rc.uniform(0.02, 0.15)
+                cv.box(L - 0.047, y2, z2, L - 0.0455, min(y + sz - 0.02, y2 + rc.uniform(0.08, 0.2)),
+                       min(z + sz - 0.02, z2 + rc.uniform(0.05, 0.2)), col=lin(rc.choice(pal)))
+        objs.append(cv.object(bpy, colour_attr_mat(bpy, 'sleeve-cover', rough=0.5, coat=0.2)))
     rec = Mesh('dj-recess')
     rec.box(L - dj['desk_d'] - 0.02, dj['y0'], dj['recess_z'], L, dj['y1'], dj['recess_z'] + 0.04)
     objs.append(rec.object(bpy, kit.material(bpy, 'felt', '#1B1A1F')))

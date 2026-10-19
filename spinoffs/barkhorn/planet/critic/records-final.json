@@ -1,0 +1,344 @@
+{
+ "stage1": {
+  "impression": "A wall of record spines dominates the middle third and the blue speaker glows at the right edge. The left 40% of the frame is a near-black desk in front of a flat, featureless blue rectangle, with a turntable cut off by the frame edge. The record sleeves repeat in an obviously procedural way, the light pools look like a game engine's, and the empty grey concrete in the lower right is brighter than anything the frame is meant to be about. It reads as competent CG with no single idea.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The DJ desk and the record player must read as a lit subject: desk region median luminance above 40, not 9",
+  "The screen behind the desk must have content or a gradient, not a flat field (luminance range under 10 now)",
+  "The record wall's sleeves need varied heights, lean, wear and gaps so the procedural repetition disappears",
+  "No large empty area brighter than the subjects: the bare floor at lower right (median 126) must sit below the record wall",
+  "Nothing important cut by the frame edge: the record player is clipped at x=0",
+  "A human or prop scale cue and some lived-in detail (headphones, a sleeve propped on the desk, a glass)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    1000,
+    1000,
+    1500
+   ],
+   "what": "DJ desk and the floor in front of it crushed to near black (median 9.3); the desk's form is unreadable"
+  },
+  {
+   "region": [
+    0,
+    250,
+    800,
+    1000
+   ],
+   "what": "screen is a flat blue field (lum range 9.8) and reads as a missing texture or a void"
+  },
+  {
+   "region": [
+    0,
+    980,
+    420,
+    1250
+   ],
+   "what": "record player cut off by the left frame edge, and dark"
+  },
+  {
+   "region": [
+    1040,
+    0,
+    1720,
+    1600
+   ],
+   "what": "record sleeves are uniform procedural slats repeating cube after cube; 1.5% clipping on the white spines"
+  },
+  {
+   "region": [
+    1300,
+    1350,
+    2400,
+    1600
+   ],
+   "what": "bare concrete floor is the brightest large area in the frame (median 126) and pulls the eye to nothing"
+  },
+  {
+   "region": [
+    2000,
+    0,
+    2400,
+    160
+   ],
+   "what": "hard-edged hotspot of the corner lamp on the wall and ceiling, with a game-light look"
+  },
+  {
+   "region": [
+    150,
+    130,
+    800,
+    300
+   ],
+   "what": "ceiling slots over the desk read as black gashes; grainy sparkle in the spot cone near x 180-260, y 230-330"
+  },
+  {
+   "region": [
+    1650,
+    680,
+    2300,
+    1370
+   ],
+   "what": "the Ice speaker is pushed against the right edge and partly behind the plinth shadow; its horn reflection looks streaky"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The frame's subject, the DJ desk with Cumulus, is almost black.",
+   "evidence": {
+    "region": [
+     0,
+     1000,
+     1000,
+     1500
+    ],
+    "measured": "lum_median 9.3, p95 25, crush 2.2%"
+   },
+   "change": {
+    "setting": "the DJ desk spot and DJ recess",
+    "from": "spot 150 W cone 35 deg; recess 0.03",
+    "to": "spot 600 W cone 45 deg aimed at the platter; recess 0.12"
+   },
+   "expected": "The desk top and Cumulus read clearly, with the platter's acrylic catching light; desk median about 45-60.",
+   "accept": {
+    "region": [
+     0,
+     1000,
+     1000,
+     1500
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The composition splits into three unrelated panels, with the record player cut by the left edge and the speaker against the right edge.",
+   "evidence": {
+    "region": [
+     0,
+     980,
+     420,
+     1250
+    ],
+    "measured": "the turntable's plinth runs off the frame at x=0; the speaker's right edge sits at about x 2290"
+   },
+   "change": {
+    "setting": "camera position and target",
+    "from": "position [15.6, 4.7, 1.5], target [18.288, 2.7, 1.2], 26 mm",
+    "to": "position [15.2, 3.6, 1.35], target [18.288, 3.4, 1.1], 30 mm, so that the desk and the player sit on the left third, the record wall fills the centre and the speaker sits fully inside the frame on the right third"
+   },
+   "expected": "The player is whole and well inside the frame, the speaker is clear of the edge, and the frame reads as one room.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "set",
+   "problem": "The screen behind the desk is a flat blue field that reads as a void.",
+   "evidence": {
+    "region": [
+     0,
+     250,
+     800,
+     1000
+    ],
+    "measured": "lum_median 25.9, lum_range 9.8, a uniform b-dominant field"
+   },
+   "change": {
+    "setting": "screen content and emission",
+    "from": "flat blue",
+    "to": "a slow abstract image, such as a dim waveform or a still album-art image, at a low level with a vertical gradient, emission about 2x the current"
+   },
+   "expected": "The screen has visible structure and reads as a screen, with lum_range above 40.",
+   "accept": {
+    "region": [
+     0,
+     250,
+     800,
+     1000
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 40
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The bare concrete floor in the lower right is brighter than the record wall and the subjects.",
+   "evidence": {
+    "region": [
+     1300,
+     1350,
+     2400,
+     1600
+    ],
+    "measured": "lum_median 125.6, against 55 for the record wall"
+   },
+   "change": {
+    "setting": "on each corner speaker 4 x area",
+    "from": "10.0 W/m2 at the target",
+    "to": "4.0 W/m2, and tilt the wash so it lights the speaker rather than the floor in front of it"
+   },
+   "expected": "The floor drops to a supporting mid-tone and the eye goes to the speaker and the wall.",
+   "accept": {
+    "region": [
+     1300,
+     1350,
+     2400,
+     1600
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     85
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "asset",
+   "problem": "The record sleeves are visibly procedural: uniform thickness and height, the same pattern in every cube.",
+   "evidence": {
+    "region": [
+     1040,
+     300,
+     1720,
+     1500
+    ],
+    "measured": "visual: the same striping repeats in every cube, with no lean or gaps; clip 1.47% on the white spines"
+   },
+   "change": {
+    "setting": "record wall fill (prop material)",
+    "from": "uniform sleeves",
+    "to": "randomise each sleeve's thickness (2-5 mm) and height (+-4 mm), add 3-8 deg lean at the end of each row, leave 10-15% of cubes part-empty, add a few sleeves facing out, add a roughness variation and edge wear, and lower the albedo of the white spines to 0.75"
+   },
+   "expected": "The wall reads as a real, used collection, and the clipping falls below 0.3%.",
+   "accept": {
+    "region": [
+     1040,
+     300,
+     1720,
+     1500
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The corner lamp leaves a hard hotspot on the wall and ceiling at the top right.",
+   "evidence": {
+    "region": [
+     2000,
+     0,
+     2400,
+     160
+    ],
+    "measured": "lum_p95 203.6, against a wall median of about 97 below it"
+   },
+   "change": {
+    "setting": "the wash behind each pair 4 x spot",
+    "from": "90 W, cone 50 deg",
+    "to": "60 W, cone 70 deg, with spot blend 0.6"
+   },
+   "expected": "A soft graded wash with no hard-edged hotspot.",
+   "accept": {
+    "region": [
+     2000,
+     0,
+     2400,
+     160
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 160
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The record wall's spots leave its bottom third and its top in shadow, with a falloff that looks like a game light.",
+   "evidence": {
+    "region": [
+     1050,
+     200,
+     1700,
+     1550
+    ],
+    "measured": "y falloff bins 34, 50, 51, 63, 55, 49, 54, 80: uneven, with dark top"
+   },
+   "change": {
+    "setting": "the record wall 3 x spot",
+    "from": "60 W, cone 25 deg",
+    "to": "6 x spot, 45 W, cone 30 deg, spot blend 0.5, staggered in height"
+   },
+   "expected": "An even, gently graded wash down the wall, with no bin below 45.",
+   "accept": {
+    "region": [
+     1050,
+     200,
+     1700,
+     600
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 45
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The room is empty of life and scale: nothing tells you it is a bar in use.",
+   "evidence": {
+    "region": [
+     0,
+     1000,
+     1000,
+     1500
+    ],
+    "measured": "visual: the desk carries only the record player"
+   },
+   "change": {
+    "setting": "small props",
+    "from": "none at the desk",
+    "to": "headphones on the desk, a sleeve propped up beside Cumulus, a rocks glass; the haze density from 0.012 to 0.018 so the spots draw soft cones"
+   },
+   "expected": "The desk reads as used, and the light gains depth through the haze.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The Ice speaker's horn shows streaky internal reflections at its top",
+   "why": "the speaker's materials and shape are fixed"
+  },
+  {
+   "request": "Reconsider the screen's size and placement beside the record wall",
+   "why": "the room's design, including the screens, is fixed"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

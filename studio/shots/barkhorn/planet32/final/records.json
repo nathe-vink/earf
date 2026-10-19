@@ -6,21 +6,21 @@
  ],
  "camera": {
   "position": [
-   15.6,
-   4.7,
-   1.5
+   15.3,
+   5.0,
+   1.45
   ],
   "target": [
    18.288,
-   2.7,
-   1.2
+   3.2,
+   1.15
   ],
-  "lens_mm": 26,
+  "lens_mm": 24,
   "level": true,
   "fstop": 4.0,
   "focus": [
    17.838,
-   2.6,
+   3.0,
    1.4
   ]
  },
@@ -308,9 +308,10 @@
     "windows_lit": 0.35,
     "street": true,
     "membrane_white": 0.45,
-    "dj_glow": 0.03,
+    "dj_glow": 0.0,
     "dj_color": "#F2D6B0",
-    "panel_foot": 0.2
+    "panel_foot": 0.2,
+    "covers": true
    },
    {
     "kind": "kit",
@@ -766,7 +767,7 @@
     "model": "street_lamp_01",
     "res": "1k",
     "position": [
-     6.5,
+     11.4,
      -3.7,
      0.0
     ],
@@ -782,7 +783,7 @@
     "model": "street_lamp_01",
     "res": "1k",
     "position": [
-     20.0,
+     24.0,
      -3.7,
      0.0
     ],
@@ -920,7 +921,7 @@
     0.45,
     0.45
    ],
-   "irradiance": 10.0,
+   "irradiance": 5.0,
    "color": 3000
   },
   "wash0": {
@@ -957,7 +958,7 @@
     0.45,
     0.45
    ],
-   "irradiance": 10.0,
+   "irradiance": 5.0,
    "color": 3000
   },
   "wash1": {
@@ -994,7 +995,7 @@
     0.45,
     0.45
    ],
-   "irradiance": 10.0,
+   "irradiance": 5.0,
    "color": 3000
   },
   "wash2": {
@@ -1031,7 +1032,7 @@
     0.45,
     0.45
    ],
-   "irradiance": 10.0,
+   "irradiance": 5.0,
    "color": 3000
   },
   "wash3": {
@@ -1190,8 +1191,8 @@
     4.422,
     0.94
    ],
-   "power_w": 150.0,
-   "cone_deg": 35,
+   "power_w": 500.0,
+   "cone_deg": 55,
    "blend": 0.8,
    "radius_m": 0.05,
    "color": 3000
@@ -1768,7 +1769,7 @@
   "street1": {
    "type": "point",
    "position": [
-    6.5,
+    11.4,
     -3.7,
     3.3
    ],
@@ -1779,7 +1780,7 @@
   "street2": {
    "type": "point",
    "position": [
-    20.0,
+    24.0,
     -3.7,
     3.3
    ],

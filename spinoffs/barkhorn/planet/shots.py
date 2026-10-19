@@ -45,7 +45,7 @@ def room_piece(v):
             'record_glow', 'neon', 'windows_lit', 'street', 'floor_tex', 'floor_tint', 'floor_tint_mix', 'floor_coat',
             'wall', 'booth_color', 'absorber', 'rug_tex', 'rug_tint', 'membrane_white', 'last_dim', 'flat_glow',
             'across_glow', 'backpanel_color', 'dj_glow', 'facade', 'dj_color', 'membrane_tint', 'road_rough',
-            'panel_foot', 'props', 'glasses_x')
+            'panel_foot', 'props', 'glasses_x', 'covers')
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_room', 'fn': 'room', **{k: v[k] for k in keys if k in v}}
 
 
@@ -120,7 +120,7 @@ def lights(v):
                         'blend': 0.7, 'radius_m': 0.02, 'color': 2900}
     # the DJ desk's own light
     L['dj'] = {'type': 'spot', 'position': [P.L - 0.42, P.D / 2 - 0.15, P.DJ['recess_z'] - 0.03],
-               'target': [P.L - 0.40, P.D / 2 - 0.15, P.DJ['desk_z']], 'power_w': v['spot_dj'], 'cone_deg': 35, 'blend': 0.8, 'radius_m': 0.05, 'color': 3000}
+               'target': [P.L - 0.40, P.D / 2 - 0.15, P.DJ['desk_z']], 'power_w': v['spot_dj'], 'cone_deg': 55, 'blend': 0.8, 'radius_m': 0.05, 'color': 3000}
     if v.get('spot_records', 0) > 0:                                 # a wash down the record wall
         for k, yy in enumerate((2.6, 4.57, 6.5)):
             L[f'rec{k}'] = {'type': 'spot', 'position': [P.L - 2.4, yy, P.MEMBRANE - 0.02], 'target': [P.L - 0.4, yy, 0.9],
@@ -193,9 +193,11 @@ VIEWS = {
     'records': {'title': 'the record wall and the DJ desk with Cumulus',
                 # the record wall and the DJ desk the subject, the player small and soft (the companions are being
                 # redesigned: a stand-in, never the hero), one of the Ice pair in at the left
-                'camera': {'position': [15.6, 4.7, 1.5], 'target': [P.L, 2.7, 1.2], 'lens_mm': 26, 'level': True,
-                           'fstop': 4.0, 'focus': [P.L - 0.45, 2.6, 1.4]},
-                'settings': {'exposure': 0.6, 'dj_glow': 0.03, 'spot_dj': 150.0, 'spot_records': 60.0}},
+                # (final 1: the desk cut by the edge, the recess a dead plane) the desk whole in the left third
+                'camera': {'position': [15.3, 5.0, 1.45], 'target': [P.L, 3.2, 1.15], 'lens_mm': 24, 'level': True,
+                           'fstop': 4.0, 'focus': [P.L - 0.45, 3.0, 1.4]},
+                'settings': {'exposure': 0.6, 'dj_glow': 0.0, 'spot_dj': 500.0, 'spot_records': 60.0, 'covers': True,
+                             'spk_irr': 5.0}},
     'street': {'title': 'the street at night, through the window',
                # from across the road (reframed after the first final read as a massing model): the lit shopfront
                # filling the frame, the flats above cropped at the cornice, the wet road carrying its reflection
