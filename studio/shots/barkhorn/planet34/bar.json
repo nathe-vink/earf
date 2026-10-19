@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   7.2,
+   7.6,
    3.3,
-   1.35
+   1.55
   ],
   "target": [
    9.06,
    5.9,
-   1.9
+   1.75
   ],
-  "lens_mm": 28,
+  "lens_mm": 35,
   "level": true,
   "fstop": 4.0,
   "focus": [
@@ -154,9 +154,9 @@
     "shape": "ext",
     "module": "planet_loft",
     "fn": "room",
-    "shelf_glow": 4.0,
+    "shelf_glow": 1.0,
     "shade_glow": 0.4,
-    "pendant_glow": 0.35,
+    "pendant_glow": 0.25,
     "flame": 25.0,
     "record_glow": 1.0,
     "vu": 2.0,
@@ -167,11 +167,13 @@
     "rug_mix": 0.7,
     "rug_value": 0.9,
     "neighbour_plain": true,
-    "niche_glow": 0.35,
+    "niche_glow": 0.12,
     "flat_glow": 0.06,
     "screen_glow": 0.8,
     "inlay_glow": 0.6,
-    "pendant_lamp": 4.0,
+    "pendant_lamp": 2.5,
+    "concrete_tint": "#A0998F",
+    "concrete_mix": 0.3,
     "etch_glow": 0.05
    },
    {
@@ -664,16 +666,16 @@
    "type": "spot",
    "position": [
     4.66,
-    5.734999999999999,
+    5.5649999999999995,
     1.91
    ],
    "target": [
     4.66,
     5.665,
-    1.55
+    1.65
    ],
-   "power_w": 160.0,
-   "cone_deg": 30.0,
+   "power_w": 220.0,
+   "cone_deg": 20.0,
    "blend": 0.8,
    "radius_m": 0.02,
    "color": 2600
@@ -702,16 +704,16 @@
    "type": "spot",
    "position": [
     9.059999999999999,
-    5.734999999999999,
+    5.5649999999999995,
     1.91
    ],
    "target": [
     9.059999999999999,
     5.665,
-    1.55
+    1.65
    ],
-   "power_w": 160.0,
-   "cone_deg": 30.0,
+   "power_w": 220.0,
+   "cone_deg": 20.0,
    "blend": 0.8,
    "radius_m": 0.02,
    "color": 2600
@@ -740,8 +742,8 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 110.0,
-   "cone_deg": 35.0,
+   "power_w": 180.0,
+   "cone_deg": 24.0,
    "blend": 0.6,
    "radius_m": 0.04,
    "color": 2400
@@ -758,8 +760,8 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 110.0,
-   "cone_deg": 35.0,
+   "power_w": 180.0,
+   "cone_deg": 24.0,
    "blend": 0.6,
    "radius_m": 0.04,
    "color": 2400
@@ -776,8 +778,8 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 110.0,
-   "cone_deg": 35.0,
+   "power_w": 180.0,
+   "cone_deg": 24.0,
    "blend": 0.6,
    "radius_m": 0.04,
    "color": 2400
@@ -1198,7 +1200,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "None",
-  "exposure": 1.1,
+  "exposure": 1.45,
   "white_balance_k": 3300,
   "white_balance_tint": 0.0
  }

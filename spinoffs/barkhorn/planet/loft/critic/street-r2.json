@@ -1,0 +1,384 @@
+{
+ "stage1": {
+  "impression": "A dark, level shopfront at night with a big grey lightbox carrying a dancer's silhouette, a flat blue-grey EARF wordmark, and a warm, blurry room behind glass that shows no reflections. The street, the stall riser and the left-hand building fall into near-black, the Edwardian bay is cropped off, and the red speaker is a small pink smudge under the lettering. The surfaces are smooth and uniform and there is no sign of life, so it reads as a clean CG proof, not a night photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Frame lum_median at 22 to 40 (now 12.1), with the pavement and stall riser holding detail instead of going to black",
+  "The Ember speaker readable at a glance as the frame's one saturated colour, not hidden under the window lettering and washed out to pink",
+  "The window wordmark reading as warm frosted or back-lit acrylic, not a flat blue-grey sign that competes with the speaker",
+  "The shopfront glass reflecting the street faintly (street lamps, the building opposite), so the glass reads as present",
+  "The building's Edwardian bay in frame, as the card's brief for the frame asks",
+  "Real material texture at 1:1 on the pavement, the blackened-steel frame and the building facade (the pour, the patina, wet or worn paving), and some sign of life"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Underexposed overall: lum_median 12.1, 78.9 % of pixels below 40"
+  },
+  {
+   "region": [
+    100,
+    340,
+    610,
+    400
+   ],
+   "what": "Stall riser below the glass is crushed (lum_median 1.2, crush_pct 84): a black slab with no steel texture"
+  },
+  {
+   "region": [
+    0,
+    380,
+    720,
+    480
+   ],
+   "what": "Pavement flat and dark (lum_median 9.4, crush 18 %), a uniform tiled plane with no wear, wet sheen or pools from the street lamps"
+  },
+  {
+   "region": [
+    0,
+    0,
+    150,
+    480
+   ],
+   "what": "Neighbouring facade almost black (crush 33 %), with a flat grey louvred panel at the left edge that reads as a placeholder"
+  },
+  {
+   "region": [
+    310,
+    190,
+    430,
+    228
+   ],
+   "what": "EARF wordmark is flat blue-grey (r 99, g 110, b 122), opaque and evenly lit: it reads as vinyl signage and is the strongest saturated colour in the frame, ahead of the speaker"
+  },
+  {
+   "region": [
+    385,
+    238,
+    415,
+    262
+   ],
+   "what": "The Ember speaker is a tiny, washed-out pink patch (r 201, g 147, b 131) half hidden behind the lettering, so it is not the hero"
+  },
+  {
+   "region": [
+    165,
+    145,
+    300,
+    260
+   ],
+   "what": "The lightbox is a cold neutral grey (130, 127, 130) against a warm room: it reads like a fluorescent panel, and the dancer silhouette has a hard clip-art look"
+  },
+  {
+   "region": [
+    150,
+    130,
+    580,
+    345
+   ],
+   "what": "The shopfront glass has no reflections at all, so it reads as an empty opening"
+  },
+  {
+   "region": [
+    120,
+    50,
+    720,
+    115
+   ],
+   "what": "Transom strip lights read as thin CG lines, and the facade above them (the bay) is cropped out"
+  },
+  {
+   "region": [
+    300,
+    140,
+    580,
+    260
+   ],
+   "what": "The room behind the glass is smeared by the denoiser or the depth of field: the shelves and the record wall are soft blobs with no edges"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The frame is far too dark for a magazine night exterior, so the street, the riser and the facade drop to black.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 12.1, lum_p5 0.9, below_40 78.9 %, clip 0 %"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "0.9",
+    "to": "2.1"
+   },
+   "expected": "Frame median about 25 to 32 with no clipping outside the lamps; the lightbox rises to about 150 to 170 (c6 brings it back down).",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The street lamps barely reach the pavement or the shopfront, so the lower third of the frame is dead.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     720,
+     480
+    ],
+    "measured": "lum_median 9.4, crush_pct 18.2; riser [100,340,610,400] lum_median 1.2, crush 84 %"
+   },
+   "change": {
+    "setting": "lamps: street lamps 3 x point",
+    "from": "55.0 W, 3200 K",
+    "to": "260 W, 3400 K, one placed behind the camera at about 4 m high so that it grazes the pavement and the steel riser"
+   },
+   "expected": "Soft pools on the pavement falling off toward the frame edges; the riser's blackened steel shows a soft sheen and its edges; pavement median about 20 to 30.",
+   "accept": {
+    "region": [
+     100,
+     340,
+     610,
+     400
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 40
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The camera crops off the Edwardian bay the frame is meant to show, and its line of sight puts the window lettering over the Ember speaker.",
+   "evidence": {
+    "region": [
+     385,
+     238,
+     415,
+     262
+    ],
+    "measured": "the speaker is about 30 x 24 px, under the wordmark, with the transom at the top edge and no bay visible"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [-7.5, 4.6, 1.55], target [6.0, 3.4, 1.5], 40 mm, no shift",
+    "to": "position [-9.0, 3.0, 1.6], level, 35 mm with a vertical lens shift of +0.18 so the bay's sill and the first floor are in frame and the verticals stay true; the target moved so the Ember pair sits in the clear glass to the right of the lettering"
+   },
+   "expected": "The bay fills the top quarter of the frame; the shopfront sits in the lower middle; the red speaker is seen through clear glass, not through the lettering.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The window's frosted name reads as flat blue-grey vinyl and is the frame's dominant colour, ahead of the speaker.",
+   "evidence": {
+    "region": [
+     310,
+     190,
+     430,
+     228
+    ],
+    "measured": "r 99, g 110, b 122 median: cool and opaque against a warm 2400 to 2700 K room"
+   },
+   "change": {
+    "setting": "the window's frosted name emission and the frosted acrylic's roughness",
+    "from": "emission 0.1, as now",
+    "to": "emission 0.5 at 2700 K, frosted roughness raised so the room's light diffuses through it, with its polished edges catching the light"
+   },
+   "expected": "Warm off-white letters glowing softly with brighter edges; no blue cast; the speaker becomes the only saturated colour.",
+   "accept": {
+    "region": [
+     310,
+     190,
+     430,
+     228
+    ],
+    "metric": "delta_e",
+    "hex": "#D6CAB8",
+    "op": "<=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The shopfront glass reflects nothing, so it reads as an open hole rather than glazing.",
+   "evidence": {
+    "region": [
+     150,
+     130,
+     580,
+     345
+    ],
+    "measured": "no reflected highlights from the street lamps anywhere in the glazing"
+   },
+   "change": {
+    "setting": "shopfront glass finish",
+    "from": "effectively transparent with no visible reflection",
+    "to": "clear float glass with a Fresnel reflection of about 4 to 8 % (IOR 1.52), so the street lamps and a dim facade across the street show faintly in the lower panes"
+   },
+   "expected": "A few soft reflected highlights and a faint ghost of the street in the riser-height glass; the room still reads clearly through it.",
+   "accept": {
+    "region": [
+     150,
+     260,
+     580,
+     345
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 75
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The lightbox is a cold grey slab that will blow out once exposure rises and that fights the warm room.",
+   "evidence": {
+    "region": [
+     165,
+     145,
+     300,
+     260
+    ],
+    "measured": "lum_median 127.9, r 130, g 127, b 130: neutral against a room at r 64, g 43, b 29"
+   },
+   "change": {
+    "setting": "the screens' images emission",
+    "from": "0.8, neutral",
+    "to": "0.45 with a warmer white near 3200 K, and the frosted panel's roughness raised so the silhouette's edge softens further"
+   },
+   "expected": "After c1 the box sits about 135 to 155, slightly warm, glowing evenly; the dancer is a softer and more suggestive shadow.",
+   "accept": {
+    "region": [
+     165,
+     145,
+     300,
+     260
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     125,
+     160
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The Ember speaker is washed to pink because the area lamps on it are too hot for its tint to read.",
+   "evidence": {
+    "region": [
+     385,
+     238,
+     415,
+     262
+    ],
+    "measured": "lum_median 158, r 201, g 147, b 131: a low-saturation pink"
+   },
+   "change": {
+    "setting": "lamps: on each Ember speaker 2 x area",
+    "from": "30.0 W/m2, 2700 K",
+    "to": "18 W/m2, 2700 K, lowered and moved toward the back so that the light passes through the red acrylic instead of washing its face"
+   },
+   "expected": "A deeper, saturated red glow through the cabinet that reads as the frame's one colour; its region median about 90 to 130 with r well above g.",
+   "accept": {
+    "region": [
+     385,
+     238,
+     415,
+     262
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     85,
+     135
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The frame has no atmosphere or sign of life, and the room behind the glass is smeared.",
+   "evidence": {
+    "region": [
+     300,
+     140,
+     580,
+     260
+    ],
+    "measured": "the shelves and the record wall are soft blobs; the window ledge and the street are empty"
+   },
+   "change": {
+    "setting": "haze, props and focus",
+    "from": "haze 0.02, no props in the window, f/4.0 focused on the glass",
+    "to": "haze 0.035; a couple of rocks glasses, a candle votive and a folded menu on the window ledge or a bar top seen through the glass; f/5.6 with focus 2 m inside the glass, so the room's edges hold"
+   },
+   "expected": "A faint glow in the room's air around the pendants, small highlights on the glasses, and readable shelf and record edges.",
+   "accept": {
+    "region": [
+     300,
+     140,
+     580,
+     260
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 190
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Redraw the dancer silhouette so it is less clip-art (its odd head shape and hard edges)",
+   "why": "What the screens show is fixed by the card; only their brightness and the frosting may change (c6)."
+  },
+  {
+   "request": "Change the wordmark's letterforms or how it is mounted in the window",
+   "why": "The shopfront is part of the room's fixed design; only its light level and finish are adjusted (c4)."
+  },
+  {
+   "request": "Make the Ember speaker larger or more prominent in the room",
+   "why": "The speaker and its placement in the listening room are fixed; it can be served only by the camera (c3) and its lamps (c7)."
+  },
+  {
+   "request": "Add texture detail to the facade, the paving and the neighbouring louvred panel",
+   "why": "Partly an asset change to the street geometry, which the card does not list as changeable; the concrete's and the steel's finish can be roughened within c2 and c5."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

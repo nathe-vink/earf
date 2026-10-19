@@ -22,8 +22,9 @@ S.OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'planet34')
 S.BELL = 'fog'                                                      # Bell's opal white: no second colour in a frame
 
 DEFAULT = dict(S.DEFAULT, **dict(
-    sconce_w=6.0, pendant_w=60.0, pendant_cone=50.0, shelf_glow=4.0, shade_glow=0.4, niche_glow=0.6, pendant_glow=0.35,
-    pendant_lamp=4.0, screen_glow=0.8, inlay_glow=0.6, etch_glow=0.05, spot_records=9.0, record_glow=1.0,
+    sconce_w=6.0, pendant_w=60.0, pendant_cone=50.0, shelf_glow=1.0, shade_glow=0.4, niche_glow=0.6, pendant_glow=0.25,
+    pendant_lamp=2.5,                # (bar-r2: the 4.0s here had overridden the kit's calmer edges and lamps)
+    screen_glow=0.8, inlay_glow=0.6, etch_glow=0.05, spot_records=9.0, record_glow=1.0,
     rug_tex='poly_wool_herringbone', rug_tint='#4A4541', rug_mix=0.7, rug_value=0.9, haze=0.008,
     wb=3300, exposure=0.0,
     # AgX, measured against Khronos PBR Neutral on the bar frame (README): crush 0.07 % vs 0.98, no clipping vs 0.3 %,
@@ -50,12 +51,14 @@ VIEWS = {
             # the den's close corner (the lead's): from a stool at 65 mm, one of the Fog pair in its niche, a frosted
             # pendant over the counter, a glass near
             # (the lead) wider, the frame shifted up so a fir beam and the steel cornice read over the niche
-            'camera': {'position': [7.2, 3.3, 1.35], 'target': [9.06, 5.9, 1.90], 'lens_mm': 28, 'level': True,
+            # after bar-r2 (4.0): a step closer and higher on 35 mm, the niche's speaker larger, a beam still in
+            'camera': {'position': [7.6, 3.3, 1.55], 'target': [9.06, 5.9, 1.75], 'lens_mm': 35, 'level': True,
                        'fstop': 4.0, 'focus': [LP.NICHES[1][0] + LP.NICHES[1][1] / 2, LP.BACKBAR_Y + 0.05, 1.3]},
             # after bar-r1 (4.5): the shelf edges warm and lower (kit), the niche softer and graded, its spots grazing;
             # the pendants pooling on the fir; brighter; haze; the near glass in focus at f/4
-            'settings': {'exposure': 1.1, 'niche_glow': 0.35, 'spot_niche': 160.0, 'niche_cone': 30.0, 'niche_dy': 0.15,
-                         'niche_aim_z': 1.1, 'niche_fill': 6.0, 'pendant_w': 110.0, 'pendant_cone': 35.0, 'haze': 0.02}},
+            'settings': {'exposure': 1.45, 'niche_glow': 0.12, 'spot_niche': 220.0, 'niche_cone': 20.0, 'niche_dy': 0.32,
+                         'niche_aim_z': 1.2, 'niche_fill': 6.0, 'pendant_w': 180.0, 'pendant_cone': 24.0, 'haze': 0.02,
+                         'concrete_tint': '#A0998F', 'concrete_mix': 0.3}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (5.5): 28 mm from a little back and higher, the beams in, the speaker on the left third
                   # (p2: from 14.3, 1.8 a lounge chair filled the foreground) clear of the chairs
@@ -67,18 +70,19 @@ VIEWS = {
                                'exposure': -0.5, 'wb': 3800, 'spot_records': 10.0, 'rec_cone': 40.0, 'rec_aim_z': 1.2,
                                'record_glow': 0.8, 'console_lift': 0.55, 'chair_dye': '#4A3A32'}},
     'street': {'title': 'the shopfront at night, from across the street',
-               # after street-r1 (3.5): closer and looking down the room past the dancer's lightbox, so the bar, the
-               # pendants and the right-hand Ember speaker read through the glass; the street lamps lower and off the
-               # facades; the room brighter; the lightbox calmer; the frosted name warm
-               'camera': {'position': [-7.5, 4.6, 1.55], 'target': [6.0, 3.4, 1.5], 'lens_mm': 40, 'level': True,
-                          'fstop': 4.0, 'focus': [0.0, 3.6, 1.6]},
-               'settings': {'exposure': 0.9, 'wb': 3300, 'wet': True, 'road_rough': 0.12, 'street_lamp': 55.0,
-                            'lamp_k': 3200, 'lamp_z': 6.0, 'lamp_dx': 0.0, 'lamp_cam': 60.0, 'sign_w': 0.0,
-                            'entry_w': 30.0, 'entry_cone': 100.0, 'transom_glow': 0.3, 'spk_irr': 30.0,
-                            'pendant_w': 160.0, 'pendant_glow': 0.8, 'inlay_glow': 1.2, 'haze': 0.02,
-                            'siding': '#8E9384', 'sky': 0.05, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
-                            'flat_glow': 0.12, 'across_glow': 0.10, 'linen_trans': 0.5, 'etch_glow': 0.35,
-                            'screen_window': 0.55}},
+               # after street-r2 (4.5): from the far curb, level and shifted up so the Edwardian bay is in, the right
+               # Ember speaker in clear glass beside the name; 1.2 stops brighter, the street lamps up and one low
+               # behind the camera grazing the pavement and riser; the lightbox, the name, the pendants and the Ember
+               # lamp scaled back for the exposure; more haze; focused 2 m inside
+               'camera': {'position': [-9.0, 3.0, 1.6], 'target': [0.0, 3.2, 2.9], 'lens_mm': 35, 'level': True,
+                          'fstop': 5.6, 'focus': [2.0, 3.0, 1.5]},
+               'settings': {'exposure': 2.1, 'wb': 3300, 'wet': True, 'road_rough': 0.12, 'street_lamp': 260.0,
+                            'lamp_k': 3400, 'lamp_z': 6.0, 'lamp_dx': 0.0, 'lamp_cam': 200.0, 'lamp_cam_z': 4.0,
+                            'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 15.0, 'entry_cone': 100.0,
+                            'transom_glow': 0.15, 'spk_irr': 10.0, 'pendant_w': 90.0, 'pendant_glow': 0.4,
+                            'inlay_glow': 0.6, 'haze': 0.035, 'siding': '#8E9384', 'sky': 0.03,
+                            'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550', 'flat_glow': 0.06,
+                            'across_glow': 0.05, 'linen_trans': 0.5, 'etch_glow': 0.25, 'screen_window': 0.24}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot

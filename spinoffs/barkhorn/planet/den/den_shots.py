@@ -148,7 +148,7 @@ def lights(v):
             L[f'street{k}'] = {'type': 'point', 'position': [CURB_X + 0.4 + v.get('lamp_dx', 0.9), y, v.get('lamp_z', 5.6)],
                                'power_w': v['street_lamp'], 'radius_m': 0.15, 'color': v.get('lamp_k', 2700)}
         if v.get('lamp_cam', 0) > 0:                                  # a lamp across the street, behind the camera
-            L['street-cam'] = {'type': 'point', 'position': [CURB_X - 12.4, 1.0, 5.6], 'power_w': v['lamp_cam'],
+            L['street-cam'] = {'type': 'point', 'position': [CURB_X - 12.4, v.get('lamp_cam_y', 1.0), v.get('lamp_cam_z', 5.6)], 'power_w': v['lamp_cam'],
                                'radius_m': 0.15, 'color': v.get('lamp_k', 2700)}
         E = P.ENTRY                                                    # the vestibule's downlight, the sign's lamp
         if v.get('entry_w', 0) > 0:

@@ -1,0 +1,372 @@
+{
+ "stage1": {
+  "impression": "A dark back-bar of bottles on shelves lit by thin edge strips that read as LED display lighting, with a frosted pendant on the right and a timber counter in the foreground. The speaker in the central niche shows only as a ghostly grey blur behind frosted glass: a rounded outline, a dark smudge and a white woofer cut off by the counter. Concrete, steel and fir are mostly lost in murk, the glass reads as a black cube, and the soft, smeared surfaces say render, not photograph.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speaker reads at a glance as the hero: clear acrylic edges catching light, the white batts and horn legible, not a silhouette smeared against a glowing back",
+  "The shelves' lit edges read as polished thick acrylic edges glowing softly, not white LED strips (row p95 near 227)",
+  "Board-formed concrete, blackened steel and fir grain show at 1:1 (formwork lines, tie holes, patina) in the back-bar, which is now a flat brown at median 22",
+  "Pools of light from the pendants on the fir counter, with visible falloff; the counter is flat now (p95 45)",
+  "A real, recognisable prop of life near camera (a rocks glass with whisky and ice, a coaster), not a black cube",
+  "No denoiser smear or soft CG surfaces at full delivered resolution"
+ ],
+ "defects": [
+  {
+   "region": [
+    330,
+    235,
+    420,
+    340
+   ],
+   "what": "The speaker's upper cabinet reads as a dark smudge and an outline behind a grey frosted back; the horn and acrylic can't be read, and the denoiser has smeared it"
+  },
+  {
+   "region": [
+    340,
+    345,
+    415,
+    410
+   ],
+   "what": "The woofer and white batt are cropped by the counter edge, and a steel crossbar cuts the speaker in two at y about 340"
+  },
+  {
+   "region": [
+    0,
+    110,
+    320,
+    125
+   ],
+   "what": "The shelf edges glow as thin white LED strips (p95 227) and look like retail display lighting"
+  },
+  {
+   "region": [
+    440,
+    195,
+    555,
+    340
+   ],
+   "what": "The right shelves' edge strips are the same: thin bright lines with a hard cutoff"
+  },
+  {
+   "region": [
+    0,
+    60,
+    320,
+    340
+   ],
+   "what": "The concrete back wall is a flat dark brown (median 22) with no formwork texture; the bottles are generic and repeat (the same labelled bottle many times)"
+  },
+  {
+   "region": [
+    425,
+    410,
+    480,
+    450
+   ],
+   "what": "The near glass reads as an opaque black cube with a white specular, not a glass"
+  },
+  {
+   "region": [
+    300,
+    380,
+    720,
+    480
+   ],
+   "what": "The fir counter is flat-lit (median 31, p95 45): no pendant pool, and its front edge is a dark band"
+  },
+  {
+   "region": [
+    615,
+    65,
+    675,
+    180
+   ],
+   "what": "The pendant's frosted tube is near clipping (2 % clipped) and shows a square hot spot at its top, so it reads as a CG emitter"
+  },
+  {
+   "region": [
+    330,
+    0,
+    600,
+    140
+   ],
+   "what": "The ceiling beams are smooth brown, with no checks or end grain"
+  },
+  {
+   "region": [
+    600,
+    180,
+    720,
+    380
+   ],
+   "what": "The right wall/door is a flat featureless dark panel"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speaker is backlit by its niche's frosted back, so it reads as a grey silhouette instead of a lit clear-acrylic object.",
+   "evidence": {
+    "region": [
+     330,
+     235,
+     420,
+     340
+    ],
+    "measured": "median 56, p95 127, RGB 66/54/46; the outline and horn are low-contrast against the back; the white batts below (340,345,415,410) are at median 101"
+   },
+   "change": {
+    "setting": "niches' frosted backs emission; niche spots",
+    "from": "frosted back 0.35; 2 x spot 160 W, 2600 K, cone 30 deg",
+    "to": "frosted back 0.12; spots 220 W, cone 20 deg, aimed down the front faces and edges of the cabinet from above-front so the polished acrylic edges and the horn throat catch highlights"
+   },
+   "expected": "The cabinet's edges and horn read as bright lines and forms against a darker back, and the speaker becomes the brightest object after the pendant.",
+   "accept": {
+    "region": [
+     330,
+     235,
+     420,
+     340
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 170
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The shelves' lit edges are thin hot lines that read as LED retail strips.",
+   "evidence": {
+    "region": [
+     0,
+     110,
+     320,
+     125
+    ],
+    "measured": "p95 227 against a median of 22, a 1-2 px bright line with a hard edge"
+   },
+   "change": {
+    "setting": "the shelves' lit edges",
+    "from": "4.0",
+    "to": "1.0, and make the shelf edge the visible polished face of 25-30 mm acrylic so the glow spreads up the bottles"
+   },
+   "expected": "The shelf edges glow amber-white, not white; the bottles above each shelf get a soft uplight.",
+   "accept": {
+    "region": [
+     0,
+     110,
+     320,
+     125
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     120,
+     175
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The pendants make no pool on the fir counter, so the bar is flat and the near foreground dead.",
+   "evidence": {
+    "region": [
+     300,
+     380,
+     720,
+     480
+    ],
+    "measured": "median 31, p95 45, range 35"
+   },
+   "change": {
+    "setting": "pendants 3 x spot",
+    "from": "110 W, cone 35 deg",
+    "to": "180 W, cone 24 deg, aimed straight down onto the counter; the pendant's frosted tubes stay at 0.35"
+   },
+   "expected": "Distinct warm ovals on the counter, falling off to dark between them, with the fir grain readable inside the pools.",
+   "accept": {
+    "region": [
+     300,
+     390,
+     720,
+     470
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 85
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The frame sits at the very bottom of the dim-but-readable band, so the concrete, steel and bottles go to mud.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame median 24.6; 85 % of pixels below 40; back-bar left median 22"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.1",
+    "to": "1.45 (with c2 lowering the strips, so the highlights hold)"
+   },
+   "expected": "Frame median about 32-38; the bottles' labels and the concrete read without lifting the blacks.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     42
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The back-bar's concrete and the beams are smooth, untextured brown, so they read as CG, not board-formed concrete or old fir.",
+   "evidence": {
+    "region": [
+     0,
+     60,
+     320,
+     340
+    ],
+    "measured": "median 22, RGB 32/20/12; no formwork lines or tie holes visible at 2x crop"
+   },
+   "change": {
+    "setting": "concrete's tone and sheen; fir stain",
+    "from": "dark warm, smooth",
+    "to": "a lighter warm grey concrete (albedo about 0.35) with 150 mm board-mark bump, tie holes and faint staining, roughness 0.8; the beams get checks and darker end grain"
+   },
+   "expected": "The wall between the shelves shows horizontal board lines catching the shelves' uplight; the wall reads as concrete.",
+   "accept": {
+    "region": [
+     0,
+     140,
+     320,
+     220
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The near glass reads as a black cube, and the bottles repeat one model, so there is no believable sign of life.",
+   "evidence": {
+    "region": [
+     425,
+     410,
+     480,
+     450
+    ],
+    "measured": "crush 0.86 %, p5 4.8: an opaque black body with one white specular"
+   },
+   "change": {
+    "setting": "props: rocks glasses, bottles",
+    "from": "an opaque cube glass; the same bottle repeated",
+    "to": "a heavy clear rocks glass with an inch of whisky and one large ice cube on a felt coaster, a folded menu beside it; at least 6 distinct bottle shapes and label colours, all muted"
+   },
+   "expected": "The glass shows refraction of the counter and an amber glint; the shelves read as a stocked bar.",
+   "accept": {
+    "region": [
+     425,
+     410,
+     480,
+     450
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The counter edge crops the speaker's woofer, and a steel crossbar splits it, so the hero is not read whole.",
+   "evidence": {
+    "region": [
+     330,
+     340,
+     420,
+     415
+    ],
+    "measured": "the woofer is cut at y about 410 by the counter; the crossbar at y about 340"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "z 1.35, target [9.06, 5.9, 1.9], 28 mm",
+    "to": "z 1.45, a step closer (x 7.6) and 35 mm, centred on the niche so the whole cabinet clears the counter and sits on the left third line"
+   },
+   "expected": "The whole speaker is in frame above the counter, larger, at about 25 % of the frame height or more.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The pendant's frosted tube clips and shows a square hot spot, and the denoiser smears the frosted and clear surfaces.",
+   "evidence": {
+    "region": [
+     615,
+     65,
+     675,
+     180
+    ],
+    "measured": "median 193, clip 2.03 %, a square bright patch near the top; smear visible in the speaker crop"
+   },
+   "change": {
+    "setting": "pendants' lamps; render samples/denoise",
+    "from": "lamps 4.0; 256 samples, adaptive 0.02",
+    "to": "lamps 2.5 with a diffuser so the tube glows evenly; 512 samples, adaptive 0.01, denoiser prefilter accurate with albedo and normal passes"
+   },
+   "expected": "The tube glows evenly with no square, and the speaker's edges stay crisp.",
+   "accept": {
+    "region": [
+     615,
+     65,
+     675,
+     180
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the hero speaker a saturated tint so the frame has its one colour",
+   "why": "The card fixes this niche's pair as Fog (water-clear). The 'one colour from the speaker' test can't be met in this frame without changing the product; the owner would have to put an Ember speaker in view instead."
+  },
+  {
+   "request": "Remove the steel crossbar in the niche that splits the speaker",
+   "why": "The niche and back-bar are fixed room design; only the camera (c7) can work around it."
+  }
+ ],
+ "score_if_fixed": 6.5
+}
