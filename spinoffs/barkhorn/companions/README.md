@@ -312,7 +312,7 @@ also balance at 3600 K, as bar photography does, so 2700 K reads warm, not white
 - the pendant: the same split, with a frosted band round the mouth, the block above, and the light 120 up inside
   (a cut-off of about 32°).
 
-It is rendered in Moon's two bar frames (`renders/2026-10-19/barkhorn/f1b/`). These are blockouts: if the owner picks
+It is rendered in Moon's two bar frames (`renders/2026-10-19/barkhorn/f1b/`, beside Moon in `beside-moon.png`). These are blockouts: if the owner picks
 it, it gets Moon's treatment (fab-kit products, a BOM, a kit piece).
 
 Still open:
