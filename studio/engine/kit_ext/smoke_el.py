@@ -9,7 +9,7 @@ glow). `rise` stretches the wisps upward, `lean` [dx, dy] shears them as the smo
 import math
 
 import bmesh
-from mathutils import Vector
+from mathutils import Vector, noise
 
 
 def woodsmoke(bpy, name, p, kit):
@@ -247,7 +247,10 @@ def ribbon(bpy, name, p, kit):
     at its core. Each strand is `layers` nested tubes, so the density steps up toward the core instead of stopping at a
     hard wall; noise (`scale` metres, `cut`, `soft`, stretched upward by `rise`) tears the wider parts into curls,
     `laminar` metres from each strand's start stay smooth (the unbroken thread above an incense stick). It thins out
-    between `fade` [z0, z1] (world z). `color`, `anisotropy` as woodsmoke's."""
+    between `fade` [z0, z1] (world z). `wobble` pushes each layer's wall in and out by that share of its radius (at
+    `wobble_freq` per metre), so the outline is ragged, not a hose; `break_scale` metres of broad noise (above
+    `break_cut`, never below `break_floor`) thins and thickens it along its length. `color`, `anisotropy` as
+    woodsmoke's."""
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     out = nt.nodes.new('ShaderNodeOutputMaterial')
     vol = nt.nodes.new('ShaderNodeVolumePrincipled')
@@ -289,8 +292,22 @@ def ribbon(bpy, name, p, kit):
     nt.links.new(wz.outputs['Z'], fd.inputs['Value'])
     m1 = nt.nodes.new('ShaderNodeMath'); m1.operation = 'MULTIPLY'
     nt.links.new(mix.outputs['Result'], m1.inputs[0]); nt.links.new(fd.outputs['Result'], m1.inputs[1])
-    # the strand's density rides on the object's colour-free custom input: one material, density per object via
-    # Object Info's alpha would need the object's colour; simpler, each layer gets its own copy of the multiplier
+    if p.get('break_scale'):
+        # thinning and thickening along the strand: a broad noise in world space, so the ribbon breaks into wisps
+        bz = nt.nodes.new('ShaderNodeTexNoise'); bz.inputs['Scale'].default_value = 1.0 / p['break_scale']
+        bz.inputs['Detail'].default_value = 2.0
+        sh = nt.nodes.new('ShaderNodeVectorMath'); sh.operation = 'ADD'
+        sh.inputs[1].default_value = (p.get('seed', 0) * 3.7, p.get('seed', 0) * 1.9, 0.0)
+        nt.links.new(gz.outputs['Position'], sh.inputs[0]); nt.links.new(sh.outputs['Vector'], bz.inputs['Vector'])
+        br = nt.nodes.new('ShaderNodeMapRange'); br.clamp = True
+        br.inputs['From Min'].default_value = p.get('break_cut', 0.4)
+        br.inputs['From Max'].default_value = p.get('break_cut', 0.4) + 0.25
+        br.inputs['To Min'].default_value = p.get('break_floor', 0.15)
+        nt.links.new(bz.outputs['Fac'], br.inputs['Value'])
+        mb = nt.nodes.new('ShaderNodeMath'); mb.operation = 'MULTIPLY'
+        nt.links.new(m1.outputs[0], mb.inputs[0]); nt.links.new(br.outputs['Result'], mb.inputs[1])
+        m1 = mb
+    # each layer's density per metre rides on its object's colour alpha (x 100), so one material serves every layer
     dn = nt.nodes.new('ShaderNodeObjectInfo')
     m2 = nt.nodes.new('ShaderNodeMath'); m2.operation = 'MULTIPLY'
     nt.links.new(m1.outputs[0], m2.inputs[0]); nt.links.new(dn.outputs['Alpha'], m2.inputs[1])
@@ -310,6 +327,16 @@ def ribbon(bpy, name, p, kit):
             f = 1.0 - li / layers
             bm = bmesh.new()
             kit._tube(bm, [tuple(v - o) for v in pts], [r * f for r in radii], 1.0, 0.0, 12, p.get('res', 10))
+            wob = p.get('wobble', 0.0)
+            if wob:
+                bm.verts.index_update()
+                # an irregular outline: each layer's wall pushed in and out by noise, scaled to the local radius
+                nring = len(bm.verts) // 12
+                for v in bm.verts:
+                    t = min(1.0, (v.index // 12) / max(1, nring - 1))
+                    x = t * (len(radii) - 1); i = min(int(x), len(radii) - 2); fr = x - i
+                    r = (radii[i] * (1 - fr) + radii[i + 1] * fr) * f
+                    v.co += noise.noise_vector(v.co * p.get('wobble_freq', 12.0) + Vector((si * 3.1, li * 5.3, p.get('seed', 0)))) * r * wob
             me = bpy.data.meshes.new(f'{name}-{si}-{li}'); bm.to_mesh(me); bm.free()
             ob = bpy.data.objects.new(f'{name}-{si}-{li}', me); bpy.context.scene.collection.objects.link(ob)
             ob.location = o

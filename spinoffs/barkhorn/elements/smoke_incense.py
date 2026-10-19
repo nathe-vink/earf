@@ -55,25 +55,25 @@ def burner():
             piece('sphere', position=list(tip), scale=0.0018, material='glow', color='#FF6A2A', emit=40.0)], tip
 
 
-def incense(tip, seed=7):
-    """The smoke: one thread rising straight from the tip for 30 cm, then breaking into curls that widen and lean
-    left as they climb through the sun; two finer strands peel off it."""
+def incense(tip, seed=7, laminar=0.3, n=46, density=220.0, spread=0.045, lean=0.18, curl=0.12, color='#D9DADC',
+            anisotropy=0.2, fade=(1.6, 2.3), branches=((12, 0.1, 0.05), (18, -0.08, -0.06)), cut=0.38, **extra):
+    """The smoke: one thread rising straight from the tip for `laminar` metres, then breaking into curls that widen
+    (`spread`) and lean left (`lean`) as they climb; finer strands peel off it at `branches` (point, dx, dy)."""
     rnd = random.Random(seed)
     x0, y0, z0 = tip
     main, radii = [], []
-    n = 46
     ph = [rnd.uniform(0, 6.28) for _ in range(4)]
     for i in range(n):
         z = z0 + 0.04 * i
         h = z - z0
-        k = max(0.0, h - 0.3)                       # turbulence grows above the laminar thread
-        a = 0.015 * k + 0.12 * k ** 1.4
-        x = x0 - 0.18 * k ** 1.3 + a * math.sin(7.0 * h + ph[0]) + 0.4 * a * math.sin(15.0 * h + ph[1])
+        k = max(0.0, h - laminar)                   # turbulence grows above the laminar thread
+        a = 0.015 * k + curl * k ** 1.4
+        x = x0 - lean * k ** 1.3 + a * math.sin(7.0 * h + ph[0] + 2.0 * math.sin(2.3 * h)) + 0.4 * a * math.sin(15.0 * h + ph[1])
         y = y0 + 0.6 * a * math.cos(6.0 * h + ph[2]) + 0.3 * a * math.sin(13.0 * h + ph[3])
         main.append([round(x, 4), round(y, 4), round(z, 4)])
-        radii.append(round(0.0025 + 0.004 * min(h, 0.3) / 0.3 + 0.045 * k ** 1.2, 4))
-    strands = [{'points': main, 'radii': radii, 'density': 220.0}]
-    for j, (start, dx, dy) in enumerate([(12, 0.1, 0.05), (18, -0.08, -0.06)]):
+        radii.append(round(0.0025 + 0.004 * min(h, max(laminar, 0.05)) / max(laminar, 0.05) + spread * k ** 1.2, 4))
+    strands = [{'points': main, 'radii': radii, 'density': density}]
+    for j, (start, dx, dy) in enumerate(branches):
         pts, rr = [main[start]], [radii[start]]
         for i in range(1, 22):
             z = main[start][2] + 0.045 * i
@@ -81,10 +81,10 @@ def incense(tip, seed=7):
             pts.append([round(main[start][0] + dx * s * 2.2 + 0.05 * s * math.sin(9 * s + j), 4),
                         round(main[start][1] + dy * s * 2.2 + 0.04 * s * math.cos(8 * s + j), 4), round(z, 4)])
             rr.append(round(radii[start] * (0.7 + 1.2 * s), 4))
-        strands.append({'points': pts, 'radii': rr, 'density': 70.0})
-    return piece('ext', module='smoke_el', fn='ribbon', strands=strands, layers=3, scale=0.035, cut=0.38, soft=0.3,
-                 rise=2.5, laminar=0.3, laminar_blend=0.15, fade=[1.6, 2.3], color='#D9DADC', anisotropy=0.2,
-                 detail=5.0, distortion=0.8, seed=seed)
+        strands.append({'points': pts, 'radii': rr, 'density': density / 3})
+    return piece('ext', module='smoke_el', fn='ribbon', strands=strands, layers=extra.pop('layers', 3), scale=0.035, cut=cut, soft=0.3,
+                 rise=2.5, laminar=laminar, laminar_blend=0.15, fade=list(fade), color=color, anisotropy=anisotropy,
+                 detail=5.0, distortion=0.8, seed=seed, **extra)
 
 
 def shot():
