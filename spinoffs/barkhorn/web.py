@@ -243,8 +243,16 @@ def make_images(sources=None):
             os.remove(os.path.join(IMG, name))
     for k in KEYS:
         for side in ('on', 'off'):
-            one(first(os.path.join(FIN, f'front-{side}-{k}.png'), at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg')),
-                lambda p, s=side: save(Image.open(p), f'{k}-{s}.jpg', 900, q=80))    # the cards' tall frame
+            # the cards' tall frame (1:2): cut from the 4:5 front when it is in (the drivers made real, on the paper the
+            # gallery shares), else the 1:2 render from before the drivers
+            cut = first(*[os.path.join(FIN, f'front-{side}-tall-{k}.{e}') for e in ('png', 'jpg')])
+            if cut:
+                one(cut, lambda p, s=side: save((lambda im: im.crop(((im.width - im.height // 2) // 2, 0,
+                                                                     (im.width + im.height // 2) // 2, im.height)))(Image.open(p)),
+                                                  f'{k}-{s}.jpg', 900, q=80))
+            else:
+                one(first(os.path.join(FIN, f'front-{side}-{k}.png'), at('r8', 'deck-assets', 'photos', f'look2-{k}-{side}.jpg')),
+                    lambda p, s=side: save(Image.open(p), f'{k}-{s}.jpg', 900, q=80))
             # the gallery's, at the stage's shapes (3:2, and 4:5 on phones): the fronts rendered at those shapes when they are
             # in, else the tall front with its backdrop carried on past its sides
             for shape, ar, px in (('wide', 1.5, 1800), ('tall', 0.8, 1000)):
