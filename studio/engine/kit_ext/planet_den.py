@@ -720,7 +720,10 @@ def record_wall(bpy, kit, p, objs):
     for ob in cobj:
         ob.rotation_euler.z = math.radians(-90); ob.location = (L - C['d'] / 2 - 0.02, W / 2, 0.0)
     objs += cobj
-    # the amplifier on it, beside the record player (a dark-faced valve amp)
+    # the amplifier on it, beside the record player (a dark-faced valve amp); off by default (the lead: it read as a
+    # placeholder, and the speakers carry their own amplifiers)
+    if not p.get('amp', False):
+        return
     am = Mesh('amp'); ax, ay = L - 0.30, W / 2 + 0.55
     am.box(ax - 0.17, ay - 0.21, C['h'], ax + 0.17, ay + 0.21, C['h'] + 0.13)
     objs.append(am.object(bpy, principled(bpy, 'amp-face', '#26221E', rough=0.35, metal=0.6), bevel=0.004))

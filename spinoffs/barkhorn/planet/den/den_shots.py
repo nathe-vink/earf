@@ -188,7 +188,10 @@ VIEWS = {
                   'camera': {'position': [14.5, 2.0, 1.0], 'target': [16.35, 4.36, 0.95], 'lens_mm': 40, 'level': True,
                              'fstop': 2.8, 'focus': [16.15, P.PAIR['y'][1], 0.9]},
                   'settings': {'spk_irr': 10.0, 'spk_k': 3200, 'spk_back': 6.0, 'sconce_w': 4.0, 'shade_glow': 0.05,
-                               'wb': 2900, 'spot_records': 9.0, 'record_glow': 1.0, 'haze': 0.012}},
+                               'wb': 2900, 'spot_records': 9.0, 'record_glow': 1.0, 'haze': 0.012,
+                               # the lead: red acrylic on red brick is a hue clash; the brick much darker and aged, so
+                               # the speaker's own light separates it
+                               'brick_tint': '#2A1D18', 'brick_mix': 0.6}},
 }
 
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.10, 'clarity': 0.06, 'sharpen': 0.3,
