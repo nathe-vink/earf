@@ -283,24 +283,34 @@ def shopfront(bpy, kit, p, objs):
         def circ(cx, cy, r):
             return [(cx + r * math.cos(t), cy + r * math.sin(t)) for t in (2 * math.pi * k / 72 for k in range(72))]
         bm = bmesh.new()
-        for si, sh in enumerate(MK.WORDMARK):
-            holes = []
-            if sh[0] == 'rect':
-                a0, b0, a1, b1 = sh[1:5]; pts = [(a0, b0), (a1, b0), (a1, b1), (a0, b1)]
-            elif sh[0] == 'circle':
-                pts = circ(*sh[1:4])
-            elif sh[0] == 'ring':
-                pts, holes = circ(sh[1], sh[2], sh[3]), [circ(sh[1], sh[2], sh[4])]
-            else:
-                pts = list(sh[1:])
-            xs = xg - 0.00015 * si                        # each shape a hair apart: overlapping strokes z-fought as stripes
-            loops = [[Vector((xs, yc + w / 2 - u * sc, z0 - v * sc)) for u, v in lp] for lp in [pts] + holes]
+        for loops_uv in _wordmark_outlines():
+            loops = [[Vector((xg, yc + w / 2 - u * sc, z0 - v * sc)) for u, v in lp] for lp in loops_uv]
             for tri in tessellate_polygon(loops):
                 flat = [v for lp in loops for v in lp]
                 f = bm.faces.new([bm.verts.new(flat[i]) for i in tri]); f.normal_update()
         me = bpy.data.meshes.new('gold-leaf'); bm.to_mesh(me); bm.free()
         me.materials.append(sign_mat(bpy, p))
         ob = bpy.data.objects.new('gold-leaf', me); bpy.context.scene.collection.objects.link(ob); objs.append(ob)
+
+
+def _wordmark_outlines():
+    """EARF's wordmark as clean outlines, from the brand's own SVG (brand/mark/earf-wordmark-black.svg, viewBox
+    980 x 300): one list of loops per letter, the first its outline and the rest its holes. (Built from marks.py's
+    overlapping strokes, the letters z-fought and refracted into blocks on the glass.)"""
+    import re
+    svg = open(os.path.join(ROOT, 'spinoffs', 'barkhorn', 'brand', 'mark', 'earf-wordmark-black.svg')).read()
+    out = []
+    for d in re.findall(r'<path d="([^"]+)"', svg):
+        loops = []
+        for sub in re.split(r'Z\s*', d):
+            pts = [(float(a), float(b)) for a, b in re.findall(r'[ML]\s*([-\d.]+)[ ,]([-\d.]+)', sub)]
+            if len(pts) >= 3:
+                if pts[0] == pts[-1]:
+                    pts = pts[:-1]
+                loops.append(pts)
+        if loops:
+            out.append(loops)
+    return out
 
 
 def storefront_mat(bpy, p):
