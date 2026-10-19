@@ -353,3 +353,56 @@ The table lamps keep Moon's cordless foot.
 These are blockouts. Whichever shape the owner picks gets Moon's full build.
 
 ![The shape study](../../../renders/2026-10-19/barkhorn/study/sheet.png)
+
+## Round 32d: the pick, Dome and Orb
+
+The owner picked from the shape study: "I like the dome overhead lights, especially if the acrylic covers are easy to
+swap out, but I'm also a sucker for the spheres. For the table lamp though, I'd want the spheres to be squatted rather
+than raised, like a crystal ball." Both products keep round 32c's wall: tint, frost, tint, with nothing white outside.
+They are built as fab-kit products (`crystal.py`, `dome_pendant.py`, `orb_table.py`); both pass their checks.
+
+**Dome, the pendant, with covers that swap by hand.**
+- **The cover:** the tinted dome, 200 across. A brass collar is bonded into its crown, with three L-slots in it.
+- **The catch:** three pins on the fixture's brass hub make a quarter-turn bayonet (30°). To take the cover off, lift
+  it 5 mm, turn it and lower it. To fit one, push it up, turn it until the spring plunger clicks into its dimple, and
+  let go. The cover's weight holds each pin up in a notch at the end of its slot, so a knock can't turn it off. That
+  is more secure than a magnet over a bar, and it needs no tools.
+- **What stays up:** the COB (2700 K, 22 mm up a 46 mm bore, a cut-off of about 46°), the hub, the cord and the driver
+  in the canopy. A cover is never a live part, and the fixture is listed (UL 1598) with any cover.
+- **Spare covers** are sold separately in every tint.
+
+**Orb, the table lamp, a crystal ball.**
+- **The ball:** tinted, 160 across, sitting low in the cup of a short base, 180 tall overall. The base is a
+  blackened-steel drum 120 across under a brass ring; the ring is the touch (tap to switch, hold to dim, 2200 to
+  2700 K).
+- **The guts:** Moon's (a 25 Wh battery, the tray contacts or USB-C, IP44), sealed in the base. The LED shines up
+  through a sealed window into a brass-lined port under the ball.
+- **The ball lifts off**, because nothing in it is electrical, so Orbs swap colour just as Domes do. It rests on a
+  silicone ring in an 18 mm cup, enough to stop a nudge rolling it.
+- **The weight** is about 2.6 kg with the ball.
+- **Height:** at 180 it is below the brief's 250–300 mm, by the owner's choice (squat, not raised).
+
+| | Dome pendant | Orb table lamp |
+|---|---|---|
+| BOM, one-off shop rates | **$1,421** plus the listing (`out-dome-pendant/bom.md`) | **$1,190** (`out-orb-table/bom.md`) |
+| of which the three-layer cover | about $990 (three turned cups, the rim and the brass collar) | about $855 (three turned balls) |
+| BOM, a run of 200 (my estimate) | about $200 parts, $230 landed; a spare cover about $100 | about $200 parts, $225 landed; a spare ball about $100 |
+| target retail | **$795 to $895** with one cover; covers **$295 to $345** | **$595 to $695**; balls **$245 to $295** |
+
+The one-off price is the lathe turning three nested layers from block. In a run, the layers are cast or moulded and
+only finished on the lathe, and the frost is cast into the tinted block, which is the caster's question. The run
+figures are my estimates, not quotes. The covers are where the line earns: a bar that buys the fixtures once can
+change its colour by season. The prices are for the owner to set.
+
+**For Planet** (`studio/engine/kit_ext/earf_moon.py`, the same piece as Moon's): `fn` is `dome` (spots: the rim;
+`ceiling` stretches the cord) or `orb` (spots: the table).
+- The liner glows by itself (`shade_glow`, default 0.25), and the lamp is hidden as before (`lamp_w` defaults to 9 and
+  3).
+- `hide` takes a pattern of part names, so a spare cover can stand alone (`"hub|pins|cob|gland|cord|canopy"`).
+- `cover_drop` and `cover_turn` show the swap; `lamp: false` turns the light off.
+- The GLBs are committed in `out-dome-pendant/render/` and `out-orb-table/render/`.
+
+The frames (`crystal_shots.py`, `renders/2026-10-19/barkhorn/crystal/`) are made through that piece:
+- the bar hero in smoked and in Ember;
+- the swap (a Dome lowered off its fixture, three spare covers on the counter);
+- the catch, close.

@@ -317,5 +317,33 @@
   "supplier": "UL Solutions or Intertek",
   "price_date": "2026-10-19",
   "note": "quoted per design; about $8,000 to $15,000 is typical for a fixture, not confirmed"
+ },
+ "_crystal": "round 32d (crystal.py): the Dome pendant's bayonet and the Orb's seat; the rest is Moon's (moon-*). Estimates, to confirm.",
+ "dome-pins": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Three stainless dowel pins 4 x 8 (ISO 8734), pressed into the hub: the bayonet's pins",
+  "usd": 1.5,
+  "estimate": true,
+  "supplier": "McMaster-Carr or alike",
+  "price_date": "2026-10-19"
+ },
+ "dome-plunger": {
+  "kind": "hardware",
+  "maker": "Kipp or Misumi",
+  "model": "A stainless ball spring plunger M5, light force (about 10 N), threaded into the hub: the bayonet's detent, clicking into a dimple in the collar",
+  "usd": 4.5,
+  "estimate": true,
+  "supplier": "Misumi",
+  "price_date": "2026-10-19"
+ },
+ "orb-seat": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "A silicone seat ring 92 x 84 x 1.5 (Shore 40, black) in the base's cup: the ball rests on it, and it stops a nudge rolling it",
+  "usd": 1.5,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-19"
  }
 }
