@@ -16,7 +16,7 @@
  },
  "set": {
   "kind": "sweep",
-  "color": "#D9E4D3",
+  "color": "#F7F0E8",
   "width": 6.0,
   "front": 5.0,
   "depth": 1.5,
@@ -101,6 +101,53 @@
    "color": "#FFF1DC",
    "specular": 0,
    "transmission": false
+  },
+  "d-wall": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    2.0
+   ],
+   "position": [
+    0.0,
+    -0.8,
+    3.2
+   ],
+   "target": [
+    0.0,
+    1.5,
+    1.4
+   ],
+   "irradiance": 0.35,
+   "color": "#FFF4E8",
+   "specular": 0.0,
+   "receivers": [
+    "sweep"
+   ]
+  },
+  "d-floor": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "position": [
+    0.0,
+    -1.8,
+    3.5
+   ],
+   "target": [
+    0.0,
+    -0.5,
+    0.0
+   ],
+   "irradiance": 0.15,
+   "spread_deg": 60,
+   "color": "#FFF4E8",
+   "specular": 0.0,
+   "receivers": [
+    "sweep"
+   ]
   }
  },
  "render": {
@@ -114,7 +161,7 @@
   "white_balance_k": 5600,
   "white_balance_tint": 3.0
  },
- "title": "barkhorn, green, the amplifier (finals31, green)",
+ "title": "barkhorn, amp (details31, green, on the paper) (finals31, green)",
  "size": [
   1000,
   1250

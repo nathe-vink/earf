@@ -26,16 +26,16 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'lookbook31')
 
-# the colours by key (finals.py's keys), their flavour, the sweep's tint and an exposure trim (EV)
+# the colours by key (finals.py's keys), their flavour and an exposure trim (EV); one paper for all eight (PAPER)
 COLOURS = {
-    'red':    dict(flavour='cloud-red',            sweep='#DDD7D6', ev=0.0),
-    'orange': dict(flavour='cloud-orange',         sweep='#DDD8D3', ev=0.0),
-    'amber':  dict(flavour='cloud-amber',          sweep='#DBD8D0', ev=0.0),
-    'green':  dict(flavour='eucalyptus-y2k-green', sweep='#D6D9D4', ev=0.0),
-    'blue':   dict(flavour='cloud-blue',           sweep='#DBDFE2', ev=0.0),
-    'violet': dict(flavour='cloud-violet',         sweep='#D9D7DC', ev=0.0),
-    'ice':    dict(flavour='birch-fog-clear',      sweep='#DADCDC', ev=-0.6),
-    'black':  dict(flavour='cloud-black',          sweep='#D5D4D3', ev=0.0),
+    'red':    dict(flavour='cloud-red',            ev=0.0),
+    'orange': dict(flavour='cloud-orange',         ev=0.0),
+    'amber':  dict(flavour='cloud-amber',          ev=0.0),
+    'green':  dict(flavour='eucalyptus-y2k-green', ev=0.0),
+    'blue':   dict(flavour='cloud-blue',           ev=0.0),
+    'violet': dict(flavour='cloud-violet',         ev=0.0),
+    'ice':    dict(flavour='birch-fog-clear',      ev=-0.6),
+    'black':  dict(flavour='cloud-black',          ev=0.0),
 }
 
 # the lamps that draw lines (edge, rim) light only these, so the paper's gloss never mirrors them
@@ -129,6 +129,34 @@ RIG = {
 }
 
 
+# The paper (the coordinator, after a full-site critic pass: four studio looks across the product pictures, and the home
+# cards, which take their panel colour from these frames' foot, reading a dingy grey): the studio's warm pale paper of
+# round 31c's bright field, one neutral backdrop for all eight (no tint per colour), lit high-key by lamps that light
+# the paper alone (the speaker's own light is the rig's, as it won), to about #F2EFEA at the feet and #EDE9E3 on the wall
+# with no more than about ten levels to the corners. Smoke and Fog part from the pale ground by the rig's own black
+# cards, which the side and the edges mirror (31c's tall dark strip was tried: its shadow drew a streak on the cove).
+PAPER = {
+    'color': '#F7F0E8',
+    'flags': [],
+    'lights': {
+        'bg-left': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [-2.6, 3.2, 3.4], 'target': [-1.5, 6.0, 1.2],
+                    'irradiance': 0.7, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+        'bg-right': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [2.6, 3.2, 3.4], 'target': [-0.9, 6.0, 1.0],
+                     'irradiance': 1.1, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+        # the cove's far left and its upper wall, which every frame sees past the speaker's key side
+        'wall_left': {'type': 'area', 'size_m': [10.0, 5.0], 'position': [-6.0, 0.5, 5.5], 'target': [-8.0, 5.5, 4.7],
+                      'irradiance': 4.5, 'color': '#FFF0E2', 'specular': 0.0, 'receivers': ['sweep']},
+        'bg-high': {'type': 'area', 'size_m': [6.0, 3.0], 'position': [0.0, 1.0, 6.5], 'target': [-1.5, 5.5, 5.0],
+                    'irradiance': 0.2, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+        'floor': {'type': 'area', 'size_m': [6.0, 4.0], 'position': [0.0, -2.0, 4.5], 'target': [0.0, 0.5, 0.0],
+                  'irradiance': 0.7, 'spread_deg': 50, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+    },
+    # the tinted look's paper lamps, retuned for the pale paper: the glow behind and the key side's wall are off (they
+    # drove the wall past white), the floor's wash a little down
+    'tune': {'paper': {'power_w': 0.0}, 'wall': {'irradiance': 0.0}, 'wash': {'irradiance': 0.5}},
+}
+
+
 def shot(k, cover):
     c = COLOURS[k]
     s = copy.deepcopy(RIG)
@@ -136,9 +164,94 @@ def shot(k, cover):
     if not cover:
         inst['hide'] = ['cloth-disc']
     s['product'] = {'def': 'studio/products/barkhorn-cloud.json', 'flavour': c['flavour'], 'instances': [inst]}
-    s['set']['color'] = c['sweep']
+    s['set']['color'] = PAPER['color']
+    s['set']['flags'] += copy.deepcopy(PAPER['flags'])
+    s['lights'].update(copy.deepcopy(PAPER['lights']))
+    for n, kv in PAPER['tune'].items():
+        s['lights'][n].update(kv)
     s['render']['exposure'] = c['ev']
     s['title'] = f'barkhorn, cover {"on" if cover else "off"} (catalogue31, {k})'
+    return s
+
+
+# the gallery's other stages (the owner, round 31: the 1:2 fronts "feel odd and out of place" beside the 3:2 and 4:5
+# pictures): the same rig and the same light from the same camera position (so the same perspective), reframed by lens
+# and lens shift only. The engine fits the sensor's 36 mm to the frame's width, so a frame of another height-to-width
+# ratio needs the lens scaled to hold the speaker at its share of the height; each was then centred by its box in the
+# frame (render.py's parts_2d): the 1:2 at 65 % of the height (16/17 % margins left and right, 24 % above, 11 % below);
+# the 3:2 at 70 % of the height and 24 % of the width, centred (38 % each side, 15 % above and below); the 4:5 at 70 %
+# of the height, centred across, a little low (16 % above, 14 % below), for phones
+FRAMES = {
+    '': {'size': [1080, 2160]},
+    # the 3:2 sees far more of the set: the sweep wider and taller (its end showed at 18 m), and the paper on the key
+    # side, which only it sees, lifted by a lamp of its own (it read as a dirty grey third of the frame)
+    'wide': {'size': [1920, 1280], 'lens_mm': 32.3, 'shift_x': -0.011, 'shift_y': 0.025,
+             'set': {'width': 40.0, 'height': 9.0},
+             'lights': {'wall_far': {'type': 'area', 'size_m': [8.0, 4.0], 'position': [-8.0, 0.5, 6.0],
+                                     'target': [-11.5, 5.5, 5.5], 'irradiance': 3.0, 'color': '#FFF0E2',
+                                     'specular': 0.0, 'receivers': ['sweep']},
+                        # and the foot of the cove's curve far to the left, at the frame's edge (a grey dip to 205)
+                        'cove_far': {'type': 'area', 'size_m': [6.0, 3.0], 'position': [-6.0, 0.0, 3.0],
+                                     'target': [-8.6, 4.0, 0.7], 'irradiance': 4.5, 'color': '#FFF0E2',
+                                     'specular': 0.0, 'receivers': ['sweep']}}},
+    'tall': {'size': [1440, 1800], 'lens_mm': 60.5, 'shift_x': -0.027, 'shift_y': 0.012},
+}
+
+
+def framed(s, f):
+    """Shot s reframed for the frame `f` ('' the 1:2, 'wide' 3:2, 'tall' 4:5)."""
+    F = FRAMES[f]
+    s = copy.deepcopy(s)
+    s['size'] = list(F['size'])
+    for key in ('lens_mm', 'shift_x', 'shift_y'):
+        if key in F:
+            s['camera'][key] = F[key]
+    s['set'].update(copy.deepcopy(F.get('set', {})))
+    s['lights'].update(copy.deepcopy(F.get('lights', {})))
+    # a colour's exposure trim (Fog's -0.6 EV, for its white cloth) is the speaker's, not the paper's: the paper's lamps
+    # make it good, so every colour stands on the same paper
+    ev = s['render'].get('exposure', 0.0)
+    for l in s['lights'].values():
+        if l.get('receivers') == ['sweep'] and ev:
+            for key in ('irradiance', 'power_w'):
+                if key in l:
+                    l[key] = round(l[key] * 2 ** -ev, 4)
+    if f:
+        s['title'] = s['title'].replace('(catalogue31,', f'(catalogue31 {f},')
+    return s
+
+
+# The detail views (finals.py's horn-side, horn-back, back, amp and inside) on the same paper (the coordinator: every
+# product picture in one studio look): each from its own template, its camera and its light as they were tuned, the
+# paper set under it and lit by two lamps on the paper alone (the cove's wall and its floor), their strength set per
+# view (their cameras see the cove differently) to the catalogue's paper: about 240 at the floor, 236 on the wall.
+DETAILS = {'horn-side': 'horn21/horn-{k}-side.json', 'horn-back': 'horn21/horn-{k}-back.json',
+           'back': 'site30/back-{k}.json', 'amp': 'site30/detail-{k}.json', 'inside': 'site30/inside.json'}
+DETAILS_OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'details31')
+DETAIL_PAPER = {
+    'd-wall': {'type': 'area', 'size_m': [4.0, 2.0], 'position': [0.0, -0.8, 3.2], 'target': [0.0, 1.5, 1.4],
+               'irradiance': 1.0, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+    'd-floor': {'type': 'area', 'size_m': [4.0, 3.0], 'position': [0.0, -1.8, 3.5], 'target': [0.0, -0.5, 0.0],
+                'irradiance': 1.0, 'spread_deg': 60, 'color': '#FFF4E8', 'specular': 0.0, 'receivers': ['sweep']},
+}
+DETAIL_GAIN = {'horn-side': {'d-wall': 0.35, 'd-floor': 0.15}, 'horn-back': {'d-wall': 0.35, 'd-floor': 0.15},
+               'back': {'d-wall': 0.35, 'd-floor': 0.15}, 'amp': {'d-wall': 0.35, 'd-floor': 0.15},
+               'inside': {'d-wall': 0.35, 'd-floor': 0.15}}
+
+
+def detail(view, k):
+    """Detail view `view` of colour k on the paper."""
+    s = json.load(open(os.path.join(ROOT, 'studio', 'shots', 'barkhorn', DETAILS[view].format(k=k))))
+    fl = COLOURS[k]['flavour']
+    s['product']['flavour'] = fl                                   # the cutaway's template is one colour's
+    for inst in s['product'].get('instances', []):
+        inst['flavour'] = fl
+    s['set']['color'] = PAPER['color']
+    for n, l in DETAIL_PAPER.items():
+        l = copy.deepcopy(l)
+        l['irradiance'] = round(l['irradiance'] * DETAIL_GAIN[view][n], 4)
+        s['lights'][n] = l
+    s['title'] = f'barkhorn, {view} (details31, {k}, on the paper)'
     return s
 
 
@@ -232,8 +345,15 @@ def write():
     os.makedirs(OUT, exist_ok=True)
     for k in COLOURS:
         for cover in (True, False):
-            json.dump(shot(k, cover), open(os.path.join(OUT, f'look-{k}-{"on" if cover else "off"}.json'), 'w'), indent=1)
-    print(f'{len(COLOURS) * 2} shots in', os.path.relpath(OUT, ROOT))
+            for f in FRAMES:
+                name = f'look-{k}-{"on" if cover else "off"}' + (f'-{f}' if f else '') + '.json'
+                json.dump(framed(shot(k, cover), f), open(os.path.join(OUT, name), 'w'), indent=1)
+    print(f'{len(COLOURS) * 2 * len(FRAMES)} shots in', os.path.relpath(OUT, ROOT))
+    os.makedirs(DETAILS_OUT, exist_ok=True)
+    for k in COLOURS:
+        for view in DETAILS:
+            json.dump(detail(view, k), open(os.path.join(DETAILS_OUT, f'{view}-{k}.json'), 'w'), indent=1)
+    print(f'{len(COLOURS) * len(DETAILS)} shots in', os.path.relpath(DETAILS_OUT, ROOT))
 
 
 def main():

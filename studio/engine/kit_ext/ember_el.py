@@ -119,8 +119,9 @@ def fall(bpy, name, p, kit):
     import bmesh
     bm = bmesh.new()
     kit._tube(bm, p['points'], p.get('radius', 0.3), p.get('flat', 0.25), 0.0, p.get('sides', 20), p.get('samples', 12))
-    mat = lava_material(bpy, p.get('lava', 'acg:Lava004'), p.get('lava_res', '2k'), p.get('scale', 1.2),
-                        p.get('strength', 4.0), gain=p.get('gain', 1.0), name=f'{name}-lava',
+    # `tex_scale`: the texture's tile; a bare `scale` (kept for concept A) also scales the object in kit.finish
+    mat = lava_material(bpy, p.get('lava', 'acg:Lava004'), p.get('lava_res', '2k'), p.get('tex_scale', p.get('scale', 1.2)),
+                        p.get('strength', 4.0), gain=p.get('gain', 1.0), ramp=p.get('ramp'), name=f'{name}-lava',
                         rough=p.get('crust_rough'), specular=p.get('crust_spec'))
     return kit.finish(bpy, name, bm, p, mat=mat)
 
@@ -175,6 +176,13 @@ def terrain(bpy, name, p, kit):
             fl = np.floor(k); fr = k - fl
             zc = (fl + _smooth(c.get('riser', 0.65), 1.0, fr)) * L
         Z = Z + zc
+    # volcanic cones: [x, y, r, h, crater_r] smooth shoulders, a crater cut in the top
+    for (vx, vy, vr, vh, cr) in p.get('cones', []):
+        d = np.hypot(X - vx, Y - vy) * (1 + 0.08 * _fbm(X, Y, 4.0, 3, 51.0))
+        cone = vh * (1 - _smooth(0.0, vr, d)) ** 1.6
+        if cr:
+            cone = cone - 0.35 * vh * (1 - _smooth(cr * 0.6, cr, d))
+        Z = Z + cone
     lava = np.zeros(X.shape, dtype=np.int8)                 # 0 rock, 1 flow, 2 molten
     for ch in p.get('channels', []):
         dist, _ = _seg_dist(X, Y, ch['points'])
@@ -298,8 +306,9 @@ def lava_surface(bpy, name, p, kit):
     for v in bm.verts:
         v.co.x *= w; v.co.y *= d
         v.co.z = rip * noise.noise(Vector((v.co.x * 1.3, v.co.y * 1.3, 2.2)))
-    mat = lava_material(bpy, p.get('lava', 'acg:Lava001'), p.get('lava_res', '2k'), p.get('scale', 1.5),
-                        p.get('strength', 8.0), gain=p.get('gain', 1.0), crust=p.get('crust', 0.08), name=f'{name}-lava',
+    mat = lava_material(bpy, p.get('lava', 'acg:Lava001'), p.get('lava_res', '2k'), p.get('tex_scale', p.get('scale', 1.5)),
+                        p.get('strength', 8.0), gain=p.get('gain', 1.0), crust=p.get('crust', 0.08), ramp=p.get('ramp'),
+                        name=f'{name}-lava',
                         rough=p.get('crust_rough'), specular=p.get('crust_spec'))
     return kit.finish(bpy, name, bm, p, mat=mat)
 
@@ -430,3 +439,25 @@ def rock(bpy, name, p, kit):
                     done[m.name] = basalt(bpy, m, p.get('albedo', 0.12), p.get('saturation', 0.25), p.get('rough_mul', 1.0))
                 o.data.materials[i] = done[m.name]
     return [root]
+
+
+def rubble(bpy, name, p, kit):
+    """Scanned rocks scattered over `area` [x0, y0, x1, y1] (`models`, `count`, `scale` [min, max], `avoid`, `seed`,
+    sunk `z`, tilted at random up to `tilt_deg`), their materials regraded to basalt (`albedo`, `saturation`,
+    `rough_mul`): clinker and slabs on a lava field."""
+    import assets
+    made = assets.scatter(bpy, p['models'], p.get('res', '1k'), p.get('count', 20), tuple(p['area']),
+                          [tuple(a) for a in p.get('avoid', [])], tuple(p.get('scale', [0.5, 1.5])), p.get('z', 0.0),
+                          p.get('seed', 1), True, p.get('tilt_deg', 25.0))
+    done = {}
+    objs = list(made)
+    for root in made:
+        for o in [root] + list(root.children_recursive):
+            if o.type == 'MESH':
+                for i, m in enumerate(o.data.materials):
+                    if m is None:
+                        continue
+                    if m.name not in done:
+                        done[m.name] = basalt(bpy, m, p.get('albedo', 0.05), p.get('saturation', 0.1), p.get('rough_mul', 0.7))
+                    o.data.materials[i] = done[m.name]
+    return objs

@@ -2,8 +2,8 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/finals31/back-red.json",
  "image": "/home/user/earf/renders/2026-10-18/barkhorn/finals31/back-red.png",
  "seconds": {
-  "build": 18.6,
-  "render": 405.7
+  "build": 17.1,
+  "render": 465.6
  },
  "samples": 128,
  "size": [
@@ -493,6 +493,34 @@
    ],
    "depth_m": 2.723
   },
+  "hf-band#0": {
+   "part": "hf-band",
+   "centre_px": [
+    517.2,
+    299.9
+   ],
+   "box_px": [
+    461,
+    243,
+    573,
+    357
+   ],
+   "depth_m": 2.671
+  },
+  "hf-exit#0": {
+   "part": "hf-exit",
+   "centre_px": [
+    509.9,
+    299.8
+   ],
+   "box_px": [
+    488,
+    278,
+    532,
+    322
+   ],
+   "depth_m": 2.712
+  },
   "hf-frame#0": {
    "part": "hf-frame",
    "centre_px": [
@@ -524,16 +552,30 @@
   "hf-plug#0": {
    "part": "hf-plug",
    "centre_px": [
-    509.9,
+    510.6,
     299.8
    ],
    "box_px": [
-    492,
-    282,
-    528,
-    317
+    490,
+    280,
+    531,
+    319
    ],
-   "depth_m": 2.712
+   "depth_m": 2.708
+  },
+  "hf-terminals#0": {
+   "part": "hf-terminals",
+   "centre_px": [
+    522.8,
+    300.0
+   ],
+   "box_px": [
+    470,
+    297,
+    575,
+    303
+   ],
+   "depth_m": 2.64
   },
   "land-bottom#0": {
    "part": "land-bottom",
@@ -594,12 +636,12 @@
   "lead-hf#0": {
    "part": "lead-hf",
    "centre_px": [
-    540.0,
-    593.9
+    539.9,
+    593.2
    ],
    "box_px": [
     528,
-    523,
+    522,
     552,
     667
    ],
@@ -1238,16 +1280,30 @@
   "woofer-frame#0": {
    "part": "woofer-frame",
    "centre_px": [
-    473.5,
-    758.3
+    477.4,
+    762.4
    ],
    "box_px": [
     324,
     603,
-    624,
-    924
+    635,
+    935
    ],
-   "depth_m": 2.936
+   "depth_m": 2.91
+  },
+  "woofer-gasket#0": {
+   "part": "woofer-gasket",
+   "centre_px": [
+    467.1,
+    751.6
+   ],
+   "box_px": [
+    326,
+    605,
+    605,
+    902
+   ],
+   "depth_m": 2.979
   },
   "woofer-magnet#0": {
    "part": "woofer-magnet",
@@ -1291,6 +1347,20 @@
    ],
    "depth_m": 2.992
   },
+  "woofer-screws#0": {
+   "part": "woofer-screws",
+   "centre_px": [
+    466.1,
+    750.5
+   ],
+   "box_px": [
+    337,
+    616,
+    593,
+    889
+   ],
+   "depth_m": 2.986
+  },
   "woofer-spider#0": {
    "part": "woofer-spider",
    "centre_px": [
@@ -1308,16 +1378,30 @@
   "woofer-surround#0": {
    "part": "woofer-surround",
    "centre_px": [
-    466.4,
-    750.8
+    466.9,
+    751.3
    ],
    "box_px": [
-    341,
+    342,
     621,
     589,
     885
    ],
-   "depth_m": 2.984
+   "depth_m": 2.981
+  },
+  "woofer-terminals#0": {
+   "part": "woofer-terminals",
+   "centre_px": [
+    475.5,
+    845.4
+   ],
+   "box_px": [
+    471,
+    841,
+    480,
+    850
+   ],
+   "depth_m": 2.923
   }
  }
 }

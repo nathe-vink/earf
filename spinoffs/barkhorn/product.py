@@ -318,8 +318,17 @@ def lining(P, plen, ribs):
     if P['horn']['form'] == 'cast':
         pp = P['horn']['cast']['posts']; places = rod_places(P)
         (gx, gy), (tx, ty) = places[pp['cable_post']], places[pp['tie_post']]
-        under_top += [(gx - 20, gx + 20, H - T - max(60, t_top + 10), H - T + 1, gy - 12, y1 + 1),   # the HF lead's gland and its way in
-                      (tx - 10, tx + 10, H - T - t_top - g - 2, H - T + 1, min(ty - 9, yback - g), y1 + 1)]   # the tie rod's anchor
+        # round 31: the gland's notch only as deep as the gland and the lead's turn into it: the M12 gland's body (the
+        # amp box's gland, `gl` long) below the pad or the top it screws into, plus 10 for the lead to bend up into it (it
+        # was max(60, t_top + 10) = 110 under the top, a notch 85 deep in the back's upper batt that showed through the
+        # tinted back below the mark's letters as a pale tab); the lead runs up the batt's inner face to it (lead-hf)
+        zpad = top_boss(P)[4] if top_boss(P) else H - T
+        zgl = zpad - P['amp_box']['gland'][1] - 10.0
+        under_top += [(gx - 20, gx + 20, zgl, H - T + 1, gy - 12, y1 + 1),   # the HF lead's gland and its way in
+                      # the tie rod's anchor: its insert sits in the pad (or the top) from below, flush, so only the
+                      # rod's tip and room to reach it, 10, below that (round 31: it was the top's batts' depth, H - T -
+                      # t_top - g - 2, a notch 77 deep in the back's upper batt whose foot showed below the mark's E)
+                      (tx - 10, tx + 10, zpad - 10.0, H - T + 1, min(ty - 9, yback - g), y1 + 1)]
         tb = top_boss(P)
         if tb:                                                # round 15: the pad under the top
             under_top.append((tb[0] - g, tb[2] + g, tb[4] - g, H - T + 1, tb[1] - g, tb[3] + g))
@@ -1491,12 +1500,17 @@ def amp_compartment(P, ribs, wz, wood):
         pad = top_boss(P); zg = pad[4] if pad else H - T          # the gland screws into the top, or the pad under it
         top_glands = [cyl('z', (gx, gy), gd, zg - gl, zg)]
         t0 = tip(g_hf); zt = H - T - Lc.get('t_top', Lc['t']) - Lc['gap']     # the top's batts' underside
+        # round 31: up the back's upper batt's inner face, in the 10 between it and the top's batts' back ends (the
+        # cabinet side, where the batt hides it from behind), and into the gland's notch only in its last 10 (lining():
+        # the notch is the gland and that turn)
+        yl = gy - 8.5
         hf_path = [t0, (t0[0], t0[1] - 7, t0[2] + 4), (t0[0] - 4, t0[1] - 2, t0[2] + 22), (gx, t0[1] + 9.5, zt - 20),
-                   (gx, gy - 13, zt - 6), (gx, gy, min(zt + 8, zg - gl - 6)), (gx, gy, zg - gl)]
+                   (gx, yl, zt - 6), (gx, yl, zg - gl - 10), (gx, gy - 3, zg - gl - 3), (gx, gy, zg - gl)]
         out.append(Part('lead-hf', tube_along(hf_path, 5.0), Bought('hf-pair'), finish='cable', inside=True,
                         notes=['from its connector at the compartment\'s upper gland straight up'
                                + (', through brace-2\'s window (on a screw-mount tie base on its back member)' if len(P['braces']) > 1 else '')
-                               + ', through the gland under the top and up the cable post (7 bore) into the pod; it stays in the '
+                               + ', up the back\'s upper batt\'s inner face (the batt hides it from behind), into its notch only to turn up '
+                               'through the gland under the top and up the cable post (7 bore) into the pod; it stays in the '
                                'cabinet when the back comes off; a 50 service loop at each end; silicone sleeving where it meets the '
                                'post\'s cut ends']))
     t1, end = tip(g_lf), (cx + 5.0, yb + 68.0, wz - 122.0)
