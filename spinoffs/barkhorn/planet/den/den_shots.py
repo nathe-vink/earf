@@ -54,7 +54,9 @@ def props(v):
     for k, (dy, a) in enumerate(((-0.62, 0.0), (0.62, 180.0))):
         out.append({'kind': 'kit', 'shape': 'asset', 'model': v.get('chair_model', 'dining_chair_02'), 'res': '1k',
                     'position': [wx, wy + dy, 0.0], 'rotate': [0, 0, v.get('dining_rot0', 180.0) + a + 90 + 6 * k]})
-    for x, y, f in P.CHAIRS:                                          # the lounge's low leather chairs, as scanned
+    for i, (x, y, f) in enumerate(P.CHAIRS):                          # the lounge's low leather chairs, as scanned
+        dx, dy, df = v.get('chair_move', {}).get(str(i), (0.0, 0.0, 0.0))   # moved for one frame, as a stylist would
+        x, y, f = x + dx, y + dy, f + df
         ch = {'kind': 'kit', 'shape': 'asset', 'model': 'mid_century_lounge_chair', 'res': '1k',
               'position': [x, y, 0.008], 'rotate': [0, 0, -90.0 + f + ((int(x * 10) * 7 + int(y * 10) * 3) % 7 - 3)]}
         if v.get('chair_dye'):                                         # re-dyed (room 31's recolour piece)

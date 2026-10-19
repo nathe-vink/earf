@@ -29,8 +29,8 @@ SCREEN_GAP = 0.10                # the image plane behind it
 SCREEN_FRAME = 0.025             # a blackened-steel angle round the reveal
 # (name, wall, a0, a1, z0, z1, image): wall 'right' (y = 0) or 'left' (y = W) spans x a0..a1; 'window' spans y a0..a1
 SCREENS = [
-    ('banquette-a', 'right', 4.30, 5.90, 1.30, 2.70, 'hands'),       # over the banquette, between its tables
-    ('banquette-b', 'right', 7.35, 8.95, 1.30, 2.70, 'ovoid'),
+    ('banquette-a', 'right', 4.30, 5.90, 1.30, 2.70, 'ovoid'),       # over the banquette, between its tables
+    ('banquette-b', 'right', 7.35, 8.95, 1.30, 2.70, 'hands'),       # the one the bar frame sees (the lead: the hands)
     ('lounge', 'left', 15.25, 16.85, 0.85, 2.45, 'logogram'),       # the listening room's left wall, behind the left
                                                                      # Ember speaker (the lead: the acrylic in this frame too)
     ('window', 'window', 4.45, 5.75, 0.62, 2.42, 'dancer'),         # a lightbox in the shopfront, seen from both sides

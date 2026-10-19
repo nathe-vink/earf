@@ -226,8 +226,10 @@ _SCREEN_TINT = {}
 def screens(bpy, kit, p, objs):
     """Each screen: a 30 mm frosted panel flush with the wall, a glowing image 100 mm behind it, a dark box behind
     that, a blackened-steel angle round the reveal."""
-    W = P.W; T = LP.SCREEN_T; G = LP.SCREEN_GAP; F = LP.SCREEN_FRAME
+    W = P.W; T = LP.SCREEN_T; G = p.get('screen_gap', LP.SCREEN_GAP); F = LP.SCREEN_FRAME
     fro = acrylic(bpy, 'frosted', 'screen-frosted')
+    next(n for n in fro.node_tree.nodes if n.type == 'BSDF_PRINCIPLED').inputs['Roughness'].default_value = \
+        p.get('screen_rough', 0.42)                                   # finer than the panels' 0.42: the image reads
     pan = Mesh('screen-panels'); box = Mesh('screen-boxes'); frm = Mesh('screen-frames')
     for nm, wall, a0, a1, z0, z1, img in LP.SCREENS:
         st = p.get('screen_glow', 1.5) * p.get(f'screen_{nm}', 1.0)
