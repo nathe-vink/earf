@@ -226,3 +226,12 @@ and shows almost none). The cutaway takes each colour's flavour; its old per-col
 lookbook21) now applies to the old template only. With the drivers: the horn views show the new HF driver through the
 pod, the cutaway the new woofer's motor. Proof: Ice's set, `catalogue31/paper-detail-*-blue.png` (half size, 1 to 3
 minutes each).
+
+**The gland's notch (round 31, approved by the lead):** the pale tab under the R of the back's EARF, on back and amp in
+every colour, was the notch cut in the back's upper batt (lining-back-c) for the HF lead's gland, 85 deep (its floor
+`max(60, t_top + 10)` under the top), seen through the tinted back. It is now sized from the gland: the M12 gland's 22
+mm body below the 20 mm pad, plus 10 for the lead to turn up into it (floor at z 808, 27 deep), behind the letters; the
+lead runs up the batt's inner face in the 10 between it and the top's batts, hidden from behind, and turns into the
+notch only at the top (product.py `lining()` and `lead-hf`). Full build: 0 clashes; lining-back-c's cut file, its nest
+and its area in the parts list change, nothing else (the rest of the rebuild was timestamps and the drawings' issue
+date, reverted). Before and after: `catalogue31/gland-notch-before-after.png`.
