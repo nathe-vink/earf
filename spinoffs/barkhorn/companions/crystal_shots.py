@@ -29,15 +29,38 @@ def bar(colour):
     tx, ty, px, py = -0.12, 0.0, 0.26, 0.18
     s['title'] = f'Orb and Dome in {colour}, in a bar'
     s['set']['props'] = [p for p in s['set']['props'] if p.get('module') != 'earf_moon'] + [
-        piece('orb', [[tx, ty, MS.TABLE_Z]], colour),
-        piece('dome', [[px, py, PZ]], colour)]
+        # p1 c1, c5: lower, so the tint reads (a centre-to-rim fall) and the Orb stays the brighter
+        piece('orb', [[tx, ty, MS.TABLE_Z]], colour, lamp_w=3.0, shade_glow=1.1 if colour == 'smoked' else 0.4),
+        piece('dome', [[px, py, PZ]], colour, lamp_w=6.0, shade_glow=0.10)]
+    # p1 c3: an oiled fir counter that reflects the lamp, not dry planks
+    for p in s['set']['props']:
+        if p.get('texture') == 'brown_planks_09' and p.get('size', [0, 0, 1])[2] < 0.1:
+            p.update(texture='wood_table_001', color='#B08050', rough_mul=0.35)     # honey fir (p2 c4: it read mahogany)
     # the Orb is squat (180 tall to Moon's 277): the strip behind Moon's column would light the counter's edge
     s['lights'].pop('strip', None)
     s['lights']['kick']['position'] = [px, 0.50, PZ + 0.08]
     s['lights']['kick']['target'] = [px, py, PZ + 0.06]
     # closer and lower than Moon's (the Orb is squat): the pendant hung lower over it
-    s['camera'].update(position=[-0.30, -0.98, 0.97], target=[-0.01, 0.05, 0.99], lens_mm=50,
-                       focus=[tx, ty, MS.TABLE_Z + 0.10])
+    # p1 c4: closer and lower, the counter's front edge out of frame
+    s['camera'].update(position=[-0.28, -0.80, 0.94], target=[-0.02, 0.05, 0.965], lens_mm=50,   # p2 c7
+                       fstop=4.5, focus=[-0.02, 0.06, 0.95])                                    # p2 c6: both sharp
+    # p1 c2: the Orb lights its counter. Its own lamp is shut in the ball (hidden from transmission, as every lamp
+    # here), so two small hidden lamps just outside its equator stand in for the glow it would throw
+    for i, dx in enumerate((-0.095, 0.095)):
+        s['lights'][f'orbpool{i}'] = {'type': 'point', 'position': [tx + dx, ty - 0.02, MS.TABLE_Z + 0.04], 'power_w': 2.5,
+                                      'radius_m': 0.03, 'color': 2500, 'camera': False, 'transmission': False, 'specular': 0.0}
+    # p1 c6: a low strip from the front left draws the brass ring and the steel's edge
+    # (p2 c1: the front strip mirrored in the ball and the counter as a softbox, so it is gone; c3: one from behind)
+    s['lights']['base_back'] = {'type': 'area', 'size_m': [0.3, 0.04], 'position': [-0.35, 0.35, 0.80],
+                                'target': [tx, ty, 0.78], 'irradiance': 0.5, 'color': 2700, 'camera': False,
+                                'specular': 0.0}           # it mirrored in the oiled counter as a white bar
+    # p2 c5: the Dome's pool on the counter, from inside its hub (its own lamp is hidden from transmission)
+    s['lights']['domepool'] = {'type': 'spot', 'position': [px, py, PZ + 0.07], 'target': [px, py, MS.TABLE_Z],
+                               'power_w': 3.0, 'cone_deg': 50, 'radius_m': 0.01, 'color': 2500, 'camera': False}
+    # p1 c7, c8: a little cool in the shadows; the wall's boards grazed
+    s['render']['white_balance_k'] = 3200          # p2 c4 (2900 asked; 3200 turned the cream ball lavender, now smoke)
+    s['sky']['strength'] = 0.4
+    s['lights']['wallwash'].update(position=[0.3, 2.36, 2.9], target=[0.3, 2.44, 0.9], irradiance=0.8)
     return s
 
 

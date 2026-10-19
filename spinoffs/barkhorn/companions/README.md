@@ -406,3 +406,23 @@ The frames (`crystal_shots.py`, `renders/2026-10-19/barkhorn/crystal/`) are made
 - the bar hero in smoked and in Ember;
 - the swap (a Dome lowered off its fixture, three spare covers on the counter);
 - the catch, close.
+
+![Orb and Dome](../../../renders/2026-10-19/barkhorn/crystal/sheet.png)
+
+**Critic** (`critic/LOG.md`): three blind rounds on the smoked hero scored 5.0, 5.0 and 5.0. That is the family's
+limit, so I stopped. It is lower than Moon's 6.0.
+
+Two findings changed the products, not just the set:
+- The smoked tint was cast too light and read cream through the frost; it is now denser (`crystal.VARIANTS`).
+- The Orb's light sat below the ball's centre and drew a crescent in the frost; it is now centred (`ORB_LIGHT`, and
+  the kit piece).
+
+Open on the hero:
+- the grade is all red-orange at 3200 K, and the counter reads as red lacquer;
+- the smoked ball reads milky, with no hot core;
+- the base is dark;
+- the pendant's underside reads pale;
+- the wall is flat.
+
+Smoked is the hardest tint for this treatment: lit from within it glows a warm grey, not a colour. The Ember frame
+shows the idea better.

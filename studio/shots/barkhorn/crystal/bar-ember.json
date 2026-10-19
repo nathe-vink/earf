@@ -6,22 +6,22 @@
  ],
  "camera": {
   "position": [
-   -0.3,
-   -0.98,
-   0.97
+   -0.28,
+   -0.8,
+   0.94
   ],
   "target": [
-   -0.01,
+   -0.02,
    0.05,
-   0.99
+   0.965
   ],
   "lens_mm": 50,
   "level": true,
-  "fstop": 2.8,
+  "fstop": 4.5,
   "focus": [
-   -0.12,
-   0.0,
-   0.86
+   -0.02,
+   0.06,
+   0.95
   ]
  },
  "render": {
@@ -32,7 +32,7 @@
   "bounces": 12,
   "view": "Khronos PBR Neutral",
   "exposure": 0.6,
-  "white_balance_k": 3600
+  "white_balance_k": 3200
  },
  "set": {
   "kind": "sweep",
@@ -65,9 +65,9 @@
     "kind": "kit",
     "shape": "box",
     "material": "pbr",
-    "texture": "brown_planks_09",
+    "texture": "wood_table_001",
     "res": "2k",
-    "color": "#6E4A2E",
+    "color": "#B08050",
     "size": [
      1.8,
      0.75,
@@ -77,7 +77,8 @@
      0.05,
      0.05,
      0.715
-    ]
+    ],
+    "rough_mul": 0.35
    },
    {
     "kind": "kit",
@@ -875,7 +876,9 @@
       0.76
      ]
     ],
-    "flavour": "ember"
+    "flavour": "ember",
+    "lamp_w": 3.0,
+    "shade_glow": 0.4
    },
    {
     "kind": "kit",
@@ -889,7 +892,9 @@
       1.2
      ]
     ],
-    "flavour": "ember"
+    "flavour": "ember",
+    "lamp_w": 6.0,
+    "shade_glow": 0.1
    }
   ]
  },
@@ -898,7 +903,7 @@
   "zenith": "#1A1C22",
   "horizon": "#24221F",
   "ground": "#141210",
-  "strength": 0.25
+  "strength": 0.4
  },
  "lights": {
   "fill": {
@@ -948,15 +953,15 @@
    ],
    "position": [
     0.3,
-    2.3,
-    2.7
+    2.36,
+    2.9
    ],
    "target": [
     0.3,
-    2.45,
-    1.4
+    2.44,
+    0.9
    ],
-   "irradiance": 0.35,
+   "irradiance": 0.8,
    "color": 2400,
    "camera": false
   },
@@ -1014,6 +1019,73 @@
    ],
    "irradiance": 0.6,
    "color": 2400,
+   "camera": false
+  },
+  "orbpool0": {
+   "type": "point",
+   "position": [
+    -0.215,
+    -0.02,
+    0.8
+   ],
+   "power_w": 2.5,
+   "radius_m": 0.03,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "orbpool1": {
+   "type": "point",
+   "position": [
+    -0.024999999999999994,
+    -0.02,
+    0.8
+   ],
+   "power_w": 2.5,
+   "radius_m": 0.03,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "base_back": {
+   "type": "area",
+   "size_m": [
+    0.3,
+    0.04
+   ],
+   "position": [
+    -0.35,
+    0.35,
+    0.8
+   ],
+   "target": [
+    -0.12,
+    0.0,
+    0.78
+   ],
+   "irradiance": 0.5,
+   "color": 2700,
+   "camera": false,
+   "specular": 0.0
+  },
+  "domepool": {
+   "type": "spot",
+   "position": [
+    0.26,
+    0.18,
+    1.27
+   ],
+   "target": [
+    0.26,
+    0.18,
+    0.76
+   ],
+   "power_w": 3.0,
+   "cone_deg": 50,
+   "radius_m": 0.01,
+   "color": 2500,
    "camera": false
   }
  }

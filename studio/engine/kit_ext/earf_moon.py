@@ -40,7 +40,7 @@ import product as PR                                                 # noqa: E40
 DEFS = {'table': 'studio/products/earf-moon-table.json', 'pendant': 'studio/products/earf-moon-pendant.json',
         'dome': 'studio/products/earf-dome-pendant.json', 'orb': 'studio/products/earf-orb-table.json'}
 # moon.TABLE_LIGHT, moon.PENDANT_LIGHT, crystal.DOME_LIGHT, crystal.ORB_LIGHT
-LIGHT_MM = {'table': (0.0, 0.0, 222.0), 'pendant': (0.0, 0.0, 70.0), 'dome': (0.0, 0.0, 74.0), 'orb': (0.0, 0.0, 70.4)}
+LIGHT_MM = {'table': (0.0, 0.0, 222.0), 'pendant': (0.0, 0.0, 70.0), 'dome': (0.0, 0.0, 74.0), 'orb': (0.0, 0.0, 100.4)}
 LAMP_W = {'table': 4.0, 'pendant': 14.0, 'dome': 9.0, 'orb': 3.0}
 # the pendants' cords, from the cap to the canopy, and the canopy's top (mm above the rim)
 CORD_MM = {'pendant': (121.0, 707.0), 'dome': (126.0, 726.0)}

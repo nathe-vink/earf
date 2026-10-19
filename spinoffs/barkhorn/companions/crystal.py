@@ -43,7 +43,7 @@ MATERIALS = dict(B.MATERIALS,
                  silicone={'preset': 'rubber', 'color': '#1A1A1A'},
                  gold={'preset': 'metal', 'color': '#D8B45A', 'roughness': 0.2})
 VARIANTS = copy.deepcopy(B.VARIANTS)
-VARIANTS['smoked'].setdefault('materials', {})['body'] = {'radius': 0.008}
+VARIANTS['smoked'].setdefault('materials', {})['body'] = {'radius': 0.0055}     # 0.008 read cream, not smoke (critic p2)
 
 GAP, LT, SKIN = 1.0, 2.5, 3.0          # the liner 1 mm in from the shell, 2.5 thick; the inner skin 3
 
@@ -219,7 +219,7 @@ def eased(d, z0, z1, e, top=True, bottom=True):
 
 
 _R, _bd, _bh, _zt, _zc = orb_geometry()
-ORB_LIGHT = (0.0, 0.0, round(_zc - 30.0, 1))
+ORB_LIGHT = (0.0, 0.0, round(_zc, 1))           # at the centre: 30 below drew a crescent in the frost (critic p2)
 ORB_SIZE = dict(ball=2 * _R, height=round(_zc + _R, 1), base=_bd)
 
 NOTES_DOME = [
