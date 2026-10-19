@@ -269,7 +269,7 @@ def amanita(bpy, name, p, kit):
     for bm in bms.values():
         for v in bm.verts:
             t = max(0.0, min(1.5, v.co.z / top)); v.co.x += lx * t * t; v.co.y += ly * t * t
-    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0))
+    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0), p.get('matte', False))
     obs = []
     for k, bm in bms.items():
         if len(bm.verts):
@@ -279,7 +279,7 @@ def amanita(bpy, name, p, kit):
     return obs
 
 
-def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0):
+def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
     key = (sp,)
     out = {}
     # the cap: viscid (a wet, thin coat), red with orange toward the margin and blotchy, a little light through it
@@ -311,6 +311,8 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0):
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)
     b.inputs['Roughness'].default_value = 0.55
     b.inputs['Coat Weight'].default_value = 0.15; b.inputs['Coat Roughness'].default_value = 0.25
+    if matte:                                             # a dried cap: no viscid coat, a soft sheen at most
+        b.inputs['Roughness'].default_value = 0.68; b.inputs['Coat Weight'].default_value = 0.04
     fib = _noise(nt, 1.0 / (R * 0.06), 6.0, stretch=(1.0, 1.0, 1.0))
     n1 = _bump(nt, b, fib.outputs['Fac'], 0.25, R * 0.004)
     # the striate margin: fine radial grooves in the outer fifth of the cap
@@ -349,6 +351,8 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0):
         mx = nt.nodes.new('ShaderNodeMath'); mx.operation = 'MULTIPLY_ADD'
         nt.links.new(nz.outputs['Fac'], mx.inputs[0]); mx.inputs[1].default_value = 0.25; nt.links.new(hz.outputs['Value'], mx.inputs[2])
         cols = [(0.05, '#5A4A32'), (0.2, '#A39478'), (0.38, '#D6CCB2'), (1.0, '#E6DEC8')]
+        if matte:                                         # a dried stem: dirty ivory, soil climbing from the base
+            cols = [(0.05, '#3E3222'), (0.28, '#7E705A'), (0.5, '#AA9E84'), (1.0, '#BFB59C')]
         if k == 'volva' and sp != 'muscaria':
             cols = [(0.0, '#7A6A4E'), (0.25, '#CFC6AE'), (1.0, '#EDE8DA')]
         nt.links.new(_ramp(nt, mx.outputs['Value'], cols), b.inputs['Base Color'])
