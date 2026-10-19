@@ -107,6 +107,30 @@ MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn abov
            'The horn: cast resin, its driver in a pod whose cap twists off.'),
           ('woofer', 'ice', 'The 15-inch woofer through an Ice cabinet', 'The 15-inch woofer, behind the cloth when the cover&rsquo;s on.'),
           ]   # the grip (Poison) left the row of details with the lineup: four read as a set
+# the lamps (round 32d), the owner's picks of 2026-10-19 ("sick lamps. Add them to the site as well"): a pendant whose
+# tinted cover comes off on a quarter turn, and a table lamp whose ball sits low in a steel cup, both cast in the eight
+# tints, frosted within. Their particulars are the fab kits' (companions/dome_pendant.py and orb_table.py). The band
+# shows once every picture in LAMP_PICS is in site/img (made from renders/2026-10-19/barkhorn/lamps-site/)
+LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
+    ('dome', 'Dome', 'Pendant', 'Hung low over the bar. A quarter turn takes its cover off, and another puts a new colour on.',
+     'The Dome pendant lit, its Ember cover glowing beneath a brass hub',
+     [('Size', '200 mm across'), ('Shade', 'Cast acrylic, tinted outside and frosted within'),
+      ('Light', '2700 K, its source shielded inside the hub'), ('Fitting', 'Brass, with a quarter-turn catch'),
+      ('Covers', 'In all eight colours, sold singly')]),
+    ('orb', 'Orb', 'Table lamp', 'A ball of tinted acrylic sitting low in a steel cup. No cord, so it goes where the conversation is.',
+     'The Orb table lamp lit in Ember, sitting low in its blackened steel cup',
+     [('Size', '160 mm ball, 180 mm tall'), ('Weight', '2.6 kg'),
+      ('Light', '2200 to 2700 K, warmer as it dims, under a brass touch ring'),
+      ('Power', 'Cordless; charges over USB-C or on its tray'), ('Rating', 'IP44, for terraces and spilt drinks'),
+      ('Balls', 'In all eight colours, sold singly')]),
+]
+LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band doesn't write one)
+    'lamp-dome': (800, None), 'lamp-orb': (800, None),
+    'lamps-orbs': (1200, 'Eight Orbs in a row, lit, in spectrum order: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke'),
+    'lamps-domes': (1200, 'Eight Dome pendants hung in a row at one height, lit, one in each colour'),
+    'lamp-catch': (900, "The Dome's cover lowered off its brass hub, the catch's pins and slots in view"),
+    'lamps-unlit': (800, 'An Orb and a Dome in Smoke, switched off: dark, polished acrylic with a pale core'),
+}
 KEYS = [c[0] for c in CLOUDS]
 MARK = {key: col for key, line, num, name, col in M.SPEAKERS if line == 'Cloud'}
 HUE = {'red': 0, 'orange': 1, 'amber': 2, 'green': 3, 'blue': 4, 'violet': 5}   # the painter's wheel, from red
@@ -346,6 +370,13 @@ def make_images(sources=None):
         if os.path.exists(src):
             shutil.copy(src, os.path.join(IMG, name))
             made.append(name)
+    # the lamps' pictures (the companions session's finals, at full size), each at twice its page width and at once
+    for name, (w, _) in LAMP_PICS.items():
+        src = os.path.join(ROOT, 'renders', '2026-10-19', 'barkhorn', 'lamps-site', f'{name}.png')
+        if os.path.exists(src):
+            im = Image.open(src)
+            save(im, f'{name}.jpg', 2 * w, q=84); save(im, f'{name}-{w}.jpg', w, q=84)
+            made.append(name)
     # the coins, in the icons' order, one sheet for each ground (round 30's renders, at 800 px on E.PAPER and E.NIGHT)
     order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
     for tag, ground, dark in (('paper', (242, 238, 232), False), ('night', (17, 16, 19), True)):
@@ -550,10 +581,30 @@ def body():
             '<figure><img src="img/next-{0}.jpg" width="{1}" height="{2}" loading="lazy" alt="{5}">'
             '<figcaption><b>{3}</b> {4}</figcaption></figure>'.format(t, *Image.open(os.path.join(IMG, f'next-{t}.jpg')).size, n, d, alt)
             for t, n, d, alt in pair) + '</div>'
+    lamps_shown = all(os.path.exists(os.path.join(IMG, f'{n}.jpg')) for n in LAMP_PICS)
+    def pic(name, alt, cls=''):
+        w, h = Image.open(os.path.join(IMG, f'{name}.jpg')).size
+        w1 = LAMP_PICS[name][0]
+        return (f'<img{cls} src="img/{name}-{w1}.jpg" srcset="img/{name}-{w1}.jpg {w1}w, img/{name}.jpg {w}w" '
+                f'sizes="(max-width: 720px) 100vw, 50vw" width="{w}" height="{h}" loading="lazy" alt="{alt or LAMP_PICS[name][1]}">')
+    lamps = ('  <section class="band lamps" id="lamps"><div class="wrap">\n'
+             '    <div class="head"><div><p class="eyebrow">In good company</p><h2>The same eight, lit from within.</h2>\n'
+             '      <p>A pendant and a table lamp in the speakers&rsquo; acrylic, frosted inside, so the colour glows and the '
+             'source never shows. Every cover comes off by hand.</p></div></div>\n'
+             '    <div class="lamp-pair">' + ''.join(
+                 f'<article class="lamp">{pic("lamp-" + k, alt)}<h3>{name}<small>{kind}</small></h3><p class="line">{line}</p>'
+                 '<dl class="facts">' + ''.join(f'<dt>{t}</dt><dd>{d}</dd>' for t, d in facts) + '</dl></article>'
+                 for k, name, kind, line, alt, facts in LAMPS) + '</div>\n'
+             '    <figure class="eight">' + pic('lamps-domes', None) + pic('lamps-orbs', None) +
+             '<figcaption>In spectrum order, as the speakers: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
+             '    <div class="lamp-duo"><figure>' + pic('lamp-catch', None) +
+             '<figcaption>A quarter turn, and the cover is off. Nothing live comes with it.</figcaption></figure>'
+             '<figure>' + pic('lamps-unlit', None) + '<figcaption>Off, in Smoke.</figcaption></figure></div>\n'
+             '  </div></section>') if lamps_shown else ''
     nxt = ('  <section class="band"><div class="wrap next">\n    <p class="eyebrow">Next</p>\n'
            '    <h2>In good company.</h2>\n'
            '    <p>A record player and a lamp are on the drawing board, cast in the same eight colours.</p>' + figs +
-           '\n  </div></section>') if COMPANIONS_SHOWN else ''
+           '\n  </div></section>') if COMPANIONS_SHOWN else lamps
     goes_sec = ('    <section aria-labelledby="goes-title">\n'
                 '      <div class="goes-head"><h2 id="goes-title">Good company</h2><span id="goes-note"></span></div>\n'
                 '      <div class="goes" id="goes" aria-live="polite"></div>\n'
@@ -583,6 +634,7 @@ def body():
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
                 .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt).replace('__GOES__', goes_sec)
+                .replace('__LAMPS_NAV__', '<li class="wide"><a href="#lamps">Lamps</a></li>' if lamps_shown else '')
                 .replace('__STILL__', still).replace('__POSTER__', poster).replace('__POSTER_NIGHT__', poster_night).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
     cut = page.index('</style>') + len('</style>')
     return page[:cut], page[cut:]
@@ -861,6 +913,19 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 .dwg figcaption { flex: 1 0 100%; font: 500 12px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: #5E5A53 }
 .next { display: grid; gap: 14px }
 .next p { margin: 0; max-width: 60ch; color: var(--muted) }
+/* the lamps: the pair side by side, each a tall picture over its name, line and particulars; the eight in a row;
+   the catch and the lamps switched off beneath */
+.lamp-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px }
+.lamp { display: grid; gap: 12px; align-content: start; min-width: 0 }
+.lamp img, .eight img, .lamp-duo img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.lamp h3 { margin: 4px 0 0; display: flex; align-items: baseline; gap: 12px; font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
+.lamp h3 small { font: 500 12px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted) }
+.lamp .line { margin: 0 0 6px; color: var(--muted); max-width: 52ch }
+.eight { margin: 32px 0 0; display: grid; gap: 12px }
+.lamp-duo { display: grid; grid-template-columns: 15fr 8fr; gap: 24px; margin-top: 24px; align-items: start }   /* 3:2 and 4:5 at one height */
+.lamp-duo figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
+.eight figcaption, .lamp-duo figcaption { font-size: 15px; color: var(--muted) }
+@media (max-width: 720px) { .lamp-pair, .lamp-duo { grid-template-columns: minmax(0, 1fr) } }
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 14px }
 .pair figure { margin: 0; display: grid; gap: 10px }
 .pair img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
@@ -1014,7 +1079,7 @@ html.cursor, html.cursor * { cursor: none !important }
   <a class="brand" href="#top" aria-label="EARF, home"><span class="globe" aria-hidden="true"></span>__WORD__</a>
   <nav aria-label="Pages"><ul>
     <li><a href="#atmosphere">Colours</a></li><li><a href="#turn">The horn</a></li><li class="wide"><a href="#spec">Details</a></li>
-    <li><a href="#contact">Enquire</a></li>
+    __LAMPS_NAV__<li><a href="#contact">Enquire</a></li>
   </ul></nav>
 </div></header>
 
@@ -1082,7 +1147,7 @@ __NEXT__
   <section class="band" id="contact"><div class="wrap contact">
     <p class="eyebrow">Enquiries</p>
     <h2>Prices, pairs and partnerships.</h2>
-    <p>Every pair is made to order, so we quote rather than list. Write for prices and lead times, or if you&rsquo;d like to
+    <p>Everything here is made to order, so we quote rather than list. Write for prices and lead times, or if you&rsquo;d like to
       make, stock or collaborate.</p>
     <div class="addr"><code id="addr">hello@earf.world</code><button type="button" class="btn" id="copy">Copy address</button></div>
     <small id="copy-note">The inbox opens at launch.</small>
