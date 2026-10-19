@@ -229,3 +229,22 @@ The proof, d3-p0 (k6, 960 px, 512 samples), goes back to D2's column with the em
 **Duel at 720 px, order swapped: A won, 5.65 to 4.25** (4.5 v 5.8, 4.0 v 5.5). This fails the gate. Both judges still call even a small orange glow "a forest fire", and both say the fern hides the base's lower-left corner. They credit D3 with stronger shafts and more depth, and with the ferns giving it a sense of place.
 
 This stops here, as the coordinator set: the best proofs go to the owner beside A. See `critic-smoke/d3-duel-vs-A-newdrivers.json`.
+
+## Round E: three settings without the forest (the owner, 2026-10-19)
+
+The owner: "I just don't think the forest is a good setting for smoke, it's too hazy and forests are just like that in the morning without smoke, and then the fire seems forced." The site keeps A until a new Smoke wins. These are three settings, proofed at 0.3 scale (720 × 480, 256 samples) on the drivers made real, so the owner can pick one. Each keeps A's speaker rig: the fills and kickers are linked to the speaker alone, and the acrylic is the same.
+
+The smoke in all three is a new piece, `ribbon` (studio/engine/kit_ext/smoke_el.py). It is a volume inside nested tubes along a curve, with a laminar thread at its start. Noise tears the wider parts, a ragged wall (`wobble`) keeps it from reading as a hose, and a broad noise (`break_*`) thins and thickens it along its length.
+
+| Setting | File | Proof | Read test (600 px, fresh judge) |
+|---|---|---|---|
+| E1 incense in a concrete hall | `smoke_incense.py` | element-smoke-e1-incense-p0 | stands; "smoke, not fog or haze: a thin wispy plume rising from the incense stick"; no flame, "only a small red ember"; no figure. One note: a short bright streak partway up (the thread where it crosses the beam) "looks a little odd". |
+| E2 after hours in a cigar room | `smoke_cigar.py` | element-smoke-e2-cigar-p0 | stands (contact shadow on the lit floor); "clearly smoke, not fog or haze", from "a cigar resting in an ashtray"; no fire, no ember seen; no figure. |
+| E3 the studio take | `smoke_studio.py` | element-smoke-e3-studio-p0 | stands (its reflection in the gloss floor); "smoke, a dense coiling plume rather than flat fog or haze"; no fire; no figure. |
+
+The three side by side: `element-smoke-e-settings.jpg`. No duels yet: the owner picks the setting first.
+
+How each was found:
+- **E1:** the slot was first placed behind the speaker, where the beam fell out of frame. It now sits low in the right wall, in front, so the sun's slab crosses the smoke and lands on the back wall as a bar behind the speaker.
+- **E2:** the spot was first over the table, which lit the smoke dull. It now comes from behind, so the smoke glows. The chair faces the camera. A brass vase was dropped because it read as clutter.
+- **E3:** three thick strands read as cotton-wool coils, and thin ones read as tubing. One wide, billowing strand plus a fainter second reads as smoke. It starts low at the front so the cabinet stays clear, and the rims are hidden from the gloss floor.
