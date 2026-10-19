@@ -1,0 +1,1210 @@
+{
+ "title": "Planet EARF, the shopfront at night, from across the street (round 33)",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   -16.0,
+   13.5,
+   1.6
+  ],
+  "target": [
+   0.0,
+   3.2,
+   2.2
+  ],
+  "lens_mm": 40,
+  "level": true
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "flavour": "cloud-red",
+     "position": [
+      16.15,
+      1.25,
+      0.1
+     ],
+     "rotate_z": -132.56,
+     "hide": [
+      "cloth-disc"
+     ]
+    },
+    {
+     "flavour": "cloud-red",
+     "position": [
+      16.15,
+      5.75,
+      0.1
+     ],
+     "rotate_z": -47.44,
+     "hide": [
+      "cloth-disc"
+     ]
+    },
+    {
+     "flavour": "cloud-black",
+     "position": [
+      4.66,
+      6.785,
+      0.45
+     ],
+     "rotate_z": 0.0,
+     "hide": [
+      "cloth-disc"
+     ]
+    },
+    {
+     "flavour": "cloud-black",
+     "position": [
+      9.06,
+      6.785,
+      0.45
+     ],
+     "rotate_z": 0.0,
+     "hide": [
+      "cloth-disc"
+     ]
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-lamp.json",
+   "flavour": "fog",
+   "instances": [
+    {
+     "flavour": "fog",
+     "position": [
+      5.1,
+      0.82,
+      0.74
+     ],
+     "rotate_z": 0.0
+    },
+    {
+     "flavour": "fog",
+     "position": [
+      8.14,
+      0.82,
+      0.74
+     ],
+     "rotate_z": 0.0
+    },
+    {
+     "flavour": "fog",
+     "position": [
+      1.13,
+      4.3999999999999995,
+      0.74
+     ],
+     "rotate_z": 0.0
+    },
+    {
+     "flavour": "fog",
+     "position": [
+      12.85,
+      2.62,
+      0.5
+     ],
+     "rotate_z": 0.0
+    },
+    {
+     "flavour": "fog",
+     "position": [
+      12.85,
+      4.38,
+      0.5
+     ],
+     "rotate_z": 0.0
+    }
+   ]
+  },
+  {
+   "def": "studio/products/barkhorn-turntable.json",
+   "flavour": "smoke",
+   "instances": [
+    {
+     "flavour": "smoke",
+     "position": [
+      16.7,
+      3.2,
+      0.66
+     ],
+     "rotate_z": -90.0
+    }
+   ]
+  }
+ ],
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "planet_den",
+    "fn": "room",
+    "shelf_glow": 6.0,
+    "shade_glow": 0.3,
+    "pendant_glow": 0.5,
+    "flame": 25.0,
+    "record_glow": 2.0,
+    "vu": 2.0,
+    "street": true,
+    "windows_lit": 0.5,
+    "wet": true,
+    "road_rough": 0.12,
+    "neighbour_plain": true,
+    "flat_glow": 0.06
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     3.745,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     -11
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     4.435,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     3
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     5.125,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     -6
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     5.815,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     8
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     6.505,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     -1
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     7.195,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     -10
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     7.885,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     4
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     8.575,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     -5
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     9.265,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     9
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "bar_chair_round_01",
+    "res": "1k",
+    "position": [
+     9.955,
+     4.53,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "res": "1k",
+    "position": [
+     3.71,
+     1.64,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     176.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "res": "1k",
+    "position": [
+     5.27,
+     1.64,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     181.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "res": "1k",
+    "position": [
+     6.83,
+     1.64,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     177.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "res": "1k",
+    "position": [
+     8.27,
+     1.64,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     182.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "res": "1k",
+    "position": [
+     9.83,
+     1.64,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     178.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "res": "1k",
+    "position": [
+     1.25,
+     3.6799999999999997,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     270.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dining_chair_02",
+    "res": "1k",
+    "position": [
+     1.25,
+     4.92,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     456.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     13.95,
+     2.65,
+     0.008
+    ],
+    "rotate": [
+     0,
+     0,
+     -92.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     13.95,
+     4.35,
+     0.008
+    ],
+    "rotate": [
+     0,
+     0,
+     -90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     12.85,
+     1.75,
+     0.008
+    ],
+    "rotate": [
+     0,
+     0,
+     -76.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     12.85,
+     3.5,
+     0.008
+    ],
+    "rotate": [
+     0,
+     0,
+     -93.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     12.85,
+     5.25,
+     0.008
+    ],
+    "rotate": [
+     0,
+     0,
+     -106.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     14.9,
+     0.95,
+     0.008
+    ],
+    "rotate": [
+     0,
+     0,
+     -27.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "mid_century_lounge_chair",
+    "res": "1k",
+    "position": [
+     14.9,
+     6.05,
+     0.008
+    ],
+    "rotate": [
+     0,
+     0,
+     -148.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     -3.16,
+     -6.0,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     -3.16,
+     16.0,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90.0
+    ]
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#05070C",
+  "horizon": "#141824",
+  "ground": "#08080A",
+  "strength": 0.0
+ },
+ "lights": {
+  "spk0": {
+   "type": "area",
+   "position": [
+    15.487,
+    1.859,
+    3.1999999999999997
+   ],
+   "target": [
+    16.15,
+    1.25,
+    0.75
+   ],
+   "size_m": [
+    0.35,
+    0.35
+   ],
+   "irradiance": 3.0,
+   "color": 2700
+  },
+  "spk1": {
+   "type": "area",
+   "position": [
+    15.487,
+    5.141,
+    3.1999999999999997
+   ],
+   "target": [
+    16.15,
+    5.75,
+    0.75
+   ],
+   "size_m": [
+    0.35,
+    0.35
+   ],
+   "irradiance": 3.0,
+   "color": 2700
+  },
+  "niche2": {
+   "type": "spot",
+   "position": [
+    4.66,
+    6.6850000000000005,
+    1.91
+   ],
+   "target": [
+    4.66,
+    6.565,
+    1.05
+   ],
+   "power_w": 60.0,
+   "cone_deg": 45,
+   "blend": 0.8,
+   "radius_m": 0.02,
+   "color": 2600
+  },
+  "niche3": {
+   "type": "spot",
+   "position": [
+    9.059999999999999,
+    6.6850000000000005,
+    1.91
+   ],
+   "target": [
+    9.059999999999999,
+    6.565,
+    1.05
+   ],
+   "power_w": 60.0,
+   "cone_deg": 45,
+   "blend": 0.8,
+   "radius_m": 0.02,
+   "color": 2600
+  },
+  "sconceR0": {
+   "type": "point",
+   "position": [
+    3.0,
+    0.22,
+    1.78
+   ],
+   "power_w": 10.0,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconceR1": {
+   "type": "point",
+   "position": [
+    4.52,
+    0.22,
+    1.78
+   ],
+   "power_w": 10.0,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconceR2": {
+   "type": "point",
+   "position": [
+    6.04,
+    0.22,
+    1.78
+   ],
+   "power_w": 10.0,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconceR3": {
+   "type": "point",
+   "position": [
+    7.5600000000000005,
+    0.22,
+    1.78
+   ],
+   "power_w": 10.0,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconceR4": {
+   "type": "point",
+   "position": [
+    9.08,
+    0.22,
+    1.78
+   ],
+   "power_w": 10.0,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconceR5": {
+   "type": "point",
+   "position": [
+    10.6,
+    0.22,
+    1.78
+   ],
+   "power_w": 10.0,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconceL0": {
+   "type": "point",
+   "position": [
+    13.2,
+    6.8,
+    1.78
+   ],
+   "power_w": 10.0,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconceL1": {
+   "type": "point",
+   "position": [
+    15.6,
+    6.8,
+    1.78
+   ],
+   "power_w": 10.0,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "pend0": {
+   "type": "spot",
+   "position": [
+    4.55,
+    5.209999999999999,
+    2.02
+   ],
+   "target": [
+    4.55,
+    5.079999999999999,
+    1.07
+   ],
+   "power_w": 45.0,
+   "cone_deg": 75.0,
+   "blend": 0.6,
+   "radius_m": 0.04,
+   "color": 2400
+  },
+  "pend1": {
+   "type": "spot",
+   "position": [
+    6.85,
+    5.209999999999999,
+    2.02
+   ],
+   "target": [
+    6.85,
+    5.079999999999999,
+    1.07
+   ],
+   "power_w": 45.0,
+   "cone_deg": 75.0,
+   "blend": 0.6,
+   "radius_m": 0.04,
+   "color": 2400
+  },
+  "pend2": {
+   "type": "spot",
+   "position": [
+    9.15,
+    5.209999999999999,
+    2.02
+   ],
+   "target": [
+    9.15,
+    5.079999999999999,
+    1.07
+   ],
+   "power_w": 45.0,
+   "cone_deg": 75.0,
+   "blend": 0.6,
+   "radius_m": 0.04,
+   "color": 2400
+  },
+  "rec0": {
+   "type": "spot",
+   "position": [
+    16.540000000000003,
+    2.5,
+    2.6700000000000004
+   ],
+   "target": [
+    16.8,
+    2.5,
+    0.6
+   ],
+   "power_w": 18.0,
+   "cone_deg": 60,
+   "blend": 0.9,
+   "radius_m": 0.03,
+   "color": 2500
+  },
+  "rec1": {
+   "type": "spot",
+   "position": [
+    16.540000000000003,
+    3.5,
+    2.6700000000000004
+   ],
+   "target": [
+    16.8,
+    3.5,
+    0.6
+   ],
+   "power_w": 18.0,
+   "cone_deg": 60,
+   "blend": 0.9,
+   "radius_m": 0.03,
+   "color": 2500
+  },
+  "rec2": {
+   "type": "spot",
+   "position": [
+    16.540000000000003,
+    4.5,
+    2.6700000000000004
+   ],
+   "target": [
+    16.8,
+    4.5,
+    0.6
+   ],
+   "power_w": 18.0,
+   "cone_deg": 60,
+   "blend": 0.9,
+   "radius_m": 0.03,
+   "color": 2500
+  },
+  "candle0": {
+   "type": "point",
+   "position": [
+    3.89,
+    0.84,
+    0.775
+   ],
+   "power_w": 0.6,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "candle1": {
+   "type": "point",
+   "position": [
+    6.93,
+    0.84,
+    0.775
+   ],
+   "power_w": 0.6,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "candle2": {
+   "type": "point",
+   "position": [
+    9.97,
+    0.84,
+    0.775
+   ],
+   "power_w": 0.6,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "candle3": {
+   "type": "point",
+   "position": [
+    1.35,
+    4.18,
+    0.775
+   ],
+   "power_w": 0.6,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "candle4": {
+   "type": "point",
+   "position": [
+    4.1,
+    4.93,
+    1.155
+   ],
+   "power_w": 0.6,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "candle5": {
+   "type": "point",
+   "position": [
+    6.3,
+    4.93,
+    1.155
+   ],
+   "power_w": 0.6,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "candle6": {
+   "type": "point",
+   "position": [
+    8.6,
+    4.93,
+    1.155
+   ],
+   "power_w": 0.6,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "candle7": {
+   "type": "point",
+   "position": [
+    14.01,
+    3.58,
+    0.535
+   ],
+   "power_w": 0.6,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "bellT1-0": {
+   "type": "point",
+   "position": [
+    5.1,
+    0.867,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellT1-1": {
+   "type": "point",
+   "position": [
+    5.0593,
+    0.7965,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellT1-2": {
+   "type": "point",
+   "position": [
+    5.1407,
+    0.7965,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellT3-0": {
+   "type": "point",
+   "position": [
+    8.14,
+    0.867,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellT3-1": {
+   "type": "point",
+   "position": [
+    8.0993,
+    0.7965,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellT3-2": {
+   "type": "point",
+   "position": [
+    8.1807,
+    0.7965,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellW-0": {
+   "type": "point",
+   "position": [
+    1.13,
+    4.447,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellW-1": {
+   "type": "point",
+   "position": [
+    1.0893,
+    4.3765,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellW-2": {
+   "type": "point",
+   "position": [
+    1.1707,
+    4.3765,
+    1.181
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellS0-0": {
+   "type": "point",
+   "position": [
+    12.85,
+    2.667,
+    0.941
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellS0-1": {
+   "type": "point",
+   "position": [
+    12.8093,
+    2.5965,
+    0.941
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellS0-2": {
+   "type": "point",
+   "position": [
+    12.8907,
+    2.5965,
+    0.941
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellS1-0": {
+   "type": "point",
+   "position": [
+    12.85,
+    4.427,
+    0.941
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellS1-1": {
+   "type": "point",
+   "position": [
+    12.8093,
+    4.3565,
+    0.941
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "bellS1-2": {
+   "type": "point",
+   "position": [
+    12.8907,
+    4.3565,
+    0.941
+   ],
+   "power_w": 7.333333333333333,
+   "radius_m": 0.04,
+   "color": 2500,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "street0": {
+   "type": "point",
+   "position": [
+    -2.2600000000000002,
+    -6.0,
+    5.6
+   ],
+   "power_w": 250.0,
+   "radius_m": 0.15,
+   "color": 2700
+  },
+  "street1": {
+   "type": "point",
+   "position": [
+    -2.2600000000000002,
+    16.0,
+    5.6
+   ],
+   "power_w": 250.0,
+   "radius_m": 0.15,
+   "color": 2700
+  }
+ },
+ "haze": {},
+ "render": {
+  "samples": 256,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 10,
+  "view": "Khronos PBR Neutral",
+  "look": "None",
+  "exposure": 0.4,
+  "white_balance_k": 4000,
+  "white_balance_tint": 0.0
+ }
+}
