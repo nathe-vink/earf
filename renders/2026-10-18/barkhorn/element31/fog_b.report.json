@@ -67,5 +67,52 @@
    "lift_color": "#000000",
    "vignette": 0.22
   }
+ },
+ "mended_joins": {
+  "note": "a band rendered across each strip join (crops 0.225-0.275, 0.475-0.525, 0.725-0.775, 256 spp, finish off), aligned by RMSE to the stitched raw, blended over rows join +-28 with 8-row fades, then the finish applied once",
+  "bands": [
+   {
+    "band": "j1",
+    "join_row": 400,
+    "band_top": 360,
+    "band_rows": 80,
+    "rmse_off_seam": 0.89,
+    "minutes": 20.4
+   },
+   {
+    "band": "j2",
+    "join_row": 800,
+    "band_top": 761,
+    "band_rows": 79,
+    "rmse_off_seam": 0.99,
+    "minutes": 40.5
+   },
+   {
+    "band": "j3",
+    "join_row": 1200,
+    "band_top": 1160,
+    "band_rows": 80,
+    "rmse_off_seam": 1.54,
+    "minutes": 23.6
+   }
+  ],
+  "row_to_row_grain_correlation": {
+   "399": {
+    "before": -0.3,
+    "after": 0.31,
+    "local_median": 0.46,
+    "note": "the band rendered whole reads 0.25-0.33 in rows 396-420: content, not seam"
+   },
+   "799": {
+    "before": 0.81,
+    "after": 0.9,
+    "local": 0.84
+   },
+   "1199": {
+    "before": 0.72,
+    "after": 0.82,
+    "local": 0.81
+   }
+  }
  }
 }
