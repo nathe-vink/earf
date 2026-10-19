@@ -59,7 +59,7 @@ def settings(sh, scale):
     hz = sh.get('haze') or {}
     out = [f"- frame: {sh['size'][0]} x {sh['size'][1]} as delivered; this proof at scale {scale}",
            f"- camera: position {cam['position']} m (x 0 at the shopfront's glass to 17 at the back wall, y 0 at the "
-           f"right-hand wall to 7 at the left-hand wall where the bar runs, z up), level, at {cam['target']}, lens "
+           f"right-hand wall to {S.P.W} at the left-hand wall where the bar runs, z up), level, at {cam['target']}, lens "
            f"{cam['lens_mm']} mm on 36 mm" + (f", f/{cam['fstop']} focused at {cam.get('focus')}" if cam.get('fstop') else ''),
            f"- the room's glowing surfaces (emission strengths; Cycles units): back-bar shelf strips {v.get('shelf_glow')}, "
            f"sconce shades {v.get('shade_glow')}, pendants' insides {v.get('pendant_glow')}, niche backs {v.get('niche_glow')}, "
