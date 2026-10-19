@@ -98,3 +98,14 @@ The two halves pull apart:
 - **The cap shift:** three of those four preferred A4's warmer orange-red. The retouched caps read pink, "candy" or "more synthetic".
 
 **The full retouch does not clearly beat A4 on both frames, so A4 stays as it is.** The streak half alone is the likely win, but it is untested.
+
+## The streak half alone (2026-10-19, `retouch_a4.py --streak-only`; applied)
+
+The caps are left as rendered. Only the corner streak is compressed (in the landscape the band is x 1140–1308; in the phone frame, x 760–878). The coordinator's rule for a non-owner improvement: it goes up only if it comes out ahead on both frames.
+
+| Frame | Streak first | A4 first | Average | Preferred |
+|---|---|---|---|---|
+| Landscape | 6.6 / 6.3 | 6.6 / 6.4 | **+0.25** | the streak fix, 2 of 2 |
+| Phone | 6.6 / 6.4 | 6.8 / 6.4 | **+0.3** | the streak fix, 2 of 2 |
+
+All four judges named the same change: the milky wash on the clear corner is gone, the surround's edge and the green read through, and the panel reads as clear acrylic rather than haze. **Applied over `poison_a4.png` and `poison_a4-portrait.png`.**
