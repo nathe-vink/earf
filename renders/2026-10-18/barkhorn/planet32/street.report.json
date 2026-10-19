@@ -1,0 +1,36 @@
+{
+ "shot": "studio/shots/barkhorn/planet32/final/street.json",
+ "image": "renders/2026-10-18/barkhorn/planet32/street.png",
+ "seconds": {
+  "render_total": 2460.2
+ },
+ "samples": 256,
+ "size": [
+  2400,
+  1600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "strips": 4,
+ "strip_seconds": [
+  477.7,
+  725.6,
+  706.6,
+  550.3
+ ],
+ "finish": {
+  "white_in": 236,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.1,
+  "clarity": 0.06,
+  "sharpen": 0.3,
+  "sharpen_px": 0.7,
+  "gain": 1.0169
+ },
+ "note": "rendered in horizontal strips (resumable across container restarts), stitched raw, finished once"
+}
