@@ -25,7 +25,10 @@ DEFAULT = dict(S.DEFAULT, **dict(
     sconce_w=6.0, pendant_w=60.0, pendant_cone=50.0, shelf_glow=4.0, shade_glow=0.4, niche_glow=0.6, pendant_glow=0.35,
     pendant_lamp=4.0, screen_glow=0.8, inlay_glow=0.6, etch_glow=0.05, spot_records=9.0, record_glow=1.0,
     rug_tex='poly_wool_herringbone', rug_tint='#4A4541', rug_mix=0.7, rug_value=0.9, haze=0.008,
-    wb=3300, exposure=0.0))
+    wb=3300, exposure=0.0,
+    # AgX, measured against Khronos PBR Neutral on the bar frame (README): crush 0.07 % vs 0.98, no clipping vs 0.3 %,
+    # median 27.9 vs 19.4, whites warm-white not orange (b 19 vs 2)
+    view='AgX'))
 S.DEFAULT = DEFAULT
 LOFT_KEYS = ('screen_glow', 'screen_banquette-a', 'screen_banquette-b', 'screen_lounge', 'screen_window', 'inlay_glow',
              'pendant_lamp', 'concrete_tint', 'concrete_mix', 'concrete_tex', 'floor_acg', 'floor_tint', 'floor_mix',
@@ -46,9 +49,9 @@ VIEWS = {
     'bar': {'title': 'the bar from a stool, close',
             # the den's close corner (the lead's): from a stool at 65 mm, one of the Fog pair in its niche, a frosted
             # pendant over the counter, a glass near
-            'camera': {'position': [7.5, 3.6, 1.40], 'target': [9.06, 5.9, 1.25], 'lens_mm': 50, 'level': True,
+            'camera': {'position': [7.2, 3.3, 1.35], 'target': [9.06, 5.9, 1.40], 'lens_mm': 35, 'level': True,
                        'fstop': 2.8, 'focus': [LP.NICHES[1][0] + LP.NICHES[1][1] / 2, LP.BACKBAR_Y + 0.05, 1.3]},
-            'settings': {'exposure': 0.6, 'spot_niche': 300.0, 'niche_cone': 40.0, 'niche_dy': 0.30, 'niche_aim_z': 0.9,
+            'settings': {'exposure': 0.6, 'niche_glow': 0.3, 'spot_niche': 300.0, 'niche_cone': 40.0, 'niche_dy': 0.30, 'niche_aim_z': 0.9,
                          'niche_fill': 10.0}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   'camera': {'position': [14.6, 2.0, 0.95], 'target': [16.3, 4.5, 0.75], 'lens_mm': 35, 'level': True,

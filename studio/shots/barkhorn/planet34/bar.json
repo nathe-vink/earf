@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   7.5,
-   3.6,
-   1.4
+   7.2,
+   3.3,
+   1.35
   ],
   "target": [
    9.06,
    5.9,
-   1.25
+   1.4
   ],
-  "lens_mm": 50,
+  "lens_mm": 35,
   "level": true,
   "fstop": 2.8,
   "focus": [
@@ -167,7 +167,7 @@
     "rug_mix": 0.7,
     "rug_value": 0.9,
     "neighbour_plain": true,
-    "niche_glow": 0.6,
+    "niche_glow": 0.3,
     "flat_glow": 0.06,
     "screen_glow": 0.8,
     "inlay_glow": 0.6,
@@ -1184,7 +1184,7 @@
   "denoise": true,
   "clamp": 10,
   "bounces": 10,
-  "view": "Khronos PBR Neutral",
+  "view": "AgX",
   "look": "None",
   "exposure": 0.6,
   "white_balance_k": 3300,

@@ -45,8 +45,14 @@ The response, round 34 (`loft/`). It keeps the den's footprint: a 20 ft (6.1 m) 
   Marcelis's acrylic, Brooklyn's listening rooms. Its explicit checks are premium acrylic, real concrete, timber and
   steel at 1:1, dim but readable (numeric floors), cozy, and one colour.
 - **Pipeline:** scanned CC0 materials (Poly Haven and ambientCG), a thick-acrylic shader (rough transmission, volume
-  absorption, polished edges), and modelled shades in place of IES profiles (none were to hand). The view transform is
-  measured, AgX against Khronos PBR Neutral, before one is chosen.
+  absorption, polished edges), and modelled shades in place of IES profiles (none were to hand). The view transform was
+  measured on the bar frame before choosing. AgX against Khronos PBR Neutral at the same exposure:
+  - frame median 27.9 against 19.4;
+  - crush 0.07 % against 0.98 %;
+  - clipping 0 against 0.3 %;
+  - blue median 19 against 2, so whites stay warm-white rather than orange.
+  AgX is used. Round 32 left it for PBR Neutral because AgX bleached saturated panels, so the Ember frame is
+  checked for that.
 - **The products:** Fog at the bar and Ember in the listening room, as before. Bell is in Fog (opal white), so no frame
   carries a second colour.
 
