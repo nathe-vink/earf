@@ -682,7 +682,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .photo .off { opacity: 0 }
 .show-off .photo .on { opacity: 0 }
 .show-off .photo .off { opacity: 1 }
-.about { padding: 14px 16px 18px; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: 4px; min-width: 0 }
+.about { padding: 14px 16px 18px; display: grid; grid-template-rows: auto auto 1fr auto auto; gap: 4px; min-width: 0 }  /* the line takes the slack, so a row's specs and links align */
 .photo { color: var(--card-ink) }
 .about .num { margin: 0; display: flex; align-items: center; gap: 8px; font: 500 12px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase }
 .about h3.named { display: flex; align-items: center; gap: 0.3em }
