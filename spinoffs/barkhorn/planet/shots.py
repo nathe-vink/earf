@@ -210,7 +210,7 @@ VIEWS = {
                # from across the road (reframed after the first final read as a massing model): the lit shopfront
                # filling the frame, the flats above cropped at the cornice, the wet road carrying its reflection
                'camera': {'position': [5.9, -15.2, 1.55], 'target': [5.9, 0.0, 1.45], 'lens_mm': 50, 'level': True},
-               'settings': {'sky': 0.012, 'sky_zenith': '#0A0C12', 'sky_horizon': '#3A3026', 'exposure': 0.6, 'wb': 4200,
+               'settings': {'sky': 0.0, 'sky_zenith': '#0A0C12', 'sky_horizon': '#3A3026', 'exposure': 0.6, 'wb': 4200,
                             'wb_tint': 0.0, 'across_glow': 0.08, 'road_rough': 0.12, 'wet': True,
                             'window_sign': True}},
 }

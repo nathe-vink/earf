@@ -801,8 +801,8 @@ def street(bpy, kit, p, objs):
         tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
         nz.inputs['Scale'].default_value = 0.35; nz.inputs['Detail'].default_value = 6.0
         nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
-        mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = 0.42; mr.inputs['From Max'].default_value = 0.6
-        mr.inputs['To Min'].default_value = 0.02; mr.inputs['To Max'].default_value = 0.35
+        mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = 0.35; mr.inputs['From Max'].default_value = 0.62
+        mr.inputs['To Min'].default_value = 0.005; mr.inputs['To Max'].default_value = 0.2
         nt.links.new(nz.outputs['Fac'], mr.inputs['Value']); nt.links.new(mr.outputs['Result'], rb.inputs['Coat Roughness'])
     objs.append(rd.object(bpy, rm))
     across = Mesh('sidewalk-across'); across.box(-60.0, -20.0, -0.2, L + 40.0, -16.0, 0.0)
@@ -868,24 +868,33 @@ def street(bpy, kit, p, objs):
     objs.append(acr_w.object(bpy, emitter(bpy, 'across-lit', '#FFC488', p.get('across_glow', 0.22))))
     objs.append(acr_d.object(bpy, principled(bpy, 'dark-glass', '#0A0B0D', rough=0.03, spec=0.6)))
     if p.get('window_sign'):
-        # EARF in frosted white on the glass, in the window's top-left pane, read from the street (+x left to right)
-        ws = Mesh('window-sign'); W = P.WINDOW
-        x0, zc, lh, lw, t = W['x0'] + 0.30, 2.95, 0.15, 0.13, 0.012
-        y0, y1 = -0.079, -0.077
-        def st(a, b, c, d):
-            ws.box(a, y0, b, c, y1, d)
-        for i in range(4):
-            a = x0 + i * (lw + 0.05); b = a + lw; zb, ztp = zc - lh / 2, zc + lh / 2; zm = zc
-            st(a, zb, a + t, ztp)                                                  # each letter's stem
-            if i in (0, 3):                                                        # E and F: top and middle bars
-                st(a, ztp - t, b, ztp); st(a, zm - t / 2, b - 0.02, zm + t / 2)
-                if i == 0:
-                    st(a, zb, b, zb + t)                                           # E's foot
-            if i == 1:                                                             # A: right stem, top, crossbar
-                st(b - t, zb, b, ztp); st(a, ztp - t, b, ztp); st(a, zm - t / 2, b, zm + t / 2)
-            if i == 2:                                                             # R: top, bowl, crossbar, leg
-                st(a, ztp - t, b, ztp); st(b - t, zm, b, ztp); st(a, zm - t / 2, b, zm + t / 2); st(b - t, zb, b, zm)
-        objs.append(ws.object(bpy, principled(bpy, 'frosted-vinyl', '#F4F1EA', rough=0.6, emit='#FFF4E6', strength=0.25)))
+        # EARF's own wordmark (marks.py's shapes, the R with its ring), etched frosted on the glass in the window's
+        # top-left pane, read from the street (+x left to right); a matte, light-scattering etch, not lit
+        from mathutils.geometry import tessellate_polygon
+        sys.path.insert(0, os.path.join(ROOT, 'spinoffs', 'barkhorn'))
+        import marks as MK
+        W = P.WINDOW; wdt = p.get('sign_w', 1.05); sc = wdt / MK.WORDMARK_W
+        x0, z0, yg = W['x0'] + 0.22, 2.80, -0.0865                  # just street-side of the glass sheet
+        def circ(cx, cy, r):
+            return [(cx + r * math.cos(t), cy + r * math.sin(t)) for t in (2 * math.pi * k / 72 for k in range(72))]
+        bm = bmesh.new()
+        for sh in MK.WORDMARK:
+            holes = []
+            if sh[0] == 'rect':
+                a0, b0, a1, b1 = sh[1:5]; pts = [(a0, b0), (a1, b0), (a1, b1), (a0, b1)]
+            elif sh[0] == 'circle':
+                pts = circ(*sh[1:4])
+            elif sh[0] == 'ring':
+                pts, holes = circ(sh[1], sh[2], sh[3]), [circ(sh[1], sh[2], sh[4])]
+            else:
+                pts = list(sh[1:])
+            loops = [[Vector((x0 + u * sc, yg, z0 + (300 - v) * sc)) for u, v in lp] for lp in [pts] + holes]
+            for tri in tessellate_polygon(loops):
+                flat = [v for lp in loops for v in lp]
+                f = bm.faces.new([bm.verts.new(flat[i]) for i in tri]); f.normal_update()
+        me = bpy.data.meshes.new('window-sign'); bm.to_mesh(me); bm.free()
+        me.materials.append(principled(bpy, 'frosted-etch', '#EDEBE6', rough=0.85, spec=0.2, emit='#FFF4E6', strength=0.06))
+        ob = bpy.data.objects.new('window-sign', me); bpy.context.scene.collection.objects.link(ob); objs.append(ob)
     # the small neon EARF sign over the door: four letters as glowing tubes on a bracket (a stand-in for the
     # wordmark's own tubes)
     neon = Mesh('neon'); N = P.NEON
