@@ -121,14 +121,17 @@ VIEWS = {
                                      'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
                           'settings': {'colourway': 'oxblood', 'exposure': 0.35, 'wb': 2700}},
     'street': {'title': 'the shopfront at night, from the kerb',
-               'camera': {'position': [-2.6, 3.0, 1.55], 'target': [7.4, 4.3, 1.4], 'lens_mm': 35, 'level': True,
-                          'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
-               'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 200.0,
-                            'screen_window': 0.45, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 120.0,
+               # after the two critics on p1 (5.0, 5.0): over-exposed under a veil, the mullion through the altar, the
+               # etched name a beige square, the lightbox too bright, no reflections: 32 mm with the mullion on a third,
+               # exposure down, the etch unlit, the lightbox down, a lamp behind the camera for the glass
+               'camera': {'position': [-3.2, 2.2, 1.5], 'target': [17.0, 3.4, 1.35], 'lens_mm': 32, 'level': True,
+                          'fstop': 5.6, 'focus': [0.0, 3.0, 1.6]},
+               'settings': {'exposure': 1.2, 'etch_glow': 0.0, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 200.0,
+                            'screen_window': 0.27, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 300.0,
                             'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 45.0, 'entry_cone': 100.0,
                             'transom_glow': 0.15, 'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440',
                             'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5,
-                            'glass_gloss': 3.0, 'haze': 0.008}},
+                            'glass_gloss': 3.0, 'haze': 0.003}},
     'sink': {'title': 'the sink, a detail',
              # after the two critics on p1 (3.0, 4.0): the trough a black box with a red lid, the wall lit instead,
              # a dead black strip at the left: a glowing core cast inside it; the boards darker and varied; turned right

@@ -1,0 +1,394 @@
+{
+ "stage1": {
+  "impression": "A view from the street through a shopfront into a long, warm listening bar: a curved counter, a lit record wall, banquettes, and two small red speakers at the far end. It reads as a competent but soft CG render. A uniform brown haze flattens everything, and the glass shows no reflections, so there is no sense of standing outside it. The EARF pair, the reason for the room, is a pair of tiny red tiles that read like signage, and two green glows compete with them. As it stands a magazine would see a generic warm bar, not a specific place: the altar, the zinc and the etched name do not register.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember pair must read as the hero at a glance: larger in frame (at least 6% of frame height each) and not blown (clip_pct < 2 on the cabinets)",
+  "The glass must behave like glass seen from the kerb: faint reflections of the street lamps and the street, with the etched name reading as frosted letters cut into clear glass, not a beige square patch",
+  "Frame lum_median 30 to 48 with real blacks (lum_p5 <= 10) and pools of light separated by dark; at the moment haze and exposure give a flat, uniform mid-tone",
+  "The steel mullion must not split the frame at its centre or sit against the left speaker",
+  "The counter must read as zinc (cool, grey, patinated metal sheen) against the fir and concrete; it reads as warm brown timber now",
+  "Materials at 1:1 (floor, concrete, beams) need texture and grain, not smooth smeared surfaces"
+ ],
+ "defects": [
+  {
+   "region": [
+    403,
+    232,
+    420,
+    268
+   ],
+   "what": "Left Ember speaker: 10% clipped, half hidden by the mullion, about 36 px tall at proof scale; reads as a red sign with a white disc"
+  },
+  {
+   "region": [
+    478,
+    232,
+    502,
+    268
+   ],
+   "what": "Right Ember speaker: 13.7% clipped, its face blown to pink-white; the acrylic does not read as tinted cast acrylic with batts inside"
+  },
+  {
+   "region": [
+    392,
+    0,
+    408,
+    480
+   ],
+   "what": "Black steel mullion runs down the exact centre of the frame and cuts into the altar"
+  },
+  {
+   "region": [
+    80,
+    118,
+    138,
+    208
+   ],
+   "what": "Etched name: reads as an opaque beige square sticker with a dark E, not frosted letters in clear glass"
+  },
+  {
+   "region": [
+    0,
+    20,
+    100,
+    440
+   ],
+   "what": "Frosted lightbox: a flat, even field (median 94, range 93) covering about 12% of the frame; the dancer silhouette is a vague smudge and the box reads as signage"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No reflections on the shopfront glass at all; the street lamps leave no trace on the glass or the steel"
+  },
+  {
+   "region": [
+    380,
+    170,
+    560,
+    300
+   ],
+   "what": "Back of the room veiled by haze (p5 23, no true dark); the green Domes over the altar add a second saturated colour beside the red speakers"
+  },
+  {
+   "region": [
+    140,
+    60,
+    310,
+    270
+   ],
+   "what": "The record wall is the brightest large area in the frame (median 112) and pulls the eye away from the altar; the record spines read as a repeated texture"
+  },
+  {
+   "region": [
+    265,
+    262,
+    385,
+    280
+   ],
+   "what": "Counter top reads warm brown and wood-like (r131 g98 b78), not zinc"
+  },
+  {
+   "region": [
+    400,
+    380,
+    720,
+    480
+   ],
+   "what": "Floor is smooth and smeared by the denoiser, with no polish texture or aggregate; light falls off evenly with no pools"
+  },
+  {
+   "region": [
+    515,
+    270,
+    720,
+    400
+   ],
+   "what": "Rows of identical stools and tables in a regular line read as one model copied many times"
+  },
+  {
+   "region": [
+    470,
+    195,
+    500,
+    225
+   ],
+   "what": "Glowing green Dome cover above the speaker floats like an emissive blob with no light falling from it"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speakers are tiny and the mullion bisects the frame right beside the left speaker.",
+   "evidence": {
+    "region": [
+     392,
+     170,
+     520,
+     300
+    ],
+    "measured": "speakers about 36 px tall of 480 (7.5%), about 20 px wide; mullion edge at x 392 to 408, touching the left cabinet at x 403"
+   },
+   "change": {
+    "setting": "camera position, target and lens",
+    "from": "position [-2.6, 3.0, 1.55], target [7.4, 4.3, 1.4], 35 mm",
+    "to": "position [-1.2, 2.4, 1.45], target [16.0, 3.6, 1.2], 45 mm; check that the shopfront frame still borders the left and right edges, and that the mullion falls at about 0.3 of the width, clear of the altar"
+   },
+   "expected": "The Ember pair grows to about 10 to 12% of frame height and sits on a third line, unobstructed; the shopfront still frames the picture as seen from the kerb.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frame is too bright and flat for night, with no real blacks.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 60.1 (target 22 to 50), lum_p5 16.8, below_40 only 27%"
+   },
+   "change": {
+    "setting": "render exposure; haze density",
+    "from": "exposure 1.7; haze 0.008",
+    "to": "exposure 1.2; haze 0.003"
+   },
+   "expected": "Frame median about 40, blacks to about 8, the back of the room clears so the altar separates from its wall.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     48
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Ember cabinets are blown, so the tinted acrylic and the batts behind it read as a flat pink sign.",
+   "evidence": {
+    "region": [
+     478,
+     232,
+     502,
+     268
+    ],
+    "measured": "clip_pct 13.66, lum_p95 216; left cabinet clip 9.97"
+   },
+   "change": {
+    "setting": "lamps on each Ember speaker; altar spots",
+    "from": "4 x area 14.0 W/m2; altar 2 x spot 40 W cone 40 deg",
+    "to": "4 x area 7.0 W/m2; altar 2 x spot 60 W, cone 28 deg, aimed at the floor in front of and the plinth under the pair so they sit in a pool"
+   },
+   "expected": "The cabinets hold deep red with visible depth and edge glow, ringed by a pool of warm light on the altar; no clipping.",
+   "accept": {
+    "region": [
+     478,
+     232,
+     502,
+     268
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The record wall is the brightest large area and steals the eye from the altar.",
+   "evidence": {
+    "region": [
+     140,
+     60,
+     310,
+     270
+    ],
+    "measured": "lum_median 111.7, brighter than the altar region (67.7)"
+   },
+   "change": {
+    "setting": "record wall spots",
+    "from": "4 x spot 30 W, cone 34 deg",
+    "to": "4 x spot 14 W, cone 24 deg, so the spines catch scalloped pools with dark between them"
+   },
+   "expected": "The record wall drops to a secondary pool, median about 55 to 65 after the exposure change, with visible scallops.",
+   "accept": {
+    "region": [
+     140,
+     60,
+     310,
+     270
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The etched name reads as a beige opaque patch, and the glass shows no reflection, so the kerb viewpoint does not read.",
+   "evidence": {
+    "region": [
+     80,
+     118,
+     138,
+     208
+    ],
+    "measured": "uniform beige square (median 83, r110 g77 b57) around a dark E; whole glass plane has no specular events"
+   },
+   "change": {
+    "setting": "the window's etched name emission; shopfront glass finish",
+    "from": "etched name 0.01 over a square region; glass with no visible reflection",
+    "to": "etched name 0.0, with frosted roughness (about 0.4) on the letter shapes only and the rest of the glass clear; glass Fresnel reflection kept on so the three street lamps and the kerb show as faint (3 to 6%) reflections, plus a slight smudge or roughness map"
+   },
+   "expected": "Frosted letters catch the room's light from behind, the glass between them is clear, and faint street-lamp reflections place the viewer outside.",
+   "accept": {
+    "region": [
+     80,
+     118,
+     138,
+     208
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The frosted lightbox is a big, flat, bright field that reads as signage, with the silhouette lost in it.",
+   "evidence": {
+    "region": [
+     0,
+     20,
+     100,
+     440
+    ],
+    "measured": "lum_median 94, p95 105: an even field over 12% of the frame"
+   },
+   "change": {
+    "setting": "the lightbox's emission (screens' brightness) and the frosted acrylic's roughness",
+    "from": "even emission at about frame median x1.6; high roughness",
+    "to": "emission down about 40% with a soft top-to-bottom gradient from back-lighting; roughness lowered a little so the dancer's silhouette sharpens at its nearest points"
+   },
+   "expected": "The box glows softly at about 55 to 65 median with a readable figure, as a frosted panel and not a lightbox sign.",
+   "accept": {
+    "region": [
+     0,
+     20,
+     100,
+     440
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The counter's zinc does not read; the top looks like warm wood.",
+   "evidence": {
+    "region": [
+     265,
+     262,
+     385,
+     280
+    ],
+    "measured": "r131 g98 b78, warm brown; no cool metallic sheen"
+   },
+   "change": {
+    "setting": "zinc patina finish",
+    "from": "current zinc (reads warm, matte)",
+    "to": "zinc with lower roughness (about 0.3), a cool grey base near #8A8D8C with a mottled patina map, so the Dome downlights land as soft elongated highlights"
+   },
+   "expected": "The counter top reads as grey metal with soft hot spots under the Domes, set against the fir.",
+   "accept": {
+    "region": [
+     265,
+     262,
+     385,
+     280
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 85
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The floor and lower room are smooth and smeared, with no pools of light.",
+   "evidence": {
+    "region": [
+     400,
+     380,
+     720,
+     480
+    ],
+    "measured": "lum_range 67.8 and a monotonic falloff of 98 to 47 with no pools; smeared texture on the crop"
+   },
+   "change": {
+    "setting": "floor polish and denoise",
+    "from": "smooth floor; denoise on with adaptive 0.02",
+    "to": "polished concrete with an aggregate and trowel map, roughness about 0.25 so the Domes and table lamps reflect as soft pools; adaptive threshold 0.01 to cut denoiser smear"
+   },
+   "expected": "Pools of reflected light under the tables and counter; the floor has texture at 1:1.",
+   "accept": {
+    "region": [
+     400,
+     380,
+     720,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 90
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Swap the green Dome covers over the altar for smoked ones, so the red speakers are the only saturated colour",
+   "why": "The Dome covers are an EARF product and the bottle-green zone is fixed room design; it is the owner's call"
+  },
+  {
+   "request": "Vary the identical stools and tables (mixed pieces, slight rotation, things left on them)",
+   "why": "The seats are fixed by the room's design; only their placement and small props could help, and rotating them may count as a layout change"
+  },
+  {
+   "request": "Make the speakers bigger in frame beyond what the lens allows",
+   "why": "The altar is at the back wall 17 m deep by design; from the kerb the hero will always be small, so a closer shot is needed for the speaker to dominate"
+  }
+ ],
+ "score_if_fixed": 6.8
+}

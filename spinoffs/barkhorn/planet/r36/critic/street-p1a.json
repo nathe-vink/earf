@@ -1,0 +1,423 @@
+{
+ "stage1": {
+  "impression": "A night view from the kerb through a steel shopfront into a long, warm, timber-ceilinged bar: it is readable and pleasant, but it is lit far too evenly and too brightly for a night room. A milky veil sits over the back half, and the two Ember speakers at the far end are thumbnail-sized salmon rectangles that read as screens or signs, not as an altar. The glass has no reflections, so the 'E' reads as a beige card pasted in the air. At this distance it reads as a generic, nicely furnished restaurant: the record wall and the lightbox hint at a specific place, but a magazine would not run it as one yet.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Frame lum_median at 32-48 with real pools of light and dark between them; at present the room is evenly filled (median 60.1)",
+  "The Ember pair has to read at a glance as deep red tinted acrylic cabinets on an altar, not clipped salmon rectangles. Today it shows clip 6-12 % and dE2000 17.5 against red, and the mullion splits the view between them",
+  "The shopfront glass has to read as glass: faint street-lamp and kerb reflections across it, an etched name that is translucent and edge-lit rather than an opaque beige panel, and steel with patina",
+  "The back third needs contrast; haze is flattening it (p5 48.5 in the altar zone)",
+  "The lightbox dancer has to be legible as a figure, and the frame needs a clear reason it is a shopfront shot rather than a doorway view",
+  "1:1 craft: concrete floor with formwork/trowel variation and pendant reflections, no denoiser smear on the record spines, and no row of identical stools reading as copies"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Overall overexposed for a night interior: lum_median 60.1 against a target of 22-50, and 27 % of pixels below 40, so the shadows are thin"
+  },
+  {
+   "region": [
+    400,
+    230,
+    425,
+    270
+   ],
+   "what": "Left Ember speaker: clip 6.1 %, lum_p95 208, reads pink-salmon; half hidden behind the centre mullion"
+  },
+  {
+   "region": [
+    478,
+    230,
+    502,
+    270
+   ],
+   "what": "Right Ember speaker: clip 12.3 %, r/g/b medians 183/104/93 (salmon, not deep red), dE2000 17.5 against #C8102E; reads as a lit screen or sign"
+  },
+  {
+   "region": [
+    390,
+    0,
+    410,
+    480
+   ],
+   "what": "Centre steel mullion splits the frame exactly between the two speakers and through the vanishing point"
+  },
+  {
+   "region": [
+    140,
+    40,
+    310,
+    270
+   ],
+   "what": "Record wall is the brightest large surface in the frame (median 106) and pulls the eye away from the altar; the spines are smeared by the denoiser"
+  },
+  {
+   "region": [
+    620,
+    140,
+    720,
+    400
+   ],
+   "what": "Banquette wall evenly washed (median 98), with no falloff between the sconces and tables; reads as a showroom"
+  },
+  {
+   "region": [
+    420,
+    190,
+    560,
+    290
+   ],
+   "what": "Haze veil over the altar zone: p5 48.5, so no true blacks behind the speakers, and the back looks foggy rather than atmospheric"
+  },
+  {
+   "region": [
+    80,
+    115,
+    140,
+    210
+   ],
+   "what": "Etched 'E' on the glass reads as an opaque beige rectangle floating in space, not as etching in glass"
+  },
+  {
+   "region": [
+    0,
+    20,
+    105,
+    440
+   ],
+   "what": "Frosted lightbox glows as a flat mauve-grey card (lum_range 94 across it, but no edge glow or falloff); only a cropped fragment of the dancer is visible, so the figure is illegible"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Shopfront glass shows no reflection of the street, kerb or street lamps, so there is no evidence the camera is outside behind glass"
+  },
+  {
+   "region": [
+    150,
+    400,
+    720,
+    480
+   ],
+   "what": "Floor is a flat brown with no pendant reflections, trowel marks or wear; it reads as CG"
+  },
+  {
+   "region": [
+    370,
+    260,
+    600,
+    370
+   ],
+   "what": "Identical stools and bistro tables repeated down the room read as copies of one model"
+  },
+  {
+   "region": [
+    455,
+    195,
+    500,
+    225
+   ],
+   "what": "Green objects (lamps or plants) at the back compete with the red speakers for the only saturated colour"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The frame is too bright for a night room, so the light pools and the darkness between them are lost.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 60.1, lum_mean 69.0, below_40 only 27.4 %"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.7",
+    "to": "1.15"
+   },
+   "expected": "The whole room drops about two-thirds of a stop; the practicals and pools hold, and the walls and ceiling fall into warm shadow.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     32,
+     48
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Ember speakers are over-lit from the front, so their red clips to salmon and they read as glowing screens rather than tinted acrylic.",
+   "evidence": {
+    "region": [
+     478,
+     230,
+     502,
+     270
+    ],
+    "measured": "clip_pct 12.3, r/g/b median 183/104/93, dE2000 17.5 vs #C8102E"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area (W/m2 at the target); the altar 2 x spot",
+    "from": "14.0 W/m2 at 2900 K; altar 40 W",
+    "to": "6.0 W/m2 at 2700 K; altar spots 55 W with cone 30 deg, aimed to rake the cabinets from above and behind so the light passes through the acrylic"
+   },
+   "expected": "The cabinets read as deep translucent red with glowing edges, and the white batts show through; there is no clipping on the faces.",
+   "accept": {
+    "region": [
+     478,
+     230,
+     502,
+     270
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.5
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The record wall is the brightest large surface and steals the hero role from the altar.",
+   "evidence": {
+    "region": [
+     140,
+     40,
+     310,
+     270
+    ],
+    "measured": "lum_median 106.2, p95 163.5 (the speaker region's median is 82-120)"
+   },
+   "change": {
+    "setting": "the record wall 4 x spot",
+    "from": "30.0 W, cone 34 deg",
+    "to": "14.0 W, cone 24 deg, so the spines get scallops with dark gaps between them"
+   },
+   "expected": "The record wall becomes a secondary, scalloped glow; the eye travels down the room to the altar.",
+   "accept": {
+    "region": [
+     140,
+     40,
+     310,
+     270
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "Haze puts a milky veil over the back third, so there are no true darks behind the speakers.",
+   "evidence": {
+    "region": [
+     420,
+     190,
+     560,
+     290
+    ],
+    "measured": "lum_p5 48.5, lum_range 85.9"
+   },
+   "change": {
+    "setting": "haze in the room's air (density)",
+    "from": "0.008 per metre",
+    "to": "0.003 per metre"
+   },
+   "expected": "The altar zone gains depth and black; the beams of the spots stay faintly visible.",
+   "accept": {
+    "region": [
+     420,
+     190,
+     560,
+     290
+    ],
+    "metric": "lum_p5",
+    "op": "<",
+    "value": 25
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The shopfront glass shows no reflections and the etched name reads as an opaque beige card, so the frame does not read as taken from the kerb through glass.",
+   "evidence": {
+    "region": [
+     80,
+     115,
+     140,
+     210
+    ],
+    "measured": "the 'E' panel is a uniform median 81 with hard rectangular edges and no translucency; no street reflections anywhere on the glass"
+   },
+   "change": {
+    "setting": "the window's etched name emission, the street lamps, and the glass finish",
+    "from": "etched name 0.01 emission on an opaque panel; street lamps 3 x 200 W with no visible reflection",
+    "to": "etched letters only (no backing rectangle), a frosted roughness of about 0.4 on clear glass, emission 0; let the street lamps (raise to 300 W, with one placed behind and to the side of the camera) give a soft reflection of the kerb and a lamp streak across the lower glass at about 8-12 % reflectance"
+   },
+   "expected": "The 'E' reads as acid-etched glass that catches the interior light at its edges, and faint reflections place the viewer outside on the street.",
+   "accept": {
+    "region": [
+     80,
+     115,
+     140,
+     210
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 60
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The banquette wall is washed evenly, with no pools at the tables.",
+   "evidence": {
+    "region": [
+     620,
+     140,
+     720,
+     400
+    ],
+    "measured": "lum_median 98.2, p5 26.7 (the brightest wall in the room after the records)"
+   },
+   "change": {
+    "setting": "the Orbs and the street-lamp spill on the right wall",
+    "from": "each Orb 6.0 W, glow 0.6",
+    "to": "each Orb 4.0 W, glow 0.8, so the light sits on the table tops and the wall between the tables falls dark"
+   },
+   "expected": "Distinct pools on each table, with the wall between them in shadow.",
+   "accept": {
+    "region": [
+     620,
+     140,
+     720,
+     400
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The centre mullion sits on the vanishing point and splits the Ember pair, and the lightbox dancer is cropped to an unreadable fragment.",
+   "evidence": {
+    "region": [
+     390,
+     0,
+     410,
+     480
+    ],
+    "measured": "the mullion runs x 392-408, between the speakers at x 400-425 and 478-502; only about 30 % of the dancer is in frame at x 0-60"
+   },
+   "change": {
+    "setting": "camera position and target",
+    "from": "position [-2.6, 3.0, 1.55], target [7.4, 4.3, 1.4], 35 mm",
+    "to": "position [-3.2, 2.2, 1.5], target [17.0, 3.4, 1.35], 32 mm, so the mullion falls on a third and clear of the altar, and the full dancer silhouette sits in the left fifth"
+   },
+   "expected": "The altar sits in one clear pane at the end of the room's perspective; the lightbox reads as a figure and frames the left edge.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     32,
+     48
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The floor is a flat CG brown with no polish, wear or pendant reflections.",
+   "evidence": {
+    "region": [
+     150,
+     400,
+     720,
+     480
+    ],
+    "measured": "lum_median 44.5, lum_range 68.5, r/g/b 61/41/31 with no specular streaks under the Domes"
+   },
+   "change": {
+    "setting": "the floor's polish",
+    "from": "the current matte finish",
+    "to": "honed concrete, roughness 0.25-0.35 with a roughness map from trowel swirls and wear paths, warm grey base #5A534B"
+   },
+   "expected": "Soft elongated reflections of the Domes and the altar's red down the floor, giving depth and a real surface.",
+   "accept": {
+    "region": [
+     150,
+     400,
+     720,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 90
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Remove or desaturate the green objects near the altar so the red speakers carry the only saturated colour",
+   "why": "The card fixes the zone and its deep bottle-green colour; a green-red clash at the altar is a design decision for the owner"
+  },
+  {
+   "request": "Vary the stools and bistro tables so they do not read as one repeated model",
+   "why": "The seats are fixed by the room's design; only a set change approved by the owner could vary them"
+  },
+  {
+   "request": "Make the counter read as zinc rather than fluted timber",
+   "why": "The counter is fixed design; if the model shows timber where the brief says zinc, that is a model or spec question, not a picture fix"
+  },
+  {
+   "request": "Render at the full 2400 x 1600 to judge the denoiser smear on the record spines and the material grain at 1:1",
+   "why": "This proof is at scale 0.3; craft at 1:1 cannot be judged from it"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
