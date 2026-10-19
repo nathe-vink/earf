@@ -121,6 +121,24 @@ def lit_acrylic(bpy, name, color, glow, deep=None, rough=0.04, ramp=None):
     return m
 
 
+def thin_glass(bpy, gloss=1.0, name='thin-glass'):
+    """Plate glass as a thin sheet: what is behind passes straight through, and the face mirrors by Fresnel (IOR 1.5)."""
+    if name in _M:
+        return _M[name]
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent'); gs = nt.nodes.new('ShaderNodeBsdfGlossy')
+    gs.inputs['Roughness'].default_value = 0.02
+    fr = nt.nodes.new('ShaderNodeFresnel'); fr.inputs['IOR'].default_value = 1.5
+    mul = nt.nodes.new('ShaderNodeMath'); mul.operation = 'MULTIPLY'; mul.inputs[1].default_value = gloss
+    nt.links.new(fr.outputs['Fac'], mul.inputs[0])
+    mx = nt.nodes.new('ShaderNodeMixShader')
+    nt.links.new(mul.outputs['Value'], mx.inputs['Fac']); nt.links.new(tr.outputs['BSDF'], mx.inputs[1])
+    nt.links.new(gs.outputs['BSDF'], mx.inputs[2]); nt.links.new(mx.outputs['Shader'], out.inputs['Surface'])
+    _M[name] = m
+    return m
+
+
 def stone(bpy, name='basalt'):
     """Honed basalt: near black, a fine grey speckle and a faint cloud, honed (a soft sheen, not a mirror)."""
     if name in _M:
@@ -336,8 +354,12 @@ def window_and_door(bpy, kit, p, objs):
     fr.box(W['x0'], -0.12, 2.55, W['x1'], -0.05, 2.55 + f)                   # the transom bar
     fr.box(W['x0'] - 0.02, -0.30, W['sill'] - 0.02, W['x1'] + 0.02, 0.02, W['sill'])   # the sill
     objs.append(fr.object(bpy, principled(bpy, 'bronze-anodised', '#2E2A25', rough=0.38, metal=0.9)))
-    gl = Mesh('glass'); gl.box(W['x0'], -0.09, W['sill'], W['x1'], -0.08, W['head'])
-    objs.append(gl.object(bpy, principled(bpy, 'window-glass', '#FFFFFF', rough=0.0, trans=1.0, ior=1.5)))
+    # the glass as one thin sheet: clear, with a Fresnel gloss (a 10 mm slab drew a bright stripe across the room
+    # in the street final, a refraction artefact; it went with the glass)
+    gl = Mesh('glass'); gl.quad([(W['x0'], -0.085, W['sill']), (W['x1'], -0.085, W['sill']), (W['x1'], -0.085, W['head']),
+                                 (W['x0'], -0.085, W['head'])])
+    if not p.get('no_glass'):
+        objs.append(gl.object(bpy, thin_glass(bpy, p.get('glass_gloss', 1.0))))
     # the plain door: blackened steel, a pull, a slot of a window at eye height left out (it is plain)
     # (it fills its opening: a 10 mm gap round it let the street lamp's light in as fireflies)
     dr = Mesh('door'); dr.box(-0.12, Dr['y0'] - 0.002, 0.0, -0.05, Dr['y1'] + 0.002, Dr['h'] + 0.002)
@@ -770,7 +792,19 @@ def street(bpy, kit, p, objs):
     curb = Mesh('curb'); curb.box(-4.05, -4.05, -0.2, L + 40.0, -3.9, 0.0); curb.box(-60.0, -4.05, -0.2, -16.0, -3.9, 0.0); curb.box(-4.05, -3.9, -0.2, -3.9, D + 12.0, 0.0)
     objs.append(curb.object(bpy, principled(bpy, 'curb', '#8A8781', rough=0.8)))
     rd = Mesh('road'); rd.box(-60.0, -16.0, -0.35, L + 40.0, -4.05, -0.15); rd.box(-16.0, -4.05, -0.35, -4.05, D + 40.0, -0.15)
-    objs.append(rd.object(bpy, _pbr(bpy, kit, 'asphalt_02', res='2k', tint='#3A3A3C', tint_mix=0.4, rough_mul=p.get('road_rough', 0.4))))
+    rm = _pbr(bpy, kit, 'asphalt_02', res='2k', tint='#3A3A3C', tint_mix=0.4, rough_mul=p.get('road_rough', 0.4))
+    if p.get('wet'):
+        # after rain: a film of water over the asphalt, mirror-smooth in the puddles, rougher where it has dried
+        rm = rm.copy(); rm.name = 'asphalt-wet'; nt = rm.node_tree
+        rb = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+        _set(rb, 'Coat Weight', 1.0); _set(rb, 'Coat IOR', 1.33)
+        tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+        nz.inputs['Scale'].default_value = 0.35; nz.inputs['Detail'].default_value = 6.0
+        nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+        mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = 0.42; mr.inputs['From Max'].default_value = 0.6
+        mr.inputs['To Min'].default_value = 0.02; mr.inputs['To Max'].default_value = 0.35
+        nt.links.new(nz.outputs['Fac'], mr.inputs['Value']); nt.links.new(mr.outputs['Result'], rb.inputs['Coat Roughness'])
+    objs.append(rd.object(bpy, rm))
     across = Mesh('sidewalk-across'); across.box(-60.0, -20.0, -0.2, L + 40.0, -16.0, 0.0)
     objs.append(across.object(bpy, _pbr(bpy, kit, 'concrete_pavement', res='2k', tint='#77746F', tint_mix=0.3)))
     # the building: a three-storey corner building, stucco, the shop below; the flats' windows
@@ -809,7 +843,7 @@ def street(bpy, kit, p, objs):
     xb = -30.0
     while xb < L + 30.0:
         w = rnd.uniform(7.0, 11.0); h = rnd.uniform(9.0, 14.0)
-        acr.box(xb, -32.0, 0.0, xb + w - 0.15, -20.0, h)
+        acr.box(xb, -32.0, 0.0, xb + w - 0.001, -20.0, h)
         for storey in range(int((h - 4.0) / 3.4)):
             z0 = 4.6 + storey * 3.4
             for k in range(int((w - 1) / 2.2)):
@@ -833,6 +867,25 @@ def street(bpy, kit, p, objs):
     objs.append(acr.object(bpy, _pbr(bpy, kit, 'white_stucco_02', res='1k', tint='#8C8780', tint_mix=0.5)))
     objs.append(acr_w.object(bpy, emitter(bpy, 'across-lit', '#FFC488', p.get('across_glow', 0.22))))
     objs.append(acr_d.object(bpy, principled(bpy, 'dark-glass', '#0A0B0D', rough=0.03, spec=0.6)))
+    if p.get('window_sign'):
+        # EARF in frosted white on the glass, in the window's top-left pane, read from the street (+x left to right)
+        ws = Mesh('window-sign'); W = P.WINDOW
+        x0, zc, lh, lw, t = W['x0'] + 0.30, 2.95, 0.15, 0.13, 0.012
+        y0, y1 = -0.079, -0.077
+        def st(a, b, c, d):
+            ws.box(a, y0, b, c, y1, d)
+        for i in range(4):
+            a = x0 + i * (lw + 0.05); b = a + lw; zb, ztp = zc - lh / 2, zc + lh / 2; zm = zc
+            st(a, zb, a + t, ztp)                                                  # each letter's stem
+            if i in (0, 3):                                                        # E and F: top and middle bars
+                st(a, ztp - t, b, ztp); st(a, zm - t / 2, b - 0.02, zm + t / 2)
+                if i == 0:
+                    st(a, zb, b, zb + t)                                           # E's foot
+            if i == 1:                                                             # A: right stem, top, crossbar
+                st(b - t, zb, b, ztp); st(a, ztp - t, b, ztp); st(a, zm - t / 2, b, zm + t / 2)
+            if i == 2:                                                             # R: top, bowl, crossbar, leg
+                st(a, ztp - t, b, ztp); st(b - t, zm, b, ztp); st(a, zm - t / 2, b, zm + t / 2); st(b - t, zb, b, zm)
+        objs.append(ws.object(bpy, principled(bpy, 'frosted-vinyl', '#F4F1EA', rough=0.6, emit='#FFF4E6', strength=0.25)))
     # the small neon EARF sign over the door: four letters as glowing tubes on a bracket (a stand-in for the
     # wordmark's own tubes)
     neon = Mesh('neon'); N = P.NEON

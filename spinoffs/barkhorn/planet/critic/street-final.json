@@ -1,0 +1,359 @@
+{
+ "stage1": {
+  "impression": "A Hopper-like night storefront seen straight on: one long lit window holding a spectrum-coloured bar front and edge-lit bottle shelves, set in a black facade over an empty sidewalk and street. The idea comes across, but about 80% of the frame is near-black, blank CG surface, the street has no life or atmosphere, and the speakers are small, cut off at the frame edges or half hidden behind booth backs and stools. It reads as a clean architectural render, not a magazine photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The frame's own brief is not met: no door and no small neon sign appear anywhere in it",
+  "The facade, sidewalk and street need real material micro-detail and light (wet asphalt reflecting the window, a kerb, a lamp pool) instead of flat near-black planes",
+  "At least one Atmosphere speaker must read at a glance through the glass, unblocked, with its tinted acrylic glowing; now the only legible one is a sliver at the far right behind a booth",
+  "The glass needs to read as glass (faint reflections of the street, not a hard blue horizontal streak), and the blown vertical light bar must go",
+  "Atmosphere: a little haze inside so the light has volume, and a sense of a city beyond (sky, neighbouring frontage)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    2400,
+    255
+   ],
+   "what": "Upper facade band is a flat, featureless grey-teal plane (lum range 27), with no sky, cornice or texture; dead space that reads as CG"
+  },
+  {
+   "region": [
+    0,
+    270,
+    2400,
+    440
+   ],
+   "what": "The fascia above the window is a near-uniform dark blue slab (median 16, range 9); its faint mottled texture looks like a stretched noise map"
+  },
+  {
+   "region": [
+    0,
+    1360,
+    2400,
+    1600
+   ],
+   "what": "The street is a muddy brown-black plane (median 13.6, 7% crushed) with blotchy low-frequency texture and no reflection of the lit window; it does not read as asphalt at night"
+  },
+  {
+   "region": [
+    0,
+    1200,
+    2400,
+    1300
+   ],
+   "what": "Sidewalk tiles are clean and CG-regular with a warm gradient on the right only; no grime, joints or wet sheen"
+  },
+  {
+   "region": [
+    620,
+    460,
+    660,
+    650
+   ],
+   "what": "Blown white vertical bar (a light tube or reflection) floating in front of the top-left shelves; reads as an artifact"
+  },
+  {
+   "region": [
+    170,
+    985,
+    2180,
+    1000
+   ],
+   "what": "Hard horizontal streak along the glass/sill line, saturated blue across the right-hand booths and the red speaker; looks like a seam, not a reflection"
+  },
+  {
+   "region": [
+    2060,
+    860,
+    2160,
+    1050
+   ],
+   "what": "The red Ember speaker, the only legible product, sits at the far right edge, half hidden behind a booth back and crossed by the blue streak"
+  },
+  {
+   "region": [
+    1150,
+    940,
+    1260,
+    1070
+   ],
+   "what": "Black speakers in front of the bar are pure silhouettes against the panels (p5 lum 0); their acrylic does not read"
+  },
+  {
+   "region": [
+    960,
+    790,
+    1070,
+    900
+   ],
+   "what": "Fog speakers in the back-bar niches are tiny and grey; no glow through the clear acrylic"
+  },
+  {
+   "region": [
+    600,
+    920,
+    1900,
+    1060
+   ],
+   "what": "Stools, tables and booth backs make a busy foreground fence across the bar panels (15% crushed, 1% clipped); clutter at product height"
+  },
+  {
+   "region": [
+    0,
+    1090,
+    140,
+    1190
+   ],
+   "what": "Sill and plinth under the window crushed to near-black (median 5) with no edge definition"
+  },
+  {
+   "region": [
+    180,
+    460,
+    2180,
+    540
+   ],
+   "what": "Window mullion and transom bars cross the upper shelves; the room's top third is an empty warm ceiling band"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame misses its brief and its hero: no door or neon in view, and the speakers sit at the edges or behind furniture, all small in a straight-on elevation.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     2400,
+     1600
+    ],
+    "measured": "Window occupies y 455-1085 of 1600; the top 455 px and bottom 515 px are blank facade and street (81% of pixels below lum 40); the red speaker is at x 2060-2160, the frame edge"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [5.9, -15.2, 1.55], target [5.9, 0, 1.75], 50 mm",
+    "to": "position [3.0, -11.0, 1.45], target [8.5, 0, 1.6], 40 mm, so the frame turns about 15 deg toward the corner: door and neon at left, the window running in perspective to the right, the street in the lower fifth"
+   },
+   "expected": "The door and neon enter left; the window fills about 50% of the frame in perspective; blank facade drops below 25% of the frame; a corner speaker pair sits near a third line, not the edge.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The street is a flat, muddy, crushed plane that reflects nothing, so the image has no night-street atmosphere or depth.",
+   "evidence": {
+    "region": [
+     0,
+     1360,
+     2400,
+     1600
+    ],
+    "measured": "lum median 13.6, p95 21.8, crush 7.2%, r/g/b median 26/11/5 (brown, not asphalt)"
+   },
+   "change": {
+    "setting": "street material",
+    "from": "matte brown asphalt",
+    "to": "wet dark asphalt: base #1a1b1d, roughness 0.25 with puddle mask patches at 0.05, fine aggregate normal map at 2-3 mm scale, a granite kerb and a painted line"
+   },
+   "expected": "The spectrum panels and shelves mirror as soft coloured streaks in the street; the street gains structure (p95 above 60) with no crush.",
+   "accept": {
+    "region": [
+     0,
+     1360,
+     2400,
+     1600
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "A blown white vertical bar floats in front of the top-left shelves and pulls the eye.",
+   "evidence": {
+    "region": [
+     620,
+     460,
+     660,
+     650
+    ],
+    "measured": "Visibly near-white column against warm shelves (crop c4); the brightest unmotivated shape in the window"
+   },
+   "change": {
+    "setting": "the source of the bar (a light tube, mullion reflection or emissive strip)",
+    "from": "visible, near clipping",
+    "to": "remove it, or drop its emission until it matches the shelf edge-light (shelves 0.08)"
+   },
+   "expected": "Shelves in that column read continuously and nothing white overlaps them.",
+   "accept": {
+    "region": [
+     620,
+     460,
+     660,
+     650
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The glass reads as a hard horizontal seam with a saturated blue streak, not as plate glass.",
+   "evidence": {
+    "region": [
+     170,
+     985,
+     2180,
+     1000
+    ],
+    "measured": "p5 0 / p95 153 inside a 10 px band; a blue line crosses the red speaker at x 2060-2160"
+   },
+   "change": {
+    "setting": "street window glass",
+    "from": "glass with a thin blue-reflecting element at y about 990 (a rail, edge or reflected neon line)",
+    "to": "clear 12 mm low-iron glass, IOR 1.52, roughness 0.02; remove or soften the line source; let the street lamps and the opposite frontage reflect faintly (about 5-8%) over the lower panes"
+   },
+   "expected": "No hard line crosses the room; the glass is legible from soft reflections only.",
+   "accept": {
+    "region": [
+     1700,
+     985,
+     2180,
+     1000
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The street lamps do not light the street or facade: the facade and fascia are flat, dead planes, and only the right of the sidewalk warms.",
+   "evidence": {
+    "region": [
+     0,
+     270,
+     2400,
+     440
+    ],
+    "measured": "Fascia lum median 16, range 9.3 (flat); upper band median 22, range 27; plinth [0,1090,140,1190] median 5, crush 15%"
+   },
+   "change": {
+    "setting": "street lamps",
+    "from": "3 x point, 600 W",
+    "to": "2 x sodium-warm (2700 K) lamps at 5 m, placed out of frame left and right, 900 W each, plus one grazing light along the facade to raise its texture; the facade gets a board-formed concrete material with real 1-2 mm relief"
+   },
+   "expected": "The facade reads as concrete with grazing texture and a falloff; the plinth separates from the sidewalk.",
+   "accept": {
+    "region": [
+     0,
+     270,
+     2400,
+     440
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The speakers in the room read as black silhouettes or grey shapes; their tinted acrylic does not glow through the window.",
+   "evidence": {
+    "region": [
+     2060,
+     860,
+     2160,
+     1050
+    ],
+    "measured": "Red speaker: r median 104 but p5 0, 14% crushed; Smoke speakers at [1150,940,1260,1070] are pure silhouettes against the panels"
+   },
+   "change": {
+    "setting": "lamps: the wash behind each pair and on each Fog speaker",
+    "from": "wash 90 W cone 50; Fog 300 W cone 40",
+    "to": "wash 160 W cone 40 aimed through the cabinets from behind; Fog 450 W cone 35; bar panels 1.4 down to 1.0 so the speakers, not the panels, are the brightest colour"
+   },
+   "expected": "Each visible cabinet shows light through its tint and the batts inside; the speakers become the saturated focal points, with the panels a step below.",
+   "accept": {
+    "region": [
+     2060,
+     860,
+     2160,
+     1050
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 5
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Stools and tables make a busy fence across the bar panels at product height.",
+   "evidence": {
+    "region": [
+     600,
+     920,
+     1900,
+     1060
+    ],
+    "measured": "15% crushed, 1% clipped: dark stool silhouettes against bright panels"
+   },
+   "change": {
+    "setting": "props and stools (small props may change; the layout is fixed)",
+    "from": "every stool tucked in a regular row, a coupe and a lamp in each gap",
+    "to": "keep the layout, drop the bar-top props to 3-4 glasses, and add one or two people (a seated figure at the bar, a bartender) to break the regularity and give scale"
+   },
+   "expected": "Fewer hard silhouettes; the panels read as fields of colour; human scale.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The room's air has no volume, so the glow does not spill into the street and the image lacks atmosphere.",
+   "evidence": {
+    "region": [
+     180,
+     460,
+     2180,
+     540
+    ],
+    "measured": "Haze density 0 per card; ceiling band median 77 with no gradient into the room"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "density 0, anisotropy 0",
+    "to": "density 0.015 per m, anisotropy 0.3; plus a faint street haze, density 0.003, outside"
+   },
+   "expected": "Soft blooms around Bell lamps and the spots; the panel colours bleed slightly into the air; the street lamps gain a halo.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move a speaker pair out from behind the booth backs toward the window so the product reads from the street",
+   "why": "The room's layout and speaker positions are fixed; only the camera can solve this (c1)"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

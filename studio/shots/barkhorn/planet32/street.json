@@ -13,7 +13,7 @@
   "target": [
    5.9,
    0.0,
-   1.75
+   1.45
   ],
   "lens_mm": 50,
   "level": true
@@ -306,7 +306,9 @@
     "dj_glow": 0.008,
     "dj_color": "#F2D6B0",
     "road_rough": 0.12,
-    "panel_foot": 0.2
+    "panel_foot": 0.2,
+    "wet": true,
+    "window_sign": true
    },
    {
     "kind": "kit",
@@ -1187,7 +1189,7 @@
     0.94
    ],
    "power_w": 70.0,
-   "cone_deg": 35,
+   "cone_deg": 55,
    "blend": 0.8,
    "radius_m": 0.05,
    "color": 3000
