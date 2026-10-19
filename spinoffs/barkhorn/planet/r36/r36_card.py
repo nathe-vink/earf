@@ -21,7 +21,7 @@ FOR = {
     'listening': 'the listening zone: a room within the room, raised 200 mm, in one saturated colour ({zone}: velvet tub '
                  'chairs, wool carpet, limewashed walls), all seats facing the altar: the Ember pair on solid oak plinths in '
                  'a niche lined in end-grain blocks, toed in to the best seat, felt behind; small hexagonal oak tables with '
-                 'a squat smoked-acrylic Sphere lamp on each.',
+                 'a squat smoked-acrylic Orb lamp on each.',
     'street': 'the shopfront at night, from the kerb: the blackened-steel shopfront, the name etched into the glass, a '
               'frosted lightbox with the fogged silhouette of a woman dancing, and the room behind the glass: the zinc '
               'counter under its Dome pendants, the record wall, and at the far end the Ember pair on its altar.',
@@ -44,8 +44,8 @@ generic bar?"""
 
 FIXED = """**Fixed (never change):** EARF's products (their shape, colour and parts): the Atmosphere speakers (1293 mm tall,
 tinted cast-acrylic cabinets with white batts inside, a resin horn; cover off; the Ember (red) pair on the altar), and
-EARF's bar lamps (the Dome pendant and the Sphere table lamp, smoked acrylic with a frosted liner inside; placeholders
-for designs in progress). The room's design as proposed: its layout and dimensions, its materials, the screens and what
+EARF's bar lamps (the Dome pendant, its covers swapped by hand, and the Orb, a squat crystal-ball table lamp in a
+low cup: tinted acrylic with a frosted liner set within it, smoked here). The room's design as proposed: its layout and dimensions, its materials, the screens and what
 they show, the counter, the back bar and record wall, the banquette, the seats, the zone and its colour, the altar, the
 sink and the shopfront."""
 
@@ -59,6 +59,8 @@ finish."""
 
 def settings(sh, scale):
     v = next(p for p in sh['set']['props'] if p.get('module') == 'planet_r36')
+    dm = next((p for p in sh['set']['props'] if p.get('fn') == 'dome'), {})
+    ob = next((p for p in sh['set']['props'] if p.get('fn') == 'orb'), {})
     cam = sh['camera']; R = sh['render']; Ls = sh['lights']
 
     def lamps(prefix):
@@ -76,8 +78,9 @@ def settings(sh, scale):
         f"right-hand wall to {S.RP.W} at the left-hand wall where the counter runs, z up), level, at {cam['target']}, "
         f"lens {cam['lens_mm']} mm on 36 mm" + (f", f/{cam['fstop']} focused at {cam.get('focus')}" if cam.get('fstop') else ''),
         f"- the zone's colour: {ZONE.get(v.get('colourway', 'green'))}",
-        f"- the lamps (hidden; their shells glow by themselves): each Dome {v.get('dome_w')} W, its liner's glow "
-        f"{v.get('dome_glow')}; each Sphere {v.get('sphere_w')} W, glow {v.get('sphere_glow')}",
+        f"- EARF's lamps (the lamp hidden; the frosted liner glows by itself): each Dome {dm.get('lamp_w', v.get('dome_w'))} W, "
+        f"its liner's glow {dm.get('shade_glow', v.get('dome_glow'))}; each Orb {ob.get('lamp_w', v.get('sphere_w'))} W, glow "
+        f"{ob.get('shade_glow', v.get('sphere_glow'))}",
         f"- the room's glowing surfaces (emission strengths): the screens' images {v.get('screen_glow')}, the disc behind "
         f"the DJ station {v.get('disc_glow')} in {v.get('disc_col')} (with a {v.get('disc_lamp')} W area lamp), the "
         f"lit niche's strip {v.get('niche_strip')}, the nameplate {v.get('name_glow')}, the sink's under-glow "

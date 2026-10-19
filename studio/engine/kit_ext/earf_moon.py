@@ -15,6 +15,12 @@ out-moon-*/render), with their materials in a flavour and their light set up.
   bar frames), so the frost reads lit from inside without the lamp drawing a shape through it;
 - `materials`: overrides by the product's material names (body, shade, brass, steel, ...), as a shot's would be.
 
+Round 32d, the pick (spinoffs/barkhorn/companions/crystal.py): `fn` "dome" (the pendant whose covers swap by hand;
+spots its rim, `ceiling` as above) and "orb" (the cordless crystal ball; spots the table). Their frost is set within
+the tint, and it is the liner that glows (`shade_glow`, default 0.25); `lamp_w` defaults 9 and 3. For a spot or the
+piece: `hide` (a pattern of part names, e.g. "hub|pins|cob|gland|cord|canopy" for a spare cover alone), `cover_drop`
+(m) and `cover_turn` (deg) to show the swap, and `lamp`: false for no light.
+
 The lamp follows Planet's loft (commit f7c99a4): hidden from the camera and from transmission (seen through rough or
 frosted acrylic it read as a blob or a square), and from glossy rays (it mirrored as a hot spot in the frost); it lights
 the room and the table under the dome, and the dome glows by itself. lift_shot.py can scale `lamp_w` and `shade_glow`
@@ -31,11 +37,17 @@ if ENGINE not in sys.path:
     sys.path.insert(0, ENGINE)
 import product as PR                                                 # noqa: E402
 
-DEFS = {'table': 'studio/products/earf-moon-table.json', 'pendant': 'studio/products/earf-moon-pendant.json'}
-LIGHT_MM = {'table': (0.0, 0.0, 222.0), 'pendant': (0.0, 0.0, 70.0)}   # moon.TABLE_LIGHT, moon.PENDANT_LIGHT
-LAMP_W = {'table': 4.0, 'pendant': 14.0}
-CORD_MM = (121.0, 707.0)            # the pendant's cord, from the cap to the canopy; the canopy's top at 757
-CANOPY_TOP_MM = 757.0
+DEFS = {'table': 'studio/products/earf-moon-table.json', 'pendant': 'studio/products/earf-moon-pendant.json',
+        'dome': 'studio/products/earf-dome-pendant.json', 'orb': 'studio/products/earf-orb-table.json'}
+# moon.TABLE_LIGHT, moon.PENDANT_LIGHT, crystal.DOME_LIGHT, crystal.ORB_LIGHT
+LIGHT_MM = {'table': (0.0, 0.0, 222.0), 'pendant': (0.0, 0.0, 70.0), 'dome': (0.0, 0.0, 74.0), 'orb': (0.0, 0.0, 100.4)}
+LAMP_W = {'table': 4.0, 'pendant': 14.0, 'dome': 9.0, 'orb': 3.0}
+# the pendants' cords, from the cap to the canopy, and the canopy's top (mm above the rim)
+CORD_MM = {'pendant': (121.0, 707.0), 'dome': (126.0, 726.0)}
+CANOPY_TOP_MM = {'pendant': 757.0, 'dome': 776.0}
+# the material that glows by itself, and its default (Moon's white frost; round 32d's liner, set within the tint)
+GLOW = {'table': ('shade', 3.0), 'pendant': ('shade', 3.0), 'dome': ('liner', 0.25), 'orb': ('liner', 0.25)}
+COVER = 'shell|liner|skin|rim|collar|grommet'      # a Dome's or an Orb's cover: what lifts off
 _CACHE = {}
 
 
@@ -61,7 +73,8 @@ def _lamp(bpy, name, pos, watts, kelvin):
 
 def _place(bpy, which, name, p, kit):
     pdef, tpl = _templates(bpy, which)
-    over = {'shade': {'glow': p.get('shade_glow', 3.0)}}
+    gm, g0 = GLOW[which]
+    over = {gm: {'glow': p.get('shade_glow', g0)}}
     for k, v in p.get('materials', {}).items():
         over[k] = {**over.get(k, {}), **v}
     mats = {}
@@ -73,24 +86,31 @@ def _place(bpy, which, name, p, kit):
             mats[fl] = PR.build_materials(bpy, pdef, fl, over, f'moon-{which}-{fl}')
         T = Matrix.Translation(Vector(s['position'])) @ Matrix.Rotation(math.radians(s.get('rotate_z', 0)), 4, 'Z')
         lift = 0.0
-        if which == 'pendant' and p.get('ceiling') is not None:
-            lift = p['ceiling'] - s['position'][2] - CANOPY_TOP_MM / 1000
+        if which in CANOPY_TOP_MM and p.get('ceiling') is not None:
+            lift = p['ceiling'] - s['position'][2] - CANOPY_TOP_MM[which] / 1000
+        hide = s.get('hide', p.get('hide', ''))
+        # the swap, shown: the cover lowered (m) and turned (deg) off its fixture
+        drop, turn = s.get('cover_drop', p.get('cover_drop', 0.0)), s.get('cover_turn', p.get('cover_turn', 0.0))
         for pname, t in tpl.items():
             mname = next((r['material'] for r in pdef['assign'] if PR._match(pname, r['match'])), None)
-            if mname is None:
+            if mname is None or (hide and PR._match(pname, hide)):
                 continue
             ob = bpy.data.objects.new(f'{name}-{pname}#{i}', t.data)
             bpy.context.scene.collection.objects.link(ob)
             ob.material_slots[0].link = 'OBJECT'; ob.material_slots[0].material = mats[fl][mname]
             M = Matrix.Identity(4)
+            if (drop or turn) and PR._match(pname, COVER):
+                M = Matrix.Translation((0, 0, -drop)) @ Matrix.Rotation(math.radians(-turn), 4, 'Z')
             if lift and pname == 'canopy':
                 M = Matrix.Translation((0, 0, lift))
             elif lift and pname == 'cord':
-                z0, z1 = CORD_MM[0] / 1000, CORD_MM[1] / 1000
+                z0, z1 = CORD_MM[which][0] / 1000, CORD_MM[which][1] / 1000
                 k = (z1 - z0 + lift) / (z1 - z0)
                 M = Matrix.Translation((0, 0, z0)) @ Matrix.Diagonal((1, 1, k, 1)) @ Matrix.Translation((0, 0, -z0))
             ob.matrix_world = T @ M
             objs.append(ob)
+        if s.get('lamp', p.get('lamp', True)) is False:
+            continue
         pos = T @ (Vector(LIGHT_MM[which]) / 1000)
         objs.append(_lamp(bpy, f'{name}-lamp#{i}', pos, p.get('lamp_w', LAMP_W[which]), p.get('lamp_k', 2700)))
     return objs
@@ -102,3 +122,11 @@ def table(bpy, name, p, kit):
 
 def pendant(bpy, name, p, kit):
     return _place(bpy, 'pendant', name, p, kit)
+
+
+def dome(bpy, name, p, kit):
+    return _place(bpy, 'dome', name, p, kit)
+
+
+def orb(bpy, name, p, kit):
+    return _place(bpy, 'orb', name, p, kit)

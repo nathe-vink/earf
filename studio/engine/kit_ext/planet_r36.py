@@ -750,8 +750,9 @@ def room(bpy, name, p, kit):
     seats(bpy, kit, p, objs)
     banquette(bpy, kit, p, objs)
     tubs(bpy, kit, p, objs)
-    domes(bpy, kit, p, objs)
-    spheres(bpy, kit, p, objs)
+    if p.get('placeholders'):                         # the owner's Dome and Orb are kit pieces now (earf_moon)
+        domes(bpy, kit, p, objs)
+        spheres(bpy, kit, p, objs)
     panels(bpy, kit, p, objs)
     sink(bpy, kit, p, objs)
     if p.get('props', True):

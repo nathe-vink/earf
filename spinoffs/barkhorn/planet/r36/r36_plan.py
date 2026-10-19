@@ -69,7 +69,7 @@ ALCOVE = dict(x0=10.42, x1=11.62, depth=0.06, z1=2.45)
 SINK = dict(x=11.02, w=0.86, d=0.40, t=0.17, top=0.86, basin=(0.32, 0.13, 0.11))   # basin semi-axes x, y, z
 
 # --- 7. light: the Dome pendant low over the counter, the squat Sphere on every table ---------------------------------
-DOMES = [4.45, 5.85, 7.95, 9.30]                                    # over the counter, clear of the DJ disc
+DOMES = [4.95, 6.25, 7.50, 8.70]                                    # over the counter, between the beams
 DOME = dict(r=0.17, h=0.13, t=0.006, rim_z=1.72)                    # the rim 650 over the zinc
 SPHERE = dict(r=0.08, squash=0.82, cup_r=0.065, cup_h=0.028)        # a 160 ball, a low brass cup
 

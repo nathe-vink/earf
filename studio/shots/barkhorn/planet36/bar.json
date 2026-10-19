@@ -65,10 +65,10 @@
     "module": "planet_r36",
     "fn": "room",
     "colourway": "green",
-    "dome_w": 30.0,
-    "dome_glow": 0.6,
-    "sphere_w": 6.0,
-    "sphere_glow": 0.6,
+    "dome_w": 9.0,
+    "dome_glow": 1.1,
+    "sphere_w": 3.0,
+    "sphere_glow": 1.1,
     "disc_col": "#FF5A3A",
     "disc_glow": 0.8,
     "disc_lamp": 60.0,
@@ -119,6 +119,130 @@
      0,
      90.0
     ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "flavour": "smoked",
+    "spots": [
+     [
+      4.95,
+      4.4,
+      1.72
+     ],
+     [
+      6.25,
+      4.4,
+      1.72
+     ],
+     [
+      7.5,
+      4.4,
+      1.72
+     ],
+     [
+      8.7,
+      4.4,
+      1.72
+     ]
+    ],
+    "ceiling": 3.4,
+    "lamp_w": 9.0,
+    "lamp_k": 2700,
+    "shade_glow": 1.1
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "orb",
+    "spots": [
+     {
+      "position": [
+       4.38,
+       0.9700000000000001,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       5.93,
+       0.9700000000000001,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       7.48,
+       0.9700000000000001,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       9.03,
+       0.9700000000000001,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       1.17,
+       4.359999999999999,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       13.15,
+       3.05,
+       0.66
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       14.15,
+       0.5999999999999996,
+       0.66
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       14.15,
+       5.5,
+       0.66
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       12.55,
+       1.9999999999999998,
+       0.66
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       12.55,
+       4.1,
+       0.66
+      ],
+      "flavour": "smoked"
+     }
+    ],
+    "lamp_w": 3.0,
+    "lamp_k": 2700,
+    "shade_glow": 1.1
    }
   ]
  },
@@ -146,7 +270,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 14.0,
+   "irradiance": 5.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -169,7 +293,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 30.0,
+   "irradiance": 40.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -192,7 +316,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 14.0,
+   "irradiance": 5.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -215,7 +339,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 30.0,
+   "irradiance": 40.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -225,12 +349,12 @@
   "pend0": {
    "type": "spot",
    "position": [
-    4.45,
+    4.95,
     4.4,
     1.82
    ],
    "target": [
-    4.45,
+    4.95,
     4.2700000000000005,
     1.07
    ],
@@ -244,12 +368,12 @@
   "pend1": {
    "type": "spot",
    "position": [
-    5.85,
+    6.25,
     4.4,
     1.82
    ],
    "target": [
-    5.85,
+    6.25,
     4.2700000000000005,
     1.07
    ],
@@ -263,12 +387,12 @@
   "pend2": {
    "type": "spot",
    "position": [
-    7.95,
+    7.5,
     4.4,
     1.82
    ],
    "target": [
-    7.95,
+    7.5,
     4.2700000000000005,
     1.07
    ],
@@ -282,12 +406,12 @@
   "pend3": {
    "type": "spot",
    "position": [
-    9.3,
+    8.7,
     4.4,
     1.82
    ],
    "target": [
-    9.3,
+    8.7,
     4.2700000000000005,
     1.07
    ],
@@ -432,8 +556,8 @@
     2.05,
     0.8
    ],
-   "power_w": 40.0,
-   "cone_deg": 40.0,
+   "power_w": 70.0,
+   "cone_deg": 28.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -451,8 +575,8 @@
     4.05,
     0.8
    ],
-   "power_w": 40.0,
-   "cone_deg": 40.0,
+   "power_w": 70.0,
+   "cone_deg": 28.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,

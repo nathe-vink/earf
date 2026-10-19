@@ -1,0 +1,173 @@
+{
+ "_note": "Orb table lamp for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-orb-table/render/earf-orb-table.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "materials": {
+  "body": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "$deep",
+   "radius": 0.005,
+   "roughness": 0.04
+  },
+  "brass": {
+   "preset": "metal",
+   "color": "#B8945A",
+   "roughness": 0.32
+  },
+  "gold": {
+   "preset": "metal",
+   "color": "#D8B45A",
+   "roughness": 0.2
+  },
+  "led": {
+   "preset": "emit",
+   "color": "#FFC890",
+   "strength": 0.0
+  },
+  "liner": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#EFE6D8",
+   "roughness": 0.5,
+   "radius": 0.02,
+   "clear": 0.1,
+   "glow": 0.25,
+   "glow_color": "#FF9A50"
+  },
+  "silicone": {
+   "preset": "rubber",
+   "color": "#1A1A1A"
+  },
+  "steel": {
+   "preset": "gunmetal",
+   "color": "#232120"
+  },
+  "window": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F4F2EE",
+   "radius": 0.05,
+   "roughness": 0.2
+  }
+ },
+ "assign": [
+  {
+   "match": "shell|skin",
+   "material": "body"
+  },
+  {
+   "match": "grommet|ring",
+   "material": "brass"
+  },
+  {
+   "match": "contacts",
+   "material": "gold"
+  },
+  {
+   "match": "led",
+   "material": "led"
+  },
+  {
+   "match": "liner",
+   "material": "liner"
+  },
+  {
+   "match": "seat|foot-ring",
+   "material": "silicone"
+  },
+  {
+   "match": "base|plate",
+   "material": "steel"
+  },
+  {
+   "match": "window",
+   "material": "window"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#F2A29C",
+   "frost": "#F2A29C",
+   "glow": "#FF4A3A",
+   "shade_glow": "#F2A29C"
+  },
+  "dust": {
+   "deep": "#F2B184",
+   "frost": "#F2B184",
+   "glow": "#FF8A3A",
+   "shade_glow": "#F2B184"
+  },
+  "acid": {
+   "deep": "#F2D06B",
+   "frost": "#F2D06B",
+   "glow": "#FFC93A",
+   "shade_glow": "#F2D06B"
+  },
+  "poison": {
+   "deep": "#B2C9A2",
+   "frost": "#B2C9A2",
+   "glow": "#6BD45A",
+   "shade_glow": "#B2C9A2"
+  },
+  "ice": {
+   "deep": "#B5D9EE",
+   "frost": "#B5D9EE",
+   "glow": "#4FB8FF",
+   "shade_glow": "#B5D9EE"
+  },
+  "haze": {
+   "deep": "#BEADD8",
+   "frost": "#BEADD8",
+   "glow": "#9A6BFF",
+   "shade_glow": "#BEADD8"
+  },
+  "fog": {
+   "deep": "#F7F8F7",
+   "frost": "#F7F8F7",
+   "glow": "#FFF4E4",
+   "shade_glow": "#F7F8F7"
+  },
+  "smoke": {
+   "deep": "#8A888E",
+   "frost": "#8A888E",
+   "glow": "#C8C0D8",
+   "shade_glow": "#8A888E"
+  },
+  "clear": {
+   "deep": "#F4F6F5",
+   "frost": "#F6F4F0",
+   "glow": "#FF9A40",
+   "shade_glow": "#FF9A50"
+  },
+  "frosted": {
+   "deep": "#F2F2EF",
+   "frost": "#F4F2EE",
+   "glow": "#FF9A40",
+   "shade_glow": "#FF9A50",
+   "materials": {
+    "body": {
+     "preset": "frosted",
+     "color": "#F4F2EE",
+     "absorb": "#EFE6D8",
+     "roughness": 0.5
+    }
+   }
+  },
+  "smoked": {
+   "deep": "#6E655C",
+   "frost": "#8E867E",
+   "glow": "#FF8A30",
+   "shade_glow": "#FF9A50",
+   "materials": {
+    "body": {
+     "radius": 0.0055
+    }
+   }
+  }
+ }
+}

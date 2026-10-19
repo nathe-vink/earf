@@ -23,7 +23,7 @@ S.OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'planet36')
 S.BELL_TABLES = ()
 
 DEFAULT = dict(S.DEFAULT, **dict(
-    colourway='green', pendant_w=320.0, pendant_cone=46.0, dome_w=30.0, dome_glow=0.6, sphere_w=2.5, sphere_glow=0.3,
+    colourway='green', pendant_w=320.0, pendant_cone=46.0, dome_w=9.0, dome_glow=1.1, sphere_w=3.0, sphere_glow=1.1,
     disc_col='#FF5A3A', disc_glow=0.8, disc_lamp=60.0, name_glow=0.25, niche_strip=4.0, sink_glow=6.0,
     screen_glow=0.5, screen_tint='#FFA060', screen_gap=0.04, screen_rough=0.22, etch_glow=0.01, etch_frost=0.3,
     rw_w=30.0, rw_cone=34.0, altar_w=70.0, altar_cone=28.0, spk_irr=5.0, spk_back=40.0, spk_spread=90.0,
@@ -52,9 +52,22 @@ def products(v):
     return [g for g in _products(v) if g['def'] == S.CLOUD]
 
 
+def lamps(v):
+    """The owner's lamps (companions, r31-companions 2ea12b9): the Dome pendant low over the counter, the Orb on every
+    table; smoked, so the Ember pair stays the hero; an Ember Orb only where a frame asks for one (`orb_ember`)."""
+    y = round((RP.COUNTER['y0'] + RP.COUNTER['y1']) / 2, 4)
+    orbs = [{'position': list(s), 'flavour': 'ember' if i in v.get('orb_ember', ()) else v.get('lamp_flavour', 'smoked')}
+            for i, s in enumerate(RP.sphere_spots())]
+    return [{'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'flavour': v.get('lamp_flavour', 'smoked'),
+             'spots': [[x, y, RP.DOME['rim_z']] for x in RP.DOMES], 'ceiling': RP.CEIL, 'lamp_w': v['dome_w'],
+             'lamp_k': 2700, 'shade_glow': v['dome_glow']},
+            {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'spots': orbs, 'lamp_w': v['sphere_w'],
+             'lamp_k': 2700, 'shade_glow': v['sphere_glow']}]
+
+
 def props(v):
-    """The room and the street lamps; the den's scanned stools and chairs are gone (the kit builds the seats)."""
-    return [o for o in _props(v) if o.get('module') == 'planet_r36' or o.get('model') == 'street_lamp_01']
+    """The room, the lamps and the street lamps; the den's scanned stools and chairs are gone (the kit builds the seats)."""
+    return [o for o in _props(v) if o.get('module') == 'planet_r36' or o.get('model') == 'street_lamp_01'] + lamps(v)
 
 
 def lights(v):
