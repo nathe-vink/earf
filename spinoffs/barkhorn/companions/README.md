@@ -223,3 +223,73 @@ system `python3` and fails here. That is worth a line in setup.sh, but I didn't 
 7. **The bearing** is made, not bought. Should we ask Rega or Pro-Ject for their bearing as a spare, or keep ours?
 8. **Prices.** Neither has a selling price. At the speakers' multiple (round 15: $19,000 a pair against about $8,000
    of parts), Cumulus would sell for about $5,000 and Bell for about $1,400. These are for the owner to set.
+
+## Round 32: the bar lamps (Moon, recommended)
+
+The brief (the owner, 2026-10-19, through the coordinator): an acrylic table lamp and a hanging lamp for a bar, Planet
+EARF first, and for sale. Three families were blocked out (`bar_lamps.py`, the sheet at
+`renders/2026-10-19/barkhorn/barlamps/sheet.png`): F1 Block (rounded-square, squared), F2 Column (a lit cylinder),
+F3 Moon (a frosted dome on a tinted column, and its pendant). **Moon is recommended**, F1 Block the alternative if
+the owner wants the squared one.
+
+Why Moon, for a bar:
+- **It lights the table, not the eyes.** The light sits inside a frosted dome, above a seated guest's eye line in the
+  table lamp and up a 46 mm baffle in the pendant (cut-off about 46° from the vertical). Nobody sees an LED.
+- **It survives service.** The dome sheds a spill and the finial is round. The steel foot is sealed by O-rings
+  (IP44, wipeable) and weighs about 1.5 kg, so a sleeve or an elbow doesn't tip it. It charges on a staff tray of
+  six through gold rings, with no cable on the table.
+- **It sells.** The cordless mushroom is the form bars already buy (Poldina, Bellhop, Panthella Portable), so the
+  trade knows it. What is new is the material: a turned cast dome and a solid tinted column whose polished top
+  glows, in the eight Atmosphere colours plus clear, frosted and smoked. The pendant is the same dome hung mouth
+  down, so a room can be specified as one family.
+
+Built as two fab-kit products, `moon.py` (geometry, parts, notes), `moon_table.py` and `moon_pendant.py`; checks pass:
+
+    .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/moon_table.py --out spinoffs/barkhorn/companions/out-moon-table
+    .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/moon_pendant.py --out spinoffs/barkhorn/companions/out-moon-pendant
+
+| | table lamp | pendant |
+|---|---|---|
+| size | foot 120, 277 tall, about 1.9 kg | dome 200 across, disc 220, canopy 150 x 50, drop 600 (to cut) |
+| light | warm-dim board 2200 to 2700 K, 2.5 W, about 200 lm; touch dimmer on the finial | 2700 K CRI 90 COB (Bridgelux Vero SE 10) on a Mean Well PCD-16-700B in the canopy (phase-cut) |
+| power | 25 Wh (two 18650s), about 12 h at the bar setting; tray contacts or USB-C | mains, to be listed to UL 1598 |
+| BOM, one-off shop rates | **$583** (`out-moon-table/bom.md`) | **$780** plus the listing (`out-moon-pendant/bom.md`) |
+| BOM, a run of 200 (my estimate) | about $170 parts, $195 landed | about $180 parts, $205 landed, plus the listing spread over the run |
+| target retail | **$450 to $495** (trade at 30 % off) | **$695 to $750** |
+
+The one-off BOM is mostly the lathe (the turned dome alone is $212 in the table lamp and $344 in the pendant, and
+the brass canopy $229). At volume, four changes bring it down:
+- the domes cast in a mould and finished on the lathe, not turned from block;
+- the brass parts turned in a batch;
+- a spun canopy in place of a turned one;
+- the foot cut from steel bar.
+
+The run figures are my estimates, not quotes. At about $195 landed, $495 retail is about 2.5 times cost, thin once
+the trade discount is taken off. The dome is where the cost has to come out. The benchmarks are about $300 to $500 for
+a cordless bar lamp and $600 to $1,000 for a designer pendant; check them before setting a price. The prices are the
+owner's to set.
+
+**For Planet:** `studio/engine/kit_ext/earf_moon.py` places either lamp from its fab-kit model (the GLBs in
+`out-moon-*/render/`, committed for this) with materials in any flavour and its light set up as Planet's loft does
+(commit f7c99a4):
+- the lamp is a point light inside the dome, hidden from the camera, from transmission and from glossy rays;
+- the frosted dome glows by itself (`shade_glow`).
+
+    {"kind": "kit", "shape": "ext", "module": "earf_moon", "fn": "table", "spots": [[x, y, z_table]], "flavour": "smoked"}
+    {"kind": "kit", "shape": "ext", "module": "earf_moon", "fn": "pendant", "spots": [[x, y, z_rim]], "ceiling": 3.2, "flavour": "smoked"}
+
+Other parameters:
+- `lamp_w`: the power (default 4 for the table lamp, 14 for the pendant);
+- `lamp_k`: the colour temperature (2700);
+- `shade_glow`;
+- `materials`: overrides;
+- a spot can be `{"position", "flavour", "rotate_z"}`.
+
+`lift_shot.py`'s `glow:lamp_w=2` scales the lamp's power. The frames in `renders/2026-10-19/barkhorn/moon/` are made
+with this same piece (`moon_shots.py`), so they test exactly what Planet imports.
+
+Still open:
+- the listing cost;
+- the board (to make; a TI BQ25895-class charger with a touch dimmer);
+- whether bars want the tray of six as its own product;
+- the canopy in brass or blackened steel to match Planet's steel.

@@ -24,6 +24,12 @@ FIXED = {
              'down, lit from an opal sleeve at its throat (warm white LED, about 600 lm), on a clear acrylic stem and a foot '
              'of two tinted acrylic discs; sold at about $1,500. Beside it, as context, a 1293 mm tall horn loudspeaker in '
              'the same tinted acrylic (sold at about $20,000 a pair).'),
+    # round 32: Moon, the bar lamps
+    'moon': ('a pair of bar lamps in one tinted cast acrylic. A cordless table lamp 277 mm tall: a frosted acrylic dome '
+             '150 across over a solid tinted acrylic column 40 across, a brass hub and finial, on a blackened-steel foot '
+             '120 across; lit from inside the dome, the LED never seen. A pendant: a frosted acrylic dome 200 across under '
+             'a 20 mm tinted acrylic disc 220 across, a brass hub and canopy, a black cord. Sold to bars and restaurants '
+             'at about $450 (the table lamp) and $750 (the pendant).'),
 }
 PURPOSE = {
     'turntable': 'The record player\'s campaign hero: the record player is the subject, in a real living room, with the '
@@ -31,6 +37,9 @@ PURPOSE = {
     'lamp': 'The lamp\'s campaign hero: the lamp, switched on, is the subject; its light through the coloured shade carries '
             'the room at dusk, the loudspeaker in its colour as context. It will run as a full page and as the hero of its '
             'homepage.',
+    'moon': 'The bar lamps\' hero for the trade: both lamps lit, in a dim bar at about 2700 K (board-formed concrete, a '
+            'fir table), so a bar owner sees the light they make and the quality of the acrylic and the metal. It will run '
+            'as the line sheet\'s and the website\'s lead image.',
 }
 
 
@@ -64,7 +73,7 @@ def settings(shot):
         row(f'set.props.{i}', p)
     for k, v in (s.get('materials') or {}).items():
         row(f'materials.{k}', v)
-    for b, blk in enumerate(s.get('products') or [s.get('product')]):
+    for b, blk in enumerate(s.get('products') or ([s['product']] if s.get('product') else [])):
         row(f'products.{b}.instances.0.position', blk['instances'][0]['position'])
     for k in ('exposure', 'white_balance_k', 'samples'):
         if k in s.get('render', {}):
@@ -79,8 +88,8 @@ def stage(a):
     card = os.path.join(STAGE, f'card-{a.tag}.md')
     L = ['# Card', '', '## What this frame is for', '', a.purpose or PURPOSE[a.kind], '',
          '## Fixed (never prescribe a change to these)', '', 'The product: ' + FIXED[a.kind] + ' Their shape, size, '
-         'colour, materials and parts are fixed, and so is which loudspeaker stands beside it. Every piece in the frame '
-         'shares one colour by design.', '',
+         'colour, materials and parts are fixed' + ('.' if a.kind == 'moon' else ', and so is which loudspeaker stands '
+         'beside it. Every piece in the frame shares one colour by design.'), '',
          '## May change', '', 'Everything about the set (the room, its walls, floor, window, furniture and props, any '
          'Poly Haven CC0 texture, model or sky), the light (sun, sky, lamps, the lamp\'s own output), the camera (place, '
          'lens, aperture, focus) and the finish (exposure, white balance). Where the products stand may change.', '',
