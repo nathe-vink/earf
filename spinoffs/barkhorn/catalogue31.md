@@ -242,3 +242,11 @@ depth, `H - T - t_top - g - 2`). The anchor's insert sits flush in the pad from 
 rod's tip and 10 to reach it: floor at `zpad - 10` (z 830). Full build: 0 clashes; lining-back-c's cut file, its nest and
 its mass in the parts list (38 to 41 g) change, nothing else. Before and after (amp, Fog):
 `catalogue31/tie-notch-before-after.png`. The finals' back and amp views were rendered before this and still show it.
+
+**Where the two notches show (round 31, the lead asked):** Fog's front and detail frames rendered from the model before
+both fixes (7bc7768's parent) and after (ddfacf4), at proof size (0.5, 32 spp, the same seed), and differenced. Horn-back
+shows them: through the back, the old notches read as two pale tabs, above the E and A and above the R and F, and the new
+model shows only the gland's short tab (`catalogue31/notch-horn-back-ice-old-new-diff.png`: old, new, difference). The
+fronts (on and off, every frame) differ only in a thin strip at the top brace, a few dozen proof pixels, at most 55 of 255:
+the HF lead's run from the throat to the gland, which 7bc7768 rerouted, not a notch
+(`catalogue31/notch-front-off-wide-ice-old-new-diff.png`). Horn-side: nothing over 8 of 255. Inside: 4 pixels.
