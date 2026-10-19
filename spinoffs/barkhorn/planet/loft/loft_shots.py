@@ -121,7 +121,9 @@ VIEWS = {
                # x3.6, the sconce x4.8, the entry x3, the niches x2.4, the speaker x2.4, the shelf edges x0.5), p10's
                # camera, the name acid etch; and the speaker in frame (the lead: present and lit in every frame): the
                # two lounge chairs on the sightline to the left Ember speaker moved aside, as a stylist would
-               'camera': {'position': [-3.0, 2.5, 1.6], 'target': [6.85, 5.1, 1.55], 'lens_mm': 35, 'level': True,
+               # (p11: the bar's far end hides the left Ember speaker from any kerb position that keeps the lightbox;
+               # now the right-hand one, down the aisle through the lounge's opening, its two chairs moved aside)
+               'camera': {'position': [-3.0, 3.6, 1.6], 'target': [6.85, 4.4, 1.5], 'lens_mm': 35, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
                'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
                             'screen_glow': 0.4, 'screen_window': 0.22, 'screen_tint': '#FFA060', 'spot_niche': 288.0,
@@ -134,7 +136,7 @@ VIEWS = {
                             'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05,
                             'linen_trans': 0.5, 'etch_glow': 0.03, 'glass_gloss': 3.0, 'chair_dye': '#2B2119',
                             'screen_gap': 0.06, 'screen_rough': 0.3,
-                            'chair_move': {'4': [0.0, 0.55, 0.0], '6': [0.3, 0.40, 0.0]}}},
+                            'chair_move': {'2': [0.0, -0.5, 0.0], '5': [-0.5, -0.35, 0.0]}}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot
