@@ -141,7 +141,7 @@ def shot():
               # low wisps drifting between the camera and the speaker, veiling its lower half a little
               smoke((0.0, -1.6, 0.0), (9.0, 3.0, 1.8), 0.45, 13, scale=0.8, cut=0.48, soft=0.3, anisotropy=0.6,
                     fade=[0.3, 0.35, 0.6], floor=0.02, rise=0.5, color='#D6D0C8')]
-    cam = camera(height=0.7, distance=6.2, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=2.8, shift_x=0.14)
+    cam = camera(height=1.1, distance=6.4, azimuth=-20, lens=65, target=(0.0, 0.0, 0.7), fstop=4.0, shift_x=0.14, shift_y=-0.05)
     lights = {
         # the open sky behind the camera, cool, lifting the shadow side: the woofer and lining just read in the tint
         'skyfill': {**area(-20, 5, 2.4, 6.0, '#9EA8B6', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
