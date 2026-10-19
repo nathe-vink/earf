@@ -208,13 +208,13 @@ def altar(bpy, kit, p, objs):
         for k in range(nz):
             y0 = A['y0'] + i * B + 0.002; z0 = Z['z'] + k * B + 0.002
             dx = rnd.uniform(0.0, 0.012)
-            bl.box(L - 0.075 - dx, y0, z0, L - 0.004, y0 + B - 0.004, z0 + B - 0.004)
+            bl.box(L - 0.075 - dx, y0, z0, L - 0.004, y0 + B - 0.0025, z0 + B - 0.0025)
     objs.append(bl.object(bpy, D.walnut(bpy, vertical=False, coat=0.1, coat_rough=0.5, tint='#3A2A1E', mix=0.35,
                                         name='-endgrain'), bevel=0.003))
     fe = Mesh('altar-felt')
     for role, colour, x, y, z, rot in R.speakers():
         fe.box(L - 0.105, y - 0.55, Z['z'] + 0.25, L - 0.080, y + 0.55, Z['z'] + 2.05)
-    objs.append(fe.object(bpy, kit.material(bpy, 'felt', C['felt']), bevel=0.01))
+    objs.append(fe.object(bpy, mohair(bpy, C['velvet'], 'velvet-' + p.get('colourway', 'green')), bevel=0.012))
     pl = Mesh('altar-plinths'); S = R.PAIR36
     for role, colour, x, y, z, rot in R.speakers():
         _obox(pl.bm, x, y, Z['z'], S['plinth_d'], S['plinth_w'], S['plinth'], math.radians(rot + 90))

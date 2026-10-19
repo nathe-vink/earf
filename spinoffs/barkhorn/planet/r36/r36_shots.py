@@ -94,13 +94,13 @@ VIEWS = {
             # partition's opening
             'camera': {'position': [1.4, 2.75, 1.45], 'target': [17.0, 3.15, 1.15], 'lens_mm': 30, 'level': True,
                        'fstop': 5.6, 'focus': [8.0, 3.2, 1.1]},
-            'settings': {'exposure': 0.6}},
+            'settings': {'exposure': 0.0}},
     'listening-green': {'title': 'the listening zone, bottle green',
-                        'camera': {'position': [12.15, 2.85, 1.45], 'target': [16.6, 3.05, 1.1], 'lens_mm': 35,
+                        'camera': {'position': [11.25, 2.75, 1.35], 'target': [16.6, 3.05, 1.05], 'lens_mm': 32,
                                    'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
                         'settings': {'colourway': 'green', 'exposure': 0.2}},
     'listening-oxblood': {'title': 'the listening zone, oxblood',
-                          'camera': {'position': [12.15, 2.85, 1.45], 'target': [16.6, 3.05, 1.1], 'lens_mm': 35,
+                          'camera': {'position': [11.25, 2.75, 1.35], 'target': [16.6, 3.05, 1.05], 'lens_mm': 32,
                                      'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
                           'settings': {'colourway': 'oxblood', 'exposure': 0.2}},
     'street': {'title': 'the shopfront at night, from the kerb',
@@ -113,9 +113,9 @@ VIEWS = {
                             'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5,
                             'glass_gloss': 3.0, 'haze': 0.008}},
     'sink': {'title': 'the sink, a detail',
-             'camera': {'position': [10.25, 1.55, 1.38], 'target': [11.02, 0.26, 0.82], 'lens_mm': 65, 'level': True,
+             'camera': {'position': [9.85, 2.05, 1.42], 'target': [11.02, 0.30, 0.86], 'lens_mm': 65, 'level': True,
                         'fstop': 2.8, 'focus': [11.02, 0.27, 0.84]},
-             'settings': {'exposure': 0.4, 'haze': 0.0}},
+             'settings': {'exposure': 0.2, 'haze': 0.0, 'sink_glow': 2.5}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot
