@@ -12,8 +12,8 @@ the light that comes through its acrylic shows its tint.
 from common import area, asset, point, camera, finish, ground, piece, scatter, shot as frame, sky, portrait_of
 
 PILE = (5.0, 5.2)            # the burn pile (round C)
-PILE_D = (8.0, 9.0)          # round D2: the smoke's source, far back between the trunks
-FERN = ((-1.0, -0.45, 0.0), 80.0, 0.8)   # D3: the fern clump at the near left corner (position, turn, scale)
+PILE_D = (12.0, 9.0)         # round D2: the smoke's source, far back between the trunks
+FERN = ((-0.55, -0.45, 0.0), 170.0, 0.8)   # D3: the fern clump at the near left corner (position, turn, scale)
 SUN_A = {'azimuth_deg': 150.0, 'elevation_deg': 24.0, 'irradiance': 30.0, 'angle_deg': 0.5, 'color': '#FFB978'}
 SKY = 'misty_pines'           # a real pine wood in morning mist (Poly Haven, CC0)
 SUN = {'azimuth_deg': 150.0, 'elevation_deg': 18.0, 'irradiance': 75.0, 'angle_deg': 0.5, 'color': '#FFCC9A'}
@@ -145,7 +145,7 @@ def shot():
     for k in range(8):
         t = k / 7
         w = 0.5 + 2.4 * t ** 1.3
-        props.append(smoke((PILE_D[0] - 2.2 * t ** 1.6, PILE_D[1] - 0.3 * t, 0.1 + 0.9 * k), (w, w, 2.0), 30.0 * 0.75 ** k,
+        props.append(smoke((PILE_D[0] - 4.5 * t ** 1.4, PILE_D[1] - 0.3 * t, 0.1 + 0.9 * k), (w, w, 2.0), 18.0 * 0.75 ** k,
                            21 + k, scale=0.3 + 0.45 * t, cut=0.45 + 0.12 * t, soft=0.22, anisotropy=0.75,
                            fade=[0.42, 0.42, 0.4], floor=0.1 * (1 - t), rise=2.2 - 0.8 * t, color='#C9CCD1',
                            detail_scale=0.12 + 0.1 * t, detail_weight=0.4 + 0.25 * t))
