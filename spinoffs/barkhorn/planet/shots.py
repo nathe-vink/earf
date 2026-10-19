@@ -112,7 +112,7 @@ def lights(v):
     for k, (role, colour, x, y, z, rot) in enumerate(P.speakers()):
         if role == 'backbar':
             L[f'fog{k}'] = {'type': 'spot', 'position': [x, y - 0.12, P.NICHE_Z0 + P.NICHE_H - 0.03], 'target': [x, y - 0.25, z + 0.6],
-                            'power_w': v['spot_fog'], 'cone_deg': 40, 'blend': 0.7, 'radius_m': 0.02, 'color': 3000}
+                            'power_w': v['spot_fog'], 'cone_deg': v.get('fog_cone', 40), 'blend': 0.7, 'radius_m': 0.02, 'color': 3000}
     # pinholes onto the bar top, between the pendants
     for i, x in enumerate(P.bar_pendants()[:-1]):
         L[f'bar{i}'] = {'type': 'spot', 'position': [x + 0.7, P.BAR_FRONT + 0.05, P.MEMBRANE - 0.02],
@@ -191,9 +191,13 @@ VIEWS = {
     'backbar': {'title': 'the back-bar, the Fog pair among the lit shelves',
                 # concept changed after three passes at 4.0 to 4.5 (one speaker in a niche over a dead counter): the
                 # pair from across the room, rising above the bar among the shelves, the spectrum front below
-                'camera': {'position': [(P.NICHES[0][0] + P.NICHES[1][0] + P.NICHES[1][1]) / 2, 3.60, 1.75],
-                           'target': [(P.NICHES[0][0] + P.NICHES[1][0] + P.NICHES[1][1]) / 2, P.D, 1.25], 'lens_mm': 30,
-                           'level': True}},
+                # after the final's critic (critic/backbar-final.json, 4.0): three-quarter on the left Fog speaker at
+                # 45 mm, the right one soft beyond; the speakers lit above the wall; the panels down to a soft band
+                'camera': {'position': [5.2, 4.2, 1.45], 'target': [7.4, P.D, 1.6], 'lens_mm': 45, 'level': True,
+                           'fstop': 4.0, 'focus': [P.NICHES[0][0] + P.NICHES[0][1] / 2, P.BACKBAR_Y + 0.05, 1.3]},
+                'settings': {'panel_glow': 0.5, 'panel_foot': 0.05, 'niche_glow': 0.10, 'spot_fog': 600.0,
+                             'fog_cone': 28.0, 'backpanel_glow': 0.008, 'shelf_glow': 0.06, 'wb': 3800, 'wb_tint': -4.0,
+                             'exposure': 0.15}},
     'records': {'title': 'the record wall and the DJ desk with Cumulus',
                 # the record wall and the DJ desk the subject, the player small and soft (the companions are being
                 # redesigned: a stand-in, never the hero), one of the Ice pair in at the left

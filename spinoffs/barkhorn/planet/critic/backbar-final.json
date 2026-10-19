@@ -1,0 +1,369 @@
+{
+ "stage1": {
+  "impression": "A frontal, symmetrical back-bar in which the rainbow edge-lit shelves read well and the bottles have believable glass and paper labels. The lower third is taken over by four flat, evenly glowing colour blocks with the stools as cut-out silhouettes, so the frame reads as a CG interior, not a photograph. The two grey niche objects that are meant to be the product read as cabinets or appliances: dim, low-contrast and the same warm grey as the wall behind them, so nothing in the frame is the hero.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Fog speakers must be the brightest, most contrasted objects above the bar (niche lum_median at least 1.5x the shelf wall), with the clear acrylic showing edge highlights and the white batts glowing through",
+  "The bar-front panels must stop being the brightest area in the frame: lum_median at or below 75, with a visible vertical gradient and some surface texture, not flat emissive rectangles",
+  "The camera must favour one speaker or bring the pair larger in frame (each speaker at least 18% of frame height, not about 12%), at eye level with a longer lens",
+  "There must be visible atmosphere: haze catching the Bell pendants and the Fog spots, depth between the stools, bar and back-bar",
+  "The stools must read as wood with a rim light from the room, not as black cut-outs cropped at the frame edges"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    1070,
+    2400,
+    1600
+   ],
+   "what": "The bar-front panels are flat, uniform emissive blocks (lum_range 17 to 19 inside a panel, median 113 to 128) with hard seams. They are the brightest, most saturated area in the frame and pull the eye away from the product."
+  },
+  {
+   "region": [
+    460,
+    540,
+    730,
+    940
+   ],
+   "what": "The left Fog speaker has lum_median 42.5 against a shelf wall of about the same value. It reads as a grey box with a clear lid and a white ring, like an appliance, and its acrylic has no edge light."
+  },
+  {
+   "region": [
+    1680,
+    540,
+    1940,
+    940
+   ],
+   "what": "The right Fog speaker has the same problem: lum_median 43.7, it merges into the wall, and its silhouette does not read."
+  },
+  {
+   "region": [
+    1660,
+    1000,
+    1800,
+    1034
+   ],
+   "what": "A bright white rectangle on the bar top (p95 197, a menu under a pinhole) is the hottest small highlight near the product and distracts."
+  },
+  {
+   "region": [
+    0,
+    1270,
+    2400,
+    1600
+   ],
+   "what": "The stools are near-black silhouettes (crush 2.1%), cut off at both frame edges. The front stool at far left and far right is cropped awkwardly."
+  },
+  {
+   "region": [
+    0,
+    0,
+    2400,
+    160
+   ],
+   "what": "The top shelf runs out of the frame with the ceiling cut off. There is no headroom and no membrane, so the frame feels cropped, not composed."
+  },
+  {
+   "region": [
+    0,
+    400,
+    2400,
+    560
+   ],
+   "what": "The Bell pendants have bright hotspots but throw no visible cone into the haze; with haze 0.012 the air reads as empty."
+  },
+  {
+   "region": [
+    880,
+    940,
+    2160,
+    1040
+   ],
+   "what": "The stone bar top is a dark, undifferentiated band (median 26.5) with no reflection of the shelves or the panel glow; the coupes float on it with weak contact."
+  },
+  {
+   "region": [
+    0,
+    160,
+    2400,
+    940
+   ],
+   "what": "The bottle population is repetitive: similar labels and shapes repeat shelf to shelf, which reads as instanced assets."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The bar panels outshine everything and flatten the lower third into colour blocks.",
+   "evidence": {
+    "region": [
+     600,
+     1080,
+     1220,
+     1300
+    ],
+    "measured": "lum_median 112.6, lum_range 19.2 inside one panel; blue panel lum_median 127.6, b_median 249 (near clip)"
+   },
+   "change": {
+    "setting": "bar panels emission (and its grade)",
+    "from": "1.4, graded 0.2 to 1.0",
+    "to": "0.5, graded 0.05 at the foot to 1.0 at the top"
+   },
+   "expected": "The panels glow as a soft band under the stone, darker at the floor, about 60 to 75 median, no channel above 235, and the stools pick up a coloured rim, not a hard silhouette.",
+   "accept": {
+    "region": [
+     1240,
+     1080,
+     1860,
+     1300
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Fog speakers are no brighter than the wall behind them, so the product never reads.",
+   "evidence": {
+    "region": [
+     460,
+     540,
+     730,
+     940
+    ],
+    "measured": "lum_median 42.5, p95 96, against shelf wall regions at about 40"
+   },
+   "change": {
+    "setting": "Fog niches emission and the spots on each Fog speaker",
+    "from": "niches 0.03; 2 x spot 300 W, cone 40 deg",
+    "to": "niches 0.10; 2 x spot 600 W, cone 28 deg, aimed from above and slightly to the side so they graze the acrylic edges"
+   },
+   "expected": "Each speaker stands out as the brightest object in its bay: clear edges, white batts luminous through the acrylic, the horn throat legible, lum_median at about 75 to 95.",
+   "accept": {
+    "region": [
+     460,
+     540,
+     730,
+     940
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     100
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The shelf wall and back panel compete with the niches at the same value.",
+   "evidence": {
+    "region": [
+     0,
+     160,
+     400,
+     540
+    ],
+    "measured": "shelf bay values about 40, matching the speaker niche median of 42 to 44"
+   },
+   "change": {
+    "setting": "back-bar back panel and shelves emission",
+    "from": "back panel 0.02; shelves 0.08",
+    "to": "back panel 0.008; shelves 0.06"
+   },
+   "expected": "The bottle wall drops about a stop behind the speakers, the edge-lit shelf lines stay vivid, and the niches separate.",
+   "accept": {
+    "region": [
+     0,
+     160,
+     400,
+     540
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     18,
+     32
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "A 30 mm frontal view from 5.5 m makes the speakers small, cuts the stools at the edges and leaves no headroom.",
+   "evidence": {
+    "region": [
+     460,
+     540,
+     730,
+     940
+    ],
+    "measured": "the speaker occupies about 400 of 1600 px of height; stools are cropped at x 0 and x 2400"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [6.10, 3.6, 1.75], target [6.10, 9.144, 1.25], 30 mm",
+    "to": "position [5.2, 4.2, 1.45], target [7.4, 9.144, 1.6], 45 mm: a slight three-quarter view on the left Fog speaker, the right one soft in the background, two stools in the foreground left, with the ceiling line inside the frame"
+   },
+   "expected": "One speaker reads as the hero at about 25% of frame height, the bar front recedes on a diagonal, and the shelves converge, giving depth and room for type at the upper right.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The air reads empty: no light shafts from the pendants or the Fog spots, no depth.",
+   "evidence": {
+    "region": [
+     0,
+     400,
+     2400,
+     560
+    ],
+    "measured": "the pendants are small bright points with no visible cone under them"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "density 0.012, anisotropy 0.3",
+    "to": "density 0.03, anisotropy 0.55"
+   },
+   "expected": "Faint cones under the Bells and the Fog spots, the back-bar slightly veiled against the foreground stools.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     2400,
+     160
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 16
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "A white menu on the bar top is a hot, hard-edged rectangle beside the right speaker.",
+   "evidence": {
+    "region": [
+     1660,
+     1000,
+     1800,
+     1034
+    ],
+    "measured": "p95 197 against a bar top at median 26"
+   },
+   "change": {
+    "setting": "props on the bar",
+    "from": "folded white menu under a pinhole",
+    "to": "move the menu out of the pinhole cone or use a cream-on-black card; put rocks glasses with a pour under the pinholes instead"
+   },
+   "expected": "No small hotspot competes with the speaker; the pinholes light glass and liquid instead.",
+   "accept": {
+    "region": [
+     1660,
+     1000,
+     1800,
+     1034
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 140
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The stone bar top is a dead band with no reflection.",
+   "evidence": {
+    "region": [
+     880,
+     940,
+     2160,
+     1040
+    ],
+    "measured": "lum_median 26.5, lum_range 27.9"
+   },
+   "change": {
+    "setting": "honed stone top material",
+    "from": "near-matte",
+    "to": "honed, roughness 0.35, with a faint specular so the shelves and pendants show as soft streaks"
+   },
+   "expected": "Soft coloured streaks across the top tie the props to the surface and lead the eye to the speakers.",
+   "accept": {
+    "region": [
+     880,
+     940,
+     2160,
+     1040
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The 3300 K white balance turns every neutral amber while the panels stay hyper-saturated, so the grade feels split.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     2400,
+     160
+    ],
+    "measured": "r 35 / g 23 / b 10 in the neutral top band"
+   },
+   "change": {
+    "setting": "render white_balance_k / exposure",
+    "from": "3300 K, tint -10, exposure -0.1",
+    "to": "3800 K, tint -4, exposure +0.15 after c1 to c3"
+   },
+   "expected": "The Fog acrylic reads close to clear-white rather than brown, the walls are warm but not orange, and the shadows lift slightly.",
+   "accept": {
+    "region": [
+     460,
+     540,
+     730,
+     940
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 55
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Fog speakers' silhouette read more clearly as a horn loudspeaker; head-on it reads as a box with a lid and a ring",
+   "why": "That is the product's shape; only the camera angle and the light (c2, c4) may address it."
+  },
+  {
+   "request": "Mute or reorder the bar panels' spectrum colours",
+   "why": "The eight panels in spectrum order are a fixed part of the room's design; only their glow level may change."
+  },
+  {
+   "request": "Vary the bottle models and labels so the shelves don't repeat",
+   "why": "The card does not list the bottles as a changeable prop; it is worth adding if the studio allows it."
+  }
+ ],
+ "score_if_fixed": 6.8
+}
