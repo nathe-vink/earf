@@ -10,7 +10,7 @@
  "engine": "Cycles (CPU), bpy 5.0.1 on python3.11",
  "rig_commit": "01267eb4a12e4e25d6ffed04851578b25bd517c2",
  "note": "re-rendered for the real drivers (the FaitalPRO 15PR400 woofer as made, the HF driver with its machined exit and phase plug, the ring in opaque polished acrylic); the set, light, camera and finish are the final rig of 2026-10-18, unchanged",
- "method": "four horizontal strips (render.py --crop 0 y0 1 y1, finish off), stitched top to bottom, then studio/engine/finish.py apply once on the whole frame with the shot's finish",
+ "method": "four horizontal strips (render.py --crop 0 y0 1 y1, finish off), stitched top to bottom; at each join a band rendered across it (rows 360-440, 761-840, 1160-1240; Blender's border rounding started the second at 761, measured by aligning it to the strips) blended over join-28..join+28 with 8-row fades, so the denoiser's strip edges do not show; then studio/engine/finish.py apply once on the whole frame",
  "strips": [
   {
    "crop": [
@@ -70,5 +70,64 @@
    "lift_color": "#000000",
    "vignette": 0.2
   }
+ },
+ "bands": [
+  {
+   "crop": [
+    0,
+    0.225,
+    1,
+    0.275
+   ],
+   "rows": [
+    360,
+    440
+   ],
+   "render_s": 552
+  },
+  {
+   "crop": [
+    0,
+    0.475,
+    1,
+    0.525
+   ],
+   "rows": [
+    761,
+    840
+   ],
+   "render_s": 864
+  },
+  {
+   "crop": [
+    0,
+    0.725,
+    1,
+    0.775
+   ],
+   "rows": [
+    1160,
+    1240
+   ],
+   "render_s": 462
+  }
+ ],
+ "seam_check": {
+  "join_400": {
+   "before": 0.07,
+   "after": 0.21,
+   "neighbours": 0.28
+  },
+  "join_800": {
+   "before": 0.26,
+   "after": 0.81,
+   "neighbours": 0.88
+  },
+  "join_1200": {
+   "before": 0.33,
+   "after": 0.58,
+   "neighbours": 0.52
+  },
+  "metric": "correlation of the horizontal high-pass grain of rows j-1 and j"
  }
 }
