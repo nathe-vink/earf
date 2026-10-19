@@ -24,7 +24,7 @@ You come in off the sidewalk into a recessed entry with a white mosaic floor, th
 oxblood velvet curtain. The room is 6.1 m (20 ft) wide and 17 m deep under a dark plaster ceiling. On the left runs the bar,
 6.9 m of reeded walnut on an aged-brass kick, with an oiled walnut top, an oxblood leather armrest and a brass
 footrail, under three spun-brass pendants. Behind it is the back-bar: walnut, an antique mirror, and three shelves of
-bottles, each lit warm from a strip under its front edge. The Smoke pair stands in two walnut niches among the bottles,
+bottles, each lit warm from a strip under its front edge. The Fog pair (clear acrylic; first drawn in Smoke, which read as a black screen in the niches) stands in two walnut niches among the bottles,
 the horns at a stool-sitter's eye, each lit by a pinhole against a softly glowing linen back. On the right, an oxblood
 leather banquette, channel-tufted, runs under shaded brass sconces, with five walnut two-tops; Bell (Dust) on two of
 them and candles on the rest. A round table sits in the window behind café curtains.
@@ -59,8 +59,8 @@ panelled bulkhead, prism-glass transoms lit from inside, and EARF's wordmark in 
   flats above. The site's neighbourhood is unnamed and the street has no landmarks.
 - **Capacity:** 29 seats (bar 10, banquette 10, window 2, listening room 7); occupant load 40, Group B, so no Place of
   Assembly permit.
-- **Pairs:** two, not three. The Ember pair is the listening room's; the Smoke pair is in the back-bar. Round 32's Fog
-  and Ice pairs are dropped. No cool speaker appears anywhere.
+- **Pairs:** two, not three. The Ember pair is the listening room's; the Fog pair is in the back-bar (Smoke at first: it vanished in the niches). Round 32's Ice pair is
+  dropped. No cool speaker appears anywhere.
 - **Bell** in Dust, as table lamps only (round 32's pendant Bell is dropped). The bar's pendants are plain spun-brass
   domes, not an EARF product.
 - **The bar top is walnut, oiled and waxed**, not stone (round 32 used stone because spirits craze acrylic; there is no
@@ -85,7 +85,7 @@ What changes:
 ## The owner's open questions
 
 - Is this the room: the size, the warmth, walnut and brass, brick at the back?
-- Which pairs, and how many: Ember at the back and Smoke at the bar, or one pair only?
+- Which pairs, and how many: Ember at the back and Fog at the bar (or Smoke, lit another way), or one pair only?
 - A walnut bar top (oiled) or stone?
 - The listening room's curtains: drawn for quiet sessions, open otherwise?
 - People: no figures are in these views yet.

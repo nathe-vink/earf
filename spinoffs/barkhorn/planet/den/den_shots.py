@@ -81,7 +81,7 @@ def products(v):
 
 def lights(v):
     L = {}
-    # a soft warm lamp from the ceiling onto each Ember speaker; a pinhole in each niche's head onto the Smoke pair
+    # a soft warm lamp from the ceiling onto each Ember speaker; a pinhole in each niche's head onto the back-bar pair
     for k, (role, c, x, y, z, rot) in enumerate(P.speakers()):
         if role == 'lounge':
             fx, fy = math.sin(math.radians(rot)), -math.cos(math.radians(rot))

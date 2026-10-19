@@ -13,7 +13,7 @@ FOR = {
     'street': 'the shopfront at night from across the street: one narrow storefront in an ordinary San Francisco '
               'building, the room glowing warm behind café curtains, a recessed door, the transom lit, the name in gold '
               'leaf on the glass.',
-    'bar': 'the bar: a reeded walnut bar under three brass pendants, the back-bar\'s lit shelves of bottles with a Smoke '
+    'bar': 'the bar: a reeded walnut bar under three brass pendants, the back-bar\'s lit shelves of bottles with a Fog '
            'speaker standing among them, the listening room glimpsed at the far end.',
     'listening': 'the listening room at the back: one of the Ember pair beside the record wall, old brick behind it, '
                  'leather chairs turned toward it, a sconce and a lamp making pools of warm light.',
@@ -30,7 +30,7 @@ room's only colour."""
 
 FIXED = """**Fixed (never change):** EARF's products (their shape, colour and parts): the Atmosphere speakers (1293 mm tall,
 tinted cast acrylic cabinets with white batts inside, a resin horn; cover off; an Ember (red) pair in the listening
-room, a Smoke (black) pair in the back-bar's niches), Bell (the table lamps), and Cumulus (a small stand-in on the
+room, a Fog (clear) pair in the back-bar's niches), Bell (the table lamps), and Cumulus (a small stand-in on the
 console). The room's design as proposed: its layout and dimensions, the walnut bar and back-bar, the banquette, the
 listening room, the record wall and the shopfront."""
 

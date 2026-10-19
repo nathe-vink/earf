@@ -99,7 +99,8 @@ LOUNGE_CEILING = dict(slat=0.045, pitch=0.090)   # walnut slats over absorber on
 COLOURS = {'ember': '#D2382F', 'dust': '#E5732A', 'acid': '#E9B320', 'poison': '#4F7F3A',
            'ice': '#4A90C8', 'haze': '#6C4BA3', 'fog': '#F6F8F8', 'smoke': '#34323A'}
 FLAVOUR = {'ember': 'cloud-red', 'dust': 'cloud-orange', 'smoke': 'cloud-black', 'fog': 'birch-fog-clear'}
-BACKBAR_PAIR = 'smoke'
+BACKBAR_PAIR = 'fog'                # Fog, not Smoke (bar-r1 to r2: the Smoke cabinet read as a black screen in its niche
+                                 # under every light tried; Fog's clear acrylic and white batts glow there)
 
 # seats, counted for the plan
 SEATS = {'bar': STOOLS, 'banquette': 2 * len(TABLES), 'window': 2, 'lounge': len(CHAIRS)}

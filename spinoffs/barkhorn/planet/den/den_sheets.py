@@ -179,7 +179,7 @@ def plan_sheet(pg):
         pg.text(lx0 + 200, ly0 + 6 - k * 4.5, s, va='center', size=7.1)
     pg.text(lx0, 26, 'Products', size=8, fontweight='bold')
     prods = ['Atmosphere: the Ember pair either side of the record wall on low walnut plinths, each aimed at the listening seat (+);',
-             'the Smoke pair in the back-bar\'s two niches, floor 450, the horns at a stool\'s eye. Arrows: each speaker\'s axis.',
+             'the Fog pair in the back-bar\'s two niches, floor 450, the horns at a stool\'s eye. Arrows: each speaker\'s axis.',
              'Bell (Dust): table lamps. Cumulus: a small stand-in on the console while the companions are redesigned.']
     for k, s in enumerate(prods):
         pg.text(lx0, 21.5 - k * 4.0, s, va='center', size=7.1)
@@ -209,7 +209,7 @@ def section_sheet(pg):
     R(0, 0, P.BAR_X0 - 0.2, P.WAINSCOT, fc=WALNUT, lw=0.2, alpha=0.35, z=2)
     R(P.BAR_X1 + 0.2, 0, P.LOUNGE_X0, P.WAINSCOT, fc=WALNUT, lw=0.2, alpha=0.35, z=2)
     R(P.LOUNGE_X0, 0, L, H, fc='#B0705A', lw=0.2, alpha=0.25, z=1, hatch='----')
-    # beyond: the back-bar, its shelves and niches, the Smoke pair
+    # beyond: the back-bar, its shelves and niches, the Fog pair
     bx0, bx1 = P.BAR_X0 - 0.30, P.BAR_X1 + 0.30
     R(bx0, 0, bx1, P.BASE_H, fc='#d9cbb8', lw=0.25)
     R(bx0, P.BASE_H, bx1, P.BACKBAR_TOP + 0.2, lw=0.25)
