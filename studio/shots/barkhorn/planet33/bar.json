@@ -1,23 +1,23 @@
 {
- "title": "Planet EARF, the bar, from the window table (round 33)",
+ "title": "Planet EARF, the bar, from a stool (round 33)",
  "size": [
   2400,
   1600
  ],
  "camera": {
   "position": [
-   5.9,
-   3.0,
-   1.3
+   7.6,
+   3.75,
+   1.45
   ],
   "target": [
    9.06,
    5.9,
-   1.55
+   1.4
   ],
-  "lens_mm": 32,
+  "lens_mm": 65,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 2.8,
   "focus": [
    9.059999999999999,
    5.699999999999999,
@@ -610,7 +610,8 @@
     0.35
    ],
    "irradiance": 3.0,
-   "color": 2700
+   "color": 2700,
+   "spread_deg": 180
   },
   "spk1": {
    "type": "area",
@@ -629,7 +630,8 @@
     0.35
    ],
    "irradiance": 3.0,
-   "color": 2700
+   "color": 2700,
+   "spread_deg": 180
   },
   "nfill2": {
    "type": "area",

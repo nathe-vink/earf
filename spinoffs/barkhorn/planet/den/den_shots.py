@@ -204,7 +204,7 @@ VIEWS = {
                             'storefront_paint': '#1F2B24', 'sconce_w': 25.0, 'haze': 0.04,
                             'siding': '#8E9384', 'sky': 0.05, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
                             'flat_glow': 0.12, 'across_glow': 0.06}},
-    'bar': {'title': 'the bar, from the window table',
+    'bar': {'title': 'the bar, from a stool',
             # bar-r2: the niche a soft glow, not a lightbox; the pinhole from the niche's front edge onto the face and
             # horn; a fill up the cabinet; the rim strip down; pendants pooling harder; the grade lifted and warmer
             'settings': {'exposure': 1.1, 'wb': 2650, 'niche_glow': 0.3, 'spot_niche': 450.0, 'niche_cone': 40.0,
@@ -217,8 +217,10 @@ VIEWS = {
             # (p5: from 3.4, 3.4 the bar top filled the frame and the speaker sat small at 6 m) from a stool's side,
             # 3.7 m off the speaker, the far room out of frame
             # after bar-r2 (4.5): back and wider, the pendants in the top quarter, the niche near the centre
-            'camera': {'position': [5.9, 3.0, 1.30], 'target': [9.06, 5.9, 1.55], 'lens_mm': 32, 'level': True,
-                       'fstop': 4.0, 'focus': [P.NICHES[1][0] + P.NICHES[1][1] / 2, P.BACKBAR_Y + 0.05, 1.3]}},
+            # (p8: the wide bar keeps the speaker small and half behind the bar top) the lead's close corner: from a
+            # stool at 65 mm, the Fog speaker in its niche, the third pendant pooling on the counter, a glass near
+            'camera': {'position': [7.6, 3.75, 1.45], 'target': [9.06, 5.9, 1.40], 'lens_mm': 65, 'level': True,
+                       'fstop': 2.8, 'focus': [P.NICHES[1][0] + P.NICHES[1][1] / 2, P.BACKBAR_Y + 0.05, 1.3]}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (4.5): 40 mm from further back and lower, the speaker on the left third; the
                   # speaker lit harder and from behind, the sconce and the records down, the grade less orange

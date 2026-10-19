@@ -13,8 +13,8 @@ FOR = {
     'street': 'the shopfront at night from across the street: one narrow storefront in an ordinary San Francisco '
               'building, the room glowing warm behind café curtains, a recessed door, the transom lit, the name in gold '
               'leaf on the glass.',
-    'bar': 'the bar: a reeded walnut bar under three brass pendants, the back-bar\'s lit shelves of bottles with a Fog '
-           'speaker standing among them, the listening room glimpsed at the far end.',
+    'bar': 'the bar from a stool, close: one of the Fog pair (clear acrylic) standing in its walnut niche in the '
+           'back-bar among lit shelves of bottles, a brass pendant pooling light on the walnut counter, a glass near.',
     'listening': 'the listening room at the back: one of the Ember pair beside the record wall, old brick behind it, '
                  'leather chairs turned toward it, a sconce and a lamp making pools of warm light.',
     'door': 'the whole room from just inside the door: the bar down the left, the banquette down the right, the '
