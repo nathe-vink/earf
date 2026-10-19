@@ -1,0 +1,337 @@
+{
+ "stage1": {
+  "impression": "A moody, convincingly warm night room with a good long-bar perspective, pendant pools and a hint of haze, but it reads as CG: smooth untextured concrete floor with hard, overlapping scalloped stool shadows, a perfectly regular row of identical stools, crushed featureless booths on the right, and no sign of life. The red speaker, which should be the hero, is a tiny blob at the vanishing point, half hidden behind the stools, and the bar's fir ceiling is as saturated a red-brown as the speaker itself.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker is readable at a glance as a tall tinted-acrylic horn speaker, unoccluded, at least ~8% of frame width, glowing through its acrylic",
+  "The right-hand booths and wall hold detail (no region >10% of frame more than half crushed; booth region median >= 18)",
+  "The floor reads as real polished concrete (aggregate, faint staining, soft reflections) with soft, natural shadow edges rather than overlapping hard discs",
+  "Stools and props show life: varied stool angles, glasses, a coat, menus visible at full resolution",
+  "Ceiling and timber neutral-warm brown rather than saturated red, so the speaker is the only saturated colour",
+  "Back-bar acrylic shelves read as thick, with glowing polished edges and bottles catching highlights"
+ ],
+ "defects": [
+  {
+   "region": [
+    295,
+    240,
+    325,
+    282
+   ],
+   "what": "Ember speaker tiny (~30x42 px of 720) and partly occluded by the stool row; silhouette does not read as a speaker"
+  },
+  {
+   "region": [
+    230,
+    320,
+    440,
+    480
+   ],
+   "what": "Floor: hard-edged overlapping disc shadows from the stools under the pendants form a repeating scallop pattern; concrete is smooth and textureless"
+  },
+  {
+   "region": [
+    470,
+    250,
+    720,
+    480
+   ],
+   "what": "Booths crushed: lum_median 7.7, crush_pct 29.5; leather and fir caps barely legible"
+  },
+  {
+   "region": [
+    440,
+    150,
+    560,
+    330
+   ],
+   "what": "Right wall/rear between booths and listening room nearly black (median 7.9), the frosted screen above the booths is the only thing reading"
+  },
+  {
+   "region": [
+    20,
+    290,
+    330,
+    480
+   ],
+   "what": "Stools identical and aligned in a perfect row: repeated copies of one model"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    100
+   ],
+   "what": "Ceiling and beams saturated red-orange (r 38, g 17, b 10), competing with the speaker as the frame's colour"
+  },
+  {
+   "region": [
+    0,
+    120,
+    300,
+    250
+   ],
+   "what": "Back-bar acrylic shelves read as thin flat grey sheet; bottles are dim silhouettes without highlights"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Proof is soft/smeared at 0.3 scale; denoiser smear on the stools and the speaker"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speaker is a tiny red block at the vanishing point, overlapped by the stool row.",
+   "evidence": {
+    "region": [
+     295,
+     240,
+     325,
+     282
+    ],
+    "measured": "speaker region 30x42 px (4% of frame width), stools cross in front of it at 1:1"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [1.6, 2.3, 1.45], target [17.0, 3.4, 1.2], 28 mm, focus [7.0, 3.0, 1.0]",
+    "to": "position [3.0, 1.9, 1.35], target [17.0, 2.8, 1.0], 40 mm, focus [12.0, 2.8, 1.0]"
+   },
+   "expected": "Camera moves into the aisle so the stool row clears the listening room; the Ember speaker fills ~8-10% of frame width with its silhouette and tint readable, bar still leading in on the left.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The booths along the right wall are crushed and featureless.",
+   "evidence": {
+    "region": [
+     470,
+     250,
+     720,
+     480
+    ],
+    "measured": "lum_median 7.7, lum_p95 31.7, crush_pct 29.5 over 16.6% of frame"
+   },
+   "change": {
+    "setting": "EARF Moon table lamp in each table lamp; candles",
+    "from": "120.0 W; 9 x 2.4 W",
+    "to": "260.0 W; 9 x 5.0 W"
+   },
+   "expected": "Warm pools on each booth table that lift the tan leather and fir caps; booth region median ~20, crush under 12%.",
+   "accept": {
+    "region": [
+     470,
+     250,
+     720,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The pendants throw hard, overlapping disc shadows of the stools onto the floor, a repeating scallop that reads as CG.",
+   "evidence": {
+    "region": [
+     230,
+     320,
+     440,
+     480
+    ],
+    "measured": "floor median 49.5, brighter than the bar top median 57 nearly; at 3x the shadow edges are hard discs in a regular row"
+   },
+   "change": {
+    "setting": "pendants 3 x spot",
+    "from": "950.0 W, cone 40.0 deg, small radius",
+    "to": "650.0 W, cone 55.0 deg, spot radius 0.10 m with blend 0.6"
+   },
+   "expected": "Softer, wider pools with penumbrae; the floor falls below the bar top in brightness so the eye goes to the bar and the speaker.",
+   "accept": {
+    "region": [
+     230,
+     320,
+     440,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     42
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The floor and ceiling surfaces are smooth CG planes with no material scale.",
+   "evidence": {
+    "region": [
+     440,
+     330,
+     560,
+     470
+    ],
+    "measured": "at 2x the concrete floor is a uniform grey with no aggregate, staining or reflections of the pendants"
+   },
+   "change": {
+    "setting": "floor's polish / concrete tone",
+    "from": "matte smooth",
+    "to": "polished concrete, roughness ~0.25 with a noise/stain map varying roughness 0.15-0.4 and albedo +/-10%, exposed fine aggregate"
+   },
+   "expected": "Soft, broken reflections of the pendants and the speaker's red glow on the floor; visible aggregate and staining at 1:1.",
+   "accept": {
+    "region": [
+     440,
+     330,
+     560,
+     470
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "post",
+   "problem": "The fir ceiling and walls are saturated red-orange, so the speaker is not the only colour.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     100
+    ],
+    "measured": "r_median 38, g_median 17, b_median 10 (R/B 3.8)"
+   },
+   "change": {
+    "setting": "render white_balance_k",
+    "from": "3000",
+    "to": "2600"
+   },
+   "expected": "Timber reads warm brown rather than red; the Ember's red stands alone.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     100
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The rear right wall between the booths and the listening room falls to black, so the room ends in a void.",
+   "evidence": {
+    "region": [
+     440,
+     150,
+     560,
+     330
+    ],
+    "measured": "lum_median 7.9, lum_p95 15.6"
+   },
+   "change": {
+    "setting": "sconce point / record-wall spots",
+    "from": "sconce 40.0 W; record wall 3 x 6.0 W",
+    "to": "sconce 110.0 W; record wall 3 x 18.0 W"
+   },
+   "expected": "A dim but legible far wall with texture, framing the listening room and speaker.",
+   "accept": {
+    "region": [
+     440,
+     150,
+     560,
+     330
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The back-bar's acrylic shelves read as thin flat grey sheets and the bottles carry no highlights.",
+   "evidence": {
+    "region": [
+     0,
+     120,
+     140,
+     250
+    ],
+    "measured": "lum_median 61.8, lum_p95 132.7; shelf edges barely brighter than the wall"
+   },
+   "change": {
+    "setting": "shelves' lit edges emission",
+    "from": "0.35",
+    "to": "0.9"
+   },
+   "expected": "Polished shelf edges glow as thick acrylic lines; bottles catch rim highlights.",
+   "accept": {
+    "region": [
+     0,
+     120,
+     140,
+     250
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 165
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Identical stools aligned in a perfect row and an empty room read as a showroom render.",
+   "evidence": {
+    "region": [
+     20,
+     290,
+     330,
+     480
+    ],
+    "measured": "seven stools at identical rotation and spacing; no props legible at proof scale"
+   },
+   "change": {
+    "setting": "props / stool placement",
+    "from": "stools aligned, props small on the bar",
+    "to": "rotate stools randomly +/-15 deg, pull two out 15 cm, a coat over one stool back, two rocks glasses and a record out of its sleeve on the bar near camera"
+   },
+   "expected": "The row reads as used furniture and the room as lived-in.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember speaker larger or move it forward in the room",
+   "why": "The speaker and the room layout are fixed; only the camera can make it bigger in frame (c1)."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

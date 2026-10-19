@@ -80,7 +80,8 @@ CHAIR = dict(seat_h=0.46, seat_r=0.21, top=0.80, foot_r=0.20, rest_z=None)
 
 def seats():
     """Every stool and chair outside the lounge: (x, y, the direction it faces in degrees, kind)."""
-    out = [(x, y, 90.0 + ((i * 5) % 7 - 3) * 2.5, 'stool') for i, (x, y) in enumerate(stools())]   # facing the bar
+    out = [(x, y - (0.15 if i in (2, 6) else 0.0), 90.0 + ((i * 5) % 7 - 3) * 6.0, 'stool')       # facing the bar, each
+           for i, (x, y) in enumerate(stools())]                     # turned a little, two pulled out (bar-p12)
     wx, wy = WINDOW_TABLE
     out += [(wx, wy - 0.62, 90.0, 'chair'), (wx, wy + 0.62, 270.0, 'chair')]                       # facing their table
     return out
