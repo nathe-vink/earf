@@ -150,18 +150,20 @@ VIEWS = {
                # pendants blown: 35 mm turned left so the lightbox and the speaker both hold; the lightbox up; the
                # speaker's lamps down; the name's glow off; the lamp behind the camera down; the pendants softer;
                # the room's sources up a little (not the grade)
+               # (p14a, not judged: the name gone without its glow, median 16.9: the name as p13, the lightbox and the
+               # room's sources up)
                'camera': {'position': [-2.6, 2.7, 1.5], 'target': [6.86, 5.96, 1.4], 'lens_mm': 35, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
                'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
-                            'screen_glow': 0.4, 'screen_window': 0.45, 'screen_tint': '#FFA060', 'spot_niche': 430.0,
+                            'screen_glow': 0.4, 'screen_window': 0.7, 'screen_tint': '#FFA060', 'spot_niche': 560.0,
                             'spk_link': True, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 120.0,
-                            'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 60.0, 'entry_cone': 100.0,
+                            'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 80.0, 'entry_cone': 100.0,
                             'transom_glow': 0.15, 'spk_irr': 15.0, 'spk_back': 60.0, 'spk_spread': 90.0,
-                            'pendant_w': 480.0, 'pendant_glow': 0.2, 'pendant_lamp': 1.0, 'inlay_glow': 1.08,
-                            'bell_w': 75.0, 'sconce_w': 44.0, 'spot_records': 48.0, 'candle_w': 2.9, 'tlamp_glow': 0.08,
+                            'pendant_w': 620.0, 'pendant_glow': 0.2, 'pendant_lamp': 1.0, 'inlay_glow': 1.08,
+                            'bell_w': 95.0, 'sconce_w': 57.0, 'spot_records': 62.0, 'candle_w': 3.8, 'tlamp_glow': 0.08,
                             'tlamp_bulb': 1.0, 'haze': 0.005, 'shelf_glow': 0.25, 'siding': '#8E9384', 'sky': 0.03,
                             'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05,
-                            'linen_trans': 0.5, 'etch_glow': 0.0, 'etch_frost': 0.25, 'glass_gloss': 3.0, 'chair_dye': '#2B2119',
+                            'linen_trans': 0.5, 'etch_glow': 0.01, 'etch_frost': 0.3, 'glass_gloss': 3.0, 'chair_dye': '#2B2119',
                             'screen_gap': 0.06, 'screen_rough': 0.3,
                             'chair_move': {'2': [0.0, -0.5, 0.0], '5': [-0.5, -0.35, 0.0]}}},
 }
