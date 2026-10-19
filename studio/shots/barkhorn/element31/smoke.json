@@ -8,7 +8,7 @@
     "position": [
      0.0,
      0.0,
-     -0.045
+     -0.03
     ],
     "rotate_z": 18.0,
     "hide": [
@@ -82,9 +82,9 @@
      19.0,
      12.0
     ],
-    "density": 0.04,
+    "density": 0.15,
     "seed": 1,
-    "scale": 4.0,
+    "scale": 3.0,
     "cut": 0.4,
     "soft": 0.3,
     "anisotropy": 0.85,
@@ -346,128 +346,6 @@
    },
    {
     "kind": "kit",
-    "shape": "sphere",
-    "material": "pbr",
-    "texture": "forest_leaves_04",
-    "tex_res": "2k",
-    "position": [
-     0.0773,
-     -0.2378,
-     -0.03
-    ],
-    "scale": [
-     0.36,
-     0.14,
-     0.15
-    ],
-    "rotate": [
-     0,
-     0,
-     18.0
-    ],
-    "tint": "#4A3626",
-    "tint_mix": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "pbr",
-    "texture": "forest_leaves_04",
-    "tex_res": "2k",
-    "position": [
-     -0.0773,
-     0.2378,
-     -0.03
-    ],
-    "scale": [
-     0.36,
-     0.14,
-     0.15
-    ],
-    "rotate": [
-     0,
-     0,
-     18.0
-    ],
-    "tint": "#4A3626",
-    "tint_mix": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "pbr",
-    "texture": "forest_leaves_04",
-    "tex_res": "2k",
-    "position": [
-     -0.3043,
-     -0.0989,
-     -0.03
-    ],
-    "scale": [
-     0.14,
-     0.27,
-     0.15
-    ],
-    "rotate": [
-     0,
-     0,
-     18.0
-    ],
-    "tint": "#4A3626",
-    "tint_mix": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "pbr",
-    "texture": "forest_leaves_04",
-    "tex_res": "2k",
-    "position": [
-     0.3043,
-     0.0989,
-     -0.03
-    ],
-    "scale": [
-     0.14,
-     0.27,
-     0.15
-    ],
-    "rotate": [
-     0,
-     0,
-     18.0
-    ],
-    "tint": "#4A3626",
-    "tint_mix": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "material": "pbr",
-    "texture": "forest_leaves_04",
-    "tex_res": "2k",
-    "radius": 0.62,
-    "height": 0.012,
-    "position": [
-     0.0,
-     0.0,
-     -0.004
-    ],
-    "scale": [
-     1.0,
-     0.8,
-     1.0
-    ],
-    "rotate": [
-     0,
-     0,
-     18.0
-    ],
-    "tint": "#15100C",
-    "tint_mix": 0.7
-   },
-   {
-    "kind": "kit",
     "shape": "asset",
     "model": "fern_02",
     "position": [
@@ -485,56 +363,22 @@
    },
    {
     "kind": "kit",
-    "shape": "asset",
-    "model": "pine_roots",
-    "position": [
-     1.6,
-     1.2,
-     -0.02
-    ],
-    "rotate": [
-     0,
-     0,
-     120
-    ],
-    "scale": 1.0,
-    "res": "1k"
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "tree_stump_01",
-    "position": [
-     -2.2,
-     2.4,
-     -0.05
-    ],
-    "rotate": [
-     0,
-     0,
-     60
-    ],
-    "scale": 0.9,
-    "res": "1k"
-   },
-   {
-    "kind": "kit",
     "shape": "scatter_assets",
     "models": [
      "dry_branches_medium_01"
     ],
-    "count": 4,
+    "count": 3,
     "area": [
-     -2.0,
-     -1.5,
-     2.5,
-     1.8
+     -1.8,
+     -1.6,
+     2.0,
+     1.2
     ],
     "avoid": [
      [
       0.0,
       0.0,
-      1.0
+      0.9
      ],
      [
       -0.75,
@@ -543,8 +387,8 @@
      ]
     ],
     "scale": [
-     0.5,
-     0.8
+     0.18,
+     0.28
     ],
     "seed": 21,
     "res": "1k",
@@ -556,27 +400,14 @@
     "module": "smoke_el",
     "fn": "burnpile",
     "position": [
-     5.0,
-     5.2,
+     8.0,
+     9.0,
      0.0
     ],
-    "radius": 0.9,
+    "radius": 0.7,
     "seed": 3,
-    "ember": 90.0
-   },
-   {
-    "kind": "kit",
-    "shape": "cylinder",
-    "material": "sand",
-    "color": "#8E8A85",
-    "tint2": "#5E5A56",
-    "radius": 1.15,
-    "height": 0.025,
-    "position": [
-     5.0,
-     5.2,
-     -0.01
-    ]
+    "ember": 60.0,
+    "logs": 10
    },
    {
     "kind": "kit",
@@ -584,95 +415,31 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     5.0,
-     5.2,
+     8.0,
+     9.0,
      0.1
     ],
     "size": [
-     0.7,
-     0.7,
-     2.2
-    ],
-    "density": 18.0,
-    "seed": 11,
-    "scale": 0.35,
-    "cut": 0.42,
-    "soft": 0.22,
-    "anisotropy": 0.45,
-    "fade": [
-     0.42,
-     0.42,
-     0.4
-    ],
-    "floor": 0.2,
-    "rise": 2.2,
-    "color": "#9DA2AA",
-    "detail_scale": 0.12,
-    "detail_weight": 0.35
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_el",
-    "fn": "woodsmoke",
-    "position": [
-     4.922698960719385,
-     5.155555555555556,
-     1.05
-    ],
-    "size": [
-     0.8839224383899684,
-     0.8839224383899684,
-     2.2
-    ],
-    "density": 12.959999999999999,
-    "seed": 12,
-    "scale": 0.40555555555555556,
-    "cut": 0.4333333333333333,
-    "soft": 0.22,
-    "anisotropy": 0.45,
-    "fade": [
-     0.42,
-     0.42,
-     0.4
-    ],
-    "floor": 0.17777777777777778,
-    "rise": 2.111111111111111,
-    "color": "#9DA2AA",
-    "detail_scale": 0.1311111111111111,
-    "detail_weight": 0.37777777777777777
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_el",
-    "fn": "woodsmoke",
-    "position": [
-     4.765667068307803,
-     5.111111111111112,
+     0.5,
+     0.5,
      2.0
     ],
-    "size": [
-     1.1528701650251687,
-     1.1528701650251687,
-     2.2
-    ],
-    "density": 9.331199999999999,
-    "seed": 13,
-    "scale": 0.4611111111111111,
-    "cut": 0.44666666666666666,
+    "density": 30.0,
+    "seed": 21,
+    "scale": 0.3,
+    "cut": 0.45,
     "soft": 0.22,
-    "anisotropy": 0.45,
+    "anisotropy": 0.75,
     "fade": [
      0.42,
      0.42,
      0.4
     ],
-    "floor": 0.15555555555555556,
-    "rise": 2.0222222222222226,
-    "color": "#9DA2AA",
-    "detail_scale": 0.14222222222222222,
-    "detail_weight": 0.40555555555555556
+    "floor": 0.1,
+    "rise": 2.2,
+    "color": "#C9CCD1",
+    "detail_scale": 0.12,
+    "detail_weight": 0.4
    },
    {
     "kind": "kit",
@@ -680,31 +447,31 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     4.551689056424451,
-     5.066666666666666,
-     2.9499999999999997
+     7.902216446247712,
+     8.957142857142857,
+     1.0
     ],
     "size": [
-     1.4671712995465218,
-     1.4671712995465218,
-     2.2
+     0.6912422258182558,
+     0.6912422258182558,
+     2.0
     ],
-    "density": 6.718463999999999,
-    "seed": 14,
-    "scale": 0.5166666666666666,
-    "cut": 0.45999999999999996,
+    "density": 22.5,
+    "seed": 22,
+    "scale": 0.36428571428571427,
+    "cut": 0.46714285714285714,
     "soft": 0.22,
-    "anisotropy": 0.45,
+    "anisotropy": 0.75,
     "fade": [
      0.42,
      0.42,
      0.4
     ],
-    "floor": 0.13333333333333336,
-    "rise": 1.9333333333333336,
-    "color": "#9DA2AA",
-    "detail_scale": 0.15333333333333332,
-    "detail_weight": 0.4333333333333333
+    "floor": 0.08571428571428573,
+    "rise": 2.085714285714286,
+    "color": "#C9CCD1",
+    "detail_scale": 0.13428571428571429,
+    "detail_weight": 0.4357142857142857
    },
    {
     "kind": "kit",
@@ -712,31 +479,31 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     4.289635386710373,
-     5.022222222222222,
-     3.9
+     7.703575695290794,
+     8.914285714285715,
+     1.9000000000000001
     ],
     "size": [
-     1.8150971472826534,
-     1.8150971472826534,
-     2.2
+     0.9708935958235849,
+     0.9708935958235849,
+     2.0
     ],
-    "density": 4.8372940799999995,
-    "seed": 15,
-    "scale": 0.5722222222222222,
-    "cut": 0.47333333333333333,
+    "density": 16.875,
+    "seed": 23,
+    "scale": 0.42857142857142855,
+    "cut": 0.4842857142857143,
     "soft": 0.22,
-    "anisotropy": 0.45,
+    "anisotropy": 0.75,
     "fade": [
      0.42,
      0.42,
      0.4
     ],
-    "floor": 0.11111111111111112,
-    "rise": 1.8444444444444446,
-    "color": "#9DA2AA",
-    "detail_scale": 0.16444444444444445,
-    "detail_weight": 0.4611111111111111
+    "floor": 0.07142857142857144,
+    "rise": 1.9714285714285715,
+    "color": "#C9CCD1",
+    "detail_scale": 0.14857142857142858,
+    "detail_weight": 0.4714285714285714
    },
    {
     "kind": "kit",
@@ -744,31 +511,31 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     3.984833355100787,
-     4.977777777777778,
-     4.85
+     7.432899768789371,
+     8.871428571428572,
+     2.8000000000000003
     ],
     "size": [
-     2.1903755652826034,
-     2.1903755652826034,
-     2.2
+     1.2977033590544371,
+     1.2977033590544371,
+     2.0
     ],
-    "density": 3.4828517375999994,
-    "seed": 16,
-    "scale": 0.6277777777777778,
-    "cut": 0.48666666666666664,
+    "density": 12.65625,
+    "seed": 24,
+    "scale": 0.4928571428571428,
+    "cut": 0.5014285714285714,
     "soft": 0.22,
-    "anisotropy": 0.45,
+    "anisotropy": 0.75,
     "fade": [
      0.42,
      0.42,
      0.4
     ],
-    "floor": 0.08888888888888889,
-    "rise": 1.7555555555555558,
-    "color": "#9DA2AA",
-    "detail_scale": 0.17555555555555555,
-    "detail_weight": 0.4888888888888889
+    "floor": 0.05714285714285714,
+    "rise": 1.8571428571428572,
+    "color": "#C9CCD1",
+    "detail_scale": 0.16285714285714287,
+    "detail_weight": 0.5071428571428571
    },
    {
     "kind": "kit",
@@ -776,31 +543,31 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     3.6409753517492662,
-     4.933333333333334,
-     5.799999999999999
+     7.1014095412718605,
+     8.82857142857143,
+     3.7
     ],
     "size": [
-     2.5889973190305193,
-     2.5889973190305193,
-     2.2
+     1.6594760395562111,
+     1.6594760395562111,
+     2.0
     ],
-    "density": 2.5076532510719995,
-    "seed": 17,
-    "scale": 0.6833333333333333,
-    "cut": 0.5,
+    "density": 9.4921875,
+    "seed": 25,
+    "scale": 0.5571428571428572,
+    "cut": 0.5185714285714286,
     "soft": 0.22,
-    "anisotropy": 0.45,
+    "anisotropy": 0.75,
     "fade": [
      0.42,
      0.42,
      0.4
     ],
-    "floor": 0.06666666666666668,
-    "rise": 1.666666666666667,
-    "color": "#9DA2AA",
-    "detail_scale": 0.18666666666666665,
-    "detail_weight": 0.5166666666666666
+    "floor": 0.042857142857142864,
+    "rise": 1.742857142857143,
+    "color": "#C9CCD1",
+    "detail_scale": 0.17714285714285713,
+    "detail_weight": 0.5428571428571429
    },
    {
     "kind": "kit",
@@ -808,31 +575,31 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     3.260829353286076,
-     4.888888888888889,
-     6.749999999999999
+     6.715843886281025,
+     8.785714285714286,
+     4.6
     ],
     "size": [
-     3.0081401099954554,
-     3.0081401099954554,
-     2.2
+     2.049689874192816,
+     2.049689874192816,
+     2.0
     ],
-    "density": 1.8055103407718396,
-    "seed": 18,
-    "scale": 0.7388888888888889,
-    "cut": 0.5133333333333333,
+    "density": 7.119140625,
+    "seed": 26,
+    "scale": 0.6214285714285714,
+    "cut": 0.5357142857142857,
     "soft": 0.22,
-    "anisotropy": 0.45,
+    "anisotropy": 0.75,
     "fade": [
      0.42,
      0.42,
      0.4
     ],
-    "floor": 0.044444444444444446,
-    "rise": 1.577777777777778,
-    "color": "#9DA2AA",
-    "detail_scale": 0.19777777777777777,
-    "detail_weight": 0.5444444444444444
+    "floor": 0.02857142857142857,
+    "rise": 1.6285714285714286,
+    "color": "#C9CCD1",
+    "detail_scale": 0.19142857142857145,
+    "detail_weight": 0.5785714285714286
    },
    {
     "kind": "kit",
@@ -840,31 +607,31 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     2.846577174748319,
-     4.844444444444445,
-     7.699999999999999
+     6.280873569364343,
+     8.742857142857144,
+     5.5
     ],
     "size": [
-     3.445691246427784,
-     3.445691246427784,
-     2.2
+     2.464176068012688,
+     2.464176068012688,
+     2.0
     ],
-    "density": 1.2999674453557244,
-    "seed": 19,
-    "scale": 0.7944444444444444,
-    "cut": 0.5266666666666666,
+    "density": 5.33935546875,
+    "seed": 27,
+    "scale": 0.6857142857142857,
+    "cut": 0.5528571428571428,
     "soft": 0.22,
-    "anisotropy": 0.45,
+    "anisotropy": 0.75,
     "fade": [
      0.42,
      0.42,
      0.4
     ],
-    "floor": 0.022222222222222233,
-    "rise": 1.488888888888889,
-    "color": "#9DA2AA",
-    "detail_scale": 0.2088888888888889,
-    "detail_weight": 0.5722222222222222
+    "floor": 0.01428571428571429,
+    "rise": 1.5142857142857145,
+    "color": "#C9CCD1",
+    "detail_scale": 0.2057142857142857,
+    "detail_weight": 0.6142857142857143
    },
    {
     "kind": "kit",
@@ -872,21 +639,21 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     2.4,
-     4.8,
-     8.649999999999999
+     5.8,
+     8.7,
+     6.3999999999999995
     ],
     "size": [
-     3.9000000000000004,
-     3.9000000000000004,
-     2.2
+     2.9,
+     2.9,
+     2.0
     ],
-    "density": 0.9359765606561214,
-    "seed": 20,
-    "scale": 0.85,
-    "cut": 0.54,
+    "density": 4.0045166015625,
+    "seed": 28,
+    "scale": 0.75,
+    "cut": 0.5700000000000001,
     "soft": 0.22,
-    "anisotropy": 0.45,
+    "anisotropy": 0.75,
     "fade": [
      0.42,
      0.42,
@@ -894,69 +661,9 @@
     ],
     "floor": 0.0,
     "rise": 1.4000000000000001,
-    "color": "#9DA2AA",
+    "color": "#C9CCD1",
     "detail_scale": 0.22,
-    "detail_weight": 0.6
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_el",
-    "fn": "woodsmoke",
-    "position": [
-     -1.0,
-     3.0,
-     1.6
-    ],
-    "size": [
-     16.0,
-     8.0,
-     4.0
-    ],
-    "density": 0.5,
-    "seed": 9,
-    "scale": 1.2,
-    "cut": 0.45,
-    "soft": 0.3,
-    "anisotropy": 0.75,
-    "fade": [
-     0.3,
-     0.4,
-     0.5
-    ],
-    "floor": 0.02,
-    "rise": 0.6,
-    "color": "#CFCBC6"
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_el",
-    "fn": "woodsmoke",
-    "position": [
-     0.0,
-     -1.6,
-     0.0
-    ],
-    "size": [
-     9.0,
-     3.0,
-     1.8
-    ],
-    "density": 0.12,
-    "seed": 13,
-    "scale": 0.8,
-    "cut": 0.48,
-    "soft": 0.3,
-    "anisotropy": 0.6,
-    "fade": [
-     0.3,
-     0.35,
-     0.6
-    ],
-    "floor": 0.02,
-    "rise": 0.5,
-    "color": "#D6D0C8"
+    "detail_weight": 0.65
    }
   ]
  },
@@ -972,8 +679,8 @@
     0.0,
     0.6
    ],
-   "irradiance": 3.0,
-   "color": "#9EA8B6",
+   "irradiance": 2.0,
+   "color": "#A9B4C2",
    "orbit": {
     "azimuth_deg": -20,
     "elevation_deg": 5,
@@ -1022,8 +729,8 @@
     0.0,
     0.6
    ],
-   "irradiance": 4.0,
-   "color": "#B4AEA6",
+   "irradiance": 7.0,
+   "color": "#C9BBA8",
    "orbit": {
     "azimuth_deg": -25,
     "elevation_deg": 12,
@@ -1064,19 +771,19 @@
   "kicker": {
    "type": "area",
    "size_m": [
-    1.0,
+    0.5,
     2.4
    ],
    "target": [
     0.0,
     0.0,
-    0.9
+    0.8
    ],
-   "irradiance": 30.0,
-   "color": "#FFC79A",
+   "irradiance": 42.0,
+   "color": "#FFB978",
    "orbit": {
     "azimuth_deg": -150,
-    "elevation_deg": 10,
+    "elevation_deg": 22,
     "distance_m": 3.0
    },
    "receivers": [
@@ -1097,19 +804,19 @@
   "kicker_r": {
    "type": "area",
    "size_m": [
-    1.0,
-    0.5
+    0.6,
+    2.4
    ],
    "target": [
     0.0,
     0.0,
-    0.4
+    0.8
    ],
-   "irradiance": 50.0,
-   "color": "#FF8A40",
+   "irradiance": 26.0,
+   "color": "#FFB978",
    "orbit": {
-    "azimuth_deg": 144,
-    "elevation_deg": 2,
+    "azimuth_deg": 150,
+    "elevation_deg": 14,
     "distance_m": 3.0
    },
    "receivers": [
@@ -1130,82 +837,31 @@
   "sungap": {
    "type": "spot",
    "position": [
-    7.13,
-    12.36,
-    4.64
+    5.4,
+    9.36,
+    4.73
    ],
    "target": [
     0.0,
     0.0,
     0.3
    ],
-   "power_w": 210000,
-   "cone_deg": 10.0,
+   "power_w": 60000,
+   "cone_deg": 9.0,
    "blend": 0.5,
-   "color": "#FFCC9A",
+   "color": "#FFB978",
    "radius_m": 0.15
   },
   "embers": {
    "type": "point",
    "position": [
-    5.0,
-    5.2,
-    0.35
+    8.0,
+    9.0,
+    0.3
    ],
-   "power_w": 140,
+   "power_w": 60,
    "color": "#FF5A14",
    "radius_m": 0.3
-  },
-  "emberglow": {
-   "type": "area",
-   "size_m": [
-    1.0,
-    1.0
-   ],
-   "position": [
-    5.0,
-    5.2,
-    0.06
-   ],
-   "target": [
-    5.0,
-    5.2,
-    2.0
-   ],
-   "power_w": 90,
-   "color": "#FF6A20"
-  },
-  "plumefill": {
-   "off": true,
-   "type": "area",
-   "size_m": [
-    6.0,
-    6.0
-   ],
-   "position": [
-    0.0,
-    -5.8,
-    2.5
-   ],
-   "target": [
-    3.8,
-    5.2,
-    4.0
-   ],
-   "irradiance": 12.0,
-   "color": "#C9CED6",
-   "receivers": [
-    "prop17-kit",
-    "prop18-kit",
-    "prop19-kit",
-    "prop20-kit",
-    "prop21-kit",
-    "prop22-kit",
-    "prop23-kit",
-    "prop24-kit",
-    "prop25-kit",
-    "prop26-kit"
-   ]
   }
  },
  "render": {
@@ -1215,7 +871,7 @@
   "clamp": 10.0,
   "bounces": 12,
   "view": "AgX",
-  "exposure": 0.3,
+  "exposure": 0.0,
   "look": "AgX - Base Contrast"
  },
  "title": "barkhorn, Smoke, woodsmoke at dawn",
@@ -1225,9 +881,9 @@
  ],
  "camera": {
   "position": [
-   -2.1889,
-   -6.014,
-   1.1
+   -2.4625,
+   -6.7658,
+   1.0
   ],
   "target": [
    0.0,
@@ -1243,51 +899,38 @@
    0.7
   ],
   "shift_x": 0.14,
-  "shift_y": -0.05
+  "shift_y": -0.04
  },
  "sky": {
   "kind": "hdri",
   "polyhaven": "misty_pines",
   "rotation_deg": 0.0,
-  "strength": 0.4,
+  "strength": 0.15,
   "res": "4k"
  },
  "sun": {
   "azimuth_deg": 150.0,
-  "elevation_deg": 18.0,
-  "irradiance": 75.0,
+  "elevation_deg": 24.0,
+  "irradiance": 30.0,
   "angle_deg": 0.5,
-  "color": "#FFCC9A"
+  "color": "#FFB978"
  },
  "finish": {
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.15,
-  "clarity": 0.0,
-  "sharpen": 0.0,
+  "contrast": 0.04,
+  "clarity": 0.03,
+  "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.06,
+   "bloom": 0.04,
    "bloom_px": 40,
    "bloom_threshold": 0.85,
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.18
+   "vignette": 0.25
   }
- },
- "haze": {
-  "box_m": [
-   -15.0,
-   -15.0,
-   0.0,
-   18.0,
-   30.0,
-   14.0
-  ],
-  "density": 0.0,
-  "anisotropy": 0.7,
-  "color": "#BCC4CE"
  }
 }
