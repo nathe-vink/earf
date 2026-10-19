@@ -103,22 +103,20 @@ S.lights = lights
 
 VIEWS = {
     'bar': {'title': 'the bar, down the room',
-            # the owner's seating (2026-10-19, after the review set): booths along the right-hand wall, stools and
-            # chairs after Fyrn, every seat facing its table. And bar p7's two critics (4.5, 4.0), shared: the listening
-            # room blown (median 160): its records' strip and spots down; the Ember speakers pale pink: their front
-            # lamps down, the light from behind, 3000 K; the foreground black: the inlay up, the pendants' cones wider,
-            # the sconce up; the screens below the speaker; the back-bar's edges and niches up; three lounge chairs
-            # moved off the sightline to the left Ember speaker, as a stylist would
-            # (p8, not judged: the seating reads, the median 18: the pendants, the booths' lamps, the inlay up)
-            'camera': {'position': [1.6, 2.3, 1.45], 'target': [17.0, 3.4, 1.2], 'lens_mm': 28, 'level': True,
-                       'fstop': 5.6, 'focus': [7.0, 3.0, 1.0]},
-            'settings': {'exposure': 1.0, 'wb': 3000, 'shelf_glow': 0.8, 'niche_glow': 0.3, 'spot_niche': 400.0,
+            # the owner's seating (booths, stools after Fyrn) from p8. After the two critics on p9 (4.5, 4.5): the
+            # speaker a small red smudge: closer, by the stools on 40 mm, aimed at it, and lit harder; the screen out-
+            # shone it, cool: dimmer and warm; the shelf edges and the inlay read as LED strips and phone screens: down;
+            # the near booth crushed: its lamp up; the pendants clipped: their lamps down
+            'camera': {'position': [5.5, 2.5, 1.30], 'target': [16.15, 4.6, 0.95], 'lens_mm': 40, 'level': True,
+                       'fstop': 4.0, 'focus': [16.15, 4.85, 0.8]},
+            'settings': {'exposure': 1.0, 'wb': 3000, 'shelf_glow': 0.35, 'niche_glow': 0.3, 'spot_niche': 400.0,
                          'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 700.0,
-                         'pendant_cone': 40.0, 'pendant_glow': 0.225, 'shade_glow': 0.6, 'inlay_glow': 2.4,
-                         'haze': 0.015, 'screen_glow': 0.4, 'screen_gap': 0.04, 'screen_rough': 0.22,
-                         'bell_w': 130.0, 'sconce_w': 25.0, 'spot_records': 6.0, 'rec_cone': 40.0, 'record_glow': 0.3,
-                         'candle_w': 2.4, 'tlamp_glow': 0.2, 'spk_irr': 25.0, 'spk_back': 90.0, 'spk_spread': 90.0,
-                         'spk_link': True, 'chair_dye': '#4A3A32',
+                         'pendant_cone': 40.0, 'pendant_glow': 0.15, 'pendant_lamp': 1.5, 'shade_glow': 0.6,
+                         'inlay_glow': 1.0, 'haze': 0.015, 'screen_glow': 0.2, 'screen_tint': '#FFA060',
+                         'screen_gap': 0.04, 'screen_rough': 0.22, 'bell_w': 200.0, 'sconce_w': 25.0,
+                         'spot_records': 6.0, 'rec_cone': 40.0, 'record_glow': 0.3, 'candle_w': 2.4, 'tlamp_glow': 0.2,
+                         'spk_irr': 50.0, 'spk_back': 90.0, 'spk_spread': 90.0, 'spk_link': True,
+                         'chair_dye': '#4A3A32',
                          'chair_move': {'1': [0.0, -0.25, 0.0], '4': [0.0, 0.30, 0.0], '6': [0.30, 0.25, 0.0]}}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # p6's frame again (5.25 at proof size, 5.5 at 1200 x 800: the best yet), with only the changes its four

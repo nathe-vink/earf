@@ -6,22 +6,22 @@
  ],
  "camera": {
   "position": [
-   1.6,
-   2.3,
-   1.45
+   5.5,
+   2.5,
+   1.3
   ],
   "target": [
-   17.0,
-   3.4,
-   1.2
+   16.15,
+   4.6,
+   0.95
   ],
-  "lens_mm": 28,
+  "lens_mm": 40,
   "level": true,
-  "fstop": 5.6,
+  "fstop": 4.0,
   "focus": [
-   7.0,
-   3.0,
-   1.0
+   16.15,
+   4.85,
+   0.8
   ]
  },
  "products": [
@@ -88,9 +88,9 @@
     "shape": "ext",
     "module": "planet_loft",
     "fn": "room",
-    "shelf_glow": 0.8,
+    "shelf_glow": 0.35,
     "shade_glow": 0.6,
-    "pendant_glow": 0.225,
+    "pendant_glow": 0.15,
     "flame": 25.0,
     "record_glow": 0.3,
     "vu": 2.0,
@@ -103,11 +103,12 @@
     "neighbour_plain": true,
     "niche_glow": 0.3,
     "flat_glow": 0.06,
-    "screen_glow": 0.4,
-    "inlay_glow": 2.4,
-    "pendant_lamp": 2.5,
+    "screen_glow": 0.2,
+    "inlay_glow": 1.0,
+    "pendant_lamp": 1.5,
     "etch_glow": 0.05,
     "menu_color": "#8A6E4E",
+    "screen_tint": "#FFA060",
     "tlamp_glow": 0.2,
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -370,7 +371,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 25.0,
+   "irradiance": 50.0,
    "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
@@ -416,7 +417,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 25.0,
+   "irradiance": 50.0,
    "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
@@ -739,7 +740,7 @@
     0.29,
     1.01
    ],
-   "power_w": 130.0,
+   "power_w": 200.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -751,7 +752,7 @@
     0.29,
     1.01
    ],
-   "power_w": 130.0,
+   "power_w": 200.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -763,7 +764,7 @@
     0.29,
     1.01
    ],
-   "power_w": 130.0,
+   "power_w": 200.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -775,7 +776,7 @@
     4.3999999999999995,
     1.01
    ],
-   "power_w": 130.0,
+   "power_w": 200.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -787,7 +788,7 @@
     2.17,
     0.77
    ],
-   "power_w": 130.0,
+   "power_w": 200.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -799,7 +800,7 @@
     3.9299999999999997,
     0.77
    ],
-   "power_w": 130.0,
+   "power_w": 200.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false

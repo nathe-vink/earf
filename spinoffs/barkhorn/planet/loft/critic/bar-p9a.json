@@ -1,0 +1,392 @@
+{
+ "stage1": {
+  "impression": "A warm, dim, plausibly laid-out bar that reads at once as CG: the floor is a field of denoiser blotches, the materials go soft and smooth at 1:1, and the shelf edges and bar-top lights look like neon strips and small glowing phone screens. The one EARF speaker is a small red smudge at the vanishing point, out-shone by a cool grey wall screen, so the frame has no hero. Mood and palette are on brief, but the craft is not near a magazine photograph.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Floor and shadow areas free of denoiser blotching and smear at 1:1 (polished floor reflections resolve as clean, slightly broken highlights, not mottled patches)",
+  "The Ember speaker reads as the hero at a glance: it fills at least about 8% of the frame height, its region lum_median >= 45, and it is the most saturated and most attention-holding thing in the frame",
+  "No neutral glowing surface (wall screen, shelf edges, pendants) out-shines or out-sizes the speaker; screen median below the speaker's",
+  "Board-formed concrete, checked fir beams and blackened-steel patina visible at 1:1 at delivery size (tie holes, board grain, edge sharpness)",
+  "Shelf lit edges and bar-top inlay read as architectural light (soft, warm, low), not LED signage or screens",
+  "The right foreground booth holds shadow detail (crush_pct < 10) and the left foreground is more than a dark mass",
+  "Visible signs of life (a coat on a stool, glasses with liquid, a record out of its sleeve) and variety among the identical stools",
+  "Pendant tubes show a soft frosted gradient, not flat clipped white"
+ ],
+ "defects": [
+  {
+   "region": [
+    300,
+    300,
+    600,
+    480
+   ],
+   "what": "Floor is mottled with large denoiser blotches and smeared reflection pools; the strongest CG giveaway"
+  },
+  {
+   "region": [
+    285,
+    235,
+    325,
+    285
+   ],
+   "what": "Ember speaker tiny, distant and dim (median 40.6, delta E 18.8 against a deep red reference); it reads as a red lamp, not a $20k horn speaker; silhouette and acrylic not legible"
+  },
+  {
+   "region": [
+    570,
+    110,
+    620,
+    245
+   ],
+   "what": "Wall screen is the largest bright area (median 90) and cool grey-blue (b > r), so it competes with the speaker and reads as a TV"
+  },
+  {
+   "region": [
+    0,
+    145,
+    140,
+    245
+   ],
+   "what": "Shelf lit edges read as thin white neon/LED strips (p95 156), signage-like rather than glowing thick acrylic edges"
+  },
+  {
+   "region": [
+    90,
+    255,
+    420,
+    290
+   ],
+   "what": "Bar-top inlay lights read as small bright rectangles like phone screens or price tags (clip 0.38%)"
+  },
+  {
+   "region": [
+    12,
+    80,
+    56,
+    150
+   ],
+   "what": "Pendant tubes flat white with clipping (2.6%), no frosted falloff; the three pendants look like identical CG cylinders"
+  },
+  {
+   "region": [
+    540,
+    280,
+    720,
+    480
+   ],
+   "what": "Right foreground booth and table crushed (crush_pct 23.6), leather and fir cap illegible"
+  },
+  {
+   "region": [
+    0,
+    280,
+    320,
+    480
+   ],
+   "what": "Stools are repeated identical copies in a perfect row; foreground is a dark, soft mass (median 15)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    120
+   ],
+   "what": "Fir beams and ceiling smooth and smeared; no checks, nail holes or end grain"
+  },
+  {
+   "region": [
+    600,
+    0,
+    720,
+    280
+   ],
+   "what": "Concrete reads as a generic noisy plaster texture, no board-form lines or tie holes"
+  },
+  {
+   "region": [
+    330,
+    180,
+    415,
+    250
+   ],
+   "what": "Smoked acrylic partition and record wall barely readable; partition has no visible edge, thickness or reflection"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Whole frame soft (proof at 0.3 scale) with no sign of life: no people, coats, drinks being poured"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The speaker, the frame's only colour and its reason to exist, is a tiny smudge at the vanishing point.",
+   "evidence": {
+    "region": [
+     285,
+     235,
+     325,
+     285
+    ],
+    "measured": "speaker spans about 40 x 50 px of 720 x 480 (about 10% of height including stand glow), median 40.6"
+   },
+   "change": {
+    "setting": "camera position / lens / target",
+    "from": "[1.6, 2.3, 1.45] m, 28 mm, aimed at [17.0, 3.4, 1.2], focus [7.0, 3.0, 1.0]",
+    "to": "about [7.5, 2.6, 1.25] m (seated height, mid-room by the booths), 40 mm, aimed at the Ember speaker, focus on the speaker at about f/4, so the bar and stools still lead in on the left and the speaker fills roughly a fifth of the frame height"
+   },
+   "expected": "Speaker silhouette, red tint and light through its acrylic read at a glance; the bar and booths become framing rather than subject; floor area and its smear shrink in the frame.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "Denoiser smear and blotches on the floor and in the shadows give the render away.",
+   "evidence": {
+    "region": [
+     300,
+     300,
+     600,
+     480
+    ],
+    "measured": "mottled patches visible in a 2x crop; falloff bins 29.8 to 11.5 are uneven with blotches rather than a smooth pool"
+   },
+   "change": {
+    "setting": "render samples / adaptive / clamp, and floor polish",
+    "from": "samples 256, adaptive 0.02, clamp 10, floor polished",
+    "to": "samples 1024, adaptive 0.005, clamp 3, floor's polish lowered to a honed finish (roughness about 0.35 with a faint roughness variation map)"
+   },
+   "expected": "Floor reflections become soft, slightly broken pools of the pendant and speaker light with fine grain, not blotches; shadow regions resolve with fine noise instead of smear.",
+   "accept": {
+    "region": [
+     300,
+     330,
+     600,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     16,
+     30
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The speaker is under-lit relative to the frame and its red reads as a lamp.",
+   "evidence": {
+    "region": [
+     285,
+     235,
+     325,
+     285
+    ],
+    "measured": "lum_median 40.6 (target 45 or more), r 61 g 35 b 30, delta E 18.8 against #B3261E"
+   },
+   "change": {
+    "setting": "the Ember speaker's area lamps and pinholes",
+    "from": "4 x area, 25.0 W/m2, 2700 K",
+    "to": "4 x area, 55 W/m2, 2700 K, with the two front lamps moved to graze the cabinet's sides so the acrylic's edges and horn mouth catch light"
+   },
+   "expected": "Speaker region median about 55 to 70 with its edges glowing and the white batts visible through the red acrylic.",
+   "accept": {
+    "region": [
+     285,
+     235,
+     325,
+     285
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The cool grey wall screen is the brightest large area and pulls the eye from the speaker.",
+   "evidence": {
+    "region": [
+     570,
+     110,
+     620,
+     245
+    ],
+    "measured": "lum_median 90.3, r 90 g 90 b 96 (cooler than everything else in the room)"
+   },
+   "change": {
+    "setting": "the screens' images emission",
+    "from": "0.4",
+    "to": "0.18, with the frosted panel's roughness raised so the image blurs further into fog"
+   },
+   "expected": "The screen sits as a soft, warm-grey glow below the speaker's brightness; the frosted panel diffuses rather than displays.",
+   "accept": {
+    "region": [
+     570,
+     110,
+     620,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     60
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The back-bar shelves' lit edges read as white LED strips, nightclub signage rather than thick polished acrylic.",
+   "evidence": {
+    "region": [
+     0,
+     145,
+     140,
+     245
+    ],
+    "measured": "lum_p95 156 against a median of 13.9; thin hard white lines"
+   },
+   "change": {
+    "setting": "the shelves' lit edges emission",
+    "from": "0.8",
+    "to": "0.3, and warmer (2400 K-equivalent colour) so the edges glow amber and light the bottles above them"
+   },
+   "expected": "Shelf edges become a warm glint along thick acrylic; bottles catch small highlights; no strip reads as neon.",
+   "accept": {
+    "region": [
+     0,
+     145,
+     140,
+     245
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 110
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The foreground booth and table are crushed, so the cozy near zone is a black hole.",
+   "evidence": {
+    "region": [
+     540,
+     280,
+     720,
+     480
+    ],
+    "measured": "crush_pct 23.6, lum_median 9.1"
+   },
+   "change": {
+    "setting": "the table lamps",
+    "from": "6 x point, 130.0 W, 2700 K",
+    "to": "6 x point, 200 W, 2700 K, with a candle in an amber votive on the nearest booth table"
+   },
+   "expected": "The leather and fir cap of the nearest booth hold detail in a warm pool, with dark between the pools.",
+   "accept": {
+    "region": [
+     540,
+     280,
+     720,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 10
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The bar top's inlay reads as scattered phone screens and the room is empty of life.",
+   "evidence": {
+    "region": [
+     90,
+     255,
+     420,
+     290
+    ],
+    "measured": "small hard white rectangles, clip_pct 0.38, p95 71"
+   },
+   "change": {
+    "setting": "the bar top's inlay emission, and props",
+    "from": "inlay 2.4; props evenly distributed",
+    "to": "inlay 0.8 (a continuous warm line, not dots); add a coat over one stool, two half-full rocks glasses with ice, a record out of its sleeve on the bar, and turn or offset alternate stools a few degrees"
+   },
+   "expected": "The bar top reads as a lit fir surface with a glow along its edge; the row of stools stops reading as copies; the room looks just left.",
+   "accept": {
+    "region": [
+     90,
+     255,
+     420,
+     290
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.1
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "Pendants are flat clipped cylinders and the concrete, fir and steel read as smooth CG at 1:1.",
+   "evidence": {
+    "region": [
+     12,
+     80,
+     56,
+     150
+    ],
+    "measured": "pendant clip_pct 2.6, median 168.6, no gradient; concrete at [600, 0, 720, 280] and beams at [0, 0, 720, 120] show no board lines, ties or checks"
+   },
+   "change": {
+    "setting": "pendant lamps and the frosted acrylic roughness; the concrete's and fir's finish",
+    "from": "pendant lamps 2.5, tubes 0.225",
+    "to": "pendant lamps 1.5, tubes 0.15 with frosted roughness raised so the tube shows a hot core fading to its ends; concrete with board-form height and tone variation (150 mm boards, tie holes at 600 mm), fir beams with checks and darker end grain, steel with an uneven brown patina sheen"
+   },
+   "expected": "Pendants glow softly without clipping; materials read at their real scale at delivery size.",
+   "accept": {
+    "region": [
+     12,
+     80,
+     56,
+     150
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the speaker larger or move it forward out of the listening room",
+   "why": "The speaker's size and the room's layout (listening room behind the smoked partition) are fixed; the camera change c1 addresses scale instead."
+  },
+  {
+   "request": "Thicken the smoked acrylic partition or give it a visible frame",
+   "why": "The partition is part of the room's design as proposed; only its lighting and finish may change."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
