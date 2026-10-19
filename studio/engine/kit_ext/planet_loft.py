@@ -385,6 +385,7 @@ def pendants(bpy, kit, p, objs):
     objs.append(cord.object(bpy, principled(bpy, 'cord', '#1A1612', rough=0.7), smooth=True))
     lamp = glow.object(bpy, emitter(bpy, 'pendant-lamp', '#FFB060', p.get('pendant_lamp', 2.5)), smooth=True)
     lamp.visible_camera = False                    # the lamp lights the tube; seen through it, it read as a square (bar-r5)
+    lamp.visible_transmission = False              # and seen through the frosted tube it still did (the review bar frame)
     objs.append(lamp)
 
 
@@ -488,6 +489,7 @@ def table_lamps(bpy, kit, p, objs):
     objs.append(sh)             # but caustics, and the review street frame fell from a median of 30 to 6
     lamp = bulb.object(bpy, emitter(bpy, 'table-lamp-bulb', '#FFB060', p.get('tlamp_bulb', 2.0)), smooth=True)
     lamp.visible_camera = False                    # as the pendants': the bulb lights the drum, never seen as a shape
+    lamp.visible_transmission = False
     objs.append(lamp)
 
 
