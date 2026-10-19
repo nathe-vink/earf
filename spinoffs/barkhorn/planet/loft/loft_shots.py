@@ -109,13 +109,14 @@ VIEWS = {
             # lamps down, the light from behind, 3000 K; the foreground black: the inlay up, the pendants' cones wider,
             # the sconce up; the screens below the speaker; the back-bar's edges and niches up; three lounge chairs
             # moved off the sightline to the left Ember speaker, as a stylist would
+            # (p8, not judged: the seating reads, the median 18: the pendants, the booths' lamps, the inlay up)
             'camera': {'position': [1.6, 2.3, 1.45], 'target': [17.0, 3.4, 1.2], 'lens_mm': 28, 'level': True,
                        'fstop': 5.6, 'focus': [7.0, 3.0, 1.0]},
-            'settings': {'exposure': 1.0, 'wb': 3000, 'shelf_glow': 0.6, 'niche_glow': 0.3, 'spot_niche': 400.0,
-                         'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 480.0,
-                         'pendant_cone': 40.0, 'pendant_glow': 0.225, 'shade_glow': 0.6, 'inlay_glow': 1.6,
-                         'haze': 0.015, 'screen_glow': 0.3, 'screen_gap': 0.04, 'screen_rough': 0.22,
-                         'bell_w': 88.0, 'sconce_w': 25.0, 'spot_records': 6.0, 'rec_cone': 40.0, 'record_glow': 0.3,
+            'settings': {'exposure': 1.0, 'wb': 3000, 'shelf_glow': 0.8, 'niche_glow': 0.3, 'spot_niche': 400.0,
+                         'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 700.0,
+                         'pendant_cone': 40.0, 'pendant_glow': 0.225, 'shade_glow': 0.6, 'inlay_glow': 2.4,
+                         'haze': 0.015, 'screen_glow': 0.4, 'screen_gap': 0.04, 'screen_rough': 0.22,
+                         'bell_w': 130.0, 'sconce_w': 25.0, 'spot_records': 6.0, 'rec_cone': 40.0, 'record_glow': 0.3,
                          'candle_w': 2.4, 'tlamp_glow': 0.2, 'spk_irr': 25.0, 'spk_back': 90.0, 'spk_spread': 90.0,
                          'spk_link': True, 'chair_dye': '#4A3A32',
                          'chair_move': {'1': [0.0, -0.25, 0.0], '4': [0.0, 0.30, 0.0], '6': [0.30, 0.25, 0.0]}}},

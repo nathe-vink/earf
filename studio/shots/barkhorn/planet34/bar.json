@@ -88,7 +88,7 @@
     "shape": "ext",
     "module": "planet_loft",
     "fn": "room",
-    "shelf_glow": 0.6,
+    "shelf_glow": 0.8,
     "shade_glow": 0.6,
     "pendant_glow": 0.225,
     "flame": 25.0,
@@ -103,8 +103,8 @@
     "neighbour_plain": true,
     "niche_glow": 0.3,
     "flat_glow": 0.06,
-    "screen_glow": 0.3,
-    "inlay_glow": 1.6,
+    "screen_glow": 0.4,
+    "inlay_glow": 2.4,
     "pendant_lamp": 2.5,
     "etch_glow": 0.05,
     "menu_color": "#8A6E4E",
@@ -506,7 +506,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 480.0,
+   "power_w": 700.0,
    "cone_deg": 40.0,
    "blend": 0.6,
    "radius_m": 0.04,
@@ -524,7 +524,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 480.0,
+   "power_w": 700.0,
    "cone_deg": 40.0,
    "blend": 0.6,
    "radius_m": 0.04,
@@ -542,7 +542,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 480.0,
+   "power_w": 700.0,
    "cone_deg": 40.0,
    "blend": 0.6,
    "radius_m": 0.04,
@@ -739,7 +739,7 @@
     0.29,
     1.01
    ],
-   "power_w": 88.0,
+   "power_w": 130.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -751,7 +751,7 @@
     0.29,
     1.01
    ],
-   "power_w": 88.0,
+   "power_w": 130.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -763,7 +763,7 @@
     0.29,
     1.01
    ],
-   "power_w": 88.0,
+   "power_w": 130.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -775,7 +775,7 @@
     4.3999999999999995,
     1.01
    ],
-   "power_w": 88.0,
+   "power_w": 130.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -787,7 +787,7 @@
     2.17,
     0.77
    ],
-   "power_w": 88.0,
+   "power_w": 130.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -799,7 +799,7 @@
     3.9299999999999997,
     0.77
    ],
-   "power_w": 88.0,
+   "power_w": 130.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
