@@ -27,7 +27,7 @@ DEFAULT = dict(
     sconce_w=10.0, pendant_w=45.0, pendant_cone=75.0, shelf_glow=10.0, shade_glow=0.12, niche_glow=0.9, pendant_glow=0.5, flame=25.0,
     candle_w=0.6, bell_w=22.0, spk_irr=3.0, spot_niche=220.0, record_glow=2.0, spot_records=18.0, vu=2.0,
     street_lamp=500.0, windows_lit=0.5, haze=0.006, street=True, neighbour_plain=True, flat_glow=0.06,
-    exposure=0.0, wb=3700, wb_tint=0.0, view='Khronos PBR Neutral', look='None', samples=256,
+    exposure=0.0, wb=3200, wb_tint=0.0, view='Khronos PBR Neutral', look='None', samples=256,
 )
 WARM = 2400                      # the room's lamps (K)
 
@@ -88,7 +88,8 @@ def lights(v):
                             'target': [x, y, 0.75], 'size_m': [0.35, 0.35], 'irradiance': v['spk_irr'], 'color': 2700}
         else:
             L[f'niche{k}'] = {'type': 'spot', 'position': [x, y - 0.10, P.NICHE_Z0 + P.NICHE_H - 0.04],
-                              'target': [x, y - 0.22, z + 0.6], 'power_w': v['spot_niche'], 'cone_deg': 45, 'blend': 0.8,
+                              'target': [x, y - 0.22, z + v.get('niche_aim_z', 0.6)], 'power_w': v['spot_niche'],
+                              'cone_deg': v.get('niche_cone', 45), 'blend': 0.8,
                               'radius_m': 0.02, 'color': 2600}
     # the sconces: a lamp inside each shade
     for i, x in enumerate(P.SCONCES_RIGHT):
@@ -126,6 +127,9 @@ def lights(v):
     bell(P.WINDOW_TABLE[0] - 0.12, P.WINDOW_TABLE[1] + 0.10, T['h'], v['bell_w'], 'bellW-')
     for i, (x, y) in enumerate(P.SIDE_TABLES[1:]):
         bell(x, y, SIDE_H, v['bell_w'], f'bellS{i}-')
+    if v.get('bounce', 0) > 0:                                        # a low warm bounce by the window table (bar-r1 c4)
+        L['bounce'] = {'type': 'area', 'position': [2.4, 3.2, 0.25], 'target': [5.0, 3.9, 0.5], 'size_m': [1.0, 0.5],
+                       'power_w': v['bounce'], 'color': 2500, 'camera': False}
     if v['street']:
         for k, y in enumerate(STREET_LAMPS):
             L[f'street{k}'] = {'type': 'point', 'position': [CURB_X + 0.4 + v.get('lamp_dx', 0.9), y, v.get('lamp_z', 5.6)],
@@ -164,9 +168,14 @@ VIEWS = {
                           'level': True},
                'settings': {'exposure': 0.4, 'wb': 3500, 'wet': True, 'road_rough': 0.12, 'street_lamp': 250.0, 'gold_glow': 0.06, 'siding': '#8E9384'}},
     'bar': {'title': 'the bar, from the window table',
-            'settings': {'exposure': 0.8},
-            'camera': {'position': [2.10, 2.70, 1.32], 'target': [9.6, 5.0, 1.05], 'lens_mm': 30, 'level': True,
-                       'fstop': 5.6, 'focus': [6.0, 4.3, 1.1]}},
+            'settings': {'exposure': 0.8, 'wb': 3000, 'niche_glow': 0.3, 'spot_niche': 450.0, 'niche_cone': 30.0,
+                         'niche_aim_z': 1.0, 'niche_rim': 1.5, 'pendant_w': 120.0, 'pendant_cone': 55.0,
+                         'pendant_glow': 2.0, 'bounce': 15.0, 'spot_records': 9.0, 'record_glow': 1.0, 'haze': 0.012,
+                         'shelf_glow': 5.0},
+            # after bar-r1 (5.0): into the room on 40 mm, the right-hand Smoke speaker the hero, the other out of frame;
+            # its niche darker behind it with a rim, a stronger pinhole; pendants pooling on the top; the far room down
+            'camera': {'position': [3.4, 3.4, 1.25], 'target': [8.5, 5.6, 1.1], 'lens_mm': 40, 'level': True,
+                       'fstop': 4.0, 'focus': [P.NICHES[1][0] + P.NICHES[1][1] / 2, P.BACKBAR_Y + 0.05, 1.3]}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   'camera': {'position': [15.0, 2.0, 1.12], 'target': [16.35, 5.0, 0.95], 'lens_mm': 30, 'level': True,
                              'fstop': 4.0, 'focus': [16.15, P.PAIR['y'][1], 0.9]}},

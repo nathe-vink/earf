@@ -122,8 +122,9 @@ def speakers():
 
 
 def stools():
-    pitch = (BAR_X1 - BAR_X0) / STOOLS
-    return [(BAR_X0 + pitch * (i + 0.5), STOOL_Y) for i in range(STOOLS)]
+    pitch = (BAR_X1 - BAR_X0) / STOOLS                # not quite in a row: each pulled out or pushed in a little
+    return [(BAR_X0 + pitch * (i + 0.5) + ((i * 7) % 5 - 2) * 0.015, STOOL_Y + ((i * 3) % 4 - 1.5) * 0.03)
+            for i in range(STOOLS)]
 
 
 def candle_spots():

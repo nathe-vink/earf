@@ -1,0 +1,367 @@
+{
+ "stage1": {
+  "impression": "A moody, convincingly laid-out bar that reads as a well-made architectural render, not a photograph: the whole frame is one orange-red cast with no blue left in it, the foreground stools and bar front sink into murk, and the brightest, most interesting thing is the listening room at the far end rather than the bar. The product is hard to find: one dark rounded cabinet sits small and dim in a back-bar niche, another is sliced by the left edge, and neither carries the frame.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Smoke speaker in the back-bar must read at a glance as the hero of the bar: separated from its niche by a rim or back light, its tinted acrylic visibly lit through, and not the dimmest object on the shelves",
+  "Colour must stay warm but not monochrome: neutral whites (labels, batts, shelf-strip tubes) near neutral, b_median above 0 in the midtones, the walnut reading brown rather than red",
+  "The foreground (bar front, stools, floor in the lower-left third) must carry readable detail and texture instead of crushing toward black",
+  "The tonal hierarchy must put the bar first: the far listening room must not be the brightest area of the frame",
+  "No cropped product at the frame edge: the left-edge speaker is either fully in or fully out",
+  "Surfaces must carry micro-detail: floorboards, reeded walnut and stool leather currently read as smooth CG with denoiser smear on the bottles"
+ ],
+ "defects": [
+  {
+   "region": [
+    470,
+    300,
+    515,
+    410
+   ],
+   "what": "The Smoke speaker in the niche is small (about 1/8 frame height), dim (lum_median 25) and reads as a dark rounded rectangle against a lighter grey niche back; no acrylic, horn or batts read"
+  },
+  {
+   "region": [
+    0,
+    240,
+    45,
+    450
+   ],
+   "what": "A second Smoke speaker cut by the left frame edge: half an object, dark (lum_median 17), reads as a stray TV"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Global orange-red cast: blue channel median 0-1 in almost every region; whites of labels and shelf strips go peach; walnut reads as red mahogany"
+  },
+  {
+   "region": [
+    0,
+    450,
+    720,
+    800
+   ],
+   "what": "Foreground stools and bar front crushed: lum_median 13.9, crush 11.4 percent; stool tops lose shape; falloff from the bar top to the bottom drops from 34 to 4.5"
+  },
+  {
+   "region": [
+    700,
+    260,
+    1045,
+    380
+   ],
+   "what": "The far listening room (record wall, brick) is the brightest area, lum_median 132 against 22 for the back-bar, pulling the eye past the bar"
+  },
+  {
+   "region": [
+    240,
+    60,
+    380,
+    170
+   ],
+   "what": "Pendants read as dark domes, lum_median 15; their inner glow and the brass do not read, and they throw no visible pool on the bar top"
+  },
+  {
+   "region": [
+    250,
+    0,
+    1200,
+    120
+   ],
+   "what": "Ceiling is a dead flat field, lum_median 14.6, no texture or bounce"
+  },
+  {
+   "region": [
+    60,
+    400,
+    700,
+    500
+   ],
+   "what": "Bar top is evenly dim (lum_median 33) with no pendant pools or specular sheen on the walnut"
+  },
+  {
+   "region": [
+    60,
+    140,
+    560,
+    420
+   ],
+   "what": "Shelf strips near clipping (clip 0.93 percent) while the bottles between them are smeared by the denoiser; labels illegible"
+  },
+  {
+   "region": [
+    720,
+    500,
+    1200,
+    800
+   ],
+   "what": "Floor boards smooth with little grain; reads as CG"
+  },
+  {
+   "region": [
+    240,
+    450,
+    820,
+    800
+   ],
+   "what": "Identical stools repeated in a perfect row with identical rotation; reads as instanced"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The Smoke speaker, the frame's product, is a dim silhouette lost in its niche.",
+   "evidence": {
+    "region": [
+     475,
+     310,
+     510,
+     385
+    ],
+    "measured": "lum_median 25.4 inside the cabinet vs about 30 for the niche around it; edge step only 14.5 over 12 px at x 465-485"
+   },
+   "change": {
+    "setting": "niche back emission and niche spots",
+    "from": "niche backs 0.9; niche spots 2 x 220 W, 2600 K, cone 45",
+    "to": "niche backs 0.3 (darker field behind the cabinet); niche spots 2 x 450 W, 2700 K, cone 30, aimed from above-front at the cabinet's top third so light passes into the tinted acrylic and lights the white batts; add a 20 W strip rim light at each niche side"
+   },
+   "expected": "The cabinet reads lighter than the niche at its edges with a visible glow through the acrylic; its silhouette separates from the back-bar",
+   "accept": {
+    "region": [
+     475,
+     310,
+     510,
+     385
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     100
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The speaker is too small in the frame and a second one is cut by the left edge.",
+   "evidence": {
+    "region": [
+     0,
+     240,
+     45,
+     450
+    ],
+    "measured": "half a cabinet at the frame edge, lum_median 17; the niche speaker spans about 105 of 800 px"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [2.1, 2.7, 1.32], look at [9.6, 5.0, 1.05], 30 mm, f/5.6 focus [6.0, 4.3, 1.1]",
+    "to": "move about 1.2 m into the room and toward the bar's centreline: position [3.4, 3.4, 1.25], look at [8.5, 5.6, 1.1], 40 mm, f/4, focused on the niche speaker; check that the left-edge speaker is either fully inside the frame or out of it"
+   },
+   "expected": "The niche speaker grows to about a quarter of frame height near the left-third line; no product cut by the frame; the listening room stays as a smaller glimpse at the right",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The frame is monochrome orange-red; whites go peach and walnut goes red.",
+   "evidence": {
+    "region": [
+     60,
+     400,
+     700,
+     500
+    ],
+    "measured": "bar top r 74 / g 24 / b 1; b_median 0-1 in every measured region"
+   },
+   "change": {
+    "setting": "render.white_balance_k",
+    "from": "3700",
+    "to": "3000 (with sources left at 2400-2700 K); keep exposure, re-check after c4"
+   },
+   "expected": "Still a warm night, but the walnut reads brown, labels near cream, and the blue channel carries some midtone detail",
+   "accept": {
+    "region": [
+     60,
+     400,
+     700,
+     500
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The pendants do not pool light on the bar top and the foreground falls into black.",
+   "evidence": {
+    "region": [
+     0,
+     450,
+     720,
+     800
+    ],
+    "measured": "lum_median 13.9, crush 11.4 percent; y-profile from 34 at the bar top to 4.5 at the bottom"
+   },
+   "change": {
+    "setting": "pendants (spot) and pendants' insides emission",
+    "from": "3 x spot 45 W, cone 75; insides 0.5",
+    "to": "3 x spot 120 W, 2400 K, cone 55 with a soft blend, aimed straight down onto the bar top; insides 2.0 so the brass interiors glow; add one low 15 W warm bounce (area, 1 x 0.5 m) at floor level by the window table to lift the stools' faces"
+   },
+   "expected": "Three distinct pools on the walnut top with a specular sheen; stool tops and the reeded front separate from the floor",
+   "accept": {
+    "region": [
+     0,
+     450,
+     720,
+     800
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 3
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The far listening room outshines the bar, inverting the hierarchy.",
+   "evidence": {
+    "region": [
+     700,
+     260,
+     1045,
+     380
+    ],
+    "measured": "lum_median 132 vs 22 for the back-bar region [60,140,560,420]"
+   },
+   "change": {
+    "setting": "record wall spots and record-wall strip",
+    "from": "3 x spot 18 W; strip 2.0",
+    "to": "3 x spot 9 W; strip 1.0; raise haze to 0.012 so the far room sits back in the air"
+   },
+   "expected": "The far room reads as a warm glimpse, about one stop under the lit back-bar and speaker",
+   "accept": {
+    "region": [
+     700,
+     260,
+     1045,
+     380
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     65,
+     95
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The shelf strips are near clipping while the bottles between them are dim and smeared.",
+   "evidence": {
+    "region": [
+     60,
+     140,
+     560,
+     420
+    ],
+    "measured": "clip_pct 0.93; lum_median 22"
+   },
+   "change": {
+    "setting": "back-bar shelf strips emission",
+    "from": "10.0",
+    "to": "5.0, with a diffuser material on the strip (wider, softer line) so more light reaches the bottles; render samples 512 with denoise kept, to reduce smear on glass"
+   },
+   "expected": "Strips read as warm lines without blown cores; bottle glass and labels pick up readable highlights",
+   "accept": {
+    "region": [
+     60,
+     140,
+     560,
+     420
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "Floor, ceiling and bar front read as smooth CG.",
+   "evidence": {
+    "region": [
+     720,
+     500,
+     1200,
+     800
+    ],
+    "measured": "visual: no board grain or wear; ceiling [250,0,1200,120] lum_range 29.7, flat"
+   },
+   "change": {
+    "setting": "floor, ceiling plaster, wood stain",
+    "from": "current smooth floor and plaster",
+    "to": "oiled oak or walnut floorboards with a 4K grain and roughness map (roughness 0.35-0.6 variation, worn path along the bar); limewash plaster on the ceiling with a fine bump; deepen the walnut stain toward brown"
+   },
+   "expected": "The floor carries a soft reflection of the pendants and visible grain; the ceiling shows faint texture where light reaches it",
+   "accept": {
+    "region": [
+     720,
+     500,
+     1200,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The stools are identical and identically rotated, and the bar is unlived-in.",
+   "evidence": {
+    "region": [
+     240,
+     450,
+     820,
+     800
+    ],
+    "measured": "visual: eight identical stools in a perfect row"
+   },
+   "change": {
+    "setting": "props",
+    "from": "stools at identical rotation; empty bar top",
+    "to": "rotate each stool by a random 3-12 deg and vary spacing by 2-4 cm; place two rocks glasses, a coupe and a folded menu on the bar top under the nearest pendant pool"
+   },
+   "expected": "The row reads as a real bar after hours; the near pendant pool has an object to catch light",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "None of the changes needs a change to the Smoke speaker itself; if c1 still leaves it unreadable, the Smoke tint may simply be too dark for a dim niche, which is a product colour question for the owner.",
+   "why": "Product colour and parts are fixed."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

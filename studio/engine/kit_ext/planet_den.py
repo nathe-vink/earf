@@ -133,7 +133,12 @@ def shell(bpy, kit, p, objs):
     fl = Mesh('floor'); fl.box(0.0, 0.0, -0.1, L, W, 0.0)
     fm = _pbr(bpy, p.get('floor_tex', 'wood_floor_worn'), tint=p.get('floor_tint', '#3A2416'),
               tint_mix=p.get('floor_mix', 0.45), rot=(0, 0, 90), res='2k')
-    b = _bsdf(fm); R._set(b, 'Coat Weight', p.get('floor_coat', 0.35)); R._set(b, 'Coat Roughness', 0.3)
+    b = _bsdf(fm); R._set(b, 'Coat Weight', p.get('floor_coat', 0.35))
+    nt = fm.node_tree; tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+    nz.inputs['Scale'].default_value = 0.8; nz.inputs['Detail'].default_value = 10.0      # the oil's sheen, worn unevenly
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.18; cr.inputs['To Max'].default_value = 0.55
+    nt.links.new(nz.outputs['Fac'], cr.inputs['Value']); nt.links.new(cr.outputs['Result'], b.inputs['Coat Roughness'])
     objs.append(fl.object(bpy, fm))
     # the walls' plaster: the right wall to the listening room, the left wall behind the bar, the front's piers
     pl = Mesh('plaster')
@@ -402,6 +407,12 @@ def backbar(bpy, kit, p, objs):
         nb_.box(n0, W - 0.03, P.NICHE_Z0, n1, W - 0.01, P.NICHE_Z0 + P.NICHE_H)
         nl.box(n0, y0 + 0.02, P.NICHE_Z0 + P.NICHE_H - 0.02, n1, W, P.NICHE_Z0 + P.NICHE_H)
     objs.append(nl.object(bpy, walnut(bpy, vertical=True, tint='#2A1A10', mix=0.5)))
+    if p.get('niche_rim', 0) > 0:                                      # a warm strip down each side of the niche, a rim
+        rm = Mesh('niche-rim')
+        for n0, n1 in niches:
+            for xa in (n0, n1 - 0.012):
+                rm.box(xa, y0 + 0.03, P.NICHE_Z0 + 0.05, xa + 0.012, y0 + 0.045, P.NICHE_Z0 + P.NICHE_H - 0.05)
+        objs.append(rm.object(bpy, emitter(bpy, 'niche-rim', '#FFC07A', p['niche_rim'])))
     objs.append(nb_.object(bpy, principled(bpy, 'niche-linen', '#D9BE94', rough=0.85, emit='#FFB868',
                                            strength=p.get('niche_glow', 0.35))))
     # the shelves: 35 mm walnut on brass brackets, each with a warm strip under its front edge
