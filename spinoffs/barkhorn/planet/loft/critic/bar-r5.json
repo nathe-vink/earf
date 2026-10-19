@@ -1,0 +1,383 @@
+{
+ "stage1": {
+  "impression": "A dark, brown, timber-and-concrete room that has the bones of a kissa, but it reads as a game-engine interior: smooth, evenly dim surfaces, cloned stools and chairs, square hot spots inside the pendants, thin LED-strip shelf edges, and a cool blue-grey 'TV' panel on the right wall showing an unreadable dark blob. The Ember speaker, which should be the hero, is a small dim red shape about 35 x 45 px in the far middle, easy to miss, and the bar top and foreground stools are almost black with no sign of life.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker reads at a glance as the hero: it fills at least about 8 % of the frame's width, its region has lum_median >= 45, and its acrylic glow and horn silhouette are legible",
+  "The frosted screens glow warm and even, with the image (hands, shell in fog) suggestive but legible, not a cool blue-grey rectangle with a dark blob (now delta_e 30 from a warm grey; b_median 60 > r_median 58 in a 2400 K room)",
+  "The pendants show a soft, evenly lit frosted tube, with no visible square emitter",
+  "The shelves' lit edges read as the polished edges of thick acrylic (warm, soft), not as white LED strips",
+  "The frame's lum_median sits at 24 to 40, with the bar top and front stools holding detail",
+  "No identical cloned stools and chairs in a row; signs of life on the bar (glasses, a menu, a coat, a record out of its sleeve)",
+  "Materials read at 1:1: board-formed concrete grain and tie holes, fir checks, blackened-steel sheen at the back-bar; no smooth CG walls",
+  "No blue streak or smear on the floor"
+ ],
+ "defects": [
+  {
+   "region": [
+    295,
+    240,
+    330,
+    285
+   ],
+   "what": "Ember speaker tiny and dim (lum_median 36.4); reads as a red blob, not the hero"
+  },
+  {
+   "region": [
+    645,
+    60,
+    705,
+    240
+   ],
+   "what": "Frosted screen reads as a cool blue-grey TV (RGB median 58/56/60) with a dark shapeless blob; out of key with the warm room"
+  },
+  {
+   "region": [
+    136,
+    115,
+    162,
+    162
+   ],
+   "what": "Pendant shows a hard square emitter inside the tube (lum_range 205, p95 216); reads as a lamp texture, not frosted acrylic"
+  },
+  {
+   "region": [
+    225,
+    145,
+    250,
+    180
+   ],
+   "what": "Second pendant, same square hot spot"
+  },
+  {
+   "region": [
+    0,
+    120,
+    170,
+    240
+   ],
+   "what": "Shelf edges read as thin pinkish-white LED strips; the bottles behind are near black (median 7.5)"
+  },
+  {
+   "region": [
+    0,
+    330,
+    240,
+    480
+   ],
+   "what": "Foreground stools and bar front nearly black (lum_median 5.8, crush 15 %); cloned identical stools in a row"
+  },
+  {
+   "region": [
+    460,
+    270,
+    600,
+    480
+   ],
+   "what": "Identical cloned chairs along the banquette"
+  },
+  {
+   "region": [
+    420,
+    340,
+    450,
+    400
+   ],
+   "what": "Blue-white streak on the floor (reflection of the screen in a polished floor), reads as a denoiser smear"
+  },
+  {
+   "region": [
+    0,
+    240,
+    300,
+    300
+   ],
+   "what": "Bar top empty and dull (median 18); small blue-white screens/devices along it read as phones or signage, no glasses or menus"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    140
+   ],
+   "what": "Fir beams and ceiling read as one smooth tiled texture with no checks or end grain"
+  },
+  {
+   "region": [
+    560,
+    140,
+    720,
+    330
+   ],
+   "what": "Right wall plaster/concrete reads as a uniform noisy texture with no formwork boards or tie holes"
+  },
+  {
+   "region": [
+    340,
+    150,
+    450,
+    250
+   ],
+   "what": "Record wall and smoked partition flat and murky; the partition does not read as acrylic"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The Ember speaker, the frame's only colour and its hero, is too small and far to read at a glance.",
+   "evidence": {
+    "region": [
+     295,
+     240,
+     330,
+     285
+    ],
+    "measured": "about 35 x 45 px of a 720 x 480 frame (under 5 % of width), lum_median 36.4"
+   },
+   "change": {
+    "setting": "camera position and lens",
+    "from": "position [1.6, 2.0, 1.45], lens 35 mm, target [17.0, 3.9, 1.0], focus [7.0, 3.3, 1.2]",
+    "to": "position [4.5, 2.4, 1.30] (seated height, from the banquette's first table), lens 50 mm, target [16.0, 3.4, 1.0] so the speaker sits on the right third, focus at the bar's mid-length [9.0, 4.5, 1.1], f/4"
+   },
+   "expected": "The speaker is about 2.5x larger in the frame and on a third line, with the bar still leading in on the left and the right-hand screen in the frame's edge; true verticals kept (level camera).",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speaker is under-lit compared with the screen and the Bell lamps, so the eye lands on the right wall and not on it.",
+   "evidence": {
+    "region": [
+     295,
+     240,
+     330,
+     285
+    ],
+    "measured": "lum_median 36.4 vs the screen at 56.5 and the Bell table at 50.6"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area (W/m2 at the target)",
+    "from": "9.0 W/m2",
+    "to": "20.0 W/m2, and the record wall 3 x spot from 5.0 W to 10.0 W so the speaker sits against a lit background"
+   },
+   "expected": "The speaker's red acrylic glows and its horn silhouette reads against the records; its region becomes the brightest coloured area in the frame.",
+   "accept": {
+    "region": [
+     295,
+     240,
+     330,
+     285
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45,
+    "note": "the region to re-locate after c1; the test is the speaker's own bounding box"
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The frosted screen reads as a cool blue television, the brightest large surface in the frame and the only cool one, with an image too dark to read.",
+   "evidence": {
+    "region": [
+     645,
+     60,
+     705,
+     240
+    ],
+    "measured": "RGB median 58/56/60 (bluer than red), lum_median 56.5, delta_e 30.3 against a neutral warm grey #8A8A86"
+   },
+   "change": {
+    "setting": "the screens' images emission and colour",
+    "from": "0.2, neutral white",
+    "to": "0.12, with its white point warmed to 3000 K, and the frosted acrylic's roughness raised so the image sits soft but legible (the image's contrast up, not its brightness)"
+   },
+   "expected": "The screen glows softly warm, the pressed hands or fog legible as a suggestion, below the speaker in brightness; no cool cast in the frame.",
+   "accept": {
+    "region": [
+     645,
+     60,
+     705,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     32,
+     46
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The overall exposure sits below the night-interior range and the foreground stools and bar front are almost black.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     240,
+     480
+    ],
+    "measured": "frame lum_median 20.6 (target 22 to 50); this region lum_median 5.8, crush 15.4 %"
+   },
+   "change": {
+    "setting": "render exposure and the bar top's inlay",
+    "from": "exposure 1.0, inlay 0.6",
+    "to": "exposure 1.3, inlay 1.0 so the bar top throws a little light down its front and onto the stools"
+   },
+   "expected": "Frame median about 28; the stools and bar front hold detail; the lamps are not clipped.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The pendants show a hard square emitter through the tube, which reads as a CG lamp texture, not frosted acrylic.",
+   "evidence": {
+    "region": [
+     136,
+     115,
+     162,
+     162
+    ],
+    "measured": "lum_range 205, p95 216.5, a sharp square inside a dim tube; clip 0.41 %"
+   },
+   "change": {
+    "setting": "the pendants' frosted tubes emission and the frosted acrylic's roughness",
+    "from": "tubes 0.06, lamps 2.5",
+    "to": "tubes 0.18, lamps 1.6, frosted acrylic roughness up (fully diffusing) so the lamp is not visible as a shape"
+   },
+   "expected": "Each pendant reads as an evenly glowing frosted cylinder with a brighter polished rim at its lower edge; the light still pools on the bar via the spots.",
+   "accept": {
+    "region": [
+     136,
+     115,
+     162,
+     162
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 140
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The shelves' lit edges read as thin white LED strips and leave the bottles black.",
+   "evidence": {
+    "region": [
+     0,
+     120,
+     170,
+     240
+    ],
+    "measured": "median 7.5 with p95 126.5: bright thin lines on near black"
+   },
+   "change": {
+    "setting": "the shelves' lit edges and the niches' spots",
+    "from": "edges 0.35, niches 160 W",
+    "to": "edges 0.18 at 2400 K, plus the niches' frosted backs from 0.12 to 0.25 so bottles show as silhouettes with small highlights"
+   },
+   "expected": "The shelves read as thick clear acrylic with softly glowing edges; the bottles and the Fog speakers in the niches read as objects.",
+   "accept": {
+    "region": [
+     0,
+     120,
+     170,
+     240
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The room reads as an empty showroom: cloned stools and chairs and an empty bar top, with small blue-white devices on it.",
+   "evidence": {
+    "region": [
+     0,
+     240,
+     300,
+     480
+    ],
+    "measured": "identical stools in a row; bar top median 18 with only blue-white points (the bar's small screens)"
+   },
+   "change": {
+    "setting": "props",
+    "from": "glasses, menus, candles placed on the tables only",
+    "to": "on the bar, two rocks glasses with ice and a coupe catching the pendant light, a folded menu, a record out of its sleeve; a coat over one stool; stools turned 5 to 20 degrees each and one pulled out; the chairs at the banquette set at varied angles"
+   },
+   "expected": "Signs of life and broken repetition; small highlights on glass under the pendants.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The floor shows a blue streak and the walls and beams read as smooth tiled CG textures.",
+   "evidence": {
+    "region": [
+     420,
+     340,
+     450,
+     400
+    ],
+    "measured": "a blue-white streak (p95 51, against a median floor of 14.8) reflecting the screen"
+   },
+   "change": {
+    "setting": "the floor's polish, the concrete's finish, the fir's stain",
+    "from": "polished floor; uniform concrete and fir",
+    "to": "a floor roughness of about 0.55 (honed, not polished), the concrete with board-formed grain, tie holes and pour lines at real scale, the fir with checks and darker end grain, and haze from 0.008 to 0.015 per metre so the pendant cones and the speaker's glow carry"
+   },
+   "expected": "No streak on the floor; materials hold up at 1:1; a little atmosphere around the light.",
+   "accept": {
+    "region": [
+     420,
+     340,
+     450,
+     400
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 38
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "None about the speaker itself",
+   "why": "Its shape, colour and parts are fixed; making it the hero is done with the camera and its own lamps (c1, c2)"
+  },
+  {
+   "request": "A second large frosted screen visible on the right, or moving the screen",
+   "why": "The screens' position and the room's layout are fixed; only the camera and brightness may change"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

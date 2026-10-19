@@ -126,6 +126,7 @@ def acrylic(bpy, kind='clear', name=None, glow=0.0, glow_col='#FFC890'):
 
 
 def image_mat(bpy, img, strength, tint='#FFBE84'):
+    tint = _SCREEN_TINT.get('tint', tint)
     """A glowing image plane (a screen): the picture's light, warm-neutral, both faces."""
     key = f'screen-{img}-{strength}'
     if key in _M:
@@ -192,6 +193,9 @@ def shell(bpy, kit, p, objs):
         if x < L - 0.1:
             bm_.box(x - LP.BEAM['w'] / 2, 0.0, H - LP.BEAM['d'], x + LP.BEAM['w'] / 2, W, H)
     objs.append(bm_.object(bpy, fir(bpy), bevel=0.006))
+
+
+_SCREEN_TINT = {}
 
 
 def screens(bpy, kit, p, objs):
@@ -354,7 +358,9 @@ def pendants(bpy, kit, p, objs):
     objs.append(tube.object(bpy, acrylic(bpy, 'frosted', 'pendant-frosted', glow=p.get('pendant_glow', 0.25), glow_col='#FFA45A'), smooth=True))
     objs.append(cap.object(bpy, steel(bpy), smooth=True))
     objs.append(cord.object(bpy, principled(bpy, 'cord', '#1A1612', rough=0.7), smooth=True))
-    objs.append(glow.object(bpy, emitter(bpy, 'pendant-lamp', '#FFB060', p.get('pendant_lamp', 2.5)), smooth=True))
+    lamp = glow.object(bpy, emitter(bpy, 'pendant-lamp', '#FFB060', p.get('pendant_lamp', 2.5)), smooth=True)
+    lamp.visible_camera = False                    # the lamp lights the tube; seen through it, it read as a square (bar-r5)
+    objs.append(lamp)
 
 
 def partition(bpy, kit, p, objs):
@@ -391,7 +397,9 @@ class _patched:
 
 def room(bpy, name, p, kit):
     objs = []
-    p = {**p, 'lounge_slats': False, 'cafe': False}                  # no café curtains: the room shows (street-r4)
+    p = {**p, 'lounge_slats': False, 'cafe': False}
+    if p.get('screen_tint'):
+        _SCREEN_TINT['tint'] = p['screen_tint']                  # no café curtains: the room shows (street-r4)
     shell(bpy, kit, p, objs)
     screens(bpy, kit, p, objs)
     wood = dict(walnut=lambda bpy, vertical=False, **k: fir(bpy, vertical=vertical),

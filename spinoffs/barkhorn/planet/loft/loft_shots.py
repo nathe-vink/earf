@@ -34,7 +34,7 @@ DEFAULT = dict(S.DEFAULT, **dict(
 S.DEFAULT = DEFAULT
 LOFT_KEYS = ('screen_glow', 'screen_banquette-a', 'screen_banquette-b', 'screen_lounge', 'screen_window', 'inlay_glow',
              'pendant_lamp', 'concrete_tint', 'concrete_mix', 'concrete_tex', 'floor_acg', 'floor_tint', 'floor_mix',
-             'floor_coat', 'etch_glow', 'shade_glow', 'niche_glow', 'menu_color')
+             'floor_coat', 'etch_glow', 'shade_glow', 'niche_glow', 'menu_color', 'screen_tint')
 _room_piece = S.room_piece
 
 
@@ -55,13 +55,16 @@ VIEWS = {
             # glowing at the far end through the smoked partition
             # after bar-r4 (5.5): 35 mm, the sightline past the chairs to the left Ember speaker; the alcove, the records
             # and the screens calmer; warmer balance; the pendants pooling on the bar, their tubes dim; less haze
-            'camera': {'position': [1.6, 2.0, 1.45], 'target': [17.0, 3.9, 1.0], 'lens_mm': 35, 'level': True,
-                       'fstop': 5.6, 'focus': [7.0, 3.3, 1.2]},
-            'settings': {'exposure': 1.0, 'wb': 2900, 'shelf_glow': 0.35, 'niche_glow': 0.12, 'spot_niche': 160.0,
+            # after bar-r5 (4.5): seated at the banquette's first table on 50 mm, the Ember speaker on the right third;
+            # it lit harder (linked); the screens warmer and lower; brighter; the pendants' lamps hidden from the camera
+            'camera': {'position': [4.5, 2.4, 1.30], 'target': [16.0, 3.4, 1.0], 'lens_mm': 50, 'level': True,
+                       'fstop': 4.0, 'focus': [9.0, 4.5, 1.1]},
+            'settings': {'exposure': 1.3, 'wb': 2900, 'shelf_glow': 0.18, 'niche_glow': 0.25, 'spot_niche': 160.0,
                          'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 180.0,
-                         'pendant_cone': 24.0, 'pendant_glow': 0.06, 'haze': 0.008, 'screen_glow': 0.2,
-                         'spk_irr': 9.0, 'spk_back': 18.0, 'spk_spread': 90.0, 'spk_link': True,
-                         'spot_records': 5.0, 'rec_cone': 40.0, 'chair_dye': '#4A3A32'}},
+                         'pendant_cone': 24.0, 'pendant_glow': 0.18, 'pendant_lamp': 1.6, 'haze': 0.015,
+                         'screen_glow': 0.12, 'screen_tint': '#FFA060', 'inlay_glow': 1.0, 'floor_coat': 0.3,
+                         'spk_irr': 20.0, 'spk_back': 30.0, 'spk_spread': 90.0, 'spk_link': True,
+                         'spot_records': 10.0, 'rec_cone': 40.0, 'chair_dye': '#4A3A32'}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (5.5): 28 mm from a little back and higher, the beams in, the speaker on the left third
                   # (p2: from 14.3, 1.8 a lounge chair filled the foreground) clear of the chairs
