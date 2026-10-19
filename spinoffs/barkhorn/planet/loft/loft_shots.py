@@ -129,15 +129,17 @@ VIEWS = {
                # the street lamps 2700 K; the pendants' lamps down, their tubes up; the shelf edges down; the lightbox up
                'camera': {'position': [-3.0, 2.5, 1.6], 'target': [6.85, 5.1, 1.55], 'lens_mm': 35, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
-               'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
+               # p8 (not judged): without the haze's veil the room fell to a median of 11, the name dark grey, the
+               # lamps' drums white blocks: exposure +0.9, the etch a faint warm glow, the drums dimmer, the speaker up
+               'settings': {'exposure': 2.6, 'wb': 3200, 'tlamp_glow': 0.12, 'etch_glow': 0.04, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
                             'screen_glow': 0.4, 'screen_window': 0.35, 'screen_tint': '#FFA060', 'spot_niche': 120.0,
                             'spk_link': True, 'lamp_k': 2700, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 150.0,
                             'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 15.0, 'entry_cone': 100.0,
-                            'transom_glow': 0.15, 'spk_irr': 40.0, 'spk_back': 45.0, 'spk_spread': 90.0,
+                            'transom_glow': 0.15, 'spk_irr': 70.0, 'spk_back': 60.0, 'spk_spread': 90.0,
                             'pendant_w': 90.0, 'pendant_glow': 0.25, 'pendant_lamp': 0.8, 'inlay_glow': 0.6,
-                            'haze': 0.004, 'shelf_glow': 0.2, 'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440',
+                            'haze': 0.006, 'shelf_glow': 0.2, 'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440',
                             'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5,
-                            'etch_glow': 0.03, 'glass_gloss': 3.0, 'chair_dye': '#2B2119'}},
+                            'glass_gloss': 3.0, 'chair_dye': '#2B2119'}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot

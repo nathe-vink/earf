@@ -139,6 +139,11 @@ def etch_mat(bpy, p):
     nt.links.new(tp.outputs[0], m1.inputs[1]); nt.links.new(tl.outputs[0], m1.inputs[2])
     m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs['Fac'].default_value = 0.05
     nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2])
+    if p.get('etch_glow', 0) > 0:                  # the room's light caught in the etch (street-p8: dark grey without)
+        em = nt.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = lin('#FFD2A0')
+        em.inputs['Strength'].default_value = p['etch_glow']
+        ad = nt.nodes.new('ShaderNodeAddShader')
+        nt.links.new(m2.outputs[0], ad.inputs[0]); nt.links.new(em.outputs[0], ad.inputs[1]); m2 = ad
     nt.links.new(m2.outputs[0], out.inputs['Surface'])
     _M['frost-etch'] = m
     return m

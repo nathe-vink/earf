@@ -114,9 +114,10 @@
     "screen_window": 0.35,
     "inlay_glow": 0.6,
     "pendant_lamp": 0.8,
-    "etch_glow": 0.03,
+    "etch_glow": 0.04,
     "menu_color": "#8A6E4E",
     "screen_tint": "#FFA060",
+    "tlamp_glow": 0.12,
     "table_lamps": [
      [
       5.1,
@@ -643,7 +644,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 40.0,
+   "irradiance": 70.0,
    "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
@@ -666,7 +667,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 45.0,
+   "irradiance": 60.0,
    "color": 2700,
    "camera": false,
    "receivers": [
@@ -689,7 +690,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 40.0,
+   "irradiance": 70.0,
    "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
@@ -712,7 +713,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 45.0,
+   "irradiance": 60.0,
    "color": 2700,
    "camera": false,
    "receivers": [
@@ -1104,7 +1105,7 @@
    6.05,
    3.32
   ],
-  "density": 0.004,
+  "density": 0.006,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1116,7 +1117,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "None",
-  "exposure": 1.7,
+  "exposure": 2.6,
   "white_balance_k": 3200,
   "white_balance_tint": 0.0
  }
