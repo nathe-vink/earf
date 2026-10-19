@@ -397,7 +397,7 @@ class _patched:
 
 def room(bpy, name, p, kit):
     objs = []
-    p = {**p, 'lounge_slats': False, 'cafe': False}
+    p = {**p, 'lounge_slats': False, 'sleeves_muted': True, 'cafe': False}
     if p.get('screen_tint'):
         _SCREEN_TINT['tint'] = p['screen_tint']                  # no café curtains: the room shows (street-r4)
     shell(bpy, kit, p, objs)

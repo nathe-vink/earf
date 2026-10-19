@@ -707,13 +707,17 @@ def record_wall(bpy, kit, p, objs):
     boards = Mesh('record-boards'); sleeves = Mesh('sleeves')
     pal = ['#1A1A1A', '#EDE7DA', '#A8321E', '#2B3C5E', '#D9A93C', '#4E6A3E', '#D8D2C4', '#3A2E2A', '#7A2D2B',
            '#F2EEE6', '#2F2F33', '#B88A5A', '#5D7486', '#C8642E', '#9C9A93', '#141414', '#C9C1AE']
+    if p.get('sleeves_muted'):          # mostly black, white, kraft and grey, a rare muted colour (the loft: one colour)
+        pal = ['#1A1A1A', '#141414', '#2F2F33', '#EDE7DA', '#F2EEE6', '#D8D2C4', '#C9C1AE', '#B88A5A', '#9C7A55',
+               '#9C9A93', '#6E6A64', '#3A2E2A', '#1A1A1A', '#EDE7DA', '#5D6670']
     xf = L - Rc['depth']
     for ci in range(ncols + 1):
         ya = y0 + ci * cell
         boards.box(xf, ya, 0.0, L, ya + 0.02, Rc['z1'])
     for ri in range(nrows + 1):
         z = 0.05 + ri * cell
-        boards.box(xf, y0, z - 0.02, L, y0 + ncols * cell + 0.02, z)
+        boards.box(xf + 0.002, y0, z - 0.02, L - 0.002, y0 + ncols * cell + 0.02, z)   # inside the uprights' faces:
+                                                                        # coplanar faces at the crossings drew black squares
         if ri == nrows:
             continue
         for ci in range(ncols):
@@ -721,7 +725,8 @@ def record_wall(bpy, kit, p, objs):
             if C['y0'] - 0.1 < (ya + yb) / 2 < C['y1'] + 0.1 and z < C['h'] + 0.05:
                 continue                                                # the console stands here
             s = ya + 0.01
-            while s < yb - 0.01:
+            fill = rnd.choice([1.0, 1.0, 0.9, 0.8, 0.7]) if p.get('sleeves_muted') else 1.0   # some bays part-full
+            while s < ya + (yb - ya) * fill - 0.01:
                 t = rnd.uniform(0.0025, 0.0045)
                 if rnd.random() < 0.03:
                     s += rnd.uniform(0.02, 0.05); continue
