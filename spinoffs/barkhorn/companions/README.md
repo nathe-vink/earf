@@ -288,6 +288,19 @@ Other parameters:
 `lift_shot.py`'s `glow:lamp_w=2` scales the lamp's power. The frames in `renders/2026-10-19/barkhorn/moon/` are made
 with this same piece (`moon_shots.py`), so they test exactly what Planet imports.
 
+The frames (`renders/2026-10-19/barkhorn/moon/`):
+
+![Moon](../../../renders/2026-10-19/barkhorn/moon/sheet.png)
+
+The critic (`critic/LOG.md`) ran three blind rounds on the smoked bar hero: 5.5, 5.5, then 6.0. Three rounds is the
+family's limit, so I stopped there. Open on the hero:
+- the smoked column still reads dark (its tint is dense);
+- the pendant's underside clips, and the pendant is out of focus at f/2.8;
+- the concrete shows no boards (the Poly Haven wall is smooth);
+- the grade is all orange at a 3600 K balance.
+
+A photographed hero would fix these. The shapes and finishes are fine.
+
 Still open:
 - the listing cost;
 - the board (to make; a TI BQ25895-class charger with a touch dimmer);
