@@ -53,7 +53,7 @@ def lamp(position, target, irradiance, size, color='#FF5A18', **kw):
 
 def props():
     rock = dict(rock='dark_rock_02', displace=0.06, albedo=0.045, rough_mul=0.85, rock_tint='#2A2A2A', rock_tint_mix=0.6)
-    avoid = [[0.0, 0.0, 1.0], [0.0, 1.8, 1.4]] + [[x, y, 1.2] for x, y in FLOW] + [[x, y, 0.3] for x, y in CRACK] + [[x, y, r + 0.3] for x, y, r, _ in GLOWS]
+    avoid = [[0.0, 0.0, 1.0], [0.0, 1.8, 1.4], [0.3, -1.6, 1.6]] + [[x, y, 1.2] for x, y in FLOW] + [[x, y, 0.3] for x, y in CRACK] + [[x, y, r + 0.3] for x, y, r, _ in GLOWS]
     P = [
         # the near field: pahoehoe ropes and lobes; the flow and the crack carved below a sheet of lava
         piece('ext', module='ember_el', fn='terrain', size=[24.0, 18.0], position=[0.0, 3.0, 0.0], cell=0.02,
@@ -77,7 +77,7 @@ def props():
         piece('ext', module='ember_el', fn='rubble', models=['moon_rock_01', 'moon_rock_03', 'moon_rock_05'],
               area=[-7.0, -1.8, 7.0, 9.0], count=90, scale=[1.0, 3.5], avoid=avoid, z=-0.01, seed=5, tilt_deg=30),
         piece('ext', module='ember_el', fn='rubble', models=['rock_09', 'moon_rock_01'],
-              area=[-6.0, -0.8, 6.0, 8.0], count=14, scale=[3.5, 7.0], avoid=avoid, z=-0.02, seed=9, tilt_deg=12),
+              area=[-6.0, 0.8, 6.0, 8.0], count=14, scale=[3.5, 7.0], avoid=avoid, z=-0.02, seed=9, tilt_deg=12),
         # the far field, and the volcano: a cone with shoulders, a crater glowing in its top
         piece('ext', module='ember_el', fn='terrain', size=[140.0, 70.0], position=[0.0, 45.0, -0.3], cell=0.15,
               relief=0.7, flat=[0.0, -200.0, 1.0], cones=[[CONE[0], CONE[1], 24.0, 7.5, 4.0]],
