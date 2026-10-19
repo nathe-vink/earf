@@ -142,7 +142,7 @@ VIEWS = {
                          'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 700.0,
                          'pendant_cone': 55.0, 'pend_radius': 0.12, 'shade_glow': 0.6, 'inlay_glow': 1.0, 'haze': 0.015,
                          'screen_glow': 0.5, 'screen_tint': '#FFA060', 'screen_gap': 0.04, 'screen_rough': 0.22,
-                         'moon_table_w': 240.0, 'moon_pendant_w': 90.0, 'moon_glow': 2.0, 'sconce_w': 80.0,
+                         'moon_table_w': 240.0, 'moon_pendant_w': 90.0, 'moon_glow': 0.6, 'sconce_w': 80.0,
                          'spot_records': 18.0, 'rec_cone': 40.0, 'record_glow': 0.3, 'candle_w': 4.5,
                          'spk_irr': 50.0, 'spk_back': 90.0, 'spk_spread': 90.0, 'spk_link': True,
                          'chair_dye': '#4A3A32',
