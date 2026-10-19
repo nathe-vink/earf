@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   -2.6,
+   -2.5,
    2.7,
    1.5
   ],
   "target": [
-   6.86,
-   5.96,
+   7.35,
+   4.44,
    1.4
   ],
-  "lens_mm": 35,
+  "lens_mm": 40,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -111,13 +111,13 @@
     "linen_trans": 0.5,
     "transom_glow": 0.15,
     "screen_glow": 0.4,
-    "screen_window": 0.7,
+    "screen_window": 0.45,
     "inlay_glow": 1.08,
     "pendant_lamp": 1.0,
-    "etch_glow": 0.01,
+    "etch_glow": 0.004,
     "menu_color": "#8A6E4E",
     "screen_tint": "#FFA060",
-    "tlamp_glow": 0.08,
+    "tlamp_glow": 0.05,
     "tlamp_bulb": 1.0,
     "etch_frost": 0.3,
     "screen_gap": 0.06,
@@ -381,7 +381,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 15.0,
+   "irradiance": 22.0,
    "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
@@ -404,7 +404,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 60.0,
+   "irradiance": 70.0,
    "color": 2700,
    "camera": false,
    "receivers": [
@@ -427,7 +427,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 15.0,
+   "irradiance": 22.0,
    "color": 2700,
    "spread_deg": 90.0,
    "receivers": [
@@ -450,7 +450,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 60.0,
+   "irradiance": 70.0,
    "color": 2700,
    "camera": false,
    "receivers": [
@@ -473,7 +473,8 @@
    "cone_deg": 45,
    "blend": 0.8,
    "radius_m": 0.02,
-   "color": 2600
+   "color": 2600,
+   "camera": false
   },
   "niche3": {
    "type": "spot",
@@ -491,7 +492,8 @@
    "cone_deg": 45,
    "blend": 0.8,
    "radius_m": 0.02,
-   "color": 2600
+   "color": 2600,
+   "camera": false
   },
   "sconceL0": {
    "type": "point",
@@ -521,7 +523,8 @@
    "cone_deg": 50.0,
    "blend": 0.6,
    "radius_m": 0.04,
-   "color": 2400
+   "color": 2400,
+   "camera": false
   },
   "pend1": {
    "type": "spot",
@@ -539,7 +542,8 @@
    "cone_deg": 50.0,
    "blend": 0.6,
    "radius_m": 0.04,
-   "color": 2400
+   "color": 2400,
+   "camera": false
   },
   "pend2": {
    "type": "spot",
@@ -557,7 +561,8 @@
    "cone_deg": 50.0,
    "blend": 0.6,
    "radius_m": 0.04,
-   "color": 2400
+   "color": 2400,
+   "camera": false
   },
   "rec0": {
    "type": "spot",
@@ -575,7 +580,8 @@
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
-   "color": 2500
+   "color": 2500,
+   "camera": false
   },
   "rec1": {
    "type": "spot",
@@ -593,7 +599,8 @@
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
-   "color": 2500
+   "color": 2500,
+   "camera": false
   },
   "rec2": {
    "type": "spot",
@@ -611,7 +618,8 @@
    "cone_deg": 60,
    "blend": 0.9,
    "radius_m": 0.03,
-   "color": 2500
+   "color": 2500,
+   "camera": false
   },
   "candle0": {
    "type": "point",
@@ -728,7 +736,7 @@
     -6.0,
     5.0
    ],
-   "power_w": 120.0,
+   "power_w": 260.0,
    "radius_m": 0.15,
    "color": 3000
   },
@@ -739,7 +747,7 @@
     15.1,
     5.0
    ],
-   "power_w": 120.0,
+   "power_w": 260.0,
    "radius_m": 0.15,
    "color": 3000
   },
@@ -770,7 +778,8 @@
    "cone_deg": 100.0,
    "blend": 0.8,
    "radius_m": 0.03,
-   "color": 2400
+   "color": 2400,
+   "camera": false
   },
   "tlamp0": {
    "type": "point",
@@ -779,7 +788,7 @@
     0.29,
     1.01
    ],
-   "power_w": 95.0,
+   "power_w": 70.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -791,7 +800,7 @@
     0.29,
     1.01
    ],
-   "power_w": 95.0,
+   "power_w": 70.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -803,7 +812,7 @@
     0.29,
     1.01
    ],
-   "power_w": 95.0,
+   "power_w": 70.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -815,7 +824,7 @@
     4.3999999999999995,
     1.01
    ],
-   "power_w": 95.0,
+   "power_w": 70.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -827,7 +836,7 @@
     2.17,
     0.77
    ],
-   "power_w": 95.0,
+   "power_w": 70.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
@@ -839,7 +848,7 @@
     3.9299999999999997,
     0.77
    ],
-   "power_w": 95.0,
+   "power_w": 70.0,
    "radius_m": 0.02,
    "color": 2700,
    "camera": false

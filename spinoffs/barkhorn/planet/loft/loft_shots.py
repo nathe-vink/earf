@@ -93,6 +93,9 @@ _lights = S.lights
 def lights(v):
     """The den's lights with each Bell's three strip lamps replaced by one bulb inside the table lamp's drum."""
     L = {k: l for k, l in _lights(v).items() if not k.startswith('bell')}
+    for k, l in L.items():                          # the spots are fittings, never bare discs to the camera (street-p14)
+        if k.startswith(('rec', 'pend', 'niche', 'entry')):
+            l['camera'] = False
     for i, (x, y, z) in enumerate(lamp_spots(v)):
         L[f'tlamp{i}'] = {'type': 'point', 'position': [x, y, round(z + 0.27, 4)], 'power_w': v['bell_w'],
                           'radius_m': 0.02, 'color': v.get('tlamp_k', 2700), 'camera': False}
@@ -152,18 +155,22 @@ VIEWS = {
                # the room's sources up a little (not the grade)
                # (p14a, not judged: the name gone without its glow, median 16.9: the name as p13, the lightbox and the
                # room's sources up)
-               'camera': {'position': [-2.6, 2.7, 1.5], 'target': [6.86, 5.96, 1.4], 'lens_mm': 35, 'level': True,
+               # after the two critics on p14 (5.0, 5.0): the Ember pair small at the edge, the street side a crushed
+               # black strip, the lightbox a flat card, the name grey card, bare discs, the lamps clipping: back near
+               # p13's framing on 40 mm; the street lamps up (the steel and the pavement); the name fainter; the spots
+               # hidden from the camera; the speakers up a little, the lightbox and the lamps down
+               'camera': {'position': [-2.5, 2.7, 1.5], 'target': [7.35, 4.44, 1.4], 'lens_mm': 40, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
-               'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
-                            'screen_glow': 0.4, 'screen_window': 0.7, 'screen_tint': '#FFA060', 'spot_niche': 560.0,
+               'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 260.0,
+                            'screen_glow': 0.4, 'screen_window': 0.45, 'screen_tint': '#FFA060', 'spot_niche': 560.0,
                             'spk_link': True, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 120.0,
                             'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 80.0, 'entry_cone': 100.0,
-                            'transom_glow': 0.15, 'spk_irr': 15.0, 'spk_back': 60.0, 'spk_spread': 90.0,
+                            'transom_glow': 0.15, 'spk_irr': 22.0, 'spk_back': 70.0, 'spk_spread': 90.0,
                             'pendant_w': 620.0, 'pendant_glow': 0.2, 'pendant_lamp': 1.0, 'inlay_glow': 1.08,
-                            'bell_w': 95.0, 'sconce_w': 57.0, 'spot_records': 62.0, 'candle_w': 3.8, 'tlamp_glow': 0.08,
+                            'bell_w': 70.0, 'sconce_w': 57.0, 'spot_records': 62.0, 'candle_w': 3.8, 'tlamp_glow': 0.05,
                             'tlamp_bulb': 1.0, 'haze': 0.005, 'shelf_glow': 0.25, 'siding': '#8E9384', 'sky': 0.03,
                             'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05,
-                            'linen_trans': 0.5, 'etch_glow': 0.01, 'etch_frost': 0.3, 'glass_gloss': 3.0, 'chair_dye': '#2B2119',
+                            'linen_trans': 0.5, 'etch_glow': 0.004, 'etch_frost': 0.3, 'glass_gloss': 3.0, 'chair_dye': '#2B2119',
                             'screen_gap': 0.06, 'screen_rough': 0.3,
                             'chair_move': {'2': [0.0, -0.5, 0.0], '5': [-0.5, -0.35, 0.0]}}},
 }

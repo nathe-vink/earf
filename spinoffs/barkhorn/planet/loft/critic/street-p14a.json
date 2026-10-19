@@ -1,0 +1,356 @@
+{
+ "stage1": {
+  "impression": "A kerb-side night view through a steel-framed shopfront into a warm, deep bar. The interior reads well: there are pools of light on the caf\u00e9 table and the bar, beams and a polished floor recede, and the haze is believable. The foreground gives it away as CG, though. The left lightbox is a flat, evenly lit pinkish card with hard 1 px edges, and its dancer reads as a vague grey smudge. The 'EARF' on the glass reads as opaque grey cardboard letters, not etched frost, and a faint rectangular decal plane shows where it crosses the lightbox. The left eighth of the frame is dead black. The red Ember speakers are tiny far-off blobs, not the hero, and a bare white disc in the ceiling at the back right reads as a CG point light.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember at the far end must read as the hero at a glance: larger in frame, with its tint and the light through its acrylic legible, not a 28 x 54 px red smear",
+  "The frosted lightbox must read as a thick, glowing, diffusing acrylic panel, with soft falloff toward its edges, a glowing polished edge, and a dancer's silhouette recognisable as a woman",
+  "The window's frosted name must read as acid-etched glass (translucent, catching the room light), with no visible decal rectangle",
+  "No region larger than a tenth of the frame may be more than half crushed: the left strip, the street-side steel and pavement, must hold detail",
+  "The shopfront glass must behave like glass from the street: faint reflections of the street lamps and the kerb side",
+  "No bare CG-looking light discs; each practical must read as a fitting"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    95,
+    380
+   ],
+   "what": "Dead black: lum_median 1.0, crush_pct 65. The steel shopfront, pavement and street side are unreadable, and the strip covers more than a tenth of the frame"
+  },
+  {
+   "region": [
+    150,
+    40,
+    200,
+    420
+   ],
+   "what": "The lightbox is a flat, uniform field (lum 104 to 110, range of about 6 across its face) with 1 px hard edges. It shows no thickness, no edge glow and no diffusion gradient, and reads as printed card"
+  },
+  {
+   "region": [
+    95,
+    80,
+    140,
+    300
+   ],
+   "what": "The dancer's silhouette is an indistinct grey blob that does not read as a figure"
+  },
+  {
+   "region": [
+    165,
+    115,
+    200,
+    200
+   ],
+   "what": "A visible rectangular decal or bounding plane of the window lettering, a slightly lighter box over the lightbox around the 'E'"
+  },
+  {
+   "region": [
+    170,
+    110,
+    430,
+    200
+   ],
+   "what": "The 'EARF' window letters read as opaque grey solid shapes, like concrete or card, not frosted glass, and they compete with the room"
+  },
+  {
+   "region": [
+    640,
+    238,
+    668,
+    292
+   ],
+   "what": "The hero Ember is tiny (about 0.4 % of the frame) and its emissive face clips at 2.25 %"
+  },
+  {
+   "region": [
+    505,
+    235,
+    530,
+    280
+   ],
+   "what": "The second Ember is dim (lum_median 34), muddy red and barely legible"
+  },
+  {
+   "region": [
+    620,
+    120,
+    640,
+    140
+   ],
+   "what": "A bare round white disc in the ceiling, 34 % clipped, that reads as a CG point light or a moon, not a fitting"
+  },
+  {
+   "region": [
+    0,
+    420,
+    720,
+    480
+   ],
+   "what": "The sill and kerb foreground are crushed and featureless (crush 10.6 %, p5 0)"
+  },
+  {
+   "region": [
+    148,
+    0,
+    465,
+    480
+   ],
+   "what": "The shopfront glass shows no reflections of the street or the street lamps, so it reads as an open frame, not glass"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The far Ember, the frame's only colour and its hero, is a 28 x 54 px blob at the edge of the frame.",
+   "evidence": {
+    "region": [
+     640,
+     238,
+     668,
+     292
+    ],
+    "measured": "about 0.4 % of the frame area; lum_median 59; it sits at x 0.9 of the frame width, outside the right third"
+   },
+   "change": {
+    "setting": "camera: lens and target",
+    "from": "35 mm, target [6.86, 5.96, 1.4]",
+    "to": "50 mm, target swung toward the listening room (about [14, 3.5, 1.1]) so that the clear pane frames the Ember near the right third, with the lightbox and the frosted name still in the left half"
+   },
+   "expected": "The Ember doubles in linear size and sits on a third, read at a glance through the clear pane; the room stays legible behind it.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frame sits just under the night-interior target, and the street side is a crushed black slab.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     95,
+     380
+    ],
+    "measured": "frame lum_median 20.1 (target 22 to 50); left strip lum_median 1.0, crush_pct 65"
+   },
+   "change": {
+    "setting": "street lamps (3 x point, 3000 K) and render exposure",
+    "from": "120 W, exposure 1.7",
+    "to": "street lamps 260 W, one placed to rake the blackened-steel jamb and pavement from the left; exposure 1.9"
+   },
+   "expected": "The steel jamb shows its sheen and patina, the pavement holds texture, and the frame median rises into the mid-20s with no new clipping.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     95,
+     380
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 40
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The lightbox reads as a flat card, not thick frosted acrylic, and the dancer does not read.",
+   "evidence": {
+    "region": [
+     150,
+     40,
+     200,
+     420
+    ],
+    "measured": "lum p5 to p95 ranges only 104 to 110 across the bright face; the edge at x 200 steps 67 in 1 px; the figure region [95, 80, 135, 300] has lum_median 56, an undefined blob"
+   },
+   "change": {
+    "setting": "the screens' image emission and the frosted acrylic's roughness, plus the lightbox's polished edges",
+    "from": "screen 0.4, single flat diffuser",
+    "to": "screen 0.55, with the panel 30 mm thick, its polished edges emissive at about 1.5 x the face, and the frost roughness lowered a step so that the silhouette's head, shoulder and raised arm hold a soft but readable edge; a slight centre-to-edge falloff of the backlight"
+   },
+   "expected": "The panel glows with a gentle gradient and a bright rim, the figure is recognisable as a dancing woman behind fog, and nothing clips.",
+   "accept": {
+    "region": [
+     150,
+     40,
+     200,
+     420
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The window name reads as opaque grey card letters, with a visible rectangular decal plane.",
+   "evidence": {
+    "region": [
+     160,
+     120,
+     198,
+     200
+    ],
+    "measured": "a lighter box around the 'E' over the lightbox (lum 107 to 110 against the panel's 104); the letters [250, 110, 300, 200] are a flat opaque grey, lum_median 45"
+   },
+   "change": {
+    "setting": "the window's frosted name",
+    "from": "emission 0.01, a decal with a visible plane",
+    "to": "emission 0, an alpha-clipped letter mask only (no plane), the material a rough transmissive frost (about 70 % transmission, roughness 0.5) set 0.5 mm off the glass"
+   },
+   "expected": "The letters read as acid-etched glass, lightly milky, with the room softly visible through them, and no box.",
+   "accept": {
+    "region": [
+     160,
+     120,
+     172,
+     200
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The near Ember is dim and muddy, and the far Ember clips on its face.",
+   "evidence": {
+    "region": [
+     505,
+     235,
+     530,
+     280
+    ],
+    "measured": "lum_median 34.4 (target 45 or more); far Ember [640, 238, 668, 292] clip_pct 2.25"
+   },
+   "change": {
+    "setting": "on each Ember speaker, 4 x area at 2700 K",
+    "from": "15.0 W/m2",
+    "to": "22 W/m2, with the frontal lamp swung 20 degrees off-axis so that it grazes the cabinet instead of hitting the horn mouth head on"
+   },
+   "expected": "Both Embers read as tinted acrylic with internal glow; the far one stops clipping.",
+   "accept": {
+    "region": [
+     505,
+     235,
+     530,
+     280
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "A bare, clipped white disc in the ceiling reads as a CG light, not a fitting.",
+   "evidence": {
+    "region": [
+     620,
+     120,
+     640,
+     140
+    ],
+    "measured": "clip_pct 34.5, lum_median 185, no visible fitting"
+   },
+   "change": {
+    "setting": "the record wall's spots (3 x spot, 62 W): the visible emitter's size and intensity",
+    "from": "a bare emitter visible to the camera",
+    "to": "set into a blackened-steel can with a recessed lens (or hidden from camera rays), visible intensity cut by about 60 %"
+   },
+   "expected": "A small warm glint in a dark fitting instead of a white moon.",
+   "accept": {
+    "region": [
+     620,
+     120,
+     640,
+     140
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The shopfront glass has no reflections, so the frame reads as an open aperture, not a window seen from the kerb.",
+   "evidence": {
+    "region": [
+     148,
+     0,
+     465,
+     480
+    ],
+    "measured": "no street-lamp or kerb reflections visible anywhere on the panes"
+   },
+   "change": {
+    "setting": "the shopfront glass's finish, with the street lamps and props behind the camera",
+    "from": "near-invisible glass",
+    "to": "physically based glass at IOR 1.5 with a faint reflection of one street lamp and a parked-car or lamppost silhouette in the upper left pane"
+   },
+   "expected": "One or two soft reflections that sell the glass, without masking the room.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The foreground sill and kerb are empty and crushed, and the room shows little sign of life near the window.",
+   "evidence": {
+    "region": [
+     0,
+     420,
+     720,
+     480
+    ],
+    "measured": "crush_pct 10.6, lum_p5 0; one glass on the caf\u00e9 table, nothing else near the glass"
+   },
+   "change": {
+    "setting": "props",
+    "from": "one glass on the caf\u00e9 table",
+    "to": "a coat over the nearest stool, a second glass and a lit votive on the caf\u00e9 table, and a record sleeve leaning on the sill inside the glass"
+   },
+   "expected": "The near zone feels occupied; the votive adds a small warm pool that lifts the sill.",
+   "accept": {
+    "region": [
+     0,
+     420,
+     720,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 6
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move the Ember pair closer to the shopfront, or put a speaker in the window",
+   "why": "The room's layout and the speakers' placement are fixed by the card"
+  },
+  {
+   "request": "Replace the dancer image with a higher-contrast or different image",
+   "why": "The screens and what they show are fixed by the card; only their brightness and the frost may change"
+  }
+ ],
+ "score_if_fixed": 7.3
+}
