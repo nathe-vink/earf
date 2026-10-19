@@ -1,0 +1,399 @@
+{
+ "stage1": {
+  "impression": "A dim, warm room in the right key, but it reads as an unfinished CG proof rather than a photograph. The whole frame sits behind a flat grey-brown veil, and the polished floor has broken up into blotchy denoiser mottling. The Ember speaker, the reason for the picture, is a small smudge of red light behind chairs and the partition. The pendants are featureless white cylinders, the back-bar shelves are empty lit lines, and at 1:1 the concrete, fir and steel have no texture you could name.",
+  "score": 3.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "No denoiser mottling or fireflies anywhere on the floor: the floor reads as continuous polished concrete with clean, streaked reflections of the pendants and the Ember glow",
+  "The Ember speaker reads at a glance as a tall red acrylic cabinet with a horn: a clear silhouette, saturated red light through its acrylic, region median 45 or more with a visible edge against the listening room",
+  "The haze veil is gone from the far room: the deep shadows in the listening room drop to lum_p5 of 18 or less while the practicals keep their pools",
+  "The pendants read as frosted acrylic, with a soft gradient and a glowing bottom rim rather than flat white plastic, and they throw visible pools on the bar top",
+  "At 1:1 the materials read as real: board-form grain and tie holes in the concrete, fir grain on the beams and bar top, a dark uneven sheen on the steel back-bar",
+  "The back-bar is dressed (bottles and glasses catching small highlights on the acrylic shelves), and there is a sign of life on the bar (a glass, a menu, a coat)"
+ ],
+ "defects": [
+  {
+   "region": [
+    250,
+    320,
+    650,
+    480
+   ],
+   "what": "Polished floor broken into large blotchy denoiser mottling (cauliflower pattern), the clearest render tell in the frame"
+  },
+  {
+   "region": [
+    280,
+    120,
+    510,
+    320
+   ],
+   "what": "Haze veils the whole listening room and back wall: p5 29.4, range 24.7, no true darks, so everything looks seen through dirty glass"
+  },
+  {
+   "region": [
+    290,
+    230,
+    335,
+    280
+   ],
+   "what": "The Ember speaker reads only as a red glowing blob with 2.2 % clipped; no cabinet silhouette, no horn, no light through the acrylic"
+  },
+  {
+   "region": [
+    475,
+    215,
+    505,
+    280
+   ],
+   "what": "The second red source is a thin dull red strip (median 41, r 63) and does not read as a speaker"
+  },
+  {
+   "region": [
+    330,
+    230,
+    500,
+    320
+   ],
+   "what": "The lounge chairs and partition sit in front of the speaker and block the hero"
+  },
+  {
+   "region": [
+    90,
+    60,
+    125,
+    125
+   ],
+   "what": "Pendant is a flat white glossy cylinder with 3.1 % clipped. It reads as plastic, not frosted acrylic"
+  },
+  {
+   "region": [
+    215,
+    120,
+    240,
+    160
+   ],
+   "what": "Second pendant is the same flat white tube; the third (230-255, 178-195) floats with no visible means of support"
+  },
+  {
+   "region": [
+    0,
+    100,
+    150,
+    250
+   ],
+   "what": "Back-bar shelves are bare lit lines with no bottles or glasses; the niche spot makes a hard CG cone"
+  },
+  {
+   "region": [
+    0,
+    240,
+    300,
+    300
+   ],
+   "what": "Bar top is a uniform dark band with no fir grain, no inlay glow and no pools under the pendants"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    100
+   ],
+   "what": "Ceiling and beams are smeared, with no fir grain, checks or end grain"
+  },
+  {
+   "region": [
+    0,
+    280,
+    330,
+    480
+   ],
+   "what": "A row of identical stools, all with the same smeared wood"
+  },
+  {
+   "region": [
+    560,
+    240,
+    720,
+    400
+   ],
+   "what": "Booths are soft and smeared: the leather has no sheen or creasing and the frosted screens above are not legible"
+  },
+  {
+   "region": [
+    350,
+    150,
+    460,
+    230
+   ],
+   "what": "Record wall at the back is a blurred stripe pattern at median 38, with no sleeves readable"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "material",
+   "problem": "The polished floor has broken into blotchy denoiser mottling, which marks the frame as a render at a glance.",
+   "evidence": {
+    "region": [
+     300,
+     320,
+     600,
+     480
+    ],
+    "measured": "Visible cauliflower blotches at 2x crop; lum_p5 13.2 against p95 118.8 inside a surface that should be smooth."
+   },
+   "change": {
+    "setting": "the floor's polish (roughness), with render samples and clamp",
+    "from": "high polish (near mirror), samples 256, clamp 10",
+    "to": "honed or satin polished concrete, roughness about 0.35 with a faint roughness variation map; samples 1024 at full size; clamp 3 for indirect"
+   },
+   "expected": "Soft, streaked reflections of the pendants and the Ember glow on a continuous floor, with no mottling. The floor's range narrows and the reflection streaks keep their gradient.",
+   "accept": {
+    "region": [
+     300,
+     380,
+     600,
+     480
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The hero speaker is hidden behind lounge chairs and the partition and reads only as a red blob.",
+   "evidence": {
+    "region": [
+     290,
+     230,
+     335,
+     280
+    ],
+    "measured": "Median 63.5 but only as a small glow, 2.2 % clipped; the second Ember strip at 475-505 has median 41.2, r 63."
+   },
+   "change": {
+    "setting": "camera position and target",
+    "from": "position [3.0, 2.4, 1.35], target [16.15, 3.9, 1.0], focus [9.0, 3.0, 1.0]",
+    "to": "shift the camera to y about 2.9 and aim at the Ember speaker that stands clear of the chairs, so it sits on the right third, unoccluded through the smoked partition; move the focus to the partition plane at about x 12; lens 40 mm"
+   },
+   "expected": "The Ember cabinet's full silhouette is visible through the smoked acrylic, the most saturated object in the frame, read at a glance.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The haze veils the far room, so it has no true darks and looks seen through dirty glass.",
+   "evidence": {
+    "region": [
+     270,
+     120,
+     500,
+     240
+    ],
+    "measured": "lum_p5 29.4, lum_range 24.7, median 39.5: a flat veil."
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.015 per metre",
+    "to": "0.004 per metre"
+   },
+   "expected": "Deeper shadows between the pools in the listening room, with the speaker and the table lamps standing out. Region p5 falls to about 15 and the range doubles.",
+   "accept": {
+    "region": [
+     270,
+     120,
+     500,
+     240
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The Ember speaker's lamps do not light its acrylic enough to show the cabinet and horn; it reads as a glow, not an object.",
+   "evidence": {
+    "region": [
+     475,
+     215,
+     505,
+     280
+    ],
+    "measured": "Median 41.2, r_median 63, g 35: dull, under the 45 target for the speaker."
+   },
+   "change": {
+    "setting": "on each Ember speaker, 4 x area lamps",
+    "from": "50.0 W/m2 at the target, 2700 K",
+    "to": "120 W/m2 at the target, 2700 K, with one lamp moved behind and above as a rim so the light passes through the cast acrylic and outlines its edges"
+   },
+   "expected": "The cabinet's edges glow red and the white batts show softly through the tint. Speaker region median 55 to 90, with no clipping on the cabinet body.",
+   "accept": {
+    "region": [
+     475,
+     215,
+     505,
+     280
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The pendants read as flat white plastic tubes and clip, and they throw no visible pools on the bar top.",
+   "evidence": {
+    "region": [
+     90,
+     60,
+     125,
+     125
+    ],
+    "measured": "Median 154.8, clip 3.08 %, little gradient across the tube; the bar top below (0-300, 240-300) has median 25.5 with no pools."
+   },
+   "change": {
+    "setting": "pendants' frosted tubes emission, pendant spot lamps",
+    "from": "tubes 0.15, lamps 1.5, spot 700 W, cone 40 deg",
+    "to": "tubes 0.06 with frosted roughness 0.6 and a polished bottom rim; lamps 1.0; spot 900 W, cone 28 deg, aimed straight down on the bar top"
+   },
+   "expected": "The tubes glow softly with a bright bottom ring and do not clip; three distinct warm pools on the fir bar top, median 40 or more inside the pools.",
+   "accept": {
+    "region": [
+     90,
+     60,
+     125,
+     125
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The back-bar and bar top are empty, so the room reads as an unopened showroom with no sign of life.",
+   "evidence": {
+    "region": [
+     0,
+     100,
+     150,
+     250
+    ],
+    "measured": "Shelves are bare lit lines at 2x crop; no bottles or glass highlights."
+   },
+   "change": {
+    "setting": "props: bottles on the back-bar, glasses, menus",
+    "from": "sparse or not visible in this frame",
+    "to": "about 30 bottles in varied heights and amber, green and clear glass on the lit acrylic shelves; two rocks glasses with ice and a folded menu on the bar near camera; a coat over the third stool"
+   },
+   "expected": "Small highlights along the shelves and the bar, a lived-in foreground, without adding saturated colour.",
+   "accept": {
+    "region": [
+     0,
+     100,
+     150,
+     250
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "Concrete, fir and steel have no readable texture at 1:1; beams, bar front and walls are smeared.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     100
+    ],
+    "measured": "Ceiling band lum_range 36.8, median 30.7, with no visible grain at 2x."
+   },
+   "change": {
+    "setting": "the concrete's tone and sheen, the stain of the fir, the steel's patina",
+    "from": "smooth, uniform finishes",
+    "to": "board-form concrete with a displacement or bump at 100 mm board pitch, tie holes and pour lines; fir with a visible grain map, checks and darker end grain at bump 0.3; blackened steel roughness 0.45 with a brown patina roughness map; render at full 2400 x 1600 to judge"
+   },
+   "expected": "Materials read as real at their real scale; the ceiling band gains texture without getting brighter.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     100
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     38
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The near-left foreground under the stools falls into murk, and the booths are soft and unreadable.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     250,
+     480
+    ],
+    "measured": "Median 20.7, p5 4.6, crush 1.75 %; booths at 560-720, 240-400 have median 31.2 with no leather sheen."
+   },
+   "change": {
+    "setting": "the bar top's inlay, the sconce",
+    "from": "inlay 1.0, sconce 25 W",
+    "to": "inlay 1.8 (to wash the bar front and the stools); sconce over the booths 60 W, 2400 K, so the leather picks up a sheen"
+   },
+   "expected": "The stool legs and the bar front stay legible in the foreground, and the booth leather shows a soft highlight. Foreground median 24 to 32.",
+   "accept": {
+    "region": [
+     0,
+     380,
+     250,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     34
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move the lounge chairs and partition so they do not block the Ember speaker",
+   "why": "The listening room's layout is fixed by the card; handled instead by moving the camera (c2)."
+  },
+  {
+   "request": "Vary the identical bar stools",
+   "why": "The stools are part of the room's fixed design; repeated identical stools are correct for a real bar."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
