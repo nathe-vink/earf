@@ -76,9 +76,9 @@ def grounding():
     for lx, ly, half, along_x in ((0.0, -0.25, 0.36, True), (0.0, 0.25, 0.36, True), (-0.32, 0.0, 0.27, False),
                                   (0.32, 0.0, 0.27, False)):
         x, y = at(lx, ly)
-        sc = [half, 0.13, 0.09] if along_x else [0.13, half, 0.09]
+        sc = [half, 0.14, 0.15] if along_x else [0.14, half, 0.15]
         out.append(piece('sphere', material='pbr', texture='forest_leaves_04', tex_res='2k', position=[x, y, -0.03],
-                         scale=sc, rotate=[0, 0, ROT], tint='#2E2219', tint_mix=0.45))
+                         scale=sc, rotate=[0, 0, ROT], tint='#4A3626', tint_mix=0.3))
     # damp, darker duff in the cabinet's own shade: the contact shadow a photograph would show under the plinth line
     out.append(piece('cylinder', material='pbr', texture='forest_leaves_04', tex_res='2k', radius=0.62, height=0.012,
                      position=[0.0, 0.0, -0.004], scale=[1.0, 0.8, 1.0], rotate=[0, 0, ROT], tint='#15100C', tint_mix=0.7))
@@ -151,6 +151,10 @@ def shot():
         'kicker': {**area(-150, 10, 3.0, 30.0, '#FFC79A', (1.0, 2.4), (0.0, 0.0, 0.9)), 'receivers': SHELL},
         'kicker_r': {**area(144, 2, 3.0, 50.0, '#FF8A40', (1.0, 0.5), (0.0, 0.0, 0.4)), 'receivers': SHELL},
         # the pile's embers, under the plume
+        # a shaft of sun through a gap in the crowns, landing where the speaker stands, so it throws its own long shadow
+        # across the needles toward the camera as the trunks do
+        'sungap': {'type': 'spot', 'position': [7.13, 12.36, 4.64], 'target': [0.0, 0.0, 0.3], 'power_w': 210000,
+                   'cone_deg': 10.0, 'blend': 0.5, 'color': '#FFCC9A', 'radius_m': 0.15},
         'embers': point([PILE[0], PILE[1], 0.35], 140, '#FF5A14', 0.3),
         'emberglow': {'type': 'area', 'size_m': [1.0, 1.0], 'position': [PILE[0], PILE[1], 0.06], 'target': [PILE[0], PILE[1], 2.0],
                       'power_w': 90, 'color': '#FF6A20'},
