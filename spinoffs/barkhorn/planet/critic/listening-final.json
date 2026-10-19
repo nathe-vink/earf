@@ -1,0 +1,354 @@
+{
+ "stage1": {
+  "impression": "A calm, well-exposed night interior with a strong idea (a glowing ice-blue speaker against a wall of records), but it reads as a clean CG render rather than a photograph: the record sleeves are flat, uniform colour strips with no wear, print or variation, the floor and walls are smooth and textureless, and a wide dead band of plain wall separates the two halves of the frame. The speaker's cyan interior is the best thing in the image, but its horn sinks murkily into the wall and its light never reaches the floor, so it sits on the set rather than in the room.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The record wall must read as real vinyl: varied sleeve thickness, printed spines, worn and sun-faded edges, records leaning and part-pulled, no repeating stripe pattern",
+  "The frame must show what it is for: at least one lounge chair in the foreground, with the speaker and the record wall behind it, and no empty central wall band",
+  "The speaker's own cyan light has to show on the floor and on the plinth's top edge, so it is visibly lit from inside and sits in the room",
+  "The horn needs separating from the wall: a readable rim or back light on its silhouette, with its tint and depth visible rather than a dark smoky slab",
+  "The floor and walls need real micro-texture (honed concrete with aggregate, trowel marks, faint reflections; plaster with variation), not smooth CG planes",
+  "The record wall must not outshine the product: no clipped sleeve spines, and the speaker must be the brightest coloured element"
+ ],
+ "defects": [
+  {
+   "region": [
+    1060,
+    0,
+    1500,
+    1300
+   ],
+   "what": "dead central band of plain wall, nearly flat (lum_range 65 over 1150 px tall, a smooth falloff with no texture or object), splits the composition in two"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1050,
+    1450
+   ],
+   "what": "record sleeves are flat, saturated colour strips with no print, wear or thickness variation; the pattern repeats across cubbies; 1.45% of pixels clipped on the top-lit spines"
+  },
+  {
+   "region": [
+    0,
+    160,
+    1060,
+    1260
+   ],
+   "what": "the shelf columns jog up and down between columns (stepped horizontal shelves) and read as modelling misalignment"
+  },
+  {
+   "region": [
+    1530,
+    430,
+    1960,
+    720
+   ],
+   "what": "horn is murky and underlit (lum_median 34 against a wall of about 65); the driver behind it shows as a soft dark blur, and its top edge merges into the wall"
+  },
+  {
+   "region": [
+    1440,
+    1300,
+    2200,
+    1600
+   ],
+   "what": "dark plinth with no cyan bounce on its top face or on the floor around it; the floor beside it is neutral-warm (r 103, g 93, b 73), so the product looks placed, not glowing in the room"
+  },
+  {
+   "region": [
+    1060,
+    1300,
+    2400,
+    1600
+   ],
+   "what": "smooth, low-detail concrete floor (lum_range 21) with sparse speckles; reads as a CG plane"
+  },
+  {
+   "region": [
+    2100,
+    0,
+    2400,
+    1300
+   ],
+   "what": "right-hand corner wall is flat and empty, with a soft gradient that looks like a studio sweep, not a room"
+  },
+  {
+   "region": [
+    1580,
+    760,
+    1940,
+    1200
+   ],
+   "what": "the inner cyan batts have an even emissive look with little falloff through the acrylic; they read slightly as self-lit plastic"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame does not show the lounge chairs it is meant to show, and the empty wall between the record wall and the speaker kills the composition.",
+   "evidence": {
+    "region": [
+     1060,
+     0,
+     1500,
+     1300
+    ],
+    "measured": "a plain wall band 440 px wide, lum_median 64.8, range 65, with no object; no chair anywhere in frame"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [14.75, 1.85, 1.2], target [17.7, 1.45, 0.92], 32 mm, f/4 focused at [17.57, 0.78, 0.9]",
+    "to": "position [14.2, 2.3, 1.0], target [17.6, 1.2, 0.85], 35 mm, f/2.8 focused on the speaker's front face; frame so that a lounge chair's back and arm come into the lower-left foreground, softly out of focus, with the speaker on the right third and the record wall behind the chair"
+   },
+   "expected": "foreground (chair), middle ground (speaker) and background (record wall) layered, with no dead central band; the speaker crisp and the chair soft",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "asset",
+   "problem": "The records read as procedural coloured stripes, which says render more than anything else in the frame.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1050,
+     1450
+    ],
+    "measured": "uniform flat-colour spines, a pattern repeated cubby to cubby; clip_pct 1.45, p95 217"
+   },
+   "change": {
+    "setting": "record sleeve material and fill (the record wall's contents, not its design)",
+    "from": "flat-colour spines at a single thickness, packed evenly",
+    "to": "spine textures from a set of at least 200 real sleeve designs with printed titles, card grain, worn corners and 5-15% desaturation; thickness varied 3-6 mm (gatefolds); in each cubby a few records leaning 5-12 deg, one or two part-pulled 20-40 mm, and some cubbies 70% full"
+   },
+   "expected": "the wall reads as a real collection with visible print detail and irregular rhythm; no repeated stripe sequence",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1050,
+     1450
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The record wall is brighter and more saturated than the product, so it competes with the hero.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1050,
+     1450
+    ],
+    "measured": "lum_p95 216.9 and clip 1.45% against the speaker body's p95 164"
+   },
+   "change": {
+    "setting": "lamps: the record wall 3 x spot",
+    "from": "30.0 W, cone 25 deg",
+    "to": "16.0 W, cone 35 deg (softer pools that grade down the wall)"
+   },
+   "expected": "the record wall settles back one stop below the speaker; the speaker becomes the brightest coloured element",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1050,
+     1450
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 180
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The horn is underlit and dissolves into the wall, so the product's silhouette reads only from the cabinet down.",
+   "evidence": {
+    "region": [
+     1540,
+     460,
+     1950,
+     700
+    ],
+    "measured": "lum_median 34.0 and p95 51.6 inside the horn, against wall pixels of about 65 around it; little edge separation"
+   },
+   "change": {
+    "setting": "lamps: the wash behind each pair 4 x spot",
+    "from": "90.0 W, cone 50 deg",
+    "to": "150.0 W, cone 40 deg, aimed at the wall 0.3 m above the horn's top edge so the horn is backlit and its tinted rim glows; raise the corner speaker area lamps from 10.0 to 14.0 W/m2"
+   },
+   "expected": "a lit halo on the wall behind the horn, the horn's tinted acrylic edge lit, and the horn's interior showing ice blue",
+   "accept": {
+    "region": [
+     1540,
+     460,
+     1950,
+     700
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     46,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The speaker's cyan light does not reach the floor or the plinth, so it does not belong to the room.",
+   "evidence": {
+    "region": [
+     1060,
+     1350,
+     1450,
+     1580
+    ],
+    "measured": "floor next to the plinth r 103, g 93, b 73, with no blue lift; plinth top lum_median 26 with no cyan edge"
+   },
+   "change": {
+    "setting": "floor material",
+    "from": "matte concrete, smooth",
+    "to": "honed dark concrete, roughness 0.35 with a roughness map from 0.25 to 0.5, base about 15% darker, so it picks up a soft cyan reflection and spill from the cabinet; give the plinth a satin top at roughness 0.3 to catch the cabinet's glow along its edge"
+   },
+   "expected": "a soft cyan pool on the floor at the plinth's left and front, and a thin cyan line on the plinth's top edge",
+   "accept": {
+    "region": [
+     1380,
+     1380,
+     1470,
+     1560
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The floor and walls are smooth CG planes without micro-detail.",
+   "evidence": {
+    "region": [
+     1060,
+     1350,
+     1450,
+     1580
+    ],
+    "measured": "floor lum_range 21.1; wall lum_range 9.9 at [1100, 1000, 1500, 1300]"
+   },
+   "change": {
+    "setting": "wall and floor materials",
+    "from": "smooth plaster wall; flat concrete with sparse speckle",
+    "to": "lime plaster with a 2-4% luminance mottle at 0.3-1 m scale and a faint bump; concrete with fine aggregate, trowel arcs and a few hairline cracks at true scale (4096 px texture over at most 2 m)"
+   },
+   "expected": "surfaces with visible but quiet texture at full size, no tiling",
+   "accept": {
+    "region": [
+     1100,
+     1000,
+     1500,
+     1300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 16
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The room lacks air and depth between the planes; the empty right corner reads as a studio sweep.",
+   "evidence": {
+    "region": [
+     2100,
+     0,
+     2400,
+     1200
+    ],
+    "measured": "smooth gradient, lum_median 62.8, range 61, no features"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "density 0.012, anisotropy 0.3",
+    "to": "density 0.02, anisotropy 0.45, so the wash and record-wall spot cones read faintly in the air; add a small prop in the corner (a low side table with a rocks glass) to anchor the space"
+   },
+   "expected": "faint visible light cones, a gentle lift of the blacks in the distance, and the corner reading as part of a room",
+   "accept": {
+    "region": [
+     2100,
+     0,
+     2400,
+     1200
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 32
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The grade is a muddy olive-brown that dulls both the wood and the speaker's ice blue.",
+   "evidence": {
+    "region": [
+     1080,
+     100,
+     1480,
+     1250
+    ],
+    "measured": "wall r 74, g 64, b 46: a greenish-amber cast"
+   },
+   "change": {
+    "setting": "render white_balance_tint and white_balance_k",
+    "from": "tint -10.0, 3300 K",
+    "to": "tint 0.0, 3500 K"
+   },
+   "expected": "warm but cleaner neutrals; the wood reads as walnut, not olive; the cyan stays true",
+   "accept": {
+    "region": [
+     1080,
+     100,
+     1480,
+     1250
+    ],
+    "metric": "b_median",
+    "op": "between",
+    "value": [
+     50,
+     62
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Align the record wall's shelf heights across columns (they step between columns)",
+   "why": "The record wall's design is fixed; if the stepping is unintended it is a model or design question for the owner, not a picture fix"
+  },
+  {
+   "request": "Make the inner batts glow with more falloff through the acrylic, less evenly emissive",
+   "why": "This touches the speaker's materials and parts, which are fixed"
+  }
+ ],
+ "score_if_fixed": 7.3
+}
