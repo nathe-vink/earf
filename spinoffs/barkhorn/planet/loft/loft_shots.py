@@ -107,19 +107,19 @@ VIEWS = {
                          'screen_glow': 0.12, 'screen_tint': '#FFA060', 'inlay_glow': 1.0, 'floor_coat': 0.3,
                          'spk_irr': 20.0, 'spk_back': 30.0, 'spk_spread': 90.0, 'spk_link': True,
                          'spot_records': 10.0, 'rec_cone': 40.0, 'chair_dye': '#4A3A32'}},
-    'listening': {'title': 'the listening room, from the listening seat',
-                  # concept changed after three passes without half a point (p6 5.25, p7 4.5, p8 4.5; both p8 critics: the
-                  # side table and lamp across the speaker, the speaker small): from behind the listening seat, both Ember
-                  # speakers either side of the record wall, the beams overhead, a plain table lamp between the chairs;
-                  # the records in brighter pools (25 W at 20 deg), the white balance nearer the lamps (2700), more haze
-                  'camera': {'position': [12.35, 3.05, 1.30], 'target': [16.6, 3.05, 1.20], 'lens_mm': 28, 'level': True,
-                             'fstop': 4.0, 'focus': [16.15, 3.05, 1.0]},
-                  'settings': {'spk_irr': 20.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 34.0, 'sconce_w': 35.0,
-                               'exposure': -0.2, 'wb': 2700, 'spot_records': 25.0, 'rec_cone': 20.0, 'rec_aim_z': 1.2,
-                               'record_glow': 0.1, 'console_lift': 0.55, 'chair_dye': '#2B2119', 'screen_lounge': 0.08,
-                               'screen_tint': '#FFA060', 'flame': 80.0, 'candle_w': 6.0, 'haze': 0.025, 'spk_link': True,
-                               'extra_bells': [[LP.SIDE_TABLES[0][0] + 0.05, LP.SIDE_TABLES[0][1] + 0.08, 0.50]],
-                               'bell_w': 22.0}},
+    'listening': {'title': 'the listening room, one of the Ember pair',
+                  # p6's frame again (5.25 at proof size, 5.5 at 1200 x 800: the best yet), with only the changes its four
+                  # critics shared. p7 and p8 (back and lower on 24 mm, a Bell lamp in frame: 4.5, 4.5) put the side table
+                  # across the speaker; the listener's-seat concept (p9c, p9d, composition checks) lost both speakers
+                  # behind the chairs. Shared: the screen well below the speaker (81 vs 39), the speaker lit harder, a
+                  # stop darker, less orange, the records in pools, the sconce up, more haze, the base and a beam in
+                  'camera': {'position': [14.6, 2.5, 1.2], 'target': [16.3, 4.6, 1.15], 'lens_mm': 26, 'level': True,
+                             'fstop': 2.8, 'focus': [16.15, LP.PAIR['y'][1], 0.9]},
+                  'settings': {'spk_irr': 12.0, 'spk_spread': 90.0, 'spk_k': 2900, 'spk_back': 20.0, 'sconce_w': 25.0,
+                               'exposure': 0.0, 'wb': 3100, 'spot_records': 20.0, 'rec_cone': 18.0, 'rec_aim_z': 1.2,
+                               'fill_w': 40.0, 'fill_pos': [14.6, 3.2, 3.0], 'fill_target': [15.2, 3.4, 0.0],
+                               'record_glow': 0.1, 'console_lift': 0.55, 'chair_dye': '#4A3A32', 'screen_lounge': 0.12,
+                               'screen_tint': '#FFA060', 'flame': 60.0, 'candle_w': 1.5, 'haze': 0.025, 'spk_link': True}},
     'street': {'title': 'the shopfront window at night, from the kerb',
                # after the two critics on p6 (4.5, 4.5): 35 mm from the kerb, the dancer's lightbox on the left edge and
                # the right-hand Ember speaker seen over the lounge chairs, clear of the bar; the name frosted glass again;

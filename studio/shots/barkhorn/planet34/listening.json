@@ -1,27 +1,27 @@
 {
- "title": "Planet EARF, the listening room, from the listening seat (round 34)",
+ "title": "Planet EARF, the listening room, one of the Ember pair (round 34)",
  "size": [
   2400,
   1600
  ],
  "camera": {
   "position": [
-   12.35,
-   3.05,
-   1.3
-  ],
-  "target": [
-   16.6,
-   3.05,
+   14.6,
+   2.5,
    1.2
   ],
-  "lens_mm": 28,
+  "target": [
+   16.3,
+   4.6,
+   1.15
+  ],
+  "lens_mm": 26,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 2.8,
   "focus": [
    16.15,
-   3.05,
-   1.0
+   4.85,
+   0.9
   ]
  },
  "products": [
@@ -91,7 +91,7 @@
     "shelf_glow": 1.0,
     "shade_glow": 0.4,
     "pendant_glow": 0.25,
-    "flame": 80.0,
+    "flame": 60.0,
     "record_glow": 0.1,
     "vu": 2.0,
     "street": true,
@@ -105,7 +105,7 @@
     "flat_glow": 0.06,
     "console_lift": 0.55,
     "screen_glow": 0.8,
-    "screen_lounge": 0.08,
+    "screen_lounge": 0.12,
     "inlay_glow": 0.6,
     "pendant_lamp": 2.5,
     "etch_glow": 0.05,
@@ -135,11 +135,6 @@
      [
       12.85,
       3.9299999999999997,
-      0.5
-     ],
-     [
-      14.0,
-      3.13,
       0.5
      ]
     ]
@@ -437,7 +432,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#2B2119",
+    "color": "#4A3A32",
     "mix": 1.0
    },
    {
@@ -461,7 +456,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#2B2119",
+    "color": "#4A3A32",
     "mix": 1.0
    },
    {
@@ -485,7 +480,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#2B2119",
+    "color": "#4A3A32",
     "mix": 1.0
    },
    {
@@ -509,7 +504,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#2B2119",
+    "color": "#4A3A32",
     "mix": 1.0
    },
    {
@@ -533,7 +528,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#2B2119",
+    "color": "#4A3A32",
     "mix": 1.0
    },
    {
@@ -557,7 +552,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#2B2119",
+    "color": "#4A3A32",
     "mix": 1.0
    },
    {
@@ -581,7 +576,7 @@
      "mid_century"
     ],
     "blend": "MULTIPLY",
-    "color": "#2B2119",
+    "color": "#4A3A32",
     "mix": 1.0
    },
    {
@@ -642,7 +637,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 20.0,
+   "irradiance": 12.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -665,7 +660,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 34.0,
+   "irradiance": 20.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -688,7 +683,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 20.0,
+   "irradiance": 12.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -711,7 +706,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 34.0,
+   "irradiance": 20.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -761,7 +756,7 @@
     5.8999999999999995,
     1.78
    ],
-   "power_w": 35.0,
+   "power_w": 25.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -832,8 +827,8 @@
     2.05,
     1.2
    ],
-   "power_w": 25.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -850,8 +845,8 @@
     3.05,
     1.2
    ],
-   "power_w": 25.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -868,8 +863,8 @@
     4.05,
     1.2
    ],
-   "power_w": 25.0,
-   "cone_deg": 20.0,
+   "power_w": 20.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500
@@ -881,7 +876,7 @@
     0.84,
     0.775
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -893,7 +888,7 @@
     0.84,
     0.775
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -905,7 +900,7 @@
     0.84,
     0.775
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -917,7 +912,7 @@
     4.18,
     0.775
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -929,7 +924,7 @@
     4.029999999999999,
     1.155
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -941,7 +936,7 @@
     4.029999999999999,
     1.155
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -953,7 +948,7 @@
     4.029999999999999,
     1.155
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -965,7 +960,7 @@
     3.13,
     0.535
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
    "camera": false
@@ -977,9 +972,29 @@
     4.29,
     0.53
    ],
-   "power_w": 6.0,
+   "power_w": 1.5,
    "radius_m": 0.006,
    "color": 1900,
+   "camera": false
+  },
+  "fill": {
+   "type": "area",
+   "position": [
+    14.6,
+    3.2,
+    3.0
+   ],
+   "target": [
+    15.2,
+    3.4,
+    0.0
+   ],
+   "size_m": [
+    1.6,
+    1.6
+   ],
+   "power_w": 40.0,
+   "color": 2700,
    "camera": false
   },
   "street0": {
@@ -1063,18 +1078,6 @@
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
-  },
-  "tlamp5": {
-   "type": "point",
-   "position": [
-    14.0,
-    3.13,
-    0.77
-   ],
-   "power_w": 22.0,
-   "radius_m": 0.02,
-   "color": 2700,
-   "camera": false
   }
  },
  "haze": {
@@ -1098,8 +1101,8 @@
   "bounces": 10,
   "view": "AgX",
   "look": "None",
-  "exposure": -0.2,
-  "white_balance_k": 2700,
+  "exposure": 0.0,
+  "white_balance_k": 3100,
   "white_balance_tint": 0.0
  }
 }
