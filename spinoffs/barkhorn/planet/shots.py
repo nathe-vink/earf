@@ -207,11 +207,17 @@ VIEWS = {
                             'window_sign': True}},
 }
 
-# the colour clock: the door's view at four hours, the membrane the only change (its glow a little up, so it reads)
+# the colour clock: one view at four hours, the membrane's colour and level the only change. Rethought after the first
+# sheet (critic/clock-final.json, 4.5: the four barely differed, the products specks): closer, the bar's end and the
+# Ember pair with the membrane across the top, the membrane bright and saturated enough to colour the room
+CLOCK_GLOW = {'opening': 0.35, 'sunset': 0.35, 'late': 0.26, 'last': 0.10}
 for hour, label in (('opening', '17:00'), ('sunset', '19:30'), ('late', '22:30'), ('last', '01:45')):
     VIEWS[f'clock-{hour}'] = {'title': f'the colour clock at {label}', 'size': [1800, 1200],
-                              'camera': dict(VIEWS['door']['camera']),
-                              'settings': {'clock': hour, 'membrane': 0.08}}
+                              'camera': {'position': [6.0, 3.3, 1.3], 'target': [12.3, 7.6, 1.6], 'lens_mm': 32,
+                                         'level': True},
+                              'settings': {'clock': hour, 'membrane': CLOCK_GLOW[hour], 'membrane_white': 0.05,
+                                           'shelf_glow': 0.05, 'panel_glow': 0.8, 'spk_irr': 14.0, 'bell_w': 50.0,
+                                           'spot_bar': 90.0}}
 
 
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.10, 'clarity': 0.06, 'sharpen': 0.3,

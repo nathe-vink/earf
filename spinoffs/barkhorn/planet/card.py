@@ -18,7 +18,7 @@ FOR = {
     'records': 'the record wall and the DJ desk set into it (the record player on it is a stand-in), one of the Ice pair beside it.',
     'street': 'the street at night: the corner storefront from across the street, the room glowing through its one long '
               'window, a plain door with one small neon sign.',
-    'clock': 'the colour clock: the same view at one of four hours, the ceiling\'s colour the only change.',
+    'clock': 'the colour clock: the bar\'s end, the Ember pair and the lounge, at four hours as a 2 x 2 sheet, the ceiling membrane\'s colour and level the only change.',
 }
 
 CONTEXT = """**The project:** a design mockup of Planet EARF, a proposed acrylic listening bar in San Francisco (Hayes Valley,

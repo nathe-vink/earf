@@ -1,0 +1,346 @@
+{
+ "stage1": {
+  "impression": "A 2 x 2 contact sheet of one wide, level view down a dark concrete listening bar, captioned with four times of day. All four panels are practically the same picture: the change of time hardly registers, and the products (two small red horns, a few lamps) are specks in a frame where the empty floor, the clipped blue bar panels and a bright floor hot spot take the eye. It reads as a clean architectural render, not a photograph: the leather is glossy and plasticky, the walls are flat grey, and there is no air.",
+  "score": 4.5
+ },
+ "verdict": "rethink",
+ "blocking_9": [
+  "The four panels must differ at a glance: the membrane colour named in each caption has to tint the ceiling, the air, the floor's reflection and the acrylic. Today the walls and floor measure the same in all four (floor lum_median 45/47/45/44).",
+  "A product must be the hero of each panel. Today a speaker is about 60 to 80 px tall in a 1200 px panel, and the Ember booth speaker is crushed (lum_median 11.5).",
+  "The bottom third of the frame cannot be empty dark floor, and its brightest point cannot be a specular hot spot.",
+  "Surfaces must read as real materials: the leather, the concrete walls and the ceiling membrane read as CG.",
+  "A 2 x 2 of a 30 mm wide shot cannot run as a full magazine page. It needs a closer view (bar plus one pair, with the membrane in frame) so each panel works at a quarter page."
+ ],
+ "defects": [
+  {
+   "region": [
+    300,
+    20,
+    900,
+    200
+   ],
+   "what": "The ceiling membrane reads as a dim, painted lavender ceiling, not a back-lit luminous membrane. Its colour shift between panels is about 10 to 20 levels per channel, which is barely visible."
+  },
+  {
+   "region": [
+    300,
+    500,
+    900,
+    780
+   ],
+   "what": "The floor and walls are identical in all four panels. The membrane's colour does not reach the room."
+  },
+  {
+   "region": [
+    820,
+    640,
+    900,
+    780
+   ],
+   "what": "A specular hot spot on the floor (lum_median 211) is the brightest thing in the panel, repeated in all four."
+  },
+  {
+   "region": [
+    0,
+    420,
+    300,
+    560
+   ],
+   "what": "The bar's front panels clip (1.19%) and read only as a saturated blue/violet block. The spectrum of eight panels does not read."
+  },
+  {
+   "region": [
+    1080,
+    380,
+    1200,
+    560
+   ],
+   "what": "The Ember speaker and the booth at the right edge are crushed to near black red (lum_median 11.5) and cut by the frame edge."
+  },
+  {
+   "region": [
+    0,
+    650,
+    1150,
+    800
+   ],
+   "what": "The bottom third is empty dark floor, about 40% of the panel below lum 40."
+  },
+  {
+   "region": [
+    500,
+    400,
+    1000,
+    530
+   ],
+   "what": "The four identical leather lounge chairs read as glossy rubber, with a CG specular on every quilt."
+  },
+  {
+   "region": [
+    1190,
+    0,
+    1210,
+    1600
+   ],
+   "what": "The panels butt with no gutter (a 56.7 step with zero width at x 1200). The captions are default system sans, and 'last call' breaks the 'flavour + flavour' pattern."
+  },
+  {
+   "region": [
+    880,
+    230,
+    1150,
+    420
+   ],
+   "what": "The Haze slats and the record wall read as flat emissive bands. The haze at 0.012 shows no beams or depth."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The products are specks and half of each panel is empty floor, so nothing is the hero.",
+   "evidence": {
+    "region": [
+     120,
+     340,
+     600,
+     560
+    ],
+    "measured": "The bar speaker is about 70 px tall in a 1200 x 800 panel. 39.4% of the image is below lum 40, mostly the floor in the bottom third."
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [2.2, 3.6, 1.35], target [18.288, 4.7, 1.25], 30 mm",
+    "to": "position [7.5, 4.2, 1.15], target [13.5, 7.0, 1.25], 40 mm, framing the bar with its Bell pendants, one speaker pair and a strip of the lit membrane in the top fifth; the same camera in all four panels"
+   },
+   "expected": "One speaker pair and the bar fill the middle third, about 3x their current size. The floor drops to under 25% of the frame. The membrane stays visible so the clock still reads.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The only variable in the sheet, the membrane colour, barely changes the picture, so the clock idea does not read.",
+   "evidence": {
+    "region": [
+     300,
+     20,
+     900,
+     200
+    ],
+    "measured": "Ceiling RGB medians: 17:00 (88,82,99), 19:30 (95,76,74), 22:30 (90,71,82), 01:45 (79,53,45). Floor lum_median 45.9 / 47.0 / 45.3 / 44.5 across the four panels."
+   },
+   "change": {
+    "setting": "membrane strength and clock colours",
+    "from": "0.08, desaturated clock tints",
+    "to": "0.22 at 17:00 and 19:30, 0.16 at 22:30, 0.07 at 01:45, with the tints saturated to the caption's flavours (Fog+Ice a cold blue-white, Acid+Dust a clear yellow-amber, Ember+Haze a red-violet, last call a low amber). Cut the shelves to 0.05 and the street neon to 10 so the membrane carries the ambient light."
+   },
+   "expected": "Each panel's ceiling, floor reflection and wall tint visibly match its caption. Walls and floor differ between panels by more than 15 levels in the dominant channel.",
+   "accept": {
+    "region": [
+     300,
+     20,
+     900,
+     200
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 125
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "A floor hot spot is the brightest element in every panel and pulls the eye from the products.",
+   "evidence": {
+    "region": [
+     820,
+     640,
+     900,
+     780
+    ],
+    "measured": "lum_median 211.2, p95 241.8, against a floor median of about 45"
+   },
+   "change": {
+    "setting": "floor material and the spot that makes the reflection",
+    "from": "glossy polished concrete; bar-top pinholes 140 W",
+    "to": "honed concrete with roughness raised to about 0.5, with fine aggregate and trowel variation in a 4K texture; bar-top pinholes 90 W"
+   },
+   "expected": "The reflection becomes a soft glow under 140 in luminance, and the floor shows real concrete micro-texture.",
+   "accept": {
+    "region": [
+     820,
+     640,
+     900,
+     780
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 140
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The bar's front panels clip and saturate, so the spectrum order reads as one blue slab.",
+   "evidence": {
+    "region": [
+     0,
+     420,
+     300,
+     560
+    ],
+    "measured": "clip_pct 1.19, b_median 128 against r_median 55"
+   },
+   "change": {
+    "setting": "bar panels",
+    "from": "1.4",
+    "to": "0.8, keeping the 0.2-to-1 vertical grade"
+   },
+   "expected": "The panels glow without clipping, and the hue steps between adjacent panels become visible.",
+   "accept": {
+    "region": [
+     0,
+     420,
+     300,
+     560
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The Ember speaker and the booth at the right fall into black, so the red acrylic does not glow.",
+   "evidence": {
+    "region": [
+     1080,
+     380,
+     1200,
+     560
+    ],
+    "measured": "lum_median 11.5, g/b medians 6/3"
+   },
+   "change": {
+    "setting": "lamps on each corner speaker; booth Bells",
+    "from": "4 x area at 10.0 W/m2; booth Bells 35 W",
+    "to": "14 W/m2 at the target; booth Bells 50 W"
+   },
+   "expected": "The Ember cabinet reads as lit translucent red with its white batts visible, and the booth's leather picks up its red spill.",
+   "accept": {
+    "region": [
+     1080,
+     380,
+     1200,
+     560
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The lounge chairs' leather reads as glossy rubber, which says 'render'.",
+   "evidence": {
+    "region": [
+     500,
+     400,
+     1000,
+     530
+    ],
+    "measured": "Seen: an even, sharp specular on every quilt of four identical chairs, with no grain or wear."
+   },
+   "change": {
+    "setting": "upholstery material",
+    "from": "smooth glossy dark leather",
+    "to": "aniline leather with roughness 0.45, a pebble-grain normal map, slight colour variation and edge wear; rotate each chair a few degrees differently"
+   },
+   "expected": "The highlights soften into broad sheen, and the chairs stop reading as copies.",
+   "accept": {
+    "region": [
+     500,
+     400,
+     1000,
+     530
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 140
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The air shows no atmosphere, so the spots, the slats and the membrane have no volume and the depth is flat.",
+   "evidence": {
+    "region": [
+     880,
+     230,
+     1150,
+     420
+    ],
+    "measured": "Seen: the slats and the record wall are flat emissive bands with no beams; the wall spot cones are invisible."
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "density 0.012, anisotropy 0.3",
+    "to": "density 0.02, anisotropy 0.5"
+   },
+   "expected": "The spot cones and the membrane's colour show faintly in the air, and the background separates from the foreground.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The sheet's layout and type look like a debug grid, not an editorial spread.",
+   "evidence": {
+    "region": [
+     1170,
+     400,
+     1230,
+     600
+    ],
+    "measured": "edge step 56.7 with 0 px width at x 1200; no gutter; system sans captions"
+   },
+   "change": {
+    "setting": "sheet layout",
+    "from": "butted panels, default sans, the caption 'last call'",
+    "to": "a 24 px gutter in near black (#111), captions in one editorial face at small caps with the time in tabular figures, and the fourth caption named on the same pattern as the others (time + membrane colour)"
+   },
+   "expected": "The sheet reads as a designed four-up spread.",
+   "accept": {
+    "region": [
+     1190,
+     0,
+     1210,
+     1600
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 6
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Bell pendants read as lamps (they render as dark smoky glass funnels and give little visible glow)",
+   "why": "Bell's shape and material are fixed EARF products. Only its wattage may change, and it may still not read."
+  },
+  {
+   "request": "Bring the speakers forward in the room or turn them toward the camera",
+   "why": "The room layout and the speakers' positions are fixed in the proposal. Only the camera can change."
+  }
+ ],
+ "score_if_fixed": 6.5
+}
