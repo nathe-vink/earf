@@ -182,7 +182,7 @@ def shell(bpy, kit, p, objs):
 def shopfront(bpy, kit, p, objs):
     W, H = P.W, P.CEIL
     E, Dr, Wn, Tr = P.ENTRY, P.DOOR, P.WINDOW, P.TRANSOM
-    paint = principled(bpy, 'storefront-paint', P.STOREFRONT_PAINT, rough=0.38, coat=0.4, coat_rough=0.2,
+    paint = principled(bpy, 'storefront-paint', p.get('storefront_paint', P.STOREFRONT_PAINT), rough=0.38, coat=0.4, coat_rough=0.2,
                        bump=(0.02, 0.04, 0.0005))
     fr = Mesh('storefront')
     x0, x1 = -0.16, 0.0                                                     # the front's depth
@@ -300,7 +300,7 @@ def shopfront(bpy, kit, p, objs):
                 flat = [v for lp in loops for v in lp]
                 f = bm.faces.new([bm.verts.new(flat[i]) for i in tri]); f.normal_update()
         me = bpy.data.meshes.new('gold-leaf'); bm.to_mesh(me); bm.free()
-        me.materials.append(principled(bpy, 'gold-leaf', '#C8922E', rough=0.25, metal=1.0, emit='#F0A838',
+        me.materials.append(principled(bpy, 'gold-leaf', '#C9A24A', rough=0.18, metal=1.0, emit='#F0A838',
                                        strength=p.get('gold_glow', 0.25)))
         ob = bpy.data.objects.new('gold-leaf', me); bpy.context.scene.collection.objects.link(ob); objs.append(ob)
 

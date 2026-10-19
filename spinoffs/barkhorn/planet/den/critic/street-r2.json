@@ -1,0 +1,357 @@
+{
+ "stage1": {
+  "impression": "A quiet night shopfront with a believable warm room behind the glass and a nice recessed door with its pool of light. It still reads as CG: the facade, pavement and sky are untextured near-black planes, the transom strip is a cold fluorescent bar that fights the 2400 K room, there is a denoiser smear in the lower centre pane, and the name on the glass reads as a flat mint-and-peach decal rather than gold leaf. No product or speaker colour reads anywhere in the frame.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The street, kerb and facade carry real material detail (wet asphalt or concrete with reflections, painted or stucco facade texture) instead of crushed flat planes: bottom band lum_median above 6 with visible texture, crush_pct below 25",
+  "One coherent night light world: street lamps visibly lighting the facade and pavement at 4000 K against the warm 2400 K interior, with no cold-white transom bar",
+  "The name on the glass reads as gilded leaf (warm metallic, specular, slightly translucent from behind), not a flat two-tone decal",
+  "No denoiser smear or blotching anywhere on the glass or curtains",
+  "The room's one colour, an Ember speaker or its glow, is readable through the glass so the frame says what this bar is",
+  "Glass reads as glass: faint street reflections and a sheen on the panes"
+ ],
+ "defects": [
+  {
+   "region": [
+    420,
+    480,
+    530,
+    645
+   ],
+   "what": "Denoiser smear / ghost blotch on the lower centre pane over the curtains; the vertical folds dissolve into a blurred patch"
+  },
+  {
+   "region": [
+    380,
+    380,
+    590,
+    450
+   ],
+   "what": "EARF letters read as a flat mint-and-peach decal, not gold leaf; no metallic specular, RGB median 162,167,132, delta-E 16.9 against a gold #C9A24A"
+  },
+  {
+   "region": [
+    40,
+    115,
+    1100,
+    200
+   ],
+   "what": "Transom lit by cold neutral-white strip bars (p95 228) that look like office fluorescents and clash with the warm room"
+  },
+  {
+   "region": [
+    0,
+    690,
+    1200,
+    800
+   ],
+   "what": "Pavement and kerb are a crushed untextured plane (lum_median 1.0, crush 57%): no ground, no reflections, no street lamp pools"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    110
+   ],
+   "what": "The facade above the transom is a featureless blue-black slab with CG-clean edges"
+  },
+  {
+   "region": [
+    0,
+    0,
+    30,
+    800
+   ],
+   "what": "The left edge is pure black (crush 96%): no neighbouring building, no context"
+  },
+  {
+   "region": [
+    880,
+    300,
+    1080,
+    700
+   ],
+   "what": "The recessed door is almost black (lum_median 1.0); the door and vestibule read as a void"
+  },
+  {
+   "region": [
+    85,
+    270,
+    830,
+    665
+   ],
+   "what": "The glass has no reflection or sheen; it reads as an open hole in the wall"
+  },
+  {
+   "region": [
+    100,
+    280,
+    340,
+    380
+   ],
+   "what": "The room's upper half is a flat orange wash with little modelling; no speaker colour visible"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The street lamps do nothing: the pavement and facade are crushed to black, so the building has no material, no ground and no night world.",
+   "evidence": {
+    "region": [
+     0,
+     690,
+     1200,
+     800
+    ],
+    "measured": "lum_median 1.0, crush_pct 56.9; facade top band lum_median 6.4"
+   },
+   "change": {
+    "setting": "street lamps 3 x point, 4000 K",
+    "from": "90 W",
+    "to": "600 W each, placed 4-5 m above the far kerb and about 2 m in front of the camera's side, one raking the facade from the left at a low angle; street material: wet dark asphalt, roughness 0.25, with a 3 cm concrete kerb"
+   },
+   "expected": "Pools of cool light on the pavement and a raking gradient across the facade, wet reflections of the warm windows in the street; bottom band median about 8-15 with texture",
+   "accept": {
+    "region": [
+     0,
+     690,
+     1200,
+     800
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 25
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The denoiser has smeared the curtain folds in the lower centre pane into a ghost blotch.",
+   "evidence": {
+    "region": [
+     420,
+     480,
+     530,
+     645
+    ],
+    "measured": "seen at 2x crop: vertical folds blur into an unstructured patch, unlike the crisp folds at 620-820"
+   },
+   "change": {
+    "setting": "render samples / denoise",
+    "from": "256 samples, adaptive 0.02, denoise true",
+    "to": "1024 samples, adaptive 0.005, denoiser with albedo and normal passes (OpenImageDenoise, prefilter Accurate)"
+   },
+   "expected": "Curtain folds stay continuous across the whole lower band; local contrast in the centre pane matches the right pane",
+   "accept": {
+    "region": [
+     420,
+     500,
+     600,
+     640
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The name on the glass reads as a flat pastel decal, not gold leaf.",
+   "evidence": {
+    "region": [
+     385,
+     385,
+     585,
+     445
+    ],
+    "measured": "RGB median 162,167,132; delta-E 16.9 against #C9A24A; no specular variation"
+   },
+   "change": {
+    "setting": "the gold leaf (material and emission)",
+    "from": "emission 0.4, flat colour",
+    "to": "emission 0; metallic 1.0, base #C9A24A, roughness 0.18, with a fine crinkle normal map and a thin dark outline; let the street lamp give it a specular glint"
+   },
+   "expected": "Letters read as warm gilt with a highlight from the street and a darker translucent back toward the room",
+   "accept": {
+    "region": [
+     385,
+     385,
+     585,
+     445
+    ],
+    "metric": "delta_e",
+    "hex": "#C9A24A",
+    "op": "<",
+    "value": 8
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The transom strip lights read as cold office fluorescents and break the warm palette.",
+   "evidence": {
+    "region": [
+     40,
+     120,
+     1100,
+     140
+    ],
+    "measured": "p95 227.8, neutral white; the room behind is r 49 g 16 b 1"
+   },
+   "change": {
+    "setting": "transom strip lights (plain description)",
+    "from": "neutral white, near clipping",
+    "to": "2400 K, half the strength, diffused behind the transom glass so it glows rather than shows a bar"
+   },
+   "expected": "The transom glows amber like the room; no bright white line across the top of the frame",
+   "accept": {
+    "region": [
+     40,
+     115,
+     1100,
+     200
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 170
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The room's only colour, the Ember speakers, does not appear, so the shopfront could be any bar.",
+   "evidence": {
+    "region": [
+     85,
+     270,
+     830,
+     665
+    ],
+    "measured": "no red speaker hue anywhere in the windows; the room is a uniform orange wash"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "[-8.5, 6.0, 1.45] looking at [0.0, 3.2, 1.9]",
+    "to": "about [-8.5, 3.0, 1.45] aimed so that one Ember speaker in the listening room is visible through the glass above the caf\u00e9 curtains, in the right third; raise the Ember speaker area lamps from 3.0 to 6.0 W/m2 so it reads from the street"
+   },
+   "expected": "A small but unmistakable red glowing cabinet through the glass, the frame's single colour accent",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The facade and window glass have no material: the building is a flat slab and the glass a hole.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     110
+    ],
+    "measured": "lum_range 35.9 with crush 46%; no reflections on the panes"
+   },
+   "change": {
+    "setting": "street and facade materials, shopfront glass",
+    "from": "flat dark painted planes; clear glass with no visible reflection",
+    "to": "painted wood or stucco facade with a fine bump and slight colour variation (a dark green or oxblood paint), visible frame mouldings; glass with IOR 1.52 and a faint reflection of the street lamps and the buildings opposite"
+   },
+   "expected": "Texture visible on the facade under the raking lamp; soft reflections over the lower panes",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     110
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     10,
+     30
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The recessed door is a black void, so the entrance doesn't invite.",
+   "evidence": {
+    "region": [
+     880,
+     300,
+     1080,
+     700
+    ],
+    "measured": "lum_median 1.0, crush 76%"
+   },
+   "change": {
+    "setting": "door downlight (plain description, or a sconce in the vestibule)",
+    "from": "a single narrow spot reaching only the floor",
+    "to": "a 2400 K wall sconce or a wider 60 deg downlight at the door, about 30 W, plus a glazed door with the room glowing through"
+   },
+   "expected": "The vestibule walls and door are legible in warm light, median around 15-25",
+   "accept": {
+    "region": [
+     880,
+     300,
+     1080,
+     700
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 35
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "There is no context and no life: black edges, no neighbours, no people.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     30,
+     800
+    ],
+    "measured": "left edge crush 95.6%"
+   },
+   "change": {
+    "setting": "props / people / set",
+    "from": "none",
+    "to": "the edge of the neighbouring building with its own dim window on the left, a parked bicycle or street tree in the soft foreground, one or two motion-blurred figures inside at the bar; a thin haze outside at 0.005 per metre so the street lamps bloom"
+   },
+   "expected": "The frame reads as a real street with depth from foreground to the room",
+   "accept": {
+    "region": [
+     0,
+     0,
+     30,
+     800
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 70
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "None for the speakers themselves",
+   "why": "The weaknesses are all set, light, material and camera; the products are not the problem in this frame (they are simply not visible)."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

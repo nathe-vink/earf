@@ -1,0 +1,386 @@
+{
+ "stage1": {
+  "impression": "A moody, warm back-bar at night with lit shelves of bottles, but the hero is a near-black rounded box set against a bright, sterile niche. It reads as a silhouette, not as tinted acrylic with light passing through it. Most of the frame is crushed, monochrome orange. The bar's pendants are cut off, and the out-of-focus foreground glasses read as blobs. It is competent interior CG, but it would not run as a magazine page.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Smoke speaker must read as lit, tinted acrylic with its horn and white batts visible, not as a silhouette against a brighter niche (speaker face lum_median >= 35 while the niche back stays <= 90)",
+  "The speaker's full 1293 mm height must read, including the lower cabinet, which is crushed now (lum 5.6)",
+  "The three brass pendants and the reeded walnut bar must be in frame and legible; today only one pendant edge shows at the top-right corner",
+  "Every light source must sit in one warm family; the vertical strip beside the niche is cool white-blue (b 248 > r 224)",
+  "Mid-tones must be lifted out of the crush (85% of pixels below 40) without losing the night mood, and the grade must hold some neutral against the all-orange cast",
+  "No denoiser smearing on the hero's surface, and no repeated bottle models with identical labels next to each other"
+ ],
+ "defects": [
+  {
+   "region": [
+    568,
+    245,
+    740,
+    390
+   ],
+   "what": "Speaker reads as a dark backlit silhouette; no light passes through the acrylic and the horn shape is barely legible; blotchy denoiser smear on its face"
+  },
+  {
+   "region": [
+    570,
+    400,
+    730,
+    540
+   ],
+   "what": "The speaker's lower cabinet/stand is crushed to black (lum_median 5.6) and merges with the niche floor"
+  },
+  {
+   "region": [
+    560,
+    165,
+    740,
+    405
+   ],
+   "what": "The niche back is a flat, bright, sterile plaster box (top band lum_median 134, p95 240), brighter than the hero and pulling the eye"
+  },
+  {
+   "region": [
+    738,
+    195,
+    752,
+    530
+   ],
+   "what": "A vertical LED strip beside the niche is cool white-blue against a 2400 K room"
+  },
+  {
+   "region": [
+    1100,
+    0,
+    1200,
+    110
+   ],
+   "what": "A pendant is cut off at the top-right corner; the bar's three pendants, which the frame is for, are absent"
+  },
+  {
+   "region": [
+    265,
+    580,
+    390,
+    680
+   ],
+   "what": "Out-of-focus foreground rocks glass reads as a dark blob with two highlight streaks, distracting at lower centre"
+  },
+  {
+   "region": [
+    945,
+    520,
+    1030,
+    565
+   ],
+   "what": "A second blurred foreground glass sits as a dark rectangle on the bar top"
+  },
+  {
+   "region": [
+    0,
+    600,
+    1200,
+    800
+   ],
+   "what": "The bar front is monochrome orange (r72 g23 b6); the walnut reeding barely reads"
+  },
+  {
+   "region": [
+    40,
+    400,
+    520,
+    590
+   ],
+   "what": "The lower back-bar shelf is unlit and crushed; the bottles there are near-black shapes"
+  },
+  {
+   "region": [
+    40,
+    60,
+    520,
+    380
+   ],
+   "what": "The same bottle models with identical striped labels repeat across the shelves"
+  },
+  {
+   "region": [
+    1100,
+    120,
+    1200,
+    480
+   ],
+   "what": "The far end, where the listening room should be glimpsed, is a flat red-black field (lum_median 10, range 4.5) with no depth"
+  },
+  {
+   "region": [
+    40,
+    180,
+    520,
+    405
+   ],
+   "what": "The shelf strips clip to white cores (p95 247) and read as hard CG lines rather than diffused LED"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero is backlit into a silhouette, because the niche back is far brighter than the speaker's face.",
+   "evidence": {
+    "region": [
+     580,
+     260,
+     730,
+     380
+    ],
+    "measured": "speaker face lum_median 15.2 (r31 g12 b4); niche back band [565,200,740,240] lum_median 134, p95 240"
+   },
+   "change": {
+    "setting": "niche backs emission strength",
+    "from": "1.2",
+    "to": "0.3"
+   },
+   "expected": "The niche becomes a soft warm glow behind the speaker instead of a lightbox, and the speaker's edges separate from it by rim light rather than by silhouette.",
+   "accept": {
+    "region": [
+     565,
+     200,
+     740,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     50,
+     90
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The niche spots do not put light into the speaker's face, so the tinted acrylic and the horn never glow.",
+   "evidence": {
+    "region": [
+     580,
+     260,
+     730,
+     380
+    ],
+    "measured": "lum_median 15.2, p95 45.6; the face is darker than the bottles on the neighbouring shelves (13-20)"
+   },
+   "change": {
+    "setting": "niche spots (2 x spot per niche)",
+    "from": "450 W, 2600 K, cone 30 deg, lighting the niche back",
+    "to": "re-aimed from the niche's top front edge, about 35 deg down onto the speaker's front face and horn mouth, 450 W, cone 40 deg, 2600 K, so light passes through the acrylic sides and picks out the white batts"
+   },
+   "expected": "The Smoke acrylic reads as a translucent smoked brown-grey with a visible horn throat and a lit inner edge, and it becomes the brightest mid-tone object in the frame centre.",
+   "accept": {
+    "region": [
+     580,
+     260,
+     730,
+     380
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The speaker's lower cabinet is lost in black, so its 1293 mm stature does not read.",
+   "evidence": {
+    "region": [
+     570,
+     410,
+     725,
+     530
+    ],
+    "measured": "lum_median 5.6, p95 15.2, crush_pct 10.4, b_median 0"
+   },
+   "change": {
+    "setting": "a fill lamp in each niche (new, small)",
+    "from": "none",
+    "to": "one area lamp at the niche floor's front lip, 0.3 x 0.05 m, aimed up and back at the cabinet, 2600 K, about 15 W"
+   },
+   "expected": "The lower cabinet and its feet separate from the niche floor with a faint warm gradient rising up the acrylic.",
+   "accept": {
+    "region": [
+     570,
+     410,
+     725,
+     530
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The frame is meant for the bar under three brass pendants, but the pendants are out of frame and only one corner of one shows.",
+   "evidence": {
+    "region": [
+     1100,
+     0,
+     1200,
+     110
+    ],
+    "measured": "a partial pendant at the corner (p95 86); no other pendant visible"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [6.6, 3.2, 1.35], level, lens 40 mm",
+    "to": "position [5.9, 3.0, 1.30], lens 32 mm, target raised to z 1.55 (vertical shift rather than tilt, to keep the verticals true), so that two or three pendants hang in the top quarter with the speaker niche still near the centre"
+   },
+   "expected": "The pendants frame the top of the image, the bar top runs into the frame as a leading line, and the speaker stays the centre of interest.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The bar top and its reeded front are a dark orange field with no pools of light, so the walnut does not read.",
+   "evidence": {
+    "region": [
+     300,
+     560,
+     700,
+     640
+    ],
+    "measured": "bar top lum_median 19.8; bar front [0,600,1200,800] lum_median 31.8, r72 g23 b6"
+   },
+   "change": {
+    "setting": "pendants (3 x spot)",
+    "from": "120 W, 2400 K, cone 55 deg",
+    "to": "220 W, 2400 K, cone 45 deg, aimed straight down onto the bar top"
+   },
+   "expected": "Distinct warm pools on the walnut bar top with soft falloff between them, and the reeding on the bar front catching grazing light.",
+   "accept": {
+    "region": [
+     300,
+     560,
+     700,
+     640
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The vertical strip at the niche's right edge is cool white-blue, the one off-colour source in a 2400 K room.",
+   "evidence": {
+    "region": [
+     740,
+     200,
+     750,
+     520
+    ],
+    "measured": "r224 g239 b248, lum_median 237"
+   },
+   "change": {
+    "setting": "niche edge strip (the emitter on the niche's right jamb; on the card it sits with the shelf strips or the niche backs)",
+    "from": "neutral or cool white, near clipping",
+    "to": "2600 K, strength halved, and recessed behind the jamb lip so it washes the jamb instead of showing as a bare line"
+   },
+   "expected": "A warm, soft vertical glow on the jamb that matches the shelf strips' colour.",
+   "accept": {
+    "region": [
+     740,
+     200,
+     750,
+     520
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 170
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The image is crushed and monochrome orange, with 85% of pixels below 40 and blue nearly zero everywhere.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "lum_median 17.6, p5 3.1, b_median 1; below_40_pct 85.2"
+   },
+   "change": {
+    "setting": "render exposure / white_balance_k",
+    "from": "exposure 0.8, white balance 3000 K",
+    "to": "exposure 1.1, white balance 2650 K (applied after c1 to c5 have lit the mid-tones)"
+   },
+   "expected": "Still a warm night interior, with the wood reading brown rather than orange, the blacks holding some detail, and the frame median near 30.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     26,
+     42
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The foreground rocks glass is a dark out-of-focus blob at lower centre, competing with the hero.",
+   "evidence": {
+    "region": [
+     265,
+     580,
+     390,
+     680
+    ],
+    "measured": "dark mass lum_median about 20 with two bright streaks, directly below and left of the speaker"
+   },
+   "change": {
+    "setting": "props (rocks glasses and coupes)",
+    "from": "a rocks glass at the bar edge, centre-left of the frame",
+    "to": "move it 0.4 m left toward the frame edge and fill it with amber liquid so it reads as a warm bokeh accent; also put the lower back-bar shelf's bottles under its strip and vary the bottle models and labels"
+   },
+   "expected": "A clean foreground leading into the niche, a warm out-of-focus accent at the left edge, and less visible repetition on the shelves.",
+   "accept": {
+    "region": [
+     380,
+     580,
+     520,
+     680
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 8
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The Smoke tint may simply be too dense for a dark niche; a lighter Smoke would read better",
+   "why": "Product colour is fixed; it has to be solved with light through and onto the acrylic (c2, c3)"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

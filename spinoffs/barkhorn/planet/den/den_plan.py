@@ -26,7 +26,8 @@ ENTRY = dict(y0=0.30, y1=1.60, depth=1.20)       # the recessed vestibule; the d
 DOOR = dict(y0=0.42, y1=1.48, h=2.30)            # the door itself (a half-glazed walnut door), in the vestibule's back
 WINDOW = dict(y0=1.85, y1=W - 0.25, sill=0.55, head=2.50)     # the display window over a panelled bulkhead
 TRANSOM = dict(z0=2.62, z1=3.22)                 # the transom lights across the whole front, over the door and window
-CAFE = dict(z0=0.58, z1=1.45, rod=1.47)          # café curtains on a brass rod across the window's lower half
+CAFE = dict(z0=0.58, z1=1.30, rod=1.32)          # café curtains on a brass rod across the window's lower part
+                                                 # (to 1.30 so the Ember pair shows over them from the street)
 SIGN = dict(z=1.80, w=1.10)                      # EARF's wordmark in gold leaf on the window, at eye height (centred)
 STOREFRONT_PAINT = '#1F1B18'                     # the shopfront's woodwork, a near-black brown
 

@@ -37,7 +37,7 @@ def room_piece(v):
             'road_rough', 'floor_tex', 'floor_tint', 'floor_mix', 'floor_coat', 'plaster', 'plaster_mix', 'ceiling',
             'brick_tint', 'rug_tex', 'rug_tint', 'rug_mix', 'rug_value', 'props', 'sign', 'cafe', 'no_glass',
             'glass_gloss', 'siding', 'neighbour', 'neighbour_plain', 'niche_glow', 'gold_glow', 'brick_scale', 'brick_mix', 'across_glow', 'flat_glow', 'shelf_color',
-            'niche_rim', 'console_lift', 'brick_tex', 'brick_bump', 'rug_displace', 'rug_cell', 'transom_glow')
+            'niche_rim', 'console_lift', 'storefront_paint', 'brick_tex', 'brick_bump', 'rug_displace', 'rug_cell', 'transom_glow')
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_den', 'fn': 'room', **{k: v[k] for k in keys if k in v}}
 
 
@@ -93,7 +93,10 @@ def lights(v):
                                  'target': [x, y, 0.65], 'size_m': [0.3, 0.3], 'irradiance': v['spk_back'],
                                  'color': v.get('spk_k', 2700), 'camera': False}
         else:
-            L[f'niche{k}'] = {'type': 'spot', 'position': [x, y - 0.10, P.NICHE_Z0 + P.NICHE_H - 0.04],
+            if v.get('niche_fill', 0) > 0:                            # a fill at the niche floor's front lip, up the cabinet
+                L[f'nfill{k}'] = {'type': 'area', 'position': [x, y - 0.33, P.NICHE_Z0 + 0.03], 'target': [x, y, z + 0.5],
+                                  'size_m': [0.3, 0.05], 'power_w': v['niche_fill'], 'color': 2600, 'camera': False}
+            L[f'niche{k}'] = {'type': 'spot', 'position': [x, y - v.get('niche_dy', 0.10), P.NICHE_Z0 + P.NICHE_H - 0.04],
                               'target': [x, y - 0.22, z + v.get('niche_aim_z', 0.6)], 'power_w': v['spot_niche'],
                               'cone_deg': v.get('niche_cone', 45), 'blend': 0.8,
                               'radius_m': 0.02, 'color': 2600}
@@ -147,7 +150,7 @@ def lights(v):
         E = P.ENTRY                                                    # the vestibule's downlight, the sign's lamp
         if v.get('entry_w', 0) > 0:
             L['entry'] = {'type': 'spot', 'position': [0.6, (E['y0'] + E['y1']) / 2, P.TRANSOM['z0'] - 0.08],
-                          'target': [0.6, (E['y0'] + E['y1']) / 2, 0.0], 'power_w': v['entry_w'], 'cone_deg': 70,
+                          'target': [0.6, (E['y0'] + E['y1']) / 2, 0.0], 'power_w': v['entry_w'], 'cone_deg': v.get('entry_cone', 70),
                           'blend': 0.8, 'radius_m': 0.03, 'color': 2400}
         if v.get('sign_w', 0) > 0:
             yc = (P.WINDOW['y0'] + P.WINDOW['y1']) / 2
@@ -186,22 +189,30 @@ VIEWS = {
                # after street-r1 (3.5): closer on 50 mm, the shopfront filling the frame and the view running down the
                # room; the room brighter, the street lamps cooler and off the facades, a dusk-blue sky, the name gilded
                # and lit, the vestibule and transoms lit, blinds in the windows, haze in the room
-               'camera': {'position': [-8.5, 6.0, 1.45], 'target': [0.0, 3.2, 1.9], 'lens_mm': 50, 'level': True},
-               'settings': {'exposure': 0.9, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 90.0,
-                            'lamp_k': 4000, 'lamp_dx': 0.0, 'lamp_cam': 90.0, 'gold_glow': 0.4, 'sign_w': 15.0,
-                            'entry_w': 12.0, 'transom_glow': 2.0, 'sconce_w': 25.0, 'pendant_w': 90.0, 'haze': 0.02,
+               # after street-r2 (4.5): looking down the room so one Ember speaker glows over the café curtains on the
+               # right third; the street lamps up, one raking from behind the camera; gilt without glow; the transom
+               # soft; the vestibule lit wider; a bottle-green shopfront (the warm room's cool counter-note)
+               'camera': {'position': [-8.5, 3.0, 1.45], 'target': [0.0, 3.37, 1.9], 'lens_mm': 50, 'level': True},
+               'settings': {'exposure': 0.9, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 300.0,
+                            'lamp_k': 4000, 'lamp_dx': 0.0, 'lamp_cam': 500.0, 'gold_glow': 0.0, 'sign_w': 15.0,
+                            'entry_w': 30.0, 'entry_cone': 100.0, 'transom_glow': 0.5, 'spk_irr': 12.0,
+                            'storefront_paint': '#1F2B24', 'sconce_w': 25.0, 'pendant_w': 90.0, 'haze': 0.02,
                             'siding': '#8E9384', 'sky': 0.05, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
                             'flat_glow': 0.12, 'across_glow': 0.06}},
     'bar': {'title': 'the bar, from the window table',
-            'settings': {'exposure': 0.8, 'wb': 3000, 'niche_glow': 1.2, 'spot_niche': 450.0, 'niche_cone': 30.0,
-                         'niche_aim_z': 1.0, 'niche_rim': 1.5, 'pendant_w': 120.0, 'pendant_cone': 55.0,
+            # bar-r2: the niche a soft glow, not a lightbox; the pinhole from the niche's front edge onto the face and
+            # horn; a fill up the cabinet; the rim strip down; pendants pooling harder; the grade lifted and warmer
+            'settings': {'exposure': 1.1, 'wb': 2650, 'niche_glow': 0.3, 'spot_niche': 450.0, 'niche_cone': 40.0,
+                         'niche_dy': 0.30, 'niche_aim_z': 0.9, 'niche_fill': 15.0, 'niche_rim': 0.5,
+                         'pendant_w': 220.0, 'pendant_cone': 45.0,
                          'pendant_glow': 2.0, 'bounce': 15.0, 'spot_records': 9.0, 'record_glow': 1.0, 'haze': 0.012,
                          'shelf_glow': 5.0},
             # after bar-r1 (5.0): into the room on 40 mm, the right-hand Smoke speaker the hero, the other out of frame;
             # its niche darker behind it with a rim, a stronger pinhole; pendants pooling on the top; the far room down
             # (p5: from 3.4, 3.4 the bar top filled the frame and the speaker sat small at 6 m) from a stool's side,
             # 3.7 m off the speaker, the far room out of frame
-            'camera': {'position': [6.6, 3.2, 1.35], 'target': [9.06, 5.9, 1.35], 'lens_mm': 40, 'level': True,
+            # after bar-r2 (4.5): back and wider, the pendants in the top quarter, the niche near the centre
+            'camera': {'position': [5.9, 3.0, 1.30], 'target': [9.06, 5.9, 1.55], 'lens_mm': 32, 'level': True,
                        'fstop': 4.0, 'focus': [P.NICHES[1][0] + P.NICHES[1][1] / 2, P.BACKBAR_Y + 0.05, 1.3]}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (4.5): 40 mm from further back and lower, the speaker on the left third; the
