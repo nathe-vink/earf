@@ -167,3 +167,22 @@ cabinet (its woofer, panels and ports legible), its warm edges and its raking li
 darker, moodier trunks and its clearer fire. Both frames' horn showed blotchy denoiser smear at 128 samples. The finals
 use p3's rig.
 | C4 | c-p4 | 5.0 | A milky peach wash; no readable plume; cone flames and dot embers; the speaker warm brown with copper outlines; smooth trunks; a hard shaft stripe on the ground | The coordinator's focused pass (c-p4) had made the plume a leaning column with two-scale wisps (`detail_weight` in `woodsmoke`), moved the pile into the bright gap, added flames and hotter embers, and a cool fill. From C4 I took the quick fixes: the trunk smoke to 0.04 and the haze to 0.003, so the plume is the main mass of smoke; the plume denser (12 falling by 0.7); no cone flames (a smouldering pile); the warm rims calmer (kicker 30, fire rim 50); the cool fill 6. A 32-sample check (g1) shows the plume's grey billows and a smoked-black cabinet. **Finals use this rig, on the rebuilt model with main's drivers (01267eb).** |
+
+## Round D (the owner, 2026-10-19: "the speaker appears to be floating ... there's no smoke in the background")
+
+Built on round C's rig (8d2526e to the d-p7 head). Read tests, a fresh judge at site size each:
+
+| Proof | Stands? | Smoke? | What changed |
+|---|---|---|---|
+| d-p0 | floats | smoke | Duff drifts on four faces, a fern over the front corner, roots, a stump, branches; the plume self-shaded and greyer, its fill off |
+| d-p1 | floats | smoke | Taller, darker drifts; a damp contact patch; feet sunk 45 mm |
+| d-p2 | floats | smoke | A sun shaft through a canopy gap onto the speaker (its own long shadow) |
+| d-p3 | **stands** | smoke | The camera up to 1.1 m at f/4: at 0.7 m the contact line and shadow were foreshortened away |
+| d-p7 | floats | smoke | No uniform haze, thinner wisps in front, fills halved (depth) |
+
+A 512-sample full-size crop (d-p6) proved the grime seen at 128 samples was noise: the acrylic reads as clean smoked glass.
+
+**Duel, d-p7 (960 px, 256 samples) against Smoke A on the new drivers (595c55b, scaled down to match): A won, 6.0 to
+3.5.** Part of the gap is resolution (a downscaled 512-sample final against a 256-sample proof: "smeared horn, mushy
+woofer"). Two points are not: the plume read as "a ghostly half-formed figure", and the lumpy drifts and debris
+"muddy" the base, where A "sits cleanly with a believable contact shadow". This rig fails the gate (within 0.5 of A).
