@@ -11,8 +11,8 @@ import loft_shots as S                                               # noqa: E40
 
 FOR = {
     'bar': 'the bar, down the room from the window table: the fir-topped concrete bar and the steel back-bar with its '
-           'clear acrylic shelves on the left, the banquette and its two frosted screens (pressed hands, a shell in fog) '
-           'on the right, frosted acrylic pendants under fir beams, and at the far end, through a smoked acrylic '
+           'clear acrylic shelves and walnut bar stools on the left, booths along the right-hand wall (deep tan leather, high '
+           'fir-capped backs) with frosted screens in the concrete above them (pressed hands, a shell in fog), frosted acrylic pendants under fir beams, and at the far end, through a smoked acrylic '
            'partition, one of the Ember pair glowing in the listening room.',
     'listening': 'the listening room at the back: one of the Ember pair beside the record wall, board-formed concrete '
                  'behind it, fir beams overhead, leather chairs turned toward it.',
@@ -31,12 +31,12 @@ The images are to sell the room to the owner, photographed as an interiors magaz
 
 FIXED = """**Fixed (never change):** EARF's products (their shape, colour and parts): the Atmosphere speakers (1293 mm tall,
 tinted cast-acrylic cabinets with white batts inside, a resin horn; cover off; an Ember (red) pair in the listening
-room, a Fog (water-clear) pair in the back-bar's niches), Bell (the table lamps) and Cumulus (a small stand-in). The
+room, a Fog (water-clear) pair in the back-bar's niches). The
 room's design as proposed: its layout and dimensions, its materials (concrete, fir, blackened steel, neutral acrylic),
-the screens and what they show, the bar, back-bar, banquette, listening room, record wall and shopfront."""
+the screens and what they show, the bar, back-bar, booths, stools, listening room, record wall and shopfront."""
 
 MAY = """**What may change:** the light levels and colours of every source (pendants, the shelves' lit edges, the niches'
-frosted backs, the screens' brightness, the bar top's lit inlay, the sconce, Bell, candles, the record wall's light, the
+frosted backs, the screens' brightness, the bar top's lit inlay, the sconce, the table lamps, candles, the record wall's light, the
 lamps and pinholes on the speakers, the street lamps), the camera, the exposure and grade (including the view
 transform), the materials' finish (the concrete's tone and sheen, the stain of the fir, the steel's patina, the floor's
 polish, how rough the frosted acrylic is), small props (glasses, bottles, books, menus, a coat), haze, and the finish."""
@@ -69,7 +69,7 @@ def settings(sh, scale):
            f"the sconce's frosted shade {v.get('shade_glow')}, candle flames {v.get('flame')}, record-wall strip "
            f"{v.get('record_glow')}, the window's frosted name {v.get('etch_glow')}",
            f"- lamps: sconces {lamps('sconce')}; pendants {lamps('pend')}; on each Ember speaker {lamps('spk')}; in each "
-           f"niche {lamps('niche')}; the record wall {lamps('rec')}; candles {lamps('candle')}; Bell {bells('bell')}; "
+           f"niche {lamps('niche')}; the record wall {lamps('rec')}; candles {lamps('candle')}; the table lamps (blackened steel, frosted-glass drums) {lamps('tlamp')}; "
            f"street lamps {lamps('street')}",
            f"- haze in the room's air: density {hz.get('density', 0)} per metre (0 = none)",
            "- props: rocks glasses and coupes, folded menus, candles in amber votives, bottles on the back-bar, books",
