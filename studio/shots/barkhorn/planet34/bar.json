@@ -103,7 +103,7 @@
     "neighbour_plain": true,
     "niche_glow": 0.3,
     "flat_glow": 0.06,
-    "screen_glow": 0.2,
+    "screen_glow": 0.3,
     "inlay_glow": 1.0,
     "pendant_lamp": 2.5,
     "etch_glow": 0.05,
@@ -352,9 +352,9 @@
      ]
     ],
     "flavour": "smoked",
-    "lamp_w": 40.0,
+    "lamp_w": 120.0,
     "lamp_k": 2700,
-    "shade_glow": 1.0
+    "shade_glow": 2.0
    },
    {
     "kind": "kit",
@@ -380,9 +380,9 @@
      ]
     ],
     "ceiling": 3.4,
-    "lamp_w": 30.0,
+    "lamp_w": 90.0,
     "lamp_k": 2700,
-    "shade_glow": 1.0
+    "shade_glow": 2.0
    }
   ]
  },
@@ -531,7 +531,7 @@
     5.8999999999999995,
     1.78
    ],
-   "power_w": 25.0,
+   "power_w": 40.0,
    "radius_m": 0.03,
    "color": 2400,
    "camera": false
@@ -548,7 +548,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 700.0,
+   "power_w": 950.0,
    "cone_deg": 40.0,
    "blend": 0.6,
    "radius_m": 0.04,
@@ -567,7 +567,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 700.0,
+   "power_w": 950.0,
    "cone_deg": 40.0,
    "blend": 0.6,
    "radius_m": 0.04,
@@ -586,7 +586,7 @@
     4.179999999999999,
     1.07
    ],
-   "power_w": 700.0,
+   "power_w": 950.0,
    "cone_deg": 40.0,
    "blend": 0.6,
    "radius_m": 0.04,
