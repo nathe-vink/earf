@@ -1,0 +1,359 @@
+{
+ "stage1": {
+  "impression": "A moody through-the-window night view of a warm timber-and-concrete bar. The palette, the pools of light on the table and the far record wall, and the red reflection on the polished floor all feel right, and from across the room it nearly passes as a photograph. At 1:1 it reads as CG, though. The frosted name on the glass looks like flat taupe paint with no glass around it: there are no reflections of the street and almost no shopfront steel. The lightbox is a dead grey sliver at the left edge with no dancer in it. The red Ember, the frame's one colour and its intended hero, is a 28 x 60 px smudge partly hidden behind armchairs at the far end. Denoiser smear softens the stools, chairs and shelving.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The frosted acrylic lightbox shows a readable fogged dancer's silhouette, glowing evenly, and takes up a real share of the frame, not a 50 px edge strip",
+  "The Ember reads at a glance as the hero: unoccluded in a clear pane, at least about 3% of the frame, with its tint and the light through its acrylic legible",
+  "The frosted name reads as frosting on glass: translucent, picking up the interior light behind it, with soft variation, not a flat opaque grey overlay",
+  "The glass reads as glass: faint, clean reflections of the street (lamps, kerb) on the pane, and the blackened-steel shopfront frame visible as a frame (head, sill, mullions) with edge sheen",
+  "No denoiser smear on the timber, the stools or the record wall at the delivered 2400 px; concrete and fir show grain and texture at 1:1",
+  "Some sign of life near the glass (a coat on a stool, a record out of its sleeve, a half-finished drink by the candle)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    50,
+    480
+   ],
+   "what": "The lightbox is a flat grey-mauve slab (lum_median 52, lum_range 30) with no image, cut off by the frame edge. It reads as a plain wall or a curtain, not a back-lit frosted panel."
+  },
+  {
+   "region": [
+    15,
+    80,
+    340,
+    195
+   ],
+   "what": "The frosted EARF letters are a uniform opaque taupe (the E's median is 67 with p95 71, nearly flat), with hard 1 px edges and no diffusion of the room behind. They read as a 2D overlay or paint, not frosted glass."
+  },
+  {
+   "region": [
+    590,
+    240,
+    618,
+    300
+   ],
+   "what": "The hero Ember is tiny (about 0.5% of the frame), sits behind the lounge chairs and is partly blown (clip 3.8%). It does not read as the hero."
+  },
+  {
+   "region": [
+    450,
+    245,
+    470,
+    280
+   ],
+   "what": "The second Ember glows red behind the bar stools as a clipped fragment, competing with the hero and reading as a stray red light."
+  },
+  {
+   "region": [
+    365,
+    0,
+    388,
+    480
+   ],
+   "what": "One dark vertical mullion splits the frame almost at centre. It is the only sign of the steel shopfront, with no sheen or patina and no head or sill."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "There are no reflections on the glass from the kerb side, so the pane reads as absent apart from the letters."
+  },
+  {
+   "region": [
+    560,
+    100,
+    595,
+    135
+   ],
+   "what": "A bare, clipped point (clip 16% in this box) floats near the ceiling and reads as a naked bulb or a stray reflection."
+  },
+  {
+   "region": [
+    400,
+    270,
+    500,
+    430
+   ],
+   "what": "Denoiser smear on the bar stools and lounge chairs: the legs and seats are soft and waxy, with no wood grain."
+  },
+  {
+   "region": [
+    640,
+    160,
+    720,
+    340
+   ],
+   "what": "The back-right door and wall are a dead dark mass (lum_median 15) with no detail."
+  },
+  {
+   "region": [
+    160,
+    315,
+    200,
+    345
+   ],
+   "what": "The table lamp's drum is blown (31.8% clip in the box). That is acceptable as a practical, but the glow has no gradient across the shade."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame misses its two subjects: the lightbox is cropped to a sliver at the left edge and the Ember is a tiny, occluded smudge, while the centre mullion splits the picture.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     50,
+     480
+    ],
+    "measured": "Lightbox 50 px wide, lum_range 30. Ember region [590,240,618,300] about 1680 px (0.5% of the frame). Mullion at x 365-388."
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [-2.4, 2.7, 1.5], target [7.3, 4.95, 1.4], 40 mm",
+    "to": "Truck right and closer to the glass, about [-1.2, 1.6, 1.45], so the lightbox fills the left fifth to quarter and the Ember sits in a clear pane, unobstructed by the lounge chairs. Aim at the Ember (about [15.5, 2.0, 0.9]) with a 50 mm lens, verticals level, and the mullion moved to a third line (about x = 0.33 W) rather than the centre."
+   },
+   "expected": "The lightbox, the frosted name and the Ember read as three layers in depth, and the Ember covers about 3% or more of the frame with its tint visible.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The lightbox is unlit as an image: no dancer's silhouette and no even frosted glow.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     50,
+     480
+    ],
+    "measured": "lum_median 52, lum_range 30, flat grey-mauve with no figure"
+   },
+   "change": {
+    "setting": "the screens' images (emission)",
+    "from": "0.4",
+    "to": "1.1, and raise the frosted acrylic's roughness so the figure is fogged but legible"
+   },
+   "expected": "The panel glows warm-neutral at about 90-130 median, with a soft dark figure inside.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     50,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The frosted name is an opaque flat taupe with hard edges, so it reads as paint or a CG overlay rather than etched or frosted glass.",
+   "evidence": {
+    "region": [
+     20,
+     90,
+     70,
+     185
+    ],
+    "measured": "Letter E lum_median 67, p95 71 (almost no variation). Edge step 21.8 at 1 px width."
+   },
+   "change": {
+    "setting": "the window's frosted name (emission) and frost roughness",
+    "from": "emission 0.01, opaque-looking",
+    "to": "emission 0, with the letters as a rough translucent transmission (frost) layer that scatters the interior light, so each letter is brighter where a pendant or shelf sits behind it and darker over dark wall"
+   },
+   "expected": "The letters vary with what is behind them and read as luminous frosting, still legible.",
+   "accept": {
+    "region": [
+     20,
+     90,
+     70,
+     185
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The pane has no reflections, so the shot does not read as taken from the kerb through glass.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     120
+    ],
+    "measured": "Upper band lum_median 18 with no reflected street lamps or kerb forms anywhere on the glass"
+   },
+   "change": {
+    "setting": "street lamps",
+    "from": "3 x point, 120 W, 3000 K",
+    "to": "3 x point, 260 W, 3000 K, placed behind and beside the camera so one or two reflect faintly as soft sodium-warm glints and a dim gradient on the glass (about 4-6% reflectance), not over the Ember"
+   },
+   "expected": "There are faint, clean reflections on the pane and the outside of the shopfront steel picks up a rim of warm light, so the glass reads as present.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     120
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 9
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The second Ember peeks through the stools as a clipped red fragment that competes with the hero.",
+   "evidence": {
+    "region": [
+     450,
+     245,
+     470,
+     280
+    ],
+    "measured": "clip 3.3%, p95 191, r_median 56 against g 31"
+   },
+   "change": {
+    "setting": "lamps on each Ember speaker (area)",
+    "from": "28 W/m2 on both",
+    "to": "Keep 28 W/m2 on the hero and lower the occluded one to 14 W/m2, or let the reframe in c1 hide it fully"
+   },
+   "expected": "One clear red hero, with the other a quiet secondary glow or out of frame.",
+   "accept": {
+    "region": [
+     450,
+     245,
+     470,
+     280
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The frame sits just under the readable floor and the back right is a dead mass.",
+   "evidence": {
+    "region": [
+     640,
+     160,
+     720,
+     340
+    ],
+    "measured": "Frame lum_p50 21.6 (target 22-50); back-right lum_median 15"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "1.7",
+    "to": "1.95"
+   },
+   "expected": "The frame median is about 26-32, with the shadows holding detail in the fir and the door.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The room is clean and empty, like a showroom: one glass on one table and no sign of life near the window.",
+   "evidence": {
+    "region": [
+     100,
+     280,
+     380,
+     480
+    ],
+    "measured": "One small glass on the table and nothing else"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses and coupes, menus, candles, bottles, books",
+    "to": "Add a lit amber votive and a half-finished coupe on the window table, a coat over the chair back at the lower right of the table, and a record out of its sleeve on the bar top in the pendants' pool"
+   },
+   "expected": "The near table becomes a lived-in pool of light, with small warm highlights.",
+   "accept": {
+    "region": [
+     100,
+     370,
+     280,
+     410
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "Denoiser smear makes the stools, chairs and shelving soft and waxy, a giveaway of CG.",
+   "evidence": {
+    "region": [
+     400,
+     270,
+     500,
+     430
+    ],
+    "measured": "Visual at 3x: stool legs and seats have no grain or texture and the edges are smeared"
+   },
+   "change": {
+    "setting": "render samples / denoise",
+    "from": "256 samples, denoise true, adaptive 0.02",
+    "to": "768 samples, adaptive 0.01, with denoising on albedo and normal passes (prefilter accurate) at the full 2400 px"
+   },
+   "expected": "The fir grain and the stool joints hold at 1:1, with fine film-like noise instead of wax.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember larger or brighter in tint itself",
+   "why": "The speaker's shape and colour are fixed. Its prominence has to come from framing (c1) and its lamps."
+  },
+  {
+   "request": "Move the lounge chairs that block the Ember",
+   "why": "The listening room's layout is fixed by the card. Solve it with the camera instead (c1)."
+  }
+ ],
+ "score_if_fixed": 7.5
+}

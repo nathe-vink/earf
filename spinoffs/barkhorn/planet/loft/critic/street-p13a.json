@@ -1,0 +1,369 @@
+{
+ "stage1": {
+  "impression": "A moody, plausible night shopfront: warm practicals, a lit table in the foreground, the fir ceiling and a red glow at the back. But it still reads as a render. The glass is a flat, even veil with none of a kerb's reflections. The frosted EARF reads as grey vinyl signage, and the panel at the left edge is a dead, flat mauve slab. At 1:1 the surfaces are smeared by the denoiser, and the Ember speaker is a tiny red box with a blown white centre, about 24 x 50 px, half lost behind a dark door panel.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The frosted lightbox (x 0-50) must show a readable fogged dancer silhouette, with lum_range > 60 in its region instead of 5.4 now",
+  "The frosted name must read as acid-etched glass picked up by the room's light, not as a lit grey vinyl panel, and with no rectangular box around the E where it crosses the lightbox",
+  "The Ember must read as the hero at a glance: a red cast-acrylic silhouette with internal gradation, its core not clipped (clip_pct < 2 instead of 11), and seen through a clear pane with no dark panel in the way",
+  "The glass needs real-world reflections (the street lamps, kerb and steel frame, soft and partial) instead of a uniform veil, and the blackened-steel shopfront frame must be visible as a frame",
+  "No floating clipped disc (the street-lamp or bulb reflection at 578,117) and no blown pendant tubes",
+  "Delivered at full resolution with material detail (board-formed concrete, fir checks, steel patina) and no denoiser smear"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    50,
+    480
+   ],
+   "what": "The lightbox reads as a flat, uniform mauve-grey slab (lum_median 52, lum_range 5.4): no dancer silhouette and no glow gradation, so it looks like a painted board"
+  },
+  {
+   "region": [
+    15,
+    88,
+    50,
+    190
+   ],
+   "what": "Where the E of the frosted name crosses the lightbox it shows as a solid lighter rectangle (lum 70, range 5.4), not a letter: the alpha or mask fails over that panel"
+  },
+  {
+   "region": [
+    10,
+    80,
+    340,
+    195
+   ],
+   "what": "The frosted EARF letters are the brightest large surface in the left half (A stem about 45, F about 39) and read as a grey vinyl or paper signage overlay, not etched glass"
+  },
+  {
+   "region": [
+    565,
+    100,
+    595,
+    135
+   ],
+   "what": "A hard, round white disc floats near the ceiling (clip 33 %): a street lamp reflection or bare bulb that reads as a CG sphere light"
+  },
+  {
+   "region": [
+    593,
+    245,
+    617,
+    297
+   ],
+   "what": "The Ember speaker is tiny, clipped at its core (11 % clip in [597,255,613,290]) with a blown white circle, and reads as an exit sign or a red lightbox, not a cast-acrylic horn"
+  },
+  {
+   "region": [
+    600,
+    170,
+    720,
+    480
+   ],
+   "what": "A large dark panel (a door or reflection) sits beside the speaker and blocks the view toward the listening room"
+  },
+  {
+   "region": [
+    380,
+    288,
+    720,
+    302
+   ],
+   "what": "A faint horizontal light band runs across the glass at sill height (profile bin 32 against 17 to 19 around it), which reads as a rendering seam"
+  },
+  {
+   "region": [
+    340,
+    140,
+    440,
+    200
+   ],
+   "what": "The pendant tubes are blown flat white with no frosted gradation (clip 0.73 % in the region)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Denoiser smear and soft, waxy surfaces at 1:1: the concrete, fir and steel show no tie holes, checks or patina, and the stools and chairs are plasticky blobs"
+  },
+  {
+   "region": [
+    365,
+    0,
+    390,
+    480
+   ],
+   "what": "The only shopfront steel visible is one mullion. The blackened-steel frame, sill and reveal that should frame the shot are missing, so the camera seems to be inside the glass"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The frosted lightbox with the dancer, one of the frame's purposes, reads as a dead flat slab.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     50,
+     480
+    ],
+    "measured": "lum_median 52.2, lum_range 5.4, no silhouette visible"
+   },
+   "change": {
+    "setting": "the screens' images (emission)",
+    "from": "0.4",
+    "to": "1.4, and lower the frosted acrylic's roughness on that panel so the silhouette shows as soft fog, not erased"
+   },
+   "expected": "The panel glows warm-white with a legible soft dark silhouette and falls off toward its edges; the lightbox becomes a secondary pool of light at the left edge",
+   "accept": {
+    "region": [
+     0,
+     0,
+     50,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 60
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Ember is clipped at its core and reads as a red sign, not tinted acrylic with white batts inside.",
+   "evidence": {
+    "region": [
+     597,
+     255,
+     613,
+     290
+    ],
+    "measured": "lum_median 161, clip_pct 11.07, lum_range 171.6"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area lamps",
+    "from": "28.0 W/m2",
+    "to": "12.0 W/m2, plus lower the speakers' lamps and pinholes so the horn throat is not a white disc"
+   },
+   "expected": "The cabinet shows a red gradation from the edge glow to the batts, with no blown centre; its saturation holds",
+   "accept": {
+    "region": [
+     597,
+     255,
+     613,
+     290
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The speaker is too small and partly blocked to be the hero, and the steel shopfront frame is missing, so the picture is neither a shopfront nor a speaker shot.",
+   "evidence": {
+    "region": [
+     593,
+     245,
+     617,
+     297
+    ],
+    "measured": "the speaker is about 0.35 % of the frame; a dark panel at x 600-720 crowds it; only one mullion is visible"
+   },
+   "change": {
+    "setting": "camera position, target and lens",
+    "from": "position [-2.4, 2.7, 1.5], target [7.3, 4.95, 1.4], 40 mm",
+    "to": "position about [-1.6, 1.6, 1.45] with the target swung onto the Ember's clear pane (about [15, 1.5, 1.0]) at 50 mm, so the steel frame and sill form the left and bottom edges and the Ember sits on the right third with clear glass between"
+   },
+   "expected": "The Ember is about 2 to 3 times larger, unobstructed and at a third; the blackened-steel frame reads as the shopfront; the lightbox stays in frame on the left",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The frosted name reads as grey vinyl and shows a rectangular box over the lightbox.",
+   "evidence": {
+    "region": [
+     15,
+     88,
+     50,
+     190
+    ],
+    "measured": "a solid rectangle at lum 70, range 5.4, where the E should have counters; the letters elsewhere sit at 39 to 45, brighter than the room behind them"
+   },
+   "change": {
+    "setting": "the window's frosted name (emission) and its frost",
+    "from": "0.01, opaque grey frost",
+    "to": "0.0, a fine acid-etch frost (partly transparent, higher roughness) with its alpha or mask fixed so the E is a letter over the lightbox"
+   },
+   "expected": "The letters read as a soft etched haze picked up by the room light, darker than the lightbox and only slightly brighter than the room behind",
+   "accept": {
+    "region": [
+     100,
+     95,
+     125,
+     185
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 36
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "A hard white disc floats near the ceiling, and the street lamps' light flattens the glass into a veil.",
+   "evidence": {
+    "region": [
+     565,
+     100,
+     595,
+     135
+    ],
+    "measured": "lum_median 179.5, clip_pct 33"
+   },
+   "change": {
+    "setting": "street lamps 3 x point",
+    "from": "120.0 W, 3000 K",
+    "to": "45 W, 3400 K, with a larger radius so their reflections in the glass are soft and off-axis"
+   },
+   "expected": "No hard sphere; reflections of the street become faint and cooler, giving the glass a believable layer without a veil",
+   "accept": {
+    "region": [
+     565,
+     100,
+     595,
+     135
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The pendant tubes and lamps are blown flat white.",
+   "evidence": {
+    "region": [
+     340,
+     140,
+     440,
+     200
+    ],
+    "measured": "clip_pct 0.73, lum_range 191"
+   },
+   "change": {
+    "setting": "the pendants' frosted tubes and lamps (emission)",
+    "from": "tubes 0.32, lamps 1.6",
+    "to": "tubes 0.2, lamps 1.0"
+   },
+   "expected": "The tubes keep a soft frosted gradation; the bar below still gets its pools from the 420 W spots",
+   "accept": {
+    "region": [
+     340,
+     140,
+     440,
+     200
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The frame sits a hair under the target median and the room's shadows are veiled rather than deep.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 21.6, lum_p95 70, 81 % of pixels below 40"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "1.7",
+    "to": "1.9 (with c5 removing the veil, so the blacks stay deep)"
+   },
+   "expected": "Frame median about 26 to 30, the bar and room legible, clipping still under 0.5 %",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     34
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The surfaces at 1:1 are waxy and smeared, with no concrete, fir or steel texture.",
+   "evidence": {
+    "region": [
+     260,
+     300,
+     360,
+     440
+    ],
+    "measured": "lum_range 5.3 on the bar front (p5 to p95 about 32 to 37.5): no texture at all"
+   },
+   "change": {
+    "setting": "render samples / denoise and the materials' finish",
+    "from": "256 samples, denoise on; smooth concrete and steel",
+    "to": "768 samples at full 2400 x 1600 with denoise on; stronger board-formed concrete bump and tie holes, a mottled steel patina, and visible fir checks"
+   },
+   "expected": "Visible board grain and tie holes on the bar front and walls, and uneven sheen on the steel",
+   "accept": {
+    "region": [
+     260,
+     300,
+     360,
+     440
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 12
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Show the Ember pair as one speaker, or move it to clear the dark door panel beside it",
+   "why": "The room layout and speaker placement are fixed by the card; this is addressed by the camera instead"
+  },
+  {
+   "request": "Make the lightbox panel wider or move it into the frame",
+   "why": "The shopfront design and screens are fixed"
+  }
+ ],
+ "score_if_fixed": 7.5
+}
