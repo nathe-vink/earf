@@ -37,9 +37,9 @@ def plume(n=10):
     for k in range(n):
         t = k / (n - 1)
         w = 0.7 + 3.2 * t ** 1.3
-        out.append(smoke((PILE[0] - 2.6 * t ** 1.6, PILE[1] - 0.4 * t, 0.1 + 0.95 * k), (w, w, 2.2), 12.0 * 0.7 ** k,
+        out.append(smoke((PILE[0] - 2.6 * t ** 1.6, PILE[1] - 0.4 * t, 0.1 + 0.95 * k), (w, w, 2.2), 18.0 * 0.72 ** k,
                          11 + k, scale=0.35 + 0.5 * t, cut=0.42 + 0.12 * t, soft=0.22, anisotropy=0.45,
-                         fade=[0.42, 0.42, 0.4], floor=0.2 * (1 - t), rise=2.2 - 0.8 * t, color='#A9A6A1',
+                         fade=[0.42, 0.42, 0.4], floor=0.2 * (1 - t), rise=2.2 - 0.8 * t, color='#9DA2AA',
                          detail_scale=0.12 + 0.1 * t, detail_weight=0.35 + 0.25 * t))
     return out
 
@@ -57,6 +57,33 @@ def flames(n=6, seed=5):
                          shadow=False))
         out.append(piece('cone', material='glow', color='#FFC060', emit=45, radius=r * 0.5, height=h * 0.45,
                          position=[round(x, 3), round(y, 3), 0.12], shadow=False))
+    return out
+
+
+ROT = 18.0                   # the speaker's turn (degrees)
+
+
+def grounding():
+    """The speaker set into the floor rather than on it: needles and duff drifted against the base on all four sides
+    (low mounds in the ground's own texture, hugging each face), a fern clump just over the front corner nearest the
+    camera, and roots, a stump and fallen branches about it, so the floor is uneven and lived-in."""
+    import math
+    c, s_ = math.cos(math.radians(ROT)), math.sin(math.radians(ROT))
+    def at(lx, ly):
+        return [round(lx * c - ly * s_, 4), round(lx * s_ + ly * c, 4)]
+    out = []
+    # (local centre, half-length along the face, which axis the face runs along)
+    for lx, ly, half, along_x in ((0.0, -0.25, 0.36, True), (0.0, 0.25, 0.36, True), (-0.32, 0.0, 0.27, False),
+                                  (0.32, 0.0, 0.27, False)):
+        x, y = at(lx, ly)
+        sc = [half, 0.09, 0.05] if along_x else [0.09, half, 0.05]
+        out.append(piece('sphere', material='pbr', texture='forest_leaves_04', tex_res='2k', position=[x, y, -0.02],
+                         scale=sc, rotate=[0, 0, ROT], tint='#4A3626', tint_mix=0.3))
+    out += [asset('fern_02', (-0.75, -0.75, 0.0), (0, 0, 35), 0.5, res='1k'),
+            asset('pine_roots', (1.6, 1.2, -0.02), (0, 0, 120), 1.0, res='1k'),
+            asset('tree_stump_01', (-2.2, 2.4, -0.05), (0, 0, 60), 0.9, res='1k'),
+            scatter(['dry_branches_medium_01'], 4, [-2.0, -1.5, 2.5, 1.8], avoid=[(0.0, 0.0, 1.0), (-0.75, -0.75, 0.8)],
+                    seed=21, res='1k', z=-0.015, scale=(0.5, 0.8))]
     return out
 
 
@@ -95,7 +122,7 @@ def shot():
                    open=0.35, seed=2),
              piece('ext', module='smoke_el', fn='canopy', size=[120.0, 200.0], z=10.0, position=[0.0, 70.0], scale=0.9,
                    open=0.65, seed=5)]
-    props += trees()
+    props += trees() + grounding()
     # the burn pile, 3 m behind and right of the speaker, and its plume: a dense column that leans off toward the left
     props += [piece('ext', module='smoke_el', fn='burnpile', position=[PILE[0], PILE[1], 0.0], radius=0.9, seed=3, ember=90.0),
               # the bed of grey-white ash the pile has burnt down into
@@ -125,12 +152,12 @@ def shot():
         'emberglow': {'type': 'area', 'size_m': [1.0, 1.0], 'position': [PILE[0], PILE[1], 0.06], 'target': [PILE[0], PILE[1], 2.0],
                       'power_w': 90, 'color': '#FF6A20'},
         # the open sky behind the camera on the plume's face (it would be a dark column lit from behind alone)
-        'plumefill': {'type': 'area', 'size_m': [6.0, 6.0], 'position': [PILE[0] - 5.0, PILE[1] - 11.0, 2.5],
+        'plumefill': {'off': True, 'type': 'area', 'size_m': [6.0, 6.0], 'position': [PILE[0] - 5.0, PILE[1] - 11.0, 2.5],
                       'target': [PILE[0] - 1.2, PILE[1], 4.0], 'irradiance': 12.0, 'color': '#C9CED6',
                       'receivers': plume_names},
     }
-    return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.7), 'barkhorn, Smoke, woodsmoke at dawn',
-                 sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.02), samples=512, exposure=0.3,
+    return frame('smoke', props, cam, sky(SKY, rotation_deg=0.0, strength=0.4), 'barkhorn, Smoke, woodsmoke at dawn',
+                 sun=SUN, lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.03), samples=512, exposure=0.3,
                  # the whole air hazed with the pile's smoke, the camera inside it, so the speaker sits in the same air
                  haze={'box_m': [-15.0, -15.0, 0.0, 18.0, 30.0, 14.0], 'density': 0.003, 'anisotropy': 0.7,
                        'color': '#BCC4CE'},
