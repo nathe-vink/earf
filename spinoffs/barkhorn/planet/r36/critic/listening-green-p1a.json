@@ -1,0 +1,434 @@
+{
+ "stage1": {
+  "impression": "A symmetrical, evenly lit box floating in a black void: two pink-glowing speakers in green-felt panels against a wall of perfectly regular dark-wood squares, with soft mint-green tub chairs and a milky ball lamp in the foreground. The acrylic speaker frames glow like neon signage with blown edges, the wall tiles are a repeated grid, the velvet and carpet have no nap, and nothing in the frame shows the concrete, fir or steel shell or any sign of life, so it reads as a game level or hi-fi showroom render, not a photograph. A magazine would not run this as a specific place: it is a generic listening-room set, and the Planet EARF shell that would make it specific is out of frame.",
+  "score": 3.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speakers' acrylic must read as thick, tinted cast acrylic with polished glowing edges, not neon tubes: no clipping on the cabinet frame (clip_pct < 1 in the speaker regions, red channel not pinned at 255)",
+  "The altar wall needs a pool of light with falloff and visible block-to-block variation in tone and grain; today it is a flat, uniform grid (lum_range 19 across the whole wall)",
+  "The subject must be the brightest, most contrasty area: the foreground chairs (median 54) are currently brighter than the altar wall (median 44)",
+  "The frame must show the room around the zone (a fir beam, concrete or steel edge, ceiling) instead of a black void on three sides, so it reads as a room within a real room",
+  "Bottle-green carpet and velvet must read as green wool and velvet with nap and sheen; the carpet currently measures brown-grey (dE2000 21.9 from a bottle green)",
+  "Signs of life in the zone: a glass on the hex table, a record sleeve, a coat on a chair",
+  "Delivered resolution with real texture at 1:1; the proof at 0.3 is soft and smeared by the denoiser"
+ ],
+ "defects": [
+  {
+   "region": [
+    185,
+    150,
+    265,
+    315
+   ],
+   "what": "Left Ember cabinet frame blown to flat pink (clip 4.1 %, top rail 39.6 % clipped, R=253); reads as neon signage, not cast acrylic"
+  },
+  {
+   "region": [
+    455,
+    150,
+    540,
+    315
+   ],
+   "what": "Right Ember cabinet same: clip 4.4 %, flat glowing pink frame, no edge or thickness visible"
+  },
+  {
+   "region": [
+    185,
+    150,
+    265,
+    200
+   ],
+   "what": "Resin horn reads as a dull red plastic box with no depth or internal reflection"
+  },
+  {
+   "region": [
+    130,
+    70,
+    600,
+    330
+   ],
+   "what": "End-grain block wall is a perfectly regular grid with identical tile tone; reads as a tiled texture, flat-lit (profile 36-46 top to bottom)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    40
+   ],
+   "what": "Black void above the niche (median 14.6); no ceiling, beam or shell visible"
+  },
+  {
+   "region": [
+    0,
+    0,
+    60,
+    480
+   ],
+   "what": "Black void at the left edge; the zone looks like a box built in an empty dark studio"
+  },
+  {
+   "region": [
+    660,
+    0,
+    720,
+    480
+   ],
+   "what": "Black void at the right edge, same issue"
+  },
+  {
+   "region": [
+    300,
+    340,
+    450,
+    380
+   ],
+   "what": "Floor/carpet reads as brownish grey stone with a mottled texture, not bottle-green wool (dE2000 21.9 vs #1F3D2B)"
+  },
+  {
+   "region": [
+    0,
+    330,
+    250,
+    480
+   ],
+   "what": "Velvet tub chairs are flat mint green with no pile, sheen or seam; read as plastic CG shells"
+  },
+  {
+   "region": [
+    600,
+    330,
+    720,
+    480
+   ],
+   "what": "Right chair same plastic, flat finish"
+  },
+  {
+   "region": [
+    265,
+    385,
+    320,
+    430
+   ],
+   "what": "Sphere lamp reads as an opaque milky ball (median 114), not smoked acrylic with a frosted liner; brighter than the subject"
+  },
+  {
+   "region": [
+    235,
+    410,
+    350,
+    470
+   ],
+   "what": "Hex table top looks like pale untextured plywood; no glass, no prop"
+  },
+  {
+   "region": [
+    175,
+    100,
+    295,
+    160
+   ],
+   "what": "Altar spot pools on the green felt are soft blobs with no visible source; the felt has no texture"
+  },
+  {
+   "region": [
+    185,
+    300,
+    265,
+    345
+   ],
+   "what": "Oak plinths read as blurry striped boxes; no grain detail"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Whole frame soft and denoiser-smeared at proof scale; rigid symmetry and identical speaker copies read as a CG set"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers' acrylic frames are blown into flat neon pink, which makes the hero read as signage rather than premium cast acrylic.",
+   "evidence": {
+    "region": [
+     190,
+     205,
+     255,
+     225
+    ],
+    "measured": "top rail clip_pct 39.6, r_median 253; whole cabinet [185,150,265,315] clip_pct 4.1, p95 196"
+   },
+   "change": {
+    "setting": "lamps: on each Ember speaker 4 x area, W/m2 at the target",
+    "from": "14.0 W/m2",
+    "to": "5.0 W/m2, and move them behind/above so they graze the acrylic edges rather than face-light the frame"
+   },
+   "expected": "Cabinet frame holds a deep ruby tone with bright polished edges only, horn shows depth; speaker region median stays >= 45 from the altar spots, clipping gone.",
+   "accept": {
+    "region": [
+     185,
+     150,
+     265,
+     315
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "Three sides of the frame are black void, so the zone reads as a set built in an empty studio rather than a room within Planet EARF.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     40
+    ],
+    "measured": "top band median 14.6; left and right 60 px strips medians 17.2 and 18.9"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "[11.25, 2.75, 1.35] m, 32 mm, centred and level on the altar",
+    "to": "step back to about x 9.5 and offset to y 2.0, 28 mm, aim slightly off-axis so a Douglas fir beam and the concrete ceiling cross the top third and the zone's raised edge and the main room show at one side; break the symmetry"
+   },
+   "expected": "Shell materials (concrete, fir, steel) visible in at least a quarter of the frame; no black void region larger than a tenth of the frame.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The foreground chairs are brighter than the altar, inverting the hierarchy; the eye lands on mint chairs and a milky ball.",
+   "evidence": {
+    "region": [
+     0,
+     340,
+     720,
+     480
+    ],
+    "measured": "foreground median 54.0 vs altar wall [300,60,420,330] median 44.2; Sphere lamp [270,385,320,425] median 114"
+   },
+   "change": {
+    "setting": "each Sphere 6.0 W, glow 0.6; haze; exposure",
+    "from": "Sphere 6.0 W, glow 0.6",
+    "to": "Sphere 2.5 W, glow 0.25 so the smoked shell reads dark with a warm core; altar 2 x spot from 40 W to 70 W, cone 40 to 28 deg"
+   },
+   "expected": "Foreground falls to a median of about 35 to 40 with small warm pools around each lamp; the altar becomes the brightest area besides the lamps.",
+   "accept": {
+    "region": [
+     0,
+     340,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 42
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The altar wall is lit flat and uniform, with no pool or falloff, which makes the end-grain block wall read as a tiled texture.",
+   "evidence": {
+    "region": [
+     300,
+     60,
+     420,
+     330
+    ],
+    "measured": "lum_range 19.4, profile along y 36-46 essentially flat"
+   },
+   "change": {
+    "setting": "the altar 2 x spot, cone, aim",
+    "from": "40.0 W, cone 40.0 deg, 2500 K",
+    "to": "70 W, cone 28 deg, aimed to graze down the niche from close to the wall so the end grain catches raking light, falling off to dark at the floor and the top corners"
+   },
+   "expected": "Visible pool behind each speaker and dark between them; the block wall shows relief.",
+   "accept": {
+    "region": [
+     300,
+     60,
+     420,
+     330
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The end-grain blocks are identical in tone and grain, a repeated tile.",
+   "evidence": {
+    "region": [
+     280,
+     60,
+     440,
+     340
+    ],
+    "measured": "seen at 3x crop: uniform grid, same grain per block; lum p5-p95 34-54"
+   },
+   "change": {
+    "setting": "the oak's stain / finish of the end-grain blocks",
+    "from": "one uniform stain, one texture repeated per block",
+    "to": "per-block random tone (+/- 15 % value, slight hue shift), randomised texture offset and rotation per block, darker checks and growth rings, satin sheen with roughness variation"
+   },
+   "expected": "The wall reads as individually cut timber blocks at their real scale, no visible repeat.",
+   "accept": {
+    "region": [
+     300,
+     60,
+     420,
+     330
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The bottle-green velvet and wool carpet read as flat mint plastic and brown-grey stone, so the zone's one colour is muddled.",
+   "evidence": {
+    "region": [
+     300,
+     345,
+     450,
+     380
+    ],
+    "measured": "carpet rgb 54/43/35, delta_e 21.9 vs #1F3D2B; chairs flat mint with no sheen at 2x crop"
+   },
+   "change": {
+    "setting": "materials' finish: velvet and carpet",
+    "from": "smooth diffuse shader; carpet with stone-like noise",
+    "to": "velvet with sheen (rim highlight) and fine pile normal, deeper bottle green; carpet as a wool loop with a fine normal and green base matching the zone colour, no mottled stone texture; white balance from 3000 K to 2700 K so the greens do not go brown"
+   },
+   "expected": "Chairs show a soft bright rim and dark core; the carpet reads green.",
+   "accept": {
+    "region": [
+     300,
+     345,
+     450,
+     380
+    ],
+    "metric": "delta_e",
+    "hex": "#1F3D2B",
+    "op": "<",
+    "value": 12
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Nothing in the zone shows life, so it reads as a showroom.",
+   "evidence": {
+    "region": [
+     235,
+     380,
+     350,
+     470
+    ],
+    "measured": "hex table bare apart from the lamp; no glass, sleeve or coat in frame"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props placed at the counter only",
+    "to": "a rocks glass with ice and a half-full coupe on the near hex table catching the Sphere's light, a record sleeve leaning on a chair, a coat over the right chair's arm, a menu"
+   },
+   "expected": "Small specular highlights in the foreground; the room reads as occupied a moment ago.",
+   "accept": {
+    "region": [
+     235,
+     380,
+     350,
+     470
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The proof is soft and denoiser-smeared, hiding every texture at 1:1.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "720 x 480 proof at scale 0.3; edges and grain smeared at 3x crop"
+   },
+   "change": {
+    "setting": "render: frame scale, samples, denoise",
+    "from": "scale 0.3, 256 samples, denoise on",
+    "to": "full 2400 x 1600, 512 samples, denoise with albedo/normal passes, add slight film grain and a gentle vignette in post"
+   },
+   "expected": "Grain of the oak, felt and velvet readable at 1:1; no smear.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember speakers' tint less pink and more ruby or deeper red, and the resin horn more transparent",
+   "why": "EARF's product colour and parts are fixed; only their lighting may change (c1)."
+  },
+  {
+   "request": "Make the Sphere lamp a smoked, visibly translucent design rather than an opaque ball",
+   "why": "The lamp is an EARF placeholder design in progress; only its light level and the frosted liner's roughness may change."
+  },
+  {
+   "request": "Swap the regular block grid for staggered or irregular end-grain blocks and replace the plain felt panels",
+   "why": "The niche lining and felt are the room's design as proposed."
+  },
+  {
+   "request": "Replace the mint-green tub chairs with a pedigree chair with more character",
+   "why": "The seats and the zone colour are fixed by the design."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

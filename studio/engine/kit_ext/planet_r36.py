@@ -71,12 +71,63 @@ def brushed_steel(bpy):
 def limewash(bpy, colour, name):
     """Limewash in the zone's colour: a soft, chalky, uneven matte."""
     if name not in _M:
-        _M[name] = principled(bpy, name, colour, rough=0.93, bump=(0.004, 1.5, 0.0006))
+        _M[name] = principled(bpy, name, colour, rough=0.93, bump=(0.004, 0.4, 0.0006))
     return _M[name]
 
 
 def mohair(bpy, colour, name):
     return D.velvet(bpy, colour, name)
+
+
+def velvet_deep(bpy, colour, name):
+    """Velvet with its nap: a deep base, a soft sheen at grazing angles (the rim highlight), a fine pile bump."""
+    if name not in _M:
+        m = principled(bpy, name, colour, rough=0.85, bump=(0.0015, 0.3, 0.0002))
+        b_ = D._bsdf(m); LK.R._set(b_, 'Sheen Weight', 1.0); LK.R._set(b_, 'Sheen Roughness', 0.3)
+        LK.R._set(b_, 'Sheen Tint', tuple(min(1.0, c * 2.2) for c in lin(colour)[:3]) + (1.0,))
+        LK.R._set(b_, 'Specular IOR Level', 0.15)
+        _M[name] = m
+    return _M[name]
+
+
+def carpet(bpy, colour, name):
+    """Wool loop carpet in the zone's colour: matte, a soft sheen, a fine loop bump; no stone mottle."""
+    if name not in _M:
+        m = principled(bpy, name, colour, rough=1.0, bump=(0.002, 0.5, 0.0004))
+        b_ = D._bsdf(m); LK.R._set(b_, 'Sheen Weight', 0.5); LK.R._set(b_, 'Specular IOR Level', 0.1)
+        _M[name] = m
+    return _M[name]
+
+
+def end_grain(bpy, name='oak-endgrain'):
+    """End-grain oak: growth rings round random hearts (one per block, more or less), checks, tone varying block to
+    block, a satin sheen."""
+    if name in _M:
+        return _M[name]
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree
+    b_ = D._bsdf(m)
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = 8.0
+    nt.links.new(tc.outputs['Object'], vo.inputs['Vector'])
+    ring = nt.nodes.new('ShaderNodeMath'); ring.operation = 'MULTIPLY'; ring.inputs[1].default_value = 260.0
+    nt.links.new(vo.outputs['Distance'], ring.inputs[0])
+    sn = nt.nodes.new('ShaderNodeMath'); sn.operation = 'SINE'; nt.links.new(ring.outputs[0], sn.inputs[0])
+    tone = nt.nodes.new('ShaderNodeTexWhiteNoise'); tone.noise_dimensions = '3D'
+    nt.links.new(vo.outputs['Position'], tone.inputs['Vector'])
+    mix = nt.nodes.new('ShaderNodeMath'); mix.operation = 'MULTIPLY_ADD'
+    nt.links.new(sn.outputs[0], mix.inputs[0]); mix.inputs[1].default_value = 0.18
+    tm = nt.nodes.new('ShaderNodeMath'); tm.operation = 'MULTIPLY'; tm.inputs[1].default_value = 0.45
+    nt.links.new(tone.outputs['Value'], tm.inputs[0]); nt.links.new(tm.outputs[0], mix.inputs[2])
+    cr = nt.nodes.new('ShaderNodeValToRGB')
+    cr.color_ramp.elements[0].position = 0.0; cr.color_ramp.elements[0].color = lin('#1E140D')
+    cr.color_ramp.elements[1].position = 0.75; cr.color_ramp.elements[1].color = lin('#6A4A30')
+    nt.links.new(mix.outputs[0], cr.inputs['Fac'])
+    nt.links.new(cr.outputs['Color'], b_.inputs['Base Color'])
+    LK.R._set(b_, 'Roughness', 0.55); LK.R._set(b_, 'Coat Weight', 0.15); LK.R._set(b_, 'Coat Roughness', 0.4)
+    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.25; bp.inputs['Distance'].default_value = 0.0005
+    nt.links.new(sn.outputs[0], bp.inputs['Height']); nt.links.new(bp.outputs['Normal'], b_.inputs['Normal'])
+    _M[name] = m
+    return m
 
 
 def resin(bpy, deep, name, radius=0.025, rough=0.04):
@@ -169,7 +220,7 @@ def zone(bpy, kit, p, objs):
     pl = Mesh('zone-platform'); pl.box(Z['x0'], 0.0, 0.0, L, W, Z['z'])
     objs.append(pl.object(bpy, dark_oak(bpy), bevel=0.012))
     cp = Mesh('zone-carpet'); cp.box(Z['x0'] + 0.03, 0.005, Z['z'] - 0.002, L - 0.005, W - 0.005, Z['z'] + 0.012)
-    objs.append(cp.object(bpy, LK.wool(bpy, C['carpet'], 'carpet-' + p.get('colourway', 'green')), bevel=0.004))
+    objs.append(cp.object(bpy, carpet(bpy, C['carpet'], 'carpet-' + p.get('colourway', 'green')), bevel=0.004))
     lw = Mesh('zone-limewash')
     holes = {'right': [], 'left': []}
     for nm, wall, a0, a1, z0, z1, img in R.SCREENS:
@@ -209,12 +260,11 @@ def altar(bpy, kit, p, objs):
             y0 = A['y0'] + i * B + 0.002; z0 = Z['z'] + k * B + 0.002
             dx = rnd.uniform(0.0, 0.012)
             bl.box(L - 0.075 - dx, y0, z0, L - 0.004, y0 + B - 0.0025, z0 + B - 0.0025)
-    objs.append(bl.object(bpy, D.walnut(bpy, vertical=False, coat=0.1, coat_rough=0.5, tint='#3A2A1E', mix=0.35,
-                                        name='-endgrain'), bevel=0.003))
+    objs.append(bl.object(bpy, end_grain(bpy), bevel=0.003))
     fe = Mesh('altar-felt')
     for role, colour, x, y, z, rot in R.speakers():
         fe.box(L - 0.105, y - 0.55, Z['z'] + 0.25, L - 0.080, y + 0.55, Z['z'] + 2.05)
-    objs.append(fe.object(bpy, mohair(bpy, C['velvet'], 'velvet-' + p.get('colourway', 'green')), bevel=0.012))
+    objs.append(fe.object(bpy, velvet_deep(bpy, C['velvet'], 'velvet-' + p.get('colourway', 'green')), bevel=0.012))
     pl = Mesh('altar-plinths'); S = R.PAIR36
     for role, colour, x, y, z, rot in R.speakers():
         _obox(pl.bm, x, y, Z['z'], S['plinth_d'], S['plinth_w'], S['plinth'], math.radians(rot + 90))
@@ -494,7 +544,7 @@ def tubs(bpy, kit, p, objs):
         LK._arc(sh.bm, x, y, T['r'] - 0.10, T['r'], b0, mid0, z0, z0 + T['arm'], seg=8)
         LK._arc(sh.bm, x, y, T['r'] - 0.10, T['r'], mid1, b1, z0, z0 + T['arm'], seg=8)
         _cyl(cu.bm, x, y, z0, T['r'] - 0.10, T['seat'], seg=40)
-    vel = mohair(bpy, C['velvet'], 'velvet-' + p.get('colourway', 'green'))
+    vel = velvet_deep(bpy, C['velvet'], 'velvet-' + p.get('colourway', 'green'))
     objs.append(sh.object(bpy, vel, smooth=True, bevel=0.04, seg=4))
     objs.append(cu.object(bpy, vel, smooth=True, bevel=0.05, seg=4))
     tt = Mesh('tub-tables'); ts = Mesh('tub-table-stems'); TT = R.TUB_TABLE
@@ -580,16 +630,20 @@ def sink(bpy, kit, p, objs):
     """An alcove of vertical dark-timber boards; a floating trough cast in Ember acrylic, its basin soft and rounded,
     lit from below so it glows through its depth; a brushed-steel spout from the wall."""
     A = R.ALCOVE; S = R.SINK
-    pn = Mesh('alcove-boards'); x = A['x0']
+    boards = [Mesh(f'alcove-boards-{k}') for k in range(3)]; x = A['x0']; k = 0
+    bk = Mesh('alcove-back'); bk.box(A['x0'], 0.001, 0.0, A['x1'], 0.003, A['z1'])
     while x < A['x1'] - 0.01:
-        pn.box(x + 0.002, 0.004, 0.0, min(x + 0.118, A['x1']), A['depth'], A['z1'])
-        x += 0.12
-    objs.append(pn.object(bpy, dark_oak(bpy, vertical=True, name='oak-alcove'), bevel=0.003))
+        boards[(k * 2) % 3].box(x + 0.002, 0.004, 0.0, min(x + 0.116, A['x1']), A['depth'], A['z1'])
+        x += 0.12; k += 1
+    objs.append(bk.object(bpy, principled(bpy, 'alcove-shadow', '#0A0806', rough=0.9)))
+    for k, (m, tint) in enumerate(zip(boards, ('#22180F', '#2B1F15', '#1B130D'))):
+        objs.append(m.object(bpy, D.walnut(bpy, vertical=True, coat=0.25, coat_rough=0.45, tint=tint, mix=0.6,
+                                           name=f'-alcove{k}'), bevel=0.003))
     hd = Mesh('alcove-head'); hd.box(A['x0'] - 0.02, 0.0, A['z1'], A['x1'] + 0.02, A['depth'] + 0.04, A['z1'] + 0.05)
     objs.append(hd.object(bpy, dark_oak(bpy, name='oak-alcove-head'), bevel=0.004))
     y0 = A['depth'] + 0.01; z0 = S['top'] - S['t']
     blk = Mesh('sink-block'); blk.box(S['x'] - S['w'] / 2, y0, z0, S['x'] + S['w'] / 2, y0 + S['d'], S['top'])
-    ob = blk.object(bpy, resin(bpy, p.get('sink_deep', '#C8262B'), 'sink-ember', radius=p.get('sink_radius', 0.05),
+    ob = blk.object(bpy, resin(bpy, p.get('sink_deep', '#C8262B'), 'sink-ember', radius=p.get('sink_radius', 0.12),
                                rough=0.03))
     # the basin: a flattened ellipsoid cut from the top, the cut and the block both eased
     me = bpy.data.meshes.new('sink-cut'); bmc = bmesh.new()
@@ -603,9 +657,12 @@ def sink(bpy, kit, p, objs):
     bev = ob.modifiers.new('ease', 'BEVEL'); bev.width = 0.012; bev.segments = 5; bev.limit_method = 'ANGLE'
     cut.hide_render = True; cut.hide_viewport = True
     objs.append(ob)
-    # the light below: a warm panel under the block, seen only through the acrylic
-    lp = Mesh('sink-under'); lp.box(S['x'] - S['w'] / 2 + 0.06, y0 + 0.05, z0 - 0.012, S['x'] + S['w'] / 2 - 0.06, y0 + S['d'] - 0.05, z0 - 0.008)
-    em = lp.object(bpy, emitter(bpy, 'sink-under', '#FFB070', p.get('sink_glow', 6.0)))
+    # the light within: a warm core cast into the block under the basin, seen only through the acrylic, so every
+    # face glows and the red deepens with the thickness (sink-p1, both critics: an emitter below lit the wall)
+    lp = Mesh('sink-core'); lp.box(S['x'] - S['w'] / 2 + 0.05, y0 + 0.05, z0 + 0.015, S['x'] + S['w'] / 2 - 0.05,
+                                   y0 + S['d'] - 0.05, z0 + 0.045)
+    em = lp.object(bpy, emitter(bpy, 'sink-core', '#FFC890', p.get('sink_glow', 6.0)))
+    em.visible_shadow = False
     objs.append(em)
     _area(bpy, 'sink-uplight', (S['x'], y0 + S['d'] / 2, z0 - 0.03), (0, 0, 0), (S['w'] - 0.1, S['d'] - 0.1),
           p.get('sink_w', 0.0) or 0.0001, kelvin=2600)
@@ -616,10 +673,13 @@ def sink(bpy, kit, p, objs):
     LK._rod(sp.bm, (S['x'] + 0.10, 0.035, S['top'] + 0.22), (S['x'] + 0.10, 0.09, S['top'] + 0.22), 0.012, 0.012, seg=16)
     LK._rod(sp.bm, (S['x'] + 0.10, 0.09, S['top'] + 0.22), (S['x'] + 0.10, 0.09, S['top'] + 0.30), 0.005, 0.004, seg=10)
     objs.append(sp.object(bpy, brushed_steel(bpy), smooth=True))
+    tw = Mesh('sink-towel'); xt = S['x'] - S['w'] / 2 + 0.13
+    tw.box(xt - 0.10, y0 + 0.06, S['top'], xt + 0.10, y0 + 0.30, S['top'] + 0.035)
+    objs.append(tw.object(bpy, principled(bpy, 'linen', '#D8D0C0', rough=0.9, bump=(0.0008, 0.3, 0.0002)), bevel=0.012, seg=3))
     so = Mesh('sink-soap')
     _lathe(so.bm, [(0, 0), (0.03, 0), (0.03, 0.12), (0.012, 0.14), (0.012, 0.17), (0, 0.17)], seg=24, z0=S['top'],
            cx=S['x'] + S['w'] / 2 - 0.07, cy=y0 + 0.08)
-    objs.append(so.object(bpy, principled(bpy, 'soap-glass', '#3A2A1E', rough=0.08, trans=1.0, ior=1.5), smooth=True))
+    objs.append(so.object(bpy, principled(bpy, 'soap-glass', '#B06A28', rough=0.05, trans=1.0, ior=1.5), smooth=True))
 
 
 # --- signs of life -----------------------------------------------------------------------------------------------------
@@ -634,7 +694,7 @@ def life(bpy, kit, p, objs):
     spots = [(4.20, yb, zt, 'rocks', 0.03), (5.40, yb + 0.04, zt, 'coupe', 0.5), (8.30, yb, zt, 'rocks', 0.02),
              (9.40, yb + 0.03, zt, 'coupe', 0.8)]
     spots += [(x - 0.15, R.TABLE36['y'] + 0.12, R.TABLE36['h'], 'rocks', 0.025) for x in R.TABLES36]
-    spots += [(x + 0.08, y - 0.07, R.ZONE['z'] + R.TUB_TABLE['h'], 'rocks', 0.03) for x, y in R.TUB_TABLES[:3]]
+    spots += [(x + 0.11, y - 0.11, R.ZONE['z'] + R.TUB_TABLE['h'], 'rocks', 0.03) for x, y in R.TUB_TABLES]
     wx, wy = R.WINDOW_TABLE
     spots += [(wx + 0.14, wy - 0.12, R.TABLE36['h'], 'coupe', 0.6), (wx - 0.10, wy + 0.14, R.TABLE36['h'], 'rocks', 0.02)]
     gl = Mesh('glasses-r36'); lq = Mesh('pours-r36')

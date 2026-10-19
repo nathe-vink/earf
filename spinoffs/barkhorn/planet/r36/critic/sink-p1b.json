@@ -1,0 +1,358 @@
+{
+ "stage1": {
+  "impression": "A red-topped slab floating against vertical timber boards, with a wall lever tap and a dark bottle. It reads as CG. The boards are a smooth, evenly repeated procedural grain with no gaps or depth. The trough's front and side are a near-black box, so nothing glows through the acrylic, and it looks like glossy red paint on a black block rather than thick cast acrylic. The tap reads as a dark door handle, not brushed steel. A design magazine would not publish this as a specific place: it is a generic bathroom-vanity render with no sign of the bar around it.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The trough's front face and polished edges must visibly glow red through the thickness of the acrylic (front face [150,300,540,400] lum_median >= 25 with r_median >= 50), not read as an opaque black box",
+  "The timber boards must read as real boards at 1:1: shadow gaps between boards, tone varying from board to board, natural grain scale, no visibly repeated texture",
+  "The spout must read as brushed steel with a soft linear highlight, not a dark brown door lever",
+  "No region larger than a tenth of the frame more than half crushed (left strip [0,0,100,480] is 85 % crushed over 13.9 % of the frame)",
+  "Some sign of life and some room context so it reads as this bar's washroom, not a catalogue vanity (towel, soap, water, a sliver of the room)",
+  "The basin's interior must hold detail instead of reading as a black hole"
+ ],
+ "defects": [
+  {
+   "region": [
+    150,
+    300,
+    540,
+    400
+   ],
+   "what": "Trough front face is near black (lum_median 2.1, crush 68 %); no light through the acrylic's thickness, and the top-front polished edge does not glow"
+  },
+  {
+   "region": [
+    380,
+    220,
+    520,
+    260
+   ],
+   "what": "Basin interior is crushed black (median 2.3, crush 57 %); the soft rounded bowl reads as a sharp dark elliptical cut-out"
+  },
+  {
+   "region": [
+    120,
+    0,
+    720,
+    180
+   ],
+   "what": "Wall boards: uniform widths, no shadow gaps, flat CG wood grain with a repetitive figure; the tone is lilac-pink rather than warm timber"
+  },
+  {
+   "region": [
+    200,
+    330,
+    560,
+    480
+   ],
+   "what": "The under-glow lights the wall below (median 63) far more than the acrylic it should come through; it reads as an LED strip under a black box"
+  },
+  {
+   "region": [
+    370,
+    35,
+    440,
+    105
+   ],
+   "what": "The spout is dark brown with red reflections and a thin wire-like drop; it reads as a door lever, not brushed steel, and sits far above the basin"
+  },
+  {
+   "region": [
+    0,
+    0,
+    100,
+    480
+   ],
+   "what": "Dead black strip down the left (median 1.1, crush 85 %, 13.9 % of the frame) with no information"
+  },
+  {
+   "region": [
+    228,
+    100,
+    265,
+    200
+   ],
+   "what": "The bottle is an anonymous dark silhouette (median 4.3) with no glass highlight or label"
+  },
+  {
+   "region": [
+    100,
+    190,
+    660,
+    310
+   ],
+   "what": "Top surface: flat, uniform red gloss with soft smeared reflections; no thickness, depth or caustic glow, so it reads like paint or plastic"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The acrylic trough does not glow through its thickness: its front face is black, so the hero object reads as a black box with a red lid.",
+   "evidence": {
+    "region": [
+     150,
+     300,
+     540,
+     400
+    ],
+    "measured": "lum_median 2.1, r_median 3, crush_pct 67.8; top [100,190,660,310] median 13.4"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength), and the sink spot",
+    "from": "under-glow 2.5; sink spot 18.0 W, 2700 K, cone 30 deg",
+    "to": "under-glow 6.0, placed inside or against the underside of the acrylic so it couples into the slab; sink spot 30 W, 2700 K, cone 40 deg, aimed to graze the front face and top edge"
+   },
+   "expected": "The front face and the polished edges read as deep, saturated ember red with a gradient that is brighter toward the lit underside; the top-front edge shows a thin glowing line",
+   "accept": {
+    "region": [
+     150,
+     300,
+     540,
+     400
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The timber boards read as a smooth, repeated CG texture with no joints, so the whole frame says render.",
+   "evidence": {
+    "region": [
+     120,
+     0,
+     720,
+     180
+    ],
+    "measured": "lum_range 40.1, lum_p5 29.8: no dark joints; same grain figure board after board at 1:1"
+   },
+   "change": {
+    "setting": "the timber boards' finish (the oak's stain)",
+    "from": "one uniform procedural grain, boards flush and without gaps, pinkish tone",
+    "to": "4 mm shadow gaps between boards, per-board tone and hue offset of about \u00b110 %, randomised grain offset and rotation for each board, roughness 0.55 to 0.7 varying by board, stain shifted to warm dark brown (less magenta)"
+   },
+   "expected": "Distinct individual boards with dark joints and varied grain; the wall reads as real timber in warm brown",
+   "accept": {
+    "region": [
+     120,
+     0,
+     720,
+     180
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The under-glow's spill makes the wall below the brightest surface in the frame and pulls the eye away from the acrylic.",
+   "evidence": {
+    "region": [
+     200,
+     330,
+     560,
+     480
+    ],
+    "measured": "lum_median 63.2, while the trough's front face is 2.1"
+   },
+   "change": {
+    "setting": "the sink's under-glow direction and spread",
+    "from": "a wide wash onto the boards below",
+    "to": "keep the emitter but shield or angle it so most of its light goes into the acrylic; the wall below receives a soft pool that falls off within about 300 mm"
+   },
+   "expected": "The wall below sits below the trough's face in brightness, and the pool falls off downward",
+   "accept": {
+    "region": [
+     200,
+     330,
+     560,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The spout reads as a dark brown door lever, not brushed steel.",
+   "evidence": {
+    "region": [
+     370,
+     35,
+     440,
+     105
+    ],
+    "measured": "a dark brown body with a thin highlight only, tinted red; no anisotropic streak"
+   },
+   "change": {
+    "setting": "the steel's patina (spout finish)",
+    "from": "dark, brownish, near-black metal",
+    "to": "brushed stainless: base colour about #8A8A88, metallic 1, roughness 0.3, anisotropy 0.6 along the spout's length"
+   },
+   "expected": "A clean linear highlight along the spout and handle, a neutral grey that is clearly steel",
+   "accept": {
+    "region": [
+     370,
+     70,
+     440,
+     105
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 120
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "A dead black strip covers the left 14 % of the frame and carries no information.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     100,
+     480
+    ],
+    "measured": "lum_median 1.1, crush_pct 85.4"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [9.85, 2.05, 1.42], aimed at [11.02, 0.3, 0.86]",
+    "to": "pan right about 4 deg (target y 0.3 -> about 0.15) so the alcove's dark return leaves the frame, or keep the framing and let a sliver of the lit room show at that edge instead of black"
+   },
+   "expected": "No large crushed region; the trough fills the frame more fully and centrally",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "Nothing says anyone uses this sink or that it belongs to a bar: the basin is a black void and the only prop is an anonymous bottle.",
+   "evidence": {
+    "region": [
+     380,
+     220,
+     520,
+     260
+    ],
+    "measured": "basin lum_median 2.3, crush 57 %; bottle [228,100,265,200] median 4.3"
+   },
+   "change": {
+    "setting": "props",
+    "from": "one dark bottle",
+    "to": "an amber glass soap bottle (so it catches the sink's light), a folded linen hand towel on the deck, a few water droplets in the basin, a small rocks glass left on the deck"
+   },
+   "expected": "Small highlights on the deck and in the basin; the bowl's curve is readable; the frame reads as lived in",
+   "accept": {
+    "region": [
+     380,
+     220,
+     520,
+     260
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 10
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The top surface is a flat, uniform red gloss with no sense of depth, so it reads like paint or plastic.",
+   "evidence": {
+    "region": [
+     420,
+     280,
+     540,
+     300
+    ],
+    "measured": "lum_range 40.7 on the lit deck; reflections soft and smeared"
+   },
+   "change": {
+    "setting": "the sink spot (position)",
+    "from": "18 W from above, broad",
+    "to": "angle the spot so its specular reflection lands as one crisp hotspot on the deck behind the basin, and add a small candle on the deck (2 W, 1900 K) for a reflected point"
+   },
+   "expected": "One or two crisp, undistorted reflections on the deck, which read as polished thick acrylic",
+   "accept": {
+    "region": [
+     100,
+     190,
+     660,
+     310
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The overall grade turns the timber lilac-pink and leaves the frame flat, with no deep blacks apart from the dead strip.",
+   "evidence": {
+    "region": [
+     120,
+     0,
+     720,
+     180
+    ],
+    "measured": "r 75, g 46, b 33 with low chroma that reads as pink-grey; frame p95 only 88"
+   },
+   "change": {
+    "setting": "render white_balance_k / look",
+    "from": "white_balance_k 3000, look None",
+    "to": "white_balance_k 2800 with a slight green-yellow tint (+0.05) toward warm brown; AgX look 'Medium High Contrast'"
+   },
+   "expected": "Warm brown timber and more contrast between the glowing acrylic and the wall; frame median stays in the 22 to 50 band",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     48
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the basin a soft, rounded hollow that blends into the top, as the card describes, rather than a sharp elliptical cut-out",
+   "why": "The sink's geometry is fixed by the room's design"
+  },
+  {
+   "request": "Lower the spout so it sits closer over the basin, and give it a more substantial body than a thin wire drop",
+   "why": "The spout is part of the sink as designed; its form and position are fixed"
+  },
+  {
+   "request": "Check that the acrylic's material actually transmits light (volume absorption sized to the slab's thickness) rather than rendering opaque",
+   "why": "The acrylic's tint and make-up are part of the sink's fixed design; if c1 fails, the material model is at fault, not the light"
+  }
+ ],
+ "score_if_fixed": 6.0
+}

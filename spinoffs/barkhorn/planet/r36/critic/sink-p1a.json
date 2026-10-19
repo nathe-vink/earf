@@ -1,0 +1,344 @@
+{
+ "stage1": {
+  "impression": "A red acrylic trough floating on a wall of pinkish, evenly lit timber boards. The sink's body is a black slab and the only red is a thin glossy film on its top, through which the wall's planks ghost. The wall under it is the brightest thing in the frame, and the spout looks like a chrome door lever stuck to the boards. It reads as a real-time CG product shot, not a photograph. A design magazine would not run it as a specific place: nothing in the frame says listening bar, Planet EARF or San Francisco, only a generic red vanity.",
+  "score": 3.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The sink must glow through its thickness: front and end faces ember red with a brighter polished edge, not a black slab (front face lum_median >= 30, now 3.9)",
+  "The timber must read as dark, aged boards (stain variation between boards, checks, end grain, nail holes) and not as one procedural grain texture with a pink cast",
+  "The wall must not be the brightest surface: a pool of light on the basin and spout, with the boards falling off into shadow",
+  "No dead black band: the left 100 px (13.9 % of the frame) is 85 % crushed",
+  "The spout must read as brushed steel set into the wall, not a polished lever floating on the boards",
+  "Some sign of life and of the place (a towel, soap, the bar's light spilling in) so the detail belongs to this room"
+ ],
+ "defects": [
+  {
+   "region": [
+    110,
+    280,
+    640,
+    430
+   ],
+   "what": "Sink front and underside nearly black (lum_median 3.9, crush 47 %); the acrylic shows no glow through its thickness despite the under-glow"
+  },
+  {
+   "region": [
+    100,
+    190,
+    660,
+    300
+   ],
+   "what": "Wall planks ghost through the red top (the gloss reflection reads as transparency); thin glossy-plastic look, no depth to the tint"
+  },
+  {
+   "region": [
+    640,
+    250,
+    665,
+    300
+   ],
+   "what": "The trough's end edge is soft and dull (step 18.8, 10-90 width 26 px); no polished, glowing acrylic edge"
+  },
+  {
+   "region": [
+    0,
+    0,
+    100,
+    480
+   ],
+   "what": "Dead black band down the left (lum_median 1.1, crush 85 %), larger than a tenth of the frame"
+  },
+  {
+   "region": [
+    180,
+    0,
+    720,
+    190
+   ],
+   "what": "Timber wall flat and evenly lit (lum_median 52, range 41), one repeating procedural grain, mauve-pink cast, no checks, nail holes or stain variation"
+  },
+  {
+   "region": [
+    180,
+    330,
+    720,
+    480
+   ],
+   "what": "Wall below the sink is the brightest area of the frame (p95 109), so the light washes the boards instead of the sink"
+  },
+  {
+   "region": [
+    360,
+    40,
+    440,
+    105
+   ],
+   "what": "Spout reads as a polished chrome lever with no rose or escutcheon, a red smear on its underside, floating on the boards"
+  },
+  {
+   "region": [
+    225,
+    100,
+    265,
+    200
+   ],
+   "what": "A lone, featureless dark bottle is the only prop; no sign of life"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Overall softness and CG-smooth surfaces; no grain or atmosphere"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The trough does not glow through its thickness: its body is a black slab while the under-glow lights the wall below instead.",
+   "evidence": {
+    "region": [
+     110,
+     280,
+     640,
+     430
+    ],
+    "measured": "lum_median 3.9, crush_pct 46.8, r_median 8; wall under the sink profiles 81 to 92"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "2.5, reading only on the wall",
+    "to": "6.0, set inside the body or on its underside facing into the acrylic so it transmits through the front and end faces, with the polished edges catching it"
+   },
+   "expected": "Front and end faces read as deep ember red, brighter at the bottom edge and the polished arrises, and the wall spill drops relative to the sink",
+   "accept": {
+    "region": [
+     150,
+     300,
+     600,
+     410
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The timber reads as a bright, flat, pinkish procedural texture, not dark boards.",
+   "evidence": {
+    "region": [
+     180,
+     0,
+     720,
+     190
+    ],
+    "measured": "lum_median 52.4, lum_range 40.7, rgb median 76/47/34; the same grain on every board"
+   },
+   "change": {
+    "setting": "the oak's stain (the alcove's timber boards)",
+    "from": "a light, uniform mid-brown with one grain",
+    "to": "a dark smoked-oak stain about 40 % darker, varied board to board (\u00b115 % value, slight hue shift), with checks, nail holes and a low sheen"
+   },
+   "expected": "The upper wall at lum_median about 25 to 35, warm brown not mauve, with visible board-to-board variation",
+   "accept": {
+    "region": [
+     180,
+     0,
+     720,
+     190
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     36
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "There is no pool of light on the basin and spout; the top is lit no better than the wall.",
+   "evidence": {
+    "region": [
+     200,
+     200,
+     600,
+     280
+    ],
+    "measured": "top region lum_median 17.2 (100-660 x 190-300), p95 59, below the wall's 52"
+   },
+   "change": {
+    "setting": "the sink spot",
+    "from": "18.0 W, cone 30 deg",
+    "to": "28.0 W, cone 20 deg, aimed at the basin's centre so the pool takes in the spout and falls off on the boards"
+   },
+   "expected": "A bright pool on the red top and basin with a crisp spout highlight; the boards outside the pool darker",
+   "accept": {
+    "region": [
+     200,
+     200,
+     600,
+     280
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The under-glow throws its strongest light on the boards below the sink, the brightest area of the frame.",
+   "evidence": {
+    "region": [
+     180,
+     330,
+     720,
+     480
+    ],
+    "measured": "lum_median 63.4, p95 109.3, above the sink itself"
+   },
+   "change": {
+    "setting": "the sink's under-glow spill on the wall (with c1)",
+    "from": "a broad wash down the boards",
+    "to": "a short glow fading within about 30 cm under the trough: the emitter inside the acrylic, not a separate lamp facing the wall"
+   },
+   "expected": "The wall below falls from about 60 near the sink to under 30 at the frame's bottom edge",
+   "accept": {
+    "region": [
+     180,
+     330,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "A dead black band on the left takes 14 % of the frame and says nothing.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     100,
+     480
+    ],
+    "measured": "lum_median 1.1, crush_pct 85.4"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [9.85, 2.05, 1.42], at [11.02, 0.3, 0.86]",
+    "to": "move the camera about 0.2 m toward +x, or move the target about 0.15 m toward -x, so the alcove's return shows as a thin edge (under 5 % of the frame) or falls off the frame"
+   },
+   "expected": "No region over a tenth of the frame more than half crushed; the sink fills more of the frame",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The spout reads as a polished chrome door lever floating on the boards, not brushed steel.",
+   "evidence": {
+    "region": [
+     360,
+     40,
+     440,
+     105
+    ],
+    "measured": "a narrow specular streak on a smooth tube with a red smear underneath; no grain in the metal"
+   },
+   "change": {
+    "setting": "the steel's patina (spout)",
+    "from": "a polished, mirror-like steel",
+    "to": "brushed steel, roughness about 0.35 and anisotropic along the spout, a slightly darker tone"
+   },
+   "expected": "A soft, elongated highlight that reads as brushed metal, with the red reflection softened",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Nothing shows life or ties the detail to this bar; the single dark bottle is anonymous.",
+   "evidence": {
+    "region": [
+     225,
+     100,
+     265,
+     200
+    ],
+    "measured": "one featureless bottle; no other props"
+   },
+   "change": {
+    "setting": "props",
+    "from": "one bottle",
+    "to": "a folded linen hand towel on the trough's end, a small soap dish or a bar of soap, the bottle replaced by an amber hand-wash bottle catching a highlight"
+   },
+   "expected": "A lived-in detail with small highlights in the pool of light",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The frame is CG-smooth, with no air and no grain.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_p5 0.0 overall with 27.7 % crushed; flat smooth gradients on the wall"
+   },
+   "change": {
+    "setting": "haze and finish",
+    "from": "haze 0, no grain",
+    "to": "haze 0.02 per metre, a fine film grain in the finish, a lift so the blacks sit about 4 to 6"
+   },
+   "expected": "A faint bloom around the sink's glow and the blacks holding detail",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 15
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A rose or escutcheon where the spout meets the wall",
+   "why": "Changes the sink's design, which the card fixes"
+  },
+  {
+   "request": "Thicker, visibly cast walls on the trough with rounded arrises like Kuramata's work",
+   "why": "Changes the sink's shape, which the card fixes"
+  },
+  {
+   "request": "A wider frame showing the banquette or the listening zone so the detail reads as Planet EARF",
+   "why": "That is a different shot from the detail the card calls for; worth a companion frame"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

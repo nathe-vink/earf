@@ -23,10 +23,10 @@ S.OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'planet36')
 S.BELL_TABLES = ()
 
 DEFAULT = dict(S.DEFAULT, **dict(
-    colourway='green', pendant_w=320.0, pendant_cone=46.0, dome_w=30.0, dome_glow=0.6, sphere_w=6.0, sphere_glow=0.6,
+    colourway='green', pendant_w=320.0, pendant_cone=46.0, dome_w=30.0, dome_glow=0.6, sphere_w=2.5, sphere_glow=0.3,
     disc_col='#FF5A3A', disc_glow=0.8, disc_lamp=60.0, name_glow=0.25, niche_strip=4.0, sink_glow=6.0,
     screen_glow=0.5, screen_tint='#FFA060', screen_gap=0.04, screen_rough=0.22, etch_glow=0.01, etch_frost=0.3,
-    rw_w=30.0, rw_cone=34.0, altar_w=40.0, altar_cone=40.0, spk_irr=14.0, spk_back=30.0, spk_spread=90.0,
+    rw_w=30.0, rw_cone=34.0, altar_w=70.0, altar_cone=28.0, spk_irr=5.0, spk_back=40.0, spk_spread=90.0,
     spk_link=True, spk_k=2900, candle_w=3.0, flame=60.0, haze=0.012, wb=3000, exposure=0.0, view='AgX',
     menu_color='#8A6E4E'))
 S.DEFAULT = DEFAULT
@@ -96,13 +96,13 @@ VIEWS = {
                        'fstop': 5.6, 'focus': [8.0, 3.2, 1.1]},
             'settings': {'exposure': -0.5}},
     'listening-green': {'title': 'the listening zone, bottle green',
-                        'camera': {'position': [11.25, 2.75, 1.35], 'target': [16.6, 3.05, 1.05], 'lens_mm': 32,
+                        'camera': {'position': [11.25, 2.45, 1.35], 'target': [16.6, 3.25, 1.2], 'lens_mm': 28,
                                    'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
-                        'settings': {'colourway': 'green', 'exposure': 0.2}},
+                        'settings': {'colourway': 'green', 'exposure': 0.35, 'wb': 2700}},
     'listening-oxblood': {'title': 'the listening zone, oxblood',
-                          'camera': {'position': [11.25, 2.75, 1.35], 'target': [16.6, 3.05, 1.05], 'lens_mm': 32,
+                          'camera': {'position': [11.25, 2.45, 1.35], 'target': [16.6, 3.25, 1.2], 'lens_mm': 28,
                                      'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
-                          'settings': {'colourway': 'oxblood', 'exposure': 0.2}},
+                          'settings': {'colourway': 'oxblood', 'exposure': 0.35, 'wb': 2700}},
     'street': {'title': 'the shopfront at night, from the kerb',
                'camera': {'position': [-2.6, 3.0, 1.55], 'target': [7.4, 4.3, 1.4], 'lens_mm': 35, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
@@ -113,9 +113,11 @@ VIEWS = {
                             'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5,
                             'glass_gloss': 3.0, 'haze': 0.008}},
     'sink': {'title': 'the sink, a detail',
-             'camera': {'position': [9.85, 2.05, 1.42], 'target': [11.02, 0.30, 0.86], 'lens_mm': 65, 'level': True,
+             # after the two critics on p1 (3.0, 4.0): the trough a black box with a red lid, the wall lit instead,
+             # a dead black strip at the left: a glowing core cast inside it; the boards darker and varied; turned right
+             'camera': {'position': [9.85, 2.05, 1.42], 'target': [11.02, 0.15, 0.86], 'lens_mm': 65, 'level': True,
                         'fstop': 2.8, 'focus': [11.02, 0.27, 0.84]},
-             'settings': {'exposure': 0.2, 'haze': 0.0, 'sink_glow': 2.5}},
+             'settings': {'exposure': 0.2, 'haze': 0.0, 'sink_glow': 6.0, 'sink_spot': 28.0, 'wb': 2800}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot
