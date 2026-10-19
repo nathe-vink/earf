@@ -249,7 +249,8 @@ def ribbon(bpy, name, p, kit):
     `laminar` metres from each strand's start stay smooth (the unbroken thread above an incense stick). It thins out
     between `fade` [z0, z1] (world z). `wobble` pushes each layer's wall in and out by that share of its radius (at
     `wobble_freq` per metre), so the outline is ragged, not a hose; `break_scale` metres of broad noise (above
-    `break_cut`, never below `break_floor`) thins and thickens it along its length. `color`, `anisotropy` as
+    `break_cut`, never below `break_floor`) thins and thickens it along its length; `fade_in` [z0, z1] lets it
+    thicken from nothing (a studio column whose source is unseen). `color`, `anisotropy` as
     woodsmoke's."""
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     out = nt.nodes.new('ShaderNodeOutputMaterial')
@@ -292,6 +293,14 @@ def ribbon(bpy, name, p, kit):
     nt.links.new(wz.outputs['Z'], fd.inputs['Value'])
     m1 = nt.nodes.new('ShaderNodeMath'); m1.operation = 'MULTIPLY'
     nt.links.new(mix.outputs['Result'], m1.inputs[0]); nt.links.new(fd.outputs['Result'], m1.inputs[1])
+    if p.get('fade_in'):
+        # thickening from nothing between fade_in [z0, z1] (world z): a column whose source is unseen
+        fi = nt.nodes.new('ShaderNodeMapRange'); fi.clamp = True
+        fi.inputs['From Min'].default_value, fi.inputs['From Max'].default_value = p['fade_in']
+        nt.links.new(wz.outputs['Z'], fi.inputs['Value'])
+        mi = nt.nodes.new('ShaderNodeMath'); mi.operation = 'MULTIPLY'
+        nt.links.new(m1.outputs[0], mi.inputs[0]); nt.links.new(fi.outputs['Result'], mi.inputs[1])
+        m1 = mi
     if p.get('break_scale'):
         # thinning and thickening along the strand: a broad noise in world space, so the ribbon breaks into wisps
         bz = nt.nodes.new('ShaderNodeTexNoise'); bz.inputs['Scale'].default_value = 1.0 / p['break_scale']
