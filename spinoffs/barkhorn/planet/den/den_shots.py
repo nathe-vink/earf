@@ -139,7 +139,19 @@ def lights(v):
     if v['street']:
         for k, y in enumerate(STREET_LAMPS):
             L[f'street{k}'] = {'type': 'point', 'position': [CURB_X + 0.4 + v.get('lamp_dx', 0.9), y, v.get('lamp_z', 5.6)],
-                               'power_w': v['street_lamp'], 'radius_m': 0.15, 'color': 2700}
+                               'power_w': v['street_lamp'], 'radius_m': 0.15, 'color': v.get('lamp_k', 2700)}
+        if v.get('lamp_cam', 0) > 0:                                  # a lamp across the street, behind the camera
+            L['street-cam'] = {'type': 'point', 'position': [CURB_X - 12.4, 1.0, 5.6], 'power_w': v['lamp_cam'],
+                               'radius_m': 0.15, 'color': v.get('lamp_k', 2700)}
+        E = P.ENTRY                                                    # the vestibule's downlight, the sign's lamp
+        if v.get('entry_w', 0) > 0:
+            L['entry'] = {'type': 'spot', 'position': [0.6, (E['y0'] + E['y1']) / 2, P.TRANSOM['z0'] - 0.08],
+                          'target': [0.6, (E['y0'] + E['y1']) / 2, 0.0], 'power_w': v['entry_w'], 'cone_deg': 70,
+                          'blend': 0.8, 'radius_m': 0.03, 'color': 2400}
+        if v.get('sign_w', 0) > 0:
+            yc = (P.WINDOW['y0'] + P.WINDOW['y1']) / 2
+            L['sign'] = {'type': 'spot', 'position': [-0.45, yc, P.TRANSOM['z0'] + 0.08], 'target': [-0.09, yc, P.SIGN['z']],
+                         'power_w': v['sign_w'], 'cone_deg': 25, 'blend': 0.6, 'radius_m': 0.02, 'color': 2700}
     return L
 
 
@@ -156,7 +168,7 @@ def shot(view):
                 'ground': '#08080A', 'strength': v.get('sky', 0.0)},
         'lights': lights(v),
         'haze': {'box_m': [0.05, 0.05, 0.01, P.L - 0.05, P.W - 0.05, P.CEIL - 0.08], 'density': v['haze'], 'anisotropy': 0.3,
-                 'color': '#FFFFFF'} if v['haze'] > 0 and view != 'street' else {},
+                 'color': '#FFFFFF'} if v['haze'] > 0 else {},
         'render': {'samples': v['samples'], 'adaptive': 0.02, 'denoise': True, 'clamp': 10, 'bounces': 10,
                    'view': v['view'], 'look': v['look'], 'exposure': v['exposure'], 'white_balance_k': v['wb'],
                    'white_balance_tint': v['wb_tint']},
@@ -170,17 +182,25 @@ STREET_LAMPS = (-6.0, P.W + 9.0)
 VIEWS = {
     'street': {'title': 'the shopfront at night, from across the street',
                # three-quarter from across the street and up it, so the bays read as bays; the shopfront the subject
-               'camera': {'position': [-11.5, P.W + 4.0, 1.5], 'target': [0.0, P.W / 2 - 0.4, 2.1], 'lens_mm': 35,
-                          'level': True},
-               'settings': {'exposure': 0.4, 'wb': 3500, 'wet': True, 'road_rough': 0.12, 'street_lamp': 250.0, 'gold_glow': 0.06, 'siding': '#8E9384'}},
+               # after street-r1 (3.5): closer on 50 mm, the shopfront filling the frame and the view running down the
+               # room; the room brighter, the street lamps cooler and off the facades, a dusk-blue sky, the name gilded
+               # and lit, the vestibule and transoms lit, blinds in the windows, haze in the room
+               'camera': {'position': [-8.5, 6.0, 1.45], 'target': [0.0, 3.2, 1.9], 'lens_mm': 50, 'level': True},
+               'settings': {'exposure': 0.9, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 90.0,
+                            'lamp_k': 4000, 'lamp_dx': 0.0, 'lamp_cam': 90.0, 'gold_glow': 0.4, 'sign_w': 15.0,
+                            'entry_w': 12.0, 'transom_glow': 2.0, 'sconce_w': 25.0, 'pendant_w': 90.0, 'haze': 0.02,
+                            'siding': '#8E9384', 'sky': 0.05, 'sky_zenith': '#1A2440', 'sky_horizon': '#2A3550',
+                            'flat_glow': 0.12, 'across_glow': 0.06}},
     'bar': {'title': 'the bar, from the window table',
-            'settings': {'exposure': 0.8, 'wb': 3000, 'niche_glow': 0.3, 'spot_niche': 450.0, 'niche_cone': 30.0,
+            'settings': {'exposure': 0.8, 'wb': 3000, 'niche_glow': 1.2, 'spot_niche': 450.0, 'niche_cone': 30.0,
                          'niche_aim_z': 1.0, 'niche_rim': 1.5, 'pendant_w': 120.0, 'pendant_cone': 55.0,
                          'pendant_glow': 2.0, 'bounce': 15.0, 'spot_records': 9.0, 'record_glow': 1.0, 'haze': 0.012,
                          'shelf_glow': 5.0},
             # after bar-r1 (5.0): into the room on 40 mm, the right-hand Smoke speaker the hero, the other out of frame;
             # its niche darker behind it with a rim, a stronger pinhole; pendants pooling on the top; the far room down
-            'camera': {'position': [3.4, 3.4, 1.25], 'target': [8.5, 5.6, 1.1], 'lens_mm': 40, 'level': True,
+            # (p5: from 3.4, 3.4 the bar top filled the frame and the speaker sat small at 6 m) from a stool's side,
+            # 3.7 m off the speaker, the far room out of frame
+            'camera': {'position': [6.6, 3.2, 1.35], 'target': [9.06, 5.9, 1.35], 'lens_mm': 40, 'level': True,
                        'fstop': 4.0, 'focus': [P.NICHES[1][0] + P.NICHES[1][1] / 2, P.BACKBAR_Y + 0.05, 1.3]}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # after listening-r1 (4.5): 40 mm from further back and lower, the speaker on the left third; the
