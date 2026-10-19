@@ -123,13 +123,18 @@
     "screen_rough": 0.3,
     "table_lamps": [
      [
-      5.1,
-      0.82,
+      4.75,
+      0.29,
       0.74
      ],
      [
-      8.14,
-      0.82,
+      6.71,
+      0.29,
+      0.74
+     ],
+     [
+      8.67,
+      0.29,
       0.74
      ],
      [
@@ -147,278 +152,6 @@
       3.9299999999999997,
       0.5
      ]
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     3.715,
-     3.585,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     -11
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     4.435,
-     3.675,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     3
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     5.155,
-     3.645,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     -6
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     5.8,
-     3.615,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     8
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     6.52,
-     3.585,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     -1
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     7.165,
-     3.675,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     -10
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     7.885,
-     3.645,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     4
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     8.605,
-     3.615,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     -5
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     9.25,
-     3.585,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     9
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "bar_chair_round_01",
-    "res": "1k",
-    "position": [
-     9.97,
-     3.675,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "dining_chair_02",
-    "res": "1k",
-    "position": [
-     3.71,
-     1.64,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     176.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "dining_chair_02",
-    "res": "1k",
-    "position": [
-     5.27,
-     1.64,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     181.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "dining_chair_02",
-    "res": "1k",
-    "position": [
-     6.83,
-     1.64,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     177.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "dining_chair_02",
-    "res": "1k",
-    "position": [
-     8.27,
-     1.64,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     182.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "dining_chair_02",
-    "res": "1k",
-    "position": [
-     9.83,
-     1.64,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     178.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "dining_chair_02",
-    "res": "1k",
-    "position": [
-     1.25,
-     3.6799999999999997,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     270.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "dining_chair_02",
-    "res": "1k",
-    "position": [
-     1.25,
-     4.92,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     456.0
     ]
    },
    {
@@ -882,8 +615,8 @@
   "candle0": {
    "type": "point",
    "position": [
-    3.89,
-    0.84,
+    4.42,
+    0.8250000000000001,
     0.775
    ],
    "power_w": 2.2,
@@ -894,8 +627,8 @@
   "candle1": {
    "type": "point",
    "position": [
-    6.93,
-    0.84,
+    6.38,
+    0.8250000000000001,
     0.775
    ],
    "power_w": 2.2,
@@ -906,8 +639,8 @@
   "candle2": {
    "type": "point",
    "position": [
-    9.97,
-    0.84,
+    8.34,
+    0.8250000000000001,
     0.775
    ],
    "power_w": 2.2,
@@ -1041,8 +774,8 @@
   "tlamp0": {
    "type": "point",
    "position": [
-    5.1,
-    0.82,
+    4.75,
+    0.29,
     1.01
    ],
    "power_w": 79.0,
@@ -1053,8 +786,8 @@
   "tlamp1": {
    "type": "point",
    "position": [
-    8.14,
-    0.82,
+    6.71,
+    0.29,
     1.01
    ],
    "power_w": 79.0,
@@ -1063,6 +796,18 @@
    "camera": false
   },
   "tlamp2": {
+   "type": "point",
+   "position": [
+    8.67,
+    0.29,
+    1.01
+   ],
+   "power_w": 79.0,
+   "radius_m": 0.02,
+   "color": 2700,
+   "camera": false
+  },
+  "tlamp3": {
    "type": "point",
    "position": [
     1.13,
@@ -1074,7 +819,7 @@
    "color": 2700,
    "camera": false
   },
-  "tlamp3": {
+  "tlamp4": {
    "type": "point",
    "position": [
     12.85,
@@ -1086,7 +831,7 @@
    "color": 2700,
    "camera": false
   },
-  "tlamp4": {
+  "tlamp5": {
    "type": "point",
    "position": [
     12.85,

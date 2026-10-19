@@ -19,6 +19,7 @@ import den_shots as S                                               # noqa: E402
 
 S.P = LP                                                            # the den's builder reads the loft's plan
 S.OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'planet34')
+S.BELL_TABLES = ()                                                  # no Bell (the loft's own lamps)
 S.BELL = 'fog'                                                      # Bell's opal white: no second colour in a frame
 
 DEFAULT = dict(S.DEFAULT, **dict(
@@ -50,9 +51,10 @@ S.room_piece = room_piece
 
 
 def lamp_spots(v):
-    """Where the den stood Bell: two banquette tables, the window table, the lounge's side tables, any extra."""
+    """The table lamps: one at the wall end of each booth's table, the window table, the lounge's side tables, any
+    extra."""
     T = LP.TABLE
-    out = [[round(LP.TABLES[i] - 0.17, 4), round(T['y'] - 0.14, 4), T['h']] for i in S.BELL_TABLES]
+    out = [[round(cx + 0.15, 4), round(LP.BOOTH['table_y0'] + 0.24, 4), T['h']] for cx in LP.BOOTHS_X]   # each booth
     out += [[LP.WINDOW_TABLE[0] - 0.12, LP.WINDOW_TABLE[1] + 0.10, T['h']]]
     out += [[x, y, S.SIDE_H] for x, y in LP.SIDE_TABLES[1:]]
     return out + [list(b) for b in v.get('extra_bells', [])]
@@ -75,6 +77,16 @@ def products(v):
 
 
 S.products = products
+_props = S.props
+
+
+def props(v):
+    """The den's props without its scanned bar stools and its banquette's chairs: the kit builds the booths and the
+    stools and chairs after Fyrn (the owner, 2026-10-19)."""
+    return [o for o in _props(v) if o.get('model') not in ('bar_chair_round_01', v.get('chair_model', 'dining_chair_02'))]
+
+
+S.props = props
 _lights = S.lights
 
 
@@ -91,18 +103,22 @@ S.lights = lights
 
 VIEWS = {
     'bar': {'title': 'the bar, down the room',
-            # back from the set-aside (the lead, 2026-10-19): p4's frame (5.5, the review set) with the review's lifted
-            # sources (pendants, lamps and candles x4, the sconce x2.5, records x1.5, the niches and the speaker x2.5),
-            # and the screens legible (the lead: the right-wall screen the hands, legible at 600 px): the image 40 mm
-            # behind a finer frost
-            'camera': {'position': [1.6, 2.6, 1.40], 'target': [17.0, 3.3, 1.30], 'lens_mm': 28, 'level': True,
-                       'fstop': 5.6, 'focus': [7.0, 3.3, 1.2]},
-            'settings': {'exposure': 1.0, 'shelf_glow': 0.35, 'niche_glow': 0.12, 'spot_niche': 400.0,
+            # the owner's seating (2026-10-19, after the review set): booths along the right-hand wall, stools and
+            # chairs after Fyrn, every seat facing its table. And bar p7's two critics (4.5, 4.0), shared: the listening
+            # room blown (median 160): its records' strip and spots down; the Ember speakers pale pink: their front
+            # lamps down, the light from behind, 3000 K; the foreground black: the inlay up, the pendants' cones wider,
+            # the sconce up; the screens below the speaker; the back-bar's edges and niches up; three lounge chairs
+            # moved off the sightline to the left Ember speaker, as a stylist would
+            'camera': {'position': [1.6, 2.3, 1.45], 'target': [17.0, 3.4, 1.2], 'lens_mm': 28, 'level': True,
+                       'fstop': 5.6, 'focus': [7.0, 3.0, 1.0]},
+            'settings': {'exposure': 1.0, 'wb': 3000, 'shelf_glow': 0.6, 'niche_glow': 0.3, 'spot_niche': 400.0,
                          'niche_cone': 30.0, 'niche_dy': 0.32, 'niche_aim_z': 1.2, 'pendant_w': 480.0,
-                         'pendant_cone': 30.0, 'pendant_glow': 0.225, 'shade_glow': 0.6, 'inlay_glow': 0.9,
-                         'haze': 0.02, 'screen_glow': 0.5, 'screen_gap': 0.04, 'screen_rough': 0.22,
-                         'bell_w': 88.0, 'sconce_w': 15.0, 'spot_records': 13.5, 'candle_w': 2.4,
-                         'spk_irr': 45.0, 'spk_back': 90.0, 'spk_spread': 90.0, 'chair_dye': '#4A3A32'}},
+                         'pendant_cone': 40.0, 'pendant_glow': 0.225, 'shade_glow': 0.6, 'inlay_glow': 1.6,
+                         'haze': 0.015, 'screen_glow': 0.3, 'screen_gap': 0.04, 'screen_rough': 0.22,
+                         'bell_w': 88.0, 'sconce_w': 25.0, 'spot_records': 6.0, 'rec_cone': 40.0, 'record_glow': 0.3,
+                         'candle_w': 2.4, 'tlamp_glow': 0.2, 'spk_irr': 25.0, 'spk_back': 90.0, 'spk_spread': 90.0,
+                         'spk_link': True, 'chair_dye': '#4A3A32',
+                         'chair_move': {'1': [0.0, -0.25, 0.0], '4': [0.0, 0.30, 0.0], '6': [0.30, 0.25, 0.0]}}},
     'listening': {'title': 'the listening room, one of the Ember pair',
                   # p6's frame again (5.25 at proof size, 5.5 at 1200 x 800: the best yet), with only the changes its four
                   # critics shared. p7 and p8 (back and lower on 24 mm, a Bell lamp in frame: 4.5, 4.5) put the side table

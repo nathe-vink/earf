@@ -1,0 +1,405 @@
+{
+ "stage1": {
+  "impression": "A long, warm, low-key bar that holds together as a layout at thumbnail size, but at 1:1 it reads as a denoised CG proof. The walls and floor are blotchy denoiser smear rather than concrete, the pendants look like plain plastic cylinders, and the brightest, most open part of the frame is a washed-out near-white listening room. The red speaker, which should be the hero, shows only as two pale pink slabs half hidden behind identical lounge chairs. No acrylic in the frame reads as thick, flush or premium.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker reads at a glance as a saturated red, back-lit acrylic object: unoccluded, with its silhouette clear against a darker listening room seen through the smoked partition",
+  "The listening room is no longer the brightest surface in the frame (lum_median of [280,172,442,300] below 100, against 160 now), so the smoked acrylic partition reads as a dark, glossy plane",
+  "No denoiser smear or blotching on the concrete walls, floor or ceiling at 1:1 in the full 2400 x 1600 frame: board-form grain, tie holes and pour lines resolve",
+  "The bar front, stools and bar top are legible in the left foreground (lum_median of [0,260,300,480] at 18 or more, against 11 now), with pools of light on the bar top from the pendants and the inlay",
+  "Acrylic details read premium: the back-bar shelves' polished edges glow as thick slabs, the frosted screens diffuse their images evenly instead of reading as framed prints, and the pendants read as thick frosted acrylic, not paper or plastic",
+  "No clipped practicals other than the lamp filaments themselves (Bell shade and the small chair-side lamps not blown)",
+  "Signs of life and less repetition: a coat, a record out of its sleeve, glasses at different fill levels; the identical chairs no longer read as one model copied"
+ ],
+ "defects": [
+  {
+   "region": [
+    280,
+    172,
+    442,
+    300
+   ],
+   "what": "Listening room overexposed, near-white walls and record wall (lum_median 160, p95 236); it outshines the whole bar and kills the Ember's colour by contrast"
+  },
+  {
+   "region": [
+    290,
+    232,
+    316,
+    280
+   ],
+   "what": "Left Ember reads as a pale pink flat slab (r 202 / g 152 / b 139), desaturated, half hidden by a lounge chair and the bar end; no visible horn, batts or acrylic depth"
+  },
+  {
+   "region": [
+    424,
+    232,
+    446,
+    280
+   ],
+   "what": "Right Ember almost entirely hidden behind a lounge chair and the banquette's end chair"
+  },
+  {
+   "region": [
+    270,
+    160,
+    520,
+    310
+   ],
+   "what": "No smoked acrylic partition is legible between the bar and the listening room; the opening reads as an empty doorway"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Heavy denoiser smear and blotching on the walls, the floor and the plaster above the banquette; concrete reads as mottled camouflage, not board-formed concrete"
+  },
+  {
+   "region": [
+    0,
+    260,
+    300,
+    480
+   ],
+   "what": "Bar front and stools crushed into brown-black (lum_median 11, p95 28); the stools are shapeless and the bar front's texture is lost"
+  },
+  {
+   "region": [
+    316,
+    260,
+    326,
+    272
+   ],
+   "what": "Small square lamps on the lounge chairs clip (19 % clipped) and read as flat white squares, like screens"
+  },
+  {
+   "region": [
+    400,
+    258,
+    412,
+    272
+   ],
+   "what": "Second clipped white square lamp (14 % clipped), same flat look"
+  },
+  {
+   "region": [
+    660,
+    285,
+    695,
+    315
+   ],
+   "what": "Bell shade blown (24 % clipped, median 215); it reads as a glowing white box"
+  },
+  {
+   "region": [
+    590,
+    110,
+    645,
+    245
+   ],
+   "what": "Frosted screen (pressed hands) reads as a flat framed poster: hard frame, no depth, no glowing edge, and at lum_median 121 it competes with the hero"
+  },
+  {
+   "region": [
+    40,
+    70,
+    90,
+    145
+   ],
+   "what": "Pendants read as plain glossy plastic or paper cylinders with clipped bottoms (1.6 %), not thick frosted acrylic"
+  },
+  {
+   "region": [
+    0,
+    140,
+    230,
+    260
+   ],
+   "what": "Back-bar shelves' lit edges read as thin LED strips, not polished thick acrylic; the bottles behind are mush; the Fog speaker in its niche is illegible (a grey cone of spotlight)"
+  },
+  {
+   "region": [
+    300,
+    300,
+    520,
+    480
+   ],
+   "what": "Floor reflections are smeared, blotchy streaks rather than a polished concrete sheen"
+  },
+  {
+   "region": [
+    300,
+    240,
+    700,
+    480
+   ],
+   "what": "Repeated identical models: four identical lounge chairs, identical tufted banquette chairs"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    120
+   ],
+   "what": "Fir beams are smooth and uniform, with no checks, nail holes or darker end grain"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The listening room is the brightest thing in the frame and washes out the Ember speaker's red.",
+   "evidence": {
+    "region": [
+     280,
+     172,
+     442,
+     300
+    ],
+    "measured": "lum_median 159.9, p95 235.5, r/g/b medians 188/154/134, against a frame median of 27.4"
+   },
+   "change": {
+    "setting": "record-wall strip emission, record wall spots, and the spill of the Ember area lamps",
+    "from": "record-wall strip 1.0; record wall 3 x 13.5 W cone 60; Ember area lamps 4 x 45 W/m2 aimed broadly",
+    "to": "record-wall strip 0.3; record wall 3 x 6 W, cone 40 deg, grazing the spines only; Ember area lamps 4 x 30 W/m2 with spread narrowed so they light the cabinet and not the white walls; the listening room's walls also take a darker concrete tone if the card's 'concrete tone' finish allows"
+   },
+   "expected": "The listening room drops to a dim warm glow with median 70 to 95, so the Ember becomes the brightest coloured object in it and the smoked partition can read",
+   "accept": {
+    "region": [
+     280,
+     172,
+     442,
+     300
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     65,
+     100
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Ember reads pale pink, not a saturated tinted acrylic glowing from within.",
+   "evidence": {
+    "region": [
+     290,
+     232,
+     316,
+     280
+    ],
+    "measured": "r_median 202, g_median 152, b_median 139: a pinkish beige with little saturation"
+   },
+   "change": {
+    "setting": "the lamps and pinholes on the speakers, and white_balance_k",
+    "from": "Ember area lamps lighting the cabinet front; white_balance_k 3300",
+    "to": "move half the Ember's light behind the cabinet (back-lighting through the acrylic so the batts and the horn glow red), keep the front fill at about a third of that; white_balance_k 3000 so the red is not pushed toward pink by the warm grade"
+   },
+   "expected": "The Ember's body reads deep red with a brighter glowing core: g_median well below 0.6 of r_median",
+   "accept": {
+    "region": [
+     290,
+     232,
+     316,
+     280
+    ],
+    "metric": "g_median",
+    "op": "<",
+    "value": 110
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "Lounge chairs and the bar end hide both Embers, and at 28 mm the hero is about 25 x 45 px of a 720 px proof.",
+   "evidence": {
+    "region": [
+     270,
+     220,
+     450,
+     300
+    ],
+    "measured": "the left Ember is about half occluded, the right one nearly fully, at 3x crop"
+   },
+   "change": {
+    "setting": "camera position, target and lens",
+    "from": "position [1.6, 2.6, 1.4], target [17.0, 3.3, 1.3], 28 mm, focus [7.0, 3.3, 1.2]",
+    "to": "position [1.6, 2.3, 1.5], target aimed at the left Ember (about [17.0, 4.0, 1.0]) so it sits in the gap between the bar end and the first lounge chair, lens 35 mm, focus kept at about 7 m with f/4 so the far room softens slightly; verticals stay true"
+   },
+   "expected": "One Ember unoccluded and about 1.5 times larger in the frame, reading as the vanishing point of the room",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "Denoiser smear turns concrete, plaster, floor and fir into blotchy CG surfaces.",
+   "evidence": {
+    "region": [
+     500,
+     100,
+     720,
+     480
+    ],
+    "measured": "at 2x crop, wall and floor show smeared low-frequency blotches with no board grain; the floor's reflections are streaky"
+   },
+   "change": {
+    "setting": "render samples, adaptive threshold, denoise, haze",
+    "from": "samples 256, adaptive 0.02, denoise true, clamp 10, haze 0.02, proof at scale 0.3",
+    "to": "samples 1024, adaptive 0.005, denoiser with albedo and normal passes (or denoise off with 2048 samples), clamp 4, judged at full 2400 x 1600; haze 0.012 so the volume noise stops feeding the smear; make sure the concrete's board-form, tie-hole and checking maps are at real-world scale (boards about 100 to 150 mm)"
+   },
+   "expected": "Concrete shows formwork grain and tie holes at 1:1, the fir shows checks, the floor's reflection pools are smooth and continuous",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The bar front and stools in the left foreground are crushed into a brown void.",
+   "evidence": {
+    "region": [
+     0,
+     260,
+     300,
+     480
+    ],
+    "measured": "lum_median 11.1, p95 27.9, range 24"
+   },
+   "change": {
+    "setting": "bar top inlay, pendants, sconce",
+    "from": "bar top inlay 0.9; pendants 3 x 480 W spot, cone 30; sconce 15 W",
+    "to": "bar top inlay 1.6 so it rakes down the bar front; pendants cone 40 deg, aimed to land pools on the bar top at the near stools; sconce 25 W; or exposure +0.3 with the listening room cut per c1"
+   },
+   "expected": "The stools' leather tops and the bar front's board texture read, still the darkest zone in the frame",
+   "accept": {
+    "region": [
+     0,
+     260,
+     300,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     18,
+     30
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The frosted screen reads as a framed poster and competes with the hero for brightness.",
+   "evidence": {
+    "region": [
+     590,
+     110,
+     645,
+     245
+    ],
+    "measured": "lum_median 121, near neutral (127/120/118), hard dark frame, hands image sharp-edged"
+   },
+   "change": {
+    "setting": "the screens' image emission and the frosted acrylic's roughness",
+    "from": "screens 0.5; frosted roughness as now",
+    "to": "screens 0.3; frosted roughness raised so the hands are a soft, low-contrast shadow; acrylic shown as a thick slab with a lit polished edge set flush into a steel reveal"
+   },
+   "expected": "The screen glows softly and evenly, a mood surface below the Ember in brightness",
+   "accept": {
+    "region": [
+     590,
+     110,
+     645,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     65,
+     95
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "Bell's shade and the small lamps by the lounge chairs clip into flat white squares.",
+   "evidence": {
+    "region": [
+     660,
+     285,
+     695,
+     315
+    ],
+    "measured": "clip_pct 24.0 on Bell; 19.2 % and 13.7 % on the lounge lamps at [316,260,326,272] and [400,258,412,272]"
+   },
+   "change": {
+    "setting": "Bell and the lounge-side lamp emission",
+    "from": "Bell shade at its current emission (lamp none); lounge lamps as now",
+    "to": "Bell shade emission cut by about half, a 2 W 2200 K point inside so it lights the table top instead; lounge-side lamps cut to a third"
+   },
+   "expected": "Shades hold a gradient from a hot core to a warm edge; only a filament-sized core clips",
+   "accept": {
+    "region": [
+     660,
+     285,
+     695,
+     315
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The room feels staged and repetitive, with no sign of life.",
+   "evidence": {
+    "region": [
+     300,
+     240,
+     700,
+     480
+    ],
+    "measured": "four identical lounge chairs, identical banquette chairs; one coupe on the bar; no coat, no record out"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses, coupes, menus, candles, bottles, books",
+    "to": "a coat over the nearest banquette chair, one chair turned a few degrees and pulled out, a record out of its sleeve on the listening-room side table, half-full glasses and a lit candle on the nearest banquette table, two or three bottles out on the bar top under a pendant"
+   },
+   "expected": "The frame reads as a room in use; the repetition is broken",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Visible smoked acrylic partition between the bar and the listening room (a thicker or more reflective panel)",
+   "why": "The partition is part of the room's design; only its light and finish may change. If c1 does not make it read, its existence and position in the model need checking, which is a design question for the owner"
+  },
+  {
+   "request": "Different chair models in the listening room and at the banquette to break repetition",
+   "why": "The furniture is part of the room's design as fixed by the card"
+  },
+  {
+   "request": "Ember cabinet colour or tint density",
+   "why": "EARF's products (shape, colour, parts) are fixed"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

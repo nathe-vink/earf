@@ -29,8 +29,8 @@ SCREEN_GAP = 0.10                # the image plane behind it
 SCREEN_FRAME = 0.025             # a blackened-steel angle round the reveal
 # (name, wall, a0, a1, z0, z1, image): wall 'right' (y = 0) or 'left' (y = W) spans x a0..a1; 'window' spans y a0..a1
 SCREENS = [
-    ('banquette-a', 'right', 4.30, 5.90, 1.30, 2.70, 'ovoid'),       # over the banquette, between its tables
-    ('banquette-b', 'right', 7.35, 8.95, 1.30, 2.70, 'hands'),       # the one the bar frame sees (the lead: the hands)
+    ('banquette-a', 'right', 3.82, 5.38, 1.32, 2.72, 'ovoid'),       # in the concrete over the first and third booths
+    ('banquette-b', 'right', 7.74, 9.30, 1.32, 2.72, 'hands'),       # the one the bar frame sees (the lead: the hands)
     ('lounge', 'left', 15.25, 16.85, 0.85, 2.45, 'logogram'),       # the listening room's left wall, behind the left
                                                                      # Ember speaker (the lead: the acrylic in this frame too)
     ('window', 'window', 4.45, 5.75, 0.62, 2.42, 'dancer'),         # a lightbox in the shopfront, seen from both sides
@@ -54,12 +54,44 @@ SCONCES_LEFT_LOUNGE = [14.55]
 LISTEN_TABLE = (15.45, 4.35)
 
 
-_den_candles = _D.candle_spots                   # held here: the kit points the den's plan at the function below
-
-
-def candle_spots():
-    """The den's candles, and one on the listening side table."""
-    return _den_candles() + [(LISTEN_TABLE[0] + 0.07, LISTEN_TABLE[1] - 0.06, 0.495)]
 
 # the niches' backs are screens too (the lead, 2026-10-19): the shell behind the first, the hands behind the second
 NICHE_IMAGES = ['ovoid', 'hands']
+
+
+# --- the seating, after the owner's note on the review set (2026-10-19): "I want better bar chairs, like Fyrn. I want
+# booth seating along a wall. The chairs on the right are facing the wrong way. The listening area should still be
+# chairs and tables." ---------------------------------------------------------------------------------------------
+# booths along the right-hand wall in place of the banquette and its chairs: benches across the room, a table between
+# each pair with its end to the wall, high backs capped in fir, deep tan leather (not oxblood: one red, the speaker's)
+BOOTH = dict(table_w=0.70, table_l=1.05, table_y0=0.05, seat_d=0.50, seat_h=0.46, back_h=1.10, back_t=0.06,
+             gap=0.07, bench_l=1.30, cap_w=0.14, cap_t=0.035, leather='#7A4A2C')
+BOOTH_PITCH = BOOTH['table_w'] + 2 * (BOOTH['gap'] + BOOTH['seat_d'] + BOOTH['back_t'])     # 1.96: backs shared
+BOOTHS_X = [6.56 + BOOTH_PITCH * k for k in (-1, 0, 1)]              # the tables' centres: 4.60, 6.56, 8.52
+TABLES = BOOTHS_X                                                    # (the den's two-tops' name, so its props follow)
+TABLE = dict(w=BOOTH['table_w'], d=BOOTH['table_l'], h=0.74, y=BOOTH['table_y0'] + BOOTH['table_l'] / 2)
+
+# the bar stools after Fyrn's Stanyan (solid walnut, a curved low back, splayed legs, graphite anodised aluminium
+# brackets and footrest; no logo, no replica): seat 760, 1060 overall; the window table's two chairs the same family
+# at dining height, each facing the table it serves (the owner: "facing the wrong way")
+STOOL = dict(seat_h=0.76, seat_r=0.19, top=1.06, foot_r=0.215, rest_z=0.29)
+CHAIR = dict(seat_h=0.46, seat_r=0.21, top=0.80, foot_r=0.20, rest_z=None)
+
+
+def seats():
+    """Every stool and chair outside the lounge: (x, y, the direction it faces in degrees, kind)."""
+    out = [(x, y, 90.0 + ((i * 5) % 7 - 3) * 2.5, 'stool') for i, (x, y) in enumerate(stools())]   # facing the bar
+    wx, wy = WINDOW_TABLE
+    out += [(wx, wy - 0.62, 90.0, 'chair'), (wx, wy + 0.62, 270.0, 'chair')]                       # facing their table
+    return out
+
+
+def candle_spots():
+    """The candles: on each booth's table, the window table, the bar, the lounge tables (the loft's own: the den's
+    read its two-tops)."""
+    zt = BAR_TOP_Z + TOP_T; T = TABLE
+    out = [(cx - 0.18, T['y'] + 0.25, T['h']) for cx in TABLES]
+    out += [(WINDOW_TABLE[0] + 0.1, WINDOW_TABLE[1] - 0.12, T['h'])]
+    out += [(x, BAR_FRONT - 0.10, zt) for x in (4.1, 6.3, 8.6)]
+    out += [(SIDE_TABLES[0][0] + 0.06, SIDE_TABLES[0][1] + 0.08, 0.50)]
+    return out + [(LISTEN_TABLE[0] + 0.07, LISTEN_TABLE[1] - 0.06, 0.495)]

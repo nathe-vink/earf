@@ -447,16 +447,19 @@ def room(bpy, name, p, kit):
     with _patched(**wood):
         D.shopfront(bpy, kit, p, objs)
         bar(bpy, kit, p, objs)
-        D.banquette(bpy, kit, p, objs)
+    booths(bpy, kit, p, objs)                      # the booths in place of the den's banquette (the owner)
+    seats(bpy, kit, p, objs)                       # the stools and chairs after Fyrn, in place of the scanned ones
+    with _patched(**wood):
         with _patched(plan={'SCONCES_RIGHT': LP.SCONCES_RIGHT, 'SCONCES_LEFT_LOUNGE': LP.SCONCES_LEFT_LOUNGE,
-                            'candle_spots': LP.candle_spots}):
+                            'candle_spots': LP.candle_spots, 'TABLES': LP.TABLES, 'TABLE': LP.TABLE}):
             D.sconces(bpy, kit, p, objs)
             if p.get('props', True):
                 D.candles(bpy, kit, p, objs)
         D.lounge(bpy, kit, p, objs)
         D.record_wall(bpy, kit, p, objs)
         if p.get('props', True):
-            D.glassware(bpy, kit, p, objs)
+            with _patched(plan={'TABLES': LP.TABLES, 'TABLE': LP.TABLE}):
+                D.glassware(bpy, kit, p, objs)       # on the booths' tables
         if p.get('street', True):
             D.street(bpy, kit, p, objs)
     backbar(bpy, kit, p, objs)
@@ -509,3 +512,116 @@ def listen_props(bpy, kit, p, objs):
     _cyl(lq.bm, x - 0.07, y + 0.05, z + 0.0165, 0.0366, 0.03, seg=40)
     objs.append(gl.object(bpy, principled(bpy, 'tumbler-glass', '#FFFFFF', rough=0.01, trans=1.0, ior=1.5), smooth=True))
     objs.append(lq.object(bpy, principled(bpy, 'pour-den', '#B5601A', rough=0.0, trans=1.0, ior=1.36), smooth=True))
+
+
+# --- the seating (the owner, 2026-10-19: booths along a wall, bar chairs like Fyrn's, every seat facing its table) --
+def _rod(bm, a, b, r0, r1, seg=12):
+    """A tapered round rod from point a (radius r0) to b (r1)."""
+    a, b = Vector(a), Vector(b); d = b - a
+    g = bmesh.ops.create_cone(bm, cap_ends=True, segments=seg, radius1=r0, radius2=r1, depth=d.length)
+    q = d.normalized().to_track_quat('Z', 'Y'); mid = (a + b) / 2
+    for v in g['verts']:
+        v.co = q @ v.co + mid
+
+
+def _arc(bm, cx, cy, r0, r1, a0, a1, z0, z1, seg=18):
+    """A curved band: the ring between radii r0 and r1, from angle a0 to a1 (radians), z0 to z1."""
+    ring = []
+    for i in range(seg + 1):
+        t = a0 + (a1 - a0) * i / seg; c, sn = math.cos(t), math.sin(t)
+        ring.append([bm.verts.new((cx + r * c, cy + r * sn, z)) for r, z in ((r0, z0), (r1, z0), (r1, z1), (r0, z1))])
+    for i in range(seg):
+        for k in range(4):
+            q = [ring[i][k], ring[i][(k + 1) % 4], ring[i + 1][(k + 1) % 4], ring[i + 1][k]]
+            bm.faces.new(q[::-1]).normal_update()
+    bm.faces.new(ring[0]).normal_update(); bm.faces.new(ring[-1][::-1]).normal_update()
+
+
+def aluminium(bpy):
+    """Graphite anodised aluminium: a dark grey metal with a soft, even sheen."""
+    if 'alu-graphite' in _M:
+        return _M['alu-graphite']
+    _M['alu-graphite'] = principled(bpy, 'alu-graphite', '#3B3C3E', rough=0.32, metal=1.0)
+    return _M['alu-graphite']
+
+
+def _seat(wood, alu, x, y, face, S):
+    """One seat of the family: a round walnut seat, four splayed legs on aluminium brackets, a curved low back on two
+    posts behind the sitter (opposite `face`, degrees), and on the bar stool an aluminium footrest."""
+    h, r = S['seat_h'], S['seat_r']; f = math.radians(face)
+    _cyl(wood.bm, x, y, h - 0.038, r, 0.038, seg=40)
+    tops, feet = [], []
+    for k in range(4):
+        t = f + math.radians(45 + 90 * k)
+        tops.append((x + 0.115 * math.cos(t), y + 0.115 * math.sin(t), h - 0.07))
+        feet.append((x + S['foot_r'] * math.cos(t), y + S['foot_r'] * math.sin(t), 0.0))
+        _rod(wood.bm, feet[-1], (tops[-1][0], tops[-1][1], h - 0.038), 0.013, 0.018)
+        _cyl(alu.bm, tops[-1][0], tops[-1][1], h - 0.068, 0.026, 0.03, seg=16)           # the bracket under the seat
+    if S['rest_z']:
+        u = S['rest_z'] / (h - 0.038)
+        pts = [tuple(fe[i] + (tp[i] - fe[i]) * u if i < 2 else S['rest_z'] for i in range(3)) for fe, tp in zip(feet, tops)]
+        for k in range(4):
+            _rod(alu.bm, pts[k], pts[(k + 1) % 4], 0.010, 0.010, seg=10)
+    b = f + math.pi; zb0 = S['top'] - 0.095
+    for da in (-0.62, 0.62):
+        t = b + da
+        _rod(wood.bm, (x + 0.15 * math.cos(t), y + 0.15 * math.sin(t), h - 0.01),
+             (x + 0.178 * math.cos(t), y + 0.178 * math.sin(t), zb0 + 0.02), 0.011, 0.010)
+    _arc(wood.bm, x, y, 0.168, 0.192, b - 0.95, b + 0.95, zb0, S['top'])
+
+
+def seats(bpy, kit, p, objs):
+    """The bar stools and the window table's chairs, after Fyrn: solid walnut and graphite aluminium."""
+    wood = Mesh('stools-walnut'); alu = Mesh('stools-alu')
+    for x, y, face, kind in LP.seats():
+        _seat(wood, alu, x, y, face, LP.STOOL if kind == 'stool' else LP.CHAIR)
+    objs.append(wood.object(bpy, D.walnut(bpy, coat=0.5, coat_rough=0.3, name='-stool'), smooth=True))
+    objs.append(alu.object(bpy, aluminium(bpy), smooth=True))
+
+
+def booths(bpy, kit, p, objs):
+    """Booths along the right-hand wall: deep tan leather benches across the room, channel-tufted high backs capped in
+    fir, a walnut table between each pair on a blackened-steel base; and the round table by the window."""
+    B = LP.BOOTH; T = LP.TABLE; L = B['bench_l']
+    core = Mesh('booth-core'); seat = Mesh('booth-seats'); back = Mesh('booth-backs'); cap = Mesh('booth-caps')
+    kick = Mesh('booth-kicks'); tops = Mesh('booth-tops'); legs = Mesh('booth-bases')
+    half = B['table_w'] / 2 + B['gap']                               # the table's centre to the seat's front
+    walls = set()
+    for cx in LP.BOOTHS_X:
+        for s in (-1, 1):
+            xf = cx + s * half; xb = xf + s * B['seat_d']; xw = xb + s * B['back_t']
+            lo, hi = sorted((xf, xb))
+            kick.box(lo + 0.03, 0.02, 0.0, hi - 0.03, L - 0.04, 0.081)                       # a recessed steel kick
+            core.box(lo, 0.02, 0.08, hi, L, B['seat_h'] - 0.10)
+            seat.box(lo + 0.006, 0.03, B['seat_h'] - 0.10, hi - 0.006, L - 0.01, B['seat_h'])
+            nch = 7
+            for k in range(nch):                                    # the back's channels
+                ya = 0.03 + k * (L - 0.04) / nch
+                back.box(min(xb, xb - s * 0.07), ya + 0.004, B['seat_h'] + 0.02, max(xb, xb - s * 0.07),
+                         ya + (L - 0.04) / nch - 0.004, B['back_h'] - 0.05)
+            walls.add(round(xw - s * B['back_t'] / 2, 4))
+            core.box(min(xb, xw), 0.02, 0.08, max(xb, xw), L, B['back_h'])
+        tops.box(cx - T['w'] / 2, B['table_y0'], T['h'] - 0.03, cx + T['w'] / 2, B['table_y0'] + T['d'], T['h'])
+        _cyl(legs.bm, cx, T['y'], 0.02, 0.035, T['h'] - 0.05, seg=20)
+        legs.box(cx - 0.05, T['y'] - 0.36, 0.0, cx + 0.05, T['y'] + 0.36, 0.02)               # a flat bar foot
+        legs.box(cx - 0.20, T['y'] - 0.03, 0.0, cx + 0.20, T['y'] + 0.03, 0.02)
+        legs.box(cx - 0.25, T['y'] - 0.20, T['h'] - 0.05, cx + 0.25, T['y'] + 0.20, T['h'] - 0.03)   # the top's frame
+    merged = []
+    for xc in sorted(walls):                                         # back to back, two booths share one cap
+        if merged and xc - merged[-1][-1] < 0.1:
+            merged[-1].append(xc)
+        else:
+            merged.append([xc])
+    for xc in [sum(g) / len(g) for g in merged]:                     # each back's fir cap
+        cap.box(xc - B['cap_w'] / 2, 0.02, B['back_h'], xc + B['cap_w'] / 2, L + 0.01, B['back_h'] + B['cap_t'])
+    wx, wy = LP.WINDOW_TABLE
+    _cyl(tops.bm, wx, wy, T['h'] - 0.03, 0.34, 0.03, seg=48)
+    _cyl(legs.bm, wx, wy, 0.02, 0.03, T['h'] - 0.05, seg=20); _cyl(legs.bm, wx, wy, 0.0, 0.22, 0.02, seg=40)
+    tan = _leather(bpy, p.get('booth_leather', B['leather']), 'leather-tan')
+    objs.append(core.object(bpy, principled(bpy, 'booth-core', '#1E1A17', rough=0.8), bevel=0.004))
+    objs.append(seat.object(bpy, tan, bevel=0.035, seg=4))
+    objs.append(back.object(bpy, tan, bevel=0.03, seg=4))
+    objs.append(cap.object(bpy, fir(bpy), bevel=0.004))
+    objs.append(kick.object(bpy, steel(bpy)))
+    objs.append(tops.object(bpy, D.walnut(bpy, coat=0.8, coat_rough=0.18, name='-booth'), bevel=0.005))
+    objs.append(legs.object(bpy, steel(bpy), smooth=True))
