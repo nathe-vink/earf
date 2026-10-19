@@ -18,7 +18,7 @@ def column(seed=5):
     rnd = random.Random(seed)
     ph = [rnd.uniform(0, 6.28) for _ in range(4)]
     # the column's spine: (t, x, y) knots from the floor (t 0) to the top of the frame (t 1)
-    knots = [(0.0, -0.9, 0.7), (0.3, -0.75, 0.75), (0.55, -0.25, 0.85), (0.78, 0.3, 0.7), (1.0, 0.7, 0.45)]
+    knots = [(0.0, -1.1, 0.85), (0.35, -1.0, 0.85), (0.6, -0.55, 0.9), (0.8, 0.05, 0.8), (1.0, 0.55, 0.5)]
     pts, rr = [], []
     n = 48
     for i in range(n):
@@ -29,27 +29,28 @@ def column(seed=5):
         w = 0.04 * t
         x = x0 + (x1 - x0) * f + w * math.sin(11 * t + ph[0])
         y = y0 + (y1 - y0) * f + w * math.cos(9 * t + ph[1])
-        # it starts above the lens (0.6 m) and fades in from the dark: seen against the floor below the horizon, a
-        # volume showed the floor behind it lit (a pale card), whatever its density
-        z = 0.68 + 1.9 * t
+        z = 0.12 + 2.45 * t
         pts.append([round(x, 4), round(y, 4), round(z, 4)])
         rr.append(round(0.1 + 0.3 * t ** 1.1 + 0.2 * max(0.0, t - 0.5), 4))
-    return piece('ext', module='smoke_el', fn='ribbon', strands=[{'points': pts, 'radii': rr, 'density': 5.0}], layers=6,
-                 scale=0.06, cut=0.42, soft=0.35, rise=1.8, laminar=0.0, laminar_blend=0.05, fade=[1.9, 2.4],
-                 color='#DADDE2', anisotropy=0.6, detail=6.0, distortion=0.8, seed=seed, wobble=0.3, wobble_freq=7.0,
-                 break_scale=0.45, break_cut=0.35, break_floor=0.3, fade_in=[0.7, 1.2])
+    return piece('ext', module='smoke_el', fn='ribbon', strands=[{'points': pts, 'radii': rr, 'density': 7.0}], layers=4,
+                 scale=0.05, cut=0.47, soft=0.22, rise=1.6, laminar=0.0, laminar_blend=0.05, fade=[1.9, 2.4],
+                 color='#DADDE2', anisotropy=0.6, detail=6.0, distortion=0.8, seed=seed, wobble=0.35, wobble_freq=6.0,
+                 break_scale=0.45, break_cut=0.35, break_floor=0.3, fade_in=[0.12, 0.7], grid=True, voxel=0.012)
 
 
 def shot():
     props = [piece('box', size=[24.0, 24.0, 0.02], position=[0.0, 0.0, -0.02], material='gloss', color='#060606',
                    roughness=0.05),
-             column()]
+             column(),
+             # a dark backdrop far behind the speaker, its edges out of frame, lit in a soft pool so the black cabinet
+             # has a graded ground to stand against
+             piece('box', size=[14.0, 0.05, 7.0], position=[0.5, 5.5, 0.0], material='clay', color='#1C1B1A')]
     cam = camera(height=0.6, distance=6.0, azimuth=-20, lens=65, target=(0.0, 0.0, 0.9), fstop=5.6, shift_x=0.0)
     lights = {
-        'skyfill': {**area(-20, 5, 2.4, 0.8, '#C8CCD4', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
-        'bounce': {**area(-25, 12, 2.0, 2.5, '#C9C4BC', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
-        'kicker': {**area(-150, 22, 3.0, 32.0, '#F2EEE8', (0.5, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
-        'kicker_r': {**area(150, 14, 3.0, 24.0, '#F2EEE8', (0.6, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
+        'skyfill': {**area(-20, 5, 2.4, 2.5, '#C8CCD4', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
+        'bounce': {**area(-25, 12, 2.0, 7.0, '#C9C4BC', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
+        'kicker': {**area(-150, 22, 3.0, 18.0, '#F2EEE8', (0.5, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
+        'kicker_r': {**area(150, 14, 3.0, 12.0, '#F2EEE8', (0.6, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
         # the smoke's rims: two tall strips behind, left and right, high enough that the gloss floor's mirror image of
         # them falls out of frame (seen through the smoke, a low one showed as a lit card on the floor)
         'rim_l': {**area(-145, 40, 3.0, 40.0, '#F4F0EA', (0.4, 2.6), (0.0, 0.0, 1.1)), 'specular': 0.0},
@@ -57,6 +58,9 @@ def shot():
         # a soft top so the black floor's gloss shows a horizon of light under the speaker
         'top': {'type': 'area', 'size_m': [2.0, 1.0], 'position': [0.0, 1.6, 3.2], 'target': [0.0, 0.3, 0.0],
                 'irradiance': 1.2, 'color': '#E8E6E2', 'specular': 0.25},
+        # the pool on the backdrop: a soft spot from high behind the camera, on the card alone
+        'pool': {'type': 'spot', 'position': [-1.0, -3.0, 4.0], 'target': [0.4, 5.5, 0.8], 'power_w': 1400,
+                 'cone_deg': 16.0, 'blend': 1.0, 'color': '#D8D4CE', 'radius_m': 0.3},
     }
     return frame('smoke_studio', props, cam, {'kind': 'none', 'strength': 0.0}, 'barkhorn, Smoke, the studio take',
                  lights=lights, rotate_z=18.0, position=(0.0, 0.0, 0.0), samples=512, exposure=0.0,

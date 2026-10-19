@@ -250,7 +250,8 @@ def ribbon(bpy, name, p, kit):
     between `fade` [z0, z1] (world z). `wobble` pushes each layer's wall in and out by that share of its radius (at
     `wobble_freq` per metre), so the outline is ragged, not a hose; `break_scale` metres of broad noise (above
     `break_cut`, never below `break_floor`) thins and thickens it along its length; `fade_in` [z0, z1] lets it
-    thicken from nothing (a studio column whose source is unseen). `color`, `anisotropy` as
+    thicken from nothing (a studio column whose source is unseen). `grid` fills a voxel grid from each tube (`voxel`
+    metres) instead of shading inside the mesh. `color`, `anisotropy` as
     woodsmoke's."""
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     out = nt.nodes.new('ShaderNodeOutputMaterial')
@@ -351,6 +352,18 @@ def ribbon(bpy, name, p, kit):
             ob.location = o
             # density per metre at this layer: the core's share, carried in the object's colour alpha (x 100)
             ob.color = (1, 1, 1, s.get('density', p.get('density', 40.0)) / layers / 100.0)
+            if p.get('grid'):
+                # as a voxel grid (a Volume object filled from the tube): no mesh walls for a ray to cross, so nothing
+                # behind the smoke is seen through a mis-tracked volume boundary (a surface behind showed lit)
+                ob.hide_render = True; ob.hide_viewport = True
+                vd = bpy.data.volumes.new(f'{name}-{si}-{li}-grid')
+                vo = bpy.data.objects.new(f'{name}-{si}-{li}-grid', vd); bpy.context.scene.collection.objects.link(vo)
+                md = vo.modifiers.new('fill', 'MESH_TO_VOLUME'); md.object = ob
+                md.resolution_mode = 'VOXEL_SIZE'; md.voxel_size = p.get('voxel', 0.01); md.density = 1.0
+                vo.color = ob.color
+                vd.materials.append(m)
+                obs.append(vo)
+                continue
             me.materials.append(m)
             obs.append(ob)
     return obs
