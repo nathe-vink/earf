@@ -79,7 +79,7 @@ def settings(sh, scale):
 def main():
     view = sys.argv[1]; out = sys.argv[2]
     img_shot = sys.argv[sys.argv.index('--shot') + 1] if '--shot' in sys.argv else None
-    scale = float(sys.argv[sys.argv.index('--scale') + 1]) if '--scale' in sys.argv else 0.35
+    scale = float(sys.argv[sys.argv.index('--scale') + 1]) if '--scale' in sys.argv else 0.3
     sh = json.load(open(img_shot)) if img_shot else S.shot(view)
     txt = (f"# Card: Planet EARF, {S.VIEWS[view]['title']}\n\n**What the frame is for:** {FOR[view]}\n\n{CONTEXT}\n\n"
            f"{FIXED}\n\n{MAY}\n\n**Settings now:**\n\n{settings(sh, scale)}\n")
