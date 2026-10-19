@@ -125,6 +125,25 @@ def acrylic(bpy, kind='clear', name=None, glow=0.0, glow_col='#FFC890'):
     return m
 
 
+def etch_mat(bpy, p):
+    """Acid-etched glass, as a film on the pane: mostly clear, a warm translucent scatter (lit by the room behind it
+    far more than by the street) and a faint rough sheen."""
+    if 'frost-etch' in _M:
+        return _M['frost-etch']
+    m = bpy.data.materials.new('frost-etch'); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    tp = nt.nodes.new('ShaderNodeBsdfTransparent')
+    tl = nt.nodes.new('ShaderNodeBsdfTranslucent'); tl.inputs['Color'].default_value = lin(p.get('etch_col', '#E8D9C4'))
+    gl = nt.nodes.new('ShaderNodeBsdfGlossy'); gl.inputs['Roughness'].default_value = 0.35
+    m1 = nt.nodes.new('ShaderNodeMixShader'); m1.inputs['Fac'].default_value = p.get('etch_frost', 0.45)
+    nt.links.new(tp.outputs[0], m1.inputs[1]); nt.links.new(tl.outputs[0], m1.inputs[2])
+    m2 = nt.nodes.new('ShaderNodeMixShader'); m2.inputs['Fac'].default_value = 0.05
+    nt.links.new(m1.outputs[0], m2.inputs[1]); nt.links.new(gl.outputs[0], m2.inputs[2])
+    nt.links.new(m2.outputs[0], out.inputs['Surface'])
+    _M['frost-etch'] = m
+    return m
+
+
 def image_mat(bpy, img, strength, tint='#FFBE84'):
     tint = _SCREEN_TINT.get('tint', tint)
     """A glowing image plane (a screen): the picture's light, warm-neutral, both faces."""
@@ -412,8 +431,9 @@ def room(bpy, name, p, kit):
                 # the thin strokes refracted into dark stripes, street-p5)
                 # frosted transmission again (street-p6, both critics): the stripes it drew before came from marks.py's
                 # overlapping strokes, which the brand's clean outlines no longer have
-                sign_mat=lambda bpy, p: acrylic(bpy, 'frosted', 'frost-etch', glow=p.get('etch_glow', 0.03),
-                                                glow_col='#FFCC94'),
+                # street-p7 (both critics): as rough transmission it mirrored the night sky, a cool opaque grey; now
+                # acid etch on a thin film, part clear, part a warm translucent scatter of the room's light behind it
+                sign_mat=lambda bpy, p: etch_mat(bpy, p),
                 _curtain=lambda *a, **k: None)
     with _patched(**wood):
         D.shopfront(bpy, kit, p, objs)
@@ -434,7 +454,33 @@ def room(bpy, name, p, kit):
     pendants(bpy, kit, p, objs)
     partition(bpy, kit, p, objs)
     listen_props(bpy, kit, p, objs)
+    table_lamps(bpy, kit, p, objs)
     return objs
+
+
+TABLE_LAMP = dict(foot_r=0.065, foot_h=0.012, stem_r=0.006, shade_r=0.070, shade_z0=0.215, shade_h=0.125, wall=0.004,
+                  bulb_z=0.27)       # a cordless bar lamp, 340 mm tall: a steel foot and stem, an open frosted-glass drum
+
+
+def table_lamps(bpy, kit, p, objs):
+    """The table lamps where the den had Bell (the lead, 2026-10-19: no EARF lamp or record player in Planet until the
+    owner picks their second designs): a blackened-steel foot and stem, an open frosted-glass drum lit from inside."""
+    spots = p.get('table_lamps', [])
+    if not spots:
+        return
+    T = TABLE_LAMP; base = Mesh('table-lamp-steel'); shade = Mesh('table-lamp-shades'); bulb = Mesh('table-lamp-bulbs')
+    for x, y, z in spots:
+        _cyl(base.bm, x, y, z, T['foot_r'], T['foot_h'], seg=40)
+        _cyl(base.bm, x, y, z + T['foot_h'], T['stem_r'], T['shade_z0'] + T['shade_h'] - 0.02 - T['foot_h'], seg=12)
+        r0, r1, z0, h = T['shade_r'] - T['wall'], T['shade_r'], z + T['shade_z0'], T['shade_h']
+        _lathe(shade.bm, [(r0, 0.0), (r1, 0.0), (r1, h), (r0, h)], seg=48, z0=z0, cx=x, cy=y)
+        _cyl(bulb.bm, x, y, z + T['bulb_z'] - 0.02, 0.018, 0.04, seg=16)
+    objs.append(base.object(bpy, steel(bpy), smooth=True))
+    objs.append(shade.object(bpy, acrylic(bpy, 'frosted', 'table-lamp-frosted', glow=p.get('tlamp_glow', 0.35),
+                                          glow_col='#FFB46A'), smooth=True))
+    lamp = bulb.object(bpy, emitter(bpy, 'table-lamp-bulb', '#FFB060', p.get('tlamp_bulb', 2.0)), smooth=True)
+    lamp.visible_camera = False                    # as the pendants': the bulb lights the drum, never seen as a shape
+    objs.append(lamp)
 
 
 def listen_props(bpy, kit, p, objs):

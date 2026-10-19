@@ -34,7 +34,8 @@ DEFAULT = dict(S.DEFAULT, **dict(
 S.DEFAULT = DEFAULT
 LOFT_KEYS = ('screen_glow', 'screen_banquette-a', 'screen_banquette-b', 'screen_lounge', 'screen_window', 'inlay_glow',
              'pendant_lamp', 'concrete_tint', 'concrete_mix', 'concrete_tex', 'floor_acg', 'floor_tint', 'floor_mix',
-             'floor_coat', 'etch_glow', 'shade_glow', 'niche_glow', 'menu_color', 'screen_tint')
+             'floor_coat', 'etch_glow', 'shade_glow', 'niche_glow', 'menu_color', 'screen_tint', 'tlamp_glow',
+             'tlamp_bulb', 'etch_frost', 'etch_col')
 _room_piece = S.room_piece
 
 
@@ -46,6 +47,47 @@ def room_piece(v):
 
 
 S.room_piece = room_piece
+
+
+def lamp_spots(v):
+    """Where the den stood Bell: two banquette tables, the window table, the lounge's side tables, any extra."""
+    T = LP.TABLE
+    out = [[round(LP.TABLES[i] - 0.17, 4), round(T['y'] - 0.14, 4), T['h']] for i in S.BELL_TABLES]
+    out += [[LP.WINDOW_TABLE[0] - 0.12, LP.WINDOW_TABLE[1] + 0.10, T['h']]]
+    out += [[x, y, S.SIDE_H] for x, y in LP.SIDE_TABLES[1:]]
+    return out + [list(b) for b in v.get('extra_bells', [])]
+
+
+def room_piece(v, _rp=room_piece):
+    out = _rp(v)
+    out['table_lamps'] = lamp_spots(v)
+    return out
+
+
+S.room_piece = room_piece
+_products = S.products
+
+
+def products(v):
+    """The Ember speakers only: no Bell and no Cumulus in Planet (the lead, 2026-10-19: the owner has not picked their
+    second designs); a plain table lamp stands where Bell stood (the kit's table_lamps)."""
+    return [g for g in _products(v) if g['def'] == S.CLOUD]
+
+
+S.products = products
+_lights = S.lights
+
+
+def lights(v):
+    """The den's lights with each Bell's three strip lamps replaced by one bulb inside the table lamp's drum."""
+    L = {k: l for k, l in _lights(v).items() if not k.startswith('bell')}
+    for i, (x, y, z) in enumerate(lamp_spots(v)):
+        L[f'tlamp{i}'] = {'type': 'point', 'position': [x, y, round(z + 0.27, 4)], 'power_w': v['bell_w'],
+                          'radius_m': 0.02, 'color': v.get('tlamp_k', 2700), 'camera': False}
+    return L
+
+
+S.lights = lights
 
 VIEWS = {
     'bar': {'title': 'the bar, down the room',
@@ -84,15 +126,18 @@ VIEWS = {
                # after the two critics on p6 (4.5, 4.5): 35 mm from the kerb, the dancer's lightbox on the left edge and
                # the right-hand Ember speaker seen over the lounge chairs, clear of the bar; the name frosted glass again;
                # the lightbox lower and warm; less haze; a cooler balance; the shelf edges down
-               'camera': {'position': [-3.0, 3.0, 1.65], 'target': [6.85, 4.74, 1.6], 'lens_mm': 35, 'level': True,
+               # after the two critics on p7 (5.0, 4.5): the speaker a sliver: the camera 0.5 m right and turned left,
+               # the speaker lit harder; the name acid etch (a translucent film), not rough transmission; the haze less;
+               # the street lamps 2700 K; the pendants' lamps down, their tubes up; the shelf edges down; the lightbox up
+               'camera': {'position': [-3.0, 2.5, 1.6], 'target': [6.85, 5.1, 1.55], 'lens_mm': 35, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, 3.4, 1.6]},
                'settings': {'exposure': 1.7, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 120.0,
-                            'screen_glow': 0.4, 'screen_window': 0.22, 'screen_tint': '#FFA060', 'spot_niche': 120.0,
-                            'spk_link': True, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 90.0,
+                            'screen_glow': 0.4, 'screen_window': 0.35, 'screen_tint': '#FFA060', 'spot_niche': 120.0,
+                            'spk_link': True, 'lamp_k': 2700, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 150.0,
                             'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 15.0, 'entry_cone': 100.0,
-                            'transom_glow': 0.15, 'spk_irr': 18.0, 'spk_back': 30.0, 'spk_spread': 90.0,
-                            'pendant_w': 90.0, 'pendant_glow': 0.18, 'pendant_lamp': 1.6, 'inlay_glow': 0.6,
-                            'haze': 0.01, 'shelf_glow': 0.5, 'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440',
+                            'transom_glow': 0.15, 'spk_irr': 40.0, 'spk_back': 45.0, 'spk_spread': 90.0,
+                            'pendant_w': 90.0, 'pendant_glow': 0.25, 'pendant_lamp': 0.8, 'inlay_glow': 0.6,
+                            'haze': 0.004, 'shelf_glow': 0.2, 'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440',
                             'sky_horizon': '#2A3550', 'flat_glow': 0.06, 'across_glow': 0.05, 'linen_trans': 0.5,
                             'etch_glow': 0.03, 'glass_gloss': 3.0, 'chair_dye': '#2B2119'}},
 }

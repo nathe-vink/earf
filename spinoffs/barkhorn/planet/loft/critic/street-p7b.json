@@ -1,0 +1,380 @@
+{
+ "stage1": {
+  "impression": "A moody night view through a shopfront into a warm, hazy bar, and the composition (lightbox, a table lamp at the glass, a deep room) has the right idea. But it reads as CG. The name on the glass is opaque slate-blue extruded letters, not frosting. The glass reflects nothing of the street. A uniform grey veil flattens the whole room. The lightbox is a dull flat panel. The Ember speaker, which should be the hero, is only a faint red smear at the far end that you only find by searching.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker reads at a glance through a clear pane: a saturated red glowing silhouette, lum_median >= 70 and r_median >= 2x g_median in its region",
+  "The frosted name reads as acid-etched or frosted glass (translucent, warm-lit from behind, no cool cast, no visible thickness) and not as solid painted letters",
+  "The shopfront glass carries faint, believable reflections of the street (the lamps, the kerb) in its upper and lower areas",
+  "The room's haze no longer lifts the blacks evenly: shadows behind the glass reach lum_p5 <= 6 while the practicals keep their pools",
+  "The pendant lamps are not blown to bare white disks (clip_pct < 5 in the lamp)",
+  "The lightbox glows evenly and warmly, with a silhouette that reads as fogged, not as a flat grey card",
+  "Resolution and craft at the full 2400 px pass 1:1 checks: no tiling on the fir ceiling, no smeared denoise on the concrete"
+ ],
+ "defects": [
+  {
+   "region": [
+    160,
+    160,
+    412,
+    242
+   ],
+   "what": "The frosted name renders as opaque, cool blue-grey extruded letters with a visible side face (r70 g77 b85, the only cool colour in a warm frame). It reads as plastic signage, not frosting on the glass."
+  },
+  {
+   "region": [
+    525,
+    240,
+    560,
+    300
+   ],
+   "what": "The Ember speaker barely reads: a thin red line and a dim smear (lum_median 47, r65 g42 b30, nearly the same as the room around it at r61 g41 b28)."
+  },
+  {
+   "region": [
+    512,
+    138,
+    530,
+    156
+   ],
+   "what": "The pendant is a blown pure-white disk (clip 33 %, median 204) with no warmth or shape. It reads as a sprite."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No reflections at all on the shopfront glass. Real glass at night from the kerb mirrors the street lamps and the pavement."
+  },
+  {
+   "region": [
+    445,
+    190,
+    720,
+    330
+   ],
+   "what": "Uniform haze veil: the back room's p5 is 23.5 and its range is 70, so everything is milky and low-contrast, like fog in a game."
+  },
+  {
+   "region": [
+    10,
+    80,
+    130,
+    440
+   ],
+   "what": "The lightbox is a dull, cool-pink grey card (median 49) with a hard dark silhouette. It does not glow and reads as a poster."
+  },
+  {
+   "region": [
+    200,
+    40,
+    720,
+    150
+   ],
+   "what": "The fir ceiling shows blocky, repeating patches of texture (tiling) and no checks or nail holes."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    50
+   ],
+   "what": "The steel fascia over the window has a stuck-on, mottled decal texture across its middle (x 400-500) that reads as a texture seam."
+  },
+  {
+   "region": [
+    370,
+    260,
+    430,
+    280
+   ],
+   "what": "The bottles on the back-bar read as a row of identical, evenly lit white dots (repeated model)."
+  },
+  {
+   "region": [
+    0,
+    440,
+    720,
+    480
+   ],
+   "what": "The bottom of the frame (the sill and the kerb) is empty and dark, with no sign of the street or of life outside."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero speaker is invisible at a glance: it has the same tone and colour as the room around it.",
+   "evidence": {
+    "region": [
+     525,
+     240,
+     560,
+     300
+    ],
+    "measured": "lum_median 46.9, r/g/b 65/42/30, against 61/41/28 for the back room [445,190,720,330]"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area, W/m2 at the target; plus the speaker's lamps and pinholes",
+    "from": "18.0 W/m2, 2700 K",
+    "to": "45 W/m2, 2700 K, with the area lights moved behind and beside the cabinet so light passes through the red acrylic and rims its edges, not only falls on its front"
+   },
+   "expected": "A glowing red silhouette at the end of the room, clearly the only saturated object in the frame",
+   "accept": {
+    "region": [
+     525,
+     240,
+     560,
+     300
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The frosted name reads as solid, cool-blue plastic letters, not frosting, and brings a second colour into the frame.",
+   "evidence": {
+    "region": [
+     165,
+     165,
+     240,
+     240
+    ],
+    "measured": "median 76, r/g/b 70/77/85 (blue-dominant), hard opaque fill with a side face"
+   },
+   "change": {
+    "setting": "the window's frosted name: frosted acrylic roughness and emission",
+    "from": "emission 0.03, opaque look, lit cool by the 3000 K street lamps",
+    "to": "a translucent frost (transmission ~0.8, roughness ~0.6, no thickness), emission 0.0, so it is lit warm from the room behind; drop the street lamps to 2700 K"
+   },
+   "expected": "Letters read as a soft, warm-grey translucent veil on the glass, slightly brighter than the room behind them, with b_median no higher than r_median",
+   "accept": {
+    "region": [
+     165,
+     165,
+     240,
+     240
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The haze lifts every shadow evenly, so the room is milky and low in contrast.",
+   "evidence": {
+    "region": [
+     445,
+     190,
+     720,
+     330
+    ],
+    "measured": "lum_p5 23.5, lum_range 70.3"
+   },
+   "change": {
+    "setting": "haze in the room's air: density",
+    "from": "0.01 per metre",
+    "to": "0.003 per metre"
+   },
+   "expected": "Deeper shadows between the pools of light, with the lamps' pools and the speaker standing out. The frame median stays at about 25-32.",
+   "accept": {
+    "region": [
+     445,
+     190,
+     720,
+     330
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The shopfront glass shows no reflections, which is the strongest sign of a render in a through-the-window shot.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "Seen: no mirrored street lamps, pavement or opposite facade anywhere on the glass"
+   },
+   "change": {
+    "setting": "street lamps and the street behind the camera",
+    "from": "3 x point, 120 W, 3000 K, nothing behind the camera for the glass to mirror",
+    "to": "Keep the 3 street lamps but put a visible lamp head and a dim facade behind the camera (on the far kerb) so the glass picks up faint (5-10 %) reflections in its upper left and lower right; set the glass's IOR to 1.52 with no anti-reflective tweak"
+   },
+   "expected": "Faint warm reflections layered over the room, mostly in the upper and lower thirds, without hiding the speaker",
+   "accept": {
+    "region": [
+     440,
+     380,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The pendant's lamp is a blown pure-white disk with no colour.",
+   "evidence": {
+    "region": [
+     512,
+     138,
+     530,
+     156
+    ],
+    "measured": "clip_pct 32.7, median 204, r/g/b 209/203/197 (near neutral)"
+   },
+   "change": {
+    "setting": "the pendants' lamps emission",
+    "from": "1.6",
+    "to": "0.6, with the frosted tube emission raised from 0.18 to 0.3 so the fitting reads as a glowing shape"
+   },
+   "expected": "A warm amber pendant with visible form, not clipped",
+   "accept": {
+    "region": [
+     512,
+     138,
+     530,
+     156
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The lightbox reads as a dull grey poster, not a frosted panel glowing from behind.",
+   "evidence": {
+    "region": [
+     10,
+     80,
+     130,
+     440
+    ],
+    "measured": "lum_median 48.8, r/g/b 60/46/42, p95 only 59"
+   },
+   "change": {
+    "setting": "the screens' images emission, and the frosted acrylic's roughness",
+    "from": "0.4",
+    "to": "0.9, with the frost roughness raised so the silhouette's edges blur another 2-3x and read as fog"
+   },
+   "expected": "An evenly glowing warm panel (median ~85-110) with a soft, fogged figure. It stays below the hero speaker in saturation.",
+   "accept": {
+    "region": [
+     10,
+     80,
+     130,
+     440
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     80,
+     115
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The fir ceiling and the fascia show tiling and texture patches.",
+   "evidence": {
+    "region": [
+     200,
+     40,
+     720,
+     150
+    ],
+    "measured": "Seen: blocky repeated patches along the beams, and a mottled decal at x 400-500 on the fascia [0,0,720,50]"
+   },
+   "change": {
+    "setting": "the stain of the fir and the steel's patina (materials' finish)",
+    "from": "repeating image textures",
+    "to": "Randomise the UVs per beam (offset and rotation), add procedural checks and darker end grain, and give the steel fascia a continuous, low-contrast brown-black patina without the decal patch"
+   },
+   "expected": "Beams that each read as distinct old timber, and a fascia that reads as one sheet of blackened steel",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     50
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 28
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The kerb side is empty and the back-bar's bottles read as identical copies.",
+   "evidence": {
+    "region": [
+     370,
+     260,
+     430,
+     280
+    ],
+    "measured": "Seen: a row of identical, evenly lit bottle dots; nothing on the sill or the kerb"
+   },
+   "change": {
+    "setting": "props",
+    "from": "bottles of one model, nothing at the window",
+    "to": "Mix 4-5 bottle shapes and heights on the back-bar; put a half-drunk coupe and a folded menu on the window table and a coat over the near chair"
+   },
+   "expected": "The room reads as lived in and the back-bar as real stock",
+   "accept": {
+    "region": [
+     370,
+     255,
+     430,
+     285
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 80
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Place the Ember pair nearer the window or make it larger in the frame",
+   "why": "The layout is fixed. Use light (c1) or a longer lens/camera move, not a change to the room."
+  },
+  {
+   "request": "Remove the dimensional depth of the letters if they are modelled as extruded solids",
+   "why": "The shopfront's design is fixed. If the name is modelled as thick letters, changing it is a design question for the owner, not a finish fix."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

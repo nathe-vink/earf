@@ -1,0 +1,341 @@
+{
+ "stage1": {
+  "impression": "A believable night kerb view into a warm, hazy bar. The fogged dancer in the lightbox on the left is the best thing in the frame and reads as a real frosted panel. But the window name reads as flat, cool, blue-grey painted letters, not frosted glass. A milky veil flattens the whole room behind the glass, and the denoiser smears the back walls. The one thing that should hold the eye, the red speaker, is only a thin red sliver half hidden behind a dark partition, so the frame has no hero. It reads as a competent CG mood frame rather than a photograph.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember speaker must read at a glance through a clear pane: its full silhouette visible (not hidden behind the dark partition at x 555-630), its red tint and the light through its acrylic legible, region lum_median >= 60",
+  "The frosted name in the glass must read as acid-etched or frosted glass (warm-neutral, slightly translucent, soft edge), not cool blue-grey vinyl: b_median not above r_median, and lum below the dancer lightbox",
+  "The room behind the glass needs depth and contrast instead of a uniform milky veil: interior lum_p5 <= 8 with highlights still held, so the pools of light read",
+  "No denoiser mottling on the back walls and the right-hand plaster/concrete wall at full size",
+  "The back-bar shelves' lit edges must stop reading as cool white neon stripes floating through the letters",
+  "Some sign of life near the camera (a glass mid-drink, a coat on a chair, a person blurred at the bar) and a faint believable street reflection in the glass"
+ ],
+ "defects": [
+  {
+   "region": [
+    534,
+    240,
+    548,
+    295
+   ],
+   "what": "The Ember speaker shows only as a narrow red strip, mostly occluded by the dark door or partition block at 555-630; no silhouette, no horn, and its tint can barely be read"
+  },
+  {
+   "region": [
+    160,
+    160,
+    410,
+    240
+   ],
+   "what": "The frosted name reads as opaque cool-grey painted letters (RGB 74/79/85, the only cool element in the frame), brighter than the room behind it, with no translucency"
+  },
+  {
+   "region": [
+    200,
+    180,
+    420,
+    265
+   ],
+   "what": "The back-bar shelves' lit edges show as hard white lines that look like neon tubes, slicing across the letters"
+  },
+  {
+   "region": [
+    500,
+    130,
+    545,
+    160
+   ],
+   "what": "A bare pendant lamp shows as a blown white disc (7.9% clipped), a CG orb with no fitting"
+  },
+  {
+   "region": [
+    440,
+    190,
+    720,
+    480
+   ],
+   "what": "A uniform haze or veil lifts the shadows: the interior has p5 of 12 and a narrow tonal range, and the far room looks fogged rather than dim"
+  },
+  {
+   "region": [
+    600,
+    150,
+    720,
+    330
+   ],
+   "what": "Denoiser smear and blotchy mottling on the right-hand wall and back wall; the texture reads as a low-sample blur"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    60
+   ],
+   "what": "The blackened-steel fascia and mullions are nearly flat black, with no sheen, patina or crisp edge highlight from the street"
+  },
+  {
+   "region": [
+    550,
+    300,
+    720,
+    420
+   ],
+   "what": "The dining chairs repeat as identical dark silhouettes in a row"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speaker is hidden behind the listening room's dark partition, so the frame has no subject.",
+   "evidence": {
+    "region": [
+     534,
+     240,
+     548,
+     295
+    ],
+    "measured": "a red strip about 14 px wide, lum_median 51, the rest of the cabinet occluded by the dark block at x 555-630 (lum about 20)"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "position [-3.0, 3.0, 1.65], target [6.85, 4.74, 1.6]",
+    "to": "position [-3.0, 2.3, 1.55], target aimed at the Ember speaker's centre (about 1.0 m up), placed on the right third through the clear pane; keep the lightbox and the name in frame on the left"
+   },
+   "expected": "The whole Ember cabinet, about 60-80 px tall at proof scale, is visible through a clear pane between the mullions, glowing red, on the right third.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "Even where it is visible, the Ember barely rises above the room; it does not glow as the hero.",
+   "evidence": {
+    "region": [
+     520,
+     230,
+     580,
+     320
+    ],
+    "measured": "lum_median 38, about the same as the surrounding room at 33"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area",
+    "from": "18.0 W/m2 at the target",
+    "to": "45.0 W/m2 at the target, and raise the speaker's pinholes or lamps so the white batts glow through the red acrylic"
+   },
+   "expected": "The speaker region sits at 1.8-2.5x the room's median, red-dominant, the brightest saturated object in the frame.",
+   "accept": {
+    "region": [
+     520,
+     230,
+     580,
+     320
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The haze over 17 m of room plus the window veils the interior, lifting the blacks and smearing detail.",
+   "evidence": {
+    "region": [
+     440,
+     190,
+     720,
+     480
+    ],
+    "measured": "lum_p5 12.3, lum_range 72, the back room greyed out"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.01 per metre",
+    "to": "0.004 per metre"
+   },
+   "expected": "Deeper shadows between the pools of light, the back wall and chairs crisp, and less noise for the denoiser to smear.",
+   "accept": {
+    "region": [
+     440,
+     190,
+     720,
+     480
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The name in the glass reads as cool grey vinyl, not frosted glass, and it is the frame's only cool colour.",
+   "evidence": {
+    "region": [
+     160,
+     160,
+     410,
+     240
+    ],
+    "measured": "RGB median 74/79/85 (blue above red), lum_median 78, brighter than the lightbox at 49"
+   },
+   "change": {
+    "setting": "the window's frosted name (emission and finish)",
+    "from": "emission 0.03, cool grey, opaque",
+    "to": "emission 0.0, a neutral white frosted transmission (roughness about 0.4, transmission 0.6) so the warm room shows through softly and the letters catch the street light only at their edges"
+   },
+   "expected": "The letters read as etched glass: warm-neutral, lum about 45-60, the room faintly visible through them.",
+   "accept": {
+    "region": [
+     160,
+     160,
+     410,
+     240
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     42,
+     62
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The shelves' lit edges read as cold neon stripes across the letters.",
+   "evidence": {
+    "region": [
+     200,
+     180,
+     420,
+     265
+    ],
+    "measured": "near-white lines against a room at lum about 30, visibly cooler than the 2400 K pendants"
+   },
+   "change": {
+    "setting": "the shelves' lit edges",
+    "from": "0.5",
+    "to": "0.2, colour matched to 2400 K"
+   },
+   "expected": "The back-bar edges become soft warm lines that light the bottles rather than drawing stripes.",
+   "accept": {
+    "region": [
+     200,
+     180,
+     420,
+     265
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "A bare pendant lamp blows out to a white disc that competes with the speaker.",
+   "evidence": {
+    "region": [
+     500,
+     130,
+     545,
+     160
+    ],
+    "measured": "clip_pct 7.85, lum_p95 255"
+   },
+   "change": {
+    "setting": "the pendants' lamps",
+    "from": "1.6",
+    "to": "0.9 (and the frosted tubes 0.18 to 0.25 so the fitting reads, not just the lamp)"
+   },
+   "expected": "The pendant reads as a lit fitting with a hot core, not a floating orb.",
+   "accept": {
+    "region": [
+     500,
+     130,
+     545,
+     160
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 3
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "Denoiser smear and mottling on the back walls read as CG.",
+   "evidence": {
+    "region": [
+     600,
+     150,
+     720,
+     330
+    ],
+    "measured": "blotchy low-frequency texture visible on a 3x crop; the plaster or concrete grain is lost"
+   },
+   "change": {
+    "setting": "render samples / adaptive",
+    "from": "256 samples, adaptive 0.02",
+    "to": "768 samples, adaptive 0.01, denoise kept on with albedo and normal passes; add a light film grain in the grade"
+   },
+   "expected": "The wall texture holds at 1:1 and the noise reads as grain, not smear.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The blackened-steel shopfront reads as flat black, with no patina or sheen at its edges.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     60
+    ],
+    "measured": "lum_median 11.6, p95 31.6, crush 11.9%"
+   },
+   "change": {
+    "setting": "street lamps 3 x point, and the steel's finish",
+    "from": "120.0 W, 3000 K, uniform steel",
+    "to": "one street lamp moved high left at 200 W to rake the fascia; steel roughness varied 0.35-0.6 with a brown patina so the edges catch a highlight; add a faint street reflection in the glass"
+   },
+   "expected": "The fascia and mullions show soft uneven sheen and sharp lit edges, framing the window like real steel.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     60
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 45
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move or remove the dark partition or door that hides the Ember speaker",
+   "why": "The room's layout is fixed; the camera move (c1) is the route instead."
+  },
+  {
+   "request": "Vary the identical dining chairs",
+   "why": "The furniture is part of the room's design as proposed; the owner would have to approve varied chairs as a design change. A coat or bag on one chair (a prop) can break the repeat within scope."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
