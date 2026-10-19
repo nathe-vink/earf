@@ -59,12 +59,13 @@ ELEMENT = dict(HABITAT)       # which concept each colour shows in its element: 
 ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a blind duel, 2 to 1 (6.2 to 5.9)
 ELEMENT['amber'] = 'acid_b'   # acid rain on black lava beat the acid spring at Dallol in a blind duel, 2 to 1 (6.3 to 5.4)
 ELEMENT['ice'] = 'fog_b'      # the headland above the fog at dawn beat the summit above a sea of cloud in a blind duel, 3 to 0 (6.7 to 4.7)
-ELEMENT['green'] = 'poison_a3'  # A's redwood floor with its poisons beat A in full-size blind duels, 3 judges to 1 (+0.45, +0.1)
+ELEMENT['green'] = 'poison_a4'  # the poisons where the eye meets them: it reads as poisonous at 600 px (A3 doesn't), -0.5 against A3 at full size
 PLACES = {  # where each concept stands: the speaker page leads with it ("Ember on a lava field at blue hour.")
     'ember': 'on a lava field at blue hour, the crust cracked to its glow',
     'dust': 'on rippled sand in the Southwest at golden hour',
     'acid': 'by the acid springs of Dallol', 'acid_b': 'in acid rain on black lava',
     'poison': 'on a redwood forest floor, among ferns', 'poison_a3': 'on a redwood forest floor, among ferns, foxgloves and fly agarics',
+    'poison_a4': 'on a redwood forest floor, behind a troop of fly agarics, among ferns and foxgloves',
     'ice': 'in snow country at blue hour', 'ice_b': 'on a black-sand beach among icebergs at sunrise',
     'haze': 'in a lavender field at dusk', 'haze_b': 'before layered hills in a hazy evening light',
     'fog': 'on a summit above a sea of cloud', 'fog_b': 'on a headland above the fog at dawn',
