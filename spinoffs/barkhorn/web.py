@@ -130,7 +130,7 @@ LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band does
     'lamp-dome': (800, None), 'lamp-orb': (800, None),
     'lamps-orbs': (1200, 'Eight Orbs in a row, lit, in spectrum order: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke'),
     'lamps-domes': (1200, 'Eight Dome pendants hung in a row at one height, lit, one in each colour'),
-    'lamp-catch': (900, "The Dome's cover lowered off its black hub, the catch's pins and slots in view"),
+    'lamp-catch': (900, "The Dome's black hub and collar up close, the quarter-turn catch's slot and pin over an Acid cover"),
     'lamps-unlit': (800, 'An Orb and a Dome in Smoke, switched off: dark, polished acrylic with a pale core'),
     'lamp-cartridge': (900, 'The Orb in Ember, its battery cartridge slid half out of the back of its black acrylic base'),
 }
