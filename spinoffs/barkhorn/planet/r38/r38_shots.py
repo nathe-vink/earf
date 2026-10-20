@@ -60,7 +60,7 @@ def props(v):
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'column',
                 'spots': [[round(RP.DJ['x'] + 0.80, 4), round(C['y1'] - 0.30, 4), zt]], 'rotate_z': 0.0,
                 'coins': ['ice', 'ember', 'acid', 'smoke', 'haze', 'dust', 'fog', 'poison', 'ember', 'ice', 'acid', 'haze',
-                          'dust', 'smoke'], 'out': 6.0, 'base_glow': v.get('column_glow', 1.0)})
+                          'dust', 'smoke'], 'out': 6.0, 'base_glow': v.get('column_glow', 0.45)})   # dimmed in the bar (the lead: the tints lead; the kit's 1.0 stays)
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan',
                 'spots': [[4.35, round(C['y0'] + 0.16, 4), zt]], 'flavours': ['dust', 'fog', 'poison'], 'heading': 15.0})
     H = RP.HOST
