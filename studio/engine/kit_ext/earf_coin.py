@@ -13,7 +13,8 @@ face and edge in one GLB; companions/out-coin-column), with their materials in a
   little `jitter` (mm) and turn between coins as a hand leaves them, `seed`;
 - column: `spots` where the request column stands; `coins` the queue's flavours from the bottom (the next song
   first), `out` (mm) how far the lowest is pushed out of its slot at the front, `rotate_z`; `base_glow` the light in
-  its base (1.0 on as designed, 0 off): the LED, and the tube's frosted back half glowing behind the queue;
+  its base (1.0 on as designed, 0 off): the LED, and the tube's frosted back half glowing behind the queue, at
+  `back_glow` of it (BACK_GLOW by default: a soft glow behind the queue, not a lightbox);
 - fan: `spots` where the first coin lies; the coins dealt along a gentle arc, `s` (mm, 30) apart, each resting its
   trailing edge on the one before (the tilt solved from that), `flavours` in order, `arc` its radius (mm, 320; 0 for a
   line), `heading` (deg) the direction it runs;
@@ -41,6 +42,8 @@ T = 0.006                     # the coin's thickness (m)
 D = 0.040                     # across
 GAP = 0.00002                 # a hair between faces that would otherwise touch
 FLOOR = 0.0132                # the column's slot floor above its foot (coin.column_parts)
+BACK_GLOW = 1.0               # the column's frost, as a share of its light (tuned from a counter stool, round 33)
+BACK_FADE = (1.0, 0.45, 0.15, 0.05)   # its four bands up from the foot (coin.BANDS: 0-50, 50-100, 100-150, 150-210 mm)
 SPECTRUM = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
 FACE_PARTS = {'engraved': ['globe-engraved', 'words'],
               'printed': ['print-*', 'underlay', 'words'],
@@ -193,7 +196,10 @@ def column(bpy, name, p, kit):
     glow = p.get('base_glow', 0.0)
     over = dict(p.get('materials', {}))
     over['led'] = {**over.get('led', {}), 'strength': 20.0 * glow}
-    over['tube-frost'] = {**over.get('tube-frost', {}), 'glow': 0.6 * glow}
+    # back_glow: the frosted back half's glow as a share of the LED's (the lead, from Planet's bar: at full it outshone
+    # the queue, a lightbox with a dark stack in it); BACK_GLOW, tuned from a counter stool, lets the coins' tints lead
+    for i, k in enumerate(BACK_FADE):              # brightest at the foot, behind the queue; dim at the empty top
+        over[f'tube-frost{i}'] = {**over.get(f'tube-frost{i}', {}), 'glow': 0.6 * glow * p.get('back_glow', BACK_GLOW) * k}
     cp = dict(p, materials=over)
     cm = _Mats(bpy, 'column', cp)
     mats = _Mats(bpy, 'coin', p)

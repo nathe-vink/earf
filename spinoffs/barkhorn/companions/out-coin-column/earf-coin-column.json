@@ -44,13 +44,43 @@
    "radius": 0.012,
    "roughness": 0.03
   },
-  "tube-frost": {
+  "tube-frost0": {
    "preset": "frosted",
    "color": "#F4F2EE",
    "absorb": "#F2EEE6",
-   "roughness": 0.45,
+   "roughness": 0.35,
    "radius": 0.02,
-   "clear": 0.35,
+   "clear": 0.7,
+   "glow": 0.0,
+   "glow_color": "#FFB070"
+  },
+  "tube-frost1": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F2EEE6",
+   "roughness": 0.35,
+   "radius": 0.02,
+   "clear": 0.7,
+   "glow": 0.0,
+   "glow_color": "#FFB070"
+  },
+  "tube-frost2": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F2EEE6",
+   "roughness": 0.35,
+   "radius": 0.02,
+   "clear": 0.7,
+   "glow": 0.0,
+   "glow_color": "#FFB070"
+  },
+  "tube-frost3": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F2EEE6",
+   "roughness": 0.35,
+   "radius": 0.02,
+   "clear": 0.7,
    "glow": 0.0,
    "glow_color": "#FFB070"
   }
@@ -81,8 +111,20 @@
    "material": "smoke-base"
   },
   {
-   "match": "tube-back",
-   "material": "tube-frost"
+   "match": "tube-back0",
+   "material": "tube-frost0"
+  },
+  {
+   "match": "tube-back1",
+   "material": "tube-frost1"
+  },
+  {
+   "match": "tube-back2",
+   "material": "tube-frost2"
+  },
+  {
+   "match": "tube-back3",
+   "material": "tube-frost3"
   }
  ],
  "flavours": {

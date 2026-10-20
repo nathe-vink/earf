@@ -55,12 +55,12 @@ def props(v):
     if not v.get('coins'):
         return out
     RP = T37.RP; C = RP.COUNTER; zt = C['top_z']
-    # the request column, lit from inside (the lead, 2026-10-20; r31-coin 2fc994c: the LED disc in its Smoke base and a
+    # the request column, lit from inside (the lead, 2026-10-20; r31-coin 2fc994c then 410356d: the LED disc in its Smoke base and a
     # bead-blasted back half of the tube glowing behind the queue)
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'column',
                 'spots': [[round(RP.DJ['x'] + 0.80, 4), round(C['y1'] - 0.30, 4), zt]], 'rotate_z': 0.0,
                 'coins': ['ice', 'ember', 'acid', 'smoke', 'haze', 'dust', 'fog', 'poison', 'ember', 'ice', 'acid', 'haze',
-                          'dust', 'smoke'], 'out': 6.0, 'base_glow': v.get('column_glow', 0.45)})   # dimmed in the bar (the lead: the tints lead; the kit's 1.0 stays)
+                          'dust', 'smoke'], 'out': 6.0, 'base_glow': 1.0, 'back_glow': 1.0})   # r31-coin 410356d, tuned from this stool
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan',
                 'spots': [[4.35, round(C['y0'] + 0.16, 4), zt]], 'flavours': ['dust', 'fog', 'poison'], 'heading': 15.0})
     H = RP.HOST

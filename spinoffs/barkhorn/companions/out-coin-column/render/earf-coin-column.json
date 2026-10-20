@@ -16,10 +16,34 @@
    -0.0,
    230.0
   ],
-  "tube-back": [
+  "tube-back0": [
    -25.0,
    0.0,
    20.0,
+   25.0,
+   25.0,
+   70.0
+  ],
+  "tube-back1": [
+   -25.0,
+   0.0,
+   70.0,
+   25.0,
+   25.0,
+   120.0
+  ],
+  "tube-back2": [
+   -25.0,
+   0.0,
+   120.0,
+   25.0,
+   25.0,
+   170.0
+  ],
+  "tube-back3": [
+   -25.0,
+   0.0,
+   170.0,
    25.0,
    25.0,
    230.0
@@ -60,7 +84,10 @@
  "finishes": {
   "base": "smoke-base",
   "tube-front": "clear",
-  "tube-back": "tube-frost",
+  "tube-back0": "tube-frost0",
+  "tube-back1": "tube-frost1",
+  "tube-back2": "tube-frost2",
+  "tube-back3": "tube-frost3",
   "ring": "brass",
   "plate": "aluminium",
   "led": "led",
