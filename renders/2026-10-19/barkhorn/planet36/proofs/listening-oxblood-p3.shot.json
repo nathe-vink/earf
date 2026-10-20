@@ -1,0 +1,632 @@
+{
+ "title": "Planet EARF, the listening zone, oxblood (round 36)",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   12.5,
+   1.75,
+   1.08
+  ],
+  "target": [
+   16.6,
+   3.35,
+   1.05
+  ],
+  "lens_mm": 35,
+  "level": true,
+  "fstop": 2.8,
+  "focus": [
+   16.5,
+   1.9,
+   0.95
+  ]
+ },
+ "products": [
+  {
+   "def": "studio/products/barkhorn-cloud.json",
+   "flavour": "cloud-red",
+   "instances": [
+    {
+     "flavour": "cloud-red",
+     "position": [
+      16.55,
+      1.9,
+      0.46
+     ],
+     "rotate_z": -108.69,
+     "hide": [
+      "cloth-disc"
+     ]
+    },
+    {
+     "flavour": "cloud-red",
+     "position": [
+      16.55,
+      4.2,
+      0.46
+     ],
+     "rotate_z": -71.31,
+     "hide": [
+      "cloth-disc"
+     ]
+    }
+   ]
+  }
+ ],
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "planet_r36",
+    "fn": "room",
+    "colourway": "oxblood",
+    "dome_w": 30.0,
+    "dome_glow": 1.1,
+    "sphere_w": 6.0,
+    "sphere_glow": 1.1,
+    "disc_col": "#FF5A3A",
+    "disc_glow": 0.8,
+    "disc_lamp": 60.0,
+    "name_glow": 0.25,
+    "niche_strip": 6.0,
+    "sink_glow": 0.8,
+    "screen_glow": 0.35,
+    "screen_tint": "#FFA060",
+    "screen_gap": 0.04,
+    "screen_rough": 0.22,
+    "etch_glow": 0.01,
+    "etch_frost": 0.3,
+    "shade_glow": 0.12,
+    "street": true,
+    "neighbour_plain": true,
+    "flat_glow": 0.06,
+    "flame": 60.0,
+    "windows_lit": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     -3.16,
+     -6.0,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     -3.16,
+     15.1,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "flavour": "smoked",
+    "spots": [
+     [
+      4.95,
+      4.4,
+      1.72
+     ],
+     [
+      6.25,
+      4.4,
+      1.72
+     ],
+     [
+      7.5,
+      4.4,
+      1.72
+     ],
+     [
+      8.7,
+      4.4,
+      1.72
+     ]
+    ],
+    "ceiling": 3.4,
+    "lamp_w": 30.0,
+    "lamp_k": 2700,
+    "shade_glow": 1.1,
+    "noshadow": "shell|liner|skin"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "orb",
+    "spots": [
+     {
+      "position": [
+       4.38,
+       0.9700000000000001,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       5.93,
+       0.9700000000000001,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       7.48,
+       0.9700000000000001,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       9.03,
+       0.9700000000000001,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       1.17,
+       4.359999999999999,
+       0.74
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       13.15,
+       3.05,
+       0.66
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       14.15,
+       0.5999999999999996,
+       0.66
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       14.15,
+       5.5,
+       0.66
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       12.55,
+       1.9999999999999998,
+       0.66
+      ],
+      "flavour": "smoked"
+     },
+     {
+      "position": [
+       12.55,
+       4.1,
+       0.66
+      ],
+      "flavour": "smoked"
+     }
+    ],
+    "lamp_w": 6.0,
+    "lamp_k": 2700,
+    "shade_glow": 1.1,
+    "noshadow": "shell|liner|skin"
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#05070C",
+  "horizon": "#141824",
+  "ground": "#08080A",
+  "strength": 0.0
+ },
+ "lights": {
+  "spk0": {
+   "type": "area",
+   "position": [
+    15.697,
+    2.188,
+    3.1999999999999997
+   ],
+   "target": [
+    16.55,
+    1.9,
+    1.0
+   ],
+   "size_m": [
+    0.35,
+    0.35
+   ],
+   "irradiance": 2.0,
+   "color": 2900,
+   "spread_deg": 90.0,
+   "receivers": [
+    "*#0"
+   ]
+  },
+  "spkb0": {
+   "type": "area",
+   "position": [
+    16.88,
+    1.9,
+    0.75
+   ],
+   "target": [
+    16.55,
+    1.9,
+    1.0
+   ],
+   "size_m": [
+    0.3,
+    0.3
+   ],
+   "irradiance": 12.0,
+   "color": 2900,
+   "camera": false,
+   "receivers": [
+    "*#0"
+   ]
+  },
+  "spk1": {
+   "type": "area",
+   "position": [
+    15.697,
+    3.912,
+    3.1999999999999997
+   ],
+   "target": [
+    16.55,
+    4.199999999999999,
+    1.0
+   ],
+   "size_m": [
+    0.35,
+    0.35
+   ],
+   "irradiance": 2.0,
+   "color": 2900,
+   "spread_deg": 90.0,
+   "receivers": [
+    "*#1"
+   ]
+  },
+  "spkb1": {
+   "type": "area",
+   "position": [
+    16.88,
+    4.199999999999999,
+    0.75
+   ],
+   "target": [
+    16.55,
+    4.199999999999999,
+    1.0
+   ],
+   "size_m": [
+    0.3,
+    0.3
+   ],
+   "irradiance": 12.0,
+   "color": 2900,
+   "camera": false,
+   "receivers": [
+    "*#1"
+   ]
+  },
+  "pend0": {
+   "type": "spot",
+   "position": [
+    4.95,
+    4.4,
+    1.82
+   ],
+   "target": [
+    4.95,
+    4.2700000000000005,
+    1.07
+   ],
+   "power_w": 260.0,
+   "cone_deg": 30.0,
+   "blend": 0.6,
+   "radius_m": 0.04,
+   "color": 2400,
+   "camera": false
+  },
+  "pend1": {
+   "type": "spot",
+   "position": [
+    6.25,
+    4.4,
+    1.82
+   ],
+   "target": [
+    6.25,
+    4.2700000000000005,
+    1.07
+   ],
+   "power_w": 260.0,
+   "cone_deg": 30.0,
+   "blend": 0.6,
+   "radius_m": 0.04,
+   "color": 2400,
+   "camera": false
+  },
+  "pend2": {
+   "type": "spot",
+   "position": [
+    7.5,
+    4.4,
+    1.82
+   ],
+   "target": [
+    7.5,
+    4.2700000000000005,
+    1.07
+   ],
+   "power_w": 260.0,
+   "cone_deg": 30.0,
+   "blend": 0.6,
+   "radius_m": 0.04,
+   "color": 2400,
+   "camera": false
+  },
+  "pend3": {
+   "type": "spot",
+   "position": [
+    8.7,
+    4.4,
+    1.82
+   ],
+   "target": [
+    8.7,
+    4.2700000000000005,
+    1.07
+   ],
+   "power_w": 260.0,
+   "cone_deg": 30.0,
+   "blend": 0.6,
+   "radius_m": 0.04,
+   "color": 2400,
+   "camera": false
+  },
+  "candle0": {
+   "type": "point",
+   "position": [
+    4.95,
+    4.17,
+    1.105
+   ],
+   "power_w": 3.0,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "candle1": {
+   "type": "point",
+   "position": [
+    8.55,
+    4.17,
+    1.105
+   ],
+   "power_w": 3.0,
+   "radius_m": 0.006,
+   "color": 1900,
+   "camera": false
+  },
+  "street0": {
+   "type": "point",
+   "position": [
+    -2.2600000000000002,
+    -6.0,
+    5.6
+   ],
+   "power_w": 500.0,
+   "radius_m": 0.15,
+   "color": 2700
+  },
+  "street1": {
+   "type": "point",
+   "position": [
+    -2.2600000000000002,
+    15.1,
+    5.6
+   ],
+   "power_w": 500.0,
+   "radius_m": 0.15,
+   "color": 2700
+  },
+  "rw0": {
+   "type": "spot",
+   "position": [
+    4.6,
+    5.1499999999999995,
+    3.08
+   ],
+   "target": [
+    4.6,
+    6.05,
+    2.0
+   ],
+   "power_w": 30.0,
+   "cone_deg": 26.0,
+   "blend": 0.8,
+   "radius_m": 0.03,
+   "color": 2600,
+   "camera": false
+  },
+  "rw1": {
+   "type": "spot",
+   "position": [
+    6.0,
+    5.1499999999999995,
+    3.08
+   ],
+   "target": [
+    6.0,
+    6.05,
+    2.0
+   ],
+   "power_w": 30.0,
+   "cone_deg": 26.0,
+   "blend": 0.8,
+   "radius_m": 0.03,
+   "color": 2600,
+   "camera": false
+  },
+  "rw2": {
+   "type": "spot",
+   "position": [
+    8.0,
+    5.1499999999999995,
+    3.08
+   ],
+   "target": [
+    8.0,
+    6.05,
+    2.0
+   ],
+   "power_w": 30.0,
+   "cone_deg": 26.0,
+   "blend": 0.8,
+   "radius_m": 0.03,
+   "color": 2600,
+   "camera": false
+  },
+  "rw3": {
+   "type": "spot",
+   "position": [
+    9.6,
+    5.1499999999999995,
+    3.08
+   ],
+   "target": [
+    9.6,
+    6.05,
+    2.0
+   ],
+   "power_w": 30.0,
+   "cone_deg": 26.0,
+   "blend": 0.8,
+   "radius_m": 0.03,
+   "color": 2600,
+   "camera": false
+  },
+  "altar0": {
+   "type": "spot",
+   "position": [
+    16.75,
+    2.05,
+    2.56
+   ],
+   "target": [
+    16.55,
+    2.05,
+    0.8500000000000001
+   ],
+   "power_w": 90.0,
+   "cone_deg": 36.0,
+   "blend": 0.9,
+   "radius_m": 0.03,
+   "color": 2500,
+   "camera": false
+  },
+  "altar1": {
+   "type": "spot",
+   "position": [
+    16.75,
+    4.05,
+    2.56
+   ],
+   "target": [
+    16.55,
+    4.05,
+    0.8500000000000001
+   ],
+   "power_w": 90.0,
+   "cone_deg": 36.0,
+   "blend": 0.9,
+   "radius_m": 0.03,
+   "color": 2500,
+   "camera": false
+  },
+  "sink": {
+   "type": "spot",
+   "position": [
+    11.02,
+    0.3,
+    2.43
+   ],
+   "target": [
+    11.02,
+    0.28,
+    0.86
+   ],
+   "power_w": 18.0,
+   "cone_deg": 30,
+   "blend": 0.7,
+   "radius_m": 0.02,
+   "color": 2700,
+   "camera": false
+  }
+ },
+ "haze": {
+  "box_m": [
+   0.05,
+   0.05,
+   0.01,
+   16.95,
+   6.05,
+   3.32
+  ],
+  "density": 0.01,
+  "anisotropy": 0.3,
+  "color": "#FFFFFF"
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 10,
+  "view": "AgX",
+  "look": "AgX - Medium High Contrast",
+  "exposure": 1.6,
+  "white_balance_k": 2700,
+  "white_balance_tint": 0.0
+ }
+}
