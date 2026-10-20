@@ -30,8 +30,9 @@ def cartridge():
     for p in s['set']['props']:
         if p.get('module') == 'earf_moon':
             p.update(cable=False, cartridge='out', cartridge_out=0.045)
-    s['camera'] = {'position': [0.24, 0.40, 0.13], 'target': [0.0, 0.04, 0.05], 'lens_mm': 85, 'level': False,
-                   'fstop': 8.0, 'focus': [0.0, 0.07, 0.02]}
+    # from above enough that the horizon (and the sky past the stone) is out of frame, the whole ball in
+    s['camera'] = {'position': [0.40, 0.70, 0.34], 'target': [0.0, 0.04, 0.07], 'lens_mm': 60, 'level': False,
+                   'fstop': 8.0, 'focus': [0.0, 0.06, 0.05]}
     L = s['lights']
     L['key'].update(orbit={'azimuth_deg': 150, 'elevation_deg': 50, 'distance_m': 2.6}, target=[0.0, 0.05, 0.03])
     L['fill'].update(orbit={'azimuth_deg': 200, 'elevation_deg': 15, 'distance_m': 3.0}, target=[0.0, 0.05, 0.03])
@@ -42,10 +43,22 @@ def cartridge():
     return s
 
 
+def unlit():
+    """Round 32e's unlit pair, the Orb cordless (its cartridge in, no cable: the short run of cable showed as a hook at
+    this angle); the light through the ball raised and softened, as its pool on the oak mirrored in the polished black
+    drum and read as brass."""
+    s = final('unlit')
+    for p in s['set']['props']:
+        if p.get('fn') == 'orb':
+            p.update(cable=False, cartridge='in')
+    s['lights']['thru_orb'].update(target=[-0.05, -1.45, 0.45], irradiance=1.5)
+    return s
+
+
 def build():
     os.makedirs(SHOTS, exist_ok=True)
     for n, src in NAMES.items():
-        s = final(src)
+        s = unlit() if n == 'lamps-unlit' else final(src)
         json.dump(s, open(os.path.join(SHOTS, n + '.json'), 'w'), indent=1)
         print(n, '<-', src)
     json.dump(cartridge(), open(os.path.join(SHOTS, 'lamp-cartridge.json'), 'w'), indent=1)

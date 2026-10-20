@@ -70,7 +70,9 @@
      "liner": {
       "glow_color": "#FFDCB8"
      }
-    }
+    },
+    "cable": false,
+    "cartridge": "in"
    },
    {
     "kind": "kit",
@@ -196,9 +198,9 @@
    "target": [
     -0.05,
     -1.45,
-    0.25
+    0.45
    ],
-   "irradiance": 4.0,
+   "irradiance": 1.5,
    "color": 4300,
    "camera": false,
    "specular": 0.0
