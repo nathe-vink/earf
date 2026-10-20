@@ -1,0 +1,353 @@
+{
+ "stage1": {
+  "impression": "A plausible kissa-style back bar (dark timber shelving, record spines, low pendants, fluted counter), but at 1:1 it reads as a render: the chair back is a denoiser-smeared black mass, the grid of square concrete panels is flat and evenly lit like lightboxes and is the brightest thing in the frame, and the only saturated colour is a flat blue band across the decks that reads as an LED strip or signage, not acrylic. The two speakers in their niches are dim, near-black boxes whose horns don't read, so the hero is lost. As it stands a magazine would see a generic record bar, not a specific place.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Both niche speakers read at a glance as tinted cast acrylic with a visible horn and white batts, region median lum >= 45 (now 26 and 32)",
+  "The saturated colour in the frame comes from the speakers. The blue R3 Float band must not out-shout them (owner question, see out_of_scope)",
+  "No denoiser smear or plastic sheen on leather, the fluted oak or the zinc at full 2400 px resolution",
+  "The record wall panels and frosted disc read as materials (board-formed concrete with tie holes, frosted acrylic glowing evenly), not as evenly lit flat squares",
+  "Visible signs of life on the counter in the frame (glasses, a coupe, a candle, a record out of its sleeve)",
+  "A foreground that frames the back bar instead of blocking it (the chair back in the bottom centre)"
+ ],
+ "defects": [
+  {
+   "region": [
+    35,
+    80,
+    160,
+    275
+   ],
+   "what": "Left niche speaker reads as a dark box: lum_median 26, horn and acrylic tint not legible"
+  },
+  {
+   "region": [
+    515,
+    60,
+    610,
+    260
+   ],
+   "what": "Right niche speaker likewise: lum_median 32, a ghostly woofer behind haze, no edge glow"
+  },
+  {
+   "region": [
+    30,
+    266,
+    160,
+    276
+   ],
+   "what": "Hard white strip at the base of the left niche, p95 239, reads as a stray emitter or light leak"
+  },
+  {
+   "region": [
+    240,
+    30,
+    400,
+    200
+   ],
+   "what": "Square concrete panels are flat, uniform and evenly bright (median 76, the brightest area), like backlit lightboxes. No pour lines or formwork grain at this scale, and the frosted disc behind the DJ station does not read"
+  },
+  {
+   "region": [
+    265,
+    266,
+    410,
+    276
+   ],
+   "what": "R3 Float base is a flat saturated blue (RGB median 13/58/109) with no depth or edge glow, reads as an LED strip or signage"
+  },
+  {
+   "region": [
+    0,
+    290,
+    720,
+    320
+   ],
+   "what": "Zinc counter edge carries a long uniform specular streak (p95 205, clip 0.22%), reads as CG chrome"
+  },
+  {
+   "region": [
+    320,
+    360,
+    560,
+    480
+   ],
+   "what": "Counter chair back is a black blob (median 10) with denoiser blotching on the leather, blocking the decks"
+  },
+  {
+   "region": [
+    0,
+    320,
+    720,
+    480
+   ],
+   "what": "Fluted oak front is perfectly regular with repeated flutes and smooth shading, no grain variation"
+  },
+  {
+   "region": [
+    0,
+    400,
+    90,
+    480
+   ],
+   "what": "Out-of-focus beige blob at bottom left (a seat?) reads as an unshaded primitive"
+  },
+  {
+   "region": [
+    260,
+    270,
+    640,
+    292
+   ],
+   "what": "Counter is nearly empty: a menu and a small red object at left, none of the card's glasses, coupe or candles read"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero speakers are underexposed and read as black boxes, so the product and its tint are lost.",
+   "evidence": {
+    "region": [
+     35,
+     80,
+     160,
+     275
+    ],
+    "measured": "lum_median 26.0, p95 50 (left); right [515,60,610,260] median 32.4"
+   },
+   "change": {
+    "setting": "lamps: on each Ember speaker 4 x area (W/m2 at the target), plus a dedicated spot into each niche",
+    "from": "1.0 W/m2, no niche spot",
+    "to": "3.0 W/m2, and one 2600 K 25 W spot per niche, cone 30 deg, aimed down the speaker's face from the niche head so the acrylic edges and horn mouth catch a highlight"
+   },
+   "expected": "Speakers lift to a median of about 50, with the horn, batts and acrylic edges legible and the smoked tint visible against the felt.",
+   "accept": {
+    "region": [
+     35,
+     80,
+     160,
+     275
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The record wall's square panels are the brightest, flattest thing in the frame and pull the eye from the speakers.",
+   "evidence": {
+    "region": [
+     240,
+     30,
+     400,
+     200
+    ],
+    "measured": "lum_median 76.3, p95 159, evenly lit squares"
+   },
+   "change": {
+    "setting": "lamps: the record wall 4 x spot",
+    "from": "30.0 W, cone 26 deg",
+    "to": "15.0 W, cone 18 deg, aimed to graze the record spines rather than wash the panels"
+   },
+   "expected": "Panels drop to a median of about 45 to 55, with a visible falloff top to bottom, and the speakers become the brightest mid-tones.",
+   "accept": {
+    "region": [
+     240,
+     30,
+     400,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     58
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "render",
+   "problem": "Denoiser smear and blotching on the leather chair back and the fluted oak read as CG.",
+   "evidence": {
+    "region": [
+     320,
+     360,
+     560,
+     480
+    ],
+    "measured": "median 10.2, crush 0.44, visible blotches at 1:1"
+   },
+   "change": {
+    "setting": "render samples / adaptive",
+    "from": "256, adaptive 0.02",
+    "to": "1024, adaptive 0.01, denoise on, judged at full 2400 x 1600"
+   },
+   "expected": "Leather shows grain and a soft sheen, flutes carry wood grain, no smear.",
+   "accept": {
+    "region": [
+     320,
+     360,
+     560,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The chair back sits dead centre in the foreground and blocks the decks and the R3 Floats, the frame's centre of interest.",
+   "evidence": {
+    "region": [
+     320,
+     360,
+     560,
+     480
+    ],
+    "measured": "a black mass covering about 9% of the frame under the decks"
+   },
+   "change": {
+    "setting": "camera position",
+    "from": "[6.0, 2.5, 1.18]",
+    "to": "[6.4, 2.5, 1.22], same target, so the chair slides toward the left third and is cropped by the frame edge"
+   },
+   "expected": "The decks and both niches are clear, and a chair edge still frames the foreground.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "There is no sign of life in the frame: the card's glasses, coupe, candles and record are absent or unreadable.",
+   "evidence": {
+    "region": [
+     260,
+     270,
+     640,
+     292
+    ],
+    "measured": "only a menu and a small red object at left are visible on the zinc"
+   },
+   "change": {
+    "setting": "props placement",
+    "from": "off camera / out of frame",
+    "to": "a half-drunk coupe and a rocks glass on the zinc at about 1/3 and 2/3 across the frame, a lit candle between them, and a record out of its sleeve leaning on the decks"
+   },
+   "expected": "Small warm highlights on the zinc and on the glass rims, and the room reads as inhabited.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The zinc's front edge carries a long, uniform, near-clipping specular streak that reads as CG chrome.",
+   "evidence": {
+    "region": [
+     0,
+     290,
+     720,
+     320
+    ],
+    "measured": "p95 204.8, clip 0.22%"
+   },
+   "change": {
+    "setting": "the zinc's patina (roughness and variation)",
+    "from": "near-polished, uniform",
+    "to": "roughness about 0.35 with a 20% noise-driven variation and faint darker wear marks"
+   },
+   "expected": "Broken, softer highlights along the zinc, and no clipping.",
+   "accept": {
+    "region": [
+     0,
+     290,
+     720,
+     320
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 170
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The left niche's base carries a hard white strip that reads as a light leak.",
+   "evidence": {
+    "region": [
+     30,
+     266,
+     160,
+     276
+    ],
+    "measured": "p95 238.9, range 230"
+   },
+   "change": {
+    "setting": "the lit niche's strip emission",
+    "from": "6.0",
+    "to": "1.5, or hide it behind the niche lip"
+   },
+   "expected": "The niche base glows warm and soft instead of showing a white line.",
+   "accept": {
+    "region": [
+     30,
+     266,
+     160,
+     276
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 150
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The frosted disc behind the DJ station does not read, so the decks have no backlight and no axis.",
+   "evidence": {
+    "region": [
+     300,
+     100,
+     500,
+     260
+    ],
+    "measured": "no distinguishable disc glow, the area is dominated by the flat panels"
+   },
+   "change": {
+    "setting": "the disc behind the DJ station (emission) and its area lamp",
+    "from": "0.15 in #FFC890, 4.0 W",
+    "to": "0.5 in #FFC890, 10 W"
+   },
+   "expected": "A soft, even warm disc behind the decks that rims the R3 Floats and the mixer.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Confirm whether the R3 Float's base or slab should be saturated blue in the Smoke configuration. It is the frame's only strong colour (RGB 13/58/109) and reads as an LED strip while the speakers read near-black.",
+   "why": "Product colour is fixed by the card. If Smoke is meant to be all smoked, this may be a material-assignment bug for the owner or model to check, not a critic fix."
+  },
+  {
+   "request": "The smoked tint makes the niche speakers nearly indistinguishable from black boxes even when lit. A lighter or more visible tint would help them read as the hero.",
+   "why": "The speakers' colour and parts are fixed."
+  },
+  {
+   "request": "The record wall's square concrete panels read as a generic grid. A specific, signature element would make the place publishable as a specific bar.",
+   "why": "The room's design (record wall, panels) is fixed."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

@@ -1,0 +1,349 @@
+{
+ "stage1": {
+  "impression": "A competent, warm, dim wood-and-records bar seen across a zinc counter, but it reads as a CG render of a generic library-speakeasy: soft, smeary surfaces at 1:1, an empty grid of cool grey concrete cubbies as the brightest thing in the frame, and a big blurred dark chair back blocking the centre. The two speakers in their niches are murky dark boxes that read as cabinets, not as the hero, and the only saturated colour is a hard electric-blue band on the record players, which reads as LED signage. A magazine would not run this as a specific place; it is a generic bar.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The bar-pair speakers must read at a glance as the hero: tinted acrylic with its edges and the white batts visible, region median lum >= 45 (now 26 and 32)",
+  "The brightest area must not be the empty cool-grey concrete cubbies behind the decks (median 81, the frame's brightest non-lamp region); the frosted disc should be the visible glow there",
+  "No foreground object blocking the centre of the counter and decks (chair back at [320,360,560,480], 44% crushed, out of focus)",
+  "The R3 Float bands read as saturated blue (RGB 14,58,108) in a Smoke configuration; either correct the product's tint or confirm it is intended (out of scope for the critic)",
+  "Materials must hold up at 1:1: grain in the oak, patina in the steel doors, pour lines and tie holes at real scale in the concrete, no denoiser smear",
+  "Specificity: the zinc racetrack counter, the brass foot rail, the blackened-steel doors and the felt niches must be legible so the room reads as Planet EARF rather than any wood-lined bar"
+ ],
+ "defects": [
+  {
+   "region": [
+    35,
+    80,
+    160,
+    275
+   ],
+   "what": "left speaker in its niche is a murky dark box, lum_median 26, acrylic edges and batts not readable, horn barely visible"
+  },
+  {
+   "region": [
+    515,
+    60,
+    610,
+    260
+   ],
+   "what": "right speaker equally murky, lum_median 32, its silhouette merges with the dark niche"
+  },
+  {
+   "region": [
+    300,
+    30,
+    400,
+    200
+   ],
+   "what": "empty concrete cubbies glow cool grey (median 81), brightest wall area; reads as blank tiles or windows, pulls the eye off the speakers"
+  },
+  {
+   "region": [
+    262,
+    262,
+    625,
+    292
+   ],
+   "what": "R3 Float slabs/bases show a saturated electric-blue band (RGB 14,58,108; delta-E 31.6 vs smoke grey #808890); reads as LED strip/signage, and is the frame's only saturated colour"
+  },
+  {
+   "region": [
+    320,
+    360,
+    560,
+    480
+   ],
+   "what": "out-of-focus chair back dominates the centre foreground, 44% crushed, blocks the counter front and the decks axis"
+  },
+  {
+   "region": [
+    0,
+    410,
+    85,
+    480
+   ],
+   "what": "cut-off tan blob (banquette/chair) in the lower left corner, unreadable"
+  },
+  {
+   "region": [
+    665,
+    425,
+    720,
+    480
+   ],
+   "what": "stool edge cut at the right frame edge"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "overall softness and denoiser smear at 1:1: oak, record spines and concrete lack fine texture; no grain or patina in steel doors"
+  },
+  {
+   "region": [
+    0,
+    300,
+    720,
+    330
+   ],
+   "what": "zinc top highlight band is near-uniform and glossy, reads as CG plastic rather than worn zinc (p95 185)"
+  },
+  {
+   "region": [
+    270,
+    230,
+    410,
+    265
+   ],
+   "what": "turntable dust covers read as thin glossy boxes with flat reflections"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The two bar-pair speakers, the frame's hero, are too dark to read as tinted acrylic.",
+   "evidence": {
+    "region": [
+     35,
+     80,
+     160,
+     275
+    ],
+    "measured": "lum_median 26.0, p95 50.1; right niche [515,60,610,260] lum_median 32.4"
+   },
+   "change": {
+    "setting": "the lamps on the speakers (bar-pair niches; currently only the Ember speakers get 4 x area 1.0 W/m2 at 2900 K)",
+    "from": "no dedicated light on the bar-pair niches",
+    "to": "2 x small area lamps per niche (a grazing top light inside the felt niche, 2700 K), about 4 W/m2 at the speaker face, plus a narrow back-light rim behind each cabinet so the acrylic edges glow"
+   },
+   "expected": "Speaker bodies rise to median 45-60, the white batts read through the smoked acrylic, cabinet edges show a bright rim line, niches stay darker than the speaker",
+   "accept": {
+    "region": [
+     35,
+     80,
+     160,
+     275
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The empty concrete cubbies behind the decks are the brightest surface and read as blank tiles, stealing the eye from the speakers.",
+   "evidence": {
+    "region": [
+     300,
+     30,
+     400,
+     200
+    ],
+    "measured": "lum_median 80.6, p95 157.7, b_median 73 (cooler than the rest of the wall)"
+   },
+   "change": {
+    "setting": "the record wall 4 x spot",
+    "from": "30.0 W, 2600 K, cone 26 deg",
+    "to": "12 W, 2400 K, cone 18 deg, aimed at the record spines rather than the concrete backs; and the disc behind the DJ station from 0.15 to 0.6 emission with its area lamp 4 W -> 10 W so the frosted disc is the glow there"
+   },
+   "expected": "Cubbies drop to median 40-55 and warm; the frosted disc becomes a soft, even glow behind the decks; speakers become the brightest product surfaces",
+   "accept": {
+    "region": [
+     300,
+     30,
+     400,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     60
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "A blurred, crushed chair back sits dead centre in the foreground, blocking the counter and the decks.",
+   "evidence": {
+    "region": [
+     320,
+     360,
+     560,
+     480
+    ],
+    "measured": "lum_median 10.2, crush_pct 0.44, out of focus, about 8% of the frame"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [6.0, 2.5, 1.18], target [7.1, 6.0, 1.3], 28 mm",
+    "to": "shift about 0.5 m along x toward the decks' centre line so the chair falls to a frame edge (or the chair is moved one seat over as a set change), keep 1.18 m height, lens 32 mm, keep verticals level"
+   },
+   "expected": "The counter's fluted front, the brass rail and the decks read uninterrupted; a chair survives only as a partial edge shape giving depth",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "Surfaces lack real-scale texture at 1:1: the oak, steel doors and concrete read smooth and smeared.",
+   "evidence": {
+    "region": [
+     170,
+     0,
+     230,
+     260
+    ],
+    "measured": "visual at 3x crop: no grain, no pour lines, records soft; denoise on at 256 samples, proof at 0.3 scale"
+   },
+   "change": {
+    "setting": "render and materials' finish",
+    "from": "samples 256, denoise true; current oak, steel and concrete finishes",
+    "to": "samples 512 at full 2400 x 1600 with denoise on albedo/normal passes; oak stain with stronger grain bump and a satin roughness 0.45; blackened steel with an uneven roughness map 0.3-0.6 and brownish patina; concrete with board-grain bump and faint staining"
+   },
+   "expected": "At 1:1 the oak shows grain, the steel an uneven sheen, the concrete formwork lines; no blotchy smear in the shadows",
+   "accept": {
+    "region": [
+     170,
+     0,
+     230,
+     260
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 120
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The zinc counter top reflects as a uniform glossy band that reads as CG plastic rather than worn zinc.",
+   "evidence": {
+    "region": [
+     0,
+     290,
+     720,
+     330
+    ],
+    "measured": "lum_p95 184.9, clip 0.17%, a continuous even highlight across the width"
+   },
+   "change": {
+    "setting": "the zinc's patina",
+    "from": "smooth, near-uniform gloss",
+    "to": "roughness 0.35 with a mottled roughness map, darker patina near the edge, soft ring marks under glasses"
+   },
+   "expected": "The highlight breaks into pools under the Domes with dull patches between; p95 eases to about 150-165",
+   "accept": {
+    "region": [
+     0,
+     290,
+     720,
+     330
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 165
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The Dome pools on the counter are weak, so the room lacks the strong pools of light and dark that make it cosy and specific.",
+   "evidence": {
+    "region": [
+     0,
+     320,
+     720,
+     480
+    ],
+    "measured": "lower band lum_median 26.7, p95 74.9: little contrast between pool and shadow on the counter front"
+   },
+   "change": {
+    "setting": "the Domes' downlights 4 x spot",
+    "from": "140 W, 2400 K, cone 20 deg",
+    "to": "180 W, 2400 K, cone 16 deg, and haze density 0.01 -> 0.02 so the cones read faintly"
+   },
+   "expected": "Distinct warm pools on the zinc and props, falling off to darkness between; faint visible cones",
+   "accept": {
+    "region": [
+     0,
+     290,
+     720,
+     330
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 170
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Signs of life are not legible: the glasses, the record out of its sleeve, the coat and candles listed on the card are not visible in the frame.",
+   "evidence": {
+    "region": [
+     0,
+     290,
+     720,
+     330
+    ],
+    "measured": "visual: only a small red object and a white card on the counter at [90,290,300,300]"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props placed outside or lost in shadow",
+    "to": "a rocks glass and the half-drunk coupe in a Dome pool on the zinc in the camera's view, a record sleeve leaning against the right deck, one candle at the counter's right third"
+   },
+   "expected": "Two or three small, warm highlights on the counter giving scale and life",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "composition",
+   "problem": "Cut-off unreadable shapes in the lower corners distract.",
+   "evidence": {
+    "region": [
+     0,
+     410,
+     85,
+     480
+    ],
+    "measured": "visual: tan blob lower left; stool edge at [665,425,720,480]"
+   },
+   "change": {
+    "setting": "camera / set",
+    "from": "banquette and stool corners clipped at the frame edges",
+    "to": "either remove them from the frame or let one read deliberately as a recognisable leather seat edge"
+   },
+   "expected": "Clean frame edges, depth carried by one intentional foreground element",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Correct the R3 Float tint in the Smoke configuration: it renders as saturated electric blue (RGB 14,58,108, delta-E 31.6 against a smoke grey) rather than smoke",
+   "why": "It is the product's colour, fixed by the card; it may be a configuration or material-assignment bug, and it currently makes the decks, not the speakers, the frame's colour hero"
+  },
+  {
+   "request": "Fill or dress the empty concrete cubbies at the centre of the record wall",
+   "why": "The record wall's design is fixed; if they are meant to hold the frosted disc, check that the disc is in the model and in view"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

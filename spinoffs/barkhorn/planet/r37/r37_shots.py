@@ -102,6 +102,13 @@ def lights(v):
             l['power_w'] = round(l['power_w'] * gl, 2)
         elif k.startswith('spk') and 'irradiance' in l:
             l['irradiance'] = round(l['irradiance'] * gl, 3)
+    # and a small spot in each niche's head, down the cabinet's face, so the smoked acrylic's edges and horn catch light
+    if v.get('niche_spot_w', 0) > 0:
+        for i, (role, x, y, zz, rot, tilt) in enumerate(RP.bar_speakers()):
+            x0, x1, yf, yb, z0, z1 = RP.niche_box(x)
+            L[f'nichespk{i}'] = {'type': 'spot', 'position': [x, round(yf + 0.08, 3), round(z1 - 0.08, 3)],
+                                 'target': [x, y, round(zz + 0.8, 3)], 'power_w': round(v['niche_spot_w'] * gb, 2),
+                                 'cone_deg': 30.0, 'blend': 0.8, 'radius_m': 0.02, 'color': 2600, 'camera': False}
     # the bar pair: a soft spot from the ceiling over the bartender's aisle onto each cabinet's face
     for i, (role, x, y, zz, rot, tilt) in enumerate(RP.bar_speakers()):
         L[f'barspk{i}'] = {'type': 'spot', 'position': [x, round(y - 1.25, 3), RP.CEIL - 0.25],
@@ -124,10 +131,15 @@ BAR = {'title': 'the back bar: the bar pair in its niches either side of the dec
        # blue the loudest colour, the disc and niche heads cold, the fluted front salmon and the brightest surface):
        # seated and off axis on 28 mm, a chair back in the foreground; the pair's spots 60 W; the Domes calmer and
        # their downlights pooled; the counter strip down; the disc and niche strips warm
-       'camera': {'position': [6.0, 2.5, 1.18], 'target': [7.1, 6.0, 1.3], 'lens_mm': 28, 'level': True, 'fstop': 4.0,
+       # p3 (p2 5.0, 5.0: the pair still dark (26, 32); the cells round the disc the brightest flat squares; the players'
+       # blue (a near-neutral glow under warm white balance: now the configuration's warm colour); the chair back dead
+       # centre; a hot line at the niche base): a spot in each niche's head down the cabinet's face; the record wall's
+       # spots 14 W at 18 deg; the disc 0.5 with 10 W; the plinths 0.6; a step right so the chair goes to the edge
+       'camera': {'position': [6.4, 2.5, 1.22], 'target': [7.1, 6.0, 1.3], 'lens_mm': 28, 'level': True, 'fstop': 4.0,
                   'focus': [7.0, 5.6, 1.5]},
        'settings': {'exposure': 0.6, 'screen_glow': 1.0, 'pendant_w': 140.0, 'pendant_cone': 20.0, 'barspk_w': 60.0,
-                    'counter_strip': 1.2, 'disc_glow': 0.15, 'disc_col': '#FFC890', 'disc_lamp': 4.0}}
+                    'counter_strip': 1.2, 'disc_glow': 0.5, 'disc_col': '#FFC890', 'disc_lamp': 10.0, 'rw_w': 14.0,
+                    'rw_cone': 18.0, 'niche_spot_w': 25.0, 'plinth': 0.6}}
 LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # p2 (p1 4.0, 4.0: the spots lit the felt above the pair, the pair murky, the chairs pink shells, a
           # dead-centre showroom view): seated, off axis, on 40 mm; the spots in front, on the cabinets' faces; the
@@ -179,7 +191,10 @@ def shot(view):
     s = _shot(view)
     s['title'] = s['title'].replace('(round 36)', '(round 37)').replace('(round 33)', '(round 37)')
     v = {**DEFAULT, **VIEWS[view]['settings']}
-    s.setdefault('materials', {})['glow'] = {'strength': v['tt_glow']}       # the players' edges, lit
+    # the players' edges, lit, in the configuration's warm light colour (their own Smoke glow, a near-neutral lavender,
+    # read electric blue under the room's 2700-3000 K white balance: bar p2)
+    tint = RP.CONFIGS[v['config']]['tt']
+    s.setdefault('materials', {})['glow'] = {'strength': v['tt_glow'], 'color': RP.PLINTH_COL[tint]}
     return s
 
 
