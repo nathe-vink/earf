@@ -1,0 +1,348 @@
+{
+ "stage1": {
+  "impression": "A thick amber slab with an oval basin floating in front of vertical timber boards, a steel spout cropped at the top. It reads as a CG product render, not a photograph: the slab's front and side are one flat orange with no depth, no internal glow gradient and no polished edge; the basin is a blown white oval; the board grain is soft and smeared, and the whole frame is one orange cast with no neutral anywhere. As a detail it shows a sink, not a specific place; a magazine would not run it as Planet EARF, it reads as a generic bathroom vanity mockup.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The slab must read as thick tinted cast acrylic: visible depth and internal falloff through its 120 mm, brighter polished edges and arrises, and reflections of the room on its faces, not a flat opaque orange (front face lum_range now 9)",
+  "The basin must hold detail: clip_pct in the bowl under 2 %, its rounded floor and drain legible",
+  "A neutral reference in frame: the timber and the towel should not share the slab's orange (blue median of the whole lower frame is 8/255); the colour must come from the sink alone",
+  "Materials at 1:1: crisp timber grain with board joints and some wear, a brushed steel spout with a believable highlight, and the linen towel on its brass rod legible as cloth",
+  "Some sign of place and life: the towel, a soap, a glimpse of the room or the concrete, so it reads as this bar's washroom rather than a catalogue vanity"
+ ],
+ "defects": [
+  {
+   "region": [
+    150,
+    225,
+    495,
+    282
+   ],
+   "what": "Basin interior blown to near white, 36.6 % clipped, no form of the bowl; reads as a flat lit oval cut into the top"
+  },
+  {
+   "region": [
+    0,
+    260,
+    680,
+    470
+   ],
+   "what": "Slab front and side a single flat orange (lum_p5..p95 20..60, front region range 9.3), no thickness cue, no internal glow gradient, no edge glow; reads as opaque painted plastic, not cast acrylic"
+  },
+  {
+   "region": [
+    0,
+    200,
+    680,
+    270
+   ],
+   "what": "Top surface is a glossy orange plane; the board reflections are present but the top has no transparency or depth through the tint"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Whole-frame orange cast: blue channel median 8-15 everywhere; the timber, the towel and the slab collapse into one hue, so the sink is not the only colour"
+  },
+  {
+   "region": [
+    100,
+    40,
+    180,
+    210
+   ],
+   "what": "Pale rectangle at left (presumably the linen towel) reads as a flat board or panel: no folds, no weave, no visible brass rod"
+  },
+  {
+   "region": [
+    300,
+    0,
+    440,
+    75
+   ],
+   "what": "Spout cropped by the top edge and soft; the steel reads as dark smeared pipe with an orange flare, no brushed texture"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    200
+   ],
+   "what": "Timber grain is soft and smeared (denoiser), board joints are clean dark lines; reads as a texture, not old boards"
+  },
+  {
+   "region": [
+    520,
+    260,
+    680,
+    460
+   ],
+   "what": "The slab's right end face is nearly the same value as the front (54.7 vs 56.7), so the box has no modelling from the light"
+  },
+  {
+   "region": [
+    0,
+    380,
+    720,
+    480
+   ],
+   "what": "Under the slab there is no shadow or glow cast on the wall from the under-glow; the slab does not visibly float"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The basin's glow is blown and flattens the bowl into a white oval.",
+   "evidence": {
+    "region": [
+     150,
+     225,
+     495,
+     282
+    ],
+    "measured": "clip_pct 36.6, lum_median 199, p95 247"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "4.0",
+    "to": "1.2"
+   },
+   "expected": "The bowl reads as a rounded amber-lit hollow with a gradient to its rim; highlights only on the wet rim.",
+   "accept": {
+    "region": [
+     150,
+     225,
+     495,
+     282
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The grade is so warm that the timber, towel and slab share one orange, leaving nothing neutral and killing the acrylic's tint as the only colour.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     180
+    ],
+    "measured": "wall r/g/b medians 72/33/10; lower frame b_median 8"
+   },
+   "change": {
+    "setting": "render.white_balance_k",
+    "from": "3300",
+    "to": "2700"
+   },
+   "expected": "The timber goes back to a dark brown with some neutrality, the towel to off-white linen, the smoked amber slab stands out as the one saturated surface.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     180
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The slab is lit flatly from the front so its faces are one value and it has no depth; a raking key from above and a side would model the box and catch the polished arrises.",
+   "evidence": {
+    "region": [
+     0,
+     260,
+     300,
+     400
+    ],
+    "measured": "front face lum_range 9.3; end face median 54.7 vs front 56.7"
+   },
+   "change": {
+    "setting": "the sink 1 x spot",
+    "from": "1.2 W, cone 34 deg",
+    "to": "6 W, cone 24 deg, aimed down the wall from above and slightly left so it grazes the boards and catches the slab's top front edge"
+   },
+   "expected": "A bright line along the slab's top front arris, the top lighter than the front, the end face darker than the front by 15+ levels, the boards raked showing grain.",
+   "accept": {
+    "region": [
+     0,
+     260,
+     680,
+     470
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The acrylic reads as opaque painted plastic: no transmission gradient through its thickness and no glowing polished edges.",
+   "evidence": {
+    "region": [
+     0,
+     280,
+     680,
+     470
+    ],
+    "measured": "falloff bins 56,57,58,58,57,56,44,33: flat across the face, no glow toward the lit basin or the edges"
+   },
+   "change": {
+    "setting": "the slab's acrylic finish (smoke tint absorption and surface roughness), within the fixed Smoke colour",
+    "from": "dense, near-opaque, uniform",
+    "to": "lower absorption density so the under-glow and basin light show through 120 mm with a gradient, polished faces at roughness 0.0-0.02, edges left polished so they carry brighter light"
+   },
+   "expected": "The face grows lighter toward the basin and the lower edge, the arrises glow, and room reflections sit cleanly on the faces.",
+   "accept": {
+    "region": [
+     0,
+     280,
+     680,
+     470
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 20
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The frame crops the spout and loses the towel and rod, so the detail has no story and no sign of the place.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     440,
+     75
+    ],
+    "measured": "spout cut by the top edge; towel at [100,40,180,210] unreadable"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [10.3, 1.3, 1.1], target [10.95, 0.3, 0.88], 65 mm",
+    "to": "raise to z 1.3 and pull back about 0.3 m, 50 mm, so the whole spout, the slab top and the towel on its brass rod sit in frame with the slab on the lower third"
+   },
+   "expected": "Spout fully in frame, towel and brass rod legible, slab still dominant.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "No sign of life or of the bar: it reads as a catalogue vanity.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "only slab, boards, spout and a flat towel in frame"
+   },
+   "change": {
+    "setting": "small props",
+    "from": "none at the sink",
+    "to": "a hand-thrown soap dish with a bar of soap on the slab's top corner, the linen towel hung slightly crumpled on its rod, a few water droplets on the slab top near the basin"
+   },
+   "expected": "The frame reads as a used washroom in a specific bar; droplets give the acrylic small sharp highlights.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The timber boards look like a soft repeated texture rather than old wood.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     200
+    ],
+    "measured": "grain smeared at 1:1; joints uniform dark lines; wall lum_range 41"
+   },
+   "change": {
+    "setting": "the boards' finish (oak stain) and render denoise",
+    "from": "smooth satin stain, denoise on at 256 samples",
+    "to": "a darker oiled stain with a slightly rougher sheen and per-board tone variation; raise samples to 512 for this detail so the denoiser keeps grain"
+   },
+   "expected": "Crisp grain at 1:1, boards varying in tone, the raking key revealing texture.",
+   "accept": {
+    "region": [
+     640,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The slab doesn't visibly float: no glow or shadow on the wall beneath.",
+   "evidence": {
+    "region": [
+     0,
+     400,
+     720,
+     480
+    ],
+    "measured": "lum_median 46, flat with the wall above"
+   },
+   "change": {
+    "setting": "the sink's under-glow placement / a lit gap",
+    "from": "glow inside the slab only",
+    "to": "let part of the under-glow spill onto the boards beneath (a soft warm wash fading down 200 mm) with the slab's underside darker"
+   },
+   "expected": "A warm pool on the wall below the slab, darker underside line, the slab clearly floating.",
+   "accept": {
+    "region": [
+     0,
+     420,
+     720,
+     480
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 15
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A less saturated, lighter smoke tint for the slab so it reads as smoked rather than orange",
+   "why": "The sink and its Smoke colour are fixed in the card; only its finish and glow may change."
+  },
+  {
+   "request": "Show concrete or the room beyond in the alcove to place the sink in the bar",
+   "why": "The alcove's timber boards are the room's design as proposed; only the camera may widen to reveal more."
+  }
+ ],
+ "score_if_fixed": 6.5
+}
