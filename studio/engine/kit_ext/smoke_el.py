@@ -387,3 +387,47 @@ def occluder(bpy, name, p, kit):
     ob.visible_camera = False; ob.visible_glossy = False; ob.visible_transmission = False
     ob.visible_volume_scatter = False
     return [ob]
+
+
+def ridge(bpy, name, p, kit):
+    """A distant fold of land: a strip `width` metres wide and `depth` deep at `position` [x, y], its crest rising
+    `height` [min, max] metres along a noise profile (`scale` metres a swell, `seed`), falling away behind; matte in
+    `color`, a touch lighter and bluer the further it stands (aerial perspective is the set's haze)."""
+    w = p.get('width', 3000.0); d = p.get('depth', 80.0)
+    h0, h1 = p.get('height', [10.0, 30.0]); sc = p.get('scale', 300.0); sd = p.get('seed', 1) * 17.3
+    nx, ny = p.get('cells', [600, 8])
+    bm = bmesh.new()
+    rows = []
+    for j in range(ny + 1):
+        fy = j / ny
+        row = []
+        for i in range(nx + 1):
+            x = -w / 2 + w * i / nx
+            n = 0.5 + 0.5 * noise.noise(Vector((x / sc + sd, sd, 0.0)))
+            n2 = 0.5 + 0.5 * noise.noise(Vector((x / (sc * 0.25) + sd, sd + 3.0, 0.0)))
+            crest = h0 + (h1 - h0) * (0.8 * n + 0.2 * n2)
+            # a rounded profile: up from the front edge to the crest at a third of the depth, down behind
+            prof = math.sin(math.pi * min(1.0, fy / 0.35) / 2) if fy < 0.35 else max(0.0, 1.0 - (fy - 0.35) / 0.65 * 0.6)
+            row.append(bm.verts.new((x, -d / 2 + d * fy, crest * prof - 1.0)))
+        rows.append(row)
+    for j in range(ny):
+        for i in range(nx):
+            bm.faces.new((rows[j][i], rows[j][i + 1], rows[j + 1][i + 1], rows[j + 1][i]))
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    for poly in me.polygons:
+        poly.use_smooth = True
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    x, y = p.get('position', [0.0, 300.0])[:2]
+    ob.location = Vector((x, y, 0.0))
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; b = nt.nodes['Principled BSDF']
+    # mottled scrub and bare earth: two tones by noise
+    tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+    nz.inputs['Scale'].default_value = 1.0 / p.get('mottle', 12.0); nz.inputs['Detail'].default_value = 6.0
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    r = nt.nodes.new('ShaderNodeValToRGB'); cr = r.color_ramp
+    cr.elements[0].position = 0.4; cr.elements[0].color = kit.M.hex_lin(p.get('color2', '#4E4A44'))
+    cr.elements[1].position = 0.6; cr.elements[1].color = kit.M.hex_lin(p.get('color', '#7A766F'))
+    nt.links.new(nz.outputs['Fac'], r.inputs['Fac']); nt.links.new(r.outputs['Color'], b.inputs['Base Color'])
+    b.inputs['Roughness'].default_value = 0.95
+    me.materials.append(m)
+    return [ob]
