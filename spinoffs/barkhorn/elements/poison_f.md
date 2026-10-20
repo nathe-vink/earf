@@ -62,3 +62,35 @@ F1 pass 2 makes the caps scarlet and viscid (`dull` 0.05, `matte` off, less veil
 **Calibration:** the live A4 fails the same test ("small red-capped mushrooms"). F1 p3 reads at least as strongly.
 
 **The pick is F1.** F2's read rests on the caps alone: there is no scan of its frogs, viper or poison plants beyond anthurium.
+
+## The lead's notes, and pass 5
+
+The lead (2026-10-20): "toadstools" counts. The read test passes when the sentence names a poisonous species or class.
+
+Asked for:
+- **More poisons, grouped as they grow:** yew with arils, a nightshade bush, a death cap cluster, a lords-and-ladies clump, and hemlock if it fits.
+- **Varied caps.**
+- **The autumn beech wood** showing behind, with a low golden backlight and a cool fill on the speaker.
+- **One honest try at a fire salamander.**
+
+**The fire salamander** (`poison_p_el.salamander`): a subdivided body on an S-curved spine, glossy wet skin with SSS, its own warped Voronoi blotches, parotoids, splayed limbs. Three rounds of fixes. A fresh critic on a close crop: **toy**, 0.7, "too uniformly smooth and tubular… blob-like yellow spots that have no skin texture, and thin stick-like legs". It is left out.
+
+**Proof 5** (`proofs31/element-poison_f1-p05.jpg`):
+- Yew (`poison_p_el.yew`: the fir_sapling scan darkened to yew's green, red arils at its twig tips), at mid-height on the right; out of focus in the corner it vanished.
+- A nightshade bush of ten sprigs.
+- Five death caps at the speaker's front-right foot.
+- Six lords-and-ladies in one clump.
+- One old cap gone flat at the back. A fallen cap read as a red ball and was dropped.
+- Copper beech litter on the bank behind, a third of its ferns.
+- A low golden sun behind-right (azimuth 150°, elevation 16°), the canopy's gaps recomputed for it, a cool fill on the speaker.
+
+**Read test** (three fresh judges):
+- "…red-capped mushrooms, ferns and orange flower spikes around it."
+- "…among ferns, red-capped toadstools and orange flowers…"
+- "…with red-capped toadstools, ferns and orange flowers around it…"
+
+Two of three pass.
+
+**Realism:** 3.5 and 4.0 (mean 3.75; proof 3 had 4.0). Both critics' first tell is the fly agarics: "copies of one model… smooth, plasticky red caps, evenly spaced white dots that look stamped on, and clean white stems with no dirt". Then the tiled floor, and the speaker pasted in on its moss pad.
+
+**Pass 6:** each cap weathered its own way: dried (matte, soil up the stem), conifer needles on it, the wash uneven, ragged veil remnants. Tested on a close crop against proof 5's in a two-order A/B before the full frame.

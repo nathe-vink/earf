@@ -1372,8 +1372,9 @@
     "dull": 0.12,
     "needles": 2,
     "torn": 0.2,
-    "matte": false,
-    "orange": false
+    "matte": true,
+    "orange": false,
+    "ragged": 0.06
    },
    {
     "kind": "kit",
@@ -1392,10 +1393,12 @@
      0.03,
      0.01
     ],
-    "wash": 0.1,
+    "wash": 0.12,
     "dull": 0.12,
-    "matte": false,
-    "orange": false
+    "matte": true,
+    "orange": false,
+    "needles": 3,
+    "ragged": 0.08
    },
    {
     "kind": "kit",
@@ -1414,11 +1417,13 @@
      -0.02,
      0.015
     ],
-    "wash": 0.0,
+    "wash": 0.25,
     "dull": 0.25,
     "torn": 0.45,
     "matte": true,
-    "orange": false
+    "orange": false,
+    "needles": 4,
+    "ragged": 0.04
    },
    {
     "kind": "kit",
@@ -1437,10 +1442,12 @@
      0.0,
      -0.01
     ],
-    "wash": 0.12,
+    "wash": 0.4,
     "dull": 0.12,
-    "matte": false,
-    "orange": false
+    "matte": true,
+    "orange": false,
+    "needles": 1,
+    "ragged": 0.06
    },
    {
     "kind": "kit",
@@ -1457,9 +1464,11 @@
     "seed": 65,
     "warts": 280,
     "dull": 0.12,
-    "matte": false,
+    "matte": true,
     "orange": false,
-    "wash": 0.12
+    "wash": 0.0,
+    "needles": 2,
+    "ragged": 0.08
    },
    {
     "kind": "kit",
@@ -1537,9 +1546,11 @@
     "wash": 0.05,
     "torn": 0.15,
     "height": 0.14,
-    "dull": 0.0,
-    "matte": false,
-    "orange": false
+    "dull": 0.13,
+    "matte": true,
+    "orange": false,
+    "needles": 4,
+    "ragged": 0.08
    },
    {
     "kind": "kit",
@@ -1560,9 +1571,11 @@
     ],
     "wash": 0.12,
     "height": 0.11,
-    "dull": 0.0,
-    "matte": false,
-    "orange": false
+    "dull": 0.04,
+    "matte": true,
+    "orange": false,
+    "needles": 1,
+    "ragged": 0.04
    },
    {
     "kind": "kit",
@@ -1578,10 +1591,12 @@
     "age": "button",
     "seed": 73,
     "warts": 260,
-    "dull": 0.0,
-    "matte": false,
+    "dull": 0.07,
+    "matte": true,
     "orange": false,
-    "wash": 0.12
+    "wash": 0.25,
+    "needles": 2,
+    "ragged": 0.06
    },
    {
     "kind": "kit",
@@ -1600,12 +1615,14 @@
      -0.04,
      0.0
     ],
-    "wash": 0.0,
+    "wash": 0.4,
     "torn": 0.55,
     "height": 0.16,
     "matte": true,
     "dull": 0.25,
-    "orange": false
+    "orange": false,
+    "needles": 3,
+    "ragged": 0.08
    },
    {
     "kind": "kit",
@@ -1624,11 +1641,13 @@
      0.01,
      -0.03
     ],
-    "wash": 0.1,
+    "wash": 0.0,
     "height": 0.12,
-    "dull": 0.0,
-    "matte": false,
-    "orange": false
+    "dull": 0.13,
+    "matte": true,
+    "orange": false,
+    "needles": 4,
+    "ragged": 0.04
    },
    {
     "kind": "kit",
@@ -1647,11 +1666,13 @@
      0.0,
      0.01
     ],
-    "wash": 0.12,
+    "wash": 0.05,
     "height": 0.08,
-    "dull": 0.0,
-    "matte": false,
-    "orange": false
+    "dull": 0.04,
+    "matte": true,
+    "orange": false,
+    "needles": 1,
+    "ragged": 0.06
    },
    {
     "kind": "kit",
@@ -1670,11 +1691,13 @@
      0.04,
      -0.01
     ],
-    "wash": 0.06,
+    "wash": 0.12,
     "height": 0.15,
     "dull": 0.12,
-    "matte": false,
-    "orange": false
+    "matte": true,
+    "orange": false,
+    "needles": 2,
+    "ragged": 0.08
    },
    {
     "kind": "kit",
@@ -2118,8 +2141,10 @@
     "torn": 0.45,
     "matte": true,
     "dull": 0.25,
-    "wash": 0.0,
-    "orange": false
+    "wash": 0.4,
+    "orange": false,
+    "needles": 4,
+    "ragged": 0.06
    },
    {
     "kind": "kit",

@@ -105,6 +105,12 @@ def shot():
             p['matte'] = p.get('age') == 'old'                              # would not out-shout the speaker, and at 600 px
             p['orange'] = False                                             # they read as pink 'toadstools'
             p['wash'] = min(p.get('wash', 0.15), 0.12)
+            # pass 6 (proof 5's critics: "copies of one plastic model, stamped dots, clean stems"): each cap weathered
+            # its own way: dried (no viscid gloss, soil up the stem), litter on the cap, the rain's wash uneven
+            k = p.get('seed', 1)
+            p['matte'] = True; p['dull'] = max(p['dull'], 0.04 + 0.03 * (k % 4))
+            p['needles'] = 1 + k % 4; p['ragged'] = 0.04 + 0.02 * (k % 3)
+            p['wash'] = [0.0, 0.05, 0.12, 0.25, 0.4][k % 5]
             p['position'][2] -= 0.015                                       # stems rise out of the duff, not stand on it
             if p.get('age') in ('old', 'plane'):                            # flat old caps read as tables at this angle:
                 p['age'] = 'convex'; p['torn'] = max(p.get('torn', 0.0), 0.45)   # the old ones domed still, but torn
