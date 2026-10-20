@@ -36,7 +36,7 @@ Every dimension is a proposal until the owner signs it (`r37_plan.py`).
 - The bartender's aisle kept at a working 0.9 m (the lead): the counter moved 200 toward the banquette (its back edge
   4.55, the niches' face 5.45).
 - Ginza's details: a warm strip under the counter's top edge; one brass sconce with a glass chimney on the record wall;
-  a "Sorry, no requests" tent card by the decks; the R3s' own covers over the decks; candles in glasses on the counter.
+  a "Sorry, no requests" tent card by the decks (taken out of the finals, 2026-10-20: the owner, verbatim through the lead, "EARFcoin. Acrylic coins with the EARF globe on them that can be exchanged for a song request. Each guest gets one." Round 38 puts a request column there; the spot is left clear); the R3s' own covers over the decks; candles in glasses on the counter.
 - The hero bar view seated at the counter (eye 1.35), a soft ceiling spot on each cabinet of the bar pair.
 
 ## Process

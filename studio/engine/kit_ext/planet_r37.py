@@ -124,30 +124,32 @@ def ginza(bpy, kit, p, objs):
     bu = K.Mesh('sconce-bulb'); K._cyl(bu.bm, sx, yw - 0.16, sz - 0.02, 0.012, 0.03, seg=24)
     objs.append(bu.object(bpy, K.emitter(bpy, 'sconce-filament', '#FFB060', p.get('sconce_glow', 6.0)), smooth=True))
     K._lamp(bpy, 'sconce-lamp', (sx, yw - 0.16, sz + 0.0), p.get('sconce_w', 6.0), 2300)
-    # the card: a small folded tent card by the right deck, its face to the customers
-    cx, cy, cz = R.DJ['x'] + 0.80, C['y1'] - 0.30, C['top_z']
-    a = math.radians(14)
-    card = K.Mesh('no-requests-card')
-    hgt, w = 0.075, 0.105
-    for sgn in (-1, 1):
-        y0 = cy + sgn * hgt * math.sin(a)
-        bm = card.bm
-        q = [bm.verts.new((cx - w / 2, y0, cz)), bm.verts.new((cx + w / 2, y0, cz)),
-             bm.verts.new((cx + w / 2, cy, cz + hgt * math.cos(a))), bm.verts.new((cx - w / 2, cy, cz + hgt * math.cos(a)))]
-        bm.faces.new(q if sgn < 0 else list(reversed(q)))
-    c = card.object(bpy, K.principled(bpy, 'card-stock', '#E9E2D2', rough=0.8))
-    c.modifiers.new('thick', 'SOLIDIFY').thickness = 0.0008
-    objs.append(c)
-    try:
-        cu = bpy.data.curves.new('no-requests', 'FONT'); cu.body = p.get('card_text', 'Sorry, no requests')
-        cu.size = 0.0085; cu.align_x = 'CENTER'; cu.align_y = 'CENTER'
-        ob = bpy.data.objects.new('no-requests', cu); bpy.context.scene.collection.objects.link(ob)
-        ob.data.materials.append(K.principled(bpy, 'card-ink', '#1E1A16', rough=0.7))
-        zc = cz + hgt * math.cos(a) / 2; yc = cy - hgt * math.sin(a) / 2 - 0.0012
-        ob.location = (cx, yc, zc); ob.rotation_euler = (math.radians(90) - a, 0, 0)
-        objs.append(ob)
-    except Exception as e:
-        print('card: no text', e)
+    # the card: a small folded tent card by the right deck, its face to the customers. Out since 2026-10-20 (the owner's
+    # EARFcoin: a coin per guest, exchanged for a song request; round 38 puts a request column here): `card` to show it
+    if p.get('card', False):
+        cx, cy, cz = R.DJ['x'] + 0.80, C['y1'] - 0.30, C['top_z']
+        a = math.radians(14)
+        card = K.Mesh('no-requests-card')
+        hgt, w = 0.075, 0.105
+        for sgn in (-1, 1):
+            y0 = cy + sgn * hgt * math.sin(a)
+            bm = card.bm
+            q = [bm.verts.new((cx - w / 2, y0, cz)), bm.verts.new((cx + w / 2, y0, cz)),
+                 bm.verts.new((cx + w / 2, cy, cz + hgt * math.cos(a))), bm.verts.new((cx - w / 2, cy, cz + hgt * math.cos(a)))]
+            bm.faces.new(q if sgn < 0 else list(reversed(q)))
+        c = card.object(bpy, K.principled(bpy, 'card-stock', '#E9E2D2', rough=0.8))
+        c.modifiers.new('thick', 'SOLIDIFY').thickness = 0.0008
+        objs.append(c)
+        try:
+            cu = bpy.data.curves.new('no-requests', 'FONT'); cu.body = p.get('card_text', 'Sorry, no requests')
+            cu.size = 0.0085; cu.align_x = 'CENTER'; cu.align_y = 'CENTER'
+            ob = bpy.data.objects.new('no-requests', cu); bpy.context.scene.collection.objects.link(ob)
+            ob.data.materials.append(K.principled(bpy, 'card-ink', '#1E1A16', rough=0.7))
+            zc = cz + hgt * math.cos(a) / 2; yc = cy - hgt * math.sin(a) / 2 - 0.0012
+            ob.location = (cx, yc, zc); ob.rotation_euler = (math.radians(90) - a, 0, 0)
+            objs.append(ob)
+        except Exception as e:
+            print('card: no text', e)
 
 
 
