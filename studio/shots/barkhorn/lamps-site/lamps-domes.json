@@ -7,12 +7,12 @@
   "position": [
    0.0,
    -4.6,
-   1.45
+   1.8
   ],
   "target": [
    0.0,
    0.0,
-   1.4
+   1.33
   ],
   "lens_mm": 60,
   "level": false,
@@ -187,7 +187,7 @@
      }
     ],
     "flavour": "haze",
-    "shade_glow": 0.637,
+    "shade_glow": 0.85,
     "lamp_w": 4.5,
     "materials": {
      "liner": {
@@ -211,7 +211,7 @@
      }
     ],
     "flavour": "fog",
-    "shade_glow": 0.338,
+    "shade_glow": 0.25,
     "lamp_w": 4.5,
     "materials": {
      "liner": {
@@ -269,7 +269,7 @@
     0.0,
     1.46
    ],
-   "irradiance": 0.9,
+   "irradiance": 0.5,
    "color": 4300
   },
   "fill": {
@@ -307,8 +307,8 @@
     0.6,
     1.46
    ],
-   "irradiance": 2.6,
-   "color": "#FFE7AA",
+   "irradiance": 1.2,
+   "color": 4300,
    "camera": false,
    "specular": 0.0
   },
@@ -348,7 +348,7 @@
     0,
     1.48
    ],
-   "irradiance": 0.8,
+   "irradiance": 0.4,
    "color": 4300,
    "camera": false
   },
@@ -364,8 +364,8 @@
     0.0,
     1.1
    ],
-   "power_w": 5.0,
-   "cone_deg": 60,
+   "power_w": 18.0,
+   "cone_deg": 40,
    "radius_m": 0.05,
    "color": "#FF7A68",
    "camera": false,
@@ -383,8 +383,8 @@
     0.0,
     1.1
    ],
-   "power_w": 5.0,
-   "cone_deg": 60,
+   "power_w": 18.0,
+   "cone_deg": 40,
    "radius_m": 0.05,
    "color": "#FF9C78",
    "camera": false,
@@ -402,8 +402,8 @@
     0.0,
     1.1
    ],
-   "power_w": 5.0,
-   "cone_deg": 60,
+   "power_w": 18.0,
+   "cone_deg": 40,
    "radius_m": 0.05,
    "color": "#FFC870",
    "camera": false,
@@ -421,8 +421,8 @@
     0.0,
     1.1
    ],
-   "power_w": 5.0,
-   "cone_deg": 60,
+   "power_w": 18.0,
+   "cone_deg": 40,
    "radius_m": 0.05,
    "color": "#BCE07A",
    "camera": false,
@@ -440,8 +440,8 @@
     0.0,
     1.1
    ],
-   "power_w": 5.0,
-   "cone_deg": 60,
+   "power_w": 18.0,
+   "cone_deg": 40,
    "radius_m": 0.05,
    "color": "#86D2FF",
    "camera": false,
@@ -459,8 +459,8 @@
     0.0,
     1.1
    ],
-   "power_w": 5.0,
-   "cone_deg": 60,
+   "power_w": 18.0,
+   "cone_deg": 40,
    "radius_m": 0.05,
    "color": "#B496FF",
    "camera": false,
@@ -478,8 +478,8 @@
     0.0,
     1.1
    ],
-   "power_w": 5.0,
-   "cone_deg": 60,
+   "power_w": 18.0,
+   "cone_deg": 40,
    "radius_m": 0.05,
    "color": "#FFF2E4",
    "camera": false,
@@ -497,8 +497,8 @@
     0.0,
     1.1
    ],
-   "power_w": 5.0,
-   "cone_deg": 60,
+   "power_w": 18.0,
+   "cone_deg": 40,
    "radius_m": 0.05,
    "color": "#CDBFAF",
    "camera": false,

@@ -105,6 +105,19 @@ def domes_row():
             p.update(size=[p['size'][0], p['size'][1], 1.10], position=[p['position'][0], p['position'][1], 0.0])
     s['camera'].update(position=[0.0, -4.6, 1.45], target=[0.0, 0.0, 1.40], lens_mm=60, focus=[0.0, 0.0, 1.45])
     s['lights']['bgwash']['irradiance'] = 2.6
+    # s2 (4.5, 5.0): the domes still darker than the wall and no pools on the counter, which was a sliver. The room
+    # dimmed (the wall about 150 to 170, pale still), the downlights stronger and tighter, the camera higher so the top
+    # carries the pools, the wash neutral (it turned the oak salmon); Haze up and Fog down, as the row's evenness asks
+    s['lights']['bgwash'].update(irradiance=1.2, color=4300)
+    s['lights']['key']['irradiance'] = 0.5
+    s['lights']['bounce']['irradiance'] = 0.4
+    for k, L in s['lights'].items():
+        if k.startswith('down'):
+            L.update(power_w=18.0, cone_deg=40)
+    for p in s['set']['props']:
+        if p.get('fn') == 'dome' and p['flavour'] in ('haze', 'fog'):
+            p['shade_glow'] = {'haze': 0.85, 'fog': 0.25}[p['flavour']]
+    s['camera'].update(position=[0.0, -4.6, 1.80], target=[0.0, 0.0, 1.33])
     for k in ('rim', 'bounce'):
         if k in s['lights']:
             s['lights'][k]['position'][2] -= 0.12
