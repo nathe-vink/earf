@@ -108,28 +108,31 @@ MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn abov
           ('woofer', 'ice', 'The 15-inch woofer through an Ice cabinet', 'The 15-inch woofer, behind the cloth when the cover&rsquo;s on.'),
           ]   # the grip (Poison) left the row of details with the lineup: four read as a set
 # the lamps (round 32d), the owner's picks of 2026-10-19 ("sick lamps. Add them to the site as well"): a pendant whose
-# tinted cover comes off on a quarter turn, and a table lamp whose ball sits low in a steel cup, both cast in the eight
-# tints, frosted within. Their particulars are the fab kits' (companions/dome_pendant.py and orb_table.py). The band
-# shows once every picture in LAMP_PICS is in site/img (made from renders/2026-10-19/barkhorn/lamps-site/)
+# tinted cover comes off on a quarter turn, and a table lamp whose ball sits low in a black acrylic base, both cast in the
+# eight tints, frosted within. Round 32f took the owner's notes: black hardware (no brass), the Orb plugged in with a
+# battery cartridge as its option, each tint cast to read as its speaker's when lit. Their particulars are the fab kits'
+# (companions/PARTICULARS.md). The band shows once every picture in LAMP_PICS is in site/img (made from
+# renders/2026-10-19/barkhorn/lamps-site/)
 LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
     ('dome', 'Dome', 'Pendant', 'Hung low over the bar. A quarter turn takes its cover off, and another puts a new colour on.',
-     'The Dome pendant lit, its Ember cover glowing beneath a brass hub',
+     'The Dome pendant lit, its Ember cover glowing beneath a black hub',
      [('Size', '200 mm across'), ('Shade', 'Cast acrylic, tinted outside and frosted within'),
-      ('Light', '2700 K, its source shielded inside the hub'), ('Fitting', 'Brass, with a quarter-turn catch'),
+      ('Light', '2700 K, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
       ('Covers', 'In all eight colours, sold singly')]),
-    ('orb', 'Orb', 'Table lamp', 'A ball of tinted acrylic sitting low in a steel cup. No cord, so it goes where the conversation is.',
-     'The Orb table lamp lit in Ember, sitting low in its blackened steel cup',
-     [('Size', '160 mm ball, 180 mm tall'), ('Weight', '2.6 kg'),
-      ('Light', '2200 to 2700 K, warmer as it dims, under a brass touch ring'),
-      ('Power', 'Cordless; charges over USB-C or on its tray'), ('Rating', 'IP44, for terraces and spilt drinks'),
+    ('orb', 'Orb', 'Table lamp', 'A ball of tinted acrylic sitting low in a black acrylic base. Plugged in, it stays put; with its battery, it goes where the conversation is.',
+     'The Orb table lamp lit in Ember, sitting low in its black acrylic base',
+     [('Size', '160 mm ball, 180 mm tall'), ('Weight', '2.0 kg'),
+      ('Light', '2200 to 2700 K, warmer as it dims, under a black touch ring'),
+      ('Power', 'USB-C, cable and adapter included; cordless for about ten hours with its battery cartridge, sold separately'), ('Rating', 'IP44, for terraces and spilt drinks'),
       ('Balls', 'In all eight colours, sold singly')]),
 ]
 LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band doesn't write one)
     'lamp-dome': (800, None), 'lamp-orb': (800, None),
     'lamps-orbs': (1200, 'Eight Orbs in a row, lit, in spectrum order: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke'),
     'lamps-domes': (1200, 'Eight Dome pendants hung in a row at one height, lit, one in each colour'),
-    'lamp-catch': (900, "The Dome's cover lowered off its brass hub, the catch's pins and slots in view"),
+    'lamp-catch': (900, "The Dome's black hub and collar up close, the quarter-turn catch's slot and pin over an Acid cover"),
     'lamps-unlit': (800, 'An Orb and a Dome in Smoke, switched off: dark, polished acrylic with a pale core'),
+    'lamp-cartridge': (900, 'The Orb in Ember, its battery cartridge slid half out of the back of its black acrylic base'),
 }
 KEYS = [c[0] for c in CLOUDS]
 MARK = {key: col for key, line, num, name, col in M.SPEAKERS if line == 'Cloud'}
@@ -597,8 +600,10 @@ def body():
                  for k, name, kind, line, alt, facts in LAMPS) + '</div>\n'
              '    <figure class="eight">' + pic('lamps-domes', None) + pic('lamps-orbs', None) +
              '<figcaption>In spectrum order, as the speakers: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
-             '    <div class="lamp-duo"><figure>' + pic('lamp-catch', None) +
+             '    <div class="lamp-trio"><figure>' + pic('lamp-catch', None) +
              '<figcaption>A quarter turn, and the cover is off. Nothing live comes with it.</figcaption></figure>'
+             '<figure>' + pic('lamp-cartridge', None) +
+             '<figcaption>Slide in the cartridge and it goes cordless for about ten hours.</figcaption></figure>'
              '<figure>' + pic('lamps-unlit', None) + '<figcaption>Off, in Smoke.</figcaption></figure></div>\n'
              '  </div></section>') if lamps_shown else ''
     nxt = ('  <section class="band"><div class="wrap next">\n    <p class="eyebrow">Next</p>\n'
@@ -914,18 +919,18 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 .next { display: grid; gap: 14px }
 .next p { margin: 0; max-width: 60ch; color: var(--muted) }
 /* the lamps: the pair side by side, each a tall picture over its name, line and particulars; the eight in a row;
-   the catch and the lamps switched off beneath */
+   the catch, the cartridge and the lamps switched off beneath */
 .lamp-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px }
 .lamp { display: grid; gap: 12px; align-content: start; min-width: 0 }
-.lamp img, .eight img, .lamp-duo img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.lamp img, .eight img, .lamp-trio img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
 .lamp h3 { margin: 4px 0 0; display: flex; align-items: baseline; gap: 12px; font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
 .lamp h3 small { font: 500 12px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted) }
 .lamp .line { margin: 0 0 6px; color: var(--muted); max-width: 52ch }
 .eight { margin: 32px 0 0; display: grid; gap: 12px }
-.lamp-duo { display: grid; grid-template-columns: 15fr 8fr; gap: 24px; margin-top: 24px; align-items: start }   /* 3:2 and 4:5 at one height */
-.lamp-duo figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
-.eight figcaption, .lamp-duo figcaption { font-size: 15px; color: var(--muted) }
-@media (max-width: 720px) { .lamp-pair, .lamp-duo { grid-template-columns: minmax(0, 1fr) } }
+.lamp-trio { display: grid; grid-template-columns: 15fr 15fr 8fr; gap: 24px; margin-top: 24px; align-items: start }   /* 3:2, 3:2 and 4:5 at one height */
+.lamp-trio figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
+.eight figcaption, .lamp-trio figcaption { font-size: 15px; color: var(--muted) }
+@media (max-width: 720px) { .lamp-pair, .lamp-trio { grid-template-columns: minmax(0, 1fr) } }
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 14px }
 .pair figure { margin: 0; display: grid; gap: 10px }
 .pair img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
