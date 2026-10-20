@@ -24,7 +24,7 @@ S.BELL_TABLES = ()
 
 DEFAULT = dict(S.DEFAULT, **dict(
     colourway='green', pendant_w=320.0, pendant_cone=46.0, dome_w=30.0, dome_glow=1.1, sphere_w=6.0, sphere_glow=1.1,
-    disc_col='#FF5A3A', disc_glow=0.8, disc_lamp=60.0, name_glow=0.25, niche_strip=4.0, sink_glow=6.0,
+    disc_col='#FF5A3A', disc_glow=0.8, disc_lamp=60.0, name_glow=0.25, niche_strip=4.0, sink_glow=2.0,
     screen_glow=1.0, screen_tint='#FFA060', screen_gap=0.04, screen_rough=0.22, etch_glow=0.01, etch_frost=0.3,
     rw_w=14.0, rw_cone=22.0, altar_w=70.0, altar_cone=28.0, spk_irr=5.0, spk_back=40.0, spk_spread=90.0,
     spk_link=True, spk_k=2900, candle_w=3.0, flame=60.0, haze=0.005, wb=3000, exposure=0.0, view='AgX',
@@ -114,15 +114,15 @@ VIEWS = {
             # less haze; a higher-contrast look; the oak darker; the record wall's spots down; the screens up
             'camera': {'position': [4.5, 2.7, 1.35], 'target': [17.0, 3.1, 1.15], 'lens_mm': 35, 'level': True,
                        'fstop': 5.6, 'focus': [12.0, 3.1, 1.1]},
-            'settings': {'exposure': -0.3}},
+            'settings': {'exposure': 0.7}},
     'listening-green': {'title': 'the listening zone, bottle green',
                         'camera': {'position': [11.25, 2.45, 1.35], 'target': [16.6, 3.25, 1.2], 'lens_mm': 28,
                                    'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
-                        'settings': {'colourway': 'green', 'exposure': 0.35, 'wb': 2700}},
+                        'settings': {'colourway': 'green', 'exposure': 1.0, 'wb': 2700}},
     'listening-oxblood': {'title': 'the listening zone, oxblood',
                           'camera': {'position': [11.25, 2.45, 1.35], 'target': [16.6, 3.25, 1.2], 'lens_mm': 28,
                                      'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
-                          'settings': {'colourway': 'oxblood', 'exposure': 0.35, 'wb': 2700}},
+                          'settings': {'colourway': 'oxblood', 'exposure': 1.0, 'wb': 2700}},
     'street': {'title': 'the shopfront at night, from the kerb',
                # after the two critics on p1 (5.0, 5.0): over-exposed under a veil, the mullion through the altar, the
                # etched name a beige square, the lightbox too bright, no reflections: 32 mm with the mullion on a third,
