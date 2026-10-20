@@ -125,7 +125,7 @@
     "name_glow": 0.25,
     "niche_strip": 5.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.2,
+    "screen_glow": 0.07,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -140,9 +140,9 @@
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
     "altar_lining": "fir",
-    "plinth_bar": 0.5,
+    "plinth_bar": 0.3,
     "plinth_bar_col": "#FFB060",
-    "plinth_listen": 0.5,
+    "plinth_listen": 0.3,
     "plinth_listen_col": "#FFB060"
    },
    {
@@ -656,10 +656,10 @@
    "target": [
     16.55,
     1.9,
-    1.5
+    1.1
    ],
-   "power_w": 140.0,
-   "cone_deg": 44.0,
+   "power_w": 70.0,
+   "cone_deg": 30.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -675,10 +675,10 @@
    "target": [
     16.55,
     4.199999999999999,
-    1.5
+    1.1
    ],
-   "power_w": 140.0,
-   "cone_deg": 44.0,
+   "power_w": 70.0,
+   "cone_deg": 30.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -719,7 +719,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.9,
    "color": "#FFB060",
    "camera": false,
    "receivers": [
@@ -742,7 +742,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.9,
    "color": "#FFB060",
    "camera": false,
    "receivers": [
@@ -765,7 +765,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.9,
    "color": "#FFB060",
    "camera": false,
    "receivers": [
@@ -788,7 +788,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.9,
    "color": "#FFB060",
    "camera": false,
    "receivers": [

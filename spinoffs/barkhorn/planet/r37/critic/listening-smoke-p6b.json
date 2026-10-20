@@ -1,0 +1,372 @@
+{
+ "stage1": {
+  "impression": "A lit fir-lined niche holding two dark speakers on glowing plinths, seen from a standing eye level across an empty dark floor. It reads as a hi-fi showroom or a home cinema, not a listening bar a magazine would run as a specific place. Two downlight hotspots blow out on the fir. The bright white screen at left is the brightest large surface in the frame and pulls the eye off the altar. The smoked speakers read as black boxes with no light through their acrylic. The fir slats show denoiser streaking, the felt panels are flat brown cards, and the ceiling and right wall fall to empty black. A design magazine would see it as a generic home theatre: none of the bar's specific material (board-formed concrete, beams, blackened steel, hex tables, Orbs) is legible.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "No clipping on the fir from the altar spots: clip_pct < 0.5 in both hotspot regions, and frame clip_pct < 0.5",
+  "The speakers are the brightest read in the niche, with light visibly passing through the smoked acrylic: speaker regions lum_median >= 45",
+  "The screen at frame left no longer outshines the altar: lum_median <= 110",
+  "A seated, three-quarter view with the zone's own furniture in the foreground (a tub chair and a hex table with a lit Orb, a glass), so it reads as a bar and not a cinema",
+  "The shell is legible: fir beams overhead and concrete or blackened steel visible with texture, ceiling not an empty black band",
+  "Fir boards without denoiser smear: individual boards, grain and joints resolved at 1:1 on the 2400 px frame",
+  "Some haze or volumetric falloff, so the spot pools read as light in air rather than painted gradients"
+ ],
+ "defects": [
+  {
+   "region": [
+    290,
+    140,
+    345,
+    180
+   ],
+   "what": "altar spot hotspot on fir blown out (clip 51 %)"
+  },
+  {
+   "region": [
+    490,
+    130,
+    545,
+    170
+   ],
+   "what": "altar spot hotspot on fir blown out (clip 75 %)"
+  },
+  {
+   "region": [
+    0,
+    145,
+    115,
+    305
+   ],
+   "what": "screen image at lum 181, the brightest large surface in the frame, competing with the hero and reading as a projector screen"
+  },
+  {
+   "region": [
+    255,
+    215,
+    325,
+    345
+   ],
+   "what": "left speaker reads as an opaque black box (median 33), no light through the smoked acrylic, white batts barely visible"
+  },
+  {
+   "region": [
+    455,
+    215,
+    545,
+    385
+   ],
+   "what": "right speaker the same (median 33); the driver and horn are the only readable parts"
+  },
+  {
+   "region": [
+    455,
+    362,
+    550,
+    375
+   ],
+   "what": "plinth light strip clipping (2.1 %), reads as display-case LED rather than a soft glow"
+  },
+  {
+   "region": [
+    200,
+    150,
+    640,
+    360
+   ],
+   "what": "fir boards show vertical denoiser streaks and smeared grain; boards read as a texture rather than timber at scale"
+  },
+  {
+   "region": [
+    270,
+    180,
+    350,
+    330
+   ],
+   "what": "felt panels behind the speakers are flat, uniform brown rectangles with no fibre or edge shading"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    90
+   ],
+   "what": "ceiling and beams nearly black (median 4.6, crush 27 %); the fir beams are only a hint"
+  },
+  {
+   "region": [
+    655,
+    90,
+    720,
+    480
+   ],
+   "what": "right wall falls to a featureless dark band (median 11); no concrete or steel texture"
+  },
+  {
+   "region": [
+    80,
+    380,
+    720,
+    480
+   ],
+   "what": "large empty, featureless carpet foreground with no props, tables or Orbs; reads as an empty showroom"
+  },
+  {
+   "region": [
+    0,
+    330,
+    80,
+    480
+   ],
+   "what": "tub chairs cut off at the frame edges, unreadable, with no sign of life"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The altar spots blow out two hotspots on the fir above the speakers, and the speakers below them stay dark.",
+   "evidence": {
+    "region": [
+     490,
+     130,
+     545,
+     170
+    ],
+    "measured": "clip_pct 74.5 (left hotspot [290,140,345,180] 50.9); speakers' lum_median 33.4"
+   },
+   "change": {
+    "setting": "lamps: the altar 2 x spot",
+    "from": "140.0 W, cone 44.0 deg, aimed at the niche wall above the speakers",
+    "to": "70 W, cone 30 deg, re-aimed from the ceiling about 1.5 m in front of the niche onto the speaker fronts at about 0.9 m height, 2500 K kept"
+   },
+   "expected": "No blown pools on the fir. Light lands on the cabinets and passes through the smoked acrylic onto the white batts, so the speakers become the brightest read in the niche.",
+   "accept": {
+    "region": [
+     490,
+     130,
+     545,
+     170
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speakers, the hero, are too dark to read their tint, batts or acrylic edges.",
+   "evidence": {
+    "region": [
+     455,
+     215,
+     545,
+     385
+    ],
+    "measured": "lum_median 33.4, p5 5.2; left speaker [255,215,325,345] median 33.4"
+   },
+   "change": {
+    "setting": "lamps: on each speaker 4 x area (the Ember speaker lamps, used here for the Smoke pair)",
+    "from": "0.1 W/m2 at the target",
+    "to": "0.35 W/m2 at the target, plus a small hidden warm 2700 K strip in each plinth top aimed up through the cabinet"
+   },
+   "expected": "The batts glow faintly grey through the smoke tint, the polished acrylic edges catch a line of light, and the speaker silhouette reads at a glance.",
+   "accept": {
+    "region": [
+     455,
+     215,
+     545,
+     385
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "A standing, frontal 24 mm view across empty carpet reads as a home-cinema brochure, and none of the zone's furniture or the shell is in the picture.",
+   "evidence": {
+    "region": [
+     80,
+     380,
+     720,
+     480
+    ],
+    "measured": "foreground is about 25 % of the frame, flat carpet (lum_range 48.7), no props; the chairs are cropped at the corners"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [12.2, 1.0, 1.7], lens 24 mm, f/5.6",
+    "to": "seated height z 1.15 m, position about [13.0, 2.2, 1.15] looking across a tub chair's shoulder and a hex table with a lit Orb and a half-drunk glass in the near third; lens 35 mm; f/2.8 focused on the right speaker; keep verticals true"
+   },
+   "expected": "A close, layered, lived-in view: furniture and an Orb pool in the foreground, the altar framed beyond, the beams and the concrete at the frame edges. It reads as a specific room.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The screen image is the brightest large surface and steals the eye from the altar.",
+   "evidence": {
+    "region": [
+     0,
+     145,
+     115,
+     305
+    ],
+    "measured": "lum_median 180.8, p95 200.6, against a frame median of 33"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the screens' images",
+    "from": "0.2",
+    "to": "0.07"
+   },
+   "expected": "The screen sits as a dim, warm secondary glow below the niche, and the artwork still reads.",
+   "accept": {
+    "region": [
+     0,
+     145,
+     115,
+     305
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "post",
+   "problem": "The fir boards and felt are smeared by the denoiser and read as CG texture.",
+   "evidence": {
+    "region": [
+     200,
+     150,
+     640,
+     360
+    ],
+    "measured": "vertical streaks along the boards and soft grain at 2x crop; the felt panels are uniform"
+   },
+   "change": {
+    "setting": "render",
+    "from": "samples 256, adaptive 0.02, denoise true",
+    "to": "samples 1024, adaptive 0.005, denoise true with albedo and normal passes (OIDN, prefilter accurate); felt given a fine bump or fibre normal and a slightly darker edge"
+   },
+   "expected": "Individual boards, joints and grain resolve at 1:1. The felt shows fibre, and its edges shade.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The plinth light strips clip and read as display-case LEDs.",
+   "evidence": {
+    "region": [
+     455,
+     362,
+     550,
+     375
+    ],
+    "measured": "clip_pct 2.11, lum_p95 250; left plinth [255,335,325,345] lum_p95 250"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the lit niche's strip (the plinth glow)",
+    "from": "5.0",
+    "to": "1.8, with a frosted diffuser roughness raised so the glow spreads over the plinth's lower edge"
+   },
+   "expected": "A soft, even glow under each plinth with no white line and no clipping.",
+   "accept": {
+    "region": [
+     455,
+     362,
+     550,
+     375
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The shell (fir beams, concrete, blackened steel) is crushed to black, so the room has no identity outside the niche.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     90
+    ],
+    "measured": "lum_median 4.6, crush_pct 26.7; right wall [655,90,720,480] median 11.0"
+   },
+   "change": {
+    "setting": "lamps: the Domes' downlights and haze",
+    "from": "Domes 4 x 260 W spot, cone 30 deg; haze 0.002/m",
+    "to": "a Dome or record-wall spot grazing the beams and the concrete edge at the frame's side (or a 2700 K uplight on the nearest beam at about 15 W); haze 0.006/m"
+   },
+   "expected": "The beams show checks and end grain, and the concrete shows its board marks in a dim warm grey. The spot pools read as light in air.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     90
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     10,
+     30
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "There is no sign of life in the zone, so it reads as an empty showroom.",
+   "evidence": {
+    "region": [
+     80,
+     380,
+     720,
+     480
+    ],
+    "measured": "no props are visible; the card's props sit elsewhere in the bar"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props at the counter only",
+    "to": "in this zone: a rocks glass and a record sleeve on the near hex table beside a lit Orb, a coat or a throw over one tub chair, a sleeve leaning on one plinth"
+   },
+   "expected": "A lived-in foreground with small highlights on glass and vinyl that leads the eye to the altar.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A single speaker instead of the pair, so that one EARF speaker is the frame's colour hero",
+   "why": "The card fixes the altar pair; frame or crop the pair as one hero instead."
+  },
+  {
+   "request": "A visibly saturated speaker tint",
+   "why": "The Smoke configuration is fixed, so the hero's colour is the smoke tint; raise its legibility with light (c2) rather than colour."
+  },
+  {
+   "request": "Replace the white, gallery-like screen artwork with something darker and warmer",
+   "why": "What the screens show is fixed by the card; only their brightness can change (c4)."
+  }
+ ],
+ "score_if_fixed": 6.8
+}

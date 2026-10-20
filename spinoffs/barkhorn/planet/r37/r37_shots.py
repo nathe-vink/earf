@@ -184,12 +184,14 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # the shell's fir (the end grain read as tile in every pass); the pair lit soft from above and in front
           # (the spots wider, weaker, aimed at the tops; the linked lamps on the faces down), the plinths glowing
           # beneath; a soft wash down the felt behind each; the Orbs 1 W. Inside the zone on 24 mm (from outside the step
-          # the partition's edge stood across the right speaker)
+          # the partition's edge stood across the right speaker). p6 4.0, 4.5 (mean 4.25, = p4): kept. For the finals,
+          # the two fixes both critics measured: the altar spots 70 W at 30 deg on the cabinets, not the fir above them
+          # (45-75 % clipped there); the screen 0.07 (median 181, the brightest surface); the plinths 0.6 (2 % clipped)
           'camera': {'position': [12.2, 1.0, 1.7], 'target': [16.5, 3.3, 1.55], 'lens_mm': 24, 'level': True,
                      'fstop': 5.6, 'focus': [16.4, 3.05, 1.0]},
-          'settings': {'exposure': 3.2, 'wb': 2700, 'screen_glow': 0.2, 'spk_irr': 0.1, 'altar_w': 140.0,
-                       'altar_cone': 44.0, 'altar_z': 1.3, 'haze': 0.002, 'sphere_w': 1.0, 'sphere_glow': 0.3,
-                       'niche_strip': 5.0, 'plinth': 1.0, 'spk_back': 10.0, 'felt_wash': 2.0,
+          'settings': {'exposure': 3.2, 'wb': 2700, 'screen_glow': 0.07, 'spk_irr': 0.1, 'altar_w': 70.0,
+                       'altar_cone': 30.0, 'altar_z': 0.9, 'haze': 0.002, 'sphere_w': 1.0, 'sphere_glow': 0.3,
+                       'niche_strip': 5.0, 'plinth': 0.6, 'spk_back': 10.0, 'felt_wash': 2.0,
                        'altar_lining': 'fir', 'look': 'AgX - High Contrast'}}
 NAMES = {'smoke': 'Smoke', 'ember': 'Ember', 'ice': 'Ice', 'mixed': 'Mixed'}
 VIEWS = {}
