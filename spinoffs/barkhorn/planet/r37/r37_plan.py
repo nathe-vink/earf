@@ -71,7 +71,7 @@ LAMP_FLAVOUR = {'smoke': 'smoked', 'ember': 'ember', 'ice': 'ice', 'dust': 'dust
 LAMP_GLOW = {'smoke': 0.3, 'ember': 0.07, 'ice': 0.3, 'dust': 0.25, 'acid': 0.25}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
 TT_DEF = 'spinoffs/barkhorn/companions/out-concepts2/r3.json'        # R3 Float, until the owner picks
 # the light plinths' colour per tint (the owner: "Lights under the speakers could be cool too")
-PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF', 'fog': '#FFE8D2'}
+PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF', 'fog': '#FFB070'}   # fog: a neutral cream read electric blue under the 2700 K balance (as Smoke's lavender did)
 # and its strength per tint: a saturated red clips first (Ember at 1.0 clipped 1387 and 5604 px red-only in a Standard
 # view, r37); Smoke needs the most to read at all
 PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.12, 'ice': 0.35}
