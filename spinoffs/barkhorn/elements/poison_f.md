@@ -123,3 +123,34 @@ Two of three pass.
    - the litter-covered bank behind reads as "a murky, flat brown haze… a texture card";
    - the yews look "pasted-in" and "floating";
    - the berry spikes and nightshade clutter the lower right.
+
+## F1b (F1 pass 7, `poison_f1b.py`): A4 whole, with more poisons kept quiet
+
+The lead approved option (a): A4's set and light (its sun and shafts, canopy gaps, redwood, fern bank) with no foxgloves, and the poisons small and set in. The read must hold ("toadstools" plus berries), then the same duel. It goes up if within 0.5 of A4.
+
+| Proof | Change | Read test (three fresh judges) |
+|---|---|---|
+| p1 (`proofs31/element-poison_f1b-p01.jpg`) | A4 + 3 caps, 3 death caps at the speaker's foot, a lords-and-ladies clump in the ferns, a yew far back | "red-capped mushrooms", "small orange mushrooms", "red-capped mushrooms": fails |
+| p2 (`…-p02.jpg`) | the caps scarlet (A4's are dulled and dried), the clump a size up | "red-capped mushrooms" ×3: fails (the caps sit in A4's sun patch, where the red washes to salmon) |
+| p3 (`…-p03.jpg`) | the caps a size up (×1.3), out of the sun patch, crisp warts; the clump nearer | "red-capped mushrooms", "red-capped toadstools", "red-capped mushrooms": fails (1 of 3; berries never named) |
+
+**Duel of p3 against the live A4** (four fresh judges, two per order; each judge saw one order):
+
+| Judge | Order | A4 | F1b |
+|---|---|---|---|
+| 1 | A4 first | 7.0 | 6.3 |
+| 2 | A4 first | 7.0 | 6.0 |
+| 3 | F1b first | 6.8 | 6.0 |
+| 4 | F1b first | 6.6 | 6.0 |
+
+**Mean:** A4 6.85, F1b 6.08. All four prefer A4, so F1b is 0.78 behind (F1 was 1.5 behind).
+
+**What drove it, in all four:**
+1. The bigger, scarlet caps read as "toy-like props", the most saturated thing in the frame.
+2. The berry spikes look "like plastic beads", a second red hotspot.
+3. A4's foxgloves add "depth and a quiet colour counterpoint". The owner called them fake; the judges like them.
+4. Small pale caps at the plinth read as clutter.
+
+**The trade:** what makes the read work (bigger, redder caps, visible berries) is exactly what the judges mark down. A4's own caps read as "red-capped mushrooms", not toadstools.
+
+**Stopped** under the lead's rule (more than 0.5 behind). The choice goes to the owner: A4 without its foxgloves, or F1b.
