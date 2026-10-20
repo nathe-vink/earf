@@ -120,3 +120,19 @@ The gate becomes: N2's realism at least 0.5 above A4's (so at least 5.0), the re
 - The speaker has no contact shadow, its panels are reflected evenly, and it looks composited. The fog falls off evenly, like CG.
 
 **N2 is stopped.** Neither of the two passes on Acid B's water reached the gate. Seven passes scored 4.5, 4.25, 4.25, 3.75, 4.25, 4.25 and 4.5. The best (p7) equals A4 on the same critics and doesn't beat it.
+
+## The finishing pass and the finals (the lead, 2026-10-20)
+
+The lead sent proof 7 to the owner beside A4, recommending the lake as the new Poison. The final is prepared now, so it can be swapped in the moment the owner agrees. Nothing goes on the site until then.
+
+**Proof 8** (`proofs31/element-poison_n2-p08.jpg`), the finishing pass on proof 7:
+- The bloom is more vivid (#4A7A12 / #8CC21E / #CDEB3E) and glossier (scum roughness 0.18).
+- The open-water lane is narrowed to 0.9 m.
+- Each dock section has its own shade of wood (`scan` `vary=`). The scan's textures are an atlas, so they can't be slid.
+
+**Read test:** passes. The judge saw "…sits at the end of a weathered wooden pier, over hazy green water, beside a 'DANGER TOXIC ALGAE / AVOID CONTACT' sign."
+
+**Realism:** 4.5 and 4.5 (mean 4.5, equal to proof 7, so the finals go ahead). The tells:
+- The water still has no visible reflections or meniscus, and its streaks look painted.
+- The planks are uniform and the posts are the same.
+- The speaker has little contact shadow, and the sign's graphics are crisp.
