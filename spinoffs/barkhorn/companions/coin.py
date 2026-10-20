@@ -264,6 +264,15 @@ def _underlay():
 
 
 # --- the request column ---------------------------------------------------------------------------------------------
+BANDS = (0.0, 50.0, 100.0, 150.0)      # the frosted back half in four bands up from its foot (the render's: its glow
+                                       # fades up the tube, as light let in at a wall's foot does)
+
+
+def _bands(z0, z1):
+    ks = [z0 + b for b in BANDS] + [z1]
+    return list(zip(ks[:-1], ks[1:]))
+
+
 def column_parts(p=COL):
     """The request column: a clear tube standing in a smoked acrylic base, a brass ring at its top. The base's slot under
     the tube lets the lowest coin out at the front, pushed by a finger through the notch at the back."""
@@ -299,11 +308,13 @@ def column_parts(p=COL):
         # almost none of the light out sideways: the stack stayed dark but for the slot)
         Part('tube', tube, Machined('cast-acrylic', 'lathe', setup_usd=60.0), finish='clear', group='tube',
              pieces={'front': (tube - box(-od, -0.01, -1, od, od, z1 + 5), 'clear'),
-                     'back': (tube - box(-od, -od, -1, od, 0.01, z1 + 5), 'tube-frost')},
+                     **{f'back{i}': (tube - box(-od, -od, -1, od, 0.01, z1 + 5) - box(-od, -od, -1, od, od, z0 + 0.01)
+                                     - box(-od, -od, z1_, od, od, z1 + 5), f'tube-frost{i}')
+                        for i, (z0, z1_) in enumerate(_bands(bh - seat, z1))}},
              notes=['cast acrylic tube 50 x 4 wall (42 bore: 1 mm round a 40 coin), water-clear, cut square and its ends '
                     'polished; bonded into the base\'s socket (Acrifix 1R 0192 or Weld-On 16); 210 long holds 33 coins',
-                    'the back half of its bore bead-blasted (masked along two lines 180 apart): lit from its foot, it '
-                    'glows behind the queue']),
+                    'the back half of its bore lightly bead-blasted (fine media, masked along two lines 180 apart): '
+                    'lit from its foot, it glows softly behind the queue, brightest low, where the queue is']),
         Part('ring', ring, Machined('brass', 'lathe'), finish='brass', group='tube',
              notes=['brass, satin: a cap ring over the tube\'s top, bonded; the coins drop in through it']),
         Part('plate', plate, Machined('aluminium', 'lathe'), finish='aluminium', group='light', inside=True,
@@ -541,8 +552,10 @@ def materials():
         'smoke-base': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#6E6B72', 'radius': 0.012, 'roughness': 0.03},
         # the column's light: off unless a shot (or the kit piece's base_glow) turns it up
         'led': {'preset': 'emit', 'color': '#FFC48A', 'strength': 0.0},
-        'tube-frost': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F2EEE6', 'roughness': 0.45, 'radius': 0.02,
-                       'clear': 0.35, 'glow': 0.0, 'glow_color': '#FFB070'},
+        # the tube's frosted back half, a light bead-blast (the lead: a heavy one read as a lightbox in Planet's bar),
+        # in four bands up from its foot (its glow fades up the tube: the kit piece's back_glow)
+        **{f'tube-frost{i}': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F2EEE6', 'roughness': 0.35,
+                              'radius': 0.02, 'clear': 0.7, 'glow': 0.0, 'glow_color': '#FFB070'} for i in range(4)},
         'opal': {'preset': 'frosted', 'color': '#F6F3EE', 'absorb': '#F1E6D6', 'roughness': 0.5, 'radius': 0.01, 'clear': 0.05},
         'aluminium': {'preset': 'metal', 'color': '#BFC1C2', 'roughness': 0.35},
         'brass': {'preset': 'metal', 'color': '#B8945A', 'roughness': 0.3},

@@ -503,6 +503,14 @@ catches the light along the edge and reads as currency in the hand; it costs abo
       their tints, backlit, like bottles on a lit shelf.
     - The frost is the part that matters. Lit only from below, polished clear coins send almost none of the light out
       sideways: the stack stayed dark but for the slot (proofs, 2026-10-20).
+    - **A light bead-blast, its glow fading up the tube** (the lead, from Planet's bar: a heavy frost outshone the queue
+      from a stool, 148 over the tube). Light let in at a wall's foot fades with height, so the frost glows brightest
+      behind the queue and dims over the empty top.
+      - In the kit piece: four bands at 1.0, 0.45, 0.15 and 0.05, set by `back_glow` (default 1.0).
+      - From a stool at 1.2 m on 50 mm, the empty top now measures about 100.
+      - The coins read as bands of their tints only where the frost lights them from behind: seen from the side,
+        each coin is 40 mm of dense tint, so the stack itself stays dark (about 15). A warm pin spot on the decks
+        lights their polished edges; that is the bar's job, not the column's.
   - **$438 one-off** at the kit's shop rates, with the light (`out-earf-coin-column/bom.md`; $322 without it).
     Proof: `renders/2026-10-20/barkhorn/coin/column-lit.png`.
 - **BOM:** a boxed set of eight is **$33** at the kit's rates (`out-earf-coin/bom.md`, sheet plus the shop's work as
@@ -544,7 +552,7 @@ a keepsake, which is the point: a bar token you'd want to keep.
   settles at about 11.5° for a 30 mm spread.
 - `column`: the request column with its queue (`coins`, from the bottom), and the next coin pushed `out` of its slot.
   `base_glow` turns its light on (1.0 as designed): the LED, and the tube's frosted back half glowing behind the
-  queue.
+  queue, fading up the tube; `back_glow` scales the frost against the LED (default 1.0, tuned from a stool).
 - `bowl`: the bowl at the door, `n` coins in it in the eight tints.
 - `flavour_materials` overrides one tint's materials. Checked: `renders/2026-10-20/barkhorn/coin/kit-check.png` (a bowl and a stack). The GLBs are committed (`out-coin-study/render/`,
   `out-coin-column/render/`).
