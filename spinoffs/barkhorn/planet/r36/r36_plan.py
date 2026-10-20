@@ -54,7 +54,9 @@ NAMEPLATE = dict(x=2.30, y=W - 0.03, z=2.15, r=0.30)               # the etched 
 LEDGE = dict(x0=4.20, x1=5.30, z=1.95)                              # the now-playing ledge
 
 # --- 5. the counter chairs: a low curved back, an upholstered seat on dark oak, at 760; a brass foot rail ----------
-CHAIRS36 = dict(seat_h=0.76, seat_r=0.21, back=0.24)
+# the lead's note (2026-10-20): the brief's chairs, not r35's pale stools: a blackened-steel frame, an upholstered seat
+# in oxblood leather, a low curved upholstered back, a brass foot ring
+CHAIRS36 = dict(seat_h=0.76, seat_r=0.21, back=0.20, leather='#3A1411')
 NCHAIRS = 8
 
 # --- 5. the banquette: a built-in curved oak banquette, channel-tufted, loose cushions, along the right-hand wall --
@@ -66,7 +68,9 @@ CHAIR_Y36 = 1.72
 # --- 6. the sink: a floating trough cast in Ember acrylic in an alcove of dark timber, between the banquette and
 # the zone -----------------------------------------------------------------------------------------------------------
 ALCOVE = dict(x0=10.42, x1=11.62, depth=0.06, z1=2.45)
-SINK = dict(x=11.02, w=0.86, d=0.40, t=0.17, top=0.86, basin=(0.32, 0.13, 0.11))   # basin semi-axes x, y, z
+# the lead's note (2026-10-20): a thick slab of cast Ember, about 120 deep and 600 wide, floating off the wall, a soft
+# rounded basin worked into its top, glowing through its depth (was a trough 860 x 400 x 170)
+SINK = dict(x=11.02, w=0.60, d=0.38, t=0.12, top=0.86, gap=0.025, basin=(0.21, 0.12, 0.075))   # basin semi-axes x, y, z
 
 # --- 7. light: the Dome pendant low over the counter, the squat Sphere on every table ---------------------------------
 DOMES = [4.95, 6.25, 7.50, 8.70]                                    # over the counter, between the beams

@@ -76,7 +76,23 @@ def limewash(bpy, colour, name):
 
 
 def mohair(bpy, colour, name):
-    return D.velvet(bpy, colour, name)
+    """Mohair: the deep velvet, its sheen tinted with the pile (D.velvet's white sheen read chocolate as pale tan)."""
+    return velvet_deep(bpy, colour, name)
+
+
+def blackened_steel(bpy):
+    if 'steel-black' not in _M:
+        _M['steel-black'] = principled(bpy, 'steel-black', '#1E1C1A', rough=0.42, metal=0.85, bump=(0.003, 0.15, 0.0002))
+    return _M['steel-black']
+
+
+def leather(bpy, colour, name='leather-oxblood'):
+    """Oxblood leather: a deep, slightly waxed hide with a fine grain."""
+    if name not in _M:
+        m = principled(bpy, name, colour, rough=0.48, bump=(0.0006, 0.25, 0.0002))
+        LK.R._set(D._bsdf(m), 'Coat Weight', 0.15); LK.R._set(D._bsdf(m), 'Coat Roughness', 0.35)
+        _M[name] = m
+    return _M[name]
 
 
 def velvet_deep(bpy, colour, name):
@@ -447,48 +463,45 @@ def nameplate(bpy, kit, p, objs):
 
 
 # --- 5: the seats ---------------------------------------------------------------------------------------------------
-def _chair(oak, uph, x, y, face, seat_h, back=0.24):
-    """A counter (or dining) chair: four tapered dark-oak legs, an upholstered round seat, a low curved oak back with
-    an upholstered pad, behind the sitter (opposite `face`, degrees)."""
+def _chair(stl, uph, br, x, y, face, seat_h, back=0.20):
+    """The brief's counter (or dining) chair: four slim blackened-steel legs, splayed; a thick upholstered round seat in
+    oxblood leather; a low curved upholstered back on two steel posts, wrapping the sitter (opposite `face`, degrees);
+    on the counter chair a brass foot ring."""
     f = math.radians(face); sr = R.CHAIRS36['seat_r']
-    _cyl(oak.bm, x, y, seat_h - 0.06, sr - 0.01, 0.025, seg=40)
-    _cyl(uph.bm, x, y, seat_h - 0.04, sr, 0.05, seg=40)
+    _cyl(stl.bm, x, y, seat_h - 0.075, sr - 0.03, 0.012, seg=40)                       # the seat pan
+    _cyl(uph.bm, x, y, seat_h - 0.065, sr, 0.055, seg=48)                              # the cushion
+    _cyl(uph.bm, x, y, seat_h - 0.012, sr - 0.012, 0.012, seg=48)                      # its crown, eased
     for k in range(4):
         t = f + math.radians(45 + 90 * k)
-        top = (x + 0.13 * math.cos(t), y + 0.13 * math.sin(t), seat_h - 0.06)
-        foot = (x + 0.20 * math.cos(t), y + 0.20 * math.sin(t), 0.0)
-        LK._rod(oak.bm, foot, top, 0.014, 0.019)
-    if seat_h > 0.6:                                                  # a stretcher ring for the feet
-        zr = 0.30
-        pts = []
-        for k in range(4):
-            t = f + math.radians(45 + 90 * k)
-            u = zr / (seat_h - 0.06)
-            pts.append((x + (0.20 - 0.07 * u) * math.cos(t), y + (0.20 - 0.07 * u) * math.sin(t), zr))
-        for k in range(4):
-            LK._rod(oak.bm, pts[k], pts[(k + 1) % 4], 0.009, 0.009, seg=8)
-    b = f + math.pi; zb = seat_h + 0.10
-    for da in (-0.55, 0.0, 0.55):
+        top = (x + 0.12 * math.cos(t), y + 0.12 * math.sin(t), seat_h - 0.07)
+        foot = (x + 0.21 * math.cos(t), y + 0.21 * math.sin(t), 0.0)
+        LK._rod(stl.bm, foot, top, 0.009, 0.011, seg=12)
+    if seat_h > 0.6:                                                  # the brass foot ring
+        zr = 0.30; rr = 0.21 - 0.09 * zr / (seat_h - 0.07)
+        LK._arc(br.bm, x, y, rr - 0.008, rr + 0.008, 0.0, 2 * math.pi, zr - 0.008, zr + 0.008, seg=48)
+    b = f + math.pi; zb = seat_h + 0.06
+    for da in (-0.62, 0.62):                                          # two posts
         t = b + da
-        LK._rod(oak.bm, (x + 0.17 * math.cos(t), y + 0.17 * math.sin(t), seat_h - 0.02),
-                (x + 0.19 * math.cos(t), y + 0.19 * math.sin(t), zb + 0.02), 0.011, 0.010)
-    LK._arc(oak.bm, x, y, 0.185, 0.212, b - 1.05, b + 1.05, zb, zb + back * 0.55)
-    LK._arc(uph.bm, x, y, 0.165, 0.186, b - 0.95, b + 0.95, zb + 0.015, zb + back * 0.55 - 0.012)
+        LK._rod(stl.bm, (x + 0.15 * math.cos(t), y + 0.15 * math.sin(t), seat_h - 0.06),
+                (x + 0.19 * math.cos(t), y + 0.19 * math.sin(t), zb + 0.02), 0.008, 0.008, seg=10)
+    LK._arc(stl.bm, x, y, 0.200, 0.208, b - 1.15, b + 1.15, zb, zb + back)              # the back's steel shell
+    LK._arc(uph.bm, x, y, 0.168, 0.200, b - 1.10, b + 1.10, zb + 0.008, zb + back - 0.004)  # its pad
 
 
 def seats(bpy, kit, p, objs):
-    oak = Mesh('chairs-oak'); uph = Mesh('chairs-mohair')
+    stl = Mesh('chairs-steel'); uph = Mesh('chairs-leather'); br = Mesh('chairs-brass')
     C = R.COUNTER; n = R.NCHAIRS
     for i in range(n):
         x = C['x0'] + 0.55 + i * (C['x1'] - C['x0'] - 1.1) / (n - 1) + ((i * 7) % 5 - 2) * 0.02
         y = C['y0'] - 0.48 - (0.12 if i in (2, 5) else 0.0)
-        _chair(oak, uph, x, y, 90.0 + ((i * 5) % 7 - 3) * 5.0, R.CHAIRS36['seat_h'])
+        _chair(stl, uph, br, x, y, 90.0 + ((i * 5) % 7 - 3) * 5.0, R.CHAIRS36['seat_h'], R.CHAIRS36['back'])
     for x in R.TABLES36:                                              # a chair opposite each banquette table
-        _chair(oak, uph, x + 0.03, R.CHAIR_Y36, 270.0 + ((int(x * 10) % 5) - 2) * 4.0, 0.46, back=0.30)
+        _chair(stl, uph, br, x + 0.03, R.CHAIR_Y36, 270.0 + ((int(x * 10) % 5) - 2) * 4.0, 0.46, back=0.26)
     wx, wy = R.WINDOW_TABLE
-    _chair(oak, uph, wx, wy - 0.62, 90.0, 0.46, back=0.30); _chair(oak, uph, wx, wy + 0.62, 270.0, 0.46, back=0.30)
-    objs.append(oak.object(bpy, dark_oak(bpy, name='oak-chairs'), smooth=True))
-    objs.append(uph.object(bpy, mohair(bpy, p.get('mohair', '#2E2520'), 'mohair-chairs'), smooth=True, bevel=0.01))
+    _chair(stl, uph, br, wx, wy - 0.62, 90.0, 0.46, back=0.26); _chair(stl, uph, br, wx, wy + 0.62, 270.0, 0.46, back=0.26)
+    objs.append(stl.object(bpy, blackened_steel(bpy), smooth=True))
+    objs.append(uph.object(bpy, leather(bpy, p.get('chair_leather', R.CHAIRS36['leather'])), smooth=True, bevel=0.012))
+    objs.append(br.object(bpy, brass(bpy), smooth=True))
 
 
 def banquette(bpy, kit, p, objs):
@@ -643,7 +656,7 @@ def sink(bpy, kit, p, objs):
                                            name=f'-alcove{k}'), bevel=0.003))
     hd = Mesh('alcove-head'); hd.box(A['x0'] - 0.02, 0.0, A['z1'], A['x1'] + 0.02, A['depth'] + 0.04, A['z1'] + 0.05)
     objs.append(hd.object(bpy, dark_oak(bpy, name='oak-alcove-head'), bevel=0.004))
-    y0 = A['depth'] + 0.01; z0 = S['top'] - S['t']
+    y0 = A['depth'] + S.get('gap', 0.01); z0 = S['top'] - S['t']
     blk = Mesh('sink-block'); blk.box(S['x'] - S['w'] / 2, y0, z0, S['x'] + S['w'] / 2, y0 + S['d'], S['top'])
     ob = blk.object(bpy, resin(bpy, p.get('sink_deep', '#C8262B'), 'sink-ember', radius=p.get('sink_radius', 0.12),
                                rough=0.03))
@@ -661,14 +674,22 @@ def sink(bpy, kit, p, objs):
     bev = ob.modifiers.new('ease', 'BEVEL'); bev.width = 0.012; bev.segments = 5; bev.limit_method = 'ANGLE'
     cut.hide_render = True; cut.hide_viewport = True
     objs.append(ob)
-    # the light within: a warm core cast into the block under the basin, seen only through the acrylic, so every
-    # face glows and the red deepens with the thickness (sink-p1, both critics: an emitter below lit the wall)
-    # set deeper in from the faces (p2r: seen as a white slab), and warmer, so it reads only as light in the red
-    lp = Mesh('sink-core'); lp.box(S['x'] - S['w'] / 2 + 0.10, y0 + 0.09, z0 + 0.02, S['x'] + S['w'] / 2 - 0.10,
-                                   y0 + S['d'] - 0.09, z0 + 0.04)
-    em = lp.object(bpy, emitter(bpy, 'sink-core', '#FF9A60', p.get('sink_glow', 6.0)))
-    em.visible_shadow = False
-    objs.append(em)
+    # the light within (the lead, 2026-10-20: a glow that deepens with thickness, never an emissive slab): an emitting
+    # volume filling the slab a hair inside its faces, cut by the same basin, so every path through the cast adds light
+    # in proportion to its length; no surface of its own
+    inn = Mesh('sink-glow'); e = 0.003
+    inn.box(S['x'] - S['w'] / 2 + e, y0 + e, z0 + e, S['x'] + S['w'] / 2 - e, y0 + S['d'] - e, S['top'] - e)
+    vm = bpy.data.materials.new('sink-glow-vol'); vm.use_nodes = True; nt = vm.node_tree
+    for n in list(nt.nodes):
+        nt.nodes.remove(n)
+    out = nt.nodes.new('ShaderNodeOutputMaterial'); vol = nt.nodes.new('ShaderNodeEmission')
+    vol.inputs['Color'].default_value = lin(p.get('sink_glow_col', '#FF3A22'))
+    vol.inputs['Strength'].default_value = p.get('sink_glow', 6.0)
+    nt.links.new(vol.outputs['Emission'], out.inputs['Volume'])
+    vo = inn.object(bpy, vm)
+    m2 = vo.modifiers.new('basin', 'BOOLEAN'); m2.operation = 'DIFFERENCE'; m2.object = cut; m2.solver = 'EXACT'
+    vo.visible_shadow = False
+    objs.append(vo)
     _area(bpy, 'sink-uplight', (S['x'], y0 + S['d'] / 2, z0 - 0.03), (0, 0, 0), (S['w'] - 0.1, S['d'] - 0.1),
           p.get('sink_w', 0.0) or 0.0001, kelvin=2600)
     # the spout and its plate
@@ -679,13 +700,14 @@ def sink(bpy, kit, p, objs):
     LK._rod(sp.bm, (S['x'] + 0.10, 0.035, S['top'] + 0.22), (S['x'] + 0.10, 0.09, S['top'] + 0.22), 0.012, 0.012, seg=16)
     LK._rod(sp.bm, (S['x'] + 0.10, 0.09, S['top'] + 0.22), (S['x'] + 0.10, 0.09, S['top'] + 0.30), 0.005, 0.004, seg=10)
     objs.append(sp.object(bpy, brushed_steel(bpy), smooth=True))
-    tw = Mesh('sink-towel'); xt = S['x'] - S['w'] / 2 + 0.13
-    tw.box(xt - 0.10, y0 + 0.06, S['top'], xt + 0.10, y0 + 0.30, S['top'] + 0.035)
-    objs.append(tw.object(bpy, principled(bpy, 'linen', '#D8D0C0', rough=0.9, bump=(0.0008, 0.3, 0.0002)), bevel=0.012, seg=3))
-    so = Mesh('sink-soap')
-    _lathe(so.bm, [(0, 0), (0.03, 0), (0.03, 0.12), (0.012, 0.14), (0.012, 0.17), (0, 0.17)], seg=24, z0=S['top'],
-           cx=S['x'] + S['w'] / 2 - 0.07, cy=y0 + 0.08)
-    objs.append(so.object(bpy, principled(bpy, 'soap-glass', '#B06A28', rough=0.05, trans=1.0, ior=1.5), smooth=True))
+    # a linen hand towel over a short brass rod on the boards, right of the slab (the slab's top is the basin)
+    rx = S['x'] + S['w'] / 2 + 0.12; rz = S['top'] + 0.18
+    rod = Mesh('sink-rod'); LK._rod(rod.bm, (rx - 0.09, 0.07, rz), (rx + 0.09, 0.07, rz), 0.006, 0.006, seg=12)
+    LK._rod(rod.bm, (rx - 0.09, A['depth'], rz), (rx - 0.09, 0.07, rz), 0.005, 0.005, seg=10)
+    LK._rod(rod.bm, (rx + 0.09, A['depth'], rz), (rx + 0.09, 0.07, rz), 0.005, 0.005, seg=10)
+    objs.append(rod.object(bpy, brass(bpy), smooth=True))
+    tw = Mesh('sink-towel'); tw.box(rx - 0.075, 0.064, rz - 0.30, rx + 0.075, 0.078, rz + 0.008)
+    objs.append(tw.object(bpy, principled(bpy, 'linen', '#D8D0C0', rough=0.9, bump=(0.0008, 0.3, 0.0002)), bevel=0.004, seg=3))
 
 
 # --- signs of life -----------------------------------------------------------------------------------------------------
