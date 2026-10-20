@@ -10,17 +10,17 @@
    0.32
   ],
   "target": [
-   0.06,
+   0.08,
    0.0,
-   0.25
+   0.27
   ],
   "lens_mm": 85,
   "level": true,
-  "fstop": 5.6,
+  "fstop": 8.0,
   "focus": [
-   0.02,
-   0.0,
-   0.14
+   0.08,
+   0.1,
+   0.25
   ]
  },
  "set": {
@@ -36,18 +36,18 @@
     "kind": "kit",
     "shape": "box",
     "material": "pbr",
-    "texture": "marble_01",
+    "texture": "oak_veneer_01",
     "res": "2k",
-    "color": "#ECE7DF",
-    "rough_mul": 0.6,
+    "color": "#E9DAC4",
+    "rough_mul": 0.75,
     "size": [
      3.0,
-     4.2,
+     3.6,
      0.04
     ],
     "position": [
      0.0,
-     0.8,
+     0.5,
      0.0
     ]
    },
@@ -79,9 +79,9 @@
     "fn": "dome",
     "spots": [
      [
-      0.1,
-      0.1,
-      0.4
+      0.22,
+      0.35,
+      0.5
      ]
     ],
     "flavour": "smoke",
@@ -106,20 +106,20 @@
   "key": {
    "type": "area",
    "size_m": [
-    3.0,
-    0.5
+    1.2,
+    0.6
    ],
    "orbit": {
-    "azimuth_deg": -30,
-    "elevation_deg": 42,
+    "azimuth_deg": -40,
+    "elevation_deg": 35,
     "distance_m": 2.6
    },
    "target": [
-    0.06,
+    0.08,
     0.0,
-    0.25
+    0.27
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.9,
    "color": 4300
   },
   "fill": {
@@ -134,9 +134,9 @@
     "distance_m": 3.0
    },
    "target": [
-    0.06,
+    0.08,
     0.0,
-    0.25
+    0.27
    ],
    "irradiance": 0.25,
    "color": 4300
@@ -144,61 +144,61 @@
   "bgwash": {
    "type": "area",
    "size_m": [
-    3.5,
-    1.0
+    6.0,
+    4.0
    ],
    "position": [
-    0.06,
-    -0.4,
-    3.0
+    0.08,
+    -1.2,
+    3.6
    ],
    "target": [
-    0.1,
+    0.08,
     2.2,
-    0.3
+    0.27
    ],
-   "irradiance": 0.9,
-   "color": 4300,
+   "irradiance": 3.403,
+   "color": "#FFE1AA",
    "camera": false,
    "specular": 0.0
   },
   "back": {
    "type": "area",
    "size_m": [
-    1.4,
-    1.0
+    0.6,
+    1.2
    ],
    "position": [
-    0.1,
-    1.6,
-    0.9
+    0.35,
+    1.0,
+    1.1
    ],
    "target": [
     0.05,
     0,
     0.3
    ],
-   "irradiance": 0.7,
+   "irradiance": 0.6,
    "color": 4300,
    "camera": false
   },
   "thru_orb": {
    "type": "area",
    "size_m": [
-    0.35,
-    0.35
+    0.16,
+    0.16
    ],
    "position": [
     0.04,
-    0.26,
-    0.135
+    0.13,
+    0.14
    ],
    "target": [
     -0.05,
     -1.45,
     0.25
    ],
-   "irradiance": 40.0,
+   "irradiance": 4.0,
    "color": 4300,
    "camera": false,
    "specular": 0.0
@@ -210,16 +210,16 @@
     0.18
    ],
    "position": [
-    0.13,
-    0.42,
-    0.47
+    0.26,
+    0.62,
+    0.57
    ],
    "target": [
     -0.05,
     -1.45,
     0.3
    ],
-   "irradiance": 3.5,
+   "irradiance": 0.3,
    "color": 4300,
    "camera": false,
    "specular": 0.0
@@ -227,21 +227,21 @@
   "bounce": {
    "type": "area",
    "size_m": [
-    0.4,
-    0.3
+    0.8,
+    0.5
    ],
    "position": [
-    -0.35,
-    -0.3,
-    0.08
+    0.0,
+    -0.6,
+    0.3
    ],
    "target": [
     0.02,
     0,
-    0.06
+    0.1
    ],
-   "irradiance": 0.6,
-   "color": 4300,
+   "irradiance": 0.12,
+   "color": 5000,
    "camera": false
   }
  },
@@ -253,7 +253,7 @@
   "bounces": 24,
   "transmission_bounces": 20,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.15,
+  "exposure": 0.0,
   "white_balance_k": 4300
  },
  "title": "Dome and Orb for earf.world: unlit"

@@ -5,18 +5,18 @@
  ],
  "camera": {
   "position": [
-   -0.16,
+   -0.14,
    -0.62,
-   0.15
+   0.16
   ],
   "target": [
    0.0,
    0.0,
-   0.13
+   0.11
   ],
   "lens_mm": 75,
   "level": true,
-  "fstop": 5.6,
+  "fstop": 4.0,
   "focus": [
    0.0,
    -0.06,
@@ -36,18 +36,18 @@
     "kind": "kit",
     "shape": "box",
     "material": "pbr",
-    "texture": "marble_01",
+    "texture": "oak_veneer_01",
     "res": "2k",
-    "color": "#ECE7DF",
-    "rough_mul": 0.6,
+    "color": "#E9DAC4",
+    "rough_mul": 0.75,
     "size": [
      3.0,
-     4.2,
+     3.6,
      0.04
     ],
     "position": [
      0.0,
-     0.8,
+     0.5,
      0.0
     ]
    },
@@ -64,8 +64,8 @@
      ]
     ],
     "flavour": "ember",
-    "shade_glow": 1.1,
-    "lamp_w": 3.0,
+    "shade_glow": 0.55,
+    "lamp_w": 1.2,
     "materials": {
      "liner": {
       "glow_color": "#FFDCB8"
@@ -85,20 +85,20 @@
   "key": {
    "type": "area",
    "size_m": [
-    3.0,
-    0.5
+    0.6,
+    1.6
    ],
    "orbit": {
-    "azimuth_deg": -30,
-    "elevation_deg": 42,
+    "azimuth_deg": -35,
+    "elevation_deg": 45,
     "distance_m": 2.6
    },
    "target": [
     0.0,
     0.0,
-    0.13
+    0.11
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.35,
    "color": 4300
   },
   "fill": {
@@ -115,29 +115,29 @@
    "target": [
     0.0,
     0.0,
-    0.13
+    0.11
    ],
-   "irradiance": 0.25,
+   "irradiance": 0.15,
    "color": 4300
   },
   "bgwash": {
    "type": "area",
    "size_m": [
-    3.5,
-    1.0
+    6.0,
+    4.0
    ],
    "position": [
     0.0,
-    -0.4,
-    3.0
+    -1.2,
+    3.6
    ],
    "target": [
     0.0,
     2.2,
-    0.25
+    0.11
    ],
-   "irradiance": 0.9,
-   "color": 4300,
+   "irradiance": 3.316,
+   "color": "#FFDFA8",
    "camera": false,
    "specular": 0.0
   },
@@ -145,11 +145,11 @@
    "type": "point",
    "position": [
     0.0,
-    -0.075,
-    0.09
+    -0.05,
+    0.1
    ],
-   "power_w": 2.0,
-   "radius_m": 0.06,
+   "power_w": 3.0,
+   "radius_m": 0.05,
    "color": "#FF7A68",
    "camera": false,
    "transmission": false,
@@ -164,17 +164,37 @@
    "position": [
     -0.25,
     0.4,
-    0.1
+    0.14
    ],
    "target": [
     0,
     0,
     0.06
    ],
-   "irradiance": 0.8,
+   "irradiance": 1.2,
    "color": 4300,
    "camera": false,
-   "specular": 0.5
+   "specular": 1.0
+  },
+  "strip": {
+   "type": "area",
+   "size_m": [
+    0.08,
+    0.6
+   ],
+   "orbit": {
+    "azimuth_deg": -60,
+    "elevation_deg": 10,
+    "distance_m": 0.6
+   },
+   "target": [
+    0,
+    0,
+    0.06
+   ],
+   "irradiance": 1.2,
+   "color": 4300,
+   "camera": false
   }
  },
  "render": {
