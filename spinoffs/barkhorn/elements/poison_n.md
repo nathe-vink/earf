@@ -26,3 +26,12 @@ The coordinator chose to drop N1 (option a).
   - the gravel is one uniform repeating texture.
 
 The sulphur vents and fumes barely register at this distance.
+
+## N2, the toxic algae lake (`poison_n2.py`)
+
+**Proof 1** (`proofs31/element-poison_n2-p01.jpg`, 1200 × 800, 96 samples):
+- **Read test:** passes. The judge saw "…a weathered wooden dock in a foggy lake covered in bright green algae, with broken tree stumps rising from the water, an empty wooden gallows-like frame with a hanging rope behind it, and a red-and-white 'DANGER: TOXIC ALGAE, AVOID CONTACT' sign in the lower left."
+- **Realism:** 4.5 and 4.5. Both critics named the same tells:
+  - The algae is a flat, smeared neon layer: no clumping, no debris, no fade into the fog.
+  - The speaker has no contact shadow on the boards and is too clean for the fog.
+  - The dock's reflection is a dark slab, and the sign's type is too crisp.
