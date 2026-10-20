@@ -22,13 +22,56 @@
   "props": [
    {
     "kind": "kit",
+    "shape": "box",
+    "size": [
+     400.0,
+     260.0,
+     0.05
+    ],
+    "position": [
+     0.0,
+     60.0,
+     -0.85
+    ],
+    "material": "card",
+    "color": "#1E2614"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "puddle",
+    "size": [
+     400.0,
+     260.0
+    ],
+    "position": [
+     0.0,
+     60.0,
+     0.0
+    ],
+    "z": 0.0,
+    "ring": 0.7,
+    "ripple": 0.35,
+    "keep": 1.0,
+    "roughness": 0.02,
+    "ripple_m": 0.0012,
+    "tint_lin": [
+     0.42,
+     0.5,
+     0.3
+    ],
+    "seed": 9
+   },
+   {
+    "kind": "kit",
     "shape": "ext",
     "module": "poison_p_el",
     "fn": "algae_water",
     "position": [
      0.0,
      60.0,
-     0.0
+     0.004
     ],
     "size": [
      400.0,
@@ -37,6 +80,7 @@
     "cover": 0.62,
     "drift": 20.0,
     "scum_rough": 0.35,
+    "float": true,
     "streak": 1.7,
     "scale": 0.12,
     "clots": 0.45,
@@ -93,7 +137,7 @@
     "module": "poison_p_el",
     "fn": "sign",
     "position": [
-     -1.2,
+     -1.55,
      10.2,
      -0.1
     ],
@@ -102,12 +146,13 @@
      0,
      26
     ],
-    "lean": 9.0,
+    "lean": 7.0,
     "size": [
      0.5,
      0.36
     ],
-    "post": 1.15
+    "post": 1.15,
+    "bolts": true
    },
    {
     "kind": "kit",
@@ -129,18 +174,18 @@
    {
     "kind": "kit",
     "shape": "asset",
-    "model": "dead_tree_trunk_02",
+    "model": "dead_tree_trunk",
     "position": [
-     -9.0,
-     16.0,
-     -1.2
+     -8.0,
+     15.0,
+     -0.9
     ],
     "rotate": [
      0,
-     -88,
+     -90,
      110
     ],
-    "scale": 2.2,
+    "scale": 1.6,
     "res": "2k"
    },
    {
@@ -150,7 +195,7 @@
     "position": [
      6.5,
      13.0,
-     -1.2
+     -1.4
     ],
     "rotate": [
      0,
@@ -163,18 +208,18 @@
    {
     "kind": "kit",
     "shape": "asset",
-    "model": "dead_tree_trunk_02",
+    "model": "dead_tree_trunk",
     "position": [
-     12.0,
-     22.0,
-     -1.2
+     4.2,
+     24.0,
+     -0.9
     ],
     "rotate": [
      0,
-     -89,
+     -88,
      70
     ],
-    "scale": 2.4,
+    "scale": 2.3,
     "res": "2k"
    },
    {
@@ -197,18 +242,52 @@
    {
     "kind": "kit",
     "shape": "asset",
-    "model": "dead_tree_trunk_02",
+    "model": "dead_tree_trunk",
     "position": [
-     3.0,
+     -2.6,
      30.0,
-     -1.2
+     -0.8
     ],
     "rotate": [
      0,
-     -88,
+     -91,
      20
     ],
-    "scale": 2.8,
+    "scale": 2.0,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dead_tree_trunk",
+    "position": [
+     11.0,
+     34.0,
+     -0.9
+    ],
+    "rotate": [
+     0,
+     -89,
+     250
+    ],
+    "scale": 2.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "tree_stump_02",
+    "position": [
+     2.9,
+     9.4,
+     -0.32
+    ],
+    "rotate": [
+     0,
+     0,
+     140
+    ],
+    "scale": 1.0,
     "res": "2k"
    },
    {
@@ -220,35 +299,45 @@
      [
       -5.5,
       9.0,
-      0.288
+      0.29
      ],
      [
-      -9.0,
-      16.0,
-      0.396
+      -8.0,
+      15.0,
+      0.12
      ],
      [
       6.5,
       13.0,
-      0.34199999999999997
+      0.34
      ],
      [
-      12.0,
-      22.0,
-      0.432
+      4.2,
+      24.0,
+      0.16
      ],
      [
       -15.0,
       26.0,
-      0.46799999999999997
+      0.47
      ],
      [
-      3.0,
+      -2.6,
       30.0,
-      0.504
+      0.14
      ],
      [
-      -1.2,
+      11.0,
+      34.0,
+      0.18
+     ],
+     [
+      2.9,
+      9.4,
+      0.62
+     ],
+     [
+      -1.55,
       10.25,
       0.06
      ],
@@ -446,8 +535,8 @@
      90.0,
      4.0
     ],
-    "clear_y": 10.0,
-    "full_y": 45.0,
+    "clear_y": 4.0,
+    "full_y": 30.0,
     "density": 0.016,
     "ground_boost": 5.0,
     "ground_h": 0.7,
@@ -521,50 +610,28 @@
     ],
     "scale": 0.5,
     "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_p_el",
+    "fn": "wetline",
+    "models": [
+     "modular_wooden_pier",
+     "dead_tree_trunk",
+     "tree_stump",
+     "weathered_planks",
+     "dry_branches"
+    ],
+    "z": 0.0,
+    "top": 0.08,
+    "color": "#3E3A26",
+    "wet_rough": 0.22
    }
   ]
  },
  "lights": {
-  "reflector": {
-   "type": "area",
-   "size_m": [
-    2.0,
-    1.5
-   ],
-   "target": [
-    0.75,
-    11.6,
-    1.14
-   ],
-   "irradiance": 3.0,
-   "color": "#EEF0E0",
-   "orbit": {
-    "azimuth_deg": -35,
-    "elevation_deg": 10,
-    "distance_m": 2.8
-   }
-  },
   "bounce": {
-   "type": "area",
-   "size_m": [
-    2.0,
-    1.5
-   ],
-   "target": [
-    0.75,
-    11.6,
-    1.04
-   ],
-   "irradiance": 3.5,
-   "color": "#E8D9B0",
-   "orbit": {
-    "azimuth_deg": 10,
-    "elevation_deg": 25,
-    "distance_m": 2.5
-   },
-   "specular": 0.0
-  },
-  "card": {
    "type": "area",
    "size_m": [
     2.0,
@@ -573,16 +640,173 @@
    "target": [
     0.75,
     11.6,
-    1.54
+    0.94
    ],
-   "irradiance": 1.0,
-   "color": "#F0F2E6",
+   "irradiance": 4.0,
+   "color": "#F1E6B8",
    "orbit": {
-    "azimuth_deg": 60,
-    "elevation_deg": 45,
+    "azimuth_deg": -40,
+    "elevation_deg": 8,
+    "distance_m": 3.5
+   }
+  },
+  "throat": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.4
+   ],
+   "target": [
+    0.75,
+    11.6,
+    1.5899999999999999
+   ],
+   "irradiance": 0.5,
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": -8,
+    "elevation_deg": 4,
+    "distance_m": 2.2
+   }
+  },
+  "low": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "target": [
+    0.75,
+    11.6,
+    0.74
+   ],
+   "irradiance": 1.5,
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": -5,
+    "elevation_deg": 3,
     "distance_m": 2.5
+   }
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    1.5,
+    1.5
+   ],
+   "target": [
+    0.75,
+    11.6,
+    0.94
+   ],
+   "irradiance": 9.0,
+   "color": "#F6DDB0",
+   "orbit": {
+    "azimuth_deg": -130,
+    "elevation_deg": 5,
+    "distance_m": 3.0
    },
-   "specular": 0.3
+   "receivers": [
+    "amp-box",
+    "amp-box-gasket",
+    "amp-plate-gold",
+    "amp-plate-housings",
+    "amp-plate-ink",
+    "amp-plate-labels",
+    "amp-plate-led-green",
+    "amp-plate-led-on",
+    "amp-plate-led-red",
+    "amp-plate-metal",
+    "amp-plate-module",
+    "amp-plate-plate",
+    "amp-plate-print",
+    "amp-plate-rca-orange",
+    "amp-plate-rca-red",
+    "amp-plate-rca-white",
+    "amp-plate-rings",
+    "amp-plate-screws",
+    "amp-plate-sticker",
+    "back",
+    "back-gasket",
+    "back-screws",
+    "bottom",
+    "brace",
+    "brace-2",
+    "cable-glands",
+    "cap-o-ring",
+    "cloth-disc",
+    "feet-base",
+    "feet-stem",
+    "front-panel",
+    "grip-left",
+    "grip-right",
+    "hf-adaptor",
+    "hf-band",
+    "hf-exit",
+    "hf-frame",
+    "hf-motor",
+    "hf-plug",
+    "hf-terminals",
+    "land-bottom",
+    "land-left",
+    "land-right",
+    "land-top",
+    "lead-hf",
+    "lead-woofer",
+    "left",
+    "lining-back-a-web",
+    "lining-back-b-web",
+    "lining-back-c-web",
+    "lining-back-d-web",
+    "lining-bottom-1-web",
+    "lining-left-2a-web",
+    "lining-left-2b-web",
+    "lining-left-3-web",
+    "lining-right-2a-web",
+    "lining-right-2b-web",
+    "lining-right-3-web",
+    "lining-top-3-web",
+    "mark-back",
+    "port-frame-left",
+    "port-frame-right",
+    "port-left",
+    "port-right",
+    "port-screws",
+    "post-1",
+    "post-2",
+    "post-3",
+    "post-4",
+    "post-sleeves",
+    "post-sockets",
+    "rating-plate-plate",
+    "rating-plate-print",
+    "rating-plate-screws",
+    "rib-back-1",
+    "rib-back-2",
+    "rib-bottom",
+    "rib-left-1",
+    "rib-right-1",
+    "rib-top",
+    "right",
+    "tie-rod-insert",
+    "tie-rod-rod",
+    "top",
+    "top-pad",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-cap",
+    "woofer-coil",
+    "woofer-cone",
+    "woofer-frame",
+    "woofer-gasket",
+    "woofer-magnet",
+    "woofer-motor",
+    "woofer-ring",
+    "woofer-screws",
+    "woofer-spider",
+    "woofer-surround",
+    "woofer-terminals"
+   ]
   }
  },
  "render": {

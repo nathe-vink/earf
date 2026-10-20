@@ -467,6 +467,13 @@ def algae_water(bpy, name, p, kit):
     hgt = nt.nodes.new('ShaderNodeMath'); hgt.operation = 'MULTIPLY'
     L(cut.outputs['Result'], hgt.inputs[0]); L(fine.outputs['Fac'], hgt.inputs[1])
     L(hgt.outputs['Value'], bump.inputs['Height']); L(bump.outputs['Normal'], b.inputs['Normal'])
+    if p.get('float'):                                    # the scum alone, floating on real water: open where it thins
+        out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+        tr = nt.nodes.new('ShaderNodeBsdfTransparent'); mx = nt.nodes.new('ShaderNodeMixShader')
+        op = nt.nodes.new('ShaderNodeMapRange'); L(cut.outputs['Result'], op.inputs['Value'])
+        op.inputs['From Min'].default_value = 0.15; op.inputs['From Max'].default_value = 0.5
+        L(op.outputs['Result'], mx.inputs['Fac']); L(tr.outputs['BSDF'], mx.inputs[1]); L(b.outputs['BSDF'], mx.inputs[2])
+        L(mx.outputs['Shader'], out.inputs['Surface'])
     bm = bmesh.new()
     vs = [bm.verts.new(c) for c in ((-w / 2, -d / 2, 0), (w / 2, -d / 2, 0), (w / 2, d / 2, 0), (-w / 2, d / 2, 0))]
     bm.faces.new(vs)
@@ -533,10 +540,19 @@ def sign(bpy, name, p, kit):
     g2 = bmesh.ops.create_cube(back, size=1.0)
     for v in g2['verts']:
         v.co = Vector((v.co.x * bw, v.co.y * 0.012 + 0.006, z0 + (v.co.z + 0.5) * bh))
+    bolts = bmesh.new()                                   # the coach bolts through the board into the post
+    if p.get('bolts'):
+        for bz in (z0 + 0.05, z0 + bh - 0.05):
+            g3 = bmesh.ops.create_cone(bolts, cap_ends=True, segments=12, radius1=0.011, radius2=0.009, depth=0.006)
+            for v in g3['verts']:
+                v.co = Vector((v.co.x, v.co.z - 0.004, v.co.y + bz))
     M = (Matrix.Translation(Vector(p.get('position', [0, 0, 0]))) @ Matrix.Rotation(math.radians(p.get('rotate', [0, 0, 0])[2]), 4, 'Z')
          @ Matrix.Rotation(math.radians(p.get('lean', 4.0)), 4, 'X'))
     out = []
-    for k, (b_, mat, sm) in enumerate(((bm, wood, False), (back, wood, False), (fb, face, False))):
+    parts = [(bm, wood, False), (back, wood, False), (fb, face, False)]
+    if p.get('bolts'):
+        parts.append((bolts, _plain(bpy, f'{name}-bolt', '#3A2A1E', 0.7, 0.6), True))
+    for k, (b_, mat, sm) in enumerate(parts):
         for v in b_.verts:
             v.co = M @ v.co
         ob = _obj(bpy, f'{name}-{k}', b_, mat, {}, smooth=sm); ob.location = (0, 0, 0); out.append(ob)
@@ -577,3 +593,44 @@ def scum_rings(bpy, name, p, kit):
             j = (k + 1) % seg
             bm.faces.new((inner[k], inner[j], outer[j], outer[k]))
     return [_obj(bpy, name, bm, m, {'position': [0, 0, 0]}, smooth=True)]
+
+
+def wetline(bpy, name, p, kit):
+    """Wet bases on everything standing in the water: every scanned model's materials (those named in `models`) are
+    darkened and glossed below world height `top` (m), most at the waterline `z`, a darker band just above it. Place
+    it after the pieces it wets."""
+    done = 0
+    for m in bpy.data.materials:
+        if not m.use_nodes or not any(k in m.name for k in p.get('models', [])):
+            continue
+        nt = m.node_tree; L = nt.links.new
+        b = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+        if b is None:
+            continue
+        geo = nt.nodes.new('ShaderNodeNewGeometry'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+        L(geo.outputs['Position'], sep.inputs['Vector'])
+        wet = nt.nodes.new('ShaderNodeMapRange'); wet.interpolation_type = 'SMOOTHSTEP'
+        L(sep.outputs['Z'], wet.inputs['Value'])
+        wet.inputs['From Min'].default_value = p.get('z', 0.0) + p.get('top', 0.07)
+        wet.inputs['From Max'].default_value = p.get('z', 0.0)
+        mul = nt.nodes.new('ShaderNodeMix'); mul.data_type = 'RGBA'; mul.blend_type = 'MULTIPLY'
+        L(wet.outputs['Result'], mul.inputs['Factor'])
+        mul.inputs['B'].default_value = (*_hex(p.get('color', '#4A4A30')), 1)
+        src = b.inputs['Base Color'].links[0].from_socket if b.inputs['Base Color'].is_linked else None
+        if src is not None:
+            L(src, mul.inputs['A'])
+        else:
+            mul.inputs['A'].default_value = b.inputs['Base Color'].default_value
+        L(mul.outputs['Result'], b.inputs['Base Color'])
+        rs = b.inputs['Roughness'].links[0].from_socket if b.inputs['Roughness'].is_linked else None
+        rmix = nt.nodes.new('ShaderNodeMix'); rmix.data_type = 'FLOAT'
+        L(wet.outputs['Result'], rmix.inputs['Factor'])
+        if rs is not None:
+            L(rs, rmix.inputs['A'])
+        else:
+            rmix.inputs['A'].default_value = b.inputs['Roughness'].default_value
+        rmix.inputs['B'].default_value = p.get('wet_rough', 0.25)
+        L(rmix.outputs['Result'], b.inputs['Roughness'])
+        done += 1
+    print(f'wetline: {done} materials wetted')
+    return []

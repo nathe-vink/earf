@@ -9,9 +9,11 @@ mark). The Bay Area's lakes close each summer for exactly this.
 Scanned (Poly Haven, CC0): modular_wooden_pier, dead_tree_trunk_02, grass_medium_02, boulder_01, brown_mud_leaves_01,
 the kloofendal_misty_morning sky. Modelled here (kit_ext/poison_p_el.py): the bloom on the water, the sign.
 """
+import json
 import math
+import os
 
-from common import area, asset, camera, finish, ground, piece, portrait_of, shot as frame, sky, sun_from_sky
+from common import ROOT, area, asset, camera, finish, ground, piece, portrait_of, shot as frame, sky, sun_from_sky
 
 HDRI, ROT = 'kloofendal_misty_morning_puresky', 200.0
 WATER = 0.0
@@ -23,8 +25,12 @@ def ext(module, fn, **k):
     return piece('ext', module=module, fn=fn, **k)
 
 
-TREES = ((-5.5, 9.0, 1.6, 30, 84), (-9.0, 16.0, 2.2, 110, 88), (6.5, 13.0, 1.9, 200, 86),
-         (12.0, 22.0, 2.4, 70, 89), (-15.0, 26.0, 2.6, 150, 87), (3.0, 30.0, 2.8, 20, 88))
+# pass 6: three scans, not one pillar cloned: the broad trunk (02), thin snags (dead_tree_trunk, stood up), a
+# root-plate stump half drowned by the jetty; at different depths. (model, x, y, z, scale, rz, rx, ring radius)
+TREES = (('dead_tree_trunk_02', -5.5, 9.0, -1.2, 1.6, 30, 84, 0.29), ('dead_tree_trunk', -8.0, 15.0, -0.9, 1.6, 110, 90, 0.12),
+         ('dead_tree_trunk_02', 6.5, 13.0, -1.4, 1.9, 200, 86, 0.34), ('dead_tree_trunk', 4.2, 24.0, -0.9, 2.3, 70, 88, 0.16),
+         ('dead_tree_trunk_02', -15.0, 26.0, -1.2, 2.6, 150, 87, 0.47), ('dead_tree_trunk', -2.6, 30.0, -0.8, 2.0, 20, 91, 0.14),
+         ('dead_tree_trunk', 11.0, 34.0, -0.9, 2.6, 250, 89, 0.18), ('tree_stump_02', 2.9, 9.4, -0.32, 1.0, 140, 0, 0.62))
 # where the pier scan's legs and posts meet the water, in its own (glTF x, z) frame (read off its mesh at the waterline)
 PIER_FEET = [(-1.21, -5.52), (1.14, -5.52), (0.59, -5.53), (-1.2, -8.48), (-0.48, -8.48), (-0.02, -8.45), (0.61, -8.48),
              (1.16, -8.48)]
@@ -40,7 +46,12 @@ SPK = (0.75, 11.6)                 # pass 4: the speaker out near the jetty's fa
 
 
 def set_props():
-    props = [ext('poison_p_el', 'algae_water', position=[0.0, 60.0, WATER], size=[400.0, 260.0], cover=0.62, drift=20.0, scum_rough=0.35,
+    # pass 6: real water (Acid B's, kit_ext/acid_rain_el.puddle: clear, IOR 1.33, a film of roughness, gentle ripples)
+    # over a murky bottom, and the bloom floating on it as its own surface, open where it thins
+    props = [piece('box', size=[400.0, 260.0, 0.05], position=[0.0, 60.0, -0.85], material='card', color='#1E2614'),
+             ext('acid_rain_el', 'puddle', size=[400.0, 260.0], position=[0.0, 60.0, 0.0], z=WATER, ring=0.7, ripple=0.35, keep=1.0,
+                 roughness=0.02, ripple_m=0.0012, tint_lin=(0.42, 0.5, 0.3), seed=9),
+             ext('poison_p_el', 'algae_water', position=[0.0, 60.0, WATER + 0.004], size=[400.0, 260.0], cover=0.62, drift=20.0, scum_rough=0.35, float=True,
                  streak=1.7, scale=0.12, clots=0.45, clot_scale=1.4,
                  greens=['#3E5A10', '#7A9A1C', '#C2D040']),          # pass 4: pea-soup yellow-green, off the speaker's bottle green;
                                                                   # pass 5: more open, glossy water between, a wet sheen on the scum
@@ -50,37 +61,41 @@ def set_props():
              ext('poison_p_el', 'scan', model='modular_wooden_pier', position=[0.4, 4.0, PIER_Z], rotate=[0, 0, 4], scale=1.0,
                  res='2k', drop=['section_05']),
              # the sign, a supporting player: small, leaning, in the shallows by the jetty, out of focus
-             ext('poison_p_el', 'sign', position=[-1.2, 10.2, -0.1], rotate=[0, 0, 26], lean=9.0, size=[0.5, 0.36], post=1.15)]   # pass 5: a size up, nearer
+             ext('poison_p_el', 'sign', position=[-1.55, 10.2, -0.1], rotate=[0, 0, 26], lean=7.0, size=[0.5, 0.36], post=1.15,
+                 bolts=True)]   # pass 5: a size up, nearer; pass 6: clear of the jetty's posts, bolted to its own
     # dead trees standing in the water, fading into the mist
-    for x, y, s, rz, rx in TREES:
-        props.append(piece('asset', model='dead_tree_trunk_02', position=[x, y, -1.2], rotate=[0, -rx, rz], scale=s, res='2k'))   # stood up
+    for model, x, y, z, s, rz, rx, _ in TREES:
+        props.append(piece('asset', model=model, position=[x, y, z], rotate=[0, -rx, rz], scale=s, res='2k'))   # stood up
     # pass 5: scum banked round the stumps, the jetty's legs and the sign's post, so they stand in the water, not on it
-    props.append(ext('poison_p_el', 'scum_rings', items=[[x, y, 0.18 * s] for x, y, s, _, _ in TREES] + [[-1.2, 10.25, 0.06]]
+    props.append(ext('poison_p_el', 'scum_rings', items=[[x, y, r] for _, x, y, _, _, _, _, r in TREES] + [[-1.55, 10.25, 0.06]]
                      + [[*pier_xy(gx, gz), 0.12] for gx, gz in PIER_FEET],
                      width=0.4, color='#A6BC34', seed=7))
     # reeds along the left edge of the jetty, in the shallows
     for x, y, s, rz in ((-2.6, 8.4, 1.5, 0), (-2.3, 9.8, 1.3, 70), (-3.1, 10.6, 1.7, 140), (-2.5, 11.8, 1.4, 30),
                         (-3.5, 12.8, 1.6, 200), (-2.8, 14.0, 1.2, 260), (3.0, 9.0, 1.3, 90), (3.5, 10.4, 1.5, 300)):
         props.append(piece('asset', model='grass_medium_02', position=[x, y, -0.06], rotate=[0, 0, rz], scale=s, res='2k'))
-    props.append(ext('smoke_b_el', 'mist', box=[-60.0, -6.0, -0.2, 60.0, 90.0, 4.0], clear_y=10.0, full_y=45.0, density=0.016,
+    props.append(ext('smoke_b_el', 'mist', box=[-60.0, -6.0, -0.2, 60.0, 90.0, 4.0], clear_y=4.0, full_y=30.0, density=0.016,
                      ground_boost=5.0, ground_h=0.7, color='#EEF0E8', anisotropy=0.72))
     for x, y, rz, s_ in ((2.2, 9.4, 30, 0.7), (-1.4, 12.8, 110, 0.6), (2.8, 13.4, 200, 0.8), (-1.6, 8.2, 70, 0.5)):
         props.append(piece('asset', model='dry_branches_medium_01', position=[x, y, -0.02], rotate=[0, 0, rz], scale=s_, res='2k'))
+    # pass 6: everything standing in the water darkened and wet at its waterline (after the pieces it wets)
+    props.append(ext('poison_p_el', 'wetline', models=['modular_wooden_pier', 'dead_tree_trunk', 'tree_stump', 'weathered_planks',
+                                                       'dry_branches'], z=WATER, top=0.08, color='#3E3A26', wet_rough=0.22))
     return props
 
 
 def lights():
-    """Poison A's rig (poison.py, the final that scored 6.5 blind with this speaker), moved to the speaker on the jetty:
-    the cool reflector, the warm diffuse bounce, the card overhead."""
+    """Acid B's rig (acid_b.py pass 9, 6.0 blind outdoors with this speaker), moved to the speaker on the jetty: a soft
+    bounce from the camera's side, two small cards low in front (the horn's throat, the woofer), a rim card behind on
+    the sun's side that lights the speaker alone."""
     x, y = SPK
-    def orb(az, el, d):
-        return {'azimuth_deg': az, 'elevation_deg': el, 'distance_m': d}
-    return {'reflector': {'type': 'area', 'size_m': [2.0, 1.5], 'target': [x, y, DECK + 0.7], 'irradiance': 3.0,
-                          'color': '#EEF0E0', 'orbit': orb(-35, 10, 2.8)},
-            'bounce': {'type': 'area', 'size_m': [2.0, 1.5], 'target': [x, y, DECK + 0.6], 'irradiance': 3.5, 'color': '#E8D9B0',
-                       'orbit': orb(10, 25, 2.5), 'specular': 0.0},
-            'card': {'type': 'area', 'size_m': [2.0, 2.0], 'target': [x, y, DECK + 1.1], 'irradiance': 1.0, 'color': '#F0F2E6',
-                     'orbit': orb(60, 45, 2.5), 'specular': 0.3}}
+    t = lambda z: (x, y, DECK + z)
+    L = {'bounce': area(-40, 8, 3.5, 4.0, '#F1E6B8', size=(2.0, 2.0), target=t(0.5)),
+         'throat': area(-8, 4, 2.2, 0.5, '#F1E6B8', size=(0.5, 0.4), target=t(1.15)),
+         'low': area(-5, 3, 2.5, 1.5, '#F1E6B8', size=(0.5, 0.5), target=t(0.3)),
+         'rim': area(-130, 5, 3.0, 9.0, '#F6DDB0', size=(1.5, 1.5), target=t(0.5))}
+    L['rim']['receivers'] = sorted(json.load(open(os.path.join(ROOT, 'spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.json')))['parts'])
+    return L
 
 
 def shot():
