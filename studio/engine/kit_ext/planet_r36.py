@@ -324,7 +324,8 @@ def counter(bpy, kit, p, objs):
     # the DJ station built into the top's back half: two turntables and a rotary mixer
     dj = Mesh('dj-plinths'); pt = Mesh('dj-platters'); kn = Mesh('dj-knobs')
     yd = C['y1'] - 0.22
-    for dx in (-0.42, 0.42):
+    earf = p.get('decks') == 'earf'                                   # round 37: EARF's players stand on the top
+    for dx in (() if earf else (-0.42, 0.42)):
         x = R.DJ['x'] + dx
         dj.box(x - 0.21, yd - 0.17, zt, x + 0.21, yd + 0.17, zt + 0.06)
         _cyl(pt.bm, x - 0.03, yd, zt + 0.06, 0.15, 0.012, seg=48)
@@ -334,28 +335,63 @@ def counter(bpy, kit, p, objs):
         for j in range(3):
             _cyl(kn.bm, R.DJ['x'] - 0.09 + 0.06 * i, yd - 0.09 + 0.08 * j, zt + 0.08, 0.016, 0.02, seg=16)
     objs.append(dj.object(bpy, principled(bpy, 'dj-body', '#1B1A19', rough=0.45, metal=0.3), bevel=0.004))
-    objs.append(pt.object(bpy, principled(bpy, 'dj-platter', '#121212', rough=0.55), smooth=True))
+    if not earf:
+        objs.append(pt.object(bpy, principled(bpy, 'dj-platter', '#121212', rough=0.55), smooth=True))
     objs.append(kn.object(bpy, brushed_steel(bpy), smooth=True))
     # a record on each platter, a label at its centre
     vr = Mesh('dj-records'); lb = Mesh('dj-labels')
     for dx in (-0.42, 0.42):
+        if earf:                                       # on the player's platter (R3 Float: its top at 101 mm; turned
+            _cyl(vr.bm, R.DJ['x'] + dx + 0.04, yd, zt + 0.1012, 0.15, 0.002, seg=64)   # 180, its spindle 40 to +x)
+            _cyl(lb.bm, R.DJ['x'] + dx + 0.04, yd, zt + 0.1033, 0.05, 0.0004, seg=32)
+            continue
         _cyl(vr.bm, R.DJ['x'] + dx - 0.03, yd, zt + 0.072, 0.15, 0.002, seg=64)
         _cyl(lb.bm, R.DJ['x'] + dx - 0.03, yd, zt + 0.0741, 0.05, 0.0004, seg=32)
     objs.append(vr.object(bpy, principled(bpy, 'vinyl', '#0B0B0C', rough=0.25), smooth=True))
     objs.append(lb.object(bpy, principled(bpy, 'vinyl-label', '#C9B48A', rough=0.6), smooth=True))
 
 
+def _clear(a, b, holes):
+    """The parts of [a, b] outside the (h0, h1) holes."""
+    out = [(a, b)]
+    for h0, h1 in sorted(holes):
+        nxt = []
+        for s0, s1 in out:
+            if h1 <= s0 or h0 >= s1:
+                nxt.append((s0, s1)); continue
+            if h0 > s0:
+                nxt.append((s0, h0))
+            if h1 < s1:
+                nxt.append((h1, s1))
+        out = nxt
+    return [(s0, s1) for s0, s1 in out if s1 - s0 > 0.005]
+
+
+def _spk_holes():
+    """The bar pair's niches (round 37: R.SPK_NICHES), as x-ranges and their top, or none."""
+    if not getattr(R, 'SPK_NICHES', None):
+        return [], 0.0
+    bx = [R.niche_box(x) for x in R.SPK_NICHES]
+    return [(b[0], b[1]) for b in bx], bx[0][5]
+
+
 def backbar(bpy, kit, p, objs):
     """A quiet back bar: blackened-steel doors under a worktop; one lit niche lined in timber; above it the record
     wall to the beams, the frosted disc set into it behind the DJ station, the now-playing ledge."""
     W = R.W; B = R.BACKBAR36; RW = R.RECORD_WALL
+    holes, htop = _spk_holes()                                        # round 37: the bar pair's niches cut through
     st = Mesh('backbar-doors'); n = int((RW['x1'] - RW['x0']) / B['doors'])
     for k in range(n):
         x0 = RW['x0'] + k * B['doors'] + 0.003
-        st.box(x0, B['y'], 0.10, x0 + B['doors'] - 0.006, W - 0.02, B['low'] - 0.03)
-    st.box(RW['x0'], B['y'] + 0.03, 0.0, RW['x1'], W - 0.02, 0.10)
+        for a0, a1 in _clear(x0, x0 + B['doors'] - 0.006, holes):
+            if a1 - a0 > 0.12:
+                st.box(a0, B['y'], 0.10, a1, W - 0.02, B['low'] - 0.03)
+    for a0, a1 in _clear(RW['x0'], RW['x1'], holes):
+        st.box(a0, B['y'] + 0.03, 0.0, a1, W - 0.02, 0.10)
     objs.append(st.object(bpy, LK.steel(bpy), bevel=0.002))
-    wt = Mesh('backbar-top'); wt.box(RW['x0'] - 0.02, B['y'] - 0.03, B['low'] - 0.03, RW['x1'] + 0.02, W - 0.005, B['low'])
+    wt = Mesh('backbar-top')
+    for a0, a1 in _clear(RW['x0'] - 0.02, RW['x1'] + 0.02, holes):
+        wt.box(a0, B['y'] - 0.03, B['low'] - 0.03, a1, W - 0.005, B['low'])
     objs.append(wt.object(bpy, zinc(bpy), bevel=0.006))
     # the record wall: dark-oak uprights and shelves, the cells clear of the disc and of the lit niche
     nx0, nx1, nz0, nz1 = B['niche']
@@ -368,13 +404,18 @@ def backbar(bpy, kit, p, objs):
     def blocked(cx, cz):
         if math.hypot(cx - R.DISC['x'], cz - R.DISC['z']) < R.DISC['r'] + cell * 0.55:
             return True
+        if cz < htop + cell * 0.5 and any(h0 - 0.01 < cx < h1 + 0.01 for h0, h1 in holes):
+            return True
         return nx0 - cell * 0.5 < cx < nx1 + cell * 0.5 and cz < nz1 + cell * 0.5
     for i in range(ncol + 1):
         x = RW['x0'] + i * cell
-        shelf.box(x - 0.011, yf, RW['z0'], x + 0.011, yb, RW['z1'])
+        inside = any(h0 - 0.011 < x < h1 + 0.011 for h0, h1 in holes)
+        shelf.box(x - 0.011, yf, max(RW['z0'], htop) if inside else RW['z0'], x + 0.011, yb, RW['z1'])
     for k in range(nrow + 1):
         z = RW['z0'] + k * cell
-        shelf.box(RW['x0'], yf, z - 0.022, RW['x0'] + ncol * cell, yb, z)
+        for a0, a1 in (_clear(RW['x0'], RW['x0'] + ncol * cell, holes) if z - 0.022 < htop else
+                       [(RW['x0'], RW['x0'] + ncol * cell)]):
+            shelf.box(a0, yf, z - 0.022, a1, yb, z)
     shelf.box(RW['x0'] - 0.02, yf, RW['z1'], RW['x0'] + ncol * cell + 0.02, yb, RW['z1'] + 0.04)
     for i in range(ncol):
         for k in range(nrow):
