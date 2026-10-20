@@ -1,0 +1,382 @@
+{
+ "stage1": {
+  "impression": "A symmetric, centred view over two tub-chair backs to a pair of speakers on oak plinths in a timber-framed niche, with an Orb lamp on a hexagonal table in the middle. It reads as a clean CG showroom or home-theatre render, not a photograph. The whole frame is under a milky veil with no true blacks. The chairs read as salmon plastic, the end-grain niche reads as a tiled grid, and the speakers are dim and grey, so they are not the hero. A magazine would see a generic hi-fi room, not a specific place.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "True blacks: frame lum_p5 at 12 or below and lum_p1 at 6 or below (now 20.4), so the shadows are deep, not veiled",
+  "The speakers are the brightest objects apart from the lamp: speaker regions lum_median at 60 or more, with the light reading through the tinted acrylic and on the horn",
+  "Pools of light with dark between them: the niche felt and the end-grain wall fall to lum_median 22 or below away from the speakers",
+  "The Orb table top is not clipped (clip_pct below 1 %)",
+  "The foreground chairs read as espresso velvet (soft sheen, nap, dark), not pink plastic, and do not fill the bottom third",
+  "Off-axis, lived-in composition with props (a glass, a record out of its sleeve), so it reads as a specific bar and not a symmetric product shot",
+  "Material grain at 1:1: the end-grain blocks vary in tone and size and are not a regular grid; the oak shows grain and stain variation"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "lifted blacks or veil across the whole frame: lum_p1 20.4, top band 0-40 has lum_range 7.3, so nothing goes dark; reads as haze plus a flat grade"
+  },
+  {
+   "region": [
+    300,
+    380,
+    420,
+    430
+   ],
+   "what": "Orb table top blown: clip_pct 15.5, lum_median 181; the lamp burns out its own table"
+  },
+  {
+   "region": [
+    190,
+    200,
+    270,
+    310
+   ],
+   "what": "left speaker dim and grey (lum_median 44, RGB 46/43/45), with no glow through the acrylic; the altar spot lands on the felt above it, not on the cabinet"
+  },
+  {
+   "region": [
+    450,
+    200,
+    530,
+    310
+   ],
+   "what": "right speaker the same (lum_median 42); the pair is not the hero"
+  },
+  {
+   "region": [
+    195,
+    250,
+    215,
+    270
+   ],
+   "what": "isolated hot specular blob on the left cabinet's edge reads as a CG highlight"
+  },
+  {
+   "region": [
+    30,
+    340,
+    260,
+    480
+   ],
+   "what": "left tub chair back: smooth, pink or salmon, featureless; reads as plastic, not espresso velvet; fills the lower left"
+  },
+  {
+   "region": [
+    460,
+    340,
+    690,
+    480
+   ],
+   "what": "right tub chair back the same; the two chairs block the lower third"
+  },
+  {
+   "region": [
+    140,
+    80,
+    580,
+    300
+   ],
+   "what": "end-grain block wall reads as a regular square tile grid (CG tiling), low contrast"
+  },
+  {
+   "region": [
+    180,
+    100,
+    300,
+    200
+   ],
+   "what": "felt panels behind the speakers are flat dark voids with no texture"
+  },
+  {
+   "region": [
+    190,
+    50,
+    230,
+    120
+   ],
+   "what": "spot beams show as hard CG cones in uniform haze"
+  },
+  {
+   "region": [
+    80,
+    50,
+    140,
+    340
+   ],
+   "what": "oak frame flat and uniform in tone, pinkish (R 66 G 45 B 40); little grain"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "perfect bilateral symmetry and no props in view: no sign of life, reads as a showroom"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The frame has no blacks: a uniform veil lifts every shadow to about 22-27, which flattens the room and reads as CG.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_p1 20.4, lum_p50 37.1; top band 0-40 lum_p5 27.1, range 7.3"
+   },
+   "change": {
+    "setting": "render.look and haze density",
+    "from": "AgX - Medium High Contrast, haze 0.008/m",
+    "to": "AgX - High Contrast (or Punchy), haze 0.003/m, exposure 2.3 -> 2.1"
+   },
+   "expected": "Deep shadows in the corners and ceiling, the beams still faintly visible near the spots, and the frame median about 28-34",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar spots light the felt and the niche above the speakers instead of the cabinets, so the speakers stay grey and dim.",
+   "evidence": {
+    "region": [
+     190,
+     200,
+     270,
+     310
+    ],
+    "measured": "lum_median 44.1 (right 42.0), RGB about neutral 46/43/45; bright cones end above the cabinets at y about 100-180"
+   },
+   "change": {
+    "setting": "altar spots (2 x spot)",
+    "from": "240 W, cone 30 deg, aimed into the niche",
+    "to": "aim each at its speaker's cabinet centre (about 0.8 m up), cone 18 deg, 300 W, so the light passes through the smoked acrylic and grazes the horn"
+   },
+   "expected": "Each speaker is the brightest object after the Orb, glowing through its tint, with a soft pool on the plinth",
+   "accept": {
+    "region": [
+     190,
+     200,
+     270,
+     310
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Orb is far too strong for its table and blows the top.",
+   "evidence": {
+    "region": [
+     300,
+     380,
+     420,
+     430
+    ],
+    "measured": "clip_pct 15.52, lum_median 181, p95 252"
+   },
+   "change": {
+    "setting": "each Orb (W, liner glow)",
+    "from": "6.0 W, glow 0.15",
+    "to": "2.5 W, glow 0.10"
+   },
+   "expected": "A warm, readable pool on the oak top, with grain visible and no clipping; the Orb's liner stays the brightest point",
+   "accept": {
+    "region": [
+     300,
+     380,
+     420,
+     430
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The dead-centre, symmetric view over two chair backs reads as a product shot, and the chairs hide the lower third and the plinths.",
+   "evidence": {
+    "region": [
+     30,
+     340,
+     690,
+     480
+    ],
+    "measured": "the chair backs fill about 30 % of the frame; the composition is mirror-symmetric about x 360"
+   },
+   "change": {
+    "setting": "camera position, target and lens",
+    "from": "[11.3, 3.05, 1.2] -> [16.4, 3.05, 1.05], 30 mm",
+    "to": "[12.0, 2.3, 1.15] -> [16.4, 3.2, 1.0], 40 mm, f/2.8: off-axis and seated, one chair shoulder in soft foreground at the edge of the frame, the pair and the Orb table fully visible"
+   },
+   "expected": "A seated guest's view, with depth and asymmetry and the speakers larger in the frame",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The espresso velvet tub chairs read as smooth salmon plastic under the Orb light.",
+   "evidence": {
+    "region": [
+     460,
+     340,
+     690,
+     480
+    ],
+    "measured": "lum_p95 102.4, warm-pink highlights with no nap or sheen falloff (seen at 3x)"
+   },
+   "change": {
+    "setting": "chair velvet finish",
+    "from": "smooth diffuse, mid-brown",
+    "to": "darker espresso base (about #2A1C16), sheen 0.6 with sheen tint 0.3, a fine nap normal map, roughness 0.8"
+   },
+   "expected": "Dark chairs with a soft rim sheen where the Orb catches them; they recede instead of dominating",
+   "accept": {
+    "region": [
+     460,
+     340,
+     690,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The end-grain niche lining reads as a regular square tile grid with uniform tone.",
+   "evidence": {
+    "region": [
+     140,
+     80,
+     580,
+     300
+    ],
+    "measured": "lum_range 34.4; a visibly repeating, equal-sized grid at 3x"
+   },
+   "change": {
+    "setting": "end-grain block finish (oak stain and variation)",
+    "from": "uniform tone, regular grid",
+    "to": "per-block random tone \u00b115 %, growth rings per block, slightly irregular block sizes, darker smoked stain"
+   },
+   "expected": "It reads as real end-grain blocks under raking light, with the pools from the altar spots showing the texture",
+   "accept": {
+    "region": [
+     180,
+     100,
+     300,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 22
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "No sign of life in the zone; it reads as a showroom.",
+   "evidence": {
+    "region": [
+     300,
+     330,
+     420,
+     430
+    ],
+    "measured": "only the Orb on the table; no glass, sleeve or coat anywhere in the frame"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none in this zone",
+    "to": "a half-drunk rocks glass and a record sleeve on the Orb table, a second sleeve leaning on a plinth, a coat over one chair arm"
+   },
+   "expected": "The Orb's light catches the glass and makes small highlights; the room reads as in use",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The oak and the chairs carry a pink or magenta cast rather than warm amber.",
+   "evidence": {
+    "region": [
+     80,
+     50,
+     140,
+     340
+    ],
+    "measured": "RGB median 66/45/40 on the oak; the chairs are similarly pinkish"
+   },
+   "change": {
+    "setting": "render.white_balance_tint and the oak's stain",
+    "from": "tint 0.0, red-leaning oak stain",
+    "to": "tint +0.05 toward green; the oak stain shifted toward amber-brown and darkened about 20 %"
+   },
+   "expected": "Warm, brown neutrals in the room, so the speakers' tint is the only distinct colour",
+   "accept": {
+    "region": [
+     80,
+     50,
+     140,
+     340
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     42
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the Smoke speakers a visibly saturated tint so they carry the frame's one colour",
+   "why": "The speaker's colour is fixed. Smoke is a near-neutral configuration, so this frame cannot meet the one-colour test except through light through the acrylic (c2)."
+  },
+  {
+   "request": "Simplify the visible internals behind the cabinet face, which read as cluttered",
+   "why": "The speaker's parts are fixed (cover off, batts inside)."
+  },
+  {
+   "request": "Break the symmetry of the altar itself (plinth heights, niche layout)",
+   "why": "The room's design is fixed; only the camera can break it (c4)."
+  }
+ ],
+ "score_if_fixed": 6.5
+}
