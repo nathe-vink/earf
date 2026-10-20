@@ -37,6 +37,7 @@ ENGINE = os.path.dirname(HERE)
 ROOT = os.path.dirname(os.path.dirname(ENGINE))
 if ENGINE not in sys.path:
     sys.path.insert(0, ENGINE)
+import materials as MT                                             # noqa: E402
 import product as PR                                                 # noqa: E402
 
 DEFS = {'table': 'studio/products/earf-moon-table.json', 'pendant': 'studio/products/earf-moon-pendant.json',
@@ -101,6 +102,16 @@ def _place(bpy, which, name, p, kit):
             ob = bpy.data.objects.new(f'{name}-{pname}#{i}', t.data)
             bpy.context.scene.collection.objects.link(ob)
             ob.material_slots[0].link = 'OBJECT'; ob.material_slots[0].material = mats[fl][mname]
+            # `parts`: a material for some parts only, apart from the rest of their group (the Dome's canopy in black
+            # acrylic while its hub stays anodised: the owner, 2026-10-20)
+            for k, pm in enumerate(p.get('parts', [])):
+                if PR._match(pname, pm['match']):
+                    key = f'{name}-part{k}'
+                    if key not in _PARTS:
+                        spec = {a: b for a, b in pm.items() if a not in ('match', 'preset')}
+                        _PARTS[key] = MT.make(bpy, key, pm['preset'], spec)
+                    ob.material_slots[0].material = _PARTS[key]
+                    break
             M = Matrix.Identity(4)
             if (drop or turn) and PR._match(pname, COVER):
                 M = Matrix.Translation((0, 0, -drop)) @ Matrix.Rotation(math.radians(-turn), 4, 'Z')
@@ -116,9 +127,44 @@ def _place(bpy, which, name, p, kit):
             objs.append(ob)
         if s.get('lamp', p.get('lamp', True)) is False:
             continue
+        if p.get('cable'):
+            objs += _cable(bpy, f'{name}-cable#{i}', T, {**p['cable'], 'floor': s.get('floor', p['cable'].get('floor', 0.0))})
         pos = T @ (Vector(LIGHT_MM[which]) / 1000)
         objs.append(_lamp(bpy, f'{name}-lamp#{i}', pos, p.get('lamp_w', LAMP_W[which]), p.get('lamp_k', 2700)))
     return objs
+
+
+_PARTS = {}
+
+
+def _cable(bpy, name, T, c):
+    """A plug-in Orb, wired (the owner, 2026-10-20: USB-C, a battery cartridge optional; in a bar it is wired): a thin
+    black fabric cable from the back of the base across the table top to a grommet, and down through it to the floor."""
+    import bmesh
+    r = c.get('radius', 0.0022); back = c.get('back', 0.075); run = c.get('run', 0.10); floor = c['floor']
+    z0 = T.translation.z
+    p0 = T @ Vector((0.0, back, r)); p1 = T @ Vector((0.0, back + run, r))
+    pts = [p0, p1, Vector((p1.x, p1.y, z0 - 0.02)), Vector((p1.x, p1.y, floor + r))]
+    me = bpy.data.meshes.new(name); bm = bmesh.new()
+    for a, b in zip(pts, pts[1:]):
+        d = b - a; L = d.length
+        if L < 1e-4:
+            continue
+        g = bmesh.ops.create_cone(bm, cap_ends=True, segments=10, radius1=r, radius2=r, depth=L)
+        q = d.normalized().to_track_quat('Z', 'Y').to_matrix().to_4x4()
+        bmesh.ops.transform(bm, matrix=Matrix.Translation((a + b) / 2) @ q, verts=g['verts'])
+    # the grommet: a black anodised ring flush in the table top
+    g = bmesh.ops.create_cone(bm, cap_ends=False, segments=24, radius1=0.009, radius2=0.009, depth=0.003)
+    bmesh.ops.transform(bm, matrix=Matrix.Translation((p1.x, p1.y, z0 + 0.0008)), verts=g['verts'])
+    bm.to_mesh(me); bm.free()
+    for f in me.polygons:
+        f.use_smooth = True
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    key = 'orb-cable-fabric'
+    if key not in _PARTS:
+        _PARTS[key] = MT.make(bpy, key, 'rubber', {'color': '#121212', 'roughness': 0.85, 'sheen': 0.5})
+    ob.data.materials.append(_PARTS[key])
+    return [ob]
 
 
 def table(bpy, name, p, kit):

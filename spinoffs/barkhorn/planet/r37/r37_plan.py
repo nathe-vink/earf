@@ -62,14 +62,16 @@ CONFIGS = {
     'smoke': dict(bar='smoke', listen='smoke', dome='smoke', orb='smoke', tt='smoke'),    # the house configuration
     'ember': dict(bar='ember', listen='ember', dome='ember', orb='ember', tt='ember'),
     'ice': dict(bar='ice', listen='ice', dome='ice', orb='ice', tt='ice'),
-    'mixed': dict(bar='smoke', listen='ember', dome='smoke', orb='ember', tt='smoke'),
+    # Mixed (the lead, 2026-10-20: the old Mixed read as Smoke at the bar and as Ember at the altar): in each view the
+    # speakers and the lamps differ; the R3s Fog, water-clear
+    'mixed': dict(bar='ice', listen='ember', dome='dust', orb='acid', tt='fog'),
 }
 SPEAKER_FLAVOUR = {'smoke': 'cloud-black', 'ember': 'cloud-red', 'ice': 'cloud-blue'}
-LAMP_FLAVOUR = {'smoke': 'smoked', 'ember': 'ember', 'ice': 'ice'}
-LAMP_GLOW = {'smoke': 0.3, 'ember': 0.2, 'ice': 0.3}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
+LAMP_FLAVOUR = {'smoke': 'smoked', 'ember': 'ember', 'ice': 'ice', 'dust': 'dust', 'acid': 'acid'}
+LAMP_GLOW = {'smoke': 0.3, 'ember': 0.2, 'ice': 0.3, 'dust': 0.25, 'acid': 0.25}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
 TT_DEF = 'spinoffs/barkhorn/companions/out-concepts2/r3.json'        # R3 Float, until the owner picks
 # the light plinths' colour per tint (the owner: "Lights under the speakers could be cool too")
-PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF'}
+PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF', 'fog': '#FFE8D2'}
 # and its strength per tint: a saturated red clips first (Ember at 1.0 clipped 1387 and 5604 px red-only in a Standard
 # view, r37); Smoke needs the most to read at all
 PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.12, 'ice': 0.35}
@@ -77,4 +79,13 @@ PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.12, 'ice': 0.35}
 # Smoke's levels clipped its red to pink (6040 px red-only in a Standard view, listening, r37)
 SPK_GAIN = {'smoke': 1.0, 'ember': 0.15, 'ice': 0.4}
 # the lamp inside each Dome and Orb per tint: a red cover lit at Smoke's 30 W clipped pink (r37, bar-ember)
-LAMP_GAIN = {'smoke': 1.0, 'ember': 0.4, 'ice': 0.6}
+LAMP_GAIN = {'smoke': 1.0, 'ember': 0.4, 'ice': 0.6, 'dust': 0.6, 'acid': 0.6}
+# the lit lamp's colour: the flavour's own glow behind its tinted shell, so a lit lamp sits within about 10 deg of hue
+# (LCh) of the speakers in its tint (the owner saw an Orb lineup read as "two reds and an orange": the fixed warm liner
+# dragged Ember to orange); Smoke keeps the warm liner
+LINER_GLOW = {'smoke': '#FF9A50', 'ember': '#FF4A3A', 'ice': '#4FB8FF', 'dust': '#FF8A3A', 'acid': '#FFC93A'}
+# the owner's lamp hardware (2026-10-20): black anodised aluminium hub and catch, a black acrylic canopy, no brass; the
+# Orb on a black polished acrylic cup with a black anodised touch ring, wired in a bar (a thin black fabric cable
+# through a grommet in its table)
+ANODISED = {'preset': 'metal', 'color': '#151515', 'roughness': 0.38}
+BLACK_ACRYLIC = {'preset': 'dark_resin', 'color': '#0C0C0D', 'roughness': 0.06, 'cloud': 0.0, 'fibre': 0.0}

@@ -63,9 +63,16 @@ def lamps(v):
              'spots': [[x, y, RP.DOME['rim_z']] for x in RP.DOMES], 'ceiling': RP.CEIL,
              'lamp_w': round(v['dome_w'] * RP.LAMP_GAIN[cfg['dome']], 2),
              'lamp_k': 2700, 'shade_glow': v.get('dome_glow_' + cfg['dome'], RP.LAMP_GLOW[cfg['dome']]),
-             'noshadow': noshadow},
+             'noshadow': noshadow,
+             'materials': {'brass': dict(RP.ANODISED), 'liner': {'glow_color': RP.LINER_GLOW[cfg['dome']]}},
+             'parts': [{'match': 'canopy', **RP.BLACK_ACRYLIC}]},
             {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'flavour': RP.LAMP_FLAVOUR[cfg['orb']],
-             'spots': [list(s) for s in RP.sphere_spots()], 'lamp_w': round(v['sphere_w'] * RP.LAMP_GAIN[cfg['orb']], 2),
+             'spots': [{'position': list(s), 'floor': RP.ZONE['z'] if s[0] >= RP.ZONE['x0'] else 0.0}
+                       for s in RP.sphere_spots()],
+             'materials': {'brass': dict(RP.ANODISED), 'steel': dict(RP.BLACK_ACRYLIC),
+                           'liner': {'glow_color': RP.LINER_GLOW[cfg['orb']]}},
+             'cable': {'radius': 0.0022, 'back': 0.075, 'run': 0.10},
+             'lamp_w': round(v['sphere_w'] * RP.LAMP_GAIN[cfg['orb']], 2),
              'lamp_k': 2700,
              'shade_glow': v.get('orb_glow_' + cfg['orb'], RP.LAMP_GLOW[cfg['orb']] * v.get('sphere_glow', 1.1) / 1.1),
              'noshadow': noshadow}]

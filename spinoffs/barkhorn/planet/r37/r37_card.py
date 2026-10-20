@@ -11,7 +11,7 @@ import r37_shots as S                                                # noqa: E40
 
 CONFIG = {'smoke': 'Smoke (everything smoked: the house configuration)', 'ember': 'Ember (everything red)',
           'ice': 'Ice (everything pale blue)',
-          'mixed': 'Mixed (the bar pair and the Domes in Smoke, the listening pair and the Orbs in Ember)'}
+          'mixed': 'Mixed (the bar pair Ice under Dust Domes, the R3s Fog; the listening pair Ember with Acid Orbs)'}
 FOR = {
     'bar': 'the back bar, the room\'s showroom wall, seen square across the counter from a banquette table: two of EARF\'s '
            'speakers standing on the floor in timber-lined, felt-lined niches either side of the DJ station (as Ginza '

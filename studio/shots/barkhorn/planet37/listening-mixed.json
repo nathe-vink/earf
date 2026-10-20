@@ -55,7 +55,7 @@
   },
   {
    "def": "studio/products/barkhorn-cloud.json",
-   "flavour": "cloud-black",
+   "flavour": "cloud-blue",
    "instances": [
     {
      "position": [
@@ -85,7 +85,7 @@
   },
   {
    "def": "spinoffs/barkhorn/companions/out-concepts2/r3.json",
-   "flavour": "smoke",
+   "flavour": "fog",
    "instances": [
     {
      "position": [
@@ -139,8 +139,8 @@
     "windows_lit": 0.5,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
-    "plinth_bar": 0.25,
-    "plinth_bar_col": "#FFB060",
+    "plinth_bar": 0.087,
+    "plinth_bar_col": "#5AB4FF",
     "plinth_listen": 0.03,
     "plinth_listen_col": "#FF5038"
    },
@@ -181,7 +181,7 @@
     "shape": "ext",
     "module": "earf_moon",
     "fn": "dome",
-    "flavour": "smoked",
+    "flavour": "dust",
     "spots": [
      [
       4.95,
@@ -205,72 +205,144 @@
      ]
     ],
     "ceiling": 3.4,
-    "lamp_w": 30.0,
+    "lamp_w": 18.0,
     "lamp_k": 2700,
-    "shade_glow": 0.3,
-    "noshadow": "shell|liner|skin"
+    "shade_glow": 0.25,
+    "noshadow": "shell|liner|skin",
+    "materials": {
+     "brass": {
+      "preset": "metal",
+      "color": "#151515",
+      "roughness": 0.38
+     },
+     "liner": {
+      "glow_color": "#FF8A3A"
+     }
+    },
+    "parts": [
+     {
+      "match": "canopy",
+      "preset": "dark_resin",
+      "color": "#0C0C0D",
+      "roughness": 0.06,
+      "cloud": 0.0,
+      "fibre": 0.0
+     }
+    ]
    },
    {
     "kind": "kit",
     "shape": "ext",
     "module": "earf_moon",
     "fn": "orb",
-    "flavour": "ember",
+    "flavour": "acid",
     "spots": [
-     [
-      4.38,
-      0.9700000000000001,
-      0.74
-     ],
-     [
-      5.93,
-      0.9700000000000001,
-      0.74
-     ],
-     [
-      7.48,
-      0.9700000000000001,
-      0.74
-     ],
-     [
-      9.03,
-      0.9700000000000001,
-      0.74
-     ],
-     [
-      1.17,
-      4.359999999999999,
-      0.74
-     ],
-     [
-      13.15,
-      3.05,
-      0.66
-     ],
-     [
-      14.15,
-      0.5999999999999996,
-      0.66
-     ],
-     [
-      14.15,
-      5.5,
-      0.66
-     ],
-     [
-      12.55,
-      1.9999999999999998,
-      0.66
-     ],
-     [
-      12.55,
-      4.1,
-      0.66
-     ]
+     {
+      "position": [
+       4.38,
+       0.9700000000000001,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       5.93,
+       0.9700000000000001,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       7.48,
+       0.9700000000000001,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       9.03,
+       0.9700000000000001,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       1.17,
+       4.359999999999999,
+       0.74
+      ],
+      "floor": 0.0
+     },
+     {
+      "position": [
+       13.15,
+       3.05,
+       0.66
+      ],
+      "floor": 0.2
+     },
+     {
+      "position": [
+       14.15,
+       0.5999999999999996,
+       0.66
+      ],
+      "floor": 0.2
+     },
+     {
+      "position": [
+       14.15,
+       5.5,
+       0.66
+      ],
+      "floor": 0.2
+     },
+     {
+      "position": [
+       12.55,
+       1.9999999999999998,
+       0.66
+      ],
+      "floor": 0.2
+     },
+     {
+      "position": [
+       12.55,
+       4.1,
+       0.66
+      ],
+      "floor": 0.2
+     }
     ],
-    "lamp_w": 1.2,
+    "materials": {
+     "brass": {
+      "preset": "metal",
+      "color": "#151515",
+      "roughness": 0.38
+     },
+     "steel": {
+      "preset": "dark_resin",
+      "color": "#0C0C0D",
+      "roughness": 0.06,
+      "cloud": 0.0,
+      "fibre": 0.0
+     },
+     "liner": {
+      "glow_color": "#FFC93A"
+     }
+    },
+    "cable": {
+     "radius": 0.0022,
+     "back": 0.075,
+     "run": 0.1
+    },
+    "lamp_w": 1.8,
     "lamp_k": 2700,
-    "shade_glow": 0.1,
+    "shade_glow": 0.125,
     "noshadow": "shell|liner|skin"
    }
   ]
@@ -692,8 +764,8 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.75,
-   "color": "#FFB060",
+   "irradiance": 0.262,
+   "color": "#5AB4FF",
    "camera": false,
    "receivers": [
     "*#0"
@@ -715,8 +787,8 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.75,
-   "color": "#FFB060",
+   "irradiance": 0.262,
+   "color": "#5AB4FF",
    "camera": false,
    "receivers": [
     "*#1"
@@ -734,7 +806,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 30.0,
+   "power_w": 12.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -753,7 +825,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 30.0,
+   "power_w": 12.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -789,7 +861,7 @@
  "materials": {
   "glow": {
    "strength": 0.05,
-   "color": "#FFB060"
+   "color": "#FFE8D2"
   }
  }
 }
