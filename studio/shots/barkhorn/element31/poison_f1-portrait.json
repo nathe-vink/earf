@@ -1878,10 +1878,10 @@
      -0.01
     ],
     "wash": 0.05,
-    "dull": 0.2,
+    "dull": 0.05,
     "needles": 2,
     "torn": 0.2,
-    "matte": true,
+    "matte": false,
     "orange": true
    },
    {
@@ -1901,9 +1901,9 @@
      0.03,
      0.01
     ],
-    "wash": 0.1,
-    "dull": 0.2,
-    "matte": true,
+    "wash": 0.08,
+    "dull": 0.05,
+    "matte": false,
     "orange": true
    },
    {
@@ -1926,7 +1926,7 @@
     "wash": 0.0,
     "dull": 0.2,
     "torn": 0.4,
-    "matte": true,
+    "matte": false,
     "orange": true
    },
    {
@@ -1946,9 +1946,9 @@
      0.0,
      -0.01
     ],
-    "wash": 0.2,
-    "dull": 0.2,
-    "matte": true,
+    "wash": 0.08,
+    "dull": 0.05,
+    "matte": false,
     "orange": true
    },
    {
@@ -1965,8 +1965,9 @@
     "age": "button",
     "seed": 65,
     "warts": 280,
-    "dull": 0.2,
-    "matte": true
+    "dull": 0.05,
+    "matte": false,
+    "wash": 0.08
    },
    {
     "kind": "kit",
@@ -2042,7 +2043,7 @@
      0.0
     ],
     "wash": 0.05,
-    "dull": 0.2,
+    "dull": 0.36,
     "torn": 0.15,
     "matte": true,
     "orange": true
@@ -2065,7 +2066,7 @@
      0.0
     ],
     "wash": 0.15,
-    "dull": 0.2,
+    "dull": 0.34,
     "matte": true,
     "orange": true
    },
@@ -2083,7 +2084,7 @@
     "age": "button",
     "seed": 73,
     "warts": 260,
-    "dull": 0.2,
+    "dull": 0.3,
     "matte": true
    },
    {
@@ -2104,7 +2105,7 @@
      0.0
     ],
     "wash": 0.0,
-    "dull": 0.2,
+    "dull": 0.46,
     "torn": 0.5,
     "matte": true,
     "orange": true
@@ -2127,7 +2128,7 @@
      -0.01
     ],
     "wash": 0.1,
-    "dull": 0.2,
+    "dull": 0.36,
     "matte": true,
     "orange": true
    },
@@ -2188,17 +2189,18 @@
     "module": "poison_p_el",
     "fn": "arum",
     "position": [
-     1.15,
-     -0.85,
+     0.98,
+     -1.65,
      -0.01
     ],
-    "height": 0.32,
+    "height": 0.34,
     "seed": 41,
     "lean": [
      0.02,
      -0.01
     ],
-    "berries": 44
+    "berries": 48,
+    "berry": 0.0055
    },
    {
     "kind": "kit",
@@ -2206,17 +2208,18 @@
     "module": "poison_p_el",
     "fn": "arum",
     "position": [
-     1.27,
-     -0.78,
+     1.1,
+     -1.58,
      -0.01
     ],
-    "height": 0.26,
+    "height": 0.28,
     "seed": 42,
     "lean": [
      -0.015,
      0.01
     ],
-    "berries": 44
+    "berries": 48,
+    "berry": 0.0055
    },
    {
     "kind": "kit",
@@ -2224,17 +2227,37 @@
     "module": "poison_p_el",
     "fn": "arum",
     "position": [
-     1.08,
-     -0.7,
+     0.9,
+     -1.5,
      -0.01
     ],
-    "height": 0.22,
+    "height": 0.24,
     "seed": 43,
     "lean": [
      0.0,
      0.02
     ],
-    "berries": 44
+    "berries": 48,
+    "berry": 0.0055
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_p_el",
+    "fn": "arum",
+    "position": [
+     1.2,
+     -0.85,
+     -0.01
+    ],
+    "height": 0.3,
+    "seed": 44,
+    "lean": [
+     0.01,
+     0.0
+    ],
+    "berries": 48,
+    "berry": 0.0055
    },
    {
     "kind": "kit",
@@ -2242,13 +2265,14 @@
     "module": "poison_b_el",
     "fn": "nightshade",
     "position": [
-     -1.35,
-     -0.9,
+     -0.95,
+     -1.75,
      -0.01
     ],
-    "height": 0.42,
+    "height": 0.38,
     "seed": 51,
-    "berries": 7
+    "berries": 9,
+    "berry": 0.0085
    },
    {
     "kind": "kit",
@@ -2256,13 +2280,14 @@
     "module": "poison_b_el",
     "fn": "nightshade",
     "position": [
-     -1.5,
-     -0.75,
+     -1.1,
+     -1.62,
      -0.01
     ],
-    "height": 0.36,
+    "height": 0.32,
     "seed": 52,
-    "berries": 7
+    "berries": 9,
+    "berry": 0.0085
    }
   ]
  },

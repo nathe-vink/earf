@@ -31,8 +31,9 @@ AGARICS2 = [(0.55, -1.55, 0.065, 'plane', 71, dict(lean=[0.01, 0.0], wash=0.05, 
             (-0.62, -1.18, 0.08, 'old', 74, dict(lean=[-0.02, 0.0], wash=0.0, dull=0.46, torn=0.5, matte=True, orange=True)),
             (-0.5, -1.55, 0.05, 'convex', 75, dict(lean=[0.01, -0.01], wash=0.1, dull=0.36, matte=True, orange=True))]
 DEATHCAPS = [(-1.05, -0.55, 0.055, 'convex', 81), (-1.2, -0.42, 0.04, 'young', 82), (-0.95, -0.35, 0.03, 'button', 83)]
-ARUMS = [(1.15, -0.85, 0.32, 41, [0.02, -0.01]), (1.27, -0.78, 0.26, 42, [-0.015, 0.01]), (1.08, -0.7, 0.22, 43, [0.0, 0.02])]
-NIGHTSHADE = [(-1.35, -0.9, 0.42, 51), (-1.5, -0.75, 0.36, 52)]
+ARUMS = [(0.98, -1.65, 0.34, 41, [0.02, -0.01]), (1.1, -1.58, 0.28, 42, [-0.015, 0.01]), (0.9, -1.5, 0.24, 43, [0.0, 0.02]),
+         (1.2, -0.85, 0.3, 44, [0.01, 0.0])]
+NIGHTSHADE = [(-0.95, -1.75, 0.38, 51), (-1.1, -1.62, 0.32, 52)]
 
 
 def extp(fn, position=(0, 0, 0), **k):
@@ -51,20 +52,21 @@ def shot():
             p['radius'] = round(p['radius'] * 0.42, 3); p['flare'] = 0.25; p['foot'] = 0.6; p['tex_scale'] = 1.0
         if p.get('fn') == 'plants' and p.get('model') == 'fern_02':           # a beech wood's floor is open: half the ferns
             p['place'] = p['place'][::2]
-    for p in props:                                                         # scarlet, as a fly agaric is: A4 dulled them so
-        if p.get('fn') == 'amanita':                                        # they would not out-shout the speaker
-            p['dull'] = min(p.get('dull', 0.0), 0.2)
+    for p in props:                                                         # scarlet and viscid, as a fresh fly agaric is: A4
+        if p.get('fn') == 'amanita' and p.get('species', 'muscaria') == 'muscaria':   # dulled and dried them (matte) so they
+            p['dull'] = 0.05 if p.get('age') != 'old' else 0.2              # would not out-shout the speaker, and at 600 px
+            p['matte'] = False                                              # they read as pink 'toadstools'
+            p['wash'] = min(p.get('wash', 0.15), 0.08)
     for x, y, R, age, sd, more in AGARICS2:
         more = dict(more); z = more.pop('z', -0.045 if age != 'button' else -0.02)
-        more['dull'] = 0.2
         props.append(A4.extb('amanita', (x, y, z), cap=R, age=age, seed=sd, **more))
     for x, y, R, age, sd in DEATHCAPS:
         props.append(A4.extb('amanita', (x, y, -0.04 if age != 'button' else -0.02), species='phalloides', cap=R, age=age,
                              seed=sd, dull=0.3, matte=True))
     for x, y, H, sd, lean in ARUMS:
-        props.append(extp('arum', (x, y, -0.01), height=H, seed=sd, lean=lean, berries=44))
+        props.append(extp('arum', (x, y, -0.01), height=H, seed=sd, lean=lean, berries=48, berry=0.0055))
     for x, y, H, sd in NIGHTSHADE:
-        props.append(A4.extb('nightshade', (x, y, -0.01), height=H, seed=sd, berries=7))
+        props.append(A4.extb('nightshade', (x, y, -0.01), height=H, seed=sd, berries=9, berry=0.0085))
     s['sky'] = sky(HDRI, ROT, strength=0.3, res='4k')
     s['title'] = 'barkhorn, Poison F1, a European poison wood in autumn'
     return s
