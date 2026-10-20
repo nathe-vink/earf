@@ -139,9 +139,9 @@
     "windows_lit": 0.5,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
-    "plinth_bar": 0.5,
+    "plinth_bar": 0.25,
     "plinth_bar_col": "#FFB060",
-    "plinth_listen": 0.5,
+    "plinth_listen": 0.25,
     "plinth_listen_col": "#FFB060"
    },
    {
@@ -207,7 +207,7 @@
     "ceiling": 3.4,
     "lamp_w": 30.0,
     "lamp_k": 2700,
-    "shade_glow": 0.45,
+    "shade_glow": 0.3,
     "noshadow": "shell|liner|skin"
    },
    {
@@ -270,7 +270,7 @@
     ],
     "lamp_w": 6.0,
     "lamp_k": 2700,
-    "shade_glow": 0.225,
+    "shade_glow": 0.15,
     "noshadow": "shell|liner|skin"
    }
   ]
@@ -770,7 +770,7 @@
    6.05,
    3.32
   ],
-  "density": 0.012,
+  "density": 0.008,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -782,7 +782,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 3.0,
+  "exposure": 2.3,
   "white_balance_k": 2700,
   "white_balance_tint": 0.0
  },
