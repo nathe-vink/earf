@@ -1,0 +1,373 @@
+{
+ "stage1": {
+  "impression": "A square-on view of a back bar: a timber grid of cubbies, two dark speaker boxes, turntables under clear covers and a fluted timber counter front. A veil of haze lifts the blacks, so the frame looks flat and smeared, with no deep shadows and no crisp highlights. The brightest thing in the room is a set of cool grey, empty-looking cubby backs, and the speakers barely read as objects. It is a generic CG bar, not a specific place a magazine would publish: no sign of life is in frame, there is no pool of light on the bar and the hero speakers disappear.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speakers in the niches read at a glance as smoked acrylic objects, with lit edges and visible internals: speaker regions lum_range > 70 and lum_p95 > 110",
+  "The record wall reads as full and warm, not as empty, cool grey cubbies brighter than the speakers",
+  "A real tonal range: true blacks in the shadows (frame lum_p5 < 14) and the haze no longer veiling the whole frame",
+  "Distinct pools of Dome light on the zinc, with dark between them, and signs of life (a glass, the coupe, a candle, a record) on the counter in frame",
+  "Crisp edges on the steel, the turntables and the timber at 1:1, with no denoiser smear (the deck edge's 10-90 width is now 78 px)",
+  "A specific sense of place: the brass foot rail, the chairs and the counter's zinc read as materials, not grey slabs"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Haze (0.02/m) lifts the shadows evenly: frame lum_p5 22.8, crush 0 %, a low-contrast milky look"
+  },
+  {
+   "region": [
+    225,
+    10,
+    430,
+    200
+   ],
+   "what": "The cubby backs are the brightest wall surface (median 71, up to 103 lower centre) and near neutral or cool (r109 g102 b101) under 2400-2600 K light. They read as empty, back-lit grey panels, and the records are only on the lower outer shelves"
+  },
+  {
+   "region": [
+    0,
+    130,
+    115,
+    300
+   ],
+   "what": "The left speaker is muddy and flat (lum_range 34.7, median 43.5). The smoked acrylic, the horn and the edges do not read, and the white batts are barely visible"
+  },
+  {
+   "region": [
+    575,
+    130,
+    700,
+    300
+   ],
+   "what": "Same for the right speaker (lum_range 36.8). Its silhouette merges with the dark niche"
+  },
+  {
+   "region": [
+    95,
+    5,
+    180,
+    70
+   ],
+   "what": "The Dome shades read as opaque white or grey metal lampshades with a bright lower rim, not as smoked acrylic with a frosted liner"
+  },
+  {
+   "region": [
+    0,
+    320,
+    720,
+    372
+   ],
+   "what": "The zinc counter top is a flat grey band with one specular streak (p95 201). There are no pools of light and no props on it"
+  },
+  {
+   "region": [
+    140,
+    250,
+    330,
+    330
+   ],
+   "what": "The turntable and plinth edges are soft (10-90 width 78 px over the deck) and look smeared by the denoiser. The clear dust covers read as boxy vitrines"
+  },
+  {
+   "region": [
+    0,
+    440,
+    250,
+    480
+   ],
+   "what": "A chair back is cut off at the bottom edge with no legible leather or steel. The brass foot rail is not visible"
+  },
+  {
+   "region": [
+    665,
+    290,
+    710,
+    320
+   ],
+   "what": "A small white card or nameplate on the counter at right is the only bright prop and reads as a placeholder"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "Haze lifts every shadow, so the frame has no true blacks and looks veiled and CG-flat.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_p5 22.8, lum_p1 15.8, crush_pct 0, lum_range 105.9"
+   },
+   "change": {
+    "setting": "haze in the room's air: density",
+    "from": "0.02 per metre",
+    "to": "0.006 per metre"
+   },
+   "expected": "Shadows drop to near black between the pools of light, the cone of the downlights still shows faintly, and local contrast returns to the timber and steel.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p5",
+    "op": "<",
+    "value": 14
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speakers, the heroes of the frame, have almost no tonal range and vanish into their niches.",
+   "evidence": {
+    "region": [
+     0,
+     130,
+     115,
+     300
+    ],
+    "measured": "lum_range 34.7, lum_p95 69.0 (right speaker: range 36.8, p95 72.2)"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area (and a grazing light in the lit niche from above, if the niche lamps are on that control)",
+    "from": "1.0 W/m2 at the target, 2900 K",
+    "to": "4.0 W/m2 at the target, 2900 K, aimed to graze the cabinet's top and side edges so the polished acrylic edges glow and the batts show through the smoke"
+   },
+   "expected": "Each speaker reads as a smoked acrylic body with glowing edges and a visible horn and woofer, brighter than the niche around it.",
+   "accept": {
+    "region": [
+     0,
+     130,
+     115,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 70
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The cubby backs are the brightest and coolest surface on the wall, so the record wall reads empty and grey and pulls the eye from the speakers.",
+   "evidence": {
+    "region": [
+     225,
+     140,
+     360,
+     200
+    ],
+    "measured": "lum_median 103.4, r109 g102 b101 (neutral under 2400-2600 K light)"
+   },
+   "change": {
+    "setting": "the concrete's tone and sheen (behind the record wall), plus whatever source lights it from behind (the disc and its 3.0 W area lamp)",
+    "from": "light grey concrete, disc lamp 3.0 W",
+    "to": "concrete darkened to a warm mid grey (albedo about 0.25, warm) and the disc's area lamp at 1.0 W, so the cubbies fall below the speakers"
+   },
+   "expected": "The cubby backs drop to a warm mid tone, the speakers become the brightest objects either side and the wall reads as timber and records.",
+   "accept": {
+    "region": [
+     225,
+     140,
+     360,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 65
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The record wall reads as an empty grid: the records fill only the lower outer shelves, so the room looks unfinished and generic.",
+   "evidence": {
+    "region": [
+     225,
+     10,
+     430,
+     200
+    ],
+    "measured": "seen at 2x: bare concrete in 9 of the 12 central cubbies; lum_range 103.7 driven by bare backs"
+   },
+   "change": {
+    "setting": "props: records",
+    "from": "records in the lower outer cubbies only",
+    "to": "spines filling most cubbies, with a few gaps, two or three sleeves face-out and one leaning record per row"
+   },
+   "expected": "The wall reads as a used collection of records with fine vertical spine detail and small highlights.",
+   "accept": {
+    "region": [
+     225,
+     10,
+     430,
+     200
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The record wall spots are too weak to give the spines the pools and small highlights of a kissa wall.",
+   "evidence": {
+    "region": [
+     140,
+     0,
+     560,
+     240
+    ],
+    "measured": "the spines at the left and right cubbies are flat brown, with no falloff or highlight visible at 2x"
+   },
+   "change": {
+    "setting": "lamps: the record wall 4 x spot",
+    "from": "6.0 W, 2600 K, cone 14.0 deg",
+    "to": "20.0 W, 2600 K, cone 22 deg, aimed at the spines rather than the cubby backs"
+   },
+   "expected": "Warm scallops of light on the record spines, falling off downward, with highlights on the sleeves' edges.",
+   "accept": {
+    "region": [
+     140,
+     130,
+     215,
+     230
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">",
+    "value": 0
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The counter in frame is bare, with no sign of life and no pools on the zinc, which makes it read as a showroom.",
+   "evidence": {
+    "region": [
+     0,
+     320,
+     720,
+     372
+    ],
+    "measured": "lum_median 45, a single specular streak (p95 201.5), no props in frame"
+   },
+   "change": {
+    "setting": "props: rocks glasses, the half-drunk coupe and candles on the counter",
+    "from": "outside the frame",
+    "to": "the coupe and a rocks glass on the zinc at about x 6.7-7.3 m, a candle at x 7.6 m, all within the frame's lower third, under the Dome downlights"
+   },
+   "expected": "Bright small highlights and a warm candle pool on the zinc in the foreground, so a viewer reads someone just left.",
+   "accept": {
+    "region": [
+     0,
+     320,
+     720,
+     372
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 190
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The Dome shades read as white metal lampshades: the liner's glow overpowers the smoked tint.",
+   "evidence": {
+    "region": [
+     95,
+     5,
+     180,
+     70
+    ],
+    "measured": "lum_median 76.2, p95 201.3, neutral-warm r89 g74 b63 with a near-white rim"
+   },
+   "change": {
+    "setting": "EARF's lamps: each Dome liner's glow",
+    "from": "0.3",
+    "to": "0.12 (keep the downlights at 180 W)"
+   },
+   "expected": "The shade reads as dark smoked acrylic with a soft inner glow, and the light lands on the zinc rather than on the lamp.",
+   "accept": {
+    "region": [
+     95,
+     5,
+     180,
+     70
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 60
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The edges are smeared at 1:1, so the decks and the steel lose their crisp, real-object edges.",
+   "evidence": {
+    "region": [
+     140,
+     250,
+     330,
+     330
+    ],
+    "measured": "edge axis y: largest step 21.4, 10-90 width 78 px"
+   },
+   "change": {
+    "setting": "render: samples / denoise",
+    "from": "256 samples, adaptive 0.02, denoise true at proof scale 0.3",
+    "to": "512 samples, adaptive 0.01, judged at full 2400 x 1600 (or denoise with albedo and normal passes)"
+   },
+   "expected": "The plinth and dust cover edges are sharp, and the timber flutes and the spines are resolved.",
+   "accept": {
+    "region": [
+     140,
+     250,
+     330,
+     330
+    ],
+    "metric": "edge",
+    "axis": "y",
+    "op": ">",
+    "value": 30
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the speakers a more saturated tint so the frame's one colour reads",
+   "why": "The Smoke configuration and the products' colour are fixed. With everything smoked, the frame has no saturated colour, and the hero has to be carried by light (c2), not by tint."
+  },
+  {
+   "request": "Replace the grid of square cubbies with a denser, finer record shelving rhythm",
+   "why": "The back bar and the record wall are the room's design as proposed, and they are fixed."
+  },
+  {
+   "request": "Show the counter chairs, the brass foot rail and the banquette more fully by lowering or pulling back the camera",
+   "why": "This is allowed (the camera may change), but it moves every region, so it carries no pixel test. Consider dropping the camera to about z 1.05 and pulling back 0.5 m so the rail and a chair back read in the foreground."
+  }
+ ],
+ "score_if_fixed": 6.5
+}
