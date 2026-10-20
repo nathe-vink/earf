@@ -27,6 +27,16 @@ The coordinator chose to drop N1 (option a).
 
 The sulphur vents and fumes barely register at this distance.
 
+**Proof 2** (`proofs31/element-poison_n3-p02.jpg`), the rethink:
+- What changed: sulphur vents fume a few metres from the speaker; a generic "DANGER / TOXIC GAS / VOLCANIC FUMES" sign stands at the path; haze replaces the far crater wall, which had read as painted.
+- **Read test:** passes, through the sign. The judge saw "…stands on dark volcanic ground by a lake, with a 'DANGER: TOXIC GAS, VOLCANIC FUMES' sign on a post to its left, yellow sulfur mounds to its right, and a grey plume of smoke under an overcast sky."
+- **Realism:** 3.0 and 2.5 (mean 2.75, −0.25). The tells:
+  - The ground is a flat, repeating gravel plane that ends in a ruler-straight edge against a flat cyan lake band and horizon.
+  - The plume is a grainy painted smear.
+  - The sulphur mounds look like clay, with no contact shadow. The speaker has no contact shadow either, and the sign is too crisp.
+
+**N3 is stopped** after its one rethink pass: it didn't move.
+
 ## N2, the toxic algae lake (`poison_n2.py`)
 
 **Proof 1** (`proofs31/element-poison_n2-p01.jpg`, 1200 × 800, 96 samples):
