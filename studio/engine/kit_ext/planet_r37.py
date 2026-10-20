@@ -242,11 +242,53 @@ def sink(bpy, kit, p, objs):
     if p.get('sink_strip', 0) > 0:
         K._area(bpy, 'sink-strip', (S['x'], y0 + S['d'] - 0.03, z0 - 0.004), (0, 0, 0), (S['w'] - 0.06, 0.012),
                 p['sink_strip'], kelvin=3000)
+    # round 38 prep (the lead: let its thickness read, the front not crushed): a hidden panel under the slab facing up
+    # into its bottom face, so light crosses the cast to the polished front and arrises
+    if p.get('sink_under', 0) > 0:
+        import math
+        K._area(bpy, 'sink-under', (S['x'], y0 + S['d'] / 2, z0 - 0.006), (math.pi, 0, 0), (S['w'] - 0.04, S['d'] - 0.04),
+                p['sink_under'], kelvin=3000)
     # and a wash down the boards from the alcove's head, so the slab has something to reflect
     if p.get('sink_wash', 0) > 0:
         import math
         K._area(bpy, 'sink-wash', ((A['x0'] + A['x1']) / 2, A['depth'] + 0.10, A['z1'] - 0.03),
                 (math.radians(-25), 0, 0), (A['x1'] - A['x0'] - 0.1, 0.03), p['sink_wash'], kelvin=2900)
+
+
+
+# --- round 38 prep: signs of life in the listening zone (the lead, 2026-10-20) -----------------------------------------
+def _tilted_box(bm, cx, cy, z0, w, d, h, heading, lean):
+    """A box w (along `heading`) by d by h standing at (cx, cy, z0), leaning back by `lean` radians about its base's
+    long edge (a sleeve against a plinth)."""
+    from mathutils import Matrix, Vector
+    import bmesh
+    g = bmesh.ops.create_cube(bm, size=1.0)
+    M = (Matrix.Translation((cx, cy, z0)) @ Matrix.Rotation(heading, 4, 'Z') @ Matrix.Rotation(-lean, 4, 'X')
+         @ Matrix.Translation((0, -d / 2, h / 2)) @ Matrix.Diagonal((w, d, h, 1)))
+    bmesh.ops.transform(bm, matrix=M, verts=g['verts'])
+
+
+def zone_life(bpy, kit, p, objs):
+    """A sleeve leaning on the left plinth, its record on the table by the near chair; a coat over the near chair's back;
+    a rocks glass and a coupe by the Orb on the near tables."""
+    import math
+    Z = R.ZONE; z0 = Z['z']; P = R.PAIR36; T = R.TUB
+    sl = K.Mesh('zone-sleeves')
+    (role, c, sx, sy, sz, rot) = R.speakers()[0]
+    _tilted_box(sl.bm, sx - P['plinth_d'] / 2 - 0.10, sy + 0.12, z0, 0.314, 0.004, 0.314, math.radians(90) - 0.0, math.radians(14))
+    tx, ty = R.TUB_TABLES[0]
+    K._obox(sl.bm, tx - 0.04, ty + 0.06, z0 + R.TUB_TABLE['h'] + 0.0005, 0.314, 0.314, 0.003, math.radians(-20))
+    objs.append(sl.object(bpy, K.principled(bpy, 'sleeve-zone', '#C9B79A', rough=0.6)))
+    vr = K.Mesh('zone-record'); K._cyl(vr.bm, tx - 0.04, ty + 0.06, z0 + R.TUB_TABLE['h'] + 0.0035, 0.15, 0.0018, seg=64)
+    objs.append(vr.object(bpy, K.principled(bpy, 'vinyl', '#0B0B0C', rough=0.25), smooth=True))
+    # a coat over the back of the near chair (the one nearest the camera's side of the zone)
+    cx, cy = R.TUBS[0]
+    ax, ay = P['x'], R.YC
+    face = math.atan2(ay - cy, ax - cx); bx, by = cx - math.cos(face) * (T['r'] - 0.05), cy - math.sin(face) * (T['r'] - 0.05)
+    co = K.Mesh('zone-coat'); top = z0 + T['h']
+    K._obox(co.bm, bx - math.cos(face) * 0.07, by - math.sin(face) * 0.07, top - 0.50, 0.03, 0.46, 0.51, face)
+    K._obox(co.bm, bx, by, top - 0.005, 0.16, 0.46, 0.035, face)
+    objs.append(co.object(bpy, LK.wool(bpy, '#5E4A3A', 'wool-coat-zone'), bevel=0.015, seg=3))
 
 
 def room(bpy, name, p, kit):
@@ -258,4 +300,6 @@ def room(bpy, name, p, kit):
     ledges(bpy, kit, p, objs)
     altar_plinths(bpy, kit, p, objs)
     ginza(bpy, kit, p, objs)
+    if p.get('zone_life'):
+        zone_life(bpy, kit, p, objs)
     return objs
