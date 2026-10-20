@@ -461,6 +461,20 @@ Orb hero at **6.25**; the others land at 5.0 to 5.75 (the Dome hero 5.5, the Orb
 Next, if the owner wants the gate: a brushed-brass shader (an anisotropic, grained material in the engine), a
 gradient in the liner's glow (brighter at the lamp), the Domes row reframed, and more samples.
 
-**Read test** (600 px, a judge told nothing): see below.
+**Read test on the finals** (600 px, a fresh judge told nothing). **It passes for three frames and fails for three:**
+
+| Frame | Object | Material | Lit? | Expensive? |
+|---|---|---|---|---|
+| dome-hero | pendant, yes | "red glass or acrylic, brass cap" | on, yes | mid ("the dome reads as plastic") |
+| orb-hero | sphere table lamp, yes | "red glass", black and brass base | on, yes | "fairly expensive" ("reads like a toy") |
+| orbs | eight sphere lamps, yes | "coloured glass" | on, yes | **cheap** ("RGB mood-light merch") |
+| domes | eight pendants, yes | "coloured glass, brass" | **"mostly off"** (wrong) | **mid to cheap** |
+| catch | the collar and shade close up, yes | "brushed brass, amber glass" | **can't tell** | expensive |
+| unlit | smoked pendant over smoked sphere, yes | "smoked glass, brass, wood" | the Orb off, yes; **the Dome "on"** (its underside reads lit) | expensive |
+
+The judge reads the acrylic as glass throughout, which flatters the product but is not quite the brief's "names the
+material". What it says hurts each frame: the Dome hero is washed out and small in its frame; the lit Orbs fill as a
+flat blob with no inner detail; the Orbs row is small, and eight colours together read as merch; the Domes row is
+cropped at the top and reads unlit; the catch is cropped too tight to read what it is; the unlit Orb is murky.
 
 **Site particulars:** `PARTICULARS.md`, read from the fab kits, with what is unconfirmed marked.

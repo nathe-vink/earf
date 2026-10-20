@@ -1,0 +1,368 @@
+{
+ "size": [
+  2400,
+  800
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -4.6,
+   1.52
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.46
+  ],
+  "lens_mm": 70,
+  "level": false,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   0.0,
+   1.55
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAE4DA",
+  "width": 10.0,
+  "front": 6.0,
+  "depth": 0.6,
+  "radius": 0.2,
+  "height": 4.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "oak_veneer_01",
+    "res": "2k",
+    "color": "#E9DAC4",
+    "rough_mul": 0.75,
+    "size": [
+     4.0,
+     0.7,
+     0.05
+    ],
+    "position": [
+     0.0,
+     0.05,
+     1.05
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       -1.05,
+       0.0,
+       1.6
+      ],
+      "flavour": "ember"
+     }
+    ],
+    "flavour": "ember",
+    "shade_glow": 0.75,
+    "lamp_w": 4.5,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFF3E6"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       -0.75,
+       0.0,
+       1.6
+      ],
+      "flavour": "dust"
+     }
+    ],
+    "flavour": "dust",
+    "shade_glow": 0.75,
+    "lamp_w": 4.5,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFF3E6"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       -0.44999999999999996,
+       0.0,
+       1.6
+      ],
+      "flavour": "acid"
+     }
+    ],
+    "flavour": "acid",
+    "shade_glow": 0.675,
+    "lamp_w": 4.5,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFF3E6"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       -0.15,
+       0.0,
+       1.6
+      ],
+      "flavour": "poison"
+     }
+    ],
+    "flavour": "poison",
+    "shade_glow": 0.675,
+    "lamp_w": 4.5,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFF3E6"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       0.15,
+       0.0,
+       1.6
+      ],
+      "flavour": "ice"
+     }
+    ],
+    "flavour": "ice",
+    "shade_glow": 0.562,
+    "lamp_w": 4.5,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFF3E6"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       0.44999999999999996,
+       0.0,
+       1.6
+      ],
+      "flavour": "haze"
+     }
+    ],
+    "flavour": "haze",
+    "shade_glow": 0.637,
+    "lamp_w": 4.5,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFF3E6"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       0.75,
+       0.0,
+       1.6
+      ],
+      "flavour": "fog"
+     }
+    ],
+    "flavour": "fog",
+    "shade_glow": 0.338,
+    "lamp_w": 4.5,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFF3E6"
+     }
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       1.05,
+       0.0,
+       1.6
+      ],
+      "flavour": "smoke"
+     }
+    ],
+    "flavour": "smoke",
+    "shade_glow": 0.45,
+    "lamp_w": 4.5,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFF3E6"
+     }
+    }
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D2C8",
+  "horizon": "#DED8CE",
+  "ground": "#D6CEC2",
+  "strength": 0.35
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    0.3
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 30,
+    "distance_m": 2.6
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.46
+   ],
+   "irradiance": 0.9,
+   "color": 4300
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.46
+   ],
+   "irradiance": 0.25,
+   "color": 4300
+  },
+  "bgwash": {
+   "type": "area",
+   "size_m": [
+    6.0,
+    4.0
+   ],
+   "position": [
+    0.0,
+    -1.2,
+    3.6
+   ],
+   "target": [
+    0.0,
+    0.6,
+    1.46
+   ],
+   "irradiance": 4.368,
+   "color": "#FFE7AA",
+   "camera": false,
+   "specular": 0.0
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    3.5,
+    0.15
+   ],
+   "position": [
+    0,
+    0.45,
+    2.0
+   ],
+   "target": [
+    0,
+    -0.2,
+    1.6
+   ],
+   "irradiance": 1.2,
+   "color": 4300,
+   "camera": false
+  },
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    1.5
+   ],
+   "position": [
+    0,
+    -1.2,
+    1.3
+   ],
+   "target": [
+    0,
+    0,
+    1.6
+   ],
+   "irradiance": 0.8,
+   "color": 4300,
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.15,
+  "white_balance_k": 4300
+ },
+ "title": "Dome and Orb for earf.world: domes"
+}
