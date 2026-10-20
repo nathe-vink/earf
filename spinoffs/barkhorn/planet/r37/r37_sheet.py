@@ -57,7 +57,7 @@ def main():
         y += CH + FH
     y += G
     for k, (key, cap) in enumerate((('street', 'The shopfront at night, from the kerb (Smoke)'),
-                                    ('sink', 'The sink in Smoke: cast acrylic, polished, read as smoked glass'))):
+                                    ('sink', 'The sink in Smoke: polished cast acrylic, 160 thick (it reads as black stone or lacquer at this stage)'))):
         x = x0 + k * (big_w + G)
         p = os.path.join(FIN, f'{key}.png')
         if os.path.exists(p):
