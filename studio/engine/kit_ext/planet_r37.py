@@ -332,6 +332,7 @@ def _cable(bpy, name, T, c):
     """A plug-in Orb, wired (the owner, 2026-10-20: USB-C, a battery cartridge optional; in a bar it is wired): a thin
     black fabric cable from the back of the base across the table top to a grommet, and down through it to the floor."""
     import bmesh
+    from mathutils import Matrix, Vector
     r = c.get('radius', 0.0022); back = c.get('back', 0.075); run = c.get('run', 0.10); floor = c['floor']
     z0 = T.translation.z
     p0 = T @ Vector((0.0, back, r)); p1 = T @ Vector((0.0, back + run, r))
