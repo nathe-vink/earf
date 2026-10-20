@@ -1,0 +1,378 @@
+{
+ "stage1": {
+  "impression": "It reads as a real-time-looking CG showroom, not a photograph. Two salmon-pink speakers glow flat and clipped in front of a dark tiled niche, the top sixth of the frame is an empty black void, and the green tub chairs are smooth, untextured shapes cut off at the bottom edge. A bright white screen at the left edge pulls the eye away from the speakers. As it stands a design magazine would not run it as a specific place: it reads as a generic dark lounge with a lit display.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Frame lum_median raised from 12.6 into 22-50 without lifting the black ceiling into a flat grey",
+  "Ember cabinets hold their red tint with clip_pct under 1% across both speakers (now 10.3%), with visible thickness and edge glow in the acrylic",
+  "The left screen is dimmed so it is no longer the brightest large surface (now median 171, against the speakers' 51-76)",
+  "Real material texture at 1:1: velvet pile and sheen on the chairs, end-grain block pattern with tonal variation in the niche, wool carpet texture",
+  "Sign of life in the zone (a glass, a sleeve on the table, a coat over a chair)",
+  "The ceiling and upper wall hold detail (beams, board-formed concrete) instead of a void",
+  "No green cone of light on the felt above the speakers that reads as stage lighting"
+ ],
+ "defects": [
+  {
+   "region": [
+    230,
+    220,
+    540,
+    320
+   ],
+   "what": "Ember cabinets blown to flat salmon pink, clip_pct 10.3% / 10.4%; the red reads as neon or signage, not tinted cast acrylic; the acrylic has no visible thickness or edge glow"
+  },
+  {
+   "region": [
+    230,
+    175,
+    540,
+    215
+   ],
+   "what": "the top modules (horn) read as a dark red smear; no form or edge detail"
+  },
+  {
+   "region": [
+    0,
+    90,
+    28,
+    275
+   ],
+   "what": "screen at the frame edge, median 171 and near white; the brightest large area, it competes with the hero and is cropped awkwardly"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    70
+   ],
+   "what": "ceiling band is an empty black void (median 6), so the room reads as unlit CG space"
+  },
+  {
+   "region": [
+    270,
+    140,
+    310,
+    220
+   ],
+   "what": "a green-tinted cone of light on the felt above each speaker reads as a theatrical gobo and adds a second coloured light"
+  },
+  {
+   "region": [
+    460,
+    140,
+    520,
+    220
+   ],
+   "what": "the same green cone above the right speaker"
+  },
+  {
+   "region": [
+    0,
+    360,
+    720,
+    480
+   ],
+   "what": "the velvet chairs are smooth, untextured CG shapes with no pile or sheen; the foreground ones are cut off and fill the frame without detail"
+  },
+  {
+   "region": [
+    200,
+    100,
+    600,
+    340
+   ],
+   "what": "the end-grain block lining reads as a regular dark tile grid, uniform like a tiled texture"
+  },
+  {
+   "region": [
+    100,
+    340,
+    600,
+    400
+   ],
+   "what": "the carpet and platform are a flat grey plane with no texture or pooled light"
+  },
+  {
+   "region": [
+    250,
+    365,
+    295,
+    425
+   ],
+   "what": "the Orb lamp reads as a grey chrome ball, not smoked acrylic with a glowing frosted liner"
+  },
+  {
+   "region": [
+    610,
+    455,
+    680,
+    480
+   ],
+   "what": "a second Orb is cropped at the bottom edge, a stray bright fragment"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "no props or sign of life in the zone; the speakers are the same model twice (a pair, as specified, but nothing else breaks up the symmetry)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The Ember cabinets clip to flat salmon, losing their red tint and every sign of thick acrylic.",
+   "evidence": {
+    "region": [
+     230,
+     220,
+     295,
+     320
+    ],
+    "measured": "clip_pct 10.31, p95 199, r/g/b median 134/59/63; right speaker clip_pct 10.39"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area, W/m2 at the target; altar 2 x spot",
+    "from": "5.0 W/m2; altar 70.0 W",
+    "to": "2.0 W/m2; altar 45 W with the spots aimed to graze the cabinet sides so the edges glow"
+   },
+   "expected": "The cabinets read deep red with luminous edges and visible internal batts; no flat pink.",
+   "accept": {
+    "region": [
+     230,
+     220,
+     295,
+     320
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frame is too dark overall and the zone's room light is missing, so everything outside the speakers falls into murk.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame lum_p50 12.6 (target 22-50); below_40_pct 85.3"
+   },
+   "change": {
+    "setting": "render exposure, and the Domes' downlights",
+    "from": "exposure 1.0; downlights 320 W",
+    "to": "exposure +0.6 stop; add or raise the downlights over the zone so warm pools fall on the hex tables and chair backs"
+   },
+   "expected": "Frame median about 25-30, pools of light on the tables and seats, with dark between them.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The left screen is the brightest large area in the frame and pulls the eye off the altar.",
+   "evidence": {
+    "region": [
+     0,
+     90,
+     28,
+     275
+    ],
+    "measured": "lum_median 171, against the speakers' 51-76"
+   },
+   "change": {
+    "setting": "the screens' images emission",
+    "from": "1.0",
+    "to": "0.25"
+   },
+   "expected": "The screen reads as a dim, glowing panel below the speakers' brightness.",
+   "accept": {
+    "region": [
+     0,
+     90,
+     28,
+     275
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 70
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "Green-tinted cones on the felt above each speaker read as stage gobos and add a second coloured light at the altar.",
+   "evidence": {
+    "region": [
+     270,
+     140,
+     310,
+     220
+    ],
+    "measured": "visible green-cyan cone over a felt median of 21.8; also at [460,140,520,220]"
+   },
+   "change": {
+    "setting": "the altar spots' aim, cone and haze",
+    "from": "cone 28 deg aimed above the cabinets, haze 0.005",
+    "to": "cone 36 deg with a soft edge, aimed down onto the cabinet tops and plinths; haze 0.002; check that the felt is neutral so it does not pick up the green bounce"
+   },
+   "expected": "No visible cone on the back felt; light lands on the speakers and the oak plinths.",
+   "accept": {
+    "region": [
+     270,
+     140,
+     310,
+     220
+    ],
+    "metric": "g_median",
+    "op": "<=",
+    "value": 16
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The top sixth of the frame is a black void and the foreground chairs are cut off into dark blobs, so the composition reads as CG.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     70
+    ],
+    "measured": "lum_median 6.0, range 5.9: no detail at all"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [11.25, 2.45, 1.35], 28 mm, aimed at z 1.2",
+    "to": "move back about 0.8 m and drop to a seated 1.15 m, 35 mm, shift down so the ceiling band shrinks; keep one chair back as a clean foreground frame instead of three cropped ones"
+   },
+   "expected": "The altar fills more of the frame, there is less void above, and the foreground reads as a deliberate seated point of view.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The velvet, carpet and end-grain lining read as smooth CG surfaces and a regular tile grid.",
+   "evidence": {
+    "region": [
+     310,
+     380,
+     560,
+     480
+    ],
+    "measured": "chair lum_range 51 with no pile or sheen highlight visible at 2x; niche [200,100,450,340] is a uniform grid"
+   },
+   "change": {
+    "setting": "materials' finish",
+    "from": "smooth velvet, uniform end-grain tiles, flat carpet",
+    "to": "velvet with a sheen layer and pile normal map (a bright rim where it turns from the light); end-grain blocks with per-block tone and ring variation of +-15%; wool carpet with a bump map"
+   },
+   "expected": "Each material reads at 1:1; the chair rims catch a lighter sheen.",
+   "accept": {
+    "region": [
+     310,
+     380,
+     560,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 70
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The Orb reads as a chrome ball rather than smoked acrylic with a glowing liner, and lights almost nothing around it.",
+   "evidence": {
+    "region": [
+     250,
+     365,
+     295,
+     425
+    ],
+    "measured": "lum_median 61, specular hotspot p95 203; the table top is barely lit"
+   },
+   "change": {
+    "setting": "each Orb W and glow; frosted acrylic roughness",
+    "from": "6.0 W, glow 1.1",
+    "to": "10 W, glow 1.8, a rougher frosted liner, lower clearcoat specular on the smoked shell"
+   },
+   "expected": "A warm, soft glow inside the smoked shell and a pool of light on the hex table top.",
+   "accept": {
+    "region": [
+     220,
+     405,
+     310,
+     450
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 50
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "There is no sign of life, so it reads as a showroom.",
+   "evidence": {
+    "region": [
+     215,
+     400,
+     315,
+     455
+    ],
+    "measured": "the hex table is empty"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none in the zone",
+    "to": "a rocks glass and a record sleeve on the hex table, a scarf or coat over one chair arm"
+   },
+   "expected": "The zone reads as occupied a moment ago.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the room's green less dominant so the speaker is the only saturated colour",
+   "why": "The card fixes the zone and its bottle-green colour; the 'one colour' test conflicts with the room's design by intent."
+  },
+  {
+   "request": "Show the speakers' horn and top module more clearly through their form",
+   "why": "Their shape and parts are fixed; only the light on them may change (c1, c4)."
+  }
+ ],
+ "score_if_fixed": 6.5
+}
