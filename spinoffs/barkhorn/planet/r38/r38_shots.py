@@ -12,13 +12,17 @@ import r37_shots as T37                                             # noqa: E402
 
 S = T37.S
 S.OUT = os.path.join(T37.ROOT, 'studio', 'shots', 'barkhorn', 'planet38')
-T37.KEYS += ('zone_life', 'sink_under', 'sink_fill')
+T37.KEYS += ('zone_life', 'sink_under', 'sink_fill', 'sink_rake')
 S.DEFAULT = T37.DEFAULT = dict(T37.DEFAULT, zone_life=True)
 
 VIEWS = {k: v for k, v in T37.VIEWS.items() if k in ('listening-smoke', 'sink')}
 # the sink (the lead: its thickness should read, light through the polished edges, the front face about lum 8-12 rather
 # than crushed): the cast less dense (0.025 -> 0.08) and a hidden panel under it lighting the cast from below
 VIEWS['sink'] = {**VIEWS['sink'], 'settings': {**VIEWS['sink']['settings'], 'sink_radius': 0.08, 'sink_under': 1.2, 'sink_fill': 20.0, 'sink_wash': 15.0}}
+# p2 (the lead, 2026-10-20: p1 still read as lacquer or stone; do both): a narrow line raked along the polished arrises;
+# the sink's Smoke lightened to the transparent grey r31-coin settled on for its Smoke coin (L about 18, like Perspex
+# 9T20), for the sink only, a proposal to the owner
+VIEWS['sink']['settings'].update(sink_deep='#A9A7AA', sink_radius=0.10, sink_rake=4.0, sink_under=0.25, sink_spot=15.0)
 # the listening view a step back and to the side, looking down a little more, so the middle table (its Orb, a record,
 # a glass) and the near chair (a coat over its back) come into the frame's lower left (round 37's p6 framed the props out)
 VIEWS['listening-smoke'] = {**VIEWS['listening-smoke'],

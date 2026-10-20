@@ -255,6 +255,15 @@ def sink(bpy, kit, p, objs):
         f = K._area(bpy, 'sink-fill', (S['x'], 1.45, z0 + S['t'] / 2), (math.radians(90), 0, 0), (0.9, 0.35),
                     p['sink_fill'], kelvin=2900)
         f.visible_glossy = True
+    # round 38 prep (the lead: rake a narrow line along the polished arrises): a long thin strip above and in front of
+    # the slab, aimed at its top front arris, seen in the bevel as a bright line
+    if p.get('sink_rake', 0) > 0:
+        import math
+        yf = y0 + S['d']; zr = S['top'] + 0.30; yr = yf + 0.22
+        a = math.atan2(zr - S['top'], yr - yf)
+        r = K._area(bpy, 'sink-rake', (S['x'], yr, zr), (math.radians(90) - a + math.radians(90), 0, 0),
+                    (S['w'] + 0.10, 0.012), p['sink_rake'], kelvin=3200)
+        r.visible_glossy = True
     # and a wash down the boards from the alcove's head, so the slab has something to reflect
     if p.get('sink_wash', 0) > 0:
         import math
