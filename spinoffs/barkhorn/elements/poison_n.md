@@ -70,3 +70,17 @@ The sulphur vents and fumes barely register at this distance.
 - The water is a flat, matte coloured floor, with no reflections, no sheen and no ripples. Its shadows have hard edges, like shadows on a painted plane.
 - The stump and the posts have no waterline or wet base.
 - The planks repeat one clean texture, and the haze makes a seamless studio-gradient horizon.
+
+**Proof 5** (`proofs31/element-poison_n2-p05.jpg`), keeping proof 4's staging:
+- Glossier open water between the scum patches.
+- Scum rings at the stumps, the jetty's legs and the sign's post.
+- The sign a size up and nearer, with TOXIC ALGAE as the biggest words, under a short DANGER band.
+
+**Read test:** passes. The judge saw "…stands on a weathered wooden dock over a misty, algae-green lake, next to a 'DANGER TOXIC ALGAE AVOID CONTACT' sign and a tall broken tree stump."
+
+**Realism:** 4.5 and 4.0 (mean 4.25, +0.5 over proof 4). That only wins back proof 4's loss; proofs 2 and 3 also scored 4.25. The tells:
+- The water is still a flat, smeared procedural plane, with almost no reflections, no ripples and no wet contact lines.
+- The speaker is too clean and crisp for the haze, with only a weak contact shadow.
+- The planks repeat one texture, the posts are identical, and the stump is a lone extruded pillar. The sign is too clean and doesn't sit on its post convincingly.
+
+**Five passes** have scored 4.5, 4.25, 4.25, 3.75 and 4.25. N2 has never left 3.75–4.5, against a gate of 6.
