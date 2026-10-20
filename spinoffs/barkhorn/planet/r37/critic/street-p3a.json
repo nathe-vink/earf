@@ -1,0 +1,372 @@
+{
+ "stage1": {
+  "impression": "A view into a deep, warm, timber-and-concrete bar through a shopfront, with a believable night key: pools on the tables, a lit counter, Douglas-fir-looking beams receding. It is let down by the huge pinkish-white EARF letters that read as an opaque vinyl/paint overlay pasted on the image (no glass, no reflection, no etch, the E cut by the frame edge), a dead-centre steel mullion, a bare blown ceiling disc, and an altar pair at the far end that is grey, small and unreadable, so the frame has no hero and the only saturated colour is a blue record player on the counter. As it stands it reads as a generic bar render with a logo stamped on, not a specific place a magazine would publish.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The window's name must read as etched/frosted glass: translucent, room visible through it, region [0,80,280,185] lum_median below 110, and all four letters fully inside the frame",
+  "The glass itself must be present: faint, clean reflections of the street (lamps, kerb) across the pane so the frame reads as shot from outside",
+  "The altar pair must read at a glance as the hero: region [300,180,440,290] lum_median >= 45 with the speakers' tint and light through the acrylic visible",
+  "No bare blown source in the ceiling: [380,120,410,145] clip_pct < 5",
+  "The vertical mullion must not bisect the frame at x=300-315; composition needs a clear subject (shopfront framing the altar) rather than two equal halves",
+  "The room behind the glass must hold detail at 1:1 (currently soft/smeared): record wall, counter zinc and altar sharp enough to read materials",
+  "The frosted lightbox with the dancing silhouette must be legible as a figure, not a pale blank panel"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    80,
+    280,
+    185
+   ],
+   "what": "EARF letters read as flat opaque pinkish-white paint overlay (median 181), no etch texture, no translucency, E cut by the left edge"
+  },
+  {
+   "region": [
+    300,
+    0,
+    318,
+    480
+   ],
+   "what": "Steel mullion splits the frame vertically almost exactly at centre"
+  },
+  {
+   "region": [
+    380,
+    120,
+    410,
+    145
+   ],
+   "what": "Bare ceiling light disc blown, 20.7% clipped, reads as a CG point light"
+  },
+  {
+   "region": [
+    300,
+    180,
+    440,
+    290
+   ],
+   "what": "Altar pair dim and colourless (median 28.7, R/G/B 35/27/25); speakers read as grey boxes with white discs, not tinted cast acrylic"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No glass reflections at all; the shopfront glass is invisible so the 'from the kerb' viewpoint does not read"
+  },
+  {
+   "region": [
+    220,
+    170,
+    520,
+    320
+   ],
+   "what": "Room behind is soft and smeared at 1:1 (denoiser smear and/or depth of field focused on the glass); chairs and tables mush together"
+  },
+  {
+   "region": [
+    540,
+    145,
+    570,
+    245
+   ],
+   "what": "Frosted lightbox is a near-blank pale panel (median 167); the dancing silhouette barely reads"
+  },
+  {
+   "region": [
+    235,
+    255,
+    280,
+    265
+   ],
+   "what": "Saturated blue record player on the counter is the strongest colour in the frame and competes with the altar for hero"
+  },
+  {
+   "region": [
+    40,
+    350,
+    190,
+    390
+   ],
+   "what": "Foreground Orb table top hot spot clips 1.3%"
+  },
+  {
+   "region": [
+    600,
+    0,
+    720,
+    480
+   ],
+   "what": "Right steel/concrete pier occupies a sixth of the frame as an undifferentiated dark slab with little steel character"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "material",
+   "problem": "The etched name reads as opaque paint stamped over the image and dominates the frame.",
+   "evidence": {
+    "region": [
+     0,
+     80,
+     280,
+     185
+    ],
+    "measured": "lum_median 180.8, lum_p95 189.6, r/g/b 196/177/174; room behind fully hidden; E cut at x=0"
+   },
+   "change": {
+    "setting": "the window's etched name emission strength, plus the etch's frosted roughness/transmission",
+    "from": "0.35 emission, effectively opaque",
+    "to": "0.05 emission, etch as frosted glass (high roughness transmission, ~60% transmissive) so the room shows through softly"
+   },
+   "expected": "Letters read as acid-etched glass: pale, translucent, lit from within by the room, not a white decal.",
+   "accept": {
+    "region": [
+     0,
+     80,
+     280,
+     185
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     60,
+     110
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar pair, the hero, is dim and colourless at the end of the room.",
+   "evidence": {
+    "region": [
+     300,
+     180,
+     440,
+     290
+    ],
+    "measured": "lum_median 28.7, speakers [310,230,335,275] 33.2 and [390,230,415,275] 37.3; no visible tint"
+   },
+   "change": {
+    "setting": "the altar 2 x spot and the lamps on each speaker",
+    "from": "altar 380 W cone 22 deg; speaker area lamps 1.0 W/m2",
+    "to": "altar 700 W cone 18 deg; speaker area lamps 3.0 W/m2; a low back-light behind each speaker so light passes through the tinted acrylic"
+   },
+   "expected": "The pair glows as the brightest, most saturated object at the vanishing point; tint and the light through the acrylic read at a glance.",
+   "accept": {
+    "region": [
+     300,
+     180,
+     440,
+     290
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The mullion bisects the frame and the name is cropped; the frame has two equal halves and no lead to the altar.",
+   "evidence": {
+    "region": [
+     300,
+     0,
+     318,
+     480
+    ],
+    "measured": "mullion at x 300-315 of 720; E of EARF cut at x=0"
+   },
+   "change": {
+    "setting": "camera position and target",
+    "from": "position [-2.5, 3.0, 1.45], target [17.0, 3.05, 1.3], 35 mm",
+    "to": "position [-3.2, 2.2, 1.45], target [17.0, 3.3, 1.3], 32 mm, so the mullion falls near the right third, the whole name is in frame and the altar sits in the pane's clear area"
+   },
+   "expected": "All four letters in frame, mullion off-centre, the eye runs from the name along the counter to the altar."
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The pane has no reflections, so the frame does not read as shot from the kerb through glass.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "no specular reflection anywhere on the glass plane; street lamps contribute nothing visible"
+   },
+   "change": {
+    "setting": "street lamps 3 x point (and their position behind/beside the camera)",
+    "from": "120 W, 3000 K",
+    "to": "250 W, 3000 K, placed behind and to either side of the camera at 4-5 m height so faint lamp and kerb reflections cross the upper and outer parts of the pane"
+   },
+   "expected": "A few soft, clean street reflections on the glass (lamp glints, kerb edge) at low contrast, not covering the altar.",
+   "accept": {
+    "region": [
+     600,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "A bare ceiling source is blown and reads as a CG light.",
+   "evidence": {
+    "region": [
+     380,
+     120,
+     410,
+     145
+    ],
+    "measured": "clip_pct 20.67, lum_p95 255"
+   },
+   "change": {
+    "setting": "the Domes' liner glow / Dome wattage for the far Dome",
+    "from": "Dome 30 W, glow 0.45",
+    "to": "Dome 18 W, glow 0.25"
+   },
+   "expected": "The pendant reads as a glowing smoked dome, bright but holding its shape.",
+   "accept": {
+    "region": [
+     380,
+     120,
+     410,
+     145
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "camera",
+   "problem": "The room behind the glass is soft and smeared; materials do not resolve at 1:1.",
+   "evidence": {
+    "region": [
+     220,
+     170,
+     520,
+     320
+    ],
+    "measured": "chairs, tables and back wall mush together; record wall and altar edges soft"
+   },
+   "change": {
+    "setting": "camera aperture/focus and render samples",
+    "from": "f/5.6 focused at [0.0, 3.0, 1.6]; 256 samples, denoise on",
+    "to": "f/8 focused at [6.0, 3.0, 1.4]; 512 samples, adaptive 0.01"
+   },
+   "expected": "Glass letters slightly soft, room sharp from counter to altar; less denoiser smear on dark surfaces.",
+   "accept": {
+    "region": [
+     300,
+     180,
+     440,
+     290
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The frosted lightbox is a pale blank panel; the dancing figure does not read.",
+   "evidence": {
+    "region": [
+     540,
+     145,
+     570,
+     245
+    ],
+    "measured": "lum_median 167.3, p95 184.7, silhouette contrast faint"
+   },
+   "change": {
+    "setting": "the screens' images emission (the lightbox)",
+    "from": "1.8",
+    "to": "1.0, and less roughness on the frosted acrylic so the fogged figure shows more contrast"
+   },
+   "expected": "A soft even glow with a legible, fogged silhouette of a dancer.",
+   "accept": {
+    "region": [
+     540,
+     145,
+     570,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     100,
+     140
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The foreground Orb table clips and pulls the eye away from the altar.",
+   "evidence": {
+    "region": [
+     40,
+     350,
+     190,
+     390
+    ],
+    "measured": "clip_pct 1.32, lum_p95 232"
+   },
+   "change": {
+    "setting": "each Orb",
+    "from": "6.0 W, glow 0.45",
+    "to": "4.0 W, glow 0.35"
+   },
+   "expected": "A warm pool on the table top with no clipping.",
+   "accept": {
+    "region": [
+     40,
+     350,
+     190,
+     390
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.3
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The blue record player on the counter is the strongest saturated colour and competes with the altar for hero",
+   "why": "It is an EARF product in its configuration tint (fixed); only its lighting can be reduced, not its colour"
+  },
+  {
+   "request": "The name's typeface/size on the glass is very large for a shopfront etch",
+   "why": "The shopfront design is fixed by the card; only its emission and finish may change"
+  }
+ ],
+ "score_if_fixed": 7.5
+}
