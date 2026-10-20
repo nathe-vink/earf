@@ -132,6 +132,7 @@ LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band does
     'lamps-domes': (1200, 'Eight Dome pendants hung in a row at one height, lit, one in each colour'),
     'lamp-catch': (900, "The Dome's cover lowered off its black hub, the catch's pins and slots in view"),
     'lamps-unlit': (800, 'An Orb and a Dome in Smoke, switched off: dark, polished acrylic with a pale core'),
+    'lamp-cartridge': (900, 'The Orb in Ember, its battery cartridge slid half out of the back of its black acrylic base'),
 }
 KEYS = [c[0] for c in CLOUDS]
 MARK = {key: col for key, line, num, name, col in M.SPEAKERS if line == 'Cloud'}
@@ -599,8 +600,10 @@ def body():
                  for k, name, kind, line, alt, facts in LAMPS) + '</div>\n'
              '    <figure class="eight">' + pic('lamps-domes', None) + pic('lamps-orbs', None) +
              '<figcaption>In spectrum order, as the speakers: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
-             '    <div class="lamp-duo"><figure>' + pic('lamp-catch', None) +
+             '    <div class="lamp-trio"><figure>' + pic('lamp-catch', None) +
              '<figcaption>A quarter turn, and the cover is off. Nothing live comes with it.</figcaption></figure>'
+             '<figure>' + pic('lamp-cartridge', None) +
+             '<figcaption>Slide in the cartridge and it goes cordless for about ten hours.</figcaption></figure>'
              '<figure>' + pic('lamps-unlit', None) + '<figcaption>Off, in Smoke.</figcaption></figure></div>\n'
              '  </div></section>') if lamps_shown else ''
     nxt = ('  <section class="band"><div class="wrap next">\n    <p class="eyebrow">Next</p>\n'
@@ -916,18 +919,18 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 .next { display: grid; gap: 14px }
 .next p { margin: 0; max-width: 60ch; color: var(--muted) }
 /* the lamps: the pair side by side, each a tall picture over its name, line and particulars; the eight in a row;
-   the catch and the lamps switched off beneath */
+   the catch, the cartridge and the lamps switched off beneath */
 .lamp-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px }
 .lamp { display: grid; gap: 12px; align-content: start; min-width: 0 }
-.lamp img, .eight img, .lamp-duo img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.lamp img, .eight img, .lamp-trio img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
 .lamp h3 { margin: 4px 0 0; display: flex; align-items: baseline; gap: 12px; font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
 .lamp h3 small { font: 500 12px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted) }
 .lamp .line { margin: 0 0 6px; color: var(--muted); max-width: 52ch }
 .eight { margin: 32px 0 0; display: grid; gap: 12px }
-.lamp-duo { display: grid; grid-template-columns: 15fr 8fr; gap: 24px; margin-top: 24px; align-items: start }   /* 3:2 and 4:5 at one height */
-.lamp-duo figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
-.eight figcaption, .lamp-duo figcaption { font-size: 15px; color: var(--muted) }
-@media (max-width: 720px) { .lamp-pair, .lamp-duo { grid-template-columns: minmax(0, 1fr) } }
+.lamp-trio { display: grid; grid-template-columns: 15fr 15fr 8fr; gap: 24px; margin-top: 24px; align-items: start }   /* 3:2, 3:2 and 4:5 at one height */
+.lamp-trio figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
+.eight figcaption, .lamp-trio figcaption { font-size: 15px; color: var(--muted) }
+@media (max-width: 720px) { .lamp-pair, .lamp-trio { grid-template-columns: minmax(0, 1fr) } }
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 14px }
 .pair figure { margin: 0; display: grid; gap: 10px }
 .pair img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
