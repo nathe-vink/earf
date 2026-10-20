@@ -265,3 +265,15 @@ The coordinator's fixes: the front kept clear; one rising column, not a creature
 **The owner, 2026-10-20:** "Maybe studio for the smoke isn't right, since it should really be black smoke."
 
 **E4** (`smoke_studio_black.py`, proof element-smoke-e4-black-p0): the same column made black, sooty and absorbing (albedo #0A0A0A, density 60), on a pale grey seamless lit soft from the front-left. The black smoke reads like ink in water, and the speaker reads clean against the pale ground. It is a test frame for the owner's direction, not yet read-tested.
+
+### E4 and E5 for the owner (the coordinator, 2026-10-20: carry E4 to a passing read; add a location with real black smoke)
+
+- **E5** (`smoke_saltflat.py`): a salt pan (Poly Haven `aarfontein_pan`, a real dry lake bed), the ground `dry_ground_01` whitened, the frame near-monochrome. A black smoke canister lies on the crust behind and right of the speaker; its plume rolls low behind the speaker, then climbs.
+  - p0 read: "floats", because there was no contact shadow (the sky's sun sat 3° up and behind).
+  - The sky was turned to bring its sun front-left and raised to 14°.
+  - p1 read: **stands** ("a soft contact shadow and a cast shadow to the right"). "Thick black smoke, sooty, close to ink", rising from the ground behind the box. No fire, no figure. The front readable.
+- **E4** (`smoke_studio_black.py`):
+  - p1 read: "ink dispersing, soot or a smudge painted on the backdrop".
+  - The smoke was made grey-black (albedo #383838) so its billows shade, given a rim from behind, and made to rise visibly from the floor.
+  - p2 read: stands. "A wisp of dark grey to black smoke, though blurry enough to also look like an ink smudge." No fire. "Mostly no" figure (the streak "could faintly suggest a tendril"). The front readable. A marginal pass.
+- **Side by side:** `element-smoke-e4-e5-e3.jpg` (E4, E5, then E3 pass 2 for reference). No duels until the owner picks.
