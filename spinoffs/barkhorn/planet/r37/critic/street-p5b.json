@@ -1,0 +1,373 @@
+{
+ "stage1": {
+  "impression": "A moody, convincingly warm view down a deep timber-and-concrete room, but there is no shopfront in it. Nothing in the frame says glass: no reflections, no etched name, no readable lightbox. So it looks like a cutaway with the front wall removed, not a photograph from the kerb. The pair on the altar is small, grey and hard to read. A bare white disc at the centre of the ceiling and a smeared, glossy floor pull the eye, and at 1:1 the steel column looks like mottled stone and the floor shows denoiser smear. A magazine would see a handsome but generic dark bar rather than a specific place: the record wall reads as specific, the shopfront and the altar do not.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The shopfront glass must read as glass: faint street reflections across it and the etched name legible, without hiding the room",
+  "The frosted lightbox must show the fogged figure of a woman dancing, glowing evenly; now it reads as a curtain or a plain panel",
+  "The altar pair must be the brightest, clearest thing past the counter (region 280,190,440,300 p95 >= 130), with tinted acrylic and horn silhouettes readable",
+  "No bare, clipped disc at the top centre (380,130,400,155 clip 27.8%) competing with the speakers",
+  "The floor must stay darker than the altar and read as matt concrete with soft pools, not a smeared wet mirror",
+  "The blackened steel shopfront must read as near-black steel with soft uneven sheen and crisp edges, not blotchy stone",
+  "No denoiser smear on the floor or the far wall at the delivered size"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    460,
+    430
+   ],
+   "what": "The window glass is invisible: no reflection, no etched name (glow 0.0), so the room reads as a cutaway with the front wall removed"
+  },
+  {
+   "region": [
+    380,
+    130,
+    400,
+    155
+   ],
+   "what": "A clipped white disc (clip 27.8%, p95 255) at the top centre reads as a bare bulb or a lamp reflection and pulls the eye from the altar"
+  },
+  {
+   "region": [
+    280,
+    190,
+    440,
+    300
+   ],
+   "what": "The altar pair is small and dim (median 45, p95 95), boxy grey shapes with a light circle; tint and horn not legible; profile flat (41.6 to 50.5)"
+  },
+  {
+   "region": [
+    250,
+    320,
+    460,
+    430
+   ],
+   "what": "The floor is brighter than the altar (median 61.4 against 45) and its reflections are smeared and blotchy: denoiser smear, wet-mirror look"
+  },
+  {
+   "region": [
+    460,
+    0,
+    525,
+    470
+   ],
+   "what": "The steel column has a blotchy, high-contrast mottle (lum_range 41) that reads as stone or rusty tile, not blackened steel"
+  },
+  {
+   "region": [
+    585,
+    120,
+    655,
+    310
+   ],
+   "what": "The frosted panel has a smoky vertical gradient that reads as a curtain; no dancing silhouette legible"
+  },
+  {
+   "region": [
+    520,
+    310,
+    690,
+    470
+   ],
+   "what": "The concrete block wall shows a repeated slab pattern with CG blotches and no formwork grain or tie holes"
+  },
+  {
+   "region": [
+    660,
+    0,
+    720,
+    480
+   ],
+   "what": "The right edge is mostly black (crush 18%)"
+  },
+  {
+   "region": [
+    0,
+    430,
+    460,
+    480
+   ],
+   "what": "The sill is crushed and featureless (crush 8.75%)"
+  },
+  {
+   "region": [
+    300,
+    230,
+    410,
+    275
+   ],
+   "what": "The two altar speakers are identical copies, side by side and flat-lit, which reads as instanced models"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "material",
+   "problem": "Nothing reads as glass, so the frame's subject, the shopfront seen from the kerb, does not exist in the picture.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     460,
+     430
+    ],
+    "measured": "No reflection structure visible anywhere in the window; the etched name's glow is 0.0 and the name is not visible"
+   },
+   "change": {
+    "setting": "the window's etched name (emission), plus the glass's reflectivity and the street lamps",
+    "from": "etched name 0.0; glass effectively non-reflective",
+    "to": "etched name 0.4 to 0.5 (warm white); glass at a plain Fresnel reflectance (IOR 1.5) so the street lamps and the kerb show as faint, clean reflections across the top third and the edges"
+   },
+   "expected": "A faint name and soft street reflections lie over the room, with the room still readable through them. The image reads as taken from outside through glass.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     460,
+     60
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     20,
+     35
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar pair, the hero, is barely brighter than the room and its form is unreadable.",
+   "evidence": {
+    "region": [
+     280,
+     190,
+     440,
+     300
+    ],
+    "measured": "median 45.0, p95 95.2; vertical profile flat, 41.6 to 50.5"
+   },
+   "change": {
+    "setting": "the altar 2 x spot",
+    "from": "1200 W, cone 24 deg",
+    "to": "1800 W, cone 18 deg, aimed to graze the cabinets' sides and the horn mouths, with the back wall left darker"
+   },
+   "expected": "The cabinets' acrylic edges and horns pick up highlights, and a clear pool sits on the altar against a darker surround.",
+   "accept": {
+    "region": [
+     280,
+     190,
+     440,
+     300
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 130
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "A clipped bare disc at the top centre is the brightest thing in the frame and draws the eye from the speakers.",
+   "evidence": {
+    "region": [
+     380,
+     130,
+     400,
+     155
+    ],
+    "measured": "clip_pct 27.8, p95 255, neutral white (r 167, g 164, b 164)"
+   },
+   "change": {
+    "setting": "the source of the disc (a Dome's liner glow seen from below, or a street lamp reflected in the glass)",
+    "from": "Dome liner glow 0.3 / street lamps 120 W",
+    "to": "Dome liner glow 0.12, or street lamps 60 W with the reflected lamp moved off the centre line"
+   },
+   "expected": "The disc becomes a warm, tinted glow under 230 with no clipped core, and the eye goes to the altar.",
+   "accept": {
+    "region": [
+     380,
+     130,
+     400,
+     155
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The floor is brighter than the altar and looks like a smeared wet mirror.",
+   "evidence": {
+    "region": [
+     250,
+     320,
+     460,
+     430
+    ],
+    "measured": "median 61.4, p95 127.9, lum_range 110 against the altar's median 45; blotchy streaks at 1:1"
+   },
+   "change": {
+    "setting": "the floor's polish",
+    "from": "high gloss (low roughness)",
+    "to": "honed concrete, roughness about 0.45, with a faint aggregate and trowel variation"
+   },
+   "expected": "The floor reads as soft pools under the lamps, falling off to dark, with no mirror streaks and no smear.",
+   "accept": {
+    "region": [
+     250,
+     320,
+     460,
+     430
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The blackened steel shopfront reads as blotchy stone tiles.",
+   "evidence": {
+    "region": [
+     460,
+     0,
+     525,
+     470
+    ],
+    "measured": "median 18.8, lum_range 41.1; large light blotches and tile seams at 1:1"
+   },
+   "change": {
+    "setting": "the steel's patina",
+    "from": "high-contrast mottled albedo",
+    "to": "near-black albedo with low-contrast brown-black variation, roughness 0.35 to 0.55 so it takes a soft uneven sheen from the street lamps, crisp edges and no tile seams"
+   },
+   "expected": "A dark steel frame with a soft vertical sheen and sharp arrises that frames the room.",
+   "accept": {
+    "region": [
+     470,
+     20,
+     515,
+     460
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The frosted lightbox reads as a smoky curtain, with no figure.",
+   "evidence": {
+    "region": [
+     585,
+     120,
+     655,
+     310
+    ],
+    "measured": "median 54.6, p5 27.9 to p95 106.9, a top-to-bottom smoky gradient"
+   },
+   "change": {
+    "setting": "the screens' images (the lightbox) and how rough the frosted acrylic is",
+    "from": "0.55; current roughness",
+    "to": "0.85, with the frosted roughness raised so the backlight spreads evenly and the dancing silhouette reads as a soft shadow"
+   },
+   "expected": "An evenly glowing panel with a legible fogged figure, the specific detail of the shopfront.",
+   "accept": {
+    "region": [
+     585,
+     120,
+     655,
+     310
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 75
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "Denoiser smear on the floor and far walls gives the picture away as CG.",
+   "evidence": {
+    "region": [
+     160,
+     300,
+     460,
+     440
+    ],
+    "measured": "Watercolour-like smear in the reflections at 1:1; crush 2.48%"
+   },
+   "change": {
+    "setting": "render samples / denoise",
+    "from": "256 samples, adaptive 0.02",
+    "to": "512 samples, adaptive 0.01, with a light film grain added after the denoiser"
+   },
+   "expected": "Fine, even grain in place of smear; textures hold at 1:1.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Nothing shows life on the kerb side, so the street-at-night premise is not sold.",
+   "evidence": {
+    "region": [
+     0,
+     430,
+     460,
+     480
+    ],
+    "measured": "Sill crushed (crush 8.75%), featureless"
+   },
+   "change": {
+    "setting": "small props / street lamps",
+    "from": "none on the street side",
+    "to": "a coat or a glass on the inside of the sill catching the street lamp's light, and the sill lit by the street lamps enough to show its edge"
+   },
+   "expected": "The foreground holds detail and the frame reads as taken from the pavement.",
+   "accept": {
+    "region": [
+     0,
+     430,
+     460,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 4
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the altar speakers larger in frame, or give them a saturated tint",
+   "why": "Their size, shape and smoked colour are fixed EARF products. Only light and camera can help, and the camera here is fixed to the shopfront brief."
+  },
+  {
+   "request": "Redesign the concrete block wall at the right to board-formed concrete",
+   "why": "The room's materials and layout are fixed. Only its finish (tone, sheen, texture variation) may change."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
