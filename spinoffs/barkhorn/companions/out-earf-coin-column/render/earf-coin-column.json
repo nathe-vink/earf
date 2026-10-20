@@ -8,9 +8,17 @@
    48.0,
    24.0
   ],
-  "tube": [
+  "tube-front": [
    -25.0,
    -25.0,
+   20.0,
+   25.0,
+   -0.0,
+   230.0
+  ],
+  "tube-back": [
+   -25.0,
+   0.0,
    20.0,
    25.0,
    25.0,
@@ -23,11 +31,39 @@
    28.0,
    28.0,
    232.0
+  ],
+  "plate": [
+   -24.8,
+   -24.8,
+   0.4,
+   24.8,
+   24.8,
+   3.0
+  ],
+  "led": [
+   -22.0,
+   -22.0,
+   3.0,
+   22.0,
+   22.0,
+   4.6
+  ],
+  "diffuser": [
+   -24.8,
+   -24.8,
+   8.0,
+   24.8,
+   24.8,
+   10.0
   ]
  },
  "finishes": {
   "base": "smoke-base",
-  "tube": "clear",
-  "ring": "brass"
+  "tube-front": "clear",
+  "tube-back": "tube-frost",
+  "ring": "brass",
+  "plate": "aluminium",
+  "led": "led",
+  "diffuser": "opal"
  }
 }

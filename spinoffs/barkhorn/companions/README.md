@@ -495,7 +495,24 @@ catches the light along the edge and reads as currency in the hand; it costs abo
   - Coins drop in at the top. A slot 6.8 tall through the base under the tube lets one coin out at the front, and the
     tube holds the next one back.
   - A finger through the notch at the back pushes the lowest coin out, so the queue plays from the bottom up.
-  - **$322 one-off** at the kit's shop rates (`out-earf-coin-column/bom.md`).
+  - **The light** (the lead, for Planet: in the bar the stack read as a dark column):
+    - A 2700 K LED disc, 44 across, about 1.5 W at 5 V, from USB-C with an inline dimmer.
+    - It sits on an aluminium plate in a 50 mm pocket milled up from under the base, under an opal diffuser and a
+      3.2 mm window of the Smoke, with a 7 × 4 channel for the cable out at the back.
+    - The tube's back half is bead-blasted inside. Lit from its foot, it glows behind the queue, so the coins read in
+      their tints, backlit, like bottles on a lit shelf.
+    - The frost is the part that matters. Lit only from below, polished clear coins send almost none of the light out
+      sideways: the stack stayed dark but for the slot (proofs, 2026-10-20).
+    - **A light bead-blast, its glow fading up the tube** (the lead, from Planet's bar: a heavy frost outshone the queue
+      from a stool, 148 over the tube). Light let in at a wall's foot fades with height, so the frost glows brightest
+      behind the queue and dims over the empty top.
+      - In the kit piece: four bands at 1.0, 0.45, 0.15 and 0.05, set by `back_glow` (default 1.0).
+      - From a stool at 1.2 m on 50 mm, the empty top now measures about 100.
+      - The coins read as bands of their tints only where the frost lights them from behind: seen from the side,
+        each coin is 40 mm of dense tint, so the stack itself stays dark (about 15). A warm pin spot on the decks
+        lights their polished edges; that is the bar's job, not the column's.
+  - **$438 one-off** at the kit's shop rates, with the light (`out-earf-coin-column/bom.md`; $322 without it).
+    Proof: `renders/2026-10-20/barkhorn/coin/column-lit.png`.
 - **BOM:** a boxed set of eight is **$33** at the kit's rates (`out-earf-coin/bom.md`, sheet plus the shop's work as
   estimated lines, plus a $9 box). Per coin, by run (`coin.py --costs`; estimates from shop rates, not quotes):
 
@@ -534,6 +551,8 @@ a keepsake, which is the point: a bar token you'd want to keep.
 - `fan`: coins dealt along an arc, each resting on the one before. The tilt is solved from that contact, so it
   settles at about 11.5° for a 30 mm spread.
 - `column`: the request column with its queue (`coins`, from the bottom), and the next coin pushed `out` of its slot.
+  `base_glow` turns its light on (1.0 as designed): the LED, and the tube's frosted back half glowing behind the
+  queue, fading up the tube; `back_glow` scales the frost against the LED (default 1.0, tuned from a stool).
 - `bowl`: the bowl at the door, `n` coins in it in the eight tints.
 - `flavour_materials` overrides one tint's materials. Checked: `renders/2026-10-20/barkhorn/coin/kit-check.png` (a bowl and a stack). The GLBs are committed (`out-coin-study/render/`,
   `out-coin-column/render/`).
@@ -541,8 +560,8 @@ a keepsake, which is the point: a bar token you'd want to keep.
 **The renders** (`coin_shots.py`, through Planet's kit piece; `renders/2026-10-20/barkhorn/coin/`):
 - the hero: one Acid coin on a bar's zinc in low light, the bar's lamps in the counter's sheen (1600 × 1067);
 - the eight: in spectrum order, dealt in a fan on paper (1600 × 1067);
-- the request column: beside an R3 Float, a queue of eighteen in mixed colours, two waiting on the walnut
-  (1200 × 800).
+- the request column, lit: beside an R3 Float in a dim bar, a queue of eighteen in mixed colours glowing against the
+  frost, two waiting on the walnut (1200 × 800); the first, unlit, by day is `column-day.png`.
 
 ![The finals](../../../renders/2026-10-20/barkhorn/coin/sheet-finals.png)
 
@@ -551,8 +570,8 @@ pass:
 - the hero: "a single thick, translucent amber coin or token… with a knurled (reeded) edge… an engraved wire-frame
   globe with "GOOD FOR ONE SONG" around the top edge and "EARF"";
 - the eight: "eight translucent, coin-like discs… in rainbow order… a dark line-drawn emblem… a faceted globe or gem";
-- the column: "a clear acrylic turntable… beside a tall clear… tube… filled with a stack of coloured discs… like coins
-  or poker chips".
+- the column, lit: "a turntable… and… a frosted translucent tube… filled with a stack of colorful discs in red, blue,
+  orange and cream like a striped roll of poker chips" (the unlit one passed too).
 
 **Critic** (`critic/LOG.md`, `critic/coin/rounds/`): two fresh critics a round on the hero. Three rounds is the
 family's limit, so I stopped there.

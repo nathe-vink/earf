@@ -163,7 +163,8 @@ def column(coins=('ice', 'ember', 'acid', 'haze', 'poison', 'dust', 'smoke', 'em
           'instances': [{'position': [-0.215, 0.10, z], 'rotate_z': 0}]}
     wood = {'kind': 'kit', 'shape': 'box', 'material': 'pbr', 'texture': 'wood_table_001', 'res': '2k', 'color': '#8A6040',
             'rough_mul': 0.5, 'size': [2.4, 1.2, z], 'position': [0.0, 0.25, 0.0]}
-    props = [wood, piece('column', [{'position': [0.135, 0.02, z], 'rotate_z': 8}], coins=list(coins), out=12.0, **PICK),
+    props = [wood, piece('column', [{'position': [0.135, 0.02, z], 'rotate_z': 8}], coins=list(coins), out=12.0, base_glow=0.0,
+                   **PICK),
              piece('coin', [{'position': [0.215, -0.06, z], 'flavour': 'acid', 'rotate': [0, 0, 30]},
                             {'position': [0.248, -0.032, z], 'flavour': 'haze', 'rotate': [0, 0, 70]}], **PICK)]
     tgt = [0.0, 0.06, 0.09 + z]
@@ -196,6 +197,28 @@ def fills(flavours=('ice', 'acid', 'haze')):
     return studio('EARFcoin: the engraving\'s fill', [1200, 1000], cam, props, samples=128)
 
 
+def column_lit(glow=1.0, ambient=0.12):
+    """The column's light, a proof (the lead: in Planet's bar the stack read dark): the same frame in a dim bar's light,
+    the LED in the base on, the queue glowing in its tints."""
+    s = column()
+    s['title'] = 'EARFcoin: the request column, lit'
+    for pr in s['set']['props']:
+        if pr.get('fn') == 'column':
+            pr['base_glow'] = glow
+    s['set']['color'] = '#2A2622'
+    s['sky']['strength'] = 0.08
+    for k, l in s['lights'].items():
+        if 'irradiance' in l:
+            l['irradiance'] = round(l['irradiance'] * ambient, 3)
+    s['render']['white_balance_k'] = 3400
+    # the light climbs the stack through two faces a coin: the engine's 8 transmission bounces stopped it at the slot
+    s['render'].update(bounces=64, transmission_bounces=64, caustics_refractive=True)
+    if ambient > 0.12:      # the final (the lead): a warm lamp over the record player so it still reads in the dim bar
+        s['lights']['deck'] = {'type': 'area', 'size_m': [0.5, 0.3], 'position': [-0.30, -0.05, 0.75],
+                               'target': [-0.215, 0.10, 0.08], 'irradiance': 0.6, 'color': 2700, 'camera': False}
+    return s
+
+
 FRAMES = {f'proof-{f[0]}-{e}': (lambda f=f, e=e, c=c: proof(f, e, c))
           for f, c in (('engraved', 'ice'), ('printed', 'fog'), ('cast', 'ember')) for e in ('plain', 'reeded')}
 FRAMES['proof-e-smoke'] = lambda: proof('engraved', 'reeded', 'smoke')
@@ -204,7 +227,9 @@ FRAMES['fills'] = lambda: fills()
 FRAMES['hero'] = lambda: hero()
 FRAMES['hero-r3-napkin'] = lambda: hero_napkin()
 FRAMES['eight'] = eight
-FRAMES['column'] = lambda: column()
+FRAMES['column'] = lambda: column_lit(ambient=0.25)     # the final: lit, in a dim bar (the lead, after the proof)
+FRAMES['column-lit'] = lambda: column_lit()             # the proof
+FRAMES['column-day'] = lambda: column()                 # the first final, unlit, by day
 
 
 def sheet(kind):
@@ -225,7 +250,7 @@ def sheet(kind):
         os.remove(top)
     else:
         tiles = ' '.join(f"-label '{t}' {R(n)}" for n, t in (('hero', 'The hero, on the zinc'), ('eight', 'The eight'),
-                                                              ('column', 'The request column')))
+                                                              ('column', 'The request column, lit')))
         out = os.path.join(RENDERS, 'sheet-finals.png')
         subprocess.run(f"montage {tiles} -tile 3x1 -geometry 600x400+4+4 -pointsize 15 -background '#F2F0EC' -depth 8 {out}",
                        shell=True, check=True)

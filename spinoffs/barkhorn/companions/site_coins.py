@@ -33,7 +33,10 @@ SIZE = [int(round(W_M * PX_M / 8)) * 8, 1056]
 LENS = 36.0 * H / W_M
 # on night each face glows faintly in its colour (round 30's NEON faces: the hues 0.15, Fog kept clear, Smoke dark)
 # (Smoke's -1: a black disc in it, so its face stays dark under its glowing rim, as round 30's did)
-FACE_GLOW = {k: 0.12 for k in ORDER} | {'fog': 0.04, 'smoke': -1}
+# (the lead, after the first night tiles: the faces sat maroon and brown, the colour on the rims alone; so the faces up
+# and the rims down, which holds Ember's, Dust's and Acid's saturation instead of blooming to coral and peach)
+FACE_GLOW = {k: 0.4 for k in ORDER} | {'fog': 0.1, 'smoke': -1}
+RIM_GLOW = 0.9
 
 
 def xs():
@@ -51,7 +54,7 @@ def shot(ground):
         spots.append({'position': [x, 0.0, (D / 2) * math.sin(math.radians(tilt))], 'flavour': fl,
                       'rotate': [round(rx, 2), round(ry, 2), round(rnd.uniform(0, 360), 1)]})
     props = [{'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'coin', 'spots': spots, 'face': 'blank',
-              'edge': 'reeded', **({'rim_glow': 1.6, 'face_glow': FACE_GLOW} if night else {})}]
+              'edge': 'reeded', **({'rim_glow': RIM_GLOW, 'face_glow': FACE_GLOW} if night else {})}]
     return {'title': f'The site\'s coins, {ground}', 'size': SIZE,
             'camera': {'position': [0.0, -0.0005, H], 'target': [0.0, 0.0, 0.0], 'lens_mm': round(LENS, 2), 'level': False,
                        'fstop': 0},

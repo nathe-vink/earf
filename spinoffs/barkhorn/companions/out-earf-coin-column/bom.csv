@@ -1,5 +1,9 @@
 item,kind,qty,what,size,mass_g,usd_each,finish,supplier,price_date,source,option
-base,cnc-mill,1,"Cast acrylic tube, tinted through",106 x 106 x 34,171,170.28,smoke-base,,,step/base.step,
+base,cnc-mill,1,"Cast acrylic tube, tinted through",106 x 106 x 34,147,170.28,smoke-base,,,step/base.step,
 tube,lathe,1,"Cast acrylic tube, tinted through",60 x 60 x 220,144,96.68,clear,,,step/tube.step,
 ring,lathe,1,Brass C360,66 x 66 x 18,43,54.41,brass,,,step/ring.step,
+plate,lathe,1,Aluminium 6061,60 x 60 x 13,14,46.12,aluminium,,,step/plate.step,
+led,buy,1,"any (a COB or SMD round board) A 44 mm round LED board, 2700 K, CRI 90, about 1.5 W at 5 V (USB), with its constant-current driver on the board",,,9.0,,"AliExpress, Adafruit or alike",2026-10-20,,
+diffuser,lathe,1,"Cast acrylic tube, tinted through",60 x 60 x 12,5,46.7,opal,,,step/diffuser.step,
+cable,buy,1,"A 2 m USB-C to bare-lead cable with an inline rotary dimmer, black, and a 5 V 2 A USB-C adapter",,,14.0,,any,2026-10-20,,
 feet,buy,1,"Four clear polyurethane bumpers, 10 x 2, under the column's base",,,0.4,,3M Bumpon SJ5302 or alike,2026-10-20,,
