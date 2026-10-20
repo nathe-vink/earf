@@ -2,13 +2,13 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/globe-mono/black-paper.json",
  "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-mono/black-paper.png",
  "seconds": {
-  "build": 0.2,
-  "render": 14.1
+  "build": 0.1,
+  "render": 123.7
  },
- "samples": 24,
+ "samples": 96,
  "size": [
-  360,
-  360
+  585,
+  585
  ],
  "applied": [],
  "pending": [],
@@ -20,98 +20,98 @@
   "disc-equator#0": {
    "part": "disc-equator",
    "centre_px": [
-    167.0,
-    163.9
+    271.4,
+    266.4
    ],
    "box_px": [
-    66,
-    93,
-    268,
-    245
+    107,
+    151,
+    435,
+    399
    ],
    "depth_m": 1.75
   },
   "disc-m150#0": {
    "part": "disc-m150",
    "centre_px": [
-    167.0,
-    163.9
+    271.4,
+    266.4
    ],
    "box_px": [
-    98,
-    49,
-    236,
-    288
+    159,
+    80,
+    383,
+    468
    ],
    "depth_m": 1.75
   },
   "disc-m30#0": {
    "part": "disc-m30",
    "centre_px": [
-    167.0,
-    163.9
+    271.4,
+    266.4
    ],
    "box_px": [
-    98,
-    49,
-    236,
-    288
+    159,
+    80,
+    383,
+    468
    ],
    "depth_m": 1.75
   },
   "disc-m90#0": {
    "part": "disc-m90",
    "centre_px": [
-    167.0,
-    163.9
+    271.4,
+    266.4
    ],
    "box_px": [
-    64,
-    68,
-    269,
-    254
+    104,
+    111,
+    437,
+    413
    ],
    "depth_m": 1.75
   },
   "disc-north#0": {
    "part": "disc-north",
    "centre_px": [
-    192.5,
-    108.8
+    312.8,
+    176.9
    ],
    "box_px": [
-    117,
-    55,
-    272,
-    169
+    190,
+    89,
+    442,
+    275
    ],
    "depth_m": 1.716
   },
   "disc-south#0": {
    "part": "disc-south",
    "centre_px": [
-    142.5,
-    217.0
+    231.6,
+    352.6
    ],
    "box_px": [
-    66,
-    160,
-    215,
-    280
+    108,
+    259,
+    349,
+    455
    ],
    "depth_m": 1.784
   },
   "stand#0": {
    "part": "stand",
    "centre_px": [
-    167.4,
-    254.3
+    272.1,
+    413.3
    ],
    "box_px": [
-    141,
-    239,
-    193,
-    270
+    230,
+    389,
+    314,
+    439
    ],
    "depth_m": 1.809
   }

@@ -529,3 +529,56 @@ a keepsake, which is the point: a bar token you'd want to keep.
 - `bowl`: the bowl at the door, `n` coins in it in the eight tints.
 - `flavour_materials` overrides one tint's materials. The GLBs are committed (`out-coin-study/render/`,
   `out-coin-column/render/`).
+
+## Round 33b: the one-colour globes as real objects
+
+The owner, 2026-10-20: "Is it possible to actually build the paper and black globes as well? Those could be cool with
+light cast on them. Maybe not." They are built as the colour globe is (`../globe_mono.py`, after `globe_object.py`):
+- **The six discs:** the three parallels and three meridians, leaning 23.4°, each slotted round those before it. The
+  meridian facing us stays whole.
+- **The light:** one hard raking spot and a little fill, so the rims draw their shadows across the discs and onto the
+  ground.
+- **The sizes:** a 300 mm desk globe, rendered; a 1 m bar piece, costed.
+
+![The one-colour globes](../../../renders/2026-10-20/barkhorn/globe-mono/sheet-proof.png)
+
+- **Black, in Smoke cast acrylic** (the Smoke speaker's own, 8 mm): the one that is the drawing. The faces are smoked
+  windows, and each edge, seen along its disc, goes dark: the drawing's dark rims. Its shadow on the ground is the
+  globe again, in line. On night it needs a rim light from behind or it disappears.
+- **Paper (i), opal cast acrylic, 8 mm:** a white sculpture of planes that glows warm where the spot falls. It is not
+  see-through, so it reads as a solid ball with fins more than as the drawing. It costs as much as the black, for less.
+- **Paper (ii), cotton board, 2 mm:** the same sculpture, matte, with the crispest shadows. Half-lit on night it is the
+  most dramatic of the three. Cheap, and fragile.
+
+**Build notes:**
+- **Slots** are the sheet's measured thickness plus clearance. Cast acrylic is ±10 % on its nominal, so measure the
+  batch.
+  - 8 mm acrylic: slot = measured + 0.3 (0.15 a side), cemented with a thickened solvent cement (Weld-On 16 or Acrifix
+    1R 0192) in a jig. The edges are diamond-polished before assembly.
+  - 2 mm board: slot = measured + 0.2, a push fit, then a line of PVA.
+  - At 1 m in 20 mm sheet: slot = measured + 0.5, cemented.
+- **Pieces:** the six discs can't be one set of half-lap slots, because three meridians cross at the poles. As modelled,
+  the facing meridian is whole, the other two are halves, the equator is six pieces and each parallel is six: 23
+  pieces, which want cement (or glue for the board), not friction alone. A friction-fit version is possible as a kit
+  with one meridian and the three parallels on half-laps, the other two meridians as quarter discs slotted onto it; that
+  is a different drawing (`globe_mono.py` builds the cemented one).
+- **Desk globe, 300 across** (R 150), on a blackened-steel ring 80 across:
+  - Black or opal: 0.46 m² of 8 mm sheet with offcut, about **$70**; cutting $60; polishing the edges $80; cementing
+    23 pieces in a jig, about 3 hours, $180 (the jig $150 once); the ring $40. About **$450 to $550 one-off, $250 in a
+    run of 50**. Retail **$650 to $850**.
+  - Board: two sheets of museum board $30, cutting $25, gluing $90, the ring $40: about **$185 one-off**. Retail $195
+    to $245, as a kit for less.
+- **Bar piece, 1 m across** (R 500):
+  - Black in 20 mm Smoke (the cabinets' stock): 5.1 m² with offcut, about **$1,950** of sheet; about **90 kg**, so it
+    wants a steel cradle and a plinth, or 12 mm sheet (about 55 kg). With cutting $600, polishing $500, assembly $800
+    and the cradle $400: **about $4,300**.
+  - Paper at bar scale: 10 mm honeycomb paper board (Re-board): light (about 8 kg), crisp, about **$600** all in.
+
+**Is it worth building?** Yes, the black one. It is the only one that is the mark as an object: see-through faces,
+dark rims, and a shadow that draws the globe again on the wall or the counter. Where:
+- **The back bar:** a 1 m Smoke globe under a hard spot, its shadow thrown up the wall behind. Planet's signature.
+- **The shop:** the 300 mm desk globe, $650 to $850.
+- **The site's dark band:** a turntable shot of it, lit from behind.
+
+The paper ones are good sculpture but not the drawing (they're opaque). Build the board one first as a $185 prototype
+to judge the scale. Skip the opal.

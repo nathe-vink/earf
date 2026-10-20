@@ -117,7 +117,22 @@ def shot(kind, ground, size=(900, 900), samples=128):
                        'view': 'Khronos PBR Neutral', 'exposure': 0.0, 'white_balance_k': 4600}}
 
 
+def final(kind, ground):
+    """A final at 1600 x 1067: the globe left of centre, its shadow drawing across the ground to the right; on night a
+    low rim from behind draws the far edges."""
+    s = shot(kind, ground, size=(1600, 1067), samples=256)
+    zc = lift() / 1000
+    s['camera'].update(lens_mm=70.0, target=[0.10, 0.06, zc - 0.02])
+    s['sky'].update(zenith='#D6D0C6', horizon='#DDD7CD')     # the sweep's wall warm, not the blue-grey of the proofs
+    if ground == 'night':
+        s['lights']['rim'] = {'type': 'area', 'size_m': [0.6, 0.15], 'position': [0.35, 1.1, zc + 0.35],
+                              'target': [0.0, 0.0, zc], 'irradiance': 0.5, 'color': 4200, 'camera': False}
+    return s
+
+
 FRAMES = {f'{k}-{g}': (lambda k=k, g=g: shot(k, g)) for k in KINDS for g in GROUNDS}
+FRAMES['final-black-paper'] = lambda: final('black', 'paper')
+FRAMES['final-board-night'] = lambda: final('board', 'night')
 
 
 def write_shots():
@@ -153,7 +168,7 @@ if __name__ == '__main__':
         write_shots()
         scale = float(a[a.index('--scale') + 1]) if '--scale' in a else 1.0
         samples = int(a[a.index('--samples') + 1]) if '--samples' in a else None
-        render_([x for x in a if x in FRAMES] or list(FRAMES), scale, samples)
+        render_([x for x in a if x in FRAMES] or [k for k in FRAMES if not k.startswith('final')], scale, samples)
     else:
         print(json.dumps(build()))
         write_shots()
