@@ -49,6 +49,8 @@ def trench(bpy, name, p, kit):
             n = noise.noise(Vector((x * 6.0 + sd, y * 3.0, 0.0)))
             x += rag * n * (0.3 + w)
             z += 0.04 * noise.noise(Vector((x * 9.0, y * 9.0 + sd, 1.0))) * (dep / max(D, 1e-3))
+            # drag marks: grooves along the slide, sharp across it, long along it
+            z -= p.get('grooves', 0.0) * abs(noise.noise(Vector((x * 14.0 + sd, y * 0.35, 2.0)))) * (dep / max(D, 1e-3))
             row.append(bm.verts.new((x, y, z)))
         rows.append(row)
     for j in range(ny):
@@ -108,7 +110,7 @@ def slabs(bpy, name, p, kit):
         f.material_index = 0 if f in tops else 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#2C2C2E', 0.3, 0.3))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.8, '#5A5650', 0.25))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.5, '#2E2C2A', 0.5))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
@@ -123,10 +125,17 @@ def debris(bpy, name, p, kit):
     tops = []
     for k in range(p.get('count', 300)):
         # along the path, thrown sideways (and some forward past the speaker); size falls with distance thrown
-        y = rnd.uniform(y0 + 1.0, y1 + 2.5)
-        r = reach * rnd.random() ** 2.2
-        x = (1 if rnd.random() < 0.5 else -1) * (p.get('inner', 0.8) + r)
-        size = max(0.015, 0.16 * (1.0 - r / reach) ** 1.6 * rnd.uniform(0.3, 1.0))
+        fwd = p.get('forward', 0.0)
+        if rnd.random() < fwd:
+            # thrown ahead of where it came to rest: a fan opening with distance
+            ahead = p.get('ahead', 6.0) * rnd.random() ** 1.6
+            y = y1 + 0.3 + ahead
+            r = (0.2 + 0.5 * ahead) * rnd.random()
+        else:
+            y = rnd.uniform(y0 + 1.0, y1 + 0.5)
+            r = reach * rnd.random() ** 2.2
+        x = (1 if rnd.random() < 0.5 else -1) * ((p.get('inner', 0.8) if y < y1 else 0.0) + r)
+        size = max(0.012, 0.16 * max(0.0, 1.0 - r / max(reach, r + 0.01)) ** 1.6 * rnd.uniform(0.3, 1.0))
         before = set(bm.verts)
         ft, fb, sides = _plate(bm, rnd, size * rnd.uniform(0.8, 1.6), size * rnd.uniform(0.8, 1.6),
                                size * rnd.uniform(0.3, 0.6))
@@ -138,8 +147,53 @@ def debris(bpy, name, p, kit):
         f.material_index = 0 if f in tops else 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#2C2C2E', 0.3, 0.3))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.8, '#55514B', 0.3))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.5, '#32302D', 0.5))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
+    return [ob]
+
+
+def scorch(bpy, name, p, kit):
+    """Scorch on the road: a plane a hair above it, soot-black where noise and a falloff from the path's centre line say
+    so and clear elsewhere, so the blackening frays out into the asphalt instead of ending at an edge. `size` [w, l],
+    `strength` the blackness at its heart, `scale` metres a patch."""
+    w, l = p.get('size', [3.0, 20.0])
+    bm = bmesh.new()
+    vs = [bm.verts.new((x, y, 0.0)) for x, y in ((-w / 2, -l / 2), (w / 2, -l / 2), (w / 2, l / 2), (-w / 2, l / 2))]
+    bm.faces.new(vs)
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    ob.location = Vector(p.get('position', [0, 0, 0.003]))
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    out = nt.nodes.new('ShaderNodeOutputMaterial')
+    bsdf = nt.nodes.new('ShaderNodeBsdfPrincipled')
+    bsdf.inputs['Base Color'].default_value = kit.M.hex_lin(p.get('color', '#0C0A09'))
+    bsdf.inputs['Roughness'].default_value = 0.9
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent'); mix = nt.nodes.new('ShaderNodeMixShader')
+    tc = nt.nodes.new('ShaderNodeTexCoord'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
+    nt.links.new(tc.outputs['Generated'], sep.inputs['Vector'])
+    # falloff across the path (x), strongest on its centre line, and toward both ends (y)
+    def band(sock, lo, hi):
+        a = nt.nodes.new('ShaderNodeMath'); a.operation = 'SUBTRACT'; a.inputs[1].default_value = 0.5
+        nt.links.new(sock, a.inputs[0])
+        b = nt.nodes.new('ShaderNodeMath'); b.operation = 'ABSOLUTE'; nt.links.new(a.outputs[0], b.inputs[0])
+        c = nt.nodes.new('ShaderNodeMapRange'); c.inputs['From Min'].default_value = hi; c.inputs['From Max'].default_value = lo
+        nt.links.new(b.outputs[0], c.inputs['Value'])
+        return c.outputs['Result']
+    fx, fy = band(sep.outputs['X'], 0.05, 0.5), band(sep.outputs['Y'], 0.3, 0.5)
+    nz = nt.nodes.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.0 / p.get('scale', 0.6)
+    nz.inputs['Detail'].default_value = 8.0
+    nt.links.new(tc.outputs['Object'], nz.inputs['Vector'])
+    m1 = nt.nodes.new('ShaderNodeMath'); m1.operation = 'MULTIPLY'; nt.links.new(fx, m1.inputs[0]); nt.links.new(fy, m1.inputs[1])
+    m2 = nt.nodes.new('ShaderNodeMath'); m2.operation = 'MULTIPLY'
+    nt.links.new(m1.outputs[0], m2.inputs[0]); nt.links.new(nz.outputs['Fac'], m2.inputs[1])
+    ramp = nt.nodes.new('ShaderNodeMapRange'); ramp.inputs['From Min'].default_value = 0.15
+    ramp.inputs['From Max'].default_value = 0.45; ramp.inputs['To Max'].default_value = p.get('strength', 0.85)
+    nt.links.new(m2.outputs[0], ramp.inputs['Value'])
+    nt.links.new(ramp.outputs['Result'], mix.inputs['Fac'])
+    nt.links.new(tr.outputs['BSDF'], mix.inputs[1]); nt.links.new(bsdf.outputs['BSDF'], mix.inputs[2])
+    nt.links.new(mix.outputs['Shader'], out.inputs['Surface'])
+    me.materials.append(m)
+    ob.visible_shadow = False
     return [ob]

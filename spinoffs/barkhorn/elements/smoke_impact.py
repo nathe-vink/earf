@@ -40,9 +40,15 @@ def deck():
 def gouge():
     common = dict(y0=Y0, y1=Y1, lip=LIP, depth=0.34, ramp=5.0)
     return [piece('ext', module='impact', fn='trench', width=1.0, end=0.8, ragged=0.07, texture='gravel_concrete',
-                  tex_scale=1.0, tint='#2A2622', tint_mix=0.4, seed=3, **common),
+                  tex_scale=0.7, tint='#1E1B18', tint_mix=0.55, seed=3, grooves=0.06, **common),
             piece('ext', module='impact', fn='slabs', count=90, thickness=0.06, tilt=40.0, tilt_min=6.0, size=0.6, seed=5, **common),
-            piece('ext', module='impact', fn='debris', y0=Y0, y1=Y1, count=420, reach=7.0, seed=7),
+            piece('ext', module='impact', fn='debris', y0=Y0, y1=Y1, count=520, reach=6.0, forward=0.45, ahead=7.0, seed=7),
+            # the heave at its leading edge: plates shoved up and over in front of the speaker
+            piece('ext', module='impact', fn='slabs', y0=Y1 - 0.9, y1=Y1 + 0.8, lip=0.45, depth=0.34, ramp=0.1, count=12,
+                  thickness=0.07, tilt=70.0, tilt_min=35.0, size=0.8, seed=13),
+            # scorch along both lips: the road blackened where it was ground up
+            piece('ext', module='impact', fn='scorch', position=[0.0, (Y0 + Y1) / 2 + 0.6, 0.003],
+                  size=[3.6, Y1 - Y0 + 2.5], strength=0.85, scale=0.5),
             # grit round the speaker's feet, on the trench floor
             piece('ext', module='impact', fn='debris', y0=-0.9, y1=-0.4, count=60, reach=0.45, inner=0.3, z=SINK, seed=9)]
 
@@ -50,7 +56,7 @@ def gouge():
 def haze():
     """Dust and smoke still rising from the gouge, thickest just behind the speaker, and the bridge's air in layers."""
     out = []
-    for i, (y, l, dens, h) in enumerate([(-1.5, 3.0, 2.0, 1.6), (-5.0, 5.0, 1.1, 1.2), (-11.0, 8.0, 0.5, 0.9)]):
+    for i, (y, l, dens, h) in enumerate([(-1.5, 3.0, 0.8, 1.2), (-5.0, 5.0, 0.5, 1.0), (-11.0, 8.0, 0.3, 0.8)]):
         out.append(piece('ext', module='smoke_el', fn='woodsmoke', position=[0.0, y, SINK], size=[2.4, l, h], density=dens,
                          seed=80 + i, scale=0.35, cut=0.5, soft=0.3, anisotropy=0.4, fade=[0.4, 0.3, 0.6], floor=0.0,
                          rise=1.6, color='#7A7068', detail_scale=0.1, detail_weight=0.5))
@@ -58,18 +64,24 @@ def haze():
                      density=0.03, seed=89, scale=6.0, cut=0.2, soft=0.5, anisotropy=0.5, fade=[0.2, 0.2, 0.5], floor=0.01,
                      rise=1.2, color='#6A625C', detail_scale=1.5, detail_weight=0.4))
     # embers in the air between the fire and the lens
-    out.append(piece('scatter', count=160, radius=[0.003, 0.009], material='glow', color='#FF8A30', emit=40.0, seed=91,
-                     **{'in': [-4.0, 2.0, 0.3, 4.0, 18.0, 5.0]}))
+    out.append(piece('scatter', count=140, radius=[0.0015, 0.007], material='glow', color='#FF8A30', emit=60.0, seed=91,
+                     **{'in': [-5.0, 5.0, 0.5, 4.0, 20.0, 6.0]}))
     return out
 
 
 def shot():
     props = deck() + gouge() + haze()
+    # a burning fragment thrown off at the impact, close by the lens at left: the key on the speaker's face
+    props.append(piece('ext', module='wreck', fn='flame', position=[-1.15, -1.6, 0.02], size=[0.5, 0.4, 0.55], density=6.0,
+                       strength=60.0, scale=0.08, seed=33))
+    props.append(piece('box', size=[0.45, 0.3, 0.06], position=[-1.15, -1.6, 0.0], rotate=[0, 8, 25], material='clay',
+                       color='#0E0C0B'))
     lp, lights = lamps()
     props += lp
     props.append(piece('ext', module='smoke_el', fn='occluder', position=[0.0, 0.0, SINK + 0.012], radius=0.42, sx=1.0,
                        sy=0.85, rotate_z=18.0))
     lights.update({
+        'keyfire': {'type': 'point', 'position': [-1.15, -1.6, 0.35], 'power_w': 600.0, 'color': '#FF8A3C', 'radius_m': 0.2},
         # a cool fill from the sky, and the fire's key on the speaker's flank
         'skyfill': {**area(-20, 10, 2.4, 2.4, '#9FB0C8', (4.0, 3.0), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
         'bounce': {**area(-25, 12, 2.0, 2.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
@@ -84,14 +96,14 @@ def shot():
             lights[f'firerim{i}'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [x * 0.4, y * 0.4, 1.0],
                                      'target': [0.0, 0.0, 0.5], 'irradiance': 30.0, 'color': '#FF8A3A', 'receivers': SHELL}
     # low beside the gouge, looking along it to the speaker; 40 mm wide open, focus on the speaker
-    cam = camera(height=0.8, distance=6.5, azimuth=-4, lens=40, target=(0.0, 0.0, 0.3), fstop=2.0, shift_x=0.0,
+    cam = camera(height=0.75, distance=5.2, azimuth=-4, lens=45, target=(0.0, 0.0, 0.3), fstop=2.0, shift_x=0.0,
                  shift_y=0.08)
     cam['clip_end'] = 3000
     return frame('smoke_impact', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.5),
                  'barkhorn, Smoke, the speaker came down like an asteroid', lights=lights, rotate_z=18.0,
                  position=(0.0, 0.0, SINK), samples=512, exposure=0.0,
-                 fin={**finish(contrast=0.08, clarity=0.04, saturation=-0.15, bloom=0.08, bloom_px=40, threshold=0.8,
-                               vignette=0.3), 'grain': 3.0})
+                 fin={**finish(contrast=0.08, clarity=0.04, saturation=-0.1, bloom=0.16, bloom_px=60, threshold=0.7,
+                               vignette=0.3), 'grain': 3.5})
 
 
 def portrait():

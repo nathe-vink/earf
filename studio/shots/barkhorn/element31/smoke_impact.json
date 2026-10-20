@@ -3251,10 +3251,11 @@
     "end": 0.8,
     "ragged": 0.07,
     "texture": "gravel_concrete",
-    "tex_scale": 1.0,
-    "tint": "#2A2622",
-    "tint_mix": 0.4,
+    "tex_scale": 0.7,
+    "tint": "#1E1B18",
+    "tint_mix": 0.55,
     "seed": 3,
+    "grooves": 0.06,
     "y0": -21.0,
     "y1": 1.2,
     "lip": 0.75,
@@ -3285,9 +3286,45 @@
     "fn": "debris",
     "y0": -21.0,
     "y1": 1.2,
-    "count": 420,
-    "reach": 7.0,
+    "count": 520,
+    "reach": 6.0,
+    "forward": 0.45,
+    "ahead": 7.0,
     "seed": 7
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "slabs",
+    "y0": 0.29999999999999993,
+    "y1": 2.0,
+    "lip": 0.45,
+    "depth": 0.34,
+    "ramp": 0.1,
+    "count": 12,
+    "thickness": 0.07,
+    "tilt": 70.0,
+    "tilt_min": 35.0,
+    "size": 0.8,
+    "seed": 13
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "scorch",
+    "position": [
+     0.0,
+     -9.3,
+     0.003
+    ],
+    "size": [
+     3.6,
+     24.7
+    ],
+    "strength": 0.85,
+    "scale": 0.5
    },
    {
     "kind": "kit",
@@ -3315,9 +3352,9 @@
     "size": [
      2.4,
      3.0,
-     1.6
+     1.2
     ],
-    "density": 2.0,
+    "density": 0.8,
     "seed": 80,
     "scale": 0.35,
     "cut": 0.5,
@@ -3347,9 +3384,9 @@
     "size": [
      2.4,
      5.0,
-     1.2
+     1.0
     ],
-    "density": 1.1,
+    "density": 0.5,
     "seed": 81,
     "scale": 0.35,
     "cut": 0.5,
@@ -3379,9 +3416,9 @@
     "size": [
      2.4,
      8.0,
-     0.9
+     0.8
     ],
-    "density": 0.5,
+    "density": 0.3,
     "seed": 82,
     "scale": 0.35,
     "cut": 0.5,
@@ -3433,23 +3470,64 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 160,
+    "count": 140,
     "radius": [
-     0.003,
-     0.009
+     0.0015,
+     0.007
     ],
     "material": "glow",
     "color": "#FF8A30",
-    "emit": 40.0,
+    "emit": 60.0,
     "seed": 91,
     "in": [
-     -4.0,
-     2.0,
-     0.3,
+     -5.0,
+     5.0,
+     0.5,
      4.0,
-     18.0,
-     5.0
+     20.0,
+     6.0
     ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "wreck",
+    "fn": "flame",
+    "position": [
+     -1.15,
+     -1.6,
+     0.02
+    ],
+    "size": [
+     0.5,
+     0.4,
+     0.55
+    ],
+    "density": 6.0,
+    "strength": 60.0,
+    "scale": 0.08,
+    "seed": 33
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.45,
+     0.3,
+     0.06
+    ],
+    "position": [
+     -1.15,
+     -1.6,
+     0.0
+    ],
+    "rotate": [
+     0,
+     8,
+     25
+    ],
+    "material": "clay",
+    "color": "#0E0C0B"
    },
    {
     "kind": "kit",
@@ -4685,6 +4763,17 @@
    "color": "#FFD2A0",
    "radius_m": 0.3
   },
+  "keyfire": {
+   "type": "point",
+   "position": [
+    -1.15,
+    -1.6,
+    0.35
+   ],
+   "power_w": 600.0,
+   "color": "#FF8A3C",
+   "radius_m": 0.2
+  },
   "skyfill": {
    "type": "area",
    "size_m": [
@@ -4913,16 +5002,16 @@
  ],
  "camera": {
   "position": [
-   -0.4534,
-   -6.4842,
-   0.8
+   -0.3627,
+   -5.1873,
+   0.75
   ],
   "target": [
    0.0,
    0.0,
    0.3
   ],
-  "lens_mm": 40,
+  "lens_mm": 45,
   "level": true,
   "fstop": 2.0,
   "focus": [
@@ -4950,14 +5039,14 @@
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
-   "bloom": 0.08,
-   "bloom_px": 40,
-   "bloom_threshold": 0.8,
-   "saturation": -0.15,
+   "bloom": 0.16,
+   "bloom_px": 60,
+   "bloom_threshold": 0.7,
+   "saturation": -0.1,
    "lift": 0.0,
    "lift_color": "#000000",
    "vignette": 0.3
   },
-  "grain": 3.0
+  "grain": 3.5
  }
 }
