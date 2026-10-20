@@ -12,7 +12,7 @@ face and edge in one GLB; companions/out-coin-column), with their materials in a
 - stack: `spots` the stacks' feet; `n` coins each, `flavours` a list cycled from the bottom (or one `flavour`), a
   little `jitter` (mm) and turn between coins as a hand leaves them, `seed`;
 - column: `spots` where the request column stands; `coins` the queue's flavours from the bottom (the next song
-  first), `out` (mm) how far the lowest is pushed out of its slot at the front, `rotate_z`; `base_glow` the light in
+  first), `out` (mm) how far the lowest is pushed out of its slot at the front, `rotate_z`; `base_glow` (default 1.0) the light in
   its base (1.0 on as designed, 0 off): the LED, and the tube's frosted back half glowing behind the queue, at
   `back_glow` of it (BACK_GLOW by default: a soft glow behind the queue, not a lightbox);
 - fan: `spots` where the first coin lies; the coins dealt along a gentle arc, `s` (mm, 30) apart, each resting its
@@ -193,7 +193,7 @@ def column(bpy, name, p, kit):
     pdef, tpl = _templates(bpy, 'column')
     # base_glow: the light in the base, on (1.0 as designed; 0 off): the LED disc, and the tube's frosted back half,
     # lit from its foot, glowing behind the queue (its frost carries its own glow, as Planet's lamps' liners do)
-    glow = p.get('base_glow', 0.0)
+    glow = p.get('base_glow', 1.0)
     over = dict(p.get('materials', {}))
     over['led'] = {**over.get('led', {}), 'strength': 20.0 * glow}
     # back_glow: the frosted back half's glow as a share of the LED's (the lead, from Planet's bar: at full it outshone

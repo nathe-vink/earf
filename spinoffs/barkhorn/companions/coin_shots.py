@@ -163,7 +163,8 @@ def column(coins=('ice', 'ember', 'acid', 'haze', 'poison', 'dust', 'smoke', 'em
           'instances': [{'position': [-0.215, 0.10, z], 'rotate_z': 0}]}
     wood = {'kind': 'kit', 'shape': 'box', 'material': 'pbr', 'texture': 'wood_table_001', 'res': '2k', 'color': '#8A6040',
             'rough_mul': 0.5, 'size': [2.4, 1.2, z], 'position': [0.0, 0.25, 0.0]}
-    props = [wood, piece('column', [{'position': [0.135, 0.02, z], 'rotate_z': 8}], coins=list(coins), out=12.0, **PICK),
+    props = [wood, piece('column', [{'position': [0.135, 0.02, z], 'rotate_z': 8}], coins=list(coins), out=12.0, base_glow=0.0,
+                   **PICK),
              piece('coin', [{'position': [0.215, -0.06, z], 'flavour': 'acid', 'rotate': [0, 0, 30]},
                             {'position': [0.248, -0.032, z], 'flavour': 'haze', 'rotate': [0, 0, 70]}], **PICK)]
     tgt = [0.0, 0.06, 0.09 + z]
