@@ -101,3 +101,6 @@ EXPO_TRIM = {'ember': -0.5}
 # but not on the bar view: there the Domes light the counter, and the bar-ember final at the trim with the Domes at
 # 0.15 read 4.6 (black); the bar's residual red is the Domes' own shells
 EXPO_TRIM_VIEWS = ('listening',)
+
+# round 38 prep: a host stand inside the door for the bowl of EARFcoins (the door at x 1.20, y 0.42-1.48)
+HOST = dict(x=1.62, y=1.95, top=1.02, w=0.36, d=0.30)

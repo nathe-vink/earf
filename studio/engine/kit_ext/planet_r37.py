@@ -307,6 +307,20 @@ def zone_life(bpy, kit, p, objs):
     objs.append(co.object(bpy, LK.wool(bpy, '#8A6A48', 'wool-coat-zone'), bevel=0.015, seg=3))
 
 
+
+# --- round 38 prep: a host stand inside the door for the bowl of EARFcoins (the owner: "Each guest gets one") --------
+def host_stand(bpy, kit, p, objs):
+    """A blackened-steel post on a plate, a dark-oak top: where the bowl of coins waits inside the door."""
+    H = R.HOST
+    st = K.Mesh('host-steel')
+    K._cyl(st.bm, H['x'], H['y'], 0.0, 0.16, 0.012, seg=48)
+    K._cyl(st.bm, H['x'], H['y'], 0.012, 0.03, H['top'] - 0.04 - 0.012, seg=24)
+    objs.append(st.object(bpy, K.blackened_steel(bpy), smooth=True))
+    tp = K.Mesh('host-top'); tp.box(H['x'] - H['w'] / 2, H['y'] - H['d'] / 2, H['top'] - 0.04, H['x'] + H['w'] / 2,
+                                    H['y'] + H['d'] / 2, H['top'])
+    objs.append(tp.object(bpy, K.dark_oak(bpy, name='oak-host'), bevel=0.004))
+
+
 def room(bpy, name, p, kit):
     K.R = R                                                           # round 36's builders on round 37's plan
     K.sink = sink                                                     # the sink as smoked glass (the lead, 2026-10-20)
@@ -318,4 +332,6 @@ def room(bpy, name, p, kit):
     ginza(bpy, kit, p, objs)
     if p.get('zone_life'):
         zone_life(bpy, kit, p, objs)
+    if p.get('host_stand'):
+        host_stand(bpy, kit, p, objs)
     return objs

@@ -148,6 +148,7 @@
     "sink_under": 0.25,
     "sink_fill": 20.0,
     "sink_rake": 4.0,
+    "host_stand": true,
     "plinth_bar": 0.5,
     "plinth_bar_col": "#FFB060",
     "plinth_listen": 0.5,
@@ -353,6 +354,63 @@
     "lamp_k": 2700,
     "shade_glow": 0.3,
     "noshadow": "shell|liner|skin"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "column",
+    "spots": [
+     [
+      7.7,
+      4.25,
+      1.07
+     ]
+    ],
+    "rotate_z": 0.0,
+    "coins": [
+     "ice",
+     "ember",
+     "acid",
+     "smoke",
+     "haze"
+    ],
+    "out": 6.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "fan",
+    "spots": [
+     [
+      4.35,
+      4.01,
+      1.07
+     ]
+    ],
+    "flavours": [
+     "dust",
+     "fog",
+     "poison"
+    ],
+    "heading": 15.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "bowl",
+    "spots": [
+     [
+      1.62,
+      1.95,
+      1.02
+     ]
+    ],
+    "n": 40,
+    "bowl": "smoke",
+    "d": 220
    }
   ]
  },

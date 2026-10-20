@@ -12,10 +12,10 @@ import r37_shots as T37                                             # noqa: E402
 
 S = T37.S
 S.OUT = os.path.join(T37.ROOT, 'studio', 'shots', 'barkhorn', 'planet38')
-T37.KEYS += ('zone_life', 'sink_under', 'sink_fill', 'sink_rake')
-S.DEFAULT = T37.DEFAULT = dict(T37.DEFAULT, zone_life=True)
+T37.KEYS += ('zone_life', 'sink_under', 'sink_fill', 'sink_rake', 'host_stand')
+S.DEFAULT = T37.DEFAULT = dict(T37.DEFAULT, zone_life=True, host_stand=True, coins=True)
 
-VIEWS = {k: v for k, v in T37.VIEWS.items() if k in ('listening-smoke', 'sink')}
+VIEWS = {k: v for k, v in T37.VIEWS.items() if k in ('listening-smoke', 'sink', 'bar-smoke', 'street')}
 # the sink (the lead: its thickness should read, light through the polished edges, the front face about lum 8-12 rather
 # than crushed): the cast less dense (0.025 -> 0.08) and a hidden panel under it lighting the cast from below
 VIEWS['sink'] = {**VIEWS['sink'], 'settings': {**VIEWS['sink']['settings'], 'sink_radius': 0.08, 'sink_under': 1.2, 'sink_fill': 20.0, 'sink_wash': 15.0}}
@@ -29,6 +29,31 @@ VIEWS['listening-smoke'] = {**VIEWS['listening-smoke'],
                             'camera': {**VIEWS['listening-smoke']['camera'], 'position': [11.9, 1.6, 1.55],
                                        'target': [16.5, 3.3, 1.0]}}
 S.VIEWS = VIEWS
+
+# --- EARFcoin (r31-coin 3cf191f, studio/engine/kit_ext/earf_coin.py; the owner: "Acrylic coins with the EARF globe on
+# them that can be exchanged for a song request. Each guest gets one."): the request column at the decks where the
+# no-requests card stood, a few coins fanned on the counter by a glass, the bowl of all eight tints at the door
+_props = S.props
+
+
+def props(v):
+    out = _props(v)
+    if not v.get('coins'):
+        return out
+    RP = T37.RP; C = RP.COUNTER; zt = C['top_z']
+    out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'column',
+                'spots': [[round(RP.DJ['x'] + 0.80, 4), round(C['y1'] - 0.30, 4), zt]], 'rotate_z': 0.0,
+                'coins': ['ice', 'ember', 'acid', 'smoke', 'haze'], 'out': 6.0})
+    out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan',
+                'spots': [[4.35, round(C['y0'] + 0.16, 4), zt]], 'flavours': ['dust', 'fog', 'poison'], 'heading': 15.0})
+    H = RP.HOST
+    out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'bowl', 'spots': [[H['x'], H['y'], H['top']]],
+                'n': 40, 'bowl': 'smoke', 'd': 220})
+    return out
+
+
+S.props = props
+T37.props = props
 
 _shot = S.shot
 
