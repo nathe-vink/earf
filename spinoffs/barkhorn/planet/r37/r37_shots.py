@@ -151,8 +151,8 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # 240 W at 30 deg aimed higher; the Orbs 6 W, glow 0.55; the light plinths half; haze 0.012
           'camera': {'position': [11.3, 3.05, 1.2], 'target': [16.4, 3.05, 1.05], 'lens_mm': 30, 'level': True,
                      'fstop': 4.0, 'focus': [16.4, 3.05, 1.0]},
-          'settings': {'exposure': 3.0, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 240.0,
-                       'altar_cone': 30.0, 'altar_z': 1.2, 'haze': 0.012, 'sphere_w': 6.0, 'sphere_glow': 0.55,
+          'settings': {'exposure': 2.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 240.0,
+                       'altar_cone': 30.0, 'altar_z': 1.2, 'haze': 0.008, 'sphere_w': 6.0, 'sphere_glow': 0.55,
                        'niche_strip': 5.0, 'plinth': 0.5}}
 NAMES = {'smoke': 'Smoke', 'ember': 'Ember', 'ice': 'Ice', 'mixed': 'Mixed'}
 VIEWS = {}
