@@ -277,3 +277,19 @@ The coordinator's fixes: the front kept clear; one rising column, not a creature
   - The smoke was made grey-black (albedo #383838) so its billows shade, given a rim from behind, and made to rise visibly from the floor.
   - p2 read: stands. "A wisp of dark grey to black smoke, though blurry enough to also look like an ink smudge." No fire. "Mostly no" figure (the streak "could faintly suggest a tendril"). The front readable. A marginal pass.
 - **Side by side:** `element-smoke-e4-e5-e3.jpg` (E4, E5, then E3 pass 2 for reference). No duels until the owner picks.
+
+### E6 and E7, the owner's two routes (2026-10-20)
+
+The owner, via the coordinator: "Salt flat, but a smoke canister on a salt flat is so random. It really comes down to the quality and pervasiveness of the smoke if we go that route. Another route could be like an apocalyptic or riot scene, with cars crashed and burning on a bridge, billowing black smoke, with the speaker in the foreground." E4 and the canister are dropped.
+
+- **E6** (`smoke_pan.py`): the salt pan with no source in sight.
+  - A black plume of stacked woodsmoke cells (soot #161616) rises 300 m off, behind the rise, and shears left. Mid billows lie along the horizon, and near wisps sit low over the crust.
+  - A 40 mm lens, so the tower fits the frame. The sun is front-left and gives a long cast shadow.
+  - The first tests showed nothing: black smoke needs about ten times the density of white to read against a bright sky.
+  - Read: stands. "Black smoke… rises in a column from behind the earth bank… as if something is burning out of sight." No fire, no figure ("the top unit's dark fins could read loosely as a hand or claw"). "Cinematic, but somewhat CG… a clean render dropped into a softer backdrop."
+  - Not yet done: the plume spreading across half the sky, layers rolling up to the speaker, and the smoke's shadow on the crust.
+- **E7** (`smoke_bridge.py`): a freeway bridge at blue hour (Poly Haven `highway_bridge_sunset`), with wet asphalt, lane markings and modelled Jersey barriers.
+  - Three sedans are simple extruded forms, two of them charred, with fire cores glowing inside their cabins, embers, and black smoke billowing up and left. Low smoke pools round the wrecks.
+  - No CC0 car model was available, so the cars are forms in silhouette. The first pass, with cut-out flames and lit cars, read as toys.
+  - Read: "a roadway or overpass at dusk… a vehicle is burning", stands, thick black smoke from the burning car, no figure. The weakest element is the car: "a flat, low-detail silhouette with a uniform orange glow". The HDRI's own trees and mast show to the right.
+- **Side by side:** `element-smoke-e6-e7.jpg`. No duels until the owner picks.
