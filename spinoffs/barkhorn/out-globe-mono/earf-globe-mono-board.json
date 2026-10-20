@@ -1,0 +1,43 @@
+{
+ "_note": "EARF globe, one colour (board) for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/out-globe-mono/board/render/earf-globe-mono-board.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "materials": {
+  "disc": {
+   "preset": "paper_cone",
+   "color": "#F1EEE6",
+   "roughness": 0.9,
+   "fibre_strength": 0.06
+  },
+  "steel": {
+   "preset": "black_oxide",
+   "color": "#2E2D2B"
+  }
+ },
+ "assign": [
+  {
+   "match": "disc-m90|disc-m30|disc-m150|disc-equator|disc-north|disc-south",
+   "material": "disc"
+  },
+  {
+   "match": "stand",
+   "material": "steel"
+  }
+ ],
+ "flavours": {
+  "board": {
+   "materials": {
+    "disc": {
+     "preset": "paper_cone",
+     "color": "#F1EEE6",
+     "roughness": 0.9,
+     "fibre_strength": 0.06
+    }
+   }
+  }
+ }
+}
