@@ -1,0 +1,251 @@
+{
+ "title": "EARFcoin: the request column, lit",
+ "size": [
+  1200,
+  800
+ ],
+ "camera": {
+  "position": [
+   0.3,
+   -0.85,
+   0.45999999999999996
+  ],
+  "target": [
+   0.0,
+   0.06,
+   0.13
+  ],
+  "lens_mm": 55,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.135,
+   0.02,
+   0.14
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#2A2622",
+  "width": 3.0,
+  "front": 2.0,
+  "depth": 0.8,
+  "radius": 0.5,
+  "height": 2.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "wood_table_001",
+    "res": "2k",
+    "color": "#8A6040",
+    "rough_mul": 0.5,
+    "size": [
+     2.4,
+     1.2,
+     0.04
+    ],
+    "position": [
+     0.0,
+     0.25,
+     0.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "column",
+    "spots": [
+     {
+      "position": [
+       0.135,
+       0.02,
+       0.04
+      ],
+      "rotate_z": 8
+     }
+    ],
+    "coins": [
+     "ice",
+     "ember",
+     "acid",
+     "haze",
+     "poison",
+     "dust",
+     "smoke",
+     "ember",
+     "fog",
+     "ice",
+     "acid",
+     "haze",
+     "poison",
+     "ember",
+     "dust",
+     "ice",
+     "fog",
+     "haze"
+    ],
+    "out": 12.0,
+    "face": "engraved",
+    "edge": "reeded",
+    "base_glow": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "coin",
+    "spots": [
+     {
+      "position": [
+       0.215,
+       -0.06,
+       0.04
+      ],
+      "flavour": "acid",
+      "rotate": [
+       0,
+       0,
+       30
+      ]
+     },
+     {
+      "position": [
+       0.248,
+       -0.032,
+       0.04
+      ],
+      "flavour": "haze",
+      "rotate": [
+       0,
+       0,
+       70
+      ]
+     }
+    ],
+    "face": "engraved",
+    "edge": "reeded"
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D4D2CE",
+  "horizon": "#DCDAD5",
+  "ground": "#6A665F",
+  "strength": 0.08
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    0.9,
+    0.7
+   ],
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 50,
+    "distance_m": 1.2
+   },
+   "target": [
+    0.0,
+    0.06,
+    0.13
+   ],
+   "irradiance": 0.168,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 40,
+    "elevation_deg": 20,
+    "distance_m": 1.4
+   },
+   "target": [
+    0.0,
+    0.06,
+    0.13
+   ],
+   "irradiance": 0.048,
+   "color": "#FFF7EA"
+  },
+  "back": {
+   "type": "area",
+   "size_m": [
+    0.8,
+    0.3
+   ],
+   "orbit": {
+    "azimuth_deg": 170,
+    "elevation_deg": 35,
+    "distance_m": 1.0
+   },
+   "target": [
+    0.0,
+    0.06,
+    0.13
+   ],
+   "irradiance": 0.096,
+   "color": "#FFF7EA",
+   "camera": false
+  },
+  "rake": {
+   "type": "area",
+   "size_m": [
+    0.08,
+    0.5
+   ],
+   "position": [
+    -0.05,
+    0.45,
+    0.25
+   ],
+   "target": [
+    0.135,
+    0.02,
+    0.12
+   ],
+   "irradiance": 0.144,
+   "color": "#FFF1DC",
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 64,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 3400,
+  "transmission_bounces": 64,
+  "caustics_refractive": true
+ },
+ "products": [
+  {
+   "def": "spinoffs/barkhorn/companions/out-concepts2/r3.json",
+   "flavour": "fog",
+   "hide": [
+    "cover"
+   ],
+   "instances": [
+    {
+     "position": [
+      -0.215,
+      0.1,
+      0.04
+     ],
+     "rotate_z": 0
+    }
+   ]
+  }
+ ]
+}
