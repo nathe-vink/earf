@@ -196,7 +196,7 @@ def fills(flavours=('ice', 'acid', 'haze')):
     return studio('EARFcoin: the engraving\'s fill', [1200, 1000], cam, props, samples=128)
 
 
-def column_lit(glow=1.0):
+def column_lit(glow=1.0, ambient=0.12):
     """The column's light, a proof (the lead: in Planet's bar the stack read dark): the same frame in a dim bar's light,
     the LED in the base on, the queue glowing in its tints."""
     s = column()
@@ -208,10 +208,13 @@ def column_lit(glow=1.0):
     s['sky']['strength'] = 0.08
     for k, l in s['lights'].items():
         if 'irradiance' in l:
-            l['irradiance'] = round(l['irradiance'] * 0.12, 3)
+            l['irradiance'] = round(l['irradiance'] * ambient, 3)
     s['render']['white_balance_k'] = 3400
     # the light climbs the stack through two faces a coin: the engine's 8 transmission bounces stopped it at the slot
     s['render'].update(bounces=64, transmission_bounces=64, caustics_refractive=True)
+    if ambient > 0.12:      # the final (the lead): a warm lamp over the record player so it still reads in the dim bar
+        s['lights']['deck'] = {'type': 'area', 'size_m': [0.5, 0.3], 'position': [-0.30, -0.05, 0.75],
+                               'target': [-0.215, 0.10, 0.08], 'irradiance': 0.6, 'color': 2700, 'camera': False}
     return s
 
 
@@ -223,8 +226,9 @@ FRAMES['fills'] = lambda: fills()
 FRAMES['hero'] = lambda: hero()
 FRAMES['hero-r3-napkin'] = lambda: hero_napkin()
 FRAMES['eight'] = eight
-FRAMES['column'] = lambda: column()
-FRAMES['column-lit'] = lambda: column_lit()
+FRAMES['column'] = lambda: column_lit(ambient=0.25)     # the final: lit, in a dim bar (the lead, after the proof)
+FRAMES['column-lit'] = lambda: column_lit()             # the proof
+FRAMES['column-day'] = lambda: column()                 # the first final, unlit, by day
 
 
 def sheet(kind):
@@ -245,7 +249,7 @@ def sheet(kind):
         os.remove(top)
     else:
         tiles = ' '.join(f"-label '{t}' {R(n)}" for n, t in (('hero', 'The hero, on the zinc'), ('eight', 'The eight'),
-                                                              ('column', 'The request column')))
+                                                              ('column', 'The request column, lit')))
         out = os.path.join(RENDERS, 'sheet-finals.png')
         subprocess.run(f"montage {tiles} -tile 3x1 -geometry 600x400+4+4 -pointsize 15 -background '#F2F0EC' -depth 8 {out}",
                        shell=True, check=True)
