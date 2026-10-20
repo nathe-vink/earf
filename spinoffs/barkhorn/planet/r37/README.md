@@ -23,11 +23,13 @@ Every dimension is a proposal until the owner signs it (`r37_plan.py`).
 | 5. Configurations | One parameter, `config`, a tint per product group (`r37_plan.CONFIGS`): **Smoke** (the house configuration), **Ember**, **Ice**, **Mixed** (the bar pair and the Domes in Smoke, the listening pair and the Orbs in Ember). The record players follow the bar. The Dome and Orb glow 1.1 smoked and 0.4 coloured. |
 | 6. Shots | `bar-<config>` (the hero: from a banquette table, square across the counter to the back bar, the pair in its niches, the decks, the Domes) and `listening-<config>` in all four; `street` and `sink` once, in Smoke. |
 
-**Choices to confirm:**
+**Choices, confirmed by the lead (2026-10-20):**
 
 - Two record players at the decks (a DJ pair), not one. The brief says "a record player"; one is a one-line change.
 - In the Mixed configuration the record players follow the bar pair, in Smoke.
 - The niche is 40 mm deeper than briefed, for the 100 mm behind the cabinet.
+- The bar pair stays on the floor (the horn at a drinker's ear at the counter, as Ginza). From the banquettes the counter
+  hides the lower cabinets; the hero bar view stands at the counter (eye 1.55) and looks over the zinc into the niches.
 
 ## Process
 
