@@ -48,3 +48,13 @@ and the best of each at 1200 x 800 as a configuration sheet. The log is `NOTES.m
     python3 spinoffs/barkhorn/planet/r37/r37_shots.py
     python3 studio/engine/render.py studio/shots/barkhorn/planet37/bar-smoke.json --out IMG --samples 48 --scale 0.3
     python3 spinoffs/barkhorn/planet/r37/r37_stage.py bar-smoke IMG TAG      # a fresh critic's message
+
+## Finals (2026-10-20)
+
+`renders/2026-10-20/barkhorn/planet37/finals/`: the bar and the listening zone in Smoke, Ember, Ice and Mixed, the
+street (from p5) and the sink (p7, smoked glass), 1200 x 800 at 256 samples; the configuration sheet
+`planet37-configurations.png` (`python3 spinoffs/barkhorn/planet/r37/r37_sheet.py`).
+
+After the lead's decisions at the milestone: Mixed redefined; the sink rebuilt as smoked glass (no glow, the Cloud's
+Smoke polished, 160 thick for a soft bowl 120 deep, escutcheons, the shell's fir, no towel); the listening view wider,
+inside the zone on 24 mm, the altar lined in fir; the lamps' black hardware and the Orbs wired; the no-requests card out.
