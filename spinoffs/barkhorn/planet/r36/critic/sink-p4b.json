@@ -1,0 +1,352 @@
+{
+ "stage1": {
+  "impression": "A flat, saturated red box floats in front of dark panelled boards with an elliptical hole cut in its top. It reads as a CG primitive, not cast acrylic: there is no glow through the thickness, the edges don't light up and the arrises are hard. The front face is a single dead red, the wood grain is procedural and stretched, the left fifth of the frame is crushed to black, and nothing shows anyone has been here. A design magazine would not run this as a specific place. It reads as a generic red trough in a sauna-like timber alcove, and nothing ties it to Planet EARF.",
+  "score": 3.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The sink must read as thick cast acrylic: light through its body, a bright polished lower edge and a gradient on the front face (front face lum_range >= 30, bottom strip brighter than the top of the face), not one flat red value with G=0",
+  "The basin's hot spot must not clip (basin clip_pct < 0.5) and must show a soft, rounded transition into the top, as the card describes, not a cut ellipse",
+  "The timber boards need real, non-repeating Douglas fir/oak grain with end checks, a satin sheen and board-to-board tone variation instead of the stretched procedural pattern",
+  "No region larger than a tenth of the frame may be more than half crushed (the left 80 px column currently sits at crush 89%)",
+  "Some sign of life at the sink: a linen towel, soap or a glass, warm and catching light",
+  "The odd flat pale rectangle at upper left (190-260, 60-190) must resolve into something identifiable or go dark",
+  "The frame needs a hint of the specific room (a sliver of board-formed concrete, a blackened-steel reveal, or a green glow from the zone) so it reads as Planet EARF and not as any bathroom"
+ ],
+ "defects": [
+  {
+   "region": [
+    100,
+    260,
+    600,
+    400
+   ],
+   "what": "The front face of the sink is a flat red (lum 11.9-26.6, R 89 G 0 B 2): it shows no glow through the thickness, gets darker toward the bottom despite the under-glow, and the green channel is clipped to zero"
+  },
+  {
+   "region": [
+    240,
+    212,
+    470,
+    250
+   ],
+   "what": "The basin hot spot clips at 8.8% and reads as a pink, plasticky hole. Its sharp elliptical lip does not match the card's 'soft and rounded into its top'"
+  },
+  {
+   "region": [
+    560,
+    200,
+    620,
+    420
+   ],
+   "what": "The sink's arrises are knife-sharp with no polished edge glow or radius, so it reads as a box primitive"
+  },
+  {
+   "region": [
+    0,
+    0,
+    80,
+    480
+   ],
+   "what": "This column (11% of the frame) is crushed: crush_pct 89.5, lum_median 0.2"
+  },
+  {
+   "region": [
+    580,
+    0,
+    720,
+    480
+   ],
+   "what": "The board grain is procedural, smeared and stretched vertically, uniformly glossy and too regular. The dark gaps between boards are pure black lines"
+  },
+  {
+   "region": [
+    190,
+    60,
+    260,
+    190
+   ],
+   "what": "An unexplained flat, pale grey rectangle with no texture or shading reads as a placeholder object"
+  },
+  {
+   "region": [
+    340,
+    0,
+    440,
+    100
+   ],
+   "what": "The spout is very small and high, its brushing doesn't read, it has no visible escutcheon, and it is cut off at the top of the frame"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Nothing at the sink shows life or place. The frame median of 20.5 is below the 22-50 band"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The sink doesn't glow through its thickness: the front face is a flat dark red that falls off toward the bottom, the opposite of being lit from below.",
+   "evidence": {
+    "region": [
+     300,
+     260,
+     320,
+     410
+    ],
+    "measured": "profile y 21.7 -> 17.2 (darker at the bottom); front face [100,260,600,400] lum_median 19.5, lum_range 14.7"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "0.8",
+    "to": "3.0, plus a warm 2700 K LED strip (or a small area lamp, about 20 W) hidden under the trough's soffit and aimed up into its body so the lower edge and the face carry a gradient"
+   },
+   "expected": "The lower 20 mm of the face glows ember-orange, the face brightens toward its bottom edge, and the polished bottom arris reads as a line of light",
+   "accept": {
+    "region": [
+     100,
+     370,
+     600,
+     400
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The saturated red is gamut-clipped (G=0), which flattens the acrylic into one plastic value with no tonal modelling.",
+   "evidence": {
+    "region": [
+     100,
+     260,
+     600,
+     400
+    ],
+    "measured": "R 89 G 0 B 2, lum_range 14.7, delta-E 21.9 vs #C8102E"
+   },
+   "change": {
+    "setting": "render.look",
+    "from": "AgX - Medium High Contrast",
+    "to": "AgX - Base (or Medium Low Contrast), keeping exposure set by c6"
+   },
+   "expected": "The red keeps a gradient and some orange in its brighter parts, and the face's tonal range widens",
+   "accept": {
+    "region": [
+     100,
+     260,
+     600,
+     400
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The sink spot burns the basin into a clipped pink hole.",
+   "evidence": {
+    "region": [
+     240,
+     212,
+     470,
+     250
+    ],
+    "measured": "clip_pct 8.76, lum_p95 194.8"
+   },
+   "change": {
+    "setting": "the sink spot",
+    "from": "15.0 W, cone 30 deg",
+    "to": "6 W, cone 40 deg, aimed at the back of the basin so the light grazes its curve rather than filling it"
+   },
+   "expected": "The basin reads as a rounded hollow, darker at its centre and lighter where it curves into the top, with no clipping",
+   "accept": {
+    "region": [
+     240,
+     212,
+     470,
+     250
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The left edge of the frame is a dead black slab.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     80,
+     480
+    ],
+    "measured": "crush_pct 89.45, lum_median 0.2"
+   },
+   "change": {
+    "setting": "candles (a small prop) / a spill from the banquette side",
+    "from": "no light reaching the left boards",
+    "to": "a 1900 K candle in a smoked glass on a ledge just out of frame left (3 W point), or the nearest Dome downlight's spill let onto the left boards"
+   },
+   "expected": "The left boards hold dim grain at lum 8-15 and the frame keeps its low key",
+   "accept": {
+    "region": [
+     0,
+     0,
+     80,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 50
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The timber is a stretched procedural grain with uniform gloss and pure-black joints, so it reads as CG laminate.",
+   "evidence": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_range 23.4; at 2x crop the grain is smeared vertical streaks with no checks or end grain"
+   },
+   "change": {
+    "setting": "the oak's stain / the boards' finish",
+    "from": "the glossy procedural grain",
+    "to": "a scanned rift-sawn oak or fir texture at real scale (boards 120-150 mm), random offset per board, roughness 0.55-0.7 with variation, a \u00b18% tone shift between boards, and joints at 6 mm with dark-brown shadow rather than black"
+   },
+   "expected": "The boards read as real timber at 1:1, with satin highlights from the sink glow",
+   "accept": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 28
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The frame sits slightly under the night-interior band.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 20.5, below_40 95%"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "0.4",
+    "to": "0.6 (after c1-c3 are applied)"
+   },
+   "expected": "Frame median about 26-32 with the basin still unclipped",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Nothing shows life or tells you which room this is.",
+   "evidence": {
+    "region": [
+     100,
+     190,
+     600,
+     260
+    ],
+    "measured": "the sink deck is bare; the only objects are the sink, the spout and the grey rectangle"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink",
+    "to": "a folded natural-linen hand towel on the deck's right end, a small amber glass soap bottle beside the basin, and a rocks glass left on the deck"
+   },
+   "expected": "Small warm highlights and a human scale cue on the deck, plus a neutral counterpoint to the red",
+   "accept": {
+    "region": [
+     480,
+     190,
+     600,
+     260
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "camera",
+   "problem": "The framing crops the spout at the top and gives a third of the frame to dark boards, so the alcove has no context.",
+   "evidence": {
+    "region": [
+     340,
+     0,
+     440,
+     100
+    ],
+    "measured": "spout touches the top edge; the pale rectangle at [190,60,260,190] is unexplained"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [10.25, 1.35, 1.15] m, target [11.02, 0.25, 0.84], 50 mm",
+    "to": "drop to about 1.05 m and look slightly up (verticals kept true by shift) at 40 mm, panned so the spout and its wall plate sit fully in frame and a sliver of board-formed concrete or the steel reveal of the alcove shows at one edge. Dim or reframe away the grey rectangle"
+   },
+   "expected": "The sink reads as a detail of a specific room, with the spout whole and the trough's underside and glow visible",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the trough rounded arrises (3-5 mm polished radii) and a basin that rolls softly into its top, as the card describes, instead of a sharp box with a cut ellipse",
+   "why": "The sink's form is fixed by the card. The model appears not to match its own description ('soft and rounded into its top'), so this is a model or spec question for the owner"
+  },
+  {
+   "request": "Show a visible thickness of acrylic (a deeper, more translucent body with a visible internal edge)",
+   "why": "This is the sink's design and material, which the card fixes"
+  }
+ ],
+ "score_if_fixed": 6.0
+}

@@ -97,7 +97,7 @@ def lights(v):
                           'blend': 0.9, 'radius_m': 0.03, 'color': 2500, 'camera': False}
     # the sink: a pinhole downlight in the alcove's head
     L['sink'] = {'type': 'spot', 'position': [RP.SINK['x'], 0.30, RP.ALCOVE['z1'] - 0.02],
-                 'target': [RP.SINK['x'], 0.28, RP.SINK['top']], 'power_w': v.get('sink_spot', 18.0), 'cone_deg': 30,
+                 'target': [RP.SINK['x'], 0.28, RP.SINK['top']], 'power_w': v.get('sink_spot', 18.0), 'cone_deg': v.get('sink_spot_cone', 30),
                  'blend': 0.7, 'radius_m': 0.02, 'color': 2700, 'camera': False}
     return L
 
@@ -118,9 +118,12 @@ VIEWS = {
             # the screens 2.0, the record wall 30 W; the sink's glow down; haze 0.010
             # p4 (the lead's note: the chairs rebuilt, a concept change): p3's 45 mm lost the counter; down the counter
             # from the window end on 32 mm, the zinc edge leading to the altar, the Domes in the top left
-            'camera': {'position': [3.3, 3.35, 1.35], 'target': [17.0, 3.3, 1.15], 'lens_mm': 32, 'level': True,
-                       'fstop': 4.0, 'focus': [9.0, 4.0, 1.1]},
-            'settings': {'exposure': 0.9, 'screen_glow': 2.0}},
+            # p5 (p4 4.75: the pair tiny behind the green seats, the zinc one wash): nearer, over the tables, on 40 mm;
+            # the Domes' pools tighter; the altar brighter; the screens up
+            'camera': {'position': [6.5, 3.4, 1.3], 'target': [17.0, 3.1, 1.0], 'lens_mm': 40, 'level': True,
+                       'fstop': 4.0, 'focus': [16.0, 3.1, 1.0]},
+            'settings': {'exposure': 0.9, 'screen_glow': 4.0, 'altar_w': 120.0, 'altar_cone': 28.0,
+                         'pendant_w': 170.0, 'pendant_cone': 18.0}},
     'listening-green': {'title': 'the listening zone, bottle green',
                         # after the critics on p2r: a standing dead-centre stare over a chair back, the speakers clipping,
                         # the left screen a white slab, the ceiling a void: seated and off axis on 35 mm, the near Ember on
@@ -128,11 +131,13 @@ VIEWS = {
                         # p3 (seated at 12.5 on 35 mm) lost the zone: only the altar in frame. p4: back to the zone's
                         # front, seated, on 28 mm, the tub chairs and an Orb table in the near third; the speakers' own
                         # lamps 1 W/m2, the altar spots 150 W on their upper halves; haze 0.005; the Orbs 10 W
-                        'camera': {'position': [11.45, 2.2, 1.15], 'target': [16.6, 3.1, 1.0], 'lens_mm': 28,
-                                   'level': True, 'fstop': 2.8, 'focus': [14.2, 2.6, 0.7]},
+                        # p5: the chair back off the centre ([11.2, 2.75, 1.3] on 35 mm); the Orbs 4 W, glow 0.6 (they
+                        # blew the table tops); the altar spots 130 W at mid-height; the niche strip 5; haze 0.008
+                        'camera': {'position': [11.2, 2.75, 1.3], 'target': [16.6, 3.1, 1.0], 'lens_mm': 35,
+                                   'level': True, 'fstop': 4.0, 'focus': [16.3, 3.1, 0.9]},
                         'settings': {'colourway': 'green', 'exposure': 1.5, 'wb': 2700, 'screen_glow': 0.35,
-                                     'spk_irr': 1.0, 'altar_w': 80.0, 'altar_cone': 28.0, 'altar_z': 1.0,
-                                     'haze': 0.005, 'sphere_w': 10.0, 'niche_strip': 3.0}},
+                                     'spk_irr': 1.0, 'altar_w': 130.0, 'altar_cone': 28.0, 'altar_z': 0.8,
+                                     'haze': 0.008, 'sphere_w': 4.0, 'sphere_glow': 0.6, 'niche_strip': 5.0}},
     'listening-oxblood': {'title': 'the listening zone, oxblood',
                         # after the critics on p2r: a standing dead-centre stare over a chair back, the speakers clipping,
                         # the left screen a white slab, the ceiling a void: seated and off axis on 35 mm, the near Ember on
@@ -140,11 +145,13 @@ VIEWS = {
                         # p3 (seated at 12.5 on 35 mm) lost the zone: only the altar in frame. p4: back to the zone's
                         # front, seated, on 28 mm, the tub chairs and an Orb table in the near third; the speakers' own
                         # lamps 1 W/m2, the altar spots 150 W on their upper halves; haze 0.005; the Orbs 10 W
-                        'camera': {'position': [11.45, 2.2, 1.15], 'target': [16.6, 3.1, 1.0], 'lens_mm': 28,
-                                   'level': True, 'fstop': 2.8, 'focus': [14.2, 2.6, 0.7]},
+                        # p5: the chair back off the centre ([11.2, 2.75, 1.3] on 35 mm); the Orbs 4 W, glow 0.6 (they
+                        # blew the table tops); the altar spots 130 W at mid-height; the niche strip 5; haze 0.008
+                        'camera': {'position': [11.2, 2.75, 1.3], 'target': [16.6, 3.1, 1.0], 'lens_mm': 35,
+                                   'level': True, 'fstop': 4.0, 'focus': [16.3, 3.1, 0.9]},
                         'settings': {'colourway': 'oxblood', 'exposure': 1.5, 'wb': 2700, 'screen_glow': 0.35,
-                                     'spk_irr': 1.0, 'altar_w': 80.0, 'altar_cone': 28.0, 'altar_z': 1.0,
-                                     'haze': 0.005, 'sphere_w': 10.0, 'niche_strip': 3.0}},
+                                     'spk_irr': 1.0, 'altar_w': 130.0, 'altar_cone': 28.0, 'altar_z': 0.8,
+                                     'haze': 0.008, 'sphere_w': 4.0, 'sphere_glow': 0.6, 'niche_strip': 5.0}},
     'street': {'title': 'the shopfront at night, from the kerb',
                # after the two critics on p1 (5.0, 5.0): over-exposed under a veil, the mullion through the altar, the
                # etched name a beige square, the lightbox too bright, no reflections: 32 mm with the mullion on a third,
@@ -168,7 +175,7 @@ VIEWS = {
              # 3200 K, lower and three-quarter on 50 mm, the spout's nose turned down
              'camera': {'position': [10.25, 1.35, 1.15], 'target': [11.02, 0.25, 0.84], 'lens_mm': 50, 'level': True,
                         'fstop': 2.8, 'focus': [11.0, 0.47, 0.84]},
-             'settings': {'exposure': 0.4, 'haze': 0.0, 'sink_glow': 0.8, 'sink_spot': 15.0, 'wb': 3200}},
+             'settings': {'exposure': 0.6, 'haze': 0.0, 'sink_glow': 2.5, 'sink_spot': 6.0, 'sink_spot_cone': 40.0, 'wb': 3200}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot

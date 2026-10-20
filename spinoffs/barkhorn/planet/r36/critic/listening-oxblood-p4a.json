@@ -1,0 +1,381 @@
+{
+ "stage1": {
+  "impression": "A centred, symmetrical view of two red speakers in a timber-framed niche, seen past a wall of red velvet chair backs, with two glowing glass balls on pale tables. It reads as a CG showroom or game interior, not a photograph: the blacks are lifted and milky, the niche's block wall reads as a regular tiled grid with no pool of light on it, the speaker cabinets glow a flat salmon pink, the Orbs are blown grey spheres, and both table tops clip. As a specific place it has an idea (an altar of speakers in a red room) that a magazine might publish, but this frame reads as a generic red lounge render.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "True blacks: frame lum_p1 under 6 and the deep shadows (ceiling, chair undersides) near black but holding detail; now lum_p1 is 12.1 and every shadow is a milky red-grey",
+  "The altar lit as a pool: the niche wall shows a visible fall-off from the spots, centre to edge range over 40; now its lum_range is 20.5 and it is flat",
+  "The Ember cabinets read as thick tinted cast acrylic with glowing edges and the white batts visible through them, not a flat pink painted surface",
+  "Orbs read as smoked acrylic with a frosted liner glowing within it, not blown grey glass balls with a hot spot; table tops not clipped",
+  "The end-grain block lining reads as timber end grain with irregular blocks and growth rings at 1:1, not a uniform tiled grid",
+  "A foreground that does not hide half the frame behind one featureless chair back, and signs of life in the zone (a glass, a record, a coat)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "lifted, milky blacks over the whole frame (lum_p1 12.1, ceiling band median 17 with p5 14); low contrast reads as CG plus haze, not night"
+  },
+  {
+   "region": [
+    300,
+    100,
+    430,
+    280
+   ],
+   "what": "niche back wall flat (lum_range 20.5) and its end-grain blocks read as a uniform square tile grid"
+  },
+  {
+   "region": [
+    210,
+    195,
+    280,
+    300
+   ],
+   "what": "left Ember cabinet glows a flat salmon pink (r 88, g 41, b 46), lit evenly from the front by its own area lamps; no edge glow, no depth through the acrylic"
+  },
+  {
+   "region": [
+    455,
+    195,
+    530,
+    300
+   ],
+   "what": "right Ember cabinet same flat pink; a duplicate of the left at the same exposure, symmetrical to the point of looking instanced"
+  },
+  {
+   "region": [
+    215,
+    100,
+    310,
+    300
+   ],
+   "what": "felt panels behind the speakers read as flat dark red rectangles with no texture; a red smear of light above each tweeter"
+  },
+  {
+   "region": [
+    120,
+    360,
+    230,
+    405
+   ],
+   "what": "left table top clipped (13.7 % clip, p95 251.6), white hexagon with no oak grain"
+  },
+  {
+   "region": [
+    450,
+    440,
+    560,
+    480
+   ],
+   "what": "right table top clipped (11 % clip, median 198)"
+  },
+  {
+   "region": [
+    165,
+    320,
+    215,
+    375
+   ],
+   "what": "left Orb reads as a grey glass ball with a blown centre (clip 2.8 %); no smoked tint, no frosted liner within"
+  },
+  {
+   "region": [
+    520,
+    385,
+    610,
+    470
+   ],
+   "what": "right Orb same, blown hot spot (clip 1.7 %), cut by the frame edge; a dark object (glass?) clipping into its right side"
+  },
+  {
+   "region": [
+    240,
+    335,
+    490,
+    480
+   ],
+   "what": "central chair back fills a fifth of the frame as a smooth featureless velvet surface with no pile, sheen or seam"
+  },
+  {
+   "region": [
+    210,
+    290,
+    280,
+    335
+   ],
+   "what": "oak plinths flat and pale with faint repeated vertical lines; look like veneered boxes"
+  },
+  {
+   "region": [
+    0,
+    70,
+    6,
+    250
+   ],
+   "what": "a light vertical strip at the left frame edge (median 46) from an out-of-frame surface"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "denoiser smear on the niche blocks and the velvet; at 1:1 the materials are waxy"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The whole frame is milky: lifted blacks and low contrast read as a render, not a night photograph.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     60
+    ],
+    "measured": "frame lum_p1 12.1, ceiling band median 17.0 with p5 14.0, no crush anywhere; grey-red floor in every shadow"
+   },
+   "change": {
+    "setting": "haze density and render.exposure / look",
+    "from": "haze 0.005 per metre, exposure 1.5, AgX - Medium High Contrast",
+    "to": "haze 0.0015 per metre, exposure 1.2, AgX - High Contrast (or a curve that puts the black point at 0)"
+   },
+   "expected": "deep shadows go near black with detail; the lit speakers, tables and pools separate from the dark; frame median about 24",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     60
+    ],
+    "metric": "lum_p5",
+    "op": "<",
+    "value": 8
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Ember cabinets are lit flat from the front by their own area lamps, so the tinted acrylic reads as pink paint rather than thick cast acrylic.",
+   "evidence": {
+    "region": [
+     210,
+     195,
+     280,
+     300
+    ],
+    "measured": "median 55, r 88 g 41 b 46, even salmon over the whole face; no edge glow"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area",
+    "from": "1.0 W/m2 at the target, 2900 K",
+    "to": "0.3 W/m2, moved behind and above the cabinets as back and rim light so light passes through the acrylic and catches the polished edges"
+   },
+   "expected": "faces darker and deeper red with bright glowing edges and the white batts visible through; cabinet median 40 to 55 with p95 over 170 on the edges",
+   "accept": {
+    "region": [
+     210,
+     195,
+     280,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 150
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The altar has no pool of light: the niche wall is lit evenly and the spots do not shape it.",
+   "evidence": {
+    "region": [
+     300,
+     100,
+     430,
+     280
+    ],
+    "measured": "lum_range 20.5, median 32; y-profile of the niche 21 to 34, flat"
+   },
+   "change": {
+    "setting": "the altar 2 x spot",
+    "from": "80.0 W, 2500 K, cone 28.0 deg",
+    "to": "140 W, 2500 K, cone 18 deg, aimed to graze down the end-grain block wall behind each speaker from close to it"
+   },
+   "expected": "two warm pools graze the end-grain blocks, raking light shows their relief; the wall between the speakers falls to near black",
+   "accept": {
+    "region": [
+     300,
+     100,
+     430,
+     280
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 45
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The Orbs are blown grey balls and they clip the table tops.",
+   "evidence": {
+    "region": [
+     120,
+     360,
+     230,
+     405
+    ],
+    "measured": "left table clip 13.7 %, p95 251.6; right table [450,440,560,480] clip 11 %; Orb [165,320,215,375] clip 2.8 %"
+   },
+   "change": {
+    "setting": "each Orb, W and glow",
+    "from": "10.0 W, glow 1.1",
+    "to": "4 W, glow 0.6"
+   },
+   "expected": "the Orb reads as smoked acrylic with a soft frosted core; oak grain visible on the table tops; clipping only in the core",
+   "accept": {
+    "region": [
+     120,
+     360,
+     230,
+     405
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The Orb's smoked acrylic and frosted liner do not read; the shell is grey and the glow fills it as a hot spot.",
+   "evidence": {
+    "region": [
+     165,
+     320,
+     215,
+     375
+    ],
+    "measured": "median 103, r 136 g 95 b 87; centre blown, no visible liner edge"
+   },
+   "change": {
+    "setting": "how rough the frosted acrylic is (Orb liner)",
+    "from": "current roughness",
+    "to": "rougher liner (about 0.6) so it glows evenly, the outer smoked shell kept glossy with a clean window reflection"
+   },
+   "expected": "a dark smoked sphere with an even frosted glow inside and a crisp specular highlight on its outside",
+   "accept": {
+    "region": [
+     165,
+     320,
+     215,
+     375
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "camera",
+   "problem": "The central chair back blocks a fifth of the frame with featureless velvet, and the dead-centre symmetric view looks like a showroom.",
+   "evidence": {
+    "region": [
+     240,
+     335,
+     490,
+     480
+    ],
+    "measured": "median 48.9, smooth flat red surface over 36,000 px with no detail"
+   },
+   "change": {
+    "setting": "camera position and target",
+    "from": "[11.45, 2.2, 1.15] at [16.6, 3.1, 1.0], 28 mm",
+    "to": "about [12.6, 1.4, 1.2] at [16.6, 3.3, 1.0], 35 mm, so the near chair is a cropped shoulder at one edge and the altar sits off centre between two chairs"
+   },
+   "expected": "the speakers grow in the frame, the chairs read as a row facing the altar, the view becomes a seated photographer's angle",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The zone is unlived-in: no glass, record or coat in the listening zone.",
+   "evidence": {
+    "region": [
+     120,
+     360,
+     230,
+     405
+    ],
+    "measured": "table tops bare except the Orbs"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props at the counter only",
+    "to": "a half-full rocks glass and a record sleeve on the left table, a jacket over the arm of a near chair"
+   },
+   "expected": "signs of life in the foreground that catch the Orb's light",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "Denoiser smear makes the blocks, felt and velvet waxy at 1:1.",
+   "evidence": {
+    "region": [
+     300,
+     100,
+     430,
+     280
+    ],
+    "measured": "block wall p5 20.2 to p95 40.7, soft mushy edges at 3x crop"
+   },
+   "change": {
+    "setting": "render samples and denoise",
+    "from": "256 samples, adaptive 0.02, denoise on",
+    "to": "512 samples, adaptive 0.01, denoise on with albedo and normal passes, plus 1 % film grain in post"
+   },
+   "expected": "end-grain, felt and velvet pile resolve at 1:1",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the end-grain block lining irregular, with varied block sizes and visible growth rings, so it stops reading as tile",
+   "why": "the niche's material is the room's design, fixed by the card; it may need a texture or asset fix by the owner's designer, not a light or setting change"
+  },
+  {
+   "request": "Give the velvet chairs visible pile, seams and a sheen",
+   "why": "the seats are fixed design; a material asset change beyond the finish settings the card allows"
+  },
+  {
+   "request": "A frame with only one saturated colour",
+   "why": "the oxblood zone is the card's design; red seats around a red speaker is the brief, so the one-colour test cannot apply here"
+  },
+  {
+   "request": "Show the speakers' cabinets with less salmon and more deep oxblood",
+   "why": "the Ember colour is EARF's product and fixed; only the light on it may change (c2)"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

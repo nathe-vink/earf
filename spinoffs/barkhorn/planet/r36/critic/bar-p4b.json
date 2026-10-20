@@ -1,0 +1,357 @@
+{
+ "stage1": {
+  "impression": "A competent, warm, dim render of a long timber bar with pendants and a record wall, but it reads as CG: the zinc top is a smooth grey slab with one broad wash instead of pools, the ceiling and walls are flat brown with no grain, beams or concrete texture, and the floor and stools are denoiser-smeared. The two red speakers at the far end are tiny (about 36 x 40 px each in a 720 x 480 frame), half hidden behind green seats, and read as a pair of red boxes rather than the hero; a floating red slab over a banquette table competes with them. As it stands a magazine would see a generic dark bar, not a specific place.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember pair reads at a glance as the hero: at least about 6 % of the frame height each, unobstructed silhouettes, light visibly through the acrylic, the altar lit as a destination",
+  "The zinc top shows distinct pools under each Dome with dark between them, not one continuous wash",
+  "Ceiling beams, board-formed concrete and record spines hold texture and detail at 1:1 (checks, tie holes, formwork grain); no flat brown fields",
+  "The room's signature elements (frosted screens with their images, the disc behind the DJ station, the smoked partition) are legible, so the room reads as a specific place",
+  "Only one saturated colour family competes with the bottle-green zone: the Ember speakers; no stray red objects elsewhere",
+  "No denoiser smear on the floor, stools and chair legs; clean edges at full size",
+  "No foreground object (the light oak post at x 360 to 392) splitting the frame"
+ ],
+ "defects": [
+  {
+   "region": [
+    300,
+    228,
+    442,
+    268
+   ],
+   "what": "Ember speakers tiny, partly blocked by green seats and tables; read as red boxes, no acrylic glow or horn detail"
+  },
+  {
+   "region": [
+    580,
+    265,
+    615,
+    285
+   ],
+   "what": "Floating red rectangular slab above a banquette table (a red Dome cover?) is a second saturated red competing with the speakers and appears to hover"
+  },
+  {
+   "region": [
+    0,
+    260,
+    290,
+    400
+   ],
+   "what": "Zinc top is a uniform grey slab with a near-white rounded edge (p95 205); no pools of light, no patina; reads as plastic laminate"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    140
+   ],
+   "what": "Ceiling flat brown (median 26.8, range 28); Douglas fir beams have no checks or grain; reads as a dark box"
+  },
+  {
+   "region": [
+    380,
+    330,
+    720,
+    480
+   ],
+   "what": "Floor smeared by denoiser, mottled blotches rather than polished concrete; stool legs soft"
+  },
+  {
+   "region": [
+    360,
+    310,
+    392,
+    480
+   ],
+   "what": "Light oak vertical post or chair back stands in the middle of the foreground and splits the frame"
+  },
+  {
+   "region": [
+    640,
+    260,
+    720,
+    340
+   ],
+   "what": "Frosted screens behind the banquette read as black recesses; their images (hands, shell) are not visible"
+  },
+  {
+   "region": [
+    105,
+    125,
+    250,
+    190
+   ],
+   "what": "Dome pendants read as flat grey discs; the frosted liner glow is weak and the smoked acrylic has no depth"
+  },
+  {
+   "region": [
+    700,
+    80,
+    720,
+    260
+   ],
+   "what": "Bright vertical strip on the right edge, an unexplained cut-off object"
+  },
+  {
+   "region": [
+    180,
+    330,
+    330,
+    480
+   ],
+   "what": "Foreground counter chair cut by the bottom edge; dark crushed shapes with smeared leather"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speakers occupy under 1 % of the frame and are hidden behind seats, so the altar is not the subject.",
+   "evidence": {
+    "region": [
+     300,
+     228,
+     442,
+     268
+    ],
+    "measured": "each speaker about 36 x 40 px of 720 x 480; region lum_median 53 and 46 but read as small red boxes"
+   },
+   "change": {
+    "setting": "camera position / lens / focus",
+    "from": "position [3.3, 3.35, 1.35], lens 32 mm, focus [9.0, 4.0, 1.1]",
+    "to": "position [6.5, 3.6, 1.30], target [17.0, 3.2, 1.0], lens 40 mm, focus [16.0, 3.2, 1.0], f/4.0"
+   },
+   "expected": "Speakers about twice their current height in the frame, seen over the tables rather than behind them; the counter still leads in from the left; the oak post leaves the foreground.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar is a dim destination: the speakers barely separate from the dark back wall and no light shows through their acrylic.",
+   "evidence": {
+    "region": [
+     270,
+     160,
+     490,
+     320
+    ],
+    "measured": "lum_median 33.3, p95 67.5 for the whole altar zone"
+   },
+   "change": {
+    "setting": "the altar 2 x spot; lamps on each Ember speaker",
+    "from": "90.0 W, cone 36 deg; 1.0 W/m2",
+    "to": "160 W, cone 28 deg aimed at the speakers' tops; 2.5 W/m2"
+   },
+   "expected": "Speakers clearly the brightest coloured object, a pool on the altar floor with fall-off around it, red glow through the cabinet edges.",
+   "accept": {
+    "region": [
+     300,
+     228,
+     336,
+     268
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     110
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Domes' downlights wash the whole zinc evenly instead of making pools, and blow the rounded edge.",
+   "evidence": {
+    "region": [
+     0,
+     300,
+     260,
+     320
+    ],
+    "measured": "profile x bins 91, 107, 132, 182, 188, 44: one continuous ramp, p95 205 on the counter"
+   },
+   "change": {
+    "setting": "the Domes' downlights",
+    "from": "4 x spot, 260.0 W, cone 30.0 deg",
+    "to": "4 x spot, 170 W, cone 18 deg, blend 0.4"
+   },
+   "expected": "Separate pools on the zinc under each Dome with darker zinc between, edge highlight no longer near white.",
+   "accept": {
+    "region": [
+     0,
+     260,
+     290,
+     400
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 175
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The zinc, floor and ceiling read as smooth CG surfaces with no patina, grain or texture.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     140
+    ],
+    "measured": "ceiling lum_range 27.9; zinc a flat grey with no variation at 3x crop"
+   },
+   "change": {
+    "setting": "the zinc's patina; the floor's polish; the oak and fir beams' texture",
+    "from": "uniform zinc, smooth floor, flat beams",
+    "to": "zinc with mottled dark oxide and wipe marks (roughness 0.25 to 0.45 varied), floor roughness 0.35 with trowel marks and a faint broken reflection, beams with checks and darker end grain"
+   },
+   "expected": "Materials read at their real scale; the zinc reflects the pendants as soft broken highlights.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     140
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The frosted screens and the record wall's identity are lost, so the room reads as a generic bar.",
+   "evidence": {
+    "region": [
+     640,
+     260,
+     720,
+     340
+    ],
+    "measured": "screen recesses read as black; record wall region lum_median 49.5 but spines blur together"
+   },
+   "change": {
+    "setting": "the screens' images emission; the record wall 4 x spot",
+    "from": "2.0; 30.0 W, cone 26 deg",
+    "to": "4.0; 45 W, cone 22 deg"
+   },
+   "expected": "The pressed hands and shell glow softly through frost; record spines show a raking pool top to bottom.",
+   "accept": {
+    "region": [
+     640,
+     260,
+     720,
+     340
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The ceiling and upper walls are a flat dark field, and the air has no atmosphere around the pendants.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     140
+    ],
+    "measured": "lum_median 26.8, p95 45.9"
+   },
+   "change": {
+    "setting": "haze in the room's air; Dome liner glow",
+    "from": "0.01 per metre; glow 1.1",
+    "to": "0.025 per metre; glow 1.8"
+   },
+   "expected": "Soft cones under the pendants, beams faintly lifted, pendants read as glowing smoked acrylic rather than grey discs.",
+   "accept": {
+    "region": [
+     105,
+     125,
+     155,
+     155
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     80,
+     130
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "Denoiser smear on the floor, stool legs and leather.",
+   "evidence": {
+    "region": [
+     380,
+     330,
+     720,
+     480
+    ],
+    "measured": "mottled blotches at 2x crop, lum_p5 15, soft edges on legs"
+   },
+   "change": {
+    "setting": "render samples / denoise",
+    "from": "256 samples, adaptive 0.02",
+    "to": "768 samples, adaptive 0.01, denoiser with albedo and normal passes, final at full 2400 x 1600"
+   },
+   "expected": "Floor shows texture and reflections instead of blotches; legs crisp.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Mid-ground is empty of life beyond the counter; the banquette tables are bare.",
+   "evidence": {
+    "region": [
+     580,
+     280,
+     720,
+     340
+    ],
+    "measured": "tables carry only an Orb and one glass"
+   },
+   "change": {
+    "setting": "props",
+    "from": "glasses on the counter, coat on a counter chair",
+    "to": "add two glasses and a record sleeve on the near banquette table and a jacket on the banquette"
+   },
+   "expected": "The room reads as in use, cosier and fuller.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Remove or swap the floating red slab over the banquette table (580-615, 265-285), apparently a Dome with a red cover, for a smoked cover",
+   "why": "EARF's lamps and their colour are fixed on the card; it is a second saturated red competing with the Ember pair, so the owner should decide the cover"
+  },
+  {
+   "request": "The bottle-green seats directly in front of the altar block the speakers' lower halves",
+   "why": "The zone, its colour and the layout are fixed; the camera change c1 lifts the view over them instead"
+  },
+  {
+   "request": "Generic-bar question",
+   "why": "As shot it would not run as a specific place: the altar, screens and disc are illegible. With c1, c2 and c5 the specific elements carry it, but the bar itself remains fairly conventional"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

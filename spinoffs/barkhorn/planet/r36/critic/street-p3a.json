@@ -1,0 +1,334 @@
+{
+ "stage1": {
+  "impression": "A warm, believable deep-plan bar interior: board ceiling, fir beams, record wall, polished concrete floor with nice soft reflections, and two small red speakers glowing on a far stage. But it does not read as a photograph from the kerb: there is no glass, no reflection, no shopfront steel, and the window lettering is a flat, opaque, razor-edged pink 'RF' pasted over the top-left corner like a graphic overlay. The hero speakers are tiny and murky, the pendant is a blown white dot, and as a 'specific place' it reads more as a generic warm wine bar than as Planet EARF; a magazine would not run it as is.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The shopfront itself must be in the picture: blackened-steel frame, glass with faint reflections of the street lamps, and the frosted lightbox legible as a lightbox, so the frame reads as taken from the pavement through glass",
+  "The etched name must read as acid-etched glass (translucent, softly lit, interior visible through it), not an opaque flat overlay with a 1 px edge",
+  "The Ember pair must read at a glance as the hero: speaker regions lum_median >= 55 with visible acrylic glow, larger in frame",
+  "No feature-less clipped practicals: the Dome pendant must show form (clip_pct < 15 in its box)",
+  "Some sign of life and atmosphere (haze in the light pools, a coat, glasses legible from outside)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    160,
+    140
+   ],
+   "what": "Window etched name renders as a solid, opaque cream-pink fill with a 1 px hard edge (edge step -108 over 1 px); occludes the record wall, no glass translucency, cropped to 'RF' so it reads as a graphic overlay, not etching"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No glass reflections anywhere: no street lamps, no kerb, no shopfront mirrored in the glass; the view reads as an interior shot with the camera inside, contradicting the 'from the kerb' brief"
+  },
+  {
+   "region": [
+    200,
+    0,
+    235,
+    480
+   ],
+   "what": "Only one dark vertical (steel mullion?) visible, lum_median 15, reading as a column in the room rather than a blackened-steel shopfront; no transom, sill or frame"
+  },
+  {
+   "region": [
+    290,
+    230,
+    430,
+    275
+   ],
+   "what": "Ember speakers small (about 40 x 45 px at proof scale) and dim: lum_median 41.5 and 39.2, under the 45 target; the acrylic reads as red boxes with a grey disc, not as glowing tinted cast acrylic"
+  },
+  {
+   "region": [
+    395,
+    102,
+    420,
+    128
+   ],
+   "what": "Dome pendant is a featureless blown white disc: clip_pct 36 %, neutral white (202/194/188), no tint or dome form"
+  },
+  {
+   "region": [
+    575,
+    120,
+    620,
+    250
+   ],
+   "what": "Right-wall panel (the lightbox?) reads as a framed print on a wall, lum_median 130, not as a frosted lightbox with a fogged dancing figure"
+  },
+  {
+   "region": [
+    0,
+    60,
+    180,
+    270
+   ],
+   "what": "Record wall spines smeared/soft, denoiser smear, no individual sleeves legible"
+  },
+  {
+   "region": [
+    330,
+    255,
+    440,
+    290
+   ],
+   "what": "Green banquette on the altar stage competes with the red speakers as a second saturated colour (fixed by the design's zone, but in this frame it splits the eye)"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame does not show the shopfront it exists to show: no steel frame, no glass, no lightbox in context, so it reads as an interior shot rather than a kerb view.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "Only one dark vertical at x 200-235 (lum_median 15); no frame members at top or bottom; no reflections; etched name cropped to 'RF'"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "position [-1.6, 2.9, 1.45], lens 40 mm, aimed at [17.0, 3.05, 1.3]",
+    "to": "position [-4.0, 2.4, 1.5], lens 32 mm, aimed at [17.0, 3.05, 1.35], focus at [0.0, 3.0, 1.6], f/5.6; verticals level"
+   },
+   "expected": "The blackened-steel shopfront frames the picture on all sides, the full etched name sits legible on the glass, the lightbox is visible in the glazing, and the room recedes behind it to the altar; a sliver of pavement at the bottom edge.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The etched name reads as an opaque flat graphic, not etched glass.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     160,
+     140
+    ],
+    "measured": "lum_p95 176, hard edge step -108 over 1 px, interior fully hidden behind the letters"
+   },
+   "change": {
+    "setting": "the window's etched name (emission and finish)",
+    "from": "emission 0.3, opaque",
+    "to": "emission 0.05, finish as frosted etch: transmission about 0.6, roughness 0.5, so the room shows soft and blurred through the letters and they catch the interior light"
+   },
+   "expected": "Letters read as a pale frosted ghost on dark glass, lit from behind by the room, with the record wall faintly visible through them.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     160,
+     140
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 120
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The hero Ember pair is too dim and small to read at a glance.",
+   "evidence": {
+    "region": [
+     290,
+     230,
+     430,
+     275
+    ],
+    "measured": "left speaker lum_median 41.5, right 39.2; target >= 45"
+   },
+   "change": {
+    "setting": "the altar 2 x spot; lamps on each Ember speaker",
+    "from": "altar 90.0 W, cone 36 deg; Ember area lamps 1.0 W/m2",
+    "to": "altar 150.0 W, cone 28 deg; Ember area lamps 2.0 W/m2"
+   },
+   "expected": "The red acrylic glows and the horn and batts read inside it; the pair becomes the brightest coloured thing in the room's depth.",
+   "accept": {
+    "region": [
+     290,
+     230,
+     430,
+     275
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The glass carries no reflection, the main tell that there is no glass and the camera is not outside.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "No bright reflected features anywhere; ceiling region 220-545 x 0-120 lum_range only 40"
+   },
+   "change": {
+    "setting": "street lamps 3 x point",
+    "from": "90.0 W, 3000 K",
+    "to": "160.0 W, 3200 K, one placed behind and above the camera so it mirrors faintly in the glass"
+   },
+   "expected": "Faint, undistorted reflections of a street lamp and the kerb in the glazing, without washing out the interior; the shopfront steel picks up a soft edge highlight.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The Dome pendant is a blown white disc with no form.",
+   "evidence": {
+    "region": [
+     395,
+     102,
+     420,
+     128
+    ],
+    "measured": "clip_pct 36.3 %, median RGB 202/194/188"
+   },
+   "change": {
+    "setting": "each Dome liner's glow",
+    "from": "1.1",
+    "to": "0.5"
+   },
+   "expected": "The dome reads as tinted acrylic with a brighter core and visible rim; its downlight pool on the counter unchanged.",
+   "accept": {
+    "region": [
+     395,
+     102,
+     420,
+     128
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 10
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The room lacks atmosphere and depth separation; pools of light do not read as volumes.",
+   "evidence": {
+    "region": [
+     220,
+     0,
+     545,
+     120
+    ],
+    "measured": "ceiling lum_median 26, lum_range 40; no visible beam or bloom around the downlights"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.003 per metre",
+    "to": "0.008 per metre"
+   },
+   "expected": "Gentle cones under the Domes and the altar spots, softer recession toward the back, the altar glowing out of the depth.",
+   "accept": {
+    "region": [
+     220,
+     0,
+     545,
+     120
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The lightbox reads as a framed print hung on the wall rather than a glowing frosted box.",
+   "evidence": {
+    "region": [
+     575,
+     120,
+     620,
+     250
+    ],
+    "measured": "lum_median 130 with p5 40: a lit picture with dark frame, no even glow"
+   },
+   "change": {
+    "setting": "the screens' images brightness / frosted acrylic roughness",
+    "from": "1.0, current roughness",
+    "to": "1.4, roughness raised so the figure is fogged and the field glows evenly"
+   },
+   "expected": "An evenly glowing frosted panel with a soft fogged silhouette, reading as a lightbox.",
+   "accept": {
+    "region": [
+     575,
+     120,
+     620,
+     250
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "No sign of life readable from the street.",
+   "evidence": {
+    "region": [
+     440,
+     280,
+     640,
+     340
+    ],
+    "measured": "tables carry a few small glasses; no coat, no record out of sleeve visible at this distance"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses, coupe, coat on a counter chair (out of view)",
+    "to": "move the coat to the near counter stool at about x 2.5 m, a record sleeve leaning on the window sill, a lit candle on the nearest table"
+   },
+   "expected": "A lived-in foreground with one or two readable human traces near the glass.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Reduce the green banquette on the altar stage so the red Ember pair is the only saturated colour",
+   "why": "The zone and its colour are fixed by the room's design; only its light could be lowered"
+  },
+  {
+   "request": "Make the Dome pendant a warmer tinted cover",
+   "why": "EARF's lamp covers and colours are fixed products"
+  },
+  {
+   "request": "Render at full delivered resolution to judge sleeve and timber texture and denoiser smear",
+   "why": "This proof is at 0.3 scale; material detail at 1:1 can only be judged on the full frame"
+  }
+ ],
+ "score_if_fixed": 7.5
+}

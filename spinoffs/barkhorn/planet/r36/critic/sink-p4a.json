@@ -1,0 +1,357 @@
+{
+ "stage1": {
+  "impression": "A red rectangular acrylic trough floats against vertical dark timber boards under a wall-mounted steel mixer. The basin is a flat, hot ellipse with no depth. The block reads as thin tinted glass you can see the boards through, not a solid cast slab glowing through its thickness. The wood is a smooth, swirly stock texture and the left eighth of the frame is dead black, so this reads as a competent-to-weak CG bathroom render rather than a night photograph. No magazine would run it as a specific place: nothing ties it to a listening bar, and it could be any hotel washroom visualisation.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The trough must read as solid cast acrylic: the boards must not be visible through its front face, and light must visibly travel through its thickness, brighter near the glow source and falling off across the face (front face lum_median >= 40 with a measurable vertical gradient).",
+  "Polished edges must catch and carry light: a bright, crisp line along the top arrises and the vertical corners (edge step > 30 over < 4 px).",
+  "The basin must have depth (a rounded bowl with a shaded far wall and a lit near wall), not a flat clipped ellipse (clip_pct < 0.5 in the basin).",
+  "The glow must spill onto the boards below and behind the trough as a red pool, so the trough sits in its alcove instead of floating in front of a backdrop.",
+  "The timber must read as real boards at 1:1: varied width and tone, checks, end-grain or joints, a soft sheen, no repeated swirl figure.",
+  "No region larger than a tenth of the frame may be more than half crushed (the left strip is 89 % crushed now).",
+  "Some sign of life and of place: a folded linen hand towel, a soap, a glimpse of the bar or the banquette at the alcove's edge."
+ ],
+ "defects": [
+  {
+   "region": [
+    85,
+    225,
+    620,
+    420
+   ],
+   "what": "Front and side faces are see-through: the board joints and grain show through the red, so the block reads as thin tinted glass or a gel overlay, not a cast slab. Flat lum 19.5, range 14.7, no glow through the thickness."
+  },
+  {
+   "region": [
+    230,
+    205,
+    480,
+    255
+   ],
+   "what": "The basin is a flat bright ellipse with 8.3 % clipped pixels and no visible bowl, wall or drain. It reads as a decal, not a carved basin."
+  },
+  {
+   "region": [
+    0,
+    0,
+    80,
+    480
+   ],
+   "what": "A dead black band (lum_median 0.2, crush 89 %) at the alcove's edge, 11 % of the frame."
+  },
+  {
+   "region": [
+    100,
+    400,
+    600,
+    480
+   ],
+   "what": "No glow pool or contact shadow on the boards under the trough (lum 21, same as the open wall). It floats like a composite."
+  },
+  {
+   "region": [
+    560,
+    220,
+    625,
+    420
+   ],
+   "what": "Soft, unpolished vertical corner: edge step 5.4 over 69 px. No polished arris catches light."
+  },
+  {
+   "region": [
+    70,
+    0,
+    720,
+    480
+   ],
+   "what": "The timber is a single swirly procedural or stock grain on every board, smooth CG surface, uniform widths: reads as laminate texture."
+  },
+  {
+   "region": [
+    195,
+    60,
+    258,
+    190
+   ],
+   "what": "An unexplained flat grey rectangle (dispenser or panel), out of focus. Reads as a blank placeholder."
+  },
+  {
+   "region": [
+    350,
+    0,
+    440,
+    100
+   ],
+   "what": "The mixer catches red on its tips but is soft and generic. Acceptable, but it reads as a stock asset."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The trough does not glow through its thickness. Its faces are dim and flat, so the one saturated object in the frame has no life.",
+   "evidence": {
+    "region": [
+     100,
+     260,
+     600,
+     400
+    ],
+    "measured": "lum_median 19.5, lum_range 14.7, y-profile flat 17.2 to 21.2"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "0.8",
+    "to": "3.0"
+   },
+   "expected": "The front face brightens to a mid ember red, brightest along the lower edge nearest the source and falling off upward, and the slab reads as lit from within.",
+   "accept": {
+    "region": [
+     100,
+     260,
+     600,
+     400
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The acrylic reads as thin clear tinted glass: the wall boards are visible through the front face.",
+   "evidence": {
+    "region": [
+     85,
+     225,
+     620,
+     420
+    ],
+    "measured": "board joints and grain visible through the face in the 2x crop; r_median 89, g 0, b 2, i.e. pure transmitted tint with no scatter"
+   },
+   "change": {
+    "setting": "the sink acrylic's finish: internal scatter/volume density (colour unchanged)",
+    "from": "clear transmission, no scatter",
+    "to": "light internal scatter (subsurface/volume scatter radius about 20 to 40 mm), so the slab is translucent, not transparent, and holds the under-glow"
+   },
+   "expected": "The boards no longer show through, the face carries a soft gradient of light from the glow, and the slab reads as 100+ mm of solid cast resin like Marcelis's work.",
+   "accept": {
+    "region": [
+     100,
+     260,
+     600,
+     400
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The basin is a hot, flat, clipped ellipse with no visible bowl.",
+   "evidence": {
+    "region": [
+     240,
+     210,
+     470,
+     250
+    ],
+    "measured": "clip_pct 8.34, lum_p95 194.7, uniform pink fill"
+   },
+   "change": {
+    "setting": "the sink spot (1 x spot, 2700 K, cone 30 deg)",
+    "from": "15.0 W, straight down into the bowl",
+    "to": "6.0 W, aimed from behind the spout toward the front lip so the far wall of the bowl falls into shade"
+   },
+   "expected": "The bowl reads as a rounded hollow: lit near wall, shaded far wall, a small specular on the rim, nothing clipped.",
+   "accept": {
+    "region": [
+     240,
+     210,
+     470,
+     250
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "Nothing grounds the floating trough: no red spill or soft shadow on the boards beneath it.",
+   "evidence": {
+    "region": [
+     150,
+     410,
+     550,
+     480
+    ],
+    "measured": "lum_median 21.2, r 40 / g 17, the same as the open wall at right (28.7)"
+   },
+   "change": {
+    "setting": "the sink's under-glow plus its spill",
+    "from": "0.8, no visible spill",
+    "to": "3.0 (c1), with the glow's emitter set to face down and back so it washes the boards under the trough in a red pool fading over about 300 mm"
+   },
+   "expected": "A warm red pool on the boards under the trough, dark at the frame bottom: the object sits in its alcove.",
+   "accept": {
+    "region": [
+     150,
+     410,
+     550,
+     480
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The left strip is a crushed black slab.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     80,
+     480
+    ],
+    "measured": "lum_median 0.2, crush_pct 89.45 (11 % of frame)"
+   },
+   "change": {
+    "setting": "exposure",
+    "from": "0.4",
+    "to": "0.6, and a candle (3 W, 1900 K) moved onto the ledge at the alcove's left return so the return's boards hold detail"
+   },
+   "expected": "The alcove's left return reads as dark timber with a faint warm edge. Frame lum_median rises into the low 20s and 30s.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     80,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 50
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The polished edges carry no light, so the acrylic does not read as premium.",
+   "evidence": {
+    "region": [
+     560,
+     300,
+     640,
+     320
+    ],
+    "measured": "edge step 5.4 over 69 px at the right vertical corner"
+   },
+   "change": {
+    "setting": "the sink acrylic's edge finish plus a small grazing source",
+    "from": "the same roughness as the faces, no grazing light",
+    "to": "edges at roughness 0.02 with a small 2700 K area lamp (about 2 W) grazing from the upper right so the top arrises and the right corner catch a crisp line"
+   },
+   "expected": "A thin bright line along the top front arris and the right vertical corner, glowing red through the edge.",
+   "accept": {
+    "region": [
+     560,
+     220,
+     640,
+     420
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The timber boards read as one smooth stock texture with a swirly, repeating figure.",
+   "evidence": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_range 23.4; at 1:1 the same flame figure recurs board to board with no joints, checks or nail holes"
+   },
+   "change": {
+    "setting": "the oak's stain and finish",
+    "from": "uniform mid-brown, smooth, swirly figure",
+    "to": "a darker, more varied stain, board-to-board tone variation of about \u00b110 %, matte oiled sheen (roughness about 0.55), straighter quarter-sawn grain at a larger scale, visible board joints and a few checks"
+   },
+   "expected": "The boards read as real timber at real scale. The red pool and grazing light show texture, not a printed swirl.",
+   "accept": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     18,
+     35
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The frame is empty of life and of place, and a blank grey rectangle sits at upper left.",
+   "evidence": {
+    "region": [
+     195,
+     60,
+     258,
+     190
+    ],
+    "measured": "a flat grey panel, lum about 60, no detail"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink; an unexplained grey panel",
+    "to": "a folded natural linen hand towel over the trough's right end, a bar of dark soap on a small blackened-steel dish, and the grey panel either removed or made a recognisable object (a smoked-acrylic towel box)"
+   },
+   "expected": "A sign of use and of a specific, designed place.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the basin a deeper, more visibly rounded bowl and a softer radius into the top.",
+   "why": "The sink's form is fixed by the card. The flatness is partly lighting (c3), but if the modelled bowl itself is shallow, that is a design change for the owner."
+  },
+  {
+   "request": "Replace the stock-looking lever mixer with a simpler, heavier spout from the wall, as the card describes.",
+   "why": "The fitting belongs to the room's design as proposed. Raise it with the designer rather than change it for a picture."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

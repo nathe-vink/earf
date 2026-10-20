@@ -1,0 +1,378 @@
+{
+ "stage1": {
+  "impression": "A warm, convincingly laid-out deep bar seen through a window. It still reads as a soft, denoised CG render: smeared record spines, smooth plastic-looking table tops, and a giant flat salmon 'RF' that looks pasted on top rather than etched into glass. The red pair at the far end is tiny and under-lit, the shopfront itself (steel, glass, lightbox) barely appears, and no glass reflections tell you there is a pane. As it stands a magazine would read it as a generic warehouse bar, not a specific place.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The shopfront must be the subject: the blackened-steel frame, the glass as a visible pane (street reflections, a faint sheen), the etched name and the frosted dancer lightbox all in frame. Right now only one mullion and two letters show.",
+  "The etched name must read as acid-etched glass (translucent, lit from the room behind and a little from the street), not as an opaque flat panel at lum 173 that tops the frame.",
+  "The Ember pair must be the obvious hero at a glance: brighter (region lum_median >= 60) and large enough to read as horn speakers rather than two red boxes.",
+  "At the delivered 2400 px there must be no denoiser smear on the record spines and bottles, and the table tops need a real material response.",
+  "One sign that this place is specific (the altar, the Domes, the lightbox), so it can't be mistaken for a generic exposed-beam bar."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    150,
+    140
+   ],
+   "what": "Etched name reads as an opaque, flat, pale-pink painted panel (lum_median 173, uniform). No frosting, no glass, no light falloff, and only 'RF' is in frame."
+  },
+  {
+   "region": [
+    200,
+    0,
+    235,
+    480
+   ],
+   "what": "A single steel mullion splits the frame at about 30 % width, the only shopfront element visible. It reads as a column in the room, not as a shopfront."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No glass reflection anywhere (street lamps, kerb, the camera side), so the pane is invisible and the 'from the kerb' premise is lost."
+  },
+  {
+   "region": [
+    295,
+    230,
+    330,
+    275
+   ],
+   "what": "Left Ember: lum_median 46.6, about 35 px wide. It reads as a small red box with a grey disc, not as a tinted cast-acrylic horn speaker."
+  },
+  {
+   "region": [
+    390,
+    230,
+    430,
+    275
+   ],
+   "what": "Right Ember: lum_median 39.2, below the 45 target and dimmer than the left one."
+  },
+  {
+   "region": [
+    0,
+    60,
+    180,
+    270
+   ],
+   "what": "Record wall spines are denoiser-smeared into colour bands with no sleeve edges or text."
+  },
+  {
+   "region": [
+    570,
+    120,
+    620,
+    250
+   ],
+   "what": "The framed screen or print on the right wall is the brightest surface in the room (lum_median 118) and pulls the eye away from the altar."
+  },
+  {
+   "region": [
+    0,
+    400,
+    90,
+    470
+   ],
+   "what": "The foreground table top is smooth, uniform and plastic-looking, with a cut-off Orb lamp at the edge."
+  },
+  {
+   "region": [
+    395,
+    100,
+    420,
+    130
+   ],
+   "what": "A Dome pendant reads as a bare white blown disc rather than a tinted acrylic lamp."
+  },
+  {
+   "region": [
+    240,
+    320,
+    560,
+    480
+   ],
+   "what": "The concrete floor reflection is plausible but smeared, with no aggregate or saw-cut detail."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame is meant to show the shopfront at night, but the camera is 1.6 m from the glass and sees straight through it, so the facade, the lightbox and most of the name are out of frame.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "The only shopfront elements are one mullion (x 200-235, lum_median 15) and the letters 'RF' (x 0-150). No lightbox, no sill, no frame head, no pavement."
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [-1.6, 2.9, 1.45], lens 40 mm, f/5.6 focused at [0.0, 3.0, 1.6]",
+    "to": "position [-5.0, 2.4, 1.5] (across the pavement, slightly off-axis toward the right-hand wall), aimed at [17.0, 3.2, 1.4], lens 35 mm, f/8 focused at [0.0, 3.0, 1.6], verticals kept level (shift instead of tilt if the head of the frame is cut)"
+   },
+   "expected": "The full steel shopfront, the whole etched name and the frosted dancer lightbox frame the room. The deep interior and the altar sit in the glass as a picture within a picture, with pavement in the lower tenth.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The etched name looks like opaque painted vinyl, flat and brighter than anything in the room.",
+   "evidence": {
+    "region": [
+     40,
+     0,
+     140,
+     135
+    ],
+    "measured": "lum_median 173.4, p5-p95 9.5-176.4 (a flat plateau), RGB 197/168/157, no gradient."
+   },
+   "change": {
+    "setting": "the window's etched name (emission strength), and frosted acrylic/glass roughness",
+    "from": "emission 0.3, reads as opaque",
+    "to": "emission 0.05; make it a rough transmissive etch (roughness about 0.6, transmission on) so the room shows through it as a blur and it catches the street lamps on its edges"
+   },
+   "expected": "The letters read as satin-frosted glass, a little lighter than what is behind them and with visible variation. They are no longer the brightest object in the frame.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p99",
+    "op": "<=",
+    "value": 165
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Ember pair, the hero, is too dim and too small to read as speakers from the kerb.",
+   "evidence": {
+    "region": [
+     390,
+     230,
+     430,
+     275
+    ],
+    "measured": "Right Ember lum_median 39.2, left 46.6 (target 45 or more). The red is about 35 px wide at proof scale."
+   },
+   "change": {
+    "setting": "the altar spots; the area lamps on each Ember speaker",
+    "from": "altar 2 x 90 W, 36 deg; Ember area 1.0 W/m2",
+    "to": "altar 2 x 170 W, 30 deg; Ember area 2.2 W/m2, balanced so both speakers match"
+   },
+   "expected": "The red acrylic glows through and the horn mouth and white batts read. The pair becomes the brightest coloured thing in the room, both speakers within 5 lum of each other.",
+   "accept": {
+    "region": [
+     295,
+     230,
+     430,
+     275
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "There is no evidence of a glass pane or a street, so this doesn't read as a photograph from the kerb.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "No specular reflections on the glass plane. The street lamps (3 x 90 W, 3000 K) leave no visible trace."
+   },
+   "change": {
+    "setting": "street lamps",
+    "from": "3 x point, 90 W, 3000 K",
+    "to": "3 x point, 140 W, 3200 K, one placed behind and to the left of the camera so its reflection and a faint mirrored kerb and parked-car shape lie in the lower-left glass, plus a sodium-warm wash on the pavement and the steel sill"
+   },
+   "expected": "A faint, clean reflection layer across 10-20 % of the glass, the pavement lit, and the steel frame edges catching a highlight, so the pane becomes real.",
+   "accept": {
+    "region": [
+     0,
+     430,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     60
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The framed screen on the right wall is the brightest surface in the room and competes with the altar.",
+   "evidence": {
+    "region": [
+     570,
+     120,
+     620,
+     250
+    ],
+    "measured": "lum_median 118 against 46 at the speakers."
+   },
+   "change": {
+    "setting": "the screens' images (emission strength)",
+    "from": "1.0",
+    "to": "0.5"
+   },
+   "expected": "The screen sits back as a soft glowing panel at about lum 65-80, and the eye goes to the altar.",
+   "accept": {
+    "region": [
+     570,
+     120,
+     620,
+     250
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     60,
+     85
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The denoiser smears fine detail (record spines, bottles, concrete) into CG paste.",
+   "evidence": {
+    "region": [
+     0,
+     60,
+     180,
+     270
+    ],
+    "measured": "Visual at 3x: the spines are colour bands with no sleeve edges, and the bottles blur into blobs."
+   },
+   "change": {
+    "setting": "render",
+    "from": "samples 256, adaptive 0.02, denoise on",
+    "to": "samples 640, adaptive 0.008, denoise on with albedo+normal passes (prefilter accurate), and judge at full 2400 x 1600 rather than at scale 0.3"
+   },
+   "expected": "Spine edges, sleeve text blocks and bottle highlights hold at 1:1, the concrete gets grain, and nothing looks painted.",
+   "accept": {
+    "region": [
+     0,
+     60,
+     180,
+     270
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 120
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The Dome pendant in the middle reads as a bare blown white disc rather than tinted acrylic.",
+   "evidence": {
+    "region": [
+     395,
+     100,
+     420,
+     130
+    ],
+    "measured": "A small white disc at the top of the frame's range (top-band p95 174, clip 0.21 % in [0, 0, 720, 120])."
+   },
+   "change": {
+    "setting": "each Dome's liner glow",
+    "from": "1.1",
+    "to": "0.6, keeping the 260 W downlights so the pools on the counter stay"
+   },
+   "expected": "The Domes show their tint and the liner as a soft gradient, with no clipping in the ceiling band.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     120
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.05
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The table tops and the floor are smooth and uniform, a CG giveaway.",
+   "evidence": {
+    "region": [
+     0,
+     400,
+     90,
+     470
+    ],
+    "measured": "Visual: a uniform tan top with no grain or wear. The floor reflection in [240, 320, 560, 480] is smooth with no aggregate."
+   },
+   "change": {
+    "setting": "the materials' finish (the floor's polish, the oak's stain)",
+    "from": "smooth polish, uniform",
+    "to": "the floor at roughness 0.25-0.4 driven by a large-scale blotch map with saw-cut joints; the table tops with an oak grain bump and ring-mark roughness variation"
+   },
+   "expected": "Softer, broken floor reflections and table tops that read as worn timber at 1:1.",
+   "accept": {
+    "region": [
+     240,
+     320,
+     560,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     55
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember speakers physically larger or bring the altar forward so the hero reads from the street.",
+   "why": "The speakers' size and the room's layout are fixed. Only the camera and the light can make them read."
+  },
+  {
+   "request": "Drop the second saturated colour (the bottle-green zone and banquette near the altar), which competes with the red.",
+   "why": "The zone and its colour are fixed by the room's design."
+  },
+  {
+   "request": "Add a person at the counter or in the doorway for scale and life.",
+   "why": "People aren't among the listed small props; this needs the owner's approval."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

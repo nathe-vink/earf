@@ -707,7 +707,7 @@ def sink(bpy, kit, p, objs):
     LK._rod(rod.bm, (rx + 0.09, A['depth'], rz), (rx + 0.09, 0.07, rz), 0.005, 0.005, seg=10)
     objs.append(rod.object(bpy, brass(bpy), smooth=True))
     tw = Mesh('sink-towel'); tw.box(rx - 0.075, 0.064, rz - 0.30, rx + 0.075, 0.078, rz + 0.008)
-    objs.append(tw.object(bpy, principled(bpy, 'linen', '#D8D0C0', rough=0.9, bump=(0.0008, 0.3, 0.0002)), bevel=0.004, seg=3))
+    objs.append(tw.object(bpy, principled(bpy, 'linen-warm', '#CDBFA6', rough=0.95, bump=(0.0015, 0.5, 0.0004)), bevel=0.004, seg=3))
 
 
 # --- signs of life -----------------------------------------------------------------------------------------------------

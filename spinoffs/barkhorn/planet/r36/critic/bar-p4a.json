@@ -1,0 +1,357 @@
+{
+ "stage1": {
+  "impression": "A dim, warm night bar seen down a long axis. The low-key exposure and the pools of light on the counter are right, but it reads as a game-engine or archviz render: surfaces are smooth and untextured, the denoiser smears the detail, the ceiling and beams are flat brown, and the pair of red speakers is a postage stamp at the far end, so the hero does not read at a glance. As it stands it is a generic dark bar, not a specific place a design magazine would publish; the green zone and a red lamp at right compete with the speakers for colour.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember pair must be the hero: each speaker at least about 8% of frame height (now about 8% of frame width combined, about 38 px of 480 tall each), with its acrylic visibly glowing and the horn readable",
+  "Materials must read real at 1:1: the zinc top needs a mottled patina and soft, broken reflections (now flat grey with one hot streak); the Douglas fir beams need checks and end grain; the concrete needs board marks and tie holes. None of them reads at present",
+  "No denoiser smear or plastic-smooth surfaces in the delivered frame (render at full 2400 x 1600 with enough samples)",
+  "The room's signature elements (the frosted screens with pressed hands and the shell, the frosted disc behind the DJ station, the fluted oak front, the brass rail, the smoked Dome pendants) must be legible in frame so it reads as Planet EARF rather than a generic bar",
+  "The only saturated colour outside the deep-green zone must be the Ember pair. The red lamp shade at right [585,268,635,282] now competes with it",
+  "Shadow regions (the banquette side, the ceiling) need detail and gradation rather than an even brown murk"
+ ],
+ "defects": [
+  {
+   "region": [
+    300,
+    228,
+    442,
+    266
+   ],
+   "what": "Ember pair too small and too far away: each about 30 x 38 px, median luminance 54 and 46 (right one only just meets 45). The acrylic glow and the tint barely read, and they look like red boxes"
+  },
+  {
+   "region": [
+    0,
+    290,
+    280,
+    400
+   ],
+   "what": "Zinc counter top is a uniform smooth grey slab with one specular streak (p95 206). No patina, no wear, no rounded edge highlight. It reads as a CG plane"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    130
+   ],
+   "what": "Ceiling and beams are flat, untextured brown (lum_range 25). No fir checks or end grain, and no light grazing them"
+  },
+  {
+   "region": [
+    0,
+    380,
+    300,
+    480
+   ],
+   "what": "Fluted oak bar front reads as a smeared stripe texture, and no brass foot rail is visible"
+  },
+  {
+   "region": [
+    490,
+    150,
+    620,
+    330
+   ],
+   "what": "Back-right corner (blackened-steel and partition area) is murky (median 21.6) with smeared reflections and no edge definition"
+  },
+  {
+   "region": [
+    560,
+    265,
+    640,
+    300
+   ],
+   "what": "A red lamp shade on the right table is a second saturated red competing with the speakers"
+  },
+  {
+   "region": [
+    690,
+    80,
+    720,
+    240
+   ],
+   "what": "A bright frosted panel is cut by the right frame edge; the screens with their images (hands, shell) are not legible"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Proof-scale denoiser smear everywhere: chair edges, stools and record spines are soft and waxy, and there is no fine grain"
+  },
+  {
+   "region": [
+    270,
+    300,
+    400,
+    480
+   ],
+   "what": "Foreground stools and chair backs are cut and blurred into soft blobs, which obstructs the axis without adding life"
+  },
+  {
+   "region": [
+    0,
+    20,
+    140,
+    250
+   ],
+   "what": "Record wall reads as repeated spine texture with no individual sleeves pulled or out of line"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speakers are tiny at the far end of a wide view, so the frame reads as a generic bar.",
+   "evidence": {
+    "region": [
+     300,
+     228,
+     442,
+     266
+    ],
+    "measured": "each speaker about 30 x 38 px in a 720 x 480 frame; the altar sits around frame y 230 to 265"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "position [3.3, 3.35, 1.35], lens 32 mm, target [17.0, 3.3, 1.15]",
+    "to": "position [6.5, 3.2, 1.25], lens 40 mm, target [17.0, 3.0, 1.0], focus [16.2, 3.0, 0.9], f/4.0"
+   },
+   "expected": "The Ember pair roughly doubles in size (about 80 px tall at proof scale), with the counter still leading in from the left and one frosted screen on the right fully in frame.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speakers are barely lit relative to the room, so their acrylic does not glow and the horn is unreadable.",
+   "evidence": {
+    "region": [
+     410,
+     228,
+     442,
+     266
+    ],
+    "measured": "lum_median 46.3 (left 53.9), against an altar surround median of 33.3"
+   },
+   "change": {
+    "setting": "the altar 2 x spot; lamps on each Ember speaker",
+    "from": "altar 90 W, cone 36 deg; speaker area lamps 1.0 W/m2",
+    "to": "altar 170 W, cone 28 deg; speaker area lamps 2.0 W/m2"
+   },
+   "expected": "The speakers stand at about twice the surround's luminance, with the red cast acrylic glowing at its edges and a visible pool on the altar plinth.",
+   "accept": {
+    "region": [
+     300,
+     228,
+     442,
+     266
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The zinc top reads as a smooth grey CG plane.",
+   "evidence": {
+    "region": [
+     0,
+     290,
+     280,
+     400
+    ],
+    "measured": "median 34.9 with one hot streak at p95 205.7; no texture visible at 2x crop"
+   },
+   "change": {
+    "setting": "the zinc's patina / finish",
+    "from": "uniform smooth zinc",
+    "to": "roughness 0.35 to 0.5, driven by a large-scale mottled patina map (darker blue-grey blooms, glass rings, wiped arcs), and a brighter worn rounded front edge"
+   },
+   "expected": "Broken, soft reflections of the Domes on the top with visible wear; the hot streak spreads into a softer pool.",
+   "accept": {
+    "region": [
+     0,
+     290,
+     280,
+     400
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 185
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The beams and ceiling are flat brown with no fir character and no light on them.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     130
+    ],
+    "measured": "lum_range 25.0, median 26.3"
+   },
+   "change": {
+    "setting": "the oak's stain / beam finish, plus the Domes' liner glow",
+    "from": "smooth uniform beam texture; Dome liner glow 1.1",
+    "to": "Douglas fir with checks, nail holes, darker end grain and a lower stain value; Dome liner glow 1.6, so the smoked domes throw a soft upward glow on the beams above"
+   },
+   "expected": "The beams show grain and pick up warm grazing light near each Dome; the ceiling gains gradation.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     130
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "post",
+   "problem": "Denoiser smear at proof scale makes every edge waxy, the main 'render' tell.",
+   "evidence": {
+    "region": [
+     270,
+     300,
+     400,
+     480
+    ],
+    "measured": "stools and chair backs soft, edge 10-90 width on counter front 78 px over [0,300,200,400]"
+   },
+   "change": {
+    "setting": "render samples / denoise",
+    "from": "samples 256, adaptive 0.02, scale 0.3 proof",
+    "to": "samples 768, adaptive 0.01, denoise with albedo and normal passes, delivered at full 2400 x 1600, plus a 2% luminance grain in post"
+   },
+   "expected": "Crisp chair and record edges, readable flutes on the oak front, and a photographic grain in place of smear.",
+   "accept": {
+    "region": [
+     0,
+     300,
+     200,
+     400
+    ],
+    "metric": "edge",
+    "axis": "y",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The banquette side and back-right corner are an even murk with no pools of light, so the room is not cozy there.",
+   "evidence": {
+    "region": [
+     490,
+     150,
+     620,
+     330
+    ],
+    "measured": "lum_median 21.6, lum_p95 51.6"
+   },
+   "change": {
+    "setting": "each Orb; the screens' images",
+    "from": "Orb 6.0 W, glow 1.1; screens 2.0",
+    "to": "Orb 12.0 W, glow 1.5; screens 3.0"
+   },
+   "expected": "A warm pool on each round table and an evenly glowing frosted screen behind the banquette, with dark between them.",
+   "accept": {
+    "region": [
+     490,
+     150,
+     620,
+     330
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 27
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "Depth separation down the long axis is weak; the far end blends into one brown field.",
+   "evidence": {
+    "region": [
+     270,
+     160,
+     490,
+     320
+    ],
+    "measured": "lum_range 46.0, profile bins 21.5 to 42.3 with no clear lit altar"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.01 per metre",
+    "to": "0.025 per metre"
+   },
+   "expected": "Faint visible cones from the altar spots and Dome downlights, and an atmospheric step between the bar and the altar.",
+   "accept": {
+    "region": [
+     270,
+     160,
+     490,
+     320
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 23
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Signs of life and specificity are too small to register; the record wall reads as a repeated texture.",
+   "evidence": {
+    "region": [
+     0,
+     20,
+     140,
+     250
+    ],
+    "measured": "uniform spine rows; props on the counter tiny at [60,260,200,320]"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses, coupe, record out of sleeve, coat, candles as now",
+    "to": "pull 3 to 4 sleeves forward and lean 2 face-out on the record wall, put a record sleeve and headphones by the turntables in the near counter foreground, and leave a menu card on the nearest round table"
+   },
+   "expected": "The wall reads as a real collection, and the near counter carries a lived-in still life.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Swap the red cover on the lamp at right [585,268,635,282] for the smoked cover in this frame",
+   "why": "The cover is part of EARF's lamp (the Dome or Orb's covers are a product choice), so it is fixed. The owner should decide; as it stands it is a second saturated red that dilutes the Ember pair as the one colour."
+  },
+  {
+   "request": "Make the deep-green banquette zone less saturated",
+   "why": "The zone and its colour are fixed by the room's design; noted only because it competes with the speakers in this axis view."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

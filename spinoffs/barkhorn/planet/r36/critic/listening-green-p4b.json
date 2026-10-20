@@ -1,0 +1,363 @@
+{
+ "stage1": {
+  "impression": "Reads as a CG render, not a photograph. The niche's end-grain lining looks like a regular tiled grid, the green walls, ceiling and chair are smooth and have no texture, and the pink-red speakers look like flat glowing paint rather than thick cast acrylic. The Orb lamps are grey glass balls that blow out the table tops. There is a specific idea here (a green room facing an altar of two red speakers), but as photographed it looks like a game set, not a place a magazine would run as a specific bar.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The niche's end-grain blocks read as real oak blocks, with varied tone and grain from block to block and no visible tiling (niche back wall lum_range >= 35)",
+  "The speakers read as thick tinted acrylic, with glowing polished edges, visible white batts inside and clean reflections, not flat emissive pink; speaker regions lum_median >= 45",
+  "The Orb lamps glow warm and frosted inside the smoked shell, and the oak tables under them hold grain (clip_pct < 2 on the table tops)",
+  "The green velvet, carpet and limewash show their texture at 1:1 (pile sheen, limewash mottling), with no flat CG planes",
+  "The composition gives the altar the frame, with the foreground chair back not a blank mass across the bottom centre",
+  "A sign of life on the tables (a glass, a record), and some haze, so the pools of light read",
+  "Delivered at full resolution with no denoiser smear on the speaker detail"
+ ],
+ "defects": [
+  {
+   "region": [
+    180,
+    90,
+    600,
+    300
+   ],
+   "what": "End-grain niche lining reads as a uniform square tile grid with almost no tonal variation (lum_range 21.7): looks like a texture, not oak blocks"
+  },
+  {
+   "region": [
+    210,
+    150,
+    280,
+    300
+   ],
+   "what": "Left Ember reads as flat pink emissive paint, with no thickness, polished-edge glow or reflection; the smoked upper part is a murky red smear; median 29.9"
+  },
+  {
+   "region": [
+    450,
+    150,
+    530,
+    305
+   ],
+   "what": "Right Ember is the same (median 26.4); it looks like a copy of the left one, posed identically"
+  },
+  {
+   "region": [
+    128,
+    360,
+    225,
+    400
+   ],
+   "what": "Hex oak table top under the left Orb is blown (clip 16%, median 188): a white slab with no grain"
+  },
+  {
+   "region": [
+    165,
+    320,
+    215,
+    380
+   ],
+   "what": "Left Orb reads as a cold grey glass ball with a hot spot, not a warm frosted glow (clip 2.2%)"
+  },
+  {
+   "region": [
+    520,
+    385,
+    610,
+    460
+   ],
+   "what": "Right Orb is a big grey sphere with a blown centre, cut by the frame edge, with a stray object beside it"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    40
+   ],
+   "what": "Ceiling band is a dead flat green plane (lum_range 5.5)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    110,
+    320
+   ],
+   "what": "Left limewashed wall is flat and has no texture (lum_range 14.4); the strip at the far left edge is an unexplained bright sliver"
+  },
+  {
+   "region": [
+    240,
+    340,
+    490,
+    480
+   ],
+   "what": "Foreground velvet chair back is a smooth, featureless green mass across the bottom centre, with no pile or seams"
+  },
+  {
+   "region": [
+    205,
+    115,
+    315,
+    295
+   ],
+   "what": "The felt panels behind the speakers read as black void rectangles"
+  },
+  {
+   "region": [
+    0,
+    320,
+    240,
+    480
+   ],
+   "what": "Left chair and table look like smooth plastic shapes with a hard green glow on the chair edge"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero speakers are underexposed and flat, so the acrylic reads as pink paint, not lit cast acrylic.",
+   "evidence": {
+    "region": [
+     210,
+     150,
+     280,
+     300
+    ],
+    "measured": "lum_median 29.9 (right speaker 26.4), target >= 45; the upper smoked section is near black-red"
+   },
+   "change": {
+    "setting": "the altar 2 x spot (W, cone) and on each Ember speaker 4 x area",
+    "from": "altar 80 W, cone 28 deg; speaker areas 1.0 W/m2",
+    "to": "altar 150 W, cone 20 deg, aimed to graze the cabinet edges from above and to the side; speaker areas 2.5 W/m2"
+   },
+   "expected": "Cabinet edges glow, the batts read through the tint, the horns separate from the felt, and the speakers become the brightest coloured thing in the frame",
+   "accept": {
+    "region": [
+     210,
+     150,
+     280,
+     300
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Orbs blow out the oak tables and read as cold grey balls.",
+   "evidence": {
+    "region": [
+     128,
+     360,
+     225,
+     400
+    ],
+    "measured": "clip_pct 15.95, lum_median 188; the Orb region has clip 2.2% and a neutral-grey body"
+   },
+   "change": {
+    "setting": "each Orb W and glow",
+    "from": "10.0 W, glow 1.1",
+    "to": "4.0 W, glow 0.6"
+   },
+   "expected": "The table tops hold their oak grain in a warm pool, and the Orb shows a soft amber core inside the smoked shell",
+   "accept": {
+    "region": [
+     128,
+     360,
+     225,
+     400
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The end-grain niche lining reads as a repeating tile texture.",
+   "evidence": {
+    "region": [
+     300,
+     100,
+     430,
+     290
+    ],
+    "measured": "lum_range 21.7, profile 27-37 across the height; the grid is visually uniform"
+   },
+   "change": {
+    "setting": "oak end-grain block finish",
+    "from": "uniform tone, single texture",
+    "to": "a random tone and stain offset per block (+/-15%), growth rings and checks in a bump map at real scale, slight per-block height jitter of 1-2 mm"
+   },
+   "expected": "The wall reads as real oak blocks catching the altar spill, unevenly",
+   "accept": {
+    "region": [
+     300,
+     100,
+     430,
+     290
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The foreground chair back is a large blank green mass under the altar and crowds the frame.",
+   "evidence": {
+    "region": [
+     240,
+     340,
+     490,
+     480
+    ],
+    "measured": "about 25% of the frame, lum_range 80 but no texture"
+   },
+   "change": {
+    "setting": "camera position",
+    "from": "[11.45, 2.2, 1.15], lens 28 mm",
+    "to": "[11.2, 2.7, 1.3], lens 35 mm, same target, so that the chair back drops to the bottom edge and sits off-centre with one Orb table as a foreground anchor"
+   },
+   "expected": "The altar fills the upper two thirds, and the chairs frame it rather than block it",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The green velvet, limewash and ceiling are smooth CG planes.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     110,
+     320
+    ],
+    "measured": "lum_range 14.4; ceiling [0,0,720,40] lum_range 5.5"
+   },
+   "change": {
+    "setting": "the finish of the velvet and the limewash",
+    "from": "smooth diffuse",
+    "to": "velvet: a sheen layer (Cycles sheen ~0.6, roughness 0.4) with fine pile noise and seams; limewash: a low-frequency mottled albedo (+/-12%) with brush-stroke bump"
+   },
+   "expected": "The chairs show a velvet rim light and the walls a soft mottling under the downlights",
+   "accept": {
+    "region": [
+     0,
+     0,
+     110,
+     320
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 22
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The felt panels behind the speakers are black voids, which kills the depth of the altar.",
+   "evidence": {
+    "region": [
+     205,
+     115,
+     315,
+     295
+    ],
+    "measured": "visually near black around the cabinets; niche wall median 31.7"
+   },
+   "change": {
+    "setting": "the lit niche's strip",
+    "from": "3.0",
+    "to": "5.0, with the felt's roughness at 1.0 and a faint fibre bump"
+   },
+   "expected": "The felt reads as dark charcoal cloth, and the speaker silhouettes separate against it",
+   "accept": {
+    "region": [
+     300,
+     100,
+     430,
+     290
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     34,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "There is no air in the room, so the spot pools on the altar do not read as beams or pools.",
+   "evidence": {
+    "region": [
+     180,
+     40,
+     620,
+     120
+    ],
+    "measured": "a hard, flat transition from the ceiling to the niche; no visible light falloff in the air"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.005 per metre",
+    "to": "0.015 per metre"
+   },
+   "expected": "Faint cones from the altar spots, and softer contrast in the background",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "There is no sign of life in the listening zone.",
+   "evidence": {
+    "region": [
+     128,
+     360,
+     225,
+     400
+    ],
+    "measured": "the tables are bare apart from the lamps"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none in the zone",
+    "to": "a half-full rocks glass on the left hex table, a record sleeve leaning against the right chair, a folded jacket on one chair arm"
+   },
+   "expected": "The frame reads as a used room mid-evening",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the room's surfaces neutral, so that the only saturated colour is the speaker",
+   "why": "The card fixes the bottle-green zone as part of the room's design; the green-against-red clash is a design decision for the owner, not a photographic fix"
+  },
+  {
+   "request": "Show a single speaker as the hero rather than a pair",
+   "why": "The card fixes the Ember pair on the altar"
+  },
+  {
+   "request": "Make the speaker cabinets' tint deeper and less pink",
+   "why": "The product's colour is fixed; only light and exposure may change how it reads"
+  }
+ ],
+ "score_if_fixed": 6.0
+}
