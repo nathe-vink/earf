@@ -14,6 +14,12 @@
    "radius": 0.006,
    "roughness": 0.03
   },
+  "fill": {
+   "preset": "satin_paint",
+   "color": "#1C1A18",
+   "roughness": 0.5,
+   "specular": 0.3
+  },
   "frost": {
    "preset": "satin_paint",
    "color": "#EEEEEA",
@@ -77,7 +83,11 @@
    "material": "coin"
   },
   {
-   "match": "globe-engraved|words",
+   "match": "globe-engraved",
+   "material": "fill"
+  },
+  {
+   "match": "words",
    "material": "frost"
   },
   {
@@ -152,7 +162,14 @@
   "smoke": {
    "deep": "#A9A7AD",
    "inlay": "#78767E",
-   "swatch": "#34323A"
+   "swatch": "#34323A",
+   "materials": {
+    "fill": {
+     "color": "#EEEEEA",
+     "roughness": 0.8,
+     "specular": 0.2
+    }
+   }
   }
  }
 }

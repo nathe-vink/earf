@@ -80,7 +80,14 @@
   "smoke": {
    "deep": "#A9A7AD",
    "inlay": "#78767E",
-   "swatch": "#34323A"
+   "swatch": "#34323A",
+   "materials": {
+    "fill": {
+     "color": "#EEEEEA",
+     "roughness": 0.8,
+     "specular": 0.2
+    }
+   }
   }
  }
 }

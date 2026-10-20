@@ -6,9 +6,9 @@
  ],
  "camera": {
   "position": [
-   0.04,
-   -0.19,
-   0.105
+   0.035,
+   -0.155,
+   0.125
   ],
   "target": [
    0.0,
@@ -173,8 +173,8 @@
     "kind": "kit",
     "shape": "box",
     "material": "glow",
-    "color": "#FF9C55",
-    "emit": 1.2,
+    "color": "#FFB070",
+    "emit": 0.6,
     "size": [
      4.0,
      0.02,
@@ -234,7 +234,7 @@
     0.004
    ],
    "irradiance": 0.9,
-   "color": 2700,
+   "color": 3400,
    "camera": false
   },
   "fill": {
@@ -266,6 +266,6 @@
   "bounces": 16,
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
-  "white_balance_k": 3600
+  "white_balance_k": 3300
  }
 }

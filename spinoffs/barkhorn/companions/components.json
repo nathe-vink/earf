@@ -368,7 +368,7 @@
  "coin-polish": {
   "kind": "service",
   "maker": "the CNC shop, or a tumbling finisher",
-  "model": "Polishing one coin's edge: vibratory tumbling in plastic media with an acrylic polishing compound (a batch of 500 overnight), or vapour polishing; the faces are the sheet's own cast faces, masked through the laser work",
+  "model": "Polishing one coin's edge: vapour polishing after the CNC, the faces still masked (tumbling would strip the masking, a flame can craze it); the faces are the sheet's own cast faces",
   "usd": 0.3,
   "estimate": true,
   "supplier": "any",
@@ -390,6 +390,15 @@
   "usd": 0.4,
   "estimate": true,
   "supplier": "3M Bumpon SJ5302 or alike",
+  "price_date": "2026-10-20"
+ },
+ "coin-fill": {
+  "kind": "service",
+  "maker": "the laser shop",
+  "model": "Paint-filling one coin's engravings through the laser's masking: the back's globe flooded black (Smoke's white), the front's words white, scraped flush and dried before the masking is peeled (a lacquer or acrylic enamel for acrylic, e.g. One Shot lettering enamel)",
+  "usd": 0.35,
+  "estimate": true,
+  "supplier": "any laser or sign shop",
   "price_date": "2026-10-20"
  }
 }

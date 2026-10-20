@@ -85,7 +85,7 @@ def tiles(ground, src):
     made = []
     fpx = LENS / 36.0 * Ww
     for x, fl in zip(xs(), ORDER):
-        cx, cy = Ww / 2 + fpx * x / H, Hh / 2
+        cx, cy = Ww / 2 + fpx * x / (H - 0.006), Hh / 2           # projected from the coins' top faces, 6 up
         x0, y0 = int(round(cx - TILE / 2)), int(round(cy - TILE / 2))
         t = v[y0:y0 + TILE, x0:x0 + TILE]
         yy, xx = np.mgrid[:TILE, :TILE] / TILE - 0.5

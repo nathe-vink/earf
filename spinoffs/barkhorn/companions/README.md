@@ -447,8 +447,14 @@ loader, `icons_real.py --coin`; the Coin ident) made real. Every dimension below
 
 **The globe, three ways** (proofs below; all three are modelled, filed and costed):
 - **A, reverse-engraved (recommended):** the brand's stroke globe (`earth.edge_lines`, lines 0.6 wide) laser-engraved
-  0.2 deep into the back face from a mirrored file. From the front it is frosted lines 6 mm down in the tint. It works
-  in all eight tints, it is the cheapest, and it is the most acrylic.
+  0.2 deep into the back face from a mirrored file, so from the front it reads the right way round, 6 mm down in the
+  tint. It works in all eight tints, it is the cheapest, and it is the most acrylic.
+  - **The fill (the lead's test):** flat on white paper, frost alone nearly vanished, and a white paint fill was worse
+    (white seen through the tint against white paper). Filled black, the globe reads in every tint, like the leading in
+    stained glass and like the brand's black stroke mark (`renders/2026-10-20/barkhorn/coin/fills.png`: frost, white,
+    black, left to right, in Ice, Acid and Haze).
+  - So the globe is paint-filled black, except in Smoke, where black would vanish, so Smoke's is white. The words on
+    the front are filled white: they are seen directly, not through the tint. The fill adds about $0.35 a coin.
 - **B, printed in colour:** the six-colour globe (the flush discs) UV-printed on the back of a Fog coin, colour first
   and a white underlay over it (choked 0.08 so no white halo shows), then sealed. It is the most legible and the most
   "brand". But it is clear only, so the guest's colour is lost, and a print can scuff.
@@ -457,7 +463,7 @@ loader, `icons_real.py --coin`; the Coin ident) made real. Every dimension below
 
 **The edge:** plain (rounded and polished) or reeded: 100 grooves 0.3 deep milled across it, like money. Reeding
 catches the light along the edge and reads as currency in the hand; it costs about $0.45 a coin more at 1,000.
-**Recommended: A with a reeded edge.**
+**Recommended: A, black-filled, with a reeded edge.**
 
 ![The concept sheet](../../../renders/2026-10-20/barkhorn/coin/sheet-proof.png)
 
@@ -467,21 +473,22 @@ catches the light along the edge and reads as currency in the hand; it costs abo
   - `coin-A-1-cut`: the 40 mm circle.
   - `coin-A-2-back-globe-MIRRORED`: the globe, mirrored. It's run with the coin face down, so it reads right from the
     front.
-  - `coin-A-3-front-words`: the words, as read.
+  - `coin-A-3-front-words`: the words, as read. Both engravings are paint-filled (the fill is a step, not a layer).
   - `coin-A-all-layers`: all three, registered.
   - `nest-600x400`: 104 coins on a 600 × 400 bed, cut, front and back layers registered.
   - B's print file (each colour and the white underlay, mirrored) and C's inlay cut file, for the faces not chosen.
 - **The route:**
   1. Cut the sheet's coins with its masking left on.
-  2. Engrave the words through the front's masking.
-  3. Lift the coins out, flip each one back into its own hole in the sheet's skeleton (the skeleton is the jig), and
-     engrave the mirrored globe through the back's masking.
-  4. On a CNC router, hold 24 coins in a vacuum fixture. Round both arrises 1.5 with a roundover cutter, then mill the
+  2. On a CNC router, hold 24 coins in a vacuum fixture. Round both arrises 1.5 with a roundover cutter, then mill the
      100 reeds (a 0.9 ball cutter, 0.3 deep).
-  5. Polish the edges by vibratory tumbling in plastic media with an acrylic compound (a batch of 500 overnight), or
-     by vapour polishing. Don't flame-polish: the flame would craze the engraving. The faces stay the cast sheet's own,
-     under the masking until the end.
-  6. Peel, check, bag.
+  3. Vapour-polish the edges. Tumbling would strip the masking, and a flame can craze the acrylic. The faces stay the
+     cast sheet's own, under the masking until the end.
+  4. Put the coins back in the sheet's skeleton (the skeleton is the jig) and engrave the words through the front's
+     masking.
+  5. Flip each coin over in its own hole and engrave the mirrored globe through the back's masking.
+  6. Paint-fill both engravings through the masking: the globe black (Smoke's white) and the words white. Scrape
+     flush and dry.
+  7. Peel, check, bag.
 - **The request column** (`earf_coin_column.py`, `out-earf-coin-column/`, it passes its checks): a water-clear cast tube
   50 × 4 wall, 210 long (42 bore: 1 mm round a coin; holds 33), bonded into a Smoke acrylic base 96 × 24 with a brass
   cap ring.
@@ -489,7 +496,7 @@ catches the light along the edge and reads as currency in the hand; it costs abo
     tube holds the next one back.
   - A finger through the notch at the back pushes the lowest coin out, so the queue plays from the bottom up.
   - **$322 one-off** at the kit's shop rates (`out-earf-coin-column/bom.md`).
-- **BOM:** a boxed set of eight is **$30** at the kit's rates (`out-earf-coin/bom.md`, sheet plus the shop's work as
+- **BOM:** a boxed set of eight is **$33** at the kit's rates (`out-earf-coin/bom.md`, sheet plus the shop's work as
   estimated lines, plus a $9 box). Per coin, by run (`coin.py --costs`; estimates from shop rates, not quotes):
 
 | a coin (the pick), USD | 500 | 1,000 | 5,000 |
@@ -497,21 +504,22 @@ catches the light along the edge and reads as currency in the hand; it costs abo
 | sheet | 0.26 | 0.26 | 0.26 |
 | laser | 1.40 | 1.17 | 0.93 |
 | edge | 1.33 | 1.11 | 0.89 |
+| paint fill | 0.45 | 0.35 | 0.25 |
 | polish | 0.40 | 0.30 | 0.20 |
 | check and bag | 0.15 | 0.15 | 0.15 |
 | setup | 1.20 | 0.60 | 0.12 |
-| scrap 5 % | 0.24 | 0.18 | 0.13 |
-| **total** | **4.98** | **3.77** | **2.68** |
+| scrap 5 % | 0.26 | 0.20 | 0.14 |
+| **total** | **5.46** | **4.14** | **2.95** |
 
 | face, edge | 500 coins | 1,000 coins | 5,000 coins |
 |---|---|---|---|
-| engraved, reeded | $4.98 | $3.77 | $2.68 |
-| engraved, plain | $4.46 | $3.33 | $2.33 |
+| engraved, reeded | $5.46 | $4.14 | $2.95 |
+| engraved, plain | $4.93 | $3.70 | $2.60 |
 | printed, reeded | $6.35 | $4.72 | $3.20 |
 | cast, reeded | $18.42 | $13.64 | $9.17 |
 
 - **Retail (merch):** a boxed set of eight (a Smoke acrylic slide-lid box, the coins standing in spectrum order)
-  costs about $39 to make at 1,000; **$95** proposed.
+  costs about $42 to make at 1,000; **$95** proposed.
 
 **The ritual.** A bowl of all eight colours stands at the door, and each guest picks theirs. That coin is their one
 request. At the decks, Ginza's "Sorry, no requests" card becomes a small Smoke acrylic block engraved **ONE COIN, ONE

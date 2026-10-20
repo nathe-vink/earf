@@ -19,11 +19,13 @@ def parts(P):
              pieces={'body': (C.body(EDGE), 'coin'), 'globe': art['globe-engraved'], 'words': art['words']},
              notes=['one in each tint (Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke), 6 mm cast acrylic',
                     'laser-cut 40 across from the sheet; the globe engraved 0.2 deep into the BACK face from the '
-                    'mirrored file (the coin face down in the sheet\'s skeleton), the words 0.12 into the FRONT',
+                    'mirrored file (the coin face down in the sheet\'s skeleton), the words 0.12 into the FRONT; '
+                    'both paint-filled through the masking: the globe black (Smoke\'s white), the words white',
                     'then both edges rounded 1.5 (a roundover cutter) and 100 reeds milled across the edge (a 0.9 ball '
                     'cutter, 0.3 deep), and the edge tumble- or vapour-polished; the faces stay the sheet\'s own']),
         Part('laser', None, Bought('coin-laser'), qty=8),
         Part('edge', None, Bought('coin-edge'), qty=8),
+        Part('fill', None, Bought('coin-fill'), qty=8),
         Part('polish', None, Bought('coin-polish'), qty=8),
         Part('box', None, Bought('coin-box')),
     ]

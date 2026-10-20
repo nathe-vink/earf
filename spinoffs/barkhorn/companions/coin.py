@@ -245,7 +245,7 @@ def disc_blank():
 
 def art_solids():
     """Every face's art as solids in the coin's frame: {name: (solid, finish)}."""
-    out = {'globe-engraved': (_extrude(globe_lines(), *ENGRAVE), 'frost'),
+    out = {'globe-engraved': (_extrude(globe_lines(), *ENGRAVE), 'fill'),
            'words': (_extrude(words(), *WORDS_Z), 'frost'),
            'underlay': (_extrude(_underlay(), PRINT[2], PRINT[3]), 'print-white'),
            'globe-cast': (_extrude(globe_solid(), *INLAY), 'inlay')}
@@ -415,6 +415,8 @@ def nest(out, sheet=(600.0, 400.0), gap=3.0, margin=10.0):
 RUNS = (500, 1000, 5000)
 RATE = {500: 120.0, 1000: 100.0, 5000: 80.0}
 SECONDS = dict(laser=12 + 20 + 10, edge=40, edge_plain=25)
+FILL = {500: 0.45, 1000: 0.35, 5000: 0.25}   # the engravings paint-filled (globe black, words white) through the masking:
+                                             # flooded, scraped, dried, before the peel
 SETUP_USD = 600.0
 FACE_EXTRA = {'engraved': (0.0, 0.0), 'printed': ({500: 0.9, 1000: 0.7, 5000: 0.45}, 200.0),
               'cast': ({500: 11.0, 1000: 8.5, 5000: 6.0}, 900.0)}       # B: UV print, white and seal; C: an embedment
@@ -429,6 +431,7 @@ def costs(face='engraved', edge='reeded'):
         extra, setup_x = FACE_EXTRA[face]
         line = {'sheet': sheet, 'laser': SECONDS['laser'] * r,
                 'edge': SECONDS['edge' if edge == 'reeded' else 'edge_plain'] * r,
+                'paint fill': FILL[n] if face == 'engraved' else 0.0,
                 'polish': {500: 0.40, 1000: 0.30, 5000: 0.20}[n], 'check and bag': 0.15,
                 'setup': (SETUP_USD + setup_x) / n}
         if extra:
@@ -475,6 +478,7 @@ def tint_deep(swatch, passes=2.0, k=1.0):
 # Smoke cast lighter than its swatch (a transparent grey, as Perspex 9T20 is beside the speakers' black): at the
 # swatch's density the coin rendered L 4 on paper and its globe was lost (round 33's tint check)
 TINT_K = {'Ember': 1.0, 'Dust': 1.0, 'Acid': 1.0, 'Poison': 1.0, 'Ice': 1.0, 'Haze': 1.0, 'Fog': 1.0, 'Smoke': 0.55}
+FILL_WHITE = ('Smoke',)                # black lines would vanish in Smoke: its globe is filled white
 RADIUS = 0.006                         # the tint's `deep` is the colour after 6 mm, the coin's thickness
 
 
@@ -489,6 +493,8 @@ def variants():
         else:
             deep = tint_deep(sw, k=TINT_K[name])
         out[key] = {'deep': deep, 'inlay': tint_deep(sw, passes=1.0, k=TINT_K[name] * 0.9), 'swatch': sw}
+        if name in FILL_WHITE:
+            out[key]['materials'] = {'fill': {'color': '#EEEEEA', 'roughness': 0.8, 'specular': 0.2}}
     return out
 
 
@@ -496,8 +502,12 @@ def materials():
     import earth as E
     m = {
         'coin': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '$deep', 'radius': RADIUS, 'roughness': 0.03},
-        # the engraving's frost: a rough face that scatters what reaches it, white (as a lasered trench in cast acrylic)
+        # the words' engraving in the front face, paint-filled white (seen directly, not through the tint)
         'frost': {'preset': 'satin_paint', 'color': '#EEEEEA', 'roughness': 0.8, 'specular': 0.2},
+        # the globe's engraving in the back, paint-filled black (the lead's test after the concept sheet: frost alone or a
+        # white fill, seen through the tint against white paper, all but vanished; black reads in every tint as the
+        # brand's black stroke mark, like the leading in stained glass). Smoke's is white (FILL_WHITE)
+        'fill': {'preset': 'satin_paint', 'color': '#1C1A18', 'roughness': 0.5, 'specular': 0.3},
         'inlay': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '$inlay', 'radius': 0.001, 'roughness': 0.03,
                   'ior': 1.02},
         'print-white': {'preset': 'satin_paint', 'color': '#F4F3EF', 'roughness': 0.5, 'specular': 0.2},

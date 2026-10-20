@@ -78,10 +78,10 @@ def hero(flavour='acid'):
     # for the zinc's sheen (a metal shows what it mirrors: at 0.25 sky it rendered black)
     props += bokeh([[-0.50, 1.6, 0.70], [-0.12, 2.0, 0.92], [0.30, 1.8, 0.78], [0.62, 2.3, 1.02], [0.06, 2.5, 1.10],
                     [-0.85, 2.3, 0.92], [0.95, 1.9, 0.80]], emit=40.0, r=0.03)
-    props += [{'kind': 'kit', 'shape': 'box', 'material': 'glow', 'color': '#FF9C55', 'emit': 1.2, 'size': [4.0, 0.02, 0.5],
+    props += [{'kind': 'kit', 'shape': 'box', 'material': 'glow', 'color': '#FFB070', 'emit': 0.6, 'size': [4.0, 0.02, 0.5],
                'position': [0.0, 2.6, 0.75], 'shadow': False}]
     tgt = [0.0, 0.002, 0.004]
-    cam = {'position': [0.040, -0.190, 0.105], 'target': tgt, 'lens_mm': 100, 'level': False, 'fstop': 2.8,
+    cam = {'position': [0.035, -0.155, 0.125], 'target': tgt, 'lens_mm': 100, 'level': False, 'fstop': 2.8,
            'focus': [0.0, -0.002, 0.004]}
     s = {'title': 'EARFcoin on the zinc', 'size': [1600, 1067], 'camera': cam,
          'set': {'kind': 'stage', 'props': props},        # no sweep: its floor would lie on the zinc's top
@@ -92,22 +92,22 @@ def hero(flavour='acid'):
                       'irradiance': 4.0, 'color': 2900, 'camera': False},
              # a soft warm top light, the counter's sheen
              'top': {'type': 'area', 'size_m': [0.6, 0.4], 'position': [0.10, 0.25, 0.55], 'target': tgt,
-                     'irradiance': 0.9, 'color': 2700, 'camera': False},
+                     'irradiance': 0.9, 'color': 3400, 'camera': False},
              'fill': {'type': 'area', 'size_m': [0.5, 0.4], 'orbit': {'azimuth_deg': 25, 'elevation_deg': 18, 'distance_m': 0.8},
                       'target': tgt, 'irradiance': 0.12, 'color': 3200, 'camera': False}},
          'render': {'samples': 384, 'adaptive': 0.008, 'denoise': True, 'clamp': 12, 'bounces': 16,
-                    'view': 'Khronos PBR Neutral', 'exposure': 0.0, 'white_balance_k': 3600}}
+                    'view': 'Khronos PBR Neutral', 'exposure': 0.0, 'white_balance_k': 3300}}
     return s
 
 
 def eight():
     """The eight in spectrum order, dealt in a fan on paper (each resting on the one before), three-quarters from the
     front in the pale studio."""
-    props = [piece('fan', [{'position': [-0.112, 0.012, 0.0], 'heading': -4}], flavours=SPECTRUM, s=30.0, arc=420.0,
+    props = [piece('fan', [{'position': [-0.118, 0.030, 0.0], 'heading': -16}], flavours=SPECTRUM, s=30.0, arc=520.0,
                    seed=4, **PICK)]
-    tgt = [-0.002, 0.040, 0.006]
-    cam = {'position': [0.01, -0.39, 0.33], 'target': tgt, 'lens_mm': 70, 'level': False, 'fstop': 8.0,
-           'focus': [-0.002, 0.040, 0.006]}
+    tgt = [-0.012, 0.016, 0.006]
+    cam = {'position': [-0.012, -0.40, 0.33], 'target': tgt, 'lens_mm': 70, 'level': False, 'fstop': 8.0,
+           'focus': [-0.012, 0.016, 0.006]}
     s = studio('EARFcoin, the eight', [1600, 1067], cam, props, key=0.9, fill=0.3, samples=256, sweep='#DDD8D0')
     # a low raking strip from the back left draws the frosted globes and the reeds
     s['lights']['rake'] = {'type': 'area', 'size_m': [0.5, 0.06], 'position': [-0.45, 0.35, 0.08], 'target': tgt,
