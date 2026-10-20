@@ -108,27 +108,29 @@ MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn abov
           ('woofer', 'ice', 'The 15-inch woofer through an Ice cabinet', 'The 15-inch woofer, behind the cloth when the cover&rsquo;s on.'),
           ]   # the grip (Poison) left the row of details with the lineup: four read as a set
 # the lamps (round 32d), the owner's picks of 2026-10-19 ("sick lamps. Add them to the site as well"): a pendant whose
-# tinted cover comes off on a quarter turn, and a table lamp whose ball sits low in a steel cup, both cast in the eight
-# tints, frosted within. Their particulars are the fab kits' (companions/dome_pendant.py and orb_table.py). The band
-# shows once every picture in LAMP_PICS is in site/img (made from renders/2026-10-19/barkhorn/lamps-site/)
+# tinted cover comes off on a quarter turn, and a table lamp whose ball sits low in a black acrylic base, both cast in the
+# eight tints, frosted within. Round 32f took the owner's notes: black hardware (no brass), the Orb plugged in with a
+# battery cartridge as its option, each tint cast to read as its speaker's when lit. Their particulars are the fab kits'
+# (companions/PARTICULARS.md). The band shows once every picture in LAMP_PICS is in site/img (made from
+# renders/2026-10-19/barkhorn/lamps-site/)
 LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
     ('dome', 'Dome', 'Pendant', 'Hung low over the bar. A quarter turn takes its cover off, and another puts a new colour on.',
-     'The Dome pendant lit, its Ember cover glowing beneath a brass hub',
+     'The Dome pendant lit, its Ember cover glowing beneath a black hub',
      [('Size', '200 mm across'), ('Shade', 'Cast acrylic, tinted outside and frosted within'),
-      ('Light', '2700 K, its source shielded inside the hub'), ('Fitting', 'Brass, with a quarter-turn catch'),
+      ('Light', '2700 K, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
       ('Covers', 'In all eight colours, sold singly')]),
-    ('orb', 'Orb', 'Table lamp', 'A ball of tinted acrylic sitting low in a steel cup. No cord, so it goes where the conversation is.',
-     'The Orb table lamp lit in Ember, sitting low in its blackened steel cup',
-     [('Size', '160 mm ball, 180 mm tall'), ('Weight', '2.6 kg'),
-      ('Light', '2200 to 2700 K, warmer as it dims, under a brass touch ring'),
-      ('Power', 'Cordless; charges over USB-C or on its tray'), ('Rating', 'IP44, for terraces and spilt drinks'),
+    ('orb', 'Orb', 'Table lamp', 'A ball of tinted acrylic sitting low in a black acrylic base. Plugged in, it stays put; with its battery, it goes where the conversation is.',
+     'The Orb table lamp lit in Ember, sitting low in its black acrylic base',
+     [('Size', '160 mm ball, 180 mm tall'), ('Weight', '2.0 kg'),
+      ('Light', '2200 to 2700 K, warmer as it dims, under a black touch ring'),
+      ('Power', 'USB-C, cable and adapter included; cordless for about ten hours with its battery cartridge, sold separately'), ('Rating', 'IP44, for terraces and spilt drinks'),
       ('Balls', 'In all eight colours, sold singly')]),
 ]
 LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band doesn't write one)
     'lamp-dome': (800, None), 'lamp-orb': (800, None),
     'lamps-orbs': (1200, 'Eight Orbs in a row, lit, in spectrum order: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke'),
     'lamps-domes': (1200, 'Eight Dome pendants hung in a row at one height, lit, one in each colour'),
-    'lamp-catch': (900, "The Dome's cover lowered off its brass hub, the catch's pins and slots in view"),
+    'lamp-catch': (900, "The Dome's cover lowered off its black hub, the catch's pins and slots in view"),
     'lamps-unlit': (800, 'An Orb and a Dome in Smoke, switched off: dark, polished acrylic with a pale core'),
 }
 KEYS = [c[0] for c in CLOUDS]
