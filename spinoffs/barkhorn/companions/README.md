@@ -426,3 +426,41 @@ Open on the hero:
 
 Smoked is the hardest tint for this treatment: lit from within it glows a warm grey, not a colour. The Ember frame
 shows the idea better.
+
+## Round 32e: Dome and Orb for earf.world
+
+The owner: "sick lamps. Add them to the site as well and work on some product images." Six frames for the site's pale
+paper page (`crystal_promo.py`; the finals' shots in `studio/shots/barkhorn/crystal-promo/final/`, the images in
+`renders/2026-10-19/barkhorn/crystal-promo/`):
+
+| Frame | Size | What it shows | From pass |
+|---|---|---|---|
+| `dome-hero` | 1600 × 2000 | Ember, lit, from a little below: the glowing underside, the rim, the brass hub | p3 |
+| `orb-hero` | 1600 × 2000 | Ember, lit, low, on pale oak: the crystal-ball silhouette, the brass touch ring, the pool | p2 |
+| `orbs` | 2400 × 800 | all eight lit, in spectrum order Ember to Smoke | p2 |
+| `domes` | 2400 × 800 | all eight at one height over a counter | p4 |
+| `catch` | 1800 × 1200 | the bayonet close, the cover lowered: pins and L-slots | p3 |
+| `unlit` | 1600 × 2000 | an Orb and a Dome in Smoke, switched off | p4 |
+
+![The site set](../../../renders/2026-10-19/barkhorn/crystal-promo/sheet.png)
+
+**The studio.** A paper sweep in #EAE4DA, washed by its own hidden area light. Each frame's wash is calibrated, in level
+and in colour channel by channel, so the backdrop's top corner renders the page's #EAE4DA (the first passes read pink,
+then lavender-grey). A ray through an Orb crosses 12 surfaces, so the studio sets 24 bounces and 20 transmission
+bounces (the engine's 8 rendered the unlit ball black: **Planet, the same for any Orb**). The liner's frost was opal
+(clear 0.1) and blocked the light; it is 0.85 in `crystal.py`.
+
+**Critic.** Two fresh critics per frame per pass, the mean, with the coordinator's stop (two passes in a row gaining
+under 0.5, then the best two duelled blind). Four passes; the means and duels are in `critic/LOG.md`. The best is the
+Orb hero at **6.25**; the others land at 5.0 to 5.75 (the Dome hero 5.5, the Orbs row 5.5, the Domes row 4.5, the catch
+5.5, the unlit pair 5.5). **The set does not meet the 6.0 gate.** What the critics still say, every pass:
+- it reads as clean CG: the brass is too smooth (no brushing), the paper and the walls are flat, the glows fill flat;
+- the pale Domes (Ice, Haze, Fog) show a pink hotspot at the crown;
+- the Domes row sits tight to the top edge.
+
+Next, if the owner wants the gate: a brushed-brass shader (an anisotropic, grained material in the engine), a
+gradient in the liner's glow (brighter at the lamp), the Domes row reframed, and more samples.
+
+**Read test** (600 px, a judge told nothing): see below.
+
+**Site particulars:** `PARTICULARS.md`, read from the fab kits, with what is unconfirmed marked.
