@@ -246,7 +246,9 @@ def _slab(r):
 
 # --- the shots -------------------------------------------------------------------------------------------------------
 def product(mode):
-    return {'def': os.path.relpath(DEF, ROOT), 'flavour': mode, 'instances': [{'position': [0, 0, 0], 'rotate_z': 0}]}
+    # by day the faces' glow discs are off: an unlit emitter inside the sheet renders black
+    return {'def': os.path.relpath(DEF, ROOT), 'flavour': mode, 'instances': [{'position': [0, 0, 0], 'rotate_z': 0}],
+            **({'hide': ['face-*']} if mode == 'day' else {})}
 
 
 def cam(size, lens=85.0, dist=1.75, elev=22.0, tx=0.0):

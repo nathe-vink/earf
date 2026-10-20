@@ -348,8 +348,8 @@ def globe(bpy, name, p, kit):
         M = (Matrix.Translation(Vector(s['position'])) @ Matrix.Rotation(math.radians(s.get('rotate_z', p.get('rotate_z', 0))), 4, 'Z')
              @ Matrix.Diagonal((k, k, k, 1.0)))
         for pname, t in tpl.items():
-            if pname.startswith('chip-'):
-                continue
+            if pname.startswith('chip-') or (mode == 'day' and pname.startswith('face-')):
+                continue                        # (by day the faces' glow discs are off: an unlit emitter renders black)
             mname = _mname(pdef, pname)
             if mname:
                 objs.append(_link(bpy, f'{name}-{pname}#{i}', t, gm(mode, mname), M))

@@ -418,5 +418,33 @@
   "estimate": true,
   "supplier": "any",
   "price_date": "2026-10-20"
+ },
+ "globe-uv-ring": {
+  "kind": "led",
+  "maker": "any",
+  "model": "A ring of twelve 395 nm UV-A LEDs (3528 SMD, about 1 W in all) on an aluminium PCB 48-62 mm, 5 V via a constant-current driver, with a touch dimmer and a USB-C socket; set below the base's rim so nobody looks into it",
+  "usd": 22.0,
+  "estimate": true,
+  "supplier": "AliExpress or a PCB house (JLCPCB assembly)",
+  "price_date": "2026-10-20",
+  "note": "an IEC 62471 photobiological assessment is needed before sale (expected Exempt or RG1 at this power)"
+ },
+ "globe-glow": {
+  "kind": "render",
+  "maker": "-",
+  "model": "(the render's stand-in for the fluorescent edge glow: nothing to buy)",
+  "usd": 0.0,
+  "estimate": true,
+  "supplier": "-",
+  "price_date": "2026-10-20"
+ },
+ "globe-chip": {
+  "kind": "render",
+  "maker": "-",
+  "model": "(the render's hue-check chips: nothing to buy)",
+  "usd": 0.0,
+  "estimate": true,
+  "supplier": "-",
+  "price_date": "2026-10-20"
  }
 }
