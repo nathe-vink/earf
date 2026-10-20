@@ -59,8 +59,11 @@ def props(v):
     # bead-blasted back half of the tube glowing behind the queue)
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'column',
                 'spots': [[round(RP.DJ['x'] + 0.80, 4), round(C['y1'] - 0.30, 4), zt]], 'rotate_z': 0.0,
-                'coins': ['ice', 'ember', 'acid', 'smoke', 'haze', 'dust', 'fog', 'poison', 'ember', 'ice', 'acid', 'haze',
-                          'dust', 'smoke'], 'out': 6.0, 'base_glow': 1.0, 'back_glow': 1.0})   # r31-coin 410356d, tuned from this stool
+                # a busy night (the lead, 2026-10-20: change what's in it, not the light): 24 coins, all eight tints, the
+                # light ones spread through, two Smoke at most, never two alike together, a clear Fog every five or six
+                # carrying the base's light out to its rim
+                'coins': ['acid', 'ember', 'poison', 'ice', 'dust', 'fog', 'haze', 'acid', 'ember', 'dust', 'poison', 'fog',
+                          'smoke', 'acid', 'ice', 'dust', 'haze', 'fog', 'poison', 'ember', 'acid', 'ice', 'smoke', 'dust'], 'out': 6.0, 'base_glow': 1.0, 'back_glow': 1.0})   # r31-coin 410356d, tuned from this stool
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan',
                 'spots': [[4.35, round(C['y0'] + 0.16, 4), zt]], 'flavours': ['dust', 'fog', 'poison'], 'heading': 15.0})
     H = RP.HOST
