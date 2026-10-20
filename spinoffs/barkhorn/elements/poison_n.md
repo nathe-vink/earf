@@ -35,3 +35,16 @@ The sulphur vents and fumes barely register at this distance.
   - The algae is a flat, smeared neon layer: no clumping, no debris, no fade into the fog.
   - The speaker has no contact shadow on the boards and is too clean for the fog.
   - The dock's reflection is a dark slab, and the sign's type is too crisp.
+
+**Proof 2** (`proofs31/element-poison_n2-p02.jpg`): the bloom clumped (a noise blend), floating branches, the sign aged, a waterline.
+- **Read test:** passes again.
+- **Realism:** 4.5 and 4.0 (mean 4.25, −0.25). The critics' tells: the speaker still pasted in, the algae still flat, the fog a flat gradient, and the pier's gantry now reads "gallows-like".
+
+**Proof 3** (`proofs31/element-poison_n2-p03.jpg`): a low backlit sun, a key light kept out of the mist, mist over the speaker, wetter scum, more open water (cover 0.74).
+- **Read test:** passes. The judge saw "a translucent green box speaker… stands on a broken wooden jetty in a foggy lake with glowing green water, between dead tree stumps and an old wooden gallows-like frame, while a 'DANGER – TOXIC ALGAE – AVOID CONTACT' sign stands in the water in the lower left."
+- **Realism:** 4.5 and 4.0 (mean 4.25, ±0). The tells:
+  - The speaker is lit flat, without haze, a wet sheen or a contact shadow, and its edges are crisp in the fog.
+  - The water is an even, saturated neon green that reads as an emissive shader, with smeared reflections and no ripples at the posts.
+  - The props look like a staged kit: the gallows frame, the cloned stumps, a pristine sign, twigs laid on the surface.
+
+**N2 is stopped.** Two passes in a row gained less than 0.5 (−0.25, then ±0). It reads as poison every time, but its realism has held at about 4.25, well short of 6.

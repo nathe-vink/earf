@@ -460,7 +460,7 @@ def algae_water(bpy, name, p, kit):
     L(cut.outputs['Result'], col.inputs['Factor']); col.inputs['A'].default_value = water; L(ramp.outputs['Color'], col.inputs['B'])
     L(col.outputs['Result'], b.inputs['Base Color'])
     rgh = nt.nodes.new('ShaderNodeMapRange'); L(cut.outputs['Result'], rgh.inputs['Value'])
-    rgh.inputs['To Min'].default_value = 0.03; rgh.inputs['To Max'].default_value = 0.55
+    rgh.inputs['To Min'].default_value = 0.03; rgh.inputs['To Max'].default_value = p.get('scum_rough', 0.55)
     L(rgh.outputs['Result'], b.inputs['Roughness'])
     b.inputs['Specular IOR Level'].default_value = 0.5
     bump = nt.nodes.new('ShaderNodeBump'); bump.inputs['Strength'].default_value = 0.35; bump.inputs['Distance'].default_value = 0.004
