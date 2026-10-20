@@ -205,10 +205,14 @@ VIEWS['sink'] = {'title': 'the sink in Smoke, a detail',
                  # p4 (p3 3.5, 4.5: the slab's face near black (5): the dense cast (radius 0.05) absorbed the glow
                  # before it reached the faces, and the spot alone lit the basin pale): the cast less dense (0.12), the
                  # glow 2.0; the spot 3 W at 20 deg; exposure 1.0; panned right so the black return leaves the frame
-                 'camera': {'position': [10.5, 1.35, 1.08], 'target': [11.25, 0.40, 0.90], 'lens_mm': 50, 'level': True,
-                            'fstop': 5.6, 'focus': [10.98, 0.47, 0.86]},
-                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 2.0, 'sink_radius': 0.12,
-                              'sink_glow_col': '#FF9A4A', 'sink_spot': 3.0, 'sink_spot_cone': 20.0, 'exposure': 1.0}}
+                 # p5 (p4 5.0, 4.5: the slab solid now but opaque, Corian-like, its face a flat 53; the basin near
+                 # white; a third of the frame the black beyond the alcove (image left is +x here)): the glow 6.0; the
+                 # spot 1.2 W at 34 deg; tighter on 65 mm and panned toward -x; f/8; 2950 K
+                 'camera': {'position': [10.3, 1.3, 1.1], 'target': [10.95, 0.30, 0.88], 'lens_mm': 65, 'level': True,
+                            'fstop': 8.0, 'focus': [10.98, 0.47, 0.86]},
+                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 6.0, 'sink_radius': 0.12,
+                              'sink_glow_col': '#FF9A4A', 'sink_spot': 1.2, 'sink_spot_cone': 34.0, 'exposure': 1.0,
+                              'wb': 2950}}
 S.VIEWS = VIEWS
 _shot = S.shot
 
