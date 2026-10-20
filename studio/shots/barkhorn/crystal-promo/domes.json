@@ -1,0 +1,197 @@
+{
+ "size": [
+  2400,
+  800
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -3.4,
+   1.48
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.7
+  ],
+  "lens_mm": 50,
+  "level": false,
+  "fstop": 8.0,
+  "focus": [
+   0.0,
+   0.0,
+   1.66
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAE4DA",
+  "width": 10.0,
+  "front": 6.0,
+  "depth": 0.4,
+  "radius": 0.3,
+  "height": 4.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     {
+      "position": [
+       -1.05,
+       0.0,
+       1.6
+      ],
+      "flavour": "ember"
+     },
+     {
+      "position": [
+       -0.75,
+       0.0,
+       1.6
+      ],
+      "flavour": "dust"
+     },
+     {
+      "position": [
+       -0.44999999999999996,
+       0.0,
+       1.6
+      ],
+      "flavour": "acid"
+     },
+     {
+      "position": [
+       -0.15,
+       0.0,
+       1.6
+      ],
+      "flavour": "poison"
+     },
+     {
+      "position": [
+       0.15,
+       0.0,
+       1.6
+      ],
+      "flavour": "ice"
+     },
+     {
+      "position": [
+       0.44999999999999996,
+       0.0,
+       1.6
+      ],
+      "flavour": "haze"
+     },
+     {
+      "position": [
+       0.75,
+       0.0,
+       1.6
+      ],
+      "flavour": "fog"
+     },
+     {
+      "position": [
+       1.05,
+       0.0,
+       1.6
+      ],
+      "flavour": "smoke"
+     }
+    ],
+    "flavour": "ember",
+    "shade_glow": 2.2,
+    "lamp_w": 12.0,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D2C8",
+  "horizon": "#DED8CE",
+  "ground": "#D6CEC2",
+  "strength": 0.35
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    0.5
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 42,
+    "distance_m": 2.6
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.7
+   ],
+   "irradiance": 0.6,
+   "color": 4300
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.7
+   ],
+   "irradiance": 0.25,
+   "color": 4300
+  },
+  "bgwash": {
+   "type": "area",
+   "size_m": [
+    3.5,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -0.4,
+    3.0
+   ],
+   "target": [
+    0.0,
+    0.4,
+    1.8
+   ],
+   "irradiance": 1.5,
+   "color": 4300,
+   "camera": false,
+   "specular": 0.0
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.15,
+  "white_balance_k": 4300
+ },
+ "title": "Dome and Orb for earf.world: domes"
+}

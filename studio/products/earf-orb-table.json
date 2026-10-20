@@ -35,7 +35,7 @@
    "absorb": "#EFE6D8",
    "roughness": 0.5,
    "radius": 0.02,
-   "clear": 0.1,
+   "clear": 0.85,
    "glow": 0.25,
    "glow_color": "#FF9A50"
   },
@@ -136,7 +136,12 @@
    "deep": "#8A888E",
    "frost": "#8A888E",
    "glow": "#C8C0D8",
-   "shade_glow": "#8A888E"
+   "shade_glow": "#8A888E",
+   "materials": {
+    "body": {
+     "radius": 0.012
+    }
+   }
   },
   "clear": {
    "deep": "#F4F6F5",

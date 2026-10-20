@@ -379,7 +379,7 @@ They are built as fab-kit products (`crystal.py`, `dome_pendant.py`, `orb_table.
   through a sealed window into a brass-lined port under the ball.
 - **The ball lifts off**, because nothing in it is electrical, so Orbs swap colour just as Domes do. It rests on a
   silicone ring in an 18 mm cup, enough to stop a nudge rolling it.
-- **The weight** is about 2.6 kg with the ball.
+- **The weight** is about 3.2 kg with the ball (from the CAD: the ball 1.2, the base 1.4, the brass ring 0.3); see PARTICULARS.md.
 - **Height:** at 180 it is below the brief's 250–300 mm, by the owner's choice (squat, not raised).
 
 | | Dome pendant | Orb table lamp |

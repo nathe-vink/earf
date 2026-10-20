@@ -36,14 +36,17 @@ import bar_lamps as B                                               # noqa: E402
 # lighter, or it goes black
 MATERIALS = dict(B.MATERIALS,
                  body={'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '$deep', 'radius': 0.005, 'roughness': 0.04},
+                 # mostly rough transmission (clear 0.85): bead-blasted acrylic 2.5 thick passes most light diffusely; at
+                 # the preset's 0.1 it rendered as opal and turned the unlit Smoke ball solid black (round 32e)
                  liner={'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#EFE6D8', 'roughness': 0.5, 'radius': 0.02,
-                        'clear': 0.1, 'glow': 0.25, 'glow_color': '#FF9A50'},
+                        'clear': 0.85, 'glow': 0.25, 'glow_color': '#FF9A50'},
                  led={'preset': 'emit', 'color': '#FFC890', 'strength': 0.0},
                  window={'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#F4F2EE', 'radius': 0.05, 'roughness': 0.2},
                  silicone={'preset': 'rubber', 'color': '#1A1A1A'},
                  gold={'preset': 'metal', 'color': '#D8B45A', 'roughness': 0.2})
 VARIANTS = copy.deepcopy(B.VARIANTS)
 VARIANTS['smoked'].setdefault('materials', {})['body'] = {'radius': 0.0055}     # 0.008 read cream, not smoke (critic p2)
+VARIANTS['smoke'].setdefault('materials', {})['body'] = {'radius': 0.012}       # Smoke at 0.005 read black (round 32e)
 
 GAP, LT, SKIN = 1.0, 2.5, 3.0          # the liner 1 mm in from the shell, 2.5 thick; the inner skin 3
 
@@ -193,7 +196,7 @@ def orb_parts(p=O):
         Part('grommet', grommet, Machined('brass', 'lathe'), finish='brass', group='ball',
              notes=['lines the port and closes the three layers there, bonded']),
         Part('base', base, Machined('steel', 'lathe'), finish='steel', group='base',
-             notes=['mild steel, blackened and waxed (or black e-coat): 120 x 30, its weight with the ball\'s about 2.6 kg; '
+             notes=['mild steel, blackened and waxed (or black e-coat): 120 x 30, its weight with the ball\'s about 3.2 kg; '
                     'the cup turned in it and the ring together']),
         Part('ring', ring, Machined('brass', 'lathe'), finish='brass', group='base',
              notes=['brass, satin, insulated from the base: the touch (tap to switch, hold to dim, 2200 to 2700 K)']),
