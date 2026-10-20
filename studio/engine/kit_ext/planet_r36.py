@@ -280,6 +280,15 @@ def altar(bpy, kit, p, objs):
             y0 = A['y0'] + i * B + 0.001; z0 = Z['z'] + k * B + 0.001
             dx = rnd.uniform(0.0, 0.012)
             bls[rnd.randrange(len(tones))].box(L - 0.075 - dx, y0, z0, L - 0.004, y0 + B - 0.0012, z0 + B - 0.0012)
+    if p.get('altar_lining', 'endgrain') == 'fir':
+        # r37 (the lead, 2026-10-20: the blocks read as a tile grid in every pass): the shell's fir, boards running up
+        fb = [Mesh(f'altar-fir-{t}') for t in range(3)]; y = A['y0']; k = 0
+        while y < A['y1'] - 0.01:
+            fb[(k * 2) % 3].box(L - 0.03, y + 0.002, Z['z'], L - 0.004, min(y + 0.136, A['y1']), A['z1'])
+            y += 0.14; k += 1
+        for t, (bm_, tint) in enumerate(zip(fb, ('#5A3C26', '#4E3420', '#64442C'))):
+            objs.append(bm_.object(bpy, LK.fir(bpy, vertical=True, tint=tint, mix=0.45), bevel=0.003))
+        bls = []
     for t, (bm_, (lo, hi)) in enumerate(zip(bls, tones)):
         if bm_.bm.verts:
             objs.append(bm_.object(bpy, end_grain(bpy, f'oak-endgrain-{t}', lo, hi), bevel=0.002))

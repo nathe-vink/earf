@@ -18,7 +18,7 @@ import planet_r36 as K                                               # noqa: E40
 import r37_plan as R                                                 # noqa: E402
 
 LK = K.LK
-DEFAULTS = dict(colourway='neutral', chair_leather=R.CHAIR_LEATHER, banq_col=R.BANQ_COL, sink_deep=R.SINK_DEEP,
+DEFAULTS = dict(altar_lining='fir', colourway='neutral', chair_leather=R.CHAIR_LEATHER, banq_col=R.BANQ_COL, sink_deep=R.SINK_DEEP,
                 sink_glow_col=R.SINK_GLOW, decks='earf', disc_col='#FFD2A0')
 
 
@@ -150,8 +150,106 @@ def ginza(bpy, kit, p, objs):
         print('card: no text', e)
 
 
+
+# --- the sink in Smoke, as smoked glass (the lead, 2026-10-20: drop the glow; a hidden lamp in a tinted block reads as
+# a lit Corian box at any level) ---------------------------------------------------------------------------------------
+def _bowl_cutter(bpy, cx, cy, top, bx, by, D, f, seg=96, n=24):
+    """A soft basin: an elliptical bowl `D` deep, its wall eased into the top by a radius `f` at the rim; a closed mesh
+    for the boolean."""
+    import bmesh, math
+    from mathutils import Vector
+    prof = []                                          # (radial offset from the ellipse, z below the top)
+    for k in range(n + 1):                             # the bowl: a half-ellipsoid D - f deep under the fillet
+        b = math.pi / 2 * (n - k) / n
+        prof.append((math.cos(b), -f - (D - f) * math.sin(b), 'bowl'))
+    for k in range(1, n // 2 + 1):                     # the fillet: from vertical at depth f to the top at offset f
+        a = math.pi / 2 * k / (n // 2)
+        prof.append((1.0, -f + f * math.sin(a), f - f * math.cos(a)))
+    prof.append((1.0, 0.02, f + 0.01))
+    me = bpy.data.meshes.new('sink37-cut'); bm = bmesh.new(); rings = []
+    for s_, z, d in prof:
+        ring = []
+        for j in range(seg):
+            t = 2 * math.pi * j / seg
+            if d == 'bowl':
+                x, y = bx * s_ * math.cos(t), by * s_ * math.sin(t)
+            else:
+                x, y = (bx + d) * math.cos(t), (by + d) * math.sin(t)
+            ring.append(bm.verts.new(Vector((cx + x, cy + y, top + z))))
+        rings.append(ring)
+    bot = bm.verts.new(Vector((cx, cy, top - D)))
+    for j in range(seg):
+        bm.faces.new((bot, rings[0][(j + 1) % seg], rings[0][j]))   # rings[0] is the bottom (s = cos(pi/2) = 0)
+    for a, b in zip(rings, rings[1:]):
+        for j in range(seg):
+            bm.faces.new((a[j], a[(j + 1) % seg], b[(j + 1) % seg], b[j]))
+    bm.faces.new(rings[-1])
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-6)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    for fc in bm.faces:
+        fc.smooth = True
+    bm.to_mesh(me); bm.free()
+    ob = bpy.data.objects.new('sink37-cut', me); bpy.context.scene.collection.objects.link(ob)
+    return ob
+
+
+def sink(bpy, kit, p, objs):
+    """The alcove in the shell's fir, boards running up; a floating slab in the Cloud's Smoke (cast acrylic, polished),
+    read by what it reflects and by its arrises; a soft bowl 120 deep with a 30 radius at the rim and a steel waste; a
+    brushed-steel spout and a separate lever, each on its own escutcheon. Its light is the room's: a narrow warm
+    downlight into the bowl, a hidden strip under the slab's front edge, a wash down the boards."""
+    A = R.ALCOVE; S = R.SINK37
+    bk = K.Mesh('alcove-back'); bk.box(A['x0'], 0.001, 0.0, A['x1'], 0.003, A['z1'])
+    objs.append(bk.object(bpy, K.principled(bpy, 'alcove-shadow', '#0A0806', rough=0.9)))
+    boards = [K.Mesh(f'alcove-fir-{k}') for k in range(3)]; x = A['x0']; k = 0
+    while x < A['x1'] - 0.01:
+        boards[(k * 2) % 3].box(x + 0.002, 0.004, 0.0, min(x + 0.136, A['x1']), A['depth'], A['z1'])
+        x += 0.14; k += 1
+    for k, (m, tint) in enumerate(zip(boards, ('#5A3C26', '#4E3420', '#64442C'))):
+        objs.append(m.object(bpy, LK.fir(bpy, vertical=True, tint=tint, mix=0.45), bevel=0.003))
+    hd = K.Mesh('alcove-head'); hd.box(A['x0'] - 0.02, 0.0, A['z1'], A['x1'] + 0.02, A['depth'] + 0.04, A['z1'] + 0.05)
+    objs.append(hd.object(bpy, K.dark_oak(bpy, name='oak-alcove-head'), bevel=0.004))
+    y0 = A['depth'] + S['gap']; z0 = S['top'] - S['t']; cy = y0 + S['d'] / 2
+    blk = K.Mesh('sink-block'); blk.box(S['x'] - S['w'] / 2, y0, z0, S['x'] + S['w'] / 2, y0 + S['d'], S['top'])
+    smoke = K.resin(bpy, p.get('sink_deep', '#8A888E'), 'sink-smoke', radius=p.get('sink_radius', 0.025),
+                    rough=p.get('sink_rough', 0.02))
+    ob = blk.object(bpy, smoke)
+    cut = _bowl_cutter(bpy, S['x'], cy, S['top'], S['bx'], S['by'], S['D'], S['fillet'])
+    mod = ob.modifiers.new('basin', 'BOOLEAN'); mod.operation = 'DIFFERENCE'; mod.object = cut; mod.solver = 'EXACT'
+    bev = ob.modifiers.new('arris', 'BEVEL'); bev.width = 0.004; bev.segments = 3; bev.limit_method = 'ANGLE'
+    bev.angle_limit = 1.2
+    cut.hide_render = True; cut.hide_viewport = True
+    objs.append(ob)
+    # the waste: a brushed-steel ring and grid a hair above the bowl's floor, a dark throat under it
+    zb = S['top'] - S['D']
+    ws = K.Mesh('sink-waste'); K._cyl(ws.bm, S['x'], cy, zb + 0.0015, 0.021, 0.002, seg=48)
+    objs.append(ws.object(bpy, K.brushed_steel(bpy), smooth=True))
+    th = K.Mesh('sink-waste-throat'); K._cyl(th.bm, S['x'], cy, zb + 0.0036, 0.014, 0.0004, seg=32)
+    objs.append(th.object(bpy, K.principled(bpy, 'waste-throat', '#050505', rough=0.6)))
+    # the spout and the lever, each on an escutcheon on the boards' face (round 36's plate sat inside the boards)
+    fy = A['depth']; zs = S['top'] + 0.22; xl = S['x'] + 0.13
+    sp = K.Mesh('sink-spout')
+    K._cyl(sp.bm, S['x'], zs, fy, 0.035, 0.008, seg=48, axis='y')                    # the escutcheon, 70
+    LK._rod(sp.bm, (S['x'], fy + 0.006, zs), (S['x'], fy + 0.20, zs), 0.011, 0.011, seg=24)
+    LK._rod(sp.bm, (S['x'], fy + 0.195, zs + 0.004), (S['x'], fy + 0.215, zs - 0.05), 0.011, 0.010, seg=24)
+    K._cyl(sp.bm, xl, zs, fy, 0.024, 0.007, seg=40, axis='y')                         # the lever's, 48
+    LK._rod(sp.bm, (xl, fy + 0.005, zs), (xl, fy + 0.045, zs), 0.012, 0.012, seg=24)
+    LK._rod(sp.bm, (xl, fy + 0.04, zs), (xl, fy + 0.04, zs + 0.075), 0.0045, 0.0035, seg=12)  # the lever, up
+    objs.append(sp.object(bpy, K.brushed_steel(bpy), smooth=True))
+    # the light: a strip hidden under the slab's front edge washing the boards and floor beneath (warm white)
+    if p.get('sink_strip', 0) > 0:
+        K._area(bpy, 'sink-strip', (S['x'], y0 + S['d'] - 0.03, z0 - 0.004), (0, 0, 0), (S['w'] - 0.06, 0.012),
+                p['sink_strip'], kelvin=3000)
+    # and a wash down the boards from the alcove's head, so the slab has something to reflect
+    if p.get('sink_wash', 0) > 0:
+        import math
+        K._area(bpy, 'sink-wash', ((A['x0'] + A['x1']) / 2, A['depth'] + 0.10, A['z1'] - 0.03),
+                (math.radians(-25), 0, 0), (A['x1'] - A['x0'] - 0.1, 0.03), p['sink_wash'], kelvin=2900)
+
+
 def room(bpy, name, p, kit):
     K.R = R                                                           # round 36's builders on round 37's plan
+    K.sink = sink                                                     # the sink as smoked glass (the lead, 2026-10-20)
     p = {**DEFAULTS, **p}
     objs = K.room(bpy, name, p, kit)
     niches(bpy, kit, p, objs)

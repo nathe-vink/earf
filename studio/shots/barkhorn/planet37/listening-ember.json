@@ -6,18 +6,18 @@
  ],
  "camera": {
   "position": [
-   11.8,
-   2.5,
-   1.15
+   10.9,
+   1.35,
+   1.65
   ],
   "target": [
    16.4,
-   3.2,
-   1.0
+   3.4,
+   1.6
   ],
-  "lens_mm": 35,
+  "lens_mm": 26,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 5.6,
   "focus": [
    16.4,
    3.05,
@@ -117,8 +117,8 @@
     "colourway": "neutral",
     "dome_w": 30.0,
     "dome_glow": 1.1,
-    "sphere_w": 3.0,
-    "sphere_glow": 0.55,
+    "sphere_w": 1.0,
+    "sphere_glow": 0.3,
     "disc_col": "#FFD2A0",
     "disc_glow": 0.06,
     "disc_lamp": 2.0,
@@ -139,9 +139,10 @@
     "windows_lit": 0.5,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
-    "plinth_bar": 0.03,
+    "altar_lining": "fir",
+    "plinth_bar": 0.06,
     "plinth_bar_col": "#FF5038",
-    "plinth_listen": 0.03,
+    "plinth_listen": 0.06,
     "plinth_listen_col": "#FF5038"
    },
    {
@@ -205,9 +206,9 @@
      ]
     ],
     "ceiling": 3.4,
-    "lamp_w": 12.0,
+    "lamp_w": 7.5,
     "lamp_k": 2700,
-    "shade_glow": 0.2,
+    "shade_glow": 0.12,
     "noshadow": "shell|liner|skin",
     "materials": {
      "brass": {
@@ -340,9 +341,9 @@
      "back": 0.075,
      "run": 0.1
     },
-    "lamp_w": 1.2,
+    "lamp_w": 0.25,
     "lamp_k": 2700,
-    "shade_glow": 0.1,
+    "shade_glow": 0.03272727272727272,
     "noshadow": "shell|liner|skin"
    }
   ]
@@ -371,7 +372,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.09,
+   "irradiance": 0.03,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -417,7 +418,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.09,
+   "irradiance": 0.03,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -655,10 +656,10 @@
    "target": [
     16.55,
     1.9,
-    1.1
+    1.5
    ],
-   "power_w": 33.0,
-   "cone_deg": 30.0,
+   "power_w": 21.0,
+   "cone_deg": 44.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -674,10 +675,10 @@
    "target": [
     16.55,
     4.199999999999999,
-    1.1
+    1.5
    ],
-   "power_w": 33.0,
-   "cone_deg": 30.0,
+   "power_w": 21.0,
+   "cone_deg": 44.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -718,7 +719,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.09,
+   "irradiance": 0.18,
    "color": "#FF5038",
    "camera": false,
    "receivers": [
@@ -741,7 +742,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.09,
+   "irradiance": 0.18,
    "color": "#FF5038",
    "camera": false,
    "receivers": [
@@ -764,7 +765,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.09,
+   "irradiance": 0.18,
    "color": "#FF5038",
    "camera": false,
    "receivers": [
@@ -787,12 +788,52 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.09,
+   "irradiance": 0.18,
    "color": "#FF5038",
    "camera": false,
    "receivers": [
     "*#1"
    ]
+  },
+  "feltwash0": {
+   "type": "area",
+   "position": [
+    16.84,
+    1.9,
+    2.57
+   ],
+   "target": [
+    16.91,
+    1.9,
+    0.8
+   ],
+   "size_m": [
+    0.06,
+    0.9
+   ],
+   "irradiance": 2.0,
+   "color": 2700,
+   "camera": false
+  },
+  "feltwash1": {
+   "type": "area",
+   "position": [
+    16.84,
+    4.199999999999999,
+    2.57
+   ],
+   "target": [
+    16.91,
+    4.199999999999999,
+    0.8
+   ],
+   "size_m": [
+    0.06,
+    0.9
+   ],
+   "irradiance": 2.0,
+   "color": 2700,
+   "camera": false
   },
   "barspk0": {
    "type": "spot",
@@ -842,7 +883,7 @@
    6.05,
    3.32
   ],
-  "density": 0.003,
+  "density": 0.002,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },

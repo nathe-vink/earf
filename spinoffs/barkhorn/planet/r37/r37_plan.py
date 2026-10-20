@@ -16,7 +16,7 @@ import r36_plan as _R36
 COLOURWAYS = dict(_R36.COLOURWAYS, neutral=dict(velvet='#2E2019', wall='#4C453E', carpet='#2B2520', felt='#1E1C1A'))
 CHAIR_LEATHER = '#2E1E16'                                            # espresso (was oxblood #3A1411)
 BANQ_COL = '#2B2019'                                                 # espresso mohair
-SINK_DEEP = '#3A3836'                                                # Smoke
+SINK_DEEP = '#8A888E'                                                # Smoke
 SINK_GLOW = '#FFA24A'                                                # lit, it glows warm amber
 
 # --- 2. the bar pair, raised (the owner, 2026-10-20, with a photo of Ginza Music Bar: "They are elevated at Ginza."):
@@ -68,7 +68,7 @@ CONFIGS = {
 }
 SPEAKER_FLAVOUR = {'smoke': 'cloud-black', 'ember': 'cloud-red', 'ice': 'cloud-blue'}
 LAMP_FLAVOUR = {'smoke': 'smoked', 'ember': 'ember', 'ice': 'ice', 'dust': 'dust', 'acid': 'acid'}
-LAMP_GLOW = {'smoke': 0.3, 'ember': 0.2, 'ice': 0.3, 'dust': 0.25, 'acid': 0.25}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
+LAMP_GLOW = {'smoke': 0.3, 'ember': 0.12, 'ice': 0.3, 'dust': 0.25, 'acid': 0.25}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
 TT_DEF = 'spinoffs/barkhorn/companions/out-concepts2/r3.json'        # R3 Float, until the owner picks
 # the light plinths' colour per tint (the owner: "Lights under the speakers could be cool too")
 PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF', 'fog': '#FFE8D2'}
@@ -79,7 +79,7 @@ PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.12, 'ice': 0.35}
 # Smoke's levels clipped its red to pink (6040 px red-only in a Standard view, listening, r37)
 SPK_GAIN = {'smoke': 1.0, 'ember': 0.15, 'ice': 0.4}
 # the lamp inside each Dome and Orb per tint: a red cover lit at Smoke's 30 W clipped pink (r37, bar-ember)
-LAMP_GAIN = {'smoke': 1.0, 'ember': 0.4, 'ice': 0.6, 'dust': 0.6, 'acid': 0.6}
+LAMP_GAIN = {'smoke': 1.0, 'ember': 0.25, 'ice': 0.6, 'dust': 0.6, 'acid': 0.6}   # Ember 0.4: the Domes clipped red (1260 px, bar)
 # the lit lamp's colour: the flavour's own glow behind its tinted shell, so a lit lamp sits within about 10 deg of hue
 # (LCh) of the speakers in its tint (the owner saw an Orb lineup read as "two reds and an orange": the fixed warm liner
 # dragged Ember to orange); Smoke keeps the warm liner
@@ -89,3 +89,7 @@ LINER_GLOW = {'smoke': '#FF9A50', 'ember': '#FF4A3A', 'ice': '#4FB8FF', 'dust': 
 # through a grommet in its table)
 ANODISED = {'preset': 'metal', 'color': '#151515', 'roughness': 0.38}
 BLACK_ACRYLIC = {'preset': 'dark_resin', 'color': '#0C0C0D', 'roughness': 0.06, 'cloud': 0.0, 'fibre': 0.0}
+
+# --- the sink as smoked glass (the lead, 2026-10-20): no glow; the Cloud's Smoke, polished; a soft bowl 120 deep with a
+# 30 radius at its rim and a visible waste. The slab 160 thick (was 120) to hold the bowl; its top stays at 860
+SINK37 = dict(SINK, t=0.16, D=0.12, bx=0.19, by=0.105, fillet=0.03)

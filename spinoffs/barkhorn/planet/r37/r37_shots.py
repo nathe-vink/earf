@@ -23,7 +23,7 @@ S.OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'planet37')
 DEFAULT = dict(T36.DEFAULT, **dict(config='smoke', colourway='neutral', disc_col='#FFD2A0', disc_glow=0.06,
                                    disc_lamp=2.0, spk_niche_strip=3.0, tt_glow=0.05, plinth=1.0, plinth_lamp=1.5, sink_glow=0.8))
 S.DEFAULT = DEFAULT
-KEYS = T36.KEYS + ('counter_strip', 'sconce_w', 'sconce_glow', 'card_text', 'chair_leather', 'banq_col', 'sink_deep', 'sink_glow_col', 'decks', 'spk_niche_strip', 'niche_felt')
+KEYS = T36.KEYS + ('counter_strip', 'sconce_w', 'sconce_glow', 'card_text', 'chair_leather', 'banq_col', 'sink_deep', 'sink_glow_col', 'decks', 'spk_niche_strip', 'niche_felt', 'sink_strip', 'sink_wash', 'sink_rough', 'altar_lining')
 
 
 def room_piece(v):
@@ -125,6 +125,13 @@ def lights(v):
                                 'target': [x, y, round(zz + 0.6, 3)], 'size_m': [0.4, 0.2],
                                 'irradiance': round(v['barback'] * gb, 3), 'color': 2700, 'camera': False,
                                 'receivers': [f'*#{i}']}
+    # a soft wash down the felt behind each of the listening pair, from the altar's soffit (the lead: not voids)
+    if v.get('felt_wash', 0) > 0:
+        A = RP.ALTAR
+        for i, (role, c, x, y, zz, rot) in enumerate(RP.speakers()):
+            L[f'feltwash{i}'] = {'type': 'area', 'position': [round(RP.L - 0.16, 3), y, round(A['z1'] - 0.03, 3)],
+                                 'target': [round(RP.L - 0.09, 3), y, round(RP.ZONE['z'] + 0.6, 3)], 'size_m': [0.06, 0.9],
+                                 'irradiance': v['felt_wash'], 'color': 2700, 'camera': False}
     # the bar pair: a soft spot from the ceiling over the bartender's aisle onto each cabinet's face
     for i, (role, x, y, zz, rot, tilt) in enumerate(RP.bar_speakers()):
         L[f'barspk{i}'] = {'type': 'spot', 'position': [x, round(y - 1.25, 3), RP.CEIL - 0.25],
@@ -169,16 +176,20 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # blows its table (15 %); a dead-centre elevation): off axis but far enough back to keep a chair and the Orb
           # table (p2's seated 40 mm lost them); haze 0.003, AgX High Contrast; the spots on the cabinets' middles,
           # 220 W; the linked back lamps 10 W/m2; the Orbs 3 W
-          # p5 (p4 4.0, 4.5: the near chair blown by the Orb, the end grain a tile grid, the felt black voids): back
-          # and right on 32 mm, f/5.6; the end grain in four tones dealt block by block (kept: a model fix); the Orbs
-          # 1.2 W; the niche strips 9; the plinths 0.3; the spots 36 deg; haze 0.0015; exposure 4.3. p5 4.0, 4.0
-          # (-0.25): the view STOPS (p4 +0.0, p5 -0.25). Best: p4 (4.25, tied with p3, without p3's veil), the base
-          # for the configurations, with the end grain's tones
-          'camera': {'position': [11.8, 2.5, 1.15], 'target': [16.4, 3.2, 1.0], 'lens_mm': 35, 'level': True,
-                     'fstop': 4.0, 'focus': [16.4, 3.05, 1.0]},
-          'settings': {'exposure': 3.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 220.0,
-                       'altar_cone': 30.0, 'altar_z': 0.9, 'haze': 0.003, 'sphere_w': 3.0, 'sphere_glow': 0.55,
-                       'niche_strip': 5.0, 'plinth': 0.5, 'spk_back': 10.0, 'look': 'AgX - High Contrast'}}
+          # p5 (p4 4.0, 4.5): back and right on 32 mm, the end grain toned, the Orbs 1.2 W. p5 4.0, 4.0 (-0.25): the
+          # view stopped (p4 +0.0, p5 -0.25), best p4 (4.25)
+          # p6 (the lead, 2026-10-20: go wider so the room is in it; one pass, kept within 0.5 of p4): back across the
+          # step and high on 26 mm, off the zone's axis so no Orb sits at the bottom centre: the fir beams overhead,
+          # the concrete and the steel round the altar, the tub chairs and Orb tables at the edges; the niche lined in
+          # the shell's fir (the end grain read as tile in every pass); the pair lit soft from above and in front
+          # (the spots wider, weaker, aimed at the tops; the linked lamps on the faces down), the plinths glowing
+          # beneath; a soft wash down the felt behind each; the Orbs 1 W
+          'camera': {'position': [10.9, 1.35, 1.65], 'target': [16.4, 3.4, 1.6], 'lens_mm': 26, 'level': True,
+                     'fstop': 5.6, 'focus': [16.4, 3.05, 1.0]},
+          'settings': {'exposure': 3.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.2, 'altar_w': 140.0,
+                       'altar_cone': 44.0, 'altar_z': 1.3, 'haze': 0.002, 'sphere_w': 1.0, 'sphere_glow': 0.3,
+                       'niche_strip': 5.0, 'plinth': 1.0, 'spk_back': 10.0, 'felt_wash': 2.0,
+                       'altar_lining': 'fir', 'look': 'AgX - High Contrast'}}
 NAMES = {'smoke': 'Smoke', 'ember': 'Ember', 'ice': 'Ice', 'mixed': 'Mixed'}
 VIEWS = {}
 for c in RP.CONFIGS:
@@ -223,11 +234,17 @@ VIEWS['sink'] = {'title': 'the sink in Smoke, a detail',
                  # orange cast at 3300 K; the spout cropped, the towel a box): the glow 1.6, the cast clearer (0.25) so
                  # the light grades through its depth; 2700 K; the spot 4 W at 30 deg; back on 50 mm, the target higher
                  # p6 4.5, 4.0 (+0.0): the slab opaque taupe, no glow through it, the bowl a flat ellipse, the towel
-                 # a board, the boards procedural. The view STOPS (p5r -0.5, p6 +0.0). Best: p4 (4.75), restored
-                 'camera': {'position': [10.5, 1.35, 1.08], 'target': [11.25, 0.4, 0.9], 'lens_mm': 50, 'level': True,
-                            'fstop': 5.6, 'focus': [10.98, 0.47, 0.86]},
-                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 2.0, 'sink_radius': 0.12,
-                              'sink_glow_col': '#FF9A4A', 'sink_spot': 3.0, 'sink_spot_cone': 20.0, 'exposure': 1.0}}
+                 # a board, the boards procedural. The view STOPS (p5r -0.5, p6 +0.0). Best: p4 (4.75), cream
+                 # p7 (the lead, 2026-10-20: p4 reads cream, wrong for Smoke whatever its score; one pass): the glow
+                 # dropped; the slab the Cloud's Smoke, polished, 160 thick; a soft bowl 120 deep, 30 at the rim, a
+                 # steel waste; the spout and a separate lever on escutcheons; no towel; the shell's fir boards; a
+                 # narrow warm downlight into the bowl, a hidden strip under the slab's front edge, a wash down the
+                 # boards; framed inside the alcove (no black third), a little off axis to show an end and its arrises
+                 'camera': {'position': [11.20, 1.55, 1.30], 'target': [11.03, 0.20, 0.92], 'lens_mm': 45, 'level': True,
+                            'fstop': 5.6, 'focus': [11.02, 0.40, 0.86]},
+                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 0.0, 'sink_deep': '#8A888E',
+                              'sink_radius': 0.025, 'sink_rough': 0.02, 'sink_spot': 40.0, 'sink_spot_cone': 12.0,
+                              'sink_strip': 4.0, 'sink_wash': 24.0, 'exposure': 1.4, 'wb': 3000}}
 S.VIEWS = VIEWS
 _shot = S.shot
 
