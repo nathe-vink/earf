@@ -1,0 +1,372 @@
+{
+ "stage1": {
+  "impression": "A tidy CG showroom: a fir-lined niche with two identical black monitors on lit plinths, a big empty brown floor, a near-white artwork at left and chair backs cut by the bottom edge. At 1:1 the fir is denoiser-smeared into streaks, the spots blow out the boards above each speaker, the speakers read as generic dark studio monitors, not tinted acrylic, and nothing says anyone has been here. As it stands no magazine would run it as a specific place; it reads as a generic home-cinema or hi-fi showroom render.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speakers must read at a glance as tinted smoked acrylic with light through them (speaker region lum_median >= 45, the white batts visible through the cabinet) rather than black boxes",
+  "No clipped fir above the speakers: clip_pct < 0.5 % for the frame and under 2 % in the niche's top band [200,100,630,170]",
+  "Clean full-resolution render: no denoiser smear on the fir grain, the felt or the speaker edges (more samples, final scale 1.0)",
+  "Signs of life and the zone's own furniture in frame: an Orb on a hex oak table, a glass, a record, so the room reads as the listening bar and not as a showroom",
+  "The floor (a fifth of the frame) needs a pool of light and texture rather than an even featureless brown plane",
+  "The artwork/screen at left must not be the brightest large surface in the frame (median 182 against a speaker at 31)"
+ ],
+ "defects": [
+  {
+   "region": [
+    460,
+    130,
+    560,
+    175
+   ],
+   "what": "Altar spot hotspot on the fir above the right speaker, 45 % clipped, blown white"
+  },
+  {
+   "region": [
+    290,
+    135,
+    340,
+    175
+   ],
+   "what": "Same hotspot above the left speaker, 48 % clipped"
+  },
+  {
+   "region": [
+    455,
+    215,
+    545,
+    375
+   ],
+   "what": "Right speaker reads as an opaque black monitor: median 30.8, the smoked tint and the batts behind it are lost; the horn reads as a dark plastic box"
+  },
+  {
+   "region": [
+    255,
+    220,
+    322,
+    345
+   ],
+   "what": "Left speaker likewise dark (median 31.4); with the right one it is an identical copy at the same angle, which reads as a duplicated model"
+  },
+  {
+   "region": [
+    200,
+    100,
+    660,
+    400
+   ],
+   "what": "Denoiser smear: the fir boards' grain turns into vertical watercolour streaks, the felt panels are flat untextured rectangles"
+  },
+  {
+   "region": [
+    0,
+    145,
+    112,
+    300
+   ],
+   "what": "The screen at left is near white (median 182) and flat, pulling the eye away from the altar and reading as a projector screen"
+  },
+  {
+   "region": [
+    100,
+    390,
+    620,
+    480
+   ],
+   "what": "Carpet is an even featureless plane (lum_range 29) with no pile, no pool of light and no furniture, a large dead area"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    90
+   ],
+   "what": "Ceiling beams 27 % crushed, the fir beams' checks and grain lost"
+  },
+  {
+   "region": [
+    0,
+    330,
+    80,
+    480
+   ],
+   "what": "Tub chair and a head cut awkwardly by the frame edge at bottom left"
+  },
+  {
+   "region": [
+    430,
+    430,
+    640,
+    480
+   ],
+   "what": "Chair backs cut by the bottom edge, unreadable as velvet tub chairs"
+  },
+  {
+   "region": [
+    455,
+    360,
+    552,
+    382
+   ],
+   "what": "Plinth glow line reads as a thin LED strip / display plinth"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The altar spots blow out the fir above each speaker while leaving the speakers themselves dark, so the hero is the darkest object in its niche.",
+   "evidence": {
+    "region": [
+     460,
+     130,
+     560,
+     175
+    ],
+    "measured": "clip_pct 45 % (left 48 %); speaker region lum_median 30.8"
+   },
+   "change": {
+    "setting": "lamps: the altar 2 x spot",
+    "from": "140.0 W, cone 44 deg, aimed down the boards",
+    "to": "70 W, cone 30 deg, re-aimed onto the speakers' faces from about 1.5 m forward of the niche, so the beam lands on the cabinet and horn, not on the boards above"
+   },
+   "expected": "No white bloom on the fir; the cabinets catch a soft warm key; speaker median rises toward 45-60",
+   "accept": {
+    "region": [
+     460,
+     130,
+     560,
+     175
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The smoked acrylic reads as opaque black because nothing lights it from within or behind, so the tint and batts never show.",
+   "evidence": {
+    "region": [
+     455,
+     215,
+     545,
+     375
+    ],
+    "measured": "lum_median 30.8, r/g/b 41/28/27; batts invisible"
+   },
+   "change": {
+    "setting": "on each speaker 4 x area (the speaker lamps)",
+    "from": "0.1 W/m2 at the target, 2900 K",
+    "to": "0.6 W/m2 at the target, 2900 K, placed behind and beside the cabinet so light passes through the acrylic and rims its polished edges"
+   },
+   "expected": "The cabinet glows smoky amber at its edges, the white batts read through it, the horn's resin catches a rim",
+   "accept": {
+    "region": [
+     455,
+     215,
+     545,
+     375
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "Denoiser smear erases the fir grain and the felt texture, the clearest CG tell in the frame.",
+   "evidence": {
+    "region": [
+     200,
+     100,
+     660,
+     400
+    ],
+    "measured": "3x crop shows vertical watercolour streaks in place of grain; felt panels flat"
+   },
+   "change": {
+    "setting": "render samples / adaptive / scale",
+    "from": "256 samples, adaptive 0.02, proof at scale 0.3",
+    "to": "1024 samples, adaptive 0.005, final at scale 1.0 (2400 x 1600), denoiser with albedo+normal passes, then a 0.3 % film grain in post"
+   },
+   "expected": "Board grain, nail holes and the felt's weave survive at 1:1; edges of the acrylic stay crisp",
+   "accept": {
+    "region": [
+     200,
+     170,
+     630,
+     390
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 120
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The screen at left is the largest bright surface in the frame and competes with the altar.",
+   "evidence": {
+    "region": [
+     0,
+     145,
+     112,
+     300
+    ],
+    "measured": "lum_median 181.8 vs speaker 30.8"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the screens' images",
+    "from": "0.2",
+    "to": "0.05"
+   },
+   "expected": "The screen sits as a dim grey image in the dark wall, well below the speakers",
+   "accept": {
+    "region": [
+     0,
+     145,
+     112,
+     300
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     60,
+     100
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The camera stands back with a wide lens, so a fifth of the frame is empty carpet and the tub chairs are cut at the edge; the zone's own furniture (hex tables, Orbs) is out of shot.",
+   "evidence": {
+    "region": [
+     100,
+     390,
+     620,
+     480
+    ],
+    "measured": "carpet lum_range 29, nothing on it; chairs cropped at [0,330,80,480] and [430,430,640,480]"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [12.2, 1.0, 1.7], 24 mm, level",
+    "to": "seated eye level about 1.15 m, from behind and beside one tub chair at about [13.6, 2.2, 1.15], 35 mm, so a chair's velvet shoulder and a hex oak table with a lit Orb sit in the near foreground and the pair fills the upper middle third"
+   },
+   "expected": "Foreground depth (chair, table, Orb pool of light), the altar larger in frame, no dead floor",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "No sign of life in the zone: the props listed all sit at the bar, out of shot.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "no glass, record, coat or sleeve visible anywhere"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses, coupe, record, coat at the counter",
+    "to": "add in the zone: a half-drunk rocks glass and a record sleeve on the nearest hex table, a coat over a tub chair's arm, a record leaning on the altar plinth"
+   },
+   "expected": "The frame reads as a used room at night, not a showroom",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The floor has no pool of light, so the space between the seats and the altar is dead and flat.",
+   "evidence": {
+    "region": [
+     100,
+     390,
+     620,
+     480
+    ],
+    "measured": "lum_median 36, lum_range 29, crush 2 %"
+   },
+   "change": {
+    "setting": "the Orbs (and the Domes' downlights if any fall in the zone)",
+    "from": "each Orb 1.0 W, glow 0.08",
+    "to": "each Orb 4 W, glow 0.25, so each hex table throws a warm pool onto the carpet; carpet material roughness up with a pile/bump texture"
+   },
+   "expected": "Pools of light with dark between them on the floor; carpet reads as pile",
+   "accept": {
+    "region": [
+     100,
+     390,
+     620,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The fir beams overhead are crushed to black, so the shell's main material is lost.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     90
+    ],
+    "measured": "crush_pct 26.7, lum_median 4.6"
+   },
+   "change": {
+    "setting": "haze and a ceiling uplight bounce",
+    "from": "haze 0.002",
+    "to": "haze 0.005, plus a dim warm grazing wash (about 20 W, 2400 K) up the beams from the niche's top edge"
+   },
+   "expected": "Beams hold checks and grain in the shadows; a little atmosphere in the spot beams",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     90
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 10
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the two altar speakers differ in pose or toe-in so they do not read as a duplicated model",
+   "why": "The pair's placement and toe-in are fixed by the room's design; a camera off the axis of symmetry (c5) reduces the effect instead"
+  },
+  {
+   "request": "Replace the thin glowing strip on the plinths with a softer, wider light plinth",
+   "why": "The light plinth is part of the altar's design as the card fixes it; only its brightness could change"
+  },
+  {
+   "request": "Make the smoked tint more saturated so the speaker carries the frame's colour",
+   "why": "The speaker's colour is fixed; only the light through it can be changed (c2)"
+  }
+ ],
+ "score_if_fixed": 6.8
+}
