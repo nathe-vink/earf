@@ -107,3 +107,16 @@ The gate becomes: N2's realism at least 0.5 above A4's (so at least 5.0), the re
 - The floating scum now reads as hard-edged cracked mud with dark gaps, hiding the new reflections.
 - The speaker has almost no contact shadow or reflections.
 - The dock is uniform CG wood with identical posts, and the fog is an even gradient.
+
+**Proof 7** (`proofs31/element-poison_n2-p07.jpg`):
+- The floating scum's edges are soft and oily, with open water along the jetty.
+- Less fill on the speaker, and the sign weathered harder.
+
+**Read test:** passes. The judge saw "…in a foggy swamp of algae-green water and old posts, next to a red-and-white sign that reads 'DANGER TOXIC ALGAE AVOID CONTACT'."
+
+**Realism:** 4.5 and 4.5 (mean 4.5, level with the live A4, under the 5.0 gate). The tells:
+- The water is still a flat matte plane, with no reflections, ripples or glints. The lily pads and grass are flat cards.
+- The planks repeat one texture, the posts have identical tops, and the dock has a hard straight edge with no wet staining.
+- The speaker has no contact shadow, its panels are reflected evenly, and it looks composited. The fog falls off evenly, like CG.
+
+**N2 is stopped.** Neither of the two passes on Acid B's water reached the gate. Seven passes scored 4.5, 4.25, 4.25, 3.75, 4.25, 4.25 and 4.5. The best (p7) equals A4 on the same critics and doesn't beat it.
