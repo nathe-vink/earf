@@ -208,7 +208,7 @@
     "ceiling": 3.4,
     "lamp_w": 4.5,
     "lamp_k": 2700,
-    "shade_glow": 0.07,
+    "shade_glow": 0.04,
     "noshadow": "shell|liner|skin",
     "materials": {
      "brass": {
@@ -343,7 +343,7 @@
     },
     "lamp_w": 0.9,
     "lamp_k": 2700,
-    "shade_glow": 0.07,
+    "shade_glow": 0.04,
     "noshadow": "shell|liner|skin"
    }
   ]
@@ -372,7 +372,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.15,
+   "irradiance": 0.08,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -411,7 +411,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.32,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -450,7 +450,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.15,
+   "irradiance": 0.08,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -489,7 +489,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 0.6,
+   "irradiance": 0.32,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -722,7 +722,7 @@
     1.9,
     1.1
    ],
-   "power_w": 13.5,
+   "power_w": 7.2,
    "cone_deg": 36.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -741,7 +741,7 @@
     4.199999999999999,
     1.1
    ],
-   "power_w": 13.5,
+   "power_w": 7.2,
    "cone_deg": 36.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -935,7 +935,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 9.0,
+   "power_w": 4.8,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -954,7 +954,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 9.0,
+   "power_w": 4.8,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
