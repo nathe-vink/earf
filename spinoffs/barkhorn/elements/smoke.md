@@ -293,3 +293,28 @@ The owner, via the coordinator: "Salt flat, but a smoke canister on a salt flat 
   - No CC0 car model was available, so the cars are forms in silhouette. The first pass, with cut-out flames and lit cars, read as toys.
   - Read: "a roadway or overpass at dusk… a vehicle is burning", stands, thick black smoke from the burning car, no figure. The weakest element is the car: "a flat, low-detail silhouette with a uniform orange glow". The HDRI's own trees and mast show to the right.
 - **Side by side:** `element-smoke-e6-e7.jpg`. No duels until the owner picks.
+
+### E6 and E7 to a realistic standard (the owner: "Both need more work and realism for me to make a call")
+
+**The gate**, restated by the coordinator after calibration: each image scores at least 4.5 from two fresh realism critics (the live A scores 4.0 and 4.0 on the same critic), passes the read test, and has no fake-looking element.
+
+Fixes common to both:
+- `smoke_el.occluder`: a shadow-only disc in the speaker's base for its contact shadow. It is a set piece; the product is untouched.
+- Grain (2.5) and shallower focus.
+- A long `ground()` patch subdivides at 1.5 cm and ran past the container's memory, so E7's deck is a textured slab.
+
+**E6, the salt pan** (`smoke_pan.py`):
+- What changed: the plume's head is a sheet spreading across the sky, low layers roll toward the speaker, there is haze to the horizon, and a high shadow layer lays the smoke's shadow across the crust while the speaker stands in a sunlit gap. The crust is 4k on a 7 m tile, the soot has some albedo so its sunlit sides show, and the sun is 3.5° wide.
+- Realism, by proof: p1 3.5 / 3.5; p2 3.5 / 3.5; p3 4.5 / 4.5.
+- Read (p3): stands (a long firm shadow), "black smoke, a tall column like a burning oil well", no fire, no figure.
+- The critics' remaining tells: the speaker's clean surfaces (the product), the smoke's soft edges, and the crack tile repeating.
+
+**E7, the bridge** (`smoke_bridge.py`, `kit_ext/wreck.py`):
+- No CC0 car was reachable, so `wreck.sedan` is a burnt-out saloon from real proportions: charred paint, rust and bare steel, a crumpled nose, no glass, a sagging roof, charred seats, bare rims on puddles of melted tyre.
+- `wreck.flame` is fire as a volume whose emission follows its density in a black-body colour (1050 to 1800 K). The volume's own black-body emission ignored density and lit the whole box.
+- The scene: a four-lane overpass with footways, railings and lamp posts, and the city at twilight (Poly Haven `sunset_jhbcentral`). The fire lights the road and rims the speaker, and the smoke rises from the wreck, darkening as it climbs.
+- Realism, by proof: p1 4.0 / 4.5; p2 4.5 / 4.5; p3 5.0 / 5.0; p4 5.0 / 4.5.
+- Reads: p3 "floats", because there was no contact shadow or reflection. p4, with a shallow puddle the speaker stands in, reads **stands** ("its base sits in the puddle, with a reflection and contact darkening"), "an urban overpass at dusk… a car is on fire", black smoke from the burning car, no figure.
+- Flagged as fake on p4: the puddle's sharp edge ("like a cut-out decal"), the smoke column too uniform, and the fire small for its smoke. The puddle is the one I'd fix next, with soft wet margins.
+
+**Side by side:** `element-smoke-e6-e7-real.jpg` (E6 p3, E7 p4).
