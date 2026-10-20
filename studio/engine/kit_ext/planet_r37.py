@@ -321,6 +321,50 @@ def host_stand(bpy, kit, p, objs):
     objs.append(tp.object(bpy, K.dark_oak(bpy, name='oak-host'), bevel=0.004))
 
 
+
+# --- the Orbs wired in the bar (the owner, 2026-10-20; the kit's own cable, round 32f, runs 420 mm straight back from
+# the base, off a small table): a thin black fabric cable from the back of each base to a grommet in its table and down
+# through it to the floor. The kit piece's own cable is off (`cable: false`), the Orb still plugged in
+_CABLE_M = {}
+
+
+def _cable(bpy, name, T, c):
+    """A plug-in Orb, wired (the owner, 2026-10-20: USB-C, a battery cartridge optional; in a bar it is wired): a thin
+    black fabric cable from the back of the base across the table top to a grommet, and down through it to the floor."""
+    import bmesh
+    r = c.get('radius', 0.0022); back = c.get('back', 0.075); run = c.get('run', 0.10); floor = c['floor']
+    z0 = T.translation.z
+    p0 = T @ Vector((0.0, back, r)); p1 = T @ Vector((0.0, back + run, r))
+    pts = [p0, p1, Vector((p1.x, p1.y, z0 - 0.02)), Vector((p1.x, p1.y, floor + r))]
+    me = bpy.data.meshes.new(name); bm = bmesh.new()
+    for a, b in zip(pts, pts[1:]):
+        d = b - a; L = d.length
+        if L < 1e-4:
+            continue
+        g = bmesh.ops.create_cone(bm, cap_ends=True, segments=10, radius1=r, radius2=r, depth=L)
+        q = d.normalized().to_track_quat('Z', 'Y').to_matrix().to_4x4()
+        bmesh.ops.transform(bm, matrix=Matrix.Translation((a + b) / 2) @ q, verts=g['verts'])
+    # the grommet: a black anodised ring flush in the table top
+    g = bmesh.ops.create_cone(bm, cap_ends=False, segments=24, radius1=0.009, radius2=0.009, depth=0.003)
+    bmesh.ops.transform(bm, matrix=Matrix.Translation((p1.x, p1.y, z0 + 0.0008)), verts=g['verts'])
+    bm.to_mesh(me); bm.free()
+    for f in me.polygons:
+        f.use_smooth = True
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    key = 'orb-cable-fabric'
+    if key not in _CABLE_M:
+        _CABLE_M[key] = K.MT.make(bpy, key, 'rubber', {'color': '#121212', 'roughness': 0.85, 'sheen': 0.5})
+    ob.data.materials.append(_CABLE_M[key])
+    return [ob]
+
+
+
+def orb_cables(bpy, kit, p, objs):
+    from mathutils import Matrix
+    for i, s in enumerate(p.get('orb_cables', [])):
+        T = Matrix.Translation(s['position'])
+        objs += _cable(bpy, f'orb-cable#{i}', T, {'radius': 0.0022, 'back': 0.075, 'run': 0.10, 'floor': s['floor']})
+
 def room(bpy, name, p, kit):
     K.R = R                                                           # round 36's builders on round 37's plan
     K.sink = sink                                                     # the sink as smoked glass (the lead, 2026-10-20)
@@ -334,4 +378,5 @@ def room(bpy, name, p, kit):
         zone_life(bpy, kit, p, objs)
     if p.get('host_stand'):
         host_stand(bpy, kit, p, objs)
+    orb_cables(bpy, kit, p, objs)
     return objs

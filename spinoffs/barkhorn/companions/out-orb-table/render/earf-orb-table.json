@@ -35,7 +35,7 @@
   "base": [
    -60.0,
    -60.0,
-   0.0,
+   -0.0,
    60.0,
    60.0,
    30.0
@@ -56,13 +56,21 @@
    14.8,
    21.1
   ],
-  "plate": [
-   -49.8,
-   -49.8,
-   0.4,
-   49.8,
-   49.8,
-   4.0
+  "chassis": [
+   -54.8,
+   -54.8,
+   12.2,
+   54.8,
+   54.8,
+   13.4
+  ],
+  "ballast": [
+   -54.0,
+   -54.0,
+   0.6,
+   54.0,
+   54.0,
+   28.0
   ],
   "led": [
    -13.0,
@@ -85,30 +93,58 @@
    -55.8,
    0.2,
    55.8,
-   55.8,
+   30.1,
    2.0
   ],
-  "contacts": [
-   -30.0,
-   -30.0,
-   0.4,
-   30.0,
-   30.0,
-   1.6
+  "blank": [
+   -35.8,
+   48.0,
+   0.6,
+   35.8,
+   59.9,
+   11.6
+  ],
+  "cable": [
+   -96.2,
+   2.9,
+   0.0,
+   -49.2,
+   420.0,
+   6.6
+  ],
+  "cartridge": [
+   -46.6,
+   -23.6,
+   0.6,
+   46.6,
+   59.9,
+   11.6
+  ],
+  "cartridge-pads": [
+   -16.0,
+   6.0,
+   0.2,
+   16.0,
+   14.0,
+   0.6
   ]
  },
  "finishes": {
   "shell": "body",
   "liner": "liner",
   "skin": "body",
-  "grommet": "brass",
-  "base": "steel",
-  "ring": "brass",
+  "grommet": "anodised",
+  "base": "trim",
+  "ring": "anodised",
   "window": "window",
-  "plate": "steel",
+  "chassis": "steel",
+  "ballast": "steel",
   "led": "led",
   "seat": "silicone",
   "foot-ring": "silicone",
-  "contacts": "gold"
+  "blank": "trim",
+  "cable": "fabric",
+  "cartridge": "trim",
+  "cartridge-pads": "gold"
  }
 }

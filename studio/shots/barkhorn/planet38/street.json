@@ -152,101 +152,8 @@
     "plinth_bar": 0.5,
     "plinth_bar_col": "#FFB060",
     "plinth_listen": 0.5,
-    "plinth_listen_col": "#FFB060"
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "street_lamp_01",
-    "res": "1k",
-    "position": [
-     -3.16,
-     -6.0,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     90.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "street_lamp_01",
-    "res": "1k",
-    "position": [
-     -3.16,
-     15.1,
-     0.0
-    ],
-    "rotate": [
-     0,
-     0,
-     90.0
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "earf_moon",
-    "fn": "dome",
-    "flavour": "smoked",
-    "spots": [
-     [
-      4.95,
-      4.2,
-      1.72
-     ],
-     [
-      6.25,
-      4.2,
-      1.72
-     ],
-     [
-      7.5,
-      4.2,
-      1.72
-     ],
-     [
-      8.7,
-      4.2,
-      1.72
-     ]
-    ],
-    "ceiling": 3.4,
-    "lamp_w": 30.0,
-    "lamp_k": 2700,
-    "shade_glow": 0.3,
-    "noshadow": "shell|liner|skin",
-    "materials": {
-     "brass": {
-      "preset": "metal",
-      "color": "#151515",
-      "roughness": 0.38
-     },
-     "liner": {
-      "glow_color": "#FF9A50"
-     }
-    },
-    "parts": [
-     {
-      "match": "canopy",
-      "preset": "dark_resin",
-      "color": "#0C0C0D",
-      "roughness": 0.06,
-      "cloud": 0.0,
-      "fibre": 0.0
-     }
-    ]
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "earf_moon",
-    "fn": "orb",
-    "flavour": "smoked",
-    "spots": [
+    "plinth_listen_col": "#FFB060",
+    "orb_cables": [
      {
       "position": [
        4.38,
@@ -327,29 +234,134 @@
       ],
       "floor": 0.2
      }
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     -3.16,
+     -6.0,
+     0.0
     ],
-    "materials": {
-     "brass": {
-      "preset": "metal",
-      "color": "#151515",
-      "roughness": 0.38
-     },
-     "steel": {
-      "preset": "dark_resin",
-      "color": "#0C0C0D",
-      "roughness": 0.06,
-      "cloud": 0.0,
-      "fibre": 0.0
-     },
-     "liner": {
-      "glow_color": "#FF9A50"
-     }
-    },
-    "cable": {
-     "radius": 0.0022,
-     "back": 0.075,
-     "run": 0.1
-    },
+    "rotate": [
+     0,
+     0,
+     90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "street_lamp_01",
+    "res": "1k",
+    "position": [
+     -3.16,
+     15.1,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90.0
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "flavour": "smoke",
+    "spots": [
+     [
+      4.95,
+      4.2,
+      1.72
+     ],
+     [
+      6.25,
+      4.2,
+      1.72
+     ],
+     [
+      7.5,
+      4.2,
+      1.72
+     ],
+     [
+      8.7,
+      4.2,
+      1.72
+     ]
+    ],
+    "ceiling": 3.4,
+    "lamp_w": 30.0,
+    "lamp_k": 2700,
+    "shade_glow": 0.3,
+    "noshadow": "shell|liner|skin"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "orb",
+    "flavour": "smoke",
+    "spots": [
+     [
+      4.38,
+      0.9700000000000001,
+      0.74
+     ],
+     [
+      5.93,
+      0.9700000000000001,
+      0.74
+     ],
+     [
+      7.48,
+      0.9700000000000001,
+      0.74
+     ],
+     [
+      9.03,
+      0.9700000000000001,
+      0.74
+     ],
+     [
+      1.17,
+      4.359999999999999,
+      0.74
+     ],
+     [
+      13.15,
+      3.05,
+      0.66
+     ],
+     [
+      14.15,
+      0.5999999999999996,
+      0.66
+     ],
+     [
+      14.15,
+      5.5,
+      0.66
+     ],
+     [
+      12.55,
+      1.9999999999999998,
+      0.66
+     ],
+     [
+      12.55,
+      4.1,
+      0.66
+     ]
+    ],
+    "cable": false,
+    "cartridge": "none",
     "lamp_w": 6.0,
     "lamp_k": 2700,
     "shade_glow": 0.3,

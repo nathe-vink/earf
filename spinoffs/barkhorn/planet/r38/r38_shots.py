@@ -15,7 +15,7 @@ S.OUT = os.path.join(T37.ROOT, 'studio', 'shots', 'barkhorn', 'planet38')
 T37.KEYS += ('zone_life', 'sink_under', 'sink_fill', 'sink_rake', 'host_stand')
 S.DEFAULT = T37.DEFAULT = dict(T37.DEFAULT, zone_life=True, host_stand=True, coins=True)
 
-VIEWS = {k: v for k, v in T37.VIEWS.items() if k in ('listening-smoke', 'sink', 'bar-smoke', 'street')}
+VIEWS = {k: v for k, v in T37.VIEWS.items() if k in ('listening-smoke', 'sink', 'bar-smoke', 'street', 'bar-mixed', 'listening-mixed')}
 # the sink (the lead: its thickness should read, light through the polished edges, the front face about lum 8-12 rather
 # than crushed): the cast less dense (0.025 -> 0.08) and a hidden panel under it lighting the cast from below
 VIEWS['sink'] = {**VIEWS['sink'], 'settings': {**VIEWS['sink']['settings'], 'sink_radius': 0.08, 'sink_under': 1.2, 'sink_fill': 20.0, 'sink_wash': 15.0}}
@@ -25,9 +25,9 @@ VIEWS['sink'] = {**VIEWS['sink'], 'settings': {**VIEWS['sink']['settings'], 'sin
 VIEWS['sink']['settings'].update(sink_deep='#A9A7AA', sink_radius=0.10, sink_rake=4.0, sink_under=0.25, sink_spot=15.0)
 # the listening view a step back and to the side, looking down a little more, so the middle table (its Orb, a record,
 # a glass) and the near chair (a coat over its back) come into the frame's lower left (round 37's p6 framed the props out)
-VIEWS['listening-smoke'] = {**VIEWS['listening-smoke'],
-                            'camera': {**VIEWS['listening-smoke']['camera'], 'position': [11.9, 1.6, 1.55],
-                                       'target': [16.5, 3.3, 1.0]}}
+for _k in ('listening-smoke', 'listening-mixed'):
+    VIEWS[_k] = {**VIEWS[_k],
+                 'camera': {**VIEWS[_k]['camera'], 'position': [11.9, 1.6, 1.55], 'target': [16.5, 3.3, 1.0]}}
 # the coins, close: the request column at the decks from a stool at the counter; the bowl on the host stand at the door
 _C = T37.RP.COUNTER; _cx = round(T37.RP.DJ['x'] + 0.80, 3); _cy = round(_C['y1'] - 0.30, 3); _zt = _C['top_z']
 VIEWS['coins-decks'] = {'title': 'EARFcoin: the request column at the decks (Smoke)',

@@ -33,7 +33,10 @@ def room_piece(v):
             # (listening p2) and was the last red clipping in Ember (r37)
             'plinth_bar': round(0.5 * v['plinth'] * RP.PLINTH_GAIN[cfg['bar']], 3), 'plinth_bar_col': RP.PLINTH_COL[cfg['bar']],
             'plinth_listen': round(0.5 * v['plinth'] * RP.PLINTH_GAIN[cfg['listen']], 3),
-            'plinth_listen_col': RP.PLINTH_COL[cfg['listen']]}
+            'plinth_listen_col': RP.PLINTH_COL[cfg['listen']],
+            # each Orb's cable through a grommet in its table to the floor (the zone's floor raised)
+            'orb_cables': [{'position': list(s), 'floor': RP.ZONE['z'] if s[0] >= RP.ZONE['x0'] else 0.0}
+                           for s in RP.sphere_spots()]}
 
 
 S.room_piece = room_piece
@@ -63,15 +66,11 @@ def lamps(v):
              'spots': [[x, y, RP.DOME['rim_z']] for x in RP.DOMES], 'ceiling': RP.CEIL,
              'lamp_w': round(v['dome_w'] * RP.LAMP_GAIN[cfg['dome']], 2),
              'lamp_k': 2700, 'shade_glow': v.get('dome_glow_' + cfg['dome'], RP.LAMP_GLOW[cfg['dome']]),
-             'noshadow': noshadow,
-             'materials': {'brass': dict(RP.ANODISED), 'liner': {'glow_color': RP.LINER_GLOW[cfg['dome']]}},
-             'parts': [{'match': 'canopy', **RP.BLACK_ACRYLIC}]},
+             'noshadow': noshadow},
             {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'flavour': RP.LAMP_FLAVOUR[cfg['orb']],
-             'spots': [{'position': list(s), 'floor': RP.ZONE['z'] if s[0] >= RP.ZONE['x0'] else 0.0}
-                       for s in RP.sphere_spots()],
-             'materials': {'brass': dict(RP.ANODISED), 'steel': dict(RP.BLACK_ACRYLIC),
-                           'liner': {'glow_color': RP.LINER_GLOW[cfg['orb']]}},
-             'cable': {'radius': 0.0022, 'back': 0.075, 'run': 0.10},
+             # the companions' kit (r31-companions 69a4ba5, round 32f): black hardware and the calibrated tints in its
+             # GLBs and variants, no local overrides; plugged in, its own cable off for the grommet's (planet_r37)
+             'spots': [list(s) for s in RP.sphere_spots()], 'cable': False, 'cartridge': 'none',
              'lamp_w': round(v['sphere_w'] * RP.LAMP_GAIN[cfg['orb']], 2),
              'lamp_k': 2700,
              'shade_glow': v.get('orb_glow_' + cfg['orb'], RP.LAMP_GLOW[cfg['orb']] * v.get('sphere_glow', 1.1) / 1.1),

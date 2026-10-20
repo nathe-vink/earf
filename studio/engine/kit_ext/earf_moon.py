@@ -19,9 +19,13 @@ Round 32d, the pick (spinoffs/barkhorn/companions/crystal.py): `fn` "dome" (the 
 spots its rim, `ceiling` as above) and "orb" (the cordless crystal ball; spots the table). Their frost is set within
 the tint, and it is the liner that glows (`shade_glow`, default 0.25); `lamp_w` defaults 9 and 3. For a spot or the
 piece: `hide` (a pattern of part names, e.g. "hub|pins|cob|gland|cord|canopy" for a spare cover alone), `cover_drop`
-(m) and `cover_turn` (deg) to show the swap, and `lamp`: false for no light. `noshadow` (a pattern of part names, e.g.
-COVER) makes those parts cast no shadow, so the hidden lamp lights the room through them (Cycles passes a lamp's light
-through glass only as caustics; Planet's loft, f7c99a4); unset, every part casts its shadow, as before.
+(m) and `cover_turn` (deg) to show the swap, and `lamp`: false for no light.
+
+Round 32f: the hardware is black (black anodised aluminium, black polished acrylic), in the GLBs themselves. The Orb
+plugs in over USB-C as standard; for a spot or the piece, `cable` (default true: its black fabric cable, dressed
+straight back from a notch at the back left, 420 mm) and `cartridge`: "none" (the default: the plug-in Orb, a blanking
+cap in the bay), "in" (the battery cartridge fitted: cordless) or "out" (the cartridge slid `cartridge_out` m out of
+the back, default 0.045, to show it). A cordless Orb is `cable: false, cartridge: "in"`.
 
 The lamp follows Planet's loft (commit f7c99a4): hidden from the camera and from transmission (seen through rough or
 frosted acrylic it read as a blob or a square), and from glossy rays (it mirrored as a hot spot in the frost); it lights
@@ -37,7 +41,6 @@ ENGINE = os.path.dirname(HERE)
 ROOT = os.path.dirname(os.path.dirname(ENGINE))
 if ENGINE not in sys.path:
     sys.path.insert(0, ENGINE)
-import materials as MT                                             # noqa: E402
 import product as PR                                                 # noqa: E402
 
 DEFS = {'table': 'studio/products/earf-moon-table.json', 'pendant': 'studio/products/earf-moon-pendant.json',
@@ -92,7 +95,16 @@ def _place(bpy, which, name, p, kit):
         if which in CANOPY_TOP_MM and p.get('ceiling') is not None:
             lift = p['ceiling'] - s['position'][2] - CANOPY_TOP_MM[which] / 1000
         hide = s.get('hide', p.get('hide', ''))
-        noshadow = p.get('noshadow', '')
+        cart_off = 0.0
+        if which == 'orb':
+            # round 32f: plug-in, the cartridge an option (none, in, out), the cable shown or not
+            cart = s.get('cartridge', p.get('cartridge', 'none'))
+            extra = ['cartridge*'] if cart == 'none' else ['blank']
+            if not s.get('cable', p.get('cable', True)):
+                extra.append('cable')
+            hide = '|'.join([h for h in [hide] + extra if h])
+            if cart == 'out':
+                cart_off = s.get('cartridge_out', p.get('cartridge_out', 0.045))
         # the swap, shown: the cover lowered (m) and turned (deg) off its fixture
         drop, turn = s.get('cover_drop', p.get('cover_drop', 0.0)), s.get('cover_turn', p.get('cover_turn', 0.0))
         for pname, t in tpl.items():
@@ -102,19 +114,11 @@ def _place(bpy, which, name, p, kit):
             ob = bpy.data.objects.new(f'{name}-{pname}#{i}', t.data)
             bpy.context.scene.collection.objects.link(ob)
             ob.material_slots[0].link = 'OBJECT'; ob.material_slots[0].material = mats[fl][mname]
-            # `parts`: a material for some parts only, apart from the rest of their group (the Dome's canopy in black
-            # acrylic while its hub stays anodised: the owner, 2026-10-20)
-            for k, pm in enumerate(p.get('parts', [])):
-                if PR._match(pname, pm['match']):
-                    key = f'{name}-part{k}'
-                    if key not in _PARTS:
-                        spec = {a: b for a, b in pm.items() if a not in ('match', 'preset')}
-                        _PARTS[key] = MT.make(bpy, key, pm['preset'], spec)
-                    ob.material_slots[0].material = _PARTS[key]
-                    break
             M = Matrix.Identity(4)
             if (drop or turn) and PR._match(pname, COVER):
                 M = Matrix.Translation((0, 0, -drop)) @ Matrix.Rotation(math.radians(-turn), 4, 'Z')
+            if cart_off and PR._match(pname, 'cartridge*'):
+                M = Matrix.Translation((0, cart_off, 0))
             if lift and pname == 'canopy':
                 M = Matrix.Translation((0, 0, lift))
             elif lift and pname == 'cord':
@@ -122,49 +126,12 @@ def _place(bpy, which, name, p, kit):
                 k = (z1 - z0 + lift) / (z1 - z0)
                 M = Matrix.Translation((0, 0, z0)) @ Matrix.Diagonal((1, 1, k, 1)) @ Matrix.Translation((0, 0, -z0))
             ob.matrix_world = T @ M
-            if noshadow and PR._match(pname, noshadow):
-                ob.visible_shadow = False
             objs.append(ob)
         if s.get('lamp', p.get('lamp', True)) is False:
             continue
-        if p.get('cable'):
-            objs += _cable(bpy, f'{name}-cable#{i}', T, {**p['cable'], 'floor': s.get('floor', p['cable'].get('floor', 0.0))})
         pos = T @ (Vector(LIGHT_MM[which]) / 1000)
         objs.append(_lamp(bpy, f'{name}-lamp#{i}', pos, p.get('lamp_w', LAMP_W[which]), p.get('lamp_k', 2700)))
     return objs
-
-
-_PARTS = {}
-
-
-def _cable(bpy, name, T, c):
-    """A plug-in Orb, wired (the owner, 2026-10-20: USB-C, a battery cartridge optional; in a bar it is wired): a thin
-    black fabric cable from the back of the base across the table top to a grommet, and down through it to the floor."""
-    import bmesh
-    r = c.get('radius', 0.0022); back = c.get('back', 0.075); run = c.get('run', 0.10); floor = c['floor']
-    z0 = T.translation.z
-    p0 = T @ Vector((0.0, back, r)); p1 = T @ Vector((0.0, back + run, r))
-    pts = [p0, p1, Vector((p1.x, p1.y, z0 - 0.02)), Vector((p1.x, p1.y, floor + r))]
-    me = bpy.data.meshes.new(name); bm = bmesh.new()
-    for a, b in zip(pts, pts[1:]):
-        d = b - a; L = d.length
-        if L < 1e-4:
-            continue
-        g = bmesh.ops.create_cone(bm, cap_ends=True, segments=10, radius1=r, radius2=r, depth=L)
-        q = d.normalized().to_track_quat('Z', 'Y').to_matrix().to_4x4()
-        bmesh.ops.transform(bm, matrix=Matrix.Translation((a + b) / 2) @ q, verts=g['verts'])
-    # the grommet: a black anodised ring flush in the table top
-    g = bmesh.ops.create_cone(bm, cap_ends=False, segments=24, radius1=0.009, radius2=0.009, depth=0.003)
-    bmesh.ops.transform(bm, matrix=Matrix.Translation((p1.x, p1.y, z0 + 0.0008)), verts=g['verts'])
-    bm.to_mesh(me); bm.free()
-    for f in me.polygons:
-        f.use_smooth = True
-    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
-    key = 'orb-cable-fabric'
-    if key not in _PARTS:
-        _PARTS[key] = MT.make(bpy, key, 'rubber', {'color': '#121212', 'roughness': 0.85, 'sheen': 0.5})
-    ob.data.materials.append(_PARTS[key])
-    return [ob]
 
 
 def table(bpy, name, p, kit):
