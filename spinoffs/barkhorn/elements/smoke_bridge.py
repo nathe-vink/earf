@@ -44,8 +44,8 @@ def smoke_column(x, y, seed):
         t = k / 7
         w = 1.8 + 9.0 * t ** 1.2
         col = '#3E3B38' if k == 0 else ('#242221' if k == 1 else '#121212')
-        out.append(piece('ext', module='smoke_el', fn='woodsmoke', position=[x - 4.5 * t ** 1.6, y + 1.5 * t, 1.2 + 2.6 * k],
-                         size=[w, w, 3.6], density=(1.5 + 3.5 * min(1.0, 2 * t)) * (1.0 - 0.5 * t), seed=seed + k,
+        out.append(piece('ext', module='smoke_el', fn='woodsmoke', position=[x - 4.5 * t ** 1.6, y + 1.5 * t, 0.9 + 2.6 * k],
+                         size=[w, w, 3.6], density=(3.0 + 2.5 * min(1.0, 2 * t)) * (1.0 - 0.5 * t), seed=seed + k,
                          scale=0.6 + 1.8 * t, cut=0.4, soft=0.3, anisotropy=0.35, fade=[0.35, 0.35, 0.4], floor=0.0,
                          rise=1.6, color=col, detail_scale=0.2 + 0.4 * t, detail_weight=0.55))
     return out
@@ -115,14 +115,17 @@ def shot():
         props.append(wreck(x, y, heading, paint_left, 11 + i))
         if burning:
             props += fire(x, y, heading, 50 + i) + smoke_column(x, y, 60 + 10 * i)
-            lights[f'fire{i}'] = point([x, y, 1.3], 9000.0, '#FF7426', 0.9)
-    cam = camera(height=0.9, distance=5.0, azimuth=-12, lens=35, target=(0.0, 0.0, 0.85), fstop=4.0, shift_x=0.0,
+            lights[f'fire{i}'] = point([x, y, 1.3], 30000.0, '#FF7426', 0.9)
+            # the fire's light on the speaker's near flank: a warm rim from the wreck's direction
+            lights[f'firerim{i}'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [x * 0.4, y * 0.4, 1.3],
+                                     'target': [0.0, 0.0, 0.8], 'irradiance': 14.0, 'color': '#FF8A3A', 'receivers': SHELL}
+    cam = camera(height=0.9, distance=5.0, azimuth=-12, lens=35, target=(0.0, 0.0, 0.85), fstop=2.8, shift_x=0.0,
                  shift_y=0.12)
     cam['clip_end'] = 3000
     return frame('smoke_bridge', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.6),
                  'barkhorn, Smoke, the aftermath on a bridge', lights=lights, rotate_z=18.0, position=(0.0, 0.0, 0.0),
                  samples=512, exposure=0.0,
-                 fin=finish(contrast=0.06, clarity=0.04, bloom=0.06, bloom_px=40, threshold=0.85, vignette=0.25))
+                 fin={**finish(contrast=0.06, clarity=0.04, bloom=0.08, bloom_px=40, threshold=0.8, vignette=0.25), 'grain': 2.5})
 
 
 def portrait():

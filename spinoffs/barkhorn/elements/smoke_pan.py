@@ -54,7 +54,7 @@ def shot():
                    scale=15.0, open=0.35, seed=7)] + plume() + [
         # the contact shadow: a shadow-only disc in the cabinet's base, blocking the sky over the crust beneath it
         piece('ext', module='smoke_el', fn='occluder', position=[0.0, 0.0, 0.03], radius=0.36, sx=1.0, sy=0.9, rotate_z=18.0)]
-    cam = camera(height=0.8, distance=4.4, azimuth=-20, lens=40, target=(0.0, 0.0, 0.85), fstop=4.0, shift_x=0.08,
+    cam = camera(height=0.8, distance=4.4, azimuth=-20, lens=40, target=(0.0, 0.0, 0.85), fstop=2.0, shift_x=0.08,
                  shift_y=0.06)
     cam['clip_end'] = 3000
     lights = {
@@ -65,9 +65,9 @@ def shot():
     }
     return frame('smoke_pan', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.8),
                  'barkhorn, Smoke, black smoke over a salt pan', sun={**sun_from_sky(SKY, SKY_ROT, irradiance=9.0),
-                                                                     'elevation_deg': 22.0, 'angle_deg': 1.5},
+                                                                     'elevation_deg': 22.0, 'angle_deg': 3.5},
                  lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.01), samples=512, exposure=0.3,
-                 fin=finish(contrast=0.06, clarity=0.04, saturation=-0.85, vignette=0.15))
+                 fin={**finish(contrast=0.06, clarity=0.04, saturation=-0.85, vignette=0.15), 'grain': 2.5})
 
 
 def portrait():
