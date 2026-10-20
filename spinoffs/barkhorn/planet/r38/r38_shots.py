@@ -28,7 +28,21 @@ VIEWS['sink']['settings'].update(sink_deep='#A9A7AA', sink_radius=0.10, sink_rak
 VIEWS['listening-smoke'] = {**VIEWS['listening-smoke'],
                             'camera': {**VIEWS['listening-smoke']['camera'], 'position': [11.9, 1.6, 1.55],
                                        'target': [16.5, 3.3, 1.0]}}
+# the coins, close: the request column at the decks from a stool at the counter; the bowl on the host stand at the door
+_C = T37.RP.COUNTER; _cx = round(T37.RP.DJ['x'] + 0.80, 3); _cy = round(_C['y1'] - 0.30, 3); _zt = _C['top_z']
+VIEWS['coins-decks'] = {'title': 'EARFcoin: the request column at the decks (Smoke)',
+                        'camera': {'position': [_cx - 0.55, round(_C['y0'] - 0.45, 3), round(_zt + 0.30, 3)],
+                                   'target': [_cx - 0.10, _cy, round(_zt + 0.06, 3)], 'lens_mm': 50, 'level': True,
+                                   'fstop': 4.0, 'focus': [_cx, _cy, round(_zt + 0.05, 3)]},
+                        'settings': {**T37.VIEWS['bar-smoke']['settings'], 'config': 'smoke', 'exposure': -0.3}}
+_H = T37.RP.HOST
+VIEWS['coins-door'] = {'title': 'EARFcoin: the bowl at the door (Smoke)',
+                       'camera': {'position': [_H['x'] + 0.75, _H['y'] + 0.45, 1.70],
+                                  'target': [_H['x'], _H['y'], _H['top'] + 0.03], 'lens_mm': 50, 'level': True,
+                                  'fstop': 4.0, 'focus': [_H['x'], _H['y'], _H['top'] + 0.03]},
+                       'settings': {**T37.VIEWS['bar-smoke']['settings'], 'config': 'smoke', 'exposure': 2.1, 'host_w': 40.0}}
 S.VIEWS = VIEWS
+T37.VIEWS.update(VIEWS)                                            # r37's shot() reads its own VIEWS
 
 # --- EARFcoin (r31-coin 3cf191f, studio/engine/kit_ext/earf_coin.py; the owner: "Acrylic coins with the EARF globe on
 # them that can be exchanged for a song request. Each guest gets one."): the request column at the decks where the
@@ -43,17 +57,38 @@ def props(v):
     RP = T37.RP; C = RP.COUNTER; zt = C['top_z']
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'column',
                 'spots': [[round(RP.DJ['x'] + 0.80, 4), round(C['y1'] - 0.30, 4), zt]], 'rotate_z': 0.0,
-                'coins': ['ice', 'ember', 'acid', 'smoke', 'haze'], 'out': 6.0})
+                'coins': ['ice', 'ember', 'acid', 'smoke', 'haze', 'dust', 'fog', 'poison', 'ember', 'ice', 'acid', 'haze', 'dust', 'smoke'], 'out': 6.0})
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan',
                 'spots': [[4.35, round(C['y0'] + 0.16, 4), zt]], 'flavours': ['dust', 'fog', 'poison'], 'heading': 15.0})
     H = RP.HOST
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'bowl', 'spots': [[H['x'], H['y'], H['top']]],
-                'n': 40, 'bowl': 'smoke', 'd': 220})
+                'n': 40, 'bowl': v.get('coin_bowl', 'brass'), 'd': 220})
     return out
 
 
 S.props = props
 T37.props = props
+
+_lights = S.lights
+
+
+def lights(v):
+    L = _lights(v)
+    if v.get('coins'):
+        H = T37.RP.HOST                                 # a pinhole downlight over the host stand, onto the bowl
+        L['host'] = {'type': 'spot', 'position': [H['x'], H['y'], T37.RP.CEIL - 0.05], 'target': [H['x'], H['y'], H['top']],
+                     'power_w': v.get('host_w', 40.0), 'cone_deg': 18.0, 'blend': 0.6, 'radius_m': 0.02, 'color': 2700,
+                     'camera': False}
+        C = T37.RP.COUNTER                              # and a narrow spot from the bar's ceiling onto the request column
+        cx, cy = round(T37.RP.DJ['x'] + 0.80, 3), round(C['y1'] - 0.30, 3)
+        L['column'] = {'type': 'spot', 'position': [cx, round(cy - 0.9, 3), T37.RP.CEIL - 0.25],
+                       'target': [cx, cy, round(C['top_z'] + 0.08, 3)], 'power_w': v.get('column_w', 6.0), 'cone_deg': 10.0,
+                       'blend': 0.6, 'radius_m': 0.02, 'color': 2700, 'camera': False}
+    return L
+
+
+S.lights = lights
+T37.lights = lights
 
 _shot = S.shot
 

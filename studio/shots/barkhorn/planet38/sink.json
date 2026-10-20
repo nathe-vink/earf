@@ -373,7 +373,16 @@
      "ember",
      "acid",
      "smoke",
-     "haze"
+     "haze",
+     "dust",
+     "fog",
+     "poison",
+     "ember",
+     "ice",
+     "acid",
+     "haze",
+     "dust",
+     "smoke"
     ],
     "out": 6.0
    },
@@ -409,7 +418,7 @@
      ]
     ],
     "n": 40,
-    "bowl": "smoke",
+    "bowl": "brass",
     "d": 220
    }
   ]
@@ -1024,6 +1033,44 @@
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "host": {
+   "type": "spot",
+   "position": [
+    1.62,
+    1.95,
+    3.35
+   ],
+   "target": [
+    1.62,
+    1.95,
+    1.02
+   ],
+   "power_w": 40.0,
+   "cone_deg": 18.0,
+   "blend": 0.6,
+   "radius_m": 0.02,
+   "color": 2700,
+   "camera": false
+  },
+  "column": {
+   "type": "spot",
+   "position": [
+    7.7,
+    3.35,
+    3.15
+   ],
+   "target": [
+    7.7,
+    4.25,
+    1.15
+   ],
+   "power_w": 6.0,
+   "cone_deg": 10.0,
+   "blend": 0.6,
+   "radius_m": 0.02,
    "color": 2700,
    "camera": false
   }
