@@ -710,3 +710,152 @@ def arum(bpy, name, p, kit):
     pos = {'position': p.get('position', [0, 0, 0]), 'rotate': [0, 0, p.get('turn', 0.0)]}
     return [_obj(bpy, f'{name}-0', stalk, stalk_m, pos), _obj(bpy, f'{name}-1', ripe, ripe_m, pos),
             _obj(bpy, f'{name}-2', green, green_m, pos)]
+
+
+def yew(bpy, name, p, kit):
+    """A yew's bough (Taxus baccata) in autumn: Poly Haven's fir_sapling (flat two-ranked needles, as yew has) placed
+    and turned like piece('asset'), its needles darkened to yew's near-black green and glossed, and `arils` red arils
+    hung at its twig tips: a fleshy scarlet cup, open at the end, the dark seed showing in it (radius `aril`)."""
+    root = assets.place(bpy, p.get('model', 'fir_sapling'), p.get('res', '2k'), tuple(p.get('position', [0, 0, 0])),
+                        tuple(p.get('rotate', [0, 0, 0])), p.get('scale', 1.0), name)
+    meshes = [o for o in root.children_recursive if o.type == 'MESH']
+    for o in meshes:
+        for slot in o.material_slots:
+            m = slot.material
+            if m is None or not m.use_nodes:
+                continue
+            m = m.copy(); slot.material = m
+            b = next((n for n in m.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+            if b is None or not b.inputs['Base Color'].is_linked:
+                continue
+            nt = m.node_tree; src = b.inputs['Base Color'].links[0].from_socket
+            hsv = nt.nodes.new('ShaderNodeHueSaturation')
+            hsv.inputs['Hue'].default_value = 0.5; hsv.inputs['Saturation'].default_value = 0.85
+            hsv.inputs['Value'].default_value = p.get('value', 0.55)
+            nt.links.new(src, hsv.inputs['Color']); nt.links.new(hsv.outputs['Color'], b.inputs['Base Color'])
+            if not b.inputs['Roughness'].is_linked:
+                b.inputs['Roughness'].default_value = 0.4
+    bpy.context.view_layer.update()
+    # twig tips: the needles' vertices furthest from the bough's own axis, sampled
+    rnd = random.Random(p.get('seed', 7))
+    pts = []
+    for o in meshes:
+        mw = o.matrix_world
+        vs = o.data.vertices
+        for _ in range(min(4000, len(vs))):
+            pts.append(mw @ vs[rnd.randrange(len(vs))].co)
+    if not pts:
+        return [root]
+    c = sum(pts, Vector()) / len(pts)
+    pts.sort(key=lambda v: -(v - c).length)
+    far = pts[:max(1, len(pts) // 5)]
+    ar = p.get('aril', 0.0045)
+    cup, seed = bmesh.new(), bmesh.new()
+    for k in range(p.get('arils', 30)):
+        q = far[rnd.randrange(len(far))] + Vector((0, 0, -ar * 1.4))      # hanging just under the twig
+        r = ar * rnd.uniform(0.8, 1.15)
+        g = bmesh.ops.create_uvsphere(cup, u_segments=14, v_segments=10, radius=r)
+        for v in g['verts']:
+            z = v.co.z
+            v.co = Vector((v.co.x, v.co.y, z * 1.15)) + q
+        # the open end: the dark seed's tip in the cup's lower mouth
+        g2 = bmesh.ops.create_uvsphere(seed, u_segments=8, v_segments=6, radius=r * 0.45)
+        for v in g2['verts']:
+            v.co = v.co + q + Vector((0, 0, -r * 0.95))
+    cm, _, cb = _node_mat(bpy, f'{name}-aril')
+    cb.inputs['Base Color'].default_value = (*_hex(p.get('red', '#C8141A')), 1)
+    cb.inputs['Roughness'].default_value = 0.12; cb.inputs['Coat Weight'].default_value = 0.6
+    cb.inputs['Subsurface Weight'].default_value = 0.4; cb.inputs['Subsurface Radius'].default_value = (1.0, 0.2, 0.1)
+    sm = _plain(bpy, f'{name}-seed', '#2A2418', 0.35)
+    return [root, _obj(bpy, f'{name}-arils', cup, cm, {}), _obj(bpy, f'{name}-seeds', seed, sm, {})]
+
+
+def salamander(bpy, name, p, kit):
+    """A fire salamander (Salamandra salamandra) on wet moss: `length` snout to tail tip (about 0.18 m), facing +y in
+    its frame, its spine bent `bend` (an S, radians); smooth, glossy, wet skin, black with irregular yellow blotches
+    (its own pattern by `seed`), bulging parotoid glands behind the eyes, short splayed limbs with blunt toes. Placed
+    at `position`, turned `turn` degrees; `drop` sits it on whatever is below."""
+    rnd = random.Random(p.get('seed', 3))
+    Lg = p.get('length', 0.18); bend = p.get('bend', 0.35)
+    # the spine: head (t=0) to tail tip (t=1), an S in plan, lying close to the ground
+    def spine(t):
+        x = math.sin(t * math.pi * 1.3 + 0.2) * bend * Lg * 0.14 * t
+        y = Lg * (0.5 - t)
+        return Vector((x, y, 0.0))
+    def rad(t):                                           # the body's half-width along it (m)
+        if t < 0.05:
+            return Lg * (0.028 + 0.7 * t)                 # the blunt, rounded snout
+        if t < 0.17:
+            return Lg * 0.062 + Lg * 0.012 * math.sin((t - 0.05) / 0.12 * math.pi)   # the broad head, parotoids
+        if t < 0.21:
+            return Lg * 0.056                             # the short neck
+        if t < 0.55:
+            return Lg * 0.066                             # the stout trunk
+        return Lg * 0.06 * max(0.04, (1.0 - (t - 0.55) / 0.45)) ** 1.1   # the tail, thick at its root
+    n = 60
+    pts = [spine(i / (n - 1)) for i in range(n)]
+    radii = [rad(i / (n - 1)) for i in range(n)]
+    body = bmesh.new()
+    kit._tube(body, [tuple(v + Vector((0, 0, r * 0.72))) for v, r in zip(pts, radii)], radii, 0.74, 0.0, 24, 2)
+    # four limbs, splayed, elbows up, each ending in blunt toes on the ground
+    limbs = bmesh.new()
+    for t, side, fwd in ((0.22, 1, 1), (0.22, -1, 1), (0.5, 1, -1), (0.5, -1, -1)):
+        i = int(t * (n - 1)); c = pts[i]
+        T = (pts[min(i + 1, n - 1)] - pts[max(i - 1, 0)]).normalized()
+        S = Vector((-T.y, T.x, 0)) * side
+        r = radii[i]
+        sh = c + S * r * 0.8 + Vector((0, 0, r * 0.5))
+        el = c + S * (r + Lg * 0.06) + Vector((0, 0, r * 0.75)) - T * fwd * Lg * 0.01
+        ft = c + S * (r + Lg * 0.08) - T * fwd * Lg * 0.04 + Vector((0, 0, Lg * 0.006))
+        kit._tube(limbs, [tuple(sh), tuple(el), tuple(ft)], [Lg * 0.018, Lg * 0.014, Lg * 0.011], 0.8, 0.0, 10, 4)
+        for k in range(4 if fwd > 0 else 5):
+            a = (k - (1.5 if fwd > 0 else 2.0)) * 0.42
+            d = (S * math.cos(a) - T * fwd * math.sin(a) * 0.9).normalized()
+            kit._tube(limbs, [tuple(ft), tuple(ft + d * Lg * 0.028 + Vector((0, 0, -Lg * 0.004)))],
+                      [Lg * 0.006, Lg * 0.0045], 0.7, 0.0, 6, 2)
+    # the eyes: dark, bulging, near the head's top
+    eyes = bmesh.new()
+    for side in (1, -1):
+        i = int(0.07 * (n - 1)); c = pts[i]; r = radii[i]
+        T = (pts[i + 1] - pts[i - 1]).normalized(); S = Vector((-T.y, T.x, 0)) * side
+        g = bmesh.ops.create_uvsphere(eyes, u_segments=12, v_segments=8, radius=Lg * 0.0105)
+        for v in g['verts']:
+            v.co = v.co + c + S * r * 0.58 + Vector((0, 0, r * 0.88))
+    for bm_ in (body, limbs):
+        bmesh.ops.subdivide_edges(bm_, edges=bm_.edges[:], cuts=1, use_grid_fill=True, smooth=0.5)
+    # the skin: wet glossy black with its own yellow blotches (stretched noise, thresholded hard), a little SSS
+    m, nt, b = _node_mat(bpy, f'{name}-skin'); L = nt.links.new
+    tc = nt.nodes.new('ShaderNodeTexCoord'); mp = nt.nodes.new('ShaderNodeMapping')
+    mp.inputs['Scale'].default_value = (1.6, 0.8, 1.6); mp.inputs['Location'].default_value = (rnd.uniform(0, 9), rnd.uniform(0, 9), 0)
+    L(tc.outputs['Object'], mp.inputs['Vector'])
+    # rounded blotches, each its own size, the coordinates warped so none is a perfect disc
+    wn = nt.nodes.new('ShaderNodeTexNoise'); wn.inputs['Scale'].default_value = 1.0 / (Lg * 0.12); wn.inputs['Detail'].default_value = 4.0
+    L(mp.outputs['Vector'], wn.inputs['Vector'])
+    wm = nt.nodes.new('ShaderNodeVectorMath'); wm.operation = 'MULTIPLY_ADD'
+    L(wn.outputs['Color'], wm.inputs[0]); wm.inputs[1].default_value = (Lg * 0.1,) * 3; L(mp.outputs['Vector'], wm.inputs[2])
+    vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = 1.0 / (Lg * 0.085)
+    vo.inputs['Randomness'].default_value = 0.9; L(wm.outputs['Vector'], vo.inputs['Vector'])
+    thr = nt.nodes.new('ShaderNodeMath'); thr.operation = 'MULTIPLY_ADD'      # each cell its own blotch radius
+    L(vo.outputs['Color'], thr.inputs[0]); thr.inputs[1].default_value = -0.25; thr.inputs[2].default_value = 0.0
+    dd = nt.nodes.new('ShaderNodeMath'); dd.operation = 'ADD'; L(vo.outputs['Distance'], dd.inputs[0]); L(thr.outputs['Value'], dd.inputs[1])
+    ramp = nt.nodes.new('ShaderNodeValToRGB'); L(dd.outputs['Value'], ramp.inputs['Fac'])
+    e = ramp.color_ramp.elements
+    e[0].position = 0.18; e[0].color = (*_hex(p.get('yellow', '#E8B008')), 1)
+    e[1].position = 0.22; e[1].color = (*_hex('#0C0B0A'), 1)
+    L(ramp.outputs['Color'], b.inputs['Base Color'])
+    b.inputs['Roughness'].default_value = 0.22; b.inputs['Coat Weight'].default_value = 0.8
+    b.inputs['Coat Roughness'].default_value = 0.08
+    b.inputs['Subsurface Weight'].default_value = 0.12; b.inputs['Subsurface Radius'].default_value = (0.002, 0.0015, 0.001)
+    fine = nt.nodes.new('ShaderNodeTexNoise'); fine.inputs['Scale'].default_value = 1.0 / (Lg * 0.006)
+    L(tc.outputs['Object'], fine.inputs['Vector'])
+    bp = nt.nodes.new('ShaderNodeBump'); bp.inputs['Strength'].default_value = 0.25; bp.inputs['Distance'].default_value = 0.0004
+    L(fine.outputs['Fac'], bp.inputs['Height']); L(bp.outputs['Normal'], b.inputs['Normal'])
+    em = _plain(bpy, f'{name}-eye', '#050505', 0.05)
+    pos = list(p.get('position', [0, 0, 0]))
+    if p.get('drop'):
+        bpy.context.view_layer.update(); dg = bpy.context.evaluated_depsgraph_get()
+        hit, loc, *_ = bpy.context.scene.ray_cast(dg, Vector((pos[0], pos[1], pos[2] + 1.0)), Vector((0, 0, -1)), distance=2.0)
+        if hit:
+            pos[2] = loc.z - Lg * 0.004
+    q = {'position': pos, 'rotate': [0, 0, p.get('turn', 0.0)]}
+    return [_obj(bpy, f'{name}-0', body, m, q), _obj(bpy, f'{name}-1', limbs, m, q), _obj(bpy, f'{name}-2', eyes, em, q)]

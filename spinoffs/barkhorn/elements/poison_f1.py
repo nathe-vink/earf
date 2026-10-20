@@ -12,14 +12,18 @@ on the trunks (chinese_hackberry_bark). The poisons, all in season together in a
 - death caps (Amanita phalloides), olive, at the foot of the beech;
 - lords-and-ladies (Arum maculatum) in berry: bare stalks with clubs of glossy orange-red berries;
 - deadly nightshade (Atropa belladonna) sprigs with glossy black berries.
+Pass 5 (the lead's notes): the poisons grouped as they grow (a death cap cluster at the speaker's foot, a clump of
+lords-and-ladies, a straggly nightshade bush, a yew's bough with red arils over the top-right corner), the troop varied
+(one fallen, one old and cupped), the beech wood let in (copper litter on the bank, a low golden backlight).
 No animals: no CC0 scan of an adder or a fire salamander exists (Poly Haven, ambientCG, Smithsonian 3D searched
-2026-10-20), and modelled snakes read as toys (poison_a2.md).
+2026-10-20), modelled snakes read as toys (poison_a2.md), and a modelled fire salamander (poison_p_el.salamander)
+was judged a toy on a close crop (2026-10-20).
 """
 import copy
 
 import poison as A
 import poison_a4 as A4
-from common import piece, portrait_of, sky
+from common import area, piece, portrait_of, sky
 
 HDRI, ROT = 'autumn_forest_01', 180.0
 BEECH = '#8A8B82'                   # the bark's smooth grey
@@ -33,10 +37,22 @@ AGARICS2 = [(0.62, -1.62, 0.085, 'convex', 71, dict(lean=[0.035, 0.0], wash=0.05
             (-0.48, -1.72, 0.065, 'convex', 75, dict(lean=[0.01, -0.03], wash=0.1, height=0.12)),
             (-0.95, -1.5, 0.045, 'young', 76, dict(lean=[0.0, 0.01], wash=0.15, height=0.08)),
             (0.25, -2.05, 0.075, 'convex', 77, dict(lean=[0.04, -0.01], wash=0.06, height=0.15, dull=0.12))]
-DEATHCAPS = [(-1.05, -0.55, 0.055, 'convex', 81), (-1.2, -0.42, 0.04, 'young', 82), (-0.95, -0.35, 0.03, 'button', 83)]
-ARUMS = [(0.98, -1.65, 0.38, 41, [0.04, -0.01], 52), (1.1, -1.58, 0.22, 42, [-0.03, 0.015], 30), (0.9, -1.5, 0.29, 43, [0.0, 0.035], 44),
-         (1.2, -0.85, 0.33, 44, [0.02, 0.0], 38)]
-NIGHTSHADE = [(-0.95, -1.75, 0.38, 51), (-1.1, -1.62, 0.32, 52)]
+# pass 5 (the lead): the poisons grouped as they grow. Death caps in a cluster at the speaker's foot, left
+DEATHCAPS = [(0.38, -0.5, 0.06, 'convex', 81), (0.5, -0.42, 0.045, 'young', 82), (0.3, -0.62, 0.03, 'button', 83),
+             (0.56, -0.55, 0.052, 'convex', 84), (0.44, -0.66, 0.025, 'button', 85)]
+# lords-and-ladies in one clump, as they come up from a patch of corms (uneven heights, leaning apart)
+ARUMS = [(1.02, -1.6, 0.36, 41, [0.03, -0.01], 50), (1.1, -1.55, 0.24, 42, [0.035, 0.02], 32), (0.96, -1.52, 0.29, 43, [-0.02, 0.03], 44),
+         (1.07, -1.68, 0.31, 44, [0.01, -0.035], 40), (0.93, -1.64, 0.2, 45, [-0.035, -0.01], 26), (1.14, -1.62, 0.27, 46, [0.04, -0.02], 36)]
+# deadly nightshade: a straggly bush mid-right, behind the berries' clump
+NIGHTSHADE = [(1.12 + dx, 0.3 + dy, h * 0.7, 51 + k) for k, (dx, dy, h) in enumerate(
+    ((0.0, 0.0, 0.75), (0.12, 0.08, 0.62), (-0.1, 0.1, 0.68), (0.06, -0.1, 0.55), (-0.14, -0.05, 0.5), (0.18, -0.04, 0.48),
+     (-0.04, 0.18, 0.8), (0.1, 0.2, 0.58), (-0.2, 0.12, 0.44), (0.22, 0.12, 0.66)))]
+# the yew's bough hanging into the top-right corner, near the lens and soft
+YEW = dict(position=[1.5, -1.55, 1.3], rotate=[168, 0, 200], scale=0.4)
+# the low golden sun of an autumn morning, through the beeches behind and right: the backlight
+SUN = {'azimuth_deg': 150.0, 'elevation_deg': 16.0, 'irradiance': 26.0, 'angle_deg': 0.6, 'color': '#FFC47A'}
+SUNLIT = [(0.0, 0.0, 0.8, 1.1), (-0.2, -1.35, 0.0, 0.7), (0.6, -1.7, 0.0, 0.5), (-0.5, -0.4, 0.0, 0.4), (1.5, 0.5, 0.4, 0.5),
+          (2.5, 6.5, 0.8, 0.8), (-2.0, 7.0, 1.0, 0.8)]
 
 
 def extp(fn, position=(0, 0, 0), **k):
@@ -64,7 +80,22 @@ def shot():
     for x, y, H, sd, lean, n in ARUMS:
         props.append(extp('arum', (x, y, -0.01), height=H, seed=sd, lean=lean, berries=n, berry=0.0055, club=0.22 + n / 400))
     for x, y, H, sd in NIGHTSHADE:
-        props.append(A4.extb('nightshade', (x, y, -0.01), height=H, seed=sd, berries=9, berry=0.0085))
+        props.append(A4.extb('nightshade', (x, y, -0.01), height=H, seed=sd, berries=9, berry=0.0085, leaves=1,
+                             lean=[0.08 * ((sd % 3) - 1), 0.06 * ((sd % 2) * 2 - 1)]))
+    props.append(extp('yew', arils=50, aril=0.006, seed=9, value=0.75, **YEW))
+    # the troop's variety: one old cap gone flat and cupped at the back (a fallen one read as a ball, so none)
+    props.append(A4.extb('amanita', (-0.35, -0.95, -0.05), cap=0.085, age='old', seed=79, torn=0.4, matte=True, dull=0.3, wash=0.0))
+    # the beech wood shows: the bank behind in copper beech litter, a third of its ferns
+    for p in props:
+        if p.get('texture') == 'acg:Moss001':
+            p['texture'] = 'leaves_forest_ground'; p['tint'] = '#5A3A1E'; p['tint_mix'] = 0.15; p['tex_scale'] = 0.6
+        if p.get('fn') == 'plants' and p.get('model') == 'fern_02' and p.get('seed') == 17:
+            p['place'] = p['place'][::3]
+        if p.get('fn') == 'canopy':                                         # the canopy's gaps along the new sun
+            p['holes'] = [A.gap_for(x, y, z, r, (0.0, 4.0), SUN) for x, y, z, r in SUNLIT]
+    s['sun'] = SUN
+    # a cool fill from the camera side, so the speaker's green stays true against the warm backlight
+    s['lights']['cool'] = {**area(-25, 15, 3.0, 1.2, '#DCE6EE', (1.5, 1.5), (0.0, 0.0, 0.7)), 'specular': 0.1}
     for p in props:
         if p.get('fn') == 'amanita' and p.get('species', 'muscaria') == 'muscaria' and p['position'][1] > -1.5:
             p['cap'] = round(p['cap'] * 1.35, 3)                              # a bold troop: mature caps 15-20 cm across
