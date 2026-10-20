@@ -1,0 +1,336 @@
+{
+ "stage1": {
+  "impression": "A dark, glossy box with an oval basin cut into its top, hanging in front of reddish timber boards, with a crude wall spout and a plain pale block beside it. It reads as a CG bathroom-vanity render, not a photograph. The slab's body is near black, so the acrylic reads as black lacquer: no thickness, no glow, no polished edge. The basin is a flat, bright pinkish ellipse with no visible depth or curvature. The left fifth of the frame is empty black, the timber grain is soft and printed-looking, and there is no sign of life. A design magazine would not run this as a specific place; it is a generic hotel washroom.",
+  "score": 3.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Smoke slab must read as thick cast acrylic glowing warm amber through its body and edges (front face lum_median >= 25), not as black lacquer",
+  "The basin must show its rounded depth: a gradient from a bright floor to a darker rim, not a flat lit ellipse",
+  "No dead black block: the left void (0-140 px) must hold detail (crush_pct < 50)",
+  "The linen towel on its brass rod must read as woven linen on a visible brass rod; at present it is an untextured pale block",
+  "The timber boards need real grain relief, board joints and sheen variation at 1:1",
+  "Some sign of life on the slab (soap, a glass, a folded hand towel) and a frame that reads as a specific, designed room rather than a generic vanity"
+ ],
+ "defects": [
+  {
+   "region": [
+    150,
+    290,
+    680,
+    430
+   ],
+   "what": "The slab's front face is near black (lum_median 5.6). No glow through its 120 mm thickness and no glowing polished edges, so it reads as black lacquered MDF, not smoked cast acrylic"
+  },
+  {
+   "region": [
+    300,
+    245,
+    530,
+    275
+   ],
+   "what": "The basin reads as a flat, evenly lit pink-white ellipse (p95 222) with no curvature or depth shading, like a decal on the top"
+  },
+  {
+   "region": [
+    0,
+    0,
+    140,
+    480
+   ],
+   "what": "A dead black band, 19% of the frame and 87% crushed, with no detail. It reads as an unlit void, not as shadow"
+  },
+  {
+   "region": [
+    255,
+    112,
+    310,
+    215
+   ],
+   "what": "The linen towel is a flat pale box with no weave, fold or drape (lum_range 17). The brass rod shows only as a tiny orange fleck at about 312,115"
+  },
+  {
+   "region": [
+    410,
+    40,
+    500,
+    130
+   ],
+   "what": "The spout is crude geometry with a smeared, soft highlight. It does not read as brushed steel"
+  },
+  {
+   "region": [
+    140,
+    230,
+    720,
+    480
+   ],
+   "what": "The timber boards have soft, smeared, printed-looking grain with no relief; the wall under the slab is lit as brightly as the wall above it (lum_median 27.9), so the slab looks pasted on and casts no believable shadow"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No props or sign of life; the frame median of 18.5 is below the 22 to 50 band"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The smoked slab shows no light through its thickness, so the acrylic reads as black lacquer.",
+   "evidence": {
+    "region": [
+     150,
+     290,
+     680,
+     430
+    ],
+    "measured": "lum_median 5.6, lum_p95 36, r/g/b medians 12/4/2"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "0.6",
+    "to": "3.0"
+   },
+   "expected": "The 120 mm body glows warm amber, brightest at its polished edges and the lower arris, and spills warm light onto the boards below it, so the slab reads as lit from within.",
+   "accept": {
+    "region": [
+     150,
+     290,
+     680,
+     430
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The hard spot flattens the basin into an evenly lit ellipse, so the rounded hollow does not show.",
+   "evidence": {
+    "region": [
+     300,
+     245,
+     530,
+     275
+    ],
+    "measured": "lum_median 147, lum_p95 222: a hot, even fill"
+   },
+   "change": {
+    "setting": "the sink spot: power and cone",
+    "from": "6.0 W, cone 35 deg",
+    "to": "3.0 W, cone 20 deg, aimed at the basin's floor so the rim falls into shade"
+   },
+   "expected": "A pool of light on the basin's floor falling off to a darker rim, which shows the basin's curvature; the hot highlight drops.",
+   "accept": {
+    "region": [
+     300,
+     245,
+     530,
+     275
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 185
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The left fifth of the frame is a dead black band that carries nothing.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     140,
+     480
+    ],
+    "measured": "lum_median 0.2, crush_pct 87.3"
+   },
+   "change": {
+    "setting": "camera target",
+    "from": "[11.0, 0.4, 0.9]",
+    "to": "pan right about 0.25 m along x (about [11.25, 0.4, 0.9]) so the alcove's dark return leaves the frame and the slab sits on the left third, with the towel and rod fully in frame"
+   },
+   "expected": "The frame is all boards, slab and towel, with no region crushed beyond 50%.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The frame sits below the night-interior band.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 18.5, crush_pct 18.5"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "0.8",
+    "to": "1.1"
+   },
+   "expected": "Frame median of about 25 to 30 with the basin still unclipped.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The linen towel is an untextured pale block and the brass rod is almost invisible.",
+   "evidence": {
+    "region": [
+     255,
+     112,
+     310,
+     215
+    ],
+    "measured": "lum_range 17.3; the rod shows only as a fleck of orange at about 312,115"
+   },
+   "change": {
+    "setting": "the towel's finish (linen) and the brass's finish",
+    "from": "flat diffuse, no texture; the brass unlit",
+    "to": "an oatmeal linen with a visible weave bump and slub, roughness 0.9, and a soft sag over the rod; satin brass, roughness 0.35, so it picks up a line highlight from the sink spot"
+   },
+   "expected": "The towel reads as cloth, with shading across its fold, and the rod reads as a thin brass line.",
+   "accept": {
+    "region": [
+     255,
+     112,
+     310,
+     215
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The timber boards look like printed veneer: soft grain, no relief, and even light above and below the slab.",
+   "evidence": {
+    "region": [
+     560,
+     0,
+     720,
+     250
+    ],
+    "measured": "lum_range 28.9; the grain is smeared at 1:1"
+   },
+   "change": {
+    "setting": "the timber's finish",
+    "from": "smooth, uniform sheen",
+    "to": "an oiled finish with a grain bump of about 0.3 mm, roughness varying 0.45 to 0.7 per board, slightly darker end grain and visible board joints of 3 mm"
+   },
+   "expected": "The boards catch the spot's raking light along the grain and the joints read as real joinery.",
+   "accept": {
+    "region": [
+     560,
+     0,
+     720,
+     250
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 38
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "There is no sign of life; the vanity reads as a catalogue shot.",
+   "evidence": {
+    "region": [
+     150,
+     230,
+     680,
+     300
+    ],
+    "measured": "the slab top is empty apart from reflections"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink",
+    "to": "a small bar of soap on a stone or steel dish and a folded hand towel at the slab's right end, plus one used towel hung askew on the rod"
+   },
+   "expected": "A lived-in detail that gives the slab's top scale and catches the glow.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The wall under the slab is lit as brightly as the wall above it, so the slab floats without a shadow.",
+   "evidence": {
+    "region": [
+     140,
+     430,
+     720,
+     480
+    ],
+    "measured": "lum_median 27.9 against 40.3 on the boards above it at 560,0-720,250; no darker band"
+   },
+   "change": {
+    "setting": "the sink spot's position",
+    "from": "the current aim",
+    "to": "raise it and pull it toward the wall so it grazes the boards from above; let c1's glow alone light the boards below the slab"
+   },
+   "expected": "A soft shadow band directly under the slab, warmed at its top edge by the acrylic's glow, which seats the slab on the wall.",
+   "accept": {
+    "region": [
+     140,
+     430,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 22
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The basin's profile: a deeper, more visibly rounded bowl with a softened rim radius",
+   "why": "The sink is fixed as the room's design; lighting (c2) can show its depth but cannot change its shape."
+  },
+  {
+   "request": "A finer spout model with a visible brushed finish and a wall rose",
+   "why": "The spout's geometry belongs to the sink's fixed design; only its finish can change."
+  },
+  {
+   "request": "Something specific to Planet EARF in this detail (an EARF product in the tint, or concrete or steel from the shell in the frame)",
+   "why": "Without it a magazine would not publish this as a specific place: this is a generic washroom. The alcove's materials and contents are fixed by the design."
+  }
+ ],
+ "score_if_fixed": 6.0
+}
