@@ -1,0 +1,217 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/globe-colour/proof-day.json",
+ "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-colour/proof-day.png",
+ "seconds": {
+  "build": 0.3,
+  "render": 75.9
+ },
+ "samples": 128,
+ "size": [
+  585,
+  585
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    292.5,
+    418.6
+   ],
+   "box_px": [
+    239,
+    386,
+    346,
+    453
+   ],
+   "depth_m": 1.815
+  },
+  "disc-equator#0": {
+   "part": "disc-equator",
+   "centre_px": [
+    292.5,
+    283.6
+   ],
+   "box_px": [
+    143,
+    175,
+    442,
+    407
+   ],
+   "depth_m": 1.75
+  },
+  "disc-m150#0": {
+   "part": "disc-m150",
+   "centre_px": [
+    292.5,
+    283.6
+   ],
+   "box_px": [
+    190,
+    111,
+    395,
+    469
+   ],
+   "depth_m": 1.75
+  },
+  "disc-m30#0": {
+   "part": "disc-m30",
+   "centre_px": [
+    292.5,
+    283.6
+   ],
+   "box_px": [
+    190,
+    111,
+    395,
+    469
+   ],
+   "depth_m": 1.75
+  },
+  "disc-m90#0": {
+   "part": "disc-m90",
+   "centre_px": [
+    292.5,
+    283.6
+   ],
+   "box_px": [
+    141,
+    144,
+    444,
+    414
+   ],
+   "depth_m": 1.75
+  },
+  "disc-north#0": {
+   "part": "disc-north",
+   "centre_px": [
+    330.7,
+    203.1
+   ],
+   "box_px": [
+    219,
+    120,
+    449,
+    295
+   ],
+   "depth_m": 1.714
+  },
+  "disc-south#0": {
+   "part": "disc-south",
+   "centre_px": [
+    255.8,
+    360.8
+   ],
+   "box_px": [
+    143,
+    274,
+    363,
+    457
+   ],
+   "depth_m": 1.786
+  },
+  "rim-equator#0": {
+   "part": "rim-equator",
+   "centre_px": [
+    292.5,
+    283.6
+   ],
+   "box_px": [
+    143,
+    175,
+    442,
+    407
+   ],
+   "depth_m": 1.75
+  },
+  "rim-m150#0": {
+   "part": "rim-m150",
+   "centre_px": [
+    292.5,
+    283.6
+   ],
+   "box_px": [
+    191,
+    111,
+    394,
+    469
+   ],
+   "depth_m": 1.75
+  },
+  "rim-m30#0": {
+   "part": "rim-m30",
+   "centre_px": [
+    292.5,
+    283.6
+   ],
+   "box_px": [
+    191,
+    111,
+    394,
+    469
+   ],
+   "depth_m": 1.75
+  },
+  "rim-m90#0": {
+   "part": "rim-m90",
+   "centre_px": [
+    292.5,
+    283.6
+   ],
+   "box_px": [
+    141,
+    144,
+    444,
+    414
+   ],
+   "depth_m": 1.75
+  },
+  "rim-north#0": {
+   "part": "rim-north",
+   "centre_px": [
+    330.7,
+    203.1
+   ],
+   "box_px": [
+    219,
+    120,
+    448,
+    295
+   ],
+   "depth_m": 1.714
+  },
+  "rim-south#0": {
+   "part": "rim-south",
+   "centre_px": [
+    255.8,
+    360.8
+   ],
+   "box_px": [
+    143,
+    274,
+    363,
+    456
+   ],
+   "depth_m": 1.786
+  },
+  "uv#0": {
+   "part": "uv",
+   "centre_px": [
+    292.5,
+    415.5
+   ],
+   "box_px": [
+    263,
+    401,
+    322,
+    430
+   ],
+   "depth_m": 1.813
+  }
+ }
+}
