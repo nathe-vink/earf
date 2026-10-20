@@ -1,0 +1,353 @@
+{
+ "stage1": {
+  "impression": "A tight detail of a floating black basin against vertical oiled timber boards with a wall spout and a mixer button; the boards carry believable grain, knots and nail holes, and the spout has a decent brushed sheen. But the basin reads as a crushed black stone or lacquered box, not cast acrylic: its front face is a dead void with no edge, no thickness and no glow, the bowl is a black hole, and a pale smeared vertical strip on the left (a stretched texture or an out-of-focus light leak) says render. As it stands a magazine would not run it as a specific place; it is a generic dark-wood washroom.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The slab must read as thick smoked cast acrylic glowing warm amber through its thickness: front face [150,340,625,475] lum_median >= 35 with a visible gradient, not crushed (crush_pct < 20).",
+  "Polished edges of the slab must catch light: a bright line along the top front arris and the left vertical edge.",
+  "The bowl [235,270,510,330] must show its soft rounded form (lum_p95 >= 45, crush_pct < 40), lit from within.",
+  "The pale smeared vertical strip at [40,0,60,480] must be removed or resolved into a real object.",
+  "The linen towel on the brass rod named on the card must be in frame as the sign of life and second material.",
+  "Spout escutcheon must sit on a board face, not be clipped by a board gap."
+ ],
+ "defects": [
+  {
+   "region": [
+    150,
+    340,
+    625,
+    475
+   ],
+   "what": "Front face of the slab is crushed black (lum_median 0.2, crush_pct 91, 18.5% of the frame): no acrylic, no thickness, no glow; fails the 'no region > 1/10 frame more than half crushed' rule."
+  },
+  {
+   "region": [
+    235,
+    270,
+    510,
+    330
+   ],
+   "what": "Basin bowl is a black void (lum_median 0.4, crush 74); only a thin rim highlight on the right."
+  },
+  {
+   "region": [
+    40,
+    0,
+    60,
+    480
+   ],
+   "what": "Pale, streaky vertical band (lum_median 131 vs 63 beside it) with stretched, smeared grain: reads as a UV-stretched texture or an unexplained light leak."
+  },
+  {
+   "region": [
+    140,
+    300,
+    170,
+    400
+   ],
+   "what": "Slab's left edge is soft and dark (step 17, 18 px wide): no polished edge glint, the slab silhouette barely separates from the wall."
+  },
+  {
+   "region": [
+    335,
+    95,
+    385,
+    180
+   ],
+   "what": "Spout escutcheon's right edge appears cut by the board gap line in front of it (intersection with the boarding)."
+  },
+  {
+   "region": [
+    260,
+    75,
+    295,
+    140
+   ],
+   "what": "Mixer button rod rises to the top of the frame as a thin dark line, reads as a floating stem."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No towel, brass rod or other prop despite the card; frame reads empty and generic."
+  },
+  {
+   "region": [
+    150,
+    255,
+    625,
+    340
+   ],
+   "what": "Slab top shows mirror reflections of the boards but no translucency or smoked tint: reads as gloss black paint."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The slab has no internal glow so the Smoke acrylic reads as a black box.",
+   "evidence": {
+    "region": [
+     150,
+     340,
+     625,
+     475
+    ],
+    "measured": "lum_median 0.2, lum_p95 12.8, crush_pct 91.2"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "0.0",
+    "to": "0.8 (warm, ~2400 K), raise toward 1.2 if the front stays below target"
+   },
+   "expected": "The front face glows deep amber-brown, brighter toward the bottom edge and through the polished arrises, showing the 120 mm thickness.",
+   "accept": {
+    "region": [
+     150,
+     340,
+     625,
+     475
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The front face must not stay crushed over a fifth of the frame.",
+   "evidence": {
+    "region": [
+     150,
+     340,
+     625,
+     475
+    ],
+    "measured": "crush_pct 91.2"
+   },
+   "change": {
+    "setting": "the sink's under-glow plus the sink spot",
+    "from": "glow 0.0; spot 40 W, cone 12 deg",
+    "to": "glow 0.8; spot 40 W, cone 20 deg aimed at the slab's front-top arris"
+   },
+   "expected": "Front face holds detail everywhere with a glint on the top arris.",
+   "accept": {
+    "region": [
+     150,
+     340,
+     625,
+     475
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 20
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The bowl is a black hole; its soft rounded form is invisible.",
+   "evidence": {
+    "region": [
+     235,
+     270,
+     510,
+     330
+    ],
+    "measured": "lum_median 0.4, lum_p95 15.7, crush_pct 73.9"
+   },
+   "change": {
+    "setting": "the sink spot",
+    "from": "cone 12 deg, aimed past the bowl",
+    "to": "cone 20 deg, aimed into the bowl's centre so the inner curve shows a falloff from lit far wall to shaded near wall"
+   },
+   "expected": "Bowl reads as a curved, glowing hollow with a bright far wall.",
+   "accept": {
+    "region": [
+     235,
+     270,
+     510,
+     330
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The pale smeared strip on the left reads as a broken texture or stray light.",
+   "evidence": {
+    "region": [
+     40,
+     0,
+     60,
+     480
+    ],
+    "measured": "lum_median 130.7 vs 62.8 in the boards beside it; streaked grain at 3x"
+   },
+   "change": {
+    "setting": "the board at the alcove's left return (material mapping) or the camera framing",
+    "from": "stretched texture strip in frame",
+    "to": "fix the UVs on that board so its grain matches its neighbours, or hide it behind the linen towel on the brass rod"
+   },
+   "expected": "Left third reads as continuous boarding at the same tone as the rest of the wall.",
+   "accept": {
+    "region": [
+     40,
+     0,
+     60,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     45,
+     85
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "The frame is empty: the card's linen towel on a brass rod is missing, so there is no sign of life and the place is generic.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "no towel or rod visible at any crop"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink",
+    "to": "a crumpled oatmeal linen hand towel on the brass rod at the slab's left end, catching the sink spot; a small amber glass soap bottle on the slab top"
+   },
+   "expected": "A soft, lit textile and a warm brass highlight beside the slab; frame reads lived-in.",
+   "accept": {
+    "region": [
+     60,
+     250,
+     160,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The slab top reads as gloss black paint, not smoked acrylic.",
+   "evidence": {
+    "region": [
+     150,
+     255,
+     625,
+     340
+    ],
+    "measured": "lum_median 10, r/g/b medians 19/8/3; mirror reflections, no depth"
+   },
+   "change": {
+    "setting": "the sink's acrylic finish (absorption/tint density, polish)",
+    "from": "near-opaque black",
+    "to": "Smoke at its specified tint with lower absorption so the under-glow shows as depth through the top, polish kept"
+   },
+   "expected": "Top shows both board reflections and a warm glow from below.",
+   "accept": {
+    "region": [
+     150,
+     255,
+     625,
+     340
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The camera crops tight on the slab with the wall's top dominating, and the spout and button are cut by board gaps.",
+   "evidence": {
+    "region": [
+     335,
+     95,
+     385,
+     180
+    ],
+    "measured": "board gap line overlaps escutcheon edge at 3x"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [11.2, 1.55, 1.3], target [11.03, 0.2, 0.92], 45 mm",
+    "to": "drop to z 1.15, swing 5 deg left to include the towel rod, keep 45 mm; or nudge the escutcheon centre onto a board face"
+   },
+   "expected": "Slab sits in the lower half with towel left, spout centred on a board.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The wall above the slab outshines the subject.",
+   "evidence": {
+    "region": [
+     200,
+     0,
+     600,
+     250
+    ],
+    "measured": "lum_median 69.7 vs slab front 0.2; falloff down the wall 88 -> 45"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "1.4",
+    "to": "1.2 once the sink's glow is in (keep frame lum_median 30-50)"
+   },
+   "expected": "Boards recede into a dimmer surround; the glowing slab becomes the brightest large mass.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     50
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "None of the sink's form (slab thickness, bowl shape) needs changing; it is fixed by the card.",
+   "why": "The sink's design is fixed; only its glow, light and finish are adjusted above."
+  }
+ ],
+ "score_if_fixed": 7.2
+}

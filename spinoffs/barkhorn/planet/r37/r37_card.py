@@ -22,15 +22,19 @@ FOR = {
            'curved back) in front; EARF\'s Dome pendants low over the zinc. Configuration: {config}.',
     'listening': 'the listening zone: a room within the room, raised 200 mm, in deep warm neutrals (espresso velvet tub '
                  'chairs, dark carpet, limewashed walls), all seats facing the altar: EARF\'s listening pair on solid oak '
-                 'plinths in a niche lined in end-grain blocks, toed in to the best seat, felt behind; small hexagonal oak '
-                 'tables with an EARF Orb lamp on each. Configuration: {config}.',
+                 'plinths in a niche lined in the shell\'s Douglas fir boards, toed in to the best seat, felt behind, a light '
+                 'plinth glowing under each; small hexagonal oak tables with an EARF Orb lamp on each; the shell around '
+                 'it: fir beams overhead, concrete, blackened steel. Configuration: {config}.',
     'street': 'the shopfront at night, from the kerb: the blackened-steel shopfront, the name etched into the glass, a '
               'frosted lightbox with the fogged silhouette of a woman dancing, and the room behind the glass: the zinc '
               'counter under its Dome pendants, the record wall, and at the far end EARF\'s pair on its altar. '
               'Configuration: {config}.',
-    'sink': 'a detail: the washbasin in an alcove of dark timber boards, a slab of cast acrylic about 120 mm thick in '
-            'Smoke, floating off the wall, a soft rounded basin worked into its top, lit from within so it glows warm '
-            'amber through its thickness, a brushed-steel spout from the wall, a linen towel on a brass rod.',
+    'sink': 'a detail: the washbasin in an alcove of the shell\'s Douglas fir boards, a slab of cast acrylic 160 mm '
+            'thick in Smoke (EARF\'s smoked tint, polished), floating off the wall, unlit from within: it reads as '
+            'smoked glass, by reflection and by its polished arrises; a soft bowl 120 mm deep with a 30 mm radius at '
+            'its rim and a steel waste; a brushed-steel spout and a separate lever, each on its own escutcheon. Its '
+            'light is the room\'s: a narrow warm downlight into the bowl, a hidden strip under the front edge, a wash '
+            'down the boards. No internal glow (a design decision: a lit tinted block reads as a lit Corian box).',
 }
 
 CONTEXT = """**The project:** a design mockup of Planet EARF, a proposed listening bar in San Francisco: a narrow, deep
