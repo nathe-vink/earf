@@ -1,0 +1,3 @@
+{"stage1": {"score": 5.5}, "verdict": "iterate", "score_if_fixed": 7.5,
+ "changes": {"c1": "front 1.0->0.25, fill 0.5->0.15, sky 1.0->0.45 (the cast's core 20 levels deep, colours pastel)", "c2": "sun angle 2.5->0.5 (hard edges)", "c3": "sun round 35 deg toward the back, elevation 40: a shorter cast in frame, the discs backlit", "c4": "paper texture and falloff", "c5": "a rim strip behind for the base's edge", "c6": "lift the core's shadows"},
+ "out_of_scope": ["edges visibly fluorescing (the render's day edge glow at 0.8 is too weak to read)", "the orange meridian's slivers past the parallels (geometry)"]}

@@ -28,11 +28,11 @@
    0.8798849843246478
   ],
   "target": [
-   0.09,
-   0.03,
+   0.06,
+   -0.02,
    0.13309585894199738
   ],
-  "lens_mm": 95.0,
+  "lens_mm": 80.0,
   "level": false
  },
  "set": {
@@ -42,20 +42,38 @@
   "front": 4.0,
   "depth": 2.0,
   "radius": 1.2,
-  "height": 4.0
+  "height": 4.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#EEEAE3",
+    "size": [
+     3.0,
+     2.0,
+     0.002
+    ],
+    "position": [
+     0.0,
+     0.3,
+     0.0
+    ]
+   }
+  ]
  },
  "sky": {
   "kind": "gradient",
   "zenith": "#D8D4CE",
   "horizon": "#DEDAD4",
   "ground": "#6A665F",
-  "strength": 1.0
+  "strength": 0.15
  },
  "sun": {
-  "azimuth_deg": 295.0,
-  "elevation_deg": 30.0,
-  "irradiance": 5.0,
-  "angle_deg": 2.5,
+  "azimuth_deg": 322.0,
+  "elevation_deg": 36.0,
+  "irradiance": 9.0,
+  "angle_deg": 0.5,
   "color": "#FFF2DE"
  },
  "lights": {
@@ -75,7 +93,7 @@
     0,
     0.16809585894199738
    ],
-   "irradiance": 0.5,
+   "irradiance": 0.15,
    "color": "#FFF7EA",
    "camera": false
   },
@@ -95,7 +113,27 @@
     0,
     0.16809585894199738
    ],
-   "irradiance": 1.0,
+   "irradiance": 0.3,
+   "color": "#FFF7EA",
+   "camera": false
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.4
+   ],
+   "orbit": {
+    "azimuth_deg": 180,
+    "elevation_deg": 15,
+    "distance_m": 1.2
+   },
+   "target": [
+    0,
+    0,
+    0.16809585894199738
+   ],
+   "irradiance": 1.5,
    "color": "#FFF7EA",
    "camera": false
   }
@@ -108,7 +146,7 @@
   "bounces": 24,
   "transmission_bounces": 24,
   "view": "Khronos PBR Neutral",
-  "exposure": 0.0,
+  "exposure": -0.6,
   "white_balance_k": 5400
  },
  "materials": {
@@ -129,6 +167,24 @@
   },
   "disc-haze": {
    "deep": "#AC8ACA"
+  },
+  "rim-ember": {
+   "strength": 2.0
+  },
+  "rim-dust": {
+   "strength": 2.0
+  },
+  "rim-acid": {
+   "strength": 2.0
+  },
+  "rim-poison": {
+   "strength": 2.0
+  },
+  "rim-ice": {
+   "strength": 2.0
+  },
+  "rim-haze": {
+   "strength": 2.0
   }
  }
 }

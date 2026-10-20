@@ -266,9 +266,23 @@ def day(size=(900, 900), samples=160, final=False):
         # the fluorescent sheet, denser: the faces carry the site's colour face-on
         s['materials'] = {f'disc-{n.lower()}': {'deep': _deep(SWATCH[n], FLUO_K)} for n in SWATCH}
         # soft light from behind the camera through the discs (not a rake on every slot's edge)
+        # round 2 (two critics, 5.5 and 5.5): the fills down so the coloured cast reads; a rim behind for the edges
         s['lights']['front'] = {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 10, 'elevation_deg': 35,
-                                'distance_m': 2.5}, 'target': [0, 0, lift() / 1000], 'irradiance': 1.0, 'color': '#FFF7EA',
+                                'distance_m': 2.5}, 'target': [0, 0, lift() / 1000], 'irradiance': 0.3, 'color': '#FFF7EA',
                                 'camera': False}
+        s['lights']['fill']['irradiance'] = 0.15
+        s['sky']['strength'] = 0.15
+        s['sun']['irradiance'] = 9.0
+        s['render']['exposure'] = -0.6
+        s['lights']['rim'] = {'type': 'area', 'size_m': [0.6, 0.4], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 15,
+                              'distance_m': 1.2}, 'target': [0, 0, lift() / 1000], 'irradiance': 1.5, 'color': '#FFF7EA',
+                              'camera': False}
+        s['camera'].update(lens_mm=80.0, target=[0.06, -0.02, lift() / 1000 - 0.035])
+        # the fluorescent edges, stronger: they gather daylight through the faces (0.8 did not read)
+        for n in SWATCH:
+            s['materials'][f'rim-{n.lower()}'] = {'strength': 2.0}
+        s['set']['props'] = [{'kind': 'kit', 'shape': 'box', 'material': 'paper', 'color': '#EEEAE3',
+                              'size': [3.0, 2.0, 0.002], 'position': [0.0, 0.3, 0.0]}]
     return s
 
 
@@ -282,8 +296,8 @@ def _day(size=(900, 900), samples=160, final=False):
     return {'title': 'The EARF globe in colour, by day', 'size': list(size), 'product': product('day'), 'camera': c,
             'set': {'kind': 'sweep', 'color': '#EEEAE3', 'width': 8.0, 'front': 4.0, 'depth': 2.0, 'radius': 1.2, 'height': 4.0},
             'sky': {'kind': 'gradient', 'zenith': '#D8D4CE', 'horizon': '#DEDAD4', 'ground': '#6A665F', 'strength': 1.0},
-            'sun': {'azimuth_deg': 295.0, 'elevation_deg': 30.0, 'irradiance': 5.0, 'angle_deg': 2.5 if final else 0.6,
-                    'color': '#FFF2DE'},
+            'sun': {'azimuth_deg': 322.0 if final else 295.0, 'elevation_deg': 36.0 if final else 30.0, 'irradiance': 5.0,
+                    'angle_deg': 0.5 if final else 0.6, 'color': '#FFF2DE'},
             'lights': {'fill': {'type': 'area', 'size_m': [2.0, 1.6], 'orbit': {'azimuth_deg': -30, 'elevation_deg': 20, 'distance_m': 3.0},
                                 'target': [0, 0, zc], 'irradiance': 0.5, 'color': '#FFF7EA', 'camera': False}},
             'render': {'samples': samples, 'adaptive': 0.01, 'denoise': True, 'clamp': 10, 'bounces': 24,
