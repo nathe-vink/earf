@@ -1,0 +1,373 @@
+{
+ "stage1": {
+  "impression": "A symmetrical, dim, green-and-brown shrine with two identical glowing red boxes on axis. At 1:1 it reads as CG: the back wall is a blotchy camouflage texture under a regular grid, the speakers' red reads as emissive signage and not as light passing through thick tinted acrylic, their tall upper cabinets disappear into the dark, the banquettes are flat green blocks, and three identical tables, each with an identical orb, repeat across the floor. The foreground oak chairs are the only convincing passage. As a feature picture it is a generic hotel-lounge shrine and not a specific place: none of the bar's defining features (the zinc racetrack counter, the turntables, the record wall, the Dome pendants, the frosted screens) can be read in the frame.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The frame must show the bar: the zinc counter with its rounded edge, the fluted oak front and brass rail along the left, with the Dome pendants hung low over it, reading as the subject that leads down the room to the altar. At present the counter and pendants are out of frame or illegible.",
+  "Both Ember speakers must read top to bottom as 1293 mm tinted cast-acrylic cabinets with light through them. The upper body [215,140,305,218] now measures lum_median 17, darker than the wall behind it at 25.",
+  "The wall behind the altar needs real board-formed concrete or plaster detail (tie holes, pour lines, board grain) and not a camouflage blotch texture with a visible grid [330,120,410,280].",
+  "Frame lum_median inside 22 to 50 (now 19.0).",
+  "Signs of life (glasses, the coupe, the record out of its sleeve, the coat) visible and catching highlights in pools of light.",
+  "No exact repeats: the three identical table and Orb sets need variation in props, placement or lamp level.",
+  "The right-hand fifth of the frame [620,0,720,480] (median 7.9) must hold some detail or be cropped out, not left as an empty slab."
+ ],
+ "defects": [
+  {
+   "region": [
+    330,
+    120,
+    410,
+    280
+   ],
+   "what": "Back wall: camouflage blotches over a regular square grid, which reads as a tiled CG texture, with no concrete or plaster scale cues"
+  },
+  {
+   "region": [
+    215,
+    140,
+    305,
+    218
+   ],
+   "what": "Upper body of the left Ember is lost: darker (median 17) than the wall behind it (25), so only the bottom frame and the horn read"
+  },
+  {
+   "region": [
+    443,
+    140,
+    495,
+    218
+   ],
+   "what": "The same loss of the upper body on the right Ember"
+  },
+  {
+   "region": [
+    232,
+    218,
+    285,
+    290
+   ],
+   "what": "Speaker red is flat and emissive-looking (r 103, g 31, b 31) with a hard 2 px edge, so it reads as a neon sign and not as tinted acrylic with polished glowing edges; 0.52 % clipped"
+  },
+  {
+   "region": [
+    70,
+    0,
+    620,
+    90
+   ],
+   "what": "Ceiling band is blotchy and repetitive, with no beam detail (no checks or end grain on fir); it reads as a texture"
+  },
+  {
+   "region": [
+    200,
+    290,
+    600,
+    430
+   ],
+   "what": "Banquettes are flat, untextured green blocks with no seams, piping or sheen falloff, and the floor beneath is crushed toward 11 to 15"
+  },
+  {
+   "region": [
+    140,
+    300,
+    560,
+    410
+   ],
+   "what": "Three identical round tables, each with an identical Orb, placed symmetrically: repeated copies of one model"
+  },
+  {
+   "region": [
+    620,
+    0,
+    720,
+    480
+   ],
+   "what": "Right edge is a near-black slab (median 7.9, 14 % of the frame) with one stray blurred highlight; it reads as a void"
+  },
+  {
+   "region": [
+    0,
+    30,
+    70,
+    280
+   ],
+   "what": "Pale panel with black brush strokes cut off at the left edge. It is the brightest large surface (median 46) and pulls the eye away from the axis"
+  },
+  {
+   "region": [
+    0,
+    260,
+    260,
+    480
+   ],
+   "what": "No props visible: no glasses, coat, records or menus, so the room reads unoccupied and showroom-like"
+  },
+  {
+   "region": [
+    160,
+    430,
+    620,
+    470
+   ],
+   "what": "Altar plinth front is a uniform flat oak band with no light pool or falloff"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame is meant to be the bar leading down to the altar, but the 45 mm lens from x 7 on the centre line shows only the altar end, so the counter, pendants, turntables and record wall are absent.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "No zinc top, Dome pendant, brass rail or record wall can be found anywhere in the frame; the left third holds only chairs and a pale panel"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [7.0, 2.8, 1.3], target [17.0, 3.1, 1.12], lens 45 mm, f/4.0",
+    "to": "position [3.2, 3.6, 1.35], target [17.0, 3.4, 1.15], lens 32 mm, f/2.8 focused at about [9.0, 4.6, 1.1] (the counter's middle), so that the counter runs from the left foreground toward the altar, with 2 or 3 Domes in the top-left third and the altar at the vanishing point. Keep the verticals level."
+   },
+   "expected": "A leading line along the zinc edge to the Ember pair, with the pendants making pools on the zinc. The bar becomes a specific, recognisable place and the right-hand void shrinks.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Embers' tall upper cabinets read darker than the wall, so the hero silhouette is lost and only the red bottom frames read, like signage.",
+   "evidence": {
+    "region": [
+     215,
+     140,
+     305,
+     218
+    ],
+    "measured": "lum_median 17.0 against the wall's 25.4 at [330,120,410,280]; the speaker's lower region [232,218,285,290] median 50.7 with 0.52 % clipped"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area; the altar 2 x spot",
+    "from": "4 x area 2.0 W/m2 at 2900 K; altar 2 x spot 90 W, cone 36 deg",
+    "to": "4 x area 6.0 W/m2 at 2900 K, aimed to graze the cabinet's top and sides and its polished edges; altar 2 x spot 160 W, cone 28 deg, aimed to the cabinets' upper half; lower the wall's share by narrowing the cone"
+   },
+   "expected": "The full 1293 mm cabinets read as tinted red acrylic with the white batts glowing through, the edges catch light, and the speaker is brighter than the wall behind it.",
+   "accept": {
+    "region": [
+     215,
+     140,
+     305,
+     218
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The frame is underexposed for a magazine night interior: the shadows block up and the banquettes and floor lose detail.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 19.0 (target 22 to 50), lum_p5 6.7, below_40 83.5 %"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "0.7",
+    "to": "1.1 (keep AgX - Medium High Contrast; if the speakers clip above 0.5 %, use AgX - Medium Contrast)"
+   },
+   "expected": "Frame median of about 28 to 32, with shadow detail in the banquettes and floor while the room still reads as night.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The wall behind the altar reads as a camouflage blotch texture on a regular grid, which says render at once.",
+   "evidence": {
+    "region": [
+     330,
+     120,
+     410,
+     280
+    ],
+    "measured": "Visible square grid lines at a regular pitch with large low-frequency blotches; lum_range 13.8, so it is flat with no grazing relief"
+   },
+   "change": {
+    "setting": "the concrete's tone and sheen",
+    "from": "a high-contrast blotch albedo with a grid",
+    "to": "reduce the albedo blotch contrast by about 70 %; add board-formed relief in the normal and bump (100 to 150 mm boards, a horizontal pour line every 600 mm, tie holes at a 600 x 900 grid), roughness 0.75 with a faint 0.6 variation; warm the grey slightly"
+   },
+   "expected": "It reads as real board-formed concrete under grazing altar light, with no tiling.",
+   "accept": {
+    "region": [
+     330,
+     120,
+     410,
+     280
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 20
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "There is no sign of life, and the three identical table and Orb sets read as copies of one model.",
+   "evidence": {
+    "region": [
+     140,
+     300,
+     560,
+     410
+    ],
+    "measured": "Three tables at equal spacing, each with an identical Orb; no glasses, records or coat visible in the frame"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props listed but none legible in the frame",
+    "to": "put the half-drunk coupe and two rocks glasses on the zinc under a Dome pool in the near third, the record out of its sleeve by the turntable, the coat over the nearest counter chair; on the banquette tables, a glass on one, a menu on another and nothing on the third, with one table rotated or offset by about 100 mm; set the Orbs to 6, 4.5 and 6 W"
+   },
+   "expected": "The room reads as occupied a moment ago, with small highlights in the glasses and no visible repetition.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The light is flat and wall-washed, with no pools or falloff on the floor and plinth.",
+   "evidence": {
+    "region": [
+     160,
+     430,
+     620,
+     470
+    ],
+    "measured": "Plinth band lum_range 34 with median 39.7; floor and banquette [200,290,600,430] median 15.1, with no pool shapes visible"
+   },
+   "change": {
+    "setting": "the Domes' downlights; haze in the room's air",
+    "from": "4 x spot 260 W at 2400 K, cone 30 deg; haze 0.01 per m",
+    "to": "4 x spot 260 W, cone 22 deg, blend 0.4, so that each makes a distinct pool on the zinc; haze 0.025 per m, so the cones and the altar spots read faintly"
+   },
+   "expected": "Distinct pools of light along the bar with dark between them, and a faint atmosphere that separates the altar from the room.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The banquettes are flat green blocks with no upholstery cues.",
+   "evidence": {
+    "region": [
+     210,
+     290,
+     310,
+     400
+    ],
+    "measured": "lum_median 16.4, range 33, with no seam or piping highlights visible at 3x"
+   },
+   "change": {
+    "setting": "the materials' finish (the banquette's upholstery)",
+    "from": "a uniform matte green",
+    "to": "a velvet or mohair sheen (sheen 0.5, a little anisotropy), channel seams every 150 mm, piping on the top edge, slight compression on the seats; keep the zone's bottle green"
+   },
+   "expected": "The banquette reads as upholstered furniture with soft highlight rolls under the Orbs.",
+   "accept": {
+    "region": [
+     210,
+     290,
+     310,
+     400
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The pale panel at the left edge is the brightest large surface and competes with the speakers.",
+   "evidence": {
+    "region": [
+     15,
+     50,
+     60,
+     270
+    ],
+    "measured": "lum_median 45.8, almost equal to the speaker region's 50.7"
+   },
+   "change": {
+    "setting": "the screens' images",
+    "from": "emission 2.0",
+    "to": "1.2 (or keep the panel out of frame with c1's camera)"
+   },
+   "expected": "The eye goes to the counter and the Embers first.",
+   "accept": {
+    "region": [
+     15,
+     50,
+     60,
+     270
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 35
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Break the strict mirror symmetry of the speaker and banquette layout",
+   "why": "The altar and the banquette layout are the room's fixed design; only the camera and props may vary it."
+  },
+  {
+   "request": "Mute the bottle green of the banquettes so the speaker's red is the frame's only saturated colour",
+   "why": "The zone and its colour are fixed by the card; the green is the designed saturated zone."
+  },
+  {
+   "request": "Make the speakers' red read as tinted acrylic with polished edges, not as a flat emissive red",
+   "why": "The speaker's material and colour are fixed. Only the light on it (c2) may change, and if the shader itself reads as emissive, the asset owner must fix it."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
