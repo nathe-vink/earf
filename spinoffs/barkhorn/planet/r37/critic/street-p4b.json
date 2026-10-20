@@ -1,0 +1,370 @@
+{
+ "stage1": {
+  "impression": "A competent, moody night-street render of a bar seen through a steel shopfront: the fir ceiling, the counter and the pools of light on the tables are believable, but the frosted lightbox (a quarter of the frame, flat and pinkish) and the opaque grey 'EARF' letters, which read like vinyl lettering and not an etch, take over the picture, and the EARF pair at the far end is lost in the dark behind the centre mullion. At 1:1 the steel spandrel is a crushed slab with a blotchy grunge decal, the glass has no reflections at all, and the bright warm slab of pavement at the lower right has no texture or source; it reads as CG. As it stands it reads as a generic dark bar with a poster in the window, not as a specific place a magazine would run, though the dancing silhouette is a real idea.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The EARF pair on the altar reads at a glance in a clear pane of glass, not behind a mullion: altar region lum_median >= 50 with the speakers' silhouettes and the light through their acrylic legible",
+  "The etched name reads as a frosted etch in the glass (light, translucent, the room visible through it), not as opaque grey block letters",
+  "The lightbox stops dominating: its luminance sits within about 1.5x the room's lit areas, and its white is neutral, not pink",
+  "The blackened steel spandrel and fascia show their edges, sheen and patina under the street light instead of crushing to a flat slab, and the grunge decal goes",
+  "The glass carries faint, believable reflections of the street (its lamps, the kerb) so it reads as a window photographed at night",
+  "The bright pavement patch at the lower right is either toned down to the street's level or given real texture and a visible source",
+  "Delivered at full resolution with no denoiser smear in the room's mid-ground (stools, banquette, back wall)"
+ ],
+ "defects": [
+  {
+   "region": [
+    370,
+    200,
+    480,
+    300
+   ],
+   "what": "The altar and the EARF pair are barely legible: lum_median 29.6-32.8, no tint or silhouette readable; the centre mullion at x~375 sits on the room's axis and cuts the far end"
+  },
+  {
+   "region": [
+    190,
+    165,
+    360,
+    215
+   ],
+   "what": "The etched EARF reads as opaque flat grey sans letters (lum_median 90.8, R109 G86 B80), brighter than the room behind it: vinyl signage, not an etch"
+  },
+  {
+   "region": [
+    15,
+    105,
+    195,
+    360
+   ],
+   "what": "The lightbox is flat, evenly lit and pinkish (lum_median 96, R111 G92 B95), the brightest large area in the frame by 2.5x over the room; reads as a backlit poster in a shop window"
+  },
+  {
+   "region": [
+    0,
+    380,
+    615,
+    470
+   ],
+   "what": "The blackened steel spandrel is crushed to lum_median 7.4 with no edge highlights or sheen; a blotchy splatter texture at about x 330-430 reads as a CG grunge decal"
+  },
+  {
+   "region": [
+    615,
+    400,
+    720,
+    470
+   ],
+   "what": "A bright warm untextured slab (lum_median 145, R168 G141 B115) at the lower right edge; unexplained source, reads as an unlit-material plane"
+  },
+  {
+   "region": [
+    615,
+    90,
+    720,
+    400
+   ],
+   "what": "The right-hand reveal and neighbouring door crush (crush_pct 10.4) with a near-black, featureless column"
+  },
+  {
+   "region": [
+    385,
+    150,
+    405,
+    170
+   ],
+   "what": "The visible Dome reads as a bare clipped white dot (clip 20 %), no tinted acrylic shell legible"
+  },
+  {
+   "region": [
+    210,
+    80,
+    540,
+    380
+   ],
+   "what": "The glass shows no reflections at all; the room reads as seen through an empty opening"
+  },
+  {
+   "region": [
+    400,
+    230,
+    540,
+    330
+   ],
+   "what": "Denoiser smear on stools, banquette and back wall; soft, waxy detail (also the 0.3-scale proof)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    70
+   ],
+   "what": "The fascia is a dark, flat band (lum_median 17.8) with no readable steel or signage detail"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero pair at the far end is hidden behind the centre mullion and lost in the dark; the frame has no hero.",
+   "evidence": {
+    "region": [
+     370,
+     200,
+     480,
+     300
+    ],
+    "measured": "lum_median 29.6-32.8; the mullion at x~375 runs through the room's vanishing point and the altar"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "position [-3.8, 3.3, 1.5], target [17.0, 3.2, 1.35], 28 mm",
+    "to": "position [-3.2, 2.2, 1.45], target [17.0, 2.9, 1.35], 35 mm, so the altar sits in the clear right-hand pane, about a third in from the right mullion, and the lightbox crops to about 18 % of the frame on the left"
+   },
+   "expected": "The altar and the pair read through clear glass at the end of the room's perspective, framed by the counter on the left and the banquette on the right; the lightbox becomes a side element.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar is too dark for the pair to read from the street, despite 650 W spots.",
+   "evidence": {
+    "region": [
+     420,
+     200,
+     480,
+     300
+    ],
+    "measured": "lum_median 29.6, R35 G28 B26: the far wall is barely above the room's mid-ground"
+   },
+   "change": {
+    "setting": "lamps: the altar 2 x spot; lamps on the speakers",
+    "from": "650 W, cone 18 deg; speaker area lamps 1.0 W/m2",
+    "to": "1300 W, cone 24 deg aimed to wash the cabinets and the plinth; speaker area lamps 3.0 W/m2 so the light through the smoked acrylic shows"
+   },
+   "expected": "The pair becomes the brightest point at the end of the room after the pendants, with its smoked tint and the white batts legible; altar region lum_median about 55-75.",
+   "accept": {
+    "region": [
+     400,
+     200,
+     480,
+     300
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The etched name reads as opaque grey vinyl letters glowing on their own, brighter than the room behind it.",
+   "evidence": {
+    "region": [
+     190,
+     165,
+     360,
+     215
+    ],
+    "measured": "lum_median 90.8 inside the letters vs about 37 in the room; the letters are flat and fully opaque"
+   },
+   "change": {
+    "setting": "the window's etched name (emission strength) and the etch's frosting",
+    "from": "emission 0.05, opaque frosted fill",
+    "to": "emission 0.0; make the etch a light frost (high roughness, about 60 % transmission) catching the street lamps only, so the room shows through the letters"
+   },
+   "expected": "The name reads as acid-etched glass: a pale grey frost a few levels above what is behind it, edges crisp; letter interior lum_median about 45-65.",
+   "accept": {
+    "region": [
+     190,
+     165,
+     360,
+     215
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The lightbox is a flat, pinkish, overbright panel that dominates the frame and reads as an advertising poster.",
+   "evidence": {
+    "region": [
+     15,
+     105,
+     195,
+     360
+    ],
+    "measured": "lum_median 96.3, lum_range only 93.8 over the panel, R111 G92 B95 (pink cast)"
+   },
+   "change": {
+    "setting": "the screens' images (emission strength) and colour of the lightbox's light",
+    "from": "1.0, pinkish white",
+    "to": "0.55, a warm neutral white (about 3000 K) with a slight falloff toward the frame's edges (frosted panel lit from behind, not a uniform emitter)"
+   },
+   "expected": "The lightbox glows softly, at about the level of the lit counter, neutral warm white; the silhouette keeps its fog.",
+   "accept": {
+    "region": [
+     15,
+     105,
+     195,
+     360
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The blackened-steel shopfront crushes to a flat slab with no edges or sheen, and its grunge texture reads as a decal.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     615,
+     470
+    ],
+    "measured": "lum_median 7.4, lum_p95 19.4, lum_range 16.4: no highlight on any edge; a splatter pattern around x 330-430"
+   },
+   "change": {
+    "setting": "street lamps 3 x point; the steel's patina",
+    "from": "120 W, 3000 K; high-contrast blotchy stain texture",
+    "to": "one street lamp at 250 W, 3200 K, raised and placed about 3 m to camera left so it rakes the steel; the steel's finish a soft uneven satin with a fine brown patina, the splatter decal's strength cut by 70 %"
+   },
+   "expected": "The steel reads near black with a soft raking sheen and bright mitred edges on the sill, mullions and fascia; spandrel lum_median about 14-22, p95 above 40.",
+   "accept": {
+    "region": [
+     0,
+     380,
+     615,
+     470
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 38
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The glass has no reflections, so the window reads as an empty opening rather than glazing photographed from the kerb.",
+   "evidence": {
+    "region": [
+     210,
+     80,
+     540,
+     380
+    ],
+    "measured": "no reflected highlights or street shapes anywhere in the panes; only the interior and the letters"
+   },
+   "change": {
+    "setting": "the shopfront glass's finish; street lamps",
+    "from": "fully transparent, no reflection visible",
+    "to": "real glass reflectance (IOR 1.52, Fresnel), with one street lamp and a dim lit facade across the street behind the camera so faint reflections appear in the upper panes"
+   },
+   "expected": "Faint, undistorted reflections of a street lamp and the far kerb sit over the upper third of the glass without hiding the room.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The bright warm slab at the lower right is the brightest exterior surface and has neither texture nor a visible source.",
+   "evidence": {
+    "region": [
+     615,
+     400,
+     720,
+     470
+    ],
+    "measured": "lum_median 144.7, R168 G141 B115, flat"
+   },
+   "change": {
+    "setting": "street lamps (the one nearest the right) and the pavement's finish",
+    "from": "120 W lighting a smooth flat surface",
+    "to": "60 W, and give the pavement a worn concrete texture with joints; or reframe (c1) so this patch leaves the frame"
+   },
+   "expected": "The patch drops to the street's level with visible paving texture; no exterior surface outshines the room.",
+   "accept": {
+    "region": [
+     615,
+     400,
+     720,
+     470
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The frame is at the bottom of the night range and the room's mid-ground is soft and smeared by the denoiser.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame lum_p50 22.1, below_40_pct 70.4; waxy stools and banquette at 400-540 x 230-330"
+   },
+   "change": {
+    "setting": "render: exposure; samples; denoise",
+    "from": "exposure 1.6, 256 samples, denoise on, proof at 0.3",
+    "to": "exposure 1.8, 768 samples with adaptive 0.01, denoise on with albedo/normal passes, delivered at full 2400 x 1600"
+   },
+   "expected": "The frame lifts into the middle of the range without blowing the pendants, and the stools, banquette and back wall hold crisp edges.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     45
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move the centre mullion so it does not cut the room's axis",
+   "why": "The shopfront is fixed by the card; handled by the camera instead (c1)."
+  },
+  {
+   "request": "Make the Dome read as a tinted shell rather than a bare white dot",
+   "why": "The Dome's shape and tint are EARF's product; only its liner glow may change, and from this distance a lower glow alone may not reveal the shell."
+  },
+  {
+   "request": "Add a person or figure in the room for life",
+   "why": "Not on the card's list of props; would need the owner's go-ahead."
+  }
+ ],
+ "score_if_fixed": 7.3
+}
