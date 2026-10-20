@@ -154,3 +154,35 @@ The lead approved option (a): A4's set and light (its sun and shafts, canopy gap
 **The trade:** what makes the read work (bigger, redder caps, visible berries) is exactly what the judges mark down. A4's own caps read as "red-capped mushrooms", not toadstools.
 
 **Stopped** under the lead's rule (more than 0.5 behind). The choice goes to the owner: A4 without its foxgloves, or F1b.
+
+## The owner's choice, and the realism pass
+
+The owner, verbatim: "Poison: A, the new pass". The note, verbatim: "Poison needs more realism too." So F1b is the picture. One realism pass before the finals, aimed at what the judges and the A4 calibration named:
+- **Caps:** forest-lit scarlet (dull 0.12–0.24) rather than glowing; four sizes; some torn; stems sunk, with moss and litter over the bases (one strew per group: a strew scatters over the whole ground before trimming to its circle, and one per cap ran out of memory).
+- **Berries:** translucent (SSS 0.45, scale 6 mm), a waxy bloom (roughness 0.3), uneven sizes, 15% missing.
+- **Death caps:** two, sunk into the moss.
+- **A4's own tells:** the moss mat's edge made ragged and patchy; each fern its own scale and lean; wood sorrel clumps (shrub_sorrel_01); the litter's repeat broken (`poison_p_el.detile`: a second lookup, turned 37° and scaled 1.37, under a broad noise mask).
+
+**Proof 4** (`proofs31/element-poison_f1b-p04.jpg`). Realism **4.5 and 4.5**, level with A4's calibration and up from F1's 3.75–4.0. The tells now:
+- the caps still read as toys (one red, decal-like dots);
+- the moss reads as procedural scatter;
+- the speaker reads as a clean CG model, flat-lit;
+- the berry spikes and ferns read as instanced copies.
+
+**Duel against the live A4**, for information only (the owner has already chosen). Two judges, each seeing **both orders** in one context:
+
+| Judge | A4 as A | A4 as B |
+|---|---|---|
+| 1 | A4 6.5, F1b 6.0 | A4 6.5, F1b 6.0 |
+| 2 | A4 6.6, F1b 6.0 | A4 6.6, F1b 6.0 |
+
+Both prefer A4 consistently. A4 6.55, F1b 6.0: **0.55 behind**, down from 0.78 before this pass.
+
+The tells against F1b:
+- the berry spikes "plasticky… pull the eye";
+- the caps "more numerous and more saturated";
+- A4's foxgloves "add depth".
+
+One judge credits F1b's wider moss bed as planting the speaker; the other calls it an artificial grass mat.
+
+**Next step on realism, if the owner agrees** (the lead): a real scanned fly agaric. The good free ones are CC-BY on Sketchfab and need an account, so the owner would pass one to us. Nothing fetched here.
