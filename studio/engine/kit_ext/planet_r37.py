@@ -248,6 +248,13 @@ def sink(bpy, kit, p, objs):
         import math
         K._area(bpy, 'sink-under', (S['x'], y0 + S['d'] / 2, z0 - 0.006), (math.pi, 0, 0), (S['w'] - 0.04, S['d'] - 0.04),
                 p['sink_under'], kelvin=3000)
+    # and a soft warm panel facing the slab from the room side, seen in its polished front (a photographer's softbox:
+    # the front face of a smoked block reads only by what it mirrors)
+    if p.get('sink_fill', 0) > 0:
+        import math
+        f = K._area(bpy, 'sink-fill', (S['x'], 1.45, z0 + S['t'] / 2), (math.radians(90), 0, 0), (0.9, 0.35),
+                    p['sink_fill'], kelvin=2900)
+        f.visible_glossy = True
     # and a wash down the boards from the alcove's head, so the slab has something to reflect
     if p.get('sink_wash', 0) > 0:
         import math
@@ -276,13 +283,13 @@ def zone_life(bpy, kit, p, objs):
     sl = K.Mesh('zone-sleeves')
     (role, c, sx, sy, sz, rot) = R.speakers()[0]
     _tilted_box(sl.bm, sx - P['plinth_d'] / 2 - 0.10, sy + 0.12, z0, 0.314, 0.004, 0.314, math.radians(90) - 0.0, math.radians(14))
-    tx, ty = R.TUB_TABLES[0]
+    tx, ty = R.TUB_TABLES[4]                          # the near-left table, in the listening view's frame
     K._obox(sl.bm, tx - 0.04, ty + 0.06, z0 + R.TUB_TABLE['h'] + 0.0005, 0.314, 0.314, 0.003, math.radians(-20))
     objs.append(sl.object(bpy, K.principled(bpy, 'sleeve-zone', '#C9B79A', rough=0.6)))
     vr = K.Mesh('zone-record'); K._cyl(vr.bm, tx - 0.04, ty + 0.06, z0 + R.TUB_TABLE['h'] + 0.0035, 0.15, 0.0018, seg=64)
     objs.append(vr.object(bpy, K.principled(bpy, 'vinyl', '#0B0B0C', rough=0.25), smooth=True))
     # a coat over the back of the near chair (the one nearest the camera's side of the zone)
-    cx, cy = R.TUBS[0]
+    cx, cy = R.TUBS[1]
     ax, ay = P['x'], R.YC
     face = math.atan2(ay - cy, ax - cx); bx, by = cx - math.cos(face) * (T['r'] - 0.05), cy - math.sin(face) * (T['r'] - 0.05)
     co = K.Mesh('zone-coat'); top = z0 + T['h']
