@@ -21,8 +21,8 @@ MORE_CAPS = [(0.32, -1.45, 0.05, 'young', 91, dict(lean=[0.01, 0.0], wash=0.1, d
              (-0.55, -1.2, 0.06, 'convex', 92, dict(lean=[-0.015, 0.01], wash=0.05, dull=0.36, matte=True, orange=True, torn=0.2)),
              (0.48, -1.32, 0.022, 'button', 93, dict(warts=260, dull=0.3, matte=True))]
 DEATHCAPS = [(0.4, -0.48, 0.045, 'convex', 81), (0.5, -0.4, 0.035, 'young', 82), (0.33, -0.58, 0.022, 'button', 83)]
-ARUMS = [(1.3, -0.6, 0.34, 41, [0.02, -0.01], 50), (1.37, -0.55, 0.25, 42, [0.03, 0.015], 36), (1.25, -0.52, 0.29, 43, [-0.02, 0.025], 44),
-         (1.33, -0.68, 0.22, 44, [0.0, -0.03], 30)]
+ARUMS = [(1.05, -1.25, 0.34, 41, [0.02, -0.01], 50), (1.12, -1.2, 0.25, 42, [0.03, 0.015], 36), (1.0, -1.17, 0.29, 43, [-0.02, 0.025], 44),
+         (1.08, -1.33, 0.22, 44, [0.0, -0.03], 30)]
 YEW = dict(position=[2.6, 3.0, 1.6], rotate=[168, 0, 200], scale=0.5)
 
 
@@ -48,7 +48,12 @@ def shot():
     for p in props:
         if p.get('fn') == 'amanita' and p.get('species', 'muscaria') == 'muscaria':
             p['orange'] = False; p['dull'] = 0.15 if p.get('age') == 'old' else 0.04
-            p['matte'] = p.get('age') == 'old'; p['wash'] = min(p.get('wash', 0.15), 0.1)
+            p['matte'] = p.get('age') == 'old'; p['wash'] = min(p.get('wash', 0.15), 0.05)
+            p['cap'] = round(p['cap'] * 1.3, 3)                               # a size up from A4's: read at 600 px
+    # their dapple off: in A4's sun patch the scarlet washed to salmon; in the shade beside it they keep their red
+    for p in props:
+        if p.get('fn') == 'canopy':
+            p['holes'] = [h for h in p['holes'] if abs(h[0] - p['holes'][-2][0]) > 1e-6 or abs(h[1] - p['holes'][-2][1]) > 1e-6]
     s['title'] = 'barkhorn, Poison F1b, A4 with more of the wood\'s poisons'
     return s
 
