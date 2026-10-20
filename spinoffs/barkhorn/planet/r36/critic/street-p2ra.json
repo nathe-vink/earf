@@ -1,0 +1,410 @@
+{
+ "stage1": {
+  "impression": "A view through a dark shopfront window down a long, low timber bar to a pair of glowing red speakers at the far end. The room behind the glass has believable depth, warmth and a record wall, but the frame is underexposed and mostly black steel. The speakers are tiny, read as red neon outlines rather than tinted acrylic, and compete with a second hot red patch on the record wall. The floor shows smeared reflections, and the bright flat slab at bottom right and the beige side room read as CG. A magazine would see a generic dark bar seen through a window, not a specific place: the shopfront's identity (the name, the lightbox) is not in the picture.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The shopfront's own identity must be legible: the name etched into the glass visible, and the frosted lightbox with the fogged dancing silhouette readable as such",
+  "Frame lum_median between 22 and 40, with the room behind the glass carrying the light and the steel holding texture",
+  "The Ember pair must read as tinted acrylic cabinets with light passing through them, not clipped red outlines (clip_pct under 1 on each speaker)",
+  "Red only on the speakers: no second saturated red patch on the record wall",
+  "No CG tells: no smeared denoiser streaks on the floor, no flat untextured bright plane at the sill or pavement",
+  "Composition: the speakers larger in frame, and the mullion off the record wall and counter",
+  "Delivered at 2400 x 1600 with 1:1 material detail (formwork grain, fir checks, steel patina)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Underexposed overall: lum_median 16.0, below_40 83.7 %"
+  },
+  {
+   "region": [
+    320,
+    235,
+    345,
+    265
+   ],
+   "what": "Left Ember speaker clips 8.4 % and reads as a red neon outline around a white disc, not as tinted cast acrylic; only about 25 px wide"
+  },
+  {
+   "region": [
+    395,
+    235,
+    420,
+    265
+   ],
+   "what": "Right Ember speaker clips 7.1 %, same reading as the left"
+  },
+  {
+   "region": [
+    160,
+    160,
+    195,
+    235
+   ],
+   "what": "Saturated red patch on the record wall (r 97, g 27, b 14), probably spill from the #FF5A3A disc; breaks the one-colour rule"
+  },
+  {
+   "region": [
+    200,
+    300,
+    470,
+    430
+   ],
+   "what": "Concrete floor shows smeared, streaky reflections typical of the denoiser; no aggregate or polish detail"
+  },
+  {
+   "region": [
+    525,
+    455,
+    710,
+    480
+   ],
+   "what": "Flat, bright, untextured beige slab at the sill or pavement (lum_median 123.5), the brightest large surface in the frame, reads as a CG plane"
+  },
+  {
+   "region": [
+    530,
+    140,
+    640,
+    310
+   ],
+   "what": "Side opening shows a beige wall, pink wainscot and a curtain lit brighter than the room (lum_median 60.4); it does not read as a frosted lightbox and no dancing silhouette is legible"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No etched name visible anywhere on the glass (its emission is 0.0)"
+  },
+  {
+   "region": [
+    193,
+    30,
+    207,
+    430
+   ],
+   "what": "Window mullion cuts the frame vertically between the record wall and the counter"
+  },
+  {
+   "region": [
+    470,
+    0,
+    530,
+    430
+   ],
+   "what": "Blackened-steel pier is blotchy, mottled like a low-resolution texture, with no sharp edges or soft sheen; dark (lum_median 13.3)"
+  },
+  {
+   "region": [
+    640,
+    0,
+    720,
+    480
+   ],
+   "what": "Right edge is dead dark wall, 28 % crushed, with no information"
+  },
+  {
+   "region": [
+    0,
+    0,
+    470,
+    40
+   ],
+   "what": "Top band 19.5 % crushed"
+  },
+  {
+   "region": [
+    395,
+    140,
+    412,
+    160
+   ],
+   "what": "Bare hot point light in the ceiling, a bright disc with no fixture"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No street reflection or glass reflection at all, so the window reads as an open hole rather than glass"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The shopfront's subject (the etched name and the frosted lightbox with the dancing silhouette) is invisible, so the picture loses its point and reads as a generic bar.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "No etched lettering visible anywhere on the glass; the card shows the window's etched name at 0.0; the side panel 530-640 x 140-310 shows a wall and curtain, not a frosted, evenly glowing panel"
+   },
+   "change": {
+    "setting": "the window's etched name (emission) and the lightbox / screens' images brightness",
+    "from": "etched name 0.0; screens' images 1.0",
+    "to": "etched name 0.6 to 0.8 (edge-lit, warm 2700 K), so the letters catch light like frosted etching against the dark room; the lightbox's frosted panel 1.4 with frosted acrylic roughness raised so the silhouette is fogged and the panel glows evenly"
+   },
+   "expected": "The name reads as a pale frosted band on the glass at a glance; the lightbox reads as one even soft glow with a blurred figure inside.",
+   "accept": {
+    "region": [
+     530,
+     140,
+     640,
+     310
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 90
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The frame is too dark for a magazine night interior.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 16.0, lum_p5 1.2, below_40 83.7 %"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.2",
+    "to": "1.75"
+   },
+   "expected": "The frame's median rises into the low-to-mid 20s; the steel and the timber ceiling hold texture.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Ember speakers clip and read as red neon outlines, not tinted acrylic with light passing through.",
+   "evidence": {
+    "region": [
+     320,
+     235,
+     345,
+     265
+    ],
+    "measured": "clip_pct 8.4, lum_p95 185 (the right speaker: clip 7.1)"
+   },
+   "change": {
+    "setting": "lamps on each Ember speaker (4 x area) and the altar spots",
+    "from": "5.0 W/m2 at the target, 2900 K; altar 2 x 70 W",
+    "to": "2.0 W/m2 at the target; altar 2 x 90 W with the cone widened from 28 to 36 deg, so the cabinets are lit from outside and glow through the acrylic instead of blooming at the edges"
+   },
+   "expected": "Each speaker shows its tint as a body with a gradient across the acrylic, with no blown rim; median still 45 or more after c2.",
+   "accept": {
+    "region": [
+     320,
+     235,
+     345,
+     265
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "A second saturated red patch on the record wall competes with the red speakers.",
+   "evidence": {
+    "region": [
+     160,
+     160,
+     195,
+     235
+    ],
+    "measured": "r_median 97, g_median 27, b_median 14: as saturated as the speakers"
+   },
+   "change": {
+    "setting": "the disc behind the DJ station",
+    "from": "emission 0.8 in #FF5A3A with a 60.0 W area lamp",
+    "to": "emission 0.3 with a 15 W area lamp (or warm it toward #E0A070); raise the record wall's spots from 14 W to 20 W at 2600 K to keep the wall lit"
+   },
+   "expected": "The record wall turns warm brown and amber; the only saturated red left in the frame is on the speakers.",
+   "accept": {
+    "region": [
+     160,
+     160,
+     195,
+     235
+    ],
+    "metric": "delta_e",
+    "hex": "#5A3A28",
+    "op": "<",
+    "value": 15
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The speakers are about 25 px wide in a 720 px frame and the mullion splits the room; a third of the frame is dead pier and side wall.",
+   "evidence": {
+    "region": [
+     470,
+     0,
+     720,
+     480
+    ],
+    "measured": "Pier and right wall lum_median 13.3 / 10.6, with 28 % crushed at the right edge; mullion at x 193-207"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [-3.2, 2.2, 1.5], lens 32 mm, target [17.0, 3.4, 1.35]",
+    "to": "position [-2.6, 3.0, 1.5], lens 40 mm, target [17.0, 3.1, 1.3], keeping the shopfront's frame edges inside the picture and the etched name and lightbox in frame; place the mullion over the floor aisle, not over the counter or the record wall"
+   },
+   "expected": "The shopfront glass fills about 70 % of the width, the altar pair reads at about 1.4x their current size, and the dead wall shrinks to a thin dark border.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The floor reads as smeared CG: streaky reflections with no concrete detail.",
+   "evidence": {
+    "region": [
+     200,
+     300,
+     470,
+     430
+    ],
+    "measured": "Streaks run along the view axis in the 2x crop; lum_range 89.5 with no fine texture"
+   },
+   "change": {
+    "setting": "the floor's polish and render settings",
+    "from": "floor polish as now; samples 256, adaptive 0.02, denoise on",
+    "to": "floor roughness raised by about 0.15 (honed, not polished) with aggregate and stain in the bump; samples 512, adaptive 0.01"
+   },
+   "expected": "The floor shows soft, broad pools under the Domes with visible aggregate and no directional smear.",
+   "accept": {
+    "region": [
+     200,
+     300,
+     470,
+     430
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 90
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The bright flat slab at the bottom right is the brightest large surface and reads as an untextured CG plane.",
+   "evidence": {
+    "region": [
+     525,
+     455,
+     710,
+     480
+    ],
+    "measured": "lum_median 123.5, uniform (p5 16 is only the edge), r 156, g 118, b 79"
+   },
+   "change": {
+    "setting": "street lamps",
+    "from": "3 x point, 200.0 W, 3000 K",
+    "to": "3 x point, 90 W, 3000 K, the nearest one moved so it rakes the pavement and the steel at a grazing angle; give the sill or pavement a worn concrete finish with roughness 0.8"
+   },
+   "expected": "The sill falls to a dim, textured kerb that does not pull the eye from the window.",
+   "accept": {
+    "region": [
+     525,
+     455,
+     710,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 60
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The blackened steel pier is blotchy and soft and has no sheen, patina or crisp edges.",
+   "evidence": {
+    "region": [
+     470,
+     0,
+     530,
+     430
+    ],
+    "measured": "lum_median 13.3, lum_range 30.9, mottled at 2x; edges soft"
+   },
+   "change": {
+    "setting": "the steel's patina",
+    "from": "as now (high-contrast mottle)",
+    "to": "lower mottle contrast by half, roughness 0.45 with a brownish patina, edge wear on the arrises so the raking street light draws a thin highlight down each edge"
+   },
+   "expected": "The pier reads as near-black steel with a soft uneven sheen and one sharp highlighted edge.",
+   "accept": {
+    "region": [
+     470,
+     0,
+     530,
+     430
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     40,
+     80
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "The Ember speakers' white batts and horn read as a white disc in a red frame at this size; a less outline-like tint would read better",
+   "why": "The speakers' shape, colour and parts are fixed; only their lighting is addressed (c3)"
+  },
+  {
+   "request": "The side room with the pink wainscot and curtain, if it is part of the room's design rather than the lightbox",
+   "why": "The room's layout and the shopfront are fixed; only its brightness can change. If it is meant to be the lightbox, its content must read as the fogged silhouette (c1)"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

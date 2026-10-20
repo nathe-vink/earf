@@ -649,7 +649,9 @@ def sink(bpy, kit, p, objs):
                                rough=0.03))
     # the basin: a flattened ellipsoid cut from the top, the cut and the block both eased
     me = bpy.data.meshes.new('sink-cut'); bmc = bmesh.new()
-    g = bmesh.ops.create_uvsphere(bmc, u_segments=48, v_segments=24, radius=1.0)
+    g = bmesh.ops.create_uvsphere(bmc, u_segments=128, v_segments=64, radius=1.0)
+    for fc in bmc.faces:                               # the basin smooth-shaded (sink-p2r, both critics: faceted)
+        fc.smooth = True
     bx, by, bz = S['basin']
     for v in g['verts']:
         v.co = Vector((S['x'] + v.co.x * bx, y0 + S['d'] / 2 + v.co.y * by, S['top'] + 0.03 + v.co.z * bz))
@@ -661,9 +663,10 @@ def sink(bpy, kit, p, objs):
     objs.append(ob)
     # the light within: a warm core cast into the block under the basin, seen only through the acrylic, so every
     # face glows and the red deepens with the thickness (sink-p1, both critics: an emitter below lit the wall)
-    lp = Mesh('sink-core'); lp.box(S['x'] - S['w'] / 2 + 0.05, y0 + 0.05, z0 + 0.015, S['x'] + S['w'] / 2 - 0.05,
-                                   y0 + S['d'] - 0.05, z0 + 0.045)
-    em = lp.object(bpy, emitter(bpy, 'sink-core', '#FFC890', p.get('sink_glow', 6.0)))
+    # set deeper in from the faces (p2r: seen as a white slab), and warmer, so it reads only as light in the red
+    lp = Mesh('sink-core'); lp.box(S['x'] - S['w'] / 2 + 0.10, y0 + 0.09, z0 + 0.02, S['x'] + S['w'] / 2 - 0.10,
+                                   y0 + S['d'] - 0.09, z0 + 0.04)
+    em = lp.object(bpy, emitter(bpy, 'sink-core', '#FF9A60', p.get('sink_glow', 6.0)))
     em.visible_shadow = False
     objs.append(em)
     _area(bpy, 'sink-uplight', (S['x'], y0 + S['d'] / 2, z0 - 0.03), (0, 0, 0), (S['w'] - 0.1, S['d'] - 0.1),
@@ -672,6 +675,7 @@ def sink(bpy, kit, p, objs):
     sp = Mesh('sink-spout')
     _cyl(sp.bm, S['x'], 0.03, S['top'] + 0.22, 0.035, 0.012, seg=32, axis='y')
     LK._rod(sp.bm, (S['x'], 0.035, S['top'] + 0.22), (S['x'], 0.035 + 0.20, S['top'] + 0.22), 0.011, 0.011, seg=16)
+    LK._rod(sp.bm, (S['x'], 0.235, S['top'] + 0.225), (S['x'], 0.25, S['top'] + 0.17), 0.011, 0.010, seg=16)  # its nose, down
     LK._rod(sp.bm, (S['x'] + 0.10, 0.035, S['top'] + 0.22), (S['x'] + 0.10, 0.09, S['top'] + 0.22), 0.012, 0.012, seg=16)
     LK._rod(sp.bm, (S['x'] + 0.10, 0.09, S['top'] + 0.22), (S['x'] + 0.10, 0.09, S['top'] + 0.30), 0.005, 0.004, seg=10)
     objs.append(sp.object(bpy, brushed_steel(bpy), smooth=True))

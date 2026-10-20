@@ -137,9 +137,12 @@ VIEWS = {
                # after the two critics on p1 (5.0, 5.0): over-exposed under a veil, the mullion through the altar, the
                # etched name a beige square, the lightbox too bright, no reflections: 32 mm with the mullion on a third,
                # exposure down, the etch unlit, the lightbox down, a lamp behind the camera for the glass
-               'camera': {'position': [-3.2, 2.2, 1.5], 'target': [17.0, 3.4, 1.35], 'lens_mm': 32, 'level': True,
+               # after the two critics on p2r (5.0, 5.0): dark (16), the pair tiny and clipping, the name gone, the sill
+               # the brightest plane, the disc's red on the record wall: nearer on 40 mm, exposure 1.65, the name 0.3,
+               # the street lamps 90 W, the disc down, the frost rougher
+               'camera': {'position': [-1.6, 2.9, 1.45], 'target': [17.0, 3.05, 1.3], 'lens_mm': 40, 'level': True,
                           'fstop': 5.6, 'focus': [0.0, 3.0, 1.6]},
-               'settings': {'exposure': 1.2, 'etch_glow': 0.0, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 200.0,
+               'settings': {'exposure': 1.65, 'etch_glow': 0.3, 'disc_glow': 0.3, 'disc_lamp': 15.0, 'screen_rough': 0.6, 'wb': 3200, 'wet': True, 'road_rough': 0.12, 'street_lamp': 90.0,
                             'screen_window': 0.27, 'lamp_k': 3000, 'lamp_z': 5.0, 'lamp_dx': 0.0, 'lamp_cam': 300.0,
                             'lamp_cam_z': 4.0, 'lamp_cam_y': 2.0, 'sign_w': 0.0, 'entry_w': 45.0, 'entry_cone': 100.0,
                             'transom_glow': 0.15, 'siding': '#8E9384', 'sky': 0.03, 'sky_zenith': '#1A2440',
@@ -148,9 +151,12 @@ VIEWS = {
     'sink': {'title': 'the sink, a detail',
              # after the two critics on p1 (3.0, 4.0): the trough a black box with a red lid, the wall lit instead,
              # a dead black strip at the left: a glowing core cast inside it; the boards darker and varied; turned right
-             'camera': {'position': [9.85, 2.05, 1.42], 'target': [11.02, 0.15, 0.86], 'lens_mm': 65, 'level': True,
-                        'fstop': 2.8, 'focus': [11.02, 0.27, 0.84]},
-             'settings': {'exposure': 0.2, 'haze': 0.0, 'sink_glow': 6.0, 'sink_spot': 28.0, 'wb': 2800}},
+             # after the two critics on p2r (3.5, 4.0): the core seen as a white slab that clips, the basin faceted, the
+             # boards red, square on so the thickness never reads: the core deeper and warmer at 2.5, the basin smooth,
+             # 3200 K, lower and three-quarter on 50 mm, the spout's nose turned down
+             'camera': {'position': [10.25, 1.35, 1.15], 'target': [11.02, 0.25, 0.84], 'lens_mm': 50, 'level': True,
+                        'fstop': 2.8, 'focus': [11.0, 0.47, 0.84]},
+             'settings': {'exposure': 0.4, 'haze': 0.0, 'sink_glow': 2.5, 'sink_spot': 40.0, 'wb': 3200}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot

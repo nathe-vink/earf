@@ -1,0 +1,333 @@
+{
+ "stage1": {
+  "impression": "A frontal elevation of a red acrylic trough sink against mahogany-red boards. It reads as a CG product render, not a photograph. The under-glow shows as a flat, near-white slab and clips. The basin's inside is visibly faceted at 1:1. The timber grain looks painterly and procedural, and the red cast floods the wall, so the whole frame is red. The spout floats high on the wall and runs sideways, so it never reaches the basin. A design magazine would not run this as a specific place: nothing in the frame says listening bar, Planet EARF or San Francisco. It is a generic showroom vignette of a sink.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Under-glow reads as light passing through the acrylic, not as a visible white emitter slab; clip_pct < 0.5 in the trough region",
+  "Basin interior smooth at 1:1, with no polygon facets",
+  "Acrylic thickness and polished, glowing edges legible from a three-quarter view at basin height",
+  "Timber reads as real dark fir or oak boards (checks, nail holes, uneven tone), not a red procedural grain; wall r_median falls toward neutral brown",
+  "Steel spout reads as brushed steel with soft highlights, not black chrome",
+  "A sign of the room and of life in frame (the banquette's edge, a towel, a glass) so it reads as this bar, not a showroom",
+  "No crushed black void at the frame's left edge"
+ ],
+ "defects": [
+  {
+   "region": [
+    75,
+    300,
+    600,
+    430
+   ],
+   "what": "The under-glow emitter is visible as an opaque pinkish-white slab with hard edges. It reads as a light box, not a glow through the acrylic, and clips (3.4% clipped)."
+  },
+  {
+   "region": [
+    170,
+    220,
+    420,
+    300
+   ],
+   "what": "The basin interior is visibly faceted (low-poly shading steps), which says CG."
+  },
+  {
+   "region": [
+    250,
+    0,
+    720,
+    480
+   ],
+   "what": "The timber boards have a painterly procedural grain, uniform plank width and no checks or nail holes. The stain is red mahogany (r65 g31 b24) and blends with the red spill."
+  },
+  {
+   "region": [
+    320,
+    60,
+    395,
+    125
+   ],
+   "what": "The spout is mounted high and runs along the wall, ending well short of the basin. It reads as black chrome or a towel hook, not brushed steel."
+  },
+  {
+   "region": [
+    170,
+    120,
+    220,
+    220
+   ],
+   "what": "A saturated dark-red bottle or figurine beside the tap competes with the sink as a second red object."
+  },
+  {
+   "region": [
+    400,
+    235,
+    580,
+    305
+   ],
+   "what": "A grey rounded block on the deck reads as a foam cushion or sponge at the wrong scale."
+  },
+  {
+   "region": [
+    0,
+    0,
+    60,
+    480
+   ],
+   "what": "The left strip is crushed black (crush_pct 78)."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "The camera is square-on, so the trough reads flat, its thickness and edges go unread, and nothing places it in the room."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The under-glow is overdriven: it reads as a white light box and clips.",
+   "evidence": {
+    "region": [
+     80,
+     300,
+     590,
+     430
+    ],
+    "measured": "lum_median 147.8, lum_p95 218.8, clip_pct 3.43, r246 g121 b124 (desaturated toward white); frame clip_pct 0.84"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "6.0",
+    "to": "2.0"
+   },
+   "expected": "The slab drops to a saturated ember glow: lum_median about 90 to 110, no clipping, red held instead of washing to pink-white.",
+   "accept": {
+    "region": [
+     80,
+     300,
+     590,
+     430
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The emitter itself is visible through the trough, not diffused by the acrylic, so the glow has hard edges.",
+   "evidence": {
+    "region": [
+     75,
+     300,
+     600,
+     430
+    ],
+    "measured": "a hard edge from the slab to the dark gap below it, step -34 over 46 px at [300,280,340,330]; the slab's b_median of 124 is close to its g_median of 121, so it reads as white light"
+   },
+   "change": {
+    "setting": "how rough the frosted acrylic is (the trough's lower shelf/diffuser) and the under-glow colour",
+    "from": "the emitter visible, white",
+    "to": "frosted roughness about 0.6 on the diffuser face; under-glow colour warm 2200 K so the light picks up Ember through the cast"
+   },
+   "expected": "An even, soft glow seen through the shelf, with the light carried to the polished edges; the shelf's blue channel falls well below its red.",
+   "accept": {
+    "region": [
+     80,
+     310,
+     590,
+     420
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The square-on elevation hides the acrylic's thickness and edges and gives no sense of the room.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "the trough's front reads as one flat band; there is no depth cue or room context in frame"
+   },
+   "change": {
+    "setting": "camera position, target, lens",
+    "from": "[9.85, 2.05, 1.42] looking at [11.02, 0.15, 0.86], 65 mm",
+    "to": "lowered to about 1.15 m and swung about 30 deg toward the banquette side, 50 mm, f/2.8, focus on the trough's near front edge, with a sliver of the banquette or listening zone soft at the frame's edge"
+   },
+   "expected": "The 30 mm+ wall thickness and polished edges glow, the basin's curve reads, and the alcove sits in the bar.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The timber reads as a red-stained procedural texture, and its tone merges with the sink's red, so the sink is not the frame's only saturated colour.",
+   "evidence": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "measured": "r_median 55, g 23, b 17 (strongly red); grain smooth and painterly at 2x"
+   },
+   "change": {
+    "setting": "the timber boards' stain and finish",
+    "from": "red mahogany, uniform",
+    "to": "dark smoked fir/oak brown (about #3A2A20 lit), with checks, nail holes, plank-to-plank tone variation and a soft satin sheen"
+   },
+   "expected": "The wall reads as warm brown timber, not red, away from the sink's spill; the red is held to the sink.",
+   "accept": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "Props compete with the sink or read at the wrong scale: a saturated red bottle and a grey foam-like block.",
+   "evidence": {
+    "region": [
+     170,
+     120,
+     220,
+     220
+    ],
+    "measured": "the bottle's r_median 40 against g 1 (pure red object); the block at [400,235,580,305] reads as a cushion"
+   },
+   "change": {
+    "setting": "small props",
+    "from": "red bottle, grey rounded block",
+    "to": "a clear or smoked glass soap bottle, and a folded natural linen hand towel on the deck in place of the block; optionally a rinsed rocks glass upside down"
+   },
+   "expected": "Neutral props, a sign of use, and the sink as the only saturated object.",
+   "accept": {
+    "region": [
+     170,
+     120,
+     220,
+     220
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The spout reads as black chrome and has no brushed character.",
+   "evidence": {
+    "region": [
+     320,
+     60,
+     395,
+     125
+    ],
+    "measured": "near-black body with a few hard red highlights; lum_median 45.5 including the wall"
+   },
+   "change": {
+    "setting": "the steel's patina/finish",
+    "from": "dark, mirror-like",
+    "to": "brushed stainless, roughness about 0.35, anisotropic along the spout's length, a lighter base tone"
+   },
+   "expected": "The spout shows a soft linear highlight from the sink's spot and reads as brushed steel.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The left edge is a crushed black void and the wall has no pool of light falling off.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     60,
+     480
+    ],
+    "measured": "crush_pct 78.4, lum_median 1.0"
+   },
+   "change": {
+    "setting": "the sink's spot (and the alcove's spill)",
+    "from": "1 x spot 28 W, 2700 K, cone 30 deg",
+    "to": "the same spot at 22 W with cone 40 deg, plus a faint grazing spill from the banquette side so the boards fall off gradually into dark"
+   },
+   "expected": "The alcove reads as a pool of light that fades into shadow with detail; there is no pure black.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     60,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 50
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "asset",
+   "problem": "The basin's interior shows polygon facets.",
+   "evidence": {
+    "region": [
+     170,
+     220,
+     420,
+     300
+    ],
+    "measured": "stepped shading bands visible in the 3x crop"
+   },
+   "change": {
+    "setting": "the basin mesh's shading/tessellation (not its shape)",
+    "from": "flat-shaded or low subdivision",
+    "to": "smooth shading with a subdivision level of 2 or more (or auto-smooth) on the same surface"
+   },
+   "expected": "Continuous gradients across the bowl, so the cast form reads as moulded.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Move the spout so it reaches over the basin, or lower it toward the deck",
+   "why": "The sink and its spout are fixed by the room's design. As placed, it reads as a towel hook and never meets the water. Raise this with the owner."
+  },
+  {
+   "request": "Change the sink's form or colour",
+   "why": "The sink is fixed by the card. If the facets are in the modelled shape rather than its shading, that is a design and asset question for the owner."
+  },
+  {
+   "request": "Include the EARF speaker",
+   "why": "This is a sink detail with no speaker in frame, so the one-colour hero is the sink. Whether a speaker should appear soft in the background is a composition choice for the brief."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

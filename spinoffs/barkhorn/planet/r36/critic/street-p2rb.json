@@ -1,0 +1,390 @@
+{
+ "stage1": {
+  "impression": "A dim, warm view through a dark shopfront into a long timber-and-concrete room. The depth, the record wall and the stools hold up, but it reads as a clean CG proof rather than a night photograph: the glass is an empty hole with no reflection, the steel pier looks like smeared polished stone, and the two red speakers at the far end are about 26 px tall, flat and glowing at their edges like neon signs. As a specific place it does not land yet. From the kerb it reads as a generic dark bar, because the things that would make it Planet EARF (the etched name, the dancing-figure lightbox, the altar) are too small to see or not visible at all, so a magazine would not run it as this bar.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Frame lum_median between 22 and 40. It measures 16.0 now.",
+  "The Ember pair reads at a glance as two tinted acrylic cabinets on an altar, about 10% of frame height or more, with clip_pct < 2 on each cabinet. Now they are about 26 px of 480 tall and clip 9 to 11%.",
+  "The shopfront glass reads as glass: a faint, clean reflection of the street, and the etched name legible. The name shows no trace now (its emission is 0.0).",
+  "The frosted lightbox reads as evenly glowing frosted acrylic with a fogged dancing figure behind it. The right-hand bay now reads as a clear window onto a pink-wainscoted room with a curtain.",
+  "The blackened-steel shopfront reads as near-black steel with a soft, uneven sheen and crisp lit edges, not as blotchy polished stone.",
+  "Saturated colour only from the Ember pair and the deep green zone. The red block of record spines and any other loud colour must not compete with the speakers."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Underexposed overall: lum_median 16.0, 83.7% of pixels below 40."
+  },
+  {
+   "region": [
+    323,
+    238,
+    345,
+    264
+   ],
+   "what": "Left Ember cabinet clips 11.0% and reads as a flat red rectangle with a glowing outline, like a sign, not as thick tinted acrylic."
+  },
+  {
+   "region": [
+    396,
+    238,
+    418,
+    264
+   ],
+   "what": "Right Ember cabinet clips 9.3%, with the same neon-sign look."
+  },
+  {
+   "region": [
+    300,
+    190,
+    440,
+    300
+   ],
+   "what": "The altar and the speakers are tiny in frame and lost at the end of the room. The hero is not read at a glance."
+  },
+  {
+   "region": [
+    395,
+    140,
+    412,
+    158
+   ],
+   "what": "Bare white disc on the ceiling, 37.9% clipped, reads as a blown bulb."
+  },
+  {
+   "region": [
+    0,
+    40,
+    470,
+    430
+   ],
+   "what": "The shopfront glass has no reflection, sheen or etched name, so it reads as an open hole."
+  },
+  {
+   "region": [
+    527,
+    138,
+    660,
+    308
+   ],
+   "what": "The lightbox bay reads as a clear view of a room with a pinkish wainscot and a curtain. It does not read as frosted, and no dancing silhouette is legible."
+  },
+  {
+   "region": [
+    470,
+    0,
+    527,
+    430
+   ],
+   "what": "The steel pier (lum_median 13) has a blotchy, marbled sheen like polished granite and no lit edge."
+  },
+  {
+   "region": [
+    527,
+    455,
+    700,
+    480
+   ],
+   "what": "A flat, bright, untextured slab on the sill or pavement (lum_median 123.5), the brightest large area in the frame. It pulls the eye to the bottom-right corner."
+  },
+  {
+   "region": [
+    165,
+    160,
+    192,
+    235
+   ],
+   "what": "A saturated red block of record spines (r_median 111) competes with the Ember pair for the frame's one colour."
+  },
+  {
+   "region": [
+    15,
+    130,
+    65,
+    210
+   ],
+   "what": "A pale trapezoidal ghost of light on the left wall that matches no visible source."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    40
+   ],
+   "what": "Top band 28.9% crushed: the soffit and header are empty black."
+  },
+  {
+   "region": [
+    190,
+    30,
+    205,
+    430
+   ],
+   "what": "The mullion cuts through the record wall and the counter, splitting the room's best area."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero pair and the altar are too small to read from this distance and lens, and the mullion splits the room.",
+   "evidence": {
+    "region": [
+     300,
+     190,
+     440,
+     300
+    ],
+    "measured": "Each cabinet is about 22 x 26 px in a 720 x 480 proof (about 5% of frame height). The mullion sits at x 190 to 205."
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "position [-3.2, 2.2, 1.5], lens 32 mm, target [17.0, 3.4, 1.35]",
+    "to": "position [-1.6, 2.9, 1.45], lens 40 mm, target [17.0, 3.05, 1.3], focus at [0.0, 3.0, 1.6], f/5.6 kept. Stand close enough that the glass and steel still frame the edges, with the mullion moved off the record wall (to the left third or out of frame)."
+   },
+   "expected": "The speakers stand about 9 to 11% of frame height, centred near the vertical thirds, with the shopfront still reading as a frame around the room.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The frame is darker than a night interior that runs in print.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 16.0, lum_mean 24.7, below_40 83.7%"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.2",
+    "to": "1.65"
+   },
+   "expected": "Frame median about 26 to 30, with the timber and the floor holding detail.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The Ember cabinets clip and glow at their edges like neon, so they read as signage, not as thick tinted acrylic.",
+   "evidence": {
+    "region": [
+     323,
+     238,
+     345,
+     264
+    ],
+    "measured": "clip_pct 11.0, lum_p95 188. The right cabinet [396, 238, 418, 264] clips 9.3%."
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area / the altar 2 x spot",
+    "from": "4 x area 5.0 W/m2, altar spots 70.0 W cone 28 deg",
+    "to": "4 x area 2.5 W/m2, altar spots 45 W with cone 40 deg, aimed so that they wash the plinth and graze the cabinets' faces"
+   },
+   "expected": "The red reads as a transmitted tint with gradation through the acrylic, the edges glow without blowing, and the white batts and horn are legible. It must hold after the exposure rise in c2.",
+   "accept": {
+    "region": [
+     323,
+     238,
+     345,
+     264
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The lightbox does not read as frosted acrylic and the dancing figure is not legible.",
+   "evidence": {
+    "region": [
+     527,
+     138,
+     660,
+     308
+    ],
+    "measured": "lum_range 121.5. Sharp detail of the room behind shows through (a wainscot edge and curtain folds), and there is no even glow."
+   },
+   "change": {
+    "setting": "frosted acrylic roughness / the lightbox's glow",
+    "from": "the current roughness (it reads near clear)",
+    "to": "roughness about 0.7, with enough transmission blur that the figure reads only as a soft silhouette; light the box evenly from behind"
+   },
+   "expected": "An even, soft field with the figure as a fogged shadow, with no hard detail of the room behind.",
+   "accept": {
+    "region": [
+     527,
+     138,
+     660,
+     308
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 80
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The glass reads as an open hole: no street reflection, and the etched name is invisible.",
+   "evidence": {
+    "region": [
+     0,
+     40,
+     470,
+     430
+    ],
+    "measured": "No reflection structure is visible. The window's etched name has emission 0.0 and no trace of it shows."
+   },
+   "change": {
+    "setting": "the window's etched name emission / street lamps",
+    "from": "etched name 0.0, street lamps 3 x 200 W",
+    "to": "etched name 0.3 (a faint frost catching the room's light), with one street lamp moved behind and above the camera at 300 W so that the glass carries a faint, clean reflection of the kerb and the lamp"
+   },
+   "expected": "The name reads in the upper part of the glass, and a faint reflection plane sits over the room without hiding it.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "A flat, bright slab at the bottom right is the brightest large area in the frame and pulls the eye out of the picture.",
+   "evidence": {
+    "region": [
+     527,
+     455,
+     700,
+     480
+    ],
+    "measured": "lum_median 123.5 (the frame median is 16), with no texture"
+   },
+   "change": {
+    "setting": "street lamps (the one nearest the lightbox bay)",
+    "from": "200 W",
+    "to": "80 W, or aimed so that its pool falls on the pavement in front of the glass, not on the sill"
+   },
+   "expected": "The sill sits in the 40 to 70 range and the eye goes into the room.",
+   "accept": {
+    "region": [
+     527,
+     455,
+     700,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 70
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The steel shopfront reads as blotchy polished granite rather than blackened steel.",
+   "evidence": {
+    "region": [
+     470,
+     0,
+     527,
+     430
+    ],
+    "measured": "lum_median 13.2, p95 31. A large-scale marbled specular pattern, and no edge highlight."
+   },
+   "change": {
+    "setting": "steel patina",
+    "from": "the current high-contrast, large-scale mottled sheen",
+    "to": "a finer, lower-contrast brown-black patina (sheen variation at about 5 to 20 cm scale, roughness 0.45 to 0.6), so that the street lamp catches the arrises as a thin, crisp edge"
+   },
+   "expected": "Near-black steel with a soft, uneven sheen and sharp lit edges.",
+   "accept": {
+    "region": [
+     470,
+     0,
+     527,
+     430
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "Light sources that compete with the hero: a blown ceiling disc and a hot red patch on the record wall.",
+   "evidence": {
+    "region": [
+     395,
+     140,
+     412,
+     158
+    ],
+    "measured": "The disc clips 37.9%. The red spine block [165, 160, 192, 235] has r_median 111."
+   },
+   "change": {
+    "setting": "the Domes' downlights / the record wall 4 x spot",
+    "from": "Domes' downlights 320 W; record wall spots 14 W",
+    "to": "Domes' downlights 220 W (or the bulb hidden so the light reads as a pool, not a disc); the record-wall spot on the red bay to 7 W; haze 0.003 to 0.006 so the pools show"
+   },
+   "expected": "No point source besides the speakers draws the eye, the record wall reads as an even warm field, and the pools of light on the counter show soft beams.",
+   "accept": {
+    "region": [
+     395,
+     140,
+     412,
+     158
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 15
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Mute or reorder the saturated red record sleeves on the record wall.",
+   "why": "The record wall and what it shows are fixed room design. Only their light may change (c8)."
+  },
+  {
+   "request": "Make the speaker cabinets' tint less flat or give their acrylic more visible thickness.",
+   "why": "EARF's products are fixed. The look must come from their light (c3) and the camera (c1)."
+  },
+  {
+   "request": "Move or remove the mullion.",
+   "why": "The shopfront is fixed design. Only the camera can move it out of the room's best area (c1)."
+  }
+ ],
+ "score_if_fixed": 6.8
+}
