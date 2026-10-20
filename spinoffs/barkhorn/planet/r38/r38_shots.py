@@ -40,7 +40,7 @@ VIEWS['coins-door'] = {'title': 'EARFcoin: the bowl at the door (Smoke)',
                        'camera': {'position': [_H['x'] + 0.75, _H['y'] + 0.45, 1.70],
                                   'target': [_H['x'], _H['y'], _H['top'] + 0.03], 'lens_mm': 50, 'level': True,
                                   'fstop': 4.0, 'focus': [_H['x'], _H['y'], _H['top'] + 0.03]},
-                       'settings': {**T37.VIEWS['bar-smoke']['settings'], 'config': 'smoke', 'exposure': 2.1, 'host_w': 40.0}}
+                       'settings': {**T37.VIEWS['bar-smoke']['settings'], 'config': 'smoke', 'exposure': 2.1, 'host_w': 30.0}}
 S.VIEWS = VIEWS
 T37.VIEWS.update(VIEWS)                                            # r37's shot() reads its own VIEWS
 
@@ -55,9 +55,20 @@ def props(v):
     if not v.get('coins'):
         return out
     RP = T37.RP; C = RP.COUNTER; zt = C['top_z']
-    out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'column',
-                'spots': [[round(RP.DJ['x'] + 0.80, 4), round(C['y1'] - 0.30, 4), zt]], 'rotate_z': 0.0,
-                'coins': ['ice', 'ember', 'acid', 'smoke', 'haze', 'dust', 'fog', 'poison', 'ember', 'ice', 'acid', 'haze', 'dust', 'smoke'], 'out': 6.0})
+    # the column's queue placed as single coins, so each can carry the kit's rim glow: the LED disc in the column's base
+    # (the lead, 2026-10-20) shining up through the stack, every coin's rim alight in its own tint
+    import random
+    cx, cy = round(RP.DJ['x'] + 0.80, 4), round(C['y1'] - 0.30, 4)
+    queue = ['ice', 'ember', 'acid', 'smoke', 'haze', 'dust', 'fog', 'poison', 'ember', 'ice', 'acid', 'haze', 'dust', 'smoke']
+    rnd = random.Random(5); FLOOR, STEP = 0.0132, 0.006 + 0.00002
+    out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'column', 'spots': [[cx, cy, zt]],
+                'rotate_z': 0.0, 'coins': []})
+    out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'coin', 'face': 'engraved',
+                'rim_glow': v.get('column_glow', 0.5),
+                'spots': [{'position': [round(cx + rnd.uniform(-0.0004, 0.0004), 5),
+                                        round(cy - (0.006 if k == 0 else 0.0) + rnd.uniform(-0.0004, 0.0004), 5),
+                                        round(zt + FLOOR + k * STEP, 5)],
+                           'flavour': fl, 'rotate_z': round(rnd.uniform(0, 360), 1)} for k, fl in enumerate(queue)]})
     out.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan',
                 'spots': [[4.35, round(C['y0'] + 0.16, 4), zt]], 'flavours': ['dust', 'fog', 'poison'], 'heading': 15.0})
     H = RP.HOST
@@ -77,13 +88,15 @@ def lights(v):
     if v.get('coins'):
         H = T37.RP.HOST                                 # a pinhole downlight over the host stand, onto the bowl
         L['host'] = {'type': 'spot', 'position': [H['x'], H['y'], T37.RP.CEIL - 0.05], 'target': [H['x'], H['y'], H['top']],
-                     'power_w': v.get('host_w', 40.0), 'cone_deg': 18.0, 'blend': 0.6, 'radius_m': 0.02, 'color': 2700,
+                     'power_w': v.get('host_w', 40.0), 'cone_deg': v.get('host_cone', 6.0), 'blend': 0.6, 'radius_m': 0.02, 'color': 2700,
                      'camera': False}
-        C = T37.RP.COUNTER                              # and a narrow spot from the bar's ceiling onto the request column
+        C = T37.RP.COUNTER                              # the request column lit from inside (the lead, 2026-10-20): a warm
+        # LED disc in its Smoke base shining up through the stack, so the coins glow in their tints (as the speakers' light
+        # plinths); r31-coin is adding it to the column's design. A small lamp just under the slot's floor (13.2 mm)
         cx, cy = round(T37.RP.DJ['x'] + 0.80, 3), round(C['y1'] - 0.30, 3)
-        L['column'] = {'type': 'spot', 'position': [cx, round(cy - 0.9, 3), T37.RP.CEIL - 0.25],
-                       'target': [cx, cy, round(C['top_z'] + 0.08, 3)], 'power_w': v.get('column_w', 6.0), 'cone_deg': 10.0,
-                       'blend': 0.6, 'radius_m': 0.02, 'color': 2700, 'camera': False}
+        L['column-led'] = {'type': 'spot', 'position': [cx, cy, round(C['top_z'] + 0.009, 4)],
+                           'target': [cx, cy, round(C['top_z'] + 0.30, 3)], 'power_w': v.get('column_led', 0.6),
+                           'cone_deg': 40.0, 'blend': 0.9, 'radius_m': 0.012, 'color': 2700, 'camera': False}
     return L
 
 
