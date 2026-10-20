@@ -57,14 +57,17 @@
     "module": "earf_moon",
     "fn": "orb",
     "spots": [
-     [
-      0.0,
-      0.0,
-      0.04
-     ]
+     {
+      "position": [
+       0.0,
+       0.0,
+       0.04
+      ],
+      "rotate_z": -40
+     }
     ],
     "flavour": "ember",
-    "shade_glow": 1.1,
+    "shade_glow": 0.8,
     "lamp_w": 3.0,
     "materials": {
      "liner": {
@@ -158,23 +161,23 @@
   "back": {
    "type": "area",
    "size_m": [
-    0.4,
-    0.06
+    0.08,
+    0.6
    ],
    "position": [
-    -0.25,
-    0.4,
-    0.1
+    0.45,
+    0.15,
+    0.2
    ],
    "target": [
-    0,
-    0,
-    0.06
+    0.0,
+    0.0,
+    0.12
    ],
-   "irradiance": 0.8,
+   "irradiance": 1.6,
    "color": 4300,
    "camera": false,
-   "specular": 0.5
+   "specular": 1.0
   }
  },
  "render": {

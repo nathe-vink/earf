@@ -55,10 +55,82 @@ def unlit():
     return s
 
 
+# each tint's glow, relative (crystal_promo.GAIN): round 32e's Orbs row was one piece, so every tint glowed alike and
+# Fog clipped (s1, both critics)
+POOL = {'ember': '#FF7A68', 'dust': '#FF9C78', 'acid': '#FFC870', 'poison': '#BCE07A', 'ice': '#86D2FF',
+        'haze': '#B496FF', 'fog': '#FFF2E4', 'smoke': '#CDBFAF'}    # crystal_promo.POOL: each tint's light
+GAIN = {'ember': 1.0, 'dust': 1.0, 'acid': 0.9, 'poison': 0.9, 'ice': 0.75, 'haze': 0.85, 'fog': 0.45, 'smoke': 0.6}
+
+
+def orbs_row():
+    """s1 (5.5, 5.5): the balls flat discs and Fog clipped (one glow for all: now a piece a tint, its gain, and the
+    glow down from 1.8 to 1.3); the cables' run back read as stubs curling up behind each base in a lineup (the hero
+    shows the cable; here they are left out); the pools faint (stronger, closer under each ball); the paper flat (the
+    wash aimed lower, so it falls off up the sweep)."""
+    s = final('orbs')
+    props = []
+    for p in s['set']['props']:
+        if p.get('fn') != 'orb':
+            props.append(p); continue
+        for sp in p['spots']:
+            q = copy.deepcopy(p); q['spots'] = [sp]; q['flavour'] = sp['flavour']
+            q.update(shade_glow=round(1.3 * GAIN[sp['flavour']], 3), cable=False)
+            props.append(q)
+    s['set']['props'] = props
+    for k, L in s['lights'].items():
+        if k.startswith('pool'):
+            L.update(power_w=1.6, position=[L['position'][0], -0.06, 0.04])
+    s['lights']['bgwash']['target'] = [0.0, 1.0, 0.0]
+    return s
+
+
+def domes_row():
+    """s1 (4.5, 4.5): the lamps lit nothing and the wall outshone them, the domes crammed under the top edge above an
+    empty wall and a sliver of counter. Now the domes hang 38 cm over the counter (a bar's low pendants), the camera a
+    little above them with a wider lens, so the cords, the domes and the counter's top all read; each dome lights the
+    counter in its tint; the counter a solid block, not a slab over the floor; the wash down."""
+    s = final('domes')
+    for p in s['set']['props']:
+        if p.get('fn') == 'dome':
+            for sp in p['spots']:
+                sp['position'][2] = 1.48
+            # a downlight in each dome's tint lights the counter under it (its own lamp is 2700 K and hidden from
+            # transmission: at 18 W it washed the wall and the counter orange, untinted)
+            for sp in p['spots']:
+                x = sp['position'][0]
+                s['lights'][f'down{x:+.2f}'] = {'type': 'spot', 'position': [x, 0.0, 1.53], 'target': [x, 0.0, 1.10],
+                                                'power_w': 5.0, 'cone_deg': 60, 'radius_m': 0.05,
+                                                'color': POOL[sp['flavour']], 'camera': False, 'specular': 0.0}
+        elif p.get('texture') == 'oak_veneer_01':
+            p.update(size=[p['size'][0], p['size'][1], 1.10], position=[p['position'][0], p['position'][1], 0.0])
+    s['camera'].update(position=[0.0, -4.6, 1.45], target=[0.0, 0.0, 1.40], lens_mm=60, focus=[0.0, 0.0, 1.45])
+    s['lights']['bgwash']['irradiance'] = 2.6
+    for k in ('rim', 'bounce'):
+        if k in s['lights']:
+            s['lights'][k]['position'][2] -= 0.12
+            s['lights'][k]['target'][2] -= 0.12
+    return s
+
+
+def orb_hero():
+    """s1 (6.0, 6.0): the cable drew a line across the left third (the lamp turned 40 degrees on its spot, so its
+    notch faces back and the cable runs away behind the ball; at 80 its run turned to the right edge); the red pinned at 249, a flat disc (the glow
+    1.1 to 0.8); the polished base without a highlight (the low strip behind becomes a tall one at the right, so a line
+    runs down the drum and the ring)."""
+    s = final('orb-hero')
+    for p in s['set']['props']:
+        if p.get('fn') == 'orb':
+            p['spots'] = [{'position': p['spots'][0], 'rotate_z': -40}]
+            p['shade_glow'] = 0.8
+    s['lights']['back'].update(size_m=[0.08, 0.6], position=[0.45, 0.15, 0.2], target=[0.0, 0.0, 0.12],
+                               irradiance=1.6, specular=1.0)
+    return s
+
+
 def build():
     os.makedirs(SHOTS, exist_ok=True)
     for n, src in NAMES.items():
-        s = unlit() if n == 'lamps-unlit' else final(src)
+        s = {'lamps-unlit': unlit, 'lamps-orbs': orbs_row, 'lamps-domes': domes_row, 'lamp-orb': orb_hero}.get(n, lambda: final(src))()
         json.dump(s, open(os.path.join(SHOTS, n + '.json'), 'w'), indent=1)
         print(n, '<-', src)
     json.dump(cartridge(), open(os.path.join(SHOTS, 'lamp-cartridge.json'), 'w'), indent=1)
