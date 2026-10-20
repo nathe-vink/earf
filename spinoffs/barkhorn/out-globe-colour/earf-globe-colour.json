@@ -1,0 +1,209 @@
+{
+ "_note": "EARF globe, in colour for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/out-globe-colour/render/earf-globe-colour.glb",
+ "origin_mm": [
+  0,
+  0,
+  1e-06
+ ],
+ "materials": {
+  "base": {
+   "preset": "black_oxide",
+   "color": "#1E1E1F"
+  },
+  "disc-acid": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F8E4A2",
+   "radius": 0.008,
+   "roughness": 0.03
+  },
+  "disc-dust": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F9CA96",
+   "radius": 0.008,
+   "roughness": 0.03
+  },
+  "disc-ember": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#F7AF90",
+   "radius": 0.008,
+   "roughness": 0.03
+  },
+  "disc-haze": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#C8B2E0",
+   "radius": 0.008,
+   "roughness": 0.03
+  },
+  "disc-ice": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#B3D5F0",
+   "radius": 0.008,
+   "roughness": 0.03
+  },
+  "disc-poison": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#BECCA0",
+   "radius": 0.008,
+   "roughness": 0.03
+  },
+  "rim-acid": {
+   "preset": "emit",
+   "color": "#FFC93A",
+   "strength": 0.0
+  },
+  "rim-dust": {
+   "preset": "emit",
+   "color": "#FF8A3A",
+   "strength": 0.0
+  },
+  "rim-ember": {
+   "preset": "emit",
+   "color": "#FF4A3A",
+   "strength": 0.0
+  },
+  "rim-haze": {
+   "preset": "emit",
+   "color": "#9A6BFF",
+   "strength": 0.0
+  },
+  "rim-ice": {
+   "preset": "emit",
+   "color": "#4FB8FF",
+   "strength": 0.0
+  },
+  "rim-poison": {
+   "preset": "emit",
+   "color": "#6BD45A",
+   "strength": 0.0
+  },
+  "uv": {
+   "preset": "emit",
+   "color": "#7A52FF",
+   "strength": 0.0
+  }
+ },
+ "assign": [
+  {
+   "match": "base",
+   "material": "base"
+  },
+  {
+   "match": "disc-south|chip-acid",
+   "material": "disc-acid"
+  },
+  {
+   "match": "disc-m150|chip-dust",
+   "material": "disc-dust"
+  },
+  {
+   "match": "disc-north|chip-ember",
+   "material": "disc-ember"
+  },
+  {
+   "match": "disc-m30|chip-haze",
+   "material": "disc-haze"
+  },
+  {
+   "match": "disc-equator|chip-ice",
+   "material": "disc-ice"
+  },
+  {
+   "match": "disc-m90|chip-poison",
+   "material": "disc-poison"
+  },
+  {
+   "match": "rim-south",
+   "material": "rim-acid"
+  },
+  {
+   "match": "rim-m150",
+   "material": "rim-dust"
+  },
+  {
+   "match": "rim-north",
+   "material": "rim-ember"
+  },
+  {
+   "match": "rim-m30",
+   "material": "rim-haze"
+  },
+  {
+   "match": "rim-equator",
+   "material": "rim-ice"
+  },
+  {
+   "match": "rim-m90",
+   "material": "rim-poison"
+  },
+  {
+   "match": "uv",
+   "material": "uv"
+  }
+ ],
+ "flavours": {
+  "day": {
+   "materials": {
+    "rim-ember": {
+     "strength": 0.8
+    },
+    "rim-dust": {
+     "strength": 0.8
+    },
+    "rim-acid": {
+     "strength": 0.8
+    },
+    "rim-poison": {
+     "strength": 0.8
+    },
+    "rim-ice": {
+     "strength": 0.8
+    },
+    "rim-haze": {
+     "strength": 0.8
+    }
+   }
+  },
+  "night": {
+   "materials": {
+    "rim-ember": {
+     "strength": 4.0
+    },
+    "rim-dust": {
+     "strength": 4.0
+    },
+    "rim-acid": {
+     "strength": 4.0
+    },
+    "rim-poison": {
+     "strength": 4.0
+    },
+    "rim-ice": {
+     "strength": 4.0
+    },
+    "rim-haze": {
+     "strength": 4.0
+    },
+    "uv": {
+     "strength": 2.0
+    }
+   }
+  }
+ },
+ "options": {
+  "chips": [
+   "chip-ember",
+   "chip-dust",
+   "chip-acid",
+   "chip-poison",
+   "chip-ice",
+   "chip-haze"
+  ]
+ }
+}
