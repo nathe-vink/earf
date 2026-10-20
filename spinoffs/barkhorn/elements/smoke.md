@@ -324,3 +324,10 @@ Fixes common to both:
 - **E7 p5:** a bigger fire, a broken-up column, a smaller puddle with a wet margin. Realism 4.5 / 4.5 and "floats" again, with the puddle still read as a decal.
 - Both are worse than E6 p3 and E7 p4, so the set files are restored to those proofs (5811e3e), which stay the ones in front of the owner.
 - The critics vary by about half a point between runs, so gains under that are noise.
+
+**E6 structural pass (the coordinator, while the owner decides): p5.**
+- What changed: three modelled folds of land (`smoke_el.ridge`) stand at 330, 540 and 860 m, each lighter and bluer. The plume rises behind them and its top shears downwind as one column; the separate dark mass is gone. A warm, 4°-wide sun comes through the smoke. The crust has a 22 m cell beyond the near patch, plus salt patches. The kickers are off the horn's mirror top.
+- Realism, scored beside the live A in the same run, order swapped: E6 4.5 against A 5.5, then E6 4.5 against A 5.0. Paired, A scores higher than it did alone (4.0 / 4.0), so E6 trails A by 0.5 to 1.0 and does not clear "A + 0.5".
+- Read: "a dark, boxy loudspeaker… stands alone on a cracked, dry lakebed, with a thick column of black smoke rising from the hazy horizon behind it". No mushroom ("no distinct cap on a narrow stem"), no figure, no face.
+- Remaining tells: the plume is "a soft, uniform volumetric blob" without fine turbulence, the crack tile still repeats near the camera, the hills read as a "blurred backdrop band", and the horn's top is still a white field.
+- No Smoke horn preset exists in this repo or on main (searched), so that fix is not applied.
