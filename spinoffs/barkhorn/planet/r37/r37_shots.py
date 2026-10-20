@@ -212,12 +212,15 @@ VIEWS['sink'] = {'title': 'the sink in Smoke, a detail',
                  # p5 (p4 5.0, 4.5: the slab solid now but opaque, Corian-like, its face a flat 53; the basin near
                  # white; a third of the frame the black beyond the alcove (image left is +x here)): the glow 6.0; the
                  # spot 1.2 W at 34 deg; tighter on 65 mm and panned toward -x; f/8; 2950 K
-                 # p5r (p5 at glow 6 read 72.8, milky salmon): glow 4 in a deeper amber, exposure 0.75, 3300 K so the amber stays amber
-                 'camera': {'position': [10.3, 1.3, 1.1], 'target': [10.95, 0.30, 0.88], 'lens_mm': 65, 'level': True,
-                            'fstop': 8.0, 'focus': [10.98, 0.47, 0.86]},
-                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 4.0, 'sink_radius': 0.12,
-                              'sink_glow_col': '#FF7A1E', 'sink_spot': 1.2, 'sink_spot_cone': 34.0, 'exposure': 0.75,
-                              'wb': 3300}}
+                 # p5r (p5 at glow 6 read 72.8, milky salmon): glow 4 in a deeper amber, exposure 0.75, 3300 K
+                 # p6 (p5r 4.0, 4.5: the basin blown (37-47 %); the slab one flat opaque orange; the whole frame one
+                 # orange cast at 3300 K; the spout cropped, the towel a box): the glow 1.6, the cast clearer (0.25) so
+                 # the light grades through its depth; 2700 K; the spot 4 W at 30 deg; back on 50 mm, the target higher
+                 'camera': {'position': [10.25, 1.55, 1.2], 'target': [10.95, 0.30, 0.98], 'lens_mm': 50, 'level': True,
+                            'fstop': 8.0, 'focus': [10.98, 0.47, 0.90]},
+                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 1.6, 'sink_radius': 0.25,
+                              'sink_glow_col': '#FF8A30', 'sink_spot': 4.0, 'sink_spot_cone': 30.0, 'exposure': 0.9,
+                              'wb': 2700}}
 S.VIEWS = VIEWS
 _shot = S.shot
 
