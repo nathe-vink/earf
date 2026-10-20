@@ -538,6 +538,40 @@ a keepsake, which is the point: a bar token you'd want to keep.
 - `flavour_materials` overrides one tint's materials. The GLBs are committed (`out-coin-study/render/`,
   `out-coin-column/render/`).
 
+**The renders** (`coin_shots.py`, through Planet's kit piece; `renders/2026-10-20/barkhorn/coin/`):
+- the hero: one Acid coin on a bar's zinc in low light, the bar's lamps in the counter's sheen (1600 × 1067);
+- the eight: in spectrum order, dealt in a fan on paper (1600 × 1067);
+- the request column: beside an R3 Float, a queue of eighteen in mixed colours, two waiting on the walnut
+  (1200 × 800).
+
+![The finals](../../../renders/2026-10-20/barkhorn/coin/sheet-finals.png)
+
+**The read test:** each final at 600 px, shown to a fresh judge told nothing (`critic/coin/READTEST.md`). All three
+pass:
+- the hero: "a single thick, translucent amber coin or token… with a knurled (reeded) edge… an engraved wire-frame
+  globe with "GOOD FOR ONE SONG" around the top edge and "EARF"";
+- the eight: "eight translucent, coin-like discs… in rainbow order… a dark line-drawn emblem… a faceted globe or gem";
+- the column: "a clear acrylic turntable… beside a tall clear… tube… filled with a stack of coloured discs… like coins
+  or poker chips".
+
+**Critic** (`critic/LOG.md`, `critic/coin/rounds/`): two fresh critics a round on the hero. Three rounds is the
+family's limit, so I stopped there.
+
+| round | A | B |
+|---|---|---|
+| 1 | 6.0 | 5.5 |
+| 2 | 6.0 | 6.0 |
+| 3 | 5.0 | 5.5 |
+
+- **The final is round 2**, the best of the three; round 3 is kept as `hero-r3-napkin.png`.
+- **The brief's gate:** A has two passes in a row each gaining under 0.5. B gained +0.5, then lost 0.5.
+- **Round 3:** I put a white cocktail napkin under the coin, which answered round 2 (the face glowed and the globe
+  read). Both new critics wanted it gone, and the shallow focus back. The critics pulled against each other.
+- **One finding changed the product:** frost or a white fill all but vanished on paper, so the globe is filled black
+  (the lead's test).
+- **Open on the hero:** the face is still a deep amber, darker than the critics want. The zinc is a plain satin
+  surface: the photographed metal plate read as concrete, then as camouflage, at coin scale.
+
 ## Round 33b: the one-colour globes as real objects
 
 The owner, 2026-10-20: "Is it possible to actually build the paper and black globes as well? Those could be cool with

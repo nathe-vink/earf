@@ -69,7 +69,41 @@ def bokeh(points, colour='#FFB060', emit=6.0, r=0.012):
 
 
 def hero(flavour='acid'):
-    """One coin on the bar's zinc, on a white cocktail napkin, low light through it from behind, the bar's lamps small
+    """One coin on the bar's zinc, low light coming through it from behind, the bar's lamps soft in the counter's sheen;
+    the globe, 6 mm down in the tint, in focus. The final: round 2 (6.0 and 6.0), the best of three critic rounds.
+    Round 2 after two critics (5.5 and 6.0): stopped down and focused on the
+    globe, the camera back to 0.28 m at 30 deg, a cooler satin zinc, the lamps low so they reflect in the counter, the
+    light from behind the coin, no hot corner."""
+    # a satin zinc top: plain metal (the photographed plate's patina read as camouflage at coin scale)
+    zinc = {'kind': 'kit', 'shape': 'box', 'material': 'gloss', 'color': '#3E4144', 'roughness': 0.3,
+            'size': [2.4, 1.6, 0.03], 'position': [0.0, 0.5, -0.03]}
+    props = [zinc, piece('coin', [{'position': [0.0, 0.0, 0.0], 'rotate': [0, 0, -14]}], flavour=flavour, **PICK)]
+    # the bar's lamps, low and behind: their reflections in the satin zinc are the frame's soft warm circles
+    props += bokeh([[-0.30, 0.65, 0.30], [-0.08, 0.85, 0.42], [0.16, 0.72, 0.34], [0.38, 0.95, 0.44], [0.58, 0.70, 0.28]],
+                   emit=120.0, r=0.018)
+    tgt = [0.0, 0.004, 0.003]
+    cam = {'position': [0.045, -0.235, 0.144], 'target': tgt, 'lens_mm': 100, 'level': False, 'fstop': 9.0,
+           'focus': [0.0, 0.0, 0.002]}
+    s = {'title': 'EARFcoin on the zinc', 'size': [1600, 1067], 'camera': cam,
+         'set': {'kind': 'stage', 'props': props},        # no sweep: its floor would lie on the zinc's top
+         'sky': {'kind': 'gradient', 'zenith': '#1C1B1A', 'horizon': '#2A2622', 'ground': '#141210', 'strength': 0.15},
+         'lights': {
+             # low and behind: through the coin, the tint glows and the reeds catch a rim of light
+             'rake': {'type': 'area', 'size_m': [0.3, 0.05], 'position': [-0.12, 0.30, 0.045], 'target': tgt,
+                      'irradiance': 5.0, 'color': 3100, 'camera': False},
+             # steeper and nearer above behind the coin: light down through the tint onto the zinc
+             'top': {'type': 'area', 'size_m': [0.3, 0.2], 'position': [0.05, 0.12, 0.45], 'target': tgt,
+                     'irradiance': 0.7, 'color': 3800, 'camera': False},
+             'fill': {'type': 'area', 'size_m': [0.5, 0.4], 'orbit': {'azimuth_deg': -20, 'elevation_deg': 12, 'distance_m': 0.8},
+                      'target': tgt, 'irradiance': 0.22, 'color': 4000, 'camera': False}},
+         'render': {'samples': 320, 'adaptive': 0.008, 'denoise': True, 'clamp': 12, 'bounces': 16,
+                    'view': 'Khronos PBR Neutral', 'exposure': -0.3, 'white_balance_k': 3500}}
+    return s
+
+
+def hero_napkin(flavour='acid'):
+    """Round 3, kept as the alternative (the critics scored it 5.0 and 5.5; both wanted the napkin gone): one coin on
+    the bar's zinc, on a white cocktail napkin, low light through it from behind, the bar's lamps small
     and soft behind; the globe, 6 mm down in the tint, sharp. Round 3 after two critics each round (r1 5.5 and 6.0, r2
     6.0 and 6.0): both found the face muddy brown and the black globe without a field to read against, so the coin
     lies on a napkin (a tinted coin glows over white, as on the bar it would); focus on the face plane at f/13; a dim
@@ -168,6 +202,7 @@ FRAMES['proof-e-smoke'] = lambda: proof('engraved', 'reeded', 'smoke')
 FRAMES['tints'] = lambda: tints()
 FRAMES['fills'] = lambda: fills()
 FRAMES['hero'] = lambda: hero()
+FRAMES['hero-r3-napkin'] = lambda: hero_napkin()
 FRAMES['eight'] = eight
 FRAMES['column'] = lambda: column()
 
