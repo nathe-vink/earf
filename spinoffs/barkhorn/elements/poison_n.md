@@ -57,4 +57,16 @@ The sulphur vents and fumes barely register at this distance.
   - The water is an even, saturated neon green that reads as an emissive shader, with smeared reflections and no ripples at the posts.
   - The props look like a staged kit: the gallows frame, the cloned stumps, a pristine sign, twigs laid on the surface.
 
-**N2 is stopped.** Two passes in a row gained less than 0.5 (−0.25, then ±0). It reads as poison every time, but its realism has held at about 4.25, well short of 6.
+**N2 was stopped here, prematurely.** Two passes in a row had gained less than 0.5 (−0.25, then ±0), but the lead's staging (sent 04:40) had not yet been tried, so the count resets with it.
+
+**Proof 4** (`proofs31/element-poison_n2-p04.jpg`), the lead's staging:
+- The gantry is out. The speaker sits off-centre near the jetty's far end, turned three-quarter, and the camera is low along the boards.
+- Poison A's rig is moved to the speaker, a low golden sun rakes across, and the mist is capped at 4 m.
+- The scum is matte pea-soup with open patches, scanned grass stands for reeds, and the sign is small and soft beside the jetty.
+
+**Read test:** fails. The judge saw "…stands at the end of a weathered wooden dock, which runs out over a flat green marsh under a hazy grey sky, with a tall eroded rock pillar behind it and a red-and-white 'DANGER' sign on a post to the left." It names DANGER but not toxicity: the smaller sign lost the read.
+
+**Realism:** 3.5 and 4.0 (mean 3.75, −0.5). The tells:
+- The water is a flat, matte coloured floor, with no reflections, no sheen and no ripples. Its shadows have hard edges, like shadows on a painted plane.
+- The stump and the posts have no waterline or wet base.
+- The planks repeat one clean texture, and the haze makes a seamless studio-gradient horizon.
