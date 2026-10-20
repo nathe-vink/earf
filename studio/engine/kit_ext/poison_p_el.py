@@ -663,3 +663,50 @@ def wetline(bpy, name, p, kit):
         done += 1
     print(f'wetline: {done} materials wetted')
     return []
+
+
+def arum(bpy, name, p, kit):
+    """Lords-and-ladies (Arum maculatum) in autumn: the leaves and hood withered away, a bare stalk `height` tall
+    ending in a club of glossy berries packed round it (`berries`, radius `berry`), ripe orange-red and scarlet, the
+    top few still green; the stalk leans `lean` [dx, dy] at its top."""
+    rnd = random.Random(p.get('seed', 4))
+    H = p.get('height', 0.3); br = p.get('berry', 0.0045); n = p.get('berries', 40)
+    lx, ly = p.get('lean', [0.02, 0.0])
+    club = p.get('club', 0.3)                             # the berried top's share of the stalk
+    stalk = bmesh.new()
+    kit._tube(stalk, [(0, 0, 0), (lx * 0.2, ly * 0.2, H * 0.45), (lx * 0.6, ly * 0.6, H * 0.8), (lx, ly, H)],
+              [0.0042, 0.0036, 0.003, 0.0022], 1.0, 0.0, 10, 8)
+    ripe, green = bmesh.new(), bmesh.new()
+    def axis(t):
+        return Vector((lx * t * t, ly * t * t, H * t))
+    for k in range(n):
+        f = k / max(1, n - 1)
+        t = 1.0 - club + club * f
+        c = axis(t)
+        a = k * 2.39996 + rnd.uniform(-0.2, 0.2)          # packed in a spiral, as on the spadix
+        rr = br * (1.0 + 0.25 * (1 - f)) * rnd.uniform(0.85, 1.12)
+        off = Vector((math.cos(a), math.sin(a), 0)) * (0.0032 + rr * 0.85)
+        bm_ = green if f > 0.88 and rnd.random() < 0.7 else ripe
+        g = bmesh.ops.create_uvsphere(bm_, u_segments=12, v_segments=8, radius=rr)
+        sq = rnd.uniform(0.85, 1.0)
+        for v in g['verts']:
+            v.co = Vector((v.co.x, v.co.y, v.co.z * sq)) + c + off
+    stalk_m = _plain(bpy, f'{name}-stalk', p.get('stalk', '#6E7A3A'), 0.6)
+    ripe_m, _, rb = _node_mat(bpy, f'{name}-ripe')
+    rb.inputs['Roughness'].default_value = 0.18
+    rb.inputs['Coat Weight'].default_value = 0.4
+    rb.inputs['Subsurface Weight'].default_value = 0.25
+    rb.inputs['Subsurface Radius'].default_value = (1.0, 0.25, 0.1)
+    # each berry its own shade between orange-red and scarlet (by position, so neighbours differ)
+    nt = ripe_m.node_tree; L = nt.links.new
+    tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+    nz.inputs['Scale'].default_value = 160.0; L(tc.outputs['Object'], nz.inputs['Vector'])
+    ramp = nt.nodes.new('ShaderNodeValToRGB'); L(nz.outputs['Fac'], ramp.inputs['Fac'])
+    e = ramp.color_ramp.elements
+    e[0].position = 0.35; e[0].color = (*_hex(p.get('scarlet', '#B8120C')), 1)
+    e[1].position = 0.65; e[1].color = (*_hex(p.get('orange', '#E2501A')), 1)
+    L(ramp.outputs['Color'], rb.inputs['Base Color']); L(ramp.outputs['Color'], rb.inputs['Subsurface Color']) if 'Subsurface Color' in rb.inputs else None
+    green_m = _plain(bpy, f'{name}-green', '#7C8A2A', 0.25)
+    pos = {'position': p.get('position', [0, 0, 0]), 'rotate': [0, 0, p.get('turn', 0.0)]}
+    return [_obj(bpy, f'{name}-0', stalk, stalk_m, pos), _obj(bpy, f'{name}-1', ripe, ripe_m, pos),
+            _obj(bpy, f'{name}-2', green, green_m, pos)]
