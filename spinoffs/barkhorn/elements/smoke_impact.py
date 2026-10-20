@@ -41,7 +41,7 @@ def gouge():
     common = dict(y0=Y0, y1=Y1, lip=LIP, depth=0.34, ramp=5.0)
     return [piece('ext', module='impact', fn='trench', width=1.0, end=0.8, ragged=0.07, texture='gravel_concrete',
                   tex_scale=1.0, tint='#2A2622', tint_mix=0.4, seed=3, **common),
-            piece('ext', module='impact', fn='slabs', count=46, thickness=0.08, tilt=60.0, seed=5, **common),
+            piece('ext', module='impact', fn='slabs', count=90, thickness=0.06, tilt=40.0, tilt_min=6.0, size=0.6, seed=5, **common),
             piece('ext', module='impact', fn='debris', y0=Y0, y1=Y1, count=420, reach=7.0, seed=7),
             # grit round the speaker's feet, on the trench floor
             piece('ext', module='impact', fn='debris', y0=-0.9, y1=-0.4, count=60, reach=0.45, inner=0.3, z=SINK, seed=9)]
@@ -71,10 +71,10 @@ def shot():
                        sy=0.85, rotate_z=18.0))
     lights.update({
         # a cool fill from the sky, and the fire's key on the speaker's flank
-        'skyfill': {**area(-20, 10, 2.4, 1.2, '#9FB0C8', (4.0, 3.0), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
+        'skyfill': {**area(-20, 10, 2.4, 2.4, '#9FB0C8', (4.0, 3.0), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
         'bounce': {**area(-25, 12, 2.0, 2.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
-        'kicker': {**area(-150, 22, 3.0, 26.0, '#FF9A50', (0.5, 2.4), (0.0, 0.0, 0.5)), 'receivers': SHELL},
-        'kicker_r': {**area(150, 14, 3.0, 16.0, '#FFB070', (0.6, 2.4), (0.0, 0.0, 0.5)), 'receivers': SHELL},
+        'kicker': {**area(-150, 22, 3.0, 40.0, '#FF9A50', (0.5, 2.4), (0.0, 0.0, 0.5)), 'receivers': SHELL},
+        'kicker_r': {**area(150, 14, 3.0, 28.0, '#FFB070', (0.6, 2.4), (0.0, 0.0, 0.5)), 'receivers': SHELL},
     })
     for i, (x, y, heading, paint_left, burning) in enumerate(WRECKS):
         props.append(wreck(x, y, heading, paint_left, 11 + i))
@@ -84,8 +84,8 @@ def shot():
             lights[f'firerim{i}'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [x * 0.4, y * 0.4, 1.0],
                                      'target': [0.0, 0.0, 0.5], 'irradiance': 30.0, 'color': '#FF8A3A', 'receivers': SHELL}
     # low beside the gouge, looking along it to the speaker; 40 mm wide open, focus on the speaker
-    cam = camera(height=0.42, distance=5.6, azimuth=-7, lens=40, target=(0.0, 0.0, 0.45), fstop=2.0, shift_x=0.0,
-                 shift_y=0.14)
+    cam = camera(height=0.8, distance=6.5, azimuth=-4, lens=40, target=(0.0, 0.0, 0.3), fstop=2.0, shift_x=0.0,
+                 shift_y=0.08)
     cam['clip_end'] = 3000
     return frame('smoke_impact', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.5),
                  'barkhorn, Smoke, the speaker came down like an asteroid', lights=lights, rotate_z=18.0,

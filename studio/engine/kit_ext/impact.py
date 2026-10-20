@@ -94,11 +94,12 @@ def slabs(bpy, name, p, kit):
         y = rnd.uniform(y0 + 0.5, y1 - 0.2)
         s = 1 if rnd.random() < 0.5 else -1
         f = min(1.0, (y - y0) / ramp)                          # bigger, steeper plates where the trench is deep
-        w, d = rnd.uniform(0.25, 0.7) * (0.5 + f), rnd.uniform(0.3, 0.8) * (0.5 + f)
+        sz = p.get('size', 1.0)
+        w, d = sz * rnd.uniform(0.25, 0.7) * (0.5 + f), sz * rnd.uniform(0.3, 0.8) * (0.5 + f)
         before = set(bm.verts)
         ft, fb, sides = _plate(bm, rnd, w, d, t)
         new = [v for v in bm.verts if v not in before]
-        tilt = rnd.uniform(15.0, p.get('tilt', 55.0)) * f
+        tilt = rnd.uniform(p.get('tilt_min', 15.0), p.get('tilt', 55.0)) * f
         x = s * (lip + w * 0.25 * rnd.uniform(0.2, 1.0))
         z = 0.02 + 0.5 * w * math.sin(math.radians(tilt)) * 0.4 - (0.0 if rnd.random() < 0.7 else 0.1)
         _place(bm, new, (rnd.uniform(-8, 8), s * tilt, rnd.uniform(-25, 25)), (x, y, z))

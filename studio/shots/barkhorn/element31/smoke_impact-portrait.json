@@ -3266,9 +3266,11 @@
     "shape": "ext",
     "module": "impact",
     "fn": "slabs",
-    "count": 46,
-    "thickness": 0.08,
-    "tilt": 60.0,
+    "count": 90,
+    "thickness": 0.06,
+    "tilt": 40.0,
+    "tilt_min": 6.0,
+    "size": 0.6,
     "seed": 5,
     "y0": -21.0,
     "y1": 1.2,
@@ -4694,7 +4696,7 @@
     0.0,
     0.3
    ],
-   "irradiance": 1.2,
+   "irradiance": 2.4,
    "color": "#9FB0C8",
    "orbit": {
     "azimuth_deg": -20,
@@ -4794,7 +4796,7 @@
     0.0,
     0.5
    ],
-   "irradiance": 26.0,
+   "irradiance": 40.0,
    "color": "#FF9A50",
    "orbit": {
     "azimuth_deg": -150,
@@ -4827,7 +4829,7 @@
     0.0,
     0.5
    ],
-   "irradiance": 16.0,
+   "irradiance": 28.0,
    "color": "#FFB070",
    "orbit": {
     "azimuth_deg": 150,
