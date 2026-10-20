@@ -684,7 +684,9 @@ def arum(bpy, name, p, kit):
         t = 1.0 - club + club * f
         c = axis(t)
         a = k * 2.39996 + rnd.uniform(-0.2, 0.2)          # packed in a spiral, as on the spadix
-        rr = br * (1.0 + 0.25 * (1 - f)) * rnd.uniform(0.85, 1.12)
+        rr = br * (1.0 + 0.25 * (1 - f)) * rnd.uniform(0.7, 1.2)
+        if rnd.random() < p.get('missing', 0.0):              # eaten or fallen: a gap on the club
+            continue
         off = Vector((math.cos(a), math.sin(a), 0)) * (0.0032 + rr * 0.85)
         bm_ = green if f > 0.88 and rnd.random() < 0.7 else ripe
         g = bmesh.ops.create_uvsphere(bm_, u_segments=12, v_segments=8, radius=rr)
@@ -693,10 +695,12 @@ def arum(bpy, name, p, kit):
             v.co = Vector((v.co.x, v.co.y, v.co.z * sq)) + c + off
     stalk_m = _plain(bpy, f'{name}-stalk', p.get('stalk', '#6E7A3A'), 0.6)
     ripe_m, _, rb = _node_mat(bpy, f'{name}-ripe')
-    rb.inputs['Roughness'].default_value = 0.18
+    rb.inputs['Roughness'].default_value = p.get('berry_rough', 0.18)   # a faint waxy bloom when raised
     rb.inputs['Coat Weight'].default_value = 0.4
-    rb.inputs['Subsurface Weight'].default_value = 0.25
+    rb.inputs['Subsurface Weight'].default_value = p.get('sss', 0.25)
     rb.inputs['Subsurface Radius'].default_value = (1.0, 0.25, 0.1)
+    if p.get('sss_scale'):                                  # translucency depth (m); unset keeps Blender's default
+        rb.inputs['Subsurface Scale'].default_value = p['sss_scale']
     # each berry its own shade between orange-red and scarlet (by position, so neighbours differ)
     nt = ripe_m.node_tree; L = nt.links.new
     tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
@@ -859,3 +863,53 @@ def salamander(bpy, name, p, kit):
             pos[2] = loc.z - Lg * 0.004
     q = {'position': pos, 'rotate': [0, 0, p.get('turn', 0.0)]}
     return [_obj(bpy, f'{name}-0', body, m, q), _obj(bpy, f'{name}-1', limbs, m, q), _obj(bpy, f'{name}-2', eyes, em, q)]
+
+
+def detile(bpy, name, p, kit):
+    """Break a ground texture's repeat: on the objects named in `on`, each image texture's lookup is blended with a
+    second lookup of the same image, turned `turn` degrees and scaled `scale`, under a broad noise mask (`mask_m`
+    metres), so no tile repeats across the frame. Place it after the ground."""
+    import math as _m
+    n_done = 0
+    for oname in p.get('on', []):
+        ob = bpy.data.objects.get(oname)
+        if ob is None:
+            continue
+        for slot in ob.material_slots:
+            m = slot.material
+            if m is None or not m.use_nodes:
+                continue
+            nt = m.node_tree; L = nt.links.new
+            texs = [n for n in nt.nodes if n.type == 'TEX_IMAGE' and n.inputs['Vector'].is_linked]
+            if not texs:
+                continue
+            src = texs[0].inputs['Vector'].links[0].from_socket
+            mp = nt.nodes.new('ShaderNodeMapping')
+            mp.inputs['Rotation'].default_value = (0, 0, _m.radians(p.get('turn', 37.0)))
+            s = p.get('scale', 1.37); mp.inputs['Scale'].default_value = (s, s, s)
+            mp.inputs['Location'].default_value = (0.31, 0.57, 0)
+            L(src, mp.inputs['Vector'])
+            tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
+            nz.inputs['Scale'].default_value = 1.0 / p.get('mask_m', 2.5); nz.inputs['Detail'].default_value = 2.0
+            L(tc.outputs['Object'], nz.inputs['Vector'])
+            mk = nt.nodes.new('ShaderNodeMapRange'); mk.interpolation_type = 'SMOOTHSTEP'; L(nz.outputs['Fac'], mk.inputs['Value'])
+            mk.inputs['From Min'].default_value = 0.42; mk.inputs['From Max'].default_value = 0.58
+            for t in texs:
+                outs = [(l.to_socket) for o in t.outputs for l in o.links]
+                if not outs:
+                    continue
+                t2 = nt.nodes.new('ShaderNodeTexImage'); t2.image = t.image; t2.interpolation = t.interpolation
+                t2.projection = t.projection; t2.extension = t.extension
+                L(mp.outputs['Vector'], t2.inputs['Vector'])
+                for o in t.outputs:
+                    if not o.links:
+                        continue
+                    o2 = t2.outputs[o.name]
+                    mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA' if o.name == 'Color' else 'FLOAT'
+                    ia, ib = (6, 7) if o.name == 'Color' else (2, 3)
+                    for l in list(o.links):
+                        to = l.to_socket; nt.links.remove(l); L(mx.outputs[2 if o.name == 'Color' else 0], to)
+                    L(mk.outputs['Result'], mx.inputs['Factor']); L(o, mx.inputs[ia]); L(o2, mx.inputs[ib])
+            n_done += 1
+    print(f'detile: {n_done} materials')
+    return []
