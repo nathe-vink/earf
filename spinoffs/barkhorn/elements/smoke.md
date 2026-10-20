@@ -339,3 +339,29 @@ Fixes common to both:
 - **p6 read:** "a thick plume of black smoke rises from the horizon behind it", but the shapes check failed: "it reads easily as an explosion or a mushroom cloud". The billowing, sheared top is the cause.
 - **Result:** p6 fails the gate. E6 stops at p3 and its set is restored to p3 (88532b0). The ridge and gully pieces stay in smoke_el for later use.
 - **On the critic:** two passes in a row have split 1–1 with each judge preferring the second image. At this level the paired duel measures order more than quality.
+
+## E8, the speaker came down like an asteroid (the owner, 2026-10-20)
+
+The owner chose **"Smoke: A, salt flat"** (E6 p3; its finals go to helpers from bf7ae75), with a note: "The Smoke options are both weak. The bridge could be a lot cooler if it looked like the speaker slid along the asphalt and ground it up, like an asteroid might. It needs way more realism though, like a movie still."
+
+**The set:** `smoke_impact.py` and `kit_ext/impact.py`.
+- E7's overpass, with a 1 m by 0.34 m gouge 22 m long down the near lane, and the speaker at its end, sunk 0.3 m.
+- Along both lips, asphalt plates torn up: an asphalt top, with sub-base under and at the broken edges.
+- A scorched aggregate floor, debris thrown wide and finer with distance, and grit at the speaker's feet.
+- Dust and smoke still rising from the gouge, and embers in the air.
+- A low camera along the gouge: 40 mm at f/2.
+
+**p0** (960 px, 128 samples):
+- **Read:** "a dusk city overpass after some kind of disaster: a burning car sends up black smoke… and a dark rectangular speaker-like box sits in a cracked trench in the asphalt, surrounded by broken concrete and drifting sparks or embers". No figure. The read doesn't say "crashed" or "slid".
+- **Movie-still realism:** 4.0 and 4.0. The tells:
+  - the trench floor reads as sand;
+  - debris is even on both sides, not thrown forward along the slide;
+  - no scorch or dust on the speaker's lower faces;
+  - the embers are uniform dots;
+  - no halation;
+  - the speaker is dark and flat, with no fire on its faces.
+- **Duel against E6 p3**, four judges, each order twice:
+  - E8 first: 4.0 v 6.0, and 4.0 v 6.0, both preferring E6.
+  - E6 first: 4.5 v 5.5, and 4.5 v 5.5, both preferring E8.
+  - Means: E6 5.25, E8 4.75. Every judge preferred the second image shown, and E6 carries the net by 0.5.
+  - The judges who preferred E8 cite its impact ("one clear cinematic idea"). Those who preferred E6 cite the product being legible.
