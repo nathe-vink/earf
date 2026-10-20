@@ -21,7 +21,7 @@ S.P = RP
 S.OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'planet37')
 
 DEFAULT = dict(T36.DEFAULT, **dict(config='smoke', colourway='neutral', disc_col='#FFD2A0', disc_glow=0.06,
-                                   disc_lamp=2.0, spk_niche_strip=3.0, tt_glow=0.15, plinth=1.0, plinth_lamp=1.5, sink_glow=0.8))
+                                   disc_lamp=2.0, spk_niche_strip=3.0, tt_glow=0.05, plinth=1.0, plinth_lamp=1.5, sink_glow=0.8))
 S.DEFAULT = DEFAULT
 KEYS = T36.KEYS + ('counter_strip', 'sconce_w', 'sconce_glow', 'card_text', 'chair_leather', 'banq_col', 'sink_deep', 'sink_glow_col', 'decks', 'spk_niche_strip', 'niche_felt')
 
@@ -29,7 +29,8 @@ KEYS = T36.KEYS + ('counter_strip', 'sconce_w', 'sconce_glow', 'card_text', 'cha
 def room_piece(v):
     cfg = RP.CONFIGS[v['config']]
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_r37', 'fn': 'room', **{k: v[k] for k in KEYS if k in v},
-            'plinth': v['plinth'], 'plinth_bar_col': RP.PLINTH_COL[cfg['bar']],
+            'plinth_bar': round(v['plinth'] * RP.PLINTH_GAIN[cfg['bar']], 3), 'plinth_bar_col': RP.PLINTH_COL[cfg['bar']],
+            'plinth_listen': round(v['plinth'] * RP.PLINTH_GAIN[cfg['listen']], 3),
             'plinth_listen_col': RP.PLINTH_COL[cfg['listen']]}
 
 
@@ -90,7 +91,7 @@ def lights(v):
             tint = cfg['listen'] if grp == 'l' else cfg['bar']
             for i, (x, y, zz) in enumerate(spk):
                 L[f'plinth{grp}{i}'] = {'type': 'area', 'position': [x, y, round(zz + 0.01, 3)], 'target': [x, y, round(zz + 0.9, 3)],
-                                        'size_m': [0.40, 0.30], 'irradiance': round(v['plinth_lamp'] * v['plinth'], 3),
+                                        'size_m': [0.40, 0.30], 'irradiance': round(v['plinth_lamp'] * v['plinth'] * RP.PLINTH_GAIN[tint], 3),
                                         'color': RP.PLINTH_COL[tint], 'camera': False, 'receivers': [f'*#{i}']}
     # the bar pair: a soft spot from the ceiling over the bartender's aisle onto each cabinet's face
     for i, (role, x, y, zz, rot, tilt) in enumerate(RP.bar_speakers()):
@@ -119,7 +120,7 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # Orbs 2.5 W; a browner velvet
           'camera': {'position': [12.4, 2.2, 1.12], 'target': [16.4, 3.4, 0.95], 'lens_mm': 40, 'level': True,
                      'fstop': 2.8, 'focus': [16.5, 1.95, 0.9]},
-          'settings': {'exposure': 2.0, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 1.0, 'altar_w': 170.0,
+          'settings': {'exposure': 2.7, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 1.0, 'altar_w': 170.0,
                        'altar_cone': 22.0, 'altar_z': 0.9, 'haze': 0.006, 'sphere_w': 2.5, 'sphere_glow': 0.45,
                        'niche_strip': 5.0}}
 NAMES = {'smoke': 'Smoke', 'ember': 'Ember', 'ice': 'Ice', 'mixed': 'Mixed'}
@@ -147,7 +148,7 @@ VIEWS['sink'] = {'title': 'the sink in Smoke, a detail',
                  # camera higher and a step right; f/5.6
                  'camera': {'position': [10.3, 1.2, 1.32], 'target': [11.0, 0.33, 0.95], 'lens_mm': 50, 'level': True,
                             'fstop': 5.6, 'focus': [10.98, 0.47, 0.86]},
-                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 4.0, 'sink_radius': 0.05,
+                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 2.0, 'sink_radius': 0.05,
                               'sink_spot': 3.0, 'sink_spot_cone': 25.0, 'exposure': 0.8}}
 S.VIEWS = VIEWS
 _shot = S.shot

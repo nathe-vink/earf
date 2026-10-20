@@ -80,7 +80,7 @@ def ledges(bpy, kit, p, objs):
             j = (i + 1) % 4
             bm.faces.new([vb[i], vb[j], vt[j], vt[i]])
     col = p.get('plinth_bar_col', '#FFB060')
-    w = oak.object(bpy, LK.acrylic(bpy, 'frosted', 'plinth-bar-' + col, glow=p.get('plinth', 0.0), glow_col=col), bevel=0.002)
+    w = oak.object(bpy, LK.acrylic(bpy, 'frosted', 'plinth-bar-' + col, glow=p.get('plinth_bar', p.get('plinth', 0.0)), glow_col=col), bevel=0.002)
     w.visible_shadow = False; objs.append(w)
 
 
@@ -93,7 +93,7 @@ def altar_plinths(bpy, kit, p, objs):
     for role, colour, x, y, z, rot in R.speakers():
         K._obox(top.bm, x, y, z0, S['plinth_d'] + 0.004, S['plinth_w'] + 0.004, 0.0295, math.radians(rot + 90))
     col = p.get('plinth_listen_col', '#FFB060')
-    t = top.object(bpy, LK.acrylic(bpy, 'frosted', 'plinth-listen-' + col, glow=p.get('plinth', 0.0), glow_col=col), bevel=0.002)
+    t = top.object(bpy, LK.acrylic(bpy, 'frosted', 'plinth-listen-' + col, glow=p.get('plinth_listen', p.get('plinth', 0.0)), glow_col=col), bevel=0.002)
     t.visible_shadow = False; objs.append(t)
 
 

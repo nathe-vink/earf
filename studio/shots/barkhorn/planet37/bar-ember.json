@@ -139,8 +139,9 @@
     "windows_lit": 0.5,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
-    "plinth": 1.0,
+    "plinth_bar": 0.25,
     "plinth_bar_col": "#FF5038",
+    "plinth_listen": 0.25,
     "plinth_listen_col": "#FF5038"
    },
    {
@@ -645,7 +646,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.375,
    "color": "#FF5038",
    "camera": false,
    "receivers": [
@@ -668,7 +669,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.375,
    "color": "#FF5038",
    "camera": false,
    "receivers": [
@@ -691,7 +692,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.375,
    "color": "#FF5038",
    "camera": false,
    "receivers": [
@@ -714,7 +715,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 1.5,
+   "irradiance": 0.375,
    "color": "#FF5038",
    "camera": false,
    "receivers": [
@@ -787,7 +788,7 @@
  },
  "materials": {
   "glow": {
-   "strength": 0.15
+   "strength": 0.05
   }
  }
 }

@@ -147,8 +147,9 @@
     "windows_lit": 0.5,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
-    "plinth": 1.0,
+    "plinth_bar": 1.0,
     "plinth_bar_col": "#FFB060",
+    "plinth_listen": 1.0,
     "plinth_listen_col": "#FFB060"
    },
    {
@@ -825,7 +826,7 @@
  },
  "materials": {
   "glow": {
-   "strength": 0.15
+   "strength": 0.05
   }
  }
 }
