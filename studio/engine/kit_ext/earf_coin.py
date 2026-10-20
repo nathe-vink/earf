@@ -18,6 +18,10 @@ face and edge in one GLB; companions/out-coin-column), with their materials in a
 - fan: `spots` where the first coin lies; the coins dealt along a gentle arc, `s` (mm, 30) apart, each resting its
   trailing edge on the one before (the tilt solved from that), `flavours` in order, `arc` its radius (mm, 320; 0 for a
   line), `heading` (deg) the direction it runs;
+- globe (round 33c, spinoffs/barkhorn/globe_colour.py): the site's multicolour globe made real, six slotted discs in
+  the speakers' acrylics on a black base. `spots` its base's underside; `size` (mm across, 300 the desk piece, 1000
+  the back bar's; the model scales, its sheet with it); `mode` "day" (tinted acrylic) or "night" (each edge glowing its
+  colour: the fluorescent sheet under the base's UV-A ring); `glow` scales night's edges (1.0); `rotate_z`;
 - bowl: `spots` the bowl's foot; `n` coins in it (spectrum order dealt round it), `bowl` "smoke" (the base's acrylic),
   "clear" or "brass", `d` its width (mm, 220), `seed`.
 
@@ -37,7 +41,8 @@ if ENGINE not in sys.path:
 import product as PR                                                 # noqa: E402
 
 DEFS = {'coin': 'spinoffs/barkhorn/companions/out-coin-study/earf-coin-study.json',
-        'column': 'spinoffs/barkhorn/companions/out-coin-column/earf-coin-column.json'}
+        'column': 'spinoffs/barkhorn/companions/out-coin-column/earf-coin-column.json',
+        'globe': 'spinoffs/barkhorn/out-globe-colour/earf-globe-colour.json'}
 T = 0.006                     # the coin's thickness (m)
 D = 0.040                     # across
 GAP = 0.00002                 # a hair between faces that would otherwise touch
@@ -325,4 +330,27 @@ def bowl(bpy, name, p, kit):
             objs += _one(bpy, f'{name}-coin#{i}.{k}', M, fl, face, edge, mats)
             placed.append((cx, cy, z, layer))
             k += 1
+    return objs
+
+
+def globe(bpy, name, p, kit):
+    """The colour globe, `size` mm across (scaled from the 300 model), by day or by night."""
+    pdef, tpl = _templates(bpy, 'globe')
+    mode = p.get('mode', 'day')
+    over = dict(p.get('materials', {}))
+    if mode == 'night' and p.get('glow', 1.0) != 1.0:
+        for k, v in pdef['flavours']['night'].get('materials', {}).items():
+            over[k] = {**v, **over.get(k, {}), 'strength': v.get('strength', 0.0) * p['glow']}
+    gm = _Mats(bpy, 'globe', dict(p, materials=over))
+    k = p.get('size', 300.0) / 300.0
+    objs = []
+    for i, s in _spots(p):
+        M = (Matrix.Translation(Vector(s['position'])) @ Matrix.Rotation(math.radians(s.get('rotate_z', p.get('rotate_z', 0))), 4, 'Z')
+             @ Matrix.Diagonal((k, k, k, 1.0)))
+        for pname, t in tpl.items():
+            if pname.startswith('chip-') or (mode == 'day' and pname.startswith('face-')):
+                continue                        # (by day the faces' glow discs are off: an unlit emitter renders black)
+            mname = _mname(pdef, pname)
+            if mname:
+                objs.append(_link(bpy, f'{name}-{pname}#{i}', t, gm(mode, mname), M))
     return objs

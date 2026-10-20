@@ -1,0 +1,3 @@
+{"stage1": {"score": 5.5}, "verdict": "iterate", "score_if_fixed": 7.0,
+ "changes": {"c1": "sky 0.35, front 0.3, fill 0.15", "c2": "sun angle 0.5", "c3": "sun 320/34 (behind, backlit)", "c4": "lens 80, cast in frame", "c5": "rim light behind", "c6": "paper tooth", "c7": "exposure: foreground paper 238-242, falloff up the sweep"},
+ "out_of_scope": ["edges brighter than faces (fluorescent)", "core going black where three tints stack"]}

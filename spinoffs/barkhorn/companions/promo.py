@@ -45,6 +45,13 @@ FIXED = {
              'the leading in stained glass); GOOD FOR ONE SONG and EARF are engraved small round the rim of the front '
              'face and filled white. Made in eight tints (red, orange, amber, green, blue, violet, '
              'water-clear and smoke grey); each guest gets one and hands it over with a song request.'),
+    # round 33c: the colour globe
+    'globe': ('a desk sculpture 300 mm across: a globe of six interlocking discs of tinted fluorescent cast acrylic '
+              '5 mm thick, slotted together (three meridians, green facing, orange and violet either side; three '
+              'parallels, red, blue and yellow), leaning 23 degrees, on a black anodised aluminium base 110 across. The '
+              'fluorescent sheet gathers light through its faces and gives it out at its polished cut edges, so every '
+              'edge glows its colour; at night a UV ring in the base makes the edges glow in the dark. Sold at about '
+              '$550.'),
 }
 PURPOSE = {
     'turntable': 'The record player\'s campaign hero: the record player is the subject, in a real living room, with the '
@@ -58,6 +65,10 @@ PURPOSE = {
     'crystal': 'The bar lamps\' hero for the trade: both lamps lit, in a dim bar at about 2700 K (board-formed concrete, '
                'a fir counter), so a bar owner sees the light they make and the quality of the acrylic and the brass. It will '
                'run as the line sheet\'s and the website\'s lead image.',
+    'globe': 'The globe\'s hero by day, for the shop and the brand: the object is the subject, on paper in a pale '
+             'studio, a hard sun through its coloured discs throwing their colours across the paper. It will run as the '
+             'product\'s lead image and beside the brand\'s own globe mark, and has to say: the brand\'s globe, made '
+             'real in coloured acrylic, with light passing through it.',
     'coin': 'EARFcoin\'s hero: one coin, the subject, on a bar\'s zinc counter in low light, the engraved globe '
             'catching the light, shallow focus. It will run as the coin\'s lead image on the website and in the bar\'s '
             'menu, and has to say at a glance: an acrylic coin with a globe on it, a token worth something.',
@@ -109,7 +120,7 @@ def stage(a):
     card = os.path.join(STAGE, f'card-{a.tag}.md')
     L = ['# Card', '', '## What this frame is for', '', a.purpose or PURPOSE[a.kind], '',
          '## Fixed (never prescribe a change to these)', '', 'The product: ' + FIXED[a.kind] + ' Their shape, size, '
-         'colour, materials and parts are fixed' + ('.' if a.kind in ('moon', 'crystal', 'coin') else ', and so is which loudspeaker stands '
+         'colour, materials and parts are fixed' + ('.' if a.kind in ('moon', 'crystal', 'coin', 'globe') else ', and so is which loudspeaker stands '
          'beside it. Every piece in the frame shares one colour by design.'), '',
          '## May change', '', 'Everything about the set (the room, its walls, floor, window, furniture and props, any '
          'Poly Haven CC0 texture, model or sky), the light (sun, sky, lamps, the lamp\'s own output), the camera (place, '

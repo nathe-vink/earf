@@ -1,0 +1,301 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/globe-colour/chips.json",
+ "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-colour/chips.png",
+ "seconds": {
+  "build": 0.3,
+  "render": 30.6
+ },
+ "samples": 48,
+ "size": [
+  1400,
+  300
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    -5014.4,
+    148.9
+   ],
+   "box_px": [
+    -5215,
+    6,
+    -4817,
+    290
+   ],
+   "depth_m": 1.29
+  },
+  "chip-acid#0": {
+   "part": "chip-acid",
+   "centre_px": [
+    598.1,
+    149.6
+   ],
+   "box_px": [
+    521,
+    73,
+    675,
+    226
+   ],
+   "depth_m": 1.297
+  },
+  "chip-dust#0": {
+   "part": "chip-dust",
+   "centre_px": [
+    394.2,
+    149.6
+   ],
+   "box_px": [
+    316,
+    73,
+    472,
+    226
+   ],
+   "depth_m": 1.297
+  },
+  "chip-ember#0": {
+   "part": "chip-ember",
+   "centre_px": [
+    190.3,
+    149.6
+   ],
+   "box_px": [
+    111,
+    73,
+    268,
+    226
+   ],
+   "depth_m": 1.297
+  },
+  "chip-haze#0": {
+   "part": "chip-haze",
+   "centre_px": [
+    1209.7,
+    149.6
+   ],
+   "box_px": [
+    1132,
+    73,
+    1289,
+    226
+   ],
+   "depth_m": 1.297
+  },
+  "chip-ice#0": {
+   "part": "chip-ice",
+   "centre_px": [
+    1005.8,
+    149.6
+   ],
+   "box_px": [
+    928,
+    73,
+    1084,
+    226
+   ],
+   "depth_m": 1.297
+  },
+  "chip-poison#0": {
+   "part": "chip-poison",
+   "centre_px": [
+    801.9,
+    149.6
+   ],
+   "box_px": [
+    725,
+    73,
+    879,
+    226
+   ],
+   "depth_m": 1.297
+  },
+  "disc-equator#0": {
+   "part": "disc-equator",
+   "centre_px": [
+    -5806.1,
+    131.1
+   ],
+   "box_px": [
+    -6661,
+    -338,
+    -5050,
+    588
+   ],
+   "depth_m": 1.133
+  },
+  "disc-m150#0": {
+   "part": "disc-m150",
+   "centre_px": [
+    -5806.1,
+    131.1
+   ],
+   "box_px": [
+    -7093,
+    -327,
+    -4815,
+    552
+   ],
+   "depth_m": 1.133
+  },
+  "disc-m30#0": {
+   "part": "disc-m30",
+   "centre_px": [
+    -5806.1,
+    131.1
+   ],
+   "box_px": [
+    -7093,
+    -327,
+    -4815,
+    552
+   ],
+   "depth_m": 1.133
+  },
+  "disc-m90#0": {
+   "part": "disc-m90",
+   "centre_px": [
+    -5806.1,
+    131.1
+   ],
+   "box_px": [
+    -7304,
+    95,
+    -4659,
+    159
+   ],
+   "depth_m": 1.133
+  },
+  "disc-north#0": {
+   "part": "disc-north",
+   "centre_px": [
+    -6235.3,
+    118.8
+   ],
+   "box_px": [
+    -6968,
+    -268,
+    -5574,
+    494
+   ],
+   "depth_m": 1.045
+  },
+  "disc-south#0": {
+   "part": "disc-south",
+   "centre_px": [
+    -5439.1,
+    141.7
+   ],
+   "box_px": [
+    -6024,
+    -186,
+    -4903,
+    461
+   ],
+   "depth_m": 1.221
+  },
+  "rim-equator#0": {
+   "part": "rim-equator",
+   "centre_px": [
+    -5806.1,
+    131.1
+   ],
+   "box_px": [
+    -6657,
+    -338,
+    -5053,
+    588
+   ],
+   "depth_m": 1.133
+  },
+  "rim-m150#0": {
+   "part": "rim-m150",
+   "centre_px": [
+    -5806.1,
+    131.1
+   ],
+   "box_px": [
+    -7090,
+    -326,
+    -4817,
+    551
+   ],
+   "depth_m": 1.133
+  },
+  "rim-m30#0": {
+   "part": "rim-m30",
+   "centre_px": [
+    -5806.1,
+    131.1
+   ],
+   "box_px": [
+    -7090,
+    -326,
+    -4817,
+    551
+   ],
+   "depth_m": 1.133
+  },
+  "rim-m90#0": {
+   "part": "rim-m90",
+   "centre_px": [
+    -5806.1,
+    131.1
+   ],
+   "box_px": [
+    -7303,
+    97,
+    -4659,
+    157
+   ],
+   "depth_m": 1.133
+  },
+  "rim-north#0": {
+   "part": "rim-north",
+   "centre_px": [
+    -6235.3,
+    118.8
+   ],
+   "box_px": [
+    -6964,
+    -268,
+    -5577,
+    493
+   ],
+   "depth_m": 1.045
+  },
+  "rim-south#0": {
+   "part": "rim-south",
+   "centre_px": [
+    -5439.1,
+    141.7
+   ],
+   "box_px": [
+    -6021,
+    -186,
+    -4906,
+    461
+   ],
+   "depth_m": 1.221
+  },
+  "uv#0": {
+   "part": "uv",
+   "centre_px": [
+    -5031.0,
+    148.5
+   ],
+   "box_px": [
+    -5119,
+    69,
+    -4943,
+    228
+   ],
+   "depth_m": 1.286
+  }
+ }
+}

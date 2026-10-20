@@ -1,0 +1,84 @@
+{
+ "title": "The EARF globe in colour, by night",
+ "size": [
+  1600,
+  1067
+ ],
+ "product": {
+  "def": "spinoffs/barkhorn/out-globe-colour/earf-globe-colour.json",
+  "flavour": "night",
+  "instances": [
+   {
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": 0
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -1.622571745491878,
+   0.8236573974198435
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.15809585894199737
+  ],
+  "lens_mm": 95.0,
+  "level": false
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#121114",
+  "width": 8.0,
+  "front": 4.0,
+  "depth": 2.0,
+  "radius": 1.2,
+  "height": 4.0
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#0A0A0C",
+  "horizon": "#0E0E10",
+  "ground": "#050505",
+  "strength": 0.05
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.8
+   ],
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 40,
+    "distance_m": 2.5
+   },
+   "target": [
+    0,
+    0,
+    0.16809585894199738
+   ],
+   "irradiance": 0.06,
+   "color": "#C8D0FF",
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 384,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 12,
+  "bounces": 24,
+  "transmission_bounces": 24,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 6000
+ }
+}

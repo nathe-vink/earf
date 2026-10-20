@@ -643,3 +643,99 @@ dark rims, and a shadow that draws the globe again on the wall or the counter. W
 
 The paper ones are good sculpture but not the drawing (they're opaque). Build the board one first as a $185 prototype
 to judge the scale. Skip the opal.
+
+## Round 33c: the multicolour globe made real
+
+The owner, after round 33b: "For the globe I meant use the dark and light mode version of the globe. The multicolor
+acrylic globe." So round 33b's one-colour globes are alternates. This is the site's own globe as an object
+(`../globe_colour.py`).
+- **The discs:** six, slotted together: the Poison meridian facing us whole, Dust and Haze either side, and Ember, Ice
+  and Acid as the parallels. Each is slotted round those before it, 23 pieces in all.
+- **The setting:** they lean 23.4° and rest on a black anodised base.
+- **By day:** tinted sheet, and a hard sun throws the discs' colours across the table.
+- **By night:** each edge glows its colour.
+
+![The site's globes, and made real](../../../renders/2026-10-20/barkhorn/globe-colour/sheet-proof.png)
+
+**The tints:** six chips of the sheets on paper, each lit hue measured against its swatch: Ember −0.7°, Dust −0.8°,
+Acid +1.9°, Poison −2.2°, Ice −1.3°, Haze −2.7°. A tint thinned along Beer's law drifts its hue (Ember and Ice by 10
+to 12°). So each sheet's colour is the swatch lightened in OKLab with the hue held, then turned against the warm
+room's measured drift (`TINT_K`, `HUE_TURN`).
+
+**How a real one glows, honestly:**
+- **(a) Fluorescent cast acrylic with a 395 nm UV-A ring in the base: yes, with two catches.**
+  - Fluorescent cast sheet exists in red, orange, yellow, green and blue: Perspex's range is Mars Red, Lava Orange,
+    Solar Yellow, Acid Green and Neptune Blue, plus Laser Pink. It gathers light through its faces and gives it out at
+    its cut edges, by day as well as under UV. So one object gives both of the site's looks: tinted discs with bright
+    edges by day, and glowing edges in the dark. Clear tinted sheet can't do the day look; its edges, seen along
+    300 mm of tint, go black.
+  - **Catch 1:** I found no violet. Haze is a meridian standing in the base, so the ring feeds its edge directly and
+    it glows violet by guiding the light rather than by fluorescing. **Haze stays violet (the lead's call) and its
+    edge glows dimmer than the other five**; Laser Pink was the off-hue alternative.
+  - **Catch 2:** fluorescent sheet comes in 3 mm, and some 5 mm. The desk piece is 5 mm, thinner edges than the
+    mark's 0.05 R. Confirm the stock with Perspex.
+  - Fluorescent Acid Green is lighter and yellower than Poison, so the day look is more neon than the speakers'.
+- **(b) Edge-lit with white or RGB LEDs: no.** The parallels don't touch the base, so only the meridians would glow.
+- **UV-A safety:** 395 nm, not 365, about 1 W of LEDs set below the base's rim line where nobody looks into them;
+  PMMA blocks much of it. It should class Exempt or RG1 under IEC 62471, but it needs an assessment before sale.
+- **At 1 m:** there's no fluorescent stock 15 to 25 mm thick, so the back-bar piece is day only, in clear tints. Its
+  show is a hard spot throwing its colours up the wall. A night glow at 1 m: maybe not.
+- **Recommendation (accepted by the lead):** the 300 mm desk piece in 5 mm fluorescent cast on the UV-A base, one
+  object for both modes; the 1 m piece in clear tints under a spot, day only.
+
+**The fab kit** (`out-globe-colour/`):
+- **Cut files** (`cut/`, SVG and DXF, mm): each disc laid flat with its slots, for the 300 in 8 mm (or 5 mm
+  fluorescent; scale the slot) and the 1000 in 25 mm.
+- **Slots:** the measured sheet plus 0.3 (0.15 a side) at 300, plus 0.8 at 1000. The laser's kerf comes off the
+  outline by the shop's own offset. Cast sheet is ±10 % on its nominal, so measure the batch.
+- **Edges:** diamond-polished before assembly; the fluorescent edge is the light.
+- **Assembly:** bonded with a thin solvent cement (Weld-On 4) wicked into each slot in a jig. A dry fit holds, but
+  23 pieces want cement.
+- **The base:** black anodised aluminium 110 × 22 with a seat ring. Inside are the UV-A ring (twelve 395 nm LEDs,
+  about 1 W), a touch dimmer under the rim, and a USB-C socket at the back.
+- **The 1 m piece** stands on a weighted steel base 300 across, its foot bolted through, and wants a plinth. 25 mm
+  sheet makes about 160 kg of acrylic; 15 mm makes about 95 kg.
+
+**Cost (estimates, labelled):**
+
+| | one-off | a run of 50 | retail suggested |
+|---|---|---|---|
+| 300 desk, fluorescent 5 mm, UV base | about $520 (sheet $60, cutting $80, polish $120, jig and bond $150, base $90, UV ring $22) | about $190 | **$495 to $595** |
+| 300 desk, clear tints 8 mm, plain base | about $450 | about $160 | $395 to $450 |
+| 1000 bar, clear tints 25 mm, steel base | about $6,500 (sheet about $3,000, cutting $900, polish $900, assembly $1,000, base $700) | (a few a year) | **$8,500 to $9,500** |
+
+**The finals** (1600 × 1067, `renders/2026-10-20/barkhorn/globe-colour/`), both of the desk piece:
+- **By day:** on paper under a hard sun from behind. The fluorescent edges glow, and the globe throws a stained-glass
+  shadow of red, orange, yellow and blue toward the viewer.
+- **By night:** on black with the ring on, each edge glowing its colour as the site's dark-mode globe does.
+
+![The finals](../../../renders/2026-10-20/barkhorn/globe-colour/sheet-finals.png)
+
+**Read tests** (600 px, a fresh judge told nothing; `critic/coin/READTEST.md`):
+- Day: "a translucent… sphere… with several colored translucent discs… like an armillary sphere… casting a big tinted
+  elliptical shadow".
+- Night: "a glowing… sphere… coloured neon-like rings… around a translucent ball". It reads as a computer render, and
+  the judge didn't say acrylic.
+
+**Critics** on the day final, two fresh critics a round, three rounds (the family's limit):
+
+| round | A | B |
+|---|---|---|
+| 1 | 5.5 | 5.5 |
+| 2 | 6.0 | 5.5 |
+| 3 | 5.0 | 6.0 |
+
+- Neither critic met the gate (two passes in a row each gaining under 0.5).
+- Round 2 against round 3 went to a position-balanced duel: two judges, each shown both orders. Round 3 won 4 of 4,
+  for its long stained-glass shadow, so it is the final; round 2 is kept as `final-day-r2.png`.
+- **Open on the day final:**
+  - a grey veil over the coloured shadow;
+  - the paper has no texture;
+  - the black base is crushed;
+  - the core goes dark where four tints stack.
+  The critics also want the edges brighter than the faces. That is the fluorescent sheet's real strength, which a
+  sample should settle.
+
+**For Planet:** `globe(size, mode)` in `studio/engine/kit_ext/earf_coin.py`.
+- `size` is in mm across: 300 for the desk piece, 1000 for the back bar's.
+- `mode` is "day" or "night"; `glow` scales the night edges.
