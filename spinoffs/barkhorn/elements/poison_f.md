@@ -186,3 +186,19 @@ The tells against F1b:
 One judge credits F1b's wider moss bed as planting the speaker; the other calls it an artificial grass mat.
 
 **Next step on realism, if the owner agrees** (the lead): a real scanned fly agaric. The good free ones are CC-BY on Sketchfab and need an account, so the owner would pass one to us. Nothing fetched here.
+
+**p5** (`proofs31/element-poison_f1b-p05.jpg`), the lead's last realism pass:
+- **Light:** the canopy's gap over the speaker made a small leaf-edged fleck on the horn and the upper-left face, the reflector halved (the shadow side a stop down), a warm bounce off the litter.
+- **Ground:** no moss mat; the feet in bark crumbs and twigs.
+- **Caps:** seven, a sheen on two only, one tipped.
+- **Berries:** two spikes, bent apart, ripeness mixed, berries fallen (`arum` `unripe=`, `fallen=`).
+- **Not built:** raised cottony warts, a lined margin, fallen and nibbled caps, moss cushions on the roots, brown fern tips. The kit's caps don't offer the cap details.
+
+**Read test:** "…stands on a dim forest floor beside a redwood trunk, with ferns and red-capped mushrooms around it." Passes on the lead's bar ("red-capped toadstools or mushrooms").
+
+**Realism:** 4.5 and 4.5, a tie with p04, so the finals are p5 (the lead's rule). The tells:
+- the caps still toy-like, and the tipped one reads as "floating with no stem";
+- the speaker without a contact shadow, not lit by the dapple;
+- the floor's debris and the ferns repeating.
+
+**Next step on realism, if the owner agrees:** a real scanned fly agaric (the lead is asking the owner).
