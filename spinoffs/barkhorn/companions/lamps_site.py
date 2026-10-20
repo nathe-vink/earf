@@ -71,6 +71,13 @@ def unlit():
         if p.get('fn') == 'orb':
             p.update(cable=False, cartridge='in')
     s['lights']['thru_orb'].update(target=[-0.05, -1.45, 0.45], irradiance=1.5)
+    # s1 (5.5, 5.5), and the coordinator for the caption "Off, in Smoke.": the Dome's underside read as a lit white
+    # disc and a warm pool lay round the Orb's base, both "on". Both lamps are off (lamp false, no glow): it was the
+    # helper lights. The light through the ball kept to a faint core, the one through the Dome's mouth nearly out, and
+    # the bounce under them warm (at 5000 K it turned the frosted liner blue-white)
+    s['lights']['thru_orb']['irradiance'] = 0.15
+    s['lights']['thru_dome'].update(irradiance=0.04, color=3400)
+    s['lights']['bounce'].update(color=3500)
     return s
 
 

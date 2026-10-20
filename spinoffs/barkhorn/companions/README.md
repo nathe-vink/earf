@@ -569,3 +569,30 @@ unlit base.
 on all the lit frames, now the Domes row too (round 32e's read it as off), and the unlit Orb read as off; the unlit
 Dome read as faintly on. Expensive: the unlit pair ("most expensive"), the Orb hero ("fairly expensive"); mid for the
 Orbs row and the Dome hero; cheap for the Domes row and the cartridge. The material reads as glass throughout.
+
+**The lamps' light in the site frames, for Planet to match** (the kit piece's `shade_glow` and `lamp_w`; the liner's
+`materials.liner.glow_color`; every frame at exposure 0.15 and a 4300 K balance, as in `lamps_site.py`):
+
+| Frame | `shade_glow` | `lamp_w` | `glow_color` |
+|---|---|---|---|
+| `lamps-orbs` (a piece a tint) | 1.3 × the tint's gain: Ember 1.3, Dust 1.3, Acid 1.17, Poison 1.17, Ice 0.975, Haze 1.105, Fog 0.585, Smoke 0.78 | 4.0 | #FFDCB8 |
+| `lamp-orb` (Ember) | 0.8 | 3.0 | #FFDCB8 |
+| `lamps-domes` | Ember and Dust 0.75, Acid and Poison 0.675, Ice 0.562, Haze 0.85, Fog 0.25, Smoke 0.45 | 4.5, plus a 18 W spot a dome in its tint, 40° | #FFF3E6 |
+| `lamp-dome` (Ember) | 0.9 | 15.0 | #FFDCB8 |
+
+An Orb blows to near white above about 1.3 for Ember and Dust (Acid's and the pale tints' gains are lower for that
+reason): the liner glows evenly by design, so its level sets how saturated the ball reads.
+
+`earf_moon.py` carries Planet's `noshadow` again (27f39bf on r32-planet; round 32f's kit had dropped it).
+
+**The unlit pair, again** (the coordinator, for the caption "Off, in Smoke."): the Dome's underside read as a lit white
+disc and a warm pool lay round the Orb's base. Both lamps were off; it was the helper lights. The light through the
+ball keeps to a faint core (1.5 to 0.15), the one through the Dome's mouth nearly out (0.3 to 0.04, 3400 K), and the
+bounce under them warm (5000 to 3500 K).
+
+**The catch** (s1, 5.0, 5.0): with the hub black, its L-slots sink into black on black. Raking strips (s2, tried in a
+proof) changed nothing: anodised black shows only a specular, so the slots need a reflector placed for the camera's
+angle, or a lighter anodise on a sample. It stays at s1 for now; the read test named it a pendant's collar, off, mid.
+Read again at 600 px: the Orb off; the Dome "faintly on" (a little glow at the rim, no pool), so closer to the caption
+but not yet fully dark; and now "mid-range", where the lit-helper version read "most expensive": without that light
+the smoked pair goes murky on the pale page. The next step for it is a crisp edge light on both, not light through them.
