@@ -39,7 +39,7 @@
     "tint": "#F0EEEA",
     "tint_mix": 0.95,
     "bump": 2.0,
-    "tex_scale": 7.0
+    "tex_scale": 9.5
    },
    {
     "kind": "kit",
@@ -79,7 +79,7 @@
     "color": "#4A4744",
     "scale": 10.0,
     "cut": 0.42,
-    "soft": 0.25,
+    "soft": 0.12,
     "anisotropy": 0.3,
     "fade": [
      0.25,
@@ -88,8 +88,10 @@
     ],
     "floor": 0.0,
     "rise": 1.2,
-    "detail_scale": 3.0,
-    "detail_weight": 0.55
+    "detail_scale": 1.5,
+    "detail_weight": 0.7,
+    "detail": 9.0,
+    "roughness": 0.7
    },
    {
     "kind": "kit",
@@ -111,7 +113,7 @@
     "color": "#4A4744",
     "scale": 12.5,
     "cut": 0.43,
-    "soft": 0.25,
+    "soft": 0.12,
     "anisotropy": 0.3,
     "fade": [
      0.25,
@@ -120,8 +122,10 @@
     ],
     "floor": 0.0,
     "rise": 1.2,
-    "detail_scale": 3.6666666666666665,
-    "detail_weight": 0.55
+    "detail_scale": 1.8333333333333333,
+    "detail_weight": 0.7,
+    "detail": 9.0,
+    "roughness": 0.7
    },
    {
     "kind": "kit",
@@ -143,7 +147,7 @@
     "color": "#4A4744",
     "scale": 15.0,
     "cut": 0.44,
-    "soft": 0.25,
+    "soft": 0.12,
     "anisotropy": 0.3,
     "fade": [
      0.25,
@@ -152,8 +156,10 @@
     ],
     "floor": 0.0,
     "rise": 1.2,
-    "detail_scale": 4.333333333333333,
-    "detail_weight": 0.55
+    "detail_scale": 2.1666666666666665,
+    "detail_weight": 0.7,
+    "detail": 9.0,
+    "roughness": 0.7
    },
    {
     "kind": "kit",
@@ -175,7 +181,7 @@
     "color": "#4A4744",
     "scale": 17.5,
     "cut": 0.44999999999999996,
-    "soft": 0.25,
+    "soft": 0.12,
     "anisotropy": 0.3,
     "fade": [
      0.25,
@@ -184,8 +190,10 @@
     ],
     "floor": 0.0,
     "rise": 1.2,
-    "detail_scale": 5.0,
-    "detail_weight": 0.55
+    "detail_scale": 2.5,
+    "detail_weight": 0.7,
+    "detail": 9.0,
+    "roughness": 0.7
    },
    {
     "kind": "kit",
@@ -207,7 +215,7 @@
     "color": "#4A4744",
     "scale": 20.0,
     "cut": 0.45999999999999996,
-    "soft": 0.25,
+    "soft": 0.12,
     "anisotropy": 0.3,
     "fade": [
      0.25,
@@ -216,8 +224,10 @@
     ],
     "floor": 0.0,
     "rise": 1.2,
-    "detail_scale": 5.666666666666666,
-    "detail_weight": 0.55
+    "detail_scale": 2.833333333333333,
+    "detail_weight": 0.7,
+    "detail": 9.0,
+    "roughness": 0.7
    },
    {
     "kind": "kit",
@@ -239,7 +249,7 @@
     "color": "#4A4744",
     "scale": 22.5,
     "cut": 0.47,
-    "soft": 0.25,
+    "soft": 0.12,
     "anisotropy": 0.3,
     "fade": [
      0.25,
@@ -248,8 +258,10 @@
     ],
     "floor": 0.0,
     "rise": 1.2,
-    "detail_scale": 6.333333333333334,
-    "detail_weight": 0.55
+    "detail_scale": 3.166666666666667,
+    "detail_weight": 0.7,
+    "detail": 9.0,
+    "roughness": 0.7
    },
    {
     "kind": "kit",
@@ -271,7 +283,7 @@
     "color": "#4A4744",
     "scale": 25.0,
     "cut": 0.48,
-    "soft": 0.25,
+    "soft": 0.12,
     "anisotropy": 0.3,
     "fade": [
      0.25,
@@ -280,8 +292,10 @@
     ],
     "floor": 0.0,
     "rise": 1.2,
-    "detail_scale": 7.0,
-    "detail_weight": 0.55
+    "detail_scale": 3.5,
+    "detail_weight": 0.7,
+    "detail": 9.0,
+    "roughness": 0.7
    },
    {
     "kind": "kit",
@@ -303,7 +317,7 @@
     "color": "#4A4744",
     "scale": 55.0,
     "cut": 0.4,
-    "soft": 0.35,
+    "soft": 0.2,
     "anisotropy": 0.3,
     "fade": [
      0.15,
@@ -312,8 +326,10 @@
     ],
     "floor": 0.0,
     "rise": 0.6,
-    "detail_scale": 18.0,
-    "detail_weight": 0.5
+    "detail_scale": 8.0,
+    "detail_weight": 0.65,
+    "detail": 9.0,
+    "roughness": 0.7
    },
    {
     "kind": "kit",

@@ -29,7 +29,7 @@ def fire(x, y, heading, seed):
     import math
     h = math.radians(heading)
     out = []
-    for k, (dx, w, d, hgt, z) in enumerate([(-0.3, 1.6, 1.4, 2.4, 0.6), (1.6, 1.1, 1.4, 1.5, 0.6)]):
+    for k, (dx, w, d, hgt, z) in enumerate([(-0.3, 2.0, 1.6, 3.4, 0.55), (1.6, 1.4, 1.6, 2.2, 0.55), (-1.4, 1.2, 1.4, 1.8, 0.5)]):
         out.append(piece('ext', module='wreck', fn='flame', position=[x + dx * math.cos(h), y + dx * math.sin(h), z],
                          size=[w, d, hgt], rotate_z=heading, density=5.0, strength=70.0, scale=0.2, seed=seed + k))
     out.append(piece('scatter', count=50, radius=[0.004, 0.012], position=[x, y, 1.6], material='glow', color='#FF8A30',
@@ -46,8 +46,8 @@ def smoke_column(x, y, seed):
         col = '#3E3B38' if k == 0 else ('#242221' if k == 1 else '#121212')
         out.append(piece('ext', module='smoke_el', fn='woodsmoke', position=[x - 4.5 * t ** 1.6, y + 1.5 * t, 0.9 + 2.6 * k],
                          size=[w, w, 3.6], density=(3.0 + 2.5 * min(1.0, 2 * t)) * (1.0 - 0.5 * t), seed=seed + k,
-                         scale=0.6 + 1.8 * t, cut=0.4, soft=0.3, anisotropy=0.35, fade=[0.35, 0.35, 0.4], floor=0.0,
-                         rise=1.6, color=col, detail_scale=0.2 + 0.4 * t, detail_weight=0.55))
+                         scale=0.6 + 1.8 * t, cut=0.44, soft=0.16, anisotropy=0.35, fade=[0.35, 0.35, 0.4], floor=0.0,
+                         rise=1.6, color=col, detail_scale=0.12 + 0.25 * t, detail_weight=0.75, detail=9.0, roughness=0.7))
     return out
 
 
@@ -116,9 +116,13 @@ def shot():
     for k in range(48):
         a = 2 * math.pi * k / 48
         r = 1.0 + 0.18 * math.sin(3 * a + ph[0]) + 0.1 * math.sin(5 * a + ph[1]) + 0.05 * math.sin(11 * a + ph[2])
-        puddle.append([round(0.95 * r * math.cos(a), 4), round(0.62 * r * math.sin(a), 4)])
-    props.append(piece('extrude', outline=puddle, depth=0.002, position=[0.2, 0.15, 0.0], rotate=[90.0, 0.0, 12.0],
+        puddle.append([round(0.72 * r * math.cos(a), 4), round(0.5 * r * math.sin(a), 4)])
+    props.append(piece('extrude', outline=puddle, depth=0.002, position=[0.2, 0.15, 0.001], rotate=[90.0, 0.0, 12.0],
                        material='gloss', color='#151517', roughness=0.07, ease=0.0005))
+    # its margin: a wider film of water, rougher and darker than the puddle, so the mirror fades into the wet road
+    margin = [[round(1.35 * x + 0.05 * math.sin(7 * k), 4), round(1.4 * y, 4)] for k, (x, y) in enumerate(puddle)]
+    props.append(piece('extrude', outline=margin, depth=0.001, position=[0.2, 0.15, 0.0], rotate=[90.0, 0.0, 12.0],
+                       material='gloss', color='#1A1A1C', roughness=0.22, ease=0.0003))
     lights.update({
         'skyfill': {**area(-20, 5, 2.4, 1.6, '#AEB8C8', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
         'bounce': {**area(-25, 12, 2.0, 4.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},

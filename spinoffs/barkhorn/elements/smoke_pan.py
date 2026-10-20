@@ -28,11 +28,13 @@ def plume():
         t = k / 6
         w = 45 + 170 * t ** 1.4
         cells.append(smoke((150 - 200 * t ** 1.5, 300 - 40 * t, -5 + 42 * k), (w, 0.6 * w, 60), 0.9 * 0.8 ** k,
-                           31 + k, scale=10 + 15 * t, cut=0.42 + 0.06 * t, soft=0.25, anisotropy=0.3,
-                           fade=[0.25, 0.25, 0.35], floor=0.0, rise=1.2, detail_scale=3 + 4 * t, detail_weight=0.55))
+                           31 + k, scale=10 + 15 * t, cut=0.42 + 0.06 * t, soft=0.12, anisotropy=0.3,
+                           fade=[0.25, 0.25, 0.35], floor=0.0, rise=1.2, detail_scale=1.5 + 2 * t, detail_weight=0.7,
+                           detail=9.0, roughness=0.7))
     # the plume's head: a broad sheet sheared off the top, spreading across half the sky toward and over the camera
-    cells.append(smoke((-320, 760, 200), (1000, 640, 130), 0.05, 39, scale=55.0, cut=0.4, soft=0.35, anisotropy=0.3,
-                       fade=[0.15, 0.2, 0.45], floor=0.0, rise=0.6, detail_scale=18.0, detail_weight=0.5))
+    cells.append(smoke((-320, 760, 200), (1000, 640, 130), 0.05, 39, scale=55.0, cut=0.4, soft=0.2, anisotropy=0.3,
+                       fade=[0.15, 0.2, 0.45], floor=0.0, rise=0.6, detail_scale=8.0, detail_weight=0.65, detail=9.0,
+                       roughness=0.7))
     # layers rolling low toward the speaker, nearer ones lower and finer
     for i, (y, w, d, h, dens, sc) in enumerate([(170, 200, 90, 26, 0.25, 9.0), (85, 120, 50, 12, 0.35, 4.0),
                                                  (45, 80, 26, 6.0, 0.5, 2.2), (22, 60, 20, 4.0, 0.6, 1.4),
@@ -48,7 +50,7 @@ def plume():
 
 def shot():
     props = [ground('dry_ground_01', size=(40.0, 40.0), position=(0.0, 14.0, 0.0), displace=0.0, relief=0.05,
-                    res='4k', tint='#F0EEEA', tint_mix=0.95, bump=2.0, tex_scale=7.0),
+                    res='4k', tint='#F0EEEA', tint_mix=0.95, bump=2.0, tex_scale=9.5),
              # the plume's shadow across part of the pan, and the gap the sun comes through onto the foreground
              piece('ext', module='smoke_el', fn='canopy', size=[600.0, 600.0], z=20.0, position=[-60.0, 60.0],
                    scale=15.0, open=0.35, seed=7)] + plume() + [
