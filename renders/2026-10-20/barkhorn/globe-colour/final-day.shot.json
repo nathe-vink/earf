@@ -1,0 +1,94 @@
+{
+ "title": "The EARF globe in colour, by day",
+ "size": [
+  1600,
+  1067
+ ],
+ "product": {
+  "def": "spinoffs/barkhorn/out-globe-colour/earf-globe-colour.json",
+  "flavour": "day",
+  "instances": [
+   {
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": 0
+   }
+  ],
+  "hide": [
+   "face-*"
+  ]
+ },
+ "camera": {
+  "position": [
+   0.1,
+   -1.5987045508745514,
+   0.8798849843246478
+  ],
+  "target": [
+   0.13,
+   0.08,
+   0.09809585894199738
+  ],
+  "lens_mm": 70.0,
+  "level": false
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EEEAE3",
+  "width": 8.0,
+  "front": 4.0,
+  "depth": 2.0,
+  "radius": 1.2,
+  "height": 4.0
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D4CE",
+  "horizon": "#DEDAD4",
+  "ground": "#6A665F",
+  "strength": 1.0
+ },
+ "sun": {
+  "azimuth_deg": 295.0,
+  "elevation_deg": 30.0,
+  "irradiance": 5.0,
+  "angle_deg": 0.6,
+  "color": "#FFF2DE"
+ },
+ "lights": {
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    1.6
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 20,
+    "distance_m": 3.0
+   },
+   "target": [
+    0,
+    0,
+    0.16809585894199738
+   ],
+   "irradiance": 0.5,
+   "color": "#FFF7EA",
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 384,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 24,
+  "transmission_bounces": 24,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5400
+ }
+}

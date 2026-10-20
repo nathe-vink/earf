@@ -1,0 +1,301 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/globe-colour/final-night.json",
+ "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-colour/final-night.png",
+ "seconds": {
+  "build": 0.4,
+  "render": 7.3
+ },
+ "samples": 24,
+ "size": [
+  480,
+  320
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    240.0,
+    240.2
+   ],
+   "box_px": [
+    207,
+    220,
+    273,
+    261
+   ],
+   "depth_m": 1.81
+  },
+  "disc-equator#0": {
+   "part": "disc-equator",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    146,
+    89,
+    334,
+    229
+   ],
+   "depth_m": 1.75
+  },
+  "disc-m150#0": {
+   "part": "disc-m150",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    176,
+    48,
+    304,
+    269
+   ],
+   "depth_m": 1.75
+  },
+  "disc-m30#0": {
+   "part": "disc-m30",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    176,
+    48,
+    304,
+    269
+   ],
+   "depth_m": 1.75
+  },
+  "disc-m90#0": {
+   "part": "disc-m90",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    145,
+    66,
+    335,
+    238
+   ],
+   "depth_m": 1.75
+  },
+  "disc-north#0": {
+   "part": "disc-north",
+   "centre_px": [
+    263.9,
+    103.4
+   ],
+   "box_px": [
+    194,
+    53,
+    337,
+    159
+   ],
+   "depth_m": 1.716
+  },
+  "disc-south#0": {
+   "part": "disc-south",
+   "centre_px": [
+    217.0,
+    203.4
+   ],
+   "box_px": [
+    147,
+    151,
+    284,
+    262
+   ],
+   "depth_m": 1.784
+  },
+  "face-equator#0": {
+   "part": "face-equator",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    148,
+    91,
+    332,
+    227
+   ],
+   "depth_m": 1.75
+  },
+  "face-m150#0": {
+   "part": "face-m150",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    179,
+    50,
+    301,
+    267
+   ],
+   "depth_m": 1.75
+  },
+  "face-m30#0": {
+   "part": "face-m30",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    179,
+    50,
+    301,
+    267
+   ],
+   "depth_m": 1.75
+  },
+  "face-m90#0": {
+   "part": "face-m90",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    146,
+    67,
+    334,
+    236
+   ],
+   "depth_m": 1.75
+  },
+  "face-north#0": {
+   "part": "face-north",
+   "centre_px": [
+    263.8,
+    103.4
+   ],
+   "box_px": [
+    196,
+    56,
+    336,
+    156
+   ],
+   "depth_m": 1.716
+  },
+  "face-south#0": {
+   "part": "face-south",
+   "centre_px": [
+    217.1,
+    203.4
+   ],
+   "box_px": [
+    148,
+    153,
+    283,
+    259
+   ],
+   "depth_m": 1.784
+  },
+  "rim-equator#0": {
+   "part": "rim-equator",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    147,
+    89,
+    333,
+    229
+   ],
+   "depth_m": 1.75
+  },
+  "rim-m150#0": {
+   "part": "rim-m150",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    176,
+    48,
+    304,
+    269
+   ],
+   "depth_m": 1.75
+  },
+  "rim-m30#0": {
+   "part": "rim-m30",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    176,
+    48,
+    304,
+    269
+   ],
+   "depth_m": 1.75
+  },
+  "rim-m90#0": {
+   "part": "rim-m90",
+   "centre_px": [
+    240.0,
+    154.4
+   ],
+   "box_px": [
+    145,
+    66,
+    335,
+    237
+   ],
+   "depth_m": 1.75
+  },
+  "rim-north#0": {
+   "part": "rim-north",
+   "centre_px": [
+    263.9,
+    103.4
+   ],
+   "box_px": [
+    194,
+    54,
+    337,
+    158
+   ],
+   "depth_m": 1.716
+  },
+  "rim-south#0": {
+   "part": "rim-south",
+   "centre_px": [
+    217.0,
+    203.4
+   ],
+   "box_px": [
+    147,
+    151,
+    284,
+    262
+   ],
+   "depth_m": 1.784
+  },
+  "uv#0": {
+   "part": "uv",
+   "centre_px": [
+    240.0,
+    238.2
+   ],
+   "box_px": [
+    221,
+    230,
+    259,
+    247
+   ],
+   "depth_m": 1.808
+  }
+ }
+}

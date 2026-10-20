@@ -1,0 +1,217 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/globe-colour/final-day.json",
+ "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-colour/final-day.png",
+ "seconds": {
+  "build": 0.4,
+  "render": 7.7
+ },
+ "samples": 24,
+ "size": [
+  480,
+  320
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    173.9,
+    218.5
+   ],
+   "box_px": [
+    143,
+    200,
+    203,
+    238
+   ],
+   "depth_m": 1.814
+  },
+  "disc-equator#0": {
+   "part": "disc-equator",
+   "centre_px": [
+    171.4,
+    144.7
+   ],
+   "box_px": [
+    84,
+    84,
+    248,
+    213
+   ],
+   "depth_m": 1.748
+  },
+  "disc-m150#0": {
+   "part": "disc-m150",
+   "centre_px": [
+    171.4,
+    144.7
+   ],
+   "box_px": [
+    109,
+    50,
+    222,
+    247
+   ],
+   "depth_m": 1.748
+  },
+  "disc-m30#0": {
+   "part": "disc-m30",
+   "centre_px": [
+    171.4,
+    144.7
+   ],
+   "box_px": [
+    109,
+    50,
+    222,
+    247
+   ],
+   "depth_m": 1.748
+  },
+  "disc-m90#0": {
+   "part": "disc-m90",
+   "centre_px": [
+    171.4,
+    144.7
+   ],
+   "box_px": [
+    85,
+    68,
+    252,
+    217
+   ],
+   "depth_m": 1.748
+  },
+  "disc-north#0": {
+   "part": "disc-north",
+   "centre_px": [
+    190.8,
+    100.4
+   ],
+   "box_px": [
+    125,
+    54,
+    251,
+    151
+   ],
+   "depth_m": 1.711
+  },
+  "disc-south#0": {
+   "part": "disc-south",
+   "centre_px": [
+    152.7,
+    187.1
+   ],
+   "box_px": [
+    87,
+    139,
+    210,
+    240
+   ],
+   "depth_m": 1.785
+  },
+  "rim-equator#0": {
+   "part": "rim-equator",
+   "centre_px": [
+    171.4,
+    144.7
+   ],
+   "box_px": [
+    84,
+    85,
+    248,
+    213
+   ],
+   "depth_m": 1.748
+  },
+  "rim-m150#0": {
+   "part": "rim-m150",
+   "centre_px": [
+    171.4,
+    144.7
+   ],
+   "box_px": [
+    109,
+    50,
+    222,
+    246
+   ],
+   "depth_m": 1.748
+  },
+  "rim-m30#0": {
+   "part": "rim-m30",
+   "centre_px": [
+    171.4,
+    144.7
+   ],
+   "box_px": [
+    109,
+    50,
+    222,
+    246
+   ],
+   "depth_m": 1.748
+  },
+  "rim-m90#0": {
+   "part": "rim-m90",
+   "centre_px": [
+    171.4,
+    144.7
+   ],
+   "box_px": [
+    85,
+    68,
+    252,
+    217
+   ],
+   "depth_m": 1.748
+  },
+  "rim-north#0": {
+   "part": "rim-north",
+   "centre_px": [
+    190.8,
+    100.4
+   ],
+   "box_px": [
+    125,
+    55,
+    251,
+    151
+   ],
+   "depth_m": 1.711
+  },
+  "rim-south#0": {
+   "part": "rim-south",
+   "centre_px": [
+    152.7,
+    187.1
+   ],
+   "box_px": [
+    87,
+    139,
+    210,
+    240
+   ],
+   "depth_m": 1.785
+  },
+  "uv#0": {
+   "part": "uv",
+   "centre_px": [
+    173.8,
+    216.8
+   ],
+   "box_px": [
+    157,
+    209,
+    190,
+    225
+   ],
+   "depth_m": 1.813
+  }
+ }
+}
