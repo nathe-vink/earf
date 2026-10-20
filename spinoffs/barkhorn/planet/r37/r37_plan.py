@@ -25,10 +25,15 @@ SINK_GLOW = '#FFA24A'                                                # lit, it g
 # the ledge, 1450 clear inside, felt-lined, 100 behind the cabinet and 150 above it. Tilted 8 degrees, not 10: the
 # cabinet (1293 tall) pivots on its base, so its top leans 180 forward; the niche is 680 deep (the briefed 560 plus
 # the lean) and the top still leans 80 past the face frame, as a tilted cabinet does
+# the counter moved 200 toward the banquette (the lead: keep the bartender's aisle a working 0.9 m; move the counter out
+# rather than squeeze the niches): its back edge 4.55, the niches' face at 5.45. Round 36's functions read their own
+# module's COUNTER, so it is set there too (in a round-37 process only)
+COUNTER = dict(_R36.COUNTER, y0=_R36.COUNTER['y0'] - 0.20, y1=_R36.COUNTER['y1'] - 0.20)
+_R36.COUNTER = COUNTER
 SPK_LEDGE = dict(top=1.07)                                           # oak, on the worktop; 72 kg each, with margin
-SPK_NICHE = dict(w=0.70, h=1.45, d=0.68, felt=0.02, wall=0.03, back_gap=0.10, floor=0.02)
+SPK_NICHE = dict(w=0.70, h=1.45, d=0.62, felt=0.02, wall=0.03, back_gap=0.10, floor=0.02)
 SPK_NICHES = [(round(DJ['x'] - 1.35, 3)), (round(DJ['x'] + 1.35, 3))]   # their centres, x
-SPK_TILT = 8.0                                                       # degrees, the front down
+SPK_TILT = 6.0                                                       # degrees, the front down (the lead: 6 at 620 deep)
 SPK_AIM = (6.90, 1.20)                                               # toed in toward the counter's middle (about 15 deg)
 LEDGE = dict(x0=3.62, x1=4.72, z=1.95)
 CLOUD_HALF = dict(w=0.280, d=0.2138)                                # the cabinet's half-footprint (its origin_mm)

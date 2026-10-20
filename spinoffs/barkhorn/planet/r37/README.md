@@ -28,8 +28,15 @@ Every dimension is a proposal until the owner signs it (`r37_plan.py`).
 - Two record players at the decks (a DJ pair), not one. The brief says "a record player"; one is a one-line change.
 - In the Mixed configuration the record players follow the bar pair, in Smoke.
 - The niche is 40 mm deeper than briefed, for the 100 mm behind the cabinet.
-- The bar pair stays on the floor (the horn at a drinker's ear at the counter, as Ginza). From the banquettes the counter
-  hides the lower cabinets; the hero bar view stands at the counter (eye 1.55) and looks over the zinc into the niches.
+- ~~The bar pair stays on the floor~~: corrected by the owner with a photo of Ginza ("They are elevated at Ginza."). The
+  pair stands on oak ledges at counter height (1.07), the steel doors beneath, each on an oak wedge tilted 6 deg down and
+  toed in about 15 deg toward the counter's middle; the niche starts at the ledge, 1450 clear, 620 deep (the lead's
+  choice: 6 deg at 620); the cabinet's top leans about 80 past the face frame.
+- The bartender's aisle kept at a working 0.9 m (the lead): the counter moved 200 toward the banquette (its back edge
+  4.55, the niches' face 5.45).
+- Ginza's details: a warm strip under the counter's top edge; one brass sconce with a glass chimney on the record wall;
+  a "Sorry, no requests" tent card by the decks; the R3s' own covers over the decks; candles in glasses on the counter.
+- The hero bar view seated at the counter (eye 1.35), a soft ceiling spot on each cabinet of the bar pair.
 
 ## Process
 
