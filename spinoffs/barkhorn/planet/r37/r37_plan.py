@@ -93,3 +93,8 @@ BLACK_ACRYLIC = {'preset': 'dark_resin', 'color': '#0C0C0D', 'roughness': 0.06, 
 # --- the sink as smoked glass (the lead, 2026-10-20): no glow; the Cloud's Smoke, polished; a soft bowl 120 deep with a
 # 30 radius at its rim and a visible waste. The slab 160 thick (was 120) to hold the bowl; its top stays at 860
 SINK37 = dict(SINK, t=0.16, D=0.12, bx=0.19, by=0.105, fillet=0.03)
+
+# an exposure trim per tint of the view's hero pair: the Ember red reaches R = 1 in a Standard view off the room's own
+# light (the niche's strip, the felt wash), not only the lamps scaled above (r37: lowering SPK_GAIN 0.15 -> 0.08 moved
+# nothing); half a stop down on its frames
+EXPO_TRIM = {'ember': -0.5}
