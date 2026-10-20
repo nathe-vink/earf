@@ -400,5 +400,23 @@
   "estimate": true,
   "supplier": "any laser or sign shop",
   "price_date": "2026-10-20"
+ },
+ "column-led": {
+  "kind": "led",
+  "maker": "any (a COB or SMD round board)",
+  "model": "A 44 mm round LED board, 2700 K, CRI 90, about 1.5 W at 5 V (USB), with its constant-current driver on the board",
+  "usd": 9.0,
+  "estimate": true,
+  "supplier": "AliExpress, Adafruit or alike",
+  "price_date": "2026-10-20"
+ },
+ "column-cable": {
+  "kind": "cable",
+  "maker": "any",
+  "model": "A 2 m USB-C to bare-lead cable with an inline rotary dimmer, black, and a 5 V 2 A USB-C adapter",
+  "usd": 14.0,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-20"
  }
 }

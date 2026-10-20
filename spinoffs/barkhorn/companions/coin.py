@@ -54,7 +54,11 @@ FONT = os.path.join(ROOT, 'studio', 'fabkit', 'fonts', 'IBMPlexMono-SemiBold.ttf
 # The column the requests stack in, at the decks (mm): a water-clear cast tube on a base; coins drop in at the top and
 # the lowest one is pushed out through a slot at the foot, so the queue plays from the bottom up
 COL = dict(tube_od=50.0, tube_id=42.0, tube_h=210.0, base_d=96.0, base_h=24.0, slot_h=6.8, slot_w=41.6, notch_w=22.0,
-           seat=4.0, ring_h=8.0)
+           seat=4.0, ring_h=8.0,
+           # the light (the lead, for Planet: "the stacked coins read as a dark column, so give it a light"): a warm LED
+           # disc in a pocket milled up from under the base, under a 3.2 mm window of the Smoke, shining up through the
+           # queue so it glows in its tints, as the speakers' light plinths do; 5 V from USB-C, its cable out at the back
+           pocket_d=50.0, pocket_h=10.0, led_d=44.0, cable_w=7.0, cable_h=4.0)
 
 
 def mass_g():
@@ -273,6 +277,13 @@ def column_parts(p=COL):
     base = base - cyl('z', (0, 0), idi, floor, bh + 1)                      # the coins' well, through to the slot
     base = base - box(-sw / 2, -bd_, floor, sw / 2, 0, floor + sh)          # the slot, out at the front (-y)
     base = base - box(-nw / 2, 0, floor, nw / 2, bd_, floor + sh)           # the finger notch, at the back
+    pd, ph = p['pocket_d'], p['pocket_h']
+    base = base - cyl('z', (0, 0), pd, -1, ph)                              # the light's pocket, from below
+    base = base - box(-p['cable_w'] / 2, 0, -1, p['cable_w'] / 2, bd_ / 2 + 1, p['cable_h'])   # the cable's channel, out
+                                                                                            # at the back
+    plate = cyl('z', (0, 0), pd - 0.4, 0.4, 3.0)                            # aluminium: the LED's heat sink and the lid
+    led = cyl('z', (0, 0), p['led_d'], 3.0, 4.6)                            # the LED disc on the plate
+    diffuser = cyl('z', (0, 0), pd - 0.4, ph - 2.0, ph - 0.02)              # opal acrylic under the window
     tube = cyl('z', (0, 0), od, bh - seat, bh - seat + th) - cyl('z', (0, 0), idi, bh - seat - 1, bh - seat + th + 1)
     z1 = bh - seat + th
     ring = cyl('z', (0, 0), od + 6, z1 - p['ring_h'] + 2, z1 + 2) - cyl('z', (0, 0), idi, z1 - p['ring_h'], z1 + 3) \
@@ -281,12 +292,27 @@ def column_parts(p=COL):
         Part('base', base, Machined('cast-acrylic', 'cnc-mill', setup_usd=150.0), finish='smoke-base', group='base',
              notes=['turned and milled from 25 mm Smoke cast acrylic (24 finished), all faces polished; the socket 4 deep '
                     'takes the tube; the slot 6.8 tall lets one coin out at the front; the notch at the back takes a '
-                    'finger to push it']),
+                    'finger to push it; from below, a 50 pocket 10 deep for the light (3.2 of Smoke left as its '
+                    'window under the coins) and a 7 x 4 channel for its cable, out at the back']),
+        # the tube's back half frosted inside: lit from its foot by the LED (through the Smoke under the socket), it
+        # glows, and the queue reads in its tints against it, backlit (lit only from below, clear polished coins send
+        # almost none of the light out sideways: the stack stayed dark but for the slot)
         Part('tube', tube, Machined('cast-acrylic', 'lathe', setup_usd=60.0), finish='clear', group='tube',
+             pieces={'front': (tube - box(-od, -0.01, -1, od, od, z1 + 5), 'clear'),
+                     'back': (tube - box(-od, -od, -1, od, 0.01, z1 + 5), 'tube-frost')},
              notes=['cast acrylic tube 50 x 4 wall (42 bore: 1 mm round a 40 coin), water-clear, cut square and its ends '
-                    'polished; bonded into the base\'s socket (Acrifix 1R 0192 or Weld-On 16); 210 long holds 33 coins']),
+                    'polished; bonded into the base\'s socket (Acrifix 1R 0192 or Weld-On 16); 210 long holds 33 coins',
+                    'the back half of its bore bead-blasted (masked along two lines 180 apart): lit from its foot, it '
+                    'glows behind the queue']),
         Part('ring', ring, Machined('brass', 'lathe'), finish='brass', group='tube',
              notes=['brass, satin: a cap ring over the tube\'s top, bonded; the coins drop in through it']),
+        Part('plate', plate, Machined('aluminium', 'lathe'), finish='aluminium', group='light', inside=True,
+             notes=['aluminium 3 thick, the LED disc bonded to it with thermal tape; held in the pocket by three M3 '
+                    'screws into brass inserts; the cable through a grommet into the channel']),
+        Part('led', led, Bought('column-led'), finish='led', group='light', inside=True),
+        Part('diffuser', diffuser, Machined('cast-acrylic', 'lathe'), finish='opal', group='light', inside=True,
+             notes=['opal cast acrylic 2 thick, bonded under the window: no hot spot under the coins']),
+        Part('cable', None, Bought('column-cable'), render=False),
         Part('feet', None, Bought('column-feet'), render=False),
     ], floor
 
@@ -513,6 +539,12 @@ def materials():
         'print-white': {'preset': 'satin_paint', 'color': '#F4F3EF', 'roughness': 0.5, 'specular': 0.2},
         'clear': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#EEF4F4', 'radius': 0.05, 'roughness': 0.02},
         'smoke-base': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#6E6B72', 'radius': 0.012, 'roughness': 0.03},
+        # the column's light: off unless a shot (or the kit piece's base_glow) turns it up
+        'led': {'preset': 'emit', 'color': '#FFC48A', 'strength': 0.0},
+        'tube-frost': {'preset': 'frosted', 'color': '#F4F2EE', 'absorb': '#F2EEE6', 'roughness': 0.45, 'radius': 0.02,
+                       'clear': 0.35, 'glow': 0.0, 'glow_color': '#FFB070'},
+        'opal': {'preset': 'frosted', 'color': '#F6F3EE', 'absorb': '#F1E6D6', 'roughness': 0.5, 'radius': 0.01, 'clear': 0.05},
+        'aluminium': {'preset': 'metal', 'color': '#BFC1C2', 'roughness': 0.35},
         'brass': {'preset': 'metal', 'color': '#B8945A', 'roughness': 0.3},
     }
     for name, col in zip(E.RING_NAMES, E.RING):

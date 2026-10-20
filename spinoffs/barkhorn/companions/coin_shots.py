@@ -196,6 +196,25 @@ def fills(flavours=('ice', 'acid', 'haze')):
     return studio('EARFcoin: the engraving\'s fill', [1200, 1000], cam, props, samples=128)
 
 
+def column_lit(glow=1.0):
+    """The column's light, a proof (the lead: in Planet's bar the stack read dark): the same frame in a dim bar's light,
+    the LED in the base on, the queue glowing in its tints."""
+    s = column()
+    s['title'] = 'EARFcoin: the request column, lit'
+    for pr in s['set']['props']:
+        if pr.get('fn') == 'column':
+            pr['base_glow'] = glow
+    s['set']['color'] = '#2A2622'
+    s['sky']['strength'] = 0.08
+    for k, l in s['lights'].items():
+        if 'irradiance' in l:
+            l['irradiance'] = round(l['irradiance'] * 0.12, 3)
+    s['render']['white_balance_k'] = 3400
+    # the light climbs the stack through two faces a coin: the engine's 8 transmission bounces stopped it at the slot
+    s['render'].update(bounces=64, transmission_bounces=64, caustics_refractive=True)
+    return s
+
+
 FRAMES = {f'proof-{f[0]}-{e}': (lambda f=f, e=e, c=c: proof(f, e, c))
           for f, c in (('engraved', 'ice'), ('printed', 'fog'), ('cast', 'ember')) for e in ('plain', 'reeded')}
 FRAMES['proof-e-smoke'] = lambda: proof('engraved', 'reeded', 'smoke')
@@ -205,6 +224,7 @@ FRAMES['hero'] = lambda: hero()
 FRAMES['hero-r3-napkin'] = lambda: hero_napkin()
 FRAMES['eight'] = eight
 FRAMES['column'] = lambda: column()
+FRAMES['column-lit'] = lambda: column_lit()
 
 
 def sheet(kind):

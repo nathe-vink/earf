@@ -7,6 +7,11 @@
   0.0
  ],
  "materials": {
+  "aluminium": {
+   "preset": "metal",
+   "color": "#BFC1C2",
+   "roughness": 0.35
+  },
   "brass": {
    "preset": "metal",
    "color": "#B8945A",
@@ -19,26 +24,65 @@
    "radius": 0.05,
    "roughness": 0.02
   },
+  "led": {
+   "preset": "emit",
+   "color": "#FFC48A",
+   "strength": 0.0
+  },
+  "opal": {
+   "preset": "frosted",
+   "color": "#F6F3EE",
+   "absorb": "#F1E6D6",
+   "roughness": 0.5,
+   "radius": 0.01,
+   "clear": 0.05
+  },
   "smoke-base": {
    "preset": "clear_resin",
    "color": "#FFFFFF",
    "deep": "#6E6B72",
    "radius": 0.012,
    "roughness": 0.03
+  },
+  "tube-frost": {
+   "preset": "frosted",
+   "color": "#F4F2EE",
+   "absorb": "#F2EEE6",
+   "roughness": 0.45,
+   "radius": 0.02,
+   "clear": 0.35,
+   "glow": 0.0,
+   "glow_color": "#FFB070"
   }
  },
  "assign": [
+  {
+   "match": "plate",
+   "material": "aluminium"
+  },
   {
    "match": "ring",
    "material": "brass"
   },
   {
-   "match": "tube",
+   "match": "tube-front",
    "material": "clear"
+  },
+  {
+   "match": "led",
+   "material": "led"
+  },
+  {
+   "match": "diffuser",
+   "material": "opal"
   },
   {
    "match": "base",
    "material": "smoke-base"
+  },
+  {
+   "match": "tube-back",
+   "material": "tube-frost"
   }
  ],
  "flavours": {
@@ -80,7 +124,14 @@
   "smoke": {
    "deep": "#A9A7AD",
    "inlay": "#78767E",
-   "swatch": "#34323A"
+   "swatch": "#34323A",
+   "materials": {
+    "fill": {
+     "color": "#EEEEEA",
+     "roughness": 0.8,
+     "specular": 0.2
+    }
+   }
   }
  }
 }

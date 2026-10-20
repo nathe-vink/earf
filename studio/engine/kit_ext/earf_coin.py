@@ -12,7 +12,8 @@ face and edge in one GLB; companions/out-coin-column), with their materials in a
 - stack: `spots` the stacks' feet; `n` coins each, `flavours` a list cycled from the bottom (or one `flavour`), a
   little `jitter` (mm) and turn between coins as a hand leaves them, `seed`;
 - column: `spots` where the request column stands; `coins` the queue's flavours from the bottom (the next song
-  first), `out` (mm) how far the lowest is pushed out of its slot at the front, `rotate_z`;
+  first), `out` (mm) how far the lowest is pushed out of its slot at the front, `rotate_z`; `base_glow` the light in
+  its base (1.0 on as designed, 0 off): the LED, and the tube's frosted back half glowing behind the queue;
 - fan: `spots` where the first coin lies; the coins dealt along a gentle arc, `s` (mm, 30) apart, each resting its
   trailing edge on the one before (the tilt solved from that), `flavours` in order, `arc` its radius (mm, 320; 0 for a
   line), `heading` (deg) the direction it runs;
@@ -187,7 +188,14 @@ def stack(bpy, name, p, kit):
 def column(bpy, name, p, kit):
     """The request column, its queue stacked from the slot's floor up; the lowest pushed `out` mm at the front."""
     pdef, tpl = _templates(bpy, 'column')
-    cm = _Mats(bpy, 'column', p)
+    # base_glow: the light in the base, on (1.0 as designed; 0 off): the LED disc, and the tube's frosted back half,
+    # lit from its foot, glowing behind the queue (its frost carries its own glow, as Planet's lamps' liners do)
+    glow = p.get('base_glow', 0.0)
+    over = dict(p.get('materials', {}))
+    over['led'] = {**over.get('led', {}), 'strength': 20.0 * glow}
+    over['tube-frost'] = {**over.get('tube-frost', {}), 'glow': 0.6 * glow}
+    cp = dict(p, materials=over)
+    cm = _Mats(bpy, 'column', cp)
     mats = _Mats(bpy, 'coin', p)
     face, edge = p.get('face', 'engraved'), p.get('edge', 'plain')
     rnd = random.Random(p.get('seed', 5))

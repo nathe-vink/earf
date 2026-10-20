@@ -495,7 +495,16 @@ catches the light along the edge and reads as currency in the hand; it costs abo
   - Coins drop in at the top. A slot 6.8 tall through the base under the tube lets one coin out at the front, and the
     tube holds the next one back.
   - A finger through the notch at the back pushes the lowest coin out, so the queue plays from the bottom up.
-  - **$322 one-off** at the kit's shop rates (`out-earf-coin-column/bom.md`).
+  - **The light** (the lead, for Planet: in the bar the stack read as a dark column):
+    - A 2700 K LED disc, 44 across, about 1.5 W at 5 V, from USB-C with an inline dimmer.
+    - It sits on an aluminium plate in a 50 mm pocket milled up from under the base, under an opal diffuser and a
+      3.2 mm window of the Smoke, with a 7 × 4 channel for the cable out at the back.
+    - The tube's back half is bead-blasted inside. Lit from its foot, it glows behind the queue, so the coins read in
+      their tints, backlit, like bottles on a lit shelf.
+    - The frost is the part that matters. Lit only from below, polished clear coins send almost none of the light out
+      sideways: the stack stayed dark but for the slot (proofs, 2026-10-20).
+  - **$438 one-off** at the kit's shop rates, with the light (`out-earf-coin-column/bom.md`; $322 without it).
+    Proof: `renders/2026-10-20/barkhorn/coin/column-lit.png`.
 - **BOM:** a boxed set of eight is **$33** at the kit's rates (`out-earf-coin/bom.md`, sheet plus the shop's work as
   estimated lines, plus a $9 box). Per coin, by run (`coin.py --costs`; estimates from shop rates, not quotes):
 
@@ -534,6 +543,8 @@ a keepsake, which is the point: a bar token you'd want to keep.
 - `fan`: coins dealt along an arc, each resting on the one before. The tilt is solved from that contact, so it
   settles at about 11.5° for a 30 mm spread.
 - `column`: the request column with its queue (`coins`, from the bottom), and the next coin pushed `out` of its slot.
+  `base_glow` turns its light on (1.0 as designed): the LED, and the tube's frosted back half glowing behind the
+  queue.
 - `bowl`: the bowl at the door, `n` coins in it in the eight tints.
 - `flavour_materials` overrides one tint's materials. Checked: `renders/2026-10-20/barkhorn/coin/kit-check.png` (a bowl and a stack). The GLBs are committed (`out-coin-study/render/`,
   `out-coin-column/render/`).
