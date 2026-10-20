@@ -169,7 +169,8 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # 36 deg; haze 0.0015
           'camera': {'position': [11.5, 1.85, 1.12], 'target': [16.4, 3.1, 0.98], 'lens_mm': 32, 'level': True,
                      'fstop': 5.6, 'focus': [16.4, 3.05, 1.0]},
-          'settings': {'exposure': 3.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 220.0,
+          # p5 at 3.3 read 8.0 (the Orbs down, the spots wider): exposure 4.3, retaken before the critics
+          'settings': {'exposure': 4.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 220.0,
                        'altar_cone': 36.0, 'altar_z': 0.9, 'haze': 0.0015, 'sphere_w': 1.2, 'sphere_glow': 0.3,
                        'niche_strip': 9.0, 'plinth': 0.3, 'spk_back': 10.0, 'look': 'AgX - High Contrast'}}
 NAMES = {'smoke': 'Smoke', 'ember': 'Ember', 'ice': 'Ice', 'mixed': 'Mixed'}
