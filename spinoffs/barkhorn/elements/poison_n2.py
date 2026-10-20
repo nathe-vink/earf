@@ -51,7 +51,8 @@ def set_props():
     props = [piece('box', size=[400.0, 260.0, 0.05], position=[0.0, 60.0, -0.85], material='card', color='#1E2614'),
              ext('acid_rain_el', 'puddle', size=[400.0, 260.0], position=[0.0, 60.0, 0.0], z=WATER, ring=0.7, ripple=0.35, keep=1.0,
                  roughness=0.02, ripple_m=0.0012, tint_lin=(0.42, 0.5, 0.3), seed=9),
-             ext('poison_p_el', 'algae_water', position=[0.0, 60.0, WATER + 0.004], size=[400.0, 260.0], cover=0.62, drift=20.0, scum_rough=0.35, float=True,
+             ext('poison_p_el', 'algae_water', position=[0.0, 60.0, WATER + 0.004], size=[400.0, 260.0], cover=0.7, drift=20.0, scum_rough=0.35, float=True,
+                 edge=[0.06, 0.55], lane=[0.45, 1.6],    # pass 7: soft, oily edges; open water along the jetty
                  streak=1.7, scale=0.12, clots=0.45, clot_scale=1.4,
                  greens=['#3E5A10', '#7A9A1C', '#C2D040']),          # pass 4: pea-soup yellow-green, off the speaker's bottle green;
                                                                   # pass 5: more open, glossy water between, a wet sheen on the scum
@@ -90,7 +91,7 @@ def lights():
     the sun's side that lights the speaker alone."""
     x, y = SPK
     t = lambda z: (x, y, DECK + z)
-    L = {'bounce': area(-40, 8, 3.5, 4.0, '#F1E6B8', size=(2.0, 2.0), target=t(0.5)),
+    L = {'bounce': area(-40, 8, 3.5, 2.5, '#F1E6B8', size=(2.0, 2.0), target=t(0.5)),
          'throat': area(-8, 4, 2.2, 0.5, '#F1E6B8', size=(0.5, 0.4), target=t(1.15)),
          'low': area(-5, 3, 2.5, 1.5, '#F1E6B8', size=(0.5, 0.5), target=t(0.3)),
          'rim': area(-130, 5, 3.0, 9.0, '#F6DDB0', size=(1.5, 1.5), target=t(0.5))}

@@ -471,8 +471,19 @@ def algae_water(bpy, name, p, kit):
         out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
         tr = nt.nodes.new('ShaderNodeBsdfTransparent'); mx = nt.nodes.new('ShaderNodeMixShader')
         op = nt.nodes.new('ShaderNodeMapRange'); L(cut.outputs['Result'], op.inputs['Value'])
-        op.inputs['From Min'].default_value = 0.15; op.inputs['From Max'].default_value = 0.5
-        L(op.outputs['Result'], mx.inputs['Fac']); L(tr.outputs['BSDF'], mx.inputs[1]); L(b.outputs['BSDF'], mx.inputs[2])
+        op.inputs['From Min'].default_value, op.inputs['From Max'].default_value = p.get('edge', [0.15, 0.5])
+        fac = op.outputs['Result']
+        if p.get('lane'):                                 # [x, half-width]: open water along a line of constant x
+            lx, lw = p['lane']
+            sx = nt.nodes.new('ShaderNodeSeparateXYZ'); L(tc.outputs['Object'], sx.inputs['Vector'])
+            dx = nt.nodes.new('ShaderNodeMath'); dx.operation = 'SUBTRACT'; L(sx.outputs['X'], dx.inputs[0])
+            dx.inputs[1].default_value = lx - p.get('position', [0, 0, 0])[0]
+            ab = nt.nodes.new('ShaderNodeMath'); ab.operation = 'ABSOLUTE'; L(dx.outputs['Value'], ab.inputs[0])
+            ln = nt.nodes.new('ShaderNodeMapRange'); ln.interpolation_type = 'SMOOTHSTEP'; L(ab.outputs['Value'], ln.inputs['Value'])
+            ln.inputs['From Min'].default_value = lw; ln.inputs['From Max'].default_value = lw * 2.5
+            lm = nt.nodes.new('ShaderNodeMath'); lm.operation = 'MULTIPLY'; L(fac, lm.inputs[0]); L(ln.outputs['Result'], lm.inputs[1])
+            fac = lm.outputs['Value']
+        L(fac, mx.inputs['Fac']); L(tr.outputs['BSDF'], mx.inputs[1]); L(b.outputs['BSDF'], mx.inputs[2])
         L(mx.outputs['Shader'], out.inputs['Surface'])
     bm = bmesh.new()
     vs = [bm.verts.new(c) for c in ((-w / 2, -d / 2, 0), (w / 2, -d / 2, 0), (w / 2, d / 2, 0), (-w / 2, d / 2, 0))]
@@ -489,7 +500,7 @@ def sign_path(kind='algae'):
     """A warning sign's face: weathered white enamel, a red DANGER band, the warning (generic, no agency's mark)."""
     from PIL import Image, ImageDraw
     os.makedirs(LABEL_DIR, exist_ok=True)
-    path = os.path.join(LABEL_DIR, f'sign-{kind}-2.png')
+    path = os.path.join(LABEL_DIR, f'sign-{kind}-3.png')
     if os.path.exists(path):
         return path
     # as real bloom signs set it: the hazard the biggest words, under a short DANGER band
@@ -514,7 +525,7 @@ def sign_path(kind='algae'):
     fit(b, 365, 74, '#1A1A1A')
     fit(c, 470, 32, '#222222')
     fit(e, 512, 32, '#222222')
-    img = _age(img, 21, 2.0)
+    img = _age(img, 21, 3.5)                              # weathered hard: the type faded and spotted, not vector-crisp
     img.save(path)
     return path
 

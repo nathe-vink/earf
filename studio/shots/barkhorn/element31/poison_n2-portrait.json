@@ -77,10 +77,18 @@
      400.0,
      260.0
     ],
-    "cover": 0.62,
+    "cover": 0.7,
     "drift": 20.0,
     "scum_rough": 0.35,
     "float": true,
+    "edge": [
+     0.06,
+     0.55
+    ],
+    "lane": [
+     0.45,
+     1.6
+    ],
     "streak": 1.7,
     "scale": 0.12,
     "clots": 0.45,
@@ -642,7 +650,7 @@
     11.6,
     0.94
    ],
-   "irradiance": 4.0,
+   "irradiance": 2.5,
    "color": "#F1E6B8",
    "orbit": {
     "azimuth_deg": -40,
