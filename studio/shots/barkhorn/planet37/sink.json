@@ -124,7 +124,7 @@
     "disc_lamp": 2.0,
     "name_glow": 0.25,
     "niche_strip": 6.0,
-    "sink_glow": 6.0,
+    "sink_glow": 4.0,
     "sink_radius": 0.12,
     "screen_glow": 1.0,
     "screen_tint": "#FFA060",
@@ -139,7 +139,7 @@
     "flame": 60.0,
     "windows_lit": 0.5,
     "sconce_w": 10.0,
-    "sink_glow_col": "#FF9A4A",
+    "sink_glow_col": "#FF7A1E",
     "spk_niche_strip": 3.0,
     "plinth_bar": 0.5,
     "plinth_bar_col": "#FFB060",
@@ -772,8 +772,8 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 1.0,
-  "white_balance_k": 2950,
+  "exposure": 0.75,
+  "white_balance_k": 3300,
   "white_balance_tint": 0.0
  },
  "materials": {
