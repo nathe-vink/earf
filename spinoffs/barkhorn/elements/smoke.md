@@ -331,3 +331,11 @@ Fixes common to both:
 - Read: "a dark, boxy loudspeaker… stands alone on a cracked, dry lakebed, with a thick column of black smoke rising from the hazy horizon behind it". No mushroom ("no distinct cap on a narrow stem"), no figure, no face.
 - Remaining tells: the plume is "a soft, uniform volumetric blob" without fine turbulence, the crack tile still repeats near the camera, the hills read as a "blurred backdrop band", and the horn's top is still a white field.
 - No Smoke horn preset exists in this repo or on main (searched), so that fix is not applied.
+
+**E6: p3 against p5, then p6 (the last pass under the stop rule).**
+- **p3 against p5:** the blind duel on two critics, order swapped, came out 4.5 v 5.5 and 5.5 v 4.5. Each judge preferred the image shown second, so it is a tie with a position bias, and p3, the incumbent with the owner, stands.
+- **p6** (`4400ad6d4b85ddd832525dd55e4d3e1ad36fd431`) put p3's low warm sun back (1.75°) and graded the sky warm near the horizon. It added turbulent, brown-grey plume edges, gullies on the near fold, salt patches near the camera, and a black flag high behind the camera so the horn's resin mirrors dark there. (From a 0.8 m camera, the horn's faces mirror the sky behind the camera, not above the speaker.)
+- **p6 against p3:** p3 5.5 v p6 4.5, then p6 5.5 v p3 5.0. Split again, the same position bias, so no 0.5 win on both.
+- **p6 read:** "a thick plume of black smoke rises from the horizon behind it", but the shapes check failed: "it reads easily as an explosion or a mushroom cloud". The billowing, sheared top is the cause.
+- **Result:** p6 fails the gate. E6 stops at p3 and its set is restored to p3 (88532b0). The ridge and gully pieces stay in smoke_el for later use.
+- **On the critic:** two passes in a row have split 1–1 with each judge preferring the second image. At this level the paired duel measures order more than quality.
