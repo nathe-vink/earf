@@ -1,0 +1,363 @@
+{
+ "stage1": {
+  "impression": "A symmetrical, dim, red-washed view of two red speakers in a lit timber niche, framed over the backs of velvet tub chairs with two glowing crystal-ball lamps in the foreground. It reads as a competent CG mockup, not a photograph. The niche's end-grain wall reads as a regular square tile grid with soft, uniform blotches. The chairs are smooth, untextured shells. The ceiling and upper walls are a flat dead field. The speakers are small and recessed, so the eye goes first to the hot foreground orbs and the table tops they blow out. As a specific place it is halfway there: the altar idea is legible, but at this size and with this surfacing it would read as a generic dark lounge render, and a magazine would not publish it.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember pair must be the hero at a glance: closer, larger in frame (each speaker at least about 1/4 of the frame height), with light through the acrylic visibly glowing at the edges, the speaker region lum_median >= 60.",
+  "The end-grain niche must read as real oak end grain at its real scale: irregular block sizes, visible growth rings and checks, and no regular square grid.",
+  "The velvet chairs and carpet need real pile and nap (sheen falloff at the silhouettes, crushed-pile variation) instead of smooth CG shells.",
+  "No blown practicals: the Orb lamps and the tables under them must hold detail (clip_pct < 2 on the table tops), and their smoked acrylic must read as tinted, thick and glossy, not as white crystal balls.",
+  "Pools of light and atmosphere: the altar spots should form visible pools on the plinths and floor, and a little haze should show the beams. The ceiling and upper walls must not be a featureless flat field.",
+  "Signs of life inside the zone: a glass on a hex table, a record sleeve, a coat on a chair."
+ ],
+ "defects": [
+  {
+   "region": [
+    175,
+    90,
+    600,
+    300
+   ],
+   "what": "End-grain niche wall reads as a regular square tile grid with uniform grout-like lines and soft procedural blotches, a tiling texture with no ring or check detail. Flat light: lum_range 19.8."
+  },
+  {
+   "region": [
+    130,
+    360,
+    225,
+    400
+   ],
+   "what": "The hex table top under the left Orb is blown: clip_pct 17.8, median 191. The table reads as a white slab."
+  },
+  {
+   "region": [
+    165,
+    320,
+    215,
+    375
+   ],
+   "what": "The left Orb reads as a clear crystal ball with a hot core, not smoked tinted acrylic with a frosted liner. 2.8% clipped."
+  },
+  {
+   "region": [
+    520,
+    390,
+    610,
+    470
+   ],
+   "what": "The right foreground Orb is large, hot (1.8% clip) and cut by the frame edge. It pulls the eye away from the altar."
+  },
+  {
+   "region": [
+    230,
+    330,
+    490,
+    480
+   ],
+   "what": "The central tub chair back is a smooth, featureless red shell with no velvet nap or pile, and it blocks the lower centre of the frame."
+  },
+  {
+   "region": [
+    0,
+    300,
+    160,
+    480
+   ],
+   "what": "The left chairs are smooth CG volumes, with no seams, piping or fabric sheen."
+  },
+  {
+   "region": [
+    40,
+    0,
+    680,
+    40
+   ],
+   "what": "The ceiling and upper wall are a dead flat field (lum_range 4.2) with no texture or light."
+  },
+  {
+   "region": [
+    200,
+    105,
+    310,
+    300
+   ],
+   "what": "The felt panels behind the speakers are flat red rectangles with a hard red hotspot at the top. They read as CG cards."
+  },
+  {
+   "region": [
+    210,
+    195,
+    280,
+    300
+   ],
+   "what": "The speakers are small in frame and the acrylic shows little glow or edge light. Interior parts look busy and noisy at 1:1."
+  },
+  {
+   "region": [
+    0,
+    70,
+    6,
+    250
+   ],
+   "what": "A pale sliver at the left frame edge: a stray object or the edge of a wall."
+  },
+  {
+   "region": [
+    210,
+    295,
+    280,
+    330
+   ],
+   "what": "The oak plinths are flat-lit, with a weak grain read. The plinth tops show no pool from the altar spots."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The altar is small and distant behind a wall of chair backs, so the speakers do not read as the hero.",
+   "evidence": {
+    "region": [
+     210,
+     195,
+     530,
+     305
+    ],
+    "measured": "each speaker cabinet is about 110 px of a 480 px frame height (23%) and partly hidden; the central chair occupies 230-490 x 330-480"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "[11.45, 2.2, 1.15] m, 28 mm, target [16.6, 3.1, 1.0]",
+    "to": "about [13.3, 2.4, 1.05] m, 40 mm, target [16.6, 3.0, 0.95], focus on the nearer speaker's horn; shift off-axis about 0.4 m so one chair and one Orb frame the edge rather than block the centre"
+   },
+   "expected": "The speakers fill about 40% of the frame height, chair backs fall to the lower fifth at one side, and the altar reads at a glance.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Orb lamps blow out themselves and the table tops under them, reading as crystal balls and stealing the eye.",
+   "evidence": {
+    "region": [
+     130,
+     360,
+     225,
+     400
+    ],
+    "measured": "table top clip_pct 17.8, lum_median 191; orb region clip 2.8%"
+   },
+   "change": {
+    "setting": "each Orb W / glow",
+    "from": "10.0 W, glow 1.1",
+    "to": "3.5 W, glow 0.45"
+   },
+   "expected": "The Orbs read as smoked, tinted glows with a visible frosted liner, and the table tops hold grain at a warm mid-tone.",
+   "accept": {
+    "region": [
+     130,
+     360,
+     225,
+     400
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2.0
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The speakers and plinths are underlit relative to the foreground, and the acrylic shows no light through it.",
+   "evidence": {
+    "region": [
+     450,
+     195,
+     530,
+     305
+    ],
+    "measured": "right speaker lum_median 42.7 (target >= 45); the left is 55"
+   },
+   "change": {
+    "setting": "altar spots and the lamps on each Ember speaker",
+    "from": "2 x spot 80 W, cone 28 deg; area 1.0 W/m2",
+    "to": "2 x spot 140 W, cone 20 deg, aimed at each speaker's top edge so the pool lands on the plinth; speaker area lamps 2.0 W/m2"
+   },
+   "expected": "The speakers become the brightest non-practical objects, with glowing acrylic edges and a pool on each plinth.",
+   "accept": {
+    "region": [
+     450,
+     195,
+     530,
+     305
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The end-grain niche reads as a square tile grid, a tiling texture rather than oak end-grain blocks.",
+   "evidence": {
+    "region": [
+     300,
+     90,
+     430,
+     300
+    ],
+    "measured": "a regular grid of about 13 px pitch with uniform dark lines; lum_range 19.8; no ring detail at 3x crop"
+   },
+   "change": {
+    "setting": "end-grain material finish",
+    "from": "uniform blocks with a procedural blotch",
+    "to": "per-block random rotation and tone (+/-15% value), growth-ring texture per block, radial checks, a slightly darker oiled finish with low roughness variation; break the joint lines to hairline, uneven depth"
+   },
+   "expected": "The wall reads as real end-grain parquet at scale under grazing light from the niche strip.",
+   "accept": {
+    "region": [
+     300,
+     90,
+     430,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The niche wall has no grazing light, so its texture and the room's depth stay flat.",
+   "evidence": {
+    "region": [
+     300,
+     90,
+     430,
+     300
+    ],
+    "measured": "y-profile 27 to 37, almost flat"
+   },
+   "change": {
+    "setting": "lit niche strip",
+    "from": "3.0",
+    "to": "6.0, kept at the niche's top edge so it grazes down the end grain; add haze density 0.012"
+   },
+   "expected": "A top-to-bottom falloff on the niche wall, end-grain relief visible near the top, and a soft beam read in the haze.",
+   "accept": {
+    "region": [
+     300,
+     90,
+     430,
+     300
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The velvet tub chairs read as smooth plastic shells.",
+   "evidence": {
+    "region": [
+     230,
+     330,
+     490,
+     480
+    ],
+    "measured": "a smooth gradient, no nap sheen at the silhouette, no seams"
+   },
+   "change": {
+    "setting": "chair and carpet finish (velvet)",
+    "from": "plain diffuse red",
+    "to": "velvet sheen (rim brightening at grazing angles, sheen tint warm), fine pile noise with crushed-pile patches, roughness 0.8; carpet with visible wool loop"
+   },
+   "expected": "The chairs show a bright rim and a darker face, as real velvet does, and read as upholstered at 1:1.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The zone looks unused: no glasses, sleeves or coats are visible in it.",
+   "evidence": {
+    "region": [
+     130,
+     360,
+     720,
+     480
+    ],
+    "measured": "the hex table tops are bare apart from the lamps"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props at the counter and panels only",
+    "to": "a half-full rocks glass and a coaster on each hex table, a record sleeve leaning on the right plinth, a jacket over one tub chair arm"
+   },
+   "expected": "Signs of life in the foreground, with small highlights on the glass.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The upper frame is a dead, featureless band and the stray pale sliver at the left edge reads as an error.",
+   "evidence": {
+    "region": [
+     40,
+     0,
+     680,
+     40
+    ],
+    "measured": "lum_range 4.2; left sliver 0-6 x 70-250 at median 46 against a darker surround"
+   },
+   "change": {
+    "setting": "exposure / grade, camera framing",
+    "from": "exposure 1.5, AgX Medium High Contrast",
+    "to": "exposure 1.3 with a slight lift in the shadows (toe) so the beams and ceiling texture separate; reframe or crop out the left-edge sliver"
+   },
+   "expected": "The ceiling shows a soft gradient and grain, there is no edge artefact, and the frame median stays at about 25-35.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     40
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the felt panels behind the speakers a less saturated or darker colour so the speakers separate from them.",
+   "why": "The zone's colour (oxblood) and the felt behind the altar are fixed by the room's design."
+  },
+  {
+   "request": "Make the Orb lamps' shells more clearly smoked or tinted as objects.",
+   "why": "EARF's lamps are fixed products. Only their light output and glow may change (handled in c2)."
+  },
+  {
+   "request": "Simplify the visible internal parts of the speakers, which read as busy at 1:1.",
+   "why": "The speaker's parts are fixed. Better light through the acrylic (c3) is the allowed remedy."
+  }
+ ],
+ "score_if_fixed": 6.8
+}
