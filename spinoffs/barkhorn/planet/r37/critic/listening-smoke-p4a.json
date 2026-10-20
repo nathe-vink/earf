@@ -1,0 +1,386 @@
+{
+ "stage1": {
+  "impression": "This reads as a dim CG home-cinema showroom, not a photograph of a bar. Two identical speakers sit in dead-black recesses on a wall that looks like square bathroom tile, and the foreground tub chairs are smeared, shapeless pinkish blobs with one blown arm beside a glowing orb. Denoiser smear softens every surface, the floor between the seats and the speakers is a void, and nothing in the frame shows anyone has been here. A magazine would take it for a generic hi-fi room, not a specific place.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The felt panels behind the speakers must read as felt with texture and tone (niche region lum_median 14 to 28), not as black voids (now 6 to 8)",
+  "The end-grain block lining must read as timber end grain with per-block variation in tone and growth rings, not as a uniform square tile grid with dark grout",
+  "The foreground tub chairs must read as espresso velvet with pile and sheen, with no clipping on the near chair (clip_pct < 0.5 in [0,380,140,480], now 5.34)",
+  "The floor and riser between the seats and the altar must carry a falloff pool, not a void (lum_median 16 to 30 in [120,340,720,400], now 11.7)",
+  "A full-resolution frame with no denoiser smear: chair fabric, speaker cabinet edges and the oak plinths crisp at 1:1",
+  "A sign of life in the near ground (a glass, a record sleeve or a coat) and a composition that shows a whole chair and table, not cropped backs",
+  "The smoked tint of the speaker cabinets should read as smoke, a grey-brown veil over the batts, at a glance"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    380,
+    140,
+    480
+   ],
+   "what": "Near chair arm blown out by the Orb (clip 5.34 %), smooth and pinkish-mauve (R97 G69 B65) rather than espresso velvet; no pile texture"
+  },
+  {
+   "region": [
+    280,
+    390,
+    700,
+    480
+   ],
+   "what": "Right foreground chair back is a large, featureless, smeared dark-mauve shape cutting across the bottom of the frame"
+  },
+  {
+   "region": [
+    175,
+    70,
+    310,
+    310
+   ],
+   "what": "Felt panel behind the left speaker reads as a black void (lum_median 8.2); the speaker floats with no depth cue"
+  },
+  {
+   "region": [
+    480,
+    60,
+    630,
+    320
+   ],
+   "what": "Felt panel behind the right speaker is likewise a black void (lum_median 6.3)"
+  },
+  {
+   "region": [
+    300,
+    40,
+    470,
+    330
+   ],
+   "what": "End-grain block lining reads as a uniform bathroom tile grid: regular squares, dark grout, little tone variation (lum_range 25.7)"
+  },
+  {
+   "region": [
+    120,
+    340,
+    720,
+    400
+   ],
+   "what": "Carpet and riser between the seats and the altar are a dead dark band (lum_median 11.7); no step edge or light pool"
+  },
+  {
+   "region": [
+    160,
+    0,
+    190,
+    80
+   ],
+   "what": "Vertical haze shaft from the altar spot reads as a smudge or streak on the lens"
+  },
+  {
+   "region": [
+    570,
+    0,
+    600,
+    80
+   ],
+   "what": "Second haze shaft, same smudge look"
+  },
+  {
+   "region": [
+    180,
+    185,
+    600,
+    325
+   ],
+   "what": "Speakers render as neutral grey and white (R61 G57 B60); the white batts dominate and the smoked cast acrylic barely reads"
+  },
+  {
+   "region": [
+    180,
+    185,
+    268,
+    320
+   ],
+   "what": "Denoiser smear on the cabinet and its reflections at proof scale; the edges and the reflections inside the acrylic are mushy"
+  },
+  {
+   "region": [
+    150,
+    370,
+    230,
+    440
+   ],
+   "what": "The Orb lamp is a soft featureless glowing ball; its tinted shell and frosted liner do not separate"
+  },
+  {
+   "region": [
+    35,
+    0,
+    125,
+    355
+   ],
+   "what": "Left timber pilaster is a smooth, evenly striped wood texture with no checks or end grain; it reads as veneer"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The near Orb blows out the chair arm beside it and tints it mauve, so the most prominent object in the frame is a clipped blob.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     140,
+     480
+    ],
+    "measured": "clip_pct 5.34, lum_p95 245, RGB median 97/69/65"
+   },
+   "change": {
+    "setting": "EARF's lamps: each Orb W and glow",
+    "from": "3.0 W, glow 0.15",
+    "to": "1.2 W, glow 0.08"
+   },
+   "expected": "The chair arm holds texture and a warm gradient; the Orb becomes a small bright practical with a pool on the table top.",
+   "accept": {
+    "region": [
+     0,
+     380,
+     140,
+     480
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The felt behind each speaker gets no light, so the speakers float in black rectangles and the niche loses its depth.",
+   "evidence": {
+    "region": [
+     175,
+     70,
+     310,
+     180
+    ],
+    "measured": "lum_median 8.2 (right niche 6.3), lum_range 16"
+   },
+   "change": {
+    "setting": "add a concealed grazer at each niche head (new lamp)",
+    "from": "none",
+    "to": "2 x linear area, 12 W each, 2700 K, aimed down the felt and the end-grain returns"
+   },
+   "expected": "The felt reads as a soft textured dark-brown surface, brighter at the top and falling off toward the speaker, with the speaker's silhouette clear against it.",
+   "accept": {
+    "region": [
+     175,
+     70,
+     310,
+     180
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     14,
+     28
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The end-grain block lining reads as square bathroom tile with dark grout.",
+   "evidence": {
+    "region": [
+     300,
+     40,
+     470,
+     330
+    ],
+    "measured": "lum_median 25.1, lum_range 25.7: uniform squares, joints darker than the faces"
+   },
+   "change": {
+    "setting": "the oak's stain / end-grain block finish",
+    "from": "a uniform tone per block, dark recessed joints",
+    "to": "a \u00b115 % tone variation per block, visible growth rings and checks, tight joints close to the face tone, a slight relief between blocks"
+   },
+   "expected": "The wall reads as timber end-grain parquet at its real scale; the joint grid recedes.",
+   "accept": {
+    "region": [
+     300,
+     40,
+     470,
+     330
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The floor and the 200 mm riser between the seats and the altar are a dead band, so the zone's room-within-a-room reads as nothing.",
+   "evidence": {
+    "region": [
+     120,
+     340,
+     720,
+     400
+    ],
+    "measured": "lum_median 11.7, lum_p5 6.6"
+   },
+   "change": {
+    "setting": "add a step light under the riser nosing (new lamp), and the altar spots' cone",
+    "from": "no riser light; altar 2 x spot 220 W, cone 30 deg",
+    "to": "a 2700 K linear strip at 4 W/m under the nosing; altar cone 30 to 38 deg so the spill reaches the plinth fronts and the carpet"
+   },
+   "expected": "A thin bright line marks the riser edge, with a soft pool on the carpet in front of the plinths.",
+   "accept": {
+    "region": [
+     120,
+     340,
+     720,
+     400
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     16,
+     30
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "Two cropped chair backs fill the bottom third as shapeless masses, and the frame reads as a home cinema seen from behind the sofa.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     720,
+     480
+    ],
+    "measured": "bottom profile bins 48.9/75.6/70.3, dominated by out-of-focus chair backs"
+   },
+   "change": {
+    "setting": "camera position, target and lens",
+    "from": "[11.8, 2.5, 1.15] to [16.4, 3.2, 1.0], 35 mm",
+    "to": "[11.4, 1.6, 1.05] to [16.4, 3.1, 0.95], 32 mm: shift right and back so one whole tub chair with its hex table, Orb and glass sits at the lower left third, the pair framed between it and the right wall"
+   },
+   "expected": "One complete chair and table in the near ground, the altar in clear view, specific furniture rather than anonymous backs.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "Denoiser smear softens the chairs, the speaker cabinets and the acrylic reflections, which says render at once.",
+   "evidence": {
+    "region": [
+     180,
+     185,
+     268,
+     320
+    ],
+    "measured": "the cabinet edges and reflections are mushy at 3x; the chair surfaces are plasticky smooth"
+   },
+   "change": {
+    "setting": "render samples, adaptive, frame scale; post grain",
+    "from": "256 samples, adaptive 0.02, proof scale 0.3",
+    "to": "512 samples, adaptive 0.01, full 2400 x 1600; add fine luminance grain (ISO 800 look) in post"
+   },
+   "expected": "The velvet pile, oak grain and cabinet edges are crisp at 1:1; the shadows carry grain, not smear.",
+   "accept": {
+    "region": [
+     180,
+     185,
+     268,
+     320
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": "<=",
+    "value": 2
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "There is no sign of life near the camera, so the room reads as a showroom.",
+   "evidence": {
+    "region": [
+     150,
+     370,
+     280,
+     480
+    ],
+    "measured": "the hex table carries only the Orb; no glass, sleeve or coat in frame"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props on the counter only",
+    "to": "a half-drunk rocks glass and a record sleeve on the near hex table; a coat or scarf over the near chair's arm"
+   },
+   "expected": "A lived-in near ground, with the glass catching a small highlight from the Orb.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The haze shafts from the altar spots read as vertical smudges on the lens at the top of the frame.",
+   "evidence": {
+    "region": [
+     160,
+     0,
+     190,
+     80
+    ],
+    "measured": "two isolated pale vertical streaks at x about 175 and 585, top of frame"
+   },
+   "change": {
+    "setting": "haze density",
+    "from": "0.003 per metre",
+    "to": "0.0015 per metre"
+   },
+   "expected": "The haze softens the background evenly without reading as discrete streaks.",
+   "accept": {
+    "region": [
+     160,
+     0,
+     190,
+     80
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 45
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Smoke cabinets read darker and more tinted, so the white batts show less",
+   "why": "The speaker's colour and parts are fixed; only the altar spots' level and angle may change, and c2 and c4 rebalance them."
+  },
+  {
+   "request": "Replace the square end-grain block grid behind the altar with limewash or board-formed concrete",
+   "why": "The niche lining is the room's design as the card fixes it; c3 changes only its finish."
+  },
+  {
+   "request": "Shoot only one speaker, or stagger the pair, so the frame does not read as two copies of one model",
+   "why": "The listening pair on the altar is the room's design; the camera change in c5 can only reduce the symmetry."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

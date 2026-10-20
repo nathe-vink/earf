@@ -6,18 +6,18 @@
  ],
  "camera": {
   "position": [
-   11.8,
-   2.5,
-   1.15
+   11.5,
+   1.85,
+   1.12
   ],
   "target": [
    16.4,
-   3.2,
-   1.0
+   3.1,
+   0.98
   ],
-  "lens_mm": 35,
+  "lens_mm": 32,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 5.6,
   "focus": [
    16.4,
    3.05,
@@ -117,13 +117,13 @@
     "colourway": "neutral",
     "dome_w": 30.0,
     "dome_glow": 1.1,
-    "sphere_w": 3.0,
-    "sphere_glow": 0.55,
+    "sphere_w": 1.2,
+    "sphere_glow": 0.3,
     "disc_col": "#FFD2A0",
     "disc_glow": 0.06,
     "disc_lamp": 2.0,
     "name_glow": 0.25,
-    "niche_strip": 5.0,
+    "niche_strip": 9.0,
     "sink_glow": 0.8,
     "screen_glow": 0.35,
     "screen_tint": "#FFA060",
@@ -139,9 +139,9 @@
     "windows_lit": 0.5,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
-    "plinth_bar": 0.25,
+    "plinth_bar": 0.15,
     "plinth_bar_col": "#FFB060",
-    "plinth_listen": 0.25,
+    "plinth_listen": 0.15,
     "plinth_listen_col": "#FFB060"
    },
    {
@@ -268,9 +268,9 @@
       0.66
      ]
     ],
-    "lamp_w": 3.0,
+    "lamp_w": 1.2,
     "lamp_k": 2700,
-    "shade_glow": 0.15,
+    "shade_glow": 0.0818181818181818,
     "noshadow": "shell|liner|skin"
    }
   ]
@@ -586,7 +586,7 @@
     1.1
    ],
    "power_w": 220.0,
-   "cone_deg": 30.0,
+   "cone_deg": 36.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -605,7 +605,7 @@
     1.1
    ],
    "power_w": 220.0,
-   "cone_deg": 30.0,
+   "cone_deg": 36.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -646,7 +646,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.75,
+   "irradiance": 0.45,
    "color": "#FFB060",
    "camera": false,
    "receivers": [
@@ -669,7 +669,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.75,
+   "irradiance": 0.45,
    "color": "#FFB060",
    "camera": false,
    "receivers": [
@@ -692,7 +692,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.75,
+   "irradiance": 0.45,
    "color": "#FFB060",
    "camera": false,
    "receivers": [
@@ -715,7 +715,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.75,
+   "irradiance": 0.45,
    "color": "#FFB060",
    "camera": false,
    "receivers": [
@@ -770,7 +770,7 @@
    6.05,
    3.32
   ],
-  "density": 0.003,
+  "density": 0.0015,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },

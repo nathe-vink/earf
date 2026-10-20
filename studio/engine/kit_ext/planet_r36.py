@@ -117,7 +117,7 @@ def carpet(bpy, colour, name):
     return _M[name]
 
 
-def end_grain(bpy, name='oak-endgrain'):
+def end_grain(bpy, name='oak-endgrain', lo='#1E140D', hi='#8A6242'):
     """End-grain oak: growth rings round random hearts (one per block, more or less), checks, tone varying block to
     block, a satin sheen."""
     if name in _M:
@@ -137,8 +137,8 @@ def end_grain(bpy, name='oak-endgrain'):
     tm = nt.nodes.new('ShaderNodeMath'); tm.operation = 'MULTIPLY'; tm.inputs[1].default_value = 0.3   # p3: 0.8 read as camouflage across the blocks
     nt.links.new(tone.outputs['Value'], tm.inputs[0]); nt.links.new(tm.outputs[0], mix.inputs[2])
     cr = nt.nodes.new('ShaderNodeValToRGB')
-    cr.color_ramp.elements[0].position = 0.0; cr.color_ramp.elements[0].color = lin('#1E140D')
-    cr.color_ramp.elements[1].position = 0.9; cr.color_ramp.elements[1].color = lin('#8A6242')
+    cr.color_ramp.elements[0].position = 0.0; cr.color_ramp.elements[0].color = lin(lo)
+    cr.color_ramp.elements[1].position = 0.9; cr.color_ramp.elements[1].color = lin(hi)
     nt.links.new(mix.outputs[0], cr.inputs['Fac'])
     nt.links.new(cr.outputs['Color'], b_.inputs['Base Color'])
     LK.R._set(b_, 'Roughness', 0.55); LK.R._set(b_, 'Coat Weight', 0.15); LK.R._set(b_, 'Coat Roughness', 0.4)
@@ -271,14 +271,18 @@ def altar(bpy, kit, p, objs):
     ch.box(A['x0'], A['y0'], A['z1'], L - 0.002, A['y1'], A['z1'] + 0.06)
     objs.append(ch.object(bpy, dark_oak(bpy, vertical=True), bevel=0.008))
     rnd = random.Random(36); B = A['block']
-    bl = Mesh('altar-endgrain')
+    # r37 listening p4 (both critics: a uniform tile grid): four tones dealt block by block, the joints tighter
+    tones = (('#1E140D', '#8A6242'), ('#170F09', '#6E4A30'), ('#24180F', '#9A7050'), ('#1A110B', '#7A5638'))
+    bls = [Mesh(f'altar-endgrain-{t}') for t in range(len(tones))]
     nz = int((A['z1'] - Z['z']) / B); ny = int((A['y1'] - A['y0']) / B)
     for i in range(ny):
         for k in range(nz):
-            y0 = A['y0'] + i * B + 0.002; z0 = Z['z'] + k * B + 0.002
+            y0 = A['y0'] + i * B + 0.001; z0 = Z['z'] + k * B + 0.001
             dx = rnd.uniform(0.0, 0.012)
-            bl.box(L - 0.075 - dx, y0, z0, L - 0.004, y0 + B - 0.0025, z0 + B - 0.0025)
-    objs.append(bl.object(bpy, end_grain(bpy), bevel=0.003))
+            bls[rnd.randrange(len(tones))].box(L - 0.075 - dx, y0, z0, L - 0.004, y0 + B - 0.0012, z0 + B - 0.0012)
+    for t, (bm_, (lo, hi)) in enumerate(zip(bls, tones)):
+        if bm_.bm.verts:
+            objs.append(bm_.object(bpy, end_grain(bpy, f'oak-endgrain-{t}', lo, hi), bevel=0.002))
     fe = Mesh('altar-felt')
     for role, colour, x, y, z, rot in R.speakers():
         fe.box(L - 0.105, y - 0.55, Z['z'] + 0.25, L - 0.080, y + 0.55, Z['z'] + 2.05)

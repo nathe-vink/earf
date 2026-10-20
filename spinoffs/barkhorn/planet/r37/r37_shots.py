@@ -162,11 +162,16 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # blows its table (15 %); a dead-centre elevation): off axis but far enough back to keep a chair and the Orb
           # table (p2's seated 40 mm lost them); haze 0.003, AgX High Contrast; the spots on the cabinets' middles,
           # 220 W; the linked back lamps 10 W/m2; the Orbs 3 W
-          'camera': {'position': [11.8, 2.5, 1.15], 'target': [16.4, 3.2, 1.0], 'lens_mm': 35, 'level': True,
-                     'fstop': 4.0, 'focus': [16.4, 3.05, 1.0]},
+          # p5 (p4 4.0, 4.5: the near chair blown by the Orb (5.3 %) and the backs pink blobs; the end grain a tile
+          # grid; the felt black voids; the plinth tops white strips; the haze two smudges): back and right so one
+          # chair and its table sit whole at the lower left, 32 mm, f/5.6; the end grain in four tones dealt block
+          # by block, the joints tighter; the Orbs 1.2 W, glow 0.3; the niche strips 9; the plinths 0.3; the spots
+          # 36 deg; haze 0.0015
+          'camera': {'position': [11.5, 1.85, 1.12], 'target': [16.4, 3.1, 0.98], 'lens_mm': 32, 'level': True,
+                     'fstop': 5.6, 'focus': [16.4, 3.05, 1.0]},
           'settings': {'exposure': 3.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 220.0,
-                       'altar_cone': 30.0, 'altar_z': 0.9, 'haze': 0.003, 'sphere_w': 3.0, 'sphere_glow': 0.55,
-                       'niche_strip': 5.0, 'plinth': 0.5, 'spk_back': 10.0, 'look': 'AgX - High Contrast'}}
+                       'altar_cone': 36.0, 'altar_z': 0.9, 'haze': 0.0015, 'sphere_w': 1.2, 'sphere_glow': 0.3,
+                       'niche_strip': 9.0, 'plinth': 0.3, 'spk_back': 10.0, 'look': 'AgX - High Contrast'}}
 NAMES = {'smoke': 'Smoke', 'ember': 'Ember', 'ice': 'Ice', 'mixed': 'Mixed'}
 VIEWS = {}
 for c in RP.CONFIGS:
