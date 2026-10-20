@@ -1,0 +1,175 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/coin/column.json",
+ "image": "/home/user/earf/renders/2026-10-20/barkhorn/coin/column.png",
+ "seconds": {
+  "build": 1.8,
+  "render": 457.3
+ },
+ "samples": 256,
+ "size": [
+  1200,
+  800
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "arm#0": {
+   "part": "arm",
+   "centre_px": [
+    497.2,
+    333.8
+   ],
+   "box_px": [
+    334,
+    218,
+    622,
+    490
+   ],
+   "depth_m": 1.023
+  },
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    269.6,
+    463.3
+   ],
+   "box_px": [
+    -279,
+    328,
+    723,
+    678
+   ],
+   "depth_m": 1.063
+  },
+  "base-edge#0": {
+   "part": "base-edge",
+   "centre_px": [
+    269.6,
+    463.3
+   ],
+   "box_px": [
+    -281,
+    327,
+    725,
+    679
+   ],
+   "depth_m": 1.063
+  },
+  "edge#0": {
+   "part": "edge",
+   "centre_px": [
+    269.6,
+    381.4
+   ],
+   "box_px": [
+    -251,
+    255,
+    705,
+    578
+   ],
+   "depth_m": 1.063
+  },
+  "feet#0": {
+   "part": "feet",
+   "centre_px": [
+    269.6,
+    482.3
+   ],
+   "box_px": [
+    -191,
+    359,
+    665,
+    664
+   ],
+   "depth_m": 1.063
+  },
+  "label#0": {
+   "part": "label",
+   "centre_px": [
+    208.7,
+    311.8
+   ],
+   "box_px": [
+    86,
+    281,
+    324,
+    346
+   ],
+   "depth_m": 1.076
+  },
+  "platter#0": {
+   "part": "platter",
+   "centre_px": [
+    208.7,
+    329.2
+   ],
+   "box_px": [
+    -184,
+    231,
+    537,
+    470
+   ],
+   "depth_m": 1.076
+  },
+  "plinth#0": {
+   "part": "plinth",
+   "centre_px": [
+    269.6,
+    381.4
+   ],
+   "box_px": [
+    -249,
+    255,
+    704,
+    577
+   ],
+   "depth_m": 1.063
+  },
+  "posts#0": {
+   "part": "posts",
+   "centre_px": [
+    269.6,
+    428.8
+   ],
+   "box_px": [
+    -163,
+    306,
+    645,
+    605
+   ],
+   "depth_m": 1.063
+  },
+  "pulley#0": {
+   "part": "pulley",
+   "centre_px": [
+    115.1,
+    272.4
+   ],
+   "box_px": [
+    91,
+    256,
+    139,
+    289
+   ],
+   "depth_m": 1.223
+  },
+  "spindle#0": {
+   "part": "spindle",
+   "centre_px": [
+    208.7,
+    298.5
+   ],
+   "box_px": [
+    200,
+    283,
+    217,
+    314
+   ],
+   "depth_m": 1.076
+  }
+ }
+}

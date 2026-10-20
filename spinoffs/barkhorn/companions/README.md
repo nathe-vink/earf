@@ -560,8 +560,8 @@ a keepsake, which is the point: a bar token you'd want to keep.
 **The renders** (`coin_shots.py`, through Planet's kit piece; `renders/2026-10-20/barkhorn/coin/`):
 - the hero: one Acid coin on a bar's zinc in low light, the bar's lamps in the counter's sheen (1600 × 1067);
 - the eight: in spectrum order, dealt in a fan on paper (1600 × 1067);
-- the request column: beside an R3 Float, a queue of eighteen in mixed colours, two waiting on the walnut
-  (1200 × 800).
+- the request column, lit: beside an R3 Float in a dim bar, a queue of eighteen in mixed colours glowing against the
+  frost, two waiting on the walnut (1200 × 800); the first, unlit, by day is `column-day.png`.
 
 ![The finals](../../../renders/2026-10-20/barkhorn/coin/sheet-finals.png)
 
@@ -570,8 +570,8 @@ pass:
 - the hero: "a single thick, translucent amber coin or token… with a knurled (reeded) edge… an engraved wire-frame
   globe with "GOOD FOR ONE SONG" around the top edge and "EARF"";
 - the eight: "eight translucent, coin-like discs… in rainbow order… a dark line-drawn emblem… a faceted globe or gem";
-- the column: "a clear acrylic turntable… beside a tall clear… tube… filled with a stack of coloured discs… like coins
-  or poker chips".
+- the column, lit: "a turntable… and… a frosted translucent tube… filled with a stack of colorful discs in red, blue,
+  orange and cream like a striped roll of poker chips" (the unlit one passed too).
 
 **Critic** (`critic/LOG.md`, `critic/coin/rounds/`): two fresh critics a round on the hero. Three rounds is the
 family's limit, so I stopped there.
