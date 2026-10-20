@@ -33,10 +33,12 @@ FIXED = {
     # round 32d: Dome and Orb, the frost set within the tint
     'crystal': ('a pair of bar lamps in one tinted cast acrylic, whose walls are three layers: a tinted outer shell, a '
                 'frosted liner set inside it, and a tinted inner skin, so no white or frosted surface is ever seen and the '
-                'tint glows evenly from within. A cordless table lamp, a crystal ball: a tinted ball 160 across sitting low '
-                'in the cup of a blackened-steel base 120 across with a brass ring, 180 tall, lit from inside the ball. A '
-                'pendant: a tinted dome 200 across, open below, on a brass hub and canopy and a black cord, lit from up '
-                'inside the hub. Sold to bars at about $650 (the table lamp) and $850 (the pendant).'),
+                'tint glows evenly from within. A table lamp, a crystal ball: a tinted ball 160 across sitting low in the '
+                'cup of a polished black acrylic base 120 across with a black anodised touch ring, 180 tall, lit from inside '
+                'the ball; it plugs in by a slim black fabric cable from the back of the base, or runs cordless on an '
+                'optional battery cartridge. A pendant: a tinted dome 200 across, open below, on a black anodised hub and a '
+                'black acrylic canopy and a black cord, lit from up inside the hub. All hardware is black (round 32f), so '
+                'the tint is the only colour. Sold to bars at about $600 (the table lamp) and $850 (the pendant).'),
     # round 33: EARFcoin
     'coin': ('a song-request token for a listening bar: a coin of tinted cast acrylic 40 mm across and 6 mm thick, '
              'its edges rounded and polished and reeded (milled grooves round the edge, as money has). A globe made of '
@@ -63,7 +65,7 @@ PURPOSE = {
             'fir table), so a bar owner sees the light they make and the quality of the acrylic and the metal. It will run '
             'as the line sheet\'s and the website\'s lead image.',
     'crystal': 'The bar lamps\' hero for the trade: both lamps lit, in a dim bar at about 2700 K (board-formed concrete, '
-               'a fir counter), so a bar owner sees the light they make and the quality of the acrylic and the brass. It will '
+               'a fir counter), so a bar owner sees the light they make and the quality of the acrylic and the hardware. It will '
                'run as the line sheet\'s and the website\'s lead image.',
     'globe': 'The globe\'s hero by day, for the shop and the brand: the object is the subject, on paper in a pale '
              'studio, a hard sun through its coloured discs throwing their colours across the paper. It will run as the '

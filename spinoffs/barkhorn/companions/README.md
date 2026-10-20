@@ -379,7 +379,7 @@ They are built as fab-kit products (`crystal.py`, `dome_pendant.py`, `orb_table.
   through a sealed window into a brass-lined port under the ball.
 - **The ball lifts off**, because nothing in it is electrical, so Orbs swap colour just as Domes do. It rests on a
   silicone ring in an 18 mm cup, enough to stop a nudge rolling it.
-- **The weight** is about 2.6 kg with the ball.
+- **The weight** is about 3.2 kg with the ball (from the CAD: the ball 1.2, the base 1.4, the brass ring 0.3); see PARTICULARS.md.
 - **Height:** at 180 it is below the brief's 250–300 mm, by the owner's choice (squat, not raised).
 
 | | Dome pendant | Orb table lamp |
@@ -426,6 +426,176 @@ Open on the hero:
 
 Smoked is the hardest tint for this treatment: lit from within it glows a warm grey, not a colour. The Ember frame
 shows the idea better.
+
+## Round 32e: Dome and Orb for earf.world
+
+The owner: "sick lamps. Add them to the site as well and work on some product images." Six frames for the site's pale
+paper page (`crystal_promo.py`; the finals' shots in `studio/shots/barkhorn/crystal-promo/final/`, the images in
+`renders/2026-10-19/barkhorn/crystal-promo/`):
+
+| Frame | Size | What it shows | From pass |
+|---|---|---|---|
+| `dome-hero` | 1600 × 2000 | Ember, lit, from a little below: the glowing underside, the rim, the brass hub | p3 |
+| `orb-hero` | 1600 × 2000 | Ember, lit, low, on pale oak: the crystal-ball silhouette, the brass touch ring, the pool | p2 |
+| `orbs` | 2400 × 800 | all eight lit, in spectrum order Ember to Smoke | p2 |
+| `domes` | 2400 × 800 | all eight at one height over a counter | p4 |
+| `catch` | 1800 × 1200 | the bayonet close, the cover lowered: pins and L-slots | p3 |
+| `unlit` | 1600 × 2000 | an Orb and a Dome in Smoke, switched off | p4 |
+
+![The site set](../../../renders/2026-10-19/barkhorn/crystal-promo/sheet.png)
+
+**The studio.** A paper sweep in #EAE4DA, washed by its own hidden area light. Each frame's wash is calibrated, in level
+and in colour channel by channel, so the backdrop's top corner renders the page's #EAE4DA (the first passes read pink,
+then lavender-grey). A ray through an Orb crosses 12 surfaces, so the studio sets 24 bounces and 20 transmission
+bounces (the engine's 8 rendered the unlit ball black: **Planet, the same for any Orb**). The liner's frost was opal
+(clear 0.1) and blocked the light; it is 0.85 in `crystal.py`.
+
+**Critic.** Two fresh critics per frame per pass, the mean, with the coordinator's stop (two passes in a row gaining
+under 0.5, then the best two duelled blind). Four passes; the means and duels are in `critic/LOG.md`. The best is the
+Orb hero at **6.25**; the others land at 5.0 to 5.75 (the Dome hero 5.5, the Orbs row 5.5, the Domes row 4.5, the catch
+5.5, the unlit pair 5.5). **The set does not meet the 6.0 gate.** What the critics still say, every pass:
+- it reads as clean CG: the brass is too smooth (no brushing), the paper and the walls are flat, the glows fill flat;
+- the pale Domes (Ice, Haze, Fog) show a pink hotspot at the crown;
+- the Domes row sits tight to the top edge.
+
+Next, if the owner wants the gate: a brushed-brass shader (an anisotropic, grained material in the engine), a
+gradient in the liner's glow (brighter at the lamp), the Domes row reframed, and more samples.
+
+**Read test on the finals** (600 px, a fresh judge told nothing). **It passes for three frames and fails for three:**
+
+| Frame | Object | Material | Lit? | Expensive? |
+|---|---|---|---|---|
+| dome-hero | pendant, yes | "red glass or acrylic, brass cap" | on, yes | mid ("the dome reads as plastic") |
+| orb-hero | sphere table lamp, yes | "red glass", black and brass base | on, yes | "fairly expensive" ("reads like a toy") |
+| orbs | eight sphere lamps, yes | "coloured glass" | on, yes | **cheap** ("RGB mood-light merch") |
+| domes | eight pendants, yes | "coloured glass, brass" | **"mostly off"** (wrong) | **mid to cheap** |
+| catch | the collar and shade close up, yes | "brushed brass, amber glass" | **can't tell** | expensive |
+| unlit | smoked pendant over smoked sphere, yes | "smoked glass, brass, wood" | the Orb off, yes; **the Dome "on"** (its underside reads lit) | expensive |
+
+The judge reads the acrylic as glass throughout, which flatters the product but is not quite the brief's "names the
+material". What it says hurts each frame: the Dome hero is washed out and small in its frame; the lit Orbs fill as a
+flat blob with no inner detail; the Orbs row is small, and eight colours together read as merch; the Domes row is
+cropped at the top and reads unlit; the catch is cropped too tight to read what it is; the unlit Orb is murky.
+
+**Site particulars:** `PARTICULARS.md`, read from the fab kits, with what is unconfirmed marked.
+
+## Round 32f: black hardware, the plug-in Orb, the tints matched lit
+
+Four notes from the owner after the site set, relayed by the coordinator (and the first asked here directly):
+- "Why do the domes have brass tops? Why not black acrylic?"
+- "The orb base can be updated too"
+- "Maybe the orbs are plug in and optionally rechargeable or something."
+- "The orb lamps appear to have two reds and an orange instead of red orange yellow"
+
+**Black hardware, so the tint is the only colour.** Where a part works, it is black anodised aluminium (6061, type II,
+sealed, satin): the Dome's hub (the COB's heat sink and its baffle), its pins and its collar with the L-slots, the Orb's
+touch ring and its port lining. Acrylic is brittle and notch-sensitive, so a bayonet's slots would wear and crack under
+repeated quarter turns, and it softens near the COB's heat; a touch ring must be metal to sense a touch. Where a part is
+trim, it is black cast acrylic, polished: the Dome's canopy (over a steel junction-box strap that carries the load) and
+the cap over its cord grip, and the Orb's whole base drum. No brass anywhere. The aluminium is lighter than the brass
+(the Dome's hub 0.58 kg, was 1.8) and cheaper to machine.
+
+**The Orb plugs in; a cartridge makes it cordless.**
+- Standard: USB-C PD in through a notch in the underside at the back left, so the base sits flat; a slim black fabric
+  cable (2 m) and a 20 W listed adapter in the box; no battery. Inside the black acrylic drum, an aluminium chassis
+  carries the board and the LED's heat, and a steel ballast (a plate round the bay and a ring under the cup) keeps the
+  lamp planted: 2.0 kg with the ball (was 3.2 with the steel drum and the cells).
+- The option: a battery cartridge slides into a bay under the base from the back and holds on two magnets and a detent,
+  its back face the drum's, flush. One Li-ion pouch (about 8 x 60 x 90, about 22 Wh) with its own protection and fuel
+  gauge: about 10 h at the bar setting. It charges in the lamp over the USB-C, or on the staff tray through two gold pads
+  underneath, so a bar can run a fleet. Without it, a blanking cap closes the bay.
+- Why this is better: the standard lamp is cheaper and simpler to certify (a low-voltage lamp on a listed adapter; the
+  battery's IEC 62133-2 and UN38.3 move to the cartridge, sold as an accessory), and a bar chooses per table.
+- A correction on the way: the two 18650 cells drawn in Moon's foot were 9 mm tall in the model; real 18650s are 18.4
+  across and do not fit under the LED (13 mm). The cartridge's flat pouch does, at about 22 Wh rather than 25.
+
+| | Dome pendant | Orb, plug-in | Orb battery cartridge |
+|---|---|---|---|
+| BOM, one-off shop rates | **$1,203** (was $1,421) | **$1,310** (with cable and adapter) | about **$40** (bought, estimate) |
+| BOM, a run of 200 (my estimate) | about $185 parts, $215 landed | about $170 parts, $195 landed | about $28 parts, $35 landed |
+| suggested retail (the owner sets prices) | $795 to $895 with one cover; covers $295 to $345 | **$545 to $645**; balls $245 to $295 | **$95 to $125** |
+
+**For Planet** (`earf_moon.py`): the black is in the GLBs. The `orb` piece takes `cable` (default true) and
+`cartridge`: `"none"` (default, the plug-in Orb with its blanking cap), `"in"`, or `"out"` (slid `cartridge_out` m,
+default 0.045, out of the back). A cordless Orb is `cable: false, cartridge: "in"`.
+
+**The tints, matched to the speakers when lit (a casting spec).** The owner saw "two reds and an orange instead of red
+orange yellow" in the Orbs row: lit, Dust read at 33° (Ember's red) and Acid at 60° (orange). The cause is the tint's
+depth, not the light: the rows' glow is about 3200 K under a 4300 K balance, near neutral, but a warm cast seen through
+9 to 12 mm of tint pulls toward red, and harder the deeper it is. So each tint is cast to its own colour (`crystal.CAST`,
+its absorption at the body's 5 mm radius), found by measurement: render the row, take the median LCh hue of each lamp's
+glowing body (highlights and rim out), turn the cast's hue by the miss, again until it holds (Acid's response is steep
+near yellow, so it was bisected). Ember is cast deeper than the rest so it reads red, not coral. Targets are the
+speakers' swatches (`marks.SPEAKERS`).
+
+| Tint | Cast (`deep`) | Speaker's hue | Lit Orb (h, C) | Lit Dome (h, C) |
+|---|---|---|---|---|
+| Ember | #CD8553 | 35.1° | 33.3° (−1.8), C 50 | 40.0° (+4.9), C 74 |
+| Dust | #DDBA7B | 55.3° | 55.4° (+0.1), C 34 | 60.5° (+5.3), C 48 |
+| Acid | #E2D481 | 84.1° | 83.1° (−1.0), C 35 | 88.6° (+4.5), C 52 |
+| Poison | #A4C87C | 133.0° | 133.1° (+0.1), C 67 | 136.1° (+3.2), C 76 |
+| Ice | #5AC0E7 | 262.3° | 258.2° (−4.1), C 33 | 270.5° (+8.2), C 49 |
+| Haze | #A080D7 | 308.0° | 308.2° (+0.2), C 67 | 307.2° (−0.8), C 94 |
+| Fog | #F7F8F7 | neutral (C 0.7) | neutral, C 2 | neutral, C 4 |
+| Smoke | #787E87 | 300.7° at C 5.5 | 314.6° at C 6 | 287.2° at C 12 |
+
+Six chromatic tints sit within 9° of their speakers on both lamps, most within 5°. Fog and Smoke are near-neutral, as
+their swatches are, and a hue angle at chroma 2 to 12 swings with a few units of a or b: one cast cannot hold Smoke within
+10° on both lamps (the Orb pulls it pink, the Dome blue), so it is held neutral grey (±14° at C 6 to 12). These are
+render measurements: the caster matches the casts on chips 10 mm thick under a 2700 K source, and the first lit samples
+are checked against the speakers' swatches the same way.
+
+**The site set again, black and plug-in** (`lamps_site.py`; `renders/2026-10-19/barkhorn/lamps-site/`, in the names
+the site picks up):
+
+| Frame | Size | Passes (two critics, the mean) | Final |
+|---|---|---|---|
+| `lamp-orb` | 1600 × 2000 | s1 6.0, s2 6.0 | s2: **6.0, meets the gate**; the lamp turned 40° so its cable runs away behind the ball |
+| `lamp-dome` | 1600 × 2000 | s1 5.25 | s1 (a counter under it put the camera level with the rim and lost the underside the brief asks for) |
+| `lamps-orbs` | 2400 × 800 | s1 5.5, s2 5.5 | s2: a glow per tint (Fog clipped), no cables in the lineup |
+| `lamps-domes` | 2400 × 800 | s1 4.5, s2 4.75, s3 4.75 | s3, by a blind duel over s2 (6 to 5): a dimmer room, each dome's pool on the counter in its tint |
+| `lamps-unlit` | 1600 × 2000 | s1 5.5 | s1: the Orb cordless (its cartridge in) |
+| `lamp-cartridge` | 1800 × 1200 | s1 4.5, s2 5.25 | s2: the cartridge half out of the back, lit |
+| `lamp-catch` | 1800 × 1200 | (rendering) | |
+
+The Orb hero clears 6.0; the rest stay at 4.75 to 5.5. What the critics still say: the studio reads as CG (a smooth
+paper sweep, no room), every ball and dome carries the same strip reflection, the Domes row's wall reads mauve and its
+oak warms the cool pools, the unlit Dome's underside reads faintly lit and the polished black base mirrors the oak as
+wood, and the cartridge's top is crushed black. Next, if the owner wants the gate everywhere: a real room (a plaster
+wall and a bar top with a back bar), a window-shaped key, a pale stone counter for the Domes, and a flag under the
+unlit base.
+
+**Read test** (600 px, a fresh judge told nothing; the catch still rendering): every object named; lit or off right
+on all the lit frames, now the Domes row too (round 32e's read it as off), and the unlit Orb read as off; the unlit
+Dome read as faintly on. Expensive: the unlit pair ("most expensive"), the Orb hero ("fairly expensive"); mid for the
+Orbs row and the Dome hero; cheap for the Domes row and the cartridge. The material reads as glass throughout.
+
+**The lamps' light in the site frames, for Planet to match** (the kit piece's `shade_glow` and `lamp_w`; the liner's
+`materials.liner.glow_color`; every frame at exposure 0.15 and a 4300 K balance, as in `lamps_site.py`):
+
+| Frame | `shade_glow` | `lamp_w` | `glow_color` |
+|---|---|---|---|
+| `lamps-orbs` (a piece a tint) | 1.3 × the tint's gain: Ember 1.3, Dust 1.3, Acid 1.17, Poison 1.17, Ice 0.975, Haze 1.105, Fog 0.585, Smoke 0.78 | 4.0 | #FFDCB8 |
+| `lamp-orb` (Ember) | 0.8 | 3.0 | #FFDCB8 |
+| `lamps-domes` | Ember and Dust 0.75, Acid and Poison 0.675, Ice 0.562, Haze 0.85, Fog 0.25, Smoke 0.45 | 4.5, plus a 18 W spot a dome in its tint, 40° | #FFF3E6 |
+| `lamp-dome` (Ember) | 0.9 | 15.0 | #FFDCB8 |
+
+An Orb blows to near white above about 1.3 for Ember and Dust (Acid's and the pale tints' gains are lower for that
+reason): the liner glows evenly by design, so its level sets how saturated the ball reads.
+
+`earf_moon.py` carries Planet's `noshadow` again (27f39bf on r32-planet; round 32f's kit had dropped it).
+
+**The unlit pair, again** (the coordinator, for the caption "Off, in Smoke."): the Dome's underside read as a lit white
+disc and a warm pool lay round the Orb's base. Both lamps were off; it was the helper lights. The light through the
+ball keeps to a faint core (1.5 to 0.15), the one through the Dome's mouth nearly out (0.3 to 0.04, 3400 K), and the
+bounce under them warm (5000 to 3500 K).
+
+**The catch** (s1, 5.0, 5.0): with the hub black, its L-slots sink into black on black. Raking strips (s2, tried in a
+proof) changed nothing: anodised black shows only a specular, so the slots need a reflector placed for the camera's
+angle, or a lighter anodise on a sample. It stays at s1 for now; the read test named it a pendant's collar, off, mid.
+Read again at 600 px: the Orb off; the Dome "faintly on" (a little glow at the rim, no pool), so closer to the caption
+but not yet fully dark; and now "mid-range", where the lit-helper version read "most expensive": without that light
+the smoked pair goes murky on the pale page. The next step for it is a crisp edge light on both, not light through them.
 
 ## Round 33: EARFcoin
 

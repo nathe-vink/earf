@@ -1,0 +1,200 @@
+{
+ "size": [
+  1800,
+  1200
+ ],
+ "camera": {
+  "position": [
+   0.2,
+   -0.46,
+   1.33
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.235
+  ],
+  "lens_mm": 100,
+  "level": false,
+  "fstop": 11.0,
+  "focus": [
+   0.0,
+   -0.04,
+   1.26
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAE4DA",
+  "width": 10.0,
+  "front": 6.0,
+  "depth": 0.6,
+  "radius": 0.3,
+  "height": 4.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     [
+      0.0,
+      0.0,
+      1.18
+     ]
+    ],
+    "flavour": "acid",
+    "cover_drop": 0.02,
+    "cover_turn": -30,
+    "shade_glow": 0.35,
+    "lamp_w": 3.0,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D2C8",
+  "horizon": "#DED8CE",
+  "ground": "#D6CEC2",
+  "strength": 0.35
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    0.3,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": -55,
+    "elevation_deg": 62,
+    "distance_m": 2.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.235
+   ],
+   "irradiance": 1.3,
+   "color": 4300
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    0.35,
+    1.4
+   ],
+   "orbit": {
+    "azimuth_deg": 40,
+    "elevation_deg": 10,
+    "distance_m": 2.2
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.235
+   ],
+   "irradiance": 1.2,
+   "color": 4300
+  },
+  "bgwash": {
+   "type": "area",
+   "size_m": [
+    3.5,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -0.4,
+    3.0
+   ],
+   "target": [
+    -0.3,
+    0.6,
+    1.4
+   ],
+   "irradiance": 1.937,
+   "color": "#FFE5A2",
+   "camera": false,
+   "specular": 0.0
+  },
+  "rimstrip": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": 115,
+    "elevation_deg": 25,
+    "distance_m": 0.9
+   },
+   "target": [
+    0,
+    0,
+    1.26
+   ],
+   "irradiance": 2.0,
+   "color": 4300,
+   "camera": false
+  },
+  "domestrip": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": 60,
+    "elevation_deg": 15,
+    "distance_m": 1.0
+   },
+   "target": [
+    0,
+    0,
+    1.22
+   ],
+   "irradiance": 1.0,
+   "color": 4300,
+   "camera": false
+  },
+  "pinkick": {
+   "type": "area",
+   "size_m": [
+    0.05,
+    0.05
+   ],
+   "orbit": {
+    "azimuth_deg": -45,
+    "elevation_deg": 30,
+    "distance_m": 0.6
+   },
+   "target": [
+    0,
+    0,
+    1.3
+   ],
+   "irradiance": 0.5,
+   "color": 4300,
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.15,
+  "white_balance_k": 4300
+ },
+ "title": "Dome and Orb for earf.world: catch"
+}

@@ -1,0 +1,309 @@
+{
+ "size": [
+  2400,
+  800
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -4.2,
+   0.62
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.09
+  ],
+  "lens_mm": 70,
+  "level": false,
+  "fstop": 8.0,
+  "focus": [
+   0.0,
+   0.0,
+   0.08
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAE4DA",
+  "width": 10.0,
+  "front": 6.0,
+  "depth": 1.0,
+  "radius": 0.6,
+  "height": 4.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "orb",
+    "spots": [
+     {
+      "position": [
+       -0.84,
+       0.0,
+       0.0
+      ],
+      "flavour": "ember"
+     },
+     {
+      "position": [
+       -0.6,
+       0.0,
+       0.0
+      ],
+      "flavour": "dust"
+     },
+     {
+      "position": [
+       -0.36,
+       0.0,
+       0.0
+      ],
+      "flavour": "acid"
+     },
+     {
+      "position": [
+       -0.12,
+       0.0,
+       0.0
+      ],
+      "flavour": "poison"
+     },
+     {
+      "position": [
+       0.12,
+       0.0,
+       0.0
+      ],
+      "flavour": "ice"
+     },
+     {
+      "position": [
+       0.36,
+       0.0,
+       0.0
+      ],
+      "flavour": "haze"
+     },
+     {
+      "position": [
+       0.6,
+       0.0,
+       0.0
+      ],
+      "flavour": "fog"
+     },
+     {
+      "position": [
+       0.84,
+       0.0,
+       0.0
+      ],
+      "flavour": "smoke"
+     }
+    ],
+    "flavour": "ember",
+    "shade_glow": 1.8,
+    "lamp_w": 4.0,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D2C8",
+  "horizon": "#DED8CE",
+  "ground": "#D6CEC2",
+  "strength": 0.35
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    0.5
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 42,
+    "distance_m": 2.6
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.09
+   ],
+   "irradiance": 0.6,
+   "color": 4300
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.09
+   ],
+   "irradiance": 0.25,
+   "color": 4300
+  },
+  "bgwash": {
+   "type": "area",
+   "size_m": [
+    3.5,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -0.4,
+    3.0
+   ],
+   "target": [
+    0.0,
+    1.0,
+    0.2
+   ],
+   "irradiance": 2.85,
+   "color": "#FFD999",
+   "camera": false,
+   "specular": 0.0
+  },
+  "pool-0.84": {
+   "type": "point",
+   "position": [
+    -0.84,
+    -0.075,
+    0.05
+   ],
+   "power_w": 0.9,
+   "radius_m": 0.06,
+   "color": "#FF7A68",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "pool-0.60": {
+   "type": "point",
+   "position": [
+    -0.6,
+    -0.075,
+    0.05
+   ],
+   "power_w": 0.9,
+   "radius_m": 0.06,
+   "color": "#FF9C78",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "pool-0.36": {
+   "type": "point",
+   "position": [
+    -0.36,
+    -0.075,
+    0.05
+   ],
+   "power_w": 0.9,
+   "radius_m": 0.06,
+   "color": "#FFC870",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "pool-0.12": {
+   "type": "point",
+   "position": [
+    -0.12,
+    -0.075,
+    0.05
+   ],
+   "power_w": 0.9,
+   "radius_m": 0.06,
+   "color": "#BCE07A",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "pool+0.12": {
+   "type": "point",
+   "position": [
+    0.12,
+    -0.075,
+    0.05
+   ],
+   "power_w": 0.9,
+   "radius_m": 0.06,
+   "color": "#86D2FF",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "pool+0.36": {
+   "type": "point",
+   "position": [
+    0.36,
+    -0.075,
+    0.05
+   ],
+   "power_w": 0.9,
+   "radius_m": 0.06,
+   "color": "#B496FF",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "pool+0.60": {
+   "type": "point",
+   "position": [
+    0.6,
+    -0.075,
+    0.05
+   ],
+   "power_w": 0.9,
+   "radius_m": 0.06,
+   "color": "#FFF2E4",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  },
+  "pool+0.84": {
+   "type": "point",
+   "position": [
+    0.84,
+    -0.075,
+    0.05
+   ],
+   "power_w": 0.9,
+   "radius_m": 0.06,
+   "color": "#CDBFAF",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.15,
+  "white_balance_k": 4300
+ },
+ "title": "Dome and Orb for earf.world: orbs"
+}

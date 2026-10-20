@@ -446,5 +446,60 @@
   "estimate": true,
   "supplier": "-",
   "price_date": "2026-10-20"
+ },
+ "_crystal_32f": "round 32f (crystal.py): the Orb plug-in over USB-C with an optional battery cartridge. Estimates, to confirm.",
+ "orb-board": {
+  "kind": "control",
+  "maker": "to make (a contract PCB house)",
+  "model": "The Orb's board: a USB-C PD sink (9 V, 20 W class; STUSB4500 kind), the LED driver (two channels, 2200 and 2700 K warm-dim, about 2.5 W), the capacitive touch dimmer on the anodised ring, and the cartridge's port (5 pogo pins: power, its fuel gauge on I2C) with its charger (TI BQ25895 kind), sealed in the base",
+  "usd": 24,
+  "estimate": true,
+  "supplier": "a contract PCB house",
+  "price_date": "2026-10-20"
+ },
+ "orb-seals": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Two EPDM O-rings (the window, the chassis to the drum), a silicone foot ring 110 x 2 (Shore 40, non-slip), a sealed USB-C receptacle (IP67 rated, e.g. GCT USB4135 kind): IP44",
+  "usd": 5,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-20"
+ },
+ "orb-cable": {
+  "kind": "wiring",
+  "maker": "any (made to order)",
+  "model": "A slim black braided-fabric USB-C to USB-C cable, 2 m, 3 A, a black right-angle overmoulded plug for the notch",
+  "usd": 6,
+  "estimate": true,
+  "supplier": "a cable maker (Shenzhen)",
+  "price_date": "2026-10-20"
+ },
+ "orb-adapter": {
+  "kind": "power",
+  "maker": "any (UL/CE listed)",
+  "model": "A 20 W USB-C PD wall adapter, black, UL 62368-1 / CE listed (bought listed, so the plug-in Orb is a low-voltage lamp)",
+  "usd": 7,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-20"
+ },
+ "orb-cartridge": {
+  "kind": "power",
+  "maker": "to make (a battery-pack house)",
+  "model": "The battery cartridge: one Li-ion pouch cell about 8 x 60 x 90 (6,000 mAh at 3.7 V, about 22 Wh), its protection board and fuel gauge, in a black polished acrylic and PC housing 93 x 83 x 11 with its back face the drum's; two magnets and a detent hold it; IEC 62133-2, UN38.3 on the cartridge alone",
+  "usd": 38,
+  "estimate": true,
+  "supplier": "a battery-pack house",
+  "price_date": "2026-10-20"
+ },
+ "orb-pads": {
+  "kind": "power",
+  "maker": "Mill-Max (or alike)",
+  "model": "Two gold-plated flat pads under the cartridge, for the staff tray's spring pins",
+  "usd": 2,
+  "estimate": true,
+  "supplier": "Mill-Max",
+  "price_date": "2026-10-20"
  }
 }
