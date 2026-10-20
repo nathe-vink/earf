@@ -94,3 +94,32 @@ Two of three pass.
 **Realism:** 3.5 and 4.0 (mean 3.75; proof 3 had 4.0). Both critics' first tell is the fly agarics: "copies of one model… smooth, plasticky red caps, evenly spaced white dots that look stamped on, and clean white stems with no dirt". Then the tiled floor, and the speaker pasted in on its moss pad.
 
 **Pass 6:** each cap weathered its own way: dried (matte, soil up the stem), conifer needles on it, the wash uneven, ragged veil remnants. Tested on a close crop against proof 5's in a two-order A/B before the full frame.
+
+**The caps on a close crop:** a two-order A/B of proof 5's cap corner against pass 6's weathered caps.
+- Pass 6: 4.2 and 4.0, mean 4.1. Proof 5: 4.0 and 3.5, mean 3.75.
+- Each judge preferred whichever crop it saw second, and both called the caps clearly CG.
+- The modelled caps are near their ceiling.
+
+**Proof 6** (`proofs31/element-poison_f1-p06.jpg`, pass 6's caps). Read test: "A green speaker sits on the floor of a dim forest: a box with a large woofer and a dark horn on top, with ferns, red berries and red-capped toadstools around it." Passes.
+
+## Duel: the live A4 against F1 proof 6
+
+`critic/ab/PROMPT-DUEL.txt`, 1200 × 800 each. Four fresh judges, two per order. Position is balanced, but each judge saw one order only.
+
+| Judge | Order | A4 | F1 |
+|---|---|---|---|
+| 1 | A4 first | 6.5 | 5.0 |
+| 2 | A4 first | 6.5 | 5.0 |
+| 3 | F1 first | 6.5 | 5.0 |
+| 4 | F1 first | 6.6 | 5.0 |
+
+**Mean:** A4 6.53, F1 5.0. All four prefer A4, so F1 is 1.5 behind and does not go up (the bar was within about 0.5).
+
+**What drove it, in all four:**
+1. **The caps:** oversized, repeated "clones… kitbashed", crowding the foreground and upstaging the product. A4's five small caps stay a quiet accent.
+2. **The light:** pass 5's low golden backlight left the speaker flat-lit. Its woofer reads as "a flat dark disc", where A4's sun gives shafts, rim highlights on the surround and modelled faces.
+3. **The set:**
+   - the beech trunk reads as "a flat grey slab… a billboard" against A4's redwood bark;
+   - the litter-covered bank behind reads as "a murky, flat brown haze… a texture card";
+   - the yews look "pasted-in" and "floating";
+   - the berry spikes and nightshade clutter the lower right.
