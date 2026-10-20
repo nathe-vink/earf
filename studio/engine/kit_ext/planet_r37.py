@@ -283,19 +283,19 @@ def zone_life(bpy, kit, p, objs):
     sl = K.Mesh('zone-sleeves')
     (role, c, sx, sy, sz, rot) = R.speakers()[0]
     _tilted_box(sl.bm, sx - P['plinth_d'] / 2 - 0.10, sy + 0.12, z0, 0.314, 0.004, 0.314, math.radians(90) - 0.0, math.radians(14))
-    tx, ty = R.TUB_TABLES[4]                          # the near-left table, in the listening view's frame
+    tx, ty = R.TUB_TABLES[0]                          # the zone's middle table
     K._obox(sl.bm, tx - 0.04, ty + 0.06, z0 + R.TUB_TABLE['h'] + 0.0005, 0.314, 0.314, 0.003, math.radians(-20))
     objs.append(sl.object(bpy, K.principled(bpy, 'sleeve-zone', '#C9B79A', rough=0.6)))
     vr = K.Mesh('zone-record'); K._cyl(vr.bm, tx - 0.04, ty + 0.06, z0 + R.TUB_TABLE['h'] + 0.0035, 0.15, 0.0018, seg=64)
     objs.append(vr.object(bpy, K.principled(bpy, 'vinyl', '#0B0B0C', rough=0.25), smooth=True))
     # a coat over the back of the near chair (the one nearest the camera's side of the zone)
-    cx, cy = R.TUBS[1]
+    cx, cy = R.TUBS[0]
     ax, ay = P['x'], R.YC
     face = math.atan2(ay - cy, ax - cx); bx, by = cx - math.cos(face) * (T['r'] - 0.05), cy - math.sin(face) * (T['r'] - 0.05)
     co = K.Mesh('zone-coat'); top = z0 + T['h']
     K._obox(co.bm, bx - math.cos(face) * 0.07, by - math.sin(face) * 0.07, top - 0.50, 0.03, 0.46, 0.51, face)
     K._obox(co.bm, bx, by, top - 0.005, 0.16, 0.46, 0.035, face)
-    objs.append(co.object(bpy, LK.wool(bpy, '#5E4A3A', 'wool-coat-zone'), bevel=0.015, seg=3))
+    objs.append(co.object(bpy, LK.wool(bpy, '#8A6A48', 'wool-coat-zone'), bevel=0.015, seg=3))
 
 
 def room(bpy, name, p, kit):
