@@ -138,7 +138,10 @@
     "flame": 60.0,
     "windows_lit": 0.5,
     "sconce_w": 10.0,
-    "spk_niche_strip": 3.0
+    "spk_niche_strip": 3.0,
+    "plinth": 1.0,
+    "plinth_bar_col": "#FFB060",
+    "plinth_listen_col": "#FFB060"
    },
    {
     "kind": "kit",
@@ -625,6 +628,98 @@
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
+  },
+  "plinthl0": {
+   "type": "area",
+   "position": [
+    16.55,
+    1.9,
+    0.47
+   ],
+   "target": [
+    16.55,
+    1.9,
+    1.36
+   ],
+   "size_m": [
+    0.4,
+    0.3
+   ],
+   "irradiance": 1.5,
+   "color": "#FFB060",
+   "camera": false,
+   "receivers": [
+    "*#0"
+   ]
+  },
+  "plinthl1": {
+   "type": "area",
+   "position": [
+    16.55,
+    4.199999999999999,
+    0.47
+   ],
+   "target": [
+    16.55,
+    4.199999999999999,
+    1.36
+   ],
+   "size_m": [
+    0.4,
+    0.3
+   ],
+   "irradiance": 1.5,
+   "color": "#FFB060",
+   "camera": false,
+   "receivers": [
+    "*#1"
+   ]
+  },
+  "plinthb0": {
+   "type": "area",
+   "position": [
+    5.55,
+    5.7162,
+    1.126
+   ],
+   "target": [
+    5.55,
+    5.7162,
+    2.016
+   ],
+   "size_m": [
+    0.4,
+    0.3
+   ],
+   "irradiance": 1.5,
+   "color": "#FFB060",
+   "camera": false,
+   "receivers": [
+    "*#0"
+   ]
+  },
+  "plinthb1": {
+   "type": "area",
+   "position": [
+    8.25,
+    5.7162,
+    1.126
+   ],
+   "target": [
+    8.25,
+    5.7162,
+    2.016
+   ],
+   "size_m": [
+    0.4,
+    0.3
+   ],
+   "irradiance": 1.5,
+   "color": "#FFB060",
+   "camera": false,
+   "receivers": [
+    "*#1"
+   ]
   },
   "barspk0": {
    "type": "spot",

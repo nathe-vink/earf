@@ -61,6 +61,11 @@ def ledges(bpy, kit, p, objs):
     for xc in R.SPK_NICHES:
         x0, x1, yf, yb, z0, z1 = R.niche_box(xc)
         oak.box(x0 - 0.012, yf - 0.012, B['low'], x1 + 0.012, yb, z0)
+    objs.append(oak.object(bpy, K.dark_oak(bpy, name='oak-spk-ledge'), bevel=0.003))
+    # the light plinth (the owner: "Lights under the speakers could be cool too"): the wedge under each cabinet in
+    # frosted acrylic lit from within, so light rises into the tinted cabinet's base; its glow `plinth` (0 = an unlit
+    # frosted wedge), its colour the configuration's (warm amber in Smoke, red in Ember, blue in Ice)
+    oak = K.Mesh('spk-light-plinths')
     zf = R.SPK_LEDGE['top'] + R.SPK_NICHE['floor'] + 0.001
     hw, hd = R.CLOUD_HALF['w'] - 0.01, R.CLOUD_HALF['d'] - 0.01
     for role, x, y, z, rot, tilt in R.bar_speakers():
@@ -74,7 +79,22 @@ def ledges(bpy, kit, p, objs):
         for i in range(4):
             j = (i + 1) % 4
             bm.faces.new([vb[i], vb[j], vt[j], vt[i]])
-    objs.append(oak.object(bpy, K.dark_oak(bpy, name='oak-spk-ledge'), bevel=0.003))
+    col = p.get('plinth_bar_col', '#FFB060')
+    w = oak.object(bpy, LK.acrylic(bpy, 'frosted', 'plinth-bar-' + col, glow=p.get('plinth', 0.0), glow_col=col), bevel=0.002)
+    w.visible_shadow = False; objs.append(w)
+
+
+def altar_plinths(bpy, kit, p, objs):
+    """The listening pair's plinths get the same: a frosted acrylic top, lit from within, 30 deep, standing 2 proud of
+    the oak on every side."""
+    import math
+    S = R.PAIR36; z0 = R.ZONE['z'] + S['plinth'] - 0.030
+    top = K.Mesh('altar-light-tops')
+    for role, colour, x, y, z, rot in R.speakers():
+        K._obox(top.bm, x, y, z0, S['plinth_d'] + 0.004, S['plinth_w'] + 0.004, 0.0295, math.radians(rot + 90))
+    col = p.get('plinth_listen_col', '#FFB060')
+    t = top.object(bpy, LK.acrylic(bpy, 'frosted', 'plinth-listen-' + col, glow=p.get('plinth', 0.0), glow_col=col), bevel=0.002)
+    t.visible_shadow = False; objs.append(t)
 
 
 def ginza(bpy, kit, p, objs):
@@ -136,5 +156,6 @@ def room(bpy, name, p, kit):
     objs = K.room(bpy, name, p, kit)
     niches(bpy, kit, p, objs)
     ledges(bpy, kit, p, objs)
+    altar_plinths(bpy, kit, p, objs)
     ginza(bpy, kit, p, objs)
     return objs
