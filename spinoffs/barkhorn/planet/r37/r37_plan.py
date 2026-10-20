@@ -79,7 +79,7 @@ PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.12, 'ice': 0.35}
 # Smoke's levels clipped its red to pink (6040 px red-only in a Standard view, listening, r37)
 SPK_GAIN = {'smoke': 1.0, 'ember': 0.08, 'ice': 0.4}
 # the lamp inside each Dome and Orb per tint: a red cover lit at Smoke's 30 W clipped pink (r37, bar-ember)
-LAMP_GAIN = {'smoke': 1.0, 'ember': 0.15, 'ice': 0.6, 'dust': 0.6, 'acid': 0.6}   # Ember 0.4 then 0.25: the Domes clipped red (1260, 580 px, bar)
+LAMP_GAIN = {'smoke': 1.0, 'ember': 0.3, 'ice': 0.6, 'dust': 0.6, 'acid': 0.6}   # Ember 0.4 then 0.25: the Domes clipped red (1260, 580 px, bar)
 # the lit lamp's colour: the flavour's own glow behind its tinted shell, so a lit lamp sits within about 10 deg of hue
 # (LCh) of the speakers in its tint (the owner saw an Orb lineup read as "two reds and an orange": the fixed warm liner
 # dragged Ember to orange); Smoke keeps the warm liner
@@ -98,3 +98,6 @@ SINK37 = dict(SINK, t=0.16, D=0.12, bx=0.19, by=0.105, fillet=0.03)
 # light (the niche's strip, the felt wash), not only the lamps scaled above (r37: lowering SPK_GAIN 0.15 -> 0.08 moved
 # nothing); half a stop down on its frames
 EXPO_TRIM = {'ember': -0.5}
+# but not on the bar view: there the Domes light the counter, and the bar-ember final at the trim with the Domes at
+# 0.15 read 4.6 (black); the bar's residual red is the Domes' own shells
+EXPO_TRIM_VIEWS = ('listening',)

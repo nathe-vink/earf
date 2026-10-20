@@ -214,7 +214,7 @@ for c in RP.CONFIGS:
         hero = RP.CONFIGS[c]['bar' if key == 'bar' else 'listen']
         VIEWS[f'{key}-{c}'] = {'title': f"{base['title']} ({NAMES[c]})", 'camera': dict(base['camera']),
                                'settings': {**base['settings'], 'config': c,
-                                            'exposure': round(base['settings']['exposure'] + RP.EXPO_TRIM.get(hero, 0.0), 2)}}
+                                            'exposure': round(base['settings']['exposure'] + (RP.EXPO_TRIM.get(hero, 0.0) if key in RP.EXPO_TRIM_VIEWS else 0.0), 2)}}
 VIEWS['street'] = {'title': 'the shopfront at night, from the kerb (Smoke)',
                    # round 36's best street framing (p2r): the shopfront in frame, the mullion off the altar
                    'camera': {'position': [-3.2, 2.2, 1.5], 'target': [17.0, 3.4, 1.35], 'lens_mm': 32, 'level': True,
