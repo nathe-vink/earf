@@ -4,9 +4,15 @@
  "origin_mm": [
   0.0,
   0.0,
-  0.0
+  1e-06
  ],
  "materials": {
+  "anodised": {
+   "preset": "metal",
+   "color": "#2A2A2D",
+   "roughness": 0.36,
+   "anisotropic": 0.3
+  },
   "body": {
    "preset": "clear_resin",
    "color": "#FFFFFF",
@@ -14,10 +20,11 @@
    "radius": 0.005,
    "roughness": 0.04
   },
-  "brass": {
-   "preset": "metal",
-   "color": "#B8945A",
-   "roughness": 0.32
+  "fabric": {
+   "preset": "rubber",
+   "color": "#141414",
+   "roughness": 0.8,
+   "sheen": 0.4
   },
   "gold": {
    "preset": "metal",
@@ -47,6 +54,13 @@
    "preset": "gunmetal",
    "color": "#232120"
   },
+  "trim": {
+   "preset": "gloss_plastic",
+   "color": "#0C0C0D",
+   "roughness": 0.04,
+   "coat": 1.0,
+   "coat_roughness": 0.02
+  },
   "window": {
    "preset": "clear_resin",
    "color": "#FFFFFF",
@@ -57,15 +71,19 @@
  },
  "assign": [
   {
+   "match": "grommet|ring",
+   "material": "anodised"
+  },
+  {
    "match": "shell|skin",
    "material": "body"
   },
   {
-   "match": "grommet|ring",
-   "material": "brass"
+   "match": "cable",
+   "material": "fabric"
   },
   {
-   "match": "contacts",
+   "match": "cartridge-pads",
    "material": "gold"
   },
   {
@@ -81,8 +99,12 @@
    "material": "silicone"
   },
   {
-   "match": "base|plate",
+   "match": "chassis|ballast",
    "material": "steel"
+  },
+  {
+   "match": "base|blank|cartridge",
+   "material": "trim"
   },
   {
    "match": "window",
@@ -91,37 +113,37 @@
  ],
  "flavours": {
   "ember": {
-   "deep": "#F2A29C",
+   "deep": "#CD8553",
    "frost": "#F2A29C",
    "glow": "#FF4A3A",
    "shade_glow": "#F2A29C"
   },
   "dust": {
-   "deep": "#F2B184",
+   "deep": "#DDBA7B",
    "frost": "#F2B184",
    "glow": "#FF8A3A",
    "shade_glow": "#F2B184"
   },
   "acid": {
-   "deep": "#F2D06B",
+   "deep": "#E2D481",
    "frost": "#F2D06B",
    "glow": "#FFC93A",
    "shade_glow": "#F2D06B"
   },
   "poison": {
-   "deep": "#B2C9A2",
+   "deep": "#A4C87C",
    "frost": "#B2C9A2",
    "glow": "#6BD45A",
    "shade_glow": "#B2C9A2"
   },
   "ice": {
-   "deep": "#B5D9EE",
+   "deep": "#5AC0E7",
    "frost": "#B5D9EE",
    "glow": "#4FB8FF",
    "shade_glow": "#B5D9EE"
   },
   "haze": {
-   "deep": "#BEADD8",
+   "deep": "#A080D7",
    "frost": "#BEADD8",
    "glow": "#9A6BFF",
    "shade_glow": "#BEADD8"
@@ -133,7 +155,7 @@
    "shade_glow": "#F7F8F7"
   },
   "smoke": {
-   "deep": "#8A888E",
+   "deep": "#787E87",
    "frost": "#8A888E",
    "glow": "#C8C0D8",
    "shade_glow": "#8A888E",
@@ -174,5 +196,11 @@
     }
    }
   }
+ },
+ "options": {
+  "cartridge": [
+   "cartridge",
+   "cartridge-pads"
+  ]
  }
 }

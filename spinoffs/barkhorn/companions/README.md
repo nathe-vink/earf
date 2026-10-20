@@ -478,3 +478,69 @@ flat blob with no inner detail; the Orbs row is small, and eight colours togethe
 cropped at the top and reads unlit; the catch is cropped too tight to read what it is; the unlit Orb is murky.
 
 **Site particulars:** `PARTICULARS.md`, read from the fab kits, with what is unconfirmed marked.
+
+## Round 32f: black hardware, the plug-in Orb, the tints matched lit
+
+Four notes from the owner after the site set, relayed by the coordinator (and the first asked here directly):
+- "Why do the domes have brass tops? Why not black acrylic?"
+- "The orb base can be updated too"
+- "Maybe the orbs are plug in and optionally rechargeable or something."
+- "The orb lamps appear to have two reds and an orange instead of red orange yellow"
+
+**Black hardware, so the tint is the only colour.** Where a part works, it is black anodised aluminium (6061, type II,
+sealed, satin): the Dome's hub (the COB's heat sink and its baffle), its pins and its collar with the L-slots, the Orb's
+touch ring and its port lining. Acrylic is brittle and notch-sensitive, so a bayonet's slots would wear and crack under
+repeated quarter turns, and it softens near the COB's heat; a touch ring must be metal to sense a touch. Where a part is
+trim, it is black cast acrylic, polished: the Dome's canopy (over a steel junction-box strap that carries the load) and
+the cap over its cord grip, and the Orb's whole base drum. No brass anywhere. The aluminium is lighter than the brass
+(the Dome's hub 0.58 kg, was 1.8) and cheaper to machine.
+
+**The Orb plugs in; a cartridge makes it cordless.**
+- Standard: USB-C PD in through a notch in the underside at the back left, so the base sits flat; a slim black fabric
+  cable (2 m) and a 20 W listed adapter in the box; no battery. Inside the black acrylic drum, an aluminium chassis
+  carries the board and the LED's heat, and a steel ballast (a plate round the bay and a ring under the cup) keeps the
+  lamp planted: 2.0 kg with the ball (was 3.2 with the steel drum and the cells).
+- The option: a battery cartridge slides into a bay under the base from the back and holds on two magnets and a detent,
+  its back face the drum's, flush. One Li-ion pouch (about 8 x 60 x 90, about 22 Wh) with its own protection and fuel
+  gauge: about 10 h at the bar setting. It charges in the lamp over the USB-C, or on the staff tray through two gold pads
+  underneath, so a bar can run a fleet. Without it, a blanking cap closes the bay.
+- Why this is better: the standard lamp is cheaper and simpler to certify (a low-voltage lamp on a listed adapter; the
+  battery's IEC 62133-2 and UN38.3 move to the cartridge, sold as an accessory), and a bar chooses per table.
+- A correction on the way: the two 18650 cells drawn in Moon's foot were 9 mm tall in the model; real 18650s are 18.4
+  across and do not fit under the LED (13 mm). The cartridge's flat pouch does, at about 22 Wh rather than 25.
+
+| | Dome pendant | Orb, plug-in | Orb battery cartridge |
+|---|---|---|---|
+| BOM, one-off shop rates | **$1,203** (was $1,421) | **$1,310** (with cable and adapter) | about **$40** (bought, estimate) |
+| BOM, a run of 200 (my estimate) | about $185 parts, $215 landed | about $170 parts, $195 landed | about $28 parts, $35 landed |
+| suggested retail (the owner sets prices) | $795 to $895 with one cover; covers $295 to $345 | **$545 to $645**; balls $245 to $295 | **$95 to $125** |
+
+**For Planet** (`earf_moon.py`): the black is in the GLBs. The `orb` piece takes `cable` (default true) and
+`cartridge`: `"none"` (default, the plug-in Orb with its blanking cap), `"in"`, or `"out"` (slid `cartridge_out` m,
+default 0.045, out of the back). A cordless Orb is `cable: false, cartridge: "in"`.
+
+**The tints, matched to the speakers when lit (a casting spec).** The owner saw "two reds and an orange instead of red
+orange yellow" in the Orbs row: lit, Dust read at 33° (Ember's red) and Acid at 60° (orange). The cause is the tint's
+depth, not the light: the rows' glow is about 3200 K under a 4300 K balance, near neutral, but a warm cast seen through
+9 to 12 mm of tint pulls toward red, and harder the deeper it is. So each tint is cast to its own colour (`crystal.CAST`,
+its absorption at the body's 5 mm radius), found by measurement: render the row, take the median LCh hue of each lamp's
+glowing body (highlights and rim out), turn the cast's hue by the miss, again until it holds (Acid's response is steep
+near yellow, so it was bisected). Ember is cast deeper than the rest so it reads red, not coral. Targets are the
+speakers' swatches (`marks.SPEAKERS`).
+
+| Tint | Cast (`deep`) | Speaker's hue | Lit Orb (h, C) | Lit Dome (h, C) |
+|---|---|---|---|---|
+| Ember | #CD8553 | 35.1° | 33.3° (−1.8), C 50 | 40.0° (+4.9), C 74 |
+| Dust | #DDBA7B | 55.3° | 55.4° (+0.1), C 34 | 60.5° (+5.3), C 48 |
+| Acid | #E2D481 | 84.1° | 83.1° (−1.0), C 35 | 88.6° (+4.5), C 52 |
+| Poison | #A4C87C | 133.0° | 133.1° (+0.1), C 67 | 136.1° (+3.2), C 76 |
+| Ice | #5AC0E7 | 262.3° | 258.2° (−4.1), C 33 | 270.5° (+8.2), C 49 |
+| Haze | #A080D7 | 308.0° | 308.2° (+0.2), C 67 | 307.2° (−0.8), C 94 |
+| Fog | #F7F8F7 | neutral (C 0.7) | neutral, C 2 | neutral, C 4 |
+| Smoke | #787E87 | 300.7° at C 5.5 | 314.6° at C 6 | 287.2° at C 12 |
+
+Six chromatic tints sit within 9° of their speakers on both lamps, most within 5°. Fog and Smoke are near-neutral, as
+their swatches are, and a hue angle at chroma 2 to 12 swings with a few units of a or b: one cast cannot hold Smoke within
+10° on both lamps (the Orb pulls it pink, the Dome blue), so it is held neutral grey (±14° at C 6 to 12). These are
+render measurements: the caster matches the casts on chips 10 mm thick under a 2700 K source, and the first lit samples
+are checked against the speakers' swatches the same way.

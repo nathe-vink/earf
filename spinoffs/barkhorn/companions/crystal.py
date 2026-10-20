@@ -3,20 +3,24 @@ especially if the acrylic covers are easy to swap out, but I'm also a sucker for
 though, I'd want the spheres to be squatted rather than raised, like a crystal ball."). Two products, the frost set
 within the acrylic as in round 32c (study.py): tint, frost, tint; nothing white outside.
 
-Dome, the pendant. A tinted dome 200 across is a cover that comes off by hand. A brass collar is bonded into its crown,
-and three L-slots in the collar take three pins on the fixture's brass hub: a quarter-turn bayonet (30 degrees here).
+Dome, the pendant. A tinted dome 200 across is a cover that comes off by hand. A black anodised collar is bonded into its crown,
+and three L-slots in the collar take three pins on the fixture's black anodised hub: a quarter-turn bayonet (30 degrees here).
 Lifted 5 mm, turned and lowered, the cover hangs with each pin up in a notch at the end of its slot, so its own weight
 locks it. It can't turn out unless it is first pushed up, and a spring plunger in the hub clicks into a dimple in the
 collar as a detent. The COB (2700 K, recessed 22 up a 46 bore: a cut-off about 46 deg from the vertical), the hub, the
 cord and the driver in the canopy stay on the fixture, so a cover is never a live part and the listing (UL 1598) covers
 the fixture with any cover. The covers are sold on their own in every tint.
 
-Orb, the table lamp. A tinted ball 160 across, a crystal ball, sits low in the cup of a short base: a blackened-steel
-drum 120 across with a brass ring at its top that is the touch (tap to switch, hold to dim, 2200 to 2700 K). The
-battery, the board and the LED stay sealed in the base (IP44, as Moon's foot), and the LED shines up through a sealed
-window into a port in the ball's underside. So the ball is a cover too: it lifts off, and Orbs swap colour as the Domes
-do. It rests on a silicone ring in the cup, 18 deep, which is enough to stop a nudge rolling it. It charges on the
-staff tray through gold rings underneath (or USB-C).
+Orb, the table lamp. A tinted ball 160 across, a crystal ball, sits low in the cup of a short base: a black polished
+acrylic drum 120 across with a black anodised ring at its top that is the touch (tap to switch, hold to dim, 2200 to
+2700 K). The board and the LED stay sealed in the base (IP44), and the LED shines up through a sealed window into a
+port in the ball's underside. So the ball is a cover too: it lifts off, and Orbs swap colour as the Domes do. It rests
+on a silicone ring in the cup, 18 deep, which is enough to stop a nudge rolling it. It plugs in over USB-C; a battery
+cartridge (an option) makes it cordless.
+
+Round 32f (2026-10-20, the owner): the hardware black on both ("Why do the domes have brass tops? Why not black
+acrylic?"; "The orb base can be updated too"), and the Orb plug-in, optionally cordless ("Maybe the orbs are plug in and
+optionally rechargeable or something").
 
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/dome_pendant.py --out spinoffs/barkhorn/companions/out-dome-pendant
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/orb_table.py --out spinoffs/barkhorn/companions/out-orb-table
@@ -43,10 +47,27 @@ MATERIALS = dict(B.MATERIALS,
                  led={'preset': 'emit', 'color': '#FFC890', 'strength': 0.0},
                  window={'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#F4F2EE', 'radius': 0.05, 'roughness': 0.2},
                  silicone={'preset': 'rubber', 'color': '#1A1A1A'},
-                 gold={'preset': 'metal', 'color': '#D8B45A', 'roughness': 0.2})
+                 gold={'preset': 'metal', 'color': '#D8B45A', 'roughness': 0.2},
+                 # round 32f (the owner: "Why do the domes have brass tops? Why not black acrylic?"): the hardware
+                 # black, so the tint is the only colour. The working metal black anodised aluminium, satin; the trim
+                 # black cast acrylic, polished, as the cord
+                 anodised={'preset': 'metal', 'color': '#2A2A2D', 'roughness': 0.36, 'anisotropic': 0.3},
+                 trim={'preset': 'gloss_plastic', 'color': '#0C0C0D', 'roughness': 0.04, 'coat': 1.0,
+                       'coat_roughness': 0.02},
+                 fabric={'preset': 'rubber', 'color': '#141414', 'roughness': 0.8, 'sheen': 0.4})
 VARIANTS = copy.deepcopy(B.VARIANTS)
 VARIANTS['smoked'].setdefault('materials', {})['body'] = {'radius': 0.0055}     # 0.008 read cream, not smoke (critic p2)
 VARIANTS['smoke'].setdefault('materials', {})['body'] = {'radius': 0.012}       # Smoke at 0.005 read black (round 32e)
+# round 32f, the casting spec (the owner: "The orb lamps appear to have two reds and an orange instead of red orange
+# yellow"): each tint's cast colour (its absorption at the 5 mm radius) set so the lit lamp's glowing body sits on its
+# speaker's hue (marks.SPEAKERS), measured in LCh on the site's rows (crystal_promo.py, the glow about 3200 K at a 4300 K
+# balance) and moved until within 10 degrees on both the Orbs and the Domes (Fog and Smoke, near-neutral as their swatches,
+# by staying neutral: a hue angle at chroma 2 to 12 is not stable); README, round 32f, has the angles. The
+# Clouds' casts (common.COLOURS) went red when lit: the tint's depth over 9 to 12 mm pulls a warm hue toward red
+CAST = {'ember': '#CD8553', 'dust': '#DDBA7B', 'acid': '#E2D481', 'poison': '#A4C87C', 'ice': '#5AC0E7', 'haze': '#A080D7',
+        'fog': '#F7F8F7', 'smoke': '#787E87'}
+for _k, _c in CAST.items():
+    VARIANTS[_k]['deep'] = _c
 
 GAP, LT, SKIN = 1.0, 2.5, 3.0          # the liner 1 mm in from the shell, 2.5 thick; the inner skin 3
 
@@ -125,19 +146,23 @@ def dome_parts(p=D):
              notes=['the cover\'s inside: a 3 cup in the tint, polished, so the frost is seen only through acrylic']),
         Part('rim', rim, Machined('cast-acrylic', 'lathe'), finish='body', group='cover',
              notes=['closes the three layers at the mouth, bonded and polished with them']),
-        Part('collar', collar, Machined('brass', 'mill'), finish='brass', group='cover',
-             notes=['brass, satin: bonded into the crown; three L-slots, a quarter-turn bayonet (30 deg); the cover lifts '
-                    '5, turns and drops, its weight holding each pin up in its notch']),
-        Part('hub', hub, Machined('brass', 'lathe'), finish='brass', group='fixture',
-             notes=['brass, satin: the COB 22 up its 46 bore (the cut-off), the pins pressed in, the spring plunger '
-                    'the detent; the heat into the brass']),
-        Part('pins', pins, Bought('dome-pins'), finish='brass', group='fixture'),
+        Part('collar', collar, Machined('aluminium', 'mill'), finish='anodised', group='cover',
+             notes=['aluminium 6061, black anodised (type II, sealed), satin: bonded into the crown; three L-slots, a '
+                    'quarter-turn bayonet (30 deg); the cover lifts 5, turns and drops, its weight holding each pin up in '
+                    'its notch. Metal, not acrylic: acrylic is brittle and notch-sensitive, so the slots would wear and '
+                    'crack under the quarter turns, and it softens near the COB']),
+        Part('hub', hub, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
+             notes=['aluminium 6061, black anodised, satin: the COB\'s heat sink and its baffle (the COB 22 up the 46 '
+                    'bore, the cut-off), the pins pressed in, the spring plunger the detent']),
+        Part('pins', pins, Bought('dome-pins'), finish='anodised', group='fixture'),
         Part('cob', cob, Bought('moon-cob'), finish='led', group='fixture', inside=True),
-        Part('gland', gland, Machined('brass', 'lathe'), finish='brass', group='fixture',
-             notes=['the cord grip and strain relief, screwed into the hub']),
+        Part('gland', gland, Machined('cast-acrylic', 'lathe'), finish='trim', group='fixture',
+             notes=['the cap: black cast acrylic, polished, over the nylon cord grip (the strain relief), on two M3 into '
+                    'the hub']),
         Part('cord', cord, Bought('moon-cord'), finish='cord', group='fixture'),
-        Part('canopy', canopy, Machined('brass', 'lathe'), finish='brass', group='canopy',
-             notes=['150 x 50, brass (or blackened steel): the driver and the junction-box strap']),
+        Part('canopy', canopy, Machined('cast-acrylic', 'lathe'), finish='trim', group='canopy',
+             notes=['150 x 50, black cast acrylic, polished: over the driver and a steel junction-box strap (the strap '
+                    'carries the load)']),
         Part('driver', driver, Bought('moon-driver'), finish='steel', group='canopy', inside=True, render=False),
         Part('plunger', None, Bought('dome-plunger')),
         Part('listing', None, Bought('moon-listing')),
@@ -164,25 +189,48 @@ def orb_parts(p=O):
     shell = ball(R, t, (0, 0, zc)) - port
     liner = ball(r_liner, LT, (0, 0, zc)) - cyl('z', (0, 0), p['port'] + 8, zc - R - 5, zc - R + 25)
     skin = ball(r_skin, SKIN, (0, 0, zc)) - port
-    # the ring that lines the port and closes the layers there: brass, bonded
+    # the ring that lines the port and closes the layers there: black anodised, bonded
     gz0 = zc - math.sqrt(R ** 2 - (p['port'] / 2) ** 2)
     gz1 = zc - math.sqrt((r_skin - SKIN) ** 2 - (p['port'] / 2) ** 2)
     grommet = cyl('z', (0, 0), p['port'] - 0.4, gz0, gz1) - cyl('z', (0, 0), p['port'] - 6, gz0 - 1, gz1 + 1)
-    # the base: a blackened-steel drum, its pocket (the battery and the board) closed from below by a plate; the cup's
-    # floor carries a sealed window over the LED; a brass touch ring on top, the cup through both
-    base = eased(bd, 0, bh, 3.0, top=False) - cyl('z', (0, 0), 100, -1, 16) - cup - cyl('z', (0, 0), 30, 15, bh)
-    plate = cyl('z', (0, 0), 99.6, 0.4, 4) \
-        - (cyl('z', (0, 0), 61, -1, 2) - cyl('z', (0, 0), 53, -2, 3))
+    # round 32f (the owner: "The orb base can be updated too"; "Maybe the orbs are plug in and optionally rechargeable
+    # or something"): the base a black polished acrylic drum, its pocket from below holding an aluminium chassis (the
+    # LED's heat path, the board) and a steel ballast (the weight the steel drum had); the touch ring black anodised.
+    # Plug-in over USB-C as standard, the cable leaving by a notch in the underside at the back left; a battery
+    # cartridge slides into a bay from the back (an option), a blanking cap closing the bay without it
+    pd, pz = bd - 10, 16.0                                   # the pocket: 110 across, 16 up
+    base = eased(bd, 0, bh, 3.0, top=False) - cyl('z', (0, 0), pd, -1, pz) - cup - cyl('z', (0, 0), 30, 15, bh)
     ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup
-    window = cyl('z', (0, 0), 29.6, 16.2, zc - math.sqrt((R + 0.5) ** 2 - 15 ** 2) - 0.3)
-    pack = box(-34, -19, 4.2, 34, 19, 13.5)
-    board = cyl('z', (0, 0), 92, 13.6, 15.0) - cyl('z', (0, 0), 34, 13, 16)
+    window = cyl('z', (0, 0), 29.6, pz + 0.2, zc - math.sqrt((R + 0.5) ** 2 - 15 ** 2) - 0.3)
+    chassis = cyl('z', (0, 0), pd - 0.4, 12.2, 13.4) - cyl('z', (0, 0), 20, 12, 14)
+    board = cyl('z', (0, 0), 78, 13.6, 15.0) - cyl('z', (0, 0), 34, 13, 16)
     led = cyl('z', (0, 0), 26, 14.0, 15.6)
-    # the seat: a silicone ring in the cup under the ball (its top just under the ball's surface)
+    # the bay: 94 wide, from 24 in front of the centre out through the drum's back, 12 tall
+    bw, by0, bz = 94.0, -24.0, 12.0
+    bay = box(-bw / 2, by0, -1, bw / 2, bd / 2 + 5, bz)
+    drum = cyl('z', (0, 0), bd - 0.2, -1, bz + 1)
+    ballast = cyl('z', (0, 0), 105.0, 0.6, 12.0) - box(-bw / 2 - 0.5, by0 - 0.5, 0, bw / 2 + 0.5, bd, 13)
+    # and a steel ring above the chassis, under the cup (the cup is 31 up or more out there), in a groove from below
+    ballast = ballast + (cyl('z', (0, 0), 108.0, 13.4, 28.0) - cyl('z', (0, 0), 80.0, 13, 29))
+    base = base - bay - (cyl('z', (0, 0), 108.4, 15, 28.2) - cyl('z', (0, 0), 79.6, 14, 29))
+    # the cartridge: its back face is the drum's, so it closes the bay flush
+    cartridge = box(-bw / 2 + 0.4, by0 + 0.4, 0.6, bw / 2 - 0.4, bd / 2, bz - 0.4) & drum
+    pads = None
+    for x in (-12.0, 12.0):
+        pad = cyl('z', (x, 10.0), 8.0, 0.2, 0.6)
+        pads = pad if pads is None else pads + pad
+    blank = box(-bw / 2 + 0.4, bd / 2 - 12, 0.6, bw / 2 - 0.4, bd / 2, bz - 0.4) & drum
+    # USB-C: a receptacle on the chassis's edge, facing out along a notch in the underside at the back left
+    a = math.radians(100.0)                                  # from the front (-y), round by the left: clear of the bay
+    ux, uy = -math.sin(a), -math.cos(a)
+    notch = at(math.degrees(math.atan2(uy, ux)), box(48, -6.5, -1, bd / 2 + 2, 6.5, 7.0))
+    base = base - notch
+    ballast = ballast - notch
+    plug = at(math.degrees(math.atan2(uy, ux)), box(51, -6.0, 0.6, 62, 6.0, 6.6))
+    cable = orb_cable(ux, uy)
     zs = zc - math.sqrt(R ** 2 - 42 ** 2) - 0.3
     seat = cyl('z', (0, 0), 92, zs - 1.5, zs) - cyl('z', (0, 0), 84, zs - 2, zs + 1)
-    contacts = cyl('z', (0, 0), 60, 0.4, 1.6) - cyl('z', (0, 0), 54, 0, 2)
-    foot = cyl('z', (0, 0), 111.6, 0.2, 2) - cyl('z', (0, 0), 106.4, 0, 3)
+    foot = cyl('z', (0, 0), 111.6, 0.2, 2) - cyl('z', (0, 0), 106.4, 0, 3) - bay - notch
     base = base - (cyl('z', (0, 0), 112, -1, 2) - cyl('z', (0, 0), 106, -2, 3)) - cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01)
     ring = ring - (cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01) - cyl('z', (0, 0), 83.6, zs - 3, zs + 1))     # the seat's groove
     return [
@@ -193,24 +241,53 @@ def orb_parts(p=O):
              notes=['the diffuser: a 2.5 ball in clear, bead-blasted, in two halves inside the shell']),
         Part('skin', skin, Machined('cast-acrylic', 'lathe', setup_usd=120.0), finish='body', group='ball', inside=True,
              notes=['a 3 ball in the tint inside the liner: seen through the port, the frost is still behind acrylic']),
-        Part('grommet', grommet, Machined('brass', 'lathe'), finish='brass', group='ball',
-             notes=['lines the port and closes the three layers there, bonded']),
-        Part('base', base, Machined('steel', 'lathe'), finish='steel', group='base',
-             notes=['mild steel, blackened and waxed (or black e-coat): 120 x 30, its weight with the ball\'s about 3.2 kg; '
-                    'the cup turned in it and the ring together']),
-        Part('ring', ring, Machined('brass', 'lathe'), finish='brass', group='base',
-             notes=['brass, satin, insulated from the base: the touch (tap to switch, hold to dim, 2200 to 2700 K)']),
+        Part('grommet', grommet, Machined('aluminium', 'lathe'), finish='anodised', group='ball',
+             notes=['black anodised aluminium: lines the port and closes the three layers there, bonded']),
+        Part('base', base, Machined('cast-acrylic', 'lathe', setup_usd=80.0), finish='trim', group='base',
+             notes=['black cast acrylic, polished: 120 x 30, the cup turned in it, the pocket (110 x 16) from below, the '
+                    'bay and the cable notch milled']),
+        Part('ring', ring, Machined('aluminium', 'lathe'), finish='anodised', group='base',
+             notes=['aluminium, black anodised, satin, insulated from the chassis: the touch (tap to switch, hold to dim, '
+                    '2200 to 2700 K); metal, as it must be to sense a touch']),
         Part('window', window, Machined('cast-acrylic', 'lathe'), finish='window', group='base',
              notes=['a clear acrylic plug, sealed with an O-ring: the LED under it, the base IP44 with the ball off']),
-        Part('plate', plate, Machined('steel', 'lathe'), finish='steel', group='base', inside=True,
-             notes=['closes the pocket from below on an O-ring; the gold contact rings on it']),
-        Part('battery', pack, Bought('moon-battery'), finish='steel', group='base', inside=True, render=False),
-        Part('board', board, Bought('moon-board'), finish='steel', group='base', inside=True, render=False),
+        Part('chassis', chassis, Machined('aluminium', 'mill'), finish='steel', group='base', inside=True,
+             notes=['aluminium 6061 plate: carries the board, the LED\'s heat path and the USB-C receptacle; screwed up '
+                    'into the acrylic on threaded inserts, an O-ring between']),
+        Part('ballast', ballast, Machined('steel', 'mill'), finish='steel', group='base', inside=True,
+             notes=['mild steel, zinc-plated: the weight under the ball (the steel drum\'s job before): a plate round '
+                    'the bay and a ring above the chassis, under the cup; screwed through the chassis']),
+        Part('board', board, Bought('orb-board'), finish='steel', group='base', inside=True, render=False),
         Part('led', led, Bought('moon-led-table'), finish='led', group='base', inside=True),
         Part('seat', seat, Bought('orb-seat'), finish='silicone', group='base'),
-        Part('foot-ring', foot, Bought('moon-seals'), finish='silicone', group='base'),
-        Part('contacts', contacts, Bought('moon-contacts'), finish='gold', group='base'),
+        Part('foot-ring', foot, Bought('orb-seals'), finish='silicone', group='base'),
+        Part('blank', blank, Machined('cast-acrylic', 'mill'), finish='trim', group='base',
+             notes=['the bay\'s blanking cap, black acrylic polished, flush with the drum: two magnets hold it']),
+        Part('cable', cable + plug, Bought('orb-cable'), finish='fabric', group='cable'),
+        Part('adapter', None, Bought('orb-adapter')),
+        Part('cartridge', cartridge, Bought('orb-cartridge'), finish='trim', group='cartridge', option='cartridge'),
+        Part('cartridge-pads', pads, Bought('orb-pads'), finish='gold', group='cartridge', option='cartridge'),
     ]
+
+
+def orb_cable(ux, uy):
+    """The cable, dressed away: out of the plug along the notch, curving round to run straight back over the table, 420
+    long. Short straight lengths with round joints (a swept spline tessellated to 650,000 vertices)."""
+    from build123d import Solid, Plane, Sphere, Pos, Vector as V
+    r, z = 2.6, 2.6
+    p0, p1, p2 = (62 * ux, 62 * uy, 3.6), (95 * ux, 95 * uy + 30, z), (95 * ux, 140, z)
+    pts = []
+    for i in range(13):                                   # a quadratic Bezier round the corner
+        s = i / 12
+        pts.append(tuple((1 - s) ** 2 * a + 2 * s * (1 - s) * b + s * s * c for a, b, c in zip(p0, p1, p2)))
+    pts.append((95 * ux, 420, z))
+    out = None
+    for a, b in zip(pts, pts[1:]):
+        d = V(*b) - V(*a)
+        seg = Solid.make_cylinder(r, d.length, Plane(origin=a, z_dir=d))
+        seg = seg + Pos(*b) * Sphere(r) if b != pts[-1] else seg
+        out = seg if out is None else out + seg
+    return out
 
 
 def eased(d, z0, z1, e, top=True, bottom=True):
@@ -238,14 +315,22 @@ NOTES_DOME = [
 NOTES_ORB = [
     'A crystal ball: a 160 tinted ball, low in the cup of a 120 x 38 base. The ball lifts off: the LED is under a '
     'sealed window in the base, so balls swap colour by hand, as the Dome\'s covers do.',
-    'Cordless: two 18650 cells (25 Wh) sealed in the base, about 12 hours at the bar setting; it charges on the staff '
-    'tray through two gold rings underneath, or by USB-C. Touch the brass ring: tap to switch, hold to dim, 2200 to '
-    '2700 K as it dims.',
-    'IP44: the base sealed by the window\'s and the plate\'s O-rings; with the ball on or off. Wipe with a damp cloth.',
-    'The ball\'s wall is tint, frost, tint, as the Dome\'s: the port underneath is lined in brass, and through it the '
-    'frost is still behind acrylic.',
+    'Plug-in as standard: USB-C PD in through a notch in the underside at the back left, so the base sits flat; a '
+    'slim black fabric cable (2 m) and a 20 W adapter in the box; no battery. Touch the black ring: tap to switch, '
+    'hold to dim, 2200 to 2700 K as it dims.',
+    'Cordless as an option: a battery cartridge (one 8 x 60 x 90 Li-ion pouch, about 22 Wh, with its own protection '
+    'board) slides into the bay under the base from the back and latches on two magnets and a detent, flush with the '
+    'drum. About 10 hours at the bar setting; it charges in the lamp over the USB-C, or on the staff tray through two '
+    'gold pads on its underside. Without it a blanking cap closes the bay.',
+    'IP44: the base sealed by the window\'s and the chassis\'s O-rings, the cartridge\'s own contacts sealed; with '
+    'the ball on or off. Wipe with a damp cloth.',
+    'Black, so the tint is the only colour: the drum black cast acrylic, polished, over an aluminium chassis and a '
+    'steel ballast; the touch ring and the port\'s lining black anodised aluminium.',
 ]
 TOUCHING_DOME = [('collar', 'shell'), ('collar', 'liner'), ('collar', 'skin'), ('pins', 'hub'), ('pins', 'collar'),
                  ('cob', 'hub'), ('gland', 'hub'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'liner')]
 TOUCHING_ORB = [('grommet', 'shell'), ('grommet', 'liner'), ('grommet', 'skin'), ('window', 'base'),
-                ('seat', 'base'), ('ring', 'base'), ('led', 'board')]
+                ('seat', 'base'), ('ring', 'base'), ('led', 'board'), ('chassis', 'base'), ('ballast', 'chassis'),
+                ('ballast', 'base'), ('blank', 'cartridge'), ('blank', 'base'), ('cartridge', 'base'),
+                ('cable', 'base'), ('cable', 'ballast'), ('cable', 'chassis'), ('cartridge-pads', 'cartridge'),
+                ('board', 'chassis'), ('foot-ring', 'base')]

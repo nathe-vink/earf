@@ -1,14 +1,20 @@
 {
  "product": "earf-orb-table",
  "title": "Orb table lamp",
- "parts": 14,
- "seconds": 10,
+ "parts": 18,
+ "seconds": 12,
  "sheets": {},
  "budget_usd": {
-  "lathe": 1133,
-  "buy": 56
+  "lathe": 1111,
+  "mill": 146,
+  "buy": 52
  },
- "options_usd": {},
+ "options_usd": {
+  "cartridge": {
+   "usd": 40,
+   "unpriced": 0
+  }
+ },
  "checks_ok": true,
  "drawings": "spinoffs/barkhorn/companions/out-orb-table/drawings/earf-orb-table-sheets.pdf",
  "render": "spinoffs/barkhorn/companions/out-orb-table/render/earf-orb-table.glb"
