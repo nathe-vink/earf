@@ -1089,6 +1089,25 @@
    "radius_m": 0.02,
    "color": 2700,
    "camera": false
+  },
+  "decks-pin": {
+   "type": "spot",
+   "position": [
+    7.85,
+    3.5,
+    2.55
+   ],
+   "target": [
+    7.7,
+    4.25,
+    1.15
+   ],
+   "power_w": 300.0,
+   "cone_deg": 9.0,
+   "blend": 0.5,
+   "radius_m": 0.015,
+   "color": 2700,
+   "camera": false
   }
  },
  "haze": {

@@ -82,6 +82,14 @@ def lights(v):
         L['host'] = {'type': 'spot', 'position': [H['x'], H['y'], T37.RP.CEIL - 0.05], 'target': [H['x'], H['y'], H['top']],
                      'power_w': v.get('host_w', 40.0), 'cone_deg': v.get('host_cone', 6.0), 'blend': 0.6, 'radius_m': 0.02, 'color': 2700,
                      'camera': False}
+        C = T37.RP.COUNTER                              # a warm pin spot over the decks, from above and in front (below
+        # the Domes' line: from the ceiling over the aisle it lit nothing at the column, by eye and measure; a Cycles spot's
+        # watts are for the whole sphere, so a narrow cone needs hundreds to read), grazing
+        # the request column's front so the coins' polished edges catch it (the lead: as any listening bar lights its decks)
+        cx, cy = round(T37.RP.DJ['x'] + 0.80, 3), round(C['y1'] - 0.30, 3)
+        L['decks-pin'] = {'type': 'spot', 'position': [round(cx + 0.15, 3), round(cy - 0.75, 3), 2.55],
+                          'target': [cx, cy, round(C['top_z'] + 0.08, 3)], 'power_w': v.get('decks_pin', 300.0),
+                          'cone_deg': 9.0, 'blend': 0.5, 'radius_m': 0.015, 'color': 2700, 'camera': False}
     return L
 
 
