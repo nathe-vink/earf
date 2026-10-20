@@ -318,3 +318,9 @@ Fixes common to both:
 - Flagged as fake on p4: the puddle's sharp edge ("like a cut-out decal"), the smoke column too uniform, and the fire small for its smoke. The puddle is the one I'd fix next, with soft wet margins.
 
 **Side by side:** `element-smoke-e6-e7-real.jpg` (E6 p3, E7 p4).
+
+**The coordinator's follow-up pass (during the owner's wait), reverted.**
+- **E6 p4:** sharper, finer smoke edges and a longer crust tile. Realism fell to 3.5 / 3.5, and the read test saw "a mushroom cloud or a giant hooded figure" in the sharpened plume.
+- **E7 p5:** a bigger fire, a broken-up column, a smaller puddle with a wet margin. Realism 4.5 / 4.5 and "floats" again, with the puddle still read as a decal.
+- Both are worse than E6 p3 and E7 p4, so the set files are restored to those proofs (5811e3e), which stay the ones in front of the owner.
+- The critics vary by about half a point between runs, so gains under that are noise.
