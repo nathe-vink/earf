@@ -23,26 +23,26 @@
  },
  "camera": {
   "position": [
-   0.0,
-   -1.5987045508745514,
-   0.8798849843246478
+   0.18,
+   -1.95,
+   0.62
   ],
   "target": [
-   0.06,
-   -0.02,
-   0.13309585894199738
+   0.17,
+   -0.1,
+   0.06809585894199738
   ],
-  "lens_mm": 80.0,
-  "level": false
+  "lens_mm": 70.0,
+  "level": false,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.12,
+   0.16809585894199738
+  ]
  },
  "set": {
-  "kind": "sweep",
-  "color": "#EEEAE3",
-  "width": 8.0,
-  "front": 4.0,
-  "depth": 2.0,
-  "radius": 1.2,
-  "height": 4.0,
+  "kind": "stage",
   "props": [
    {
     "kind": "kit",
@@ -50,28 +50,28 @@
     "material": "paper",
     "color": "#EEEAE3",
     "size": [
-     3.0,
-     2.0,
-     0.002
+     14.0,
+     14.0,
+     0.01
     ],
     "position": [
      0.0,
-     0.3,
-     0.0
+     4.0,
+     -0.01
     ]
    }
   ]
  },
  "sky": {
   "kind": "gradient",
-  "zenith": "#D8D4CE",
-  "horizon": "#DEDAD4",
+  "zenith": "#E6E2DB",
+  "horizon": "#DCD6CC",
   "ground": "#6A665F",
-  "strength": 0.15
+  "strength": 0.5
  },
  "sun": {
-  "azimuth_deg": 322.0,
-  "elevation_deg": 36.0,
+  "azimuth_deg": 205.0,
+  "elevation_deg": 28.0,
   "irradiance": 9.0,
   "angle_deg": 0.5,
   "color": "#FFF2DE"
@@ -93,7 +93,7 @@
     0,
     0.16809585894199738
    ],
-   "irradiance": 0.15,
+   "irradiance": 0.25,
    "color": "#FFF7EA",
    "camera": false
   },
@@ -113,27 +113,47 @@
     0,
     0.16809585894199738
    ],
-   "irradiance": 0.3,
+   "irradiance": 0.55,
    "color": "#FFF7EA",
    "camera": false
   },
   "rim": {
    "type": "area",
    "size_m": [
-    0.6,
+    1.2,
     0.4
    ],
    "orbit": {
-    "azimuth_deg": 180,
-    "elevation_deg": 15,
-    "distance_m": 1.2
+    "azimuth_deg": 200,
+    "elevation_deg": 22,
+    "distance_m": 1.5
    },
    "target": [
     0,
     0,
     0.16809585894199738
    ],
-   "irradiance": 1.5,
+   "irradiance": 2.5,
+   "color": "#FFF7EA",
+   "camera": false
+  },
+  "base": {
+   "type": "area",
+   "size_m": [
+    0.08,
+    0.8
+   ],
+   "orbit": {
+    "azimuth_deg": 50,
+    "elevation_deg": 8,
+    "distance_m": 1.0
+   },
+   "target": [
+    0,
+    0,
+    0.012
+   ],
+   "irradiance": 0.6,
    "color": "#FFF7EA",
    "camera": false
   }
@@ -146,7 +166,7 @@
   "bounces": 24,
   "transmission_bounces": 24,
   "view": "Khronos PBR Neutral",
-  "exposure": -0.6,
+  "exposure": -0.4,
   "white_balance_k": 5400
  },
  "materials": {

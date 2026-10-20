@@ -271,18 +271,31 @@ def day(size=(900, 900), samples=160, final=False):
                                 'distance_m': 2.5}, 'target': [0, 0, lift() / 1000], 'irradiance': 0.3, 'color': '#FFF7EA',
                                 'camera': False}
         s['lights']['fill']['irradiance'] = 0.15
-        s['sky']['strength'] = 0.15
+        s['sky']['strength'] = 0.08
         s['sun']['irradiance'] = 9.0
-        s['render']['exposure'] = -0.6
-        s['lights']['rim'] = {'type': 'area', 'size_m': [0.6, 0.4], 'orbit': {'azimuth_deg': 180, 'elevation_deg': 15,
-                              'distance_m': 1.2}, 'target': [0, 0, lift() / 1000], 'irradiance': 1.5, 'color': '#FFF7EA',
+        s['render']['exposure'] = -0.4
+        # round 3 (round 2: A 6.0, B 5.5; both: the sun behind the globe so light comes through it toward the camera
+        # and the coloured shadow falls forward; a lower camera; the base's sheen; the paper falling off behind)
+        s['sun'].update(azimuth_deg=205.0, elevation_deg=28.0)
+        s['lights']['front']['irradiance'] = 0.55
+        s['lights']['fill']['irradiance'] = 0.25
+        s['lights']['rim'] = {'type': 'area', 'size_m': [1.2, 0.4], 'orbit': {'azimuth_deg': 200, 'elevation_deg': 22,
+                              'distance_m': 1.5}, 'target': [0, 0, lift() / 1000], 'irradiance': 2.5, 'color': '#FFF7EA',
                               'camera': False}
-        s['camera'].update(lens_mm=80.0, target=[0.06, -0.02, lift() / 1000 - 0.035])
+        s['lights']['base'] = {'type': 'area', 'size_m': [0.08, 0.8], 'orbit': {'azimuth_deg': 50, 'elevation_deg': 8,
+                               'distance_m': 1.0}, 'target': [0, 0, 0.012], 'irradiance': 0.6, 'color': '#FFF7EA',
+                               'camera': False}
+        s['camera'] = {'position': [0.18, -1.95, 0.62], 'target': [0.17, -0.10, lift() / 1000 - 0.10], 'lens_mm': 70.0,
+                       'level': False, 'fstop': 5.6, 'focus': [0.0, -0.12, lift() / 1000]}
+        # no sweep: its back wall stood between the sun (behind, 28 deg up) and the globe and shaded the whole set;
+        # a long sheet of paper to the horizon instead, the sky warm
+        s['set'] = {'kind': 'stage', 'props': [{'kind': 'kit', 'shape': 'box', 'material': 'paper', 'color': '#EEEAE3',
+                                                 'size': [14.0, 14.0, 0.01], 'position': [0.0, 4.0, -0.01]}]}
+        s['sky'].update(zenith='#E6E2DB', horizon='#DCD6CC', ground='#6A665F', strength=0.5)
         # the fluorescent edges, stronger: they gather daylight through the faces (0.8 did not read)
         for n in SWATCH:
             s['materials'][f'rim-{n.lower()}'] = {'strength': 2.0}
-        s['set']['props'] = [{'kind': 'kit', 'shape': 'box', 'material': 'paper', 'color': '#EEEAE3',
-                              'size': [3.0, 2.0, 0.002], 'position': [0.0, 0.3, 0.0]}]
+
     return s
 
 
