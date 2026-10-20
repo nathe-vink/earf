@@ -11,7 +11,7 @@ from common import area, camera, finish, piece, shot as frame, portrait_of
 from smoke import SHELL, SPEAKER
 
 
-def column(seed=5):
+def column(seed=5, color='#DADDE2', density=7.0, cut=0.44, fade_in=(0.12, 1.0)):
     """One column, rising out of the dark behind and left of the speaker (its source unseen), crossing behind the
     waveguide so the horn stands against it, then rolling up and away to the right as it widens, billows and thins.
     Nothing crosses the front or touches the shell, and it never seems to come out of the speaker."""
@@ -32,10 +32,10 @@ def column(seed=5):
         z = 0.12 + 2.45 * t
         pts.append([round(x, 4), round(y, 4), round(z, 4)])
         rr.append(round(0.1 + 0.3 * t ** 1.1 + 0.2 * max(0.0, t - 0.5), 4))
-    return piece('ext', module='smoke_el', fn='ribbon', strands=[{'points': pts, 'radii': rr, 'density': 7.0}], layers=6,
-                 scale=0.07, cut=0.44, soft=0.3, rise=1.6, laminar=0.0, laminar_blend=0.05, fade=[1.9, 2.4],
-                 color='#DADDE2', anisotropy=0.6, detail=7.0, distortion=0.8, seed=seed, wobble=0.35, wobble_freq=6.0,
-                 break_scale=0.45, break_cut=0.35, break_floor=0.15, fade_in=[0.12, 1.0], grid=True, voxel=0.012)
+    return piece('ext', module='smoke_el', fn='ribbon', strands=[{'points': pts, 'radii': rr, 'density': density}], layers=6,
+                 scale=0.07, cut=cut, soft=0.3, rise=1.6, laminar=0.0, laminar_blend=0.05, fade=[1.9, 2.4],
+                 color=color, anisotropy=0.6, detail=7.0, distortion=0.8, seed=seed, wobble=0.35, wobble_freq=6.0,
+                 break_scale=0.45, break_cut=0.35, break_floor=0.15, fade_in=list(fade_in), grid=True, voxel=0.012)
 
 
 def shot():

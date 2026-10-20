@@ -248,3 +248,20 @@ How each was found:
 - **E1:** the slot was first placed behind the speaker, where the beam fell out of frame. It now sits low in the right wall, in front, so the sun's slab crosses the smoke and lands on the back wall as a bar behind the speaker.
 - **E2:** the spot was first over the table, which lit the smoke dull. It now comes from behind, so the smoke glows. The chair faces the camera. A brass vase was dropped because it read as clutter.
 - **E3:** three thick strands read as cotton-wool coils, and thin ones read as tubing. One wide, billowing strand plus a fainter second reads as smoke. It starts low at the front so the cabinet stays clear, and the rims are hidden from the gloss floor.
+
+## E3, the studio take (the owner's pick), passes 1 to 3, and E4 black smoke
+
+The coordinator's fixes: the front kept clear; one rising column, not a creature; the speaker legible on black; nothing like fire.
+
+- **Pass 1** (g1): one column rising behind and left and rolling over the top.
+  - Reads: smoke, no fire. But the dark horn fins against the blown panel read as "a clawed hand", and the smoke seemed to come out of the speaker's top.
+  - Duel: A 5.75, E3 4.0.
+- **Root cause of the "card".** A surface seen through the smoke (the floor, and later a backdrop) showed lit, whatever the smoke's density. It persisted with a single clean tube, without light linking, and with a matte floor. Shading inside a mesh volume was the cause: ribbon now fills a voxel grid from each tube (`grid=True`, a MESH_TO_VOLUME object), and the card is gone. The "hose" and "painted" edges the judges saw came from the same thing.
+- **Pass 2** (g2): the column rises from the floor behind-left as a grid, with a backdrop pool, fills up and the kicker down.
+  - Reads, twice: stands, "smoke from the floor at the far left, not from the speaker", no fire, no figure, the front readable but dim.
+  - Duel: A 6.0, E3 4.75. The judges: crushed blacks, the plume "flat, cut-out", the floor contact weak, the product small.
+- **Pass 3** (h3, a 64-sample test): fills and the backdrop pool lifted, a softer lit floor, a softer column, the camera nearer. Its proof was stopped when the owner wrote.
+
+**The owner, 2026-10-20:** "Maybe studio for the smoke isn't right, since it should really be black smoke."
+
+**E4** (`smoke_studio_black.py`, proof element-smoke-e4-black-p0): the same column made black, sooty and absorbing (albedo #0A0A0A, density 60), on a pale grey seamless lit soft from the front-left. The black smoke reads like ink in water, and the speaker reads clean against the pale ground. It is a test frame for the owner's direction, not yet read-tested.
