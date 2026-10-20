@@ -12,7 +12,7 @@ from common import area, camera, finish, ground, piece, shot as frame, portrait_
 from smoke import SHELL, SPEAKER
 
 SKY = 'aarfontein_pan'                      # a real dry lake bed at a low sun (Poly Haven, CC0)
-SKY_ROT = 0.0
+SKY_ROT = 124.0                             # the sky's low sun to the front-left, so the speaker's shadow falls behind it
 CAN = (1.9, 1.4)                           # the canister, on the crust right of and behind the speaker
 
 
@@ -61,7 +61,7 @@ def shot():
         'kicker_r': {**area(150, 14, 3.0, 16.0, '#FFE6CC', (0.6, 2.4), (0.0, 0.0, 0.8)), 'receivers': SHELL},
     }
     return frame('smoke_saltflat', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=1.0),
-                 'barkhorn, Smoke, black smoke on a salt pan', sun=sun_from_sky(SKY, SKY_ROT, irradiance=4.0),
+                 'barkhorn, Smoke, black smoke on a salt pan', sun={**sun_from_sky(SKY, SKY_ROT, irradiance=9.0), 'elevation_deg': 14.0},
                  lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.01), samples=512, exposure=0.3,
                  fin=finish(contrast=0.05, clarity=0.03, saturation=-0.9, vignette=0.15))
 

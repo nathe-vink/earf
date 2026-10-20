@@ -351,7 +351,7 @@
        0.4887,
        0.5
       ],
-      "density": 60.0
+      "density": 45.0
      }
     ],
     "layers": 6,
@@ -365,7 +365,7 @@
      1.9,
      2.4
     ],
-    "color": "#0A0A0A",
+    "color": "#383838",
     "anisotropy": 0.6,
     "detail": 7.0,
     "distortion": 0.8,
@@ -377,7 +377,7 @@
     "break_floor": 0.15,
     "fade_in": [
      0.12,
-     0.45
+     0.25
     ],
     "grid": true,
     "voxel": 0.012
@@ -519,6 +519,26 @@
     "elevation_deg": 40,
     "distance_m": 4.0
    }
+  },
+  "rim_l": {
+   "type": "area",
+   "size_m": [
+    0.4,
+    2.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.1
+   ],
+   "irradiance": 30.0,
+   "color": "#F4F0EA",
+   "orbit": {
+    "azimuth_deg": -145,
+    "elevation_deg": 40,
+    "distance_m": 3.0
+   },
+   "specular": 0.0
   },
   "wall": {
    "type": "area",
