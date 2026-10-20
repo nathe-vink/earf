@@ -26,7 +26,7 @@ DEFAULT = dict(S.DEFAULT, **dict(
     colourway='green', pendant_w=260.0, pendant_cone=30.0, dome_w=30.0, dome_glow=1.1, sphere_w=6.0, sphere_glow=1.1,
     disc_col='#FF5A3A', disc_glow=0.8, disc_lamp=60.0, name_glow=0.25, niche_strip=6.0, sink_glow=0.8,
     screen_glow=1.0, screen_tint='#FFA060', screen_gap=0.04, screen_rough=0.22, etch_glow=0.01, etch_frost=0.3,
-    rw_w=30.0, rw_cone=26.0, altar_w=90.0, altar_cone=36.0, spk_irr=2.0, spk_back=12.0, spk_spread=90.0,
+    rw_w=30.0, rw_cone=26.0, altar_w=90.0, altar_cone=36.0, spk_irr=1.0, spk_back=4.0, spk_spread=90.0,
     spk_link=True, spk_k=2900, candle_w=3.0, flame=60.0, haze=0.010, wb=3000, exposure=0.0, view='AgX',
     look='AgX - Medium High Contrast',
     menu_color='#8A6E4E'))
@@ -116,9 +116,11 @@ VIEWS = {
             # salmon, no pools on the zinc, the screens and the record wall unread, the red sink a second hero: nearer on
             # 45 mm; the speakers' lamps 2 W/m2, the altar spots on their faces; the oak darker; the Domes' cones tighter;
             # the screens 2.0, the record wall 30 W; the sink's glow down; haze 0.010
-            'camera': {'position': [7.0, 2.8, 1.3], 'target': [17.0, 3.1, 1.12], 'lens_mm': 45, 'level': True,
-                       'fstop': 4.0, 'focus': [16.0, 3.1, 1.0]},
-            'settings': {'exposure': 0.7, 'screen_glow': 2.0}},
+            # p4 (the lead's note: the chairs rebuilt, a concept change): p3's 45 mm lost the counter; down the counter
+            # from the window end on 32 mm, the zinc edge leading to the altar, the Domes in the top left
+            'camera': {'position': [3.3, 3.35, 1.35], 'target': [17.0, 3.3, 1.15], 'lens_mm': 32, 'level': True,
+                       'fstop': 4.0, 'focus': [9.0, 4.0, 1.1]},
+            'settings': {'exposure': 0.9, 'screen_glow': 2.0}},
     'listening-green': {'title': 'the listening zone, bottle green',
                         # after the critics on p2r: a standing dead-centre stare over a chair back, the speakers clipping,
                         # the left screen a white slab, the ceiling a void: seated and off axis on 35 mm, the near Ember on
@@ -166,7 +168,7 @@ VIEWS = {
              # 3200 K, lower and three-quarter on 50 mm, the spout's nose turned down
              'camera': {'position': [10.25, 1.35, 1.15], 'target': [11.02, 0.25, 0.84], 'lens_mm': 50, 'level': True,
                         'fstop': 2.8, 'focus': [11.0, 0.47, 0.84]},
-             'settings': {'exposure': 0.4, 'haze': 0.0, 'sink_glow': 2.5, 'sink_spot': 40.0, 'wb': 3200}},
+             'settings': {'exposure': 0.4, 'haze': 0.0, 'sink_glow': 1.5, 'sink_spot': 40.0, 'wb': 3200}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot
