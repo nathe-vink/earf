@@ -1,0 +1,348 @@
+{
+ "stage1": {
+  "impression": "A dark timber-boarded alcove with a smoked slab basin, but the basin reads as a blown white oval cut into a flat dark box: the 'glow through the thickness' is not there, the slab's faces are featureless, and the board grain is smooth and CG-like. It reads as a showroom render detail, not a photograph of a specific bar's washroom; a magazine would not run it as a picture of a specific place.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Basin glow under clipping and warm: region [245,262,525,358] clip_pct < 2 and r_median-b_median >= 60 (now clip 34.6 %, RGB 245/227/216, delta-E 25.7 vs #E0A060)",
+  "Slab front and side faces show the light passing through 120 mm of smoked acrylic: a visible gradient on [90,360,640,470] (lum_range >= 40, now 12.4) and a glowing polished top arris",
+  "Left edge not a black void: [0,0,90,480] crush_pct < 50 (now 86.9 % on 12.5 % of the frame)",
+  "Brief's props in frame: linen towel on a brass rod, plus one sign of use (a drop of water, a soap, a folded hand towel)",
+  "Timber boards with real fir/oak character at 1:1 (checks, varied grain, slight board-to-board tone variation) rather than smooth repeated texture",
+  "Unexplained white/cream panel with a copper pip at upper left [200,70,290,215] resolved or dressed"
+ ],
+ "defects": [
+  {
+   "region": [
+    245,
+    262,
+    525,
+    358
+   ],
+   "what": "Basin interior clipped (34.6 % of pixels at 255) and near white, not the warm amber the brief asks for; reads as a light box, not a lit acrylic bowl"
+  },
+  {
+   "region": [
+    90,
+    360,
+    640,
+    470
+   ],
+   "what": "Slab front face flat dark brown (lum_median 21.5, range 12.4); no sign of 120 mm acrylic, no edge glow, no internal light; reads as a painted MDF box"
+  },
+  {
+   "region": [
+    90,
+    215,
+    690,
+    300
+   ],
+   "what": "Top of slab: ghostly doubled reflections of the wall boards and tap, slightly wobbly; top arris has no highlight, so the thickness doesn't read"
+  },
+  {
+   "region": [
+    395,
+    385,
+    420,
+    410
+   ],
+   "what": "Small bright blob below the basin (drain or tap reflection) floating mid-face, reads as an artefact"
+  },
+  {
+   "region": [
+    0,
+    0,
+    90,
+    480
+   ],
+   "what": "Left band crushed to black (crush_pct 86.9 %), larger than a tenth of the frame"
+  },
+  {
+   "region": [
+    200,
+    70,
+    290,
+    215
+   ],
+   "what": "Blank cream rectangle with a copper pip on the wall: unidentified object, reads as placeholder geometry"
+  },
+  {
+   "region": [
+    480,
+    0,
+    720,
+    280
+   ],
+   "what": "Timber boards smooth and evenly grained, look like a tiled wood texture; no checks, no board-to-board variation"
+  },
+  {
+   "region": [
+    380,
+    20,
+    480,
+    160
+   ],
+   "what": "Spout reads as polished chrome rather than brushed steel; geometry soft and slightly rubbery at the bend"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No towel, brass rod or sign of life; frame is empty and showroom-like"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The basin is a clipped white oval rather than a warm glow.",
+   "evidence": {
+    "region": [
+     245,
+     262,
+     525,
+     358
+    ],
+    "measured": "clip_pct 34.6, lum_median 229.7, RGB 245/227/216, delta-E 25.7 vs #E0A060"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength) and the sink spot",
+    "from": "under-glow 2.0; sink spot 3.0 W 2700 K",
+    "to": "under-glow 0.6 with emission colour #FFB070 (about 2200 K); sink spot 1.5 W 2400 K"
+   },
+   "expected": "Basin reads as a warm amber bowl with a gradient from rim to centre, no clipped area beyond a small specular.",
+   "accept": {
+    "region": [
+     245,
+     262,
+     525,
+     358
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The slab's faces are flat dark and show no light passing through the acrylic thickness.",
+   "evidence": {
+    "region": [
+     90,
+     360,
+     640,
+     470
+    ],
+    "measured": "lum_median 21.5, lum_range 12.4, crush 0.2: uniform"
+   },
+   "change": {
+    "setting": "smoked acrylic finish (absorption/volume density of the sink slab) and the under-glow's placement",
+    "from": "smoke dense enough to read opaque",
+    "to": "lower volume absorption so the under-glow scatters through ~120 mm and the polished arrises catch it; keep the tint Smoke"
+   },
+   "expected": "Front face darkens from a warm glow near the basin/top edge to deep smoke at the bottom; top arris shows a thin bright line.",
+   "accept": {
+    "region": [
+     90,
+     360,
+     640,
+     470
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "set",
+   "problem": "The brief's towel on a brass rod and any sign of use are missing, so the frame reads as a showroom.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "seen: no towel, rod, soap or water anywhere in frame"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink",
+    "to": "linen towel (oatmeal, slightly creased) on the brass rod at the slab's right end, in frame; a small amber glass soap bottle on the slab's back corner; a few water droplets in the bowl"
+   },
+   "expected": "A second warm material and a sign of life; the brass catches a highlight from the basin.",
+   "accept": {
+    "region": [
+     560,
+     230,
+     720,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The left 90 px are a black void and the framing gives the slab no edge to show its thickness.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     90,
+     480
+    ],
+    "measured": "crush_pct 86.9 on 12.5 % of the frame"
+   },
+   "change": {
+    "setting": "camera position/target",
+    "from": "position [10.3, 1.2, 1.32] aimed at [11.0, 0.33, 0.95]",
+    "to": "move about 0.25 m along +x and lower to 1.15 m so the slab's left end sits inside the frame with its polished end face showing, and the alcove's dark side wall is cropped out"
+   },
+   "expected": "The slab's end grain-less polished face shows its 120 mm thickness; no large crushed band.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "Timber boards read as a smooth tiled texture, not real boards.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     280
+    ],
+    "measured": "lum_range 34.5, even grain repeating board to board; seen at 1:1"
+   },
+   "change": {
+    "setting": "the oak's stain / timber finish",
+    "from": "uniform stain, smooth",
+    "to": "per-board random tone offset (+/-10 %), a bump map with fine checks and open grain, slight sheen variation (roughness 0.45-0.65)"
+   },
+   "expected": "Board-to-board variation and grain relief catch the low raking light from the basin.",
+   "accept": {
+    "region": [
+     480,
+     0,
+     720,
+     280
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The wall above the slab is lit evenly with no pool from the basin, flattening the alcove.",
+   "evidence": {
+    "region": [
+     480,
+     0,
+     720,
+     280
+    ],
+    "measured": "lum_median 42.4, nearly the same as wall at [200,70,285,215] 36.4"
+   },
+   "change": {
+    "setting": "the sink spot cone and the exposure",
+    "from": "cone 25 deg; exposure 0.8",
+    "to": "cone 18 deg aimed into the bowl; exposure 0.6, so the wall is lit mainly by the bowl's bounce and falls off upward"
+   },
+   "expected": "Light falls off upward from the slab: lower wall brighter than upper.",
+   "accept": {
+    "region": [
+     600,
+     0,
+     640,
+     280
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">",
+    "value": 0
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "A blank cream panel with a copper pip on the upper-left wall reads as placeholder geometry.",
+   "evidence": {
+    "region": [
+     200,
+     70,
+     290,
+     215
+    ],
+    "measured": "seen: untextured rectangle, lum_median 36.4"
+   },
+   "change": {
+    "setting": "props / framing",
+    "from": "visible undressed panel",
+    "to": "crop it out with c4, or replace it with a small smoked-glass mirror or framed print in a blackened-steel frame"
+   },
+   "expected": "No unexplained object in frame.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The spout reads as polished chrome, not brushed steel.",
+   "evidence": {
+    "region": [
+     380,
+     20,
+     480,
+     160
+    ],
+    "measured": "lum_p95 82 against median 40: sharp specular streaks"
+   },
+   "change": {
+    "setting": "the steel's patina / finish",
+    "from": "low roughness",
+    "to": "roughness 0.35 with anisotropy 0.6 along the spout's axis"
+   },
+   "expected": "Soft, elongated highlights along the spout instead of mirror streaks.",
+   "accept": {
+    "region": [
+     380,
+     60,
+     480,
+     160
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 75
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A rounder, deeper basin profile with a softened rim so the glow grades over a curved surface",
+   "why": "The sink's shape is fixed by the card; only its glow and finish may change"
+  },
+  {
+   "request": "An EARF product in frame for the frame's single saturated colour",
+   "why": "The card defines this as a sink detail; adding a speaker would change the composition the room's design fixes"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
