@@ -9,6 +9,8 @@ mark). The Bay Area's lakes close each summer for exactly this.
 Scanned (Poly Haven, CC0): modular_wooden_pier, dead_tree_trunk_02, grass_medium_02, boulder_01, brown_mud_leaves_01,
 the kloofendal_misty_morning sky. Modelled here (kit_ext/poison_p_el.py): the bloom on the water, the sign.
 """
+import math
+
 from common import area, asset, camera, finish, ground, piece, portrait_of, shot as frame, sky, sun_from_sky
 
 HDRI, ROT = 'kloofendal_misty_morning_puresky', 200.0
@@ -23,11 +25,22 @@ def ext(module, fn, **k):
 
 TREES = ((-5.5, 9.0, 1.6, 30, 84), (-9.0, 16.0, 2.2, 110, 88), (6.5, 13.0, 1.9, 200, 86),
          (12.0, 22.0, 2.4, 70, 89), (-15.0, 26.0, 2.6, 150, 87), (3.0, 30.0, 2.8, 20, 88))
+# where the pier scan's legs and posts meet the water, in its own (glTF x, z) frame (read off its mesh at the waterline)
+PIER_FEET = [(-1.21, -5.52), (1.14, -5.52), (0.59, -5.53), (-1.2, -8.48), (-0.48, -8.48), (-0.02, -8.45), (0.61, -8.48),
+             (1.16, -8.48)]
+
+
+def pier_xy(gx, gz, at=(0.4, 4.0), turn=4.0):
+    x, y = gx, -gz                                        # glTF y-up to z-up
+    c, s_ = math.cos(math.radians(turn)), math.sin(math.radians(turn))
+    return round(at[0] + c * x - s_ * y, 3), round(at[1] + s_ * x + c * y, 3)
+
+
 SPK = (0.75, 11.6)                 # pass 4: the speaker out near the jetty's far end, off-centre on its boards
 
 
 def set_props():
-    props = [ext('poison_p_el', 'algae_water', position=[0.0, 60.0, WATER], size=[400.0, 260.0], cover=0.62, drift=20.0, scum_rough=0.45,
+    props = [ext('poison_p_el', 'algae_water', position=[0.0, 60.0, WATER], size=[400.0, 260.0], cover=0.62, drift=20.0, scum_rough=0.35,
                  streak=1.7, scale=0.12, clots=0.45, clot_scale=1.4,
                  greens=['#3E5A10', '#7A9A1C', '#C2D040']),          # pass 4: pea-soup yellow-green, off the speaker's bottle green;
                                                                   # pass 5: more open, glossy water between, a wet sheen on the scum
@@ -41,8 +54,9 @@ def set_props():
     # dead trees standing in the water, fading into the mist
     for x, y, s, rz, rx in TREES:
         props.append(piece('asset', model='dead_tree_trunk_02', position=[x, y, -1.2], rotate=[0, -rx, rz], scale=s, res='2k'))   # stood up
-    # pass 5: scum banked round the stumps and the sign's post, so they stand in the water, not on it
-    props.append(ext('poison_p_el', 'scum_rings', items=[[x, y, 0.18 * s] for x, y, s, _, _ in TREES] + [[-1.2, 10.25, 0.06]],
+    # pass 5: scum banked round the stumps, the jetty's legs and the sign's post, so they stand in the water, not on it
+    props.append(ext('poison_p_el', 'scum_rings', items=[[x, y, 0.18 * s] for x, y, s, _, _ in TREES] + [[-1.2, 10.25, 0.06]]
+                     + [[*pier_xy(gx, gz), 0.12] for gx, gz in PIER_FEET],
                      width=0.4, color='#A6BC34', seed=7))
     # reeds along the left edge of the jetty, in the shallows
     for x, y, s, rz in ((-2.6, 8.4, 1.5, 0), (-2.3, 9.8, 1.3, 70), (-3.1, 10.6, 1.7, 140), (-2.5, 11.8, 1.4, 30),

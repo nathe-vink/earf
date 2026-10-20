@@ -482,27 +482,31 @@ def sign_path(kind='algae'):
     """A warning sign's face: weathered white enamel, a red DANGER band, the warning (generic, no agency's mark)."""
     from PIL import Image, ImageDraw
     os.makedirs(LABEL_DIR, exist_ok=True)
-    path = os.path.join(LABEL_DIR, f'sign-{kind}.png')
+    path = os.path.join(LABEL_DIR, f'sign-{kind}-2.png')
     if os.path.exists(path):
         return path
+    # as real bloom signs set it: the hazard the biggest words, under a short DANGER band
     W, H = 900, 640
     img = Image.new('RGB', (W, H), '#EDEBE2'); d = ImageDraw.Draw(img)
-    d.rectangle((0, 0, W - 1, 170), fill='#C3161C')
+    d.rectangle((0, 0, W - 1, 130), fill='#C3161C')
     d.rectangle((10, 10, W - 11, H - 11), outline='#1A1A1A', width=8)
-    _centre(d, 'DANGER', 22, _font(SANS, 130), '#FFFFFF', W)
-    cx, cy, r = 150, 400, 110                             # a warning triangle
-    d.polygon([(cx, cy - r), (cx + r * 1.05, cy + r * 0.75), (cx - r * 1.05, cy + r * 0.75)], fill='#1A1A1A')
-    d.polygon([(cx, cy - r + 26), (cx + r * 0.8, cy + r * 0.6), (cx - r * 0.8, cy + r * 0.6)], fill='#F2C31A')
-    d.text((cx - 14, cy - 56), '!', font=_font(SANS, 120), fill='#1A1A1A')
-    def fit(text, y, size, fill):                         # each line shrunk to the space right of the triangle
-        while size > 14 and d.textbbox((0, 0), text, font=_font(SANS, size))[2] > W - 300 - 36:
-            size -= 2
-        d.text((300, y), text, font=_font(SANS, size), fill=fill)
+    _centre(d, 'DANGER', 18, _font(SANS, 96), '#FFFFFF', W)
     a, b, c, e = SIGNS[kind]
-    fit(a, 215, 88, '#1A1A1A')
-    fit(b, 330, 70, '#1A1A1A')
-    fit(c, 440, 34, '#222222')
-    fit(e, 486, 34, '#222222')
+    size = 150
+    while size > 40 and d.textbbox((0, 0), a, font=_font(SANS, size))[2] > W - 70:
+        size -= 4
+    _centre(d, a, 160, _font(SANS, size), '#1A1A1A', W)
+    cx, cy, r = 130, 450, 80                              # a warning triangle
+    d.polygon([(cx, cy - r), (cx + r * 1.05, cy + r * 0.75), (cx - r * 1.05, cy + r * 0.75)], fill='#1A1A1A')
+    d.polygon([(cx, cy - r + 20), (cx + r * 0.8, cy + r * 0.6), (cx - r * 0.8, cy + r * 0.6)], fill='#F2C31A')
+    d.text((cx - 10, cy - 42), '!', font=_font(SANS, 90), fill='#1A1A1A')
+    def fit(text, y, size, fill):                         # each line shrunk to the space right of the triangle
+        while size > 14 and d.textbbox((0, 0), text, font=_font(SANS, size))[2] > W - 250 - 36:
+            size -= 2
+        d.text((250, y), text, font=_font(SANS, size), fill=fill)
+    fit(b, 365, 74, '#1A1A1A')
+    fit(c, 470, 32, '#222222')
+    fit(e, 512, 32, '#222222')
     img = _age(img, 21, 2.0)
     img.save(path)
     return path
