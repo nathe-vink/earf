@@ -1870,7 +1870,7 @@
      -1.34,
      -0.045
     ],
-    "cap": 0.07,
+    "cap": 0.095,
     "age": "convex",
     "seed": 61,
     "lean": [
@@ -1878,11 +1878,11 @@
      -0.01
     ],
     "wash": 0.05,
-    "dull": 0.05,
+    "dull": 0.0,
     "needles": 2,
     "torn": 0.2,
     "matte": false,
-    "orange": true
+    "orange": false
    },
    {
     "kind": "kit",
@@ -1894,7 +1894,7 @@
      -1.28,
      -0.045
     ],
-    "cap": 0.06,
+    "cap": 0.081,
     "age": "convex",
     "seed": 62,
     "lean": [
@@ -1902,9 +1902,9 @@
      0.01
     ],
     "wash": 0.08,
-    "dull": 0.05,
+    "dull": 0.0,
     "matte": false,
-    "orange": true
+    "orange": false
    },
    {
     "kind": "kit",
@@ -1916,7 +1916,7 @@
      -1.24,
      -0.045
     ],
-    "cap": 0.075,
+    "cap": 0.101,
     "age": "old",
     "seed": 63,
     "lean": [
@@ -1924,10 +1924,10 @@
      0.015
     ],
     "wash": 0.0,
-    "dull": 0.2,
+    "dull": 0.15,
     "torn": 0.4,
     "matte": false,
-    "orange": true
+    "orange": false
    },
    {
     "kind": "kit",
@@ -1939,7 +1939,7 @@
      -1.36,
      -0.045
     ],
-    "cap": 0.045,
+    "cap": 0.061,
     "age": "young",
     "seed": 64,
     "lean": [
@@ -1947,9 +1947,9 @@
      -0.01
     ],
     "wash": 0.08,
-    "dull": 0.05,
+    "dull": 0.0,
     "matte": false,
-    "orange": true
+    "orange": false
    },
    {
     "kind": "kit",
@@ -1961,12 +1961,13 @@
      -1.46,
      -0.02
     ],
-    "cap": 0.025,
+    "cap": 0.034,
     "age": "button",
     "seed": 65,
     "warts": 280,
-    "dull": 0.05,
+    "dull": 0.0,
     "matte": false,
+    "orange": false,
     "wash": 0.08
    },
    {
@@ -2031,22 +2032,23 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     0.55,
-     -1.55,
+     0.62,
+     -1.62,
      -0.045
     ],
-    "cap": 0.065,
+    "cap": 0.095,
     "age": "plane",
     "seed": 71,
     "lean": [
-     0.01,
+     0.02,
      0.0
     ],
     "wash": 0.05,
-    "dull": 0.36,
     "torn": 0.15,
-    "matte": true,
-    "orange": true
+    "height": 0.17,
+    "dull": 0.0,
+    "matte": false,
+    "orange": false
    },
    {
     "kind": "kit",
@@ -2054,21 +2056,22 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     0.72,
-     -1.48,
+     0.82,
+     -1.38,
      -0.045
     ],
-    "cap": 0.04,
-    "age": "young",
+    "cap": 0.081,
+    "age": "convex",
     "seed": 72,
     "lean": [
      -0.01,
-     0.0
+     0.01
     ],
-    "wash": 0.15,
-    "dull": 0.34,
-    "matte": true,
-    "orange": true
+    "wash": 0.08,
+    "height": 0.13,
+    "dull": 0.0,
+    "matte": false,
+    "orange": false
    },
    {
     "kind": "kit",
@@ -2076,16 +2079,18 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     0.66,
-     -1.72,
+     0.5,
+     -1.95,
      -0.02
     ],
-    "cap": 0.022,
+    "cap": 0.03,
     "age": "button",
     "seed": 73,
     "warts": 260,
-    "dull": 0.3,
-    "matte": true
+    "dull": 0.0,
+    "matte": false,
+    "orange": false,
+    "wash": 0.08
    },
    {
     "kind": "kit",
@@ -2093,22 +2098,23 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     -0.62,
-     -1.18,
+     -0.7,
+     -1.02,
      -0.045
     ],
-    "cap": 0.08,
+    "cap": 0.135,
     "age": "old",
     "seed": 74,
     "lean": [
-     -0.02,
+     -0.03,
      0.0
     ],
     "wash": 0.0,
-    "dull": 0.46,
     "torn": 0.5,
-    "matte": true,
-    "orange": true
+    "height": 0.19,
+    "dull": 0.15,
+    "matte": false,
+    "orange": false
    },
    {
     "kind": "kit",
@@ -2116,21 +2122,67 @@
     "module": "poison_b_el",
     "fn": "amanita",
     "position": [
-     -0.5,
-     -1.55,
+     -0.48,
+     -1.72,
      -0.045
     ],
-    "cap": 0.05,
+    "cap": 0.07,
     "age": "convex",
     "seed": 75,
     "lean": [
      0.01,
+     -0.02
+    ],
+    "wash": 0.08,
+    "height": 0.15,
+    "dull": 0.0,
+    "matte": false,
+    "orange": false
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_b_el",
+    "fn": "amanita",
+    "position": [
+     -0.95,
+     -1.5,
+     -0.045
+    ],
+    "cap": 0.05,
+    "age": "young",
+    "seed": 76,
+    "lean": [
+     0.0,
+     0.01
+    ],
+    "wash": 0.08,
+    "dull": 0.0,
+    "matte": false,
+    "orange": false
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_b_el",
+    "fn": "amanita",
+    "position": [
+     0.25,
+     -2.05,
+     -0.045
+    ],
+    "cap": 0.085,
+    "age": "convex",
+    "seed": 77,
+    "lean": [
+     0.02,
      -0.01
     ],
-    "wash": 0.1,
-    "dull": 0.36,
-    "matte": true,
-    "orange": true
+    "wash": 0.06,
+    "height": 0.16,
+    "dull": 0.0,
+    "matte": false,
+    "orange": false
    },
    {
     "kind": "kit",

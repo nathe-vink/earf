@@ -25,11 +25,13 @@ HDRI, ROT = 'autumn_forest_01', 180.0
 BEECH = '#8A8B82'                   # the bark's smooth grey
 
 # (x, y, cap radius, age, seed, extra): A4's troop at the left, more caps round it, and a second group at the right
-AGARICS2 = [(0.55, -1.55, 0.065, 'plane', 71, dict(lean=[0.01, 0.0], wash=0.05, dull=0.36, torn=0.15, matte=True, orange=True)),
-            (0.72, -1.48, 0.04, 'young', 72, dict(lean=[-0.01, 0.0], wash=0.15, dull=0.34, matte=True, orange=True)),
-            (0.66, -1.72, 0.022, 'button', 73, dict(warts=260, dull=0.3, matte=True)),
-            (-0.62, -1.18, 0.08, 'old', 74, dict(lean=[-0.02, 0.0], wash=0.0, dull=0.46, torn=0.5, matte=True, orange=True)),
-            (-0.5, -1.55, 0.05, 'convex', 75, dict(lean=[0.01, -0.01], wash=0.1, dull=0.36, matte=True, orange=True))]
+AGARICS2 = [(0.62, -1.62, 0.095, 'plane', 71, dict(lean=[0.02, 0.0], wash=0.05, torn=0.15, height=0.17)),
+            (0.82, -1.38, 0.06, 'convex', 72, dict(lean=[-0.01, 0.01], wash=0.1, height=0.13)),
+            (0.5, -1.95, 0.03, 'button', 73, dict(warts=260)),
+            (-0.7, -1.02, 0.1, 'old', 74, dict(lean=[-0.03, 0.0], wash=0.0, torn=0.5, height=0.19)),
+            (-0.48, -1.72, 0.07, 'convex', 75, dict(lean=[0.01, -0.02], wash=0.08, height=0.15)),
+            (-0.95, -1.5, 0.05, 'young', 76, dict(lean=[0.0, 0.01], wash=0.12)),
+            (0.25, -2.05, 0.085, 'convex', 77, dict(lean=[0.02, -0.01], wash=0.06, height=0.16))]
 DEATHCAPS = [(-1.05, -0.55, 0.055, 'convex', 81), (-1.2, -0.42, 0.04, 'young', 82), (-0.95, -0.35, 0.03, 'button', 83)]
 ARUMS = [(0.98, -1.65, 0.34, 41, [0.02, -0.01]), (1.1, -1.58, 0.28, 42, [-0.015, 0.01]), (0.9, -1.5, 0.24, 43, [0.0, 0.02]),
          (1.2, -0.85, 0.3, 44, [0.01, 0.0])]
@@ -52,11 +54,6 @@ def shot():
             p['radius'] = round(p['radius'] * 0.42, 3); p['flare'] = 0.25; p['foot'] = 0.6; p['tex_scale'] = 1.0
         if p.get('fn') == 'plants' and p.get('model') == 'fern_02':           # a beech wood's floor is open: half the ferns
             p['place'] = p['place'][::2]
-    for p in props:                                                         # scarlet and viscid, as a fresh fly agaric is: A4
-        if p.get('fn') == 'amanita' and p.get('species', 'muscaria') == 'muscaria':   # dulled and dried them (matte) so they
-            p['dull'] = 0.05 if p.get('age') != 'old' else 0.2              # would not out-shout the speaker, and at 600 px
-            p['matte'] = False                                              # they read as pink 'toadstools'
-            p['wash'] = min(p.get('wash', 0.15), 0.08)
     for x, y, R, age, sd, more in AGARICS2:
         more = dict(more); z = more.pop('z', -0.045 if age != 'button' else -0.02)
         props.append(A4.extb('amanita', (x, y, z), cap=R, age=age, seed=sd, **more))
@@ -67,6 +64,14 @@ def shot():
         props.append(extp('arum', (x, y, -0.01), height=H, seed=sd, lean=lean, berries=48, berry=0.0055))
     for x, y, H, sd in NIGHTSHADE:
         props.append(A4.extb('nightshade', (x, y, -0.01), height=H, seed=sd, berries=9, berry=0.0085))
+    for p in props:
+        if p.get('fn') == 'amanita' and p.get('species', 'muscaria') == 'muscaria' and p['position'][1] > -1.5:
+            p['cap'] = round(p['cap'] * 1.35, 3)                              # a bold troop: mature caps 15-20 cm across
+    for p in props:                                                         # scarlet and viscid, as a fresh fly agaric is: A4
+        if p.get('fn') == 'amanita' and p.get('species', 'muscaria') == 'muscaria':   # dulled and dried them (matte) so they
+            p['dull'] = 0.0 if p.get('age') != 'old' else 0.15              # would not out-shout the speaker, and at 600 px
+            p['matte'] = False; p['orange'] = False                         # they read as pink 'toadstools'
+            p['wash'] = min(p.get('wash', 0.15), 0.08)
     s['sky'] = sky(HDRI, ROT, strength=0.3, res='4k')
     s['title'] = 'barkhorn, Poison F1, a European poison wood in autumn'
     return s
