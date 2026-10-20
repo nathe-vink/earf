@@ -87,6 +87,8 @@ def _deep(swatch, k=1.0):
 # (Ember and Dust 10 low, Poison 11 high, at 0.7)
 HUE_TURN = {'Ember': 11.0, 'Dust': 11.0, 'Acid': 3.0, 'Poison': -12.0, 'Ice': 2.0, 'Haze': 6.0}
 TINT_K = {'Ember': 0.7, 'Dust': 0.7, 'Acid': 0.7, 'Poison': 0.7, 'Ice': 0.7, 'Haze': 0.7}
+# the finals' fluorescent sheet: denser, more saturated (the lead: the day tile read paler than the site's light mode)
+FLUO_K = 1.0
 
 
 def materials():
@@ -259,16 +261,29 @@ def cam(size, lens=85.0, dist=1.75, elev=22.0, tx=0.0):
 
 
 def day(size=(900, 900), samples=160, final=False):
+    s = _day(size, samples, final)
+    if final:
+        # the fluorescent sheet, denser: the faces carry the site's colour face-on
+        s['materials'] = {f'disc-{n.lower()}': {'deep': _deep(SWATCH[n], FLUO_K)} for n in SWATCH}
+        # soft light from behind the camera through the discs (not a rake on every slot's edge)
+        s['lights']['front'] = {'type': 'area', 'size_m': [1.6, 1.2], 'orbit': {'azimuth_deg': 10, 'elevation_deg': 35,
+                                'distance_m': 2.5}, 'target': [0, 0, lift() / 1000], 'irradiance': 1.0, 'color': '#FFF7EA',
+                                'camera': False}
+    return s
+
+
+def _day(size=(900, 900), samples=160, final=False):
     """Light mode: on paper in the pale studio, a hard sun low from the left behind, the discs' colours thrown across
     the paper in coloured shadow."""
     zc = lift() / 1000
-    c = cam(size, lens=70.0 if final else 105.0, dist=1.75, elev=24.0, tx=0.10 if final else 0.0)
-    if final:
-        c['target'] = [0.13, 0.08, zc - 0.07]
+    c = cam(size, lens=105.0 if final else 105.0, dist=1.75, elev=24.0)
+    if final:       # the globe about 60 % of the frame's height, its shadows running off to the right
+        c.update(lens_mm=95.0, target=[0.09, 0.03, zc - 0.035])
     return {'title': 'The EARF globe in colour, by day', 'size': list(size), 'product': product('day'), 'camera': c,
             'set': {'kind': 'sweep', 'color': '#EEEAE3', 'width': 8.0, 'front': 4.0, 'depth': 2.0, 'radius': 1.2, 'height': 4.0},
             'sky': {'kind': 'gradient', 'zenith': '#D8D4CE', 'horizon': '#DEDAD4', 'ground': '#6A665F', 'strength': 1.0},
-            'sun': {'azimuth_deg': 295.0, 'elevation_deg': 30.0, 'irradiance': 5.0, 'angle_deg': 0.6, 'color': '#FFF2DE'},
+            'sun': {'azimuth_deg': 295.0, 'elevation_deg': 30.0, 'irradiance': 5.0, 'angle_deg': 2.5 if final else 0.6,
+                    'color': '#FFF2DE'},
             'lights': {'fill': {'type': 'area', 'size_m': [2.0, 1.6], 'orbit': {'azimuth_deg': -30, 'elevation_deg': 20, 'distance_m': 3.0},
                                 'target': [0, 0, zc], 'irradiance': 0.5, 'color': '#FFF7EA', 'camera': False}},
             'render': {'samples': samples, 'adaptive': 0.01, 'denoise': True, 'clamp': 10, 'bounces': 24,
@@ -279,7 +294,7 @@ def night(size=(900, 900), samples=160, final=False):
     """Dark mode: on black, each edge glowing its colour (the fluorescent sheet under the base's UV ring), a little of
     their colour cast on the surface."""
     zc = lift() / 1000
-    c = cam(size, lens=80.0 if final else 105.0, dist=1.75, elev=22.0)
+    c = cam(size, lens=95.0 if final else 105.0, dist=1.75, elev=22.0)
     return {'title': 'The EARF globe in colour, by night', 'size': list(size), 'product': product('night'), 'camera': c,
             'set': {'kind': 'sweep', 'color': '#121114', 'width': 8.0, 'front': 4.0, 'depth': 2.0, 'radius': 1.2, 'height': 4.0},
             'sky': {'kind': 'gradient', 'zenith': '#0A0A0C', 'horizon': '#0E0E10', 'ground': '#050505', 'strength': 0.05},

@@ -23,16 +23,16 @@
  },
  "camera": {
   "position": [
-   0.1,
+   0.0,
    -1.5987045508745514,
    0.8798849843246478
   ],
   "target": [
-   0.13,
-   0.08,
-   0.09809585894199738
+   0.09,
+   0.03,
+   0.13309585894199738
   ],
-  "lens_mm": 70.0,
+  "lens_mm": 95.0,
   "level": false
  },
  "set": {
@@ -55,7 +55,7 @@
   "azimuth_deg": 295.0,
   "elevation_deg": 30.0,
   "irradiance": 5.0,
-  "angle_deg": 0.6,
+  "angle_deg": 2.5,
   "color": "#FFF2DE"
  },
  "lights": {
@@ -78,6 +78,26 @@
    "irradiance": 0.5,
    "color": "#FFF7EA",
    "camera": false
+  },
+  "front": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": 10,
+    "elevation_deg": 35,
+    "distance_m": 2.5
+   },
+   "target": [
+    0,
+    0,
+    0.16809585894199738
+   ],
+   "irradiance": 1.0,
+   "color": "#FFF7EA",
+   "camera": false
   }
  },
  "render": {
@@ -90,5 +110,25 @@
   "view": "Khronos PBR Neutral",
   "exposure": 0.0,
   "white_balance_k": 5400
+ },
+ "materials": {
+  "disc-ember": {
+   "deep": "#E68219"
+  },
+  "disc-dust": {
+   "deep": "#EEB119"
+  },
+  "disc-acid": {
+   "deep": "#F2D760"
+  },
+  "disc-poison": {
+   "deep": "#9FB26C"
+  },
+  "disc-ice": {
+   "deep": "#8EC0E2"
+  },
+  "disc-haze": {
+   "deep": "#AC8ACA"
+  }
  }
 }

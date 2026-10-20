@@ -670,8 +670,8 @@ room's measured drift (`TINT_K`, `HUE_TURN`).
     edges by day, and glowing edges in the dark. Clear tinted sheet can't do the day look; its edges, seen along
     300 mm of tint, go black.
   - **Catch 1:** I found no violet. Haze is a meridian standing in the base, so the ring feeds its edge directly and
-    it glows violet by guiding the light rather than by fluorescing, dimmer than the rest. The alternative is Laser
-    Pink, which is off-hue.
+    it glows violet by guiding the light rather than by fluorescing. **Haze stays violet (the lead's call) and its
+    edge glows dimmer than the other five**; Laser Pink was the off-hue alternative.
   - **Catch 2:** fluorescent sheet comes in 3 mm, and some 5 mm. The desk piece is 5 mm, thinner edges than the
     mark's 0.05 R. Confirm the stock with Perspex.
   - Fluorescent Acid Green is lighter and yellower than Poison, so the day look is more neon than the speakers'.
@@ -680,8 +680,8 @@ room's measured drift (`TINT_K`, `HUE_TURN`).
   PMMA blocks much of it. It should class Exempt or RG1 under IEC 62471, but it needs an assessment before sale.
 - **At 1 m:** there's no fluorescent stock 15 to 25 mm thick, so the back-bar piece is day only, in clear tints. Its
   show is a hard spot throwing its colours up the wall. A night glow at 1 m: maybe not.
-- **Recommendation:** the 300 mm desk piece in fluorescent cast on the UV-A base, one object for both modes; the 1 m
-  piece in clear tints under a spot.
+- **Recommendation (accepted by the lead):** the 300 mm desk piece in 5 mm fluorescent cast on the UV-A base, one
+  object for both modes; the 1 m piece in clear tints under a spot, day only.
 
 **The fab kit** (`out-globe-colour/`):
 - **Cut files** (`cut/`, SVG and DXF, mm): each disc laid flat with its slots, for the 300 in 8 mm (or 5 mm
