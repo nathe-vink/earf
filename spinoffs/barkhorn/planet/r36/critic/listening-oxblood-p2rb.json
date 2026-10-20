@@ -1,0 +1,395 @@
+{
+ "stage1": {
+  "impression": "A dark, symmetrical, head-on view of two glowing red speakers in a timber-framed niche, seen over the backs of oxblood tub chairs. It reads as a home-cinema or showroom render, not a photograph of a particular bar: the surfaces are smooth and flat, the speakers' batts glow almost white, the left edge has a bright neutral screen slab, the wall behind the speakers is a regular tile grid, and the two spot cones on the wall look like stage lighting. A design magazine would not publish this as a specific place; it reads as a generic hi-fi room, because the shell's concrete, fir and steel are not visible at all and nothing in the frame says 'bar'.",
+  "score": 4.5
+ },
+ "verdict": "rethink",
+ "blocking_9": [
+  "The frame must read as a bar in a specific shell: board-formed concrete, a fir beam or blackened steel should be visible, and at least one sign of the bar (counter edge, glass, record sleeve) should be in the frame. Right now the frame is only the niche and chairs.",
+  "A dead-axis, eye-level symmetric composition with a chair back across the lower centre reads as a showroom. It needs a seated, off-axis view from inside the zone, with a table, an Orb and a glass as the foreground.",
+  "Frame lum_median at 22 or above (now 12.7) without the speakers clipping; the speaker regions at a median of 45 or above (now 32 and 24) with clip_pct under 2 (now 6.6 and 7.1).",
+  "The altar spots should not show as hard cones on the wall above the speakers.",
+  "The niche lining should read as end-grain oak blocks at real scale, not as a dark tile grid.",
+  "The left-hand screen should not be the second-brightest neutral object in the frame.",
+  "Surfaces need texture at 1:1 (velvet nap, wool carpet, oak grain); currently smooth CG at proof scale."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    95,
+    25,
+    270
+   ],
+   "what": "Screen slab at the left edge is cut by the frame and reads near-white and neutral (lum_median 172), pulling the eye out of frame."
+  },
+  {
+   "region": [
+    230,
+    175,
+    300,
+    320
+   ],
+   "what": "Left Ember: the batts and cabinet edges clip (clip_pct 6.6, p95 194) while the rest of the cabinet sits at a median of 32. The acrylic reads as glowing signage, not as thick tinted cast acrylic with polished edges."
+  },
+  {
+   "region": [
+    465,
+    175,
+    535,
+    320
+   ],
+   "what": "Right Ember: same clipping (7.1 %), and darker (median 23.8). It is an identical mirrored copy at an identical angle, which reads as duplicated geometry in a symmetric frame."
+  },
+  {
+   "region": [
+    265,
+    130,
+    310,
+    200
+   ],
+   "what": "The altar spot throws a hard-edged pink cone on the felt or wall above each speaker (profile jumps 10 to 33 at the cone edge), like stage lighting."
+  },
+  {
+   "region": [
+    450,
+    130,
+    520,
+    200
+   ],
+   "what": "The same hard cone above the right speaker."
+  },
+  {
+   "region": [
+    190,
+    105,
+    600,
+    330
+   ],
+   "what": "The niche's back wall reads as a regular dark square tile or mesh grid (lum_range 13 between speakers), not end-grain oak blocks. It is flat and uniform, with no variation from block to block."
+  },
+  {
+   "region": [
+    100,
+    330,
+    600,
+    400
+   ],
+   "what": "The floor of the zone reads as grey concrete or felt (RGB median 37/30/29), not oxblood wool carpet. The zone's single colour breaks at the floor."
+  },
+  {
+   "region": [
+    220,
+    405,
+    310,
+    450
+   ],
+   "what": "The hex table top reads as pale stone or plaster (median 158, p95 237), not oak; the Orb burns a hotspot into it."
+  },
+  {
+   "region": [
+    320,
+    380,
+    560,
+    480
+   ],
+   "what": "A tub chair back blocks the lower centre of the frame: a large, smooth, featureless velvet mass with no nap or seam detail."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    70
+   ],
+   "what": "Ceiling band and upper wall dead flat and near black (median 5.2, range 5.8): no structure, beam or texture, an empty void."
+  },
+  {
+   "region": [
+    560,
+    100,
+    720,
+    340
+   ],
+   "what": "The right-hand wall and chairs sink to a median of 11 with no readable surface; the limewash has no variation."
+  },
+  {
+   "region": [
+    610,
+    455,
+    680,
+    480
+   ],
+   "what": "A second Orb clipped at the bottom edge reads as an accidental intrusion."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "A dead-centre, eye-level, symmetric view over a chair back reads as a home-cinema showroom and hides the shell and every sign of a bar.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "The speakers sit at x 265 and x 500, mirrored about the centre; the chair back fills 320 to 560 by 380 to 480; there is no concrete, fir, steel or counter anywhere in the frame."
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [11.25, 2.45, 1.35], target [16.6, 3.25, 1.2], 28 mm, f/4",
+    "to": "a seated view from inside the zone, about [13.4, 1.2, 1.05], aimed at about [16.6, 3.6, 1.0]; 35 mm, f/2.8, focused on the near Ember. Three-quarter on the altar, with the near speaker on the left third. A hex table, an Orb and a glass sharp in the lower-right foreground; one chair arm soft at the frame edge; the timber frame of the niche and a strip of concrete or fir visible at the top or left."
+   },
+   "expected": "It reads as a person's seat in a specific room; the speakers stop being mirrored copies; the shell materials enter the frame; and the frame acquires depth layers (table, then chairs, then altar).",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speakers clip on their batts while the frame as a whole sits under the target, so exposure can't simply be raised.",
+   "evidence": {
+    "region": [
+     230,
+     175,
+     300,
+     320
+    ],
+    "measured": "lum_median 32.3, p95 194, clip_pct 6.6 (the right speaker: 23.8 and 7.1 %); frame lum_median 12.7"
+   },
+   "change": {
+    "setting": "on each Ember speaker, 4 x area (W/m2 at target)",
+    "from": "5.0 W/m2",
+    "to": "2.5 W/m2, with the altar spots carrying the front light instead (see c3)"
+   },
+   "expected": "The batts glow inside the tint instead of burning white; the cabinet's edges show as polished bright lines and not as solid blown pink blocks.",
+   "accept": {
+    "region": [
+     230,
+     175,
+     300,
+     320
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2.0
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The altar spots draw hard pink cones on the wall above the speakers instead of lighting the cabinets.",
+   "evidence": {
+    "region": [
+     270,
+     120,
+     310,
+     230
+    ],
+    "measured": "The vertical profile steps from 7.9 to 32.6 at the cone edge, and the cone is visible above both speakers."
+   },
+   "change": {
+    "setting": "altar 2 x spot",
+    "from": "70 W, 2500 K, cone 28 deg, aimed high",
+    "to": "110 W, 2500 K, cone 40 deg with a soft blend of 0.6, aimed at the horn's centre (about 0.65 m up the cabinet), so the pool falls on the cabinet and the plinth and not on the wall"
+   },
+   "expected": "No hard cone on the wall; the faces of the cabinets and the oak plinths lit evenly; the speaker regions' median at 45 or more.",
+   "accept": {
+    "region": [
+     230,
+     175,
+     300,
+     320
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The frame is too dark for a night interior that is meant to hold its shadows; most of it is under 40.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 12.7, below_40_pct 85.2"
+   },
+   "change": {
+    "setting": "render exposure / look",
+    "from": "exposure 1.0, AgX Medium High Contrast",
+    "to": "exposure 1.6 (once c2 is applied), AgX Base Contrast, so the shadows hold detail"
+   },
+   "expected": "The chairs, carpet, walls and niche become readable while the speakers stay below clipping.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The left-hand screen is a bright neutral slab cut by the frame edge, competing with the speakers.",
+   "evidence": {
+    "region": [
+     0,
+     95,
+     25,
+     270
+    ],
+    "measured": "lum_median 172, neutral RGB 179/169/179"
+   },
+   "change": {
+    "setting": "the screens' images (emission)",
+    "from": "1.0",
+    "to": "0.3; and frame it out entirely with the c1 camera if possible"
+   },
+   "expected": "Nothing neutral in the frame brighter than the speakers' batts; the eye goes to the altar.",
+   "accept": {
+    "region": [
+     0,
+     95,
+     25,
+     270
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 70
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The niche's end-grain lining reads as a uniform dark tile grid.",
+   "evidence": {
+    "region": [
+     330,
+     120,
+     450,
+     320
+    ],
+    "measured": "lum_range 13.5, median 15; a regular square pattern with no variation from block to block"
+   },
+   "change": {
+    "setting": "the oak's stain / finish (the end-grain blocks)",
+    "from": "one dark uniform stain",
+    "to": "a mid-brown oak stain with random tone variation between blocks (about plus or minus 15 %), visible growth rings, and matte roughness 0.7; plus a low grazing wash from the lit niche's strip, or a 2700 K up-light, to bring out the relief"
+   },
+   "expected": "The niche reads as real end-grain timber at scale, warm brown, with block-to-block variation.",
+   "accept": {
+    "region": [
+     330,
+     120,
+     450,
+     320
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The hex table's oak top reads as pale stone because of the Orb's hotspot.",
+   "evidence": {
+    "region": [
+     220,
+     405,
+     310,
+     450
+    ],
+    "measured": "lum_median 158, p95 237"
+   },
+   "change": {
+    "setting": "the oak's stain; each Orb W",
+    "from": "light oak; Orb 6.0 W, glow 1.1",
+    "to": "a darker smoked-oak stain, roughness 0.5; Orb 4.0 W, glow 0.9"
+   },
+   "expected": "The table top reads as warm oak, with a soft pool under the lamp and no white plaster look.",
+   "accept": {
+    "region": [
+     220,
+     405,
+     310,
+     450
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     120
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The ceiling and the upper wall are an empty black void, and the room has no atmosphere.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     70
+    ],
+    "measured": "lum_median 5.2, lum_range 5.8"
+   },
+   "change": {
+    "setting": "haze density; the Domes' downlights",
+    "from": "haze 0.005; Domes 320 W",
+    "to": "haze 0.012, so the altar beams show faintly in the air; Domes 240 W, and bring one Dome or one beam into the top of the frame with the c1 camera"
+   },
+   "expected": "Some readable structure and air above the zone; light pools separate from the dark between them.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     70
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 15
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Break the two speakers' identical mirrored toe-in and pose so they don't read as duplicated geometry.",
+   "why": "The altar layout and the toe-in are fixed by the card; only the camera (c1) can break the symmetry."
+  },
+  {
+   "request": "Make the zone's floor read clearly oxblood rather than grey.",
+   "why": "The carpet's colour is fixed by the card. If the model assigns the zone floor a grey material, that is a model error to fix against the room's design, not a picture change; confirm which surface this is."
+  },
+  {
+   "request": "Make the speakers' acrylic read thicker, with polished glowing edges, rather than as flat glowing pink blocks.",
+   "why": "The speaker's material and parts are fixed; the lighting changes c2 and c3 are the permitted lever."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
