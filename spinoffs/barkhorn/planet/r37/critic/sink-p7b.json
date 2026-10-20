@@ -1,0 +1,323 @@
+{
+ "stage1": {
+  "impression": "A tight detail of a black slab basin with a wall-mounted steel spout against vertical timber boards, lit warm from above. The timber reads quite photographically at a glance, but the slab, which should be the hero, is a crushed black box with no light inside it, no glowing edges and no visible float. It reads as a generic hotel washroom detail rendered in CG, not as a specific place a design magazine would publish: the one thing that would make it Planet EARF (amber light through thick Smoke acrylic) is missing. The knots also repeat in rows across the boards, and a bright blurred vertical on the left pulls the eye away.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The slab must read as thick cast acrylic glowing warm amber through its body and polished edges. Its front [145,340,630,470] must have lum_median of 30 or more, crush_pct below 30, and r>g>b.",
+  "The slab must visibly float: its underside, a shadow gap and the wall below it have to be in frame.",
+  "The towel on its brass rod (part of the fixed design brief for this frame) must be in frame, as the sign of life.",
+  "No visible texture repetition on the timber boards. Knots must not line up at the same heights across boards.",
+  "The brightest element in the frame must be the sink or its light, not an out-of-focus strip at the frame edge."
+ ],
+ "defects": [
+  {
+   "region": [
+    145,
+    330,
+    630,
+    480
+   ],
+   "what": "Slab front is crushed black: lum_median 0.9, crush_pct 83.5 over about 21% of the frame. It reads as opaque painted MDF or black stone, not Smoke acrylic, and there is no glow (the sink's under-glow is 0.0)."
+  },
+  {
+   "region": [
+    230,
+    268,
+    510,
+    330
+   ],
+   "what": "Basin interior crushed: lum_median 0.4, crush_pct 71. The basin's shape is unreadable except for a faint rim highlight."
+  },
+  {
+   "region": [
+    145,
+    440,
+    630,
+    480
+   ],
+   "what": "The slab's bottom is cropped by the frame edge, so 'floating off the wall' can't be read. There is no underside, shadow gap or wall below."
+  },
+  {
+   "region": [
+    60,
+    30,
+    690,
+    150
+   ],
+   "what": "Timber texture tiles: knots and nail holes recur at the same heights (around y 45 and y 130) on many boards. This is a CG tell."
+  },
+  {
+   "region": [
+    35,
+    0,
+    60,
+    480
+   ],
+   "what": "A blurred, salmon-pink vertical strip is the brightest thing in the frame (lum_median 121, p95 160). It reads as a smeared or out-of-focus jamb or emitter and competes with the hero."
+  },
+  {
+   "region": [
+    60,
+    0,
+    690,
+    480
+   ],
+   "what": "Board joints are pure-black lines, ruler-straight and of uniform width for the full height. They read as a modelled groove with no bevel or fill light."
+  },
+  {
+   "region": [
+    255,
+    85,
+    385,
+    180
+   ],
+   "what": "The spout and lever have soft, low-contrast highlights and little brushed-steel character at proof scale. The spout looks pasted against the boards, with no contact shadow."
+  },
+  {
+   "region": [
+    690,
+    0,
+    720,
+    480
+   ],
+   "what": "A grey sliver of another surface at the right edge is an unresolved frame edge."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero slab has no internal light, so the Smoke acrylic reads as opaque black and the frame's purpose (amber glow through 120 mm of acrylic) is absent.",
+   "evidence": {
+    "region": [
+     145,
+     340,
+     630,
+     470
+    ],
+    "measured": "lum_median 0.9, lum_p95 17.7, crush_pct 83.5; card: the sink's under-glow 0.0"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the sink's under-glow",
+    "from": "0.0",
+    "to": "2.0 (raise to 3.0 if the slab front stays under lum_median 30)"
+   },
+   "expected": "The slab front and polished edges glow a deep warm amber. The front reads at lum_median about 35 to 60 with r_median well above g and b, and the edges are brighter than the faces, the way thick acrylic gathers light.",
+   "accept": {
+    "region": [
+     145,
+     340,
+     630,
+     470
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The framing crops the slab's underside and the towel rod, so the float and the sign of life (both in the frame's brief) are lost, and the frame is only wall and a black box.",
+   "evidence": {
+    "region": [
+     145,
+     440,
+     630,
+     480
+    ],
+    "measured": "Slab front runs into the bottom frame edge. No towel or brass rod is visible anywhere in the frame."
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position z 1.3, target z 0.92, lens 45 mm, f/5.6",
+    "to": "position z 1.15, target z 0.78, lens 35 mm, f/4, and pan to include the towel rod and about 250 mm of wall under the slab"
+   },
+   "expected": "The slab sits in the upper-middle third with a visible shadow gap and wall beneath it, so it reads as floating. The linen towel on its brass rod is in frame. The left blurred strip falls further out or becomes small.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The sink spot lights the wall above the basin, not the slab top and basin, so the hierarchy is inverted: the wall is the brightest surface and the hero is the darkest.",
+   "evidence": {
+    "region": [
+     60,
+     0,
+     690,
+     240
+    ],
+    "measured": "Upper wall lum_median 72.6 vs basin [230,268,510,330] lum_median 0.4. The y-profile falls 92 to 0.2 from top to bottom."
+   },
+   "change": {
+    "setting": "the sink 1 x spot",
+    "from": "40.0 W, 2700 K, cone 12.0 deg",
+    "to": "55 W, 2700 K, cone 20 deg, aimed down into the basin so the pool lands on the slab top and the wall just behind it"
+   },
+   "expected": "A pool of light on the slab top and into the basin, so the basin's soft rounded form reads, with the wall falling off above it.",
+   "accept": {
+    "region": [
+     230,
+     268,
+     510,
+     330
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 15
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The timber boards share one texture placement, so knots and nail holes line up in rows across boards. This gives the CG away at a glance.",
+   "evidence": {
+    "region": [
+     60,
+     30,
+     690,
+     150
+    ],
+    "measured": "Seen: knots at about y 45 and y 130 repeat on 8 or more boards."
+   },
+   "change": {
+    "setting": "the oak's stain / board material mapping",
+    "from": "one texture with the same offset on every board",
+    "to": "a random UV offset (0 to 2 m along the grain) and a random 0 to 8% value and hue shift per board, with occasional 180-degree flips"
+   },
+   "expected": "Each board carries its own knots and tone. No horizontal rows of features, and the tonal variation across boards is visible but subtle.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "post",
+   "problem": "Once the slab glows, the frame will run too bright overall unless exposure comes down. It is already at the top of the night range.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "Frame lum_median 49.1 (target band 22 to 50), with the wall carrying most of it."
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "1.4",
+    "to": "1.1 (after c1 and c3)"
+   },
+   "expected": "A night-room frame with a median of about 30 to 45. The wall becomes a dim warm backdrop and the slab's glow is the brightest area apart from the spout's highlight.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     48
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "composition",
+   "problem": "A blurred pink vertical at the left edge is the brightest element and pulls the eye from the hero.",
+   "evidence": {
+    "region": [
+     35,
+     0,
+     60,
+     480
+    ],
+    "measured": "lum_median 121, p95 160, versus the slab front at 0.9."
+   },
+   "change": {
+    "setting": "whichever source lights the alcove's left jamb (or the reframe in c2)",
+    "from": "lit jamb in frame at the edge",
+    "to": "dim the jamb's light by about 1.5 stops, or reframe so the jamb edge is outside the frame or reads as a sharp, dark return"
+   },
+   "expected": "The left edge reads as a dim timber return, not a glowing smear.",
+   "accept": {
+    "region": [
+     35,
+     0,
+     60,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 75
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The frame has no sign of life, so it reads as a product render rather than a bar's washroom photographed in use.",
+   "evidence": {
+    "region": [
+     160,
+     255,
+     620,
+     340
+    ],
+    "measured": "Seen: the slab top is empty and no towel is in frame."
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink",
+    "to": "the linen towel slightly rumpled on its brass rod, a small amber glass soap bottle and a folded hand towel on the slab's corner, a few water droplets in the basin"
+   },
+   "expected": "The frame reads as a used, specific room. The props catch small highlights from the sink's spot.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The brushed-steel spout lacks anisotropic sheen and a contact shadow, so it reads as pasted onto the boards.",
+   "evidence": {
+    "region": [
+     255,
+     85,
+     385,
+     180
+    ],
+    "measured": "Seen: soft, smeared highlight and no shadow under the spout on the boards."
+   },
+   "change": {
+    "setting": "the steel's patina / finish",
+    "from": "smooth metal",
+    "to": "brushed stainless: anisotropy 0.7 along the spout, roughness 0.3, with a slightly warmer tint"
+   },
+   "expected": "A fine streaked highlight along the spout and a sharper rosette edge, with a soft shadow on the boards from the sink spot.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "If the under-glow at 3.0 still leaves the slab near black, the Smoke tint's density or the slab's thickness may need to change so light carries through it.",
+   "why": "The sink's tint and form are fixed in the room's design and the configuration. That is the owner's call, not a critic fix."
+  },
+  {
+   "request": "Board joints with a small bevel and a varied gap width, instead of uniform black grooves.",
+   "why": "The board profile is the room's geometry, which the card fixes."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
