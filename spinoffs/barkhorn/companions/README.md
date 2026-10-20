@@ -535,7 +535,7 @@ a keepsake, which is the point: a bar token you'd want to keep.
   settles at about 11.5° for a 30 mm spread.
 - `column`: the request column with its queue (`coins`, from the bottom), and the next coin pushed `out` of its slot.
 - `bowl`: the bowl at the door, `n` coins in it in the eight tints.
-- `flavour_materials` overrides one tint's materials. The GLBs are committed (`out-coin-study/render/`,
+- `flavour_materials` overrides one tint's materials. Checked: `renders/2026-10-20/barkhorn/coin/kit-check.png` (a bowl and a stack). The GLBs are committed (`out-coin-study/render/`,
   `out-coin-column/render/`).
 
 **The renders** (`coin_shots.py`, through Planet's kit piece; `renders/2026-10-20/barkhorn/coin/`):
