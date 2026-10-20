@@ -54,10 +54,10 @@ def _charred(bpy, kit, name, paint, paint_left, seed):
         return n.outputs['Fac']
     def ramp(fac, stops):
         r = nt.nodes.new('ShaderNodeValToRGB'); cr = r.color_ramp
-        cr.elements[0].position, cr.elements[0].color = stops[0][0], (*kit.M.hex_lin(stops[0][1]), 1)
-        cr.elements[1].position, cr.elements[1].color = stops[1][0], (*kit.M.hex_lin(stops[1][1]), 1)
+        cr.elements[0].position, cr.elements[0].color = stops[0][0], kit.M.hex_lin(stops[0][1])
+        cr.elements[1].position, cr.elements[1].color = stops[1][0], kit.M.hex_lin(stops[1][1])
         for pos, col in stops[2:]:
-            e = cr.elements.new(pos); e.color = (*kit.M.hex_lin(col), 1)
+            e = cr.elements.new(pos); e.color = kit.M.hex_lin(col)
         nt.links.new(fac, r.inputs['Fac'])
         return r.outputs['Color']
     soot_rust = ramp(nz(3.0, 8.0, seed), [(0.42, '#0C0B0A'), (0.62, '#4A2B1B'), (0.55, '#1E1611'), (0.72, '#6A3A22')])
@@ -65,14 +65,14 @@ def _charred(bpy, kit, name, paint, paint_left, seed):
     mix = nt.nodes.new('ShaderNodeMix'); mix.data_type = 'RGBA'
     mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value = 0.58; mr.inputs['From Max'].default_value = 0.66
     nt.links.new(steel, mr.inputs['Value']); nt.links.new(mr.outputs['Result'], mix.inputs['Factor'])
-    nt.links.new(soot_rust, mix.inputs['A']); mix.inputs['B'].default_value = (*kit.M.hex_lin('#5E5B57'), 1)
+    nt.links.new(soot_rust, mix.inputs['A']); mix.inputs['B'].default_value = kit.M.hex_lin('#5E5B57')
     col = mix.outputs['Result']
     if paint_left > 0:
         pm = nt.nodes.new('ShaderNodeMix'); pm.data_type = 'RGBA'
         pr = nt.nodes.new('ShaderNodeMapRange')
         pr.inputs['From Min'].default_value = 1.0 - paint_left; pr.inputs['From Max'].default_value = 1.0 - paint_left + 0.04
         nt.links.new(nz(0.8, 3.0, seed + 7.7), pr.inputs['Value']); nt.links.new(pr.outputs['Result'], pm.inputs['Factor'])
-        nt.links.new(col, pm.inputs['A']); pm.inputs['B'].default_value = (*kit.M.hex_lin(paint), 1)
+        nt.links.new(col, pm.inputs['A']); pm.inputs['B'].default_value = kit.M.hex_lin(paint)
         col = pm.outputs['Result']
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Roughness'].default_value = 0.82
@@ -85,7 +85,7 @@ def _charred(bpy, kit, name, paint, paint_left, seed):
 
 def _flat(bpy, kit, name, color, rough=0.9, metallic=0.0):
     m = bpy.data.materials.new(name); m.use_nodes = True; b = m.node_tree.nodes['Principled BSDF']
-    b.inputs['Base Color'].default_value = (*kit.M.hex_lin(color), 1)
+    b.inputs['Base Color'].default_value = kit.M.hex_lin(color)
     b.inputs['Roughness'].default_value = rough; b.inputs['Metallic'].default_value = metallic
     return m
 
