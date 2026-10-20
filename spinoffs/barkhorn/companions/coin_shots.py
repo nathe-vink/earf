@@ -138,10 +138,30 @@ def column(coins=('ice', 'ember', 'acid', 'haze', 'poison', 'dust', 'smoke', 'em
     return s
 
 
+# the engraving's fill (the lead, after the concept sheet: flat on paper the globe nearly vanishes): the frost alone, as
+# a lasered trench is (a translucent rough face), against the trench paint-filled white or black (a shop's step)
+FILLS = {'frost': {'preset': 'frosted', 'color': '#F4F4F2', 'absorb': '#EEEEEA', 'roughness': 0.6, 'radius': 0.0006,
+                   'clear': 0.0},
+         'white': {'preset': 'satin_paint', 'color': '#F2F1EC', 'roughness': 0.6, 'specular': 0.3},
+         'black': {'preset': 'satin_paint', 'color': '#1C1A18', 'roughness': 0.5, 'specular': 0.3}}
+
+
+def fills(flavours=('ice', 'acid', 'haze')):
+    """The three fills side by side (columns) in three tints (rows), flat on paper, from above at an angle."""
+    props = []
+    for j, (fill, m) in enumerate(FILLS.items()):
+        props.append(piece('coin', [{'position': [-0.055 + 0.055 * j, 0.05 - 0.05 * i, 0.0], 'flavour': f, 'rotate': [0, 0, 0]}
+                                    for i, f in enumerate(flavours)], materials={'frost': m}, **PICK))
+    tgt = [0.0, 0.0, 0.0]
+    cam = {'position': [0.0, -0.22, 0.42], 'target': tgt, 'lens_mm': 70, 'level': False, 'fstop': 11.0, 'focus': tgt}
+    return studio('EARFcoin: the engraving\'s fill', [1200, 1000], cam, props, samples=128)
+
+
 FRAMES = {f'proof-{f[0]}-{e}': (lambda f=f, e=e, c=c: proof(f, e, c))
           for f, c in (('engraved', 'ice'), ('printed', 'fog'), ('cast', 'ember')) for e in ('plain', 'reeded')}
 FRAMES['proof-e-smoke'] = lambda: proof('engraved', 'reeded', 'smoke')
 FRAMES['tints'] = lambda: tints()
+FRAMES['fills'] = lambda: fills()
 FRAMES['hero'] = lambda: hero()
 FRAMES['eight'] = eight
 FRAMES['column'] = lambda: column()
