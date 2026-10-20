@@ -30,12 +30,15 @@ def niches(bpy, kit, p, objs):
     for xc in R.SPK_NICHES:
         x0, x1, yf, yb, z0, z1 = R.niche_box(xc)
         t, f = N['wall'], N['felt']
-        oak.box(x0, yf, z0, x0 + t, yb, z1)                          # the cheeks
-        oak.box(x1 - t, yf, z0, x1, yb, z1)
-        oak.box(x0, yf, z1 - t, x1, yb, z1)                          # the head
+        oak.box(x0, yf + 0.004, z0, x0 + t, yb, z1)                  # the cheeks
+        oak.box(x1 - t, yf + 0.004, z0, x1, yb, z1)
+        oak.box(x0 + t, yf + 0.004, z1 - t, x1 - t, yb, z1)          # the head
         oak.box(x0 + t, yf, z0, x1 - t, yb, z0 + 0.02)               # the floor board
         oak.box(x0 + t, yb - t, z0 + 0.02, x1 - t, yb, z1 - t)       # the back
-        oak.box(x0 - 0.012, yf - 0.012, z0, x1 + 0.012, yf + 0.004, z1 + 0.012)   # a proud frame, the face
+        fw = 0.045                                                    # a proud face frame: two stiles and a head
+        oak.box(x0 - 0.012, yf - 0.012, z0, x0 + fw, yf + 0.004, z1 + 0.012)
+        oak.box(x1 - fw, yf - 0.012, z0, x1 + 0.012, yf + 0.004, z1 + 0.012)
+        oak.box(x0 + fw, yf - 0.012, z1 - fw, x1 - fw, yf + 0.004, z1 + 0.012)
         # the felt: a hair inside the oak (coplanar faces render black)
         felt.box(x0 + t + 0.001, yb - t - f, z0 + 0.021, x1 - t - 0.001, yb - t - 0.001, z1 - t - 0.001)
         felt.box(x0 + t + 0.001, yf + 0.02, z0 + 0.021, x0 + t + f, yb - t - f, z1 - t - 0.001)

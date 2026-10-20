@@ -20,8 +20,8 @@ S = T36.S
 S.P = RP
 S.OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'planet37')
 
-DEFAULT = dict(T36.DEFAULT, **dict(config='smoke', colourway='neutral', disc_col='#FFD2A0', disc_glow=0.25,
-                                   disc_lamp=8.0, spk_niche_strip=0.8, tt_glow=0.6, sink_glow=0.8))
+DEFAULT = dict(T36.DEFAULT, **dict(config='smoke', colourway='neutral', disc_col='#FFD2A0', disc_glow=0.12,
+                                   disc_lamp=4.0, spk_niche_strip=0.8, tt_glow=0.35, sink_glow=0.8))
 S.DEFAULT = DEFAULT
 KEYS = T36.KEYS + ('chair_leather', 'banq_col', 'sink_deep', 'sink_glow_col', 'decks', 'spk_niche_strip', 'niche_felt')
 

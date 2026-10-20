@@ -118,8 +118,8 @@
     "sphere_w": 4.0,
     "sphere_glow": 0.6,
     "disc_col": "#FFD2A0",
-    "disc_glow": 0.25,
-    "disc_lamp": 8.0,
+    "disc_glow": 0.12,
+    "disc_lamp": 4.0,
     "name_glow": 0.25,
     "niche_strip": 5.0,
     "sink_glow": 0.8,
@@ -651,7 +651,7 @@
  },
  "materials": {
   "glow": {
-   "strength": 0.6
+   "strength": 0.35
   }
  }
 }
