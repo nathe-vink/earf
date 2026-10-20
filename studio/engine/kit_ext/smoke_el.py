@@ -367,3 +367,23 @@ def ribbon(bpy, name, p, kit):
             me.materials.append(m)
             obs.append(ob)
     return obs
+
+
+def occluder(bpy, name, p, kit):
+    """A disc that only casts shadow: unseen by the camera, in reflections and through glass, it blocks the sky over the
+    ground under the speaker so the floor darkens where the cabinet meets it (its contact shadow), as the cabinet's
+    clear acrylic base does not. `radius`, `position` (its centre), `segments`."""
+    bm = bmesh.new()
+    bmesh.ops.create_circle(bm, cap_ends=True, segments=p.get('segments', 32), radius=p.get('radius', 0.4))
+    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+    ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    ob.location = Vector(p.get('position', [0, 0, 0.05]))
+    ob.scale = Vector((p.get('sx', 1.0), p.get('sy', 1.0), 1.0))
+    ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
+    m = bpy.data.materials.new(name); m.use_nodes = True
+    b = m.node_tree.nodes['Principled BSDF']; b.inputs['Base Color'].default_value = (0.0, 0.0, 0.0, 1.0)
+    b.inputs['Roughness'].default_value = 1.0
+    me.materials.append(m)
+    ob.visible_camera = False; ob.visible_glossy = False; ob.visible_transmission = False
+    ob.visible_volume_scatter = False
+    return [ob]

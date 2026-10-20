@@ -12,7 +12,7 @@ from smoke import SHELL, SPEAKER
 
 SKY = 'aarfontein_pan'                      # a real dry lake bed with a low rise at its horizon (Poly Haven, CC0)
 SKY_ROT = 124.0                             # its low sun to the front-left
-SOOT = '#161616'
+SOOT = '#4A4744'                            # soot, but with enough albedo that the sunlit sides of the billows show
 
 
 def smoke(position, size, density, seed, **k):
@@ -48,10 +48,12 @@ def plume():
 
 def shot():
     props = [ground('dry_ground_01', size=(40.0, 40.0), position=(0.0, 14.0, 0.0), displace=0.0, relief=0.05,
-                    res='4k', tint='#F0EEEA', tint_mix=0.95, bump=2.0),
+                    res='4k', tint='#F0EEEA', tint_mix=0.95, bump=2.0, tex_scale=7.0),
              # the plume's shadow across part of the pan, and the gap the sun comes through onto the foreground
              piece('ext', module='smoke_el', fn='canopy', size=[600.0, 600.0], z=20.0, position=[-60.0, 60.0],
-                   scale=15.0, open=0.35, seed=7)] + plume()
+                   scale=15.0, open=0.35, seed=7)] + plume() + [
+        # the contact shadow: a shadow-only disc in the cabinet's base, blocking the sky over the crust beneath it
+        piece('ext', module='smoke_el', fn='occluder', position=[0.0, 0.0, 0.03], radius=0.36, sx=1.0, sy=0.9, rotate_z=18.0)]
     cam = camera(height=0.8, distance=4.4, azimuth=-20, lens=40, target=(0.0, 0.0, 0.85), fstop=4.0, shift_x=0.08,
                  shift_y=0.06)
     cam['clip_end'] = 3000
@@ -63,7 +65,7 @@ def shot():
     }
     return frame('smoke_pan', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.8),
                  'barkhorn, Smoke, black smoke over a salt pan', sun={**sun_from_sky(SKY, SKY_ROT, irradiance=9.0),
-                                                                     'elevation_deg': 22.0},
+                                                                     'elevation_deg': 22.0, 'angle_deg': 1.5},
                  lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.01), samples=512, exposure=0.3,
                  fin=finish(contrast=0.06, clarity=0.04, saturation=-0.85, vignette=0.15))
 
