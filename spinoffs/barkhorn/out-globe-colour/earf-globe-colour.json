@@ -53,6 +53,36 @@
    "radius": 0.008,
    "roughness": 0.03
   },
+  "face-acid": {
+   "preset": "emit",
+   "color": "#FFC93A",
+   "strength": 0.0
+  },
+  "face-dust": {
+   "preset": "emit",
+   "color": "#FF8A3A",
+   "strength": 0.0
+  },
+  "face-ember": {
+   "preset": "emit",
+   "color": "#FF4A3A",
+   "strength": 0.0
+  },
+  "face-haze": {
+   "preset": "emit",
+   "color": "#9A6BFF",
+   "strength": 0.0
+  },
+  "face-ice": {
+   "preset": "emit",
+   "color": "#4FB8FF",
+   "strength": 0.0
+  },
+  "face-poison": {
+   "preset": "emit",
+   "color": "#6BD45A",
+   "strength": 0.0
+  },
   "rim-acid": {
    "preset": "emit",
    "color": "#FFC93A",
@@ -119,6 +149,30 @@
    "material": "disc-poison"
   },
   {
+   "match": "face-south",
+   "material": "face-acid"
+  },
+  {
+   "match": "face-m150",
+   "material": "face-dust"
+  },
+  {
+   "match": "face-north",
+   "material": "face-ember"
+  },
+  {
+   "match": "face-m30",
+   "material": "face-haze"
+  },
+  {
+   "match": "face-equator",
+   "material": "face-ice"
+  },
+  {
+   "match": "face-m90",
+   "material": "face-poison"
+  },
+  {
    "match": "rim-south",
    "material": "rim-acid"
   },
@@ -173,22 +227,40 @@
   "night": {
    "materials": {
     "rim-ember": {
-     "strength": 4.0
+     "strength": 2.5
     },
     "rim-dust": {
-     "strength": 4.0
+     "strength": 2.5
     },
     "rim-acid": {
-     "strength": 4.0
+     "strength": 2.5
     },
     "rim-poison": {
-     "strength": 4.0
+     "strength": 2.5
     },
     "rim-ice": {
-     "strength": 4.0
+     "strength": 2.5
     },
     "rim-haze": {
-     "strength": 4.0
+     "strength": 2.5
+    },
+    "face-ember": {
+     "strength": 0.12
+    },
+    "face-dust": {
+     "strength": 0.12
+    },
+    "face-acid": {
+     "strength": 0.12
+    },
+    "face-poison": {
+     "strength": 0.12
+    },
+    "face-ice": {
+     "strength": 0.12
+    },
+    "face-haze": {
+     "strength": 0.12
     },
     "uv": {
      "strength": 2.0

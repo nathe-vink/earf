@@ -16,6 +16,14 @@
    3.5,
    318.0
   ],
+  "face-m90": [
+   -149.1,
+   -0.1,
+   19.0,
+   149.1,
+   0.1,
+   317.2
+  ],
   "disc-m30": [
    -94.3,
    -131.9,
@@ -31,6 +39,14 @@
    93.8,
    131.6,
    310.1
+  ],
+  "face-m30": [
+   -90.6,
+   -129.2,
+   28.1,
+   90.6,
+   129.2,
+   308.1
   ],
   "disc-m150": [
    -94.3,
@@ -48,6 +64,14 @@
    131.6,
    310.1
   ],
+  "face-m150": [
+   -90.6,
+   -129.2,
+   28.1,
+   90.6,
+   129.2,
+   308.1
+  ],
   "disc-equator": [
    -139.2,
    -150.0,
@@ -63,6 +87,14 @@
    138.9,
    149.9,
    230.9
+  ],
+  "face-equator": [
+   -136.8,
+   -149.1,
+   108.7,
+   136.8,
+   149.1,
+   227.5
   ],
   "disc-north": [
    -68.6,
@@ -80,6 +112,14 @@
    114.9,
    305.5
   ],
+  "face-north": [
+   -66.2,
+   -114.0,
+   211.1,
+   142.9,
+   114.0,
+   302.0
+  ],
   "disc-south": [
    -145.4,
    -114.9,
@@ -95,6 +135,14 @@
    68.3,
    114.9,
    128.5
+  ],
+  "face-south": [
+   -142.9,
+   -114.0,
+   34.2,
+   66.2,
+   114.0,
+   125.0
   ],
   "base": [
    -55.0,
@@ -164,16 +212,22 @@
  "finishes": {
   "disc-m90": "disc-poison",
   "rim-m90": "rim-poison",
+  "face-m90": "face-poison",
   "disc-m30": "disc-haze",
   "rim-m30": "rim-haze",
+  "face-m30": "face-haze",
   "disc-m150": "disc-dust",
   "rim-m150": "rim-dust",
+  "face-m150": "face-dust",
   "disc-equator": "disc-ice",
   "rim-equator": "rim-ice",
+  "face-equator": "face-ice",
   "disc-north": "disc-ember",
   "rim-north": "rim-ember",
+  "face-north": "face-ember",
   "disc-south": "disc-acid",
   "rim-south": "rim-acid",
+  "face-south": "face-acid",
   "base": "base",
   "uv": "uv",
   "chip-ember": "disc-ember",

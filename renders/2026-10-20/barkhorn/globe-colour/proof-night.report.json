@@ -3,7 +3,7 @@
  "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-colour/proof-night.png",
  "seconds": {
   "build": 0.3,
-  "render": 127.5
+  "render": 56.4
  },
  "samples": 128,
  "size": [
@@ -112,6 +112,90 @@
     277,
     363,
     455
+   ],
+   "depth_m": 1.784
+  },
+  "face-equator#0": {
+   "part": "face-equator",
+   "centre_px": [
+    292.5,
+    283.5
+   ],
+   "box_px": [
+    146,
+    182,
+    439,
+    399
+   ],
+   "depth_m": 1.75
+  },
+  "face-m150#0": {
+   "part": "face-m150",
+   "centre_px": [
+    292.5,
+    283.5
+   ],
+   "box_px": [
+    194,
+    116,
+    391,
+    464
+   ],
+   "depth_m": 1.75
+  },
+  "face-m30#0": {
+   "part": "face-m30",
+   "centre_px": [
+    292.5,
+    283.5
+   ],
+   "box_px": [
+    194,
+    116,
+    391,
+    464
+   ],
+   "depth_m": 1.75
+  },
+  "face-m90#0": {
+   "part": "face-m90",
+   "centre_px": [
+    292.5,
+    283.5
+   ],
+   "box_px": [
+    142,
+    144,
+    443,
+    414
+   ],
+   "depth_m": 1.75
+  },
+  "face-north#0": {
+   "part": "face-north",
+   "centre_px": [
+    330.6,
+    201.9
+   ],
+   "box_px": [
+    222,
+    126,
+    446,
+    286
+   ],
+   "depth_m": 1.716
+  },
+  "face-south#0": {
+   "part": "face-south",
+   "centre_px": [
+    255.8,
+    361.9
+   ],
+   "box_px": [
+    146,
+    281,
+    361,
+    451
    ],
    "depth_m": 1.784
   },

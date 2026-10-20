@@ -96,6 +96,7 @@ def materials():
         m[f'disc-{k}'] = {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': _deep(SWATCH[name], TINT_K[name]),
                           'radius': T / 1000, 'roughness': 0.03}
         m[f'rim-{k}'] = {'preset': 'emit', 'color': GLOW[name], 'strength': 0.0}
+        m[f'face-{k}'] = {'preset': 'emit', 'color': GLOW[name], 'strength': 0.0}
     m['base'] = {'preset': 'black_oxide', 'color': '#1E1E1F'}
     m['uv'] = {'preset': 'emit', 'color': '#7A52FF', 'strength': 0.0}
     m['seat'] = {'preset': 'rubber', 'color': '#161616'}
@@ -118,7 +119,8 @@ def full_discs(r=R, t=T, gap=GAP):
         disc = place(Cylinder(rr, t))
         cutter = place(Cylinder(rr + 1, t + 2 * gap))
         rim = place(Cylinder(rr - 0.05, t - 1.0) - Cylinder(rr - RIM, t))
-        shapes.append((name, disc, cutter, rim))
+        face = place(Cylinder(rr - RIM - 0.3, 0.2))          # night: the face's own faint glow, at its mid-plane
+        shapes.append((name, disc, cutter, rim, face))
     return shapes
 
 
@@ -126,11 +128,12 @@ def discs(r=R, t=T, gap=GAP):
     """[(name, disc, rim)] each slotted round those before it (the meridian facing us whole)."""
     sh = full_discs(r, t, gap)
     out = []
-    for i, (name, disc, cutter, rim) in enumerate(sh):
-        for _, _, c, _ in sh[:i]:
+    for i, (name, disc, cutter, rim, face) in enumerate(sh):
+        for _, _, c, _, _ in sh[:i]:
             disc = disc - c
             rim = rim - c
-        out.append((name, disc, rim))
+            face = face - c
+        out.append((name, disc, rim, face))
     return out
 
 
@@ -146,12 +149,13 @@ def parts():
     z = lift()
     M = lambda s: Pos(0, 0, z) * Rot(Y=LEAN) * s
     ps = []
-    for name, disc, rim in discs():
+    for name, disc, rim, face in discs():
         k = DISCS[name].lower()
         ps.append(Part(f'disc-{name}', M(disc), Machined('cast-acrylic', 'cnc-mill'), finish=f'disc-{k}', group='globe',
                        notes=[f'{DISCS[name]}: fluorescent (or the speaker\'s) cast acrylic, 8 mm, laser-cut, the slots '
                               'kerf-compensated to the measured sheet, every edge diamond-polished']))
         ps.append(Part(f'rim-{name}', M(rim), Bought('globe-glow'), finish=f'rim-{k}', render=True, inside=True))
+        ps.append(Part(f'face-{name}', M(face), Bought('globe-glow'), finish=f'face-{k}', render=True, inside=True))
     b = BASE
     cup = Pos(0, 0, z) * Sphere(R + 0.3)
     base = cyl('z', (0, 0), b['d'], 0, b['h']) - cup - cyl('z', (0, 0), 2 * b['ring'][1] + 1, b['h'] - 8, b['h'] + 1)
@@ -176,7 +180,8 @@ def build():
     ps = parts()
     # fluorescent sheet gathers daylight through its faces and gives it out at its cut edges, so by day the edges glow
     # too, less (clear tinted sheet's edges, seen along 300 mm of tint, render black)
-    flav = {'day': {'materials': {f'rim-{n.lower()}': {'strength': 0.8} for n in SWATCH}}, 'night': {'materials': {**{f'rim-{n.lower()}': {'strength': 4.0} for n in SWATCH},
+    flav = {'day': {'materials': {f'rim-{n.lower()}': {'strength': 0.8} for n in SWATCH}}, 'night': {'materials': {**{f'rim-{n.lower()}': {'strength': 2.5} for n in SWATCH},
+                                               **{f'face-{n.lower()}': {'strength': 0.12} for n in SWATCH},
                                                'uv': {'strength': 2.0}}}}
     prod = K.Product('earf-globe-colour', 'EARF globe, in colour', 'the site\'s globe in six acrylics', params={},
                      parts=lambda P: ps, count=1, materials=materials(), variants=flav,
@@ -197,7 +202,7 @@ def cut_files(out=os.path.join(OUT, 'cut')):
     for tag, r, t, gap in (('300', R, T, GAP), ('1000', 500.0, 25.0, 0.4)):
         sh = discs(r, t, gap)
         full = full_discs(r, t, gap)
-        for (name, disc, _), (_, _, _, _) in zip(sh, full):
+        for (name, disc, _, _) in sh:
             # the disc's plane: a section through its middle, turned flat
             faces = _flat(name, disc, r)
             doc = ezdxf.new('R2010', setup=True); doc.units = ezdxf.units.MM
