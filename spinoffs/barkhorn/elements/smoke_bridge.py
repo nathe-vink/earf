@@ -29,9 +29,9 @@ def fire(x, y, heading, seed):
     import math
     h = math.radians(heading)
     out = []
-    for k, (dx, w, d, hgt, z) in enumerate([(-0.3, 1.5, 1.3, 1.6, 0.55), (1.6, 1.0, 1.4, 1.1, 0.6)]):
+    for k, (dx, w, d, hgt, z) in enumerate([(-0.3, 1.6, 1.4, 2.4, 0.6), (1.6, 1.1, 1.4, 1.5, 0.6)]):
         out.append(piece('ext', module='wreck', fn='flame', position=[x + dx * math.cos(h), y + dx * math.sin(h), z],
-                         size=[w, d, hgt], rotate_z=heading, density=8.0, strength=1.0, scale=0.16, seed=seed + k))
+                         size=[w, d, hgt], rotate_z=heading, density=5.0, strength=70.0, scale=0.2, seed=seed + k))
     out.append(piece('scatter', count=50, radius=[0.004, 0.012], position=[x, y, 1.6], material='glow', color='#FF8A30',
                      emit=40.0, seed=seed, plume={'height': 6.0, 'spread': [0.3, 2.2], 'lean': [-2.5, 0.5], 'taper': 0.7}))
     return out
@@ -42,9 +42,9 @@ def smoke_column(x, y, seed):
     out = []
     for k in range(8):
         t = k / 7
-        w = 2.2 + 12.0 * t ** 1.2
-        col = '#5A5652' if k == 0 else ('#2C2B2A' if k == 1 else '#141414')
-        out.append(piece('ext', module='smoke_el', fn='woodsmoke', position=[x - 10.0 * t ** 1.5, y + 3.0 * t, 1.4 + 2.8 * k],
+        w = 1.8 + 9.0 * t ** 1.2
+        col = '#3E3B38' if k == 0 else ('#242221' if k == 1 else '#121212')
+        out.append(piece('ext', module='smoke_el', fn='woodsmoke', position=[x - 4.5 * t ** 1.6, y + 1.5 * t, 1.2 + 2.6 * k],
                          size=[w, w, 3.6], density=(1.5 + 3.5 * min(1.0, 2 * t)) * (1.0 - 0.5 * t), seed=seed + k,
                          scale=0.6 + 1.8 * t, cut=0.4, soft=0.3, anisotropy=0.35, fade=[0.35, 0.35, 0.4], floor=0.0,
                          rise=1.6, color=col, detail_scale=0.2 + 0.4 * t, detail_weight=0.55))
@@ -54,8 +54,9 @@ def smoke_column(x, y, seed):
 def deck():
     """The overpass: wet asphalt, lane markings, Jersey barriers, footways, steel railings and lamp posts."""
     D = DECK_HALF
-    out = [ground('asphalt_02', size=(2 * D + 4.0, 140.0), position=(0.0, 60.0, 0.0), displace=0.004, relief=False,
-                  res='2k', tint='#2C2C2E', tint_mix=0.3, rough_mul=0.3)]
+    # the deck as a slab with the asphalt laid on it (a ground patch this long subdivides past the container's memory)
+    out = [piece('box', size=[2 * D + 4.0, 140.0, 0.3], position=[0.0, 60.0, -0.3], material='pbr', texture='asphalt_02',
+                 tex_scale=4.0, tint='#2C2C2E', tint_mix=0.3, rough_mul=0.3)]
     for k in range(15):
         y = -4.0 + 9.0 * k
         for x in (-3.5, 3.5):

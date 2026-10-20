@@ -139,7 +139,10 @@ def sedan(bpy, name, p, kit):
     for i in range(6):
         for j in range(6):
             rf.faces.new((roof[i][j], roof[i][j + 1], roof[i + 1][j + 1], roof[i + 1][j]))
-    bmesh.ops.solidify(rf, geom=rf.faces[:], thickness=0.02)
+    bmesh.ops.solidify(rf, geom=rf.faces[:], thickness=0.06)
+    for sgn in (1, -1):
+        kit._tube(rf, [(0.37, sgn * 0.69, 1.40), (-0.2, sgn * 0.71, 1.42 - 0.6 * sag), (-0.77, sgn * 0.69, 1.40)], 0.04, 1.0, 0.0,
+                  8, 4)
     rme = bpy.data.meshes.new(name + '-roof'); rf.to_mesh(rme); rf.free()
     rob = bpy.data.objects.new(name + '-roof', rme); rme.materials.append(char); obs.append(rob)
     me = bpy.data.meshes.new(name + '-cabin'); cab.to_mesh(me); cab.free()
@@ -223,11 +226,13 @@ def flame(bpy, name, p, kit):
         return c.outputs['Result']
     env = nt.nodes.new('ShaderNodeMath'); env.operation = 'MULTIPLY'
     nt.links.new(side(sep.outputs['X']), env.inputs[0]); nt.links.new(side(sep.outputs['Y']), env.inputs[1])
+    envs = nt.nodes.new('ShaderNodeMath'); envs.operation = 'POWER'; envs.inputs[1].default_value = 2.0
+    nt.links.new(env.outputs[0], envs.inputs[0])
     env2 = nt.nodes.new('ShaderNodeMath'); env2.operation = 'MULTIPLY'
-    nt.links.new(env.outputs[0], env2.inputs[0]); nt.links.new(hz.outputs['Result'], env2.inputs[1])
+    nt.links.new(envs.outputs[0], env2.inputs[0]); nt.links.new(hz.outputs['Result'], env2.inputs[1])
     # the noise above a threshold that rises with height: solid at the roots, tongues above, wisps at the tips
     th = nt.nodes.new('ShaderNodeMath'); th.operation = 'MULTIPLY_ADD'
-    nt.links.new(sep.outputs['Z'], th.inputs[0]); th.inputs[1].default_value = 0.35; th.inputs[2].default_value = 0.35
+    nt.links.new(sep.outputs['Z'], th.inputs[0]); th.inputs[1].default_value = 0.25; th.inputs[2].default_value = 0.48
     sub = nt.nodes.new('ShaderNodeMath'); sub.operation = 'SUBTRACT'
     nt.links.new(nz.outputs['Fac'], sub.inputs[0]); nt.links.new(th.outputs[0], sub.inputs[1])
     cl = nt.nodes.new('ShaderNodeMapRange'); cl.inputs['From Min'].default_value = 0.0; cl.inputs['From Max'].default_value = 0.12
@@ -238,12 +243,17 @@ def flame(bpy, name, p, kit):
     nt.links.new(fire.outputs[0], dens.inputs[0]); nt.links.new(dens.outputs[0], vol.inputs['Density'])
     # temperature: hot at the roots and in the cores, cooling to dull red at the tips
     tmp = nt.nodes.new('ShaderNodeMapRange'); tmp.inputs['From Min'].default_value = 0.0; tmp.inputs['From Max'].default_value = 1.0
-    tmp.inputs['To Min'].default_value = p.get('cool', 750.0); tmp.inputs['To Max'].default_value = p.get('hot', 1450.0)
+    tmp.inputs['To Min'].default_value = p.get('cool', 1050.0); tmp.inputs['To Max'].default_value = p.get('hot', 1800.0)
     hot = nt.nodes.new('ShaderNodeMath'); hot.operation = 'MULTIPLY'
     nt.links.new(hz.outputs['Result'], hot.inputs[0]); nt.links.new(cl.outputs['Result'], hot.inputs[1])
     nt.links.new(hot.outputs[0], tmp.inputs['Value'])
-    nt.links.new(tmp.outputs['Result'], vol.inputs['Temperature'])
-    vol.inputs['Blackbody Intensity'].default_value = p.get('strength', 1.0)
+    # the emission itself: the black-body colour at that temperature, as bright as the flame is dense (the volume's own
+    # black-body emission ignores density, which lit the whole box)
+    bb = nt.nodes.new('ShaderNodeBlackbody'); nt.links.new(tmp.outputs['Result'], bb.inputs['Temperature'])
+    nt.links.new(bb.outputs['Color'], vol.inputs['Emission Color'])
+    es = nt.nodes.new('ShaderNodeMath'); es.operation = 'MULTIPLY'; es.inputs[1].default_value = p.get('strength', 1.0)
+    nt.links.new(fire.outputs[0], es.inputs[0]); nt.links.new(es.outputs[0], vol.inputs['Emission Strength'])
+    vol.inputs['Blackbody Intensity'].default_value = 0.0
     nt.links.new(vol.outputs['Volume'], out.inputs['Volume'])
     me.materials.append(m)
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
