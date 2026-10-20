@@ -1,0 +1,380 @@
+{
+ "stage1": {
+  "impression": "A night shopfront seen through a big steel-framed window into a long timber-and-concrete bar, with a frosted lightbox of a dancing woman on the left and the name across the glass. The room behind reads as a competent, uniformly dim CG interior: the glass has no reflections at all, the EARF letters sit on it as flat opaque grey blocks, the lightbox is the brightest thing in the frame and reads as a poster or sign, and no speaker can be found at the far end, so the frame has no hero. As shot, a magazine would see a generic dark bar, not a specific place: the one specific gesture (the dancer lightbox) reads as signage.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The altar pair must read at a glance at the end of the room: region [330,200,470,290] lum_median >= 45 with the speakers' silhouettes and the light through the acrylic distinct from the back wall (now 34, not identifiable even at 5x)",
+  "The shopfront glass must behave like glass: faint reflections of the street lamps and the kerb on the panes, not a perfectly invisible plane",
+  "The etched name must read as etching (a translucent frost lit by the room and the street), not opaque grey letters floating on the glass",
+  "The lightbox must glow below the room's practicals and in neutral white, not as the frame's brightest, mauve-tinted poster",
+  "The steel fascia below the window must hold detail (now median 8) and the pavement patch on the right must stop being the brightest flat surface in the frame",
+  "No window mullion cutting through the vanishing point and the altar",
+  "Delivered at 2400 x 1600 with clean material detail at 1:1 (this proof at 0.3 cannot show formwork grain, fir checks or steel patina)"
+ ],
+ "defects": [
+  {
+   "region": [
+    330,
+    200,
+    470,
+    290
+   ],
+   "what": "The altar and its speakers are unreadable: the far end is a muddle of dim shapes, lum_median 34; no speaker silhouette or tint can be found"
+  },
+  {
+   "region": [
+    20,
+    105,
+    195,
+    360
+   ],
+   "what": "Lightbox is the brightest large area (median 96.5) and tinted mauve (RGB 113/93/96, dE2000 41 vs a warm white); reads as a backlit poster or signage"
+  },
+  {
+   "region": [
+    200,
+    160,
+    360,
+    215
+   ],
+   "what": "Etched EARF letters render as flat opaque grey blocks (median 88) with no frost texture, no edge highlight, floating in front of the room"
+  },
+  {
+   "region": [
+    0,
+    60,
+    615,
+    380
+   ],
+   "what": "Shopfront glass shows no reflection of the street, the kerb or the street lamps; the panes read as absent"
+  },
+  {
+   "region": [
+    380,
+    160,
+    400,
+    175
+   ],
+   "what": "The one visible Dome pendant clips (27% of its area at 255) as a bare white dot; no visible pool of light under it on the counter"
+  },
+  {
+   "region": [
+    0,
+    380,
+    615,
+    480
+   ],
+   "what": "Blackened-steel fascia below the window nearly black (median 8.2, p95 19.8); its patina and panel joints barely read"
+  },
+  {
+   "region": [
+    615,
+    400,
+    720,
+    470
+   ],
+   "what": "Pavement patch at the doorway is a flat cream plane (median 145), the brightest large surface, with no texture, drawing the eye out of frame"
+  },
+  {
+   "region": [
+    615,
+    60,
+    720,
+    400
+   ],
+   "what": "Door recess and right pier 12% crushed; the corrugated panel in the recess reads as a CG texture"
+  },
+  {
+   "region": [
+    370,
+    60,
+    382,
+    380
+   ],
+   "what": "Centre mullion runs straight down the vanishing point, splitting the room and the altar"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No sign of life legible from the kerb: no figure, no readable glass or coat; tables are evenly lit and repeated, like a showroom"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero, EARF's pair on the altar, cannot be found; the far end is as dim as the rest of the room.",
+   "evidence": {
+    "region": [
+     330,
+     200,
+     470,
+     290
+    ],
+    "measured": "lum_median 34.3, p95 86.9; dark zone [415,195,475,275] median 29.1; no speaker silhouette visible at 5x"
+   },
+   "change": {
+    "setting": "lamps: the altar 2 x spot (and the lamps on each speaker)",
+    "from": "650 W, cone 18 deg; speaker area lamps 1.0 W/m2",
+    "to": "1100 W, cone 22 deg; speaker area lamps 3.0 W/m2"
+   },
+   "expected": "The altar becomes the brightest pool at the end of the room, the two cabinets' silhouettes and the light through their acrylic read from the kerb.",
+   "accept": {
+    "region": [
+     330,
+     200,
+     470,
+     290
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The glass shows no reflections and the steel fascia is nearly black, so the shopfront does not read as glass in a steel frame on a street.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     615,
+     480
+    ],
+    "measured": "lum_median 8.2, p95 19.8, crush 4.6%; window panes show zero reflection of street lamps"
+   },
+   "change": {
+    "setting": "lamps: street lamps 3 x point",
+    "from": "120 W, 3000 K",
+    "to": "260 W, 3200 K"
+   },
+   "expected": "A raking street light picks out the steel's uneven sheen and panel joints and puts faint, clean reflections of lamps and kerb on the panes.",
+   "accept": {
+    "region": [
+     0,
+     380,
+     615,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     14,
+     30
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The lightbox outshines the room and is tinted mauve, so it reads as a poster rather than frosted acrylic glowing softly.",
+   "evidence": {
+    "region": [
+     20,
+     105,
+     195,
+     360
+    ],
+    "measured": "lum_median 96.5, RGB 113/93/96, delta_e2000 41 vs #E8E4DE"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the screens' images",
+    "from": "1.0",
+    "to": "0.55, with the screen's white set warm-neutral (no magenta) under the 2900 K white balance"
+   },
+   "expected": "The lightbox sits just below the altar and the pendants in brightness, a soft even warm white with the fogged dancer, not a sign.",
+   "accept": {
+    "region": [
+     20,
+     105,
+     195,
+     360
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     60,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The etched name reads as opaque grey letters floating on the glass instead of etching.",
+   "evidence": {
+    "region": [
+     200,
+     160,
+     360,
+     215
+    ],
+    "measured": "lum_median 88.3, flat fill, no edge highlight or frost grain at 2x"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the window's etched name (and the frosted roughness of the etch)",
+    "from": "emission 0.05, roughness as now",
+    "to": "emission 0.0, etch transmissive with roughness ~0.35 so it catches the street lamps and lets the room show through"
+   },
+   "expected": "Letters read as a light frost on clear glass, legible but showing the room behind, brighter at edges where the street light catches them.",
+   "accept": {
+    "region": [
+     200,
+     160,
+     360,
+     215
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The Dome pendant reads as a clipped bare dot and the counter has no distinct pool of light under it.",
+   "evidence": {
+    "region": [
+     380,
+     160,
+     400,
+     175
+    ],
+    "measured": "clip_pct 27.0, p95 255; counter region [210,250,370,380] median 38.6"
+   },
+   "change": {
+    "setting": "EARF's lamps: each Dome liner glow; the Domes' downlights",
+    "from": "glow 0.45; downlights 260 W, cone 30 deg",
+    "to": "glow 0.25; downlights 380 W, cone 26 deg"
+   },
+   "expected": "The Domes glow tinted rather than blown and throw tighter, brighter pools on the zinc counter with dark between.",
+   "accept": {
+    "region": [
+     380,
+     160,
+     400,
+     175
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The pavement patch at the door is the brightest flat surface in the frame and pulls the eye out of the room.",
+   "evidence": {
+    "region": [
+     615,
+     400,
+     720,
+     470
+    ],
+    "measured": "lum_median 144.7, flat cream, no texture"
+   },
+   "change": {
+    "setting": "materials' finish: the concrete's tone (pavement and threshold)",
+    "from": "light cream, matte",
+    "to": "mid grey-warm concrete, albedo about half, with a slight damp sheen"
+   },
+   "expected": "The threshold reads as street concrete catching some door light and street-lamp reflection, no longer a bright cutout.",
+   "accept": {
+    "region": [
+     615,
+     400,
+     720,
+     470
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     95
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The centre mullion falls on the vanishing point and splits the room and the altar.",
+   "evidence": {
+    "region": [
+     370,
+     60,
+     382,
+     380
+    ],
+    "measured": "mullion spans the full window height at the frame's centre, crossing the altar zone"
+   },
+   "change": {
+    "setting": "camera position",
+    "from": "[-3.8, 3.3, 1.5], 28 mm",
+    "to": "[-3.2, 2.5, 1.45], 32 mm, aimed at the altar"
+   },
+   "expected": "The altar sits clear in one pane, a third in from the mullion, with the lightbox and name still in frame.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The room reads as an empty showroom from the kerb; no air, no life.",
+   "evidence": {
+    "region": [
+     210,
+     250,
+     540,
+     380
+    ],
+    "measured": "tables evenly lit and repeated; no legible glass, coat or figure; no visible beams in the air"
+   },
+   "change": {
+    "setting": "haze density and props",
+    "from": "haze 0.006; props as listed",
+    "to": "haze 0.012; put the half-drunk coupe and a lit candle on the front table by the window, and the coat on the nearest stool in view"
+   },
+   "expected": "Soft beams under the Domes and altar spots, and a near sign of life at the window that a passer-by would see.",
+   "accept": {
+    "region": [
+     380,
+     250,
+     540,
+     380
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 18
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A saturated colour for the hero speakers so the frame has one colour accent",
+   "why": "The Smoke configuration fixes every product's tint; the speakers' colour cannot change."
+  },
+  {
+   "request": "Replace the dancer lightbox's content or move it",
+   "why": "The screens and what they show, and the shopfront, are fixed by the room's design."
+  },
+  {
+   "request": "Fewer or differently placed mullions in the shopfront",
+   "why": "The shopfront is fixed design; only the camera can move around it."
+  }
+ ],
+ "score_if_fixed": 6.5
+}
