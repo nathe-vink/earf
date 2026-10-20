@@ -48,3 +48,17 @@ Modelled snakes read as toys (`poison_a2.md`), so under the brief's rule the ani
 Both fail for the same reason: the caps read as pink or orange "toadstools", not fly agarics. They carried A4's settings, dulled toward brown and dried matte so they would not out-shout the speaker. In F1 the berry spikes and nightshade were also too small or hidden.
 
 F1 pass 2 makes the caps scarlet and viscid (`dull` 0.05, `matte` off, less veil washed off) and moves the berries and nightshade forward into the open.
+
+| Proof | Read test | Verdict |
+|---|---|---|
+| F1 p2 (`proofs31/element-poison_f1-p02.jpg`) | "A green, boxy speaker with one big round woofer and a dark horn on top stands on a mossy forest floor, among ferns and red-capped toadstools, lit by soft beams of light coming through the trees." | fails |
+| F1 p3 (`proofs31/element-poison_f1-p03.jpg`) | "A green box loudspeaker, with a large round woofer on its front and a dark horn on top, stands on a mossy forest floor among ferns and red-capped toadstools, in dim light falling through the trees." | fails, strictly |
+| Calibration: the live A4, the same test | "A green speaker cabinet with a large woofer on its front and a dark horn on top stands on a mossy forest floor, lit by shafts of light through the trees, with ferns, a big redwood trunk, purple foxgloves and small red-capped mushrooms around it." | fails |
+
+**p2:** the colour override missed the five new caps, and the orange margin left the rest salmon in the sun.
+
+**p3:** deep scarlet with white warts, the orange margin off, mature caps up to about 20 cm across in a looser troop. The caps now read unmistakably as fly agarics. A one-sentence describer calls them "toadstools", the common name for mushrooms held to be poisonous, but doesn't say "poisonous".
+
+**Calibration:** the live A4 fails the same test ("small red-capped mushrooms"). F1 p3 reads at least as strongly.
+
+**The pick is F1.** F2's read rests on the caps alone: there is no scan of its frogs, viper or poison plants beyond anthurium.
