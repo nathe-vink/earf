@@ -34,10 +34,17 @@
      120.0,
      90.0
     ],
-    "cover": 0.5,
+    "cover": 0.74,
     "drift": 20.0,
-    "streak": 3.5,
-    "scale": 0.12
+    "streak": 1.7,
+    "scale": 0.12,
+    "clots": 0.45,
+    "clot_scale": 1.4,
+    "greens": [
+     "#1A3E10",
+     "#357A1A",
+     "#6AAE24"
+    ]
    },
    {
     "kind": "kit",
@@ -383,11 +390,79 @@
     ],
     "clear_y": 2.0,
     "full_y": 40.0,
-    "density": 0.035,
-    "ground_boost": 3.0,
-    "ground_h": 1.6,
+    "density": 0.05,
+    "ground_boost": 3.5,
+    "ground_h": 1.8,
     "color": "#EEF0E8",
     "anisotropy": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dry_branches_medium_01",
+    "position": [
+     1.8,
+     0.4,
+     -0.02
+    ],
+    "rotate": [
+     0,
+     0,
+     30
+    ],
+    "scale": 0.7,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dry_branches_medium_01",
+    "position": [
+     -0.4,
+     2.6,
+     -0.02
+    ],
+    "rotate": [
+     0,
+     0,
+     110
+    ],
+    "scale": 0.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dry_branches_medium_01",
+    "position": [
+     2.6,
+     3.4,
+     -0.02
+    ],
+    "rotate": [
+     0,
+     0,
+     200
+    ],
+    "scale": 0.8,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dry_branches_medium_01",
+    "position": [
+     -2.2,
+     1.2,
+     -0.02
+    ],
+    "rotate": [
+     0,
+     0,
+     70
+    ],
+    "scale": 0.5,
+    "res": "2k"
    }
   ]
  },
@@ -474,11 +549,11 @@
   "res": "4k"
  },
  "sun": {
-  "azimuth_deg": -150.7,
-  "elevation_deg": 44.9,
-  "irradiance": 3.0,
-  "angle_deg": 3.0,
-  "color": "#EDF3FE"
+  "azimuth_deg": -55.0,
+  "elevation_deg": 11.0,
+  "irradiance": 4.5,
+  "angle_deg": 2.5,
+  "color": "#FFD2A0"
  },
  "finish": {
   "enabled": true,

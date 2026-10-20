@@ -22,8 +22,9 @@ def ext(module, fn, **k):
 
 
 def set_props():
-    props = [ext('poison_p_el', 'algae_water', position=[0.0, 20.0, WATER], size=[120.0, 90.0], cover=0.5, drift=20.0,
-                 streak=3.5, scale=0.12),
+    props = [ext('poison_p_el', 'algae_water', position=[0.0, 20.0, WATER], size=[120.0, 90.0], cover=0.74, drift=20.0,
+                 streak=1.7, scale=0.12, clots=0.45, clot_scale=1.4,
+                 greens=['#1A3E10', '#357A1A', '#6AAE24']),
              # the near shore: mud and leaves, dipping under the bloom at its edge
              ground('brown_mud_leaves_01', size=(14.0, 5.0), position=(0.0, -4.2, -0.12), displace=0.03, relief=0.22,
                     res='2k', flat=False),
@@ -41,8 +42,10 @@ def set_props():
     props += [piece('asset', model='boulder_01', position=[-2.6, -2.6, -0.35], rotate=[0, 0, 40], scale=0.7, res='2k'),
               piece('asset', model='boulder_01', position=[2.9, -3.0, -0.45], rotate=[0, 0, 210], scale=0.55, res='2k'),
               # mist lying on the water, thicker with distance
-              ext('smoke_b_el', 'mist', box=[-60.0, -2.0, -0.2, 60.0, 80.0, 12.0], clear_y=2.0, full_y=40.0, density=0.035,
-                  ground_boost=3.0, ground_h=1.6, color='#EEF0E8', anisotropy=0.5)]
+              ext('smoke_b_el', 'mist', box=[-60.0, -2.0, -0.2, 60.0, 80.0, 12.0], clear_y=2.0, full_y=40.0, density=0.05,
+                  ground_boost=3.5, ground_h=1.8, color='#EEF0E8', anisotropy=0.5)]
+    for x, y, rz, s_ in ((1.8, 0.4, 30, 0.7), (-0.4, 2.6, 110, 0.6), (2.6, 3.4, 200, 0.8), (-2.2, 1.2, 70, 0.5)):
+        props.append(piece('asset', model='dry_branches_medium_01', position=[x, y, -0.02], rotate=[0, 0, rz], scale=s_, res='2k'))
     return props
 
 
@@ -53,9 +56,9 @@ def lights():
 
 def shot():
     cam = camera(height=DECK + 0.95 - 0.0, distance=5.2, azimuth=-14.0, lens=40.0, target=(0.4, 1.0, DECK + 0.75),
-                 focus=(0.4, 1.0, DECK + 0.66), fstop=5.6)
+                 focus=(0.4, 1.0, DECK + 0.66), fstop=3.5)
     return frame('poison', set_props(), cam, sky(HDRI, ROT, strength=1.0, res='4k'), 'barkhorn, Poison N2, the algae lake',
-                 lights=lights(), sun=sun_from_sky(HDRI, ROT, irradiance=3.0, angle_deg=3.0), rotate_z=-16.0,
+                 lights=lights(), sun={'azimuth_deg': -55.0, 'elevation_deg': 11.0, 'irradiance': 4.5, 'angle_deg': 2.5, 'color': '#FFD2A0'}, rotate_z=-16.0,
                  position=(0.4, 1.0, DECK - 0.003), fin=finish(contrast=0.08, clarity=0.05, vignette=0.18))
 
 

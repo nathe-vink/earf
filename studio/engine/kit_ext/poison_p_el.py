@@ -433,6 +433,14 @@ def algae_water(bpy, name, p, kit):
     fine = noise(2.2, 8.0, 0.8)                           # clots and pinholes in the scum
     mix = nt.nodes.new('ShaderNodeMath'); mix.operation = 'MULTIPLY_ADD'
     L(fine.outputs['Fac'], mix.inputs[0]); mix.inputs[1].default_value = 0.25; L(big.outputs['Fac'], mix.inputs[2])
+    if p.get('clots', 0.0):                               # the scum broken into irregular clots and rafts
+        cl = noise(p.get('clot_scale', 1.4), 10.0, 1.4, 0.7)
+        k = p['clots']
+        a_ = nt.nodes.new('ShaderNodeMath'); a_.operation = 'MULTIPLY'
+        L(mix.outputs['Value'], a_.inputs[0]); a_.inputs[1].default_value = 1.0 - k
+        b_ = nt.nodes.new('ShaderNodeMath'); b_.operation = 'MULTIPLY_ADD'
+        L(cl.outputs['Fac'], b_.inputs[0]); b_.inputs[1].default_value = k; L(a_.outputs['Value'], b_.inputs[2])
+        mix = b_
     cover = p.get('cover', 0.6)
     cut = nt.nodes.new('ShaderNodeMapRange'); cut.interpolation_type = 'SMOOTHSTEP'
     cut.inputs['From Min'].default_value = 0.78 - cover * 0.45; cut.inputs['From Max'].default_value = 0.86 - cover * 0.45
@@ -490,7 +498,7 @@ def sign_path():
     fit('AVOID CONTACT', 330, 70, '#1A1A1A')
     fit('with the water. Keep children', 440, 34, '#222222')
     fit('and dogs out of the lake.', 486, 34, '#222222')
-    img = _age(img, 21, 1.4)
+    img = _age(img, 21, 2.0)
     img.save(path)
     return path
 
