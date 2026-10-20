@@ -1,0 +1,343 @@
+{
+ "stage1": {
+  "impression": "A dark timber washroom alcove with a deep beige-grey slab basin and a wall spout. The boards hold up at 1:1, but the slab reads as an opaque matte solid-surface block (Corian, or plastic) and not as thick smoked cast acrylic glowing through its body. The bowl is a hot, pinkish-white oval, the left third of the frame is an empty black void, and there is no towel or any sign of life. A magazine would not publish it as a specific place: it reads as a generic dark-wood hotel washroom, with nothing that says Planet EARF or acrylic made well.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The slab must read as translucent smoked cast acrylic, with amber light graded through its 120 mm thickness and polished, glowing arrises. At the moment its front face is a flat lum 52 from top to bottom.",
+  "The bowl must glow amber and not pinkish white (its median is now 184, RGB 214/178/160).",
+  "The frame must be filled with the subject: no black void over a third of the frame (the left 230 px now have crush 88.6 %).",
+  "The towel on its brass rod, which the card calls for, must be in frame as the sign of life.",
+  "The slab's front edges must be crisp. The left end now spreads over 18 px from 10 % to 90 %.",
+  "The splashback rectangle must read as a material (frosted acrylic or plaster). Now it reads as a flat grey card."
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    230,
+    480
+   ],
+   "what": "Empty black void, 32 % of the frame, crush_pct 88.6, lum_median 0.2"
+  },
+  {
+   "region": [
+    285,
+    300,
+    720,
+    460
+   ],
+   "what": "Slab front is uniform and opaque (lum 52-53 flat down the face, then a drop to 35), with no internal glow or depth. It reads as Corian or plastic"
+  },
+  {
+   "region": [
+    440,
+    262,
+    720,
+    305
+   ],
+   "what": "Bowl is hot pinkish white (lum_median 184, p95 223), like a lit white ceramic or plastic bowl rather than amber light in smoked acrylic"
+  },
+  {
+   "region": [
+    270,
+    300,
+    310,
+    440
+   ],
+   "what": "Slab's left end is soft (edge width 18 px), so the slab looks mushy, not cut and polished"
+  },
+  {
+   "region": [
+    365,
+    110,
+    435,
+    245
+   ],
+   "what": "Splashback panel is a featureless flat grey-beige rectangle, like cardboard"
+  },
+  {
+   "region": [
+    428,
+    110,
+    445,
+    122
+   ],
+   "what": "Small orange glint at the splashback's top corner reads as a stray firefly or an unexplained source"
+  },
+  {
+   "region": [
+    440,
+    0,
+    720,
+    240
+   ],
+   "what": "The timber boards repeat the same grain pattern and tone from board to board (tiling)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No towel or brass rod in frame, as the card requires; no sign of life"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The slab does not glow through its thickness. It reads as opaque matte solid-surface.",
+   "evidence": {
+    "region": [
+     285,
+     300,
+     720,
+     460
+    ],
+    "measured": "lum_median 52.3, lum_range 34.7; the profile in y is flat at 53 then falls to 35; RGB 73/48/34; delta-E 31.9 against amber #B8742A"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the sink's under-glow",
+    "from": "2.0",
+    "to": "6.0, warmed toward 2400 K amber, so that light carries through the Smoke body and is brightest at the polished arrises"
+   },
+   "expected": "The slab front grades from a lit amber top arris to a darker smoky middle, its median around 75, with a visible amber cast.",
+   "accept": {
+    "region": [
+     285,
+     300,
+     720,
+     460
+    ],
+    "metric": "delta_e",
+    "hex": "#B8742A",
+    "op": "<",
+    "value": 20
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "A third of the frame is an empty black void, and the towel and rod are out of frame.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     230,
+     480
+    ],
+    "measured": "lum_median 0.2, crush_pct 88.6 over 32 % of the frame"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "position [10.5, 1.35, 1.08], target [11.25, 0.4, 0.9]",
+    "to": "pan toward the alcove's right-hand wall and step about 0.3 m closer, so the slab, spout and towel on its brass rod fill the frame and the dark jamb is at most a thin edge on the left"
+   },
+   "expected": "The subject fills the frame. No region larger than a tenth of the frame is more than half crushed.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The bowl is a hot, pinkish-white oval and not an amber glow.",
+   "evidence": {
+    "region": [
+     440,
+     262,
+     720,
+     305
+    ],
+    "measured": "lum_median 184.3, p95 223, RGB 214/178/160"
+   },
+   "change": {
+    "setting": "lamps: the sink spot",
+    "from": "3.0 W, 2700 K",
+    "to": "1.2 W, 2400 K; let the under-glow from c1 light the bowl from within"
+   },
+   "expected": "The bowl reads as warm amber, with its median at 120-160 and red well above blue.",
+   "accept": {
+    "region": [
+     440,
+     262,
+     720,
+     305
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     115,
+     160
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The slab's front edges are soft, which makes the cut and polished acrylic look mushy.",
+   "evidence": {
+    "region": [
+     270,
+     320,
+     310,
+     420
+    ],
+    "measured": "edge in x: step 8.3, width from 10 % to 90 % = 18 px"
+   },
+   "change": {
+    "setting": "camera f-stop and focus",
+    "from": "f/5.6 focused at [10.98, 0.47, 0.86]",
+    "to": "f/8 focused on the slab's front top arris"
+   },
+   "expected": "Crisp arrises on the slab, with the edge transition within about 5 px.",
+   "accept": {
+    "region": [
+     270,
+     320,
+     310,
+     420
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": "<=",
+    "value": 6
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The slab's surface and edges look matte, like plastic. Cast acrylic needs polished arrises that catch a fine line of light.",
+   "evidence": {
+    "region": [
+     285,
+     295,
+     720,
+     310
+    ],
+    "measured": "top front arris shows no specular line; the face is a flat 52-54"
+   },
+   "change": {
+    "setting": "the finish of the sink's acrylic (roughness)",
+    "from": "as now (reads as satin)",
+    "to": "polished faces and arrises (roughness about 0.02); keep the frosting only inside the body"
+   },
+   "expected": "A thin bright line along the top front arris and clean reflections of the boards in the top surface.",
+   "accept": {
+    "region": [
+     285,
+     295,
+     720,
+     310
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "There is no sign of life: no towel and nothing on the slab.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "No towel, rod or prop is visible"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none in this frame",
+    "to": "the linen towel on its brass rod in frame, casually hung, plus a small amber glass soap bottle on the slab's left end"
+   },
+   "expected": "A lived-in detail, with soft linen and a brass highlight next to the glowing slab.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The splashback reads as a flat grey card, and a stray orange glint sits at its corner.",
+   "evidence": {
+    "region": [
+     365,
+     110,
+     435,
+     245
+    ],
+    "measured": "lum_median 40.5, range 33.9, no texture; an orange speck at about [435, 117]"
+   },
+   "change": {
+    "setting": "the finish of the frosted acrylic (roughness), and the source of the glint",
+    "from": "flat, uniform",
+    "to": "frosted roughness about 0.35 with a faint, even glow from behind if it is acrylic; find and remove or hide the source of the orange glint"
+   },
+   "expected": "The panel reads as soft frosted acrylic and the speck is gone.",
+   "accept": {
+    "region": [
+     425,
+     108,
+     445,
+     125
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 70
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The timber boards repeat one grain map at the same tone, which says CG.",
+   "evidence": {
+    "region": [
+     440,
+     0,
+     720,
+     240
+    ],
+    "measured": "The same grain figure repeats on adjacent boards; tone is uniform (lum range 41)"
+   },
+   "change": {
+    "setting": "the oak's stain (per-board variation)",
+    "from": "one map, one tone",
+    "to": "a random offset and rotation of the grain per board, and \u00b18 % variation in value and hue per board"
+   },
+   "expected": "Each board reads as a separate piece of wood.",
+   "accept": {
+    "region": [
+     440,
+     0,
+     720,
+     240
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 50
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Put an EARF product (an Orb lamp, say) in the frame so the colour comes from a product",
+   "why": "The card frames this as a sink detail, and adding a product would change the room's design. The sink's acrylic must carry the frame by itself."
+  },
+  {
+   "request": "Make the slab thinner or more visibly transparent",
+   "why": "The sink's geometry and its Smoke material are fixed by the card. Only its glow and finish may change."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
