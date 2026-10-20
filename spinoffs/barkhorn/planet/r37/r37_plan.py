@@ -66,7 +66,7 @@ CONFIGS = {
 }
 SPEAKER_FLAVOUR = {'smoke': 'cloud-black', 'ember': 'cloud-red', 'ice': 'cloud-blue'}
 LAMP_FLAVOUR = {'smoke': 'smoked', 'ember': 'ember', 'ice': 'ice'}
-LAMP_GLOW = {'smoke': 0.45, 'ember': 0.2, 'ice': 0.3}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
+LAMP_GLOW = {'smoke': 0.3, 'ember': 0.2, 'ice': 0.3}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
 TT_DEF = 'spinoffs/barkhorn/companions/out-concepts2/r3.json'        # R3 Float, until the owner picks
 # the light plinths' colour per tint (the owner: "Lights under the speakers could be cool too")
 PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF'}

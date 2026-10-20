@@ -111,6 +111,13 @@ def lights(v):
             L[f'nichespk{i}'] = {'type': 'spot', 'position': [x, round(yf + 0.08, 3), round(z1 - 0.08, 3)],
                                  'target': [x, y, round(zz + 0.8, 3)], 'power_w': round(v['niche_spot_w'] * gb, 2),
                                  'cone_deg': 30.0, 'blend': 0.8, 'radius_m': 0.02, 'color': 2600, 'camera': False}
+    # and a lamp behind and above each cabinet of the bar pair, linked to it, so light passes through the tint
+    if v.get('barback', 0) > 0:
+        for i, (role, x, y, zz, rot, tilt) in enumerate(RP.bar_speakers()):
+            L[f'barback{i}'] = {'type': 'area', 'position': [x, round(y + 0.22, 3), round(zz + 1.35, 3)],
+                                'target': [x, y, round(zz + 0.6, 3)], 'size_m': [0.4, 0.2],
+                                'irradiance': round(v['barback'] * gb, 3), 'color': 2700, 'camera': False,
+                                'receivers': [f'*#{i}']}
     # the bar pair: a soft spot from the ceiling over the bartender's aisle onto each cabinet's face
     for i, (role, x, y, zz, rot, tilt) in enumerate(RP.bar_speakers()):
         L[f'barspk{i}'] = {'type': 'spot', 'position': [x, round(y - 1.25, 3), RP.CEIL - 0.25],
@@ -137,11 +144,15 @@ BAR = {'title': 'the back bar: the bar pair in its niches either side of the dec
        # blue (a near-neutral glow under warm white balance: now the configuration's warm colour); the chair back dead
        # centre; a hot line at the niche base): a spot in each niche's head down the cabinet's face; the record wall's
        # spots 14 W at 18 deg; the disc 0.5 with 10 W; the plinths 0.6; a step right so the chair goes to the edge
-       'camera': {'position': [6.4, 2.5, 1.22], 'target': [7.1, 6.0, 1.3], 'lens_mm': 28, 'level': True, 'fstop': 4.0,
+       # p4 (p3 5.0, 4.5: the disc seen through the record wall's grid the brightest, coolest flat (median 110); the
+       # pair still murky (28, 37); the zinc one streak; the chair a black slab): the disc 0.12 with 3 W, the record
+       # wall 6 W at 14 deg; a lamp behind and above each cabinet, linked to it, so light passes through the smoked
+       # acrylic; the niche spots 40 W; the Domes' downlights 180 W at 14 deg (pools); haze 0.02; 32 mm, a step right
+       'camera': {'position': [6.6, 2.6, 1.18], 'target': [7.0, 6.0, 1.4], 'lens_mm': 32, 'level': True, 'fstop': 4.0,
                   'focus': [7.0, 5.6, 1.5]},
-       'settings': {'exposure': 0.6, 'screen_glow': 1.0, 'pendant_w': 140.0, 'pendant_cone': 20.0, 'barspk_w': 60.0,
-                    'counter_strip': 1.2, 'disc_glow': 0.5, 'disc_col': '#FFC890', 'disc_lamp': 10.0, 'rw_w': 14.0,
-                    'rw_cone': 18.0, 'niche_spot_w': 25.0, 'plinth': 0.6}}
+       'settings': {'exposure': 0.6, 'screen_glow': 1.0, 'pendant_w': 180.0, 'pendant_cone': 14.0, 'barspk_w': 60.0,
+                    'counter_strip': 1.2, 'disc_glow': 0.12, 'disc_col': '#FFC890', 'disc_lamp': 3.0, 'rw_w': 6.0,
+                    'rw_cone': 14.0, 'niche_spot_w': 40.0, 'plinth': 0.6, 'barback': 4.0, 'haze': 0.02}}
 LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # p2 (p1 4.0, 4.0: the spots lit the felt above the pair, the pair murky, the chairs pink shells, a
           # dead-centre showroom view): seated, off axis, on 40 mm; the spots in front, on the cabinets' faces; the
