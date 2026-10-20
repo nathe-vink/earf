@@ -40,6 +40,25 @@ def cartridge():
     L['back'].update(position=[0.30, 0.05, 0.10], target=[0.0, 0.06, 0.03])
     # the paper behind is now the front of the sweep: the wash moves to light what the camera sees
     L['bgwash'].update(position=[0.0, 1.6, 3.0], target=[0.0, -1.0, 0.25])
+    # s1 (4.5, 4.5): the room brighter than the lamp, the cartridge crushed black, the pool off to the left only, the
+    # slab's far edge a seam at the top, the ball against the top edge. The room dimmed toward an evening bar's, the pool
+    # from the ball's centre, a strip laid along the cartridge's top, the slab run out past the frame, the camera lower
+    # and back on a longer lens, focused on the cartridge
+    L['bgwash']['irradiance'] = 1.2
+    s['sky']['strength'] = 0.15
+    L['key']['irradiance'] = 0.35
+    L['fill']['irradiance'] = 0.1
+    L['pool+0.00'].update(position=[0.0, 0.0, 0.10], power_w=3.0, radius_m=0.07)
+    L['cartstrip'] = {'type': 'area', 'size_m': [0.6, 0.08], 'position': [0.15, 0.45, 0.30], 'target': [0.0, 0.10, 0.02],
+                      'irradiance': 1.2, 'color': 3200, 'camera': False, 'specular': 1.0}
+    for p in s['set']['props']:
+        if p.get('texture') == 'marble_01':
+            p.update(size=[4.0, 6.0, p['size'][2]], position=[0.0, -1.0, p['position'][2]])
+        if p.get('module') == 'earf_moon':
+            p['shade_glow'] = 0.8
+    # high enough that the horizon is out of frame (lower, the far end went a navy void)
+    s['camera'] = {'position': [0.45, 0.95, 0.34], 'target': [0.0, 0.05, 0.09], 'lens_mm': 70, 'level': False,
+                   'fstop': 4.0, 'focus': [0.0, 0.11, 0.02]}
     return s
 
 

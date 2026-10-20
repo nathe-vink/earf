@@ -544,3 +544,28 @@ their swatches are, and a hue angle at chroma 2 to 12 swings with a few units of
 10° on both lamps (the Orb pulls it pink, the Dome blue), so it is held neutral grey (±14° at C 6 to 12). These are
 render measurements: the caster matches the casts on chips 10 mm thick under a 2700 K source, and the first lit samples
 are checked against the speakers' swatches the same way.
+
+**The site set again, black and plug-in** (`lamps_site.py`; `renders/2026-10-19/barkhorn/lamps-site/`, in the names
+the site picks up):
+
+| Frame | Size | Passes (two critics, the mean) | Final |
+|---|---|---|---|
+| `lamp-orb` | 1600 × 2000 | s1 6.0, s2 6.0 | s2: **6.0, meets the gate**; the lamp turned 40° so its cable runs away behind the ball |
+| `lamp-dome` | 1600 × 2000 | s1 5.25 | s1 (a counter under it put the camera level with the rim and lost the underside the brief asks for) |
+| `lamps-orbs` | 2400 × 800 | s1 5.5, s2 5.5 | s2: a glow per tint (Fog clipped), no cables in the lineup |
+| `lamps-domes` | 2400 × 800 | s1 4.5, s2 4.75, s3 4.75 | s3, by a blind duel over s2 (6 to 5): a dimmer room, each dome's pool on the counter in its tint |
+| `lamps-unlit` | 1600 × 2000 | s1 5.5 | s1: the Orb cordless (its cartridge in) |
+| `lamp-cartridge` | 1800 × 1200 | s1 4.5, s2 5.25 | s2: the cartridge half out of the back, lit |
+| `lamp-catch` | 1800 × 1200 | (rendering) | |
+
+The Orb hero clears 6.0; the rest stay at 4.75 to 5.5. What the critics still say: the studio reads as CG (a smooth
+paper sweep, no room), every ball and dome carries the same strip reflection, the Domes row's wall reads mauve and its
+oak warms the cool pools, the unlit Dome's underside reads faintly lit and the polished black base mirrors the oak as
+wood, and the cartridge's top is crushed black. Next, if the owner wants the gate everywhere: a real room (a plaster
+wall and a bar top with a back bar), a window-shaped key, a pale stone counter for the Domes, and a flag under the
+unlit base.
+
+**Read test** (600 px, a fresh judge told nothing; the catch still rendering): every object named; lit or off right
+on all the lit frames, now the Domes row too (round 32e's read it as off), and the unlit Orb read as off; the unlit
+Dome read as faintly on. Expensive: the unlit pair ("most expensive"), the Orb hero ("fairly expensive"); mid for the
+Orbs row and the Dome hero; cheap for the Domes row and the cartridge. The material reads as glass throughout.
