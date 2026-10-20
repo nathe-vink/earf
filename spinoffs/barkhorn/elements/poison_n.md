@@ -93,3 +93,17 @@ The live Poison A4 (`element31/poison_a4.png`, 653ad29) at 1200 × 800 went thro
 - The litter tiles, the ferns repeat as cards, and the god-rays and foxgloves look too tidy.
 
 The gate becomes: N2's realism at least 0.5 above A4's (so at least 5.0), the read test, and no fake-looking elements. N2's proof 5 (4.25) does not meet it.
+
+**Proof 6** (`proofs31/element-poison_n2-p06.jpg`), with Acid B's water:
+- Acid B's clear water (IOR 1.33, ripples) over a murky bottom, with the bloom floating on it, open where it thins.
+- Wet waterlines on the scans.
+- Three trunk scans at different depths in place of one pillar.
+- Acid B's rig (a bounce, two low cards, a rim card on the speaker alone), and the mist reaching the speaker.
+- A bolted sign clear of the jetty's posts.
+
+**Read test:** passes. The judge saw "…at the end of a weathered wooden pier, which runs out into a still, algae-green lake under grey fog, with a 'DANGER TOXIC ALGAE / AVOID CONTACT' sign on the left."
+
+**Realism:** 4.5 and 4.0 (mean 4.25, against the 5.0 gate). The tells:
+- The floating scum now reads as hard-edged cracked mud with dark gaps, hiding the new reflections.
+- The speaker has almost no contact shadow or reflections.
+- The dock is uniform CG wood with identical posts, and the fog is an even gradient.
