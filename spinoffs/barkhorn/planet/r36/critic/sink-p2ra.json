@@ -1,0 +1,387 @@
+{
+ "stage1": {
+  "impression": "A red acrylic trough glowing hot pink against dark, red-washed timber boards. Up close it reads as a render: the basin floor is visibly faceted, the under-glow is a near-white slab that clips and turns the Ember red to candy pink, and the timber is a smooth procedural with no pool of light on it. As it stands this is a generic neon display-case sink, not a specific place a design magazine would publish; it reads as signage or a nightclub vanity, not Kuramata-grade acrylic.",
+  "score": 3.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The basin's inner surface is smooth, with no faceting visible at 1:1 (region 150-310 x 215-300)",
+  "The under-glow is not seen as an object: no near-white slab, and the acrylic body reads deep Ember red, not pink (region 80-590 x 300-430: lum_median about 90 or less, clip_pct under 0.5)",
+  "Frame clip_pct under 0.5 % (now 0.84 %, all from the sink, which is not a lamp)",
+  "A real pool of 2700 K light falls from the spout onto the trough and fades up the boards, so the wall is not flat (y-profile over 220-600 x 0-200 is now 35 to 38, dead flat)",
+  "The left edge holds some timber detail instead of a black band (0-60 x 0-480: crush_pct 78)",
+  "A sign of life on the sink: a folded linen towel, a bar of soap or a small vase, so it reads as a used bar washroom",
+  "The timber shows real grain, checks and board-to-board variation instead of a smooth procedural washed in red spill",
+  "The dark object at the back-left corner (170-215 x 120-220) reads as a recognisable thing, or goes"
+ ],
+ "defects": [
+  {
+   "region": [
+    150,
+    215,
+    310,
+    300
+   ],
+   "what": "The basin floor is faceted into visible flat polygons and stair-steps: low tessellation or flat shading on a surface meant to be soft and rounded"
+  },
+  {
+   "region": [
+    75,
+    300,
+    595,
+    435
+   ],
+   "what": "The under-glow emitter shows as an opaque near-white/pink slab inside the frame, clipping (clip_pct 3.4, lum_median 148); it reads as a light box, not light passing through thick acrylic"
+  },
+  {
+   "region": [
+    50,
+    210,
+    610,
+    300
+   ],
+   "what": "The Ember acrylic is driven to pink (r 240 g 100 b 104 in the basin): the colour reads as neon signage, not a deep cast red"
+  },
+  {
+   "region": [
+    0,
+    0,
+    60,
+    480
+   ],
+   "what": "Dead black vertical band at the left edge (lum_median 1, crush_pct 78): an unlit return or the alcove edge, with nothing readable in it"
+  },
+  {
+   "region": [
+    220,
+    0,
+    600,
+    200
+   ],
+   "what": "The wall is lit flat (y-profile 35 to 38); there is no pool from the 28 W sink spot and nothing falls off naturally"
+  },
+  {
+   "region": [
+    600,
+    0,
+    720,
+    480
+   ],
+   "what": "The timber boards are a smooth procedural grain with a uniform red cast; no checks, nail holes, darker end grain or sheen variation"
+  },
+  {
+   "region": [
+    170,
+    120,
+    215,
+    220
+   ],
+   "what": "A dark red, unreadable object on the back-left corner of the trough (lum_median 11.6), which reads as a blob"
+  },
+  {
+   "region": [
+    320,
+    55,
+    395,
+    125
+   ],
+   "what": "The spout reads as a floating lever with a thin vertical pin: no escutcheon or wall plate, and it casts no shadow on the boards"
+  },
+  {
+   "region": [
+    400,
+    235,
+    580,
+    305
+   ],
+   "what": "The grey pad (soap rest?) is a smooth, uniform CG block with a soft plastic sheen"
+  },
+  {
+   "region": [
+    50,
+    340,
+    120,
+    360
+   ],
+   "what": "Thin doubled edge lines at the lower left of the frame read as coplanar or overlapping acrylic faces"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The under-glow is visible as a clipping white slab and overdrives the acrylic to pink, which is what makes the sink read as signage.",
+   "evidence": {
+    "region": [
+     80,
+     300,
+     590,
+     430
+    ],
+    "measured": "lum_median 147.8, clip_pct 3.43, r/g/b median 246/121/124; basin 200-400 x 230-320 r/g/b 240/100/104"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "6.0",
+    "to": "1.5, and the emitter hidden from camera rays (or recessed so only its light through the acrylic is seen)"
+   },
+   "expected": "The slab drops to a soft glow inside the acrylic, the body reads as a deep cast red with its polished edges brightest, and there is no clipping on the sink.",
+   "accept": {
+    "region": [
+     80,
+     300,
+     590,
+     430
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     95
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "asset",
+   "problem": "The basin's floor is faceted, so the 'soft, rounded' basin reads as low-poly CG at 1:1.",
+   "evidence": {
+    "region": [
+     150,
+     215,
+     310,
+     300
+    ],
+    "measured": "Seen in a 3x crop: flat polygons and stair-stepped facets across the basin floor"
+   },
+   "change": {
+    "setting": "the sink basin mesh's tessellation and shading (same shape)",
+    "from": "coarse tessellation, flat-shaded",
+    "to": "subdivided (2 levels or 4x the segments) with smooth shading and auto-smooth; the shape is unchanged"
+   },
+   "expected": "A continuous, smooth gradient across the basin, with clean refraction and no hard steps.",
+   "accept": {
+    "region": [
+     150,
+     215,
+     310,
+     300
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": "<",
+    "value": 25
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The room light has no pool: the wall is lit flat and the sink spot does not register, so nothing falls off naturally.",
+   "evidence": {
+    "region": [
+     220,
+     0,
+     600,
+     200
+    ],
+    "measured": "y-profile bins 35.2 to 38.5 (flat); median 37"
+   },
+   "change": {
+    "setting": "the sink spot",
+    "from": "28.0 W, cone 30 deg",
+    "to": "60 W, cone 22 deg, aimed at the spout and the trough's rim, with the softness at 0.4"
+   },
+   "expected": "A warm 2700 K pool on the rim and the spout that fades up the boards: the top of the frame 15 to 25 % darker than the band just above the sink.",
+   "accept": {
+    "region": [
+     220,
+     0,
+     600,
+     200
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 0.15
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The red spill and the warm white balance together make the timber and everything else red, so the sink has no neutral to read against.",
+   "evidence": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "measured": "Wall r/g/b median 55/23/17: a strongly red-cast 'neutral' timber"
+   },
+   "change": {
+    "setting": "render white_balance_k",
+    "from": "2800",
+    "to": "3200 (keeping the lamps' colours), so the timber reads brown"
+   },
+   "expected": "The boards read as dark brown timber (g/r about 0.5 or more), and the only saturated red is the sink itself.",
+   "accept": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 28
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The left edge is a dead black band with no detail.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     60,
+     480
+    ],
+    "measured": "lum_median 1.0, crush_pct 78.4"
+   },
+   "change": {
+    "setting": "a fill from the banquette side (or the nearest Dome downlight)",
+    "from": "nothing reaching the alcove's left return",
+    "to": "a 2400 K bounce of about 10 W on the left return, or reframe so the return is out of shot"
+   },
+   "expected": "The return holds a dim, readable edge of timber or concrete.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     60,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 40
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The sink is a showroom object with no sign of use.",
+   "evidence": {
+    "region": [
+     400,
+     235,
+     580,
+     305
+    ],
+    "measured": "Only a featureless grey pad on the rim; no towel, soap or vessel anywhere in frame"
+   },
+   "change": {
+    "setting": "small props",
+    "from": "none on the sink",
+    "to": "a bar of tallow soap on the grey rest, a folded linen hand towel on the right end of the trough, and a small stoneware bud vase with one stem on the back-left corner, replacing the unreadable dark object"
+   },
+   "expected": "A lived-in detail with neutral props, and the trough remains the only saturated colour.",
+   "accept": {
+    "region": [
+     170,
+     120,
+     215,
+     220
+    ],
+    "metric": "lum_median",
+    "op": ">",
+    "value": 20
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The timber boards are a smooth procedural, with no checks, end grain or sheen variation, which reads as CG at 1:1.",
+   "evidence": {
+    "region": [
+     600,
+     0,
+     720,
+     480
+    ],
+    "measured": "In a 3x crop: uniform soft grain, p5-p95 18.5 to 39.4 across a whole board with no defects"
+   },
+   "change": {
+    "setting": "the timber boards' finish",
+    "from": "smooth uniform procedural, one tone",
+    "to": "per-board tone and stain variation of plus or minus 10 %, a roughness map of 0.35 to 0.6, fine checks and the odd nail hole, and a slightly darker board-edge reveal"
+   },
+   "expected": "Boards that differ from each other and show real grain under the raking spot.",
+   "accept": {
+    "region": [
+     600,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The spout reads as a floating lever and the grey rest as a plastic block.",
+   "evidence": {
+    "region": [
+     320,
+     55,
+     395,
+     125
+    ],
+    "measured": "lum_median 45.5; no shadow on the wall below the spout; the rest at 400-580 x 235-305 is uniform, median 69"
+   },
+   "change": {
+    "setting": "the steel's and the rest's finish",
+    "from": "smooth glossy metal; smooth satin grey",
+    "to": "brushed steel, anisotropic, roughness 0.3, with a wall rose; the rest in honed stone or blackened steel, roughness 0.6"
+   },
+   "expected": "The spout reads as brushed steel fixed to the wall, with a contact shadow, and the rest as a real material.",
+   "accept": {
+    "region": [
+     320,
+     55,
+     395,
+     125
+    ],
+    "metric": "lum_p95",
+    "op": ">",
+    "value": 100
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the trough thicker-walled or give it a flush-set reveal in the boards so it reads as premium cast acrylic rather than a floating box",
+   "why": "The sink's design is fixed by the card; this is a design question for the owner"
+  },
+  {
+   "request": "Change the trough's colour from Ember red, or tint the room green to tie it to the zone",
+   "why": "The sink and the zone's colour are fixed"
+  },
+  {
+   "request": "Is this a specific place a magazine would publish? Not yet: there is nothing of Planet EARF in the frame (no concrete, fir, steel or speaker). A detail shot sells the room only if the trough is clearly the 'acrylic for special things' gesture",
+   "why": "Answering would mean changing the composition or the brief: widening to include the board-formed concrete or the banquette edge is a camera choice the owner should make"
+  }
+ ],
+ "score_if_fixed": 6.5
+}
