@@ -215,11 +215,12 @@ VIEWS['sink'] = {'title': 'the sink in Smoke, a detail',
                  # p6 (p5r 4.0, 4.5: the basin blown (37-47 %); the slab one flat opaque orange; the whole frame one
                  # orange cast at 3300 K; the spout cropped, the towel a box): the glow 1.6, the cast clearer (0.25) so
                  # the light grades through its depth; 2700 K; the spot 4 W at 30 deg; back on 50 mm, the target higher
-                 'camera': {'position': [10.25, 1.55, 1.2], 'target': [10.95, 0.30, 0.98], 'lens_mm': 50, 'level': True,
-                            'fstop': 8.0, 'focus': [10.98, 0.47, 0.90]},
-                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 1.6, 'sink_radius': 0.25,
-                              'sink_glow_col': '#FF8A30', 'sink_spot': 4.0, 'sink_spot_cone': 30.0, 'exposure': 0.9,
-                              'wb': 2700}}
+                 # p6 4.5, 4.0 (+0.0): the slab opaque taupe, no glow through it, the bowl a flat ellipse, the towel
+                 # a board, the boards procedural. The view STOPS (p5r -0.5, p6 +0.0). Best: p4 (4.75), restored
+                 'camera': {'position': [10.5, 1.35, 1.08], 'target': [11.25, 0.4, 0.9], 'lens_mm': 50, 'level': True,
+                            'fstop': 5.6, 'focus': [10.98, 0.47, 0.86]},
+                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 2.0, 'sink_radius': 0.12,
+                              'sink_glow_col': '#FF9A4A', 'sink_spot': 3.0, 'sink_spot_cone': 20.0, 'exposure': 1.0}}
 S.VIEWS = VIEWS
 _shot = S.shot
 

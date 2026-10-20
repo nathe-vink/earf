@@ -1,0 +1,350 @@
+{
+ "stage1": {
+  "impression": "A dim detail of a washbasin against vertical dark-timber boards: a thick tinted slab with an oval bowl that glows, a wall spout, and a grey panel at the left. It reads as a competent but obvious render. The wood figure is smeared and procedural, the slab is an opaque, evenly lit box with no light through its thickness and no glowing edges, the bowl reads as a flat bright ellipse with a seam across it, and the spout floats on the boards. A magazine would not run it as a specific place. It is a generic CG washroom with nothing that says Planet EARF.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Smoke slab must read as thick cast acrylic: amber light through its 120 mm thickness, polished edges brighter than its faces, a gradient on the front face (lum_range > 70 on the face instead of 48), not an opaque matte box",
+  "The bowl must read as a soft rounded basin, with a falloff from rim to floor and no straight seam or reflection line across it",
+  "The timber must read as real boards at real scale: straight fir or oak grain with variation from board to board, no smeared or marbled procedural figure, no repeats",
+  "The towel must read as linen (folds, drape, a weave at 1:1) on a visible brass rod, not a grey flat board",
+  "The sink's light must land on the room: a warm halo on the boards below and beside the slab, a shadow under the slab that shows it floats",
+  "The spout must read as brushed steel, not glossy black plastic",
+  "Some sign of the place or of life in the frame (a cake of soap, a small glass, the edge of the alcove's concrete or steel) so it reads as Planet EARF, not as any washroom"
+ ],
+ "defects": [
+  {
+   "region": [
+    95,
+    280,
+    560,
+    475
+   ],
+   "what": "The slab reads as opaque, milky tinted plastic. The front face is evenly lit (p5 19.7 to p95 68.6, x profile flat at 63 to 68), with no light through the thickness and no bright polished edges."
+  },
+  {
+   "region": [
+    215,
+    295,
+    445,
+    340
+   ],
+   "what": "The bowl is a flat bright ellipse (median 170) with a straight horizontal reflection or seam across it. There is no curvature or depth, so it looks like a hole with a lit plate in it."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    300
+   ],
+   "what": "The timber grain is smeared, marbled and procedural, with similar figure repeated across boards. The boards have no checks, no end-grain variation and no sheen variation."
+  },
+  {
+   "region": [
+    160,
+    165,
+    230,
+    290
+   ],
+   "what": "The towel reads as a flat grey board with hard edges and no folds. The brass rod shows only as a small orange stub at about [215, 170]."
+  },
+  {
+   "region": [
+    325,
+    105,
+    400,
+    200
+   ],
+   "what": "The spout and lever look like glossy black plastic with odd proportions. They float on the boards with no backplate or seat."
+  },
+  {
+   "region": [
+    560,
+    300,
+    720,
+    480
+   ],
+   "what": "There is no under-glow or halo on the wall beside or below the slab (median 33.6, the same as the wall above), so the floating slab casts no light on the room."
+  },
+  {
+   "region": [
+    0,
+    0,
+    140,
+    480
+   ],
+   "what": "The left edge is a dead band (median 11.3, crush 22 %) with no readable surface."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Nothing places the frame in the bar. No props, no concrete or steel, no sign of life."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The Smoke slab does not glow through its thickness. It reads as an opaque matte box.",
+   "evidence": {
+    "region": [
+     95,
+     345,
+     540,
+     455
+    ],
+    "measured": "lum_range 47.9, p95 68.6; x profile 55 to 68, nearly flat; no edge brighter than the face"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength), plus the slab acrylic's finish (roughness)",
+    "from": "1.6; frosted-looking faces",
+    "to": "4.0 to 5.0, with the slab's faces polished (roughness about 0.02) so the light carries to the edges and the polished arrises catch it"
+   },
+   "expected": "Warm amber light through the slab, brightest at the polished edges and near the bowl and falling off toward the ends. The face reads as clear smoked acrylic, not paint.",
+   "accept": {
+    "region": [
+     95,
+     345,
+     540,
+     455
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The timber's procedural figure is smeared and repeats, and gives the render away at a glance.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     300
+    ],
+    "measured": "Seen at 3x crop: marbled swirls, no straight grain, similar figure on neighbouring boards; wall lum_range 50"
+   },
+   "change": {
+    "setting": "the oak's stain and the wood material (finish)",
+    "from": "procedural, swirled figure at a large scale",
+    "to": "a scanned straight-grain rift oak or fir texture at its real scale (boards about 140 mm wide, grain lines about 1 to 3 mm), randomised per board, with a slightly lighter and less saturated stain and a satin sheen that varies with the grain"
+   },
+   "expected": "The boards read as real timber at 1:1, each one different, catching soft highlights from the sink's light.",
+   "accept": {
+    "region": [
+     560,
+     0,
+     720,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The bowl is a flat, evenly bright ellipse with a straight seam reflection, so it reads as a hole, not a soft basin.",
+   "evidence": {
+    "region": [
+     215,
+     295,
+     445,
+     340
+    ],
+    "measured": "median 170, p5 54, p95 226; a horizontal reflection line across the bowl"
+   },
+   "change": {
+    "setting": "the sink's spot (1 x spot, 4 W, 2700 K, cone 30 deg)",
+    "from": "4 W, cone 30 deg, aimed straight down into the bowl",
+    "to": "2.5 W, cone 20 deg, aimed at the back wall of the bowl from a little in front, so the curve falls from bright at the back rim to darker at the front; hide or soften whatever casts the straight reflection line"
+   },
+   "expected": "A visible gradient across the bowl from back to front that shows its curvature, with the highlight peak below 230.",
+   "accept": {
+    "region": [
+     215,
+     295,
+     445,
+     340
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The towel reads as a grey board, and the brass rod is barely there.",
+   "evidence": {
+    "region": [
+     160,
+     165,
+     230,
+     290
+    ],
+    "measured": "median 38.8, lum_range 34.5; uniform, hard-edged rectangle"
+   },
+   "change": {
+    "setting": "props: the linen towel on the brass rod",
+    "from": "a flat rectangular slab",
+    "to": "a cloth-simulated oatmeal linen towel draped over the rod with soft folds and a frayed hem, slightly crumpled from use; the brass rod given a warm, worn satin finish that catches the sink's light"
+   },
+   "expected": "Folds and a weave visible at 1:1; a warm highlight line on the rod.",
+   "accept": {
+    "region": [
+     160,
+     165,
+     230,
+     290
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The floating slab lights nothing around it, so it does not sit in the room.",
+   "evidence": {
+    "region": [
+     560,
+     300,
+     720,
+     480
+    ],
+    "measured": "median 33.6, the same as the wall above (36.7)"
+   },
+   "change": {
+    "setting": "the sink's under-glow, plus a light inside the slab's underside",
+    "from": "1.6, no visible spill",
+    "to": "With c1 at 4 to 5, let the underside emit so a warm halo falls on the boards below and beside the slab, with a soft shadow line directly under it"
+   },
+   "expected": "A warm pool on the wall below and to the side, brighter close to the slab, so the slab reads as floating and as the light source.",
+   "accept": {
+    "region": [
+     560,
+     300,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 42
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The spout reads as glossy black plastic, not brushed steel.",
+   "evidence": {
+    "region": [
+     325,
+     105,
+     400,
+     200
+    ],
+    "measured": "median 44, p5 13.9; near-black body with a mirror highlight"
+   },
+   "change": {
+    "setting": "the steel's finish (patina)",
+    "from": "dark, glossy",
+    "to": "brushed stainless steel: base about #8A8780, anisotropic roughness 0.3 along the spout's axis, so it picks up a long soft warm streak from the bowl"
+   },
+   "expected": "The spout reads as metal with a lengthwise brushed highlight, lighter than the wall.",
+   "accept": {
+    "region": [
+     325,
+     105,
+     400,
+     200
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 90
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The frame has no sign of life or of the place.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "Seen: no props on or near the sink"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink",
+    "to": "a cake of soap on a small stone dish or a ribbed glass tumbler on the slab top near the right end, with a few water drops on the slab and in the bowl"
+   },
+   "expected": "A small warm highlight and a lived-in note, and a sense of scale for the slab.",
+   "accept": {
+    "region": [
+     445,
+     280,
+     560,
+     340
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 120
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "camera",
+   "problem": "The crop is tight and frontal, the left band is dead, and nothing of the alcove or the room's shell shows.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     140,
+     480
+    ],
+    "measured": "median 11.3, crush 22 %"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "50 mm at f/8 from [10.25, 1.55, 1.2], looking straight at the slab",
+    "to": "35 to 40 mm from slightly further left and lower (about 1.0 m), angled about 30 degrees to the wall, so one polished end of the slab shows its glowing thickness and the alcove's return (concrete or steel) frames the left edge; f/4 focused on the bowl's near rim"
+   },
+   "expected": "The slab's thickness and edge glow read at a glance, the alcove gives the place, and the left band becomes a readable surface.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the spout a backplate or seat where it leaves the wall, and refine the lever's proportions",
+   "why": "The spout is part of the sink's design, which the card fixes. Without a seat it reads as floating, which is a design question for the owner."
+  },
+  {
+   "request": "Reshape the bowl if it is modelled as a shallow flat-bottomed ellipse rather than a soft rounded basin",
+   "why": "The sink's geometry is fixed. If c3 cannot show the curvature, the model may not match the card's 'soft rounded basin', and that needs the owner."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

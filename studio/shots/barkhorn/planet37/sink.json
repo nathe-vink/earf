@@ -6,22 +6,22 @@
  ],
  "camera": {
   "position": [
-   10.25,
-   1.55,
-   1.2
+   10.5,
+   1.35,
+   1.08
   ],
   "target": [
-   10.95,
-   0.3,
-   0.98
+   11.25,
+   0.4,
+   0.9
   ],
   "lens_mm": 50,
   "level": true,
-  "fstop": 8.0,
+  "fstop": 5.6,
   "focus": [
    10.98,
    0.47,
-   0.9
+   0.86
   ]
  },
  "products": [
@@ -124,8 +124,8 @@
     "disc_lamp": 2.0,
     "name_glow": 0.25,
     "niche_strip": 6.0,
-    "sink_glow": 1.6,
-    "sink_radius": 0.25,
+    "sink_glow": 2.0,
+    "sink_radius": 0.12,
     "screen_glow": 1.0,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
@@ -139,7 +139,7 @@
     "flame": 60.0,
     "windows_lit": 0.5,
     "sconce_w": 10.0,
-    "sink_glow_col": "#FF8A30",
+    "sink_glow_col": "#FF9A4A",
     "spk_niche_strip": 3.0,
     "plinth_bar": 0.5,
     "plinth_bar_col": "#FFB060",
@@ -625,8 +625,8 @@
     0.28,
     0.86
    ],
-   "power_w": 4.0,
-   "cone_deg": 30.0,
+   "power_w": 3.0,
+   "cone_deg": 20.0,
    "blend": 0.7,
    "radius_m": 0.02,
    "color": 2700,
@@ -772,8 +772,8 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 0.9,
-  "white_balance_k": 2700,
+  "exposure": 1.0,
+  "white_balance_k": 3200,
   "white_balance_tint": 0.0
  },
  "materials": {
