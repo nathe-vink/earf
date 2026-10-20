@@ -168,12 +168,15 @@ VIEWS['street'] = {'title': 'the shopfront at night, from the kerb (Smoke)',
                    # the mullion through the counter): nearer on 40 mm with the altar in a clear pane; exposure 1.6;
                    # the name unlit; the street lamps 60 W; the altar spots 220 W
                    # p3 (p2 4.0, 4.5: the pier dead centre over the altar): on the room's axis through the glass, 35 mm
-                   'camera': {'position': [-2.5, 3.0, 1.45], 'target': [17.0, 3.05, 1.3], 'lens_mm': 35, 'level': True,
-                              'fstop': 5.6, 'focus': [0.0, 3.0, 1.6]},
+                   # p4 (p3 5.0, 5.0: the name opaque paint and its E cut; the pair grey and small; the mullion
+                   # central; the lightbox a blank flat): back across the pavement on 28 mm, the whole name and the
+                   # shopfront in frame; the name 0.05; the altar 650 W at 18 deg; the screens 1.0; haze 0.006
+                   'camera': {'position': [-3.8, 3.3, 1.5], 'target': [17.0, 3.2, 1.35], 'lens_mm': 28, 'level': True,
+                              'fstop': 8.0, 'focus': [6.0, 3.0, 1.4]},
                    'settings': {**T36.VIEWS['street']['settings'], 'config': 'smoke', 'etch_glow': 0.0,
                                 'exposure': 1.6, 'disc_glow': 0.3, 'disc_lamp': 10.0, 'street_lamp': 120.0,
-                                'altar_w': 380.0, 'altar_cone': 22.0, 'haze': 0.003, 'screen_glow': 1.8,
-                                'screen_rough': 0.6, 'etch_glow': 0.35, 'wb': 2900}}
+                                'altar_w': 650.0, 'altar_cone': 18.0, 'haze': 0.006, 'screen_glow': 1.0,
+                                'screen_rough': 0.6, 'etch_glow': 0.05, 'wb': 2900}}
 VIEWS['sink'] = {'title': 'the sink in Smoke, a detail',
                  'camera': dict(T36.VIEWS['sink']['camera']),
                  # p2 (p1 3.5, 4.0: no glow through the slab, the boards showing through it, the bowl a flat disc, the

@@ -6,22 +6,22 @@
  ],
  "camera": {
   "position": [
-   -2.5,
-   3.0,
-   1.45
+   -3.8,
+   3.3,
+   1.5
   ],
   "target": [
    17.0,
-   3.05,
-   1.3
+   3.2,
+   1.35
   ],
-  "lens_mm": 35,
+  "lens_mm": 28,
   "level": true,
-  "fstop": 5.6,
+  "fstop": 8.0,
   "focus": [
-   0.0,
+   6.0,
    3.0,
-   1.6
+   1.4
   ]
  },
  "products": [
@@ -125,12 +125,12 @@
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
-    "screen_glow": 1.8,
+    "screen_glow": 1.0,
     "screen_window": 0.27,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.6,
-    "etch_glow": 0.35,
+    "etch_glow": 0.05,
     "etch_frost": 0.3,
     "shade_glow": 0.12,
     "street": true,
@@ -623,8 +623,8 @@
     1.9,
     1.1
    ],
-   "power_w": 380.0,
-   "cone_deg": 22.0,
+   "power_w": 650.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -642,8 +642,8 @@
     4.199999999999999,
     1.1
    ],
-   "power_w": 380.0,
-   "cone_deg": 22.0,
+   "power_w": 650.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -808,7 +808,7 @@
    6.05,
    3.32
   ],
-  "density": 0.003,
+  "density": 0.006,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },

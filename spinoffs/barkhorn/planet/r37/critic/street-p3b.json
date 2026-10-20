@@ -1,0 +1,377 @@
+{
+ "stage1": {
+  "impression": "It reads as a warm, well-proportioned timber listening bar seen through a window. But the name on the glass is a flat, opaque, pinkish-white overlay that cuts off the E. The view never establishes glass, kerb or shopfront. The EARF pair at the far end are two small grey boxes you have to hunt for. Light and materials are plausible at a glance. Up close the back of the room goes mushy, a clipped white blob floats in the middle of the ceiling, and the steel post on the right reads as smeared dark marble. As it stands a magazine would see a nice but generic bar, not a specific place.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The etched name reads as acid-etched glass: a pale frosted ghost (lum_median about 60 to 110 over the letters) that the room shows through, not opaque paint at lum 181",
+  "The whole word is in frame, and the shopfront (steel frame, sill, the glass plane with faint street reflections) is legible, so the frame reads as taken from the kerb",
+  "The altar pair reads at a glance as the hero: speaker region lum_median >= 45, the smoked tint and the light through the acrylic visible, the altar the brightest pool at the back",
+  "No blown hot spot outside the lamps; the central ceiling blob at (400,135) gone or tamed",
+  "The blackened-steel shopfront reads as steel (near black, soft uneven sheen, sharp lit edge), not mottled stone",
+  "The far half of the room holds detail at full resolution, with no denoiser smear on the stools, tables and back wall",
+  "A sign of life visible through the glass (a figure at the counter, or a coat and glasses read clearly in a pool of light)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    80,
+    275,
+    185
+   ],
+   "what": "The window's etched name renders as opaque, flat, pinkish-white letters (lum_median 181, r196 g177 b174), with no frosting, no translucency and no glass. It reads as a graphic overlay, and it hides the record wall."
+  },
+  {
+   "region": [
+    0,
+    80,
+    40,
+    185
+   ],
+   "what": "The E of EARF is cut by the left frame edge, so the word reads 'ARF'"
+  },
+  {
+   "region": [
+    310,
+    225,
+    415,
+    270
+   ],
+   "what": "The altar speakers are tiny, neutral grey and dim (lum_median 32), and read as generic monitors. The hero is not legible."
+  },
+  {
+   "region": [
+    388,
+    124,
+    412,
+    146
+   ],
+   "what": "A neutral white disc is 29 % clipped mid-ceiling. It is probably a street lamp reflected in the glass, but it reads as a stray bare bulb and is the brightest thing in the frame."
+  },
+  {
+   "region": [
+    235,
+    250,
+    280,
+    268
+   ],
+   "what": "The record player's saturated blue is the only strong colour in the frame. It pulls the eye away from the altar."
+  },
+  {
+   "region": [
+    605,
+    0,
+    720,
+    480
+   ],
+   "what": "The shopfront's blackened steel reads as smeared dark marble or stone tiles with blotchy mottling. It has no crisp lit edge and no steel sheen."
+  },
+  {
+   "region": [
+    296,
+    0,
+    318,
+    480
+   ],
+   "what": "The steel mullion splits the frame down the middle and slightly through the altar view"
+  },
+  {
+   "region": [
+    220,
+    170,
+    520,
+    310
+   ],
+   "what": "The back of the room is mushy: denoiser smear on the stools, tables and back wall (made worse by the 0.3 proof scale)"
+  },
+  {
+   "region": [
+    540,
+    145,
+    570,
+    245
+   ],
+   "what": "The frosted lightbox (lum_median 167) is the brightest flat in the room and competes with the altar. The dancing silhouette reads as a smudge."
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "There are no glass cues: no reflections of the street, the kerb or the frame on the pane, so 'from the kerb' is not legible"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "material",
+   "problem": "The etched name glows like opaque paint instead of frosted etch on glass.",
+   "evidence": {
+    "region": [
+     0,
+     80,
+     275,
+     185
+    ],
+    "measured": "lum_median 180.9, p95 189.9, r196 g177 b174: flat and uniform, with nothing of the room showing through"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the window's etched name (plus the frosted etch's roughness and transmission)",
+    "from": "0.35 emission, opaque-looking",
+    "to": "0.06 emission, with the etch as a translucent frosted glass (high roughness, about 60 to 70 % transmission), so it is lit mostly by the room behind it"
+   },
+   "expected": "The letters read as pale ghosts with the record wall faintly visible through them, about 60 to 110 lum, lighter where the room behind is bright",
+   "accept": {
+    "region": [
+     0,
+     80,
+     275,
+     185
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     115
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The EARF pair on the altar is too dim to be the hero.",
+   "evidence": {
+    "region": [
+     310,
+     225,
+     335,
+     270
+    ],
+    "measured": "lum_median 32.1 (second speaker 32.0), below the 45 required; the back-of-room region [300,180,440,300] median 28.7"
+   },
+   "change": {
+    "setting": "lamps: the altar 2 x spot",
+    "from": "380 W, cone 22 deg",
+    "to": "650 W, cone 18 deg, aimed to rake the cabinets so light passes through the smoked acrylic onto the batts"
+   },
+   "expected": "The two cabinets become the brightest pool at the far end, with the tint and internal glow legible at a glance; speaker median about 48 to 60",
+   "accept": {
+    "region": [
+     310,
+     225,
+     335,
+     270
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "A clipped neutral disc mid-ceiling reads as a stray bulb and steals focus.",
+   "evidence": {
+    "region": [
+     388,
+     124,
+     412,
+     146
+    ],
+    "measured": "clip_pct 29.4, lum_median 161, neutral r162 g160 b162"
+   },
+   "change": {
+    "setting": "lamps: street lamps 3 x point",
+    "from": "120 W",
+    "to": "45 W (if the disc is not their reflection, find the emitter and cut it below clipping)"
+   },
+   "expected": "No blown spot in the ceiling; any street-lamp reflection becomes a soft, dim glint on the glass",
+   "accept": {
+    "region": [
+     388,
+     124,
+     412,
+     146
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The name is cropped ('ARF'), and the frame shows no kerb, sill or shopfront head, so it does not read as a shopfront from the street.",
+   "evidence": {
+    "region": [
+     0,
+     80,
+     40,
+     185
+    ],
+    "measured": "the left edge cuts through the E; the frame is all interior apart from one mullion and the right-hand slab"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [-2.5, 3.0, 1.45], lens 35 mm, aim [17.0, 3.05, 1.3]",
+    "to": "position [-4.0, 3.4, 1.5], lens 28 mm, aim [17.0, 3.2, 1.35], kept level so the verticals stay true; the full word, the steel head and sill, and a strip of pavement in frame"
+   },
+   "expected": "The whole name is legible, the shopfront frames the room, and the altar sits near the centre right without the mullion crossing it",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The frosted lightbox is the brightest flat in the room and competes with the altar.",
+   "evidence": {
+    "region": [
+     540,
+     145,
+     570,
+     245
+    ],
+    "measured": "lum_median 167, p95 185"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the screens' images",
+    "from": "1.8",
+    "to": "1.0"
+   },
+   "expected": "The lightbox glows softly and evenly at about 110 to 135, the silhouette reads as fog behind frosting, and the altar wins",
+   "accept": {
+    "region": [
+     540,
+     145,
+     570,
+     245
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     100,
+     140
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The shopfront's blackened steel reads as smeared, mottled stone.",
+   "evidence": {
+    "region": [
+     605,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 15.5, p95 46.6, blotchy high-contrast mottling and horizontal joints; no crisp edge highlight"
+   },
+   "change": {
+    "setting": "the steel's patina (material finish)",
+    "from": "high-contrast mottled patina",
+    "to": "a finer, lower-contrast brown-black patina with a soft anisotropic sheen (roughness about 0.35 to 0.45) and a crisp lit arris from the street lamps"
+   },
+   "expected": "The steel reads near black with a soft, even sheen and a bright sharp edge line",
+   "accept": {
+    "region": [
+     605,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The room is empty: there is no sign of life to make it a specific, lived-in place.",
+   "evidence": {
+    "region": [
+     190,
+     255,
+     300,
+     290
+    ],
+    "measured": "the counter pool is bright (lum_median 73) but holds only two small glasses"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses, a coupe, a coat on a counter chair",
+    "to": "the coat moved to the counter chair nearest the window inside the counter pool, a record sleeve standing on the counter, two glasses and a bottle catching the downlight"
+   },
+   "expected": "A clear sign of life visible through the glass in the counter's pool of light",
+   "accept": {
+    "region": [
+     190,
+     255,
+     300,
+     290
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 200
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The pools of light have no air, so the far room reads flat and smeared rather than atmospheric.",
+   "evidence": {
+    "region": [
+     300,
+     180,
+     440,
+     300
+    ],
+    "measured": "lum_range only 55.5 at the far end; denoiser smear on the stools and back wall"
+   },
+   "change": {
+    "setting": "haze in the room's air (and render samples for the delivered frame)",
+    "from": "0.003 per metre, 256 samples",
+    "to": "0.007 per metre, 512 samples at full 2400 x 1600"
+   },
+   "expected": "The altar spot cones are faintly visible, there is separation in depth, and the stools and tables hold edges",
+   "accept": {
+    "region": [
+     300,
+     180,
+     440,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 70
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Calm or remove the saturated blue on the record player at (235-280, 250-268)",
+   "why": "The R3 Float and its lit base are a fixed EARF product in the configuration's tint. It is the only saturated colour in the frame and pulls focus from the speakers, so the owner should check whether the Smoke configuration means it to be blue."
+  },
+  {
+   "request": "Larger speakers on the altar, or the altar moved closer to the window",
+   "why": "The speakers and the room layout are fixed. Light and camera are the only ways to make them read."
+  },
+  {
+   "request": "A visible street (the facade, the kerb, the reflections of the opposite buildings) modelled outside the glass",
+   "why": "The scene beyond the shopfront is not listed as changeable. Without it the glass will never carry real street reflections."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
