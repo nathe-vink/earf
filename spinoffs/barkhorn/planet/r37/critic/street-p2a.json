@@ -1,0 +1,349 @@
+{
+ "stage1": {
+  "impression": "A warm, hazy wood bar seen past a huge slab of grungy dark steel that fills the middle third of the frame. It reads as a game-engine render: the steel looks like a tiled grunge texture with white specks, the floor has smeary marble streaks, the far end dissolves into flat grey haze, and no hero speaker can be read at a glance. The only strong colour is a small blue light on the counter. A magazine would see a generic bar here, not a specific place: nothing tells you it is a shopfront (no glass, no name, no reflections), and the room behind is the usual wood-and-pendants interior.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The altar pair at the far end must be clearly visible in the frame and read as the hero. Right now the central steel pier hides it, and only a sliver of a horn shows at about x 300, y 240.",
+  "The shopfront must read as glass: visible reflections of the street lamps, the etched name legible, and the lightbox's dancing silhouette recognisable. Today the openings read as empty holes.",
+  "The blackened steel must read as real blackened steel at 1:1: a soft, uneven brownish sheen and crisp lit edges, with no tiled grunge decal and no white specks.",
+  "The far end needs contrast through the haze, not a flat grey veil (today its median is 38 and its p5 is 27).",
+  "The floor must show no denoiser or polish smear.",
+  "The only saturated colour must come from EARF's products. The blue light on the counter must either be a product in its own tint or be calmed down."
+ ],
+ "defects": [
+  {
+   "region": [
+    310,
+    0,
+    480,
+    480
+   ],
+   "what": "The steel pier takes about 24% of the frame width dead centre and blocks the line of sight to the altar. Its median is 17.9 and its p95 is 42, so it is a dark dead zone."
+  },
+  {
+   "region": [
+    370,
+    0,
+    480,
+    25
+   ],
+   "what": "High-contrast white grunge specks on the steel lintel look like a texture decal, not a patina."
+  },
+  {
+   "region": [
+    420,
+    0,
+    720,
+    480
+   ],
+   "what": "The steel cladding repeats the same blotchy grunge pattern panel to panel, which reads as tiling."
+  },
+  {
+   "region": [
+    480,
+    55,
+    690,
+    345
+   ],
+   "what": "The window shows no glass: no reflections, no etched name, no sheen. It reads as an open hole."
+  },
+  {
+   "region": [
+    595,
+    55,
+    690,
+    345
+   ],
+   "what": "The frosted lightbox glows unevenly: median 31 in its top band against 47.6 overall. The dancing silhouette is an unreadable dark smudge, and the panel reads as a curtain."
+  },
+  {
+   "region": [
+    250,
+    175,
+    310,
+    280
+   ],
+   "what": "The far end is flat grey haze (median 38, p5 27) with one horn barely visible behind the pier edge. The altar cannot be read."
+  },
+  {
+   "region": [
+    140,
+    250,
+    210,
+    270
+   ],
+   "what": "A saturated blue light on the counter, clipping 0.5% with p95 214, is the only strong colour in the frame. It does not read as the hero speaker."
+  },
+  {
+   "region": [
+    160,
+    400,
+    310,
+    480
+   ],
+   "what": "The floor shows smeary marble-like streaks with p95 102, which reads as denoiser smear or over-polish."
+  },
+  {
+   "region": [
+    5,
+    120,
+    40,
+    270
+   ],
+   "what": "The left back-bar niche is dark (median 19.5), so its speaker reads as a black screen."
+  },
+  {
+   "region": [
+    0,
+    0,
+    310,
+    100
+   ],
+   "what": "The ceiling and beams are very orange (median R 48, G 21, B 7). The grade pushes the wood toward an oversaturated amber."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The steel pier sits dead centre and hides the altar pair, which is the frame's reason to exist.",
+   "evidence": {
+    "region": [
+     310,
+     0,
+     480,
+     480
+    ],
+    "measured": "Pier median 17.9 across a full-height band 170 px wide. The only speaker visible at the far end is a horn sliver at about [290, 225, 310, 260]."
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [-2.0, 1.6, 1.45], target [17.0, 3.0, 1.3], lens 40 mm",
+    "to": "Position about [-2.5, 3.0, 1.45], aimed straight down the room's axis at the altar [17.0, 3.05, 1.3], lens 35 mm. Check in a layout frame that the camera-to-altar line passes through the door or window glass and clears the pier, and put the pier on a vertical third or at the frame edge."
+   },
+   "expected": "Both altar speakers are visible and lit through the glass at the end of the room's perspective. The steel shrinks to a frame-edge element of 15% or less of the width.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The glass is invisible: no etched name and no reflections, so the frame does not read as a shopfront from the kerb.",
+   "evidence": {
+    "region": [
+     480,
+     55,
+     690,
+     345
+    ],
+    "measured": "There is no specular structure in the opening. The window's etched name emission is 0.0 on the card."
+   },
+   "change": {
+    "setting": "the window's etched name emission, plus the street lamps",
+    "from": "etched name 0.0; street lamps 3 x 60 W",
+    "to": "Etched name 0.35 to 0.5 (a soft edge-lit glow). Raise the street lamps to 3 x 120 W, and set one of them behind and beside the camera so it puts a faint reflection streak on the glass."
+   },
+   "expected": "The name reads in the glass, and a faint street-lamp reflection shows that there is a pane between the viewer and the room.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The frosted lightbox glows unevenly and too weakly, so the dancing silhouette does not read.",
+   "evidence": {
+    "region": [
+     595,
+     60,
+     690,
+     120
+    ],
+    "measured": "The top band has median 31 against 47.6 for the whole panel [595, 55, 690, 345]."
+   },
+   "change": {
+    "setting": "the screens' brightness, plus how rough the frosted acrylic is",
+    "from": "screens' images 1.0; frosted roughness at its current value",
+    "to": "Screens 1.8 to 2.2 and the frosted acrylic rougher (more diffuse), so the backlight spreads evenly and the silhouette sits as a soft, recognisable fogged shape."
+   },
+   "expected": "The panel glows evenly from top to bottom, and the figure reads as a dancing woman.",
+   "accept": {
+    "region": [
+     600,
+     70,
+     685,
+     340
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     70,
+     110
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The blackened steel reads as a tiled grunge decal with white specks, not real steel.",
+   "evidence": {
+    "region": [
+     370,
+     0,
+     480,
+     25
+    ],
+    "measured": "Bright white flecks on near-black steel. The same blotch pattern repeats on the cladding at [420, 345, 720, 480], where the median is 26.6."
+   },
+   "change": {
+    "setting": "the steel's patina",
+    "from": "high-contrast grunge with pale specks",
+    "to": "A near-black base with a low-contrast brownish oxide patina and a soft, uneven satin sheen. Drop the white specks entirely, vary the panels from one to the next, and make the edges crisp so they catch the street light."
+   },
+   "expected": "The steel reads as hot-rolled blackened plate: dark, with a soft sheen and lit edges, and no visible repeats.",
+   "accept": {
+    "region": [
+     420,
+     345,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The far end of the room is a flat grey haze, so the altar and record wall have no contrast.",
+   "evidence": {
+    "region": [
+     250,
+     175,
+     310,
+     280
+    ],
+    "measured": "Median 38.1, p5 26.8, range 58. The haze lifts the blacks."
+   },
+   "change": {
+    "setting": "the haze, plus the altar spots",
+    "from": "haze 0.006/m; altar 2 x 220 W",
+    "to": "Haze 0.003/m; altar 2 x 380 W, so the altar is the brightest pool deep in the room."
+   },
+   "expected": "The far end gets real blacks and a bright pool on the speakers. The pair becomes the frame's focal point.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "A saturated blue glow on the counter is the frame's only colour, and it pulls the eye away from the speakers.",
+   "evidence": {
+    "region": [
+     140,
+     250,
+     210,
+     270
+    ],
+    "measured": "Clip 0.5%, p95 214, blue in a frame that is otherwise amber."
+   },
+   "change": {
+    "setting": "the sink's under-glow (or whichever lit source on the counter this is)",
+    "from": "0.8",
+    "to": "0.3"
+   },
+   "expected": "The blue sits as a small, quiet accent, and the speakers carry the colour.",
+   "accept": {
+    "region": [
+     140,
+     250,
+     210,
+     270
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.1
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The floor shows smeary, marble-like streaks that read as denoiser smear or over-polish.",
+   "evidence": {
+    "region": [
+     160,
+     400,
+     310,
+     480
+    ],
+    "measured": "p95 102 with blotchy streaks at 1:1."
+   },
+   "change": {
+    "setting": "the floor's polish",
+    "from": "high polish (low roughness)",
+    "to": "Roughness 0.45 to 0.55 for a honed concrete with soft, broad reflections. If smear remains, raise samples to 512."
+   },
+   "expected": "A matte-satin concrete floor with soft pools of reflected light and no streaks.",
+   "accept": {
+    "region": [
+     160,
+     400,
+     310,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 85
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The grade pushes the wood toward oversaturated orange, which reads as a filter rather than 2700 K light on fir.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     310,
+     100
+    ],
+    "measured": "Median R 48, G 21, B 7."
+   },
+   "change": {
+    "setting": "white_balance_k",
+    "from": "3200",
+    "to": "2900, which keeps the warmth but restores neutral greys in the concrete and steel."
+   },
+   "expected": "The timber reads warm brown, not orange, and the concrete reads warm grey.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     310,
+     100
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 12
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Narrow or move the central steel pier in the shopfront.",
+   "why": "The shopfront's design is fixed by the card. Fix this with the camera (c1) instead."
+  },
+  {
+   "request": "Change the tint of whatever product glows blue on the counter, if it is an EARF product.",
+   "why": "EARF's products and their colours are fixed. Only the light level may change."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

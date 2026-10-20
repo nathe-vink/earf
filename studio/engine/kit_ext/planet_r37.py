@@ -47,7 +47,7 @@ def niches(bpy, kit, p, objs):
         strip.box(x0 + t + f + 0.03, yf + 0.04, z1 - t - f - 0.012, x1 - t - f - 0.03, yf + 0.06, z1 - t - f - 0.004)
     objs.append(oak.object(bpy, K.dark_oak(bpy, vertical=True, name='oak-spk-niche'), bevel=0.003))
     objs.append(felt.object(bpy, kit.material(bpy, 'felt', p.get('niche_felt', '#1C1B1A'))))
-    lamp = strip.object(bpy, K.emitter(bpy, 'spk-niche-strip', '#FFC890', p.get('spk_niche_strip', 2.0)))
+    lamp = strip.object(bpy, K.emitter(bpy, 'spk-niche-strip', '#FF9A50', p.get('spk_niche_strip', 2.0)))
     lamp.visible_camera = False; lamp.visible_glossy = False; objs.append(lamp)
 
 

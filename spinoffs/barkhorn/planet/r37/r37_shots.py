@@ -111,9 +111,14 @@ BAR = {'title': 'the back bar: the bar pair in its niches either side of the dec
        # counter's customer side, the eye at 1.55, the sight line drops over the zinc onto the cabinets
        # the pair raised (the owner, with a photo of Ginza): seated at the counter's customer side, the eye at 1.35,
        # looking up a little to the cabinets on their ledges
-       'camera': {'position': [6.9, 2.75, 1.35], 'target': [6.95, 6.0, 1.6], 'lens_mm': 24, 'level': True, 'fstop': 4.0,
-                  'focus': [6.9, 5.6, 1.6]},
-       'settings': {'exposure': 0.6, 'screen_glow': 1.0, 'pendant_w': 170.0, 'pendant_cone': 24.0}}
+       # p2 (p1 4.5, 4.5: a square elevation with the Domes across the cabinets, the pair dark (36-39), the players'
+       # blue the loudest colour, the disc and niche heads cold, the fluted front salmon and the brightest surface):
+       # seated and off axis on 28 mm, a chair back in the foreground; the pair's spots 60 W; the Domes calmer and
+       # their downlights pooled; the counter strip down; the disc and niche strips warm
+       'camera': {'position': [6.0, 2.5, 1.18], 'target': [7.1, 6.0, 1.3], 'lens_mm': 28, 'level': True, 'fstop': 4.0,
+                  'focus': [7.0, 5.6, 1.5]},
+       'settings': {'exposure': 0.6, 'screen_glow': 1.0, 'pendant_w': 140.0, 'pendant_cone': 20.0, 'barspk_w': 60.0,
+                    'counter_strip': 1.2, 'disc_glow': 0.15, 'disc_col': '#FFC890', 'disc_lamp': 4.0}}
 LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # p2 (p1 4.0, 4.0: the spots lit the felt above the pair, the pair murky, the chairs pink shells, a
           # dead-centre showroom view): seated, off axis, on 40 mm; the spots in front, on the cabinets' faces; the
@@ -136,11 +141,13 @@ VIEWS['street'] = {'title': 'the shopfront at night, from the kerb (Smoke)',
                    # p2 (p1 5.0, 5.0: dark (15), the pair murky, the name opaque vinyl, the sill the brightest plane,
                    # the mullion through the counter): nearer on 40 mm with the altar in a clear pane; exposure 1.6;
                    # the name unlit; the street lamps 60 W; the altar spots 220 W
-                   'camera': {'position': [-2.0, 1.6, 1.45], 'target': [17.0, 3.0, 1.3], 'lens_mm': 40, 'level': True,
+                   # p3 (p2 4.0, 4.5: the pier dead centre over the altar): on the room's axis through the glass, 35 mm
+                   'camera': {'position': [-2.5, 3.0, 1.45], 'target': [17.0, 3.05, 1.3], 'lens_mm': 35, 'level': True,
                               'fstop': 5.6, 'focus': [0.0, 3.0, 1.6]},
                    'settings': {**T36.VIEWS['street']['settings'], 'config': 'smoke', 'etch_glow': 0.0,
-                                'exposure': 1.6, 'disc_glow': 0.3, 'disc_lamp': 10.0, 'street_lamp': 60.0,
-                                'altar_w': 220.0, 'altar_cone': 30.0, 'haze': 0.006}}
+                                'exposure': 1.6, 'disc_glow': 0.3, 'disc_lamp': 10.0, 'street_lamp': 120.0,
+                                'altar_w': 380.0, 'altar_cone': 22.0, 'haze': 0.003, 'screen_glow': 1.8,
+                                'screen_rough': 0.6, 'etch_glow': 0.35, 'wb': 2900}}
 VIEWS['sink'] = {'title': 'the sink in Smoke, a detail',
                  'camera': dict(T36.VIEWS['sink']['camera']),
                  # p2 (p1 3.5, 4.0: no glow through the slab, the boards showing through it, the bowl a flat disc, the

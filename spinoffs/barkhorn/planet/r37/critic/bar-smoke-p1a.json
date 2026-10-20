@@ -1,0 +1,379 @@
+{
+ "stage1": {
+  "impression": "A square-on, symmetrical, low-res frame of a timber record wall with two smoked glass boxes and two pendants either side of two record players. It reads as a clean CG render, not a photograph: the timber is smeared and uniform, and the empty, cool-lit concrete cubbies in the centre look unfinished. Two saturated electric-blue bands under the decks look like LED strip or nightclub signage and pull the eye from the speakers, which are grey and veiled behind their pendants. A magazine would not run it as a specific place. It reads as a generic hotel-lobby bar or a showroom: no sign of life on the counter, no chairs and no foot rail in frame, and the speakers do not read as the altar.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speakers read at a glance as the hero: horn and cabinet tint legible, niche lum_median >= 50 with visible separation from the felt behind, not hidden behind the Dome pendants",
+  "No cool or blue light anywhere in the room's surfaces: the centre record wall and the niche head strips warm (r_median > b_median)",
+  "The centre of the record wall is filled (records and the frosted disc glowing warm), not empty concrete cubbies",
+  "Signs of life in frame: glasses, a candle, the coat over a counter chair, the brass foot rail and chair backs visible",
+  "A composition that is not dead-centre and frontal: a seated, slightly off-axis view across the zinc so that the counter has depth",
+  "The fluted oak front reads as dark oak, not salmon or pink, and is not the brightest large surface in the frame",
+  "Full-resolution render with the timber grain, concrete board marks and steel patina resolving at 1:1, without denoiser smear"
+ ],
+ "defects": [
+  {
+   "region": [
+    135,
+    335,
+    300,
+    372
+   ],
+   "what": "Saturated blue bands under the left record player read as LED strip or signage; the only saturated colour in the frame is not the speaker"
+  },
+  {
+   "region": [
+    405,
+    335,
+    570,
+    372
+   ],
+   "what": "Same blue bands under the right record player"
+  },
+  {
+   "region": [
+    290,
+    90,
+    400,
+    240
+   ],
+   "what": "Centre record wall: empty cubbies with flat, cool, blue-grey concrete backs (b_median 81 > r 79); no records, and no warm disc visible; reads as an unfinished set"
+  },
+  {
+   "region": [
+    60,
+    70,
+    170,
+    80
+   ],
+   "what": "Cool blue strip at the head of the left niche (b 87 vs r 65), inconsistent with the 2400-2900 K practicals"
+  },
+  {
+   "region": [
+    540,
+    70,
+    640,
+    80
+   ],
+   "what": "Cool blue strip at the head of the right niche (b 91 vs r 70)"
+  },
+  {
+   "region": [
+    55,
+    70,
+    180,
+    315
+   ],
+   "what": "Left speaker veiled and grey (lum_median 39, below 45); the horn reads as a dull disc behind the glass, and the Dome pendant sits in front of it and hides the cabinet's top"
+  },
+  {
+   "region": [
+    535,
+    70,
+    650,
+    315
+   ],
+   "what": "Right speaker darker still (lum_median 35, lum_range 29 in its body); flat and low contrast"
+  },
+  {
+   "region": [
+    0,
+    430,
+    720,
+    480
+   ],
+   "what": "Fluted counter front is pink-salmon (r 94, g 62, b 50) and is the brightest large surface (median 68), brighter than the speakers; the flutes repeat uniformly, which reads as CG"
+  },
+  {
+   "region": [
+    0,
+    380,
+    720,
+    430
+   ],
+   "what": "Zinc top bare: no glasses, candles or coat visible, apart from a white menu card and a blank white placard (the placard at 590-630 reads as a price tag)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    60
+   ],
+   "what": "Top band crushed toward black with smeared record spines (median 15.5)"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Denoiser smear and soft, waxy timber everywhere at 1:1; the shelf grain is one repeated texture"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers, the reason for the frame, are grey, veiled and darker than the counter front.",
+   "evidence": {
+    "region": [
+     55,
+     70,
+     180,
+     315
+    ],
+    "measured": "left niche lum_median 39.1, right 35.1 (target >= 45); body lum_range 29 to 38; counter front median 67.6"
+   },
+   "change": {
+    "setting": "lamps: on each Ember speaker 4 x area (W/m2 at the target), plus the lit niche's strip",
+    "from": "1.0 W/m2, 2900 K; strip 6.0",
+    "to": "3.0 W/m2 grazing from above and side to rim the cabinet edges and horn mouth, 2700 K; strip 4.0 and warmed (see c3)"
+   },
+   "expected": "Cabinet edges and horn lip pick up glowing polished-edge highlights; the niches become the brightest non-lamp areas after the bar top.",
+   "accept": {
+    "region": [
+     60,
+     170,
+     175,
+     300
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The camera is square-on and centred at 1.35 m, so the frame is a flat elevation: the pendants overlap the speakers, and the counter, the chairs and the foot rail have no depth.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "perfect bilateral symmetry; the Domes at 100-170 x 110-160 sit over the speaker tops; no chairs or rail in frame"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "[6.9, 2.75, 1.35] looking at [6.95, 6.0, 1.6], 24 mm",
+    "to": "about [5.6, 2.9, 1.15] (seated, about 1.3 m off-axis toward the shopfront) looking at [7.3, 6.0, 1.3], 35 mm, f/2.8 focused on the nearer speaker's horn, so that a chair back and the brass rail cut the lower left foreground"
+   },
+   "expected": "The near speaker reads large and three-quarter, clear of its Dome; the zinc recedes in perspective and the chairs and rail give scale and life.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "Cool, bluish light on the centre record wall and in the niche head strips breaks the warm practicals and adds a second colour.",
+   "evidence": {
+    "region": [
+     290,
+     90,
+     400,
+     240
+    ],
+    "measured": "r 79 / g 77 / b 81; niche strips b 87-91 vs r 65-70"
+   },
+   "change": {
+    "setting": "the disc behind the DJ station / the lit niche's strip colour / the record wall's spots",
+    "from": "disc 0.06 #FFD2A0 with 2.0 W area lamp; record wall spots 30 W 2600 K",
+    "to": "disc 0.5 #FFD2A0 with 15 W area lamp so that it reads as a soft frosted glow; niche strips set to 2700 K; record wall spots 45 W 2600 K aimed at the spines, not the backs"
+   },
+   "expected": "The centre reads as a warm frosted glow framed by records; no surface has b_median above r_median.",
+   "accept": {
+    "region": [
+     290,
+     90,
+     400,
+     240
+    ],
+    "metric": "r_median",
+    "op": ">",
+    "value": 90
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The centre of the record wall is empty cubbies, so it reads as an unfinished set, not a listening bar's library.",
+   "evidence": {
+    "region": [
+     260,
+     80,
+     420,
+     300
+    ],
+    "measured": "seen at 3x: nine bare concrete-backed cubbies, no spines"
+   },
+   "change": {
+    "setting": "props: records",
+    "from": "records only in outer bays",
+    "to": "fill every cubby around the disc with spines of varied height and lean, a few sleeves face-out, a couple of gaps; keep the disc's opening clear"
+   },
+   "expected": "The wall reads as dense and lived-in, with small highlights on the spines.",
+   "accept": {
+    "region": [
+     260,
+     80,
+     420,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The fluted oak front is salmon-pink and the brightest large surface, which competes with the speakers and reads as laminate.",
+   "evidence": {
+    "region": [
+     0,
+     430,
+     720,
+     480
+    ],
+    "measured": "lum_median 67.6, r 94 g 62 b 50"
+   },
+   "change": {
+    "setting": "the oak's stain / the Domes' downlights' aim",
+    "from": "light warm stain; downlights spilling onto the front",
+    "to": "dark smoked-oak stain (base about #3A2A20, satin), with slight per-flute grain and tone variation; aim the Dome downlights to land on the zinc, not over its edge"
+   },
+   "expected": "The counter front falls to a dark warm band that frames the bottom of the frame, with a single soft highlight along the flutes.",
+   "accept": {
+    "region": [
+     0,
+     430,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "No sign of life: the listed props are not in frame and the zinc is bare apart from a white card and a blank placard.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     720,
+     430
+    ],
+    "measured": "only a white menu card at left and a white placard (lum_median 178) at 590-630 x 340-370"
+   },
+   "change": {
+    "setting": "props",
+    "from": "glasses, candles and coat out of frame",
+    "to": "a half-drunk coupe and a rocks glass on the zinc in the right foreground, one lit candle near frame centre-left, the coat over the nearest chair back, a record out of its sleeve on the deck; remove the blank white placard or turn it to read as a menu"
+   },
+   "expected": "Small warm highlights and reflections on the zinc; the frame reads as occupied at night.",
+   "accept": {
+    "region": [
+     0,
+     380,
+     720,
+     430
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 170
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The top of the frame is crushed, smeared mud, and the whole image has denoiser smear at proof scale.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     60
+    ],
+    "measured": "lum_median 15.5, p5 5.7; spines unreadable at 1:1"
+   },
+   "change": {
+    "setting": "render: samples / denoise / exposure / haze",
+    "from": "256 samples, denoise on, exposure 0.6, haze 0.01",
+    "to": "full 2400 x 1600 at 1024 samples with the denoiser on albedo+normal prepass; exposure 0.75; haze 0.02 so that the Dome cones read faintly"
+   },
+   "expected": "Spines and timber grain resolve; the shadows hold detail without lifting the black.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     60
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 22
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The Dome liners are blown white discs that sit in front of the speakers and read as the hero instead of them.",
+   "evidence": {
+    "region": [
+     100,
+     110,
+     170,
+     160
+    ],
+    "measured": "lum_p95 190 at the liner; it overlaps the left speaker's top"
+   },
+   "change": {
+    "setting": "EARF's lamps: each Dome liner glow / downlight",
+    "from": "30 W, glow 0.7; downlights 170 W",
+    "to": "20 W, glow 0.45; downlights 140 W, kept on the zinc"
+   },
+   "expected": "The pendants glow as warm accents, not white discs; the eye goes to the speakers.",
+   "accept": {
+    "region": [
+     100,
+     110,
+     170,
+     160
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 170
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Change the electric-blue glow of the R3 Float's lit base to a warm or smoked tone",
+   "why": "The record player and its lit base are a fixed EARF product. As rendered, it is the single largest 'signage / nightclub' tell and the only saturated colour, and it competes with the speakers, so the owner should check whether blue is correct for the Smoke configuration."
+  },
+  {
+   "request": "Move the Dome pendants so that they do not hang in front of the niches",
+   "why": "The layout is fixed; c2 (camera) is the in-scope way to separate them."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

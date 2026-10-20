@@ -1,0 +1,369 @@
+{
+ "stage1": {
+  "impression": "A symmetrical, competent back-bar render. It reads as a hotel lobby bar or a showroom, not a photograph of a specific listening bar. The two EARF speakers, which should be the altar, read as dark glass vitrines half hidden behind the Dome pendants: no silhouette, no tint and no light through the acrylic at a glance. The only saturated colour in the frame is the electric-blue edge glow on the two record players, which reads as nightclub signage. The record wall and the fluted counter give it some character. The surfaces are soft and denoised (record spines smear at 1:1), the centre frosted grid is a cold grey, the oak front is pinkish and there is no sign of life on the zinc. A magazine would not run it as a specific place yet: it is generic.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Both Atmosphere speakers read at a glance as the hero: the smoked tint, the white batts and the horn visible through lit acrylic, with each niche region lum_median >= 45 and no pendant crossing a cabinet",
+  "No saturated colour louder than the speakers' tint: the R3 Float edge glow must not be the most saturated thing in the frame",
+  "Every room surface warm-neutral under 2400 to 2700 K light: the frosted disc and the niche strips are not cold blue-grey",
+  "Signs of life in a pool of light on the zinc: glasses, a record out of its sleeve, a candle, a chair back in the foreground",
+  "Full-resolution render with grain-level material detail (oak grain, zinc patina, record spines) and no denoiser smear",
+  "Reads as one specific place (Ginza Music Bar lineage) rather than a symmetrical catalogue elevation"
+ ],
+ "defects": [
+  {
+   "region": [
+    55,
+    70,
+    175,
+    320
+   ],
+   "what": "Left speaker reads as a dark glass vitrine: lum_median 38.8, horn and cabinet tint illegible, Dome pendant hangs across its upper half"
+  },
+  {
+   "region": [
+    530,
+    70,
+    650,
+    320
+   ],
+   "what": "Right speaker the same: lum_median 35.6, occluded by its pendant"
+  },
+  {
+   "region": [
+    135,
+    330,
+    300,
+    372
+   ],
+   "what": "Left R3 Float edge glow electric blue (b_median 181, r 46): the frame's most saturated colour, reads as signage or nightclub"
+  },
+  {
+   "region": [
+    405,
+    330,
+    570,
+    372
+   ],
+   "what": "Right R3 Float: the same blue edge glow"
+  },
+  {
+   "region": [
+    290,
+    90,
+    420,
+    240
+   ],
+   "what": "Frosted disc / grid behind the DJ station is cold neutral grey (r 77, b 78) in a 2400 to 2700 K room; reads as an office partition"
+  },
+  {
+   "region": [
+    60,
+    69,
+    170,
+    76
+   ],
+   "what": "Left niche top strip is cool blue-white (r 131, b 164); the same at [540, 69, 645, 76]"
+  },
+  {
+   "region": [
+    0,
+    425,
+    720,
+    480
+   ],
+   "what": "Fluted dark-oak front reads salmon-pink and plasticky (r 89, g 58, b 47), not dark oak"
+  },
+  {
+   "region": [
+    0,
+    380,
+    720,
+    400
+   ],
+   "what": "Zinc top's front edge is a uniform bright band (p95 142) with clipping 0.53% in the counter strip; zinc reads as flat grey paint, with no patina"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    340
+   ],
+   "what": "Record spines and shelving smeared by the denoiser at 1:1; no legible sleeve detail"
+  },
+  {
+   "region": [
+    0,
+    345,
+    720,
+    420
+   ],
+   "what": "Counter nearly empty: a white menu sheet and a card only; no glasses, candles or record in light; no chairs in the foreground"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Dead-square symmetrical elevation; reads as an architectural elevation or a catalogue rather than a photographer's frame"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers, the altar of the room, are too dark to read: their tint, batts and horn are invisible.",
+   "evidence": {
+    "region": [
+     55,
+     170,
+     175,
+     320
+    ],
+    "measured": "left niche lum_median 38.8, right 35.6, below the 45 target; woofer region lum_range 26 (flat)"
+   },
+   "change": {
+    "setting": "lamps on the speakers (area, per speaker) and the lit niche's strip",
+    "from": "1.0 W/m2 at the target, 2900 K; niche strip 6.0",
+    "to": "4.0 W/m2 at the target, 2700 K, aimed as a grazing top-back light so it passes through the cast acrylic onto the white batts; niche strip 10.0 at 2700 K"
+   },
+   "expected": "Cabinets glow from within in the smoke tint, batts and horn legible, niche lum_median about 50 to 60 while the room stays dark",
+   "accept": {
+    "region": [
+     55,
+     170,
+     175,
+     320
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 48
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The Dome pendants hang across the speakers and the dead-square elevation reads as a catalogue drawing.",
+   "evidence": {
+    "region": [
+     100,
+     115,
+     170,
+     160
+    ],
+    "measured": "pendant shade sits in front of the left cabinet's upper third (lum p95 191 over a 39-median cabinet)"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [6.9, 2.75, 1.35], target [6.95, 6.0, 1.6], 24 mm",
+    "to": "seated eye height z 1.15 m, position [6.2, 2.4, 1.15], target [7.1, 6.0, 1.25], 28 mm, verticals kept true (shift, not tilt), with a counter-chair back entering soft at the lower left"
+   },
+   "expected": "Pendants rise above the cabinets' horns, the speakers read whole, a slight oblique gives depth to the niches and the counter, and a foreground chair gives scale and life",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The R3 Float edge glow is the loudest colour in the frame and reads as nightclub LED.",
+   "evidence": {
+    "region": [
+     140,
+     344,
+     290,
+     352
+    ],
+    "measured": "r 46 / g 111 / b 181, lum_median 102, brighter and more saturated than the speakers"
+   },
+   "change": {
+    "setting": "R3 Float lit base (light level only; the colour is the product's)",
+    "from": "current base emission (not on the card)",
+    "to": "about 25% of current, so the edges read as a faint glow under a dark slab"
+   },
+   "expected": "Edge strips become a quiet accent below the speakers' saturation; the speakers become the colour hero",
+   "accept": {
+    "region": [
+     140,
+     344,
+     290,
+     352
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 110
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The frosted disc behind the DJ station reads as a cold grey office partition.",
+   "evidence": {
+    "region": [
+     290,
+     90,
+     420,
+     240
+    ],
+    "measured": "r 77 / g 75 / b 78: neutral-blue in a 2400 to 2700 K room"
+   },
+   "change": {
+    "setting": "the disc behind the DJ station",
+    "from": "emission 0.06 #FFD2A0, area lamp 2.0 W",
+    "to": "emission 0.12 #FFC890, area lamp 4.0 W at 2500 K; frosted acrylic roughness up so it glows evenly"
+   },
+   "expected": "A soft warm amber glow behind the decks that silhouettes the mixer and record players",
+   "accept": {
+    "region": [
+     290,
+     90,
+     420,
+     240
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 62
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "set",
+   "problem": "There is no sign of life on the zinc: the counter is an empty showroom.",
+   "evidence": {
+    "region": [
+     0,
+     345,
+     720,
+     420
+    ],
+    "measured": "only a white menu and a place card visible; the glasses, candles, record and coat on the card are out of frame"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props placed off-frame",
+    "to": "in frame on the zinc under the Domes' pools: two rocks glasses and the half-drunk coupe left of centre, a lit candle at right, a record out of its sleeve leaning by the left deck; the menu sheet turned edge-on so it stops reading as a white rectangle"
+   },
+   "expected": "Small warm highlights and reflections on the zinc, a lived-in counter, a believable night",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The fluted dark-oak counter front reads pinkish and plastic, not dark oak.",
+   "evidence": {
+    "region": [
+     0,
+     425,
+     720,
+     480
+    ],
+    "measured": "r 89 / g 58 / b 47, lum_median 64: salmon tone, uniform flutes"
+   },
+   "change": {
+    "setting": "the oak's stain",
+    "from": "current mid-brown stain",
+    "to": "dark fumed oak (base about #3A2618), visible open grain, satin sheen; let the brass foot rail catch the highlight"
+   },
+   "expected": "The counter face becomes a dark warm base for the frame with grain legible and flute shadows",
+   "accept": {
+    "region": [
+     0,
+     425,
+     720,
+     480
+    ],
+    "metric": "r_median",
+    "op": "<=",
+    "value": 65
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The zinc top reads as flat grey paint with a hard, uniform bright band along its front edge.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     720,
+     400
+    ],
+    "measured": "lum_p95 142, uniform along the whole width; strip [0,345,720,420] clip_pct 0.53"
+   },
+   "change": {
+    "setting": "the zinc's patina and the Domes' downlights",
+    "from": "even satin zinc; downlights 170 W, cone 24 deg",
+    "to": "patinated zinc with roughness varied 0.25 to 0.5 and darker wear rings; downlights 130 W, cone 20 deg so they pool rather than wash"
+   },
+   "expected": "Distinct pools of light on the zinc with dark between them; no clipped edge band",
+   "accept": {
+    "region": [
+     0,
+     345,
+     720,
+     420
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The niche top strips are cool blue-white, breaking the warm palette.",
+   "evidence": {
+    "region": [
+     60,
+     69,
+     170,
+     76
+    ],
+    "measured": "r 131 / g 148 / b 164"
+   },
+   "change": {
+    "setting": "the lit niche's strip colour",
+    "from": "cool white (as rendered)",
+    "to": "2700 K"
+   },
+   "expected": "Niche heads glow warm and match the timber lining",
+   "accept": {
+    "region": [
+     60,
+     69,
+     170,
+     76
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 120
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Change the R3 Float's edge or base colour away from blue",
+   "why": "The product's colour is fixed; only its light level may change (c3)"
+  },
+  {
+   "request": "Move the Dome pendants higher or out of the speakers' line",
+   "why": "The room's design and the lamps' placement are fixed; c2 handles it with the camera instead"
+  },
+  {
+   "request": "Make the record wall less symmetrical or less dominant",
+   "why": "The record wall and the back bar are fixed room design"
+  }
+ ],
+ "score_if_fixed": 6.5
+}
