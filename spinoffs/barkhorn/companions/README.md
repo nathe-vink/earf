@@ -704,6 +704,38 @@ room's measured drift (`TINT_K`, `HUE_TURN`).
 | 300 desk, clear tints 8 mm, plain base | about $450 | about $160 | $395 to $450 |
 | 1000 bar, clear tints 25 mm, steel base | about $6,500 (sheet about $3,000, cutting $900, polish $900, assembly $1,000, base $700) | (a few a year) | **$8,500 to $9,500** |
 
+**The finals** (1600 × 1067, `renders/2026-10-20/barkhorn/globe-colour/`), both of the desk piece:
+- **By day:** on paper under a hard sun from behind. The fluorescent edges glow, and the globe throws a stained-glass
+  shadow of red, orange, yellow and blue toward the viewer.
+- **By night:** on black with the ring on, each edge glowing its colour as the site's dark-mode globe does.
+
+![The finals](../../../renders/2026-10-20/barkhorn/globe-colour/sheet-finals.png)
+
+**Read tests** (600 px, a fresh judge told nothing; `critic/coin/READTEST.md`):
+- Day: "a translucent… sphere… with several colored translucent discs… like an armillary sphere… casting a big tinted
+  elliptical shadow".
+- Night: "a glowing… sphere… coloured neon-like rings… around a translucent ball". It reads as a computer render, and
+  the judge didn't say acrylic.
+
+**Critics** on the day final, two fresh critics a round, three rounds (the family's limit):
+
+| round | A | B |
+|---|---|---|
+| 1 | 5.5 | 5.5 |
+| 2 | 6.0 | 5.5 |
+| 3 | 5.0 | 6.0 |
+
+- Neither critic met the gate (two passes in a row each gaining under 0.5).
+- Round 2 against round 3 went to a position-balanced duel: two judges, each shown both orders. Round 3 won 4 of 4,
+  for its long stained-glass shadow, so it is the final; round 2 is kept as `final-day-r2.png`.
+- **Open on the day final:**
+  - a grey veil over the coloured shadow;
+  - the paper has no texture;
+  - the black base is crushed;
+  - the core goes dark where four tints stack.
+  The critics also want the edges brighter than the faces. That is the fluorescent sheet's real strength, which a
+  sample should settle.
+
 **For Planet:** `globe(size, mode)` in `studio/engine/kit_ext/earf_coin.py`.
 - `size` is in mm across: 300 for the desk piece, 1000 for the back bar's.
 - `mode` is "day" or "night"; `glow` scales the night edges.
