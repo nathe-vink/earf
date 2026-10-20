@@ -1,0 +1,186 @@
+{
+ "title": "The site's coins, paper",
+ "size": [
+  7400,
+  1056
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -0.0005,
+   0.9
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "lens_mm": 75.35,
+  "level": false,
+  "fstop": 0
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#F2EFEA",
+  "width": 4.0,
+  "front": 2.0,
+  "depth": 1.5,
+  "radius": 0.6,
+  "height": 2.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "coin",
+    "spots": [
+     {
+      "position": [
+       -0.17500000000000002,
+       0.0,
+       0.0005371762081060878
+      ],
+      "flavour": "ember",
+      "rotate": [
+       -0.38,
+       1.49,
+       10.8
+      ]
+     },
+     {
+      "position": [
+       -0.125,
+       0.0,
+       0.0005771476375129132
+      ],
+      "flavour": "dust",
+      "rotate": [
+       0.41,
+       1.6,
+       92.6
+      ]
+     },
+     {
+      "position": [
+       -0.07500000000000001,
+       0.0,
+       0.0004876658635729708
+      ],
+      "flavour": "acid",
+      "rotate": [
+       -0.88,
+       -1.09,
+       356.0
+      ]
+     },
+     {
+      "position": [
+       -0.025,
+       0.0,
+       0.0005101159378929248
+      ],
+      "flavour": "poison",
+      "rotate": [
+       1.46,
+       -0.06,
+       357.3
+      ]
+     },
+     {
+      "position": [
+       0.025,
+       0.0,
+       0.0004337415851596335
+      ],
+      "flavour": "ice",
+      "rotate": [
+       1.12,
+       0.55,
+       57.6
+      ]
+     },
+     {
+      "position": [
+       0.07500000000000001,
+       0.0,
+       0.0006428346074047057
+      ],
+      "flavour": "haze",
+      "rotate": [
+       -1.49,
+       -1.08,
+       330.3
+      ]
+     },
+     {
+      "position": [
+       0.125,
+       0.0,
+       0.0006882809559107283
+      ],
+      "flavour": "fog",
+      "rotate": [
+       -1.11,
+       -1.63,
+       192.7
+      ]
+     },
+     {
+      "position": [
+       0.17500000000000002,
+       0.0,
+       0.0003726519680872804
+      ],
+      "flavour": "smoke",
+      "rotate": [
+       1.06,
+       0.16,
+       289.9
+      ]
+     }
+    ],
+    "face": "blank",
+    "edge": "reeded"
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#CFCDC9",
+  "horizon": "#D6D4CF",
+  "ground": "#6A665F",
+  "strength": 0.55
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.25,
+    0.25
+   ],
+   "position": [
+    0.0,
+    0.18,
+    1.6
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "irradiance": 2.2,
+   "color": "#FFF5E8"
+  }
+ },
+ "render": {
+  "samples": 160,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5600
+ }
+}

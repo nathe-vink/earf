@@ -4,9 +4,11 @@ face and edge in one GLB; companions/out-coin-column), with their materials in a
 
     {"kind": "kit", "shape": "ext", "module": "earf_coin", "fn": "coin", "spots": [[x, y, z], ...], "flavour": "ice"}
 
-- coin: `spots` where each coin's back face lies (metres; a spot can be {"position", "flavour", "face", "edge",
-  "rotate": [rx, ry, rz] degrees, "flip": true (lying face down)}); `face` engraved (A, the house pick), printed (B:
+- coin: `rim_glow` (a strength) lights each coin's rim from inside in its own colour (companions.common.GLOW), as
+  the site's coins glow on night, and `face_glow` (a strength, or one a flavour) its face faintly; `spots` where each coin's back face lies (metres; a spot can be {"position", "flavour", "face", "edge",
+  "rotate": [rx, ry, rz] degrees, "flip": true (lying face down)}); `face` blank (the coin alone), engraved (A, the house pick), printed (B:
   the colour globe printed on a Fog coin) or cast (C: a tinted globe set in a clear coin); `edge` plain or reeded;
+- every piece: `flavour_materials` {flavour: {material: overrides}} for one tint alone;
 - stack: `spots` the stacks' feet; `n` coins each, `flavours` a list cycled from the bottom (or one `flavour`), a
   little `jitter` (mm) and turn between coins as a hand leaves them, `seed`;
 - column: `spots` where the request column stands; `coins` the queue's flavours from the bottom (the next song
@@ -41,7 +43,8 @@ FLOOR = 0.0132                # the column's slot floor above its foot (coin.col
 SPECTRUM = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
 FACE_PARTS = {'engraved': ['globe-engraved', 'words'],
               'printed': ['print-*', 'underlay', 'words'],
-              'cast': ['globe-cast', 'words']}
+              'cast': ['globe-cast', 'words'],
+              'blank': []}                  # the coin alone: the site's colour picker and loader
 CLEAR_BODY = ('printed', 'cast')            # B and C are read through a water-clear coin
 _CACHE = {}
 
@@ -62,7 +65,10 @@ class _Mats:
 
     def __call__(self, fl, mname):
         if fl not in self.sets:
-            self.sets[fl] = PR.build_materials(self.bpy, self.pdef, fl, self.p.get('materials', {}), f'coin-{self.which}-{fl}')
+            over = dict(self.p.get('materials', {}))
+            for k, v in self.p.get('flavour_materials', {}).get(fl, {}).items():
+                over[k] = {**over.get(k, {}), **v}
+            self.sets[fl] = PR.build_materials(self.bpy, self.pdef, fl, over, f'coin-{self.which}-{fl}')
         return self.sets[fl][mname]
 
 
@@ -104,14 +110,56 @@ def _spots(p):
         yield i, (s if isinstance(s, dict) else {'position': s})
 
 
+GLOW = {'ember': '#FF4A3A', 'dust': '#FF8A3A', 'acid': '#FFC93A', 'poison': '#6BD45A', 'ice': '#4FB8FF',
+        'haze': '#9A6BFF', 'fog': '#FFF4E4', 'smoke': '#C8C0D8'}      # companions/common.py GLOW
+
+
+def _rim(bpy, kit, name, M, fl, strength, face=0.0):
+    """A thin band of light inside the coin's edge, 0.3 in from it, its middle 4 of the 6, with a black band just inside
+    it so it shines out through the rim only (lit both ways, it flooded the face and mirrored in it as triangles); and,
+    `face` above 0, a faint disc of the same light in the middle of the coin, so its face reads its colour on night (as
+    round 30's coins' faces did)."""
+    import bmesh
+    objs = []
+    # both under the rounded rim (it starts 1.5 in), where the rim's curve hides them from above; the shield nearly
+    # the rim's whole height there, so no light gets round it into the face
+    r0, r1 = D / 2 - 0.00045, D / 2 - 0.00025
+    for nm, (a, b), (z0, z1), mat in (
+            ('glow', (r0, r1), (0.0012, T - 0.0012), kit.material(bpy, 'glow', GLOW[fl], {'emit': strength})),
+            ('shield', (r0 - 0.00014, r0 - 0.00004), (0.00036, T - 0.00036), kit.material(bpy, 'gloss', '#050505', {'roughness': 0.6}))):
+        bm = bmesh.new()
+        kit._lathe(bm, [(a, z0), (b, z0), (b, z1), (a, z1), (a, z0)], seg=128)
+        ob = kit.finish(bpy, f'{name}-{nm}', bm, {}, smooth=True, mat=mat)[0]
+        ob.matrix_world = M
+        ob.visible_shadow = False
+        objs.append(ob)
+    if face:                         # below 0: a black disc, the face held dark (Smoke: the rim's light, trapped
+        bm = bmesh.new()             # between the polished faces, otherwise fills the whole coin)
+        rf = D / 2 - 0.0016
+        kit._lathe(bm, [(0.0, T / 2 - 0.0002), (rf, T / 2 - 0.0002), (rf, T / 2 + 0.0002), (0.0, T / 2 + 0.0002)], seg=128)
+        mat = (kit.material(bpy, 'glow', GLOW[fl], {'emit': face}) if face > 0
+               else kit.material(bpy, 'felt', '#050505'))
+        ob = kit.finish(bpy, f'{name}-face', bm, {}, smooth=True, mat=mat)[0]
+        ob.matrix_world = M
+        ob.visible_shadow = False
+        objs.append(ob)
+    return objs
+
+
 def coin(bpy, name, p, kit):
     mats = _Mats(bpy, 'coin', p)
     objs = []
     for i, s in _spots(p):
         pos = list(s['position']); pos[2] += GAP
         M = _matrix(pos, s.get('rotate', p.get('rotate', (0, 0, s.get('rotate_z', 0)))), s.get('flip', p.get('flip', False)))
-        objs += _one(bpy, f'{name}#{i}', M, s.get('flavour', p.get('flavour', 'ice')), s.get('face', p.get('face', 'engraved')),
-                     s.get('edge', p.get('edge', 'plain')), mats)
+        fl = s.get('flavour', p.get('flavour', 'ice'))
+        objs += _one(bpy, f'{name}#{i}', M, fl, s.get('face', p.get('face', 'engraved')), s.get('edge', p.get('edge', 'plain')), mats)
+        rg = s.get('rim_glow', p.get('rim_glow'))
+        rg = rg.get(fl, 0.0) if isinstance(rg, dict) else rg
+        if rg:
+            fg = s.get('face_glow', p.get('face_glow', 0.0))
+            fg = fg.get(fl, 0.0) if isinstance(fg, dict) else fg
+            objs += _rim(bpy, kit, f'{name}-rim#{i}', M, fl, rg, fg)
     return objs
 
 

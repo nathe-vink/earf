@@ -460,3 +460,72 @@ catches the light along the edge and reads as currency in the hand; it costs abo
 **Recommended: A with a reeded edge.**
 
 ![The concept sheet](../../../renders/2026-10-20/barkhorn/coin/sheet-proof.png)
+
+**The fab kit** (`out-earf-coin/`, `.venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/earf_coin.py
+--out spinoffs/barkhorn/companions/out-earf-coin`; it passes its checks):
+- **Laser files** (`out-earf-coin/laser/`, written by `coin.py`, SVG and DXF in mm, layers named):
+  - `coin-A-1-cut`: the 40 mm circle.
+  - `coin-A-2-back-globe-MIRRORED`: the globe, mirrored. It's run with the coin face down, so it reads right from the
+    front.
+  - `coin-A-3-front-words`: the words, as read.
+  - `coin-A-all-layers`: all three, registered.
+  - `nest-600x400`: 104 coins on a 600 × 400 bed, cut, front and back layers registered.
+  - B's print file (each colour and the white underlay, mirrored) and C's inlay cut file, for the faces not chosen.
+- **The route:**
+  1. Cut the sheet's coins with its masking left on.
+  2. Engrave the words through the front's masking.
+  3. Lift the coins out, flip each one back into its own hole in the sheet's skeleton (the skeleton is the jig), and
+     engrave the mirrored globe through the back's masking.
+  4. On a CNC router, hold 24 coins in a vacuum fixture. Round both arrises 1.5 with a roundover cutter, then mill the
+     100 reeds (a 0.9 ball cutter, 0.3 deep).
+  5. Polish the edges by vibratory tumbling in plastic media with an acrylic compound (a batch of 500 overnight), or
+     by vapour polishing. Don't flame-polish: the flame would craze the engraving. The faces stay the cast sheet's own,
+     under the masking until the end.
+  6. Peel, check, bag.
+- **The request column** (`earf_coin_column.py`, `out-earf-coin-column/`, it passes its checks): a water-clear cast tube
+  50 × 4 wall, 210 long (42 bore: 1 mm round a coin; holds 33), bonded into a Smoke acrylic base 96 × 24 with a brass
+  cap ring.
+  - Coins drop in at the top. A slot 6.8 tall through the base under the tube lets one coin out at the front, and the
+    tube holds the next one back.
+  - A finger through the notch at the back pushes the lowest coin out, so the queue plays from the bottom up.
+  - **$322 one-off** at the kit's shop rates (`out-earf-coin-column/bom.md`).
+- **BOM:** a boxed set of eight is **$30** at the kit's rates (`out-earf-coin/bom.md`, sheet plus the shop's work as
+  estimated lines, plus a $9 box). Per coin, by run (`coin.py --costs`; estimates from shop rates, not quotes):
+
+| a coin (the pick), USD | 500 | 1,000 | 5,000 |
+|---|---|---|---|
+| sheet | 0.26 | 0.26 | 0.26 |
+| laser | 1.40 | 1.17 | 0.93 |
+| edge | 1.33 | 1.11 | 0.89 |
+| polish | 0.40 | 0.30 | 0.20 |
+| check and bag | 0.15 | 0.15 | 0.15 |
+| setup | 1.20 | 0.60 | 0.12 |
+| scrap 5 % | 0.24 | 0.18 | 0.13 |
+| **total** | **4.98** | **3.77** | **2.68** |
+
+| face, edge | 500 coins | 1,000 coins | 5,000 coins |
+|---|---|---|---|
+| engraved, reeded | $4.98 | $3.77 | $2.68 |
+| engraved, plain | $4.46 | $3.33 | $2.33 |
+| printed, reeded | $6.35 | $4.72 | $3.20 |
+| cast, reeded | $18.42 | $13.64 | $9.17 |
+
+- **Retail (merch):** a boxed set of eight (a Smoke acrylic slide-lid box, the coins standing in spectrum order)
+  costs about $39 to make at 1,000; **$95** proposed.
+
+**The ritual.** A bowl of all eight colours stands at the door, and each guest picks theirs. That coin is their one
+request. At the decks, Ginza's "Sorry, no requests" card becomes a small Smoke acrylic block engraved **ONE COIN, ONE
+SONG.** (the alternative: YES, REQUESTS. ONE EACH.). A guest hands over their coin with a song. It drops into the
+request column, and the queue stands there as a column of colours, played from the bottom up: the DJ pushes the lowest
+coin out of the slot when its song comes on. The spent coins go back into the bowl at the door, or home in a pocket as
+a keepsake, which is the point: a bar token you'd want to keep.
+
+**For Planet** (`studio/engine/kit_ext/earf_coin.py`; every coin render here was made through it):
+- `coin`: spots with flavour, face (`engraved` the pick, `printed`, `cast` or `blank`), edge, `rotate`, `flip`.
+- `stack`: a loose stack, `n` coins, `flavours` cycled from the bottom.
+- `fan`: coins dealt along an arc, each resting on the one before. The tilt is solved from that contact, so it
+  settles at about 11.5° for a 30 mm spread.
+- `column`: the request column with its queue (`coins`, from the bottom), and the next coin pushed `out` of its slot.
+- `bowl`: the bowl at the door, `n` coins in it in the eight tints.
+- `flavour_materials` overrides one tint's materials. The GLBs are committed (`out-coin-study/render/`,
+  `out-coin-column/render/`).
