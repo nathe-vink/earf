@@ -1,0 +1,361 @@
+{
+ "stage1": {
+  "impression": "A moody, warm night view into a timber bar, but a dark blackened-steel post fills the middle quarter of the frame and splits it into two pictures. The right half's 'curtain' is muddy, and there is no clear hero speaker: the only saturated colour is a hot blue slab on the counter, and the far-end speaker is cut off by the post. The haze and warm pools are believable, but the floor reads as smeared marble and the frame says render. As shot, a magazine would see a generic wood-panelled bar, not a specific place: the name on the glass, the lightbox figure and the altar, which would make it Planet EARF, do not read.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The altar pair at the far end must be visible in full, not cut by the shopfront mullion, and must be the brightest tinted object in the frame",
+  "The shopfront must read as a shopfront: the glass plane carries the etched name, legible, plus faint street reflections, and the steel frame has lit edges",
+  "The frosted lightbox must read as an evenly glowing panel with a soft but recognisable dancing figure, not a dark streaked curtain",
+  "No unsaturated-room violations: the blue glow on the counter must not out-shout the speakers (clip 0 % there)",
+  "The floor must read as polished board-formed or trowelled concrete at real scale, not as marbled smoke",
+  "No single dead element wider than about 15 % of the frame in the foreground"
+ ],
+ "defects": [
+  {
+   "region": [
+    310,
+    0,
+    480,
+    480
+   ],
+   "what": "Blackened-steel mullion, 170 px (24 % of the width), dead centre, lum_median 17.9, no edge highlight. It splits the frame in two and reads as a wall of mottled texture, not as a sharp steel section"
+  },
+  {
+   "region": [
+    290,
+    200,
+    312,
+    260
+   ],
+   "what": "The far-end speaker (the altar) is cut by the mullion's edge: the hero is half hidden"
+  },
+  {
+   "region": [
+    145,
+    255,
+    210,
+    270
+   ],
+   "what": "A saturated blue glowing slab on the counter (p95 218, clip 0.72 %): the loudest colour in the frame, and it is not the hero speaker"
+  },
+  {
+   "region": [
+    595,
+    60,
+    690,
+    345
+   ],
+   "what": "Frosted lightbox: reads as a pleated curtain with dark vertical smears and a dark top band; no figure is legible and the glow is uneven (lum p5 21 to p95 94)"
+  },
+  {
+   "region": [
+    150,
+    330,
+    310,
+    480
+   ],
+   "what": "Floor reads as marbled or smoky stone with blotchy white veining; the texture scale and contrast are wrong for concrete"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No evidence of the glass shopfront the camera is behind: no etched name (emission 0.0), no street reflections, no glass edge"
+  },
+  {
+   "region": [
+    0,
+    120,
+    140,
+    270
+   ],
+   "what": "The back-bar niche speakers read as dark boxes behind glass with cold blue-white strip highlights at their tops"
+  },
+  {
+   "region": [
+    480,
+    0,
+    720,
+    50
+   ],
+   "what": "Top steel band and right-hand steel frame: flat, low-contrast mottled texture with no sheen gradient; reads as a CG grunge map"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Proof at scale 0.3 (720 x 480): soft overall, so the 1:1 material read is limited"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The mullion sits on the view axis, so it takes the centre of the frame and hides the altar pair, the subject of the shot.",
+   "evidence": {
+    "region": [
+     310,
+     0,
+     480,
+     480
+    ],
+    "measured": "Mullion is 170 px wide (24 % of the frame), lum_median 17.9; the altar speaker at about [290, 200, 312, 260] is clipped by its left edge"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "position [-2.0, 1.6, 1.45], target [17.0, 3.0, 1.3], lens 40 mm",
+    "to": "position [-1.6, 3.0, 1.5], target [17.0, 3.0, 1.35], lens 35 mm, so the axis runs straight through a glass bay to the altar. If the mullion is near y 3.0, move to the bay centre either side, and keep the mullion on a vertical third at no more than 10 % of the width"
+   },
+   "expected": "One continuous view down the room, with the counter on the left, the altar pair centred and fully visible at the far end, and the steel frame as a thin border with the lightbox at one edge",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar pair does not read as the hero: it is dimmer than the counter's blue glow and lost in haze.",
+   "evidence": {
+    "region": [
+     250,
+     170,
+     310,
+     260
+    ],
+    "measured": "Far-end region lum_median 34.9, below the 45 target for the speaker region; the counter glow reaches p95 218"
+   },
+   "change": {
+    "setting": "the altar 2 x spot",
+    "from": "220.0 W, cone 30.0 deg",
+    "to": "380 W, cone 22 deg, aimed at the cabinets' mid-height so light passes through the tinted acrylic"
+   },
+   "expected": "The altar speakers glow as the brightest tinted object in the room, at a lum_median of 55 to 80 for the speaker region and with no clipping on them",
+   "accept": {
+    "region": [
+     250,
+     170,
+     310,
+     260
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The shot is 'from the kerb', but nothing shows the glass or the name etched into it, so it reads as an interior shot through a hole in a wall.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "The window's etched name emission is 0.0 on the card; no glyphs or reflections are visible anywhere in the frame"
+   },
+   "change": {
+    "setting": "the window's etched name (emission strength)",
+    "from": "0.0",
+    "to": "0.35 (edge-lit frosting, reading pale warm against the dark room)"
+   },
+   "expected": "The name reads as a thin frosted inscription on the glass plane, legible but quieter than the speakers and the lightbox",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The blackened steel reads as a flat grunge texture, with no sheen and no crisp edges, because nothing rakes it from the street side.",
+   "evidence": {
+    "region": [
+     310,
+     0,
+     480,
+     480
+    ],
+    "measured": "lum_range 36.5, p95 42.2; no edge highlight on the mullion"
+   },
+   "change": {
+    "setting": "street lamps 3 x point",
+    "from": "60.0 W, 3000 K",
+    "to": "160 W, 3400 K, with one placed about 3 m to the camera's side and above, so it grazes the steel faces and puts faint cool reflections in the glass"
+   },
+   "expected": "The steel frame shows a soft, uneven sheen with bright arrises, the glass picks up faint street reflections, and the cool outside reads against the warm inside",
+   "accept": {
+    "region": [
+     480,
+     345,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 65
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The frosted lightbox reads as a streaked curtain, not an evenly glowing panel with a fogged dancing figure.",
+   "evidence": {
+    "region": [
+     595,
+     60,
+     690,
+     345
+    ],
+    "measured": "lum_p5 21.5 to p95 94.1 with dark vertical bands and a dark top third; no figure is legible"
+   },
+   "change": {
+    "setting": "frosted acrylic roughness (lightbox) and screens' brightness",
+    "from": "current roughness, screens 1.0",
+    "to": "raise the frosted roughness to fully diffuse (about 0.6) and the lightbox screen's brightness to 1.6, so the light fills the panel evenly and the figure sits in it as one soft darker silhouette"
+   },
+   "expected": "The panel glows evenly from edge to edge with a recognisable soft figure: the shopfront's signature",
+   "accept": {
+    "region": [
+     600,
+     70,
+     685,
+     340
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The blue glow on the counter is the frame's loudest colour and clips, breaking the one-colour-from-the-hero rule.",
+   "evidence": {
+    "region": [
+     145,
+     255,
+     210,
+     270
+    ],
+    "measured": "p95 218.5, clip 0.72 %, a cool blue against a warm room"
+   },
+   "change": {
+    "setting": "the Domes' downlights / screens' brightness (whichever source lights the slab on the counter); if it is the R3 Float's lit base, its emission",
+    "from": "current",
+    "to": "cut the source on the slab by about 60 %, so it sits below the altar speakers in brightness"
+   },
+   "expected": "The counter object stays tinted but secondary; the eye goes to the altar first",
+   "accept": {
+    "region": [
+     145,
+     255,
+     210,
+     270
+    ],
+    "metric": "clip_pct",
+    "op": "<=",
+    "value": 0.0
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The floor reads as marbled smoky stone at the wrong scale, not as concrete.",
+   "evidence": {
+    "region": [
+     150,
+     330,
+     310,
+     480
+    ],
+    "measured": "Blotchy white veining with p95 of about 93 against a median of 14.6 in the floor strip"
+   },
+   "change": {
+    "setting": "the floor's polish and the concrete's tone",
+    "from": "current high-contrast mottling, glossy",
+    "to": "lower the mottle contrast by about 60 %, make the colour variation finer (aggregate scale), and set roughness to about 0.45 for a satin polish that catches only the pendants' pools"
+   },
+   "expected": "The floor reads as a satin polished concrete slab with soft warm reflections of the counter lights and no veining",
+   "accept": {
+    "region": [
+     0,
+     400,
+     310,
+     480
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The room has little sign of life at the counter from this view, so it reads empty and showroom-like.",
+   "evidence": {
+    "region": [
+     20,
+     250,
+     280,
+     300
+    ],
+    "measured": "Visually, only two small glasses on the counter top"
+   },
+   "change": {
+    "setting": "props",
+    "from": "rocks glasses and coupe, coat on a chair, candles",
+    "to": "move the coat and coupe to the nearest third of the counter, and light the two candles nearest the camera so they make small warm pools on the zinc"
+   },
+   "expected": "Small warm highlights and a human trace in the foreground of the bar",
+   "accept": {
+    "region": [
+     20,
+     250,
+     280,
+     300
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 120
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Change or neutralise the blue tint of the counter object if it is an EARF product (R3 Float)",
+   "why": "EARF products' colour is fixed; only the light on them may change (c6)"
+  },
+  {
+   "request": "Make the shopfront mullion thinner or move it",
+   "why": "The shopfront's design is fixed; only the camera can move (c1)"
+  },
+  {
+   "request": "Change the lightbox's image (the dancing figure)",
+   "why": "What the screens show is fixed; only their brightness and the frosting may change"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
