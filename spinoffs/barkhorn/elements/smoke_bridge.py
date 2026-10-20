@@ -105,6 +105,9 @@ def shot():
     props = deck()
     lp, lights = lamps()
     props += lp
+    # the contact shadow: a shadow-only disc in the cabinet's base, blocking the sky and lamps over the road beneath it
+    props.append(piece('ext', module='smoke_el', fn='occluder', position=[0.0, 0.0, 0.03], radius=0.36, sx=1.0, sy=0.9,
+                       rotate_z=18.0))
     lights.update({
         'skyfill': {**area(-20, 5, 2.4, 1.6, '#AEB8C8', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
         'bounce': {**area(-25, 12, 2.0, 4.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
@@ -118,7 +121,7 @@ def shot():
             lights[f'fire{i}'] = point([x, y, 1.3], 30000.0, '#FF7426', 0.9)
             # the fire's light on the speaker's near flank: a warm rim from the wreck's direction
             lights[f'firerim{i}'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [x * 0.4, y * 0.4, 1.3],
-                                     'target': [0.0, 0.0, 0.8], 'irradiance': 14.0, 'color': '#FF8A3A', 'receivers': SHELL}
+                                     'target': [0.0, 0.0, 0.8], 'irradiance': 30.0, 'color': '#FF8A3A', 'receivers': SHELL}
     cam = camera(height=0.9, distance=5.0, azimuth=-12, lens=35, target=(0.0, 0.0, 0.85), fstop=2.8, shift_x=0.0,
                  shift_y=0.12)
     cam['clip_end'] = 3000

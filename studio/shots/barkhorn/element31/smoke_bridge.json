@@ -3845,6 +3845,21 @@
    {
     "kind": "kit",
     "shape": "ext",
+    "module": "smoke_el",
+    "fn": "occluder",
+    "position": [
+     0.0,
+     0.0,
+     0.03
+    ],
+    "radius": 0.36,
+    "sx": 1.0,
+    "sy": 0.9,
+    "rotate_z": 18.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
     "module": "wreck",
     "fn": "sedan",
     "position": [
@@ -4594,7 +4609,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 14.0,
+   "irradiance": 30.0,
    "color": "#FF8A3A",
    "receivers": [
     "left",
