@@ -3,12 +3,12 @@
  "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-mono/final-black-paper.png",
  "seconds": {
   "build": 0.1,
-  "render": 9.4
+  "render": 1115.8
  },
- "samples": 16,
+ "samples": 256,
  "size": [
-  480,
-  320
+  1600,
+  1067
  ],
  "applied": [],
  "pending": [],
@@ -20,98 +20,98 @@
   "disc-equator#0": {
    "part": "disc-equator",
    "centre_px": [
-    188.6,
-    163.2
+    628.6,
+    544.1
    ],
    "box_px": [
-    106,
-    104,
-    270,
-    231
+    354,
+    348,
+    901,
+    770
    ],
    "depth_m": 1.747
   },
   "disc-m150#0": {
    "part": "disc-m150",
    "centre_px": [
-    188.6,
-    163.2
+    628.6,
+    544.1
    ],
    "box_px": [
-    131,
-    69,
-    243,
-    265
+    438,
+    231,
+    811,
+    885
    ],
    "depth_m": 1.747
   },
   "disc-m30#0": {
    "part": "disc-m30",
    "centre_px": [
-    188.6,
-    163.2
+    628.6,
+    544.1
    ],
    "box_px": [
-    131,
-    69,
-    243,
-    265
+    438,
+    231,
+    811,
+    885
    ],
    "depth_m": 1.747
   },
   "disc-m90#0": {
    "part": "disc-m90",
    "centre_px": [
-    188.6,
-    163.2
+    628.6,
+    544.1
    ],
    "box_px": [
-    103,
-    84,
-    270,
-    238
+    345,
+    281,
+    898,
+    794
    ],
    "depth_m": 1.747
   },
   "disc-north#0": {
    "part": "disc-north",
    "centre_px": [
-    208.5,
-    118.1
+    695.0,
+    393.9
    ],
    "box_px": [
-    147,
-    73,
-    273,
-    168
+    490,
+    245,
+    908,
+    560
    ],
    "depth_m": 1.717
   },
   "disc-south#0": {
    "part": "disc-south",
    "centre_px": [
-    169.4,
-    206.7
+    564.5,
+    689.0
    ],
    "box_px": [
-    107,
-    159,
-    228,
-    260
+    357,
+    530,
+    762,
+    866
    ],
    "depth_m": 1.778
   },
   "stand#0": {
    "part": "stand",
    "centre_px": [
-    190.2,
-    236.7
+    634.0,
+    789.1
    ],
    "box_px": [
-    169,
-    224,
-    212,
-    250
+    564,
+    746,
+    705,
+    834
    ],
    "depth_m": 1.804
   }

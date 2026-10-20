@@ -2,13 +2,13 @@
  "shot": "/home/user/earf/studio/shots/barkhorn/globe-mono/final-board-night.json",
  "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-mono/final-board-night.png",
  "seconds": {
-  "build": 0.1,
-  "render": 8.2
+  "build": 0.2,
+  "render": 629.3
  },
- "samples": 16,
+ "samples": 256,
  "size": [
-  480,
-  320
+  1600,
+  1067
  ],
  "applied": [],
  "pending": [],
@@ -20,98 +20,98 @@
   "disc-equator#0": {
    "part": "disc-equator",
    "centre_px": [
-    188.6,
-    163.2
+    628.6,
+    544.1
    ],
    "box_px": [
-    107,
-    106,
-    270,
-    230
+    356,
+    352,
+    898,
+    765
    ],
    "depth_m": 1.747
   },
   "disc-m150#0": {
    "part": "disc-m150",
    "centre_px": [
-    188.6,
-    163.2
+    628.6,
+    544.1
    ],
    "box_px": [
-    133,
-    70,
-    242,
-    264
+    443,
+    234,
+    806,
+    882
    ],
    "depth_m": 1.747
   },
   "disc-m30#0": {
    "part": "disc-m30",
    "centre_px": [
-    188.6,
-    163.2
+    628.6,
+    544.1
    ],
    "box_px": [
-    133,
-    70,
-    242,
-    264
+    443,
+    234,
+    806,
+    882
    ],
    "depth_m": 1.747
   },
   "disc-m90#0": {
    "part": "disc-m90",
    "centre_px": [
-    188.6,
-    163.2
+    628.6,
+    544.1
    ],
    "box_px": [
-    104,
-    85,
-    269,
-    237
+    345,
+    283,
+    898,
+    792
    ],
    "depth_m": 1.747
   },
   "disc-north#0": {
    "part": "disc-north",
    "centre_px": [
-    208.5,
-    118.1
+    694.9,
+    393.9
    ],
    "box_px": [
-    148,
-    75,
-    272,
-    166
+    493,
+    250,
+    906,
+    555
    ],
    "depth_m": 1.717
   },
   "disc-south#0": {
    "part": "disc-south",
    "centre_px": [
-    169.4,
-    206.7
+    564.6,
+    689.0
    ],
    "box_px": [
-    108,
-    160,
-    228,
-    258
+    360,
+    534,
+    759,
+    861
    ],
    "depth_m": 1.778
   },
   "stand#0": {
    "part": "stand",
    "centre_px": [
-    190.2,
-    236.7
+    634.0,
+    789.1
    ],
    "box_px": [
-    169,
-    224,
-    212,
-    250
+    564,
+    746,
+    705,
+    834
    ],
    "depth_m": 1.804
   }
