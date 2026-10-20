@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   10.9,
-   1.35,
-   1.65
+   12.2,
+   1.0,
+   1.7
   ],
   "target": [
-   16.4,
-   3.4,
-   1.6
+   16.5,
+   3.3,
+   1.55
   ],
-  "lens_mm": 26,
+  "lens_mm": 24,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -125,7 +125,7 @@
     "name_glow": 0.25,
     "niche_strip": 5.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.35,
+    "screen_glow": 0.2,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -372,7 +372,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.1,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -418,7 +418,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.2,
+   "irradiance": 0.1,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -895,7 +895,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - High Contrast",
-  "exposure": 3.3,
+  "exposure": 3.2,
   "white_balance_k": 2700,
   "white_balance_tint": 0.0
  },

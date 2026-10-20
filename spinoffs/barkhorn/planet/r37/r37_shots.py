@@ -183,10 +183,11 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # the concrete and the steel round the altar, the tub chairs and Orb tables at the edges; the niche lined in
           # the shell's fir (the end grain read as tile in every pass); the pair lit soft from above and in front
           # (the spots wider, weaker, aimed at the tops; the linked lamps on the faces down), the plinths glowing
-          # beneath; a soft wash down the felt behind each; the Orbs 1 W
-          'camera': {'position': [10.9, 1.35, 1.65], 'target': [16.4, 3.4, 1.6], 'lens_mm': 26, 'level': True,
+          # beneath; a soft wash down the felt behind each; the Orbs 1 W. Inside the zone on 24 mm (from outside the step
+          # the partition's edge stood across the right speaker)
+          'camera': {'position': [12.2, 1.0, 1.7], 'target': [16.5, 3.3, 1.55], 'lens_mm': 24, 'level': True,
                      'fstop': 5.6, 'focus': [16.4, 3.05, 1.0]},
-          'settings': {'exposure': 3.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.2, 'altar_w': 140.0,
+          'settings': {'exposure': 3.2, 'wb': 2700, 'screen_glow': 0.2, 'spk_irr': 0.1, 'altar_w': 140.0,
                        'altar_cone': 44.0, 'altar_z': 1.3, 'haze': 0.002, 'sphere_w': 1.0, 'sphere_glow': 0.3,
                        'niche_strip': 5.0, 'plinth': 1.0, 'spk_back': 10.0, 'felt_wash': 2.0,
                        'altar_lining': 'fir', 'look': 'AgX - High Contrast'}}
