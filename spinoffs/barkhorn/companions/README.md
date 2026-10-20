@@ -635,6 +635,12 @@ loader, `icons_real.py --coin`; the Coin ident) made real. Every dimension below
 catches the light along the edge and reads as currency in the hand; it costs about $0.45 a coin more at 1,000.
 **Recommended: A, black-filled, with a reeded edge.**
 
+**Signed by the owner, 2026-10-20:** "EARFcoin: A, engraved, reeded edge". So the face is A: the globe reverse-engraved
+into the back face, filled black (Smoke's filled white), the words engraved into the front and filled white. The edge
+is reeded. B (printed in colour) and C (cast in) stay on the concept sheet as the alternates not chosen. The coin's
+other dimensions remain proposals until the owner signs them (40 × 6, edges 1.5, the globe 25 across, the words'
+band 15 to 17).
+
 ![The concept sheet](../../../renders/2026-10-20/barkhorn/coin/sheet-proof.png)
 
 **The fab kit** (`out-earf-coin/`, `.venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/earf_coin.py
