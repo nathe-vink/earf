@@ -136,3 +136,11 @@ The lead sent proof 7 to the owner beside A4, recommending the lake as the new P
 - The water still has no visible reflections or meniscus, and its streaks look painted.
 - The planks are uniform and the posts are the same.
 - The speaker has little contact shadow, and the sign's graphics are crisp.
+
+**The finals** (512 samples, each in two strips with the finish off, stitched by `stitch.py`, the finish applied once):
+- `renders/2026-10-18/barkhorn/element31/poison_n2.png`: 2400 × 1600, 3.1 MB.
+- `renders/2026-10-18/barkhorn/element31/poison_n2-portrait.png`: 1600 × 2000, 2.7 MB.
+
+The first portrait cropped the sign to a sliver at the edge. Since the sign carries the read, it was re-rendered at 34 mm, turned a little left (65aebd0).
+
+Prepared for the owner's decision; not on the site.
