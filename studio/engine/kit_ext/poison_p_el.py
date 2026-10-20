@@ -579,6 +579,24 @@ def scan(bpy, name, p, kit):
     for o in list(root.children_recursive):
         if any(d in o.name for d in drop):
             bpy.data.objects.remove(o, do_unlink=True)
+    if p.get('vary'):                                     # each part its own copy of its materials, its wood a shade
+        rnd = random.Random(p.get('seed', 3))             # lighter or darker, greyer or browner (the textures are an
+        for o in root.children_recursive:                 # atlas, so they cannot be slid)
+            if o.type != 'MESH':
+                continue
+            for slot in o.material_slots:
+                if slot.material is None or not slot.material.use_nodes:
+                    continue
+                m = slot.material.copy(); slot.material = m; nt = m.node_tree
+                b = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+                if b is None or not b.inputs['Base Color'].is_linked:
+                    continue
+                src = b.inputs['Base Color'].links[0].from_socket
+                hsv = nt.nodes.new('ShaderNodeHueSaturation')
+                hsv.inputs['Hue'].default_value = 0.5 + rnd.uniform(-0.015, 0.015)
+                hsv.inputs['Saturation'].default_value = 1.0 + rnd.uniform(-p['vary'], p['vary'])
+                hsv.inputs['Value'].default_value = 1.0 + rnd.uniform(-p['vary'], p['vary'])
+                nt.links.new(src, hsv.inputs['Color']); nt.links.new(hsv.outputs['Color'], b.inputs['Base Color'])
     return [root]
 
 

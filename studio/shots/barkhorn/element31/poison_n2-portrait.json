@@ -79,7 +79,7 @@
     ],
     "cover": 0.7,
     "drift": 20.0,
-    "scum_rough": 0.35,
+    "scum_rough": 0.18,
     "float": true,
     "edge": [
      0.06,
@@ -87,16 +87,16 @@
     ],
     "lane": [
      0.45,
-     1.6
+     0.9
     ],
     "streak": 1.7,
     "scale": 0.12,
     "clots": 0.45,
     "clot_scale": 1.4,
     "greens": [
-     "#3E5A10",
-     "#7A9A1C",
-     "#C2D040"
+     "#4A7A12",
+     "#8CC21E",
+     "#CDEB3E"
     ]
    },
    {
@@ -137,7 +137,9 @@
     "res": "2k",
     "drop": [
      "section_05"
-    ]
+    ],
+    "vary": 0.18,
+    "seed": 5
    },
    {
     "kind": "kit",

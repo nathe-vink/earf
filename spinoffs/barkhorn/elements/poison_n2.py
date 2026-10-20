@@ -51,16 +51,16 @@ def set_props():
     props = [piece('box', size=[400.0, 260.0, 0.05], position=[0.0, 60.0, -0.85], material='card', color='#1E2614'),
              ext('acid_rain_el', 'puddle', size=[400.0, 260.0], position=[0.0, 60.0, 0.0], z=WATER, ring=0.7, ripple=0.35, keep=1.0,
                  roughness=0.02, ripple_m=0.0012, tint_lin=(0.42, 0.5, 0.3), seed=9),
-             ext('poison_p_el', 'algae_water', position=[0.0, 60.0, WATER + 0.004], size=[400.0, 260.0], cover=0.7, drift=20.0, scum_rough=0.35, float=True,
-                 edge=[0.06, 0.55], lane=[0.45, 1.6],    # pass 7: soft, oily edges; open water along the jetty
+             ext('poison_p_el', 'algae_water', position=[0.0, 60.0, WATER + 0.004], size=[400.0, 260.0], cover=0.7, drift=20.0, scum_rough=0.18, float=True,
+                 edge=[0.06, 0.55], lane=[0.45, 0.9],    # pass 7: soft, oily edges; open water along the jetty
                  streak=1.7, scale=0.12, clots=0.45, clot_scale=1.4,
-                 greens=['#3E5A10', '#7A9A1C', '#C2D040']),          # pass 4: pea-soup yellow-green, off the speaker's bottle green;
+                 greens=['#4A7A12', '#8CC21E', '#CDEB3E']),          # pass 4: yellow-green, off the speaker's bottle green; final: vivid, as real blooms are;
                                                                   # pass 5: more open, glossy water between, a wet sheen on the scum
              ground('brown_mud_leaves_01', size=(14.0, 5.0), position=(0.0, -4.2, -0.12), displace=0.03, relief=0.22,
                     res='2k', flat=False),
              # the old jetty out into the lake, its gantry and rope taken off (pass 4): plain mooring posts
              ext('poison_p_el', 'scan', model='modular_wooden_pier', position=[0.4, 4.0, PIER_Z], rotate=[0, 0, 4], scale=1.0,
-                 res='2k', drop=['section_05']),
+                 res='2k', drop=['section_05'], vary=0.18, seed=5),     # final: each section's wood its own shade
              # the sign, a supporting player: small, leaning, in the shallows by the jetty, out of focus
              ext('poison_p_el', 'sign', position=[-1.55, 10.2, -0.1], rotate=[0, 0, 26], lean=7.0, size=[0.5, 0.36], post=1.15,
                  bolts=True)]   # pass 5: a size up, nearer; pass 6: clear of the jetty's posts, bolted to its own
