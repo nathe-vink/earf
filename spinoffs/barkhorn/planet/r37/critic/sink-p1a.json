@@ -1,0 +1,369 @@
+{
+ "stage1": {
+  "impression": "A smoky slab with a bright oval cut in it, floating against a wall of vertical dark boards. Read 1:1, it is a render. The board grain is a smeared procedural texture with no checks, joints or end grain. The slab is a flat, muddy translucent box with the boards ghosting through its front face and no glowing polished edges. The bowl is a near-white disc with no depth. The spout is cut off by the top of the frame and floats. A beige block stands in for the towel, and the left sixth of the frame falls to black. As a specific place it does not register: this could be any hotel-bathroom CGI. A magazine would not run it, either as a detail of this bar or as a generic one.",
+  "score": 3.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Smoke slab must read as thick cast acrylic: polished edges that glow warm amber, light carried through the 120 mm thickness, and a clear silhouette against the boards (an edge step of at least 25 levels at the slab's right and bottom edges)",
+  "The basin must read as a soft rounded hollow with a gradient in depth (a luminance range inside the bowl, no flat near-white disc), warm amber rather than paper white",
+  "The timber boards must read as real oiled boards at 1:1: varied planks, V-joints, a sheen catching the sink's light, no smeared procedural grain",
+  "The spout must be fully in frame and visibly come out of the wall, with a brushed highlight",
+  "The towel must read as linen on a brass rod (folds, a weave, a brass glint), not a flat beige block",
+  "No region larger than a tenth of the frame more than half crushed (the left edge is 82 % crushed now)",
+  "Some sign of life and atmosphere: a bar of soap, a small glass, a sprig, a bit of haze in the sink's light"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    80,
+    480
+   ],
+   "what": "The left edge falls to black: lum_median 1.1, crush_pct 81.8 over 11 % of the frame"
+  },
+  {
+   "region": [
+    100,
+    260,
+    600,
+    400
+   ],
+   "what": "The slab's front face is a flat, muddy olive-brown (lum_median 29, range 19, RGB 41/27/16). The boards show through it like a transparency glitch; there is no glow through the thickness and no polished edge"
+  },
+  {
+   "region": [
+    590,
+    230,
+    640,
+    420
+   ],
+   "what": "The slab's right edge dissolves into the wall: the largest step is 3.5 levels over 46 px, so there is no silhouette"
+  },
+  {
+   "region": [
+    240,
+    212,
+    470,
+    250
+   ],
+   "what": "The basin is a flat near-white ellipse (median 202, RGB 221/198/182) with no visible depth, curvature or rim. It reads as a hole cut in a texture, not a worked hollow, and it is cold beside an amber brief"
+  },
+  {
+   "region": [
+    350,
+    0,
+    440,
+    100
+   ],
+   "what": "The spout is cut off by the top of the frame and hangs in mid-air; the wall entry and spout end are unreadable and it is soft and out of focus"
+  },
+  {
+   "region": [
+    195,
+    65,
+    265,
+    180
+   ],
+   "what": "The towel reads as a flat beige box with an orange speck, not linen on a brass rod"
+  },
+  {
+   "region": [
+    600,
+    0,
+    720,
+    480
+   ],
+   "what": "The board grain is a smeared, stretched procedural pattern; the planks look alike, the joints are uniform black lines and there is no sheen or texture at 1:1"
+  },
+  {
+   "region": [
+    300,
+    400,
+    600,
+    480
+   ],
+   "what": "The shadow under the slab is diffuse and weak; the slab does not feel anchored to the wall or floating with intent"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "There are no props and no air: nothing says someone uses this room"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The slab does not glow through its thickness. Its front face is a flat, dim mud and the boards ghost through it.",
+   "evidence": {
+    "region": [
+     100,
+     260,
+     600,
+     400
+    ],
+    "measured": "lum_median 29.2, lum_range 19.3, RGB 41/27/16; profile down the face is flat (29 to 34)"
+   },
+   "change": {
+    "setting": "the sink's under-glow (emission strength)",
+    "from": "1.2",
+    "to": "4.0, warm (about 2400 K / #FFB070), so the light carries through the smoked thickness and the polished edges read as bright amber lines"
+   },
+   "expected": "The front face becomes a warm amber gradient, brightest at the bottom and polished edges and darker in the middle of the thickness, and is clearly separated from the boards",
+   "accept": {
+    "region": [
+     100,
+     260,
+     600,
+     400
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     55,
+     110
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The smoked acrylic reads as thin translucent film: the boards behind show through the front face and the edges carry no glow.",
+   "evidence": {
+    "region": [
+     590,
+     230,
+     640,
+     420
+    ],
+    "measured": "edge step 3.5 levels over 46 px at the slab's right edge"
+   },
+   "change": {
+    "setting": "the frosted acrylic's roughness / the slab's finish",
+    "from": "the current smoky see-through finish",
+    "to": "polished faces with a higher absorption density, so nothing behind shows through, and polished arrises catching the spot as thin specular lines"
+   },
+   "expected": "The slab reads as a solid 120 mm block with a crisp silhouette and glowing edges",
+   "accept": {
+    "region": [
+     590,
+     280,
+     640,
+     300
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The basin is a flat, cold, near-white disc with no depth.",
+   "evidence": {
+    "region": [
+     240,
+     212,
+     470,
+     250
+    ],
+    "measured": "median 202, RGB 221/198/182"
+   },
+   "change": {
+    "setting": "the sink spot (1 x spot, 6.0 W, 2700 K, cone 40 deg)",
+    "from": "6.0 W, 2700 K, 40 deg, straight down",
+    "to": "3.0 W, 2400 K, 25 deg, aimed slightly toward the back of the bowl so its far wall lights and its near wall falls into shade"
+   },
+   "expected": "The bowl shows a gradient from a lit back wall to a shaded front lip and reads as a hollow, in amber, not paper white",
+   "accept": {
+    "region": [
+     240,
+     212,
+     470,
+     250
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     110,
+     175
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "The spout is cut off by the top edge, the left sixth of the frame is dead black, and the composition gives the slab no context.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     80,
+     480
+    ],
+    "measured": "crush_pct 81.8, lum_median 1.1; the spout runs into the top edge at y 0"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [10.25, 1.35, 1.15], target [11.02, 0.25, 0.84], 50 mm",
+    "to": "raise to about z 1.30 and tilt down a few degrees, aimed so the spout and its wall plate sit fully in frame about 15 % from the top. Step about 0.15 m to the right so the dead black jamb leaves the frame, keeping 50 mm and level verticals"
+   },
+   "expected": "The spout, its wall entry, the whole bowl and the towel are all in frame, and no dead black band runs down the edge",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The timber boards read as smeared procedural grain with no sheen or variation.",
+   "evidence": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_range 27.7; visual: stretched blurry grain, every plank alike"
+   },
+   "change": {
+    "setting": "the oak's stain / the timber's finish",
+    "from": "the current flat dark stain with a soft procedural grain",
+    "to": "an oiled finish with a slight sheen (roughness about 0.45), sharper grain at 1:1, a per-plank variation of about \u00b110 % in tone, and shallow V-joints that catch a sliver of light"
+   },
+   "expected": "The boards read as real timber, catching soft highlights from the sink glow near the slab",
+   "accept": {
+    "region": [
+     620,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The towel reads as a flat beige block, the frame has no sign of life, and the brass rod does not read.",
+   "evidence": {
+    "region": [
+     195,
+     65,
+     265,
+     180
+    ],
+    "measured": "lum_median 34, range 29.6: a flat panel"
+   },
+   "change": {
+    "setting": "small props",
+    "from": "a towel shape with no folds",
+    "to": "a linen hand towel draped with soft folds and a visible hem over a brass rod that catches a glint; add a bar of soap or a small stoneware dish on the slab and a small glass with a sprig"
+   },
+   "expected": "A lived-in detail with soft textile and a brass highlight on the left",
+   "accept": {
+    "region": [
+     195,
+     65,
+     265,
+     180
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The slab does not cast a convincing shadow or glow onto the wall beneath it, so it does not read as floating with intent.",
+   "evidence": {
+    "region": [
+     300,
+     400,
+     600,
+     480
+    ],
+    "measured": "lum_median 24.8, lum_range 24: a flat, weak shadow"
+   },
+   "change": {
+    "setting": "haze in the room's air plus the under-glow",
+    "from": "haze density 0",
+    "to": "haze density about 0.02 per metre, so the sink's light shows a faint warm bloom and pools on the boards below the slab"
+   },
+   "expected": "A warm pool on the boards just below the slab, falling off downward, and a hint of air in the light",
+   "accept": {
+    "region": [
+     300,
+     410,
+     600,
+     480
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">=",
+    "value": 8
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The frame is very low key overall, with 88 % of pixels below 40, and nothing but the bowl carries a highlight.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_p50 29, below_40_pct 87.9"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "0.6",
+    "to": "0.8, after c1 to c3, keeping the bowl below clipping"
+   },
+   "expected": "Shadows hold detail and the boards and slab are readable while the frame still reads as night",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     50
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the basin a visible soft rolled rim and a deeper, more sculpted hollow",
+   "why": "That is the sink's geometry as the room's design fixes it; only its light and finish may change here"
+  },
+  {
+   "request": "Put an EARF product (an Orb lamp on the slab, say) in the frame so the colour has a hero",
+   "why": "The products and their placement belong to the room's design; adding one is a design decision for the owner, not a lighting or set fix"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

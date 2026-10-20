@@ -1,0 +1,389 @@
+{
+ "stage1": {
+  "impression": "Through-the-window night view into a deep, timber-lined bar. The depth, the record wall and the blackened-steel mullions have real atmosphere, but the frame is underexposed and mostly crushed. The etched name reads as an opaque pink-beige decal, cut off at the left edge. The far altar, where the speakers should be the hero, is a murky brown smudge. The glass carries no reflections, so it reads as no glass at all. As it stands it is a competent moody render of a generic dark bar, not yet a specific place a magazine would run.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The EARF pair on the altar must read at a glance as the hero: region [320,230,440,290] lum_median >= 45, with their smoked acrylic and horn visibly lit",
+  "Frame lum_median between 22 and 40 (now 14.6), with the bottom sill band [0,420,470,480] crush_pct < 50 and holding steel texture",
+  "The etched name must read as a frosted etch in glass (translucent, fine-grained, catching light at its edges) rather than an opaque painted decal, and it must be fully in frame",
+  "The shopfront glass must show faint, believable reflections (the street lamps, the kerb) so the camera clearly sits outside behind glass",
+  "The frosted lightbox with the dancer's silhouette (named on the card) must be in frame and readable; it is not legible now",
+  "No bare, neutral-white hot spot in the room: the source at [395,140,412,158] clips 37 % and is cooler than every other source",
+  "The pavement slab [520,450,720,480] must read as real worn concrete, not a flat beige plane"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    130,
+    180,
+    210
+   ],
+   "what": "The etched name 'EARF' reads as an opaque matte pink-beige vinyl decal (lum_median 60, flat fill). It has no etch grain or edge glow, and the 'E' is cut off by the frame edge"
+  },
+  {
+   "region": [
+    320,
+    230,
+    440,
+    290
+   ],
+   "what": "The altar speakers are near-invisible dark shapes (lum_median 21.5, p95 55). The hero product is not read"
+  },
+  {
+   "region": [
+    395,
+    140,
+    412,
+    158
+   ],
+   "what": "A bare, near-neutral white disc (RGB ~195/188/184, 37 % clipped) floats mid-room. Every other source is warm. It reads as a CG point lamp or a stray reflection"
+  },
+  {
+   "region": [
+    0,
+    420,
+    470,
+    480
+   ],
+   "what": "The sill and stall-riser band is crushed (crush_pct 20.5, lum_median 5.8). The steel there is a black void"
+  },
+  {
+   "region": [
+    470,
+    0,
+    530,
+    430
+   ],
+   "what": "The central steel mullion is very dark (lum_median 10). Its patina shows only in the upper part; the lower 2/3 is flat"
+  },
+  {
+   "region": [
+    520,
+    450,
+    720,
+    480
+   ],
+   "what": "The pavement reads as a flat, evenly lit beige plane (lum_median 121, low texture) with a hard CG edge. It is brighter than anything inside the room"
+  },
+  {
+   "region": [
+    560,
+    135,
+    590,
+    250
+   ],
+   "what": "A pale frosted panel (presumably the lightbox) is seen obliquely through the side bay. No dancer silhouette is legible, and the panel reads as a blank pink rectangle"
+  },
+  {
+   "region": [
+    520,
+    130,
+    650,
+    310
+   ],
+   "what": "The side bay is a plain beige wall with a sheer curtain, unrelated to the main room. It reads as a different, empty space and splits the composition"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "There are no reflections on the shopfront glass anywhere, so the window reads as an open hole"
+  },
+  {
+   "region": [
+    200,
+    30,
+    470,
+    170
+   ],
+   "what": "Ceiling and beams are dim and uniformly red-brown (r 27 / g 10 / b 4 median). The grade is over-saturated orange in the shadows, with little neutral concrete"
+  },
+  {
+   "region": [
+    40,
+    320,
+    160,
+    360
+   ],
+   "what": "The table lamp/Orb on the front table is a small blown blob (0.8 % clip) on an otherwise empty table. It reads as a placeholder"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero speakers on the altar are lost in the murk at the end of the room.",
+   "evidence": {
+    "region": [
+     320,
+     230,
+     440,
+     290
+    ],
+    "measured": "lum_median 21.5, p95 55.3; speakers read only as dark silhouettes"
+   },
+   "change": {
+    "setting": "the altar 2 x spot (power, cone)",
+    "from": "90.0 W, 2500 K, cone 36.0 deg",
+    "to": "260 W, 2500 K, cone 24 deg, aimed at each speaker's horn and upper cabinet so the smoked acrylic glows"
+   },
+   "expected": "The pair becomes the brightest coloured object at the vanishing point, with readable horn mouths and lit acrylic edges",
+   "accept": {
+    "region": [
+     320,
+     230,
+     440,
+     290
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The whole frame is underexposed below the brief's night-interior range.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 14.6 (target 22-50), 83.7 % below 40"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.2",
+    "to": "1.75"
+   },
+   "expected": "Frame median about 24-30; the room's shadows hold detail while the lamps stay unclipped",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The etched name is cropped at the left edge, and the lightbox with the dancer (a subject the card names) is only a sliver in the side bay.",
+   "evidence": {
+    "region": [
+     0,
+     130,
+     180,
+     210
+    ],
+    "measured": "the 'E' is cut by the frame edge; the lightbox panel [560,135,590,250] is seen edge-on with no silhouette"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "[-3.2, 2.2, 1.5], 32 mm",
+    "to": "[-4.6, 2.6, 1.5], 28 mm, still level and aimed at [17.0, 3.4, 1.35], so the full name, both mullions and the lightbox face sit inside the frame"
+   },
+   "expected": "The whole shopfront reads as a composed facade: name, door bay, lightbox and the deep room behind",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The etched name reads as opaque painted vinyl rather than frosted etch in glass.",
+   "evidence": {
+    "region": [
+     0,
+     130,
+     180,
+     210
+    ],
+    "measured": "lum_median 59.9 with flat fill, RGB 81/55/42; no grain, no edge highlight"
+   },
+   "change": {
+    "setting": "the window's etched name (emission and etch finish)",
+    "from": "emission 0.05, current frost",
+    "to": "emission 0.0, lower the etch's opacity to about 40 % transmission-frost with a fine roughness, so the room shows through and the edges catch the street light"
+   },
+   "expected": "The letters read as pale, translucent frost about 25-40 lum over the room, with the record wall faintly visible through them",
+   "accept": {
+    "region": [
+     0,
+     130,
+     180,
+     210
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The steel shopfront is a black void at the bottom, and the glass carries no reflections, so the camera does not read as being outside behind glass.",
+   "evidence": {
+    "region": [
+     0,
+     420,
+     470,
+     480
+    ],
+    "measured": "lum_median 5.8, crush_pct 20.5; mullion [470,0,530,430] lum_median 10.1"
+   },
+   "change": {
+    "setting": "street lamps 3 x point",
+    "from": "90.0 W, 3000 K, current positions",
+    "to": "keep two at 90 W; move one to about 1.5 m left of camera at 3 m high and raise it to 160 W, so it grazes the steel at a low angle and leaves a soft streak reflection on the glass"
+   },
+   "expected": "The sill and mullion patina become readable (brownish, uneven sheen); a faint warm street-lamp reflection appears on the glass",
+   "accept": {
+    "region": [
+     0,
+     420,
+     470,
+     480
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "A cool, near-white clipped disc floats in the middle of the room and breaks the single warm light family.",
+   "evidence": {
+    "region": [
+     395,
+     140,
+     412,
+     158
+    ],
+    "measured": "RGB median 195/188/184, clip_pct 37.3, against 2400-2600 K everywhere else"
+   },
+   "change": {
+    "setting": "the Dome pendant's liner glow (or the source producing the disc)",
+    "from": "glow 1.1, rendering near neutral white",
+    "to": "glow 0.6 with the smoked tint visible; if it is a street-lamp reflection, move that lamp out of the glass's mirror angle"
+   },
+   "expected": "A warm, smoked glow with no clipping, matching the other pendants",
+   "accept": {
+    "region": [
+     395,
+     140,
+     412,
+     158
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The pavement in the right foreground is a flat, evenly lit beige plane, brighter than anything in the room.",
+   "evidence": {
+    "region": [
+     520,
+     450,
+     720,
+     480
+    ],
+    "measured": "lum_median 121.3, RGB 154/116/77, little texture"
+   },
+   "change": {
+    "setting": "pavement material finish",
+    "from": "smooth light concrete",
+    "to": "darker, worn, slightly damp concrete (albedo about 0.18, roughness 0.5 with variation, joint lines and staining)"
+   },
+   "expected": "The kerb recedes and frames the window rather than competing with it",
+   "accept": {
+    "region": [
+     520,
+     450,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     80
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The pools of light from the Domes' downlights have no air in them, so the room reads flat and showroom-clean from the street.",
+   "evidence": {
+    "region": [
+     170,
+     255,
+     300,
+     280
+    ],
+    "measured": "counter lum_median 42.4 with p95 210: hard hot spots, no visible cones"
+   },
+   "change": {
+    "setting": "haze density",
+    "from": "0.003 per metre",
+    "to": "0.007 per metre"
+   },
+   "expected": "Soft visible cones under the pendants, with the far altar slightly veiled to give the room depth",
+   "accept": {
+    "region": [
+     200,
+     30,
+     470,
+     170
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 18
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the side bay at [520,130,650,310] a purpose, or relate it to the main room",
+   "why": "The shopfront and room layout are fixed by the card; only camera framing can reduce its weight"
+  },
+  {
+   "request": "Show the dancer silhouette in the lightbox more strongly",
+   "why": "What the screens and lightbox show is fixed; only their brightness and the camera may change"
+  },
+  {
+   "request": "Add a person or figure inside for a sign of life",
+   "why": "Props are limited to small objects; a figure is beyond the card's allowed changes"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

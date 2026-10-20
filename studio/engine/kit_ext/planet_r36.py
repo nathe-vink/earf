@@ -370,27 +370,28 @@ def _clear(a, b, holes):
 def _spk_holes():
     """The bar pair's niches (round 37: R.SPK_NICHES), as x-ranges and their top, or none."""
     if not getattr(R, 'SPK_NICHES', None):
-        return [], 0.0
+        return [], 0.0, 0.0
     bx = [R.niche_box(x) for x in R.SPK_NICHES]
-    return [(b[0], b[1]) for b in bx], bx[0][5]
+    return [(b[0], b[1]) for b in bx], bx[0][5], bx[0][4]
 
 
 def backbar(bpy, kit, p, objs):
     """A quiet back bar: blackened-steel doors under a worktop; one lit niche lined in timber; above it the record
     wall to the beams, the frosted disc set into it behind the DJ station, the now-playing ledge."""
     W = R.W; B = R.BACKBAR36; RW = R.RECORD_WALL
-    holes, htop = _spk_holes()                                        # round 37: the bar pair's niches cut through
+    holes, htop, hz0 = _spk_holes()                                   # round 37: the bar pair's niches cut through
+    low = holes if hz0 < B['low'] else []                             # a niche on a ledge: the doors run beneath
     st = Mesh('backbar-doors'); n = int((RW['x1'] - RW['x0']) / B['doors'])
     for k in range(n):
         x0 = RW['x0'] + k * B['doors'] + 0.003
-        for a0, a1 in _clear(x0, x0 + B['doors'] - 0.006, holes):
+        for a0, a1 in _clear(x0, x0 + B['doors'] - 0.006, low):
             if a1 - a0 > 0.12:
                 st.box(a0, B['y'], 0.10, a1, W - 0.02, B['low'] - 0.03)
-    for a0, a1 in _clear(RW['x0'], RW['x1'], holes):
+    for a0, a1 in _clear(RW['x0'], RW['x1'], low):
         st.box(a0, B['y'] + 0.03, 0.0, a1, W - 0.02, 0.10)
     objs.append(st.object(bpy, LK.steel(bpy), bevel=0.002))
     wt = Mesh('backbar-top')
-    for a0, a1 in _clear(RW['x0'] - 0.02, RW['x1'] + 0.02, holes):
+    for a0, a1 in _clear(RW['x0'] - 0.02, RW['x1'] + 0.02, low):
         wt.box(a0, B['y'] - 0.03, B['low'] - 0.03, a1, W - 0.005, B['low'])
     objs.append(wt.object(bpy, zinc(bpy), bevel=0.006))
     # the record wall: dark-oak uprights and shelves, the cells clear of the disc and of the lit niche

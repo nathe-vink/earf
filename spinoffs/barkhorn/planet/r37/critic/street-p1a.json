@@ -1,0 +1,378 @@
+{
+ "stage1": {
+  "impression": "A night street view through a dark steel shopfront into a long, low, timber-lined bar. The mood is right (warm, brown and black, a record wall, a candle on a small table), but the frame is underexposed and has no hero: the pair at the far end are two small dark shapes, the etched name reads as flat pale vinyl stuck on the glass, and a hard cream block at bottom right is the brightest large area in the picture. As it stands a magazine would read it as a generic dark bar seen through a window, not as a specific place built around its speakers.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The altar pair must be the read at a glance: speaker regions at lum_median >= 45 with their smoked tint and the light through the acrylic visible, and large enough in frame to show their silhouette (each at least ~8% of frame height)",
+  "Frame lum_median inside 22-50 (now 14.6)",
+  "The etched name must read as acid-etched glass (a frosted, slightly glowing tooth lit by the street) and not as opaque pale vinyl blocking the record wall",
+  "The frosted lightbox with the fogged silhouette of a dancing woman must be legible as such; it currently reads as a window into a beige room with a curtain",
+  "No hard bright non-light surface outranking the room: the cream block at bottom right must drop below the bar's pools of light",
+  "The glass must behave like a shopfront at night: faint reflections of the street lamps and kerb, so the viewer knows there is glass",
+  "The central steel mullion must not bisect the room's vanishing point and the counter; the room's depth axis wants a clear pane",
+  "Full-resolution check of grain and denoiser smear on the concrete and steel (this proof is 0.3 scale and too soft to judge 1:1 texture)"
+ ],
+ "defects": [
+  {
+   "region": [
+    320,
+    230,
+    350,
+    285
+   ],
+   "what": "Left altar speaker almost illegible: lum_median 19.1, no tint or acrylic glow visible, reads as a black box"
+  },
+  {
+   "region": [
+    395,
+    230,
+    425,
+    285
+   ],
+   "what": "Right altar speaker almost illegible: lum_median 20.3"
+  },
+  {
+   "region": [
+    0,
+    130,
+    180,
+    215
+   ],
+   "what": "Etched name reads as opaque pale pink vinyl (lum_median 51, flat fill) covering the record wall and cropped hard at the left edge ('ARF')"
+  },
+  {
+   "region": [
+    527,
+    135,
+    660,
+    310
+   ],
+   "what": "Lightbox does not read as a frosted panel with a fogged dancing figure: reads as a view into a beige room with a curtain and a lit window; glow very uneven (p5 10, p95 146)"
+  },
+  {
+   "region": [
+    527,
+    455,
+    700,
+    480
+   ],
+   "what": "Hard-edged cream block (sill or pavement) at lum_median 123.5, the brightest large non-lamp area in frame, pulls the eye out of the room"
+  },
+  {
+   "region": [
+    395,
+    140,
+    412,
+    160
+   ],
+   "what": "Bare ceiling source at the back clips (33% of its pixels at 255) and reads as a bare bulb pointed at camera"
+  },
+  {
+   "region": [
+    190,
+    30,
+    210,
+    425
+   ],
+   "what": "Steel mullion splits the frame and the counter down the left-centre"
+  },
+  {
+   "region": [
+    0,
+    420,
+    720,
+    480
+   ],
+   "what": "Bottom band (stallriser) 13.5% crushed, lum_median 7.9; dead area"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No reflections on the glass: the shopfront reads as an open hole, not glass"
+  },
+  {
+   "region": [
+    225,
+    255,
+    265,
+    268
+   ],
+   "what": "Small cold blue screen glow on the counter is the only saturated colour, competing with the speakers' tint"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero pair at the altar is too dark to read, so the frame has no subject.",
+   "evidence": {
+    "region": [
+     320,
+     230,
+     425,
+     285
+    ],
+    "measured": "speaker regions lum_median 19.1 and 20.3; altar region [300,190,470,310] lum_median 20.1"
+   },
+   "change": {
+    "setting": "lamps: the altar 2 x spot, W; and on each speaker area lamps, W/m2",
+    "from": "altar spots 90.0 W, speaker area lamps 1.0 W/m2",
+    "to": "altar spots 240 W (cone 36 deg kept, 2500 K), speaker area lamps 3.0 W/m2"
+   },
+   "expected": "The two cabinets separate from the back wall as smoked, lit acrylic with the white batts showing through; speaker regions near 45-60.",
+   "accept": {
+    "region": [
+     320,
+     230,
+     350,
+     285
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "post",
+   "problem": "The whole frame is underexposed below the night-interior band.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 14.6, below_40_pct 83.7, crush_pct 9.7"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.2",
+    "to": "1.6"
+   },
+   "expected": "Frame median about 24-30 with the shadows holding timber and concrete detail; the ceiling source stays the only clipped area.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The altar pair is tiny and far off, and the mullion bisects the counter and the room's depth axis.",
+   "evidence": {
+    "region": [
+     190,
+     30,
+     210,
+     425
+    ],
+    "measured": "mullion runs the full height at x~200; each speaker is ~55 px of a 480 px frame (~11%) but reads smaller because it is dark"
+   },
+   "change": {
+    "setting": "camera position, aim and lens",
+    "from": "position [-3.2, 2.2, 1.5], lens 32 mm, aim [17.0, 3.4, 1.35]",
+    "to": "position [-2.0, 1.6, 1.45], lens 40 mm, aim [17.0, 3.0, 1.3], so that the room's vanishing point and the altar sit in one clear pane on the right of the mullion, with the steel frame as a dark edge at left and right"
+   },
+   "expected": "The altar pair about 1.25x larger, framed by the far opening in a clean pane; the counter runs unbroken from the left edge to the back.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The etched name reads as opaque vinyl, not etched glass, and blots out the record wall.",
+   "evidence": {
+    "region": [
+     0,
+     130,
+     180,
+     215
+    ],
+    "measured": "flat fill lum_median 51.2 with the letters in a uniform pale pink, more opaque than the record wall behind"
+   },
+   "change": {
+    "setting": "the window's etched name: emission strength and the etch's finish",
+    "from": "emission 0.05, near-opaque",
+    "to": "emission 0.0; etch as rough clear (roughness ~0.5, transmission kept ~0.8) so it is lit only by the street lamps and the room behind, showing as a faint frosted tooth"
+   },
+   "expected": "Letters legible as a soft grey frost through which the shelves are still visible, region median about 30-40.",
+   "accept": {
+    "region": [
+     0,
+     130,
+     180,
+     215
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     42
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "A hard cream block at bottom right is brighter than any surface inside the room.",
+   "evidence": {
+    "region": [
+     527,
+     455,
+     700,
+     480
+    ],
+    "measured": "lum_median 123.5, r/g/b 157/118/79"
+   },
+   "change": {
+    "setting": "lamps: street lamps 3 x point, and the sill/pavement finish",
+    "from": "90.0 W, 3000 K; sill finish light",
+    "to": "60 W, 3000 K, the nearest lamp moved back off the sill; pavement and sill finish darkened to a wet grey concrete (base value ~0.15)"
+   },
+   "expected": "The sill sits at about the level of the bar's floor pool, so the eye goes through the glass to the room.",
+   "accept": {
+    "region": [
+     527,
+     455,
+     700,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The frosted lightbox does not read as frosted acrylic carrying a fogged silhouette of a dancing woman.",
+   "evidence": {
+    "region": [
+     527,
+     135,
+     660,
+     310
+    ],
+    "measured": "lum_p5 10.3, lum_p95 145.8; reads as a room with a lit window and curtain behind clear glass"
+   },
+   "change": {
+    "setting": "frosted acrylic roughness (lightbox face)",
+    "from": "current (reads clear)",
+    "to": "roughness 0.6-0.7 so the figure behind is fogged and the face glows evenly"
+   },
+   "expected": "An evenly glowing warm panel with a soft dark figure in it; no legible room behind.",
+   "accept": {
+    "region": [
+     527,
+     135,
+     660,
+     310
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The bare source at the back clips and reads as a naked bulb aimed at the lens.",
+   "evidence": {
+    "region": [
+     395,
+     140,
+     412,
+     160
+    ],
+    "measured": "clip_pct 33.5, lum_median 173.8"
+   },
+   "change": {
+    "setting": "the screens' / disc / lamp nearest that position (whichever fixture it is): brightness",
+    "from": "current",
+    "to": "halve its emission (e.g. disc 0.3 -> 0.15 or the relevant spot visible face hidden)"
+   },
+   "expected": "A glowing but unclipped point, no hotspot drawing the eye above the altar.",
+   "accept": {
+    "region": [
+     395,
+     140,
+     412,
+     160
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Nothing tells the viewer there is glass, and the room is empty of air.",
+   "evidence": {
+    "region": [
+     230,
+     300,
+     470,
+     425
+    ],
+    "measured": "floor pool reads cleanly with no reflection overlay; haze 0.003 gives no visible beam"
+   },
+   "change": {
+    "setting": "haze density and glass reflection",
+    "from": "haze 0.003; glass with no visible reflection",
+    "to": "haze 0.006; keep the shopfront glass a true clear pane (IOR 1.5, roughness 0) so the street lamps and kerb show as faint reflections in the dark lower panes"
+   },
+   "expected": "Faint street reflections in the stallriser-level panes and soft cones under the Domes; the dead bottom band gains a little value.",
+   "accept": {
+    "region": [
+     0,
+     420,
+     720,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 8
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the speakers' smoked tint more saturated so they carry the frame's colour",
+   "why": "The speakers' colour is fixed by the configuration (Smoke); only their lighting may change"
+  },
+  {
+   "request": "Remove or move the central shopfront mullion",
+   "why": "The shopfront is part of the room's fixed design; handled by moving the camera (c3) instead"
+  },
+  {
+   "request": "Recut the window lettering so the full name reads in frame",
+   "why": "The etched name's position and size are part of the fixed shopfront; the camera change may bring it fully into frame"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

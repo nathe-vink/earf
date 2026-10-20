@@ -422,7 +422,8 @@ def place(bpy, pdef, templates, shot, root):
                 _decal_nodes(mats[dec['material']], dec, images[ip], M.hex_lin(ink)[:3], pdef['origin_mm'])
             mats_by_flavour[fl] = mats
         mats = mats_by_flavour[fl]
-        T = Matrix.Translation(Vector(inst.get('position', (0, 0, 0)))) @ Matrix.Rotation(math.radians(inst.get('rotate_z', 0)), 4, 'Z')
+        T = (Matrix.Translation(Vector(inst.get('position', (0, 0, 0)))) @ Matrix.Rotation(math.radians(inst.get('rotate_z', 0)), 4, 'Z')
+             @ Matrix.Rotation(math.radians(inst.get('tilt_x', 0)), 4, 'X'))   # tilt_x: the front (-y) down, about the origin
         shown = set(inst.get('options', prod.get('options', [])))
         unfitted = {n for o, names in pdef.get('options', {}).items() if o not in shown for n in names}
         for pname, tpl in templates.items():
@@ -526,7 +527,8 @@ def cutaway(bpy, spec, instances, objs, laminated=None):
     for ob in objs:
         by_inst.setdefault(ob['instance'], []).append(ob)
     for i, inst in enumerate(instances):
-        T = Matrix.Translation(Vector(inst.get('position', (0, 0, 0)))) @ Matrix.Rotation(math.radians(inst.get('rotate_z', 0)), 4, 'Z')
+        T = (Matrix.Translation(Vector(inst.get('position', (0, 0, 0)))) @ Matrix.Rotation(math.radians(inst.get('rotate_z', 0)), 4, 'Z')
+             @ Matrix.Rotation(math.radians(inst.get('tilt_x', 0)), 4, 'X'))   # tilt_x: the front (-y) down, about the origin
         cme = bpy.data.meshes.new(f'cutter#{i}')
         bm = bmesh.new(); bmesh.ops.create_cube(bm, size=1.0); bm.to_mesh(cme); bm.free()
         cutter = bpy.data.objects.new(f'cutter#{i}', cme)

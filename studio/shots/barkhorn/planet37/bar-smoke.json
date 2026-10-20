@@ -6,22 +6,22 @@
  ],
  "camera": {
   "position": [
-   6.55,
-   2.55,
-   1.55
+   6.9,
+   2.75,
+   1.35
   ],
   "target": [
    6.95,
    6.0,
-   0.95
+   1.6
   ],
-  "lens_mm": 26,
+  "lens_mm": 24,
   "level": true,
   "fstop": 4.0,
   "focus": [
    6.9,
-   5.4,
-   0.9
+   5.6,
+   1.6
   ]
  },
  "products": [
@@ -61,9 +61,10 @@
      "position": [
       5.55,
       5.7162,
-      0.02
+      1.1238
      ],
-     "rotate_z": 0.0,
+     "rotate_z": 16.64,
+     "tilt_x": 8.0,
      "hide": [
       "cloth-disc"
      ]
@@ -72,9 +73,10 @@
      "position": [
       8.25,
       5.7162,
-      0.02
+      1.1238
      ],
-     "rotate_z": 0.0,
+     "rotate_z": -16.64,
+     "tilt_x": 8.0,
      "hide": [
       "cloth-disc"
      ]
@@ -118,8 +120,8 @@
     "sphere_w": 6.0,
     "sphere_glow": 1.1,
     "disc_col": "#FFD2A0",
-    "disc_glow": 0.12,
-    "disc_lamp": 4.0,
+    "disc_glow": 0.06,
+    "disc_lamp": 2.0,
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
@@ -135,7 +137,8 @@
     "flat_glow": 0.06,
     "flame": 60.0,
     "windows_lit": 0.5,
-    "spk_niche_strip": 0.8
+    "sconce_w": 10.0,
+    "spk_niche_strip": 3.0
    },
    {
     "kind": "kit",
@@ -200,7 +203,7 @@
     "ceiling": 3.4,
     "lamp_w": 30.0,
     "lamp_k": 2700,
-    "shade_glow": 1.1,
+    "shade_glow": 0.7,
     "noshadow": "shell|liner|skin"
    },
    {
@@ -263,7 +266,7 @@
     ],
     "lamp_w": 6.0,
     "lamp_k": 2700,
-    "shade_glow": 1.1,
+    "shade_glow": 0.7,
     "noshadow": "shell|liner|skin"
    }
   ]
@@ -569,14 +572,14 @@
   "altar0": {
    "type": "spot",
    "position": [
-    16.75,
-    2.05,
-    2.56
+    15.55,
+    1.9,
+    2.45
    ],
    "target": [
     16.55,
-    2.05,
-    0.8500000000000001
+    1.9,
+    1.1
    ],
    "power_w": 90.0,
    "cone_deg": 36.0,
@@ -588,14 +591,14 @@
   "altar1": {
    "type": "spot",
    "position": [
-    16.75,
-    4.05,
-    2.56
+    15.55,
+    4.199999999999999,
+    2.45
    ],
    "target": [
     16.55,
-    4.05,
-    0.8500000000000001
+    4.199999999999999,
+    1.1
    ],
    "power_w": 90.0,
    "cone_deg": 36.0,
@@ -620,6 +623,44 @@
    "cone_deg": 30,
    "blend": 0.7,
    "radius_m": 0.02,
+   "color": 2700,
+   "camera": false
+  },
+  "barspk0": {
+   "type": "spot",
+   "position": [
+    5.55,
+    4.466,
+    3.15
+   ],
+   "target": [
+    5.55,
+    5.7162,
+    1.874
+   ],
+   "power_w": 30.0,
+   "cone_deg": 26.0,
+   "blend": 0.8,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false
+  },
+  "barspk1": {
+   "type": "spot",
+   "position": [
+    8.25,
+    4.466,
+    3.15
+   ],
+   "target": [
+    8.25,
+    5.7162,
+    1.874
+   ],
+   "power_w": 30.0,
+   "cone_deg": 26.0,
+   "blend": 0.8,
+   "radius_m": 0.03,
    "color": 2700,
    "camera": false
   }
@@ -651,7 +692,7 @@
  },
  "materials": {
   "glow": {
-   "strength": 0.35
+   "strength": 0.15
   }
  }
 }
