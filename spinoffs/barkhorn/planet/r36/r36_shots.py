@@ -130,8 +130,8 @@ VIEWS = {
                         # lamps 1 W/m2, the altar spots 150 W on their upper halves; haze 0.005; the Orbs 10 W
                         'camera': {'position': [11.45, 2.2, 1.15], 'target': [16.6, 3.1, 1.0], 'lens_mm': 28,
                                    'level': True, 'fstop': 2.8, 'focus': [14.2, 2.6, 0.7]},
-                        'settings': {'colourway': 'green', 'exposure': 1.8, 'wb': 2700, 'screen_glow': 0.35,
-                                     'spk_irr': 1.0, 'altar_w': 150.0, 'altar_cone': 28.0, 'altar_z': 1.0,
+                        'settings': {'colourway': 'green', 'exposure': 1.5, 'wb': 2700, 'screen_glow': 0.35,
+                                     'spk_irr': 1.0, 'altar_w': 80.0, 'altar_cone': 28.0, 'altar_z': 1.0,
                                      'haze': 0.005, 'sphere_w': 10.0, 'niche_strip': 3.0}},
     'listening-oxblood': {'title': 'the listening zone, oxblood',
                         # after the critics on p2r: a standing dead-centre stare over a chair back, the speakers clipping,
@@ -142,8 +142,8 @@ VIEWS = {
                         # lamps 1 W/m2, the altar spots 150 W on their upper halves; haze 0.005; the Orbs 10 W
                         'camera': {'position': [11.45, 2.2, 1.15], 'target': [16.6, 3.1, 1.0], 'lens_mm': 28,
                                    'level': True, 'fstop': 2.8, 'focus': [14.2, 2.6, 0.7]},
-                        'settings': {'colourway': 'oxblood', 'exposure': 1.8, 'wb': 2700, 'screen_glow': 0.35,
-                                     'spk_irr': 1.0, 'altar_w': 150.0, 'altar_cone': 28.0, 'altar_z': 1.0,
+                        'settings': {'colourway': 'oxblood', 'exposure': 1.5, 'wb': 2700, 'screen_glow': 0.35,
+                                     'spk_irr': 1.0, 'altar_w': 80.0, 'altar_cone': 28.0, 'altar_z': 1.0,
                                      'haze': 0.005, 'sphere_w': 10.0, 'niche_strip': 3.0}},
     'street': {'title': 'the shopfront at night, from the kerb',
                # after the two critics on p1 (5.0, 5.0): over-exposed under a veil, the mullion through the altar, the
@@ -168,7 +168,7 @@ VIEWS = {
              # 3200 K, lower and three-quarter on 50 mm, the spout's nose turned down
              'camera': {'position': [10.25, 1.35, 1.15], 'target': [11.02, 0.25, 0.84], 'lens_mm': 50, 'level': True,
                         'fstop': 2.8, 'focus': [11.0, 0.47, 0.84]},
-             'settings': {'exposure': 0.4, 'haze': 0.0, 'sink_glow': 1.5, 'sink_spot': 40.0, 'wb': 3200}},
+             'settings': {'exposure': 0.4, 'haze': 0.0, 'sink_glow': 0.8, 'sink_spot': 15.0, 'wb': 3200}},
 }
 S.VIEWS = VIEWS
 _shot = S.shot
