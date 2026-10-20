@@ -1,0 +1,119 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/globe-mono/final-black-paper.json",
+ "image": "/home/user/earf/renders/2026-10-20/barkhorn/globe-mono/final-black-paper.png",
+ "seconds": {
+  "build": 0.1,
+  "render": 1115.8
+ },
+ "samples": 256,
+ "size": [
+  1600,
+  1067
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "disc-equator#0": {
+   "part": "disc-equator",
+   "centre_px": [
+    628.6,
+    544.1
+   ],
+   "box_px": [
+    354,
+    348,
+    901,
+    770
+   ],
+   "depth_m": 1.747
+  },
+  "disc-m150#0": {
+   "part": "disc-m150",
+   "centre_px": [
+    628.6,
+    544.1
+   ],
+   "box_px": [
+    438,
+    231,
+    811,
+    885
+   ],
+   "depth_m": 1.747
+  },
+  "disc-m30#0": {
+   "part": "disc-m30",
+   "centre_px": [
+    628.6,
+    544.1
+   ],
+   "box_px": [
+    438,
+    231,
+    811,
+    885
+   ],
+   "depth_m": 1.747
+  },
+  "disc-m90#0": {
+   "part": "disc-m90",
+   "centre_px": [
+    628.6,
+    544.1
+   ],
+   "box_px": [
+    345,
+    281,
+    898,
+    794
+   ],
+   "depth_m": 1.747
+  },
+  "disc-north#0": {
+   "part": "disc-north",
+   "centre_px": [
+    695.0,
+    393.9
+   ],
+   "box_px": [
+    490,
+    245,
+    908,
+    560
+   ],
+   "depth_m": 1.717
+  },
+  "disc-south#0": {
+   "part": "disc-south",
+   "centre_px": [
+    564.5,
+    689.0
+   ],
+   "box_px": [
+    357,
+    530,
+    762,
+    866
+   ],
+   "depth_m": 1.778
+  },
+  "stand#0": {
+   "part": "stand",
+   "centre_px": [
+    634.0,
+    789.1
+   ],
+   "box_px": [
+    564,
+    746,
+    705,
+    834
+   ],
+   "depth_m": 1.804
+  }
+ }
+}

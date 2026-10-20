@@ -1,0 +1,29 @@
+{
+ "pieces": {
+  "acrylic": {
+   "m90": 1,
+   "m30": 2,
+   "m150": 2,
+   "equator": 6,
+   "north": 1,
+   "south": 1
+  },
+  "board": {
+   "m90": 1,
+   "m30": 2,
+   "m150": 2,
+   "equator": 6,
+   "north": 6,
+   "south": 6
+  }
+ },
+ "R": 150.0,
+ "sheets": {
+  "acrylic": 8.0,
+  "board": 2.0
+ },
+ "gap": {
+  "acrylic": 0.15,
+  "board": 0.1
+ }
+}

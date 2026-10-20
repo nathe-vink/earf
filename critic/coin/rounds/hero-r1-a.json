@@ -1,0 +1,3 @@
+{"stage1": {"score": 6.0}, "verdict": "iterate", "score_if_fixed": 8.0,
+ "changes": {"c1": "fstop 11, focus on the globe [0,0,0.002], camera back to 0.28 m at 30 deg", "c2": "top light steeper and stronger (3.0)", "c3": "rake behind and low, 7.0", "c4": "zinc: cooler satin, rough_mul 0.4, finer grain", "c5": "bar lamps low (y 0.6-1.0, z 0.25-0.45, emit 120) so they reflect in the counter as bokeh", "c6": "no hot spot top left: fill from the camera side, sky 0.15", "c7": "WB 3000"},
+ "out_of_scope": "white globe lines (the globe is black-filled by design, after the fill test)"}

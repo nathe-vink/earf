@@ -1,0 +1,114 @@
+{
+ "parts": {
+  "body-plain": [
+   -20.0,
+   -20.0,
+   0.0,
+   20.0,
+   20.0,
+   6.0
+  ],
+  "body-reeded": [
+   -20.0,
+   -20.0,
+   -0.0,
+   20.0,
+   20.0,
+   6.0
+  ],
+  "globe-engraved": [
+   -12.5,
+   -12.2,
+   0.0,
+   12.5,
+   12.3,
+   0.2
+  ],
+  "words": [
+   -14.1,
+   -16.9,
+   5.8,
+   14.1,
+   16.8,
+   5.9
+  ],
+  "underlay": [
+   -12.4,
+   -12.2,
+   -0.1,
+   12.4,
+   12.2,
+   -0.1
+  ],
+  "globe-cast": [
+   -12.5,
+   -12.2,
+   2.5,
+   12.5,
+   12.3,
+   3.5
+  ],
+  "print-ember": [
+   -5.9,
+   -11.7,
+   -0.1,
+   12.0,
+   -2.5,
+   -0.0
+  ],
+  "print-ice": [
+   -11.7,
+   -5.0,
+   -0.1,
+   11.6,
+   6.0,
+   -0.0
+  ],
+  "print-acid": [
+   -12.0,
+   3.2,
+   -0.1,
+   5.8,
+   11.7,
+   -0.0
+  ],
+  "print-haze": [
+   -4.9,
+   -12.3,
+   -0.1,
+   6.6,
+   12.3,
+   -0.0
+  ],
+  "print-poison": [
+   -12.5,
+   -12.2,
+   -0.1,
+   12.5,
+   12.2,
+   -0.0
+  ],
+  "print-dust": [
+   -8.4,
+   -11.1,
+   -0.1,
+   8.1,
+   11.1,
+   -0.0
+  ]
+ },
+ "finishes": {
+  "body-plain": "coin",
+  "body-reeded": "coin",
+  "globe-engraved": "fill",
+  "words": "frost",
+  "underlay": "print-white",
+  "globe-cast": "inlay",
+  "print-ember": "print-ember",
+  "print-ice": "print-ice",
+  "print-acid": "print-acid",
+  "print-haze": "print-haze",
+  "print-poison": "print-poison",
+  "print-dust": "print-dust"
+ }
+}

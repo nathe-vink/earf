@@ -1,0 +1,86 @@
+{
+ "_note": "EARFcoin request column for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "model": "spinoffs/barkhorn/companions/out-earf-coin-column/render/earf-coin-column.glb",
+ "origin_mm": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "materials": {
+  "brass": {
+   "preset": "metal",
+   "color": "#B8945A",
+   "roughness": 0.3
+  },
+  "clear": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#EEF4F4",
+   "radius": 0.05,
+   "roughness": 0.02
+  },
+  "smoke-base": {
+   "preset": "clear_resin",
+   "color": "#FFFFFF",
+   "deep": "#6E6B72",
+   "radius": 0.012,
+   "roughness": 0.03
+  }
+ },
+ "assign": [
+  {
+   "match": "ring",
+   "material": "brass"
+  },
+  {
+   "match": "tube",
+   "material": "clear"
+  },
+  {
+   "match": "base",
+   "material": "smoke-base"
+  }
+ ],
+ "flavours": {
+  "ember": {
+   "deep": "#E77B72",
+   "inlay": "#D64239",
+   "swatch": "#D2382F"
+  },
+  "dust": {
+   "deep": "#F2AC6D",
+   "inlay": "#E77D34",
+   "swatch": "#E5732A"
+  },
+  "acid": {
+   "deep": "#F4D661",
+   "inlay": "#EBBA29",
+   "swatch": "#E9B320"
+  },
+  "poison": {
+   "deep": "#90B57D",
+   "inlay": "#598844",
+   "swatch": "#4F7F3A"
+  },
+  "ice": {
+   "deep": "#8CC0E2",
+   "inlay": "#5499CD",
+   "swatch": "#4A90C8"
+  },
+  "haze": {
+   "deep": "#A78DCC",
+   "inlay": "#7655AB",
+   "swatch": "#6C4BA3"
+  },
+  "fog": {
+   "deep": "#F2F7F7",
+   "inlay": "#F7F9F9",
+   "swatch": "#F6F8F8"
+  },
+  "smoke": {
+   "deep": "#A9A7AD",
+   "inlay": "#78767E",
+   "swatch": "#34323A"
+  }
+ }
+}

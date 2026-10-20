@@ -1,0 +1,102 @@
+{
+ "title": "Black: Smoke cast acrylic, on paper",
+ "size": [
+  900,
+  900
+ ],
+ "product": {
+  "def": "spinoffs/barkhorn/out-globe-mono/earf-globe-mono-acrylic.json",
+  "flavour": "black",
+  "instances": [
+   {
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "rotate_z": 0
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#F2EFEA",
+  "width": 6.0,
+  "front": 3.0,
+  "depth": 1.6,
+  "radius": 0.9,
+  "height": 3.0
+ },
+ "camera": {
+  "position": [
+   0.0,
+   -1.622571745491878,
+   0.8158865192569325
+  ],
+  "target": [
+   0.02,
+   0.02,
+   0.12532498077908638
+  ],
+  "lens_mm": 115.0,
+  "level": false
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#C4C2BE",
+  "horizon": "#CFCDC8",
+  "ground": "#5A5650",
+  "strength": 0.25
+ },
+ "lights": {
+  "spot": {
+   "type": "spot",
+   "position": [
+    -1.5,
+    0.35,
+    0.7803249807790864
+   ],
+   "target": [
+    0.06,
+    -0.02,
+    0.1
+   ],
+   "power_w": 700,
+   "cone_deg": 24,
+   "blend": 0.35,
+   "radius_m": 0.003,
+   "color": 3600,
+   "camera": false
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.6,
+    1.2
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 20,
+    "distance_m": 2.6
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.16032498077908638
+   ],
+   "irradiance": 0.18,
+   "color": "#FFF7EA",
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 4600
+ }
+}

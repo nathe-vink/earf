@@ -1,0 +1,229 @@
+{
+ "title": "EARFcoin, the eight",
+ "size": [
+  1400,
+  300
+ ],
+ "camera": {
+  "position": [
+   0.0,
+   -0.1,
+   1.02
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "lens_mm": 85,
+  "level": false,
+  "fstop": 16.0,
+  "focus": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#ECE8E1",
+  "width": 3.0,
+  "front": 2.0,
+  "depth": 0.8,
+  "radius": 0.5,
+  "height": 2.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "coin",
+    "spots": [
+     {
+      "position": [
+       -0.161,
+       0.0,
+       0.0
+      ],
+      "flavour": "ember",
+      "rotate": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "position": [
+       -0.115,
+       0.0,
+       0.0
+      ],
+      "flavour": "dust",
+      "rotate": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "position": [
+       -0.069,
+       0.0,
+       0.0
+      ],
+      "flavour": "acid",
+      "rotate": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "position": [
+       -0.022999999999999993,
+       0.0,
+       0.0
+      ],
+      "flavour": "poison",
+      "rotate": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "position": [
+       0.022999999999999993,
+       0.0,
+       0.0
+      ],
+      "flavour": "ice",
+      "rotate": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "position": [
+       0.06899999999999998,
+       0.0,
+       0.0
+      ],
+      "flavour": "haze",
+      "rotate": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "position": [
+       0.11500000000000002,
+       0.0,
+       0.0
+      ],
+      "flavour": "fog",
+      "rotate": [
+       0,
+       0,
+       0
+      ]
+     },
+     {
+      "position": [
+       0.161,
+       0.0,
+       0.0
+      ],
+      "flavour": "smoke",
+      "rotate": [
+       0,
+       0,
+       0
+      ]
+     }
+    ],
+    "face": "engraved",
+    "edge": "plain"
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D4D2CE",
+  "horizon": "#DCDAD5",
+  "ground": "#6A665F",
+  "strength": 0.6
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    0.9,
+    0.7
+   ],
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 50,
+    "distance_m": 1.2
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "irradiance": 1.6,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 40,
+    "elevation_deg": 20,
+    "distance_m": 1.4
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "irradiance": 0.5,
+   "color": "#FFF7EA"
+  },
+  "back": {
+   "type": "area",
+   "size_m": [
+    0.8,
+    0.3
+   ],
+   "orbit": {
+    "azimuth_deg": 170,
+    "elevation_deg": 35,
+    "distance_m": 1.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "irradiance": 0.8,
+   "color": "#FFF7EA",
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 192,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5400
+ }
+}

@@ -426,3 +426,201 @@ Open on the hero:
 
 Smoked is the hardest tint for this treatment: lit from within it glows a warm grey, not a colour. The Ember frame
 shows the idea better.
+
+## Round 33: EARFcoin
+
+The owner, 2026-10-20: "One idea I had before bed: EARFcoin. Acrylic coins with the EARF globe on them that can be
+exchanged for a song request. Each guest gets one." The coin is the site's acrylic coin (the colour picker and the
+loader, `icons_real.py --coin`; the Coin ident) made real. Every dimension below is a proposal until the owner signs it.
+
+**The coin** (`coin.py`; the fab kit `earf_coin.py`, a boxed set of eight; `out-earf-coin/`):
+- **Stock:** cast acrylic in the eight speaker tints, 40 across and 6 thick, about 9.0 g (a casino chip is about 10 g).
+  Both edges are rounded 1.5 and polished, so it feels like a coin and not a laser-cut disc.
+- **Two faces, never overlapping:** a tinted coin shows both faces at once. The globe sits inside 25 across; the words
+  sit in a band 15 to 17 from the centre, round the rim. Each reads the right way from the front.
+- **The words:** GOOD FOR ONE SONG over the top and EARF under the bottom, in IBM Plex Mono SemiBold (the site's mono),
+  caps 1.9 tall, engraved 0.12 into the front face. The one alternative: ONE COIN · ONE SONG.
+- **The tints** are the speakers' swatches (`earth._C`), cast so that light through the coin and back off the paper
+  lands on the swatch. Measured on the render of the eight (`coin_tints.py`), every hue is within 4° of its swatch in
+  LCh: Ember 36° against Dust 52°, so it is one red and one orange. Smoke is cast lighter than its swatch (a
+  transparent grey, like Perspex 9T20): at the swatch's density it rendered almost black (L 4) and hid the globe.
+
+**The globe, three ways** (proofs below; all three are modelled, filed and costed):
+- **A, reverse-engraved (recommended):** the brand's stroke globe (`earth.edge_lines`, lines 0.6 wide) laser-engraved
+  0.2 deep into the back face from a mirrored file, so from the front it reads the right way round, 6 mm down in the
+  tint. It works in all eight tints, it is the cheapest, and it is the most acrylic.
+  - **The fill (the lead's test):** flat on white paper, frost alone nearly vanished, and a white paint fill was worse
+    (white seen through the tint against white paper). Filled black, the globe reads in every tint, like the leading in
+    stained glass and like the brand's black stroke mark (`renders/2026-10-20/barkhorn/coin/fills.png`: frost, white,
+    black, left to right, in Ice, Acid and Haze).
+  - So the globe is paint-filled black, except in Smoke, where black would vanish, so Smoke's is white. The words on
+    the front are filled white: they are seen directly, not through the tint. The fill adds about $0.35 a coin.
+- **B, printed in colour:** the six-colour globe (the flush discs) UV-printed on the back of a Fog coin, colour first
+  and a white underlay over it (choked 0.08 so no white halo shows), then sealed. It is the most legible and the most
+  "brand". But it is clear only, so the guest's colour is lost, and a print can scuff.
+- **C, cast in:** the one-colour mosaic cut from 1 mm tinted sheet and set mid-thickness in a clear cast coin. The
+  globe floats in the guest's colour. It is premium, and about four times the cost.
+
+**The edge:** plain (rounded and polished) or reeded: 100 grooves 0.3 deep milled across it, like money. Reeding
+catches the light along the edge and reads as currency in the hand; it costs about $0.45 a coin more at 1,000.
+**Recommended: A, black-filled, with a reeded edge.**
+
+![The concept sheet](../../../renders/2026-10-20/barkhorn/coin/sheet-proof.png)
+
+**The fab kit** (`out-earf-coin/`, `.venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/earf_coin.py
+--out spinoffs/barkhorn/companions/out-earf-coin`; it passes its checks):
+- **Laser files** (`out-earf-coin/laser/`, written by `coin.py`, SVG and DXF in mm, layers named):
+  - `coin-A-1-cut`: the 40 mm circle.
+  - `coin-A-2-back-globe-MIRRORED`: the globe, mirrored. It's run with the coin face down, so it reads right from the
+    front.
+  - `coin-A-3-front-words`: the words, as read. Both engravings are paint-filled (the fill is a step, not a layer).
+  - `coin-A-all-layers`: all three, registered.
+  - `nest-600x400`: 104 coins on a 600 × 400 bed, cut, front and back layers registered.
+  - B's print file (each colour and the white underlay, mirrored) and C's inlay cut file, for the faces not chosen.
+- **The route:**
+  1. Cut the sheet's coins with its masking left on.
+  2. On a CNC router, hold 24 coins in a vacuum fixture. Round both arrises 1.5 with a roundover cutter, then mill the
+     100 reeds (a 0.9 ball cutter, 0.3 deep).
+  3. Vapour-polish the edges. Tumbling would strip the masking, and a flame can craze the acrylic. The faces stay the
+     cast sheet's own, under the masking until the end.
+  4. Put the coins back in the sheet's skeleton (the skeleton is the jig) and engrave the words through the front's
+     masking.
+  5. Flip each coin over in its own hole and engrave the mirrored globe through the back's masking.
+  6. Paint-fill both engravings through the masking: the globe black (Smoke's white) and the words white. Scrape
+     flush and dry.
+  7. Peel, check, bag.
+- **The request column** (`earf_coin_column.py`, `out-earf-coin-column/`, it passes its checks): a water-clear cast tube
+  50 × 4 wall, 210 long (42 bore: 1 mm round a coin; holds 33), bonded into a Smoke acrylic base 96 × 24 with a brass
+  cap ring.
+  - Coins drop in at the top. A slot 6.8 tall through the base under the tube lets one coin out at the front, and the
+    tube holds the next one back.
+  - A finger through the notch at the back pushes the lowest coin out, so the queue plays from the bottom up.
+  - **$322 one-off** at the kit's shop rates (`out-earf-coin-column/bom.md`).
+- **BOM:** a boxed set of eight is **$33** at the kit's rates (`out-earf-coin/bom.md`, sheet plus the shop's work as
+  estimated lines, plus a $9 box). Per coin, by run (`coin.py --costs`; estimates from shop rates, not quotes):
+
+| a coin (the pick), USD | 500 | 1,000 | 5,000 |
+|---|---|---|---|
+| sheet | 0.26 | 0.26 | 0.26 |
+| laser | 1.40 | 1.17 | 0.93 |
+| edge | 1.33 | 1.11 | 0.89 |
+| paint fill | 0.45 | 0.35 | 0.25 |
+| polish | 0.40 | 0.30 | 0.20 |
+| check and bag | 0.15 | 0.15 | 0.15 |
+| setup | 1.20 | 0.60 | 0.12 |
+| scrap 5 % | 0.26 | 0.20 | 0.14 |
+| **total** | **5.46** | **4.14** | **2.95** |
+
+| face, edge | 500 coins | 1,000 coins | 5,000 coins |
+|---|---|---|---|
+| engraved, reeded | $5.46 | $4.14 | $2.95 |
+| engraved, plain | $4.93 | $3.70 | $2.60 |
+| printed, reeded | $6.35 | $4.72 | $3.20 |
+| cast, reeded | $18.42 | $13.64 | $9.17 |
+
+- **Retail (merch):** a boxed set of eight (a Smoke acrylic slide-lid box, the coins standing in spectrum order)
+  costs about $42 to make at 1,000; **$95** proposed.
+
+**The ritual.** A bowl of all eight colours stands at the door, and each guest picks theirs. That coin is their one
+request. At the decks, Ginza's "Sorry, no requests" card becomes a small Smoke acrylic block engraved **ONE COIN, ONE
+SONG.** (the alternative: YES, REQUESTS. ONE EACH.). A guest hands over their coin with a song. It drops into the
+request column, and the queue stands there as a column of colours, played from the bottom up: the DJ pushes the lowest
+coin out of the slot when its song comes on. The spent coins go back into the bowl at the door, or home in a pocket as
+a keepsake, which is the point: a bar token you'd want to keep.
+
+**For Planet** (`studio/engine/kit_ext/earf_coin.py`; every coin render here was made through it):
+- `coin`: spots with flavour, face (`engraved` the pick, `printed`, `cast` or `blank`), edge, `rotate`, `flip`.
+- `stack`: a loose stack, `n` coins, `flavours` cycled from the bottom.
+- `fan`: coins dealt along an arc, each resting on the one before. The tilt is solved from that contact, so it
+  settles at about 11.5° for a 30 mm spread.
+- `column`: the request column with its queue (`coins`, from the bottom), and the next coin pushed `out` of its slot.
+- `bowl`: the bowl at the door, `n` coins in it in the eight tints.
+- `flavour_materials` overrides one tint's materials. Checked: `renders/2026-10-20/barkhorn/coin/kit-check.png` (a bowl and a stack). The GLBs are committed (`out-coin-study/render/`,
+  `out-coin-column/render/`).
+
+**The renders** (`coin_shots.py`, through Planet's kit piece; `renders/2026-10-20/barkhorn/coin/`):
+- the hero: one Acid coin on a bar's zinc in low light, the bar's lamps in the counter's sheen (1600 × 1067);
+- the eight: in spectrum order, dealt in a fan on paper (1600 × 1067);
+- the request column: beside an R3 Float, a queue of eighteen in mixed colours, two waiting on the walnut
+  (1200 × 800).
+
+![The finals](../../../renders/2026-10-20/barkhorn/coin/sheet-finals.png)
+
+**The read test:** each final at 600 px, shown to a fresh judge told nothing (`critic/coin/READTEST.md`). All three
+pass:
+- the hero: "a single thick, translucent amber coin or token… with a knurled (reeded) edge… an engraved wire-frame
+  globe with "GOOD FOR ONE SONG" around the top edge and "EARF"";
+- the eight: "eight translucent, coin-like discs… in rainbow order… a dark line-drawn emblem… a faceted globe or gem";
+- the column: "a clear acrylic turntable… beside a tall clear… tube… filled with a stack of coloured discs… like coins
+  or poker chips".
+
+**Critic** (`critic/LOG.md`, `critic/coin/rounds/`): two fresh critics a round on the hero. Three rounds is the
+family's limit, so I stopped there.
+
+| round | A | B |
+|---|---|---|
+| 1 | 6.0 | 5.5 |
+| 2 | 6.0 | 6.0 |
+| 3 | 5.0 | 5.5 |
+
+- **The final is round 2**, the best of the three; round 3 is kept as `hero-r3-napkin.png`.
+- **The brief's gate:** A has two passes in a row each gaining under 0.5. B gained +0.5, then lost 0.5.
+- **Round 3:** I put a white cocktail napkin under the coin, which answered round 2 (the face glowed and the globe
+  read). Both new critics wanted it gone, and the shallow focus back. The critics pulled against each other.
+- **One finding changed the product:** frost or a white fill all but vanished on paper, so the globe is filled black
+  (the lead's test).
+- **Open on the hero:** the face is still a deep amber, darker than the critics want. The zinc is a plain satin
+  surface: the photographed metal plate read as concrete, then as camouflage, at coin scale.
+
+## Round 33b: the one-colour globes as real objects
+
+The owner, 2026-10-20: "Is it possible to actually build the paper and black globes as well? Those could be cool with
+light cast on them. Maybe not." They are built as the colour globe is (`../globe_mono.py`, after `globe_object.py`):
+- **The six discs:** the three parallels and three meridians, leaning 23.4°, each slotted round those before it. The
+  meridian facing us stays whole.
+- **The light:** one hard raking spot and a little fill, so the rims draw their shadows across the discs and onto the
+  ground.
+- **The sizes:** a 300 mm desk globe, rendered; a 1 m bar piece, costed.
+
+![The one-colour globes](../../../renders/2026-10-20/barkhorn/globe-mono/sheet-proof.png)
+
+- **Black, in Smoke cast acrylic** (the Smoke speaker's own, 8 mm): the one that is the drawing. The faces are smoked
+  windows, and each edge, seen along its disc, goes dark: the drawing's dark rims. Its shadow on the ground is the
+  globe again, in line. On night it needs a rim light from behind or it disappears.
+- **Paper (i), opal cast acrylic, 8 mm:** a white sculpture of planes that glows warm where the spot falls. It is not
+  see-through, so it reads as a solid ball with fins more than as the drawing. It costs as much as the black, for less.
+- **Paper (ii), cotton board, 2 mm:** the same sculpture, matte, with the crispest shadows. Half-lit on night it is the
+  most dramatic of the three. Cheap, and fragile.
+
+**Build notes:**
+- **Slots** are the sheet's measured thickness plus clearance. Cast acrylic is ±10 % on its nominal, so measure the
+  batch.
+  - 8 mm acrylic: slot = measured + 0.3 (0.15 a side), cemented with a thickened solvent cement (Weld-On 16 or Acrifix
+    1R 0192) in a jig. The edges are diamond-polished before assembly.
+  - 2 mm board: slot = measured + 0.2, a push fit, then a line of PVA.
+  - At 1 m in 20 mm sheet: slot = measured + 0.5, cemented.
+- **Pieces:** the six discs can't be one set of half-lap slots, because three meridians cross at the poles. As modelled,
+  the facing meridian is whole, the other two are halves, the equator is six pieces and each parallel is six: 23
+  pieces, which want cement (or glue for the board), not friction alone. A friction-fit version is possible as a kit
+  with one meridian and the three parallels on half-laps, the other two meridians as quarter discs slotted onto it; that
+  is a different drawing (`globe_mono.py` builds the cemented one).
+- **Desk globe, 300 across** (R 150), on a blackened-steel ring 80 across:
+  - Black or opal: 0.46 m² of 8 mm sheet with offcut, about **$70**; cutting $60; polishing the edges $80; cementing
+    23 pieces in a jig, about 3 hours, $180 (the jig $150 once); the ring $40. About **$450 to $550 one-off, $250 in a
+    run of 50**. Retail **$650 to $850**.
+  - Board: two sheets of museum board $30, cutting $25, gluing $90, the ring $40: about **$185 one-off**. Retail $195
+    to $245, as a kit for less.
+- **Bar piece, 1 m across** (R 500):
+  - Black in 20 mm Smoke (the cabinets' stock): 5.1 m² with offcut, about **$1,950** of sheet; about **90 kg**, so it
+    wants a steel cradle and a plinth, or 12 mm sheet (about 55 kg). With cutting $600, polishing $500, assembly $800
+    and the cradle $400: **about $4,300**.
+  - Paper at bar scale: 10 mm honeycomb paper board (Re-board): light (about 8 kg), crisp, about **$600** all in.
+
+**Is it worth building?** Yes, the black one. It is the only one that is the mark as an object: see-through faces,
+dark rims, and a shadow that draws the globe again on the wall or the counter. Where:
+- **The back bar:** a 1 m Smoke globe under a hard spot, its shadow thrown up the wall behind. Planet's signature.
+- **The shop:** the 300 mm desk globe, $650 to $850.
+- **The site's dark band:** a turntable shot of it, lit from behind.
+
+The paper ones are good sculpture but not the drawing (they're opaque). Build the board one first as a $185 prototype
+to judge the scale. Skip the opal.
