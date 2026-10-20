@@ -84,3 +84,12 @@ The sulphur vents and fumes barely register at this distance.
 - The planks repeat one texture, the posts are identical, and the stump is a lone extruded pillar. The sign is too clean and doesn't sit on its post convincingly.
 
 **Five passes** have scored 4.5, 4.25, 4.25, 3.75 and 4.25. N2 has never left 3.75–4.5, against a gate of 6.
+
+## Calibration (the lead, 2026-10-20)
+
+The live Poison A4 (`element31/poison_a4.png`, 653ad29) at 1200 × 800 went through the same two realism critics with the same prompt and scored **4.5 and 4.5**. Their tells:
+- The toadstools read as props.
+- The speaker sits on a moss mat that looks like a decal, with no contact shadow.
+- The litter tiles, the ferns repeat as cards, and the god-rays and foxgloves look too tidy.
+
+The gate becomes: N2's realism at least 0.5 above A4's (so at least 5.0), the read test, and no fake-looking elements. N2's proof 5 (4.25) does not meet it.
