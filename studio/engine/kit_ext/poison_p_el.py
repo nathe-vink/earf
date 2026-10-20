@@ -397,3 +397,130 @@ def tape(bpy, name, p, kit):
     ob = _obj(bpy, name, bm, mat, {}, smooth=False)
     ob.location = (0, 0, 0)
     return [ob]
+
+
+# --- outdoors (round 31g) --------------------------------------------------------------------------------------
+def plume_at(bpy, name, p, kit):
+    """Smoke's plume (smoke_b_el.plume), its foot at height `z` instead of the ground (a vent down in a crater): the
+    volume's shading is in its object's own frame, so moving the object moves the plume with it."""
+    import smoke_b_el
+    obs = smoke_b_el.plume(bpy, name, p, kit)
+    for ob in obs:
+        ob.location.z += p.get('z', 0.0)
+    return obs
+
+
+def algae_water(bpy, name, p, kit):
+    """A still lake choked with a cyanobacteria bloom: a plane `size` [w, d] at `position`, dark glossy water under a
+    paint-like scum of vivid green that gathers in swirls and streaks (warped noise, stretched along `drift` degrees),
+    thick and matte where it has massed, thinning to an oily film and open water (`cover` 0-1 how much is scum). The
+    scum's greens `greens` [deep, mid, bright]; `streak` how stretched the swirls are."""
+    w, d = p.get('size', [80.0, 80.0])
+    m, nt, b = _node_mat(bpy, f'{name}-mat'); L = nt.links.new
+    tc = nt.nodes.new('ShaderNodeTexCoord')
+    mp = nt.nodes.new('ShaderNodeMapping')
+    mp.inputs['Rotation'].default_value = (0, 0, math.radians(p.get('drift', 25.0)))
+    st = p.get('streak', 3.0)
+    mp.inputs['Scale'].default_value = (1.0 / st, 1.0, 1.0)
+    L(tc.outputs['Object'], mp.inputs['Vector'])
+    def noise(scale, detail, dist, rough=0.6):
+        n = nt.nodes.new('ShaderNodeTexNoise')
+        n.inputs['Scale'].default_value = scale; n.inputs['Detail'].default_value = detail
+        n.inputs['Distortion'].default_value = dist; n.inputs['Roughness'].default_value = rough
+        L(mp.outputs['Vector'], n.inputs['Vector'])
+        return n
+    big = noise(p.get('scale', 0.18), 6.0, 2.5)            # the masses and their swirling edges
+    fine = noise(2.2, 8.0, 0.8)                           # clots and pinholes in the scum
+    mix = nt.nodes.new('ShaderNodeMath'); mix.operation = 'MULTIPLY_ADD'
+    L(fine.outputs['Fac'], mix.inputs[0]); mix.inputs[1].default_value = 0.25; L(big.outputs['Fac'], mix.inputs[2])
+    cover = p.get('cover', 0.6)
+    cut = nt.nodes.new('ShaderNodeMapRange'); cut.interpolation_type = 'SMOOTHSTEP'
+    cut.inputs['From Min'].default_value = 0.78 - cover * 0.45; cut.inputs['From Max'].default_value = 0.86 - cover * 0.45
+    L(mix.outputs['Value'], cut.inputs['Value'])
+    deep, midc, bright = p.get('greens', ['#1E4A12', '#3F8A1E', '#7DBE2A'])
+    ramp = nt.nodes.new('ShaderNodeValToRGB')
+    el = ramp.color_ramp.elements
+    el[0].position = 0.0; el[0].color = (*_hex(deep), 1)
+    el[1].position = 1.0; el[1].color = (*_hex(bright), 1)
+    e = el.new(0.5); e.color = (*_hex(midc), 1)
+    tone = nt.nodes.new('ShaderNodeMapRange'); L(fine.outputs['Fac'], tone.inputs['Value'])
+    tone.inputs['From Min'].default_value = 0.3; tone.inputs['From Max'].default_value = 0.75
+    L(tone.outputs['Result'], ramp.inputs['Fac'])
+    # open water: dark, glossy, a little green-brown
+    water = (*_hex(p.get('water', '#141A10')), 1)
+    col = nt.nodes.new('ShaderNodeMix'); col.data_type = 'RGBA'
+    L(cut.outputs['Result'], col.inputs['Factor']); col.inputs['A'].default_value = water; L(ramp.outputs['Color'], col.inputs['B'])
+    L(col.outputs['Result'], b.inputs['Base Color'])
+    rgh = nt.nodes.new('ShaderNodeMapRange'); L(cut.outputs['Result'], rgh.inputs['Value'])
+    rgh.inputs['To Min'].default_value = 0.03; rgh.inputs['To Max'].default_value = 0.55
+    L(rgh.outputs['Result'], b.inputs['Roughness'])
+    b.inputs['Specular IOR Level'].default_value = 0.5
+    bump = nt.nodes.new('ShaderNodeBump'); bump.inputs['Strength'].default_value = 0.35; bump.inputs['Distance'].default_value = 0.004
+    hgt = nt.nodes.new('ShaderNodeMath'); hgt.operation = 'MULTIPLY'
+    L(cut.outputs['Result'], hgt.inputs[0]); L(fine.outputs['Fac'], hgt.inputs[1])
+    L(hgt.outputs['Value'], bump.inputs['Height']); L(bump.outputs['Normal'], b.inputs['Normal'])
+    bm = bmesh.new()
+    vs = [bm.verts.new(c) for c in ((-w / 2, -d / 2, 0), (w / 2, -d / 2, 0), (w / 2, d / 2, 0), (-w / 2, d / 2, 0))]
+    bm.faces.new(vs)
+    ob = _obj(bpy, name, bm, m, {'position': p.get('position', [0, 0, 0])}, smooth=False)
+    return [ob]
+
+
+def sign_path():
+    """The shore sign's face: weathered white enamel, a red DANGER band, the warning (generic, no agency's mark)."""
+    from PIL import Image, ImageDraw
+    os.makedirs(LABEL_DIR, exist_ok=True)
+    path = os.path.join(LABEL_DIR, 'sign-algae.png')
+    if os.path.exists(path):
+        return path
+    W, H = 900, 640
+    img = Image.new('RGB', (W, H), '#EDEBE2'); d = ImageDraw.Draw(img)
+    d.rectangle((0, 0, W - 1, 170), fill='#C3161C')
+    d.rectangle((10, 10, W - 11, H - 11), outline='#1A1A1A', width=8)
+    _centre(d, 'DANGER', 22, _font(SANS, 130), '#FFFFFF', W)
+    cx, cy, r = 150, 400, 110                             # a warning triangle
+    d.polygon([(cx, cy - r), (cx + r * 1.05, cy + r * 0.75), (cx - r * 1.05, cy + r * 0.75)], fill='#1A1A1A')
+    d.polygon([(cx, cy - r + 26), (cx + r * 0.8, cy + r * 0.6), (cx - r * 0.8, cy + r * 0.6)], fill='#F2C31A')
+    d.text((cx - 14, cy - 56), '!', font=_font(SANS, 120), fill='#1A1A1A')
+    def fit(text, y, size, fill):                         # each line shrunk to the space right of the triangle
+        while size > 14 and d.textbbox((0, 0), text, font=_font(SANS, size))[2] > W - 300 - 36:
+            size -= 2
+        d.text((300, y), text, font=_font(SANS, size), fill=fill)
+    fit('TOXIC ALGAE', 215, 88, '#1A1A1A')
+    fit('AVOID CONTACT', 330, 70, '#1A1A1A')
+    fit('with the water. Keep children', 440, 34, '#222222')
+    fit('and dogs out of the lake.', 486, 34, '#222222')
+    img = _age(img, 21, 1.4)
+    img.save(path)
+    return path
+
+
+def sign(bpy, name, p, kit):
+    """A weathered warning sign on a timber post at the water's edge: the board `size` [w, h] m, its foot at
+    `position`, turned `rotate` (degrees about z; the face looks along -y unturned), leaning `lean` degrees."""
+    bw, bh = p.get('size', [0.6, 0.43])
+    post_h = p.get('post', 1.25)
+    wood = assets.pbr(bpy, p.get('wood', 'weathered_planks'), '2k', scale=0.5, coords='object')
+    face = _image_mat(bpy, f'{name}-face', sign_path(), 0.55)
+    bm = bmesh.new()
+    g = bmesh.ops.create_cube(bm, size=1.0)
+    for v in g['verts']:
+        v.co = Vector((v.co.x * 0.08, v.co.y * 0.08 + 0.05, (v.co.z + 0.5) * post_h))
+    fb = bmesh.new(); uv = fb.loops.layers.uv.new('UVMap')
+    z0 = post_h - bh - 0.04
+    vs = [fb.verts.new(c) for c in ((-bw / 2, -0.001, z0), (bw / 2, -0.001, z0), (bw / 2, -0.001, z0 + bh), (-bw / 2, -0.001, z0 + bh))]
+    f = fb.faces.new(vs)
+    for loop, (u, v) in zip(f.loops, ((0, 0), (1, 0), (1, 1), (0, 1))):
+        loop[uv].uv = (u, v)
+    back = bmesh.new()
+    g2 = bmesh.ops.create_cube(back, size=1.0)
+    for v in g2['verts']:
+        v.co = Vector((v.co.x * bw, v.co.y * 0.012 + 0.006, z0 + (v.co.z + 0.5) * bh))
+    M = (Matrix.Translation(Vector(p.get('position', [0, 0, 0]))) @ Matrix.Rotation(math.radians(p.get('rotate', [0, 0, 0])[2]), 4, 'Z')
+         @ Matrix.Rotation(math.radians(p.get('lean', 4.0)), 4, 'X'))
+    out = []
+    for k, (b_, mat, sm) in enumerate(((bm, wood, False), (back, wood, False), (fb, face, False))):
+        for v in b_.verts:
+            v.co = M @ v.co
+        ob = _obj(bpy, f'{name}-{k}', b_, mat, {}, smooth=sm); ob.location = (0, 0, 0); out.append(ob)
+    return out
