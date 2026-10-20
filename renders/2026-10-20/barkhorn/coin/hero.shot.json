@@ -1,0 +1,271 @@
+{
+ "title": "EARFcoin on the zinc",
+ "size": [
+  1600,
+  1067
+ ],
+ "camera": {
+  "position": [
+   0.035,
+   -0.155,
+   0.125
+  ],
+  "target": [
+   0.0,
+   0.002,
+   0.004
+  ],
+  "lens_mm": 100,
+  "level": false,
+  "fstop": 2.8,
+  "focus": [
+   0.0,
+   -0.002,
+   0.004
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "pbr",
+    "texture": "metal_plate_02",
+    "res": "2k",
+    "tint": "#8E949A",
+    "tint_mix": 0.55,
+    "rough_mul": 0.75,
+    "tex_scale": 0.6,
+    "size": [
+     2.4,
+     1.6,
+     0.03
+    ],
+    "position": [
+     0.0,
+     0.5,
+     -0.03
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "coin",
+    "spots": [
+     {
+      "position": [
+       0.0,
+       0.0,
+       0.0
+      ],
+      "rotate": [
+       0,
+       0,
+       -14
+      ]
+     }
+    ],
+    "flavour": "acid",
+    "face": "engraved",
+    "edge": "reeded"
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 40.0,
+    "scale": 0.03,
+    "position": [
+     -0.5,
+     1.6,
+     0.7
+    ],
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 40.0,
+    "scale": 0.03,
+    "position": [
+     -0.12,
+     2.0,
+     0.92
+    ],
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 40.0,
+    "scale": 0.03,
+    "position": [
+     0.3,
+     1.8,
+     0.78
+    ],
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 40.0,
+    "scale": 0.03,
+    "position": [
+     0.62,
+     2.3,
+     1.02
+    ],
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 40.0,
+    "scale": 0.03,
+    "position": [
+     0.06,
+     2.5,
+     1.1
+    ],
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 40.0,
+    "scale": 0.03,
+    "position": [
+     -0.85,
+     2.3,
+     0.92
+    ],
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 40.0,
+    "scale": 0.03,
+    "position": [
+     0.95,
+     1.9,
+     0.8
+    ],
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "glow",
+    "color": "#FFB070",
+    "emit": 0.6,
+    "size": [
+     4.0,
+     0.02,
+     0.5
+    ],
+    "position": [
+     0.0,
+     2.6,
+     0.75
+    ],
+    "shadow": false
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#1C1B1A",
+  "horizon": "#2A2622",
+  "ground": "#141210",
+  "strength": 0.25
+ },
+ "lights": {
+  "rake": {
+   "type": "area",
+   "size_m": [
+    0.25,
+    0.08
+   ],
+   "position": [
+    -0.3,
+    0.28,
+    0.07
+   ],
+   "target": [
+    0.0,
+    0.002,
+    0.004
+   ],
+   "irradiance": 4.0,
+   "color": 2900,
+   "camera": false
+  },
+  "top": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.4
+   ],
+   "position": [
+    0.1,
+    0.25,
+    0.55
+   ],
+   "target": [
+    0.0,
+    0.002,
+    0.004
+   ],
+   "irradiance": 0.9,
+   "color": 3400,
+   "camera": false
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.4
+   ],
+   "orbit": {
+    "azimuth_deg": 25,
+    "elevation_deg": 18,
+    "distance_m": 0.8
+   },
+   "target": [
+    0.0,
+    0.002,
+    0.004
+   ],
+   "irradiance": 0.12,
+   "color": 3200,
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 384,
+  "adaptive": 0.008,
+  "denoise": true,
+  "clamp": 12,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 3300
+ }
+}
