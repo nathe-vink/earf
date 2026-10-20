@@ -51,7 +51,7 @@ def shot(ground):
         spots.append({'position': [x, 0.0, (D / 2) * math.sin(math.radians(tilt))], 'flavour': fl,
                       'rotate': [round(rx, 2), round(ry, 2), round(rnd.uniform(0, 360), 1)]})
     props = [{'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'coin', 'spots': spots, 'face': 'blank',
-              'edge': 'reeded', **({'rim_glow': 4.0, 'face_glow': FACE_GLOW} if night else {})}]
+              'edge': 'reeded', **({'rim_glow': 1.6, 'face_glow': FACE_GLOW} if night else {})}]
     return {'title': f'The site\'s coins, {ground}', 'size': SIZE,
             'camera': {'position': [0.0, -0.0005, H], 'target': [0.0, 0.0, 0.0], 'lens_mm': round(LENS, 2), 'level': False,
                        'fstop': 0},
@@ -97,6 +97,10 @@ def tiles(ground, src):
             coef, *_ = np.linalg.lstsq(A[g], t[..., c][g], rcond=None)
             fit = A @ coef
             out[..., c] = t[..., c] / fit * target[c] if ground == 'paper' else t[..., c] - fit + target[c]
+        # and beyond the coin and its contact shadow or glow, exactly the page's ground (a soft edge from 0.45 to 0.49
+        # of the square), so no tile shows as a box once multiplied or screened onto the page
+        m = np.clip((rr - 0.45) / 0.04, 0, 1)[..., None]
+        out = out * (1 - m) + target * m
         f = os.path.join(OUT, f'{fl}-{ground}.png')
         Image.fromarray(np.clip(out, 0, 255).round().astype(np.uint8)).save(f)
         made.append(f)

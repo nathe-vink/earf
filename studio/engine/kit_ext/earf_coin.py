@@ -123,10 +123,10 @@ def _rim(bpy, kit, name, M, fl, strength, face=0.0):
     objs = []
     # both under the rounded rim (it starts 1.5 in), where the rim's curve hides them from above; the shield nearly
     # the rim's whole height there, so no light gets round it into the face
-    r0, r1 = D / 2 - 0.00045, D / 2 - 0.00025
+    r0, r1 = D / 2 - 0.0016, D / 2 - 0.00025              # 1.35 wide: a bold ring at the rim, as round 30's
     for nm, (a, b), (z0, z1), mat in (
-            ('glow', (r0, r1), (0.0012, T - 0.0012), kit.material(bpy, 'glow', GLOW[fl], {'emit': strength})),
-            ('shield', (r0 - 0.00014, r0 - 0.00004), (0.00036, T - 0.00036), kit.material(bpy, 'gloss', '#050505', {'roughness': 0.6}))):
+            ('glow', (r0, r1), (0.0016, T - 0.0016), kit.material(bpy, 'glow', GLOW[fl], {'emit': strength})),
+            ('shield', (r0 - 0.00014, r0 - 0.00004), (0.0004, T - 0.0004), kit.material(bpy, 'gloss', '#050505', {'roughness': 0.6}))):
         bm = bmesh.new()
         kit._lathe(bm, [(a, z0), (b, z0), (b, z1), (a, z1), (a, z0)], seg=128)
         ob = kit.finish(bpy, f'{name}-{nm}', bm, {}, smooth=True, mat=mat)[0]
@@ -135,7 +135,7 @@ def _rim(bpy, kit, name, M, fl, strength, face=0.0):
         objs.append(ob)
     if face:                         # below 0: a black disc, the face held dark (Smoke: the rim's light, trapped
         bm = bmesh.new()             # between the polished faces, otherwise fills the whole coin)
-        rf = D / 2 - 0.0016
+        rf = D / 2 - 0.0019
         kit._lathe(bm, [(0.0, T / 2 - 0.0002), (rf, T / 2 - 0.0002), (rf, T / 2 + 0.0002), (0.0, T / 2 + 0.0002)], seg=128)
         mat = (kit.material(bpy, 'glow', GLOW[fl], {'emit': face}) if face > 0
                else kit.material(bpy, 'felt', '#050505'))
