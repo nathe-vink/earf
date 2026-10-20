@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   11.3,
-   3.05,
-   1.2
+   11.8,
+   2.5,
+   1.15
   ],
   "target": [
    16.4,
-   3.05,
-   1.05
+   3.2,
+   1.0
   ],
-  "lens_mm": 30,
+  "lens_mm": 35,
   "level": true,
   "fstop": 4.0,
   "focus": [
@@ -117,7 +117,7 @@
     "colourway": "neutral",
     "dome_w": 30.0,
     "dome_glow": 1.1,
-    "sphere_w": 6.0,
+    "sphere_w": 3.0,
     "sphere_glow": 0.55,
     "disc_col": "#FFD2A0",
     "disc_glow": 0.06,
@@ -268,7 +268,7 @@
       0.66
      ]
     ],
-    "lamp_w": 6.0,
+    "lamp_w": 3.0,
     "lamp_k": 2700,
     "shade_glow": 0.15,
     "noshadow": "shell|liner|skin"
@@ -322,7 +322,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 4.0,
+   "irradiance": 10.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -368,7 +368,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 4.0,
+   "irradiance": 10.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -583,9 +583,9 @@
    "target": [
     16.55,
     1.9,
-    1.4
+    1.1
    ],
-   "power_w": 240.0,
+   "power_w": 220.0,
    "cone_deg": 30.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -602,9 +602,9 @@
    "target": [
     16.55,
     4.199999999999999,
-    1.4
+    1.1
    ],
-   "power_w": 240.0,
+   "power_w": 220.0,
    "cone_deg": 30.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -770,7 +770,7 @@
    6.05,
    3.32
   ],
-  "density": 0.008,
+  "density": 0.003,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -781,7 +781,7 @@
   "clamp": 10,
   "bounces": 10,
   "view": "AgX",
-  "look": "AgX - Medium High Contrast",
+  "look": "AgX - High Contrast",
   "exposure": 2.3,
   "white_balance_k": 2700,
   "white_balance_tint": 0.0

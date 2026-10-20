@@ -160,11 +160,15 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # p3 (p2 3.5, 3.5: the seated 40 mm framed only the niche, no chairs, Orbs or carpet, the right speaker cut;
           # the horns black; the plinth tops a hot line): on the zone's axis behind a tub chair, 30 mm; the spots
           # 240 W at 30 deg aimed higher; the Orbs 6 W, glow 0.55; the light plinths half; haze 0.012
-          'camera': {'position': [11.3, 3.05, 1.2], 'target': [16.4, 3.05, 1.05], 'lens_mm': 30, 'level': True,
+          # p4 (p3 4.5, 4.0: a milky veil, no blacks (p1 20); the pair's upper bodies darker than the wall; the Orb
+          # blows its table (15 %); a dead-centre elevation): off axis but far enough back to keep a chair and the Orb
+          # table (p2's seated 40 mm lost them); haze 0.003, AgX High Contrast; the spots on the cabinets' middles,
+          # 220 W; the linked back lamps 10 W/m2; the Orbs 3 W
+          'camera': {'position': [11.8, 2.5, 1.15], 'target': [16.4, 3.2, 1.0], 'lens_mm': 35, 'level': True,
                      'fstop': 4.0, 'focus': [16.4, 3.05, 1.0]},
-          'settings': {'exposure': 2.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 240.0,
-                       'altar_cone': 30.0, 'altar_z': 1.2, 'haze': 0.008, 'sphere_w': 6.0, 'sphere_glow': 0.55,
-                       'niche_strip': 5.0, 'plinth': 0.5}}
+          'settings': {'exposure': 2.3, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 220.0,
+                       'altar_cone': 30.0, 'altar_z': 0.9, 'haze': 0.003, 'sphere_w': 3.0, 'sphere_glow': 0.55,
+                       'niche_strip': 5.0, 'plinth': 0.5, 'spk_back': 10.0, 'look': 'AgX - High Contrast'}}
 NAMES = {'smoke': 'Smoke', 'ember': 'Ember', 'ice': 'Ice', 'mixed': 'Mixed'}
 VIEWS = {}
 for c in RP.CONFIGS:
