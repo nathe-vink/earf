@@ -392,7 +392,8 @@ def occluder(bpy, name, p, kit):
 def ridge(bpy, name, p, kit):
     """A distant fold of land: a strip `width` metres wide and `depth` deep at `position` [x, y], its crest rising
     `height` [min, max] metres along a noise profile (`scale` metres a swell, `seed`), falling away behind; matte in
-    `color`, a touch lighter and bluer the further it stands (aerial perspective is the set's haze)."""
+    `color`, a touch lighter and bluer the further it stands (aerial perspective is the set's haze). `gullies` metres of
+    ridged noise cut into it (`gully_scale` metres apart) give a near fold its relief."""
     w = p.get('width', 3000.0); d = p.get('depth', 80.0)
     h0, h1 = p.get('height', [10.0, 30.0]); sc = p.get('scale', 300.0); sd = p.get('seed', 1) * 17.3
     nx, ny = p.get('cells', [600, 8])
@@ -406,6 +407,10 @@ def ridge(bpy, name, p, kit):
             n = 0.5 + 0.5 * noise.noise(Vector((x / sc + sd, sd, 0.0)))
             n2 = 0.5 + 0.5 * noise.noise(Vector((x / (sc * 0.25) + sd, sd + 3.0, 0.0)))
             crest = h0 + (h1 - h0) * (0.8 * n + 0.2 * n2)
+            if p.get('gullies'):
+                # gullies and rock: a fine ridged noise cut into the slope, deepest on the face toward the camera
+                g = 1.0 - abs(noise.noise(Vector((x / p.get('gully_scale', 18.0) + sd, sd + 7.0, fy * 3.0))))
+                crest -= p['gullies'] * g ** 3
             # a rounded profile: up from the front edge to the crest at a third of the depth, down behind
             prof = math.sin(math.pi * min(1.0, fy / 0.35) / 2) if fy < 0.35 else max(0.0, 1.0 - (fy - 0.35) / 0.65 * 0.6)
             row.append(bm.verts.new((x, -d / 2 + d * fy, crest * prof - 1.0)))

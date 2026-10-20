@@ -14,9 +14,9 @@ from smoke import SHELL, SPEAKER
 
 SKY = 'aarfontein_pan'                      # a real dry lake bed (Poly Haven, CC0); its own hills hidden by the folds
 SKY_ROT = 124.0
-SOOT = '#4A4744'                            # soot, but with enough albedo that the sunlit sides of the billows show
-# the sun through the smoke's thin edge: from the left and a little behind, warm, soft
-SUN = {'azimuth_deg': -112.0, 'elevation_deg': 19.0, 'irradiance': 18.0, 'angle_deg': 4.0, 'color': '#FFD6A6'}
+SOOT = '#5A4E44'                            # soot: low albedo, not zero, brown-grey where the sun catches the billows
+# a low warm sun from the front left through thin high haze: a defined shadow with a softened edge
+SUN = {'azimuth_deg': -70.0, 'elevation_deg': 22.0, 'irradiance': 9.0, 'angle_deg': 1.75, 'color': '#FFD2A0'}
 # the rims light the cabinet, not the horn's mirror top (they burnt it to a white field)
 RIM = [s for s in SHELL if s not in ('waveguide', 'waveguide-cap')]
 
@@ -34,8 +34,9 @@ def plume():
         t = k / 6
         w = 90 + 420 * t ** 1.4
         cells.append(smoke((320 - 650 * t ** 1.8, 640 - 120 * t, -10 + 62 * k), (w, 0.6 * w, 95), 0.45 * 0.8 ** k,
-                           31 + k, scale=20 + 25 * t, cut=0.42 + 0.06 * t, soft=0.25, anisotropy=0.3,
-                           fade=[0.25, 0.25, 0.35], floor=0.0, rise=1.2, detail_scale=6 + 6 * t, detail_weight=0.55))
+                           31 + k, scale=20 + 25 * t, cut=0.42 + 0.06 * t, soft=0.25, anisotropy=0.45,
+                           fade=[0.25, 0.25, 0.35], floor=0.0, rise=1.2, detail_scale=4 + 4 * t, detail_weight=0.6,
+                           distortion=1.3, detail=8.0))
     # the sheet: three thin layers off the tower's top, drifting left and toward the camera, thinning with distance
     # (it leaves the tower's sheared top and runs on downwind, so nothing hangs apart from the column)
     for i, (dx, y, z, w, d, h, dens) in enumerate([(-650, 480, 330, 700, 420, 70, 0.08), (-950, 430, 300, 800, 520, 60, 0.05)]):
@@ -63,8 +64,8 @@ def land():
                  tex_scale=22.0, tint='#ECEAE6', tint_mix=0.95)]
     # salt-crust patches: whiter, a larger crack, on the mid-pan where depth of field softens their margins
     rnd = random.Random(12)
-    for k in range(7):
-        cx, cy = rnd.uniform(-25, 30), rnd.uniform(16, 60)
+    for k in range(14):
+        cx, cy = (rnd.uniform(-8, 10), rnd.uniform(3, 15)) if k >= 7 else (rnd.uniform(-25, 30), rnd.uniform(16, 60))
         rx, ry = rnd.uniform(3, 9), rnd.uniform(2, 5)
         ph = [rnd.uniform(0, 6.28) for _ in range(3)]
         outline = []
@@ -79,7 +80,8 @@ def land():
     for i, (y, h, col, col2) in enumerate([(330, [4, 14], '#6C6863', '#4C4842'), (540, [22, 50], '#83837F', '#686763'),
                                            (860, [55, 110], '#999DA3', '#868A90')]):
         out.append(piece('ext', module='smoke_el', fn='ridge', position=[0.0, y], width=3000.0, depth=120.0 + 60 * i,
-                         height=h, scale=260.0 + 100 * i, seed=3 + i, color=col, color2=col2, mottle=10.0 + 8 * i))
+                         height=h, scale=260.0 + 100 * i, seed=3 + i, color=col, color2=col2, mottle=4.0 + 12 * i,
+                         gullies=3.0 if i == 0 else 0.0, gully_scale=14.0, cells=[1500, 24] if i == 0 else [600, 8]))
     return out
 
 
@@ -88,6 +90,10 @@ def shot():
         # the plume's shadow: a high band of smoke between the sun and the far pan (shadow only, unseen)
         piece('ext', module='smoke_el', fn='canopy', size=[900.0, 260.0], z=90.0, position=[-120.0, 200.0],
               scale=60.0, open=0.35, seed=9),
+        # a black flag high behind the camera, out of frame, so the horn's polished resin mirrors dark there, not a
+        # white field of sky (an ordinary object, as a photographer would rig it)
+        piece('box', size=[1.2, 0.02, 1.2], position=[-2.1, -5.9, 1.9], rotate=[-20.0, 0.0, -20.0], material='clay',
+              color='#050505'),
         # the contact shadow: a shadow-only disc in the cabinet's base, blocking the sky over the crust beneath it
         piece('ext', module='smoke_el', fn='occluder', position=[0.0, 0.0, 0.03], radius=0.36, sx=1.0, sy=0.9, rotate_z=18.0)]
     cam = camera(height=0.8, distance=4.4, azimuth=-20, lens=40, target=(0.0, 0.0, 0.85), fstop=4.0, shift_x=0.08,
@@ -99,10 +105,10 @@ def shot():
         'kicker': {**area(-150, 22, 3.0, 22.0, '#FFE2C4', (0.5, 2.4), (0.0, 0.0, 0.8)), 'receivers': RIM},
         'kicker_r': {**area(150, 14, 3.0, 16.0, '#FFE2C4', (0.6, 2.4), (0.0, 0.0, 0.8)), 'receivers': RIM},
     }
-    return frame('smoke_pan', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.8),
+    return frame('smoke_pan', props, cam, {**sky(SKY, rotation_deg=SKY_ROT, strength=0.8), 'grade': {'horizon': '#FFE9D2', 'zenith': '#C8D0DC', 'height_deg': 35.0}},
                  'barkhorn, Smoke, black smoke over a salt pan', sun=SUN, lights=lights, rotate_z=18.0,
-                 position=(0.0, 0.0, -0.01), samples=512, exposure=0.5,
-                 fin=finish(contrast=0.06, clarity=0.04, saturation=-0.85, vignette=0.15))
+                 position=(0.0, 0.0, -0.01), samples=512, exposure=0.3,
+                 fin={**finish(contrast=0.06, clarity=0.04, saturation=-0.55, vignette=0.15), 'grain': 2.5})
 
 
 def portrait():
