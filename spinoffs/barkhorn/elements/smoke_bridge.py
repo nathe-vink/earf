@@ -106,8 +106,19 @@ def shot():
     lp, lights = lamps()
     props += lp
     # the contact shadow: a shadow-only disc in the cabinet's base, blocking the sky and lamps over the road beneath it
-    props.append(piece('ext', module='smoke_el', fn='occluder', position=[0.0, 0.0, 0.03], radius=0.36, sx=1.0, sy=0.9,
+    props.append(piece('ext', module='smoke_el', fn='occluder', position=[0.0, 0.0, 0.012], radius=0.5, sx=1.0, sy=0.85,
                        rotate_z=18.0))
+    # a shallow puddle the speaker stands in: standing water mirrors it, as the wet road round it cannot
+    import math, random
+    rnd = random.Random(4)
+    ph = [rnd.uniform(0, 6.28) for _ in range(3)]
+    puddle = []
+    for k in range(48):
+        a = 2 * math.pi * k / 48
+        r = 1.0 + 0.18 * math.sin(3 * a + ph[0]) + 0.1 * math.sin(5 * a + ph[1]) + 0.05 * math.sin(11 * a + ph[2])
+        puddle.append([round(0.95 * r * math.cos(a), 4), round(0.62 * r * math.sin(a), 4)])
+    props.append(piece('extrude', outline=puddle, depth=0.002, position=[0.2, 0.15, 0.0], rotate=[90.0, 0.0, 12.0],
+                       material='gloss', color='#151517', roughness=0.07, ease=0.0005))
     lights.update({
         'skyfill': {**area(-20, 5, 2.4, 1.6, '#AEB8C8', (4.0, 3.0), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
         'bounce': {**area(-25, 12, 2.0, 4.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.6)), 'receivers': SPEAKER},
