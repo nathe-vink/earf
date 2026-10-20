@@ -1,0 +1,364 @@
+{
+ "stage1": {
+  "impression": "A warm, low-key back-bar elevation with a credible kissa palette (fir framing, fluted dark oak, zinc band), but it reads as a soft, smeared CG proof rather than a photograph. The two speakers, which should be the altar, are murky grey discs barely brighter than their niches, half cut off by the frame edges. The centre of the record wall is a grid of empty, flatly lit concrete cubbies that look like windows. Nothing in the frame carries colour or a sign of life. A magazine would read it as a generic dark bar, not a specific place.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Both speakers sit whole inside the frame and read at a glance as the hero: speaker region lum_median >= 60, with the light through the smoked acrylic and the white batts visible behind it",
+  "The frosted disc behind the DJ station reads as a soft, even glow, the room's one designed light moment",
+  "The record wall reads as full of records with spot pools on them, not as empty grey concrete cubbies",
+  "Dome downlights put visible pools of light on the zinc, with glasses, the coupe and candles catching highlights in them (a sign of life)",
+  "Full-resolution render with no denoiser smear; material texture at 1:1 (concrete tie holes, oak grain, steel patina) and black levels deep but holding detail (frame lum_p1 <= 10)",
+  "A specific, recognisable place: the niches, the altar logic of the speakers and the frosted disc have to be legible, or it stays a generic bar"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    120,
+    115,
+    300
+   ],
+   "what": "Left speaker is a murky grey disc behind reflections, cut off by the left frame edge; lum_median 44, no visible tint or acrylic depth"
+  },
+  {
+   "region": [
+    575,
+    130,
+    700,
+    300
+   ],
+   "what": "Right speaker is the same: grey, flat, partly hidden behind the pendant and the R3 lid, lum_median 50"
+  },
+  {
+   "region": [
+    220,
+    0,
+    430,
+    200
+   ],
+   "what": "Centre record wall cubbies are empty bare concrete lit flat and cool grey (p95 138); they read as windows or a blank grid, and the frosted disc is not visible at all"
+  },
+  {
+   "region": [
+    0,
+    300,
+    720,
+    345
+   ],
+   "what": "Zinc top shows a long, uniform specular streak (p95 207) instead of pools under the Domes; it reads as a CG gloss band"
+  },
+  {
+   "region": [
+    140,
+    255,
+    650,
+    320
+   ],
+   "what": "R3 Float record players read as empty glass display cases, with no lit base or tint"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    120
+   ],
+   "what": "Dome pendants cropped at the top edge; the left one is a blown white bowl at the frame corner"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Whole frame is soft, with denoiser smear and haze-lifted blacks (lum_p1 15.8); no grain, no 1:1 material detail"
+  },
+  {
+   "region": [
+    0,
+    380,
+    720,
+    470
+   ],
+   "what": "Fluted oak front is a perfectly regular repeat with uniform stain; it reads as a tiled texture"
+  },
+  {
+   "region": [
+    0,
+    430,
+    250,
+    480
+   ],
+   "what": "Cut-off chair back in the bottom-left corner is an unreadable dark blob"
+  },
+  {
+   "region": [
+    300,
+    290,
+    470,
+    345
+   ],
+   "what": "No props in the frame: no glasses, coupe, candles or record out of its sleeve on the counter"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers, the reason for the frame, are barely brighter than their niches and show no tint or acrylic depth.",
+   "evidence": {
+    "region": [
+     0,
+     120,
+     115,
+     300
+    ],
+    "measured": "lum_median 44.1, lum_range 34; right speaker [575,130,700,300] lum_median 50.4, r/g/b 58/49/42 (near neutral)"
+   },
+   "change": {
+    "setting": "lamps on each speaker (4 x area, W/m2 at the target, K) and the lit niche's strip",
+    "from": "1.0 W/m2, 2900 K; niche strip 6.0",
+    "to": "5.0 W/m2, 2900 K, grazing from the niche's top and sides so light passes through the smoked cabinet and lifts the white batts; niche strip 10.0"
+   },
+   "expected": "Each speaker is the brightest mid-tone mass on the wall, with a readable silhouette, horn and visible depth through the acrylic.",
+   "accept": {
+    "region": [
+     575,
+     130,
+     700,
+     300
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 62
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The frame crops both speakers and both Domes, so the back bar's symmetry (niche, decks, niche) never reads.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     300
+    ],
+    "measured": "left speaker clipped at x=0, right speaker clipped behind the pendant and the R3 lid; Domes cut at y=0"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "position [6.6, 2.6, 1.18], 32 mm",
+    "to": "position [6.6, 1.9, 1.15], 28 mm, same target and level, so both niches sit fully inside with about 4% margin and the Domes hang fully in the frame"
+   },
+   "expected": "Both speakers whole and symmetrical about the decks; the Domes are complete, low over the zinc; the counter is in the foreground.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The frosted disc behind the DJ station, the wall's centrepiece, is invisible.",
+   "evidence": {
+    "region": [
+     300,
+     140,
+     420,
+     280
+    ],
+    "measured": "no disc visible; the area reads as concrete cubbies, lum_median of the wall centre 65.6, cool b 57"
+   },
+   "change": {
+    "setting": "the disc behind the DJ station (emission, area lamp)",
+    "from": "0.12 in #FFC890, 3.0 W",
+    "to": "1.2 in #FFC890, 12.0 W"
+   },
+   "expected": "A soft, evenly glowing warm disc framing the mixer, the brightest non-lamp surface in the frame but unclipped.",
+   "accept": {
+    "region": [
+     330,
+     160,
+     410,
+     260
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     120,
+     200
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The record wall's centre reads as empty, bare concrete cubbies, not a floor-to-ceiling record wall.",
+   "evidence": {
+    "region": [
+     220,
+     0,
+     430,
+     200
+    ],
+    "measured": "flat grey concrete in every cubby, lum_p95 138, g 63 / b 57 (cool against the warm room)"
+   },
+   "change": {
+    "setting": "props (records) and the record wall's spots",
+    "from": "cubbies empty in the centre bays; spots 6.0 W, 2600 K",
+    "to": "fill every cubby with spine-out records (some leaning, two face-out sleeves); spots 10.0 W, 2600 K, aimed on the spines"
+   },
+   "expected": "A dense, warm, striped record wall with small spot pools; no bare concrete squares.",
+   "accept": {
+    "region": [
+     220,
+     0,
+     430,
+     200
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 48
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The zinc shows one long specular streak instead of pools of light under the Domes.",
+   "evidence": {
+    "region": [
+     0,
+     300,
+     720,
+     345
+    ],
+    "measured": "p95 207, clip 0.13%, the streak runs almost the full width"
+   },
+   "change": {
+    "setting": "zinc patina (roughness) and the Domes' downlights",
+    "from": "smooth zinc; downlights 180 W, cone 14 deg",
+    "to": "zinc roughness up to about 0.35 with a mottled patina; downlights 140 W, cone 20 deg, aimed on the zinc in front of each place"
+   },
+   "expected": "Two or three distinct pools on the zinc falling off to dark between them; no continuous streak.",
+   "accept": {
+    "region": [
+     0,
+     300,
+     720,
+     345
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 185
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "No sign of life in the frame.",
+   "evidence": {
+    "region": [
+     150,
+     300,
+     600,
+     345
+    ],
+    "measured": "empty zinc; the listed glasses, coupe and candles are not in shot"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props out of frame",
+    "to": "a half-drunk coupe and a rocks glass in a Dome pool on the zinc front-left of centre, a candle at the right, a record out of its sleeve leaning on the decks"
+   },
+   "expected": "Small bright highlights on glass in the pools, the scale of a seated drinker.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "Haze and the denoiser lift and smear the whole frame, so nothing holds 1:1 texture.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "frame lum_p1 15.8, below_40 33%; soft edges on all timber and on the speaker discs in the crops"
+   },
+   "change": {
+    "setting": "haze / render",
+    "from": "haze 0.02; 256 samples, denoise on, AgX Medium High Contrast, proof at scale 0.3",
+    "to": "haze 0.008; 1024 samples at full 2400 x 1600, denoise at about 0.5 blend with fine film grain in post; keep AgX Medium High Contrast, exposure 0.5"
+   },
+   "expected": "Deeper blacks that still hold detail, crisp timber edges, visible concrete tie holes and oak grain.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_p5",
+    "op": "<=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The fluted oak front is a perfectly regular repeat with uniform stain and reads as tiled.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     720,
+     470
+    ],
+    "measured": "identical flute value bands across the whole width; lum_median 38"
+   },
+   "change": {
+    "setting": "oak stain / finish",
+    "from": "uniform dark stain",
+    "to": "per-flute variation in stain and grain (about \u00b18% value), satin sheen catching the Dome light along the top 15 cm, darker toward the floor"
+   },
+   "expected": "The front reads as real joinery with a light-to-dark falloff downward.",
+   "accept": {
+    "region": [
+     0,
+     360,
+     720,
+     470
+    ],
+    "metric": "falloff",
+    "axis": "y",
+    "op": ">",
+    "value": 0
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A more saturated speaker tint so the frame has its one colour",
+   "why": "Smoke is the house configuration and the products' colour is fixed; under Smoke the hero has to come from light through the acrylic, not from hue."
+  },
+  {
+   "request": "Make the R3 Float lids less like glass display cases",
+   "why": "The record player's shape and parts are fixed products."
+  },
+  {
+   "request": "Lose the reflective cabinet faces over the speakers' drivers",
+   "why": "The speakers' build (cover off, cast acrylic) is fixed."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
