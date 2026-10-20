@@ -29,8 +29,10 @@ KEYS = T36.KEYS + ('counter_strip', 'sconce_w', 'sconce_glow', 'card_text', 'cha
 def room_piece(v):
     cfg = RP.CONFIGS[v['config']]
     return {'kind': 'kit', 'shape': 'ext', 'module': 'planet_r37', 'fn': 'room', **{k: v[k] for k in KEYS if k in v},
-            'plinth_bar': round(v['plinth'] * RP.PLINTH_GAIN[cfg['bar']], 3), 'plinth_bar_col': RP.PLINTH_COL[cfg['bar']],
-            'plinth_listen': round(v['plinth'] * RP.PLINTH_GAIN[cfg['listen']], 3),
+            # the plinths' own surface glow at half the lamp's share: at full it read as a hot line on the plinth tops
+            # (listening p2) and was the last red clipping in Ember (r37)
+            'plinth_bar': round(0.5 * v['plinth'] * RP.PLINTH_GAIN[cfg['bar']], 3), 'plinth_bar_col': RP.PLINTH_COL[cfg['bar']],
+            'plinth_listen': round(0.5 * v['plinth'] * RP.PLINTH_GAIN[cfg['listen']], 3),
             'plinth_listen_col': RP.PLINTH_COL[cfg['listen']]}
 
 
