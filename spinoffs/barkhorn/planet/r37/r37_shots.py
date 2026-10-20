@@ -93,10 +93,17 @@ def lights(v):
                 L[f'plinth{grp}{i}'] = {'type': 'area', 'position': [x, y, round(zz + 0.01, 3)], 'target': [x, y, round(zz + 0.9, 3)],
                                         'size_m': [0.40, 0.30], 'irradiance': round(v['plinth_lamp'] * v['plinth'] * RP.PLINTH_GAIN[tint], 3),
                                         'color': RP.PLINTH_COL[tint], 'camera': False, 'receivers': [f'*#{i}']}
+    # the light on each pair scaled to its tint (a saturated red clips first)
+    gl, gb = RP.SPK_GAIN[cfg['listen']], RP.SPK_GAIN[cfg['bar']]
+    for k, l in L.items():
+        if k.startswith('altar') and 'power_w' in l:
+            l['power_w'] = round(l['power_w'] * gl, 2)
+        elif k.startswith('spk') and 'irradiance' in l:
+            l['irradiance'] = round(l['irradiance'] * gl, 3)
     # the bar pair: a soft spot from the ceiling over the bartender's aisle onto each cabinet's face
     for i, (role, x, y, zz, rot, tilt) in enumerate(RP.bar_speakers()):
         L[f'barspk{i}'] = {'type': 'spot', 'position': [x, round(y - 1.25, 3), RP.CEIL - 0.25],
-                           'target': [x, y, round(zz + 0.75, 3)], 'power_w': v.get('barspk_w', 30.0),
+                           'target': [x, y, round(zz + 0.75, 3)], 'power_w': round(v.get('barspk_w', 30.0) * gb, 2),
                            'cone_deg': v.get('barspk_cone', 26.0), 'blend': 0.8, 'radius_m': 0.03, 'color': 2700,
                            'camera': False}
     return L

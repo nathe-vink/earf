@@ -73,3 +73,6 @@ PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF'}
 # and its strength per tint: a saturated red clips first (Ember at 1.0 clipped 1387 and 5604 px red-only in a Standard
 # view, r37); Smoke needs the most to read at all
 PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.25, 'ice': 0.5}
+# the light on the speakers per tint (the altar spots, the lamps on the listening pair, the bar pair's spots): Ember at
+# Smoke's levels clipped its red to pink (6040 px red-only in a Standard view, listening, r37)
+SPK_GAIN = {'smoke': 1.0, 'ember': 0.35, 'ice': 0.6}
