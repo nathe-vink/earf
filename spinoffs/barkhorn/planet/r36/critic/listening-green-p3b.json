@@ -1,0 +1,357 @@
+{
+ "stage1": {
+  "impression": "Two red-glowing acrylic speakers on oak plinths stand in front of a dark block-tiled wall, with haze beams from two ceiling spots. The speakers' insides glow hot pink like neon signage. The wall reads as a procedural camouflage (Voronoi) pattern over a grid, the floor is a near-black void with two odd teal light patches, and the frame reads as a CG showroom, not a photographed room. Nothing marks it as a specific place: no green zone, no seats, no tables, no lamps, no sign of life, so a magazine would not run it as a specific bar.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The frame must show the listening zone it is meant to sell: bottle-green velvet tub chairs, green carpet, the hexagonal oak tables with lit smoked Orbs in the foreground, all facing the altar",
+  "The Ember speakers must read as thick tinted cast acrylic with polished glowing edges and clean reflections, not as pink neon boxes (speaker region clip_pct < 0.3, lum_p95 <= 150)",
+  "The end-grain block lining must read as real oak end grain (growth rings, checks, block-to-block tone variation of about 10 to 15 % lum), not a Voronoi camo texture",
+  "The floor and carpet must hold readable texture and read as green (delta_e to the zone green under 10 in the lit carpet); now crushed neutral black",
+  "A sign of life in frame (a glass on an Orb table, a sleeve on a chair arm)",
+  "A full-resolution 2400 x 1600 render without denoiser smear inside the speaker cabinets"
+ ],
+ "defects": [
+  {
+   "region": [
+    540,
+    100,
+    670,
+    360
+   ],
+   "what": "Right Ember: white batts behind red acrylic glow saturated pink like a neon sign, clipping 0.58 %; shell edges are not lit, so the acrylic shows no thickness or polished edge"
+  },
+  {
+   "region": [
+    185,
+    125,
+    290,
+    330
+   ],
+   "what": "Left Ember: same pink neon look, clipping 0.76 %; denoiser smear on the internal parts"
+  },
+  {
+   "region": [
+    330,
+    40,
+    500,
+    320
+   ],
+   "what": "The end-grain block wall reads as a Voronoi camouflage overlay on a tile grid, with no grain or rings: an obvious procedural texture"
+  },
+  {
+   "region": [
+    0,
+    380,
+    720,
+    480
+   ],
+   "what": "Floor and carpet: lum_median 14, no texture, neutral (13,14,12), delta_e 24 from bottle green; the zone's colour is missing"
+  },
+  {
+   "region": [
+    280,
+    357,
+    350,
+    392
+   ],
+   "what": "Hard-edged teal light patch on the floor between the plinths reads as a light leak or decal"
+  },
+  {
+   "region": [
+    450,
+    375,
+    530,
+    400
+   ],
+   "what": "Second teal patch, same problem"
+  },
+  {
+   "region": [
+    200,
+    20,
+    330,
+    130
+   ],
+   "what": "Visible haze cone from the altar spot reads as stage or nightclub lighting"
+  },
+  {
+   "region": [
+    0,
+    0,
+    60,
+    480
+   ],
+   "what": "Left edge is an empty black wedge with a featureless oak return: dead space"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No chairs, tables, Orb lamps or props in frame; the room reads as an empty showroom niche"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame is meant to sell the listening zone, but no green seat, table, Orb or carpet edge is in shot; it shows only the altar niche.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "Zero tub chairs, tables or Orbs visible; the carpet is neutral black with delta_e 24 to #1F4A33"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [12.5, 1.75, 1.08], target [16.6, 3.35, 1.05], 35 mm",
+    "to": "position about [10.8, 2.4, 1.15] (seated eye height, behind the back row), target [16.6, 3.0, 1.0], 28 mm, f/2.8 focused at about [15.0, 2.6, 0.7]; two tub chairs and one Orb table in the near third, the Ember pair in the upper middle, still level"
+   },
+   "expected": "The green chairs and carpet fill the lower third and the Orb gives a warm pool in the foreground; the frame reads as the zone facing the altar, a specific place",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The lamps on each Ember flood the white batts, so the cabinets glow saturated pink like neon signage and clip.",
+   "evidence": {
+    "region": [
+     540,
+     100,
+     670,
+     360
+    ],
+    "measured": "lum_p95 170, clip_pct 0.58 (left speaker 0.76), r/g median 51/16"
+   },
+   "change": {
+    "setting": "on each Ember speaker, area lamps",
+    "from": "2.0 W/m2, 2900 K",
+    "to": "1.0 W/m2, 2900 K"
+   },
+   "expected": "The internal glow drops to an ember, the batts read as pale shapes behind tinted acrylic, and nothing clips on the cabinets",
+   "accept": {
+    "region": [
+     540,
+     100,
+     670,
+     360
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The speakers are lit only from inside, so the shells' faces and polished edges never catch light, and the cabinets are too dark overall to read as the hero.",
+   "evidence": {
+    "region": [
+     540,
+     100,
+     670,
+     360
+    ],
+    "measured": "lum_median 24.4 (target 45 or more); edges show no specular line"
+   },
+   "change": {
+    "setting": "the altar, 2 x spot",
+    "from": "90.0 W, 2500 K, cone 36.0 deg",
+    "to": "170 W, 2500 K, cone 28 deg, aimed at the speakers' top front edges so the horn and the cabinet edges catch a highlight"
+   },
+   "expected": "Bright edge lines on the acrylic slabs, the horn's tint reads, and the cabinets' faces are legible without the internal glow",
+   "accept": {
+    "region": [
+     540,
+     100,
+     670,
+     360
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 38
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The end-grain block lining reads as a procedural camouflage pattern, which marks the frame as a render at a glance.",
+   "evidence": {
+    "region": [
+     330,
+     40,
+     500,
+     320
+    ],
+    "measured": "Large irregular two-tone patches cross the block joints; no rings or checks visible at 2x"
+   },
+   "change": {
+    "setting": "the oak's stain / finish of the end-grain blocks",
+    "from": "patchy two-tone Voronoi variation independent of the blocks",
+    "to": "a per-block random tone of plus or minus 12 % with an end-grain ring texture scaled to 60 to 90 mm blocks, faint radial checks, a slightly darker oiled stain and a low sheen of about 0.6 roughness"
+   },
+   "expected": "Each block reads as one piece of oak end grain and the cells stop spanning joints; the wall stays low key",
+   "accept": {
+    "region": [
+     330,
+     40,
+     500,
+     320
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     34
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The zone's green carpet and floor are crushed to neutral black, so the room's one saturated colour does not appear.",
+   "evidence": {
+    "region": [
+     0,
+     400,
+     720,
+     480
+    ],
+    "measured": "rgb (13,14,12), lum_median 14, delta_e 23.9 to #1F4A33"
+   },
+   "change": {
+    "setting": "each Orb, 6.0 W glow 1.1; plus the exposure",
+    "from": "Orb 6.0 W, exposure 1.6",
+    "to": "Orb 14 W (glow 1.4) so each throws a warm pool on the green carpet and chairs; exposure 1.8"
+   },
+   "expected": "Warm pools on the carpet with the green readable inside them and dark between; the frame lum_median about 28 to 34",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     26,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "Two hard-edged teal patches on the floor between the plinths read as light leaks rather than pools of light.",
+   "evidence": {
+    "region": [
+     280,
+     357,
+     350,
+     392
+    ],
+    "measured": "Rectangular saturated teal shapes with sharp edges, against a lum 11 floor"
+   },
+   "change": {
+    "setting": "the lit niche's strip / the altar spots' spill",
+    "from": "strip 6.0 with a hard spill onto the floor",
+    "to": "strip 3.0 and softened (or the spots' cone edge blend raised to about 0.5), so the spill is a soft gradient"
+   },
+   "expected": "No hard-edged colour shapes on the floor; the spill falls off smoothly",
+   "accept": {
+    "region": [
+     280,
+     357,
+     350,
+     392
+    ],
+    "metric": "lum_range",
+    "op": "<=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Nothing in the frame says anyone uses the room.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "No glasses, sleeves or coats visible"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props only at the counter (out of frame)",
+    "to": "a rocks glass and a record sleeve on the near Orb table, a coat over one tub chair's arm"
+   },
+   "expected": "A sign of life in the foreground pool of light",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "Visible haze cones from the ceiling spots read as stage lighting.",
+   "evidence": {
+    "region": [
+     200,
+     20,
+     330,
+     130
+    ],
+    "measured": "A distinct beam cone above each speaker"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.01 per metre",
+    "to": "0.005 per metre"
+   },
+   "expected": "The atmosphere stays, but the beams no longer read as distinct cones",
+   "accept": {
+    "region": [
+     200,
+     40,
+     330,
+     130
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 21
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Render at full 2400 x 1600 for judging at 1:1 (the denoiser smear inside the cabinets may come from the 0.3-scale proof)",
+   "why": "Resolution is a delivery setting, not a look change; judge the final at full scale"
+  },
+  {
+   "request": "Reconsider whether a second identical speaker is wanted",
+   "why": "The Ember pair on the altar is fixed by the card; the pair is by design, not a repeated model"
+  },
+  {
+   "request": "Show the zone's limewashed green walls and raised 200 mm platform edge",
+   "why": "The room's design is fixed; only framing (c1) can bring them into shot"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

@@ -93,7 +93,7 @@ def lights(v):
     # the altar: two spots in the niche's soffit, washing down the end grain and the cabinets
     for i, y in enumerate((RP.YC - 1.0, RP.YC + 1.0)):
         L[f'altar{i}'] = {'type': 'spot', 'position': [RP.L - 0.25, y, RP.ALTAR['z1'] - 0.04],
-                          'target': [RP.L - 0.45, y, z + 0.65], 'power_w': v['altar_w'], 'cone_deg': v['altar_cone'],
+                          'target': [RP.L - 0.45, y, z + v.get('altar_z', 0.65)], 'power_w': v['altar_w'], 'cone_deg': v['altar_cone'],
                           'blend': 0.9, 'radius_m': 0.03, 'color': 2500, 'camera': False}
     # the sink: a pinhole downlight in the alcove's head
     L['sink'] = {'type': 'spot', 'position': [RP.SINK['x'], 0.30, RP.ALCOVE['z1'] - 0.02],
@@ -123,16 +123,26 @@ VIEWS = {
                         # after the critics on p2r: a standing dead-centre stare over a chair back, the speakers clipping,
                         # the left screen a white slab, the ceiling a void: seated and off axis on 35 mm, the near Ember on
                         # the left third, a tub table in the foreground; the screens 0.35; a stop brighter
-                        'camera': {'position': [12.5, 1.75, 1.08], 'target': [16.6, 3.35, 1.05], 'lens_mm': 35,
-                                   'level': True, 'fstop': 2.8, 'focus': [16.5, 1.9, 0.95]},
-                        'settings': {'colourway': 'green', 'exposure': 1.6, 'wb': 2700, 'screen_glow': 0.35}},
+                        # p3 (seated at 12.5 on 35 mm) lost the zone: only the altar in frame. p4: back to the zone's
+                        # front, seated, on 28 mm, the tub chairs and an Orb table in the near third; the speakers' own
+                        # lamps 1 W/m2, the altar spots 150 W on their upper halves; haze 0.005; the Orbs 10 W
+                        'camera': {'position': [11.45, 2.2, 1.15], 'target': [16.6, 3.1, 1.0], 'lens_mm': 28,
+                                   'level': True, 'fstop': 2.8, 'focus': [14.2, 2.6, 0.7]},
+                        'settings': {'colourway': 'green', 'exposure': 1.8, 'wb': 2700, 'screen_glow': 0.35,
+                                     'spk_irr': 1.0, 'altar_w': 150.0, 'altar_cone': 28.0, 'altar_z': 1.0,
+                                     'haze': 0.005, 'sphere_w': 10.0, 'niche_strip': 3.0}},
     'listening-oxblood': {'title': 'the listening zone, oxblood',
                         # after the critics on p2r: a standing dead-centre stare over a chair back, the speakers clipping,
                         # the left screen a white slab, the ceiling a void: seated and off axis on 35 mm, the near Ember on
                         # the left third, a tub table in the foreground; the screens 0.35; a stop brighter
-                        'camera': {'position': [12.5, 1.75, 1.08], 'target': [16.6, 3.35, 1.05], 'lens_mm': 35,
-                                   'level': True, 'fstop': 2.8, 'focus': [16.5, 1.9, 0.95]},
-                        'settings': {'colourway': 'oxblood', 'exposure': 1.6, 'wb': 2700, 'screen_glow': 0.35}},
+                        # p3 (seated at 12.5 on 35 mm) lost the zone: only the altar in frame. p4: back to the zone's
+                        # front, seated, on 28 mm, the tub chairs and an Orb table in the near third; the speakers' own
+                        # lamps 1 W/m2, the altar spots 150 W on their upper halves; haze 0.005; the Orbs 10 W
+                        'camera': {'position': [11.45, 2.2, 1.15], 'target': [16.6, 3.1, 1.0], 'lens_mm': 28,
+                                   'level': True, 'fstop': 2.8, 'focus': [14.2, 2.6, 0.7]},
+                        'settings': {'colourway': 'oxblood', 'exposure': 1.8, 'wb': 2700, 'screen_glow': 0.35,
+                                     'spk_irr': 1.0, 'altar_w': 150.0, 'altar_cone': 28.0, 'altar_z': 1.0,
+                                     'haze': 0.005, 'sphere_w': 10.0, 'niche_strip': 3.0}},
     'street': {'title': 'the shopfront at night, from the kerb',
                # after the two critics on p1 (5.0, 5.0): over-exposed under a veil, the mullion through the altar, the
                # etched name a beige square, the lightbox too bright, no reflections: 32 mm with the mullion on a third,

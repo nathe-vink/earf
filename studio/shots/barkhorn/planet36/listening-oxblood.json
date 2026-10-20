@@ -6,22 +6,22 @@
  ],
  "camera": {
   "position": [
-   12.5,
-   1.75,
-   1.08
+   11.45,
+   2.2,
+   1.15
   ],
   "target": [
    16.6,
-   3.35,
-   1.05
+   3.1,
+   1.0
   ],
-  "lens_mm": 35,
+  "lens_mm": 28,
   "level": true,
   "fstop": 2.8,
   "focus": [
-   16.5,
-   1.9,
-   0.95
+   14.2,
+   2.6,
+   0.7
   ]
  },
  "products": [
@@ -67,13 +67,13 @@
     "colourway": "oxblood",
     "dome_w": 30.0,
     "dome_glow": 1.1,
-    "sphere_w": 6.0,
+    "sphere_w": 10.0,
     "sphere_glow": 1.1,
     "disc_col": "#FF5A3A",
     "disc_glow": 0.8,
     "disc_lamp": 60.0,
     "name_glow": 0.25,
-    "niche_strip": 6.0,
+    "niche_strip": 3.0,
     "sink_glow": 0.8,
     "screen_glow": 0.35,
     "screen_tint": "#FFA060",
@@ -241,7 +241,7 @@
       "flavour": "smoked"
      }
     ],
-    "lamp_w": 6.0,
+    "lamp_w": 10.0,
     "lamp_k": 2700,
     "shade_glow": 1.1,
     "noshadow": "shell|liner|skin"
@@ -272,7 +272,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 2.0,
+   "irradiance": 1.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -318,7 +318,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 2.0,
+   "irradiance": 1.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -556,10 +556,10 @@
    "target": [
     16.55,
     2.05,
-    0.8500000000000001
+    1.2
    ],
-   "power_w": 90.0,
-   "cone_deg": 36.0,
+   "power_w": 150.0,
+   "cone_deg": 28.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -575,10 +575,10 @@
    "target": [
     16.55,
     4.05,
-    0.8500000000000001
+    1.2
    ],
-   "power_w": 90.0,
-   "cone_deg": 36.0,
+   "power_w": 150.0,
+   "cone_deg": 28.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -613,7 +613,7 @@
    6.05,
    3.32
   ],
-  "density": 0.01,
+  "density": 0.005,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -625,7 +625,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 1.6,
+  "exposure": 1.8,
   "white_balance_k": 2700,
   "white_balance_tint": 0.0
  }
