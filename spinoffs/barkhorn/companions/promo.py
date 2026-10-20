@@ -40,9 +40,10 @@ FIXED = {
     # round 33: EARFcoin
     'coin': ('a song-request token for a listening bar: a coin of tinted cast acrylic 40 mm across and 6 mm thick, '
              'its edges rounded and polished and reeded (milled grooves round the edge, as money has). A globe made of '
-             'interlocking rings is laser-engraved into its back face, mirrored, so from the front it reads the right '
-             'way round as frosted white lines seen down through the tint; GOOD FOR ONE SONG and EARF are engraved '
-             'small round the rim of the front face. Made in eight tints (red, orange, amber, green, blue, violet, '
+             'interlocking rings is laser-engraved into its back face, mirrored, and the engraving paint-filled black, '
+             'so from the front it reads the right way round as fine black lines seen 6 mm down through the tint (like '
+             'the leading in stained glass); GOOD FOR ONE SONG and EARF are engraved small round the rim of the front '
+             'face and filled white. Made in eight tints (red, orange, amber, green, blue, violet, '
              'water-clear and smoke grey); each guest gets one and hands it over with a song request.'),
 }
 PURPOSE = {
