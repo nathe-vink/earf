@@ -27,24 +27,31 @@ def plume():
     for k in range(7):
         t = k / 6
         w = 45 + 170 * t ** 1.4
-        cells.append(smoke((150 - 200 * t ** 1.5, 300 - 40 * t, -5 + 42 * k), (w, 0.6 * w, 60), 0.5 * 0.8 ** k,
-                           31 + k, scale=18 + 22 * t, cut=0.42 + 0.06 * t, soft=0.3, anisotropy=0.3,
-                           fade=[0.25, 0.25, 0.35], floor=0.0, rise=1.3, detail_scale=6 + 6 * t, detail_weight=0.45))
-    # mid billows, rolling toward the camera low over the pan
-    cells.append(smoke((60, 170, -2), (170, 90, 26), 0.25, 41, scale=9.0, cut=0.5, soft=0.3, anisotropy=0.3,
-                       fade=[0.2, 0.3, 0.5], floor=0.0, rise=1.2, detail_scale=3.0, detail_weight=0.45))
-    # near wisps drifting over the crust behind the speaker (the ground inside the box, as the forest's)
-    cells.append(smoke((-2, 22, -0.3), (60, 26, 5.0), 0.7, 43, scale=1.6, cut=0.56, soft=0.25, anisotropy=0.3,
-                       fade=[0.2, 0.3, 0.6], floor=0.0, rise=1.4, detail_scale=0.4, detail_weight=0.5))
+        cells.append(smoke((150 - 200 * t ** 1.5, 300 - 40 * t, -5 + 42 * k), (w, 0.6 * w, 60), 0.9 * 0.8 ** k,
+                           31 + k, scale=10 + 15 * t, cut=0.42 + 0.06 * t, soft=0.25, anisotropy=0.3,
+                           fade=[0.25, 0.25, 0.35], floor=0.0, rise=1.2, detail_scale=3 + 4 * t, detail_weight=0.55))
+    # the plume's head: a broad sheet sheared off the top, spreading across half the sky toward and over the camera
+    cells.append(smoke((-320, 760, 200), (1000, 640, 130), 0.05, 39, scale=55.0, cut=0.4, soft=0.35, anisotropy=0.3,
+                       fade=[0.15, 0.2, 0.45], floor=0.0, rise=0.6, detail_scale=18.0, detail_weight=0.5))
+    # layers rolling low toward the speaker, nearer ones lower and finer
+    for i, (y, w, d, h, dens, sc) in enumerate([(170, 200, 90, 26, 0.25, 9.0), (85, 120, 50, 12, 0.35, 4.0),
+                                                 (45, 80, 26, 6.0, 0.5, 2.2), (22, 60, 20, 4.0, 0.6, 1.4),
+                                                 (11, 40, 8, 1.6, 0.45, 0.7)]):
+        cells.append(smoke((20 - 0.25 * y, y, -0.3), (w, d, h), 0.8 * dens, 41 + i, scale=sc, cut=0.56, soft=0.28,
+                           anisotropy=0.3, fade=[0.2, 0.3, 0.55], floor=0.0, rise=1.3, detail_scale=sc / 4,
+                           detail_weight=0.5))
+    # haze toward the horizon: smoke thinned out over the whole pan
+    cells.append(smoke((0, 500, -1), (1600, 900, 45), 0.0025, 49, scale=200.0, cut=0.0, soft=0.9, anisotropy=0.2,
+                       fade=[0.1, 0.1, 0.7], floor=0.0025, color='#8C8C8C'))
     return cells
 
 
 def shot():
     props = [ground('dry_ground_01', size=(40.0, 40.0), position=(0.0, 14.0, 0.0), displace=0.0, relief=0.05,
-                    res='2k', tint='#F0EEEA', tint_mix=0.95),
+                    res='4k', tint='#F0EEEA', tint_mix=0.95, bump=2.0),
              # the plume's shadow across part of the pan, and the gap the sun comes through onto the foreground
-             piece('ext', module='smoke_el', fn='canopy', size=[400.0, 400.0], z=60.0, position=[-60.0, 160.0],
-                   scale=40.0, open=0.45, seed=7)] + plume()
+             piece('ext', module='smoke_el', fn='canopy', size=[600.0, 600.0], z=20.0, position=[-60.0, 60.0],
+                   scale=15.0, open=0.35, seed=7)] + plume()
     cam = camera(height=0.8, distance=4.4, azimuth=-20, lens=40, target=(0.0, 0.0, 0.85), fstop=4.0, shift_x=0.08,
                  shift_y=0.06)
     cam['clip_end'] = 3000
@@ -56,7 +63,7 @@ def shot():
     }
     return frame('smoke_pan', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.8),
                  'barkhorn, Smoke, black smoke over a salt pan', sun={**sun_from_sky(SKY, SKY_ROT, irradiance=9.0),
-                                                                     'elevation_deg': 14.0},
+                                                                     'elevation_deg': 22.0},
                  lights=lights, rotate_z=18.0, position=(0.0, 0.0, -0.01), samples=512, exposure=0.3,
                  fin=finish(contrast=0.06, clarity=0.04, saturation=-0.85, vignette=0.15))
 
