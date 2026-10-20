@@ -1,0 +1,381 @@
+{
+ "stage1": {
+  "impression": "A centred, symmetrical pair of loudspeakers in a dark red box. The cabinets' acrylic frames glow salmon-pink like neon tubes, and the horns above them dissolve into soft red smears against near-black felt. The back wall is a square grid with large blotchy Voronoi patches laid over it, which reads straight away as a procedural shader, not end-grain oak. The bottom fifth is empty, featureless carpet, and nothing in the frame (no chair, table, lamp, glass or person) says a room is in use. It reads as a game-engine shrine or a showroom vignette, not a photograph of a specific place. As it stands a design magazine would not publish it: the room is not shown at all, only the altar, and the altar looks like signage.",
+  "score": 3.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The frame must show the listening zone, not only the altar: at least one oxblood velvet tub chair and one hex oak table with a lit smoked Orb in the foreground or middle ground, from a seated eye height, so the image says 'room facing an altar'",
+  "The end-grain block wall must read as real oak end grain at 1:1 (growth rings, checks, varied block tone, slight relief and gaps) with no visible Voronoi or tiling pattern",
+  "The speakers' acrylic edges must read as thick polished cast acrylic catching light, not as pink neon: clip_pct inside each speaker region < 0.2 and the edge glow no brighter than the woofer surround",
+  "The horns must separate from the felt: horn region lum_median >= 35 against felt <= 20, with a clean, crisp silhouette (no denoiser smear)",
+  "The carpet floor must carry pools of light with texture (lum_range >= 35 in the bottom band) instead of a flat red void",
+  "Visible signs of life within the zone: a glass on a hex table, a record sleeve, a coat over a chair arm"
+ ],
+ "defects": [
+  {
+   "region": [
+    330,
+    40,
+    520,
+    300
+   ],
+   "what": "End-grain wall reads as a regular square grid with large blotchy Voronoi patches overlaid: a procedural CG texture, no rings, checks or relief, and the same pattern repeats behind both speakers"
+  },
+  {
+   "region": [
+    185,
+    190,
+    290,
+    330
+   ],
+   "what": "Left speaker's acrylic frame edges glow salmon-pink and clip (0.68 % in the speaker region), so the cabinet reads as a neon sign or illuminated display, not polished thick acrylic"
+  },
+  {
+   "region": [
+    540,
+    180,
+    670,
+    350
+   ],
+   "what": "Right speaker has the same neon-pink edge glow (clip 0.56 %); its internal parts at the bottom (cables, terminals) are lit pink and look like an exploded display model"
+  },
+  {
+   "region": [
+    530,
+    100,
+    650,
+    175
+   ],
+   "what": "Right horn is a soft red smear, lum_median 16.7, nearly the same as the felt behind it (13.1); its form and its acrylic edge are lost; smeared like denoiser output"
+  },
+  {
+   "region": [
+    180,
+    120,
+    285,
+    190
+   ],
+   "what": "Left horn is the same: lum_median 20.1, smeared, no readable form or edge"
+  },
+  {
+   "region": [
+    0,
+    380,
+    720,
+    480
+   ],
+   "what": "Carpet floor is flat and empty: lum_median 14.7, lum_range 18.2, no texture, no pool of light, no platform edge, no furniture; a fifth of the frame says nothing"
+  },
+  {
+   "region": [
+    300,
+    80,
+    332,
+    320
+   ],
+   "what": "Felt panels behind the speakers are a flat, untextured oxblood rectangle (lum_range 5.0); they swallow the speakers' silhouettes"
+  },
+  {
+   "region": [
+    560,
+    220,
+    625,
+    290
+   ],
+   "what": "The woofer cone reads cool blue-grey (b_median 68 > g_median 55) and smooth, like a plastic CG material, in an otherwise 2500 K room"
+  },
+  {
+   "region": [
+    240,
+    20,
+    300,
+    110
+   ],
+   "what": "Haze cones from the ceiling spots read as stage beams, hard-edged and theatrical, rather than a faint atmosphere"
+  },
+  {
+   "region": [
+    55,
+    0,
+    160,
+    370
+   ],
+   "what": "Left-hand timber return is a flat striped plane with no grain detail, no beam checks and no end grain; it reads as a texture"
+  },
+  {
+   "region": [
+    180,
+    325,
+    660,
+    410
+   ],
+   "what": "The oak plinths read as pale grey-beige boxes with a uniform surface; there are no oil sheen and no visible grain under the spots"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Strict one-point symmetry with both speakers framed like product shots: it reads as a showroom, not a room someone is sitting in"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame shows only the altar and an empty floor, so it cannot read as the listening zone or as a specific place.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     720,
+     480
+    ],
+    "measured": "bottom band lum_median 14.7, lum_range 18.2, no furniture or props in frame; the card lists tub chairs, hex tables and Orbs, but none of them is visible"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [12.5, 1.75, 1.08], target [16.6, 3.35, 1.05], 35 mm, focus [16.5, 1.9, 0.95]",
+    "to": "position about [11.4, 2.6, 0.95] (seated eye height, behind and beside a tub chair), target [16.6, 2.9, 0.9], 35 mm, slightly off axis so the pair is not centred; a velvet tub chair's back and arm in the left or right third foreground, one hex table with a lit Orb in the middle ground; focus on the nearer speaker; f/2.8"
+   },
+   "expected": "The image becomes 'a seat facing the altar': the oxblood velvet, the Orb's pool of light on oak and the speakers beyond it. The empty floor band is replaced by furniture and lit table tops.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "material",
+   "problem": "The end-grain block wall reads as a procedural grid with Voronoi blotches, which says CG at a glance.",
+   "evidence": {
+    "region": [
+     330,
+     40,
+     520,
+     300
+    ],
+    "measured": "uniform square grid, large-scale blotch pattern unrelated to the blocks, lum_range 24.6; no ring structure visible at 3x crop"
+   },
+   "change": {
+    "setting": "materials' finish: the niche's end-grain oak blocks",
+    "from": "procedural cell-noise tint over a regular grid",
+    "to": "per-block end-grain texture (concentric growth rings, radial checks, pith offset varying per block), per-block tone jitter of plus or minus 8 % that follows block boundaries, not blotches, 2 to 3 mm dark gaps with slight bump relief, matte oiled sheen (roughness about 0.6)"
+   },
+   "expected": "The wall reads as oak end-grain blocks at 1:1; the blotch pattern disappears; small specular glints catch at block edges under the altar spots.",
+   "accept": {
+    "region": [
+     330,
+     40,
+     520,
+     300
+    ],
+    "metric": "lum_range",
+    "op": "between",
+    "value": [
+     30,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The lamps on each speaker make the acrylic frames glow hot pink and clip, so the cabinets read as neon signage, not thick polished acrylic.",
+   "evidence": {
+    "region": [
+     540,
+     100,
+     670,
+     360
+    ],
+    "measured": "clip_pct 0.56 (right), 0.68 in [185, 120, 295, 330] (left); p95 about 170 on the frame edges while the cabinet body median is about 25"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area",
+    "from": "2.0 W/m2 at the target, 2900 K",
+    "to": "0.8 W/m2 at the target, 2700 K, and move the energy to the altar spots (c4) so the cabinets are lit from outside and their edges catch light instead of emitting it"
+   },
+   "expected": "The edges read as bright polished lines, not tubes; the cabinet's red tint reads through the body; no clipping on the speakers.",
+   "accept": {
+    "region": [
+     540,
+     100,
+     670,
+     360
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The horns and the felt are both near black, so the speakers' silhouettes, their hero feature, are lost.",
+   "evidence": {
+    "region": [
+     530,
+     100,
+     650,
+     175
+    ],
+    "measured": "horn lum_median 16.7 against felt [650, 60, 705, 330] at 13.1; left horn 20.1 against felt 16.9"
+   },
+   "change": {
+    "setting": "the altar 2 x spot",
+    "from": "90.0 W, 2500 K, cone 36.0 deg",
+    "to": "150.0 W, 2500 K, cone 28 deg, aimed at horn height (about 1.15 m) from slightly in front and above, plus a grazing wash on the felt from the niche's top edge (the lit niche's strip raised from 6.0 to 10.0 if it is the source that lights the felt)"
+   },
+   "expected": "The horns read as solid red forms with lit rims; the felt shows its weave and separates as a mid-dark ground behind them.",
+   "accept": {
+    "region": [
+     530,
+     100,
+     650,
+     175
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "post",
+   "problem": "The horns and the wall are smeared as if by a denoiser, which flattens the acrylic and reads as CG.",
+   "evidence": {
+    "region": [
+     180,
+     120,
+     285,
+     190
+    ],
+    "measured": "horn interior is a soft blob at 3x crop, lum_range 17.7, no edge; wall blocks soft at their boundaries"
+   },
+   "change": {
+    "setting": "render",
+    "from": "samples 256, adaptive 0.02, denoise true, clamp 10",
+    "to": "samples 1024, adaptive 0.01, denoise true with albedo and normal passes (OIDN prefilter accurate), clamp 6; judge at full 2400 x 1600"
+   },
+   "expected": "Crisp acrylic edges and horn mouth contours; wood grain survives denoising.",
+   "accept": {
+    "region": [
+     180,
+     120,
+     285,
+     190
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "Nothing in the frame shows the room is in use; it reads as a showroom.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     720,
+     480
+    ],
+    "measured": "no props in frame; the card's props are all at the counter, outside the view"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props at the counter only",
+    "to": "add within the zone: a rocks glass with a finger of whisky and a coaster on the nearest hex table beside the Orb, a record sleeve leaned against a plinth or the table, a coat or scarf over the near tub chair's arm"
+   },
+   "expected": "Signs of life in the foreground; small highlights on glass and vinyl.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The carpet is a flat red void with no pool of light and no texture.",
+   "evidence": {
+    "region": [
+     0,
+     380,
+     720,
+     480
+    ],
+    "measured": "lum_median 14.7, lum_range 18.2, falloff profile 25.5 to 12.4 with no local peak"
+   },
+   "change": {
+    "setting": "each Orb 6.0 W, glow 1.1, and the carpet's finish",
+    "from": "Orb 6.0 W, glow 1.1; carpet smooth",
+    "to": "Orb 9.0 W, glow 1.4 so each throws a soft pool on its table and the carpet; carpet given a wool-loop bump and a little sheen (sheen 0.3) so the light picks out its pile"
+   },
+   "expected": "Pools of warm light on the floor around the tables, falling off to dark between them; carpet texture is readable.",
+   "accept": {
+    "region": [
+     0,
+     380,
+     720,
+     480
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The haze makes the ceiling spots draw hard theatrical cones, a stage-lighting cue.",
+   "evidence": {
+    "region": [
+     240,
+     20,
+     300,
+     110
+    ],
+    "measured": "visible conical beams with defined edges above each speaker"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "density 0.01 per metre",
+    "to": "0.004 per metre, with the altar spots' cones softened (blend 0.3) so the beams become a faint glow rather than shafts"
+   },
+   "expected": "A trace of atmosphere without visible stage cones.",
+   "accept": {
+    "region": [
+     240,
+     20,
+     300,
+     110
+    ],
+    "metric": "lum_range",
+    "op": "<",
+    "value": 20
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Cool the speakers' saturated red against the oxblood zone, or change the zone colour, so the speaker is the frame's only saturated colour",
+   "why": "The Ember pair's colour and the oxblood zone are both fixed by the card; red on oxblood weakens the speaker as the hero, and that is a design question for the owner"
+  },
+  {
+   "request": "Change the woofer cone's cool blue-grey, plasticky material and the visible internal cables and terminals behind the clear acrylic",
+   "why": "The speaker's parts and materials are fixed; if the cone's material is a model default rather than the product's real finish, that should be raised with the owner"
+  },
+  {
+   "request": "Break the strict symmetry of the niche and the pair",
+   "why": "The altar's layout is fixed; only the camera (c1) can make it less symmetrical"
+  }
+ ],
+ "score_if_fixed": 6.5
+}

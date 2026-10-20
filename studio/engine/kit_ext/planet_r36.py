@@ -109,7 +109,7 @@ def end_grain(bpy, name='oak-endgrain'):
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree
     b_ = D._bsdf(m)
     tc = nt.nodes.new('ShaderNodeTexCoord')
-    vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = 8.0; vo.inputs['Randomness'].default_value = 1.0
+    vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = 16.0; vo.inputs['Randomness'].default_value = 1.0   # cells under a block
     nt.links.new(tc.outputs['Object'], vo.inputs['Vector'])
     ring = nt.nodes.new('ShaderNodeMath'); ring.operation = 'MULTIPLY'; ring.inputs[1].default_value = 260.0
     nt.links.new(vo.outputs['Distance'], ring.inputs[0])
@@ -118,7 +118,7 @@ def end_grain(bpy, name='oak-endgrain'):
     nt.links.new(vo.outputs['Position'], tone.inputs['Vector'])
     mix = nt.nodes.new('ShaderNodeMath'); mix.operation = 'MULTIPLY_ADD'
     nt.links.new(sn.outputs[0], mix.inputs[0]); mix.inputs[1].default_value = 0.18
-    tm = nt.nodes.new('ShaderNodeMath'); tm.operation = 'MULTIPLY'; tm.inputs[1].default_value = 0.8
+    tm = nt.nodes.new('ShaderNodeMath'); tm.operation = 'MULTIPLY'; tm.inputs[1].default_value = 0.3   # p3: 0.8 read as camouflage across the blocks
     nt.links.new(tone.outputs['Value'], tm.inputs[0]); nt.links.new(tm.outputs[0], mix.inputs[2])
     cr = nt.nodes.new('ShaderNodeValToRGB')
     cr.color_ramp.elements[0].position = 0.0; cr.color_ramp.elements[0].color = lin('#1E140D')
