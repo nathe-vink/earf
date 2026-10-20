@@ -361,143 +361,24 @@
      ]
     ],
     "rotate_z": 0.0,
-    "coins": []
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "earf_coin",
-    "fn": "coin",
-    "face": "engraved",
-    "rim_glow": 0.5,
-    "spots": [
-     {
-      "position": [
-       7.7001,
-       4.24419,
-       1.0832
-      ],
-      "flavour": "ice",
-      "rotate_z": 286.3
-     },
-     {
-      "position": [
-       7.70035,
-       4.25019,
-       1.08922
-      ],
-      "flavour": "ember",
-      "rotate_z": 332.0
-     },
-     {
-      "position": [
-       7.69962,
-       4.24997,
-       1.09524
-      ],
-      "flavour": "acid",
-      "rotate_z": 339.6
-     },
-     {
-      "position": [
-       7.70012,
-       4.25032,
-       1.10126
-      ],
-      "flavour": "smoke",
-      "rotate_z": 40.8
-     },
-     {
-      "position": [
-       7.69998,
-       4.2498,
-       1.10728
-      ],
-      "flavour": "haze",
-      "rotate_z": 195.8
-     },
-     {
-      "position": [
-       7.70006,
-       4.24961,
-       1.1133
-      ],
-      "flavour": "dust",
-      "rotate_z": 78.0
-     },
-     {
-      "position": [
-       7.69982,
-       4.25033,
-       1.11932
-      ],
-      "flavour": "fog",
-      "rotate_z": 275.7
-     },
-     {
-      "position": [
-       7.69973,
-       4.25024,
-       1.12534
-      ],
-      "flavour": "poison",
-      "rotate_z": 50.0
-     },
-     {
-      "position": [
-       7.70009,
-       4.2497,
-       1.13136
-      ],
-      "flavour": "ember",
-      "rotate_z": 0.6
-     },
-     {
-      "position": [
-       7.7003,
-       4.24977,
-       1.13738
-      ],
-      "flavour": "ice",
-      "rotate_z": 77.6
-     },
-     {
-      "position": [
-       7.70039,
-       4.2503,
-       1.1434
-      ],
-      "flavour": "acid",
-      "rotate_z": 104.1
-     },
-     {
-      "position": [
-       7.70037,
-       4.25003,
-       1.14942
-      ],
-      "flavour": "haze",
-      "rotate_z": 244.0
-     },
-     {
-      "position": [
-       7.69976,
-       4.25035,
-       1.15544
-      ],
-      "flavour": "dust",
-      "rotate_z": 248.6
-     },
-     {
-      "position": [
-       7.70037,
-       4.25031,
-       1.16146
-      ],
-      "flavour": "smoke",
-      "rotate_z": 107.6
-     }
-    ]
+    "coins": [
+     "ice",
+     "ember",
+     "acid",
+     "smoke",
+     "haze",
+     "dust",
+     "fog",
+     "poison",
+     "ember",
+     "ice",
+     "acid",
+     "haze",
+     "dust",
+     "smoke"
+    ],
+    "out": 6.0,
+    "base_glow": 1.0
    },
    {
     "kind": "kit",
@@ -1165,25 +1046,6 @@
    "cone_deg": 6.0,
    "blend": 0.6,
    "radius_m": 0.02,
-   "color": 2700,
-   "camera": false
-  },
-  "column-led": {
-   "type": "spot",
-   "position": [
-    7.7,
-    4.25,
-    1.079
-   ],
-   "target": [
-    7.7,
-    4.25,
-    1.37
-   ],
-   "power_w": 0.6,
-   "cone_deg": 40.0,
-   "blend": 0.9,
-   "radius_m": 0.012,
    "color": 2700,
    "camera": false
   }
