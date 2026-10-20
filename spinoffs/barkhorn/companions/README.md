@@ -426,3 +426,37 @@ Open on the hero:
 
 Smoked is the hardest tint for this treatment: lit from within it glows a warm grey, not a colour. The Ember frame
 shows the idea better.
+
+## Round 33: EARFcoin
+
+The owner, 2026-10-20: "One idea I had before bed: EARFcoin. Acrylic coins with the EARF globe on them that can be
+exchanged for a song request. Each guest gets one." The coin is the site's acrylic coin (the colour picker and the
+loader, `icons_real.py --coin`; the Coin ident) made real. Every dimension below is a proposal until the owner signs it.
+
+**The coin** (`coin.py`; the fab kit `earf_coin.py`, a boxed set of eight; `out-earf-coin/`):
+- **Stock:** cast acrylic in the eight speaker tints, 40 across and 6 thick, about 9.0 g (a casino chip is about 10 g).
+  Both edges are rounded 1.5 and polished, so it feels like a coin and not a laser-cut disc.
+- **Two faces, never overlapping:** a tinted coin shows both faces at once. The globe sits inside 25 across; the words
+  sit in a band 15 to 17 from the centre, round the rim. Each reads the right way from the front.
+- **The words:** GOOD FOR ONE SONG over the top and EARF under the bottom, in IBM Plex Mono SemiBold (the site's mono),
+  caps 1.9 tall, engraved 0.12 into the front face. The one alternative: ONE COIN · ONE SONG.
+- **The tints** are the speakers' swatches (`earth._C`), cast so that light through the coin and back off the paper
+  lands on the swatch. Measured on the render of the eight (`coin_tints.py`), every hue is within 4° of its swatch in
+  LCh: Ember 36° against Dust 52°, so it is one red and one orange. Smoke is cast lighter than its swatch (a
+  transparent grey, like Perspex 9T20): at the swatch's density it rendered almost black (L 4) and hid the globe.
+
+**The globe, three ways** (proofs below; all three are modelled, filed and costed):
+- **A, reverse-engraved (recommended):** the brand's stroke globe (`earth.edge_lines`, lines 0.6 wide) laser-engraved
+  0.2 deep into the back face from a mirrored file. From the front it is frosted lines 6 mm down in the tint. It works
+  in all eight tints, it is the cheapest, and it is the most acrylic.
+- **B, printed in colour:** the six-colour globe (the flush discs) UV-printed on the back of a Fog coin, colour first
+  and a white underlay over it (choked 0.08 so no white halo shows), then sealed. It is the most legible and the most
+  "brand". But it is clear only, so the guest's colour is lost, and a print can scuff.
+- **C, cast in:** the one-colour mosaic cut from 1 mm tinted sheet and set mid-thickness in a clear cast coin. The
+  globe floats in the guest's colour. It is premium, and about four times the cost.
+
+**The edge:** plain (rounded and polished) or reeded: 100 grooves 0.3 deep milled across it, like money. Reeding
+catches the light along the edge and reads as currency in the hand; it costs about $0.45 a coin more at 1,000.
+**Recommended: A with a reeded edge.**
+
+![The concept sheet](../../../renders/2026-10-20/barkhorn/coin/sheet-proof.png)

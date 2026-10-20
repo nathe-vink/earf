@@ -37,6 +37,13 @@ FIXED = {
                 'in the cup of a blackened-steel base 120 across with a brass ring, 180 tall, lit from inside the ball. A '
                 'pendant: a tinted dome 200 across, open below, on a brass hub and canopy and a black cord, lit from up '
                 'inside the hub. Sold to bars at about $650 (the table lamp) and $850 (the pendant).'),
+    # round 33: EARFcoin
+    'coin': ('a song-request token for a listening bar: a coin of tinted cast acrylic 40 mm across and 6 mm thick, '
+             'its edges rounded and polished and reeded (milled grooves round the edge, as money has). A globe made of '
+             'interlocking rings is laser-engraved into its back face, mirrored, so from the front it reads the right '
+             'way round as frosted white lines seen down through the tint; GOOD FOR ONE SONG and EARF are engraved '
+             'small round the rim of the front face. Made in eight tints (red, orange, amber, green, blue, violet, '
+             'water-clear and smoke grey); each guest gets one and hands it over with a song request.'),
 }
 PURPOSE = {
     'turntable': 'The record player\'s campaign hero: the record player is the subject, in a real living room, with the '
@@ -50,6 +57,9 @@ PURPOSE = {
     'crystal': 'The bar lamps\' hero for the trade: both lamps lit, in a dim bar at about 2700 K (board-formed concrete, '
                'a fir counter), so a bar owner sees the light they make and the quality of the acrylic and the brass. It will '
                'run as the line sheet\'s and the website\'s lead image.',
+    'coin': 'EARFcoin\'s hero: one coin, the subject, on a bar\'s zinc counter in low light, the engraved globe '
+            'catching the light, shallow focus. It will run as the coin\'s lead image on the website and in the bar\'s '
+            'menu, and has to say at a glance: an acrylic coin with a globe on it, a token worth something.',
 }
 
 
@@ -98,7 +108,7 @@ def stage(a):
     card = os.path.join(STAGE, f'card-{a.tag}.md')
     L = ['# Card', '', '## What this frame is for', '', a.purpose or PURPOSE[a.kind], '',
          '## Fixed (never prescribe a change to these)', '', 'The product: ' + FIXED[a.kind] + ' Their shape, size, '
-         'colour, materials and parts are fixed' + ('.' if a.kind in ('moon', 'crystal') else ', and so is which loudspeaker stands '
+         'colour, materials and parts are fixed' + ('.' if a.kind in ('moon', 'crystal', 'coin') else ', and so is which loudspeaker stands '
          'beside it. Every piece in the frame shares one colour by design.'), '',
          '## May change', '', 'Everything about the set (the room, its walls, floor, window, furniture and props, any '
          'Poly Haven CC0 texture, model or sky), the light (sun, sky, lamps, the lamp\'s own output), the camera (place, '

@@ -345,5 +345,51 @@
   "estimate": true,
   "supplier": "any",
   "price_date": "2026-10-19"
+ },
+ "_coin": "EARFcoin (round 33, coin.py): the shop's work on each coin, and the set's box and the column's feet. Every price is an estimate from like jobs (laser and CNC shop rates of about $90 to $120 an hour, 2026), not a quote; coin.py costs() shows the sums at 500, 1,000 and 5,000.",
+ "coin-laser": {
+  "kind": "service",
+  "maker": "a laser shop (a CO2 laser, 100 W or more)",
+  "model": "Laser work on one coin at about 1,000: cut from 6 mm cast sheet (125 mm of cut, about 12 s), the globe engraved into the back face, mirrored (about 20 s), and the words into the front (about 10 s), each face run in a jig from the sheet's own skeleton",
+  "usd": 1.1,
+  "estimate": true,
+  "supplier": "any laser shop",
+  "price_date": "2026-10-20"
+ },
+ "coin-edge": {
+  "kind": "service",
+  "maker": "a CNC shop",
+  "model": "The edge on one coin at about 1,000: both arrises rounded 1.5 with a roundover cutter and 100 reeds milled across it, in a vacuum fixture of 24 (about 40 s a coin)",
+  "usd": 1.0,
+  "estimate": true,
+  "supplier": "any CNC router shop",
+  "price_date": "2026-10-20"
+ },
+ "coin-polish": {
+  "kind": "service",
+  "maker": "the CNC shop, or a tumbling finisher",
+  "model": "Polishing one coin's edge: vibratory tumbling in plastic media with an acrylic polishing compound (a batch of 500 overnight), or vapour polishing; the faces are the sheet's own cast faces, masked through the laser work",
+  "usd": 0.3,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-20"
+ },
+ "coin-box": {
+  "kind": "packaging",
+  "maker": "any",
+  "model": "The set's box: a slide-lid box of 3 mm Smoke cast acrylic, 190 x 40 x 52 outside, with a felt-lined insert of eight 41 mm slots, so the coins stand on edge in spectrum order",
+  "usd": 9.0,
+  "estimate": true,
+  "supplier": "any laser shop",
+  "price_date": "2026-10-20"
+ },
+ "column-feet": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Four clear polyurethane bumpers, 10 x 2, under the column's base",
+  "usd": 0.4,
+  "estimate": true,
+  "supplier": "3M Bumpon SJ5302 or alike",
+  "price_date": "2026-10-20"
  }
 }

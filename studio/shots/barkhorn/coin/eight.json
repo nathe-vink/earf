@@ -1,0 +1,166 @@
+{
+ "title": "EARFcoin, the eight",
+ "size": [
+  1600,
+  1067
+ ],
+ "camera": {
+  "position": [
+   0.01,
+   -0.39,
+   0.33
+  ],
+  "target": [
+   -0.002,
+   0.04,
+   0.006
+  ],
+  "lens_mm": 70,
+  "level": false,
+  "fstop": 8.0,
+  "focus": [
+   -0.002,
+   0.04,
+   0.006
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#DDD8D0",
+  "width": 3.0,
+  "front": 2.0,
+  "depth": 0.8,
+  "radius": 0.5,
+  "height": 2.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_coin",
+    "fn": "fan",
+    "spots": [
+     {
+      "position": [
+       -0.112,
+       0.012,
+       0.0
+      ],
+      "heading": -4
+     }
+    ],
+    "flavours": [
+     "ember",
+     "dust",
+     "acid",
+     "poison",
+     "ice",
+     "haze",
+     "fog",
+     "smoke"
+    ],
+    "s": 30.0,
+    "arc": 420.0,
+    "seed": 4,
+    "face": "engraved",
+    "edge": "reeded"
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D4D2CE",
+  "horizon": "#DCDAD5",
+  "ground": "#6A665F",
+  "strength": 0.6
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    0.9,
+    0.7
+   ],
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 50,
+    "distance_m": 1.2
+   },
+   "target": [
+    -0.002,
+    0.04,
+    0.006
+   ],
+   "irradiance": 0.9,
+   "color": "#FFF3E1"
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    1.0
+   ],
+   "orbit": {
+    "azimuth_deg": 40,
+    "elevation_deg": 20,
+    "distance_m": 1.4
+   },
+   "target": [
+    -0.002,
+    0.04,
+    0.006
+   ],
+   "irradiance": 0.3,
+   "color": "#FFF7EA"
+  },
+  "back": {
+   "type": "area",
+   "size_m": [
+    0.8,
+    0.3
+   ],
+   "orbit": {
+    "azimuth_deg": 170,
+    "elevation_deg": 35,
+    "distance_m": 1.0
+   },
+   "target": [
+    -0.002,
+    0.04,
+    0.006
+   ],
+   "irradiance": 0.8,
+   "color": "#FFF7EA",
+   "camera": false
+  },
+  "rake": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.06
+   ],
+   "position": [
+    -0.45,
+    0.35,
+    0.08
+   ],
+   "target": [
+    -0.002,
+    0.04,
+    0.006
+   ],
+   "irradiance": 3.0,
+   "color": "#FFF1DC",
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5400
+ }
+}
