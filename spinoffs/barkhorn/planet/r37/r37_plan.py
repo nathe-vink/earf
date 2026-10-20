@@ -66,13 +66,15 @@ CONFIGS = {
 }
 SPEAKER_FLAVOUR = {'smoke': 'cloud-black', 'ember': 'cloud-red', 'ice': 'cloud-blue'}
 LAMP_FLAVOUR = {'smoke': 'smoked', 'ember': 'ember', 'ice': 'ice'}
-LAMP_GLOW = {'smoke': 0.45, 'ember': 0.4, 'ice': 0.4}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
+LAMP_GLOW = {'smoke': 0.45, 'ember': 0.2, 'ice': 0.3}                 # the lead's 1.1 smoked read a blown disc (r37 p1)
 TT_DEF = 'spinoffs/barkhorn/companions/out-concepts2/r3.json'        # R3 Float, until the owner picks
 # the light plinths' colour per tint (the owner: "Lights under the speakers could be cool too")
 PLINTH_COL = {'smoke': '#FFB060', 'ember': '#FF5038', 'ice': '#5AB4FF'}
 # and its strength per tint: a saturated red clips first (Ember at 1.0 clipped 1387 and 5604 px red-only in a Standard
 # view, r37); Smoke needs the most to read at all
-PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.25, 'ice': 0.5}
+PLINTH_GAIN = {'smoke': 1.0, 'ember': 0.12, 'ice': 0.35}
 # the light on the speakers per tint (the altar spots, the lamps on the listening pair, the bar pair's spots): Ember at
 # Smoke's levels clipped its red to pink (6040 px red-only in a Standard view, listening, r37)
-SPK_GAIN = {'smoke': 1.0, 'ember': 0.35, 'ice': 0.6}
+SPK_GAIN = {'smoke': 1.0, 'ember': 0.15, 'ice': 0.4}
+# the lamp inside each Dome and Orb per tint: a red cover lit at Smoke's 30 W clipped pink (r37, bar-ember)
+LAMP_GAIN = {'smoke': 1.0, 'ember': 0.4, 'ice': 0.6}

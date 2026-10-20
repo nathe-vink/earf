@@ -58,11 +58,13 @@ def lamps(v):
     y = round((RP.COUNTER['y0'] + RP.COUNTER['y1']) / 2, 4)
     noshadow = T36.COVER
     return [{'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'flavour': RP.LAMP_FLAVOUR[cfg['dome']],
-             'spots': [[x, y, RP.DOME['rim_z']] for x in RP.DOMES], 'ceiling': RP.CEIL, 'lamp_w': v['dome_w'],
+             'spots': [[x, y, RP.DOME['rim_z']] for x in RP.DOMES], 'ceiling': RP.CEIL,
+             'lamp_w': round(v['dome_w'] * RP.LAMP_GAIN[cfg['dome']], 2),
              'lamp_k': 2700, 'shade_glow': v.get('dome_glow_' + cfg['dome'], RP.LAMP_GLOW[cfg['dome']]),
              'noshadow': noshadow},
             {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'orb', 'flavour': RP.LAMP_FLAVOUR[cfg['orb']],
-             'spots': [list(s) for s in RP.sphere_spots()], 'lamp_w': v['sphere_w'], 'lamp_k': 2700,
+             'spots': [list(s) for s in RP.sphere_spots()], 'lamp_w': round(v['sphere_w'] * RP.LAMP_GAIN[cfg['orb']], 2),
+             'lamp_k': 2700,
              'shade_glow': v.get('orb_glow_' + cfg['orb'], RP.LAMP_GLOW[cfg['orb']] * v.get('sphere_glow', 1.1) / 1.1),
              'noshadow': noshadow}]
 

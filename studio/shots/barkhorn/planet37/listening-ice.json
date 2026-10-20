@@ -139,9 +139,9 @@
     "windows_lit": 0.5,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
-    "plinth_bar": 0.25,
+    "plinth_bar": 0.175,
     "plinth_bar_col": "#5AB4FF",
-    "plinth_listen": 0.25,
+    "plinth_listen": 0.175,
     "plinth_listen_col": "#5AB4FF"
    },
    {
@@ -205,9 +205,9 @@
      ]
     ],
     "ceiling": 3.4,
-    "lamp_w": 30.0,
+    "lamp_w": 18.0,
     "lamp_k": 2700,
-    "shade_glow": 0.4,
+    "shade_glow": 0.3,
     "noshadow": "shell|liner|skin"
    },
    {
@@ -268,9 +268,9 @@
       0.66
      ]
     ],
-    "lamp_w": 6.0,
+    "lamp_w": 3.6,
     "lamp_k": 2700,
-    "shade_glow": 0.2,
+    "shade_glow": 0.15,
     "noshadow": "shell|liner|skin"
    }
   ]
@@ -299,7 +299,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.36,
+   "irradiance": 0.24,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -322,7 +322,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 2.4,
+   "irradiance": 1.6,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -345,7 +345,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.36,
+   "irradiance": 0.24,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -368,7 +368,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 2.4,
+   "irradiance": 1.6,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -585,7 +585,7 @@
     1.9,
     1.4
    ],
-   "power_w": 144.0,
+   "power_w": 96.0,
    "cone_deg": 30.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -604,7 +604,7 @@
     4.199999999999999,
     1.4
    ],
-   "power_w": 144.0,
+   "power_w": 96.0,
    "cone_deg": 30.0,
    "blend": 0.9,
    "radius_m": 0.03,
@@ -646,7 +646,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.375,
+   "irradiance": 0.262,
    "color": "#5AB4FF",
    "camera": false,
    "receivers": [
@@ -669,7 +669,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.375,
+   "irradiance": 0.262,
    "color": "#5AB4FF",
    "camera": false,
    "receivers": [
@@ -692,7 +692,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.375,
+   "irradiance": 0.262,
    "color": "#5AB4FF",
    "camera": false,
    "receivers": [
@@ -715,7 +715,7 @@
     0.4,
     0.3
    ],
-   "irradiance": 0.375,
+   "irradiance": 0.262,
    "color": "#5AB4FF",
    "camera": false,
    "receivers": [
@@ -734,7 +734,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 18.0,
+   "power_w": 12.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -753,7 +753,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 18.0,
+   "power_w": 12.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
