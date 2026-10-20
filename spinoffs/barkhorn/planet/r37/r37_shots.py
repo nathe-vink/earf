@@ -85,6 +85,16 @@ def props(v):
 _lights = S.lights
 
 
+# a speaker's own parts, for its linked lamps: '*#i' also matched the R3s' parts (plinth, base, cover share the
+# instance numbers), so the bar pair's blue plinth lamps lit the Fog players in Mixed
+SPK_PARTS = ('left', 'right', 'top', 'bottom', 'front-panel', 'back', 'brace*', 'rib-*', 'port-*', 'land-*', 'grip-*',
+             'waveguide*', 'woofer-*', 'hf-*', 'lining-*', 'feet-base', 'amp-*')
+
+
+def spk_rx(i):
+    return [f'{n}#{i}' for n in SPK_PARTS]
+
+
 def lights(v):
     """Round 36's lights; the altar's two spots moved in front of the listening pair and aimed at their faces (p1, both
     critics: the pools fell on the felt above them)."""
@@ -103,7 +113,11 @@ def lights(v):
             for i, (x, y, zz) in enumerate(spk):
                 L[f'plinth{grp}{i}'] = {'type': 'area', 'position': [x, y, round(zz + 0.01, 3)], 'target': [x, y, round(zz + 0.9, 3)],
                                         'size_m': [0.40, 0.30], 'irradiance': round(v['plinth_lamp'] * v['plinth'] * RP.PLINTH_GAIN[tint], 3),
-                                        'color': RP.PLINTH_COL[tint], 'camera': False, 'receivers': [f'*#{i}']}
+                                        'color': RP.PLINTH_COL[tint], 'camera': False, 'receivers': spk_rx(i)}
+    for l in L.values():                               # round 36's linked lamps too
+        r = l.get('receivers')
+        if r and len(r) == 1 and r[0].startswith('*#'):
+            l['receivers'] = spk_rx(int(r[0][2:]))
     # the light on each pair scaled to its tint (a saturated red clips first)
     gl, gb = RP.SPK_GAIN[cfg['listen']], RP.SPK_GAIN[cfg['bar']]
     for k, l in L.items():
@@ -124,7 +138,7 @@ def lights(v):
             L[f'barback{i}'] = {'type': 'area', 'position': [x, round(y + 0.22, 3), round(zz + 1.35, 3)],
                                 'target': [x, y, round(zz + 0.6, 3)], 'size_m': [0.4, 0.2],
                                 'irradiance': round(v['barback'] * gb, 3), 'color': 2700, 'camera': False,
-                                'receivers': [f'*#{i}']}
+                                'receivers': spk_rx(i)}
     # a soft wash down the felt behind each of the listening pair, from the altar's soffit (the lead: not voids)
     if v.get('felt_wash', 0) > 0:
         A = RP.ALTAR
