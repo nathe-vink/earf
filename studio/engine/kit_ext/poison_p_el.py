@@ -549,3 +549,27 @@ def scan(bpy, name, p, kit):
         if any(d in o.name for d in drop):
             bpy.data.objects.remove(o, do_unlink=True)
     return [root]
+
+
+def scum_rings(bpy, name, p, kit):
+    """Scum banked up round what stands in the bloom (the wind piles it against posts and stumps): for each
+    [x, y, r] in `items`, a ragged annulus of thick, wet scum (`color`) from r out to r + `width`, lying on the water
+    at `z`."""
+    rnd = random.Random(p.get('seed', 1))
+    m, nt, b = _node_mat(bpy, f'{name}-mat')
+    b.inputs['Base Color'].default_value = (*_hex(p.get('color', '#9AB02C')), 1)
+    b.inputs['Roughness'].default_value = p.get('roughness', 0.35)
+    bm = bmesh.new()
+    z, wid, seg = p.get('z', 0.004), p.get('width', 0.35), 40
+    for x, y, r in p.get('items', []):
+        inner, outer = [], []
+        ph = rnd.uniform(0, 6.28)
+        for k in range(seg):
+            a = 2 * math.pi * k / seg
+            ro = r + wid * (0.6 + 0.4 * math.sin(3 * a + ph) * rnd.uniform(0.6, 1.0))
+            inner.append(bm.verts.new((x + r * math.cos(a), y + r * math.sin(a), z)))
+            outer.append(bm.verts.new((x + ro * math.cos(a), y + ro * math.sin(a), z)))
+        for k in range(seg):
+            j = (k + 1) % seg
+            bm.faces.new((inner[k], inner[j], outer[j], outer[k]))
+    return [_obj(bpy, name, bm, m, {'position': [0, 0, 0]}, smooth=True)]
