@@ -537,3 +537,15 @@ def sign(bpy, name, p, kit):
             v.co = M @ v.co
         ob = _obj(bpy, f'{name}-{k}', b_, mat, {}, smooth=sm); ob.location = (0, 0, 0); out.append(ob)
     return out
+
+
+def scan(bpy, name, p, kit):
+    """A scanned model placed like piece('asset'), less the parts whose names contain any of `drop` (as the pier's
+    gantry, modular_wooden_pier_section_05)."""
+    root = assets.place(bpy, p['model'], p.get('res', '2k'), tuple(p.get('position', [0, 0, 0])),
+                        tuple(p.get('rotate', [0, 0, 0])), p.get('scale', 1.0), name)
+    drop = p.get('drop', [])
+    for o in list(root.children_recursive):
+        if any(d in o.name for d in drop):
+            bpy.data.objects.remove(o, do_unlink=True)
+    return [root]
