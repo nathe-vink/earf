@@ -474,11 +474,15 @@ def algae_water(bpy, name, p, kit):
     return [ob]
 
 
-def sign_path():
-    """The shore sign's face: weathered white enamel, a red DANGER band, the warning (generic, no agency's mark)."""
+SIGNS = {'algae': ('TOXIC ALGAE', 'AVOID CONTACT', 'with the water. Keep children', 'and dogs out of the lake.'),
+         'gas': ('TOXIC GAS', 'VOLCANIC FUMES', 'Do not stop or leave the path.', 'Gases can kill in minutes.')}
+
+
+def sign_path(kind='algae'):
+    """A warning sign's face: weathered white enamel, a red DANGER band, the warning (generic, no agency's mark)."""
     from PIL import Image, ImageDraw
     os.makedirs(LABEL_DIR, exist_ok=True)
-    path = os.path.join(LABEL_DIR, 'sign-algae.png')
+    path = os.path.join(LABEL_DIR, f'sign-{kind}.png')
     if os.path.exists(path):
         return path
     W, H = 900, 640
@@ -494,10 +498,11 @@ def sign_path():
         while size > 14 and d.textbbox((0, 0), text, font=_font(SANS, size))[2] > W - 300 - 36:
             size -= 2
         d.text((300, y), text, font=_font(SANS, size), fill=fill)
-    fit('TOXIC ALGAE', 215, 88, '#1A1A1A')
-    fit('AVOID CONTACT', 330, 70, '#1A1A1A')
-    fit('with the water. Keep children', 440, 34, '#222222')
-    fit('and dogs out of the lake.', 486, 34, '#222222')
+    a, b, c, e = SIGNS[kind]
+    fit(a, 215, 88, '#1A1A1A')
+    fit(b, 330, 70, '#1A1A1A')
+    fit(c, 440, 34, '#222222')
+    fit(e, 486, 34, '#222222')
     img = _age(img, 21, 2.0)
     img.save(path)
     return path
@@ -509,7 +514,7 @@ def sign(bpy, name, p, kit):
     bw, bh = p.get('size', [0.6, 0.43])
     post_h = p.get('post', 1.25)
     wood = assets.pbr(bpy, p.get('wood', 'weathered_planks'), '2k', scale=0.5, coords='object')
-    face = _image_mat(bpy, f'{name}-face', sign_path(), 0.55)
+    face = _image_mat(bpy, f'{name}-face', sign_path(p.get('warning', 'algae')), 0.55)
     bm = bmesh.new()
     g = bmesh.ops.create_cube(bm, size=1.0)
     for v in g['verts']:

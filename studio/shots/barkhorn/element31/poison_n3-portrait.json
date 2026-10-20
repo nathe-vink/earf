@@ -35,7 +35,7 @@
     "flat": [
      0.0,
      0.0,
-     2.0
+     4.2
     ],
     "stand": 0.0,
     "zone_scale": 0.35,
@@ -125,16 +125,76 @@
     "module": "acid_el",
     "fn": "chimney",
     "position": [
+     1.7,
+     2.3,
+     -0.05
+    ],
+    "height": 0.4,
+    "radius": 0.45,
+    "colors": [
+     "#CFC27A",
+     "#B09A3A",
+     "#7A6A2A"
+    ],
+    "tex_scale": 1.1,
+    "seed": 11
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_el",
+    "fn": "chimney",
+    "position": [
+     2.7,
+     3.5,
+     -0.05
+    ],
+    "height": 0.6,
+    "radius": 0.65,
+    "colors": [
+     "#CFC27A",
+     "#B09A3A",
+     "#7A6A2A"
+    ],
+    "tex_scale": 1.1,
+    "seed": 12
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_el",
+    "fn": "chimney",
+    "position": [
+     0.9,
+     3.7,
+     -0.05
+    ],
+    "height": 0.22,
+    "radius": 0.28,
+    "colors": [
+     "#CFC27A",
+     "#B09A3A",
+     "#7A6A2A"
+    ],
+    "tex_scale": 1.1,
+    "seed": 13
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_el",
+    "fn": "chimney",
+    "position": [
      -7.0,
      19.0,
-     -2.5500000000000003
+     -2.6
     ],
     "height": 0.9,
     "radius": 1.0,
     "colors": [
-     "#EFE39A",
-     "#E2C628",
-     "#B8960E"
+     "#CFC27A",
+     "#B09A3A",
+     "#7A6A2A"
     ],
     "tex_scale": 1.1,
     "seed": 2
@@ -147,14 +207,14 @@
     "position": [
      4.0,
      18.5,
-     -2.5500000000000003
+     -2.6
     ],
     "height": 0.7,
     "radius": 0.8,
     "colors": [
-     "#EFE39A",
-     "#E2C628",
-     "#B8960E"
+     "#CFC27A",
+     "#B09A3A",
+     "#7A6A2A"
     ],
     "tex_scale": 1.1,
     "seed": 5
@@ -162,43 +222,23 @@
    {
     "kind": "kit",
     "shape": "ext",
-    "module": "acid_el",
-    "fn": "chimney",
-    "position": [
-     10.0,
-     23.0,
-     -2.5500000000000003
-    ],
-    "height": 1.1,
-    "radius": 1.2,
-    "colors": [
-     "#EFE39A",
-     "#E2C628",
-     "#B8960E"
-    ],
-    "tex_scale": 1.1,
-    "seed": 8
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
     "module": "poison_p_el",
     "fn": "plume_at",
     "base": [
-     -7.0,
-     19.0
+     1.7,
+     2.3
     ],
-    "height": 9.0,
-    "lean": 7.0,
-    "bend": 1.6,
-    "width": 0.7,
-    "spread": 0.5,
-    "density": 0.9,
-    "color": "#D6E2C4",
-    "absorb_color": "#9AAA84",
-    "anisotropy": 0.45,
+    "height": 4.5,
+    "lean": 1.2,
+    "bend": 1.4,
+    "width": 0.2,
+    "spread": 0.32,
+    "density": 2.2,
+    "color": "#ECEBD8",
+    "absorb_color": "#B4B08A",
+    "anisotropy": 0.5,
     "seed": 1,
-    "z": -2.6
+    "z": 0.0
    },
    {
     "kind": "kit",
@@ -206,20 +246,20 @@
     "module": "poison_p_el",
     "fn": "plume_at",
     "base": [
-     4.0,
-     18.5
+     2.7,
+     3.5
     ],
-    "height": 9.0,
-    "lean": 6.0,
-    "bend": 1.6,
-    "width": 0.7,
-    "spread": 0.5,
-    "density": 0.9,
-    "color": "#D6E2C4",
-    "absorb_color": "#9AAA84",
-    "anisotropy": 0.45,
+    "height": 6.0,
+    "lean": 1.8,
+    "bend": 1.4,
+    "width": 0.28,
+    "spread": 0.32,
+    "density": 1.8,
+    "color": "#ECEBD8",
+    "absorb_color": "#B4B08A",
+    "anisotropy": 0.5,
     "seed": 2,
-    "z": -2.6
+    "z": 0.0
    },
    {
     "kind": "kit",
@@ -227,91 +267,59 @@
     "module": "poison_p_el",
     "fn": "plume_at",
     "base": [
-     10.0,
-     23.0
+     0.9,
+     3.7
     ],
-    "height": 9.0,
-    "lean": 8.0,
-    "bend": 1.6,
-    "width": 0.7,
-    "spread": 0.5,
-    "density": 0.9,
-    "color": "#D6E2C4",
-    "absorb_color": "#9AAA84",
-    "anisotropy": 0.45,
-    "seed": 3,
-    "z": -2.6
+    "height": 3.0,
+    "lean": 0.8,
+    "bend": 1.4,
+    "width": 0.12,
+    "spread": 0.32,
+    "density": 1.6,
+    "color": "#ECEBD8",
+    "absorb_color": "#B4B08A",
+    "anisotropy": 0.5,
+    "seed": 5,
+    "z": 0.0
    },
    {
     "kind": "kit",
     "shape": "ext",
-    "module": "smoke_b_el",
-    "fn": "smoke",
-    "box": [
-     -30.0,
-     3.0,
-     -2.0,
-     30.0,
-     45.0,
-     6.0
+    "module": "poison_p_el",
+    "fn": "sign",
+    "position": [
+     -1.45,
+     -0.45,
+     -0.02
     ],
-    "drift": -20.0,
-    "height": 1.2,
-    "thickness": 3.5,
-    "density": 0.06,
-    "color": "#DCE6CC",
-    "absorb_color": "#A4B290",
-    "anisotropy": 0.35,
-    "seed": 4
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "acid_el",
-    "fn": "ridge",
-    "distance": 95.0,
-    "height": 34.0,
-    "span": [
-     -55.0,
-     50.0
+    "rotate": [
+     0,
+     0,
+     22
     ],
-    "tint": "#5E5C56",
-    "tint_mix": 0.7,
-    "tex_scale": 3.0,
-    "seed": 9
+    "lean": 5.0,
+    "size": [
+     0.48,
+     0.34
+    ],
+    "post": 1.15,
+    "warning": "gas"
    },
    {
     "kind": "kit",
     "shape": "asset",
     "model": "rock_09",
     "position": [
-     -1.6,
-     1.1,
-     -0.12
+     -2.3,
+     1.6,
+     -0.15
     ],
     "rotate": [
      0,
      0,
      40
     ],
-    "scale": 14.0,
-    "res": "2k"
-   },
-   {
-    "kind": "kit",
-    "shape": "asset",
-    "model": "rock_09",
-    "position": [
-     2.1,
-     2.4,
-     -0.15
-    ],
-    "rotate": [
-     0,
-     0,
-     200
-    ],
-    "scale": 20.0,
+    "scale": 12.0,
     "res": "2k"
    }
   ]
@@ -425,14 +433,14 @@
  },
  "haze": {
   "box_m": [
-   -300,
-   -30,
-   -6,
-   300,
-   300,
+   -600,
+   -600,
+   -50,
+   600,
+   600,
    200
   ],
-  "density": 0.0007,
+  "density": 0.01,
   "anisotropy": 0.4,
   "color": "#DCE4D2"
  }
