@@ -6,22 +6,22 @@
  ],
  "camera": {
   "position": [
-   0.045,
+   0.032,
    -0.235,
-   0.144
+   0.15
   ],
   "target": [
-   0.0,
-   0.004,
-   0.003
+   -0.014,
+   0.006,
+   0.008
   ],
   "lens_mm": 100,
   "level": false,
-  "fstop": 9.0,
+  "fstop": 13.0,
   "focus": [
    0.0,
-   0.0,
-   0.002
+   -0.004,
+   0.006
   ]
  },
  "set": {
@@ -46,6 +46,27 @@
    },
    {
     "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#EEEAE3",
+    "size": [
+     0.085,
+     0.085,
+     0.0005
+    ],
+    "position": [
+     0.012,
+     0.012,
+     4e-05
+    ],
+    "rotate": [
+     0,
+     0,
+     24
+    ]
+   },
+   {
+    "kind": "kit",
     "shape": "ext",
     "module": "earf_coin",
     "fn": "coin",
@@ -54,7 +75,7 @@
       "position": [
        0.0,
        0.0,
-       0.0
+       0.00055
       ],
       "rotate": [
        0,
@@ -72,12 +93,12 @@
     "shape": "sphere",
     "material": "glow",
     "color": "#FFB060",
-    "emit": 120.0,
-    "scale": 0.018,
+    "emit": 50.0,
+    "scale": 0.009,
     "position": [
      -0.3,
-     0.65,
-     0.3
+     1.3,
+     0.26
     ],
     "shadow": false
    },
@@ -86,25 +107,11 @@
     "shape": "sphere",
     "material": "glow",
     "color": "#FFB060",
-    "emit": 120.0,
-    "scale": 0.018,
+    "emit": 50.0,
+    "scale": 0.009,
     "position": [
-     -0.08,
-     0.85,
-     0.42
-    ],
-    "shadow": false
-   },
-   {
-    "kind": "kit",
-    "shape": "sphere",
-    "material": "glow",
-    "color": "#FFB060",
-    "emit": 120.0,
-    "scale": 0.018,
-    "position": [
-     0.16,
-     0.72,
+     -0.12,
+     1.55,
      0.34
     ],
     "shadow": false
@@ -114,12 +121,12 @@
     "shape": "sphere",
     "material": "glow",
     "color": "#FFB060",
-    "emit": 120.0,
-    "scale": 0.018,
+    "emit": 50.0,
+    "scale": 0.009,
     "position": [
-     0.38,
-     0.95,
-     0.44
+     0.1,
+     1.4,
+     0.3
     ],
     "shadow": false
    },
@@ -128,12 +135,26 @@
     "shape": "sphere",
     "material": "glow",
     "color": "#FFB060",
-    "emit": 120.0,
-    "scale": 0.018,
+    "emit": 50.0,
+    "scale": 0.009,
     "position": [
-     0.58,
-     0.7,
-     0.28
+     0.3,
+     1.6,
+     0.36
+    ],
+    "shadow": false
+   },
+   {
+    "kind": "kit",
+    "shape": "sphere",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 50.0,
+    "scale": 0.009,
+    "position": [
+     -0.42,
+     1.5,
+     0.22
     ],
     "shadow": false
    }
@@ -154,16 +175,16 @@
     0.05
    ],
    "position": [
-    -0.12,
-    0.3,
-    0.045
+    -0.2,
+    0.17,
+    0.02
    ],
    "target": [
-    0.0,
-    0.004,
-    0.003
+    -0.014,
+    0.006,
+    0.008
    ],
-   "irradiance": 5.0,
+   "irradiance": 6.0,
    "color": 3100,
    "camera": false
   },
@@ -175,16 +196,36 @@
    ],
    "position": [
     0.05,
-    0.12,
+    -0.05,
     0.45
    ],
    "target": [
-    0.0,
-    0.004,
-    0.003
+    -0.014,
+    0.006,
+    0.008
    ],
-   "irradiance": 0.7,
-   "color": 3800,
+   "irradiance": 1.0,
+   "color": 3600,
+   "camera": false
+  },
+  "strip": {
+   "type": "area",
+   "size_m": [
+    0.4,
+    0.03
+   ],
+   "position": [
+    0.0,
+    0.16,
+    0.3
+   ],
+   "target": [
+    -0.014,
+    0.006,
+    0.008
+   ],
+   "irradiance": 1.2,
+   "color": 3000,
    "camera": false
   },
   "fill": {
@@ -199,23 +240,23 @@
     "distance_m": 0.8
    },
    "target": [
-    0.0,
-    0.004,
-    0.003
+    -0.014,
+    0.006,
+    0.008
    ],
-   "irradiance": 0.22,
+   "irradiance": 0.3,
    "color": 4000,
    "camera": false
   }
  },
  "render": {
-  "samples": 320,
-  "adaptive": 0.008,
+  "samples": 400,
+  "adaptive": 0.006,
   "denoise": true,
   "clamp": 12,
   "bounces": 16,
   "view": "Khronos PBR Neutral",
-  "exposure": -0.3,
-  "white_balance_k": 3500
+  "exposure": -0.2,
+  "white_balance_k": 3800
  }
 }
