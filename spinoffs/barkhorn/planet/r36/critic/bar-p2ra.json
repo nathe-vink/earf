@@ -1,0 +1,394 @@
+{
+ "stage1": {
+  "impression": "A dim, warm, well-composed wide view down a timber bar to a lit alcove where two red speakers glow. But the speakers read as neon signs: their edges are blown and hard. The near counter chairs look like smooth, pale, pinkish CG, and the right third falls into a featureless black slab. Surfaces have no 1:1 texture (no concrete formwork, fir checks or steel patina), and there is a second saturated hue (bottle green, plus a red slab lamp on the right). It reads as a competent hospitality render of a generic bar, not as a photograph of a specific place. A design magazine would not run it as Planet EARF: the zinc racetrack, fluted front, record wall and frosted screens are all illegible.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Speakers read as cast acrylic lit from within, not as neon: clip_pct inside each speaker box under 2 %, with the batts and horn readable through the tint",
+  "The room's signature elements are legible at a glance: the record wall on the left, the frosted screens on the right (hands, shell), the zinc top with its rounded edge and the fluted oak front",
+  "Materials hold at 1:1 at full 2400 px: board-formed concrete with tie holes and pour lines, fir checks, blackened steel patina, no smooth plastic upholstery",
+  "The smoked partition (right third) shows reflections and depth instead of a black void (lum_median >= 14)",
+  "Counter chairs read as dark oak, not blonde or pink timber",
+  "Visible pools of light repeat down the counter under each Dome, with dark between them",
+  "Signs of life read at proof scale: coat, glasses, record out of its sleeve",
+  "A little visible haze in the altar's spot beams"
+ ],
+ "defects": [
+  {
+   "region": [
+    280,
+    225,
+    315,
+    272
+   ],
+   "what": "left Ember speaker: 10.2 % clipped; the edge glow is a hard, saturated neon outline (edge step 116 over 1 px), so it reads as signage, not thick acrylic"
+  },
+  {
+   "region": [
+    408,
+    225,
+    445,
+    272
+   ],
+   "what": "right Ember speaker: 9.3 % clipped, same neon read"
+  },
+  {
+   "region": [
+    490,
+    110,
+    640,
+    320
+   ],
+   "what": "smoked partition and right-hand wall: a featureless near-black slab, median 8.3, a fifth of the frame with no information; one smeared red reflection"
+  },
+  {
+   "region": [
+    0,
+    320,
+    300,
+    480
+   ],
+   "what": "counter chairs read as pale, pinkish blonde wood with smooth, plastic-looking seats; the card says dark oak"
+  },
+  {
+   "region": [
+    580,
+    270,
+    700,
+    310
+   ],
+   "what": "the red Dome or slab lamp over the banquette table reads as a glossy red plastic block with blown pink edges, a second red hotspot that competes with the altar"
+  },
+  {
+   "region": [
+    60,
+    120,
+    210,
+    265
+   ],
+   "what": "the frosted screen or panel is barely legible (median 26.5, range 23): the shell in fog is a faint outline"
+  },
+  {
+   "region": [
+    0,
+    60,
+    60,
+    260
+   ],
+   "what": "the back bar and record wall are not readable as records: median 30, no sleeve highlights"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    110
+   ],
+   "what": "the ceiling is flat, uniform planking (range 19); no Douglas fir beam character"
+  },
+  {
+   "region": [
+    250,
+    360,
+    600,
+    480
+   ],
+   "what": "the floor is mottled and blotchy, with a CG-looking noise pattern; as bright as the bar top (median 40 vs 36), so the pools of light do not separate"
+  },
+  {
+   "region": [
+    230,
+    150,
+    490,
+    330
+   ],
+   "what": "the altar alcove's back wall is dark and textureless, red-brown; the bottle-green booths add a second saturated colour, and the green cone shades over the speakers look like plastic"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "proof is 720 x 480 with visible denoiser smear on all wood grain; no people, so it is showroom-empty"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The Ember pair blows out to a neon outline, so the hero reads as a sign, not as premium cast acrylic.",
+   "evidence": {
+    "region": [
+     280,
+     225,
+     315,
+     272
+    ],
+    "measured": "clip_pct 10.2 (right speaker 9.3), lum_p95 184, edge step 116 over 1 px"
+   },
+   "change": {
+    "setting": "lamps: on each Ember speaker 4 x area (and the altar 2 x spot)",
+    "from": "area 5.0 W/m2 at the target; altar spots 70.0 W, cone 28 deg",
+    "to": "area 2.0 W/m2; altar spots 45 W, cone 36 deg, aimed to graze the cabinet faces from above rather than backlight the edges"
+   },
+   "expected": "The speakers keep their red glow but the edges stop clipping; the white batts and resin horn read through the tint; the speaker median stays at or above 45.",
+   "accept": {
+    "region": [
+     280,
+     225,
+     315,
+     272
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2.0
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The frosted screens on the right and the panel on the left are nearly invisible, so the room's specific art is lost.",
+   "evidence": {
+    "region": [
+     60,
+     120,
+     210,
+     265
+    ],
+    "measured": "median 26.5, range 23.4; right-hand screens inside [490,110,640,320] median 8.3"
+   },
+   "change": {
+    "setting": "the room's glowing surfaces: the screens' images",
+    "from": "1.0",
+    "to": "2.5"
+   },
+   "expected": "The screens glow softly and evenly with the hands and the shell legible; the right third gains a light source and stops being a void.",
+   "accept": {
+    "region": [
+     490,
+     110,
+     640,
+     320
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The counter chairs read as blonde or pink timber with smooth, plastic-looking seats, not dark oak.",
+   "evidence": {
+    "region": [
+     0,
+     320,
+     200,
+     480
+    ],
+    "measured": "r 66 / g 37 / b 25, lum_p95 119: light warm-pink wood"
+   },
+   "change": {
+    "setting": "the oak's stain",
+    "from": "the current light stain",
+    "to": "a dark smoked oak, albedo about #3A2618, roughness 0.55, visible open grain (bump 0.3); seat leather given a micro-wrinkle normal and roughness 0.6"
+   },
+   "expected": "The chairs sit back into the room as dark furniture with highlights only on the curved back rails; the frame's warmth comes from the light, not the wood.",
+   "accept": {
+    "region": [
+     0,
+     320,
+     200,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     34
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The record wall and back bar do not read as records.",
+   "evidence": {
+    "region": [
+     0,
+     60,
+     60,
+     260
+    ],
+    "measured": "median 29.9, p95 54, no sleeve highlights"
+   },
+   "change": {
+    "setting": "lamps: the record wall 4 x spot",
+    "from": "14.0 W, cone 22 deg",
+    "to": "40 W, cone 30 deg, 2600 K, grazing down the spines"
+   },
+   "expected": "The sleeve spines pick up small coloured highlights, and the back bar becomes a legible wall of records.",
+   "accept": {
+    "region": [
+     0,
+     60,
+     60,
+     260
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The floor is as bright as the zinc, so there are no pools of light down the counter.",
+   "evidence": {
+    "region": [
+     250,
+     360,
+     600,
+     480
+    ],
+    "measured": "floor median 39.6 vs bar top [0,265,200,320] median 36.3; bar-top profile drops from 129 to 29 within 200 px, so only the nearest Dome makes a pool"
+   },
+   "change": {
+    "setting": "lamps: the Domes' downlights 4 x spot; the floor's polish",
+    "from": "320.0 W, cone 46 deg; current floor sheen",
+    "to": "260 W, cone 30 deg (tight pools on the zinc); floor roughness up to 0.6 with a darker concrete tone"
+   },
+   "expected": "Each Dome throws a distinct pool on the zinc with dark between them; the floor drops to a quiet mid-dark.",
+   "accept": {
+    "region": [
+     250,
+     360,
+     600,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     32
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The red lamp over the banquette table is a blown, glossy red block that competes with the altar as a second red hotspot.",
+   "evidence": {
+    "region": [
+     590,
+     270,
+     700,
+     310
+    ],
+    "measured": "r 67 / g 25 / b 22, lum_p95 132, pink-white edge clip visible in the 4x crop"
+   },
+   "change": {
+    "setting": "EARF's lamps: each Dome's liner glow (the one over the banquette)",
+    "from": "30.0 W, glow 1.1",
+    "to": "18 W, glow 0.6"
+   },
+   "expected": "The lamp reads as a warm, quiet secondary glow, and the eye goes to the altar first.",
+   "accept": {
+    "region": [
+     590,
+     270,
+     700,
+     310
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 100
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "No atmosphere: the altar spots and Domes make no visible beam, so the room reads as a clean CG volume.",
+   "evidence": {
+    "region": [
+     270,
+     175,
+     330,
+     225
+    ],
+    "measured": "the air above the speakers has median 13.6, range 33, no gradient from the spots"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.005 per metre",
+    "to": "0.015 per metre"
+   },
+   "expected": "Faint cones under the altar spots and the Domes, slightly lifted shadows above the speakers, the photographic night-bar air.",
+   "accept": {
+    "region": [
+     270,
+     175,
+     330,
+     225
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     16,
+     26
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The props on the card (coat, coupe, record out of its sleeve, candles) are not legible, so the room reads unlived.",
+   "evidence": {
+    "region": [
+     0,
+     265,
+     200,
+     320
+    ],
+    "measured": "the bar top shows two small glass shapes only; no coat or record visible in [0,320,300,480]"
+   },
+   "change": {
+    "setting": "props",
+    "from": "the current placement",
+    "to": "move the coat onto the nearest counter chair in frame, set a record out of its sleeve and the half-drunk coupe in the nearest Dome pool, and put a lit candle on the near banquette table"
+   },
+   "expected": "Two or three clear signs of life in the foreground pools.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Lose the bottle-green booths and the green cone shades by the altar, so that red is the only saturated colour",
+   "why": "The zone and its colour (deep bottle green) and EARF's lamps are fixed by the card. Only their light can change."
+  },
+  {
+   "request": "Swap the red cover on the Dome over the banquette for smoked",
+   "why": "The Dome's covers are part of EARF's product as specified; only its light level can change (c6)."
+  },
+  {
+   "request": "Give the shell real board-formed concrete with tie holes and pour lines, and Douglas fir beams with checks, on the ceiling and walls",
+   "why": "The tone and sheen are in scope, but the room's materials and geometry are fixed. If the current textures are what is specified, a new texture asset is a design decision for the owner."
+  },
+  {
+   "request": "Judge at full resolution",
+   "why": "This proof is at scale 0.3 (720 x 480); 1:1 material and denoiser judgements need the 2400 x 1600 frame."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

@@ -73,8 +73,8 @@
     "disc_glow": 0.8,
     "disc_lamp": 60.0,
     "name_glow": 0.25,
-    "niche_strip": 4.0,
-    "sink_glow": 2.0,
+    "niche_strip": 6.0,
+    "sink_glow": 0.8,
     "screen_glow": 1.0,
     "screen_window": 0.27,
     "screen_tint": "#FFA060",
@@ -280,7 +280,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 5.0,
+   "irradiance": 2.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -303,7 +303,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 40.0,
+   "irradiance": 12.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -326,7 +326,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 5.0,
+   "irradiance": 2.0,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -349,7 +349,7 @@
     0.3,
     0.3
    ],
-   "irradiance": 40.0,
+   "irradiance": 12.0,
    "color": 2900,
    "camera": false,
    "receivers": [
@@ -368,8 +368,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 320.0,
-   "cone_deg": 46.0,
+   "power_w": 260.0,
+   "cone_deg": 30.0,
    "blend": 0.6,
    "radius_m": 0.04,
    "color": 2400,
@@ -387,8 +387,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 320.0,
-   "cone_deg": 46.0,
+   "power_w": 260.0,
+   "cone_deg": 30.0,
    "blend": 0.6,
    "radius_m": 0.04,
    "color": 2400,
@@ -406,8 +406,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 320.0,
-   "cone_deg": 46.0,
+   "power_w": 260.0,
+   "cone_deg": 30.0,
    "blend": 0.6,
    "radius_m": 0.04,
    "color": 2400,
@@ -425,8 +425,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 320.0,
-   "cone_deg": 46.0,
+   "power_w": 260.0,
+   "cone_deg": 30.0,
    "blend": 0.6,
    "radius_m": 0.04,
    "color": 2400,
@@ -520,8 +520,8 @@
     6.05,
     2.0
    ],
-   "power_w": 14.0,
-   "cone_deg": 22.0,
+   "power_w": 30.0,
+   "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
    "color": 2600,
@@ -539,8 +539,8 @@
     6.05,
     2.0
    ],
-   "power_w": 14.0,
-   "cone_deg": 22.0,
+   "power_w": 30.0,
+   "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
    "color": 2600,
@@ -558,8 +558,8 @@
     6.05,
     2.0
    ],
-   "power_w": 14.0,
-   "cone_deg": 22.0,
+   "power_w": 30.0,
+   "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
    "color": 2600,
@@ -577,8 +577,8 @@
     6.05,
     2.0
    ],
-   "power_w": 14.0,
-   "cone_deg": 22.0,
+   "power_w": 30.0,
+   "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
    "color": 2600,
@@ -592,12 +592,12 @@
     2.56
    ],
    "target": [
-    16.95,
+    16.55,
     2.05,
-    0.8
+    0.8500000000000001
    ],
-   "power_w": 70.0,
-   "cone_deg": 28.0,
+   "power_w": 90.0,
+   "cone_deg": 36.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -611,12 +611,12 @@
     2.56
    ],
    "target": [
-    16.95,
+    16.55,
     4.05,
-    0.8
+    0.8500000000000001
    ],
-   "power_w": 70.0,
-   "cone_deg": 28.0,
+   "power_w": 90.0,
+   "cone_deg": 36.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,

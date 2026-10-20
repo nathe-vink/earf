@@ -1,0 +1,415 @@
+{
+ "stage1": {
+  "impression": "A dim, warm, coherent night interior that still reads as a CG walkthrough. Its pale salmon counter chairs are one smooth model repeated, the concrete and fir are soft blotchy textures with no tie holes, checks or grain at 1:1, and the upper quarter is a flat brown ceiling. The Ember pair is the right idea but is only about 35 px wide at the far end, with clipped neon-like red edges, under two green cones that look like props. As it stands a magazine would not run it as a specific place: it reads as a generic hotel or restaurant bar with a red speaker display at the back, and only the altar hints at what the room is.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The Ember pair must read as the hero at a glance: at least about 12% of the frame's width, its tint and the light through its acrylic legible, its edges glowing but not clipped (clip_pct < 3 in its region).",
+  "The counter chairs must read as dark oak with upholstered seats, not pale salmon solids; at 1:1 the materials (board-formed concrete, fir, zinc, blackened steel) need real-scale detail with no blotchy or denoised surfaces.",
+  "Pools of light from the Dome downlights on the zinc and props (glasses, coat, candles, a record out of its sleeve) need to be visible and readable, so the room reads as lived in.",
+  "The upper fifth (the ceiling) and the black smoked partition at right must carry detail rather than dead tone.",
+  "The frosted screens must glow evenly, as lit panels, rather than read as grey smudged plaster.",
+  "The second saturated red slab at the right-hand table must not compete with the Ember pair.",
+  "A full-resolution render, so the 1:1 material check is possible; this proof is at 0.3 scale."
+ ],
+ "defects": [
+  {
+   "region": [
+    280,
+    225,
+    315,
+    270
+   ],
+   "what": "The left Ember's edges are clipped hot red (clip_pct 10.7) and read as neon signage, not polished glowing acrylic edges."
+  },
+  {
+   "region": [
+    408,
+    225,
+    445,
+    270
+   ],
+   "what": "The right Ember is the same: clip_pct 9.7, neon-like edge glow, and the cabinet's tint and the batts are hard to read."
+  },
+  {
+   "region": [
+    285,
+    175,
+    325,
+    215
+   ],
+   "what": "A green conical shape above each speaker reads as a solid green traffic-cone prop or a coloured light beam, an unexplained object."
+  },
+  {
+   "region": [
+    405,
+    175,
+    440,
+    215
+   ],
+   "what": "The same green cone over the right speaker; the two read as repeated copies."
+  },
+  {
+   "region": [
+    0,
+    330,
+    300,
+    480
+   ],
+   "what": "The counter chairs are pale salmon or blonde, smooth and grainless, one model repeated six or more times; the seat and the wood are the same colour, so there is no upholstery read (median RGB 68/38/26)."
+  },
+  {
+   "region": [
+    0,
+    385,
+    130,
+    480
+   ],
+   "what": "A large, soft, featureless foreground chair back fills the lower-left corner like a CG blocker."
+  },
+  {
+   "region": [
+    100,
+    0,
+    650,
+    110
+   ],
+   "what": "The ceiling is a flat, evenly dim fir-board band (lum_range 18.5) with no beam detail: dead weight in the top quarter of the frame."
+  },
+  {
+   "region": [
+    490,
+    110,
+    640,
+    330
+   ],
+   "what": "The smoked partition is a near-black void (median 8.3) with a ghosted red smear reflected in it at about 520-610 x 260-280."
+  },
+  {
+   "region": [
+    600,
+    270,
+    700,
+    305
+   ],
+   "what": "A thin glossy red slab over the right-hand table (a red Dome cover) reads as a cheap plastic tray and adds a second saturated red away from the altar."
+  },
+  {
+   "region": [
+    120,
+    125,
+    205,
+    265
+   ],
+   "what": "The left frosted screen reads as grey smudged plaster with an oval stain (median 26.7) and does not glow."
+  },
+  {
+   "region": [
+    85,
+    145,
+    120,
+    170
+   ],
+   "what": "The Dome pendant reads as a metal shade, not smoked acrylic with a glowing liner, and it throws no visible pool on the zinc."
+  },
+  {
+   "region": [
+    0,
+    260,
+    210,
+    330
+   ],
+   "what": "The zinc top is a flat grey slab with no patina, no built-in turntables or mixer legible, and only tiny props."
+  },
+  {
+   "region": [
+    260,
+    350,
+    600,
+    480
+   ],
+   "what": "The concrete floor is a blotchy mottled texture, like denoiser smear or a tiled noise map, with no reflection of the altar's light."
+  },
+  {
+   "region": [
+    230,
+    150,
+    490,
+    340
+   ],
+   "what": "The alcove's green booths and back wall are mostly flat; the altar reads as a stage set seen through a frame."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The hero speakers are too small and far away to read at a glance.",
+   "evidence": {
+    "region": [
+     280,
+     225,
+     445,
+     270
+    ],
+    "measured": "Each Ember is about 35 px of 720 (5% of the width); the pair and its altar take about 36% of the width, inside a frame that is mostly ceiling, chairs and floor."
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "position [4.5, 2.7, 1.35], lens 35 mm, f/5.6 focused at [12.0, 3.1, 1.1]",
+    "to": "position [7.5, 2.9, 1.25], lens 50 mm, focused at [16.0, 3.1, 1.0], f/4, still aimed at [17.0, 3.1, 1.15] and level"
+   },
+   "expected": "Each Ember about 12-15% of the frame's width, the counter's near end still on the left and the banquette on the right, the ceiling cut to about 12% of the height, and the foreground chair back out of the frame.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The speakers' acrylic edges clip to a neon red, so they read as signage, not premium cast acrylic.",
+   "evidence": {
+    "region": [
+     280,
+     225,
+     315,
+     270
+    ],
+    "measured": "clip_pct 10.67, p95 184, median R/G/B 152/52/52; the right speaker has clip_pct 9.67."
+   },
+   "change": {
+    "setting": "on each Ember speaker, the 4 x area lamps / the altar's 2 x spot",
+    "from": "5.0 W/m2 at the target, 2900 K / 70.0 W, cone 28 deg",
+    "to": "2.5 W/m2 at 2900 K / 90.0 W, cone 24 deg, aimed at the cabinets' faces rather than their edges"
+   },
+   "expected": "The edges glow but hold colour, the faces, tint and white batts are readable, and the cabinets read as thick lit acrylic rather than outlines.",
+   "accept": {
+    "region": [
+     280,
+     225,
+     315,
+     270
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 3.0
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The counter chairs read as pale salmon plastic, not dark oak with upholstered seats, and they dominate the left half.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     210,
+     480
+    ],
+    "measured": "median lum 43.1, R/G/B 68/38/26, the seat and the frame the same tone with no visible grain."
+   },
+   "change": {
+    "setting": "the oak's stain / the seats' upholstery finish",
+    "from": "the current light oak stain, the seat matching the wood",
+    "to": "a dark fumed-oak stain (base around #3A2618, roughness 0.45, visible grain) with seats in a dark cognac or oxblood-brown leather (#4A2A1E, roughness 0.55, a slight sheen)"
+   },
+   "expected": "The chairs recede into the warm dark, the frame separates from the seat, and the eye goes down the counter to the altar.",
+   "accept": {
+    "region": [
+     0,
+     330,
+     210,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     20,
+     32
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The Domes give no distinct pools on the zinc, so the counter reads flat and unlit by its own practicals.",
+   "evidence": {
+    "region": [
+     0,
+     260,
+     210,
+     330
+    ],
+    "measured": "median 33.5 and p95 157 over the zinc, with no clear pool structure; the Dome at 85-120 x 145-170 reads as a metal shade."
+   },
+   "change": {
+    "setting": "the Domes' downlights / each Dome's liner glow",
+    "from": "4 x spot, 320 W, 2400 K, cone 46 deg / glow 1.1",
+    "to": "4 x spot, 260 W, 2400 K, cone 30 deg, blend 0.3 / glow 2.0; also the zinc's patina: roughness 0.35 with a mottled dull grey, so the pools show as soft highlights"
+   },
+   "expected": "Separate warm pools along the zinc with dark between them, the props and the built-in turntables catching highlights, and the Domes reading as glowing smoked acrylic.",
+   "accept": {
+    "region": [
+     0,
+     260,
+     210,
+     330
+    ],
+    "metric": "falloff",
+    "axis": "x",
+    "op": ">",
+    "value": 0.3
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The frosted screen reads as a grey smudge on plaster instead of an evenly glowing panel.",
+   "evidence": {
+    "region": [
+     120,
+     125,
+     205,
+     265
+    ],
+    "measured": "median 26.7, range 21.7: barely above the wall around it."
+   },
+   "change": {
+    "setting": "the screens' images (emission strength) / the frosted acrylic's roughness",
+    "from": "1.0 / the current roughness",
+    "to": "2.4 / frosted roughness 0.6 with the image set 10 mm behind the frost, so it diffuses"
+   },
+   "expected": "The screens glow softly and evenly as lit panels, with the pressed hands and the shell legible as soft forms in fog.",
+   "accept": {
+    "region": [
+     120,
+     125,
+     205,
+     265
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The concrete floor is a blotchy noise texture that reads as CG and carries none of the altar's light.",
+   "evidence": {
+    "region": [
+     260,
+     350,
+     600,
+     480
+    ],
+    "measured": "median 38.9, p95 81.2: a mottled texture with no reflected pools."
+   },
+   "change": {
+    "setting": "the floor's polish / the concrete's tone",
+    "from": "the current matte mottled concrete",
+    "to": "a honed, sealed concrete, roughness 0.25, warm grey #6E6660, a larger-scale aggregate and faint trowel marks, no high-frequency blotch"
+   },
+   "expected": "Soft, elongated reflections of the altar and the Domes run toward the camera, guiding the eye, and the floor reads as real concrete.",
+   "accept": {
+    "region": [
+     260,
+     350,
+     600,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 100
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The smoked partition and the ceiling are dead tone, so a third of the frame carries no information.",
+   "evidence": {
+    "region": [
+     490,
+     110,
+     640,
+     330
+    ],
+    "measured": "median 8.3 (and a ghost red smear); the ceiling 100-650 x 0-110 has median 18.7 and range 18.5."
+   },
+   "change": {
+    "setting": "the record wall's spots / haze / a grazing light on the fir beams",
+    "from": "4 x spot, 14 W, cone 22 deg / haze 0.005 per metre",
+    "to": "4 x spot, 30 W, 2600 K, cone 22 deg / haze 0.012 per metre; also, if the card's lamps allow, tilt one Dome downlight's spill to graze the beams"
+   },
+   "expected": "The things behind the smoked partition show dimly through it, the ceiling shows beam checks and board lines, and a faint atmosphere joins the pools.",
+   "accept": {
+    "region": [
+     490,
+     110,
+     640,
+     330
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The red Dome over the right-hand table is a thin glossy red slab that competes with the Ember pair as a second saturated red.",
+   "evidence": {
+    "region": [
+     600,
+     270,
+     700,
+     305
+    ],
+    "measured": "median R/G/B 73/27/23, p95 154.8: a hard-edged saturated red highlight band."
+   },
+   "change": {
+    "setting": "each Dome's liner glow (this Dome) / the camera crop",
+    "from": "glow 1.1",
+    "to": "glow 0.5 for this Dome, so it reads as smoked rather than lit red; and let c1's tighter framing move it to the edge of the frame or out of it"
+   },
+   "expected": "The only saturated red that reads at a glance is the Ember pair on the altar.",
+   "accept": {
+    "region": [
+     600,
+     270,
+     700,
+     305
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 110
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Replace the repeated counter chair with two or three varied models, or change its curved-back design.",
+   "why": "The card fixes the seats as part of the room's design; only their finish can change (c3)."
+  },
+  {
+   "request": "Lose or recolour the green cones above the speakers and the green booths, so the frame's only saturated colour is the Ember.",
+   "why": "If they are the zone's deep bottle green, the card fixes the zone and its colour; and if the cones are EARF's lamps on the speakers, their shape is fixed. Only their light levels can change. Worth confirming with the owner whether the cones are intended: they read as props."
+  },
+  {
+   "request": "Change the red Dome's cover colour.",
+   "why": "The Dome pendants and their covers are EARF's products and fixed; only their glow can change (c8)."
+  },
+  {
+   "request": "Change the speakers' tint, shape or acrylic.",
+   "why": "EARF's products are fixed."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

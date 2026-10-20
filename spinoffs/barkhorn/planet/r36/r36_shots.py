@@ -23,11 +23,11 @@ S.OUT = os.path.join(ROOT, 'studio', 'shots', 'barkhorn', 'planet36')
 S.BELL_TABLES = ()
 
 DEFAULT = dict(S.DEFAULT, **dict(
-    colourway='green', pendant_w=320.0, pendant_cone=46.0, dome_w=30.0, dome_glow=1.1, sphere_w=6.0, sphere_glow=1.1,
-    disc_col='#FF5A3A', disc_glow=0.8, disc_lamp=60.0, name_glow=0.25, niche_strip=4.0, sink_glow=2.0,
+    colourway='green', pendant_w=260.0, pendant_cone=30.0, dome_w=30.0, dome_glow=1.1, sphere_w=6.0, sphere_glow=1.1,
+    disc_col='#FF5A3A', disc_glow=0.8, disc_lamp=60.0, name_glow=0.25, niche_strip=6.0, sink_glow=0.8,
     screen_glow=1.0, screen_tint='#FFA060', screen_gap=0.04, screen_rough=0.22, etch_glow=0.01, etch_frost=0.3,
-    rw_w=14.0, rw_cone=22.0, altar_w=70.0, altar_cone=28.0, spk_irr=5.0, spk_back=40.0, spk_spread=90.0,
-    spk_link=True, spk_k=2900, candle_w=3.0, flame=60.0, haze=0.005, wb=3000, exposure=0.0, view='AgX',
+    rw_w=30.0, rw_cone=26.0, altar_w=90.0, altar_cone=36.0, spk_irr=2.0, spk_back=12.0, spk_spread=90.0,
+    spk_link=True, spk_k=2900, candle_w=3.0, flame=60.0, haze=0.010, wb=3000, exposure=0.0, view='AgX',
     look='AgX - Medium High Contrast',
     menu_color='#8A6E4E'))
 S.DEFAULT = DEFAULT
@@ -93,7 +93,7 @@ def lights(v):
     # the altar: two spots in the niche's soffit, washing down the end grain and the cabinets
     for i, y in enumerate((RP.YC - 1.0, RP.YC + 1.0)):
         L[f'altar{i}'] = {'type': 'spot', 'position': [RP.L - 0.25, y, RP.ALTAR['z1'] - 0.04],
-                          'target': [RP.L - 0.05, y, z + 0.6], 'power_w': v['altar_w'], 'cone_deg': v['altar_cone'],
+                          'target': [RP.L - 0.45, y, z + 0.65], 'power_w': v['altar_w'], 'cone_deg': v['altar_cone'],
                           'blend': 0.9, 'radius_m': 0.03, 'color': 2500, 'camera': False}
     # the sink: a pinhole downlight in the alcove's head
     L['sink'] = {'type': 'spot', 'position': [RP.SINK['x'], 0.30, RP.ALCOVE['z1'] - 0.02],
@@ -112,17 +112,27 @@ VIEWS = {
             # after the two critics on p1 (4.5, 4.5): one orange wood everywhere, the ceiling over the floor under a haze
             # veil, the record wall the brightest, the lamps dull (placeholders then), the altar small: nearer on 35 mm;
             # less haze; a higher-contrast look; the oak darker; the record wall's spots down; the screens up
-            'camera': {'position': [4.5, 2.7, 1.35], 'target': [17.0, 3.1, 1.15], 'lens_mm': 35, 'level': True,
-                       'fstop': 5.6, 'focus': [12.0, 3.1, 1.1]},
-            'settings': {'exposure': 0.7}},
+            # after the two critics on p2r (4.5, 4.5): the pair 5 % of the width and clipping like neon, the chairs pale
+            # salmon, no pools on the zinc, the screens and the record wall unread, the red sink a second hero: nearer on
+            # 45 mm; the speakers' lamps 2 W/m2, the altar spots on their faces; the oak darker; the Domes' cones tighter;
+            # the screens 2.0, the record wall 30 W; the sink's glow down; haze 0.010
+            'camera': {'position': [7.0, 2.8, 1.3], 'target': [17.0, 3.1, 1.12], 'lens_mm': 45, 'level': True,
+                       'fstop': 4.0, 'focus': [16.0, 3.1, 1.0]},
+            'settings': {'exposure': 0.7, 'screen_glow': 2.0}},
     'listening-green': {'title': 'the listening zone, bottle green',
-                        'camera': {'position': [11.25, 2.45, 1.35], 'target': [16.6, 3.25, 1.2], 'lens_mm': 28,
-                                   'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
-                        'settings': {'colourway': 'green', 'exposure': 1.0, 'wb': 2700}},
+                        # after the critics on p2r: a standing dead-centre stare over a chair back, the speakers clipping,
+                        # the left screen a white slab, the ceiling a void: seated and off axis on 35 mm, the near Ember on
+                        # the left third, a tub table in the foreground; the screens 0.35; a stop brighter
+                        'camera': {'position': [12.5, 1.75, 1.08], 'target': [16.6, 3.35, 1.05], 'lens_mm': 35,
+                                   'level': True, 'fstop': 2.8, 'focus': [16.5, 1.9, 0.95]},
+                        'settings': {'colourway': 'green', 'exposure': 1.6, 'wb': 2700, 'screen_glow': 0.35}},
     'listening-oxblood': {'title': 'the listening zone, oxblood',
-                          'camera': {'position': [11.25, 2.45, 1.35], 'target': [16.6, 3.25, 1.2], 'lens_mm': 28,
-                                     'level': True, 'fstop': 4.0, 'focus': [16.5, 3.05, 1.1]},
-                          'settings': {'colourway': 'oxblood', 'exposure': 1.0, 'wb': 2700}},
+                        # after the critics on p2r: a standing dead-centre stare over a chair back, the speakers clipping,
+                        # the left screen a white slab, the ceiling a void: seated and off axis on 35 mm, the near Ember on
+                        # the left third, a tub table in the foreground; the screens 0.35; a stop brighter
+                        'camera': {'position': [12.5, 1.75, 1.08], 'target': [16.6, 3.35, 1.05], 'lens_mm': 35,
+                                   'level': True, 'fstop': 2.8, 'focus': [16.5, 1.9, 0.95]},
+                        'settings': {'colourway': 'oxblood', 'exposure': 1.6, 'wb': 2700, 'screen_glow': 0.35}},
     'street': {'title': 'the shopfront at night, from the kerb',
                # after the two critics on p1 (5.0, 5.0): over-exposed under a veil, the mullion through the altar, the
                # etched name a beige square, the lightbox too bright, no reflections: 32 mm with the mullion on a third,

@@ -46,7 +46,7 @@ _M = {}
 # --- materials -----------------------------------------------------------------------------------------------------
 def dark_oak(bpy, vertical=False, name='oak-dark'):
     """Dark oak, oiled: the walnut scan darkened and cooled toward fumed oak."""
-    return D.walnut(bpy, vertical=vertical, coat=0.35, coat_rough=0.35, tint='#1C140E', mix=0.6, name='-' + name)
+    return D.walnut(bpy, vertical=vertical, coat=0.35, coat_rough=0.35, tint='#1A120C', mix=0.82, name='-' + name)
 
 
 def zinc(bpy):
@@ -95,6 +95,8 @@ def carpet(bpy, colour, name):
     if name not in _M:
         m = principled(bpy, name, colour, rough=1.0, bump=(0.002, 0.5, 0.0004))
         b_ = D._bsdf(m); LK.R._set(b_, 'Sheen Weight', 0.5); LK.R._set(b_, 'Specular IOR Level', 0.1)
+        # the sheen tinted with the wool, so the pile reads green (or oxblood), not grey (p2r: r35 g32 b31)
+        LK.R._set(b_, 'Sheen Tint', tuple(min(1.0, c * 2.5) for c in lin(colour)[:3]) + (1.0,))
         _M[name] = m
     return _M[name]
 
@@ -107,7 +109,7 @@ def end_grain(bpy, name='oak-endgrain'):
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree
     b_ = D._bsdf(m)
     tc = nt.nodes.new('ShaderNodeTexCoord')
-    vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = 8.0
+    vo = nt.nodes.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value = 8.0; vo.inputs['Randomness'].default_value = 1.0
     nt.links.new(tc.outputs['Object'], vo.inputs['Vector'])
     ring = nt.nodes.new('ShaderNodeMath'); ring.operation = 'MULTIPLY'; ring.inputs[1].default_value = 260.0
     nt.links.new(vo.outputs['Distance'], ring.inputs[0])
@@ -116,11 +118,11 @@ def end_grain(bpy, name='oak-endgrain'):
     nt.links.new(vo.outputs['Position'], tone.inputs['Vector'])
     mix = nt.nodes.new('ShaderNodeMath'); mix.operation = 'MULTIPLY_ADD'
     nt.links.new(sn.outputs[0], mix.inputs[0]); mix.inputs[1].default_value = 0.18
-    tm = nt.nodes.new('ShaderNodeMath'); tm.operation = 'MULTIPLY'; tm.inputs[1].default_value = 0.45
+    tm = nt.nodes.new('ShaderNodeMath'); tm.operation = 'MULTIPLY'; tm.inputs[1].default_value = 0.8
     nt.links.new(tone.outputs['Value'], tm.inputs[0]); nt.links.new(tm.outputs[0], mix.inputs[2])
     cr = nt.nodes.new('ShaderNodeValToRGB')
     cr.color_ramp.elements[0].position = 0.0; cr.color_ramp.elements[0].color = lin('#1E140D')
-    cr.color_ramp.elements[1].position = 0.75; cr.color_ramp.elements[1].color = lin('#6A4A30')
+    cr.color_ramp.elements[1].position = 0.9; cr.color_ramp.elements[1].color = lin('#8A6242')
     nt.links.new(mix.outputs[0], cr.inputs['Fac'])
     nt.links.new(cr.outputs['Color'], b_.inputs['Base Color'])
     LK.R._set(b_, 'Roughness', 0.55); LK.R._set(b_, 'Coat Weight', 0.15); LK.R._set(b_, 'Coat Roughness', 0.4)
