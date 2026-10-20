@@ -1,0 +1,388 @@
+{
+ "stage1": {
+  "impression": "A nearly black frame. Only a faint zinc counter, some chair backs on the left and two small glowing red boxes at the far end show, plus a red slab glowing on the right. No concrete, timber, steel, record wall or banquette can be read, and the speakers look like tiny red cabinets with odd green cones above them, not 1.3 m acrylic horns. It reads as an unlit game level, not a photograph. A magazine would not publish it as a specific place: nothing in it is specific yet.",
+  "score": 2.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Frame lum_median between 22 and 50; it is now 0.2 (p95 8.5, crush_pct 89.9 over the full frame)",
+  "Ember pair region lum_median >= 45 and the speakers read as tall tinted-acrylic horns, not small red boxes (now median 24.8 / 22.2)",
+  "The room's materials (board-formed concrete, fir beams, blackened-steel doors, the record wall, the oak banquette, the frosted screens) legible at 1:1 with real texture; now none show",
+  "No region over a tenth of the frame more than half crushed: ceiling [200,0,720,220] is 97.6 % crushed, aisle floor [300,290,560,480] 99.5 %, banquette side [560,250,720,420] 68 %",
+  "Only one saturated colour family: the red slab at the right [605,278,692,308] and the green cones over the speakers compete with the Ember red",
+  "The speaker held large enough in frame to be the hero at a glance (it now spans about 32 px of a 480 px frame)",
+  "Signs of life (glasses, coat, record, candles) readable"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Gross underexposure: lum_median 0.2, mean 2.1, 99.2 % of pixels below 40; the room is effectively invisible"
+  },
+  {
+   "region": [
+    200,
+    0,
+    720,
+    220
+   ],
+   "what": "Ceiling, beams and back wall fully black (crush 97.6 %); no Douglas fir or concrete visible"
+  },
+  {
+   "region": [
+    300,
+    290,
+    560,
+    480
+   ],
+   "what": "Floor and aisle down the room pure black (median 0.0, crush 99.5 %); no pools of light, no floor polish"
+  },
+  {
+   "region": [
+    560,
+    250,
+    720,
+    420
+   ],
+   "what": "Banquette, small tables and frosted screens on the right lost in black (median 0.6, crush 68 %)"
+  },
+  {
+   "region": [
+    280,
+    225,
+    316,
+    272
+   ],
+   "what": "Left Ember speaker reads as a small square red box with a grey driver; no horn, no acrylic depth, no glowing edges; denoiser smear and red drips at its foot"
+  },
+  {
+   "region": [
+    408,
+    225,
+    444,
+    272
+   ],
+   "what": "Right Ember speaker: same as the left; blotchy red streaks under the cabinet"
+  },
+  {
+   "region": [
+    290,
+    175,
+    320,
+    215
+   ],
+   "what": "Green cone shape above the left speaker (and the same above the right at ~[410,175,440,215]): reads as a stray green object or a lit haze cone, not part of the altar"
+  },
+  {
+   "region": [
+    605,
+    278,
+    692,
+    308
+   ],
+   "what": "Saturated red glowing slab with a dark disc in front on the right (p95 185, r_median 48, g 1): a second red light source that competes with the speakers and reads as neon or signage"
+  },
+  {
+   "region": [
+    0,
+    262,
+    200,
+    300
+   ],
+   "what": "Zinc counter top only faintly lit (median 1.4, p95 43); no pools under the Dome pendants, no rounded-edge highlight"
+  },
+  {
+   "region": [
+    120,
+    300,
+    280,
+    480
+   ],
+   "what": "Counter chairs read as flat dark CG shapes with smooth plasticky seat tops; leather and oak unreadable (crush 82 %)"
+  },
+  {
+   "region": [
+    120,
+    125,
+    210,
+    260
+   ],
+   "what": "Panel on the left wall with an oval figure, very dim (median 6.5); its image barely reads"
+  },
+  {
+   "region": [
+    0,
+    125,
+    120,
+    175
+   ],
+   "what": "Dome pendants show as small dim shapes and light almost nothing below them"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The frame is underexposed by several stops; nothing but the emitters reads.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 0.2, mean 2.1, p95 8.5, crush_pct 89.9, clip 0 %"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "-0.3",
+    "to": "+2.0 (with look 'AgX - Medium Contrast' in place of 'Medium High Contrast' so the shadows open)"
+   },
+   "expected": "Lit surfaces rise about 5x in linear light; the counter, chairs and the altar wall read; the frame median rises toward 15-25 before the light changes below.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Domes' downlights barely reach the zinc; there are no pools of light along the counter.",
+   "evidence": {
+    "region": [
+     0,
+     262,
+     200,
+     300
+    ],
+    "measured": "lum_median 1.4, p95 43.3, crush_pct 56.3"
+   },
+   "change": {
+    "setting": "the Domes' downlights (4 x spot)",
+    "from": "320 W, cone 46 deg",
+    "to": "700 W, cone 55 deg, and the Dome liner glow from 1.1 to 2.5"
+   },
+   "expected": "Distinct warm pools on the zinc with a highlight along its rounded edge, falling off between pendants; the chair seats and the fluted oak front catch spill.",
+   "accept": {
+    "region": [
+     0,
+     262,
+     200,
+     300
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The hero pair is too dark and reads as small red boxes rather than glowing acrylic horns.",
+   "evidence": {
+    "region": [
+     280,
+     225,
+     316,
+     272
+    ],
+    "measured": "lum_median 24.8 (right speaker 22.2), crush_pct 27.5, p5 0.0"
+   },
+   "change": {
+    "setting": "the altar's spots and the area lamps on each Ember speaker",
+    "from": "altar 2 x 70 W; speaker area 5.0 W/m2",
+    "to": "altar 2 x 180 W, cone 34 deg; speaker area 14 W/m2 at the target"
+   },
+   "expected": "The tinted cabinets glow through their thickness with bright polished edges, the white batts show through, and the altar plinth and wall behind them read.",
+   "accept": {
+    "region": [
+     280,
+     225,
+     316,
+     272
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "At 12.5 m and 35 mm the hero speakers span about 10 % of the frame height and cannot be read as 1.3 m horns.",
+   "evidence": {
+    "region": [
+     280,
+     225,
+     444,
+     272
+    ],
+    "measured": "each speaker about 32 x 45 px in a 720 x 480 proof"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [4.5, 2.7, 1.35], lens 35 mm, focus at x 12.0",
+    "to": "position [7.5, 2.9, 1.30], lens 40 mm, aimed at [17.0, 3.1, 1.10], focus at the altar x 16.0, f/4"
+   },
+   "expected": "The pair fills about a quarter of the frame height and the horns' silhouettes read, with the counter still running in from the left and the banquette on the right.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The back bar and the record wall are invisible, which removes the room's most specific feature.",
+   "evidence": {
+    "region": [
+     200,
+     0,
+     720,
+     220
+    ],
+    "measured": "lum_median 0.0, p95 1.9, crush_pct 97.6"
+   },
+   "change": {
+    "setting": "the record wall's spots (4 x) and the disc behind the DJ station",
+    "from": "14 W, cone 22 deg; disc 0.8 in #FF5A3A with a 60 W lamp",
+    "to": "60 W, cone 32 deg, grazing the spines; disc 0.8 in a warm white near #FFD9B0 (keeps red to the speakers) with the 60 W lamp"
+   },
+   "expected": "The record spines show as a textured wall with small highlights; the blackened-steel doors below catch a soft sheen; the upper back of the frame leaves black.",
+   "accept": {
+    "region": [
+     200,
+     0,
+     720,
+     220
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 50
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The banquette side is lost and a saturated red slab there competes with the hero.",
+   "evidence": {
+    "region": [
+     605,
+     278,
+     692,
+     308
+    ],
+    "measured": "p95 185, r_median 48, g_median 1; surrounding [560,250,720,420] median 0.6, crush 68 %"
+   },
+   "change": {
+    "setting": "the sink's under-glow, the Orbs and the screens' images",
+    "from": "sink glow 6.0; Orb 3.0 W, glow 1.1; screens 1.0",
+    "to": "sink glow 1.5; Orb 10 W, glow 2.0; screens 2.5"
+   },
+   "expected": "The red slab falls to a quiet accent; the banquette's oak, the small round tables and the frosted screens (hands, shell) read as soft even glows.",
+   "accept": {
+    "region": [
+     560,
+     250,
+     720,
+     420
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 18
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The floor and aisle down the room's axis are pure black, so there is no depth and no pool-to-dark rhythm.",
+   "evidence": {
+    "region": [
+     300,
+     290,
+     560,
+     480
+    ],
+    "measured": "lum_median 0.0, p95 1.2, crush_pct 99.5"
+   },
+   "change": {
+    "setting": "haze density and the floor's polish",
+    "from": "haze 0.005 per metre; floor finish as is",
+    "to": "haze 0.015 per metre; the floor's polish raised so the pools and the speakers' red reflect softly in it"
+   },
+   "expected": "A faint atmosphere along the axis, soft reflections of the pendants' pools and the altar on the floor, and the aisle reading as floor rather than void.",
+   "accept": {
+    "region": [
+     300,
+     290,
+     560,
+     480
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 50
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "No sign of life reads; the props are lost in the dark.",
+   "evidence": {
+    "region": [
+     0,
+     262,
+     300,
+     480
+    ],
+    "measured": "chair and counter region crush 56-82 %; glasses and coat not distinguishable"
+   },
+   "change": {
+    "setting": "props and candles",
+    "from": "candles 2 x 3.0 W point at 1900 K, flame 60; props placed as is",
+    "to": "candles 2 x 8 W; move the coupe, a rocks glass and the record out of its sleeve into the nearest Dome pool on the zinc; the coat over the nearest chair, in light"
+   },
+   "expected": "Small specular highlights on the glass and the vinyl in the foreground pool; the coat reads as fabric.",
+   "accept": {
+    "region": [
+     0,
+     262,
+     200,
+     300
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 150
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Ember speakers read as tall horns rather than square boxes (their silhouette in this view)",
+   "why": "The speakers' shape is fixed; this is addressed only through camera and light (c3, c4). If it still reads as a box after those, check the model, not the picture."
+  },
+  {
+   "request": "Identify and remove the green cone shapes above each speaker if they are geometry (e.g. part of the altar or the zone)",
+   "why": "The zone, its bottle-green colour and the altar are fixed room design; if they are haze-lit spot cones they will change with c3 and c7. Their read as stray green objects needs the designer's check."
+  }
+ ],
+ "score_if_fixed": 6.5
+}

@@ -65,9 +65,9 @@
     "module": "planet_r36",
     "fn": "room",
     "colourway": "oxblood",
-    "dome_w": 9.0,
+    "dome_w": 30.0,
     "dome_glow": 1.1,
-    "sphere_w": 3.0,
+    "sphere_w": 6.0,
     "sphere_glow": 1.1,
     "disc_col": "#FF5A3A",
     "disc_glow": 0.8,
@@ -149,9 +149,10 @@
      ]
     ],
     "ceiling": 3.4,
-    "lamp_w": 9.0,
+    "lamp_w": 30.0,
     "lamp_k": 2700,
-    "shade_glow": 1.1
+    "shade_glow": 1.1,
+    "noshadow": "shell|liner|skin"
    },
    {
     "kind": "kit",
@@ -240,9 +241,10 @@
       "flavour": "smoked"
      }
     ],
-    "lamp_w": 3.0,
+    "lamp_w": 6.0,
     "lamp_k": 2700,
-    "shade_glow": 1.1
+    "shade_glow": 1.1,
+    "noshadow": "shell|liner|skin"
    }
   ]
  },

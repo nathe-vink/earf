@@ -19,7 +19,9 @@ Round 32d, the pick (spinoffs/barkhorn/companions/crystal.py): `fn` "dome" (the 
 spots its rim, `ceiling` as above) and "orb" (the cordless crystal ball; spots the table). Their frost is set within
 the tint, and it is the liner that glows (`shade_glow`, default 0.25); `lamp_w` defaults 9 and 3. For a spot or the
 piece: `hide` (a pattern of part names, e.g. "hub|pins|cob|gland|cord|canopy" for a spare cover alone), `cover_drop`
-(m) and `cover_turn` (deg) to show the swap, and `lamp`: false for no light.
+(m) and `cover_turn` (deg) to show the swap, and `lamp`: false for no light. `noshadow` (a pattern of part names, e.g.
+COVER) makes those parts cast no shadow, so the hidden lamp lights the room through them (Cycles passes a lamp's light
+through glass only as caustics; Planet's loft, f7c99a4); unset, every part casts its shadow, as before.
 
 The lamp follows Planet's loft (commit f7c99a4): hidden from the camera and from transmission (seen through rough or
 frosted acrylic it read as a blob or a square), and from glossy rays (it mirrored as a hot spot in the frost); it lights
@@ -89,6 +91,7 @@ def _place(bpy, which, name, p, kit):
         if which in CANOPY_TOP_MM and p.get('ceiling') is not None:
             lift = p['ceiling'] - s['position'][2] - CANOPY_TOP_MM[which] / 1000
         hide = s.get('hide', p.get('hide', ''))
+        noshadow = p.get('noshadow', '')
         # the swap, shown: the cover lowered (m) and turned (deg) off its fixture
         drop, turn = s.get('cover_drop', p.get('cover_drop', 0.0)), s.get('cover_turn', p.get('cover_turn', 0.0))
         for pname, t in tpl.items():
@@ -108,6 +111,8 @@ def _place(bpy, which, name, p, kit):
                 k = (z1 - z0 + lift) / (z1 - z0)
                 M = Matrix.Translation((0, 0, z0)) @ Matrix.Diagonal((1, 1, k, 1)) @ Matrix.Translation((0, 0, -z0))
             ob.matrix_world = T @ M
+            if noshadow and PR._match(pname, noshadow):
+                ob.visible_shadow = False
             objs.append(ob)
         if s.get('lamp', p.get('lamp', True)) is False:
             continue
