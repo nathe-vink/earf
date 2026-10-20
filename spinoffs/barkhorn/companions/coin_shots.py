@@ -69,34 +69,34 @@ def bokeh(points, colour='#FFB060', emit=6.0, r=0.012):
 
 
 def hero(flavour='acid'):
-    """One coin on the bar's zinc, low light raking across it from behind, shallow focus: the globe 6 mm down in the
-    tint catching the light, the reeds glinting."""
-    zinc = {'kind': 'kit', 'shape': 'box', 'material': 'pbr', 'texture': 'metal_plate_02', 'res': '2k', 'tint': '#8E949A',
-            'tint_mix': 0.55, 'rough_mul': 0.75, 'tex_scale': 0.6, 'size': [2.4, 1.6, 0.03], 'position': [0.0, 0.5, -0.03]}
+    """One coin on the bar's zinc, low light coming through it from behind, the bar's lamps soft in the counter's sheen;
+    the globe, 6 mm down in the tint, in focus. Round 2 after two critics (5.5 and 6.0): stopped down and focused on the
+    globe, the camera back to 0.28 m at 30 deg, a cooler satin zinc, the lamps low so they reflect in the counter, the
+    light from behind the coin, no hot corner."""
+    # a satin zinc top: plain metal (the photographed plate's patina read as camouflage at coin scale)
+    zinc = {'kind': 'kit', 'shape': 'box', 'material': 'gloss', 'color': '#3E4144', 'roughness': 0.3,
+            'size': [2.4, 1.6, 0.03], 'position': [0.0, 0.5, -0.03]}
     props = [zinc, piece('coin', [{'position': [0.0, 0.0, 0.0], 'rotate': [0, 0, -14]}], flavour=flavour, **PICK)]
-    # the bar behind, out of focus: its lamps seen in the zinc as soft warm circles, and a low glow along the back bar
-    # for the zinc's sheen (a metal shows what it mirrors: at 0.25 sky it rendered black)
-    props += bokeh([[-0.50, 1.6, 0.70], [-0.12, 2.0, 0.92], [0.30, 1.8, 0.78], [0.62, 2.3, 1.02], [0.06, 2.5, 1.10],
-                    [-0.85, 2.3, 0.92], [0.95, 1.9, 0.80]], emit=40.0, r=0.03)
-    props += [{'kind': 'kit', 'shape': 'box', 'material': 'glow', 'color': '#FFB070', 'emit': 0.6, 'size': [4.0, 0.02, 0.5],
-               'position': [0.0, 2.6, 0.75], 'shadow': False}]
-    tgt = [0.0, 0.002, 0.004]
-    cam = {'position': [0.035, -0.155, 0.125], 'target': tgt, 'lens_mm': 100, 'level': False, 'fstop': 2.8,
-           'focus': [0.0, -0.002, 0.004]}
+    # the bar's lamps, low and behind: their reflections in the satin zinc are the frame's soft warm circles
+    props += bokeh([[-0.30, 0.65, 0.30], [-0.08, 0.85, 0.42], [0.16, 0.72, 0.34], [0.38, 0.95, 0.44], [0.58, 0.70, 0.28]],
+                   emit=120.0, r=0.018)
+    tgt = [0.0, 0.004, 0.003]
+    cam = {'position': [0.045, -0.235, 0.144], 'target': tgt, 'lens_mm': 100, 'level': False, 'fstop': 9.0,
+           'focus': [0.0, 0.0, 0.002]}
     s = {'title': 'EARFcoin on the zinc', 'size': [1600, 1067], 'camera': cam,
          'set': {'kind': 'stage', 'props': props},        # no sweep: its floor would lie on the zinc's top
-         'sky': {'kind': 'gradient', 'zenith': '#1C1B1A', 'horizon': '#2A2622', 'ground': '#141210', 'strength': 0.25},
+         'sky': {'kind': 'gradient', 'zenith': '#1C1B1A', 'horizon': '#2A2622', 'ground': '#141210', 'strength': 0.15},
          'lights': {
-             # low and behind on the left: grazes the face, lights the engraving from inside, rims the reeds
-             'rake': {'type': 'area', 'size_m': [0.25, 0.08], 'position': [-0.30, 0.28, 0.07], 'target': tgt,
-                      'irradiance': 4.0, 'color': 2900, 'camera': False},
-             # a soft warm top light, the counter's sheen
-             'top': {'type': 'area', 'size_m': [0.6, 0.4], 'position': [0.10, 0.25, 0.55], 'target': tgt,
-                     'irradiance': 0.9, 'color': 3400, 'camera': False},
-             'fill': {'type': 'area', 'size_m': [0.5, 0.4], 'orbit': {'azimuth_deg': 25, 'elevation_deg': 18, 'distance_m': 0.8},
-                      'target': tgt, 'irradiance': 0.12, 'color': 3200, 'camera': False}},
-         'render': {'samples': 384, 'adaptive': 0.008, 'denoise': True, 'clamp': 12, 'bounces': 16,
-                    'view': 'Khronos PBR Neutral', 'exposure': 0.0, 'white_balance_k': 3300}}
+             # low and behind: through the coin, the tint glows and the reeds catch a rim of light
+             'rake': {'type': 'area', 'size_m': [0.3, 0.05], 'position': [-0.12, 0.30, 0.045], 'target': tgt,
+                      'irradiance': 5.0, 'color': 3100, 'camera': False},
+             # steeper and nearer above behind the coin: light down through the tint onto the zinc
+             'top': {'type': 'area', 'size_m': [0.3, 0.2], 'position': [0.05, 0.12, 0.45], 'target': tgt,
+                     'irradiance': 0.7, 'color': 3800, 'camera': False},
+             'fill': {'type': 'area', 'size_m': [0.5, 0.4], 'orbit': {'azimuth_deg': -20, 'elevation_deg': 12, 'distance_m': 0.8},
+                      'target': tgt, 'irradiance': 0.22, 'color': 4000, 'camera': False}},
+         'render': {'samples': 320, 'adaptive': 0.008, 'denoise': True, 'clamp': 12, 'bounces': 16,
+                    'view': 'Khronos PBR Neutral', 'exposure': -0.3, 'white_balance_k': 3500}}
     return s
 
 
