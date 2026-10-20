@@ -111,5 +111,6 @@ def shot():
 
 def portrait():
     x, y = SPK
-    return portrait_of(shot(), **camera(height=DECK + 0.7, distance=5.6, azimuth=-6.0, lens=42.0,
-                                        target=(x - 0.2, y, DECK + 0.95), focus=(x, y, DECK + 0.6), fstop=5.6))
+    # wider and turned a little left so the sign stays in the 4:5 frame (it carries the read)
+    return portrait_of(shot(), **camera(height=DECK + 0.7, distance=5.6, azimuth=-6.0, lens=34.0,
+                                        target=(x - 0.45, y, DECK + 0.95), focus=(x, y, DECK + 0.6), fstop=5.6))
