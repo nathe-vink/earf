@@ -688,11 +688,17 @@ def arum(bpy, name, p, kit):
         if rnd.random() < p.get('missing', 0.0):              # eaten or fallen: a gap on the club
             continue
         off = Vector((math.cos(a), math.sin(a), 0)) * (0.0032 + rr * 0.85)
-        bm_ = green if f > 0.88 and rnd.random() < 0.7 else ripe
+        bm_ = green if (f > 0.88 and rnd.random() < 0.7) or rnd.random() < p.get('unripe', 0.0) else ripe
         g = bmesh.ops.create_uvsphere(bm_, u_segments=12, v_segments=8, radius=rr)
         sq = rnd.uniform(0.85, 1.0)
         for v in g['verts']:
             v.co = Vector((v.co.x, v.co.y, v.co.z * sq)) + c + off
+    for k in range(p.get('fallen', 0)):                   # a few dropped on the litter round the stalk's foot
+        a = rnd.uniform(0, 6.28); d = rnd.uniform(0.02, 0.09)
+        r = br * rnd.uniform(0.8, 1.1)
+        g = bmesh.ops.create_uvsphere(ripe, u_segments=12, v_segments=8, radius=r)
+        for v in g['verts']:
+            v.co = Vector((v.co.x, v.co.y, v.co.z * 0.9)) + Vector((math.cos(a) * d, math.sin(a) * d, r * 0.6))
     stalk_m = _plain(bpy, f'{name}-stalk', p.get('stalk', '#6E7A3A'), 0.6)
     ripe_m, _, rb = _node_mat(bpy, f'{name}-ripe')
     rb.inputs['Roughness'].default_value = p.get('berry_rough', 0.18)   # a faint waxy bloom when raised

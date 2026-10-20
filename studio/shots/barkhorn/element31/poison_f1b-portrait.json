@@ -182,7 +182,7 @@
     "on": [
      "prop0-kit"
     ],
-    "density": 12000,
+    "density": 1,
     "up": 0.5,
     "scale": [
      0.7,
@@ -238,9 +238,9 @@
     "open": 0.05,
     "holes": [
      [
-      -16.625,
-      -1.069,
-      1.1
+      -16.362,
+      -1.196,
+      0.36
      ],
      [
       -11.625,
@@ -3209,7 +3209,7 @@
     ],
     "wash": 0.05,
     "dull": 0.24,
-    "matte": false,
+    "matte": true,
     "orange": false
    },
    {
@@ -3249,12 +3249,12 @@
     "age": "young",
     "seed": 64,
     "lean": [
-     0.0,
-     -0.01
+     0.07,
+     -0.03
     ],
     "wash": 0.05,
     "dull": 0.12,
-    "matte": false,
+    "matte": true,
     "orange": false
    },
    {
@@ -3272,7 +3272,7 @@
     "seed": 65,
     "warts": 280,
     "dull": 0.18,
-    "matte": false,
+    "matte": true,
     "orange": false,
     "wash": 0.05
    },
@@ -3373,29 +3373,9 @@
     ],
     "wash": 0.05,
     "dull": 0.12,
-    "matte": false,
+    "matte": true,
     "orange": false,
     "torn": 0.2
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_b_el",
-    "fn": "amanita",
-    "position": [
-     0.48,
-     -1.32,
-     -0.032
-    ],
-    "cap": 0.025,
-    "age": "button",
-    "seed": 93,
-    "warts": 260,
-    "dull": 0.18,
-    "matte": false,
-    "orange": false,
-    "wash": 0.05,
-    "torn": 0.35
    },
    {
     "kind": "kit",
@@ -3444,8 +3424,8 @@
     "height": 0.34,
     "seed": 41,
     "lean": [
-     0.02,
-     -0.01
+     0.05,
+     -0.02
     ],
     "berries": 50,
     "berry": 0.006,
@@ -3453,7 +3433,9 @@
     "missing": 0.15,
     "sss": 0.45,
     "sss_scale": 0.006,
-    "berry_rough": 0.3
+    "berry_rough": 0.3,
+    "unripe": 0.15,
+    "fallen": 4
    },
    {
     "kind": "kit",
@@ -3461,71 +3443,25 @@
     "module": "poison_p_el",
     "fn": "arum",
     "position": [
-     1.12,
-     -1.2,
+     1.13,
+     -1.19,
      -0.01
     ],
-    "height": 0.25,
+    "height": 0.24,
     "seed": 42,
     "lean": [
-     0.03,
-     0.015
+     -0.04,
+     0.03
     ],
-    "berries": 36,
+    "berries": 32,
     "berry": 0.006,
-    "club": 0.31,
+    "club": 0.3,
     "missing": 0.15,
     "sss": 0.45,
     "sss_scale": 0.006,
-    "berry_rough": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_p_el",
-    "fn": "arum",
-    "position": [
-     1.0,
-     -1.17,
-     -0.01
-    ],
-    "height": 0.29,
-    "seed": 43,
-    "lean": [
-     -0.02,
-     0.025
-    ],
-    "berries": 44,
-    "berry": 0.006,
-    "club": 0.33,
-    "missing": 0.15,
-    "sss": 0.45,
-    "sss_scale": 0.006,
-    "berry_rough": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "poison_p_el",
-    "fn": "arum",
-    "position": [
-     1.08,
-     -1.33,
-     -0.01
-    ],
-    "height": 0.22,
-    "seed": 44,
-    "lean": [
-     0.0,
-     -0.03
-    ],
-    "berries": 30,
-    "berry": 0.006,
-    "club": 0.295,
-    "missing": 0.15,
-    "sss": 0.45,
-    "sss_scale": 0.006,
-    "berry_rough": 0.3
+    "berry_rough": 0.3,
+    "unripe": 0.35,
+    "fallen": 1
    },
    {
     "kind": "kit",
@@ -3761,6 +3697,74 @@
     "turn": 37.0,
     "scale": 1.37,
     "mask_m": 2.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_el",
+    "fn": "strew",
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "model": "bark_debris_01",
+    "on": [
+     "prop0-kit"
+    ],
+    "density": 160.0,
+    "up": 0.5,
+    "scale": [
+     0.12,
+     0.28
+    ],
+    "seed": 501,
+    "within": [
+     0.0,
+     0.0,
+     0.62
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.31
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_el",
+    "fn": "strew",
+    "position": [
+     0,
+     0,
+     0
+    ],
+    "model": "dry_branches_medium_01",
+    "on": [
+     "prop0-kit"
+    ],
+    "density": 4.0,
+    "up": 0.5,
+    "scale": [
+     0.2,
+     0.45
+    ],
+    "seed": 502,
+    "within": [
+     0.0,
+     0.0,
+     0.7
+    ],
+    "avoid": [
+     [
+      0.0,
+      0.0,
+      0.34
+     ]
+    ]
    }
   ]
  },
@@ -3776,7 +3780,7 @@
     0.0,
     0.7
    ],
-   "irradiance": 3.0,
+   "irradiance": 1.5,
    "color": "#EEF0E0",
    "orbit": {
     "azimuth_deg": -35,
@@ -3823,6 +3827,26 @@
     "distance_m": 2.5
    },
    "specular": 0.3
+  },
+  "litter": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.22
+   ],
+   "irradiance": 0.7,
+   "color": "#C8966A",
+   "orbit": {
+    "azimuth_deg": -5,
+    "elevation_deg": 2,
+    "distance_m": 1.8
+   },
+   "specular": 0.0
   }
  },
  "render": {

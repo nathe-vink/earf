@@ -15,16 +15,16 @@ import copy
 
 import poison as A
 import poison_a4 as A4
-from common import piece
+from common import area, piece
 
 MORE_CAPS = [(0.32, -1.45, 0.05, 'young', 91, dict(lean=[0.01, 0.0], wash=0.1, dull=0.3, matte=True, orange=True)),
              (-0.55, -1.2, 0.06, 'convex', 92, dict(lean=[-0.015, 0.01], wash=0.05, dull=0.36, matte=True, orange=True, torn=0.2)),
-             (0.48, -1.32, 0.022, 'button', 93, dict(warts=260, dull=0.3, matte=True))]
+            ]   # p5: seven caps in all with A4's five (a loose arc, not a row)
 # the final's realism pass (the owner: "Poison needs more realism too"): two death caps only, set into the moss
 DEATHCAPS = [(0.42, -0.5, 0.045, 'convex', 81), (0.52, -0.42, 0.035, 'young', 82)]
 SORREL = [(-1.25, -0.9, 0.9, 20), (0.95, -0.75, 0.8, 140), (-0.9, -1.75, 0.7, 260), (1.6, -1.4, 0.85, 80), (-1.7, -0.3, 1.0, 310)]
-ARUMS = [(1.05, -1.25, 0.34, 41, [0.02, -0.01], 50), (1.12, -1.2, 0.25, 42, [0.03, 0.015], 36), (1.0, -1.17, 0.29, 43, [-0.02, 0.025], 44),
-         (1.08, -1.33, 0.22, 44, [0.0, -0.03], 30)]
+# p5: two spikes only, bent apart, ripeness mixed, a few berries dropped (the critics: "instanced copies")
+ARUMS = [(1.05, -1.25, 0.34, 41, [0.05, -0.02], 50, 0.15, 4), (1.13, -1.19, 0.24, 42, [-0.04, 0.03], 32, 0.35, 1)]
 YEW = dict(position=[2.6, 3.0, 1.6], rotate=[168, 0, 200], scale=0.5)
 
 
@@ -41,9 +41,9 @@ def shot():
         props.append(A4.extb('amanita', (x, y, z), cap=R, age=age, seed=sd, **more))
     for x, y, R, age, sd in DEATHCAPS:
         props.append(A4.extb('amanita', (x, y, -0.055), species='phalloides', cap=R, age=age, seed=sd, dull=0.3, matte=True))
-    for x, y, H, sd, lean, n in ARUMS:
+    for x, y, H, sd, lean, n, unripe, fallen in ARUMS:
         props.append(extp('arum', (x, y, -0.01), height=H, seed=sd, lean=lean, berries=n, berry=0.006, club=0.22 + n / 400,
-                          missing=0.15, sss=0.45, sss_scale=0.006, berry_rough=0.3))   # translucent, a waxy bloom, gaps
+                          missing=0.15, sss=0.45, sss_scale=0.006, berry_rough=0.3, unripe=unripe, fallen=fallen))
     props.append(extp('yew', arils=40, aril=0.007, seed=9, value=0.7, **YEW))
     # the read (proof 7's judges: "orange mushrooms"): A4 dulled its caps toward brown and dried them so they would not
     # out-shout the speaker; scarlet with white warts they read as fly agarics (F1 p3 on), still at A4's size
@@ -86,6 +86,28 @@ def shot():
         props.append(piece('asset', model='shrub_sorrel_01', position=[x, y, -0.01], rotate=[0, 0, rz], scale=sc, res='2k'))
     # the litter's repeat broken (a second lookup, turned and scaled, under a broad mask)
     props.append(extp('detile', on=['prop0-kit'], turn=37.0, scale=1.37, mask_m=2.5))
+    # p5 (the lead, on the critics' tells): -------------------------------------------------------------------------
+    for p in props:
+        if p.get('fn') == 'amanita' and p.get('species', 'muscaria') == 'muscaria':
+            # a wet sheen on two caps only; the rest dried
+            p['matte'] = p.get('seed') not in (61, 91)
+            if p.get('seed') == 64:                                         # one tipped hard, its gills to the lens
+                p['lean'] = [0.07, -0.03]
+        # no mat under the speaker: its feet stand in litter (the ring of moss kept in place, emptied, so the props'
+        # numbering the strews rely on is unchanged)
+        if p.get('fn') == 'strew' and p.get('model') == 'moss_01' and p.get('within') == [0.0, 0.0, 0.58]:
+            p['density'] = 1
+        # one fleck of sun through the canopy across the horn's top and the cabinet's upper-left face, the leaves' edge
+        # breaking it, not a pool over the whole speaker
+        if p.get('fn') == 'canopy':
+            p['holes'][0] = A.gap_for(-0.12, -0.06, 1.15, 0.36, (0.0, 4.0), A.SUN_A2)
+    props.append(A.ext('strew', model='bark_debris_01', on=['prop0-kit'], density=160.0, up=0.5, scale=[0.12, 0.28], seed=501,
+                       within=[0.0, 0.0, 0.62], avoid=[[0.0, 0.0, 0.31]]))
+    props.append(A.ext('strew', model='dry_branches_medium_01', on=['prop0-kit'], density=4.0, up=0.5, scale=[0.2, 0.45],
+                       seed=502, within=[0.0, 0.0, 0.7], avoid=[[0.0, 0.0, 0.34]]))
+    # the shadow side down a stop (the reflector halved); a warm bounce off the litter, low on the cabinet
+    s['lights']['reflector'] = {**s['lights']['reflector'], 'irradiance': s['lights']['reflector']['irradiance'] * 0.5}
+    s['lights']['litter'] = {**area(-5, 2, 1.8, 0.7, '#C8966A', (1.2, 0.4), (0.0, 0.0, 0.22)), 'specular': 0.0}
     s['title'] = 'barkhorn, Poison F1b, A4 with more of the wood\'s poisons'
     return s
 
