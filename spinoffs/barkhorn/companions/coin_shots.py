@@ -160,7 +160,7 @@ def sheet(kind):
                        shell=True, check=True)
         out = os.path.join(RENDERS, 'sheet-proof.png')
         subprocess.run(f"convert {top} \\( {R('tints')} -resize 1832x -background '#F2F0EC' -gravity south -splice 0x22 "
-                       f"-pointsize 15 -annotate +0+2 'A, the eight (the tint check: each within 4 deg of its swatch)' \\) "
+                       f"-pointsize 15 -annotate +0+2 'A, the eight (the tint check: each hue within 5 deg of its swatch)' \\) "
                        f"-background '#F2F0EC' -gravity center -append -depth 8 {out}", shell=True, check=True)
         os.remove(top)
     else:
