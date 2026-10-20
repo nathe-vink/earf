@@ -130,11 +130,14 @@ LISTEN = {'title': 'the listening zone: the listening pair on the altar',
           # p2 (p1 4.0, 4.0: the spots lit the felt above the pair, the pair murky, the chairs pink shells, a
           # dead-centre showroom view): seated, off axis, on 40 mm; the spots in front, on the cabinets' faces; the
           # Orbs 2.5 W; a browner velvet
-          'camera': {'position': [12.4, 2.2, 1.12], 'target': [16.4, 3.4, 0.95], 'lens_mm': 40, 'level': True,
-                     'fstop': 2.8, 'focus': [16.5, 1.95, 0.9]},
-          'settings': {'exposure': 2.7, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 1.0, 'altar_w': 170.0,
-                       'altar_cone': 22.0, 'altar_z': 0.9, 'haze': 0.006, 'sphere_w': 2.5, 'sphere_glow': 0.45,
-                       'niche_strip': 5.0}}
+          # p3 (p2 3.5, 3.5: the seated 40 mm framed only the niche, no chairs, Orbs or carpet, the right speaker cut;
+          # the horns black; the plinth tops a hot line): on the zone's axis behind a tub chair, 30 mm; the spots
+          # 240 W at 30 deg aimed higher; the Orbs 6 W, glow 0.55; the light plinths half; haze 0.012
+          'camera': {'position': [11.3, 3.05, 1.2], 'target': [16.4, 3.05, 1.05], 'lens_mm': 30, 'level': True,
+                     'fstop': 4.0, 'focus': [16.4, 3.05, 1.0]},
+          'settings': {'exposure': 3.0, 'wb': 2700, 'screen_glow': 0.35, 'spk_irr': 0.6, 'altar_w': 240.0,
+                       'altar_cone': 30.0, 'altar_z': 1.2, 'haze': 0.012, 'sphere_w': 6.0, 'sphere_glow': 0.55,
+                       'niche_strip': 5.0, 'plinth': 0.5}}
 NAMES = {'smoke': 'Smoke', 'ember': 'Ember', 'ice': 'Ice', 'mixed': 'Mixed'}
 VIEWS = {}
 for c in RP.CONFIGS:
@@ -160,10 +163,12 @@ VIEWS['sink'] = {'title': 'the sink in Smoke, a detail',
                  # p2 (p1 3.5, 4.0: no glow through the slab, the boards showing through it, the bowl a flat disc, the
                  # spout cropped, a black band at the left): the glow 4.0, the cast denser, the spot 3 W at 25 deg; the
                  # camera higher and a step right; f/5.6
-                 'camera': {'position': [10.3, 1.2, 1.32], 'target': [11.0, 0.33, 0.95], 'lens_mm': 50, 'level': True,
+                 # p3 (p2 4.5, 4.5: the basin a clipped white oval (35 %), the slab's face flat, no thickness; the black
+                 # band left): the glow 0.6 in amber; the spot 6 W at 35 deg; lower, nearer the slab's level
+                 'camera': {'position': [10.25, 1.35, 1.08], 'target': [11.0, 0.40, 0.90], 'lens_mm': 50, 'level': True,
                             'fstop': 5.6, 'focus': [10.98, 0.47, 0.86]},
-                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 2.0, 'sink_radius': 0.05,
-                              'sink_spot': 3.0, 'sink_spot_cone': 25.0, 'exposure': 0.8}}
+                 'settings': {**T36.VIEWS['sink']['settings'], 'config': 'smoke', 'sink_glow': 0.6, 'sink_radius': 0.05,
+                              'sink_glow_col': '#FF9A4A', 'sink_spot': 6.0, 'sink_spot_cone': 35.0, 'exposure': 0.8}}
 S.VIEWS = VIEWS
 _shot = S.shot
 

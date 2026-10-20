@@ -1,0 +1,381 @@
+{
+ "stage1": {
+  "impression": "A dark, empty, tiled-looking room with two grey speakers on glowing wooden plinths, the right one cut off by the frame edge. The end-grain wall reads as uniform bathroom tile, the speakers read as grey hi-fi boxes with no tint and a black top half, the floor is a featureless dark band, and there is no sign of life: no chairs, tables, lamps, glasses or people. It reads as a game or showroom render, and a magazine would not publish it as a specific place. It is a generic dark room with speakers.",
+  "score": 3.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The listening zone itself must be in frame: the espresso velvet tub chairs, the hex oak tables with lit Orbs, the carpet and the raised step, with both altar speakers whole and symmetrical in the niche",
+  "Each speaker's resin horn and upper cabinet must be lit and legible (horn region lum_median >= 35), and the smoked tint must read as tinted acrylic, not grey plastic",
+  "The end-grain block lining needs real end-grain variation (growth rings, checks, tone and height variation block to block) so it stops reading as ceramic tile",
+  "Frame lum_median 24 to 40, with pools of light on the tables and the plinths and dark between them, not one flat dim level",
+  "Signs of life in the zone: a glass on a table, a record sleeve, a coat or throw on a chair",
+  "No neon-like hot line at the plinth tops; the plinth-to-speaker joint must read as a physical seat",
+  "Visible but restrained air: the altar spots' cones faintly readable in haze"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "Frame underexposed: lum_median 18.6 (target 22-50), 86.6 % of pixels below 40"
+  },
+  {
+   "region": [
+    170,
+    90,
+    290,
+    160
+   ],
+   "what": "Left speaker's horn/upper cabinet nearly black (lum_median 14.1), so the silhouette is lost against the dark niche"
+  },
+  {
+   "region": [
+    595,
+    60,
+    720,
+    160
+   ],
+   "what": "Right speaker's horn likewise lost in black"
+  },
+  {
+   "region": [
+    580,
+    60,
+    720,
+    415
+   ],
+   "what": "Right speaker and plinth cut by the frame edge; the pair is not composed as an altar"
+  },
+  {
+   "region": [
+    175,
+    160,
+    280,
+    330
+   ],
+   "what": "Speaker reads grey and neutral (R40 G39 B43): the smoke tint carries no colour and looks like grey plastic or metal mesh, not cast acrylic"
+  },
+  {
+   "region": [
+    165,
+    318,
+    292,
+    332
+   ],
+   "what": "A hot white strip at the plinth top (p95 244) reads as an LED or neon edge, not light on oak"
+  },
+  {
+   "region": [
+    580,
+    340,
+    720,
+    360
+   ],
+   "what": "Same hot white strip on the right plinth"
+  },
+  {
+   "region": [
+    340,
+    0,
+    560,
+    340
+   ],
+   "what": "End-grain wall reads as a regular square ceramic tile grid with mottled CG noise; lum_range only 19.6, no grain, no relief"
+  },
+  {
+   "region": [
+    0,
+    360,
+    720,
+    480
+   ],
+   "what": "Floor/carpet is a flat featureless dark band (lum_median 12.6) with no texture, no furniture and no light pools"
+  },
+  {
+   "region": [
+    10,
+    0,
+    125,
+    370
+   ],
+   "what": "Oak pillar or panel at left is a flat smooth veneer slab with no edge detail; it reads as CG"
+  },
+  {
+   "region": [
+    0,
+    0,
+    720,
+    480
+   ],
+   "what": "No people, seats, tables, Orb lamps or props visible; the room is empty"
+  },
+  {
+   "region": [
+    180,
+    0,
+    340,
+    90
+   ],
+   "what": "No visible haze or spot cones; the air is dead and the top third of the frame is empty dark"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The frame shows only the niche's wall and one and a half speakers; the listening zone (chairs, Orb tables, carpet, step) that the frame is for is absent, and the right speaker is cut.",
+   "evidence": {
+    "region": [
+     580,
+     60,
+     720,
+     415
+    ],
+    "measured": "right speaker truncated at x=720; no seating or tables anywhere in frame"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [12.4, 2.2, 1.12], target [16.4, 3.4, 0.95], 40 mm, f/2.8",
+    "to": "position [11.0, 3.05, 1.15] on the niche's centre line behind one tub chair, target [16.4, 3.05, 1.05], 32 mm, f/4 focused on the altar; keep one chair back and a hex table with its Orb in the near third"
+   },
+   "expected": "Both speakers whole and symmetrical in the middle third, two tub chairs and an Orb table framing the foreground: reads as a specific listening room",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar spots light only the cabinet's middle; the horns and tops fall to black, so the hero's silhouette is lost.",
+   "evidence": {
+    "region": [
+     170,
+     90,
+     290,
+     160
+    ],
+    "measured": "lum_median 14.1, p95 30 on the horn region versus 39.4 on the cabinet"
+   },
+   "change": {
+    "setting": "the altar 2 x spot",
+    "from": "170 W, 2500 K, cone 22 deg",
+    "to": "240 W, 2500 K, cone 30 deg, aimed 300 mm higher at each speaker's horn mouth, with a soft blend 0.4"
+   },
+   "expected": "Horns and cabinet tops read, the tinted acrylic glows through, and a pool of light falls on each plinth",
+   "accept": {
+    "region": [
+     170,
+     90,
+     290,
+     160
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 35
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The frame as a whole sits below the night-interior band.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 18.6, below_40 86.6 %, clip 0.0 %"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "2.7",
+    "to": "3.2"
+   },
+   "expected": "Frame median in the high 20s with the shadows holding detail; still no clipping outside the lamps",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     24,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "Nothing in the zone makes the pools of light a night interior needs; the floor band is flat dark.",
+   "evidence": {
+    "region": [
+     0,
+     360,
+     720,
+     480
+    ],
+    "measured": "lum_median 12.6, lum_range 45.7, no local highlights"
+   },
+   "change": {
+    "setting": "each Orb",
+    "from": "2.5 W, glow 0.29",
+    "to": "7 W, glow 0.55"
+   },
+   "expected": "Warm pools on each hex table and the chair arms, with dark between them; carpet texture legible near the lamps",
+   "accept": {
+    "region": [
+     0,
+     360,
+     720,
+     480
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The end-grain block lining reads as a regular grid of ceramic tiles with CG mottle.",
+   "evidence": {
+    "region": [
+     340,
+     0,
+     560,
+     340
+    ],
+    "measured": "lum_range 19.6, identical cells, no ring grain or relief at 3x crop"
+   },
+   "change": {
+    "setting": "end-grain block material (finish)",
+    "from": "uniform tone with a noise mottle, flat face",
+    "to": "per-block random tone \u00b118 %, visible growth-ring texture at real scale, random rotation per block, 1-2 mm height variation with a bump map, hairline checks, slightly irregular joints"
+   },
+   "expected": "The wall reads as oak end-grain blocks catching the spill light block by block",
+   "accept": {
+    "region": [
+     340,
+     0,
+     560,
+     340
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "A blown white line runs along the top of each plinth and reads as an LED strip or signage edge.",
+   "evidence": {
+    "region": [
+     165,
+     318,
+     292,
+     332
+    ],
+    "measured": "p95 244.3 against median 62.5 on a 14 px strip"
+   },
+   "change": {
+    "setting": "on each Ember speaker 4 x area (the lamps on the speakers)",
+    "from": "1.0 W/m2 at the target",
+    "to": "0.4 W/m2, or move the lower lamp so it does not graze the plinth's top edge; lower the oak plinth's top-edge sheen (roughness 0.25 to 0.5)"
+   },
+   "expected": "The plinth top reads as lit oak with a soft highlight, not a glowing bar",
+   "accept": {
+    "region": [
+     165,
+     318,
+     292,
+     332
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 200
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The zone shows no sign of life.",
+   "evidence": {
+    "region": [
+     0,
+     300,
+     720,
+     480
+    ],
+    "measured": "no props visible in the foreground or on the plinths"
+   },
+   "change": {
+    "setting": "props",
+    "from": "props at the counter only",
+    "to": "add in the listening zone a rocks glass on the nearest hex table, a record sleeve leaning against the left plinth, and a coat or wool throw over one tub chair's arm"
+   },
+   "expected": "A lived-in foreground that reads as an occupied room, with small highlights on the glass",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The air is dead, so the top third is empty black and the altar spots have no shape.",
+   "evidence": {
+    "region": [
+     340,
+     0,
+     560,
+     340
+    ],
+    "measured": "falloff by y 19.5-26.4, flat; no cone visible"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.006 per metre",
+    "to": "0.012 per metre"
+   },
+   "expected": "Faint beams of the altar spots read above the speakers, and the dark has depth",
+   "accept": {
+    "region": [
+     180,
+     0,
+     340,
+     90
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     18,
+     35
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the speakers a more saturated smoke tint so they read as the frame's one colour",
+   "why": "The speaker's colour is fixed; better light through the acrylic (c2) is the allowed lever. If smoke still reads as grey plastic, the owner should decide whether Smoke is the right configuration for the hero shot."
+  },
+  {
+   "request": "Swap the square end-grain block lining for something that does not read as tile",
+   "why": "The niche lining is part of the fixed room design; only its finish (c5) may change."
+  }
+ ],
+ "score_if_fixed": 6.0
+}
