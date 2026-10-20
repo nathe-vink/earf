@@ -1,0 +1,397 @@
+{
+ "stage1": {
+  "impression": "A symmetrical pair of speakers on pale plinths in a timber-framed niche lined with a dark block grid. It reads as a dim CG showroom, not a photographed room. The blocks are a regular, even grid. Heavy denoiser smear softens every edge. A blurred, blown Orb and a chair back fill the bottom third. Two cone-shaped haze shafts and a salmon-magenta cast make it look like a nightclub rather than 2700 K warmth. The niche and altar idea is specific, but this frame would not run as a specific place: a magazine would see a generic hi-fi showroom render.",
+  "score": 4.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Foreground clear of the defocused Orb at the bottom centre and of the chair back that hides the altar plinths; the speakers framed whole, with one sharp sign of life (a glass or a sleeve) in the near plane",
+  "End-grain niche reads as real oak end grain at 1:1 (per-block tone, checks, ring texture), not as a uniform square tile",
+  "No visible cone-shaped beams in the haze; the altar light reads as a soft pool, with the plinth tops not near clipping",
+  "Neutral warm grade: no magenta or salmon cast on the velvet and the limewash",
+  "Frame lum_median 25-40 with the niche above the speakers holding detail (not black voids)",
+  "No clipping on the Orb tables (clip < 1.5 % in that region)",
+  "Clean full-resolution render: no denoiser smear on the speaker edges, driver surrounds or block joints"
+ ],
+ "defects": [
+  {
+   "region": [
+    380,
+    390,
+    480,
+    480
+   ],
+   "what": "Out-of-focus Orb lamp cut by the bottom edge: bright blob (median 140, clip 2.3 %) with a dark smeared mass beside it at 470-520, 420-480"
+  },
+  {
+   "region": [
+    120,
+    330,
+    400,
+    480
+   ],
+   "what": "Tub chair back fills a quarter of the frame, hides the left plinth, and reads as a flat salmon-pink surface (R62 G39 B36)"
+  },
+  {
+   "region": [
+    0,
+    330,
+    120,
+    480
+   ],
+   "what": "Orb and hex table top blown (clip 5.0 %) beside crushed shadow (crush 35 %)"
+  },
+  {
+   "region": [
+    170,
+    20,
+    210,
+    80
+   ],
+   "what": "Visible cone-shaped light shaft in haze from the left altar spot: reads as stage lighting"
+  },
+  {
+   "region": [
+    495,
+    10,
+    535,
+    70
+   ],
+   "what": "Visible cone-shaped light shaft in haze from the right altar spot"
+  },
+  {
+   "region": [
+    320,
+    60,
+    450,
+    260
+   ],
+   "what": "End-grain block wall reads as a uniform square tile grid with low variation (lum_range 23); hard-edged scalloped spill at its base (profile jumps 26 to 112 within 30 px)"
+  },
+  {
+   "region": [
+    200,
+    95,
+    315,
+    185
+   ],
+   "what": "Niche above the left speaker is a black void (median 6.0)"
+  },
+  {
+   "region": [
+    450,
+    85,
+    590,
+    185
+   ],
+   "what": "Niche above the right speaker is a black void (median 5.9)"
+  },
+  {
+   "region": [
+    195,
+    300,
+    280,
+    335
+   ],
+   "what": "Left plinth top near clipping (p95 242) and reads as a flat white slab"
+  },
+  {
+   "region": [
+    460,
+    310,
+    570,
+    350
+   ],
+   "what": "Right plinth top near clipping (p95 242)"
+  },
+  {
+   "region": [
+    200,
+    185,
+    560,
+    315
+   ],
+   "what": "Denoiser smear on the speakers: driver surrounds, frame bars and inner parts melt together; the cabinets read as grey/white boxes with no tint"
+  },
+  {
+   "region": [
+    560,
+    300,
+    720,
+    480
+   ],
+   "what": "Lower-right block is a dead dark mass (median 8.6), with nothing legible"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "camera",
+   "problem": "The foreground is a blown, defocused Orb and a big chair back that hide the altar plinths and read as clutter, not as an intimate seat view.",
+   "evidence": {
+    "region": [
+     120,
+     330,
+     480,
+     480
+    ],
+    "measured": "Orb blob median 140, clip 2.3 %; the chair back covers about 25 % of the frame"
+   },
+   "change": {
+    "setting": "camera position / lens",
+    "from": "[11.5, 1.85, 1.12], 32 mm, f/5.6 focused at [16.4, 3.05, 1.0]",
+    "to": "[12.6, 2.4, 1.15] (between the tub chairs, seated eye level), 40 mm, f/4 focused at the altar centre, so the near Orb and table sit at the frame's lower-left corner or out of frame and the plinths are seen whole"
+   },
+   "expected": "The speakers and plinths are complete and larger in the frame, with one soft but legible chair arm or table edge as the foreground, and no blown blob at the bottom edge.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar spots are too wide and hot: cone beams show in the haze, the plinth tops near clip, and they throw a hard scalloped spill on the block wall.",
+   "evidence": {
+    "region": [
+     195,
+     300,
+     280,
+     335
+    ],
+    "measured": "plinth p95 242.5; shafts at 170-210 x 20-80 and 495-535 x 10-70; wall profile steps 26 to 112"
+   },
+   "change": {
+    "setting": "the altar 2 x spot",
+    "from": "220.0 W, 2500 K, cone 36.0 deg",
+    "to": "140 W, 2500 K, cone 24 deg with a 0.5 blend (soft edge), aimed at each speaker's mid-height, not at the plinth top"
+   },
+   "expected": "Soft pools on the speakers, no visible cones in the haze, plinth tops below clip, a softer spill on the wall.",
+   "accept": {
+    "region": [
+     195,
+     300,
+     280,
+     335
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 215
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The grade has a salmon-magenta cast: the velvet, the limewash and the timber read pink rather than warm brown.",
+   "evidence": {
+    "region": [
+     120,
+     330,
+     400,
+     480
+    ],
+    "measured": "R62 G39 B36 (G and B nearly equal: magenta); right wall R90 G54 B45"
+   },
+   "change": {
+    "setting": "render white_balance_tint / white_balance_k",
+    "from": "tint 0.0, 2700 K",
+    "to": "tint toward green by +0.06, 2600 K"
+   },
+   "expected": "Warm amber-brown neutrals; the green channel lifts against blue so the surfaces read as timber and velvet, not pink.",
+   "accept": {
+    "region": [
+     120,
+     330,
+     400,
+     480
+    ],
+    "metric": "g_median",
+    "op": ">=",
+    "value": 43
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The niche above and behind each speaker is a black void, so the speakers float in holes instead of sitting in a lined niche.",
+   "evidence": {
+    "region": [
+     200,
+     95,
+     315,
+     185
+    ],
+    "measured": "lum_median 6.0 (left), 5.9 (right)"
+   },
+   "change": {
+    "setting": "add a concealed grazer inside the top of each altar niche (plain description)",
+    "from": "none",
+    "to": "a 2700 K linear grazer, about 10 W, washing down the end-grain lining and the felt"
+   },
+   "expected": "The niche lining shows texture and depth behind the speakers; the speaker silhouette separates from the back.",
+   "accept": {
+    "region": [
+     200,
+     95,
+     315,
+     185
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 14
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The end-grain block lining reads as a uniform square tile, not as oak end grain.",
+   "evidence": {
+    "region": [
+     320,
+     60,
+     450,
+     260
+    ],
+    "measured": "lum_range 23.3, every block the same tone and size at 1:1"
+   },
+   "change": {
+    "setting": "the oak's stain / the end-grain finish",
+    "from": "one uniform tone per block, flat surface",
+    "to": "per-block random tone (\u00b115 % value, \u00b15 % hue), visible growth-ring texture and radial checks in the end grain, slight per-block height variation of 1-2 mm in the bump"
+   },
+   "expected": "The wall reads as hand-laid end-grain oak with ring pattern and variation that catches the grazing light.",
+   "accept": {
+    "region": [
+     320,
+     60,
+     450,
+     260
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 32
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The Orbs and their tables blow out next to crushed shadow.",
+   "evidence": {
+    "region": [
+     0,
+     330,
+     120,
+     480
+    ],
+    "measured": "clip 5.0 %, crush 34.9 %; the Orb at 75-130 x 315-380 median 171, clip 3.3 %"
+   },
+   "change": {
+    "setting": "each Orb",
+    "from": "1.2 W, glow 0.0818",
+    "to": "0.7 W, glow 0.05; the Domes' downlights also off the hex tables or reduced from 260 W to 180 W"
+   },
+   "expected": "The Orb reads as a frosted glow with tint visible, and the table top as oak, not white.",
+   "accept": {
+    "region": [
+     0,
+     330,
+     120,
+     480
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.5
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The frame sits just under the target median, and large areas such as the lower right are dead dark.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "measured": "lum_median 21.8; lower right 560-720 x 300-480 median 8.6"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "4.3",
+    "to": "4.6, applied after c2 and c6 bring the hot spots down"
+   },
+   "expected": "Frame median about 26-30 with the shadows holding detail and the highlights still under clip.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     720,
+     480
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "The frame shows no sign of life, and denoiser smear makes every edge read as CG.",
+   "evidence": {
+    "region": [
+     200,
+     185,
+     560,
+     315
+    ],
+    "measured": "speaker edges smeared; the edge on the right cabinet side is 8 px wide at 10-90 in a 0.3-scale proof"
+   },
+   "change": {
+    "setting": "props and render samples",
+    "from": "no props in the zone; 256 samples, adaptive 0.02",
+    "to": "a half-full rocks glass and a record sleeve on the nearest hex table; for the deliverable, 1024 samples at full scale, adaptive 0.01, denoise with albedo and normal passes"
+   },
+   "expected": "A lived-in near plane, with crisp driver surrounds, frame bars and block joints.",
+   "accept": {
+    "region": [
+     455,
+     200,
+     480,
+     230
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": "<=",
+    "value": 4
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the speakers a readable saturated tint or hero colour; the Smoke cabinets read as neutral grey and white boxes (R92 G82 B85), so the frame has no single hero colour",
+   "why": "The speaker's colour and parts are fixed by the card (Smoke configuration); only the light on them may change"
+  },
+  {
+   "request": "The dark upper sections over each speaker read as black boxes",
+   "why": "Part of the speaker's fixed shape"
+  },
+  {
+   "request": "A single speaker as hero instead of an identical pair",
+   "why": "The altar pair is the room's fixed design"
+  },
+  {
+   "request": "Make the block grid irregular in size",
+   "why": "The niche lining is the room's design; only its finish may change (handled in c5)"
+  }
+ ],
+ "score_if_fixed": 6.0
+}
