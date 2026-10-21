@@ -270,7 +270,7 @@ def sink(bpy, kit, p, objs):
     # front of the slab facing down, seen only in reflections (an emitting card hidden from the camera and from diffuse
     # rays: it lights nothing, the polished bowl and top mirror it)
     if p.get('sink_top_fill', 0) > 0:
-        yc = y0 + S['d'] + 0.25; zc = S['top'] + 0.75
+        yc = y0 + S['d'] * 0.35; zc = S['top'] + 0.55        # above the bowl, a little toward the wall: what the floor mirrors to the eye
         cd = K.Mesh('sink-reflect-card'); cd.box(S['x'] - 0.35, yc - 0.15, zc, S['x'] + 0.35, yc + 0.15, zc + 0.004)
         ob = cd.object(bpy, K.emitter(bpy, 'sink-reflect', '#FFD8B0', p['sink_top_fill']))
         ob.visible_camera = False; ob.visible_diffuse = False; ob.visible_shadow = False; ob.visible_transmission = False
