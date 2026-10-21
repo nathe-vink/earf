@@ -301,12 +301,15 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
                     else [(0.15, '#4A0402'), (0.45, '#7A0803'), (0.8, '#A01C05'), (1.1, '#C4420E')])
         b.inputs['Subsurface Weight'].default_value = 0.12
     else:
-        # olive-green to yellowish at the margin, with dark radial fibrils
-        col = _ramp(nt, mix.outputs['Value'], [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'), (1.2, '#A3A06A')])
+        # olive-green to yellowish at the margin, with dark radial fibrils (`cap_ramp` [(position, hex)...] overrides:
+        # Poison G pushes it toward the yellow-green of a fresh cap)
+        col = _ramp(nt, mix.outputs['Value'], p.get('cap_ramp') or [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'),
+                                                                    (1.2, '#A3A06A')])
         b.inputs['Subsurface Weight'].default_value = 0.08
     if dull:                                              # weathered: the red toward a brown, as an old cap goes
         dm = nt.nodes.new('ShaderNodeMix'); dm.data_type = 'RGBA'; dm.inputs['Factor'].default_value = dull
-        nt.links.new(col, dm.inputs['A']); dm.inputs['B'].default_value = (*_hex('#4A2414'), 1); col = dm.outputs['Result']
+        nt.links.new(col, dm.inputs['A']); dm.inputs['B'].default_value = (*_hex(p.get('dull_to', '#4A2414')), 1)
+        col = dm.outputs['Result']
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)
     b.inputs['Roughness'].default_value = 0.55
