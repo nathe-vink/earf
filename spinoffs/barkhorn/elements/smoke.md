@@ -453,3 +453,16 @@ the round ends at p5, whose finals were already rendering (16 strips a frame on 
 `r31-element-smoke-e9` at 7808c315). Every critic of p3, p4 and p5 named the same remaining tell: the billows are all one
 size, "cotton-ball" or "metaball" lobes with no sheared wisps, because the 0.14 m grid sets one scale of eddy. A finer
 grid with a stronger wind (shear streaks, a leaning column) is the next step if the owner wants more.
+
+**The finals.** p5 at full size, 2400 x 1600 and 1600 x 2000 at 144 samples, each in 16 strips over the eight helpers
+(`haze_b_strips.py`: the strips raw, stitched and finished once): `element31/smoke_e9.png` and `smoke_e9-portrait.png`,
+9.4 and 6.1 machine-hours. The slow band runs through the fire and the speaker: landscape strip 10 took 116 minutes,
+four under a run's cap. Three helpers' sessions refused to push their strips, and those twelve were rendered again on
+the helpers whose pushes went through, and here. Neighbouring strips agree over their 64 shared rows to 0.4-2.3 of 255
+on average (the same pixels from two machines; the rest is noise in the flames and glints on the wet road), and no
+seam shows at full size.
+
+**A finer sim, not used.** `plume_b`: 10 cm cells (280 x 200 x 400), the wind at 2.6 m/s, 22 s, 103 minutes to solve.
+Its margins are a little finer but its body is still even lumps, and the windier column leaves the 28 m box about
+18 m downwind, where the sponge cuts it off. Another pass would need a box about 40 m long (some 2.5 hours of
+simulation) before the column could stand in the frame.
