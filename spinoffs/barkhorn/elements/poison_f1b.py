@@ -91,8 +91,7 @@ def shot():
         if p.get('fn') == 'amanita' and p.get('species', 'muscaria') == 'muscaria':
             # a wet sheen on two caps only; the rest dried
             p['matte'] = p.get('seed') not in (61, 91)
-            if p.get('seed') == 64:                                         # one tipped hard, its gills to the lens
-                p['lean'] = [0.07, -0.03]
+            # (the tipped cap read as floating with no stem: it stands again, the lead's fallback)
         # no mat under the speaker: its feet stand in litter (the ring of moss kept in place, emptied, so the props'
         # numbering the strews rely on is unchanged)
         if p.get('fn') == 'strew' and p.get('model') == 'moss_01' and p.get('within') == [0.0, 0.0, 0.58]:
@@ -101,13 +100,16 @@ def shot():
         # breaking it, not a pool over the whole speaker
         if p.get('fn') == 'canopy':
             p['holes'][0] = A.gap_for(-0.12, -0.06, 1.15, 0.36, (0.0, 4.0), A.SUN_A2)
-    props.append(A.ext('strew', model='bark_debris_01', on=['prop0-kit'], density=160.0, up=0.5, scale=[0.12, 0.28], seed=501,
-                       within=[0.0, 0.0, 0.62], avoid=[[0.0, 0.0, 0.31]]))
+    props.append(A.ext('strew', model='bark_debris_01', on=['prop0-kit'], density=220.0, up=0.5, scale=[0.12, 0.28], seed=501,
+                       within=[0.0, 0.0, 0.62], avoid=[[0.0, 0.0, 0.22]]))     # up to the plinth's edge, to occlude it
     props.append(A.ext('strew', model='dry_branches_medium_01', on=['prop0-kit'], density=4.0, up=0.5, scale=[0.2, 0.45],
                        seed=502, within=[0.0, 0.0, 0.7], avoid=[[0.0, 0.0, 0.34]]))
     # the shadow side down a stop (the reflector halved); a warm bounce off the litter, low on the cabinet
     s['lights']['reflector'] = {**s['lights']['reflector'], 'irradiance': s['lights']['reflector']['irradiance'] * 0.5}
     s['lights']['litter'] = {**area(-5, 2, 1.8, 0.7, '#C8966A', (1.2, 0.4), (0.0, 0.0, 0.22)), 'specular': 0.0}
+    # the feet 5 mm further into the crumbs, so they occlude (the critics: "no contact shadow")
+    for inst in s['product']['instances']:
+        inst['position'] = [inst['position'][0], inst['position'][1], inst['position'][2] - 0.005]
     s['title'] = 'barkhorn, Poison F1b, A4 with more of the wood\'s poisons'
     return s
 
