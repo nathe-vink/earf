@@ -9,7 +9,8 @@ scale in physically plausible materials, for a redwood forest photographed on lo
   low on the flank, a rust tail tip, amber eyes with vertical slits, a broad triangular head;
 - dartfrog: a green-and-black dyeing dart frog (Dendrobates auratus) sitting, its skin wet;
 - foxglove and nightshade: a spire of tubular bells, speckled in the throat; a sprig of glossy black berries.
-- bones: a deer's skull and jaw lying on the floor a season or two after it died (Smithsonian scans, CC0), weathered.
+- bones: a deer's bones (skull, jaw, foreleg, vertebrae, ribs ...) lying on the floor a season or two after it died
+  (Smithsonian scans, CC0), weathered.
 Every piece is placed by `position` and `rotate` (degrees) and `scale` like any kit piece.
 """
 import math, random
@@ -30,14 +31,18 @@ def _node_mat(bpy, name):
     return m, nt, b
 
 
-def _noise(nt, scale, detail=4.0, coord='Object', rough=0.6, w=None, stretch=None):
+def _noise(nt, scale, detail=4.0, coord='Object', rough=0.6, w=None, stretch=None, offset=None):
     tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
     nz.inputs['Scale'].default_value = scale; nz.inputs['Detail'].default_value = detail
     if 'Roughness' in nz.inputs:
         nz.inputs['Roughness'].default_value = rough
     src = tc.outputs[coord]
-    if stretch:
-        mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Scale'].default_value = stretch
+    if stretch or offset:
+        mp = nt.nodes.new('ShaderNodeMapping')
+        if stretch:
+            mp.inputs['Scale'].default_value = stretch
+        if offset:
+            mp.inputs['Location'].default_value = offset
         nt.links.new(src, mp.inputs['Vector']); src = mp.outputs['Vector']
     nt.links.new(src, nz.inputs['Vector'])
     return nz
@@ -962,51 +967,90 @@ def sorrel(bpy, name, p, kit):
 
 
 # --- bones -------------------------------------------------------------------------------------------------------
-# A white-tailed deer's skull and jaw: the Smithsonian's scans of a cast in the NMNH's education collection
-# (edanmdm:nmnheducation_15006160, released CC0), the cranium 27 cm long and the jaw 24; fetched once into the cache
-SI = 'https://3d-api.si.edu/content/document/3d_package:fcc69841-d8be-4103-be0f-143e374c9ce6/resources/'
-BONES = {'skull': 'USNM_PAL_Deer_skull-100k-2048_std.glb', 'jaw': 'USNM_PAL_Deer_mandible-100k-2048_std.glb'}
+# A deer's bones, all from the Smithsonian's scans released CC0, fetched once into the cache: a white-tailed deer's
+# skull, jaw and foreleg, scans of casts in the NMNH's education collection (edanmdm:nmnheducation_15006160; the
+# cranium 27 cm long, the jaw 24, the leg 68 from the elbow to the hoof), and a mule deer's bones from a wolf kill on
+# Vancouver Island, scans of the specimens in the NMNH paleobiology department's vertebrate taphonomy collection
+# (edanmdm:nmnhpaleobiology_17208149 to 17208155: a broken humerus, a cervical, a lumbar and a thoracic vertebra, a
+# rib, a scapula and part of a pelvis; small as scanned, a rib 12.5 cm and a thoracic vertebra 6, so scaled up).
+SI = 'https://3d-api.si.edu/content/document/3d_package:%s/resources/%s'
+_WT = 'fcc69841-d8be-4103-be0f-143e374c9ce6'
+_MD = 'Odocoileus_hemionus-150k-4096_std.glb'
+BONES = {'skull': (_WT, 'USNM_PAL_Deer_skull-100k-2048_std.glb'), 'jaw': (_WT, 'USNM_PAL_Deer_mandible-100k-2048_std.glb'),
+         'foreleg': ('9395b925-4132-468c-a974-745abec177b4', 'USNM_PAL_Deer_forelimb-100k-2048_std.glb'),
+         'humerus': ('049ebdfd-8571-4a0e-a197-2ae927ffbab9', _MD), 'cervical': ('e30c4375-f116-45e6-ae8d-eb257cb2b584', _MD),
+         'lumbar': ('618ba3dc-35ca-495f-9e82-ad5986172900', _MD), 'thoracic': ('efec128b-72f1-4ef6-9751-57c62ab34990', _MD),
+         'rib': ('bc79e866-98ca-406c-8592-2532d8f3f20b', _MD), 'scapula': ('c72dbbaa-cb47-4f27-9630-cd93878b0d14', _MD),
+         'pelvis': ('271c34c0-f2f8-4732-902c-120f32ec54ec', _MD)}
+WEATHER = ('bone', 'streaks', 'pits', 'algae', 'moss', 'soil', 'ground', 'seed')    # an item's own weathering
 
 
 def bones(bpy, name, p, kit):
-    """A deer's bones on the forest floor a season or two after it died: for each of `items` ({'part': 'skull' or
-    'jaw', 'position', 'rotate' (degrees), 'scale', 'sink' (m)}) the scan, its snout to -y and its crown up before
-    `rotate`, set down so its lowest point is `sink` below `position`'s height. Weathered (`_bone_mat`): bone gone
-    from white to a dull ivory, stained tan, darker in its pits (the scan's own occlusion), green with algae where it
-    faces the sky, a few cushions of moss on top, and soil-dark where it sinks into the litter."""
+    """A deer's bones on the forest floor a season or two after it died: for each of `items` ({'part' (a key of
+    BONES), 'position', 'rotate' (degrees, XYZ), 'scale' (a number or [x, y, z]), 'mirror' (a right-side bone from
+    the left's scan), 'sink' (m), and any of WEATHER to weather it apart from the rest}) the scan as it was scanned
+    (the skull's snout to -y and its crown up; the leg along y; a vertebra's body along z and its spine to +y; a rib
+    along y, its head at +y and its bow to +x; the humerus along z) turned by `rotate` and set down so its lowest
+    point is `sink` below `position`'s height. Each scan is read once and its mesh shared by every bone cut from it,
+    each weathered on its own (`_bone_mat`): bone gone from white to a dull ivory, stained tan, darker in its pits
+    (the scan's own occlusion), green with algae where it faces the sky, cushions of moss on top, and soil-dark where
+    it sinks into the litter. The scans' maps are cut to `max_tex` px (2048): the bones are seen from metres off."""
     import os
     import assets
-    out = []
+    import numpy as np
+    cap = p.get('max_tex', 2048)
+    scans, out = {}, []
     for i, it in enumerate(p['items']):
-        f = BONES[it['part']]
-        path = os.path.join(assets.CACHE, 'si', f)
-        if not os.path.exists(path):
-            assets._get(SI + f, path)
-        before = set(bpy.data.objects)
-        bpy.ops.import_scene.gltf(filepath=path)
-        new = [o for o in bpy.data.objects if o not in before]
-        bpy.context.view_layer.update()
-        ob = next(o for o in new if o.type == 'MESH')
-        src = ob.data.materials[0] if ob.data.materials else None
-        ob.data.transform(ob.matrix_world); ob.parent = None; ob.matrix_world = Matrix.Identity(4)
-        for o in new:
-            if o is not ob:
-                bpy.data.objects.remove(o, do_unlink=True)
-        ob.name = f'{name}-{it["part"]}{i}'
-        ob.data.materials.clear(); ob.data.materials.append(_bone_mat(bpy, f'{name}-{i}', src, p, it))
-        if src is not None and src.users == 0:
-            bpy.data.materials.remove(src)
-        for f_ in ob.data.polygons:
-            f_.use_smooth = True
+        part = it['part']
+        if part not in scans:
+            pkg, f = BONES[part]
+            path = os.path.join(assets.CACHE, 'si', pkg[:8] + '-' + f if f == _MD else f)
+            if not os.path.exists(path):
+                assets._get(SI % (pkg, f), path)
+            before = set(bpy.data.objects)
+            bpy.ops.import_scene.gltf(filepath=path)
+            new = [o for o in bpy.data.objects if o not in before]
+            bpy.context.view_layer.update()
+            ob = next(o for o in new if o.type == 'MESH')
+            src = ob.data.materials[0] if ob.data.materials else None
+            ob.data.transform(ob.matrix_world); ob.parent = None; ob.matrix_world = Matrix.Identity(4)
+            for o in new:
+                if o is not ob:
+                    bpy.data.objects.remove(o, do_unlink=True)
+            for f_ in ob.data.polygons:
+                f_.use_smooth = True
+            if not ob.data.materials:
+                ob.data.materials.append(None)
+            if src is not None and src.use_nodes:
+                for n in src.node_tree.nodes:
+                    if n.type == 'TEX_IMAGE' and n.image and max(n.image.size) > cap:
+                        n.image.scale(cap, cap)
+            co = np.empty(len(ob.data.vertices) * 3); ob.data.vertices.foreach_get('co', co)
+            scans[part] = (ob.data, src, co.reshape(-1, 3))
+        else:
+            ob = bpy.data.objects.new('bone', scans[part][0])
+            for c in out[0].users_collection if out else [bpy.context.scene.collection]:
+                c.objects.link(ob)
+        mesh, src, co = scans[part]
+        ob.name = f'{name}-{part}{i}'
+        q = dict(p, **{k: it[k] for k in WEATHER if k in it})
+        ob.material_slots[0].link = 'OBJECT'                         # one mesh, each bone weathered its own way
+        ob.material_slots[0].material = _bone_mat(bpy, f'{name}-{i}', src, q, it)
         x, y, z = it['position']
         ob.rotation_mode = 'XYZ'                                     # the glTF importer leaves it in quaternions
         ob.rotation_euler = [math.radians(a) for a in it.get('rotate', [0, 0, 0])]
-        s = it.get('scale', 1.0); ob.scale = (s, s, s)
+        s = it.get('scale', 1.0); s = list(s) if isinstance(s, (list, tuple)) else [s, s, s]
+        if it.get('mirror'):
+            s[0] = -s[0]
+        ob.scale = s
         ob.location = (x, y, 0.0)
-        bpy.context.view_layer.update()
-        low = min((ob.matrix_world @ v.co).z for v in ob.data.vertices)
-        ob.location.z = z - low - it.get('sink', 0.02)
+        mb = np.array(ob.matrix_basis)
+        ob.location.z = z - float((co @ mb[2, :3]).min()) - it.get('sink', 0.02)
         out.append(ob)
+    for mesh, src, co in scans.values():                             # the scans' own materials, now unused
+        mesh.materials[0] = None
+        if src is not None and src.users == 0:
+            bpy.data.materials.remove(src)
     return out
 
 
@@ -1024,6 +1068,8 @@ def _bone_mat(bpy, name, src, p, it):
                     orm = n.image
     tc = nt.nodes.new('ShaderNodeTexCoord'); geo = nt.nodes.new('ShaderNodeNewGeometry')
     uv = tc.outputs['UV']
+    sd = p.get('seed')                                               # a bone's own pattern, though its mesh is shared
+    off = (1.7 * sd, 2.3 * sd, 3.1 * sd) if sd else None
 
     def mrange(v, a, c, lo=0.0, hi=1.0, smooth=True):
         r = nt.nodes.new('ShaderNodeMapRange'); r.clamp = True
@@ -1053,11 +1099,11 @@ def _bone_mat(bpy, name, src, p, it):
         return k.outputs[2]
 
     # the bone: ivory, mottled tan and grey where water stood and dried (cm-scale), finer grain within it
-    n1 = _noise(nt, 1.0 / 0.035, 5.0, rough=0.62)
+    n1 = _noise(nt, 1.0 / 0.035, 5.0, rough=0.62, offset=off)
     col = _ramp(nt, n1.outputs['Fac'], p.get('bone', [(0.32, '#C9BFA5'), (0.5, '#B5A88A'), (0.62, '#A39679'),
                                                      (0.75, '#8E8670')]))
     # tannin run down its sides from the litter and the rain: streaks long in z, a darker tan
-    n5 = _noise(nt, 1.0 / 0.02, 3.0, stretch=(1.0, 1.0, 0.22))
+    n5 = _noise(nt, 1.0 / 0.02, 3.0, stretch=(1.0, 1.0, 0.22), offset=off)
     col = mix(mul(mrange(n5.outputs['Fac'], 0.5, 0.7), p.get('streaks', 0.55)), col, '#7C6B4D')
     # darker in its pits and seams: the scan's ambient occlusion
     if orm is not None:
@@ -1069,11 +1115,11 @@ def _bone_mat(bpy, name, src, p, it):
         k.inputs['Factor'].default_value = 1.0; L(col, k.inputs[6]); L(ao, k.inputs[7]); col = k.outputs[2]
     # green with algae where it faces the sky (world normal), in patches
     up = nt.nodes.new('ShaderNodeSeparateXYZ'); L(geo.outputs['Normal'], up.inputs['Vector'])
-    n2 = _noise(nt, 1.0 / 0.05, 3.0)
+    n2 = _noise(nt, 1.0 / 0.05, 3.0, offset=off)
     algae = mul(mrange(up.outputs['Z'], 0.0, 0.8), mrange(n2.outputs['Fac'], 0.38, 0.58))
     col = mix(mul(algae, p.get('algae', 0.75)), col, '#646B40')
     # a few cushions of moss on top
-    n3 = _noise(nt, 1.0 / 0.03, 4.0, rough=0.7)
+    n3 = _noise(nt, 1.0 / 0.03, 4.0, rough=0.7, offset=off)
     moss = mul(mrange(up.outputs['Z'], 0.45, 0.85), mrange(n3.outputs['Fac'], 0.6, 0.66))
     moss = mul(moss, p.get('moss', 1.0))
     mc = _ramp(nt, n1.outputs['Fac'], [(0.35, '#3E5420'), (0.65, '#5A6E2A')])
@@ -1100,7 +1146,7 @@ def _bone_mat(bpy, name, src, p, it):
         L(uv, tn.inputs['Vector'])
         nm = nt.nodes.new('ShaderNodeNormalMap'); nm.inputs['Strength'].default_value = 1.0
         L(tn.outputs['Color'], nm.inputs['Color']); prev = nm.outputs['Normal']
-    n4 = _noise(nt, 1.0 / 0.0012, 3.0)
+    n4 = _noise(nt, 1.0 / 0.0012, 3.0, offset=off)
     h = nt.nodes.new('ShaderNodeMath'); h.operation = 'ADD'
     L(n4.outputs['Fac'], h.inputs[0]); L(mul(moss, 1.5), h.inputs[1])
     _bump(nt, b, h.outputs['Value'], 0.25, 0.0006, prev)
