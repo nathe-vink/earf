@@ -10,7 +10,7 @@
      0.0,
      -0.3
     ],
-    "rotate_z": 18.0,
+    "rotate_z": 26.0,
     "hide": [
      "cloth-disc"
     ]
@@ -3330,12 +3330,28 @@
     "fn": "debris",
     "y0": -21.0,
     "y1": 1.2,
-    "count": 520,
-    "reach": 6.0,
-    "forward": 0.45,
-    "ahead": 7.0,
+    "count": 420,
+    "reach": 4.5,
+    "forward": 0.7,
+    "ahead": 6.0,
     "seed": 7,
     "rotate_z": 180.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -11.0,
+    "y1": 1.2,
+    "count": 1400,
+    "reach": 2.5,
+    "forward": 0.8,
+    "ahead": 5.0,
+    "inner": 0.6,
+    "seed": 17,
+    "rotate_z": 180.0,
+    "fine": true
    },
    {
     "kind": "kit",
@@ -3575,27 +3591,6 @@
     ],
     "material": "clay",
     "color": "#0E0C0B"
-   },
-   {
-    "kind": "kit",
-    "shape": "box",
-    "size": [
-     1.4,
-     0.02,
-     1.4
-    ],
-    "position": [
-     3.34,
-     -5.34,
-     1.6
-    ],
-    "rotate": [
-     -25.0,
-     0.0,
-     32.0
-    ],
-    "material": "clay",
-    "color": "#050505"
    },
    {
     "kind": "kit",
@@ -4270,7 +4265,7 @@
     "radius": 0.42,
     "sx": 1.0,
     "sy": 0.85,
-    "rotate_z": 18.0
+    "rotate_z": 26.0
    },
    {
     "kind": "kit",
@@ -4854,8 +4849,8 @@
     0.0,
     0.3
    ],
-   "irradiance": 2.4,
-   "color": "#9FB0C8",
+   "irradiance": 2.0,
+   "color": "#8EA4C6",
    "orbit": {
     "azimuth_deg": -20,
     "elevation_deg": 10,
@@ -5071,16 +5066,16 @@
  ],
  "camera": {
   "position": [
-   2.4376,
-   -3.901,
-   0.55
+   1.7101,
+   -4.6985,
+   1.2
   ],
   "target": [
    0.0,
    0.0,
    0.35
   ],
-  "lens_mm": 45,
+  "lens_mm": 35,
   "level": true,
   "fstop": 2.0,
   "focus": [
@@ -5103,15 +5098,15 @@
   "enabled": true,
   "white_in": 240,
   "white_out": 240,
-  "contrast": 0.08,
-  "clarity": 0.04,
+  "contrast": 0.16,
+  "clarity": 0.05,
   "sharpen": 0.25,
   "sharpen_px": 0.6,
   "dream": {
    "bloom": 0.16,
    "bloom_px": 60,
    "bloom_threshold": 0.7,
-   "saturation": -0.1,
+   "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
    "vignette": 0.3

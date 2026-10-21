@@ -76,6 +76,12 @@ def _plate(bm, rnd, w, d, t):
     sides = []
     for i in range(k):
         sides.append(bm.faces.new((top[i], bot[i], bot[(i + 1) % k], top[(i + 1) % k])))
+    # crumbled, not cut: the broken edges subdivided and pushed in and out, the aggregate showing through
+    res = bmesh.ops.subdivide_edges(bm, edges=list({e for f in sides for e in f.edges}), cuts=2, use_grid_fill=False)
+    sc = max(w, d)
+    for v in [g for g in res['geom'] if isinstance(g, bmesh.types.BMVert)]:
+        v.co.x += sc * 0.08 * rnd.uniform(-1, 1); v.co.y += sc * 0.08 * rnd.uniform(-1, 1)
+        v.co.z += t * 0.25 * rnd.uniform(-1, 1)
     return ft, fb, sides
 
 
@@ -98,9 +104,10 @@ def slabs(bpy, name, p, kit):
         f = min(1.0, (y - y0) / ramp)                          # bigger, steeper plates where the trench is deep
         sz = p.get('size', 1.0)
         w, d = sz * rnd.uniform(0.25, 0.7) * (0.5 + f), sz * rnd.uniform(0.3, 0.8) * (0.5 + f)
-        before = set(bm.verts)
+        before = len(bm.verts)
         ft, fb, sides = _plate(bm, rnd, w, d, t)
-        new = [v for v in bm.verts if v not in before]
+        bm.verts.ensure_lookup_table()
+        new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         tilt = rnd.uniform(p.get('tilt_min', 15.0), p.get('tilt', 55.0)) * f
         x = s * (lip + w * 0.25 * rnd.uniform(0.2, 1.0))
         z = 0.02 + 0.5 * w * math.sin(math.radians(tilt)) * 0.4 - (0.0 if rnd.random() < 0.7 else 0.1)
@@ -109,8 +116,8 @@ def slabs(bpy, name, p, kit):
     for f in bm.faces:
         f.material_index = 0 if f in tops else 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#1E1E20', 0.6, 0.5))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.5, '#262422', 0.7))
+    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#0D0D0E', 0.78, 0.45))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#34312D', 0.62))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
@@ -136,18 +143,21 @@ def debris(bpy, name, p, kit):
             r = reach * rnd.random() ** 2.2
         x = (1 if rnd.random() < 0.5 else -1) * ((p.get('inner', 0.8) if y < y1 else 0.0) + r)
         size = max(0.012, 0.16 * max(0.0, 1.0 - r / max(reach, r + 0.01)) ** 1.6 * rnd.uniform(0.3, 1.0))
-        before = set(bm.verts)
+        if p.get('fine'):
+            size = rnd.uniform(0.005, 0.03) * (1.0 - 0.5 * min(1.0, r / reach))
+        before = len(bm.verts)
         ft, fb, sides = _plate(bm, rnd, size * rnd.uniform(0.8, 1.6), size * rnd.uniform(0.8, 1.6),
                                size * rnd.uniform(0.3, 0.6))
-        new = [v for v in bm.verts if v not in before]
+        bm.verts.ensure_lookup_table()
+        new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         _place(bm, new, (rnd.uniform(-40, 40), rnd.uniform(-40, 40), rnd.uniform(0, 360)), (x, y, p.get('z', 0.0) + size * 0.2))
         if rnd.random() < 0.6:
             tops.append(ft)
     for f in bm.faces:
         f.material_index = 0 if f in tops else 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#1E1E20', 0.6, 0.5))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.5, '#2A2826', 0.7))
+    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#0D0D0E', 0.78, 0.45))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#34312D', 0.62))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))

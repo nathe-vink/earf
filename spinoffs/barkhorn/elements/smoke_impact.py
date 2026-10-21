@@ -50,7 +50,10 @@ def gouge():
     return [piece('ext', module='impact', fn='trench', width=1.3, end=0.8, ragged=0.05, texture='gravel_concrete',
                   tex_scale=0.7, tint='#4A4640', tint_mix=0.45, seed=3, grooves=0.06, rotate=[0, 0, FLIP], **common),
             piece('ext', module='impact', fn='slabs', count=90, thickness=0.06, tilt=40.0, tilt_min=6.0, size=0.6, seed=5, rotate_z=FLIP, **common),
-            piece('ext', module='impact', fn='debris', y0=Y0, y1=Y1, count=520, reach=6.0, forward=0.45, ahead=7.0, seed=7, rotate_z=FLIP),
+            piece('ext', module='impact', fn='debris', y0=Y0, y1=Y1, count=420, reach=4.5, forward=0.7, ahead=6.0, seed=7, rotate_z=FLIP),
+            # fines: gravel and grit sprayed ahead along the slide, and a dust skirt round the base
+            piece('ext', module='impact', fn='debris', y0=Y0 + 10.0, y1=Y1, count=1400, reach=2.5, forward=0.8, ahead=5.0,
+                  inner=0.6, seed=17, rotate_z=FLIP, fine=True),
             # the heave at its leading edge: plates shoved up and over in front of the speaker
             piece('ext', module='impact', fn='slabs', y0=Y1 - 0.9, y1=Y1 + 0.8, lip=0.45, depth=0.34, ramp=0.1, count=18,
                   thickness=0.07, tilt=60.0, tilt_min=30.0, size=0.42, seed=13, rotate_z=FLIP),
@@ -84,18 +87,15 @@ def shot():
                        strength=60.0, scale=0.08, seed=33))
     props.append(piece('box', size=[0.45, 0.3, 0.06], position=[0.2, -2.9, 0.0], rotate=[0, 8, 25], material='clay',
                        color='#0E0C0B'))
-    # a black flag high behind the camera, out of frame: the horn's polished resin mirrors it, not a white sky
-    props.append(piece('box', size=[1.4, 0.02, 1.4], position=[3.34, -5.34, 1.6], rotate=[-25.0, 0.0, 32.0], material='clay',
-                       color='#050505'))
     lp, lights = lamps()
     props += lp
     props.append(piece('ext', module='smoke_el', fn='occluder', position=[0.0, 0.0, SINK + 0.012], radius=0.42, sx=1.0,
-                       sy=0.85, rotate_z=18.0))
+                       sy=0.85, rotate_z=26.0))
     lights.update({
         'keyfire': {'type': 'point', 'position': [0.2, -2.9, 0.35], 'power_w': 600.0, 'color': '#FF8A3C', 'radius_m': 0.2,
                     'specular': 0.15},
         # a cool fill from the sky, and the fire's key on the speaker's flank
-        'skyfill': {**area(-20, 10, 2.4, 2.4, '#9FB0C8', (4.0, 3.0), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
+        'skyfill': {**area(-20, 10, 2.4, 2.0, '#8EA4C6', (4.0, 3.0), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
         'bounce': {**area(-25, 12, 2.0, 2.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
         'kicker': {**area(-150, 22, 3.0, 40.0, '#FF9A50', (0.5, 2.4), (0.0, 0.0, 0.5)), 'receivers': SHELL},
         'kicker_r': {**area(150, 14, 3.0, 28.0, '#FFB070', (0.6, 2.4), (0.0, 0.0, 0.5)), 'receivers': SHELL},
@@ -108,13 +108,13 @@ def shot():
             lights[f'firerim{i}'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [x * 0.4, y * 0.4, 1.0],
                                      'target': [0.0, 0.0, 0.5], 'irradiance': 30.0, 'color': '#FF8A3A', 'receivers': SHELL}
     # low beside the gouge, looking along it to the speaker; 40 mm wide open, focus on the speaker
-    cam = camera(height=0.55, distance=4.6, azimuth=32, lens=45, target=(0.0, 0.0, 0.35), fstop=2.0, shift_x=0.0,
+    cam = camera(height=1.2, distance=5.0, azimuth=20, lens=35, target=(0.0, 0.0, 0.35), fstop=2.0, shift_x=0.0,
                  shift_y=0.12)
     cam['clip_end'] = 3000
     return frame('smoke_impact', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.5),
-                 'barkhorn, Smoke, the speaker came down like an asteroid', lights=lights, rotate_z=18.0,
+                 'barkhorn, Smoke, the speaker came down like an asteroid', lights=lights, rotate_z=26.0,
                  position=(0.0, 0.0, SINK), samples=512, exposure=0.0,
-                 fin={**finish(contrast=0.08, clarity=0.04, saturation=-0.1, bloom=0.16, bloom_px=60, threshold=0.7,
+                 fin={**finish(contrast=0.16, clarity=0.05, saturation=0.0, bloom=0.16, bloom_px=60, threshold=0.7,
                                vignette=0.3), 'grain': 3.5})
 
 
