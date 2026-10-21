@@ -365,3 +365,17 @@ The owner chose **"Smoke: A, salt flat"** (E6 p3; its finals go to helpers from 
   - E6 first: 4.5 v 5.5, and 4.5 v 5.5, both preferring E8.
   - Means: E6 5.25, E8 4.75. Every judge preferred the second image shown, and E6 carries the net by 0.5.
   - The judges who preferred E8 cite its impact ("one clear cinematic idea"). Those who preferred E6 cite the product being legible.
+
+**E8 p1** (the coordinator's composition note): the gouge turned to run away behind the speaker toward the wrecks, a bow wave of heaved plates in front, an 8 cm asphalt course in section on the walls, backlit dust over the trench, a camera low and off-axis on the speaker's face, a burning fragment by the lens as the key, finer embers, halation, and a black flag for the horn's mirror.
+- **Read:** "a boxy speaker sits on a wet, rubble-strewn rooftop at dusk… broken concrete chunks lie around it… a burning vehicle giving off sparks and smoke". No figure. "The top box: its white blob around the black hole could be seen as a mouth or a face at a glance."
+- **The read target failed.** There is no crash, slide or impact in the sentence, and the gouge doesn't read from this angle.
+- **Movie-still realism:** 4.5 and 4.5, up from 4.0 and 4.0. The tells:
+  - clean, faceted low-poly slabs with no fines, aggregate or rebar;
+  - debris scattered radially, not trailing one way;
+  - no dust skirt at the speaker's base;
+  - fire spill missing from the speaker's far side.
+- **Duel against E6 p3**, four judges, each order twice:
+  - E8 first: 4.5 v 6.0 and 5.0 v 6.5, E6 preferred both times.
+  - E6 first: 5.0 v 6.5, E8 preferred; and 5.5 v 4.5, E6 preferred.
+  - Means: E6 5.75, E8 5.125. E6 is preferred 3 to 1.
+- **The flag misfired.** Three judges read the horn's black-and-white reflection as a "texture error". The horn mirrors the flag as a hard black blotch against the white sky.
