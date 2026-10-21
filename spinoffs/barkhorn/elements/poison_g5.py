@@ -30,6 +30,16 @@ p3, the deer's remains rather than its skull, found rather than placed:
 - the sun fleck across the ribs, not centred on the skull, and a second fleck on the open floor at centre right,
   where the shafts would land (both realism critics: the shafts "land nowhere").
 G4 otherwise whole, so the duel against G4 measures the remains.
+
+p3's critics: at 600 px "looks like bleached bones, perhaps the remains of a small animal, though it could also be dead
+pale roots"; told the brief ("green, but more obviously deadly"), both duels took p3 over G4 (5 v 6, 5 v 6 for realism):
+"the bleached bones next to the pale mushrooms suggest something was poisoned here", but both had the bones "too bright
+and clean ... on top of the leaf litter instead of in it: stain, darken and partly bury them". The proof also showed the
+jaw run into the back of the skull. Both realism critics also found the skeleton "tidy", "a neat, still-joined
+line". So p4: the bone mottled from p3's pale to two steps darker (darker all over, a local look, made the ribs read as
+sticks), the stains and pits deeper, mossier; every bone sunk 1-2 cm deeper; the troop's own moss and bark strews (G4's
+seeds 300 and 400) moved over the bones and thickened; a vertebra knocked off the line (a rib dragged off the row and dropped flat read as a stick);
+the jaw 12 cm clear of the skull.
 """
 import copy
 import math
@@ -38,9 +48,11 @@ import poison as A
 import poison_g4 as G4
 
 VIEW = 108.0                    # the lens's heading on the floor (degrees from +x): across the view is 18
-BONE = [(0.32, '#BDB297'), (0.5, '#A89B7E'), (0.62, '#978A6E'), (0.75, '#837A63')]    # the kit's, a step darker
+BONE = [(0.3, '#C2B79B'), (0.48, '#A69A7C'), (0.6, '#8B8064'), (0.72, '#6E6650')]     # pale to stained: mottled
 BRANCH_CLEAR = [(-0.2, -1.66, 0.45)]                                 # no strewn branch through the bones (x, y, r)
 FLECKS = [(-0.26, -1.72, 0.02, 0.16), (0.95, -0.7, 0.0, 0.18)]       # canopy holes' spots: across the ribs; open floor
+LITTER = {300: ((-0.15, -1.56, 0.6), 6500), 400: ((-0.15, -1.6, 0.62), 140.0)}   # G4's troop strews (seed: within, density),
+                                                                    # moved over the bones and thickened
 
 
 def _euler(cx, cy, cz):
@@ -118,15 +130,15 @@ def remains(dx=0.0, dy=0.0, leg=True):
         d = _flat(yaw + side)
         return round(x0 + (x1 - x0) * t + d[0] * off, 3), round(y0 + (y1 - y0) * t + d[1] * off, 3)
 
-    out = [vertebra('lumbar', *at(0.06), yaw, roll=70.0, scale=1.45, sink=0.025, seed=1),
-           vertebra('thoracic', *at(0.3), yaw + 6.0, roll=40.0, seed=2),
-           vertebra('thoracic', *at(0.46), yaw - 4.0, roll=55.0, seed=3),
-           vertebra('thoracic', *at(0.62), yaw + 10.0, roll=30.0, seed=4),
-           vertebra('cervical', *at(0.86), yaw - 14.0, roll=60.0, seed=5)]
+    out = [vertebra('lumbar', *at(0.06), yaw, roll=70.0, scale=1.45, sink=0.04, seed=1),
+           vertebra('thoracic', *at(0.3), yaw + 6.0, roll=40.0, sink=0.035, seed=2),
+           vertebra('thoracic', *at(0.46, 0.09, 90.0), yaw - 40.0, roll=85.0, sink=0.035, seed=3),   # knocked off
+           vertebra('thoracic', *at(0.62), yaw + 10.0, roll=30.0, sink=0.035, seed=4),
+           vertebra('cervical', *at(0.86), yaw - 14.0, roll=60.0, sink=0.035, seed=5)]
     # the upper side's ribs, heads at the spine, tips toward the front right; centre half a rib out from the head
-    for k, (t, out_yaw, lean, sc, sink) in enumerate([(0.14, -34.0, 8.0, 1.9, 0.014), (0.26, -31.0, 12.0, 2.1, 0.012),
-                                                      (0.38, -28.0, 6.0, 2.2, 0.016), (0.5, -25.0, 10.0, 2.1, 0.012),
-                                                      (0.62, -22.0, 4.0, 1.9, 0.014)]):
+    for k, (t, out_yaw, lean, sc, sink) in enumerate([(0.14, -34.0, 8.0, 1.9, 0.028), (0.26, -31.0, 12.0, 2.1, 0.024),
+                                                      (0.38, -28.0, 6.0, 2.2, 0.03), (0.5, -25.0, 10.0, 2.1, 0.024),
+                                                      (0.62, -22.0, 4.0, 1.9, 0.028)]):
         d = _flat(out_yaw); half = 0.062 * sc
         hx, hy = at(t, 0.035)
         out.append(rib(round(hx + d[0] * half, 3), round(hy + d[1] * half, 3), out_yaw + 180.0, lean=lean, scale=sc,
@@ -136,11 +148,11 @@ def remains(dx=0.0, dy=0.0, leg=True):
         d = _flat(out_yaw); half = 0.062 * sc
         hx, hy = at(t, 0.035, 90.0)
         out.append(rib(round(hx + d[0] * half, 3), round(hy + d[1] * half, 3), out_yaw + 180.0, lean=86.0, scale=sc,
-                       sink=0.01, seed=11 + k))
-    out += [skull('skull', x1 + 0.13, y1 + 0.02, VIEW + 90.0 + 15.0, roll=-12.0, pitch=8.0, scale=1.2, sink=0.035,
-                  moss=1.3, seed=13),
-            skull('jaw', x1 + 0.3, y1 - 0.12, VIEW + 90.0 + 30.0, roll=12.0, scale=1.2, sink=0.02, seed=14),
-            long_bone('humerus', x0 - 0.12, y0 - 0.06, -10.0, roll=20.0, scale=1.25, seed=15)]
+                       sink=0.016, seed=11 + k))
+    out += [skull('skull', x1 + 0.13, y1 + 0.02, VIEW + 90.0 + 15.0, roll=-12.0, pitch=8.0, scale=1.2, sink=0.05,
+                  moss=1.6, seed=13),
+            skull('jaw', x1 + 0.42, y1 - 0.16, VIEW + 90.0 + 30.0, roll=12.0, scale=1.2, sink=0.03, seed=14),
+            long_bone('humerus', x0 - 0.12, y0 - 0.06, -10.0, roll=20.0, scale=1.25, sink=0.03, seed=15)]
     return out if leg else out[:-1]
 
 
@@ -149,13 +161,17 @@ def shot(dx=0.0, dy=0.0, leg=True):
     s = copy.deepcopy(G4.shot())
     props = s['set']['props']
     for p in props:
+        if p.get('fn') == 'strew' and p.get('seed') in LITTER:          # the troop's moss and bark over the bones
+            (x, y, r), dens = LITTER[p['seed']]
+            p['within'], p['density'] = [x + dx, y + dy, r], dens
         if p.get('fn') == 'strew' and p.get('model') == 'dry_branches_medium_01':
             p['avoid'] = p.get('avoid', []) + [[x + dx, y + dy, r] for x, y, r in BRANCH_CLEAR]
         elif p.get('fn') == 'canopy':                                # G4's fleck, the last hole, onto the ribs; one more
             spots = [(FLECKS[0][0] + dx, FLECKS[0][1] + dy) + FLECKS[0][2:]] + FLECKS[1:]
             p['holes'] = p['holes'][:-1] + [A.gap_for(x, y, z, r, (0.0, 4.0), A.SUN_A2) for x, y, z, r in spots]
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'poison_b_el', 'fn': 'bones', 'position': [0, 0, 0],
-                  'bone': BONE, 'streaks': 0.65, 'algae': 0.9, 'moss': 1.2, 'soil': 0.05, 'items': remains(dx, dy, leg)})
+                  'bone': BONE, 'streaks': 0.85, 'pits': 0.35, 'algae': 1.0, 'moss': 1.5, 'soil': 0.04,
+                  'items': remains(dx, dy, leg)})
     s['title'] = 'barkhorn, Poison G5, the wood\'s poisons green, a deer\'s remains among the death caps'
     return s
 
