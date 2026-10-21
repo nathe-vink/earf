@@ -123,7 +123,7 @@ if B:
         # the altar pair keyed
         'street': dict(etch_glow=0.04, disc_glow=0.1, disc_lamp=4.0, street_lamp=200.0, altar_w=1500.0, altar_cone=18.0),
         # Smoke glass, not lacquer: the bowl lit and its floor lifted, the arrises raked brighter; the slab uncropped
-        'sink': dict(sink_spot=55.0, sink_spot_cone=20.0, sink_rake=8.0, sink_fill=30.0, sink_wash=10.0, sink_top_fill=25.0,
+        'sink': dict(sink_spot=55.0, sink_spot_cone=20.0, sink_rake=8.0, sink_fill=30.0, sink_wash=10.0, sink_top_fill=1.5,
                      life_soap=[11.02 + 0.22, 0.06 + 0.025 + 0.06, 0.86]),
         # brighter; the coins heaped (more of them); two left out on the stand
         'coins-door': dict(exposure=4.0, coin_n=90, host_w=40.0, host_cone=12.0),

@@ -267,10 +267,14 @@ def sink(bpy, kit, p, objs):
         r.visible_glossy = True
     # round 38b (the lead: the bowl's floor lifted by a room reflection, not crushed black): a soft warm panel over the
     # front of the slab facing down, seen in the polished bowl and top
+    # front of the slab facing down, seen only in reflections (an emitting card hidden from the camera and from diffuse
+    # rays: it lights nothing, the polished bowl and top mirror it)
     if p.get('sink_top_fill', 0) > 0:
-        tf = K._area(bpy, 'sink-top-fill', (S['x'], y0 + S['d'] + 0.25, S['top'] + 0.75), (math.radians(-35), 0, 0),
-                     (0.7, 0.3), p['sink_top_fill'], kelvin=3000)
-        tf.visible_glossy = True
+        yc = y0 + S['d'] + 0.25; zc = S['top'] + 0.75
+        cd = K.Mesh('sink-reflect-card'); cd.box(S['x'] - 0.35, yc - 0.15, zc, S['x'] + 0.35, yc + 0.15, zc + 0.004)
+        ob = cd.object(bpy, K.emitter(bpy, 'sink-reflect', '#FFD8B0', p['sink_top_fill']))
+        ob.visible_camera = False; ob.visible_diffuse = False; ob.visible_shadow = False; ob.visible_transmission = False
+        objs.append(ob)
     # and a wash down the boards from the alcove's head, so the slab has something to reflect
     if p.get('sink_wash', 0) > 0:
         import math
