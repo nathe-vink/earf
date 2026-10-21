@@ -360,9 +360,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.416,
+    "lamp_w": 0.208,
     "lamp_k": 2700,
-    "shade_glow": 0.0666,
+    "shade_glow": 0.0333,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -1075,8 +1075,8 @@
     1.95,
     1.02
    ],
-   "power_w": 24.0,
-   "cone_deg": 14.0,
+   "power_w": 40.0,
+   "cone_deg": 12.0,
    "blend": 0.6,
    "radius_m": 0.02,
    "color": 2700,
@@ -1123,7 +1123,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 3.0,
+  "exposure": 4.0,
   "white_balance_k": 3000,
   "white_balance_tint": 0.0
  },

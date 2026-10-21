@@ -200,6 +200,7 @@ def sink(bpy, kit, p, objs):
     read by what it reflects and by its arrises; a soft bowl 120 deep with a 30 radius at the rim and a steel waste; a
     brushed-steel spout and a separate lever, each on its own escutcheon. Its light is the room's: a narrow warm
     downlight into the bowl, a hidden strip under the slab's front edge, a wash down the boards."""
+    import math
     A = R.ALCOVE; S = R.SINK37
     bk = K.Mesh('alcove-back'); bk.box(A['x0'], 0.001, 0.0, A['x1'], 0.003, A['z1'])
     objs.append(bk.object(bpy, K.principled(bpy, 'alcove-shadow', '#0A0806', rough=0.9)))
@@ -264,6 +265,12 @@ def sink(bpy, kit, p, objs):
         r = K._area(bpy, 'sink-rake', (S['x'], yr, zr), (math.radians(90) - a + math.radians(90), 0, 0),
                     (S['w'] + 0.10, 0.012), p['sink_rake'], kelvin=3200)
         r.visible_glossy = True
+    # round 38b (the lead: the bowl's floor lifted by a room reflection, not crushed black): a soft warm panel over the
+    # front of the slab facing down, seen in the polished bowl and top
+    if p.get('sink_top_fill', 0) > 0:
+        tf = K._area(bpy, 'sink-top-fill', (S['x'], y0 + S['d'] + 0.25, S['top'] + 0.75), (math.radians(-35), 0, 0),
+                     (0.7, 0.3), p['sink_top_fill'], kelvin=3000)
+        tf.visible_glossy = True
     # and a wash down the boards from the alcove's head, so the slab has something to reflect
     if p.get('sink_wash', 0) > 0:
         import math
@@ -436,9 +443,9 @@ def extra_life(bpy, kit, p, objs):
         objs.append(vr.object(bpy, K.principled(bpy, 'vinyl', '#0B0B0C', rough=0.25), smooth=True))
     if RG:
         rg = K.Mesh('life38-rings')
-        for x, y, z in RG:
-            K._cyl(rg.bm, x, y, z + 0.00015, 0.040, 0.0002, seg=48)
-        objs.append(rg.object(bpy, K.principled(bpy, 'wet-ring', '#1A1A1A', rough=0.05), smooth=True))
+        for x, y, z in RG:                              # a thin wet ring a glass left, not a disc
+            K._lathe(rg.bm, [(0.034, 0.0), (0.038, 0.0), (0.038, 0.0003), (0.034, 0.0003)], seg=48, z0=z + 0.0001, cx=x, cy=y)
+        objs.append(rg.object(bpy, K.principled(bpy, 'wet-ring', '#3A3A3A', rough=0.08), smooth=True))
     if SO:
         x, y, z = SO
         d = K.Mesh('life38-soapdish'); K._cyl(d.bm, x, y, z + 0.0003, 0.045, 0.006, seg=40)

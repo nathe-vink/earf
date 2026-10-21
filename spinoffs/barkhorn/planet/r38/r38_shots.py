@@ -13,7 +13,7 @@ import r37_shots as T37                                             # noqa: E402
 S = T37.S
 S.OUT = os.path.join(T37.ROOT, 'studio', 'shots', 'barkhorn', 'planet38')
 T37.KEYS += ('zone_life', 'sink_under', 'sink_fill', 'sink_rake', 'host_stand', 'decorrelate', 'rw_faceout', 'rw_vary',
-             'rw_pull', 'steel_mix', 'life_glasses', 'life_sleeves', 'life_rings', 'life_soap')
+             'rw_pull', 'steel_mix', 'life_glasses', 'life_sleeves', 'life_rings', 'life_soap', 'sink_top_fill')
 S.DEFAULT = T37.DEFAULT = dict(T37.DEFAULT, zone_life=True, host_stand=True, coins=True)
 
 VIEWS = {k: v for k, v in T37.VIEWS.items() if k in ('listening-smoke', 'sink', 'bar-smoke', 'street', 'bar-mixed', 'listening-mixed')}
@@ -108,25 +108,25 @@ if B:
     b = {
         # the pair off the wall behind (a key on each cabinet, the niches' strips down); the cubbies 1.3 stops down and
         # warmer; a rocks glass and an open sleeve on the zinc in front
-        'bar-smoke': dict(barspk_w=150.0, barback=8.0, spk_niche_strip=1.5, rw_w=12.0, rw_k=2400, disc_glow=0.06,
+        'bar-smoke': dict(barspk_w=100.0, barback=8.0, spk_niche_strip=1.5, rw_w=12.0, rw_k=2400, disc_glow=0.06,
                           life_glasses=[[6.55, round(C['y0'] + 0.14, 3), zt, 0.022], [7.35, round(C['y0'] + 0.20, 3), zt, 0.03]],
                           life_sleeves=[[6.95, round(C['y0'] + 0.26, 3), zt, -14.0]]),
         # the coins brighter from the column's own light; the pin spot's shadow soft; a wet ring and a sleeve on the zinc
-        'coins-decks': dict(column_glow=1.6, decks_pin_r=0.15, life_rings=[[cx + 0.22, cy - 0.12, zt], [cx - 0.30, cy - 0.30, zt]],
+        'coins-decks': dict(column_glow=1.6, decks_pin_r=0.15, life_rings=[[cx + 0.20, cy - 0.10, zt]],
                             life_sleeves=[[cx + 0.42, cy - 0.20, zt, 18.0]]),
         # the fir under 2 % clipped (the spots narrower onto the cabinets, the niche strip down), the pair keyed, the
         # screen under the pair; a sleeve on the near table
-        'listening-smoke': dict(altar_w=45.0, altar_cone=20.0, altar_z=0.75, niche_strip=2.0, spk_irr=0.5, screen_glow=0.025,
+        'listening-smoke': dict(exposure=3.9, orb_trim=0.35, altar_w=45.0, altar_cone=20.0, altar_z=0.75, niche_strip=2.0, spk_irr=0.5, screen_glow=0.025,
                                 felt_wash=1.0, life_sleeves=[[round(RP.TUB_TABLES[4][0] - 0.05, 3), round(RP.TUB_TABLES[4][1] + 0.08, 3),
                                                               round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 30.0]]),
         # the glass as glass (the etched name lit, the street faintly in it), the clipped disc down, the steel less grungy,
         # the altar pair keyed
-        'street': dict(etch_glow=0.2, disc_glow=0.1, disc_lamp=4.0, street_lamp=200.0, altar_w=1500.0, altar_cone=18.0),
+        'street': dict(etch_glow=0.04, disc_glow=0.1, disc_lamp=4.0, street_lamp=200.0, altar_w=1500.0, altar_cone=18.0),
         # Smoke glass, not lacquer: the bowl lit and its floor lifted, the arrises raked brighter; the slab uncropped
-        'sink': dict(sink_spot=55.0, sink_spot_cone=20.0, sink_rake=8.0, sink_fill=30.0, sink_wash=10.0,
+        'sink': dict(sink_spot=55.0, sink_spot_cone=20.0, sink_rake=8.0, sink_fill=30.0, sink_wash=10.0, sink_top_fill=25.0,
                      life_soap=[11.02 + 0.22, 0.06 + 0.025 + 0.06, 0.86]),
         # brighter; the coins heaped (more of them); two left out on the stand
-        'coins-door': dict(exposure=3.0, coin_n=90, host_w=24.0, host_cone=14.0),
+        'coins-door': dict(exposure=4.0, coin_n=90, host_w=40.0, host_cone=12.0),
     }
     for k, d in b.items():
         VIEWS[k]['settings'] = {**VIEWS[k]['settings'], **ALL, **d}
@@ -147,7 +147,7 @@ def shot(view):
     s = _shot(view)
     s['title'] = s['title'].replace('(round 37)', '(round 38)')
     if B:
-        f = 2 ** (0.15 - s['render']['exposure'])
+        f = 2 ** (0.15 - s['render']['exposure']) * VIEWS.get(view, {}).get('settings', {}).get('orb_trim', 1.0)
         for o in s['set']['props']:
             if o.get('fn') == 'orb':
                 fl = o.get('flavour', 'smoke')
