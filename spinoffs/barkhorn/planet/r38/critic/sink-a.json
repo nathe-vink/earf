@@ -1,0 +1,321 @@
+{
+ "stage1": {
+  "impression": "A tight detail of a dark block basin in front of vertical timber boards, with a wall-mounted spout and lever. The boards have convincing grain and a warm wash, but the knots repeat in rows across neighbouring boards. The block reads as glossy grey-and-black plastic rather than polished smoked glass: its top is a flat pale grey sheet, the bowl is a black hole, and a white crescent of the bowl's underside shows through the front face like a plastic dish. The frame cuts the block at the bottom, so it does not read as floating, and there is no sign of life. As a specific place it is generic: it could be a hotel bathroom, not Planet EARF.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The bowl must read as a lit, soft 120 mm hollow with its steel waste visible, not a crushed void (bowl region crush_pct < 30, lum_median > 15)",
+  "The block must read as polished smoked glass: crisp, undistorted reflections and bright, thin arrises, not a flat grey satin top",
+  "The underside and the shadow gap must be in frame, so the block visibly floats off the wall",
+  "No repeated knot pattern across the boards; every face of the alcove carries grain, including the pale return at the left",
+  "One small human trace (a folded linen towel, a wet ring, a stone soap) to make it a place in use",
+  "Something specific to Planet EARF: the board-formed concrete or blackened steel of the shell, or a glimpse of the room past the alcove"
+ ],
+ "defects": [
+  {
+   "region": [
+    380,
+    450,
+    860,
+    545
+   ],
+   "what": "Bowl interior crushed to black (lum_median 1.4, crush_pct 73.7). The 15 W downlight barely registers; no form, no waste."
+  },
+  {
+   "region": [
+    450,
+    610,
+    800,
+    670
+   ],
+   "what": "The bowl's underside shows through the front face as a neutral grey-white crescent (median 85, RGB 90/83/86). It reads as a white plastic dish inside a box."
+  },
+  {
+   "region": [
+    310,
+    500,
+    370,
+    580
+   ],
+   "what": "The flat top is a uniform pale grey (lum 100, range 22, RGB 110/97/97). It reads as satin grey plastic, not smoked polished acrylic, and the board reflections in it are faint and soft."
+  },
+  {
+   "region": [
+    100,
+    40,
+    1150,
+    320
+   ],
+   "what": "The board texture repeats: dark knots fall in the same horizontal rows (y about 70 and 290) on almost every board. It reads as tiling."
+  },
+  {
+   "region": [
+    60,
+    0,
+    100,
+    800
+   ],
+   "what": "The pale vertical return at the left has no grain and a soft, smeared edge. At median 108 it is the brightest thing in the frame and pulls the eye off the sink."
+  },
+  {
+   "region": [
+    245,
+    590,
+    1045,
+    800
+   ],
+   "what": "The front face is near black (median 8.5) and cut by the frame edge at the bottom. A stray sliver of something shows at the bottom centre (about 560-640, 785-800)."
+  },
+  {
+   "region": [
+    205,
+    0,
+    215,
+    800
+   ],
+   "what": "The board joints are pure black slots (p5 0) with no depth or bounce. They read as gaps cut in a flat plane."
+  },
+  {
+   "region": [
+    1160,
+    0,
+    1200,
+    800
+   ],
+   "what": "Only a featureless sliver of the concrete shell shows: flat, with no tie holes or formwork grain at this size."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The bowl is a black void, so the basin's form, its 30 mm rim radius and the steel waste do not read.",
+   "evidence": {
+    "region": [
+     380,
+     450,
+     860,
+     545
+    ],
+    "measured": "lum_median 1.4, crush_pct 73.65, p95 96 only on the rim"
+   },
+   "change": {
+    "setting": "lamps: the sink 1 x spot",
+    "from": "15.0 W, 2700 K, cone 12.0 deg",
+    "to": "50.0 W, 2700 K, cone 18.0 deg, aimed at the waste so the pool covers the whole bowl floor and grazes the far wall of the bowl"
+   },
+   "expected": "A warm pool in the bowl with a gradient up its sides, and the steel waste catching a small highlight. The bowl median rises to about 18-30.",
+   "accept": {
+    "region": [
+     380,
+     450,
+     860,
+     545
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 30
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The frame cuts the block at its bottom edge, so it never reads as floating off the wall, which the card names as the point of the detail.",
+   "evidence": {
+    "region": [
+     245,
+     590,
+     1045,
+     800
+    ],
+    "measured": "the front face runs off the bottom of the frame; the underside and the shadow gap are not visible"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [11.2, 1.55, 1.3], target [11.03, 0.2, 0.92], 45 mm",
+    "to": "position [11.35, 1.75, 1.25], target [11.03, 0.2, 0.78], 40 mm, level, the block's underside and about 150 mm of wall or floor below it in frame, slightly off-axis so the left end's polished arris shows"
+   },
+   "expected": "The whole block in frame with the shadow gap and the under-light pool below it, and one end face showing its 160 mm thickness and a bright arris.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The hidden strip under the front edge that the card describes is off, so nothing separates the block from the wall below or proves it floats.",
+   "evidence": {
+    "region": [
+     245,
+     590,
+     1045,
+     800
+    ],
+    "measured": "front face median 8.5, no light below the block; the sink's under-glow is 0.0"
+   },
+   "change": {
+    "setting": "room's glowing surfaces: the sink's under-glow",
+    "from": "0.0",
+    "to": "0.5, warm (about 2700 K), hidden under the front edge, washing down the boards below"
+   },
+   "expected": "A soft warm pool on the boards under the block, falling off downward, with the block's underside silhouetted against it.",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The top reads as flat grey satin plastic, not polished smoked acrylic.",
+   "evidence": {
+    "region": [
+     310,
+     500,
+     370,
+     580
+    ],
+    "measured": "lum_median 99.8, range 22, near-neutral RGB 110/97/97; the board reflections are faint and blurred"
+   },
+   "change": {
+    "setting": "materials' finish: the sink's Smoke acrylic surface",
+    "from": "current roughness (reads satin)",
+    "to": "polished, roughness at or near 0.0. Darken whatever bright surface the top is mirroring (or flag it), so the top shows a deep smoke tone with crisp reflections of the boards and the spout."
+   },
+   "expected": "The top drops to a deep smoke with sharp board reflections and bright arrises along its edges.",
+   "accept": {
+    "region": [
+     310,
+     500,
+     370,
+     580
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     75
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The grainless pale return at the left is the brightest surface in the frame and pulls the eye from the sink.",
+   "evidence": {
+    "region": [
+     60,
+     0,
+     100,
+     800
+    ],
+    "measured": "lum_median 107.7 against 65 for the boards and 44 for the sink top"
+   },
+   "change": {
+    "setting": "the wash down the boards (Dome downlight or the record wall's spill on the alcove)",
+    "from": "lighting the left return fully",
+    "to": "flag or narrow the wash so the return falls about 1 stop below the boards behind the sink"
+   },
+   "expected": "The brightest areas become the bowl pool and the board wash right behind the tap.",
+   "accept": {
+    "region": [
+     60,
+     0,
+     100,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The board texture tiles: the knots repeat in rows across boards, which says CG at once.",
+   "evidence": {
+    "region": [
+     100,
+     40,
+     1150,
+     320
+    ],
+    "measured": "visual: dark knots aligned at y about 70 and about 290 on most boards"
+   },
+   "change": {
+    "setting": "materials' finish: the Douglas fir boards",
+    "from": "one texture at a common offset per board",
+    "to": "a random UV offset (and 180-degree flip) per board, slight per-board tone variation of plus or minus 8 %, grain on the left return too"
+   },
+   "expected": "No visible pattern. Each board reads as a different plank.",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "Nothing says the sink is in use, so the frame reads as a showroom product shot.",
+   "evidence": {
+    "region": [
+     300,
+     425,
+     1030,
+     590
+    ],
+    "measured": "visual: a bare top, no props"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink",
+    "to": "a folded undyed linen hand towel on the right end of the top, a small grey stone soap, and a few water drops near the spout's landing"
+   },
+   "expected": "A sign of life in neutral colours. The smoke tint stays the only colour.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The board joints are dead black slots, which flattens the wall into a printed plane.",
+   "evidence": {
+    "region": [
+     205,
+     0,
+     215,
+     800
+    ],
+    "measured": "joint lum_p5 0.0, crush_pct 20 in a 10 px strip"
+   },
+   "change": {
+    "setting": "render: exposure / haze",
+    "from": "exposure 1.4, haze 0",
+    "to": "exposure 1.4 kept; haze density 0.002 per metre so the joints and shadows lift slightly, and the downlight cones show faintly"
+   },
+   "expected": "The joints hold a dark brown, and the shadows carry detail.",
+   "accept": {
+    "region": [
+     205,
+     0,
+     215,
+     800
+    ],
+    "metric": "lum_p5",
+    "op": ">",
+    "value": 4
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the bowl's underside less visible through the front face (it reads as a white dish)",
+   "why": "It follows from the sink's design (a bowl cast in a 160 mm smoked block). Only the light on it can change, which c1 and c3 address in part."
+  },
+  {
+   "request": "Show more of the shell (board-formed concrete, blackened steel) or a glimpse of the bar so the detail reads as Planet EARF",
+   "why": "It may need a wider frame than this detail is for, or the alcove's design, which is fixed. Flagged because the frame is currently generic."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

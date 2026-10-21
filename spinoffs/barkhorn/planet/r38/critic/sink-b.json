@@ -1,0 +1,368 @@
+{
+ "stage1": {
+  "impression": "A smoked-acrylic washbasin block in front of a wall of brown vertical boards with a wall-mounted steel spout and lever. The timber wall is the brightest and best-lit thing in the frame. The block reads as a black glossy box: the bowl is a crushed black hole, the front face is near black with only a ghostly white bowl underside showing through, the arrises do not catch light, and the bottom of the slab is cropped, so it does not read as floating. A smeared, over-bright vertical strip at the left edge, pure-black board gaps and no prop or sign of life make it read as a competent CG product render. A magazine would not run it as a detail of a specific place: nothing in it is particular to this bar, and it is a generic sink against generic boards.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The bowl must read as a lit, soft-sided form with a pool of warm light and a visible steel waste, not a crushed void (bowl region lum_median >= 25, crush_pct < 20)",
+  "The slab must read as smoked glass: crisp polished arrises with thin bright highlights (edge width <= 4 px) and legible reflections in the front face (front lum_median >= 18)",
+  "The sink, not the wall, must be the brightest surface of interest: the wall wash about a stop under the lit bowl and top",
+  "The whole slab, including its underside and the shadow gap to the boards, must be in frame so that it reads as floating",
+  "The left-edge strip must be removed or retextured (no stretched UVs or blown band)",
+  "Add one sign of life (a folded linen towel, a bar of soap on a small steel dish, or a single rocks glass) that gives the acrylic something real to reflect",
+  "Add something particular to Planet EARF (the edge of a concrete return, a beam, a glimpse of the room) so the frame reads as a specific place"
+ ],
+ "defects": [
+  {
+   "region": [
+    450,
+    470,
+    800,
+    540
+   ],
+   "what": "Bowl interior is crushed to black (lum_median 0.2, crush_pct 92.6), with no downlight pool and the waste invisible"
+  },
+  {
+   "region": [
+    250,
+    580,
+    1045,
+    800
+   ],
+   "what": "Front face of the slab is a near-black box (lum_median 8.5) with weak smeared wall reflections, so it reads as black plastic, not 160 mm smoked glass"
+  },
+  {
+   "region": [
+    600,
+    560,
+    640,
+    620
+   ],
+   "what": "Front top arris is soft (10-90 width 25 px), with no polished highlight line"
+  },
+  {
+   "region": [
+    440,
+    600,
+    810,
+    670
+   ],
+   "what": "White underside of the bowl floats inside the dark block, brighter than the bowl's own interior; the lighting reads as inconsistent"
+  },
+  {
+   "region": [
+    60,
+    0,
+    100,
+    800
+   ],
+   "what": "Over-bright vertical band (lum_median 107.7, the brightest region in the frame) with stretched, streaky grain: a UV-stretched board return or light leak"
+  },
+  {
+   "region": [
+    200,
+    0,
+    1150,
+    420
+   ],
+   "what": "Wall wash outshines the product (lum_median 63.9 vs slab 9.6); the hero is the wrong object"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Board gaps are pure black (lum_p1 0.0) with no bounce, a CG tell"
+  },
+  {
+   "region": [
+    300,
+    0,
+    1150,
+    120
+   ],
+   "what": "Nail holes in a perfectly level row, two per board, and similar grain on alternate boards; reads as a repeated texture"
+  },
+  {
+   "region": [
+    240,
+    760,
+    1050,
+    800
+   ],
+   "what": "Slab is cropped at the bottom edge; the underside, waste and float gap are cut off, and a stray grey arc sits at the frame edge"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "No prop or sign of use; showroom-clean"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The bowl, the reason for the frame, is a black void because its downlight is too weak and too narrow to read on a dark polished surface.",
+   "evidence": {
+    "region": [
+     450,
+     470,
+     800,
+     540
+    ],
+    "measured": "lum_median 0.2, crush_pct 92.6; the profile down the bowl falls from 5.8 to 0.0 before the rim at 69"
+   },
+   "change": {
+    "setting": "lamps: the sink 1 x spot",
+    "from": "15.0 W, 2700 K, cone 12.0 deg",
+    "to": "60.0 W, 2700 K, cone 22.0 deg, aimed at the bowl's far wall so the pool falls across the curve to the waste"
+   },
+   "expected": "A warm pool on the far wall of the bowl grading to dark at the near lip, with the steel waste catching a small highlight",
+   "accept": {
+    "region": [
+     450,
+     470,
+     800,
+     540
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 25
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The slab is cropped at the bottom, so it does not read as floating, and the lens looks down onto the top, which hides the front face's reflections.",
+   "evidence": {
+    "region": [
+     240,
+     760,
+     1050,
+     800
+    ],
+    "measured": "Slab bottom at y ~790 of 800; no underside or shadow gap visible"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position z 1.3 m, target [11.03, 0.2, 0.92], 45 mm",
+    "to": "pull back about 0.35 m along x, z 1.15 m, target z 0.80, 40 mm, keeping the verticals level; frame the slab's underside and its shadow on the boards plus 10 % of the floor or a concrete return"
+   },
+   "expected": "The whole block sits in the frame with a dark float gap beneath it and the spout above it; the front face shows a readable reflection of the room",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The wall wash is brighter than the product, so the eye goes to the boards and not the sink.",
+   "evidence": {
+    "region": [
+     200,
+     0,
+     1150,
+     420
+    ],
+    "measured": "Wall lum_median 63.9 vs slab region lum_median 9.6"
+   },
+   "change": {
+    "setting": "the wash down the boards (the alcove's grazing light)",
+    "from": "current level",
+    "to": "about 0.6x (-0.7 stop), and narrowed so it falls off toward the top of the frame"
+   },
+   "expected": "Boards read dim and warm, graded from the sink upward; the lit bowl and top become the brightest surfaces",
+   "accept": {
+    "region": [
+     200,
+     0,
+     1150,
+     420
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The polished arrises and the front face catch no light, so 160 mm of smoked acrylic reads as black plastic.",
+   "evidence": {
+    "region": [
+     600,
+     560,
+     640,
+     620
+    ],
+    "measured": "Front-top edge step -40.8, 10-90 width 25 px; front face lum_median 8.5"
+   },
+   "change": {
+    "setting": "the sink's under-glow (the hidden strip under the front edge) and a small edge kicker",
+    "from": "under-glow 0.0, no kicker",
+    "to": "under-glow 0.8 (a strip washing the boards below the slab, not the block itself), plus a 0.3 m x 0.02 m area lamp, 2700 K, about 3 W, above and in front, angled to graze the top-front arris"
+   },
+   "expected": "A thin bright line along the top-front arris and a soft glow on the boards under the slab, lifting the front face by reflection without lighting the block from within",
+   "accept": {
+    "region": [
+     600,
+     560,
+     640,
+     620
+    ],
+    "metric": "edge",
+    "axis": "y",
+    "op": "<=",
+    "value": 4
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "asset",
+   "problem": "The left-edge strip is a stretched, over-bright band that reads as a UV error.",
+   "evidence": {
+    "region": [
+     60,
+     0,
+     100,
+     800
+    ],
+    "measured": "lum_median 107.7 (frame median 53.4), visible streaked grain"
+   },
+   "change": {
+    "setting": "the alcove's left return board (texture mapping and finish)",
+    "from": "stretched UVs, catching the full wash",
+    "to": "box-mapped grain at the same scale as the boards, and the wash flagged off it"
+   },
+   "expected": "The return reads as a board in shadow, a little darker than the face boards",
+   "accept": {
+    "region": [
+     60,
+     0,
+     100,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 60
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "Nothing in the frame shows use or gives the acrylic something real to reflect.",
+   "evidence": {
+    "region": [
+     290,
+     430,
+     1030,
+     600
+    ],
+    "measured": "Empty top surface; reflections are only of the boards"
+   },
+   "change": {
+    "setting": "props",
+    "from": "none at the sink",
+    "to": "a folded natural-linen hand towel on the right-hand top, a bar of soap on a small blackened-steel dish at the back left, and a few water droplets in the bowl"
+   },
+   "expected": "Small true reflections in the top, scale cues for the 160 mm slab, and a sign of life",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "Board gaps render pure black and the nail-hole row is perfectly level, both CG tells.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "Frame lum_p1 0.0; gaps at x ~205, 350, 495, 770 with 0 luminance"
+   },
+   "change": {
+    "setting": "the fir boards' finish",
+    "from": "uniform texture, black gaps",
+    "to": "randomise texture offset and rotation per board, jitter nail height \u00b115 mm, and give the gap backing a dark-brown albedo (~0.04) instead of void"
+   },
+   "expected": "Gaps read as deep shadow with a hint of brown; the boards read as individual old fir",
+   "accept": {
+    "region": [
+     300,
+     100,
+     900,
+     400
+    ],
+    "metric": "lum_p5",
+    "op": ">=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "post",
+   "problem": "The shadows crush to zero, which a magazine night exposure would hold.",
+   "evidence": {
+    "region": [
+     250,
+     580,
+     1045,
+     800
+    ],
+    "measured": "lum_p5 2.6, lum_median 8.5"
+   },
+   "change": {
+    "setting": "render: look and exposure",
+    "from": "AgX - Medium High Contrast, exposure 1.4",
+    "to": "AgX - Base Contrast (or Medium Contrast), exposure 1.5, after c1-c4"
+   },
+   "expected": "The shadows hold detail in the slab's face and the board gaps while the frame median stays in band",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     35,
+     50
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A brighter or clearer smoke tint so the block reads less opaque",
+   "why": "Smoke is EARF's tint and the sink's colour is fixed"
+  },
+  {
+   "request": "Internal glow in the block",
+   "why": "The card rules it out as a design decision (it reads as a lit Corian box)"
+  },
+  {
+   "request": "A slimmer slab or a different bowl form, so the white bowl underside does not float in the dark block",
+   "why": "The sink's geometry is fixed by the room's design; only light can reconcile it"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
