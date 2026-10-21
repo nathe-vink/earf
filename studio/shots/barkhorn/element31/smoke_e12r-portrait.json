@@ -3303,7 +3303,8 @@
     "y1": 1.2,
     "lip": 0.75,
     "depth": 0.34,
-    "ramp": 5.0
+    "ramp": 5.0,
+    "value": 0.45
    },
    {
     "kind": "kit",
@@ -3321,7 +3322,9 @@
     "y1": 1.2,
     "lip": 0.75,
     "depth": 0.34,
-    "ramp": 5.0
+    "ramp": 5.0,
+    "top_value": 0.7,
+    "under_value": 0.4
    },
    {
     "kind": "kit",
@@ -3335,7 +3338,9 @@
     "forward": 0.7,
     "ahead": 6.0,
     "seed": 7,
-    "rotate_z": 180.0
+    "rotate_z": 180.0,
+    "top_value": 0.7,
+    "under_value": 0.4
    },
    {
     "kind": "kit",
@@ -3351,7 +3356,9 @@
     "inner": 0.6,
     "seed": 17,
     "rotate_z": 180.0,
-    "fine": true
+    "fine": true,
+    "top_value": 0.7,
+    "under_value": 0.4
    },
    {
     "kind": "kit",
@@ -3369,7 +3376,9 @@
     "tilt_min": 30.0,
     "size": 0.42,
     "seed": 13,
-    "rotate_z": 180.0
+    "rotate_z": 180.0,
+    "top_value": 0.7,
+    "under_value": 0.4
    },
    {
     "kind": "kit",
@@ -3400,7 +3409,9 @@
     "inner": 0.3,
     "z": -0.3,
     "seed": 9,
-    "rotate_z": 180.0
+    "rotate_z": 180.0,
+    "top_value": 0.7,
+    "under_value": 0.4
    },
    {
     "kind": "kit",
@@ -4112,84 +4123,6 @@
     "shape": "ext",
     "module": "plume",
     "fn": "plume",
-    "cache": "renders/2026-10-21/barkhorn/plume/plume_d.npz",
-    "position": [
-     20.7,
-     150.0,
-     0.0
-    ],
-    "rotate_z": 145.0,
-    "scale": 2.0,
-    "density": 2.25,
-    "strength": 320.0,
-    "color": "#8F857B",
-    "anisotropy": 0.4,
-    "cool": 1100.0,
-    "hot": 2100.0,
-    "flame_floor": 0.25,
-    "tongues": 0.9,
-    "tongue_scale": 0.44,
-    "tongue_edge": [
-     0.42,
-     0.62
-    ],
-    "edge": [
-     0.02,
-     0.22
-    ],
-    "detail": 1.5,
-    "detail_scale": 0.36,
-    "detail_octaves": 2.0,
-    "breakup": 0.3,
-    "breakup_scale": 1.4,
-    "breakup_octaves": 1.0,
-    "tongue_octaves": 2.0,
-    "seed": 7
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "plume",
-    "fn": "plume",
-    "cache": "renders/2026-10-21/barkhorn/plume/plume_d.npz",
-    "position": [
-     -45.0,
-     230.0,
-     0.0
-    ],
-    "rotate_z": 145.0,
-    "scale": 2.6,
-    "density": 1.7307692307692306,
-    "strength": 320.0,
-    "color": "#8F857B",
-    "anisotropy": 0.4,
-    "cool": 1100.0,
-    "hot": 2100.0,
-    "flame_floor": 0.25,
-    "tongues": 0.9,
-    "tongue_scale": 0.5720000000000001,
-    "tongue_edge": [
-     0.42,
-     0.62
-    ],
-    "edge": [
-     0.02,
-     0.22
-    ],
-    "detail": 1.5,
-    "detail_scale": 0.46799999999999997,
-    "detail_octaves": 2.0,
-    "breakup": 0.3,
-    "breakup_scale": 1.8199999999999998,
-    "breakup_octaves": 1.0,
-    "tongue_octaves": 2.0,
-    "seed": 8
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "plume",
-    "fn": "plume",
     "cache": "renders/2026-10-21/barkhorn/plume/meteor_c.npz",
     "anchor": "solid",
     "position": [
@@ -4573,28 +4506,6 @@
     "port-frame-*"
    ]
   },
-  "farfire0": {
-   "type": "point",
-   "position": [
-    20.7,
-    150.0,
-    2.4
-   ],
-   "power_w": 100000.0,
-   "color": "#FF7A2E",
-   "radius_m": 2.0
-  },
-  "farfire1": {
-   "type": "point",
-   "position": [
-    -45.0,
-    230.0,
-    3.12
-   ],
-   "power_w": 169000.0,
-   "color": "#FF7A2E",
-   "radius_m": 2.6
-  },
   "flame0": {
    "type": "point",
    "position": [
@@ -4606,7 +4517,8 @@
    "color": "#FF7A2E",
    "radius_m": 0.12,
    "camera": false,
-   "transmission": false
+   "transmission": false,
+   "specular": 0.0
   },
   "flame1": {
    "type": "point",
@@ -4619,7 +4531,8 @@
    "color": "#FF7A2E",
    "radius_m": 0.12,
    "camera": false,
-   "transmission": false
+   "transmission": false,
+   "specular": 0.0
   },
   "flame2": {
    "type": "point",
@@ -4632,7 +4545,8 @@
    "color": "#FF7A2E",
    "radius_m": 0.12,
    "camera": false,
-   "transmission": false
+   "transmission": false,
+   "specular": 0.0
   }
  },
  "render": {

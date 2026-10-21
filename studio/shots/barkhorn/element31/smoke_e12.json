@@ -159,11 +159,11 @@
      0.55,
      0.36
     ],
-    "glow": 3.0,
-    "glow_r": 0.85,
+    "glow": 4.0,
+    "glow_r": 1.0,
     "glow_patch": [
-     0.5,
-     0.66
+     0.46,
+     0.64
     ],
     "debris": {
      "count": 90,
@@ -359,7 +359,8 @@
    "color": "#FF7A2E",
    "radius_m": 0.12,
    "camera": false,
-   "transmission": false
+   "transmission": false,
+   "specular": 0.0
   },
   "flame1": {
    "type": "point",
@@ -372,7 +373,8 @@
    "color": "#FF7A2E",
    "radius_m": 0.12,
    "camera": false,
-   "transmission": false
+   "transmission": false,
+   "specular": 0.0
   },
   "flame2": {
    "type": "point",
@@ -385,7 +387,8 @@
    "color": "#FF7A2E",
    "radius_m": 0.12,
    "camera": false,
-   "transmission": false
+   "transmission": false,
+   "specular": 0.0
   }
  },
  "render": {

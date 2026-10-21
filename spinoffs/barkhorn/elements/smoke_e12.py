@@ -49,23 +49,24 @@ def fire():
 
 def impact(ground_name):
     """The crash's marks on the crust. The heat in the cracks a few patches close round the foot (p2-p3's, at twice the
-    strength and over 1.3 m, laced the whole crater in an even orange web)."""
+    strength and over 1.3 m, laced the whole crater in an even orange web; p4's 3 within 0.85 m all but vanished)."""
     return piece('ext', module='smoke_el', fn='impact', on=ground_name, centre=CRATER[:2], char=[0.9, 1.7], jag=0.8,
-                 soot=3.5, soot_mix=0.6, furrow=TRENCH[:5], glow=3.0, glow_r=0.85, glow_patch=[0.5, 0.66],
+                 soot=3.5, soot_mix=0.6, furrow=TRENCH[:5], glow=4.0, glow_r=1.0, glow_patch=[0.46, 0.64],
                  debris={'count': 90, 'size': [0.04, 0.22], 'spread': [0.65, 2.6], 'ahead': round(AHEAD, 1), 'seed': 3})
 
 
 def firelight(drop=SINK):
     """The flames' light: low on both flanks and behind, warm, on the speaker, the crater and the crust; `drop`, how far
-    the speaker's foot is sunk. Hidden from the lens and from rays through glass: p2's lamps, 0.35 m balls 0.17 m off
-    the cabinet's sides, showed through its clear acrylic as a pale disc over half its face; and at 520 W they turned
-    the whole pan orange (E6's is grey), so half that."""
+    the speaker's foot is sunk. Hidden from the lens, from rays through glass and from reflections: p2's lamps, 0.35 m
+    balls 0.17 m off the cabinet's sides, showed through its clear acrylic as a pale disc over half its face (and p4's,
+    still mirrored in it, as a small one by the woofer); and at 520 W they turned the whole pan orange (E6's is grey),
+    so half that. The flames' own glow is what the glossy parts reflect."""
     a = math.radians(ROT)
     out = {}
     for k, (x, y, z, w) in enumerate([(-0.55, 0.1, 0.45, 260.0), (0.55, 0.15, 0.4, 260.0), (0.0, 0.5, 0.6, 190.0)]):
         out[f'flame{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z - drop, 3)], w, '#FF7A2E', 0.12),
-                                camera=False, transmission=False)
+                                camera=False, transmission=False, specular=0.0)
     return out
 
 

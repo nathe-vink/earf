@@ -395,7 +395,8 @@ def piece_material(bpy, p):
         res = p.get('tex_res') or (p['res'] if isinstance(p.get('res'), str) else '2k')
         return assets.pbr(bpy, p['texture'], res, scale=p.get('tex_scale'), displace=p.get('displace', 0.0),
                           tint=p.get('tint'), tint_mix=p.get('tint_mix', 0.0), rough_mul=p.get('rough_mul', 1.0),
-                          bump=p.get('bump', 1.0), coords=p.get('coords', 'object'), emit=p.get('emit_map', 0.0))
+                          bump=p.get('bump', 1.0), coords=p.get('coords', 'object'), emit=p.get('emit_map', 0.0),
+                          value=p.get('value', 1.0))
     opts = {k: p[k] for k in ('roughness', 'alpha', 'emit', 'emit_color', 'tint2', 'grain', 'rib') if k in p}
     return material(bpy, p.get('material', 'felt'), p.get('color', '#D9D4CB'), opts)
 

@@ -12,6 +12,10 @@ the lip by up to `tilt` degrees, larger near the impact's deepest part. `seed`.
 
 debris: chunks of asphalt and aggregate thrown forward and to the sides of the path: `count` of them, finer and sparser
 with distance (`reach` metres), lying on the road at random tilt. `seed`.
+
+The tints shift only hue and saturation, so a dark tint on the light aggregate stays light (E12r's proof: "pale cream
+slabs, like concrete blocks dumped in a line"); `value` (trench), `top_value` and `under_value` (slabs, debris) scale
+the brightness, 1 as before.
 """
 import math, random
 
@@ -19,9 +23,9 @@ import bmesh
 from mathutils import Euler, Matrix, Vector, noise
 
 
-def _mat(bpy, kit, texture, tex_scale, tint=None, tint_mix=0.0, rough=1.0, bump=1.5):
+def _mat(bpy, kit, texture, tex_scale, tint=None, tint_mix=0.0, rough=1.0, bump=1.5, value=1.0):
     return kit.piece_material(bpy, {'material': 'pbr', 'texture': texture, 'tex_scale': tex_scale, 'tint': tint,
-                                    'tint_mix': tint_mix, 'rough_mul': rough, 'bump': bump})
+                                    'tint_mix': tint_mix, 'rough_mul': rough, 'bump': bump, 'value': value})
 
 
 def trench(bpy, name, p, kit):
@@ -57,7 +61,7 @@ def trench(bpy, name, p, kit):
         for i in range(nx):
             bm.faces.new((rows[j][i], rows[j][i + 1], rows[j + 1][i + 1], rows[j + 1][i]))
     mat = _mat(bpy, kit, p.get('texture', 'gravel_concrete'), p.get('tex_scale', 1.2), p.get('tint', '#2E2A26'),
-               p.get('tint_mix', 0.35), 1.0, 2.0)
+               p.get('tint_mix', 0.35), 1.0, 2.0, p.get('value', 1.0))
     q = {k: v for k, v in p.items() if k in ('position', 'rotate')}
     return kit.finish(bpy, name, bm, q, smooth=True, mat=mat)
 
@@ -116,8 +120,10 @@ def slabs(bpy, name, p, kit):
     for f in bm.faces:
         f.material_index = 0 if f in tops else 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#211F1D', 0.75))
+    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45,
+                             value=p.get('top_value', 1.0)))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#211F1D', 0.75,
+                             value=p.get('under_value', 1.0)))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
@@ -156,8 +162,10 @@ def debris(bpy, name, p, kit):
     for f in bm.faces:
         f.material_index = 0 if f in tops else 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#211F1D', 0.75))
+    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45,
+                             value=p.get('top_value', 1.0)))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#211F1D', 0.75,
+                             value=p.get('under_value', 1.0)))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))

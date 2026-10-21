@@ -233,11 +233,12 @@ def _img(bpy, nt, path, colour, x, y):
 
 
 def pbr(bpy, aid, res='2k', scale=None, displace=0.0, tint=None, tint_mix=0.0, rough_mul=1.0, bump=1.0,
-        coords='object', name=None, translucency=0.0, emit=0.0):
+        coords='object', name=None, translucency=0.0, emit=0.0, value=1.0):
     """A Cycles material from a Poly Haven texture set (or an ambientCG one, its id prefixed 'acg:', e.g. 'acg:Lava004',
     whose emission map glows at `emit`), laid at its real size (`scale` metres a tile overrides it).
     `displace` (metres) lifts the surface by its height map where the mesh is dense enough (Cycles displacement, bump
-    beyond); `tint` (hex) blended in by `tint_mix` shifts its colour toward a set's palette; `coords` 'object' (box
+    beyond); `tint` (hex) blended in by `tint_mix` shifts its colour toward a set's palette (its hue and saturation
+    only: a dark tint leaves a light texture light), and `value` scales its brightness; `coords` 'object' (box
     projection in object space, for ground and rock without UVs) or 'uv'."""
     acg = aid.startswith('acg:')
     maps = ambientcg(aid[4:], res.upper()) if acg else texture(aid, res)
@@ -273,6 +274,10 @@ def pbr(bpy, aid, res='2k', scale=None, displace=0.0, tint=None, tint_mix=0.0, r
             c = [((v + 0.055) / 1.055) ** 2.4 if v > 0.04045 else v / 12.92 for v in c]
             mx.inputs['Factor'].default_value = tint_mix; mx.inputs['B'].default_value = (*c, 1.0)
             nt.links.new(col, mx.inputs['A']); col = mx.outputs['Result']
+        if value != 1.0:
+            vm = nt.nodes.new('ShaderNodeMix'); vm.data_type = 'RGBA'; vm.blend_type = 'MULTIPLY'; vm.location = (380, 400)
+            vm.inputs['Factor'].default_value = 1.0; vm.inputs['B'].default_value = (value, value, value, 1.0)
+            nt.links.new(col, vm.inputs['A']); col = vm.outputs['Result']
         nt.links.new(col, bs.inputs['Base Color'])
     if 'rough' in maps:
         r = tex('rough', False, 0)

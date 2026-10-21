@@ -9,6 +9,11 @@ might") runs twenty metres back from it to where it struck, the asphalt torn up 
 bare and scorched in the trench, debris thrown wide, plates shoved up and over at its end. The speaker stands sunk in
 the trench's end and E12's fire wraps it (the flow round the speaker, its skin burning: E12's solve fits as made, the
 speaker turned the same and the camera eight degrees round from E6's), its smoke rolling up and away to the right.
+
+p2, after proof 1: E9's far fires are gone too (a riot's, not a crash's: one sat at road level by the left railing
+with nothing under it, the other just behind a cold wreck, so it read as burning); the torn road is darkened to read as
+asphalt and its bared aggregate (the slabs' and chips' broken faces came out "pale cream, like concrete blocks dumped
+in a line": the kit's tints shift hue only).
 """
 import copy
 
@@ -18,19 +23,25 @@ import smoke_e12 as M
 import smoke_impact as I
 
 NEAR = [-1.2, 15.0]                  # E10's burning car, across the gouge's line: the speaker is the fire now
+DARK = {'trench': {'value': 0.45}, 'slabs': {'top_value': 0.7, 'under_value': 0.4},
+        'debris': {'top_value': 0.7, 'under_value': 0.4}}    # the torn road's brightness (impact.py)
 
 
 def shot():
     s = copy.deepcopy(B.shot())
     props = s['set']['props']
-    rest = [p for p in props[len(smoke_bridge.deck()):] if (p.get('position') or [])[:2] != NEAR]
+    rest = [p for p in props[len(smoke_bridge.deck()):] if (p.get('position') or [])[:2] != NEAR
+            and not (p.get('module') == 'plume')]                   # the near car's fire and the far fires
     for p in rest:
         if p.get('fn') == 'occluder':                                # the contact shadow, down in the trench with it
             p['position'] = [0.0, 0.0, round(I.SINK + 0.012, 3)]
     fire = M.fire()
     fire['position'] = [0.0, 0.0, I.SINK]                           # the solve's floor at the speaker's foot
-    props[:] = I.deck() + I.gouge() + rest + [fire]
-    for k in ('fire0', 'firerim0'):
+    gouge = I.gouge()
+    for p in gouge:
+        p.update(DARK.get(p.get('fn'), {}))
+    props[:] = I.deck() + gouge + rest + [fire]
+    for k in ('fire0', 'firerim0', 'farfire0', 'farfire1'):
         s['lights'].pop(k)
     s['lights'].update(M.firelight(-I.SINK))
     for inst in s['product']['instances']:
