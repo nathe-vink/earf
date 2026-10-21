@@ -1,0 +1,386 @@
+{
+ "stage1": {
+  "impression": "A moody night view through a shopfront into a deep timber-and-concrete listening bar. The record wall, the bar under its pendants and the pair of speakers lit by spots at the far end make it a specific place rather than a generic bar, so a magazine would recognise it as somewhere. It still reads as CG: the steel column and the panels on the right have blotchy, game-like grunge textures, the name on the glass is a flat pink overlay, a clipped white disc floats in the middle of the room, the Orb lamps glow cyan and are the frame's loudest colour, and the EARF pair at the far end is small, dark and reads as generic boxes with white cones.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The EARF pair on the altar reads at a glance as the hero: the speaker region median is 45 or more, and the smoked tint and the light through the acrylic are visible rather than two white woofers in dark boxes",
+  "Within the room, the only saturated colour comes from the speakers. The Orb liners render warm, not cyan (Orb b_median is now above r_median)",
+  "No clipped stray highlight in the middle of the frame: the white disc at [630,220,675,255] is gone or below the clip level",
+  "The etched name on the glass reads as frosted etching on thick glass, not as a semi-opaque pink overlay",
+  "The frosted lightbox shows the fogged silhouette of the dancing woman, lit evenly",
+  "The blackened steel and the right-hand stone panels read as real patinated steel and board-formed concrete at 1:1, without tiled grunge decals and white flecks",
+  "Some human presence or obvious life seen through the glass (the coat, a figure at the bar, a glass catching light) that is legible at the delivered size"
+ ],
+ "defects": [
+  {
+   "region": [
+    630,
+    220,
+    675,
+    255
+   ],
+   "what": "A clipped white disc floats mid-room (clip 22.9 %). It reads as a CG sphere or a lamp reflection with no source"
+  },
+  {
+   "region": [
+    500,
+    390,
+    680,
+    455
+   ],
+   "what": "The altar speakers are dark (region median 26.5) and tiny. They read as generic box speakers with bright white cones, and the smoked acrylic does not read"
+  },
+  {
+   "region": [
+    52,
+    535,
+    92,
+    575
+   ],
+   "what": "The Orb table lamp glows cold cyan-white (R164 G178 B196), and so do the Orbs at [575,435,590,450] and [650,440,662,452]. They are the most saturated colour in the frame and pull the eye from the speakers"
+  },
+  {
+   "region": [
+    0,
+    200,
+    230,
+    300
+   ],
+   "what": "The etched name on the glass is a flat, semi-opaque pink wash (median 76 against a dark interior), cropped at the frame edge. It reads as a decal overlay, not etched glass"
+  },
+  {
+   "region": [
+    975,
+    200,
+    1080,
+    510
+   ],
+   "what": "The frosted lightbox shows no dancing silhouette. It is a vertical dark-to-light gradient with streaky reflections, so it reads as a shower curtain"
+  },
+  {
+   "region": [
+    770,
+    0,
+    870,
+    800
+   ],
+   "what": "The blackened steel column carries a high-contrast blotchy grunge texture with white flecks, and its panels repeat. It reads as a game texture"
+  },
+  {
+   "region": [
+    870,
+    120,
+    1200,
+    780
+   ],
+   "what": "The right-hand wall panels have a repeated stained-tile look and visible panel seams on a regular grid. The material is ambiguous: neither board-formed concrete nor steel"
+  },
+  {
+   "region": [
+    300,
+    500,
+    760,
+    720
+   ],
+   "what": "The floor has a mottled, puddle-like pattern under a hard triangular wash of street light, which reads as a procedural texture"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    90
+   ],
+   "what": "The top band is almost black (median 4, crush 32 %). The beams above the glass are lost"
+  },
+  {
+   "region": [
+    0,
+    720,
+    780,
+    800
+   ],
+   "what": "The sill and kerb band are crushed (median 13, crush 18 %), with no detail in the steel sill"
+  },
+  {
+   "region": [
+    330,
+    330,
+    460,
+    370
+   ],
+   "what": "The Dome pendants read as small white half-domes with no tint or frosted-liner depth at this size"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero pair on the altar is too dark and too small to read as tinted acrylic speakers.",
+   "evidence": {
+    "region": [
+     490,
+     330,
+     700,
+     480
+    ],
+    "measured": "Region median 26.5. Left speaker [500,390,550,450] median 36.8; right speaker [630,390,680,450] median 26.8. The cones peak at about 158 while the cabinets sit in the 20s"
+   },
+   "change": {
+    "setting": "lamps on each speaker (4 x area, W/m2 at the target) and the altar spots",
+    "from": "1.0 W/m2, 2900 K; altar 2 x spot 1500 W, cone 18 deg",
+    "to": "4.0 W/m2, 2900 K, aimed to backlight and side-light the cabinets so light passes through the smoked acrylic; altar spots 1500 W but cone 26 deg so they wash the cabinets, not only the floor"
+   },
+   "expected": "Both cabinets glow smoke-brown with visible edge light and internal batts, at a median of 50 to 70, and the cones no longer dominate.",
+   "accept": {
+    "region": [
+     500,
+     390,
+     680,
+     455
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The Orb lamps' liners render cold cyan, so they carry the frame's strongest colour instead of the speakers.",
+   "evidence": {
+    "region": [
+     52,
+     535,
+     92,
+     575
+    ],
+    "measured": "r 164, g 178, b 196 at a median of 176. The Orbs at the far end measure b 162 against r 104"
+   },
+   "change": {
+    "setting": "each Orb glow (and the colour of its liner emission)",
+    "from": "0.956 W, glow 0.1529, neutral white under a 2900 K white balance",
+    "to": "0.956 W, glow 0.09, liner emission at 2700 K (#FFD2A8)"
+   },
+   "expected": "The Orbs read as small warm glows, about the same hue as the pendants, and b_median drops below r_median.",
+   "accept": {
+    "region": [
+     52,
+     535,
+     92,
+     575
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "A clipped white disc floats in mid-air in the middle of the room, which is the most obvious CG tell.",
+   "evidence": {
+    "region": [
+     630,
+     220,
+     675,
+     255
+    ],
+    "measured": "clip_pct 22.9, p95 255, neutral (138/139/142)"
+   },
+   "change": {
+    "setting": "street lamps (3 x point), the likely source reflected in the glass",
+    "from": "200 W, 3000 K",
+    "to": "60 W, 3000 K, moved so that its reflection falls on the steel rather than the glass, or the reflection culled from the glass"
+   },
+   "expected": "No bright disc in the room; at most a faint warm reflection on the glass.",
+   "accept": {
+    "region": [
+     630,
+     220,
+     675,
+     255
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The etched name on the window is a flat pink semi-opaque wash, not frosted etching.",
+   "evidence": {
+    "region": [
+     0,
+     200,
+     230,
+     300
+    ],
+    "measured": "median 76, r 94 against b 66, uniform across the letters; the interior behind it sits near 30"
+   },
+   "change": {
+    "setting": "the window's etched name (emission)",
+    "from": "0.04",
+    "to": "0.0, with the etched area rough (roughness 0.6) so it shows only by catching the street lamps and the room light"
+   },
+   "expected": "The letters read as pale frosted glass, about 10 to 20 levels above the interior behind them, with the shelves faintly visible through them.",
+   "accept": {
+    "region": [
+     0,
+     200,
+     230,
+     300
+    ],
+    "metric": "lum_median",
+    "op": "<=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The blackened steel column and the right-hand panels read as tiled grunge decals with white flecks.",
+   "evidence": {
+    "region": [
+     770,
+     0,
+     870,
+     800
+    ],
+    "measured": "median 21, p95 44. At 1:1 there are high-contrast blotches, bright specks and repeated panel patterns; the right wall [870,500,1200,780] shows the same stain repeated across its panels"
+   },
+   "change": {
+    "setting": "the steel's patina and the concrete's tone (material finish)",
+    "from": "high-contrast blotchy patina with bright flecks; uniform stained panels",
+    "to": "steel: near-black with a low-contrast brown patina, roughness 0.35 to 0.5 varying slowly, crisp bright edges where the street light rakes; concrete: board grain and tie holes, with the stain broken up so no two panels match"
+   },
+   "expected": "The column reads as one blackened steel member with a soft sheen and a highlight at its edge, and the wall reads as board-formed concrete.",
+   "accept": {
+    "region": [
+     780,
+     100,
+     860,
+     700
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 40
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The frosted lightbox shows no dancing silhouette and is lit unevenly, so it reads as a curtain.",
+   "evidence": {
+    "region": [
+     975,
+     200,
+     1080,
+     510
+    ],
+    "measured": "median 57, range 76, a dark-to-light vertical gradient with streaks; no figure visible"
+   },
+   "change": {
+    "setting": "the screens' images (emission), for the lightbox",
+    "from": "0.55",
+    "to": "1.0, backlit evenly, with the frosted acrylic's roughness raised so the silhouette fogs and does not streak"
+   },
+   "expected": "An evenly glowing panel with a soft dark figure in it, reading as a lightbox.",
+   "accept": {
+    "region": [
+     985,
+     220,
+     1070,
+     500
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     80,
+     140
+    ]
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The frame sits at the floor of the brightness range and the top and bottom bands are lost.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "frame median 22.6, 78 % below 40. The top band [0,0,1200,90] has a median of 4 and crush of 32 %; the sill [0,720,780,800] has crush of 18 %"
+   },
+   "change": {
+    "setting": "render exposure",
+    "from": "1.8",
+    "to": "2.1, with the Domes' downlights kept at 260 W so the pools still hold"
+   },
+   "expected": "The frame median rises to about 28 to 32, and the beams and the sill show some detail.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     26,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "camera",
+   "problem": "At 35 mm from the kerb, the altar pair is about 40 px wide and cannot be the hero at a glance.",
+   "evidence": {
+    "region": [
+     500,
+     390,
+     680,
+     455
+    ],
+    "measured": "each speaker is about 30 x 55 px in a 1200 x 800 proof"
+   },
+   "change": {
+    "setting": "camera lens and target",
+    "from": "35 mm, target [17.0, 2.9, 1.35]",
+    "to": "45 mm, the camera 0.6 m to the right so the altar sits on the right-hand third line, clear of the steel column, with the shopfront steel still framing the left and right"
+   },
+   "expected": "The altar pair is about 30 % larger and framed by the shopfront.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the Dome pendants and the Orbs show more of the smoked tint at this distance",
+   "why": "Their shape, colour and parts are EARF products and fixed; only their light levels can change"
+  },
+  {
+   "request": "Show the speakers' smoked acrylic more strongly, or lighten their tint",
+   "why": "The speakers' colour and parts are fixed; only their lighting is addressed (c1)"
+  },
+  {
+   "request": "Redesign the right-hand wall's panelled cladding",
+   "why": "The shopfront's design is fixed; only its finish is addressed (c5)"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
