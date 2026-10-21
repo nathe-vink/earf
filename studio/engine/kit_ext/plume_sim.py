@@ -15,7 +15,7 @@ a light wind.
   - an exact pressure projection (FFT across, cosine transform up the height);
   - three scalars: soot (`rho`), heat (`heat`, slow to cool, what lifts the plume) and flame (`flame`, quick to cool,
     what glows);
-  - sponges at the lid and the domain's ends, so nothing wraps round;
+  - sponges at the lid and the domain's ends, so little wraps round (as little as you like: `--sponge-k`);
   - for E10, whose critics saw E9's billows all one size ("cotton-ball", "metaball lobes"): `--disturb STRENGTH SCALE`
     pairs, random kicks inside the smoke at each scale (m/s^2, m), drifting up with it, that break the lobes into many
     sizes; `--tau-soot`, the soot thinning with age (s), so the old edges go wispy;
@@ -23,7 +23,10 @@ a light wind.
     (no flow through their faces, no smoke inside: the speaker, so the fire wraps it and nothing shows inside its clear
     acrylic), and `--shell RATE HEAT FLAME W FALL`, the solids' skins burning: soot, heat and flame fed in the cells just
     outside each solid, strongest at its foot and falling off up it over FALL metres, the gas pushed up at W;
-    `--shell-quiet DX DY K` burns the side facing (DX, DY), the lens's, less (a first look hid the speaker's face).
+    `--shell-quiet DX DY K` burns the side facing (DX, DY), the lens's, less (a first look hid the speaker's face);
+    `--sponge-k K`, how hard the end sponges take the smoke, heat and flame back (the flow's own damping raised to the
+    power K): at 1 about half the smoke crossing an end lived through it, and in E12's first box (8 m long, 12 s of a
+    2.2 m/s wind) it went round three times and filled the box, a second column standing at its far end (meteor_a).
 
 It writes the last frame as an .npz of 8-bit grids (square-root coded), which `plume.py` turns into a volume in Cycles.
 Run once; the result is committed beside the shot, so a render never needs this file or numba:
@@ -31,7 +34,7 @@ Run once; the result is committed beside the shot, so a render never needs this 
     pip install --target <dir> numba==0.60.0 llvmlite==0.43.0 --no-deps
     PYTHONPATH=<dir> python3.11 plume_sim.py OUT.npz [--dx 0.2] [--seconds 20] [--seed 1]
         [--velocity sl|mc] [--disturb 6 0.6 3 1.6] [--disturb-rho 0.5] [--tau-soot 25]
-        [--solid 2 2.5 0 0.31 0.22 1.28 -32] [--shell 6 1 1 2 0.5]
+        [--solid 2 2.5 0 0.31 0.22 1.28 -32] [--shell 6 1 1 2 0.5] [--sponge-k 20]
 """
 import argparse
 import math
@@ -354,10 +357,10 @@ def disturb(u, v, w, rho, t, dt, dx, seed, amp, scale, rho_ref):
 
 
 @njit(parallel=True, fastmath=True)
-def sponge(s, u, v, w, uw, dt, nx_band, nz_band, cool_heat, cool_flame, fade_soot):
+def sponge(s, u, v, w, uw, dt, nx_band, nz_band, cool_heat, cool_flame, fade_soot, kill):
     """Cool the heat and the flame, thin the soot by fade_soot (E10: old smoke spreads thin at its edges and in the
     wake, where E9's stayed as dense as at the fire), and at the domain's ends and lid fade everything back to the
-    still wind."""
+    still wind, the scalars by the flow's damping to the power kill."""
     NS, NX, NY, NZ = s.shape
     for i in prange(NX):
         ex = min(i, NX - 1 - i) / max(nx_band, 1)
@@ -367,9 +370,10 @@ def sponge(s, u, v, w, uw, dt, nx_band, nz_band, cool_heat, cool_flame, fade_soo
                 ez = (NZ - 1 - k) / max(nz_band, 1)
                 e = min(1.0, min(min(ex, ey), ez))
                 damp = 1.0 - (1.0 - e) * min(1.0, 4.0 * dt)
-                s[0, i, j, k] *= damp * fade_soot
-                s[1, i, j, k] *= damp * cool_heat
-                s[2, i, j, k] *= damp * cool_flame
+                ds = damp if kill == 1.0 else damp ** kill
+                s[0, i, j, k] *= ds * fade_soot
+                s[1, i, j, k] *= ds * cool_heat
+                s[2, i, j, k] *= ds * cool_flame
                 u[i, j, k] = uw[k] + (u[i, j, k] - uw[k]) * damp
                 v[i, j, k] *= damp
                 if k + 1 < NZ:
@@ -473,13 +477,15 @@ def main():
                     help='pairs of strength (m/s^2) and scale (m): random kicks inside the smoke at those scales')
     ap.add_argument('--disturb-rho', type=float, default=0.5, help='the soot density at which the kicks reach full strength')
     ap.add_argument('--tau-soot', type=float, default=0.0, help='seconds for the soot to thin by e (0: never)')
-    # E12's two (off unless given):
+    # E12's (off unless given):
     ap.add_argument('--solid', type=float, nargs=7, action='append', default=[],
                     help='a box the flow goes round: centre x y, foot z, half-sizes x y, top z, yaw degrees (repeatable)')
     ap.add_argument('--shell', type=float, nargs=5, default=None,
                     help="the solids' skins burning: soot rate, heat, flame, upward push (m/s), fall-off up the solid (m)")
     ap.add_argument('--shell-quiet', type=float, nargs=3, default=None,
                     help='the skins burn less on the side facing (dx, dy), by up to k on that face (the lens side)')
+    ap.add_argument('--sponge-k', type=float, default=1.0,
+                    help="how hard the end sponges take back the smoke, heat and flame: the flow's damping to this power")
     a = ap.parse_args()
     assert len(a.disturb) % 2 == 0, '--disturb takes strength, scale pairs'
 
@@ -550,7 +556,7 @@ def main():
         advect_scalars_1(un, vn, wn, s, s1, mn, mx, h)
         advect_scalars_2(un, vn, wn, s, s1, mn, mx, sn, h)
         u, un = un, u; v, vn = vn, v; w, wn = wn, w; s, sn = sn, s
-        sponge(s, u, v, w, uw, a.dt, int(0.08 * NX), int(0.1 * NZ), cool_h, cool_f, fade)
+        sponge(s, u, v, w, uw, a.dt, int(0.08 * NX), int(0.1 * NZ), cool_h, cool_f, fade, a.sponge_k)
         if a.solid:
             enforce_solid(s, u, v, w, solid)
         if n % 20 == 0 or n == steps - 1:

@@ -1,8 +1,9 @@
 """A simulated smoke plume as a volume in Cycles (round 31b, Smoke E9: the bridge).
 
 plume: the grids from `plume_sim.py` (`cache`, an .npz path from the repo root) as a box of smoke and flame. The fire's
-centre sits at `position` (x, y; the box's floor at z), the sim's downwind +x turned `rotate_z` degrees, everything
-scaled `scale`. Soot is `color`, scattering forward by `anisotropy`, `density` per metre where the coded soot is
+centre sits at `position` (x, y; the box's floor at z), or with `anchor` 'solid' the first solid's (E12: the speaker the
+flow went round, whose fire is set behind it), the sim's downwind +x turned `rotate_z` degrees, everything scaled
+`scale`. Soot is `color`, scattering forward by `anisotropy`, `density` per metre where the coded soot is
 full; `absorb` darkens what it scatters. The flame glows in black-body colour from `cool` to `hot` kelvin, `strength`
 bright, and heat glows dull red at `heat_glow`. `detail` pushes the lookups about by a fine noise (`detail_scale`
 metres, `detail` in voxels) so the edges tatter below the grid's own size; `edge` [lo, hi] remaps the soot by a
@@ -57,7 +58,8 @@ def _atlas(bpy, path):
     img.colorspace_settings.name = 'Non-Color'
     img.pixels.foreach_set(a.ravel())
     img.pack()
-    info = dict(img=img, NX=NX, NY=NY, NZ=NZ, TX=TX, TY=TY, dx=float(z['dx']), source=[float(v) for v in z['source']])
+    info = dict(img=img, NX=NX, NY=NY, NZ=NZ, TX=TX, TY=TY, dx=float(z['dx']), source=[float(v) for v in z['source']],
+                solids=z['solids'].tolist() if 'solids' in z.files else [])
     _ATLAS[path] = info
     return info
 
@@ -69,8 +71,9 @@ def plume(bpy, name, p, kit):
     sc = p.get('scale', 1.0)
     dx = A['dx'] * sc
     Lx, Ly, Lz = NX * dx, NY * dx, NZ * dx
-    sx, sy = A['source'][0] * sc, A['source'][1] * sc
-    # the box, with the fire's centre at the object's origin
+    cx, cy = A['solids'][0][:2] if p.get('anchor') == 'solid' else A['source'][:2]
+    sx, sy = cx * sc, cy * sc
+    # the box, with the fire's centre (or the solid's) at the object's origin
     bm = bmesh.new()
     g = bmesh.ops.create_cube(bm, size=1.0)
     for v in g['verts']:

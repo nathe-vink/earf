@@ -10,6 +10,8 @@ impact (Smoke E12, the speaker come down burning like a meteor): what the crash 
 piece's own dents and furrows dig the crater and the trench). The ground's material, the object named by `on`, is
 charred round the crater and along the trench, sooted wider, and glows in its cracks near the crater; and `debris`
 chunks of the crust, broken from the crater and the trench and thrown out, lie round them in the same material.
+
+trail (Smoke E12): the meteor's smoke trail down the sky to the crash, a tube of smoke widening with age.
 """
 import math
 
@@ -522,6 +524,9 @@ def impact(bpy, name, p, kit):
         e = math_('MULTIPLY', math_('MULTIPLY', crack, hot), smooth(fl.outputs['Fac'], 0.42, 0.62))
         bs.inputs['Emission Color'].default_value = kit.M.hex_lin(p.get('glow_color', '#FF5A14'))
         L(math_('MULTIPLY', e, p['glow']), bs.inputs['Emission Strength'])
+        # seen, not sampled as a light: a linked strength makes every triangle of the ground a light in Cycles' light
+        # tree, and E12's pan has 14 M of them (its first proofs died at 14 GB); the fire's lamps light the scene
+        m.cycles.emission_sampling = 'NONE'
     # the debris: crust broken into slabs, thrown out round the crater, most of it the way the crash was going
     out = []
     db = p.get('debris')
@@ -562,3 +567,108 @@ def impact(bpy, name, p, kit):
         d_ob = bpy.data.objects.new(name + '-debris', me); bpy.context.scene.collection.objects.link(d_ob)
         out.append(d_ob)
     return out
+
+
+def trail(bpy, name, p, kit):
+    """The way the meteor came down (Smoke E12): its smoke trail across the sky, from `start` (high and far, the oldest
+    smoke) down to `end` (the crash). A tube of smoke `radius` [at the end, at the start] metres, widening as it ages,
+    its line pushed about by the wind (`warp` [amount, scale], both in the tube's local radii) and its smoke lumped by
+    noise (`puff` [amount, scale]), `density` per metre at its core where it is `radius[0]` wide, thinning as it widens
+    by (r0 / r) ** `thin` (1: as dense to look through all along), `color`, scattering forward by `anisotropy`, fading
+    out over the last `fade` of its length toward the start. Cycles steps a procedural volume at a tenth of its
+    object's size, so the tube is cut into boxes about as long as they are wide, each stepped to suit the smoke inside
+    it (`step` scales that); they share one material, which works in world space."""
+    E, S = Vector(p['end']), Vector(p['start'])
+    D = S - E; Ld = D.length; u = D / Ld
+    r0, r1 = p.get('radius', [1.0, 20.0])
+    wa, ws = p.get('warp', [0.6, 0.5])
+    pa, ps = p.get('puff', [0.8, 0.8])
+
+    def rad(t):
+        return r0 + (r1 - r0) * t ** 0.6
+
+    m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
+    N = nt.nodes.new; L = nt.links.new
+
+    def math_(op, a, b=None):
+        n = N('ShaderNodeMath'); n.operation = op
+        for i, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[i].default_value = v
+            else:
+                L(v, n.inputs[i])
+        return n.outputs[0]
+
+    def vec(op, a, b=None, scale=None):
+        n = N('ShaderNodeVectorMath'); n.operation = op
+        for i, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if isinstance(v, (tuple, list, Vector)):
+                n.inputs[i].default_value = tuple(v)
+            else:
+                L(v, n.inputs[i])
+        if scale is not None:
+            if isinstance(scale, (int, float)):
+                n.inputs['Scale'].default_value = scale
+            else:
+                L(scale, n.inputs['Scale'])
+        return n.outputs['Value'] if op in ('DOT_PRODUCT', 'LENGTH', 'DISTANCE') else n.outputs['Vector']
+
+    def smooth(v, lo, hi):                                          # 0 at lo, 1 at hi (either way round)
+        n = N('ShaderNodeMapRange'); n.interpolation_type = 'SMOOTHSTEP'; n.clamp = True
+        n.inputs['From Min'].default_value = lo; n.inputs['From Max'].default_value = hi
+        L(v, n.inputs['Value']); return n.outputs['Result']
+
+    def noise_(v, scale, detail, rough=0.5, seed=0.0):
+        n = N('ShaderNodeTexNoise'); n.noise_dimensions = '4D'
+        n.inputs['Scale'].default_value = scale; n.inputs['Detail'].default_value = detail
+        n.inputs['Roughness'].default_value = rough; n.inputs['W'].default_value = seed
+        L(v, n.inputs['Vector']); return n
+
+    seed = float(p.get('seed', 0))
+    geo = N('ShaderNodeNewGeometry')
+    q = vec('SUBTRACT', geo.outputs['Position'], E)                    # from the crash
+    along = vec('DOT_PRODUCT', q, u)
+    t = math_('MINIMUM', math_('MAXIMUM', math_('DIVIDE', along, Ld), 0.0), 1.0)
+    r = math_('ADD', r0, math_('MULTIPLY', r1 - r0, math_('POWER', t, 0.6)))
+    inv = math_('DIVIDE', 1.0, r)
+    qn = vec('SCALE', q, scale=inv)                                    # in local radii, so the noise grows with the tube
+    w = noise_(qn, ws, 2.0, 0.5, seed)
+    off = vec('SCALE', vec('SUBTRACT', w.outputs['Color'], (0.5, 0.5, 0.5)), scale=math_('MULTIPLY', r, 2.0 * wa))
+    q2 = vec('ADD', q, off)
+    radial = vec('LENGTH', vec('SUBTRACT', q2, vec('SCALE', u, scale=vec('DOT_PRODUCT', q2, u))))
+    core = smooth(math_('DIVIDE', radial, r), 1.0, 0.3)
+    lump = noise_(vec('SCALE', q2, scale=inv), ps, 6.0, 0.55, seed + 3.7)
+    lumpy = math_('MAXIMUM', math_('ADD', 1.0, math_('MULTIPLY', math_('SUBTRACT', lump.outputs['Fac'], 0.5), 4.0 * pa)), 0.0)
+    fade = smooth(t, 1.0, 1.0 - p.get('fade', 0.25))
+    near = smooth(along, -0.5 * r0, 0.5 * r0)                         # cut off at the crash, not a tube past it
+    spread = math_('POWER', math_('MULTIPLY', inv, r0), p.get('thin', 1.0))
+    dens = math_('MULTIPLY', math_('MULTIPLY', math_('MULTIPLY', core, lumpy), math_('MULTIPLY', fade, near)),
+                 math_('MULTIPLY', spread, p.get('density', 1.5)))
+    v = N('ShaderNodeVolumePrincipled')
+    v.inputs['Color'].default_value = kit.M.hex_lin(p.get('color', '#D9D5CF'))
+    v.inputs['Anisotropy'].default_value = p.get('anisotropy', 0.35)
+    L(dens, v.inputs['Density'])
+    out = N('ShaderNodeOutputMaterial'); L(v.outputs['Volume'], out.inputs['Volume'])
+    m.cycles.volume_step_rate = p.get('step', 0.12)
+    # the boxes: each about three local radii long, wide enough for the warp
+    obs, t0, k = [], 0.0, 0
+    rot = u.to_track_quat('X', 'Z')
+    while t0 < 1.0 - 1e-6:
+        t1 = min(1.0, t0 + 3.0 * rad(t0) / Ld)
+        hw = rad(t1) * (1.0 + wa) * 1.15
+        ln = (t1 - t0) * Ld
+        bm = bmesh.new()
+        g = bmesh.ops.create_cube(bm, size=1.0)
+        for vv in g['verts']:
+            vv.co = Vector((vv.co.x * ln, vv.co.y * 2 * hw, vv.co.z * 2 * hw))
+        me = bpy.data.meshes.new(f'{name}-{k}'); bm.to_mesh(me); bm.free()
+        me.materials.append(m)
+        ob = bpy.data.objects.new(f'{name}-{k}', me); bpy.context.scene.collection.objects.link(ob)
+        ob.location = E + u * (Ld * (t0 + t1) / 2)
+        ob.rotation_mode = 'QUATERNION'; ob.rotation_quaternion = rot
+        obs.append(ob); t0 = t1; k += 1
+    return obs

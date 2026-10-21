@@ -11,9 +11,13 @@ off it and away on a light wind.
 
 The fire is E10's solver (plume_sim.py) with the speaker in it as a solid the flow goes round, so the fire wraps it and
 no smoke stands inside its clear acrylic, and its skin burning, strongest at its foot, less on the face the camera sees
-(a first look, m1, hid the speaker's face in flame); a ring of fire round its foot, set behind it. meteor_a: 8 x 5 x 8 m
-at 0.05 m, 12 s, wind 2.2 m/s, confinement 3.2 (the small plume's law, eps x dx 0.16). The flames are E9's: black-body
-from 1100 to 2100 K, broken into hard-edged tongues.
+(a first look, m1, hid the speaker's face in flame); a ring of fire round its foot, set 0.2 m behind it. meteor_b:
+10 x 7 x 8 m at 0.05 m, 12 s, wind 2.2 m/s, confinement 3.2 (the small plume's law, eps x dx 0.16), the box's ends
+taking the smoke back hard (meteor_a's 8 x 5 m box filled up: its smoke went round the periodic ends and came back in
+upwind, and stood as a second column at the far end). The volume is placed by the solid, so the speaker stands in the
+hole the flow left for it (placed by the fire's centre, meteor_a's proofs had it 0.2 m in front of the speaker). The
+flames are E9's: black-body from 1100 to 2100 K, broken into hard-edged tongues. The cracks' glow is seen but not
+sampled as a light (a linked emission made the pan's 14 M triangles lights: the first proofs died at 14 GB).
 """
 import copy
 import math
@@ -21,7 +25,7 @@ import math
 import smoke_pan as P
 from common import piece, point
 
-CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_a.npz'
+CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_b.npz'
 ROT = 18.0                     # the speaker's turn (E6's)
 WIND = 50.0                    # the sim's downwind (+x) turned: away from the camera, a little right
 SINK = 0.10                    # the speaker's foot below the crust: it stopped in its crater
@@ -31,8 +35,9 @@ AHEAD = math.degrees(math.atan2(TRENCH[3] - TRENCH[1], TRENCH[2] - TRENCH[0]))  
 
 
 def fire():
-    """The fire as a volume: E10's plume shader with E9's flames, the box's floor at the crater's."""
-    return piece('ext', module='plume', fn='plume', cache=CACHE, position=[0.0, 0.0, -SINK], rotate_z=WIND,
+    """The fire as a volume: E10's plume shader with E9's flames, the box's floor at the crater's, its solid on the
+    speaker."""
+    return piece('ext', module='plume', fn='plume', cache=CACHE, anchor='solid', position=[0.0, 0.0, -SINK], rotate_z=WIND,
                  density=4.5, strength=220.0, color='#8F857B', anisotropy=0.4, cool=1100.0, hot=2100.0,
                  flame_floor=0.25, tongues=0.9, tongue_scale=0.12, tongue_edge=[0.42, 0.62], edge=[0.02, 0.22],
                  detail=2.5, detail_scale=0.1, detail_octaves=4.0, breakup=0.45, breakup_scale=0.35,
