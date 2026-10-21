@@ -1,0 +1,62 @@
+{
+ "frame": "renders/2026-10-21/barkhorn/proofs/smoke-e9-p4.png",
+ "date": "2026-10-21",
+ "read": {
+  "sentence": "A black loudspeaker cabinet with a framed screen or mirror on top stands in the middle of a wet elevated highway at dusk, while behind it on the left a car burns with tall orange flames and thick black smoke, and a tall concrete tower block rises on the right.",
+  "object": "stands",
+  "dark_mass": "thick plumes of black smoke rising from the burning car, lit orange from below",
+  "fire": "an old sedan burning, two smaller fires nearby",
+  "figure": "none; the speaker loosely robot-like",
+  "first_glance": "the flames, then the speaker"
+ },
+ "realism": [
+  {
+   "score": 4,
+   "tells": [
+    "the fire a soft creamy glow with no tongues, rising behind the car not out of it",
+    "the car placeholder-grade: flat sides, wire-thin pillars, puck wheels",
+    "the smoke mushy, soft-edged, no sky light on the tops; the firelight a smooth orange haze"
+   ]
+  },
+  {
+   "score": 5,
+   "tells": [
+    "the flames an airbrushed cone, standing like a wall behind the car",
+    "the car a low-detail slab; no dark reflection of it in the wet road",
+    "the smoke even, same-sized cotton-ball puffs; the fire-lit base a smooth orange haze"
+   ],
+   "most_convincing": "the setting and grade; the product dark and backlit, warm fire light on its left edges, cool sky on its right"
+  }
+ ],
+ "duel_vs_p3": [
+  {
+   "order": "p4 first",
+   "p4": 5,
+   "p3": 4,
+   "prefer": "p4"
+  },
+  {
+   "order": "p4 first",
+   "p4": 5,
+   "p3": 6,
+   "prefer": "p3"
+  },
+  {
+   "order": "p3 first",
+   "p3": 5,
+   "p4": 7,
+   "prefer": "p4"
+  },
+  {
+   "order": "p3 first",
+   "p3": 6,
+   "p4": 7,
+   "prefer": "p4"
+  }
+ ],
+ "duel_means": {
+  "p4": 6.0,
+  "p3": 5.25
+ },
+ "note": "p4 preferred 3 of 4 (+0.75 in the duel) though the realism critics scored it 4.5 against p3's 5.0; the car now reads as a sedan"
+}

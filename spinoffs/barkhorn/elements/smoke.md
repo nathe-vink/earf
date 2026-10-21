@@ -413,3 +413,37 @@ The owner picked E6 p3. Both frames were rendered from the committed shot files 
 - Seams checked at full size at every boundary and through the horizon pieces: none visible.
 - On the site as `ELEMENT['black'] = 'smoke_e6'`, "Smoke on a cracked salt flat, black smoke climbing from the horizon."
 
+
+## E9, the bridge with simulated smoke (the owner, 2026-10-21: "I wanted bridge smoke. That smoke looks bad")
+
+The owner's verdict on the live salt flat: they wanted the bridge, and the salt flat's smoke looks bad. Every Smoke
+set so far drew its smoke as noise carved into boxes, and every critic read it the same way: "a soft, uniform
+volumetric blob". So E9 keeps E7's overpass and replaces the smoke with a simulation.
+
+**The smoke** (`studio/engine/kit_ext/plume_sim.py`, `plume.py`): Blender's own smoke solver (Mantaflow) fails headless
+in this container's bpy (its scripts raise NameErrors and a missing `setConst`), and the CC0 VDB packs (JangaFX) sit
+behind a browser check, so the plume is solved here: a staggered grid, semi-Lagrangian velocity, MacCormack scalars,
+buoyancy, vorticity confinement, an exact FFT/DCT projection, and three scalars (soot, heat, flame). numba runs it on
+four cores (installed into the scratchpad, never the system Python). `plume_a`: a car fire under a 1.6 m/s wind, 28 x 20
+x 40 m at 0.14 m (8.2 M cells), 20 s of flow in 444 steps, 22 minutes; stored as 8-bit square-root-coded grids
+(`renders/2026-10-21/barkhorn/plume/plume_a.npz`, 3.7 MB). With no VDB writer, `plume.py` packs the slices into one
+float image (an atlas) and the volume shader blends the two slices about each point; the grids fade out over the sim's
+sponges so the box never shows.
+
+**The set** (`smoke_riot.py`): E7's deck, lamps and wrecks; the near wreck burns with the simulated fire (its source lies
+along the car), two more fires burn further along the bridge and out over the city (the same plume, scaled 2 and 2.6),
+all leaning left with one wind; the sky behind the speaker's horn is kept clear.
+
+| Proof | What changed | Notes |
+|---|---|---|
+| p0 | first light | the smoke's shape right; every plume glowed pink (a heat-glow term), the speaker cropped by the shift |
+| p1 | heat glow off, shift 0.14 | the far plume real black smoke; the near one still glowing (flame emission at every level) |
+| p2 | flames only above a floor, fire light lower and weaker | reads as a burning car under black smoke |
+| p3 | far plume moved off the horn, soot a shade lighter | read test passes; realism 5 / 5; beats E7 p4 4-0 position-balanced (6.5 v 4.75) |
+| p4 | soot brown-grey, torn edges, uneven inside, flame tongues and yellow-white cores, the car three-quarter with its roof, the fire light above the roof, a warmer rim | the car reads as "an old sedan"; realism 4 / 5; beats p3 3-1 position-balanced (6.0 v 5.25) |
+| p5 | the soot's margins remapped by a smoothstep (firm lobes), hard-edged flame tongues at twice the brightness, the fire light lower and half as strong (p4: "a smooth orange haze"), the rim to 120, octaves 4/2/3 near and 2/1/2 far | rendering |
+
+p3's critics (`critic-smoke/e9-p3.json`): the smoke "black cotton wool" (cores near RGB 10, no sky-lit tops, unlit belly),
+the flames a smooth salmon gradient, the wreck "a flat slab with a tube on top". p4 answers each; it also cost 3.4 times
+p3 to render (47 minutes at 960 px), almost all in the extra noise octaves, so the finals use 4/2/3 octaves near and
+2/1/2 far.

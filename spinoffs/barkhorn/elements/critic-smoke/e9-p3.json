@@ -1,0 +1,61 @@
+{
+ "frame": "renders/2026-10-21/barkhorn/proofs/smoke-e9-p3.png",
+ "date": "2026-10-21",
+ "read": {
+  "sentence": "A wet, empty elevated city highway at dusk, where a low barricade burns on the left under thick black smoke, a tall apartment tower rises on the right, and a boxy grey speaker with a glass screen on top sits on the road in the foreground.",
+  "object": "stands",
+  "dark_mass": "thick, billowing black smoke from the fires",
+  "figure": "none in the smoke; the speaker itself faintly robot-like",
+  "first_glance": "the flames and the black smoke on the left"
+ },
+ "realism": [
+  {
+   "score": 5,
+   "tells": [
+    "smoke near pure black, opaque, evenly sized soft lumps, no sky-lit tops or translucent wisps; the fire light dies a few pixels above the flames",
+    "flames a smooth orange-to-salmon gradient, no clipped core, no tongues, no halation",
+    "the HDRI tower read as repeated CG modules"
+   ]
+  },
+  {
+   "score": 5,
+   "tells": [
+    "smoke black cotton wool: cores near RGB 10, evenly blurred edges, no sky-lit tops, unlit belly",
+    "the burning car a flat slab with a tube outline for a roof; flames rise behind it, not out of it",
+    "flames a soft salmon gradient with no core or tongues; embers crisp round dots"
+   ],
+   "most_convincing": "the right half (tower, dusk sky, haze, railing) and the product: skylight, a warm rim from the fire, the contact shadow, matched focus"
+  }
+ ],
+ "duel_vs_E7_p4": [
+  {
+   "order": "E9 first",
+   "E9": 6,
+   "E7": 5,
+   "prefer": "E9"
+  },
+  {
+   "order": "E9 first",
+   "E9": 6,
+   "E7": 5,
+   "prefer": "E9"
+  },
+  {
+   "order": "E7 first",
+   "E7": 5,
+   "E9": 7,
+   "prefer": "E9"
+  },
+  {
+   "order": "E7 first",
+   "E7": 4,
+   "E9": 7,
+   "prefer": "E9"
+  }
+ ],
+ "duel_means": {
+  "E9": 6.5,
+  "E7": 4.75
+ },
+ "note": "every judge preferred E9 p3 in both orders; the shared complaints: the speaker catches little fire light (two judges), the flattened wreck, the smoke slightly blobby"
+}
