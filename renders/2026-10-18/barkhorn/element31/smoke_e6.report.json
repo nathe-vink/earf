@@ -1,0 +1,109 @@
+{
+ "shot": "studio/shots/barkhorn/element31/smoke_pan.json",
+ "image": "renders/2026-10-18/barkhorn/element31/smoke_e6.png",
+ "size": [
+  2400,
+  1600
+ ],
+ "pieces": [
+  [
+   "strip0.png",
+   0,
+   165
+  ],
+  [
+   "strip1.png",
+   101,
+   197
+  ],
+  [
+   "strip2.png",
+   234,
+   197
+  ],
+  [
+   "strip3.png",
+   367,
+   197
+  ],
+  [
+   "strip4.png",
+   500,
+   197
+  ],
+  [
+   "strip5.png",
+   633,
+   197
+  ],
+  [
+   "piece-814-851.png",
+   814,
+   37
+  ],
+  [
+   "piece-835-872.png",
+   835,
+   37
+  ],
+  [
+   "piece-856-893.png",
+   856,
+   37
+  ],
+  [
+   "piece-877-915.png",
+   877,
+   38
+  ],
+  [
+   "strip7.png",
+   899,
+   197
+  ],
+  [
+   "strip8.png",
+   1032,
+   197
+  ],
+  [
+   "strip9.png",
+   1165,
+   197
+  ],
+  [
+   "strip10.png",
+   1298,
+   198
+  ],
+  [
+   "strip11.png",
+   1431,
+   169
+  ]
+ ],
+ "finish": {
+  "white_in": 240,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": -0.85,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.15
+  },
+  "grain": [
+   2.5,
+   1.0
+  ],
+  "gain": 1.0
+ },
+ "note": "rendered in horizontal pieces (strips, plus thinner pieces where the horizon is slowest), stitched raw with feathered overlaps, finished once"
+}

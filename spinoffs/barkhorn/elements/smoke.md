@@ -402,3 +402,14 @@ The owner chose **"Smoke: A, salt flat"** (E6 p3; its finals go to helpers from 
 
 - **The best E8 is p1** (element-smoke-e8-impact-p1.jpg), with the highest realism and the closest duel. p0 split by position.
 - **The constant** across every judge: the disaster story buries the product, and the trench and rubble read as CG.
+
+### E6 finals: the salt flat, live (2026-10-21)
+
+The owner picked E6 p3. Both frames were rendered from the committed shot files at bf7ae75 (byte-identical to p3's render source, 88532b0) at 512 samples, in twelve horizontal strips per frame (`haze_b_strips.py --n 12`) across eight helper sessions, three strips each.
+
+- **The horizon is the cost.** Grazing rays cross the pan-wide haze box, the rolling layers and the plume's base out to the 3 km clip. A 12-row test at the horizon took 769 s (about 64 s a row, landscape) against about 4 s a row for the rest of the frame. The strips through it took 66 to 76 minutes; the others took 6 to 14.
+- **Landscape strip 6** (rows 766-963, the peak) was stopped at the two-hour limit of a background task. It was replaced by four thin pieces rendered with `render.py --crop` from the same raw shot (rows 814-851, 835-872, 856-893 and 877-915, 27 to 47 minutes each). They are stitched with the other eleven strips by `rowstitch.py`, which feathers across each whole overlap and applies the finish once. On the phone strips it matches `haze_b_strips.py stitch` to a mean of 0.003 levels.
+- **Phone frame:** all twelve strips, stitched by `haze_b_strips.py stitch`.
+- Seams checked at full size at every boundary and through the horizon pieces: none visible.
+- On the site as `ELEMENT['black'] = 'smoke_e6'`, "Smoke on a cracked salt flat, black smoke climbing from the horizon."
+

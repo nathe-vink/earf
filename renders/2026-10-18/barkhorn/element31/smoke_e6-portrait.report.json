@@ -1,0 +1,57 @@
+{
+ "shot": "studio/shots/barkhorn/element31/smoke_pan-portrait.json",
+ "image": "renders/2026-10-18/barkhorn/element31/smoke_e6-portrait.png",
+ "seconds": {
+  "render_total": 13853.5
+ },
+ "samples": 512,
+ "size": [
+  1600,
+  2000
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "strips": 12,
+ "strip_seconds": [
+  623.1,
+  543.9,
+  528.3,
+  682.8,
+  4563.7,
+  4014.2,
+  665.7,
+  590.5,
+  458.8,
+  367.0,
+  381.4,
+  434.1
+ ],
+ "finish": {
+  "white_in": 240,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": -0.85,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.15
+  },
+  "grain": [
+   2.5,
+   1.0
+  ],
+  "gain": 1.0
+ },
+ "note": "rendered in horizontal strips (resumable across container restarts), stitched raw, finished once"
+}

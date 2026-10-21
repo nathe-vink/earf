@@ -1,0 +1,763 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-black",
+  "instances": [
+   {
+    "flavour": "cloud-black",
+    "position": [
+     0.0,
+     0.0,
+     -0.01
+    ],
+    "rotate_z": 18.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ground",
+    "texture": "dry_ground_01",
+    "size": [
+     40.0,
+     40.0
+    ],
+    "position": [
+     0.0,
+     14.0,
+     0.0
+    ],
+    "displace": 0.0,
+    "relief": 0.05,
+    "res": "4k",
+    "tint": "#F0EEEA",
+    "tint_mix": 0.95,
+    "bump": 2.0,
+    "tex_scale": 7.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "canopy",
+    "size": [
+     600.0,
+     600.0
+    ],
+    "z": 20.0,
+    "position": [
+     -60.0,
+     60.0
+    ],
+    "scale": 15.0,
+    "open": 0.35,
+    "seed": 7
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     150.0,
+     300.0,
+     -5
+    ],
+    "size": [
+     45.0,
+     27.0,
+     60
+    ],
+    "density": 0.9,
+    "seed": 31,
+    "color": "#4A4744",
+    "scale": 10.0,
+    "cut": 0.42,
+    "soft": 0.25,
+    "anisotropy": 0.3,
+    "fade": [
+     0.25,
+     0.25,
+     0.35
+    ],
+    "floor": 0.0,
+    "rise": 1.2,
+    "detail_scale": 3.0,
+    "detail_weight": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     136.39172365120456,
+     293.3333333333333,
+     37
+    ],
+    "size": [
+     58.836848021366634,
+     35.30210881281998,
+     60
+    ],
+    "density": 0.7200000000000001,
+    "seed": 32,
+    "color": "#4A4744",
+    "scale": 12.5,
+    "cut": 0.43,
+    "soft": 0.25,
+    "anisotropy": 0.3,
+    "fade": [
+     0.25,
+     0.25,
+     0.35
+    ],
+    "floor": 0.0,
+    "rise": 1.2,
+    "detail_scale": 3.6666666666666665,
+    "detail_weight": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     111.50998205402496,
+     286.6666666666667,
+     79
+    ],
+    "size": [
+     81.51566084871106,
+     48.90939650922664,
+     60
+    ],
+    "density": 0.5760000000000002,
+    "seed": 33,
+    "color": "#4A4744",
+    "scale": 15.0,
+    "cut": 0.44,
+    "soft": 0.25,
+    "anisotropy": 0.3,
+    "fade": [
+     0.25,
+     0.25,
+     0.35
+    ],
+    "floor": 0.0,
+    "rise": 1.2,
+    "detail_scale": 4.333333333333333,
+    "detail_weight": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     79.28932188134524,
+     280.0,
+     121
+    ],
+    "size": [
+     109.41795407669193,
+     65.65077244601515,
+     60
+    ],
+    "density": 0.4608000000000001,
+    "seed": 34,
+    "color": "#4A4744",
+    "scale": 17.5,
+    "cut": 0.44999999999999996,
+    "soft": 0.25,
+    "anisotropy": 0.3,
+    "fade": [
+     0.25,
+     0.25,
+     0.35
+    ],
+    "floor": 0.0,
+    "rise": 1.2,
+    "detail_scale": 5.0,
+    "detail_weight": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     41.13378920963653,
+     273.3333333333333,
+     163
+    ],
+    "size": [
+     141.36540671394863,
+     84.81924402836917,
+     60
+    ],
+    "density": 0.3686400000000001,
+    "seed": 35,
+    "color": "#4A4744",
+    "scale": 20.0,
+    "cut": 0.45999999999999996,
+    "soft": 0.25,
+    "anisotropy": 0.3,
+    "fade": [
+     0.25,
+     0.25,
+     0.35
+    ],
+    "floor": 0.0,
+    "rise": 1.2,
+    "detail_scale": 5.666666666666666,
+    "detail_weight": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     -2.14515486254615,
+     266.6666666666667,
+     205
+    ],
+    "size": [
+     176.70285117643797,
+     106.02171070586279,
+     60
+    ],
+    "density": 0.29491200000000006,
+    "seed": 36,
+    "color": "#4A4744",
+    "scale": 22.5,
+    "cut": 0.47,
+    "soft": 0.25,
+    "anisotropy": 0.3,
+    "fade": [
+     0.25,
+     0.25,
+     0.35
+    ],
+    "floor": 0.0,
+    "rise": 1.2,
+    "detail_scale": 6.333333333333334,
+    "detail_weight": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     -50.0,
+     260.0,
+     247
+    ],
+    "size": [
+     215.0,
+     129.0,
+     60
+    ],
+    "density": 0.2359296000000001,
+    "seed": 37,
+    "color": "#4A4744",
+    "scale": 25.0,
+    "cut": 0.48,
+    "soft": 0.25,
+    "anisotropy": 0.3,
+    "fade": [
+     0.25,
+     0.25,
+     0.35
+    ],
+    "floor": 0.0,
+    "rise": 1.2,
+    "detail_scale": 7.0,
+    "detail_weight": 0.55
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     -320,
+     760,
+     200
+    ],
+    "size": [
+     1000,
+     640,
+     130
+    ],
+    "density": 0.05,
+    "seed": 39,
+    "color": "#4A4744",
+    "scale": 55.0,
+    "cut": 0.4,
+    "soft": 0.35,
+    "anisotropy": 0.3,
+    "fade": [
+     0.15,
+     0.2,
+     0.45
+    ],
+    "floor": 0.0,
+    "rise": 0.6,
+    "detail_scale": 18.0,
+    "detail_weight": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     -22.5,
+     170,
+     -0.3
+    ],
+    "size": [
+     200,
+     90,
+     26
+    ],
+    "density": 0.2,
+    "seed": 41,
+    "color": "#4A4744",
+    "scale": 9.0,
+    "cut": 0.56,
+    "soft": 0.28,
+    "anisotropy": 0.3,
+    "fade": [
+     0.2,
+     0.3,
+     0.55
+    ],
+    "floor": 0.0,
+    "rise": 1.3,
+    "detail_scale": 2.25,
+    "detail_weight": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     -1.25,
+     85,
+     -0.3
+    ],
+    "size": [
+     120,
+     50,
+     12
+    ],
+    "density": 0.27999999999999997,
+    "seed": 42,
+    "color": "#4A4744",
+    "scale": 4.0,
+    "cut": 0.56,
+    "soft": 0.28,
+    "anisotropy": 0.3,
+    "fade": [
+     0.2,
+     0.3,
+     0.55
+    ],
+    "floor": 0.0,
+    "rise": 1.3,
+    "detail_scale": 1.0,
+    "detail_weight": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     8.75,
+     45,
+     -0.3
+    ],
+    "size": [
+     80,
+     26,
+     6.0
+    ],
+    "density": 0.4,
+    "seed": 43,
+    "color": "#4A4744",
+    "scale": 2.2,
+    "cut": 0.56,
+    "soft": 0.28,
+    "anisotropy": 0.3,
+    "fade": [
+     0.2,
+     0.3,
+     0.55
+    ],
+    "floor": 0.0,
+    "rise": 1.3,
+    "detail_scale": 0.55,
+    "detail_weight": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     14.5,
+     22,
+     -0.3
+    ],
+    "size": [
+     60,
+     20,
+     4.0
+    ],
+    "density": 0.48,
+    "seed": 44,
+    "color": "#4A4744",
+    "scale": 1.4,
+    "cut": 0.56,
+    "soft": 0.28,
+    "anisotropy": 0.3,
+    "fade": [
+     0.2,
+     0.3,
+     0.55
+    ],
+    "floor": 0.0,
+    "rise": 1.3,
+    "detail_scale": 0.35,
+    "detail_weight": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     17.25,
+     11,
+     -0.3
+    ],
+    "size": [
+     40,
+     8,
+     1.6
+    ],
+    "density": 0.36000000000000004,
+    "seed": 45,
+    "color": "#4A4744",
+    "scale": 0.7,
+    "cut": 0.56,
+    "soft": 0.28,
+    "anisotropy": 0.3,
+    "fade": [
+     0.2,
+     0.3,
+     0.55
+    ],
+    "floor": 0.0,
+    "rise": 1.3,
+    "detail_scale": 0.175,
+    "detail_weight": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     0,
+     500,
+     -1
+    ],
+    "size": [
+     1600,
+     900,
+     45
+    ],
+    "density": 0.0025,
+    "seed": 49,
+    "color": "#8C8C8C",
+    "scale": 200.0,
+    "cut": 0.0,
+    "soft": 0.9,
+    "anisotropy": 0.2,
+    "fade": [
+     0.1,
+     0.1,
+     0.7
+    ],
+    "floor": 0.0025
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "occluder",
+    "position": [
+     0.0,
+     0.0,
+     0.03
+    ],
+    "radius": 0.36,
+    "sx": 1.0,
+    "sy": 0.9,
+    "rotate_z": 18.0
+   }
+  ]
+ },
+ "lights": {
+  "skyfill": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 2.0,
+   "color": "#DCE2EA",
+   "orbit": {
+    "azimuth_deg": -20,
+    "elevation_deg": 5,
+    "distance_m": 2.4
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*",
+    "lining-*",
+    "woofer-*",
+    "amp-*",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "port-*",
+    "hf-*",
+    "feet-*",
+    "tie-rod-*",
+    "top-pad",
+    "mark-back",
+    "back-*",
+    "cap-o-ring",
+    "lead-*",
+    "cable-glands",
+    "rating-plate"
+   ]
+  },
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    2.4,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 6.0,
+   "color": "#E6E2DA",
+   "orbit": {
+    "azimuth_deg": -25,
+    "elevation_deg": 12,
+    "distance_m": 2.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*",
+    "lining-*",
+    "woofer-*",
+    "amp-*",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "port-*",
+    "hf-*",
+    "feet-*",
+    "tie-rod-*",
+    "top-pad",
+    "mark-back",
+    "back-*",
+    "cap-o-ring",
+    "lead-*",
+    "cable-glands",
+    "rating-plate"
+   ]
+  },
+  "kicker": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 22.0,
+   "color": "#FFE6CC",
+   "orbit": {
+    "azimuth_deg": -150,
+    "elevation_deg": 22,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*"
+   ]
+  },
+  "kicker_r": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 16.0,
+   "color": "#FFE6CC",
+   "orbit": {
+    "azimuth_deg": 150,
+    "elevation_deg": 14,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*"
+   ]
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.3,
+  "look": "AgX - Base Contrast"
+ },
+ "title": "barkhorn, Smoke, black smoke over a salt pan",
+ "size": [
+  2400,
+  1600
+ ],
+ "camera": {
+  "position": [
+   -1.5049,
+   -4.1346,
+   0.8
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.85
+  ],
+  "lens_mm": 40,
+  "level": true,
+  "fstop": 2.0,
+  "focus": [
+   0.0,
+   -0.21,
+   0.85
+  ],
+  "shift_x": 0.08,
+  "shift_y": 0.06,
+  "clip_end": 3000
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "aarfontein_pan",
+  "rotation_deg": 124.0,
+  "strength": 0.8,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": -70.3,
+  "elevation_deg": 22.0,
+  "irradiance": 9.0,
+  "angle_deg": 3.5,
+  "color": "#FEC163"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": -0.85,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.15
+  },
+  "grain": 2.5
+ }
+}
