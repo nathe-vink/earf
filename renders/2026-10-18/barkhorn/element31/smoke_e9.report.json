@@ -1,0 +1,61 @@
+{
+ "shot": "studio/shots/barkhorn/element31/smoke_riot.json",
+ "image": "renders/2026-10-18/barkhorn/element31/smoke_e9.png",
+ "seconds": {
+  "render_total": 33836.2
+ },
+ "samples": 144,
+ "size": [
+  2400,
+  1600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "strips": 16,
+ "strip_seconds": [
+  342.1,
+  553.1,
+  551.3,
+  518.2,
+  710.5,
+  1002.6,
+  1180.4,
+  1531.9,
+  2783.8,
+  4618.6,
+  6973.6,
+  4794.6,
+  1930.6,
+  2133.5,
+  2364.7,
+  1846.7
+ ],
+ "finish": {
+  "white_in": 240,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.2,
+   "bloom_px": 40,
+   "bloom_threshold": 0.7,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.25
+  },
+  "grain": [
+   2.5,
+   1.0
+  ],
+  "gain": 1.0
+ },
+ "note": "rendered in horizontal strips (resumable across container restarts), stitched raw, finished once"
+}

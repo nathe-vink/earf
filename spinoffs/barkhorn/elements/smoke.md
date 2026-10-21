@@ -413,3 +413,56 @@ The owner picked E6 p3. Both frames were rendered from the committed shot files 
 - Seams checked at full size at every boundary and through the horizon pieces: none visible.
 - On the site as `ELEMENT['black'] = 'smoke_e6'`, "Smoke on a cracked salt flat, black smoke climbing from the horizon."
 
+
+## E9, the bridge with simulated smoke (the owner, 2026-10-21: "I wanted bridge smoke. That smoke looks bad")
+
+The owner's verdict on the live salt flat: they wanted the bridge, and the salt flat's smoke looks bad. Every Smoke
+set so far drew its smoke as noise carved into boxes, and every critic read it the same way: "a soft, uniform
+volumetric blob". So E9 keeps E7's overpass and replaces the smoke with a simulation.
+
+**The smoke** (`studio/engine/kit_ext/plume_sim.py`, `plume.py`): Blender's own smoke solver (Mantaflow) fails headless
+in this container's bpy (its scripts raise NameErrors and a missing `setConst`), and the CC0 VDB packs (JangaFX) sit
+behind a browser check, so the plume is solved here: a staggered grid, semi-Lagrangian velocity, MacCormack scalars,
+buoyancy, vorticity confinement, an exact FFT/DCT projection, and three scalars (soot, heat, flame). numba runs it on
+four cores (installed into the scratchpad, never the system Python). `plume_a`: a car fire under a 1.6 m/s wind, 28 x 20
+x 40 m at 0.14 m (8.2 M cells), 20 s of flow in 444 steps, 22 minutes; stored as 8-bit square-root-coded grids
+(`renders/2026-10-21/barkhorn/plume/plume_a.npz`, 3.7 MB). With no VDB writer, `plume.py` packs the slices into one
+float image (an atlas) and the volume shader blends the two slices about each point; the grids fade out over the sim's
+sponges so the box never shows.
+
+**The set** (`smoke_riot.py`): E7's deck, lamps and wrecks; the near wreck burns with the simulated fire (its source lies
+along the car), two more fires burn further along the bridge and out over the city (the same plume, scaled 2 and 2.6),
+all leaning left with one wind; the sky behind the speaker's horn is kept clear.
+
+| Proof | What changed | Notes |
+|---|---|---|
+| p0 | first light | the smoke's shape right; every plume glowed pink (a heat-glow term), the speaker cropped by the shift |
+| p1 | heat glow off, shift 0.14 | the far plume real black smoke; the near one still glowing (flame emission at every level) |
+| p2 | flames only above a floor, fire light lower and weaker | reads as a burning car under black smoke |
+| p3 | far plume moved off the horn, soot a shade lighter | read test passes; realism 5 / 5; beats E7 p4 4-0 position-balanced (6.5 v 4.75) |
+| p4 | soot brown-grey, torn edges, uneven inside, flame tongues and yellow-white cores, the car three-quarter with its roof, the fire light above the roof, a warmer rim | the car reads as "an old sedan"; realism 4 / 5; beats p3 3-1 position-balanced (6.0 v 5.25) |
+| p5 | the soot's margins remapped by a smoothstep (firm lobes), hard-edged flame tongues at twice the brightness, the fire light lower and half as strong (p4: "a smooth orange haze"), the rim to 120, octaves 4/2/3 near and 2/1/2 far | realism 5 / 5; against p4 2-2, every judge preferring the second frame (6.0 v 6.5); the finals |
+
+p3's critics (`critic-smoke/e9-p3.json`): the smoke "black cotton wool" (cores near RGB 10, no sky-lit tops, unlit belly),
+the flames a smooth salmon gradient, the wreck "a flat slab with a tube on top". p4 answers each; it also cost 3.4 times
+p3 to render (47 minutes at 960 px), almost all in the extra noise octaves, so the finals use 4/2/3 octaves near and
+2/1/2 far.
+
+**Where the round ends.** p4 to p5 moved under half a point both ways, as p3 to p4 did on realism, so under the stop rule
+the round ends at p5, whose finals were already rendering (16 strips a frame on the eight helpers, 144 samples,
+`r31-element-smoke-e9` at 7808c315). Every critic of p3, p4 and p5 named the same remaining tell: the billows are all one
+size, "cotton-ball" or "metaball" lobes with no sheared wisps, because the 0.14 m grid sets one scale of eddy. A finer
+grid with a stronger wind (shear streaks, a leaning column) is the next step if the owner wants more.
+
+**The finals.** p5 at full size, 2400 x 1600 and 1600 x 2000 at 144 samples, each in 16 strips over the eight helpers
+(`haze_b_strips.py`: the strips raw, stitched and finished once): `element31/smoke_e9.png` and `smoke_e9-portrait.png`,
+9.4 and 6.1 machine-hours. The slow band runs through the fire and the speaker: landscape strip 10 took 116 minutes,
+four under a run's cap. Three helpers' sessions refused to push their strips, and those twelve were rendered again on
+the helpers whose pushes went through, and here. Neighbouring strips agree over their 64 shared rows to 0.4-2.3 of 255
+on average (the same pixels from two machines; the rest is noise in the flames and glints on the wet road), and no
+seam shows at full size.
+
+**A finer sim, not used.** `plume_b`: 10 cm cells (280 x 200 x 400), the wind at 2.6 m/s, 22 s, 103 minutes to solve.
+Its margins are a little finer but its body is still even lumps, and the windier column leaves the 28 m box about
+18 m downwind, where the sponge cuts it off. Another pass would need a box about 40 m long (some 2.5 hours of
+simulation) before the column could stand in the frame.

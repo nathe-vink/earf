@@ -1,0 +1,1416 @@
+{
+ "shot": "studio/shots/barkhorn/element31/smoke_riot.json",
+ "image": "renders/2026-10-21/barkhorn/proofs/smoke-e9-p0.png",
+ "seconds": {
+  "build": 47.8,
+  "render": 983.4
+ },
+ "samples": 96,
+ "size": [
+  960,
+  640
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "amp-box#0": {
+   "part": "amp-box",
+   "centre_px": [
+    466.7,
+    570.1
+   ],
+   "box_px": [
+    451,
+    538,
+    482,
+    603
+   ],
+   "depth_m": 5.127
+  },
+  "amp-box-gasket#0": {
+   "part": "amp-box-gasket",
+   "centre_px": [
+    463.3,
+    569.8
+   ],
+   "box_px": [
+    451,
+    538,
+    476,
+    602
+   ],
+   "depth_m": 5.16
+  },
+  "amp-plate-gold#0": {
+   "part": "amp-plate-gold",
+   "centre_px": [
+    461.5,
+    551.1
+   ],
+   "box_px": [
+    458,
+    546,
+    465,
+    556
+   ],
+   "depth_m": 5.177
+  },
+  "amp-plate-housings#0": {
+   "part": "amp-plate-housings",
+   "centre_px": [
+    462.2,
+    570.3
+   ],
+   "box_px": [
+    454,
+    545,
+    470,
+    596
+   ],
+   "depth_m": 5.171
+  },
+  "amp-plate-ink#0": {
+   "part": "amp-plate-ink",
+   "centre_px": [
+    462.0,
+    566.7
+   ],
+   "box_px": [
+    456,
+    545,
+    468,
+    588
+   ],
+   "depth_m": 5.182
+  },
+  "amp-plate-labels#0": {
+   "part": "amp-plate-labels",
+   "centre_px": [
+    462.4,
+    551.0
+   ],
+   "box_px": [
+    456,
+    550,
+    469,
+    552
+   ],
+   "depth_m": 5.182
+  },
+  "amp-plate-led-green#0": {
+   "part": "amp-plate-led-green",
+   "centre_px": [
+    456.1,
+    549.2
+   ],
+   "box_px": [
+    456,
+    549,
+    456,
+    550
+   ],
+   "depth_m": 5.161
+  },
+  "amp-plate-led-on#0": {
+   "part": "amp-plate-led-on",
+   "centre_px": [
+    456.1,
+    547.8
+   ],
+   "box_px": [
+    456,
+    548,
+    456,
+    548
+   ],
+   "depth_m": 5.161
+  },
+  "amp-plate-led-red#0": {
+   "part": "amp-plate-led-red",
+   "centre_px": [
+    456.1,
+    546.9
+   ],
+   "box_px": [
+    456,
+    547,
+    456,
+    547
+   ],
+   "depth_m": 5.161
+  },
+  "amp-plate-metal#0": {
+   "part": "amp-plate-metal",
+   "centre_px": [
+    462.6,
+    569.6
+   ],
+   "box_px": [
+    456,
+    545,
+    469,
+    595
+   ],
+   "depth_m": 5.181
+  },
+  "amp-plate-module#0": {
+   "part": "amp-plate-module",
+   "centre_px": [
+    464.0,
+    569.9
+   ],
+   "box_px": [
+    455,
+    544,
+    473,
+    596
+   ],
+   "depth_m": 5.153
+  },
+  "amp-plate-plate#0": {
+   "part": "amp-plate-plate",
+   "centre_px": [
+    461.5,
+    569.6
+   ],
+   "box_px": [
+    452,
+    541,
+    471,
+    599
+   ],
+   "depth_m": 5.177
+  },
+  "amp-plate-print#0": {
+   "part": "amp-plate-print",
+   "centre_px": [
+    460.0,
+    571.2
+   ],
+   "box_px": [
+    453,
+    545,
+    467,
+    598
+   ],
+   "depth_m": 5.176
+  },
+  "amp-plate-rca-orange#0": {
+   "part": "amp-plate-rca-orange",
+   "centre_px": [
+    459.0,
+    554.4
+   ],
+   "box_px": [
+    458,
+    552,
+    460,
+    556
+   ],
+   "depth_m": 5.174
+  },
+  "amp-plate-rca-red#0": {
+   "part": "amp-plate-rca-red",
+   "centre_px": [
+    459.0,
+    548.8
+   ],
+   "box_px": [
+    458,
+    548,
+    460,
+    549
+   ],
+   "depth_m": 5.174
+  },
+  "amp-plate-rca-white#0": {
+   "part": "amp-plate-rca-white",
+   "centre_px": [
+    459.0,
+    546.5
+   ],
+   "box_px": [
+    458,
+    546,
+    460,
+    547
+   ],
+   "depth_m": 5.174
+  },
+  "amp-plate-rings#0": {
+   "part": "amp-plate-rings",
+   "centre_px": [
+    461.4,
+    570.3
+   ],
+   "box_px": [
+    455,
+    547,
+    468,
+    594
+   ],
+   "depth_m": 5.179
+  },
+  "amp-plate-screws#0": {
+   "part": "amp-plate-screws",
+   "centre_px": [
+    461.3,
+    569.6
+   ],
+   "box_px": [
+    452,
+    541,
+    471,
+    598
+   ],
+   "depth_m": 5.18
+  },
+  "amp-plate-sticker#0": {
+   "part": "amp-plate-sticker",
+   "centre_px": [
+    463.8,
+    587.3
+   ],
+   "box_px": [
+    462,
+    586,
+    466,
+    589
+   ],
+   "depth_m": 5.186
+  },
+  "back#0": {
+   "part": "back",
+   "centre_px": [
+    462.3,
+    584.2
+   ],
+   "box_px": [
+    419,
+    508,
+    503,
+    664
+   ],
+   "depth_m": 5.17
+  },
+  "back-gasket#0": {
+   "part": "back-gasket",
+   "centre_px": [
+    463.3,
+    584.3
+   ],
+   "box_px": [
+    421,
+    508,
+    503,
+    664
+   ],
+   "depth_m": 5.16
+  },
+  "back-screws#0": {
+   "part": "back-screws",
+   "centre_px": [
+    462.7,
+    584.2
+   ],
+   "box_px": [
+    420,
+    509,
+    503,
+    663
+   ],
+   "depth_m": 5.165
+  },
+  "bottom#0": {
+   "part": "bottom",
+   "centre_px": [
+    480.4,
+    666.7
+   ],
+   "box_px": [
+    419,
+    656,
+    543,
+    678
+   ],
+   "depth_m": 4.997
+  },
+  "brace#0": {
+   "part": "brace",
+   "centre_px": [
+    482.1,
+    629.6
+   ],
+   "box_px": [
+    426,
+    623,
+    538,
+    638
+   ],
+   "depth_m": 4.981
+  },
+  "brace-2#0": {
+   "part": "brace-2",
+   "centre_px": [
+    482.1,
+    535.9
+   ],
+   "box_px": [
+    426,
+    533,
+    538,
+    539
+   ],
+   "depth_m": 4.981
+  },
+  "cable-glands#0": {
+   "part": "cable-glands",
+   "centre_px": [
+    468.4,
+    553.9
+   ],
+   "box_px": [
+    459,
+    512,
+    478,
+    597
+   ],
+   "depth_m": 5.1
+  },
+  "cap-o-ring#0": {
+   "part": "cap-o-ring",
+   "centre_px": [
+    463.4,
+    464.9
+   ],
+   "box_px": [
+    448,
+    447,
+    478,
+    482
+   ],
+   "depth_m": 5.159
+  },
+  "feet-base#0": {
+   "part": "feet-base",
+   "centre_px": [
+    480.4,
+    670.2
+   ],
+   "box_px": [
+    423,
+    662,
+    538,
+    680
+   ],
+   "depth_m": 4.997
+  },
+  "feet-stem#0": {
+   "part": "feet-stem",
+   "centre_px": [
+    480.4,
+    667.8
+   ],
+   "box_px": [
+    427,
+    659,
+    534,
+    678
+   ],
+   "depth_m": 4.997
+  },
+  "front-panel#0": {
+   "part": "front-panel",
+   "centre_px": [
+    497.3,
+    588.4
+   ],
+   "box_px": [
+    452,
+    507,
+    540,
+    674
+   ],
+   "depth_m": 4.844
+  },
+  "grip-left#0": {
+   "part": "grip-left",
+   "centre_px": [
+    440.6,
+    525.4
+   ],
+   "box_px": [
+    427,
+    521,
+    455,
+    530
+   ],
+   "depth_m": 4.877
+  },
+  "grip-right#0": {
+   "part": "grip-right",
+   "centre_px": [
+    518.3,
+    525.2
+   ],
+   "box_px": [
+    503,
+    521,
+    534,
+    530
+   ],
+   "depth_m": 5.117
+  },
+  "hf-adaptor#0": {
+   "part": "hf-adaptor",
+   "centre_px": [
+    472.3,
+    463.9
+   ],
+   "box_px": [
+    457,
+    446,
+    487,
+    481
+   ],
+   "depth_m": 5.072
+  },
+  "hf-band#0": {
+   "part": "hf-band",
+   "centre_px": [
+    467.6,
+    464.4
+   ],
+   "box_px": [
+    456,
+    451,
+    479,
+    478
+   ],
+   "depth_m": 5.118
+  },
+  "hf-exit#0": {
+   "part": "hf-exit",
+   "centre_px": [
+    471.3,
+    464.0
+   ],
+   "box_px": [
+    466,
+    459,
+    476,
+    469
+   ],
+   "depth_m": 5.082
+  },
+  "hf-frame#0": {
+   "part": "hf-frame",
+   "centre_px": [
+    471.3,
+    464.0
+   ],
+   "box_px": [
+    458,
+    449,
+    484,
+    479
+   ],
+   "depth_m": 5.082
+  },
+  "hf-motor#0": {
+   "part": "hf-motor",
+   "centre_px": [
+    467.5,
+    464.4
+   ],
+   "box_px": [
+    453,
+    451,
+    482,
+    478
+   ],
+   "depth_m": 5.119
+  },
+  "hf-plug#0": {
+   "part": "hf-plug",
+   "centre_px": [
+    471.0,
+    464.1
+   ],
+   "box_px": [
+    466,
+    459,
+    476,
+    469
+   ],
+   "depth_m": 5.085
+  },
+  "hf-terminals#0": {
+   "part": "hf-terminals",
+   "centre_px": [
+    464.8,
+    464.7
+   ],
+   "box_px": [
+    454,
+    464,
+    475,
+    466
+   ],
+   "depth_m": 5.145
+  },
+  "land-bottom#0": {
+   "part": "land-bottom",
+   "centre_px": [
+    464.3,
+    658.3
+   ],
+   "box_px": [
+    425,
+    653,
+    502,
+    664
+   ],
+   "depth_m": 5.15
+  },
+  "land-left#0": {
+   "part": "land-left",
+   "centre_px": [
+    424.1,
+    586.0
+   ],
+   "box_px": [
+    421,
+    508,
+    427,
+    664
+   ],
+   "depth_m": 5.026
+  },
+  "land-right#0": {
+   "part": "land-right",
+   "centre_px": [
+    502.6,
+    582.9
+   ],
+   "box_px": [
+    500,
+    509,
+    505,
+    658
+   ],
+   "depth_m": 5.274
+  },
+  "land-top#0": {
+   "part": "land-top",
+   "centre_px": [
+    464.3,
+    510.6
+   ],
+   "box_px": [
+    425,
+    508,
+    502,
+    513
+   ],
+   "depth_m": 5.15
+  },
+  "lead-hf#0": {
+   "part": "lead-hf",
+   "centre_px": [
+    464.3,
+    531.5
+   ],
+   "box_px": [
+    460,
+    516,
+    468,
+    547
+   ],
+   "depth_m": 5.078
+  },
+  "lead-woofer#0": {
+   "part": "lead-woofer",
+   "centre_px": [
+    484.4,
+    598.9
+   ],
+   "box_px": [
+    472,
+    594,
+    497,
+    604
+   ],
+   "depth_m": 4.994
+  },
+  "left#0": {
+   "part": "left",
+   "centre_px": [
+    435.5,
+    588.1
+   ],
+   "box_px": [
+    416,
+    503,
+    456,
+    679
+   ],
+   "depth_m": 4.862
+  },
+  "lining-back-a-web#0": {
+   "part": "lining-back-a-web",
+   "centre_px": [
+    437.2,
+    585.6
+   ],
+   "box_px": [
+    429,
+    513,
+    445,
+    660
+   ],
+   "depth_m": 5.052
+  },
+  "lining-back-b-web#0": {
+   "part": "lining-back-b-web",
+   "centre_px": [
+    465.4,
+    630.9
+   ],
+   "box_px": [
+    444,
+    604,
+    486,
+    658
+   ],
+   "depth_m": 5.139
+  },
+  "lining-back-c-web#0": {
+   "part": "lining-back-c-web",
+   "centre_px": [
+    465.4,
+    523.6
+   ],
+   "box_px": [
+    444,
+    513,
+    486,
+    535
+   ],
+   "depth_m": 5.139
+  },
+  "lining-back-d-web#0": {
+   "part": "lining-back-d-web",
+   "centre_px": [
+    492.7,
+    583.5
+   ],
+   "box_px": [
+    485,
+    513,
+    500,
+    655
+   ],
+   "depth_m": 5.227
+  },
+  "lining-bottom-1-web#0": {
+   "part": "lining-bottom-1-web",
+   "centre_px": [
+    482.0,
+    655.8
+   ],
+   "box_px": [
+    452,
+    642,
+    513,
+    670
+   ],
+   "depth_m": 4.981
+  },
+  "lining-left-2a-web#0": {
+   "part": "lining-left-2a-web",
+   "centre_px": [
+    448.9,
+    585.0
+   ],
+   "box_px": [
+    437,
+    538,
+    461,
+    633
+   ],
+   "depth_m": 4.808
+  },
+  "lining-left-2b-web#0": {
+   "part": "lining-left-2b-web",
+   "centre_px": [
+    433.3,
+    583.0
+   ],
+   "box_px": [
+    423,
+    538,
+    444,
+    630
+   ],
+   "depth_m": 4.961
+  },
+  "lining-left-3-web#0": {
+   "part": "lining-left-3-web",
+   "centre_px": [
+    441.5,
+    521.0
+   ],
+   "box_px": [
+    423,
+    507,
+    461,
+    535
+   ],
+   "depth_m": 4.88
+  },
+  "lining-right-2a-web#0": {
+   "part": "lining-right-2a-web",
+   "centre_px": [
+    525.5,
+    582.0
+   ],
+   "box_px": [
+    513,
+    537,
+    538,
+    628
+   ],
+   "depth_m": 5.043
+  },
+  "lining-right-2b-web#0": {
+   "part": "lining-right-2b-web",
+   "centre_px": [
+    508.3,
+    580.3
+   ],
+   "box_px": [
+    498,
+    537,
+    519,
+    625
+   ],
+   "depth_m": 5.196
+  },
+  "lining-right-3-web#0": {
+   "part": "lining-right-3-web",
+   "centre_px": [
+    517.4,
+    521.0
+   ],
+   "box_px": [
+    498,
+    508,
+    538,
+    534
+   ],
+   "depth_m": 5.114
+  },
+  "lining-top-3-web#0": {
+   "part": "lining-top-3-web",
+   "centre_px": [
+    482.0,
+    517.3
+   ],
+   "box_px": [
+    435,
+    507,
+    530,
+    527
+   ],
+   "depth_m": 4.981
+  },
+  "mark-back#0": {
+   "part": "mark-back",
+   "centre_px": [
+    461.4,
+    521.6
+   ],
+   "box_px": [
+    450,
+    518,
+    472,
+    525
+   ],
+   "depth_m": 5.179
+  },
+  "port-frame-left#0": {
+   "part": "port-frame-left",
+   "centre_px": [
+    468.5,
+    655.5
+   ],
+   "box_px": [
+    456,
+    641,
+    481,
+    670
+   ],
+   "depth_m": 4.752
+  },
+  "port-frame-right#0": {
+   "part": "port-frame-right",
+   "centre_px": [
+    526.3,
+    650.7
+   ],
+   "box_px": [
+    515,
+    637,
+    538,
+    665
+   ],
+   "depth_m": 4.927
+  },
+  "port-left#0": {
+   "part": "port-left",
+   "centre_px": [
+    457.9,
+    652.8
+   ],
+   "box_px": [
+    437,
+    637,
+    479,
+    669
+   ],
+   "depth_m": 4.848
+  },
+  "port-right#0": {
+   "part": "port-right",
+   "centre_px": [
+    515.0,
+    648.2
+   ],
+   "box_px": [
+    494,
+    633,
+    536,
+    664
+   ],
+   "depth_m": 5.023
+  },
+  "port-screws#0": {
+   "part": "port-screws",
+   "centre_px": [
+    497.5,
+    653.0
+   ],
+   "box_px": [
+    457,
+    638,
+    537,
+    669
+   ],
+   "depth_m": 4.843
+  },
+  "post-1#0": {
+   "part": "post-1",
+   "centre_px": [
+    466.4,
+    499.0
+   ],
+   "box_px": [
+    465,
+    492,
+    468,
+    506
+   ],
+   "depth_m": 4.754
+  },
+  "post-2#0": {
+   "part": "post-2",
+   "centre_px": [
+    526.9,
+    499.8
+   ],
+   "box_px": [
+    526,
+    493,
+    528,
+    506
+   ],
+   "depth_m": 4.937
+  },
+  "post-3#0": {
+   "part": "post-3",
+   "centre_px": [
+    460.9,
+    493.8
+   ],
+   "box_px": [
+    460,
+    481,
+    462,
+    507
+   ],
+   "depth_m": 5.101
+  },
+  "post-4#0": {
+   "part": "post-4",
+   "centre_px": [
+    473.7,
+    494.0
+   ],
+   "box_px": [
+    472,
+    481,
+    475,
+    507
+   ],
+   "depth_m": 5.141
+  },
+  "post-sleeves#0": {
+   "part": "post-sleeves",
+   "centre_px": [
+    481.9,
+    505.3
+   ],
+   "box_px": [
+    436,
+    503,
+    528,
+    507
+   ],
+   "depth_m": 4.983
+  },
+  "post-sockets#0": {
+   "part": "post-sockets",
+   "centre_px": [
+    481.9,
+    505.5
+   ],
+   "box_px": [
+    436,
+    503,
+    529,
+    508
+   ],
+   "depth_m": 4.983
+  },
+  "rating-plate-plate#0": {
+   "part": "rating-plate-plate",
+   "centre_px": [
+    479.3,
+    554.8
+   ],
+   "box_px": [
+    474,
+    551,
+    485,
+    559
+   ],
+   "depth_m": 5.236
+  },
+  "rating-plate-print#0": {
+   "part": "rating-plate-print",
+   "centre_px": [
+    479.3,
+    555.0
+   ],
+   "box_px": [
+    475,
+    552,
+    483,
+    558
+   ],
+   "depth_m": 5.237
+  },
+  "rating-plate-screws#0": {
+   "part": "rating-plate-screws",
+   "centre_px": [
+    479.2,
+    554.8
+   ],
+   "box_px": [
+    474,
+    554,
+    484,
+    555
+   ],
+   "depth_m": 5.238
+  },
+  "rib-back-1#0": {
+   "part": "rib-back-1",
+   "centre_px": [
+    444.9,
+    585.4
+   ],
+   "box_px": [
+    441,
+    513,
+    449,
+    659
+   ],
+   "depth_m": 5.07
+  },
+  "rib-back-2#0": {
+   "part": "rib-back-2",
+   "centre_px": [
+    486.2,
+    583.8
+   ],
+   "box_px": [
+    482,
+    513,
+    490,
+    655
+   ],
+   "depth_m": 5.2
+  },
+  "rib-bottom#0": {
+   "part": "rib-bottom",
+   "centre_px": [
+    481.6,
+    659.5
+   ],
+   "box_px": [
+    466,
+    650,
+    498,
+    669
+   ],
+   "depth_m": 4.985
+  },
+  "rib-left-1#0": {
+   "part": "rib-left-1",
+   "centre_px": [
+    441.2,
+    583.9
+   ],
+   "box_px": [
+    435,
+    538,
+    447,
+    630
+   ],
+   "depth_m": 4.892
+  },
+  "rib-right-1#0": {
+   "part": "rib-right-1",
+   "centre_px": [
+    515.5,
+    581.1
+   ],
+   "box_px": [
+    510,
+    537,
+    521,
+    625
+   ],
+   "depth_m": 5.122
+  },
+  "rib-top#0": {
+   "part": "rib-top",
+   "centre_px": [
+    482.1,
+    513.5
+   ],
+   "box_px": [
+    467,
+    507,
+    498,
+    519
+   ],
+   "depth_m": 4.98
+  },
+  "right#0": {
+   "part": "right",
+   "centre_px": [
+    522.9,
+    584.6
+   ],
+   "box_px": [
+    501,
+    504,
+    546,
+    670
+   ],
+   "depth_m": 5.132
+  },
+  "tie-rod-insert#0": {
+   "part": "tie-rod-insert",
+   "centre_px": [
+    473.7,
+    511.1
+   ],
+   "box_px": [
+    472,
+    510,
+    475,
+    512
+   ],
+   "depth_m": 5.141
+  },
+  "tie-rod-rod#0": {
+   "part": "tie-rod-rod",
+   "centre_px": [
+    473.7,
+    494.2
+   ],
+   "box_px": [
+    472,
+    477,
+    476,
+    512
+   ],
+   "depth_m": 5.141
+  },
+  "top#0": {
+   "part": "top",
+   "centre_px": [
+    480.4,
+    506.0
+   ],
+   "box_px": [
+    419,
+    503,
+    543,
+    509
+   ],
+   "depth_m": 4.997
+  },
+  "top-pad#0": {
+   "part": "top-pad",
+   "centre_px": [
+    467.3,
+    510.0
+   ],
+   "box_px": [
+    457,
+    508,
+    477,
+    512
+   ],
+   "depth_m": 5.121
+  },
+  "waveguide#0": {
+   "part": "waveguide",
+   "centre_px": [
+    480.9,
+    463.0
+   ],
+   "box_px": [
+    412,
+    423,
+    551,
+    498
+   ],
+   "depth_m": 4.991
+  },
+  "waveguide-cap#0": {
+   "part": "waveguide-cap",
+   "centre_px": [
+    462.6,
+    465.0
+   ],
+   "box_px": [
+    446,
+    446,
+    479,
+    483
+   ],
+   "depth_m": 5.166
+  },
+  "woofer-cap#0": {
+   "part": "woofer-cap",
+   "centre_px": [
+    492.0,
+    580.5
+   ],
+   "box_px": [
+    482,
+    570,
+    502,
+    591
+   ],
+   "depth_m": 4.891
+  },
+  "woofer-coil#0": {
+   "part": "woofer-coil",
+   "centre_px": [
+    488.7,
+    580.1
+   ],
+   "box_px": [
+    477,
+    569,
+    500,
+    591
+   ],
+   "depth_m": 4.921
+  },
+  "woofer-cone#0": {
+   "part": "woofer-cone",
+   "centre_px": [
+    494.2,
+    580.7
+   ],
+   "box_px": [
+    466,
+    552,
+    521,
+    611
+   ],
+   "depth_m": 4.872
+  },
+  "woofer-frame#0": {
+   "part": "woofer-frame",
+   "centre_px": [
+    490.3,
+    580.3
+   ],
+   "box_px": [
+    450,
+    542,
+    530,
+    621
+   ],
+   "depth_m": 4.906
+  },
+  "woofer-gasket#0": {
+   "part": "woofer-gasket",
+   "centre_px": [
+    497.3,
+    581.1
+   ],
+   "box_px": [
+    464,
+    543,
+    529,
+    621
+   ],
+   "depth_m": 4.845
+  },
+  "woofer-magnet#0": {
+   "part": "woofer-magnet",
+   "centre_px": [
+    484.8,
+    579.7
+   ],
+   "box_px": [
+    473,
+    568,
+    496,
+    592
+   ],
+   "depth_m": 4.956
+  },
+  "woofer-motor#0": {
+   "part": "woofer-motor",
+   "centre_px": [
+    484.8,
+    579.7
+   ],
+   "box_px": [
+    472,
+    567,
+    497,
+    592
+   ],
+   "depth_m": 4.956
+  },
+  "woofer-ring#0": {
+   "part": "woofer-ring",
+   "centre_px": [
+    498.6,
+    581.2
+   ],
+   "box_px": [
+    461,
+    539,
+    534,
+    626
+   ],
+   "depth_m": 4.833
+  },
+  "woofer-screws#0": {
+   "part": "woofer-screws",
+   "centre_px": [
+    498.0,
+    581.1
+   ],
+   "box_px": [
+    467,
+    546,
+    528,
+    617
+   ],
+   "depth_m": 4.839
+  },
+  "woofer-spider#0": {
+   "part": "woofer-spider",
+   "centre_px": [
+    488.0,
+    580.1
+   ],
+   "box_px": [
+    477,
+    567,
+    499,
+    593
+   ],
+   "depth_m": 4.927
+  },
+  "woofer-surround#0": {
+   "part": "woofer-surround",
+   "centre_px": [
+    497.4,
+    581.1
+   ],
+   "box_px": [
+    468,
+    547,
+    526,
+    616
+   ],
+   "depth_m": 4.843
+  },
+  "woofer-terminals#0": {
+   "part": "woofer-terminals",
+   "centre_px": [
+    491.6,
+    602.3
+   ],
+   "box_px": [
+    490,
+    602,
+    494,
+    603
+   ],
+   "depth_m": 4.894
+  }
+ },
+ "finish": {
+  "white_in": 240,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.1,
+   "bloom_px": 40,
+   "bloom_threshold": 0.8,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.25
+  },
+  "grain": [
+   2.5,
+   1.0
+  ],
+  "gain": 1.0
+ }
+}
