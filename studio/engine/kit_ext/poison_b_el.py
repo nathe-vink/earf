@@ -269,7 +269,8 @@ def amanita(bpy, name, p, kit):
     for bm in bms.values():
         for v in bm.verts:
             t = max(0.0, min(1.5, v.co.z / top)); v.co.x += lx * t * t; v.co.y += ly * t * t
-    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0), p.get('matte', False))
+    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0), p.get('matte', False),
+                         p.get('cap_ramp'), p.get('dull_to', '#4A2414'), p.get('fibrils', 0.0))
     obs = []
     for k, bm in bms.items():
         if len(bm.verts):
@@ -279,7 +280,7 @@ def amanita(bpy, name, p, kit):
     return obs
 
 
-def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
+def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False, cap_ramp=None, dull_to='#4A2414', fibrils=0.0):
     key = (sp,)
     out = {}
     # the cap: viscid (a wet, thin coat), red with orange toward the margin and blotchy, a little light through it
@@ -303,12 +304,28 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
     else:
         # olive-green to yellowish at the margin, with dark radial fibrils (`cap_ramp` [(position, hex)...] overrides:
         # Poison G pushes it toward the yellow-green of a fresh cap)
-        col = _ramp(nt, mix.outputs['Value'], p.get('cap_ramp') or [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'),
+        col = _ramp(nt, mix.outputs['Value'], cap_ramp or [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'),
                                                                     (1.2, '#A3A06A')])
         b.inputs['Subsurface Weight'].default_value = 0.08
+        if fibrils:                                       # the death cap's dark radial fibrils, streaking out from the centre
+            at = nt.nodes.new('ShaderNodeMath'); at.operation = 'ARCTAN2'
+            nt.links.new(sep.outputs['Y'], at.inputs[0]); nt.links.new(sep.outputs['X'], at.inputs[1])
+            cxyz = nt.nodes.new('ShaderNodeCombineXYZ')
+            th = nt.nodes.new('ShaderNodeMath'); th.operation = 'MULTIPLY'; th.inputs[1].default_value = 9.0
+            nt.links.new(at.outputs[0], th.inputs[0]); nt.links.new(th.outputs[0], cxyz.inputs['X'])
+            rr = nt.nodes.new('ShaderNodeMath'); rr.operation = 'MULTIPLY'; rr.inputs[1].default_value = 0.8
+            nt.links.new(dv.outputs['Value'], rr.inputs[0]); nt.links.new(rr.outputs[0], cxyz.inputs['Y'])
+            fn = nt.nodes.new('ShaderNodeTexNoise'); fn.inputs['Scale'].default_value = 7.0; fn.inputs['Detail'].default_value = 3.0
+            nt.links.new(cxyz.outputs['Vector'], fn.inputs['Vector'])
+            fm = nt.nodes.new('ShaderNodeMapRange'); fm.inputs['From Min'].default_value = 0.5; fm.inputs['From Max'].default_value = 0.72
+            fm.inputs['To Max'].default_value = fibrils
+            nt.links.new(fn.outputs['Fac'], fm.inputs['Value'])
+            fx = nt.nodes.new('ShaderNodeMix'); fx.data_type = 'RGBA'
+            nt.links.new(fm.outputs['Result'], fx.inputs['Factor']); nt.links.new(col, fx.inputs['A'])
+            fx.inputs['B'].default_value = (*_hex('#262A10'), 1); col = fx.outputs['Result']
     if dull:                                              # weathered: the red toward a brown, as an old cap goes
         dm = nt.nodes.new('ShaderNodeMix'); dm.data_type = 'RGBA'; dm.inputs['Factor'].default_value = dull
-        nt.links.new(col, dm.inputs['A']); dm.inputs['B'].default_value = (*_hex(p.get('dull_to', '#4A2414')), 1)
+        nt.links.new(col, dm.inputs['A']); dm.inputs['B'].default_value = (*_hex(dull_to), 1)
         col = dm.outputs['Result']
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)

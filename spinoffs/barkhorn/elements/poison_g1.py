@@ -15,7 +15,7 @@ import poison as A
 import poison_f1b as F
 
 # a fresh death cap: olive at the centre to yellow-green at the margin, greener than the kit's bronze-olive default
-DEATHCAP = [(0.1, '#2E3F14'), (0.45, '#4E6424'), (0.85, '#76883A'), (1.2, '#A6B06A')]
+DEATHCAP = [(0.1, '#34401A'), (0.45, '#55642C'), (0.85, '#7A8746'), (1.2, '#A8AD74')]
 
 
 def shot():
@@ -29,6 +29,9 @@ def shot():
             p['cap'] = min(p['cap'], 0.07)                   # F1b sized its fly agarics up; a big death cap is 14 cm across
             p['cap_ramp'] = DEATHCAP
             p['dull_to'] = '#3A3A1C'                         # weathering toward a dark olive-brown, not the red's brown
+            p['fibrils'] = 0.55                              # the dark radial fibrils that mark a death cap
+            if p.get('age') == 'old':                        # a flat, upturned old cap is the fly agaric's; a death cap opens plane
+                p['age'] = 'plane'
         elif p.get('fn') == 'arum':
             p['unripe'] = 1.0
     s['title'] = 'barkhorn, Poison G1, the wood\'s poisons green'
