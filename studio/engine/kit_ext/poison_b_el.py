@@ -155,7 +155,8 @@ def amanita(bpy, name, p, kit):
     hem uneven, not a collar); `sac` (the volva a loose membranous sac, torn into lobes; on a button, the egg it
     breaks out of); `tilt` [deg about x, deg about y] (the cap tilted on its stem); `bite` [deg, depth m] (a slug's
     notch out of the margin, the white flesh in it); `rest` (the cap's colour placed by its own axis, not the leaned
-    stem's, and its underside the gills' white); `dirt` (soil splashed on the cap, 0-1); `rough`, `coat` (its finish)."""
+    stem's, and its underside the gills' white); `dirt` (soil splashed on the cap, 0-1); `rough`, `coat` (its finish);
+    `shade` (0-1, G3: the stem and skirt less white, soil splashed higher, darker toward the cap that shades them)."""
     rnd = random.Random(p.get('seed', 1))
     sp = p.get('species', 'muscaria')
     R = p.get('cap', 0.06); age = p.get('age', 'convex'); hr, under, up, open_ = _AGES[age]
@@ -334,7 +335,7 @@ def amanita(bpy, name, p, kit):
             t = max(0.0, min(1.5, v.co.z / top)); v.co.x += lx * t * t; v.co.y += ly * t * t
     mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0), p.get('matte', False),
                          p.get('cap_ramp'), p.get('dull_to', '#4A2414'), p.get('fibrils', 0.0), p.get('rest', False),
-                         p.get('bite'), p.get('dirt', 0.0), p.get('rough'), p.get('coat'))
+                         p.get('bite'), p.get('dirt', 0.0), p.get('rough'), p.get('coat'), p.get('shade', 0.0))
     obs = []
     for k, bm in bms.items():
         if len(bm.verts):
@@ -345,7 +346,7 @@ def amanita(bpy, name, p, kit):
 
 
 def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False, cap_ramp=None, dull_to='#4A2414', fibrils=0.0,
-                  rest=False, bite=None, dirt=0.0, rough=None, coat=None):
+                  rest=False, bite=None, dirt=0.0, rough=None, coat=None, shade=0.0):
     key = (sp,)
     out = {}
     # the cap: viscid (a wet, thin coat), red with orange toward the margin and blotchy, a little light through it
@@ -485,7 +486,25 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False, cap
             cols = [(0.05, '#3E3222'), (0.28, '#7E705A'), (0.5, '#AA9E84'), (1.0, '#BFB59C')]
         if k == 'volva' and sp != 'muscaria':
             cols = [(0.0, '#7A6A4E'), (0.25, '#CFC6AE'), (1.0, '#EDE8DA')]
-        nt.links.new(_ramp(nt, mx.outputs['Value'], cols), b.inputs['Base Color'])
+        if shade and k != 'volva':                        # Poison G3: soil splashed higher up the stem, and less white
+            cols = [(0.05, '#4A3D2A'), (0.3, '#968A72'), (0.5, '#C8BFA8'), (1.0, '#D8D0BC')]
+        col_ = _ramp(nt, mx.outputs['Value'], cols)
+        if shade and k != 'volva':
+            # the cap's shadow on the stem's top and the skirt (G2's critics: "the stems as bright just under the cap
+            # as at the base"): darker toward the cap, the soft light from the canopy blocked there
+            sh = nt.nodes.new('ShaderNodeMapRange'); sh.interpolation_type = 'SMOOTHSTEP'
+            sh.inputs['From Min'].default_value = 0.55; sh.inputs['From Max'].default_value = 1.0
+            sh.inputs['To Min'].default_value = 1.0; sh.inputs['To Max'].default_value = 1.0 - 0.55 * shade
+            nt.links.new(hz.outputs['Value'], sh.inputs['Value'])
+            shm = nt.nodes.new('ShaderNodeMix'); shm.data_type = 'RGBA'; shm.blend_type = 'MULTIPLY'
+            shm.inputs['Factor'].default_value = 1.0
+            nt.links.new(col_, shm.inputs['A'])
+            cc = nt.nodes.new('ShaderNodeCombineColor')
+            for ch in ('Red', 'Green', 'Blue'):
+                nt.links.new(sh.outputs['Result'], cc.inputs[ch])
+            nt.links.new(cc.outputs['Color'], shm.inputs['B'])
+            col_ = shm.outputs['Result']
+        nt.links.new(col_, b.inputs['Base Color'])
         b.inputs['Roughness'].default_value = 0.72; b.inputs['Subsurface Weight'].default_value = 0.15
         b.inputs['Subsurface Radius'].default_value = (0.003, 0.003, 0.002)
         fib = _noise(nt, 1.0 / (R * 0.04), 6.0, stretch=(14.0, 14.0, 0.5))
