@@ -385,3 +385,20 @@ The owner chose **"Smoke: A, salt flat"** (E6 p3; its finals go to helpers from 
 - **Realism:** 4.0 and 4.5. The rubble reads as "crumpled paper or styrofoam", pale where the foreground fire lights it.
 - **Duel against E6 p3**, four judges, each order twice: all four prefer E6, scoring E6 6.0, 6.0, 5.5, 5.5 against E8's 4.0, 4.0, 4.0, 4.0. Means: E6 5.75, E8 4.0.
 - **Stop rule:** the read missed again, so one higher three-quarter frame follows (p3), and then E8 stops.
+
+**E8 p3** (the stop-rule frame): a high three-quarter view from above the bow wave, looking down the furrow to the wrecks, with darker debris and the foreground key on the speaker only.
+- **Read:** "an upright, box-shaped speaker-like object… sits in a broken trench cut along the centre of a wet, cracked multi-storey car-park deck at dusk… a burning car and a wrecked car behind it". It names the trench but not the slide. No figure.
+- **Realism:** 3.5 and 3.5. The trench reads as "a clean, flat-bottomed rectangular cutout… a boolean cut with scattered props", and the debris is evenly spaced, not thrown.
+- **Duel against E6 p3**, four judges, each order twice: all four prefer E6. E6 scores 6.0, 5.5, 6.0, 5.0 against E8's 4.0, 4.0, 4.0, 4.0. Means: E6 5.625, E8 4.0.
+
+**E8 stops here, per the stop rule.**
+
+| | Read names the slide | Realism | Duel mean, E8 v E6 p3 | Judges preferring E8 |
+|---|---|---|---|---|
+| p0 | no ("a box in a cracked trench") | 4.0 / 4.0 | 4.75 v 5.25 | 2 of 4 |
+| **p1** | no ("rubble-strewn rooftop") | **4.5 / 4.5** | **5.125 v 5.75** | **1 of 4** |
+| p2 | no | 4.0 / 4.5 | 4.0 v 5.75 | 0 of 4 |
+| p3 | no ("a broken trench cut along…") | 3.5 / 3.5 | 4.0 v 5.625 | 0 of 4 |
+
+- **The best E8 is p1** (element-smoke-e8-impact-p1.jpg), with the highest realism and the closest duel. p0 split by position.
+- **The constant** across every judge: the disaster story buries the product, and the trench and rubble read as CG.
