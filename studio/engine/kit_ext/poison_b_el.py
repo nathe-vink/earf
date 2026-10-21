@@ -9,6 +9,7 @@ scale in physically plausible materials, for a redwood forest photographed on lo
   low on the flank, a rust tail tip, amber eyes with vertical slits, a broad triangular head;
 - dartfrog: a green-and-black dyeing dart frog (Dendrobates auratus) sitting, its skin wet;
 - foxglove and nightshade: a spire of tubular bells, speckled in the throat; a sprig of glossy black berries.
+- bones: a deer's skull and jaw lying on the floor a season or two after it died (Smithsonian scans, CC0), weathered.
 Every piece is placed by `position` and `rotate` (degrees) and `scale` like any kit piece.
 """
 import math, random
@@ -958,3 +959,149 @@ def sorrel(bpy, name, p, kit):
         if o.type == 'MESH' and any(k in o.name for k in p['on']):
             md = o.modifiers.new(name, 'NODES'); md.node_group = pe._strew_group(bpy, name, p, col, o.location)
     return []
+
+
+# --- bones -------------------------------------------------------------------------------------------------------
+# A white-tailed deer's skull and jaw: the Smithsonian's scans of a cast in the NMNH's education collection
+# (edanmdm:nmnheducation_15006160, released CC0), the cranium 27 cm long and the jaw 24; fetched once into the cache
+SI = 'https://3d-api.si.edu/content/document/3d_package:fcc69841-d8be-4103-be0f-143e374c9ce6/resources/'
+BONES = {'skull': 'USNM_PAL_Deer_skull-100k-2048_std.glb', 'jaw': 'USNM_PAL_Deer_mandible-100k-2048_std.glb'}
+
+
+def bones(bpy, name, p, kit):
+    """A deer's bones on the forest floor a season or two after it died: for each of `items` ({'part': 'skull' or
+    'jaw', 'position', 'rotate' (degrees), 'scale', 'sink' (m)}) the scan, its snout to -y and its crown up before
+    `rotate`, set down so its lowest point is `sink` below `position`'s height. Weathered (`_bone_mat`): bone gone
+    from white to a dull ivory, stained tan, darker in its pits (the scan's own occlusion), green with algae where it
+    faces the sky, a few cushions of moss on top, and soil-dark where it sinks into the litter."""
+    import os
+    import assets
+    out = []
+    for i, it in enumerate(p['items']):
+        f = BONES[it['part']]
+        path = os.path.join(assets.CACHE, 'si', f)
+        if not os.path.exists(path):
+            assets._get(SI + f, path)
+        before = set(bpy.data.objects)
+        bpy.ops.import_scene.gltf(filepath=path)
+        new = [o for o in bpy.data.objects if o not in before]
+        bpy.context.view_layer.update()
+        ob = next(o for o in new if o.type == 'MESH')
+        src = ob.data.materials[0] if ob.data.materials else None
+        ob.data.transform(ob.matrix_world); ob.parent = None; ob.matrix_world = Matrix.Identity(4)
+        for o in new:
+            if o is not ob:
+                bpy.data.objects.remove(o, do_unlink=True)
+        ob.name = f'{name}-{it["part"]}{i}'
+        ob.data.materials.clear(); ob.data.materials.append(_bone_mat(bpy, f'{name}-{i}', src, p, it))
+        if src is not None and src.users == 0:
+            bpy.data.materials.remove(src)
+        for f_ in ob.data.polygons:
+            f_.use_smooth = True
+        x, y, z = it['position']
+        ob.rotation_mode = 'XYZ'                                     # the glTF importer leaves it in quaternions
+        ob.rotation_euler = [math.radians(a) for a in it.get('rotate', [0, 0, 0])]
+        s = it.get('scale', 1.0); ob.scale = (s, s, s)
+        ob.location = (x, y, 0.0)
+        bpy.context.view_layer.update()
+        low = min((ob.matrix_world @ v.co).z for v in ob.data.vertices)
+        ob.location.z = z - low - it.get('sink', 0.02)
+        out.append(ob)
+    return out
+
+
+def _bone_mat(bpy, name, src, p, it):
+    """Weathered bone over the scan's own normal and occlusion maps (taken from its imported material `src`)."""
+    m, nt, b = _node_mat(bpy, name); L = nt.links.new
+    nmap = orm = None
+    if src is not None and src.use_nodes:
+        for n in src.node_tree.nodes:
+            if n.type == 'TEX_IMAGE' and n.image:
+                to = [l.to_node.type for o in n.outputs for l in o.links]
+                if 'NORMAL_MAP' in to:
+                    nmap = n.image
+                elif 'SEPARATE_COLOR' in to or 'SEPRGB' in to:
+                    orm = n.image
+    tc = nt.nodes.new('ShaderNodeTexCoord'); geo = nt.nodes.new('ShaderNodeNewGeometry')
+    uv = tc.outputs['UV']
+
+    def mrange(v, a, c, lo=0.0, hi=1.0, smooth=True):
+        r = nt.nodes.new('ShaderNodeMapRange'); r.clamp = True
+        if smooth:
+            r.interpolation_type = 'SMOOTHSTEP'
+        r.inputs['From Min'].default_value = a; r.inputs['From Max'].default_value = c
+        r.inputs['To Min'].default_value = lo; r.inputs['To Max'].default_value = hi
+        L(v, r.inputs['Value']); return r.outputs['Result']
+
+    def mul(a, c):
+        k = nt.nodes.new('ShaderNodeMath'); k.operation = 'MULTIPLY'
+        for j, v in enumerate((a, c)):
+            if isinstance(v, (int, float)):
+                k.inputs[j].default_value = v
+            else:
+                L(v, k.inputs[j])
+        return k.outputs['Value']
+
+    def mix(fac, a, c):
+        k = nt.nodes.new('ShaderNodeMix'); k.data_type = 'RGBA'
+        L(fac, k.inputs['Factor'])
+        for sock, v in ((k.inputs[6], a), (k.inputs[7], c)):
+            if isinstance(v, str):
+                sock.default_value = (*_hex(v), 1)
+            else:
+                L(v, sock)
+        return k.outputs[2]
+
+    # the bone: ivory, mottled tan and grey where water stood and dried (cm-scale), finer grain within it
+    n1 = _noise(nt, 1.0 / 0.035, 5.0, rough=0.62)
+    col = _ramp(nt, n1.outputs['Fac'], p.get('bone', [(0.32, '#C9BFA5'), (0.5, '#B5A88A'), (0.62, '#A39679'),
+                                                     (0.75, '#8E8670')]))
+    # tannin run down its sides from the litter and the rain: streaks long in z, a darker tan
+    n5 = _noise(nt, 1.0 / 0.02, 3.0, stretch=(1.0, 1.0, 0.22))
+    col = mix(mul(mrange(n5.outputs['Fac'], 0.5, 0.7), p.get('streaks', 0.55)), col, '#7C6B4D')
+    # darker in its pits and seams: the scan's ambient occlusion
+    if orm is not None:
+        ti = nt.nodes.new('ShaderNodeTexImage'); ti.image = orm; orm.colorspace_settings.name = 'Non-Color'
+        L(uv, ti.inputs['Vector'])
+        sp = nt.nodes.new('ShaderNodeSeparateColor'); L(ti.outputs['Color'], sp.inputs['Color'])
+        ao = mrange(sp.outputs['Red'], 0.15, 1.0, p.get('pits', 0.25), 1.0, smooth=False)
+        k = nt.nodes.new('ShaderNodeMix'); k.data_type = 'RGBA'; k.blend_type = 'MULTIPLY'
+        k.inputs['Factor'].default_value = 1.0; L(col, k.inputs[6]); L(ao, k.inputs[7]); col = k.outputs[2]
+    # green with algae where it faces the sky (world normal), in patches
+    up = nt.nodes.new('ShaderNodeSeparateXYZ'); L(geo.outputs['Normal'], up.inputs['Vector'])
+    n2 = _noise(nt, 1.0 / 0.05, 3.0)
+    algae = mul(mrange(up.outputs['Z'], 0.0, 0.8), mrange(n2.outputs['Fac'], 0.38, 0.58))
+    col = mix(mul(algae, p.get('algae', 0.75)), col, '#646B40')
+    # a few cushions of moss on top
+    n3 = _noise(nt, 1.0 / 0.03, 4.0, rough=0.7)
+    moss = mul(mrange(up.outputs['Z'], 0.45, 0.85), mrange(n3.outputs['Fac'], 0.6, 0.66))
+    moss = mul(moss, p.get('moss', 1.0))
+    mc = _ramp(nt, n1.outputs['Fac'], [(0.35, '#3E5420'), (0.65, '#5A6E2A')])
+    col = mix(moss, col, mc)
+    # soil-dark where it sinks into the litter: the last few cm above the ground (world height)
+    wz = nt.nodes.new('ShaderNodeSeparateXYZ'); L(geo.outputs['Position'], wz.inputs['Vector'])
+    g0 = p.get('ground', 0.0); soil = mrange(wz.outputs['Z'], g0 + p.get('soil', 0.035), g0 - 0.01)
+    col = mix(soil, col, '#3B2E20')
+    L(col, b.inputs['Base Color'])
+    # rough, matt bone; moss and soil rougher still
+    rr = nt.nodes.new('ShaderNodeMath'); rr.operation = 'MAXIMUM'
+    L(mrange(n1.outputs['Fac'], 0.3, 0.7, 0.55, 0.72), rr.inputs[0]); L(mrange(moss, 0.0, 1.0, 0.0, 0.95), rr.inputs[1])
+    r2 = nt.nodes.new('ShaderNodeMath'); r2.operation = 'MAXIMUM'
+    L(rr.outputs['Value'], r2.inputs[0]); L(mrange(soil, 0.0, 1.0, 0.0, 0.9), r2.inputs[1])
+    L(r2.outputs['Value'], b.inputs['Roughness'])
+    b.inputs['Subsurface Weight'].default_value = 0.06
+    b.inputs['Subsurface Radius'].default_value = (1.0, 0.6, 0.35)
+    if 'Subsurface Scale' in b.inputs:
+        b.inputs['Subsurface Scale'].default_value = 0.003
+    # the scan's normals, then pitting and the moss's pile on top
+    prev = None
+    if nmap is not None:
+        tn = nt.nodes.new('ShaderNodeTexImage'); tn.image = nmap; nmap.colorspace_settings.name = 'Non-Color'
+        L(uv, tn.inputs['Vector'])
+        nm = nt.nodes.new('ShaderNodeNormalMap'); nm.inputs['Strength'].default_value = 1.0
+        L(tn.outputs['Color'], nm.inputs['Color']); prev = nm.outputs['Normal']
+    n4 = _noise(nt, 1.0 / 0.0012, 3.0)
+    h = nt.nodes.new('ShaderNodeMath'); h.operation = 'ADD'
+    L(n4.outputs['Fac'], h.inputs[0]); L(mul(moss, 1.5), h.inputs[1])
+    _bump(nt, b, h.outputs['Value'], 0.25, 0.0006, prev)
+    return m
