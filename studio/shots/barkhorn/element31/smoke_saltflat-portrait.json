@@ -1,0 +1,693 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-black",
+  "instances": [
+   {
+    "flavour": "cloud-black",
+    "position": [
+     0.0,
+     0.0,
+     -0.01
+    ],
+    "rotate_z": 18.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ground",
+    "texture": "dry_ground_01",
+    "size": [
+     40.0,
+     40.0
+    ],
+    "position": [
+     0.0,
+     14.0,
+     0.0
+    ],
+    "displace": 0.0,
+    "relief": 0.05,
+    "res": "2k",
+    "tint": "#F0EEEA",
+    "tint_mix": 0.95
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "ribbon",
+    "strands": [
+     {
+      "points": [
+       [
+        1.75,
+        1.35,
+        0.06
+       ],
+       [
+        1.7372,
+        1.3485,
+        0.0607
+       ],
+       [
+        1.7011,
+        1.3456,
+        0.0615
+       ],
+       [
+        1.6456,
+        1.3414,
+        0.0622
+       ],
+       [
+        1.5746,
+        1.3363,
+        0.0705
+       ],
+       [
+        1.492,
+        1.3305,
+        0.0801
+       ],
+       [
+        1.402,
+        1.3243,
+        0.0905
+       ],
+       [
+        1.3084,
+        1.318,
+        0.1014
+       ],
+       [
+        1.2152,
+        1.3118,
+        0.1122
+       ],
+       [
+        1.1265,
+        1.3061,
+        0.1224
+       ],
+       [
+        1.0462,
+        1.301,
+        0.1317
+       ],
+       [
+        0.9784,
+        1.297,
+        0.1396
+       ],
+       [
+        0.927,
+        1.2941,
+        0.1456
+       ],
+       [
+        0.8961,
+        1.2927,
+        0.1491
+       ],
+       [
+        0.8878,
+        1.2928,
+        0.1502
+       ],
+       [
+        0.8659,
+        1.2893,
+        0.1547
+       ],
+       [
+        0.8184,
+        1.281,
+        0.1643
+       ],
+       [
+        0.7502,
+        1.2686,
+        0.1782
+       ],
+       [
+        0.6656,
+        1.2532,
+        0.1955
+       ],
+       [
+        0.5694,
+        1.2357,
+        0.2152
+       ],
+       [
+        0.4661,
+        1.2168,
+        0.2364
+       ],
+       [
+        0.3603,
+        1.1976,
+        0.2582
+       ],
+       [
+        0.2565,
+        1.1788,
+        0.2796
+       ],
+       [
+        0.1591,
+        1.1613,
+        0.2998
+       ],
+       [
+        0.0728,
+        1.1461,
+        0.3177
+       ],
+       [
+        0.0021,
+        1.134,
+        0.3326
+       ],
+       [
+        -0.0487,
+        1.1257,
+        0.3434
+       ],
+       [
+        -0.0749,
+        1.1223,
+        0.3492
+       ],
+       [
+        -0.0798,
+        1.1225,
+        0.3533
+       ],
+       [
+        -0.1046,
+        1.1154,
+        0.3779
+       ],
+       [
+        -0.1516,
+        1.1008,
+        0.4223
+       ],
+       [
+        -0.2156,
+        1.0803,
+        0.4816
+       ],
+       [
+        -0.2912,
+        1.0558,
+        0.5508
+       ],
+       [
+        -0.373,
+        1.029,
+        0.625
+       ],
+       [
+        -0.4557,
+        1.0016,
+        0.6992
+       ],
+       [
+        -0.5338,
+        0.9755,
+        0.7684
+       ],
+       [
+        -0.6019,
+        0.9525,
+        0.8277
+       ],
+       [
+        -0.6546,
+        0.9343,
+        0.8721
+       ],
+       [
+        -0.6862,
+        0.9227,
+        0.8967
+       ],
+       [
+        -0.6973,
+        0.9174,
+        0.9074
+       ],
+       [
+        -0.7185,
+        0.9061,
+        0.961
+       ],
+       [
+        -0.7511,
+        0.8887,
+        1.0539
+       ],
+       [
+        -0.7907,
+        0.8675,
+        1.1711
+       ],
+       [
+        -0.833,
+        0.8446,
+        1.2976
+       ],
+       [
+        -0.8734,
+        0.8223,
+        1.4185
+       ],
+       [
+        -0.9075,
+        0.8028,
+        1.5189
+       ],
+       [
+        -0.9308,
+        0.7882,
+        1.5837
+       ],
+       [
+        -0.9391,
+        0.7806,
+        1.6027
+       ],
+       [
+        -0.9363,
+        0.7754,
+        1.6619
+       ],
+       [
+        -0.9262,
+        0.7704,
+        1.7826
+       ],
+       [
+        -0.9109,
+        0.7657,
+        1.9433
+       ],
+       [
+        -0.8926,
+        0.7615,
+        2.1227
+       ],
+       [
+        -0.8732,
+        0.7577,
+        2.2995
+       ],
+       [
+        -0.855,
+        0.7545,
+        2.4522
+       ],
+       [
+        -0.84,
+        0.752,
+        2.5595
+       ],
+       [
+        -0.8306,
+        0.7502,
+        2.6
+       ]
+      ],
+      "radii": [
+       0.07,
+       0.0768,
+       0.0827,
+       0.0882,
+       0.0936,
+       0.0989,
+       0.104,
+       0.1091,
+       0.1141,
+       0.119,
+       0.1239,
+       0.1287,
+       0.1335,
+       0.1383,
+       0.143,
+       0.1476,
+       0.1523,
+       0.1569,
+       0.1615,
+       0.166,
+       0.1706,
+       0.1751,
+       0.1796,
+       0.1841,
+       0.1885,
+       0.193,
+       0.1974,
+       0.2018,
+       0.2062,
+       0.2105,
+       0.2149,
+       0.2192,
+       0.2235,
+       0.2279,
+       0.2367,
+       0.2455,
+       0.2544,
+       0.2632,
+       0.272,
+       0.2807,
+       0.2895,
+       0.2983,
+       0.307,
+       0.3158,
+       0.3245,
+       0.3332,
+       0.342,
+       0.3507,
+       0.3594,
+       0.368,
+       0.3767,
+       0.3854,
+       0.3941,
+       0.4027,
+       0.4114,
+       0.42
+      ],
+      "density": 55.0
+     }
+    ],
+    "layers": 6,
+    "scale": 0.07,
+    "cut": 0.38,
+    "soft": 0.3,
+    "rise": 1.4,
+    "laminar": 0.0,
+    "laminar_blend": 0.05,
+    "fade": [
+     2.2,
+     2.9
+    ],
+    "color": "#0C0C0C",
+    "anisotropy": 0.3,
+    "detail": 7.0,
+    "distortion": 0.8,
+    "seed": 9,
+    "wobble": 0.35,
+    "wobble_freq": 6.0,
+    "break_scale": 0.5,
+    "break_cut": 0.35,
+    "break_floor": 0.35,
+    "grid": true,
+    "voxel": 0.02
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.033,
+    "height": 0.15,
+    "position": [
+     1.9,
+     1.4,
+     0.033
+    ],
+    "rotate": [
+     0.0,
+     -90.0,
+     20.0
+    ],
+    "material": "clay",
+    "color": "#151515",
+    "roughness": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.034,
+    "height": 0.012,
+    "position": [
+     1.9049999999999998,
+     1.402,
+     0.033
+    ],
+    "rotate": [
+     0.0,
+     -90.0,
+     20.0
+    ],
+    "material": "foil",
+    "color": "#5A5A5A",
+    "roughness": 0.4
+   }
+  ]
+ },
+ "lights": {
+  "skyfill": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 2.0,
+   "color": "#DCE2EA",
+   "orbit": {
+    "azimuth_deg": -20,
+    "elevation_deg": 5,
+    "distance_m": 2.4
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*",
+    "lining-*",
+    "woofer-*",
+    "amp-*",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "port-*",
+    "hf-*",
+    "feet-*",
+    "tie-rod-*",
+    "top-pad",
+    "mark-back",
+    "back-*",
+    "cap-o-ring",
+    "lead-*",
+    "cable-glands",
+    "rating-plate"
+   ]
+  },
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    2.4,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 6.0,
+   "color": "#E6E2DA",
+   "orbit": {
+    "azimuth_deg": -25,
+    "elevation_deg": 12,
+    "distance_m": 2.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*",
+    "lining-*",
+    "woofer-*",
+    "amp-*",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "port-*",
+    "hf-*",
+    "feet-*",
+    "tie-rod-*",
+    "top-pad",
+    "mark-back",
+    "back-*",
+    "cap-o-ring",
+    "lead-*",
+    "cable-glands",
+    "rating-plate"
+   ]
+  },
+  "kicker": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 22.0,
+   "color": "#FFE6CC",
+   "orbit": {
+    "azimuth_deg": -150,
+    "elevation_deg": 22,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*"
+   ]
+  },
+  "kicker_r": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 16.0,
+   "color": "#FFE6CC",
+   "orbit": {
+    "azimuth_deg": 150,
+    "elevation_deg": 14,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*"
+   ]
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.3,
+  "look": "AgX - Base Contrast"
+ },
+ "title": "barkhorn, Smoke, black smoke on a salt pan (4:5)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -1.5733,
+   -4.3226,
+   0.8
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.85
+  ],
+  "lens_mm": 65,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   -0.21,
+   0.85
+  ],
+  "shift_x": 0.0,
+  "shift_y": 0.05
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "aarfontein_pan",
+  "rotation_deg": 124.0,
+  "strength": 1.0,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": -70.3,
+  "elevation_deg": 14.0,
+  "irradiance": 9.0,
+  "angle_deg": 0.53,
+  "color": "#FEC163"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.05,
+  "clarity": 0.03,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": -0.9,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.15
+  }
+ }
+}

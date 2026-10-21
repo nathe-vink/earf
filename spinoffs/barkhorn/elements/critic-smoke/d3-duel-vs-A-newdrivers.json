@@ -1,0 +1,6 @@
+{"setup": "720 px, both downscaled (D3 k6 960x640 512 spp; A final 595c55b 2400x1600). Two fresh judges, order swapped.",
+ "judge1": {"A_is": "D3", "A": 4.5, "B": 5.8, "prefer": "B",
+   "notes": ["plume and orange embers read as a forest fire", "fern overlaps the cabinet's lower-left corner, base hidden", "D3 cabinet darker and hazier, ports dissolve", "D3 ground cluttered", "ferns add place and depth (favours D3)"]},
+ "judge2": {"A_is": "A", "A": 5.5, "B": 4.0, "prefer": "A",
+   "notes": ["small orange fire and smoke column read as a forest fire", "fern hides the base's lower-left corner", "D3 cabinet darker, muddier, less edge separation", "D3 shafts and fog depth more cinematic (favours D3)", "ferns and twigs give texture and scale (favours D3)"]},
+ "mean": {"D3": 4.25, "A": 5.65}, "gap": 1.4, "gate": "within 0.5: FAIL"}

@@ -150,3 +150,192 @@ numbers (R x 0.84, B x 1.25, a 0.003 toe, a 0.7-stop dodge). The speaker's mask 
 --set set.kind=none --set finish.enabled=false`, so nothing stands in front of it. The cabinet lands where it did:
 mean luma 55.5 against 55, the ground below 37 against 38, grey-brown (62/54/51). The joins show no line at 3x, and
 the row-to-row grain sits at its neighbours' at every join.
+
+## Round C (the owner, 2026-10-18 17:30)
+
+The owner, verbatim: "Smoke's still looks bad. Doesn't look like a smokey environment and the speaker is too stark and
+crisp relative to the environment."
+
+The place stays a pine wood at dawn, now with a **smouldering burn pile** in frame, 3.6 m right and 5 m behind the
+speaker (`burnpile` in `kit_ext/smoke_el.py`: charred logs, ember chips, an ember light). Its smoke fills the wood:
+- a plume of seven noise cells that widen and drift left as they rise, with a cool fill on the plume alone so it reads
+  pale, not as a dark column;
+- a drifting layer at 2 to 5 m;
+- low wisps between the camera and the speaker;
+- a uniform haze through the whole scene, the camera inside it, so the smoke lies between the lens and the speaker and
+  lifts its blacks.
+
+Clarity and sharpening are off, so the speaker is no crisper than the set.
+
+| Pass | Image | Score | Top changes | What I did |
+|---|---|---|---|---|
+| C1 | c-p1 | 5.0 | All one sepia-orange (the smoke read as dust); the speaker's body as dark as the ground (31 against 29); the fire a placeholder of logs and dots; flat tonal range (p99 156); a muddy ground; waxy trunks | **Grade.** A cool grey haze (#C4CAD2), a paler sun (#FFCC9A, 40) and the sky at 0.35, so shadowed smoke goes blue-grey and the shafts stay warm. **Fire.** A 250 W ember light, plus a 150 W glow up from under the logs; the plume denser (5.0) with its fill at 8. **Speaker.** The sky fill to 4, the bounce to 14, the left kicker to 55, and an orange (#FF8A40) rim of 45 from the pile's side. **Exposure and contrast.** Exposure +0.3, contrast 0.10. **Not done.** The camera at 0.55 m: it is below the brief's eye level. |
+| C2 | c-p2 | 5.0 | The plume read as a dark trunk; CG logs and sprite embers; the speaker flat and slightly cool; no fire rim; shafts not reading as rays; flat tones; the bottom fifth dead | **Plume.** Thinner (1.8), front-lit by its fill from the camera's side (22). **Fire.** A grey ash bed. **Speaker.** A warm sky fill (2.0, #B8B4AE); the left kicker 95 and lower; the fire rim 120 at log height. **Grade.** Sky 0.7, a cooler and thinner haze (0.012, #BCC4CE). **Sun.** 75 at elevation 18. **Smoke.** The drifting layer to 0.5. **Finish.** Contrast 0.15, vignette 0.18. **Camera.** 6.2 m at f/2.8 (height kept at 0.7 m, the brief's eye level). |
+| C3 | c-p3 | 5.0 | The haze bleaching the top half into a flat cream; no plume structure (reads as fog); the fire a salmon cast on blocky logs; the speaker warm brown, not smoked grey-black; blotches on the horn; smooth trunks; a gravel-like floor | Stopped: C1, C2 and C3 all scored 5.0, so two passes in a row gained under 0.5. A blind duel between p2 and p3 picks the finals' rig. |
+
+**Round C's duel.** p2 (A) against p3 (B), blind: p3 won, 5.5 to 5.0. The judge preferred p3's larger, better-lit
+cabinet (its woofer, panels and ports legible), its warm edges and its raking light on the ground. It preferred p2's
+darker, moodier trunks and its clearer fire. Both frames' horn showed blotchy denoiser smear at 128 samples. The finals
+use p3's rig.
+| C4 | c-p4 | 5.0 | A milky peach wash; no readable plume; cone flames and dot embers; the speaker warm brown with copper outlines; smooth trunks; a hard shaft stripe on the ground | The coordinator's focused pass (c-p4) had made the plume a leaning column with two-scale wisps (`detail_weight` in `woodsmoke`), moved the pile into the bright gap, added flames and hotter embers, and a cool fill. From C4 I took the quick fixes: the trunk smoke to 0.04 and the haze to 0.003, so the plume is the main mass of smoke; the plume denser (12 falling by 0.7); no cone flames (a smouldering pile); the warm rims calmer (kicker 30, fire rim 50); the cool fill 6. A 32-sample check (g1) shows the plume's grey billows and a smoked-black cabinet. **Finals use this rig, on the rebuilt model with main's drivers (01267eb).** |
+
+## Round D (the owner, 2026-10-19: "the speaker appears to be floating ... there's no smoke in the background")
+
+Built on round C's rig (8d2526e to the d-p7 head). Read tests, a fresh judge at site size each:
+
+| Proof | Stands? | Smoke? | What changed |
+|---|---|---|---|
+| d-p0 | floats | smoke | Duff drifts on four faces, a fern over the front corner, roots, a stump, branches; the plume self-shaded and greyer, its fill off |
+| d-p1 | floats | smoke | Taller, darker drifts; a damp contact patch; feet sunk 45 mm |
+| d-p2 | floats | smoke | A sun shaft through a canopy gap onto the speaker (its own long shadow) |
+| d-p3 | **stands** | smoke | The camera up to 1.1 m at f/4: at 0.7 m the contact line and shadow were foreshortened away |
+| d-p7 | floats | smoke | No uniform haze, thinner wisps in front, fills halved (depth) |
+
+A 512-sample full-size crop (d-p6) proved the grime seen at 128 samples was noise: the acrylic reads as clean smoked glass.
+
+**Duel, d-p7 (960 px, 256 samples) against Smoke A on the new drivers (595c55b, scaled down to match): A won, 6.0 to
+3.5.** Part of the gap is resolution (a downscaled 512-sample final against a 256-sample proof: "smeared horn, mushy
+woofer"). Two points are not: the plume read as "a ghostly half-formed figure", and the lumpy drifts and debris
+"muddy" the base, where A "sits cleanly with a believable contact shadow". This rig fails the gate (within 0.5 of A).
+
+## Round D2 (A's rig plus the owner's asks only)
+
+On A's rig: the camera at 1.0 m, a fern over the near front corner, three small twigs, and a sun shaft onto the speaker. Far back in the bright gap (8, 9) sits a small smouldering pile (charred logs and embers). A thin column of woodsmoke rises from it, backlit and leaning left. No drifts.
+
+| Proof | Stands? | Smoke? | Figure? |
+|---|---|---|---|
+| d2-p0 (k4) | stands | smoke | none |
+| d2-p1 (k5, 960 px, 256 spp), run 1 | stands | smoke, from the fire | none |
+| d2-p1, run 2 | stands | smoke, from the fire | none |
+
+**Duel at 720 px (both scaled down, order swapped across two judges): A won, 6.0 to 4.75** (5.0 v 6.5, 4.5 v 5.5). The gate is within 0.5, so this fails. Both judges read the glowing ember pile as "a forest fire next to a loudspeaker" that pulls the eye. That glow is the visible source the owner asked for. They also called the fern sparse and dropped in, the speaker too high in the frame with empty ground in front, and the cabinet softer. Part of the softness is 256 against 512 samples. One judge credited D2 for its grounding and its stronger, more atmospheric shafts. See `critic-smoke/d2-duel-vs-A-newdrivers.json`.
+
+## Round D3 (the coordinator's last pass: no glow, a natural clump, A's framing, a fair duel)
+
+Tests at 64 samples:
+- **t1:** the embers off. The dark column alone read as a figure.
+- **t2 and t3:** the source moved off frame right, plus a wispy drift across the far shafts. A read test said "no smoke: haze or light fog, no visible source".
+- **t4 and t5:** an unlit pile in the bright gap, then nearer in a sunlit patch. Each read as a dark lump or a log heap, and the smoke didn't show.
+
+Without a visible, faintly glowing source, this set's smoke reads as fog.
+
+The proof, d3-p0 (k6, 960 px, 512 samples), goes back to D2's column with the embers at 6 instead of 60, keeps the fern at the near-left corner, and uses A's framing (shift_y 0).
+
+| d3-p0 | Stands? | Smoke? | Figure? |
+|---|---|---|---|
+| run 1 | stands | smoke, from the orange glow | "could faintly suggest a standing figure" |
+| run 2 | stands | smoke, from the ember patch | "could be mistaken for a vague figure at a glance" |
+
+**Duel at 720 px, order swapped: A won, 5.65 to 4.25** (4.5 v 5.8, 4.0 v 5.5). This fails the gate. Both judges still call even a small orange glow "a forest fire", and both say the fern hides the base's lower-left corner. They credit D3 with stronger shafts and more depth, and with the ferns giving it a sense of place.
+
+This stops here, as the coordinator set: the best proofs go to the owner beside A. See `critic-smoke/d3-duel-vs-A-newdrivers.json`.
+
+## Round E: three settings without the forest (the owner, 2026-10-19)
+
+The owner: "I just don't think the forest is a good setting for smoke, it's too hazy and forests are just like that in the morning without smoke, and then the fire seems forced." The site keeps A until a new Smoke wins. These are three settings, proofed at 0.3 scale (720 × 480, 256 samples) on the drivers made real, so the owner can pick one. Each keeps A's speaker rig: the fills and kickers are linked to the speaker alone, and the acrylic is the same.
+
+The smoke in all three is a new piece, `ribbon` (studio/engine/kit_ext/smoke_el.py). It is a volume inside nested tubes along a curve, with a laminar thread at its start. Noise tears the wider parts, a ragged wall (`wobble`) keeps it from reading as a hose, and a broad noise (`break_*`) thins and thickens it along its length.
+
+| Setting | File | Proof | Read test (600 px, fresh judge) |
+|---|---|---|---|
+| E1 incense in a concrete hall | `smoke_incense.py` | element-smoke-e1-incense-p0 | stands; "smoke, not fog or haze: a thin wispy plume rising from the incense stick"; no flame, "only a small red ember"; no figure. One note: a short bright streak partway up (the thread where it crosses the beam) "looks a little odd". |
+| E2 after hours in a cigar room | `smoke_cigar.py` | element-smoke-e2-cigar-p0 | stands (contact shadow on the lit floor); "clearly smoke, not fog or haze", from "a cigar resting in an ashtray"; no fire, no ember seen; no figure. |
+| E3 the studio take | `smoke_studio.py` | element-smoke-e3-studio-p0 | stands (its reflection in the gloss floor); "smoke, a dense coiling plume rather than flat fog or haze"; no fire; no figure. |
+
+The three side by side: `element-smoke-e-settings.jpg`. No duels yet: the owner picks the setting first.
+
+How each was found:
+- **E1:** the slot was first placed behind the speaker, where the beam fell out of frame. It now sits low in the right wall, in front, so the sun's slab crosses the smoke and lands on the back wall as a bar behind the speaker.
+- **E2:** the spot was first over the table, which lit the smoke dull. It now comes from behind, so the smoke glows. The chair faces the camera. A brass vase was dropped because it read as clutter.
+- **E3:** three thick strands read as cotton-wool coils, and thin ones read as tubing. One wide, billowing strand plus a fainter second reads as smoke. It starts low at the front so the cabinet stays clear, and the rims are hidden from the gloss floor.
+
+## E3, the studio take (the owner's pick), passes 1 to 3, and E4 black smoke
+
+The coordinator's fixes: the front kept clear; one rising column, not a creature; the speaker legible on black; nothing like fire.
+
+- **Pass 1** (g1): one column rising behind and left and rolling over the top.
+  - Reads: smoke, no fire. But the dark horn fins against the blown panel read as "a clawed hand", and the smoke seemed to come out of the speaker's top.
+  - Duel: A 5.75, E3 4.0.
+- **Root cause of the "card".** A surface seen through the smoke (the floor, and later a backdrop) showed lit, whatever the smoke's density. It persisted with a single clean tube, without light linking, and with a matte floor. Shading inside a mesh volume was the cause: ribbon now fills a voxel grid from each tube (`grid=True`, a MESH_TO_VOLUME object), and the card is gone. The "hose" and "painted" edges the judges saw came from the same thing.
+- **Pass 2** (g2): the column rises from the floor behind-left as a grid, with a backdrop pool, fills up and the kicker down.
+  - Reads, twice: stands, "smoke from the floor at the far left, not from the speaker", no fire, no figure, the front readable but dim.
+  - Duel: A 6.0, E3 4.75. The judges: crushed blacks, the plume "flat, cut-out", the floor contact weak, the product small.
+- **Pass 3** (h3, a 64-sample test): fills and the backdrop pool lifted, a softer lit floor, a softer column, the camera nearer. Its proof was stopped when the owner wrote.
+
+**The owner, 2026-10-20:** "Maybe studio for the smoke isn't right, since it should really be black smoke."
+
+**E4** (`smoke_studio_black.py`, proof element-smoke-e4-black-p0): the same column made black, sooty and absorbing (albedo #0A0A0A, density 60), on a pale grey seamless lit soft from the front-left. The black smoke reads like ink in water, and the speaker reads clean against the pale ground. It is a test frame for the owner's direction, not yet read-tested.
+
+### E4 and E5 for the owner (the coordinator, 2026-10-20: carry E4 to a passing read; add a location with real black smoke)
+
+- **E5** (`smoke_saltflat.py`): a salt pan (Poly Haven `aarfontein_pan`, a real dry lake bed), the ground `dry_ground_01` whitened, the frame near-monochrome. A black smoke canister lies on the crust behind and right of the speaker; its plume rolls low behind the speaker, then climbs.
+  - p0 read: "floats", because there was no contact shadow (the sky's sun sat 3° up and behind).
+  - The sky was turned to bring its sun front-left and raised to 14°.
+  - p1 read: **stands** ("a soft contact shadow and a cast shadow to the right"). "Thick black smoke, sooty, close to ink", rising from the ground behind the box. No fire, no figure. The front readable.
+- **E4** (`smoke_studio_black.py`):
+  - p1 read: "ink dispersing, soot or a smudge painted on the backdrop".
+  - The smoke was made grey-black (albedo #383838) so its billows shade, given a rim from behind, and made to rise visibly from the floor.
+  - p2 read: stands. "A wisp of dark grey to black smoke, though blurry enough to also look like an ink smudge." No fire. "Mostly no" figure (the streak "could faintly suggest a tendril"). The front readable. A marginal pass.
+- **Side by side:** `element-smoke-e4-e5-e3.jpg` (E4, E5, then E3 pass 2 for reference). No duels until the owner picks.
+
+### E6 and E7, the owner's two routes (2026-10-20)
+
+The owner, via the coordinator: "Salt flat, but a smoke canister on a salt flat is so random. It really comes down to the quality and pervasiveness of the smoke if we go that route. Another route could be like an apocalyptic or riot scene, with cars crashed and burning on a bridge, billowing black smoke, with the speaker in the foreground." E4 and the canister are dropped.
+
+- **E6** (`smoke_pan.py`): the salt pan with no source in sight.
+  - A black plume of stacked woodsmoke cells (soot #161616) rises 300 m off, behind the rise, and shears left. Mid billows lie along the horizon, and near wisps sit low over the crust.
+  - A 40 mm lens, so the tower fits the frame. The sun is front-left and gives a long cast shadow.
+  - The first tests showed nothing: black smoke needs about ten times the density of white to read against a bright sky.
+  - Read: stands. "Black smoke… rises in a column from behind the earth bank… as if something is burning out of sight." No fire, no figure ("the top unit's dark fins could read loosely as a hand or claw"). "Cinematic, but somewhat CG… a clean render dropped into a softer backdrop."
+  - Not yet done: the plume spreading across half the sky, layers rolling up to the speaker, and the smoke's shadow on the crust.
+- **E7** (`smoke_bridge.py`): a freeway bridge at blue hour (Poly Haven `highway_bridge_sunset`), with wet asphalt, lane markings and modelled Jersey barriers.
+  - Three sedans are simple extruded forms, two of them charred, with fire cores glowing inside their cabins, embers, and black smoke billowing up and left. Low smoke pools round the wrecks.
+  - No CC0 car model was available, so the cars are forms in silhouette. The first pass, with cut-out flames and lit cars, read as toys.
+  - Read: "a roadway or overpass at dusk… a vehicle is burning", stands, thick black smoke from the burning car, no figure. The weakest element is the car: "a flat, low-detail silhouette with a uniform orange glow". The HDRI's own trees and mast show to the right.
+- **Side by side:** `element-smoke-e6-e7.jpg`. No duels until the owner picks.
+
+### E6 and E7 to a realistic standard (the owner: "Both need more work and realism for me to make a call")
+
+**The gate**, restated by the coordinator after calibration: each image scores at least 4.5 from two fresh realism critics (the live A scores 4.0 and 4.0 on the same critic), passes the read test, and has no fake-looking element.
+
+Fixes common to both:
+- `smoke_el.occluder`: a shadow-only disc in the speaker's base for its contact shadow. It is a set piece; the product is untouched.
+- Grain (2.5) and shallower focus.
+- A long `ground()` patch subdivides at 1.5 cm and ran past the container's memory, so E7's deck is a textured slab.
+
+**E6, the salt pan** (`smoke_pan.py`):
+- What changed: the plume's head is a sheet spreading across the sky, low layers roll toward the speaker, there is haze to the horizon, and a high shadow layer lays the smoke's shadow across the crust while the speaker stands in a sunlit gap. The crust is 4k on a 7 m tile, the soot has some albedo so its sunlit sides show, and the sun is 3.5° wide.
+- Realism, by proof: p1 3.5 / 3.5; p2 3.5 / 3.5; p3 4.5 / 4.5.
+- Read (p3): stands (a long firm shadow), "black smoke, a tall column like a burning oil well", no fire, no figure.
+- The critics' remaining tells: the speaker's clean surfaces (the product), the smoke's soft edges, and the crack tile repeating.
+
+**E7, the bridge** (`smoke_bridge.py`, `kit_ext/wreck.py`):
+- No CC0 car was reachable, so `wreck.sedan` is a burnt-out saloon from real proportions: charred paint, rust and bare steel, a crumpled nose, no glass, a sagging roof, charred seats, bare rims on puddles of melted tyre.
+- `wreck.flame` is fire as a volume whose emission follows its density in a black-body colour (1050 to 1800 K). The volume's own black-body emission ignored density and lit the whole box.
+- The scene: a four-lane overpass with footways, railings and lamp posts, and the city at twilight (Poly Haven `sunset_jhbcentral`). The fire lights the road and rims the speaker, and the smoke rises from the wreck, darkening as it climbs.
+- Realism, by proof: p1 4.0 / 4.5; p2 4.5 / 4.5; p3 5.0 / 5.0; p4 5.0 / 4.5.
+- Reads: p3 "floats", because there was no contact shadow or reflection. p4, with a shallow puddle the speaker stands in, reads **stands** ("its base sits in the puddle, with a reflection and contact darkening"), "an urban overpass at dusk… a car is on fire", black smoke from the burning car, no figure.
+- Flagged as fake on p4: the puddle's sharp edge ("like a cut-out decal"), the smoke column too uniform, and the fire small for its smoke. The puddle is the one I'd fix next, with soft wet margins.
+
+**Side by side:** `element-smoke-e6-e7-real.jpg` (E6 p3, E7 p4).
+
+**The coordinator's follow-up pass (during the owner's wait), reverted.**
+- **E6 p4:** sharper, finer smoke edges and a longer crust tile. Realism fell to 3.5 / 3.5, and the read test saw "a mushroom cloud or a giant hooded figure" in the sharpened plume.
+- **E7 p5:** a bigger fire, a broken-up column, a smaller puddle with a wet margin. Realism 4.5 / 4.5 and "floats" again, with the puddle still read as a decal.
+- Both are worse than E6 p3 and E7 p4, so the set files are restored to those proofs (5811e3e), which stay the ones in front of the owner.
+- The critics vary by about half a point between runs, so gains under that are noise.
+
+**E6 structural pass (the coordinator, while the owner decides): p5.**
+- What changed: three modelled folds of land (`smoke_el.ridge`) stand at 330, 540 and 860 m, each lighter and bluer. The plume rises behind them and its top shears downwind as one column; the separate dark mass is gone. A warm, 4°-wide sun comes through the smoke. The crust has a 22 m cell beyond the near patch, plus salt patches. The kickers are off the horn's mirror top.
+- Realism, scored beside the live A in the same run, order swapped: E6 4.5 against A 5.5, then E6 4.5 against A 5.0. Paired, A scores higher than it did alone (4.0 / 4.0), so E6 trails A by 0.5 to 1.0 and does not clear "A + 0.5".
+- Read: "a dark, boxy loudspeaker… stands alone on a cracked, dry lakebed, with a thick column of black smoke rising from the hazy horizon behind it". No mushroom ("no distinct cap on a narrow stem"), no figure, no face.
+- Remaining tells: the plume is "a soft, uniform volumetric blob" without fine turbulence, the crack tile still repeats near the camera, the hills read as a "blurred backdrop band", and the horn's top is still a white field.
+- No Smoke horn preset exists in this repo or on main (searched), so that fix is not applied.
+
+**E6: p3 against p5, then p6 (the last pass under the stop rule).**
+- **p3 against p5:** the blind duel on two critics, order swapped, came out 4.5 v 5.5 and 5.5 v 4.5. Each judge preferred the image shown second, so it is a tie with a position bias, and p3, the incumbent with the owner, stands.
+- **p6** (`4400ad6d4b85ddd832525dd55e4d3e1ad36fd431`) put p3's low warm sun back (1.75°) and graded the sky warm near the horizon. It added turbulent, brown-grey plume edges, gullies on the near fold, salt patches near the camera, and a black flag high behind the camera so the horn's resin mirrors dark there. (From a 0.8 m camera, the horn's faces mirror the sky behind the camera, not above the speaker.)
+- **p6 against p3:** p3 5.5 v p6 4.5, then p6 5.5 v p3 5.0. Split again, the same position bias, so no 0.5 win on both.
+- **p6 read:** "a thick plume of black smoke rises from the horizon behind it", but the shapes check failed: "it reads easily as an explosion or a mushroom cloud". The billowing, sheared top is the cause.
+- **Result:** p6 fails the gate. E6 stops at p3 and its set is restored to p3 (88532b0). The ridge and gully pieces stay in smoke_el for later use.
+- **On the critic:** two passes in a row have split 1–1 with each judge preferring the second image. At this level the paired duel measures order more than quality.
