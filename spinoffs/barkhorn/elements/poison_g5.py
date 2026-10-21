@@ -4,48 +4,48 @@ The owner, 2026-10-21, verbatim: "Poison: green, but more obviously deadly". G4 
 death caps, the arum's green berries), but at a glance it is a green wood with mushrooms in it: nothing says they kill.
 The obvious green danger is a green pit viper, and Poison B modelled one; every critique of B called it a rubber toy
 (poison_b.md), and it cost B its duel. So the cue here is a real thing, not a model: a white-tailed deer's skull, the
-Smithsonian's scan (CC0, edanmdm:nmnheducation_15006160; poison_b_el.bones), lying on the litter at the troop's right,
-its snout toward the caps, weathered a season or two: dull ivory, tannin-stained, darker in its pits, green with algae
-on top, its teeth sunk in the moss. Seen side on (its long snout, the eye socket and the tooth row read as a skull at
-600 px). A young death cap comes up at its snout and another behind it. Nothing strewn on the floor pierces it; the
-troop's own moss and litter (G3's strews round the clump) already reach it. Two more strews of its own, moss and
-litter in a ring round it, took the proof render past the helpers' 15 GB (14 GB at Cycles' start, against G4's 4.8),
-so they are out.
-G4 otherwise whole, its light included, so the duel against G4 measures the skull.
+Smithsonian's scan (CC0, edanmdm:nmnheducation_15006160; poison_b_el.bones), weathered a season or two: dull ivory,
+tannin-stained, darker in its pits, green with algae on top, its teeth sunk in the litter. Seen side on: its long
+snout, the eye socket and the tooth row. Nothing strewn on the floor pierces it; the troop's own moss and litter (G3's
+strews round the clump) reach it. (Two more strews of its own, moss and litter in a ring round it, took the proof past
+the helpers' 15 GB: each strew on this ground costs about 3 GB at Cycles' start. They are out.)
+
+p1 (the skull at the troop's right, 5.5 m off, life size, in the shade, two young caps beside it): in the frame it was
+a pale scrap about 90 x 30 px that "could pass for a bleached bit of bark or bone"; only a 3x crop showed a skull. So,
+p2:
+- the skull a big buck's (1.25 x the scan's doe, 34 cm), forward into the open litter in front of the speaker's left
+  foot, 5.0 m off, side on to the lens, its snout pointing into the troop (cap 62 a hand's width ahead of it): about
+  1.5 x p1's size in frame;
+- the forest's one sun fleck, G4's (which lit open litter no one saw), moved onto it, so bleached bone in sun is the
+  brightest small thing in the lower frame, against the dark duff;
+- the bone a step paler, the tannin lighter, so that in the sun it reads white;
+- p1's two young caps out (the troop's 62 and 64 now flank it).
+G4 otherwise whole, so the duel against G4 measures the skull.
 """
 import copy
 
 import poison as A
 import poison_g4 as G4
 
-SKULL = (-0.05, -1.03)          # right of the troop, between the clump and cap 64; 5.5 m from the lens, inside f/2.8
-SKULL_ROT = [-6, -15, -65]      # snout to the camera's left (at the caps), crown rolled a little toward the lens
-CAPS = {                        # new by seed: (x, y), age, cap radius, stem height over the radius, extras
-    93: ((-0.23, -1.07), 'young', 0.03, 1.5, dict(lean=[-0.01, -0.006], tilt=[-5, 7])),     # clear of its snout
-    94: ((0.12, -0.9), 'young', 0.024, 1.35, dict(lean=[0.006, 0.004], tilt=[6, -4])),      # and of its crown
-}
-SINK = {'young': -0.016}
-AVOID = {'bark_debris_01': 0.16, 'dry_branches_medium_01': 0.16, 'moss_01': 0.09}   # clear of the skull (m)
+SKULL = (0.24, -1.37)           # in the open litter in front of the speaker's left foot; 5.0 m off
+SKULL_ROT = [-6, -15, -80]      # side on to the lens, snout to its left (into the troop), crown rolled toward it
+SKULL_SCALE = 1.25              # a big buck's
+BONE = [(0.32, '#D6CDB4'), (0.5, '#C6BA9D'), (0.62, '#B4A88B'), (0.75, '#A0977F')]   # a step paler than the kit's
+AVOID = {'bark_debris_01': 0.2, 'dry_branches_medium_01': 0.2, 'moss_01': 0.11}    # clear of the skull (m)
 
 
 def shot():
     s = copy.deepcopy(G4.shot())
     props = s['set']['props']
-    young = next(p for p in props if p.get('fn') == 'amanita' and p.get('seed') == 92)
-    for p in props:                                   # nothing strewn on the floor grows through the skull
-        if p.get('fn') == 'strew' and p.get('model') in AVOID:
+    for p in props:
+        if p.get('fn') == 'strew' and p.get('model') in AVOID:      # nothing strewn on the floor grows through it
             p['avoid'] = p.get('avoid', []) + [[SKULL[0], SKULL[1], AVOID[p['model']]]]
-    for seed, ((x, y), age, R, hr, more) in CAPS.items():
-        c = copy.deepcopy(young)
-        for k in ('lean', 'tilt', 'height', 'stem'):
-            c.pop(k, None)
-        c.update(seed=seed, age=age, cap=R, position=[x, y, SINK[age]], **more)
-        if hr:
-            c['height'] = round(hr * R, 4); c['stem'] = round(0.2 * R, 4)
-        props.append(c)
+        elif p.get('fn') == 'canopy':                                # G4's fleck, the last hole, onto the skull
+            p['holes'] = p['holes'][:-1] + [A.gap_for(SKULL[0], SKULL[1], 0.06, 0.15, (0.0, 4.0), A.SUN_A2)]
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'poison_b_el', 'fn': 'bones', 'position': [0, 0, 0],
+                  'bone': BONE, 'streaks': 0.4,
                   'items': [{'part': 'skull', 'position': [SKULL[0], SKULL[1], 0.0], 'rotate': SKULL_ROT,
-                             'sink': 0.025}]})
+                             'scale': SKULL_SCALE, 'sink': 0.03}]})
     s['title'] = 'barkhorn, Poison G5, the wood\'s poisons green, a deer\'s skull among the death caps'
     return s
 
