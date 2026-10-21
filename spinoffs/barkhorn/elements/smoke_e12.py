@@ -11,10 +11,12 @@ off it and away on a light wind.
 
 The fire is E10's solver (plume_sim.py) with the speaker in it as a solid the flow goes round, so the fire wraps it and
 no smoke stands inside its clear acrylic, and its skin burning, strongest at its foot, less on the face the camera sees
-(a first look, m1, hid the speaker's face in flame); a ring of fire round its foot, set 0.2 m behind it. meteor_b:
-10 x 7 x 8 m at 0.05 m, 12 s, wind 2.2 m/s, confinement 3.2 (the small plume's law, eps x dx 0.16), the box's ends
+(a first look, m1, hid the speaker's face in flame); a ring of fire round its foot, set 0.2 m behind it. meteor_c:
+10 x 7 x 8 m at 0.05 m, 12 s, wind 1.4 m/s, confinement 3.2 (the small plume's law, eps x dx 0.16), the box's ends
 taking the smoke back hard (meteor_a's 8 x 5 m box filled up: its smoke went round the periodic ends and came back in
-upwind, and stood as a second column at the far end). The volume is placed by the solid, so the speaker stands in the
+upwind, and stood as a second column at the far end). In meteor_b's 2.2 m/s the plume's foot ran along the ground and
+rose again downwind like a second fire (12% of the smoke below 1.2 m); in 1.4 the column stands up off the speaker and
+bends over high (2%). The volume is placed by the solid, so the speaker stands in the
 hole the flow left for it (placed by the fire's centre, meteor_a's proofs had it 0.2 m in front of the speaker). The
 flames are E9's: black-body from 1100 to 2100 K, broken into hard-edged tongues. The cracks' glow is seen but not
 sampled as a light (a linked emission made the pan's 14 M triangles lights: the first proofs died at 14 GB).
@@ -25,7 +27,7 @@ import math
 import smoke_pan as P
 from common import piece, point
 
-CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_b.npz'
+CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_c.npz'
 ROT = 18.0                     # the speaker's turn (E6's)
 WIND = 50.0                    # the sim's downwind (+x) turned: away from the camera, a little right
 SINK = 0.10                    # the speaker's foot below the crust: it stopped in its crater
@@ -50,13 +52,14 @@ def impact(ground_name):
                  debris={'count': 90, 'size': [0.04, 0.22], 'spread': [0.65, 2.6], 'ahead': round(AHEAD, 1), 'seed': 3})
 
 
-def firelight():
-    """The flames' light: low on both flanks and behind, warm, on the speaker, the crater and the crust."""
+def firelight(drop=SINK):
+    """The flames' light: low on both flanks and behind, warm, on the speaker, the crater and the crust; `drop`, how far
+    the speaker's foot is sunk."""
     a = math.radians(ROT)
     out = {}
     for k, (x, y, z, w) in enumerate([(-0.48, 0.1, 0.45, 520.0), (0.48, 0.15, 0.4, 520.0), (0.0, 0.42, 0.6, 380.0)]):
         out[f'flame{k}'] = point([round(x * math.cos(a) - y * math.sin(a), 3), round(x * math.sin(a) + y * math.cos(a), 3),
-                                  z - SINK], w, '#FF7A2E', 0.35)
+                                  z - drop], w, '#FF7A2E', 0.35)
     return out
 
 
