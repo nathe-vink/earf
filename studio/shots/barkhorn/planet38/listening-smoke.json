@@ -123,7 +123,7 @@
     "disc_glow": 0.06,
     "disc_lamp": 2.0,
     "name_glow": 0.25,
-    "niche_strip": 2.0,
+    "niche_strip": 0.9,
     "sink_glow": 0.8,
     "screen_glow": 0.025,
     "screen_tint": "#FFA060",
@@ -830,10 +830,10 @@
    "target": [
     16.55,
     1.9,
-    0.95
+    0.9
    ],
-   "power_w": 45.0,
-   "cone_deg": 20.0,
+   "power_w": 28.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -849,10 +849,10 @@
    "target": [
     16.55,
     4.199999999999999,
-    0.95
+    0.9
    ],
-   "power_w": 45.0,
-   "cone_deg": 20.0,
+   "power_w": 28.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,

@@ -445,7 +445,7 @@ def extra_life(bpy, kit, p, objs):
         rg = K.Mesh('life38-rings')
         for x, y, z in RG:                              # a thin wet ring a glass left, not a disc
             K._lathe(rg.bm, [(0.034, 0.0), (0.038, 0.0), (0.038, 0.0003), (0.034, 0.0003)], seg=48, z0=z + 0.0001, cx=x, cy=y)
-        objs.append(rg.object(bpy, K.principled(bpy, 'wet-ring', '#3A3A3A', rough=0.08), smooth=True))
+        objs.append(rg.object(bpy, K.principled(bpy, 'wet-ring', '#9A9A98', metal=0.6, rough=0.04), smooth=True))   # a dried ring, a brighter sheen
     if SO:
         x, y, z = SO
         d = K.Mesh('life38-soapdish'); K._cyl(d.bm, x, y, z + 0.0003, 0.045, 0.006, seg=40)
