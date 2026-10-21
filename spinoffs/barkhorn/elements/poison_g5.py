@@ -7,7 +7,10 @@ The obvious green danger is a green pit viper, and Poison B modelled one; every 
 Smithsonian's scan (CC0, edanmdm:nmnheducation_15006160; poison_b_el.bones), lying on the litter at the troop's right,
 its snout toward the caps, weathered a season or two: dull ivory, tannin-stained, darker in its pits, green with algae
 on top, its teeth sunk in the moss. Seen side on (its long snout, the eye socket and the tooth row read as a skull at
-600 px). A young death cap comes up at its snout and another behind it. Nothing strewn on the floor pierces it.
+600 px). A young death cap comes up at its snout and another behind it. Nothing strewn on the floor pierces it; the
+troop's own moss and litter (G3's strews round the clump) already reach it. Two more strews of its own, moss and
+litter in a ring round it, took the proof render past the helpers' 15 GB (14 GB at Cycles' start, against G4's 4.8),
+so they are out.
 G4 otherwise whole, its light included, so the duel against G4 measures the skull.
 """
 import copy
@@ -43,14 +46,6 @@ def shot():
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'poison_b_el', 'fn': 'bones', 'position': [0, 0, 0],
                   'items': [{'part': 'skull', 'position': [SKULL[0], SKULL[1], 0.0], 'rotate': SKULL_ROT,
                              'sink': 0.025}]})
-    # moss up to its edges and a little litter round it, as round the troop
-    props.append({'kind': 'kit', 'shape': 'ext', 'module': 'poison_el', 'fn': 'strew', 'position': [0, 0, 0],
-                  'model': 'moss_01', 'on': ['prop0-kit'], 'density': 5000, 'up': 0.5, 'scale': [0.5, 1.1],
-                  'seed': 302, 'patch': 0.05, 'patch_cut': 0.3, 'within': [SKULL[0], SKULL[1], 0.3],
-                  'avoid': [[SKULL[0], SKULL[1], 0.09]]})
-    props.append({'kind': 'kit', 'shape': 'ext', 'module': 'poison_el', 'fn': 'strew', 'position': [0, 0, 0],
-                  'model': 'bark_debris_01', 'on': ['prop0-kit'], 'density': 60.0, 'up': 0.5, 'scale': [0.12, 0.25],
-                  'seed': 402, 'within': [SKULL[0], SKULL[1], 0.32], 'avoid': [[SKULL[0], SKULL[1], 0.16]]})
     s['title'] = 'barkhorn, Poison G5, the wood\'s poisons green, a deer\'s skull among the death caps'
     return s
 
