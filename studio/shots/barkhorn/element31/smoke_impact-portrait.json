@@ -65,12 +65,12 @@
     "shape": "box",
     "size": [
      1.5,
-     128.8,
+     109.0,
      0.3
     ],
     "position": [
      0.0,
-     65.6,
+     75.5,
      -0.3
     ],
     "material": "pbr",
@@ -90,7 +90,7 @@
     ],
     "position": [
      0.0,
-     -26.0,
+     -6.2,
      -0.3
     ],
     "material": "pbr",
@@ -99,6 +99,44 @@
     "tint": "#2C2C2E",
     "tint_mix": 0.3,
     "rough_mul": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     22.2,
+     0.08
+    ],
+    "position": [
+     -0.738,
+     9.9,
+     -0.08
+    ],
+    "material": "pbr",
+    "texture": "asphalt_02",
+    "tex_scale": 2.0,
+    "tint": "#1C1C1E",
+    "tint_mix": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.03,
+     22.2,
+     0.08
+    ],
+    "position": [
+     0.738,
+     9.9,
+     -0.08
+    ],
+    "material": "pbr",
+    "texture": "asphalt_02",
+    "tex_scale": 2.0,
+    "tint": "#1C1C1E",
+    "tint_mix": 0.5
    },
    {
     "kind": "kit",
@@ -3247,15 +3285,20 @@
     "shape": "ext",
     "module": "impact",
     "fn": "trench",
-    "width": 1.0,
+    "width": 1.3,
     "end": 0.8,
-    "ragged": 0.07,
+    "ragged": 0.05,
     "texture": "gravel_concrete",
     "tex_scale": 0.7,
-    "tint": "#1E1B18",
-    "tint_mix": 0.55,
+    "tint": "#4A4640",
+    "tint_mix": 0.45,
     "seed": 3,
     "grooves": 0.06,
+    "rotate": [
+     0,
+     0,
+     180.0
+    ],
     "y0": -21.0,
     "y1": 1.2,
     "lip": 0.75,
@@ -3273,6 +3316,7 @@
     "tilt_min": 6.0,
     "size": 0.6,
     "seed": 5,
+    "rotate_z": 180.0,
     "y0": -21.0,
     "y1": 1.2,
     "lip": 0.75,
@@ -3290,7 +3334,8 @@
     "reach": 6.0,
     "forward": 0.45,
     "ahead": 7.0,
-    "seed": 7
+    "seed": 7,
+    "rotate_z": 180.0
    },
    {
     "kind": "kit",
@@ -3302,12 +3347,13 @@
     "lip": 0.45,
     "depth": 0.34,
     "ramp": 0.1,
-    "count": 12,
+    "count": 18,
     "thickness": 0.07,
-    "tilt": 70.0,
-    "tilt_min": 35.0,
-    "size": 0.8,
-    "seed": 13
+    "tilt": 60.0,
+    "tilt_min": 30.0,
+    "size": 0.42,
+    "seed": 13,
+    "rotate_z": 180.0
    },
    {
     "kind": "kit",
@@ -3316,7 +3362,7 @@
     "fn": "scorch",
     "position": [
      0.0,
-     -9.3,
+     9.3,
      0.003
     ],
     "size": [
@@ -3337,7 +3383,8 @@
     "reach": 0.45,
     "inner": 0.3,
     "z": -0.3,
-    "seed": 9
+    "seed": 9,
+    "rotate_z": 180.0
    },
    {
     "kind": "kit",
@@ -3346,20 +3393,20 @@
     "fn": "woodsmoke",
     "position": [
      0.0,
-     -1.5,
+     1.8,
      -0.3
     ],
     "size": [
      2.4,
      3.0,
-     1.2
+     1.4
     ],
-    "density": 0.8,
+    "density": 0.7,
     "seed": 80,
     "scale": 0.35,
     "cut": 0.5,
     "soft": 0.3,
-    "anisotropy": 0.4,
+    "anisotropy": 0.65,
     "fade": [
      0.4,
      0.3,
@@ -3367,7 +3414,7 @@
     ],
     "floor": 0.0,
     "rise": 1.6,
-    "color": "#7A7068",
+    "color": "#8A7E74",
     "detail_scale": 0.1,
     "detail_weight": 0.5
    },
@@ -3378,20 +3425,20 @@
     "fn": "woodsmoke",
     "position": [
      0.0,
-     -5.0,
+     5.0,
      -0.3
     ],
     "size": [
      2.4,
      5.0,
-     1.0
+     1.2
     ],
-    "density": 0.5,
+    "density": 0.45,
     "seed": 81,
     "scale": 0.35,
     "cut": 0.5,
     "soft": 0.3,
-    "anisotropy": 0.4,
+    "anisotropy": 0.65,
     "fade": [
      0.4,
      0.3,
@@ -3399,7 +3446,7 @@
     ],
     "floor": 0.0,
     "rise": 1.6,
-    "color": "#7A7068",
+    "color": "#8A7E74",
     "detail_scale": 0.1,
     "detail_weight": 0.5
    },
@@ -3410,20 +3457,20 @@
     "fn": "woodsmoke",
     "position": [
      0.0,
-     -11.0,
+     11.0,
      -0.3
     ],
     "size": [
      2.4,
      8.0,
-     0.8
+     1.0
     ],
     "density": 0.3,
     "seed": 82,
     "scale": 0.35,
     "cut": 0.5,
     "soft": 0.3,
-    "anisotropy": 0.4,
+    "anisotropy": 0.65,
     "fade": [
      0.4,
      0.3,
@@ -3431,7 +3478,7 @@
     ],
     "floor": 0.0,
     "rise": 1.6,
-    "color": "#7A7068",
+    "color": "#8A7E74",
     "detail_scale": 0.1,
     "detail_weight": 0.5
    },
@@ -3494,8 +3541,8 @@
     "module": "wreck",
     "fn": "flame",
     "position": [
-     -1.15,
-     -1.6,
+     0.2,
+     -2.9,
      0.02
     ],
     "size": [
@@ -3517,8 +3564,8 @@
      0.06
     ],
     "position": [
-     -1.15,
-     -1.6,
+     0.2,
+     -2.9,
      0.0
     ],
     "rotate": [
@@ -3528,6 +3575,27 @@
     ],
     "material": "clay",
     "color": "#0E0C0B"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     1.4,
+     0.02,
+     1.4
+    ],
+    "position": [
+     3.34,
+     -5.34,
+     1.6
+    ],
+    "rotate": [
+     -25.0,
+     0.0,
+     32.0
+    ],
+    "material": "clay",
+    "color": "#050505"
    },
    {
     "kind": "kit",
@@ -4210,8 +4278,8 @@
     "module": "wreck",
     "fn": "sedan",
     "position": [
-     -1.2,
-     15.0
+     -3.4,
+     16.0
     ],
     "heading": 125.0,
     "paint": "#2B3036",
@@ -4226,8 +4294,8 @@
     "module": "wreck",
     "fn": "flame",
     "position": [
-     -1.027927069094686,
-     14.754254386713303,
+     -3.227927069094686,
+     15.754254386713303,
      0.6
     ],
     "size": [
@@ -4247,8 +4315,8 @@
     "module": "wreck",
     "fn": "flame",
     "position": [
-     -2.1177222981616737,
-     16.310643270862386,
+     -4.317722298161674,
+     17.310643270862386,
      0.6
     ],
     "size": [
@@ -4271,8 +4339,8 @@
      0.012
     ],
     "position": [
-     -1.2,
-     15.0,
+     -3.4,
+     16.0,
      1.6
     ],
     "material": "glow",
@@ -4298,8 +4366,8 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     -1.2,
-     15.0,
+     -3.4,
+     16.0,
      0.9
     ],
     "size": [
@@ -4330,8 +4398,8 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     -1.4000118144933165,
-     15.214285714285714,
+     -3.600011814493316,
+     16.214285714285715,
      3.5
     ],
     "size": [
@@ -4362,8 +4430,8 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     -1.8063224414506487,
-     15.428571428571429,
+     -4.006322441450648,
+     16.428571428571427,
      6.1000000000000005
     ],
     "size": [
@@ -4394,8 +4462,8 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     -2.3599777456581057,
-     15.642857142857142,
+     -4.559977745658106,
+     16.642857142857142,
      8.700000000000001
     ],
     "size": [
@@ -4426,8 +4494,8 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     -3.038025938307558,
-     15.857142857142858,
+     -5.238025938307558,
+     16.857142857142858,
      11.3
     ],
     "size": [
@@ -4458,8 +4526,8 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     -3.8266829598797214,
-     16.071428571428573,
+     -6.026682959879722,
+     17.071428571428573,
      13.9
     ],
     "size": [
@@ -4490,8 +4558,8 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     -4.716394971754752,
-     16.285714285714285,
+     -6.916394971754752,
+     17.285714285714285,
      16.5
     ],
     "size": [
@@ -4522,8 +4590,8 @@
     "module": "smoke_el",
     "fn": "woodsmoke",
     "position": [
-     -5.7,
-     16.5,
+     -7.9,
+     17.5,
      19.099999999999998
     ],
     "size": [
@@ -4554,8 +4622,8 @@
     "module": "wreck",
     "fn": "sedan",
     "position": [
-     3.6,
-     21.0
+     3.8,
+     20.0
     ],
     "heading": 20.0,
     "paint": "#2B3036",
@@ -4570,7 +4638,7 @@
     "module": "wreck",
     "fn": "sedan",
     "position": [
-     -3.4,
+     -4.2,
      29.0
     ],
     "heading": 70.0,
@@ -4766,13 +4834,14 @@
   "keyfire": {
    "type": "point",
    "position": [
-    -1.15,
-    -1.6,
+    0.2,
+    -2.9,
     0.35
    ],
    "power_w": 600.0,
    "color": "#FF8A3C",
-   "radius_m": 0.2
+   "radius_m": 0.2,
+   "specular": 0.15
   },
   "skyfill": {
    "type": "area",
@@ -4943,8 +5012,8 @@
   "fire0": {
    "type": "point",
    "position": [
-    -1.2,
-    15.0,
+    -3.4,
+    16.0,
     1.3
    ],
    "power_w": 30000.0,
@@ -4958,8 +5027,8 @@
     1.0
    ],
    "position": [
-    -0.48,
-    6.0,
+    -1.36,
+    6.4,
     1.0
    ],
    "target": [
