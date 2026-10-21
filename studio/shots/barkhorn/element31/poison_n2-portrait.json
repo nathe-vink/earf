@@ -1,0 +1,889 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "eucalyptus-y2k-green",
+  "instances": [
+   {
+    "flavour": "eucalyptus-y2k-green",
+    "position": [
+     0.75,
+     11.6,
+     0.43699999999999994
+    ],
+    "rotate_z": -38.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     400.0,
+     260.0,
+     0.05
+    ],
+    "position": [
+     0.0,
+     60.0,
+     -0.85
+    ],
+    "material": "card",
+    "color": "#1E2614"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "acid_rain_el",
+    "fn": "puddle",
+    "size": [
+     400.0,
+     260.0
+    ],
+    "position": [
+     0.0,
+     60.0,
+     0.0
+    ],
+    "z": 0.0,
+    "ring": 0.7,
+    "ripple": 0.35,
+    "keep": 1.0,
+    "roughness": 0.02,
+    "ripple_m": 0.0012,
+    "tint_lin": [
+     0.42,
+     0.5,
+     0.3
+    ],
+    "seed": 9
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_p_el",
+    "fn": "algae_water",
+    "position": [
+     0.0,
+     60.0,
+     0.004
+    ],
+    "size": [
+     400.0,
+     260.0
+    ],
+    "cover": 0.7,
+    "drift": 20.0,
+    "scum_rough": 0.18,
+    "float": true,
+    "edge": [
+     0.06,
+     0.55
+    ],
+    "lane": [
+     0.45,
+     0.9
+    ],
+    "streak": 1.7,
+    "scale": 0.12,
+    "clots": 0.45,
+    "clot_scale": 1.4,
+    "greens": [
+     "#4A7A12",
+     "#8CC21E",
+     "#CDEB3E"
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ground",
+    "texture": "brown_mud_leaves_01",
+    "size": [
+     14.0,
+     5.0
+    ],
+    "position": [
+     0.0,
+     -4.2,
+     -0.12
+    ],
+    "displace": 0.03,
+    "relief": 0.22,
+    "res": "2k",
+    "flat": false
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_p_el",
+    "fn": "scan",
+    "model": "modular_wooden_pier",
+    "position": [
+     0.4,
+     4.0,
+     -2.2
+    ],
+    "rotate": [
+     0,
+     0,
+     4
+    ],
+    "scale": 1.0,
+    "res": "2k",
+    "drop": [
+     "section_05"
+    ],
+    "vary": 0.18,
+    "seed": 5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_p_el",
+    "fn": "sign",
+    "position": [
+     -1.55,
+     10.2,
+     -0.1
+    ],
+    "rotate": [
+     0,
+     0,
+     26
+    ],
+    "lean": 7.0,
+    "size": [
+     0.5,
+     0.36
+    ],
+    "post": 1.15,
+    "bolts": true
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dead_tree_trunk_02",
+    "position": [
+     -5.5,
+     9.0,
+     -1.2
+    ],
+    "rotate": [
+     0,
+     -84,
+     30
+    ],
+    "scale": 1.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dead_tree_trunk",
+    "position": [
+     -8.0,
+     15.0,
+     -0.9
+    ],
+    "rotate": [
+     0,
+     -90,
+     110
+    ],
+    "scale": 1.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dead_tree_trunk_02",
+    "position": [
+     6.5,
+     13.0,
+     -1.4
+    ],
+    "rotate": [
+     0,
+     -86,
+     200
+    ],
+    "scale": 1.9,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dead_tree_trunk",
+    "position": [
+     4.2,
+     24.0,
+     -0.9
+    ],
+    "rotate": [
+     0,
+     -88,
+     70
+    ],
+    "scale": 2.3,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dead_tree_trunk_02",
+    "position": [
+     -15.0,
+     26.0,
+     -1.2
+    ],
+    "rotate": [
+     0,
+     -87,
+     150
+    ],
+    "scale": 2.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dead_tree_trunk",
+    "position": [
+     -2.6,
+     30.0,
+     -0.8
+    ],
+    "rotate": [
+     0,
+     -91,
+     20
+    ],
+    "scale": 2.0,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dead_tree_trunk",
+    "position": [
+     11.0,
+     34.0,
+     -0.9
+    ],
+    "rotate": [
+     0,
+     -89,
+     250
+    ],
+    "scale": 2.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "tree_stump_02",
+    "position": [
+     2.9,
+     9.4,
+     -0.32
+    ],
+    "rotate": [
+     0,
+     0,
+     140
+    ],
+    "scale": 1.0,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_p_el",
+    "fn": "scum_rings",
+    "items": [
+     [
+      -5.5,
+      9.0,
+      0.29
+     ],
+     [
+      -8.0,
+      15.0,
+      0.12
+     ],
+     [
+      6.5,
+      13.0,
+      0.34
+     ],
+     [
+      4.2,
+      24.0,
+      0.16
+     ],
+     [
+      -15.0,
+      26.0,
+      0.47
+     ],
+     [
+      -2.6,
+      30.0,
+      0.14
+     ],
+     [
+      11.0,
+      34.0,
+      0.18
+     ],
+     [
+      2.9,
+      9.4,
+      0.62
+     ],
+     [
+      -1.55,
+      10.25,
+      0.06
+     ],
+     [
+      -1.192,
+      9.422,
+      0.12
+     ],
+     [
+      1.152,
+      9.586,
+      0.12
+     ],
+     [
+      0.603,
+      9.558,
+      0.12
+     ],
+     [
+      -1.389,
+      12.376,
+      0.12
+     ],
+     [
+      -0.67,
+      12.426,
+      0.12
+     ],
+     [
+      -0.209,
+      12.428,
+      0.12
+     ],
+     [
+      0.417,
+      12.502,
+      0.12
+     ],
+     [
+      0.966,
+      12.54,
+      0.12
+     ]
+    ],
+    "width": 0.4,
+    "color": "#A6BC34",
+    "seed": 7
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "grass_medium_02",
+    "position": [
+     -2.6,
+     8.4,
+     -0.06
+    ],
+    "rotate": [
+     0,
+     0,
+     0
+    ],
+    "scale": 1.5,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "grass_medium_02",
+    "position": [
+     -2.3,
+     9.8,
+     -0.06
+    ],
+    "rotate": [
+     0,
+     0,
+     70
+    ],
+    "scale": 1.3,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "grass_medium_02",
+    "position": [
+     -3.1,
+     10.6,
+     -0.06
+    ],
+    "rotate": [
+     0,
+     0,
+     140
+    ],
+    "scale": 1.7,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "grass_medium_02",
+    "position": [
+     -2.5,
+     11.8,
+     -0.06
+    ],
+    "rotate": [
+     0,
+     0,
+     30
+    ],
+    "scale": 1.4,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "grass_medium_02",
+    "position": [
+     -3.5,
+     12.8,
+     -0.06
+    ],
+    "rotate": [
+     0,
+     0,
+     200
+    ],
+    "scale": 1.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "grass_medium_02",
+    "position": [
+     -2.8,
+     14.0,
+     -0.06
+    ],
+    "rotate": [
+     0,
+     0,
+     260
+    ],
+    "scale": 1.2,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "grass_medium_02",
+    "position": [
+     3.0,
+     9.0,
+     -0.06
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "scale": 1.3,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "grass_medium_02",
+    "position": [
+     3.5,
+     10.4,
+     -0.06
+    ],
+    "rotate": [
+     0,
+     0,
+     300
+    ],
+    "scale": 1.5,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_b_el",
+    "fn": "mist",
+    "box": [
+     -60.0,
+     -6.0,
+     -0.2,
+     60.0,
+     90.0,
+     4.0
+    ],
+    "clear_y": 4.0,
+    "full_y": 30.0,
+    "density": 0.016,
+    "ground_boost": 5.0,
+    "ground_h": 0.7,
+    "color": "#EEF0E8",
+    "anisotropy": 0.72
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dry_branches_medium_01",
+    "position": [
+     2.2,
+     9.4,
+     -0.02
+    ],
+    "rotate": [
+     0,
+     0,
+     30
+    ],
+    "scale": 0.7,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dry_branches_medium_01",
+    "position": [
+     -1.4,
+     12.8,
+     -0.02
+    ],
+    "rotate": [
+     0,
+     0,
+     110
+    ],
+    "scale": 0.6,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dry_branches_medium_01",
+    "position": [
+     2.8,
+     13.4,
+     -0.02
+    ],
+    "rotate": [
+     0,
+     0,
+     200
+    ],
+    "scale": 0.8,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "model": "dry_branches_medium_01",
+    "position": [
+     -1.6,
+     8.2,
+     -0.02
+    ],
+    "rotate": [
+     0,
+     0,
+     70
+    ],
+    "scale": 0.5,
+    "res": "2k"
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "poison_p_el",
+    "fn": "wetline",
+    "models": [
+     "modular_wooden_pier",
+     "dead_tree_trunk",
+     "tree_stump",
+     "weathered_planks",
+     "dry_branches"
+    ],
+    "z": 0.0,
+    "top": 0.08,
+    "color": "#3E3A26",
+    "wet_rough": 0.22
+   }
+  ]
+ },
+ "lights": {
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    2.0,
+    2.0
+   ],
+   "target": [
+    0.75,
+    11.6,
+    0.94
+   ],
+   "irradiance": 2.5,
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": -40,
+    "elevation_deg": 8,
+    "distance_m": 3.5
+   }
+  },
+  "throat": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.4
+   ],
+   "target": [
+    0.75,
+    11.6,
+    1.5899999999999999
+   ],
+   "irradiance": 0.5,
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": -8,
+    "elevation_deg": 4,
+    "distance_m": 2.2
+   }
+  },
+  "low": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "target": [
+    0.75,
+    11.6,
+    0.74
+   ],
+   "irradiance": 1.5,
+   "color": "#F1E6B8",
+   "orbit": {
+    "azimuth_deg": -5,
+    "elevation_deg": 3,
+    "distance_m": 2.5
+   }
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    1.5,
+    1.5
+   ],
+   "target": [
+    0.75,
+    11.6,
+    0.94
+   ],
+   "irradiance": 9.0,
+   "color": "#F6DDB0",
+   "orbit": {
+    "azimuth_deg": -130,
+    "elevation_deg": 5,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "amp-box",
+    "amp-box-gasket",
+    "amp-plate-gold",
+    "amp-plate-housings",
+    "amp-plate-ink",
+    "amp-plate-labels",
+    "amp-plate-led-green",
+    "amp-plate-led-on",
+    "amp-plate-led-red",
+    "amp-plate-metal",
+    "amp-plate-module",
+    "amp-plate-plate",
+    "amp-plate-print",
+    "amp-plate-rca-orange",
+    "amp-plate-rca-red",
+    "amp-plate-rca-white",
+    "amp-plate-rings",
+    "amp-plate-screws",
+    "amp-plate-sticker",
+    "back",
+    "back-gasket",
+    "back-screws",
+    "bottom",
+    "brace",
+    "brace-2",
+    "cable-glands",
+    "cap-o-ring",
+    "cloth-disc",
+    "feet-base",
+    "feet-stem",
+    "front-panel",
+    "grip-left",
+    "grip-right",
+    "hf-adaptor",
+    "hf-band",
+    "hf-exit",
+    "hf-frame",
+    "hf-motor",
+    "hf-plug",
+    "hf-terminals",
+    "land-bottom",
+    "land-left",
+    "land-right",
+    "land-top",
+    "lead-hf",
+    "lead-woofer",
+    "left",
+    "lining-back-a-web",
+    "lining-back-b-web",
+    "lining-back-c-web",
+    "lining-back-d-web",
+    "lining-bottom-1-web",
+    "lining-left-2a-web",
+    "lining-left-2b-web",
+    "lining-left-3-web",
+    "lining-right-2a-web",
+    "lining-right-2b-web",
+    "lining-right-3-web",
+    "lining-top-3-web",
+    "mark-back",
+    "port-frame-left",
+    "port-frame-right",
+    "port-left",
+    "port-right",
+    "port-screws",
+    "post-1",
+    "post-2",
+    "post-3",
+    "post-4",
+    "post-sleeves",
+    "post-sockets",
+    "rating-plate-plate",
+    "rating-plate-print",
+    "rating-plate-screws",
+    "rib-back-1",
+    "rib-back-2",
+    "rib-bottom",
+    "rib-left-1",
+    "rib-right-1",
+    "rib-top",
+    "right",
+    "tie-rod-insert",
+    "tie-rod-rod",
+    "top",
+    "top-pad",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-cap",
+    "woofer-coil",
+    "woofer-cone",
+    "woofer-frame",
+    "woofer-gasket",
+    "woofer-magnet",
+    "woofer-motor",
+    "woofer-ring",
+    "woofer-screws",
+    "woofer-spider",
+    "woofer-surround",
+    "woofer-terminals"
+   ]
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.0,
+  "look": "AgX - Base Contrast"
+ },
+ "title": "barkhorn, Poison N2, the algae lake (4:5)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -0.2854,
+   6.0307,
+   1.14
+  ],
+  "target": [
+   0.3,
+   11.6,
+   1.39
+  ],
+  "lens_mm": 34.0,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.75,
+   11.6,
+   1.04
+  ]
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "kloofendal_misty_morning_puresky",
+  "rotation_deg": 200.0,
+  "strength": 0.35,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": -100.0,
+  "elevation_deg": 11.0,
+  "irradiance": 40.0,
+  "angle_deg": 0.8,
+  "color": "#FFC98C"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.08,
+  "clarity": 0.05,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.18
+  }
+ }
+}
