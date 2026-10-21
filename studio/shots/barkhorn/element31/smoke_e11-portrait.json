@@ -1,0 +1,346 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-black",
+  "instances": [
+   {
+    "flavour": "cloud-black",
+    "position": [
+     0.0,
+     0.0,
+     -0.01
+    ],
+    "rotate_z": 18.0,
+    "hide": [
+     "cloth-disc"
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ground",
+    "texture": "dry_ground_01",
+    "size": [
+     40.0,
+     40.0
+    ],
+    "position": [
+     0.0,
+     14.0,
+     0.0
+    ],
+    "displace": 0.0,
+    "relief": 0.05,
+    "res": "4k",
+    "tint": "#F0EEEA",
+    "tint_mix": 0.95,
+    "bump": 2.0,
+    "tex_scale": 7.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "canopy",
+    "size": [
+     600.0,
+     600.0
+    ],
+    "z": 20.0,
+    "position": [
+     -60.0,
+     60.0
+    ],
+    "scale": 15.0,
+    "open": 0.35,
+    "seed": 7
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "occluder",
+    "position": [
+     0.0,
+     0.0,
+     0.03
+    ],
+    "radius": 0.36,
+    "sx": 1.0,
+    "sy": 0.9,
+    "rotate_z": 18.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "plume",
+    "fn": "plume",
+    "cache": "renders/2026-10-21/barkhorn/plume/plume_salt2.npz",
+    "position": [
+     -0.2627,
+     0.8084,
+     0.0
+    ],
+    "rotate_z": 50.0,
+    "density": 4.0,
+    "strength": 0.0,
+    "color": "#7A746C",
+    "anisotropy": 0.2,
+    "edge": [
+     0.04,
+     0.3
+    ],
+    "detail": 0.5,
+    "detail_scale": 0.08,
+    "detail_octaves": 3.0,
+    "breakup": 0.35,
+    "breakup_scale": 0.4,
+    "breakup_octaves": 2.0,
+    "seed": 3
+   }
+  ]
+ },
+ "lights": {
+  "skyfill": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 2.0,
+   "color": "#DCE2EA",
+   "orbit": {
+    "azimuth_deg": -20,
+    "elevation_deg": 5,
+    "distance_m": 2.4
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*",
+    "lining-*",
+    "woofer-*",
+    "amp-*",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "port-*",
+    "hf-*",
+    "feet-*",
+    "tie-rod-*",
+    "top-pad",
+    "mark-back",
+    "back-*",
+    "cap-o-ring",
+    "lead-*",
+    "cable-glands",
+    "rating-plate"
+   ]
+  },
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    2.4,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 6.0,
+   "color": "#E6E2DA",
+   "orbit": {
+    "azimuth_deg": -25,
+    "elevation_deg": 12,
+    "distance_m": 2.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*",
+    "lining-*",
+    "woofer-*",
+    "amp-*",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "port-*",
+    "hf-*",
+    "feet-*",
+    "tie-rod-*",
+    "top-pad",
+    "mark-back",
+    "back-*",
+    "cap-o-ring",
+    "lead-*",
+    "cable-glands",
+    "rating-plate"
+   ]
+  },
+  "kicker": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 22.0,
+   "color": "#FFE6CC",
+   "orbit": {
+    "azimuth_deg": -150,
+    "elevation_deg": 22,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*"
+   ]
+  },
+  "kicker_r": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 16.0,
+   "color": "#FFE6CC",
+   "orbit": {
+    "azimuth_deg": 150,
+    "elevation_deg": 14,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*"
+   ]
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.3,
+  "look": "AgX - Base Contrast"
+ },
+ "title": "barkhorn, Smoke E11, the salt pan with smoke billowing from behind the speaker (4:5)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -1.5733,
+   -4.3226,
+   0.8
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.85
+  ],
+  "lens_mm": 50,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   -0.21,
+   0.85
+  ],
+  "shift_x": 0.0,
+  "shift_y": -0.05,
+  "clip_end": 3000
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "aarfontein_pan",
+  "rotation_deg": 124.0,
+  "strength": 0.8,
+  "res": "4k"
+ },
+ "sun": {
+  "azimuth_deg": -70.3,
+  "elevation_deg": 22.0,
+  "irradiance": 9.0,
+  "angle_deg": 3.5,
+  "color": "#FEC163"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": -0.85,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.15
+  },
+  "grain": 2.5
+ }
+}
