@@ -1,0 +1,369 @@
+{
+ "stage1": {
+  "impression": "A long, warm view from the street into a deep timber room: a lit counter with low pendants, a record wall on the left, a pair of speakers far away under hazy spots, and a dark, grimy steel shopfront framing it all. The depth and the pools of light work, and the far end is moody. But it reads as a competent CG render, not a photograph. The window has no glass in it: no reflections, no etched name. The ceiling timber tiles in every bay. A clipped white disc floats in the middle of the frame like a moon. The steel's grunge looks like a stretched decal. The speakers are 40-50 px grey boxes that nobody would spot as the hero. As it stands, a magazine would see a generic dark bar seen through a hole, not a specific place.",
+  "score": 5.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The shopfront must read as glass: visible street reflections and the etched name legible on the pane over the room",
+  "The frosted lightbox with the dancing woman's fogged silhouette must be in frame and read at a glance; it is not visible (the frosted panel at 940-980,205-415 glows evenly, with no figure)",
+  "No clipped floating point source mid-frame (region 640-665,225-250 is 57.6 % clipped)",
+  "The ceiling timber must not tile: each bay between 300-770,60-300 now shows the same blotch pattern",
+  "The blackened steel's patina must read as real oxidised steel at 1:1, not a high-contrast grunge decal (770-870,0-800 and the lintel 870-1120,120-210)",
+  "The altar pair must be found by the eye within a second: larger in frame or set off by a clearer light contrast against the wainscot behind",
+  "A sign of life near the glass (a figure at the counter, or a coat or glass close to the window), so the room reads as open and lived in, not as a set"
+ ],
+ "defects": [
+  {
+   "region": [
+    640,
+    225,
+    665,
+    250
+   ],
+   "what": "A pure white clipped disc floating in front of the back wall: 57.6 % clipped, reads as a bare bulb or moon, not as a warm #FFD2A0 disc"
+  },
+  {
+   "region": [
+    0,
+    0,
+    770,
+    720
+   ],
+   "what": "The shopfront glass is invisible: no reflection, no etched name (the etched name's glow is 0.0), so the window reads as an open hole"
+  },
+  {
+   "region": [
+    300,
+    60,
+    770,
+    300
+   ],
+   "what": "The ceiling timber repeats the same mottled texture in every bay"
+  },
+  {
+   "region": [
+    770,
+    0,
+    870,
+    800
+   ],
+   "what": "The steel column's patina is blotchy white flecks over near-black, like a stretched grunge map; no sharp edge sheen"
+  },
+  {
+   "region": [
+    870,
+    120,
+    1120,
+    210
+   ],
+   "what": "The lintel and the right-hand facade panels carry the same grunge decal, with flat tile-like panels"
+  },
+  {
+   "region": [
+    940,
+    205,
+    980,
+    415
+   ],
+   "what": "The frosted panel is an even rectangle with no silhouette; if this is the lightbox, the dancing figure does not read"
+  },
+  {
+   "region": [
+    980,
+    205,
+    1080,
+    515
+   ],
+   "what": "The corrugated column has a smooth CG vertical gradient and specular streak and reads as plastic"
+  },
+  {
+   "region": [
+    490,
+    340,
+    690,
+    480
+   ],
+   "what": "The speakers are tiny and grey (smoked tint plus white batts) against a brown wainscot; the haze cones above them draw more attention than the cabinets"
+  },
+  {
+   "region": [
+    0,
+    720,
+    870,
+    800
+   ],
+   "what": "The foreground sill is 14.7 % crushed, median 11.6: a dead black band"
+  },
+  {
+   "region": [
+    420,
+    520,
+    700,
+    720
+   ],
+   "what": "The floor is wet-glossy with smeared reflections, slightly denoiser-soft"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "The grade is orange-brown overall (r 41 / g 28 / b 22 median); the concrete reads tan rather than warm grey"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The glass is invisible and the etched name, one of the frame's stated subjects, does not exist in the picture.",
+   "evidence": {
+    "region": [
+     300,
+     60,
+     770,
+     300
+    ],
+    "measured": "no letterforms or reflections in the upper pane; lum_range 49, all of it from the ceiling texture; the etched name glow is 0.0 on the card"
+   },
+   "change": {
+    "setting": "the window's etched name (emission strength), and street lamps",
+    "from": "etched name 0.0; street lamps 3 x 120 W",
+    "to": "etched name 0.35, so the frosted letters catch edge light; street lamps 3 x 220 W, with one behind and above the camera so its glow and the kerb reflect faintly in the pane"
+   },
+   "expected": "The name reads as pale frosted letters over the room, and a faint cool-warm street reflection sits on the glass's lower third, so the pane reads as glass",
+   "accept": {
+    "region": [
+     300,
+     60,
+     770,
+     300
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 70
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The frosted lightbox with the dancing woman, a stated subject of the frame, is not legible: either it is out of frame or the panel at the right shows no silhouette.",
+   "evidence": {
+    "region": [
+     940,
+     205,
+     980,
+     415
+    ],
+    "measured": "lum_median 140, p5 42 at the edge only; the interior is even, with no figure"
+   },
+   "change": {
+    "setting": "camera position / target",
+    "from": "position [-3.2, 2.2, 1.45], target [17.0, 2.9, 1.35]",
+    "to": "position [-3.6, 1.6, 1.45], target [17.0, 3.1, 1.35], so the lightbox sits in the right third face-on; if it is the panel at 940-980, raise its backlight and lower the frosted acrylic's roughness until the figure resolves"
+   },
+   "expected": "The fogged dancing figure reads in the right third as a soft dark silhouette against an evenly glowing field, at a lum_median of about 120-150 with the figure 40-60 levels darker",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "A clipped white disc floats mid-frame and reads as a bare bulb or moon.",
+   "evidence": {
+    "region": [
+     640,
+     225,
+     665,
+     250
+    ],
+    "measured": "clip_pct 57.6, r/g/b median 255/255/255 (not the specified #FFD2A0)"
+   },
+   "change": {
+    "setting": "the disc behind the DJ station (emission) and its area lamp",
+    "from": "0.3 in #FFD2A0, with a 10.0 W area lamp",
+    "to": "0.12 in #FFD2A0, with a 6.0 W area lamp; if this is a Dome's liner seen bare, its glow goes from 0.3 to 0.12"
+   },
+   "expected": "The disc reads as a warm amber circle with visible colour, not white",
+   "accept": {
+    "region": [
+     640,
+     225,
+     665,
+     250
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 5
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "material",
+   "problem": "The ceiling's Douglas fir tiles, so every bay shows the same blotches, which says CG at once.",
+   "evidence": {
+    "region": [
+     300,
+     60,
+     770,
+     300
+    ],
+    "measured": "seen at 2x: the same mottled pattern repeats in each bay between the beams"
+   },
+   "change": {
+    "setting": "the oak/fir finish (stain), texture mapping",
+    "from": "one texture tiled across the bays",
+    "to": "randomise the texture offset and rotation per board and per beam, add darker end grain and occasional checks, and lower the mottle contrast by about 40 %"
+   },
+   "expected": "No two bays alike; the ceiling reads as old boards under low warm light",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The blackened steel shopfront reads as a grunge decal, not as patinated steel.",
+   "evidence": {
+    "region": [
+     770,
+     0,
+     870,
+     800
+    ],
+    "measured": "lum_median 17.8, p95 42; high-contrast white flecks over near-black with no edge sheen"
+   },
+   "change": {
+    "setting": "the steel's patina",
+    "from": "high-contrast grunge flecks",
+    "to": "a soft, uneven brownish-black patina at about 30 % of the current fleck contrast, a low-sheen roughness of about 0.45 with variation, and a thin bright arris on the column's street-facing edges caught by the street lamps"
+   },
+   "expected": "The steel reads as near-black with a soft sheen and crisp edges; the spread stays similar but the flecks go",
+   "accept": {
+    "region": [
+     770,
+     0,
+     870,
+     800
+    ],
+    "metric": "lum_p95",
+    "op": "between",
+    "value": [
+     28,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The altar pair does not register as the hero: the cabinets are small and their luminance sits close to the panels behind them.",
+   "evidence": {
+    "region": [
+     490,
+     340,
+     690,
+     480
+    ],
+    "measured": "region lum_median 53.3; speakers 56-67 median against a wainscot of about 45-55"
+   },
+   "change": {
+    "setting": "the altar spots and haze",
+    "from": "2 x spot 1200 W, cone 24 deg; haze 0.008",
+    "to": "2 x spot 1500 W, cone 18 deg, aimed at the cabinets' centres; haze 0.005, so the cones are quieter; record-wall spots 30 W to 22 W so the altar is the brightest zone at the far end"
+   },
+   "expected": "The cabinets read as the brightest objects at the far end, at about 1.5x their surround",
+   "accept": {
+    "region": [
+     500,
+     395,
+     550,
+     455
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 75
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The grade is orange throughout, so the concrete reads tan and the room loses its neutral shell.",
+   "evidence": {
+    "region": [
+     30,
+     460,
+     250,
+     560
+    ],
+    "measured": "concrete r/g/b median 57/46/40; whole frame 41/28/22"
+   },
+   "change": {
+    "setting": "render.white_balance_k",
+    "from": "2900",
+    "to": "3150"
+   },
+   "expected": "The concrete reads warm grey, with the red-blue gap on the concrete below 12",
+   "accept": {
+    "region": [
+     30,
+     460,
+     250,
+     560
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 46
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "Nothing near the glass says the bar is open, and the foreground sill is a dead black band.",
+   "evidence": {
+    "region": [
+     0,
+     720,
+     870,
+     800
+    ],
+    "measured": "crush_pct 14.7, lum_median 11.6"
+   },
+   "change": {
+    "setting": "props, and street lamps",
+    "from": "the props set deep in the room; the sill unlit",
+    "to": "move the coat and a rocks glass to the window table at the left (0-200,540-720), and let the street-lamp change in c1 graze the sill"
+   },
+   "expected": "A sign of life within the first 3 m, and the sill shows its steel texture",
+   "accept": {
+    "region": [
+     0,
+     720,
+     870,
+     800
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 6
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the hero speakers a visible saturated tint so they carry the frame's one colour",
+   "why": "The Smoke configuration fixes the speakers' tint; in Smoke the frame has no saturated accent by design. Light and camera are the only levers (c6, c2)."
+  },
+  {
+   "request": "Replace the corrugated column at 980-1080,205-515 with a better-reading material",
+   "why": "It is part of the shopfront's design; only its finish (roughness, sheen variation) may change"
+  }
+ ],
+ "score_if_fixed": 7.3
+}
