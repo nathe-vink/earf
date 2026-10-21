@@ -3877,7 +3877,7 @@
     "shape": "ext",
     "module": "plume",
     "fn": "plume",
-    "cache": "renders/2026-10-21/barkhorn/plume/plume_c.npz",
+    "cache": "renders/2026-10-21/barkhorn/plume/plume_d.npz",
     "position": [
      -1.2,
      15.0,
@@ -3900,13 +3900,13 @@
     ],
     "edge": [
      0.02,
-     0.3
+     0.22
     ],
-    "detail": 1.0,
-    "detail_scale": 0.12,
-    "detail_octaves": 3.0,
-    "breakup": 0.25,
-    "breakup_scale": 0.5,
+    "detail": 2.5,
+    "detail_scale": 0.18,
+    "detail_octaves": 4.0,
+    "breakup": 0.45,
+    "breakup_scale": 0.7,
     "breakup_octaves": 2.0,
     "tongue_octaves": 3.0,
     "seed": 3
@@ -3976,7 +3976,7 @@
     "shape": "ext",
     "module": "plume",
     "fn": "plume",
-    "cache": "renders/2026-10-21/barkhorn/plume/plume_a.npz",
+    "cache": "renders/2026-10-21/barkhorn/plume/plume_d.npz",
     "position": [
      20.7,
      150.0,
@@ -4015,7 +4015,7 @@
     "shape": "ext",
     "module": "plume",
     "fn": "plume",
-    "cache": "renders/2026-10-21/barkhorn/plume/plume_a.npz",
+    "cache": "renders/2026-10-21/barkhorn/plume/plume_d.npz",
     "position": [
      -45.0,
      230.0,
