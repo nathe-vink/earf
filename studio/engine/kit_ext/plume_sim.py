@@ -8,19 +8,24 @@ a light wind.
 
   - a staggered (MAC) grid, periodic across the wind's plane, a solid ground and a closed lid far above;
   - semi-Lagrangian advection of the velocity (second-order trace) and MacCormack advection of the scalars, which
-    keeps the billows' edges sharp;
+    keeps the billows' edges sharp; with `--velocity mc` (Smoke E10) the velocity by MacCormack too, clamped to the
+    first lookup's corners, which keeps the small eddies the semi-Lagrangian step smears away;
   - buoyancy from heat, vorticity confinement to put back the eddies the grid smooths away, a wind that shears with
     height;
   - an exact pressure projection (FFT across, cosine transform up the height);
   - three scalars: soot (`rho`), heat (`heat`, slow to cool, what lifts the plume) and flame (`flame`, quick to cool,
     what glows);
-  - sponges at the lid and the domain's ends, so nothing wraps round.
+  - sponges at the lid and the domain's ends, so nothing wraps round;
+  - for E10, whose critics saw E9's billows all one size ("cotton-ball", "metaball lobes"): `--disturb STRENGTH SCALE`
+    pairs, random kicks inside the smoke at each scale (m/s^2, m), drifting up with it, that break the lobes into many
+    sizes; `--tau-soot`, the soot thinning with age (s), so the old edges go wispy.
 
 It writes the last frame as an .npz of 8-bit grids (square-root coded), which `plume.py` turns into a volume in Cycles.
 Run once; the result is committed beside the shot, so a render never needs this file or numba:
 
     pip install --target <dir> numba==0.60.0 llvmlite==0.43.0 --no-deps
     PYTHONPATH=<dir> python3.11 plume_sim.py OUT.npz [--dx 0.2] [--seconds 20] [--seed 1]
+        [--velocity sl|mc] [--disturb 6 0.6 3 1.6] [--disturb-rho 0.5] [--tau-soot 25]
 """
 import argparse
 import math
@@ -93,6 +98,52 @@ def advect_velocity(u, v, w, un, vn, wn, h):
                 wn[i, j, k] = _s(w, x, y, z, 0.5, 0.5, 0.0)
             wn[i, j, 0] = 0.0
             wn[i, j, NZ] = 0.0
+
+
+@njit(parallel=True, fastmath=True)
+def advect_velocity_1(u, v, w, un, vn, wn, lo_u, hi_u, lo_v, hi_v, lo_w, hi_w, h):
+    """MacCormack's first half for the velocity (E10: the semi-Lagrangian step alone smears away every eddy smaller
+    than a few cells, which is what left E9's billows all one size): the semi-Lagrangian step, and each lookup's
+    bounds."""
+    NX, NY, NZ = u.shape
+    for i in prange(NX):
+        for j in range(NY):
+            for k in range(NZ):
+                x, y, z = _trace(u, v, w, i * 1.0, j + 0.5, k + 0.5, h)
+                un[i, j, k], lo_u[i, j, k], hi_u[i, j, k] = _corners(u, x, y, z, 0.0, 0.5, 0.5)
+                x, y, z = _trace(u, v, w, i + 0.5, j * 1.0, k + 0.5, h)
+                vn[i, j, k], lo_v[i, j, k], hi_v[i, j, k] = _corners(v, x, y, z, 0.5, 0.0, 0.5)
+            for k in range(1, NZ):
+                x, y, z = _trace(u, v, w, i + 0.5, j + 0.5, k * 1.0, h)
+                wn[i, j, k], lo_w[i, j, k], hi_w[i, j, k] = _corners(w, x, y, z, 0.5, 0.5, 0.0)
+            wn[i, j, 0] = 0.0
+            wn[i, j, NZ] = 0.0
+
+
+@njit(inline='always', fastmath=True)
+def _clamp(a, lo, hi):
+    return lo if a < lo else (hi if a > hi else a)
+
+
+@njit(parallel=True, fastmath=True)
+def advect_velocity_2(u, v, w, un, vn, wn, lo_u, hi_u, lo_v, hi_v, lo_w, hi_w, uo, vo, wo, h):
+    """MacCormack's second half for the velocity: trace forward, correct by half the round-trip error, clamp."""
+    NX, NY, NZ = u.shape
+    for i in prange(NX):
+        for j in range(NY):
+            for k in range(NZ):
+                x, y, z = _trace(u, v, w, i * 1.0, j + 0.5, k + 0.5, -h)
+                a = un[i, j, k] + 0.5 * (u[i, j, k] - _s(un, x, y, z, 0.0, 0.5, 0.5))
+                uo[i, j, k] = _clamp(a, lo_u[i, j, k], hi_u[i, j, k])
+                x, y, z = _trace(u, v, w, i + 0.5, j * 1.0, k + 0.5, -h)
+                a = vn[i, j, k] + 0.5 * (v[i, j, k] - _s(vn, x, y, z, 0.5, 0.0, 0.5))
+                vo[i, j, k] = _clamp(a, lo_v[i, j, k], hi_v[i, j, k])
+            for k in range(1, NZ):
+                x, y, z = _trace(u, v, w, i + 0.5, j + 0.5, k * 1.0, -h)
+                a = wn[i, j, k] + 0.5 * (w[i, j, k] - _s(wn, x, y, z, 0.5, 0.5, 0.0))
+                wo[i, j, k] = _clamp(a, lo_w[i, j, k], hi_w[i, j, k])
+            wo[i, j, 0] = 0.0
+            wo[i, j, NZ] = 0.0
 
 
 @njit(parallel=True, fastmath=True)
@@ -274,8 +325,33 @@ def emit(s, w, src, t, dt, dx, seed, rate, heat_src, flame_src, w_src, scale):
 
 
 @njit(parallel=True, fastmath=True)
-def sponge(s, u, v, w, uw, dt, nx_band, nz_band, cool_heat, cool_flame):
-    """Cool the heat and the flame, and at the domain's ends and lid fade everything back to the still wind."""
+def disturb(u, v, w, rho, t, dt, dx, seed, amp, scale, rho_ref):
+    """Disturbance (E10): a smooth random kick to the velocity wherever there is soot, its strength following the
+    soot's density up to rho_ref. Confinement alone spins every eddy up at the grid's one scale, which is why E9's
+    billows came out like cotton balls all one size; a kick at a few scales breaks them into lobes of many sizes. The
+    projection that follows keeps only its swirling part. The field drifts upward slowly, so it is not frozen."""
+    NX, NY, NZ = u.shape
+    drift = 0.6 * t / scale
+    for i in prange(NX):
+        x = (i + 0.5) * dx / scale
+        for j in range(NY):
+            y = (j + 0.5) * dx / scale
+            for k in range(1, NZ):
+                r = rho[i, j, k]
+                if r < 0.02 * rho_ref:
+                    continue
+                m = dt * amp * min(1.0, r / rho_ref)
+                z = (k + 0.5) * dx / scale - drift
+                u[i, j, k] += m * (2.0 * _vnoise(x, y, z, seed) - 1.0)
+                v[i, j, k] += m * (2.0 * _vnoise(x + 31.7, y, z, seed + 1) - 1.0)
+                w[i, j, k] += m * (2.0 * _vnoise(x, y + 47.3, z, seed + 2) - 1.0)
+
+
+@njit(parallel=True, fastmath=True)
+def sponge(s, u, v, w, uw, dt, nx_band, nz_band, cool_heat, cool_flame, fade_soot):
+    """Cool the heat and the flame, thin the soot by fade_soot (E10: old smoke spreads thin at its edges and in the
+    wake, where E9's stayed as dense as at the fire), and at the domain's ends and lid fade everything back to the
+    still wind."""
     NS, NX, NY, NZ = s.shape
     for i in prange(NX):
         ex = min(i, NX - 1 - i) / max(nx_band, 1)
@@ -285,7 +361,7 @@ def sponge(s, u, v, w, uw, dt, nx_band, nz_band, cool_heat, cool_flame):
                 ez = (NZ - 1 - k) / max(nz_band, 1)
                 e = min(1.0, min(min(ex, ey), ez))
                 damp = 1.0 - (1.0 - e) * min(1.0, 4.0 * dt)
-                s[0, i, j, k] *= damp
+                s[0, i, j, k] *= damp * fade_soot
                 s[1, i, j, k] *= damp * cool_heat
                 s[2, i, j, k] *= damp * cool_flame
                 u[i, j, k] = uw[k] + (u[i, j, k] - uw[k]) * damp
@@ -313,7 +389,15 @@ def main():
     ap.add_argument('--tau-heat', type=float, default=5.0, help='seconds for heat to fall by e')
     ap.add_argument('--tau-flame', type=float, default=0.35, help='seconds for the flame to fall by e')
     ap.add_argument('--noise', type=float, default=0.6, help="the fire's churn, metres")
+    # E10's three (left off, a run reproduces E9's plume_a):
+    ap.add_argument('--velocity', choices=('sl', 'mc'), default='sl',
+                    help="the velocity's advection: semi-Lagrangian, or MacCormack, which keeps the small eddies")
+    ap.add_argument('--disturb', type=float, nargs='*', default=[],
+                    help='pairs of strength (m/s^2) and scale (m): random kicks inside the smoke at those scales')
+    ap.add_argument('--disturb-rho', type=float, default=0.5, help='the soot density at which the kicks reach full strength')
+    ap.add_argument('--tau-soot', type=float, default=0.0, help='seconds for the soot to thin by e (0: never)')
     a = ap.parse_args()
+    assert len(a.disturb) % 2 == 0, '--disturb takes strength, scale pairs'
 
     dx = a.dx
     NX, NY, NZ = (int(round(L / dx)) for L in a.size)
@@ -329,6 +413,9 @@ def main():
     s1, mn, mx, sn = (np.empty_like(s) for _ in range(4))
     uc, vc, wc = (np.empty((NX, NY, NZ), f32) for _ in range(3))
     ox, oy, oz, om, fx, fy, fz, d = (np.empty((NX, NY, NZ), f32) for _ in range(8))
+    if a.velocity == 'mc':      # MacCormack's bounds and its second-half output
+        lo_u, hi_u, lo_v, hi_v, uo, vo = (np.empty((NX, NY, NZ), f32) for _ in range(6))
+        lo_w, hi_w, wo = (np.empty((NX, NY, NZ + 1), f32) for _ in range(3))
     # the Laplacian's eigenvalues for FFT across (periodic) and the type-II cosine transform up the height (Neumann)
     li = (2 * np.cos(2 * np.pi * np.arange(NX) / NX) - 2)[:, None, None]
     lj = (2 * np.cos(2 * np.pi * np.arange(NY // 2 + 1) / NY) - 2)[None, :, None]
@@ -340,6 +427,7 @@ def main():
     h = a.dt / dx
     t0 = time.time()
     cool_h, cool_f = math.exp(-a.dt / a.tau_heat), math.exp(-a.dt / a.tau_flame)
+    fade = math.exp(-a.dt / a.tau_soot) if a.tau_soot > 0 else 1.0
     for n in range(steps):
         t = n * a.dt
         emit(s, w, src, t, a.dt, dx, a.seed, a.rate, 1.0, 1.0, a.w_src, a.noise)
@@ -347,6 +435,8 @@ def main():
         vorticity(uc, vc, wc, ox, oy, oz, om)
         confinement(ox, oy, oz, om, fx, fy, fz, a.eps)
         apply_forces(u, v, w, fx, fy, fz, s[1], s[0], a.dt, a.beta, a.alpha)
+        for m in range(0, len(a.disturb), 2):
+            disturb(u, v, w, s[0], t, a.dt, dx, a.seed + 101 + 13 * m, a.disturb[m], a.disturb[m + 1], a.disturb_rho)
         divergence(u, v, w, d, 1.0 / dx)
         q = sfft.dct(d, type=2, axis=2, norm='ortho', workers=4)
         q = sfft.rfftn(q, axes=(0, 1), workers=4)
@@ -355,11 +445,16 @@ def main():
         q = sfft.irfftn(q, s=(NX, NY), axes=(0, 1), workers=4)
         q = sfft.idct(q, type=2, axis=2, norm='ortho', workers=4).astype(f32)
         subtract_gradient(u, v, w, q, 1.0 / dx)
-        advect_velocity(u, v, w, un, vn, wn, h)
+        if a.velocity == 'mc':
+            advect_velocity_1(u, v, w, un, vn, wn, lo_u, hi_u, lo_v, hi_v, lo_w, hi_w, h)
+            advect_velocity_2(u, v, w, un, vn, wn, lo_u, hi_u, lo_v, hi_v, lo_w, hi_w, uo, vo, wo, h)
+            un, uo = uo, un; vn, vo = vo, vn; wn, wo = wo, wn
+        else:
+            advect_velocity(u, v, w, un, vn, wn, h)
         advect_scalars_1(un, vn, wn, s, s1, mn, mx, h)
         advect_scalars_2(un, vn, wn, s, s1, mn, mx, sn, h)
         u, un = un, u; v, vn = vn, v; w, wn = wn, w; s, sn = sn, s
-        sponge(s, u, v, w, uw, a.dt, int(0.08 * NX), int(0.1 * NZ), cool_h, cool_f)
+        sponge(s, u, v, w, uw, a.dt, int(0.08 * NX), int(0.1 * NZ), cool_h, cool_f, fade)
         if n % 20 == 0 or n == steps - 1:
             el = time.time() - t0
             top = np.nonzero(s[0].max(axis=(0, 1)) > 0.05)[0]
