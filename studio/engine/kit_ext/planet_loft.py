@@ -79,13 +79,17 @@ def fir(bpy, vertical=False, coat=0.0, coat_rough=0.4, tint=None, mix=None, name
     return _M[key]
 
 
+STEEL_MIX = 0.55
+
+
 def steel(bpy, aged=True):
     """Blackened steel: a dark plate scan, metallic, its sheen uneven, a brownish patina."""
-    if 'steel-black' not in _M:
-        m = D._pbr(bpy, 'metal_plate_02', tint='#25221F', tint_mix=0.55, rough_mul=0.8, res='2k')
+    key = f'steel-black-{STEEL_MIX}'
+    if key not in _M:                  # STEEL_MIX: how far the tint flattens the scan's grunge (Planet r38b: 0.85)
+        m = D._pbr(bpy, 'metal_plate_02', tint='#25221F', tint_mix=STEEL_MIX, rough_mul=0.8, res='2k')
         b = D._bsdf(m); R._set(b, 'Metallic', 0.75)
-        _M['steel-black'] = m
-    return _M['steel-black']
+        _M[key] = m
+    return _M[key]
 
 
 def dark_leather(bpy, colour='#2E2420', name='leather-dark'):

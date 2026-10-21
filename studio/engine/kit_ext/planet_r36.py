@@ -437,18 +437,18 @@ def backbar(bpy, kit, p, objs):
             cx, cz = (xa + xb) / 2, z + cell / 2
             if blocked(cx, cz):
                 continue
-            if rnd.random() < 0.08:                                   # a sleeve face out
+            if rnd.random() < p.get('rw_faceout', 0.08):              # a sleeve face out
                 fo.box(xa + 0.01, yf + 0.04, z + 0.004, xb - 0.01, yf + 0.046, z + 0.318,
                        col=lin(rnd.choice(pal)))
-            fill = rnd.choice([1.0, 1.0, 0.95, 0.85, 0.7, 0.55])
+            fill = rnd.choice([1.0, 1.0, 0.95, 0.85, 0.7, 0.55] + ([0.4, 0.62, 0.78] if p.get('rw_vary') else []))
             s = xa + 0.004
             while s < xa + (xb - xa) * fill - 0.004:
                 t = rnd.choice([0.003, 0.0032, 0.0035, 0.004, 0.0045, 0.006, 0.009]) * rnd.uniform(0.9, 1.1)
                 if rnd.random() < 0.025:
                     s += rnd.uniform(0.015, 0.04); continue
-                pull = rnd.uniform(0.03, 0.08) if rnd.random() < 0.035 else 0.0
+                pull = rnd.uniform(0.03, 0.08) if rnd.random() < p.get('rw_pull', 0.035) else 0.0
                 col = lin(rnd.choice(pal)) if rnd.random() < 0.8 else LK.R._mixhex(rnd.choice(pal), '#D8CFBC', rnd.random() * 0.6)
-                h = 0.315 + rnd.uniform(-0.005, 0.002); dz = rnd.uniform(0.0, 0.003)
+                h = 0.315 + rnd.uniform(-0.005, 0.002) - (rnd.choice([0, 0, 0, 0.012, 0.03, 0.06]) if p.get('rw_vary') else 0); dz = rnd.uniform(0.0, 0.003)
                 sl.box(s, yf + 0.012 - pull, z + dz, s + t, yf + 0.33 - pull, z + h + dz, col=col)
                 s += t + 0.0004
     objs.append(shelf.object(bpy, dark_oak(bpy, vertical=True), bevel=0.003))

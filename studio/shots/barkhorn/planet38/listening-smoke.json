@@ -123,9 +123,9 @@
     "disc_glow": 0.06,
     "disc_lamp": 2.0,
     "name_glow": 0.25,
-    "niche_strip": 5.0,
+    "niche_strip": 2.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.07,
+    "screen_glow": 0.025,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -142,6 +142,19 @@
     "altar_lining": "fir",
     "zone_life": true,
     "host_stand": true,
+    "decorrelate": true,
+    "rw_faceout": 0.14,
+    "rw_vary": true,
+    "rw_pull": 0.08,
+    "steel_mix": 0.85,
+    "life_sleeves": [
+     [
+      12.5,
+      4.18,
+      0.66,
+      30.0
+     ]
+    ],
     "plinth_bar": 0.3,
     "plinth_bar_col": "#FFB060",
     "plinth_listen": 0.3,
@@ -355,10 +368,15 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 1.0,
+    "lamp_w": 0.362,
     "lamp_k": 2700,
-    "shade_glow": 0.0818181818181818,
-    "noshadow": "shell|liner|skin"
+    "shade_glow": 0.058,
+    "noshadow": "shell|liner|skin",
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
    },
    {
     "kind": "kit",
@@ -464,7 +482,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.1,
+   "irradiance": 0.5,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -542,7 +560,7 @@
     0.35,
     0.35
    ],
-   "irradiance": 0.1,
+   "irradiance": 0.5,
    "color": 2900,
    "spread_deg": 90.0,
    "receivers": [
@@ -812,10 +830,10 @@
    "target": [
     16.55,
     1.9,
-    1.1
+    0.95
    ],
-   "power_w": 70.0,
-   "cone_deg": 30.0,
+   "power_w": 45.0,
+   "cone_deg": 20.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -831,10 +849,10 @@
    "target": [
     16.55,
     4.199999999999999,
-    1.1
+    0.95
    ],
-   "power_w": 70.0,
-   "cone_deg": 30.0,
+   "power_w": 45.0,
+   "cone_deg": 20.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1031,7 +1049,7 @@
     0.06,
     0.9
    ],
-   "irradiance": 2.0,
+   "irradiance": 1.0,
    "color": 2700,
    "camera": false
   },
@@ -1051,7 +1069,7 @@
     0.06,
     0.9
    ],
-   "irradiance": 2.0,
+   "irradiance": 1.0,
    "color": 2700,
    "camera": false
   },

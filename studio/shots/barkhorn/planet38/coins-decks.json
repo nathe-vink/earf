@@ -142,6 +142,31 @@
     "spk_niche_strip": 3.0,
     "zone_life": true,
     "host_stand": true,
+    "decorrelate": true,
+    "rw_faceout": 0.14,
+    "rw_vary": true,
+    "rw_pull": 0.08,
+    "steel_mix": 0.85,
+    "life_sleeves": [
+     [
+      8.120000000000001,
+      4.05,
+      1.07,
+      18.0
+     ]
+    ],
+    "life_rings": [
+     [
+      7.92,
+      4.13,
+      1.07
+     ],
+     [
+      7.4,
+      3.95,
+      1.07
+     ]
+    ],
     "plinth_bar": 0.5,
     "plinth_bar_col": "#FFB060",
     "plinth_listen": 0.5,
@@ -355,10 +380,15 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 6.0,
+    "lamp_w": 4.098,
     "lamp_k": 2700,
-    "shade_glow": 0.3,
-    "noshadow": "shell|liner|skin"
+    "shade_glow": 0.6557,
+    "noshadow": "shell|liner|skin",
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
    },
    {
     "kind": "kit",
@@ -400,7 +430,7 @@
      "dust"
     ],
     "out": 6.0,
-    "base_glow": 1.0,
+    "base_glow": 1.6,
     "back_glow": 1.0
    },
    {
@@ -1087,7 +1117,7 @@
    "power_w": 300.0,
    "cone_deg": 9.0,
    "blend": 0.5,
-   "radius_m": 0.015,
+   "radius_m": 0.15,
    "color": 2700,
    "camera": false
   }

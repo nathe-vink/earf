@@ -120,7 +120,7 @@
     "sphere_w": 6.0,
     "sphere_glow": 1.1,
     "disc_col": "#FFC890",
-    "disc_glow": 0.15,
+    "disc_glow": 0.06,
     "disc_lamp": 4.0,
     "name_glow": 0.25,
     "niche_strip": 6.0,
@@ -139,9 +139,36 @@
     "windows_lit": 0.5,
     "counter_strip": 1.2,
     "sconce_w": 10.0,
-    "spk_niche_strip": 3.0,
+    "spk_niche_strip": 1.5,
     "zone_life": true,
     "host_stand": true,
+    "decorrelate": true,
+    "rw_faceout": 0.14,
+    "rw_vary": true,
+    "rw_pull": 0.08,
+    "steel_mix": 0.85,
+    "life_glasses": [
+     [
+      6.55,
+      3.99,
+      1.07,
+      0.022
+     ],
+     [
+      7.35,
+      4.05,
+      1.07,
+      0.03
+     ]
+    ],
+    "life_sleeves": [
+     [
+      6.95,
+      4.11,
+      1.07,
+      -14.0
+     ]
+    ],
     "plinth_bar": 0.5,
     "plinth_bar_col": "#FFB060",
     "plinth_listen": 0.5,
@@ -355,10 +382,15 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 6.0,
+    "lamp_w": 2.196,
     "lamp_k": 2700,
-    "shade_glow": 0.3,
-    "noshadow": "shell|liner|skin"
+    "shade_glow": 0.3514,
+    "noshadow": "shell|liner|skin",
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
    },
    {
     "kind": "kit",
@@ -738,11 +770,11 @@
     6.05,
     2.0
    ],
-   "power_w": 30.0,
+   "power_w": 12.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
-   "color": 2600,
+   "color": 2400,
    "camera": false
   },
   "rw1": {
@@ -757,11 +789,11 @@
     6.05,
     2.0
    ],
-   "power_w": 30.0,
+   "power_w": 12.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
-   "color": 2600,
+   "color": 2400,
    "camera": false
   },
   "rw2": {
@@ -776,11 +808,11 @@
     6.05,
     2.0
    ],
-   "power_w": 30.0,
+   "power_w": 12.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
-   "color": 2600,
+   "color": 2400,
    "camera": false
   },
   "rw3": {
@@ -795,11 +827,11 @@
     6.05,
     2.0
    ],
-   "power_w": 30.0,
+   "power_w": 12.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
-   "color": 2600,
+   "color": 2400,
    "camera": false
   },
   "altar0": {
@@ -1015,6 +1047,84 @@
     "amp-*#1"
    ]
   },
+  "barback0": {
+   "type": "area",
+   "position": [
+    5.55,
+    5.936,
+    2.466
+   ],
+   "target": [
+    5.55,
+    5.7162,
+    1.716
+   ],
+   "size_m": [
+    0.4,
+    0.2
+   ],
+   "irradiance": 8.0,
+   "color": 2700,
+   "camera": false,
+   "receivers": [
+    "left#0",
+    "right#0",
+    "top#0",
+    "bottom#0",
+    "front-panel#0",
+    "back#0",
+    "brace*#0",
+    "rib-*#0",
+    "port-*#0",
+    "land-*#0",
+    "grip-*#0",
+    "waveguide*#0",
+    "woofer-*#0",
+    "hf-*#0",
+    "lining-*#0",
+    "feet-base#0",
+    "amp-*#0"
+   ]
+  },
+  "barback1": {
+   "type": "area",
+   "position": [
+    8.25,
+    5.936,
+    2.466
+   ],
+   "target": [
+    8.25,
+    5.7162,
+    1.716
+   ],
+   "size_m": [
+    0.4,
+    0.2
+   ],
+   "irradiance": 8.0,
+   "color": 2700,
+   "camera": false,
+   "receivers": [
+    "left#1",
+    "right#1",
+    "top#1",
+    "bottom#1",
+    "front-panel#1",
+    "back#1",
+    "brace*#1",
+    "rib-*#1",
+    "port-*#1",
+    "land-*#1",
+    "grip-*#1",
+    "waveguide*#1",
+    "woofer-*#1",
+    "hf-*#1",
+    "lining-*#1",
+    "feet-base#1",
+    "amp-*#1"
+   ]
+  },
   "barspk0": {
    "type": "spot",
    "position": [
@@ -1027,7 +1137,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 60.0,
+   "power_w": 150.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -1046,7 +1156,7 @@
     5.7162,
     1.866
    ],
-   "power_w": 60.0,
+   "power_w": 150.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,

@@ -366,10 +366,92 @@ def orb_cables(bpy, kit, p, objs):
         T = Matrix.Translation(s['position'])
         objs += _cable(bpy, f'orb-cable#{i}', T, {'radius': 0.0022, 'back': 0.075, 'run': 0.10, 'floor': s['floor']})
 
+
+# --- round 38b (the critics, all frames: the fir, the fluted oak repeat): each loose part of a board or flute object
+# takes one of a few copies of its scanned material, the copies' grain shifted and turned, dealt at random
+def _vary(bpy, mat, k):
+    import math
+    name = f'{mat.name}~v{k}'
+    if name in bpy.data.materials:
+        return bpy.data.materials[name]
+    m = mat.copy(); m.name = name
+    for n in m.node_tree.nodes:
+        if n.type == 'MAPPING':
+            loc = n.inputs['Location'].default_value
+            n.inputs['Location'].default_value = (loc[0] + 0.37 * k, loc[1] + 0.61 * k, loc[2] + 0.53 * k)
+            r = n.inputs['Rotation'].default_value
+            n.inputs['Rotation'].default_value = (r[0], r[1], r[2] + math.radians(180 * (k % 2)))
+    return m
+
+
+def decorrelate(bpy, ob, n=5, seed=38):
+    """Deal the object's loose parts (its boards, its flutes) across `n` shifted copies of its material."""
+    import bmesh, random
+    if not ob.data.materials:
+        return
+    base = ob.data.materials[0]
+    for k in range(1, n):
+        ob.data.materials.append(_vary(bpy, base, k))
+    bm = bmesh.new(); bm.from_mesh(ob.data); bm.faces.ensure_lookup_table()
+    rnd = random.Random(seed); seen = set()
+    for f in bm.faces:
+        if f.index in seen:
+            continue
+        stack = [f]; part = []
+        while stack:
+            g = stack.pop()
+            if g.index in seen:
+                continue
+            seen.add(g.index); part.append(g)
+            for e in g.edges:
+                for h in e.link_faces:
+                    if h.index not in seen:
+                        stack.append(h)
+        k = rnd.randrange(n)
+        for g in part:
+            g.material_index = k
+    bm.to_mesh(ob.data); bm.free()
+
+
+
+# --- round 38b: a sign of life where each camera looks (the lead, from the critics) ----------------------------------
+def extra_life(bpy, kit, p, objs):
+    """Glasses, an open record sleeve, a wet ring on the zinc, a soap on a steel dish: whatever the view's settings list."""
+    import math
+    G = p.get('life_glasses', []); SL = p.get('life_sleeves', []); RG = p.get('life_rings', []); SO = p.get('life_soap')
+    if G:
+        glass = K.principled(bpy, 'tumbler-glass', '#FFFFFF', rough=0.01, trans=1.0, ior=1.5)
+        pour = K.principled(bpy, 'pour-r36', '#B5601A', rough=0.0, trans=1.0, ior=1.36)
+        rocks = [(0, 0), (0.041, 0), (0.0425, 0.09), (0.0385, 0.09), (0.037, 0.016), (0, 0.016)]
+        gl = K.Mesh('life38-glasses'); lq = K.Mesh('life38-pours')
+        for x, y, z, fill in G:
+            K._lathe(gl.bm, rocks, seg=40, z0=z + 0.0002, cx=x, cy=y)
+            K._cyl(lq.bm, x, y, z + 0.0167, 0.0366, fill, seg=40)
+        objs.append(gl.object(bpy, glass, smooth=True)); objs.append(lq.object(bpy, pour, smooth=True))
+    for k, (x, y, z, a) in enumerate(SL):
+        sl = K.Mesh(f'life38-sleeve{k}'); K._obox(sl.bm, x, y, z + 0.0006, 0.314, 0.314, 0.003, math.radians(a))
+        objs.append(sl.object(bpy, K.principled(bpy, 'sleeve-life38', '#B9A98C', rough=0.6)))
+        vr = K.Mesh(f'life38-record{k}'); K._cyl(vr.bm, x + 0.06 * math.cos(math.radians(a)), y + 0.06 * math.sin(math.radians(a)),
+                                                  z + 0.0040, 0.15, 0.0018, seg=64)
+        objs.append(vr.object(bpy, K.principled(bpy, 'vinyl', '#0B0B0C', rough=0.25), smooth=True))
+    if RG:
+        rg = K.Mesh('life38-rings')
+        for x, y, z in RG:
+            K._cyl(rg.bm, x, y, z + 0.00015, 0.040, 0.0002, seg=48)
+        objs.append(rg.object(bpy, K.principled(bpy, 'wet-ring', '#1A1A1A', rough=0.05), smooth=True))
+    if SO:
+        x, y, z = SO
+        d = K.Mesh('life38-soapdish'); K._cyl(d.bm, x, y, z + 0.0003, 0.045, 0.006, seg=40)
+        objs.append(d.object(bpy, K.blackened_steel(bpy), smooth=True))
+        so = K.Mesh('life38-soap'); K._obox(so.bm, x, y, z + 0.0065, 0.07, 0.045, 0.022, math.radians(12))
+        objs.append(so.object(bpy, K.principled(bpy, 'soap-stone', '#CFC6B4', rough=0.7), bevel=0.008, seg=3))
+
+
 def room(bpy, name, p, kit):
     K.R = R                                                           # round 36's builders on round 37's plan
     K.sink = sink                                                     # the sink as smoked glass (the lead, 2026-10-20)
     p = {**DEFAULTS, **p}
+    LK.STEEL_MIX = p.get('steel_mix', 0.55)
     objs = K.room(bpy, name, p, kit)
     niches(bpy, kit, p, objs)
     ledges(bpy, kit, p, objs)
@@ -380,4 +462,9 @@ def room(bpy, name, p, kit):
     if p.get('host_stand'):
         host_stand(bpy, kit, p, objs)
     orb_cables(bpy, kit, p, objs)
+    extra_life(bpy, kit, p, objs)
+    if p.get('decorrelate'):
+        for ob in objs:
+            if any(ob.name.startswith(t) for t in ('counter-flutes', 'alcove-fir', 'altar-fir', 'records-shelving')):
+                decorrelate(bpy, ob)
     return objs

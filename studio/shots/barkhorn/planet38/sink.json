@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   11.2,
-   1.55,
-   1.3
+   11.22,
+   1.85,
+   1.2
   ],
   "target": [
    11.03,
    0.2,
-   0.92
+   0.78
   ],
-  "lens_mm": 45,
+  "lens_mm": 40,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -142,13 +142,23 @@
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
     "sink_strip": 4.0,
-    "sink_wash": 15.0,
+    "sink_wash": 10.0,
     "sink_rough": 0.02,
     "zone_life": true,
     "sink_under": 0.25,
-    "sink_fill": 20.0,
-    "sink_rake": 4.0,
+    "sink_fill": 30.0,
+    "sink_rake": 8.0,
     "host_stand": true,
+    "decorrelate": true,
+    "rw_faceout": 0.14,
+    "rw_vary": true,
+    "rw_pull": 0.08,
+    "steel_mix": 0.85,
+    "life_soap": [
+     11.24,
+     0.145,
+     0.86
+    ],
     "plinth_bar": 0.5,
     "plinth_bar_col": "#FFB060",
     "plinth_listen": 0.5,
@@ -362,10 +372,15 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 6.0,
+    "lamp_w": 1.261,
     "lamp_k": 2700,
-    "shade_glow": 0.3,
-    "noshadow": "shell|liner|skin"
+    "shade_glow": 0.2018,
+    "noshadow": "shell|liner|skin",
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
    },
    {
     "kind": "kit",
@@ -859,8 +874,8 @@
     0.28,
     0.86
    ],
-   "power_w": 15.0,
-   "cone_deg": 12.0,
+   "power_w": 55.0,
+   "cone_deg": 20.0,
    "blend": 0.7,
    "radius_m": 0.02,
    "color": 2700,

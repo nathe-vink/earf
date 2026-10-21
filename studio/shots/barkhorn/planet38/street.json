@@ -120,8 +120,8 @@
     "sphere_w": 6.0,
     "sphere_glow": 1.1,
     "disc_col": "#FFD2A0",
-    "disc_glow": 0.3,
-    "disc_lamp": 10.0,
+    "disc_glow": 0.1,
+    "disc_lamp": 4.0,
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
@@ -130,7 +130,7 @@
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.6,
-    "etch_glow": 0.0,
+    "etch_glow": 0.2,
     "etch_frost": 0.3,
     "shade_glow": 0.12,
     "street": true,
@@ -149,6 +149,11 @@
     "spk_niche_strip": 3.0,
     "zone_life": true,
     "host_stand": true,
+    "decorrelate": true,
+    "rw_faceout": 0.14,
+    "rw_vary": true,
+    "rw_pull": 0.08,
+    "steel_mix": 0.85,
     "plinth_bar": 0.5,
     "plinth_bar_col": "#FFB060",
     "plinth_listen": 0.5,
@@ -362,10 +367,15 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 6.0,
+    "lamp_w": 0.956,
     "lamp_k": 2700,
-    "shade_glow": 0.3,
-    "noshadow": "shell|liner|skin"
+    "shade_glow": 0.1529,
+    "noshadow": "shell|liner|skin",
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
    },
    {
     "kind": "kit",
@@ -718,7 +728,7 @@
     -6.0,
     5.0
    ],
-   "power_w": 120.0,
+   "power_w": 200.0,
    "radius_m": 0.15,
    "color": 3000
   },
@@ -729,7 +739,7 @@
     15.1,
     5.0
    ],
-   "power_w": 120.0,
+   "power_w": 200.0,
    "radius_m": 0.15,
    "color": 3000
   },
@@ -851,8 +861,8 @@
     1.9,
     1.1
    ],
-   "power_w": 1200.0,
-   "cone_deg": 24.0,
+   "power_w": 1500.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -870,8 +880,8 @@
     4.199999999999999,
     1.1
    ],
-   "power_w": 1200.0,
-   "cone_deg": 24.0,
+   "power_w": 1500.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
