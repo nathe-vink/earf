@@ -202,3 +202,15 @@ One judge credits F1b's wider moss bed as planting the speaker; the other calls 
 - the floor's debris and the ferns repeating.
 
 **Next step on realism, if the owner agrees:** a real scanned fly agaric (the lead is asking the owner).
+
+**The lead's two fixes before the finals:**
+1. **The tipped cap stands again.** It read as floating with no stem; this is the lead's fallback.
+2. **The contact shadow.** The speaker already sat 22 mm down on ground flattened around it, and the bark crumbs kept a 31 cm clear ring round it. Now the feet sit 5 mm further down (−27 mm) and the crumbs come up to the plinth's edge (avoid 0.22). A 1:1 crop of the base (`proofs31/element-poison_f1b-p05-base.jpg`) shows the crumbs piled against and over the plinth's foot, with a dark line under the glass at the left: the edge is hidden more than shadowed. The leaf fleck is left as it was.
+
+**The finals** (512 samples, each in two strips with the finish off, each strip its own tracked run, stitched by `stitch.py`, the finish applied once):
+- `renders/2026-10-18/barkhorn/element31/poison_f1b.png`: 2400 × 1600, 4.0 MB.
+- `renders/2026-10-18/barkhorn/element31/poison_f1b-portrait.png`: 1600 × 2000, 3.1 MB. The caps and the berry spikes are in the frame.
+
+A container restart lost the landscape's bottom strip once; it was re-rendered.
+
+For the lead's site swap.
