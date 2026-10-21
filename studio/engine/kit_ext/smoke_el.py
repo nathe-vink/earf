@@ -5,11 +5,16 @@ density `density` per metre carved by noise into wisps and banks (`scale` metres
 the noise left clear, `soft` how gradually it thickens), thinning toward the box's top and its edges (`fade`), its
 colour `color` and its forward scattering `anisotropy` (woodsmoke throws light forward, so a sun behind it makes it
 glow). `rise` stretches the wisps upward, `lean` [dx, dy] shears them as the smoke drifts. `seed` moves the noise.
+
+impact (Smoke E12, the speaker come down burning like a meteor): what the crash leaves on the ground it hit (the ground
+piece's own dents and furrows dig the crater and the trench). The ground's material, the object named by `on`, is
+charred round the crater and along the trench, sooted wider, and glows in its cracks near the crater; and `debris`
+chunks of the crust, broken from the crater and the trench and thrown out, lie round them in the same material.
 """
 import math
 
 import bmesh
-from mathutils import Vector, noise
+from mathutils import Matrix, Vector, noise
 
 
 def woodsmoke(bpy, name, p, kit):
@@ -436,3 +441,124 @@ def ridge(bpy, name, p, kit):
     b.inputs['Roughness'].default_value = 0.95
     me.materials.append(m)
     return [ob]
+
+
+def impact(bpy, name, p, kit):
+    """The crash's marks. `centre` [x, y] the crater's; `char` [inner, outer] radii (m) over which the ground goes from
+    burnt black to its own colour, ragged by noise; `soot` the radius of the fainter fallout round it; `furrow` [x0, y0,
+    x1, y1, half-width] a trench charred along its floor; `glow` the strength of the heat glowing in the crust's cracks
+    within `glow_r` of the centre; `debris` {count, size [min, max] m, spread [inner, outer] m, ahead (degrees, the way
+    the crash was travelling: more is thrown that way), seed}. Returns the debris."""
+    import random
+    ob = bpy.data.objects[p['on']]
+    m = ob.data.materials[0]; nt = m.node_tree; L = nt.links.new
+    bs = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    cx, cy = p.get('centre', [0.0, 0.0])
+
+    def node(t, **k):
+        n = nt.nodes.new(t)
+        for key, v in k.items():
+            setattr(n, key, v)
+        return n
+
+    def math_(op, a, b=None):
+        n = node('ShaderNodeMath', operation=op)
+        for i, v in enumerate((a, b)):
+            if v is None:
+                continue
+            if isinstance(v, (int, float)):
+                n.inputs[i].default_value = v
+            else:
+                L(v, n.inputs[i])
+        return n.outputs[0]
+
+    def smooth(v, lo, hi):                                          # 0 at lo, 1 at hi (either way round)
+        n = node('ShaderNodeMapRange', interpolation_type='SMOOTHSTEP', clamp=True)
+        n.inputs['From Min'].default_value = lo; n.inputs['From Max'].default_value = hi
+        L(v, n.inputs['Value']); return n.outputs['Result']
+
+    geo = node('ShaderNodeNewGeometry'); xyz = node('ShaderNodeSeparateXYZ'); L(geo.outputs['Position'], xyz.inputs[0])
+    dx = math_('SUBTRACT', xyz.outputs['X'], cx); dy = math_('SUBTRACT', xyz.outputs['Y'], cy)
+    d = math_('SQRT', math_('ADD', math_('MULTIPLY', dx, dx), math_('MULTIPLY', dy, dy)))
+    tc = node('ShaderNodeTexCoord')
+    nz = node('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value = 1.6; nz.inputs['Detail'].default_value = 6.0
+    L(geo.outputs['Position'], nz.inputs['Vector'])
+    jag = math_('MULTIPLY', math_('SUBTRACT', nz.outputs['Fac'], 0.5), p.get('jag', 0.6))
+    dj = math_('ADD', d, jag)
+    r0, r1 = p.get('char', [0.6, 1.4])
+    char = smooth(dj, r1, r0)
+    if p.get('furrow'):
+        x0, y0, x1, y1, hw = p['furrow']
+        ax, ay = x1 - x0, y1 - y0; l2 = ax * ax + ay * ay
+        px = math_('SUBTRACT', xyz.outputs['X'], x0); py = math_('SUBTRACT', xyz.outputs['Y'], y0)
+        t = math_('DIVIDE', math_('ADD', math_('MULTIPLY', px, ax), math_('MULTIPLY', py, ay)), l2)
+        t = math_('MINIMUM', math_('MAXIMUM', t, 0.0), 1.0)
+        qx = math_('SUBTRACT', px, math_('MULTIPLY', t, ax)); qy = math_('SUBTRACT', py, math_('MULTIPLY', t, ay))
+        ds = math_('ADD', math_('SQRT', math_('ADD', math_('MULTIPLY', qx, qx), math_('MULTIPLY', qy, qy))), jag)
+        fw = math_('MULTIPLY', smooth(ds, hw * 1.6, hw * 0.5), math_('ADD', 0.75, math_('MULTIPLY', t, 0.25)))
+        char = math_('MAXIMUM', char, fw)
+    soot = math_('MULTIPLY', smooth(dj, p.get('soot', 3.0), r0), p.get('soot_mix', 0.55))
+    col_in = bs.inputs['Base Color'].links[0].from_socket if bs.inputs['Base Color'].links else None
+
+    def mix(fac, a, hexcol):
+        n = node('ShaderNodeMix', data_type='RGBA'); L(fac, n.inputs['Factor'])
+        if a is not None:
+            L(a, n.inputs[6])
+        n.inputs[7].default_value = kit.M.hex_lin(hexcol)
+        return n.outputs[2]
+    col = mix(soot, col_in, p.get('soot_color', '#4A423B'))
+    col = mix(char, col, p.get('char_color', '#121010'))
+    L(col, bs.inputs['Base Color'])
+    if bs.inputs['Roughness'].links:
+        rough = math_('MAXIMUM', bs.inputs['Roughness'].links[0].from_socket, math_('MULTIPLY', char, 0.95))
+        L(rough, bs.inputs['Roughness'])
+    if p.get('glow'):                                               # heat in the cracks of the crust near the crater
+        vo = node('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE'); vo.inputs['Scale'].default_value = 1.0 / 0.11
+        L(geo.outputs['Position'], vo.inputs['Vector'])
+        crack = smooth(vo.outputs['Distance'], 0.045, 0.0)
+        hot = smooth(dj, p.get('glow_r', 0.9), 0.15)
+        fl = node('ShaderNodeTexNoise'); fl.inputs['Scale'].default_value = 4.0; fl.inputs['Detail'].default_value = 3.0
+        L(geo.outputs['Position'], fl.inputs['Vector'])
+        e = math_('MULTIPLY', math_('MULTIPLY', crack, hot), smooth(fl.outputs['Fac'], 0.42, 0.62))
+        bs.inputs['Emission Color'].default_value = kit.M.hex_lin(p.get('glow_color', '#FF5A14'))
+        L(math_('MULTIPLY', e, p['glow']), bs.inputs['Emission Strength'])
+    # the debris: crust broken into slabs, thrown out round the crater, most of it the way the crash was going
+    out = []
+    db = p.get('debris')
+    if db:
+        rnd = random.Random(db.get('seed', 1))
+        s0, s1 = db.get('size', [0.04, 0.2]); i0, i1 = db.get('spread', [0.6, 2.4])
+        ahead = math.radians(db.get('ahead', 90.0))
+        bm = bmesh.new()
+        bpy.context.view_layer.update()                               # the ground as built, for the ray casts
+        dg = bpy.context.evaluated_depsgraph_get()
+        for k in range(db.get('count', 80)):
+            a = ahead + rnd.gauss(0.0, 1.0) * (math.pi * 0.45) if rnd.random() < 0.7 else rnd.uniform(0, 2 * math.pi)
+            r = i0 + (i1 - i0) * rnd.random() ** 1.6
+            sz = s0 + (s1 - s0) * rnd.random() ** 2.2 * max(0.3, 1.0 - (r - i0) / (i1 - i0))
+            x, y = cx + math.cos(a) * r, cy + math.sin(a) * r
+            hit, loc, nrm, _, _, _ = bpy.context.scene.ray_cast(dg, Vector((x, y, 2.0)), Vector((0, 0, -1)))
+            z = loc.z if hit else 0.0
+            n = rnd.randint(5, 8)
+            ring = []
+            for i in range(n):
+                t = 2 * math.pi * (i + rnd.uniform(-0.3, 0.3)) / n
+                rr = sz * rnd.uniform(0.55, 1.0)
+                ring.append(bm.verts.new((math.cos(t) * rr, math.sin(t) * rr, 0.0)))
+            f = bm.faces.new(ring)
+            th = sz * rnd.uniform(0.15, 0.3)
+            ex = bmesh.ops.extrude_face_region(bm, geom=[f])
+            top = [g for g in ex['geom'] if isinstance(g, bmesh.types.BMVert)]
+            bmesh.ops.translate(bm, vec=Vector((0, 0, th)), verts=top)
+            verts = ring + top
+            tilt = math.radians(rnd.uniform(5, 40) if r < i0 * 1.6 else rnd.uniform(0, 18))   # heaved up near the rim
+            rot = Matrix.Rotation(tilt, 3, Vector((math.cos(a + 1.3), math.sin(a + 1.3), 0.0))) @ \
+                Matrix.Rotation(rnd.uniform(0, 2 * math.pi), 3, 'Z')
+            bmesh.ops.rotate(bm, verts=verts, cent=Vector((0, 0, 0)), matrix=rot)
+            bmesh.ops.translate(bm, vec=Vector((x, y, z - th * 0.35)), verts=verts)
+        bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+        me = bpy.data.meshes.new(name + '-debris'); bm.to_mesh(me); bm.free()
+        me.materials.append(m)
+        d_ob = bpy.data.objects.new(name + '-debris', me); bpy.context.scene.collection.objects.link(d_ob)
+        out.append(d_ob)
+    return out

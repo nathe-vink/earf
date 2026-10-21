@@ -18,7 +18,12 @@ a light wind.
   - sponges at the lid and the domain's ends, so nothing wraps round;
   - for E10, whose critics saw E9's billows all one size ("cotton-ball", "metaball lobes"): `--disturb STRENGTH SCALE`
     pairs, random kicks inside the smoke at each scale (m/s^2, m), drifting up with it, that break the lobes into many
-    sizes; `--tau-soot`, the soot thinning with age (s), so the old edges go wispy.
+    sizes; `--tau-soot`, the soot thinning with age (s), so the old edges go wispy;
+  - for E12, the speaker come down burning like a meteor: `--solid CX CY Z0 HX HY Z1 YAW`, boxes the flow goes round
+    (no flow through their faces, no smoke inside: the speaker, so the fire wraps it and nothing shows inside its clear
+    acrylic), and `--shell RATE HEAT FLAME W FALL`, the solids' skins burning: soot, heat and flame fed in the cells just
+    outside each solid, strongest at its foot and falling off up it over FALL metres, the gas pushed up at W;
+    `--shell-quiet DX DY K` burns the side facing (DX, DY), the lens's, less (a first look hid the speaker's face).
 
 It writes the last frame as an .npz of 8-bit grids (square-root coded), which `plume.py` turns into a volume in Cycles.
 Run once; the result is committed beside the shot, so a render never needs this file or numba:
@@ -26,6 +31,7 @@ Run once; the result is committed beside the shot, so a render never needs this 
     pip install --target <dir> numba==0.60.0 llvmlite==0.43.0 --no-deps
     PYTHONPATH=<dir> python3.11 plume_sim.py OUT.npz [--dx 0.2] [--seconds 20] [--seed 1]
         [--velocity sl|mc] [--disturb 6 0.6 3 1.6] [--disturb-rho 0.5] [--tau-soot 25]
+        [--solid 2 2.5 0 0.31 0.22 1.28 -32] [--shell 6 1 1 2 0.5]
 """
 import argparse
 import math
@@ -370,6 +376,77 @@ def sponge(s, u, v, w, uw, dt, nx_band, nz_band, cool_heat, cool_flame, fade_soo
                     w[i, j, k + 1] *= damp
 
 
+def solid_mask(NX, NY, NZ, dx, boxes, quiet=None):
+    """The cells inside any of the boxes (cx, cy, z0, hx, hy, z1, yaw degrees), and the fluid cells within two cells of
+    them (the skin a solid's burning feeds), each skin cell with its height above its solid's foot and a weight: 1, or
+    with `quiet` (dx, dy, k) less on the side facing (dx, dy) (the lens: a product shot keeps the face the camera sees
+    clear of flame), down to 1 - k on that face itself."""
+    x = (np.arange(NX) + 0.5)[:, None, None] * dx; y = (np.arange(NY) + 0.5)[None, :, None] * dx
+    z = (np.arange(NZ) + 0.5)[None, None, :] * dx
+    solid = np.zeros((NX, NY, NZ), np.bool_); skin = np.zeros((NX, NY, NZ), np.float32) - 1.0
+    weight = np.ones((NX, NY, NZ), np.float32)
+    for cx, cy, z0, hx, hy, z1, yaw in boxes:
+        c, s_ = math.cos(math.radians(yaw)), math.sin(math.radians(yaw))
+        lx = (x - cx) * c + (y - cy) * s_; ly = -(x - cx) * s_ + (y - cy) * c
+        inside = (np.abs(lx) <= hx) & (np.abs(ly) <= hy) & (z >= z0) & (z <= z1)
+        near = (np.abs(lx) <= hx + 2 * dx) & (np.abs(ly) <= hy + 2 * dx) & (z >= z0) & (z <= z1 + 2 * dx)
+        solid |= inside
+        sk = near & ~inside
+        skin = np.where(sk & (skin < 0), np.broadcast_to(z - z0, skin.shape), skin)
+        if quiet is not None:
+            ox, oy = x - cx, y - cy
+            r = np.sqrt(ox * ox + oy * oy) + 1e-6
+            face = np.clip((ox * quiet[0] + oy * quiet[1]) / r, 0.0, 1.0)
+            weight = np.where(sk, 1.0 - quiet[2] * np.broadcast_to(face, weight.shape), weight)
+    skin[solid] = -1.0
+    return solid, skin.astype(np.float32), weight.astype(np.float32)
+
+
+@njit(parallel=True, fastmath=True)
+def enforce_solid(s, u, v, w, solid):
+    """No smoke inside a solid, and no flow through its faces: every face with a solid cell on either side is shut."""
+    NS, NX, NY, NZ = s.shape
+    for i in prange(NX):
+        im = (i - 1) % NX
+        for j in range(NY):
+            jm = (j - 1) % NY
+            for k in range(NZ):
+                if solid[i, j, k]:
+                    for n in range(NS):
+                        s[n, i, j, k] = 0.0
+                    u[i, j, k] = 0.0; v[i, j, k] = 0.0; w[i, j, k] = 0.0; w[i, j, k + 1] = 0.0
+                else:
+                    if solid[im, j, k]:
+                        u[i, j, k] = 0.0
+                    if solid[i, jm, k]:
+                        v[i, j, k] = 0.0
+                    if k > 0 and solid[i, j, k - 1]:
+                        w[i, j, k] = 0.0
+
+
+@njit(parallel=True, fastmath=True)
+def emit_shell(s, w, skin, weight, t, dt, dx, seed, rate, heat_src, flame_src, w_src, fall, scale):
+    """A solid's skin burning: in its skin cells soot, heat and flame are fed and the gas pushed up, by the same churning
+    noise as the fire, strongest at the solid's foot and falling off over `fall` metres up it."""
+    NS, NX, NY, NZ = s.shape
+    for i in prange(NX):
+        for j in range(NY):
+            for k in range(NZ):
+                hgt = skin[i, j, k]
+                if hgt < 0.0:
+                    continue
+                x = (i + 0.5) * dx; y = (j + 0.5) * dx; z = (k + 0.5) * dx
+                n = _vnoise(x / scale, y / scale, (z - 3.0 * t) / scale, seed + 3)
+                n2 = _vnoise(x / (0.4 * scale), y / (0.4 * scale), (z - 4.0 * t) / (0.4 * scale), seed + 11)
+                m = max(0.0, 1.6 * n + 0.6 * n2 - 0.7) * math.exp(-hgt / fall) * weight[i, j, k]
+                s[0, i, j, k] += dt * rate * m
+                s[1, i, j, k] = max(s[1, i, j, k], heat_src * m)
+                s[2, i, j, k] = max(s[2, i, j, k], flame_src * m)
+                ww = w_src * m
+                if w[i, j, k + 1] < ww:
+                    w[i, j, k + 1] = ww
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('out')
@@ -396,6 +473,13 @@ def main():
                     help='pairs of strength (m/s^2) and scale (m): random kicks inside the smoke at those scales')
     ap.add_argument('--disturb-rho', type=float, default=0.5, help='the soot density at which the kicks reach full strength')
     ap.add_argument('--tau-soot', type=float, default=0.0, help='seconds for the soot to thin by e (0: never)')
+    # E12's two (off unless given):
+    ap.add_argument('--solid', type=float, nargs=7, action='append', default=[],
+                    help='a box the flow goes round: centre x y, foot z, half-sizes x y, top z, yaw degrees (repeatable)')
+    ap.add_argument('--shell', type=float, nargs=5, default=None,
+                    help="the solids' skins burning: soot rate, heat, flame, upward push (m/s), fall-off up the solid (m)")
+    ap.add_argument('--shell-quiet', type=float, nargs=3, default=None,
+                    help='the skins burn less on the side facing (dx, dy), by up to k on that face (the lens side)')
     a = ap.parse_args()
     assert len(a.disturb) % 2 == 0, '--disturb takes strength, scale pairs'
 
@@ -423,6 +507,9 @@ def main():
     lam = ((li + lj + lk) / dx ** 2).astype(np.float64)
     lam[0, 0, 0] = 1.0
     src = np.array(a.source, np.float64)
+    if a.solid:
+        solid, skin, weight = solid_mask(NX, NY, NZ, dx, a.solid, a.shell_quiet)
+        print(f'solids: {int(solid.sum())} cells, skin {int((skin >= 0).sum())} cells')
     steps = int(round(a.seconds / a.dt))
     h = a.dt / dx
     t0 = time.time()
@@ -431,12 +518,19 @@ def main():
     for n in range(steps):
         t = n * a.dt
         emit(s, w, src, t, a.dt, dx, a.seed, a.rate, 1.0, 1.0, a.w_src, a.noise)
+        if a.solid and a.shell:
+            emit_shell(s, w, skin, weight, t, a.dt, dx, a.seed, a.shell[0], a.shell[1], a.shell[2], a.shell[3], a.shell[4],
+                       a.noise)
+        if a.solid:
+            enforce_solid(s, u, v, w, solid)
         centre_velocity(u, v, w, uc, vc, wc)
         vorticity(uc, vc, wc, ox, oy, oz, om)
         confinement(ox, oy, oz, om, fx, fy, fz, a.eps)
         apply_forces(u, v, w, fx, fy, fz, s[1], s[0], a.dt, a.beta, a.alpha)
         for m in range(0, len(a.disturb), 2):
             disturb(u, v, w, s[0], t, a.dt, dx, a.seed + 101 + 13 * m, a.disturb[m], a.disturb[m + 1], a.disturb_rho)
+        if a.solid:
+            enforce_solid(s, u, v, w, solid)
         divergence(u, v, w, d, 1.0 / dx)
         q = sfft.dct(d, type=2, axis=2, norm='ortho', workers=4)
         q = sfft.rfftn(q, axes=(0, 1), workers=4)
@@ -445,6 +539,8 @@ def main():
         q = sfft.irfftn(q, s=(NX, NY), axes=(0, 1), workers=4)
         q = sfft.idct(q, type=2, axis=2, norm='ortho', workers=4).astype(f32)
         subtract_gradient(u, v, w, q, 1.0 / dx)
+        if a.solid:
+            enforce_solid(s, u, v, w, solid)
         if a.velocity == 'mc':
             advect_velocity_1(u, v, w, un, vn, wn, lo_u, hi_u, lo_v, hi_v, lo_w, hi_w, h)
             advect_velocity_2(u, v, w, un, vn, wn, lo_u, hi_u, lo_v, hi_v, lo_w, hi_w, uo, vo, wo, h)
@@ -455,6 +551,8 @@ def main():
         advect_scalars_2(un, vn, wn, s, s1, mn, mx, sn, h)
         u, un = un, u; v, vn = vn, v; w, wn = wn, w; s, sn = sn, s
         sponge(s, u, v, w, uw, a.dt, int(0.08 * NX), int(0.1 * NZ), cool_h, cool_f, fade)
+        if a.solid:
+            enforce_solid(s, u, v, w, solid)
         if n % 20 == 0 or n == steps - 1:
             el = time.time() - t0
             top = np.nonzero(s[0].max(axis=(0, 1)) > 0.05)[0]
@@ -468,6 +566,8 @@ def main():
         sc = float(np.percentile(g[g > 1e-4], 99.9)) if (g > 1e-4).any() else 1.0
         out[name] = np.round(np.sqrt(np.clip(g / sc, 0, 1)) * 255).astype(np.uint8)
         out[name + '_scale'] = np.float32(sc)
+    if a.solid:
+        out['solids'] = np.array(a.solid, np.float32)
     np.savez_compressed(a.out, dx=np.float32(dx), size=np.array([NX, NY, NZ]), source=src.astype(np.float32),
                         wind=np.float32(a.wind), seconds=np.float32(a.seconds), seed=np.int32(a.seed), **out)
     print('wrote', a.out, f'in {time.time() - t0:.0f}s')

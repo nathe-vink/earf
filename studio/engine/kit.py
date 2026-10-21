@@ -408,7 +408,8 @@ def _photographic(bpy, name, p):
         ob = assets.ground(bpy, name, p['texture'], tuple(p.get('size', [8.0, 8.0])), p.get('res', '2k'),
                            tuple(p.get('position', [0, 0, 0])), p.get('cells'), p.get('displace', 0.03), p.get('tint'),
                            p.get('tint_mix', 0.0), p.get('tex_scale'), p.get('rough_mul', 1.0), p.get('bump', 1.0), p.get('relief'),
-                           tuple(p.get('flat', [0.0, 0.0, 0.9])) if p.get('flat') is not False else None)
+                           tuple(p.get('flat', [0.0, 0.0, 0.9])) if p.get('flat') is not False else None,
+                           p.get('dents'), p.get('furrows'))
         ob.rotation_euler.z = math.radians(p.get('rotate', [0, 0, 0])[2] if isinstance(p.get('rotate'), list) else p.get('rotate', 0))
         return [ob]
     if shape == 'asset':

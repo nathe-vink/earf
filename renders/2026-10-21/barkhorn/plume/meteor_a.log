@@ -1,0 +1,34 @@
+grid 160 x 100 x 160 = 2.6 M cells, dx 0.05 m, 12.0 s at dt 0.02
+solids: 2808 cells, skin 2960 cells
+step 1/600 t=0.02s  178s elapsed (177.55s/step)  soot max 0.23  top 0.2 m  |w| max 1.8
+step 21/600 t=0.42s  198s elapsed (9.44s/step)  soot max 2.72  top 1.4 m  |w| max 3.0
+step 41/600 t=0.82s  220s elapsed (5.38s/step)  soot max 5.76  top 1.5 m  |w| max 5.8
+step 61/600 t=1.22s  241s elapsed (3.96s/step)  soot max 7.60  top 2.1 m  |w| max 5.7
+step 81/600 t=1.62s  262s elapsed (3.23s/step)  soot max 9.07  top 2.8 m  |w| max 5.3
+step 101/600 t=2.02s  286s elapsed (2.84s/step)  soot max 12.11  top 3.5 m  |w| max 5.6
+step 121/600 t=2.42s  322s elapsed (2.66s/step)  soot max 11.73  top 4.0 m  |w| max 5.4
+step 141/600 t=2.82s  361s elapsed (2.56s/step)  soot max 7.36  top 4.4 m  |w| max 4.9
+step 161/600 t=3.22s  404s elapsed (2.51s/step)  soot max 7.24  top 4.9 m  |w| max 5.6
+step 181/600 t=3.62s  445s elapsed (2.46s/step)  soot max 7.40  top 5.2 m  |w| max 4.6
+step 201/600 t=4.02s  487s elapsed (2.42s/step)  soot max 8.15  top 5.7 m  |w| max 5.7
+step 221/600 t=4.42s  529s elapsed (2.39s/step)  soot max 11.30  top 5.8 m  |w| max 5.5
+step 241/600 t=4.82s  571s elapsed (2.37s/step)  soot max 11.87  top 6.4 m  |w| max 5.4
+step 261/600 t=5.22s  609s elapsed (2.33s/step)  soot max 12.02  top 6.8 m  |w| max 5.4
+step 281/600 t=5.62s  645s elapsed (2.30s/step)  soot max 11.86  top 7.0 m  |w| max 5.5
+step 301/600 t=6.02s  683s elapsed (2.27s/step)  soot max 11.67  top 7.2 m  |w| max 5.7
+step 321/600 t=6.42s  720s elapsed (2.24s/step)  soot max 11.49  top 7.2 m  |w| max 5.4
+step 341/600 t=6.82s  759s elapsed (2.22s/step)  soot max 11.31  top 7.4 m  |w| max 5.4
+step 361/600 t=7.22s  798s elapsed (2.21s/step)  soot max 11.13  top 7.5 m  |w| max 5.5
+step 381/600 t=7.62s  820s elapsed (2.15s/step)  soot max 10.95  top 7.5 m  |w| max 4.6
+step 401/600 t=8.02s  840s elapsed (2.10s/step)  soot max 10.78  top 7.6 m  |w| max 4.2
+step 421/600 t=8.42s  864s elapsed (2.05s/step)  soot max 10.61  top 7.6 m  |w| max 5.6
+step 441/600 t=8.82s  898s elapsed (2.04s/step)  soot max 10.44  top 7.6 m  |w| max 5.5
+step 461/600 t=9.22s  924s elapsed (2.00s/step)  soot max 10.27  top 7.6 m  |w| max 5.8
+step 481/600 t=9.62s  944s elapsed (1.96s/step)  soot max 10.37  top 7.6 m  |w| max 6.3
+step 501/600 t=10.02s  962s elapsed (1.92s/step)  soot max 11.38  top 7.5 m  |w| max 5.0
+step 521/600 t=10.42s  986s elapsed (1.89s/step)  soot max 12.06  top 7.5 m  |w| max 5.3
+step 541/600 t=10.82s  1020s elapsed (1.88s/step)  soot max 11.79  top 7.4 m  |w| max 5.6
+step 561/600 t=11.22s  1044s elapsed (1.86s/step)  soot max 11.61  top 7.4 m  |w| max 6.1
+step 581/600 t=11.62s  1065s elapsed (1.83s/step)  soot max 11.42  top 7.4 m  |w| max 5.7
+step 600/600 t=12.00s  1084s elapsed (1.81s/step)  soot max 11.25  top 7.4 m  |w| max 5.4
+wrote meteor_a.npz in 1084s

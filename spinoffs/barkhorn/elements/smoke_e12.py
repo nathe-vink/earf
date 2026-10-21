@@ -1,0 +1,79 @@
+"""Smoke, setting E12: the meteor. The owner, 2026-10-21, on E10's fire-and-smoke tests: "I meant it would look cool if
+the speaker was enveloped in this particular fire/smoke, like it's an asteroid that just burned through the atmosphere
+and came crashing into a road or salt flats." (E11 had read his first note as smoke rising behind the speaker.)
+
+E6's salt pan (smoke_pan.py), less its far tower: the crust to the horizon, the low sun from the front-left, the cloud
+shadow, the camera and the lights on the speaker. The speaker has just come down. It ploughed a trench in from the back
+left, its spoil heaped along both banks, and stopped in a crater with a heaved, broken rim, sunk to its foot; the crust
+is burnt black round it and along the trench, sooted wider, glowing in its cracks near the crater, and slabs of it lie
+thrown out ahead, the way it was going. It is still burning: flames lick up its sides and back and the black smoke rolls
+off it and away on a light wind.
+
+The fire is E10's solver (plume_sim.py) with the speaker in it as a solid the flow goes round, so the fire wraps it and
+no smoke stands inside its clear acrylic, and its skin burning, strongest at its foot, less on the face the camera sees
+(a first look, m1, hid the speaker's face in flame); a ring of fire round its foot, set behind it. meteor_a: 8 x 5 x 8 m
+at 0.05 m, 12 s, wind 2.2 m/s, confinement 3.2 (the small plume's law, eps x dx 0.16). The flames are E9's: black-body
+from 1100 to 2100 K, broken into hard-edged tongues.
+"""
+import copy
+import math
+
+import smoke_pan as P
+from common import piece, point
+
+CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_a.npz'
+ROT = 18.0                     # the speaker's turn (E6's)
+WIND = 50.0                    # the sim's downwind (+x) turned: away from the camera, a little right
+SINK = 0.10                    # the speaker's foot below the crust: it stopped in its crater
+CRATER = [0.0, 0.0, 0.62, 0.12, 0.06, 0.18]                      # x, y, r, depth, rim, rim width
+TRENCH = [-2.6, 6.2, -0.15, 0.55, 0.36, 0.05, 0.13, 0.08]        # from, to, half-width, depth there and here, rim
+AHEAD = math.degrees(math.atan2(TRENCH[3] - TRENCH[1], TRENCH[2] - TRENCH[0]))   # the way it was travelling
+
+
+def fire():
+    """The fire as a volume: E10's plume shader with E9's flames, the box's floor at the crater's."""
+    return piece('ext', module='plume', fn='plume', cache=CACHE, position=[0.0, 0.0, -SINK], rotate_z=WIND,
+                 density=4.5, strength=220.0, color='#8F857B', anisotropy=0.4, cool=1100.0, hot=2100.0,
+                 flame_floor=0.25, tongues=0.9, tongue_scale=0.12, tongue_edge=[0.42, 0.62], edge=[0.02, 0.22],
+                 detail=2.5, detail_scale=0.1, detail_octaves=4.0, breakup=0.45, breakup_scale=0.35,
+                 breakup_octaves=2.0, tongue_octaves=3.0, seed=3)
+
+
+def impact(ground_name):
+    return piece('ext', module='smoke_el', fn='impact', on=ground_name, centre=CRATER[:2], char=[0.9, 1.7], jag=0.8,
+                 soot=3.5, soot_mix=0.6, furrow=TRENCH[:5], glow=8.0, glow_r=1.3,
+                 debris={'count': 90, 'size': [0.04, 0.22], 'spread': [0.65, 2.6], 'ahead': round(AHEAD, 1), 'seed': 3})
+
+
+def firelight():
+    """The flames' light: low on both flanks and behind, warm, on the speaker, the crater and the crust."""
+    a = math.radians(ROT)
+    out = {}
+    for k, (x, y, z, w) in enumerate([(-0.48, 0.1, 0.45, 520.0), (0.48, 0.15, 0.4, 520.0), (0.0, 0.42, 0.6, 380.0)]):
+        out[f'flame{k}'] = point([round(x * math.cos(a) - y * math.sin(a), 3), round(x * math.sin(a) + y * math.cos(a), 3),
+                                  z - SINK], w, '#FF7A2E', 0.35)
+    return out
+
+
+def shot():
+    s = copy.deepcopy(P.shot())
+    props = s['set']['props']
+    props[:] = [p for p in props if p.get('fn') != 'woodsmoke']
+    g = next(p for p in props if p.get('shape') == 'ground')
+    g['dents'], g['furrows'] = [CRATER], [TRENCH]
+    for p in props:
+        if p.get('fn') == 'occluder':                                # the contact shadow, down in the crater with it
+            p['position'] = [p['position'][0], p['position'][1], round(p['position'][2] - SINK, 3)]
+    props += [fire(), impact(f'prop{props.index(g)}-kit')]
+    for inst in s['product']['instances']:
+        inst['position'] = [inst['position'][0], inst['position'][1], round(inst['position'][2] - SINK, 3)]
+    s['lights'].update(firelight())
+    s['title'] = 'barkhorn, Smoke E12, the meteor: the speaker come down burning on the salt pan'
+    return s
+
+
+def portrait():
+    sh = shot()
+    p = P.portrait()
+    p['set'], p['lights'], p['product'], p['title'] = sh['set'], sh['lights'], sh['product'], sh['title'] + ' (4:5)'
+    return p

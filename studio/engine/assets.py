@@ -389,12 +389,16 @@ def scatter(bpy, ids, res='2k', count=20, area=(-3, -3, 3, 3), avoid=(), scale=(
 
 
 def ground(bpy, name, aid, size=(8.0, 8.0), res='2k', centre=(0.0, 0.0, 0.0), cells=None, displace=0.03,
-           tint=None, tint_mix=0.0, scale=None, rough_mul=1.0, bump=1.0, relief=None, flat=(0.0, 0.0, 0.9)):
+           tint=None, tint_mix=0.0, scale=None, rough_mul=1.0, bump=1.0, relief=None, flat=(0.0, 0.0, 0.9),
+           dents=None, furrows=None):
     """A patch of ground `size` metres, dense enough to take its texture's height map (`displace` metres) as true
     displacement, laid with that texture at its real size. `relief` (metres, optional) adds broad undulation by noise
     so the ground does not read as a floor; it fades to nothing within `flat` (x, y, r: a world point and a radius,
     the product's footprint by default) so what stands there stands on level ground; `cells` sets the mesh's density
-    (default about 1.5 cm)."""
+    (default about 1.5 cm). Smoke E12's impact, both optional and in world metres: `dents`, craters [x, y, r, depth,
+    rim, rim width] (a bowl `depth` deep at its centre, its lip raised `rim` round radius r), and `furrows`, trenches
+    [x0, y0, x1, y1, half-width, depth at the start, depth at the end, rim] (a groove ploughed from the first point to
+    the second, its spoil heaped along both banks)."""
     import bmesh
     w, d = size
     nx = cells or max(2, int(w / 0.015)); ny = max(2, int(nx * d / w))
@@ -411,6 +415,34 @@ def ground(bpy, name, aid, size=(8.0, 8.0), res='2k', centre=(0.0, 0.0, 0.0), ce
                 q = min(1.0, max(0.0, (math.hypot(v.co.x - fx, v.co.y - fy) - fr) / fr))
                 t = q * q * (3 - 2 * q)                               # level under the product, rising to full by 2r
             v.co.z += t * relief * noise.noise(Vector((v.co.x * 0.35, v.co.y * 0.35, 0.7)))
+    if dents or furrows:
+        from mathutils import noise as nz, Vector as V
+        for v in bm.verts:
+            x, y = v.co.x + centre[0], v.co.y + centre[1]
+            dz = 0.0
+            for cx, cy, r, depth, rim, rw in dents or []:
+                d = math.hypot(x - cx, y - cy)
+                if d > r + 4 * rw:
+                    continue
+                jag = 1.0 + 0.12 * nz.noise(V((x * 6.0, y * 6.0, 3.1)))      # no crater is round
+                q = d / (r * jag)
+                if q < 1.0:
+                    dz -= depth * (1.0 - q * q)
+                dz += rim * math.exp(-((d - r * jag) / rw) ** 2) * (1.0 + 0.5 * nz.noise(V((x * 9.0, y * 9.0, 5.3))))
+            for x0, y0, x1, y1, hw, d0, d1, rim in furrows or []:
+                ax, ay = x1 - x0, y1 - y0; L2 = ax * ax + ay * ay
+                t = max(0.0, min(1.0, ((x - x0) * ax + (y - y0) * ay) / L2))
+                px, py = x0 + ax * t, y0 + ay * t
+                d = math.hypot(x - px, y - py)
+                w = hw * (0.5 + 0.5 * t) * (1.0 + 0.15 * nz.noise(V((x * 5.0, y * 5.0, 7.7))))   # wider as it bit deeper
+                if d > 3 * w:
+                    continue
+                q = d / w
+                depth = d0 + (d1 - d0) * t
+                if q < 1.0:
+                    dz -= depth * (1.0 - q * q)
+                dz += rim * (0.3 + 0.7 * t) * math.exp(-((q - 1.15) / 0.45) ** 2)
+            v.co.z += dz
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     for f in me.polygons:
         f.use_smooth = True
