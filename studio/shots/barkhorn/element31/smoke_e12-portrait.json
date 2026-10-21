@@ -13,6 +13,10 @@
     "rotate_z": 18.0,
     "hide": [
      "cloth-disc"
+    ],
+    "tilt": [
+     4.0,
+     -1.5
     ]
    }
   ]
@@ -85,6 +89,35 @@
     "kind": "kit",
     "shape": "ext",
     "module": "smoke_el",
+    "fn": "woodsmoke",
+    "position": [
+     0,
+     500,
+     -1
+    ],
+    "size": [
+     1600,
+     900,
+     45
+    ],
+    "density": 0.0025,
+    "seed": 49,
+    "color": "#8C8C8C",
+    "scale": 200.0,
+    "cut": 0.0,
+    "soft": 0.9,
+    "anisotropy": 0.2,
+    "fade": [
+     0.1,
+     0.1,
+     0.7
+    ],
+    "floor": 0.0025
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
     "fn": "occluder",
     "position": [
      0.0,
@@ -110,7 +143,7 @@
     ],
     "rotate_z": 50.0,
     "density": 4.5,
-    "strength": 220.0,
+    "strength": 110.0,
     "color": "#8F857B",
     "anisotropy": 0.4,
     "cool": 1100.0,
@@ -160,10 +193,10 @@
      0.36
     ],
     "glow": 4.0,
-    "glow_r": 1.0,
+    "glow_r": 0.9,
     "glow_patch": [
-     0.46,
-     0.64
+     0.56,
+     0.7
     ],
     "debris": {
      "count": 90,
@@ -351,44 +384,47 @@
   "flame0": {
    "type": "point",
    "position": [
-    -0.554,
-    -0.075,
-    0.29
+    -0.602,
+    -0.09,
+    0.64
    ],
-   "power_w": 260.0,
+   "power_w": 400.0,
    "color": "#FF7A2E",
-   "radius_m": 0.12,
+   "radius_m": 0.25,
    "camera": false,
    "transmission": false,
-   "specular": 0.0
+   "specular": 0.0,
+   "volume": false
   },
   "flame1": {
    "type": "point",
    "position": [
-    0.477,
-    0.313,
-    0.24
+    0.524,
+    0.328,
+    0.59
    ],
-   "power_w": 260.0,
+   "power_w": 400.0,
    "color": "#FF7A2E",
-   "radius_m": 0.12,
+   "radius_m": 0.25,
    "camera": false,
    "transmission": false,
-   "specular": 0.0
+   "specular": 0.0,
+   "volume": false
   },
   "flame2": {
    "type": "point",
    "position": [
-    -0.155,
-    0.476,
-    0.44
+    -0.17,
+    0.523,
+    0.79
    ],
-   "power_w": 190.0,
+   "power_w": 300.0,
    "color": "#FF7A2E",
-   "radius_m": 0.12,
+   "radius_m": 0.25,
    "camera": false,
    "transmission": false,
-   "specular": 0.0
+   "specular": 0.0,
+   "volume": false
   }
  },
  "render": {

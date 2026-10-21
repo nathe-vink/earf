@@ -15,8 +15,16 @@ with distance (`reach` metres), lying on the road at random tilt. `seed`.
 
 The tints shift only hue and saturation, so a dark tint on the light aggregate stays light (E12r's proof: "pale cream
 slabs, like concrete blocks dumped in a line"); `value` (trench), `top_value` and `under_value` (slabs, debris) scale
-the brightness, 1 as before.
-"""
+the brightness, 1 as before, and `under_tint` names the under face's tint (its brown read as red chips).
+
+E12r's p3 critics: "procedural Voronoi fracture: flat slabs of nearly the same thickness and size, with clean flat faces
+and crisp edges, laid in a tidy row", "broken edges would show black binder and grey aggregate over a lighter
+crushed-stone layer". Off by default, so E8 renders as it did: `crumble` (slabs, debris) rounds every sharp edge over
+`crumble` cm, so the edges catch the light as broken ones do, and lumps the faces by a fine noise; `side` (a texture)
+gives the broken edges their own material, the asphalt's binder and stones (`side_value`), the underside staying the
+sub-base; for slabs, `spread` how far out from the lip a plate lies (in its widths; 0.25 as before), `flip` the share
+turned over onto their backs, `fallen` the share dropped into the trench, and `size_power` biases the sizes toward the
+small (1 as before)."""
 import math, random
 
 import bmesh
@@ -95,35 +103,72 @@ def _place(bm, verts, rot, loc):
         v.co = m @ v.co + Vector(loc)
 
 
+def _faces(ft, fb, sides, top, p):
+    """A piece's faces to their materials: its top the road's asphalt (when it has one), its underside the sub-base, its
+    broken edges the sub-base too or, with `side`, their own."""
+    ft.material_index = 0 if top else 1
+    fb.material_index = 1
+    for f in sides:
+        f.material_index = 2 if p.get('side') else 1
+
+
+def _materials(bpy, kit, me, p):
+    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45,
+                             value=p.get('top_value', 1.0)))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, p.get('under_tint', '#211F1D'), 0.75,
+                             value=p.get('under_value', 1.0)))
+    if p.get('side'):
+        me.materials.append(_mat(bpy, kit, p['side'], p.get('side_scale', 1.5), '#0B0B0C', 0.85, 0.8,
+                                 value=p.get('side_value', 1.0)))
+
+
+def _crumble(bm, cm, seed):
+    """Every sharp edge rounded over `cm` centimetres, so the broken edges catch the light along their length, and each
+    face tented a little from a point near its middle, so none is a flat plane."""
+    sharp = [e for e in bm.edges if e.is_manifold and e.calc_face_angle(0.0) > math.radians(35.0)]
+    bmesh.ops.bevel(bm, geom=sharp, offset=cm * 0.01, offset_type='OFFSET', segments=2, profile=0.5, affect='EDGES',
+                    clamp_overlap=True)
+    big = [f for f in bm.faces if len(f.verts) > 5 and f.calc_area() > (cm * 0.03) ** 2]
+    bm.normal_update()
+    res = bmesh.ops.poke(bm, faces=big)
+    o = Vector((seed * 1.7, seed * 2.3, seed * 0.9))
+    for v in res['verts']:
+        n = v.normal.copy()
+        v.co += n * (cm * 0.006 * noise.noise(v.co * 7.0 + o))
+    bm.normal_update()
+
+
 def slabs(bpy, name, p, kit):
     rnd = random.Random(p.get('seed', 1))
     y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
     lip, t = p.get('lip', 0.75), p.get('thickness', 0.08)
     D, ramp = p.get('depth', 0.35), p.get('ramp', 4.0)
+    spread, flip, fallen, sp = p.get('spread', 0.25), p.get('flip', 0.0), p.get('fallen', 0.0), p.get('size_power', 1.0)
     bm = bmesh.new()
-    tops = []
     for k in range(p.get('count', 40)):
         y = rnd.uniform(y0 + 0.5, y1 - 0.2)
         s = 1 if rnd.random() < 0.5 else -1
         f = min(1.0, (y - y0) / ramp)                          # bigger, steeper plates where the trench is deep
         sz = p.get('size', 1.0)
-        w, d = sz * rnd.uniform(0.25, 0.7) * (0.5 + f), sz * rnd.uniform(0.3, 0.8) * (0.5 + f)
+        w, d = sz * (0.25 + 0.45 * rnd.random() ** sp) * (0.5 + f), sz * (0.3 + 0.5 * rnd.random() ** sp) * (0.5 + f)
         before = len(bm.verts)
         ft, fb, sides = _plate(bm, rnd, w, d, t)
+        _faces(ft, fb, sides, True, p)
         bm.verts.ensure_lookup_table()
         new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         tilt = rnd.uniform(p.get('tilt_min', 15.0), p.get('tilt', 55.0)) * f
-        x = s * (lip + w * 0.25 * rnd.uniform(0.2, 1.0))
+        x = s * (lip + w * spread * rnd.uniform(0.2, 1.0))
         z = 0.02 + 0.5 * w * math.sin(math.radians(tilt)) * 0.4 - (0.0 if rnd.random() < 0.7 else 0.1)
+        if fallen and rnd.random() < fallen and abs(y) > 0.8:   # dropped into the trench (clear of the speaker at 0)
+            x = s * rnd.uniform(0.0, lip * 0.75)
+            z = -D * f + t * 0.5 + 0.02 + 0.3 * w * math.sin(math.radians(tilt))
+        if flip and rnd.random() < flip:                       # thrown over onto its back
+            tilt = 180.0 - tilt * 0.5
         _place(bm, new, (rnd.uniform(-8, 8), s * tilt, rnd.uniform(-25, 25)), (x, y, z))
-        tops.append(ft)
-    for f in bm.faces:
-        f.material_index = 0 if f in tops else 1
+    if p.get('crumble'):
+        _crumble(bm, p['crumble'], p.get('seed', 1))
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45,
-                             value=p.get('top_value', 1.0)))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#211F1D', 0.75,
-                             value=p.get('under_value', 1.0)))
+    _materials(bpy, kit, me, p)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
@@ -135,7 +180,6 @@ def debris(bpy, name, p, kit):
     y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
     reach = p.get('reach', 6.0)
     bm = bmesh.new()
-    tops = []
     for k in range(p.get('count', 300)):
         # along the path, thrown sideways (and some forward past the speaker); size falls with distance thrown
         fwd = p.get('forward', 0.0)
@@ -157,15 +201,11 @@ def debris(bpy, name, p, kit):
         bm.verts.ensure_lookup_table()
         new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         _place(bm, new, (rnd.uniform(-40, 40), rnd.uniform(-40, 40), rnd.uniform(0, 360)), (x, y, p.get('z', 0.0) + size * 0.2))
-        if rnd.random() < 0.6:
-            tops.append(ft)
-    for f in bm.faces:
-        f.material_index = 0 if f in tops else 1
+        _faces(ft, fb, sides, rnd.random() < 0.6, p)
+    if p.get('crumble'):
+        _crumble(bm, p['crumble'], p.get('seed', 2))
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45,
-                             value=p.get('top_value', 1.0)))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#211F1D', 0.75,
-                             value=p.get('under_value', 1.0)))
+    _materials(bpy, kit, me, p)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))

@@ -324,6 +324,13 @@ def point(bpy, name, spec, centre):
     if spec.get('transmission') is False:
         ob.visible_transmission = False
     lamp_shares(bpy, ob, spec)
+    # a lamp among a fire's flames lights the smoke round it far too hard (Smoke E12r's look at 1.1 kW: the column's foot
+    # glowed like a fireball): `volume` False hides it from the smoke; 'only' lights the smoke and nothing else (after
+    # the shares, which set the surface rays' visibility)
+    if spec.get('volume') is False:
+        ob.visible_volume_scatter = False
+    elif spec.get('volume') == 'only':
+        ob.visible_diffuse = ob.visible_glossy = ob.visible_transmission = False
     return ob
 
 

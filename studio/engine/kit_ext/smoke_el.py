@@ -9,7 +9,8 @@ glow). `rise` stretches the wisps upward, `lean` [dx, dy] shears them as the smo
 impact (Smoke E12, the speaker come down burning like a meteor): what the crash leaves on the ground it hit (the ground
 piece's own dents and furrows dig the crater and the trench). The ground's material, the object named by `on`, is
 charred round the crater and along the trench, sooted wider, and glows in its cracks near the crater; and `debris`
-chunks of the crust, broken from the crater and the trench and thrown out, lie round them in the same material.
+chunks of the crust, broken from the crater and the trench and thrown out, lie round them in the same material. On a
+road (E12r) the surface is cracked instead, radially and in rings round the impact, and dusted with what it threw out.
 
 trail (Smoke E12): the meteor's smoke trail down the sky to the crash, a tube of smoke widening with age.
 """
@@ -451,6 +452,10 @@ def impact(bpy, name, p, kit):
     x1, y1, half-width] a trench charred along its floor; `glow` the strength of the heat glowing in the crust's cracks
     within `glow_r` of the centre, in patches where a noise passes `glow_patch` [lo, hi]; `debris` {count, size [min,
     max] m, spread [inner, outer] m, ahead (degrees, the way the crash was travelling: more is thrown that way), seed}.
+    For a road: `cracks` [inner, outer] radii (m) of cracks running out from the centre and round it, as a hard surface
+    breaks under a blow, `crack_count` of them round it, `crack_width` m wide, cut into the surface by `crack_bump`;
+    `dust` [inner, outer] radii of the powder thrown over it, `dust_color`, `dust_mix` at its thickest, in patches
+    `dust_scale` m across. Several objects can take one impact each (a road's slabs): the marks are placed in the world.
     Returns the debris."""
     import random
     ob = bpy.data.objects[p['on']]
@@ -510,7 +515,44 @@ def impact(bpy, name, p, kit):
         n.inputs[7].default_value = kit.M.hex_lin(hexcol)
         return n.outputs[2]
     col = mix(soot, col_in, p.get('soot_color', '#4A423B'))
+    if p.get('dust'):                                               # powder thrown out over the road, in patches, on the soot
+        u0, u1 = p['dust']
+        dn = node('ShaderNodeTexNoise'); dn.inputs['Scale'].default_value = 1.0 / p.get('dust_scale', 0.5)
+        dn.inputs['Detail'].default_value = 8.0
+        L(geo.outputs['Position'], dn.inputs['Vector'])
+        dust = math_('MULTIPLY', math_('MULTIPLY', smooth(dj, u1, u0), smooth(dn.outputs['Fac'], 0.4, 0.62)),
+                     p.get('dust_mix', 0.5))
+        col = mix(dust, col, p.get('dust_color', '#6B645C'))
     col = mix(char, col, p.get('char_color', '#121010'))
+    if p.get('cracks'):
+        # cracks running out from the impact and round it: cells of a Voronoi laid out in angle and log radius, so
+        # they are long radially and their rings spread outward; the same scale on both, so a cell's edge, in either
+        # direction, is its distance there times the radius over the scale, and the width holds in metres
+        c0, c1 = p['cracks']
+        k = p.get('crack_count', 14.0) / (2 * math.pi)
+        dd = math_('MAXIMUM', d, 0.02)
+        wob = node('ShaderNodeTexNoise'); wob.inputs['Scale'].default_value = 3.0; wob.inputs['Detail'].default_value = 4.0
+        L(geo.outputs['Position'], wob.inputs['Vector'])
+        jit = math_('MULTIPLY', math_('SUBTRACT', wob.outputs['Fac'], 0.5), 0.5)
+        u = math_('ADD', math_('MULTIPLY', math_('ARCTAN2', dy, dx), k), jit)
+        v = math_('ADD', math_('MULTIPLY', math_('LOGARITHM', dd, math.e), k), jit)
+        cv = node('ShaderNodeCombineXYZ'); L(u, cv.inputs['X']); L(v, cv.inputs['Y'])
+        cv.inputs['Z'].default_value = p.get('seed', 1) * 3.7
+        vc = node('ShaderNodeTexVoronoi', feature='DISTANCE_TO_EDGE'); L(cv.outputs['Vector'], vc.inputs['Vector'])
+        wd = math_('DIVIDE', math_('MULTIPLY', vc.outputs['Distance'], dd), k)
+        some = node('ShaderNodeTexNoise'); some.inputs['Scale'].default_value = 1.4; some.inputs['Detail'].default_value = 2.0
+        L(geo.outputs['Position'], some.inputs['Vector'])
+        crack = math_('MULTIPLY', smooth(wd, p.get('crack_width', 0.012), 0.0),
+                      math_('MULTIPLY', math_('MULTIPLY', smooth(d, c1, c1 * 0.55), smooth(d, c0 * 0.6, c0)),
+                            smooth(some.outputs['Fac'], 0.36, 0.5)))
+        col = mix(crack, col, p.get('crack_color', '#060505'))
+        if p.get('crack_bump', 0.0):
+            bp = node('ShaderNodeBump', invert=True); bp.inputs['Strength'].default_value = p['crack_bump']
+            bp.inputs['Distance'].default_value = 0.01
+            L(crack, bp.inputs['Height'])
+            if bs.inputs['Normal'].links:
+                L(bs.inputs['Normal'].links[0].from_socket, bp.inputs['Normal'])
+            L(bp.outputs['Normal'], bs.inputs['Normal'])
     L(col, bs.inputs['Base Color'])
     if bs.inputs['Roughness'].links:
         rough = math_('MAXIMUM', bs.inputs['Roughness'].links[0].from_socket, math_('MULTIPLY', char, 0.95))
@@ -565,7 +607,15 @@ def impact(bpy, name, p, kit):
             bmesh.ops.translate(bm, vec=Vector((x, y, z - th * 0.35)), verts=verts)
         bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
         me = bpy.data.meshes.new(name + '-debris'); bm.to_mesh(me); bm.free()
-        me.materials.append(m)
+        # the ground's material without the cracks' glow: in it the slabs carried the crack web across their faces (E12
+        # p5: "a regular orange web of thin glowing lines" over the rubble, "like a wireframe shader")
+        dm = m.copy()
+        for n in dm.node_tree.nodes:
+            if n.type == 'BSDF_PRINCIPLED':
+                for ln in list(n.inputs['Emission Strength'].links):
+                    dm.node_tree.links.remove(ln)
+                n.inputs['Emission Strength'].default_value = 0.0
+        me.materials.append(dm)
         d_ob = bpy.data.objects.new(name + '-debris', me); bpy.context.scene.collection.objects.link(d_ob)
         out.append(d_ob)
     return out

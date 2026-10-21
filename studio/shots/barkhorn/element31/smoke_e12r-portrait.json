@@ -13,6 +13,10 @@
     "rotate_z": 18.0,
     "hide": [
      "cloth-disc"
+    ],
+    "tilt": [
+     4.0,
+     -1.5
     ]
    }
   ]
@@ -117,7 +121,8 @@
     "texture": "asphalt_02",
     "tex_scale": 2.0,
     "tint": "#1C1C1E",
-    "tint_mix": 0.5
+    "tint_mix": 0.5,
+    "value": 0.35
    },
    {
     "kind": "kit",
@@ -136,7 +141,8 @@
     "texture": "asphalt_02",
     "tex_scale": 2.0,
     "tint": "#1C1C1E",
-    "tint_mix": 0.5
+    "tint_mix": 0.5,
+    "value": 0.35
    },
    {
     "kind": "kit",
@@ -3311,7 +3317,7 @@
     "shape": "ext",
     "module": "impact",
     "fn": "slabs",
-    "count": 90,
+    "count": 130,
     "thickness": 0.06,
     "tilt": 40.0,
     "tilt_min": 6.0,
@@ -3323,8 +3329,16 @@
     "lip": 0.75,
     "depth": 0.34,
     "ramp": 5.0,
-    "top_value": 0.7,
-    "under_value": 0.4
+    "top_value": 0.5,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.3,
+    "side": "asphalt_02",
+    "side_value": 0.55,
+    "crumble": 1.2,
+    "spread": 0.7,
+    "flip": 0.12,
+    "fallen": 0.12,
+    "size_power": 1.6
    },
    {
     "kind": "kit",
@@ -3339,8 +3353,12 @@
     "ahead": 6.0,
     "seed": 7,
     "rotate_z": 180.0,
-    "top_value": 0.7,
-    "under_value": 0.4
+    "top_value": 0.5,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.3,
+    "side": "asphalt_02",
+    "side_value": 0.55,
+    "crumble": 0.5
    },
    {
     "kind": "kit",
@@ -3357,8 +3375,8 @@
     "seed": 17,
     "rotate_z": 180.0,
     "fine": true,
-    "top_value": 0.7,
-    "under_value": 0.4
+    "under_tint": "#1C1C1C",
+    "under_value": 0.6
    },
    {
     "kind": "kit",
@@ -3371,14 +3389,18 @@
     "depth": 0.34,
     "ramp": 0.1,
     "count": 18,
-    "thickness": 0.07,
+    "thickness": 0.05,
     "tilt": 60.0,
     "tilt_min": 30.0,
-    "size": 0.42,
+    "size": 0.55,
     "seed": 13,
     "rotate_z": 180.0,
-    "top_value": 0.7,
-    "under_value": 0.4
+    "top_value": 0.5,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.3,
+    "side": "asphalt_02",
+    "side_value": 0.55,
+    "crumble": 1.2
    },
    {
     "kind": "kit",
@@ -3410,8 +3432,32 @@
     "z": -0.3,
     "seed": 9,
     "rotate_z": 180.0,
-    "top_value": 0.7,
-    "under_value": 0.4
+    "top_value": 0.5,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.3,
+    "side": "asphalt_02",
+    "side_value": 0.55,
+    "crumble": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -15.0,
+    "y1": -0.9,
+    "count": 260,
+    "reach": 0.6,
+    "inner": 0.0,
+    "z": -0.32,
+    "seed": 19,
+    "rotate_z": 180.0,
+    "crumble": 0.5,
+    "top_value": 0.5,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.3,
+    "side": "asphalt_02",
+    "side_value": 0.55
    },
    {
     "kind": "kit",
@@ -4132,7 +4178,7 @@
     ],
     "rotate_z": 50.0,
     "density": 4.5,
-    "strength": 220.0,
+    "strength": 420.0,
     "color": "#8F857B",
     "anisotropy": 0.4,
     "cool": 1100.0,
@@ -4156,6 +4202,117 @@
     "breakup_octaves": 2.0,
     "tongue_octaves": 3.0,
     "seed": 3
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "on": "prop0-kit",
+    "module": "smoke_el",
+    "fn": "impact",
+    "centre": [
+     0.0,
+     0.0
+    ],
+    "char": [
+     1.0,
+     2.6
+    ],
+    "jag": 0.8,
+    "soot": 4.5,
+    "soot_mix": 0.55,
+    "cracks": [
+     0.9,
+     3.8
+    ],
+    "crack_count": 13.0,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
+    "dust": [
+     1.6,
+     5.5
+    ],
+    "dust_mix": 0.5,
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "on": "prop1-kit",
+    "module": "smoke_el",
+    "fn": "impact",
+    "centre": [
+     0.0,
+     0.0
+    ],
+    "char": [
+     1.0,
+     2.6
+    ],
+    "jag": 0.8,
+    "soot": 4.5,
+    "soot_mix": 0.55,
+    "cracks": [
+     0.9,
+     3.8
+    ],
+    "crack_count": 13.0,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
+    "dust": [
+     1.6,
+     5.5
+    ],
+    "dust_mix": 0.5,
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "on": "prop3-kit",
+    "module": "smoke_el",
+    "fn": "impact",
+    "centre": [
+     0.0,
+     0.0
+    ],
+    "char": [
+     1.0,
+     2.6
+    ],
+    "jag": 0.8,
+    "soot": 4.5,
+    "soot_mix": 0.55,
+    "cracks": [
+     0.9,
+     3.8
+    ],
+    "crack_count": 13.0,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
+    "dust": [
+     1.6,
+     5.5
+    ],
+    "dust_mix": 0.5,
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "impact",
+    "on": "prop188-kit",
+    "centre": [
+     0.0,
+     0.0
+    ],
+    "char": [
+     0.5,
+     2.0
+    ],
+    "jag": 0.7,
+    "soot": 3.0,
+    "soot_mix": 0.5
    }
   ]
  },
@@ -4401,8 +4558,8 @@
     0.0,
     0.6
    ],
-   "irradiance": 4.0,
-   "color": "#C9BBA8",
+   "irradiance": 3.0,
+   "color": "#D9A27A",
    "orbit": {
     "azimuth_deg": -25,
     "elevation_deg": 12,
@@ -4509,44 +4666,92 @@
   "flame0": {
    "type": "point",
    "position": [
-    -0.554,
-    -0.075,
-    0.15
+    -0.602,
+    -0.09,
+    0.3
    ],
-   "power_w": 260.0,
+   "power_w": 300.0,
    "color": "#FF7A2E",
-   "radius_m": 0.12,
+   "radius_m": 0.3,
    "camera": false,
    "transmission": false,
-   "specular": 0.0
+   "specular": 0.0,
+   "volume": false
   },
   "flame1": {
    "type": "point",
    "position": [
-    0.477,
-    0.313,
-    0.1
+    -0.602,
+    -0.09,
+    1.3
    ],
-   "power_w": 260.0,
+   "power_w": 900.0,
    "color": "#FF7A2E",
-   "radius_m": 0.12,
+   "radius_m": 0.3,
    "camera": false,
    "transmission": false,
-   "specular": 0.0
+   "specular": 0.0,
+   "volume": false
   },
   "flame2": {
    "type": "point",
    "position": [
-    -0.155,
-    0.476,
-    0.3
+    0.524,
+    0.328,
+    0.25
    ],
-   "power_w": 190.0,
+   "power_w": 300.0,
    "color": "#FF7A2E",
-   "radius_m": 0.12,
+   "radius_m": 0.3,
    "camera": false,
    "transmission": false,
-   "specular": 0.0
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame3": {
+   "type": "point",
+   "position": [
+    0.524,
+    0.328,
+    1.2
+   ],
+   "power_w": 900.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.3,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame4": {
+   "type": "point",
+   "position": [
+    -0.17,
+    0.523,
+    1.1
+   ],
+   "power_w": 700.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.3,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame5": {
+   "type": "point",
+   "position": [
+    -0.108,
+    0.333,
+    0.5
+   ],
+   "power_w": 600.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.5,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": "only"
   }
  },
  "render": {
@@ -4612,6 +4817,6 @@
    "lift_color": "#000000",
    "vignette": 0.25
   },
-  "grain": 2.5
+  "grain": 3.5
  }
 }

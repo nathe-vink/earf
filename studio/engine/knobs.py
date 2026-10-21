@@ -170,6 +170,7 @@ KNOBS = [
     ('product.normals_refine', 'true/false', None, 'the waveguide\'s facets refined onto its true surface (true); false for a frame where the waveguides are a few dozen pixels across, where it only costs memory'),
     ('product.instances.*.position', 'm [x, y, z]', None, 'where this copy stands: x and y on the floor; z is its base\'s height (0 on the floor, the top of the furniture it stands on)'),
     ('product.instances.*.rotate_z', 'deg', (-360, 360), 'its turn about z: 0 faces -y; + turns its front toward +x'),
+    ('product.instances.*.tilt', 'deg [about x, about y]', (-30, 30), 'its cant about its base\'s centre, in its own frame after the turn: + about x tips its top toward its front (-y), + about y toward its side at +x'),
     ('products.*.instances.*.position', 'm [x, y, z]', None, 'where this copy stands: x and y on the floor; z is its base\'s height (0 on the floor, the top of the furniture it stands on)'),
     ('products.*.instances.*.rotate_z', 'deg', (-360, 360), 'its turn about z: 0 faces -y; + turns its front toward +x'),
     ('product.explode.*.offset_m', 'm [x, y, z]', None, 'how far the matched parts are drawn out along their own fixing axis: change the length, keep the direction'),
