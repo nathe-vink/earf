@@ -63,7 +63,7 @@ ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a b
 ELEMENT['amber'] = 'acid_b'   # acid rain on black lava beat the acid spring at Dallol in a blind duel, 2 to 1 (6.3 to 5.4)
 ELEMENT['ice'] = 'fog_b'      # the headland above the fog at dawn beat the summit above a sea of cloud in a blind duel, 3 to 0 (6.7 to 4.7)
 ELEMENT['green'] = 'poison_f1b'  # the owner's pick (2026-10-20): A4's wood without the foxgloves, more caps and the arum's berries, after a realism pass
-ELEMENT['black'] = 'smoke_e6'    # the owner's pick (2026-10-20): the salt flat, black smoke climbing from the horizon
+ELEMENT['black'] = 'smoke_e9'    # the owner (2026-10-21): "I wanted bridge smoke" - the bridge, its smoke simulated (E9 p5)
 PLACES = {  # where each concept stands: the speaker page leads with it ("Ember on a lava field at blue hour.")
     'ember': 'on a lava field at blue hour, the crust cracked to its glow',
     'dust': 'on rippled sand in the Southwest at golden hour',
@@ -76,6 +76,7 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'fog': 'on a summit above a sea of cloud', 'fog_b': 'on a headland above the fog at dawn',
     'smoke': 'in a pine wood at dawn, in shafts of woodsmoke', 'smoke_b': 'in a misty birch wood',
     'smoke_e6': 'on a cracked salt flat, black smoke climbing from the horizon',
+    'smoke_e9': 'on a city bridge at dusk, a wrecked car burning behind it',
 }
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 COMPANIONS_SHOWN = False      # Cumulus and Bell stay off the page while their second designs are drawn (the owner, 2026-10-18)
