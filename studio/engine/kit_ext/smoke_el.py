@@ -449,8 +449,9 @@ def impact(bpy, name, p, kit):
     """The crash's marks. `centre` [x, y] the crater's; `char` [inner, outer] radii (m) over which the ground goes from
     burnt black to its own colour, ragged by noise; `soot` the radius of the fainter fallout round it; `furrow` [x0, y0,
     x1, y1, half-width] a trench charred along its floor; `glow` the strength of the heat glowing in the crust's cracks
-    within `glow_r` of the centre; `debris` {count, size [min, max] m, spread [inner, outer] m, ahead (degrees, the way
-    the crash was travelling: more is thrown that way), seed}. Returns the debris."""
+    within `glow_r` of the centre, in patches where a noise passes `glow_patch` [lo, hi]; `debris` {count, size [min,
+    max] m, spread [inner, outer] m, ahead (degrees, the way the crash was travelling: more is thrown that way), seed}.
+    Returns the debris."""
     import random
     ob = bpy.data.objects[p['on']]
     m = ob.data.materials[0]; nt = m.node_tree; L = nt.links.new
@@ -521,7 +522,8 @@ def impact(bpy, name, p, kit):
         hot = smooth(dj, p.get('glow_r', 0.9), 0.15)
         fl = node('ShaderNodeTexNoise'); fl.inputs['Scale'].default_value = 4.0; fl.inputs['Detail'].default_value = 3.0
         L(geo.outputs['Position'], fl.inputs['Vector'])
-        e = math_('MULTIPLY', math_('MULTIPLY', crack, hot), smooth(fl.outputs['Fac'], 0.42, 0.62))
+        lo, hi = p.get('glow_patch', [0.42, 0.62])                   # the higher, the fewer cracks glow
+        e = math_('MULTIPLY', math_('MULTIPLY', crack, hot), smooth(fl.outputs['Fac'], lo, hi))
         bs.inputs['Emission Color'].default_value = kit.M.hex_lin(p.get('glow_color', '#FF5A14'))
         L(math_('MULTIPLY', e, p['glow']), bs.inputs['Emission Strength'])
         # seen, not sampled as a light: a linked strength makes every triangle of the ground a light in Cycles' light

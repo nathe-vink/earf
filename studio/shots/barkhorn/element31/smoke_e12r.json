@@ -4598,35 +4598,41 @@
   "flame0": {
    "type": "point",
    "position": [
-    -0.487,
-    -0.053,
-    0.15000000000000002
+    -0.554,
+    -0.075,
+    0.15
    ],
-   "power_w": 520.0,
+   "power_w": 260.0,
    "color": "#FF7A2E",
-   "radius_m": 0.35
+   "radius_m": 0.12,
+   "camera": false,
+   "transmission": false
   },
   "flame1": {
    "type": "point",
    "position": [
-    0.41,
-    0.291,
-    0.10000000000000003
+    0.477,
+    0.313,
+    0.1
    ],
-   "power_w": 520.0,
+   "power_w": 260.0,
    "color": "#FF7A2E",
-   "radius_m": 0.35
+   "radius_m": 0.12,
+   "camera": false,
+   "transmission": false
   },
   "flame2": {
    "type": "point",
    "position": [
-    -0.13,
-    0.399,
+    -0.155,
+    0.476,
     0.3
    ],
-   "power_w": 380.0,
+   "power_w": 190.0,
    "color": "#FF7A2E",
-   "radius_m": 0.35
+   "radius_m": 0.12,
+   "camera": false,
+   "transmission": false
   }
  },
  "render": {
