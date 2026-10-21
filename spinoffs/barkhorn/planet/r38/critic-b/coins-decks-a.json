@@ -1,0 +1,358 @@
+{
+ "stage1": {
+  "impression": "A clean, quiet product still: a clear tube of red, blue and white-edged discs on a black base, sitting beside a smoked-acrylic turntable on a pale grey counter, with walnut shelving soft in the background. It reads as a good CG product render, not a photograph. The counter is a flat, featureless grey slab that takes up the bottom 40 % of the frame and is brighter than the hero. The coins inside the column are dark and muddy, while the empty top of the tube is the brightest part of it. Nothing at 1:1 shows real material grain, there is barely a sign of life, and nothing says which bar this is: a magazine would see a generic hi-fi detail on a showroom counter, not a specific place.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The coin stack must be the brightest and most saturated thing in the frame, glowing from the base LED up through the coins: the coin band [715,220,780,450] lum_median >= 55, brighter than the counter",
+  "The counter must read as a real material at 1:1 (visible grain or aggregate, an uneven sheen, faint wear rings) rather than a uniform grey CG plane: lum_range over [600,500,1200,800] >= 50 with a visible pool of light",
+  "The light needs one coherent warm pool from the pin spot centred on the column, falling off into darkness toward the frame edges, rather than an even wash of the foreground",
+  "The base LED must be warm or neutral, not cool blue-white, so the room's only saturated colour comes from the coins",
+  "Some sign of the bar must be in frame: a glass, a fanned coin, a record sleeve, a hand-written request, plus a hint of the shell (concrete, fir, steel), so the picture reads as this specific room"
+ ],
+ "defects": [
+  {
+   "region": [
+    600,
+    500,
+    1200,
+    800
+   ],
+   "what": "The counter surface is uniform, untextured grey (lum_range 29.9, falloff flat at 61 to 68 from top to bottom). It reads as a CG plane and is brighter than the hero."
+  },
+  {
+   "region": [
+    0,
+    650,
+    600,
+    800
+   ],
+   "what": "The foreground counter is the brightest broad area in the frame (median 73.9). It pulls the eye to empty surface at the bottom left."
+  },
+  {
+   "region": [
+    715,
+    220,
+    780,
+    450
+   ],
+   "what": "The coin stack is dark and muddy (median 21, r 38 / g 14 / b 13). The coins look like dull lozenges, not lit acrylic, and the EARF globes are not legible."
+  },
+  {
+   "region": [
+    710,
+    110,
+    780,
+    210
+   ],
+   "what": "The empty upper tube is lit grey-white (median 125) by the background behind it. It is brighter than the coins, so the eye goes to the empty part."
+  },
+  {
+   "region": [
+    710,
+    478,
+    785,
+    492
+   ],
+   "what": "The base LED strip is cool blue-white (r 95 / g 102 / b 131) in a 2400 to 2700 K room. It reads as a gadget or nightclub light."
+  },
+  {
+   "region": [
+    560,
+    470,
+    700,
+    560
+   ],
+   "what": "The pin spot's pool falls between the turntable and the column (median 90), not on the column."
+  },
+  {
+   "region": [
+    0,
+    480,
+    600,
+    650
+   ],
+   "what": "The turntable's plinth and underside crush to black (crush_pct 23 %). The clear posts and the lit base of the R3 Float barely read."
+  },
+  {
+   "region": [
+    380,
+    0,
+    800,
+    180
+   ],
+   "what": "The back-bar niche shows grey, blown-looking glass shapes. They are blurred but read as a CG reflection or glass props."
+  },
+  {
+   "region": [
+    1050,
+    455,
+    1200,
+    495
+   ],
+   "what": "A lone flat disc and a card on the counter at the right edge are cut off. They read as floating decals, not coins or a menu."
+  },
+  {
+   "region": [
+    700,
+    92,
+    790,
+    112
+   ],
+   "what": "The tube's copper-toned cap is smooth with one even sheen. It reads as a CG material."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero is darker than the counter it stands on: the coins do not glow and their tint is lost.",
+   "evidence": {
+    "region": [
+     715,
+     220,
+     780,
+     450
+    ],
+    "measured": "lum_median 21.0, p95 90.7, r/g/b 38/14/13, against a counter median of 63.3"
+   },
+   "change": {
+    "setting": "the request column's base LED (its emission and light up the tube)",
+    "from": "a weak, cool strip that lights only the base ring",
+    "to": "about 3 to 4 times brighter, warm white (about 3000 K), aimed up the tube so each coin's edge glows"
+   },
+   "expected": "The coin stack becomes the bright, saturated focus. The coin edges glow red, blue and smoke, and the globes start to read.",
+   "accept": {
+    "region": [
+     715,
+     220,
+     780,
+     450
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 55
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The counter is lit evenly from front to back, so the frame has no pool of light and the foreground outshines the hero.",
+   "evidence": {
+    "region": [
+     0,
+     650,
+     600,
+     800
+    ],
+    "measured": "lum_median 73.9 in the foreground; falloff over [600,500,1200,800] is flat, 63.6 to 68.0"
+   },
+   "change": {
+    "setting": "the warm pin spot over the decks (and the Domes' downlights spilling onto the counter here)",
+    "from": "a pool that lands left of the column, with a broad ambient wash of the counter",
+    "to": "re-aimed so the pool is centred on the column's base, the cone narrowed to about 14 deg, the Domes' downlights near the decks cut to about 60 W"
+   },
+   "expected": "A warm pool around the column that falls off to dark at the frame edges. The foreground counter drops to about 30 to 40.",
+   "accept": {
+    "region": [
+     0,
+     650,
+     600,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The counter top reads as a smooth CG plane: no grain, aggregate, wear or uneven sheen.",
+   "evidence": {
+    "region": [
+     600,
+     500,
+     1200,
+     800
+    ],
+    "measured": "lum_range 29.9, p5 56.2 to p95 86.0; no texture visible at 1:1"
+   },
+   "change": {
+    "setting": "the counter's finish (tone and sheen)",
+    "from": "a uniform matte mid grey",
+    "to": "a darker tone (about 35 % lower albedo), a roughness map with low-contrast variation (0.35 to 0.6), fine aggregate or grain in the bump, faint glass rings and wipe marks"
+   },
+   "expected": "The counter reads as a real, used surface with soft broken reflections of the column and the lamp, and sits darker than the hero.",
+   "accept": {
+    "region": [
+     600,
+     500,
+     1200,
+     800
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 50
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The base LED is cool blue-white, the only cool source in a warm room, and reads as a gadget light.",
+   "evidence": {
+    "region": [
+     710,
+     478,
+     785,
+     492
+    ],
+    "measured": "r/g/b median 95/102/131"
+   },
+   "change": {
+    "setting": "the request column's base LED colour",
+    "from": "about 6500 K, blue-white",
+    "to": "about 3000 K warm white"
+   },
+   "expected": "The strip glows warm white. The only saturated colour left in the frame is the coins.",
+   "accept": {
+    "region": [
+     710,
+     478,
+     785,
+     492
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 100
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "composition",
+   "problem": "The empty upper tube is backlit by the bright niche behind it and outshines the coins.",
+   "evidence": {
+    "region": [
+     710,
+     110,
+     780,
+     210
+    ],
+    "measured": "lum_median 124.8, against 21.0 for the coins"
+   },
+   "change": {
+    "setting": "the lit niche's strip and the camera",
+    "from": "the niche strip at 6.0, with the camera putting the bright niche directly behind the tube",
+    "to": "the strip at 2.0, and the camera shifted about 0.25 m along x so the tube's top sits against the dark walnut shelving"
+   },
+   "expected": "The empty tube goes quiet and dark, framed by its two edge highlights, so the coins carry the column.",
+   "accept": null
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "The frame has almost no sign of life or of the specific bar: one cut-off disc and card at the edge.",
+   "evidence": {
+    "region": [
+     1050,
+     455,
+     1200,
+     495
+    ],
+    "measured": "a flat disc and a card cropped at the right edge, nothing else on the counter"
+   },
+   "change": {
+    "setting": "props",
+    "from": "a disc and a card at the right edge",
+    "to": "two or three EARFcoins fanned in the pool near the column's base, globe up; a rocks glass with a little left in it at the right third; a record sleeve leaning against the turntable"
+   },
+   "expected": "The story (a coin for a song) reads at a glance, the frame feels inhabited, and small highlights break up the empty counter.",
+   "accept": {
+    "region": [
+     900,
+     450,
+     1200,
+     650
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 80
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The R3 Float's underside and plinth crush to black, losing its clear posts and lit base.",
+   "evidence": {
+    "region": [
+     0,
+     480,
+     600,
+     650
+    ],
+    "measured": "crush_pct 23.4, lum_p5 1.1"
+   },
+   "change": {
+    "setting": "exposure and the record player's base glow",
+    "from": "exposure -0.3",
+    "to": "exposure -0.1, with c2 holding the counter down; a small warm fill (record wall spots up to about 40 W) to rim the plinth"
+   },
+   "expected": "The posts and the plinth's edge show detail and the shadows hold texture.",
+   "accept": {
+    "region": [
+     0,
+     480,
+     600,
+     650
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 10
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The column's cap and the counter-side objects have single, even CG sheens.",
+   "evidence": {
+    "region": [
+     700,
+     92,
+     790,
+     112
+    ],
+    "measured": "lum_range 54, one smooth highlight band"
+   },
+   "change": {
+    "setting": "the brass and metal patina (finish)",
+    "from": "a uniform polished metal",
+    "to": "brushed brass with an anisotropic roughness of about 0.3 and a faint darkened patina at the edge"
+   },
+   "expected": "The cap reads as handled metal, with a broken highlight.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Show the EARF globe on each coin legibly, for example a larger or engraved globe on the coin face",
+   "why": "This is the coin's design, an EARF product; only the lighting (c1) may be used to reveal it."
+  },
+  {
+   "request": "Bring the board-formed concrete, fir beams or blackened steel into frame by changing the background",
+   "why": "The room's design is fixed. A wider or different camera angle could show it, but that changes what the detail frame is for, so it is the owner's call."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

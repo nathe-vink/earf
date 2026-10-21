@@ -1,0 +1,337 @@
+{
+ "stage1": {
+  "impression": "This is a tabletop product still of a hammered brass bowl of glossy coloured tokens on a pale, pinkish timber block against a dark wall. It reads as CG. The coins cling to the bowl's sloped inner wall facing the camera, which no gravity would allow. Heavy denoiser smear removes every micro-texture, the wood is a smooth pink procedural with no pores, and the top of the stand is lit almost to paper white while the room around it goes to mud. Nothing places it in a specific bar: there is no door, no concrete, fir or steel, and no EARF speaker, so a magazine would see a generic casino-chip prop shot rather than Planet EARF.",
+  "score": 4.0
+ },
+ "verdict": "rethink",
+ "blocking_9": [
+  "Coins must lie as a gravity-settled heap in the bottom of the bowl (stacked, overlapping, some on edge against the wall), not arranged in a ring stuck to the inner wall facing the lens",
+  "The frame must show where it is: the door, the host stand's real material and some of the shell (board-formed concrete, fir, blackened steel, shopfront glass or street light) so the picture reads as Planet EARF and not a tabletop",
+  "The stand top must sit at lum_median 90 to 140, not around 200, with a real pool of light falling off across it, and it must read as stained oak or fir with visible grain and pores, not pink-white smooth CG",
+  "No clipping in the bowl: the hot spot in the bowl's interior is 30 % clipped and must be under 2 %",
+  "Denoiser smear gone: the hammered brass, the coin engraving and the wood grain must hold crisp detail at 1:1 (render at full 2400 x 1600 with more samples, denoise off or at a lower prefilter)",
+  "The acrylic coins must read as thick cast acrylic, with polished, glowing edges and some light passing through, not as opaque glossy poker chips with white dashes",
+  "Some sign of life and some context in the frame: a hand, a coat, the door's edge, a guest's silhouette beyond"
+ ],
+ "defects": [
+  {
+   "region": [
+    410,
+    260,
+    780,
+    500
+   ],
+   "what": "Coins float on, or are glued to, the steep inner wall of the bowl in a fan aimed at the camera. Not physically settled."
+  },
+  {
+   "region": [
+    540,
+    260,
+    700,
+    330
+   ],
+   "what": "The bowl's interior hot spot is blown: clip_pct 30.5, lum_p95 254.9"
+  },
+  {
+   "region": [
+    250,
+    600,
+    700,
+    780
+   ],
+   "what": "The stand top is overexposed and pink: lum_median 202, RGB 227/197/183, delta-E 29 against a warm oak at #8A6A4E. Smooth procedural streaks, no pores, no wear."
+  },
+  {
+   "region": [
+    140,
+    380,
+    980,
+    800
+   ],
+   "what": "The stand is a plain slab with soft, rounded, blurry edges (an edge width of 54 px at its left edge) and reads as a block of foam or soap, not joinery"
+  },
+  {
+   "region": [
+    400,
+    250,
+    800,
+    520
+   ],
+   "what": "Denoiser smear: the hammered brass dimples, the coin engraving and the edges are all mushy, with painterly blotches"
+  },
+  {
+   "region": [
+    380,
+    470,
+    820,
+    600
+   ],
+   "what": "The bowl's outer wall reads as flat salmon-pink copper, not brass. It does not match the interior's gold, and its reflections are featureless."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    400
+   ],
+   "what": "The background is an undifferentiated dark brown wall with faint vertical panels. No concrete texture, no tie holes, nothing identifying the room."
+  },
+  {
+   "region": [
+    850,
+    450,
+    1200,
+    800
+   ],
+   "what": "The floor and the right side are murky, low-contrast mud. The shadow shapes are ambiguous."
+  },
+  {
+   "region": [
+    420,
+    260,
+    790,
+    500
+   ],
+   "what": "The coins read as opaque poker or casino chips with white edge dashes. That is the wrong cue for premium acrylic, and their eight saturated tints compete as a confetti of colour."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "set",
+   "problem": "The coins are arranged on the bowl's steep inner wall facing the lens, which is physically impossible and the single biggest CG tell.",
+   "evidence": {
+    "region": [
+     410,
+     260,
+     780,
+     500
+    ],
+    "measured": "Seen at 1:1 (crop x2): the coins sit at 30 to 60 degrees on the upper wall with nothing under them"
+   },
+   "change": {
+    "setting": "props: EARFcoins, the brass bowl of 40 at the door",
+    "from": "coins placed in a ring on the bowl's inner surface",
+    "to": "40 coins dropped by rigid-body simulation into the bowl so they settle in a heap 2 to 4 deep at the bottom, a few leaning on edge against the wall, and one or two loose on the stand beside the bowl"
+   },
+   "expected": "A believable pile with contact shadows between the coins. Only the top layer's faces are visible and the rest show as edges.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The frame is a tabletop product shot with no sign of the door, the shell or the bar, so it cannot read as a specific place.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     400
+    ],
+    "measured": "The top half has lum_median 13 to 18 and is a featureless dark wall. No concrete, fir, steel or glass can be identified."
+   },
+   "change": {
+    "setting": "camera: position, target and lens",
+    "from": "position [2.37, 2.4, 1.7] looking down at [1.62, 1.95, 1.05], 50 mm, f/4",
+    "to": "pull back and lower to about [3.2, 2.6, 1.35] at a seated or standing-host height, 35 mm, f/2.8, so the bowl sits in the near third with the shopfront glass, the door's steel frame and the street lamps' glow behind it, and the bar's Domes and one speaker soft in the depth"
+   },
+   "expected": "The bowl reads as the welcome at the door of a particular room, with the room's materials and one smoked EARF speaker or lamp present as the colour hero",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The stand top is lit to near white and the bowl's interior clips. The light is a flat studio hot spot, not a practical's pool.",
+   "evidence": {
+    "region": [
+     250,
+     600,
+     700,
+     780
+    ],
+    "measured": "The stand top has lum_median 202.2 and the bowl's hot spot [540,260,700,330] has clip_pct 30.46"
+   },
+   "change": {
+    "setting": "render: exposure (and the nearest Dome downlight over the host stand)",
+    "from": "exposure 4.0; downlight 140 W, cone 20 deg",
+    "to": "exposure 3.0; the downlight over the host stand at 60 W, 2400 K, cone 30 deg, aimed 15 cm off the bowl's centre so the pool falls off across the stand"
+   },
+   "expected": "The stand top in the mid-tones with a gradient, the brass holding its dimples without a blown disc, and the frame median staying in the 22 to 50 band",
+   "accept": {
+    "region": [
+     250,
+     600,
+     700,
+     780
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     90,
+     140
+    ]
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The bowl's interior hot spot clips.",
+   "evidence": {
+    "region": [
+     540,
+     260,
+     700,
+     330
+    ],
+    "measured": "clip_pct 30.46, lum_p95 254.9"
+   },
+   "change": {
+    "setting": "the Dome downlight over the host stand, plus render clamp",
+    "from": "140 W straight down into the bowl, clamp 10",
+    "to": "60 W aimed off-axis, as in c3, clamp 6"
+   },
+   "expected": "A small specular streak on the brass instead of a blown disc",
+   "accept": {
+    "region": [
+     540,
+     260,
+     700,
+     330
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 2.0
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The stand reads as pink, smooth, procedurally streaked wood with no pores, and its rounded edges make it read as soap or foam.",
+   "evidence": {
+    "region": [
+     250,
+     600,
+     700,
+     780
+    ],
+    "measured": "RGB median 227/197/183, delta-E 29.1 against a warm oak at #8A6A4E; the left edge's 10-90 width is 54 px"
+   },
+   "change": {
+    "setting": "the oak's stain (the host stand's finish)",
+    "from": "a pale raw stain, near white under 3000 K",
+    "to": "a mid-dark smoked-oak stain, base about #6E5038, with a scanned grain and pore texture at real scale (2 to 4 mm figure), roughness 0.45 with a slight oiled sheen; the edges eased to 1 to 2 mm, not rounded"
+   },
+   "expected": "The top reads as warm brown timber with visible grain at 1:1 and a crisp arris",
+   "accept": {
+    "region": [
+     250,
+     600,
+     700,
+     780
+    ],
+    "metric": "delta_e",
+    "op": "<",
+    "value": 12,
+    "hex": "#8A6A4E"
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "Denoiser smear removes the hammered texture, the coin engraving and the grain.",
+   "evidence": {
+    "region": [
+     400,
+     250,
+     800,
+     520
+    ],
+    "measured": "At 1:1 the dimples and engraving are smeared into blotches, and this proof is only at scale 0.5"
+   },
+   "change": {
+    "setting": "render: samples, denoise",
+    "from": "256 samples, denoise on, proof at scale 0.5",
+    "to": "1024 samples at the full 2400 x 1600, denoiser with an albedo and normal prefilter (or off, with a light grain added in post)"
+   },
+   "expected": "Crisp hammer facets and engraved lines on the coins, and natural fine grain in the shadows",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The bowl's exterior reads as salmon copper and does not match the gold interior.",
+   "evidence": {
+    "region": [
+     380,
+     470,
+     820,
+     600
+    ],
+    "measured": "RGB median 200/125/90 against an interior of 166/110/72. The pink cast is lifted by the bounce off the pink stand."
+   },
+   "change": {
+    "setting": "brass patina (the bowl's finish)",
+    "from": "a polished, pinkish metal on the exterior",
+    "to": "an aged brass (#B08D57 base), roughness 0.3 to 0.35 with faint fingerprints and a darker patina toward the foot, the same on the inside and outside"
+   },
+   "expected": "One coherent brass object, warm gold, with soft reflections of the room",
+   "accept": {
+    "region": [
+     380,
+     470,
+     820,
+     600
+    ],
+    "metric": "delta_e",
+    "op": "<",
+    "value": 15,
+    "hex": "#A8844F"
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "There is no sign of life, and the background is a dead brown field.",
+   "evidence": {
+    "region": [
+     850,
+     450,
+     1200,
+     800
+    ],
+    "measured": "lum_median 36.8 with a low-texture murk. No props in the frame."
+   },
+   "change": {
+    "setting": "props and haze",
+    "from": "the bowl alone; haze 0.01",
+    "to": "a guest's hand reaching for a coin or a coat on a hook by the door, a stack of menus on the stand; haze 0.02 so the street light through the glass reads as a soft shaft"
+   },
+   "expected": "A lived-in moment at the door, with depth layers",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the coins thick clear-edged cast acrylic with glowing polished edges, and drop the white poker-chip edge dashes",
+   "why": "The coins are an EARF product (their tint, design and graphic are fixed by the card). If the dashes are part of the coin design, that is the owner's call, but they read as casino chips."
+  },
+  {
+   "request": "Limit the bowl to one or two tints rather than all eight",
+   "why": "The card fixes the bowl as coins in all eight of EARF's tints. This breaks the frame's one-colour rule, which the owner should weigh."
+  },
+  {
+   "request": "Show an Atmosphere speaker in this frame as the colour hero",
+   "why": "Whether the door detail includes a speaker is a framing choice (c2 attempts it). If the door's sightline cannot reach one, the frame cannot satisfy the hero-speaker criterion."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

@@ -1,0 +1,397 @@
+{
+ "stage1": {
+  "impression": "A dark, tidy home-cinema or showroom: two speakers in a fir-lined niche, a black void around them, a bright cool projection-like screen on the left and a glowing orb in the foreground. The fir boards are smooth, even and repeat like a texture, the carpet is a flat brown plane, the ceiling and walls fall to black, and the drivers and the plinths' clipped glowing edges show denoiser smear and CG-bright strips. None of the shell (concrete, beams, blackened steel) can be read, and there is no sign of life, so a magazine would see a generic hi-fi demo room, not a specific place.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The shell has to be legible: board-formed concrete with tie holes, a fir beam overhead and blackened steel each readable at 1:1 somewhere in the frame (top band lum_median above 12, currently 4.1)",
+  "The speakers must be the brightest thing in the frame that is not a lamp: speaker regions lum_median 45 or more (now 27 and 24), with the screen dimmer than they are (screen median 114 now)",
+  "Frame lum_median 22 to 50 (now 19.0)",
+  "Visible signs of life at the seat: a glass, a record and a coat legible in the foreground, not dark blobs",
+  "No CG giveaways: no denoiser smear on the cones and batts, no clipped neon strips on the plinth edges (clip 0.6 to 0.9 % there now), fir boards with real variation (checks, nail holes, darker end grain), carpet with pile and falloff",
+  "A believable seated interiors lens: true verticals, 28 to 35 mm, a foreground table edge in front rather than a blank grey slab",
+  "A sense of a specific room: the limewashed walls, the tub chairs and the hexagonal tables read as designed objects, not black silhouettes"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    140,
+    150,
+    420
+   ],
+   "what": "Screen is the brightest large surface (lum_median 113.6), neutral cool grey-violet, pulls the eye away from the altar and reads as a projector"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    120
+   ],
+   "what": "Ceiling and upper walls fall to black (lum_median 4.1, crush 37.8 %): no beams, no concrete, room has no top"
+  },
+  {
+   "region": [
+    420,
+    275,
+    525,
+    480
+   ],
+   "what": "Left speaker under-lit (lum_median 27.4) and reads as a dark box; cone and batts show denoiser smear"
+  },
+  {
+   "region": [
+    770,
+    270,
+    905,
+    520
+   ],
+   "what": "Right speaker under-lit (lum_median 23.7); white batts at the base smear into blotches; specular streak on the horn's lower lip reads as a CG highlight"
+  },
+  {
+   "region": [
+    415,
+    465,
+    530,
+    500
+   ],
+   "what": "Left plinth's glowing edge clips (clip 0.6 %, p95 251) as a thin neon strip, signage-like"
+  },
+  {
+   "region": [
+    760,
+    495,
+    915,
+    525
+   ],
+   "what": "Right plinth's glowing edge clips (clip 0.88 %, p95 251)"
+  },
+  {
+   "region": [
+    780,
+    500,
+    845,
+    570
+   ],
+   "what": "Record sleeve against the plinth reads as a blank beige card, no artwork, no thickness"
+  },
+  {
+   "region": [
+    560,
+    130,
+    760,
+    500
+   ],
+   "what": "Fir boards are uniform, evenly spaced and repeat; no checks, nail holes or variation in width; smooth CG grain"
+  },
+  {
+   "region": [
+    150,
+    530,
+    850,
+    800
+   ],
+   "what": "Carpet is a flat brown plane (lum_range 72), no pile, no pool of light from the altar spots on the floor"
+  },
+  {
+   "region": [
+    115,
+    650,
+    200,
+    735
+   ],
+   "what": "Orb lamp glows cool blue-white (b 191 > r 167) against a 2700 K room; the frosted face is a featureless disc"
+  },
+  {
+   "region": [
+    0,
+    690,
+    450,
+    800
+   ],
+   "what": "Foreground hexagonal table reads as a smooth pink-grey slab; no oak grain, no props legible on it"
+  },
+  {
+   "region": [
+    850,
+    550,
+    1200,
+    800
+   ],
+   "what": "Right tub chairs crush to near-black silhouettes (lum_median 9.6); velvet nap not readable"
+  },
+  {
+   "region": [
+    1040,
+    80,
+    1200,
+    600
+   ],
+   "what": "Niche's outer fir return and the wall beyond are a dull ramp with no material"
+  },
+  {
+   "region": [
+    300,
+    60,
+    1100,
+    160
+   ],
+   "what": "Niche header fascia is a plain smooth band; downlight hot spots on it are the only detail"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The hero speakers are dimmer than the screen and the niche boards, so the altar does not read at a glance.",
+   "evidence": {
+    "region": [
+     770,
+     270,
+     905,
+     520
+    ],
+    "measured": "speaker lum_median 23.7 (left 27.4) vs fir boards 77.8 and screen 113.6"
+   },
+   "change": {
+    "setting": "the altar 2 x spot (power, cone)",
+    "from": "28.0 W, cone 18.0 deg",
+    "to": "70 W, cone 24 deg, aimed at the cabinet's mid-height so the light passes through the tinted acrylic onto the white batts"
+   },
+   "expected": "Both cabinets glow from within; speaker regions lum_median 45 to 70, cone and batts legible without lifting the boards above about 95",
+   "accept": {
+    "region": [
+     770,
+     270,
+     905,
+     520
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The screen is the brightest large surface and steals the frame.",
+   "evidence": {
+    "region": [
+     0,
+     140,
+     150,
+     420
+    ],
+    "measured": "lum_median 113.6, cool neutral (r 122, g 110, b 122)"
+   },
+   "change": {
+    "setting": "the screens' images (emission strength)",
+    "from": "0.025",
+    "to": "0.008"
+   },
+   "expected": "The screen sits as a dim image in the dark, below the speakers",
+   "accept": {
+    "region": [
+     0,
+     140,
+     150,
+     420
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     55
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The frame shows a niche in a void: the shell (beams, concrete, steel), the limewashed walls and the zone's furniture are cropped out or black, so it reads as a generic demo room, and the lens is a standing 24 mm with a blank slab in front.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     120
+    ],
+    "measured": "top band lum_median 4.1, crush 37.8 %; foreground table a featureless slab"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [11.9, 1.6, 1.55], 24 mm, f/5.6",
+    "to": "seated, about [12.6, 2.4, 1.15], 32 mm, level, at [16.5, 3.05, 1.05], with a fir beam crossing the top of the frame and the middle hexagonal table with the glass and record in the lower left foreground; f/4 focused on the near speaker"
+   },
+   "expected": "One beam and the concrete above the niche enter the frame, the zone reads as a room within a room, a sign of life sits in the foreground",
+   "accept": null
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The frame is a touch too dark overall and the shadows are empty rather than deep.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "frame lum_p50 19.0; 67.2 % of pixels below 40; chairs at right lum_median 9.6"
+   },
+   "change": {
+    "setting": "render.exposure, haze density",
+    "from": "exposure 4.8, haze 0.002",
+    "to": "exposure 5.2, haze 0.006"
+   },
+   "expected": "Frame median about 26 to 30, the chairs' velvet and the walls hold detail, the altar spots show faint beams",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The plinths' glowing edges clip into thin neon strips that read as signage.",
+   "evidence": {
+    "region": [
+     760,
+     495,
+     915,
+     525
+    ],
+    "measured": "clip 0.88 % (left plinth 0.6 %), p95 251"
+   },
+   "change": {
+    "setting": "the light plinth glow under each speaker (emission strength) and the frosted acrylic's roughness",
+    "from": "current (clipping)",
+    "to": "about half the strength, frosted roughness up so the glow spreads softly over the plinth top rather than along its edge"
+   },
+   "expected": "A soft even glow under each cabinet, no clipped line",
+   "accept": {
+    "region": [
+     760,
+     495,
+     915,
+     525
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The denoiser smears the cones and the white batts into blotches, the biggest single CG tell on the hero.",
+   "evidence": {
+    "region": [
+     770,
+     420,
+     905,
+     510
+    ],
+    "measured": "batts at the base of the right cabinet read as smudged white patches in a 2x crop"
+   },
+   "change": {
+    "setting": "render.samples / adaptive",
+    "from": "256, adaptive 0.02",
+    "to": "1024, adaptive 0.005, denoise on with albedo and normal passes, at full 2400 x 1600 rather than the 0.5 proof"
+   },
+   "expected": "Batt fibres and the cone's surround legible at 1:1",
+   "accept": null
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The fir boards and the carpet read as smooth CG surfaces.",
+   "evidence": {
+    "region": [
+     560,
+     130,
+     760,
+     500
+    ],
+    "measured": "boards uniform, falloff bins 106 to 61 smooth with no board-to-board variation; carpet lum_range 72 flat"
+   },
+   "change": {
+    "setting": "materials' finish (fir, floor)",
+    "from": "uniform fir texture, flat carpet",
+    "to": "fir with per-board tone variation of about 10 %, checks and nail holes, a little sheen; carpet with a pile bump and a slight sheen so the altar spots leave a pool on the floor in front of the plinths"
+   },
+   "expected": "Boards read as reclaimed fir, a pool of light falls on the floor in front of the altar",
+   "accept": {
+    "region": [
+     450,
+     520,
+     900,
+     620
+    ],
+    "metric": "lum_range",
+    "op": ">",
+    "value": 90
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "No sign of life reads: the sleeve against the plinth is a blank card and the table props are lost.",
+   "evidence": {
+    "region": [
+     780,
+     500,
+     845,
+     570
+    ],
+    "measured": "sleeve a flat beige rectangle, lum_median 73.9 with no artwork"
+   },
+   "change": {
+    "setting": "props",
+    "from": "blank sleeve, props off camera",
+    "to": "a sleeve with real printed artwork and a visible spine, a rocks glass with a finger of whisky and a record out of its sleeve on the foreground table caught by the Orb's light, the coat over the near tub chair's arm"
+   },
+   "expected": "Two or three readable signs of life in the frame",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Give the frame one saturated colour from the speaker",
+   "why": "The Smoke configuration's tint is fixed on the card; the speakers are smoked, so the frame has no saturated colour by design. Another configuration would carry it."
+  },
+  {
+   "request": "Show one speaker rather than a matched pair",
+   "why": "The altar's pair is fixed by the room's design; the two identical cabinets are correct, not a repeated asset."
+  },
+  {
+   "request": "Warm the Orb's frosted liner, which reads cool blue-white",
+   "why": "The Orb's tint and liner are a fixed EARF product; only its glow level may change. A lower Orb glow and the 2700 K grade will lessen the cast."
+  },
+  {
+   "request": "Make the niche's flat fascia and the plain plinth blocks more crafted",
+   "why": "The niche and the altar are part of the room's design as proposed."
+  }
+ ],
+ "score_if_fixed": 7.0
+}
