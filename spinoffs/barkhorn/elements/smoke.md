@@ -339,3 +339,66 @@ Fixes common to both:
 - **p6 read:** "a thick plume of black smoke rises from the horizon behind it", but the shapes check failed: "it reads easily as an explosion or a mushroom cloud". The billowing, sheared top is the cause.
 - **Result:** p6 fails the gate. E6 stops at p3 and its set is restored to p3 (88532b0). The ridge and gully pieces stay in smoke_el for later use.
 - **On the critic:** two passes in a row have split 1–1 with each judge preferring the second image. At this level the paired duel measures order more than quality.
+
+## E8, the speaker came down like an asteroid (the owner, 2026-10-20)
+
+The owner chose **"Smoke: A, salt flat"** (E6 p3; its finals go to helpers from bf7ae75), with a note: "The Smoke options are both weak. The bridge could be a lot cooler if it looked like the speaker slid along the asphalt and ground it up, like an asteroid might. It needs way more realism though, like a movie still."
+
+**The set:** `smoke_impact.py` and `kit_ext/impact.py`.
+- E7's overpass, with a 1 m by 0.34 m gouge 22 m long down the near lane, and the speaker at its end, sunk 0.3 m.
+- Along both lips, asphalt plates torn up: an asphalt top, with sub-base under and at the broken edges.
+- A scorched aggregate floor, debris thrown wide and finer with distance, and grit at the speaker's feet.
+- Dust and smoke still rising from the gouge, and embers in the air.
+- A low camera along the gouge: 40 mm at f/2.
+
+**p0** (960 px, 128 samples):
+- **Read:** "a dusk city overpass after some kind of disaster: a burning car sends up black smoke… and a dark rectangular speaker-like box sits in a cracked trench in the asphalt, surrounded by broken concrete and drifting sparks or embers". No figure. The read doesn't say "crashed" or "slid".
+- **Movie-still realism:** 4.0 and 4.0. The tells:
+  - the trench floor reads as sand;
+  - debris is even on both sides, not thrown forward along the slide;
+  - no scorch or dust on the speaker's lower faces;
+  - the embers are uniform dots;
+  - no halation;
+  - the speaker is dark and flat, with no fire on its faces.
+- **Duel against E6 p3**, four judges, each order twice:
+  - E8 first: 4.0 v 6.0, and 4.0 v 6.0, both preferring E6.
+  - E6 first: 4.5 v 5.5, and 4.5 v 5.5, both preferring E8.
+  - Means: E6 5.25, E8 4.75. Every judge preferred the second image shown, and E6 carries the net by 0.5.
+  - The judges who preferred E8 cite its impact ("one clear cinematic idea"). Those who preferred E6 cite the product being legible.
+
+**E8 p1** (the coordinator's composition note): the gouge turned to run away behind the speaker toward the wrecks, a bow wave of heaved plates in front, an 8 cm asphalt course in section on the walls, backlit dust over the trench, a camera low and off-axis on the speaker's face, a burning fragment by the lens as the key, finer embers, halation, and a black flag for the horn's mirror.
+- **Read:** "a boxy speaker sits on a wet, rubble-strewn rooftop at dusk… broken concrete chunks lie around it… a burning vehicle giving off sparks and smoke". No figure. "The top box: its white blob around the black hole could be seen as a mouth or a face at a glance."
+- **The read target failed.** There is no crash, slide or impact in the sentence, and the gouge doesn't read from this angle.
+- **Movie-still realism:** 4.5 and 4.5, up from 4.0 and 4.0. The tells:
+  - clean, faceted low-poly slabs with no fines, aggregate or rebar;
+  - debris scattered radially, not trailing one way;
+  - no dust skirt at the speaker's base;
+  - fire spill missing from the speaker's far side.
+- **Duel against E6 p3**, four judges, each order twice:
+  - E8 first: 4.5 v 6.0 and 5.0 v 6.5, E6 preferred both times.
+  - E6 first: 5.0 v 6.5, E8 preferred; and 5.5 v 4.5, E6 preferred.
+  - Means: E6 5.75, E8 5.125. E6 is preferred 3 to 1.
+- **The flag misfired.** Three judges read the horn's black-and-white reflection as a "texture error". The horn mirrors the flag as a hard black blotch against the white sky.
+
+**E8 p2:** the camera at 1.2 m on a 35 mm lens with the furrow running to the burning wreck, crumbled near-black asphalt, fines sprayed along the slide, the flag removed, the speaker turned to 26°, and a deeper grade. Also a fix: plate vertices are now tracked by index, because bmesh vertex wrappers are not stable after `subdivide_edges`. Every earlier plate had been re-placed with each new one.
+- **Read** (neutral): "a tall, dark speaker cabinet stands upright in the middle of a cracked, rubble-strewn city road at dusk… behind it a car burns". This misses the slide. The figure check is "mildly": a robot, with the waveguide as its eye.
+- **Realism:** 4.0 and 4.5. The rubble reads as "crumpled paper or styrofoam", pale where the foreground fire lights it.
+- **Duel against E6 p3**, four judges, each order twice: all four prefer E6, scoring E6 6.0, 6.0, 5.5, 5.5 against E8's 4.0, 4.0, 4.0, 4.0. Means: E6 5.75, E8 4.0.
+- **Stop rule:** the read missed again, so one higher three-quarter frame follows (p3), and then E8 stops.
+
+**E8 p3** (the stop-rule frame): a high three-quarter view from above the bow wave, looking down the furrow to the wrecks, with darker debris and the foreground key on the speaker only.
+- **Read:** "an upright, box-shaped speaker-like object… sits in a broken trench cut along the centre of a wet, cracked multi-storey car-park deck at dusk… a burning car and a wrecked car behind it". It names the trench but not the slide. No figure.
+- **Realism:** 3.5 and 3.5. The trench reads as "a clean, flat-bottomed rectangular cutout… a boolean cut with scattered props", and the debris is evenly spaced, not thrown.
+- **Duel against E6 p3**, four judges, each order twice: all four prefer E6. E6 scores 6.0, 5.5, 6.0, 5.0 against E8's 4.0, 4.0, 4.0, 4.0. Means: E6 5.625, E8 4.0.
+
+**E8 stops here, per the stop rule.**
+
+| | Read names the slide | Realism | Duel mean, E8 v E6 p3 | Judges preferring E8 |
+|---|---|---|---|---|
+| p0 | no ("a box in a cracked trench") | 4.0 / 4.0 | 4.75 v 5.25 | 2 of 4 |
+| **p1** | no ("rubble-strewn rooftop") | **4.5 / 4.5** | **5.125 v 5.75** | **1 of 4** |
+| p2 | no | 4.0 / 4.5 | 4.0 v 5.75 | 0 of 4 |
+| p3 | no ("a broken trench cut along…") | 3.5 / 3.5 | 4.0 v 5.625 | 0 of 4 |
+
+- **The best E8 is p1** (element-smoke-e8-impact-p1.jpg), with the highest realism and the closest duel. p0 split by position.
+- **The constant** across every judge: the disaster story buries the product, and the trench and rubble read as CG.
