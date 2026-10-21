@@ -93,7 +93,7 @@ def shot():
                        sy=0.85, rotate_z=26.0))
     lights.update({
         'keyfire': {'type': 'point', 'position': [0.2, -2.9, 0.35], 'power_w': 600.0, 'color': '#FF8A3C', 'radius_m': 0.2,
-                    'specular': 0.15},
+                    'specular': 0.15, 'receivers': SPEAKER},
         # a cool fill from the sky, and the fire's key on the speaker's flank
         'skyfill': {**area(-20, 10, 2.4, 2.0, '#8EA4C6', (4.0, 3.0), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
         'bounce': {**area(-25, 12, 2.0, 2.0, '#C9BBA8', (2.4, 2.4), (0.0, 0.0, 0.3)), 'receivers': SPEAKER},
@@ -108,8 +108,8 @@ def shot():
             lights[f'firerim{i}'] = {'type': 'area', 'size_m': [1.0, 1.0], 'position': [x * 0.4, y * 0.4, 1.0],
                                      'target': [0.0, 0.0, 0.5], 'irradiance': 30.0, 'color': '#FF8A3A', 'receivers': SHELL}
     # low beside the gouge, looking along it to the speaker; 40 mm wide open, focus on the speaker
-    cam = camera(height=1.2, distance=5.0, azimuth=20, lens=35, target=(0.0, 0.0, 0.35), fstop=2.0, shift_x=0.0,
-                 shift_y=0.12)
+    cam = camera(height=2.3, distance=4.6, azimuth=10, lens=30, target=(0.0, 0.0, 0.4), fstop=2.8, shift_x=0.0,
+                 shift_y=0.1)
     cam['clip_end'] = 3000
     return frame('smoke_impact', props, cam, sky(SKY, rotation_deg=SKY_ROT, strength=0.5),
                  'barkhorn, Smoke, the speaker came down like an asteroid', lights=lights, rotate_z=26.0,

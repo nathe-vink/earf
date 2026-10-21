@@ -116,8 +116,8 @@ def slabs(bpy, name, p, kit):
     for f in bm.faces:
         f.material_index = 0 if f in tops else 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#0D0D0E', 0.78, 0.45))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#34312D', 0.62))
+    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#211F1D', 0.75))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
@@ -156,8 +156,8 @@ def debris(bpy, name, p, kit):
     for f in bm.faces:
         f.material_index = 0 if f in tops else 1
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#0D0D0E', 0.78, 0.45))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#34312D', 0.62))
+    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45))
+    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, '#211F1D', 0.75))
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))

@@ -379,3 +379,9 @@ The owner chose **"Smoke: A, salt flat"** (E6 p3; its finals go to helpers from 
   - E6 first: 5.0 v 6.5, E8 preferred; and 5.5 v 4.5, E6 preferred.
   - Means: E6 5.75, E8 5.125. E6 is preferred 3 to 1.
 - **The flag misfired.** Three judges read the horn's black-and-white reflection as a "texture error". The horn mirrors the flag as a hard black blotch against the white sky.
+
+**E8 p2:** the camera at 1.2 m on a 35 mm lens with the furrow running to the burning wreck, crumbled near-black asphalt, fines sprayed along the slide, the flag removed, the speaker turned to 26°, and a deeper grade. Also a fix: plate vertices are now tracked by index, because bmesh vertex wrappers are not stable after `subdivide_edges`. Every earlier plate had been re-placed with each new one.
+- **Read** (neutral): "a tall, dark speaker cabinet stands upright in the middle of a cracked, rubble-strewn city road at dusk… behind it a car burns". This misses the slide. The figure check is "mildly": a robot, with the waveguide as its eye.
+- **Realism:** 4.0 and 4.5. The rubble reads as "crumpled paper or styrofoam", pale where the foreground fire lights it.
+- **Duel against E6 p3**, four judges, each order twice: all four prefer E6, scoring E6 6.0, 6.0, 5.5, 5.5 against E8's 4.0, 4.0, 4.0, 4.0. Means: E6 5.75, E8 4.0.
+- **Stop rule:** the read missed again, so one higher three-quarter frame follows (p3), and then E8 stops.
