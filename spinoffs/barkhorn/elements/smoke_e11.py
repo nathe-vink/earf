@@ -24,6 +24,8 @@ CACHE = 'renders/2026-10-21/barkhorn/plume/plume_salt2.npz'
 ROT = 18.0                     # the speaker's turn (E6's rotate_z)
 BEHIND, SIDE = 0.85, 0.0       # the source's centre (1 m across) from the speaker's: behind its back, toward its right
 WIND = 50.0                    # the sim's downwind (+x) turned: away from the camera, a little right (looks e11_s2_w45/60)
+FLOOR = -0.03                  # the box's floor under the crust: level with it, it met the crust levelled under the
+                               # speaker face to face, and Cycles drew a pale disc there (proof 1)
 
 
 def plume():
@@ -33,7 +35,7 @@ def plume():
     a = math.radians(ROT)
     x = -math.sin(a) * BEHIND + math.cos(a) * SIDE
     y = math.cos(a) * BEHIND + math.sin(a) * SIDE
-    return piece('ext', module='plume', fn='plume', cache=CACHE, position=[round(x, 4), round(y, 4), 0.0],
+    return piece('ext', module='plume', fn='plume', cache=CACHE, position=[round(x, 4), round(y, 4), FLOOR],
                  rotate_z=WIND, density=4.0, strength=0.0, color='#7A746C', anisotropy=0.2, edge=[0.04, 0.3],
                  detail=0.5, detail_scale=0.08, detail_octaves=3.0, breakup=0.35, breakup_scale=0.4,
                  breakup_octaves=2.0, seed=3)
