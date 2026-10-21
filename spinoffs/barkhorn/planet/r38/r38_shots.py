@@ -108,7 +108,7 @@ if B:
     b = {
         # the pair off the wall behind (a key on each cabinet, the niches' strips down); the cubbies 1.3 stops down and
         # warmer; a rocks glass and an open sleeve on the zinc in front
-        'bar-smoke': dict(barspk_w=80.0, barback=4.0, spk_niche_strip=1.5, rw_w=12.0, rw_k=2400, disc_glow=0.06,
+        'bar-smoke': dict(barspk_w=80.0, barback=0.0, spk_niche_strip=1.5, rw_w=12.0, rw_k=2400, disc_glow=0.06,
                           life_glasses=[[6.55, round(C['y0'] + 0.14, 3), zt, 0.022], [7.35, round(C['y0'] + 0.20, 3), zt, 0.03]],
                           life_sleeves=[[6.95, round(C['y0'] + 0.26, 3), zt, -14.0]]),
         # the coins brighter from the column's own light; the pin spot's shadow soft; a wet ring and a sleeve on the zinc
@@ -116,7 +116,7 @@ if B:
                             life_sleeves=[[cx + 0.42, cy - 0.20, zt, 18.0]]),
         # the fir under 2 % clipped (the spots narrower onto the cabinets, the niche strip down), the pair keyed, the
         # screen under the pair; a sleeve on the near table
-        'listening-smoke': dict(exposure=3.9, orb_trim=0.35, altar_w=28.0, altar_cone=18.0, altar_z=0.7, niche_strip=0.9, spk_irr=0.5, screen_glow=0.025,
+        'listening-smoke': dict(exposure=4.8, look='AgX - Medium High Contrast', orb_trim=0.35, altar_w=28.0, altar_cone=18.0, altar_z=0.7, niche_strip=0.9, spk_irr=0.5, screen_glow=0.025,
                                 felt_wash=0.25, life_sleeves=[[round(RP.TUB_TABLES[4][0] - 0.05, 3), round(RP.TUB_TABLES[4][1] + 0.08, 3),
                                                               round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 30.0]]),
         # the glass as glass (the etched name lit, the street faintly in it), the clipped disc down, the steel less grungy,
