@@ -1,0 +1,351 @@
+{
+ "stage1": {
+  "impression": "A floating black glossy basin block against vertical timber boards, with a brushed-steel spout and lever and a bar of soap. It reads as a competent CG vanity render rather than a night photograph: the frame is too bright and even for a night room, the wall directly under the slab is the brightest thing in the frame so the block looks pasted on with no contact shadow, the boards are a pinkish-mauve with knots that seem to repeat, and the bowl's underside shows through the front as a pale saucer. As a specific place it reads as a generic hotel or restaurant washroom detail. A magazine would not run it as Planet EARF; at best it would run as a small detail once the fir and the smoked-glass character come through.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Night exposure: frame lum_median within 22-50 (now 85.8)",
+  "The slab casts a soft, believable shadow onto the boards beneath it; the wall under the slab is darker than the wall beside it (now 157 vs 77)",
+  "The boards read as honey or amber Douglas fir under 2700 K, not pink or mauve (now r94 g72 b70, so b is close to g)",
+  "The Smoke slab reads as smoked glass: a dim, legible reflection gradient and bright polished arrises on the front face, not a flat black void (front median 4.6, 33% crushed)",
+  "The bowl interior reads from the camera as a soft lit hollow; the bowl's underside does not show through the front as a pale plastic saucer",
+  "No tiling or repeat in the board grain and knots",
+  "No unexplained pale blur at the frame edge (the left strip at x 205-235)",
+  "Some sign of life and a hint of the rest of the room, so the frame says this bar and not any washroom"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Overexposed for a night interior: lum_median 85.8, target 22-50"
+  },
+  {
+   "region": [
+    350,
+    550,
+    910,
+    700
+   ],
+   "what": "Wall below the floating slab is brightly lit (median 157, brighter than the wall beside it at 77). There is no contact or cast shadow, so the slab looks composited or floating in CG"
+  },
+  {
+   "region": [
+    60,
+    0,
+    340,
+    800
+   ],
+   "what": "Boards read pink or mauve (r94 g72 b70) rather than warm fir; reads as stained oak laminate"
+  },
+  {
+   "region": [
+    180,
+    0,
+    260,
+    800
+   ],
+   "what": "Knots repeat at near-regular vertical intervals on the board left of the strip, which suggests texture tiling"
+  },
+  {
+   "region": [
+    205,
+    0,
+    235,
+    800
+   ],
+   "what": "A pale, defocused vertical strip (median 141) at the left with no readable source; it reads as an artefact or a mis-placed edge"
+  },
+  {
+   "region": [
+    350,
+    390,
+    910,
+    545
+   ],
+   "what": "Front face of the Smoke slab is a near-flat black void (median 4.6, crush 33%) with almost no reflection of the room"
+  },
+  {
+   "region": [
+    490,
+    420,
+    770,
+    460
+   ],
+   "what": "The bowl underside shows through the front as a pale white saucer shape, which reads as lit plastic or Corian"
+  },
+  {
+   "region": [
+    450,
+    330,
+    790,
+    380
+   ],
+   "what": "Bowl interior barely seen from this low eye height; the rim highlight clips (2.2% clipped) while the bowl is crushed (37%)"
+  },
+  {
+   "region": [
+    1110,
+    170,
+    1200,
+    800
+   ],
+   "what": "Walnut-veneer column at the right edge is cut by the frame, pinkish (r126 g95 b95), and its grain looks smeared or stretched at the top"
+  },
+  {
+   "region": [
+    560,
+    0,
+    650,
+    300
+   ],
+   "what": "The spout escutcheon highlight clips (3.4%) and reads as chrome CG rather than brushed steel"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The frame is exposed like a daytime bathroom, not a bar at night.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "lum_median 85.8, p95 167.6"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.4",
+    "to": "0.4 (about -1 stop; fine-tune so the median lands near 40)"
+   },
+   "expected": "Frame median about 38-45; the boards fall into warm shadow between pools of light, and the sink's downlight pool becomes the brightest area.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     28,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The boards under the slab are lit harder than anywhere else, so the floating block casts no shadow and looks pasted on.",
+   "evidence": {
+    "region": [
+     350,
+     550,
+     910,
+     700
+    ],
+    "measured": "lum_median 157.3 vs 76.8 on the boards at left (60,0,340,800)"
+   },
+   "change": {
+    "setting": "the hidden strip under the slab's front edge and the wash down the boards (the light sources hitting the wall below the sink)",
+    "from": "strip lighting the wall below the slab at full strength",
+    "to": "strip at about 25% power and aimed down at the floor, not back at the boards; the wash down the boards dropped so it fades out above the slab. The slab then throws a soft shadow 100-200 mm deep onto the boards beneath it"
+   },
+   "expected": "A dark band directly under the slab that lifts gradually toward the floor; the wall beneath is darker than the wall beside the sink.",
+   "accept": {
+    "region": [
+     350,
+     550,
+     910,
+     620
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 35
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "material",
+   "problem": "The boards read as pink or mauve stained oak, not warm Douglas fir under 2700 K light.",
+   "evidence": {
+    "region": [
+     60,
+     0,
+     340,
+     800
+    ],
+    "measured": "r 94, g 72, b 70: blue is almost equal to green, so the hue sits toward magenta"
+   },
+   "change": {
+    "setting": "the boards' stain or finish (base colour)",
+    "from": "a cool pinkish brown with b about equal to g",
+    "to": "a honey or amber fir with blue well below green (about #8A5E3A at full light), a matte oil finish, and darker end grain at the seams"
+   },
+   "expected": "The boards read amber-brown; b_median is about 70% of g_median or less.",
+   "accept": {
+    "region": [
+     60,
+     0,
+     340,
+     800
+    ],
+    "metric": "b_median",
+    "op": "<=",
+    "value": 30
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "camera",
+   "problem": "From a 1.2 m eye height the polished top and the bowl are seen almost edge-on, so the slab reads as a black box and the downlit bowl, the point of the frame, is hidden.",
+   "evidence": {
+    "region": [
+     450,
+     330,
+     790,
+     380
+    ],
+    "measured": "bowl lum_median 18, crush 37%, while the rim clips at 2.2%"
+   },
+   "change": {
+    "setting": "camera position z and target",
+    "from": "position z 1.2, target z 0.78",
+    "to": "position z 1.45-1.5 (standing eye level), target z 0.80, lens 40 mm unchanged, verticals kept true (shift rather than tilt)"
+   },
+   "expected": "The bowl's interior shows as a soft warm pool from the 20-degree spot, and the 30 mm rim radius and the polished top read as smoked glass.",
+   "accept": null
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The Smoke slab's front face is a flat black void with almost no reflection, so it does not read as polished smoked acrylic.",
+   "evidence": {
+    "region": [
+     350,
+     390,
+     910,
+     545
+    ],
+    "measured": "lum_median 4.6, crush_pct 33.3, while the top surface and arris carry the only highlights"
+   },
+   "change": {
+    "setting": "a reflection source opposite the sink (a lit fir board or a dim warm wall wash behind the camera, a practical in the room)",
+    "from": "none",
+    "to": "a dim warm vertical wash on the wall behind the camera, 2700 K, enough to place a soft gradient reflection and a polished-edge line along the front face's lower arris"
+   },
+   "expected": "A faint warm gradient reflection across the front face and a crisp highlight on the bottom arris; the face stays dark but is no longer crushed.",
+   "accept": {
+    "region": [
+     350,
+     390,
+     910,
+     545
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 15
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "light",
+   "problem": "The light through the slab picks out the bowl's underside as a pale saucer, which reads as a lit Corian or plastic box.",
+   "evidence": {
+    "region": [
+     490,
+     420,
+     770,
+     460
+    ],
+    "measured": "lum_median 60.7, p95 128 inside an otherwise near-black face"
+   },
+   "change": {
+    "setting": "the sink spot (1 x spot, 35 W, 2700 K, cone 20 deg)",
+    "from": "35 W, cone 20 deg",
+    "to": "18-20 W, cone 14-16 deg, aimed at the waste so that less light passes through the bowl wall to its underside; the bowl's underside material gets a darker smoked finish, not a white one, if that is a finish setting"
+   },
+   "expected": "The underside reads as a dim smoky ghost of the bowl, not a white shape.",
+   "accept": {
+    "region": [
+     490,
+     420,
+     770,
+     460
+    ],
+    "metric": "lum_p95",
+    "op": "<",
+    "value": 70
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The board texture repeats (regularly spaced knots) and gives the wall a CG tiled look.",
+   "evidence": {
+    "region": [
+     180,
+     0,
+     260,
+     800
+    ],
+    "measured": "seen at 2x: knots recur at near-equal vertical spacing down the board"
+   },
+   "change": {
+    "setting": "board material mapping",
+    "from": "one texture instance shared across boards",
+    "to": "a random UV offset, rotation by 180 deg and a slight tone variation (about +/-8%) per board, plus occasional nail holes and checks"
+   },
+   "expected": "No two adjacent boards share a knot pattern; the wall reads as real milled fir.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "composition",
+   "problem": "The pale defocused strip at the left edge and the cropped pink column at the right pull the eye out of the frame and say nothing about the bar.",
+   "evidence": {
+    "region": [
+     205,
+     0,
+     235,
+     800
+    ],
+    "measured": "lum_median 141, a uniform blur with no readable source; column at 1110-1200 is cut by the frame edge"
+   },
+   "change": {
+    "setting": "camera framing and props",
+    "from": "the alcove return blurred at left, the column sliced at right, only soap on the slab",
+    "to": "reframe so the alcove's left return is either fully in shadow or out of frame and the right column is either clearly included or excluded; add a folded linen hand towel and a rocks glass left on the slab's corner as a sign of life"
+   },
+   "expected": "One clear subject in a dark alcove with a lived-in detail; no unexplained bright edge.",
+   "accept": null
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Show a visible fixing or bracket so the floating slab is plausible",
+   "why": "The sink's design (floating off the wall) is fixed by the card; a cast shadow (c2) should carry the plausibility instead."
+  },
+  {
+   "request": "A faint internal glow in the Smoke slab to separate it from the dark wall",
+   "why": "The card rules out internal glow by design (a lit tinted block reads as a lit Corian box)."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

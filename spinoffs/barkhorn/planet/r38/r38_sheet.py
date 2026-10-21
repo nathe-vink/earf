@@ -13,7 +13,7 @@ FRAMES = [('bar-smoke', 'The bar: the pair raised on ledges at counter height, t
           ('coins-decks', 'EARFcoin at the decks: the request column, lit from its base'),
           ('listening-smoke', 'The listening zone: the altar pair, a record and a coat'),
           ('street', 'The shopfront at night, from the kerb'),
-          ('sink', 'The sink: polished cast acrylic in Smoke'),
+          ('sink', 'The sink: polished cast acrylic in Smoke, read as black glass'),
           ('coins-door', 'EARFcoin at the door: a coin for each guest')]
 CW, CH, M, G, FH = 900, 600, 48, 20, 44
 BG, INK, MUTE = (16, 14, 13), (236, 230, 220), (150, 142, 132)
