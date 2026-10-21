@@ -156,7 +156,8 @@ def amanita(bpy, name, p, kit):
     breaks out of); `tilt` [deg about x, deg about y] (the cap tilted on its stem); `bite` [deg, depth m] (a slug's
     notch out of the margin, the white flesh in it); `rest` (the cap's colour placed by its own axis, not the leaned
     stem's, and its underside the gills' white); `dirt` (soil splashed on the cap, 0-1); `rough`, `coat` (its finish);
-    `shade` (0-1, G3: the stem and skirt less white, soil splashed higher, darker toward the cap that shades them)."""
+    `shade` (0-1, G3: the stem and skirt less white, soil splashed higher, darker toward the cap that shades them),
+    `stem_tone` (with `shade`, the stem and skirt's whole albedo scaled: G4's front fill made the white stems glow)."""
     rnd = random.Random(p.get('seed', 1))
     sp = p.get('species', 'muscaria')
     R = p.get('cap', 0.06); age = p.get('age', 'convex'); hr, under, up, open_ = _AGES[age]
@@ -335,7 +336,8 @@ def amanita(bpy, name, p, kit):
             t = max(0.0, min(1.5, v.co.z / top)); v.co.x += lx * t * t; v.co.y += ly * t * t
     mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0), p.get('matte', False),
                          p.get('cap_ramp'), p.get('dull_to', '#4A2414'), p.get('fibrils', 0.0), p.get('rest', False),
-                         p.get('bite'), p.get('dirt', 0.0), p.get('rough'), p.get('coat'), p.get('shade', 0.0))
+                         p.get('bite'), p.get('dirt', 0.0), p.get('rough'), p.get('coat'), p.get('shade', 0.0),
+                         p.get('stem_tone', 1.0))
     obs = []
     for k, bm in bms.items():
         if len(bm.verts):
@@ -346,7 +348,7 @@ def amanita(bpy, name, p, kit):
 
 
 def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False, cap_ramp=None, dull_to='#4A2414', fibrils=0.0,
-                  rest=False, bite=None, dirt=0.0, rough=None, coat=None, shade=0.0):
+                  rest=False, bite=None, dirt=0.0, rough=None, coat=None, shade=0.0, stem_tone=1.0):
     key = (sp,)
     out = {}
     # the cap: viscid (a wet, thin coat), red with orange toward the margin and blotchy, a little light through it
@@ -494,7 +496,7 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False, cap
             # as at the base"): darker toward the cap, the soft light from the canopy blocked there
             sh = nt.nodes.new('ShaderNodeMapRange'); sh.interpolation_type = 'SMOOTHSTEP'
             sh.inputs['From Min'].default_value = 0.55; sh.inputs['From Max'].default_value = 1.0
-            sh.inputs['To Min'].default_value = 1.0; sh.inputs['To Max'].default_value = 1.0 - 0.55 * shade
+            sh.inputs['To Min'].default_value = stem_tone; sh.inputs['To Max'].default_value = stem_tone * (1.0 - 0.55 * shade)
             nt.links.new(hz.outputs['Value'], sh.inputs['Value'])
             shm = nt.nodes.new('ShaderNodeMix'); shm.data_type = 'RGBA'; shm.blend_type = 'MULTIPLY'
             shm.inputs['Factor'].default_value = 1.0
