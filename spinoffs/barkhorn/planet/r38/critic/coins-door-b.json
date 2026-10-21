@@ -1,0 +1,332 @@
+{
+ "stage1": {
+  "impression": "A close, low-angle still life of a hammered brass bowl of tinted acrylic tokens on a plain timber block against near-black boards. The warm pool of light on the bowl is pleasant, but the coins stand in a neat, evenly spaced ring around the bowl's wall instead of lying in a heap, they are one model in colour swaps, the whole frame is soft from shallow focus and denoiser smear, and the block reads as a smooth CG slab with smeared grain and razor-sharp unbevelled edges. Nothing in the frame says listening bar, door or San Francisco: as it stands a magazine would not run it as a specific place; it is a generic product still.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The coins lie as a believable heap of 40 (stacked, tilted, overlapping, some on edge, a few face down) with no visible ring layout and no coin floating or cutting into another or into the bowl",
+  "The coins and the bowl's rim are sharp at 1:1 (edge width at a coin's printed rim <= 2 px at proof scale), with no denoiser smear on the globe print",
+  "The frame places the bowl at the door of this room: the host stand's real top and edge, the door frame or shopfront glass, and the lit room behind out of focus (Dome pendants as warm bokeh), so it reads as Planet EARF and not as a tabletop",
+  "The stand's timber shows real grain at scale, an eased or worn edge and an oiled sheen, not a smeared procedural streak",
+  "Frame lum_median between 22 and 40 with the boards behind holding visible grain, and the bowl's hotspot under 0.5 % clipped"
+ ],
+ "defects": [
+  {
+   "region": [
+    410,
+    260,
+    790,
+    500
+   ],
+   "what": "Coins arranged in an evenly spaced ring standing against the bowl's wall, reading as placed by script, not dropped by a hand; only about 15 of the card's 40 are visible"
+  },
+  {
+   "region": [
+    410,
+    260,
+    790,
+    500
+   ],
+   "what": "Repeated single coin model with only the tint changed; identical globe print and identical white dash rim on every coin"
+  },
+  {
+   "region": [
+    500,
+    280,
+    660,
+    380
+   ],
+   "what": "Hotspot on the clear and pink coins and the bowl floor: 3.97 % clipped, lum_median 111, the brightest point in the frame"
+  },
+  {
+   "region": [
+    380,
+    200,
+    820,
+    610
+   ],
+   "what": "General softness: coins and the hammered brass out of focus and smeared, the globe print mushy; f/4.0 at about 1 m gives too little depth"
+  },
+  {
+   "region": [
+    140,
+    380,
+    990,
+    800
+   ],
+   "what": "Host stand top: smeared, stretched streak grain with no pores or figure; a dead-flat slab with knife-sharp edges (edge width 3 px, step 9) and no wear, oil sheen or end grain"
+  },
+  {
+   "region": [
+    0,
+    0,
+    380,
+    800
+   ],
+   "what": "Background boards nearly black (lum_median 12.4); the room is unreadable"
+  },
+  {
+   "region": [
+    850,
+    0,
+    1200,
+    400
+   ],
+   "what": "Upper right a dead void (lum_median 5.7): no door, no room, no practicals, so the frame has no place"
+  },
+  {
+   "region": [
+    400,
+    560,
+    840,
+    660
+   ],
+   "what": "Bowl's foot and shadow form a perfect concentric ellipse on the timber; the contact shadow is soft and wide, so the bowl looks slightly hovering"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "set",
+   "problem": "The coins sit in a scripted ring, not in a heap, which is the single strongest sign of a render.",
+   "evidence": {
+    "region": [
+     410,
+     260,
+     790,
+     500
+    ],
+    "measured": "about 15 coins visible, evenly spaced around the wall, each standing at the same angle; none overlapping or stacked"
+   },
+   "change": {
+    "setting": "props: EARFcoins, the brass bowl of 40 at the door",
+    "from": "40 coins placed in a ring around the bowl's inner wall",
+    "to": "40 coins dropped into the bowl by a rigid-body simulation (random spin and tilt, settled), forming a mound higher in the middle, with 3 or 4 coins on edge against the wall, one or two face down and one coin left on the stand beside the bowl; each coin rotated randomly about its axis so the globe prints do not align"
+   },
+   "expected": "A heap that reads as handled; the print alignment and the ring layout disappear; more coins visible (25 or more) in the bowl.",
+   "accept": null
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "camera",
+   "problem": "The frame is a tabletop still with no sense of the door or of the room, so it cannot be read as a specific place.",
+   "evidence": {
+    "region": [
+     850,
+     0,
+     1200,
+     400
+    ],
+    "measured": "lum_median 5.7; the entire top and right of the frame is empty dark board"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [2.37, 2.4, 1.7], target [1.62, 1.95, 1.05], 50 mm, looking down into a wall",
+    "to": "lens 35 mm, camera lowered to about 1.35 m and turned so that it looks past the bowl into the room (towards +x), the bowl in the lower left third, the shopfront's door frame or glass edge cutting one side and the counter with its Dome pendants and Orbs out of focus behind"
+   },
+   "expected": "The bowl as foreground hero with the lit room as warm bokeh behind; the frame says host stand, inside the door, of this bar.",
+   "accept": null
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "camera",
+   "problem": "The coins and brass are soft: depth of field is too shallow for a close detail and the print is mushy.",
+   "evidence": {
+    "region": [
+     500,
+     280,
+     660,
+     380
+    ],
+    "measured": "the globe line art and white rim dashes blur over 4 to 6 px at 2x crop; the bowl's far rim is soft"
+   },
+   "change": {
+    "setting": "camera aperture and focus",
+    "from": "f/4.0 focused at [1.62, 1.95, 1.05]",
+    "to": "f/8.0 focused on the top of the coin mound (the bowl's centre plus the mound height); keep samples 256 but raise adaptive threshold strictness from 0.02 to 0.01 to reduce denoiser smear on the print"
+   },
+   "expected": "The coins' print and the hammered dimples crisp across the whole bowl, while the room behind (after c2) still falls into bokeh.",
+   "accept": {
+    "region": [
+     500,
+     280,
+     660,
+     380
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": "<=",
+    "value": 2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The spot over the bowl burns the centre coins while the rest of the frame sinks below the night-room range.",
+   "evidence": {
+    "region": [
+     500,
+     280,
+     660,
+     380
+    ],
+    "measured": "clip_pct 3.97, lum_median 111, against frame lum_median 12.2 and boards 5.7 to 12.4"
+   },
+   "change": {
+    "setting": "the Domes' downlights (the one over the host stand) and render exposure",
+    "from": "140.0 W, cone 20.0 deg; exposure 2.1",
+    "to": "the downlight over the stand 90 W with cone 30 deg (a wider, softer pool that covers the stand's whole top); exposure 2.6"
+   },
+   "expected": "The hotspot holds detail; the pool spreads over the stand's top; the frame median rises into the night-room range.",
+   "accept": {
+    "region": [
+     500,
+     280,
+     660,
+     380
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The frame is darker than a published night interior; the shadows are empty.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "frame lum_p50 12.2 (target 22 to 50); 91 % of pixels below 40"
+   },
+   "change": {
+    "setting": "exposure and the room's fill",
+    "from": "exposure 2.1; haze 0.01",
+    "to": "exposure 2.6 (with c4); haze 0.02 so the street lamps and Domes lift the air behind the stand"
+   },
+   "expected": "Frame median at about 24 to 32 with the board grain and the room behind legible.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     40
+    ]
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The host stand's timber is a smooth CG slab with stretched, smeared grain and razor edges.",
+   "evidence": {
+    "region": [
+     140,
+     560,
+     200,
+     640
+    ],
+    "measured": "edge width 3 px with a hard 9-level step at the front arris; at 2x the grain is long blurred streaks with no pores or figure"
+   },
+   "change": {
+    "setting": "the oak's stain and finish (the host stand)",
+    "from": "smooth, streaked procedural grain, sharp arris, uniform sheen",
+    "to": "a scanned oak texture at true scale (pores and ray fleck visible at 1:1), a 2 to 3 mm eased edge with darker end grain on the front, an oiled finish with roughness varying 0.35 to 0.55 and faint ring marks and handling wear near the bowl"
+   },
+   "expected": "The stand reads as oiled oak; a soft highlight rolls along the eased edge instead of a knife line.",
+   "accept": {
+    "region": [
+     140,
+     560,
+     200,
+     640
+    ],
+    "metric": "edge",
+    "axis": "x",
+    "op": ">=",
+    "value": 4
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "set",
+   "problem": "The bowl's contact with the stand is weak and the composition has no sign of life at the door.",
+   "evidence": {
+    "region": [
+     400,
+     560,
+     840,
+     660
+    ],
+    "measured": "the shadow under the foot is a wide soft ellipse with no dark contact line"
+   },
+   "change": {
+    "setting": "props at the host stand",
+    "from": "the bowl alone on the stand",
+    "to": "seat the bowl's foot exactly on the top (no gap, a hair above to avoid coplanar faces) and add a small door-side prop set: a guest list or reservation book with a pen, one coin on the open page, and the edge of a coat on a hook in frame"
+   },
+   "expected": "A dark contact line under the foot; the stand reads as a working host stand.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "material",
+   "problem": "The board-formed wall behind is too dark and too smooth to read as the room's shell.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     380,
+     800
+    ],
+    "measured": "lum_median 12.4; joints visible but no tie holes, pour lines or grain"
+   },
+   "change": {
+    "setting": "the concrete's tone and sheen",
+    "from": "dark, low-detail board surface",
+    "to": "lighter warm-grey concrete tone (about +20 % albedo) with board-grain normal, tie holes and faint staining, roughness 0.8"
+   },
+   "expected": "The wall reads as board-formed concrete under the warm spill, holding detail above lum 15.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     380,
+     800
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 18
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Vary the coin model itself (print, edge dashes, thickness) so the 40 coins are not identical copies",
+   "why": "EARFcoin is one of EARF's products; its shape and print are fixed. The prescribed fix is random rotation and a heap (c1), which breaks the repetition without changing the coin."
+  },
+  {
+   "request": "An EARF speaker in frame as the hero of the colour",
+   "why": "This frame is the door detail; the card makes the coins in all eight tints its subject, so the saturated colour from the coins is per design."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

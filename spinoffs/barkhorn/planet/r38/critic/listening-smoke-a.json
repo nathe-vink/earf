@@ -1,0 +1,412 @@
+{
+ "stage1": {
+  "impression": "A clean, dark, warm render of two horn speakers in a fir-lined niche, but it reads as a CG home-theatre showroom, not a photographed room: the carpet, walls and tub chairs are smooth untextured surfaces, the fir boards look like a tiled wood map, the foreground Orb is a blown white disc, the projection on the left is the brightest broad surface, and the speakers sit as near-black silhouettes against a brighter wall with no tint or glow to make them the hero. None of the shell (concrete, beams, blackened steel) or the signs of life is visible, so a magazine would see a generic hi-fi demo room rather than a specific place.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The speakers must be the brightest, most legible thing in the frame: speaker region lum_median >= 45 with the smoke tint and white batts reading through the acrylic, not darker than the wall behind them (now 21 vs 90)",
+  "No hot spots on the niche: the altar spots' scallops on the fir clip 16 % of the band above the speakers; clip_pct < 1 there",
+  "The Orb's frosted liner must glow, not clip: clip_pct < 3 in its region (now 18.4 %)",
+  "The screen must sit below the speakers in brightness (now median 115)",
+  "At 1:1 the carpet, velvet, felt and fir need real texture: carpet pile, velvet sheen falloff, board grain variation and joints; no smooth CG surfaces",
+  "The frame must show what makes it this place: a fir beam, board-formed concrete or blackened steel at the edge of frame, and the props on the table (glass, record, sleeve against a plinth, coat on a chair) in view",
+  "Shadows hold detail: no large region more than half crushed (right chair now 50.8 %)",
+  "A trace of haze so the spots read as pools and the room has air"
+ ],
+ "defects": [
+  {
+   "region": [
+    760,
+    270,
+    900,
+    520
+   ],
+   "what": "Right speaker under-lit (lum_median 21.2), reads as a black box; smoke tint and white batts barely visible"
+  },
+  {
+   "region": [
+    420,
+    275,
+    520,
+    480
+   ],
+   "what": "Left speaker under-lit (lum_median 19.8)"
+  },
+  {
+   "region": [
+    400,
+    130,
+    1000,
+    220
+   ],
+   "what": "Altar spots' scallops on the fir clip (clip_pct 16.0, median 174): the wall is lit, not the speakers"
+  },
+  {
+   "region": [
+    110,
+    640,
+    200,
+    730
+   ],
+   "what": "Orb lamp blown to a flat white disc (clip_pct 18.4, median 238); no frosted-liner gradation or tinted shell visible"
+  },
+  {
+   "region": [
+    0,
+    140,
+    150,
+    420
+   ],
+   "what": "Projection screen too bright (median 115), the largest bright area, competes with the speakers and reads as a flat CG plane"
+  },
+  {
+   "region": [
+    130,
+    500,
+    1040,
+    800
+   ],
+   "what": "Carpet is a flat smooth surface, no pile or texture at 1:1; floor reads as a CG plane"
+  },
+  {
+   "region": [
+    860,
+    580,
+    1200,
+    800
+   ],
+   "what": "Right tub chairs crushed (crush_pct 50.8) and blobby, smooth untextured velvet"
+  },
+  {
+   "region": [
+    0,
+    470,
+    140,
+    800
+   ],
+   "what": "Left chairs are dark smooth blobs, no velvet sheen"
+  },
+  {
+   "region": [
+    390,
+    140,
+    1020,
+    520
+   ],
+   "what": "Fir boards look like a repeated, uniform wood texture with even vertical stripes; no checks, nail holes or board-to-board tone variation"
+  },
+  {
+   "region": [
+    430,
+    205,
+    940,
+    500
+   ],
+   "what": "Felt panels behind speakers are flat matte rectangles with crisp CG edges, no fibre"
+  },
+  {
+   "region": [
+    780,
+    500,
+    910,
+    575
+   ],
+   "what": "Light plinth glow reads as a white rectangle edge; the sleeve against the plinth reads as a flat grey card"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    120
+   ],
+   "what": "Ceiling band nearly empty (median 3.6, crush 25.5 %): the fir beam is a dark slab, no shell visible"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Frame clip_pct 1.06 % (above 0.5 % allowed outside lamps), largely from the niche scallops; no haze, air reads as vacuum"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers are darker than the wall behind them, so they read as black silhouettes instead of the tinted, lit hero.",
+   "evidence": {
+    "region": [
+     760,
+     270,
+     900,
+     520
+    ],
+    "measured": "speaker lum_median 21.2 vs niche 89.6; p95 122"
+   },
+   "change": {
+    "setting": "lamps on each speaker (4 x area, W/m2 at the target)",
+    "from": "0.1 W/m2",
+    "to": "1.5 W/m2, kept at 2900 K, placed to light the cabinet's acrylic and batts from inside/below so light passes through the smoke tint"
+   },
+   "expected": "Cabinets glow smoky brown-grey, batts read as soft white behind the acrylic, horn edges catch light; speaker median about 50-65.",
+   "accept": {
+    "region": [
+     760,
+     270,
+     900,
+     520
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The altar spots light the fir above the speakers into clipped scallops instead of lighting the speakers.",
+   "evidence": {
+    "region": [
+     400,
+     130,
+     1000,
+     220
+    ],
+    "measured": "clip_pct 16.0, lum_median 174, p95 255"
+   },
+   "change": {
+    "setting": "the altar 2 x spot",
+    "from": "70.0 W, cone 30 deg, aimed high on the wall",
+    "to": "35 W, cone 22 deg with soft blend, retargeted onto each speaker's horn and cabinet top (about z 1.1 m) so the pool falls on the speaker and spills down onto the plinth"
+   },
+   "expected": "No blown scallops; a pool of light on each speaker with the fir falling off naturally above; niche band median about 90-120.",
+   "accept": {
+    "region": [
+     400,
+     130,
+     1000,
+     220
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 1.0
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The foreground Orb is a flat clipped white disc, the worst CG tell in the frame.",
+   "evidence": {
+    "region": [
+     110,
+     640,
+     200,
+     730
+    ],
+    "measured": "clip_pct 18.4, lum_median 238"
+   },
+   "change": {
+    "setting": "each Orb's liner glow / Orb lamp",
+    "from": "glow 0.0818, 1.0 W",
+    "to": "glow 0.03, 1.5 W (more light onto the table, less self-emission) and frosted acrylic roughness raised so the liner diffuses with a centre-to-edge gradient"
+   },
+   "expected": "The Orb reads as a smoked shell with a warm frosted core, bright but not blown, throwing a pool onto the oak table and the props.",
+   "accept": {
+    "region": [
+     110,
+     640,
+     200,
+     730
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 3.0
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The projection screen is the largest bright surface and pulls the eye away from the altar.",
+   "evidence": {
+    "region": [
+     0,
+     140,
+     150,
+     420
+    ],
+    "measured": "lum_median 114.8, p95 196"
+   },
+   "change": {
+    "setting": "the screens' images (emission strength)",
+    "from": "0.07",
+    "to": "0.03"
+   },
+   "expected": "The screen sits as a dim cool-grey image at the edge of frame, below the speakers in brightness.",
+   "accept": {
+    "region": [
+     0,
+     140,
+     150,
+     420
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     70
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The frame shows a generic home-theatre room: none of the shell (concrete, fir beams, blackened steel) and none of the props are in view, and the eye-level 24 mm view reads as an architectural walkthrough.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "top band 0-120 median 3.6 with no readable beam; no glass, record or coat visible; no concrete or steel anywhere"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [11.9, 1.6, 1.55], target [16.5, 3.3, 1.0], 24 mm",
+    "to": "seated height z 1.15 m, step back about 0.6 m and lens 32 mm so a fir beam crosses the top of frame and a slice of board-formed concrete or the blackened-steel edge of the zone shows at one side; frame the middle table with its glass and record in the near foreground, the coat over a tub chair at frame edge"
+   },
+   "expected": "The image reads as a specific room in a shell, seen from a seat, with signs of life leading to the altar.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 0
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "Carpet, velvet chairs, felt and fir are smooth, uniform CG surfaces at 1:1.",
+   "evidence": {
+    "region": [
+     130,
+     500,
+     1040,
+     800
+    ],
+    "measured": "floor lum_range 87 over a large plane with no texture visible in crop; chairs smooth blobs; fir boards evenly striped"
+   },
+   "change": {
+    "setting": "materials' finish",
+    "from": "smooth carpet, plain velvet, uniform fir",
+    "to": "carpet with a fine pile bump and slight colour noise; velvet with sheen (fresnel rim highlight) on the tub chairs; felt with fibre bump; fir boards with per-board tone variation of about +/-10 %, checks and a few nail holes, darker joints"
+   },
+   "expected": "At 1:1 each material reads at its real scale; chair silhouettes gain rim highlights that pull them out of black.",
+   "accept": {
+    "region": [
+     860,
+     580,
+     1200,
+     800
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 30
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "post",
+   "problem": "The High Contrast look crushes the near chairs and clips highlights at the same time, so the frame is both too dark and too hot.",
+   "evidence": {
+    "region": [
+     860,
+     580,
+     1200,
+     800
+    ],
+    "measured": "crush_pct 50.8, median 2.9; frame clip_pct 1.06"
+   },
+   "change": {
+    "setting": "render view/look",
+    "from": "AgX, look 'AgX - High Contrast', exposure 3.2",
+    "to": "AgX, look 'AgX - Base Contrast' (or Medium High Contrast), exposure 3.2 held, re-check after c1-c4"
+   },
+   "expected": "Shadows hold velvet and carpet detail, lamps stay bright but unclipped; frame median 30-45.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The air is a vacuum: the spots and the Orb make no pools in the air and the ceiling falls to black.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     120
+    ],
+    "measured": "lum_median 3.6, crush_pct 25.5"
+   },
+   "change": {
+    "setting": "haze in the room's air",
+    "from": "0.002 per metre",
+    "to": "0.008 per metre"
+   },
+   "expected": "A faint glow around the altar spots and the Orb, a soft gradation into the ceiling, the beam readable.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     120
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 15
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "A more saturated or lighter speaker tint so the speaker is the frame's one colour",
+   "why": "The Smoke configuration's tint is fixed; the hero has to come from light through the acrylic (c1, c2), not a colour change."
+  },
+  {
+   "request": "Stronger velvet or carpet colour, or removing the felt panels behind the speakers",
+   "why": "The zone's materials and layout are fixed by the room's design."
+  },
+  {
+   "request": "Fewer or differently placed speakers (two identical copies read as repetition)",
+   "why": "The pair on the altar is fixed; it is a stereo pair, not a duplicated prop."
+  }
+ ],
+ "score_if_fixed": 7.0
+}

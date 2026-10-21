@@ -1,0 +1,381 @@
+{
+ "stage1": {
+  "impression": "A close, low-key still life: a hammered brass bowl of tinted acrylic tokens on a pale wood block, set against dark board-marked walls. The pool of light on the bowl is pleasing, but the frame is underexposed and smeared orange. The tokens are soft and lie in one evenly spaced layer instead of a heap. The wood and the hammered brass are smoothed by the denoiser. The block reads as a plywood cube floating in the dark, not a host stand inside a door. A magazine would not run this as a specific place: nothing in the frame says listening bar, door or San Francisco, and it reads as a generic product vignette that is still clearly CG.",
+  "score": 4.5
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Frame lum_median at 22 to 50 (now 12.2) and the bowl region's median at 45 or more (now 18.0), with shadows that hold detail",
+  "Coins heaped and touching in a believable pile of about 40, settled in the bowl with contact shadows and overlaps, not one evenly spaced floating layer",
+  "Coin edges glowing as polished thick acrylic, the globe engraving sharp at 1:1, no denoiser smear on the coins, the brass or the wood grain",
+  "Grade neutral-warm rather than monochrome orange: concrete reads as warm grey, not brown-black (wall b_median now 7 against r_median 20)",
+  "The door context legible: the host stand's edge or top in its real material, a slice of the shopfront glass or street light, or a hand or coat, so it reads as this bar's door and not a product plinth",
+  "No clipped hotspot on the centre coins (6.35 % clipped now)"
+ ],
+ "defects": [
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Frame underexposed: lum_median 12.2, 91 % of pixels below 40"
+  },
+  {
+   "region": [
+    400,
+    210,
+    820,
+    600
+   ],
+   "what": "The hero bowl's median is 18, far below the 45 the hero needs; only its centre is lit"
+  },
+  {
+   "region": [
+    560,
+    280,
+    660,
+    380
+   ],
+   "what": "Pin-spot hotspot clips the red and clear centre coins (clip 6.35 %, p95 234)"
+  },
+  {
+   "region": [
+    410,
+    260,
+    780,
+    500
+   ],
+   "what": "Coins spaced evenly in one layer, apparently floating on the bowl wall; 13 or so visible against the 40 specified; no overlaps and no heap"
+  },
+  {
+   "region": [
+    410,
+    260,
+    780,
+    500
+   ],
+   "what": "Coins soft and smeared at the focus plane (denoiser); no glowing polished edges; the engraving is mushy"
+  },
+  {
+   "region": [
+    380,
+    210,
+    820,
+    610
+   ],
+   "what": "Hammered brass dimpling is blobby and low-frequency, like a noise bump map, and there is no crisp rim highlight"
+  },
+  {
+   "region": [
+    140,
+    360,
+    990,
+    800
+   ],
+   "what": "The stand top's grain is streaked and smeared, with no pores and no finish sheen; it reads as a CG wood texture"
+  },
+  {
+   "region": [
+    140,
+    560,
+    200,
+    800
+   ],
+   "what": "The front edge of the block is a plain 3 px step with no bevel or arris highlight, so it reads as a plywood box"
+  },
+  {
+   "region": [
+    0,
+    0,
+    520,
+    400
+   ],
+   "what": "Walls nearly featureless brown-black (median 13.4, range 17.9); the concrete's formwork and tie holes are barely visible"
+  },
+  {
+   "region": [
+    820,
+    0,
+    1200,
+    800
+   ],
+   "what": "Right half of the frame empty dark (median 9.3), with nothing showing the room or the door"
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    800
+   ],
+   "what": "Whole frame tinted one orange (r/g/b medians about 37/14/5 on the bowl); white balance 3000 K against 2400-2500 K sources"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "post",
+   "problem": "The frame is far too dark for print, and the hero is barely readable.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "lum_median 12.2, below_40 91 %; bowl [400,210,820,600] median 18.0"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "2.1",
+    "to": "3.0"
+   },
+   "expected": "Frame median about 26 to 32, bowl median about 45, walls showing formwork detail",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "set",
+   "problem": "The coins read as a placed, evenly spaced single layer rather than a bowl of 40 waiting to be handed out.",
+   "evidence": {
+    "region": [
+     410,
+     260,
+     780,
+     500
+    ],
+    "measured": "about 13 coins visible, regularly spaced, with no overlaps and no contact shadows between them"
+   },
+   "change": {
+    "setting": "props: EARFcoins, brass bowl of 40 at the door",
+    "from": "single spaced layer on the bowl wall",
+    "to": "40 coins physically settled (rigid-body drop) into a heap, overlapping and tilted, a few on edge, one or two out on the stand top beside the bowl"
+   },
+   "expected": "A believable pile with occlusion between coins and contact shadows; the eight tints mixed through the heap",
+   "accept": {
+    "region": [
+     430,
+     300,
+     770,
+     500
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 150
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The pin spot over the bowl clips the centre coins while the bowl's rim and the stand fall into the dark.",
+   "evidence": {
+    "region": [
+     560,
+     280,
+     660,
+     380
+    ],
+    "measured": "clip_pct 6.35, p95 234.4; bowl region median 18"
+   },
+   "change": {
+    "setting": "the spot over the host stand (the nearest Dome downlight / pin spot)",
+    "from": "tight hot cone on the bowl centre",
+    "to": "cone widened to about 30 deg with a soft edge, 25 % lower intensity, aimed a little forward so it rakes the coin edges and the stand top"
+   },
+   "expected": "No clipping on the coins, light reaching the rim and the front of the stand, coin edges catching highlights",
+   "accept": {
+    "region": [
+     560,
+     280,
+     660,
+     380
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "post",
+   "problem": "The whole frame is one orange-brown, so the concrete reads as brown and the coins' eight tints lose separation.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     520,
+     400
+    ],
+    "measured": "wall r/g/b medians 20/12/7; bowl 37/14/5"
+   },
+   "change": {
+    "setting": "render.white_balance_k",
+    "from": "3000",
+    "to": "2600"
+   },
+   "expected": "Warm grey concrete, brass golden rather than copper-red, and the tints of the clear, purple and blue coins readable",
+   "accept": {
+    "region": [
+     0,
+     0,
+     520,
+     400
+    ],
+    "metric": "b_median",
+    "op": ">=",
+    "value": 12
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "camera",
+   "problem": "The frame shows no door, no bar and no sign of life, so it is a generic product vignette, not this place.",
+   "evidence": {
+    "region": [
+     820,
+     0,
+     1200,
+     800
+    ],
+    "measured": "right half median 9.3, empty"
+   },
+   "change": {
+    "setting": "camera",
+    "from": "position [2.37, 2.4, 1.7] aimed down at the bowl, 50 mm",
+    "to": "drop to about 1.35 m and pull back 0.4 m, 40 mm, turned so the shopfront glass with the street lamp's warm glow and the etched name (glow 0.01 to 0.05) fills the dark right third out of focus; a coat sleeve or a guest's hand reaching for a coin at the edge"
+   },
+   "expected": "Reads at a glance as the bowl inside Planet EARF's door at night"
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "post",
+   "problem": "The denoiser smears the coins' engraving, the brass dimples and the wood grain.",
+   "evidence": {
+    "region": [
+     410,
+     260,
+     780,
+     500
+    ],
+    "measured": "coin edges soft at 1:1 in the focus plane; wood top streaked"
+   },
+   "change": {
+    "setting": "render.samples / denoise",
+    "from": "256, adaptive 0.02, denoise true",
+    "to": "1024 samples, adaptive 0.01, denoiser with albedo and normal passes (prefilter accurate), plus 0.5 % film grain in post"
+   },
+   "expected": "Crisp globe engraving and polished coin edges; real grain pores on the stand",
+   "accept": {
+    "region": [
+     430,
+     300,
+     770,
+     500
+    ],
+    "metric": "edge",
+    "op": ">=",
+    "value": 20,
+    "axis": "x"
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "material",
+   "problem": "The stand top reads as a smooth CG wood decal, and its front edge as a raw plywood box.",
+   "evidence": {
+    "region": [
+     150,
+     560,
+     560,
+     800
+    ],
+    "measured": "median 30.1, range 88, grain streaked; front edge a plain 3 px step"
+   },
+   "change": {
+    "setting": "oak stain / finish",
+    "from": "pale orange, smooth",
+    "to": "darker smoked oak, open-pore grain with a fine roughness variation (0.35 to 0.5) and a 1 to 2 mm eased edge that catches a line of light"
+   },
+   "expected": "The stand reads as a finished piece of joinery; the edge has an arris highlight",
+   "accept": {
+    "region": [
+     150,
+     560,
+     560,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     25,
+     45
+    ]
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The walls and the room behind sit in flat, empty dark with no second pool of light.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     520,
+     400
+    ],
+    "measured": "median 13.4, range 17.9"
+   },
+   "change": {
+    "setting": "haze density and the street lamps",
+    "from": "haze 0.01, street lamps 500 W",
+    "to": "haze 0.02, street lamps 800 W, so a soft raking spill from the shopfront grazes the board-formed wall"
+   },
+   "expected": "Formwork lines and tie holes visible as a gradient across the wall; atmosphere around the spot",
+   "accept": {
+    "region": [
+     0,
+     0,
+     520,
+     400
+    ],
+    "metric": "lum_range",
+    "op": ">=",
+    "value": 30
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the hero colour come from one EARF product only",
+   "why": "The card fixes the bowl of coins in all eight tints as the point of the frame; the many tints are intended"
+  },
+  {
+   "request": "Replace the plain cube with a designed host stand",
+   "why": "The host stand is part of the room's design as proposed; only its finish may change here"
+  }
+ ],
+ "score_if_fixed": 7.0
+}

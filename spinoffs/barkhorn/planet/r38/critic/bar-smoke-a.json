@@ -1,0 +1,386 @@
+{
+ "stage1": {
+  "impression": "A calm, well-composed view of a dark timber back bar with two smoked speakers in niches, two white pendants and a grid of concrete cubbies. But it reads as a clean CG visualisation, not a photograph. The brightest thing in the frame is a block of cool, flat concrete squares that look backlit. The speakers, which are supposed to be the subject, sink to near-black boxes. The fluted counter front and the foreground chair are smeared by the denoiser. The bar is almost empty of life, and the only saturated colour is a tiny striped column at the right edge. As it stands a magazine would take this for a generic upscale bar render, not a specific place.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "The two speakers must be the hero, read at a glance: niche regions lum_median >= 45, with the white batts and resin horn legible through the smoked acrylic and a glowing light plinth under each.",
+  "The concrete must stop being the brightest, coolest surface in the frame: warm grey under 2400-2700 K, median well under the bar top's pools, and the formwork board grain and tie holes legible at 1:1.",
+  "No denoiser smear on the fluted oak and the foreground chair. Wood grain and leather texture must hold at 1:1.",
+  "Signs of life in frame: the listed glasses, coupe, candles, coat and fanned EARFcoins visible on the zinc in pools of light.",
+  "The Dome pendants must read as tinted smoked acrylic with a glowing liner, not as plain white enamel shades.",
+  "A believable night exposure, with pools of light on the zinc falling off into dark between them rather than an even sheen.",
+  "Specificity: something the reader recognises as Planet EARF (the request column, the frosted disc, the R3 Float decks lit) rather than a catalogue back bar."
+ ],
+ "defects": [
+  {
+   "region": [
+    400,
+    50,
+    660,
+    320
+   ],
+   "what": "The concrete cubby backs are the brightest area (median 88, panels about 154) and read cool, RGB 152/155/158, against warm 2400-2600 K sources. They look like backlit lightboxes or wallpaper and lack board marks. delta-E 12 from a warm concrete grey."
+  },
+  {
+   "region": [
+    60,
+    130,
+    265,
+    460
+   ],
+   "what": "The left speaker is a near-black box, median 25.9: the batts, horn and acrylic edges are barely legible and the plinth glow is just a thin white strip at its foot."
+  },
+  {
+   "region": [
+    860,
+    200,
+    1010,
+    400
+   ],
+   "what": "The right speaker is dim (median 37.2) and half lost behind the pendant, with no glow through its acrylic."
+  },
+  {
+   "region": [
+    0,
+    540,
+    1200,
+    800
+   ],
+   "what": "The fluted oak counter front is smeared by the denoiser: the grain is waxy and repeats strip to strip, and the flutes read as CG stripes."
+  },
+  {
+   "region": [
+    540,
+    600,
+    930,
+    800
+   ],
+   "what": "The foreground chair back is a dark, smeared blob (median 10.2, crush 0.43) with a blotchy leather texture that reads as a denoiser artefact."
+  },
+  {
+   "region": [
+    0,
+    680,
+    150,
+    800
+   ],
+   "what": "The out-of-focus stool at bottom left is a flat, salmon-pink plastic-looking shape that pulls the eye."
+  },
+  {
+   "region": [
+    0,
+    470,
+    1200,
+    545
+   ],
+   "what": "The zinc top reads as an even dark-grey slab with long specular streaks (clip 0.18 %), not pools of light under each Dome. The paper and red record are the only props visible: no glasses, candles, coupe or coins."
+  },
+  {
+   "region": [
+    380,
+    60,
+    520,
+    150
+   ],
+   "what": "The Dome pendants read as white enamel shades with an opaque liner, not tinted smoked acrylic, and look generic."
+  },
+  {
+   "region": [
+    430,
+    395,
+    850,
+    485
+   ],
+   "what": "The R3 Float decks and mixer read as dull grey boxes with a grey lid. The lit base and the clear posts don't register, and the mixer's knob row is a row of beads."
+  },
+  {
+   "region": [
+    1050,
+    375,
+    1095,
+    470
+   ],
+   "what": "The request column is the only saturated colour and is tiny at the frame edge. Its striped coins read as a sweet tube."
+  },
+  {
+   "region": [
+    0,
+    0,
+    1200,
+    120
+   ],
+   "what": "The top band and the record wall's upper rows are murky (median 20). The record spines are soft and similar, close to a repeated texture."
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The speakers, the hero of the frame, are near-black, and the light plinths and the lamps on the speakers barely register.",
+   "evidence": {
+    "region": [
+     60,
+     130,
+     265,
+     460
+    ],
+    "measured": "left niche lum_median 25.9, p95 51.3; right niche [860,200,1010,400] lum_median 37.2"
+   },
+   "change": {
+    "setting": "lamps: on each speaker 4 x area (W/m2 at the target) and the lit niche's strip emission",
+    "from": "1.0 W/m2 at 2900 K; niche strip 6.0",
+    "to": "3.5 W/m2 at 2700 K, aimed through the acrylic at the white batts and the horn; niche strip 3.0, so the plinth glows under the cabinet rather than as a hard white line"
+   },
+   "expected": "Both cabinets glow from within, smoked tint visible, batts and horn legible. Niche medians reach 45-60.",
+   "accept": {
+    "region": [
+     60,
+     130,
+     265,
+     460
+    ],
+    "metric": "lum_median",
+    "op": ">=",
+    "value": 45
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The concrete cubby backs are the brightest and coolest surface in the frame, so the eye goes to the wall instead of the speakers.",
+   "evidence": {
+    "region": [
+     400,
+     50,
+     660,
+     320
+    ],
+    "measured": "lum_median 88.3; panel [505,160,570,220] RGB 152/155/158, delta-E 12.0 vs #8C8276"
+   },
+   "change": {
+    "setting": "the record wall 4 x spot (power, colour) and concrete tone",
+    "from": "30.0 W at 2600 K; concrete as is",
+    "to": "14 W at 2400 K, grazing from the top of each cubby so the board grain shows; concrete tone warmed and darkened about 15 %"
+   },
+   "expected": "The wall becomes a warm, dim backdrop at about half its current value. The spines and the board grain read in raking light.",
+   "accept": {
+    "region": [
+     400,
+     50,
+     660,
+     320
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     40,
+     65
+    ]
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "post",
+   "problem": "The denoiser smears the fluted oak and the foreground chair into waxy CG surfaces.",
+   "evidence": {
+    "region": [
+     0,
+     540,
+     1200,
+     800
+    ],
+    "measured": "visually at 3x: grain smeared and repeating strip to strip; the chair [540,600,930,800] is a blotchy dark mass, crush 0.43"
+   },
+   "change": {
+    "setting": "render: samples / adaptive / denoise",
+    "from": "256 samples, adaptive 0.02, denoise on",
+    "to": "1024 samples, adaptive 0.005, denoise with albedo+normal passes (or off with 2048 samples), plus a light 35 mm-like grain in post"
+   },
+   "expected": "The oak flutes show real open grain with varied figure, and the chair leather shows creasing and sheen.",
+   "accept": {
+    "region": [
+     540,
+     600,
+     930,
+     800
+    ],
+    "metric": "crush_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "set",
+   "problem": "The bar top is nearly empty: the card's glasses, coupe, candles and coins are not visible, so the frame lacks life.",
+   "evidence": {
+    "region": [
+     0,
+     470,
+     1200,
+     545
+    ],
+    "measured": "only a sheet of paper and a red record visible; zinc median 53.9 with long streak highlights"
+   },
+   "change": {
+    "setting": "props",
+    "from": "glasses, coupe, candles and coins placed out of frame or not visible",
+    "to": "two rocks glasses and the half-drunk coupe in the Domes' pools at about x 450 and x 1000, a candle between them, three EARFcoins fanned near the camera, the record sleeve leaning on the decks"
+   },
+   "expected": "Small warm highlights on the glass and the coins and candle flicker on the zinc. The bar reads as in use.",
+   "accept": {
+    "region": [
+     0,
+     470,
+     1200,
+     545
+    ],
+    "metric": "lum_p95",
+    "op": ">=",
+    "value": 180
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "light",
+   "problem": "The zinc is evenly lit with long streaks instead of distinct pools under each Dome.",
+   "evidence": {
+    "region": [
+     0,
+     485,
+     1200,
+     515
+    ],
+    "measured": "lum_median 72.4, p95 213, clip 0.44 % in a band of continuous streak highlights"
+   },
+   "change": {
+    "setting": "the Domes' downlights 4 x spot (cone, power)",
+    "from": "140.0 W, cone 20.0 deg",
+    "to": "110 W, cone 14 deg, with a soft edge (blend 0.4); zinc roughness up so the patina breaks the reflection"
+   },
+   "expected": "Defined pools on the zinc, dark between them, highlights no longer streaking the full width.",
+   "accept": {
+    "region": [
+     0,
+     485,
+     1200,
+     515
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.2
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "material",
+   "problem": "The Dome pendants read as plain white enamel shades, not tinted acrylic with a frosted liner.",
+   "evidence": {
+    "region": [
+     380,
+     60,
+     520,
+     150
+    ],
+    "measured": "shade p95 218, neutral RGB 84/71/65 median; no tint or edge glow visible"
+   },
+   "change": {
+    "setting": "EARF's lamps: Dome 30.0 W, liner glow 0.3",
+    "from": "30.0 W, glow 0.3",
+    "to": "18 W, glow 0.6, frosted liner roughness up so the smoked outer shell shows as a darker tinted rim with a glowing polished edge"
+   },
+   "expected": "The Domes read as smoked acrylic with a warm inner glow, a signature object rather than a catalogue pendant.",
+   "accept": {
+    "region": [
+     380,
+     60,
+     520,
+     150
+    ],
+    "metric": "lum_p95",
+    "op": "<=",
+    "value": 205
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "camera",
+   "problem": "The right speaker is half hidden by the right Dome. The foreground stool and chair dominate the bottom third, and the request column is lost at the edge.",
+   "evidence": {
+    "region": [
+     860,
+     140,
+     1060,
+     400
+    ],
+    "measured": "Dome overlaps the right cabinet's top; chair and stool fill about 20 % of the frame at median 10 to 53"
+   },
+   "change": {
+    "setting": "camera position / target / lens",
+    "from": "position [6.0, 2.5, 1.18], at [7.1, 6.0, 1.3], 28 mm",
+    "to": "position [6.3, 2.7, 1.25], at [7.25, 6.0, 1.4], 32 mm, so both cabinets clear the Domes, the stool leaves the frame and the request column moves in from the edge"
+   },
+   "expected": "Both speakers are framed symmetrically about the decks, with the counter as the foreground and the chair back only as a dark edge.",
+   "accept": null
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "light",
+   "problem": "The room has no atmosphere and the upper third is murky rather than deep.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     120
+    ],
+    "measured": "lum_median 20.4; no visible beam in the Domes' cones"
+   },
+   "change": {
+    "setting": "haze density; the disc behind the DJ station",
+    "from": "0.01 per metre; disc 0.15 with a 4.0 W area lamp",
+    "to": "0.025 per metre; disc 0.3 with 8 W, so the frosted disc reads behind the decks"
+   },
+   "expected": "Faint cones under the Domes, a soft glow behind the decks, and depth in the top band without lifting the blacks.",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     120
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     22,
+     35
+    ]
+   }
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Make the request column larger or more central, or less like a striped tube.",
+   "why": "Its design and the coins' tints are EARF's products, fixed by the card. Only the camera and light on it may change."
+  },
+  {
+   "request": "Replace the salmon foreground stool's upholstery with leather or a darker finish.",
+   "why": "The seats are fixed by the room's design. It can only be framed out (c7)."
+  },
+  {
+   "request": "Make the Dome shape less generic.",
+   "why": "The Dome pendant's form is an EARF product and fixed. Only its light and liner roughness may change (c6)."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
