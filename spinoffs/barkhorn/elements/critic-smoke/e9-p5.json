@@ -1,0 +1,54 @@
+{
+ "frame": "renders/2026-10-21/barkhorn/proofs/smoke-e9-p5.png",
+ "date": "2026-10-21",
+ "realism": [
+  {
+   "score": 5,
+   "tells": [
+    "the smoke round cauliflower puffs all the same size; the column right of the fire a stack of balls; the body crushed near black; no see-through edges, no lean or streaks; embers frozen dots",
+    "the car a crude slab, flames standing behind it like a backdrop",
+    "the flames a soft peach mass, no blown core, no tongues; no glow spreading into the smoke"
+   ],
+   "most_convincing": "the dusk light and haze, the fire reflections on the wet road, the product: dark front, sky glint, faint warm rim, firm contact shadow"
+  },
+  {
+   "score": 5,
+   "tells": [
+    "the smoke opaque near-identical cotton-ball lobes with the same soft fringe; the column behind the car a string of metaball beads; no sheared wisps",
+    "the flames a featureless glow with no tongues or heat shimmer",
+    "the car a clean stand-in model with nothing showing it burns"
+   ]
+  }
+ ],
+ "duel_vs_p4": [
+  {
+   "order": "p5 first",
+   "p5": 5,
+   "p4": 7,
+   "prefer": "p4"
+  },
+  {
+   "order": "p5 first",
+   "p5": 5,
+   "p4": 7,
+   "prefer": "p4"
+  },
+  {
+   "order": "p4 first",
+   "p4": 6,
+   "p5": 7,
+   "prefer": "p5"
+  },
+  {
+   "order": "p4 first",
+   "p4": 6,
+   "p5": 7,
+   "prefer": "p5"
+  }
+ ],
+ "duel_means": {
+  "p5": 6.0,
+  "p4": 6.5
+ },
+ "note": "every judge preferred the second frame it saw: a tie with a position bias (p4 +0.5 on the means); realism p5 5.0 against p4 4.5. Under the stop rule (two passes under +0.5) the round ends at p5, already in finals; the constant tell is the sim's even billow size (no wisps or shear), which a finer, windier sim would answer"
+}

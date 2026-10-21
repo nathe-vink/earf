@@ -441,9 +441,15 @@ all leaning left with one wind; the sky behind the speaker's horn is kept clear.
 | p2 | flames only above a floor, fire light lower and weaker | reads as a burning car under black smoke |
 | p3 | far plume moved off the horn, soot a shade lighter | read test passes; realism 5 / 5; beats E7 p4 4-0 position-balanced (6.5 v 4.75) |
 | p4 | soot brown-grey, torn edges, uneven inside, flame tongues and yellow-white cores, the car three-quarter with its roof, the fire light above the roof, a warmer rim | the car reads as "an old sedan"; realism 4 / 5; beats p3 3-1 position-balanced (6.0 v 5.25) |
-| p5 | the soot's margins remapped by a smoothstep (firm lobes), hard-edged flame tongues at twice the brightness, the fire light lower and half as strong (p4: "a smooth orange haze"), the rim to 120, octaves 4/2/3 near and 2/1/2 far | rendering |
+| p5 | the soot's margins remapped by a smoothstep (firm lobes), hard-edged flame tongues at twice the brightness, the fire light lower and half as strong (p4: "a smooth orange haze"), the rim to 120, octaves 4/2/3 near and 2/1/2 far | realism 5 / 5; against p4 2-2, every judge preferring the second frame (6.0 v 6.5); the finals |
 
 p3's critics (`critic-smoke/e9-p3.json`): the smoke "black cotton wool" (cores near RGB 10, no sky-lit tops, unlit belly),
 the flames a smooth salmon gradient, the wreck "a flat slab with a tube on top". p4 answers each; it also cost 3.4 times
 p3 to render (47 minutes at 960 px), almost all in the extra noise octaves, so the finals use 4/2/3 octaves near and
 2/1/2 far.
+
+**Where the round ends.** p4 to p5 moved under half a point both ways, as p3 to p4 did on realism, so under the stop rule
+the round ends at p5, whose finals were already rendering (16 strips a frame on the eight helpers, 144 samples,
+`r31-element-smoke-e9` at 7808c315). Every critic of p3, p4 and p5 named the same remaining tell: the billows are all one
+size, "cotton-ball" or "metaball" lobes with no sheared wisps, because the 0.14 m grid sets one scale of eddy. A finer
+grid with a stronger wind (shear streaks, a leaning column) is the next step if the owner wants more.
