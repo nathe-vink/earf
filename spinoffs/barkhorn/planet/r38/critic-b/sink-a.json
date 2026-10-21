@@ -1,0 +1,357 @@
+{
+ "stage1": {
+  "impression": "A quiet detail of a floating, glossy black slab basin against weathered vertical planks with brushed-steel wall taps: the timber and taps are convincing at 1:1, but the room is lit like a bright daytime spa, not a bar at night, and the slab hangs with no contact shadow, lit from below, so it reads as a CG product cut-out. The smoked block reads as black lacquer or Corian rather than smoked glass: its front face is crushed to black, with no lit arris and no depth except a ghostly pale crescent of the bowl seen through it. A magazine might run a sink this specific, but not this frame. It reads as a hotel-bathroom render, not a particular listening bar.",
+  "score": 5.0
+ },
+ "verdict": "iterate",
+ "blocking_9": [
+  "Night exposure: the frame's lum_median falls from 85.8 into 30 to 50, with the boards above the sink no longer an even bright wash (median 104 now)",
+  "The slab sits in a pool and casts a soft contact shadow on the boards below it. The boards under it are not brighter than those above it (now 160 against 104)",
+  "The smoked acrylic reads as glass: its polished arrises catch a thin highlight and the front face shows depth (lum_median 10 to 25, not 4.6), so it no longer looks like black lacquer",
+  "There is no unexplained bright vertical band at the left (x 205 to 235, median 141)",
+  "The fir boards read as warm orange-brown fir, not mauve-grey (now b > g above the sink)",
+  "A sign of the bar: some trace of the specific place (a glass on the slab, a hand towel, the boards' joint with the concrete) so it is not a generic washroom"
+ ],
+ "defects": [
+  {
+   "region": [
+    350,
+    548,
+    912,
+    640
+   ],
+   "what": "The boards directly under the floating slab are the brightest part of the wall (median 160), with no contact or cast shadow, so the slab looks pasted on and lit from below"
+  },
+  {
+   "region": [
+    350,
+    390,
+    912,
+    545
+   ],
+   "what": "The slab's front face is crushed (median 4.6, crush 33 %): no arris highlight and no depth. It reads as black lacquer, not smoked cast acrylic"
+  },
+  {
+   "region": [
+    490,
+    420,
+    790,
+    465
+   ],
+   "what": "A pale crescent (the bowl's underside seen through the slab) floats mid-face like a printed decal and reads as a glitch more than as a refraction"
+  },
+  {
+   "region": [
+    205,
+    0,
+    235,
+    800
+   ],
+   "what": "A bright, desaturated full-height vertical band (median 141) at the left: an unexplained light leak or door edge"
+  },
+  {
+   "region": [
+    240,
+    0,
+    1010,
+    300
+   ],
+   "what": "The boards above the sink are washed evenly bright (median 104, p95 173), a daytime level, and grey-mauve (r 118, g 100, b 106) rather than warm fir"
+  },
+  {
+   "region": [
+    440,
+    330,
+    790,
+    375
+   ],
+   "what": "The bowl's rim highlight clips (2.4 %) in one hard CG streak"
+  },
+  {
+   "region": [
+    1110,
+    170,
+    1200,
+    800
+   ],
+   "what": "A walnut-veneer column is cut by the right edge. Its glossy, smeary veneer is the brightest saturated element and competes with the subject"
+  },
+  {
+   "region": [
+    0,
+    0,
+    50,
+    800
+   ],
+   "what": "The left edge drops to near black (median 6) in a hard strip, like a vignette or wall return without a visible source"
+  }
+ ],
+ "changes": [
+  {
+   "id": "c1",
+   "rank": 1,
+   "kind": "light",
+   "problem": "The frame is far too bright for a night interior. The board wash dominates and flattens the scene.",
+   "evidence": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "measured": "frame lum_median 85.8 (target 22 to 50); boards above sink median 104.5, p95 173"
+   },
+   "change": {
+    "setting": "render.exposure",
+    "from": "1.4",
+    "to": "0.6 (and keep the sink spot at 35 W so the bowl becomes the pool)"
+   },
+   "expected": "The frame median falls to about 40, the wall reads as a dim warm surface, and the downlit bowl becomes the brightest pool",
+   "accept": {
+    "region": [
+     0,
+     0,
+     1200,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     30,
+     50
+    ]
+   }
+  },
+  {
+   "id": "c2",
+   "rank": 2,
+   "kind": "light",
+   "problem": "The wash down the boards is uniform and lights the wall below the sink more than the sink. There is no pool of light.",
+   "evidence": {
+    "region": [
+     350,
+     548,
+     912,
+     640
+    ],
+    "measured": "boards under slab median 159.8 vs boards above 104.5; x-profile below sink 129 to 164, flat"
+   },
+   "change": {
+    "setting": "the board wash (grazing wash down the boards)",
+    "from": "even full-height wash",
+    "to": "reduce by about 60 % and narrow it into a grazing spot above the taps, falling off to dark by the floor, so the boards below the slab sit in the slab's shadow"
+   },
+   "expected": "The boards below the slab are darker than the boards beside the taps, which gives a visible soft cast shadow under the slab",
+   "accept": {
+    "region": [
+     350,
+     550,
+     912,
+     640
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 60
+   }
+  },
+  {
+   "id": "c3",
+   "rank": 3,
+   "kind": "light",
+   "problem": "The floating slab casts no contact shadow and looks composited.",
+   "evidence": {
+    "region": [
+     350,
+     540,
+     912,
+     570
+    ],
+    "measured": "edge at slab underside: step 65.8 in 2 px, dark slab to bright wall with no shadow gradient"
+   },
+   "change": {
+    "setting": "the hidden strip under the front edge",
+    "from": "aimed down the wall (current output)",
+    "to": "aim it down onto the floor or cut it to a faint glow, and let the sink spot and board wash come from above, so the slab shadows the wall beneath"
+   },
+   "expected": "A soft shadow 30 to 80 px deep under the slab, darkening the boards to about half the brightness of the boards beside it",
+   "accept": {
+    "region": [
+     550,
+     552,
+     700,
+     600
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 45
+   }
+  },
+  {
+   "id": "c4",
+   "rank": 4,
+   "kind": "light",
+   "problem": "The smoked acrylic reads as black lacquer: its front face is crushed, and its polished arrises do not catch light.",
+   "evidence": {
+    "region": [
+     350,
+     390,
+     912,
+     545
+    ],
+    "measured": "lum_median 4.6, crush_pct 33.4, p95 126 only at the top edge"
+   },
+   "change": {
+    "setting": "a small accent (a narrow 2700 K strip or a card reflector above and behind the camera)",
+    "from": "none",
+    "to": "a low-level soft source placed to put a thin specular line along the slab's front top and bottom arrises and a faint reflection of the boards in its face"
+   },
+   "expected": "Thin bright lines on the arrises and a smoky depth to the face (median 10 to 25), so the slab reads as smoked glass",
+   "accept": {
+    "region": [
+     350,
+     390,
+     912,
+     545
+    ],
+    "metric": "lum_median",
+    "op": "between",
+    "value": [
+     10,
+     25
+    ]
+   }
+  },
+  {
+   "id": "c5",
+   "rank": 5,
+   "kind": "material",
+   "problem": "The fir boards read mauve-grey, not warm Douglas fir, under the 3000 K white balance.",
+   "evidence": {
+    "region": [
+     240,
+     0,
+     1010,
+     300
+    ],
+    "measured": "r 118, g 100, b 106 (blue above green)"
+   },
+   "change": {
+    "setting": "the boards' stain (oak/fir finish tone), or render.white_balance_k",
+    "from": "current stain; white balance 3000 K",
+    "to": "a warmer amber-brown stain, or white balance 3300 K"
+   },
+   "expected": "The boards read honey-brown with g above b",
+   "accept": {
+    "region": [
+     240,
+     0,
+     1010,
+     300
+    ],
+    "metric": "b_median",
+    "op": "<",
+    "value": 85
+   }
+  },
+  {
+   "id": "c6",
+   "rank": 6,
+   "kind": "set",
+   "problem": "A bright vertical band at the left reads as a light leak or an unexplained object.",
+   "evidence": {
+    "region": [
+     205,
+     0,
+     235,
+     800
+    ],
+    "measured": "lum_median 140.9 vs adjacent boards 54.7"
+   },
+   "change": {
+    "setting": "camera framing, or the object or light at that position",
+    "from": "band in frame",
+    "to": "find the object (a door edge or glass reflection) and darken it or remove it from view; or reframe so it falls outside the frame"
+   },
+   "expected": "No strip brighter than the boards beside it",
+   "accept": {
+    "region": [
+     205,
+     0,
+     235,
+     800
+    ],
+    "metric": "lum_median",
+    "op": "<",
+    "value": 70
+   }
+  },
+  {
+   "id": "c7",
+   "rank": 7,
+   "kind": "light",
+   "problem": "The bowl's rim highlight clips in a single hard CG streak.",
+   "evidence": {
+    "region": [
+     440,
+     330,
+     790,
+     375
+    ],
+    "measured": "clip_pct 2.37, p95 238"
+   },
+   "change": {
+    "setting": "the sink spot",
+    "from": "35 W, cone 20 deg",
+    "to": "about 25 W, cone 28 deg with a soft edge, aimed into the bowl so the pool lands on its floor and the steel waste"
+   },
+   "expected": "The bowl's floor is the frame's brightest pool, with no clipping on the rim",
+   "accept": {
+    "region": [
+     440,
+     330,
+     790,
+     375
+    ],
+    "metric": "clip_pct",
+    "op": "<",
+    "value": 0.5
+   }
+  },
+  {
+   "id": "c8",
+   "rank": 8,
+   "kind": "set",
+   "problem": "It reads as a generic washroom with no sign of life or of the bar.",
+   "evidence": {
+    "region": [
+     395,
+     300,
+     470,
+     340
+    ],
+    "measured": "only a bar of soap on a dish; no other props"
+   },
+   "change": {
+    "setting": "props",
+    "from": "soap on its dish",
+    "to": "add a folded linen hand towel on the slab's corner, and perhaps a small rocks glass with a sprig, so it belongs to the bar"
+   },
+   "expected": "A lived-in detail that stays neutral in colour"
+  }
+ ],
+ "out_of_scope": [
+  {
+   "request": "Show the bowl through the slab less as a pale floating crescent, for example by changing the bowl's underside finish or the slab's tint density",
+   "why": "The sink's design and EARF's Smoke tint are fixed; only the lighting (c3, c4) can soften it"
+  },
+  {
+   "request": "Reconsider the walnut column at the right edge (its glossy veneer competes with the subject)",
+   "why": "It is part of the room's fixed design; c-level reframing is possible but the column itself is not ours to change"
+  },
+  {
+   "request": "Give the slab a visible bracket or a shadow-gap reveal into the wall",
+   "why": "The sink's mounting is fixed as designed (floating off the wall)"
+  }
+ ],
+ "score_if_fixed": 7.0
+}
