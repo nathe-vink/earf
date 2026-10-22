@@ -161,9 +161,13 @@ LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band does
 }
 TT = dict(name='Mantle', kind='Record player', route='mantle',             # round 34's (companions/README.md "Round 34"): its words when it lands
           line='A record player that floats on its own light.',
-          facts=[('Plinth', 'Cast acrylic, 25 mm, tinted through'), ('Base', 'Cast acrylic, edge-lit from within'),
-                 ('Drive', 'Belt, its motor in a pod of its own'), ('Speeds', '33 and 45, by a button'),
-                 ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'), ('Cover', 'Tinted acrylic, hinged')])
+          facts=[('Plinth', 'Cast acrylic, 25 mm, tinted through; it floats 40 mm over the base'),
+                 ('Base', 'Cast acrylic, edge-lit from within, dimmable'), ('Drive', 'Belt, its motor in a heavy pod of its own'),
+                 ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'),
+                 ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
+                 ('Cover', 'Tinted acrylic, hinged'), ('Size', '470 wide, 380 deep, 194 high with the lid down (mm)'),
+                 ('Weight', 'About 15.5 kg'), ('Figures', 'Design figures; they may change before production')])
+# round 34's final (companions/README.md "Round 34: the record player, final (Mantle)", r32-turntable-final)
 LINES = [  # the shop's three lines: key, name, what's in it, its line
     ('speakers', 'Speakers', 'Atmosphere', 'A powered horn loudspeaker in eight colours of cast acrylic.'),
     ('lighting', 'Lighting', 'Hemisphere North and Core', 'A pendant and a table lamp in the speakers&rsquo; acrylic, frosted within.'),
@@ -428,6 +432,7 @@ def make_images(sources=None):
         one(os.path.join(TTR, f'studio-{fl}.png'), lambda p, k=k: (save(Image.open(p), f'tt-{k}-studio.jpg', 2400, q=84),
                                                                    save(Image.open(p), f'tt-{k}-studio-1200.jpg', 1200, q=82)))
         one(os.path.join(TTR, f'dusk-{fl}.png'), lambda p, k=k: save(Image.open(p), f'tt-{k}-dusk.jpg', 2400, q=84))
+        one(os.path.join(TTR, f'studio-{fl}-closed.png'), lambda p, k=k: save(Image.open(p), f'tt-{k}-closed.jpg', 2400, q=84))
         one(os.path.join(TTR, f'tall-{fl}.png'), lambda p, k=k: (save(Image.open(p), f'tt-{k}-tall.jpg', 1200, q=84),
                                                                  save(Image.open(p), f'tt-{k}-card.jpg', 640, q=82)))
     for n in ('open', 'detail', 'pod'):
@@ -532,6 +537,8 @@ def product_meta():
         views = {'studio': dict(pic(f'tt-{k}-studio.jpg'), fill=True, **({'tall': pic(f'tt-{k}-tall.jpg')} if pic(f'tt-{k}-tall.jpg') else {}))}
         if pic(f'tt-{k}-dusk.jpg'):
             views['dusk'] = dict(pic(f'tt-{k}-dusk.jpg'), fill=True)
+        if pic(f'tt-{k}-closed.jpg'):
+            views['closed'] = dict(pic(f'tt-{k}-closed.jpg'), fill=True)
         views.update({n: pic(f'tt-{n}.jpg') for n in ('open', 'detail', 'pod') if pic(f'tt-{n}.jpg')})
         tt[k] = dict(views=views, card=pic(f'tt-{k}-card.jpg') or pic(f'tt-{k}-studio.jpg'))
     out['turntable'] = tt if len(tt) == len(KEYS) else None
@@ -1648,7 +1655,8 @@ const LAMP_VIEWS = {
         ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],
         ['unlit', 'Off', () => 'A Core and a Hemisphere in Smoke, switched off: dark, polished acrylic, pale at the centre.']],
 };
-const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],
+const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}, its lid raised.`],
+                  ['closed', 'Lid down', c => `${D.tt.name} in ${c.name}, its lid down.`],
                   ['dusk', 'At dusk', c => `${D.tt.name} in ${c.name} at dusk, its base glowing.`],
                   ['open', 'Cover open', () => 'Its cover open.'], ['detail', 'Arm and platter', () => 'The arm and the platter.'],
                   ['pod', 'The motor apart', () => 'The motor in its own pod, standing clear of the plinth.']];

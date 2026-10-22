@@ -934,7 +934,8 @@ const LAMP_VIEWS = {
         ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],
         ['unlit', 'Off', () => 'A Core and a Hemisphere in Smoke, switched off: dark, polished acrylic, pale at the centre.']],
 };
-const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],
+const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}, its lid raised.`],
+                  ['closed', 'Lid down', c => `${D.tt.name} in ${c.name}, its lid down.`],
                   ['dusk', 'At dusk', c => `${D.tt.name} in ${c.name} at dusk, its base glowing.`],
                   ['open', 'Cover open', () => 'Its cover open.'], ['detail', 'Arm and platter', () => 'The arm and the platter.'],
                   ['pod', 'The motor apart', () => 'The motor in its own pod, standing clear of the plinth.']];
