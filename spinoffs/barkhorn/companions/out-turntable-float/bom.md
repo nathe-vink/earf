@@ -5,6 +5,7 @@
 | plinth | cut | 1 | 25 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 450 x 360 | 96.19 |
 | base | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 470 x 380 | 42.42 |
 | led-strip | buy | 1 | Ledco LCLS24V-24W-27K-IP22: 24 V, 4.8 W/m, 8 mm, 2700 K, CRI 90+, dimmable, 5 m roll (1.42 m used, in four straight runs standing in the base's slot, facing out) |  | 58.00 |
+| slot-mask | buy | 1 | any screen printer Opaque black band screen-printed in two coats (UV-curing ink for acrylic) on the base's top over the light's slot: four runs, 9 wide, 1.36 m in all; black cast acrylic strips cemented in a shallow rebate are the alternative |  | 30.00 |
 | post-1, post-2, post-3, post-4 | lathe | 4 | Cast acrylic tube, tinted through | 40 x 40 x 36 | 17.33 |
 | bushings | buy | 1 | Isolate It (Sorbothane Inc.) Sorbothane vibration isolation bushings, 30 duro, 0.28 in ID x 0.72 in OD x 0.22 in thick (7.1 x 18.3 x 5.6), a 12-pack: two at each post (eight), one over and one under the base on the M6 bolt; about 1.8 kg on each (77 kPa), so the plinth sits at roughly 15-20 Hz, under the arm and cartridge's 10 Hz only by a factor of two: confirm on the maker's load chart and by a tap test |  | 25.00 |
 | float-bolts | buy | 1 | Four M6 x 70 stainless socket cap bolts, four 18 mm stainless washers, four M6 nyloc nuts (the float's hold-downs, snug only) |  | 8.00 |
@@ -44,9 +45,9 @@
 
 | | USD |
 |---|---|
-| buy | 2,538 |
+| buy | 2,568 |
 | cut | 196 |
 | lathe | 667 |
-| total | 3,401 |
+| total | 3,431 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

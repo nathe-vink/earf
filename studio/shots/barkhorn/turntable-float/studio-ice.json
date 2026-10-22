@@ -1,11 +1,11 @@
 {
- "title": "Float in Ice, studio",
+ "title": "Float in Ice, studio, lid open",
  "size": [
   2400,
   1600
  ],
  "product": {
-  "def": "studio/products/barkhorn-turntable-float.json",
+  "def": "spinoffs/barkhorn/companions/out-turntable-float/open/barkhorn-turntable-float-open.json",
   "flavour": "ice",
   "hide": [
    "led-strip-edge"
@@ -67,18 +67,18 @@
   "flags": [
    {
     "center_m": [
-     -0.539,
-     1.092,
-     0.64
+     -0.588,
+     1.082,
+     0.523
     ],
     "size_m": [
      2.4,
      1.4
     ],
     "normal": [
-     0.415,
-     -0.84,
-     -0.35
+     0.452,
+     -0.833,
+     -0.32
     ],
     "glossy": true,
     "reflect_only": true,
@@ -88,16 +88,16 @@
  },
  "camera": {
   "position": [
-   0.8,
-   -1.62,
-   0.86
+   0.95,
+   -1.75,
+   0.78
   ],
   "target": [
    0.0,
-   0.0,
-   0.075
+   0.03,
+   0.15
   ],
-  "lens_mm": 70.0,
+  "lens_mm": 62.0,
   "level": false
  },
  "sky": {
@@ -236,6 +236,27 @@
    "irradiance": 14.0,
    "color": "#FFF8F0",
    "camera": false
+  },
+  "plinth-back": {
+   "type": "area",
+   "size_m": [
+    1.0,
+    0.12
+   ],
+   "position": [
+    -0.4,
+    0.8,
+    0.07
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.068
+   ],
+   "irradiance": 24.0,
+   "color": "#FFF8F0",
+   "camera": false,
+   "specular": 0.0
   }
  }
 }

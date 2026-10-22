@@ -218,6 +218,10 @@ def parts(P, lid_open=False):
                     box(se + 2, Db - si - sw + 0.2, b0 + 0.5, Wb - se - 2, Db - si - sw + 1.6, b0 + 8.5),
                     box(si + sw - 1.6, se + 2, b0 + 0.5, si + sw - 0.2, Db - se - 2, b0 + 8.5),
                     box(Wb - si - sw + 0.2, se + 2, b0 + 0.5, Wb - si - sw + 1.6, Db - se - 2, b0 + 8.5)])
+    # an opaque black band printed on the base's top over the slot, 9 wide, so the strip never shows from above: only
+    # the polished edge glows (a hair off the face, so the render never meets two coplanar faces)
+    mask = union(*[box(se, si - 3, b1 + 0.05, Wb - se, si + sw + 3, b1 + 0.15), box(se, Db - si - sw - 3, b1 + 0.05, Wb - se, Db - si + 3, b1 + 0.15),
+                   box(si - 3, se, b1 + 0.05, si + sw + 3, Db - se, b1 + 0.15), box(Wb - si - sw - 3, se, b1 + 0.05, Wb - si + 3, Db - se, b1 + 0.15)])
     edge = ring_skin(rounded_rect(Wb + 0.8, Db + 0.8, P['Rb'] + 0.4, cx=Wb / 2, cy=Db / 2),
                      rounded_rect(Wb + 0.1, Db + 0.1, P['Rb'] + 0.05, cx=Wb / 2, cy=Db / 2), b0 + e, b1 - e)
 
@@ -325,6 +329,8 @@ def parts(P, lid_open=False):
                     'from above: the arm\'s lead groove 8 x 5 to the back-right corner']),
         Part('led-strip', strip, Bought('led-strip-float'), finish='ledstrip', group='base', pieces={'strip': (strip, 'ledstrip'), 'edge': (edge, 'glow')},
              notes=['four straight runs (2 x 386, 2 x 296; 1.36 m) stood in the slot on their 3M tape against the inner wall, the LEDs facing out, joined at the corners with soldered jumpers; 6.5 W at full']),
+        Part('slot-mask', mask, Bought('slot-mask-print'), finish='black', group='base',
+             notes=['opaque black, screen-printed in two coats on the base\'s top over the light\'s slot, 9 wide (the slot 3 and 3 each side), the four runs\' length: the strip never shows from above']),
         *[Part(f'post-{i + 1}', s, Machined('cast-acrylic', 'lathe'), finish='clear', group='float',
                notes=['water-clear cast acrylic rod 30, bored 6.6, faced and polished; cemented under the plinth on a jig'] if i == 0 else [])
           for i, s in enumerate(post_parts)],

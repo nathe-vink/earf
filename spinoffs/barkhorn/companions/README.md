@@ -933,7 +933,7 @@ Status: **a proposal until the owner signs it.** Nothing of the speakers, the si
 | size | 470 W x 380 D x 186 H with the lid down (the plinth 450 x 360); open, the lid needs 100 mm behind |
 | acrylic | plinth 25, base 10, platter turned from 25 to 20, pod rings 20 + 20 + 15 + 10, lid 6 (cast 3.3 times as dense in the tint), posts water-clear rod 30 |
 | weight | about 14.5 kg in all; 1.96 kg turning; the plinth with all it carries 9.7 kg on the float; the pod 2.2 kg |
-| parts list | **$3,401**, one off |
+| parts list | **$3,431**, one off |
 | product file | `turntable_float.py` (the shots: `turntable_float_shots.py`) |
 | build | `out-turntable-float/` (cut files, 18 drawing sheets, parts list, checks: no clashes, every sheet in stock, every bought part in the library) |
 
@@ -1045,8 +1045,10 @@ Three paths could carry noise to the stylus, and each has a soft break.
 - **How it glows.** A 24 V strip in four straight runs (2 x 386 and 2 x 296, 1.36 m) stands on edge in a 3 x 9 slot
   routed up into the base's underside, 12 mm in from its edge, its LEDs facing out. The light enters the slot's outer
   wall, meets the top and bottom faces past acrylic's critical angle (42 degrees), stays in the sheet, and leaves at
-  the polished edge, which glows in the base's colour. The top stays clear. The runs stop 40 mm short of each corner,
-  so the corners glow a little less.
+  the polished edge, which glows in the base's colour. An opaque black band, screen-printed 9 mm wide on the base's
+  top over the slot, hides the strip from above (unmasked, it read as a fluorescent tube through the clear top, the
+  coordinator's note on the first proof): only the edge glows. The runs stop 40 mm short of each corner, so the
+  corners glow a little less.
 - **Power.** 4.8 W/m x 1.36 m = 6.5 W at full, from a listed Mean Well 24 V 25 W adapter through Waveform's
   flicker-free dimmer.
 - **Heat.** Cast acrylic softens near 100 C; keep it under about 80 C. At 4.8 W/m in free air a strip like this runs
@@ -1077,12 +1079,12 @@ Three paths could carry noise to the stylus, and each has a soft break.
 
 | | USD |
 |---|---|
-| bought (arm $675, cartridge $750, Neo $445, motor $200, dimmer $80, and the rest) | 2,538 |
+| bought (arm $675, cartridge $750, Neo $445, motor $200, dimmer $80, the slot's printed band $30, and the rest) | 2,568 |
 | cut acrylic (plinth $96, base $42, lid $44, pod rings and mat $13, hinge blocks) | 196 |
 | turned (platter $181, pod core $112, spindle $126, bearing housing $76, hub $56, pulley $47, four posts $69) | 667 |
-| **one off** | **3,401** |
+| **one off** | **3,431** |
 
-The arm, cartridge and Neo are $1,870 of it. The review's points added $414 (the turned platter, the brass core, the
+The arm, cartridge and Neo are $1,870 of it. The review's points added $414 and the slot's band $30 (the turned platter, the brass core, the
 bronze bushes and steel plate, the 25 kHz dimmer, the second pack of bushings, the cement). At the speakers' multiple
 it would sell for about $6,000; the owner sets the price.
 
