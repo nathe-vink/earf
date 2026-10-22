@@ -502,7 +502,7 @@
   "supplier": "Mill-Max",
   "price_date": "2026-10-20"
  },
- "_turntable_float": "Float, the record player (round 34): parts added on top of Cumulus's, from web searches of 2026-10-22 (search snippets; confirm on the page before ordering)",
+ "_turntable_float": "Mantle (round 34's Float), the record player: parts added on top of Cumulus's, from web searches of 2026-10-22 (search snippets; confirm on the page before ordering)",
  "float-bushings": {
   "kind": "isolation",
   "maker": "Isolate It (Sorbothane Inc.)",
@@ -542,7 +542,7 @@
  "led-strip-float": {
   "kind": "light",
   "maker": "Ledco",
-  "model": "LCLS24V-24W-27K-IP22: 24 V, 4.8 W/m, 8 mm, 2700 K, CRI 90+, dimmable, 5 m roll; on a black PCB if Ledco makes it (UNCONFIRMED; black-PCB 24 V strips are common), so the strip reads as a dark line through the polished edge when off (1.42 m used, in four straight runs standing in the base's slot, facing out)",
+  "model": "LCLS24V-24W-27K-IP22: 24 V, 4.8 W/m, 8 mm, 2700 K, CRI 90+, dimmable, 5 m roll; on a black PCB if Ledco makes it (UNCONFIRMED; black-PCB 24 V strips are common), so the strip reads as a dark line through the polished edge when off (0.98 m used, in three straight runs standing in the base's slot, facing out)",
   "usd": 58,
   "supplier": "Ledco (CAD 79.95 the 5 m roll)",
   "price_date": "2026-10-22",
@@ -578,7 +578,7 @@
  "pod-bushings": {
   "kind": "isolation",
   "maker": "Isolate It (Sorbothane Inc.)",
-  "model": "Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6 (the float's, from a second 12-pack): three stacks of two under the motor's pod, 2.2 kg on three, 32 kPa a stack (load per the maker's table UNCONFIRMED)",
+  "model": "Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6 (the float's, from a second 12-pack): three stacks of two under the motor's pod, 2.4 kg on three, 35 kPa a stack (load per the maker's table UNCONFIRMED)",
   "usd": 25,
   "supplier": "Isolate It ($24.95, a reseller's listing)",
   "price_date": "2026-10-22"
@@ -632,10 +632,56 @@
  "slot-mask-print": {
   "kind": "service",
   "maker": "any screen printer",
-  "model": "Opaque black band screen-printed in two coats (UV-curing ink for acrylic) on the base's top over the light's slot: four runs, 9 wide, 1.36 m in all; black cast acrylic strips cemented in a shallow rebate are the alternative",
+  "model": "Opaque black band screen-printed in two coats (UV-curing ink for acrylic) on the base's top over the light's slot: three runs, 9 wide, 0.98 m in all; black cast acrylic strips cemented in a shallow rebate are the alternative",
   "usd": 30,
   "estimate": true,
   "supplier": "a sign or screen printer",
+  "price_date": "2026-10-22"
+ },
+ "phono-box-s2": {
+  "kind": "phono stage",
+  "maker": "Pro-Ject",
+  "model": "Phono Box S2, MM/MC phono stage in an aluminium case, 103 x 115 x 36 (one listing 103 x 36 x 115 mm, 0.57 kg): RIAA within 0.4 dB 20 Hz-20 kHz, MM S/N 94 dBA at 40/43 dB gain, THD under 0.01 %, subsonic filter 20 Hz 12 dB/oct, MM 47k with switchable capacitance; 18 V DC 500 mA in. Used whole, inside Mantle's float, fed from the rear box's regulator",
+  "usd": 269,
+  "supplier": "Bloom Audio ($269); Doug Brady HiFi GBP 159",
+  "price_date": "2026-10-22",
+  "url": "https://bloomaudio.com/collections/pro-ject/products/pro-ject-phono-box-s2",
+  "note": "dimensions conflict between listings (one gives 4.5 x 4.1 x 1.4 in): confirm 36 mm tall on the unit before cutting the float to 40"
+ },
+ "phono-felts": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Four 10 mm felt pads under the phono stage",
+  "usd": 2,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-22"
+ },
+ "rear-box": {
+  "kind": "enclosure",
+  "maker": "Hammond",
+  "model": "1590A die-cast aluminium box, 92.6 x 38.5 x 31, black: the arm's lead in, a DPDT bypass toggle, two gold RCA line-out jacks, an earth post, a 2.1 mm 24 V jack, the regulator inside",
+  "usd": 55,
+  "estimate": true,
+  "supplier": "Hammond (box about $12) and any distributor (toggle, jacks, post)",
+  "price_date": "2026-10-22"
+ },
+ "phono-ldo": {
+  "kind": "power",
+  "maker": "any (an LT3045 module, Analog Devices' ultra-low-noise LDO)",
+  "model": "LT3045 linear regulator module set to 18 V from 24 V, 0.8 uV rms noise (10 Hz-100 kHz) per the chip's datasheet, for the phono stage; and a 2.1 mm Y lead splitting the Mean Well 24 V adapter between the light's dimmer and the rear box",
+  "usd": 25,
+  "estimate": true,
+  "supplier": "module sellers (Tindie, Amazon)",
+  "price_date": "2026-10-22"
+ },
+ "phono-wiring": {
+  "kind": "wiring",
+  "maker": "any",
+  "model": "Short shielded interconnects inside the float: the arm's lead to the rear box, the rear box to the phono stage and back; star earth at the rear box's post (arm, bearing, phono stage)",
+  "usd": 20,
+  "estimate": true,
+  "supplier": "any",
   "price_date": "2026-10-22"
  }
 }

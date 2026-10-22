@@ -1,5 +1,5 @@
 {
- "_note": "Float for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "_note": "Mantle for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
  "model": "spinoffs/barkhorn/companions/out-turntable-float/open/render/barkhorn-turntable-float-open.glb",
  "origin_mm": [
   235.0,
@@ -31,6 +31,11 @@
    "preset": "metal",
    "color": "#BFC1C2",
    "roughness": 0.35
+  },
+  "aluminium-dark": {
+   "preset": "metal",
+   "color": "#2A2A2C",
+   "roughness": 0.45
   },
   "arm": {
    "preset": "gunmetal",
@@ -99,6 +104,10 @@
    "material": "aluminium"
   },
   {
+   "match": "phono-stage|rear-box",
+   "material": "aluminium-dark"
+  },
+  {
    "match": "arm-arm|arm-lift",
    "material": "arm"
   },
@@ -127,7 +136,7 @@
    "material": "ledstrip"
   },
   {
-   "match": "bushings|pod-pads|belt",
+   "match": "bushings|pod-pads|belt|phono-pads",
    "material": "rubber"
   },
   {

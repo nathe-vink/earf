@@ -1,8 +1,9 @@
-"""Round 34's renders of Float, the record player (turntable_float.py), in the names the site picks up
-(renders/2026-10-22/barkhorn/turntable/): for each of the eight colours a studio hero (3:2) on the speakers' pale paper
-field, the same at dusk with the base lit, and a phone frame (4:5); in Smoke, the lid open, the arm and platter, and
-the motor's pod. The studio rig is the speakers' studio heroes' (studio31's hero-light, rig 1769c6a), brought in to a
-record player's size; the materials are the speakers' own (common.MATERIALS), so the tints match.
+"""Round 34's renders of Mantle (Float until the owner named it), the record player (turntable_float.py), in the names
+the site picks up (renders/2026-10-22/barkhorn/turntable/): for each of the eight colours a studio hero (3:2) on the
+speakers' pale paper field, the same at dusk with the base lit, and a phone frame (4:5); in Smoke, the lid open, the
+arm and platter, and the motor's pod. The studio rig is the speakers' studio heroes' (studio31's hero-light, rig
+1769c6a), brought in to a record player's size; the materials are the speakers' own (common.MATERIALS), so the tints
+match.
 
     .venv-fab/bin/python spinoffs/barkhorn/companions/turntable_float_shots.py --model     # the lid-open model
     python3 spinoffs/barkhorn/companions/turntable_float_shots.py                         # the shot files
@@ -54,14 +55,14 @@ def mirror_flag(cam, at, dist=1.3, size=(2.4, 1.4), color='#4A4A4C'):
 
 def record():
     """A 12 inch record on the platter (a prop of the set, not a part of the product): black vinyl, a cream label."""
-    z = 0.105
+    z = 0.113
     return [{'kind': 'kit', 'shape': 'cylinder', 'radius': 0.1505, 'height': 0.0018, 'position': [SPINDLE[0], SPINDLE[1], z],
              'material': 'gloss', 'color': '#0C0C0D', 'roughness': 0.22},
             {'kind': 'kit', 'shape': 'cylinder', 'radius': 0.050, 'height': 0.0003, 'position': [SPINDLE[0], SPINDLE[1], z + 0.0018],
              'material': 'paper', 'color': '#E6E0D4'}]
 
 
-def aim(s, at=(0.0, 0.0, 0.186)):
+def aim(s, at=(0.0, 0.0, 0.194)):
     """The mirror card for the shot's camera, on the lid's top (or a level face at `at`)."""
     s['set']['flags'] = [mirror_flag(s['camera']['position'], at)]
     return s
@@ -76,7 +77,7 @@ def studio(colour, lid='open'):
     """The studio hero: the speakers' bright field (studio31, hero-light), the record player from the front right
     and above; `lid` 'open' (raised on its hinges), 'closed' or 'off'."""
     s = {
-        'title': f'Float in {C.NAMES[colour]}, studio, lid {lid}',
+        'title': f'Mantle in {C.NAMES[colour]}, studio, lid {lid}',
         'size': [2400, 1600],
         'product': {'def': OPEN_DEF if lid == 'open' else DEF, 'flavour': colour, 'hide': DAY_HIDE + (['lid-*'] if lid == 'off' else []),
                     'instances': [{'position': [0.0, 0.0, 0.0], 'rotate_z': 0.0}]},
@@ -103,17 +104,17 @@ def studio(colour, lid='open'):
                          'target': [0.0, -0.3, 0.0], 'irradiance': 14.0, 'color': '#FFF8F0', 'camera': False},
             # a low soft bank behind, opposite the camera, at the plinth's height: light through the sheet edge to
             # edge, so the plinth's edges glow in the colour as lit acrylic does, instead of reading black
-            'plinth-back': {'type': 'area', 'size_m': [1.0, 0.12], 'position': [-0.40, 0.80, 0.07], 'target': [0.0, 0.0, 0.068],
+            'plinth-back': {'type': 'area', 'size_m': [1.0, 0.12], 'position': [-0.40, 0.80, 0.077], 'target': [0.0, 0.0, 0.076],
                             'irradiance': 120.0, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0},
         },
     }
-    return aim(s) if lid == 'closed' else aim(s, (0.0, 0.0, 0.107))
+    return aim(s) if lid == 'closed' else aim(s, (0.0, 0.0, 0.115))
 
 
 def dusk(colour, lid='open'):
     """The same frame at dusk: the paper in blue-grey evening light, the room's lamps down, the base's edge lit."""
     s = studio(colour, lid)
-    s['title'] = f'Float in {C.NAMES[colour]}, dusk, the base lit'
+    s['title'] = f'Mantle in {C.NAMES[colour]}, dusk, the base lit'
     s['product']['hide'] = []
     s['set']['color'] = '#B9BCC6'
     s['sky'].update(zenith='#5A6274', horizon='#77808F', ground='#3A3D46', strength=0.25)
@@ -133,38 +134,38 @@ def dusk(colour, lid='open'):
 def tall(colour, lid='open'):
     """The phone frame, 4:5: the raised lid over the deck, the float under it, stacked in the tall frame."""
     s = studio(colour, lid)
-    s['title'] = f'Float in {C.NAMES[colour]}, phone'
+    s['title'] = f'Mantle in {C.NAMES[colour]}, phone'
     s['size'] = [1600, 2000]
     s['camera'] = {'position': [0.66, -1.22, 0.86], 'target': [0.0, 0.03, 0.17], 'lens_mm': 62.0, 'level': False}
-    return aim(s, (0.0, 0.0, 0.107))
+    return aim(s, (0.0, 0.0, 0.115))
 
 
 def opened():
     """The lid open from the left, lower: the hinges, the lid's edge, the deck under it."""
     s = studio(ONE, 'open')
-    s['title'] = f'Float in {C.NAMES[ONE]}, the lid open, from the left'
+    s['title'] = f'Mantle in {C.NAMES[ONE]}, the lid open, from the left'
     s['camera'] = {'position': [-1.15, -1.45, 0.55], 'target': [0.0, 0.05, 0.16], 'lens_mm': 62.0, 'level': False}
     s['lights']['key']['orbit'] = {'azimuth_deg': 30, 'elevation_deg': 38, 'distance_m': 2.2}
-    s['lights']['plinth-back'].update(position=[0.55, 0.70, 0.07])
-    return aim(s, (0.0, 0.0, 0.107))
+    s['lights']['plinth-back'].update(position=[0.55, 0.70, 0.077])
+    return aim(s, (0.0, 0.0, 0.115))
 
 
 def detail():
     """The arm at rest beside the record's lead-in, and the platter's edge, close and low from the front right."""
     s = studio(ONE, 'off')
-    s['title'] = f'Float in {C.NAMES[ONE]}, the arm and the platter'
+    s['title'] = f'Mantle in {C.NAMES[ONE]}, the arm and the platter'
     s['camera'] = {'position': [0.42, -0.42, 0.24], 'target': [0.07, -0.04, 0.10], 'lens_mm': 85.0, 'level': False,
                    'fstop': 5.6, 'focus': [STYLUS[0], STYLUS[1], 0.11]}
-    return aim(s, (0.0, 0.0, 0.107))
+    return aim(s, (0.0, 0.0, 0.115))
 
 
 def pod():
     """The motor's pod rising from the base through its hole in the floating plinth, from the back left, low."""
     s = studio(ONE, 'off')
-    s['title'] = f'Float in {C.NAMES[ONE]}, the motor apart'
+    s['title'] = f'Mantle in {C.NAMES[ONE]}, the motor apart'
     s['camera'] = {'position': [-0.62, 0.55, 0.22], 'target': [-0.15, 0.10, 0.07], 'lens_mm': 85.0, 'level': False,
                    'fstop': 5.6, 'focus': [POD[0], POD[1], 0.07]}
-    aim(s, (-0.05, 0.0, 0.107))
+    aim(s, (-0.05, 0.0, 0.115))
     s['lights']['key']['orbit'] = {'azimuth_deg': 220, 'elevation_deg': 40, 'distance_m': 2.2}
     s['lights']['back-top']['orbit'] = {'azimuth_deg': -20, 'elevation_deg': 30, 'distance_m': 1.4}
     s['lights']['back-top']['target'] = [0.0, 0.3, 0.0]

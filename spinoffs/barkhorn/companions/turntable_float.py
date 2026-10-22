@@ -1,14 +1,15 @@
-"""Float, EARF's record player, final (round 34). The owner, 2026-10-18: "I want a squared record player similar to a
-debut or orbit but with a clear body and matching cover." "The brian eno one and the audio technica hotaru are
-acrylic I think and look really cool when backlit, but are way too expensive." And 2026-10-22: "We also need to
-finalize the record player." Round 31c's R3 Float, refined; Cumulus's engineering (turntable.py) carried over.
+"""Mantle (round 34's Float; the owner named it 2026-10-22), EARF's record player, final. The owner, 2026-10-18: "I
+want a squared record player similar to a debut or orbit but with a clear body and matching cover." "The brian eno
+one and the audio technica hotaru are acrylic I think and look really cool when backlit, but are way too expensive."
+And 2026-10-22: "We also need to finalize the record player." Round 31c's R3 Float, refined; Cumulus's engineering
+(turntable.py) carried over.
 
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/turntable_float.py \
         --out spinoffs/barkhorn/companions/out-turntable-float
 
 - **The plinth** is one 25 mm sheet of the Clouds' tinted cast acrylic, 450 x 360, its corners R4 and its edges eased
   and polished: the Debut's and the Orbit's squared slab.
-- **It floats** 32 mm over a 10 mm base of the same acrylic on four clear posts, each bonded under the plinth and
+- **It floats** 40 mm over a 10 mm base of the same acrylic on four clear posts, each bonded under the plinth and
   standing on a Sorbothane bushing on the base, held down by a stainless M6 bolt through a second bushing under the
   base, so nothing hard joins the plinth to the base and it cannot be tipped off.
 - **The base glows round its edge.** A 24 V strip stands in a 3 mm slot routed up into the base's underside 12 mm in
@@ -16,6 +17,8 @@ finalize the record player." Round 31c's R3 Float, refined; Cumulus's engineerin
   critical angle) and leaves at the polished edge. The top stays clear.
 - **The motor stands apart**, on the shelf, in its own heavy pod (a brass cup in rings of the colour) on three soft
   pad stacks, up through holes in the base and the plinth with clearance all round: only the belt touches both.
+- **Its own phono stage**, Pro-Ject's Phono Box S2 whole, in the float under the platter, with a rear box (the line
+  out, a bypass switch, a low-noise regulator from the light's 24 V).
 - **Bought:** Rega's RB330 arm and its lift, an Ortofon 2M Black, Rega's 24 V motor driven by its Neo PSU MK2,
   Pro-Ject's friction hinges for a 6 mm lid in the same tint, the LED strip behind a listed 24 V adapter and an
   in-line dimmer, levelling feet. The bearing is turned, as Cumulus's (no inverted bearing is sold on its own now).
@@ -35,7 +38,7 @@ P = dict(
     W=450.0, D=360.0, T=25.0, R=4.0,          # PROPOSAL: the plinth, a Debut's or an Orbit's footprint
     margin=10.0, Tb=10.0, Rb=8.0,             # the base: 10 past the plinth all round, 10 thick
     feet_h=14.0,                              # the levelling feet: the base's underside from the shelf
-    gap=32.0,                                 # the float: base top to the plinth's underside
+    gap=40.0,                                 # the float: base top to the plinth's underside (the phono stage's 36 under it)
     post_d=30.0, post_bore=6.6,               # the clear posts (an M6 bolt through each)
     posts=((145.0, 60.0), (305.0, 60.0), (145.0, 300.0), (305.0, 300.0)),   # in the plinth's own frame
     bush_t=5.6,                               # the Sorbothane bushing under each post (0.22 in)
@@ -187,12 +190,13 @@ def parts(P, lid_open=False):
     plinth = plinth_cuts(prism(out, 'z', z0, z1))
     plinth_soft = plinth_cuts(slab(out, z0, z1, e))
 
-    # -- the base: the light's slot up from below (3 x 9, 12 in from the edge, four straight runs that stop short
+    # -- the base: the light's slot up from below (3 x 9, 12 in from the edge, three straight runs that stop short
     # of the corners), the four feet's M6 inserts, the four bolts' holes (10, for the bushings' sleeves), the pod's
     # hole (100: the pod stands on the shelf through it, 6 clear), the arm's lead in a groove on top to the back-right
     # corner; the light's lead leaves at the back-left, away from the arm's
     si, sw, sh, se = P['slot_in'], P['slot_w'], P['slot_h'], P['strip_end']
-    runs = [box(se, si, b0 - 1, Wb - se, si + sw, b0 + sh), box(se, Db - si - sw, b0 - 1, Wb - se, Db - si, b0 + sh),
+    # three runs, front, left and right: none along the back, where the phono stage sits
+    runs = [box(se, si, b0 - 1, Wb - se, si + sw, b0 + sh),
             box(si, se, b0 - 1, si + sw, Db - se, b0 + sh), box(Wb - si - sw, se, b0 - 1, Wb - si, Db - se, b0 + sh)]
     feet = [(35.0, 35.0), (Wb - 35, 35.0), (35.0, Db - 35), (Wb - 35, Db - 35)]
 
@@ -215,12 +219,11 @@ def parts(P, lid_open=False):
     base_soft = base_cuts(slab(bout, b0, b1, e))
     # the strip in its slot, its LEDs facing out; and the polished edge it lights, as a skin a hair outside it
     strip = union(*[box(se + 2, si + sw - 1.6, b0 + 0.5, Wb - se - 2, si + sw - 0.2, b0 + 8.5),
-                    box(se + 2, Db - si - sw + 0.2, b0 + 0.5, Wb - se - 2, Db - si - sw + 1.6, b0 + 8.5),
                     box(si + sw - 1.6, se + 2, b0 + 0.5, si + sw - 0.2, Db - se - 2, b0 + 8.5),
                     box(Wb - si - sw + 0.2, se + 2, b0 + 0.5, Wb - si - sw + 1.6, Db - se - 2, b0 + 8.5)])
     # an opaque black band printed on the base's top over the slot, 9 wide, so the strip never shows from above: only
     # the polished edge glows (a hair off the face, so the render never meets two coplanar faces)
-    mask = union(*[box(se, si - 3, b1 + 0.05, Wb - se, si + sw + 3, b1 + 0.15), box(se, Db - si - sw - 3, b1 + 0.05, Wb - se, Db - si + 3, b1 + 0.15),
+    mask = union(*[box(se, si - 3, b1 + 0.05, Wb - se, si + sw + 3, b1 + 0.15),
                    box(si - 3, se, b1 + 0.05, si + sw + 3, Db - se, b1 + 0.15), box(Wb - si - sw - 3, se, b1 + 0.05, Wb - si + 3, Db - se, b1 + 0.15)])
     edge = ring_skin(rounded_rect(Wb + 0.8, Db + 0.8, P['Rb'] + 0.4, cx=Wb / 2, cy=Db / 2),
                      rounded_rect(Wb + 0.1, Db + 0.1, P['Rb'] + 0.05, cx=Wb / 2, cy=Db / 2), b0 + e, b1 - e)
@@ -255,7 +258,7 @@ def parts(P, lid_open=False):
     pdisc = cyl('z', S, P['platter_d'], pz0, pz1) - cyl('z', S, 46.0, pz0 - 1, pz1 + 1)
     pdisc_soft = slab(circle_pts(S[0], S[1], P['platter_d'], 128), pz0, pz1, e) - cyl('z', S, 46.0, pz0 - 1, pz1 + 1)
 
-    # -- the motor's pod, on the shelf through the base: a brass cup (76 x 65, 1.7 kg) in four rings of the colour
+    # -- the motor's pod, on the shelf through the base: a brass cup (76 x 72, 1.9 kg) in four rings of the colour
     # (20, 20, 15, 10; 88 across), the motor's body in the cup's 54 bore, 42 deep; on three stacks of two Sorbothane
     # bushings sitting in 2 mm pockets in the cup's floor and in a 6 mm acrylic mat on the shelf, so the belt can't walk
     # it; its lead out from under it along the shelf. The motor's flange on top, the pulley at the platter's mid-rim
@@ -264,7 +267,7 @@ def parts(P, lid_open=False):
     mz, sb = 6.0, 2.0                                     # the mat's top; the pockets' depth
     stack_h = 2 * P['bush_t']
     c0 = mz - sb + stack_h + sb                           # the cup's (and the rings') floor
-    q = [c0, c0 + 20, c0 + 40, c0 + 55, c0 + 65]
+    q = [c0, c0 + 20, c0 + 40, c0 + 60, c0 + 72]
     mat = cyl('z', M, P['mat_d'], 0, mz)
     for c in st:
         mat = mat - cyl('z', c, 19.0, mz - sb, mz + 1)
@@ -288,6 +291,21 @@ def parts(P, lid_open=False):
     foot = union(*(union(cyl('z', f, 30.0, 0, 6), cyl('z', f, 22.0, 6, 10), cyl('z', f, 6.0, 10, b0)) for f in feet))
 
     arm, lift, cart = arm_solids(P, D)
+
+    # -- the phono stage (the owner, 2026-10-22: approved): Pro-Ject's Phono Box S2, whole, in its own aluminium case
+    # (103 x 115 x 36, its shield), on four felt pads on the base under the back of the platter, between the back
+    # posts, its gain and loading switches to the front; and the rear box (Hammond 1590A, 92.6 x 38.5 x 31), at the
+    # back right behind the post: the arm's lead in, the bypass switch, the RCA line out and earth post, and the 24 to 18
+    # V low-noise regulator. Neither touches the plinth
+    px0, py0 = Wb / 2 - 51.5, 240.0
+    phono = union(box(px0, py0, b1 + 1.5, px0 + 103, py0 + 115, b1 + 37.5),
+                  *[cyl('y', (px0 + x, b1 + 15), 8.0, py0 + 115, py0 + 125) for x in (20, 36, 67, 83)])
+    felts = union(*[cyl('z', (px0 + x, py0 + y), 10.0, b1 + 0.15, b1 + 1.5) for x in (12, 91) for y in (12, 103)])
+    rx0, ry0 = 330.0, 325.0
+    rear = union(box(rx0, ry0, b1 + 0.15, rx0 + 92.6, ry0 + 38.5, b1 + 31.15),
+                 *[cyl('y', (rx0 + x, b1 + 16), 8.0, ry0 + 38.5, ry0 + 46) for x in (22, 38)],          # line out L/R
+                 cyl('y', (rx0 + 60, b1 + 16), 6.0, ry0 + 38.5, ry0 + 50),                              # the bypass toggle
+                 cyl('y', (rx0 + 78, b1 + 16), 7.0, ry0 + 38.5, ry0 + 46))                              # the 24 V in
 
     # -- the lid: 6 mm sheet in the same tint, a top and four walls cemented, standing on six clear bumpers on the
     # plinth, hinged behind on Pro-Ject's two friction hinges, each in a slot in a 20 mm acrylic block screwed to
@@ -325,10 +343,10 @@ def parts(P, lid_open=False):
                     'under it: four 8 holes 12 deep for the posts\' M6 inserts; on top: the bearing\'s flange pocket 56.4 x 6 and three 6 holes for its M4 inserts']),
         Part('base', base, A10, finish='acrylic', group='base', pieces={'slab': (base_soft, 'acrylic')},
              notes=['10 mm cast acrylic in the colour; the outer edge polished all round (it is the light\'s exit); top and bottom left as cast',
-                    'from below: the light\'s slot 3 wide x 9 deep 12 in from the edge, four straight runs; the motor\'s lead groove 8 x 5 to the back-left corner; four 8 holes 7 deep for the feet\'s M6 inserts',
+                    'from below: the light\'s slot 3 wide x 9 deep 12 in from the edge, three straight runs (front, left, right); the pod\'s 100 hole; four 8 holes 7 deep for the feet\'s M6 inserts',
                     'from above: the arm\'s lead groove 8 x 5 to the back-right corner']),
         Part('led-strip', strip, Bought('led-strip-float'), finish='ledstrip', group='base', pieces={'strip': (strip, 'ledstrip'), 'edge': (edge, 'glow')},
-             notes=['four straight runs (2 x 386, 2 x 296; 1.36 m) stood in the slot on their 3M tape against the inner wall, the LEDs facing out, joined at the corners with soldered jumpers; 6.5 W at full']),
+             notes=['three straight runs (386 front, 2 x 296 sides; 0.98 m) stood in the slot on their 3M tape against the inner wall, the LEDs facing out, joined at the front corners with soldered jumpers, fed at the back-left; 4.7 W at full; none along the back, where the phono stage is']),
         Part('slot-mask', mask, Bought('slot-mask-print'), finish='black', group='base',
              notes=['opaque black, screen-printed in two coats on the base\'s top over the light\'s slot, 9 wide (the slot 3 and 3 each side), the four runs\' length: the strip never shows from above']),
         *[Part(f'post-{i + 1}', s, Machined('cast-acrylic', 'lathe'), finish='clear', group='float',
@@ -353,10 +371,10 @@ def parts(P, lid_open=False):
         Part('pod-ring-1', rings[0], A20, finish='acrylic', group='pod', pieces={'stack': (pod_soft, 'acrylic')},
              notes=['four rings of the colour, 88 x 76.4, cemented into one sleeve and slid over the cup; its edges eased']),
         Part('pod-ring-2', rings[1], A20, finish='acrylic', group='pod', render=False),
-        Part('pod-ring-3', rings[2], Sheet('cast-acrylic', 15, face='+z'), finish='acrylic', group='pod', render=False),
-        Part('pod-ring-4', rings[3], A10, finish='acrylic', group='pod', render=False),
+        Part('pod-ring-3', rings[2], A20, finish='acrylic', group='pod', render=False),
+        Part('pod-ring-4', rings[3], Sheet('cast-acrylic', 12, face='+z'), finish='acrylic', group='pod', render=False),
         Part('pod-core', cup, Machined('brass', 'lathe'), finish='brass', group='pod',
-             notes=['C360 brass, 76 x 65, the motor\'s bore 54 x 42 from the top, three 19 x 2 pockets under it for the pad stacks, a 10 hole for the motor\'s lead: 1.7 kg, the pod 2.2 kg with its rings and the motor']),
+             notes=['C360 brass, 76 x 72, the motor\'s bore 54 x 42 from the top, three 19 x 2 pockets under it for the pad stacks, a 10 hole for the motor\'s lead: 1.9 kg, the pod 2.4 kg with its rings and the motor']),
         Part('pod-mat', mat, A6, finish='acrylic', group='pod',
              notes=['6 mm of the colour, 80 across, three 19 x 2 pockets for the pad stacks; a clear silicone bumper film under it (the shelf)']),
         Part('motor', motor, Bought('rega-24v-motor'), finish='black', group='pod',
@@ -364,7 +382,7 @@ def parts(P, lid_open=False):
         Part('pulley', pulley, Machined('aluminium', 'lathe'), finish='aluminium', group='pod',
              notes=[f'its belt face {pd:.2f} at {P["rpm_motor"]:g} rpm (Neo, 33.3); turned to the motor\'s measured speed; the Neo trims the rest']),
         Part('pod-pads', pod_pads, Bought('pod-bushings'), finish='rubber', group='pod',
-             notes=['three stacks of two 30-duro bushings: 2.2 kg on three, 32 kPa each, about 1.3 mm down (UNCONFIRMED against the maker\'s load table)']),
+             notes=['three stacks of two 30-duro bushings: 2.4 kg on three, 35 kPa each, about 1.4 mm down (UNCONFIRMED against the maker\'s load table)']),
         Part('belt', belt, Bought('flat-belt'), finish='rubber', group='platter'),
         Part('feet', foot, Bought('levelling-feet'), finish='black', group='base',
              notes=['four M6 levelling feet in bonded brass inserts: level the platter on them before setting the arm']),
@@ -372,6 +390,13 @@ def parts(P, lid_open=False):
              notes=['its nut under the plinth (25 mm), its lead down into the float and back along the base\'s top groove; its height set with Rega\'s spacers to the cartridge\'s VTA',
                     'its lift on its own base\'s tongue, as Rega fits it; mounting through 25 mm and the record\'s height over the plinth UNCONFIRMED against Rega\'s RB330 manual: see the README']),
         Part('cartridge', cart, Bought('ortofon-2m-black'), finish='cartridge', group='arm'),
+        Part('phono-stage', phono, Bought('phono-box-s2'), finish='aluminium-dark', group='phono',
+             notes=['Pro-Ject Phono Box S2 in its own case, on four felt pads; set to MM, 40 dB, 47k / 100 pF for the 2M Black; its 18 V from the rear box\'s regulator']),
+        Part('phono-pads', felts, Bought('phono-felts'), finish='rubber', group='phono'),
+        Part('rear-box', rear, Bought('rear-box'), finish='aluminium-dark', group='phono',
+             notes=['Hammond 1590A in black: the arm\'s lead in, a DPDT bypass toggle (phono stage or straight through, for an owner\'s own phono amp), gold RCA line out, an earth post, the LT3045 24-to-18 V module; screwed to the base through two bonded inserts']),
+        Part('phono-power', None, Bought('phono-ldo')),
+        Part('phono-wiring', None, Bought('phono-wiring')),
         Part('hinge-blocks', blocks, A20, finish='acrylic', group='lid',
              notes=['two 40 x 20 x 9.5 blocks of the colour (cut from 20 sheet on edge, faced to 9.5), each with the hinge\'s slot',
                     'each on two M4 stainless screws through clearance holes into brass inserts bonded into the plinth\'s back edge (drilled after cutting): the screws run horizontally, so the lid\'s 2.2 kg loads them in shear, never pulling out of a thread; no screw is cut into acrylic anywhere']),
@@ -396,11 +421,11 @@ NOTES = [
     'The float: four water-clear posts (30 rod, bored 6.6) cemented under the plinth; each stands on a Sorbothane bushing '
     '(30 duro, 18.3 x 7.1 x 5.6) on the base, with a second under the base, a washer and a nyloc nut on an M6 stainless '
     'bolt into a brass insert in the plinth. Snug the nuts by hand: the bushings carry about 1.8 kg each.',
-    'The light: a 24 V, 4.8 W/m strip in four straight runs standing in a 3 x 9 slot routed up into the base from below, '
+    'The light: a 24 V, 4.8 W/m strip in three straight runs (front, left, right) standing in a 3 x 9 slot routed up into the base from below, '
     '12 in from the edge, the LEDs facing out. Behind a listed Mean Well 24 V adapter and an in-line flicker-free dimmer '
-    '(25 kHz PWM, above anything a phono stage hears). 6.5 W at full; the slot is open below, so the strip breathes into '
+    '(25 kHz PWM, above anything a phono stage hears). 4.7 W at full; the slot is open below, so the strip breathes into '
     'the 14 mm under the base. Its leads twisted, out at the back-left, away from the arm\'s lead at the back-right.',
-    'The motor stands apart: its pod (a 1.7 kg brass cup in four rings of the colour, 88 across, 2.2 kg with the motor) on '
+    'The motor stands apart: its pod (a 1.9 kg brass cup in four rings of the colour, 88 across, 2.4 kg with the motor) on '
     'three stacks of two Sorbothane bushings in pockets in a 6 mm mat on the shelf, up through a 100 hole in the base and '
     'a 96 hole in the plinth, 4 mm clear. Nothing touches the plinth from the motor but the belt.',
     'The platter: turned from 25 mm cast sheet in the colour (rough, anneal, face both sides to 20, finish-turn the rim); '
@@ -429,12 +454,13 @@ MATERIALS = dict(C.MATERIALS,
                  clear={'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '#F4F6F5', 'radius': 0.05, 'roughness': 0.04},
                  # the lid: 6 mm cast 3.3 times as dense in the tint, so it reads as the cabinets' 20 mm walls do
                  **{'acrylic-lid': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '$deep', 'radius': 0.0075, 'roughness': 0.05}},
+                 **{'aluminium-dark': {'preset': 'metal', 'color': '#2A2A2C', 'roughness': 0.45}},
                  cartridge={'preset': 'satin_paint', 'color': '#0E0E0F', 'roughness': 0.35, 'specular': 0.5},
                  ledstrip={'preset': 'satin_paint', 'color': '#161616', 'roughness': 0.5, 'specular': 0.3})   # a black PCB: through the edge it reads as a dark line
 
-PRODUCT = Product('barkhorn-turntable-float', 'Float', 'Belt-drive record player in tinted cast acrylic, floating over a lit base',
+PRODUCT = Product('barkhorn-turntable-float', 'Mantle', 'Belt-drive record player in tinted cast acrylic, floating over a lit base, with its own phono stage',
                   params=P, parts=parts, count=1, notes=NOTES, materials=MATERIALS, variants=C.VARIANTS,
-                  touching=[('bushes', 'bearing-housing'), ('bushes', 'spindle'), ('pod-ring-*', 'pod-core'), ('float-bolts', 'post-*'),
+                  touching=[('phono-pads', 'phono-stage'), ('bushes', 'bearing-housing'), ('bushes', 'spindle'), ('pod-ring-*', 'pod-core'), ('float-bolts', 'post-*'),
                             ('float-bolts', 'bushings'), ('led-strip', 'base')], drawing_prefix='EF')
 
 if __name__ == '__main__':
