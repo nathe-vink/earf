@@ -1,0 +1,45 @@
+{
+ "shot": "studio/shots/barkhorn/element31/poison_g5.json",
+ "image": "renders/2026-10-18/barkhorn/element31/poison_g5.png",
+ "seconds": {
+  "render_total": 6814.9
+ },
+ "samples": 512,
+ "size": [
+  2400,
+  1600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "strips": 4,
+ "strip_seconds": [
+  1185.6,
+  1718.3,
+  1912.4,
+  1998.6
+ ],
+ "finish": {
+  "white_in": 240,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.08,
+  "clarity": 0.06,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.0,
+   "bloom_px": 30,
+   "bloom_threshold": 0.92,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.2
+  },
+  "gain": 1.0
+ },
+ "note": "rendered in horizontal strips (resumable across container restarts), stitched raw, finished once"
+}
