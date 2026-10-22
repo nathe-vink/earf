@@ -75,7 +75,7 @@ VIEWS = {
                   'camera': {'position': [11.95, 1.05, 1.25], 'target': [16.6, 3.3, 1.00], 'lens_mm': 26, 'level': True,
                              'fstop': 4.0, 'focus': [15.5, 3.0, 1.0]},
                   'base': 'listening-smoke', 'settings': dict(exposure=4.7, screen_glow=0.004, listen_key=0.8, listen_rim=5.0, altar_w=60.0,
-                                                       altar_cone=12.0, altar_z=0.7, niche_strip=0.07, haze=0.004,
+                                                       altar_cone=12.0, altar_z=0.7, niche_strip=0.07, haze=0.004, plinth=0.0,
                                                        orb_pool=5.0),
                   'life': dict(rocks=[[round(RP.TUB_TABLES[3][0] + 0.06, 3), round(RP.TUB_TABLES[3][1] - 0.07, 3),
                                        round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.024, 1, AMBER]],
