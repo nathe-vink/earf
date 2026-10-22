@@ -65,3 +65,11 @@ once the owner signs: lamp-dome 5.25, lamp-orb 6.0.
 | lamp-dome-ember (North) | r1 | 4.5 | The black fins and collar flat silhouettes (a rim or strip light); the shade reads as opaque glossy plastic with little glow, the mouth's frost a flat peach disc; faint triangular light wedges on the backdrop and an empty lower half |
 | lamp-orb-ember (Core) | r1 | 5.0 | No detail to say what it is (no seam, control or cable in view); the shell's dark rim muddy, a faint band across the core; a rim light and a contact shadow for the base |
 | lamp-south-ember (South) | r1 | 4.0 | Too small and seen from straight below (closer, nearer the bowl's height); the black canopy, rod and fins flat cut-outs (a rim light); empty cream fields |
+| lamp-dome-ember (North) | r2 (edge strips, glow 1.4, 88 mm) | 5.0 | The lamp doesn't read as lit (a stronger glow, warm spill on the backdrop); the bottom 40 % empty and the backdrop's faint diagonal cones read as artefacts; the black fins and collar still near-silhouettes |
+| lamp-orb-ember (Core) | r2 (an edge strip on the base) | 4.0 | Anonymous: no seam, control or cable in view; the sphere's reflections hard, geometric and clipped; the plinth muddy; the floor a CG plane |
+| lamp-south-ember (South) | r2 (larger, nearer eye level, edge strips) | 5.0 | The black parts still near-silhouettes (a rim light, a satin sheen); the bowl a flat orange fill (light through it, a coloured cast on the wall); empty rod and ceiling, no grounding cue |
+
+Pass 2 meets none of the coordinator's bars (North 5.25, Core 6.0, South 5.5). Stopped as asked; the other 21 site
+pictures are not rendered. What the critics still want is more than light: the satin black anodising barely shows a
+strip's reflection (a glint placed for the camera's angle, or a lighter sample of the anodise, as round 32f found on
+the catch); a backdrop without the lamp's light cones; and, for Core, a view that shows the cable or the touch ring.
