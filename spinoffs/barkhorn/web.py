@@ -112,7 +112,7 @@ SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabi
         ('Weight', 'About 72 kg; 62 kg with the horn lifted off'),
         ('Woofer', "FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners"),
         ('Horn driver', 'B&amp;C DE1085TN, 2-inch compression driver'),
-        ('Horn', "Tinted cast acrylic formed from the cabinet&rsquo;s own sheet, a turned acrylic throat; the cabinet&rsquo;s full depth"),
+        ('Horn', "Formed from the same tinted cast acrylic as its cabinet, a turned acrylic throat; the cabinet&rsquo;s full depth"),
         ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
         ('Bass', 'To about 49 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
         ('Loudness', 'Up to about 115 dB at 1 m, each'),
@@ -124,7 +124,7 @@ MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn abov
            'The corner: two 20 mm walls, cast in one colour and cemented.'),
           ('amp', 'dust', "Hypex's FA122 amplifier on the back of a Dust cabinet", 'The amplifier, built in: Hypex&rsquo;s FA122.'),
           ('horn', 'acid', "The Acid horn from the side, its driver's pod and the flare",
-           'The horn: tinted acrylic formed from the cabinet&rsquo;s own sheet.'),
+           'The horn: formed from the same tinted acrylic as its cabinet.'),
           ('woofer', 'ice', 'The 15-inch woofer through an Ice cabinet', 'The 15-inch woofer, behind the cloth when the cover&rsquo;s on.'),
           ]   # the grip (Poison) left the row of details with the lineup: four read as a set
 # the lamps (round 32d), the owner's picks of 2026-10-19 ("sick lamps. Add them to the site as well"): a pendant whose
@@ -1350,7 +1350,7 @@ __HABITATS__
       <li><b>Drawn.</b><span>Atmosphere is drawn for making, part by part: more than eighty of them, each with its fabrication
         drawing, the horn&rsquo;s profile and the cabinet&rsquo;s bass worked out by simulation before any acrylic is cut.</span></li>
       <li><b>Next, the first pair.</b><span>Built as production will build it: the horn formed from the cabinet&rsquo;s own
-        sheet, the back screwed to the braces. A prototype is there to test the making, not only the sound.</span></li>
+        tinted acrylic, the back screwed to the braces. A prototype is there to test the making, not only the sound.</span></li>
       <li><b>Then, measured.</b><span>In a room, by ear and by microphone. The design figures on these pages give way to
         measured ones, and the lamps and Mantle follow the same road.</span></li>
     </ol>
@@ -1404,7 +1404,7 @@ __CLOSER__
     <div class="head">
       <div><p class="eyebrow">The horn</p><h2>The oldest amplifier is a shape.</h2>
         <p>Long before there were amplifiers, a horn was how a small sound filled a large room: the gramophone&rsquo;s, or a
-          cupped hand&rsquo;s. Ours is formed from its cabinet&rsquo;s own tinted sheet, its driver in a pod whose cap twists
+          cupped hand&rsquo;s. Ours is formed from the same tinted acrylic as its cabinet, its driver in a pod whose cap twists
           off by hand. Above 1&nbsp;kHz the horn carries the music; below, a 15-inch woofer takes it, each on its own channel
           of the amplifier inside. A horn wastes little, so a little power goes a long way.</p></div>
     </div>
@@ -1654,7 +1654,7 @@ const PRODUCTS = [
   { id: 'speaker', line: 'speakers', lineName: 'Speakers', route: 'speaker', kind: 'Horn loudspeaker', name: c => c.name,
     num: c => `Atmosphere ${c.num}`, copy: c => c.line, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
     card: k => { const o = BY[k].views.off; return o.tall || o.card || o; }, unit: 'each pair made to order', ask: 'Enquire about a pair',
-    facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Tinted acrylic, formed from the cabinet&rsquo;s own sheet'],
+    facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Formed from the same tinted acrylic as the cabinet'],
       ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`], ['Drivers', '15-inch woofer; 2-inch compression driver on the horn'],
       ['Amplifier', 'Hypex FusionAmp FA122, built in: 2 &times; 125 W, crossed at 1 kHz'], ['Bass', 'To about 49 Hz (&minus;3 dB) before the room; a design figure, measured with the first pair'],
       ['Inputs', 'XLR, RCA, AES, S/PDIF coaxial and optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg']],
