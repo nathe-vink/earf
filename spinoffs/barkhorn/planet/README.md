@@ -314,25 +314,29 @@ one-off (round 33c), and sheet and polishing scale with area, so 1.3 m is about 
 
 The owner, 2026-10-22: "Also wondering if there's any opportunity to tie in Mother EARF."
 
-**The proposal rendered:** Mother EARF is the brand's multicolour globe (round 33c on main: six slotted discs of
-tinted cast acrylic, the Poison meridian whole, Dust and Haze the side meridians, Ember, Ice and Acid the parallels,
-the axis leaning 23.4 degrees) made at architectural scale, 1.3 m across in 25 mm sheet, hung over the listening room
-between the tub chairs and the altar pair, its centre 2.5 m up so seated guests see the pair under it and a standing
-guest clears it by 15 cm. It is the one place in the room where all the colours meet, so the rest of the room stays
-Smoke. (`r39/kit39.py`, `mother`.)
+**The proposal rendered:** Mother EARF is round 33b's one-colour globe made at architectural scale: the brand
+globe's six slotted discs (three meridians and three parallels, the axis leaning 23.4 degrees) cut from 25 mm cast
+acrylic in Smoke, 1.25 m across. Its faces are see-through smoked glass and its polished rims read dark. It hangs low
+over the middle banquette table, 1.1 m above it and between two beams, under one hard spot on the deck behind it, so
+its shadow draws the globe a second time, ring inside ring, on the bare concrete wall between the two frosted screens.
+Round 33b's own text recommended exactly this: "a 1 m piece for the bar's back bar under a hard spot". Because it is
+in the house's tint, it adds no colour to the room: the products stay the only colour. (`r39/kit39.py`, `mother`;
+the frames `door` and `door-mother`, so the owner can compare.)
 
-- **How it glows, honestly.** Round 33c found no fluorescent cast sheet thicker than 5 mm, so a 1.3 m piece cannot glow
-  the way the 300 mm desk piece does. This one is built round a 260 mm blown opal core with a lamp in it: the three
-  meridians are cut round the core, so its light enters each at its inner edge and travels out to the polished rim,
-  as an edge-lit sign does. The meridians' rims glow; the three parallels do not reach the core and glow faintly, from
-  light carried across the slots. The core also lights the listening room from above, as a pendant would. This needs
-  a sample before anyone believes it: the drawing assumes more light reaches the rims than a real 650 mm run of tint
-  may pass.
-- **Its cost:** about $9,000 to $12,000 one-off (est.; scaled from main's 1 m piece), about 95 kg of acrylic in 15 mm
-  or 160 kg in 25 mm at 1 m (main), so at 1.3 m in 25 mm about 270 kg (est.): it hangs from the slab, not the fir
-  deck, and needs an engineer's fixing.
-- **The frames:** the door and the listening room are rendered with and without it (`door-mother`,
-  `listening-mother`), so the owner can compare.
+- **Why not over the listening room or at the hinge:** over the listening room the partition's header hid it from
+  the door; at the hinge between the counter and the step, 9 m from the door, it read as nothing (both rendered,
+  round 39 looks 2 and 5).
+- **Its cost:** about $9,000 to $12,000 one-off (est.; scaled from main's 1 m piece in clear tints, about $6,500), and
+  about 270 kg of acrylic in 25 mm at this size (est.; main gives 160 kg at 1 m): it hangs from the slab on a rated
+  fixing, not from the fir deck, and needs an engineer.
+- **Over a table, not a walkway:** its foot is 1.85 m above the floor, which is fine over a table and its banquette,
+  not over the aisle.
+
+**The multicolour variant, kept for comparison only** (`door-mother-colour`): round 33c's six tinted discs round a
+glowing opal core, the rims lit. Rendered first (p1), it read as "a glowing multicoloured neon wireframe globe" to a
+judge told nothing, and both critics called it a nightclub cue. The owner on colour: "I also don't love the overt
+rainbow coloring. It's too Castro for SF" and "lots of acrylic features, just not rainbow everywhere". So it is not
+recommended.
 
 **Other ways the name could live in the bar, a sentence each:**
 
