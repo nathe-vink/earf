@@ -104,7 +104,7 @@ def studio(colour, lid='open'):
             # a low soft bank behind, opposite the camera, at the plinth's height: light through the sheet edge to
             # edge, so the plinth's edges glow in the colour as lit acrylic does, instead of reading black
             'plinth-back': {'type': 'area', 'size_m': [1.0, 0.12], 'position': [-0.40, 0.80, 0.07], 'target': [0.0, 0.0, 0.068],
-                            'irradiance': 24.0, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0},
+                            'irradiance': 120.0, 'color': '#FFF8F0', 'camera': False, 'specular': 0.0},
         },
     }
     return aim(s) if lid == 'closed' else aim(s, (0.0, 0.0, 0.107))
@@ -123,7 +123,7 @@ def dusk(colour, lid='open'):
     L['scrim'].update(irradiance=0.12, color='#B8C6E6')
     L['key'].update(irradiance=0.45, color='#AFC0E4')
     L['back-top'].update(irradiance=1.6, color='#C9D2EA')
-    L['plinth-back'].update(irradiance=2.4, color='#C9D2EA')
+    L['plinth-back'].update(irradiance=12.0, color='#C9D2EA')
     s['materials']['glow'] = {'strength': 9.0}
     s['finish'] = {'enabled': True, 'contrast': 0.08, 'clarity': 0.03, 'sharpen': 0.1, 'sharpen_px': 0.7}
     s['render'].update(white_balance_k=5600, white_balance_tint=0.0, exposure=0.3)

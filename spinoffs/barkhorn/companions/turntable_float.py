@@ -430,7 +430,7 @@ MATERIALS = dict(C.MATERIALS,
                  # the lid: 6 mm cast 3.3 times as dense in the tint, so it reads as the cabinets' 20 mm walls do
                  **{'acrylic-lid': {'preset': 'clear_resin', 'color': '#FFFFFF', 'deep': '$deep', 'radius': 0.0075, 'roughness': 0.05}},
                  cartridge={'preset': 'satin_paint', 'color': '#0E0E0F', 'roughness': 0.35, 'specular': 0.5},
-                 ledstrip={'preset': 'satin_paint', 'color': '#F2EEE6', 'roughness': 0.5, 'specular': 0.3})
+                 ledstrip={'preset': 'satin_paint', 'color': '#161616', 'roughness': 0.5, 'specular': 0.3})   # a black PCB: through the edge it reads as a dark line
 
 PRODUCT = Product('barkhorn-turntable-float', 'Float', 'Belt-drive record player in tinted cast acrylic, floating over a lit base',
                   params=P, parts=parts, count=1, notes=NOTES, materials=MATERIALS, variants=C.VARIANTS,
