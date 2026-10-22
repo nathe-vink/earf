@@ -119,13 +119,13 @@ SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabi
         ('Loudness', 'Up to about 115 dB at 1 m, each'),
         ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
         ('Lining', 'Recycled polyester batts in white voile, 100 mm at the top and the bottom'),
-        ('Price', 'On request: each pair is made to order'),
+        ('Price', 'Set at launch; each pair is made to order'),
         ('Figures', 'Design figures, from the drawings and their simulation; measured ones follow with the first pair')]
 MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn above it',
            'The corner: two 20 mm walls, cast in one colour and cemented.'),
           ('amp', 'dust', "Hypex's FA122 amplifier on the back of a Dust cabinet", 'The amplifier, built in: Hypex&rsquo;s FA122.'),
           ('horn', 'acid', "The Acid horn from the side, its driver's pod and the flare",
-           'The horn: formed from the same tinted acrylic as its cabinet.'),
+           'The horn: its flare, and its driver&rsquo;s pod behind it.'),
           ('woofer', 'ice', 'The 15-inch woofer through an Ice cabinet', 'The 15-inch woofer, behind the cloth when the cover&rsquo;s on.'),
           ]   # the grip (Poison) left the row of details with the lineup: four read as a set
 # the lamps (round 32d), the owner's picks of 2026-10-19 ("sick lamps. Add them to the site as well"): a pendant whose
@@ -671,7 +671,7 @@ def body():
                         + (f'<source media="(max-width: 700px)" srcset="img/{k}-habitat-portrait.jpg">' if tall else '') +
                         f'<img src="img/{k}-habitat.jpg" srcset="img/{k}-habitat-1200.jpg 1200w, img/{k}-habitat.jpg {hw}w" '
                         f'sizes="(max-width: 700px) 84vw, min(86vw, 1080px)" width="{hw}" height="{hh}" loading="lazy" '
-                        f'alt="{name}, on location"></picture><span><b>{name}</b> {line}</span></a></li>'
+                        f'alt="{name}, on location"></picture><span><b>{name}</b></span></a></li>'
                         for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n'
                     f'    <button type="button" class="nav prev" id="hab-prev" aria-label="Previous">{CHEV_L}</button>'
                     f'<button type="button" class="nav next" id="hab-next" aria-label="Next">{CHEV_R}</button>\n'
@@ -756,7 +756,7 @@ def body():
                '    <div class="head"><div><p class="eyebrow">By colour</p><h2>Eight colours, every line.</h2>\n'
                '      <p>Each colour runs through everything we make, so a room can be one colour or three.</p></div></div>\n'
                '    <ul class="shopcol">' + ''.join(
-                   f'<li><a href="#colour-{name.lower()}"><span class="coin-dot" style="--i:{coin[k]}"></span><b>{name}</b><small>{line}</small></a></li>'
+                   f'<li><a href="#colour-{name.lower()}"><span class="coin-dot" style="--i:{coin[k]}"></span><b>{name}</b></a></li>'
                    for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n  </div></section>')
     data = dict(
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
@@ -1354,31 +1354,31 @@ __HABITATS__
   </section>
 
   <section class="band" id="progress"><div class="wrap">
-    <div class="head"><div><p class="eyebrow">Where it stands</p><h2>Drawn to be made.</h2></div></div>
+    <div class="head"><div><p class="eyebrow">Progress</p><h2>Drawn to be made.</h2></div></div>
     <ol class="promise stages">
       <li><b>Drawn.</b><span>Atmosphere is drawn for making, part by part: more than eighty of them, each with its fabrication
-        drawing, the horn&rsquo;s profile and the cabinet&rsquo;s bass worked out by simulation before any acrylic is cut.</span></li>
+        drawing. The horn&rsquo;s profile and the cabinet&rsquo;s bass were worked out by simulation before any acrylic was cut.</span></li>
       <li><b>Next, the first pair.</b><span>Built as production will build it: the horn formed from the cabinet&rsquo;s own
-        tinted acrylic, the back screwed to the braces. A prototype is there to test the making, not only the sound.</span></li>
+        tinted acrylic, the back screwed to the braces. A prototype is there to test the making.</span></li>
       <li><b>Then, measured.</b><span>In a room, by ear and by microphone. The design figures on these pages give way to
-        measured ones, and the lamps and Mantle follow the same road.</span></li>
+        measured ones. The lamps and Mantle come next, the same way.</span></li>
     </ol>
   </div></section>
 
   <section class="band mother" id="mother-earf"><div class="wrap">
     <div class="head"><div><p class="eyebrow">Mother EARF</p><h2>Everything comes home.</h2>
-      <p>We name our things after the layers of the Earth, so we keep a promise to it. We call the promise Mother EARF.</p></div></div>
+      <p>Our things borrow their names from the Earth, core to atmosphere. Mother EARF is how we pay it back.</p></div></div>
     <div class="mother-grid">
     <figure class="mother-fig"><img src="img/mother-globe.jpg" srcset="img/mother-globe-800.jpg 800w, img/mother-globe.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw"
       width="1600" height="1067" loading="lazy" alt="The EARF globe made in acrylic: tinted discs slotted into a sphere, red, orange, yellow, green, blue and violet, on a black base">
       <figcaption>The mark, made in the same acrylic.</figcaption></figure>
     <ol class="promise">
-      <li><b>Acrylic that has lived before.</b><span>Cast acrylic can be broken back down to the liquid it was cast from and cast again. We mean to
-        make our cabinets from sheet made that way, in our eight colours, as its makers bring them to 20&nbsp;mm.</span></li>
+      <li><b>Acrylic that has lived before.</b><span>Cast acrylic can be broken back down to the liquid it was cast from and cast again.
+        Recycled sheet isn&rsquo;t yet made in our colours at 20&nbsp;mm; when it is, we mean to use it.</span></li>
       <li><b>Made to be mended.</b><span>Drivers and amplifiers any good technician knows. Screws, not glue, wherever a part may one day
-        need to come out. The lamps&rsquo; batteries change with a screwdriver.</span></li>
-      <li><b>Taken back at the end.</b><span>When you&rsquo;re done with a piece, send it home. What still works carries on; the acrylic
-        goes back to be cast again.</span></li>
+        need to come out. Core&rsquo;s battery changes with a screwdriver.</span></li>
+      <li><b>Taken back at the end.</b><span>When you&rsquo;re done with a piece, we mean to take it back: what still works carries on, and
+        the acrylic goes back to be cast again.</span></li>
     </ol>
     </div>
   </div></section>
@@ -1468,7 +1468,7 @@ __TURNTABLE__
         <p class="num"><span id="p-num"></span></p>
         <h1 class="named"><span id="p-name"></span><span class="pic" id="p-icon"></span></h1>
         <p class="line" id="p-line"></p>
-        <p class="price">Price on request <span id="p-unit">&middot; each pair made to order</span></p>
+        <p class="price">Priced at launch <span id="p-unit">&middot; each pair made to order</span></p>
         <ul class="swatches" id="swatches" aria-label="Colour"></ul>
         <p class="pick">Colour: <b id="p-pick"></b><span class="pick-ic" id="p-pick-ic"></span></p>
         <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Enquire about a pair</a></div>
@@ -1482,7 +1482,7 @@ __TURNTABLE__
 
 <footer><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home">__WORD__</a>
-  <nav class="foot-nav" aria-label="More"><a href="#progress">Where it stands</a><a href="#mother-earf">Mother EARF</a><a href="#contact">Enquiries</a></nav>
+  <nav class="foot-nav" aria-label="More"><a href="#progress">Progress</a><a href="#mother-earf">Mother EARF</a><a href="#contact">Enquiries</a></nav>
   <p>EARF &middot; San Francisco &middot; In development, not yet for sale &middot; The pictures are renders &middot; &copy; 2026</p>
 </div></footer>
 
@@ -1634,7 +1634,7 @@ document.getElementById('copy').addEventListener('click', () => {
 // a product's page (round 34, the shop): its pictures as a shop shows them, one at a time (the arrows, a swipe, the arrow
 // keys, or the strip of thumbnails), in the colour picked; Atmosphere's open on the photograph in its element
 const SPEAKER_VIEWS = [
-  ['habitat', 'In its element', c => `${c.name} ${c.place}.`],
+  ['habitat', 'In its element', c => `${c.name} ${c.place}.`, c => `In its element, ${c.place}.`],
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
   ['studio-light', 'In the studio', c => `${c.name} in the studio, on a pale ground.`],
@@ -1648,10 +1648,12 @@ const SPEAKER_VIEWS = [
   ['turn', 'Turning', c => `${c.name}'s horn, all the way round.`],
 ];
 const LAMP_VIEWS = {
-  dome: [['hero', 'Lit', (c, s) => s ? `Hemisphere North lit, shown in ${BY[s].name}; its ${c.name} shade is cast in the same way.` : `Hemisphere North lit, its ${c.name} shade glowing beneath a black hub.`],
+  dome: [['hero', 'Lit', (c, s) => s ? `Hemisphere North lit, shown in ${BY[s].name}; its ${c.name} shade is cast in the same way.` : `Hemisphere North lit, its ${c.name} shade glowing beneath a black hub.`,
+          (c, s) => s ? `Shown lit in ${BY[s].name}; the ${c.name} shade is cast the same way.` : `Lit, in ${c.name}.`],
          ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each colour.'],
          ['unlit', 'Off', () => 'A Core and a Hemisphere in Smoke, switched off: dark, polished acrylic, pale at the centre.']],
-  orb: [['hero', 'Lit', (c, s) => s ? `Core lit, shown in ${BY[s].name}; its ${c.name} ball is cast in the same way.` : `Core lit in ${c.name}, sitting low in its black acrylic base.`],
+  orb: [['hero', 'Lit', (c, s) => s ? `Core lit, shown in ${BY[s].name}; its ${c.name} ball is cast in the same way.` : `Core lit in ${c.name}, sitting low in its black acrylic base.`,
+         (c, s) => s ? `Shown lit in ${BY[s].name}; the ${c.name} shade is cast the same way.` : `Lit, in ${c.name}.`],
         ['row', 'All eight', () => 'Eight Core lamps in a row, lit, in spectrum order.'],
         ['unlit', 'Off', () => 'A Core and a Hemisphere in Smoke, switched off: dark, polished acrylic, pale at the centre.']],
 };
@@ -1685,6 +1687,7 @@ let P = PRODUCTS[0], cur = null, view = 'habitat', turnFrame = 0, autoTurn = nul
 const vw = () => P.views(cur) || {};
 function src(c, v) { return vw()[v]; }
 const say = (c, v) => P.VIEWS.find(x => x[0] === v)[2](c, (vw()[v] || {}).shown);
+const tell = (c, v) => { const x = P.VIEWS.find(x => x[0] === v); return (x[3] || x[2])(c, (vw()[v] || {}).shown); };   // the caption
 const shown = c => P.VIEWS.map(x => x[0]).filter(v => vw()[v] && !(v === 'studio' && vw()['studio-light']));   // the bright studio won
 // the stage's ground for a picture: its sides' colours when it is narrower than the stage, its top's and bottom's when wider
 // (a close-up has a blurred copy of itself instead, and one cut off at the foot sits on the stage's foot under its top's colour)
@@ -1722,8 +1725,8 @@ function showView(v, focus) {
   if (v === 'inside' && s.shared && cur !== 'green') stage.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
   if (s.shown) stage.appendChild(el('span', { class: 'tag' }, `Shown in ${BY[s.shown].name}`));
   stage.style.background = ground(v);
-  document.getElementById('cap').textContent = say(c, v);
-  document.getElementById('g-count').textContent = `${i + 1} / ${list.length}`;
+  document.getElementById('cap').textContent = tell(c, v);
+  document.getElementById('g-count').textContent = `${i + 1} / ${list.length} · Render`;   // labelled on the picture itself
   thumbs.querySelectorAll('button').forEach(b => { const sel = b.dataset.v === v; b.setAttribute('aria-selected', String(sel)); b.tabIndex = sel ? 0 : -1;
     if (!sel) return;
     stage.setAttribute('aria-labelledby', b.id);
@@ -1809,16 +1812,19 @@ function block(id, title, note, cards) {
   const g = el('div', { class: 'pgrid' }); cards.forEach(([Pr, c]) => g.appendChild(pcard(Pr, c))); sec.appendChild(g);
   return sec;
 }
+// each opposite pair's own line, written once for it (the critics: one sentence on every page read as a template)
+const PAIR = { 'green|red': 'Red and green, minus the Christmas.', 'blue|orange': 'Orange and blue: each looks hotter, or colder, for the other.',
+               'amber|violet': 'Yellow and violet: the sun, and the dusk it leaves.', 'black|ice': 'Clear and smoked: the same acrylic, light and dark.' };
 function company(box, k, pid, mono) {
-  const c = BY[k], r = relations(k), names = cs => cs.map(x => BY[x].name).join(' and ');
+  const c = BY[k], r = relations(k), names = cs => cs.map(x => BY[x].name).join(' and '), pair = PAIR[[k, r.comp[0]].sort().join('|')] || '';
   const out = [
     block(`${box.id}-comp`, 'Complementary', r.neutral
-      ? `${c.name} has no hue of its own, so it pairs by lightness: ${names(r.comp)} is its opposite.`
-      : `${names(r.comp)} sits opposite ${c.name} on the colour wheel. Each makes the other look more like itself.`, picks(r.comp, pid, k)),
+      ? `${c.name} has no hue of its own, so it pairs by lightness with ${names(r.comp)}. ${pair}`
+      : `${names(r.comp)}, opposite on the colour wheel. ${pair}`, picks(r.comp, pid, k)),
     block(`${box.id}-ana`, 'Analogous', r.neutral
-      ? `The tints that sit easiest beside it: ${names(r.ana)}.`
-      : `${names(r.ana)}, its neighbours on the wheel. They agree with it.`, picks(r.ana, pid, k))];
-  if (mono) out.push(block(`${box.id}-mono`, 'Monochromatic', `${c.name} all the way through: the same colour in the other lines.`, picks([k], pid, k)));
+      ? `${names(r.ana)}, the tints it sits easiest beside.`
+      : `${names(r.ana)}, either side of it on the wheel.`, picks(r.ana, pid, k))];
+  if (mono) out.push(block(`${box.id}-mono`, 'Monochromatic', `${c.name} in the other lines.`, picks([k], pid, k)));
   box.replaceChildren(...out);
 }
 // a colour's page: everything made in it, then its complement and its neighbours
