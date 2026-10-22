@@ -6,20 +6,20 @@
  ],
  "camera": {
   "position": [
-   11.95,
-   1.05,
-   1.25
+   12.2,
+   1.25,
+   1.2
   ],
   "target": [
    16.6,
-   3.3,
+   3.2,
    1.0
   ],
-  "lens_mm": 26,
+  "lens_mm": 28,
   "level": true,
-  "fstop": 4.0,
+  "fstop": 5.6,
   "focus": [
-   15.5,
+   15.8,
    3.0,
    1.0
   ]
@@ -123,9 +123,9 @@
     "disc_glow": 0.06,
     "disc_lamp": 2.0,
     "name_glow": 0.25,
-    "niche_strip": 0.07,
+    "niche_strip": 0.12,
     "sink_glow": 0.8,
-    "screen_glow": 0.004,
+    "screen_glow": 0.003,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -368,13 +368,13 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.18,
+    "lamp_w": 0.198,
     "lamp_k": 2700,
-    "shade_glow": 0.0057,
+    "shade_glow": 0.0036,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
-      "glow_color": "#FFB878"
+      "glow_color": "#FFA060"
      }
     }
    },
@@ -669,8 +669,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 50.0,
-   "cone_deg": 24.0,
+   "power_w": 32.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -688,8 +688,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 50.0,
-   "cone_deg": 24.0,
+   "power_w": 32.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -707,8 +707,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 50.0,
-   "cone_deg": 24.0,
+   "power_w": 32.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -726,8 +726,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 50.0,
-   "cone_deg": 24.0,
+   "power_w": 32.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -764,7 +764,7 @@
     -6.0,
     5.6
    ],
-   "power_w": 50.0,
+   "power_w": 8.0,
    "radius_m": 0.15,
    "color": 2700
   },
@@ -775,7 +775,7 @@
     15.1,
     5.6
    ],
-   "power_w": 50.0,
+   "power_w": 8.0,
    "radius_m": 0.15,
    "color": 2700
   },
@@ -865,10 +865,10 @@
    "target": [
     16.55,
     1.9,
-    0.9
+    0.95
    ],
-   "power_w": 60.0,
-   "cone_deg": 12.0,
+   "power_w": 55.0,
+   "cone_deg": 20.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -884,10 +884,10 @@
    "target": [
     16.55,
     4.199999999999999,
-    0.9
+    0.95
    ],
-   "power_w": 60.0,
-   "cone_deg": 12.0,
+   "power_w": 55.0,
+   "cone_deg": 20.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1083,7 +1083,7 @@
     0.5,
     0.08
    ],
-   "irradiance": 5.0,
+   "irradiance": 6.0,
    "color": 2800,
    "camera": false,
    "receivers": [
@@ -1161,7 +1161,7 @@
     0.5,
     0.08
    ],
-   "irradiance": 5.0,
+   "irradiance": 6.0,
    "color": 2800,
    "camera": false,
    "receivers": [
@@ -1194,7 +1194,7 @@
    6.05,
    3.32
   ],
-  "density": 0.004,
+  "density": 0.007,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1206,9 +1206,9 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 4.7,
-  "white_balance_k": 2850,
-  "white_balance_tint": -4.0
+  "exposure": 4.9,
+  "white_balance_k": 3000,
+  "white_balance_tint": -2.0
  },
  "materials": {
   "glow": {

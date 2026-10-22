@@ -272,7 +272,7 @@ def life(bpy, name, p, kit):
         objs.append(st.object(bpy, K.principled(bpy, 'match-strip', '#6A4A38', rough=0.9)))
     for i, (x, y, z, a) in enumerate(p.get('napkins', [])):
         nk = K.Mesh(f'{name}-napkin{i}'); K._obox(nk.bm, x, y, z + 0.0002, 0.11, 0.11, 0.0015, math.radians(a))
-        objs.append(nk.object(bpy, K.principled(bpy, 'napkin', '#E9E4DA', rough=0.85), bevel=0.0005, seg=1))
+        objs.append(nk.object(bpy, K.principled(bpy, 'napkin-' + p.get('napkin_col', '#E9E4DA')[1:], p.get('napkin_col', '#E9E4DA'), rough=0.85), bevel=0.0005, seg=1))
     for i, (x, y, z, face, w) in enumerate(p.get('coats', [])):  # a coat folded over a chair back, hanging both sides
         objs.append(_coat(bpy, f'{name}-coat{i}', x, y, z, math.radians(face), w, p.get('coat_col', '#5A4636'), i))
     return objs
@@ -347,7 +347,7 @@ def retouch(bpy, name, p, kit):
     import assets
     sys.path.insert(0, os.path.join(ROOT, 'studio', 'engine'))
     out = []
-    for key, f in dict({'zinc': 0.6}, **p.get('darken', {})).items():   # a darker stain or patina, by material name
+    for key, f in dict({'zinc': 0.42}, **p.get('darken', {})).items():   # a darker stain or patina, by material name
         for m in [m for m in bpy.data.materials if key in m.name]:
             _darken(m, f)
     for key, vals in p.get('set', {}).items():         # a finish set outright (p3: the bowl as aged brass)
@@ -383,7 +383,8 @@ def retouch(bpy, name, p, kit):
 
 
 def records(bpy, name, p, kit):
-    """The record wall's cells that round 36 left empty for its lit timber niche (bays 8.90 to 9.90, which round 37
+    """The record wall's cells that round 36 left empty for its lit timber niche and round the frosted disc (p3: the
+    disc does not read in the bar's frame, its cells were lit empty boxes); (bays 8.90 to 9.90, which round 37
     replaced with the bar pair's niches): filled with spines like the rest, so the wall reads as a working library
     (both p2 bar critics: "empty cubbies, the brightest large area")."""
     R = K37.R; RW = R.RECORD_WALL; B = R.BACKBAR36
@@ -399,11 +400,12 @@ def records(bpy, name, p, kit):
         for k in range(nrow):
             xa = RW['x0'] + i * cell + 0.013; xb = RW['x0'] + (i + 1) * cell - 0.013; z = RW['z0'] + k * cell
             cx, cz = (xa + xb) / 2, z + cell / 2
-            if math.hypot(cx - R.DISC['x'], cz - R.DISC['z']) < R.DISC['r'] + cell * 0.55:
+            in_disc = math.hypot(cx - R.DISC['x'], cz - R.DISC['z']) < R.DISC['r'] + cell * 0.55
+            if in_disc and not p.get('fill_disc', True):
                 continue
             if cz < htop + cell * 0.5 and any(h0 - 0.01 < cx < h1 + 0.01 for h0, h1 in holes):
                 continue
-            if not (nx0 - cell * 0.5 < cx < nx1 + cell * 0.5 and cz < nz1 + cell * 0.5):
+            if not in_disc and not (nx0 - cell * 0.5 < cx < nx1 + cell * 0.5 and cz < nz1 + cell * 0.5):
                 continue                                 # filled by round 36 already
             fill = rnd.choice([1.0, 0.95, 0.85, 0.7, 0.62])
             s = xa + 0.004

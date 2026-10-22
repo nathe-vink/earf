@@ -38,6 +38,11 @@ ALL.update(screen_glow=0.07, street_lamp=110.0, pendant_w=80.0, pendant_cone=28.
 # white balls with no pools; the record wall's cubbies empty and glowing; the street lamps still raking the floor
 ALL.update(haze=0.003, wb=2850, wb_tint=-4.0, pendant_w=50.0, pendant_cone=24.0, dome_glow_smoke=0.05, orb_trim=0.28,
            orb_pool=3.0, screen_glow=0.035, street_lamp=50.0, rw_w=6.0, records_fill=True)
+# finals (the p3 critics, 4.5 to 5.5; the third round per frame, so these settings go to the finals): the street lamps
+# still raked hard stool shadows across the floor (they light the shopfront, not the room); the Domes' pools still
+# hot on the zinc; the Cores white balls without pools; the balance swung too cool at 2850
+ALL.update(street_lamp=8.0, pendant_w=32.0, pendant_cone=20.0, orb_trim=0.2, orb_pool=6.0, orb_col='#FFA060',
+           wb=3000, wb_tint=-2.0, screen_glow=0.03)
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.08, 'clarity': 0.05, 'sharpen': 0.25,
           'sharpen_px': 0.7, 'grain': 2.5}
 
@@ -64,19 +69,19 @@ VIEWS = {
     'door': {'title': 'the room from the door, at night',
              'camera': {'position': [1.90, 1.20, 1.38], 'target': [16.5, 3.2, 1.20], 'lens_mm': 28, 'level': True,
                         'fstop': 5.6, 'focus': [8.0, 3.0, 1.2]},
-             'base': 'bar-smoke', 'settings': dict(exposure=4.0, altar_w=300.0, altar_cone=22.0, listen_key=1.0, listen_rim=5.0), 'life': COUNTER_LIFE},
+             'base': 'bar-smoke', 'settings': dict(exposure=4.0, altar_w=170.0, altar_cone=30.0, altar_z=0.6, listen_key=2.0, listen_rim=10.0), 'life': COUNTER_LIFE},
     # the bar counter: from the banquette's end, along the zinc to the decks and the pair
     'bar': {'title': 'the bar counter',
-            'camera': {'position': [3.30, 2.40, 1.28], 'target': [7.4, 5.5, 1.40], 'lens_mm': 35, 'level': True,
+            'camera': {'position': [3.60, 2.80, 1.25], 'target': [7.4, 5.6, 1.40], 'lens_mm': 40, 'level': True,
                        'fstop': 4.0, 'focus': [6.6, 4.4, 1.2]},
-            'base': 'bar-smoke', 'settings': dict(exposure=3.4, bar_key=1.4, bar_rim=8.0, spk_niche_strip=0.8, niche_strip=1.5), 'life': COUNTER_LIFE},
+            'base': 'bar-smoke', 'settings': dict(exposure=2.8, bar_key=2.2, bar_rim=8.0, spk_niche_strip=0.5, niche_strip=0.6, rw_w=3.0), 'life': COUNTER_LIFE},
     # the listening room: from behind the tub chairs, the pair on the altar
     'listening': {'title': 'the listening room',
-                  'camera': {'position': [11.95, 1.05, 1.25], 'target': [16.6, 3.3, 1.00], 'lens_mm': 26, 'level': True,
-                             'fstop': 4.0, 'focus': [15.5, 3.0, 1.0]},
-                  'base': 'listening-smoke', 'settings': dict(exposure=4.7, screen_glow=0.004, listen_key=0.8, listen_rim=5.0, altar_w=60.0,
-                                                       altar_cone=12.0, altar_z=0.7, niche_strip=0.07, haze=0.004, plinth=0.0,
-                                                       orb_pool=5.0),
+                  'camera': {'position': [12.20, 1.25, 1.20], 'target': [16.6, 3.2, 1.00], 'lens_mm': 28, 'level': True,
+                             'fstop': 5.6, 'focus': [15.8, 3.0, 1.0]},
+                  'base': 'listening-smoke', 'settings': dict(exposure=4.9, screen_glow=0.003, listen_key=0.8, listen_rim=6.0, altar_w=55.0,
+                                                       altar_cone=20.0, altar_z=0.75, niche_strip=0.12, haze=0.007, plinth=0.0,
+                                                       orb_pool=9.0),
                   'life': dict(rocks=[[round(RP.TUB_TABLES[3][0] + 0.06, 3), round(RP.TUB_TABLES[3][1] - 0.07, 3),
                                        round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.024, 1, AMBER]],
                                votives=[[round(RP.TUB_TABLES[0][0] + 0.10, 3), round(RP.TUB_TABLES[0][1] - 0.12, 3),
@@ -84,13 +89,13 @@ VIEWS = {
     'decks': {'title': 'the decks: the request column and a drink just poured',
               # seated at the counter by the decks, low over the zinc: a coupe just poured in front, the mixing glass and
               # the open bottle behind it, the request column at the right third, a record player beyond
-              'camera': {'position': [round(DX - 0.56, 3), round(Y0 - 0.50, 3), round(ZT + 0.30, 3)],
-                         'target': [round(DX - 0.06, 3), round(DY - 0.02, 3), round(ZT + 0.13, 3)], 'lens_mm': 40, 'level': True,
-                         'fstop': 5.6, 'focus': [DX, round(DY - 0.04, 3), round(ZT + 0.10, 3)]},
-              'base': 'coins-decks', 'settings': dict(exposure=1.0, bar_key=3.0, bar_rim=8.0, column_glow=1.6, decks_pin=220.0),
+              'camera': {'position': [round(DX - 0.40, 3), round(Y0 - 0.40, 3), round(ZT + 0.33, 3)],
+                         'target': [round(DX - 0.06, 3), round(DY - 0.02, 3), round(ZT + 0.13, 3)], 'lens_mm': 50, 'level': True,
+                         'fstop': 4.0, 'focus': [DX, round(DY - 0.04, 3), round(ZT + 0.10, 3)]},
+              'base': 'coins-decks', 'settings': dict(exposure=1.0, bar_key=1.5, bar_rim=8.0, column_glow=4.0, decks_pin=150.0),
               # p2: the mixing glass and the bottle were hidden behind the record player (both critics): now right of the
               # column, in the focus plane; the coupe left, clear of the column; the votive nearest, its flame in frame
-              'life': dict(coupes=[[round(DX - 0.30, 3), round(Y0 + 0.14, 3), ZT, 0.92, RED]],
+              'life': dict(napkin_col='#8E877C', coupes=[[round(DX - 0.30, 3), round(Y0 + 0.14, 3), ZT, 0.92, AMBER]],
                            mixing=[[round(DX + 0.17, 3), round(Y0 + 0.30, 3), ZT, 0.05, AMBER]],
                            bottles=[[round(DX + 0.36, 3), round(Y0 + 0.44, 3), ZT, 150.0, '#D8CDB2']],
                            napkins=[[round(DX - 0.30, 3), round(Y0 + 0.14, 3), ZT, 12.0]],
@@ -102,21 +107,22 @@ VIEWS = {
              # p2 (4.5, 5.0: two thirds empty wall, the door unreadable, the stand pale): nearer and higher on 45 mm,
              # looking down past the bowl to the door and the vestibule's glass (a Smoke bowl, tried, read as a dark hole)
              # p3 (4.5, 5.0: still no door, only a cream strip and a void): swung round to the shopfront glass
-             'camera': {'position': [round(RP.HOST['x'] + 0.95, 3), round(RP.HOST['y'] + 0.65, 3), 1.40],
-                        'target': [0.3, 1.6, 1.05], 'lens_mm': 45, 'level': True,
+             'camera': {'position': [round(RP.HOST['x'] + 0.72, 3), round(RP.HOST['y'] + 0.50, 3), 1.30],
+                        'target': [0.9, 1.55, 1.0], 'lens_mm': 50, 'level': True,
                         'fstop': 2.8, 'focus': [RP.HOST['x'], RP.HOST['y'], RP.HOST['top'] + 0.04]},
-             'base': 'coins-door', 'settings': dict(exposure=5.0, host_w=5.0, host_cone=22.0, coin_edge='reeded', street_lamp=160.0),
-             'retouch': dict(darken={'oak-host': 0.3}, set={'foil': {'Base Color': '#8A6A3A', 'Roughness': 0.24, 'Metallic': 1.0}}),
-             'life': dict(matchbooks=[[RP.HOST['x'] + 0.10, RP.HOST['y'] - 0.08, RP.HOST['top'], -18.0],
-                                      [RP.HOST['x'] + 0.13, RP.HOST['y'] - 0.06, RP.HOST['top'] + 0.006, 9.0]])},
+             'base': 'coins-door', 'settings': dict(exposure=5.0, host_w=12.0, host_cone=14.0, coin_edge='reeded', street_lamp=70.0, etch_glow=0.12),
+             'retouch': dict(set={'foil': {'Base Color': '#8A6A3A', 'Roughness': 0.24, 'Metallic': 1.0}}),   # (the stand's oak is the room's shared walnut scan: no
+             # material of its own to darken; its lightness was the host spot's, now 12 W at 14 deg
+             'life': dict(matchbooks=[[RP.HOST['x'] + 0.13, RP.HOST['y'] - 0.11, RP.HOST['top'], -18.0],
+                                      [RP.HOST['x'] + 0.15, RP.HOST['y'] - 0.09, RP.HOST['top'] + 0.006, 9.0]])},
     'street': {'title': 'the shopfront at blue hour, from across the street',
                # from the far kerb and up the street, at eye height: the whole frontage at three-quarters, the flats above
                # it, the street running away, the sky still blue over it, the room already lit
-               'camera': {'position': [-11.0, -1.2, 1.50], 'target': [0.0, 3.6, 1.9], 'lens_mm': 50, 'level': True,
+               'camera': {'position': [-11.0, -2.6, 1.50], 'target': [0.0, 3.05, 2.2], 'lens_mm': 50, 'level': True,
                           'fstop': 8.0, 'focus': [0.0, 3.05, 1.6]},
-               'base': 'street', 'settings': dict(exposure=2.0, sky=0.25, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE', wb=4300,
-                                                street_lamp=150.0, etch_glow=0.03, pendant_w=300.0, rw_w=60.0,
-                                                screen_glow=0.8, records_fill=True),
+               'base': 'street', 'settings': dict(exposure=2.3, sky=0.35, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE', wb=3300,
+                                                street_lamp=120.0, lamp_k=4000, etch_glow=0.07, pendant_w=300.0,
+                                                rw_w=60.0, screen_glow=0.5, records_fill=True),
                # the coordinator's p1 note: the street needs life and SF furniture: a street tree at the kerb, a hydrant
                'assets': [{'model': 'tree_small_02', 'position': [-3.0, -2.2, 0.0], 'rotate': [0, 0, 40]},
                           {'model': 'fire_hydrant', 'position': [-3.15, 6.7, 0.0], 'rotate': [0, 0, 90]}]},
@@ -134,7 +140,7 @@ VIEWS = {
 # concrete wall between the two frosted screens
 MOTHER = dict(centre=[6.24, 1.15, 2.47], size=1.25, t=0.025, core=0.0, rim=0.0, tint='#6A6668', radius=0.07,
               ceiling=RP.CEIL, heading=55.0)
-MOTHER_SPOT = dict(position=[6.24, 2.75, 3.32], power_w=60.0, cone_deg=34.0, radius_m=0.02)
+MOTHER_SPOT = dict(position=[6.24, 2.75, 3.32], power_w=140.0, cone_deg=30.0, radius_m=0.02)
 # the multicolour globe of p1 (round 33c), kept as a second variant only (`-colour`)
 MOTHER_COLOUR = dict(centre=[11.12, RP.YC, 2.76], size=1.25, t=0.025, core=0.13, rim=0.22, rim_par=0.5, core_glow=0.05,
               core_w=45.0, ceiling=RP.CEIL, heading=-35.0, radius=0.04)
@@ -196,8 +202,8 @@ def shot(view):
                                           'blend': 0.35, 'radius_m': sp['radius_m'], 'color': 3000, 'camera': False}
             # p3: a narrow light behind and above it, from the window side, so the polished rims catch a line each
             c = MOTHER['centre']
-            s['lights']['mother-rim'] = {'type': 'spot', 'position': [round(c[0] + 1.6, 3), round(c[1] + 0.2, 3), 3.30],
-                                         'target': list(c), 'power_w': v.get('mother_rim', 25.0), 'cone_deg': 30.0,
+            s['lights']['mother-rim'] = {'type': 'spot', 'position': [round(c[0] + 0.96, 3), c[1], 3.30],
+                                         'target': list(c), 'power_w': v.get('mother_rim', 45.0), 'cone_deg': 24.0,
                                          'blend': 0.5, 'radius_m': 0.05, 'color': 2700, 'camera': False}
     if v.get('records_fill'):                     # p3: the record wall's empty cells filled (both bar critics)
         extra.append({'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'records'})

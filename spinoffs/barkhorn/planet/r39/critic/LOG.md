@@ -27,3 +27,13 @@ Read test p1: every frame named correctly and every frame called a render ("too 
 
 Read test p2: all seven called renders; Mother EARF "a large dark wire-sphere pendant"; the street "an
 architectural-visualization look"; the bowl "fairly photoreal".
+| p3 | door-mother | 5.5 | 5.5 | 5.5 | 7.3, 7.0 | the globe still a black cage (lum 9): light its edges; the wall shadow reads as mullions; the altar dim |
+| p3 | door | 5.5 | 5.0 | 5.25 | 7.5, 7.0 | the street lamps' hard stool shadows on the floor; the altar pair small and white-faced; zinc white |
+| p3 | bar | 5.0 | 5.0 | 5.0 | 7.0, 7.0 | the cells round the disc empty and lit; the niche glass mirrors a white patch; Domes white |
+| p3 | listening | 4.5 | 4.5 | 4.5 | 6.5, 6.5 | a half-cut table and a blown Core in the corner; chairs crushed; batts near white; floor dead |
+| p3 | decks | 5.0 | 5.5 | 5.25 | 7.0, 7.0 | the column's base not lit from within; the counter brightest near the lens; the coupe black |
+| p3 | bowl | 5.5 | 5.5 | 5.5 | 7.5, 7.5 | the bowl small and near empty; the stand brightest; dashed rim highlights on the coins |
+| p3 | street | 5.0 | 5.0 | 5.0 | 7.0, 7.0 | the balance swung amber at 4300 K, no blue hour; the lightbox brightest; flats over-lit |
+
+Three rounds per frame reached (the studio's limit): the finals take p3's consensus fixes and are judged once more.
+Read test p3: all seven renders again ("repeated identical furniture", "CG-style shadows").

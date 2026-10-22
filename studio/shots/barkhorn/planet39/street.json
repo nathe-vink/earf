@@ -7,13 +7,13 @@
  "camera": {
   "position": [
    -11.0,
-   -1.2,
+   -2.6,
    1.5
   ],
   "target": [
    0.0,
-   3.6,
-   1.9
+   3.05,
+   2.2
   ],
   "lens_mm": 50,
   "level": true,
@@ -125,12 +125,12 @@
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.8,
+    "screen_glow": 0.5,
     "screen_window": 0.27,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.6,
-    "etch_glow": 0.03,
+    "etch_glow": 0.07,
     "etch_frost": 0.3,
     "shade_glow": 0.12,
     "street": true,
@@ -367,13 +367,13 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.699,
+    "lamp_w": 0.81,
     "lamp_k": 2700,
-    "shade_glow": 0.0373,
+    "shade_glow": 0.0216,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
-      "glow_color": "#FFB878"
+      "glow_color": "#FFA060"
      }
     }
    },
@@ -506,7 +506,7 @@
   "zenith": "#2A3F6A",
   "horizon": "#7A8AAE",
   "ground": "#08080A",
-  "strength": 0.25
+  "strength": 0.35
  },
  "lights": {
   "spk0": {
@@ -678,7 +678,7 @@
     1.07
    ],
    "power_w": 300.0,
-   "cone_deg": 24.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -697,7 +697,7 @@
     1.07
    ],
    "power_w": 300.0,
-   "cone_deg": 24.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -716,7 +716,7 @@
     1.07
    ],
    "power_w": 300.0,
-   "cone_deg": 24.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -735,7 +735,7 @@
     1.07
    ],
    "power_w": 300.0,
-   "cone_deg": 24.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -772,9 +772,9 @@
     -6.0,
     5.0
    ],
-   "power_w": 150.0,
+   "power_w": 120.0,
    "radius_m": 0.15,
-   "color": 3000
+   "color": 4000
   },
   "street1": {
    "type": "point",
@@ -783,9 +783,9 @@
     15.1,
     5.0
    ],
-   "power_w": 150.0,
+   "power_w": 120.0,
    "radius_m": 0.15,
-   "color": 3000
+   "color": 4000
   },
   "street-cam": {
    "type": "point",
@@ -796,7 +796,7 @@
    ],
    "power_w": 300.0,
    "radius_m": 0.15,
-   "color": 3000
+   "color": 4000
   },
   "entry": {
    "type": "spot",
@@ -1204,9 +1204,9 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 2.0,
-  "white_balance_k": 4300,
-  "white_balance_tint": -4.0
+  "exposure": 2.3,
+  "white_balance_k": 3300,
+  "white_balance_tint": -2.0
  },
  "materials": {
   "glow": {

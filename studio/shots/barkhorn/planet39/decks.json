@@ -6,18 +6,18 @@
  ],
  "camera": {
   "position": [
-   7.14,
-   3.35,
-   1.37
+   7.3,
+   3.45,
+   1.4
   ],
   "target": [
    7.64,
    4.23,
    1.2
   ],
-  "lens_mm": 40,
+  "lens_mm": 50,
   "level": true,
-  "fstop": 5.6,
+  "fstop": 4.0,
   "focus": [
    7.7,
    4.21,
@@ -125,7 +125,7 @@
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.035,
+    "screen_glow": 0.03,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -375,13 +375,13 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 1.398,
+    "lamp_w": 1.998,
     "lamp_k": 2700,
-    "shade_glow": 0.0746,
+    "shade_glow": 0.0533,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
-      "glow_color": "#FFB878"
+      "glow_color": "#FFA060"
      }
     }
    },
@@ -425,7 +425,7 @@
      "dust"
     ],
     "out": 6.0,
-    "base_glow": 1.6,
+    "base_glow": 4.0,
     "back_glow": 1.0
    },
    {
@@ -468,13 +468,14 @@
     "shape": "ext",
     "path": "spinoffs/barkhorn/planet/r39/kit39.py",
     "fn": "life",
+    "napkin_col": "#8E877C",
     "coupes": [
      [
       7.4,
       3.99,
       1.07,
       0.92,
-      "#B8462A"
+      "#B8641C"
      ]
     ],
     "mixing": [
@@ -709,8 +710,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 50.0,
-   "cone_deg": 24.0,
+   "power_w": 32.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -728,8 +729,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 50.0,
-   "cone_deg": 24.0,
+   "power_w": 32.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -747,8 +748,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 50.0,
-   "cone_deg": 24.0,
+   "power_w": 32.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -766,8 +767,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 50.0,
-   "cone_deg": 24.0,
+   "power_w": 32.0,
+   "cone_deg": 20.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -804,7 +805,7 @@
     -6.0,
     5.6
    ],
-   "power_w": 50.0,
+   "power_w": 8.0,
    "radius_m": 0.15,
    "color": 2700
   },
@@ -815,7 +816,7 @@
     15.1,
     5.6
    ],
-   "power_w": 50.0,
+   "power_w": 8.0,
    "radius_m": 0.15,
    "color": 2700
   },
@@ -1177,7 +1178,7 @@
     4.25,
     1.15
    ],
-   "power_w": 220.0,
+   "power_w": 150.0,
    "cone_deg": 9.0,
    "blend": 0.5,
    "radius_m": 0.15,
@@ -1200,7 +1201,7 @@
     1.0,
     0.7
    ],
-   "irradiance": 3.0,
+   "irradiance": 1.5,
    "color": 3000,
    "camera": false,
    "receivers": [
@@ -1278,7 +1279,7 @@
     1.0,
     0.7
    ],
-   "irradiance": 3.0,
+   "irradiance": 1.5,
    "color": 3000,
    "camera": false,
    "receivers": [
@@ -1363,8 +1364,8 @@
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
   "exposure": 1.0,
-  "white_balance_k": 2850,
-  "white_balance_tint": -4.0
+  "white_balance_k": 3000,
+  "white_balance_tint": -2.0
  },
  "materials": {
   "glow": {
