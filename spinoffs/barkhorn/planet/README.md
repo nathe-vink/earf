@@ -327,7 +327,9 @@ the frames `door` and `door-mother`, so the owner can compare.)
   the door; at the hinge between the counter and the step, 9 m from the door, it read as nothing (both rendered,
   round 39 looks 2 and 5).
 - **Its cost:** about $9,000 to $12,000 one-off (est.; scaled from main's 1 m piece in clear tints, about $6,500), and
-  about 270 kg of acrylic in 25 mm at this size (est.; main gives 160 kg at 1 m): it hangs from the slab on a rated
+  about 190 kg of acrylic in 25 mm at this size, 208 kg if the cast sheet runs 10 % thick (four great circles of
+  4.91 m² and two ±40° parallels of 1.44 m², 6.35 m² × 25 mm × 1190 kg/m³; main's 160 kg at 1 m is sheet bought, offcut
+  included): it hangs from the slab on a rated
   fixing, not from the fir deck, and needs an engineer.
 - **Over a table, not a walkway:** its foot is 1.85 m above the floor, which is fine over a table and its banquette,
   not over the aisle.
