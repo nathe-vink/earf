@@ -423,9 +423,12 @@ def make_images(sources=None):
                                                                  save(Image.open(p), f'tt-{k}-card.jpg', 640, q=82)))
     for n in ('open', 'detail', 'pod'):
         one(os.path.join(TTR, f'{n}.png'), lambda p, n=n: save(Image.open(p), f'tt-{n}.jpg', 2400, q=84))
-    # until then its line shows the concept it is drawn from (round 31c's R3 Float, lit at dusk), at its own size
-    one(os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions2', 'concepts', 'concept-r3-dusk.png'),
+    # until then its line shows Mantle's own proof (round 34, lit at dusk) or, before that, the concept it is drawn from
+    # (round 31c's R3 Float, lit at dusk), at its own size
+    one(first(os.path.join(TTR, 'proof', 'dusk-haze.png'),
+              os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions2', 'concepts', 'concept-r3-dusk.png')),
         lambda p: save(Image.open(p), 'tt-concept.jpg', None, q=88))
+    one(os.path.join(TTR, 'proof', 'studio-haze.png'), lambda p: save(Image.open(p), 'tt-proof-studio.jpg', None, q=88))
     # the coins, in the icons' order, one sheet for each ground (round 30's renders, at 800 px on E.PAPER and E.NIGHT)
     order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
     for tag, ground, dark in (('paper', (242, 238, 232), False), ('night', (17, 16, 19), True)):
@@ -696,14 +699,19 @@ def body():
                                                              f'{TT["name"]} in Fog, its base glowing') + '</div>\n'
                      '  </div></section>')
     else:
-        cw, ch = Image.open(os.path.join(IMG, 'tt-concept.jpg')).size if os.path.exists(os.path.join(IMG, 'tt-concept.jpg')) else (450, 360)
+        def fig(img, alt, cap):
+            w, h = Image.open(os.path.join(IMG, img)).size
+            return (f'<figure class="concept"><img src="img/{img}" width="{w}" height="{h}" loading="lazy" alt="{alt}">'
+                    f'<figcaption>{cap}</figcaption></figure>')
+        figs = ([fig('tt-proof-studio.jpg', f'{TT["name"]} in Haze with its lid raised: a violet plinth floating on clear posts over a violet base',
+                     f'{TT["name"]} in Haze, its lid raised.')] if os.path.exists(os.path.join(IMG, 'tt-proof-studio.jpg')) else [])
+        figs.append(fig('tt-concept.jpg', f'{TT["name"]} in Haze at dusk, its lid raised: a violet plinth floating over a base whose edge glows',
+                        f'{TT["name"]} in Haze, lit at dusk.'))
         turntable = ('  <section class="band" id="record"><div class="wrap soon-wrap">\n'
-                     f'    <div class="head"><div><p class="eyebrow">Turntable</p><h2>{TT["name"]}, on the drawing board.</h2>\n'
+                     f'    <div class="head"><div><p class="eyebrow">Turntable</p><h2>{TT["name"]}, nearly here.</h2>\n'
                      '      <p>A record player in the same eight colours: a tinted plinth floating on clear posts over a base that glows '
-                     'at its edge, the motor in a pod of its own. Its pictures are being made.</p></div></div>\n'
-                     f'    <figure class="concept"><img src="img/tt-concept.jpg" width="{cw}" height="{ch}" loading="lazy" '
-                     'alt="A concept of the record player at dusk: a dark plinth floating over a base whose edge glows violet">'
-                     '<figcaption>The concept it is drawn from, lit at dusk.</figcaption></figure>\n'
+                     'at its edge, its own phono stage inside, the motor standing apart. The rest of its pictures are being made.</p></div></div>\n'
+                     '    <div class="concepts">' + ''.join(figs) + '</div>\n'
                      '    <div class="acts"><a class="btn" href="#contact">Ask about it</a></div>\n'
                      '  </div></section>')
     # the home page's lines and colours
@@ -718,7 +726,7 @@ def body():
     if lighting:
         tiles.append(tile('lighting', LINES[1][1], LINES[1][2], LINES[1][3], 'dome-red.jpg', 'Hemisphere North lit in Ember', 'Shop lighting'))
     tiles.append(tile('turntable', LINES[2][1], LINES[2][2], LINES[2][3], 'tt-ice-tall.jpg' if tt else 'tt-concept.jpg',
-                      f'{TT["name"]}, the record player' if tt else 'The record player\'s concept, its base glowing at dusk',
+                      f'{TT["name"]}, the record player' if tt else f'{TT["name"]} in Haze at dusk, its base glowing',
                       'See the record player' if tt else 'See where it stands', soon=not tt))
     lines = ('  <section class="band" id="lines"><div class="wrap">\n'
              '    <div class="head"><div><p class="eyebrow">The lines</p><h2>One acrylic, three ways to use it.</h2></div></div>\n'
@@ -1224,8 +1232,9 @@ html.cursor, html.cursor * { cursor: none !important }
 .dots-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none }
 .dots-row a { display: block; width: 28px; height: 28px; border-radius: 50% }
 .dots-row .coin-dot { width: 100%; height: 100%; display: block }
-.concept { margin: 0; display: grid; gap: 10px; justify-items: start }
-.concept img { width: min(100%, 560px); height: auto; border-radius: 6px; display: block }
+.concepts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 24px }
+.concept { margin: 0; display: grid; gap: 10px; align-content: start; min-width: 0 }
+.concept img { width: 100%; height: auto; border-radius: 6px; display: block }
 .concept figcaption { font-size: 14px; color: var(--muted) }
 .soon-wrap .acts { margin-top: 24px }
 .colour-head { display: flex; align-items: center; gap: 22px; padding-block: 18px 16px }
