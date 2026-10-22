@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   -15.2,
-   -5.5,
+   -12.5,
+   -3.2,
    1.55
   ],
   "target": [
    0.0,
-   3.6,
-   2.9
+   3.4,
+   3.0
   ],
-  "lens_mm": 32,
+  "lens_mm": 35,
   "level": true,
   "fstop": 8.0,
   "focus": [
@@ -137,14 +137,14 @@
     "wet": true,
     "road_rough": 0.12,
     "siding": "#8E9384",
-    "neighbour_plain": true,
+    "neighbour_plain": false,
     "flat_glow": 0.06,
     "across_glow": 0.05,
     "linen_trans": 0.5,
     "transom_glow": 0.15,
     "glass_gloss": 3.0,
     "flame": 60.0,
-    "windows_lit": 0.5,
+    "windows_lit": 1.0,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
     "zone_life": true,

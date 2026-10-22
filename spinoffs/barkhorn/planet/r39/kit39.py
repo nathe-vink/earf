@@ -93,7 +93,7 @@ def mother(bpy, name, p, kit):
     """Mother EARF, hung: `centre` [x, y, z], `size` (m across), `t` (sheet), `core` (the opal's radius), `rim` (the
     meridians' rim glow), `rim_par` (the parallels'), `core_glow`, `core_w` (the lamp in it), `ceiling` (z of the canopy),
     `heading` (degrees: the side the axis leans toward)."""
-    cx, cy, cz = p.get('centre', [14.56, 3.05, 2.50])
+    cx, cy, cz = p.get('centre', [11.12, 3.05, 2.76])
     R = p.get('size', 1.30) / 2; T = p.get('t', 0.025); rc = p.get('core', 0.13); gap = 0.0008
     W = (Matrix.Translation((cx, cy, cz)) @ Matrix.Rotation(math.radians(p.get('heading', 0.0)), 4, 'Z')
          @ Matrix.Rotation(math.radians(LEAN), 4, 'X'))
@@ -156,7 +156,7 @@ def _liquid(bpy, hexc, name):
         m = K.principled(bpy, key, '#FFFFFF', rough=0.0, trans=1.0, ior=1.34)
         nt = m.node_tree; out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
         va = nt.nodes.new('ShaderNodeVolumeAbsorption'); va.inputs['Color'].default_value = LK.lin(hexc)
-        va.inputs['Density'].default_value = 40.0
+        va.inputs['Density'].default_value = 14.0
         nt.links.new(va.outputs['Volume'], out.inputs['Volume'])
         _M[key] = m
     return _M[key]
@@ -329,7 +329,7 @@ def retouch(bpy, name, p, kit):
         d = _scan_node(bpy, nt, t['diff'], True, p.get('zinc_scale', 1.7))
         bw = nt.nodes.new('ShaderNodeRGBToBW'); nt.links.new(d.outputs['Color'], bw.inputs['Color'])
         mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'
-        mx.inputs['Factor'].default_value = p.get('zinc_mottle', 0.6)
+        mx.inputs['Factor'].default_value = p.get('zinc_mottle', 0.35)
         mx.inputs[6].default_value = b.inputs['Base Color'].default_value[:]
         cr = nt.nodes.new('ShaderNodeMapRange'); cr.inputs['To Min'].default_value = 0.65; cr.inputs['To Max'].default_value = 1.25
         nt.links.new(bw.outputs['Val'], cr.inputs['Value'])

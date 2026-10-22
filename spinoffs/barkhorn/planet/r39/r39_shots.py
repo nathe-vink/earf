@@ -52,17 +52,17 @@ VIEWS = {
     'door': {'title': 'the room from the door, at night',
              'camera': {'position': [1.55, 0.95, 1.42], 'target': [16.5, 3.3, 1.20], 'lens_mm': 24, 'level': True,
                         'fstop': 5.6, 'focus': [8.0, 3.0, 1.2]},
-             'base': 'bar-smoke', 'settings': dict(exposure=4.2), 'life': COUNTER_LIFE},
+             'base': 'bar-smoke', 'settings': dict(exposure=4.2, screen_glow=0.25), 'life': COUNTER_LIFE},
     # the bar counter: from the banquette's end, along the zinc to the decks and the pair
     'bar': {'title': 'the bar counter',
             'camera': {'position': [3.05, 2.55, 1.35], 'target': [7.6, 5.2, 1.30], 'lens_mm': 28, 'level': True,
                        'fstop': 4.0, 'focus': [6.6, 4.4, 1.2]},
-            'base': 'bar-smoke', 'settings': dict(exposure=3.4, bar_key=2.0, bar_rim=6.0), 'life': COUNTER_LIFE},
+            'base': 'bar-smoke', 'settings': dict(exposure=3.4, bar_key=1.2, bar_rim=6.0), 'life': COUNTER_LIFE},
     # the listening room: from behind the tub chairs, the pair on the altar
     'listening': {'title': 'the listening room',
-                  'camera': {'position': [12.05, 1.45, 1.30], 'target': [16.4, 3.25, 1.25], 'lens_mm': 24, 'level': True,
+                  'camera': {'position': [12.0, 0.65, 1.45], 'target': [16.6, 3.6, 1.05], 'lens_mm': 24, 'level': True,
                              'fstop': 4.0, 'focus': [15.5, 3.0, 1.0]},
-                  'base': 'listening-smoke', 'settings': dict(exposure=6.0, screen_glow=0.012, listen_key=1.0, listen_rim=4.0),
+                  'base': 'listening-smoke', 'settings': dict(exposure=6.0, screen_glow=0.012, listen_key=0.35, listen_rim=3.0),
                   'life': dict(rocks=[[round(RP.TUB_TABLES[3][0] + 0.06, 3), round(RP.TUB_TABLES[3][1] - 0.07, 3),
                                        round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.024, 1, AMBER]],
                                votives=[[round(RP.TUB_TABLES[0][0] + 0.10, 3), round(RP.TUB_TABLES[0][1] - 0.12, 3),
@@ -83,24 +83,27 @@ VIEWS = {
     'bowl': {'title': 'the door: the bowl of coins on the host stand',
              # from inside the room, looking back to the door: the bowl on the host stand in the foreground, the steel
              # door and the shopfront beyond it, the street's light in the glass
-             'camera': {'position': [round(RP.HOST['x'] + 1.05, 3), round(RP.HOST['y'] + 0.55, 3), 1.38],
-                        'target': [0.0, round(RP.HOST['y'] - 0.75, 3), 1.05], 'lens_mm': 35, 'level': True,
+             'camera': {'position': [round(RP.HOST['x'] + 0.80, 3), round(RP.HOST['y'] + 0.42, 3), 1.32],
+                        'target': [0.0, round(RP.HOST['y'] - 0.75, 3), 1.05], 'lens_mm': 40, 'level': True,
                         'fstop': 2.8, 'focus': [RP.HOST['x'], RP.HOST['y'], RP.HOST['top'] + 0.04]},
-             'base': 'coins-door', 'settings': dict(exposure=3.0, host_w=22.0, host_cone=14.0),
+             'base': 'coins-door', 'settings': dict(exposure=5.4, host_w=8.0, host_cone=14.0),
              'life': dict(matchbooks=[[RP.HOST['x'] + 0.10, RP.HOST['y'] - 0.08, RP.HOST['top'], -18.0],
                                       [RP.HOST['x'] + 0.13, RP.HOST['y'] - 0.06, RP.HOST['top'] + 0.006, 9.0]])},
     'street': {'title': 'the shopfront at blue hour, from across the street',
                # from the far kerb and up the street, at eye height: the whole frontage at three-quarters, the flats above
                # it, the street running away, the sky still blue over it, the room already lit
-               'camera': {'position': [-15.2, -5.5, 1.55], 'target': [0.0, 3.6, 2.9], 'lens_mm': 32, 'level': True,
+               'camera': {'position': [-12.5, -3.2, 1.55], 'target': [0.0, 3.4, 3.0], 'lens_mm': 35, 'level': True,
                           'fstop': 8.0, 'focus': [0.0, 3.05, 1.6]},
-               'base': 'street', 'settings': dict(exposure=1.8, sky=0.6, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE')},
+               'base': 'street', 'settings': dict(exposure=1.8, sky=0.6, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE',
+                                                neighbour_plain=False, windows_lit=1.0)},
 }
 
 
-# Mother EARF over the listening room: between the beams at 13.95 and 15.17, between the chairs and the altar
-MOTHER = dict(centre=[14.56, RP.YC, 2.50], size=1.30, t=0.025, core=0.13, rim=6.0, rim_par=0.45, core_glow=1.2,
-              core_w=25.0, ceiling=RP.CEIL, heading=-35.0)
+# Mother EARF at the room's hinge, over the aisle between the counter's end and the step (over the listening room the
+# partition's header hid it from the door, look 2): between the beams at 10.51 and 11.73, its foot 2.13 m up so a
+# standing guest walks under it, its top 15 mm under the deck
+MOTHER = dict(centre=[11.12, RP.YC, 2.76], size=1.25, t=0.025, core=0.13, rim=22.0, rim_par=0.45, core_glow=0.5,
+              core_w=25.0, ceiling=RP.CEIL, heading=-35.0, radius=0.02)
 
 
 def product_lights(v):

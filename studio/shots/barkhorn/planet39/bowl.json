@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   2.67,
-   2.5,
-   1.38
+   2.42,
+   2.37,
+   1.32
   ],
   "target": [
    0.0,
    1.2,
    1.05
   ],
-  "lens_mm": 35,
+  "lens_mm": 40,
   "level": true,
   "fstop": 2.8,
   "focus": [
@@ -360,9 +360,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.416,
+    "lamp_w": 0.079,
     "lamp_k": 2700,
-    "shade_glow": 0.0666,
+    "shade_glow": 0.0126,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -1101,7 +1101,7 @@
     1.95,
     1.02
    ],
-   "power_w": 22.0,
+   "power_w": 8.0,
    "cone_deg": 14.0,
    "blend": 0.6,
    "radius_m": 0.02,
@@ -1149,7 +1149,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 3.0,
+  "exposure": 5.4,
   "white_balance_k": 3000,
   "white_balance_tint": 0.0
  },
