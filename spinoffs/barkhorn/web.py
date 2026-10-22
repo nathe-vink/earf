@@ -746,8 +746,7 @@ def body():
              f'    <div class="lines">{"".join(tiles)}</div>\n  </div></section>')
     colours = ('  <section class="band" id="colours"><div class="wrap">\n'
                '    <div class="head"><div><p class="eyebrow">By colour</p><h2>Eight colours, every line.</h2>\n'
-               '      <p>Each is named for something the air carries, and each runs through everything we make, so a '
-               'room can be one colour or three.</p></div></div>\n'
+               '      <p>Each colour runs through everything we make, so a room can be one colour or three.</p></div></div>\n'
                '    <ul class="shopcol">' + ''.join(
                    f'<li><a href="#colour-{name.lower()}"><span class="coin-dot" style="--i:{coin[k]}"></span><b>{name}</b><small>{line}</small></a></li>'
                    for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n  </div></section>')
