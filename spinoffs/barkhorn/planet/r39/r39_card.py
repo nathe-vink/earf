@@ -13,10 +13,9 @@ import r38_card as C38                                               # noqa: E40
 C = C38.C
 COIN = ('EARFcoin: acrylic coins with the EARF globe on them, one given to each guest at the door, exchanged for a song '
         'request. ')
-MOTHER = (' Hung over the listening room: Mother EARF, the brand\'s multicolour globe made at architectural scale, '
-          '1.3 m across, six slotted discs of 25 mm tinted cast acrylic round a glowing opal core; the core\'s light '
-          'travels out through the discs to their polished rims, which glow their colours. It is the one multicoloured '
-          'object in the room, by design.')
+MOTHER = (' Hung low over the middle banquette table: Mother EARF, the brand\'s globe made at architectural scale, '
+          '1.25 m across, six slotted discs of 25 mm cast acrylic in Smoke, see-through, under one hard spot that '
+          'throws its shadow on the concrete wall: the room\'s centrepiece.')
 FOR = {
     'door': 'the hero of the feature: the whole room from just inside the door at night, as a guest first sees it: the '
             'banquette and its frosted screens on the right, the zinc racetrack counter under its Dome pendants on the '
@@ -53,8 +52,14 @@ def main():
         s += '\n- round 39 props: ' + ', '.join(f"{len(v)} {k}" for k, v in life.items() if isinstance(v, list))
     m = next((p for p in sh['set']['props'] if p.get('fn') == 'mother'), None)
     if m:
-        s += (f"\n- Mother EARF: centre {m['centre']}, {m['size']} m across, rim glow {m['rim']} (parallels x{m['rim_par']}), "
-              f"core glow {m['core_glow']}, core lamp {m['core_w']} W")
+        if m.get('tint'):
+            sp = sh['lights'].get('mother-spot', {})
+            s += (f"\n- Mother EARF: centre {m['centre']}, {m['size']} m across, every disc cast in Smoke ({m['tint']}, "
+                  f"radius {m.get('radius')}), unlit; one hard spot {sp.get('power_w')} W, cone {sp.get('cone_deg')} deg, from "
+                  f"{sp.get('position')}, throwing its shadow on the concrete wall")
+        else:
+            s += (f"\n- Mother EARF: centre {m['centre']}, {m['size']} m across, rim glow {m['rim']} (parallels x{m['rim_par']}), "
+                  f"core glow {m['core_glow']}, core lamp {m['core_w']} W")
     txt = (f"# Card: Planet EARF, {sh['title']}\n\n**What the frame is for:** {FOR[key]}Configuration: Smoke (the house "
            f"configuration).{MOTHER if m else ''}\n\n{C.CONTEXT}\n\n{C.FIXED}\n\n{C.MAY}\n\n**Settings now:**\n\n{s}\n")
     open(out, 'w').write(txt)
