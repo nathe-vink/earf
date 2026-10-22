@@ -1,0 +1,232 @@
+# EARF launch-readiness checklist (US, starting in California)
+
+Prepared 22 October 2026. This is a research summary, not legal advice. **[UNCONFIRMED]** marks anything I could not pin to a source, or that a lab, lawyer or agency should confirm. Product codes used below: **A** = Atmosphere (powered horn speaker pair), **H** = Hemisphere North (hardwired pendant), **C** = Core (USB-C / Li-ion table lamp), **M** = Mantle (record player with phono stage and external supply).
+
+---
+
+## 1. Summary
+
+Taking a deposit needs paperwork; shipping needs lab work. Before the first deposit EARF needs a company, a free CDTFA seller's permit, its payment processor's consent to pre-orders, and a website with a privacy policy (CalOPPA applies as soon as the register-interest form collects emails), all-in prices (SB 478), a posted refund and cancellation policy, the warranty text, and a ship date it can back up, because under the FTC Mail Order Rule a deposit starts the shipping clock. Any deposit taken before FCC testing must be a "conditional sale" with the disclosures in 47 CFR 2.803, and nothing can be delivered until EARF has issued an FCC Supplier's Declaration of Conformity (SDoC) for each product; the FA122's compliance does not carry over, because Hypex puts that duty on the speaker maker. Each product also needs a safety listing from a recognized lab: federal law doesn't require one for consumer sales, but the electrical code requires every luminaire to be listed, the bar is a workplace that needs approved equipment, and shops and insurers expect it. California adds four product rules (Core's charger in the CEC database, JA8 certification for Hemisphere North in homes, battery stewardship for Core's removable cell, and Prop 65 only once EARF has 10 or more employees) and, for any company that gives a warranty, in-state repair within 30 days, maker-paid in-home service for heavy or installed goods, and repair parts for 7 years. Four design issues should be settled before the first prototypes go to a lab (a fifth, the amplifier's fire-rated compartment, is already met: it is aluminium, earthed): the Mean Well driver claims only "non-consumer" FCC emissions, a single 22 Wh cell is over the 20 Wh small-cell shipping limit, the Hypex remote's CR2032 coin cell brings in Reese's Law, and Core's built-in charger has efficiency rules of its own.
+
+---
+
+## 2. Checklist table
+
+Key to the "needed before" column: **D** = before taking a deposit, **S** = before the first shipment to a customer, **R** = before selling through a shop.
+
+| # | Item | Applies to | Required by | Needed before | Rough cost and lead time | Source |
+|---|---|---|---|---|---|---|
+| 1 | FCC Part 15 Subpart B emissions test and SDoC as a Class B digital device. The responsible party must be US-based, and a compliance statement must ship with the product. | A; C (its USB-PD controller is digital); M if its speed control is digital [UNCONFIRMED until the circuit is fixed] | Law: 47 CFR 15.101, 2.1077 | S (no delivery to anyone before the SDoC) | About $700 for a simple device (compliance firm); $3,000–5,000 for a basic device with no transmitter (US lab's published tiers). No sourced lead time. | [15.101](https://www.law.cornell.edu/cfr/text/47/15.101); [ComplianceGate SDoC guide](https://www.compliancegate.com/fcc-sdoc); [Compliance Testing cost page](https://compliancetesting.com/fcc-certification-faqs/fcc-certification-cost/) |
+| 2 | FCC Part 15 SDoC for an LED fixture. FCC guidance (KDB 640677) treats LED lighting with a switching driver as a Part 15 unintentional radiator, with radiated tests from 30 to 1000 MHz. | H | Law: Part 15 plus FCC guidance | S | Same ranges as row 1 | [In Compliance](https://incompliancemag.com/fcc-clarifies-emissions-requirements-for-led-lights/); [ARRL](https://www.arrl.org/news/fcc-s-oet-clarifies-emissions-compliance-testing-for-rf-led-lighting-devices) |
+| 3 | Pre-authorization sales: a deposit is allowed only as a "conditional sale". The buyer must be told prominently that delivery depends on completing FCC authorization, that FCC rules do not address consumer or contract law, and what the buyer gets if authorization fails, including the refund policy. No delivery is allowed before the SDoC, and conditional-sale records must be kept 60 months. Ads and displays before authorization need the FCC notice text. | All | Law: 47 CFR 2.803 | D | $0 | [47 CFR 2.803](https://www.law.cornell.edu/cfr/text/47/2.803) |
+| 4 | NRTL safety listing to UL 62368-1. UL 60065, the old audio/video safety standard, was retired on 20 Dec 2020. | A; M (also M's external supply if EARF designs it) | Practice for consumer sales: no federal law found that requires a listing. Effectively required for workplace use such as the bar (OSHA "approved" equipment), for shops and for insurers. | S; before installing in the bar | No NRTL fee schedule found. Only vendor-marketing blogs give figures: about $3k–30k+, 6–16 weeks, plus yearly factory-inspection fees [UNCONFIRMED]. | [UL infosheet](https://aws-dewi.ul.com/resources/ul-can-support-your-transition-iec-62368-1-based-standards); [OSHA 1910.303](https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.303); [Alibaba seller blog (low quality)](https://seller.alibaba.com/blogs/2026/southeast-asia/electrical/ul-certification-requirements-electrical-products-alibaba-b2b) |
+| 5 | NRTL listing to UL 1598 for the whole fixture, including the canopy, driver and shade. "ETL" is Intertek's mark, not a separate standard: the standard is UL 1598 whichever recognized lab certifies it. | H | Electrical code: NEC 410.6, "All luminaires… shall be listed". California inspectors accept only listed equipment or equipment approved by a recognized lab (LADBS is the example found). | S; before any installation, including the bar | Same caveat as row 4 | [IAEI on NEC Art. 410](https://iaeimagazine.org/electrical-inspections/nec-article-410-luminaires-lampholders-and-lamps); [LADBS bulletin P/EC 2020-013](https://dbs.lacity.gov/sites/default/files/efs/forms/pc17/ib-p-ec-2020-013-electrical-equipment-approval-requirements.pdf) |
+| 6 | Stopgap for the bar: a one-time field approval of unlisted units at a specific address, if listing isn't finished when the bar opens | H (A as well, if the bar's insurer or inspector asks) | Local inspector (AHJ) practice | Before the bar opens | LADBS (Los Angeles): roughly 1–5 months; the fee is set by its application form [amount not found]. The SF process was not researched. | [LADBS bulletin](https://dbs.lacity.gov/sites/default/files/efs/forms/pc17/ib-p-ec-2020-013-electrical-equipment-approval-requirements.pdf) |
+| 7 | NRTL listing to UL 153 (portable luminaires), which covers USB-powered lamps and, through Supplement SA, lamps that run on internal rechargeable batteries. The cell or pack is normally certified to UL 2054 or UL/IEC 62133-2 [UNCONFIRMED: the lab decides which]. | C | Practice; expected by retailers | S | No sourced cost | [UL: UL 153 adds battery-operated luminaires](https://www.ul.com/news/ul-153-expanded-add-battery-operated-portable-luminaires) |
+| 8 | Fire enclosure for the amplifier: Hypex says the FA122 compartment should be V-1 material with a V-0 layer on both sides of the module, or all V-0, per IEC 62368-1. Cast acrylic is UL 94 HB. The FA122 is Class I: earth all conductive parts and keep 3 mm clearance. **Coordinator's check (22 Oct): already met by design.** Since round 13 the FA122 sits in its own sealed compartment of aluminium sheet (`amp-box` in product.py), and round 35 bonded it to protective earth. Metal is non-combustible, so it meets "V-0 or better" (Hypex Fusion Manual R4, p. 12, verified). What remains is to check the 3 mm clearance to conductive parts in CAD. | A | Standard: IEC/UL 62368-1, as set out in Hypex's installation guide | Before safety testing | Design check only | [Hypex Fusion manual R4](https://cdn.hypex.nl/media/df/df/c2/1678368740/Fusion%20Manual%20R4.pdf); [Perspex cast acrylic datasheet (UL 94 HB)](https://www.simplyplastics.com/media/2kiowxdv/data-sheet-cast-acrylic-sheet.pdf) |
+| 9 | Driver EMC risk: the PCD-16 datasheet lists "FCC part 18 non-consumer equipment (A type only)" for emissions. A home fixture needs consumer-level limits. Pre-scan early, or pick a driver rated for consumer emissions [UNCONFIRMED whether the fixture passes]. | H | Law: Part 15 limits | Before the EMC test | No sourced cost | [Mean Well PCD-16 datasheet](https://www.meanwell.com/Upload/PDF/PCD-16/PCD-16-SPEC.PDF) |
+| 10 | UN 38.3-tested cell or pack, with the test summary made available | C | Law: 49 CFR 173.185 (PHMSA) | S, and any battery shipment, including prototypes | No sourced cost | [PHMSA lithium batteries](https://www.phmsa.dot.gov/lithiumbatteries); [PHMSA test-summary FAQ](https://www.phmsa.dot.gov/sites/phmsa.dot.gov/files/2024-09/Lithium-Battery-Test-Summary-2024.pdf) |
+| 11 | Shipping class. The small-battery exception covers cells up to 20 Wh and batteries up to 100 Wh, shipped as UN3481 in or with equipment, with a lithium battery mark on larger consignments. A single-cell "battery" counts as a cell, so a single 22 Wh pouch cell is over the limit and would ship as fully regulated Class 9 (hazmat training, UN packaging, papers) [UNCONFIRMED: depends on the actual cell configuration]. Spare cells shipped alone are UN3480. | C | Law: 49 CFR 173.185 | Design decision now; S | Hazmat training and packaging costs not found | [PHMSA Lithium Battery Guide 2024](https://www.phmsa.dot.gov/sites/phmsa.dot.gov/files/2024-11/Lithium-Battery-Guide-2024.pdf); [PHMSA 2014 rule (20 Wh / 100 Wh)](https://www.faa.gov/sites/faa.gov/files/2022-11/PHMSA_Lithium_Battery_Rule.pdf) |
+| 12 | Reese's Law: the Hypex remote uses a CR2032 coin cell. A remote sold in the US needs a child-resistant battery compartment, warnings and a General Certificate of Conformity (GCC). An importer must also eFile the certificate (in force since 8 July 2026). The Hypex remote manual has no swallowing warnings. | A (optional remote) | Law: 16 CFR 1263; CPSC eFiling rule | Before selling the remote | No sourced cost | [CPSC button/coin battery guidance](https://www.cpsc.gov/Business--Manufacturing/Business-Education/Business-Guidance/Button-Cell-and-Coin-Battery); [CPSC eFiling release](https://www.cpsc.gov/Newsroom/News-Releases/2026/CPSC-Implements-Mandatory-eFiling-for-Certificates-of-Compliance-Targeting-Dangerous-Foreign-Imports); [Hypex remote manual](https://www.hypex.nl/media/9a/74/eb/1687169153/Hypex%20Remote%20manual%20R6-A4.pdf) |
+| 13 | Product-safety reporting and recall plan: report to CPSC within 24 hours of reportable information, with at most about 10 working days to investigate | All | Law: CPSA §15(b) | S | $0 (a process) | [CPSC duty to report](https://www.cpsc.gov/Business--Manufacturing/Recall-Guidance/Duty-to-Report-to-CPSC-Rights-and-Responsibilities-of-Businesses) |
+| 14 | Core's built-in charger is a federally regulated battery charger. It must be certified in the CEC's appliance database (MAEDbS), mandatory since 1 Jan 2019, under the model number of the product it is built into, and must meet the DOE standard. | C | Law: Title 20, plus DOE | Before the first sale into California | No sourced test cost | [CEC battery charger FAQ](https://www.energy.ca.gov/programs-and-topics/programs/appliance-efficiency-program-outreach-and-education/federal-battery) |
+| 15 | External power supplies must meet DOE Level VI and carry the "VI" mark. This covers the bundled 20 W USB-C adapter and Mantle's supply; if EARF designs its own supply, EARF must certify it. | C, M | Law: DOE (10 CFR 430.32) | S | Buy an adapter that is already compliant; not costed | [DOE EPS standard](https://www.energy.gov/cmei/buildings/articles/2014-02-03-issuance-energy-conservation-standards-external-power-supplies); [10 CFR 430.32](https://www.law.cornell.edu/cfr/text/10/430.32) |
+| 16 | Title 24 JA8 certification for installs in California homes: ≥45 lm/W, power factor ≥0.90, CCT ≤4000 K, CRI ≥90, R9 ≥50, dims to ≤10%, flicker <30%, noise ≤24 dBA. Tested at an NVLAP-accredited lab, certified by a CEC packet signed under penalty of perjury, and marked "JA8-2025". | H (residential sales) | Law: Title 24 Part 6 §150.0(k), enforced at permit | Before selling for California homes | No sourced cost | [CEC 2025 Single-Family Compliance Manual ch. 6](https://www.energy.ca.gov/filebrowser/download/8638) |
+| 17 | Prop 65. Businesses with fewer than 10 employees are exempt. Above that, products need warnings for listed chemicals, for example lead and phthalates in PVC cords (settlement limits: lead 100 ppm, phthalates 1000 ppm). The short-form warning has had to name a chemical since 1 Jan 2025, with transition to 2028. | All | Law: Prop 65 | S once EARF has ≥10 employees; R if a shop demands it [UNCONFIRMED] | Screening cost not found | [OEHHA ISOR (exemption)](https://oehha.ca.gov/sites/default/files/media/downloads/crnr/p65shortformisorf2021.pdf); [OEHHA FSOR 2025](https://oehha.ca.gov/sites/default/files/media/2025-01/fsor112624approval_0.pdf); [TÜV SÜD settlement list](https://www.tuvsud.com/en-us/e-ssentials-newsletter/consumer-products-and-retail-essentials/e-ssentials-14-2018/us-recent-california-proposition-65-settlements) |
+| 18 | Battery stewardship: AB 2440 covers loose batteries and batteries a user can remove with household tools. CalRecycle was still in rulemaking in June 2026. The older 2006 take-back law exempts sellers under $1M in sales and batteries packed with a device, and is repealed on 1 Jan 2027. | C (removable cell; spare cells) | Law | Join a stewardship program once the rules take effect [date UNCONFIRMED] | Fees not yet set | [CalRecycle battery stewardship](https://calrecycle.ca.gov/epr/batteries/); [DTSC AB 1125 fact sheet](https://dtsc.ca.gov/ab-1125-rechargeable-battery-recycling-act-fact-sheet/) |
+| 19 | Song-Beverly warranty duties: repair facilities in California (EARF's own or designated independents); repair within 30 days; for goods that can't reasonably be brought in because of size, weight or installation, service at home, pickup or transport at the maker's expense | All, if EARF gives an express warranty | Law: Civil Code 1793.2 | S | Cost of a service network not found | [Civ. Code 1793.2](https://california.public.law/codes/civil_code_section_1793.2) |
+| 20 | Right to repair (SB 244): documentation, functional parts and tools for owners and repair shops, for 7 years if the wholesale price is ≥$100 (3 years for $50–99.99) | A, M; H and C [UNCONFIRMED whether lamps fall in the definition] | Law: Civil Code 1793.03 | Plan before S; ongoing | Not costed | [SB 244 chaptered text](https://legiscan.com/CA/text/SB244/2023); [Perkins Coie summary](https://perkinscoie.com/insights/update/californias-digital-fair-repair-act-sb-244) |
+| 21 | All-in prices (SB 478): an advertised price must include every mandatory fee except government taxes and shipping. Handling fees must be in the price. | All | Law: Civil Code 1770(a)(29) | D, and any published price | $0 | [CA AG: hidden fees](https://oag.ca.gov/hiddenfees); [AG SB 478 FAQ](https://oag.ca.gov/system/files/attachments/press-docs/SB%20478%20FAQ%20(B).pdf) |
+| 22 | Refund-policy display: a seller that doesn't give full refunds or exchanges for 7 days must post its policy, or the buyer gets a 30-day refund right. Goods marked "all sales final" and "customized goods received as ordered" are excluded. | All | Law: Civil Code 1723 | D | $0 | [Civ. Code 1723 (Justia)](https://law.justia.com/codes/california/code-civ/division-3/part-3/section-1723); [CA DCA legal guide S-6](https://www.dca.ca.gov/publications/legal_guides/s_6.shtml) |
+| 23 | Privacy policy, conspicuously posted, including how the site responds to Do Not Track | Website | Law: CalOPPA | Now, before the register-interest form goes live | $0 to a lawyer's fee | [CA AG privacy-policy page](https://oag.ca.gov/privacy/facts/online-privacy/privacy-policy) |
+| 24 | CCPA: probably not triggered at launch. It applies at $26.625M revenue, or 100k California consumers' data, or 50% of revenue from selling or sharing data. | Website | Law, if a threshold is met | Monitor | n/a | [CPPA FAQ](https://cppa.ca.gov/faq.html) |
+| 25 | Written warranty, which is optional. If EARF offers one: title it "Full" or "Limited" (products over $10); put the terms in one clear document (over $15); make it available before the sale online; no disclaiming implied warranties; no tie-ins | All | Law: Magnuson-Moss, 16 CFR 701/702 | D | $0 | [FTC warranty guide](https://www.ftc.gov/business-guidance/resources/businesspersons-guide-federal-warranty-law) |
+| 26 | Mail Order Rule: state a ship time EARF has a reasonable basis for (otherwise 30 days applies). A full or partial payment starts the clock. Send delay notices with a cancel option, refund within 7 working days of a cancellation, and keep records. | All | Law: 16 CFR 435 | D | Penalties up to $53,088 per violation | [FTC Mail Order Rule guide](https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule) |
+| 27 | Payment processor consent for pre-orders; possible reserves for long delivery windows | All | Contract (Stripe terms, as an example) | D | Reserve level is at Stripe's discretion | [Stripe pre-orders](https://support.stripe.com/questions/accepting-payments-for-pre-orders); [Stripe reserves FAQ](https://support.stripe.com/questions/reserves-frequently-asked-questions) |
+| 28 | Origin claims. An unqualified "Made in USA" means all or virtually all US content (California allows ≤5% foreign content, or ≤10% if a part is unavailable domestically). "Designed in USA, Made in X" is acceptable; "Created in USA" was called deceptive. | All | Law: FTC Act and 16 CFR 323; Cal. B&P 17533.7 | Before any marketing | $0 | [FTC Made in USA guide](https://www.ftc.gov/business-guidance/resources/complying-made-usa-standard); [B&P 17533.7](https://california.public.law/codes/business_and_professions_code_section_17533.7) |
+| 29 | Entity (LLC or corporation) and the $800 California annual tax. The first-year waiver covered only 2021–2023 formations. | Company | Law for the tax; practice for the entity | D | $800/yr plus the Secretary of State filing fee [fee not checked] | [FTB LLC page](https://www.ftb.ca.gov/file/business/types/limited-liability-company/index.html) |
+| 30 | CDTFA seller's permit and sales tax. Delivery by EARF's own vehicle is taxable; separately stated common-carrier charges are not. | Company | Law | D for the permit; S for tax set-up | The permit is free; a security deposit may be required | [CDTFA Pub 73](https://cdtfa.ca.gov/formspubs/pub73.pdf); [Regulation 1628](https://cdtfa.ca.gov/lawguides/vol1/sutr/1628.html) |
+| 31 | General liability including product liability, typically $1M per occurrence / $2M aggregate | Company; the bar | Practice | S; before demos at the bar; R | Small-business median about $42/month in CA, $45/month nationally; not specific to hardware makers, so expect more [UNCONFIRMED] | [Insureon](https://www.insureon.com/small-business-insurance/product-liability/cost) |
+| 32 | Import duty on FA122 modules: Hypex says US import duties are not covered by Hypex, so EARF pays them as importer | A | Law (customs) | First production order | Duty rate not researched | [Hypex FA122 page](https://www.hypex.nl/products/amplifier-families/fusion-amplifier-family/fusionamp-fa122) |
+| 33 | Retail extras: supply warranty materials to shops (the warrantor's duty). Shop vendor requirements such as listing marks, insurance certificates and Prop 65 warnings were not checked against any retailer's vendor guide [UNCONFIRMED]. | All | Law (Magnuson-Moss) plus practice | R | $0 | [FTC warranty guide](https://www.ftc.gov/business-guidance/resources/businesspersons-guide-federal-warranty-law) |
+
+---
+
+## 3. Notes by section
+
+### A. Certifications and marks
+
+**FCC: what each product is.**
+- **Atmosphere (A).** The FA122 has an onboard DSP, so Atmosphere is a "Class B digital device", which needs an SDoC or certification under the [15.101 table](https://www.law.cornell.edu/cfr/text/47/15.101). Treating anything with clocks above 9 kHz as digital comes from the 47 CFR 15.3 definition ([LII 15.3](https://www.law.cornell.edu/cfr/text/47/15.3)) [UNCONFIRMED: definition not re-read for this report].
+- **Core (C).** Core cannot use the low-frequency exemption in [15.103(h)](https://www.law.cornell.edu/cfr/text/47/15.103), because that exemption excludes devices that run from an AC adapter or while charging.
+- **Hemisphere North (H).** Hemisphere has no digital logic, but its switching driver makes it a Part 15 unintentional radiator under FCC guidance on LED lighting ([In Compliance](https://incompliancemag.com/fcc-clarifies-emissions-requirements-for-led-lights/)).
+- **Mantle (M).** Mantle is a digital device if its motor speed control uses a microcontroller or crystal; otherwise it may only be an "incidental radiator" [UNCONFIRMED; the lab should classify it].
+
+**FCC: SDoC versus certification.** None of the four products has a radio transmitter. The Hypex remote is infrared, using the Philips RC-5 protocol ([remote manual](https://www.hypex.nl/media/9a/74/eb/1687169153/Hypex%20Remote%20manual%20R6-A4.pdf)), so SDoC is the route for all four. Adding Bluetooth or Wi-Fi later would make a product an intentional radiator that needs FCC certification ([ComplianceGate](https://www.compliancegate.com/fcc-sdoc)). An SDoC is not filed with the FCC, but EARF must:
+
+- be, or appoint, a US-based responsible party;
+- keep the test report;
+- ship a compliance statement naming the product, the compliance wording and the responsible party's contact details ([ComplianceGate](https://www.compliancegate.com/fcc-sdoc)).
+
+**Does the FA122's compliance carry over? No.**
+- The FA122 product page lists no FCC, UL, CB or CE certification ([Hypex FA122](https://www.hypex.nl/products/amplifier-families/fusion-amplifier-family/fusionamp-fa122)).
+- The Hypex manual calls the FA122 a "subassembly" and says "responsibility for verifying the performance, safety, reliability and compliance with legal standards of end products using this subassembly falls to the manufacturer of said end product" ([Fusion manual R4](https://cdn.hypex.nl/media/df/df/c2/1678368740/Fusion%20Manual%20R4.pdf)).
+- FCC rules exempt a subassembly inside a housing from the technical standards, but the system it is sold in must comply ([15.101(e)](https://www.law.cornell.edu/cfr/text/47/15.101)).
+
+So Atmosphere is tested as a finished product. A good module helps it pass, but it does not replace the test. The manual also confirms that the USB port is for configuration only ("does not support USB audio"), and the product page gives the mains range as "100-120Vac / 200-240Vac" and the output as 2 x 125 W into 4 ohms, or 2 x 75 W into 8 ohms ([Hypex FA122](https://www.hypex.nl/products/amplifier-families/fusion-amplifier-family/fusionamp-fa122)).
+
+**Marketing before the SDoC.** Under [47 CFR 2.803](https://www.law.cornell.edu/cfr/text/47/2.803), EARF can advertise and display an unauthorized device only with the FCC notice: "This device has not been authorized as required by the rules of the Federal Communications Commission. This device is not, and may not be, offered for sale or lease, or sold or leased, until authorization is obtained." It can take conditional-sale orders only with the disclosures in row 3 of the table. Running unauthorized prototypes in the bar is a separate question, covered by 47 CFR 2.805 [UNCONFIRMED: not researched]. The simple fix is to finish the SDoC before the bar opens.
+
+**Safety listing: legally required, effectively required or optional.**
+- **Legally required at installation (Hemisphere North).** NEC 410.6 says "all luminaires, lampholders, and retrofit kits shall be listed" ([IAEI](https://iaeimagazine.org/electrical-inspections/nec-article-410-luminaires-lampholders-and-lamps)). California inspectors enforce this through California Electrical Code 110.2 and 110.3. Los Angeles, for example, accepts only equipment listed by a recognized agency (UL, CSA, FM Approvals, Intertek, TÜV and others) or approved by the city's own lab ([LADBS](https://dbs.lacity.gov/sites/default/files/efs/forms/pc17/ib-p-ec-2020-013-electrical-equipment-approval-requirements.pdf)). San Francisco's rules were not checked [UNCONFIRMED].
+- **Required in workplaces (the bar).** OSHA says electrical equipment "shall be acceptable only if approved, as defined in § 1910.399" ([OSHA 1910.303](https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.303)). In practice that means listed by an NRTL. California runs its own state plan, Cal/OSHA [UNCONFIRMED: its equivalent rule was not checked].
+- **Effectively required (Atmosphere, Core, Mantle).** I found no federal law that requires an NRTL listing to sell these consumer products. Shops, insurers, landlords and fire marshals are the practical gate [UNCONFIRMED: no retailer or insurer document was reviewed].
+- **Which standard.** Atmosphere and Mantle: UL 62368-1, which replaced UL 60065 on 20 Dec 2020 ([UL](https://aws-dewi.ul.com/resources/ul-can-support-your-transition-iec-62368-1-based-standards)). Hemisphere North: UL 1598, and the driver is already UL 8750 ([PCD-16 datasheet](https://www.meanwell.com/Upload/PDF/PCD-16/PCD-16-SPEC.PDF)). Core: UL 153, including Supplement SA for battery operation ([UL](https://www.ul.com/news/ul-153-expanded-add-battery-operated-portable-luminaires)).
+
+**Batteries (Core).** UN 38.3 is a legal requirement for transport. 49 CFR 173.185 requires each cell or battery to be of a type that passed the UN tests, and the test summary must be available ([PHMSA](https://www.phmsa.dot.gov/lithiumbatteries)). UL 2054 or IEC 62133-2 is normally what the NRTL and shops want, but it is not a federal legal requirement [UNCONFIRMED]. Because the cell is user-replaceable, the pack itself has to be safe for users to handle, and spare cells sold on their own ship as UN3480 ([PHMSA guide](https://www.phmsa.dot.gov/sites/phmsa.dot.gov/files/2024-11/Lithium-Battery-Guide-2024.pdf)).
+
+**Design flags found while checking parts.**
+
+1. **Acrylic cabinet.** Cast acrylic is UL 94 HB ([Perspex datasheet](https://www.simplyplastics.com/media/2kiowxdv/data-sheet-cast-acrylic-sheet.pdf)), while Hypex asks for a V-1 or V-0 compartment around the FA122 ([manual](https://cdn.hypex.nl/media/df/df/c2/1678368740/Fusion%20Manual%20R4.pdf)). The amplifier needs its own fire-rated enclosure, either metal or V-0 plastic, inside the acrylic. *Already met: the design's `amp-box` is sealed aluminium sheet, bonded to earth in round 35; only the 3 mm clearance needs checking.*
+2. **Hemisphere driver.** The PCD-16's EMC line names FCC Part 18 "non-consumer" equipment ([datasheet](https://www.meanwell.com/Upload/PDF/PCD-16/PCD-16-SPEC.PDF)), not Class B or consumer limits.
+3. **Core cell size.** A 22 Wh single cell exceeds the 20 Wh cell limit for the small-battery shipping exception ([PHMSA 2014 rule](https://www.faa.gov/sites/faa.gov/files/2022-11/PHMSA_Lithium_Battery_Rule.pdf); [PHMSA guide](https://www.phmsa.dot.gov/sites/phmsa.dot.gov/files/2024-11/Lithium-Battery-Guide-2024.pdf)).
+4. **Remote coin cell.** The Hypex remote uses a CR2032 ([remote manual](https://www.hypex.nl/media/9a/74/eb/1687169153/Hypex%20Remote%20manual%20R6-A4.pdf)), which brings in Reese's Law ([CPSC](https://www.cpsc.gov/Business--Manufacturing/Business-Education/Business-Guidance/Button-Cell-and-Coin-Battery)).
+
+**Costs and lead times.**
+- FCC SDoC testing: about $700 for a simple device ([ComplianceGate](https://www.compliancegate.com/fcc-sdoc)) and $3,000–5,000 for a basic device without a transmitter ([Compliance Testing](https://compliancetesting.com/fcc-certification-faqs/fcc-certification-cost/)).
+- NRTL listing: no NRTL publishes fees. The only figures found are from vendor-marketing blogs ($3k–30k+, 6–16 weeks) and should not be budgeted on [UNCONFIRMED].
+- Field approval: the Los Angeles city lab quotes 1–5 months overall ([LADBS](https://dbs.lacity.gov/sites/default/files/efs/forms/pc17/ib-p-ec-2020-013-electrical-equipment-approval-requirements.pdf)).
+- UN 38.3, battery certification and JA8 testing: no cost source found.
+
+### B. California-specific rules
+
+**Prop 65.**
+- Prop 65 "expressly exempts businesses with less than 10 employees" ([OEHHA ISOR](https://oehha.ca.gov/sites/default/files/media/downloads/crnr/p65shortformisorf2021.pdf)), so it is not a launch-day obligation for a very small EARF.
+- Once EARF reaches 10 employees, the likely triggers are lead and phthalates (DEHP, DINP and others) in PVC cords. Settlement limits have been lead 100 ppm and phthalates 1000 ppm ([TÜV SÜD](https://www.tuvsud.com/en-us/e-ssentials-newsletter/consumer-products-and-retail-essentials/e-ssentials-14-2018/us-recent-california-proposition-65-settlements)).
+- Brass parts (lead), leaded solder and MDF are other common candidates [UNCONFIRMED: no source fetched].
+- Since 1 Jan 2025 the short-form warning must name a chemical, with a three-year transition ([OEHHA FSOR](https://oehha.ca.gov/sites/default/files/media/2025-01/fsor112624approval_0.pdf); [OEHHA warnings page](https://oehha.ca.gov/proposition-65/crnr/proposition-65-clear-and-reasonable-warnings-safe-harbor-methods-and-content)).
+- Cheapest path: specify low-lead, phthalate-free cords and parts now, so no warning is ever needed.
+
+**Title 20 appliance efficiency.**
+- It reaches Core. Core's built-in charger is a "federally regulated battery charger" and must be certified in MAEDbS under Core's own model number before it is sold in California ([CEC FAQ](https://www.energy.ca.gov/programs-and-topics/programs/appliance-efficiency-program-outreach-and-education/federal-battery)).
+- The bundled adapter and Mantle's supply must meet DOE Level VI and be marked "VI" ([DOE](https://www.energy.gov/cmei/buildings/articles/2014-02-03-issuance-energy-conservation-standards-external-power-supplies)). Whether the CEC database also needs a separate listing for an adapter EARF buys in is [UNCONFIRMED]. The simplest course is to buy an adapter already listed with DOE and the CEC.
+- Whether Title 20's "compact audio" category reaches a powered speaker was not researched [UNCONFIRMED].
+
+**Title 24 (Hemisphere North only).** In California homes, luminaires with built-in LED sources "must be certified to the Energy Commission as meeting the JA8 requirements" and be marked JA8-2025. Plug-in table lamps count as portable lighting and are outside the rule, so Core is not affected ([CEC manual ch. 6](https://www.energy.ca.gov/filebrowser/download/8638)). The JA8 requirements become the specification for Hemisphere North:
+
+- CRI ≥90 and R9 ≥50;
+- CCT ≤4000 K;
+- dims to 10% or lower;
+- flicker below 30% at 20% output;
+- power factor ≥0.90.
+
+The PCD-16 is a TRIAC (forward phase-cut) driver, so test flicker when dimmed.
+
+**Battery take-back.**
+- AB 2440 will make "producers" of covered batteries fund collection. Covered batteries include those a user can remove with household tools, which describes Core's cell. CalRecycle was still holding rulemaking workshops in June 2026 ([CalRecycle](https://calrecycle.ca.gov/epr/batteries/)).
+- The 2006 retailer take-back law excludes sellers under $1M in annual sales and batteries packaged with a device, and is repealed on 1 Jan 2027 ([DTSC](https://dtsc.ca.gov/ab-1125-rechargeable-battery-recycling-act-fact-sheet/)).
+- Whether EARF counts as the "producer" of a cell made by someone else is [UNCONFIRMED].
+
+**Returns.** Civil Code 1723 requires a conspicuous posted policy if EARF does not give full refunds or exchanges within 7 days. Without one, the buyer may return the item within 30 days. "Customized goods received as ordered" are excluded ([Justia](https://law.justia.com/codes/california/code-civ/division-3/part-3/section-1723); [DCA](https://www.dca.ca.gov/publications/legal_guides/s_6.shtml)). A standard Atmosphere in a standard finish is probably not "customized" [UNCONFIRMED], so post the policy anyway.
+
+**Privacy.**
+- CalOPPA applies to any commercial website that collects personal information such as names or emails from California consumers ([CA AG](https://oag.ca.gov/privacy/facts/online-privacy/privacy-policy)).
+- The AG settled with DoorDash for $375,000 over privacy-policy failures ([AG release](https://oag.ca.gov/news/press-releases/attorney-general-bonta-announces-settlement-doordash-investigation-finds-company)).
+- The CCPA thresholds are far above launch scale ([CPPA](https://cppa.ca.gov/faq.html)).
+
+**Three more California rules worth knowing.**
+- **Song-Beverly service duties.** These apply if EARF gives an express warranty ([1793.2](https://california.public.law/codes/civil_code_section_1793.2)). The size, weight and installation clause covers both Atmosphere and Hemisphere North, so the warranty must budget for in-home service in California.
+- **SB 244 right to repair.** Parts, tools and documentation for 7 years ([legiscan](https://legiscan.com/CA/text/SB244/2023); [Perkins Coie](https://perkinscoie.com/insights/update/californias-digital-fair-repair-act-sb-244)).
+- **SB 478 all-in pricing** ([CA AG](https://oag.ca.gov/hiddenfees)). Any mandatory crating or handling fee belongs in the advertised price. That this covers a crating fee is my inference from the AG's "handling" answer.
+
+### C. Federal consumer rules for the website and the sale
+
+**Magnuson-Moss.**
+- The Act "does not require any business to provide a written warranty". If EARF gives one, the warranty must be titled "Full" or "Limited" and written in one clear document. The warrantor can meet the pre-sale rule by posting the terms on its website and giving the web address plus a non-internet way to get a copy in the manual or on the packaging.
+- Implied warranties cannot be disclaimed, though a "Limited" warranty can limit them to its own duration.
+- A "Full" warranty brings extra duties, including a refund or replacement option if repairs fail. "Limited" is the realistic choice ([FTC](https://www.ftc.gov/business-guidance/resources/businesspersons-guide-federal-warranty-law)).
+
+**Mail Order Rule and long lead times.**
+- The clock starts when EARF receives "the correct full or partial … payment", so a deposit starts it.
+- EARF needs a reasonable basis for the stated ship date; with no stated date, the default is 30 days.
+- If the date slips, EARF must send a delay notice with a new date and a free way to cancel. Silence counts as consent only for a first delay of 30 days or less; it never counts as consent to a later, renewed delay. What happens if the customer doesn't answer a renewed notice (cancel and refund) comes from the rule text, not the FTC guide I read [UNCONFIRMED].
+- Refunds are due within 7 working days of a cancellation. "Shipment" means handing the goods to the carrier.
+- Penalties run up to $53,088 per violation ([FTC](https://www.ftc.gov/business-guidance/resources/business-guide-ftcs-mail-internet-or-telephone-order-merchandise-rule)).
+- Inference, not stated by the FTC: a "non-refundable deposit" clause cannot override the cancellation right that a missed date triggers.
+
+**Deposits for goods not yet made.** No federal or California statute specific to such deposits was found beyond the Mail Order Rule [UNCONFIRMED]. Three other constraints apply:
+
+- **FCC.** Deposits taken before an SDoC must be conditional sales with the required disclosures, and the product cannot be delivered before the SDoC ([2.803](https://www.law.cornell.edu/cfr/text/47/2.803)).
+- **Payment processor.** Stripe's terms require its consent before charging for goods that are not immediately deliverable. Stripe may hold reserves for businesses with long delivery windows, and it recommends partial deposits and realistic dates ([Stripe pre-orders](https://support.stripe.com/questions/accepting-payments-for-pre-orders); [Stripe reserves](https://support.stripe.com/questions/reserves-frequently-asked-questions)).
+- **Sales tax.** When tax is due on a deposit, as opposed to at delivery, needs a CDTFA answer [UNCONFIRMED].
+
+**"Made in USA" and "Designed in San Francisco".**
+- An unqualified "Made in USA" needs all or virtually all US content ([FTC](https://www.ftc.gov/business-guidance/resources/complying-made-usa-standard)). California allows at most 5% foreign content by wholesale value, or 10% if a part cannot be obtained domestically ([B&P 17533.7](https://california.public.law/codes/business_and_professions_code_section_17533.7)). With a Dutch amplifier module, an unqualified claim is very unlikely to hold.
+- "Assembled in USA" needs the principal assembly and the last substantial transformation to happen in the US; simple screwdriver assembly does not count.
+- The FTC treats "Designed in USA — Made in Finland" as fine and "Created in USA" as deceptive. "Designed in San Francisco" is safest paired with the true country of manufacture ([FTC](https://www.ftc.gov/business-guidance/resources/complying-made-usa-standard)).
+
+### D. Business basics
+
+- **Entity.** Every California LLC owes $800 a year. The first-year waiver applied only to 2021–2023 formations, and the $800 minimum also applies to corporations ([FTB](https://www.ftb.ca.gov/file/business/types/limited-liability-company/index.html)). Choosing between an LLC and a corporation is a question for an accountant; it was not researched.
+- **Seller's permit and sales tax.** The CDTFA seller's permit is free, though a security deposit may be required ([Pub 73](https://cdtfa.ca.gov/formspubs/pub73.pdf)). For white-glove delivery: a delivery charge is taxable when EARF delivers in its own vehicle, and separately stated common-carrier charges are not ([Reg 1628](https://cdtfa.ca.gov/lawguides/vol1/sutr/1628.html)). Sales-tax registration in other states was not researched.
+- **Insurance.** Small-business general liability, which usually includes product liability, has a median of about $42 a month in California and $45 nationally, and 85% of buyers choose $1M/$2M limits ([Insureon](https://www.insureon.com/small-business-insurance/product-liability/cost)). These are mostly low-risk businesses. No source gave premiums for mains-powered hardware makers, so get quotes [UNCONFIRMED].
+- **Minimum website pages.** Each page and the rows it satisfies:
+  - **Contact** page with a real address. The FCC compliance statement already needs the responsible party's contact details.
+  - **Terms of sale**, covering deposit amount and refundability, the conditional-sale FCC disclosure, ship-date estimate and delay process, delivery terms, and title and risk (rows 3 and 26).
+  - **Warranty** text (row 25).
+  - **Returns and refunds** policy (row 22).
+  - **Shipping and lead times** (row 26).
+  - **Privacy policy** (row 23).
+  - **All-in prices** (row 21).
+  - **Battery disposal and recycling** information (row 18).
+  - **Prop 65** warnings once EARF reaches 10 employees (row 17).
+
+### E. What premium hi-fi brands' sites state
+
+| Brand (model) | Lead time | Warranty | Delivery of heavy speakers | Demos | Returns |
+|---|---|---|---|---|---|
+| Volti Audio (US horn speakers, sells direct) | Custom orders "two to four months" ([home](https://www.voltiaudio.com/)). All timelines are "estimates" ([policies](https://voltiaudio.com/policies/)). | 1 year from purchase ([policies](https://voltiaudio.com/policies/)) | Not stated | Links a "Shows" page (not read); no home demos stated | "All Sales Are Final"; "All payments and deposits are non-refundable"; full payment before shipping ([policies](https://voltiaudio.com/policies/)) |
+| Zu Audio (US, sells direct) | Not found | "Lifetime" badge on product pages; terms not confirmed [UNCONFIRMED] | Zu arranges collection for returns; return shipping covered in the lower 48 | The 60-day home trial serves as the demo | 60-day guarantee; custom orders typically refunded at 80%; 20% restocking fee if returned without contacting Zu ([Zu 60-day guarantee](https://www.zuaudio.com/60-day-guarantee)) |
+| Klipsch Heritage (US, sells through dealers) | Not found | 10-year limited warranty on current Heritage floorstanders; void if not bought from Klipsch or an authorized dealer; ends if the speaker is sold on ([Klipsch Heritage warranty](https://www.klipsch.com/warranty-heritage-products)) | Not found | Dealers | Not found |
+| Living Voice (UK horn systems) | Not found | Not found | "Every pair of Vox Series speakers is installed by us, usually over several days", worldwide, with room modelling ([Living Voice installation](https://www.livingvoice.co.uk/vox-system-installation.html)) | A dedicated "Vox Listening Suite" (link only; content not read) | Not found |
+
+DeVore Fidelity, Ojas, Leben and Cessaro were not checked: the DeVore FAQ URL returned 404, and the search found only a reseller's pages.
+
+**What EARF can take from these sites:**
+- The range runs from Volti's "all sales final, deposits non-refundable" to Zu's 60-day trial with an 80% refund on custom orders.
+- Copy Volti's honest "timelines are estimates" wording, but not its non-refundable deposits (see section C).
+- Living Voice's "we install every pair" and its listening suite are the closest model for a 72 kg speaker plus EARF's San Francisco bar.
+
+---
+
+## 4. Decisions only the founder can make
+
+1. **Deposits.** When to start (now, as conditional sales, or after the SDoC and listing); how much (Stripe suggests partial deposits); whether they are refundable, and on what conditions; and what the buyer gets if certification fails or the date slips.
+2. **Return policy for made-to-order goods.** All sales final, a trial period, or something between (an 80% refund, a restocking fee). Whatever is chosen must be posted and must still honor the Mail Order Rule's cancellation right.
+3. **Warranty.** Length (benchmarks run from 1 to 10 years); "Limited" wording; whether it transfers to a second owner; and how EARF will give in-home service in California for 72 kg speakers and hardwired fixtures (EARF's own technician or designated repair shops).
+4. **The Hypex remote.** Drop it in the US, make it Reese's-Law compliant, or source a compliant remote.
+5. **Core's battery design.** One 22 Wh cell (fully regulated hazmat shipping) or cells of 20 Wh or less; installed or packed separately; whether to sell spare cells.
+6. **Hemisphere North parts.** Keep the PCD-16 or choose a driver with consumer-level emissions. Choose the CRI/R9/CCT bin needed to meet JA8. Decide whether California residential sales are a launch market.
+7. **Labs.** Which NRTL (UL, Intertek/ETL, CSA and others), whether one lab does FCC and safety together, and the test order.
+8. **Who signs.** Who is the FCC responsible party (EARF itself, US-based) and who carries the CPSC reporting duty internally.
+9. **Origin wording.** For example "Designed in San Francisco, made in [country]" or "Assembled in [city], USA", only if EARF actually assembles there.
+10. **Entity and location.** LLC or corporation; where the company is based; whether to register in San Francisco (not researched).
+11. **Prototypes in the bar.** Whether to run them before listing or SDoC (needs an inspector-approved field evaluation and an FCC check), or wait.
+12. **Sales channel.** Direct only at first, or through shops, which brings shop insurance and marking demands.
+13. **Headcount.** Staying under 10 employees keeps EARF outside Prop 65's warning duty.
+
+---
+
+## 5. Not confirmed or not researched
+
+- Whether Mantle contains a digital circuit (this decides its FCC class), and the exact UL 153 / UL 2054 / IEC 62133-2 route for Core: both depend on lab review.
+- The exact 47 CFR 15.3 "digital device" wording, and 47 CFR 2.805 (running unauthorized prototypes).
+- San Francisco's own inspection or field-approval process, its business registration, the California Fire Code's listing wording, and Cal/OSHA's equivalent of OSHA 1910.303.
+- Retailer vendor requirements and insurer requirements. No vendor guide was read.
+- NRTL, UN 38.3, battery certification and JA8 test costs: no reputable published figures were found.
+- Whether Title 20's compact-audio rules reach Atmosphere, and whether a bought-in adapter needs its own CEC listing.
+- When AB 2440's producer duties start, and whether EARF counts as a "producer".
+- Whether SB 244 covers lamps.
+- Prop 65 triggers other than PVC cords (brass, solder, MDF).
+- Sales-tax timing for deposits, other states' sales tax, customs duty rates, CAN-SPAM, and website accessibility (ADA).
+- DeVore Fidelity, Ojas, Leben and Cessaro policies.
