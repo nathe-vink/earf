@@ -11,7 +11,7 @@ The paths below are relative to `renders/2026-10-22/barkhorn/planet39/`.
 |---|---|---|---|---|
 | door (hero 1), with Mother EARF | finals/door-mother.png (2400 × 1600) | 5.5 / 5.5 | not dueled: round 38 had no door frame | final |
 | door (hero 1), without | finals/door.png (2400 × 1600) | 5.5 / 5.5 | not dueled | final |
-| door, Mother EARF in colour (a labelled variant, not a proposal) | proofs-p4/door-mother-colour.png (half size) | not judged | — | variant |
+| door, Mother EARF in colour (a labelled variant, not a proposal) | proofs-p4/door-mother-colour.png (half size; it hangs on a 3 mm cable, which does not resolve at this size) | not judged | — | variant |
 | bar (hero 2) | proofs-p2/bar.png (half size) | 5.5 / 5.5 | round 39 wins 2–0 | proof only |
 | listening (hero 3) | proofs-p3/listening.png (half size) | 4.5 / 4.5 | round 39 wins 2–0 (slight) | proof only |
 | decks (detail) | **round 38's** coins-decks.png (round 39's proofs/decks lost 0–2) | 4.5 to 5.5 | round 38 wins 2–0 | round 38 kept |
