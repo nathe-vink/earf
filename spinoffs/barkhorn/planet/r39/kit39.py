@@ -418,3 +418,66 @@ def records(bpy, name, p, kit):
     if not sl.bm.verts:
         sl.bm.free(); return []
     return [sl.object(bpy, LK.R.colour_attr_mat(bpy, 'sleeve-card-r39', rough=0.6))]
+
+
+# --- p4 (the coordinator, from the read tests: "repeated identical furniture", "objects repeat exactly") ------------
+def _copy_centres():
+    """Where round 36 put each copy of its seats and tables (r36 seats(), banquette(), tubs()), as {mesh: centres}."""
+    R = K37.R; C = R.COUNTER; n = R.NCHAIRS
+    counter = [(C['x0'] + 0.55 + i * (C['x1'] - C['x0'] - 1.1) / (n - 1) + ((i * 7) % 5 - 2) * 0.02,
+                C['y0'] - 0.48 - (0.12 if i in (2, 5) else 0.0)) for i in range(n)]
+    banq = [(x + 0.03, R.CHAIR_Y36) for x in R.TABLES36]
+    wx, wy = R.WINDOW_TABLE
+    chairs = counter + banq + [(wx, wy - 0.62), (wx, wy + 0.62)]
+    tables = [(x, R.TABLE36['y']) for x in R.TABLES36] + [(wx, wy)]
+    return {'chairs': chairs, 'tubs': list(R.TUBS), 'tables36': tables, 'tub-tables': list(R.TUB_TABLES)}
+
+
+def jitter(bpy, name, p, kit):
+    """Every copy of a seat or table its own small turn and shift (`turn` degrees, `shift` metres, seeded), and a few
+    pulled out as if just left (`pull`: {"chairs:3": [dx, dy, deg]}): the plan does not change, only how a night left
+    it. Each mesh's loose parts are dealt to the nearest copy's centre and moved with it."""
+    import bmesh
+    groups = {'chairs': ('chairs-steel', 'chairs-leather', 'chairs-brass'), 'tubs': ('tubs', 'tub-cushions'),
+              'tables36': ('tables36', 'tables36-bases'), 'tub-tables': ('tub-tables', 'tub-table-stems')}
+    turn = p.get('turn', {'chairs': 9.0, 'tubs': 7.0, 'tables36': 0.0, 'tub-tables': 0.0})
+    shift = p.get('shift', {'chairs': 0.035, 'tubs': 0.03, 'tables36': 0.012, 'tub-tables': 0.01})
+    pull = p.get('pull', {})
+    cen = _copy_centres()
+    rnd = random.Random(p.get('seed', 394))
+    for g, meshes in groups.items():
+        moves = []
+        for i, (cx, cy) in enumerate(cen[g]):
+            a = rnd.uniform(-1, 1) * turn.get(g, 0.0); dx = rnd.uniform(-1, 1) * shift.get(g, 0.0); dy = rnd.uniform(-1, 1) * shift.get(g, 0.0)
+            if f'{g}:{i}' in pull:
+                px, py, pa = pull[f'{g}:{i}']; dx += px; dy += py; a += pa
+            moves.append(Matrix.Translation((cx + dx, cy + dy, 0)) @ Matrix.Rotation(math.radians(a), 4, 'Z')
+                         @ Matrix.Translation((-cx, -cy, 0)))
+        for ob in [o for o in bpy.data.objects if o.type == 'MESH' and o.name.split('.')[0] in meshes]:
+            bm = bmesh.new(); bm.from_mesh(ob.data); bm.verts.ensure_lookup_table()
+            seen = set()
+            for v in bm.verts:
+                if v.index in seen:
+                    continue
+                part, stack = [], [v]
+                while stack:
+                    u = stack.pop()
+                    if u.index in seen:
+                        continue
+                    seen.add(u.index); part.append(u)
+                    stack.extend(e.other_vert(u) for e in u.link_edges if e.other_vert(u).index not in seen)
+                mx = sum(u.co.x for u in part) / len(part); my = sum(u.co.y for u in part) / len(part)
+                k = min(range(len(cen[g])), key=lambda j: (cen[g][j][0] - mx) ** 2 + (cen[g][j][1] - my) ** 2)
+                bmesh.ops.transform(bm, matrix=moves[k], verts=part)
+            bm.to_mesh(ob.data); bm.free(); ob.data.update()
+    return []
+
+
+def leaning(bpy, name, p, kit):
+    """Record sleeves leaning on things: [x, y, z, heading deg, lean deg], with the record half out of one."""
+    objs = []
+    for i, (x, y, z, h, lean) in enumerate(p.get('sleeves', [])):
+        sl = K.Mesh(f'{name}-sleeve{i}')
+        K37._tilted_box(sl.bm, x, y, z, 0.314, 0.004, 0.314, math.radians(h), math.radians(lean))
+        objs.append(sl.object(bpy, K.principled(bpy, f'sleeve-lean-{i}', ['#2A2622', '#C9B79A', '#5A3A2E'][i % 3], rough=0.6)))
+    return objs

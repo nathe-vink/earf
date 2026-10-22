@@ -42,7 +42,7 @@ ALL.update(haze=0.003, wb=2850, wb_tint=-4.0, pendant_w=50.0, pendant_cone=24.0,
 # still raked hard stool shadows across the floor (they light the shopfront, not the room); the Domes' pools still
 # hot on the zinc; the Cores white balls without pools; the balance swung too cool at 2850
 ALL.update(street_lamp=8.0, pendant_w=32.0, pendant_cone=20.0, orb_trim=0.2, orb_pool=6.0, orb_col='#FFA060',
-           wb=3000, wb_tint=-2.0, screen_glow=0.03)
+           wb=3000, wb_tint=-2.0, screen_glow=0.03, jitter=True)
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.08, 'clarity': 0.05, 'sharpen': 0.25,
           'sharpen_px': 0.7, 'grain': 2.5}
 
@@ -63,6 +63,17 @@ COUNTER_LIFE = dict(
     votives=[[5.15, Y0 + 0.22, ZT], [7.95, Y0 + 0.22, ZT]],
     matchbooks=[[5.32, Y0 + 0.12, ZT, 28.0]],
     coats=[[chair_x(1), round(C['y0'] - 0.48 - 0.19, 3), 1.02, 0.0, 0.40]])
+# p4 (the coordinator: "the room lived in"): the banquette's tables half-finished, a menu card, a coat over a
+# banquette chair's back; nothing on the third table
+_TB, _TH, _TY = RP.TABLES36, RP.TABLE36['h'], RP.TABLE36['y']
+COUNTER_LIFE['rocks'] += [[_TB[0] - 0.10, _TY - 0.05, _TH, 0.012, 1, AMBER], [_TB[1] + 0.12, _TY + 0.02, _TH, 0.030, 1, AMBER],
+                          [_TB[1] - 0.06, _TY - 0.12, _TH, 0.020, 1, AMBER]]
+COUNTER_LIFE['coupes'] += [[_TB[0] + 0.14, _TY + 0.08, _TH, 0.35, CLEAR], [_TB[3] - 0.12, _TY - 0.02, _TH, 0.6, RED]]
+COUNTER_LIFE['napkins'] += [[_TB[0] - 0.10, _TY - 0.05, _TH, 14.0], [_TB[3] + 0.05, _TY + 0.10, _TH, -8.0]]
+COUNTER_LIFE['matchbooks'] += [[_TB[1] + 0.02, _TY + 0.14, _TH, 33.0]]
+COUNTER_LIFE['coats'] += [[round(_TB[1] + 0.03, 3), round(RP.CHAIR_Y36 + 0.19, 3), 0.78, 180.0, 0.40]]
+JITTER = {'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'jitter',
+          'pull': {'chairs:3': [0.04, -0.20, 18.0], 'chairs:10': [0.06, 0.16, -15.0], 'tubs:0': [-0.08, -0.07, 12.0]}}
 
 VIEWS = {
     # the room from the door at night: standing just inside, by the host stand, down the room's length to the altar
@@ -82,6 +93,7 @@ VIEWS = {
                   'base': 'listening-smoke', 'settings': dict(exposure=4.9, screen_glow=0.003, listen_key=0.8, listen_rim=6.0, altar_w=55.0,
                                                        altar_cone=20.0, altar_z=0.75, niche_strip=0.12, haze=0.007, plinth=0.0,
                                                        orb_pool=9.0),
+                  'leaning': [[round(RP.TUB_TABLES[3][0] + 0.10, 3), round(RP.TUB_TABLES[3][1] + 0.23, 3), RP.ZONE['z'], 200.0, 16.0]],
                   'life': dict(rocks=[[round(RP.TUB_TABLES[3][0] + 0.06, 3), round(RP.TUB_TABLES[3][1] - 0.07, 3),
                                        round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.024, 1, AMBER]],
                                votives=[[round(RP.TUB_TABLES[0][0] + 0.10, 3), round(RP.TUB_TABLES[0][1] - 0.12, 3),
@@ -192,6 +204,10 @@ def shot(view):
             d[vw['base']] = v
     v = new['settings']
     extra = [{'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'life', **vw.get('life', {})}] if vw.get('life') else []
+    if v.get('jitter'):
+        extra.append(dict(JITTER))
+    if vw.get('leaning'):
+        extra.append({'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'leaning', 'sleeves': vw['leaning']})
     if mother:
         extra.append({'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'mother',
                       **(MOTHER_COLOUR if colour else MOTHER), **vw.get('mother', {})})
