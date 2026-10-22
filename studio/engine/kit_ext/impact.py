@@ -28,7 +28,8 @@ small (1 as before). `top_rough` and `side_rough` scale the roughness of the top
 before; E12r p5: "a glossy, slate-like sheen"). `flat_tops` keeps the crumble's tenting off the tops and undersides
 (a road's surface stays flat; E12r p6's tented tops read as "crumpled paper"), and `smooth` shades smooth across edges
 gentler than that many degrees (the tents and the jagged edges' facets read as crystals when flat-shaded). Debris's
-`band` [y0, y1] strews it across the path between those, `inner` clear of the centre line on both sides."""
+`band` [y0, y1] strews it across the path between those, `inner` clear of the centre line on both sides. `rough`
+(slabs, debris) breaks each piece's edges as a fracture does, uneven but whole (see _plate)."""
 import math, random
 
 import bmesh
@@ -78,8 +79,12 @@ def trench(bpy, name, p, kit):
     return kit.finish(bpy, name, bm, q, smooth=True, mat=mat)
 
 
-def _plate(bm, rnd, w, d, t):
-    """An irregular plate: a polygon of 6 to 9 corners, `t` thick, its edges jagged."""
+def _plate(bm, rnd, w, d, t, rough=0.0):
+    """An irregular plate: a polygon of 6 to 9 corners, `t` thick, its edges jagged. With `rough`, a polygon of 10 to 15
+    corners, its top and underside flat, its broken edges a fine grid pushed in and out by a smooth noise up to `rough`
+    of its size (a fracture's face, uneven but whole: the jagged edges' random corners read as crystals)."""
+    if rough:
+        return _rough_plate(bm, rnd, w, d, t, rough)
     k = rnd.randint(6, 9)
     pts = []
     for i in range(k):
@@ -99,6 +104,33 @@ def _plate(bm, rnd, w, d, t):
         v.co.x += sc * 0.08 * rnd.uniform(-1, 1); v.co.y += sc * 0.08 * rnd.uniform(-1, 1)
         v.co.z += t * 0.25 * rnd.uniform(-1, 1)
     return ft, fb, sides
+
+
+def _rough_plate(bm, rnd, w, d, t, rough):
+    v0 = len(bm.verts)
+    k = rnd.randint(10, 15)
+    pts = []
+    for i in range(k):
+        a = 2 * math.pi * (i + rnd.uniform(-0.3, 0.3)) / k
+        r = rnd.uniform(0.75, 1.0)
+        pts.append((w / 2 * r * math.cos(a), d / 2 * r * math.sin(a)))
+    top = [bm.verts.new((x, y, t / 2)) for x, y in pts]
+    bot = [bm.verts.new((x * rnd.uniform(0.92, 1.04), y * rnd.uniform(0.92, 1.04), -t / 2)) for x, y in pts]
+    ft = bm.faces.new(top); fb = bm.faces.new(bot[::-1])
+    sides = [bm.faces.new((top[i], bot[i], bot[(i + 1) % k], top[(i + 1) % k])) for i in range(k)]
+    bmesh.ops.subdivide_edges(bm, edges=list({e for f in sides for e in f.edges}), cuts=3, use_grid_fill=True)
+    bm.verts.ensure_lookup_table()
+    new = [bm.verts[i] for i in range(v0, len(bm.verts))]
+    sc = max(w, d)
+    o = Vector((rnd.uniform(0, 100), rnd.uniform(0, 100), rnd.uniform(0, 100)))
+    for v in new:
+        q = v.co / sc
+        n = noise.noise_vector(q * 3.0 + o) + 0.35 * noise.noise_vector(q * 9.0 + o * 1.7)
+        v.co.x += rough * sc * n.x; v.co.y += rough * sc * n.y
+        if abs(abs(v.co.z) - t / 2) > 1e-6:                        # the edge's face, not the top's or underside's rim
+            v.co.z += 0.12 * t * n.z
+    faces = {f for v in new for f in v.link_faces}
+    return ft, fb, [f for f in faces if f != ft and f != fb]
 
 
 def _place(bm, verts, rot, loc):
@@ -167,7 +199,7 @@ def slabs(bpy, name, p, kit):
         sz = p.get('size', 1.0)
         w, d = sz * (0.25 + 0.45 * rnd.random() ** sp) * (0.5 + f), sz * (0.3 + 0.5 * rnd.random() ** sp) * (0.5 + f)
         before = len(bm.verts)
-        ft, fb, sides = _plate(bm, rnd, w, d, t)
+        ft, fb, sides = _plate(bm, rnd, w, d, t, p.get('rough', 0.0))
         _faces(ft, fb, sides, True, p)
         bm.verts.ensure_lookup_table()
         new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
@@ -217,7 +249,7 @@ def debris(bpy, name, p, kit):
             size = rnd.uniform(0.005, 0.03) * (1.0 - 0.5 * min(1.0, r / reach))
         before = len(bm.verts)
         ft, fb, sides = _plate(bm, rnd, size * rnd.uniform(0.8, 1.6), size * rnd.uniform(0.8, 1.6),
-                               size * rnd.uniform(0.3, 0.6))
+                               size * rnd.uniform(0.3, 0.6), p.get('rough', 0.0))
         bm.verts.ensure_lookup_table()
         new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         _place(bm, new, (rnd.uniform(-40, 40), rnd.uniform(-40, 40), rnd.uniform(0, 360)), (x, y, p.get('z', 0.0) + size * 0.2))

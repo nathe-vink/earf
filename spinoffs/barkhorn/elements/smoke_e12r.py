@@ -48,6 +48,17 @@ either side of its foot, where the low flames lit the pit's floor as two flat or
 whole fire turned 25 degrees: face on, its horn's mouth read as a screen (every read test: "an old CRT television ... on
 top of a dark box"); turned, it shows its flare and its driver, and both blind duels of the two looks chose it ("reads
 as a horn loudspeaker"), its smoke now rising straight up out of the crash.
+
+p7, after proof 6's critics (realism 5 and 5; it beat p5, 7 to 6, but lost both duels with E9, 4 to 6, where p5 had won
+both): the rubble "sharp, faceted, near-black shards ... a heap of coal or low-poly rocks", "thin, clean-edged tan slabs
+... broken plasterboard" (impact.py's rough: each piece's broken edges a fracture's face, uneven but whole; tried close
+up first); "an even, fine dried mud crack pattern ... on a smooth, light pinkish-beige surface" whose "warm tint does not
+fade with distance" (the cracks and dust back to p5's, and the fire's high lamp lower and weaker so its light falls away
+within a metre or two, the low ones stronger); "its horn knocked crooked" (the roll back to p5's); the turned horn on its
+posts "a stage spotlight or a camera on a stand", the woofer hidden (meteor_e: the speaker solved turned, against the
+wind as before, so the smoke leans away right again instead of rising "a mushroom ... an explosion cloud", its face
+quieter so the woofer shows through thinner flames); the embers "identical round dots ... to the top of the frame"
+(longer streaks, each tilted, lower and denser over the fire); and "no heat haze" (finish.haze, the speaker kept still).
 """
 import copy
 import math
@@ -61,13 +72,19 @@ from common import piece, point
 NEAR = [-1.2, 15.0]                  # E10's burning car, across the gouge's line: the speaker is the fire now
 # the torn asphalt (impact.py): black right through, its stones in the broken edges, the sub-base grey under it
 ASPHALT = dict(top_value=0.28, under_tint='#1C1C1C', under_value=0.2, side='asphalt_02', side_value=0.6, top_rough=1.0,
-               side_rough=1.0, flat_tops=True, smooth=30.0)
-TILT = [6.0, -6.0]                   # the speaker pitched forward onto its face as it dug in, and over to its left
-TURN = 25.0                          # the speaker and its fire turned together about its foot (the solve's flow kept),
-                                     # so the horn shows its flare: face on, it read as "a vintage CRT television"
+               side_rough=1.0, flat_tops=True, smooth=30.0, rough=0.07)
+TILT = [6.0, -2.5]                   # the speaker pitched forward onto its face as it dug in, and a little to its left
+                                     # (p6's -6 read as "its horn knocked crooked ... being destroyed rather than arriving")
+TURN = 25.0                          # the speaker turned so the horn shows its flare (face on, it read as "a vintage CRT
+                                     # television"): meteor_e is solved with it so, against the same wind
+# the shimmer over the fire (finish.haze), in each frame's fractions: the rising air either side of and above the
+# speaker, the speaker itself kept still
+HAZE = dict(box=[0.34, 0.2, 0.68, 0.9], px=2.0, scale=6.0, exclude=[[0.42, 0.55, 0.59, 0.93]])
+HAZE_PORTRAIT = dict(box=[0.33, 0.25, 0.68, 0.8], px=2.0, scale=6.0, exclude=[[0.4, 0.54, 0.61, 0.79]])
 WB = (4800, 10.0)                    # the white point: the dusk blue-grey round the fire's warm pool (p4's read pink throughout)
 STRENGTH = 420.0                     # the flames (E12's 220 on a sunlit pan): the cores clip at dusk
-CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_d.npz'   # meteor_c with fire on the speaker's front corners and foot
+CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_e.npz'   # meteor_d with the speaker turned 25 degrees against the wind,
+                                                            # its face quieter so the woofer shows
 
 
 def torn(gouge):
@@ -109,7 +126,7 @@ def marks(deck_len):
     # the char reaches past the fire's hottest light: within a metre and a half its lamps lit the black as bright as the
     # open road (a top-down test without them showed it there), so a scorch that small read as none
     road = dict(module='smoke_el', fn='impact', centre=[0.0, 0.0], char=[1.0, 2.6], jag=0.8, soot=4.5, soot_mix=0.55,
-                cracks=[0.9, 3.8], crack_count=13.0, crack_width=0.02, crack_bump=0.8, dust=[1.6, 5.5], dust_mix=0.65,
+                cracks=[0.9, 3.8], crack_count=13.0, crack_width=0.012, crack_bump=0.6, dust=[1.6, 5.5], dust_mix=0.5,
                 seed=4)
     return [piece('ext', on=f'prop{i}-kit', **road) for i in (0, 1, 3)] + \
         [piece('ext', module='smoke_el', fn='impact', on=f'prop{deck_len}-kit', centre=[0.0, 0.0], char=[0.5, 2.0],
@@ -130,13 +147,15 @@ def firelight():
     # p6: and the fire's whole light from above it, strong, so it reaches the road, the cars and the rubble's rims ten
     # metres off and throws their shadows outward (p5: "the fire lights almost nothing around it"); the low ones weaker,
     # so its pit is no longer a lit tray
-    for k, (x, y, z, w, v) in enumerate([(-0.6, 0.1, 0.55, 350.0, False), (-0.6, 0.1, 1.5, 300.0, False),
-                                         (0.6, 0.15, 0.5, 350.0, False), (0.6, 0.15, 1.4, 300.0, False),
-                                         (0.0, 0.55, 1.3, 500.0, False), (0.0, 0.1, 1.75, 5000.0, False),
+    # p7: lower and weaker (p6's lit the whole foreground evenly, "the warm light covers the whole foreground", read as a
+    # grade and not a fire's light: from lower its light falls away faster), the low ones stronger
+    for k, (x, y, z, w, v) in enumerate([(-0.6, 0.1, 0.55, 500.0, False), (-0.6, 0.1, 1.5, 300.0, False),
+                                         (0.6, 0.15, 0.5, 500.0, False), (0.6, 0.15, 1.4, 300.0, False),
+                                         (0.0, 0.55, 1.3, 500.0, False), (0.0, 0.1, 1.2, 2500.0, False),
                                          (0.0, 0.35, 0.8, 600.0, 'only')]):
         out[f'flame{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK, 3)], w, '#FF7A2E',
-                                      0.5 if w >= 5000.0 or v == 'only' else 0.3),
+                                      0.5 if w >= 2500.0 or v == 'only' else 0.3),
                                 camera=False, transmission=False, specular=0.0, volume=v)
     return out
 
@@ -153,14 +172,11 @@ def shot():
     fire = M.fire(CACHE)
     fire['position'] = [0.0, 0.0, I.SINK]                           # the solve's floor at the speaker's foot
     fire['strength'] = STRENGTH
-    fire['rotate_z'] = fire['rotate_z'] + TURN
     deck = [p for p in I.deck() if p.get('size', [0.0])[0] != 0.03]   # the trench's walls in section: firelit, a pale
     fire['through_glass'] = False                                     # ruled line along the lip (the trench has walls)
-    t = math.radians(TURN)                                            # the embers lean downwind with the smoke
-    lean = [round(0.9 * math.cos(t) - 0.3 * math.sin(t), 3), round(0.9 * math.sin(t) + 0.3 * math.cos(t), 3)]
     embers = piece('scatter', count=45, radius=[0.0012, 0.003], position=[0.0, 0.0, 0.9], material='glow',
-                   color='#FF8A30', emit=60.0, seed=27, plume={'height': 2.5, 'spread': [0.2, 1.2], 'lean': lean,
-                                                              'taper': 0.5, 'power': 2.5, 'streak': 10.0})
+                   color='#FF8A30', emit=60.0, seed=27, plume={'height': 1.8, 'spread': [0.2, 1.0], 'lean': [0.9, 0.3],
+                                                              'taper': 0.5, 'power': 3.0, 'streak': 30.0, 'swirl': 0.35})
     props[:] = deck + torn(I.gouge()) + rest + [fire, embers] + marks(len(deck))
     for k in ('fire0', 'firerim0', 'farfire0', 'farfire1'):
         s['lights'].pop(k)
@@ -174,6 +190,7 @@ def shot():
     s['finish']['grain'] = 3.5                                       # p3: "grain-free and lens-clean"
     s['render']['white_balance_k'], s['render']['white_balance_tint'] = WB
     s['finish']['dream'].update(bloom=0.32, bloom_px=60)               # p5: "no halation, lens glare"
+    s['finish']['dream']['haze'] = HAZE                                # p6: "no heat haze bending the railing behind them"
     _aim(s['camera'])
     s['title'] = 'barkhorn, Smoke E12r, the meteor on the road: the speaker skidded to rest in its gouge, burning'
     return s
@@ -190,6 +207,7 @@ def portrait():
     sh = shot()
     p = B.portrait()
     p['set'], p['lights'], p['product'], p['title'] = sh['set'], sh['lights'], sh['product'], sh['title'] + ' (4:5)'
-    p['finish'] = sh['finish']
+    p['finish'] = copy.deepcopy(sh['finish'])
+    p['finish']['dream']['haze'] = HAZE_PORTRAIT
     _aim(p['camera'])
     return p

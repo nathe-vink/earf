@@ -177,12 +177,41 @@ DREAM = {'bloom': 0.0, 'bloom_px': 40.0, 'bloom_threshold': 0.75, 'saturation': 
          'lift_color': '#000000', 'vignette': 0.0}
 
 
+def haze(rgb, spec):
+    """Heat shimmer over a fire (Smoke E12r: every realism critic, "no heat haze bending the railing behind them"): the
+    frame inside `box` [x0, y0, x1, y1] (fractions from the top left) displaced by a smooth noise up to `px` pixels (at
+    1350 wide) with features `scale` pixels across, strongest at the box's foot (the flames' tips) and fading up it and
+    out to its sides, so the background through the rising air wavers and nothing outside it moves; `exclude` boxes
+    (the same fractions) stay still, feathered, so the product's lines keep true."""
+    h, w = rgb.shape[:2]; k = w / 1350
+    x0, y0, x1, y1 = spec['box']
+    rng = np.random.default_rng(int(spec.get('seed', 11)))
+    sc = spec.get('scale', 6.0) * k
+    dx, dy = (gaussian_filter(rng.standard_normal((h, w)), sc) for _ in range(2))
+    dx /= max(dx.std(), 1e-6); dy /= max(dy.std(), 1e-6)
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float64)
+    u = (xx / w - x0) / max(x1 - x0, 1e-6); v = (yy / h - y0) / max(y1 - y0, 1e-6)    # 0..1 across, 0 top 1 foot
+    across = np.clip(1 - np.abs(2 * u - 1), 0, 1) ** 0.7
+    up = np.clip(v, 0, 1) ** 1.5 * (v <= 1.0) + np.clip(1 - (v - 1) / 0.08, 0, 1) * (v > 1.0)
+    keep = np.ones((h, w))
+    for ex0, ey0, ex1, ey1 in spec.get('exclude', []):
+        keep[int(ey0 * h):int(np.ceil(ey1 * h)), int(ex0 * w):int(np.ceil(ex1 * w))] = 0.0
+    m = gaussian_filter(across * up * (u >= 0) * (u <= 1), 6 * k) * gaussian_filter(keep, 4 * k)
+    a = spec.get('px', 1.5) * k * m
+    from scipy.ndimage import map_coordinates
+    cy = np.clip(yy + a * dy * 0.6, 0, h - 1); cx = np.clip(xx + a * dx, 0, w - 1)
+    return np.stack([map_coordinates(rgb[..., c], [cy, cx], order=1, mode='nearest') for c in range(3)], -1)
+
+
 def dream(rgb, spec):
     """The dioramas' finish (round 31), on a float sRGB frame (0 to 255): a glow round the highlights (those above
-    `bloom_threshold`, spread over `bloom_px` and `bloom_px` / 4, added back in linear light at `bloom`), a vibrance
+    `bloom_threshold`, spread over `bloom_px` and `bloom_px` / 4, added back in linear light at `bloom`; first, with
+    `haze`, the shimmer over a fire, see haze()), a vibrance
     (`saturation`: each pixel's chroma raised by that share, less the stronger it already is), the blacks lifted toward
     `lift_color` by `lift` (the shadows of a print, not of a screen) and a smooth `vignette`."""
     d = {**DREAM, **(spec or {})}
+    if d.get('haze'):
+        rgb = haze(np.asarray(rgb, dtype=np.float64), d['haze'])
     lin = s2l(np.clip(rgb, 0, 255) / 255)
     h, w = lin.shape[:2]; k = w / 1350
     if d['bloom']:

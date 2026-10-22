@@ -16,7 +16,7 @@
     ],
     "tilt": [
      6.0,
-     -6.0
+     -2.5
     ]
    }
   ]
@@ -3298,6 +3298,7 @@
     "side_rough": 1.0,
     "flat_tops": true,
     "smooth": 30.0,
+    "rough": 0.07,
     "crumble": 2.0,
     "spread": 0.7,
     "flip": 0.12,
@@ -3326,6 +3327,7 @@
     "side_rough": 1.0,
     "flat_tops": true,
     "smooth": 30.0,
+    "rough": 0.07,
     "crumble": 0.6
    },
    {
@@ -3372,6 +3374,7 @@
     "side_rough": 1.0,
     "flat_tops": true,
     "smooth": 30.0,
+    "rough": 0.07,
     "crumble": 2.0
    },
    {
@@ -3413,6 +3416,7 @@
     "side_rough": 1.0,
     "flat_tops": true,
     "smooth": 30.0,
+    "rough": 0.07,
     "crumble": 0.6
    },
    {
@@ -3437,7 +3441,8 @@
     "top_rough": 1.0,
     "side_rough": 1.0,
     "flat_tops": true,
-    "smooth": 30.0
+    "smooth": 30.0,
+    "rough": 0.07
    },
    {
     "kind": "kit",
@@ -3461,7 +3466,8 @@
     "top_rough": 1.0,
     "side_rough": 1.0,
     "flat_tops": true,
-    "smooth": 30.0
+    "smooth": 30.0,
+    "rough": 0.07
    },
    {
     "kind": "kit",
@@ -3485,7 +3491,8 @@
     "top_rough": 1.0,
     "side_rough": 1.0,
     "flat_tops": true,
-    "smooth": 30.0
+    "smooth": 30.0,
+    "rough": 0.07
    },
    {
     "kind": "kit",
@@ -3511,7 +3518,8 @@
     "top_rough": 1.0,
     "side_rough": 1.0,
     "flat_tops": true,
-    "smooth": 30.0
+    "smooth": 30.0,
+    "rough": 0.07
    },
    {
     "kind": "kit",
@@ -3535,7 +3543,8 @@
     "top_rough": 1.0,
     "side_rough": 1.0,
     "flat_tops": true,
-    "smooth": 30.0
+    "smooth": 30.0,
+    "rough": 0.07
    },
    {
     "kind": "kit",
@@ -4247,14 +4256,14 @@
     "shape": "ext",
     "module": "plume",
     "fn": "plume",
-    "cache": "renders/2026-10-21/barkhorn/plume/meteor_d.npz",
+    "cache": "renders/2026-10-21/barkhorn/plume/meteor_e.npz",
     "anchor": "solid",
     "position": [
      0.0,
      0.0,
      -0.3
     ],
-    "rotate_z": 75.0,
+    "rotate_z": 50.0,
     "density": 4.5,
     "strength": 420.0,
     "color": "#8F857B",
@@ -4300,18 +4309,19 @@
     "emit": 60.0,
     "seed": 27,
     "plume": {
-     "height": 2.5,
+     "height": 1.8,
      "spread": [
       0.2,
-      1.2
+      1.0
      ],
      "lean": [
-      0.689,
-      0.652
+      0.9,
+      0.3
      ],
      "taper": 0.5,
-     "power": 2.5,
-     "streak": 10.0
+     "power": 3.0,
+     "streak": 30.0,
+     "swirl": 0.35
     }
    },
    {
@@ -4336,13 +4346,13 @@
      3.8
     ],
     "crack_count": 13.0,
-    "crack_width": 0.02,
-    "crack_bump": 0.8,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
     "dust": [
      1.6,
      5.5
     ],
-    "dust_mix": 0.65,
+    "dust_mix": 0.5,
     "seed": 4
    },
    {
@@ -4367,13 +4377,13 @@
      3.8
     ],
     "crack_count": 13.0,
-    "crack_width": 0.02,
-    "crack_bump": 0.8,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
     "dust": [
      1.6,
      5.5
     ],
-    "dust_mix": 0.65,
+    "dust_mix": 0.5,
     "seed": 4
    },
    {
@@ -4398,13 +4408,13 @@
      3.8
     ],
     "crack_count": 13.0,
-    "crack_width": 0.02,
-    "crack_bump": 0.8,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
     "dust": [
      1.6,
      5.5
     ],
-    "dust_mix": 0.65,
+    "dust_mix": 0.5,
     "seed": 4
    },
    {
@@ -4781,7 +4791,7 @@
     -0.336,
     0.25
    ],
-   "power_w": 350.0,
+   "power_w": 500.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -4811,7 +4821,7 @@
     0.519,
     0.2
    ],
-   "power_w": 350.0,
+   "power_w": 500.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -4854,9 +4864,9 @@
    "position": [
     -0.068,
     0.073,
-    1.45
+    0.9
    ],
-   "power_w": 5000.0,
+   "power_w": 2500.0,
    "color": "#FF7A2E",
    "radius_m": 0.5,
    "camera": false,
@@ -4941,7 +4951,25 @@
    "saturation": 0.0,
    "lift": 0.0,
    "lift_color": "#000000",
-   "vignette": 0.25
+   "vignette": 0.25,
+   "haze": {
+    "box": [
+     0.33,
+     0.25,
+     0.68,
+     0.8
+    ],
+    "px": 2.0,
+    "scale": 6.0,
+    "exclude": [
+     [
+      0.4,
+      0.54,
+      0.61,
+      0.79
+     ]
+    ]
+   }
   },
   "grain": 3.5
  }
