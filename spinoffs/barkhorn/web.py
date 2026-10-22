@@ -72,7 +72,8 @@ ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a b
 ELEMENT['amber'] = 'acid_b'   # acid rain on black lava beat the acid spring at Dallol in a blind duel, 2 to 1 (6.3 to 5.4)
 ELEMENT['ice'] = 'fog_b'      # the headland above the fog at dawn beat the summit above a sea of cloud in a blind duel, 3 to 0 (6.7 to 4.7)
 ELEMENT['green'] = 'poison_g5'   # the owner (2026-10-22): "Poison: put the deadly green one live" - death caps and a deer's bones (G5 p4)
-ELEMENT['black'] = 'smoke_e9'    # the owner (2026-10-21): "I wanted bridge smoke" - the bridge, its smoke simulated (E9 p5)
+ELEMENT['black'] = 'smoke_e10'   # the owner (2026-10-22): "Bridge: put the bigger bridge pass live meanwhile" - the overpass
+                                 # at blue hour, a burnt-out car still burning behind it (E10; E9 p5 before it)
 PLACES = {  # where each concept stands: the speaker page leads with it ("Ember on a lava field at blue hour.")
     'ember': 'on a lava field at blue hour, the crust cracked to its glow',
     'dust': 'on rippled sand in the Southwest at golden hour',
