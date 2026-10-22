@@ -69,7 +69,7 @@ VIEWS = {
     'listening': {'title': 'the listening room',
                   'camera': {'position': [12.9, 1.70, 1.15], 'target': [16.6, 3.2, 1.00], 'lens_mm': 32, 'level': True,
                              'fstop': 4.0, 'focus': [15.5, 3.0, 1.0]},
-                  'base': 'listening-smoke', 'settings': dict(exposure=6.0, screen_glow=0.004, listen_key=0.6, listen_rim=4.0, altar_w=35.0,
+                  'base': 'listening-smoke', 'settings': dict(exposure=6.0, screen_glow=0.004, listen_key=0.9, listen_rim=5.0, altar_w=35.0,
                                                        altar_cone=16.0, altar_z=0.8, niche_strip=0.15, haze=0.009),
                   'life': dict(rocks=[[round(RP.TUB_TABLES[3][0] + 0.06, 3), round(RP.TUB_TABLES[3][1] - 0.07, 3),
                                        round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.024, 1, AMBER]],
@@ -98,7 +98,7 @@ VIEWS = {
              'camera': {'position': [round(RP.HOST['x'] + 0.62, 3), round(RP.HOST['y'] + 0.60, 3), 1.45],
                         'target': [1.0, 0.9, 1.0], 'lens_mm': 45, 'level': True,
                         'fstop': 2.8, 'focus': [RP.HOST['x'], RP.HOST['y'], RP.HOST['top'] + 0.04]},
-             'base': 'coins-door', 'settings': dict(exposure=4.8, host_w=10.0, host_cone=12.0, coin_bowl='smoke'),
+             'base': 'coins-door', 'settings': dict(exposure=4.8, host_w=10.0, host_cone=12.0, coin_bowl='smoke', coin_edge='reeded'),
              'retouch': dict(darken={'oak-host': 0.45}),
              'life': dict(matchbooks=[[RP.HOST['x'] + 0.10, RP.HOST['y'] - 0.08, RP.HOST['top'], -18.0],
                                       [RP.HOST['x'] + 0.13, RP.HOST['y'] - 0.06, RP.HOST['top'] + 0.006, 9.0]])},
@@ -108,14 +108,25 @@ VIEWS = {
                'camera': {'position': [-11.0, -2.6, 1.50], 'target': [0.0, 3.05, 2.2], 'lens_mm': 50, 'level': True,
                           'fstop': 8.0, 'focus': [0.0, 3.05, 1.6]},
                'base': 'street', 'settings': dict(exposure=2.3, sky=0.25, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE', wb=3400,
-                                                street_lamp=400.0, etch_glow=0.12, pendant_w=120.0)},
+                                                street_lamp=400.0, etch_glow=0.12, pendant_w=120.0),
+               # the coordinator's p1 note: the street needs life and SF furniture: a street tree at the kerb, a hydrant
+               'assets': [{'model': 'tree_small_02', 'position': [-3.0, -0.7, 0.0], 'rotate': [0, 0, 40]},
+                          {'model': 'fire_hydrant', 'position': [-3.15, 6.7, 0.0], 'rotate': [0, 0, 90]}]},
 }
 
 
 # Mother EARF at the room's hinge, over the aisle between the counter's end and the step (over the listening room the
 # partition's header hid it from the door, look 2): between the beams at 10.51 and 11.73, its foot 2.13 m up so a
 # standing guest walks under it, its top 15 mm under the deck
-MOTHER = dict(centre=[11.12, RP.YC, 2.76], size=1.25, t=0.025, core=0.13, rim=0.22, rim_par=0.5, core_glow=0.05,
+# p2 (the lead, 2026-10-22, from the owner's rainbow notes: "I also don't love the overt rainbow coloring. It's too
+# Castro for SF"): Mother EARF is round 33b's one-colour globe, the same slotted discs in Smoke, whole (no core),
+# see-through, the rims dark and polished, under one hard spot on the beam behind it, so its shadow draws the globe
+# again on the concrete floor down the aisle. Hung 6 cm lower than p1 so the spot fits above it in the beams' depth
+MOTHER = dict(centre=[11.12, RP.YC, 2.70], size=1.25, t=0.025, core=0.0, rim=0.0, tint='#8A888E', radius=0.10,
+              ceiling=RP.CEIL, heading=-35.0)
+MOTHER_SPOT = dict(position=[11.70, RP.YC, 3.15], power_w=220.0, cone_deg=100.0, radius_m=0.004)
+# the multicolour globe of p1 (round 33c), kept as a second variant only (`-colour`)
+MOTHER_COLOUR = dict(centre=[11.12, RP.YC, 2.76], size=1.25, t=0.025, core=0.13, rim=0.22, rim_par=0.5, core_glow=0.05,
               core_w=45.0, ceiling=RP.CEIL, heading=-35.0, radius=0.04)
 
 
@@ -147,8 +158,9 @@ def _base(name):
 
 
 def shot(view):
-    mother = view.endswith('-mother')
-    key = view[:-7] if mother else view
+    colour = view.endswith('-mother-colour')
+    mother = colour or view.endswith('-mother')
+    key = view.split('-mother')[0]
     vw = VIEWS[key]
     b = _base(vw['base'])
     new = {**b, 'camera': dict(vw['camera']), 'settings': {**b['settings'], **ALL, **vw['settings'], 'mother': mother}}
@@ -165,8 +177,20 @@ def shot(view):
     v = new['settings']
     extra = [{'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'life', **vw.get('life', {})}] if vw.get('life') else []
     if mother:
-        extra.append({'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'mother', **MOTHER, **vw.get('mother', {})})
+        extra.append({'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'mother',
+                      **(MOTHER_COLOUR if colour else MOTHER), **vw.get('mother', {})})
+        if not colour:
+            sp = MOTHER_SPOT
+            s['lights']['mother-spot'] = {'type': 'spot', 'position': sp['position'], 'target': MOTHER['centre'],
+                                          'power_w': v.get('mother_spot', sp['power_w']), 'cone_deg': sp['cone_deg'],
+                                          'blend': 0.05, 'radius_m': sp['radius_m'], 'color': 3000, 'camera': False}
     extra.append({'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'retouch', **vw.get('retouch', {})})
+    if v.get('coin_edge'):                       # the coins' reeded edge (the coordinator: they read as jelly sweets)
+        for o in s['set']['props']:
+            if o.get('fn') == 'bowl':
+                o['edge'] = v['coin_edge']
+    for a in vw.get('assets', []):                # scanned CC0 street furniture (Poly Haven)
+        extra.append({'kind': 'kit', 'shape': 'asset', 'res': '1k', **a})
     s['set']['props'] += extra
     s['lights'].update(product_lights(v))
     for k, l in s['lights'].items():             # p2: the Domes' downlights from a larger source, softly edged
@@ -175,7 +199,7 @@ def shot(view):
     for o in s['set']['props']:                  # the Orbs' liners warmer: at #FFDCB8 under the room's 3000 K balance
         if o.get('fn') == 'orb':                 # they read cyan (look 2, r38b's street)
             o.setdefault('materials', {}).setdefault('liner', {})['glow_color'] = v.get('orb_col', '#FFB878')
-    s['title'] = f"Planet EARF, {vw['title']}{' (Mother EARF)' if mother else ''} (round 39)"
+    s['title'] = f"Planet EARF, {vw['title']}{' (Mother EARF, multicolour)' if colour else ' (Mother EARF)' if mother else ''} (round 39)"
     s['size'] = [2400, 1600]
     s['finish'] = dict(FINISH)
     return s
@@ -184,7 +208,7 @@ def shot(view):
 def write(names=None, final=False):
     out = os.path.join(OUT, 'final') if final else OUT
     os.makedirs(out, exist_ok=True)
-    for n in names or list(VIEWS) + ['door-mother', 'listening-mother']:
+    for n in names or list(VIEWS) + ['door-mother', 'door-mother-colour']:
         s = shot(n)
         if final:
             s['render'].update({'samples': 256, 'adaptive': 0.01})

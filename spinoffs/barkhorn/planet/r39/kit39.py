@@ -101,12 +101,15 @@ def mother(bpy, name, p, kit):
     for key, tint, a in DISCS:
         kind = 'm' if key.startswith('m') else 'p'
         M, r = _disc_matrix(kind, a, R)
-        body = K.resin(bpy, DEEP[tint], f'mother-{tint}', radius=p.get('radius', 0.08), rough=0.02)
+        if p.get('tint'):                              # one colour (round 33b's globe): every disc the same cast tint
+            body = K.resin(bpy, p['tint'], f"mother-one-{p['tint'][1:]}", radius=p.get('radius', 0.08), rough=0.015)
+        else:
+            body = K.resin(bpy, DEEP[tint], f'mother-{tint}', radius=p.get('radius', 0.08), rough=0.02)
         glow = p.get('rim', 6.0) * (1.0 if kind == 'm' else p.get('rim_par', 0.45))
-        rim = _add_emission(bpy, body, f'mother-rim-{tint}-{glow}', GLOW[tint], glow)
+        rim = _add_emission(bpy, body, f'mother-rim-{tint}-{glow}', GLOW[tint], glow) if glow > 0 else body
         # built in world coordinates (identity matrices), its materials in place before the slots are cut, so the
         # boolean keeps the rim's index
-        bm = bmesh.new(); _annulus(bm, rc + 0.004 if kind == 'm' else 0.0, r, T)
+        bm = bmesh.new(); _annulus(bm, rc + 0.004 if (kind == 'm' and rc > 0) else 0.0, r, T)
         bmesh.ops.transform(bm, matrix=W @ M, verts=bm.verts[:])
         me = bpy.data.meshes.new(f'{name}-{key}'); bm.to_mesh(me); bm.free()
         me.materials.append(body); me.materials.append(rim)
@@ -134,6 +137,12 @@ def mother(bpy, name, p, kit):
             f.use_smooth = False
         objs.append(ob)
     # the opal core and its lamp (hidden from the camera, from glossy rays and from transmission: Planet's rule)
+    if rc <= 0:                                        # no core: the globe hangs on its cable alone
+        top = p.get('ceiling', 3.40)
+        cb = K.Mesh(f'{name}-cable'); K._cyl(cb.bm, cx, cy, cz + R * 0.766, 0.003, top - cz - R * 0.766, seg=12)
+        K._cyl(cb.bm, cx, cy, top - 0.025, 0.07, 0.025, seg=48)
+        objs.append(cb.object(bpy, K.principled(bpy, 'mother-black', '#121212', rough=0.35, metal=0.6), smooth=True))
+        return objs
     co = K.Mesh(f'{name}-core'); bmesh.ops.create_uvsphere(co.bm, u_segments=64, v_segments=32, radius=rc)
     bmesh.ops.translate(co.bm, verts=co.bm.verts[:], vec=(cx, cy, cz))
     opal = MT.make(bpy, 'mother-opal', 'frosted', {'color': '#F6F2EA', 'absorb': '#F2E8D8', 'roughness': 0.6, 'radius': 0.03,

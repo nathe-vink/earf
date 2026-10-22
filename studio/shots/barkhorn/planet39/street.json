@@ -460,6 +460,38 @@
     "shape": "ext",
     "path": "spinoffs/barkhorn/planet/r39/kit39.py",
     "fn": "retouch"
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "res": "1k",
+    "model": "tree_small_02",
+    "position": [
+     -3.0,
+     -0.7,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     40
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "asset",
+    "res": "1k",
+    "model": "fire_hydrant",
+    "position": [
+     -3.15,
+     6.7,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ]
    }
   ]
  },
