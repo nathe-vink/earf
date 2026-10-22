@@ -18,20 +18,20 @@ MOTHER = (' Hung low over the middle banquette table: Mother EARF, the brand\'s 
           'throws its shadow on the concrete wall: the room\'s centrepiece.')
 FOR = {
     'door': 'the hero of the feature: the whole room from just inside the door at night, as a guest first sees it: the '
-            'banquette and its frosted screens on the right, the zinc racetrack counter under its Dome pendants on the '
+            'banquette and its frosted screens on the right, the zinc racetrack counter under its Hemisphere North pendants on the '
             'left with the record wall and the bar pair behind it, and at the far end, up a step, the listening room with '
             'EARF\'s pair on its altar. Board-formed concrete, fir beams, blackened steel. ',
     'bar': 'a hero: the bar counter, from the banquette\'s end, along the zinc-topped racetrack counter with its fluted '
            'dark-oak front to the back bar: two of EARF\'s speakers raised on oak ledges at counter height in timber-lined '
-           'niches either side of the decks (as Ginza Music Bar\'s Tannoys sit in theirs), EARF\'s record players, the '
-           'record wall with a frosted disc, the Dome pendants low over the zinc; a night\'s glasses, a candle and a coat '
+           'niches either side of the decks (as Ginza Music Bar\'s Tannoys sit in theirs), EARF\'s Mantle record players, the '
+           'record wall with a frosted disc, the Hemisphere North pendants low over the zinc; a night\'s glasses, a candle and a coat '
            'on a chair. ',
     'listening': 'a hero: the listening room, a room within the room up a 200 mm step: low velvet tub chairs and small '
-                 'oak tables with EARF\'s Orb lamps, all facing the altar, where EARF\'s listening pair stands on solid oak '
+                 'oak tables with EARF\'s Core lamps, all facing the altar, where EARF\'s listening pair stands on solid oak '
                  'plinths in a niche lined in Douglas fir; the shell around it. ',
     'decks': 'a detail at the bar: a drink just poured beside the decks (a coupe, the mixing glass it came from, the bottle '
              'open), the request column (a clear tube on a Smoke base where the coins played wait their turn, lit from '
-             'its base), one of EARF\'s record players beyond. ' + COIN,
+             'its base), one of EARF\'s Mantle record players beyond. ' + COIN,
     'bowl': 'a detail at the door: the bowl of coins in EARF\'s eight tints on the host stand inside the door, a coin for '
             'each guest, the door and the shopfront beyond. ' + COIN,
     'street': 'a detail: the shopfront at blue hour from across the street: the blackened-steel shopfront, the name etched '

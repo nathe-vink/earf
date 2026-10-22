@@ -193,8 +193,8 @@ choice is the owner's to overturn.*
 ### What it is
 
 Planet EARF is a 49-person listening bar in a concrete shell in San Francisco: 104 m² (1,116 sq ft) of room, 6.1 m
-across and 17 m deep, 3.4 m to the fir deck. It is EARF's showroom, run as a bar. Four Atmosphere speakers, the Dome
-pendants, the Orb lamps and EARF's record players are all for sale, and all swap tints, so the room is one
+across and 17 m deep, 3.4 m to the fir deck. It is EARF's showroom, run as a bar. Four Atmosphere speakers, the Hemisphere
+North pendants, the Core lamps and EARF's Mantle record players are all for sale, and all swap tints, so the room is one
 configuration of the catalogue on any given night (the house configuration is Smoke).
 
 ### From the door to last call
@@ -204,13 +204,13 @@ configuration of the catalogue on any given night (the house configuration is Sm
   you a seat and puts one coin in your hand: "That's your song."
 - **The bar.** Eight chairs at a zinc-topped racetrack counter with a fluted oak front. Behind it the back bar's record
   wall, the decks between the bar pair (raised on ledges at counter height, Ginza's way), and the request column. The
-  Domes hang low over the zinc; everything else is lit from what you can see.
-- **The banquette.** Along the street wall, four small round tables and a chair opposite each, an Orb on every table,
+  Hemisphere North pendants hang low over the zinc; everything else is lit from what you can see.
+- **The banquette.** Along the street wall, four small round tables and a chair opposite each, a Core lamp on every table,
   the frosted screens above (hands on fogged glass, the dancer, the Arrival-like shell).
 - **The listening room.** Up one 200 mm step, behind the smoked partition: six low tub chairs facing the altar pair,
   side tables between. Quiet is the rule here (a card on each table says so, once). This is where the sessions happen.
 - **Last call.** Called by the record, not by a bell: the selector plays the house's closing side (the same track every
-  night, announced nowhere), the Domes come down a stop over its length, and the coins left in the column are played or
+  night, announced nowhere), the Hemisphere Norths come down a stop over its length, and the coins left in the column are played or
   returned with the bill.
 
 ### The listening programme
@@ -296,8 +296,8 @@ anecdotal); this room sits at the top of that range because of its joinery, acou
 | Acoustic isolation: the listening room's box, the ceiling absorber, door seals, the party walls | $60,000 | $110,000 | (est.) |
 | Joinery: the racetrack counter (zinc top, fluted oak), the back bar, the record wall, the banquette, the altar | $120,000 | $185,000 | (est.) |
 | Acrylic: four frosted screens with displays behind them, the Smoke sink, the request column, 300 coins | $45,000 | $90,000 | research.md: no public price for thick cast acrylic; back-lit onyx runs $120 to $360 a sq ft installed |
-| Lighting: Domes, Orbs, spots and their control | $35,000 | $60,000 | (est.; the companions at cost) |
-| The system: four Atmosphere, amplification, two record players, a rotary mixer, cartridges | at EARF's cost | | not yet priced |
+| Lighting: Hemisphere North pendants, Core lamps, spots and their control | $35,000 | $60,000 | (est.; the companions at cost) |
+| The system: four Atmosphere, amplification, two Mantle record players, a rotary mixer, cartridges | at EARF's cost | | not yet priced |
 | Bar equipment: ice machine, glasswasher, under-counter refrigeration, the bar die | $70,000 | $110,000 | (est.) |
 | Furniture, glassware, the first 4,000 records | $70,000 | $120,000 | records at about $12 to $18 used (est.) |
 | Design, engineering, permits and fees | $60,000 | $100,000 | about 10 % (est.) |
