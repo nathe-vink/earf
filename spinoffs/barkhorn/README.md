@@ -249,6 +249,7 @@ aluminium plug.
 - The colour: the horn beside the cabinet, by eye and on a spectrophotometer, after accelerated UV ageing (round 35).
 - The stress: no crazing at the inserts and the joints after a 48-hour solvent-wipe test (isopropanol) on an annealed
   shot.
+- Emissions: an FCC Part 15 Class B and CE pre-scan of the first pair (the launch-readiness note below).
 
 ### Risks
 
@@ -261,6 +262,28 @@ aluminium plug.
 - **Can the maker cast 6, 10, 20, 30 and 75 mm from one batch?** Ask first. The fallback is the throat block laminated
   from two 30s and a 15, cemented, which would show its joints faintly.
 - **The colour** (above).
+
+### Three notes from the launch-readiness check (the coordinator, 2026-10-22)
+
+- **The FA122's compartment (Hypex's Fusion Manual R4, page 12).** Hypex asks for the module in a separate compartment,
+  either of V-1 material with V-0 layers either side, or all V-0, with conductive parts earthed and 3 mm clearance
+  kept. The material is met: 1.5 mm aluminium, sealed (round 13) and earthed (round 35). Measured in the CAD (the built
+  STEP files): the FA122's module envelope is **18.5 mm** from the compartment's walls at the least (its sides; 20.5 at
+  the ends, 40 at the front), and 41.5 from the glands. One near part is not the enclosure. The HF capacitor, lying on
+  the L-pad's plate, comes **2.0 mm** from the module's envelope at its front. The capacitor's body is insulated, but
+  its leads carry signal and it sits under the 3 mm figure. Making the compartment 3 mm deeper inside (75 to 78) or
+  standing the capacitor on end would clear it; that is for the next CAD pass. The module's envelope is a
+  proportioned block from Hypex's outline (the plate and its recess). Its live parts should be checked against
+  Hypex's drawing, or on the first sample, for the same 3 mm.
+- **The remote's coin cell (US: Reese's Law, 16 CFR 1263).** The Hypex remote runs on a CR2032. Selling it in the US
+  needs a child-resistant battery compartment, the warnings on the product, its packaging and its manual, and a
+  certificate of conformity. Hypex's remote manual has no swallowing warnings. A risk, with three ways out: ship it
+  compliant (our own label, packaging and certificate, if its battery door passes the test); source a compliant remote
+  that sends RC-5 device 16; or leave it out of US boxes, with volume from HFD or the source.
+- **Atmosphere's own compliance.** The FA122's marks do not carry over: Hypex's CE is the module's. The speaker is a
+  digital device in its own right, and needs its own FCC Part 15 Class B test and a supplier's declaration of
+  conformity (SDoC) before it is sold in the US, with CE and UKCA testing for Europe and the UK. This joins the first
+  prototype's list: a pre-scan of radiated and conducted emissions on the first pair, before the pilot.
 
 ### The back tied to the braces
 
