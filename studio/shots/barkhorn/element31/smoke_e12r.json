@@ -4366,7 +4366,7 @@
     "shape": "ext",
     "module": "plume",
     "fn": "plume",
-    "cache": "renders/2026-10-22/barkhorn/plume/meteor_j.npz",
+    "cache": "renders/2026-10-22/barkhorn/plume/meteor_l.npz",
     "anchor": "solid",
     "position": [
      0.0,
@@ -4375,12 +4375,12 @@
     ],
     "rotate_z": 50.0,
     "density": 8.5,
-    "strength": 620.0,
+    "strength": 400.0,
     "color": "#8F857B",
     "anisotropy": 0.4,
     "cool": 1000.0,
     "hot": 2600.0,
-    "flame_floor": 0.42,
+    "flame_floor": 0.3,
     "tongues": 0.9,
     "tongue_scale": 0.07,
     "tongue_edge": [
@@ -4399,7 +4399,7 @@
     "breakup_octaves": 2.0,
     "tongue_octaves": 4.0,
     "seed": 3,
-    "flame_gamma": 2.2,
+    "flame_gamma": 1.5,
     "through_glass": false
    },
    {
@@ -4926,7 +4926,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 38.0,
+   "irradiance": 50.0,
    "color": "#FF9A50",
    "orbit": {
     "azimuth_deg": -150,
@@ -4959,7 +4959,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 26.0,
+   "irradiance": 40.0,
    "color": "#FFB070",
    "orbit": {
     "azimuth_deg": 150,

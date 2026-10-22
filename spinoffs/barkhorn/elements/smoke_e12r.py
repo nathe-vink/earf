@@ -115,17 +115,22 @@ HAZE_PORTRAIT = dict(box=[0.34, 0.15, 0.66, 0.6], px=9.0, scale=4.5, exclude=[[0
 # speaker's own still box, left 0.6 px on the lamp post over the flames: "the pole ... stays ruler-straight and crisp")
 WB = (4800, 4.0)                     # the white point: the dusk blue-grey round the fire's warm pool (p4's read pink
                                      # throughout); the tint off magenta (p7's sky "lavender", its firelight salmon)
-STRENGTH = 620.0                     # the flames (E12's 220 on a sunlit pan): the cores clip at dusk; p13 (p12 B: "two
+STRENGTH = 400.0                     # the flames (E12's 220 on a sunlit pan): the cores clip at dusk; p13 (p12 B: "two
                                      # blown-out vertical sheets") less, so the tongues keep their orange; p17d (p17c A:
                                      # "an even orange glow fills a tall band of the smoke ... no flame to explain it"):
-                                     # with the floor raised and the gamma steeper only the cores burn, so they burn
-                                     # brighter (p17 400, p17b 480, p17c 560)
-CACHE = 'renders/2026-10-22/barkhorn/plume/meteor_j.npz'   # p17 (the owner, 2026-10-22: "too much fire enveloping the
-                                                            # speaker, making the speaker stand out less ... a slightly
-                                                            # smaller fire behind it"): meteor_i, meteor_h with its skins
-                                                            # burning less (back 0.7 over 0.6 m, the right face 0.35, the
-                                                            # edges' floor 0.45; soot 5, flame 0.8) and the fire behind
-                                                            # smaller (half-sizes 0.42, rate 8)
+                                     # 620, with the floor raised and the gamma steeper so only the cores burn (p17 400,
+                                     # p17b 480, p17c 560); p18: p15's again, with its floor and gathering
+FLAME_FLOOR, FLAME_GAMMA = 0.3, 1.5  # p18: p15's (p17d 0.42, 2.2): over the speaker's top the lens sees the flames' upper
+                                     # half, which a higher floor would cut away
+# p18 (p17d, both: "a soft orange haze ... no flames"; the flame map through the lens: the speaker hid all of meteor_j's
+# flame, where p15's meteor_h showed about a tenth, half of it over the top and half up the sides): meteor_l, meteor_j's
+# quiet skins with the fire behind taller (to 1.0 m, meteor_k: still hidden, its flames dying within 0.6 m of the source's
+# top) and its flames longer-lived (0.42 s, was 0.25), so they rise over the speaker's top and nowhere else (on a coarse
+# solve, about p15's share over the top and none up the sides)
+CACHE = 'renders/2026-10-22/barkhorn/plume/meteor_l.npz'
+# p17 (the owner, 2026-10-22: "too much fire enveloping the speaker, making the speaker stand out less ... a slightly
+# smaller fire behind it"): meteor_i, meteor_h with its skins burning less (back 0.7 over 0.6 m, the right face 0.35, the
+# edges' floor 0.45; soot 5, flame 0.8) and the fire behind smaller (half-sizes 0.42, rate 8)
 # p17b (p17's notes check: "a tall, bright column of flame still hugs the left side of the cabinet"; the flame map put
 # 15 % of meteor_i's flame on its back face, which the lens sees on the left): meteor_j, the back face 0.25 over 0.3 m
 # meteor_h (p13 to p16f): meteor_g at half the wind (0.7 m/s), so the smoke rises off every flame and the flames and
@@ -356,7 +361,9 @@ def shot():
     fire.update(tongues=0.9, tongue_octaves=4.0, hot=2600.0, cool=1000.0, flame_gamma=1.5, breakup=0.6)
     # p17d (p17c, both: no flame at the base, the smoke glowing by itself): flames only where the gas burns hard, the light
     # gathered into their cores, so the fire shows as flames at the foot and the smoke above it goes dark within a metre
-    fire.update(flame_floor=0.42, flame_gamma=2.2)
+    # p18 (p17d, both: "a soft orange haze ... no flames"; projected through the lens, the speaker hid all of meteor_j's
+    # flame): meteor_l's flames rise over its top, so the floor and the gathering go back to show them (FLAME_FLOOR)
+    fire.update(flame_floor=FLAME_FLOOR, flame_gamma=FLAME_GAMMA)
     # p15 (p14's notes check: "a wall of flame on the left, a sliver on the right"): the cut and the gathering eased back
     # so the right flank burns again; the hotter core and redder tips kept (p14 beat the live bridge 2-0)
     # p17c (p17b's notes check: "the huge smoke column takes over the frame", "the fire reads as glowing smoke"): the
@@ -399,8 +406,10 @@ def shot():
     # the bounce on the speaker's face is the fire-lit road's now, warm (p3: "a flat, neutral grey light")
     # p17c (p17b: "the darker cabinet hides the woofer"): 3.0 -> 5.5
     s['lights']['bounce'].update(color='#D9A27A', irradiance=5.5)
-    s['lights']['kicker']['irradiance'] = 38.0                       # p9: backlit by the fire behind it
-    s['lights']['kicker_r']['irradiance'] = 26.0
+    # p9: backlit by the fire behind it; p18 (p17d A: "the product has only a faint warm edge even though it sits right in
+    # front of the glow"): brighter (38 and 26), the right more, where meteor_l's flames lean
+    s['lights']['kicker']['irradiance'] = 50.0
+    s['lights']['kicker_r']['irradiance'] = 40.0
     for inst in s['product']['instances']:
         inst['position'] = [inst['position'][0], inst['position'][1], I.SINK]
         inst['tilt'] = TILT

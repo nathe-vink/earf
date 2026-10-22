@@ -1,0 +1,35 @@
+args renders/2026-10-22/barkhorn/plume/meteor_l.npz --dx 0.05 --size 10 7 8 --seconds 12 --dt 0.02 --source 2.64 3.735 0.5 0.42 0.42 0.5 --beta 9 --tau-heat 4 --tau-flame 0.42 --rate 8 --w-src 3.0 --noise 0.25 --eps 3.2 --velocity mc --tau-soot 25 --wind 0.7 --solid 2.2 3.5 0.0 0.315 0.215 1.28 -7 --shell 5 1.0 0.8 2.0 0.5 --shell-shape 0.12 0.25 0.15 0.35 0.12 0.3 0.15 0.5 0.45 0.25 --sponge-k 20
+grid 200 x 140 x 160 = 4.5 M cells, dx 0.05 m, 12.0 s at dt 0.02
+solids: 2912 cells, skin 3024 cells
+step 1/600 t=0.02s  131s elapsed (130.81s/step)  soot max 0.13  top 0.8 m  |w| max 2.0
+step 21/600 t=0.42s  156s elapsed (7.41s/step)  soot max 1.46  top 1.3 m  |w| max 3.5
+step 41/600 t=0.82s  181s elapsed (4.41s/step)  soot max 1.84  top 1.9 m  |w| max 5.6
+step 61/600 t=1.22s  207s elapsed (3.39s/step)  soot max 2.22  top 2.7 m  |w| max 5.1
+step 81/600 t=1.62s  231s elapsed (2.85s/step)  soot max 2.41  top 3.3 m  |w| max 6.1
+step 101/600 t=2.02s  256s elapsed (2.53s/step)  soot max 1.94  top 4.0 m  |w| max 6.1
+step 121/600 t=2.42s  282s elapsed (2.33s/step)  soot max 2.33  top 4.5 m  |w| max 6.0
+step 141/600 t=2.82s  307s elapsed (2.17s/step)  soot max 2.45  top 5.2 m  |w| max 5.6
+step 161/600 t=3.22s  332s elapsed (2.06s/step)  soot max 1.89  top 5.7 m  |w| max 5.6
+step 181/600 t=3.62s  358s elapsed (1.98s/step)  soot max 2.35  top 6.2 m  |w| max 6.4
+step 201/600 t=4.02s  383s elapsed (1.91s/step)  soot max 2.70  top 6.7 m  |w| max 5.2
+step 221/600 t=4.42s  410s elapsed (1.86s/step)  soot max 2.93  top 7.2 m  |w| max 5.7
+step 241/600 t=4.82s  439s elapsed (1.82s/step)  soot max 2.78  top 7.4 m  |w| max 5.6
+step 261/600 t=5.22s  466s elapsed (1.78s/step)  soot max 2.77  top 7.4 m  |w| max 5.0
+step 281/600 t=5.62s  489s elapsed (1.74s/step)  soot max 2.63  top 7.4 m  |w| max 6.0
+step 301/600 t=6.02s  513s elapsed (1.70s/step)  soot max 3.11  top 7.4 m  |w| max 5.8
+step 321/600 t=6.42s  536s elapsed (1.67s/step)  soot max 3.28  top 7.4 m  |w| max 6.0
+step 341/600 t=6.82s  559s elapsed (1.64s/step)  soot max 3.13  top 7.4 m  |w| max 5.8
+step 361/600 t=7.22s  582s elapsed (1.61s/step)  soot max 2.67  top 7.4 m  |w| max 5.8
+step 381/600 t=7.62s  606s elapsed (1.59s/step)  soot max 3.06  top 7.4 m  |w| max 5.5
+step 401/600 t=8.02s  630s elapsed (1.57s/step)  soot max 3.24  top 7.3 m  |w| max 5.6
+step 421/600 t=8.42s  654s elapsed (1.55s/step)  soot max 2.98  top 7.3 m  |w| max 5.6
+step 441/600 t=8.82s  677s elapsed (1.54s/step)  soot max 3.20  top 7.3 m  |w| max 4.8
+step 461/600 t=9.22s  702s elapsed (1.52s/step)  soot max 3.34  top 7.3 m  |w| max 5.2
+step 481/600 t=9.62s  728s elapsed (1.51s/step)  soot max 3.49  top 7.3 m  |w| max 5.3
+step 501/600 t=10.02s  752s elapsed (1.50s/step)  soot max 3.70  top 7.3 m  |w| max 5.5
+step 521/600 t=10.42s  776s elapsed (1.49s/step)  soot max 3.58  top 7.3 m  |w| max 5.4
+step 541/600 t=10.82s  802s elapsed (1.48s/step)  soot max 2.57  top 7.3 m  |w| max 4.8
+step 561/600 t=11.22s  827s elapsed (1.47s/step)  soot max 3.32  top 7.3 m  |w| max 6.0
+step 581/600 t=11.62s  850s elapsed (1.46s/step)  soot max 2.57  top 7.3 m  |w| max 5.8
+step 600/600 t=12.00s  872s elapsed (1.45s/step)  soot max 2.25  top 7.3 m  |w| max 5.6
+wrote renders/2026-10-22/barkhorn/plume/meteor_l.npz in 872s
