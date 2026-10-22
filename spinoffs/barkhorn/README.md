@@ -84,6 +84,243 @@ R's hole, each colour's own cutaway), and makes the cloth read as cloth; it buil
 acrylic, and starts the pictures for a launch, each passed by a critic to a $20,000 product's bar: the studio, the
 speakers lit from below and on a night facade, and each Cloud in its element, photographed in a real place.
 
+## Round 36: the horn as it will be made, and the back tied down (2026-10-22)
+
+The owner, on the horn: "I'd rather the prototype be as close to production as possible. The whole point of a prototype
+is to test production." This round draws the Cloud's horn as it will be made in production: thermoformed from the
+cabinet's own tinted cast sheet, with a turned acrylic throat. It also ties the back to the braces (the review's S1)
+and puts Hypex's remote on the parts list. The horn's air path is unchanged: the simulation approved that profile,
+and the tool is cut to it. The rest of the horn changes, and the biggest visible change is its colour (below). Only
+the Cloud (`cloud.py`) changes; the pressed sheet keeps its resin horn and its gasket.
+
+![The formed horn, Haze, in the studio31 rig](../../renders/2026-10-22/barkhorn/horn36/hero-haze-horn36.png)
+
+![The formed horn close to](../../renders/2026-10-22/barkhorn/horn36/macro-horn-haze-horn36.png)
+
+The same rig, camera and light as the studio set's Haze hero of 2026-10-18 (`renders/2026-10-18/barkhorn/studio31/hero-light-haze.png`, the resin horn), framed 3:2 at 2400 x 1600; the close-up is the set's horn macro, in Haze. Only these two are rendered: the rest of the set waits for the owner to sign the look.
+
+### How it is made, step by step
+
+1. **The sheet.** Cast acrylic 10 mm, tinted in the speaker's colour and cut from the same batch as the cabinet's
+   20 mm sheet. The batch also gives a 6 mm sheet (the pod), a 30 mm sheet (the cap and the pads) and a 75 mm
+   block (the throat piece). A blank is about 820 x 560 per horn. If the sheet has stood unwrapped, it is dried at
+   80 °C overnight (about an hour per millimetre), so that moisture does not boil into bubbles.
+2. **Heating.** The blank is heated in a circulating-air oven at about 170 °C for about 30 minutes, until it is 160 to
+   170 °C all the way through. Cast sheet does not melt. It goes rubbery, and it forms evenly only if it is heated
+   evenly.
+3. **Forming over a male tool, under pressure.** The blank is clamped in a frame, and air blows it into a shallow
+   bubble to pre-stretch it. The tool's plug rises into the bubble and the frame seals on the tool's base. A pressure
+   box then closes over the sheet at 4 bar, while vacuum draws through 0.6 mm vents in the plug, until the sheet is
+   below about 90 °C (5 to 8 minutes). The plug is the horn's air path, so the face that lies on the tool is the face
+   the sound sees, and it is exact. The outside never touches anything, so it keeps the sheet's own gloss.
+
+   Why male and not female: on a female tool (a cavity) the sheet touches the mouth first and thins toward the throat.
+   It would need 12 mm sheet to stay 4 mm thick at the throat. That would leave the mouth about 12 thick, too thick
+   for the 10 mm rim: the side walls meet the mouth's plane at 42°, so a 12 mm wall is 18 wide there. Its air face
+   would also be the free face, so its shape would depend on how the sheet thinned. On a male tool the sheet touches
+   the throat end first and thins toward the mouth. That is where the shape needs it thin, and where 6 mm fits
+   inside the rim.
+4. **Annealing.** About 80 °C for 3½ hours, then slow cooling, so that no forming stress is left where the cement
+   and the inserts go.
+5. **Trimming** on the 5-axis router, on a fixture that copies the plug. The waste nose comes off 40 mm from the
+   throat. The flange left on the tool's base is cut 10 mm outside the mouth, routed full round and polished: that
+   is the 10 mm rim.
+6. **The throat piece** is turned and milled from the 75 mm block of the same batch. Its bore carries the air path
+   from the driver's 51 mm exit to the trim. It has a 12 mm deep socket whose bore is the flare's outside plus
+   0.2 mm for cement. Round the socket is a collar 4 thick, and outside the air path a 7 mm neck rises from the
+   flange on an R10 cove. The flange is the driver's boss (14 thick, four M5 inserts bonded on 170 for the adaptor
+   ring), and its spigot goes into the pod. The flare's end is cemented into the socket with ACRIFIX 2R 0190. Both
+   air faces are cut to the same surface, the throat's on the mill and the flare's on the tool, so they meet with no
+   step. Round 35's limit of 0.5 mm becomes a machining tolerance of about 0.1.
+7. **The pod** is rolled from the 6 mm sheet over a heated mandrel to 200 across. Its seam is scarfed and cemented
+   underneath, between the rear posts. It is annealed, its bore turned true, and the twist-lock's three L-slots
+   milled in it. Then it is cemented over the throat piece's spigot. **The cap** is turned from the 30 mm sheet, its
+   three lugs left on the spigot and milled; it twist-locks as before, with its O-ring.
+8. **The posts' pads** are four pucks, 26 across, turned from the 30 mm sheet. Each top is milled to the flare's (or
+   the pod's) underside and cemented on through a jig taken off the cabinet's sockets. Each foot is 15 below the
+   shell, so the M10 insert (12 deep, bonded) stays wholly in the pad: a 5 to 8 mm wall cannot take an insert. The
+   rear pair are bored through the pod for the HF lead and the tie rod. A small saddle cemented on the pod's floor
+   gives the tie rod's washer a flat seat. The posts, sockets, sleeves, tie rod, adaptor ring and driver are as before.
+9. **Inspection.** Measure the wall with a Hall-effect thickness gauge at 30 points (it reads through clear plastic
+   onto a steel ball). Check the joint by eye and with a feeler. Look over every cemented joint: no visible bubble, as
+   in round 35.
+
+### The wall
+
+| where | the CAD (a shop's rule for a male draw of this ratio) | a membrane model (an upper bound) |
+|---|---|---|
+| the throat end, at the trim | 8.5 | 6.9 |
+| the middle of the flare | 7.2 | 7.3 |
+| the mouth's sides | 6.0 | 6.8 |
+| the mouth's corners (formed last) | **4.9, the thinnest** | about 6 |
+| the flange (the rim) | 6.0 | 6.7 |
+
+The CAD models the thinner of the two estimates (`product.formed_wall`, its shares in `cloud.py`): 0.85 of the sheet
+at the trim, 0.60 at the mouth's sides, and 18 % less again in the mouth's corners. The membrane model assumes the
+sheet locks wherever it touches and the free part stretches evenly; it gives a flatter 6.7 to 7.4. Real thinning can
+only be found on the first shots, so the sheet is chosen to clear 4 mm by 0.9 even on the thinner estimate. The air
+path never moves; the wall's thinning moves only the outside, so the horn's outer size varies by a millimetre or so.
+The first shots are cut open and gauged, and if the corners come out under 4.5 the next sheet is 12 mm.
+
+**Resonance.** The resin horn was a 6 mm polyurethane shell (E about 2 GPa) with a solid neck. The formed horn's walls
+are 6 to 8.5 mm of cast acrylic (E 3.2 GPa), slightly denser. Treating the largest panels as flat plates (which
+ignores curvature, so the numbers are low for both, but the comparison holds):
+
+| panel | resin horn, 6 mm PU | formed horn, cast acrylic |
+|---|---|---|
+| top or bottom wall near the mouth, about 200 x 450 | 120 Hz | 158 Hz (6.6 mm) |
+| side wall near the mouth, about 190 x 260 | 170 Hz | 224 Hz (6.6 mm) |
+| the neck, about 90 x 120 | 772 Hz (inside a solid neck) | 1,270 Hz (8.2 mm) |
+
+The walls are stiffer and about 20 % heavier per square metre, so a given pressure inside the horn moves them less. As a
+whole the horn is lighter, 4.1 kg against 6.0, because the solid neck is gone. Acrylic damps a little less than
+polyurethane (a loss factor of about 0.04 against 0.05 or more). Above the 1 kHz crossover both horns ring in high-order
+modes, driven only by the air in the horn. **No damping is added.** Anything stuck to the wall would show through
+the clear acrylic, and the estimate gives no reason for it. The first sample settles it: an accelerometer on the flare
+at 100 dB/1 m, in third octaves from 800 Hz. If any wall rises within 20 dB of the horn's own output, a clear
+constrained layer goes on the flare's underside, out of sight from the front: a 0.25 mm viscoelastic film (3M ISD 112
+or alike) under a 2 mm acrylic skin cemented at its edges.
+
+### The tint where the wall thins
+
+The horn is now the cabinet's own sheet, so it takes the cabinet's colour per millimetre. The cabinet is tinted to read
+deep through 20 mm, so 5 to 8.5 mm of it is pale. Light crosses the wall once, square to it: through Haze that reads
+about #F1ECF7 at the mouth's corners (4.9 mm), #EEE9F5 at its sides (6), and #E7E0F1 at the throat end (8.5). The
+cabinet reads #CABBDF through 20 mm. The resin horn, tinted deeper so its 6 mm shell matched, read about #8E71B5. Smoke goes
+from #5B5A5D (resin, 6 mm) to about #DDDCDE.
+
+The formed horn deepens toward the throat and pales toward the mouth. It is deepest where it is seen edge-on: along the
+rim and at the silhouette, where light runs 20 to 40 mm through the wall (Haze #CABBDF to #9F88C3). The driver and its
+dark pod show through it more clearly than through the resin. The render shows this from the model's real wall
+thicknesses (the engine's tint is a Beer's-law volume, per millimetre).
+
+**For the owner to decide:** keep the one dye lot (the horn pale, a glass of the cabinet's colour), or cast the horn's
+10 mm sheet from the same dyes at about three times the loading so it reads as deep as the resin horn did. The second
+keeps the same material and the same UV behaviour, but not the same lot, so its colour has to be matched to the
+cabinet's on a swatch.
+
+### The tool
+
+The CAD carries the tool as the option `tooling`, drawn beside the speaker. One set of tooling makes every horn.
+
+- **Production:** the plug is A356 aluminium, cast near shape from a pattern and machined all over on a 5-axis mill to
+  the air path. It is polished, drilled for oil at 85 °C so every shot cools alike, and vented. It bolts to a
+  machined 6061 base plate, 900 x 640 x 40, with the clamp frame's seal groove. The plug is cored in practice:
+  drawn solid it would be about 52 kg. Budget: about $14,500 for the plug and $2,600 for the base (the kit's
+  `tooling` line: $17,272), plus about $2,500 for the trim fixture. **About $20,000.**
+- **The prototype's:** the same plug, cut by the same 5-axis program in high-temperature epoxy tooling board rated
+  above 150 °C, on the production base plate and trim fixture. Budget: about $4,500 for the board plug, plus the base
+  and the fixture, which carry over into production ($5,100). It lasts some tens of shots, enough for the first pair
+  and two or three corrections. It still tests production because everything but the plug's material is
+  production's: the sheet and its batch, the oven, the pressure, the bubble, the plug's geometry, the trim, the throat
+  piece, the cement and the inspection. The board does not cool like oil-heated aluminium, so the first pair's cycle
+  time and the gloss of the inside are not production's. Those are checked on the aluminium plug's first shots, before
+  any horn is sold.
+- **Owner's choice:** go straight to aluminium for the first pair (about $15,000 more up front, and four to six weeks
+  longer to the first horn). That tests the real cycle and gloss from the first shot, but any correction to the plug
+  then means recutting aluminium.
+
+### The cost
+
+| per horn | prototype (one-off rates) | production (batches of about 50) |
+|---|---|---|
+| the 10 mm blank (0.46 m2 of the batch) | $90 | $90 |
+| drying, heating, forming | $250 (a shop's setup per run) | $75 |
+| trim, anneal, polish | $200 | $110 |
+| the throat piece (block, turning, milling) | $450 | $270 |
+| the pod, the cap, the pads, the saddle | $350 | $270 |
+| cement, assembly, inspection | $160 | $90 |
+| **a horn** | **about $1,500** | **about $900** |
+
+The resin horn was about $820 a horn on the kit's rates (its mould spread over a pair), so production costs about
+$80 more a horn. The kit's parts list for a pair (`out-cloud/bom.md`, budget rates) is now $9,540 against round 35's $8,208. Most of the difference is the horn's parts at the kit's rates, plus the bosses, the seal and the remote. Tooling is
+extra: about $9,600 for the prototype's (of which $5,100 carries into production), then about $15,000 more for the
+aluminium plug.
+
+### What the first prototype proves
+
+- The wall: gauged at 30 points on each of the first shots against the table above, ≥ 4 everywhere, and the corners
+  as predicted to within 1 mm.
+- The 10 mm rim: trimmed, routed full round and polished, with no forming marks or webbing in the mouth's corners.
+- The joint: no step on the air face (≤ 0.1 by feeler), and no bubble in the cement.
+- The air path: the plug measured against the CAD, and the horn's response and distortion at 800, 900 and 1,000 Hz
+  (round 35's list).
+- The wall's vibration: the accelerometer test above.
+- The colour: the horn beside the cabinet, by eye and on a spectrophotometer, after accelerated UV ageing (round 35).
+- The stress: no crazing at the inserts and the joints after a 48-hour solvent-wipe test (isopropanol) on an annealed
+  shot.
+
+### Risks
+
+- **Webbing or thinning in the mouth's corners**, which are formed last. Against it: the bubble's size, a ring of
+  slower cooling on the base, and the frame shaped close to the plug. A 12 mm sheet is the fallback.
+- **Mark-off on the inside** from the plug's vents and from dust. The inside is seen through the mouth. Against it:
+  vents only in the waste and the corners, a polished plug, and forming in a clean room.
+- **Springback.** Cast acrylic remembers its flat shape if it is heated again. So the cement is a polymerising one,
+  annealing stays at 80 °C, and no flame polishing is done near the joints.
+- **Can the maker cast 6, 10, 20, 30 and 75 mm from one batch?** Ask first. The fallback is the throat block laminated
+  from two 30s and a 15, cemented, which would show its joints faintly.
+- **The colour** (above).
+
+### The back tied to the braces
+
+- **Bosses.** Four machined acrylic blocks, 36 x 36, each slotted 20 wide and 12 deep over a brace's rear member and
+  cemented, two to each brace, just outboard of the back's two ribs (x 120 and 441, at z 210 and 710). Each reaches
+  back to the plane of the land strips, and its back face is milled flush with theirs in the same setup. An M5 insert
+  bonded in each takes a screw through the back. The back's batt is cut round them (`lining-back-*`), so nothing clashes.
+- **The seal.** A 4 mm EPDM cord, its ends vulcanised into a loop, lies in a groove 5.4 wide and 3.0 deep in the
+  lands, 22 in from the shell, so it is squeezed 25 %. It replaces the 3 mm sponge gasket. The back now seats hard on
+  the lands and the bosses, so the screws' torque no longer sets the seal, and the box's air is held by the cord.
+- **The lands** are 30 wide (25 before) to fit the groove beside the screws. The screws move out to 10 from the
+  shell: 7 up each side and 4 along each end, 18 round the edge, plus 4 into the bosses, **22 in all** (16 before).
+  All are the same M5 x 30 black button heads.
+- By the review's estimate the back's first mode rises from about 100 Hz to about 210 Hz: each of its ribs is now
+  held at both braces as well as at its ends. Measure the panels from 50 to 500 Hz on the first pair, before and after
+  the back is tied (round 35).
+
+### Volume from Hypex's remote
+
+Hypex's own documents (the Fusion manual R4, the IR kit's manual and the remote's):
+
+- **Hypex Remote Control** (H08U001537): infrared, Philips RC-5, device 16. Volume up is code 51, down 52, mute 53,
+  power 50. It comes with its CR2032. One per pair, and not supplied with the amplifier (`hypex-remote`, about €12).
+- **Fusion Remote Kit** (H08U003549), in the master speaker only: an IR receiver board with a bi-colour LED, a 5-pin
+  cable 125 cm to J15 on the FA122's input board, two light pipes and a tinted perspex window (`hypex-remote-kit`,
+  about €25). Hypex: "This set must be used in master devices if the Hypex remote is to be used (remote not
+  included)." Its window needs a place on the back's amplifier plate or in the front. That is to be drawn; on the
+  back, the remote has to be aimed at the speaker from behind.
+- **The second speaker** is a slave on Hypex's link. It is 75 Ω coax between the two FA122s' S/PDIF I/O, under 25 m
+  (`hypex-link-coax`). Hypex: "The master module modulates a communication link on to the S/PDIF I/O." On a slave,
+  "the IR functionality is disabled". Master and slave, and an optional start-up volume, are set in HFD. The volume
+  can also be set from HFD over USB.
+- Prices on hypex.nl show only after a login. The figures are soundimports.eu's (2026-10-22). Hypex documents no
+  learnable or generic remote, only its fixed RC-5 codes.
+
+### The woofer against FaitalPRO's current datasheet
+
+FaitalPRO's 8 Ω sheet (printed 2026-10-22, `components.json`): Fs 35, Re 5.1, Qms 6.0, Qes 0.34, Qts 0.32, Xmax 5.75
+(defined as (Hvc − Hg)/2 + Hg/3), 99 dB 1 W/1 m, AES 400 W, 3.6 kg, 393/356/165. All of those are as held. Changed:
+**Vas 248.9 L** (223), **Sd 857 cm²** (805), **Le 0.72 mH** (0.75), and the bolt circle 374 (375; the panel's holes
+move 0.5 mm). New: Bl 16.7 T m, Mms 85.2 g, Xdamage 15.5, minimum impedance 5.9 Ω, and 3.7 L displaced, now used in
+the net volume (4.5 estimated before).
+
+### The box at 75 W
+
+The FA122 gives 2 x 125 W into 4 Ω, so about 75 W into the 8 Ω woofer (24.5 V). The model is `speaker.box`:
+135.6 L net (135.1 before this round: the bosses, the wider lands and the gasket gone, the woofer's 3.7 L), fb 38 Hz, two 113 mm ports 223 long, the two ports in parallel, and the preset's LR4 high-pass at 28 Hz.
+
+| | the old figures (Vas 223, Sd 805) | Faital's current (Vas 248.9, Sd 857) |
+|---|---|---|
+| f3 | 47.5 Hz | 50.9 Hz |
+| peak excursion at 75 W, with the high-pass | 4.5 mm at 58 Hz | 4.4 mm at 59 Hz (Xmax 5.75) |
+| peak excursion at 75 W, no high-pass | 6.5 mm at 30 Hz | 6.1 mm at 30 Hz, 14.4 at 20 Hz (Xdamage 15.5) |
+| peak air speed in the ports at 75 W, with the high-pass | 9.4 m/s | 9.1 m/s |
+
+With the preset's high-pass in place, the woofer stays inside Xmax at the amplifier's full 75 W, and the ports stay
+well under the 17 m/s or so where a rounded port starts to chuff. That held before as well. Faital's current figures make the
+box a little less deep (f3 51 Hz against 48; round 35's "flat to about 50 Hz" holds) and a little safer. The high-pass is what protects the woofer: without it, 75 W at 20 Hz takes
+the cone to 14.4 mm, close to its 15.5 mm damage limit. It stays in the shipping preset, with the limiter.
+
 ## Round 35: the engineering review, and the owner's calls on it (2026-10-22)
 
 The owner, 2026-10-22: "validate ... that your designs for the speakers, lights, and record player would actually work.
@@ -122,15 +359,15 @@ prototype "as close to production as possible. The whole point of a prototype is
 
 **Decided, drawn next** (each changes what shows through the acrylic, so the speakers are re-rendered once, after all of
 them):
-- **The horn, prototyped as it will be made.** The flare thermoformed from the cabinet's own tinted cast sheet, 6 to 8
+- **The horn, prototyped as it will be made** (drawn in round 36: 10 mm sheet over a male tool). The flare thermoformed from the cabinet's own tinted cast sheet, 6 to 8
   mm, over a machined tool, a turned acrylic throat and boss cemented in; one material and one dye lot with the
   cabinet, the same UV life, and the neck no longer a solid dark mass. The prototype proves the wall's thinning toward
   the mouth, the 10 mm rim, the wall's vibration and the step at the throat (well under 0.5 mm).
-- **The back tied to the braces (S1).** The braces' rear members run to the back on machined bosses, two screws a brace
+- **The back tied to the braces (S1; drawn in round 36).** The braces' rear members run to the back on machined bosses, two screws a brace
   through it; a cord seal in a groove in place of the sponge gasket; 20 to 24 screws. By the review's estimate the
   back's first mode rises from about 100 Hz to about 210.
 - **Phono and volume (the system).** Mantle, the record player, carries a moving-magnet stage with a line out; the
-  speakers take their volume from Hypex's remote.
+  speakers take their volume from Hypex's remote (its parts listed in round 36).
 
 Still to measure on the first pair: the horn's distortion at 800, 900 and 1,000 Hz; the panels from 50 to 500 Hz before
 and after the back is tied; the amplifier's heat after four hours; the horn's colour against the cabinet's after
@@ -3617,9 +3854,9 @@ These are renders of the idea. The materials are procedural (`pressed_eucalyptus
 | a thin walnut shell framing a pale front panel set back in it | The shell (sides, top, bottom, back) is 18 mm birch plywood faced in **bark**, wrapped round its front edges. The front panel is set back 24 mm and painted pale. 24 mm is deep enough for a cover to clear the cone. |
 | a 15 in black cone in a wide off-white ring, its centre a little above the middle | FaitalPRO 15PR400-8 (treated paper cone, 99 dB), flush in its rebate, its centre 45.7 % down. A 6 mm MDF ring 436 across lies over its frame, with pockets behind for the screw heads. |
 | a small square port at the bottom right | A round port in each bottom corner (round 6), 113 across inside, in a 140 square frame printed in one with it in black (round 14, the owner: "cylindrical with square framing around the end"; the Cloud's in its own acrylic, round 15), both its mouths rounded on R8 (round 15). In the pressed cabinet (20 mm, round 15) it is 233 long, the box 131 L net, tuned to 38 Hz, its -3 dB point about 49 Hz in half space before room gain (`.venv-fab/bin/python spinoffs/barkhorn/product.py` for the plywood cabinet's numbers). |
-| a frosted, translucent rounded-rectangle waveguide about 629 x 366 (1.72 : 1), wider than the cabinet, its rim thin, the throat a dark dot near its centre | Since round 4: 626 x 361 outside, a 610 x 346 mouth, a 10 mm rim rounded over. Its flare is 200 deep, with the pod 70 behind it. It is a superellipse waveguide: round at the 1 in throat, squaring toward the mouth (corners about 70), covering about 113 x 82 degrees. It is a 6 mm shell cast in tinted translucent polyurethane, its neck solid, bead-blasted to frost. (Rounds 1 to 3: 633 x 292, read wrongly as 2.1 : 1.) |
+| a frosted, translucent rounded-rectangle waveguide about 629 x 366 (1.72 : 1), wider than the cabinet, its rim thin, the throat a dark dot near its centre | A 610 x 346 mouth with a 10 mm rim, about 630 x 366 outside. Since round 5 its flare is 278 deep from a **2 in** throat (51 across, for the B&C DE1085TN), the pod 130 behind it, so the horn runs the cabinet's full depth. It is a superellipse waveguide: round at the throat, squaring toward the mouth (corners about 70), covering about 113 x 82 degrees. Cast in tinted resin until round 35; from round 36 the Cloud's is thermoformed from the cabinet's own 10 mm tinted cast sheet, its wall 8.5 at the throat end thinning to 6 at the mouth, a turned throat piece and a rolled pod cemented to it. (Round 4's was 200 deep on a 1 in throat; rounds 1 to 3: 633 x 292, read wrongly as 2.1 : 1.) |
 | it stands on four slim posts, a wide pair in front and a narrow pair behind, its rim just above the cabinet | Since round 4, four posts in that layout: stainless lamp tube 10 x 7, screwed M10 x 1 into brass inserts in pads under the horn, their feet standing in brass sockets in the top (round 11), the HF pair inside a rear one; the rim 39 above the top. (Rounds 1 to 3: three rods, 80 clear.) |
-| (not visible) | A B&C DE1085TN-16 compression driver (2 in exit, titanium diaphragm) sits in the pod (round 5). A Hypex FusionAmp FA122 on the cabinet's back, in a sealed compartment of its own (round 13), crosses at about 800 Hz and pads the HF channel about 9 dB. Part of the pad is a passive L-pad after the amplifier, so its hiss stays inaudible. The back comes off (round 14). |
+| (not visible) | A B&C DE1085TN-16 compression driver (2 in exit, titanium diaphragm) sits in the pod (round 5). A Hypex FusionAmp FA122 on the cabinet's back, in a sealed compartment of its own (round 13), crosses at 1 kHz (LR4; round 35) and pads the HF channel about 6 dB (round 35: the 16 ohm driver is 105 dB at 2.83 V). Part of the pad is a passive L-pad after the amplifier, so its hiss stays inaudible. The back comes off (round 14). |
 
 ## The two finishes (proposals)
 
