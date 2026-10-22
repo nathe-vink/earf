@@ -66,7 +66,7 @@ def solve(P_in, lm, eta_out, sink, Ta, R_jc=0.9, R_tim=0.3, R_core=0.2, coupling
 
 # Hemisphere North: the Vero SE 10 (DS120: 350 mA, 26.0 V, 9.1 W, about 1,130 lm at Tc 25 C, 1,020 at 85 C; the half
 # level about 175 mA, 24.5 V, 4.3 W, 575 lm, scaled) behind the reflector (85 % out); fins 80 across, 36 tall, 16 x 1.8
-NORTH = {'1,100 lm (PCD-16-350A)': (9.1, 1100.0), '575 lm (175 mA)': (4.3, 575.0)}
+NORTH = {'1,100 lm (350 mA)': (9.1, 1100.0), '575 lm (175 mA)': (4.3, 575.0)}
 NORTH_SINK = (80.0, 36.0, 16, 1.8, 30.0)
 # Hemisphere South: twice North's light, from a ring board of mid-power LEDs (about 150 lm/W at 2700 K CRI 90 at a
 # moderate current: an estimate for LM301H-class parts); the fins 90 across, 50 tall, 18 x 1.8, hung 60 below the bowl

@@ -443,8 +443,9 @@ NOTES_DOME = [
     'clear wherever it was bonded). Nothing white is seen.',
     'Light: a Bridgelux Vero SE 10 (2700 K, CRI 90) at the top of a 46 bore lined with a reflector, 22 up: the cut-off '
     'about 46 deg from the vertical, and about 85 % of its light out (the black bore passed 52 %). Two levels, the '
-    'owner to choose: about 1,100 lm at the COB on a Mean Well PCD-16-350A (350 mA, 24 to 48 V; the COB runs 26 V, '
-    '9.1 W), or about 575 lm at about 175 mA (4.3 W, driver to source). Dimmed by a phase-cut (TRIAC) dimmer; a 0-10 V '
+    'owner to choose: about 1,100 lm at the COB on a Fulham T1T11200350-15L (350 mA, FCC Part 15B consumer; the COB '
+    'runs 26 V, 9.1 W; the Mean Well PCD-16-350A the bar-only alternate, FCC Part 18 non-consumer), or about 575 lm at '
+    'about 175 mA (4.3 W, driver to source). Dimmed by a phase-cut (TRIAC) dimmer; a 0-10 V '
     'driver for bars that want it.',
     'Heat: the hub\'s fins sit above the shade in room air (an 80 radial extrusion, black); a PEEK ring carries the '
     'bayonet\'s pins, so the hub reaches the shade only through it and 4 to 10 mm of air. Estimated at 1,100 lm in a 35 C '

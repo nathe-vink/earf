@@ -478,7 +478,7 @@
  "orb-adapter": {
   "kind": "power",
   "maker": "any (UL/CE listed)",
-  "model": "A 20 W USB-C PD wall adapter, black, UL 62368-1 / CE listed (bought listed, so the plug-in Orb is a low-voltage lamp)",
+  "model": "A 20 W USB-C wall adapter, black, UL 62368-1 listed, DOE Level VI external power supply: it is part of Core's battery charger system as tested (the DOE standard and California Title 20, listed in the CEC's MAEDbS under Core's model number)",
   "usd": 7,
   "estimate": true,
   "supplier": "any",
@@ -505,18 +505,18 @@
  "_hemisphere": "Round 35 (2026-10-22): Hemisphere North and South, engineered after the review (B1, B2, L1, L2, L4). Datasheet figures from Bridgelux DS120 (Vero SE 10, 2700 K, CRI 90) as found by web search; driver ranges from Mean Well's PCD-16 listings. Prices are estimates unless a URL is given.",
  "north-driver": {
   "kind": "power",
-  "maker": "Mean Well",
-  "model": "PCD-16-350A, constant current 350 mA, 24 to 48 V, 120 V AC in (the A type), phase-cut dimmable (TRIAC, leading and trailing edge), UL 8750 Class 2, 84 x 57 x 29.5: in the canopy. The Vero SE 10 at 350 mA runs 26.0 V typical (DS120), inside the window: about 9.1 W, about 1,100 lm at Tc 25 C (1,020 at Tc 85 C). The 1,100 lm level",
-  "usd": 19.0,
+  "maker": "Fulham",
+  "model": "T1T11200350-15L: constant current 350 mA, 15 W, 120 V in, one channel, leading- or trailing-edge TRIAC dimming 100 % to 10 %, Class 2 output, FCC Part 15B consumer (spec sheet). The 1,100 lm level for homes and bars: the Vero SE 10 at 350 mA runs 26.0 V, 9.1 W [UNCONFIRMED: its output voltage window covers 26 V; power factor at 9 W (60 % load) for JA8's 0.90]",
+  "usd": 25.0,
   "estimate": true,
-  "supplier": "TRC Electronics or Digi-Key",
+  "supplier": "Fulham distributors",
   "price_date": "2026-10-22",
-  "note": "The review's B1: the PCD-16-700B (16 to 24 V, 180 to 295 V in) could not light the COB. FCC Part 18 non-consumer per the review: confirm for home sales"
+  "url": "https://www.fulham.com/PDFs/SpecSheets/T1T11200350-15L-2015-551.pdf"
  },
  "north-driver-575": {
   "kind": "power",
   "maker": "to choose",
-  "model": "A Class 2 constant-current driver at about 175 mA, 22 to 30 V window, 120 V AC in, phase-cut dimmable, FCC Part 15 B (consumer): the Vero SE 10 at about 175 mA runs about 24.5 V, about 4.3 W, about 575 lm (scaled from DS120: the 350 mA row less 2 % efficacy gain at half current, an estimate). The 575 lm level. Mean Well's PCD-16 starts at 350 mA, so the part is open",
+  "model": "A Class 2 constant-current driver at about 175 mA, 22 to 30 V window, 120 V AC in, phase-cut dimmable, FCC Part 15 Class B (consumer), dimming to 10 % or below, PF 0.90 or more at its load (JA8): the Vero SE 10 at about 175 mA runs about 24.5 V, about 4.3 W, about 575 lm (scaled from DS120: the 350 mA row less 2 % efficacy gain at half current, an estimate). The 575 lm level. Mean Well's PCD-16 starts at 350 mA, so the part is open",
   "usd": 22.0,
   "estimate": true,
   "supplier": "to find",
@@ -609,7 +609,7 @@
  "core-cells": {
   "kind": "power",
   "maker": "any reputable LiFePO4 maker (to qualify: A123/Lithium Werks, EVE, Lishen)",
-  "model": "Three LiFePO4 26650 cells (IFR26650), about 3,000 mAh at 3.2 V each, in parallel (1S3P): about 29 Wh; about 2,000 cycles to 80 % (several times ordinary Li-ion's 500 or so); each to IEC 62133-2 and UN 38.3",
+  "model": "Three LiFePO4 26650 cells (IFR26650), about 3,000 mAh at 3.2 V each, in parallel (1S3P): about 29 Wh; about 2,000 cycles to 80 % (several times ordinary Li-ion's 500 or so); each to IEC 62133-2 and UN 38.3 (a UN 38.3 test summary from the cell maker). Each cell about 9.6 Wh (at most 20 Wh) and the set about 29 Wh (at most 100 Wh): Core ships under the small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment), not as fully regulated Class 9",
   "usd": 12,
   "estimate": true,
   "supplier": "a battery distributor",
@@ -627,8 +627,8 @@
  "core-board": {
   "kind": "control",
   "maker": "to make (a contract PCB house)",
-  "model": "Core's board: a USB-C sink (5 V 3 A, no PD needed; a PD sink optional), a LiFePO4 charger with power path (TI BQ25171 kind, or Microchip MCP73123 kind: 3.6 V full, the lamp runs while it charges), a charge limit at about 3.45 V (about 90 %) by default with a full-charge mode, a battery protector (over/under voltage, over current, short circuit) and a fuel gauge, charging held off below 0 C and above 45 C by the cells' NTC; the two-channel warm-dim LED driver (2200 to 2700 K, about 2.5 W) and the capacitive touch on the ring",
-  "usd": 28,
+  "model": "Core's board: a USB-C sink (5 V 3 A); a switching LiFePO4 charger with power path, Analog Devices LTC4162-F (synchronous step-down, 1 to 9 LFP cells, up to 3.2 A, I2C telemetry and termination: no trickle charge at rest, so the maintenance power stays low for the DOE battery-charger limits and Title 20); a charge limit at about 3.45 V (about 90 %) by default with a full-charge mode; a battery protector (over/under voltage, over current, short circuit) and a fuel gauge, charging held off below 0 C and above 45 C by the cells' NTC; the two-channel warm-dim LED driver (2200 to 2700 K, about 2.5 W) and the capacitive touch on the ring",
+  "usd": 34,
   "estimate": true,
   "supplier": "a PCB assembler, about 500 off",
   "price_date": "2026-10-22"
@@ -650,5 +650,15 @@
   "estimate": true,
   "supplier": "McMaster-Carr or alike",
   "price_date": "2026-10-22"
+ },
+ "north-driver-pcd16": {
+  "kind": "power",
+  "maker": "Mean Well",
+  "model": "PCD-16-350A, constant current 350 mA, 24 to 48 V, 120 V AC in (the A type), phase-cut dimmable (TRIAC, leading and trailing edge), UL 8750 Class 2, 84 x 57 x 29.5: in the canopy. The Vero SE 10 at 350 mA runs 26.0 V typical (DS120), inside the window: about 9.1 W, about 1,100 lm at Tc 25 C (1,020 at Tc 85 C). The 1,100 lm level. Kept as the bar-only alternate: its datasheet lists FCC Part 18 non-consumer (A type), a risk for homes (Part 15 Class B)",
+  "usd": 19.0,
+  "estimate": true,
+  "supplier": "TRC Electronics or Digi-Key",
+  "price_date": "2026-10-22",
+  "note": "The review's B1: the PCD-16-700B (16 to 24 V, 180 to 295 V in) could not light the COB. FCC Part 18 non-consumer per the review: confirm for home sales"
  }
 }

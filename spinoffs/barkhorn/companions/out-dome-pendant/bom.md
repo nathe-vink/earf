@@ -19,17 +19,17 @@
 | gland | lathe | 1 | Cast acrylic tube, tinted through | 50 x 50 x 24 | 47.40 |
 | cord | buy | 1 | any (UL listed) Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip in the cap and one in the canopy, the pair tested to hold the fixture (UL 1598's cord-support test: confirm the load with the lab) |  | 16.00 |
 | canopy | lathe | 1 | Cast acrylic tube, tinted through | 160 x 160 x 60 | 106.44 |
-| driver | buy | 1 | Mean Well PCD-16-350A, constant current 350 mA, 24 to 48 V, 120 V AC in (the A type), phase-cut dimmable (TRIAC, leading and trailing edge), UL 8750 Class 2, 84 x 57 x 29.5: in the canopy. The Vero SE 10 at 350 mA runs 26.0 V typical (DS120), inside the window: about 9.1 W, about 1,100 lm at Tc 25 C (1,020 at Tc 85 C). The 1,100 lm level |  | 19.00 |
+| driver | buy | 1 | Fulham T1T11200350-15L: constant current 350 mA, 15 W, 120 V in, one channel, leading- or trailing-edge TRIAC dimming 100 % to 10 %, Class 2 output, FCC Part 15B consumer (spec sheet). The 1,100 lm level for homes and bars: the Vero SE 10 at 350 mA runs 26.0 V, 9.1 W [UNCONFIRMED: its output voltage window covers 26 V; power factor at 9 W (60 % load) for JA8's 0.90] |  | 25.00 |
 | plunger | buy | 1 | Kipp or Misumi A stainless ball spring plunger M5, light force (about 10 N), threaded into the hub: the bayonet's detent, clicking into a dimple in the collar |  | 4.50 |
 | listing | buy | 1 | UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run |  | [PRICE] |
 
 | | USD |
 |---|---|
-| buy | 62 |
+| buy | 68 |
 | extrusion | 14 |
 | formed | 3,959 |
 | lathe | 506 |
-| total | 4,541 |
+| total | 4,547 |
 
 No price yet for: UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run.
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

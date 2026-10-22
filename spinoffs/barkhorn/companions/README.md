@@ -1007,8 +1007,8 @@ about 145.
 **Recommendation: 575 lm.** It gives about 370 lux across the table, twice the 100 to 200 lux dining target and
 enough to read a menu, at half the heat. 1,100 lm is office-level light, worth having only behind a dimmer.
 
-Its 175 mA driver is still to be found. If none turns up, ship the Mean Well PCD-16-350A (1,100 lm, in stock) and
-specify a dimmer. This is the owner's call from the sheet. South follows at twice: about 1,150 lm.
+Its 175 mA driver is still to be found. If none turns up, ship the 1,100 lm level on the Fulham T1T11200350-15L (a
+consumer-class 350 mA driver) and specify a dimmer. This is the owner's call from the sheet. South follows at twice: about 1,150 lm.
 
 **A correction to the review's B1 numbers.** The 575 lm option came from the review's figures. Bridgelux's own table
 (DS120) gives the Vero SE 10 at 2700 K, CRI 90 as follows **[UNCONFIRMED: the tables as quoted by web search; the
@@ -1029,8 +1029,10 @@ pass with no clashes).
 
 **B1, the driver.** It is chosen from the COB's forward voltage at the current wanted. Both levels are ready
 (`components.json`):
-- **1,100 lm:** `north-driver`, Mean Well PCD-16-350A. 350 mA, a 24 to 48 V window; the COB runs 26 V and 9.1 W.
-  It takes 120 V and is UL 8750 Class 2.
+- **1,100 lm:** `north-driver`, the Fulham T1T11200350-15L. 350 mA, 15 W, 120 V in, Class 2, TRIAC dimming 100 % to
+  10 %, and FCC Part 15B consumer on its spec sheet. The COB runs 26 V and 9.1 W **[to confirm: its output window
+  covers 26 V]**. The Mean Well PCD-16-350A (`north-driver-pcd16`, 24 to 48 V) is the bar-only alternate: its
+  datasheet lists FCC Part 18 non-consumer (launch readiness, below).
 - **575 lm:** `north-driver-575`, about 175 mA, 22 to 30 V, phase-cut and consumer class **[the part is open]**.
 - **0-10 V:** `north-driver-010v`, a 0-10 V driver at 350 mA, for bars that dim that way **[to confirm]**.
 
@@ -1082,8 +1084,8 @@ below 50 °C at either level, even in a 35 °C room.
 3. **The rooms.** An environmental chamber, or a closed room, held at 25 °C and at 35 °C, still air. The fixture
    hangs at its standard 600 mm drop, 300 mm below a ceiling panel.
 4. **Settings.**
-   - Full output on each driver: the PCD-16-350A, and the 575 lm driver once it is chosen.
-   - Then the PCD-16-350A at its dimmer's lowest setting. Phase-cut dimmers can heat a driver at low conduction
+   - Full output on each driver: the Fulham T1T11200350-15L, and the 575 lm driver once it is chosen.
+   - Then the Fulham at its dimmer's lowest setting. Phase-cut dimmers can heat a driver at low conduction
      angles.
 5. **Logging.** Every minute until stable: less than 1 K change in 30 minutes, and at least 4 hours.
 6. **Pass.**
@@ -1261,15 +1263,58 @@ step if the owner wants these frames on the site.
 - **The site's images are now out of date.** The renders in `renders/2026-10-19/barkhorn/lamps-site/` show round
   32f's Dome (no fins) and Orb (the low base, and the cartridge frame). The site isn't this round's to change.
 
+### Launch readiness (the coordinator's check, 2026-10-22)
+
+These are decisions, with numbers. The sources are in `spinoffs/barkhorn/launch/launch-readiness.md` on r32-site-shop.
+
+1. **Core's battery ships under the small-battery exception.**
+   - **The limits** (49 CFR 173.185(c); PHMSA's guide): at most 20 Wh a cell and 100 Wh a battery.
+   - **Core's cells:** three LiFePO4 26650s at about 3.0 Ah × 3.2 V, about **9.6 Wh each**, about **29 Wh** together.
+     So it ships as UN3481, contained in equipment, with the lithium battery mark, not as fully regulated Class 9.
+     No resizing is needed: the cartridge's single 22 Wh pouch was the problem, and it is gone.
+   - **Runtime:** about **11.5 hours at the bar setting** (2 W) and 9 at full brightness (2.5 W), at the default 90 %
+     charge limit; about 13 and 10.5 at a full charge.
+   - **The cells:** UN 38.3-tested, with the maker's test summary on file (`core-cells`).
+2. **Core's charger is a battery charger system under the DOE standard and California Title 20.**
+   - **The topology:** a switching charger. The board uses Analog Devices' **LTC4162-F**, a synchronous step-down
+     charger for 1 to 9 LiFePO4 cells, up to 3.2 A, with power path and I2C telemetry. A linear charger from 5 V to
+     3.6 V would waste about 30 % as heat.
+   - **Low energy at rest:** charging ends on termination with no trickle charge, and the power path runs the lamp
+     from USB-C while it charges.
+   - **The adapter** in the box is a DOE Level VI external power supply and is tested as part of the system.
+   - **The listing:** the system is to be listed in the CEC's MAEDbS under Core's model number **[NOT YET TESTED;
+     the adapter's no-load power and the charger's maintenance power are the numbers to measure]**.
+3. **North's driver for homes: FCC Part 15 Class B.**
+   - **The risk:** the Mean Well PCD-16's datasheet lists "FCC part 18 non-consumer equipment (A type only)".
+   - **The choice:** the standard driver is now the **Fulham T1T11200350-15L** (350 mA, 120 V, TRIAC 100 to 10 %,
+     Class 2, FCC Part 15B consumer on its spec sheet). The PCD-16-350A is kept for bars only.
+   - **Before the listing:** a conducted-emissions pre-scan of the whole fixture with each driver. The 575 lm driver,
+     still to source, must claim Part 15 Class B too.
+4. **JA8, for California homes.** Against each requirement:
+
+| JA8 | North | |
+|---|---|---|
+| CRI 90 or more | 90 (the Vero SE 10 -D-73 bin) | met by the bin |
+| R9 50 or more | 50 minimum for Bridgelux's 90 CRI parts, ±3 | **at the limit**: specify R9 ≥ 50 on the order, or a higher-R9 bin if Bridgelux offers one **[UNCONFIRMED]** |
+| 4000 K or less | 2700 K | met |
+| dims to 10 % or below | the Fulham: 100 % to 10 % | **at the limit**: to test with the listed dimmers |
+| flicker under 30 % | not published | **to test** at 100 %, 20 % and 10 % |
+| power factor 0.90 or more | not published at 9 W (60 % of the Fulham's 15 W) | **to test**; at 575 lm (4.3 W) a 15 W driver may fall short, so its driver must be sized to the load |
+| 45 lm/W or more | about 87 lm/W at 1,100 lm (935 lm out of about 10.7 W in), about 96 at 575 lm (490 out of about 5.1 W), with the reflector | met with margin (with the black bore, about 54 and 59) |
+
+North can pass JA8 by design. Four items must be confirmed by test or order: R9, the 10 % dimming, the flicker and the
+power factor.
+
 ### What the owner must decide
 
-1. **North's level:** 575 lm (recommended; its driver to source) or 1,100 lm (the PCD-16-350A, in stock; with a
+1. **North's level:** 575 lm (recommended; its driver to source) or 1,100 lm (the Fulham T1T11200350-15L; with a
    dimmer). South follows it at twice: 1,150 or 2,200 lm.
 2. **Whether to fit the reflector.** It is a proposal: about 1.6 times the light for the same heat, and the same
    cut-off.
 3. **Core's taller base** (48 mm, was 30): it is what lets the cells lie under the LED.
 4. **The prices** above.
-5. **For home sales:** a consumer-class (FCC Part 15 B) phase-cut driver, or 0-10 V only.
+5. **For home sales:** the Fulham (FCC Part 15B consumer) as the standard driver, with the PCD-16-350A for bars only,
+   or a pre-scan to Part 15 Class B if the PCD-16 is kept.
 
 **Still open:**
 - the 575 lm driver;
