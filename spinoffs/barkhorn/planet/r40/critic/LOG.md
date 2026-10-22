@@ -41,3 +41,21 @@ Read test p2: all three renders ("faceless mannequins", "smooth, featureless blu
 
 p2 is worse than p1 everywhere. The procedural figures are the binding limit: sharp, they read as mannequins; blurred,
 as composited ghosts. p3 (the last round per frame) goes back to p1's framing, keeps the figures few and dark, in shadow.
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| p3 | door-mother | 5.0 | 5.0 | 5.0 | 6.8, 7.0 | the altar dim; the globe a black cage; floor brightest with hard shadows; Orbs white plates; figures "grey clay" |
+| p3 | bar | 4.5 | 4.5 | 4.5 | 6.5, 7.0 | figures "grey untextured clay mannequins"; white wedge in the niche; zinc a flat grey plane |
+| p3 | listening | 5.0 | 4.0 | 4.5 | 6.8, 6.5 | the guest a mannequin with floating legs; the near chair crushed; floor flat; speakers darker than the fir |
+
+Read test p3: all three renders ("smooth featureless mannequins").
+
+| frame | ab | ba | result |
+|---|---|---|---|
+| door-mother | r39, clear | r39, clear | round 39 2–0 |
+| bar | r39, clear | r39, clear | round 39 2–0 |
+| listening | r39, slight | r39, clear | round 39 2–0 |
+
+Three rounds per frame reached. No frame reached 6 on both critics, so none was rendered at full size. Kept per frame:
+door, round 39's finals/door-mother (it won every duel); bar and listening, round 40's p1 proofs (they beat round 39's
+best 2–0; no later pass beat them).
