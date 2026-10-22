@@ -60,7 +60,7 @@ BAR_PEOPLE = [
     person(1, 'stool', [cx(5), YS - 0.12, 0], 96, 0.76, head=[0.26, 0.14, 0.03, 45.0]),   # turned to talk
     person(2, 'stool', [cx(7), YS, 0], 84, 0.76),
     person(3, 'pour', [5.05, 5.00, 0], -90, move=[0.30, 0.04, 0.0], spin=14.0, arms=[0.35, 0.10, 0.18, 40.0],
-           head=[0.32, 0.06, 0.04, 30.0], cloth='#1A1918', sleeve='#C8C2B6'),                    # the bartender, mid-pour
+           head=[0.32, 0.06, 0.04, 30.0], cloth='#1A1918', sleeve='#7A7064'),                    # the bartender, mid-pour
     person(4, 'decks', [6.95, 4.98, 0], -90, move=[0.08, 0.04, 0.0], spin=8.0, arms=[0.22, 0.14, 0.08, 30.0],
            head=[0.10, 0.05, 0.12, 25.0]),                                                        # the selector
 ]
