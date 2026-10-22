@@ -1,0 +1,53 @@
+{
+ "shot": "studio/shots/barkhorn/element31/smoke_e10.json",
+ "image": "renders/2026-10-18/barkhorn/element31/smoke_e10.png",
+ "seconds": {
+  "render_total": 14911.8
+ },
+ "samples": 128,
+ "size": [
+  2400,
+  1600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "strips": 8,
+ "strip_seconds": [
+  276.2,
+  390.5,
+  423.2,
+  606.4,
+  2610.2,
+  6292.6,
+  2305.6,
+  2007.1
+ ],
+ "finish": {
+  "white_in": 240,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.2,
+   "bloom_px": 40,
+   "bloom_threshold": 0.7,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.25
+  },
+  "grain": [
+   2.5,
+   1.0
+  ],
+  "gain": 1.0
+ },
+ "note": "rendered in horizontal strips (resumable across container restarts), stitched raw, finished once"
+}
