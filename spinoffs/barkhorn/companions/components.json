@@ -501,5 +501,78 @@
   "estimate": true,
   "supplier": "Mill-Max",
   "price_date": "2026-10-20"
+ },
+ "_turntable_float": "Float, the record player (round 34): parts added on top of Cumulus's, from web searches of 2026-10-22 (search snippets; confirm on the page before ordering)",
+ "float-bushings": {
+  "kind": "isolation",
+  "maker": "Isolate It (Sorbothane Inc.)",
+  "model": "Sorbothane vibration isolation bushings, 30 duro, 0.28 in ID x 0.72 in OD x 0.22 in thick (7.1 x 18.3 x 5.6), a 12-pack: two at each post (eight), one over and one under the base on the M6 bolt; about 1.8 kg on each (77 kPa), so the plinth sits at roughly 15-20 Hz, under the arm and cartridge's 10 Hz only by a factor of two: confirm on the maker's load chart and by a tap test",
+  "usd": 25,
+  "supplier": "Isolate It ($24.95, a reseller's listing)",
+  "price_date": "2026-10-22"
+ },
+ "float-bolts": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Four M6 x 70 stainless socket cap bolts, four 18 mm stainless washers, four M6 nyloc nuts (the float's hold-downs, snug only)",
+  "usd": 8,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-22"
+ },
+ "levelling-feet": {
+  "kind": "hardware",
+  "maker": "any (Essentra, Kipp, Elesa kind)",
+  "model": "Four levelling feet, M6 x 20 stud, 30 mm base with an anti-slip rubber pad, the stud into M6 brass inserts bonded into the base",
+  "usd": 24,
+  "estimate": true,
+  "supplier": "any industrial supplier",
+  "price_date": "2026-10-22"
+ },
+ "cover-hinges": {
+  "kind": "hardware",
+  "maker": "Pro-Ject",
+  "model": "Replacement dust cover hinge for Debut series (rp-611), two: friction hinges that hold the lid open at any angle, a spring blade clamped to the lid's back wall, the foot in a slot (here a pocket in an acrylic block on the plinth's back edge)",
+  "usd": 34,
+  "supplier": "Turntable Lab ($16.95 each; listed as coming soon)",
+  "price_date": "2026-10-22",
+  "url": "https://www.turntablelab.com/collections/pro-ject-alpha/products/pro-ject-replacement-dust-cover-hinge-for-debut-series-turntables-c1303580",
+  "note": "Debut lids are about 3-4 mm and weigh about 1.2 kg; ours is 6 mm and about 2.9 kg: confirm the hinges' torque holds it, or take Technics-pattern hinges (2-pack $15.99) and add a counterspring"
+ },
+ "led-strip-float": {
+  "kind": "light",
+  "maker": "Ledco",
+  "model": "LCLS24V-24W-27K-IP22: 24 V, 4.8 W/m, 8 mm, 2700 K, CRI 90+, dimmable, 5 m roll (1.42 m used, in four straight runs standing in the base's slot, facing out)",
+  "usd": 58,
+  "supplier": "Ledco (CAD 79.95 the 5 m roll)",
+  "price_date": "2026-10-22",
+  "url": "https://bup.ledco.ca/en/products/led-strip-indoor-24v-5w-ip22",
+  "note": "CRI 90+, not 95: the colour seen is the tint's, but if 95 is wanted, Waveform's CENTRIC WARM is 95+ at about three times the power a metre, which this slot would not take at full (see the heat note)"
+ },
+ "led-adapter-float": {
+  "kind": "power",
+  "maker": "Mean Well",
+  "model": "GST25A24-P1J desktop adapter, 24 V DC 1.04 A (25 W), level VI, IEC C8 inlet, 2.1 mm plug; UL/cUL 62368-1 listed, a Class 2 / limited power source (the strip draws 6.8 W)",
+  "usd": 19,
+  "supplier": "IBS Electronics ($19.42)",
+  "price_date": "2026-10-18"
+ },
+ "float-dimmer": {
+  "kind": "control",
+  "maker": "LEDSupply",
+  "model": "Single Color Mini Rotary Dimmer, 12-24 V DC PWM, in its own housing, in line on the 24 V lead behind the record player (2.1 mm in and out), on/off at the end of its turn",
+  "usd": 9,
+  "supplier": "LEDSupply ($8.84)",
+  "price_date": "2026-10-18",
+  "url": "https://ledsupply.com/led-dimmers/mini-rotary-knob-dimmer"
+ },
+ "float-fixings": {
+  "kind": "hardware",
+  "maker": "any",
+  "model": "Brass threaded inserts (4 M6 for the feet, 4 M6 for the posts' bolts, 4 M4 for the hinge blocks, 3 M4 for the bearing's flange), M4 stainless button screws, two clear Heyco-kind cord grips (motor and light), 3M Bumpon SJ5302 clear x 6 under the lid's walls",
+  "usd": 22,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-22"
  }
 }
