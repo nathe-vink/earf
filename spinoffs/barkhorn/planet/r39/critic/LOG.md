@@ -37,3 +37,32 @@ architectural-visualization look"; the bowl "fairly photoreal".
 
 Three rounds per frame reached (the studio's limit): the finals take p3's consensus fixes and are judged once more.
 Read test p3: all seven renders again ("repeated identical furniture", "CG-style shadows").
+
+## Finals (2400 × 1600, 192 samples), two blind critics each
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| final | door-mother (Smoke globe) | 5.5 | 5.5 | 5.5 | 7.5, 7.3 | see final-door-mother-a/b.json |
+| final | door | 5.5 | 5.5 | 5.5 | 7.5, 7.3 | see final-door-a/b.json |
+
+## p4, "the room lived in" (half size, one fresh blind critic each, the coordinator's re-plan)
+
+| pass | frame | critic | if fixed | main notes |
+|---|---|---|---|---|
+| p4 | door | 5.0 | 7.0 | street lamps still throw a hard stool-shadow fan; zinc hottest (135); altar pair dim (29); banquette crushed; repeats still read |
+| p4 | bar | 5.5 | 7.0 | the niche strip a flat white card (224); Domes white milk glass; zinc flat; right third a void; chroma grain |
+| p4 | listening | 4.5 | 7.0 | still a showroom: chairs silhouettes, Cores too dim, batts blown (243), fir one texture, floor dead |
+
+None reached 6, so none was rendered at full size (the coordinator's rule).
+
+## Duels: round 39's best against round 38's best (renders/2026-10-20/barkhorn/planet38/finals-best/)
+
+Two judges per frame, the order swapped (ab: image 1 = round 38; ba: image 1 = round 39). Verbatim in duel-*.json.
+
+| frame | round 39 entry | ab | ba | kept |
+|---|---|---|---|---|
+| bar | proofs-p2/bar | r39, clear | r39, slight | round 39 |
+| listening | proofs-p3/listening | r39, slight | r39, slight | round 39 |
+| decks | proofs/decks | r38, clear | r38, clear | round 38 |
+| bowl (door, coins) | proofs-p3/bowl | r39, clear | r39, clear | round 39 |
+| street | proofs-p2/street | r39, clear | r39, clear | round 39 |
