@@ -92,7 +92,8 @@ LISTEN_PEOPLE = [person(9, 'tub', [tx, ty, RP.ZONE['z']], _toward(tx, ty), RP.TU
                         cloth='#1C2230', sleeve='#1C2230')]
 
 VIEWS = {
-    'door-mother': dict(people=BAR_PEOPLE[:1] + BAR_PEOPLE[2:] + BANQ_PEOPLE[1:],          # p2: two at the counter
+    # p2b: from the door the people are 5 to 9 m off, so a half shutter left them sharp dummies: the full one here
+    'door-mother': dict(people=BAR_PEOPLE[:1] + BAR_PEOPLE[2:] + BANQ_PEOPLE[1:], shutter=1.0,   # p2: two at the counter
                         settings=dict(altar_w=230.0, altar_cone=20.0, listen_key=3.0, exposure=4.4, wb=2850,
                                       floor_coat=0.15)),
     'bar': dict(people=BAR_PEOPLE + BANQ_PEOPLE[:1],
@@ -104,8 +105,9 @@ VIEWS = {
                       # sleeve under the Core in front, the listener mid-ground
                       camera={'position': [11.90, 3.15, 1.10], 'target': [16.5, 3.0, 1.0], 'lens_mm': 30, 'level': True,
                               'fstop': 2.8, 'focus': [16.3, 3.0, 1.0]},
-                      settings=dict(altar_w=50.0, altar_cone=30.0, orb_pool=12.0, orb_trim=0.08, exposure=4.7, haze=0.004, niche_strip=0.06,
+                      settings=dict(altar_w=50.0, altar_cone=30.0, orb_pool=3.0, orb_trim=0.08, exposure=4.7, haze=0.004, niche_strip=0.06,
                                     listen_key=1.2, listen_rim=6.0),
+                      orb_shade=0.3,
                       life=dict(rocks=[[round(RP.TUB_TABLES[0][0] - 0.06, 3), round(RP.TUB_TABLES[0][1] + 0.07, 3),
                                         round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.022, 1, '#B8641C']],
                                 coats=[[round(RP.TUBS[1][0] - 0.30, 3), round(RP.TUBS[1][1], 3), round(RP.ZONE['z'] + 0.62, 3), 90.0, 0.36]])),
@@ -126,9 +128,12 @@ def shot(view):
     finally:
         v39['camera'], v39['settings'], v39['retouch'] = saved
     s['set']['props'] += [{'kind': 'kit', 'shape': 'ext', 'path': KIT40, 'fn': 'boards'},
-                          {'kind': 'kit', 'shape': 'ext', 'path': KIT40, 'fn': 'figures', 'people': vw['people'], 'shutter': SHUTTER}]
+                          {'kind': 'kit', 'shape': 'ext', 'path': KIT40, 'fn': 'figures', 'people': vw['people'], 'shutter': vw.get('shutter', SHUTTER)}]
     if vw.get('life'):
         s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': T39.KIT39, 'fn': 'life', 'seed': 402, **vw['life']})
+    for o in s['set']['props']:                  # p2b: the Core nearest the lens blew out at any trim; its shade dimmer
+        if o.get('fn') == 'orb' and vw.get('orb_shade'):
+            o['shade_glow'] = round(o.get('shade_glow', 0.1) * vw['orb_shade'], 4)
     s['title'] = s['title'].replace('(round 39)', '(round 40)')
     return s
 
