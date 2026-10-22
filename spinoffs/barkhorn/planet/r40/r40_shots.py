@@ -35,13 +35,21 @@ C = RP.COUNTER
 T39.ALL.update(counter_strip=0.08, street_lamp=0.0, pendant_w=20.0, dome_glow_smoke=0.016, orb_pool=9.0, screen_glow=0.05, haze=0.004)
 T39.JITTER['pull'].update({'chairs:6': [0.03, -0.14, 22.0], 'chairs:12': [-0.05, 0.12, 14.0], 'tubs:3': [0.06, 0.05, -10.0]})
 RETOUCH = dict(darken={'zinc': 0.30}, zinc_rough=[0.30, 0.62])
+# p2 (the p1 critics: door 6.0/5.5, bar 5.0/5.0, listening 5.5/5.0; the read test: "ghostly blobs"): the people were
+# translucent double copies (a 1-frame shutter and up to 20 cm of travel): now a half shutter and a few centimetres,
+# so a body holds and only heads and hands soften; nobody between the camera and a speaker; the altar spots clipped
+# the pair, the screens and the globe's spot lit the right wall brighter than the altar, the Domes' liners near clip,
+# a milky haze; the zinc read as plaster: metallic now
+T39.ALL.update(dome_glow_smoke=0.008, pendant_w=16.0, screen_glow=0.022, haze=0.0022, mother_spot=65.0, mother_rim=110.0)
+RETOUCH['set'] = {'zinc': {'Metallic': 0.85}}
+SHUTTER = 0.5
 
 # people (seat heights from the plan: the counter chairs 0.76, the banquette 0.45, the chairs at the tables 0.46,
 # the tub chairs 0.38 on the 0.2 step); clothes muted, never the products' colours
 CLOTH = ['#1C2230', '#141312', '#3A1A16', '#262524', '#2E3024', '#5A4430', '#2A3448', '#1E1C1A', '#3C2E26', '#4A4A48']
 SKIN = ['#D9AE94', '#B47E5E', '#7E5038', '#5A3A28', '#C89878', '#E2BCA4', '#9A6648']
 HAIR = ['#1A1410', '#3A2A1E', '#0E0C0A', '#6A5038', '#2A2420', '#8A7A6A', '#151210']
-SIT = dict(move=[0.09, 0.07, 0.01], spin=10.0, head=[0.20, 0.12, 0.03, 35.0], arms=[0.24, 0.12, 0.10, 30.0])
+SIT = dict(move=[0.02, 0.015, 0.0], spin=3.0, head=[0.08, 0.05, 0.02, 15.0], arms=[0.10, 0.06, 0.04, 15.0])
 
 
 def person(i, pose, at, heading, seat=0.46, **k):
@@ -57,16 +65,16 @@ TB, TY = RP.TABLES36, RP.TABLE36['y']
 BENCH_Y = 0.42
 BAR_PEOPLE = [
     person(0, 'stool', [cx(4), YS, 0], 90, 0.76),
-    person(1, 'stool', [cx(5), YS - 0.12, 0], 96, 0.76, head=[0.26, 0.14, 0.03, 45.0]),   # turned to talk
+    person(1, 'stool', [cx(5), YS - 0.12, 0], 96, 0.76, head=[0.12, 0.07, 0.02, 25.0]),   # turned to talk
     person(2, 'stool', [cx(7), YS, 0], 84, 0.76),
-    person(3, 'pour', [5.05, 5.00, 0], -90, move=[0.30, 0.04, 0.0], spin=14.0, arms=[0.35, 0.10, 0.18, 40.0],
-           head=[0.32, 0.06, 0.04, 30.0], cloth='#1A1918', sleeve='#7A7064'),                    # the bartender, mid-pour
-    person(4, 'decks', [6.95, 4.98, 0], -90, move=[0.08, 0.04, 0.0], spin=8.0, arms=[0.22, 0.14, 0.08, 30.0],
-           head=[0.10, 0.05, 0.12, 25.0]),                                                        # the selector
+    person(3, 'pour', [5.75, 5.00, 0], -90, move=[0.06, 0.02, 0.0], spin=6.0, arms=[0.18, 0.08, 0.12, 30.0],
+           head=[0.10, 0.05, 0.02, 18.0], cloth='#1A1918', sleeve='#7A7064'),                    # the bartender, mid-pour
+    person(4, 'decks', [6.55, 4.98, 0], -90, move=[0.02, 0.01, 0.0], spin=3.0, arms=[0.10, 0.06, 0.04, 15.0],
+           head=[0.05, 0.03, 0.08, 12.0]),                                                        # the selector
 ]
 BANQ_PEOPLE = [
     person(5, 'bench', [TB[0], BENCH_Y, 0], 90, 0.45),
-    person(6, 'bench', [TB[1] + 0.12, BENCH_Y, 0], 90, 0.45, head=[0.26, 0.14, 0.03, 45.0]),
+    person(6, 'bench', [TB[1] + 0.12, BENCH_Y, 0], 90, 0.45, head=[0.12, 0.07, 0.02, 25.0]),
     person(7, 'chair', [TB[3] + 0.03, RP.CHAIR_Y36 + 0.05, 0], -90, 0.46),
     person(8, 'bench', [TB[3] - 0.05, BENCH_Y, 0], 90, 0.45),
 ]
@@ -76,21 +84,29 @@ def _toward(x, y, tx=16.55, ty=3.05):
     return round(math.degrees(math.atan2(ty - y, tx - x)), 1)
 
 
-tx, ty = RP.TUBS[1]
+tx, ty = RP.TUBS[2]                                                 # p2: mid-ground, in the side chair
 LISTEN_PEOPLE = [person(9, 'tub', [tx, ty, RP.ZONE['z']], _toward(tx, ty), RP.TUB['seat'],
-                        move=[0.06, 0.05, 0.02], spin=8.0, head=[0.16, 0.10, 0.04, 30.0], arms=[0.20, 0.12, 0.08, 25.0])]
+                        move=[0.03, 0.02, 0.01], spin=4.0, head=[0.10, 0.06, 0.03, 20.0], arms=[0.08, 0.05, 0.03, 10.0],
+                        cloth='#1C2230', sleeve='#1C2230')]
 
 VIEWS = {
-    'door-mother': dict(people=BAR_PEOPLE + BANQ_PEOPLE[1:],
-                        settings=dict(altar_w=380.0, altar_cone=24.0, listen_key=3.0, exposure=4.6)),
+    'door-mother': dict(people=BAR_PEOPLE[:1] + BAR_PEOPLE[2:] + BANQ_PEOPLE[1:],          # p2: two at the counter
+                        settings=dict(altar_w=230.0, altar_cone=20.0, listen_key=3.0, exposure=4.4, wb=2850,
+                                      floor_coat=0.15)),
     'bar': dict(people=BAR_PEOPLE + BANQ_PEOPLE[:1],
                 camera={'position': [3.40, 2.70, 1.30], 'target': [7.4, 5.6, 1.65], 'lens_mm': 35, 'level': True,
                         'fstop': 4.0, 'focus': [6.6, 4.4, 1.2]},
-                settings=dict(niche_strip=0.12, spk_niche_strip=0.1, rw_w=8.0, bar_key=3.0, exposure=3.0)),
+                settings=dict(niche_strip=0.06, spk_niche_strip=0.05, rw_w=8.0, bar_key=1.5, exposure=3.0)),
     'listening': dict(people=LISTEN_PEOPLE,
-                      camera={'position': [12.05, 5.45, 1.25], 'target': [16.4, 2.7, 1.0], 'lens_mm': 28, 'level': True,
-                              'fstop': 4.0, 'focus': [16.0, 2.6, 1.0]},
-                      settings=dict(altar_w=38.0, altar_cone=24.0, orb_pool=20.0, exposure=4.7, haze=0.006)),
+                      # p2: seated in the second row (both critics), a tub chair's back, its table, a glass and a
+                      # sleeve under the Core in front, the listener mid-ground
+                      camera={'position': [11.90, 3.15, 1.10], 'target': [16.5, 3.0, 1.0], 'lens_mm': 30, 'level': True,
+                              'fstop': 2.8, 'focus': [16.3, 3.0, 1.0]},
+                      settings=dict(altar_w=50.0, altar_cone=30.0, orb_pool=30.0, exposure=4.7, haze=0.004, niche_strip=0.06,
+                                    listen_key=1.2, listen_rim=6.0),
+                      life=dict(rocks=[[round(RP.TUB_TABLES[0][0] - 0.06, 3), round(RP.TUB_TABLES[0][1] + 0.07, 3),
+                                        round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.022, 1, '#B8641C']],
+                                coats=[[round(RP.TUBS[1][0] - 0.30, 3), round(RP.TUBS[1][1], 3), round(RP.ZONE['z'] + 0.62, 3), 90.0, 0.36]])),
 }
 
 
@@ -108,7 +124,9 @@ def shot(view):
     finally:
         v39['camera'], v39['settings'], v39['retouch'] = saved
     s['set']['props'] += [{'kind': 'kit', 'shape': 'ext', 'path': KIT40, 'fn': 'boards'},
-                          {'kind': 'kit', 'shape': 'ext', 'path': KIT40, 'fn': 'figures', 'people': vw['people']}]
+                          {'kind': 'kit', 'shape': 'ext', 'path': KIT40, 'fn': 'figures', 'people': vw['people'], 'shutter': SHUTTER}]
+    if vw.get('life'):
+        s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': T39.KIT39, 'fn': 'life', 'seed': 402, **vw['life']})
     s['title'] = s['title'].replace('(round 39)', '(round 40)')
     return s
 
