@@ -102,8 +102,8 @@ TURN = 25.0                          # the speaker turned so the horn shows its 
                                      # television"): meteor_e is solved with it so, against the same wind
 # the shimmer over the fire (finish.haze), in each frame's fractions: the rising air either side of and above the
 # speaker, the speaker itself kept still
-HAZE = dict(box=[0.34, 0.2, 0.68, 0.9], px=3.5, scale=6.0, exclude=[[0.42, 0.55, 0.59, 0.93]])
-HAZE_PORTRAIT = dict(box=[0.33, 0.25, 0.68, 0.8], px=3.5, scale=6.0, exclude=[[0.4, 0.54, 0.61, 0.79]])
+HAZE = dict(box=[0.34, 0.2, 0.68, 0.9], px=6.0, scale=6.0, exclude=[[0.42, 0.55, 0.59, 0.93]])   # p10: 3.5 read as none
+HAZE_PORTRAIT = dict(box=[0.33, 0.25, 0.68, 0.8], px=6.0, scale=6.0, exclude=[[0.4, 0.54, 0.61, 0.79]])
 WB = (4800, 4.0)                     # the white point: the dusk blue-grey round the fire's warm pool (p4's read pink
                                      # throughout); the tint off magenta (p7's sky "lavender", its firelight salmon)
 STRENGTH = 420.0                     # the flames (E12's 220 on a sunlit pan): the cores clip at dusk
@@ -111,7 +111,7 @@ CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_g.npz'   # meteor_e's fire beh
                                                             # face: low in front, climbing the edges beside the burning
                                                             # faces, tall behind (p9; meteor_f climbed the near corner too)
 # the lips torn back (impact.py's jag): the same line for the trench, the plates along it and the deck either side
-JAG = dict(jag=0.42, jag_seed=9)
+JAG = dict(jag=0.6, jag_seed=9)      # p10: 0.42 still read as "a ruler-straight edge" on the left (the notes check)
 ROAD = dict(material='pbr', texture='asphalt_02', tex_scale=4.0, tint='#2C2C2E', tint_mix=0.3, rough_mul=0.3)   # E8's deck
 
 
@@ -120,15 +120,17 @@ def torn(gouge):
     for p in gouge:
         fn = p.get('fn')
         if fn == 'trench':
-            p['value'] = 0.45
+            p['value'] = 0.26                                        # p10: p9's floor "a smooth beige slope"
+            p['ragged'] = 0.09
             p.update(JAG)                                            # p9: "too linear on both sides"
         elif fn == 'slabs':
             p.update(ASPHALT, crumble=1.0)                           # p7: "blocks with bevelled edges"
             if p['count'] == 90:                                     # along the lips: thick crumbling lumps (p5: "thin,
-                p.update(count=130, spread=0.7, flip=0.12, fallen=0.12, size_power=1.6, thickness=0.075, **JAG)  # even
+                p.update(count=130, spread=0.9, flip=0.2, fallen=0.2, size_power=1.6, thickness=0.075, thick_var=0.9,
+                         clump=0.3, **JAG)  # even
                                                                      # sheets"), along the torn line (p9)
             else:                                                    # the heave in front: lower, more of them
-                p.update(thickness=0.07, size=0.45, count=28, tilt=40.0, tilt_min=15.0)
+                p.update(thickness=0.07, size=0.45, count=34, tilt=40.0, tilt_min=15.0, thick_var=0.8)
         elif fn == 'debris':
             if p.get('fine'):                                        # the grit: crushed stone, grey
                 p.update(under_tint='#1C1C1C', under_value=0.6)
@@ -145,8 +147,20 @@ def torn(gouge):
     # and either side of it, where the low flames light the pit's floor (p6's look: two flat orange shelves)
     pit.append(piece('ext', module='impact', fn='debris', band=[-0.45, 0.45], count=140, reach=0.6, inner=0.4, z=I.SINK,
                      seed=35, rotate_z=I.FLIP, crumble=0.3, **ASPHALT))
-    return gouge + pit + [piece('ext', module='impact', fn='debris', y0=I.Y0 + 6.0, y1=-0.9, count=260, reach=0.6,
-                                inner=0.0, z=-0.32, seed=19, rotate_z=I.FLIP, crumble=0.5, **ASPHALT)]
+    # p10: a rim of plates heaved up round the speaker's foot on both sides (p9's notes check: "on the right there is
+    # almost no broken rim, so it does not read as a rough hole around the speaker"), clear of it (the lip at 0.62
+    # against the cabinet's 0.4 half-diagonal), steep and of every thickness
+    rim = [piece('ext', module='impact', fn='slabs', y0=I.Y1 - 2.2, y1=I.Y1 + 0.4, lip=0.62, depth=0.34, ramp=0.1, count=18,
+                 thickness=0.08, thick_var=0.9, tilt=68.0, tilt_min=28.0, size=0.55, spread=0.35, seed=41,
+                 rotate_z=I.FLIP, crumble=1.0, drop=True, **ASPHALT)]
+    # and the sizes between the plates and the pebbles (p9 B: "fragment sizes jump straight from big slabs to a few
+    # pebbles"): chunks of 4 to 10 cm and grit round the rim, thinning outward
+    rim.append(piece('ext', module='impact', fn='debris', band=[-1.0, 1.8], count=220, reach=1.6, inner=0.55, z=0.0,
+                     seed=43, rotate_z=I.FLIP, crumble=0.4, drop=True, **ASPHALT))
+    rim.append(piece('ext', module='impact', fn='debris', band=[-1.2, 2.2], count=900, reach=2.2, inner=0.5, z=0.0,
+                     seed=47, rotate_z=I.FLIP, fine=True, drop=True, under_tint='#1C1C1C', under_value=0.6))
+    return gouge + pit + rim + [piece('ext', module='impact', fn='debris', y0=I.Y0 + 6.0, y1=-0.9, count=260, reach=0.6,
+                                      inner=0.0, z=-0.32, seed=19, rotate_z=I.FLIP, crumble=0.5, **ASPHALT)]
 
 
 def deck():
@@ -165,8 +179,10 @@ def marks(deck_len):
     it threw."""
     # the char reaches past the fire's hottest light: within a metre and a half its lamps lit the black as bright as the
     # open road (a top-down test without them showed it there), so a scorch that small read as none
+    # p10: the cracks wider and further (p9 A: "the intact road stays perfectly smooth and uncracked right up to the
+    # hole"; at the proof's size 12 mm cracks were under a pixel), the dust heavier
     road = dict(module='smoke_el', fn='impact', centre=[0.0, 0.0], char=[1.0, 2.6], jag=0.8, soot=4.5, soot_mix=0.55,
-                cracks=[0.9, 3.8], crack_count=13.0, crack_width=0.012, crack_bump=0.6, dust=[1.6, 5.5], dust_mix=0.5,
+                cracks=[0.8, 5.0], crack_count=22.0, crack_width=0.03, crack_bump=0.9, dust=[1.6, 5.5], dust_mix=0.68,
                 seed=4)
     return [piece('ext', on='prop0-kit', **road)] + \
         [piece('ext', module='smoke_el', fn='impact', on=f'prop{deck_len}-kit', centre=[0.0, 0.0], char=[0.5, 2.0],
@@ -212,11 +228,15 @@ def _backlight(a):
     one at each edge the flames climb (the near corner and both silhouettes), weak and low; one at its foot in front,
     where the low flames lick it; and the smoke's own lamp, behind, inside the column's foot."""
     out = {}
+    # p10: and the two silhouette edges' tall flames lit as they burn, high (p9 B: "for something that bright they give
+    # off little light ... the large slab directly in front of the box and the foreground asphalt stay mostly cool
+    # grey"; A: "the warm spill dies within a box-width or two"), the foot's lamp up from 120 W
     for k, (x, y, z, w, v) in enumerate([(0.45, 0.32, 0.6, 1200.0, False), (0.40, 0.28, 1.25, 900.0, False),
                                          (0.25, 0.25, 1.9, 1200.0, False),
                                          (-0.42, -0.30, 0.3, 150.0, False), (0.45, -0.25, 0.35, 200.0, False),
-                                         (-0.45, 0.30, 0.4, 200.0, False), (0.0, -0.40, 0.12, 120.0, False),
-                                         (0.40, 0.35, 0.9, 700.0, 'only')]):
+                                         (-0.45, 0.30, 0.4, 200.0, False), (0.0, -0.40, 0.12, 260.0, False),
+                                         (0.40, 0.35, 0.9, 700.0, 'only'),
+                                         (-0.50, 0.32, 0.95, 600.0, False), (0.50, -0.28, 0.9, 600.0, False)]):
         out[f'flame{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK, 3)], w, '#FF7A2E',
                                       0.5 if w >= 1000.0 or v == 'only' else 0.3),
@@ -264,7 +284,8 @@ def shot():
         inst['rotate_z'] = inst['rotate_z'] + TURN
     s['finish']['grain'] = 3.5                                       # p3: "grain-free and lens-clean"
     s['render']['white_balance_k'], s['render']['white_balance_tint'] = WB
-    s['finish']['dream'].update(bloom=0.32, bloom_px=60)               # p5: "no halation, lens glare"
+    s['finish']['dream'].update(bloom=0.42, bloom_px=70)               # p5: "no halation, lens glare"; p10 (p9 B: "the
+                                                                       # overexposed core has no bloom or halation")
     s['finish']['dream']['haze'] = HAZE                                # p6: "no heat haze bending the railing behind them"
     _aim(s['camera'])
     s['title'] = 'barkhorn, Smoke E12r, the meteor on the road: the speaker skidded to rest in its gouge, burning'

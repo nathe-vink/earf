@@ -36,7 +36,13 @@ crude, while maintaining realism"): `jag` (trench, slabs, road) tears each lip b
 along an angular line of its own (`jag_seed`), with bites where chunks broke away, less near the impact and more round
 the speaker; the trench's walls run up to it, the torn plates lie along it, and road: the deck either side as one
 slab `thickness` thick out to `half` metres, open over the gouge along those lips, `ylo` to `yhi` along it, in the
-road's material, so the deck's edge is the lip and nothing shows a ruled line."""
+road's material, so the deck's edge is the lip and nothing shows a ruled line.
+
+E12r p10 (p9's notes check: "on the left they line up into a ruler-straight edge"; its critics: "nearly the same
+thickness"): for slabs, `thick_var` varies each plate's thickness from (1 - thick_var / 2) to (1 + thick_var) times
+`thickness`, and `clump` leaves gaps along each lip where a slow noise falls below `clump` - 0.35 (the row torn in
+clumps) and throws the plates that remain out over a wider, uneven band. Both off by default. `drop` (slabs, debris)
+lets each piece down onto the set built before it, its lowest corner a little into the surface below (see _drop)."""
 import math, random
 
 import bmesh
@@ -197,6 +203,28 @@ def _place(bm, verts, rot, loc):
         v.co = m @ v.co + Vector(loc)
 
 
+def _drop(bpy, p, verts, sink):
+    """With `drop`, a piece let down onto the set built before it (E12r p10: rubble round the speaker's foot laid at
+    road level floated over the trench): its lowest corner set `sink` metres into the first surface of a set piece (an
+    object named prop...) found straight down from above that corner, in the frame the piece is turned and placed in.
+    A corner over nothing stays where it was; a flat decal (scorch's plane, four corners) is looked through."""
+    low = min(verts, key=lambda v: v.co.z)
+    a = math.radians(p.get('rotate_z', 0.0)); px, py, pz = p.get('position', [0.0, 0.0, 0.0])
+    x, y = low.co.x, low.co.y
+    o = Vector((x * math.cos(a) - y * math.sin(a) + px, x * math.sin(a) + y * math.cos(a) + py, 6.0))
+    dg = bpy.context.evaluated_depsgraph_get()
+    for _ in range(6):
+        hit, loc, _n, _i, ob, _m = bpy.context.scene.ray_cast(dg, o, Vector((0.0, 0.0, -1.0)), distance=30.0)
+        if not hit:
+            return
+        if ob.name.startswith('prop') and len(getattr(ob.data, 'vertices', ())) > 4:   # not a decal's plane (scorch)
+            dz = (loc.z - pz) - sink - low.co.z
+            for v in verts:
+                v.co.z += dz
+            return
+        o = loc + Vector((0.0, 0.0, -1e-3))
+
+
 def _faces(ft, fb, sides, top, p):
     """A piece's faces to their materials: its top the road's asphalt (when it has one), its underside the sub-base, its
     broken edges the sub-base too or, with `side`, their own."""
@@ -251,26 +279,34 @@ def slabs(bpy, name, p, kit):
     spread, flip, fallen, sp = p.get('spread', 0.25), p.get('flip', 0.0), p.get('fallen', 0.0), p.get('size_power', 1.0)
     lipf = _lipf(p)
     bm = bmesh.new()
+    tv, clump = p.get('thick_var', 0.0), p.get('clump', 0.0)
+    if p.get('drop'):
+        bpy.context.view_layer.update()
     for k in range(p.get('count', 40)):
         y = rnd.uniform(y0 + 0.5, y1 - 0.2)
         s = 1 if rnd.random() < 0.5 else -1
+        if clump and noise.noise(Vector((y * 0.9, s * 3.7, p.get('seed', 1) * 0.61))) < clump - 0.35:
+            continue                                           # a gap in the row: the lip tore in clumps, not evenly
         f = min(1.0, (y - y0) / ramp)                          # bigger, steeper plates where the trench is deep
         sz = p.get('size', 1.0)
         w, d = sz * (0.25 + 0.45 * rnd.random() ** sp) * (0.5 + f), sz * (0.3 + 0.5 * rnd.random() ** sp) * (0.5 + f)
+        tk = t * rnd.uniform(1.0 - 0.5 * tv, 1.0 + tv) if tv else t
         before = len(bm.verts)
-        ft, fb, sides = _plate(bm, rnd, w, d, t, p.get('rough', 0.0))
+        ft, fb, sides = _plate(bm, rnd, w, d, tk, p.get('rough', 0.0))
         _faces(ft, fb, sides, True, p)
         bm.verts.ensure_lookup_table()
         new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         tilt = rnd.uniform(p.get('tilt_min', 15.0), p.get('tilt', 55.0)) * f
-        x = s * (lipf(y, s) + w * spread * rnd.uniform(0.2, 1.0))
-        z = 0.02 + 0.5 * w * math.sin(math.radians(tilt)) * 0.4 - (0.0 if rnd.random() < 0.7 else 0.1)
+        x = s * (lipf(y, s) + w * spread * (rnd.uniform(0.2, 1.0) if not clump else rnd.random() ** 0.6 * 1.6))
+        z = 0.02 + 0.5 * w * math.sin(math.radians(tilt)) * 0.4 - (0.0 if rnd.random() < 0.7 else 0.1) + (tk - t) * 0.5
         if fallen and rnd.random() < fallen and abs(y) > 0.8:   # dropped into the trench (clear of the speaker at 0)
             x = s * rnd.uniform(0.0, lip * 0.75)
             z = -D * f + t * 0.5 + 0.02 + 0.3 * w * math.sin(math.radians(tilt))
         if flip and rnd.random() < flip:                       # thrown over onto its back
             tilt = 180.0 - tilt * 0.5
         _place(bm, new, (rnd.uniform(-8, 8), s * tilt, rnd.uniform(-25, 25)), (x, y, z))
+        if p.get('drop'):
+            _drop(bpy, p, new, tk * 0.3)
     if p.get('crumble'):
         _crumble(bm, p['crumble'], p.get('seed', 1), p.get('flat_tops', False))
     if p.get('smooth'):
@@ -288,6 +324,8 @@ def debris(bpy, name, p, kit):
     y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
     reach = p.get('reach', 6.0)
     bm = bmesh.new()
+    if p.get('drop'):
+        bpy.context.view_layer.update()
     for k in range(p.get('count', 300)):
         # along the path, thrown sideways (and some forward past the speaker); size falls with distance thrown
         fwd = p.get('forward', 0.0)
@@ -312,6 +350,8 @@ def debris(bpy, name, p, kit):
         bm.verts.ensure_lookup_table()
         new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         _place(bm, new, (rnd.uniform(-40, 40), rnd.uniform(-40, 40), rnd.uniform(0, 360)), (x, y, p.get('z', 0.0) + size * 0.2))
+        if p.get('drop'):
+            _drop(bpy, p, new, size * 0.15)
         _faces(ft, fb, sides, rnd.random() < 0.6, p)
     if p.get('crumble'):
         _crumble(bm, p['crumble'], p.get('seed', 2), p.get('flat_tops', False))
