@@ -16,7 +16,7 @@ The paths below are relative to `renders/2026-10-22/barkhorn/planet39/`.
 | listening (hero 3) | proofs-p3/listening.png (half size) | 4.5 / 4.5 | round 39 wins 2–0 (slight) | proof only |
 | decks (detail) | **round 38's** coins-decks.png (round 39's proofs/decks lost 0–2) | 4.5 to 5.5 | round 38 wins 2–0 | round 38 kept |
 | door and coin bowl (detail) | proofs-p3/bowl.png (half size) | 5.5 / 5.5 | round 39 wins 2–0 | proof only |
-| shopfront at blue hour (detail) | proofs-p2/street.png (half size) | 6.0 / 6.0 | round 39 wins 2–0 | proof only |
+| shopfront at blue hour (detail) | finals/street-final.png (2400 × 1600, p2's shot unchanged; also street-2400.jpg and street-1200.jpg, quality 88) | 6.0 / 6.0 (the p2 proof) | round 39 wins 2–0 | final |
 
 Four of the six full-size finals were not rendered. On the coordinator's re-plan, a frame gets a full-size render only once a proof scores 6 or more. Only the street proof did (p2), and that was before the re-plan. It is the next full-size render if wanted. The command:
 `python3 spinoffs/barkhorn/planet/r39/r39_shots.py street` and then `render.py` at scale 1.0, 192 samples. Then apply `photo.py`.
