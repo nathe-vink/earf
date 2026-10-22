@@ -1,0 +1,262 @@
+{
+ "title": "Mantle in Haze, phone",
+ "size": [
+  1600,
+  2000
+ ],
+ "product": {
+  "def": "spinoffs/barkhorn/companions/out-turntable-float/open/barkhorn-turntable-float-open.json",
+  "flavour": "haze",
+  "hide": [
+   "led-strip-edge"
+  ],
+  "instances": [
+   {
+    "position": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotate_z": 0.0
+   }
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#F3F1EE",
+  "width": 52.0,
+  "front": 20.0,
+  "depth": 6.0,
+  "radius": 5.0,
+  "height": 9.0,
+  "contact": {
+   "strength": 0.8,
+   "distance_m": 0.3,
+   "core_strength": 0.9,
+   "core_distance_m": 0.03
+  },
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.1505,
+    "height": 0.0018,
+    "position": [
+     -0.025,
+     -0.012,
+     0.113
+    ],
+    "material": "gloss",
+    "color": "#0C0C0D",
+    "roughness": 0.22
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.05,
+    "height": 0.0003,
+    "position": [
+     -0.025,
+     -0.012,
+     0.1148
+    ],
+    "material": "paper",
+    "color": "#E6E0D4"
+   }
+  ],
+  "flags": [
+   {
+    "center_m": [
+     -0.545,
+     1.007,
+     0.73
+    ],
+    "size_m": [
+     2.4,
+     1.4
+    ],
+    "normal": [
+     0.419,
+     -0.775,
+     -0.473
+    ],
+    "glossy": true,
+    "reflect_only": true,
+    "color": "#4A4A4C"
+   }
+  ]
+ },
+ "camera": {
+  "position": [
+   0.66,
+   -1.22,
+   0.86
+  ],
+  "target": [
+   0.0,
+   0.03,
+   0.17
+  ],
+  "lens_mm": 62.0,
+  "level": false
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#F2F1EF",
+  "horizon": "#EEEDEB",
+  "ground": "#CFCCC8",
+  "strength": 0.6,
+  "visible": false
+ },
+ "render": {
+  "samples": 64,
+  "adaptive": 0.015,
+  "denoise": true,
+  "clamp": 4,
+  "bounces": 16,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.0,
+  "white_balance_k": 5900,
+  "white_balance_tint": 7.0
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 235,
+  "white_out": 238,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7
+ },
+ "materials": {
+  "sweep": {
+   "roughness": 0.32
+  }
+ },
+ "lights": {
+  "bg-left": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "position": [
+    -2.6,
+    3.2,
+    3.4
+   ],
+   "target": [
+    -1.5,
+    6.0,
+    1.2
+   ],
+   "irradiance": 3.6,
+   "color": "#FFF4E8",
+   "camera": false,
+   "specular": 0.0
+  },
+  "bg-right": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "position": [
+    2.6,
+    3.2,
+    3.4
+   ],
+   "target": [
+    -0.9,
+    6.0,
+    1.0
+   ],
+   "irradiance": 3.6,
+   "color": "#FFF4E8",
+   "camera": false,
+   "specular": 0.0
+  },
+  "scrim": {
+   "type": "area",
+   "size_m": [
+    1.4,
+    1.2
+   ],
+   "position": [
+    0.05,
+    0.15,
+    1.5
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.1
+   ],
+   "irradiance": 1.6,
+   "color": "#FFFAF4",
+   "camera": false
+  },
+  "key": {
+   "type": "area",
+   "size_m": [
+    0.9,
+    0.9
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 38,
+    "distance_m": 2.2
+   },
+   "target": [
+    0.0,
+    0.0,
+    0.08
+   ],
+   "irradiance": 4.0,
+   "color": "#FFFAF4",
+   "camera": false,
+   "specular": 1.0
+  },
+  "back-top": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "orbit": {
+    "azimuth_deg": 200,
+    "elevation_deg": 30,
+    "distance_m": 1.4
+   },
+   "target": [
+    0.0,
+    -0.3,
+    0.0
+   ],
+   "irradiance": 14.0,
+   "color": "#FFF8F0",
+   "camera": false
+  },
+  "plinth-back": {
+   "type": "area",
+   "size_m": [
+    1.0,
+    0.12
+   ],
+   "position": [
+    -0.4,
+    0.8,
+    0.077
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.076
+   ],
+   "irradiance": 120.0,
+   "color": "#FFF8F0",
+   "camera": false,
+   "specular": 0.0
+  }
+ }
+}
