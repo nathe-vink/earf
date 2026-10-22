@@ -1,16 +1,24 @@
 """earf.world, built from the repository (round 31: round 30's draft and its hosting moved here from the working
 notes, so any session can rebuild the site).
 
-One page, two views by its address: the home page (#top, and its sections #turn, #atmosphere, #room, #spec, #contact)
-and a speaker's page (#speaker-ember ... #speaker-smoke, by name; the colour keys still answer). It is written as it is hosted: a whole document, with what a
+One page, laid out as a shop since round 34 (the owner, 2026-10-22: "Do a pass so it works more like an e-commerce site
+in terms of the information architecture. A home page that highlights each product line, and then product detail pages
+where users can browse colors. The product detail pages are where we'll have sections for complementary, analogous, and
+monochromatic colors"). Its views, by address: the home page (#top: the lines, the colours, the light, the eight in
+their element, the room, enquiries); a line's page (#speakers, #lighting, #turntable); a colour's page (#colour-poison:
+everything made in it); and a product's page (#speaker-poison, #dome-poison, #orb-poison, #turntable-poison), its
+pictures in the colour picked, the eight to pick from, and what goes with that colour across every line, by the colour
+wheel: its complement, its neighbours, and itself. The old addresses (#atmosphere, #turn, #spec, #lamps) still answer. It is written as it is hosted: a whole document, with what a
 browser and a link preview need, a bar saying it is a preview, and kept out of search engines until launch (a meta
 tag, an X-Robots-Tag header on every response and a robots.txt that disallows everything), into site/ for Vercel,
 which deploys it on every push to main.
 
-- Home: the hero (the eight on an arc, covers off, each a link to its page); the horns, turning as the page scrolls
-  and by hand; the eight cards, covers off first, each with its acrylic icon; the room; the particulars; enquiries.
-- A speaker's page: a gallery of eight views, its colour picked from the acrylic coins, its particulars, what goes
-  with its colour (round 25's idea, sketches for now) and the other seven.
+- Home: the hero (the eight on an arc, covers off, each a link to its page); the three lines; the eight colours; lit
+  from below; in their element; the room; enquiries.
+- Speakers: the eight cards, covers off first; in the studio; the horns, turning as the page scrolls and by hand; the
+  particulars. Lighting: the Dome and the Orb, each in its eight. Turntable: the record player, or its concept until its
+  pictures are in.
+- A product's page: its pictures in the colour picked, the eight coins, its particulars, and its colour's company.
 - The header's globe keeps turning, never under reduced motion. The page opens on it: the acrylic globe large in the
   middle of a plain ground, turning, which flies and shrinks into its place at the top left as the ground is drawn in
   behind it, and goes on turning there (the owner, 2026-10-19). The opening follows the system's setting: paper and the
@@ -79,8 +87,9 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'smoke_e6': 'on a cracked salt flat, black smoke climbing from the horizon',
     'smoke_e9': 'on a city bridge at dusk, a wrecked car burning behind it',
 }
+LP = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'lamps-pdp')   # each lamp in each colour (lamps_pdp.py)
+TTR = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'turntable')  # the record player, round 34's finals
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
-COMPANIONS_SHOWN = False      # Cumulus and Bell stay off the page while their second designs are drawn (the owner, 2026-10-18)
 LINEUP_SHOWN = False          # the studio's eight in a row repeated the hero (the site critic, 2026-10-18); it stays in the look book
 TITLE = 'EARF · Atmosphere'
 DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours from Ember to Smoke. '
@@ -138,6 +147,16 @@ LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band does
     'lamps-unlit': (800, 'An Orb and a Dome in Smoke, switched off: dark, polished acrylic with a pale core'),
     'lamp-cartridge': (900, 'The Orb in Ember, its battery cartridge slid half out of the back of its black acrylic base'),
 }
+TT = dict(name='Float', kind='Record player',             # round 34's (companions/README.md "Round 34"): its words when it lands
+          line='A record player that floats on its own light.',
+          facts=[('Plinth', 'Cast acrylic, 25 mm, tinted through'), ('Base', 'Cast acrylic, edge-lit from within'),
+                 ('Drive', 'Belt, its motor in a pod of its own'), ('Speeds', '33 and 45, by a button'),
+                 ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'), ('Cover', 'Tinted acrylic, hinged')])
+LINES = [  # the shop's three lines: key, name, what's in it, its line
+    ('speakers', 'Speakers', 'Atmosphere', 'A horn loudspeaker cast in tinted acrylic, in eight colours.'),
+    ('lighting', 'Lighting', 'Dome and Orb', 'A pendant and a table lamp in the speakers&rsquo; acrylic, frosted within.'),
+    ('turntable', 'Turntable', 'Float', 'A record player in the same eight colours, lit from underneath.'),
+]
 KEYS = [c[0] for c in CLOUDS]
 MARK = {key: col for key, line, num, name, col in M.SPEAKERS if line == 'Cloud'}
 HUE = {'red': 0, 'orange': 1, 'amber': 2, 'green': 3, 'blue': 4, 'violet': 5}   # the painter's wheel, from red
@@ -384,6 +403,26 @@ def make_images(sources=None):
             im = Image.open(src)
             save(im, f'{name}.jpg', 2 * w, q=84); save(im, f'{name}-{w}.jpg', w, q=84)
             made.append(name)
+    # round 34, the shop: each lamp in each colour for its page and its cards (lamps_pdp.py; Ember's is round 32f's hero)
+    for lamp in ('dome', 'orb'):
+        for k in KEYS:
+            fl = HABITAT[k]
+            one(first(os.path.join(LP, f'lamp-{lamp}-{fl}.png'),
+                      os.path.join(ROOT, 'renders', '2026-10-19', 'barkhorn', 'lamps-site', f'lamp-{lamp}.png') if fl == 'ember' else ''),
+                lambda p, lamp=lamp, k=k: (save(Image.open(p), f'{lamp}-{k}.jpg', 1600, q=84), save(Image.open(p), f'{lamp}-{k}-card.jpg', 640, q=82)))
+    # the record player (round 34) as its pictures arrive: each colour in the studio, at dusk and in the phone's frame
+    for k in KEYS:
+        fl = HABITAT[k]
+        one(os.path.join(TTR, f'studio-{fl}.png'), lambda p, k=k: (save(Image.open(p), f'tt-{k}-studio.jpg', 2400, q=84),
+                                                                   save(Image.open(p), f'tt-{k}-studio-1200.jpg', 1200, q=82)))
+        one(os.path.join(TTR, f'dusk-{fl}.png'), lambda p, k=k: save(Image.open(p), f'tt-{k}-dusk.jpg', 2400, q=84))
+        one(os.path.join(TTR, f'tall-{fl}.png'), lambda p, k=k: (save(Image.open(p), f'tt-{k}-tall.jpg', 1200, q=84),
+                                                                 save(Image.open(p), f'tt-{k}-card.jpg', 640, q=82)))
+    for n in ('open', 'detail', 'pod'):
+        one(os.path.join(TTR, f'{n}.png'), lambda p, n=n: save(Image.open(p), f'tt-{n}.jpg', 2400, q=84))
+    # until then its line shows the concept it is drawn from (round 31c's R3 Float, lit at dusk), at its own size
+    one(os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions2', 'concepts', 'concept-r3-dusk.png'),
+        lambda p: save(Image.open(p), 'tt-concept.jpg', None, q=88))
     # the coins, in the icons' order, one sheet for each ground (round 30's renders, at 800 px on E.PAPER and E.NIGHT)
     order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
     for tag, ground, dark in (('paper', (242, 238, 232), False), ('night', (17, 16, 19), True)):
@@ -445,6 +484,38 @@ def image_meta():
         corner = np.asarray(Image.open(os.path.join(IMG, f'{k}-on.jpg')).convert('RGB'))[-18:-3].reshape(-1, 3).mean(0)   # where the photograph meets its panel
         panel[k] = '#%02X%02X%02X' % tuple(int(x) for x in corner)
     return meta, panel
+
+
+def product_meta():
+    """The lamps' and the record player's pictures as they stand in site/img: for each product, each colour's views
+    (src, w, h), its card (the 4:5 frame the shop's grids use), and where a colour has no picture of its own yet, Ember's
+    with a note saying so ('shown'). The record player is None until its pictures are in."""
+    pic = lambda n, **k: dict(src=f'img/{n}', w=Image.open(os.path.join(IMG, n)).width, h=Image.open(os.path.join(IMG, n)).height, **k) \
+        if os.path.exists(os.path.join(IMG, n)) else None
+    out = {}
+    for lamp, shared in (('dome', [('row', 'lamps-domes.jpg'), ('unlit', 'lamps-unlit.jpg')]),
+                         ('orb', [('row', 'lamps-orbs.jpg'), ('cartridge', 'lamp-cartridge.jpg'), ('unlit', 'lamps-unlit.jpg')])):
+        cols = {}
+        for k in KEYS:
+            own = pic(f'{lamp}-{k}.jpg')
+            hero, card, shown = (own, pic(f'{lamp}-{k}-card.jpg'), None) if own else (pic(f'{lamp}-red.jpg'), pic(f'{lamp}-red-card.jpg'), 'red')
+            if not hero:
+                continue
+            views = {'hero': dict(hero, **({'shown': shown} if shown else {}))}
+            views.update({v: pic(n) for v, n in shared if pic(n)})
+            cols[k] = dict(views=views, card=dict(card or hero, **({'shown': shown} if shown else {})))
+        out[lamp] = cols
+    tt = {}
+    for k in KEYS:
+        if not pic(f'tt-{k}-studio.jpg'):
+            continue
+        views = {'studio': dict(pic(f'tt-{k}-studio.jpg'), fill=True, **({'tall': pic(f'tt-{k}-tall.jpg')} if pic(f'tt-{k}-tall.jpg') else {}))}
+        if pic(f'tt-{k}-dusk.jpg'):
+            views['dusk'] = dict(pic(f'tt-{k}-dusk.jpg'), fill=True)
+        views.update({n: pic(f'tt-{n}.jpg') for n in ('open', 'detail', 'pod') if pic(f'tt-{n}.jpg')})
+        tt[k] = dict(views=views, card=pic(f'tt-{k}-card.jpg') or pic(f'tt-{k}-studio.jpg'))
+    out['turntable'] = tt if len(tt) == len(KEYS) else None
+    return out
 
 
 def body():
@@ -578,49 +649,89 @@ def body():
                     f'    <button type="button" class="nav prev" id="hab-prev" aria-label="Previous">{CHEV_L}</button>'
                     f'<button type="button" class="nav next" id="hab-next" aria-label="Next">{CHEV_R}</button>\n'
                     '    </div>\n  </div></section>')
-    pair = [('turntable', 'Cumulus', 'A record player. Belt drive, its motor in a pod of its own.',
-             'Cumulus, a record player in tinted acrylic, its platter on a plinth of overlapping circles'),
-            ('lamp', 'Bell', 'A lamp. The horn&rsquo;s flare, hung mouth down.',
-             'Bell, a table lamp whose tinted acrylic shade is the horn&rsquo;s flare turned over')]
-    figs = ''
-    if COMPANIONS_SHOWN and all(os.path.exists(os.path.join(IMG, f'next-{t}.jpg')) for t, *_ in pair):
-        figs = '\n    <div class="pair">' + ''.join(
-            '<figure><img src="img/next-{0}.jpg" width="{1}" height="{2}" loading="lazy" alt="{5}">'
-            '<figcaption><b>{3}</b> {4}</figcaption></figure>'.format(t, *Image.open(os.path.join(IMG, f'next-{t}.jpg')).size, n, d, alt)
-            for t, n, d, alt in pair) + '</div>'
+    pm = product_meta()
     lamps_shown = all(os.path.exists(os.path.join(IMG, f'{n}.jpg')) for n in LAMP_PICS)
     def pic(name, alt, cls=''):
         w, h = Image.open(os.path.join(IMG, f'{name}.jpg')).size
         w1 = LAMP_PICS[name][0]
         return (f'<img{cls} src="img/{name}-{w1}.jpg" srcset="img/{name}-{w1}.jpg {w1}w, img/{name}.jpg {w}w" '
                 f'sizes="(max-width: 720px) 100vw, 50vw" width="{w}" height="{h}" loading="lazy" alt="{alt or LAMP_PICS[name][1]}">')
-    lamps = ('  <section class="band lamps" id="lamps"><div class="wrap">\n'
-             '    <div class="head"><div><p class="eyebrow">In good company</p><h2>The same eight, lit from within.</h2>\n'
-             '      <p>A pendant and a table lamp in the speakers&rsquo; acrylic, frosted inside, so the colour glows and the '
-             'source never shows. Every cover comes off by hand.</p></div></div>\n'
-             '    <div class="lamp-pair">' + ''.join(
-                 f'<article class="lamp">{pic("lamp-" + k, alt)}<h3>{name}<small>{kind}</small></h3><p class="line">{line}</p>'
-                 '<dl class="facts">' + ''.join(f'<dt>{t}</dt><dd>{d}</dd>' for t, d in facts) + '</dl></article>'
-                 for k, name, kind, line, alt, facts in LAMPS) + '</div>\n'
-             '    <figure class="eight">' + pic('lamps-domes', None) + pic('lamps-orbs', None) +
-             '<figcaption>In spectrum order, as the speakers: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
-             '    <div class="lamp-duo"><figure>' + pic('lamp-cartridge', None) +
-             '<figcaption>Slide in the cartridge and it goes cordless for about ten hours.</figcaption></figure>'
-             '<figure>' + pic('lamps-unlit', None) + '<figcaption>Off, in Smoke.</figcaption></figure></div>\n'
-             '  </div></section>') if lamps_shown else ''
-    nxt = ('  <section class="band"><div class="wrap next">\n    <p class="eyebrow">Next</p>\n'
-           '    <h2>In good company.</h2>\n'
-           '    <p>A record player and a lamp are on the drawing board, cast in the same eight colours.</p>' + figs +
-           '\n  </div></section>') if COMPANIONS_SHOWN else lamps
-    goes_sec = ('    <section aria-labelledby="goes-title">\n'
-                '      <div class="goes-head"><h2 id="goes-title">Good company</h2><span id="goes-note"></span></div>\n'
-                '      <div class="goes" id="goes" aria-live="polite"></div>\n'
-                '    </section>\n') if COMPANIONS_SHOWN else ''
+    def big(name, alt, sizes='(max-width: 720px) 100vw, 50vw'):      # a 4:5 picture and its card-sized cut
+        w, h = Image.open(os.path.join(IMG, name)).size
+        card = name.replace('.jpg', '-card.jpg')
+        srcset = (f' srcset="img/{card} {Image.open(os.path.join(IMG, card)).width}w, img/{name} {w}w" sizes="{sizes}"'
+                  if os.path.exists(os.path.join(IMG, card)) else '')
+        return f'<img src="img/{name}"{srcset} width="{w}" height="{h}" loading="lazy" alt="{alt}">'
+    # a product's eight, as links to its page in each colour
+    dots = lambda route: ('<ul class="dots-row" aria-label="Colours">' + ''.join(
+        f'<li><a href="#{route}-{name.lower()}" aria-label="{name}" title="{name}"><span class="coin-dot" style="--i:{coin[k]}"></span></a></li>'
+        for k, num, name, *_ in CLOUDS) + '</ul>')
+    def ptile(route, name, kind, line, img, alt):
+        return (f'<article class="ptile"><a class="ph" href="#{route}-ember">{big(img, alt)}</a>'
+                f'<div class="pt-body"><h3>{name}<small>{kind}</small></h3><p class="line">{line}</p>{dots(route)}'
+                f'<a class="more" href="#{route}-ember">See the {name}</a></div></article>')
+    # the lighting line: the Dome and the Orb, each with its eight, then the rows, the cartridge and the pair switched off
+    lighting = ('  <section class="band lamps" id="lamps"><div class="wrap">\n'
+                '    <div class="head"><div><p class="eyebrow">Lighting</p><h2>The same eight, lit from within.</h2>\n'
+                '      <p>A pendant and a table lamp in the speakers&rsquo; acrylic, frosted inside, so the colour glows and the '
+                'source never shows. Every cover comes off by hand.</p></div></div>\n'
+                '    <div class="ptiles">' + ''.join(ptile(k_, name, kind, line, f'{k_}-red.jpg', alt)
+                                                    for k_, name, kind, line, alt, facts in LAMPS) + '</div>\n'
+                '    <figure class="eight">' + pic('lamps-domes', None) + pic('lamps-orbs', None) +
+                '<figcaption>In spectrum order, as the speakers: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
+                '    <div class="lamp-duo"><figure>' + pic('lamp-cartridge', None) +
+                '<figcaption>Slide in the cartridge and it goes cordless for about ten hours.</figcaption></figure>'
+                '<figure>' + pic('lamps-unlit', None) + '<figcaption>Off, in Smoke.</figcaption></figure></div>\n'
+                '  </div></section>') if lamps_shown and pm['dome'] and pm['orb'] else ''
+    # the turntable line: the record player in its eight once its pictures are in; until then the concept, and a word
+    tt = pm['turntable']
+    if tt:
+        turntable = ('  <section class="band" id="record"><div class="wrap">\n'
+                     f'    <div class="head"><div><p class="eyebrow">Turntable</p><h2>{TT["name"]}.</h2><p>{TT["line"]}</p></div></div>\n'
+                     '    <div class="ptiles one">' + ptile('turntable', TT['name'], TT['kind'], TT['line'], 'tt-ice-tall.jpg',
+                                                             f'{TT["name"]} in Fog, its base glowing') + '</div>\n'
+                     '  </div></section>')
+    else:
+        cw, ch = Image.open(os.path.join(IMG, 'tt-concept.jpg')).size if os.path.exists(os.path.join(IMG, 'tt-concept.jpg')) else (450, 360)
+        turntable = ('  <section class="band" id="record"><div class="wrap soon-wrap">\n'
+                     f'    <div class="head"><div><p class="eyebrow">Turntable</p><h2>{TT["name"]}, on the drawing board.</h2>\n'
+                     '      <p>A record player in the same eight colours: a tinted plinth floating on clear posts over a base that glows '
+                     'at its edge, the motor in a pod of its own. Its pictures are being made.</p></div></div>\n'
+                     f'    <figure class="concept"><img src="img/tt-concept.jpg" width="{cw}" height="{ch}" loading="lazy" '
+                     'alt="A concept of the record player at dusk: a dark plinth floating over a base whose edge glows violet">'
+                     '<figcaption>The concept it is drawn from, lit at dusk.</figcaption></figure>\n'
+                     '    <div class="acts"><a class="btn" href="#contact">Ask about it</a></div>\n'
+                     '  </div></section>')
+    # the home page's lines and colours
+    def tile(key, name, what, line, img, alt, go, soon=False):
+        w, h = Image.open(os.path.join(IMG, img)).size
+        return (f'<a class="tile" href="#{key}">' + ('<span class="soon">Soon</span>' if soon else '') +
+                f'<img src="img/{img}" width="{w}" height="{h}" loading="lazy" alt="{alt}">'
+                f'<span class="t-body"><span class="eyebrow">{name}</span><b class="t-name">{what}</b><span class="t-line">{line}</span>'
+                f'<span class="t-go">{go}</span></span></a>')
+    sp_img = next((f'{k}-habitat-portrait.jpg' for k in ('violet', 'green', 'red') if os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg'))), 'hero-1200.jpg')
+    tiles = [tile('speakers', LINES[0][1], LINES[0][2], LINES[0][3], sp_img, 'Haze, a violet speaker, before layered hills in a hazy evening light', 'Shop speakers')]
+    if lighting:
+        tiles.append(tile('lighting', LINES[1][1], LINES[1][2], LINES[1][3], 'dome-red.jpg', 'The Dome pendant lit in Ember', 'Shop lighting'))
+    tiles.append(tile('turntable', LINES[2][1], LINES[2][2], LINES[2][3], 'tt-ice-tall.jpg' if tt else 'tt-concept.jpg',
+                      f'{TT["name"]}, the record player' if tt else 'The record player\'s concept, its base glowing at dusk',
+                      'See the record player' if tt else 'See where it stands', soon=not tt))
+    lines = ('  <section class="band" id="lines"><div class="wrap">\n'
+             '    <div class="head"><div><p class="eyebrow">The lines</p><h2>One acrylic, three ways to use it.</h2></div></div>\n'
+             f'    <div class="lines">{"".join(tiles)}</div>\n  </div></section>')
+    colours = ('  <section class="band" id="colours"><div class="wrap">\n'
+               '    <div class="head"><div><p class="eyebrow">Shop by colour</p><h2>Eight colours, every line.</h2>\n'
+               '      <p>Each colour runs through everything we make, so a room can be one colour or three.</p></div></div>\n'
+               '    <ul class="shopcol">' + ''.join(
+                   f'<li><a href="#colour-{name.lower()}"><span class="coin-dot" style="--i:{coin[k]}"></span><b>{name}</b><small>{line}</small></a></li>'
+                   for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n  </div></section>')
     data = dict(
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
                      coin=coin[k], views=meta[k], place=PLACES.get(ELEMENT[k], 'on location'))
                 for k, num, name, icon, tint, line, cover in CLOUDS],
-        hues=E.HUES)
+        hues=E.HUES,
+        lamps={k_: dict(name=name, kind=kind, line=line, facts=facts, colours=pm[k_]) for k_, name, kind, line, alt, facts in LAMPS} if lighting else {},
+        tt=dict(TT, colours=tt) if tt else None)
     # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
     # give way on phones to the names under it, the boxes being the landscape frame's
     tall = lambda f: os.path.exists(os.path.join(IMG, f))
@@ -640,8 +751,8 @@ def body():
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
                 .replace('__HERO_CLASS__', ' has-tall' if hero_tall else '')
                 .replace('__TURN__', turn).replace('__CARDS__', cards).replace('__SPEC__', spec).replace('__DWG__', dwg)
-                .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer).replace('__NEXT__', nxt).replace('__GOES__', goes_sec)
-                .replace('__LAMPS_NAV__', '<li class="wide"><a href="#lamps">Lamps</a></li>' if lamps_shown else '')
+                .replace('__REEL__', reel).replace('__HABITATS__', habitats).replace('__CLOSER__', closer)
+                .replace('__LINES__', lines).replace('__COLOURS__', colours).replace('__LIGHTING__', lighting).replace('__TURNTABLE__', turntable)
                 .replace('__STILL__', still).replace('__POSTER__', poster).replace('__POSTER_NIGHT__', poster_night).replace('__DATA__', json.dumps(data, separators=(',', ':'))))
     cut = page.index('</style>') + len('</style>')
     return page[:cut], page[cut:]
@@ -649,7 +760,8 @@ def body():
 
 PAGE = r"""
 <script>(function (d) { d.classList.add('opening');      // the opening's choice, made before anything paints: whether it plays, and by day or night
-  if (location.hash.startsWith('#speaker-') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (/^#(speaker|dome|orb|turntable|colour)-|^#(speakers|lighting|turntable|atmosphere|turn|spec|lamps|record)$/.test(location.hash)
+      || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   d.classList.add('intro');
   if (matchMedia('(prefers-color-scheme: dark)').matches) { d.classList.add('night'); document.querySelector('meta[name="theme-color"]').content = '#100F12'; }
 })(document.documentElement)</script>
@@ -1071,6 +1183,75 @@ html.cursor, html.cursor * { cursor: none !important }
   .spec dl, .facts { grid-template-columns: minmax(0, 1fr) } .spec dt, .facts dt { padding: 10px 0 0; border-bottom: 0 }
   .spec dd, .facts dd { padding: 2px 0 10px } .swatches { gap: 6px } .swatches a { width: 36px; height: 36px }
   nav li.wide { display: none } }
+/* the shop (round 34): the lines and the colours on the home page, a line's products, a colour's page, and the
+   company a colour keeps (its complement, its neighbours, itself), all as cards in the 4:5 frame */
+.lines { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px }
+.tile { position: relative; display: grid; grid-template-rows: auto 1fr; border-radius: 6px; overflow: hidden; background: #F1EDE8;
+  color: var(--ink); text-decoration: none; min-width: 0 }
+.tile img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; display: block; max-width: 100% }
+.tile .t-body { padding: 16px 18px 20px; display: grid; gap: 4px; align-content: start; min-width: 0 }
+.tile .eyebrow { margin: 0 }
+.tile .t-name { font-size: 26px; line-height: 1.1; font-weight: 600; letter-spacing: -0.01em }
+.tile .t-line { color: var(--muted); font-size: 15px }
+.tile .t-go { margin-top: 10px; font-weight: 600; font-size: 15px; text-decoration: underline; text-underline-offset: 4px }
+.tile:hover .t-go { text-decoration-thickness: 2px }
+.tile .soon { position: absolute; top: 12px; left: 12px; z-index: 1; font: 500 12px/1 var(--mono); letter-spacing: 0.1em;
+  text-transform: uppercase; background: var(--veil); backdrop-filter: blur(6px); padding: 7px 10px; border-radius: 999px }
+.shopcol { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none }
+.shopcol a { display: grid; justify-items: center; align-content: start; gap: 6px; color: var(--ink); text-decoration: none;
+  text-align: center; min-width: 0 }
+.shopcol .coin-dot { width: min(72px, 100%); height: auto; aspect-ratio: 1 }
+.shopcol b { font-weight: 600; font-size: 16px; margin-top: 4px }
+.shopcol small { color: var(--muted); font-size: 13px; line-height: 1.35 }
+.shopcol a:hover b { text-decoration: underline; text-underline-offset: 4px }
+.ptiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px }
+.ptiles.one { grid-template-columns: minmax(0, 1fr); max-width: 760px }
+.ptile { display: grid; gap: 12px; align-content: start; min-width: 0 }
+.ptile .ph img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.ptile h3 { margin: 4px 0 0; display: flex; align-items: baseline; gap: 12px; font-size: 26px; line-height: 1.1; font-weight: 600;
+  letter-spacing: -0.01em }
+.ptile h3 small { font: 500 12px/1.3 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted) }
+.ptile .line { margin: 0; color: var(--muted); max-width: 52ch }
+.ptile .more { justify-self: start; color: var(--ink); font-weight: 600; font-size: 15px; text-underline-offset: 4px }
+.dots-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none }
+.dots-row a { display: block; width: 28px; height: 28px; border-radius: 50% }
+.dots-row .coin-dot { width: 100%; height: 100%; display: block }
+.concept { margin: 0; display: grid; gap: 10px; justify-items: start }
+.concept img { width: min(100%, 560px); height: auto; border-radius: 6px; display: block }
+.concept figcaption { font-size: 14px; color: var(--muted) }
+.soon-wrap .acts { margin-top: 24px }
+.colour-head { display: flex; align-items: center; gap: 22px; padding-block: 18px 16px }
+.colour-head .coin-big { width: 96px; height: 96px; flex: none }
+.colour-head .coin-big .coin-dot { width: 100%; height: 100%; display: block }
+.colour-head h1 { font-size: clamp(40px, 5vw, 64px) }
+.colour-head .num { margin: 0 0 6px; font: 500 13px/1.3 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.colour-head .line { margin: 8px 0 0; font-size: 18px }
+.company { padding-block: 32px 8px }
+#p-company .company:first-child { padding-top: 56px }
+.company .goes-head span { max-width: 60ch }
+.pgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px }
+.pcard { position: relative; display: grid; gap: 8px; align-content: start; color: var(--ink); text-decoration: none; min-width: 0 }
+.pcard img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; display: block; background: #F1EDE8;
+  max-width: 100% }
+.pcard b { font-weight: 600; font-size: 17px; line-height: 1.2 }
+.pcard .pc-col { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted) }
+.pcard .pc-col .coin-dot { width: 16px; height: 16px }
+.pcard .tag { position: absolute; left: 8px; top: 8px; font: 500 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--veil); padding: 6px 8px; border-radius: 999px }
+.pcard:hover b { text-decoration: underline; text-underline-offset: 4px }
+.pick-ic { display: inline-block; width: 1.3em; height: 1.3em; vertical-align: -0.3em; margin-left: 6px }
+.pick-ic:empty { display: none }
+.more-line { padding-block: 32px 72px; margin: 0; color: var(--muted) }
+.more-line:empty { padding-block: 0 48px }
+.more-line a { color: var(--ink); text-underline-offset: 4px }
+@media (max-width: 960px) { .shopcol { grid-template-columns: repeat(4, minmax(0, 1fr)) } .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+@media (max-width: 720px) {
+  .lines { grid-template-columns: minmax(0, 1fr); gap: 12px }
+  .tile { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); grid-template-rows: none }
+  .tile img { height: 100% }
+  .ptiles { grid-template-columns: minmax(0, 1fr) }
+  .colour-head .coin-big { width: 72px; height: 72px }
+}
 @media (prefers-reduced-motion: reduce) { .photo img, .spot-label, .thumb { transition: none } .stage .in { animation: none } }
 </style>
 
@@ -1085,8 +1266,9 @@ html.cursor, html.cursor * { cursor: none !important }
 <header class="top"><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home"><span class="globe" aria-hidden="true"></span>__WORD__</a>
   <nav aria-label="Pages"><ul>
-    <li><a href="#atmosphere">Colours</a></li><li><a href="#turn">The horn</a></li><li class="wide"><a href="#spec">Details</a></li>
-    __LAMPS_NAV__<li><a href="#contact">Enquire</a></li>
+    <li><a href="#speakers" data-nav="speakers">Speakers</a></li><li><a href="#lighting" data-nav="lighting">Lighting</a></li>
+    <li><a href="#turntable" data-nav="turntable">Turntable</a></li><li class="wide"><a href="#colours" data-nav="colours">Colours</a></li>
+    <li><a href="#contact">Enquire</a></li>
   </ul></nav>
 </div></header>
 
@@ -1102,36 +1284,13 @@ html.cursor, html.cursor * { cursor: none !important }
     </div>
     <div class="wrap hero-foot">
       <p class="lede">Atmosphere is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke.</p>
-      <div class="acts"><a class="btn solid" href="#atmosphere">The colours</a><a class="btn" href="#contact">Enquire</a></div>
+      <div class="acts"><a class="btn solid" href="#speakers">Shop speakers</a><a class="btn" href="#colours">Shop by colour</a></div>
     </div>
     <div class="wrap"><ul class="cast" aria-label="The eight, in spectrum order">__NAMES__</ul></div>
   </section>
 
-__CLOSER__
-
-  <section class="band" id="turn"><div class="wrap">
-    <div class="head">
-      <div><p class="eyebrow">The horn</p><h2>The oldest amplifier is a shape.</h2>
-        <p>Long before there were amplifiers, a horn was how a small sound filled a large room: the gramophone&rsquo;s, the
-          megaphone&rsquo;s, a cupped hand&rsquo;s. Ours is cast in resin tinted to match its cabinet, and its driver lives in a
-          pod whose cap twists off by hand.</p></div>
-    </div>
-    <ul class="horns" id="horns">__TURN__</ul>
-  </div></section>
-
-  <section class="band" id="atmosphere"><div class="wrap">
-    <div class="head">
-      <div><p class="eyebrow">The colours</p><h2>Choose your atmosphere.</h2>
-        <p>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The lining shows through the walls,
-          so we dressed it in white voile.</p></div>
-      <div class="seg" role="group" aria-label="The speakers' covers">
-        <button type="button" id="cover-off" aria-pressed="true">Cover off</button>
-        <button type="button" id="cover-on" aria-pressed="false">Cover on</button>
-      </div>
-    </div>
-    <div class="cards show-off" id="cards">__CARDS__</div>
-  </div></section>
-
+__LINES__
+__COLOURS__
 __REEL__
 __HABITATS__
   <section class="band room" id="room">
@@ -1139,17 +1298,6 @@ __HABITATS__
     <figure><picture>__ROOM_TALL__<img src="img/room.jpg" srcset="img/room-1440.jpg 1440w, img/room.jpg 2880w" sizes="100vw" width="2880" height="1620" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
       <figcaption class="wrap"><span>Covers on, by a tall window.</span><span>Each stands 1293&nbsp;mm tall and 560&nbsp;mm wide.</span></figcaption></figure>
   </section>
-
-  <section class="band spec" id="spec"><div class="wrap">
-    <div class="head"><div><p class="eyebrow">Details</p><h2>The particulars</h2></div></div>
-    <div class="spec-grid">
-      <dl>__SPEC__</dl>
-      <figure class="dwg">__DWG__
-        <figcaption>From the fabrication drawings</figcaption></figure>
-    </div>
-  </div></section>
-
-__NEXT__
 
   <section class="band" id="contact"><div class="wrap contact">
     <p class="eyebrow">Enquiries</p>
@@ -1161,9 +1309,65 @@ __NEXT__
   </div></section>
 </main>
 
+<main id="line" hidden>
+  <div class="lineview" data-line="speakers">
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Speakers</p></div>
+  <section class="band" id="atmosphere"><div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">Atmosphere</p><h2>Choose your atmosphere.</h2>
+        <p>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The lining shows through the walls,
+          so we dressed it in white voile.</p></div>
+      <div class="seg" role="group" aria-label="The speakers' covers">
+        <button type="button" id="cover-off" aria-pressed="true">Cover off</button>
+        <button type="button" id="cover-on" aria-pressed="false">Cover on</button>
+      </div>
+    </div>
+    <div class="cards show-off" id="cards">__CARDS__</div>
+  </div></section>
+__CLOSER__
+  <section class="band" id="turn"><div class="wrap">
+    <div class="head">
+      <div><p class="eyebrow">The horn</p><h2>The oldest amplifier is a shape.</h2>
+        <p>Long before there were amplifiers, a horn was how a small sound filled a large room: the gramophone&rsquo;s, the
+          megaphone&rsquo;s, a cupped hand&rsquo;s. Ours is cast in resin tinted to match its cabinet, and its driver lives in a
+          pod whose cap twists off by hand.</p></div>
+    </div>
+    <ul class="horns" id="horns">__TURN__</ul>
+  </div></section>
+  <section class="band spec" id="spec"><div class="wrap">
+    <div class="head"><div><p class="eyebrow">Details</p><h2>The particulars</h2></div></div>
+    <div class="spec-grid">
+      <dl>__SPEC__</dl>
+      <figure class="dwg">__DWG__
+        <figcaption>From the fabrication drawings</figcaption></figure>
+    </div>
+  </div></section>
+  </div>
+  <div class="lineview" data-line="lighting">
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Lighting</p></div>
+__LIGHTING__
+  </div>
+  <div class="lineview" data-line="turntable">
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Turntable</p></div>
+__TURNTABLE__
+  </div>
+</main>
+
+<main id="colour" hidden>
+  <div class="wrap">
+    <p class="crumbs"><a href="#top">Home</a> / <a href="#colours">Colours</a> / <span id="c-crumb"></span></p>
+    <div class="colour-head"><span class="coin-big" id="c-coin"></span>
+      <div><p class="num" id="c-num"></p><h1 id="c-name"></h1><p class="line" id="c-line"></p></div></div>
+    <ul class="swatches" id="c-swatches" aria-label="Colour"></ul>
+    <section class="company" aria-labelledby="c-in"><div class="goes-head"><h2 id="c-in"></h2><span id="c-in-note"></span></div>
+      <div class="pgrid" id="c-products"></div></section>
+    <div id="c-company"></div>
+  </div>
+</main>
+
 <main id="pdp" hidden>
   <div class="wrap">
-    <p class="crumbs"><a href="#atmosphere">Atmosphere</a> / <span id="p-crumb"></span></p>
+    <p class="crumbs"><a href="#top">Home</a> / <a id="p-line-link" href="#speakers">Speakers</a> / <span id="p-crumb"></span></p>
     <div class="pdp">
       <section class="gallery" aria-label="Pictures">
         <div class="frame">
@@ -1172,24 +1376,22 @@ __NEXT__
           <button type="button" class="nav next" id="g-next" aria-label="Next picture"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 3.5 12 9l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <span class="count" id="g-count" aria-hidden="true"></span>
         </div>
-        <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures of this speaker"></div>
+        <div class="thumbs" id="thumbs" role="tablist" aria-label="Pictures"></div>
         <p class="cap" id="cap" aria-live="polite"></p>
       </section>
-      <aside class="buy" aria-label="This speaker">
+      <aside class="buy" aria-label="This product">
         <p class="num"><span id="p-num"></span></p>
         <h1 class="named"><span id="p-name"></span><span class="pic" id="p-icon"></span></h1>
         <p class="line" id="p-line"></p>
-        <p class="price">Price on request <span>&middot; each pair made to order</span></p>
+        <p class="price">Price on request <span id="p-unit">&middot; each pair made to order</span></p>
         <ul class="swatches" id="swatches" aria-label="Colour"></ul>
-        <p class="pick">Colour: <b id="p-pick"></b></p>
-        <div class="acts"><a class="btn solid" href="#contact">Enquire about a pair</a></div>
+        <p class="pick">Colour: <b id="p-pick"></b><span class="pick-ic" id="p-pick-ic"></span></p>
+        <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Enquire about a pair</a></div>
         <dl class="facts" id="facts"></dl>
       </aside>
     </div>
-__GOES__    <section class="others" aria-labelledby="others-title">
-      <div class="goes-head"><h2 id="others-title">The other seven</h2><span>Same speaker, a different air</span></div>
-      <ul id="others"></ul>
-    </section>
+    <div id="p-company"></div>
+    <p class="more-line" id="p-more"></p>
   </div>
 </main>
 
@@ -1343,9 +1545,9 @@ document.getElementById('copy').addEventListener('click', () => {
   try { navigator.clipboard.writeText(text).then(done, pickText); } catch (e) { pickText(); }
 });
 
-// a speaker's page: its pictures as a shop shows them, the photograph in its element first, then the rest one at a time
-// (the arrows, a swipe, the arrow keys, or the strip of thumbnails)
-const VIEWS = [
+// a product's page (round 34, the shop): its pictures as a shop shows them, one at a time (the arrows, a swipe, the arrow
+// keys, or the strip of thumbnails), in the colour picked; Atmosphere's open on the photograph in its element
+const SPEAKER_VIEWS = [
   ['habitat', 'In its element', c => `${c.name} ${c.place}.`],
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
   ['off', 'Cover off', c => `Cover off: the 15-inch woofer, the two ports, and the lining showing through the walls.`],
@@ -1359,11 +1561,44 @@ const VIEWS = [
   ['reel', 'Lit from below', c => `${c.name} on a light, its colour thrown up the wall behind it.`],
   ['turn', 'Turning', c => `${c.name}'s horn, all the way round.`],
 ];
+const LAMP_VIEWS = {
+  dome: [['hero', 'Lit', (c, s) => s ? `The Dome lit, shown in ${BY[s].name}; its ${c.name} cover is cast in the same way.` : `The Dome lit, its ${c.name} cover glowing beneath a black hub.`],
+         ['row', 'All eight', () => 'Eight Domes hung in a row, lit, one in each colour.'],
+         ['unlit', 'Off', () => 'An Orb and a Dome in Smoke, switched off: dark, polished acrylic with a pale core.']],
+  orb: [['hero', 'Lit', (c, s) => s ? `The Orb lit, shown in ${BY[s].name}; its ${c.name} ball is cast in the same way.` : `The Orb lit in ${c.name}, sitting low in its black acrylic base.`],
+        ['row', 'All eight', () => 'Eight Orbs in a row, lit, in spectrum order.'],
+        ['cartridge', 'Cordless', () => 'The battery cartridge slid half out of the base: about ten hours without the cable.'],
+        ['unlit', 'Off', () => 'An Orb and a Dome in Smoke, switched off: dark, polished acrylic with a pale core.']],
+};
+const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}.`],
+                  ['dusk', 'At dusk', c => `${D.tt.name} in ${c.name} at dusk, its base glowing.`],
+                  ['open', 'Cover open', () => 'Its cover open.'], ['detail', 'Arm and platter', () => 'The arm and the platter.'],
+                  ['pod', 'The motor apart', () => 'The motor in its own pod, standing clear of the plinth.']];
+const PRODUCTS = [
+  { id: 'speaker', line: 'speakers', lineName: 'Speakers', route: 'speaker', kind: 'Horn loudspeaker', name: c => c.name,
+    num: c => `Atmosphere ${c.num}`, copy: c => c.line, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
+    card: k => { const o = BY[k].views.off; return o.tall || o.card || o; }, unit: 'each pair made to order', ask: 'Enquire about a pair',
+    facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Cast resin, tinted to match'],
+      ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`], ['Amplifier', 'Hypex FusionAmp FA122, built in'], ['Inputs', 'XLR, RCA, AES, S/PDIF, optical'],
+      ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg']],
+    title: c => `Atmosphere in ${c.name}` },
+  ...Object.entries(D.lamps).map(([id, L]) => ({ id, line: 'lighting', lineName: 'Lighting', route: id, kind: L.kind, name: () => L.name,
+    num: () => `Lighting &middot; ${L.kind}`, copy: () => L.line, views: k => (L.colours[k] || {}).views, VIEWS: LAMP_VIEWS[id],
+    card: k => L.colours[k].card, unit: 'made to order', ask: 'Enquire', facts: c => [...L.facts, ['Colour', c.name]],
+    title: c => `${L.name} in ${c.name}` })),
+  ...(D.tt ? [{ id: 'turntable', line: 'turntable', lineName: 'Turntable', route: 'turntable', kind: D.tt.kind, name: () => D.tt.name,
+    num: () => 'Turntable', copy: () => D.tt.line, views: k => (D.tt.colours[k] || {}).views, VIEWS: TT_VIEWS,
+    card: k => D.tt.colours[k].card, unit: 'made to order', ask: 'Enquire', facts: c => [...D.tt.facts, ['Colour', c.name]],
+    title: c => `${D.tt.name} in ${c.name}` }] : []),
+];
+const PBY = Object.fromEntries(PRODUCTS.map(p => [p.route, p]));
+const icons = c => `<img class="ic only-light" src="img/icon-${c.icon}-light.webp" alt="" width="256" height="256"><img class="ic only-dark" src="img/icon-${c.icon}-dark.webp" alt="" width="256" height="256">`;
 const stage = document.getElementById('stage'), thumbs = document.getElementById('thumbs'), phone = matchMedia('(max-width: 700px)');
-let cur = null, view = 'habitat', turnFrame = 0, autoTurn = null;
-function src(c, v) { return c.views[v]; }
-const say = (c, v) => VIEWS.find(x => x[0] === v)[2](c);
-const shown = c => VIEWS.map(x => x[0]).filter(v => c.views[v] && !(v === 'studio' && c.views['studio-light']));   // the bright studio won
+let P = PRODUCTS[0], cur = null, view = 'habitat', turnFrame = 0, autoTurn = null;
+const vw = () => P.views(cur) || {};
+function src(c, v) { return vw()[v]; }
+const say = (c, v) => P.VIEWS.find(x => x[0] === v)[2](c, (vw()[v] || {}).shown);
+const shown = c => P.VIEWS.map(x => x[0]).filter(v => vw()[v] && !(v === 'studio' && vw()['studio-light']));   // the bright studio won
 // the stage's ground for a picture: its sides' colours when it is narrower than the stage, its top's and bottom's when wider
 // (a close-up has a blurred copy of itself instead, and one cut off at the foot sits on the stage's foot under its top's colour)
 function ground(v) {
@@ -1398,6 +1633,7 @@ function showView(v, focus) {
   stage.replaceChildren(pic);
   if (s.edge === 'busy' && v !== 'habitat') stage.prepend(el('div', { class: 'blur', 'aria-hidden': 'true', style: `background-image:url(${s.src})` }));
   if (v === 'inside' && s.shared && cur !== 'green') stage.appendChild(el('span', { class: 'tag' }, 'Shown in Poison'));
+  if (s.shown) stage.appendChild(el('span', { class: 'tag' }, `Shown in ${BY[s.shown].name}`));
   stage.style.background = ground(v);
   document.getElementById('cap').textContent = say(c, v);
   document.getElementById('g-count').textContent = `${i + 1} / ${list.length}`;
@@ -1410,31 +1646,36 @@ function showView(v, focus) {
     const t = src(c, n); if (n !== 'turn') new Image().src = (phone.matches && t.tall ? t.tall : t).src; }
 }
 function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
-function renderPDP(k) {
-  const c = BY[k], first = cur === null; cur = k;
-  document.getElementById('p-crumb').textContent = c.name;
-  document.getElementById('p-num').textContent = `Atmosphere ${c.num}`;
-  document.getElementById('p-name').textContent = c.name;
-  document.getElementById('p-line').textContent = c.line;
+const MORE = {
+  speaker: 'More on the speaker: <a href="#turn">the horn</a>, <a href="#closer">in the studio</a> and <a href="#spec">the particulars</a>.',
+  dome: 'Also in Lighting: <a href="#orb-ember">the Orb</a>, a table lamp in the same eight.',
+  orb: 'Also in Lighting: <a href="#dome-ember">the Dome</a>, a pendant in the same eight.',
+  turntable: 'See it beside the speakers: <a href="#speakers">Atmosphere</a>.',
+};
+function renderProduct(Pr, k) {
+  const c = BY[k]; P = Pr; cur = k;
+  document.title = `${P.title(c)} · EARF`;
+  const ll = document.getElementById('p-line-link'); ll.textContent = P.lineName; ll.href = `#${P.line}`;
+  document.getElementById('p-crumb').textContent = P.id === 'speaker' ? c.name : P.title(c);
+  document.getElementById('p-num').innerHTML = P.num(c);
+  document.getElementById('p-name').textContent = P.name(c);
+  document.getElementById('p-line').textContent = P.copy(c);
   document.getElementById('p-pick').textContent = c.name;
-  document.getElementById('p-icon').innerHTML = `<img class="ic only-light" src="img/icon-${c.icon}-light.webp" alt="" width="256" height="256"><img class="ic only-dark" src="img/icon-${c.icon}-dark.webp" alt="" width="256" height="256">`;
-  document.getElementById('facts').innerHTML = [
-    ['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Cast resin, tinted to match'],
-    ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`],
-    ['Amplifier', 'Hypex FusionAmp FA122, built in'], ['Inputs', 'XLR, RCA, AES, S/PDIF, optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'],
-    ['Weight', 'About 72 kg']].map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('');
+  document.getElementById('p-icon').innerHTML = P.id === 'speaker' ? icons(c) : '';         // the colour's own icon: by the
+  document.getElementById('p-pick-ic').innerHTML = P.id === 'speaker' ? '' : icons(c);     // name it is, else by the colour
+  document.getElementById('p-unit').innerHTML = `&middot; ${P.unit}`;
+  document.getElementById('p-enquire').textContent = P.ask;
+  document.getElementById('facts').innerHTML = P.facts(c).map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join('');
   document.getElementById('swatches').replaceChildren(...D.clouds.map(o => { const li = el('li');
-    const a = el('a', { href: `#speaker-${o.name.toLowerCase()}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
-      `<span class="coin-dot" style="--i:${o.coin}"></span>`); li.appendChild(a); return li; }));
-  thumbs.replaceChildren(...shown(c).map((v, i) => { const s = src(c, v), label = VIEWS.find(x => x[0] === v)[1];
+    li.appendChild(el('a', { href: `#${P.route}-${o.name.toLowerCase()}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
+      `<span class="coin-dot" style="--i:${o.coin}"></span>`)); return li; }));
+  thumbs.replaceChildren(...shown(c).map((v, i) => { const s = src(c, v), label = P.VIEWS.find(x => x[0] === v)[1];
     const b = el('button', { type: 'button', role: 'tab', id: `thumb-${i}`, 'data-v': v, 'aria-label': label, 'aria-controls': 'stage',
       class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
     b.addEventListener('click', () => showView(v)); return b; }));
-  document.getElementById('others').replaceChildren(...D.clouds.filter(o => o.k !== k).map(o => { const li = el('li');
-    const f = o.views.off.card || o.views.off;
-    li.appendChild(el('a', { href: `#speaker-${o.name.toLowerCase()}` }, `<img src="${f.src}" alt="" loading="lazy" width="${f.w}" height="${f.h}"><span>${o.name}</span>`)); return li; }));
-  showView(shown(c)[0]);                              // each speaker opens on its photograph in its element
-  goesWith(c);
+  showView(shown(c)[0]);                              // Atmosphere opens on its photograph in its element, the rest on their hero
+  company(document.getElementById('p-company'), k, P.id, true);
+  document.getElementById('p-more').innerHTML = MORE[P.id] || '';
 }
 document.getElementById('g-prev').addEventListener('click', () => go(-1));
 document.getElementById('g-next').addEventListener('click', () => go(1));
@@ -1451,55 +1692,101 @@ stage.addEventListener('pointerup', e => { if (sx === null) return; const dx = e
   if (Math.abs(dx) > 40 && Math.abs(dx) > 1.2 * Math.abs(dy)) go(dx < 0 ? 1 : -1); });
 stage.addEventListener('pointercancel', () => { sx = null; });
 
-// what goes with a colour (round 25): never another speaker, but the things round it, by the painter's wheel
-const CH = D.clouds.filter(c => c.hue !== null).sort((a, b) => a.hue - b.hue), hue = h => CH[((h % 6) + 6) % 6];
-const shade = (hex, k) => '#' + [1, 3, 5].map(i => Math.round(parseInt(hex.slice(i, i + 2), 16) * k).toString(16).padStart(2, '0')).join('');
-const light = (hex, k) => '#' + [1, 3, 5].map(i => { const v = parseInt(hex.slice(i, i + 2), 16); return Math.round(v + (255 - v) * k).toString(16).padStart(2, '0'); }).join('');
-const INK = '#1C1A18';
-const ART = {
-  player: c => `<svg viewBox="0 0 160 120" aria-hidden="true"><rect x="8" y="22" width="144" height="84" rx="8" fill="${c}"/>
-    <rect x="8" y="98" width="144" height="8" rx="3" fill="${shade(c, 0.78)}"/>
-    <circle cx="66" cy="62" r="34" fill="${INK}"/><circle cx="66" cy="62" r="24" fill="none" stroke="#3A3733" stroke-width="1.5"/>
-    <circle cx="66" cy="62" r="10" fill="${light(c, 0.35)}"/><circle cx="66" cy="62" r="2" fill="${INK}"/>
-    <circle cx="128" cy="38" r="7" fill="${shade(c, 0.7)}"/><path d="M128 38 L122 84 L108 92" fill="none" stroke="#D9D6D0" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="132" y="84" width="10" height="10" rx="2" fill="${shade(c, 0.7)}"/></svg>`,
-  lamp: c => `<svg viewBox="0 0 160 120" aria-hidden="true"><path d="M44 52 A36 34 0 0 1 116 52 Z" fill="${c}"/>
-    <rect x="40" y="50" width="80" height="6" rx="3" fill="${shade(c, 0.8)}"/><rect x="77" y="56" width="6" height="42" fill="${INK}"/>
-    <ellipse cx="80" cy="102" rx="26" ry="8" fill="${shade(c, 0.8)}"/><ellipse cx="80" cy="99" rx="26" ry="8" fill="${c}"/></svg>`,
-};
-function goes(c) {
-  if (c.hue === null) { const white = c.k === 'ice', acc = white ? hue(4) : hue(0);
-    return [['player', 'Monochromatic', white ? '#EEF1F1' : '#2A2826', white ? 'white' : 'black', `All ${white ? 'white' : 'black'}.`],
-            ['lamp', 'Accent', acc.col, acc.name.toLowerCase(), `One of the six as an accent: ${acc.name}, say.`]]; }
-  const comp = hue(c.hue + 3);
-  return [['player', 'Monochromatic', shade(c.col, 0.72), `deep ${c.name.toLowerCase()}`, 'The same colour, a shade deeper.'],
-          ['lamp', 'Complementary', comp.col, comp.name.toLowerCase(), 'Opposite on the colour wheel, so each sets the other off.']];
+// the company a colour keeps, by the painter's wheel of six (round 25's idea, made the shop's in round 34): its
+// complement opposite, its two neighbours, and itself in every line. Fog and Smoke have no hue: each is the other's
+// complement, light against dark, and sits easiest beside the cool tints (Fog: Ice, Haze) or the deep ones (Smoke: Haze, Ember)
+const HUE6 = { red: 0, orange: 1, amber: 2, green: 3, blue: 4, violet: 5 }, AT6 = Object.fromEntries(Object.entries(HUE6).map(([k, h]) => [h, k]));
+function relations(k) {
+  const h = HUE6[k];
+  if (h === undefined) return { comp: [k === 'ice' ? 'black' : 'ice'], ana: k === 'ice' ? ['blue', 'violet'] : ['violet', 'red'], neutral: true };
+  return { comp: [AT6[(h + 3) % 6]], ana: [AT6[(h + 5) % 6], AT6[(h + 1) % 6]], neutral: false };
 }
-const GOODS = { player: 'Record player', lamp: 'Lamp' };
-function goesWith(c) {
-  if (!document.getElementById('goes')) return;       // off the page while the companions are redrawn
-  document.getElementById('goes-note').textContent = c.hue === null ? `No hue of its own, so it pairs by lightness. Sketches, for now.`
-    : `Paired by the colour wheel. Sketches, for now.`;
-  document.getElementById('goes').replaceChildren(...goes(c).map(([id, way, col, cname, why]) => el('figure', { class: 'good' },
-    `<div class="art">${ART[id](col)}</div><b>${GOODS[id]}</b><span class="way">${way} <i>&middot;</i> <span class="chip"><span class="dot" style="--c:${col}"></span>${cname}</span></span><p>${why}</p>`)));
+function pcard(Pr, k) {
+  const c = BY[k], im = Pr.card(k);
+  const a = el('a', { class: 'pcard', href: `#${Pr.route}-${c.name.toLowerCase()}` },
+    `<img src="${im.src}" width="${im.w}" height="${im.h}" alt="" loading="lazy">` + (im.shown ? `<span class="tag">Shown in ${BY[im.shown].name}</span>` : '') +
+    `<b>${Pr.id === 'speaker' ? `Atmosphere, ${c.name}` : Pr.name(c)}</b>` +
+    `<span class="pc-col"><span class="coin-dot" style="--i:${c.coin}"></span>${Pr.id === 'speaker' ? Pr.kind : `${Pr.kind} in ${c.name}`}</span>`);
+  a.querySelector('img').alt = Pr.title(c);
+  return a;
+}
+// a row's cards for some colours: this product in each first, then the other lines' in each, as many as a row holds
+function picks(cols, pid, k, max = 4) {
+  const order = [...PRODUCTS.filter(x => x.id === pid), ...PRODUCTS.filter(x => x.id !== pid)], out = [];
+  for (const Pr of order) for (const c of cols) if (!(Pr.id === pid && c === k) && Pr.views(c)) out.push([Pr, c]);
+  return out.slice(0, max);
+}
+function block(id, title, note, cards) {
+  const sec = el('section', { class: 'company', 'aria-labelledby': id });
+  sec.appendChild(el('div', { class: 'goes-head' }, `<h2 id="${id}">${title}</h2><span>${note}</span>`));
+  const g = el('div', { class: 'pgrid' }); cards.forEach(([Pr, c]) => g.appendChild(pcard(Pr, c))); sec.appendChild(g);
+  return sec;
+}
+function company(box, k, pid, mono) {
+  const c = BY[k], r = relations(k), names = cs => cs.map(x => BY[x].name).join(' and ');
+  const out = [
+    block(`${box.id}-comp`, 'Complementary', r.neutral
+      ? `${c.name} has no hue of its own, so it pairs by lightness: ${names(r.comp)} is its opposite.`
+      : `${names(r.comp)} sits opposite ${c.name} on the colour wheel. Each makes the other look more like itself.`, picks(r.comp, pid, k)),
+    block(`${box.id}-ana`, 'Analogous', r.neutral
+      ? `The tints that sit easiest beside it: ${names(r.ana)}.`
+      : `${names(r.ana)}, its neighbours on the wheel. They agree with it.`, picks(r.ana, pid, k))];
+  if (mono) out.push(block(`${box.id}-mono`, 'Monochromatic', `${c.name} all the way through: the same colour in the other lines.`, picks([k], pid, k)));
+  box.replaceChildren(...out);
+}
+// a colour's page: everything made in it, then its complement and its neighbours
+function renderColour(k) {
+  const c = BY[k];
+  document.title = `${c.name} · EARF`;
+  document.getElementById('c-crumb').textContent = c.name;
+  document.getElementById('c-num').textContent = `Colour ${c.num} of 8`;
+  document.getElementById('c-name').textContent = c.name;
+  document.getElementById('c-line').textContent = c.line;
+  document.getElementById('c-coin').innerHTML = `<span class="coin-dot" style="--i:${c.coin}"></span>`;
+  document.getElementById('c-swatches').replaceChildren(...D.clouds.map(o => { const li = el('li');
+    li.appendChild(el('a', { href: `#colour-${o.name.toLowerCase()}`, title: o.name, 'aria-label': o.name, ...(o.k === k ? { 'aria-current': 'true' } : {}) },
+      `<span class="coin-dot" style="--i:${o.coin}"></span>`)); return li; }));
+  document.getElementById('c-in').textContent = `In ${c.name}`;
+  document.getElementById('c-in-note').textContent = `Every line, in ${c.tint.toLowerCase()} acrylic.`;
+  document.getElementById('c-products').replaceChildren(...PRODUCTS.filter(Pr => Pr.views(k)).map(Pr => pcard(Pr, k)));
+  company(document.getElementById('c-company'), k, 'speaker', false);
 }
 
-// the address: #top and the home page's sections, or #speaker-<colour>
+// the address: the home page and its sections; a line (#speakers, #lighting, #turntable, and the old #atmosphere, #turn,
+// #spec and #lamps on theirs); a colour (#colour-poison); or a product in a colour (#speaker-poison, #dome-poison ...)
 const home = document.getElementById('home'), pdp = document.getElementById('pdp');
+const lineMain = document.getElementById('line'), colourMain = document.getElementById('colour'), MAINS = { home, line: lineMain, colour: colourMain, pdp };
+const LINE_OF = { speakers: 'speakers', atmosphere: 'speakers', turn: 'speakers', spec: 'speakers', closer: 'speakers',
+                  lighting: 'lighting', lamps: 'lighting', turntable: 'turntable', record: 'turntable' };
+const LINE_NAME = { speakers: 'Speakers', lighting: 'Lighting', turntable: 'Turntable' };
+const TITLE0 = document.title;
 let last = null;
+const showMain = name => Object.entries(MAINS).forEach(([n, m]) => { m.hidden = n !== name; });
+const navAt = which => document.querySelectorAll('nav a[data-nav]').forEach(a => {
+  if (a.dataset.nav === which) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
 function route() {
-  const h = location.hash.slice(1), m = /^speaker-([a-z]+)$/.exec(h), k = m ? keyOf(m[1]) : null;
-  const page = k ? 'speaker' : 'home';
-  if (k) {
-    const was = last; home.hidden = true; pdp.hidden = false; renderPDP(k);
-    if (was !== 'speaker') scrollTo(0, 0);
+  const h = location.hash.slice(1);
+  let m, page;
+  if ((m = /^(speaker|dome|orb|turntable)-([a-z]+)$/.exec(h)) && PBY[m[1]] && keyOf(m[2]) && PBY[m[1]].views(keyOf(m[2]))) {
+    page = h; showMain('pdp'); renderProduct(PBY[m[1]], keyOf(m[2]));
+    if (!(last || '').startsWith(m[1] + '-')) scrollTo(0, 0);
+    navAt(PBY[m[1]].line);
+  } else if ((m = /^colour-([a-z]+)$/.exec(h)) && keyOf(m[1])) {
+    page = h; showMain('colour'); renderColour(keyOf(m[1])); scrollTo(0, 0); navAt('colours');
+  } else if (LINE_OF[h] || /^turntable-/.test(h)) {
+    const L = LINE_OF[h] || 'turntable'; page = 'line-' + L; showMain('line');
+    lineMain.querySelectorAll('.lineview').forEach(v => { v.hidden = v.dataset.line !== L; });
+    document.title = `${LINE_NAME[L]} · EARF`;
+    const target = document.getElementById(h);
+    if (target && !LINE_NAME[h] && !/^turntable-/.test(h)) target.scrollIntoView(); else scrollTo(0, 0);
+    navAt(L); ask();
   } else {
-    const was = last; home.hidden = false; pdp.hidden = true;
+    page = 'home'; showMain('home'); document.title = TITLE0;
     const target = h && document.getElementById(h);
-    if (target && h !== 'top') target.scrollIntoView(); else if (was === 'speaker' || h === 'top') scrollTo(0, 0);
-    ask();
+    if (target && h !== 'top') target.scrollIntoView(); else if (last !== 'home' || h === 'top') scrollTo(0, 0);
+    navAt(h === 'colours' ? 'colours' : null); ask();
   }
-  last = page === 'speaker' ? 'speaker' : 'home';
+  last = page;
 }
 addEventListener('hashchange', route);
 
@@ -1551,7 +1838,7 @@ if (matchMedia('(pointer: fine)').matches && !reduce) {
   const root = document.documentElement, dot = el('div', { class: 'cur cur-dot', 'aria-hidden': 'true' }), ring = el('div', { class: 'cur cur-ring', 'aria-hidden': 'true' });
   document.body.append(dot, ring);
   let x = -99, y = -99, rx = -99, ry = -99, sc = 1, scTo = 1, last = performance.now(), under = null;
-  const speakerOf = a => { const k = a && (a.dataset.k || keyOf((/#speaker-([a-z]+)/.exec(a.getAttribute('href') || '') || [])[1])); return k && BY[k] ? BY[k].col : null; };
+  const speakerOf = a => { const k = a && (a.dataset.k || keyOf((/#(?:speaker|dome|orb|turntable|colour)-([a-z]+)/.exec(a.getAttribute('href') || '') || [])[1])); return k && BY[k] ? BY[k].col : null; };
   addEventListener('pointermove', e => {
     if (e.pointerType && e.pointerType !== 'mouse') return;
     x = e.clientX; y = e.clientY; root.classList.add('cursor');
