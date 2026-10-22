@@ -262,13 +262,27 @@ def brace_window(P, b):
 
 
 def back_screws(P):
-    """The back's sixteen screws' centres (x, z): `per_side` up each side, `per_end` along the top and the bottom (the
-    corners shared), on the land strips' centre lines."""
+    """The back's screws' centres (x, z): `per_side` up each side, `per_end` along the top and the bottom (the corners
+    shared), on the land strips' centre lines or (round 36, with a cord seal) `screw_at` in from the shell, outside the
+    seal's groove; then the ties' to the braces' bosses (back_ties)."""
     W, H, T, bk = P['W'], P['H'], P['T'], P['back']
-    e = T + bk['land'] / 2
+    e = T + bk.get('screw_at', bk['land'] / 2)
     zs = [e + (H - 2 * e) * k / (bk['per_side'] - 1) for k in range(bk['per_side'])]
     xs = [e + (W - 2 * e) * k / (bk['per_end'] - 1) for k in range(bk['per_end'])]
-    return [(x, z) for x in (e, W - e) for z in zs] + [(x, z) for x in xs[1:-1] for z in (e, H - e)]
+    return [(x, z) for x in (e, W - e) for z in zs] + [(x, z) for x in xs[1:-1] for z in (e, H - e)] + back_ties(P)
+
+
+def back_ties(P):
+    """Round 36 (the engineering review's S1, the owner: yes): where the back is screwed to the braces, (x, z), two to a
+    brace: each beside one of the back's outer ribs, outboard of it, at the brace's mid-thickness. None unless
+    P['back']['ties']. The back's first mode is set by its long span between the top and the bottom; tied there, each
+    rib is held at both braces too, and the review's estimate puts the first mode at about 210 Hz, against about 100."""
+    tie = P['back'].get('ties')
+    if not tie or not P['ribs']:
+        return []
+    rb = P['ribs']; xr, rt, bw = (min(rb['back']), max(rb['back'])), rb['t'], tie['boss'][0]
+    xs = (xr[0] - rt / 2 - tie['beside'] - bw / 2, xr[1] + rt / 2 + tie['beside'] + bw / 2)
+    return [(x, b['z'] + P['T'] / 2) for b in P['braces'] for x in xs]
 
 
 def tuned(P):
@@ -385,6 +399,9 @@ def lining(P, plen, ribs):
     stops = [xb0, xb1] + [v for r in backs for v in (r.bounding_box().min.X - g, r.bounding_box().max.X + g)]
     cut = [grown(r) for r in backs] + [keep_out(cx - aw, cx + aw, az - ah, az + ah, yback - 1, D + 1, zone, stops)]
     cut += [box(ux0, uy0, uz0, ux1, uy1, uz1) for ux0, ux1, uz0, uz1, uy0, uy1 in under_top]
+    if back_ties(P):                                  # round 36: round the braces' bosses, a gap all round
+        bw, bh = bk['ties']['boss']
+        cut += [keep_out(x - bw / 2 - g, x + bw / 2 + g, z - bh / 2 - g, z + bh / 2 + g, yback - 1, D + 1, zone, stops) for x, z in back_ties(P)]
     for r in cut:
         s = s - r
     out += named('back', 0, s, (0, 2))
@@ -429,7 +446,11 @@ def net_volume(P, port_l=60.0):
         (iw + 2 * ab['t']) * (ih + 2 * ab['t']) * (idp + ab['t'] - ab['gasket']) / 1e6
     tb = top_boss(P)
     pad = (tb[2] - tb[0]) * (tb[3] - tb[1]) * (tb[5] - tb[4]) / 1e6 if tb else 0.0
-    return inner - 4.5 - amp - port - brace - ribs - land - pad   # woofer (estimated), compartment, ports, braces, ribs, lands, pad
+    ties = 0.0
+    if back_ties(P):                                  # round 36: the braces' bosses
+        bw, bh = bk['ties']['boss']
+        ties = len(back_ties(P)) * (bw * bh * (D - T - bk['gasket'] - ye + bk['ties']['saddle']) - bw * T * bk['ties']['saddle']) / 1e6
+    return inner - 3.7 - amp - port - brace - ribs - land - pad - ties   # woofer (round 36: Faital's 3.7 L; 4.5 estimated before), compartment, ports, braces, ribs, lands, pad, bosses
 
 
 def parts(P):
@@ -599,9 +620,13 @@ def parts(P):
     # `gap` above the top; it stands on three rods cut to its underside
     wg = waveguide(P)
     shell, zc = wg['shell'], wg['zc']
-    out.append(Part('waveguide', shell, Machined('cast-resin', 'cast', setup_usd=900.0), finish='horn', group='horn',
-                    notes=wg['notes']))
-    if wg['cap'] is not None:
+    fm = wg.get('formed')
+    if fm:
+        out += formed_parts(P, wg)
+    else:
+        out.append(Part('waveguide', shell, Machined('cast-resin', 'cast', setup_usd=900.0), finish='horn', group='horn',
+                        notes=wg['notes']))
+    if wg['cap'] is not None and not fm:
         out.append(Part('waveguide-cap', wg['cap'], Machined('cast-resin', 'cast', setup_usd=250.0), finish='horn', group='horn',
                         notes=[('the tub\'s back, a lid; six M4 screws into inserts round its edge; the cable leaves through a post below'
                                 if hz['form'] == 'cast' and hz['cast']['back'] == 'tub' else
@@ -613,6 +638,7 @@ def parts(P):
                                  'closes the pod behind the driver; a spigot locates it, three M4 screws hold it; ')
                                 + ('the HF pair leaves through a post below; unplugged here, the horn lifts off its sockets'
                                    if hz['form'] == 'cast' else 'the cable leaves through its centre'))]))
+    if wg['cap'] is not None:
         if wg.get('ring') is not None:
             later.append(Part('cap-o-ring', wg['ring'], Bought('cap-o-ring'), finish='sleeve', group='horn', inside=True,
                               notes=['in the groove on the cap\'s spigot, beyond the lugs; a smear of silicone grease so it turns']))
@@ -622,8 +648,10 @@ def parts(P):
         out.append(adaptor_ring(P, wg, hf))
     from build123d import Axis
     if hz['form'] == 'cast':
-        out += posts(P, rods, shell)
-        later += fittings(P, rods, shell)
+        out += posts(P, rods, fm['support'] if fm else shell)
+        later += fittings(P, rods, shell, floor=fm['floor'] if fm else None)
+        if fm:
+            later += formed_later(P, wg)
         rods = []                                 # the study forms' rods below
     for i, (rx, ry) in enumerate(rods, 1):
         # where the rod meets the shell's underside: the lowest hit over its axis and its rim, so no edge pokes in
@@ -675,6 +703,15 @@ def parts(P):
              notes=['a stud on a bared spot of the compartment\'s floor, a star washer under its nut, and a green and yellow lead '
                     'with ring terminals to the FA122\'s earth point; anodising insulates, so its screws do not count']),
         Part('amp-box-fixings', None, Bought('amp-box-screws')),
+        # round 36: the volume from Hypex's remote (the record player carries the phono stage): one each for the pair, the
+        # receiver in the master speaker, the slave on Hypex's link over coax (its own IR disabled)
+        *([Part('remote-kit', None, Bought('hypex-remote-kit'), qty=0.5,
+                notes=['in the master speaker: its IR board behind a window in the back\'s amplifier plate (to be drawn), its cable to J15 on '
+                       'the FA122\'s input board; master and slave set in HFD']),
+           Part('remote', None, Bought('hypex-remote'), qty=0.5),
+           Part('link-cable', None, Bought('hypex-link-coax'), qty=0.5,
+                notes=['master to slave on the FA122s\' S/PDIF I/O, which carries Hypex\'s link: one remote sets both'])]
+          if P.get('remote') else []),
         *([] if hz['form'] == 'cast' else [Part('hf-cable', None, Bought('speaker-cable-1m'))]),
         Part('hf-capacitor', None, Bought('hf-protect-cap'), notes=['in series ahead of the L-pad: the driver safe from low frequencies '
                                                                     'even if the amplifier\'s preset is lost (a first-order high-pass at '
@@ -1080,6 +1117,12 @@ def back_and_feet(P, kind):
            'wood': 'a cleat glued and screwed to the shell'}[kind]
     ins = {'wood': 'for wood', 'hdpe': 'for plastics', 'acrylic': 'bonded with epoxy'}[kind]
     out = []
+    seal = bk.get('seal')
+    groove = None
+    if seal:                                         # round 36: the cord's groove, a rounded rectangle round the lands
+        gd, gw = seal['groove']; a = T + seal['at']
+        ring2d = lambda o: rounded_rect(W - 2 * a + 2 * o, H - 2 * a + 2 * o, seal['corner'] + o, cx=W / 2, cy=H / 2)
+        groove = prism(ring2d(gw / 2), 'y', yl1 - gd, yl1 + 1) - prism(ring2d(-gw / 2), 'y', yl1 - gd - 1, yl1 + 2)
     for n, s in (('land-left', box(T, yl0, T, T + lw, yl1, H - T)), ('land-right', box(W - T - lw, yl0, T, W - T, yl1, H - T)),
                  ('land-top', box(T + lw, yl0, H - T - lw, W - T - lw, yl1, H - T)),
                  ('land-bottom', box(T + lw, yl0, T, W - T - lw, yl1, T + lw))):
@@ -1087,17 +1130,40 @@ def back_and_feet(P, kind):
         for sx, sz in screws:
             if bb.min.X < sx < bb.max.X and bb.min.Z < sz < bb.max.Z:
                 s -= cyl('y', (sx, sz), hd, yl1 - hl, yl1 + 1); k += 1
+        if groove is not None:
+            s -= groove
         out.append(Part(n, s, Sheet(P['stock'], T, face='+y', grain='z' if n in ('land-left', 'land-right') else 'x'),
                         finish='raw' if wood else 'bark', group='cabinet', inside=True,
                         notes=[f'{lw:g} x {T:g}, {fix}, its back face {gk + T:g} in from the shell\'s back edge; {k} M5 inserts '
-                               + ins + f' in {hd:g} holes {hl:g} deep take the back\'s screws']))
-    gasket = box(T + bc, yl1, T + bc, W - T - bc, D - T, H - T - bc) - box(T + lw, yl1 - 1, T + lw, W - T - lw, D - T + 1, H - T - lw)
-    for sx, sz in screws:
-        gasket -= cyl('y', (sx, sz), 6.0, yl1 - 1, D - T + 1)
-    out.append(Part('back-gasket', gasket, Bought('back-gasket'), finish='sleeve', group='cabinet', inside=True,
-                    notes=[f'{lw - bc:g} wide, {gk:g} thick, on the land strips under the back\'s edge, punched for the screws, which '
-                           'locate it' + (' (no adhesive: HDPE holds none)' if kind == 'hdpe' else '') + '; at full output the box runs at '
-                           'about 1 kPa inside, so it must seal all round']))
+                               + ins + f' in {hd:g} holes {hl:g} deep take the back\'s screws'
+                               + (f'; the seal\'s groove {seal["groove"][1]:g} wide and {seal["groove"][0]:g} deep milled in its back face, '
+                                  'with the other strips\' and the bosses\' faces, in one setup after the box is cemented' if seal else '')]))
+    if seal:
+        cd = seal['cord']; gd, gw = seal['groove']; a = T + seal['at']
+        ring2d = lambda o: rounded_rect(W - 2 * a + 2 * o, H - 2 * a + 2 * o, seal['corner'] + o, cx=W / 2, cy=H / 2)
+        w_ = gw - 0.6                                # the cord as it sits squeezed in its groove
+        cord = prism(ring2d(w_ / 2), 'y', yl1 - gd + 0.1, yl1 - 0.05) - prism(ring2d(-w_ / 2), 'y', yl1 - gd, yl1 + 1)
+        L = 2 * (W - 2 * a + H - 2 * a) - (8 - 2 * math.pi) * seal['corner']
+        out.append(Part('back-seal', cord, Bought('back-cord-seal'), finish='sleeve', group='cabinet', inside=True,
+                        notes=[f'EPDM cord {cd:g} across, {L / 1000:.2f} m, its ends vulcanised into a loop, laid in the lands\' groove '
+                               f'({gw:g} wide, {gd:g} deep: squeezed {100 * (cd - gd) / cd:.0f} %); the back seats hard on the lands and the '
+                               'bosses, so the screws\' torque no longer sets the seal; at full output the box runs at about 1 kPa inside']))
+        tie = bk['ties']; bw, bh = tie['boss']; ye = back_edge(P)[0]
+        bosses = []
+        for x, z in back_ties(P):
+            zb = z - T / 2                           # the brace's underside
+            b_ = box(x - bw / 2, ye - tie['saddle'], z - bh / 2, x + bw / 2, yl1, z + bh / 2)
+            b_ -= box(x - bw / 2 - 1, ye - tie['saddle'] - 1, zb - 0.2, x + bw / 2 + 1, ye + 0.2, zb + T + 0.2)    # the slot over the brace
+            b_ -= cyl('y', (x, z), hd, yl1 - hl, yl1 + 1)
+            bosses.append(b_)
+        for i, b_ in enumerate(bosses, 1):
+            out.append(Part(f'back-boss-{i}', b_, Machined('cast-acrylic-block' if kind == 'acrylic' else
+                                                          'cast-resin' if kind == 'hdpe' else 'birch-hardwood', 'cnc-mill'),
+                            finish='raw' if wood else 'bark', group='cabinet', inside=True,
+                            notes=[f'{bw:g} x {bh:g}, {yl1 - ye + tie["saddle"]:.0f} deep: slotted {T:g} wide and {tie["saddle"]:g} deep over the '
+                                   'brace\'s rear member and ' + {'acrylic': 'cemented', 'hdpe': 'welded', 'wood': 'glued'}[kind]
+                                   + ' to it, its back face milled flush with the lands\' so the back seats on both; an M5 insert '
+                                   + ins + f' in a {hd:g} hole {hl:g} deep takes the back\'s screw: the back tied to the brace']))
     heads = []
     for sx, sz in screws:
         h = cyl('y', (sx, sz), 9.5, D, D + 2.8)
@@ -1107,9 +1173,11 @@ def back_and_feet(P, kind):
             pass
         heads.append(h.fuse(cyl('y', (sx, sz), 4.8, yl1 - hl + 2.0, D)))
     out.append(Part('back-screws', Compound(children=heads), Bought('back-screws'), finish='screw', group='cabinet',
-                    notes=[f'{len(screws)} M5 x {round(T + gk + hl - 2, -1):g} button heads (ISO 7380, A2, black: round 16) on black nylon washers, '
+                    notes=[(f'{len(screws) - len(back_ties(P))} round the edge and {len(back_ties(P))} into the braces\' bosses: ' if back_ties(P) else '')
+                           + f'{len(screws)} M5 x {round(T + gk + hl - 2, -1):g} button heads (ISO 7380, A2, black: round 16) on black nylon washers, '
                            f'{bk["edge"]:g} in from the back\'s edges, into the inserts in the land strips; tightened evenly '
-                           'round the back, by hand, to compress the gasket without crushing it']))
+                           'round the back, by hand, ' + ('until the back seats on the lands and the bosses' if seal else
+                                                          'to compress the gasket without crushing it')]))
     f = P['feet']
     bases = [cyl('z', (x, y), f['d'], -f['lift'], -f['lift'] + f['base']) for x, y in feet_places(P)]
     stems = [cyl('z', (x, y), 13.0, -5.0, 0.0).fuse(cyl('z', (x, y), 7.8, -f['lift'] + f['base'] - 0.5, f['insert'][1] - 1.0))
@@ -1531,7 +1599,7 @@ def amp_compartment(P, ribs, wz, wood):
     return out
 
 
-def fittings(P, places, shell):
+def fittings(P, places, shell, floor=None):
     """Round 13 (the reality check's r1 and r3). Each post's foot stands in a polyurethane sleeve in a brass socket, the
     socket knurled and pressed into the top (no bond to HDPE): the sleeve takes up the castings' scatter and stops the
     post buzzing. An M6 rod down the free rear post, from a thumb nut on a washer inside the pod to a flanged insert
@@ -1548,6 +1616,7 @@ def fittings(P, places, shell):
         sleeves.append(cyl('z', (rx, ry), so, H - sl, H) - cyl('z', (rx, ry), si, H - sl - 1, H + 1))
     tx, ty = places[pp['tie_post']]
     d, (bi, bl, fd, ft) = pp['tie']['d'], pp['tie']['insert']
+    given = floor
     floor = []                                      # the pod's floor inside, round the washer: it sits on the highest
     for k in range(8):
         a = 2 * math.pi * k / 8
@@ -1555,7 +1624,9 @@ def fittings(P, places, shell):
                       if h[0].Z > H + 1.0)
         if len(hits) > 1:
             floor.append(hits[1])
-    zf = max(floor) + 0.3
+    zf = max(floor) + 0.3 if floor else None
+    if given is not None:                            # round 36: the formed horn's saddle inside the pod
+        zf = given
     kind, tb = shell_kind(P), top_boss(P)
     zi = tb[4] if tb else H - T                      # a flanged insert in the top's underside, or (round 15) in the pad under it
     z0 = zi + 1.0
@@ -1589,6 +1660,19 @@ def waveguide(P):
     cast = ('cast in tinted translucent polyurethane in a two-part silicone mould from a CNC-cut plug, bead-blasted to '
             'frost; M8 inserts bonded into pads inside its underside take the rods')
     cap = None
+    if f == 'cast' and hz['cast'].get('formed'):  # round 36: the Cloud's horn thermoformed (formed_horn)
+        c = hz['cast']; depth = c['d']
+        r = formed_horn(P)
+        zc = H + c['gap'] + c['mouth_h'] / 2 + c['rim']
+        pl = lambda s_: place(s_, (cx, depth, zc), (0, -1, 0))
+        from build123d import Pos as _Pos, Compound as _Compound
+        tool_at = _Pos(c['formed']['tool']['beside'], 0, 0)
+        out = dict(shell=pl(r['flare']), cap=pl(r['cap']), ring=pl(r['ring']), zc=zc, throat_y=depth,
+                   driver_y=depth + c['boss']['t'] + c['adaptor']['t'], notes=[],
+                   formed=dict(piece=pl(r['piece']), pod=pl(r['pod']), pads=[pl(p_) for p_ in r['pads']], saddle=pl(r['saddle']),
+                               plug=tool_at * pl(r['plug']), base=tool_at * pl(r['base']), nums=r['nums'], floor=zc + r['saddle_top']))
+        out['formed']['support'] = _Compound(children=out['formed']['pads'])
+        return out
     if f == 'cast':
         c, pp = hz['cast'], hz['cast']['posts']
         depth, half_h = c['d'], c['mouth_h'] / 2 + c['rim']
@@ -1657,6 +1741,279 @@ def waveguide(P):
     if cap is not None:
         cap = place(cap, (cx, depth, zc), (0, -1, 0))
     return dict(shell=shell, cap=cap, zc=zc, throat_y=depth, driver_y=depth + hz['boss']['t'], notes=notes)
+
+
+# round 36 (the owner, 2026-10-22: "I'd rather the prototype be as close to production as possible. The whole point of a
+# prototype is to test production"): the Cloud's horn thermoformed from the cabinet's own tinted cast sheet. The kit's
+# stock table has no thermoformed sheet or thick cast block, so the horn's two are added here (budget rates, 2026: the
+# sheet's rate a cubic centimetre of the finished shell carries its blank, the forming, the trim and the polish)
+SOLIDS.setdefault('cast-acrylic-thermoformed', dict(
+    title='Cast acrylic sheet 10 mm, tinted through, of the cabinet\'s own batch, pressure-formed over a male tool, trimmed and '
+          'polished (the rate carries the blank, the forming, the trim and the polish)', density=1.19, usd_per_cm3=0.13))
+SOLIDS.setdefault('cast-acrylic-block', dict(
+    title='Cast acrylic, tinted through, of the cabinet\'s own batch (sheet or block, 6 to 70 mm), turned and milled',
+    density=1.19, usd_per_cm3=0.05))
+
+
+def flare_section(c, z):
+    """The horn's air surface at z (its local frame: the throat at z = 0, the mouth at c['d']): half width, half height
+    and the superellipse's exponent, as speaker.horn.waveguide_shell draws it, the profile the simulation approved;
+    straight behind the throat."""
+    hw, hh, d, r0 = c['mouth_w'] / 2, c['mouth_h'] / 2, c['d'], c['r0']
+    if z <= 0:
+        return r0, r0, 2.0
+    ta, tb = math.sqrt(hw ** 2 - r0 ** 2) / d, math.sqrt(hh ** 2 - r0 ** 2) / d
+    zz = min(z, d)
+    return math.sqrt(r0 ** 2 + (zz * ta) ** 2), math.sqrt(r0 ** 2 + (zz * tb) ** 2), 2.0 + (c['n_mouth'] - 2.0) * (zz / d) ** 1.2
+
+
+def _se_point(w, h, n, t):
+    c_, s_ = math.cos(t), math.sin(t)
+    return w * math.copysign(abs(c_) ** (2 / n), c_), h * math.copysign(abs(s_) ** (2 / n), s_)
+
+
+SE_N = 72                                          # points round a section, from the corner (speaker.horn._se_wire's)
+
+
+def formed_wall(c, z, t):
+    """Round 36: the formed flare's wall, mm normal to its face, at z and the section's parameter t (pi/4 is a corner).
+    Formed over a male tool, the sheet touches the tool's nose (the throat end) first and freezes there, and the rest
+    is stretched on down the flare: thickest at the throat end, thinning toward the mouth, the mouth's corners the
+    last to form and the thinnest. A shop's distribution for a male draw of this ratio (0.85 of the sheet at the trim,
+    0.60 at the mouth's sides, 18 % less again in its corners), the thinner of round 36's two estimates (README)."""
+    F = c['formed']; th = F['thin']
+    f = min(max((z - F['trim']) / (c['d'] - F['trim']), 0.0), 1.0)
+    base = th['throat'] - (th['throat'] - th['mouth']) * f ** 1.3
+    return F['sheet'] * base * (1.0 - th['corner'] * f * f * (2 * abs(math.cos(t) * math.sin(t))) ** 2)
+
+
+def offset_section(c, z, d_of_t):
+    """The air surface's section at z pushed out along the surface's normal by d_of_t(t) mm (the in-plane push made
+    larger by the wall's slope there, so the wall is that thick square to its face): [(x, y, z)], SE_N points."""
+    sec = flare_section(c, z)
+    lo, hi = flare_section(c, z - 0.5), flare_section(c, z + 0.5)
+    out = []
+    for k in range(SE_N):
+        t = math.pi / 4 + 2 * math.pi * k / SE_N
+        px, py = _se_point(*sec, t)
+        ax, ay = _se_point(*sec, t + 1e-4); bx, by = _se_point(*sec, t - 1e-4)
+        tx, ty = ax - bx, ay - by
+        L = math.hypot(tx, ty); nx, ny = ty / L, -tx / L
+        if nx * px + ny * py < 0:
+            nx, ny = -nx, -ny
+        (x1, y1), (x0, y0) = _se_point(*hi, t), _se_point(*lo, t)
+        s = (x1 - x0) * nx + (y1 - y0) * ny
+        d = d_of_t(t) * math.sqrt(1.0 + s * s)
+        out.append((px + nx * d, py + ny * d, z))
+    return out
+
+
+def _wire_pts(pts):
+    from build123d import Edge, Wire, Vector
+    return Wire([Edge.make_spline([Vector(*q) for q in pts], periodic=True)])
+
+
+def _se_pts(w, h, n, z):
+    return [(*_se_point(w, h, n, math.pi / 4 + 2 * math.pi * k / SE_N), z) for k in range(SE_N)]
+
+
+def _loft(secs):
+    from build123d import Solid
+    return Solid.make_loft([_wire_pts(s) for s in secs], False)
+
+
+def air_sections(c, z0, z1, n=10, roll=True):
+    """The air path's sections from z0 to z1 (z1 at the mouth: the mouth's lip rolled over `lip` into the face, then on
+    past it, so a cut opens through the face)."""
+    F, d = c['formed'], c['d']
+    za = d - F['lip_run'] if roll and z1 >= d else z1
+    zs = [z0 + (za - z0) * (i / n) ** 1.15 for i in range(n + 1)]
+    secs = [_se_pts(*flare_section(c, z), z) for z in zs]
+    if roll and z1 >= d:                           # a quadratic Bezier in each half size, leaving the flare on its slope
+        (w0, h0, n0), (w1, h1, _) = flare_section(c, za), flare_section(c, za - 0.5)
+        qw, qh = w0 + (w0 - w1) / 0.5 * (d - za), h0 + (h0 - h1) / 0.5 * (d - za)
+        cw, ch = c['mouth_w'] / 2 + F['lip'], c['mouth_h'] / 2 + F['lip']
+        for k in range(1, 5):                      # the last eased off short of flat: a face tangent to the mouth's plane
+            u = 1.0 - math.sqrt(1.0 - k / 4) if k < 4 else 0.82    # defeats the booleans (as the cast horn's rim found)
+            a, b, e = (1 - u) ** 2, 2 * u * (1 - u), u * u
+            secs.append(_se_pts(a * w0 + b * qw + e * cw, a * h0 + b * qh + e * ch, n0, za + (d - za) * k / 4))
+        secs.append(_se_pts(cw + 4.0, ch + 4.0, c['n_mouth'], d + 3.0))
+    return secs
+
+
+def formed_horn(P):
+    """Round 36: the Cloud's horn as it will be made, in its local frame (x across, y up, z from the throat to the
+    mouth; the pod behind, z < 0). The flare pressure-formed from the cabinet's 10 mm tinted cast sheet over a male
+    aluminium tool (the tool's surface is the air path, so the air path is exact and the wall's own thinning moves only
+    the outside); trimmed at `trim` and its end cemented into a socket in the throat piece, turned and milled from a
+    block of the same batch, whose bore carries the air path from the driver's exit to the trim, so the two faces meet
+    with no step; the throat piece's flange is the driver's boss; the pod a tube rolled from the batch's 6 mm sheet,
+    cemented over the flange's spigot, the cap twist-locked in its bore as before; the posts' pads turned pucks cemented
+    under the flare and the pod. Returns {name: solid} in the local frame, the notes' numbers, and the tool."""
+    from build123d import Axis, Pos, Cylinder, Align, Solid, Compound
+    from speaker.horn import twist_lock
+    c = P['horn']['cast']; F = c['formed']; pp = c['posts']
+    d, hw, hh, nm = c['d'], c['mouth_w'] / 2, c['mouth_h'] / 2, c['n_mouth']
+    zt, cem, sock, col = F['trim'], F['cement'], F['socket'], F['collar']
+    wall = lambda z: (lambda t: formed_wall(c, z, t))
+    # the flare: its outside the air path pushed out by the wall, then (the last `lip_run`) out into the rim: the sheet's
+    # flange on the tool's base, trimmed `rim` outside the mouth and its edge routed full round
+    tf = F['sheet'] * F['thin']['mouth']           # the flange: formed last, as thin as the mouth
+    zw = [zt + (d - tf + 1.0 - zt) * (i / 12) ** 0.9 for i in range(13)]
+    rim = c['rim']; re_ = tf / 2
+    rim_secs = [(d - tf, rim - re_ - 0.3), (d - tf + 0.35 * re_, rim - 0.3 * re_), (d - re_, rim),
+                (d - 0.35 * re_, rim - 0.3 * re_), (d, rim - re_ - 0.3)]
+    outer = _loft([offset_section(c, z, wall(z)) for z in zw])           # the wall's outside (one loft: through the rim's
+    flange = _loft([_se_pts(hw + e, hh + e, nm, z) for z, e in rim_secs])  # sharp turn a loft balloons), the rim its own
+    air = _loft(air_sections(c, zt - 6.0, d))
+    flare = (outer + flange) - air
+    if not flare.is_valid:
+        raise RuntimeError('formed_horn: the flare\'s boolean failed')
+    # the throat piece: its flange (the boss) on the pod's spigot, the neck `neck` thick outside the air path, rising out
+    # of the flange on a cove, a collar round the socket the flare's end is cemented into
+    fl = F['flange']
+    piece = Pos(0, 0, -fl['shoulder']) * Cylinder(c['pod_r'], fl['shoulder'], align=(Align.CENTER, Align.CENTER, Align.MIN))
+    piece = piece + Pos(0, 0, -c['boss']['t']) * Cylinder(c['pod_r'] - c['wall'] - cem, c['boss']['t'] - fl['shoulder'] + 0.5,
+                                                         align=(Align.CENTER, Align.CENTER, Align.MIN))
+    R = F['cove']
+    cove = lambda z: R - math.sqrt(max(R * R - (R - min(max(z, 0.0), R)) ** 2, 0.0))
+    zn = [-1.0, 0.0, 1.0, 2.5, 4.5, 7.0, 10.0, 15.0, 22.0, zt - 7.0]
+    secs = [offset_section(c, z, (lambda z_: lambda t: F['neck'] + cove(z_))(z)) for z in zn]
+    secs += [offset_section(c, z, (lambda t: formed_wall(c, zt, t) + cem + col)) for z in (zt - 3.0, zt + 2.0, zt + sock)]
+    piece = piece + _loft(secs)
+    bore = _loft([_se_pts(c['r0'], c['r0'], 2.0, -c['boss']['t'] - 1.0)] + air_sections(c, 0.0, zt - cem + 0.5, n=8, roll=False))
+    socket = _loft([offset_section(c, z, (lambda t: formed_wall(c, zt, t) + cem)) for z in (zt - cem, zt + 4.0, zt + sock / 2, zt + sock + 1.0)])
+    piece = piece - bore - socket - _loft(air_sections(c, zt - 2.0, zt + sock + 2.0, n=3, roll=False))
+    b = c['boss']
+    for k in range(b['bolts']):                     # blind, for the adaptor's M5 inserts, bonded
+        a = 2 * math.pi * (k + 0.5) / b['bolts']
+        piece = piece - Pos(b['bolt_d'] / 2 * math.cos(a), b['bolt_d'] / 2 * math.sin(a), -b['t'] - 1.0) * \
+            Cylinder(b['bolt_hole'] / 2, F['insert_depth'] + 1.0, align=(Align.CENTER, Align.CENTER, Align.MIN))
+    # the pod, rolled; the cap turned, twist-locked in its bore as before
+    zp = -fl['shoulder'] - cem
+    pod = Pos(0, 0, -c['pod_back']) * (Cylinder(c['pod_r'], zp + c['pod_back'], align=(Align.CENTER, Align.CENTER, Align.MIN)) -
+                                       Cylinder(c['pod_r'] - c['wall'], zp + c['pod_back'] + 1, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    z0, pr, dome = -c['pod_back'], c['pod_r'], c['dome']
+    rings = [(z0 - dome * u, max(pr * math.sqrt(max(1 - u * u, 0.0)), 5.0 + c['wall'] + 2)) for u in (0.0, 0.3, 0.55, 0.75, 0.9, 1.0)]
+    cap_out = Solid.make_loft([_wire_pts(_se_pts(r, r, 2.0, z)) for z, r in rings], False)
+    inner = [(z + c['wall'] * u, max(r - c['wall'], 2.0)) for (z, r), u in zip(rings[:-1], (0.0, 0.3, 0.55, 0.75, 0.9))]
+    cap_in = Solid.make_loft([_wire_pts(_se_pts(pr - c['wall'], pr - c['wall'], 2.0, z0 + 1.0))] +
+                             [_wire_pts(_se_pts(r, r, 2.0, z)) for z, r in inner], False)
+    cap = (cap_out - cap_in) + Pos(0, 0, z0) * (Cylinder(pr - c['wall'] - 0.3, 10.0, align=(Align.CENTER, Align.CENTER, Align.MIN)) -
+                                                Cylinder(pr - 2 * c['wall'], 11.0, align=(Align.CENTER, Align.CENTER, Align.MIN)))
+    pod, cap, ring = twist_lock(pod, cap, pr, c['wall'], c['pod_back'], dome, **c['lock'])
+    # the posts' pads: pucks `pad_d` across, their tops milled to the flare's (or the pod's) underside a cement line
+    # clear, their feet `pad_h` below its lowest point over them, each with its M10 insert's hole
+    cx = P['W'] / 2
+    pads, holes = [], []
+    for i, (rx, ry) in enumerate(rod_places(P)):
+        x, z = rx - cx, d - ry
+        r = pp['pad_d'] / 2
+        if z > 0:                                   # under the flare: its underside found by rays
+            low = min(h[0].Y for dx, dz in [(0, 0)] + [(r * math.cos(a), r * math.sin(a)) for a in (0, 1.57, 3.14, 4.71, 0.785, 2.36, 3.93, 5.5)]
+                      for h in [sorted(outer.find_intersection_points(Axis((x + dx, -1000.0, z + dz), (0, 1, 0))), key=lambda q: q[0].Y)[0]])
+            grown = _loft([offset_section(c, zz, (lambda t, zz=zz: formed_wall(c, zz, t) + cem)) for zz in (z - r - 4, z, z + r + 4)])
+        else:                                       # under the pod
+            low = -math.sqrt(pr ** 2 - (abs(x) - r) ** 2)
+            grown = Pos(0, 0, z - r - 5) * Cylinder(pr + cem, 2 * r + 10, align=(Align.CENTER, Align.CENTER, Align.MIN))
+        foot = low - pp['pad_h']
+        puck = Pos(x, foot, z) * Cylinder(r, low - foot + 20.0, rotation=(-90, 0, 0), align=(Align.CENTER, Align.CENTER, Align.MIN)) - grown
+        puck = puck - Pos(x, foot - 1.0, z) * Cylinder(pp['insert_d'] / 2, insert_depth(pp, ry, d) + 1.0, rotation=(-90, 0, 0),
+                                                       align=(Align.CENTER, Align.CENTER, Align.MIN))
+        if i in (pp['cable_post'], pp['tie_post']):    # the HF lead's or the tie rod's way into the pod
+            hole = Pos(x, foot - 1.0, z) * Cylinder(pp['bore'] / 2, low - foot + 22.0, rotation=(-90, 0, 0), align=(Align.CENTER, Align.CENTER, Align.MIN))
+            puck = puck - hole; holes.append(hole)
+        pads.append(puck)
+    for h in holes:
+        pod = pod - h
+    # the tie rod's saddle inside the pod: a puck on its floor, flat on top for the washer
+    tx, tz = rod_places(P)[pp['tie_post']][0] - cx, d - rod_places(P)[pp['tie_post']][1]
+    sr, stop = F['saddle']
+    saddle = Pos(tx, -pr, tz) * Cylinder(sr, pr + stop, rotation=(-90, 0, 0), align=(Align.CENTER, Align.CENTER, Align.MIN))
+    saddle = (saddle & Pos(0, 0, tz - 20) * Cylinder(pr - c['wall'] - cem, 40.0, align=(Align.CENTER, Align.CENTER, Align.MIN))) - \
+        Pos(tx, -pr - 1, tz) * Cylinder(pp['tie']['hole'] / 2, pr, rotation=(-90, 0, 0), align=(Align.CENTER, Align.CENTER, Align.MIN))
+    # the tool: the plug is the air path from a rounded nose behind the trim to the mouth, its lip a cove at its foot,
+    # on a base plate in the mouth's plane (the clamp frame seals on it); in front of the mouth, z > d
+    T_ = F['tool']
+    plug = _loft(air_sections(c, T_['nose'], d)[:-1])     # its foot on the base's face
+    if plug.volume < 0:
+        plug = Solid(plug.wrapped.Reversed())
+    from build123d import Box
+    base = Pos(0, 0, d) * Box(T_['base'][0], T_['base'][1], T_['base'][2], align=(Align.CENTER, Align.CENTER, Align.MIN))
+    tool = plug + base
+    # the numbers for the notes and the README
+    ts = [formed_wall(c, z, t) for z in zw for t in (0.0, math.pi / 4, math.pi / 2)]
+    nums = dict(trim=formed_wall(c, zt, 0.0), mouth=formed_wall(c, d, 0.0), corner=formed_wall(c, d, math.pi / 4), thinnest=min(ts + [tf * (1 - F['thin']['corner'])]),
+                flange=tf, flare_cm3=flare.volume / 1000, piece_cm3=piece.volume / 1000, pod_cm3=pod.volume / 1000,
+                cap_cm3=cap.volume / 1000, pads_cm3=sum(p.volume for p in pads) / 1000)
+    nums['mass_kg'] = 1.19 * (nums['flare_cm3'] + nums['piece_cm3'] + nums['pod_cm3'] + nums['cap_cm3'] + nums['pads_cm3'] + saddle.volume / 1000) / 1000
+    return dict(flare=flare, piece=piece, pod=pod, cap=cap, ring=ring, pads=pads, saddle=saddle, tool=tool, plug=plug,
+                base=base, outer=outer, nums=nums, saddle_top=stop)
+
+
+def formed_parts(P, wg):
+    """Round 36: the formed horn's parts in the order the drawings number them: the flare, the throat piece, the pod and
+    the cap (where the cast horn and its cap were)."""
+    c = P['horn']['cast']; F = c['formed']; fm = wg['formed']; n = fm['nums']
+    lock = c['lock']
+    return [
+        Part('waveguide', wg['shell'], Machined('cast-acrylic-thermoformed', 'formed', setup_usd=F['run_usd']), finish='bark', group='horn',
+             notes=[f'mouth {c["mouth_w"]:g} x {c["mouth_h"]:g}, {c["d"]:g} deep, 2 in throat, the air path as the simulation approved it; '
+                    f'pressure-formed from the cabinet\'s own {F["sheet"]:g} mm tinted cast sheet (its batch) over a male aluminium tool '
+                    '(horn-tool): the blank dried, heated through at about 170 C, blown into a bubble, the tool raised into it and '
+                    '4 bar over it; its face against the tool is the air path, exact; the outside free and glossy. The wall '
+                    f'{n["trim"]:.1f} at its throat end, thinning toward the mouth: {n["mouth"]:.1f} at the mouth\'s sides, {n["corner"]:.1f} '
+                    f'in its corners, the thinnest (4 at the least, by the sheet chosen); the mouth\'s lip rolled R12 on the tool; '
+                    f'the flange left on the tool\'s base trimmed {c["rim"]:g} outside the mouth and routed full round, polished: '
+                    f'the {c["rim"]:g} rim; trimmed at {F["trim"]:g} from the throat on the 5-axis router, its end cemented into the '
+                    f'throat piece\'s socket; annealed after forming; {n["flare_cm3"] * 1.19 / 1000:.1f} kg']),
+        Part('horn-throat', fm['piece'], Machined('cast-acrylic-block', 'cnc-mill', stock=(210.0, 210.0, 75.0), setup_usd=F['throat_usd']),
+             finish='bark', group='horn',
+             notes=[f'turned and milled from a 75 mm block of the same batch: its bore the air path from the driver\'s 51 exit to the '
+                    f'trim, {F["neck"]:g} of neck outside it rising out of the flange on an R{F["cove"]:g} cove, a {F["socket"]:g} deep socket '
+                    f'for the flare\'s end (its bore the flare\'s outside, {F["cement"]:g} clear for the cement; the two air faces meet with '
+                    'no step, the throat\'s bore machined to the same surface as the tool), and a collar round it; its flange the driver\'s '
+                    f'boss, {c["boss"]["t"]:g} thick, its spigot in the pod; {c["boss"]["bolts"]} M5 inserts bonded in blind holes on '
+                    f'{c["boss"]["bolt_d"]:g} take the adaptor ring']),
+        Part('horn-pod', fm['pod'], Machined('cast-acrylic-block', 'formed', setup_usd=F['pod_usd']), finish='bark', group='horn',
+             notes=[f'rolled from the batch\'s {c["wall"]:g} mm sheet over a heated mandrel to {2 * c["pod_r"]:g} across, its seam '
+                    'scarfed and cemented underneath, between the rear posts; annealed, its bore turned true; cemented over the throat '
+                    f'piece\'s spigot; the twist-lock\'s {lock["lugs"]} L-slots milled in its bore; holed for the HF lead and the tie rod']),
+        Part('waveguide-cap', wg['cap'], Machined('cast-acrylic-block', 'cnc-mill', stock=(210.0, 210.0, 35.0), setup_usd=150.0), finish='bark',
+             group='horn',
+             notes=['turned from the batch\'s 30 mm sheet, its three lugs left on the spigot and milled; closes the pod behind the '
+                    f'driver on the twist-lock as before: an eighth of a turn ({lock["turn"]:g} degrees, clockwise from behind), an O-ring '
+                    'on the spigot beyond the lugs; two shallow finger dimples to turn it by; no screw shows']),
+    ]
+
+
+def formed_later(P, wg):
+    """Round 36: the formed horn's small parts and its tool, numbered after the parts the drawings have long had."""
+    from build123d import Compound
+    c = P['horn']['cast']; F = c['formed']; fm = wg['formed']; pp = c['posts']
+    pads = fm['pads']
+    tool_note = (f'one tool makes every horn (the line\'s quantity is one); {F["tool"]["note"]}')
+    return [
+        Part('horn-pads', Compound(children=pads), Machined('cast-acrylic-block', 'lathe', stock=(30.0, 30.0, 110.0), setup_usd=80.0), finish='bark', group='horn',
+             notes=[f'four pucks {pp["pad_d"]:g} across, turned from the batch\'s 30 mm sheet, their tops milled to the flare\'s (the rear '
+                    f'pair\'s to the pod\'s) underside and cemented on through a jig taken off the cabinet\'s sockets; each foot '
+                    f'{pp["pad_h"]:g} below the shell\'s lowest point over it, so the M10 x 1 insert ({pp["insert_d"]:g} x '
+                    f'{F["insert_depth"]:g}, bonded) stays wholly in the pad; the rear pair bored {pp["bore"]:g} on through the pod for '
+                    'the HF lead and the tie rod']),
+        Part('horn-saddle', fm['saddle'], Machined('cast-acrylic-block', 'lathe', setup_usd=20.0), finish='bark', group='horn', inside=True,
+             notes=['a puck 16 across cemented on the pod\'s floor inside at the tie post, its top flat for the tie rod\'s washer and '
+                    'thumb nut; bored 6.5']),
+        Part('horn-tool', fm['plug'], Machined('aluminium', 'cast', setup_usd=F['tool']['plug_usd']), qty=0.5, finish='driver-frame',
+             option='tooling', render=False,
+             notes=['the forming tool\'s plug: the horn\'s air path from its nose 25 behind the trim (its edge rounded) to the mouth, its lip a '
+                    'cove R12 at its foot; A356 aluminium cast near shape from a pattern and machined all over on a 5-axis mill to the '
+                    'air path\'s surface, polished; drilled for oil at 85 C, vented by 0.6 mm holes in the waste and the mouth\'s corners; '
+                    + tool_note]),
+        Part('horn-tool-base', fm['base'], Machined('aluminium', 'cnc-mill', setup_usd=F['tool']['base_usd']), qty=0.5, finish='driver-frame',
+             option='tooling', render=False,
+             notes=['the tool\'s base plate in the mouth\'s plane, 6061 machined, the clamp frame\'s seal groove round it and the plug '
+                    'bolted on from below, so the flange forms flat on it; ' + tool_note]),
+    ]
 
 
 def adaptor_ring(P, wg, hf):

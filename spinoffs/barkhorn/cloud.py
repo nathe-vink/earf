@@ -48,10 +48,37 @@ P['feet']['insert'] = (12.5, 15.0)
 # review's estimate); the front and back feet 25 in from the edges give about 124 forward and 138 back (estimate), the
 # inserts still wholly in the bottom panel (under the front panel's foot and under the back's land)
 P['feet']['inset_y'] = 25.0
+# round 36 (the owner, 2026-10-22: "I'd rather the prototype be as close to production as possible. The whole point of a
+# prototype is to test production"): the horn thermoformed from the cabinet's own tinted cast sheet (product.formed_horn):
+# the flare pressure-formed from `sheet` mm over a male aluminium tool, so its face on the tool is the air path; the wall
+# thinning toward the mouth by `thin` (shares of the sheet: at the trim, at the mouth's sides, less again in its
+# corners); trimmed `trim` from the throat and cemented `cement` thick into a `socket` in the throat piece (turned and
+# milled from a block of the same batch: the air path from the driver to the trim, a `neck` thick outside it on a
+# `cove`, a `collar` round the socket, its flange the driver's boss on a spigot into the pod); the mouth's lip rolled
+# `lip` past the mouth on the tool over its last `lip_run`; the pod rolled from the batch's 6 mm sheet; the posts' pads
+# turned pucks, the tie rod's washer on a `saddle` (radius, its top's height) in the pod; the pads' M10 inserts 12 deep
+# (the shell's wall too thin to take them). The tool's plug and base drawn `beside` the speaker (x), as option 'tooling'
+P['horn']['cast']['formed'] = dict(
+    sheet=10.0, trim=40.0, cement=0.2, socket=12.0, collar=4.0, neck=7.0, cove=10.0, lip=6.0, lip_run=8.0,
+    thin=dict(throat=0.85, mouth=0.60, corner=0.18), insert_depth=12.0, flange=dict(shoulder=4.0), saddle=(8.0, -78.0),
+    run_usd=600.0, throat_usd=400.0, pod_usd=250.0,
+    tool=dict(nose=15.0, base=(900.0, 640.0, 40.0), beside=1500.0, plug_usd=14000.0, base_usd=2000.0,
+              note='the first pair\'s plug is the same part cut from the same program in high-temperature epoxy tooling board on '
+                   'this base (README, round 36)'))
+P['horn']['cast']['posts'].update(pad_h=15.0, insert_depth=12.0, front_insert_depth=12.0)
+# round 36 (the engineering review's S1, the owner: yes): the back tied to the braces, two M5 screws a brace into
+# machined bosses saddled on their rear members, beside the back's ribs (product.back_ties); a 4 mm EPDM cord in a groove
+# `groove` (deep, wide) `at` in from the shell in place of the sponge gasket, so the back seats hard on the lands (gasket
+# 0); the lands 30 wide for the groove beside the screws, which move out to `screw_at`; 18 round the edge and 4 into the
+# bosses, 22 in all
+P['back'].update(land=30.0, gasket=0.0, screw_at=10.0, per_side=7, per_end=4,
+                 seal=dict(cord=4.0, groove=(3.0, 5.4), at=22.0, corner=12.0),
+                 ties=dict(boss=(36.0, 36.0), saddle=12.0, beside=2.5))
 # round 24 (the owner, of round 23's options: "Name on back own color", and of lifting: "240 grips + feet range"): EARF
 # etched high on the back and filled with the speaker's own colour, and a grip 240 long for both hands in each side near
 # the top, as standard (product.extras); castors, spikes and isolation feet sold for the feet's M8 inserts
 P.update(mark=['back'], mark_finish='tint', lift=['grips'], grip_w=240.0)
+P['remote'] = True                               # round 36: Hypex's remote kit, its remote and the link cable, one a pair
 PRODUCT = dataclasses.replace(
     pressed.PRODUCT, name='barkhorn-cloud', params=P,
     kind='Two-way horn loudspeaker after Friendly Pressure, the Cloud: tinted cast acrylic, no wood',
@@ -66,7 +93,8 @@ PRODUCT = dataclasses.replace(
         'for each 3 mm of thickness, cooled slowly); the ribs cemented to their panels flat (the back\'s to the back); the '
         'shell\'s corners, the front panel (set back 24 mm), the two braces and the back\'s four land strips cemented with a '
         'two-part polymerising acrylic cement for thick sheet (ACRIFIX 2R 0190 or Weld-On 40), clamped square on a jig, no visible bubble in any joint; the box '
-        'annealed again; the back closes the box last, on its gasket and sixteen screws, and comes off. No solvent cement: '
+        'annealed again; the lands\' faces, the bosses\' and the seal\'s groove milled in one setup; the back closes the box last, '
+        'seated hard on the lands and the braces\' bosses over a cord seal, twenty-two screws, and comes off. No solvent cement: '
         'it crazes thick cast sheet.',
         'The woofer flush in its rebate on a gasket, on eight M6 brass inserts bonded with epoxy in 8.5 holes; the ring over '
         'its frame on its magnets, bonded in their pockets; each port in the cabinet\'s own acrylic, its tube cemented into '
