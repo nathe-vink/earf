@@ -69,7 +69,7 @@ VIEWS = {
     'listening': {'title': 'the listening room',
                   'camera': {'position': [12.25, 2.20, 1.25], 'target': [16.6, 3.1, 1.15], 'lens_mm': 28, 'level': True,
                              'fstop': 4.0, 'focus': [15.5, 3.0, 1.0]},
-                  'base': 'listening-smoke', 'settings': dict(exposure=5.2, screen_glow=0.004, listen_key=0.45, listen_rim=5.0, altar_w=35.0,
+                  'base': 'listening-smoke', 'settings': dict(exposure=4.7, screen_glow=0.004, listen_key=0.45, listen_rim=5.0, altar_w=35.0,
                                                        altar_cone=16.0, altar_z=0.8, niche_strip=0.15, haze=0.009),
                   'life': dict(rocks=[[round(RP.TUB_TABLES[3][0] + 0.06, 3), round(RP.TUB_TABLES[3][1] - 0.07, 3),
                                        round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.024, 1, AMBER]],
@@ -120,11 +120,13 @@ VIEWS = {
 # standing guest walks under it, its top 15 mm under the deck
 # p2 (the lead, 2026-10-22, from the owner's rainbow notes: "I also don't love the overt rainbow coloring. It's too
 # Castro for SF"): Mother EARF is round 33b's one-colour globe, the same slotted discs in Smoke, whole (no core),
-# see-through, the rims dark and polished, under one hard spot on the beam behind it, so its shadow draws the globe
-# again on the concrete floor down the aisle. Hung 6 cm lower than p1 so the spot fits above it in the beams' depth
-MOTHER = dict(centre=[11.12, RP.YC, 2.70], size=1.25, t=0.025, core=0.0, rim=0.0, tint='#8A888E', radius=0.10,
-              ceiling=RP.CEIL, heading=-35.0)
-MOTHER_SPOT = dict(position=[11.70, RP.YC, 3.15], power_w=220.0, cone_deg=100.0, radius_m=0.004)
+# see-through, the rims dark and polished, under one hard spot, so its shadow draws the globe again on the concrete.
+# At the hinge, 9 m from the door, it vanished (look 5); so it hangs low over the middle banquette table, between the
+# beams at 5.63 and 6.85, 1.1 m over the table, and the spot on the deck behind it throws its shadow on the bare
+# concrete wall between the two frosted screens
+MOTHER = dict(centre=[6.24, 1.15, 2.47], size=1.25, t=0.025, core=0.0, rim=0.0, tint='#6A6668', radius=0.07,
+              ceiling=RP.CEIL, heading=55.0)
+MOTHER_SPOT = dict(position=[6.24, 2.75, 3.32], power_w=130.0, cone_deg=42.0, radius_m=0.004)
 # the multicolour globe of p1 (round 33c), kept as a second variant only (`-colour`)
 MOTHER_COLOUR = dict(centre=[11.12, RP.YC, 2.76], size=1.25, t=0.025, core=0.13, rim=0.22, rim_par=0.5, core_glow=0.05,
               core_w=45.0, ceiling=RP.CEIL, heading=-35.0, radius=0.04)

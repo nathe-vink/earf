@@ -585,18 +585,18 @@
     "path": "spinoffs/barkhorn/planet/r39/kit39.py",
     "fn": "mother",
     "centre": [
-     11.12,
-     3.05,
-     2.7
+     6.24,
+     1.15,
+     2.47
     ],
     "size": 1.25,
     "t": 0.025,
     "core": 0.0,
     "rim": 0.0,
-    "tint": "#8A888E",
-    "radius": 0.1,
+    "tint": "#6A6668",
+    "radius": 0.07,
     "ceiling": 3.4,
-    "heading": -35.0
+    "heading": 55.0
    },
    {
     "kind": "kit",
@@ -1260,17 +1260,17 @@
   "mother-spot": {
    "type": "spot",
    "position": [
-    11.7,
-    3.05,
-    3.15
+    6.24,
+    2.75,
+    3.32
    ],
    "target": [
-    11.12,
-    3.05,
-    2.7
+    6.24,
+    1.15,
+    2.47
    ],
-   "power_w": 220.0,
-   "cone_deg": 100.0,
+   "power_w": 130.0,
+   "cone_deg": 42.0,
    "blend": 0.05,
    "radius_m": 0.004,
    "color": 3000,
