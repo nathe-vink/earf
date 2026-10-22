@@ -292,6 +292,9 @@ def main():
         import probe as Pb
         res = {}
         for pat in a.probe:
+            if pat.startswith('hit:'):   # 'hit:x0,y0,x1,y1': what the camera sees in that box of the frame (probe.hits)
+                res[pat] = Pb.hits(bpy, scene, cam, [int(v) for v in pat[4:].split(',')])
+                continue
             if '#' in pat:          # 'part#x0,y0,x1,y1': a per-pixel map of what shades that box of the part, per lamp
                 pp, bx = pat.split('#')
                 res[pat] = Pb.shadow_map(bpy, scene, cam, objs, part_of, pp, Pr._match, [int(v) for v in bx.split(',')],
@@ -306,7 +309,8 @@ def main():
         for pat, r in res.items():
             print(f'{pat}: {r.get("pixels_sampled", 0)} pixels sampled' + (f' ({r["error"]})' if 'error' in r else ''))
             for what, v in r.get('seen', {}).items():
-                print(f'  {v["share"] * 100:5.1f}%  {what:34s} box {v["box_px"]}  az {v["az_deg"]}  el {v["el_deg"]}')
+                print(f'  {v["share"] * 100:5.1f}%  {what:34s} box {v["box_px"]}' +
+                      (f'  az {v["az_deg"]}  el {v["el_deg"]}' if 'az_deg' in v else ''))
         return
     scene.render.filepath = str(out.resolve())
     t1 = time.time()

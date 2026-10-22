@@ -67,6 +67,39 @@ def _cast(scene, dg, o, d, through_panels, receiver=None):
             return False, loc, nrm, None
 
 
+def hits(bpy, scene, cam, box, step=2):
+    """What the camera sees in a box of the frame (x0, y0, x1, y1, in the image's own pixels at the scale rendered): each
+    object the camera's first ray meets there, by its share of the box's pixels and the box it covers, so a critic's
+    "the pale plane at the bottom left" can be named before it is fixed (Smoke E12r p15). Nothing is rendered."""
+    dg = bpy.context.evaluated_depsgraph_get()
+    W, H = scene.render.resolution_x, scene.render.resolution_y
+    M = cam.matrix_world; origin = M.translation
+    tr, br, bl, tl = [M @ v for v in cam.data.view_frame(scene=scene)]
+    x0, y0, x1, y1 = box
+    seen, total = {}, 0
+    for py in range(max(0, y0), min(H, y1), step):
+        for px in range(max(0, x0), min(W, x1), step):
+            u, v = (px + 0.5) / W, (py + 0.5) / H
+            d = ((tl + (tr - tl) * u + (bl - tl) * v) - origin).normalized()
+            o, dist = origin, 1e4
+            while True:                              # past the smoke's and the haze's boxes (volumes): surfaces only
+                hit, loc, nrm, hob = _cast(scene, dg, o, d, through_panels=True)
+                if not (hit and hob and hob.get('engine_volume')):
+                    break
+                o = loc + d * 1e-3
+            what = _clean(hob.name) if hit and hob else 'world (sky)'
+            if hit and hob:
+                mats = [m.name for m in getattr(hob.data, 'materials', []) if m]
+                what += ' [' + ', '.join(sorted(set(_clean(m) for m in mats)))[:80] + ']' if mats else ''
+            total += 1
+            s_ = seen.setdefault(what, {'n': 0, 'x0': W, 'y0': H, 'x1': 0, 'y1': 0})
+            s_['n'] += 1
+            s_['x0'], s_['y0'] = min(s_['x0'], px), min(s_['y0'], py); s_['x1'], s_['y1'] = max(s_['x1'], px + step), max(s_['y1'], py + step)
+    return {'box': list(box), 'pixels_sampled': total, 'step': step,
+            'seen': {w: {'share': round(v['n'] / max(total, 1), 3), 'box_px': [v['x0'], v['y0'], v['x1'], v['y1']]}
+                     for w, v in sorted(seen.items(), key=lambda kv: -kv[1]['n'])}}
+
+
 def reflections(bpy, scene, cam, objs, part_of, pattern, match, step=2):
     """The probe for parts matching `pattern`: {seen: {share, box_px, az, el, pixels}}, over pixels every `step`."""
     dg = bpy.context.evaluated_depsgraph_get()
