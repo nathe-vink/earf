@@ -1108,3 +1108,27 @@ it would sell for about $6,000; the owner sets the price.
 7. **Two plugs.** The Neo and the light each need a socket. One supply for both only if Rega would sell the Neo's
    drive board alone; ask Rega.
 8. **The posts.** Water-clear in every colour, as the concepts showed them. They could be cast in the colour.
+9. **The plinth's edges.** Edge-on you look through 360-450 mm of the sheet, so the plinth's edges read dark
+   violet-slate where the lid (6 mm at 3.3 times the density) reads light: the speakers' cabinet edges do the same.
+   The plinth's top face matches the lid. Lighter edges would take a lighter cast for the plinth alone, which would no
+   longer be the speakers' sheet.
+
+### The renders (`renders/2026-10-22/barkhorn/turntable/`)
+
+Made in the studio engine with the speakers' own materials (`common.MATERIALS`: the Clouds' cast resin absorbing to
+each colour's `deep` after 25 mm), on the speakers' studio rig brought in to a record player's size: the pale paper
+field, the background lamps, the key, the scrim, the back light, plus a low bank behind at the plinth's height and a
+dark card seen only in reflections (so the lid's top reads as tinted sheet, not as the white field). A 12 inch record
+is a prop of the set, not a part.
+
+| file | what |
+|---|---|
+| `studio-<colour>.png` | the hero, 2400 x 1600, lid open on its hinges |
+| `studio-<colour>-closed.png` | the second picture, lid down |
+| `dusk-<colour>.png` | the hero's frame at dusk, the base's edge lit |
+| `tall-<colour>.png` | the phone frame, 1600 x 2000, lid open |
+| `open.png`, `detail.png`, `pod.png` | in Smoke: the lid open from the left, the arm at rest beside the lead-in, the motor's pod through the float |
+| `proof/` | the coordinator's half-size proof of the look (Haze) |
+
+The colours by their site names: ember, dust, acid, poison, ice, haze, fog, smoke. A fresh checkout renders them with
+`python3.11 spinoffs/barkhorn/companions/turntable_float_shots.py --render <names>`: the render models are committed.
