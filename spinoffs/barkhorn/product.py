@@ -1748,8 +1748,12 @@ def waveguide(P):
 # stock table has no thermoformed sheet or thick cast block, so the horn's two are added here (budget rates, 2026: the
 # sheet's rate a cubic centimetre of the finished shell carries its blank, the forming, the trim and the polish)
 SOLIDS.setdefault('cast-acrylic-thermoformed', dict(
-    title='Cast acrylic sheet 10 mm, tinted through, of the cabinet\'s own batch, pressure-formed over a male tool, trimmed and '
+    title='Cast acrylic sheet 10 mm, tinted through in the horn\'s own dye lot (about three times the cabinet\'s dye, matched to '
+          'it on a swatch: the lot\'s cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and '
           'polished (the rate carries the blank, the forming, the trim and the polish)', density=1.19, usd_per_cm3=0.13))
+SOLIDS.setdefault('cast-acrylic-horn-lot', dict(
+    title='Cast acrylic, tinted through in the horn\'s own dye lot (about three times the cabinet\'s dye; 6, 30 and 75 mm), turned '
+          'and milled', density=1.19, usd_per_cm3=0.05))
 SOLIDS.setdefault('cast-acrylic-block', dict(
     title='Cast acrylic, tinted through, of the cabinet\'s own batch (sheet or block, 6 to 70 mm), turned and milled',
     density=1.19, usd_per_cm3=0.05))
@@ -1957,9 +1961,10 @@ def formed_parts(P, wg):
     c = P['horn']['cast']; F = c['formed']; fm = wg['formed']; n = fm['nums']
     lock = c['lock']
     return [
-        Part('waveguide', wg['shell'], Machined('cast-acrylic-thermoformed', 'formed', setup_usd=F['run_usd']), finish='bark', group='horn',
+        Part('waveguide', wg['shell'], Machined('cast-acrylic-thermoformed', 'formed', setup_usd=F['run_usd']), finish='horn-lot', group='horn',
              notes=[f'mouth {c["mouth_w"]:g} x {c["mouth_h"]:g}, {c["d"]:g} deep, 2 in throat, the air path as the simulation approved it; '
-                    f'pressure-formed from the cabinet\'s own {F["sheet"]:g} mm tinted cast sheet (its batch) over a male aluminium tool '
+                    f'pressure-formed from {F["sheet"]:g} mm cast sheet tinted in the horn\'s own dye lot (about {F["dye"]:g} times the '
+                    'cabinet\'s dye, matched to it on a swatch, so its 5 to 8.5 mm wall reads as deep as the cabinet\'s 20 mm) over a male aluminium tool '
                     '(horn-tool): the blank dried, heated through at about 170 C, blown into a bubble, the tool raised into it and '
                     '4 bar over it; its face against the tool is the air path, exact; the outside free and glossy. The wall '
                     f'{n["trim"]:.1f} at its throat end, thinning toward the mouth: {n["mouth"]:.1f} at the mouth\'s sides, {n["corner"]:.1f} '
@@ -1967,21 +1972,21 @@ def formed_parts(P, wg):
                     f'the flange left on the tool\'s base trimmed {c["rim"]:g} outside the mouth and routed full round, polished: '
                     f'the {c["rim"]:g} rim; trimmed at {F["trim"]:g} from the throat on the 5-axis router, its end cemented into the '
                     f'throat piece\'s socket; annealed after forming; {n["flare_cm3"] * 1.19 / 1000:.1f} kg']),
-        Part('horn-throat', fm['piece'], Machined('cast-acrylic-block', 'cnc-mill', stock=(210.0, 210.0, 75.0), setup_usd=F['throat_usd']),
-             finish='bark', group='horn',
-             notes=[f'turned and milled from a 75 mm block of the same batch: its bore the air path from the driver\'s 51 exit to the '
+        Part('horn-throat', fm['piece'], Machined('cast-acrylic-horn-lot', 'cnc-mill', stock=(210.0, 210.0, 75.0), setup_usd=F['throat_usd']),
+             finish='horn-lot', group='horn',
+             notes=[f'turned and milled from a 75 mm block of the horn\'s lot: its bore the air path from the driver\'s 51 exit to the '
                     f'trim, {F["neck"]:g} of neck outside it rising out of the flange on an R{F["cove"]:g} cove, a {F["socket"]:g} deep socket '
                     f'for the flare\'s end (its bore the flare\'s outside, {F["cement"]:g} clear for the cement; the two air faces meet with '
                     'no step, the throat\'s bore machined to the same surface as the tool), and a collar round it; its flange the driver\'s '
                     f'boss, {c["boss"]["t"]:g} thick, its spigot in the pod; {c["boss"]["bolts"]} M5 inserts bonded in blind holes on '
                     f'{c["boss"]["bolt_d"]:g} take the adaptor ring']),
-        Part('horn-pod', fm['pod'], Machined('cast-acrylic-block', 'formed', setup_usd=F['pod_usd']), finish='bark', group='horn',
-             notes=[f'rolled from the batch\'s {c["wall"]:g} mm sheet over a heated mandrel to {2 * c["pod_r"]:g} across, its seam '
+        Part('horn-pod', fm['pod'], Machined('cast-acrylic-horn-lot', 'formed', setup_usd=F['pod_usd']), finish='horn-lot', group='horn',
+             notes=[f'rolled from the horn lot\'s {c["wall"]:g} mm sheet over a heated mandrel to {2 * c["pod_r"]:g} across, its seam '
                     'scarfed and cemented underneath, between the rear posts; annealed, its bore turned true; cemented over the throat '
                     f'piece\'s spigot; the twist-lock\'s {lock["lugs"]} L-slots milled in its bore; holed for the HF lead and the tie rod']),
-        Part('waveguide-cap', wg['cap'], Machined('cast-acrylic-block', 'cnc-mill', stock=(210.0, 210.0, 35.0), setup_usd=150.0), finish='bark',
+        Part('waveguide-cap', wg['cap'], Machined('cast-acrylic-horn-lot', 'cnc-mill', stock=(210.0, 210.0, 35.0), setup_usd=150.0), finish='horn-lot',
              group='horn',
-             notes=['turned from the batch\'s 30 mm sheet, its three lugs left on the spigot and milled; closes the pod behind the '
+             notes=['turned from the horn lot\'s 30 mm sheet, its three lugs left on the spigot and milled; closes the pod behind the '
                     f'driver on the twist-lock as before: an eighth of a turn ({lock["turn"]:g} degrees, clockwise from behind), an O-ring '
                     'on the spigot beyond the lugs; two shallow finger dimples to turn it by; no screw shows']),
     ]
@@ -1994,13 +1999,13 @@ def formed_later(P, wg):
     pads = fm['pads']
     tool_note = (f'one tool makes every horn (the line\'s quantity is one); {F["tool"]["note"]}')
     return [
-        Part('horn-pads', Compound(children=pads), Machined('cast-acrylic-block', 'lathe', stock=(30.0, 30.0, 110.0), setup_usd=80.0), finish='bark', group='horn',
-             notes=[f'four pucks {pp["pad_d"]:g} across, turned from the batch\'s 30 mm sheet, their tops milled to the flare\'s (the rear '
+        Part('horn-pads', Compound(children=pads), Machined('cast-acrylic-horn-lot', 'lathe', stock=(30.0, 30.0, 110.0), setup_usd=80.0), finish='horn-lot', group='horn',
+             notes=[f'four pucks {pp["pad_d"]:g} across, turned from the horn lot\'s 30 mm sheet, their tops milled to the flare\'s (the rear '
                     f'pair\'s to the pod\'s) underside and cemented on through a jig taken off the cabinet\'s sockets; each foot '
                     f'{pp["pad_h"]:g} below the shell\'s lowest point over it, so the M10 x 1 insert ({pp["insert_d"]:g} x '
                     f'{F["insert_depth"]:g}, bonded) stays wholly in the pad; the rear pair bored {pp["bore"]:g} on through the pod for '
                     'the HF lead and the tie rod']),
-        Part('horn-saddle', fm['saddle'], Machined('cast-acrylic-block', 'lathe', setup_usd=20.0), finish='bark', group='horn', inside=True,
+        Part('horn-saddle', fm['saddle'], Machined('cast-acrylic-horn-lot', 'lathe', setup_usd=20.0), finish='horn-lot', group='horn', inside=True,
              notes=['a puck 16 across cemented on the pod\'s floor inside at the tie post, its top flat for the tie rod\'s washer and '
                     'thumb nut; bored 6.5']),
         Part('horn-tool', fm['plug'], Machined('aluminium', 'cast', setup_usd=F['tool']['plug_usd']), qty=0.5, finish='driver-frame',
@@ -2411,6 +2416,15 @@ VARIANTS['birch-fog-opal'] = {**VARIANTS['birch-y2k-ice'],
                         'materials': {**VARIANTS['birch-y2k-ice']['materials'],
                                       'bark': {'deep': '#F5F6F5', 'radius': 0.025, 'roughness': 0.05, 'milk': 0.18}}}
 
+# round 36 (the owner, 2026-10-22: "Horn tint: as deep as the cabinet (a heavier dye lot for the horn's sheet)"): the
+# formed horn's parts are cast in a dye lot of their own, about HORN_LOT times the cabinet's dye, so its 5 to 8.5 mm wall
+# reads as deep as the cabinet's 20 mm. The cabinet's tint is a Beer's-law volume reaching its `deep` colour at `radius`;
+# the horn's lot reaches the same colour in a third of the distance
+HORN_LOT = 3.0
+for _v in VARIANTS.values():
+    _b = _v.get('materials', {}).get('bark')
+    if _v.get('bark') == 'clear_resin' and _b is not None:
+        _v['materials'] = {**_v['materials'], 'horn-lot': {**_b, 'radius': _b.get('radius', 0.01) / HORN_LOT}}
 
 PRODUCT = Product(
     'barkhorn', 'barkhorn', 'Two-way horn loudspeaker after Friendly Pressure, in birch bark or eucalyptus bark', params=P, parts=parts,
@@ -2430,6 +2444,7 @@ PRODUCT = Product(
     # the shell's edges broken on 1 (round 15): no sheet's edge is sharp once welded and planed, cemented and polished, or
     # wrapped in bark, and the light's catch on it shows where one panel meets the next
     materials={'bark': {'preset': '$bark', 'bevel_mm': 1.0}, 'raw': {'preset': 'birch'},
+               'horn-lot': {'preset': '$bark', 'bevel_mm': 1.0},     # round 36: the formed horn's own dye lot (HORN_LOT)
                'cloth': {'preset': 'cloth', 'color': '$cloth'}, 'disc': {'preset': 'cloth', 'color': '$disc'},
                'grille-paint': {'preset': 'satin_paint', 'color': '$panel', 'roughness': 0.6, 'specular': 0.3},
                'grille-timber': {'preset': 'birch', 'color': '#8E6E4E', 'roughness': 0.55},

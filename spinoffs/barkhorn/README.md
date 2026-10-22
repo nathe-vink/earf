@@ -88,9 +88,10 @@ speakers lit from below and on a night facade, and each Cloud in its element, ph
 
 The owner, on the horn: "I'd rather the prototype be as close to production as possible. The whole point of a prototype
 is to test production." This round draws the Cloud's horn as it will be made in production: thermoformed from the
-cabinet's own tinted cast sheet, with a turned acrylic throat. It also ties the back to the braces (the review's S1)
+cabinet's tinted cast acrylic, with a turned acrylic throat. It also ties the back to the braces (the review's S1)
 and puts Hypex's remote on the parts list. The horn's air path is unchanged: the simulation approved that profile,
-and the tool is cut to it. The rest of the horn changes, and the biggest visible change is its colour (below). Only
+and the tool is cut to it. The rest of the horn changes. Its colour was this round's open question, and the owner settled it: as deep as the
+cabinet, from a heavier dye lot (below). Only
 the Cloud (`cloud.py`) changes; the pressed sheet keeps its resin horn and its gasket.
 
 ![The formed horn, Haze, in the studio31 rig](../../renders/2026-10-22/barkhorn/horn36/hero-haze-horn36.png)
@@ -101,9 +102,9 @@ The same rig, camera and light as the studio set's Haze hero of 2026-10-18 (`ren
 
 ### How it is made, step by step
 
-1. **The sheet.** Cast acrylic 10 mm, tinted in the speaker's colour and cut from the same batch as the cabinet's
-   20 mm sheet. The batch also gives a 6 mm sheet (the pod), a 30 mm sheet (the cap and the pads) and a 75 mm
-   block (the throat piece). A blank is about 820 x 560 per horn. If the sheet has stood unwrapped, it is dried at
+1. **The sheet.** Cast acrylic 10 mm, tinted in the speaker's colour in the horn's own dye lot: the cabinet's dyes at
+   about three times the loading (the owner's call, below), matched to the cabinet on a swatch. The horn's lot also
+   gives a 6 mm sheet (the pod), a 30 mm sheet (the cap and the pads) and a 75 mm block (the throat piece). A blank is about 820 x 560 per horn. If the sheet has stood unwrapped, it is dried at
    80 °C overnight (about an hour per millimetre), so that moisture does not boil into bubbles.
 2. **Heating.** The blank is heated in a circulating-air oven at about 170 °C for about 30 minutes, until it is 160 to
    170 °C all the way through. Cast sheet does not melt. It goes rubbery, and it forms evenly only if it is heated
@@ -125,7 +126,7 @@ The same rig, camera and light as the studio set's Haze hero of 2026-10-18 (`ren
 5. **Trimming** on the 5-axis router, on a fixture that copies the plug. The waste nose comes off 40 mm from the
    throat. The flange left on the tool's base is cut 10 mm outside the mouth, routed full round and polished: that
    is the 10 mm rim.
-6. **The throat piece** is turned and milled from the 75 mm block of the same batch. Its bore carries the air path
+6. **The throat piece** is turned and milled from the 75 mm block of the horn's lot. Its bore carries the air path
    from the driver's 51 mm exit to the trim. It has a 12 mm deep socket whose bore is the flare's outside plus
    0.2 mm for cement. Round the socket is a collar 4 thick, and outside the air path a 7 mm neck rises from the
    flange on an R10 cove. The flange is the driver's boss (14 thick, four M5 inserts bonded on 170 for the adaptor
@@ -183,21 +184,38 @@ or alike) under a 2 mm acrylic skin cemented at its edges.
 
 ### The tint where the wall thins
 
-The horn is now the cabinet's own sheet, so it takes the cabinet's colour per millimetre. The cabinet is tinted to read
-deep through 20 mm, so 5 to 8.5 mm of it is pale. Light crosses the wall once, square to it: through Haze that reads
+Cut from the cabinet's own lot, the horn would take the cabinet's colour per millimetre. The cabinet is tinted to read
+deep through 20 mm, so 5 to 8.5 mm of it would be pale. Light crosses the wall once, square to it: through Haze that would read
 about #F1ECF7 at the mouth's corners (4.9 mm), #EEE9F5 at its sides (6), and #E7E0F1 at the throat end (8.5). The
 cabinet reads #CABBDF through 20 mm. The resin horn, tinted deeper so its 6 mm shell matched, read about #8E71B5. Smoke goes
-from #5B5A5D (resin, 6 mm) to about #DDDCDE.
+from #5B5A5D (resin, 6 mm) to about #DDDCDE. The first proofs of this round showed that pale horn.
 
-The formed horn deepens toward the throat and pales toward the mouth. It is deepest where it is seen edge-on: along the
-rim and at the silhouette, where light runs 20 to 40 mm through the wall (Haze #CABBDF to #9F88C3). The driver and its
-dark pod show through it more clearly than through the resin. The render shows this from the model's real wall
-thicknesses (the engine's tint is a Beer's-law volume, per millimetre).
+In either lot the formed horn deepens toward the throat and pales toward the mouth, and it is deepest where it is seen
+edge-on, along the rim and at the silhouette. The driver and its dark pod show through it more clearly than through the
+resin. The render draws this from the model's real wall thicknesses (the engine's tint is a Beer's-law volume, per
+millimetre).
 
-**For the owner to decide:** keep the one dye lot (the horn pale, a glass of the cabinet's colour), or cast the horn's
-10 mm sheet from the same dyes at about three times the loading so it reads as deep as the resin horn did. The second
-keeps the same material and the same UV behaviour, but not the same lot, so its colour has to be matched to the
-cabinet's on a swatch.
+**The owner's call (2026-10-22): "Horn tint: as deep as the cabinet (a heavier dye lot for the horn's sheet)".** The
+horn's sheet is cast in a dye lot of its own, with the cabinet's dyes at about **three times the loading**, so its
+5 to 8.5 mm wall reads as deep as the cabinet's 20 mm. It is matched to the cabinet on a swatch: a horn-lot coupon at
+7 mm beside a cabinet coupon at 20 mm, under daylight and under the studio's light, before the lot is cast. Through Haze
+the formed wall then reads about #D7CBE7 at the mouth's corners, #CEC1E2 at its sides and #BDACD7 at the throat end,
+against the cabinet's #CABBDF. The rim and the silhouette, seen edge-on through 20 to 40 mm, go deep: #7D62AB to
+#392171. Smoke reads #A4A3A8 at 6 mm against the cabinet's #9C9BA0.
+
+Every horn part is cast in the horn's lot, not only the 10 mm sheet: the pod (6 mm), the cap and the pads (30 mm) and
+the throat piece (75 mm). Otherwise a pale pod and neck would sit behind a deep flare. The lot is the same dyes and the
+same acrylic, so it has the same UV life. Only its strength differs, which is why it is matched on a swatch and aged
+beside the cabinet in round 35's UV test. A horn takes about 0.46 m² of the 10 mm sheet, so a 4 x 8 ft sheet makes about
+six horns; a lot for a first run is one or two 10 mm sheets and a sheet of each other thickness, a colour.
+
+**To confirm with the caster:** the cost and the minimum order of a separate lot in each colour. No figures for it are on
+file: round 17's makers list minimums only as "some with minimum orders" (Madreperla) and "by asking" (Plastiglas). It
+is marked so in the parts list (`waveguide`'s stock line).
+
+In the model, `product.HORN_LOT` (3.0) gives the horn's parts their own material, `horn-lot`. It is the cabinet's
+tinted acrylic reaching the same colour in a third of the distance (`radius` 8.3 mm against 25), in every colour. The
+renders below are drawn from it.
 
 ### The tool
 
@@ -224,7 +242,7 @@ The CAD carries the tool as the option `tooling`, drawn beside the speaker. One 
 
 | per horn | prototype (one-off rates) | production (batches of about 50) |
 |---|---|---|
-| the 10 mm blank (0.46 m2 of the batch) | $90 | $90 |
+| the 10 mm blank (0.46 m2 of the horn's lot; the lot's own cost to confirm) | $90 | $90 |
 | drying, heating, forming | $250 (a shop's setup per run) | $75 |
 | trim, anneal, polish | $200 | $110 |
 | the throat piece (block, turning, milling) | $450 | $270 |
@@ -259,9 +277,9 @@ aluminium plug.
   vents only in the waste and the corners, a polished plug, and forming in a clean room.
 - **Springback.** Cast acrylic remembers its flat shape if it is heated again. So the cement is a polymerising one,
   annealing stays at 80 °C, and no flame polishing is done near the joints.
-- **Can the maker cast 6, 10, 20, 30 and 75 mm from one batch?** Ask first. The fallback is the throat block laminated
+- **Can the maker cast the horn's lot at 6, 10, 30 and 75 mm, and match it to the cabinet's 20 mm lot?** Ask first. The fallback is the throat block laminated
   from two 30s and a 15, cemented, which would show its joints faintly.
-- **The colour** (above).
+- **The colour:** the heavier lot has to match the cabinet on the swatch and through UV ageing (above).
 
 ### Three notes from the launch-readiness check (the coordinator, 2026-10-22)
 

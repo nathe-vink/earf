@@ -119,6 +119,10 @@
    "color": "#1A1A1A",
    "roughness": 0.5
   },
+  "horn-lot": {
+   "preset": "$bark",
+   "bevel_mm": 1.0
+  },
   "led-green": {
    "preset": "gloss_plastic",
    "color": "#0F3A1E",
@@ -201,7 +205,7 @@
    "material": "amp-ring"
   },
   {
-   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|port-left|port-frame-left|port-right|port-frame-right|waveguide|horn-throat|horn-pod|waveguide-cap|horn-pads|horn-saddle|land-left|land-right|land-top|land-bottom|back-boss-1|back-boss-2|back-boss-3|back-boss-4|top-pad|grip-left|grip-right",
+   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|port-left|port-frame-left|port-right|port-frame-right|land-left|land-right|land-top|land-bottom|back-boss-1|back-boss-2|back-boss-3|back-boss-4|top-pad|grip-left|grip-right",
    "material": "bark"
   },
   {
@@ -275,6 +279,10 @@
   {
    "match": "amp-plate-housings|cable-glands",
    "material": "gland"
+  },
+  {
+   "match": "waveguide|horn-throat|horn-pod|waveguide-cap|horn-pads|horn-saddle",
+   "material": "horn-lot"
   },
   {
    "match": "amp-plate-led-green",
@@ -824,6 +832,11 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#C7C7C5",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05
     }
    }
   },
@@ -845,6 +858,11 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#B2C9A2",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05
     }
    }
   },
@@ -867,6 +885,12 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#F7F8F7",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05,
+     "milk": 0.0
     }
    }
   },
@@ -948,6 +972,19 @@
     "bark": {
      "deep": "#DCDFB8",
      "radius": 0.025,
+     "roughness": 0.1,
+     "milk": 0.12,
+     "cloud": 1.0,
+     "cloud_m": 0.13,
+     "cloud_edge": [
+      0.47,
+      0.6
+     ],
+     "vein": "#3F4A1E"
+    },
+    "horn-lot": {
+     "deep": "#DCDFB8",
+     "radius": 0.008333333333333333,
      "roughness": 0.1,
      "milk": 0.12,
      "cloud": 1.0,
@@ -1160,6 +1197,14 @@
      "cloud": 1.0,
      "vein": "#5E5B56",
      "cloud_m": 0.3
+    },
+    "horn-lot": {
+     "deep": "#D9D8D3",
+     "radius": 0.008333333333333333,
+     "roughness": 0.06,
+     "cloud": 1.0,
+     "vein": "#5E5B56",
+     "cloud_m": 0.3
     }
    }
   },
@@ -1181,6 +1226,14 @@
     "bark": {
      "deep": "#E2D6AE",
      "radius": 0.025,
+     "roughness": 0.06,
+     "cloud": 1.0,
+     "vein": "#4F6A2C",
+     "cloud_m": 0.3
+    },
+    "horn-lot": {
+     "deep": "#E2D6AE",
+     "radius": 0.008333333333333333,
      "roughness": 0.06,
      "cloud": 1.0,
      "vein": "#4F6A2C",
@@ -1526,6 +1579,11 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#F2D06B",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05
     }
    }
   },
@@ -1547,6 +1605,11 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#BEADD8",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05
     }
    }
   },
@@ -1568,6 +1631,11 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#F2B184",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05
     }
    }
   },
@@ -1589,6 +1657,11 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#B5D9EE",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05
     }
    }
   },
@@ -1610,6 +1683,11 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#F2A29C",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05
     }
    }
   },
@@ -1631,6 +1709,11 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#8A888E",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05
     }
    }
   },
@@ -1653,6 +1736,12 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#F7F8F7",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05,
+     "milk": 0.0
     }
    }
   },
@@ -1675,6 +1764,12 @@
     },
     "horn": {
      "roughness": 0.03
+    },
+    "horn-lot": {
+     "deep": "#F5F6F5",
+     "radius": 0.008333333333333333,
+     "roughness": 0.05,
+     "milk": 0.18
     }
    }
   }
