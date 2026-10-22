@@ -1,8 +1,8 @@
 {
  "product": "barkhorn-cloud",
  "title": "barkhorn",
- "parts": 81,
- "seconds": 796,
+ "parts": 98,
+ "seconds": 991,
  "sheets": {
   "cast-acrylic-20": 3,
   "cast-acrylic-6": 1,
@@ -12,14 +12,19 @@
   "polyester-batting-50": 3
  },
  "budget_usd": {
-  "cut": 2681,
-  "formed": 485,
-  "buy": 3005,
-  "cast": 1647,
-  "lathe": 219,
+  "cut": 2692,
+  "formed": 2051,
+  "buy": 3071,
+  "cnc-mill": 1205,
+  "lathe": 349,
   "sheet metal": 171
  },
- "options_usd": {},
+ "options_usd": {
+  "tooling": {
+   "usd": 17272,
+   "unpriced": 0
+  }
+ },
  "checks_ok": true,
  "drawings": "spinoffs/barkhorn/out-cloud/drawings/barkhorn-cloud-sheets.pdf",
  "render": "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb"

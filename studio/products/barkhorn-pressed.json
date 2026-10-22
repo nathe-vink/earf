@@ -3,7 +3,7 @@
  "model": "spinoffs/barkhorn/out-pressed/render/barkhorn-pressed.glb",
  "origin_mm": [
   280.0,
-  211.4,
+  213.8,
   -12.0
  ],
  "materials": {
@@ -12,6 +12,22 @@
    "color": "#303033",
    "roughness": 0.4,
    "specular": 0.5
+  },
+  "amp-foil": {
+   "preset": "metal",
+   "color": "#BEC0C1",
+   "roughness": 0.35
+  },
+  "amp-label": {
+   "preset": "satin_paint",
+   "color": "#C4C6C5",
+   "roughness": 0.5,
+   "specular": 0.3
+  },
+  "amp-ring": {
+   "preset": "metal",
+   "color": "#8E8E8C",
+   "roughness": 0.45
   },
   "bark": {
    "preset": "$bark",
@@ -31,41 +47,67 @@
    "preset": "cloth",
    "color": "$disc"
   },
+  "driver-bright": {
+   "preset": "metal",
+   "color": "#C9CACB",
+   "roughness": 0.22,
+   "anisotropic": 0.5
+  },
   "driver-cap": {
-   "preset": "paper_cone",
-   "color": "#1D1B1A"
+   "preset": "treated_paper",
+   "color": "#22201F",
+   "roughness": 0.6,
+   "coat": 0.1,
+   "coat_roughness": 0.4,
+   "streaks": 0.02
   },
   "driver-coil": {
    "preset": "metal",
    "color": "#B87333"
   },
   "driver-cone": {
-   "preset": "paper_cone",
-   "color": "#1D1B1A"
+   "preset": "treated_paper",
+   "color": "#242220"
   },
   "driver-frame": {
-   "preset": "satin_paint",
-   "color": "#1E1E1E"
+   "preset": "ecoat",
+   "color": "#1B1B1C"
+  },
+  "driver-gasket": {
+   "preset": "rubber",
+   "color": "#121212",
+   "roughness": 0.85
   },
   "driver-magnet": {
-   "preset": "satin_paint",
-   "color": "#2B2B2B"
+   "preset": "metal",
+   "color": "#B9B6AE",
+   "roughness": 0.3
   },
   "driver-motor": {
-   "preset": "metal",
-   "color": "#3A3A3A"
+   "preset": "ecoat",
+   "color": "#1D1D1E",
+   "roughness": 0.34
   },
   "driver-plug": {
-   "preset": "satin_paint",
-   "color": "#111111"
+   "preset": "metal",
+   "color": "#6A6B6E",
+   "roughness": 0.28
+  },
+  "driver-screw": {
+   "preset": "black_oxide"
   },
   "driver-spider": {
    "preset": "rubber",
    "color": "#C8B88A"
   },
   "driver-surround": {
-   "preset": "rubber",
-   "color": "#151515"
+   "preset": "doped_cloth",
+   "color": "#1E1D1C"
+  },
+  "driver-terminal": {
+   "preset": "metal",
+   "color": "#D4D4D2",
+   "roughness": 0.15
   },
   "foot": {
    "preset": "plastic",
@@ -85,6 +127,21 @@
    "cloud": "$horn_cloud",
    "cloud_m": 0.12
   },
+  "led-green": {
+   "preset": "gloss_plastic",
+   "color": "#0F3A1E",
+   "roughness": 0.15
+  },
+  "led-on": {
+   "preset": "emit",
+   "color": "#4CF07A",
+   "strength": 6.0
+  },
+  "led-red": {
+   "preset": "gloss_plastic",
+   "color": "#4A0E10",
+   "roughness": 0.15
+  },
   "lining": {
    "preset": "batting"
   },
@@ -95,11 +152,30 @@
    "specular": 0.5,
    "bevel_mm": 0.8
   },
-  "ring": {
+  "print": {
    "preset": "satin_paint",
-   "color": "$disc",
-   "roughness": 0.45,
-   "specular": 0.4
+   "color": "#EDEBE5",
+   "roughness": 0.9,
+   "specular": 0.05
+  },
+  "rca-orange": {
+   "preset": "plastic",
+   "color": "#C8742A",
+   "roughness": 0.35
+  },
+  "rca-red": {
+   "preset": "plastic",
+   "color": "#B3121A",
+   "roughness": 0.35
+  },
+  "rca-white": {
+   "preset": "plastic",
+   "color": "#E8E6E0",
+   "roughness": 0.35
+  },
+  "ring": {
+   "preset": "opaque_acrylic",
+   "color": "$disc"
   },
   "rod": {
    "preset": "metal",
@@ -118,15 +194,27 @@
  },
  "assign": [
   {
-   "match": "amp-plate|amp-box|rating-plate",
+   "match": "amp-plate-plate|amp-plate-module|amp-plate-ink|amp-box|rating-plate-plate",
    "material": "amp"
+  },
+  {
+   "match": "amp-plate-sticker",
+   "material": "amp-foil"
+  },
+  {
+   "match": "amp-plate-labels",
+   "material": "amp-label"
+  },
+  {
+   "match": "amp-plate-rings",
+   "material": "amp-ring"
   },
   {
    "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1a|rib-right-1a|rib-left-1b|rib-right-1b|rib-back-1|rib-back-2|rib-back-3|rib-back-4|rib-top-1|rib-bottom-1|rib-top-2|rib-bottom-2|land-left|land-right|land-top|land-bottom|top-pad",
    "material": "bark"
   },
   {
-   "match": "post-sockets|tie-rod-insert",
+   "match": "amp-plate-gold|post-sockets|tie-rod-insert",
    "material": "brass"
   },
   {
@@ -136,6 +224,10 @@
   {
    "match": "cloth-disc",
    "material": "disc"
+  },
+  {
+   "match": "hf-exit|hf-band",
+   "material": "driver-bright"
   },
   {
    "match": "woofer-cap",
@@ -154,6 +246,10 @@
    "material": "driver-frame"
   },
   {
+   "match": "woofer-gasket",
+   "material": "driver-gasket"
+  },
+  {
    "match": "woofer-magnet",
    "material": "driver-magnet"
   },
@@ -166,6 +262,10 @@
    "material": "driver-plug"
   },
   {
+   "match": "woofer-screws",
+   "material": "driver-screw"
+  },
+  {
    "match": "woofer-spider",
    "material": "driver-spider"
   },
@@ -174,11 +274,15 @@
    "material": "driver-surround"
   },
   {
+   "match": "woofer-terminals|hf-terminals",
+   "material": "driver-terminal"
+  },
+  {
    "match": "feet-base",
    "material": "foot"
   },
   {
-   "match": "cable-glands",
+   "match": "amp-plate-housings|cable-glands",
    "material": "gland"
   },
   {
@@ -186,7 +290,19 @@
    "material": "horn"
   },
   {
-   "match": "lining-bottom-1a-web|lining-bottom-1b-web|lining-bottom-1c-web|lining-left-2a-web|lining-left-2b-web|lining-left-2c-web|lining-right-2a-web|lining-right-2b-web|lining-right-2c-web|lining-left-3-web|lining-right-3-web|lining-top-3a-web|lining-top-3b-web|lining-top-3c-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web|lining-back-e-web|lining-back-f-web",
+   "match": "amp-plate-led-green",
+   "material": "led-green"
+  },
+  {
+   "match": "amp-plate-led-on",
+   "material": "led-on"
+  },
+  {
+   "match": "amp-plate-led-red",
+   "material": "led-red"
+  },
+  {
+   "match": "lining-bottom-1-web|lining-left-2a-web|lining-left-2b-web|lining-left-2c-web|lining-right-2a-web|lining-right-2b-web|lining-right-2c-web|lining-left-3-web|lining-right-3-web|lining-top-3-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web|lining-back-e-web|lining-back-f-web",
    "material": "lining"
   },
   {
@@ -194,19 +310,35 @@
    "material": "port"
   },
   {
+   "match": "amp-plate-print|rating-plate-print",
+   "material": "print"
+  },
+  {
+   "match": "amp-plate-rca-orange",
+   "material": "rca-orange"
+  },
+  {
+   "match": "amp-plate-rca-red",
+   "material": "rca-red"
+  },
+  {
+   "match": "amp-plate-rca-white",
+   "material": "rca-white"
+  },
+  {
    "match": "woofer-ring",
    "material": "ring"
   },
   {
-   "match": "post-1|post-2|post-3|post-4|tie-rod-rod|feet-stem",
+   "match": "amp-plate-metal|post-1|post-2|post-3|post-4|tie-rod-rod|feet-stem",
    "material": "rod"
   },
   {
-   "match": "back-screws|port-screws",
+   "match": "amp-plate-screws|rating-plate-screws|back-screws|port-screws",
    "material": "screw"
   },
   {
-   "match": "amp-box-gasket|cap-o-ring|post-sleeves|back-gasket",
+   "match": "amp-box-gasket|cap-o-ring|post-sleeves",
    "material": "sleeve"
   }
  ],

@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461328.8272337965
+2461336.286782407
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461328.8272337965
+2461336.286782407
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-51
+49
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{1DD3334D-861C-44CA-B509-445DC058B95C}
+{5F960CED-8B99-45AE-8B8B-0B59CCC67E36}
   9
 $VERSIONGUID
   2
-{C811C8B6-71D1-4935-9804-0FDD4985FE9B}
+{6CD6B2E8-A4ED-4A8C-9393-E0642C9266C0}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1749,7 +1749,7 @@ ACAD
   0
 APPID
   5
-4E
+46
 330
 3
 100
@@ -1763,7 +1763,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-4F
+47
 330
 3
 100
@@ -2827,270 +2827,6 @@ lining-left-2a
 100
 AcDbText
   0
-LWPOLYLINE
-  5
-46
-330
-17
-100
-AcDbEntity
-  8
-CUT_OUTSIDE
-100
-AcDbPolyline
- 90
-5
- 70
-1
- 10
-1111.0
- 20
-15.0
- 10
-1111.0
- 20
-35.0
- 10
-816.0
- 20
-35.0
- 10
-816.0
- 20
-15.0
- 10
-1111.0
- 20
-15.0
-  0
-TEXT
-  5
-47
-330
-17
-100
-AcDbEntity
-  8
-NOTES
-100
-AcDbText
- 10
-826.0
- 20
-25.0
- 30
-0.0
- 40
-12.0
-  1
-lining-bottom-1a
- 11
-826.0
- 21
-25.0
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-48
-330
-17
-100
-AcDbEntity
-  8
-CUT_OUTSIDE
-100
-AcDbPolyline
- 90
-5
- 70
-1
- 10
-1111.0
- 20
-70.5
- 10
-1111.0
- 20
-90.5
- 10
-816.0
- 20
-90.5
- 10
-816.0
- 20
-70.5
- 10
-1111.0
- 20
-70.5
-  0
-TEXT
-  5
-49
-330
-17
-100
-AcDbEntity
-  8
-NOTES
-100
-AcDbText
- 10
-826.0
- 20
-80.5
- 30
-0.0
- 40
-12.0
-  1
-lining-bottom-1a
- 11
-826.0
- 21
-80.5
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-4A
-330
-17
-100
-AcDbEntity
-  8
-CUT_OUTSIDE
-100
-AcDbPolyline
- 90
-5
- 70
-1
- 10
-1111.0
- 20
-126.0
- 10
-1111.0
- 20
-146.0
- 10
-816.0
- 20
-146.0
- 10
-816.0
- 20
-126.0
- 10
-1111.0
- 20
-126.0
-  0
-TEXT
-  5
-4B
-330
-17
-100
-AcDbEntity
-  8
-NOTES
-100
-AcDbText
- 10
-826.0
- 20
-136.0
- 30
-0.0
- 40
-12.0
-  1
-lining-bottom-1c
- 11
-826.0
- 21
-136.0
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-4C
-330
-17
-100
-AcDbEntity
-  8
-CUT_OUTSIDE
-100
-AcDbPolyline
- 90
-5
- 70
-1
- 10
-1111.0
- 20
-181.5
- 10
-1111.0
- 20
-201.5
- 10
-816.0
- 20
-201.5
- 10
-816.0
- 20
-181.5
- 10
-1111.0
- 20
-181.5
-  0
-TEXT
-  5
-4D
-330
-17
-100
-AcDbEntity
-  8
-NOTES
-100
-AcDbText
- 10
-826.0
- 20
-191.5
- 30
-0.0
- 40
-12.0
-  1
-lining-bottom-1c
- 11
-826.0
- 21
-191.5
- 31
-0.0
-100
-AcDbText
-  0
 ENDSEC
   0
 SECTION
@@ -4081,7 +3817,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-50
+48
   0
 DICTIONARYVAR
   5
@@ -4093,11 +3829,11 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-14T19:51:13.479613+00:00
+1.4.5 @ 2026-10-22T06:52:58.459731+00:00
   0
 DICTIONARYVAR
   5
-50
+48
 330
 2D
 100
@@ -4105,7 +3841,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-14T19:51:13.481950+00:00
+1.4.5 @ 2026-10-22T06:52:58.462740+00:00
   0
 ENDSEC
   0

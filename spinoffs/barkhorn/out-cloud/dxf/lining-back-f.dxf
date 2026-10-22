@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461328.8272337965
+2461336.2985300925
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461328.8272337965
+2461336.2985300925
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-39
+37
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{BD42F285-DD64-47C9-8FCB-BF264AAB3ED9}
+{1C3E0FF9-D115-491C-8C11-A52BD54EEA96}
   9
 $VERSIONGUID
   2
-{37C8C0C6-5560-4605-9BB6-7C4E97ABB2BC}
+{8AABA5B7-8C36-4940-8673-93E6DDB6AEFF}
   9
 $EXTNAMES
 290
@@ -1549,7 +1549,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-4
+5
   0
 LAYER
   5
@@ -1603,7 +1603,7 @@ Continuous
   0
 LAYER
   5
-30
+2F
 330
 1
 100
@@ -1627,7 +1627,7 @@ Continuous
   0
 LAYER
   5
-32
+31
 330
 1
 100
@@ -1640,6 +1640,30 @@ CUT_INSIDE
 0
  62
 5
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+32
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+NOTES
+ 70
+0
+ 62
+7
   6
 Continuous
 370
@@ -1749,7 +1773,7 @@ ACAD
   0
 APPID
   5
-36
+34
 330
 3
 100
@@ -1763,7 +1787,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-37
+35
 330
 3
 100
@@ -2073,39 +2097,7 @@ ENTITIES
   0
 LWPOLYLINE
   5
-2F
-330
-17
-100
-AcDbEntity
-  8
-SHEET_EDGE
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-0.0
- 20
-0.0
- 10
-1200.0
- 20
-0.0
- 10
-1200.0
- 20
-600.0
- 10
-0.0
- 20
-600.0
-  0
-LWPOLYLINE
-  5
-31
+30
 330
 17
 100
@@ -2119,25 +2111,25 @@ AcDbPolyline
  70
 1
  10
-15.0
+0.0
  20
-15.0
+0.0
  10
-184.0
+68.5
  20
-15.0
+0.0
  10
-184.0
+68.5
  20
-293.0
+141.0
  10
-15.0
+0.0
  20
-293.0
+141.0
  10
-15.0
+0.0
  20
-15.0
+0.0
   0
 TEXT
   5
@@ -2151,85 +2143,19 @@ NOTES
 100
 AcDbText
  10
-25.0
+2.0
  20
-25.0
+145.0
  30
 0.0
  40
-12.0
+6.0
   1
-lining-back-c
+lining-back-f  50 mm polyester-batting, outer face
  11
-25.0
+2.0
  21
-25.0
- 31
-0.0
-100
-AcDbText
-  0
-LWPOLYLINE
-  5
-34
-330
-17
-100
-AcDbEntity
-  8
-CUT_OUTSIDE
-100
-AcDbPolyline
- 90
-5
- 70
-1
- 10
-196.0
- 20
-15.0
- 10
-365.0
- 20
-15.0
- 10
-365.0
- 20
-293.0
- 10
-196.0
- 20
-293.0
- 10
-196.0
- 20
-15.0
-  0
-TEXT
-  5
-35
-330
-17
-100
-AcDbEntity
-  8
-NOTES
-100
-AcDbText
- 10
-206.0
- 20
-25.0
- 30
-0.0
- 40
-12.0
-  1
-lining-back-c
- 11
-206.0
- 21
-25.0
+145.0
  31
 0.0
 100
@@ -3225,7 +3151,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-38
+36
   0
 DICTIONARYVAR
   5
@@ -3237,11 +3163,11 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-14T19:51:13.503605+00:00
+1.4.5 @ 2026-10-22T07:09:53.441904+00:00
   0
 DICTIONARYVAR
   5
-38
+36
 330
 2D
 100
@@ -3249,7 +3175,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-14T19:51:13.504696+00:00
+1.4.5 @ 2026-10-22T07:09:53.443521+00:00
   0
 ENDSEC
   0

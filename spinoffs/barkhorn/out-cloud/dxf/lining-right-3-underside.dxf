@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461328.827222222
+2461336.2985300925
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461328.827222222
+2461336.2985300925
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-39
+37
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{83B27F51-C943-4F3E-AD72-68320624063F}
+{01250531-90F0-4776-B91B-BCCD9EF5DED8}
   9
 $VERSIONGUID
   2
-{FD1B4AE6-6244-47D0-96C9-94B0D7DFF137}
+{E6AF7531-9323-4782-993E-8D5326CCF989}
   9
 $EXTNAMES
 290
@@ -1549,7 +1549,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-6
+5
   0
 LAYER
   5
@@ -1611,11 +1611,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-CUT_OUTSIDE
+REF_THROUGH
  70
 0
  62
-1
+8
   6
 Continuous
 370
@@ -1627,31 +1627,7 @@ Continuous
   0
 LAYER
   5
-31
-330
-1
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-  2
-CUT_INSIDE
- 70
-0
- 62
-5
-  6
-Continuous
-370
--3
-390
-13
-347
-21
-  0
-LAYER
-  5
-32
+30
 330
 1
 100
@@ -1675,7 +1651,7 @@ Continuous
   0
 LAYER
   5
-34
+32
 330
 1
 100
@@ -1683,11 +1659,11 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-POCKET_20MM
+POCKET_43MM_UNDERSIDE
  70
 0
  62
-3
+6
   6
 Continuous
 370
@@ -1797,7 +1773,7 @@ ACAD
   0
 APPID
   5
-36
+34
 330
 3
 100
@@ -1811,7 +1787,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-37
+35
 330
 3
 100
@@ -2119,61 +2095,9 @@ SECTION
   2
 ENTITIES
   0
-LWPOLYLINE
-  5
-30
-330
-17
-100
-AcDbEntity
-  8
-CUT_OUTSIDE
-100
-AcDbPolyline
- 90
-9
- 70
-1
- 10
-5.0
- 20
-295.0
- 10
-0.0
- 20
-295.0
- 10
-0.0
- 20
-0.0
- 10
-119.0
- 20
-0.0
- 10
-119.0
- 20
-295.0
- 10
-114.0
- 20
-295.0
- 10
-114.0
- 20
-294.0
- 10
-5.0
- 20
-294.0
- 10
-5.0
- 20
-295.0
-  0
 TEXT
   5
-33
+31
 330
 17
 100
@@ -2185,17 +2109,17 @@ AcDbText
  10
 2.0
  20
-299.0
+143.0
  30
 0.0
  40
 6.0
   1
-lining-top-3b  50 mm polyester-batting, outer face
+lining-right-3  seen from the inner face (turned over left to right)
  11
 2.0
  21
-299.0
+143.0
  31
 0.0
 100
@@ -2203,13 +2127,13 @@ AcDbText
   0
 LWPOLYLINE
   5
-35
+33
 330
 17
 100
 AcDbEntity
   8
-POCKET_20MM
+POCKET_43MM_UNDERSIDE
 100
 AcDbPolyline
  90
@@ -2217,25 +2141,25 @@ AcDbPolyline
  70
 1
  10
-5.0
+42.0
  20
-295.0
+71.0
  10
-5.0
+42.0
  20
-294.0
+22.0
  10
-114.0
+289.0
  20
-294.0
+22.0
  10
-114.0
+289.0
  20
-295.0
+71.0
  10
-5.0
+42.0
  20
-295.0
+71.0
   0
 ENDSEC
   0
@@ -3227,7 +3151,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-38
+36
   0
 DICTIONARYVAR
   5
@@ -3239,11 +3163,11 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-14T19:51:12.959021+00:00
+1.4.5 @ 2026-10-22T07:09:53.148325+00:00
   0
 DICTIONARYVAR
   5
-38
+36
 330
 2D
 100
@@ -3251,7 +3175,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-14T19:51:12.968790+00:00
+1.4.5 @ 2026-10-22T07:09:53.149387+00:00
   0
 ENDSEC
   0

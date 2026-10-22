@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461328.8272337965
+2461336.286782407
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461328.8272337965
+2461336.286782407
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-37
+49
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{25BB85D3-AF0C-43B1-BEB6-A727633D5E0B}
+{EB0E4D65-2BF0-4DDF-9027-8E8D56E60AA6}
   9
 $VERSIONGUID
   2
-{CD773758-E14A-4DB3-8599-B7D0F5F3D4EE}
+{D3E7B1A4-48BD-443A-B815-FADC1CE889C8}
   9
 $EXTNAMES
 290
@@ -1323,9 +1323,9 @@ ISM
   0
 CLASS
   1
-LAYOUT
+ACDBPLACEHOLDER
   2
-AcDbLayout
+AcDbPlaceHolder
   3
 ObjectDBX Classes
  90
@@ -1339,9 +1339,9 @@ ObjectDBX Classes
   0
 CLASS
   1
-ACDBPLACEHOLDER
+LAYOUT
   2
-AcDbPlaceHolder
+AcDbLayout
   3
 ObjectDBX Classes
  90
@@ -1549,7 +1549,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-5
+6
   0
 LAYER
   5
@@ -1603,7 +1603,7 @@ Continuous
   0
 LAYER
   5
-2F
+30
 330
 1
 100
@@ -1627,7 +1627,7 @@ Continuous
   0
 LAYER
   5
-31
+32
 330
 1
 100
@@ -1651,7 +1651,7 @@ Continuous
   0
 LAYER
   5
-32
+33
 330
 1
 100
@@ -1659,11 +1659,35 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
-NOTES
+POCKET_20MM
  70
 0
  62
-7
+3
+  6
+Continuous
+370
+-3
+390
+13
+347
+21
+  0
+LAYER
+  5
+35
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
+POCKET_60MM
+ 70
+0
+ 62
+3
   6
 Continuous
 370
@@ -1773,7 +1797,7 @@ ACAD
   0
 APPID
   5
-34
+46
 330
 3
 100
@@ -1787,7 +1811,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-35
+47
 330
 3
 100
@@ -2097,7 +2121,39 @@ ENTITIES
   0
 LWPOLYLINE
   5
-30
+2F
+330
+17
+100
+AcDbEntity
+  8
+SHEET_EDGE
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+0.0
+ 20
+0.0
+ 10
+1200.0
+ 20
+0.0
+ 10
+1200.0
+ 20
+600.0
+ 10
+0.0
+ 20
+600.0
+  0
+LWPOLYLINE
+  5
+31
 330
 17
 100
@@ -2111,29 +2167,137 @@ AcDbPolyline
  70
 1
  10
-128.5
+15.0
  20
-295.0
+310.0
  10
-0.0
+15.0
  20
-295.0
+15.0
  10
-0.0
+433.0
  20
-0.0
+15.0
  10
-128.5
+433.0
  20
-0.0
+310.0
  10
-128.5
+15.0
  20
-295.0
+310.0
+  0
+LWPOLYLINE
+  5
+34
+330
+17
+100
+AcDbEntity
+  8
+POCKET_20MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+169.5
+ 20
+310.0
+ 10
+169.5
+ 20
+309.0
+ 10
+278.5
+ 20
+309.0
+ 10
+278.5
+ 20
+310.0
+ 10
+169.5
+ 20
+310.0
+  0
+LWPOLYLINE
+  5
+36
+330
+17
+100
+AcDbEntity
+  8
+POCKET_60MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+283.5
+ 20
+310.0
+ 10
+283.5
+ 20
+15.0
+ 10
+304.5
+ 20
+15.0
+ 10
+304.5
+ 20
+310.0
+ 10
+283.5
+ 20
+310.0
+  0
+LWPOLYLINE
+  5
+37
+330
+17
+100
+AcDbEntity
+  8
+POCKET_60MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+143.5
+ 20
+310.0
+ 10
+143.5
+ 20
+15.0
+ 10
+164.5
+ 20
+15.0
+ 10
+164.5
+ 20
+310.0
+ 10
+143.5
+ 20
+310.0
   0
 TEXT
   5
-33
+38
 330
 17
 100
@@ -2143,19 +2307,469 @@ NOTES
 100
 AcDbText
  10
-2.0
+25.0
  20
-299.0
+25.0
  30
 0.0
  40
-6.0
+12.0
   1
-lining-top-3c  50 mm polyester-batting, outer face
+lining-top-3
  11
-2.0
+25.0
  21
-299.0
+25.0
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+39
+330
+17
+100
+AcDbEntity
+  8
+CUT_OUTSIDE
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+445.0
+ 20
+310.0
+ 10
+445.0
+ 20
+15.0
+ 10
+863.0
+ 20
+15.0
+ 10
+863.0
+ 20
+310.0
+ 10
+445.0
+ 20
+310.0
+  0
+LWPOLYLINE
+  5
+3A
+330
+17
+100
+AcDbEntity
+  8
+POCKET_20MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+599.5
+ 20
+310.0
+ 10
+599.5
+ 20
+309.0
+ 10
+708.5
+ 20
+309.0
+ 10
+708.5
+ 20
+310.0
+ 10
+599.5
+ 20
+310.0
+  0
+LWPOLYLINE
+  5
+3B
+330
+17
+100
+AcDbEntity
+  8
+POCKET_60MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+713.5
+ 20
+310.0
+ 10
+713.5
+ 20
+15.0
+ 10
+734.5
+ 20
+15.0
+ 10
+734.5
+ 20
+310.0
+ 10
+713.5
+ 20
+310.0
+  0
+LWPOLYLINE
+  5
+3C
+330
+17
+100
+AcDbEntity
+  8
+POCKET_60MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+573.5
+ 20
+310.0
+ 10
+573.5
+ 20
+15.0
+ 10
+594.5
+ 20
+15.0
+ 10
+594.5
+ 20
+310.0
+ 10
+573.5
+ 20
+310.0
+  0
+TEXT
+  5
+3D
+330
+17
+100
+AcDbEntity
+  8
+NOTES
+100
+AcDbText
+ 10
+455.0
+ 20
+25.0
+ 30
+0.0
+ 40
+12.0
+  1
+lining-top-3
+ 11
+455.0
+ 21
+25.0
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+3E
+330
+17
+100
+AcDbEntity
+  8
+CUT_OUTSIDE
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+875.0
+ 20
+15.0
+ 10
+1076.0
+ 20
+15.0
+ 10
+1076.0
+ 20
+310.0
+ 10
+875.0
+ 20
+310.0
+ 10
+875.0
+ 20
+15.0
+  0
+LWPOLYLINE
+  5
+3F
+330
+17
+100
+AcDbEntity
+  8
+POCKET_60MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+895.0
+ 20
+310.0
+ 10
+895.0
+ 20
+15.0
+ 10
+916.0
+ 20
+15.0
+ 10
+916.0
+ 20
+310.0
+ 10
+895.0
+ 20
+310.0
+  0
+LWPOLYLINE
+  5
+40
+330
+17
+100
+AcDbEntity
+  8
+POCKET_60MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+1035.0
+ 20
+310.0
+ 10
+1035.0
+ 20
+15.0
+ 10
+1056.0
+ 20
+15.0
+ 10
+1056.0
+ 20
+310.0
+ 10
+1035.0
+ 20
+310.0
+  0
+TEXT
+  5
+41
+330
+17
+100
+AcDbEntity
+  8
+NOTES
+100
+AcDbText
+ 10
+885.0
+ 20
+25.0
+ 30
+0.0
+ 40
+12.0
+  1
+lining-bottom-1
+ 11
+885.0
+ 21
+25.0
+ 31
+0.0
+100
+AcDbText
+  0
+LWPOLYLINE
+  5
+42
+330
+17
+100
+AcDbEntity
+  8
+CUT_OUTSIDE
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+310.0
+ 20
+322.0
+ 10
+310.0
+ 20
+523.0
+ 10
+15.0
+ 20
+523.0
+ 10
+15.0
+ 20
+322.0
+ 10
+310.0
+ 20
+322.0
+  0
+LWPOLYLINE
+  5
+43
+330
+17
+100
+AcDbEntity
+  8
+POCKET_60MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+15.0
+ 20
+342.0
+ 10
+310.0
+ 20
+342.0
+ 10
+310.0
+ 20
+363.0
+ 10
+15.0
+ 20
+363.0
+ 10
+15.0
+ 20
+342.0
+  0
+LWPOLYLINE
+  5
+44
+330
+17
+100
+AcDbEntity
+  8
+POCKET_60MM
+100
+AcDbPolyline
+ 90
+5
+ 70
+1
+ 10
+15.0
+ 20
+482.0
+ 10
+310.0
+ 20
+482.0
+ 10
+310.0
+ 20
+503.0
+ 10
+15.0
+ 20
+503.0
+ 10
+15.0
+ 20
+482.0
+  0
+TEXT
+  5
+45
+330
+17
+100
+AcDbEntity
+  8
+NOTES
+100
+AcDbText
+ 10
+25.0
+ 20
+332.0
+ 30
+0.0
+ 40
+12.0
+  1
+lining-bottom-1
+ 11
+25.0
+ 21
+332.0
  31
 0.0
 100
@@ -3151,7 +3765,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-36
+48
   0
 DICTIONARYVAR
   5
@@ -3163,11 +3777,11 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-14T19:51:13.016570+00:00
+1.4.5 @ 2026-10-22T06:52:58.446762+00:00
   0
 DICTIONARYVAR
   5
-36
+48
 330
 2D
 100
@@ -3175,7 +3789,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-10-14T19:51:13.018201+00:00
+1.4.5 @ 2026-10-22T06:52:58.450423+00:00
   0
 ENDSEC
   0

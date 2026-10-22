@@ -3,7 +3,7 @@
  "model": "spinoffs/barkhorn/out-cloud/render/barkhorn-cloud.glb",
  "origin_mm": [
   280.0,
-  213.8,
+  213.7,
   -12.0
  ],
  "materials": {
@@ -119,14 +119,6 @@
    "color": "#1A1A1A",
    "roughness": 0.5
   },
-  "horn": {
-   "preset": "$horn_preset",
-   "color": "$horn",
-   "absorb": "$horn_deep",
-   "deep": "$horn_deep",
-   "cloud": "$horn_cloud",
-   "cloud_m": 0.12
-  },
   "led-green": {
    "preset": "gloss_plastic",
    "color": "#0F3A1E",
@@ -209,7 +201,7 @@
    "material": "amp-ring"
   },
   {
-   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|port-left|port-frame-left|port-right|port-frame-right|land-left|land-right|land-top|land-bottom|top-pad|grip-left|grip-right",
+   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|port-left|port-frame-left|port-right|port-frame-right|waveguide|horn-throat|horn-pod|waveguide-cap|horn-pads|horn-saddle|land-left|land-right|land-top|land-bottom|back-boss-1|back-boss-2|back-boss-3|back-boss-4|top-pad|grip-left|grip-right",
    "material": "bark"
   },
   {
@@ -285,10 +277,6 @@
    "material": "gland"
   },
   {
-   "match": "waveguide|waveguide-cap",
-   "material": "horn"
-  },
-  {
    "match": "amp-plate-led-green",
    "material": "led-green"
   },
@@ -301,7 +289,7 @@
    "material": "led-red"
   },
   {
-   "match": "lining-bottom-1-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web",
+   "match": "lining-bottom-1-web|lining-left-2a-web|lining-left-2b-web|lining-right-2a-web|lining-right-2b-web|lining-left-3-web|lining-right-3-web|lining-top-3-web|lining-back-a-web|lining-back-b-web|lining-back-c-web|lining-back-d-web|lining-back-e-web|lining-back-f-web|lining-back-g-web|lining-back-h-web",
    "material": "lining"
   },
   {
@@ -337,7 +325,7 @@
    "material": "screw"
   },
   {
-   "match": "amp-box-gasket|cap-o-ring|post-sleeves|back-gasket",
+   "match": "amp-box-gasket|cap-o-ring|post-sleeves|back-seal",
    "material": "sleeve"
   }
  ],
