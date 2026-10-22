@@ -1,0 +1,61 @@
+{
+  "stage1": {"impression": "A warm brown room with a record wall, fir ceiling and a long grey counter. It is legible and has a believable night key, but it reads as a render. The figures look like faceless mannequins in pale grey clothes. They are the brightest, largest things in the middle of the frame, and their pink head-blobs pull the eye away from the speakers. The left speaker sits behind glass in its niche and reads as a grey box in a display case, with a white wedge of reflection above it. The zinc is a flat, smooth CG plane, and the Dome pendants read as opaque white shades rather than smoked acrylic. Most of it is a generic dark-wood bar: the niches and the record wall give a little specificity, but not enough for a magazine to run it as a particular place.", "score": 4.5},
+  "verdict": "iterate",
+  "blocking_9": [
+    "Blurred figures must read as people in motion (dark clothes, skin in shadow, partial occlusion), never as pale mannequins brighter than the speakers: people region [380,300,680,580] lum_median <= 70",
+    "The left speaker must be the brightest structured object in the frame, and its smoke tint must read through lit acrylic: speaker region [160,230,340,550] lum_median >= 60 with visible glow at the cabinet edges",
+    "No unexplained white wedge of reflection in the niche above the speaker: [230,150,340,230] lum_p95 <= 150",
+    "The zinc must show patina, wipe marks and broken reflections of the pendants, not a uniform grey plane",
+    "The Dome shades must read as tinted acrylic with a glowing liner, not as white opaque bowls: shade lum_median <= 170 with a darker tinted rim",
+    "Pools of light along the counter, with dark between them, instead of a flat bright left half and a dark right half",
+    "A specific-place cue in frame (the frosted disc, the decks lit, a menu or nameplate) so the picture is not a generic dark-wood bar"
+  ],
+  "defects": [
+    {"region": [380, 300, 680, 580], "what": "Two blurred figures read as mannequins: uniform pale grey-green clothing, pink featureless head-blobs, lum_median 115 (brighter than the speaker), clip 0.67 %"},
+    {"region": [1060, 350, 1200, 620], "what": "Third figure on the right: two head-blobs ghosting side by side read as duplicated geometry rather than motion"},
+    {"region": [230, 150, 340, 230], "what": "A large white triangular reflection or highlight inside the niche above the left speaker (p95 223), unexplained and distracting"},
+    {"region": [160, 230, 340, 550], "what": "The left speaker reads as a neutral grey box behind glass (r/g/b medians 51/43/41, lum_median 44.6, under the 45 target); no edge glow, no tint through the acrylic; reads as a display case"},
+    {"region": [690, 330, 770, 500], "what": "The right speaker is half hidden by the pendant and the selector, and is brighter than the hero speaker (lum_median 116)"},
+    {"region": [0, 570, 1100, 740], "what": "The zinc top is a smooth, untextured CG plane; the left half is flat and bright (lum_median about 103), the right half falls to about 20 with no pool structure"},
+    {"region": [380, 180, 1060, 400], "what": "The Dome pendants read as opaque white bowls (shade median 205), not smoked acrylic"},
+    {"region": [0, 700, 900, 800], "what": "The fluted oak counter front is uniform, with no variation in its sheen"},
+    {"region": [880, 620, 1200, 800], "what": "The chairs in the foreground right are cut by the frame edge, with untextured leather and plastic-looking highlights"}
+  ],
+  "changes": [
+    {"id": "c1", "rank": 1, "kind": "set", "problem": "The blurred figures read as pale mannequins and dominate the centre of the frame.", "evidence": {"region": [380, 300, 680, 580], "measured": "lum_median 115.0, r/g/b 140/110/88, clip 0.67 %; heads are pink blobs with no hair or shadow structure"},
+     "change": {"setting": "people (number, places, blur) and their clothing tone", "from": "3 at the counter + bartender + selector, light grey-green clothes, shutter 0.5 frame, 2 blurred figures centred in front of the record wall", "to": "2 figures at the counter, placed back to camera or turned away and partly occluded by the counter, in dark clothing (charcoal, navy, black wool, albedo about 0.04 to 0.08); bartender moved out of the speaker sightline; shutter 0.25 frame so the blur shows motion without ghosting"},
+     "expected": "The figures sink into the room's tone and read as a life sign, not a subject; the eye goes to the speaker and the counter.",
+     "accept": {"region": [380, 300, 680, 580], "metric": "lum_median", "op": "<=", "value": 70}},
+    {"id": "c2", "rank": 2, "kind": "light", "problem": "The hero speaker is underlit, and its smoked acrylic does not glow or show tint.", "evidence": {"region": [160, 230, 340, 550], "measured": "lum_median 44.6, r/g/b 51/43/41 (neutral grey), p95 159"},
+     "change": {"setting": "the lit niche's strip and lamps on the speakers (4 x area, 1.0 W/m2)", "from": "niche strip 0.06; speaker area lamps 1.0 W/m2 at 2900 K", "to": "niche strip 0.18 (grazing from below and behind so light passes through the cabinet edges); speaker area lamps 2.5 W/m2 at 2700 K; add a narrow 10 deg spot at 15 W, 2500 K on the left speaker's horn mouth"},
+     "expected": "The cabinet edges glow, the white batts show through the smoke, and the speaker is the brightest structured object in the frame.",
+     "accept": {"region": [160, 230, 340, 550], "metric": "lum_median", "op": "between", "value": [60, 95]}},
+    {"id": "c3", "rank": 3, "kind": "light", "problem": "A large white wedge of reflection sits in the niche above the left speaker.", "evidence": {"region": [230, 150, 340, 230], "measured": "lum_p95 223.1 against a median of 24.3; a sharp white triangle"},
+     "change": {"setting": "the record wall's spots / the niche lighting angle (or what the niche glass reflects)", "from": "record wall 4 x spot, 8.0 W, cone 26 deg (one aimed so it reflects into the niche)", "to": "re-aim the nearest record-wall spot 10 deg away from the niche, or drop it to 5 W; if the wedge is the horn's resin, light it with the spot from c2 instead of the bounce"},
+     "expected": "The niche top falls to dark timber, with only small highlights.",
+     "accept": {"region": [230, 150, 340, 230], "metric": "lum_p95", "op": "<=", "value": 150}},
+    {"id": "c4", "rank": 4, "kind": "material", "problem": "The zinc top is a smooth, uniform CG plane, and the left half is flatly bright.", "evidence": {"region": [0, 600, 600, 680], "measured": "lum_median 102.7, smooth gradient with no texture at 3x"},
+     "change": {"setting": "the zinc's patina / roughness", "from": "uniform grey, low roughness variation", "to": "a patinated zinc: roughness 0.25 to 0.55 broken by a wipe-mark and ring texture, base colour darkened about 25 %, slight blue-grey to warm-grey variation; let the pendants reflect as soft, broken streaks"},
+     "expected": "The zinc reads as a real worked metal top, with the pendants reflecting in it and lower mean brightness.",
+     "accept": {"region": [0, 600, 600, 680], "metric": "lum_median", "op": "between", "value": [55, 85]}},
+    {"id": "c5", "rank": 5, "kind": "light", "problem": "The counter has no pools: bright and flat at the left, near black past the decks.", "evidence": {"region": [0, 600, 1000, 640], "measured": "x-profile bins 29/134/155/197/186/20/27/33"},
+     "change": {"setting": "the Domes' downlights (4 x spot, 16 W, cone 20 deg)", "from": "16 W, 20 deg", "to": "12 W, 14 deg for the near two; 18 W, 14 deg for the far two, so each Dome throws its own pool onto the zinc"},
+     "expected": "Distinct pools along the counter with darker gaps; the right half of the counter gains a lit pool near the decks.",
+     "accept": {"region": [600, 560, 1000, 620], "metric": "lum_median", "op": ">=", "value": 45}},
+    {"id": "c6", "rank": 6, "kind": "light", "problem": "The Dome shades read as opaque white bowls rather than smoked acrylic.", "evidence": {"region": [380, 210, 485, 265], "measured": "lum_median 205.1, r/g/b 209/205/197 (no tint)"},
+     "change": {"setting": "each Dome's liner glow", "from": "0.008", "to": "0.004, so the smoked outer shell shows as a darker tinted rim around the frosted liner"},
+     "expected": "The shades show a smoked gradient and stay bright but not white.",
+     "accept": {"region": [380, 210, 485, 265], "metric": "lum_median", "op": "between", "value": [120, 170]}},
+    {"id": "c7", "rank": 7, "kind": "set", "problem": "The frame lacks a specific-place cue; it reads as a generic dark-wood bar.", "evidence": {"region": [600, 450, 1000, 580], "measured": "the decks are lost behind the selector's blur; the frosted disc is not visible"},
+     "change": {"setting": "the disc behind the DJ station / props", "from": "disc 0.06 at #FFC890; the selector standing in front of the decks", "to": "disc 0.12; the selector moved aside so the R3 Float decks and their lit base read; put the record out of its sleeve flat on the counter near camera, with a menu card"},
+     "expected": "The decks and disc become a readable signature of the place."},
+    {"id": "c8", "rank": 8, "kind": "camera", "problem": "The foreground chairs are cut awkwardly at the right edge, and the right speaker is half hidden by a pendant.", "evidence": {"region": [880, 620, 1200, 800], "measured": "chair backs cropped by the frame edge; pendant at [730,290,800,330] overlaps the right speaker's top"},
+     "change": {"setting": "camera position / target", "from": "position [3.4, 2.7, 1.3], target [7.4, 5.6, 1.65]", "to": "position [3.4, 2.9, 1.25], target [7.4, 5.6, 1.55] (slightly lower, panned left) so the chair is fully out or fully in and the right speaker clears the pendant"},
+     "expected": "A cleaner edge and both speakers unobstructed; no pixel test because the camera moves."}
+  ],
+  "out_of_scope": [
+    {"request": "Give the speakers a more saturated tint so the frame has one clear colour", "why": "The Smoke configuration's tint is fixed product colour; only the light through it may change (see c2)."},
+    {"request": "Remove the glass or vitrine look of the niche", "why": "The niches are fixed room design; reflections can only be managed with light (c3)."}
+  ],
+  "score_if_fixed": 6.5
+}

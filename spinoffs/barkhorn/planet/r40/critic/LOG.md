@@ -20,3 +20,24 @@ Duels p1 against round 39's best:
 | door-mother | finals/door-mother (at 1200) | r39, slight | r39, clear | round 39 2–0 |
 | bar | proofs-p2/bar | r40, clear | r40, slight | round 40 2–0 |
 | listening | proofs-p3/listening | r40, clear | r40, slight | round 40 2–0 |
+
+p2a (proofs-p2 at its first commit) was not judged: with the blur cut to a few centimetres the figures read as smooth
+dummies with ball heads (seen before staging). p2 below is p2b: the bodies a little softer, the heads always smeared,
+the door on a full shutter, the Core nearest the lens dimmer.
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| p2 | door-mother | 4.5 | 5.5 | 5.0 | 6.5, 7.3 | figures "translucent grey mannequins"; the altar batts clip; the globe a black wire cage; zinc and the near floor brightest; Orbs cold white |
+| p2 | bar | 4.5 | 4.5 | 4.5 | 6.8, 6.5 | figures "pale mannequins ... the brightest mass"; the white wedge in the left niche; zinc plaster; Domes white bowls |
+| p2 | listening | 4.5 | 4.5 | 4.5 | 6.5, 6.8 | dead-centre frontal camera; flat white batt squares; the near Orb a grey disc on the axis; floor and chairs crushed; no shell |
+
+Read test p2: all three renders ("faceless mannequins", "smooth, featureless blurred shapes", "flat white placeholder blocks").
+
+| frame | ab | ba | result |
+|---|---|---|---|
+| door-mother | r39, clear | r39, clear | round 39 2–0 |
+| bar | r39, clear | r39, clear | round 39 2–0 |
+| listening | r39, clear | r39, clear | round 39 2–0 |
+
+p2 is worse than p1 everywhere. The procedural figures are the binding limit: sharp, they read as mannequins; blurred,
+as composited ghosts. p3 (the last round per frame) goes back to p1's framing, keeps the figures few and dark, in shadow.
