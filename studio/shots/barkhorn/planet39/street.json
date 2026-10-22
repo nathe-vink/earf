@@ -137,14 +137,14 @@
     "wet": true,
     "road_rough": 0.12,
     "siding": "#8E9384",
-    "neighbour_plain": false,
+    "neighbour_plain": true,
     "flat_glow": 0.06,
     "across_glow": 0.05,
     "linen_trans": 0.5,
     "transom_glow": 0.15,
     "glass_gloss": 3.0,
     "flame": 60.0,
-    "windows_lit": 1.0,
+    "windows_lit": 0.5,
     "sconce_w": 10.0,
     "spk_niche_strip": 3.0,
     "zone_life": true,
@@ -373,7 +373,7 @@
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
-      "glow_color": "#FFDCB8"
+      "glow_color": "#FFB878"
      }
     }
    },

@@ -374,7 +374,7 @@
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
-      "glow_color": "#FFDCB8"
+      "glow_color": "#FFB878"
      }
     }
    },
@@ -492,13 +492,13 @@
     "size": 1.25,
     "t": 0.025,
     "core": 0.13,
-    "rim": 22.0,
-    "rim_par": 0.45,
-    "core_glow": 0.5,
+    "rim": 0.45,
+    "rim_par": 0.5,
+    "core_glow": 0.12,
     "core_w": 25.0,
     "ceiling": 3.4,
     "heading": -35.0,
-    "radius": 0.02
+    "radius": 0.04
    },
    {
     "kind": "kit",

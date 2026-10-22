@@ -94,16 +94,15 @@ VIEWS = {
                # it, the street running away, the sky still blue over it, the room already lit
                'camera': {'position': [-12.5, -3.2, 1.55], 'target': [0.0, 3.4, 3.0], 'lens_mm': 35, 'level': True,
                           'fstop': 8.0, 'focus': [0.0, 3.05, 1.6]},
-               'base': 'street', 'settings': dict(exposure=1.8, sky=0.6, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE',
-                                                neighbour_plain=False, windows_lit=1.0)},
+               'base': 'street', 'settings': dict(exposure=1.8, sky=0.6, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE')},
 }
 
 
 # Mother EARF at the room's hinge, over the aisle between the counter's end and the step (over the listening room the
 # partition's header hid it from the door, look 2): between the beams at 10.51 and 11.73, its foot 2.13 m up so a
 # standing guest walks under it, its top 15 mm under the deck
-MOTHER = dict(centre=[11.12, RP.YC, 2.76], size=1.25, t=0.025, core=0.13, rim=22.0, rim_par=0.45, core_glow=0.5,
-              core_w=25.0, ceiling=RP.CEIL, heading=-35.0, radius=0.02)
+MOTHER = dict(centre=[11.12, RP.YC, 2.76], size=1.25, t=0.025, core=0.13, rim=0.45, rim_par=0.5, core_glow=0.12,
+              core_w=25.0, ceiling=RP.CEIL, heading=-35.0, radius=0.04)
 
 
 def product_lights(v):
@@ -156,6 +155,9 @@ def shot(view):
     extra.append({'kind': 'kit', 'shape': 'ext', 'path': KIT39, 'fn': 'retouch', **vw.get('retouch', {})})
     s['set']['props'] += extra
     s['lights'].update(product_lights(v))
+    for o in s['set']['props']:                  # the Orbs' liners warmer: at #FFDCB8 under the room's 3000 K balance
+        if o.get('fn') == 'orb':                 # they read cyan (look 2, r38b's street)
+            o.setdefault('materials', {}).setdefault('liner', {})['glow_color'] = v.get('orb_col', '#FFB878')
     s['title'] = f"Planet EARF, {vw['title']}{' (Mother EARF)' if mother else ''} (round 39)"
     s['size'] = [2400, 1600]
     s['finish'] = dict(FINISH)

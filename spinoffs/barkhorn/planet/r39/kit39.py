@@ -101,29 +101,35 @@ def mother(bpy, name, p, kit):
     for key, tint, a in DISCS:
         kind = 'm' if key.startswith('m') else 'p'
         M, r = _disc_matrix(kind, a, R)
+        body = K.resin(bpy, DEEP[tint], f'mother-{tint}', radius=p.get('radius', 0.08), rough=0.02)
+        glow = p.get('rim', 6.0) * (1.0 if kind == 'm' else p.get('rim_par', 0.45))
+        rim = _add_emission(bpy, body, f'mother-rim-{tint}-{glow}', GLOW[tint], glow)
+        # built in world coordinates (identity matrices), its materials in place before the slots are cut, so the
+        # boolean keeps the rim's index
         bm = bmesh.new(); _annulus(bm, rc + 0.004 if kind == 'm' else 0.0, r, T)
+        bmesh.ops.transform(bm, matrix=W @ M, verts=bm.verts[:])
         me = bpy.data.meshes.new(f'{name}-{key}'); bm.to_mesh(me); bm.free()
+        me.materials.append(body); me.materials.append(rim)
         ob = bpy.data.objects.new(f'{name}-{key}', me); bpy.context.scene.collection.objects.link(ob)
-        ob.matrix_world = W @ M
         # slotted round every disc before it, as the fab kit cuts them (main's globe_mono.discs)
-        for prev_kind, prev_M, prev_r in made:
+        for prev_M, prev_r in made:
             cb = bmesh.new(); _annulus(cb, 0.0, prev_r + 0.002, T + 2 * gap, seg=144)
             for f in cb.faces:
                 f.material_index = 0
+            bmesh.ops.transform(cb, matrix=W @ prev_M, verts=cb.verts[:])
             cme = bpy.data.meshes.new('cutter'); cb.to_mesh(cme); cb.free()
+            cme.materials.append(body)
             cut = bpy.data.objects.new('cutter', cme); bpy.context.scene.collection.objects.link(cut)
-            cut.matrix_world = W @ prev_M
             md = ob.modifiers.new('slot', 'BOOLEAN'); md.operation = 'DIFFERENCE'; md.object = cut; md.solver = 'EXACT'
-            dg = bpy.context.evaluated_depsgraph_get()
+            if hasattr(md, 'material_mode'):
+                md.material_mode = 'INDEX'
+            dg = bpy.context.evaluated_depsgraph_get(); dg.update()
             new = bpy.data.meshes.new_from_object(ob.evaluated_get(dg))
             ob.modifiers.remove(md); old = ob.data; ob.data = new; bpy.data.meshes.remove(old)
             bpy.data.objects.remove(cut); bpy.data.meshes.remove(cme)
-        made.append((kind, M, r))
-        body = K.resin(bpy, DEEP[tint], f'mother-{tint}', radius=p.get('radius', 0.05), rough=0.02)
-        glow = p.get('rim', 6.0) * (1.0 if kind == 'm' else p.get('rim_par', 0.45))
-        ob.data.materials.clear()
-        ob.data.materials.append(body)
-        ob.data.materials.append(_add_emission(bpy, body, f'mother-rim-{tint}-{glow}', GLOW[tint], glow))
+        made.append((M, r))
+        if len(ob.data.materials) < 2:
+            ob.data.materials.clear(); ob.data.materials.append(body); ob.data.materials.append(rim)
         for f in ob.data.polygons:
             f.use_smooth = False
         objs.append(ob)
