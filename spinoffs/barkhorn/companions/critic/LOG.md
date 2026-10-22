@@ -54,3 +54,14 @@ owner's brightness question), with only a soft fill added. Every remaining note 
 on the shades, the glow pulled down two stops, a hero crop. That is the next step if the owner wants these frames for
 the site; the gate (6.0) is not met. Twice a critic read the fins and the finial as "unfinished", which is a design
 note for the owner, not a render fix: they are the heat path (B2).
+
+### Round 35's site pictures (lamps_pdp_r35.py, the site's studio)
+
+One fresh blind critic per frame, stage 1. The gate is round 32e's (6.0). Round 32f's site heroes, which these replace
+once the owner signs: lamp-dome 5.25, lamp-orb 6.0.
+
+| Shot | Pass | Blind score | The critic's top changes |
+|---|---|---|---|
+| lamp-dome-ember (North) | r1 | 4.5 | The black fins and collar flat silhouettes (a rim or strip light); the shade reads as opaque glossy plastic with little glow, the mouth's frost a flat peach disc; faint triangular light wedges on the backdrop and an empty lower half |
+| lamp-orb-ember (Core) | r1 | 5.0 | No detail to say what it is (no seam, control or cable in view); the shell's dark rim muddy, a faint band across the core; a rim light and a contact shadow for the base |
+| lamp-south-ember (South) | r1 | 4.0 | Too small and seen from straight below (closer, nearer the bowl's height); the black canopy, rod and fins flat cut-outs (a rim light); empty cream fields |
