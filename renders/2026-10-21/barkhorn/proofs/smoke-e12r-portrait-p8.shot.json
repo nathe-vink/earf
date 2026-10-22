@@ -1,0 +1,5042 @@
+{
+ "product": {
+  "def": "studio/products/barkhorn-cloud.json",
+  "flavour": "cloud-black",
+  "instances": [
+   {
+    "flavour": "cloud-black",
+    "position": [
+     0.0,
+     0.0,
+     -0.3
+    ],
+    "rotate_z": 43.0,
+    "hide": [
+     "cloth-disc"
+    ],
+    "tilt": [
+     6.0,
+     -2.5
+    ]
+   }
+  ]
+ },
+ "set": {
+  "kind": "stage",
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     8.25,
+     150.0,
+     0.3
+    ],
+    "position": [
+     -4.875,
+     55.0,
+     -0.3
+    ],
+    "material": "pbr",
+    "texture": "asphalt_02",
+    "tex_scale": 4.0,
+    "tint": "#2C2C2E",
+    "tint_mix": 0.3,
+    "rough_mul": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     8.25,
+     150.0,
+     0.3
+    ],
+    "position": [
+     4.875,
+     55.0,
+     -0.3
+    ],
+    "material": "pbr",
+    "texture": "asphalt_02",
+    "tex_scale": 4.0,
+    "tint": "#2C2C2E",
+    "tint_mix": 0.3,
+    "rough_mul": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     1.5,
+     109.0,
+     0.3
+    ],
+    "position": [
+     0.0,
+     75.5,
+     -0.3
+    ],
+    "material": "pbr",
+    "texture": "asphalt_02",
+    "tex_scale": 4.0,
+    "tint": "#2C2C2E",
+    "tint_mix": 0.3,
+    "rough_mul": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     1.5,
+     10.0,
+     0.3
+    ],
+    "position": [
+     0.0,
+     -6.2,
+     -0.3
+    ],
+    "material": "pbr",
+    "texture": "asphalt_02",
+    "tex_scale": 4.0,
+    "tint": "#2C2C2E",
+    "tint_mix": 0.3,
+    "rough_mul": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     -4.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     -4.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     5.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     5.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     14.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     14.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     23.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     23.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     32.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     32.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     41.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     41.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     50.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     50.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     59.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     59.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     68.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     68.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     77.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     77.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     86.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     86.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     95.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     95.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     104.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     104.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     113.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     113.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     -3.5,
+     122.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.14,
+     3.0,
+     0.004
+    ],
+    "position": [
+     3.5,
+     122.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.12,
+     140.0,
+     0.004
+    ],
+    "position": [
+     -6.8,
+     60.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.12,
+     140.0,
+     0.004
+    ],
+    "position": [
+     6.8,
+     60.0,
+     0.0
+    ],
+    "material": "clay",
+    "color": "#C9C7C0"
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "outline": [
+     [
+      -0.3,
+      0.0
+     ],
+     [
+      0.3,
+      0.0
+     ],
+     [
+      0.3,
+      0.08
+     ],
+     [
+      0.1,
+      0.3
+     ],
+     [
+      0.08,
+      0.81
+     ],
+     [
+      -0.08,
+      0.81
+     ],
+     [
+      -0.1,
+      0.3
+     ],
+     [
+      -0.3,
+      0.08
+     ]
+    ],
+    "depth": 140.0,
+    "position": [
+     -7.3,
+     60.0,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "material": "pbr",
+    "texture": "concrete_wall_008",
+    "tex_scale": 2.0,
+    "tint": "#8C8A86",
+    "tint_mix": 0.3,
+    "ease": 0.01
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     1.6,
+     140.0,
+     0.2
+    ],
+    "position": [
+     -8.4,
+     60.0,
+     0.0
+    ],
+    "material": "pbr",
+    "texture": "concrete_floor_02",
+    "tex_scale": 2.0,
+    "tint": "#7E7C78",
+    "tint_mix": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     -10.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     -8.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     -6.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     -4.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     -2.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     0.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     2.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     4.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     6.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     8.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     10.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     12.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     14.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     16.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     18.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     20.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     22.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     24.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     26.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     28.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     30.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     32.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     34.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     36.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     38.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     40.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     42.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     44.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     46.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     48.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     50.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     52.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     54.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     56.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     58.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     60.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     62.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     64.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     66.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     68.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     70.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     72.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     74.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     76.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     78.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     80.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     82.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     84.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     86.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     88.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     90.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     92.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     94.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     96.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     98.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     100.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     102.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     104.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     106.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     108.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     110.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     112.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     114.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     116.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     118.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     120.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     122.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     124.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     126.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     128.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     -9.15,
+     130.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     140.0,
+     0.06
+    ],
+    "position": [
+     -9.15,
+     60.0,
+     0.75
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     140.0,
+     0.06
+    ],
+    "position": [
+     -9.15,
+     60.0,
+     1.3
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "extrude",
+    "outline": [
+     [
+      -0.3,
+      0.0
+     ],
+     [
+      0.3,
+      0.0
+     ],
+     [
+      0.3,
+      0.08
+     ],
+     [
+      0.1,
+      0.3
+     ],
+     [
+      0.08,
+      0.81
+     ],
+     [
+      -0.08,
+      0.81
+     ],
+     [
+      -0.1,
+      0.3
+     ],
+     [
+      -0.3,
+      0.08
+     ]
+    ],
+    "depth": 140.0,
+    "position": [
+     7.3,
+     60.0,
+     0.0
+    ],
+    "rotate": [
+     0,
+     0,
+     90
+    ],
+    "material": "pbr",
+    "texture": "concrete_wall_008",
+    "tex_scale": 2.0,
+    "tint": "#8C8A86",
+    "tint_mix": 0.3,
+    "ease": 0.01
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     1.6,
+     140.0,
+     0.2
+    ],
+    "position": [
+     8.4,
+     60.0,
+     0.0
+    ],
+    "material": "pbr",
+    "texture": "concrete_floor_02",
+    "tex_scale": 2.0,
+    "tint": "#7E7C78",
+    "tint_mix": 0.3
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     -10.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     -8.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     -6.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     -4.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     -2.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     0.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     2.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     4.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     6.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     8.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     10.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     12.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     14.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     16.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     18.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     20.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     22.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     24.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     26.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     28.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     30.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     32.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     34.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     36.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     38.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     40.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     42.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     44.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     46.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     48.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     50.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     52.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     54.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     56.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     58.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     60.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     62.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     64.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     66.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     68.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     70.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     72.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     74.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     76.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     78.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     80.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     82.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     84.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     86.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     88.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     90.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     92.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     94.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     96.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     98.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     100.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     102.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     104.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     106.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     108.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     110.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     112.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     114.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     116.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     118.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     120.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     122.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     124.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     126.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     128.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     0.06,
+     1.1
+    ],
+    "position": [
+     9.15,
+     130.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     140.0,
+     0.06
+    ],
+    "position": [
+     9.15,
+     60.0,
+     0.75
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.06,
+     140.0,
+     0.06
+    ],
+    "position": [
+     9.15,
+     60.0,
+     1.3
+    ],
+    "material": "foil",
+    "color": "#4E5156",
+    "roughness": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "trench",
+    "width": 1.3,
+    "end": 0.8,
+    "ragged": 0.05,
+    "texture": "gravel_concrete",
+    "tex_scale": 0.7,
+    "tint": "#4A4640",
+    "tint_mix": 0.45,
+    "seed": 3,
+    "grooves": 0.06,
+    "rotate": [
+     0,
+     0,
+     180.0
+    ],
+    "y0": -21.0,
+    "y1": 1.2,
+    "lip": 0.75,
+    "depth": 0.34,
+    "ramp": 5.0,
+    "value": 0.45
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "slabs",
+    "count": 130,
+    "thickness": 0.075,
+    "tilt": 40.0,
+    "tilt_min": 6.0,
+    "size": 0.6,
+    "seed": 5,
+    "rotate_z": 180.0,
+    "y0": -21.0,
+    "y1": 1.2,
+    "lip": 0.75,
+    "depth": 0.34,
+    "ramp": 5.0,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07,
+    "crumble": 1.0,
+    "spread": 0.7,
+    "flip": 0.12,
+    "fallen": 0.12,
+    "size_power": 1.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -21.0,
+    "y1": 1.2,
+    "count": 300,
+    "reach": 4.5,
+    "forward": 0.7,
+    "ahead": 6.0,
+    "seed": 7,
+    "rotate_z": 180.0,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07,
+    "crumble": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -11.0,
+    "y1": 1.2,
+    "count": 1400,
+    "reach": 2.5,
+    "forward": 0.8,
+    "ahead": 5.0,
+    "inner": 0.6,
+    "seed": 17,
+    "rotate_z": 180.0,
+    "fine": true,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "slabs",
+    "y0": 0.29999999999999993,
+    "y1": 2.0,
+    "lip": 0.45,
+    "depth": 0.34,
+    "ramp": 0.1,
+    "count": 28,
+    "thickness": 0.07,
+    "tilt": 40.0,
+    "tilt_min": 15.0,
+    "size": 0.45,
+    "seed": 13,
+    "rotate_z": 180.0,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07,
+    "crumble": 1.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "scorch",
+    "position": [
+     0.0,
+     9.3,
+     0.003
+    ],
+    "size": [
+     3.6,
+     24.7
+    ],
+    "strength": 0.55,
+    "scale": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -0.9,
+    "y1": -0.4,
+    "count": 60,
+    "reach": 0.45,
+    "inner": 0.3,
+    "z": -0.3,
+    "seed": 9,
+    "rotate_z": 180.0,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07,
+    "crumble": 0.6
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -0.6,
+    "y1": 0.15000000000000002,
+    "count": 70,
+    "reach": 0.55,
+    "inner": 0.0,
+    "z": -0.3,
+    "seed": 31,
+    "rotate_z": 180.0,
+    "crumble": 0.3,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -0.35,
+    "y1": 0.4,
+    "count": 70,
+    "reach": 0.55,
+    "inner": 0.0,
+    "z": -0.2,
+    "seed": 32,
+    "rotate_z": 180.0,
+    "crumble": 0.3,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -0.1,
+    "y1": 0.65,
+    "count": 70,
+    "reach": 0.55,
+    "inner": 0.0,
+    "z": -0.09,
+    "seed": 33,
+    "rotate_z": 180.0,
+    "crumble": 0.3,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "band": [
+     -0.45,
+     0.45
+    ],
+    "count": 140,
+    "reach": 0.6,
+    "inner": 0.4,
+    "z": -0.3,
+    "seed": 35,
+    "rotate_z": 180.0,
+    "crumble": 0.3,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "y0": -15.0,
+    "y1": -0.9,
+    "count": 260,
+    "reach": 0.6,
+    "inner": 0.0,
+    "z": -0.32,
+    "seed": 19,
+    "rotate_z": 180.0,
+    "crumble": 0.5,
+    "top_value": 0.28,
+    "under_tint": "#1C1C1C",
+    "under_value": 0.2,
+    "side": "asphalt_02",
+    "side_value": 0.35,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.07
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     -8.2,
+     6.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     -7.199999999999999,
+     6.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     -6.299999999999999,
+     6.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     -6.299999999999999,
+     6.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     8.2,
+     6.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     7.199999999999999,
+     6.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     6.299999999999999,
+     6.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     6.299999999999999,
+     6.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     -8.2,
+     36.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     -7.199999999999999,
+     36.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     -6.299999999999999,
+     36.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     -6.299999999999999,
+     36.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     8.2,
+     36.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     7.199999999999999,
+     36.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     6.299999999999999,
+     36.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     6.299999999999999,
+     36.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     -8.2,
+     66.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     -7.199999999999999,
+     66.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     -6.299999999999999,
+     66.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     -6.299999999999999,
+     66.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     8.2,
+     66.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     7.199999999999999,
+     66.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     6.299999999999999,
+     66.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     6.299999999999999,
+     66.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     -8.2,
+     96.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     -7.199999999999999,
+     96.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     -6.299999999999999,
+     96.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     -6.299999999999999,
+     96.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     8.2,
+     96.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     7.199999999999999,
+     96.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     6.299999999999999,
+     96.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     6.299999999999999,
+     96.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     -8.2,
+     126.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     -7.199999999999999,
+     126.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     -6.299999999999999,
+     126.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     -6.299999999999999,
+     126.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "radius": 0.09,
+    "radius_top": 0.06,
+    "height": 9.0,
+    "position": [
+     8.2,
+     126.0,
+     0.2
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     2.0,
+     0.12,
+     0.1
+    ],
+    "position": [
+     7.199999999999999,
+     126.0,
+     9.1
+    ],
+    "material": "foil",
+    "color": "#5A5D62",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.7,
+     0.3,
+     0.12
+    ],
+    "position": [
+     6.299999999999999,
+     126.0,
+     9.0
+    ],
+    "material": "foil",
+    "color": "#3E4044",
+    "roughness": 0.5
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "size": [
+     0.6,
+     0.24,
+     0.02
+    ],
+    "position": [
+     6.299999999999999,
+     126.0,
+     8.98
+    ],
+    "material": "glow",
+    "color": "#FFD8A8",
+    "emit": 60.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "occluder",
+    "position": [
+     0.0,
+     0.0,
+     -0.288
+    ],
+    "radius": 0.5,
+    "sx": 1.0,
+    "sy": 0.85,
+    "rotate_z": 43.0
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "wreck",
+    "fn": "sedan2",
+    "position": [
+     3.6,
+     21.0
+    ],
+    "heading": 20.0,
+    "paint": "#2B3036",
+    "paint_left": 0.12,
+    "crumple": 0.3,
+    "seed": 12
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "wreck",
+    "fn": "sedan2",
+    "position": [
+     -3.4,
+     29.0
+    ],
+    "heading": 70.0,
+    "paint": "#2B3036",
+    "paint_left": 0.08,
+    "crumple": 0.3,
+    "seed": 13
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "plume",
+    "fn": "plume",
+    "cache": "renders/2026-10-21/barkhorn/plume/meteor_e.npz",
+    "anchor": "solid",
+    "position": [
+     0.0,
+     0.0,
+     -0.3
+    ],
+    "rotate_z": 50.0,
+    "density": 7.0,
+    "strength": 420.0,
+    "color": "#8F857B",
+    "anisotropy": 0.4,
+    "cool": 1100.0,
+    "hot": 2100.0,
+    "flame_floor": 0.25,
+    "tongues": 0.9,
+    "tongue_scale": 0.12,
+    "tongue_edge": [
+     0.42,
+     0.62
+    ],
+    "edge": [
+     0.02,
+     0.22
+    ],
+    "detail": 2.5,
+    "detail_scale": 0.1,
+    "detail_octaves": 4.0,
+    "breakup": 0.45,
+    "breakup_scale": 0.35,
+    "breakup_octaves": 2.0,
+    "tongue_octaves": 3.0,
+    "seed": 3,
+    "through_glass": false
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 26,
+    "radius": [
+     0.0012,
+     0.003
+    ],
+    "position": [
+     0.0,
+     0.0,
+     0.9
+    ],
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 90.0,
+    "seed": 27,
+    "plume": {
+     "height": 1.2,
+     "spread": [
+      0.2,
+      0.8
+     ],
+     "lean": [
+      0.9,
+      0.3
+     ],
+     "taper": 0.5,
+     "power": 2.5,
+     "streak": 30.0,
+     "swirl": 0.35
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 14,
+    "radius": [
+     0.001,
+     0.0025
+    ],
+    "position": [
+     0.0,
+     0.0,
+     0.9
+    ],
+    "material": "glow",
+    "color": "#FF7A30",
+    "emit": 40.0,
+    "seed": 28,
+    "plume": {
+     "height": 2.0,
+     "spread": [
+      0.2,
+      1.1
+     ],
+     "lean": [
+      0.9,
+      0.3
+     ],
+     "taper": 0.5,
+     "power": 2.0,
+     "streak": 30.0,
+     "swirl": 0.35
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "scatter",
+    "count": 8,
+    "radius": [
+     0.0008,
+     0.002
+    ],
+    "position": [
+     0.0,
+     0.0,
+     0.9
+    ],
+    "material": "glow",
+    "color": "#D9481C",
+    "emit": 14.0,
+    "seed": 29,
+    "plume": {
+     "height": 2.8,
+     "spread": [
+      0.2,
+      1.4
+     ],
+     "lean": [
+      0.9,
+      0.3
+     ],
+     "taper": 0.5,
+     "power": 1.5,
+     "streak": 30.0,
+     "swirl": 0.35
+    }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "on": "prop0-kit",
+    "module": "smoke_el",
+    "fn": "impact",
+    "centre": [
+     0.0,
+     0.0
+    ],
+    "char": [
+     1.0,
+     2.6
+    ],
+    "jag": 0.8,
+    "soot": 4.5,
+    "soot_mix": 0.55,
+    "cracks": [
+     0.9,
+     3.8
+    ],
+    "crack_count": 13.0,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
+    "dust": [
+     1.6,
+     5.5
+    ],
+    "dust_mix": 0.5,
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "on": "prop1-kit",
+    "module": "smoke_el",
+    "fn": "impact",
+    "centre": [
+     0.0,
+     0.0
+    ],
+    "char": [
+     1.0,
+     2.6
+    ],
+    "jag": 0.8,
+    "soot": 4.5,
+    "soot_mix": 0.55,
+    "cracks": [
+     0.9,
+     3.8
+    ],
+    "crack_count": 13.0,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
+    "dust": [
+     1.6,
+     5.5
+    ],
+    "dust_mix": 0.5,
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "on": "prop3-kit",
+    "module": "smoke_el",
+    "fn": "impact",
+    "centre": [
+     0.0,
+     0.0
+    ],
+    "char": [
+     1.0,
+     2.6
+    ],
+    "jag": 0.8,
+    "soot": 4.5,
+    "soot_mix": 0.55,
+    "cracks": [
+     0.9,
+     3.8
+    ],
+    "crack_count": 13.0,
+    "crack_width": 0.012,
+    "crack_bump": 0.6,
+    "dust": [
+     1.6,
+     5.5
+    ],
+    "dust_mix": 0.5,
+    "seed": 4
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "impact",
+    "on": "prop186-kit",
+    "centre": [
+     0.0,
+     0.0
+    ],
+    "char": [
+     0.5,
+     2.0
+    ],
+    "jag": 0.7,
+    "soot": 3.0,
+    "soot_mix": 0.5
+   }
+  ]
+ },
+ "lights": {
+  "lamp0-1": {
+   "type": "spot",
+   "position": [
+    -6.299999999999999,
+    6.0,
+    8.9
+   ],
+   "target": [
+    -4.699999999999999,
+    6.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp01": {
+   "type": "spot",
+   "position": [
+    6.299999999999999,
+    6.0,
+    8.9
+   ],
+   "target": [
+    4.699999999999999,
+    6.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp1-1": {
+   "type": "spot",
+   "position": [
+    -6.299999999999999,
+    36.0,
+    8.9
+   ],
+   "target": [
+    -4.699999999999999,
+    36.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp11": {
+   "type": "spot",
+   "position": [
+    6.299999999999999,
+    36.0,
+    8.9
+   ],
+   "target": [
+    4.699999999999999,
+    36.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp2-1": {
+   "type": "spot",
+   "position": [
+    -6.299999999999999,
+    66.0,
+    8.9
+   ],
+   "target": [
+    -4.699999999999999,
+    66.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp21": {
+   "type": "spot",
+   "position": [
+    6.299999999999999,
+    66.0,
+    8.9
+   ],
+   "target": [
+    4.699999999999999,
+    66.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp3-1": {
+   "type": "spot",
+   "position": [
+    -6.299999999999999,
+    96.0,
+    8.9
+   ],
+   "target": [
+    -4.699999999999999,
+    96.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp31": {
+   "type": "spot",
+   "position": [
+    6.299999999999999,
+    96.0,
+    8.9
+   ],
+   "target": [
+    4.699999999999999,
+    96.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp4-1": {
+   "type": "spot",
+   "position": [
+    -6.299999999999999,
+    126.0,
+    8.9
+   ],
+   "target": [
+    -4.699999999999999,
+    126.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "lamp41": {
+   "type": "spot",
+   "position": [
+    6.299999999999999,
+    126.0,
+    8.9
+   ],
+   "target": [
+    4.699999999999999,
+    126.0,
+    0.0
+   ],
+   "power_w": 2500.0,
+   "cone_deg": 120.0,
+   "blend": 0.8,
+   "color": "#FFD2A0",
+   "radius_m": 0.3
+  },
+  "skyfill": {
+   "type": "area",
+   "size_m": [
+    4.0,
+    3.0
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 1.6,
+   "color": "#AEB8C8",
+   "orbit": {
+    "azimuth_deg": -20,
+    "elevation_deg": 5,
+    "distance_m": 2.4
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*",
+    "lining-*",
+    "woofer-*",
+    "amp-*",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "port-*",
+    "hf-*",
+    "feet-*",
+    "tie-rod-*",
+    "top-pad",
+    "mark-back",
+    "back-*",
+    "cap-o-ring",
+    "lead-*",
+    "cable-glands",
+    "rating-plate"
+   ]
+  },
+  "bounce": {
+   "type": "area",
+   "size_m": [
+    2.4,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.6
+   ],
+   "irradiance": 3.0,
+   "color": "#D9A27A",
+   "orbit": {
+    "azimuth_deg": -25,
+    "elevation_deg": 12,
+    "distance_m": 2.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*",
+    "lining-*",
+    "woofer-*",
+    "amp-*",
+    "brace*",
+    "rib-*",
+    "land-*",
+    "port-*",
+    "hf-*",
+    "feet-*",
+    "tie-rod-*",
+    "top-pad",
+    "mark-back",
+    "back-*",
+    "cap-o-ring",
+    "lead-*",
+    "cable-glands",
+    "rating-plate"
+   ]
+  },
+  "kicker": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 30.0,
+   "color": "#FF9A50",
+   "orbit": {
+    "azimuth_deg": -150,
+    "elevation_deg": 22,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*"
+   ]
+  },
+  "kicker_r": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    2.4
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.8
+   ],
+   "irradiance": 20.0,
+   "color": "#FFB070",
+   "orbit": {
+    "azimuth_deg": 150,
+    "elevation_deg": 14,
+    "distance_m": 3.0
+   },
+   "receivers": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "front-panel",
+    "back",
+    "waveguide",
+    "waveguide-cap",
+    "woofer-ring",
+    "post-*",
+    "grip-*",
+    "port-frame-*"
+   ]
+  },
+  "flame0": {
+   "type": "point",
+   "position": [
+    -0.507,
+    -0.336,
+    0.25
+   ],
+   "power_w": 300.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.3,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame1": {
+   "type": "point",
+   "position": [
+    -0.507,
+    -0.336,
+    1.2
+   ],
+   "power_w": 300.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.3,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame2": {
+   "type": "point",
+   "position": [
+    0.337,
+    0.519,
+    0.2
+   ],
+   "power_w": 500.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.3,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame3": {
+   "type": "point",
+   "position": [
+    0.337,
+    0.519,
+    1.1
+   ],
+   "power_w": 300.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.3,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame4": {
+   "type": "point",
+   "position": [
+    -0.375,
+    0.402,
+    1.0
+   ],
+   "power_w": 500.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.3,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame5": {
+   "type": "point",
+   "position": [
+    -0.068,
+    0.073,
+    0.9
+   ],
+   "power_w": 2500.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.5,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame6": {
+   "type": "point",
+   "position": [
+    -0.239,
+    0.256,
+    0.5
+   ],
+   "power_w": 600.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.5,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": "only"
+  }
+ },
+ "render": {
+  "samples": 512,
+  "adaptive": 0.02,
+  "denoise": true,
+  "clamp": 10.0,
+  "bounces": 12,
+  "view": "AgX",
+  "exposure": 0.0,
+  "look": "AgX - Base Contrast",
+  "volume_bounces": 1
+ },
+ "title": "barkhorn, Smoke E12r, the meteor on the road: the speaker skidded to rest in its gouge, burning (4:5)",
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -0.8732,
+   -4.1082,
+   0.8
+  ],
+  "target": [
+   0.0,
+   0.0,
+   0.55
+  ],
+  "lens_mm": 35,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   -0.21,
+   0.55
+  ],
+  "shift_x": 0.0,
+  "shift_y": 0.16,
+  "clip_end": 3000
+ },
+ "sky": {
+  "kind": "hdri",
+  "polyhaven": "sunset_jhbcentral",
+  "rotation_deg": 0.0,
+  "strength": 0.6,
+  "res": "4k"
+ },
+ "finish": {
+  "enabled": true,
+  "white_in": 240,
+  "white_out": 240,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.32,
+   "bloom_px": 60,
+   "bloom_threshold": 0.7,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.25,
+   "haze": {
+    "box": [
+     0.33,
+     0.25,
+     0.68,
+     0.8
+    ],
+    "px": 3.5,
+    "scale": 6.0,
+    "exclude": [
+     [
+      0.4,
+      0.54,
+      0.61,
+      0.79
+     ]
+    ]
+   }
+  },
+  "grain": 3.5
+ }
+}
