@@ -84,6 +84,58 @@ R's hole, each colour's own cutaway), and makes the cloth read as cloth; it buil
 acrylic, and starts the pictures for a launch, each passed by a critic to a $20,000 product's bar: the studio, the
 speakers lit from below and on a night facade, and each Cloud in its element, photographed in a real place.
 
+## Round 35: the engineering review, and the owner's calls on it (2026-10-22)
+
+The owner, 2026-10-22: "validate ... that your designs for the speakers, lights, and record player would actually work.
+Right components, engineering, etc. Second, that acrylic is the right move for the speakers and resin is the right move
+for the horn." An independent review read the CAD, the parts lists, the build checks and the horn simulation against the
+makers' current datasheets (the owner's page: EARF Engineering Review). Its verdict on the speaker: the core is sound
+(the 15PR400, the DE1085TN and the FA122 are current and suit each other; 135 L at 38 Hz is flat to about 50 Hz; about
+115 to 117 dB at 1 m), the detail around it needed work. The owner's answers: most of it "sounds good"; the horn's
+prototype "as close to production as possible. The whole point of a prototype is to test production"; on the crossover,
+"can we reference speakers with similar dimensions and learn from their specs?"
+
+**Fixed in this round** (none changes the speaker's look):
+- **Earth (B3).** The amplifier's compartment, 1.5 mm anodised aluminium, is bonded to protective earth, as Hypex's
+  installation rules ask: a stud on a bared spot, a star washer, a green and yellow lead to the FA122's earth point
+  (`earth-bond-kit`). Anodising insulates, so its screws never counted.
+- **No screws into acrylic (S3).** The FA122's plate now sits on eight bonded M4 brass inserts, black machine screws
+  on nylon shoulder washers, its holes opened so it can slide as it warms (`amp-screws-acrylic`); Hypex's self-tapping
+  screws stay for the HDPE cabinet only. The loom's tie bases go on bonded M3 inserts in acrylic.
+- **The cement (S4).** ACRIFIX 2R 0190 or Weld-On 40, the two-part polymerising cements. 1R 0192, named before, cures
+  by light and would not cure through the deep tints. No visible bubble in any joint is now a condition of acceptance.
+- **The horn driver's level (S5).** The 16 ohm DE1085TN is 108 dB at 1 W, which is 4 V, so 105 dB at 2.83 V: about
+  6 dB hotter than the woofer a volt, not 9. The L-pad starts at 6.8 ohm in series and 15 across (about -5.5 dB),
+  trimmed on the first sample.
+- **The crossover (S6, the owner's question).** 1 kHz, LR4, in the shipping preset. Speakers of this size cross where
+  their horns let them: JBL's 4367 (941 x 560 x 425, nearly this box) at 700 Hz and its M2 at 800 on deeper waveguides,
+  Altec's A7 at 800 (500 on its bigger horn), JBL's 4430 at 1 kHz, Klipsch's Jubilee at 340 on a horn several times
+  this one's size. This horn is 170 mm deep, and its simulation loads the driver fully only from about 900 Hz, so 900 Hz
+  to 1 kHz suits it; 800 only if the first sample's distortion at 100 dB/1 m stays low. The earlier rounds' "lower limit
+  near 210 Hz" (round 5 and the photograph's table) was a mouth-size rule of thumb, and the simulation overrules it.
+- **Tipping (S7).** The front and back feet move out to 25 mm from the edges (the sides' stay 50): with 10 kg of horn on
+  top, IEC 62368-1's push at the top (about 118 N m) now meets about 124 N m forward and 138 back, against 108 forward
+  before (the review's estimates). Bar pairs on ledges are still bolted down through the feet's inserts.
+- **Heat (S8).** Hypex's auto-standby on in the preset (about 0.5 W asleep), and the four-hour heating test early.
+- **The rating plate.** The render's plate loses its CE, UKCA and FCC marks until the speaker earns them; a picture must
+  not claim a certification. The WEEE bin stays. (The CE on Hypex's own plate is the module's.)
+
+**Decided, drawn next** (each changes what shows through the acrylic, so the speakers are re-rendered once, after all of
+them):
+- **The horn, prototyped as it will be made.** The flare thermoformed from the cabinet's own tinted cast sheet, 6 to 8
+  mm, over a machined tool, a turned acrylic throat and boss cemented in; one material and one dye lot with the
+  cabinet, the same UV life, and the neck no longer a solid dark mass. The prototype proves the wall's thinning toward
+  the mouth, the 10 mm rim, the wall's vibration and the step at the throat (well under 0.5 mm).
+- **The back tied to the braces (S1).** The braces' rear members run to the back on machined bosses, two screws a brace
+  through it; a cord seal in a groove in place of the sponge gasket; 20 to 24 screws. By the review's estimate the
+  back's first mode rises from about 100 Hz to about 210.
+- **Phono and volume (the system).** Mantle, the record player, carries a moving-magnet stage with a line out; the
+  speakers take their volume from Hypex's remote.
+
+Still to measure on the first pair: the horn's distortion at 800, 900 and 1,000 Hz; the panels from 50 to 500 Hz before
+and after the back is tied; the amplifier's heat after four hours; the horn's colour against the cabinet's after
+accelerated UV ageing.
+
 ## Round 31: every picture final, the amplifier's plate as it is, and pictures for a launch (the owner's notes of 2026-10-18; in progress)
 
 | the owner's note | what changes |

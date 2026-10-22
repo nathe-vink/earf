@@ -8,8 +8,9 @@ so every fitting inside is drawn to be seen.
 
 How it differs from the pressed sheet (round 14; the owner, asked whether to draw it next: "Yes"):
 - Cemented, not welded. Acrylic bonds well, so the corners and everything inside (the braces, the ribs, the back's
-  land strips) are cemented with a two-part polymerising acrylic cement made for thick sheet (Acrifix 1R 0192 or
-  alike): it cures clear and about as strong as the sheet. A solvent cement crazes thick cast sheet and leaves
+  land strips) are cemented with a two-part polymerising acrylic cement made for thick sheet (ACRIFIX 2R 0190 or
+  Weld-On 40; round 35: 1R 0192, named here before, is a one-part cement that cures by light and will not cure through
+  the deep tints): it cures clear and about as strong as the sheet. A solvent cement crazes thick cast sheet and leaves
   bubbles in a long joint.
 - Machined, polished and annealed. Each panel's edges are milled square and polished where they show. The panels are
   annealed before cementing (about 80 C, held an hour for each 3 mm of thickness, cooled slowly), and the box after,
@@ -42,6 +43,11 @@ P['cover']['disc_magnet']['pocket'] = 15.2       # the magnets and the steel dis
 P['horn']['cast']['posts']['socket'] = (15.2, 15.0)   # the sockets bonded in clearance holes, not pressed
 P['back']['insert'] = (8.0, 12.0)                # the back's M5 inserts and the feet's M8, bonded
 P['feet']['insert'] = (12.5, 15.0)
+# round 35 (the engineering review's S7, the owner: yes): with 10 kg of horn on top a 72 kg speaker 0.42 m deep is marginal
+# against IEC 62368-1's push at the top (about 118 N m tipping against 108 restoring forward with the feet 50 in, by the
+# review's estimate); the front and back feet 25 in from the edges give about 124 forward and 138 back (estimate), the
+# inserts still wholly in the bottom panel (under the front panel's foot and under the back's land)
+P['feet']['inset_y'] = 25.0
 # round 24 (the owner, of round 23's options: "Name on back own color", and of lifting: "240 grips + feet range"): EARF
 # etched high on the back and filled with the speaker's own colour, and a grip 240 long for both hands in each side near
 # the top, as standard (product.extras); castors, spikes and isolation feet sold for the feet's M8 inserts
@@ -59,7 +65,7 @@ PRODUCT = dataclasses.replace(
         'Assembly: each panel\'s edges milled square and polished where they show, the panels annealed (about 80 C, an hour '
         'for each 3 mm of thickness, cooled slowly); the ribs cemented to their panels flat (the back\'s to the back); the '
         'shell\'s corners, the front panel (set back 24 mm), the two braces and the back\'s four land strips cemented with a '
-        'two-part polymerising acrylic cement for thick sheet (Acrifix 1R 0192 or alike), clamped square on a jig; the box '
+        'two-part polymerising acrylic cement for thick sheet (ACRIFIX 2R 0190 or Weld-On 40), clamped square on a jig, no visible bubble in any joint; the box '
         'annealed again; the back closes the box last, on its gasket and sixteen screws, and comes off. No solvent cement: '
         'it crazes thick cast sheet.',
         'The woofer flush in its rebate on a gasket, on eight M6 brass inserts bonded with epoxy in 8.5 holes; the ring over '

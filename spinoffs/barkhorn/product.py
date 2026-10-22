@@ -668,7 +668,12 @@ def parts(P):
         Part('gasket', None, Bought('gasket-foam'), qty=2),
         Part('lining-sleeves', None, Bought('voile-sleeves')),
         *({'hdpe': [Part('lining-tape', None, Bought('lse-tape-dots'))], 'acrylic': [Part('lining-tape', None, Bought('vhb-clear-dots'))]}.get(kind, [])),
-        Part('amp-fixings', None, Bought('amp-screws')),
+        Part('amp-fixings', None, Bought('amp-screws-acrylic' if kind == 'acrylic' else 'amp-screws')),
+        # round 35 (the engineering review's B3): the compartment's aluminium bonded to protective earth, as Hypex's
+        # installation rules ask ("all possible conductive parts of the enclosure should be connected to protective earth")
+        Part('earth-bond', None, Bought('earth-bond-kit'),
+             notes=['a stud on a bared spot of the compartment\'s floor, a star washer under its nut, and a green and yellow lead '
+                    'with ring terminals to the FA122\'s earth point; anodising insulates, so its screws do not count']),
         Part('amp-box-fixings', None, Bought('amp-box-screws')),
         *([] if hz['form'] == 'cast' else [Part('hf-cable', None, Bought('speaker-cable-1m'))]),
         Part('hf-capacitor', None, Bought('hf-protect-cap'), notes=['in series ahead of the L-pad: the driver safe from low frequencies '
@@ -1051,9 +1056,11 @@ def port_screws_part(P, kind):
 
 
 def feet_places(P):
-    """The levelling feet's centres (x, y) under the bottom, `inset` in from its edges."""
-    i = P['feet']['inset']
-    return [(x, y) for x in (i, P['W'] - i) for y in (i, P['D'] - i)]
+    """The levelling feet's centres (x, y) under the bottom, `inset` in from its sides and `inset_y` (if given, else
+    `inset`) in from its front and back (round 35: the front and back feet moved out toward the edges, where tipping is
+    decided, since the cabinet is shallower than it is wide)."""
+    i = P['feet']['inset']; iy = P['feet'].get('inset_y', i)
+    return [(x, y) for x in (i, P['W'] - i) for y in (iy, P['D'] - iy)]
 
 
 def back_and_feet(P, kind):
@@ -1166,8 +1173,8 @@ def rating_plate_pieces(cx, D, az, pw):
     """The rating plate beside the amplifier (round 13's part: 70 x 40 x 1, black anodised aluminium, two M3 screws),
     laser-marked, for the render only (round 31: the finals showed it as a blank grey tile, which read as a fault). In
     white, left to right as one faces the back: the maker; the product; its model and serial number; the ratings, the
-    FA122's own (its plate's); where it was designed; and the marks, CE, UKCA, FCC and the WEEE bin. Its two black pan
-    heads either end. Returns {piece: (solid, finish)}, as amp_plate_pieces does."""
+    FA122's own (its plate's); where it was designed; and the WEEE bin (round 35: the CE, UKCA and FCC marks come off until
+    the speaker has earned them; a render must not claim a certification it hasn't got). Its two black pan heads either end. Returns {piece: (solid, finish)}, as amp_plate_pieces does."""
     from build123d import Align, Compound, Plane, Text, extrude
     FONT, BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
     rx, rz, y = cx + pw + 55.0, az + 80.0, D + 1.0          # the plate's middle on the back's outer face; +u to one's left
@@ -1194,9 +1201,6 @@ def rating_plate_pieces(cx, D, az, pw):
     prn.append(text('100-120V~ / 200-240V~    50-60 Hz    350 W MAX', L, 0.8))
     prn.append(text('DESIGNED IN SAN FRANCISCO, CALIFORNIA', L, -2.5))
     prn.append(bar(L, -5.6, -25.0, -5.6, 0.25))
-    prn.append(text('CE', L, -11.4, size=4.0))
-    prn.append(text('UKCA', L - 9.0, -11.4, size=3.0, bold=True))
-    prn.append(text('FCC', L - 21.0, -11.4, size=3.4, bold=True))
     u0, v0 = -10.6, -11.2                                  # the WEEE bin: its body, lid and wheel, crossed out, a bar under
     prn += [bar(u0 + 1.8, v0 + 2.2, u0 + 1.4, v0 - 2.4), bar(u0 - 1.8, v0 + 2.2, u0 - 1.4, v0 - 2.4), bar(u0 + 1.4, v0 - 2.4, u0 - 1.4, v0 - 2.4),
             bar(u0 + 2.3, v0 + 2.3, u0 - 2.3, v0 + 2.3), bar(u0 + 0.6, v0 + 2.9, u0 - 0.6, v0 + 2.9),
@@ -1522,8 +1526,8 @@ def amp_compartment(P, ribs, wz, wood):
     pw = amp['plate_w'] / 2
     out.append(Part('rating-plate', box(cx + pw + 20, D, az + 60, cx + pw + 90, D + 1.0, az + 100), Bought('rating-plate'), finish='amp',
                     pieces=rating_plate_pieces(cx, D, az, pw),
-                    notes=['beside the amplifier, 70 x 40: the model, the serial number, the ratings, the marks (CE, UKCA, FCC, the '
-                           'WEEE bin) and the maker\'s address, laser-marked; two M3 screws into inserts']))
+                    notes=['beside the amplifier, 70 x 40: the model, the serial number, the ratings, the WEEE bin and the maker\'s '
+                           'address, laser-marked (the CE, UKCA and FCC marks added once earned); two M3 screws into inserts']))
     return out
 
 
@@ -2058,8 +2062,8 @@ PRODUCT = Product(
            'The woofer flush in its rebate on a gasket, on eight M6 T-nuts from inside; the ring over its frame, held by four magnets in the panel under steel discs in its back; each port, printed in one with its square frame, fitted from the front, the frame flush in a recess on a foam gasket, four black wood screws in its corners; its length found on the first sample (its rounded ends cannot be trimmed).',
            'The waveguide stands on four posts, stainless lamp tube 10 x 7, each threaded M10 x 1 at its top into a brass insert bonded in a pad cast under the horn (drilled after casting, through a jig taken off the top\'s sockets), its plain foot standing in a polyurethane sleeve in a brass socket pressed into the top, so the horn and its posts lift off as one. An M6 rod down the free rear post, from a thumb nut inside the pod to an insert under the top, holds them down. The cap closing the pod is held by a twist-lock (round 16): three lugs on its spigot in L-slots in the pod\'s bore, locked by an eighth of a turn, an O-ring beyond them; no screw shows. The HF lead, a round silicone cable 5 across, runs from its connector at the amplifier\'s compartment straight up, through a gland under the top and up inside a rear post into the pod, where it plugs into the driver\'s leads. To lift the horn off: the cap off, the nut undone and the lead unplugged.',
            'The front: the panel faced in bark (1 mm) round the ring and the port, and a cloth disc over the woofer, its MDF frame standing on the ring on four magnet pairs, its face 18.5 clear of the cone at rest.',
-           'The FA122 crosses at about 800 Hz (LR4: B&C asks 12 dB/oct or steeper there) with the HF channel about 9 dB down (108 dB at 2.83 V against the woofer\'s 99), part of it in the passive L-pad after the amplifier, so its hiss stays inaudible: two 25 W aluminium-housed resistors on a plate in the compartment, behind a 33 uF film capacitor that keeps low frequencies off the driver if the preset is ever lost.',
-           'The amplifier\'s preset, stored before the speaker ships: the crossover; a 4th-order Butterworth high-pass at 28 Hz on the woofer (below the ports\' tuning the box no longer holds the cone, which would pass Xmax below about 30 Hz at full output, and a record\'s warp drives it there); limiters set to the woofer\'s Xmax and the driver\'s rating; a notch at the ports\' pipe resonance (about 540 Hz in the pressed cabinet, 560 in the Cloud\'s, 600 in the plywood one), measured in each port\'s near field.',
+           'The FA122 crosses at 1 kHz, LR4 (round 35: in its simulation the horn loads the driver fully only from about 900 Hz, and two-way speakers of this size cross where their horns allow: JBL\'s 4367 at 700 Hz and its M2 at 800 on deeper waveguides, its 4430 at 1 kHz; 800 to 900 Hz only if the first sample\'s distortion at 100 dB/1 m stays low; B&C asks 12 dB/oct or steeper, at 800 Hz or above) with the HF channel about 6 dB down (105 dB at 2.83 V against the woofer\'s 99), part of it in the passive L-pad after the amplifier, so its hiss stays inaudible: two 25 W aluminium-housed resistors on a plate in the compartment, behind a 33 uF film capacitor that keeps low frequencies off the driver if the preset is ever lost.',
+           'The amplifier\'s preset, stored before the speaker ships: the crossover; a 4th-order Butterworth high-pass at 28 Hz on the woofer (below the ports\' tuning the box no longer holds the cone, which would pass Xmax below about 30 Hz at full output, and a record\'s warp drives it there); limiters set to the woofer\'s Xmax and the driver\'s rating; a notch at the ports\' pipe resonance (about 540 Hz in the pressed cabinet, 560 in the Cloud\'s, 600 in the plywood one), measured in each port\'s near field; and Hypex\'s auto-standby on (round 35: about 0.5 W asleep, and the compartment cooler in a warm room).',
            'The amplifier in a sealed compartment of its own, as Hypex asks: 1.5 mm aluminium, black anodised, on an EPDM gasket on the back\'s inner face, so the box stays airtight and the mains electronics are enclosed in metal. The leads leave it through cable glands. A rating plate beside the amplifier carries the model, the serial number, the ratings, the marks and the maker\'s address; the finished speaker needs an EMC pre-scan and an IEC 62368-1 assessment.',
            'The lining: polyester batts (thermally bonded, recycled PET), 50 mm on the sides and 100 mm on the top and the bottom (round 21), one to each bay between the braces (and the ribs), and 50 mm on the back, its full height between its ribs, so they come off with it; each cut 10 full each way and sewn into a sleeve of white voile; none on the front panel, none beside the ports (10 clear of each tube, nothing between its inner end and the back\'s batts) and none within 20 of the amplifier\'s compartment.',
            'The back comes off (round 14): it closes on a 3 mm EPDM gasket against four land strips inside the shell, sixteen M5 button heads through it into inserts in them. The amplifier\'s compartment, the back\'s ribs and its batts come off with it and the leads unplug at the compartment, so the amplifier, the L-pad and the leads can be reached.',

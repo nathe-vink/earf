@@ -28,11 +28,11 @@
 | cloth-disc-magnets | buy | 2 | The ring's and the disc's magnets: eight 15 x 3 neodymium discs (N42) and four 15 x 3 mild-steel discs, a set: four magnets in the panel and the steel discs in the ring's back hold the ring, four in the disc's frame hold the disc to the same steel (round 13) |  | 10.00 |
 | amp-box | sheet metal | 2 | Aluminium 6061 | 305 x 500 x 2 | 85.72 |
 | amp-box-gasket | buy | 2 | EPDM sponge gasket, 3 mm, cut as a frame 15 wide for the amplifier compartment's flange |  | 6.00 |
-| hf-pad | buy | 2 | The HF channel's L-pad: two aluminium-housed wirewound resistors, 25 W (Vishay Dale RH-25 or Arcol HS25 kind), 10 ohm in series and 8.2 ohm across the driver (about -9 dB at 16 ohm; trimmed after the first measurement), screwed with thermal compound to a 3 mm aluminium plate in the amplifier's compartment (round 13: at full output the series resistor would burn about 20 W) |  | 24.00 |
+| hf-pad | buy | 2 | The HF channel's L-pad: two aluminium-housed wirewound resistors, 25 W (Vishay Dale RH-25 or Arcol HS25 kind), 6.8 ohm in series and 15 ohm across the driver (about -5.5 dB at 16 ohm, round 35: the driver is about 6 dB hotter than the woofer a volt, not 9; trimmed after the first measurement), screwed with thermal compound to a 3 mm aluminium plate in the amplifier's compartment (round 13: at full output the series resistor would burn about 20 W) |  | 24.00 |
 | lead-hf | buy | 2 | HF lead: round silicone-sheathed cable 2 x 0.5 mm2, about 5 across, 1.3 m, ferrules at the pod's end and a two-way lever connector (Wago 221-412 or like) on the driver's own leads, a polarised 2-way connector at the compartment's end |  | 6.00 |
 | lead-woofer | buy | 2 | Round-sheathed speaker cable 2 x 1.5 mm2, 1 m |  | 2.00 |
 | cable-glands | buy | 2 | Three M12 nylon cable glands for 3 to 6.5 mm cable, black: two in the amplifier compartment's front, one under the top at the cable post, in an M12 insert for plastics (in acrylic, a thread tapped in the top) |  | 4.00 |
-| rating-plate | buy | 2 | Rating plate 70 x 40 x 1, black anodised aluminium, laser-marked: the model, the serial number, the ratings, the marks (CE, UKCA, FCC, the WEEE bin) and the maker's address; two M3 screws into inserts |  | 10.00 |
+| rating-plate | buy | 2 | Rating plate 70 x 40 x 1, black anodised aluminium, laser-marked: the model, the serial number, the ratings, the WEEE bin and the maker's address (round 35: the CE, UKCA and FCC marks only once the speaker has earned them); two M3 screws into inserts |  | 10.00 |
 | cap-o-ring | buy | 2 | O-ring for the horn's cap, 182 x 2 mm, EPDM 70 Shore A (round 16: the twist-lock), and a tube of silicone grease |  | 4.00 |
 | post-sockets | buy | 2 | The posts' brass fittings: four M10 x 1 threaded inserts bonded with epoxy into the waveguide's pads after casting, in holes drilled through a jig taken off the top's sockets (13 across; the front pair 10 long, the rear 14, the tie post's bored through), and four sockets knurled to 15 and pressed into the cabinet's top, or bonded with epoxy into acrylic, which a press fit would crack (15 long: a 12 bore 13 deep on a 2 floor; the cable post's floor with a 7 hole, the tie post's with a 6.5), turned to order, a set of eight |  | 48.00 |
 | post-sleeves | buy | 2 | Polyurethane sleeves 12 x 10 x 13, Shore A 90, a set of four: pressed into the posts' sockets, they centre the posts and stop them buzzing |  | 8.00 |
@@ -42,7 +42,7 @@
 | back-gasket | buy | 2 | EPDM sponge strip 25 x 3, closed cell, cut and joined as a frame on the back's four land strips, punched for its 16 screws |  | 8.00 |
 | back-screws | buy | 2 | 16 M5 button heads (ISO 7380, A2 stainless, black: round 16) on black nylon washers: the back to the inserts in its land strips (M5 x 40 into HDPE or acrylic, M5 x 30 into plywood) |  | 8.00 |
 | feet | buy | 2 | Levelling feet M8, a 40 mm swivel base on a rubber pad, black, with lock nuts, a set of 4 |  | 18.00 |
-| port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 kind, 4 x 16 in the 20 mm HDPE; M4 x 20 into tapped threads in the 25 mm acrylic; wood screws 4 x 14 in the plywood; round 15: their holes stop 2 short of the panel's back), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
+| port-screws | buy | 2 | The ports' fixings: eight black countersunk screws, four through each port's frame into the panel (thread-forming screws for plastics, EJOT PT K40 kind, 4 x 16 in the 20 mm HDPE; M4 x 16 into tapped threads in the 20 mm acrylic; wood screws 4 x 14 in the plywood; round 15: their holes stop 2 short of the panel's back), and a 1 mm closed-cell PE foam gasket under each frame |  | 5.00 |
 | top-pad | cut | 2 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 108 x 28 | 1.44 |
 | lining-bottom-1 | cut | 2 | 100 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 201 x 295 | 1.48 |
 | lining-left-2a, lining-right-2a | cut | 4 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 167 x 479 | 1.00 |
@@ -54,14 +54,15 @@
 | lining-back-c | cut | 2 | 50 mm Polyester batt, acoustic grade, about 30 kg/m3, thermally bonded (no binder), with recycled PET content | 239 x 118 | 0.35 |
 | woofer-fixings | buy | 2 | M6 brass threaded inserts, knurled, bonded with epoxy into 8.5 holes in the acrylic panel, with M6 x 25 button heads (A2), a set of 8 (the 15PR400's eight holes on 375) |  | 14.00 |
 | hf-fixings | buy | 2 | The 2 in driver's fixings: four M6 x 16 countersunk screws (A2), the driver to its adaptor ring, and four M5 x 16 socket caps with washers, the ring to the brass inserts in the horn's boss, a set |  | 6.00 |
-| cement | buy | 2 | Two-part polymerising acrylic cement for thick cast sheet (Acrifix 1R 0192 kind), clear, about 0.5 kg a speaker: the corners, the braces, the ribs and the back's land strips |  | 45.00 |
+| cement | buy | 2 | Two-part polymerising acrylic cement for thick cast sheet (ACRIFIX 2R 0190 or Weld-On 40; round 35: not 1R 0192, a one-part cement that cures by light and will not cure through the deep tints), clear, about 0.5 kg a speaker: the corners, the braces, the ribs and the back's land strips |  | 45.00 |
 | gasket | buy | 4 | 1.5 mm closed-cell foam gasket strip, 1 m |  | 5.00 |
 | lining-sleeves | buy | 2 | White polyester voile (a sheer curtain fabric), about 3 m2 a speaker with its seams, sewn into a sleeve round each batt of the lining, so no fibre reaches the ports or the woofer and the batt's face stays even |  | 10.00 |
 | lining-tape | buy | 2 | Clear acrylic foam tape (3M VHB 4910 or alike), 20 mm dots, about 60 a speaker: on a Cloud cabinet four hold each batt's sleeve flat on the acrylic, all but invisible through it |  | 12.00 |
-| amp-fixings | buy | 2 | Hypex 4.3 x 16 self-tapping pan heads and 3 mm EPDM tape, a plate's set |  | 10.00 |
+| amp-fixings | buy | 2 | The FA122's plate in acrylic (round 35, the engineering review's S3): eight M4 brass inserts bonded with epoxy into the back on Hypex's hole pattern, after the last anneal; M4 x 16 black machine screws with nylon shoulder washers, the plate's holes opened to 5.5 so it can slide as it warms (over 315 mm acrylic grows about 0.4 mm more than aluminium for a 25 K rise); 3 mm EPDM tape under the plate. Hypex's self-tapping screws crack acrylic. |  | 14.00 |
+| earth-bond | buy | 2 | The amplifier compartment's earth bond (round 35, the engineering review's B3): an M4 stainless stud and nut, a star washer, and a green and yellow lead 1.0 mm2 about 150 long with M4 ring terminals, from a bared spot on the compartment to the FA122's earth point |  | 4.00 |
 | amp-box-fixings | buy | 2 | Ten screws for the amplifier compartment's flange, with washers: thread-forming screws for plastics (EJOT PT K40 x 12 kind) into HDPE, M4 screws into inserts bonded in acrylic, or wood screws into plywood |  | 3.00 |
 | hf-capacitor | buy | 2 | 33 uF 100 V polypropylene film capacitor, in series ahead of the L-pad (a first-order high-pass at about 300 Hz into 16 ohm) |  | 12.00 |
-| loom | buy | 2 | The loom: screw-mount cable-tie bases with thread-forming screws for plastics (EJOT PT K30 x 10 kind) every 120, ties, a polarised 2-way connector (Molex Mini-Fit Jr or Wago 2092 kind) for each lead at the compartment, crimped insulated 6.3 mm receptacles at the woofer, silicone sleeving where the HF lead meets the post's cut ends |  | 18.00 |
+| loom | buy | 2 | The loom: cable-tie bases every 120, with thread-forming screws for plastics (EJOT PT K30 x 10 kind) in HDPE and on bonded M3 brass inserts with M3 screws in acrylic (round 35: nothing self-tapping into acrylic, which cracks round a formed thread), ties, a polarised 2-way connector (Molex Mini-Fit Jr or Wago 2092 kind) for each lead at the compartment, crimped insulated 6.3 mm receptacles at the woofer, silicone sleeving where the HF lead meets the post's cut ends |  | 18.00 |
 | terminals | buy | 8 | 6.3 mm insulated push-on terminal |  | 0.50 |
 | back-inserts | buy | 2 | M5 brass threaded inserts, knurled, a set of 16, bonded with epoxy into 8 holes 12 deep in the back's acrylic land strips |  | 10.00 |
 | feet-inserts | buy | 2 | M8 brass threaded inserts, knurled, a set of 4, bonded with epoxy into 12.5 holes 15 deep in the acrylic bottom, for the feet |  | 5.00 |
@@ -70,12 +71,12 @@
 
 | | USD |
 |---|---|
-| buy | 2,989 |
+| buy | 3,005 |
 | cast | 1,647 |
 | cut | 2,681 |
 | formed | 485 |
 | lathe | 219 |
 | sheet metal | 171 |
-| total | 8,192 |
+| total | 8,208 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.
