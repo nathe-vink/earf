@@ -94,7 +94,7 @@ TTR = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'turntable')  # th
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 LINEUP_SHOWN = False          # the studio's eight in a row repeated the hero (the site critic, 2026-10-18); it stays in the look book
 TITLE = 'EARF · Atmosphere'
-DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours from Ember to Smoke. '
+DESC = ('Horn loudspeakers, lamps and a record player cast in tinted acrylic, in eight colours from Ember to Smoke. '
         'In development at EARF, not yet for sale.')
 
 CLOUDS = [  # key, number, name, icon, the acrylic, its line, its cover (the look book's)
@@ -1088,6 +1088,8 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 .promise li { display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 1px solid var(--rule); min-width: 0 }
 .promise b { font-weight: 600; font-size: 18px }
 .promise span { color: var(--muted); line-height: 1.6 }
+.stages { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px }      /* where it stands: three steps in a row */
+@media (max-width: 860px) { .stages { grid-template-columns: minmax(0, 1fr); gap: 24px } }
 .contact { display: grid; gap: 18px }
 .contact .addr { display: flex; flex-wrap: wrap; align-items: center; gap: 12px }
 .contact code { font: 500 clamp(20px, 3vw, 30px)/1.2 var(--mono); user-select: all; word-break: break-all }
@@ -1149,7 +1151,7 @@ footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; te
 .buy h1 { font-size: clamp(40px, 5vw, 64px) }
 .buy .line { margin: 0; font-size: 18px }
 .price { margin: 0; font-size: 20px; font-weight: 600 }
-.price span { font-weight: 400; color: var(--muted); font-size: 16px }
+.price span { font-weight: 400; color: var(--muted); font-size: 16px; white-space: nowrap }   /* the unit wraps whole */
 .swatches { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none }
 .swatches a { display: block; width: 40px; height: 40px; border-radius: 50%; position: relative }
 .swatches a[aria-current="true"] { outline: 2px solid var(--ink); outline-offset: 3px }
@@ -1342,6 +1344,18 @@ __HABITATS__
       <figcaption class="wrap"><span>Covers on, by a tall window.</span><span>Each stands 1293&nbsp;mm tall, 560&nbsp;mm wide at the cabinet.</span></figcaption></figure>
   </section>
 
+  <section class="band" id="progress"><div class="wrap">
+    <div class="head"><div><p class="eyebrow">Where it stands</p><h2>Drawn to be made.</h2></div></div>
+    <ol class="promise stages">
+      <li><b>Drawn.</b><span>Atmosphere is drawn for making, part by part: more than eighty of them, each with its fabrication
+        drawing, the horn&rsquo;s profile and the cabinet&rsquo;s bass worked out by simulation before any acrylic is cut.</span></li>
+      <li><b>Next, the first pair.</b><span>Built as production will build it: the horn formed from the cabinet&rsquo;s own
+        sheet, the back screwed to the braces. A prototype is there to test the making, not only the sound.</span></li>
+      <li><b>Then, measured.</b><span>In a room, by ear and by microphone. The design figures on these pages give way to
+        measured ones, and the lamps and Mantle follow the same road.</span></li>
+    </ol>
+  </div></section>
+
   <section class="band mother" id="mother-earf"><div class="wrap">
     <div class="head"><div><p class="eyebrow">Mother EARF</p><h2>Everything comes home.</h2>
       <p>We name our things after the layers of the Earth, so we keep a promise to it. We call the promise Mother EARF.</p></div></div>
@@ -1445,7 +1459,7 @@ __TURNTABLE__
         <p class="num"><span id="p-num"></span></p>
         <h1 class="named"><span id="p-name"></span><span class="pic" id="p-icon"></span></h1>
         <p class="line" id="p-line"></p>
-        <p class="price">In development &middot; price on request <span id="p-unit">&middot; each pair made to order</span></p>
+        <p class="price">Price on request <span id="p-unit">&middot; each pair made to order</span></p>
         <ul class="swatches" id="swatches" aria-label="Colour"></ul>
         <p class="pick">Colour: <b id="p-pick"></b><span class="pick-ic" id="p-pick-ic"></span></p>
         <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Enquire about a pair</a></div>
@@ -1459,8 +1473,8 @@ __TURNTABLE__
 
 <footer><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home">__WORD__</a>
-  <nav class="foot-nav" aria-label="More"><a href="#mother-earf">Mother EARF</a><a href="#contact">Enquiries</a></nav>
-  <p>EARF &middot; San Francisco &middot; Speakers, lamps and a record player in tinted acrylic &middot; In development, not yet for sale; the pictures are renders &middot; &copy; 2026</p>
+  <nav class="foot-nav" aria-label="More"><a href="#progress">Where it stands</a><a href="#mother-earf">Mother EARF</a><a href="#contact">Enquiries</a></nav>
+  <p>EARF &middot; San Francisco &middot; In development, not yet for sale &middot; The pictures are renders &middot; &copy; 2026</p>
 </div></footer>
 
 <script>
@@ -1720,7 +1734,7 @@ function renderProduct(Pr, k) {
   document.title = `${P.title(c)} · EARF`;
   const ll = document.getElementById('p-line-link'); ll.textContent = P.lineName; ll.href = `#${P.line}`;
   document.getElementById('p-crumb').textContent = P.id === 'speaker' ? c.name : P.title(c);
-  document.getElementById('p-num').innerHTML = P.num(c);
+  document.getElementById('p-num').innerHTML = `${P.num(c)} &middot; In development`;   // the plain word on every product, once
   document.getElementById('p-name').textContent = P.name(c);
   document.getElementById('p-line').textContent = P.copy(c);
   document.getElementById('p-pick').textContent = c.name;
