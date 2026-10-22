@@ -431,12 +431,14 @@ def make_images(sources=None):
         fl = HABITAT[k]
         one(os.path.join(TTR, f'studio-{fl}.png'), lambda p, k=k: (save(Image.open(p), f'tt-{k}-studio.jpg', 2400, q=84),
                                                                    save(Image.open(p), f'tt-{k}-studio-1200.jpg', 1200, q=82)))
-        one(os.path.join(TTR, f'dusk-{fl}.png'), lambda p, k=k: save(Image.open(p), f'tt-{k}-dusk.jpg', 2400, q=84))
+        one(os.path.join(TTR, f'dusk-{fl}.png'), lambda p, k=k: (save(Image.open(p), f'tt-{k}-dusk.jpg', 2400, q=84),
+                                                                 save(Image.open(p), f'tt-{k}-dusk-1200.jpg', 1200, q=82)))
         one(os.path.join(TTR, f'studio-{fl}-closed.png'), lambda p, k=k: save(Image.open(p), f'tt-{k}-closed.jpg', 2400, q=84))
         one(os.path.join(TTR, f'tall-{fl}.png'), lambda p, k=k: (save(Image.open(p), f'tt-{k}-tall.jpg', 1200, q=84),
                                                                  save(Image.open(p), f'tt-{k}-card.jpg', 640, q=82)))
     for n in ('open', 'detail', 'pod'):
-        one(os.path.join(TTR, f'{n}.png'), lambda p, n=n: save(Image.open(p), f'tt-{n}.jpg', 2400, q=84))
+        one(os.path.join(TTR, f'{n}.png'), lambda p, n=n: (save(Image.open(p), f'tt-{n}.jpg', 2400, q=84),
+                                                           save(Image.open(p), f'tt-{n}-1200.jpg', 1200, q=82)))
     # until then its line shows Mantle's own proof (round 34, lit at dusk) or, before that, the concept it is drawn from
     # (round 31c's R3 Float, lit at dusk), at its own size
     one(first(os.path.join(TTR, 'proof', 'dusk-haze.png'),
@@ -714,10 +716,31 @@ def body():
     # the turntable line: the record player in its eight once its pictures are in; until then the concept, and a word
     tt = pm['turntable']
     if tt:
+        # its line laid out as the lamps' is: its tile beside it at dusk, then its eight as links to its page in each colour,
+        # then two details (round 34's finals; the arm's close-up stays on its page, where the stand-in arm reads small)
+        def tfig(img, alt, cap, sizes='(max-width: 720px) 100vw, 50vw'):
+            w, h = Image.open(os.path.join(IMG, img)).size
+            half = img.replace('.jpg', '-1200.jpg')
+            srcset = f' srcset="img/{half} 1200w, img/{img} {w}w" sizes="{sizes}"' if os.path.exists(os.path.join(IMG, half)) else ''
+            return f'<figure><img src="img/{img}"{srcset} width="{w}" height="{h}" loading="lazy" alt="{alt}"><figcaption>{cap}</figcaption></figure>'
+        cw, ch = Image.open(os.path.join(IMG, 'tt-red-card.jpg')).size
+        eight = ''.join(f'<li><a href="#{SLUG["turntable"]}-{name.lower()}"><img src="img/tt-{k}-card.jpg" width="{cw}" height="{ch}" '
+                        f'loading="lazy" alt="{TT["name"]} in {name}"><span><span class="coin-dot" style="--i:{coin[k]}"></span>{name}</span></a></li>'
+                        for k, num, name, *_ in CLOUDS)
         turntable = ('  <section class="band" id="record"><div class="wrap">\n'
-                     f'    <div class="head"><div><p class="eyebrow">Turntable</p><h2>{TT["name"]}.</h2><p>{TT["line"]}</p></div></div>\n'
-                     '    <div class="ptiles one">' + ptile('turntable', TT['name'], TT['kind'], TT['line'], 'tt-ice-tall.jpg',
-                                                             f'{TT["name"]} in Fog, its base glowing') + '</div>\n'
+                     f'    <div class="head"><div><p class="eyebrow">Turntable</p><h2>{TT["name"]}.</h2><p>A record player in the speakers&rsquo; '
+                     'acrylic. Its tinted plinth floats 40&nbsp;mm over a base that glows at its edge. The motor stands apart in a pod of its '
+                     'own, and the phono stage is built in.</p></div></div>\n'
+                     '    <div class="lamp-duo solo tt-duo">' + ptile('turntable', TT['name'], TT['kind'], TT['line'], 'tt-ice-tall.jpg',
+                                                                    f'{TT["name"]} in Fog, its base glowing') +
+                     tfig('tt-violet-dusk.jpg', f'{TT["name"]} in Haze at dusk, its lid raised and the edge of its base lit violet',
+                          'In Haze, at dusk.', '(max-width: 720px) 100vw, 60vw') + '</div>\n'
+                     f'    <ul class="tt-eight" aria-label="{TT["name"]} in its eight colours">{eight}</ul>\n'
+                     '    <div class="tt-details">' +
+                     tfig('tt-open.jpg', f'{TT["name"]} in Smoke from the left, its lid raised, the motor&rsquo;s brass pod under the plinth',
+                          'The lid raised. Its hinges sit on brass inserts, so no screw cuts the acrylic.') +
+                     tfig('tt-pod.jpg', f'Close on {TT["name"]}&rsquo;s motor in its brass pod, standing through the base under the floating plinth',
+                          'The motor stands apart, in a brass pod on soft feet, so its hum stays out of the plinth.') + '</div>\n'
                      '  </div></section>')
     else:
         def fig(img, alt, cap):
@@ -1079,6 +1102,18 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 .lamp-duo { display: grid; grid-template-columns: 15fr 8fr; gap: 24px; margin-top: 24px; align-items: start }   /* 3:2 and 4:5 at one height */
 .lamp-duo figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
 .lamp-duo.solo { grid-template-columns: 8fr 15fr; align-items: center }
+.tt-duo .ptile .ph img { border-radius: 6px }
+.tt-eight { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px 16px }
+.tt-eight a { display: grid; gap: 10px; color: inherit; text-decoration: none; min-width: 0 }
+.tt-eight img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.tt-eight a > span { display: flex; align-items: center; gap: 8px; font-size: 15px }
+.tt-eight a:hover > span, .tt-eight a:focus-visible > span { text-decoration: underline; text-underline-offset: 3px }
+.tt-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 40px }
+.tt-details figure { margin: 0; display: grid; gap: 10px; min-width: 0 }
+.tt-details img { width: 100%; height: auto; display: block; border-radius: 6px; background: #F1EDE8; max-width: 100% }
+.tt-details figcaption { font-size: 15px; color: var(--muted) }
+@media (max-width: 720px) { .lamp-duo.tt-duo { grid-template-columns: minmax(0, 1fr) } .tt-eight { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+  .tt-details { grid-template-columns: minmax(0, 1fr) } }
 .lamp-note { display: grid; gap: 10px; max-width: 44ch; min-width: 0 }
 .lamp-note h3 { margin: 0; font-size: 22px; letter-spacing: -0.01em }
 .lamp-note p { margin: 0; color: var(--muted) }
@@ -1234,8 +1269,19 @@ html.cursor, html.cursor * { cursor: none !important }
   .count { right: 8px; bottom: 8px } .stage .tag { left: 8px; bottom: 8px } }
 @media (max-width: 460px) { .cards { gap: 12px } .about h3 { font-size: 21px } .about dl { display: none }
   .spec dl, .facts { grid-template-columns: minmax(0, 1fr) } .spec dt, .facts dt { padding: 10px 0 0; border-bottom: 0 }
-  .spec dd, .facts dd { padding: 2px 0 10px } .swatches { gap: 6px } .swatches a { width: 36px; height: 36px }
-  nav li.wide { display: none } }
+  .spec dd, .facts dd { padding: 2px 0 10px } .swatches { gap: 6px } .swatches a { width: 36px; height: 36px } }
+/* phones: the pages behind one Menu button (five names and the mark wrapped the header onto two lines at 390) */
+.menu { display: none; font: 500 14px/1 var(--sans); color: var(--ink); background: transparent; border: 1px solid currentColor;
+  border-radius: 999px; padding: 9px 14px; cursor: pointer }
+@media (max-width: 460px) {
+  .menu { display: inline-flex; align-items: center }
+  nav ul { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; gap: 0; background: var(--page);
+    padding: 4px max(16px, env(safe-area-inset-right, 0px)) 12px max(16px, env(safe-area-inset-left, 0px)); border-bottom: 1px solid rgb(0 0 0 / .08) }
+  nav.open ul { display: flex }
+  nav ul a { display: block; padding: 12px 0; font-size: 17px }
+  header.top.on-dark nav ul { background: rgb(11 12 16 / .97); border-bottom-color: rgb(255 255 255 / .06) }
+  header.top.on-dark .menu { color: #ECE8E1 }
+}
 /* the shop (round 34): the lines and the colours on the home page, a line's products, a colour's page, and the
    company a colour keeps (its complement, its neighbours, itself), all as cards in the 4:5 frame */
 .lines { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px }
@@ -1319,7 +1365,7 @@ html.cursor, html.cursor * { cursor: none !important }
 <noscript><style>html.opening .hero-photo img { opacity: 1 }</style></noscript>
 <header class="top"><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home"><span class="globe" aria-hidden="true"></span>__WORD__</a>
-  <nav aria-label="Pages"><ul>
+  <nav aria-label="Pages" id="nav"><button type="button" class="menu" aria-expanded="false" aria-controls="nav-list">Menu</button><ul id="nav-list">
     <li><a href="#speakers" data-nav="speakers">Speakers</a></li><li><a href="#lighting" data-nav="lighting">Lighting</a></li>
     <li><a href="#turntable" data-nav="turntable">Turntable</a></li><li class="wide"><a href="#colours" data-nav="colours">Colours</a></li>
     <li><a href="#contact">Enquire</a></li>
@@ -1858,6 +1904,13 @@ const LINE_NAME = { speakers: 'Speakers', lighting: 'Lighting', turntable: 'Turn
 const TITLE0 = document.title;
 let last = null;
 const showMain = name => Object.entries(MAINS).forEach(([n, m]) => { m.hidden = n !== name; });
+// the phones' Menu: opens and closes the pages' list; any page chosen, Escape, or a new address closes it
+const navEl = document.getElementById('nav'), menuBtn = navEl.querySelector('.menu');
+const menuOpen = o => { navEl.classList.toggle('open', o); menuBtn.setAttribute('aria-expanded', String(o)); };
+menuBtn.addEventListener('click', () => menuOpen(!navEl.classList.contains('open')));
+navEl.querySelectorAll('ul a').forEach(a => a.addEventListener('click', () => menuOpen(false)));
+addEventListener('hashchange', () => menuOpen(false));
+addEventListener('keydown', e => { if (e.key === 'Escape' && navEl.classList.contains('open')) { menuOpen(false); menuBtn.focus(); } });
 const navAt = which => document.querySelectorAll('nav a[data-nav]').forEach(a => {
   if (a.dataset.nav === which) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
 function route() {
