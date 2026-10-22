@@ -139,7 +139,7 @@ SLUG = {'dome': 'hemisphere', 'orb': 'core', 'turntable': 'mantle'}   # each pro
 LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
     ('dome', 'Hemisphere North', 'Pendant', 'Hung low over the bar. A quarter turn takes its shade off, and another puts a new colour on.',
      'Hemisphere North lit, its Ember shade glowing beneath a black hub',
-     [('Size', '200 mm across'), ('Shade', 'Cast acrylic, tinted outside and frosted within'),
+     [('Size', '200 mm across'), ('Shade', 'Cast acrylic in three layers, tinted, with a frosted layer between'),
       ('Light', '2700 K, CRI 90, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
       ('Mains', '120 V, dimmable; listing to UL 1598 to follow'),
@@ -453,26 +453,27 @@ def make_images(sources=None):
     return made
 
 
+def ground(n, box=None):
+    """The colours round a picture's edge, so the stage can carry its ground past it: five down the left side, five
+    down the right, then the top's and the bottom's (the top's again where the subject runs off the bottom), as hex;
+    and how its edges run: 'busy' for a close-up whose subject runs off the sides (a blurred copy of it fills the
+    stage instead), 'cut' for one whose subject runs off the bottom (it sits on the stage's foot)."""
+    im = Image.open(os.path.join(IMG, n)).convert('RGB')
+    a = np.asarray(im.crop(box) if box else im).astype(np.float32)
+    h, lum = a.shape[0], a.mean(2)
+    side = lambda e: [np.median(e[h * i // 5:h * (i + 1) // 5].reshape(-1, 3), 0) for i in range(5)]
+    top, bot = a[:8].reshape(-1, 3), a[-8:].reshape(-1, 3)
+    cut = lum[-8:].std() > 20
+    busy = np.concatenate([lum[:, :8].ravel(), lum[:, -8:].ravel()]).std() > 14 or lum[:8].std() > 8
+    hexes = ''.join('%02x%02x%02x' % tuple(int(round(float(x))) for x in c)
+                    for c in side(a[:, :8]) + side(a[:, -8:]) + [np.median(top, 0), np.median(top if cut else bot, 0)])
+    return dict(bg=hexes, **({'edge': 'busy'} if busy else {'edge': 'cut'} if cut else {}))
+
+
 def image_meta():
     """The pictures as they stand in site/img: each speaker's views (src, w, h), the inside shot, and each card's panel
     colour (the photograph's foot, where the panel meets it)."""
     size = lambda n: Image.open(os.path.join(IMG, n)).size
-
-    def ground(n, box=None):
-        """The colours round a picture's edge, so the stage can carry its ground past it: five down the left side, five
-        down the right, then the top's and the bottom's (the top's again where the subject runs off the bottom), as hex;
-        and how its edges run: 'busy' for a close-up whose subject runs off the sides (a blurred copy of it fills the
-        stage instead), 'cut' for one whose subject runs off the bottom (it sits on the stage's foot)."""
-        im = Image.open(os.path.join(IMG, n)).convert('RGB')
-        a = np.asarray(im.crop(box) if box else im).astype(np.float32)
-        h, lum = a.shape[0], a.mean(2)
-        side = lambda e: [np.median(e[h * i // 5:h * (i + 1) // 5].reshape(-1, 3), 0) for i in range(5)]
-        top, bot = a[:8].reshape(-1, 3), a[-8:].reshape(-1, 3)
-        cut = lum[-8:].std() > 20
-        busy = np.concatenate([lum[:, :8].ravel(), lum[:, -8:].ravel()]).std() > 14 or lum[:8].std() > 8
-        hexes = ''.join('%02x%02x%02x' % tuple(int(round(float(x))) for x in c)
-                        for c in side(a[:, :8]) + side(a[:, -8:]) + [np.median(top, 0), np.median(top if cut else bot, 0)])
-        return dict(bg=hexes, **({'edge': 'busy'} if busy else {'edge': 'cut'} if cut else {}))
     meta, panel = {}, {}
     for k in KEYS:
         views = {}
@@ -518,7 +519,8 @@ def product_meta():
             hero, card, shown = (own, pic(f'{lamp}-{k}-card.jpg'), None) if own else (pic(f'{lamp}-red.jpg'), pic(f'{lamp}-red-card.jpg'), 'red')
             if not hero:
                 continue
-            views = {'hero': dict(hero, **({'shown': shown} if shown else {}))}
+            views = {'hero': dict(hero, bg=ground(hero['src'][4:])['bg'], **({'shown': shown} if shown else {}))}   # the stage
+            # carries the picture's own ground on past its sides (round 35: the page's paper beside a 4:5 lamp drew its edges)
             views.update({v: pic(n) for v, n in shared if pic(n)})
             cols[k] = dict(views=views, card=dict(card or hero, **({'shown': shown} if shown else {})))
         out[lamp] = cols
