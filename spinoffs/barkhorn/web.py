@@ -108,6 +108,8 @@ CLOUDS = [  # key, number, name, icon, the acrylic, its line, its cover (the loo
     ('ice', '07', 'Fog', 'fog', 'Water-clear', 'Water-clear. Almost not there.', 'White'),
     ('black', '08', 'Smoke', 'smoke', 'Smoked black', 'Smoked glass, for after dark.', 'Black'),
 ]
+CARE = ('Care', 'Dust with a soft microfibre cloth; wash with water and a drop of mild soap, then dry. No glass cleaner, alcohol '
+        'or solvents: they craze acrylic. Fine scratches polish out.')   # the acrylic makers' own advice, and the warranty's exclusion
 SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabinet'),
         ('Depth', '423 mm overall, 420 mm at the cabinet'),
         ('Weight', 'About 72 kg; 62 kg with the horn lifted off'),
@@ -119,7 +121,7 @@ SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabi
         ('Loudness', 'Up to about 115 dB at 1 m, each'),
         ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
         ('Lining', 'Recycled polyester batts in white voile, 100 mm at the top and the bottom'),
-        ('Price', 'Set at launch; each pair is made to order'),
+        ('Price', 'Set at launch; each pair is made to order'), CARE,
         ('Figures', 'Design figures, from the drawings and their simulation; measured ones follow with the first pair')]
 MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn above it',
            'The corner: two 20 mm walls, cast in one colour and cemented.'),
@@ -144,14 +146,16 @@ LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
       ('Light', '2700 K, CRI 90, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
       ('Mains', '120 V, dimmable; listing to UL 1598 to follow'),
-      ('Shades', 'In all eight colours, sold singly'), ('Figures', 'Design figures; they may change before production')]),
+      ('Shades', 'In all eight colours, sold singly'),
+      ('Care', 'A quarter turn takes the shade off to wash: water and a drop of mild soap, then dry. No glass cleaner, alcohol or solvents: they craze acrylic.'),
+      ('Figures', 'Design figures; they may change before production')]),
     ('orb', 'Core', 'Table lamp', 'A ball of tinted acrylic sitting low in a black acrylic base. Plugged in, it stays put; unplugged, it goes where the conversation is.',
      'Core lit in Ember, sitting low in its black acrylic base',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', '2.0 kg'),
       ('Light', '2200 to 2700 K, warmer as it dims'), ('Control', 'Touch the black ring: tap to switch, hold to dim'),
       ('Power', 'USB-C, cable and adapter included; about ten hours cordless on a battery you can replace yourself'),
       ('Rating', 'Designed to meet IP44, for terraces and spilt drinks'),
-      ('Shades', 'In all eight colours, sold singly'), ('Figures', 'Design figures; they may change before production')]),
+      ('Shades', 'In all eight colours, sold singly'), CARE, ('Figures', 'Design figures; they may change before production')]),
 ]
 LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band doesn't write one)
     'lamp-dome': (800, None), 'lamp-orb': (800, None),
@@ -166,7 +170,7 @@ TT = dict(name='Mantle', kind='Record player', route='mantle',             # rou
                  ('Speeds', '33 and 45, by a button'), ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'),
                  ('Phono stage', 'Built in, for moving-magnet cartridges, with a line out and a switch to bypass it'),
                  ('Cover', 'Tinted acrylic, hinged'), ('Size', '470 wide, 380 deep, 194 high with the lid down (mm)'),
-                 ('Weight', 'About 15.5 kg'), ('Figures', 'Design figures; they may change before production')])
+                 ('Weight', 'About 15.5 kg'), CARE, ('Figures', 'Design figures; they may change before production')])
 # round 34's final (companions/README.md "Round 34: the record player, final (Mantle)", r32-turntable-final)
 LINES = [  # the shop's three lines: key, name, what's in it, its line
     ('speakers', 'Speakers', 'Atmosphere', 'A powered horn loudspeaker in eight colours of cast acrylic.'),
@@ -785,7 +789,7 @@ def body():
         clouds=[dict(k=k, num=num, name=name, icon=icon, tint=tint, line=line, cover=cover, col=MARK[k], hue=HUE.get(k),
                      coin=coin[k], views=meta[k], place=PLACES.get(ELEMENT[k], 'on location'))
                 for k, num, name, icon, tint, line, cover in CLOUDS],
-        hues=E.HUES,
+        hues=E.HUES, care=CARE[1],
         lamps={k_: dict(name=name, kind=kind, line=line, facts=facts, colours=pm[k_], route=SLUG[k_]) for k_, name, kind, line, alt, facts in LAMPS} if lighting else {},
         tt=dict(TT, colours=tt) if tt else None)
     # a phone frame of the hero or the room, where one was made (re-framed, not cropped); with the hero's, its links
@@ -1716,7 +1720,7 @@ const PRODUCTS = [
     facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Formed from the same tinted acrylic as the cabinet'],
       ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`], ['Drivers', '15-inch woofer; 2-inch compression driver on the horn'],
       ['Amplifier', 'Hypex FusionAmp FA122, built in: 2 &times; 125 W, crossed at 1 kHz'], ['Bass', 'To about 51 Hz (&minus;3 dB) before the room; a design figure, measured with the first pair'],
-      ['Inputs', 'XLR, RCA, AES, S/PDIF coaxial and optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg']],
+      ['Inputs', 'XLR, RCA, AES, S/PDIF coaxial and optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg'], ['Care', D.care]],
     title: c => `Atmosphere in ${c.name}` },
   ...Object.entries(D.lamps).map(([id, L]) => ({ id, line: 'lighting', lineName: 'Lighting', route: L.route || id, kind: L.kind, name: () => L.name,
     num: () => `Lighting &middot; ${L.kind}`, copy: () => L.line, views: k => (L.colours[k] || {}).views, VIEWS: LAMP_VIEWS[id],
