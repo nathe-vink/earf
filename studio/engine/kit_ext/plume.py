@@ -84,6 +84,10 @@ def plume(bpy, name, p, kit):
     pz = p.get('position', [0.0, 0.0, 0.0])[2] if len(p.get('position', [])) > 2 else 0.0
     ob.location = Vector((px, py, pz))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
+    # `through_glass` False: the fire and smoke unseen by rays that came through a clear part (E12r: the fire behind
+    # the speaker glowed in its smoked horn like a screen, "a vintage CRT television")
+    if p.get('through_glass') is False:
+        ob.visible_transmission = False
 
     m = bpy.data.materials.new(name); m.use_nodes = True; nt = m.node_tree; nt.nodes.clear()
     N = nt.nodes.new

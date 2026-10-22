@@ -28,6 +28,10 @@ as strong); the speaker "spotless and perfectly upright ... as if someone placed
 "almost no orange glow from the flames right next to it" (the lamps up among the flames, half as strong again, and
 unseen by the smoke); "a ruler-straight dark line where the cracked ground stops" (the pan's edge: E6's horizon haze,
 dropped with its smoke banks, is back).
+
+p7: meteor_d, the fire on its front corners and foot too (both sets of critics: the flames "never pass in front of the
+box", "glowing cards beside it"; the owner's "enveloped"), unseen through its clear parts (the flames behind it showed
+through the smoked acrylic as pale tan panels), with a lamp for the front flames on its face.
 """
 import copy
 import math
@@ -35,7 +39,7 @@ import math
 import smoke_pan as P
 from common import piece, point
 
-CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_c.npz'
+CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_d.npz'          # p7: meteor_c with fire on its front and foot too
 ROT = 18.0                     # the speaker's turn (E6's)
 WIND = 50.0                    # the sim's downwind (+x) turned: away from the camera, a little right
 SINK = 0.16                    # the speaker's foot below the crust: it stopped in its crater (p2-p3's 0.10 in a 0.12 m
@@ -46,10 +50,10 @@ TRENCH = [-2.6, 6.2, -0.15, 0.55, 0.36, 0.05, 0.13, 0.08]        # from, to, hal
 AHEAD = math.degrees(math.atan2(TRENCH[3] - TRENCH[1], TRENCH[2] - TRENCH[0]))   # the way it was travelling
 
 
-def fire():
+def fire(cache=CACHE):
     """The fire as a volume: E10's plume shader with E9's flames, the box's floor at the crater's, its solid on the
-    speaker."""
-    return piece('ext', module='plume', fn='plume', cache=CACHE, anchor='solid', position=[0.0, 0.0, -SINK], rotate_z=WIND,
+    speaker; `cache` the solve (E12r's p5 tries meteor_d, the fire on its front too)."""
+    return piece('ext', module='plume', fn='plume', cache=cache, anchor='solid', position=[0.0, 0.0, -SINK], rotate_z=WIND,
                  density=4.5, strength=110.0, color='#8F857B', anisotropy=0.4, cool=1100.0, hot=2100.0,
                  flame_floor=0.25, tongues=0.9, tongue_scale=0.12, tongue_edge=[0.42, 0.62], edge=[0.02, 0.22],
                  detail=2.5, detail_scale=0.1, detail_octaves=4.0, breakup=0.45, breakup_scale=0.35,
@@ -74,7 +78,8 @@ def firelight(drop=SINK):
     the plume's foot lit it like a fireball)."""
     a = math.radians(ROT)
     out = {}
-    for k, (x, y, z, w) in enumerate([(-0.6, 0.1, 0.8, 400.0), (0.6, 0.15, 0.75, 400.0), (0.0, 0.55, 0.95, 300.0)]):
+    for k, (x, y, z, w) in enumerate([(-0.6, 0.1, 0.8, 400.0), (0.6, 0.15, 0.75, 400.0), (0.0, 0.55, 0.95, 300.0),
+                                      (0.0, -0.4, 0.7, 150.0)]):
         out[f'flame{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z - drop, 3)], w, '#FF7A2E', 0.25),
                                 camera=False, transmission=False, specular=0.0, volume=False)
@@ -91,7 +96,7 @@ def shot():
     for p in props:
         if p.get('fn') == 'occluder':                                # the contact shadow, down in the crater with it
             p['position'] = [p['position'][0], p['position'][1], round(p['position'][2] - SINK, 3)]
-    props += [fire(), impact(f'prop{props.index(g)}-kit')]
+    props += [{**fire(), 'through_glass': False}, impact(f'prop{props.index(g)}-kit')]
     for inst in s['product']['instances']:
         inst['position'] = [inst['position'][0], inst['position'][1], round(inst['position'][2] - SINK, 3)]
         inst['tilt'] = TILT
