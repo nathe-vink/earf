@@ -668,7 +668,8 @@ def wetline(bpy, name, p, kit):
 def arum(bpy, name, p, kit):
     """Lords-and-ladies (Arum maculatum) in autumn: the leaves and hood withered away, a bare stalk `height` tall
     ending in a club of glossy berries packed round it (`berries`, radius `berry`), ripe orange-red and scarlet, the
-    top few still green; the stalk leans `lean` [dx, dy] at its top."""
+    top few still green; the stalk leans `lean` [dx, dy] at its top. `unripe` (0-1) the share of berries still green;
+    `green_gloss` gives those a glossy material, each its own shade between `green_deep` and `green`."""
     rnd = random.Random(p.get('seed', 4))
     H = p.get('height', 0.3); br = p.get('berry', 0.0045); n = p.get('berries', 40)
     lx, ly = p.get('lean', [0.02, 0.0])
@@ -716,7 +717,24 @@ def arum(bpy, name, p, kit):
     e[0].position = 0.35; e[0].color = (*_hex(p.get('scarlet', '#B8120C')), 1)
     e[1].position = 0.65; e[1].color = (*_hex(p.get('orange', '#E2501A')), 1)
     L(ramp.outputs['Color'], rb.inputs['Base Color']); L(ramp.outputs['Color'], rb.inputs['Subsurface Color']) if 'Subsurface Color' in rb.inputs else None
-    green_m = _plain(bpy, f'{name}-green', '#7C8A2A', 0.25)
+    if p.get('green_gloss'):
+        # Poison G2: unripe berries as they are for months before they turn: glossy, each its own green from a deep
+        # leaf green to a yellower one, a little light through them
+        green_m, _, gb = _node_mat(bpy, f'{name}-green')
+        gb.inputs['Roughness'].default_value = 0.14; gb.inputs['Coat Weight'].default_value = 0.6
+        gb.inputs['Coat Roughness'].default_value = 0.06
+        gb.inputs['Subsurface Weight'].default_value = 0.2; gb.inputs['Subsurface Radius'].default_value = (0.4, 1.0, 0.2)
+        gb.inputs['Subsurface Scale'].default_value = 0.004
+        gt = green_m.node_tree
+        gtc = gt.nodes.new('ShaderNodeTexCoord'); gnz = gt.nodes.new('ShaderNodeTexNoise')
+        gnz.inputs['Scale'].default_value = 160.0; gt.links.new(gtc.outputs['Object'], gnz.inputs['Vector'])
+        gr = gt.nodes.new('ShaderNodeValToRGB'); gt.links.new(gnz.outputs['Fac'], gr.inputs['Fac'])
+        ge = gr.color_ramp.elements
+        ge[0].position = 0.35; ge[0].color = (*_hex(p.get('green_deep', '#2F4A12')), 1)
+        ge[1].position = 0.68; ge[1].color = (*_hex(p.get('green', '#7C8A2A')), 1)
+        gt.links.new(gr.outputs['Color'], gb.inputs['Base Color'])
+    else:
+        green_m = _plain(bpy, f'{name}-green', '#7C8A2A', 0.25)
     pos = {'position': p.get('position', [0, 0, 0]), 'rotate': [0, 0, p.get('turn', 0.0)]}
     return [_obj(bpy, f'{name}-0', stalk, stalk_m, pos), _obj(bpy, f'{name}-1', ripe, ripe_m, pos),
             _obj(bpy, f'{name}-2', green, green_m, pos)]

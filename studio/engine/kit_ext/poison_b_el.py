@@ -9,6 +9,8 @@ scale in physically plausible materials, for a redwood forest photographed on lo
   low on the flank, a rust tail tip, amber eyes with vertical slits, a broad triangular head;
 - dartfrog: a green-and-black dyeing dart frog (Dendrobates auratus) sitting, its skin wet;
 - foxglove and nightshade: a spire of tubular bells, speckled in the throat; a sprig of glossy black berries.
+- bones: a deer's bones (skull, jaw, foreleg, vertebrae, ribs ...) lying on the floor a season or two after it died
+  (Smithsonian scans, CC0), weathered.
 Every piece is placed by `position` and `rotate` (degrees) and `scale` like any kit piece.
 """
 import math, random
@@ -29,14 +31,18 @@ def _node_mat(bpy, name):
     return m, nt, b
 
 
-def _noise(nt, scale, detail=4.0, coord='Object', rough=0.6, w=None, stretch=None):
+def _noise(nt, scale, detail=4.0, coord='Object', rough=0.6, w=None, stretch=None, offset=None):
     tc = nt.nodes.new('ShaderNodeTexCoord'); nz = nt.nodes.new('ShaderNodeTexNoise')
     nz.inputs['Scale'].default_value = scale; nz.inputs['Detail'].default_value = detail
     if 'Roughness' in nz.inputs:
         nz.inputs['Roughness'].default_value = rough
     src = tc.outputs[coord]
-    if stretch:
-        mp = nt.nodes.new('ShaderNodeMapping'); mp.inputs['Scale'].default_value = stretch
+    if stretch or offset:
+        mp = nt.nodes.new('ShaderNodeMapping')
+        if stretch:
+            mp.inputs['Scale'].default_value = stretch
+        if offset:
+            mp.inputs['Location'].default_value = offset
         nt.links.new(src, mp.inputs['Vector']); src = mp.outputs['Vector']
     nt.links.new(src, nz.inputs['Vector'])
     return nz
@@ -150,7 +156,14 @@ def amanita(bpy, name, p, kit):
     of button, young, convex, plane, old, `height` from the ground to the cap's underside, `stem` radius, `lean` [dx,
     dy] at the top, `torn` 0-1 how ragged an old margin is, `warts` how many, `seed`; `wash` the rain's threshold
     (lower washes more of the veil off; 0.15 default), `ragged` how torn the bulb's veil rings are (0.03), `needles`
-    how many conifer needles lie across the cap (0), `orange` an orange-red margin (False)."""
+    how many conifer needles lie across the cap (0), `orange` an orange-red margin (False).
+    Poison G2's death caps, each off by default: `skirt` 'membrane' (the ring a thin skirt hanging from the stem, its
+    hem uneven, not a collar); `sac` (the volva a loose membranous sac, torn into lobes; on a button, the egg it
+    breaks out of); `tilt` [deg about x, deg about y] (the cap tilted on its stem); `bite` [deg, depth m] (a slug's
+    notch out of the margin, the white flesh in it); `rest` (the cap's colour placed by its own axis, not the leaned
+    stem's, and its underside the gills' white); `dirt` (soil splashed on the cap, 0-1); `rough`, `coat` (its finish);
+    `shade` (0-1, G3: the stem and skirt less white, soil splashed higher, darker toward the cap that shades them),
+    `stem_tone` (with `shade`, the stem and skirt's whole albedo scaled: G4's front fill made the white stems glow)."""
     rnd = random.Random(p.get('seed', 1))
     sp = p.get('species', 'muscaria')
     R = p.get('cap', 0.06); age = p.get('age', 'convex'); hr, under, up, open_ = _AGES[age]
@@ -247,8 +260,47 @@ def amanita(bpy, name, p, kit):
                 v.co = Vector((v.co.x * ln_, v.co.y * w_, v.co.z * w_ * 0.5))
         m = Matrix.Translation(Vector((r * math.cos(th), r * math.sin(th), z)) + n * 0.0006) @ n.to_track_quat('Z', 'Y').to_matrix().to_4x4() @ Matrix.Rotation(rnd.uniform(0, 6.28), 4, 'Z')
         _join(bms['needles'], needle, m)
+    # Poison G2: a slug's bite out of the margin. Whatever lies outside the notch's arc is pulled in to it, so the
+    # cap's skin, its margin and its underside meet in a wall there: the flesh the material shows white
+    if p.get('bite'):
+        thb, db = math.radians(p['bite'][0]), p['bite'][1]
+        wb = 1.2 * db / R
+        for k in ('cap', 'gills', 'needles', 'warts'):
+            for v in bms[k].verts:
+                r = math.hypot(v.co.x, v.co.y)
+                d = (math.atan2(v.co.y, v.co.x) - thb + math.pi) % (2 * math.pi) - math.pi
+                if r < 1e-6 or abs(d) >= wb:
+                    continue
+                lim = R - db * math.sqrt(1 - (d / wb) ** 2)
+                if r > lim:
+                    v.co.x *= lim / r; v.co.y *= lim / r
+    if p.get('rest'):                                     # the cap's own frame, kept for its material
+        for k in ('cap', 'gills', 'warts', 'needles'):
+            uv = bms[k].loops.layers.uv.new('rest')
+            for fc in bms[k].faces:
+                for lp in fc.loops:
+                    lp[uv].uv = (lp.vert.co.x, lp.vert.co.y)
+    if p.get('tilt'):                                     # the cap tilted on its stem, about the stem's top
+        rot = (Matrix.Rotation(math.radians(p['tilt'][1]), 3, 'Y') @ Matrix.Rotation(math.radians(p['tilt'][0]), 3, 'X'))
+        piv = Vector((0.0, 0.0, z0))
+        for k in ('cap', 'gills', 'warts', 'needles'):
+            for v in bms[k].verts:
+                v.co = piv + rot @ (v.co - piv)
     # the ring: a skirt hanging from the stem's top
-    if age != 'button':
+    if age != 'button' and p.get('skirt') == 'membrane':
+        # a death cap's: a thin membrane flaring from the stem and hanging, its hem waved and torn shorter in places
+        zr = Hs * 0.84; Ls = R * p.get('skirt_len', 0.32)
+        outer = [(sr * 0.98, zr + 0.01 * R), (sr * 1.4, zr - 0.03 * R), (sr * 1.75, zr - 0.3 * Ls), (sr * 1.98, zr - 0.65 * Ls),
+                 (sr * 2.12, zr - Ls)]
+        _lathe(bms['ring'], outer + [(r - 0.0007, z) for r, z in outer[::-1]], 64)
+        for v in bms['ring'].verts:
+            dep = (zr - v.co.z) / Ls
+            if dep > 0.15:
+                th = math.atan2(v.co.y, v.co.x)
+                w = 1 + dep * (0.16 * math.sin(7 * th + ph[3]) + 0.12 * noise.noise(Vector((math.cos(th) * 4, math.sin(th) * 4, ph[1]))))
+                v.co.x *= w; v.co.y *= w
+                v.co.z += Ls * 0.35 * dep ** 2 * max(0.0, noise.noise(Vector((math.cos(th) * 2.5, math.sin(th) * 2.5, ph[2]))) + 0.1)
+    elif age != 'button':
         zr = Hs * 0.84
         rr = [(sr * 0.92, zr + 0.01 * R), (sr * 1.35, zr - 0.02 * R), (sr * 1.7, zr - 0.1 * R), (sr * 1.75, zr - 0.2 * R),
               (sr * 1.62, zr - 0.205 * R), (sr * 1.55, zr - 0.11 * R), (sr * 1.2, zr - 0.035 * R), (sr * 0.88, zr - 0.012 * R)]
@@ -260,6 +312,25 @@ def amanita(bpy, name, p, kit):
             rv = bulb * (0.93 - 0.17 * k) if k < 2 else sr * 1.25
             _lathe(bms['volva'], [(rv * 0.97, zv - 0.004 * R), (rv * 1.035, zv), (rv * 1.03, zv + 0.004 * R), (rv * 0.97, zv + 0.003 * R)], 40,
                    lambda th, z, k=k: 1 + p.get('ragged', 0.03) * noise.noise(Vector((math.cos(th) * 6, math.sin(th) * 6, k * 3))))
+    elif p.get('sac'):
+        # a death cap's volva: a loose membranous sac round the bulb, its rim torn into three lobes peeling back; on a
+        # button, the egg the cap is breaking out of
+        if age == 'button':
+            top = z0 + 0.45 * H
+            outer = [(R * 0.45, -0.006), (R * 0.92, top * 0.3), (R * 1.1, top * 0.65), (R * 1.08, top * 0.9), (R * 1.02, top)]
+        else:
+            top = bh * 1.35
+            outer = [(bulb * 0.8, -0.006), (bulb * 1.2, top * 0.25), (bulb * 1.28, top * 0.6), (bulb * 1.34, top * 0.9), (bulb * 1.42, top)]
+        _lathe(bms['volva'], outer + [(r - 0.0008, z) for r, z in outer[::-1]], 48)
+        for v in bms['volva'].verts:
+            h = v.co.z / top
+            if h > 0.45:
+                th = math.atan2(v.co.y, v.co.x)
+                lobe = abs(math.cos(1.5 * th + ph[1]))
+                keep = 0.55 + 0.45 * lobe + 0.15 * noise.noise(Vector((math.cos(th) * 5, math.sin(th) * 5, ph[0])))
+                v.co.z = top * (0.45 + (h - 0.45) * keep)
+                peel = 1 + 0.14 * (h - 0.45) / 0.55 * lobe
+                v.co.x *= peel; v.co.y *= peel
     else:
         cup = [(bulb * 1.02, -0.003), (bulb * 1.1, bh * 0.5), (bulb * 1.22, bh * 1.05), (bulb * 1.15, bh * 1.1), (bulb * 1.0, bh * 0.55)]
         _lathe(bms['volva'], cup, 40, lambda th, z: 1 + 0.12 * noise.noise(Vector((math.cos(th) * 3, math.sin(th) * 3, z * 40))))
@@ -269,7 +340,10 @@ def amanita(bpy, name, p, kit):
     for bm in bms.values():
         for v in bm.verts:
             t = max(0.0, min(1.5, v.co.z / top)); v.co.x += lx * t * t; v.co.y += ly * t * t
-    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0), p.get('matte', False))
+    mats = _amanita_mats(bpy, name, sp, R, Hs, p.get('orange', False), p.get('dull', 0.0), p.get('matte', False),
+                         p.get('cap_ramp'), p.get('dull_to', '#4A2414'), p.get('fibrils', 0.0), p.get('rest', False),
+                         p.get('bite'), p.get('dirt', 0.0), p.get('rough'), p.get('coat'), p.get('shade', 0.0),
+                         p.get('stem_tone', 1.0))
     obs = []
     for k, bm in bms.items():
         if len(bm.verts):
@@ -279,16 +353,20 @@ def amanita(bpy, name, p, kit):
     return obs
 
 
-def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
+def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False, cap_ramp=None, dull_to='#4A2414', fibrils=0.0,
+                  rest=False, bite=None, dirt=0.0, rough=None, coat=None, shade=0.0, stem_tone=1.0):
     key = (sp,)
     out = {}
     # the cap: viscid (a wet, thin coat), red with orange toward the margin and blotchy, a little light through it
     m, nt, b = _node_mat(bpy, f'{name}-capmat')
     tc = nt.nodes.new('ShaderNodeTexCoord'); sep = nt.nodes.new('ShaderNodeSeparateXYZ')
-    nt.links.new(tc.outputs['Object'], sep.inputs['Vector'])
+    src = tc.outputs['Object']
+    if rest:                                              # the cap's own frame (amanita's `rest`), not the leaned one
+        uvn = nt.nodes.new('ShaderNodeUVMap'); uvn.uv_map = 'rest'; src = uvn.outputs['UV']
+    nt.links.new(src, sep.inputs['Vector'])
     # radial position on the cap: the distance from the axis, over R
     vl = nt.nodes.new('ShaderNodeVectorMath'); vl.operation = 'MULTIPLY'; vl.inputs[1].default_value = (1, 1, 0)
-    nt.links.new(tc.outputs['Object'], vl.inputs[0])
+    nt.links.new(src, vl.inputs[0])
     ln = nt.nodes.new('ShaderNodeVectorMath'); ln.operation = 'LENGTH'; nt.links.new(vl.outputs['Vector'], ln.inputs[0])
     dv = nt.nodes.new('ShaderNodeMath'); dv.operation = 'DIVIDE'; dv.inputs[1].default_value = R
     nt.links.new(ln.outputs['Value'], dv.inputs[0])
@@ -301,18 +379,79 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
                     else [(0.15, '#4A0402'), (0.45, '#7A0803'), (0.8, '#A01C05'), (1.1, '#C4420E')])
         b.inputs['Subsurface Weight'].default_value = 0.12
     else:
-        # olive-green to yellowish at the margin, with dark radial fibrils
-        col = _ramp(nt, mix.outputs['Value'], [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'), (1.2, '#A3A06A')])
+        # olive-green to yellowish at the margin, with dark radial fibrils (`cap_ramp` [(position, hex)...] overrides:
+        # Poison G pushes it toward the yellow-green of a fresh cap)
+        col = _ramp(nt, mix.outputs['Value'], cap_ramp or [(0.1, '#3C4018'), (0.5, '#5A5E28'), (0.9, '#7E8044'),
+                                                                    (1.2, '#A3A06A')])
         b.inputs['Subsurface Weight'].default_value = 0.08
+        if fibrils:                                       # the death cap's dark radial fibrils, streaking out from the centre
+            at = nt.nodes.new('ShaderNodeMath'); at.operation = 'ARCTAN2'
+            nt.links.new(sep.outputs['Y'], at.inputs[0]); nt.links.new(sep.outputs['X'], at.inputs[1])
+            cxyz = nt.nodes.new('ShaderNodeCombineXYZ')
+            th = nt.nodes.new('ShaderNodeMath'); th.operation = 'MULTIPLY'; th.inputs[1].default_value = 9.0
+            nt.links.new(at.outputs[0], th.inputs[0]); nt.links.new(th.outputs[0], cxyz.inputs['X'])
+            rr = nt.nodes.new('ShaderNodeMath'); rr.operation = 'MULTIPLY'; rr.inputs[1].default_value = 0.8
+            nt.links.new(dv.outputs['Value'], rr.inputs[0]); nt.links.new(rr.outputs[0], cxyz.inputs['Y'])
+            fn = nt.nodes.new('ShaderNodeTexNoise'); fn.inputs['Scale'].default_value = 7.0; fn.inputs['Detail'].default_value = 3.0
+            nt.links.new(cxyz.outputs['Vector'], fn.inputs['Vector'])
+            fm = nt.nodes.new('ShaderNodeMapRange'); fm.inputs['From Min'].default_value = 0.5; fm.inputs['From Max'].default_value = 0.72
+            fm.inputs['To Max'].default_value = fibrils
+            nt.links.new(fn.outputs['Fac'], fm.inputs['Value'])
+            fx = nt.nodes.new('ShaderNodeMix'); fx.data_type = 'RGBA'
+            nt.links.new(fm.outputs['Result'], fx.inputs['Factor']); nt.links.new(col, fx.inputs['A'])
+            fx.inputs['B'].default_value = (*_hex('#262A10'), 1); col = fx.outputs['Result']
+    if dirt:                                              # soil splashed up on the cap by the rain
+        dn = _noise(nt, 1.0 / (R * 0.18), 4.0)
+        dr = nt.nodes.new('ShaderNodeMapRange'); dr.inputs['From Min'].default_value = 0.56; dr.inputs['From Max'].default_value = 0.72
+        dr.inputs['To Max'].default_value = dirt; nt.links.new(dn.outputs['Fac'], dr.inputs['Value'])
+        dx_ = nt.nodes.new('ShaderNodeMix'); dx_.data_type = 'RGBA'
+        nt.links.new(dr.outputs['Result'], dx_.inputs['Factor']); nt.links.new(col, dx_.inputs['A'])
+        dx_.inputs['B'].default_value = (*_hex('#3A2C1C'), 1); col = dx_.outputs['Result']
     if dull:                                              # weathered: the red toward a brown, as an old cap goes
         dm = nt.nodes.new('ShaderNodeMix'); dm.data_type = 'RGBA'; dm.inputs['Factor'].default_value = dull
-        nt.links.new(col, dm.inputs['A']); dm.inputs['B'].default_value = (*_hex('#4A2414'), 1); col = dm.outputs['Result']
+        nt.links.new(col, dm.inputs['A']); dm.inputs['B'].default_value = (*_hex(dull_to), 1)
+        col = dm.outputs['Result']
+    if rest:                                              # under the cap the packed white gills, not its skin
+        sn = nt.nodes.new('ShaderNodeSeparateXYZ'); nt.links.new(tc.outputs['Normal'], sn.inputs['Vector'])
+        um = nt.nodes.new('ShaderNodeMapRange'); um.inputs['From Min'].default_value = -0.15; um.inputs['From Max'].default_value = -0.45
+        nt.links.new(sn.outputs['Z'], um.inputs['Value'])
+        ux = nt.nodes.new('ShaderNodeMix'); ux.data_type = 'RGBA'
+        nt.links.new(um.outputs['Result'], ux.inputs['Factor']); nt.links.new(col, ux.inputs['A'])
+        ux.inputs['B'].default_value = (*_hex('#DCD8C8'), 1); col = ux.outputs['Result']
+    if bite:                                              # the bite's wall: the white flesh where the slug fed
+        thb, db = math.radians(bite[0]), bite[1]; wb = 1.2 * db / R
+        at2 = nt.nodes.new('ShaderNodeMath'); at2.operation = 'ARCTAN2'
+        nt.links.new(sep.outputs['Y'], at2.inputs[0]); nt.links.new(sep.outputs['X'], at2.inputs[1])
+        dd = nt.nodes.new('ShaderNodeMath'); dd.operation = 'SUBTRACT'; dd.inputs[1].default_value = thb
+        nt.links.new(at2.outputs[0], dd.inputs[0])
+        wr = nt.nodes.new('ShaderNodeMath'); wr.operation = 'WRAP'; wr.inputs[1].default_value = math.pi; wr.inputs[2].default_value = -math.pi
+        nt.links.new(dd.outputs[0], wr.inputs[0])
+        q = nt.nodes.new('ShaderNodeMath'); q.operation = 'DIVIDE'; q.inputs[1].default_value = wb; nt.links.new(wr.outputs[0], q.inputs[0])
+        q2 = nt.nodes.new('ShaderNodeMath'); q2.operation = 'MULTIPLY'; nt.links.new(q.outputs[0], q2.inputs[0]); nt.links.new(q.outputs[0], q2.inputs[1])
+        inside = nt.nodes.new('ShaderNodeMath'); inside.operation = 'LESS_THAN'; inside.inputs[1].default_value = 1.0
+        nt.links.new(q2.outputs[0], inside.inputs[0])
+        om = nt.nodes.new('ShaderNodeMath'); om.operation = 'SUBTRACT'; om.inputs[0].default_value = 1.0; om.use_clamp = True
+        nt.links.new(q2.outputs[0], om.inputs[1])
+        sq = nt.nodes.new('ShaderNodeMath'); sq.operation = 'SQRT'; nt.links.new(om.outputs[0], sq.inputs[0])
+        lim = nt.nodes.new('ShaderNodeMath'); lim.operation = 'MULTIPLY_ADD'; lim.inputs[1].default_value = -db / R
+        lim.inputs[2].default_value = 1.0 - 0.025; nt.links.new(sq.outputs[0], lim.inputs[0])
+        out_ = nt.nodes.new('ShaderNodeMath'); out_.operation = 'GREATER_THAN'
+        nt.links.new(dv.outputs['Value'], out_.inputs[0]); nt.links.new(lim.outputs[0], out_.inputs[1])
+        fm_ = nt.nodes.new('ShaderNodeMath'); fm_.operation = 'MULTIPLY'
+        nt.links.new(inside.outputs[0], fm_.inputs[0]); nt.links.new(out_.outputs[0], fm_.inputs[1])
+        bx = nt.nodes.new('ShaderNodeMix'); bx.data_type = 'RGBA'
+        nt.links.new(fm_.outputs[0], bx.inputs['Factor']); nt.links.new(col, bx.inputs['A'])
+        bx.inputs['B'].default_value = (*_hex('#E8E1CC'), 1); col = bx.outputs['Result']
     nt.links.new(col, b.inputs['Base Color'])
     b.inputs['Subsurface Radius'].default_value = (0.003, 0.0012, 0.0006)
     b.inputs['Roughness'].default_value = 0.55
     b.inputs['Coat Weight'].default_value = 0.15; b.inputs['Coat Roughness'].default_value = 0.25
     if matte:                                             # a dried cap: no viscid coat, a soft sheen at most
         b.inputs['Roughness'].default_value = 0.68; b.inputs['Coat Weight'].default_value = 0.04
+    if rough is not None:
+        b.inputs['Roughness'].default_value = rough
+    if coat is not None:
+        b.inputs['Coat Weight'].default_value = coat
     fib = _noise(nt, 1.0 / (R * 0.06), 6.0, stretch=(1.0, 1.0, 1.0))
     n1 = _bump(nt, b, fib.outputs['Fac'], 0.25, R * 0.004)
     # the striate margin: fine radial grooves in the outer fifth of the cap
@@ -355,7 +494,25 @@ def _amanita_mats(bpy, name, sp, R, Hs, orange=False, dull=0.0, matte=False):
             cols = [(0.05, '#3E3222'), (0.28, '#7E705A'), (0.5, '#AA9E84'), (1.0, '#BFB59C')]
         if k == 'volva' and sp != 'muscaria':
             cols = [(0.0, '#7A6A4E'), (0.25, '#CFC6AE'), (1.0, '#EDE8DA')]
-        nt.links.new(_ramp(nt, mx.outputs['Value'], cols), b.inputs['Base Color'])
+        if shade and k != 'volva':                        # Poison G3: soil splashed higher up the stem, and less white
+            cols = [(0.05, '#4A3D2A'), (0.3, '#968A72'), (0.5, '#C8BFA8'), (1.0, '#D8D0BC')]
+        col_ = _ramp(nt, mx.outputs['Value'], cols)
+        if shade and k != 'volva':
+            # the cap's shadow on the stem's top and the skirt (G2's critics: "the stems as bright just under the cap
+            # as at the base"): darker toward the cap, the soft light from the canopy blocked there
+            sh = nt.nodes.new('ShaderNodeMapRange'); sh.interpolation_type = 'SMOOTHSTEP'
+            sh.inputs['From Min'].default_value = 0.55; sh.inputs['From Max'].default_value = 1.0
+            sh.inputs['To Min'].default_value = stem_tone; sh.inputs['To Max'].default_value = stem_tone * (1.0 - 0.55 * shade)
+            nt.links.new(hz.outputs['Value'], sh.inputs['Value'])
+            shm = nt.nodes.new('ShaderNodeMix'); shm.data_type = 'RGBA'; shm.blend_type = 'MULTIPLY'
+            shm.inputs['Factor'].default_value = 1.0
+            nt.links.new(col_, shm.inputs['A'])
+            cc = nt.nodes.new('ShaderNodeCombineColor')
+            for ch in ('Red', 'Green', 'Blue'):
+                nt.links.new(sh.outputs['Result'], cc.inputs[ch])
+            nt.links.new(cc.outputs['Color'], shm.inputs['B'])
+            col_ = shm.outputs['Result']
+        nt.links.new(col_, b.inputs['Base Color'])
         b.inputs['Roughness'].default_value = 0.72; b.inputs['Subsurface Weight'].default_value = 0.15
         b.inputs['Subsurface Radius'].default_value = (0.003, 0.003, 0.002)
         fib = _noise(nt, 1.0 / (R * 0.04), 6.0, stretch=(14.0, 14.0, 0.5))
@@ -807,3 +964,190 @@ def sorrel(bpy, name, p, kit):
         if o.type == 'MESH' and any(k in o.name for k in p['on']):
             md = o.modifiers.new(name, 'NODES'); md.node_group = pe._strew_group(bpy, name, p, col, o.location)
     return []
+
+
+# --- bones -------------------------------------------------------------------------------------------------------
+# A deer's bones, all from the Smithsonian's scans released CC0, fetched once into the cache: a white-tailed deer's
+# skull, jaw and foreleg, scans of casts in the NMNH's education collection (edanmdm:nmnheducation_15006160; the
+# cranium 27 cm long, the jaw 24, the leg 68 from the elbow to the hoof), and a mule deer's bones from a wolf kill on
+# Vancouver Island, scans of the specimens in the NMNH paleobiology department's vertebrate taphonomy collection
+# (edanmdm:nmnhpaleobiology_17208149 to 17208155: a broken humerus, a cervical, a lumbar and a thoracic vertebra, a
+# rib, a scapula and part of a pelvis; small as scanned, a rib 12.5 cm and a thoracic vertebra 6, so scaled up).
+SI = 'https://3d-api.si.edu/content/document/3d_package:%s/resources/%s'
+_WT = 'fcc69841-d8be-4103-be0f-143e374c9ce6'
+_MD = 'Odocoileus_hemionus-150k-4096_std.glb'
+BONES = {'skull': (_WT, 'USNM_PAL_Deer_skull-100k-2048_std.glb'), 'jaw': (_WT, 'USNM_PAL_Deer_mandible-100k-2048_std.glb'),
+         'foreleg': ('9395b925-4132-468c-a974-745abec177b4', 'USNM_PAL_Deer_forelimb-100k-2048_std.glb'),
+         'humerus': ('049ebdfd-8571-4a0e-a197-2ae927ffbab9', _MD), 'cervical': ('e30c4375-f116-45e6-ae8d-eb257cb2b584', _MD),
+         'lumbar': ('618ba3dc-35ca-495f-9e82-ad5986172900', _MD), 'thoracic': ('efec128b-72f1-4ef6-9751-57c62ab34990', _MD),
+         'rib': ('bc79e866-98ca-406c-8592-2532d8f3f20b', _MD), 'scapula': ('c72dbbaa-cb47-4f27-9630-cd93878b0d14', _MD),
+         'pelvis': ('271c34c0-f2f8-4732-902c-120f32ec54ec', _MD)}
+WEATHER = ('bone', 'streaks', 'pits', 'algae', 'moss', 'soil', 'ground', 'seed')    # an item's own weathering
+
+
+def bones(bpy, name, p, kit):
+    """A deer's bones on the forest floor a season or two after it died: for each of `items` ({'part' (a key of
+    BONES), 'position', 'rotate' (degrees, XYZ), 'scale' (a number or [x, y, z]), 'mirror' (a right-side bone from
+    the left's scan), 'sink' (m), and any of WEATHER to weather it apart from the rest}) the scan as it was scanned
+    (the skull's snout to -y and its crown up; the leg along y; a vertebra's body along z and its spine to +y; a rib
+    along y, its head at +y and its bow to +x; the humerus along z) turned by `rotate` and set down so its lowest
+    point is `sink` below `position`'s height. Each scan is read once and its mesh shared by every bone cut from it,
+    each weathered on its own (`_bone_mat`): bone gone from white to a dull ivory, stained tan, darker in its pits
+    (the scan's own occlusion), green with algae where it faces the sky, cushions of moss on top, and soil-dark where
+    it sinks into the litter. The scans' maps are cut to `max_tex` px (2048): the bones are seen from metres off."""
+    import os
+    import assets
+    import numpy as np
+    cap = p.get('max_tex', 2048)
+    scans, out = {}, []
+    for i, it in enumerate(p['items']):
+        part = it['part']
+        if part not in scans:
+            pkg, f = BONES[part]
+            path = os.path.join(assets.CACHE, 'si', pkg[:8] + '-' + f if f == _MD else f)
+            if not os.path.exists(path):
+                assets._get(SI % (pkg, f), path)
+            before = set(bpy.data.objects)
+            bpy.ops.import_scene.gltf(filepath=path)
+            new = [o for o in bpy.data.objects if o not in before]
+            bpy.context.view_layer.update()
+            ob = next(o for o in new if o.type == 'MESH')
+            src = ob.data.materials[0] if ob.data.materials else None
+            ob.data.transform(ob.matrix_world); ob.parent = None; ob.matrix_world = Matrix.Identity(4)
+            for o in new:
+                if o is not ob:
+                    bpy.data.objects.remove(o, do_unlink=True)
+            for f_ in ob.data.polygons:
+                f_.use_smooth = True
+            if not ob.data.materials:
+                ob.data.materials.append(None)
+            if src is not None and src.use_nodes:
+                for n in src.node_tree.nodes:
+                    if n.type == 'TEX_IMAGE' and n.image and max(n.image.size) > cap:
+                        n.image.scale(cap, cap)
+            co = np.empty(len(ob.data.vertices) * 3); ob.data.vertices.foreach_get('co', co)
+            scans[part] = (ob.data, src, co.reshape(-1, 3))
+        else:
+            ob = bpy.data.objects.new('bone', scans[part][0])
+            for c in out[0].users_collection if out else [bpy.context.scene.collection]:
+                c.objects.link(ob)
+        mesh, src, co = scans[part]
+        ob.name = f'{name}-{part}{i}'
+        q = dict(p, **{k: it[k] for k in WEATHER if k in it})
+        ob.material_slots[0].link = 'OBJECT'                         # one mesh, each bone weathered its own way
+        ob.material_slots[0].material = _bone_mat(bpy, f'{name}-{i}', src, q, it)
+        x, y, z = it['position']
+        ob.rotation_mode = 'XYZ'                                     # the glTF importer leaves it in quaternions
+        ob.rotation_euler = [math.radians(a) for a in it.get('rotate', [0, 0, 0])]
+        s = it.get('scale', 1.0); s = list(s) if isinstance(s, (list, tuple)) else [s, s, s]
+        if it.get('mirror'):
+            s[0] = -s[0]
+        ob.scale = s
+        ob.location = (x, y, 0.0)
+        mb = np.array(ob.matrix_basis)
+        ob.location.z = z - float((co @ mb[2, :3]).min()) - it.get('sink', 0.02)
+        out.append(ob)
+    for mesh, src, co in scans.values():                             # the scans' own materials, now unused
+        mesh.materials[0] = None
+        if src is not None and src.users == 0:
+            bpy.data.materials.remove(src)
+    return out
+
+
+def _bone_mat(bpy, name, src, p, it):
+    """Weathered bone over the scan's own normal and occlusion maps (taken from its imported material `src`)."""
+    m, nt, b = _node_mat(bpy, name); L = nt.links.new
+    nmap = orm = None
+    if src is not None and src.use_nodes:
+        for n in src.node_tree.nodes:
+            if n.type == 'TEX_IMAGE' and n.image:
+                to = [l.to_node.type for o in n.outputs for l in o.links]
+                if 'NORMAL_MAP' in to:
+                    nmap = n.image
+                elif 'SEPARATE_COLOR' in to or 'SEPRGB' in to:
+                    orm = n.image
+    tc = nt.nodes.new('ShaderNodeTexCoord'); geo = nt.nodes.new('ShaderNodeNewGeometry')
+    uv = tc.outputs['UV']
+    sd = p.get('seed')                                               # a bone's own pattern, though its mesh is shared
+    off = (1.7 * sd, 2.3 * sd, 3.1 * sd) if sd else None
+
+    def mrange(v, a, c, lo=0.0, hi=1.0, smooth=True):
+        r = nt.nodes.new('ShaderNodeMapRange'); r.clamp = True
+        if smooth:
+            r.interpolation_type = 'SMOOTHSTEP'
+        r.inputs['From Min'].default_value = a; r.inputs['From Max'].default_value = c
+        r.inputs['To Min'].default_value = lo; r.inputs['To Max'].default_value = hi
+        L(v, r.inputs['Value']); return r.outputs['Result']
+
+    def mul(a, c):
+        k = nt.nodes.new('ShaderNodeMath'); k.operation = 'MULTIPLY'
+        for j, v in enumerate((a, c)):
+            if isinstance(v, (int, float)):
+                k.inputs[j].default_value = v
+            else:
+                L(v, k.inputs[j])
+        return k.outputs['Value']
+
+    def mix(fac, a, c):
+        k = nt.nodes.new('ShaderNodeMix'); k.data_type = 'RGBA'
+        L(fac, k.inputs['Factor'])
+        for sock, v in ((k.inputs[6], a), (k.inputs[7], c)):
+            if isinstance(v, str):
+                sock.default_value = (*_hex(v), 1)
+            else:
+                L(v, sock)
+        return k.outputs[2]
+
+    # the bone: ivory, mottled tan and grey where water stood and dried (cm-scale), finer grain within it
+    n1 = _noise(nt, 1.0 / 0.035, 5.0, rough=0.62, offset=off)
+    col = _ramp(nt, n1.outputs['Fac'], p.get('bone', [(0.32, '#C9BFA5'), (0.5, '#B5A88A'), (0.62, '#A39679'),
+                                                     (0.75, '#8E8670')]))
+    # tannin run down its sides from the litter and the rain: streaks long in z, a darker tan
+    n5 = _noise(nt, 1.0 / 0.02, 3.0, stretch=(1.0, 1.0, 0.22), offset=off)
+    col = mix(mul(mrange(n5.outputs['Fac'], 0.5, 0.7), p.get('streaks', 0.55)), col, '#7C6B4D')
+    # darker in its pits and seams: the scan's ambient occlusion
+    if orm is not None:
+        ti = nt.nodes.new('ShaderNodeTexImage'); ti.image = orm; orm.colorspace_settings.name = 'Non-Color'
+        L(uv, ti.inputs['Vector'])
+        sp = nt.nodes.new('ShaderNodeSeparateColor'); L(ti.outputs['Color'], sp.inputs['Color'])
+        ao = mrange(sp.outputs['Red'], 0.15, 1.0, p.get('pits', 0.25), 1.0, smooth=False)
+        k = nt.nodes.new('ShaderNodeMix'); k.data_type = 'RGBA'; k.blend_type = 'MULTIPLY'
+        k.inputs['Factor'].default_value = 1.0; L(col, k.inputs[6]); L(ao, k.inputs[7]); col = k.outputs[2]
+    # green with algae where it faces the sky (world normal), in patches
+    up = nt.nodes.new('ShaderNodeSeparateXYZ'); L(geo.outputs['Normal'], up.inputs['Vector'])
+    n2 = _noise(nt, 1.0 / 0.05, 3.0, offset=off)
+    algae = mul(mrange(up.outputs['Z'], 0.0, 0.8), mrange(n2.outputs['Fac'], 0.38, 0.58))
+    col = mix(mul(algae, p.get('algae', 0.75)), col, '#646B40')
+    # a few cushions of moss on top
+    n3 = _noise(nt, 1.0 / 0.03, 4.0, rough=0.7, offset=off)
+    moss = mul(mrange(up.outputs['Z'], 0.45, 0.85), mrange(n3.outputs['Fac'], 0.6, 0.66))
+    moss = mul(moss, p.get('moss', 1.0))
+    mc = _ramp(nt, n1.outputs['Fac'], [(0.35, '#3E5420'), (0.65, '#5A6E2A')])
+    col = mix(moss, col, mc)
+    # soil-dark where it sinks into the litter: the last few cm above the ground (world height)
+    wz = nt.nodes.new('ShaderNodeSeparateXYZ'); L(geo.outputs['Position'], wz.inputs['Vector'])
+    g0 = p.get('ground', 0.0); soil = mrange(wz.outputs['Z'], g0 + p.get('soil', 0.035), g0 - 0.01)
+    col = mix(soil, col, '#3B2E20')
+    L(col, b.inputs['Base Color'])
+    # rough, matt bone; moss and soil rougher still
+    rr = nt.nodes.new('ShaderNodeMath'); rr.operation = 'MAXIMUM'
+    L(mrange(n1.outputs['Fac'], 0.3, 0.7, 0.55, 0.72), rr.inputs[0]); L(mrange(moss, 0.0, 1.0, 0.0, 0.95), rr.inputs[1])
+    r2 = nt.nodes.new('ShaderNodeMath'); r2.operation = 'MAXIMUM'
+    L(rr.outputs['Value'], r2.inputs[0]); L(mrange(soil, 0.0, 1.0, 0.0, 0.9), r2.inputs[1])
+    L(r2.outputs['Value'], b.inputs['Roughness'])
+    b.inputs['Subsurface Weight'].default_value = 0.06
+    b.inputs['Subsurface Radius'].default_value = (1.0, 0.6, 0.35)
+    if 'Subsurface Scale' in b.inputs:
+        b.inputs['Subsurface Scale'].default_value = 0.003
+    # the scan's normals, then pitting and the moss's pile on top
+    prev = None
+    if nmap is not None:
+        tn = nt.nodes.new('ShaderNodeTexImage'); tn.image = nmap; nmap.colorspace_settings.name = 'Non-Color'
+        L(uv, tn.inputs['Vector'])
+        nm = nt.nodes.new('ShaderNodeNormalMap'); nm.inputs['Strength'].default_value = 1.0
+        L(tn.outputs['Color'], nm.inputs['Color']); prev = nm.outputs['Normal']
+    n4 = _noise(nt, 1.0 / 0.0012, 3.0, offset=off)
+    h = nt.nodes.new('ShaderNodeMath'); h.operation = 'ADD'
+    L(n4.outputs['Fac'], h.inputs[0]); L(mul(moss, 1.5), h.inputs[1])
+    _bump(nt, b, h.outputs['Value'], 0.25, 0.0006, prev)
+    return m
