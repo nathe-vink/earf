@@ -4398,7 +4398,7 @@
     "cool": 1000.0,
     "hot": 2600.0,
     "flame_floor": 0.25,
-    "tongues": 1.0,
+    "tongues": 0.9,
     "tongue_scale": 0.07,
     "tongue_edge": [
      0.47,
@@ -4416,7 +4416,7 @@
     "breakup_octaves": 2.0,
     "tongue_octaves": 4.0,
     "seed": 3,
-    "flame_gamma": 1.8,
+    "flame_gamma": 1.5,
     "through_glass": false
    },
    {
@@ -4448,8 +4448,8 @@
      ],
      "taper": 0.5,
      "power": 2.5,
-     "streak": 28.0,
-     "swirl": 0.08
+     "streak": 16.0,
+     "swirl": 0.0
     }
    },
    {
@@ -4481,8 +4481,8 @@
      ],
      "taper": 0.5,
      "power": 2.0,
-     "streak": 20.0,
-     "swirl": 0.08
+     "streak": 11.0,
+     "swirl": 0.0
     }
    },
    {
@@ -4514,8 +4514,8 @@
      ],
      "taper": 0.5,
      "power": 1.5,
-     "streak": 14.0,
-     "swirl": 0.08
+     "streak": 8.0,
+     "swirl": 0.0
     }
    },
    {
@@ -4547,8 +4547,8 @@
      ],
      "taper": 0.5,
      "power": 1.6,
-     "streak": 8.0,
-     "swirl": 0.08
+     "streak": 5.0,
+     "swirl": 0.0
     }
    },
    {
@@ -4579,7 +4579,8 @@
      1.0,
      5.0
     ],
-    "dust_mix": 0.8,
+    "dust_mix": 0.35,
+    "dust_color": "#4E4A46",
     "seed": 4
    },
    {
@@ -5061,7 +5062,7 @@
     0.529,
     0.6
    ],
-   "power_w": 1100.0,
+   "power_w": 1500.0,
    "color": "#FF7A2E",
    "radius_m": 0.5,
    "camera": false,
@@ -5106,7 +5107,7 @@
     0.39,
     1.4
    ],
-   "power_w": 800.0,
+   "power_w": 1200.0,
    "color": "#FF7A2E",
    "radius_m": 0.5,
    "camera": false,
@@ -5159,9 +5160,9 @@
     -0.302,
     0.1
    ],
-   "power_w": 1000.0,
+   "power_w": 500.0,
    "color": "#FF7A2E",
-   "radius_m": 0.5,
+   "radius_m": 0.3,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -5197,7 +5198,7 @@
     -0.329,
     -0.15
    ],
-   "power_w": 300.0,
+   "power_w": 150.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,

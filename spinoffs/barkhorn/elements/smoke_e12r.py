@@ -205,7 +205,9 @@ def marks(deck_len):
     # hole"; at the proof's size 12 mm cracks were under a pixel), the dust heavier
     # p11: fewer, longer cracks (p10's 22 round it read as "a flat, dried-mud pattern"), the powder nearer and heavier
     road = dict(module='smoke_el', fn='impact', centre=[0.0, 0.0], char=[1.0, 2.6], jag=0.8, soot=4.5, soot_mix=0.55,
-                cracks=[0.6, 6.0], crack_count=14.0, crack_width=0.036, crack_bump=0.9, dust=[1.0, 5.0], dust_mix=0.8,
+                cracks=[0.6, 6.0], crack_count=14.0, crack_width=0.036, crack_bump=0.9, dust=[1.0, 5.0], dust_mix=0.35,
+                dust_color='#4E4A46',   # p15 (p13/p14, all four critics: "a flat tan plane flush with the road, like a decal"):
+                                        # the powder thrown over the road, warmed by the fire's pool, was that plane
                 seed=4)
     return [piece('ext', on='prop0-kit', **road)] + \
         [piece('ext', module='smoke_el', fn='impact', on=f'prop{deck_len}-kit', centre=[0.0, 0.0], char=[0.5, 2.0],
@@ -265,7 +267,7 @@ def _backlight(a):
                                          (0.25, 0.25, 1.9, 1200.0, False),
                                          (-0.42, -0.30, 0.3, 150.0, False), (0.45, -0.25, 0.35, 200.0, False),
                                          (-0.45, 0.30, 0.4, 200.0, False), (0.0, -0.40, 0.12, 260.0, False),
-                                         (0.40, 0.35, 0.9, 1100.0, 'only'),
+                                         (0.40, 0.35, 0.9, 1500.0, 'only'),
                                          (-0.50, 0.32, 0.95, 600.0, False), (0.50, -0.28, 0.9, 600.0, False)]):
         out[f'flame{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK, 3)], w, '#FF7A2E',
@@ -273,14 +275,16 @@ def _backlight(a):
                                 camera=False, transmission=False, specular=0.0, volume=v)
     # p14 (p13, both: "a smoke base lit orange from below"; "only a faint glow from the fire underneath"): a second lamp
     # for the smoke alone, higher in the column's foot, behind the speaker
-    x, y, z, w = 0.25, 0.30, 1.7, 800.0
+    x, y, z, w = 0.25, 0.30, 1.7, 1200.0   # p15 (p14, both: "barely lit orange where it leaves the flames"): 800 -> 1200
     out['flame10'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3), round(x * math.sin(a) + y * math.cos(a), 3),
                                  round(z + I.SINK, 3)], w, '#FF7A2E', 0.5), camera=False, transmission=False, specular=0.0,
                           volume='only')
     # p13: and one low behind it, strong, so the speaker throws its shadow toward the lens across the rubble in front (p12
     # A: "a dark wedge of shadow would run from the product toward the camera"; every chunk lit on its far side)
-    for k, (x, y, z, w) in enumerate([(0.62, -0.22, 0.45, 2000.0), (0.35, -0.45, 0.35, 1000.0), (-0.55, 0.10, 0.4, 1000.0),
-                                      (-0.22, 0.42, 0.4, 1000.0), (0.0, -0.45, 0.15, 300.0), (0.20, 0.42, 0.35, 2500.0)]):
+    # p15 (p13/p14: "the pale crater floor and the lifted slabs on the left are flat planes ... like a decal"): the two lamps
+    # nearest the lens-side slabs (the left flank's and the foot's) halved, so those faces warm instead of bleaching tan
+    for k, (x, y, z, w) in enumerate([(0.62, -0.22, 0.45, 2000.0), (0.35, -0.45, 0.35, 1000.0), (-0.55, 0.10, 0.4, 500.0),
+                                      (-0.22, 0.42, 0.4, 1000.0), (0.0, -0.45, 0.15, 150.0), (0.20, 0.42, 0.35, 2500.0)]):
         out[f'ground{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
                                         round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK, 3)], w, '#FF7A2E',
                                        0.5 if w >= 1000.0 else 0.3),
@@ -305,7 +309,9 @@ def shot():
                                                                        # the glow cut into finer, harder-edged tongues
     # p14 (p13, both: "smooth vertical strips of even colour ... like glowing cards", "no clipped white-yellow core"): the
     # gaps between the tongues dark (a full cut), the core hotter and the tips redder, the glow gathered into the core
-    fire.update(tongues=1.0, tongue_octaves=4.0, hot=2600.0, cool=1000.0, flame_gamma=1.8, breakup=0.6)
+    fire.update(tongues=0.9, tongue_octaves=4.0, hot=2600.0, cool=1000.0, flame_gamma=1.5, breakup=0.6)
+    # p15 (p14's notes check: "a wall of flame on the left, a sliver on the right"): the cut and the gathering eased back
+    # so the right flank burns again; the hotter core and redder tips kept (p14 beat the live bridge 2-0)
     fire['density'] = 11.5                                            # p13: kept for meteor_h, whose soot is coded against a
                                                                       # 99.9th percentile 17 times lower (1.68 against 29.1: it
                                                                       # rises clear instead of pooling in the wake) but fills more
@@ -321,10 +327,14 @@ def shot():
     embers = [piece('scatter', count=n, radius=r, position=[0.0, 0.0, 0.9], material='glow', color=c, emit=e, seed=27 + i,
                     plume={'height': h, 'spread': [0.2, sp], 'lean': [0.45, 0.2], 'taper': 0.5, 'power': pw,
                            'streak': st, 'swirl': 0.08})
-              for i, (n, r, c, e, h, sp, pw, st) in enumerate([(26, [0.0010, 0.0025], '#FF9A40', 45.0, 1.2, 0.8, 2.5, 28.0),
-                                                               (14, [0.0009, 0.002], '#FF7A30', 28.0, 2.0, 1.1, 2.0, 20.0),
-                                                               (8, [0.0008, 0.002], '#D9481C', 14.0, 2.8, 1.4, 1.5, 14.0),
-                                                               (10, [0.0025, 0.005], '#FF9440', 26.0, 1.5, 1.3, 1.6, 8.0)])]
+              for i, (n, r, c, e, h, sp, pw, st) in enumerate([(26, [0.0010, 0.0025], '#FF9A40', 45.0, 1.2, 0.8, 2.5, 16.0),
+                                                               (14, [0.0009, 0.002], '#FF7A30', 28.0, 2.0, 1.1, 2.0, 11.0),
+                                                               (8, [0.0008, 0.002], '#D9481C', 14.0, 2.8, 1.4, 1.5, 8.0),
+                                                               (10, [0.0025, 0.005], '#FF9440', 26.0, 1.5, 1.3, 1.6, 5.0)])]
+    # p15 (p14, three critics: "long, curly streaks that look like a generation artifact", "curly spaghetti squiggles"):
+    # p13's lengths back, and straight (no swirl)
+    for e in embers:
+        e['plume']['swirl'] = 0.0
     # p14 (p13, both: "round dots, all the same size, with no motion blur", "short streaks at a 1/48 s shutter"): each lot
     # drawn out further along its path, still straight (p12's swirl read as "wires")
     # p13 (p12, both: "thin white wiggly spark trails ... like glowing wires", "short tapered orange dashes"): dimmer and
