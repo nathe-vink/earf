@@ -62,17 +62,17 @@ COUNTER_LIFE = dict(
 VIEWS = {
     # the room from the door at night: standing just inside, by the host stand, down the room's length to the altar
     'door': {'title': 'the room from the door, at night',
-             'camera': {'position': [2.40, 1.60, 1.35], 'target': [16.5, 3.2, 1.50], 'lens_mm': 32, 'level': True,
+             'camera': {'position': [1.90, 1.20, 1.38], 'target': [16.5, 3.2, 1.20], 'lens_mm': 28, 'level': True,
                         'fstop': 5.6, 'focus': [8.0, 3.0, 1.2]},
              'base': 'bar-smoke', 'settings': dict(exposure=4.0, altar_w=300.0, altar_cone=22.0, listen_key=1.0, listen_rim=5.0), 'life': COUNTER_LIFE},
     # the bar counter: from the banquette's end, along the zinc to the decks and the pair
     'bar': {'title': 'the bar counter',
             'camera': {'position': [3.30, 2.40, 1.28], 'target': [7.4, 5.5, 1.40], 'lens_mm': 35, 'level': True,
                        'fstop': 4.0, 'focus': [6.6, 4.4, 1.2]},
-            'base': 'bar-smoke', 'settings': dict(exposure=3.4, bar_key=2.6, bar_rim=10.0, spk_niche_strip=0.8, niche_strip=1.5), 'life': COUNTER_LIFE},
+            'base': 'bar-smoke', 'settings': dict(exposure=3.4, bar_key=1.4, bar_rim=8.0, spk_niche_strip=0.8, niche_strip=1.5), 'life': COUNTER_LIFE},
     # the listening room: from behind the tub chairs, the pair on the altar
     'listening': {'title': 'the listening room',
-                  'camera': {'position': [11.95, 2.30, 1.10], 'target': [16.6, 3.05, 1.00], 'lens_mm': 28, 'level': True,
+                  'camera': {'position': [11.95, 1.05, 1.25], 'target': [16.6, 3.3, 1.00], 'lens_mm': 26, 'level': True,
                              'fstop': 4.0, 'focus': [15.5, 3.0, 1.0]},
                   'base': 'listening-smoke', 'settings': dict(exposure=4.7, screen_glow=0.004, listen_key=0.8, listen_rim=5.0, altar_w=60.0,
                                                        altar_cone=12.0, altar_z=0.7, niche_strip=0.07, haze=0.004,
@@ -102,8 +102,8 @@ VIEWS = {
              # p2 (4.5, 5.0: two thirds empty wall, the door unreadable, the stand pale): nearer and higher on 45 mm,
              # looking down past the bowl to the door and the vestibule's glass (a Smoke bowl, tried, read as a dark hole)
              # p3 (4.5, 5.0: still no door, only a cream strip and a void): swung round to the shopfront glass
-             'camera': {'position': [round(RP.HOST['x'] + 1.25, 3), round(RP.HOST['y'] + 0.85, 3), 1.38],
-                        'target': [0.3, 1.45, 1.10], 'lens_mm': 40, 'level': True,
+             'camera': {'position': [round(RP.HOST['x'] + 0.95, 3), round(RP.HOST['y'] + 0.65, 3), 1.40],
+                        'target': [0.3, 1.6, 1.05], 'lens_mm': 45, 'level': True,
                         'fstop': 2.8, 'focus': [RP.HOST['x'], RP.HOST['y'], RP.HOST['top'] + 0.04]},
              'base': 'coins-door', 'settings': dict(exposure=5.0, host_w=5.0, host_cone=22.0, coin_edge='reeded', street_lamp=160.0),
              'retouch': dict(darken={'oak-host': 0.3}, set={'foil': {'Base Color': '#8A6A3A', 'Roughness': 0.24, 'Metallic': 1.0}}),
@@ -114,7 +114,7 @@ VIEWS = {
                # it, the street running away, the sky still blue over it, the room already lit
                'camera': {'position': [-11.0, -1.2, 1.50], 'target': [0.0, 3.6, 1.9], 'lens_mm': 50, 'level': True,
                           'fstop': 8.0, 'focus': [0.0, 3.05, 1.6]},
-               'base': 'street', 'settings': dict(exposure=1.6, sky=0.25, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE', wb=4300,
+               'base': 'street', 'settings': dict(exposure=2.0, sky=0.25, sky_zenith='#2A3F6A', sky_horizon='#7A8AAE', wb=4300,
                                                 street_lamp=150.0, etch_glow=0.03, pendant_w=300.0, rw_w=60.0,
                                                 screen_glow=0.8, records_fill=True),
                # the coordinator's p1 note: the street needs life and SF furniture: a street tree at the kerb, a hydrant
