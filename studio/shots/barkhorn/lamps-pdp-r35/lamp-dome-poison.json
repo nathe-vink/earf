@@ -14,7 +14,7 @@
    0.0,
    1.42
   ],
-  "lens_mm": 75,
+  "lens_mm": 88,
   "level": false,
   "fstop": 5.6,
   "focus": [
@@ -45,7 +45,7 @@
      ]
     ],
     "flavour": "poison",
-    "shade_glow": 0.81,
+    "shade_glow": 1.26,
     "lamp_w": 15.0,
     "materials": {
      "liner": {
@@ -181,6 +181,50 @@
    "irradiance": 0.8,
    "color": 3600,
    "camera": false
+  },
+  "edge_r": {
+   "type": "area",
+   "size_m": [
+    0.2,
+    0.8999999999999999
+   ],
+   "position": [
+    0.42,
+    0.18,
+    1.56
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.53
+   ],
+   "irradiance": 5.4,
+   "color": 4300,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
+  },
+  "edge_l": {
+   "type": "area",
+   "size_m": [
+    0.2,
+    0.8999999999999999
+   ],
+   "position": [
+    -0.42,
+    0.22,
+    1.5
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.49
+   ],
+   "irradiance": 3.0,
+   "color": 4300,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
   }
  },
  "render": {

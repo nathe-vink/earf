@@ -53,14 +53,27 @@ def lift(v, dz):
     return [v[0], v[1], round(v[2] + dz, 4)]
 
 
+def strip(pos, target, irr, size=(0.08, 0.6)):
+    """A tall narrow softbox, unseen, that draws a black part's edge as a line of light (pass 2, the coordinator: the
+    critics read the fins, the collar and the base as flat black cut-outs)."""
+    # specular only: black anodising shows a light only as its reflection, and a diffuse share greys the paper
+    return {'type': 'area', 'size_m': [size[0] * 2.5, size[1] * 1.5], 'position': pos, 'target': target,
+            'irradiance': irr * 3.0, 'color': 4300, 'camera': False, 'specular': 1.0, 'diffuse': 0.0}
+
+
 def dome(flavour):
     s = site('lamp-dome')
     for p in s['set']['props']:
         if p.get('module') == 'earf_moon':
             p['flavour'] = flavour
-            p['shade_glow'] = round(p.get('shade_glow', 0.9) * GAIN[flavour] / GAIN['ember'], 3)
+            # pass 2: the shade glows as the rows' (lamps-domes 0.75 at the rows' framing; the hero's 0.9 read as
+            # opaque plastic seen close)
+            p['shade_glow'] = round(1.4 * GAIN[flavour] / GAIN['ember'], 3)
     c = s['camera']
     c['target'] = lift(c['target'], LIFT_DOME)
+    c['lens_mm'] = 88                                       # pass 2: the lamp fills more of the tall frame
+    s['lights']['edge_r'] = strip([0.42, 0.18, 1.56], [0.0, 0.0, 1.53], 1.8)
+    s['lights']['edge_l'] = strip([-0.42, 0.22, 1.50], [0.0, 0.0, 1.49], 1.0)
     s['title'] = f'{TITLES["dome"]}, its product page: {flavour.title()} (round 35)'
     return s
 
@@ -81,6 +94,7 @@ def orb(flavour):
             L['position'] = lift(L['position'], LIFT_ORB)
         elif 'target' in L and k in ('key', 'fill', 'back'):
             L['target'] = lift(L['target'], LIFT_ORB)
+    s['lights']['edge_l'] = strip([-0.42, 0.18, 0.08], [0.0, 0.0, 0.05], 1.2, size=(0.6, 0.06))   # pass 2: the base's edge
     s['title'] = f'{TITLES["orb"]}, its product page: {flavour.title()} (round 35)'
     return s
 
@@ -116,8 +130,11 @@ def south(flavour):
                  'target': [0.0, 0.0, CEIL], 'power_w': round(WASH_W, 3), 'color': 2700, 'camera': False}
     L['bowl'] = {'type': 'point', 'position': [0.0, 0.0, RIM - 0.05], 'power_w': round(WALL_W * g, 3), 'radius_m': 0.05,
                  'color': POOL[flavour], 'camera': False, 'transmission': False, 'specular': 0.0}
-    s['camera'] = {'position': [-0.16, -1.15, 1.72], 'target': [0.0, 0.0, 2.40], 'lens_mm': 40, 'level': True,
+    # pass 2: larger and from nearer eye level, so the bowl and its wash read rather than its underside
+    s['camera'] = {'position': [-0.22, -1.00, 1.92], 'target': [0.0, 0.0, 2.33], 'lens_mm': 56, 'level': True,
                    'fstop': 5.6, 'focus': [0.0, -0.05, 2.15]}
+    L['edge_r'] = strip([0.45, 0.25, 2.05], [0.0, 0.0, 2.05], 1.8, size=(0.08, 0.9))
+    L['edge_l'] = strip([-0.45, 0.30, 2.30], [0.0, 0.0, 2.30], 1.0, size=(0.08, 0.9))
     s['title'] = f'{TITLES["south"]}, its product page: {flavour.title()} (round 35)'
     return s
 

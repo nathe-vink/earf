@@ -182,6 +182,28 @@
    "color": 4300,
    "camera": false,
    "specular": 1.0
+  },
+  "edge_l": {
+   "type": "area",
+   "size_m": [
+    1.5,
+    0.09
+   ],
+   "position": [
+    -0.42,
+    0.18,
+    0.08
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.05
+   ],
+   "irradiance": 3.5999999999999996,
+   "color": 4300,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
   }
  },
  "render": {

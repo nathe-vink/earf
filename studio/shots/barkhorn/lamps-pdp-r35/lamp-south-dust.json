@@ -5,16 +5,16 @@
  ],
  "camera": {
   "position": [
-   -0.16,
-   -1.15,
-   1.72
+   -0.22,
+   -1.0,
+   1.92
   ],
   "target": [
    0.0,
    0.0,
-   2.4
+   2.33
   ],
-  "lens_mm": 40,
+  "lens_mm": 56,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -233,6 +233,50 @@
    "camera": false,
    "transmission": false,
    "specular": 0.0
+  },
+  "edge_r": {
+   "type": "area",
+   "size_m": [
+    0.2,
+    1.35
+   ],
+   "position": [
+    0.45,
+    0.25,
+    2.05
+   ],
+   "target": [
+    0.0,
+    0.0,
+    2.05
+   ],
+   "irradiance": 5.4,
+   "color": 4300,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
+  },
+  "edge_l": {
+   "type": "area",
+   "size_m": [
+    0.2,
+    1.35
+   ],
+   "position": [
+    -0.45,
+    0.3,
+    2.3
+   ],
+   "target": [
+    0.0,
+    0.0,
+    2.3
+   ],
+   "irradiance": 3.0,
+   "color": 4300,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
   }
  },
  "render": {
