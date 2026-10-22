@@ -51,7 +51,13 @@ greys the faces that look up in drifts (see _dust); for debris, `flat` [lo, hi] 
 `size_max` the largest (0.16 m as before) and `fine_size` the grit's range (5 to 30 mm as before); for the lips (jag),
 `jag_base` and `jag_pow` each corner's tear, up to jag * jag_base with its share of small ones set by jag_pow (0.6 and
 1.7 as before: p12's notes check, "the dark furrow on the left has a clean, straight edge"); `under_scale` the
-sub-base's texture scale (0.35 as before: on a plate a foot across it read as one flat colour, "plank-like")."""
+sub-base's texture scale (0.35 as before: on a plate a foot across it read as one flat colour, "plank-like").
+
+E12r p19 (p18, every critic: "flat tan patches with hard edges ... like decals"; hiding the trench took them away, so
+they were its own faces): where a lip tore far back, the top 8 cm of the trench's wall is a long shallow slope, and the
+asphalt course (`course`, `course_value`) covered all of it as one pale plane that no impact mark reaches (a mark takes
+an object's first material). `course_steep` (trench, degrees) keeps the course to faces at least that steep, the broken
+edge itself; the shallower ones take the floor's material and its marks. Off by default."""
 import math, random
 
 import bmesh
@@ -136,12 +142,16 @@ def trench(bpy, name, p, kit):
             z -= p.get('grooves', 0.0) * abs(noise.noise(Vector((x * 14.0 + sd, y * 0.35, 2.0)))) * (dep / max(D, 1e-3))
             row.append(bm.verts.new((x, y, z)))
         rows.append(row)
+    steep = math.cos(math.radians(p['course_steep'])) if p.get('course_steep') else None
     for j in range(ny):
         for i in range(nx):
             f = bm.faces.new((rows[j][i], rows[j][i + 1], rows[j + 1][i + 1], rows[j + 1][i]))
-            # with `jag`, the asphalt course in section along the top of each wall (its 8 cm, binder and stones)
+            # with `jag`, the asphalt course in section along the top of each wall (its 8 cm, binder and stones); with
+            # `course_steep`, only where the wall is at least that steep (see the docstring)
             if p.get('jag') and f.calc_center_median().z > -0.08 and abs(-1.0 + 2.0 * (i + 0.5) / nx) > W / lip:
-                f.material_index = 1
+                f.normal_update()
+                if steep is None or abs(f.normal.z) < steep:
+                    f.material_index = 1
     mat = _mat(bpy, kit, p.get('texture', 'gravel_concrete'), p.get('tex_scale', 1.2), p.get('tint', '#2E2A26'),
                p.get('tint_mix', 0.35), 1.0, 2.0, p.get('value', 1.0))
     q = {k: v for k, v in p.items() if k in ('position', 'rotate')}

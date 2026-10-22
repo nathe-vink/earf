@@ -3220,11 +3220,12 @@
     "lip": 0.75,
     "depth": 0.34,
     "ramp": 5.0,
-    "value": 0.12,
+    "value": 0.08,
     "jag": 0.6,
     "jag_seed": 9,
     "jag_base": 0.85,
-    "jag_pow": 1.1
+    "jag_pow": 1.1,
+    "course_steep": 40.0
    },
    {
     "kind": "kit",
@@ -3622,6 +3623,69 @@
     "dust": 0.15,
     "forward": 0.55,
     "ahead": 3.5
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "band": [
+     -0.6,
+     1.3
+    ],
+    "count": 520,
+    "reach": 0.6,
+    "inner": 0.78,
+    "z": 0.0,
+    "seed": 53,
+    "rotate_z": 180.0,
+    "crumble": 0.3,
+    "drop": true,
+    "size_max": 0.17,
+    "top_value": 0.13,
+    "under_tint": "#3E4144",
+    "under_value": 0.18,
+    "under_scale": 3.0,
+    "side": "asphalt_02",
+    "side_value": 0.13,
+    "top_rough": 1.0,
+    "side_rough": 1.0,
+    "flat_tops": true,
+    "smooth": 30.0,
+    "rough": 0.1,
+    "dust": 0.25,
+    "dust_color": "#8C867E",
+    "flat": [
+     0.16,
+     0.32
+    ],
+    "size_power": 2.2
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "impact",
+    "fn": "debris",
+    "band": [
+     -0.6,
+     1.3
+    ],
+    "count": 1000,
+    "reach": 0.65,
+    "inner": 0.75,
+    "z": 0.0,
+    "seed": 59,
+    "rotate_z": 180.0,
+    "fine": true,
+    "fine_size": [
+     0.006,
+     0.04
+    ],
+    "drop": true,
+    "under_tint": "#2A2B2C",
+    "under_value": 0.3,
+    "top_value": 0.18,
+    "dust": 0.15
    },
    {
     "kind": "kit",

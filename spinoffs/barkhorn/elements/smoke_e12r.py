@@ -149,11 +149,16 @@ def torn(gouge):
     for p in gouge:
         fn = p.get('fn')
         if fn == 'trench':
-            p['value'] = 0.12                                        # p10: p9's floor "a smooth beige slope"; p14 (p13,
+            p['value'] = 0.08                                        # p10: p9's floor "a smooth beige slope"; p14 (p13,
             p['ragged'] = 0.14                                       # both: "a flat, smooth, sand-coloured patch with a
                                                                      # crisp outline ... a decal rather than a hole"): darker
                                                                      # and rougher, so the ground lamps warm it, not paint it
+                                                                     # (0.12); p19: darker again (p18's tan planes, below)
             p.update(JAG)                                            # p9: "too linear on both sides"
+            p['course_steep'] = 40.0                                 # p19 (p18, every critic: "flat tan patches with hard
+                                                                     # edges ... like decals"): the course only on the
+                                                                     # broken edge, the torn-back slopes the floor's (and
+                                                                     # charred by its marks)
         elif fn == 'slabs':
             p.update(ASPHALT, crumble=1.0)                           # p7: "blocks with bevelled edges"
             if p['count'] == 90:                                     # along the lips: thick crumbling lumps (p5: "thin,
@@ -198,6 +203,15 @@ def torn(gouge):
     rim.append(piece('ext', module='impact', fn='debris', band=[-1.2, 2.2], count=1500, reach=2.4, inner=0.45, z=0.0,
                      seed=47, rotate_z=I.FLIP, fine=True, fine_size=[0.005, 0.05], drop=True, under_tint='#2A2B2C',
                      under_value=0.3, top_value=0.18, dust=0.15, forward=0.55, ahead=3.5))
+    # p19 (p18, every critic: "light tan 'exposed base' patches look like flat decals: they have no depth, no stepped edge
+    # and no loose material in them"; hiding the trench took them away: they are its walls' torn-back slopes either side
+    # of the speaker and up its end in front (the trench's own floor at 0.8 to 1.35 m out, 0.3 to 1.2 m on), which the
+    # rubble above, strewn over 2.3 m, hardly reaches): chunks and grit dropped thick on them
+    rim.append(piece('ext', module='impact', fn='debris', band=[-0.6, 1.3], count=SLOPE[0], reach=0.6, inner=0.78, z=0.0,
+                     seed=53, rotate_z=I.FLIP, crumble=0.3, drop=True, size_max=0.17, **ASPHALT, **CHUNKS))
+    rim.append(piece('ext', module='impact', fn='debris', band=[-0.6, 1.3], count=SLOPE[1], reach=0.65, inner=0.75, z=0.0,
+                     seed=59, rotate_z=I.FLIP, fine=True, fine_size=[0.006, 0.04], drop=True, under_tint='#2A2B2C',
+                     under_value=0.3, top_value=0.18, dust=0.15))
     return gouge + pit + rim + [piece('ext', module='impact', fn='debris', y0=I.Y0 + 6.0, y1=-0.9, count=260, reach=0.6,
                                       inner=0.0, z=-0.32, seed=19, rotate_z=I.FLIP, crumble=0.35, **ASPHALT, **CHUNKS)]
 
@@ -220,6 +234,7 @@ SOOT = '#1B1A19'
 # of the speaker, flat and lit hard by the flames): the pit's rubble denser so no flat slope shows, and the trench floor
 # charred wider (0.8 to 2.6 m) and sooted further, as the ground nearest a fire is
 PIT = (200, 360)                      # the pit's rubble: each band in front, and either side (p15: 85, 170)
+SLOPE = (520, 1000)                   # p19: the chunks and the grit over the trench's torn-back slopes (see torn)
 # p16e (p16d's tests: the pale bowl round the speaker's foot stayed tan whatever its colour, tint or char, and with the
 # ground lamps off it went a dim brown): those lamps, 10 to 30 cm over the pit's smooth floor, clipped it to one flat
 # colour. At 0.4 of their power the floor kept its grain, but both critics then found the road unlit by the fire.
