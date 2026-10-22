@@ -110,12 +110,16 @@ CLOUDS = [  # key, number, name, icon, the acrylic, its line, its cover (the loo
 SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabinet'),
         ('Depth', '423 mm overall, 420 mm at the cabinet'),
         ('Weight', 'About 72 kg; 62 kg with the horn lifted off'),
-        ('Woofer', "15-inch, with two ports in the front's lower corners"), ('Horn driver', '2-inch compression driver'),
-        ('Horn', "Cast resin, the cabinet's full depth, its cap 3 mm proud"),
-        ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels, crossed at 800 Hz'),
+        ('Woofer', "FaitalPRO 15PR400, 15-inch, with two ports in the front's lower corners"),
+        ('Horn driver', 'B&amp;C DE1085TN, 2-inch compression driver'),
+        ('Horn', "Tinted cast acrylic formed from the cabinet's own sheet, a turned acrylic throat; the cabinet's full depth"),
+        ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
+        ('Bass', 'To about 49 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
+        ('Loudness', 'Up to about 115 dB at 1 m, each'),
         ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
         ('Lining', 'Recycled polyester batts in white voile, 100 mm at the top and the bottom'),
-        ('Price', 'On request: each pair is made to order')]
+        ('Price', 'On request: each pair is made to order'),
+        ('Figures', 'Design figures, from the drawings and their simulation; measured ones follow with the first pair')]
 MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn above it',
            'The corner: two 20 mm walls, cast in one colour and cemented.'),
           ('amp', 'dust', "Hypex's FA122 amplifier on the back of a Dust cabinet", 'The amplifier, built in: Hypex&rsquo;s FA122.'),
@@ -430,6 +434,9 @@ def make_images(sources=None):
               os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions2', 'concepts', 'concept-r3-dusk.png')),
         lambda p: save(Image.open(p), 'tt-concept.jpg', None, q=88))
     one(os.path.join(TTR, 'proof', 'studio-haze.png'), lambda p: save(Image.open(p), 'tt-proof-studio.jpg', None, q=88))
+    # Mother EARF: the mark made in acrylic (round 33c's multicolour globe, by day)
+    one(os.path.join(ROOT, 'renders', '2026-10-20', 'barkhorn', 'globe-colour', 'final-day-r2.png'),
+        lambda p: (save(Image.open(p), 'mother-globe.jpg', 1600, q=86), save(Image.open(p), 'mother-globe-800.jpg', 800, q=84)))
     # the coins, in the icons' order, one sheet for each ground (round 30's renders, at 800 px on E.PAPER and E.NIGHT)
     order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
     for tag, ground, dark in (('paper', (242, 238, 232), False), ('night', (17, 16, 19), True)):
@@ -1067,6 +1074,15 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 .pair img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
 .pair figcaption { font-size: 15px; color: var(--muted) } .pair figcaption b { color: var(--ink); font-weight: 600; margin-right: 6px }
 @media (max-width: 720px) { .pair { grid-template-columns: 1fr } }
+.mother-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; align-items: center }
+@media (max-width: 860px) { .mother-grid { grid-template-columns: minmax(0, 1fr) } }
+.mother-fig { margin: 0; display: grid; gap: 10px }
+.mother-fig img { width: 100%; height: auto; display: block; border-radius: 6px }
+.mother-fig figcaption { font-size: 14px; color: var(--muted) }
+.promise { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px }
+.promise li { display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 1px solid var(--rule); min-width: 0 }
+.promise b { font-weight: 600; font-size: 18px }
+.promise span { color: var(--muted); line-height: 1.6 }
 .contact { display: grid; gap: 18px }
 .contact .addr { display: flex; flex-wrap: wrap; align-items: center; gap: 12px }
 .contact code { font: 500 clamp(20px, 3vw, 30px)/1.2 var(--mono); user-select: all; word-break: break-all }
@@ -1074,6 +1090,8 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 footer { padding-block: 40px 56px; border-top: 1px solid var(--rule) }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between }
 footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
+.foot-nav { display: flex; flex-wrap: wrap; gap: 8px 22px }
+.foot-nav a { font-size: 15px; color: var(--ink); text-underline-offset: 4px }
 
 /* a speaker's page */
 .crumbs { padding-block: 22px 0; font-size: 15px; color: var(--muted) }
@@ -1317,6 +1335,24 @@ __HABITATS__
       <figcaption class="wrap"><span>Covers on, by a tall window.</span><span>Each stands 1293&nbsp;mm tall and 560&nbsp;mm wide.</span></figcaption></figure>
   </section>
 
+  <section class="band mother" id="mother-earf"><div class="wrap">
+    <div class="head"><div><p class="eyebrow">Mother EARF</p><h2>Everything comes home.</h2>
+      <p>We name our things after the layers of the Earth, so we keep a promise to it. We call the promise Mother EARF.</p></div></div>
+    <div class="mother-grid">
+    <figure class="mother-fig"><img src="img/mother-globe.jpg" srcset="img/mother-globe-800.jpg 800w, img/mother-globe.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw"
+      width="1600" height="1067" loading="lazy" alt="The EARF globe made in acrylic: tinted discs slotted into a sphere, red, orange, yellow, green, blue and violet, on a black base">
+      <figcaption>The mark, made in the same acrylic.</figcaption></figure>
+    <ol class="promise">
+      <li><b>Acrylic that has lived before.</b><span>Cast acrylic can be broken back down to the liquid it was cast from and cast again. We mean to
+        make our cabinets from sheet made that way, in our eight colours, as its makers bring them to 20&nbsp;mm.</span></li>
+      <li><b>Made to be mended.</b><span>Drivers and amplifiers any good technician knows. Screws, not glue, wherever a part may one day
+        need to come out. The lamps&rsquo; batteries change with a screwdriver.</span></li>
+      <li><b>Taken back at the end.</b><span>When you&rsquo;re done with a piece, send it home. What still works carries on; the acrylic
+        goes back to be cast again.</span></li>
+    </ol>
+    </div>
+  </div></section>
+
   <section class="band" id="contact"><div class="wrap contact">
     <p class="eyebrow">Enquiries</p>
     <h2>Prices, pairs and partnerships.</h2>
@@ -1415,6 +1451,7 @@ __TURNTABLE__
 
 <footer><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home">__WORD__</a>
+  <nav class="foot-nav" aria-label="More"><a href="#mother-earf">Mother EARF</a><a href="#contact">Enquiries</a></nav>
   <p>Atmosphere horn loudspeakers &middot; In development, not yet for sale; the pictures are renders &middot; &copy; 2026 EARF</p>
 </div></footer>
 
@@ -1596,8 +1633,9 @@ const PRODUCTS = [
     num: c => `Atmosphere ${c.num}`, copy: c => c.line, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
     card: k => { const o = BY[k].views.off; return o.tall || o.card || o; }, unit: 'each pair made to order', ask: 'Enquire about a pair',
     facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Tinted acrylic, formed from the cabinet&rsquo;s own sheet'],
-      ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`], ['Amplifier', 'Hypex FusionAmp FA122, built in'], ['Inputs', 'XLR, RCA, AES, S/PDIF, optical'],
-      ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg']],
+      ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`], ['Drivers', '15-inch woofer; 2-inch compression driver on the horn'],
+      ['Amplifier', 'Hypex FusionAmp FA122, built in: 2 &times; 125 W, crossed at 1 kHz'], ['Bass', 'To about 49 Hz (&minus;3 dB) before the room; a design figure, measured with the first pair'],
+      ['Inputs', 'XLR, RCA, AES, S/PDIF, optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg']],
     title: c => `Atmosphere in ${c.name}` },
   ...Object.entries(D.lamps).map(([id, L]) => ({ id, line: 'lighting', lineName: 'Lighting', route: L.route || id, kind: L.kind, name: () => L.name,
     num: () => `Lighting &middot; ${L.kind}`, copy: () => L.line, views: k => (L.colours[k] || {}).views, VIEWS: LAMP_VIEWS[id],
