@@ -158,11 +158,11 @@ def torn(gouge):
     # loose rubble down the trench's floor (p3: "as smooth and clean as the undamaged road"), clear of the speaker, and
     # over the floor of its pit in front of it, on the slope up to the road in three bands (p5: "a smooth, orange-lit
     # sloped floor with straight edges ... a clean tray")
-    pit = [piece('ext', module='impact', fn='debris', y0=y0, y1=y0 + 0.75, count=85, reach=0.55, inner=0.0, z=z,
+    pit = [piece('ext', module='impact', fn='debris', y0=y0, y1=y0 + 0.75, count=PIT[0], reach=0.55, inner=0.0, z=z,
                  seed=31 + i, rotate_z=I.FLIP, crumble=0.3, **ASPHALT, **CHUNKS)
            for i, (y0, z) in enumerate([(-0.6, -0.3), (-0.35, -0.2), (-0.1, -0.09)])]
     # and either side of it, where the low flames light the pit's floor (p6's look: two flat orange shelves)
-    pit.append(piece('ext', module='impact', fn='debris', band=[-0.45, 0.45], count=170, reach=0.6, inner=0.4, z=I.SINK,
+    pit.append(piece('ext', module='impact', fn='debris', band=[-0.45, 0.45], count=PIT[1], reach=0.6, inner=0.4, z=I.SINK,
                      seed=35, rotate_z=I.FLIP, crumble=0.3, **ASPHALT, **CHUNKS))
     # p10: a rim of plates heaved up round the speaker's foot on both sides (p9's notes check: "on the right there is
     # almost no broken rim, so it does not read as a rough hole around the speaker"), clear of it (the lip at 0.62
@@ -195,6 +195,24 @@ def deck():
     return [road] + rest
 
 
+# p16c (p15's tan patch, the road just outside the crater): smoke_el.impact's soot defaults to a warm brown (#4A423B)
+# mixed in up to 55 % over a smooth gradient, which flattened the asphalt into one tan wash under the firelight; soot is
+# near-black, and the powder over it in finer patches
+SOOT = '#1B1A19'
+# p16d (p16c's probe, under the scorch decal: the tan triangle is the trench's own floor, sloping up to the pit in front
+# of the speaker, flat and lit hard by the flames): the pit's rubble denser so no flat slope shows, and the trench floor
+# charred wider (0.8 to 2.6 m) and sooted further, as the ground nearest a fire is
+PIT = (200, 360)                      # the pit's rubble: each band in front, and either side (p15: 85, 170)
+# p16e (p16d's tests: the pale bowl round the speaker's foot stayed tan whatever its colour, tint or char, and with the
+# ground lamps off it went a dim brown): those lamps, 10 to 30 cm over the pit's smooth floor, clipped it to one flat
+# colour. At 0.4 of their power the floor kept its grain, but both critics then found the road unlit by the fire.
+# p16f (p16e's critics, both 5: "the fire barely lights anything around it", "a soft warm pool spreading from the base
+# of the flames on every side ... no straight edges"): the same lamps raised 45 cm and made large (1 m), so their light
+# falls as a wide soft pool instead of hot spots on the pit's floor, at 0.8 of p15's power
+GROUND = 0.8                          # the ground lamps' power against p15's (2000, 1000, 500, 1000, 150, 2500 W); p16e: 0.4
+GROUND_LIFT, GROUND_RADIUS = 0.45, 1.0
+
+
 def marks(deck_len):
     """The blow's marks on the road round the speaker (smoke_el.impact on the deck's slabs either side and in front,
     and on the trench): charred black near it, sooted further, cracked out from it and round it, and dusted with what
@@ -208,10 +226,10 @@ def marks(deck_len):
                 cracks=[0.6, 6.0], crack_count=14.0, crack_width=0.036, crack_bump=0.9, dust=[1.0, 5.0], dust_mix=0.35,
                 dust_color='#4E4A46',   # p15 (p13/p14, all four critics: "a flat tan plane flush with the road, like a decal"):
                                         # the powder thrown over the road, warmed by the fire's pool, was that plane
-                seed=4)
+                soot_color=SOOT, dust_scale=0.22, seed=4)
     return [piece('ext', on='prop0-kit', **road)] + \
-        [piece('ext', module='smoke_el', fn='impact', on=f'prop{deck_len}-kit', centre=[0.0, 0.0], char=[0.5, 2.0],
-               jag=0.7, soot=3.0, soot_mix=0.5)]
+        [piece('ext', module='smoke_el', fn='impact', on=f'prop{deck_len}-kit', centre=[0.0, 0.0], char=[0.8, 2.6],
+               jag=0.7, soot=3.5, soot_mix=0.6, soot_color=SOOT)]
 
 
 def firelight():
@@ -286,8 +304,8 @@ def _backlight(a):
     for k, (x, y, z, w) in enumerate([(0.62, -0.22, 0.45, 2000.0), (0.35, -0.45, 0.35, 1000.0), (-0.55, 0.10, 0.4, 500.0),
                                       (-0.22, 0.42, 0.4, 1000.0), (0.0, -0.45, 0.15, 150.0), (0.20, 0.42, 0.35, 2500.0)]):
         out[f'ground{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
-                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK, 3)], w, '#FF7A2E',
-                                       0.5 if w >= 1000.0 else 0.3),
+                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK + GROUND_LIFT, 3)],
+                                       round(w * GROUND, 1), '#FF7A2E', GROUND_RADIUS),
                                  camera=False, transmission=False, specular=0.0, volume=False, smoke_shadow=False,
                                  receivers=['prop*'])
     return out

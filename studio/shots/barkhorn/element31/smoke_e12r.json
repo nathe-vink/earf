@@ -3411,7 +3411,7 @@
     "fn": "debris",
     "y0": -0.6,
     "y1": 0.15000000000000002,
-    "count": 85,
+    "count": 200,
     "reach": 0.55,
     "inner": 0.0,
     "z": -0.3,
@@ -3444,7 +3444,7 @@
     "fn": "debris",
     "y0": -0.35,
     "y1": 0.4,
-    "count": 85,
+    "count": 200,
     "reach": 0.55,
     "inner": 0.0,
     "z": -0.2,
@@ -3477,7 +3477,7 @@
     "fn": "debris",
     "y0": -0.1,
     "y1": 0.65,
-    "count": 85,
+    "count": 200,
     "reach": 0.55,
     "inner": 0.0,
     "z": -0.09,
@@ -3512,7 +3512,7 @@
      -0.45,
      0.45
     ],
-    "count": 170,
+    "count": 360,
     "reach": 0.6,
     "inner": 0.4,
     "z": -0.3,
@@ -4581,6 +4581,8 @@
     ],
     "dust_mix": 0.35,
     "dust_color": "#4E4A46",
+    "soot_color": "#1B1A19",
+    "dust_scale": 0.22,
     "seed": 4
    },
    {
@@ -4594,12 +4596,13 @@
      0.0
     ],
     "char": [
-     0.5,
-     2.0
+     0.8,
+     2.6
     ],
     "jag": 0.7,
-    "soot": 3.0,
-    "soot_mix": 0.5
+    "soot": 3.5,
+    "soot_mix": 0.6,
+    "soot_color": "#1B1A19"
    }
   ]
  },
@@ -5120,11 +5123,11 @@
    "position": [
     0.603,
     0.262,
-    0.15
+    0.6
    ],
-   "power_w": 2000.0,
+   "power_w": 1600.0,
    "color": "#FF7A2E",
-   "radius_m": 0.5,
+   "radius_m": 1.0,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -5139,11 +5142,11 @@
    "position": [
     0.563,
     -0.09,
-    0.05
+    0.5
    ],
-   "power_w": 1000.0,
+   "power_w": 800.0,
    "color": "#FF7A2E",
-   "radius_m": 0.5,
+   "radius_m": 1.0,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -5158,11 +5161,11 @@
    "position": [
     -0.47,
     -0.302,
-    0.1
+    0.55
    ],
-   "power_w": 500.0,
+   "power_w": 400.0,
    "color": "#FF7A2E",
-   "radius_m": 0.3,
+   "radius_m": 1.0,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -5177,11 +5180,11 @@
    "position": [
     -0.447,
     0.157,
-    0.1
+    0.55
    ],
-   "power_w": 1000.0,
+   "power_w": 800.0,
    "color": "#FF7A2E",
-   "radius_m": 0.5,
+   "radius_m": 1.0,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -5196,11 +5199,11 @@
    "position": [
     0.307,
     -0.329,
-    -0.15
+    0.3
    ],
-   "power_w": 150.0,
+   "power_w": 120.0,
    "color": "#FF7A2E",
-   "radius_m": 0.3,
+   "radius_m": 1.0,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -5215,11 +5218,11 @@
    "position": [
     -0.14,
     0.444,
-    0.05
+    0.5
    ],
-   "power_w": 2500.0,
+   "power_w": 2000.0,
    "color": "#FF7A2E",
-   "radius_m": 0.5,
+   "radius_m": 1.0,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
