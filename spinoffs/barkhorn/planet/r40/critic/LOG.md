@@ -59,3 +59,24 @@ Read test p3: all three renders ("smooth featureless mannequins").
 Three rounds per frame reached. No frame reached 6 on both critics, so none was rendered at full size. Kept per frame:
 door, round 39's finals/door-mother (it won every duel); bar and listening, round 40's p1 proofs (they beat round 39's
 best 2–0; no later pass beat them).
+
+## The edge-light test (the coordinator, approved as render lighting: one pass)
+
+Round 39's empty door-mother final, its shot file unchanged, plus one narrow spot on Mother EARF (`r40/r40_edge.py`):
+120 W, 2700 K, cone 40 deg, from [7.1, 0.45, 3.3] behind and above the globe, raking through the discs toward the lens.
+Two unjudged looks from the camera's side (40 W and 150 W) lit the smoked faces dull grey and changed nothing, so the
+judged pass is the back rake the p2 and p3 critics proposed. Proof at 1200 x 800, 128 samples, round 39's lens step.
+The globe's crush in [610,0,880,285] fell from 14.0 % (round 39's final) to 7.65 %.
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| edge | door-mother + edge light | 5.5 | 5.0 | 5.25 | 7.0, 7.0 | the globe still "a black blob", "a black wire ball" (median 9, p95 39); the edge light "barely registers"; both ask for 260 to 350 W from further behind |
+
+Read test: a render ("a large dark wire-sphere pendant"; "surfaces too clean, furniture repeats exactly").
+
+| frame | ab | ba | result |
+|---|---|---|---|
+| door-mother + edge light, against round 39's finals/door-mother (2400 scaled to 1200) | r39, clear | r39, clear | round 39 2–0 |
+
+Both judges chose on the proof's denoiser smear (the 2400 final, scaled down, is cleaner), not on the globe. The test
+fails both conditions (both duels and 6 with both critics), so no full-size render. Round 39's final stays the door hero.
