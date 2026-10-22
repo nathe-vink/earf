@@ -125,7 +125,7 @@
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.022,
+    "screen_glow": 0.016,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -320,7 +320,7 @@
     "ceiling": 3.4,
     "lamp_w": 30.0,
     "lamp_k": 2700,
-    "shade_glow": 0.008,
+    "shade_glow": 0.004,
     "noshadow": "shell|liner|skin"
    },
    {
@@ -383,9 +383,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.288,
+    "lamp_w": 0.171,
     "lamp_k": 2700,
-    "shade_glow": 0.005,
+    "shade_glow": 0.003,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -712,7 +712,7 @@
     "path": "spinoffs/barkhorn/planet/r39/kit39.py",
     "fn": "retouch",
     "darken": {
-     "zinc": 0.3
+     "zinc": 0.22
     },
     "zinc_rough": [
      0.3,
@@ -745,8 +745,8 @@
       ],
       "heading": 90,
       "seat": 0.76,
-      "cloth": "#1C2230",
-      "skin": "#D9AE94",
+      "cloth": "#14171E",
+      "skin": "#9A7462",
       "hair": "#1A1410",
       "seed": 400,
       "move": [
@@ -777,8 +777,8 @@
       ],
       "heading": 84,
       "seat": 0.76,
-      "cloth": "#3A1A16",
-      "skin": "#9A6648",
+      "cloth": "#22100E",
+      "skin": "#6E4A36",
       "hair": "#6A5038",
       "seed": 402,
       "move": [
@@ -810,7 +810,7 @@
       "heading": -90,
       "seat": 0.46,
       "cloth": "#1A1918",
-      "skin": "#7E5038",
+      "skin": "#5E3C2A",
       "hair": "#3A2A1E",
       "seed": 403,
       "move": [
@@ -831,19 +831,19 @@
        0.16,
        35.0
       ],
-      "sleeve": "#7A7064"
+      "sleeve": "#2A2724"
      },
      {
       "pose": "decks",
       "at": [
-       6.55,
+       7.6,
        4.98,
        0
       ],
       "heading": -90,
       "seat": 0.46,
-      "cloth": "#2E3024",
-      "skin": "#E2BCA4",
+      "cloth": "#1A1B15",
+      "skin": "#A27E6A",
       "hair": "#151210",
       "seed": 404,
       "move": [
@@ -874,8 +874,8 @@
       ],
       "heading": 90,
       "seat": 0.45,
-      "cloth": "#2A3448",
-      "skin": "#C89878",
+      "cloth": "#161C26",
+      "skin": "#8A6650",
       "hair": "#0E0C0A",
       "seed": 406,
       "move": [
@@ -906,42 +906,10 @@
       ],
       "heading": -90,
       "seat": 0.46,
-      "cloth": "#1E1C1A",
-      "skin": "#D9AE94",
+      "cloth": "#121110",
+      "skin": "#9A7462",
       "hair": "#1A1410",
       "seed": 407,
-      "move": [
-       0.035,
-       0.025,
-       0.005
-      ],
-      "spin": 5.0,
-      "head": [
-       0.16,
-       0.09,
-       0.03,
-       30.0
-      ],
-      "arms": [
-       0.14,
-       0.08,
-       0.06,
-       20.0
-      ]
-     },
-     {
-      "pose": "bench",
-      "at": [
-       8.9,
-       0.42,
-       0
-      ],
-      "heading": 90,
-      "seat": 0.45,
-      "cloth": "#3C2E26",
-      "skin": "#5A3A28",
-      "hair": "#8A7A6A",
-      "seed": 408,
       "move": [
        0.035,
        0.025,
@@ -1340,8 +1308,8 @@
     1.9,
     0.8
    ],
-   "power_w": 230.0,
-   "cone_deg": 20.0,
+   "power_w": 110.0,
+   "cone_deg": 16.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1359,8 +1327,8 @@
     4.199999999999999,
     0.8
    ],
-   "power_w": 230.0,
-   "cone_deg": 20.0,
+   "power_w": 110.0,
+   "cone_deg": 16.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1620,8 +1588,8 @@
   "mother-spot": {
    "type": "spot",
    "position": [
-    6.24,
-    2.75,
+    5.4,
+    2.6,
     3.32
    ],
    "target": [
@@ -1629,7 +1597,7 @@
     1.15,
     2.47
    ],
-   "power_w": 65.0,
+   "power_w": 85.0,
    "cone_deg": 30.0,
    "blend": 0.35,
    "radius_m": 0.02,
@@ -1834,7 +1802,7 @@
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
   "exposure": 4.4,
-  "white_balance_k": 2850,
+  "white_balance_k": 2700,
   "white_balance_tint": -2.0
  },
  "materials": {

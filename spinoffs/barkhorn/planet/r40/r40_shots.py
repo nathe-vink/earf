@@ -43,11 +43,20 @@ RETOUCH = dict(darken={'zinc': 0.30}, zinc_rough=[0.30, 0.62])
 T39.ALL.update(dome_glow_smoke=0.008, pendant_w=16.0, screen_glow=0.022, haze=0.0022, mother_spot=65.0, mother_rim=110.0)
 RETOUCH['set'] = {'zinc': {'Metallic': 0.85}}
 SHUTTER = 0.5
+# p3 (the last round per frame; p2 lost every duel 2-0 and scored 4.5 to 5.5: "faceless mannequins", "pale ... the
+# brightest mass"): the people few, in near-black clothes, muted skin, so they sit in the room's shadows as a long
+# exposure records strangers; a three-quarter shutter; the listening frame back to p1's three-quarter view; the altar
+# spots far down (the batts clipped in every frame); the globe's spot moved toward the lens so its edges catch light;
+# the Orbs and Domes dimmer, the balance warmer-neutral (the fir read orange), the screens dimmer, the zinc darker
+T39.ALL.update(dome_glow_smoke=0.004, orb_trim=0.12, screen_glow=0.016, wb=2700, mother_spot=85.0)
+T39.MOTHER_SPOT = dict(T39.MOTHER_SPOT, position=[5.4, 2.6, 3.32])
+RETOUCH['darken'] = {'zinc': 0.22}
+SHUTTER = 0.75
 
 # people (seat heights from the plan: the counter chairs 0.76, the banquette 0.45, the chairs at the tables 0.46,
 # the tub chairs 0.38 on the 0.2 step); clothes muted, never the products' colours
-CLOTH = ['#1C2230', '#141312', '#3A1A16', '#262524', '#2E3024', '#5A4430', '#2A3448', '#1E1C1A', '#3C2E26', '#4A4A48']
-SKIN = ['#D9AE94', '#B47E5E', '#7E5038', '#5A3A28', '#C89878', '#E2BCA4', '#9A6648']
+CLOTH = ['#14171E', '#0E0D0C', '#22100E', '#181716', '#1A1B15', '#2A2018', '#161C26', '#121110', '#201813', '#1E1E1D']
+SKIN = ['#9A7462', '#7E5640', '#5E3C2A', '#46301F', '#8A6650', '#A27E6A', '#6E4A36']   # p3: muted, in shadow
 HAIR = ['#1A1410', '#3A2A1E', '#0E0C0A', '#6A5038', '#2A2420', '#8A7A6A', '#151210']
 # p2b (seen before judging: at 2 cm the bodies read as smooth dummies with ball heads): the body a little softer, the
 # head always a smear (a talking head moves most in a quarter second)
@@ -70,8 +79,8 @@ BAR_PEOPLE = [
     person(1, 'stool', [cx(5), YS - 0.12, 0], 96, 0.76, head=[0.20, 0.10, 0.03, 35.0]),   # turned to talk
     person(2, 'stool', [cx(7), YS, 0], 84, 0.76),
     person(3, 'pour', [5.75, 5.00, 0], -90, move=[0.10, 0.03, 0.0], spin=8.0, arms=[0.26, 0.10, 0.16, 35.0],
-           head=[0.18, 0.08, 0.03, 30.0], cloth='#1A1918', sleeve='#7A7064'),                    # the bartender, mid-pour
-    person(4, 'decks', [6.55, 4.98, 0], -90, move=[0.035, 0.02, 0.0], spin=5.0, arms=[0.16, 0.10, 0.06, 22.0],
+           head=[0.18, 0.08, 0.03, 30.0], cloth='#1A1918', sleeve='#2A2724'),                    # the bartender, mid-pour
+    person(4, 'decks', [7.60, 4.98, 0], -90, move=[0.035, 0.02, 0.0], spin=5.0, arms=[0.16, 0.10, 0.06, 22.0],
            head=[0.10, 0.06, 0.14, 25.0]),                                                        # the selector
 ]
 BANQ_PEOPLE = [
@@ -93,21 +102,18 @@ LISTEN_PEOPLE = [person(9, 'tub', [tx, ty, RP.ZONE['z']], _toward(tx, ty), RP.TU
 
 VIEWS = {
     # p2b: from the door the people are 5 to 9 m off, so a half shutter left them sharp dummies: the full one here
-    'door-mother': dict(people=BAR_PEOPLE[:1] + BAR_PEOPLE[2:] + BANQ_PEOPLE[1:], shutter=1.0,   # p2: two at the counter
-                        settings=dict(altar_w=230.0, altar_cone=20.0, listen_key=3.0, exposure=4.4, wb=2850,
-                                      floor_coat=0.15)),
-    'bar': dict(people=BAR_PEOPLE + BANQ_PEOPLE[:1],
+    'door-mother': dict(people=[BAR_PEOPLE[i] for i in (0, 2, 3, 4)] + BANQ_PEOPLE[1:3], shutter=1.0,
+                        settings=dict(altar_w=110.0, altar_cone=16.0, listen_key=3.0, exposure=4.4, floor_coat=0.15)),
+    'bar': dict(people=[BAR_PEOPLE[i] for i in (0, 2, 3, 4)],
                 camera={'position': [3.40, 2.70, 1.30], 'target': [7.4, 5.6, 1.65], 'lens_mm': 35, 'level': True,
                         'fstop': 4.0, 'focus': [6.6, 4.4, 1.2]},
                 settings=dict(niche_strip=0.06, spk_niche_strip=0.05, rw_w=8.0, bar_key=1.5, exposure=3.0)),
     'listening': dict(people=LISTEN_PEOPLE,
-                      # p2: seated in the second row (both critics), a tub chair's back, its table, a glass and a
-                      # sleeve under the Core in front, the listener mid-ground
-                      camera={'position': [11.90, 3.15, 1.10], 'target': [16.5, 3.0, 1.0], 'lens_mm': 30, 'level': True,
-                              'fstop': 2.8, 'focus': [16.3, 3.0, 1.0]},
-                      settings=dict(altar_w=50.0, altar_cone=30.0, orb_pool=3.0, orb_trim=0.08, exposure=4.7, haze=0.004, niche_strip=0.06,
-                                    listen_key=1.2, listen_rim=6.0),
-                      orb_shade=0.3,
+                      # p3: p1's three-quarter view back (the duels preferred it 2-0 over p2's frontal seat)
+                      camera={'position': [12.05, 5.45, 1.25], 'target': [16.4, 2.7, 1.0], 'lens_mm': 28, 'level': True,
+                              'fstop': 4.0, 'focus': [16.0, 2.6, 1.0]},
+                      settings=dict(altar_w=22.0, altar_cone=18.0, orb_pool=8.0, exposure=4.9, haze=0.006, niche_strip=0.06,
+                                    listen_key=0.3, listen_rim=6.0),
                       life=dict(rocks=[[round(RP.TUB_TABLES[0][0] - 0.06, 3), round(RP.TUB_TABLES[0][1] + 0.07, 3),
                                         round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.022, 1, '#B8641C']],
                                 coats=[[round(RP.TUBS[1][0] - 0.30, 3), round(RP.TUBS[1][1], 3), round(RP.ZONE['z'] + 0.62, 3), 90.0, 0.36]])),

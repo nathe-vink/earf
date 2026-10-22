@@ -6,21 +6,21 @@
  ],
  "camera": {
   "position": [
-   11.9,
-   3.15,
-   1.1
+   12.05,
+   5.45,
+   1.25
   ],
   "target": [
-   16.5,
-   3.0,
+   16.4,
+   2.7,
    1.0
   ],
-  "lens_mm": 30,
+  "lens_mm": 28,
   "level": true,
-  "fstop": 2.8,
+  "fstop": 4.0,
   "focus": [
-   16.3,
-   3.0,
+   16.0,
+   2.6,
    1.0
   ]
  },
@@ -306,7 +306,7 @@
     "ceiling": 3.4,
     "lamp_w": 30.0,
     "lamp_k": 2700,
-    "shade_glow": 0.008,
+    "shade_glow": 0.004,
     "noshadow": "shell|liner|skin"
    },
    {
@@ -369,9 +369,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.03,
+    "lamp_w": 0.104,
     "lamp_k": 2700,
-    "shade_glow": 0.0005,
+    "shade_glow": 0.0021,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -545,7 +545,7 @@
     "path": "spinoffs/barkhorn/planet/r39/kit39.py",
     "fn": "retouch",
     "darken": {
-     "zinc": 0.3
+     "zinc": 0.22
     },
     "zinc_rough": [
      0.3,
@@ -579,7 +579,7 @@
       "heading": 36.7,
       "seat": 0.38,
       "cloth": "#1C2230",
-      "skin": "#9A6648",
+      "skin": "#6E4A36",
       "hair": "#6A5038",
       "seed": 409,
       "move": [
@@ -603,7 +603,7 @@
       "sleeve": "#1C2230"
      }
     ],
-    "shutter": 0.5
+    "shutter": 0.75
    },
    {
     "kind": "kit",
@@ -1007,8 +1007,8 @@
     1.9,
     0.95
    ],
-   "power_w": 50.0,
-   "cone_deg": 30.0,
+   "power_w": 22.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1026,8 +1026,8 @@
     4.199999999999999,
     0.95
    ],
-   "power_w": 50.0,
-   "cone_deg": 30.0,
+   "power_w": 22.0,
+   "cone_deg": 18.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1184,7 +1184,7 @@
     1.0,
     0.7
    ],
-   "irradiance": 1.2,
+   "irradiance": 0.3,
    "color": 3000,
    "camera": false,
    "receivers": [
@@ -1262,7 +1262,7 @@
     1.0,
     0.7
    ],
-   "irradiance": 1.2,
+   "irradiance": 0.3,
    "color": 3000,
    "camera": false,
    "receivers": [
@@ -1334,7 +1334,7 @@
    6.05,
    3.32
   ],
-  "density": 0.004,
+  "density": 0.006,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1346,8 +1346,8 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 4.7,
-  "white_balance_k": 3000,
+  "exposure": 4.9,
+  "white_balance_k": 2700,
   "white_balance_tint": -2.0
  },
  "materials": {
