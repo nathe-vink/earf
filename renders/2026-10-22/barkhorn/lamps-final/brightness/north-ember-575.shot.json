@@ -1,0 +1,442 @@
+{
+ "title": "Hemisphere North in Ember at 575 lm, over a dining table at night",
+ "size": [
+  1800,
+  1200
+ ],
+ "render": {
+  "samples": 256,
+  "adaptive": 0.01,
+  "denoise": true,
+  "clamp": 10,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 3.153,
+  "white_balance_k": 3100
+ },
+ "sky": {
+  "kind": "none"
+ },
+ "set": {
+  "kind": "room",
+  "size": [
+   5.2,
+   4.6,
+   2.7
+  ],
+  "center": [
+   0.0,
+   0.85
+  ],
+  "floor": {
+   "plank_w": 0.16,
+   "plank_l": 1.8,
+   "base": "#6E4E34",
+   "dark": "#5A3E28",
+   "light": "#7E5C40",
+   "plank_contrast": 0.7
+  },
+  "wall": {
+   "color": "#7D7466"
+  },
+  "ceiling": "#E6E0D6",
+  "skirting": {
+   "h": 0.12,
+   "color": "#6E665A"
+  },
+  "props": [
+   {
+    "kind": "table",
+    "position": [
+     0.0,
+     0.95
+    ],
+    "size": [
+     1.7,
+     0.9,
+     0.75
+    ],
+    "color": "#6B4A30"
+   },
+   {
+    "kind": "sideboard",
+    "position": [
+     0.55,
+     2.86
+    ],
+    "size": [
+     1.6,
+     0.42,
+     0.78
+    ],
+    "color": "#3E2A1C",
+    "wood": "veneer",
+    "grain": 0.25,
+    "turntable": false
+   },
+   {
+    "kind": "frame",
+    "position": [
+     0.55,
+     3.15
+    ],
+    "z": 1.55,
+    "size": [
+     0.7,
+     0.5
+    ],
+    "art": "#6E3A2A"
+   },
+   {
+    "kind": "lamp",
+    "position": [
+     -2.15,
+     2.75
+    ],
+    "height": 1.55,
+    "shade": "#E8DCC8"
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "glow",
+    "color": "#FFB878",
+    "emit": 1.4,
+    "radius": 0.06,
+    "height": 0.16,
+    "position": [
+     -0.25,
+     3.09,
+     1.62
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "glow",
+    "color": "#FFB878",
+    "emit": 1.4,
+    "radius": 0.06,
+    "height": 0.16,
+    "position": [
+     1.35,
+     3.09,
+     1.62
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "gloss",
+    "color": "#F2EEE6",
+    "roughness": 0.25,
+    "radius": 0.135,
+    "height": 0.016,
+    "position": [
+     -0.38,
+     0.83,
+     0.75
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "gloss",
+    "color": "#F2EEE6",
+    "roughness": 0.25,
+    "radius": 0.135,
+    "height": 0.016,
+    "position": [
+     0.38,
+     1.0699999999999998,
+     0.75
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#F4F2EE",
+    "position": [
+     -0.18,
+     0.6499999999999999,
+     0.75
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.035,
+      0
+     ],
+     [
+      0.035,
+      0.004
+     ],
+     [
+      0.004,
+      0.012
+     ],
+     [
+      0.004,
+      0.1
+     ],
+     [
+      0.038,
+      0.13
+     ],
+     [
+      0.042,
+      0.19
+     ],
+     [
+      0.0,
+      0.19
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "lathe",
+    "material": "glass",
+    "color": "#F4F2EE",
+    "position": [
+     0.22,
+     1.25,
+     0.75
+    ],
+    "profile": [
+     [
+      0,
+      0
+     ],
+     [
+      0.035,
+      0
+     ],
+     [
+      0.035,
+      0.004
+     ],
+     [
+      0.004,
+      0.012
+     ],
+     [
+      0.004,
+      0.1
+     ],
+     [
+      0.038,
+      0.13
+     ],
+     [
+      0.042,
+      0.19
+     ],
+     [
+      0.0,
+      0.19
+     ]
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#F1ECE2",
+    "size": [
+     0.15,
+     0.22,
+     0.002
+    ],
+    "position": [
+     -0.05,
+     0.77,
+     0.75
+    ],
+    "rotate_z": 12
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 6.0,
+    "radius": 0.004,
+    "height": 0.012,
+    "position": [
+     0.05,
+     2.8,
+     0.855
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "gloss",
+    "color": "#EDE6D8",
+    "roughness": 0.4,
+    "radius": 0.022,
+    "height": 0.075,
+    "position": [
+     0.05,
+     2.8,
+     0.78
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "glow",
+    "color": "#FFB060",
+    "emit": 6.0,
+    "radius": 0.004,
+    "height": 0.012,
+    "position": [
+     0.17,
+     2.84,
+     0.8400000000000001
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "cylinder",
+    "material": "gloss",
+    "color": "#EDE6D8",
+    "roughness": 0.4,
+    "radius": 0.022,
+    "height": 0.06,
+    "position": [
+     0.17,
+     2.84,
+     0.78
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     [
+      0.0,
+      0.95,
+      1.45
+     ]
+    ],
+    "flavour": "ember",
+    "ceiling": 2.7,
+    "lamp": false,
+    "shade_glow": 0.0,
+    "hide": "reflector"
+   }
+  ]
+ },
+ "lights": {
+  "cob": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.01,
+    0.01
+   ],
+   "position": [
+    0.0,
+    0.95,
+    1.5314999999999999
+   ],
+   "target": [
+    0.0,
+    0.95,
+    0.0
+   ],
+   "power_w": 1.3735,
+   "color": 2700,
+   "camera": false
+  },
+  "floorlamp": {
+   "type": "point",
+   "position": [
+    -2.15,
+    2.75,
+    1.42
+   ],
+   "power_w": 0.2196,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconce1": {
+   "type": "point",
+   "position": [
+    -0.25,
+    2.98,
+    1.7
+   ],
+   "power_w": 0.1757,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "sconce2": {
+   "type": "point",
+   "position": [
+    1.35,
+    2.98,
+    1.7
+   ],
+   "power_w": 0.1757,
+   "radius_m": 0.03,
+   "color": 2400,
+   "camera": false
+  },
+  "candle1": {
+   "type": "point",
+   "position": [
+    0.05,
+    2.8,
+    0.873
+   ],
+   "power_w": 0.0176,
+   "radius_m": 0.005,
+   "color": 1900,
+   "camera": false
+  },
+  "candle2": {
+   "type": "point",
+   "position": [
+    0.17,
+    2.84,
+    0.858
+   ],
+   "power_w": 0.0176,
+   "radius_m": 0.005,
+   "color": 1900,
+   "camera": false
+  }
+ },
+ "camera": {
+  "position": [
+   -0.62,
+   -0.42,
+   1.3
+  ],
+  "target": [
+   0.02,
+   0.95,
+   1.14
+  ],
+  "lens_mm": 32,
+  "level": true,
+  "fstop": 4.0,
+  "focus": [
+   0.0,
+   0.95,
+   1.1
+  ]
+ }
+}
