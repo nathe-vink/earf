@@ -25,7 +25,7 @@ def final(n):
 def cartridge():
     """The battery cartridge slid half out of the back of a lit Ember Orb, from behind and low, on the pale stone."""
     s = final('orb-hero')
-    s['title'] = 'Orb: the battery cartridge'
+    s['title'] = 'Core: the battery cartridge (round 32f; the cartridge is gone in round 35)'
     s['size'] = [1800, 1200]
     for p in s['set']['props']:
         if p.get('module') == 'earf_moon':
@@ -170,6 +170,7 @@ def build():
     os.makedirs(SHOTS, exist_ok=True)
     for n, src in NAMES.items():
         s = {'lamps-unlit': unlit, 'lamps-orbs': orbs_row, 'lamps-domes': domes_row, 'lamp-orb': orb_hero}.get(n, lambda: final(src))()
+        s['title'] = s['title'].replace('Dome and Orb', 'Hemisphere North and Core')      # round 35's names
         json.dump(s, open(os.path.join(SHOTS, n + '.json'), 'w'), indent=1)
         print(n, '<-', src)
     json.dump(cartridge(), open(os.path.join(SHOTS, 'lamp-cartridge.json'), 'w'), indent=1)

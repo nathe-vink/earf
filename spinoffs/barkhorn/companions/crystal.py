@@ -311,7 +311,7 @@ def orb_parts(p=O):
     # render shows the frost as a thin skin of the liner's material inside the shell
     shell = ball(R, t, (0, 0, zc)) - port
     shell_r = ball(R, t - 0.4, (0, 0, zc)) - port
-    frost_r = ball(R - t + 0.4, 0.4, (0, 0, zc)) - port
+    frost_r = ball(R - t + 0.3, 0.3, (0, 0, zc)) - port        # 0.1 under the shell's face: coincident faces render dark
     gz0 = zc - math.sqrt(R ** 2 - (p['port'] / 2) ** 2)
     gz1 = zc - math.sqrt((R - t) ** 2 - (p['port'] / 2) ** 2)
     grommet = cyl('z', (0, 0), p['port'] - 0.4, gz0, gz1) - cyl('z', (0, 0), p['port'] - 6, gz0 - 1, gz1 + 1)

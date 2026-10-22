@@ -5,6 +5,14 @@ round 17 the owner had also said: "If we can find a good recycled acrylic partne
 record players, lights, etc." These are those two pieces. Both are in the Clouds' tinted cast acrylic and come in the
 eight Atmosphere colours, and each is built with the fab kit the speakers are built with.
 
+**Names, from round 35 (the owner, 2026-10-22):**
+- the Dome is **Hemisphere North**;
+- the same shades on a rod, opening up, are **Hemisphere South**;
+- the Orb is **Core**;
+- the speakers are **Atmosphere**, and the record player is **Mantle**.
+
+The rounds below keep the names they were written with. The file names stay as they were.
+
 Status: **concept, built to the fab kit's standard: proposals until the owner signs them.** The speaker, its product
 file and its CAD are untouched. The Cloud is built here only so that it can stand beside the companions in a shot.
 
@@ -915,3 +923,359 @@ room's measured drift (`TINT_K`, `HUE_TURN`).
 **For Planet:** `globe(size, mode)` in `studio/engine/kit_ext/earf_coin.py`.
 - `size` is in mm across: 300 for the desk piece, 1000 for the back bar's.
 - `mode` is "day" or "night"; `glow` scales the night edges.
+
+## Round 35: the lamps, final (Hemisphere North and South, Core)
+
+The owner's decisions (2026-10-22), and an independent engineering review of round 32f's lamps.
+- **Names.** The pendant is **Hemisphere**: today's Dome becomes **Hemisphere North**, and **Hemisphere South** is new.
+  The table lamp is **Core** (was the Orb). The file names stay as they were (`dome_pendant.py`, `orb_table.py`,
+  `crystal.py`), and so do the site's image names (`lamp-dome-*`, `lamp-orb-*`), so nothing downstream breaks.
+- **South:** the same acrylic shade turned opening up, as a bowl on a slim rod. The light sits at the bottom of the
+  bowl and shines up. The bowl glows in its colour and washes the ceiling. Both fittings use the same quarter-turn
+  catch, so any shade fits either way up. A thin frosted lid keeps the dust out.
+- **Brightness:** "I want to see a visual approximation of the change in lumens to see if it's an acceptable amount
+  of light."
+- **Core:** "I want it to work plugged in or not. Why does it need a separate cartridge for that?"
+- **Prototypes:** they should be as close to production as possible. The lamps are designed for the process they will
+  really be made with, and prototyped with that process.
+
+Estimates are marked **[ESTIMATE]**. Anything not yet measured, tested or quoted is marked **[UNCONFIRMED]**.
+
+### 1. How bright: Hemisphere North over a table at night
+
+![Brightness](../../../renders/2026-10-22/barkhorn/lamps-final/brightness/sheet.png)
+
+Four frames, `renders/2026-10-22/barkhorn/lamps-final/brightness/` (from `hemisphere_brightness.py`):
+- **The room:** a dim dining room at night. The table is 750 mm high, with Hemisphere North's rim 700 mm above it.
+- **Constant in every frame:** one camera and one exposure, like four photographs taken in that room on one setting.
+  The room's own light stays the same too: two wall lights, a floor lamp and two candles.
+- **What changes:** only the COB's lumens and the shade.
+  - Light: about **1,100 lm** (the original spec) and about **575 lm** (the half-power option).
+  - Shade: **Ember** (a mid tint) and **Smoke** (the darkest).
+
+**How the lumens were put into the renderer.**
+- **Units.** One Cycles watt of white light is taken as 683 lm, the photometric definition. So an irradiance of
+  1 W/m² in the engine is 683 lux, and a radiance of 1 W/m²/sr is a luminance of 683 cd/m². Blender normalises its
+  blackbody colours to a luminance of 1, which I checked: 2700 K and plain white read the same. So the light's colour
+  does not change the calibration.
+- **The COB.** It is modelled as a Lambertian disc 10 mm across at its face in the hub: an area lamp of
+  P = lumens ÷ 683 W.
+- **Check 1: the old black bore.** I rendered the fixture's own CAD over a white floor 700 mm below its rim. 573 lm of
+  the 1,100 lm reach the floor, which is 52 % through the old black-anodised bore. Directly below, the floor got
+  569 lux. The formula I0 = lm ÷ π, E = I0 ÷ d² gives 573 lux, so the calibration holds to 1 %.
+- **Check 2: the engineered hub.** The hub now has a reflector in the bore (below). It passes about 85 % of the
+  light **[ESTIMATE]**, so the frames' lamp is P × 0.85 ÷ 0.521. The reflected light is spread like the direct light,
+  inside the same 46° cut-off **[an approximation]**.
+- **The exposure.** EV100 6.0, about what a phone picks at a dim restaurant table (f/1.8, 1/30 s, ISO 640). The
+  meter is saturation-based: a luminance of 1.2 × 2^EV100 cd/m² maps to white. So the engine's exposure is
+  log2(683 ÷ 1.2) − 6.0 = 3.15 stops, with a 3100 K white balance.
+
+**The table's illuminance** (`hemisphere_brightness.py --lux`). These are computed figures: direct light only, with
+the COB 0.78 m above the table top. The room's bounce adds a little.
+
+| at the COB | the hub | out of the fitting | directly below | mean over a 90 cm table | mean over 60 cm (two places) |
+|---|---|---|---|---|---|
+| 1,100 lm | with the reflector, as rendered | about 935 lm | **935 lux** | **700 lux** | 815 lux |
+| 1,100 lm | black bore (round 32f's hub) | 573 lm | 573 lux | 431 lux | 500 lux |
+| 575 lm | with the reflector, as rendered | about 490 lm | **490 lux** | **370 lux** | 425 lux |
+| 575 lm | black bore | 300 lm | 300 lux | 225 lux | 260 lux |
+
+**The everyday bulbs they equal.** Bulbs are rated by what they emit in all directions:
+- 575 lm sits between a 40 W incandescent (about 450 lm) and a 60 W (about 800 lm), so call it a 50 W.
+- 1,100 lm is a 75 W.
+
+On the table, Hemisphere North gives far more than a bare bulb of the same rating, because its cut-off sends all its
+light down. A bare 60 W bulb at the same height puts about 105 lux on the table directly below it. A bare 75 W puts
+about 145.
+
+**The targets.**
+- Dining and bars: about 100 to 200 lux. Even the 575 lm level gives about twice that across the table.
+- Reading: 300 to 500 lux. The 575 lm level reaches it: you can read a menu.
+- At 1,100 lm the table gets office-task light, 700 to 935 lux. In the frames, the white plates and the menu card come
+  close to the top of the range, while the room around them stays dark.
+
+**What the frames show.**
+- **The table.** One stop apart between the levels, as the lumens say. At 575 lm the table, the plates and the menu
+  card are still plainly lit, the room round them dim.
+- **The shade.** It is lit from below by the table it lights: with the 46° cut-off, almost none of the COB's light
+  reaches it. The earlier renders gave it an emission of its own; these do not.
+  - Ember reads as a deep red bell with a lit rim at either level. Its glow drops a little at 575 lm, less than the
+    table does.
+  - Smoke reads as a dark glossy bell with a pale ring at the rim. It is a dark shade either way.
+- **The fins:** a black stepped form above the crown, quiet at this distance. It reads as part of the cap.
+
+**Recommendation: 575 lm.** It gives about 370 lux across the table, twice the 100 to 200 lux dining target and
+enough to read a menu, at half the heat. 1,100 lm is office-level light, worth having only behind a dimmer.
+
+Its 175 mA driver is still to be found. If none turns up, ship the Mean Well PCD-16-350A (1,100 lm, in stock) and
+specify a dimmer. This is the owner's call from the sheet. South follows at twice: about 1,150 lm.
+
+**A correction to the review's B1 numbers.** The 575 lm option came from the review's figures. Bridgelux's own table
+(DS120) gives the Vero SE 10 at 2700 K, CRI 90 as follows **[UNCONFIRMED: the tables as quoted by web search; the
+supplier's PDF could not be opened here]**:
+- at 350 mA: 26.0 V, 9.1 W and about 1,130 lm (1,020 lm hot, at Tc 85 °C);
+- at 700 mA, its maximum: 28.4 V, 19.9 W and about 2,120 lm.
+
+So the review is right that the PCD-16-700B could not light it: that driver gives 16 to 24 V, and its B type takes
+180 to 295 V mains. The PCD-16-350A (24 to 48 V at 350 mA, the 120 V A type) gives the original **1,100 lm**, at
+about 9 W, not 575 lm. The old "1,100 lm at 700 mA" was wrong about the current, not the lumens. The roughly 575 lm
+that came out of the review is what the old black bore let out of the fitting: 52 %. To get 575 lm at the COB needs
+about 175 mA (24.5 V, 4.3 W), and Mean Well's PCD-16 range starts at 350 mA, so that driver is still to source.
+
+### 2. Hemisphere North, engineered
+
+`crystal.py` (`north_parts`, `cover_parts`), `dome_pendant.py`, `out-dome-pendant/` (11 drawing sheets; the checks
+pass with no clashes).
+
+**B1, the driver.** It is chosen from the COB's forward voltage at the current wanted. Both levels are ready
+(`components.json`):
+- **1,100 lm:** `north-driver`, Mean Well PCD-16-350A. 350 mA, a 24 to 48 V window; the COB runs 26 V and 9.1 W.
+  It takes 120 V and is UL 8750 Class 2.
+- **575 lm:** `north-driver-575`, about 175 mA, 22 to 30 V, phase-cut and consumer class **[the part is open]**.
+- **0-10 V:** `north-driver-010v`, a 0-10 V driver at 350 mA, for bars that dim that way **[to confirm]**.
+
+**A reflector in the bore (new: the review missed this one).**
+- The COB sits 22 mm up a 46 mm black-anodised bore, which gives the 46° cut-off. But a Lambertian COB puts only
+  sin²46° = 52 % of its light inside 46°, so the bore absorbed the other half as heat (render-checked above).
+- A faceted, high-reflectance aluminium reflector in the bore (Miro kind, 95 %) keeps the same cut-off. About 85 %
+  of the light then leaves the fitting **[ESTIMATE]**. That is 1.6 times the light for the same heat.
+- The part is `north-reflector`: Ledil for a Vero 10, or spun to order **[to choose]**.
+
+**B2, the heat.**
+- **The fins.** The hub's heat now goes up the core to black fins **above** the shade, in room air. They are cut
+  from a standard radial extrusion, 80 mm across, 36 tall, with 16 fins 1.8 mm thick. They sit concentric with the
+  cap and the hub, so from below and the side they read as part of the cap.
+- **The thermal break.** The three bayonet pins sit in a **PEEK ring** (0.25 W/m K) on the hub. The shade touches the
+  fixture only through that ring and 4 to 10 mm of air. The collar's gap round the core grew from 1 to about 10 mm.
+- **The estimate** (`hemisphere_thermal.py`, a steady-state network **[ESTIMATE]**):
+  - The fins' convection uses Elenbaas's correlation for vertical plates. Their radiation counts the envelope only,
+    at an emissivity of 0.85.
+  - The hub leaks to the collar through the PEEK ring, the pins, the air and radiation, about 9 K/W.
+  - The collar loses heat to the room and through the acrylic, about 7 K/W.
+  - The LED's junction-to-case resistance is taken as 0.9 K/W **[to confirm on the datasheet]**.
+  - Heat = electrical power − light (at 310 lm per optical watt) + the light the fitting absorbs.
+
+| North | room | heat in the hub | hub | LED junction | collar, and the acrylic next to it |
+|---|---|---|---|---|---|
+| 1,100 lm | 25 °C | 6.1 W | 42 °C | 50 °C | 32 °C |
+| 1,100 lm | 35 °C | 6.1 W | 52 °C | 60 °C | **42 °C** |
+| 575 lm | 25 °C | 2.7 W | 34 °C | 37 °C | 29 °C |
+| 575 lm | 35 °C | 2.7 W | 43 °C | 47 °C | 39 °C |
+
+The review's concern was 50 to 95 °C at the hub and the crown. The limits that matter: cast acrylic is rated for
+about 71 °C continuous, and a UL 1598 listing will likely hold it to about 50 °C. On these estimates the acrylic stays
+below 50 °C at either level, even in a 35 °C room.
+- **The darkest shade.** Smoke absorbs more of the room's light and the table's bounce than a pale shade does. With
+  the cut-off, that light is small: well under 0.1 W at 1,100 lm **[ESTIMATE]**. The test below measures it anyway.
+
+**The thermocouple test plan** (on the first formed prototype, before the listing):
+1. **Thermocouples.** Type K, fine wire, bonded with a thermal epoxy dot at:
+   - the COB's Tc point;
+   - the hub core's bottom, beside the bore;
+   - the fins, top and root;
+   - the collar's flange inside the shade;
+   - the clamp ring;
+   - the acrylic at the crown, at 5 mm and 20 mm from the clamp ring, inside and outside;
+   - the shade's rim;
+   - the room air 300 mm beside the shade, at its height and shaded from it.
+2. **The shades.** Smoke (the darkest) and Fog (the palest).
+3. **The rooms.** An environmental chamber, or a closed room, held at 25 °C and at 35 °C, still air. The fixture
+   hangs at its standard 600 mm drop, 300 mm below a ceiling panel.
+4. **Settings.**
+   - Full output on each driver: the PCD-16-350A, and the 575 lm driver once it is chosen.
+   - Then the PCD-16-350A at its dimmer's lowest setting. Phase-cut dimmers can heat a driver at low conduction
+     angles.
+5. **Logging.** Every minute until stable: less than 1 K change in 30 minutes, and at least 4 hours.
+6. **Pass.**
+   - The acrylic at or under 50 °C in the 35 °C room. This is our own margin under acrylic's 71 °C rating, and what
+     UL 1598 will likely ask; confirm with the lab.
+   - The COB's Tc under 85 °C.
+   - The driver's tc point within Mean Well's limit.
+7. **Record.** Repeat with the fixture enclosed in a mock 100 mm ceiling recess, as the lab may test. Photograph and
+   log each run in `fab/tests/`.
+
+**L1, the shade is clamped.**
+- **The collar.** The collar is a tube through the crown, with a spherical **flange inside the shade**, under the
+  skin. A black anodised **clamp ring** screws onto the collar (M96 × 1.5) over the shell outside.
+- **The acrylic.** It sits between two moulded silicone rings (`hemi-gaskets`), never metal on acrylic. The bond is
+  now a seal only: if it fails, the shade stays clamped.
+- **The catch.** The quarter-turn bayonet keeps its detent (a spring plunger into a dimple). The shade is still never
+  a live part.
+- **The slots.** They are now blind from inside, so the ring's thread is whole. They are **T-ended**, so the same
+  shade works on South (below).
+
+**L2, the diffuser.**
+- **The problem.** A bead-blasted clear liner goes clear wherever it is bonded or wetted: frost scatters only at an
+  air boundary.
+- **The fix.** The liner is now a **volume-diffusing opal cast acrylic**, 3 mm thick, about 70 % transmission. It
+  scatters through its depth, so it diffuses whether or not it touches the tint.
+- **The gaps.** The three layers keep 1 mm air gaps, because formed parts don't nest perfectly. They are sealed at the
+  crown by the gaskets and at the mouth by the rim. A press-in ePTFE vent in the rim (`hemi-vent`) lets them breathe
+  without letting dust or water in.
+
+**L4, the cord and the listing.**
+- **The cord.** Mains stops at the driver in the canopy. The cord carries the LED's 26 V DC, which is Class 2.
+  - It is a listed 18 AWG 2-conductor cord (SVT-rated, or a listed Class 2 cord) in a black textile braid.
+    `hemi-cord`, replacing the European 3-core 0.75 mm².
+  - Its two grips (the cap and the canopy) are tested with the fixture's weight under UL 1598's cord-support test
+    **[the load: confirm with the lab]**.
+- **The driver's FCC class.** The review notes the PCD-16 A type claims only FCC Part 18 non-consumer. That is fine
+  for bars. Homes need a consumer-class driver **[to confirm with Mean Well; an open item]**, or the 0-10 V option.
+
+**The process: formed, as in production, and prototyped that way.**
+- **The shade's three layers** are drape-formed from cast sheet over turned aluminium moulds:
+  - the shell from 10 mm tinted sheet: 9 mm at the crown, thinner toward the rim **[the former confirms]**; its outer
+    face never touches the mould, so it keeps the sheet's gloss;
+  - the liner from 3 mm opal;
+  - the skin from 3 mm tinted sheet, into a female mould so its seen face stays glossy.
+- **Finishing.** Trimmed, nested, and closed by the turned rim.
+- **The prototypes** are formed on the same moulds. No shade is turned from block any more.
+- **The moulds** are about $1,500 for the shell, and $1,200 each for the liner and the skin **[ESTIMATE]**. One set
+  serves both North and South, in every tint.
+- **The metal and acrylic hardware** is turned or cut from extrusion, as in production.
+
+| | Hemisphere North | Hemisphere South | Core |
+|---|---|---|---|
+| the first one, on production tooling (bom.md, kit rates) | **$4,541**, of which the moulds $3,900 | **$4,612**, the moulds the same $3,900 (shared: about $710 once North's are paid) | **$2,043**, of which the ball's mould $1,500 |
+| a run of 200, parts **[ESTIMATE]** | about $200 parts + $20 tooling, about $250 landed | about $205 parts + $20 tooling, about $255 landed | about $195 parts + $8 tooling, about $235 landed |
+| weight **[computed]** | shade 1.1 kg; hanging about 1.7 kg | shade 1.1 kg; hanging about 2.0 kg | about 2.2 kg |
+| suggested retail (the owner sets prices) | $795 to $895 with one shade; shades $295 to $345 | $845 to $945 with one shade | **$595 to $695** with its cells |
+
+### 3. Hemisphere South
+
+`crystal.py` (`south_parts`), `hemisphere_south.py`, `out-hemisphere-south/` (11 drawing sheets; the checks pass).
+
+**The idea.** It is built in the shade's own frame and turned over, so its shade parts are exactly North's. Its
+fixture sits where North's does, outside the crown, but its light faces the rod.
+
+- **The light.** A ring of 2700 K, CRI 90 mid-power LEDs on an aluminium-core board (74 × 14), round the rod's end,
+  facing up into the bowl (`south-led`, the board to make **[ESTIMATE: about 150 lm/W]**).
+  - **The level.** Light bounced off a ceiling needs about twice the lumens to feel the same, so South gives twice
+    North's: **about 2,200 lm** (about 15 W) or **about 1,150 lm** (about 7.7 W).
+  - **The driver.** A Mean Well PCD-25 or PCD-16 class driver in the canopy, phase-cut, with the board's strings laid
+    out to fit its voltage window (`south-driver` **[to confirm against the board]**).
+  - **Where the light goes.** From the LED, the rim's edge is 49° off the axis, so about 57 % (sin²49°) leaves through
+    the mouth and the lid to wash the ceiling. The rest lights the bowl's wall, which glows in its tint.
+- **The rod.** A 1/8 IPS steel lamp pipe, 10.3 mm across, black, 450 mm long (`south-rod`). It hangs plumb from the
+  canopy's strap on a listed swivel, runs down the bowl's axis, and screws into the hub. The wires (Class 2 DC) run
+  inside it.
+- **The heat.** The fins hang **below** the bowl in room air: 90 mm across, 50 tall, 18 fins, on a 60 mm aluminium
+  neck. A finial in black acrylic closes the fins' core, like the knob under a 1930s bowl. The PEEK ring is the same
+  as North's.
+
+| South | room | heat in the hub | hub | LED junction | collar | warm air at the crown |
+|---|---|---|---|---|---|---|
+| 2,200 lm | 25 °C | 7.8 W | 40 °C | 55 °C | 32 °C | about +16 K |
+| 2,200 lm | 35 °C | 7.8 W | 50 °C | 65 °C | 41 °C | about +16 K: about 51 °C |
+| 1,150 lm | 35 °C | 4.1 W | 44 °C | 52 °C | 39 °C | about +11 K: about 46 °C |
+
+  - **The risk.** The fins' warm air rises past the crown. A point-plume estimate (Morton, Taylor and Turner) puts it
+    about 16 K over the room at the crown with the neck at 60 mm; at 30 mm, my first layout, it was 24 K.
+  - **What it means.** At 2,200 lm in a 35 °C room, the acrylic there sits at about the 50 °C limit **[ESTIMATE]**.
+  - **The test.** The same thermocouple plan as North's, with a sensor on the bowl's outside 5 and 20 mm from the clamp
+    ring, decides between three fixes: a longer neck, a deflector disc under the crown, or the lower level.
+- **The lid.** 3 mm clear cast acrylic, bead-blasted both faces, lying on the rim on three small silicone bumpers. It
+  lifts up the rod to be wiped. Its frost spreads the wash.
+- **The catch.** The collar's slots end in a T. When the shade hangs (North), its weight holds each pin up in the
+  notch; when it sits (South), down in it. The same shade fits either fixture, with no tools.
+- **Hanging.** The rim 450 to 600 mm below a ceiling 2.6 to 3.2 m high. South is for ceilings and rooms; North is for
+  tables.
+
+### 4. Core, one product that works plugged in or not
+
+`crystal.py` (`orb_parts`), `orb_table.py`, `out-orb-table/` (the checks pass).
+
+**The owner's question, answered.**
+- **Why the cartridge existed:** it let the plug-in lamp be certified as a simple low-voltage lamp on a listed
+  adapter, with the battery's tests carried by an accessory, and it let a bar swap charged packs from a staff tray.
+- **Why this is better:** one lamp with three standard long-life cells behind a screwed hatch works plugged in or not
+  out of the box. It lasts several times as many charges, and when the cells wear out the user replaces three standard
+  cells instead of throwing away a whole cartridge. It is also the route EU law requires for appliances from 2027.
+
+**What changed.**
+- **Gone:** the cartridge, its bay at the back, its blanking cap, its magnets and its gold tray pads. That also clears
+  the review's L3: no charger split across two products, no exposed pads for a coin to short.
+- **The cells.** Three **LiFePO4 26650** cells, about 3,000 mAh at 3.2 V each, in parallel: about **29 Wh**
+  (`core-cells` **[the cells to qualify]**).
+  - They lie side by side in a keyed holder with spring contacts and an NTC (`core-holder`).
+  - The holder sits in a pocket under the base, behind a **black anodised hatch on four captive M3 screws**
+    (Phillips or Torx: common tools) with an O-ring.
+  - The user can replace them with standard cells. EU Regulation 2023/1542 requires portable batteries in appliances
+    to be removable and replaceable by the end user from February 2027.
+- **Runtime at full brightness (2.5 W).** About **9 hours** at the default 90 % charge limit, about **10.5 hours** at
+  a full charge (29 Wh × 0.9 efficiency ÷ 2.5 W) **[ESTIMATE]**.
+- **Cycle life.** LiFePO4 keeps about 80 % after about 2,000 cycles, against about 500 for ordinary Li-ion. That is
+  five years or more of nightly use in a bar.
+- **Power and charging** (`core-board`).
+  - USB-C at 5 V 3 A; the 20 W adapter and the 2 m fabric cable stay in the box. It runs while it charges, through a
+    power path.
+  - A LiFePO4 charger (3.6 V full) with a **charge limit** at about 3.45 V (about 90 %) by default and a full-charge
+    mode. A full charge takes about 3.5 hours **[ESTIMATE]**.
+  - A protector for over- and under-voltage, over-current and short circuit, and a fuel gauge. Charging is held off
+    below 0 °C and above 45 °C by the cells' NTC.
+  - **No exposed contacts.** IP44 as before, by O-rings at the window, the chassis and the hatch.
+- **Certified as one product:** IEC/UL 62368-1 with its battery annex; the cells to IEC 62133-2, and UN 38.3 for
+  shipping **[NOT YET CERTIFIED]**.
+- **The ball (L2).** One tinted ball, its inside bead-blasted, where there were three layers. The frost faces air, so
+  it scatters, and the port that would show it faces the base.
+  - **How it is made:** two hemispheres formed from 10 mm tinted sheet on one mould and joined at the equator with a
+    polymerising acrylic cement, the joint turned and polished. It will leave a faint line at the equator, to judge on
+    the first sample.
+  - **The tint.** The casts were matched with 12 mm of tint (round 32f), so the caster deepens each by 12 ÷ 9 for the
+    one 9 mm layer, and re-matches on chips.
+- **The look changes.** The cells lie under the LED, so the **base grows from 30 to 48 mm**. The lamp is 198 mm tall
+  (was 180), still squat: the ball sits in the same 18 mm-deep cup.
+  - The steel ballast is now three segments round the cells and a ring under the cup (about 0.75 kg), so the lamp
+    weighs about 2.2 kg.
+  - The USB-C sits in the fourth segment, and the cable leaves by the same notch underneath.
+- **Prices** (the owner sets them): $595 to $695 with its cells. Before, it was $545 to $645 plug-in, plus $95 to $125
+  for the cartridge. Spare balls $245 to $295.
+
+### 5. The renders
+
+`lamps_final.py`, in the same room and the same light units as the brightness study:
+- **North:** its COB, as above, at 575 lm.
+- **South:** at 1,150 lm. The wash is a Lambertian disc the lid's size, P = lm × 0.57 × 0.85 ÷ 683, facing up. The
+  bowl's glow is the liner's emission, set by eye **[an approximation]**.
+- **Core:** its 200 lm.
+
+The exposure is half a stop under the brightness study's, the room's wall lights are dimmed to 40 lm, and a soft fill
+from the camera's side draws the black hardware.
+
+![The lamps, final](../../../renders/2026-10-22/barkhorn/lamps-final/sheet.png)
+
+| Frame | What it shows | Blind critic |
+|---|---|---|
+| `lamp-south-hero` (1600 × 2000) | South in Ember below a 2.7 m ceiling: the bowl's glow, the wash on the ceiling, the fins and the finial | r1 3.0, r2 4.0 |
+| `lamps-north-south` (1800 × 1200) | North over the table and South by the wall, both Ember: one set of shades, both ways up | r1 4.0, r2 4.0 |
+| `lamp-core-hero` (1600 × 2000) | Core in Ember, lit, on the table: the taller base | r1 4.0 |
+
+**The critic** (`critic/LOG.md`): one fresh, blind critic a frame a pass, stopped after two passes at 4.0. The frames
+meet the brief (South's wash reads; North and South hang together), not the site's gate (6.0). The remaining notes ask
+for studio light on the products: a key and a rim on the shades, the glow two stops down, a hero crop. That is the next
+step if the owner wants these frames on the site.
+- **A design note:** twice a critic read South's fins and finial as "unfinished". They are its heat path: that is the
+  owner's call, not a render fix.
+- **Not rendered:** the base from below. A test showed the black hatch on the black base doesn't read; the drawings
+  show it (`out-orb-table/drawings/`).
+- **The site's images are now out of date.** The renders in `renders/2026-10-19/barkhorn/lamps-site/` show round
+  32f's Dome (no fins) and Orb (the low base, and the cartridge frame). The site isn't this round's to change.
+
+### What the owner must decide
+
+1. **North's level:** 575 lm (recommended; its driver to source) or 1,100 lm (the PCD-16-350A, in stock; with a
+   dimmer). South follows it at twice: 1,150 or 2,200 lm.
+2. **Whether to fit the reflector.** It is a proposal: about 1.6 times the light for the same heat, and the same
+   cut-off.
+3. **Core's taller base** (48 mm, was 30): it is what lets the cells lie under the LED.
+4. **The prices** above.
+5. **For home sales:** a consumer-class (FCC Part 15 B) phase-cut driver, or 0-10 V only.
+
+**Still open:**
+- the 575 lm driver;
+- South's LED board and its driver;
+- the reflector part;
+- the LiFePO4 cells to qualify;
+- the former's quote for the moulds;
+- the thermocouple test;
+- the UL 1598 listing (North and South) and the IEC/UL 62368-1 certification (Core).
