@@ -183,3 +183,167 @@ New from the mockup:
 - People: no figures are in these views (no scanned people were to hand); every critic asked for some.
 
 <!-- PASSES -->
+
+## Round 39: the house
+
+*A proposal, written as the house would describe itself to a landlord, a licensing officer and a first hire. Numbers
+marked (est.) are estimates; (unconfirmed) means a rule or fee I could not check against its source tonight. Every
+choice is the owner's to overturn.*
+
+### What it is
+
+Planet EARF is a 49-person listening bar in a concrete shell in San Francisco: 104 m² (1,116 sq ft) of room, 6.1 m
+across and 17 m deep, 3.4 m to the fir deck. It is EARF's showroom, run as a bar. Four Atmosphere speakers, the Dome
+pendants, the Orb lamps and EARF's record players are all for sale, and all swap tints, so the room is one
+configuration of the catalogue on any given night (the house configuration is Smoke).
+
+### From the door to last call
+
+- **The door.** A plain blackened-steel door on the side street, a small etched disc for the name, no queue rope. Inside
+  the door, the host stand: a dark-oak top on a steel post, and on it the bowl of EARFcoins. The host greets you, finds
+  you a seat and puts one coin in your hand: "That's your song."
+- **The bar.** Eight chairs at a zinc-topped racetrack counter with a fluted oak front. Behind it the back bar's record
+  wall, the decks between the bar pair (raised on ledges at counter height, Ginza's way), and the request column. The
+  Domes hang low over the zinc; everything else is lit from what you can see.
+- **The banquette.** Along the street wall, four small round tables and a chair opposite each, an Orb on every table,
+  the frosted screens above (hands on fogged glass, the dancer, the Arrival-like shell).
+- **The listening room.** Up one 200 mm step, behind the smoked partition: six low tub chairs facing the altar pair,
+  side tables between. Quiet is the rule here (a card on each table says so, once). This is where the sessions happen.
+- **Last call.** Called by the record, not by a bell: the selector plays the house's closing side (the same track every
+  night, announced nowhere), the Domes come down a stop over its length, and the coins left in the column are played or
+  returned with the bill.
+
+### The listening programme
+
+| | when | who plays | what it is |
+|---|---|---|---|
+| **Opening hours** | 5 to 8 pm | the bar staff | records from the house shelves, side by side; the coins start at 6 |
+| **The Session** | Tue to Thu, 8 pm, about 50 min | the house | one album, start to finish, in the listening room, no talking; announced a week ahead; ten seats held, the rest open |
+| **Selectors** | Fri and Sat, 9 pm to close | a guest selector at the decks | vinyl only, at bar level; the coins still play (the selector fits them in) |
+| **Mother EARF Sunday** | Sun, 3 to 7 pm | a different guest each week | an afternoon of a person's records and why they own them; the one session with talking |
+
+About 4,000 records to open with (the record wall's cells hold about 4,600 at 25 a cell; est.), vinyl only, bought for
+the room: jazz, soul, ambient, Japanese city pop, dub, minimal and the West Coast. A shelf a month goes to the guest
+selectors' picks.
+
+### The coin ritual
+
+- **One coin a guest**, handed over at the door. It is an EARFcoin: cast acrylic in one of the eight tints, the EARF
+  globe on its face. The colour is random; nobody chooses.
+- **A coin is a request.** Write the song on the house's small card, hand both to the bartender. The coin goes in the
+  request column at the decks, the card on the spike. The column is the queue: the next song is the coin at the bottom,
+  and anyone can see how long the wait is.
+- **The coin comes back to the bowl** once its song has played. A guest who keeps it keeps it (it is on the bill at
+  cost, est. $6 to $9). Lost coins are re-cast in batches.
+- **The rules, kept short:** one request a guest a night; the selector may hold a request that would break a session;
+  no requests in the listening room during the Session.
+
+### The menu (a concept, short)
+
+Drinks are named for the house's own words: the eight tints, the sides of a record, the parts of the system. About
+twelve cocktails, a short natural wine list, two beers on tap, two non-alcoholic drinks given as much care as the rest.
+
+| drink | what it is |
+|---|---|
+| **Smoke** | the house drink: mezcal and rye, stirred, over one clear cube |
+| **Ember** | Campari, blood orange and sparkling wine, in a coupe |
+| **Ice** | gin, dry vermouth and a drop of eucalyptus, very cold, up |
+| **Fog** | a milk-clarified punch, crystal clear (the Fog tint: water-clear) |
+| **Acid** | yuzu, shochu and soda, long |
+| **Haze** | a violet highball: blanco tequila, butterfly pea, tonic |
+| **Side A / Side B** | two small pours of the same spirit, two ages, side by side |
+| **Needle Drop** | the bartender's choice for the record on now |
+| **Mother** | a punch for four, from the bowl, Sundays only |
+| **Run-out Groove** | the closing drink: an amaro and a short espresso |
+
+Food is snacks only (olives, a Japanese-style sando, rice crackers), which a Type 48 bar may serve without a kitchen.
+
+### Capacity, hours and sound
+
+- **Capacity: 49 occupants** (est. 28 seats: 8 at the counter, 12 at the banquette, 2 at the window table, 6 in the
+  listening room, plus standing at the counter). Under 50 keeps the room Group B, with no Fire Department Place of
+  Assembly permit (CBC §303, research.md).
+- **Hours:** Tuesday to Thursday 5 pm to midnight; Friday and Saturday 5 pm to 1:30 am; Sunday 3 to 10 pm; closed
+  Monday.
+- **Sound levels (targets, est.):** the bar at 70 to 75 dBA Leq while records play, so two people talk across a table
+  without raising their voices; the listening room at 78 to 82 dBA Leq in a Session, peaks to about 90; selector nights
+  at 80 to 85 dBA at the counter. Never more than 8 dBA (and, with a permit, 8 dBC) above ambient at the property line
+  (Police Code §2909); 45 dBA inside any home at night. Bass is the binding limit if there are flats above: no
+  subwoofers until a measured site says so.
+
+### The licences San Francisco needs for it
+
+| licence or permit | who | why | notes |
+|---|---|---|---|
+| **Type 48, on-sale general (public premises)** | California ABC | spirits, wine and beer; 21 and over | bought secondhand (capped by county population); roughly $150,000 to $500,000 (research.md, broker guide; est.); a transfer into the city may need a public-convenience-or-necessity finding by the Board of Supervisors |
+| **Place of Entertainment permit** | SF Entertainment Commission | guest selectors to 2 am | application $2,579 for July 2024 to June 2025, $2,708 from July 2026, annual licence about $863 (sf.gov fee pages; the annual figure unconfirmed); a 30-day posted notice and a hearing |
+| or **Limited Live Performance permit** | SF Entertainment Commission | selectors as a secondary use, ending by 10 or 11 pm | cheaper; would end the selector nights early |
+| **Building permit, tenant improvements** | DBI | the fit-out | light-transmitting plastics need a CC1 or CC2 classification and an interior-finish rating (CBC §2606): the frosted screens, the sink and Mother EARF should be raised with DBI early |
+| **Planning** | SF Planning | a bar use in the district | depends on the site's zoning (a neighbourhood commercial district may need a conditional use; unconfirmed until there is a site) |
+| **Health permit** | SFDPH | glasswashing, ice, garnish prep; snacks | (unconfirmed which category for a no-kitchen bar) |
+| **Music licences** | ASCAP, BMI, SESAC, GMR | playing recorded music in public | needed even when no permit is: four licences, a few thousand dollars a year in all (est.) |
+| **Business registration, seller's permit, sign permit** | Treasurer, CDTFA, Planning | | "First Year Free" waived first-year fees to 30 June 2026; check whether it was renewed |
+
+### Fit-out budget (est.)
+
+For the room as drawn, 1,116 sq ft, in a cold concrete shell with services at the street. National guides put bar
+build-outs at $200 to $550 a sq ft and one San Francisco restaurant renovation at about $560 (web search, 2026-10-22;
+anecdotal); this room sits at the top of that range because of its joinery, acoustic isolation and acrylic.
+
+| | low | high | basis |
+|---|---|---|---|
+| Shell and services: HVAC, plumbing, power, sprinklers, the accessible restroom | $210,000 | $310,000 | $190 to $280 a sq ft (est.) |
+| Acoustic isolation: the listening room's box, the ceiling absorber, door seals, the party walls | $60,000 | $110,000 | (est.) |
+| Joinery: the racetrack counter (zinc top, fluted oak), the back bar, the record wall, the banquette, the altar | $120,000 | $185,000 | (est.) |
+| Acrylic: four frosted screens with displays behind them, the Smoke sink, the request column, 300 coins | $45,000 | $90,000 | research.md: no public price for thick cast acrylic; back-lit onyx runs $120 to $360 a sq ft installed |
+| Lighting: Domes, Orbs, spots and their control | $35,000 | $60,000 | (est.; the companions at cost) |
+| The system: four Atmosphere, amplification, two record players, a rotary mixer, cartridges | at EARF's cost | | not yet priced |
+| Bar equipment: ice machine, glasswasher, under-counter refrigeration, the bar die | $70,000 | $110,000 | (est.) |
+| Furniture, glassware, the first 4,000 records | $70,000 | $120,000 | records at about $12 to $18 used (est.) |
+| Design, engineering, permits and fees | $60,000 | $100,000 | about 10 % (est.) |
+| Contingency | $100,000 | $160,000 | 15 % (est.) |
+| **Fit-out, without the licence** | **$770,000** | **$1,245,000** | |
+| Type 48 licence | $150,000 | $500,000 | research.md (est.) |
+| Pre-opening and six months' working capital | $120,000 | $180,000 | (est.) |
+| **All in** | **$1.04 M** | **$1.93 M** | |
+
+Mother EARF, if chosen, adds about $9,000 to $12,000: main's 1 m globe in 25 mm clear tints is costed at about $6,500
+one-off (round 33c), and sheet and polishing scale with area, so 1.3 m is about 1.7 times the sheet (est.).
+
+### Mother EARF in the bar (an option)
+
+The owner, 2026-10-22: "Also wondering if there's any opportunity to tie in Mother EARF."
+
+**The proposal rendered:** Mother EARF is the brand's multicolour globe (round 33c on main: six slotted discs of
+tinted cast acrylic, the Poison meridian whole, Dust and Haze the side meridians, Ember, Ice and Acid the parallels,
+the axis leaning 23.4 degrees) made at architectural scale, 1.3 m across in 25 mm sheet, hung over the listening room
+between the tub chairs and the altar pair, its centre 2.5 m up so seated guests see the pair under it and a standing
+guest clears it by 15 cm. It is the one place in the room where all the colours meet, so the rest of the room stays
+Smoke. (`r39/kit39.py`, `mother`.)
+
+- **How it glows, honestly.** Round 33c found no fluorescent cast sheet thicker than 5 mm, so a 1.3 m piece cannot glow
+  the way the 300 mm desk piece does. This one is built round a 260 mm blown opal core with a lamp in it: the three
+  meridians are cut round the core, so its light enters each at its inner edge and travels out to the polished rim,
+  as an edge-lit sign does. The meridians' rims glow; the three parallels do not reach the core and glow faintly, from
+  light carried across the slots. The core also lights the listening room from above, as a pendant would. This needs
+  a sample before anyone believes it: the drawing assumes more light reaches the rims than a real 650 mm run of tint
+  may pass.
+- **Its cost:** about $9,000 to $12,000 one-off (est.; scaled from main's 1 m piece), about 95 kg of acrylic in 15 mm
+  or 160 kg in 25 mm at 1 m (main), so at 1.3 m in 25 mm about 270 kg (est.): it hangs from the slab, not the fir
+  deck, and needs an engineer's fixing.
+- **The frames:** the door and the listening room are rendered with and without it (`door-mother`,
+  `listening-mother`), so the owner can compare.
+
+**Other ways the name could live in the bar, a sentence each:**
+
+- **Mother, the house system.** The altar pair and the amplification are called Mother on the menu and the website,
+  as clubs name their rigs; "on Mother tonight" is what the Session list says.
+- **The coin's mother.** The bowl at the door is Mother EARF: every coin starts there and goes back there, and the
+  host's line is "take one from Mother".
+- **Mother EARF Sunday.** The one listening session with talking: a guest brings the records that raised them and
+  says why (the programme above).
+- **Mother, the drink.** A punch for four served from a bowl on Sundays, the only shared drink on the menu.
+- **The mother tape.** Every record played in a night is logged, and the month's log becomes a printed sheet guests
+  take home, "from Mother", the house's memory.
+- **The sign.** The small etched disc by the door carries the globe, and the room's name under it reads "Planet EARF,
+  under Mother", if the owner wants the globe kept out of the room itself.
