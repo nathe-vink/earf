@@ -87,7 +87,7 @@
    "material": "accent"
   },
   {
-   "match": "plinth-slab|base-slab|platter-disc|pod-1-stack|hinge-blocks",
+   "match": "plinth-slab|base-slab|platter-disc|pod-ring-1-stack|pod-mat|hinge-blocks",
    "material": "acrylic"
   },
   {
@@ -103,11 +103,11 @@
    "material": "arm"
   },
   {
-   "match": "thrust-pad|motor|feet|hinges",
+   "match": "motor|feet|hinges",
    "material": "black"
   },
   {
-   "match": "platter-hub|bearing-housing|bushes",
+   "match": "platter-hub|bearing-housing|bushes|pod-core",
    "material": "brass"
   },
   {
@@ -131,7 +131,7 @@
    "material": "rubber"
   },
   {
-   "match": "float-bolts|spindle|ball",
+   "match": "float-bolts|spindle|ball|thrust-plate",
    "material": "steel"
   }
  ],

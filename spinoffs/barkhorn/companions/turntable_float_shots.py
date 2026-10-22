@@ -22,10 +22,10 @@ OPEN_DEF = 'spinoffs/barkhorn/companions/out-turntable-float/open/barkhorn-turnt
 ONE = 'smoke'                                   # the colour of the open, detail and pod frames
 
 # the product's frame in metres (its footprint's centre on the shelf): the parts the frames are aimed at
-SPINDLE = [-0.035, -0.005]
-ARM = [0.160, 0.101]
-STYLUS = [0.0845, -0.123]
-POD = [-0.168, 0.123]
+SPINDLE = [-0.025, -0.012]
+ARM = [0.170, 0.094]
+STYLUS = [0.0945, -0.130]
+POD = [-0.161, 0.113]
 DAY_HIDE = ['led-strip-edge']                   # by day the edge is the clear acrylic it is
 
 

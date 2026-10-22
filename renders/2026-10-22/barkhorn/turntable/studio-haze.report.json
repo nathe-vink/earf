@@ -1,0 +1,507 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/turntable-float/studio-haze.json",
+ "image": "/home/user/earf/renders/2026-10-22/barkhorn/turntable/studio-haze.png",
+ "seconds": {
+  "build": 1.4,
+  "render": 765.0
+ },
+ "samples": 64,
+ "size": [
+  2400,
+  1600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "arm-arm#0": {
+   "part": "arm-arm",
+   "centre_px": [
+    1518.2,
+    755.5
+   ],
+   "box_px": [
+    1225,
+    547,
+    1787,
+    996
+   ],
+   "depth_m": 1.917
+  },
+  "arm-lift#0": {
+   "part": "arm-lift",
+   "centre_px": [
+    1512.0,
+    758.2
+   ],
+   "box_px": [
+    1464,
+    697,
+    1560,
+    820
+   ],
+   "depth_m": 1.942
+  },
+  "ball#0": {
+   "part": "ball",
+   "centre_px": [
+    1121.4,
+    862.7
+   ],
+   "box_px": [
+    1112,
+    852,
+    1131,
+    873
+   ],
+   "depth_m": 1.994
+  },
+  "base-slab#0": {
+   "part": "base-slab",
+   "centre_px": [
+    1200.0,
+    920.3
+   ],
+   "box_px": [
+    487,
+    670,
+    1871,
+    1243
+   ],
+   "depth_m": 1.992
+  },
+  "bearing-housing#0": {
+   "part": "bearing-housing",
+   "centre_px": [
+    1121.1,
+    829.5
+   ],
+   "box_px": [
+    1031,
+    742,
+    1209,
+    919
+   ],
+   "depth_m": 1.987
+  },
+  "belt#0": {
+   "part": "belt",
+   "centre_px": [
+    1117.6,
+    745.7
+   ],
+   "box_px": [
+    619,
+    571,
+    1586,
+    957
+   ],
+   "depth_m": 1.973
+  },
+  "bushes#0": {
+   "part": "bushes",
+   "centre_px": [
+    1121.0,
+    820.9
+   ],
+   "box_px": [
+    1099,
+    781,
+    1143,
+    861
+   ],
+   "depth_m": 1.986
+  },
+  "bushings#0": {
+   "part": "bushings",
+   "centre_px": [
+    1200.0,
+    920.3
+   ],
+   "box_px": [
+    845,
+    752,
+    1532,
+    1115
+   ],
+   "depth_m": 1.992
+  },
+  "cartridge#0": {
+   "part": "cartridge",
+   "centre_px": [
+    1264.5,
+    848.5
+   ],
+   "box_px": [
+    1230,
+    813,
+    1299,
+    884
+   ],
+   "depth_m": 1.827
+  },
+  "feet#0": {
+   "part": "feet",
+   "centre_px": [
+    1200.0,
+    945.7
+   ],
+   "box_px": [
+    556,
+    710,
+    1811,
+    1241
+   ],
+   "depth_m": 1.997
+  },
+  "fixings#0": {
+   "part": "fixings",
+   "centre_px": [
+    1200.0,
+    781.5
+   ],
+   "box_px": [
+    507,
+    557,
+    1854,
+    1068
+   ],
+   "depth_m": 1.967
+  },
+  "float-bolts#0": {
+   "part": "float-bolts",
+   "centre_px": [
+    1200.0,
+    888.6
+   ],
+   "box_px": [
+    843,
+    678,
+    1534,
+    1129
+   ],
+   "depth_m": 1.986
+  },
+  "hinge-blocks#0": {
+   "part": "hinge-blocks",
+   "centre_px": [
+    1379.7,
+    668.1
+   ],
+   "box_px": [
+    1054,
+    587,
+    1726,
+    754
+   ],
+   "depth_m": 2.124
+  },
+  "hinges#0": {
+   "part": "hinges",
+   "centre_px": [
+    1379.4,
+    618.3
+   ],
+   "box_px": [
+    1062,
+    531,
+    1717,
+    711
+   ],
+   "depth_m": 2.114
+  },
+  "led-strip-strip#0": {
+   "part": "led-strip-strip",
+   "centre_px": [
+    1200.0,
+    921.4
+   ],
+   "box_px": [
+    532,
+    687,
+    1832,
+    1218
+   ],
+   "depth_m": 1.992
+  },
+  "lid-back#0": {
+   "part": "lid-back",
+   "centre_px": [
+    1373.9,
+    541.0
+   ],
+   "box_px": [
+    932,
+    370,
+    1859,
+    725
+   ],
+   "depth_m": 2.092
+  },
+  "lid-front#0": {
+   "part": "lid-front",
+   "centre_px": [
+    998.2,
+    825.1
+   ],
+   "box_px": [
+    502,
+    616,
+    1542,
+    1052
+   ],
+   "depth_m": 1.802
+  },
+  "lid-left#0": {
+   "part": "lid-left",
+   "centre_px": [
+    745.9,
+    588.8
+   ],
+   "box_px": [
+    510,
+    373,
+    947,
+    832
+   ],
+   "depth_m": 2.037
+  },
+  "lid-right#0": {
+   "part": "lid-right",
+   "centre_px": [
+    1697.9,
+    764.3
+   ],
+   "box_px": [
+    1520,
+    518,
+    1854,
+    1046
+   ],
+   "depth_m": 1.857
+  },
+  "lid-top#0": {
+   "part": "lid-top",
+   "centre_px": [
+    1200.0,
+    560.1
+   ],
+   "box_px": [
+    501,
+    357,
+    1860,
+    820
+   ],
+   "depth_m": 1.927
+  },
+  "mark#0": {
+   "part": "mark",
+   "centre_px": [
+    1456.2,
+    1018.9
+   ],
+   "box_px": [
+    1401,
+    1002,
+    1511,
+    1036
+   ],
+   "depth_m": 1.764
+  },
+  "motor#0": {
+   "part": "motor",
+   "centre_px": [
+    990.1,
+    631.3
+   ],
+   "box_px": [
+    890,
+    546,
+    1088,
+    719
+   ],
+   "depth_m": 2.138
+  },
+  "platter-disc#0": {
+   "part": "platter-disc",
+   "centre_px": [
+    1120.5,
+    746.2
+   ],
+   "box_px": [
+    626,
+    557,
+    1585,
+    973
+   ],
+   "depth_m": 1.972
+  },
+  "platter-hub#0": {
+   "part": "platter-hub",
+   "centre_px": [
+    1120.5,
+    746.2
+   ],
+   "box_px": [
+    1047,
+    697,
+    1193,
+    797
+   ],
+   "depth_m": 1.972
+  },
+  "plinth-slab#0": {
+   "part": "plinth-slab",
+   "centre_px": [
+    1200.0,
+    814.1
+   ],
+   "box_px": [
+    513,
+    568,
+    1849,
+    1126
+   ],
+   "depth_m": 1.973
+  },
+  "pod-1-stack#0": {
+   "part": "pod-1-stack",
+   "centre_px": [
+    991.0,
+    679.9
+   ],
+   "box_px": [
+    876,
+    590,
+    1103,
+    773
+   ],
+   "depth_m": 2.147
+  },
+  "pod-pads#0": {
+   "part": "pod-pads",
+   "centre_px": [
+    998.8,
+    731.2
+   ],
+   "box_px": [
+    899,
+    689,
+    1098,
+    775
+   ],
+   "depth_m": 2.164
+  },
+  "post-1#0": {
+   "part": "post-1",
+   "centre_px": [
+    874.8,
+    937.4
+   ],
+   "box_px": [
+    824,
+    888,
+    925,
+    988
+   ],
+   "depth_m": 1.921
+  },
+  "post-2#0": {
+   "part": "post-2",
+   "centre_px": [
+    1269.6,
+    1023.0
+   ],
+   "box_px": [
+    1219,
+    971,
+    1320,
+    1076
+   ],
+   "depth_m": 1.848
+  },
+  "post-3#0": {
+   "part": "post-3",
+   "centre_px": [
+    1139.3,
+    735.6
+   ],
+   "box_px": [
+    1094,
+    692,
+    1184,
+    780
+   ],
+   "depth_m": 2.118
+  },
+  "post-4#0": {
+   "part": "post-4",
+   "centre_px": [
+    1505.4,
+    805.8
+   ],
+   "box_px": [
+    1460,
+    760,
+    1551,
+    852
+   ],
+   "depth_m": 2.045
+  },
+  "pulley#0": {
+   "part": "pulley",
+   "centre_px": [
+    989.4,
+    596.7
+   ],
+   "box_px": [
+    921,
+    561,
+    1057,
+    633
+   ],
+   "depth_m": 2.131
+  },
+  "spindle#0": {
+   "part": "spindle",
+   "centre_px": [
+    1120.7,
+    773.4
+   ],
+   "box_px": [
+    1104,
+    683,
+    1137,
+    863
+   ],
+   "depth_m": 1.977
+  },
+  "thrust-pad#0": {
+   "part": "thrust-pad",
+   "centre_px": [
+    1121.4,
+    871.3
+   ],
+   "box_px": [
+    1100,
+    860,
+    1143,
+    882
+   ],
+   "depth_m": 1.995
+  }
+ },
+ "finish": {
+  "white_in": 235,
+  "white_out": 238,
+  "peak": 251.0,
+  "contrast": 0.1,
+  "clarity": 0.03,
+  "sharpen": 0.12,
+  "sharpen_px": 0.7,
+  "gain": 1.0128
+ }
+}

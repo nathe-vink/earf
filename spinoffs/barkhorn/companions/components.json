@@ -574,5 +574,59 @@
   "estimate": true,
   "supplier": "any",
   "price_date": "2026-10-22"
+ },
+ "pod-bushings": {
+  "kind": "isolation",
+  "maker": "Isolate It (Sorbothane Inc.)",
+  "model": "Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6 (the float's, from a second 12-pack): three stacks of two under the motor's pod, 2.2 kg on three, 32 kPa a stack (load per the maker's table UNCONFIRMED)",
+  "usd": 25,
+  "supplier": "Isolate It ($24.95, a reseller's listing)",
+  "price_date": "2026-10-22"
+ },
+ "bearing-bushes-solid": {
+  "kind": "bearing",
+  "maker": "any lathe shop",
+  "model": "Two solid bronze plain bushes (C932 / SAE 660), 10 x 14 x 12, pressed into the housing and honed in line to the ground spindle, 3-5 um diametral clearance",
+  "usd": 40,
+  "estimate": true,
+  "supplier": "the bearing's lathe shop",
+  "price_date": "2026-10-22"
+ },
+ "thrust-plate": {
+  "kind": "bearing",
+  "maker": "any",
+  "model": "Thrust plate 13.8 x 3, hardened 52100 steel (60 HRC) lapped flat, at the foot of the housing's bore in the oil bath, under the carbide ball (a sapphire window of the same size is the alternative)",
+  "usd": 20,
+  "estimate": true,
+  "supplier": "a bearing supplier or the lathe shop",
+  "price_date": "2026-10-22"
+ },
+ "float-dimmer-hf": {
+  "kind": "control",
+  "maker": "Waveform Lighting",
+  "model": "FilmGrade Flicker-Free LED Dimmer, part 3081, 6-60 V DC, 10 A, turn dial, in line on the 24 V lead; PWM at 25 kHz (Waveform's knowledge base; the store page says flicker-free 0-100 %), above anything a phono stage hears",
+  "usd": 80,
+  "supplier": "Waveform Lighting (about $80, a customer's review)",
+  "price_date": "2026-10-22",
+  "url": "https://store.waveformlighting.com/products/filmgrade-flicker-free-dimmer-for-led-strip",
+  "note": "confirm the PWM frequency on its datasheet; Moss LED's MiniCine V2 (selectable to 32 kHz) is the alternative"
+ },
+ "float-earth": {
+  "kind": "wiring",
+  "maker": "any",
+  "model": "An M3 ring tag on the bearing housing's flange and 0.5 mm2 green-yellow wire to the arm's earth lead",
+  "usd": 3,
+  "estimate": true,
+  "supplier": "any",
+  "price_date": "2026-10-22"
+ },
+ "acrylic-cement-2r": {
+  "kind": "consumable",
+  "maker": "Evonik (Röhm)",
+  "model": "ACRIFIX 2R 0190, two-component polymerising cement for cast acrylic (cures through any tint, unlike the one-part light-curing 1R 0192); Weld-On 40 or 42 is the US equivalent",
+  "usd": 45,
+  "estimate": true,
+  "supplier": "a plastics distributor",
+  "price_date": "2026-10-22"
  }
 }

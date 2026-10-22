@@ -8,19 +8,21 @@
 | post-1, post-2, post-3, post-4 | lathe | 4 | Cast acrylic tube, tinted through | 40 x 40 x 36 | 17.33 |
 | bushings | buy | 1 | Isolate It (Sorbothane Inc.) Sorbothane vibration isolation bushings, 30 duro, 0.28 in ID x 0.72 in OD x 0.22 in thick (7.1 x 18.3 x 5.6), a 12-pack: two at each post (eight), one over and one under the base on the M6 bolt; about 1.8 kg on each (77 kPa), so the plinth sits at roughly 15-20 Hz, under the arm and cartridge's 10 Hz only by a factor of two: confirm on the maker's load chart and by a tap test |  | 25.00 |
 | float-bolts | buy | 1 | Four M6 x 70 stainless socket cap bolts, four 18 mm stainless washers, four M6 nyloc nuts (the float's hold-downs, snug only) |  | 8.00 |
-| platter | cut | 1 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 300 x 300 | 42.75 |
+| platter | lathe | 1 | Cast acrylic tube, tinted through | 310 x 310 x 25 | 181.10 |
 | platter-hub | lathe | 1 | Brass C360 | 56 x 56 x 30 | 56.29 |
 | spindle | lathe | 1 | Stainless steel 304 | 20 x 20 x 87 | 126.04 |
 | bearing-housing | lathe | 1 | Brass C360 | 66 x 66 x 59 | 75.84 |
-| bushes | buy | 1 | Oil-impregnated sintered bronze plain bushes 10 x 14 x 12, a pair (Oilite kind), reamed to a 0.01 running fit on the spindle after pressing |  | 8.00 |
+| bushes | buy | 1 | any lathe shop Two solid bronze plain bushes (C932 / SAE 660), 10 x 14 x 12, pressed into the housing and honed in line to the ground spindle, 3-5 um diametral clearance |  | 40.00 |
 | ball | buy | 1 | Tungsten carbide ball, 6 mm, grade 10: the spindle's thrust point, seated in a cup at the spindle's foot |  | 5.00 |
-| thrust-pad | buy | 1 | Thrust pad, PTFE (or PEEK), 13.8 x 2, at the bottom of the housing's bore, under the ball |  | 3.00 |
-| pod-1 | cut | 1 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 76 x 76 | 2.74 |
-| pod-2 | cut | 1 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 76 x 76 | 2.74 |
-| pod-3 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 76 x 76 | 1.37 |
+| thrust-plate | buy | 1 | Thrust plate 13.8 x 3, hardened 52100 steel (60 HRC) lapped flat, at the foot of the housing's bore in the oil bath, under the carbide ball (a sapphire window of the same size is the alternative) |  | 20.00 |
+| pod-ring-1, pod-ring-2 | cut | 2 | 20 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 88 x 88 | 3.68 |
+| pod-ring-3 | cut | 1 | 15 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 88 x 88 | 2.76 |
+| pod-ring-4 | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 88 x 88 | 1.84 |
+| pod-core | lathe | 1 | Brass C360 | 86 x 86 x 75 | 111.56 |
+| pod-mat | cut | 1 | 6 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 80 | 0.91 |
 | motor | buy | 1 | Rega 24 V low-vibration synchronous motor upgrade kit (motor, its board and mounting), for the Neo PSU |  | 200.00 |
 | pulley | lathe | 1 | Aluminium 6061 | 55 x 55 x 22 | 46.69 |
-| pod-pads | buy | 1 | Isolate It (or alike) Sorbothane discs 25 x 6, Shore 30, a set of 3, under the motor's pod (about 0.6 kg on them: soft, so the motor's hum stays in the pod) |  | 15.00 |
+| pod-pads | buy | 1 | Isolate It (Sorbothane Inc.) Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6 (the float's, from a second 12-pack): three stacks of two under the motor's pod, 2.2 kg on three, 32 kPa a stack (load per the maker's table UNCONFIRMED) |  | 25.00 |
 | belt | buy | 1 | Flat turntable belt, ground rubber or polyurethane, 5 wide x 0.6, about 975 long unstretched (1025 round the platter's rim and the 40 pulley, stretched 5 %) |  | 25.00 |
 | feet | buy | 1 | any (Essentra, Kipp, Elesa kind) Four levelling feet, M6 x 20 stud, 30 mm base with an anti-slip rubber pad, the stud into M6 brass inserts bonded into the base |  | 24.00 |
 | arm | buy | 1 | Rega RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's centre to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift |  | 675.00 |
@@ -34,16 +36,17 @@
 | mark | buy | 1 | Laser etching into the cast acrylic, frosted, about 0.1 deep, from a vector file: EARF 44 wide, the etch filled with the colour, deeper |  | 15.00 |
 | neo-psu | buy | 1 | Rega Neo PSU MK2: DSP-generated drive for Rega's 24 V motor, 33/45 by a button, fine speed trim (0.01 rpm steps) on the back; US 60 Hz 115-120 V version |  | 445.00 |
 | led-adapter | buy | 1 | Mean Well GST25A24-P1J desktop adapter, 24 V DC 1.04 A (25 W), level VI, IEC C8 inlet, 2.1 mm plug; UL/cUL 62368-1 listed, a Class 2 / limited power source (the strip draws 6.8 W) |  | 19.00 |
-| led-dimmer | buy | 1 | LEDSupply Single Color Mini Rotary Dimmer, 12-24 V DC PWM, in its own housing, in line on the 24 V lead behind the record player (2.1 mm in and out), on/off at the end of its turn |  | 9.00 |
+| led-dimmer | buy | 1 | Waveform Lighting FilmGrade Flicker-Free LED Dimmer, part 3081, 6-60 V DC, 10 A, turn dial, in line on the 24 V lead; PWM at 25 kHz (Waveform's knowledge base; the store page says flicker-free 0-100 %), above anything a phono stage hears |  | 80.00 |
+| earth-lead | buy | 1 | An M3 ring tag on the bearing housing's flange and 0.5 mm2 green-yellow wire to the arm's earth lead |  | 3.00 |
 | bearing-fixings | buy | 1 | Three M4 brass threaded inserts bonded with epoxy into 6 holes in the pocket's floor, three M4 x 10 black socket button heads: the bearing's flange |  | 5.00 |
 | bearing-oil | buy | 1 | Turntable bearing oil, 8 ml (a light synthetic oil, ISO VG 32 or as the bush maker says) |  | 15.00 |
-| cement | buy | 1 | Two-part polymerising acrylic cement for cast sheet (Acrifix 1R 0192 kind), clear: the cemented layers (a 100 g kit does one piece) |  | 20.00 |
+| cement | buy | 1 | Evonik (Röhm) ACRIFIX 2R 0190, two-component polymerising cement for cast acrylic (cures through any tint, unlike the one-part light-curing 1R 0192); Weld-On 40 or 42 is the US equivalent |  | 45.00 |
 
 | | USD |
 |---|---|
-| buy | 2,380 |
-| cut | 233 |
-| lathe | 374 |
-| total | 2,987 |
+| buy | 2,538 |
+| cut | 196 |
+| lathe | 667 |
+| total | 3,401 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

@@ -14,8 +14,8 @@ finalize the record player." Round 31c's R3 Float, refined; Cumulus's engineerin
 - **The base glows round its edge.** A 24 V strip stands in a 3 mm slot routed up into the base's underside 12 mm in
   from its edge, facing out: its light enters the slot's outer wall, stays in the sheet (it meets the faces past the
   critical angle) and leaves at the polished edge. The top stays clear.
-- **The motor stands apart**, on the base, in its own pod of acrylic discs on three soft pads, up through a hole in
-  the plinth with 4 mm clear all round: the belt is the only thing that touches both.
+- **The motor stands apart**, on the shelf, in its own heavy pod (a brass cup in rings of the colour) on three soft
+  pad stacks, up through holes in the base and the plinth with clearance all round: only the belt touches both.
 - **Bought:** Rega's RB330 arm and its lift, an Ortofon 2M Black, Rega's 24 V motor driven by its Neo PSU MK2,
   Pro-Ject's friction hinges for a 6 mm lid in the same tint, the LED strip behind a listed 24 V adapter and an
   in-line dimmer, levelling feet. The bearing is turned, as Cumulus's (no inverted bearing is sold on its own now).
@@ -37,14 +37,15 @@ P = dict(
     feet_h=14.0,                              # the levelling feet: the base's underside from the shelf
     gap=32.0,                                 # the float: base top to the plinth's underside
     post_d=30.0, post_bore=6.6,               # the clear posts (an M6 bolt through each)
-    posts=((135.0, 60.0), (315.0, 60.0), (135.0, 300.0), (315.0, 300.0)),   # in the plinth's own frame
+    posts=((145.0, 60.0), (305.0, 60.0), (145.0, 300.0), (305.0, 300.0)),   # in the plinth's own frame
     bush_t=5.6,                               # the Sorbothane bushing under each post (0.22 in)
-    spindle=(190.0, 175.0),                   # in the plinth's frame
+    spindle=(200.0, 168.0),                   # in the plinth's frame
     platter_d=300.0, platter_t=20.0, lift=4.0,
-    arm_r=222.0, arm_x=385.0,                 # DATASHEET: Rega's spindle to arm hole; the pivot's x (plinth frame)
+    arm_r=222.0, arm_x=395.0,                 # DATASHEET: Rega's spindle to arm hole; the pivot's x (plinth frame)
     L_eff=236.5, offset=21.55,                # DATASHEET: RB330's effective length, its headshell's offset
     rest_r=168.0,                             # at rest the stylus sits this far from the spindle, on the arm's arc
-    pod=(57.0, 303.0), pod_d=76.0, pod_gap=4.0,
+    pod=(64.0, 293.0), pod_d=88.0, core_d=76.0, pod_gap=4.0,   # the pod 184.7 from the spindle: the belt clears the rim
+    mat_d=80.0, stack_r=22.0,                 # the pod's locating mat on the shelf, its three pad stacks' circle
     rpm_motor=250.0,                          # PROPOSAL: Rega's 24 V motor at 50 Hz from the Neo; set when in hand
     slot_in=12.0, slot_w=3.0, slot_h=9.0, strip_end=40.0,   # the light's slot under the base, its runs' ends
     lid_t=6.0, lid_h=100.0, bumper=5.0, open_deg=78.0,      # the lid
@@ -122,7 +123,7 @@ def hull_pts(circles, n=180):
 def arm_solids(P, D):
     """Rega's RB330 as a stand-in from its published geometry (effective length 236.5, offset 21.55 deg), at rest:
     the stylus just off the record's lead-in, the tube in the lift's cradle. Returns the arm (base, yoke, tube,
-    counterweight), its lift on its own base on the plinth, and the cartridge."""
+    counterweight), its lift (on the arm's own base, as Rega fits it), and the cartridge."""
     from build123d import Pos, Rot
     ax, ay = D['A']
     z = D['z1']
@@ -139,10 +140,11 @@ def arm_solids(P, D):
     stub = Pos(ax, ay, h) * Rot(0, 0, ang) * Rot(0, 90, 0) * cyl('z', (0, 0), 8, -40, -6)
     yoke = Pos(ax, ay, h) * Rot(0, 0, ang) * box(-16, -12, -9, 16, 12, 9)
     base = union(cyl('z', (ax, ay), 44, z, z + 8), cyl('z', (ax, ay), 26, z + 8, h - 9))
-    # the lift, on its own base: a pillar 70 along the tube and 22 to its right (outboard), a cradle across under it
+    # the lift on a tongue of the arm's base: a pillar 55 along the tube and 18 to its right, a cradle under the tube
     nx, ny = u[1], -u[0]                                                 # the tube's right hand, seen from the pivot
-    lx, ly = ax + 70 * u[0] + 22 * nx, ay + 70 * u[1] + 22 * ny
-    lift = union(cyl('z', (lx, ly), 18, z, z + 3), cyl('z', (lx, ly), 9, z + 3, h - 7.5),
+    lx, ly = ax + 55 * u[0] + 18 * nx, ay + 55 * u[1] + 18 * ny
+    tongue = prism(hull_pts([(ax, ay, 12.0), (lx, ly, 9.0)], n=48), 'z', z, z + 3)
+    lift = union(tongue, cyl('z', (lx, ly), 9, z + 3, h - 7.5),
                  Pos(lx - 11 * nx, ly - 11 * ny, h - 7.5) * Rot(0, 0, ang + 90) * box(-14, -3, -3, 14, 3, 2.75))
     # the 2M's body under the headshell (18 wide, 15 tall), its stylus housing forward and below, the stylus at x = 0
     cart = Pos(sx, sy, h - 4.5) * Rot(0, 0, ang + P['offset']) * union(box(-21, -9, -15, 1, 9, 0), box(-6, -3.5, -17.5, 1.5, 3.5, -14.5))
@@ -171,7 +173,7 @@ def parts(P, lid_open=False):
     posts = [(m + x, m + y) for x, y in P['posts']]
 
     # -- the plinth: the bearing's housing through it (32.4), its flange in a pocket in the top (56.4 x 6) on three
-    # M4 inserts; the arm's hole (24); the pod's hole (84); under it, the four posts' bonded seats (an M6 insert 12
+    # M4 inserts; the arm's hole (24); the pod's hole (96); under it, the four posts' bonded seats (an M6 insert 12
     # deep in each), the lift's foot screw
     def plinth_cuts(s):
         s = s - cyl('z', S, 32.4, z0 - 1, z1 + 1) - cyl('z', S, 56.4, z1 - 6, z1 + 1) - cyl('z', A, 24.0, z0 - 1, z1 + 1)
@@ -186,9 +188,9 @@ def parts(P, lid_open=False):
     plinth_soft = plinth_cuts(slab(out, z0, z1, e))
 
     # -- the base: the light's slot up from below (3 x 9, 12 in from the edge, four straight runs that stop short
-    # of the corners), the four feet's M6 inserts, the four bolts' holes (10, for the bushings' sleeves), the motor's
-    # lead down through a 10 hole under the pod and out to the back-left corner in a groove underneath, the arm's
-    # lead in a groove on top to the back-right corner, the light's lead out at the back-right corner below
+    # of the corners), the four feet's M6 inserts, the four bolts' holes (10, for the bushings' sleeves), the pod's
+    # hole (100: the pod stands on the shelf through it, 6 clear), the arm's lead in a groove on top to the back-right
+    # corner; the light's lead leaves at the back-left, away from the arm's
     si, sw, sh, se = P['slot_in'], P['slot_w'], P['slot_h'], P['strip_end']
     runs = [box(se, si, b0 - 1, Wb - se, si + sw, b0 + sh), box(se, Db - si - sw, b0 - 1, Wb - se, Db - si, b0 + sh),
             box(si, se, b0 - 1, si + sw, Db - se, b0 + sh), box(Wb - si - sw, se, b0 - 1, Wb - si, Db - se, b0 + sh)]
@@ -199,7 +201,6 @@ def parts(P, lid_open=False):
         L = math.hypot(p1[0] - p0[0], p1[1] - p0[1])
         return Pos(p0[0], p0[1], 0) * Rot(0, 0, ang) * box(0, -wd / 2, za, L, wd / 2, zb)
 
-    lead_m = groove(M, (-5.0, Db + 5.0), 8.0, b0 - 1, b0 + 4)
     lead_a = groove((A[0] - 10, A[1] - 10), (Wb + 5.0, Db + 5.0), 8.0, b1 - 4, b1 + 1)
 
     def base_cuts(s):
@@ -209,7 +210,7 @@ def parts(P, lid_open=False):
             s = s - cyl('z', f, 8.0, b0 - 1, b0 + 7)
         for p in posts:
             s = s - cyl('z', p, 10.0, b0 - 1, b1 + 1)
-        return s - cyl('z', M, 10.0, b0 - 1, b1 + 1) - lead_m - lead_a
+        return s - cyl('z', M, P['pod_d'] + 12.0, b0 - 1, b1 + 1) - lead_a
     base = base_cuts(prism(bout, 'z', b0, b1))
     base_soft = base_cuts(slab(bout, b0, b1, e))
     # the strip in its slot, its LEDs facing out; and the polished edge it lights, as a skin a hair outside it
@@ -232,7 +233,8 @@ def parts(P, lid_open=False):
                            cyl('z', p, 11.0, b0 - bt - 6.6, b0 - bt - 1.6)))
 
     # -- the bearing (turned, as Cumulus's): a brass housing from 10 over the base up through the plinth, flanged
-    # into its pocket; two sintered bronze bushes; a ground stainless spindle on a 6 mm carbide ball and a PTFE pad
+    # into its pocket; two solid bronze bushes honed to the spindle; a ground stainless spindle on a 6 mm carbide ball
+    # on a lapped hardened-steel thrust plate, all in the oil bath
     hz0 = b1 + 8.0
     housing = (cyl('z', S, 32.0, hz0, z1 - 6) + cyl('z', S, 56.0, z1 - 6, z1)) - cyl('z', S, 14.0, hz0 + 4, z1 + 1)
     for k in range(3):
@@ -249,21 +251,30 @@ def parts(P, lid_open=False):
     pdisc = cyl('z', S, P['platter_d'], pz0, pz1) - cyl('z', S, 46.0, pz0 - 1, pz1 + 1)
     pdisc_soft = slab(circle_pts(S[0], S[1], P['platter_d'], 128), pz0, pz1, e) - cyl('z', S, 46.0, pz0 - 1, pz1 + 1)
 
-    # -- the motor's pod on the base: two 20 discs and a 10 on three soft pads, the motor's body in a 56 bore
-    # through the top two, its lead down a 10 hole; the motor's flange on top, the pulley at the platter's mid-rim
-    q = [b1 + 6.0, b1 + 26.0, b1 + 46.0, b1 + 56.0]
-    pods = []
-    for i in range(3):
-        dsk = cyl('z', M, P['pod_d'], q[i], q[i + 1])
-        dsk = dsk - (cyl('z', M, 56.0, q[i] - 1, q[i + 1] + 1) if i > 0 else cyl('z', M, 10.0, q[0] - 1, q[1] + 1))
-        pods.append(dsk)
-    pod_soft = slab(circle_pts(M[0], M[1], P['pod_d'], 96), q[0], q[3], e) - cyl('z', M, 56.0, q[1], q[3] + 1)
+    # -- the motor's pod, on the shelf through the base: a brass cup (76 x 65, 1.7 kg) in four rings of the colour
+    # (20, 20, 15, 10; 88 across), the motor's body in the cup's 54 bore, 42 deep; on three stacks of two Sorbothane
+    # bushings sitting in 2 mm pockets in the cup's floor and in a 6 mm acrylic mat on the shelf, so the belt can't walk
+    # it; its lead out from under it along the shelf. The motor's flange on top, the pulley at the platter's mid-rim
+    st = [(M[0] + P['stack_r'] * math.cos(math.radians(90 + 120 * k)), M[1] + P['stack_r'] * math.sin(math.radians(90 + 120 * k)))
+          for k in range(3)]
+    mz, sb = 6.0, 2.0                                     # the mat's top; the pockets' depth
+    stack_h = 2 * P['bush_t']
+    c0 = mz - sb + stack_h + sb                           # the cup's (and the rings') floor
+    q = [c0, c0 + 20, c0 + 40, c0 + 55, c0 + 65]
+    mat = cyl('z', M, P['mat_d'], 0, mz)
+    for c in st:
+        mat = mat - cyl('z', c, 19.0, mz - sb, mz + 1)
+    cup = cyl('z', M, P['core_d'], q[0], q[4]) - cyl('z', M, 54.0, q[4] - 42, q[4] + 1)
+    for c in st:
+        cup = cup - cyl('z', c, 19.0, q[0] - 1, q[0] + sb)
+    cup = cup - cyl('z', M, 10.0, q[0] - 1, q[4] - 41)       # the motor's lead down through the floor
+    rings = [cyl('z', M, P['pod_d'], q[i], q[i + 1]) - cyl('z', M, P['core_d'] + 0.4, q[i] - 1, q[i + 1] + 1) for i in range(4)]
+    pod_soft = slab(circle_pts(M[0], M[1], P['pod_d'], 96), q[0], q[4], e) - cyl('z', M, P['core_d'] + 0.4, q[0] - 1, q[4] + 1)
     bz = D['belt_z']
-    motor = union(cyl('z', M, 50.0, q[1] + 4, q[3]), cyl('z', M, 66.0, q[3], q[3] + 3), cyl('z', M, 4.0, q[3] + 3, bz + 9))
+    motor = union(cyl('z', M, 50.0, q[4] - 38, q[4]), cyl('z', M, 66.0, q[4], q[4] + 3), cyl('z', M, 4.0, q[4] + 3, bz + 9))
     pd = D['pulley_d']
     pulley = (cyl('z', M, pd, bz - 5, bz + 5) + cyl('z', M, pd + 6, bz + 5, bz + 7)) - cyl('z', M, 4.0, bz - 6, bz + 8)
-    pod_pads = union(*(cyl('z', (M[0] + 26 * math.cos(math.radians(90 + 120 * k)), M[1] + 26 * math.sin(math.radians(90 + 120 * k))),
-                           25, b1, b1 + 6) for k in range(3)))
+    pod_pads = union(*(cyl('z', c, 18.3, mz - sb, mz - sb + stack_h) - cyl('z', c, 7.1, mz - sb - 1, mz - sb + stack_h + 1) for c in st))
 
     R = P['platter_d'] / 2
     inner = hull_pts([(S[0], S[1], R + 0.05), (M[0], M[1], pd / 2 + 0.05)], n=360)
@@ -320,45 +331,55 @@ def parts(P, lid_open=False):
         Part('bushings', union(*bush_top, *bush_bot), Bought('float-bushings'), finish='rubber', group='float'),
         Part('float-bolts', union(*bolts), Bought('float-bolts'), finish='steel', group='float',
              notes=['snug only: the nut just touches its washer, so the bushings carry the plinth and the bolt only keeps it down']),
-        Part('platter', pdisc, A20, finish='acrylic', group='platter', pieces={'disc': (pdisc_soft, 'acrylic')},
-             notes=['20 mm cast acrylic in the colour, 300 across; its edges eased R1.5, its rim polished and crowned 0.2 for the belt; balanced on the hub after bonding (under 2 g mm)']),
+        Part('platter', pdisc, Machined('cast-acrylic', 'lathe', stock=(310.0, 310.0, 25.0), setup_usd=80.0), finish='acrylic', group='platter', pieces={'disc': (pdisc_soft, 'acrylic')},
+             notes=['turned, not routed: from a 310 blank of 25 mm cast sheet in the colour, rough-turned to 302 x 22, annealed (80 C, 8 h, cooled slowly), both faces faced to 20.0, the rim finish-turned to 300 and polished, crowned 0.2 for the belt',
+                    'face flatness and axial and radial run-out 0.05 or less on the finished disc; then the hub bonded in, bored true to the platter on the lathe, the whole balanced (under 2 g mm); no mat']),
         Part('platter-hub', hub, Machined('brass', 'lathe'), finish='brass', group='platter',
              notes=['bonded into the platter with a structural acrylic adhesive; bored after, true to the spindle']),
         Part('spindle', spindle, Machined('stainless', 'lathe', setup_usd=120.0), finish='steel', group='bearing',
              notes=['440C or hardened 416, ground to 10 h5; the record spindle 7.2; a 6 cup at its foot for the ball; pressed and bonded into the hub']),
         Part('bearing-housing', housing, Machined('brass', 'lathe'), finish='brass', group='bearing',
-             notes=['C360 brass; the bushes pressed in and reamed in line; filled with 2 ml of oil; hangs 8 over the base']),
-        Part('bushes', bushes, Bought('bearing-bushes'), finish='brass', group='bearing', inside=True),
+             notes=['C360 brass; the bushes pressed in and honed in line to the spindle (3-5 um clearance); filled with 2 ml of oil; hangs 8 over the base',
+                    'an M3 earth tag on its flange, wired to the arm\'s earth lead, so static bleeds off the matless acrylic through the spindle, the oil film and the housing']),
+        Part('bushes', bushes, Bought('bearing-bushes-solid'), finish='brass', group='bearing', inside=True),
         Part('ball', ball, Bought('carbide-ball'), finish='steel', group='bearing', inside=True),
-        Part('thrust-pad', pad, Bought('thrust-pad'), finish='black', group='bearing', inside=True),
-        Part('pod-1', pods[0], A20, finish='acrylic', group='pod', pieces={'stack': (pod_soft, 'acrylic')},
-             notes=['the motor\'s lead down the 10 hole and through the base']),
-        Part('pod-2', pods[1], A20, finish='acrylic', group='pod', render=False),
-        Part('pod-3', pods[2], A10, finish='acrylic', group='pod', render=False),
+        Part('thrust-plate', pad, Bought('thrust-plate'), finish='steel', group='bearing', inside=True),
+        Part('pod-ring-1', rings[0], A20, finish='acrylic', group='pod', pieces={'stack': (pod_soft, 'acrylic')},
+             notes=['four rings of the colour, 88 x 76.4, cemented into one sleeve and slid over the cup; its edges eased']),
+        Part('pod-ring-2', rings[1], A20, finish='acrylic', group='pod', render=False),
+        Part('pod-ring-3', rings[2], Sheet('cast-acrylic', 15, face='+z'), finish='acrylic', group='pod', render=False),
+        Part('pod-ring-4', rings[3], A10, finish='acrylic', group='pod', render=False),
+        Part('pod-core', cup, Machined('brass', 'lathe'), finish='brass', group='pod',
+             notes=['C360 brass, 76 x 65, the motor\'s bore 54 x 42 from the top, three 19 x 2 pockets under it for the pad stacks, a 10 hole for the motor\'s lead: 1.7 kg, the pod 2.2 kg with its rings and the motor']),
+        Part('pod-mat', mat, A6, finish='acrylic', group='pod',
+             notes=['6 mm of the colour, 80 across, three 19 x 2 pockets for the pad stacks; a clear silicone bumper film under it (the shelf)']),
         Part('motor', motor, Bought('rega-24v-motor'), finish='black', group='pod',
-             notes=['on its own rubber mounts on the pod\'s top; the bore waits on the motor in hand']),
+             notes=['on its own rubber mounts in the cup; the bore waits on the motor in hand']),
         Part('pulley', pulley, Machined('aluminium', 'lathe'), finish='aluminium', group='pod',
              notes=[f'its belt face {pd:.2f} at {P["rpm_motor"]:g} rpm (Neo, 33.3); turned to the motor\'s measured speed; the Neo trims the rest']),
-        Part('pod-pads', pod_pads, Bought('sorbothane-pod'), finish='rubber', group='pod'),
+        Part('pod-pads', pod_pads, Bought('pod-bushings'), finish='rubber', group='pod',
+             notes=['three stacks of two 30-duro bushings: 2.2 kg on three, 32 kPa each, about 1.3 mm down (UNCONFIRMED against the maker\'s load table)']),
         Part('belt', belt, Bought('flat-belt'), finish='rubber', group='platter'),
         Part('feet', foot, Bought('levelling-feet'), finish='black', group='base',
              notes=['four M6 levelling feet in bonded brass inserts: level the platter on them before setting the arm']),
         Part('arm', union(arm, lift), Bought('rega-rb330'), finish='arm', group='arm', pieces={'arm': (arm, 'arm'), 'lift': (lift, 'arm')},
              notes=['its nut under the plinth (25 mm), its lead down into the float and back along the base\'s top groove; its height set with Rega\'s spacers to the cartridge\'s VTA',
-                    'its own lift and rest on its own base, screwed to the plinth beside it']),
+                    'its lift on its own base\'s tongue, as Rega fits it; mounting through 25 mm and the record\'s height over the plinth UNCONFIRMED against Rega\'s RB330 manual: see the README']),
         Part('cartridge', cart, Bought('ortofon-2m-black'), finish='cartridge', group='arm'),
         Part('hinge-blocks', blocks, A20, finish='acrylic', group='lid',
-             notes=['two 40 x 20 x 9.5 blocks of the colour (cut from 20 sheet on edge, faced to 9.5), each with the hinge\'s slot, on two M4 screws into inserts in the plinth\'s back edge']),
+             notes=['two 40 x 20 x 9.5 blocks of the colour (cut from 20 sheet on edge, faced to 9.5), each with the hinge\'s slot',
+                    'each on two M4 stainless screws through clearance holes into brass inserts bonded into the plinth\'s back edge (drilled after cutting): the screws run horizontally, so the lid\'s 2.2 kg loads them in shear, never pulling out of a thread; no screw is cut into acrylic anywhere']),
         Part('hinges', hinges, Bought('cover-hinges'), finish='black', group='lid'),
         Part('fixings', bumps, Bought('float-fixings'), finish='clear', group='lid'),
         *lid_parts,
         Part('mark', mark, Bought('laser-etch-small'), finish='accent'),
         Part('neo-psu', None, Bought('rega-neo-psu-mk2')),
         Part('led-adapter', None, Bought('led-adapter-float')),
-        Part('led-dimmer', None, Bought('float-dimmer')),
+        Part('led-dimmer', None, Bought('float-dimmer-hf')),
+        Part('earth-lead', None, Bought('float-earth')),
         Part('bearing-fixings', None, Bought('bearing-fixings')),
         Part('bearing-oil', None, Bought('bearing-oil')),
-        Part('cement', None, Bought('acrylic-cement-small')),
+        Part('cement', None, Bought('acrylic-cement-2r')),
     ]
 
 
@@ -370,18 +391,28 @@ NOTES = [
     '(30 duro, 18.3 x 7.1 x 5.6) on the base, with a second under the base, a washer and a nyloc nut on an M6 stainless '
     'bolt into a brass insert in the plinth. Snug the nuts by hand: the bushings carry about 1.8 kg each.',
     'The light: a 24 V, 4.8 W/m strip in four straight runs standing in a 3 x 9 slot routed up into the base from below, '
-    '12 in from the edge, the LEDs facing out. Behind a listed Mean Well 24 V adapter and an in-line dimmer. 6.5 W at '
-    'full; the slot is open below, so the strip breathes into the 14 mm under the base.',
-    'The motor stands apart: its pod (two 20 and one 10 discs, 76 across) on three soft Sorbothane pads on the base, up '
-    'through an 84 hole in the plinth, 4 mm clear all round. Nothing touches the plinth from the motor but the belt.',
-    'The platter: 20 mm of the same acrylic, 300 across; the brass hub bonded in, the spindle pressed and bonded into the '
+    '12 in from the edge, the LEDs facing out. Behind a listed Mean Well 24 V adapter and an in-line flicker-free dimmer '
+    '(25 kHz PWM, above anything a phono stage hears). 6.5 W at full; the slot is open below, so the strip breathes into '
+    'the 14 mm under the base. Its leads twisted, out at the back-left, away from the arm\'s lead at the back-right.',
+    'The motor stands apart: its pod (a 1.7 kg brass cup in four rings of the colour, 88 across, 2.2 kg with the motor) on '
+    'three stacks of two Sorbothane bushings in pockets in a 6 mm mat on the shelf, up through a 100 hole in the base and '
+    'a 96 hole in the plinth, 4 mm clear. Nothing touches the plinth from the motor but the belt.',
+    'The platter: turned from 25 mm cast sheet in the colour (rough, anneal, face both sides to 20, finish-turn the rim); '
+    'flatness and run-out 0.05 or less; the brass hub bonded in and bored true, the spindle pressed and bonded into the '
     'hub, the whole balanced. The belt on its polished rim. No mat.',
     'The bearing: a turned brass housing through the plinth, flanged into a pocket in its top on three M4 screws into '
-    'bonded inserts; two sintered bronze bushes; a ground stainless spindle on a 6 mm carbide ball on a PTFE pad. Oiled.',
+    'bonded inserts; two solid bronze bushes honed in line (3-5 um); a ground stainless spindle on a 6 mm carbide ball on '
+    'a lapped hardened-steel thrust plate, in the oil bath. Earthed to the arm\'s earth lead.',
+    'Cement: ACRIFIX 2R 0190 (two-part, polymerising; cures through any tint) for every cemented joint: the lid, the '
+    'posts to the plinth, the pod\'s rings.',
     'Speed: Rega\'s 24 V motor driven by the Neo PSU MK2 (33/45 by a button, 0.01 rpm trim); the pulley turned to the '
     'motor\'s measured speed.',
-    'Arm: Rega RB330 at Rega\'s 222 from the spindle, its nut under the 25 mm plinth; its lift on the plinth beside it; '
-    'an Ortofon 2M Black. Level the platter on the four feet before setting the arm.',
+    'Arm: Rega RB330 at Rega\'s 222 from the spindle, its nut under the 25 mm plinth (counterbored from below if its '
+    'thread is short: UNCONFIRMED), Rega\'s spacers for height; an Ortofon 2M Black. Level the platter on the four feet '
+    'before setting the arm.',
+    'First-sample checks: a thermocouple on the light\'s slot wall at full for an hour (under 60 C); a hum test with the '
+    'phono stage at full gain, the light off and at every setting of the dimmer; a tap test of the float with the stylus '
+    'on a still record.',
     'The lid: 6 mm of the same acrylic, cemented as a box 448 x 358 x 100, on six clear bumpers, on Pro-Ject\'s two '
     'friction hinges in acrylic blocks on the plinth\'s back edge. Open, it leans back about 12 degrees past upright and '
     'needs 100 mm behind the base.',
@@ -397,7 +428,7 @@ MATERIALS = dict(C.MATERIALS,
 
 PRODUCT = Product('barkhorn-turntable-float', 'Float', 'Belt-drive record player in tinted cast acrylic, floating over a lit base',
                   params=P, parts=parts, count=1, notes=NOTES, materials=MATERIALS, variants=C.VARIANTS,
-                  touching=[('bushes', 'bearing-housing'), ('bushes', 'spindle'), ('float-bolts', 'post-*'),
+                  touching=[('bushes', 'bearing-housing'), ('bushes', 'spindle'), ('pod-ring-*', 'pod-core'), ('float-bolts', 'post-*'),
                             ('float-bolts', 'bushings'), ('led-strip', 'base')], drawing_prefix='EF')
 
 if __name__ == '__main__':

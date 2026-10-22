@@ -921,20 +921,21 @@ room's measured drift (`TINT_K`, `HUE_TURN`).
 The owner, 2026-10-18: "I want a squared record player similar to a debut or orbit but with a clear body and matching
 cover." "The brian eno one and the audio technica hotaru are acrylic I think and look really cool when backlit, but
 are way too expensive." And 2026-10-22: "We also need to finalize the record player." The coordinator picked round
-31c's R3 Float, refined. This is it, built to the fab kit's standard. Cumulus's bearing, motor, arm and cartridge
+31c's R3 Float, refined. This is it, built to the fab kit's standard, with an independent engineering review of
+Cumulus and the v2 concepts (relayed by the coordinator, 2026-10-22) folded in. Cumulus's motor, arm and cartridge
 carry over; its three-circle plinth does not.
 
 Status: **a proposal until the owner signs it.** Nothing of the speakers, the site or the lamps was touched.
 
 | | **Float** |
 |---|---|
-| what | belt drive; a squared plinth floating over a lit base; the motor in its own pod, apart |
-| size | 470 W x 380 D x 186 H with the lid down (the plinth 450 x 360; 100 mm more behind it for the lid to open) |
-| acrylic | plinth 25, base 10, platter 20, pod 20 + 20 + 10, lid 6 (cast 3.3 times as dense in the tint), posts water-clear rod 30 |
-| weight | 12.5 kg in all; 2.0 kg turning (platter, hub, spindle); the plinth with all it carries, 9.8 kg on the float |
-| parts list | **$2,987**, one off (the lid is $44 of it) |
+| what | belt drive; a squared plinth floating over a lit base; the motor in its own heavy pod, apart |
+| size | 470 W x 380 D x 186 H with the lid down (the plinth 450 x 360); open, the lid needs 100 mm behind |
+| acrylic | plinth 25, base 10, platter turned from 25 to 20, pod rings 20 + 20 + 15 + 10, lid 6 (cast 3.3 times as dense in the tint), posts water-clear rod 30 |
+| weight | about 14.5 kg in all; 1.96 kg turning; the plinth with all it carries 9.7 kg on the float; the pod 2.2 kg |
+| parts list | **$3,401**, one off |
 | product file | `turntable_float.py` (the shots: `turntable_float_shots.py`) |
-| build | `out-turntable-float/` (cut files, 16 drawing sheets, parts list, checks: no clashes, every sheet in stock, every bought part in the library) |
+| build | `out-turntable-float/` (cut files, 18 drawing sheets, parts list, checks: no clashes, every sheet in stock, every bought part in the library) |
 
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/turntable_float.py --out spinoffs/barkhorn/companions/out-turntable-float
     .venv-fab/bin/python spinoffs/barkhorn/companions/turntable_float_shots.py --model     # the lid-open render model
@@ -944,100 +945,131 @@ Status: **a proposal until the owner signs it.** Nothing of the speakers, the si
 ### The design
 
 - **The plinth** is one 25 mm sheet of the Clouds' tinted cast acrylic, 450 x 360, corners R4, edges eased and
-  polished, annealed after machining. One sheet, not a laminate: 25 mm keeps the colour clear (T1's 60 mm went muddy)
-  and leaves no glue line to see. The proportions are the Debut's and the Orbit's (both about 415 x 330).
+  polished, annealed after machining. One sheet, not a laminate: no glue line to see, and the colour stays clear (T1's
+  60 mm went muddy). The footprint is the Debut's and the Orbit's (both about 415 x 330), grown to take the RB330 at
+  222 mm and the pod.
 - **The float.** The plinth sits 32 mm over the base on four water-clear posts (30 rod, bored 6.6), cemented under it
-  135 mm in from the sides and 60 mm in from the front and back, so the plinth's edges hang free and the light under
-  them reads. Each post stands on a Sorbothane bushing on the base. An M6 stainless bolt runs up through a second
-  bushing under the base, the base, the first bushing and the post, into a brass insert in the plinth. The nut is
-  snugged by hand only, so the bushings carry the load and the bolt only keeps the plinth from being tipped or lifted
-  off. Seen through the clear post, the bolt is a thin steel line.
+  145 mm in from the sides and 60 mm in from the front and back, so its edges hang free over the light. Each post
+  stands on a Sorbothane bushing on the base. An M6 stainless bolt runs up through a second bushing under the base,
+  the base, the first bushing and the post, into a brass insert in the plinth. The nut is snugged by hand only, so the
+  bushings carry the load and the bolt only stops the plinth being tipped or lifted off. Through the clear post the
+  bolt is a thin steel line.
 - **The base** is 10 mm of the same acrylic, 470 x 380, R8, 10 mm proud of the plinth all round, on four levelling
-  feet. Its edge is polished and glows (below). Under it, grooves carry the motor's lead to the back-left corner; on top,
-  a groove carries the arm's lead to the back-right corner. Every cable leaves at the back.
-- **The motor stands apart.** Its pod (two 20 mm discs and a 10, 76 across) stands on three soft Sorbothane pads on
-  the base and rises through an 84 hole in the plinth with 4 mm clear all round. The belt is the only thing that
-  touches both. The pulley is 184.6 mm from the spindle, so the belt clears the platter's rim by 15 mm.
-- **The platter** is 20 mm of the same acrylic, 300 across: 1.64 kg, 1.96 kg with its brass hub and spindle
-  (I = 0.019 kg m2, a little over a Rega glass platter's). The belt runs on its polished, crowned rim. There is no
-  mat: acrylic is close to vinyl's impedance. I chose 20 over 25 to keep the deck low (the record's top 107 mm off the
-  shelf) and the bearing's load near Cumulus's.
-- **The bearing** is turned, as Cumulus's: a brass housing through the plinth, flanged into a 6 mm pocket in its top
-  on three M4 screws, hanging 8 mm over the base in the float, where the brass shows through the tint. Inside are two
-  sintered bronze bushes, a ground stainless spindle (10, 7.2 at the record), a 6 mm tungsten carbide ball and a PTFE
-  pad. I looked again for a bearing sold on its own: Michell's inverted bearing is still listed as discontinued, and
-  Pro-Ject and Rega sell theirs only with their platters. A lathe shop makes this one from sheets 6 on of the drawings.
-- **The lid** is 6 mm of the same acrylic, a top and four walls cemented, 448 x 358 x 100, standing on six clear
-  bumpers on the plinth. It is cast 3.3 times as dense in the tint (as Bell's shade was cast 4 times), so 6 mm reads
-  as the speakers' 20 mm walls do: at the speakers' own density a 6 mm lid rendered water-clear in every colour (first
-  proof). It hangs on Pro-Ject's two Debut friction hinges, each in a slotted acrylic block screwed to the plinth's
-  back edge, so the lid stays at any angle. Open, it leans about 12 degrees past upright. The kit's checks are run
-  with it down.
-- **The arm at rest.** Rega's RB330 at Rega's 222 mm, its pivot 65 mm in from the right edge and 79 mm from the
-  back. At rest the stylus sits on the arm's own arc 168 mm from the spindle, 17 mm outside a 12 inch record's edge
-  and beside its lead-in, with the tube in the RB330's lift (which stands on the plinth beside the arm). The headshell
-  is over the plinth's front-right corner, not over the shelf (Cumulus's open question 5, answered).
+  feet in bonded inserts. Its edge is polished and glows (below). A groove on top carries the arm's lead to the
+  back-right corner; the light's lead leaves at the back-left; the motor's lead runs out along the shelf.
+- **The motor stands apart, on the shelf** (review T1). The pod is a 1.7 kg brass cup (76 across, 65 tall, the motor
+  in its 54 bore) inside four rings of the colour, 88 across: 2.2 kg with the motor. It stands on three stacks of two
+  Sorbothane bushings that sit in 2 mm pockets in the cup's floor and in a 6 mm acrylic mat on the shelf, so belt
+  tension can't walk it. It rises through a 100 hole in the base (6 mm clear) and a 96 hole in the plinth (4 mm
+  clear). Its brass shows through the tint. The pulley is 184.7 mm from the spindle; the belt clears the rim by 15 mm.
+- **The platter** (review T3) is turned, not routed: a 310 blank of 25 mm sheet in the colour, rough-turned, annealed,
+  faced on both sides to 20, then the rim finish-turned to 300 and polished. Face flatness and run-out 0.05 mm or
+  less. Then the brass hub is bonded in and bored true to the platter, and the whole balanced. 1.64 kg; 1.96 kg with
+  hub and spindle (I = 0.019 kg m2, a little over a Rega glass platter's). The belt runs on its crowned rim. No mat.
+- **The bearing** (review T2) is turned: a brass housing through the plinth, flanged into a 6 mm pocket in its top on
+  three M4 screws into bonded inserts, hanging 8 mm over the base where the brass shows. Inside: **two solid bronze
+  bushes (C932) honed in line to the spindle, 3-5 um clearance**, chosen over sintered ones for a true, round running
+  fit; a ground stainless spindle (10, 7.2 at the record); a 6 mm tungsten carbide ball on **a lapped hardened-steel
+  thrust plate** (52100, 60 HRC) in the oil bath. PTFE is gone: under 2 kg the ball's contact starts near 39 MPa and
+  PTFE yields at 10-12. A sapphire plate is the alternative. The housing carries an earth tag wired to the arm's earth
+  lead, so static bleeds off the matless platter through the spindle and housing. No bearing is sold on its own that
+  fits (Michell's inverted bearing is still listed as discontinued; Pro-Ject and Rega sell theirs with their platters).
+- **The lid** is 6 mm of the same acrylic, a top and four walls cemented, 448 x 358 x 100, on six clear bumpers on
+  the plinth. It is cast 3.3 times as dense in the tint (as Bell's shade was cast 4 times), so 6 mm reads as the
+  speakers' 20 mm walls: at the speakers' density a 6 mm lid rendered water-clear (the first proofs). It hangs on
+  Pro-Ject's two Debut friction hinges, each in a slotted acrylic block. **No screw cuts a thread in acrylic
+  anywhere**: each block is held by two M4 screws through clearance holes into brass inserts bonded into the plinth's
+  back edge. The screws run horizontally, so the lid's 2.2 kg loads them in shear. Open, the lid leans about 12
+  degrees past upright.
+- **The arm at rest.** Rega's RB330 at Rega's 222 mm, its pivot 55 mm in from the right edge and 86 mm from the
+  back. At rest the stylus sits on the arm's own arc 168 mm from the spindle, 17 mm outside a 12 inch record's edge,
+  beside its lead-in, with the tube in the lift. The lift is on the arm's own base, as Rega fits it, so the rest is
+  on the plinth. The headshell is over the plinth's front-right corner.
 - **The mark** is EARF, 40 wide, laser-etched at the plinth's front right and filled with the colour, deeper.
+- **Cement** (review point 7): ACRIFIX 2R 0190, the two-part polymerising cement, or Weld-On 40/42, for the lid, the
+  posts and the pod's rings. The companions' library entry `acrylic-cement-small` names "Acrifix 1R 0192" as two-part;
+  1R 0192 is a one-part light-curing cement that won't cure through dense tints. Float uses its own entry
+  (`acrylic-cement-2r`); Cumulus's and Bell's entry is left for whoever takes those up.
+
+### The arm's mounting (review T5)
+
+- The RB330 mounts on one nut through a 24 hole (the template's figure; Rega's current arms also take a three-point
+  fixing, which Float doesn't need). Its threaded boss must reach through 25 mm of acrylic and leave room for the nut.
+  **UNCONFIRMED**: the boss's length is in Rega's RB330 manual, which could not be opened from here. If it is short, the
+  hole is counterbored from below (a 40 counterbore leaving the depth the thread allows); that is a drawing change,
+  not a redesign.
+- Rega's arms have no height adjustment: the height is set by the plinth, the platter and Rega's 2 mm spacers under
+  the base. Float's record surface stands 25.8 mm over the plinth's top (4 mm lift, 20 mm platter, 1.8 mm record).
+  **UNCONFIRMED** against Rega's published figure for the RB330 (not found in what could be read). If Float's is lower,
+  the arm takes Rega's spacers (2 mm each, or Acoustic Signature's 0.5 mm steps); if higher, the platter's lift above
+  the plinth comes down. Either is set on the first sample with the arm tube level over a record.
 
 ### The bought parts, and why
 
 | part | why this one | source | price |
 |---|---|---|---|
-| Rega RB330 tonearm (with its lift) | the best arm at the price that mounts on one nut through a flat plinth, with its own lead and lift; Rega's 222 mm geometry is published, so the plinth is drilled from a drawing | [Safe and Sound HQ](https://www.safeandsoundhq.com/products/rega-rb330-tonearm) | $675 |
-| Ortofon 2M Black | moving magnet (any phono stage), a nude Shibata, and black in every colour (the 2M Blue read as a stray accent, round 31b) | [Upscale Audio](https://upscaleaudio.com/collections/cartridges) | $750 |
-| Rega 24 V motor kit | low vibration, made for the Neo, and it fits a plain round bore | [HiFi Gear](https://www.hifigear.co.uk/rega-neo-mk2.html) | ~$200 (GBP 150) |
-| Rega Neo PSU MK2 (US, 60 Hz) | 33/45 by a button, 0.01 rpm trim, and the only mains part: a maker's finished, marked power supply | [Audio Advisor](https://www.audioadvisor.com/products/rega-neo-psu-mk2-60hz-turntable-psu-power-supply-black) | $445 |
+| Rega RB330 tonearm (with its lift) | the best arm at the price that mounts on one nut through a flat plinth, with its own lead and lift; Rega's 222 mm geometry is published | [Safe and Sound HQ](https://www.safeandsoundhq.com/products/rega-rb330-tonearm) | $675 |
+| Ortofon 2M Black | moving magnet (any phono stage), a nude Shibata, black in every colour (the 2M Blue read as a stray accent, round 31b) | [Upscale Audio](https://upscaleaudio.com/collections/cartridges) | $750 |
+| Rega 24 V motor kit | low vibration, made for the Neo, fits a plain round bore | [HiFi Gear](https://www.hifigear.co.uk/rega-neo-mk2.html) | ~$200 (GBP 150) |
+| Rega Neo PSU MK2 (US, 60 Hz) | 33/45 by a button, 0.01 rpm trim, and the only mains part: a maker's finished power supply | [Audio Advisor](https://www.audioadvisor.com/products/rega-neo-psu-mk2-60hz-turntable-psu-power-supply-black) | $445 |
 | Pro-Ject Debut lid hinges (2) | real friction hinges that hold a lid at any angle, sold as spares | [Turntable Lab](https://www.turntablelab.com/collections/pro-ject-alpha/products/pro-ject-replacement-dust-cover-hinge-for-debut-series-turntables-c1303580) | $34 ($16.95 each; "coming soon") |
 | Ledco LCLS24V-24W-27K, 24 V, 4.8 W/m, CRI 90+ | low power a metre (the slot is in acrylic), 8 mm, dimmable, 2700 K | [Ledco](https://bup.ledco.ca/en/products/led-strip-indoor-24v-5w-ip22) | $58 (CAD 79.95 for 5 m) |
 | Mean Well GST25A24-P1J, 24 V 25 W | listed (UL/cUL 62368-1), level VI, a limited power source | IBS Electronics | $19 |
-| LEDSupply mini rotary dimmer, in line | PWM 12-24 V, on/off at the end of its turn, in its own housing | [LEDSupply](https://ledsupply.com/led-dimmers/mini-rotary-knob-dimmer) | $9 |
-| Isolate It Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6, 12-pack | sized for an M6 bolt; two at each post | Isolate It (a reseller's listing) | $25 |
-| Sorbothane pads 25 x 6 (3), levelling feet M6 (4), belt, bushes, ball, pad, inserts, bolts, cement, oil | as Cumulus's, or common stock | various | $148 (mostly estimates) |
+| Waveform FilmGrade Flicker-Free dimmer (3081) | PWM at 25 kHz, far above a phono stage's band (review T6); in line, a turn dial | [Waveform Lighting](https://store.waveformlighting.com/products/filmgrade-flicker-free-dimmer-for-led-strip) | ~$80 (a customer's figure) |
+| Isolate It Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6, two 12-packs | sized for an M6 bolt; eight in the float, six in the pod's stacks | Isolate It (a reseller's listing) | $50 |
+| solid bronze bushes, steel thrust plate, carbide ball, levelling feet, belt, inserts, bolts, cement, oil, earth lead | as above, or common stock | various | $231 (mostly estimates) |
 
 Prices are from search snippets of 2026-10-18 and 2026-10-22; the pages could not be opened from here. Confirm each
-before ordering (`components.json`, `_turntable_float`).
+before ordering (`components.json`, `_turntable_float`). The LEDSupply dimmer of the first draft is out: its PWM
+frequency is not published, and cheap rotary dimmers of its kind run at 125 Hz to 2 kHz, in the phono band.
 
 ### Isolation
 
-Three paths could carry noise into the stylus, and each has a soft break.
+Three paths could carry noise to the stylus, and each has a soft break.
 
-- **Motor to plinth.** The motor's own rubber mounts, then its pod on three 30-duro pads on the base, then the base to
-  the plinth through the bushings. The pod never touches the plinth (4 mm clear all round). Only the belt joins them.
-- **Shelf to plinth.** Feet to the base, then the bushings: about 9.8 kg on four, 2.45 kg on each (1.9 without the
-  lid), or 108 kPa on the bushing's ring. That is inside Sorbothane's working range for 30 duro and should put the
-  plinth on the float at roughly 15 to 20 Hz. The arm with the 2M Black resonates near 10 Hz (RB330 about 11 g
-  effective, the 2M's 7.2 g, compliance about 20 um/mN). The two are about an octave apart; close enough that the
-  first sample needs a tap test with the stylus on a still record. A softer or harder bushing changes it.
-- **The bolt.** It touches the plinth (through the insert) and the post, but not the base: it passes through the
-  bushings' sleeves in a 10 hole, and the nut is only snug. Tightened hard, it would short the float. The drawing
-  note says so.
+- **Motor to plinth.** The motor's own rubber mounts in the brass cup; the pod (2.2 kg) on three stacks of two 30-duro
+  bushings on the shelf: 7.2 N a stack, 32 kPa on the bushing's ring, about 1.3 mm down (12 %, in Sorbothane's
+  10-20 % working range; the maker's load table is UNCONFIRMED). That puts the pod near 14 Hz static (nearer 20 Hz
+  dynamic, Sorbothane being stiffer in motion), well under the motor's 100 Hz torque ripple at 50 Hz drive. The pod
+  touches neither the base nor the plinth; only the belt joins them.
+- **Shelf to plinth.** Feet to the base, then the four bushings under the posts: 9.7 kg on four with the lid down,
+  2.4 kg each, 107 kPa (1.9 kg and 84 kPa with the lid off). Expect the float near 15-20 Hz. The RB330 with the 2M
+  Black resonates near 10 Hz (about 11 g effective mass, the 2M's 7.2 g, compliance about 20 um/mN): about an octave
+  apart. The first sample gets a tap test with the stylus on a still record; a softer or harder bushing moves it.
+- **The bolt.** It touches the plinth (through its insert) and the post, never the base: it passes through the
+  bushings' sleeves in a 10 hole, and the nut is only snug. Tightened hard it would short the float; the drawing note
+  says so.
 
-### The light and its heat
+### The light, its heat, and the cartridge (review T6)
 
 - **How it glows.** A 24 V strip in four straight runs (2 x 386 and 2 x 296, 1.36 m) stands on edge in a 3 x 9 slot
   routed up into the base's underside, 12 mm in from its edge, its LEDs facing out. The light enters the slot's outer
-  wall, meets the top and bottom faces past acrylic's critical angle (42 degrees), so it stays in the sheet, and
-  leaves at the polished edge. The top face stays clear and dark, and the edge glows in the base's own colour. The
-  runs stop 40 mm short of each corner, so the corners glow a little less; the light spreads, and the corners take the
-  leads' grooves.
-- **Power.** 4.8 W/m x 1.36 m = 6.5 W at full, from a listed Mean Well 24 V 25 W adapter through an in-line
-  rotary dimmer (on/off at the end of its turn).
-- **Heat.** Cast acrylic softens near 100 C and should be kept under about 80 C. At 4.8 W/m in free air, a strip
-  like this runs about 15-20 C over the room. In the slot it is open below to the 14 mm space under the base, and its
-  heat also spreads through the acrylic (0.19 W/m K) across the 12 mm wall to the edge and into the base's 0.36 m2 of
-  faces: about 6.5 W over the base is under 2 C on average. My estimate for the slot's wall at full is 20-30 C over the
-  room, about 50 C in a warm room: well under 80 C, but an estimate. The first sample gets a thermocouple on the slot
-  wall at full, for an hour; if it passes 60 C, the dimmer's top is limited. A 95-CRI strip at 14 W/m (Waveform's
-  CENTRIC WARM) would not be safe in this slot at full; that is why this strip is 4.8 W/m and CRI 90+.
+  wall, meets the top and bottom faces past acrylic's critical angle (42 degrees), stays in the sheet, and leaves at
+  the polished edge, which glows in the base's colour. The top stays clear. The runs stop 40 mm short of each corner,
+  so the corners glow a little less.
+- **Power.** 4.8 W/m x 1.36 m = 6.5 W at full, from a listed Mean Well 24 V 25 W adapter through Waveform's
+  flicker-free dimmer.
+- **Heat.** Cast acrylic softens near 100 C; keep it under about 80 C. At 4.8 W/m in free air a strip like this runs
+  about 15-20 C over the room. In the slot it is open below to the 14 mm space under the base, and its heat spreads
+  through the acrylic (0.19 W/m K) across the 12 mm wall and into the base's 0.36 m2 of faces: 6.5 W over the base
+  is under 2 C on average. My estimate for the slot wall at full is 20-30 C over the room, about 50 C in a warm room.
+  A 95-CRI strip at 14 W/m (Waveform's CENTRIC WARM) would not be safe in this slot at full; that is why this strip
+  is 4.8 W/m and CRI 90+.
+- **Hum.** A moving magnet cartridge feeds a phono stage with about 40 dB of gain at 1 kHz and more in the bass, so a
+  PWM dimmer running in the audio band can be heard. The dimmer runs at 25 kHz; the strip's leads are twisted pairs
+  and leave at the back-left, the far corner from the arm's lead at the back-right.
+- **First-sample checks:** a thermocouple on the slot wall at full for an hour (if it passes 60 C, the dimmer's top is
+  limited); a hum test with the phono stage at full gain, the light off and at every setting of the dimmer; the
+  float's tap test.
 
 ### Mains safety and listing
 
-- Two things plug into the wall, and both are bought finished: Rega's Neo PSU MK2 (it drives the motor at 24 V) and
-  Mean Well's GST25A24 (UL/cUL 62368-1, a limited power source, for the light). Inside the record player everything is
-  24 V or less: the motor's lead, the strip, the dimmer. Nothing at mains voltage comes near the acrylic.
+- Two things plug into the wall, both bought finished: Rega's Neo PSU MK2 (it drives the motor at 24 V) and Mean
+  Well's GST25A24 (UL/cUL 62368-1, a limited power source, for the light). Inside the record player everything is 24
+  V or less. Nothing at mains voltage comes near the acrylic.
 - The light is a Class 2 circuit (under 100 VA, behind a listed limited power source), so the strip and the dimmer
-  ride on the adapter's listing. For sale in the US, the assembled product would still want a UL 2108 or a 62368-1
-  evaluation; that is a test lab's job, not a redesign.
+  ride on the adapter's listing. For sale in the US, the assembled product would still want a UL 2108 or 62368-1
+  evaluation: a test lab's job, not a redesign.
 - The Neo is CE and UKCA marked in Rega's literature. I did not find its UL or ETL listing in what I could read:
   confirm the US unit's mark before selling here.
 
@@ -1045,27 +1077,32 @@ Three paths could carry noise into the stylus, and each has a soft break.
 
 | | USD |
 |---|---|
-| bought (arm $675, cartridge $750, Neo $445, motor $200, and the rest) | 2,380 |
-| cut acrylic (plinth $96, base $42, platter $43, lid $44, pod $7) | 233 |
-| turned (bearing housing $76, spindle $126, hub $56, pulley $47, four posts $69) | 374 |
-| **one off** | **2,987** |
+| bought (arm $675, cartridge $750, Neo $445, motor $200, dimmer $80, and the rest) | 2,538 |
+| cut acrylic (plinth $96, base $42, lid $44, pod rings and mat $13, hinge blocks) | 196 |
+| turned (platter $181, pod core $112, spindle $126, bearing housing $76, hub $56, pulley $47, four posts $69) | 667 |
+| **one off** | **3,401** |
 
-The arm, cartridge and Neo are $1,870 of it. Cumulus was $2,775: Float adds the base, the lid and the light, and
-loses a 20 mm sheet. At the speakers' multiple it would sell for about $5,500; the owner sets the price.
+The arm, cartridge and Neo are $1,870 of it. The review's points added $414 (the turned platter, the brass core, the
+bronze bushes and steel plate, the 25 kHz dimmer, the second pack of bushings, the cement). At the speakers' multiple
+it would sell for about $6,000; the owner sets the price.
 
 ### Open questions for the owner
 
-1. **The name.** Float, the concepts' name, is kept. One line for the site: "A record player that floats a little
-   above itself. The motor stands apart; the base lights the edge."
-2. **The lid's tint.** Cast 3.3 times as dense, so it reads as the speakers' walls. It needs the casting partner to
-   make 6 mm sheet in eight tints at that density (as Bell's shade does). The alternative is a clear lid on every
-   colour.
-3. **The lid's weight.** 2.2 kg is about twice a Debut's. Pro-Ject's hinges may not hold it at every angle: try a
-   pair on the first lid; if they sag, Technics-pattern hinges (2-pack $15.99) with a stiffer spring.
-4. **The cartridge.** The 2M Black ($750) is half the arm-and-cartridge cost. A 2M Bronze or a 2M Blue in a black
-   body would take $300 to $550 off the price; the arm takes either.
-5. **CRI 90 or 95.** The strip is CRI 90+; the colour seen at the edge is the tint's, not the strip's. A 95+ strip at
-   this power was not found.
-6. **Two plugs.** The Neo and the light each need a socket. One 24 V supply for both is possible only if Rega would
-   sell the Neo's drive board alone; ask Rega.
-7. **The posts.** Water-clear in every colour (the concepts showed them so). They could be cast in the colour.
+1. **A phono stage and a volume control** (review point 8). Nothing in the EARF system has either: the speakers'
+   Hypex FA122 takes line or digital input only, so Float can't play through EARF speakers on its own. The choices are
+   a built-in MM phono stage with a switchable line out (and then still no volume), or a separate preamp with a phono
+   input and a volume knob. **I recommend the separate preamp, made as an EARF piece in the same acrylic**: it gives
+   the speakers a volume control for every source, not only the record player, and keeps a 40 dB stage away from the
+   motor and the light.
+2. **The name.** Float, the concepts' name, is kept. One line for the site: "A record player that sits a little above
+   itself. The motor stands apart; the base lights the edge."
+3. **The lid's tint.** Cast 3.3 times as dense, so it reads as the speakers' walls; the casting partner would have to
+   make 6 mm sheet in eight tints at that density (as for Bell's shade). The alternative is a clear lid on every colour.
+4. **The lid's weight.** 2.2 kg is about twice a Debut's. Pro-Ject's hinges may not hold it at every angle: try a pair
+   on the first lid; if they sag, Technics-pattern hinges (2-pack $15.99) with a stiffer spring.
+5. **The cartridge.** The 2M Black ($750) is a fifth of the cost. A 2M Bronze or 2M Blue in a black body would take
+   $300 to $550 off; the arm takes either.
+6. **CRI 90 or 95.** The strip is CRI 90+; the colour seen at the edge is the tint's, not the strip's.
+7. **Two plugs.** The Neo and the light each need a socket. One supply for both only if Rega would sell the Neo's
+   drive board alone; ask Rega.
+8. **The posts.** Water-clear in every colour, as the concepts showed them. They could be cast in the colour.
