@@ -5,7 +5,7 @@
 | plinth | cut | 1 | 25 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 450 x 360 | 96.19 |
 | base | cut | 1 | 10 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 470 x 380 | 42.42 |
 | led-strip | buy | 1 | Ledco LCLS24V-24W-27K-IP22: 24 V, 4.8 W/m, 8 mm, 2700 K, CRI 90+, dimmable, 5 m roll; on a black PCB if Ledco makes it (UNCONFIRMED; black-PCB 24 V strips are common), so the strip reads as a dark line through the polished edge when off (0.98 m used, in three straight runs standing in the base's slot, facing out) |  | 58.00 |
-| slot-mask | buy | 1 | any screen printer Opaque black band screen-printed in two coats (UV-curing ink for acrylic) on the base's top over the light's slot: four runs, 9 wide, 1.36 m in all; black cast acrylic strips cemented in a shallow rebate are the alternative |  | 30.00 |
+| slot-mask | buy | 1 | any screen printer Opaque black band screen-printed in two coats (UV-curing ink for acrylic) on the base's top over the light's slot: three runs, 9 wide, 0.98 m in all; black cast acrylic strips cemented in a shallow rebate are the alternative |  | 30.00 |
 | post-1, post-2, post-3, post-4 | lathe | 4 | Cast acrylic tube, tinted through | 40 x 40 x 44 | 17.84 |
 | bushings | buy | 1 | Isolate It (Sorbothane Inc.) Sorbothane vibration isolation bushings, 30 duro, 0.28 in ID x 0.72 in OD x 0.22 in thick (7.1 x 18.3 x 5.6), a 12-pack: two at each post (eight), one over and one under the base on the M6 bolt; about 1.8 kg on each (77 kPa), so the plinth sits at roughly 15-20 Hz, under the arm and cartridge's 10 Hz only by a factor of two: confirm on the maker's load chart and by a tap test |  | 25.00 |
 | float-bolts | buy | 1 | Four M6 x 70 stainless socket cap bolts, four 18 mm stainless washers, four M6 nyloc nuts (the float's hold-downs, snug only) |  | 8.00 |
@@ -22,7 +22,7 @@
 | pod-mat | cut | 1 | 6 mm Cast acrylic, tinted through in the speaker's colour, 4 x 8 ft sheet | 80 x 80 | 0.91 |
 | motor | buy | 1 | Rega 24 V low-vibration synchronous motor upgrade kit (motor, its board and mounting), for the Neo PSU |  | 200.00 |
 | pulley | lathe | 1 | Aluminium 6061 | 55 x 55 x 22 | 46.69 |
-| pod-pads | buy | 1 | Isolate It (Sorbothane Inc.) Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6 (the float's, from a second 12-pack): three stacks of two under the motor's pod, 2.2 kg on three, 32 kPa a stack (load per the maker's table UNCONFIRMED) |  | 25.00 |
+| pod-pads | buy | 1 | Isolate It (Sorbothane Inc.) Sorbothane bushings, 30 duro, 7.1 x 18.3 x 5.6 (the float's, from a second 12-pack): three stacks of two under the motor's pod, 2.4 kg on three, 35 kPa a stack (load per the maker's table UNCONFIRMED) |  | 25.00 |
 | belt | buy | 1 | Flat turntable belt, ground rubber or polyurethane, 5 wide x 0.6, about 975 long unstretched (1025 round the platter's rim and the 40 pulley, stretched 5 %) |  | 25.00 |
 | feet | buy | 1 | any (Essentra, Kipp, Elesa kind) Four levelling feet, M6 x 20 stud, 30 mm base with an anti-slip rubber pad, the stud into M6 brass inserts bonded into the base |  | 24.00 |
 | arm | buy | 1 | Rega RB330 tonearm (9 in, Rega geometry: 222 mm from the platter's centre to the arm's hole, effective length 236.5, overhang 14.5, offset 21.55 deg), with its own lead and cueing lift |  | 675.00 |

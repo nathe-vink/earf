@@ -1,11 +1,11 @@
 {
- "title": "Float in Haze, studio",
+ "title": "Mantle in Haze, studio, lid open",
  "size": [
   2400,
   1600
  ],
  "product": {
-  "def": "studio/products/barkhorn-turntable-float.json",
+  "def": "spinoffs/barkhorn/companions/out-turntable-float/open/barkhorn-turntable-float-open.json",
   "flavour": "haze",
   "hide": [
    "led-strip-edge"
@@ -42,9 +42,9 @@
     "radius": 0.1505,
     "height": 0.0018,
     "position": [
-     -0.035,
-     -0.005,
-     0.105
+     -0.025,
+     -0.012,
+     0.113
     ],
     "material": "gloss",
     "color": "#0C0C0D",
@@ -56,9 +56,9 @@
     "radius": 0.05,
     "height": 0.0003,
     "position": [
-     -0.035,
-     -0.005,
-     0.10679999999999999
+     -0.025,
+     -0.012,
+     0.1148
     ],
     "material": "paper",
     "color": "#E6E0D4"
@@ -67,18 +67,18 @@
   "flags": [
    {
     "center_m": [
-     -0.539,
-     1.092,
-     0.64
+     -0.588,
+     1.084,
+     0.527
     ],
     "size_m": [
      2.4,
      1.4
     ],
     "normal": [
-     0.415,
-     -0.84,
-     -0.35
+     0.453,
+     -0.834,
+     -0.317
     ],
     "glossy": true,
     "reflect_only": true,
@@ -88,16 +88,16 @@
  },
  "camera": {
   "position": [
-   0.8,
-   -1.62,
-   0.86
+   0.95,
+   -1.75,
+   0.78
   ],
   "target": [
    0.0,
-   0.0,
-   0.075
+   0.03,
+   0.15
   ],
-  "lens_mm": 70.0,
+  "lens_mm": 62.0,
   "level": false
  },
  "sky": {
@@ -236,6 +236,27 @@
    "irradiance": 14.0,
    "color": "#FFF8F0",
    "camera": false
+  },
+  "plinth-back": {
+   "type": "area",
+   "size_m": [
+    1.0,
+    0.12
+   ],
+   "position": [
+    -0.4,
+    0.8,
+    0.077
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.076
+   ],
+   "irradiance": 120.0,
+   "color": "#FFF8F0",
+   "camera": false,
+   "specular": 0.0
   }
  }
 }
