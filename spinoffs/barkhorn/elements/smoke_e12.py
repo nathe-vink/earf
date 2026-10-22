@@ -31,7 +31,8 @@ dropped with its smoke banks, is back).
 
 p7: meteor_d, the fire on its front corners and foot too (both sets of critics: the flames "never pass in front of the
 box", "glowing cards beside it"; the owner's "enveloped"), unseen through its clear parts (the flames behind it showed
-through the smoked acrylic as pale tan panels), with a lamp for the front flames on its face.
+through the smoked acrylic as pale tan panels). (A lamp for the front flames, 0.4 m off its face, turned the black
+cabinet bronze in proof 7: gone.)
 """
 import copy
 import math
@@ -78,8 +79,7 @@ def firelight(drop=SINK):
     the plume's foot lit it like a fireball)."""
     a = math.radians(ROT)
     out = {}
-    for k, (x, y, z, w) in enumerate([(-0.6, 0.1, 0.8, 400.0), (0.6, 0.15, 0.75, 400.0), (0.0, 0.55, 0.95, 300.0),
-                                      (0.0, -0.4, 0.7, 150.0)]):
+    for k, (x, y, z, w) in enumerate([(-0.6, 0.1, 0.8, 400.0), (0.6, 0.15, 0.75, 400.0), (0.0, 0.55, 0.95, 300.0)]):
         out[f'flame{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z - drop, 3)], w, '#FF7A2E', 0.25),
                                 camera=False, transmission=False, specular=0.0, volume=False)
