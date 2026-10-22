@@ -67,9 +67,9 @@ VIEWS = {
             'base': 'bar-smoke', 'settings': dict(exposure=3.4, bar_key=2.6, bar_rim=10.0, spk_niche_strip=1.5), 'life': COUNTER_LIFE},
     # the listening room: from behind the tub chairs, the pair on the altar
     'listening': {'title': 'the listening room',
-                  'camera': {'position': [12.9, 1.70, 1.15], 'target': [16.6, 3.2, 1.00], 'lens_mm': 32, 'level': True,
+                  'camera': {'position': [12.25, 2.20, 1.25], 'target': [16.6, 3.1, 1.15], 'lens_mm': 28, 'level': True,
                              'fstop': 4.0, 'focus': [15.5, 3.0, 1.0]},
-                  'base': 'listening-smoke', 'settings': dict(exposure=6.0, screen_glow=0.004, listen_key=0.9, listen_rim=5.0, altar_w=35.0,
+                  'base': 'listening-smoke', 'settings': dict(exposure=5.2, screen_glow=0.004, listen_key=0.45, listen_rim=5.0, altar_w=35.0,
                                                        altar_cone=16.0, altar_z=0.8, niche_strip=0.15, haze=0.009),
                   'life': dict(rocks=[[round(RP.TUB_TABLES[3][0] + 0.06, 3), round(RP.TUB_TABLES[3][1] - 0.07, 3),
                                        round(RP.ZONE['z'] + RP.TUB_TABLE['h'], 3), 0.024, 1, AMBER]],
@@ -94,11 +94,11 @@ VIEWS = {
              # from inside the room, looking back to the door: the bowl on the host stand in the foreground, the steel
              # door and the shopfront beyond it, the street's light in the glass
              # p2 (4.5, 5.0: two thirds empty wall, the door unreadable, the stand pale): nearer and higher on 45 mm,
-             # looking down past the bowl to the door and the vestibule's glass; the bowl in the house's own Smoke
+             # looking down past the bowl to the door and the vestibule's glass (a Smoke bowl, tried, read as a dark hole)
              'camera': {'position': [round(RP.HOST['x'] + 0.62, 3), round(RP.HOST['y'] + 0.60, 3), 1.45],
-                        'target': [1.0, 0.9, 1.0], 'lens_mm': 45, 'level': True,
+                        'target': [1.25, 1.45, 1.0], 'lens_mm': 45, 'level': True,
                         'fstop': 2.8, 'focus': [RP.HOST['x'], RP.HOST['y'], RP.HOST['top'] + 0.04]},
-             'base': 'coins-door', 'settings': dict(exposure=4.8, host_w=10.0, host_cone=12.0, coin_bowl='smoke', coin_edge='reeded'),
+             'base': 'coins-door', 'settings': dict(exposure=5.4, host_w=10.0, host_cone=12.0, coin_edge='reeded'),
              'retouch': dict(darken={'oak-host': 0.45}),
              'life': dict(matchbooks=[[RP.HOST['x'] + 0.10, RP.HOST['y'] - 0.08, RP.HOST['top'], -18.0],
                                       [RP.HOST['x'] + 0.13, RP.HOST['y'] - 0.06, RP.HOST['top'] + 0.006, 9.0]])},

@@ -11,8 +11,8 @@
    1.45
   ],
   "target": [
-   1.0,
-   0.9,
+   1.25,
+   1.45,
    1.0
   ],
   "lens_mm": 45,
@@ -360,9 +360,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.054,
+    "lamp_w": 0.035,
     "lamp_k": 2700,
-    "shade_glow": 0.0086,
+    "shade_glow": 0.0057,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -445,7 +445,7 @@
      ]
     ],
     "n": 90,
-    "bowl": "smoke",
+    "bowl": "brass",
     "d": 220,
     "edge": "reeded"
    },
@@ -1153,7 +1153,7 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 4.8,
+  "exposure": 5.4,
   "white_balance_k": 3250,
   "white_balance_tint": -6.0
  },
