@@ -6,9 +6,9 @@
  ],
  "camera": {
   "position": [
-   7.22,
-   3.47,
-   1.34
+   7.14,
+   3.35,
+   1.37
   ],
   "target": [
    7.64,
@@ -17,10 +17,10 @@
   ],
   "lens_mm": 40,
   "level": true,
-  "fstop": 2.8,
+  "fstop": 5.6,
   "focus": [
-   7.5,
-   4.01,
+   7.7,
+   4.21,
    1.17
   ]
  },
@@ -125,7 +125,7 @@
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.07,
+    "screen_glow": 0.035,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -312,7 +312,7 @@
     "ceiling": 3.4,
     "lamp_w": 30.0,
     "lamp_k": 2700,
-    "shade_glow": 0.12,
+    "shade_glow": 0.05,
     "noshadow": "shell|liner|skin"
    },
    {
@@ -375,9 +375,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.749,
+    "lamp_w": 1.398,
     "lamp_k": 2700,
-    "shade_glow": 0.1198,
+    "shade_glow": 0.0746,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -425,7 +425,7 @@
      "dust"
     ],
     "out": 6.0,
-    "base_glow": 1.0,
+    "base_glow": 1.6,
     "back_glow": 1.0
    },
    {
@@ -474,7 +474,7 @@
       3.99,
       1.07,
       0.92,
-      "#9A1E14"
+      "#B8462A"
      ]
     ],
     "mixing": [
@@ -482,8 +482,8 @@
       7.87,
       4.15,
       1.07,
-      0.07,
-      "#9A1E14"
+      0.05,
+      "#B8641C"
      ]
     ],
     "bottles": [
@@ -518,6 +518,12 @@
       -22.0
      ]
     ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "path": "spinoffs/barkhorn/planet/r39/kit39.py",
+    "fn": "records"
    },
    {
     "kind": "kit",
@@ -703,8 +709,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 80.0,
-   "cone_deg": 28.0,
+   "power_w": 50.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -722,8 +728,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 80.0,
-   "cone_deg": 28.0,
+   "power_w": 50.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -741,8 +747,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 80.0,
-   "cone_deg": 28.0,
+   "power_w": 50.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -760,8 +766,8 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 80.0,
-   "cone_deg": 28.0,
+   "power_w": 50.0,
+   "cone_deg": 24.0,
    "blend": 0.5,
    "radius_m": 0.07,
    "color": 2400,
@@ -798,7 +804,7 @@
     -6.0,
     5.6
    ],
-   "power_w": 110.0,
+   "power_w": 50.0,
    "radius_m": 0.15,
    "color": 2700
   },
@@ -809,7 +815,7 @@
     15.1,
     5.6
    ],
-   "power_w": 110.0,
+   "power_w": 50.0,
    "radius_m": 0.15,
    "color": 2700
   },
@@ -825,7 +831,7 @@
     6.05,
     2.0
    ],
-   "power_w": 30.0,
+   "power_w": 6.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -844,7 +850,7 @@
     6.05,
     2.0
    ],
-   "power_w": 30.0,
+   "power_w": 6.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -863,7 +869,7 @@
     6.05,
     2.0
    ],
-   "power_w": 30.0,
+   "power_w": 6.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -882,7 +888,7 @@
     6.05,
     2.0
    ],
-   "power_w": 30.0,
+   "power_w": 6.0,
    "cone_deg": 26.0,
    "blend": 0.8,
    "radius_m": 0.03,
@@ -1171,7 +1177,7 @@
     4.25,
     1.15
    ],
-   "power_w": 300.0,
+   "power_w": 220.0,
    "cone_deg": 9.0,
    "blend": 0.5,
    "radius_m": 0.15,
@@ -1194,7 +1200,7 @@
     1.0,
     0.7
    ],
-   "irradiance": 2.0,
+   "irradiance": 3.0,
    "color": 3000,
    "camera": false,
    "receivers": [
@@ -1233,7 +1239,7 @@
     0.5,
     0.08
    ],
-   "irradiance": 6.0,
+   "irradiance": 8.0,
    "color": 2800,
    "camera": false,
    "receivers": [
@@ -1272,7 +1278,7 @@
     1.0,
     0.7
    ],
-   "irradiance": 2.0,
+   "irradiance": 3.0,
    "color": 3000,
    "camera": false,
    "receivers": [
@@ -1311,7 +1317,7 @@
     0.5,
     0.08
    ],
-   "irradiance": 6.0,
+   "irradiance": 8.0,
    "color": 2800,
    "camera": false,
    "receivers": [
@@ -1344,7 +1350,7 @@
    6.05,
    3.32
   ],
-  "density": 0.007,
+  "density": 0.003,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1357,8 +1363,8 @@
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
   "exposure": 1.0,
-  "white_balance_k": 3250,
-  "white_balance_tint": -6.0
+  "white_balance_k": 2850,
+  "white_balance_tint": -4.0
  },
  "materials": {
   "glow": {

@@ -17,3 +17,13 @@ told nothing, shown the frames at 600 px under neutral names (`p<N>-readtest.jso
 
 Read test p1: every frame named correctly and every frame called a render ("too even", "objects repeat exactly",
 "neighbouring buildings blank"); Mother EARF read as "a glowing multicoloured neon wireframe globe".
+| p2 | door-mother (Smoke globe) | 5.5 | 5.5 | 5.5 | 7.5, 7.5 | the spot's pool a hard follow-spot ellipse; the globe a dark cage (rims unlit); haze beams |
+| p2 | door | 5.0 | 5.5 | 5.25 | 7.0, 7.0 | haze fogs the back bar; grade orange; the altar pair dimmer than the floor; zinc hot |
+| p2 | bar | 5.5 | 5.5 | 5.5 | 7.3, 7.0 | the record wall's empty cubbies the brightest area; niches wash the pair; Domes opal; orange |
+| p2 | listening | 4.0 | 4.5 | 4.25 | 6.5, 6.5 | still a showroom niche over an empty floor: pull back, seated, chairs and Orbs in front |
+| p2 | decks | 4.5 | 5.5 | 5.0 | 6.5, 7.3 | nothing sharp at f/2.8; the counter a blotch map; the mixing glass black |
+| p2 | bowl | 5.0 | 4.5 | 4.75 | 7.4, 6.5 | still no door; the bowl's floor blown; the bowl frosted copper, not brass; the stand pale |
+| p2 | street | 6.0 | 6.0 | 6.0 | 7.6, 7.8 | the exterior outshines the room; no blue; the lightbox dead; the name vinyl; a speaker through the glass |
+
+Read test p2: all seven called renders; Mother EARF "a large dark wire-sphere pendant"; the street "an
+architectural-visualization look"; the bowl "fairly photoreal".

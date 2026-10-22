@@ -350,6 +350,16 @@ def retouch(bpy, name, p, kit):
     for key, f in dict({'zinc': 0.6}, **p.get('darken', {})).items():   # a darker stain or patina, by material name
         for m in [m for m in bpy.data.materials if key in m.name]:
             _darken(m, f)
+    for key, vals in p.get('set', {}).items():         # a finish set outright (p3: the bowl as aged brass)
+        for m in [m for m in bpy.data.materials if key in m.name and m.use_nodes]:
+            b = m.node_tree.nodes.get('Principled BSDF')
+            if not b:
+                continue
+            for inp, val in vals.items():
+                if inp in b.inputs:
+                    if b.inputs[inp].is_linked:
+                        m.node_tree.links.remove(b.inputs[inp].links[0])
+                    b.inputs[inp].default_value = LK.lin(val) if isinstance(val, str) else val
     m = bpy.data.materials.get('zinc')
     if m and p.get('zinc', True):
         t = assets.texture(p.get('zinc_scan', 'metal_plate_02'), '2k', maps=('diff', 'rough'))
@@ -370,3 +380,39 @@ def retouch(bpy, name, p, kit):
             nt.links.new(cr.outputs['Result'], cc.inputs[k])
         nt.links.new(cc.outputs['Color'], mx.inputs[7]); nt.links.new(mx.outputs[2], b.inputs['Base Color'])
     return out
+
+
+def records(bpy, name, p, kit):
+    """The record wall's cells that round 36 left empty for its lit timber niche (bays 8.90 to 9.90, which round 37
+    replaced with the bar pair's niches): filled with spines like the rest, so the wall reads as a working library
+    (both p2 bar critics: "empty cubbies, the brightest large area")."""
+    R = K37.R; RW = R.RECORD_WALL; B = R.BACKBAR36
+    holes, htop, hz0 = K._spk_holes()
+    nx0, nx1, nz0, nz1 = B['niche']
+    cell = RW['cell']; ncol = int((RW['x1'] - RW['x0']) / cell); nrow = int((RW['z1'] - RW['z0']) / cell)
+    yb = R.W - 0.02; yf = yb - RW['depth']
+    rnd = random.Random(392)
+    pal = ['#1A1A1A', '#141414', '#26262A', '#E6E0D2', '#D8D0BE', '#C9BFA8', '#9C9488', '#6E6A64', '#3A2E2A', '#8A6E4E',
+           '#B8A27A', '#4A3A30', '#2E3440', '#5A4A3A', '#7A3A2A', '#3A4A3A', '#C8B890', '#1E1E22']
+    sl = K.Mesh(f'{name}-sleeves')
+    for i in range(ncol):
+        for k in range(nrow):
+            xa = RW['x0'] + i * cell + 0.013; xb = RW['x0'] + (i + 1) * cell - 0.013; z = RW['z0'] + k * cell
+            cx, cz = (xa + xb) / 2, z + cell / 2
+            if math.hypot(cx - R.DISC['x'], cz - R.DISC['z']) < R.DISC['r'] + cell * 0.55:
+                continue
+            if cz < htop + cell * 0.5 and any(h0 - 0.01 < cx < h1 + 0.01 for h0, h1 in holes):
+                continue
+            if not (nx0 - cell * 0.5 < cx < nx1 + cell * 0.5 and cz < nz1 + cell * 0.5):
+                continue                                 # filled by round 36 already
+            fill = rnd.choice([1.0, 0.95, 0.85, 0.7, 0.62])
+            s = xa + 0.004
+            while s < xa + (xb - xa) * fill - 0.004:
+                t = rnd.choice([0.003, 0.0032, 0.0035, 0.004, 0.0045, 0.006, 0.009]) * rnd.uniform(0.9, 1.1)
+                col = LK.lin(rnd.choice(pal))
+                h = 0.315 + rnd.uniform(-0.005, 0.002) - rnd.choice([0, 0, 0, 0.012, 0.03]); dz = rnd.uniform(0.0, 0.003)
+                sl.box(s, yf + 0.0125, z + dz + 0.0005, s + t, yf + 0.3295, z + h + dz, col=col)
+                s += t + 0.0004
+    if not sl.bm.verts:
+        sl.bm.free(); return []
+    return [sl.object(bpy, LK.R.colour_attr_mat(bpy, 'sleeve-card-r39', rough=0.6))]
