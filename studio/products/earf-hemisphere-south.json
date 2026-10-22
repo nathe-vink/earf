@@ -59,7 +59,7 @@
  },
  "assign": [
   {
-   "match": "collar|clamp|hub|pins|fins|rod",
+   "match": "collar|clamp|hub|pins|rod|fins",
    "material": "anodised"
   },
   {
@@ -83,7 +83,7 @@
    "material": "silicone"
   },
   {
-   "match": "ring|finial|canopy",
+   "match": "ring|canopy",
    "material": "trim"
   }
  ],

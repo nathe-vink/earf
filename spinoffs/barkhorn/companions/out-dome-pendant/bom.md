@@ -6,7 +6,7 @@
 | liner | formed | 1 | Cast acrylic sheet, volume-diffusing (opal), formed over an aluminium mould | 117 cm3, 190 x 190 x 82 | 1,212.73 |
 | skin | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 111 cm3, 182 x 182 x 81 | 1,212.30 |
 | rim | lathe | 1 | Cast acrylic tube, tinted through | 192 x 192 x 14 | 65.26 |
-| collar | lathe | 1 | Aluminium 6061 | 126 x 126 x 62 | 69.55 |
+| collar | lathe | 1 | Aluminium 6061 | 126 x 126 x 58 | 67.96 |
 | clamp | lathe | 1 | Aluminium 6061 | 126 x 126 x 24 | 54.65 |
 | gaskets | buy | 1 | Two moulded silicone rings (Shore 40, black, 1 mm, spherical): one between the collar's flange and the skin inside, one between the clamp ring and the shell outside |  | 3.00 |
 | vent | buy | 1 | Gore or alike A press-in ePTFE pressure-equalising vent (about 4 across), in the rim ring: it lets the air gaps between the layers breathe and keeps out dust and liquid |  | 1.50 |
@@ -19,17 +19,17 @@
 | gland | lathe | 1 | Cast acrylic tube, tinted through | 50 x 50 x 24 | 47.40 |
 | cord | buy | 1 | any (UL listed) Black textile-braided pendant cord, 2-conductor 18 AWG, UL listed (SVT-rated, or a listed Class 2 cord: past the driver in the canopy it carries the LED's 26 V DC, not mains), 3 m cut to the drop; a listed cord grip in the cap and one in the canopy, the pair tested to hold the fixture (UL 1598's cord-support test: confirm the load with the lab) |  | 16.00 |
 | canopy | lathe | 1 | Cast acrylic tube, tinted through | 160 x 160 x 60 | 106.44 |
-| driver | buy | 1 | Fulham T1T11200350-15L: constant current 350 mA, 15 W, 120 V in, one channel, leading- or trailing-edge TRIAC dimming 100 % to 10 %, Class 2 output, FCC Part 15B consumer (spec sheet). The 1,100 lm level for homes and bars: the Vero SE 10 at 350 mA runs 26.0 V, 9.1 W [UNCONFIRMED: its output voltage window covers 26 V; power factor at 9 W (60 % load) for JA8's 0.90] |  | 25.00 |
+| driver | buy | 1 | to choose A Class 2 constant-current driver at about 175 mA, 22 to 30 V window, 120 V AC in, phase-cut dimmable, FCC Part 15 Class B (consumer), dimming to 10 % or below, PF 0.90 or more at its load (JA8): the Vero SE 10 at about 175 mA runs about 24.5 V, about 4.3 W, about 575 lm (scaled from DS120: the 350 mA row less 2 % efficacy gain at half current, an estimate). The 575 lm level. Mean Well's PCD-16 starts at 350 mA, so the part is open |  | 22.00 |
 | plunger | buy | 1 | Kipp or Misumi A stainless ball spring plunger M5, light force (about 10 N), threaded into the hub: the bayonet's detent, clicking into a dimple in the collar |  | 4.50 |
 | listing | buy | 1 | UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run |  | [PRICE] |
 
 | | USD |
 |---|---|
-| buy | 68 |
+| buy | 64 |
 | extrusion | 14 |
 | formed | 3,959 |
-| lathe | 506 |
-| total | 4,547 |
+| lathe | 505 |
+| total | 4,543 |
 
 No price yet for: UL or Intertek (ETL) Listing the pendant to UL 1598 (and the table lamp's battery and charger to UL 153 / IEC 62368): a one-off cost a design, spread over the first run.
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

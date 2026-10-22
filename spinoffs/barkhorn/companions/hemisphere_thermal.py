@@ -69,10 +69,14 @@ def solve(P_in, lm, eta_out, sink, Ta, R_jc=0.9, R_tim=0.3, R_core=0.2, coupling
 NORTH = {'1,100 lm (350 mA)': (9.1, 1100.0), '575 lm (175 mA)': (4.3, 575.0)}
 NORTH_SINK = (80.0, 36.0, 16, 1.8, 30.0)
 # Hemisphere South: twice North's light, from a ring board of mid-power LEDs (about 150 lm/W at 2700 K CRI 90 at a
-# moderate current: an estimate for LM301H-class parts); the fins 90 across, 50 tall, 18 x 1.8, hung 60 below the bowl
-# on a 30 neck (0.5 K/W more between the LED and the fins)
-SOUTH = {'2,200 lm (twice North at 1,100)': (14.7, 2200.0), '1,150 lm (twice North at 575)': (7.7, 1150.0)}
-SOUTH_SINK = (90.0, 50.0, 18, 1.8, 30.0)
+# moderate current: an estimate for LM301H-class parts). Round 36 (nothing below the bowl): the hub sits in the collar,
+# its heat goes up an 8 copper heat pipe in the rod (about 0.4 K/W at 220 long, gravity-assisted) to fins 90 across, 40
+# tall, 18 x 1.8, on the rod above the lid; the hub, the pipe and two joints about 0.85 K/W between the LED and the fins.
+# The fins' warm air rises to the ceiling, away from the acrylic: no plume over the crown now. The owner's level is
+# North's 575 lm, so South's 1,150; 2,200 stays in the table for the record
+SOUTH = {'1,150 lm (twice North at 575)': (7.7, 1150.0), '2,200 lm (twice North at 1,100)': (14.7, 2200.0)}
+SOUTH_SINK = (90.0, 40.0, 18, 1.8, 30.0)
+NORTH = {'575 lm (175 mA; the owner, round 36)': NORTH.pop('575 lm (175 mA)'), **NORTH}
 
 
 def table():
@@ -81,21 +85,17 @@ def table():
     for title, items, sink, eta in (('North', NORTH, NORTH_SINK, 0.85), ('South', SOUTH, SOUTH_SINK, 0.97)):
         for k, (P, lm) in items.items():
             for Ta in (25.0, 35.0):
-                r = solve(P, lm, eta, sink, Ta, R_core=0.2 if title == 'North' else 0.7)
+                r = solve(P, lm, eta, sink, Ta, R_core=0.2 if title == 'North' else 0.85)
+                if title == 'South':          # the hub sits above the fins' temperature by its heat over the pipe
+                    r['Th'] += r['Q'] * 0.6
+                    r['Tcol'] = Ta + (r['Th'] - Ta) * 6.9 / (9.2 + 6.9)
                 print(f"| {title}, {k} | {Ta:.0f} C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.0f} C | "
                       f"{r['Tj']:.0f} C | {r['Tcol']:.0f} C |")
     # the black bore, for the record (the hub as it was, at 9.1 W, with fins)
     r = solve(9.1, 1100, 0.52, NORTH_SINK, 25.0)
     print(f"\n(North with the old black bore, 1,100 lm, 25 C room: {r['Q']:.1f} W in the hub, hub {r['Th']:.0f} C)")
-    # South's plume: the fins' convected heat rises into the bowl's crown. A point plume (Morton, Taylor and Turner):
-    # dT = 9.1 (T Q^2 / (g cp^2 rho^2))^(1/3) z^(-5/3), from a virtual origin about one sink diameter below the fins' top
-    for k, (P, lm) in SOUTH.items():
-        Q = (P - lm / LER) * 0.6               # about 60 % of the sink's heat leaves by convection
-        for gap in (0.03, 0.06):
-            z = gap + 0.09
-            dT = 9.1 * (300 * Q ** 2 / (9.81 * 1005 ** 2 * 1.2 ** 2)) ** (1 / 3) * z ** (-5 / 3)
-            print(f'South, {k}: the plume {dT:.0f} K over the room at the crown, {gap * 1000:.0f} mm above the fins'
-                  + (' (as drawn)' if gap == 0.06 else ' (the first layout)'))
+    print('South (round 36): its fins are above the lid, so their warm air rises to the ceiling; no plume reaches the '
+          'acrylic.')
 
 
 if __name__ == '__main__':

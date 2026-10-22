@@ -589,9 +589,9 @@
  },
  "south-rod": {
   "kind": "hardware",
-  "maker": "any lighting supplier",
-  "model": "1/8 IPS threaded steel lamp pipe, 10.3 across, black, cut to the drop, with a listed swivel (hickey) and a locknut at the canopy; the wires (18 AWG, listed fixture wire, Class 2 DC) inside",
-  "usd": 6,
+  "maker": "to make (an anodiser), or a lighting supplier's tube",
+  "model": "Aluminium tube 16 x 2 (6063), black anodised, cut to the drop, threaded into the hub; the heat pipe and the 18 AWG Class 2 wires inside it; a listed swivel (hickey) and a locknut at the canopy",
+  "usd": 9,
   "estimate": true,
   "supplier": "a lighting supplier",
   "price_date": "2026-10-22"
@@ -660,5 +660,14 @@
   "supplier": "TRC Electronics or Digi-Key",
   "price_date": "2026-10-22",
   "note": "The review's B1: the PCD-16-700B (16 to 24 V, 180 to 295 V in) could not light the COB. FCC Part 18 non-consumer per the review: confirm for home sales"
+ },
+ "south-heatpipe": {
+  "kind": "thermal",
+  "maker": "any (Wakefield, Advanced Thermal Solutions, Shenzhen makers)",
+  "model": "A sintered copper-water heat pipe, 8 across, about 220 long: its evaporator in the hub (at the bottom: gravity returns the fluid, the easiest way round for a heat pipe), its condenser in the fins' core above the lid; rated about 30 W at that length, far over South's 4 to 8 W; set in thermal paste",
+  "usd": 6,
+  "estimate": true,
+  "supplier": "a thermal components distributor",
+  "price_date": "2026-10-22"
  }
 }

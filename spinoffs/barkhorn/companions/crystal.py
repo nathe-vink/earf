@@ -131,11 +131,14 @@ def sector(r0, r1, a0, a1, z0, z1, n=12):
 #
 # The cover's frame: z up from the rim, the crown up (North as it hangs). South turns the cover over.
 N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
-         collar=(96.0, 82.0, 64.0, 104.0),      # OD, ID, z bottom, z top (the entry end)
+         collar=(96.0, 82.0, 64.0, 100.0),      # OD, ID, z bottom, z top (North's entry end; round 36: 100, was 104,
+                                                 # so it stands 3 proud of the clamp ring: South shows it underneath)
          flange_r=58.0,                          # the collar's flange under the crown and the clamp ring over it, radius
-         pin_z=97.0, turn=30.0, notch=(78.5, 99.5),     # the pins' height; the T-ended notch: up for North, down for South
-         ring=(62.0, 78.0, 90.0, 104.0),        # the PEEK pin carrier: ID, OD, z0, z1
-         core=(62.0, 60.0, 104.0),               # the hub core: OD, z0, z1 (the bore and the reflector in it)
+         pin_z=93.0, turn=30.0, notch=(82.5, 95.5),     # North's pins (from the outer end) and their notch
+         south_pins=(69.0, 60.0),                # round 36: South's pins enter from the inner end: their height, the
+                                                 # slots' angle off North's
+         ring=(62.0, 78.0, 86.0, 100.0),        # the PEEK pin carrier: ID, OD, z0, z1
+         core=(62.0, 60.0, 100.0),               # the hub core: OD, z0, z1 (the bore and the reflector in it)
          bore=(46.0, 82.0),                      # the bore's diameter and the COB's face (22 up from the mouth at 60)
          neck=(40.0, 110.0),                     # the core's neck up to the fins
          sink=(80.0, 110.0, 146.0, 16, 1.8),     # the fins: OD, z0, z1, count, thickness (cut from a radial extrusion)
@@ -176,14 +179,20 @@ def cover_parts(p=N):
     tube = cyl('z', (0, 0), co, cz0, cz1) - cyl('z', (0, 0), ci, cz0 - 1, cz1 + 1)
     flange = _sphere_band(r_ki - 1.0, r_ki - 5.0, ci / 2, fr)
     collar = tube + flange
-    # the L-slots, blind from inside (the clamp ring's thread is on the outside), T-ended: the pin rests up in the notch
-    # when the cover hangs (North) and down in it when the cover sits (South); either way its weight holds it there
+    # the L-slots, blind from inside (the clamp ring's thread is on the outside). Two sets (round 36): North's open at
+    # the outer end (its hub outside the crown), South's at the inner end (its hub inside the bowl, so nothing hangs
+    # below it). Each notch runs back toward its own entry, so the shade's weight holds each pin in it
     pz, w, rs = p['pin_z'], 5.0, ci / 2 + 4.5
     n0, n1 = p['notch']
     for a in (0, 120, 240):
         collar = collar - at(a, box(ci / 2 - 2, -w / 2, pz - 10.5, rs, w / 2, cz1 + 1))                 # the entry
         collar = collar - sector(ci / 2 - 2, rs, a, a + p['turn'], pz - 10.5, pz - 5.5)                    # the turn
         collar = collar - at(a + p['turn'], box(ci / 2 - 2, -w / 2, n0, rs, w / 2, n1))                    # the notch
+    zs, off = p['south_pins']
+    for a in (off, off + 120, off + 240):
+        collar = collar - at(a, box(ci / 2 - 2, -w / 2, cz0 - 1, rs, w / 2, zs + 7.5))                    # the entry
+        collar = collar - sector(ci / 2 - 2, rs, a, a + p['turn'], zs + 2.5, zs + 7.5)                     # the turn
+        collar = collar - at(a + p['turn'], box(ci / 2 - 2, -w / 2, zs - 2.5, rs, w / 2, zs + 7.5))        # the notch
     gasket_in = _sphere_band(r_ki, r_ki - 1.0, co / 2 + 0.2, fr)
     gasket_out = _sphere_band(R + 1.0, R, co / 2 + 0.2, fr)
     clamp = _sphere_band(R + 6.0, R + 1.0, co / 2, fr) + (cyl('z', (0, 0), co + 8, 92.0, 97.0) - cyl('z', (0, 0), co, 91, 98))
@@ -278,7 +287,7 @@ def north_parts(p=N):
         Part('canopy', canopy, Machined('cast-acrylic', 'lathe'), finish='trim', group='canopy',
              notes=['150 x 50, black cast acrylic, polished: over the driver and a steel junction-box strap (the strap '
                     'carries the load)']),
-        Part('driver', driver, Bought('north-driver'), finish='steel', group='canopy', inside=True, render=False),
+        Part('driver', driver, Bought('north-driver-575'), finish='steel', group='canopy', inside=True, render=False),   # round 36: 575 lm
         Part('plunger', None, Bought('dome-plunger')),
         Part('listing', None, Bought('moon-listing')),
     ]
@@ -484,17 +493,19 @@ TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ri
                 ('led', 'chassis')]
 
 
-# Hemisphere South: the same cover turned over, a bowl, on a rod from the ceiling. In the cover's frame its fixture
-# sits where North's does (outside the crown), but its light faces the rod: a ring of LEDs round the rod's end, facing
-# into the bowl, so the bowl glows and the frosted lid on its rim washes the ceiling. Its fins hang below the bowl, on a
-# neck that keeps their warm air off the crown.
-S = dict(N, led=(74.0, 14.0, 72.0),               # the LED ring board: OD, ID, its face (cover frame)
-         core=(62.0, 72.0, 104.0),               # the hub core: OD, z0 (the board on its face), z1
-         neck=(30.0, 164.0),                     # the neck down to the fins: 60 long, the plume's gap
-         sink=(90.0, 164.0, 214.0, 18, 1.8),     # the fins: OD, z0, z1, count, thickness
-         cap=(36.0, 12.0),                       # the finial under the fins, black acrylic
-         rod=10.3,                               # 1/8 IPS steel lamp pipe, black
-         lid=(196.0, 3.0, 12.0),                 # the frosted lid: OD, thickness, the rod's hole
+# Hemisphere South: the same cover turned over, a bowl, on a rod from the ceiling. Round 36 (the owner: "The southern
+# hemisphere dome is supposed to have nothing below the dome"): everything that holds or feeds the light is inside the
+# bowl or above it. The hub sits in the collar, its bottom a black cap flush with the collar's end; a ring of LEDs on
+# its inner face lights the bowl from its bottom, up; its heat goes up a heat pipe in the rod (gravity returns the
+# fluid, as it should with the heat at the bottom) to fins on the rod above the lid, in room air. The shade is the same
+# as North's: it fits on from inside, by the collar's second set of slots.
+S = dict(N, led=(60.0, 18.0, 66.0),               # the LED ring board: OD, ID, its face (cover frame)
+         core=(62.0, 66.0, 100.0),               # the hub core: OD, z0 (the board on its face), z1 (flush with the collar)
+         ring=(62.0, 78.0, 64.5, 78.0),          # South's PEEK pin carrier, at the collar's inner end
+         rod=(16.0, 12.0),                       # aluminium tube, OD and ID, black anodised, the heat pipe inside it
+         pipe=8.0,                               # the heat pipe: copper-water, 8 across
+         sink=(90.0, -120.0, -80.0, 18, 1.8),    # the fins on the rod, above the lid: OD, z0, z1 (cover frame), count, t
+         lid=(196.0, 3.0, 17.0),                 # the frosted lid: OD, thickness, the rod's hole
          drop=450.0)                             # from the bowl's rim to the canopy
 SOUTH_LIGHT = (0.0, 0.0, 0.0)                    # the lid's centre: the ceiling wash's source (the bowl's frame)
 
@@ -506,61 +517,60 @@ def _flip(solid):
 
 
 def south_parts(p=S):
-    """Hemisphere South, built in the cover's frame and turned over: the cover's parts as North's; the hub core with
-    the LED ring on its face, the PEEK ring and the pins, the neck and the fins below the bowl, the finial; the rod up
-    the axis through the lid to the canopy."""
+    """Hemisphere South, built in the cover's frame and turned over: the cover's parts as North's; inside the collar
+    the hub core with its PEEK ring and pins, the LED ring on its inner face; the rod up the axis, the heat pipe in it,
+    the fins on it above the lid, and the canopy. Nothing below the bowl but the shade's own collar end and clamp ring
+    and the hub's flush cap."""
     od, z0, z1 = p['core']
     lo, li, lz = p['led']
-    nd, nz = p['neck']
     sd, sz0, sz1, nf, ft = p['sink']
-    cd, ch = p['cap']
     ri, ro, rz0, rz1 = p['ring']
-    pz = p['pin_z']
-    rd = p['rod']
-    core = cyl('z', (0, 0), od, z0, z1) + cyl('z', (0, 0), nd, z1, nz)
-    core = core - cyl('z', (0, 0), rd - 1.0, z0 - 1, z0 + 20)                         # the rod's thread (1/8 IPS)
-    core = core - cyl('z', (0, 0), 8, z0 + 19, nz + 1)                                 # the wires
+    zs, off = p['south_pins']
+    rdo, rdi = p['rod']
+    core = cyl('z', (0, 0), od, z0, z1) - cyl('z', (0, 0), rdo, z0 - 1, z0 + 20)        # the rod's socket, 20 deep
+    core = core - cyl('z', (0, 0), p['pipe'] + 0.2, z0 + 19, z0 + 30)                    # the heat pipe's evaporator
     ring = cyl('z', (0, 0), ro, rz0, rz1) - cyl('z', (0, 0), ri, rz0 - 1, rz1 + 1)
     pins = None
-    for a in (0, 120, 240):
-        pin = at(a + p['turn'], cyl('x', (0, pz), 4.0, ri / 2 + 2, p['collar'][1] / 2 + 2.5))
+    for a in (off, off + 120, off + 240):
+        pin = at(a + p['turn'], cyl('x', (0, zs), 4.0, ri / 2 + 2, p['collar'][1] / 2 + 2.5))
         pins = pin if pins is None else pins + pin
     led = cyl('z', (0, 0), lo, lz - 1.6, lz) - cyl('z', (0, 0), li, lz - 3, lz + 1)
-    fins = cyl('z', (0, 0), 30, sz0, sz1) - cyl('z', (0, 0), 8, sz0 - 1, sz1 + 1)
+    rod = cyl('z', (0, 0), rdo, -p['drop'], z0 + 20) - cyl('z', (0, 0), rdi, -p['drop'] - 1, z0 + 21)
+    pipe = cyl('z', (0, 0), p['pipe'], sz0 - 10, z0 + 30)
+    fins = cyl('z', (0, 0), 30, sz0, sz1) - cyl('z', (0, 0), rdo + 0.2, sz0 - 1, sz1 + 1)
     for i in range(nf):
         fins = fins + at(360.0 * i / nf, box(14.0, -ft / 2, sz0, sd / 2, ft / 2, sz1))
-    fins = fins & (cyl('z', (0, 0), sd, sz0, sz1) - cyl('z', (0, 0), 8, sz0 - 1, sz1 + 1))
-    finial = cyl('z', (0, 0), cd, sz1, sz1 + ch)
+    fins = fins & (cyl('z', (0, 0), sd, sz0, sz1) - cyl('z', (0, 0), rdo + 0.2, sz0 - 1, sz1 + 1))
     ld, lt, lh = p['lid']
     lid = cyl('z', (0, 0), ld, -lt, 0.0) - cyl('z', (0, 0), lh, -lt - 1, 1)
-    rod = cyl('z', (0, 0), rd, -p['drop'], z0 + 18) - cyl('z', (0, 0), rd - 3.4, -p['drop'] - 1, z0 + 19)
     zc = -p['drop']
     cnd, cnh = p['canopy']
     canopy = cyl('z', (0, 0), cnd, zc - cnh, zc) - cyl('z', (0, 0), cnd - 6, zc - cnh + 3, zc + 1)
     driver = box(-42, -28.5, zc - 6 - 29.5, 42, 28.5, zc - 6)
     parts = cover_parts(p) + [
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
-             notes=['aluminium 6061, black anodised: the core, turned from bar; the LED ring on its face (inside the '
-                    'collar, facing up into the bowl), the PEEK ring round it, a 60 neck down to the fins, threaded for '
-                    'the rod (1/8 IPS) at its top']),
+             notes=['aluminium 6061, black anodised: the core, turned from bar, inside the collar; its outer face a cap '
+                    'flush with the collar\'s end, the only fixture part seen under the bowl; the LED ring on its inner '
+                    'face; the rod in a 20 deep socket, the heat pipe\'s evaporator in its bore on thermal paste']),
         Part('ring', ring, Machined('peek', 'lathe'), finish='trim', group='fixture', inside=True,
-             notes=['PEEK, unfilled: the thermal break, as North\'s; it carries the pins and the detent']),
+             notes=['PEEK, unfilled: the thermal break, at the collar\'s inner end; it carries the pins (into the '
+                    'collar\'s second set of slots) and the detent']),
         Part('pins', pins, Bought('dome-pins'), finish='anodised', group='fixture'),
         Part('led', led, Bought('south-led'), finish='led', group='fixture', inside=True),
-        Part('fins', fins, Machined('aluminium', 'extrusion', setup_usd=0.0), finish='anodised', group='fixture',
-             notes=['the heat sink below the bowl, in room air: 50 cut from a radial extrusion 90 across, 18 fins, black '
-                    'anodised; 60 below the crown on the neck, so its warm air has mixed before it reaches the acrylic']),
-        Part('finial', finial, Machined('cast-acrylic', 'lathe'), finish='trim', group='fixture',
-             notes=['black cast acrylic, polished: closes the fins\' core at the bottom (a 1930s bowl\'s finial)']),
         Part('rod', rod, Bought('south-rod'), finish='anodised', group='fixture',
-             notes=['through the lid and down the bowl\'s axis into the hub; the wires inside it']),
+             notes=['aluminium tube 16 x 2, black anodised: down the bowl\'s axis into the hub; the heat pipe and the '
+                    'wires inside it']),
+        Part('pipe', pipe, Bought('south-heatpipe'), finish='steel', group='fixture', inside=True, render=False),
+        Part('fins', fins, Machined('aluminium', 'extrusion', setup_usd=0.0), finish='anodised', group='fixture',
+             notes=['the heat sink, on the rod 80 above the lid, in room air: 40 cut from a radial extrusion 90 across, '
+                    '18 fins, black anodised, clamped on the rod over the heat pipe\'s condenser; its warm air rises '
+                    'to the ceiling, away from the acrylic']),
         Part('lid', lid, Machined('cast-acrylic', 'mill'), finish='lid', group='lid',
-             notes=['3 mm clear cast acrylic, bead-blasted both faces (or a high-transmission opal): the dust lid, '
-                    'lying on the rim on three small clear silicone bumpers; it lifts up the rod to be wiped. Its light '
-                    'is the ceiling wash']),
+             notes=['3 mm clear cast acrylic, bead-blasted both faces: the dust lid, lying on the rim on three small '
+                    'clear silicone bumpers; it lifts up the rod to be wiped. Its light is the ceiling wash']),
         Part('canopy', canopy, Machined('cast-acrylic', 'lathe'), finish='trim', group='canopy',
              notes=['150 x 50, black cast acrylic, polished, as North\'s: over the driver and a steel junction-box strap; '
-                    'the rod hangs from the strap through a listed swivel (a hickey) so it hangs plumb']),
+                    'the rod hangs from the strap through a listed swivel so it hangs plumb']),
         Part('driver', driver, Bought('south-driver'), finish='steel', group='canopy', inside=True, render=False),
         Part('plunger', None, Bought('dome-plunger')),
         Part('listing', None, Bought('moon-listing')),
@@ -572,17 +582,19 @@ def south_parts(p=S):
 
 
 NOTES_SOUTH = [
-    'The same shades as North, turned over: a bowl, opening up, on a slim rod from the ceiling. Any shade fits either '
-    'fixture: the collar\'s slots end in a T, so the pins rest up in the notch when the cover hangs (North) and down in '
-    'it when the cover sits (South); its own weight holds it either way.',
-    'The light: a ring of mid-power LEDs on the hub\'s face, round the rod, facing up into the bowl. About 57 % of it '
-    'leaves through the mouth and the frosted lid as a soft wash on the ceiling; the rest falls on the bowl\'s wall, '
-    'which glows in its tint. Bounced light needs about twice the lumens to feel as bright, so South gives twice '
-    'North\'s.',
-    'The heat: the fins hang below the bowl in room air on a 60 neck; the PEEK ring keeps the hub off the collar. See '
-    'hemisphere_thermal.py and the test plan (README, round 35).',
+    'The same shades as North, turned over: a bowl, opening up, on a slim rod from the ceiling. Nothing hangs below '
+    'the bowl (the owner, round 36): under it only the shade\'s own collar end and clamp ring and the hub\'s flush black '
+    'cap show. Any shade fits either fixture: North\'s pins enter the collar from its outer end, South\'s from its inner '
+    'end, each into its own set of slots; the shade\'s weight holds it either way.',
+    'The light: a ring of mid-power LEDs on the hub\'s inner face at the bottom of the bowl, facing up. About 57 % of '
+    'it leaves through the mouth and the frosted lid as a soft wash on the ceiling; the rest falls on the bowl\'s wall, '
+    'which glows in its tint. Twice North\'s light: about 1,150 lm.',
+    'The heat: up a copper heat pipe in the rod to black fins on the rod 80 above the lid, in room air, so the warm '
+    'air rises to the ceiling, not past the acrylic. The PEEK ring keeps the hub off the collar. See '
+    'hemisphere_thermal.py and the test plan (README, rounds 35 and 36).',
     'The dust lid: 3 mm frosted acrylic on the rim, lifted up the rod to wipe.',
     'Hang with the rim 450 to 600 below a ceiling of 2.6 to 3.2 m, so the wash spreads; not over a table (its light is '
     'on the ceiling).',
 ]
-TOUCHING_SOUTH = TOUCHING_DOME + [('rod', 'hub'), ('led', 'hub'), ('rod', 'led'), ('finial', 'fins'), ('rod', 'lid')]
+TOUCHING_SOUTH = TOUCHING_DOME + [('rod', 'hub'), ('led', 'hub'), ('rod', 'led'), ('rod', 'lid'), ('pipe', 'rod'),
+                                  ('pipe', 'hub'), ('fins', 'rod')]

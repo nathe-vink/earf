@@ -1324,3 +1324,59 @@ power factor.
 - the former's quote for the moulds;
 - the thermocouple test;
 - the UL 1598 listing (North and South) and the IEC/UL 62368-1 certification (Core).
+
+## Round 36: the owner's answers (North at 575 lm, the reflector fitted, South with nothing below)
+
+The owner, 2026-10-22, verbatim:
+- "Hemisphere North: 575 lm"
+- "Reflector: fit it"
+- "Core base and North fins: not yet"
+- "The southern hemisphere dome is supposed to have nothing below the dome."
+
+**Hemisphere North at 575 lm, the reflector fitted.**
+- **The CAD.** North's driver is now `north-driver-575` in the CAD (`crystal.north_parts`) and the parts list
+  (`out-dome-pendant/bom.md`, $4,543 one-off on production tooling). It is a Class 2, FCC Part 15B, phase-cut driver at
+  about 175 mA **[the part is still to source]**.
+- **The light.** The Vero SE 10 runs about 4.3 W there: about **575 lm at 2700 K, CRI 90**. The faceted reflector in
+  the bore (`north-reflector`) lets about 85 % of it out, about **490 lm** from the fitting. That gives about 490 lux
+  directly below and 370 lux across a 90 cm table, with the rim 700 above it.
+- **Heat** (`hemisphere_thermal.py`), in a 35 °C room: the hub 43 °C, the LED junction 47 °C, the acrylic by the
+  collar 39 °C. At 1,100 lm it was 52, 60 and 42.
+- **The collar.** It is 4 mm shorter (it ends at 100, not 104), so South shows less of it underneath, and North's pins
+  sit 4 mm lower to match. The look above the shade is unchanged.
+
+**Core's base and North's fins: not signed off.** Both stay as drawn (Core's base 48 tall, North's black radial fins
+above the crown) because the owner's answer is "not yet". They are not approved, and nothing here depends on them
+being final.
+
+**Hemisphere South: nothing below the dome.** Redrawn and rebuilt (`crystal.south_parts`, `out-hemisphere-south/`, 0
+clashes). Everything that holds or feeds the light is now inside the bowl or above it:
+- **Gone from under the bowl:** the hub, its 60 mm neck, the fins and the finial.
+- **The hub** sits inside the shade's collar, at the bottom of the bowl. Its outer face is a black cap flush with the
+  collar's end. Under the bowl you see only the shade's own collar end, its clamp ring and that cap: the same shade
+  North carries, so they cannot go without a South-only shade.
+- **The light.** The ring of LEDs sits on the hub's inner face at the bottom of the bowl, facing up, as before: about
+  1,150 lm (twice North's 575).
+- **The heat** goes up an 8 mm copper heat pipe in the rod to black fins on the rod, 80 mm above the lid. Heat at the
+  bottom and condenser at the top is the easy way round for a heat pipe: gravity returns its fluid.
+  - The fins are 90 across and 40 tall, in room air. Their warm air rises to the ceiling, so round 35's open risk is
+    gone: the plume that crossed the crown at about 16 K.
+  - Estimated in a 35 °C room: hub 47 °C, LED junction 53 °C, the acrylic by the collar 40 °C.
+- **The rod** is now a 16 mm black anodised aluminium tube with the heat pipe and the wires inside. It was a 10 mm
+  steel lamp pipe.
+- **The catch.** The shade fits on from inside: South's pins enter the collar from its inner end, into a second set of
+  slots 60° round from North's. North's pins still enter from the outer end. One set of shades still fits both.
+- **The cost of it.**
+  - One-off on tooling: $4,561, against round 35's $4,612.
+  - A run of 200: about $210 in parts, against about $205, because of the heat pipe and the aluminium rod, less the
+    neck and finial.
+  - Hanging weight: about 1.8 kg, against 2.0.
+  - The fins on the rod shade the centre of the ceiling wash a little; the penumbra is wide at 400 mm.
+
+**The pictures, again** (the same views as round 35):
+- `renders/2026-10-22/barkhorn/lamps-final/lamp-south-hero.png` and `lamps-north-south.png`: the room, North at 575 lm,
+  South at 1,150 lm;
+- `renders/2026-10-22/barkhorn/lamps-pdp-r35/lamp-south-ember.png`: the site's studio.
+
+The other site pictures were not rendered (round 35: the site keeps round 32f's).
+
