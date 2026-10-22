@@ -6,16 +6,16 @@
  ],
  "camera": {
   "position": [
-   1.55,
-   0.95,
-   1.42
+   1.9,
+   1.2,
+   1.38
   ],
   "target": [
    16.5,
-   3.3,
+   3.2,
    1.2
   ],
-  "lens_mm": 24,
+  "lens_mm": 28,
   "level": true,
   "fstop": 5.6,
   "focus": [
@@ -125,7 +125,7 @@
     "name_glow": 0.25,
     "niche_strip": 6.0,
     "sink_glow": 0.8,
-    "screen_glow": 0.25,
+    "screen_glow": 0.07,
     "screen_tint": "#FFA060",
     "screen_gap": 0.04,
     "screen_rough": 0.22,
@@ -319,7 +319,7 @@
     "ceiling": 3.4,
     "lamp_w": 30.0,
     "lamp_k": 2700,
-    "shade_glow": 0.3,
+    "shade_glow": 0.12,
     "noshadow": "shell|liner|skin"
    },
    {
@@ -382,9 +382,9 @@
     ],
     "cable": false,
     "cartridge": "none",
-    "lamp_w": 0.181,
+    "lamp_w": 0.094,
     "lamp_k": 2700,
-    "shade_glow": 0.029,
+    "shade_glow": 0.015,
     "noshadow": "shell|liner|skin",
     "materials": {
      "liner": {
@@ -592,10 +592,10 @@
     "size": 1.25,
     "t": 0.025,
     "core": 0.13,
-    "rim": 0.45,
+    "rim": 0.22,
     "rim_par": 0.5,
-    "core_glow": 0.12,
-    "core_w": 25.0,
+    "core_glow": 0.05,
+    "core_w": 45.0,
     "ceiling": 3.4,
     "heading": -35.0,
     "radius": 0.04
@@ -784,10 +784,10 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 140.0,
-   "cone_deg": 20.0,
-   "blend": 0.6,
-   "radius_m": 0.04,
+   "power_w": 80.0,
+   "cone_deg": 28.0,
+   "blend": 0.5,
+   "radius_m": 0.07,
    "color": 2400,
    "camera": false
   },
@@ -803,10 +803,10 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 140.0,
-   "cone_deg": 20.0,
-   "blend": 0.6,
-   "radius_m": 0.04,
+   "power_w": 80.0,
+   "cone_deg": 28.0,
+   "blend": 0.5,
+   "radius_m": 0.07,
    "color": 2400,
    "camera": false
   },
@@ -822,10 +822,10 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 140.0,
-   "cone_deg": 20.0,
-   "blend": 0.6,
-   "radius_m": 0.04,
+   "power_w": 80.0,
+   "cone_deg": 28.0,
+   "blend": 0.5,
+   "radius_m": 0.07,
    "color": 2400,
    "camera": false
   },
@@ -841,10 +841,10 @@
     4.2700000000000005,
     1.07
    ],
-   "power_w": 140.0,
-   "cone_deg": 20.0,
-   "blend": 0.6,
-   "radius_m": 0.04,
+   "power_w": 80.0,
+   "cone_deg": 28.0,
+   "blend": 0.5,
+   "radius_m": 0.07,
    "color": 2400,
    "camera": false
   },
@@ -879,7 +879,7 @@
     -6.0,
     5.6
    ],
-   "power_w": 500.0,
+   "power_w": 110.0,
    "radius_m": 0.15,
    "color": 2700
   },
@@ -890,7 +890,7 @@
     15.1,
     5.6
    ],
-   "power_w": 500.0,
+   "power_w": 110.0,
    "radius_m": 0.15,
    "color": 2700
   },
@@ -982,8 +982,8 @@
     1.9,
     1.1
    ],
-   "power_w": 90.0,
-   "cone_deg": 36.0,
+   "power_w": 170.0,
+   "cone_deg": 26.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1001,8 +1001,8 @@
     4.199999999999999,
     1.1
    ],
-   "power_w": 90.0,
-   "cone_deg": 36.0,
+   "power_w": 170.0,
+   "cone_deg": 26.0,
    "blend": 0.9,
    "radius_m": 0.03,
    "color": 2500,
@@ -1258,6 +1258,162 @@
    "radius_m": 0.015,
    "color": 2700,
    "camera": false
+  },
+  "keyl0": {
+   "type": "area",
+   "position": [
+    15.25,
+    1.9,
+    1.41
+   ],
+   "target": [
+    16.55,
+    1.9,
+    1.11
+   ],
+   "size_m": [
+    1.0,
+    0.7
+   ],
+   "irradiance": 0.6,
+   "color": 3000,
+   "camera": false,
+   "receivers": [
+    "left#0",
+    "right#0",
+    "top#0",
+    "bottom#0",
+    "front-panel#0",
+    "back#0",
+    "brace*#0",
+    "rib-*#0",
+    "port-*#0",
+    "land-*#0",
+    "grip-*#0",
+    "waveguide*#0",
+    "woofer-*#0",
+    "hf-*#0",
+    "lining-*#0",
+    "feet-base#0",
+    "amp-*#0"
+   ]
+  },
+  "riml0": {
+   "type": "area",
+   "position": [
+    16.8,
+    1.9,
+    1.96
+   ],
+   "target": [
+    16.55,
+    1.9,
+    1.46
+   ],
+   "size_m": [
+    0.5,
+    0.08
+   ],
+   "irradiance": 4.0,
+   "color": 2800,
+   "camera": false,
+   "receivers": [
+    "left#0",
+    "right#0",
+    "top#0",
+    "bottom#0",
+    "front-panel#0",
+    "back#0",
+    "brace*#0",
+    "rib-*#0",
+    "port-*#0",
+    "land-*#0",
+    "grip-*#0",
+    "waveguide*#0",
+    "woofer-*#0",
+    "hf-*#0",
+    "lining-*#0",
+    "feet-base#0",
+    "amp-*#0"
+   ]
+  },
+  "keyl1": {
+   "type": "area",
+   "position": [
+    15.25,
+    4.199999999999999,
+    1.41
+   ],
+   "target": [
+    16.55,
+    4.199999999999999,
+    1.11
+   ],
+   "size_m": [
+    1.0,
+    0.7
+   ],
+   "irradiance": 0.6,
+   "color": 3000,
+   "camera": false,
+   "receivers": [
+    "left#1",
+    "right#1",
+    "top#1",
+    "bottom#1",
+    "front-panel#1",
+    "back#1",
+    "brace*#1",
+    "rib-*#1",
+    "port-*#1",
+    "land-*#1",
+    "grip-*#1",
+    "waveguide*#1",
+    "woofer-*#1",
+    "hf-*#1",
+    "lining-*#1",
+    "feet-base#1",
+    "amp-*#1"
+   ]
+  },
+  "riml1": {
+   "type": "area",
+   "position": [
+    16.8,
+    4.199999999999999,
+    1.96
+   ],
+   "target": [
+    16.55,
+    4.199999999999999,
+    1.46
+   ],
+   "size_m": [
+    0.5,
+    0.08
+   ],
+   "irradiance": 4.0,
+   "color": 2800,
+   "camera": false,
+   "receivers": [
+    "left#1",
+    "right#1",
+    "top#1",
+    "bottom#1",
+    "front-panel#1",
+    "back#1",
+    "brace*#1",
+    "rib-*#1",
+    "port-*#1",
+    "land-*#1",
+    "grip-*#1",
+    "waveguide*#1",
+    "woofer-*#1",
+    "hf-*#1",
+    "lining-*#1",
+    "feet-base#1",
+    "amp-*#1"
+   ]
   }
  },
  "haze": {
@@ -1269,7 +1425,7 @@
    6.05,
    3.32
   ],
-  "density": 0.004,
+  "density": 0.007,
   "anisotropy": 0.3,
   "color": "#FFFFFF"
  },
@@ -1281,9 +1437,9 @@
   "bounces": 10,
   "view": "AgX",
   "look": "AgX - Medium High Contrast",
-  "exposure": 4.2,
-  "white_balance_k": 3000,
-  "white_balance_tint": 0.0
+  "exposure": 4.0,
+  "white_balance_k": 3250,
+  "white_balance_tint": -6.0
  },
  "materials": {
   "glow": {

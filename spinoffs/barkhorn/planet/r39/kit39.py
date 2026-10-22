@@ -318,12 +318,29 @@ def _scan_node(bpy, nt, path, colour, scale):
     return im
 
 
+def _darken(m, f):
+    """Scale a material's base colour by `f` (a darker stain), whether it is a value or a texture."""
+    if not m.use_nodes or 'Principled BSDF' not in m.node_tree.nodes:
+        return
+    nt = m.node_tree; b = nt.nodes['Principled BSDF']; inp = b.inputs['Base Color']
+    if inp.is_linked:
+        src = inp.links[0].from_socket
+        mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'; mx.inputs['Factor'].default_value = 1.0
+        mx.inputs[7].default_value = (f, f, f, 1.0)
+        nt.links.new(src, mx.inputs[6]); nt.links.new(mx.outputs[2], inp)
+    else:
+        c = inp.default_value; inp.default_value = (c[0] * f, c[1] * f, c[2] * f, c[3])
+
+
 def retouch(bpy, name, p, kit):
     """`zinc`: the bar top's sheen worn unevenly (the scan's roughness, `zinc_rough` [lo, hi]) and its tone mottled by it
     (`zinc_mottle`), at `zinc_scale` metres a tile; rotated so no two edges of the tile line up with the counter."""
     import assets
     sys.path.insert(0, os.path.join(ROOT, 'studio', 'engine'))
     out = []
+    for key, f in dict({'zinc': 0.6}, **p.get('darken', {})).items():   # a darker stain or patina, by material name
+        for m in [m for m in bpy.data.materials if key in m.name]:
+            _darken(m, f)
     m = bpy.data.materials.get('zinc')
     if m and p.get('zinc', True):
         t = assets.texture(p.get('zinc_scan', 'metal_plate_02'), '2k', maps=('diff', 'rough'))
