@@ -82,7 +82,7 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'poison_f1b': 'on a redwood forest floor, among fly agarics, ferns and the berries of lords-and-ladies',
     'poison_g5': 'on a redwood forest floor, among death caps and a deer\'s bones',
     'ice': 'in snow country at blue hour', 'ice_b': 'on a black-sand beach among icebergs at sunrise',
-    'haze': 'in a lavender field at dusk', 'haze_b': 'before layered hills in a hazy evening light',
+    'haze': 'in a lavender field at dusk', 'haze_b': 'before layered hills in evening light',
     'fog': 'on a summit above a sea of cloud', 'fog_b': 'on a headland above the fog at dawn',
     'smoke': 'in a pine wood at dawn, in shafts of woodsmoke', 'smoke_b': 'in a misty birch wood',
     'smoke_e6': 'on a cracked salt flat, black smoke climbing from the horizon',
@@ -99,10 +99,10 @@ DESC = ('Horn loudspeakers cast in tinted acrylic, in eight colours from Ember t
 
 CLOUDS = [  # key, number, name, icon, the acrylic, its line, its cover (the look book's)
     ('red', '01', 'Ember', 'ember', 'Translucent red', 'The last light of the fire.', 'Oxblood'),
-    ('orange', '02', 'Dust', 'dust', 'Translucent orange', 'The colour of a long, dry afternoon.', 'Rust'),
+    ('orange', '02', 'Dust', 'dust', 'Translucent orange', 'A long, dry afternoon.', 'Rust'),
     ('amber', '03', 'Acid', 'acid', 'Translucent golden yellow', 'A yellow with an edge.', 'Ochre'),
-    ('green', '04', 'Poison', 'poison', 'Translucent bottle green', 'Bottle green, with a hint of menace.', 'Bottle green'),
-    ('blue', '05', 'Ice', 'ice', 'Translucent ice blue', 'Glacier blue, and perfectly composed.', 'Deep blue'),
+    ('green', '04', 'Poison', 'poison', 'Translucent bottle green', 'Bottle green. Keep out of reach.', 'Bottle green'),
+    ('blue', '05', 'Ice', 'ice', 'Translucent ice blue', 'Glacier blue, and in no hurry.', 'Deep blue'),
     ('violet', '06', 'Haze', 'haze', 'Translucent violet', 'Dusk, kept indoors.', 'Deep violet'),
     ('ice', '07', 'Fog', 'fog', 'Water-clear', 'Water-clear. Almost not there.', 'White'),
     ('black', '08', 'Smoke', 'smoke', 'Smoked black', 'Smoked glass, for after dark.', 'Black'),
@@ -110,9 +110,9 @@ CLOUDS = [  # key, number, name, icon, the acrylic, its line, its cover (the loo
 SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabinet'),
         ('Depth', '423 mm overall, 420 mm at the cabinet'),
         ('Weight', 'About 72 kg; 62 kg with the horn lifted off'),
-        ('Woofer', "FaitalPRO 15PR400, 15-inch, with two ports in the front's lower corners"),
+        ('Woofer', "FaitalPRO 15PR400, 15-inch, with two ports in the front&rsquo;s lower corners"),
         ('Horn driver', 'B&amp;C DE1085TN, 2-inch compression driver'),
-        ('Horn', "Tinted cast acrylic formed from the cabinet's own sheet, a turned acrylic throat; the cabinet's full depth"),
+        ('Horn', "Tinted cast acrylic formed from the cabinet&rsquo;s own sheet, a turned acrylic throat; the cabinet&rsquo;s full depth"),
         ('Amplifier', 'Hypex FusionAmp FA122, built in: two channels of 125 W, crossed at 1 kHz in its DSP'),
         ('Bass', 'To about 49 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
         ('Loudness', 'Up to about 115 dB at 1 m, each'),
@@ -124,7 +124,7 @@ MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn abov
            'The corner: two 20 mm walls, cast in one colour and cemented.'),
           ('amp', 'dust', "Hypex's FA122 amplifier on the back of a Dust cabinet", 'The amplifier, built in: Hypex&rsquo;s FA122.'),
           ('horn', 'acid', "The Acid horn from the side, its driver's pod and the flare",
-           'The horn: tinted acrylic formed from the cabinet&rsquo;s own sheet, its driver in a pod whose cap twists off.'),
+           'The horn: tinted acrylic formed from the cabinet&rsquo;s own sheet.'),
           ('woofer', 'ice', 'The 15-inch woofer through an Ice cabinet', 'The 15-inch woofer, behind the cloth when the cover&rsquo;s on.'),
           ]   # the grip (Poison) left the row of details with the lineup: four read as a set
 # the lamps (round 32d), the owner's picks of 2026-10-19 ("sick lamps. Add them to the site as well"): a pendant whose
@@ -140,14 +140,17 @@ LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
     ('dome', 'Hemisphere North', 'Pendant', 'Hung low over the bar. A quarter turn takes its shade off, and another puts a new colour on.',
      'Hemisphere North lit, its Ember shade glowing beneath a black hub',
      [('Size', '200 mm across'), ('Shade', 'Cast acrylic, tinted outside and frosted within'),
-      ('Light', '2700 K, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
-      ('Shades', 'In all eight colours, sold singly')]),
+      ('Light', '2700 K, CRI 90, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
+      ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
+      ('Mains', '120 V, dimmable; listing to UL 1598 to follow'),
+      ('Shades', 'In all eight colours, sold singly'), ('Figures', 'Design figures; they may change before production')]),
     ('orb', 'Core', 'Table lamp', 'A ball of tinted acrylic sitting low in a black acrylic base. Plugged in, it stays put; unplugged, it goes where the conversation is.',
      'Core lit in Ember, sitting low in its black acrylic base',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', '2.0 kg'),
-      ('Light', '2200 to 2700 K, warmer as it dims, under a black touch ring'),
-      ('Power', 'USB-C, cable and adapter included; about ten hours cordless on a built-in battery you can replace yourself'), ('Rating', 'IP44, for terraces and spilt drinks'),
-      ('Balls', 'In all eight colours, sold singly')]),
+      ('Light', '2200 to 2700 K, warmer as it dims'), ('Control', 'Touch the black ring: tap to switch, hold to dim'),
+      ('Power', 'USB-C, cable and adapter included; about ten hours cordless on a battery you can replace yourself'),
+      ('Rating', 'Designed to meet IP44, for terraces and spilt drinks'),
+      ('Shades', 'In all eight colours, sold singly'), ('Figures', 'Design figures; they may change before production')]),
 ]
 LAMP_PICS = {  # name: (its width on the page at 1x, the alt where the band doesn't write one)
     'lamp-dome': (800, None), 'lamp-orb': (800, None),
@@ -161,8 +164,8 @@ TT = dict(name='Mantle', kind='Record player', route='mantle',             # rou
                  ('Drive', 'Belt, its motor in a pod of its own'), ('Speeds', '33 and 45, by a button'),
                  ('Arm', 'Rega RB330'), ('Cartridge', 'Ortofon 2M Black'), ('Cover', 'Tinted acrylic, hinged')])
 LINES = [  # the shop's three lines: key, name, what's in it, its line
-    ('speakers', 'Speakers', 'Atmosphere', 'A horn loudspeaker cast in tinted acrylic, in eight colours.'),
-    ('lighting', 'Lighting', 'Hemisphere and Core', 'A pendant and a table lamp in the speakers&rsquo; acrylic, frosted within.'),
+    ('speakers', 'Speakers', 'Atmosphere', 'A powered horn loudspeaker in eight colours of cast acrylic.'),
+    ('lighting', 'Lighting', 'Hemisphere North and Core', 'A pendant and a table lamp in the speakers&rsquo; acrylic, frosted within.'),
     ('turntable', 'Turntable', 'Mantle', 'A record player in the same eight colours, lit from underneath.'),
 ]
 KEYS = [c[0] for c in CLOUDS]
@@ -651,7 +654,7 @@ def body():
         hw, hh = meta['red']['habitat']['w'], meta['red']['habitat']['h']
         tall = all(os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg')) for k in KEYS)
         habitats = ('  <section class="band" id="habitats"><div class="wrap">\n'
-                    '    <div class="head"><div><p class="eyebrow">In their element</p><h2>Each colour, out in the world.</h2></div></div>\n'
+                    '    <div class="head"><div><p class="eyebrow">In their element</p><h2>Each colour, where it began.</h2></div></div>\n'
                     '    <div class="hab-frame">\n'
                     '    <ul class="habitats" id="hab" tabindex="0" aria-label="The eight in their habitats">' + ''.join(
                         f'<li><a href="#speaker-{name.lower()}"><picture>'
@@ -693,7 +696,7 @@ def body():
                 '    <div class="ptiles">' + ''.join(ptile(k_, name, kind, line, f'{k_}-red.jpg', alt)
                                                     for k_, name, kind, line, alt, facts in LAMPS) + '</div>\n'
                 '    <figure class="eight">' + pic('lamps-domes', None) + pic('lamps-orbs', None) +
-                '<figcaption>In spectrum order, as the speakers: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
+                '<figcaption>In the speakers&rsquo; order: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
                 '    <div class="lamp-duo solo"><figure>' + pic('lamps-unlit', None) + '<figcaption>Off, in Smoke.</figcaption></figure>'
                 '<div class="lamp-note"><h3>Plugged in or not.</h3><p>Core runs from its cable or from a battery in its base: '
                 'about ten hours without the cable, and when the battery tires, you change the battery, not the lamp.</p></div></div>\n'
@@ -716,11 +719,11 @@ def body():
         figs.append(fig('tt-concept.jpg', f'{TT["name"]} in Haze at dusk, its lid raised: a violet plinth floating over a base whose edge glows',
                         f'{TT["name"]} in Haze, lit at dusk.'))
         turntable = ('  <section class="band" id="record"><div class="wrap soon-wrap">\n'
-                     f'    <div class="head"><div><p class="eyebrow">Turntable</p><h2>{TT["name"]}, nearly here.</h2>\n'
-                     '      <p>A record player in the same eight colours: a tinted plinth floating on clear posts over a base that glows '
-                     'at its edge, its own phono stage inside, the motor standing apart. The rest of its pictures are being made.</p></div></div>\n'
+                     f'    <div class="head"><div><p class="eyebrow">Turntable</p><h2>{TT["name"]}, next.</h2>\n'
+                     '      <p>A record player in the same eight colours. Its tinted plinth floats on clear posts over a base that '
+                     'glows at its edge. The phono stage is built in, and the motor stands apart. More of it when there&rsquo;s more to show.</p></div></div>\n'
                      '    <div class="concepts">' + ''.join(figs) + '</div>\n'
-                     '    <div class="acts"><a class="btn" href="#contact">Ask about it</a></div>\n'
+                     '    <div class="acts"><a class="btn" href="#contact">Enquire</a></div>\n'
                      '  </div></section>')
     # the home page's lines and colours
     def tile(key, name, what, line, img, alt, go, soon=False):
@@ -730,9 +733,9 @@ def body():
                 f'<span class="t-body"><span class="eyebrow">{name}</span><b class="t-name">{what}</b><span class="t-line">{line}</span>'
                 f'<span class="t-go">{go}</span></span></a>')
     sp_img = next((f'{k}-habitat-portrait.jpg' for k in ('violet', 'green', 'red') if os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg'))), 'hero-1200.jpg')
-    tiles = [tile('speakers', LINES[0][1], LINES[0][2], LINES[0][3], sp_img, 'Haze, a violet speaker, before layered hills in a hazy evening light', 'Shop speakers')]
+    tiles = [tile('speakers', LINES[0][1], LINES[0][2], LINES[0][3], sp_img, 'Haze, the violet speaker, before layered hills in evening light', 'See the speakers')]
     if lighting:
-        tiles.append(tile('lighting', LINES[1][1], LINES[1][2], LINES[1][3], 'dome-red.jpg', 'Hemisphere North lit in Ember', 'Shop lighting'))
+        tiles.append(tile('lighting', LINES[1][1], LINES[1][2], LINES[1][3], 'dome-red.jpg', 'Hemisphere North lit in Ember', 'See the lighting'))
     tiles.append(tile('turntable', LINES[2][1], LINES[2][2], LINES[2][3], 'tt-ice-tall.jpg' if tt else 'tt-concept.jpg',
                       f'{TT["name"]}, the record player' if tt else f'{TT["name"]} in Haze at dusk, its base glowing',
                       'See the record player' if tt else 'See where it stands', soon=not tt))
@@ -740,8 +743,9 @@ def body():
              '    <div class="head"><div><p class="eyebrow">The lines</p><h2>One acrylic, three ways to use it.</h2></div></div>\n'
              f'    <div class="lines">{"".join(tiles)}</div>\n  </div></section>')
     colours = ('  <section class="band" id="colours"><div class="wrap">\n'
-               '    <div class="head"><div><p class="eyebrow">Shop by colour</p><h2>Eight colours, every line.</h2>\n'
-               '      <p>Each colour runs through everything we make, so a room can be one colour or three.</p></div></div>\n'
+               '    <div class="head"><div><p class="eyebrow">By colour</p><h2>Eight colours, every line.</h2>\n'
+               '      <p>Each is named for something the air carries, and each runs through everything we make, so a '
+               'room can be one colour or three.</p></div></div>\n'
                '    <ul class="shopcol">' + ''.join(
                    f'<li><a href="#colour-{name.lower()}"><span class="coin-dot" style="--i:{coin[k]}"></span><b>{name}</b><small>{line}</small></a></li>'
                    for k, num, name, icon, tint, line, cover in CLOUDS) + '</ul>\n  </div></section>')
@@ -851,6 +855,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .hero-title h1 { font-size: clamp(34px, 5vw, 80px); max-width: none }
 .hero-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; padding-block: 24px 0 }
 .hero-foot .lede { margin: 0 }
+.hero-foot .status { flex-basis: 100%; margin: 0; color: var(--muted); font-size: 14px }   /* the plain word, once, near the top */
 .acts { display: flex; flex-wrap: wrap; gap: 10px }
 .spot { position: absolute; display: block; border-radius: 10px; color: var(--on-photo); text-decoration: none; z-index: 2 }
 .spot-label { position: absolute; left: 50%; top: calc(100% + 10px); transform: translate(-50%, -6px); display: inline-flex;
@@ -1087,6 +1092,7 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 .contact .addr { display: flex; flex-wrap: wrap; align-items: center; gap: 12px }
 .contact code { font: 500 clamp(20px, 3vw, 30px)/1.2 var(--mono); user-select: all; word-break: break-all }
 .contact small { color: var(--muted); font-size: 14px }
+.contact small:empty { display: none }
 footer { padding-block: 40px 56px; border-top: 1px solid var(--rule) }
 footer .wrap { display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between }
 footer p { margin: 0; font: 500 12px/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted) }
@@ -1320,7 +1326,8 @@ html.cursor, html.cursor * { cursor: none !important }
     </div>
     <div class="wrap hero-foot">
       <p class="lede">Atmosphere is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke.</p>
-      <div class="acts"><a class="btn solid" href="#speakers">Shop speakers</a><a class="btn" href="#colours">Shop by colour</a></div>
+      <div class="acts"><a class="btn solid" href="#speakers">See the speakers</a><a class="btn" href="#colours">See the colours</a></div>
+      <p class="status">In development and not yet for sale; until the first are built, every picture here is a render.</p>
     </div>
     <div class="wrap"><ul class="cast" aria-label="The eight, in spectrum order">__NAMES__</ul></div>
   </section>
@@ -1332,7 +1339,7 @@ __HABITATS__
   <section class="band room" id="room">
     <div class="wrap"><div class="head"><div><p class="eyebrow">At home</p><h2>A pair in Poison.</h2></div></div></div>
     <figure><picture>__ROOM_TALL__<img src="img/room.jpg" srcset="img/room-1440.jpg 1440w, img/room.jpg 2880w" sizes="100vw" width="2880" height="1620" alt="Two green speakers either side of a walnut sideboard with a record player, low sun from a tall window on the left" loading="lazy"></picture>
-      <figcaption class="wrap"><span>Covers on, by a tall window.</span><span>Each stands 1293&nbsp;mm tall and 560&nbsp;mm wide.</span></figcaption></figure>
+      <figcaption class="wrap"><span>Covers on, by a tall window.</span><span>Each stands 1293&nbsp;mm tall, 560&nbsp;mm wide at the cabinet.</span></figcaption></figure>
   </section>
 
   <section class="band mother" id="mother-earf"><div class="wrap">
@@ -1355,11 +1362,11 @@ __HABITATS__
 
   <section class="band" id="contact"><div class="wrap contact">
     <p class="eyebrow">Enquiries</p>
-    <h2>Prices, pairs and partnerships.</h2>
-    <p>Everything here is made to order, so we quote rather than list. Write for prices and lead times, or if you&rsquo;d like to
-      make, stock or collaborate.</p>
+    <h2>Write to us.</h2>
+    <p>Everything is made to order, so we quote rather than list. From launch, write here for prices and lead times.
+      Trade and stockists: the same address.</p>
     <div class="addr"><code id="addr">hello@earf.world</code><button type="button" class="btn" id="copy">Copy address</button></div>
-    <small id="copy-note">The inbox opens at launch.</small>
+    <small id="copy-note"></small>
   </div></section>
 </main>
 
@@ -1368,7 +1375,7 @@ __HABITATS__
     <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Speakers</p></div>
   <section class="band" id="atmosphere"><div class="wrap">
     <div class="head">
-      <div><p class="eyebrow">Atmosphere</p><h2>Choose your atmosphere.</h2>
+      <div><p class="eyebrow">Atmosphere</p><h2>Eight atmospheres.</h2>
         <p>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The lining shows through the walls,
           so we dressed it in white voile.</p></div>
       <div class="seg" role="group" aria-label="The speakers' covers">
@@ -1382,9 +1389,10 @@ __CLOSER__
   <section class="band" id="turn"><div class="wrap">
     <div class="head">
       <div><p class="eyebrow">The horn</p><h2>The oldest amplifier is a shape.</h2>
-        <p>Long before there were amplifiers, a horn was how a small sound filled a large room: the gramophone&rsquo;s, the
-          megaphone&rsquo;s, a cupped hand&rsquo;s. Ours is cast in resin tinted to match its cabinet, and its driver lives in a
-          pod whose cap twists off by hand.</p></div>
+        <p>Long before there were amplifiers, a horn was how a small sound filled a large room: the gramophone&rsquo;s, or a
+          cupped hand&rsquo;s. Ours is formed from its cabinet&rsquo;s own tinted sheet, its driver in a pod whose cap twists
+          off by hand. Above 1&nbsp;kHz the horn carries the music; below, a 15-inch woofer takes it, each on its own channel
+          of the amplifier inside. A horn wastes little, so a little power goes a long way.</p></div>
     </div>
     <ul class="horns" id="horns">__TURN__</ul>
   </div></section>
@@ -1437,7 +1445,7 @@ __TURNTABLE__
         <p class="num"><span id="p-num"></span></p>
         <h1 class="named"><span id="p-name"></span><span class="pic" id="p-icon"></span></h1>
         <p class="line" id="p-line"></p>
-        <p class="price">Price on request <span id="p-unit">&middot; each pair made to order</span></p>
+        <p class="price">In development &middot; price on request <span id="p-unit">&middot; each pair made to order</span></p>
         <ul class="swatches" id="swatches" aria-label="Colour"></ul>
         <p class="pick">Colour: <b id="p-pick"></b><span class="pick-ic" id="p-pick-ic"></span></p>
         <div class="acts"><a class="btn solid" id="p-enquire" href="#contact">Enquire about a pair</a></div>
@@ -1452,7 +1460,7 @@ __TURNTABLE__
 <footer><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home">__WORD__</a>
   <nav class="foot-nav" aria-label="More"><a href="#mother-earf">Mother EARF</a><a href="#contact">Enquiries</a></nav>
-  <p>Atmosphere horn loudspeakers &middot; In development, not yet for sale; the pictures are renders &middot; &copy; 2026 EARF</p>
+  <p>EARF &middot; San Francisco &middot; Speakers, lamps and a record player in tinted acrylic &middot; In development, not yet for sale; the pictures are renders &middot; &copy; 2026</p>
 </div></footer>
 
 <script>
@@ -1594,7 +1602,7 @@ on.addEventListener('click', () => { on.setAttribute('aria-pressed', 'true'); of
 off.addEventListener('click', () => { off.setAttribute('aria-pressed', 'true'); on.setAttribute('aria-pressed', 'false'); cards.classList.add('show-off'); });
 document.getElementById('copy').addEventListener('click', () => {
   const note = document.getElementById('copy-note'), text = document.getElementById('addr').textContent;
-  const done = () => { note.textContent = 'Copied. The inbox opens at launch.'; };
+  const done = () => { note.textContent = 'Copied.'; };
   const pickText = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('addr'));
     const s = getSelection(); s.removeAllRanges(); s.addRange(r); note.textContent = 'Selected.'; };
   try { navigator.clipboard.writeText(text).then(done, pickText); } catch (e) { pickText(); }
@@ -1635,7 +1643,7 @@ const PRODUCTS = [
     facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Tinted acrylic, formed from the cabinet&rsquo;s own sheet'],
       ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`], ['Drivers', '15-inch woofer; 2-inch compression driver on the horn'],
       ['Amplifier', 'Hypex FusionAmp FA122, built in: 2 &times; 125 W, crossed at 1 kHz'], ['Bass', 'To about 49 Hz (&minus;3 dB) before the room; a design figure, measured with the first pair'],
-      ['Inputs', 'XLR, RCA, AES, S/PDIF, optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg']],
+      ['Inputs', 'XLR, RCA, AES, S/PDIF coaxial and optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg']],
     title: c => `Atmosphere in ${c.name}` },
   ...Object.entries(D.lamps).map(([id, L]) => ({ id, line: 'lighting', lineName: 'Lighting', route: L.route || id, kind: L.kind, name: () => L.name,
     num: () => `Lighting &middot; ${L.kind}`, copy: () => L.line, views: k => (L.colours[k] || {}).views, VIEWS: LAMP_VIEWS[id],
@@ -1702,7 +1710,7 @@ function showView(v, focus) {
 }
 function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf(view) + d + list.length) % list.length], focus); }
 const MORE = {
-  speaker: 'More on the speaker: <a href="#turn">the horn</a>, <a href="#closer">in the studio</a> and <a href="#spec">the particulars</a>.',
+  speaker: 'More on the speaker: <a href="#turn">the horn</a>, <a href="#closer">the studio</a> and <a href="#spec">the particulars</a>.',
   dome: 'Also in Lighting: <a href="#core-ember">Core</a>, a table lamp in the same eight.',
   orb: 'Also in Lighting: <a href="#hemisphere-ember">Hemisphere North</a>, a pendant in the same eight.',
   turntable: 'See it beside the speakers: <a href="#speakers">Atmosphere</a>.',
