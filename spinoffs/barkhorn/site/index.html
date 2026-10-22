@@ -1093,12 +1093,12 @@ function route() {
     navAt(PBY[m[1]].line);
   } else if ((m = /^colour-([a-z]+)$/.exec(h)) && keyOf(m[1])) {
     page = h; showMain('colour'); renderColour(keyOf(m[1])); scrollTo(0, 0); navAt('colours');
-  } else if (LINE_OF[h] || /^turntable-/.test(h)) {
+  } else if (LINE_OF[h] || /^(turntable|mantle)-/.test(h)) {         // Mantle's own addresses, before its page exists
     const L = LINE_OF[h] || 'turntable'; page = 'line-' + L; showMain('line');
     lineMain.querySelectorAll('.lineview').forEach(v => { v.hidden = v.dataset.line !== L; });
     document.title = `${LINE_NAME[L]} · EARF`;
     const target = document.getElementById(h);
-    if (target && !LINE_NAME[h] && !/^turntable-/.test(h)) target.scrollIntoView(); else scrollTo(0, 0);
+    if (target && !LINE_NAME[h] && !/^(turntable|mantle)-/.test(h)) target.scrollIntoView(); else scrollTo(0, 0);
     navAt(L); ask();
   } else {
     page = 'home'; showMain('home'); document.title = TITLE0;

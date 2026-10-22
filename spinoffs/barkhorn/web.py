@@ -87,6 +87,7 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'smoke': 'in a pine wood at dawn, in shafts of woodsmoke', 'smoke_b': 'in a misty birch wood',
     'smoke_e6': 'on a cracked salt flat, black smoke climbing from the horizon',
     'smoke_e9': 'on a city bridge at dusk, a wrecked car burning behind it',
+    'smoke_e10': 'on a city overpass at blue hour, a burnt-out car still burning behind it',
 }
 LP = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'lamps-pdp')   # each lamp in each colour (lamps_pdp.py)
 TTR = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'turntable')  # the record player, round 34's finals
@@ -1793,12 +1794,12 @@ function route() {
     navAt(PBY[m[1]].line);
   } else if ((m = /^colour-([a-z]+)$/.exec(h)) && keyOf(m[1])) {
     page = h; showMain('colour'); renderColour(keyOf(m[1])); scrollTo(0, 0); navAt('colours');
-  } else if (LINE_OF[h] || /^turntable-/.test(h)) {
+  } else if (LINE_OF[h] || /^(turntable|mantle)-/.test(h)) {         // Mantle's own addresses, before its page exists
     const L = LINE_OF[h] || 'turntable'; page = 'line-' + L; showMain('line');
     lineMain.querySelectorAll('.lineview').forEach(v => { v.hidden = v.dataset.line !== L; });
     document.title = `${LINE_NAME[L]} · EARF`;
     const target = document.getElementById(h);
-    if (target && !LINE_NAME[h] && !/^turntable-/.test(h)) target.scrollIntoView(); else scrollTo(0, 0);
+    if (target && !LINE_NAME[h] && !/^(turntable|mantle)-/.test(h)) target.scrollIntoView(); else scrollTo(0, 0);
     navAt(L); ask();
   } else {
     page = 'home'; showMain('home'); document.title = TITLE0;
