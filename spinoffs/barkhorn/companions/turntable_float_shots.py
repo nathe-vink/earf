@@ -185,6 +185,9 @@ def render(names, extra, out):
         subprocess.run([py, os.path.join(ROOT, 'studio', 'engine', 'render.py'), os.path.join(SHOTS, n + '.json'),
                         '--out', os.path.join(out, n + '.png')] + extra, check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        raw = os.path.join(out, n + '.raw.png')
+        if os.path.exists(raw):
+            os.remove(raw)                      # the site keeps the png, its shot and its report only
         print(n, flush=True)
 
 
