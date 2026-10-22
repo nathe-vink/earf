@@ -1,0 +1,605 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/turntable-float/dusk-fog.json",
+ "image": "/home/user/earf/renders/2026-10-22/barkhorn/turntable/dusk-fog.png",
+ "seconds": {
+  "build": 1.4,
+  "render": 847.8
+ },
+ "samples": 64,
+ "size": [
+  2400,
+  1600
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "arm-arm#0": {
+   "part": "arm-arm",
+   "centre_px": [
+    1406.6,
+    931.5
+   ],
+   "box_px": [
+    1148,
+    773,
+    1643,
+    1115
+   ],
+   "depth_m": 2.007
+  },
+  "arm-lift#0": {
+   "part": "arm-lift",
+   "centre_px": [
+    1471.9,
+    921.3
+   ],
+   "box_px": [
+    1391,
+    854,
+    1552,
+    991
+   ],
+   "depth_m": 2.055
+  },
+  "ball#0": {
+   "part": "ball",
+   "centre_px": [
+    1076.6,
+    1043.8
+   ],
+   "box_px": [
+    1068,
+    1035,
+    1085,
+    1052
+   ],
+   "depth_m": 2.086
+  },
+  "base-slab#0": {
+   "part": "base-slab",
+   "centre_px": [
+    1131.7,
+    1085.3
+   ],
+   "box_px": [
+    527,
+    899,
+    1706,
+    1325
+   ],
+   "depth_m": 2.091
+  },
+  "bearing-housing#0": {
+   "part": "bearing-housing",
+   "centre_px": [
+    1076.3,
+    1007.5
+   ],
+   "box_px": [
+    999,
+    929,
+    1152,
+    1088
+   ],
+   "depth_m": 2.08
+  },
+  "belt#0": {
+   "part": "belt",
+   "centre_px": [
+    1070.5,
+    926.7
+   ],
+   "box_px": [
+    642,
+    800,
+    1475,
+    1080
+   ],
+   "depth_m": 2.068
+  },
+  "bushes#0": {
+   "part": "bushes",
+   "centre_px": [
+    1076.2,
+    1000.0
+   ],
+   "box_px": [
+    1057,
+    959,
+    1095,
+    1041
+   ],
+   "depth_m": 2.079
+  },
+  "bushings#0": {
+   "part": "bushings",
+   "centre_px": [
+    1131.7,
+    1085.3
+   ],
+   "box_px": [
+    844,
+    962,
+    1401,
+    1227
+   ],
+   "depth_m": 2.091
+  },
+  "cartridge#0": {
+   "part": "cartridge",
+   "centre_px": [
+    1182.4,
+    994.7
+   ],
+   "box_px": [
+    1152,
+    966,
+    1212,
+    1024
+   ],
+   "depth_m": 1.917
+  },
+  "feet#0": {
+   "part": "feet",
+   "centre_px": [
+    1131.8,
+    1107.5
+   ],
+   "box_px": [
+    585,
+    932,
+    1654,
+    1328
+   ],
+   "depth_m": 2.095
+  },
+  "fixings#0": {
+   "part": "fixings",
+   "centre_px": [
+    1131.0,
+    950.1
+   ],
+   "box_px": [
+    545,
+    788,
+    1689,
+    1158
+   ],
+   "depth_m": 2.069
+  },
+  "float-bolts#0": {
+   "part": "float-bolts",
+   "centre_px": [
+    1131.5,
+    1050.4
+   ],
+   "box_px": [
+    842,
+    884,
+    1402,
+    1240
+   ],
+   "depth_m": 2.085
+  },
+  "hinge-blocks#0": {
+   "part": "hinge-blocks",
+   "centre_px": [
+    1297.2,
+    875.8
+   ],
+   "box_px": [
+    1028,
+    812,
+    1584,
+    944
+   ],
+   "depth_m": 2.229
+  },
+  "hinges#0": {
+   "part": "hinges",
+   "centre_px": [
+    1296.5,
+    832.7
+   ],
+   "box_px": [
+    1035,
+    764,
+    1575,
+    906
+   ],
+   "depth_m": 2.221
+  },
+  "led-strip-edge#0": {
+   "part": "led-strip-edge",
+   "centre_px": [
+    1131.7,
+    1085.3
+   ],
+   "box_px": [
+    526,
+    902,
+    1706,
+    1322
+   ],
+   "depth_m": 2.091
+  },
+  "led-strip-strip#0": {
+   "part": "led-strip-strip",
+   "centre_px": [
+    1117.9,
+    1095.4
+   ],
+   "box_px": [
+    566,
+    927,
+    1651,
+    1307
+   ],
+   "depth_m": 2.079
+  },
+  "lid-back#0": {
+   "part": "lid-back",
+   "centre_px": [
+    1330.8,
+    794.9
+   ],
+   "box_px": [
+    935,
+    699,
+    1750,
+    904
+   ],
+   "depth_m": 2.253
+  },
+  "lid-front#0": {
+   "part": "lid-front",
+   "centre_px": [
+    1272.9,
+    182.1
+   ],
+   "box_px": [
+    848,
+    116,
+    1724,
+    257
+   ],
+   "depth_m": 2.088
+  },
+  "lid-left#0": {
+   "part": "lid-left",
+   "centre_px": [
+    943.4,
+    456.7
+   ],
+   "box_px": [
+    850,
+    111,
+    1028,
+    808
+   ],
+   "depth_m": 2.27
+  },
+  "lid-right#0": {
+   "part": "lid-right",
+   "centre_px": [
+    1696.9,
+    547.6
+   ],
+   "box_px": [
+    1618,
+    168,
+    1775,
+    933
+   ],
+   "depth_m": 2.071
+  },
+  "lid-top#0": {
+   "part": "lid-top",
+   "centre_px": [
+    1344.2,
+    462.6
+   ],
+   "box_px": [
+    941,
+    96,
+    1781,
+    857
+   ],
+   "depth_m": 2.209
+  },
+  "mark#0": {
+   "part": "mark",
+   "centre_px": [
+    1323.1,
+    1121.7
+   ],
+   "box_px": [
+    1277,
+    1109,
+    1369,
+    1134
+   ],
+   "depth_m": 1.856
+  },
+  "motor#0": {
+   "part": "motor",
+   "centre_px": [
+    972.3,
+    859.6
+   ],
+   "box_px": [
+    887,
+    782,
+    1056,
+    940
+   ],
+   "depth_m": 2.24
+  },
+  "phono-pads#0": {
+   "part": "phono-pads",
+   "centre_px": [
+    1230.4,
+    1009.6
+   ],
+   "box_px": [
+    1110,
+    967,
+    1348,
+    1055
+   ],
+   "depth_m": 2.18
+  },
+  "phono-stage#0": {
+   "part": "phono-stage",
+   "centre_px": [
+    1234.9,
+    973.4
+   ],
+   "box_px": [
+    1091,
+    893,
+    1375,
+    1059
+   ],
+   "depth_m": 2.178
+  },
+  "platter-disc#0": {
+   "part": "platter-disc",
+   "centre_px": [
+    1075.5,
+    927.6
+   ],
+   "box_px": [
+    653,
+    789,
+    1474,
+    1095
+   ],
+   "depth_m": 2.067
+  },
+  "platter-hub#0": {
+   "part": "platter-hub",
+   "centre_px": [
+    1075.5,
+    927.6
+   ],
+   "box_px": [
+    1012,
+    889,
+    1138,
+    967
+   ],
+   "depth_m": 2.067
+  },
+  "plinth-slab#0": {
+   "part": "plinth-slab",
+   "centre_px": [
+    1131.1,
+    978.3
+   ],
+   "box_px": [
+    550,
+    798,
+    1685,
+    1208
+   ],
+   "depth_m": 2.074
+  },
+  "pod-core#0": {
+   "part": "pod-core",
+   "centre_px": [
+    973.2,
+    909.2
+   ],
+   "box_px": [
+    875,
+    818,
+    1069,
+    1004
+   ],
+   "depth_m": 2.248
+  },
+  "pod-mat#0": {
+   "part": "pod-mat",
+   "centre_px": [
+    974.7,
+    996.0
+   ],
+   "box_px": [
+    873,
+    958,
+    1074,
+    1036
+   ],
+   "depth_m": 2.263
+  },
+  "pod-pads#0": {
+   "part": "pod-pads",
+   "centre_px": [
+    979.6,
+    981.6
+   ],
+   "box_px": [
+    911,
+    950,
+    1048,
+    1014
+   ],
+   "depth_m": 2.266
+  },
+  "pod-ring-1-stack#0": {
+   "part": "pod-ring-1-stack",
+   "centre_px": [
+    973.2,
+    909.2
+   ],
+   "box_px": [
+    859,
+    813,
+    1084,
+    1009
+   ],
+   "depth_m": 2.248
+  },
+  "post-1#0": {
+   "part": "post-1",
+   "centre_px": [
+    868.9,
+    1083.0
+   ],
+   "box_px": [
+    825,
+    1035,
+    912,
+    1131
+   ],
+   "depth_m": 2.018
+  },
+  "post-2#0": {
+   "part": "post-2",
+   "centre_px": [
+    1156.5,
+    1141.2
+   ],
+   "box_px": [
+    1113,
+    1091,
+    1200,
+    1192
+   ],
+   "depth_m": 1.946
+  },
+  "post-3#0": {
+   "part": "post-3",
+   "centre_px": [
+    1109.4,
+    939.7
+   ],
+   "box_px": [
+    1071,
+    897,
+    1147,
+    983
+   ],
+   "depth_m": 2.22
+  },
+  "post-4#0": {
+   "part": "post-4",
+   "centre_px": [
+    1378.1,
+    987.6
+   ],
+   "box_px": [
+    1339,
+    943,
+    1417,
+    1032
+   ],
+   "depth_m": 2.148
+  },
+  "pulley#0": {
+   "part": "pulley",
+   "centre_px": [
+    971.6,
+    820.2
+   ],
+   "box_px": [
+    913,
+    793,
+    1029,
+    848
+   ],
+   "depth_m": 2.233
+  },
+  "rear-box#0": {
+   "part": "rear-box",
+   "centre_px": [
+    1517.2,
+    996.3
+   ],
+   "box_px": [
+    1416,
+    940,
+    1619,
+    1054
+   ],
+   "depth_m": 2.156
+  },
+  "slot-mask#0": {
+   "part": "slot-mask",
+   "centre_px": [
+    1116.7,
+    1085.8
+   ],
+   "box_px": [
+    553,
+    922,
+    1660,
+    1293
+   ],
+   "depth_m": 2.076
+  },
+  "spindle#0": {
+   "part": "spindle",
+   "centre_px": [
+    1075.8,
+    958.7
+   ],
+   "box_px": [
+    1061,
+    874,
+    1090,
+    1043
+   ],
+   "depth_m": 2.072
+  },
+  "thrust-plate#0": {
+   "part": "thrust-plate",
+   "centre_px": [
+    1076.7,
+    1051.2
+   ],
+   "box_px": [
+    1058,
+    1043,
+    1095,
+    1060
+   ],
+   "depth_m": 2.087
+  }
+ },
+ "finish": {
+  "white_in": 215.0,
+  "white_out": 236.0,
+  "peak": 251.0,
+  "contrast": 0.08,
+  "clarity": 0.03,
+  "sharpen": 0.1,
+  "sharpen_px": 0.7,
+  "gain": 1.0977
+ }
+}
