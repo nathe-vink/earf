@@ -1,0 +1,250 @@
+{
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -0.16,
+   -1.15,
+   1.72
+  ],
+  "target": [
+   0.0,
+   0.0,
+   2.4
+  ],
+  "lens_mm": 40,
+  "level": true,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.05,
+   2.15
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAE4DA",
+  "width": 10.0,
+  "front": 6.0,
+  "depth": 0.45,
+  "radius": 0.3,
+  "height": 4.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "box",
+    "material": "paper",
+    "color": "#EAE4DA",
+    "size": [
+     6.0,
+     3.0,
+     0.05
+    ],
+    "position": [
+     0.0,
+     0.2,
+     2.7
+    ]
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "south",
+    "spots": [
+     [
+      0.0,
+      0.0,
+      2.2
+     ]
+    ],
+    "flavour": "fog",
+    "lamp": false,
+    "shade_glow": 0.405,
+    "noshadow": "lid",
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D2C8",
+  "horizon": "#DED8CE",
+  "ground": "#D6CEC2",
+  "strength": 0.35
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    0.5
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 8,
+    "distance_m": 2.2
+   },
+   "target": [
+    0.0,
+    0.0,
+    2.18
+   ],
+   "irradiance": 0.45,
+   "color": 4300
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    2.18
+   ],
+   "irradiance": 0.15,
+   "color": 4300
+  },
+  "bgwash": {
+   "type": "area",
+   "size_m": [
+    3.5,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -0.4,
+    2.2
+   ],
+   "target": [
+    0.0,
+    0.45,
+    1.2
+   ],
+   "irradiance": 3.207,
+   "color": "#FFE0A4",
+   "camera": false,
+   "specular": 0.0
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "position": [
+    0.35,
+    0.22,
+    2.0500000000000003
+   ],
+   "target": [
+    0.0,
+    0.0,
+    2.18
+   ],
+   "irradiance": 0.35,
+   "color": 3600,
+   "camera": false
+  },
+  "rim_l": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "position": [
+    -0.35,
+    0.22,
+    2.0500000000000003
+   ],
+   "target": [
+    0.0,
+    0.0,
+    2.18
+   ],
+   "irradiance": 0.35,
+   "color": 3600,
+   "camera": false
+  },
+  "hubstrip": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.08
+   ],
+   "position": [
+    -0.4,
+    -0.3,
+    1.7500000000000002
+   ],
+   "target": [
+    0.0,
+    0.0,
+    2.0300000000000002
+   ],
+   "irradiance": 0.8,
+   "color": 3600,
+   "camera": false
+  },
+  "wash": {
+   "type": "area",
+   "shape": "DISK",
+   "size_m": [
+    0.17,
+    0.17
+   ],
+   "position": [
+    0.0,
+    0.0,
+    2.204
+   ],
+   "target": [
+    0.0,
+    0.0,
+    2.7
+   ],
+   "power_w": 0.8,
+   "color": 2700,
+   "camera": false
+  },
+  "bowl": {
+   "type": "point",
+   "position": [
+    0.0,
+    0.0,
+    2.1500000000000004
+   ],
+   "power_w": 0.225,
+   "radius_m": 0.05,
+   "color": "#FFF2E4",
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.15,
+  "white_balance_k": 4300
+ },
+ "title": "Hemisphere South, its product page: Fog (round 35)"
+}

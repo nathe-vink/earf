@@ -1,0 +1,198 @@
+{
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -0.12,
+   -0.95,
+   1.18
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.42
+  ],
+  "lens_mm": 75,
+  "level": false,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.05,
+   1.42
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAE4DA",
+  "width": 10.0,
+  "front": 6.0,
+  "depth": 0.45,
+  "radius": 0.3,
+  "height": 4.0,
+  "props": [
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "earf_moon",
+    "fn": "dome",
+    "spots": [
+     [
+      0.0,
+      0.0,
+      1.4
+     ]
+    ],
+    "flavour": "ice",
+    "shade_glow": 0.675,
+    "lamp_w": 15.0,
+    "materials": {
+     "liner": {
+      "glow_color": "#FFDCB8"
+     }
+    }
+   }
+  ]
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D2C8",
+  "horizon": "#DED8CE",
+  "ground": "#D6CEC2",
+  "strength": 0.35
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    0.5
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 42,
+    "distance_m": 2.6
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.4
+   ],
+   "irradiance": 0.6,
+   "color": 4300
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.4
+   ],
+   "irradiance": 0.25,
+   "color": 4300
+  },
+  "bgwash": {
+   "type": "area",
+   "size_m": [
+    3.5,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -0.4,
+    3.0
+   ],
+   "target": [
+    0.0,
+    0.45,
+    1.5
+   ],
+   "irradiance": 3.207,
+   "color": "#FFE0A4",
+   "camera": false,
+   "specular": 0.0
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "position": [
+    0.35,
+    0.22,
+    1.62
+   ],
+   "target": [
+    0,
+    0,
+    1.47
+   ],
+   "irradiance": 0.35,
+   "color": 3600,
+   "camera": false
+  },
+  "rim_l": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "position": [
+    -0.35,
+    0.22,
+    1.62
+   ],
+   "target": [
+    0,
+    0,
+    1.47
+   ],
+   "irradiance": 0.35,
+   "color": 3600,
+   "camera": false
+  },
+  "hubstrip": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.08
+   ],
+   "position": [
+    -0.4,
+    -0.3,
+    1.9
+   ],
+   "target": [
+    0,
+    0,
+    1.5
+   ],
+   "irradiance": 0.8,
+   "color": 3600,
+   "camera": false
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.15,
+  "white_balance_k": 4300
+ },
+ "title": "Hemisphere North, its product page: Ice (round 35)"
+}
