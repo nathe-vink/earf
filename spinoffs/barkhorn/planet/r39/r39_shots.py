@@ -42,7 +42,7 @@ ALL.update(haze=0.003, wb=2850, wb_tint=-4.0, pendant_w=50.0, pendant_cone=24.0,
 # still raked hard stool shadows across the floor (they light the shopfront, not the room); the Domes' pools still
 # hot on the zinc; the Cores white balls without pools; the balance swung too cool at 2850
 ALL.update(street_lamp=8.0, pendant_w=32.0, pendant_cone=20.0, orb_trim=0.2, orb_pool=6.0, orb_col='#FFA060',
-           wb=3000, wb_tint=-2.0, screen_glow=0.03, jitter=True)
+           wb=3000, wb_tint=-2.0, screen_glow=0.03, jitter=True, counter_strip=0.5)
 FINISH = {'enabled': True, 'white_in': 236, 'white_out': 240, 'contrast': 0.08, 'clarity': 0.05, 'sharpen': 0.25,
           'sharpen_px': 0.7, 'grain': 2.5}
 
