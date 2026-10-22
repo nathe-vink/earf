@@ -33,3 +33,24 @@ softbox high at the left as its key. Its pass 2 in morning sun was stopped befor
 | hero-turntable (dusk, Ember) | p4 | 5.5 | iterate | The wall the brightest area and salmon (dE 23.7); the lower plinth crushed; the record smoked glass; the props cropped to blocks at both edges; a flat frontal view, no depth or dusk | Stopped here: the second pass in a row gaining under 0.5 (5.5, 5.5, 5.5), the coordinator's rule. The final is the blind duel's winner of p3 and p4 | 7.5 |
 | hero-lamp (dusk, Haze) | p4 | 6.0 | iterate | The lamp does not read as on: a dark plum shade, no pool on the top or the wall; one mauve field; the foot crushed; the sleeve clips; the speaker sliced at the edge | Bell's lamps visible to transmission again (hiding them stopped their light through the shade), 42 W; sky 8 to 3, fill 0.3 to 0.12; 3000 K (this hero's grade now its own: dusk lit by a violet lamp needs a warmer balance than Cumulus's); foot kick 10 W; the speaker in; the sleeve 3.5. Not done: the cabinet turned (its back would show), the oak's roughness (that is the floor, not the cabinet). Gain over p3: +0.5 | 7.6 |
 | hero-lamp (dusk, Haze) | p5 | 5.0 | iterate | The wall brighter than the lit shade (192 against 80): the lamp still does not read as on; the throat clips; no pool on the walnut; the speaker a crushed slab; denoiser wax | Stopped: three passes gaining under half a point together (5.5 at p2, 5.0 at p5; PROMPT-promo's own rule: the setting, not its settings, is the limit). The final is the blind duel's winner of p4 and p5 | 7.5 |
+
+## Round 35: the lamps, final (Hemisphere North and South, Core)
+
+Each pass is one fresh, blind critic per frame, given only the image and a short instruction (a score out of 10, what
+it reads as, three changes): stage 1 of `critic/PROMPT.md`. The frames are lit with the lamps' calibrated light at one
+camera exposure (EV100 6, `hemisphere_brightness.py`), so a fix that would fake the lamps' light is out of scope.
+The brightness study (`renders/2026-10-22/barkhorn/lamps-final/brightness/`) is a measurement and is not judged.
+
+| Shot | Pass | Blind score | The critic's top changes | What I did |
+|---|---|---|---|---|
+| lamp-south-hero (Ember, 1,150 lm) | r1 | 3.0 | The pendant a small silhouette against a blown ceiling; the wall lights clip and pull the eye; a muddy room, a crooked ceiling line | The camera closer and nearer the bowl's height (33 mm); the wall lights 120 to 40 lm, half a stop less exposure; a soft fill from the camera's side for the black hardware |
+| lamps-north-south (Ember, 575 and 1,150 lm) | r1 | 4.0 | The pendants small and high in the frame; the wall lights outshine them; the fittings' hardware reads clunky (the fins, the stepped cap) | Closer, 32 mm; the wall lights and the fill as above. The fins are the heat path (B2): out of scope for a picture |
+| lamp-south-hero (Ember, 1,150 lm) | r2 | 4.0 | The bowl still small in a frame of empty ceiling and wall; the black collar and fins lost against the brown wall; the wall light and the print compete | Stopped here (see below) |
+| lamps-north-south (Ember, 575 and 1,150 lm) | r2 | 4.0 | Pick one hero and give it a key and a rim; the walls muddy and the black hardware swallowed; the shades read as emitters, the lower fitting as unfinished | Stopped here |
+| lamp-core-hero (Ember, 200 lm) | r1 | 4.0 | The globe a flat, blown red disc (two stops down, a rim highlight); the foreground glass overlaps it and repeats its glow; no key or rim on the base | Stopped here |
+
+Stopped after two passes, at 4.0 each. These frames are lit by the lamps' own calibrated light in a dim room (the
+owner's brightness question), with only a soft fill added. Every remaining note asks for studio light: a key and a rim
+on the shades, the glow pulled down two stops, a hero crop. That is the next step if the owner wants these frames for
+the site; the gate (6.0) is not met. Twice a critic read the fins and the finial as "unfinished", which is a design
+note for the owner, not a render fix: they are the heat path (B2).
