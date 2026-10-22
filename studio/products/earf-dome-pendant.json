@@ -1,5 +1,5 @@
 {
- "_note": "Dome pendant for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "_note": "Hemisphere North for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
  "model": "spinoffs/barkhorn/companions/out-dome-pendant/render/earf-dome-pendant.glb",
  "origin_mm": [
   0.0,
@@ -39,6 +39,10 @@
    "glow": 0.25,
    "glow_color": "#FF9A50"
   },
+  "silicone": {
+   "preset": "rubber",
+   "color": "#1A1A1A"
+  },
   "trim": {
    "preset": "gloss_plastic",
    "color": "#0C0C0D",
@@ -49,7 +53,7 @@
  },
  "assign": [
   {
-   "match": "collar|hub|pins",
+   "match": "collar|clamp|hub|pins|reflector|fins",
    "material": "anodised"
   },
   {
@@ -69,7 +73,11 @@
    "material": "liner"
   },
   {
-   "match": "gland|canopy",
+   "match": "gaskets",
+   "material": "silicone"
+  },
+  {
+   "match": "ring|gland|canopy",
    "material": "trim"
   }
  ],

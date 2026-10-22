@@ -24,6 +24,12 @@ COVER) makes those parts cast no shadow, so the hidden lamp lights the room thro
 through glass only as caustics; Planet's loft, f7c99a4); unset, every part casts its shadow, as before. (Planet r38:
 restored here; round 32f's kit had dropped it, and the bar went dark, 25.6 to 6.5.)
 
+Round 35 (spinoffs/barkhorn/companions/README.md): `dome` is Hemisphere North (its fins above the cover, the cover
+clamped, the COB 81.5 above the rim), `orb` is Core (its base 48 tall with its cells; one ball frosted inside, the
+cartridge gone, so `cartridge` changes nothing), and `south` is Hemisphere South (spots: the bowl's rim; no `ceiling`
+stretch: the rod is 450 to the canopy's face, so put the rim 500 below the ceiling; its light, the ceiling wash from
+the lid and the bowl's glow, is the shot's own to set: `lamp: false`).
+
 Round 32f: the hardware is black (black anodised aluminium, black polished acrylic), in the GLBs themselves. The Orb
 plugs in over USB-C as standard; for a spot or the piece, `cable` (default true: its black fabric cable, dressed
 straight back from a notch at the back left, 420 mm) and `cartridge`: "none" (the default: the plug-in Orb, a blanking
@@ -47,16 +53,19 @@ if ENGINE not in sys.path:
 import product as PR                                                 # noqa: E402
 
 DEFS = {'table': 'studio/products/earf-moon-table.json', 'pendant': 'studio/products/earf-moon-pendant.json',
-        'dome': 'studio/products/earf-dome-pendant.json', 'orb': 'studio/products/earf-orb-table.json'}
+        'dome': 'studio/products/earf-dome-pendant.json', 'orb': 'studio/products/earf-orb-table.json',
+        'south': 'studio/products/earf-hemisphere-south.json'}
 # moon.TABLE_LIGHT, moon.PENDANT_LIGHT, crystal.DOME_LIGHT, crystal.ORB_LIGHT
-LIGHT_MM = {'table': (0.0, 0.0, 222.0), 'pendant': (0.0, 0.0, 70.0), 'dome': (0.0, 0.0, 74.0), 'orb': (0.0, 0.0, 100.4)}
-LAMP_W = {'table': 4.0, 'pendant': 14.0, 'dome': 9.0, 'orb': 3.0}
+LIGHT_MM = {'table': (0.0, 0.0, 222.0), 'pendant': (0.0, 0.0, 70.0), 'dome': (0.0, 0.0, 81.5), 'orb': (0.0, 0.0, 118.4),
+            'south': (0.0, 0.0, -66.0)}    # round 35: Core's base 48 (its cells); South's LED ring
+LAMP_W = {'table': 4.0, 'pendant': 14.0, 'dome': 9.0, 'orb': 3.0, 'south': 9.0}
 # the pendants' cords, from the cap to the canopy, and the canopy's top (mm above the rim)
-CORD_MM = {'pendant': (121.0, 707.0), 'dome': (126.0, 726.0)}
-CANOPY_TOP_MM = {'pendant': 757.0, 'dome': 776.0}
+CORD_MM = {'pendant': (121.0, 707.0), 'dome': (160.0, 760.0)}     # round 35: the dome's cord starts above its fins
+CANOPY_TOP_MM = {'pendant': 757.0, 'dome': 810.0}
 # the material that glows by itself, and its default (Moon's white frost; round 32d's liner, set within the tint)
-GLOW = {'table': ('shade', 3.0), 'pendant': ('shade', 3.0), 'dome': ('liner', 0.25), 'orb': ('liner', 0.25)}
-COVER = 'shell|liner|skin|rim|collar|grommet'      # a Dome's or an Orb's cover: what lifts off
+GLOW = {'table': ('shade', 3.0), 'pendant': ('shade', 3.0), 'dome': ('liner', 0.25), 'orb': ('liner', 0.25),
+        'south': ('liner', 0.25)}
+COVER = 'shell*|liner|skin|rim|collar|clamp|gaskets|grommet'   # a cover (Hemisphere's, Core's ball): what lifts off
 _CACHE = {}
 
 
@@ -154,3 +163,7 @@ def dome(bpy, name, p, kit):
 
 def orb(bpy, name, p, kit):
     return _place(bpy, 'orb', name, p, kit)
+
+
+def south(bpy, name, p, kit):
+    return _place(bpy, 'south', name, p, kit)

@@ -1,5 +1,5 @@
 {
- "_note": "Orb table lamp for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
+ "_note": "Core for the engine, written by studio/fabkit/render.py from the fabrication CAD; part names are the parts' names, materials the parts' finishes.",
  "model": "spinoffs/barkhorn/companions/out-orb-table/render/earf-orb-table.glb",
  "origin_mm": [
   0.0,
@@ -25,11 +25,6 @@
    "color": "#141414",
    "roughness": 0.8,
    "sheen": 0.4
-  },
-  "gold": {
-   "preset": "metal",
-   "color": "#D8B45A",
-   "roughness": 0.2
   },
   "led": {
    "preset": "emit",
@@ -71,11 +66,11 @@
  },
  "assign": [
   {
-   "match": "grommet|ring",
+   "match": "grommet|ring|hatch",
    "material": "anodised"
   },
   {
-   "match": "shell|skin",
+   "match": "shell-shell",
    "material": "body"
   },
   {
@@ -83,15 +78,11 @@
    "material": "fabric"
   },
   {
-   "match": "cartridge-pads",
-   "material": "gold"
-  },
-  {
    "match": "led",
    "material": "led"
   },
   {
-   "match": "liner",
+   "match": "shell-frost",
    "material": "liner"
   },
   {
@@ -103,7 +94,7 @@
    "material": "steel"
   },
   {
-   "match": "base|blank|cartridge",
+   "match": "base|holder",
    "material": "trim"
   },
   {
@@ -196,11 +187,5 @@
     }
    }
   }
- },
- "options": {
-  "cartridge": [
-   "cartridge",
-   "cartridge-pads"
-  ]
  }
 }
