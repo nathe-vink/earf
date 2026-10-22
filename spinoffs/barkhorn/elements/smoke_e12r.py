@@ -33,6 +33,21 @@ for them on its face; "a vintage CRT television" (the fire behind it glowed in i
 is unseen through its clear parts); "no embers"; the slabs "cut paving tiles", "boards" (the heave lower and thinner,
 the chips less rounded, their broken edges lighter than their tops, as asphalt's stones are); "perfectly upright"
 (canted further); the trench's walls, a pale ruled line, gone.
+
+p6, after proof 5's critics (realism 5 and 5; it beat E9 in both orders, the first meteor proof to): "the fire lights
+almost nothing around it ... no falloff and no shadows cast by the fire" (a strong lamp above the flames, so their light
+reaches the road, the cars and the rubble's rims ten metres off and throws their shadows outward; the low ones weaker,
+and rubble strewn over the pit's floor, "a clean tray"); the embers "tiny, sharp, round dots ... a starfield" (fewer,
+finer, bunched low, each drawn out along its path as a spark smears in an exposure); the rubble "thin, flat,
+clean-edged plates ... slate tiles or cardboard" with "a glossy, slate-like sheen" (thick crumbling lumps, matte); "no
+halation" (bloom); "upright and level" (rolled further over onto its left); the scorch "a flat dark streak ... like a
+decal" (fainter), the cracks and dust bolder; the lamp on its face gone (it turned E12's black cabinet bronze). Its
+first look's rubble came out as crystals and crumpled paper (every face tented, flat-shaded): the tops are flat again,
+only the broken edges tented, shaded smooth across the gentle edges, the undersides and edges darker; and rubble strewn
+either side of its foot, where the low flames lit the pit's floor as two flat orange shelves. And the speaker and its
+whole fire turned 25 degrees: face on, its horn's mouth read as a screen (every read test: "an old CRT television ... on
+top of a dark box"); turned, it shows its flare and its driver, and both blind duels of the two looks chose it ("reads
+as a horn loudspeaker"), its smoke now rising straight up out of the crash.
 """
 import copy
 import math
@@ -45,8 +60,11 @@ from common import piece, point
 
 NEAR = [-1.2, 15.0]                  # E10's burning car, across the gouge's line: the speaker is the fire now
 # the torn asphalt (impact.py): black right through, its stones in the broken edges, the sub-base grey under it
-ASPHALT = dict(top_value=0.4, under_tint='#1C1C1C', under_value=0.3, side='asphalt_02', side_value=0.9)
-TILT = [6.0, -2.5]                   # the speaker pitched forward onto its face as it dug in, and to its left
+ASPHALT = dict(top_value=0.28, under_tint='#1C1C1C', under_value=0.2, side='asphalt_02', side_value=0.6, top_rough=1.0,
+               side_rough=1.0, flat_tops=True, smooth=30.0)
+TILT = [6.0, -6.0]                   # the speaker pitched forward onto its face as it dug in, and over to its left
+TURN = 25.0                          # the speaker and its fire turned together about its foot (the solve's flow kept),
+                                     # so the horn shows its flare: face on, it read as "a vintage CRT television"
 WB = (4800, 10.0)                    # the white point: the dusk blue-grey round the fire's warm pool (p4's read pink throughout)
 STRENGTH = 420.0                     # the flames (E12's 220 on a sunlit pan): the cores clip at dusk
 CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_d.npz'   # meteor_c with fire on the speaker's front corners and foot
@@ -59,19 +77,29 @@ def torn(gouge):
         if fn == 'trench':
             p['value'] = 0.45
         elif fn == 'slabs':
-            p.update(ASPHALT, crumble=1.2)
-            if p['count'] == 90:                                     # along the lips
-                p.update(count=130, spread=0.7, flip=0.12, fallen=0.12, size_power=1.6)
-            else:                                                    # the heave in front: thinner, lower, more of them
-                p.update(thickness=0.045, size=0.45, count=28, tilt=40.0, tilt_min=15.0)
+            p.update(ASPHALT, crumble=2.0)
+            if p['count'] == 90:                                     # along the lips: thick crumbling lumps (p5: "thin,
+                p.update(count=130, spread=0.7, flip=0.12, fallen=0.12, size_power=1.6, thickness=0.1)   # even sheets")
+            else:                                                    # the heave in front: lower, more of them
+                p.update(thickness=0.09, size=0.45, count=28, tilt=40.0, tilt_min=15.0)
         elif fn == 'debris':
             if p.get('fine'):                                        # the grit: crushed stone, grey
                 p.update(under_tint='#1C1C1C', under_value=0.6)
             else:
-                p.update(ASPHALT, crumble=0.3, count=min(p['count'], 300))
-    # loose rubble down the trench's floor (p3: "as smooth and clean as the undamaged road"), clear of the speaker
-    return gouge + [piece('ext', module='impact', fn='debris', y0=I.Y0 + 6.0, y1=-0.9, count=260, reach=0.6, inner=0.0,
-                          z=-0.32, seed=19, rotate_z=I.FLIP, crumble=0.5, **ASPHALT)]
+                p.update(ASPHALT, crumble=0.6, count=min(p['count'], 300))
+        elif fn == 'scorch':                                         # p5: "a flat dark streak ... like a decal"
+            p['strength'] = 0.55
+    # loose rubble down the trench's floor (p3: "as smooth and clean as the undamaged road"), clear of the speaker, and
+    # over the floor of its pit in front of it, on the slope up to the road in three bands (p5: "a smooth, orange-lit
+    # sloped floor with straight edges ... a clean tray")
+    pit = [piece('ext', module='impact', fn='debris', y0=y0, y1=y0 + 0.75, count=70, reach=0.55, inner=0.0, z=z,
+                 seed=31 + i, rotate_z=I.FLIP, crumble=0.3, **ASPHALT)
+           for i, (y0, z) in enumerate([(-0.6, -0.3), (-0.35, -0.2), (-0.1, -0.09)])]
+    # and either side of it, where the low flames light the pit's floor (p6's look: two flat orange shelves)
+    pit.append(piece('ext', module='impact', fn='debris', band=[-0.45, 0.45], count=90, reach=0.55, inner=0.4, z=I.SINK,
+                     seed=35, rotate_z=I.FLIP, crumble=0.3, **ASPHALT))
+    return gouge + pit + [piece('ext', module='impact', fn='debris', y0=I.Y0 + 6.0, y1=-0.9, count=260, reach=0.6,
+                                inner=0.0, z=-0.32, seed=19, rotate_z=I.FLIP, crumble=0.5, **ASPHALT)]
 
 
 def marks(deck_len):
@@ -81,7 +109,7 @@ def marks(deck_len):
     # the char reaches past the fire's hottest light: within a metre and a half its lamps lit the black as bright as the
     # open road (a top-down test without them showed it there), so a scorch that small read as none
     road = dict(module='smoke_el', fn='impact', centre=[0.0, 0.0], char=[1.0, 2.6], jag=0.8, soot=4.5, soot_mix=0.55,
-                cracks=[0.9, 3.8], crack_count=13.0, crack_width=0.012, crack_bump=0.6, dust=[1.6, 5.5], dust_mix=0.5,
+                cracks=[0.9, 3.8], crack_count=13.0, crack_width=0.02, crack_bump=0.8, dust=[1.6, 5.5], dust_mix=0.65,
                 seed=4)
     return [piece('ext', on=f'prop{i}-kit', **road) for i in (0, 1, 3)] + \
         [piece('ext', module='smoke_el', fn='impact', on=f'prop{deck_len}-kit', centre=[0.0, 0.0], char=[0.5, 2.0],
@@ -97,15 +125,18 @@ def firelight():
     source, so each flank's light comes from two lamps, low and high, most of it high: one lamp at its middle laid a
     hot spot at its foot that lit the charred road there as bright as the open road. They leave the smoke to a lamp of
     its own, low in the flames and weaker (the look at full strength lit the column's foot like a fireball)."""
-    a = math.radians(M.ROT)
+    a = math.radians(M.ROT + TURN)
     out = {}
-    for k, (x, y, z, w, v) in enumerate([(-0.6, 0.1, 0.55, 600.0, False), (-0.6, 0.1, 1.5, 300.0, False),
-                                         (0.6, 0.15, 0.5, 600.0, False), (0.6, 0.15, 1.4, 300.0, False),
-                                         (0.0, 0.55, 1.3, 500.0, False), (0.0, -0.4, 0.8, 180.0, False),
+    # p6: and the fire's whole light from above it, strong, so it reaches the road, the cars and the rubble's rims ten
+    # metres off and throws their shadows outward (p5: "the fire lights almost nothing around it"); the low ones weaker,
+    # so its pit is no longer a lit tray
+    for k, (x, y, z, w, v) in enumerate([(-0.6, 0.1, 0.55, 350.0, False), (-0.6, 0.1, 1.5, 300.0, False),
+                                         (0.6, 0.15, 0.5, 350.0, False), (0.6, 0.15, 1.4, 300.0, False),
+                                         (0.0, 0.55, 1.3, 500.0, False), (0.0, 0.1, 1.75, 5000.0, False),
                                          (0.0, 0.35, 0.8, 600.0, 'only')]):
         out[f'flame{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
                                        round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK, 3)], w, '#FF7A2E',
-                                      0.3 if v is False else 0.5),
+                                      0.5 if w >= 5000.0 or v == 'only' else 0.3),
                                 camera=False, transmission=False, specular=0.0, volume=v)
     return out
 
@@ -118,14 +149,18 @@ def shot():
     for p in rest:
         if p.get('fn') == 'occluder':                                # the contact shadow, down in the trench with it
             p['position'] = [0.0, 0.0, round(I.SINK + 0.012, 3)]
+            p['rotate_z'] = p.get('rotate_z', 0.0) + TURN
     fire = M.fire(CACHE)
     fire['position'] = [0.0, 0.0, I.SINK]                           # the solve's floor at the speaker's foot
     fire['strength'] = STRENGTH
+    fire['rotate_z'] = fire['rotate_z'] + TURN
     deck = [p for p in I.deck() if p.get('size', [0.0])[0] != 0.03]   # the trench's walls in section: firelit, a pale
     fire['through_glass'] = False                                     # ruled line along the lip (the trench has walls)
-    embers = piece('scatter', count=60, radius=[0.002, 0.006], position=[0.0, 0.0, 0.9], material='glow',
-                   color='#FF8A30', emit=40.0, seed=27, plume={'height': 3.5, 'spread': [0.2, 1.4], 'lean': [1.2, 0.4],
-                                                              'taper': 0.7})
+    t = math.radians(TURN)                                            # the embers lean downwind with the smoke
+    lean = [round(0.9 * math.cos(t) - 0.3 * math.sin(t), 3), round(0.9 * math.sin(t) + 0.3 * math.cos(t), 3)]
+    embers = piece('scatter', count=45, radius=[0.0012, 0.003], position=[0.0, 0.0, 0.9], material='glow',
+                   color='#FF8A30', emit=60.0, seed=27, plume={'height': 2.5, 'spread': [0.2, 1.2], 'lean': lean,
+                                                              'taper': 0.5, 'power': 2.5, 'streak': 10.0})
     props[:] = deck + torn(I.gouge()) + rest + [fire, embers] + marks(len(deck))
     for k in ('fire0', 'firerim0', 'farfire0', 'farfire1'):
         s['lights'].pop(k)
@@ -135,8 +170,10 @@ def shot():
     for inst in s['product']['instances']:
         inst['position'] = [inst['position'][0], inst['position'][1], I.SINK]
         inst['tilt'] = TILT
+        inst['rotate_z'] = inst['rotate_z'] + TURN
     s['finish']['grain'] = 3.5                                       # p3: "grain-free and lens-clean"
     s['render']['white_balance_k'], s['render']['white_balance_tint'] = WB
+    s['finish']['dream'].update(bloom=0.32, bloom_px=60)               # p5: "no halation, lens glare"
     _aim(s['camera'])
     s['title'] = 'barkhorn, Smoke E12r, the meteor on the road: the speaker skidded to rest in its gouge, burning'
     return s

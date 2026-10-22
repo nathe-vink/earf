@@ -24,7 +24,11 @@ crushed-stone layer". Off by default, so E8 renders as it did: `crumble` (slabs,
 gives the broken edges their own material, the asphalt's binder and stones (`side_value`), the underside staying the
 sub-base; for slabs, `spread` how far out from the lip a plate lies (in its widths; 0.25 as before), `flip` the share
 turned over onto their backs, `fallen` the share dropped into the trench, and `size_power` biases the sizes toward the
-small (1 as before)."""
+small (1 as before). `top_rough` and `side_rough` scale the roughness of the tops and the broken edges (0.45 and 0.8 as
+before; E12r p5: "a glossy, slate-like sheen"). `flat_tops` keeps the crumble's tenting off the tops and undersides
+(a road's surface stays flat; E12r p6's tented tops read as "crumpled paper"), and `smooth` shades smooth across edges
+gentler than that many degrees (the tents and the jagged edges' facets read as crystals when flat-shaded). Debris's
+`band` [y0, y1] strews it across the path between those, `inner` clear of the centre line on both sides."""
 import math, random
 
 import bmesh
@@ -113,22 +117,24 @@ def _faces(ft, fb, sides, top, p):
 
 
 def _materials(bpy, kit, me, p):
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, 0.45,
+    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, p.get('top_rough', 0.45),
                              value=p.get('top_value', 1.0)))
     me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, p.get('under_tint', '#211F1D'), 0.75,
                              value=p.get('under_value', 1.0)))
     if p.get('side'):
-        me.materials.append(_mat(bpy, kit, p['side'], p.get('side_scale', 1.5), '#0B0B0C', 0.85, 0.8,
+        me.materials.append(_mat(bpy, kit, p['side'], p.get('side_scale', 1.5), '#0B0B0C', 0.85, p.get('side_rough', 0.8),
                                  value=p.get('side_value', 1.0)))
 
 
-def _crumble(bm, cm, seed):
+def _crumble(bm, cm, seed, flat_tops=False):
     """Every sharp edge rounded over `cm` centimetres, so the broken edges catch the light along their length, and each
-    face tented a little from a point near its middle, so none is a flat plane."""
+    face tented a little from a point near its middle, so none is a flat plane (with `flat_tops`, the broken edges'
+    faces only: those with the edges' own material, index 2)."""
     sharp = [e for e in bm.edges if e.is_manifold and e.calc_face_angle(0.0) > math.radians(35.0)]
     bmesh.ops.bevel(bm, geom=sharp, offset=cm * 0.01, offset_type='OFFSET', segments=2, profile=0.5, affect='EDGES',
                     clamp_overlap=True)
-    big = [f for f in bm.faces if len(f.verts) > 5 and f.calc_area() > (cm * 0.03) ** 2]
+    big = [f for f in bm.faces if len(f.verts) > 5 and f.calc_area() > (cm * 0.03) ** 2
+           and (not flat_tops or f.material_index == 2)]
     bm.normal_update()
     res = bmesh.ops.poke(bm, faces=big)
     o = Vector((seed * 1.7, seed * 2.3, seed * 0.9))
@@ -136,6 +142,15 @@ def _crumble(bm, cm, seed):
         n = v.normal.copy()
         v.co += n * (cm * 0.006 * noise.noise(v.co * 7.0 + o))
     bm.normal_update()
+
+
+def _smooth(bm, deg):
+    """Smooth shading across every edge gentler than `deg` degrees; the sharper ones (and the open ones) stay sharp."""
+    a = math.radians(deg)
+    for f in bm.faces:
+        f.smooth = True
+    for e in bm.edges:
+        e.smooth = e.is_manifold and e.calc_face_angle(0.0) <= a
 
 
 def slabs(bpy, name, p, kit):
@@ -166,7 +181,9 @@ def slabs(bpy, name, p, kit):
             tilt = 180.0 - tilt * 0.5
         _place(bm, new, (rnd.uniform(-8, 8), s * tilt, rnd.uniform(-25, 25)), (x, y, z))
     if p.get('crumble'):
-        _crumble(bm, p['crumble'], p.get('seed', 1))
+        _crumble(bm, p['crumble'], p.get('seed', 1), p.get('flat_tops', False))
+    if p.get('smooth'):
+        _smooth(bm, p['smooth'])
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     _materials(bpy, kit, me, p)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
@@ -188,10 +205,13 @@ def debris(bpy, name, p, kit):
             ahead = p.get('ahead', 6.0) * rnd.random() ** 1.6
             y = y1 + 0.3 + ahead
             r = (0.2 + 0.5 * ahead) * rnd.random()
+        elif p.get('band'):                                    # a strip across the path, `inner` clear either side
+            y = rnd.uniform(*p['band'])
+            r = reach * rnd.random() ** 2.2
         else:
             y = rnd.uniform(y0 + 1.0, y1 + 0.5)
             r = reach * rnd.random() ** 2.2
-        x = (1 if rnd.random() < 0.5 else -1) * ((p.get('inner', 0.8) if y < y1 else 0.0) + r)
+        x = (1 if rnd.random() < 0.5 else -1) * ((p.get('inner', 0.8) if y < y1 or p.get('band') else 0.0) + r)
         size = max(0.012, 0.16 * max(0.0, 1.0 - r / max(reach, r + 0.01)) ** 1.6 * rnd.uniform(0.3, 1.0))
         if p.get('fine'):
             size = rnd.uniform(0.005, 0.03) * (1.0 - 0.5 * min(1.0, r / reach))
@@ -203,7 +223,9 @@ def debris(bpy, name, p, kit):
         _place(bm, new, (rnd.uniform(-40, 40), rnd.uniform(-40, 40), rnd.uniform(0, 360)), (x, y, p.get('z', 0.0) + size * 0.2))
         _faces(ft, fb, sides, rnd.random() < 0.6, p)
     if p.get('crumble'):
-        _crumble(bm, p['crumble'], p.get('seed', 2))
+        _crumble(bm, p['crumble'], p.get('seed', 2), p.get('flat_tops', False))
+    if p.get('smooth'):
+        _smooth(bm, p['smooth'])
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     _materials(bpy, kit, me, p)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)

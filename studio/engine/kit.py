@@ -204,10 +204,15 @@ def _sphere(bm, centre, radii, seg=40):
         v.co = Vector((centre[0] + v.co.x * radii[0], centre[1] + v.co.y * radii[1], centre[2] + v.co.z * radii[2]))
 
 
-def _ico(bm, centre, r, subdiv=1):
+def _ico(bm, centre, r, subdiv=1, stretch=None):
+    """A ball; `stretch` (direction, k) draws it out k times along that unit direction (a spark's streak)."""
     geom = bmesh.ops.create_icosphere(bm, subdivisions=subdiv, radius=1.0)
     for v in geom['verts']:
-        v.co = Vector(centre) + v.co * r
+        q = v.co.copy()
+        if stretch:
+            d, k = stretch
+            q = q + d * (q.dot(d) * (k - 1.0))
+        v.co = Vector(centre) + q * r
 
 
 def _extrude(bm, outline, depth, ease=0.0):
@@ -338,7 +343,8 @@ def _drape(bm, p):
 
 def _scatter(bm, p):
     """Small balls: in a box, or rising in a plume from the origin (denser and bigger low down, spreading and leaning as
-    they rise)."""
+    they rise); a plume's `streak` k draws each out k times along its path, as a spark smears in a photograph's
+    exposure (Smoke E12r: round embers read as "dots ... like stars or glitter")."""
     rnd = random.Random(p.get('seed', 1))
     r0, r1 = p.get('radius', [0.004, 0.012])
     n = p.get('count', 200)
@@ -351,7 +357,9 @@ def _scatter(bm, p):
             sp = s0 + (s1 - s0) * t
             a = rnd.uniform(0, 2 * math.pi); d = sp * math.sqrt(rnd.random())
             c = (math.cos(a) * d + lx * t * t, math.sin(a) * d + ly * t * t, H * t)
-            _ico(bm, c, rnd.uniform(r0, r1) * (1 - taper * t), sub)
+            k = pl.get('streak')
+            st = (Vector((2 * lx * t, 2 * ly * t, H)).normalized(), k * rnd.uniform(0.6, 1.4)) if k else None
+            _ico(bm, c, rnd.uniform(r0, r1) * (1 - taper * t), sub, st)
     else:
         x0, y0, z0, x1, y1, z1 = p.get('in', [-1, -1, 0, 1, 1, 1])
         for _ in range(n):
