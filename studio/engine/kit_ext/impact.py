@@ -29,7 +29,14 @@ before; E12r p5: "a glossy, slate-like sheen"). `flat_tops` keeps the crumble's 
 (a road's surface stays flat; E12r p6's tented tops read as "crumpled paper"), and `smooth` shades smooth across edges
 gentler than that many degrees (the tents and the jagged edges' facets read as crystals when flat-shaded). Debris's
 `band` [y0, y1] strews it across the path between those, `inner` clear of the centre line on both sides. `rough`
-(slabs, debris) breaks each piece's edges as a fracture does, uneven but whole (see _plate)."""
+(slabs, debris) breaks each piece's edges as a fracture does, uneven but whole (see _plate).
+
+E12r p9 (the owner, 2026-10-22: "The chasm in the road is too linear on both sides. It needs to be more jagged or
+crude, while maintaining realism"): `jag` (trench, slabs, road) tears each lip back from `lip` by up to `jag` metres
+along an angular line of its own (`jag_seed`), with bites where chunks broke away, less near the impact and more round
+the speaker; the trench's walls run up to it, the torn plates lie along it, and road: the deck either side as one
+slab `thickness` thick out to `half` metres, open over the gouge along those lips, `ylo` to `yhi` along it, in the
+road's material, so the deck's edge is the lip and nothing shows a ruled line."""
 import math, random
 
 import bmesh
@@ -41,11 +48,50 @@ def _mat(bpy, kit, texture, tex_scale, tint=None, tint_mix=0.0, rough=1.0, bump=
                                     'tint_mix': tint_mix, 'rough_mul': rough, 'bump': bump, 'value': value})
 
 
+_LIPS = {}
+
+
+def _lipf(p):
+    """The lips' line: the half-opening at road level on side s (+1 or -1) at y, `lip` torn back by up to `jag` metres
+    along an angular line (corners every 0.12 to 0.55 m, a bite where a chunk broke away about one corner in six), a
+    crumbled centimetre or two over it, less within `ramp` of the impact and more within 1.5 m of the end where the
+    speaker stopped. Without `jag`, `lip` everywhere."""
+    lip, jag = p.get('lip', 0.75), p.get('jag', 0.0)
+    if not jag:
+        return lambda y, s: lip
+    y0, y1, ramp = p.get('y0', -20.0), p.get('y1', 0.0), p.get('ramp', 4.0)
+    key = (lip, jag, y0, y1, ramp, p.get('jag_seed', 1))
+    if key not in _LIPS:
+        lines = {}
+        for side in (-1, 1):
+            rnd = random.Random(p.get('jag_seed', 1) * 1000 + side)
+            ys, xs, y = [], [], y0 - 0.6
+            while y < y1 + 0.6:
+                f = min(1.0, max(0.0, (y - y0) / ramp)) ** 0.5 * (1.0 + 0.5 * max(0.0, 1.0 - (y1 - y) / 1.5))
+                r = jag * (rnd.random() ** 1.7) * 0.6
+                if rnd.random() < 0.17:                          # a chunk broken away
+                    r = jag * rnd.uniform(0.75, 1.25)
+                ys.append(y); xs.append(r * f)
+                y += rnd.uniform(0.12, 0.55)
+            lines[side] = (ys, xs, rnd.uniform(0, 100))
+        _LIPS[key] = lines
+    lines = _LIPS[key]
+
+    def f(y, s):
+        ys, xs, o = lines[1 if s > 0 else -1]
+        k = max(0, min(len(ys) - 2, next((i for i in range(len(ys) - 1) if ys[i + 1] >= y), len(ys) - 2)))
+        t = min(1.0, max(0.0, (y - ys[k]) / max(ys[k + 1] - ys[k], 1e-6)))
+        crumb = 0.012 * noise.noise(Vector((y * 23.0, o, 0.5))) + 0.006 * noise.noise(Vector((y * 61.0, o, 1.5)))
+        return lip + max(0.0, xs[k] + (xs[k + 1] - xs[k]) * t + crumb)
+    return f
+
+
 def trench(bpy, name, p, kit):
     y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
     W, D = p.get('width', 1.0) / 2, p.get('depth', 0.35)
     ramp, rag = p.get('ramp', 4.0), p.get('ragged', 0.08)
     lip = p.get('lip', 0.75)                                   # half the opening at road level
+    lipf = _lipf(p)
     sd = p.get('seed', 1) * 7.3
     ny = int((y1 - y0) / 0.06); nx = 28
     bm = bmesh.new()
@@ -57,14 +103,18 @@ def trench(bpy, name, p, kit):
         if end and y > y1 - end:
             dep *= max(0.0, (y1 - y) / end) ** 0.8          # the gouge's end, where the speaker ploughed to rest
         row = []
+        lips = (lipf(y, -1), lipf(y, 1))
         for i in range(nx + 1):
             u = -1.0 + 2.0 * i / nx                            # across: -1 at one lip, +1 at the other
             # a U: flat floor across the width, walls rising to the lips, ragged where the slabs tore away
             w = abs(u)
             z = -dep * (1.0 if w < W / lip else max(0.0, 1.0 - ((w - W / lip) / (1.0 - W / lip)) ** 1.5))
             x = u * lip
+            if p.get('jag') and w >= W / lip:                   # the wall runs up to its torn lip, gentler where it tore back
+                t = (w - W / lip) / (1.0 - W / lip)
+                x = (1 if u > 0 else -1) * (W + (lips[1 if u > 0 else 0] - W) * t)
             n = noise.noise(Vector((x * 6.0 + sd, y * 3.0, 0.0)))
-            x += rag * n * (0.3 + w)
+            x += rag * n * (0.3 + w) * (0.0 if p.get('jag') and w > 0.999 else 1.0)
             z += 0.04 * noise.noise(Vector((x * 9.0, y * 9.0 + sd, 1.0))) * (dep / max(D, 1e-3))
             # drag marks: grooves along the slide, sharp across it, long along it
             z -= p.get('grooves', 0.0) * abs(noise.noise(Vector((x * 14.0 + sd, y * 0.35, 2.0)))) * (dep / max(D, 1e-3))
@@ -72,11 +122,18 @@ def trench(bpy, name, p, kit):
         rows.append(row)
     for j in range(ny):
         for i in range(nx):
-            bm.faces.new((rows[j][i], rows[j][i + 1], rows[j + 1][i + 1], rows[j + 1][i]))
+            f = bm.faces.new((rows[j][i], rows[j][i + 1], rows[j + 1][i + 1], rows[j + 1][i]))
+            # with `jag`, the asphalt course in section along the top of each wall (its 8 cm, binder and stones)
+            if p.get('jag') and f.calc_center_median().z > -0.08 and abs(-1.0 + 2.0 * (i + 0.5) / nx) > W / lip:
+                f.material_index = 1
     mat = _mat(bpy, kit, p.get('texture', 'gravel_concrete'), p.get('tex_scale', 1.2), p.get('tint', '#2E2A26'),
                p.get('tint_mix', 0.35), 1.0, 2.0, p.get('value', 1.0))
     q = {k: v for k, v in p.items() if k in ('position', 'rotate')}
-    return kit.finish(bpy, name, bm, q, smooth=True, mat=mat)
+    obs = kit.finish(bpy, name, bm, q, smooth=True, mat=mat)
+    if p.get('jag'):
+        obs[0].data.materials.append(_mat(bpy, kit, p.get('course', 'asphalt_02'), 1.5, '#0B0B0C', 0.85,
+                                          p.get('course_rough', 1.0), value=p.get('course_value', 0.35)))
+    return obs
 
 
 def _plate(bm, rnd, w, d, t, rough=0.0):
@@ -192,6 +249,7 @@ def slabs(bpy, name, p, kit):
     lip, t = p.get('lip', 0.75), p.get('thickness', 0.08)
     D, ramp = p.get('depth', 0.35), p.get('ramp', 4.0)
     spread, flip, fallen, sp = p.get('spread', 0.25), p.get('flip', 0.0), p.get('fallen', 0.0), p.get('size_power', 1.0)
+    lipf = _lipf(p)
     bm = bmesh.new()
     for k in range(p.get('count', 40)):
         y = rnd.uniform(y0 + 0.5, y1 - 0.2)
@@ -205,7 +263,7 @@ def slabs(bpy, name, p, kit):
         bm.verts.ensure_lookup_table()
         new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         tilt = rnd.uniform(p.get('tilt_min', 15.0), p.get('tilt', 55.0)) * f
-        x = s * (lip + w * spread * rnd.uniform(0.2, 1.0))
+        x = s * (lipf(y, s) + w * spread * rnd.uniform(0.2, 1.0))
         z = 0.02 + 0.5 * w * math.sin(math.radians(tilt)) * 0.4 - (0.0 if rnd.random() < 0.7 else 0.1)
         if fallen and rnd.random() < fallen and abs(y) > 0.8:   # dropped into the trench (clear of the speaker at 0)
             x = s * rnd.uniform(0.0, lip * 0.75)
@@ -265,6 +323,40 @@ def debris(bpy, name, p, kit):
     ob.location = Vector(p.get('position', [0, 0, 0]))
     ob.rotation_euler.z = math.radians(p.get('rotate_z', 0.0))
     return [ob]
+
+
+def road(bpy, name, p, kit):
+    """The deck either side of the gouge as one slab (E12r p9): `half` metres out each side, `thickness` thick under the
+    road's surface at 0, from `ylo` to `yhi` along the gouge's line, open between its torn lips (`lip`, `jag`) from `y0`
+    to `y1`; one object, so its texture runs on unbroken where the deck's boxes met in ruled lines. In the road's
+    material (the piece's own `material` and texture keys)."""
+    lipf = _lipf(p)
+    y0, y1, half, t = p.get('y0', -20.0), p.get('y1', 0.0), p.get('half', 10.0), p.get('thickness', 0.3)
+    ylo, yhi = p.get('ylo', y0 - 20.0), p.get('yhi', y1 + 20.0)
+    ys = sorted(set([ylo, yhi] + [y0 + (y1 - y0) * k / int((y1 - y0) / 0.03) for k in range(int((y1 - y0) / 0.03) + 1)]
+                    + [ylo + (y0 - ylo) * k / 20 for k in range(20)] + [y1 + (yhi - y1) * k / 20 for k in range(1, 20)]))
+    bm = bmesh.new()
+
+    def strip(xa, xb, ya, yb):
+        """One quad of the top, its underside and nothing between: the slab's sides are its outer edge and the lips."""
+        top = [bm.verts.new(c) for c in ((xa[0], ya, 0.0), (xb[0], ya, 0.0), (xb[1], yb, 0.0), (xa[1], yb, 0.0))]
+        bm.faces.new(top)
+    rows = [(y, lipf(y, -1), lipf(y, 1), y0 <= y <= y1) for y in ys]
+    for (ya, la, ra, ina), (yb, lb, rb, inb) in zip(rows, rows[1:]):
+        strip((-half, -half), (-la, -lb), ya, yb)                # each side, its inner edge on the lip line
+        strip((ra, rb), (half, half), ya, yb)
+        if not (ina and inb):                                    # and across between them, before and after the gouge
+            strip((-la, -lb), (ra, rb), ya, yb)
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-5)
+    # thickness: the top kept, a copy dropped to the underside, the open edges joined as the slab's sides
+    res = bmesh.ops.extrude_face_region(bm, geom=bm.faces[:], use_keep_orig=True)
+    for v in [g for g in res['geom'] if isinstance(g, bmesh.types.BMVert)]:
+        v.co.z -= t
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+    mat = kit.piece_material(bpy, {k: v for k, v in p.items() if k in ('material', 'texture', 'tex_scale', 'tint',
+                                                                       'tint_mix', 'rough_mul', 'bump', 'value')})
+    q = {k: v for k, v in p.items() if k in ('position', 'rotate')}
+    return kit.finish(bpy, name, bm, q, smooth=False, mat=mat)
 
 
 def scorch(bpy, name, p, kit):

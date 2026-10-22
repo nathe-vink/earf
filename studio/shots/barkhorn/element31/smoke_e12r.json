@@ -15,8 +15,8 @@
      "cloth-disc"
     ],
     "tilt": [
-     6.0,
-     -2.5
+     0.0,
+     0.0
     ]
    }
   ]
@@ -26,77 +26,24 @@
   "props": [
    {
     "kind": "kit",
-    "shape": "box",
-    "size": [
-     8.25,
-     150.0,
-     0.3
+    "shape": "ext",
+    "module": "impact",
+    "fn": "road",
+    "y0": -21.0,
+    "y1": 1.2,
+    "lip": 0.75,
+    "ramp": 5.0,
+    "half": 9.0,
+    "ylo": -130.0,
+    "yhi": 20.0,
+    "thickness": 0.3,
+    "rotate": [
+     0,
+     0,
+     180.0
     ],
-    "position": [
-     -4.875,
-     55.0,
-     -0.3
-    ],
-    "material": "pbr",
-    "texture": "asphalt_02",
-    "tex_scale": 4.0,
-    "tint": "#2C2C2E",
-    "tint_mix": 0.3,
-    "rough_mul": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "box",
-    "size": [
-     8.25,
-     150.0,
-     0.3
-    ],
-    "position": [
-     4.875,
-     55.0,
-     -0.3
-    ],
-    "material": "pbr",
-    "texture": "asphalt_02",
-    "tex_scale": 4.0,
-    "tint": "#2C2C2E",
-    "tint_mix": 0.3,
-    "rough_mul": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "box",
-    "size": [
-     1.5,
-     109.0,
-     0.3
-    ],
-    "position": [
-     0.0,
-     75.5,
-     -0.3
-    ],
-    "material": "pbr",
-    "texture": "asphalt_02",
-    "tex_scale": 4.0,
-    "tint": "#2C2C2E",
-    "tint_mix": 0.3,
-    "rough_mul": 0.3
-   },
-   {
-    "kind": "kit",
-    "shape": "box",
-    "size": [
-     1.5,
-     10.0,
-     0.3
-    ],
-    "position": [
-     0.0,
-     -6.2,
-     -0.3
-    ],
+    "jag": 0.42,
+    "jag_seed": 9,
     "material": "pbr",
     "texture": "asphalt_02",
     "tex_scale": 4.0,
@@ -3270,7 +3217,9 @@
     "lip": 0.75,
     "depth": 0.34,
     "ramp": 5.0,
-    "value": 0.45
+    "value": 0.45,
+    "jag": 0.42,
+    "jag_seed": 9
    },
    {
     "kind": "kit",
@@ -3303,7 +3252,9 @@
     "spread": 0.7,
     "flip": 0.12,
     "fallen": 0.12,
-    "size_power": 1.6
+    "size_power": 1.6,
+    "jag": 0.42,
+    "jag_seed": 9
    },
    {
     "kind": "kit",
@@ -4256,7 +4207,7 @@
     "shape": "ext",
     "module": "plume",
     "fn": "plume",
-    "cache": "renders/2026-10-21/barkhorn/plume/meteor_e.npz",
+    "cache": "renders/2026-10-21/barkhorn/plume/meteor_g.npz",
     "anchor": "solid",
     "position": [
      0.0,
@@ -4264,7 +4215,7 @@
      -0.3
     ],
     "rotate_z": 50.0,
-    "density": 7.0,
+    "density": 13.9,
     "strength": 420.0,
     "color": "#8F857B",
     "anisotropy": 0.4,
@@ -4424,71 +4375,9 @@
    {
     "kind": "kit",
     "shape": "ext",
-    "on": "prop1-kit",
     "module": "smoke_el",
     "fn": "impact",
-    "centre": [
-     0.0,
-     0.0
-    ],
-    "char": [
-     1.0,
-     2.6
-    ],
-    "jag": 0.8,
-    "soot": 4.5,
-    "soot_mix": 0.55,
-    "cracks": [
-     0.9,
-     3.8
-    ],
-    "crack_count": 13.0,
-    "crack_width": 0.012,
-    "crack_bump": 0.6,
-    "dust": [
-     1.6,
-     5.5
-    ],
-    "dust_mix": 0.5,
-    "seed": 4
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "on": "prop3-kit",
-    "module": "smoke_el",
-    "fn": "impact",
-    "centre": [
-     0.0,
-     0.0
-    ],
-    "char": [
-     1.0,
-     2.6
-    ],
-    "jag": 0.8,
-    "soot": 4.5,
-    "soot_mix": 0.55,
-    "cracks": [
-     0.9,
-     3.8
-    ],
-    "crack_count": 13.0,
-    "crack_width": 0.012,
-    "crack_bump": 0.6,
-    "dust": [
-     1.6,
-     5.5
-    ],
-    "dust_mix": 0.5,
-    "seed": 4
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "smoke_el",
-    "fn": "impact",
-    "on": "prop186-kit",
+    "on": "prop183-kit",
     "centre": [
      0.0,
      0.0
@@ -4795,7 +4684,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 30.0,
+   "irradiance": 38.0,
    "color": "#FF9A50",
    "orbit": {
     "azimuth_deg": -150,
@@ -4828,7 +4717,7 @@
     0.0,
     0.8
    ],
-   "irradiance": 20.0,
+   "irradiance": 26.0,
    "color": "#FFB070",
    "orbit": {
     "azimuth_deg": 150,
@@ -4853,13 +4742,13 @@
   "flame0": {
    "type": "point",
    "position": [
-    -0.507,
-    -0.336,
-    0.25
+    0.111,
+    0.541,
+    0.3
    ],
-   "power_w": 300.0,
+   "power_w": 1200.0,
    "color": "#FF7A2E",
-   "radius_m": 0.3,
+   "radius_m": 0.5,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -4868,11 +4757,11 @@
   "flame1": {
    "type": "point",
    "position": [
-    -0.507,
-    -0.336,
-    1.2
+    0.102,
+    0.478,
+    0.95
    ],
-   "power_w": 300.0,
+   "power_w": 900.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -4883,13 +4772,13 @@
   "flame2": {
    "type": "point",
    "position": [
-    0.337,
-    0.519,
-    0.2
+    0.012,
+    0.353,
+    1.6
    ],
-   "power_w": 500.0,
+   "power_w": 1200.0,
    "color": "#FF7A2E",
-   "radius_m": 0.3,
+   "radius_m": 0.5,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -4898,11 +4787,11 @@
   "flame3": {
    "type": "point",
    "position": [
-    0.337,
-    0.519,
-    1.1
+    -0.103,
+    -0.506,
+    0.0
    ],
-   "power_w": 300.0,
+   "power_w": 150.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -4913,11 +4802,11 @@
   "flame4": {
    "type": "point",
    "position": [
-    -0.375,
-    0.402,
-    1.0
+    0.5,
+    0.124,
+    0.05
    ],
-   "power_w": 500.0,
+   "power_w": 200.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -4928,13 +4817,13 @@
   "flame5": {
    "type": "point",
    "position": [
-    -0.068,
-    0.073,
-    0.9
+    -0.534,
+    -0.087,
+    0.1
    ],
-   "power_w": 2500.0,
+   "power_w": 200.0,
    "color": "#FF7A2E",
-   "radius_m": 0.5,
+   "radius_m": 0.3,
    "camera": false,
    "transmission": false,
    "specular": 0.0,
@@ -4943,11 +4832,26 @@
   "flame6": {
    "type": "point",
    "position": [
-    -0.239,
-    0.256,
-    0.5
+    0.273,
+    -0.293,
+    -0.18
    ],
-   "power_w": 600.0,
+   "power_w": 120.0,
+   "color": "#FF7A2E",
+   "radius_m": 0.3,
+   "camera": false,
+   "transmission": false,
+   "specular": 0.0,
+   "volume": false
+  },
+  "flame7": {
+   "type": "point",
+   "position": [
+    0.054,
+    0.529,
+    0.6
+   ],
+   "power_w": 700.0,
    "color": "#FF7A2E",
    "radius_m": 0.5,
    "camera": false,

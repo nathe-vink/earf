@@ -26,7 +26,14 @@ a light wind.
     `--shell-quiet DX DY K` burns the side facing (DX, DY), the lens's, less (a first look hid the speaker's face);
     `--sponge-k K`, how hard the end sponges take the smoke, heat and flame back (the flow's own damping raised to the
     power K): at 1 about half the smoke crossing an end lived through it, and in E12's first box (8 m long, 12 s of a
-    2.2 m/s wind) it went round three times and filled the box, a second column standing at its far end (meteor_a).
+    2.2 m/s wind) it went round three times and filled the box, a second column standing at its far end (meteor_a);
+  - for E12r p9 (the owner, 2026-10-22: "the flames in front should be climbing up the edges, not past the driver" and
+    "the flames in the back should serve to backlight it"): `--shell-shape WF WB WL WR FF FB FL FR KE FE`, each skin
+    by the face it lies off in the box's own frame, front (-y), back (+y), left (-x) and right (+x): how strongly it
+    burns (W) and over how many metres up the solid its burning falls off (F), the upright edges beside a loud face
+    (W 0.5 or more) at least KE over at least FE and the edge between two quiet faces as low as the quieter (meteor_f
+    climbed every edge, and the corner nearest the lens leaned its flame across the woofer), the top not at all. It replaces `--shell-quiet`, whose quiet side faced the lens by a direction from the
+    box's centre, so the face's middle and its corners burned alike.
 
 It writes the last frame as an .npz of 8-bit grids (square-root coded), which `plume.py` turns into a volume in Cycles.
 Run once; the result is committed beside the shot, so a render never needs this file or numba:
@@ -35,9 +42,11 @@ Run once; the result is committed beside the shot, so a render never needs this 
     PYTHONPATH=<dir> python3.11 plume_sim.py OUT.npz [--dx 0.2] [--seconds 20] [--seed 1]
         [--velocity sl|mc] [--disturb 6 0.6 3 1.6] [--disturb-rho 0.5] [--tau-soot 25]
         [--solid 2 2.5 0 0.31 0.22 1.28 -32] [--shell 6 1 1 2 0.5] [--sponge-k 20]
+        [--shell-shape 0.12 1 0.15 1 0.12 0.9 0.15 0.9 0.9 0.35]
 """
 import argparse
 import math
+import sys
 import time
 
 import numpy as np
@@ -380,15 +389,19 @@ def sponge(s, u, v, w, uw, dt, nx_band, nz_band, cool_heat, cool_flame, fade_soo
                     w[i, j, k + 1] *= damp
 
 
-def solid_mask(NX, NY, NZ, dx, boxes, quiet=None):
+def solid_mask(NX, NY, NZ, dx, boxes, quiet=None, shape=None):
     """The cells inside any of the boxes (cx, cy, z0, hx, hy, z1, yaw degrees), and the fluid cells within two cells of
     them (the skin a solid's burning feeds), each skin cell with its height above its solid's foot and a weight: 1, or
     with `quiet` (dx, dy, k) less on the side facing (dx, dy) (the lens: a product shot keeps the face the camera sees
-    clear of flame), down to 1 - k on that face itself."""
+    clear of flame), down to 1 - k on that face itself. With `shape` (wf, wb, wl, wr, ff, fb, fl, fr, ke, fe) each skin
+    cell takes the weight and fall-off of the face it lies off (front -y, back +y, left -x, right +x in the box's own
+    frame), the upright edges at least ke and fe where either face beside them is loud (weight 0.5 or more) and as quiet
+    as the quieter face where neither is, the top none; the fall-offs are returned per cell (else None)."""
     x = (np.arange(NX) + 0.5)[:, None, None] * dx; y = (np.arange(NY) + 0.5)[None, :, None] * dx
     z = (np.arange(NZ) + 0.5)[None, None, :] * dx
     solid = np.zeros((NX, NY, NZ), np.bool_); skin = np.zeros((NX, NY, NZ), np.float32) - 1.0
     weight = np.ones((NX, NY, NZ), np.float32)
+    fall = np.zeros((NX, NY, NZ), np.float32) - 1.0 if shape is not None else None
     for cx, cy, z0, hx, hy, z1, yaw in boxes:
         c, s_ = math.cos(math.radians(yaw)), math.sin(math.radians(yaw))
         lx = (x - cx) * c + (y - cy) * s_; ly = -(x - cx) * s_ + (y - cy) * c
@@ -402,8 +415,26 @@ def solid_mask(NX, NY, NZ, dx, boxes, quiet=None):
             r = np.sqrt(ox * ox + oy * oy) + 1e-6
             face = np.clip((ox * quiet[0] + oy * quiet[1]) / r, 0.0, 1.0)
             weight = np.where(sk, 1.0 - quiet[2] * np.broadcast_to(face, weight.shape), weight)
+        if shape is not None:
+            wf, wb, wl, wr, ff, fb, fl, fr, ke, fe = shape
+            ax, ay = np.abs(lx) - hx, np.abs(ly) - hy           # how far out past each pair of faces (m)
+            off_y = ay >= ax                                     # off the front or back rather than a side
+            wt = np.where(off_y, np.where(ly < 0, wf, wb), np.where(lx < 0, wl, wr))
+            fl_ = np.where(off_y, np.where(ly < 0, ff, fb), np.where(lx < 0, fl, fr))
+            edge = (ax >= -1.5 * dx) & (ay >= -1.5 * dx)         # within a cell and a half of both faces' planes
+            w_y, w_x = np.where(ly < 0, wf, wb), np.where(lx < 0, wl, wr)
+            f_y, f_x = np.where(ly < 0, ff, fb), np.where(lx < 0, fl, fr)
+            loud = np.maximum(w_y, w_x) >= 0.5                   # an edge climbs only beside a burning face: the one
+            wt = np.where(edge, np.where(loud, np.maximum(wt, ke), np.minimum(w_y, w_x)), wt)  # between two quiet faces
+            fl_ = np.where(edge, np.where(loud, np.maximum(fl_, fe), np.minimum(f_y, f_x)), fl_)  # (nearest the lens) stays low
+            top = (ax < 0) & (ay < 0)                            # over the top, inside the footprint
+            wt = np.broadcast_to(np.where(top, 0.0, wt), weight.shape)
+            weight = np.where(sk, wt, weight)
+            fall = np.where(sk & (fall < 0), np.broadcast_to(np.maximum(fl_, 0.02), fall.shape), fall)
     skin[solid] = -1.0
-    return solid, skin.astype(np.float32), weight.astype(np.float32)
+    if fall is not None:
+        fall = np.where(fall < 0, 0.5, fall).astype(np.float32)
+    return solid, skin.astype(np.float32), weight.astype(np.float32), fall
 
 
 @njit(parallel=True, fastmath=True)
@@ -431,7 +462,7 @@ def enforce_solid(s, u, v, w, solid):
 @njit(parallel=True, fastmath=True)
 def emit_shell(s, w, skin, weight, t, dt, dx, seed, rate, heat_src, flame_src, w_src, fall, scale):
     """A solid's skin burning: in its skin cells soot, heat and flame are fed and the gas pushed up, by the same churning
-    noise as the fire, strongest at the solid's foot and falling off over `fall` metres up it."""
+    noise as the fire, strongest at the solid's foot and falling off over `fall` metres up it (per cell)."""
     NS, NX, NY, NZ = s.shape
     for i in prange(NX):
         for j in range(NY):
@@ -442,7 +473,7 @@ def emit_shell(s, w, skin, weight, t, dt, dx, seed, rate, heat_src, flame_src, w
                 x = (i + 0.5) * dx; y = (j + 0.5) * dx; z = (k + 0.5) * dx
                 n = _vnoise(x / scale, y / scale, (z - 3.0 * t) / scale, seed + 3)
                 n2 = _vnoise(x / (0.4 * scale), y / (0.4 * scale), (z - 4.0 * t) / (0.4 * scale), seed + 11)
-                m = max(0.0, 1.6 * n + 0.6 * n2 - 0.7) * math.exp(-hgt / fall) * weight[i, j, k]
+                m = max(0.0, 1.6 * n + 0.6 * n2 - 0.7) * math.exp(-hgt / fall[i, j, k]) * weight[i, j, k]
                 s[0, i, j, k] += dt * rate * m
                 s[1, i, j, k] = max(s[1, i, j, k], heat_src * m)
                 s[2, i, j, k] = max(s[2, i, j, k], flame_src * m)
@@ -484,11 +515,15 @@ def main():
                     help="the solids' skins burning: soot rate, heat, flame, upward push (m/s), fall-off up the solid (m)")
     ap.add_argument('--shell-quiet', type=float, nargs=3, default=None,
                     help='the skins burn less on the side facing (dx, dy), by up to k on that face (the lens side)')
+    ap.add_argument('--shell-shape', type=float, nargs=10, default=None,
+                    help='the skins by face, front back left right (the box\'s -y +y -x +x): four weights, four fall-offs '
+                         '(m), then the upright edges\' least weight and fall-off; replaces --shell-quiet')
     ap.add_argument('--sponge-k', type=float, default=1.0,
                     help="how hard the end sponges take back the smoke, heat and flame: the flow's damping to this power")
     a = ap.parse_args()
     assert len(a.disturb) % 2 == 0, '--disturb takes strength, scale pairs'
 
+    print('args', ' '.join(sys.argv[1:]))
     dx = a.dx
     NX, NY, NZ = (int(round(L / dx)) for L in a.size)
     NY += NY % 2
@@ -514,7 +549,10 @@ def main():
     lam[0, 0, 0] = 1.0
     src = np.array(a.source, np.float64)
     if a.solid:
-        solid, skin, weight = solid_mask(NX, NY, NZ, dx, a.solid, a.shell_quiet)
+        solid, skin, weight, fall = solid_mask(NX, NY, NZ, dx, a.solid, None if a.shell_shape else a.shell_quiet,
+                                               a.shell_shape)
+        if fall is None:
+            fall = np.full((NX, NY, NZ), a.shell[4] if a.shell else 0.5, np.float32)
         print(f'solids: {int(solid.sum())} cells, skin {int((skin >= 0).sum())} cells')
     steps = int(round(a.seconds / a.dt))
     h = a.dt / dx
@@ -525,7 +563,7 @@ def main():
         t = n * a.dt
         emit(s, w, src, t, a.dt, dx, a.seed, a.rate, 1.0, 1.0, a.w_src, a.noise)
         if a.solid and a.shell:
-            emit_shell(s, w, skin, weight, t, a.dt, dx, a.seed, a.shell[0], a.shell[1], a.shell[2], a.shell[3], a.shell[4],
+            emit_shell(s, w, skin, weight, t, a.dt, dx, a.seed, a.shell[0], a.shell[1], a.shell[2], a.shell[3], fall,
                        a.noise)
         if a.solid:
             enforce_solid(s, u, v, w, solid)
@@ -574,6 +612,8 @@ def main():
         out[name + '_scale'] = np.float32(sc)
     if a.solid:
         out['solids'] = np.array(a.solid, np.float32)
+    if a.shell_shape:
+        out['shell_shape'] = np.array(a.shell_shape, np.float32)
     np.savez_compressed(a.out, dx=np.float32(dx), size=np.array([NX, NY, NZ]), source=src.astype(np.float32),
                         wind=np.float32(a.wind), seconds=np.float32(a.seconds), seed=np.int32(a.seed), **out)
     print('wrote', a.out, f'in {time.time() - t0:.0f}s')

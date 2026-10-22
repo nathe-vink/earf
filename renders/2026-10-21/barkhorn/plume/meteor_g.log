@@ -1,0 +1,35 @@
+args meteor_g.npz --dx 0.05 --size 10 7 8 --seconds 12 --dt 0.02 --source 2.64 3.735 0.12 0.5 0.5 0.25 --beta 9 --tau-heat 4 --tau-flame 0.25 --rate 10 --w-src 3.0 --noise 0.25 --eps 3.2 --velocity mc --tau-soot 25 --wind 1.4 --solid 2.2 3.5 0.0 0.315 0.215 1.28 -7 --shell 7 1.0 1.0 2.0 0.5 --shell-shape 0.12 1.0 0.15 1.0 0.12 0.9 0.15 0.9 0.9 0.35 --sponge-k 20
+grid 200 x 140 x 160 = 4.5 M cells, dx 0.05 m, 12.0 s at dt 0.02
+solids: 2912 cells, skin 3024 cells
+step 1/600 t=0.02s  141s elapsed (140.73s/step)  soot max 0.20  top 1.1 m  |w| max 2.0
+step 21/600 t=0.42s  170s elapsed (8.08s/step)  soot max 2.98  top 1.6 m  |w| max 4.3
+step 41/600 t=0.82s  198s elapsed (4.84s/step)  soot max 3.19  top 2.0 m  |w| max 6.1
+step 61/600 t=1.22s  227s elapsed (3.72s/step)  soot max 5.23  top 2.4 m  |w| max 6.4
+step 81/600 t=1.62s  256s elapsed (3.16s/step)  soot max 6.67  top 3.0 m  |w| max 7.2
+step 101/600 t=2.02s  284s elapsed (2.82s/step)  soot max 7.79  top 3.6 m  |w| max 6.5
+step 121/600 t=2.42s  312s elapsed (2.58s/step)  soot max 9.08  top 4.2 m  |w| max 6.9
+step 141/600 t=2.82s  339s elapsed (2.41s/step)  soot max 11.16  top 5.0 m  |w| max 6.0
+step 161/600 t=3.22s  367s elapsed (2.28s/step)  soot max 11.99  top 5.5 m  |w| max 6.5
+step 181/600 t=3.62s  395s elapsed (2.18s/step)  soot max 13.40  top 5.9 m  |w| max 6.3
+step 201/600 t=4.02s  423s elapsed (2.10s/step)  soot max 15.70  top 6.4 m  |w| max 6.3
+step 221/600 t=4.42s  450s elapsed (2.04s/step)  soot max 17.07  top 6.8 m  |w| max 6.2
+step 241/600 t=4.82s  478s elapsed (1.98s/step)  soot max 18.91  top 7.1 m  |w| max 6.0
+step 261/600 t=5.22s  506s elapsed (1.94s/step)  soot max 19.96  top 7.5 m  |w| max 5.6
+step 281/600 t=5.62s  533s elapsed (1.90s/step)  soot max 22.65  top 7.4 m  |w| max 6.3
+step 301/600 t=6.02s  561s elapsed (1.86s/step)  soot max 24.08  top 7.5 m  |w| max 6.0
+step 321/600 t=6.42s  590s elapsed (1.84s/step)  soot max 25.21  top 7.5 m  |w| max 5.8
+step 341/600 t=6.82s  618s elapsed (1.81s/step)  soot max 26.54  top 7.4 m  |w| max 5.7
+step 361/600 t=7.22s  646s elapsed (1.79s/step)  soot max 28.63  top 7.5 m  |w| max 6.6
+step 381/600 t=7.62s  673s elapsed (1.77s/step)  soot max 30.78  top 7.5 m  |w| max 6.0
+step 401/600 t=8.02s  701s elapsed (1.75s/step)  soot max 32.34  top 7.5 m  |w| max 6.0
+step 421/600 t=8.42s  728s elapsed (1.73s/step)  soot max 33.66  top 7.5 m  |w| max 5.4
+step 441/600 t=8.82s  757s elapsed (1.72s/step)  soot max 35.06  top 7.5 m  |w| max 5.9
+step 461/600 t=9.22s  785s elapsed (1.70s/step)  soot max 36.90  top 7.4 m  |w| max 6.0
+step 481/600 t=9.62s  812s elapsed (1.69s/step)  soot max 38.68  top 7.4 m  |w| max 6.2
+step 501/600 t=10.02s  840s elapsed (1.68s/step)  soot max 39.67  top 7.5 m  |w| max 6.2
+step 521/600 t=10.42s  868s elapsed (1.67s/step)  soot max 40.90  top 7.4 m  |w| max 5.3
+step 541/600 t=10.82s  896s elapsed (1.66s/step)  soot max 42.29  top 7.4 m  |w| max 5.9
+step 561/600 t=11.22s  923s elapsed (1.65s/step)  soot max 43.02  top 7.3 m  |w| max 6.1
+step 581/600 t=11.62s  951s elapsed (1.64s/step)  soot max 44.22  top 7.3 m  |w| max 6.4
+step 600/600 t=12.00s  977s elapsed (1.63s/step)  soot max 45.09  top 7.3 m  |w| max 6.6
+wrote meteor_g.npz in 978s
