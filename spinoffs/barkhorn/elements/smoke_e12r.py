@@ -59,6 +59,14 @@ posts "a stage spotlight or a camera on a stand", the woofer hidden (meteor_e: t
 wind as before, so the smoke leans away right again instead of rising "a mushroom ... an explosion cloud", its face
 quieter so the woofer shows through thinner flames); the embers "identical round dots ... to the top of the frame"
 (longer streaks, each tilted, lower and denser over the fire); and "no heat haze" (finish.haze, the speaker kept still).
+
+p8, after proof 7's critics (realism 5 and 5; it beat E9 in both orders again, 6 to 5 and 7 to 6): the rubble "a tidy
+ring of almost identical blocks with bevelled edges, like bricks or paving setts ... much paler than the dark asphalt"
+(each piece fewer corners and lopsided, its broken edges as dark as asphalt's, thinner, its bevel halved); "the fire does
+not light anything", its light on the road salmon under a "lavender" sky (the white point's tint off magenta, the low
+lamp on the open lane's side weaker); the smoke "does not grow out of the flames" (meteor_e codes its soot against a
+higher peak, so its smoke left the flames thin: denser); the sparks "an even spray of identical bright yellow streaks"
+(three lots, bright and yellow low, dimmer and redder higher); the shimmer stronger, as none of them saw it.
 """
 import copy
 import math
@@ -71,7 +79,7 @@ from common import piece, point
 
 NEAR = [-1.2, 15.0]                  # E10's burning car, across the gouge's line: the speaker is the fire now
 # the torn asphalt (impact.py): black right through, its stones in the broken edges, the sub-base grey under it
-ASPHALT = dict(top_value=0.28, under_tint='#1C1C1C', under_value=0.2, side='asphalt_02', side_value=0.6, top_rough=1.0,
+ASPHALT = dict(top_value=0.28, under_tint='#1C1C1C', under_value=0.2, side='asphalt_02', side_value=0.35, top_rough=1.0,
                side_rough=1.0, flat_tops=True, smooth=30.0, rough=0.07)
 TILT = [6.0, -2.5]                   # the speaker pitched forward onto its face as it dug in, and a little to its left
                                      # (p6's -6 read as "its horn knocked crooked ... being destroyed rather than arriving")
@@ -79,9 +87,10 @@ TURN = 25.0                          # the speaker turned so the horn shows its 
                                      # television"): meteor_e is solved with it so, against the same wind
 # the shimmer over the fire (finish.haze), in each frame's fractions: the rising air either side of and above the
 # speaker, the speaker itself kept still
-HAZE = dict(box=[0.34, 0.2, 0.68, 0.9], px=2.0, scale=6.0, exclude=[[0.42, 0.55, 0.59, 0.93]])
-HAZE_PORTRAIT = dict(box=[0.33, 0.25, 0.68, 0.8], px=2.0, scale=6.0, exclude=[[0.4, 0.54, 0.61, 0.79]])
-WB = (4800, 10.0)                    # the white point: the dusk blue-grey round the fire's warm pool (p4's read pink throughout)
+HAZE = dict(box=[0.34, 0.2, 0.68, 0.9], px=3.5, scale=6.0, exclude=[[0.42, 0.55, 0.59, 0.93]])
+HAZE_PORTRAIT = dict(box=[0.33, 0.25, 0.68, 0.8], px=3.5, scale=6.0, exclude=[[0.4, 0.54, 0.61, 0.79]])
+WB = (4800, 4.0)                     # the white point: the dusk blue-grey round the fire's warm pool (p4's read pink
+                                     # throughout); the tint off magenta (p7's sky "lavender", its firelight salmon)
 STRENGTH = 420.0                     # the flames (E12's 220 on a sunlit pan): the cores clip at dusk
 CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_e.npz'   # meteor_d with the speaker turned 25 degrees against the wind,
                                                             # its face quieter so the woofer shows
@@ -94,11 +103,11 @@ def torn(gouge):
         if fn == 'trench':
             p['value'] = 0.45
         elif fn == 'slabs':
-            p.update(ASPHALT, crumble=2.0)
+            p.update(ASPHALT, crumble=1.0)                           # p7: "blocks with bevelled edges"
             if p['count'] == 90:                                     # along the lips: thick crumbling lumps (p5: "thin,
-                p.update(count=130, spread=0.7, flip=0.12, fallen=0.12, size_power=1.6, thickness=0.1)   # even sheets")
+                p.update(count=130, spread=0.7, flip=0.12, fallen=0.12, size_power=1.6, thickness=0.075)  # even sheets")
             else:                                                    # the heave in front: lower, more of them
-                p.update(thickness=0.09, size=0.45, count=28, tilt=40.0, tilt_min=15.0)
+                p.update(thickness=0.07, size=0.45, count=28, tilt=40.0, tilt_min=15.0)
         elif fn == 'debris':
             if p.get('fine'):                                        # the grit: crushed stone, grey
                 p.update(under_tint='#1C1C1C', under_value=0.6)
@@ -113,7 +122,7 @@ def torn(gouge):
                  seed=31 + i, rotate_z=I.FLIP, crumble=0.3, **ASPHALT)
            for i, (y0, z) in enumerate([(-0.6, -0.3), (-0.35, -0.2), (-0.1, -0.09)])]
     # and either side of it, where the low flames light the pit's floor (p6's look: two flat orange shelves)
-    pit.append(piece('ext', module='impact', fn='debris', band=[-0.45, 0.45], count=90, reach=0.55, inner=0.4, z=I.SINK,
+    pit.append(piece('ext', module='impact', fn='debris', band=[-0.45, 0.45], count=140, reach=0.6, inner=0.4, z=I.SINK,
                      seed=35, rotate_z=I.FLIP, crumble=0.3, **ASPHALT))
     return gouge + pit + [piece('ext', module='impact', fn='debris', y0=I.Y0 + 6.0, y1=-0.9, count=260, reach=0.6,
                                 inner=0.0, z=-0.32, seed=19, rotate_z=I.FLIP, crumble=0.5, **ASPHALT)]
@@ -149,7 +158,7 @@ def firelight():
     # so its pit is no longer a lit tray
     # p7: lower and weaker (p6's lit the whole foreground evenly, "the warm light covers the whole foreground", read as a
     # grade and not a fire's light: from lower its light falls away faster), the low ones stronger
-    for k, (x, y, z, w, v) in enumerate([(-0.6, 0.1, 0.55, 500.0, False), (-0.6, 0.1, 1.5, 300.0, False),
+    for k, (x, y, z, w, v) in enumerate([(-0.6, 0.1, 0.55, 300.0, False), (-0.6, 0.1, 1.5, 300.0, False),
                                          (0.6, 0.15, 0.5, 500.0, False), (0.6, 0.15, 1.4, 300.0, False),
                                          (0.0, 0.55, 1.3, 500.0, False), (0.0, 0.1, 1.2, 2500.0, False),
                                          (0.0, 0.35, 0.8, 600.0, 'only')]):
@@ -172,12 +181,20 @@ def shot():
     fire = M.fire(CACHE)
     fire['position'] = [0.0, 0.0, I.SINK]                           # the solve's floor at the speaker's foot
     fire['strength'] = STRENGTH
+    fire['density'] = 7.0                                             # meteor_e codes its soot against a higher peak (11.3
+                                                                      # against meteor_d's 3.0): its smoke left the flames
+                                                                      # thin, "not growing out of the flames"
     deck = [p for p in I.deck() if p.get('size', [0.0])[0] != 0.03]   # the trench's walls in section: firelit, a pale
     fire['through_glass'] = False                                     # ruled line along the lip (the trench has walls)
-    embers = piece('scatter', count=45, radius=[0.0012, 0.003], position=[0.0, 0.0, 0.9], material='glow',
-                   color='#FF8A30', emit=60.0, seed=27, plume={'height': 1.8, 'spread': [0.2, 1.0], 'lean': [0.9, 0.3],
-                                                              'taper': 0.5, 'power': 3.0, 'streak': 30.0, 'swirl': 0.35})
-    props[:] = deck + torn(I.gouge()) + rest + [fire, embers] + marks(len(deck))
+    # the embers in three lots, bright and yellow low, dimmer and redder as they rise and cool (p7: "an even spray of
+    # identical bright yellow streaks ... a textbook particle emitter")
+    embers = [piece('scatter', count=n, radius=r, position=[0.0, 0.0, 0.9], material='glow', color=c, emit=e, seed=27 + i,
+                    plume={'height': h, 'spread': [0.2, sp], 'lean': [0.9, 0.3], 'taper': 0.5, 'power': pw,
+                           'streak': 30.0, 'swirl': 0.35})
+              for i, (n, r, c, e, h, sp, pw) in enumerate([(26, [0.0012, 0.003], '#FFB060', 90.0, 1.2, 0.8, 2.5),
+                                                           (14, [0.001, 0.0025], '#FF7A30', 40.0, 2.0, 1.1, 2.0),
+                                                           (8, [0.0008, 0.002], '#D9481C', 14.0, 2.8, 1.4, 1.5)])]
+    props[:] = deck + torn(I.gouge()) + rest + [fire] + embers + marks(len(deck))
     for k in ('fire0', 'firerim0', 'farfire0', 'farfire1'):
         s['lights'].pop(k)
     s['lights'].update(firelight())

@@ -80,9 +80,10 @@ def trench(bpy, name, p, kit):
 
 
 def _plate(bm, rnd, w, d, t, rough=0.0):
-    """An irregular plate: a polygon of 6 to 9 corners, `t` thick, its edges jagged. With `rough`, a polygon of 10 to 15
-    corners, its top and underside flat, its broken edges a fine grid pushed in and out by a smooth noise up to `rough`
-    of its size (a fracture's face, uneven but whole: the jagged edges' random corners read as crystals)."""
+    """An irregular plate: a polygon of 6 to 9 corners, `t` thick, its edges jagged. With `rough`, a lopsided polygon of 5
+    to 9 corners, its top and underside flat, its broken edges a fine grid pushed in and out by a smooth noise up to
+    `rough` of its size (a fracture's face, uneven but whole: the jagged edges' random corners read as crystals, and a
+    rounder outline of more corners as "bricks or paving blocks")."""
     if rough:
         return _rough_plate(bm, rnd, w, d, t, rough)
     k = rnd.randint(6, 9)
@@ -108,11 +109,11 @@ def _plate(bm, rnd, w, d, t, rough=0.0):
 
 def _rough_plate(bm, rnd, w, d, t, rough):
     v0 = len(bm.verts)
-    k = rnd.randint(10, 15)
+    k = rnd.randint(5, 9)                                       # few corners, far apart: a broken piece is angular
     pts = []
     for i in range(k):
-        a = 2 * math.pi * (i + rnd.uniform(-0.3, 0.3)) / k
-        r = rnd.uniform(0.75, 1.0)
+        a = 2 * math.pi * (i + rnd.uniform(-0.4, 0.4)) / k
+        r = rnd.uniform(0.5, 1.0)                               # and lopsided, not a rounded block (p7: "bricks")
         pts.append((w / 2 * r * math.cos(a), d / 2 * r * math.sin(a)))
     top = [bm.verts.new((x, y, t / 2)) for x, y in pts]
     bot = [bm.verts.new((x * rnd.uniform(0.92, 1.04), y * rnd.uniform(0.92, 1.04), -t / 2)) for x, y in pts]
