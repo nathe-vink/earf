@@ -62,7 +62,7 @@ ELEMENT = dict(HABITAT)       # which concept each colour shows in its element: 
 ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a blind duel, 2 to 1 (6.2 to 5.9)
 ELEMENT['amber'] = 'acid_b'   # acid rain on black lava beat the acid spring at Dallol in a blind duel, 2 to 1 (6.3 to 5.4)
 ELEMENT['ice'] = 'fog_b'      # the headland above the fog at dawn beat the summit above a sea of cloud in a blind duel, 3 to 0 (6.7 to 4.7)
-ELEMENT['green'] = 'poison_f1b'  # the owner's pick (2026-10-20): A4's wood without the foxgloves, more caps and the arum's berries, after a realism pass
+ELEMENT['green'] = 'poison_g5'   # the owner (2026-10-22): "Poison: put the deadly green one live" - death caps and a deer's bones (G5 p4)
 ELEMENT['black'] = 'smoke_e9'    # the owner (2026-10-21): "I wanted bridge smoke" - the bridge, its smoke simulated (E9 p5)
 PLACES = {  # where each concept stands: the speaker page leads with it ("Ember on a lava field at blue hour.")
     'ember': 'on a lava field at blue hour, the crust cracked to its glow',
@@ -71,6 +71,7 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'poison': 'on a redwood forest floor, among ferns', 'poison_a3': 'on a redwood forest floor, among ferns, foxgloves and fly agarics',
     'poison_a4': 'on a redwood forest floor, behind a troop of fly agarics, among ferns and foxgloves',
     'poison_f1b': 'on a redwood forest floor, among fly agarics, ferns and the berries of lords-and-ladies',
+    'poison_g5': 'on a redwood forest floor, among death caps and a deer\'s bones',
     'ice': 'in snow country at blue hour', 'ice_b': 'on a black-sand beach among icebergs at sunrise',
     'haze': 'in a lavender field at dusk', 'haze_b': 'before layered hills in a hazy evening light',
     'fog': 'on a summit above a sea of cloud', 'fog_b': 'on a headland above the fog at dawn',
