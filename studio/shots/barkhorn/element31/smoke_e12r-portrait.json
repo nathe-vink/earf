@@ -3357,23 +3357,6 @@
     "kind": "kit",
     "shape": "ext",
     "module": "impact",
-    "fn": "scorch",
-    "position": [
-     0.0,
-     9.3,
-     0.003
-    ],
-    "size": [
-     3.6,
-     24.7
-    ],
-    "strength": 0.55,
-    "scale": 0.5
-   },
-   {
-    "kind": "kit",
-    "shape": "ext",
-    "module": "impact",
     "fn": "debris",
     "y0": -0.9,
     "y1": -0.4,
@@ -4383,7 +4366,7 @@
     "shape": "ext",
     "module": "plume",
     "fn": "plume",
-    "cache": "renders/2026-10-21/barkhorn/plume/meteor_h.npz",
+    "cache": "renders/2026-10-22/barkhorn/plume/meteor_j.npz",
     "anchor": "solid",
     "position": [
      0.0,
@@ -4391,13 +4374,13 @@
      -0.3
     ],
     "rotate_z": 50.0,
-    "density": 11.5,
-    "strength": 400.0,
+    "density": 8.5,
+    "strength": 620.0,
     "color": "#8F857B",
     "anisotropy": 0.4,
     "cool": 1000.0,
     "hot": 2600.0,
-    "flame_floor": 0.25,
+    "flame_floor": 0.42,
     "tongues": 0.9,
     "tongue_scale": 0.07,
     "tongue_edge": [
@@ -4416,13 +4399,13 @@
     "breakup_octaves": 2.0,
     "tongue_octaves": 4.0,
     "seed": 3,
-    "flame_gamma": 1.5,
+    "flame_gamma": 2.2,
     "through_glass": false
    },
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 26,
+    "count": 16,
     "radius": [
      0.001,
      0.0025
@@ -4455,7 +4438,7 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 14,
+    "count": 8,
     "radius": [
      0.0009,
      0.002
@@ -4488,7 +4471,7 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 8,
+    "count": 5,
     "radius": [
      0.0008,
      0.002
@@ -4521,7 +4504,7 @@
    {
     "kind": "kit",
     "shape": "scatter",
-    "count": 10,
+    "count": 6,
     "radius": [
      0.0025,
      0.005
@@ -4550,6 +4533,34 @@
      "streak": 5.0,
      "swirl": 0.0
     }
+   },
+   {
+    "kind": "kit",
+    "shape": "ext",
+    "module": "smoke_el",
+    "fn": "woodsmoke",
+    "size": [
+     1.4,
+     13.0,
+     1.6
+    ],
+    "position": [
+     0.0,
+     7.5,
+     -0.25
+    ],
+    "color": "#6A6662",
+    "density": 1.4,
+    "cut": 0.48,
+    "soft": 0.2,
+    "scale": 0.7,
+    "rise": 0.8,
+    "fade": [
+     0.35,
+     0.12,
+     0.55
+    ],
+    "seed": 5
    },
    {
     "kind": "kit",
@@ -4602,7 +4613,24 @@
     "jag": 0.7,
     "soot": 3.5,
     "soot_mix": 0.6,
-    "soot_color": "#1B1A19"
+    "soot_color": "#1B1A19",
+    "furrow": [
+     0.0,
+     14.0,
+     0.0,
+     0.4,
+     0.85
+    ],
+    "glow": 26.0,
+    "glow_r": 0.5,
+    "glow_patch": [
+     0.38,
+     0.56
+    ],
+    "glow_trail": [
+     0.95,
+     1.1
+    ]
    }
   ]
  },
@@ -4848,7 +4876,7 @@
     0.0,
     0.6
    ],
-   "irradiance": 3.0,
+   "irradiance": 5.5,
    "color": "#D9A27A",
    "orbit": {
     "azimuth_deg": -25,
@@ -4960,7 +4988,7 @@
     0.541,
     0.3
    ],
-   "power_w": 1200.0,
+   "power_w": 960.0,
    "color": "#FF7A2E",
    "radius_m": 0.5,
    "camera": false,
@@ -4975,7 +5003,7 @@
     0.478,
     0.95
    ],
-   "power_w": 900.0,
+   "power_w": 720.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -4990,7 +5018,7 @@
     0.353,
     1.6
    ],
-   "power_w": 1200.0,
+   "power_w": 960.0,
    "color": "#FF7A2E",
    "radius_m": 0.5,
    "camera": false,
@@ -5005,7 +5033,7 @@
     -0.506,
     0.0
    ],
-   "power_w": 150.0,
+   "power_w": 120.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -5020,7 +5048,7 @@
     0.124,
     0.05
    ],
-   "power_w": 200.0,
+   "power_w": 160.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -5035,7 +5063,7 @@
     -0.087,
     0.1
    ],
-   "power_w": 200.0,
+   "power_w": 160.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -5050,7 +5078,7 @@
     -0.293,
     -0.18
    ],
-   "power_w": 260.0,
+   "power_w": 208.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -5065,7 +5093,7 @@
     0.529,
     0.6
    ],
-   "power_w": 1500.0,
+   "power_w": 1200.0,
    "color": "#FF7A2E",
    "radius_m": 0.5,
    "camera": false,
@@ -5080,7 +5108,7 @@
     -0.107,
     0.65
    ],
-   "power_w": 600.0,
+   "power_w": 480.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -5095,7 +5123,7 @@
     0.136,
     0.6
    ],
-   "power_w": 600.0,
+   "power_w": 480.0,
    "color": "#FF7A2E",
    "radius_m": 0.3,
    "camera": false,
@@ -5110,7 +5138,7 @@
     0.39,
     1.4
    ],
-   "power_w": 1200.0,
+   "power_w": 336.0,
    "color": "#FF7A2E",
    "radius_m": 0.5,
    "camera": false,

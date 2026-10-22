@@ -115,13 +115,22 @@ HAZE_PORTRAIT = dict(box=[0.34, 0.15, 0.66, 0.6], px=9.0, scale=4.5, exclude=[[0
 # speaker's own still box, left 0.6 px on the lamp post over the flames: "the pole ... stays ruler-straight and crisp")
 WB = (4800, 4.0)                     # the white point: the dusk blue-grey round the fire's warm pool (p4's read pink
                                      # throughout); the tint off magenta (p7's sky "lavender", its firelight salmon)
-STRENGTH = 400.0                     # the flames (E12's 220 on a sunlit pan): the cores clip at dusk; p13 (p12 B: "two
-                                     # blown-out vertical sheets") less, so the tongues keep their orange
-CACHE = 'renders/2026-10-21/barkhorn/plume/meteor_h.npz'   # p13: meteor_g at half the wind (0.7 m/s), so the smoke rises off
-                                                            # every flame and the flames and smoke agree (p12, both critics);
-                                                            # meteor_e's fire behind the speaker and its skin burning by
-                                                            # face: low in front, climbing the edges beside the burning
-                                                            # faces, tall behind (p9; meteor_f climbed the near corner too)
+STRENGTH = 620.0                     # the flames (E12's 220 on a sunlit pan): the cores clip at dusk; p13 (p12 B: "two
+                                     # blown-out vertical sheets") less, so the tongues keep their orange; p17d (p17c A:
+                                     # "an even orange glow fills a tall band of the smoke ... no flame to explain it"):
+                                     # with the floor raised and the gamma steeper only the cores burn, so they burn
+                                     # brighter (p17 400, p17b 480, p17c 560)
+CACHE = 'renders/2026-10-22/barkhorn/plume/meteor_j.npz'   # p17 (the owner, 2026-10-22: "too much fire enveloping the
+                                                            # speaker, making the speaker stand out less ... a slightly
+                                                            # smaller fire behind it"): meteor_i, meteor_h with its skins
+                                                            # burning less (back 0.7 over 0.6 m, the right face 0.35, the
+                                                            # edges' floor 0.45; soot 5, flame 0.8) and the fire behind
+                                                            # smaller (half-sizes 0.42, rate 8)
+# p17b (p17's notes check: "a tall, bright column of flame still hugs the left side of the cabinet"; the flame map put
+# 15 % of meteor_i's flame on its back face, which the lens sees on the left): meteor_j, the back face 0.25 over 0.3 m
+# meteor_h (p13 to p16f): meteor_g at half the wind (0.7 m/s), so the smoke rises off every flame and the flames and
+# smoke agree (p12, both critics); meteor_e's fire behind the speaker and its skin burning by face: low in front,
+# climbing the edges beside the burning faces, tall behind (p9; meteor_f climbed the near corner too)
 # the lips torn back (impact.py's jag): the same line for the trench, the plates along it and the deck either side
 JAG = dict(jag=0.6, jag_seed=9, jag_base=0.85, jag_pow=1.1)   # p10: 0.42 still read as "a ruler-straight edge" on the left;
                                                                 # p13: the far trench torn as hard as the near (p12's notes check)
@@ -155,6 +164,9 @@ def torn(gouge):
                 p.update(ASPHALT, crumble=0.35, count=min(p['count'], 300), size_max=0.2, **CHUNKS)
         elif fn == 'scorch':                                         # p5: "a flat dark streak ... like a decal"
             p['strength'] = 0.55
+    # p17: and E8's scorch decal gone: a plane at road level over what is now an open trench, it hid the trail's embers
+    # (the trench's own marks char it now)
+    gouge = [p for p in gouge if p.get('fn') != 'scorch']
     # loose rubble down the trench's floor (p3: "as smooth and clean as the undamaged road"), clear of the speaker, and
     # over the floor of its pit in front of it, on the slope up to the road in three bands (p5: "a smooth, orange-lit
     # sloped floor with straight edges ... a clean tray")
@@ -211,6 +223,20 @@ PIT = (200, 360)                      # the pit's rubble: each band in front, an
 # falls as a wide soft pool instead of hot spots on the pit's floor, at 0.8 of p15's power
 GROUND = 0.8                          # the ground lamps' power against p15's (2000, 1000, 500, 1000, 150, 2500 W); p16e: 0.4
 GROUND_LIFT, GROUND_RADIUS = 0.45, 1.0
+FLAME = 0.8                           # p17: the fire's own lamps against p16f's, for the smaller fire
+SMOKE_LAMP = 0.35                     # p17d: the lamp lighting the smoke high in the column, on top of FLAME (p17c A: "a
+                                      # tall band of the smoke" lit)
+SPARKS = 0.6                          # p17b (p17's notes check: "a heavy shower of sparks"): the embers fewer, for the
+                                      # smaller fire
+# p17 (the owner: "The trail behind it can be smoldering"): the trench it ploughed charred along its floor, with embers
+# glowing in the cracks, hottest by the speaker and cooling back along the trail (smoke_el.impact's glow_trail), and a
+# thin smoke lifting off it
+TRAIL = [0.0, 14.0, 0.0, 0.4, 0.85]   # the furrow, from 14 m back to just behind the speaker (world x0, y0, x1, y1), and
+                                      # its half-width: the whole trench, as a low lens sees its far wall and not its floor
+# p17b (p17's notes check: "no visible embers or thin smoke ... it looks cold"): the glow brighter and wider
+TRAIL_GLOW = dict(glow=26.0, glow_r=0.5, glow_patch=[0.38, 0.56], glow_trail=[0.95, 1.1])
+TRAIL_SMOKE = dict(size=[1.4, 13.0, 1.6], position=[0.0, 7.5, I.SINK + 0.05], color='#6A6662', density=1.4, cut=0.48,
+                   soft=0.2, scale=0.7, rise=0.8, fade=[0.35, 0.12, 0.55], seed=5)
 
 
 def marks(deck_len):
@@ -229,7 +255,7 @@ def marks(deck_len):
                 soot_color=SOOT, dust_scale=0.22, seed=4)
     return [piece('ext', on='prop0-kit', **road)] + \
         [piece('ext', module='smoke_el', fn='impact', on=f'prop{deck_len}-kit', centre=[0.0, 0.0], char=[0.8, 2.6],
-               jag=0.7, soot=3.5, soot_mix=0.6, soot_color=SOOT)]
+               jag=0.7, soot=3.5, soot_mix=0.6, soot_color=SOOT, furrow=TRAIL, **TRAIL_GLOW)]
 
 
 def firelight():
@@ -288,15 +314,15 @@ def _backlight(a):
                                          (0.40, 0.35, 0.9, 1500.0, 'only'),
                                          (-0.50, 0.32, 0.95, 600.0, False), (0.50, -0.28, 0.9, 600.0, False)]):
         out[f'flame{k}'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3),
-                                       round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK, 3)], w, '#FF7A2E',
-                                      0.5 if w >= 1000.0 or v == 'only' else 0.3),
+                                       round(x * math.sin(a) + y * math.cos(a), 3), round(z + I.SINK, 3)],
+                                      round(w * FLAME, 1), '#FF7A2E', 0.5 if w >= 1000.0 or v == 'only' else 0.3),
                                 camera=False, transmission=False, specular=0.0, volume=v)
     # p14 (p13, both: "a smoke base lit orange from below"; "only a faint glow from the fire underneath"): a second lamp
     # for the smoke alone, higher in the column's foot, behind the speaker
     x, y, z, w = 0.25, 0.30, 1.7, 1200.0   # p15 (p14, both: "barely lit orange where it leaves the flames"): 800 -> 1200
     out['flame10'] = dict(point([round(x * math.cos(a) - y * math.sin(a), 3), round(x * math.sin(a) + y * math.cos(a), 3),
-                                 round(z + I.SINK, 3)], w, '#FF7A2E', 0.5), camera=False, transmission=False, specular=0.0,
-                          volume='only')
+                                 round(z + I.SINK, 3)], round(w * FLAME * SMOKE_LAMP, 1), '#FF7A2E', 0.5),
+                          camera=False, transmission=False, specular=0.0, volume='only')
     # p13: and one low behind it, strong, so the speaker throws its shadow toward the lens across the rubble in front (p12
     # A: "a dark wedge of shadow would run from the product toward the camera"; every chunk lit on its far side)
     # p15 (p13/p14: "the pale crater floor and the lifted slabs on the left are flat planes ... like a decal"): the two lamps
@@ -328,9 +354,14 @@ def shot():
     # p14 (p13, both: "smooth vertical strips of even colour ... like glowing cards", "no clipped white-yellow core"): the
     # gaps between the tongues dark (a full cut), the core hotter and the tips redder, the glow gathered into the core
     fire.update(tongues=0.9, tongue_octaves=4.0, hot=2600.0, cool=1000.0, flame_gamma=1.5, breakup=0.6)
+    # p17d (p17c, both: no flame at the base, the smoke glowing by itself): flames only where the gas burns hard, the light
+    # gathered into their cores, so the fire shows as flames at the foot and the smoke above it goes dark within a metre
+    fire.update(flame_floor=0.42, flame_gamma=2.2)
     # p15 (p14's notes check: "a wall of flame on the left, a sliver on the right"): the cut and the gathering eased back
     # so the right flank burns again; the hotter core and redder tips kept (p14 beat the live bridge 2-0)
-    fire['density'] = 11.5                                            # p13: kept for meteor_h, whose soot is coded against a
+    # p17c (p17b's notes check: "the huge smoke column takes over the frame", "the fire reads as glowing smoke"): the
+    # smoke thinner so the flames show through, 7.5; p17d between it and p17b's 9.5 (11.5 on meteor_h)
+    fire['density'] = 8.5                                             # p13: kept for meteor_h, whose soot is coded against a
                                                                       # 99.9th percentile 17 times lower (1.68 against 29.1: it
                                                                       # rises clear instead of pooling in the wake) but fills more
                                                                       # of the box: by the old rule it would read grey
@@ -353,18 +384,21 @@ def shot():
     # p13's lengths back, and straight (no swirl)
     for e in embers:
         e['plume']['swirl'] = 0.0
+        e['count'] = max(3, round(e['count'] * SPARKS))
     # p14 (p13, both: "round dots, all the same size, with no motion blur", "short streaks at a 1/48 s shutter"): each lot
     # drawn out further along its path, still straight (p12's swirl read as "wires")
     # p13 (p12, both: "thin white wiggly spark trails ... like glowing wires", "short tapered orange dashes"): dimmer and
     # oranger, shorter, hardly swirling, leaning with the halved wind
     # p11: each lot its own streak, and a fourth of big slow embers barely streaked (p10 B: "sparks that are all the same
     # streak")
-    props[:] = road + torn(I.gouge()) + rest + [fire] + embers + marks(len(road))
+    smoulder = [piece('ext', module='smoke_el', fn='woodsmoke', **TRAIL_SMOKE)]
+    props[:] = road + torn(I.gouge()) + rest + [fire] + embers + smoulder + marks(len(road))
     for k in ('fire0', 'firerim0', 'farfire0', 'farfire1'):
         s['lights'].pop(k)
     s['lights'].update(firelight())
     # the bounce on the speaker's face is the fire-lit road's now, warm (p3: "a flat, neutral grey light")
-    s['lights']['bounce'].update(color='#D9A27A', irradiance=3.0)
+    # p17c (p17b: "the darker cabinet hides the woofer"): 3.0 -> 5.5
+    s['lights']['bounce'].update(color='#D9A27A', irradiance=5.5)
     s['lights']['kicker']['irradiance'] = 38.0                       # p9: backlit by the fire behind it
     s['lights']['kicker_r']['irradiance'] = 26.0
     for inst in s['product']['instances']:

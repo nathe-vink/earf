@@ -454,6 +454,8 @@ def impact(bpy, name, p, kit):
     max] m, spread [inner, outer] m, ahead (degrees, the way the crash was travelling: more is thrown that way), seed}.
     For a road: `cracks` [inner, outer] radii (m) of cracks running out from the centre and round it, as a hard surface
     breaks under a blow, `crack_count` of them round it, `crack_width` m wide, cut into the surface by `crack_bump`;
+    `glow_trail` [reach, fade] (with `furrow`): the heat glows along the furrow's floor too, from its (x1, y1) end back
+    over `reach` of its length, fading as the remaining share to the power `fade` (a trail that still smoulders).
     `dust` [inner, outer] radii of the powder thrown over it, `dust_color`, `dust_mix` at its thickest, in patches
     `dust_scale` m across. Several objects can take one impact each (a road's slabs): the marks are placed in the world.
     Returns the debris."""
@@ -505,6 +507,9 @@ def impact(bpy, name, p, kit):
         ds = math_('ADD', math_('SQRT', math_('ADD', math_('MULTIPLY', qx, qx), math_('MULTIPLY', qy, qy))), jag)
         fw = math_('MULTIPLY', smooth(ds, hw * 1.6, hw * 0.5), math_('ADD', 0.75, math_('MULTIPLY', t, 0.25)))
         char = math_('MAXIMUM', char, fw)
+        trail = (ds, t, hw)
+    else:
+        trail = None
     soot = math_('MULTIPLY', smooth(dj, p.get('soot', 3.0), r0), p.get('soot_mix', 0.55))
     col_in = bs.inputs['Base Color'].links[0].from_socket if bs.inputs['Base Color'].links else None
 
@@ -562,6 +567,10 @@ def impact(bpy, name, p, kit):
         L(geo.outputs['Position'], vo.inputs['Vector'])
         crack = smooth(vo.outputs['Distance'], 0.045, 0.0)
         hot = smooth(dj, p.get('glow_r', 0.9), 0.15)
+        if p.get('glow_trail') and trail:                            # and along the furrow it ploughed, cooling with distance
+            ds, t, hw = trail; reach, fade = p['glow_trail']
+            along = math_('POWER', smooth(t, 1.0 - reach, 1.0), fade)
+            hot = math_('MAXIMUM', hot, math_('MULTIPLY', smooth(ds, hw * 0.9, hw * 0.2), along))
         fl = node('ShaderNodeTexNoise'); fl.inputs['Scale'].default_value = 4.0; fl.inputs['Detail'].default_value = 3.0
         L(geo.outputs['Position'], fl.inputs['Vector'])
         lo, hi = p.get('glow_patch', [0.42, 0.62])                   # the higher, the fewer cracks glow
