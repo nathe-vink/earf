@@ -42,7 +42,16 @@ E12r p10 (p9's notes check: "on the left they line up into a ruler-straight edge
 thickness"): for slabs, `thick_var` varies each plate's thickness from (1 - thick_var / 2) to (1 + thick_var) times
 `thickness`, and `clump` leaves gaps along each lip where a slow noise falls below `clump` - 0.35 (the row torn in
 clumps) and throws the plates that remain out over a wider, uneven band. Both off by default. `drop` (slabs, debris)
-lets each piece down onto the set built before it, its lowest corner a little into the surface below (see _drop)."""
+lets each piece down onto the set built before it, its lowest corner a little into the surface below (see _drop).
+
+E12r p11 (p10's critics, both: "nearly identical and almost cubic, with flat faces ... a narrow range of sizes", "no
+grit, gravel or dust between the pieces", "a broken road comes up as thin, ragged plates"): `dust` (slabs, debris)
+greys the faces that look up in drifts (see _dust); for debris, `flat` [lo, hi] its thickness against its size (0.3 to
+0.6 as before), `size_power` its sizes from a power law (many small, a few large; uniform as before when left out),
+`size_max` the largest (0.16 m as before) and `fine_size` the grit's range (5 to 30 mm as before); for the lips (jag),
+`jag_base` and `jag_pow` each corner's tear, up to jag * jag_base with its share of small ones set by jag_pow (0.6 and
+1.7 as before: p12's notes check, "the dark furrow on the left has a clean, straight edge"); `under_scale` the
+sub-base's texture scale (0.35 as before: on a plate a foot across it read as one flat colour, "plank-like")."""
 import math, random
 
 import bmesh
@@ -66,7 +75,8 @@ def _lipf(p):
     if not jag:
         return lambda y, s: lip
     y0, y1, ramp = p.get('y0', -20.0), p.get('y1', 0.0), p.get('ramp', 4.0)
-    key = (lip, jag, y0, y1, ramp, p.get('jag_seed', 1))
+    jb, jp = p.get('jag_base', 0.6), p.get('jag_pow', 1.7)       # each corner's tear: up to jag * jag_base, mostly small
+    key = (lip, jag, y0, y1, ramp, p.get('jag_seed', 1), jb, jp)
     if key not in _LIPS:
         lines = {}
         for side in (-1, 1):
@@ -74,7 +84,7 @@ def _lipf(p):
             ys, xs, y = [], [], y0 - 0.6
             while y < y1 + 0.6:
                 f = min(1.0, max(0.0, (y - y0) / ramp)) ** 0.5 * (1.0 + 0.5 * max(0.0, 1.0 - (y1 - y) / 1.5))
-                r = jag * (rnd.random() ** 1.7) * 0.6
+                r = jag * (rnd.random() ** jp) * jb
                 if rnd.random() < 0.17:                          # a chunk broken away
                     r = jag * rnd.uniform(0.75, 1.25)
                 ys.append(y); xs.append(r * f)
@@ -235,13 +245,58 @@ def _faces(ft, fb, sides, top, p):
 
 
 def _materials(bpy, kit, me, p):
-    me.materials.append(_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, p.get('top_rough', 0.45),
-                             value=p.get('top_value', 1.0)))
-    me.materials.append(_mat(bpy, kit, p.get('under', 'gravel_concrete'), 0.35, p.get('under_tint', '#211F1D'), 0.75,
-                             value=p.get('under_value', 1.0)))
+    mats = [_mat(bpy, kit, p.get('top', 'asphalt_02'), 4.0, '#09090A', 0.85, p.get('top_rough', 0.45), value=p.get('top_value', 1.0)),
+            _mat(bpy, kit, p.get('under', 'gravel_concrete'), p.get('under_scale', 0.35), p.get('under_tint', '#211F1D'), 0.75,
+                 value=p.get('under_value', 1.0))]
     if p.get('side'):
-        me.materials.append(_mat(bpy, kit, p['side'], p.get('side_scale', 1.5), '#0B0B0C', 0.85, p.get('side_rough', 0.8),
-                                 value=p.get('side_value', 1.0)))
+        mats.append(_mat(bpy, kit, p['side'], p.get('side_scale', 1.5), '#0B0B0C', 0.85, p.get('side_rough', 0.8),
+                         value=p.get('side_value', 1.0)))
+    for m in mats:
+        me.materials.append(_dust(bpy, kit, m, p['dust'], p.get('dust_color', '#8C867E'), p.get('seed', 1)) if p.get('dust') else m)
+
+
+def _dust(bpy, kit, m, amount, color, seed):
+    """`dust` (slabs, debris): the grey powder a blow throws over everything near it (E12r p10, both critics: "no grit,
+    gravel or dust anywhere", "all dusted grey"): the faces that look up take `dust_color` in drifts, by a noise, up to
+    `dust` of the way, and go matte where it lies. On a copy of the material, so the road's own stays clean."""
+    m = m.copy()
+    nt = m.node_tree; N = nt.nodes.new; L = nt.links.new
+    bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+    if bs is None:
+        return m
+
+    def smooth(v, lo, hi):
+        n = N('ShaderNodeMapRange'); n.interpolation_type = 'SMOOTHSTEP'; n.clamp = True
+        n.inputs['From Min'].default_value = lo; n.inputs['From Max'].default_value = hi
+        L(v, n.inputs['Value']); return n.outputs['Result']
+
+    def mul(a, b):
+        n = N('ShaderNodeMath'); n.operation = 'MULTIPLY'
+        for i, x in enumerate((a, b)):
+            if isinstance(x, (int, float)):
+                n.inputs[i].default_value = x
+            else:
+                L(x, n.inputs[i])
+        return n.outputs[0]
+
+    geo = N('ShaderNodeNewGeometry'); sep = N('ShaderNodeSeparateXYZ'); L(geo.outputs['Normal'], sep.inputs[0])
+    nz = N('ShaderNodeTexNoise'); nz.noise_dimensions = '4D'
+    nz.inputs['Scale'].default_value = 7.0; nz.inputs['Detail'].default_value = 6.0; nz.inputs['W'].default_value = seed * 0.37
+    L(geo.outputs['Position'], nz.inputs['Vector'])
+    f = mul(mul(smooth(sep.outputs['Z'], 0.25, 0.85), smooth(nz.outputs['Fac'], 0.36, 0.6)), amount)
+    mx = N('ShaderNodeMix'); mx.data_type = 'RGBA'; L(f, mx.inputs['Factor'])
+    src = bs.inputs['Base Color']
+    if src.links:
+        L(src.links[0].from_socket, mx.inputs[6])
+    else:
+        mx.inputs[6].default_value = src.default_value
+    mx.inputs[7].default_value = kit.M.hex_lin(color)
+    L(mx.outputs[2], src)
+    rr = bs.inputs['Roughness']
+    if rr.links:
+        mr = N('ShaderNodeMath'); mr.operation = 'MAXIMUM'
+        L(rr.links[0].from_socket, mr.inputs[0]); L(f, mr.inputs[1]); L(mr.outputs[0], rr)
+    return m
 
 
 def _crumble(bm, cm, seed, flat_tops=False):
@@ -341,12 +396,13 @@ def debris(bpy, name, p, kit):
             y = rnd.uniform(y0 + 1.0, y1 + 0.5)
             r = reach * rnd.random() ** 2.2
         x = (1 if rnd.random() < 0.5 else -1) * ((p.get('inner', 0.8) if y < y1 or p.get('band') else 0.0) + r)
-        size = max(0.012, 0.16 * max(0.0, 1.0 - r / max(reach, r + 0.01)) ** 1.6 * rnd.uniform(0.3, 1.0))
+        mult = (0.12 + 0.88 * rnd.random() ** p['size_power']) if 'size_power' in p else rnd.uniform(0.3, 1.0)
+        size = max(0.012, p.get('size_max', 0.16) * max(0.0, 1.0 - r / max(reach, r + 0.01)) ** 1.6 * mult)
         if p.get('fine'):
-            size = rnd.uniform(0.005, 0.03) * (1.0 - 0.5 * min(1.0, r / reach))
+            size = rnd.uniform(*p.get('fine_size', [0.005, 0.03])) * (1.0 - 0.5 * min(1.0, r / reach))
         before = len(bm.verts)
         ft, fb, sides = _plate(bm, rnd, size * rnd.uniform(0.8, 1.6), size * rnd.uniform(0.8, 1.6),
-                               size * rnd.uniform(0.3, 0.6), p.get('rough', 0.0))
+                               size * rnd.uniform(*p.get('flat', [0.3, 0.6])), p.get('rough', 0.0))
         bm.verts.ensure_lookup_table()
         new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
         _place(bm, new, (rnd.uniform(-40, 40), rnd.uniform(-40, 40), rnd.uniform(0, 360)), (x, y, p.get('z', 0.0) + size * 0.2))

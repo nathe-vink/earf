@@ -80,6 +80,7 @@ def plume(bpy, name, p, kit):
         v.co = Vector(((v.co.x + 0.5) * Lx - sx, (v.co.y + 0.5) * Ly - sy, (v.co.z + 0.5) * Lz))
     me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
+    ob['engine_volume'] = True                            # a lamp may see through it (lights.smoke_unblocked)
     px, py = p.get('position', [0.0, 0.0])[:2]
     pz = p.get('position', [0.0, 0.0, 0.0])[2] if len(p.get('position', [])) > 2 else 0.0
     ob.location = Vector((px, py, pz))

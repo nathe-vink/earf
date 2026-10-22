@@ -252,6 +252,26 @@ def scope_flag(bpy, flag_ob, keep):
                 co.light_linking.link_state = 'EXCLUDE'
 
 
+def smoke_unblocked(bpy, ob):
+    """A lamp among a fire's flames whose light the fire's own smoke swallowed (Smoke E12r p10: lamps in the flames lit
+    almost nothing round them, "the asphalt a metre or two from the fire ... the same cool, even dusk light"): every
+    volume a kit marked (`engine_volume`, the plume's box) left out of its blockers (shadow linking), so its light reaches
+    the road and the rubble through the smoke; it still lights the smoke as its `volume` flag says. A light's `smoke_shadow`
+    False asks for it. Returns how many volumes it sees through."""
+    vols = [o for o in bpy.context.scene.objects if o.get('engine_volume')]
+    for L in [ob] + twins(bpy, ob):
+        col = L.light_linking.blocker_collection
+        if col is None:
+            col = bpy.data.collections.new(L.name + '-blockers'); L.light_linking.blocker_collection = col
+        for v in vols:
+            if v.name not in col.objects:
+                col.objects.link(v)
+        for o, co in zip(col.objects, col.collection_objects):
+            if o in vols:
+                co.light_linking.link_state = 'EXCLUDE'
+    return len(vols)
+
+
 def twins(bpy, ob):
     """A panel's or a lamp's twins (its fractional diffuse or specular share), which light linking has to reach as well."""
     return [bpy.data.objects[n] for n in (ob.get('engine_twins') or '').split(',') if n]
