@@ -842,6 +842,7 @@ h2 { margin: 0; font-size: clamp(30px, 4vw, 46px); line-height: 1.05; font-weigh
 .lede { margin: 16px 0 0; max-width: 46ch; font-size: 19px }
 .head { display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: end; justify-content: space-between; margin-bottom: 32px }
 .head p { margin: 10px 0 0; max-width: 58ch; color: var(--muted) }
+.vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0 }   /* a line page's h1, for screen readers: its first band's h2 is the visible title */
 .hint { font: 500 13px/1.4 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted) }
 .btn { display: inline-flex; align-items: center; gap: 8px; font: 500 15px/1 var(--sans); color: var(--ink); background: transparent;
   border: 1px solid var(--ink); border-radius: 999px; padding: 12px 18px; cursor: pointer; text-decoration: none }
@@ -1395,7 +1396,7 @@ __HABITATS__
 
 <main id="line" hidden>
   <div class="lineview" data-line="speakers">
-    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Speakers</p></div>
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Speakers</p><h1 class="vh">Speakers</h1></div>
   <section class="band" id="atmosphere"><div class="wrap">
     <div class="head">
       <div><p class="eyebrow">Atmosphere</p><h2>Eight atmospheres.</h2>
@@ -1429,11 +1430,11 @@ __CLOSER__
   </div></section>
   </div>
   <div class="lineview" data-line="lighting">
-    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Lighting</p></div>
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Lighting</p><h1 class="vh">Lighting</h1></div>
 __LIGHTING__
   </div>
   <div class="lineview" data-line="turntable">
-    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Turntable</p></div>
+    <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Turntable</p><h1 class="vh">Turntable</h1></div>
 __TURNTABLE__
   </div>
 </main>
