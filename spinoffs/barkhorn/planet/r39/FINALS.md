@@ -38,7 +38,7 @@ Four of the six full-size finals were not rendered. On the coordinator's re-plan
 
 ## Mother EARF, with and without
 
-The two door finals differ only in the globe. Both critics scored them the same (5.5 / 5.5 each). The globe neither helps nor hurts the score. As drawn, it is the Smoke one-colour globe over the middle banquette table under a hard spot, with a rim spot. The critics read it as "a large dark wire-sphere pendant", then "a black cage". The rim light lifted it a little. The multicolour version is a labelled variant only, and it carries the owner's rainbow note. The other ways the name could live in the bar are in the README, under "Mother EARF in the bar".
+The two door finals differ only in the globe. Both critics scored them the same (5.5 / 5.5 each). The globe neither helps nor hurts the score. As drawn, it is the Smoke one-colour globe over a banquette table under a hard spot, with a rim spot. The critics read it as "a large dark wire-sphere pendant", then "a black cage". The rim light lifted it a little. The multicolour version is a labelled variant only, and it carries the owner's rainbow note. The other ways the name could live in the bar are in the README, under "Mother EARF in the bar".
 
 ## What still holds the frames back (all the critics agree)
 
@@ -62,4 +62,4 @@ The two door finals differ only in the globe. Both critics scored them the same 
 - **Coin colours:** the bowl is rendered brass and the coins as modelled in round 38. Confirm the coins' finish and colours.
 - **The counter seams:** where do the zinc top's joints fall? The model does not settle that.
 - **People:** the brief says no people. The critics keep naming empty rooms as a "render" tell. Would you allow traces only (as now), or blurred figures?
-- **Budget:** every figure in "Round 39: the house" is an estimate. It is marked so, and it is to be confirmed with a QS and the SF permit desk.
+- **Budget:** every figure in "Round 39: the house" is an estimate (fit-out $790,000 to $1,285,000; all in about $0.99 M to $1.62 M). It is marked so, and it is to be confirmed with a QS and the SF permit desk.

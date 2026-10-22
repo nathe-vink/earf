@@ -192,7 +192,7 @@ choice is the owner's to overturn.*
 
 ### What it is
 
-Planet EARF is a 49-person listening bar in a concrete shell in San Francisco: 104 m² (1,116 sq ft) of room, 6.1 m
+Planet EARF is a listening bar for 49 people, staff included, in a concrete shell in San Francisco: 104 m² (1,116 sq ft) of room, 6.1 m
 across and 17 m deep, 3.4 m to the fir deck. It is EARF's showroom, run as a bar. Four Atmosphere speakers, the Hemisphere
 North pendants, the Core lamps and EARF's Mantle record players are all for sale, and all swap tints, so the room is one
 configuration of the catalogue on any given night (the house configuration is Smoke).
@@ -218,7 +218,7 @@ configuration of the catalogue on any given night (the house configuration is Sm
 | | when | who plays | what it is |
 |---|---|---|---|
 | **Opening hours** | 5 to 8 pm | the bar staff | records from the house shelves, side by side; the coins start at 6 |
-| **The Session** | Tue to Thu, 8 pm, about 50 min | the house | one album, start to finish, in the listening room, no talking; announced a week ahead; ten seats held, the rest open |
+| **The Session** | Tue to Thu, 8 pm, about 50 min | the house | one album, start to finish, in the listening room, no talking; announced a week ahead; four of the six chairs booked, two kept for the door |
 | **Selectors** | Fri and Sat, 9 pm to close | a guest selector at the decks | vinyl only, at bar level; the coins still play (the selector fits them in) |
 | **Mother EARF Sunday** | Sun, 3 to 7 pm | a different guest each week | an afternoon of a person's records and why they own them; the one session with talking |
 
@@ -230,9 +230,9 @@ selectors' picks.
 
 - **One coin a guest**, handed over at the door. It is an EARFcoin: cast acrylic in one of the eight tints, the EARF
   globe on its face. The colour is random; nobody chooses.
-- **A coin is a request.** Write the song on the house's small card, hand both to the bartender. The coin goes in the
-  request column at the decks, the card on the spike. The column is the queue: the next song is the coin at the bottom,
-  and anyone can see how long the wait is.
+- **A coin is a request.** Write the song on the house's small card, hand both to the bartender. The card goes on the
+  rail at the decks, in turn, and the coin into the request column. The column is the queue: the selector plays the
+  oldest card on the rail and takes the coin at the bottom, and anyone can see how long the wait is.
 - **The coin comes back to the bowl** once its song has played. A guest who keeps it keeps it (it is on the bill at
   cost, est. $6 to $9). Lost coins are re-cast in batches.
 - **The rules, kept short:** one request a guest a night; the selector may hold a request that would break a session;
@@ -256,33 +256,36 @@ twelve cocktails, a short natural wine list, two beers on tap, two non-alcoholic
 | **Mother** | a punch for four, from the bowl, Sundays only |
 | **Run-out Groove** | the closing drink: an amaro and a short espresso |
 
-Food is snacks only (olives, a Japanese-style sando, rice crackers), which a Type 48 bar may serve without a kitchen.
+Food is snacks only, bought in ready to serve (olives, rice crackers, a Japanese-style sando from a bakery nearby),
+which a Type 48 bar may serve without a kitchen.
 
 ### Capacity, hours and sound
 
-- **Capacity: 49 occupants** (est. 28 seats: 8 at the counter, 12 at the banquette, 2 at the window table, 6 in the
-  listening room, plus standing at the counter). Under 50 keeps the room Group B, with no Fire Department Place of
-  Assembly permit (CBC §303, research.md).
+- **Capacity: 49 occupants, staff included** (about 45 guests and 4 staff; est. 28 seats: 8 at the counter, 12 at the
+  banquette, 2 at the window table, 6 in the listening room, plus standing at the counter). Under 50 keeps the room
+  Group B, with one exit and no Fire Department Place of Assembly permit (CBC §303, research.md). That rests on DBI
+  accepting the seating plan's count: by area alone (15 sq ft net a person at tables) the room could count higher, so
+  the plan goes to DBI first.
 - **Hours:** Tuesday to Thursday 5 pm to midnight; Friday and Saturday 5 pm to 1:30 am; Sunday 3 to 10 pm; closed
   Monday.
-- **Sound levels (targets, est.):** the bar at 70 to 75 dBA Leq while records play, so two people talk across a table
-  without raising their voices; the listening room at 78 to 82 dBA Leq in a Session, peaks to about 90; selector nights
-  at 80 to 85 dBA at the counter. Never more than 8 dBA (and, with a permit, 8 dBC) above ambient at the property line
-  (Police Code §2909); 45 dBA inside any home at night. Bass is the binding limit if there are flats above: no
+- **Sound levels (targets, est.):** the bar at 60 to 65 dBA Leq while records play, so two people talk across a table
+  at an ordinary voice (ISO 9921: normal speech is about 60 dBA at 1 m); the listening room at 78 to 82 dBA Leq in a Session, peaks to about 90; selector nights
+  at 80 to 85 dBA at the counter. Outside, Police Code §2909 for a venue with a POE or LLP permit on commercial property:
+  no more than 8 dBA, and 8 dBC in the bass, above ambient at the property line; 5 dBA if the building has homes; 45 dBA inside any home at night. Bass is the binding limit if there are flats above: no
   subwoofers until a measured site says so.
 
 ### The licences San Francisco needs for it
 
 | licence or permit | who | why | notes |
 |---|---|---|---|
-| **Type 48, on-sale general (public premises)** | California ABC | spirits, wine and beer; 21 and over | bought secondhand (capped by county population); roughly $150,000 to $500,000 (research.md, broker guide; est.); a transfer into the city may need a public-convenience-or-necessity finding by the Board of Supervisors |
-| **Place of Entertainment permit** | SF Entertainment Commission | guest selectors to 2 am | application $2,579 for July 2024 to June 2025, $2,708 from July 2026, annual licence about $863 (sf.gov fee pages; the annual figure unconfirmed); a 30-day posted notice and a hearing |
-| or **Limited Live Performance permit** | SF Entertainment Commission | selectors as a secondary use, ending by 10 or 11 pm | cheaper; would end the selector nights early |
-| **Building permit, tenant improvements** | DBI | the fit-out | light-transmitting plastics need a CC1 or CC2 classification and an interior-finish rating (CBC §2606): the frosted screens, the sink and Mother EARF should be raised with DBI early |
-| **Planning** | SF Planning | a bar use in the district | depends on the site's zoning (a neighbourhood commercial district may need a conditional use; unconfirmed until there is a site) |
-| **Health permit** | SFDPH | glasswashing, ice, garnish prep; snacks | (unconfirmed which category for a no-kitchen bar) |
+| **Type 48, on-sale general (public premises)** | California ABC | spirits, wine and beer; 21 and over | San Francisco is closed to new and intercounty licences, so an existing SF licence is bought and transferred to the premises: about $75,000 to $150,000 (est.; NBC, 20 May 2026, quotes a broker at "around $100,000", sales as low as $70,000 to $85,000, down from about $250,000 in 2022); a public-convenience-or-necessity finding by the Board of Supervisors only in an over-licensed or high-crime tract |
+| **Place of Entertainment permit** | SF Entertainment Commission | guest selectors to 2 am | application $2,579 for July 2024 to June 2025, $2,708 from July 2026, annual licence $863 in 2024 to 2025, indexed to inflation since (Ord. 193-24); a 30-day posted notice and a hearing |
+| or **Limited Live Performance permit** | SF Entertainment Commission | selectors as a secondary use, ending by 10 or 11 pm | $612, the performance area at most 200 sq ft; Planning still counts the use as a bar; would end the selector nights early |
+| **Building permit, tenant improvements** | DBI | the fit-out | light-transmitting plastics need a CC1 or CC2 classification and an interior-finish rating (CBC §2606): the frosted screens and the sink should be raised with DBI early. Mother EARF is likely a hanging combustible decoration under CFC §807 (a flame test, at most 10 % of the ceiling); cast acrylic burns, so it goes to SFFD as well as DBI |
+| **Planning** | SF Planning | a bar, or Nighttime Entertainment | with a POE permit the use is "Nighttime Entertainment" (Planning Code §102), barred or restricted in many districts; with an LLP it stays a bar. Whether a conditional use is needed depends on the site |
+| **Health permit** | SFDPH | glasswashing, ice, garnish prep; snacks | snacks bought in ready to serve keep food handling to a minimum (unconfirmed which category) |
 | **Music licences** | ASCAP, BMI, SESAC, GMR | playing recorded music in public | needed even when no permit is: four licences, a few thousand dollars a year in all (est.) |
-| **Business registration, seller's permit, sign permit** | Treasurer, CDTFA, Planning | | "First Year Free" waived first-year fees to 30 June 2026; check whether it was renewed |
+| **Business registration, seller's permit, sign permit** | Treasurer, CDTFA, Planning | | "First Year Free" runs to 30 June 2027 (Ord. 134-26): first-year City fees waived, the Entertainment Commission's included; state fees (ABC, CDTFA) are not |
 
 ### Fit-out budget (est.)
 
@@ -295,19 +298,19 @@ anecdotal); this room sits at the top of that range because of its joinery, acou
 | Shell and services: HVAC, plumbing, power, sprinklers, the accessible restroom | $210,000 | $310,000 | $190 to $280 a sq ft (est.) |
 | Acoustic isolation: the listening room's box, the ceiling absorber, door seals, the party walls | $60,000 | $110,000 | (est.) |
 | Joinery: the racetrack counter (zinc top, fluted oak), the back bar, the record wall, the banquette, the altar | $120,000 | $185,000 | (est.) |
-| Acrylic: four frosted screens with displays behind them, the Smoke sink, the request column, 300 coins | $45,000 | $90,000 | research.md: no public price for thick cast acrylic; back-lit onyx runs $120 to $360 a sq ft installed |
+| Acrylic: four frosted screens with displays behind them, the Smoke sink, the request column, 300 coins, Mother EARF | $54,000 | $102,000 | research.md: no public price for thick cast acrylic; back-lit onyx runs $120 to $360 a sq ft installed |
 | Lighting: Hemisphere North pendants, Core lamps, spots and their control | $35,000 | $60,000 | (est.; the companions at cost) |
 | The system: four Atmosphere, amplification, two Mantle record players, a rotary mixer, cartridges | at EARF's cost | | not yet priced |
-| Bar equipment: ice machine, glasswasher, under-counter refrigeration, the bar die | $70,000 | $110,000 | (est.) |
+| Bar equipment: ice machine, glasswasher, under-counter refrigeration, an espresso machine, the bar die | $78,000 | $130,000 | (est.) |
 | Furniture, glassware, the first 4,000 records | $70,000 | $120,000 | records at about $12 to $18 used (est.) |
 | Design, engineering, permits and fees | $60,000 | $100,000 | about 10 % (est.) |
-| Contingency | $100,000 | $160,000 | 15 % (est.) |
-| **Fit-out, without the licence** | **$770,000** | **$1,245,000** | |
-| Type 48 licence | $150,000 | $500,000 | research.md (est.) |
+| Contingency | $103,000 | $168,000 | 15 % (est.) |
+| **Fit-out, without the licence** | **$790,000** | **$1,285,000** | |
+| Type 48 licence | $75,000 | $150,000 | NBC, 20 May 2026, a broker (est.) |
 | Pre-opening and six months' working capital | $120,000 | $180,000 | (est.) |
-| **All in** | **$1.04 M** | **$1.93 M** | |
+| **All in** | **$0.99 M** | **$1.62 M** | |
 
-Mother EARF, if chosen, adds about $9,000 to $12,000: main's 1 m globe in 25 mm clear tints is costed at about $6,500
+Mother EARF (in the acrylic line above; drop it if not chosen) is about $9,000 to $12,000: main's 1 m globe in 25 mm clear tints is costed at about $6,500
 one-off (round 33c), and sheet and polishing scale with area, so 1.3 m is about 1.7 times the sheet (est.).
 
 ### Mother EARF in the bar (an option)
@@ -317,7 +320,7 @@ The owner, 2026-10-22: "Also wondering if there's any opportunity to tie in Moth
 **The proposal rendered:** Mother EARF is round 33b's one-colour globe made at architectural scale: the brand
 globe's six slotted discs (three meridians and three parallels, the axis leaning 23.4 degrees) cut from 25 mm cast
 acrylic in Smoke, 1.25 m across. Its faces are see-through smoked glass and its polished rims read dark. It hangs low
-over the middle banquette table, 1.1 m above it and between two beams, under one hard spot on the deck behind it, so
+over a banquette table, 1.1 m above it and between two beams, under one hard spot on the deck behind it, so
 its shadow draws the globe a second time, ring inside ring, on the bare concrete wall between the two frosted screens.
 Round 33b's own text recommended exactly this: "a 1 m piece for the bar's back bar under a hard spot". Because it is
 in the house's tint, it adds no colour to the room: the products stay the only colour. (`r39/kit39.py`, `mother`;
@@ -330,7 +333,8 @@ the frames `door` and `door-mother`, so the owner can compare.)
   about 190 kg of acrylic in 25 mm at this size, 208 kg if the cast sheet runs 10 % thick (four great circles of
   4.91 m² and two ±40° parallels of 1.44 m², 6.35 m² × 25 mm × 1190 kg/m³; main's 160 kg at 1 m is sheet bought, offcut
   included): it hangs from the slab on a rated
-  fixing, not from the fir deck, and needs an engineer.
+  fixing, not from the fir deck, and needs an engineer. Cast acrylic burns, and CFC §807 may class it as a hanging
+  decoration (a flame test, at most 10 % of the ceiling): the first question for SFFD.
 - **Over a table, not a walkway:** its foot is 1.85 m above the floor, which is fine over a table and its banquette,
   not over the aisle.
 
