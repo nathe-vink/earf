@@ -6,7 +6,9 @@ colour, no core. The same 1.25 m, place, heading, sheet and light; round 39's ha
 
     python3 spinoffs/barkhorn/planet/r41/r41_colour.py [--edge]   # writes studio/shots/barkhorn/planet41/door-mother-colour.json
 
-`--edge` adds round 40's edge light (r40/r40_edge.EDGE), only if the colours do not read without it.
+`--p2` is the second pass (both p1 critics, converged: the rims read as neon tubes and the coloured shadow was the
+brightest surface): rim glow 0.06, the globe's hard spot 100 W and narrower (cone 20 deg), nothing else; it writes
+door-mother-colour-p2.json. `--edge` adds round 40's edge light (r40/r40_edge.EDGE), only if the colours do not read without it.
 """
 import json, os, sys
 
@@ -23,14 +25,19 @@ def main():
     m = next(p for p in s['set']['props'] if p.get('fn') == 'mother')
     m.pop('tint', None)
     m.update(COLOUR)
+    out = OUT
+    if '--p2' in sys.argv:
+        m['rim'] = 0.06
+        s['lights']['mother-spot'].update(power_w=100.0, cone_deg=20.0)
+        out = OUT.replace('.json', '-p2.json')
     if '--edge' in sys.argv:
         sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'r40'))
         from r40_edge import EDGE
         s['lights']['mother-edge'] = dict(EDGE)
     s['title'] = s['title'].replace('(Mother EARF)', "(Mother EARF in the site's multicolour)").replace('(round 39)', '(round 41)')
-    os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    json.dump(s, open(OUT, 'w'), indent=1)
-    print(OUT)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    json.dump(s, open(out, 'w'), indent=1)
+    print(out)
 
 
 if __name__ == '__main__':
