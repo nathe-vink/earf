@@ -1,0 +1,78 @@
+{
+ "shot": "studio/shots/barkhorn/element31/smoke_e12r-portrait.json",
+ "image": "renders/2026-10-18/barkhorn/element31/smoke_e12r_p19-portrait.png",
+ "seconds": {
+  "build": 104.8,
+  "render": 414.3
+ },
+ "samples": 128,
+ "size": [
+  1600,
+  2000
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "strips": 4,
+ "strip_seconds": [
+  519.8,
+  631.0,
+  520.9,
+  496.7
+ ],
+ "crop": {
+  "rows": [
+   968,
+   2000
+  ],
+  "seconds": {
+   "build": 96.4,
+   "render": 2079.0
+  }
+ },
+ "finish": {
+  "white_in": 240,
+  "white_out": 240,
+  "peak": 251.0,
+  "contrast": 0.06,
+  "clarity": 0.04,
+  "sharpen": 0.25,
+  "sharpen_px": 0.6,
+  "dream": {
+   "bloom": 0.75,
+   "bloom_px": 110,
+   "bloom_threshold": 0.6,
+   "saturation": 0.0,
+   "lift": 0.0,
+   "lift_color": "#000000",
+   "vignette": 0.25,
+   "haze": {
+    "box": [
+     0.34,
+     0.15,
+     0.66,
+     0.6
+    ],
+    "px": 9.0,
+    "scale": 4.5,
+    "exclude": [
+     [
+      0.4,
+      0.54,
+      0.61,
+      0.79
+     ]
+    ]
+   }
+  },
+  "grain": [
+   3.5,
+   1.0
+  ],
+  "gain": 1.0
+ },
+ "note": "the top 4 strips rendered by haze_b_strips (no rubble in them), the rest in one crop in a single process (the rubble is one build), feathered across their shared rows and finished once"
+}

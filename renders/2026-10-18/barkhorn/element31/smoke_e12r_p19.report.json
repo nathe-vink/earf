@@ -2,7 +2,8 @@
  "shot": "studio/shots/barkhorn/element31/smoke_e12r.json",
  "image": "renders/2026-10-18/barkhorn/element31/smoke_e12r_p19.png",
  "seconds": {
-  "render_total": 5648.7
+  "build": 83.9,
+  "render": 402.2
  },
  "samples": 128,
  "size": [
@@ -15,17 +16,23 @@
  "glints": [],
  "sun_aim": null,
  "flags_crossing_set": [],
- "strips": 8,
+ "strips": 4,
  "strip_seconds": [
   486.7,
   516.5,
   621.0,
-  394.4,
-  555.5,
-  1316.1,
-  1061.6,
-  696.9
+  394.4
  ],
+ "crop": {
+  "rows": [
+   768,
+   1600
+  ],
+  "seconds": {
+   "build": 126.2,
+   "render": 3354.6
+  }
+ },
  "finish": {
   "white_in": 240,
   "white_out": 240,
@@ -67,5 +74,5 @@
   ],
   "gain": 1.0
  },
- "note": "rendered in horizontal strips (resumable across container restarts), stitched raw, finished once"
+ "note": "the top 4 strips rendered by haze_b_strips (no rubble in them), the rest in one crop in a single process (the rubble is one build), feathered across their shared rows and finished once"
 }
