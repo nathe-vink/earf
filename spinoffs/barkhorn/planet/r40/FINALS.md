@@ -44,3 +44,12 @@ The critics stopped naming these:
 - the hard stool-shadow fan from the street lamps (the street lamps are off in the interiors, the counter strip down);
 - the fir as one texture (`kit40.boards`: every board its own stretch of the scan and its own tone);
 - the colour noise (`photo.py`: chroma noise reduction before the lens step).
+
+## Round 41 (the owner: empty rooms; the globe in the site's multicolour)
+
+No figures from now on; the heroes stay round 39's empty rooms. Mother EARF in the site's multicolour, over round 39's
+empty door frame (`r41/r41_colour.py`, proof `renders/2026-10-22/barkhorn/planet41/proofs/door-mother-colour.png`):
+critics 5.0 / 5.5, read test a render, duel against round 39's Smoke final 0–2 (information only). Below the
+full-size bar (both at least 5.5, nothing new wrong): both critics name the rims as neon tubes and the globe's coloured
+shadow as the brightest surface, and both ask for the rim glow at 0.06 and the globe's spot at 85 to 110 W, narrower.
+The door hero stays round 39's finals/door-mother.png (Smoke) until a multicolour frame passes. Log in `r41/critic/`.
