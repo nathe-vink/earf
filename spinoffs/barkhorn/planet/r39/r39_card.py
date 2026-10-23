@@ -59,7 +59,9 @@ def main():
                   f"{sp.get('position')}, throwing its shadow on the concrete wall")
         else:
             s += (f"\n- Mother EARF: centre {m['centre']}, {m['size']} m across, rim glow {m['rim']} (parallels x{m['rim_par']}), "
-                  f"core glow {m['core_glow']}, core lamp {m['core_w']} W")
+                  + (f"core glow {m['core_glow']}, core lamp {m['core_w']} W" if m.get('core', 0.13) > 0 else 'no core')
+                  + (f"; hard spot {sh['lights']['mother-spot']['power_w']} W, cone {sh['lights']['mother-spot']['cone_deg']} deg, "
+                     f"from {sh['lights']['mother-spot']['position']}" if 'mother-spot' in sh['lights'] else ''))
     txt = (f"# Card: Planet EARF, {sh['title']}\n\n**What the frame is for:** {FOR[key]}Configuration: Smoke (the house "
            f"configuration).{MOTHER if m else ''}\n\n{C.CONTEXT}\n\n{C.FIXED}\n\n{C.MAY}\n\n**Settings now:**\n\n{s}\n")
     open(out, 'w').write(txt)
