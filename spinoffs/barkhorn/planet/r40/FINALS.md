@@ -53,3 +53,9 @@ critics 5.0 / 5.5, read test a render, duel against round 39's Smoke final 0–2
 full-size bar (both at least 5.5, nothing new wrong): both critics name the rims as neon tubes and the globe's coloured
 shadow as the brightest surface, and both ask for the rim glow at 0.06 and the globe's spot at 85 to 110 W, narrower.
 The door hero stays round 39's finals/door-mother.png (Smoke) until a multicolour frame passes. Log in `r41/critic/`.
+
+Round 41 p2 (the coordinator: exactly the critics' converged fix, one more pass): rim glow 0.06, the globe's spot
+100 W at 20 deg (`proofs-p2/door-mother-colour-p2.png`). Critics 5.0 / 5.5, read test a render, duel 0–2 against
+round 39's Smoke (information). The wall's coloured shadow is no longer the brightest surface (142 -> 108), but the
+rims still read as neon and the near floor's pool turned out to be the Domes', not the globe's. Gate not met; stopped
+as briefed. The door hero stays round 39's Smoke final; the README's hero list is unchanged.

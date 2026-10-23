@@ -19,3 +19,22 @@ Read test: a render ("a large neon-ringed sphere"; "surfaces too clean, furnitur
 
 The full-size condition (both critics at least round 39's 5.5, nothing new wrong) is not met: critic a 5.0, and both
 name two new faults, the neon read of the rims and the coloured shadow as the brightest surface. No 2400 render.
+
+## p2 (the coordinator: "exactly as both critics converged"; one more pass, no third)
+
+Only three numbers changed (`r41_colour.py --p2`): rim glow 0.14 -> 0.06; the globe's hard spot 140 W, 30 deg -> 100 W,
+20 deg. Measured on the proof: the coloured shadow on the wall [960,90,1060,470] median 142 -> 108.5 (no longer the
+brightest large surface); the globe [610,0,880,285] p95 201 -> 165; the near floor [200,600,500,800] unchanged at 105,
+so that pool is not the globe's spot (both p2 critics now place it on the Domes' downlights, not in this brief).
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| p2 | door-mother, multicolour | 5.0 | 5.5 | 5.25 | 6.8, 7.0 | the rims still "neon hoops", the blue ring clips 1.5 %; the disc faces invisible; the near floor's hard white pool (the Domes); the altar dim; Orbs white discs; both ask rim glow 0.02 to 0.025 with the spot raised again so the faces carry the colour |
+
+Read test: a render ("a colourful ring-sphere light sculpture"; "surfaces too clean, lighting too even").
+
+| frame | ab (image 1 = round 39) | ba | result |
+|---|---|---|---|
+| p2 against round 39's finals/door-mother (Smoke) | r39, clear | r39, clear | round 39 2–0 (information only) |
+
+Gate not met (critic a 5.0 < 5.5; the rims' neon read persists). Stopped, as briefed: no 2400 render, no third pass.
