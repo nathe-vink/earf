@@ -59,3 +59,12 @@ Round 41 p2 (the coordinator: exactly the critics' converged fix, one more pass)
 round 39's Smoke (information). The wall's coloured shadow is no longer the brightest surface (142 -> 108), but the
 rims still read as neon and the near floor's pool turned out to be the Domes', not the globe's. Gate not met; stopped
 as briefed. The door hero stays round 39's Smoke final; the README's hero list is unchanged.
+
+Round 41 p3 (the coordinator, an exception: the p2 critics' converged change): rim glow 0.025, the globe's spot 135 W
+at 20 deg. Critics 5.5 / 5.5 (if fixed 7.3 / 7.0), read test a render, duel 0–2 against round 39's Smoke
+(information). The gate is met (both at round 39's 5.5, no fault new to the pass), so the 2400 final was rendered:
+`renders/2026-10-22/barkhorn/planet41/finals/door-mother-colour-p3.png` (2400 x 1600, 192 samples, round 39's lens
+step), with `door-mother-colour-p3-2400.jpg` and `-1200.jpg` (quality 88). **It is the door hero now**; the README's
+"The pictures" lists every hero and detail. What still holds it under 7, by both critics: the rims read as LED hoops
+(both ask rim 0.010 to 0.012 with the spot at 220 W), the near floor's pool from the Domes, the flat concrete, the
+repeated seats, the hot altar batts.
