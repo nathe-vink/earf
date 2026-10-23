@@ -8,7 +8,9 @@ colour, no core. The same 1.25 m, place, heading, sheet and light; round 39's ha
 
 `--p2` is the second pass (both p1 critics, converged: the rims read as neon tubes and the coloured shadow was the
 brightest surface): rim glow 0.06, the globe's hard spot 100 W and narrower (cone 20 deg), nothing else; it writes
-door-mother-colour-p2.json. `--edge` adds round 40's edge light (r40/r40_edge.EDGE), only if the colours do not read without it.
+door-mother-colour-p2.json. `--p3` is the last pass (both p2 critics: the rims still neon, the blue ring clipping, the
+faces dark): rim glow 0.025 and the spot raised again, 135 W at 20 deg, so the faces carry the colour.
+`--edge` adds round 40's edge light (r40/r40_edge.EDGE), only if the colours do not read without it.
 """
 import json, os, sys
 
@@ -30,6 +32,10 @@ def main():
         m['rim'] = 0.06
         s['lights']['mother-spot'].update(power_w=100.0, cone_deg=20.0)
         out = OUT.replace('.json', '-p2.json')
+    if '--p3' in sys.argv:
+        m['rim'] = 0.025
+        s['lights']['mother-spot'].update(power_w=135.0, cone_deg=20.0)
+        out = OUT.replace('.json', '-p3.json')
     if '--edge' in sys.argv:
         sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'r40'))
         from r40_edge import EDGE
