@@ -40,9 +40,12 @@ if ! "$BPY_PY" -c "import numpy, sys; sys.exit(0 if numpy.__version__.startswith
   log "restoring numpy 1 for bpy (something installed numpy 2 on $BPY_PY)"
   "${BPIP[@]}" "numpy>=1.26,<2.0"
 fi
-if ! "$BPY_PY" -c "import PIL, scipy" >/dev/null 2>&1; then
+if ! "$BPY_PY" -c "from PIL import Image; import scipy.ndimage" >/dev/null 2>&1; then
   log "pip install Pillow and SciPy on $BPY_PY (the renderer's finish)"
-  "${BPIP[@]}" "pillow" "scipy>=1.11,<1.14" "numpy>=1.26,<2.0"
+  "${BPIP[@]}" "scipy>=1.11,<1.14" "numpy>=1.26,<2.0"
+  # a distribution's own Pillow (Debian's, in /usr/lib/python3/dist-packages) satisfies pip and `import PIL`, but is
+  # built for another Python, so `from PIL import Image` fails (a render helper, 2026-10-23): install over it
+  "${BPIP[@]}" --ignore-installed "pillow"
 fi
 
 # 3. The CAD venv.
