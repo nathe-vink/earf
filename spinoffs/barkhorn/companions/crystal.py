@@ -499,9 +499,15 @@ TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ri
 # its inner face lights the bowl from its bottom, up; its heat goes up a heat pipe in the rod (gravity returns the
 # fluid, as it should with the heat at the bottom) to fins on the rod above the lid, in room air. The shade is the same
 # as North's: it fits on from inside, by the collar's second set of slots.
-S = dict(N, led=(60.0, 18.0, 66.0),               # the LED ring board: OD, ID, its face (cover frame)
-         core=(62.0, 66.0, 100.0),               # the hub core: OD, z0 (the board on its face), z1 (flush with the collar)
-         ring=(62.0, 78.0, 64.5, 78.0),          # South's PEEK pin carrier, at the collar's inner end
+S = dict(N, led=(60.0, 18.0, 48.0),               # the LED ring board: OD, ID, its face (cover frame)
+         # round 37 (the owner: "South ring: remove it: a shade made for South alone"): South's own shade. The shell
+         # and the opal liner are closed; only the inner tinted skin has a crown hole, set 6 in from the liner (was 1)
+         # so the collar's flange fits between them, behind the opal
+         skin_gap=6.0,
+         collar=(96.0, 82.0, 48.0, 71.0),        # OD, ID, z inner end (the entry, toward the mouth), z at the flange
+         south_pins=(54.0, 0.0),                 # the pins' height and the slots' angle (one set: South's alone)
+         core=(62.0, 48.0, 74.0),                # the hub core: OD, z0 (the board on its face), z1 (behind the opal)
+         ring=(62.0, 78.0, 48.5, 62.0),          # the PEEK pin carrier
          rod=(16.0, 12.0),                       # aluminium tube, OD and ID, black anodised, the heat pipe inside it
          pipe=8.0,                               # the heat pipe: copper-water, 8 across
          sink=(90.0, -120.0, -80.0, 18, 1.8),    # the fins on the rod, above the lid: OD, z0, z1 (cover frame), count, t
@@ -514,6 +520,70 @@ def _flip(solid):
     """The cover's frame to the bowl's: turned over about x, the rim at z 0 and the bowl below it."""
     from build123d import Rot
     return Rot(180, 0, 0) * solid
+
+
+def south_cover_parts(p=S):
+    """Round 37: South's own shade, nothing under it. From outside: a tinted shell and an opal liner, both closed;
+    then, 6 in, a tinted skin with the crown hole. The collar's flange sits on the skin's outside, between it and the
+    opal, so from below the opal hides it (a soft shade at most, never an edge); a clamp ring screws down on the skin's
+    inside, on silicone both sides. The skin carries the shade on metal (mechanically, as round 35's L1 asks); the shell
+    and the liner are welded to the skin with polymerising acrylic cement at the rim and round the crown, acrylic to
+    acrylic, as an aquarium's seams are (no metal-to-acrylic bond carries load)."""
+    R, t = p['R'], p['shell']
+    r_si = R - t
+    r_l = r_si - p['gap']                        # the liner's outside
+    r_k = r_l - p['liner'] - p['skin_gap']       # the skin's outside
+    r_ki = r_k - p['skin']                       # the skin's inside
+    co, ci, cz0, cz1 = p['collar']
+    fr = p['flange_r']
+    hole = cyl('z', (0, 0), co + 0.4, 0, R + 5)
+    shell = ball(R, t, (0, 0, 0), cut_below=0)
+    liner = ball(r_l, p['liner'], (0, 0, 0), cut_below=4)
+    skin = ball(r_k, p['skin'], (0, 0, 0), cut_below=0) - hole
+    rim = cyl('z', (0, 0), 2 * (r_si - 0.2), 0, 3.8) - cyl('z', (0, 0), 2 * (r_k + 0.2), -1, 5)
+    # the crown weld: a ring of tinted acrylic filling the gap between the skin and the liner round the flange (the
+    # liner, the ring and the skin welded as one), so the outer layers hang on acrylic joints over 5,000 mm2
+    weld = _sphere_band(r_l - p['liner'] - 0.01, r_k + 0.01, fr + 2, fr + 16)
+    tube = cyl('z', (0, 0), co, cz0, cz1) - cyl('z', (0, 0), ci, cz0 - 1, cz1 + 1)
+    flange = _sphere_band(r_k + 4.5, r_k + 1.0, ci / 2, fr)
+    collar = tube + flange
+    pz, w, rs = p['pin_z'], 5.0, ci / 2 + 4.5
+    zs, off = p['south_pins']
+    for a in (off, off + 120, off + 240):
+        collar = collar - at(a, box(ci / 2 - 2, -w / 2, cz0 - 1, rs, w / 2, zs + 7.5))                    # the entry
+        collar = collar - sector(ci / 2 - 2, rs, a, a + p['turn'], zs + 2.5, zs + 7.5)                     # the turn
+        collar = collar - at(a + p['turn'], box(ci / 2 - 2, -w / 2, zs - 2.5, rs, w / 2, zs + 7.5))        # the notch
+    gasket_out = _sphere_band(r_k + 1.0, r_k, co / 2 + 0.2, fr)
+    gasket_in = _sphere_band(r_ki, r_ki - 1.0, co / 2 + 0.2, fr)
+    clamp = _sphere_band(r_ki - 1.0, r_ki - 6.0, co / 2, fr)
+    note_formed = ('drape-formed from cast sheet over an aluminium mould, trimmed and polished; the prototypes are formed on '
+                   'the production moulds')
+    return [
+        Part('shell', shell, Machined('acrylic-formed', 'formed', setup_usd=1500.0), finish='body', group='cover',
+             notes=['South\'s own: the outside, closed at the crown (North\'s shell mould, untrimmed there): 10 mm tinted '
+                    'cast sheet ' + note_formed]),
+        Part('liner', liner, Machined('acrylic-opal-formed', 'formed', setup_usd=1200.0), finish='liner', group='cover',
+             inside=True,
+             notes=['3 mm opal, closed at the crown (North\'s liner mould): it hides the collar\'s flange from below; '
+                    + note_formed]),
+        Part('skin', skin, Machined('acrylic-formed', 'formed', setup_usd=1200.0), finish='body', group='cover',
+             notes=['South\'s own mould (6 in from the liner): 3 mm tinted cast sheet, the crown hole for the collar; it '
+                    'carries the shade on the collar\'s flange and clamp ring']),
+        Part('weld', weld, Machined('cast-acrylic', 'lathe'), finish='body', group='cover', inside=True,
+             notes=['a tinted acrylic ring turned to fill the gap round the flange: the skin, this ring and the liner '
+                    'welded with polymerising acrylic cement (Acrifix 192 kind); the shell and the liner welded at the rim']),
+        Part('rim', rim, Machined('cast-acrylic', 'lathe'), finish='body', group='cover',
+             notes=['closes the three layers at the mouth, welded and polished with them; a press-in ePTFE vent in its '
+                    'face']),
+        Part('collar', collar, Machined('aluminium', 'lathe'), finish='anodised', group='cover', inside=True,
+             notes=['aluminium 6061, black anodised: its flange on the skin\'s outside, behind the opal (unseen); its '
+                    'tube inside the bowl, with three L-slots open at the inner end for South\'s pins']),
+        Part('clamp', clamp, Machined('aluminium', 'lathe'), finish='anodised', group='cover', inside=True,
+             notes=['aluminium, black anodised: screwed onto the collar inside the bowl, on silicone, clamping the skin']),
+        Part('gaskets', gasket_in + gasket_out, Bought('south-gaskets'), finish='silicone', group='cover', inside=True),
+        Part('vent', None, Bought('hemi-vent')),
+        Part('welding', None, Bought('south-weld')),
+    ]
 
 
 def south_parts(p=S):
@@ -547,11 +617,10 @@ def south_parts(p=S):
     cnd, cnh = p['canopy']
     canopy = cyl('z', (0, 0), cnd, zc - cnh, zc) - cyl('z', (0, 0), cnd - 6, zc - cnh + 3, zc + 1)
     driver = box(-42, -28.5, zc - 6 - 29.5, 42, 28.5, zc - 6)
-    parts = cover_parts(p) + [
+    parts = south_cover_parts(p) + [
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
-             notes=['aluminium 6061, black anodised: the core, turned from bar, inside the collar; its outer face a cap '
-                    'flush with the collar\'s end, the only fixture part seen under the bowl; the LED ring on its inner '
-                    'face; the rod in a 20 deep socket, the heat pipe\'s evaporator in its bore on thermal paste']),
+             notes=['aluminium 6061, black anodised: the core, turned from bar, inside the collar; its outer face behind '
+                    'the opal, unseen; the LED ring on its inner face; the rod in a 20 deep socket, the heat pipe\'s evaporator in its bore on thermal paste']),
         Part('ring', ring, Machined('peek', 'lathe'), finish='trim', group='fixture', inside=True,
              notes=['PEEK, unfilled: the thermal break, at the collar\'s inner end; it carries the pins (into the '
                     'collar\'s second set of slots) and the detent']),
@@ -582,10 +651,10 @@ def south_parts(p=S):
 
 
 NOTES_SOUTH = [
-    'The same shades as North, turned over: a bowl, opening up, on a slim rod from the ceiling. Nothing hangs below '
-    'the bowl (the owner, round 36): under it only the shade\'s own collar end and clamp ring and the hub\'s flush black '
-    'cap show. Any shade fits either fixture: North\'s pins enter the collar from its outer end, South\'s from its inner '
-    'end, each into its own set of slots; the shade\'s weight holds it either way.',
+    'A bowl, opening up, on a slim rod from the ceiling, with nothing below it (the owner, rounds 36 and 37): its own '
+    'shade, closed underneath. Outside a tinted shell and an opal liner, both closed; inside them a tinted skin that '
+    'carries the shade on the collar, whose flange the opal hides. North\'s and South\'s shades no longer swap (the '
+    'owner accepts it).',
     'The light: a ring of mid-power LEDs on the hub\'s inner face at the bottom of the bowl, facing up. About 57 % of '
     'it leaves through the mouth and the frosted lid as a soft wash on the ceiling; the rest falls on the bowl\'s wall, '
     'which glows in its tint. Twice North\'s light: about 1,150 lm.',
@@ -596,5 +665,5 @@ NOTES_SOUTH = [
     'Hang with the rim 450 to 600 below a ceiling of 2.6 to 3.2 m, so the wash spreads; not over a table (its light is '
     'on the ceiling).',
 ]
-TOUCHING_SOUTH = TOUCHING_DOME + [('rod', 'hub'), ('led', 'hub'), ('rod', 'led'), ('rod', 'lid'), ('pipe', 'rod'),
+TOUCHING_SOUTH = TOUCHING_DOME + [('weld', 'skin'), ('weld', 'liner'), ('weld', 'collar'), ('rod', 'hub'), ('led', 'hub'), ('rod', 'led'), ('rod', 'lid'), ('pipe', 'rod'),
                                   ('pipe', 'hub'), ('fins', 'rod')]

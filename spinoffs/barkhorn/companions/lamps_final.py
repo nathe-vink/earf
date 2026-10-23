@@ -95,6 +95,16 @@ def south_hero():
     return hero_light(s, [-0.2, 1.4, 1.9], [0.55, 2.45, 2.1])
 
 
+def south_under():
+    """Round 37 (the owner: "South ring: remove it"): South from close below, so the closed underside shows clean."""
+    s = south_hero()
+    s['title'] = 'Hemisphere South in Ember, from below: nothing under the bowl'
+    s['size'] = [1600, 1200]
+    s['camera'] = {'position': [0.30, 2.08, 1.72], 'target': [0.55, 2.45, 2.14], 'lens_mm': 50, 'level': False,
+                   'fstop': 5.6, 'focus': [0.55, 2.45, 2.12]}
+    return s
+
+
 def north_south():
     """North over the table, South over the sideboard, both Ember, from the room's front corner: one set of shades,
     both ways up."""
@@ -160,7 +170,8 @@ def core_under():
 
 
 # core_under is kept but not rendered: in a test the black hatch on the black base did not read (the drawings show it)
-FRAMES = {'lamp-south-hero': south_hero, 'lamps-north-south': north_south, 'lamp-core-hero': core_hero}
+FRAMES = {'lamp-south-hero': south_hero, 'lamps-north-south': north_south, 'lamp-core-hero': core_hero,
+          'lamp-south-under': south_under}
 
 
 def build():

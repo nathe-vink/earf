@@ -1380,3 +1380,58 @@ clashes). Everything that holds or feeds the light is now inside the bowl or abo
 
 The other site pictures were not rendered (round 35: the site keeps round 32f's).
 
+## Round 37: South's own shade, nothing below it
+
+The owner, 2026-10-22, on round 36's flush ring under the bowl: "South ring: remove it: a shade made for South alone".
+The owner accepts that North's and South's shades no longer swap.
+
+**The choice: close the shade's outside and carry it on the inside layer.**
+- **Why.** Tinted acrylic hides nothing behind it: anything metal at the crown shows through it as a dark shape. Only
+  the opal does, so the hardware has to sit behind the opal.
+- **So, from outside in:**
+  - a tinted shell and an opal liner, both **closed** at the crown (formed on North's moulds, simply not cut there);
+  - a 6 mm air gap (was 1);
+  - a tinted skin with the crown hole, on a mould of its own.
+- **The mount.** The collar's flange sits on the skin's outside, between it and the opal, and a clamp ring screws down
+  on the skin's inside, on silicone both sides. From below the opal hides the flange; it shows at most as a soft
+  shade, never as an edge. From above the frosted lid hides it.
+- **How the layers are held.**
+  - The skin is carried by metal, mechanically, as round 35's review (L1) asks.
+  - The shell and the liner hang from the skin on acrylic-to-acrylic welds made with polymerising cement (Acrifix 192
+    kind): at the rim, and round the crown through a turned tinted weld ring, about 5,000 mm².
+  - These are joints of the same material, like an aquarium's seams, not the metal-to-acrylic bond the review flagged.
+    The stress is about 0.001 MPa against allowable values of a few MPa.
+  - Test plan: pull-test the first shades at 4 times their weight after 50 cycles of 25 to 60 °C **[UNTESTED]**.
+- **The other ways considered:**
+  - **A clamp moved inside, with the shell still holed:** the clamp would show through the tinted shell as a dark ring.
+  - **A deeper bowl to hide the collar:** it changes the shade's look, and the collar would still show through the
+    tint.
+  - **A cast one-piece shade with the collar embedded:** a new process (casting rather than forming), and aluminium
+    and acrylic expand at different rates (about 23 against 70 × 10⁻⁶ /K), a cracking risk at the insert.
+- **The heat path is round 36's.** The hub sits inside the collar, the LED ring on its inner face at the bottom of the
+  bowl, facing up, and an 8 mm heat pipe in the 16 mm rod carries the heat to the fins above the lid. The shade fits on
+  from inside: the hub's pins enter the collar's slots from the bowl's side.
+
+**The CAD and the parts list** (`crystal.south_cover_parts`, `out-hemisphere-south/`; 0 clashes; drawings EHS-001 to
+EHS-011, rev A):
+- **New parts:** the closed shell and liner, South's skin, the crown weld ring (`weld`), South's collar (one set of
+  slots, at its inner end), the inner clamp ring, `south-gaskets` and `south-weld` (the welding and the pull test).
+- **The one-off price on production tooling:** $4,651, against round 36's $4,561 (+$90). Of that, $3,900 is moulds:
+  the shell and liner moulds are North's, and the skin's is South's own (+$1,200 tooling for the line).
+- **A run of 200:** about $225 in parts, against about $210 (the weld ring, the welding, the larger closed layers),
+  plus $6 a shade for the skin's mould. About $275 landed **[ESTIMATE]**.
+- **Weight:** the shade about 1.2 kg (was 1.1); hanging about 1.9 kg (was 1.8).
+- **Heat** (`hemisphere_thermal.py`), at 1,150 lm in a 35 °C room: the hub 47 °C and the LED junction 53 °C, as
+  before. The collar and the acrylic beside it are now 43 °C (was 40), because the collar is shut in behind the opal and
+  loses heat only through the acrylic. That is within the 50 °C we hold acrylic to. At 2,200 lm it would be 48 °C, at
+  the limit.
+
+**The pictures** (the same views as round 36, and a close view from below):
+- `renders/2026-10-22/barkhorn/lamps-final/lamp-south-hero.png`
+- `renders/2026-10-22/barkhorn/lamps-final/lamps-north-south.png`
+- `renders/2026-10-22/barkhorn/lamps-final/lamp-south-under.png` (new: from close below)
+- `renders/2026-10-22/barkhorn/lamps-pdp-r35/lamp-south-ember.png`
+
+The bowl's glow in the renders is the liner's emission, as in every lamp frame here, so they don't show the soft shade
+the hub would cast on the opal from inside. The first sample will show how much of it there is **[UNCONFIRMED]**.
+

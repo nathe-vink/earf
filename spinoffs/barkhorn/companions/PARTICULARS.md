@@ -24,19 +24,19 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 | Shades | Swap by hand, no tools, with a quarter-turn bayonet and a detent. The same shades fit Hemisphere South (each fixture has its own set of slots in the collar). The shade carries no electrical parts. It is clamped between the collar's flange and a ring on silicone, so a failed bond can't drop it |
 | Materials | Shade: three formed layers of cast acrylic (a 9 mm tinted shell, a 3 mm opal liner, a 3 mm tinted skin), polished, vented at the rim, with a black anodised aluminium collar and clamp ring. Hub, fins and pins: black anodised aluminium. PEEK ring. Canopy and cap: black cast acrylic, polished. Black textile cord |
 | Tints | Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke, each cast to match its speaker's colour when lit (README, round 32f) |
-| Sold separately | Shades, in each tint |
+| Sold separately | Shades, in each tint (North's; South's are its own) |
 
 ## Hemisphere South, the bowl (new)
 
 | | |
 |---|---|
-| Size | The same 200 mm shade turned opening up, a bowl 100 deep, and **nothing below it** (the owner, 2026-10-22): under the bowl only the shade's own collar end and clamp ring and the hub's flush black cap. A frosted lid 196 across lies on its rim. A 16 mm black aluminium rod rises 450 to the canopy (150 × 50), with black fins 90 across and 40 tall on it, 80 above the lid |
-| Weight | Shade about 1.1 kg; fixture with lid, rod and fins about 0.7 kg; hanging about 1.8 kg (was 2.0) **[UNCONFIRMED: computed]** |
+| Size | A bowl 200 mm across and 100 deep, opening up, with **nothing below it** (the owner, 2026-10-22: its own shade, closed underneath; no collar, ring or cap shows from below or the side). A frosted lid 196 across lies on its rim. A 16 mm black aluminium rod rises 450 to the canopy (150 × 50), with black fins 90 across and 40 tall on it, 80 above the lid |
+| Weight | Shade about 1.2 kg (South's own, closed: its shell and liner whole, a welded crown ring); fixture with lid, rod and fins about 0.65 kg; hanging about 1.9 kg **[UNCONFIRMED: computed]** |
 | Light | A ring of 2700 K, CRI 90 mid-power LEDs on the hub's inner face at the bottom of the bowl, facing up. Twice North's light, because light bounced off a ceiling needs about twice the lumens to feel as bright: **about 1,150 lm** (about 7.7 W). About 57 % leaves through the mouth and lid as a wash on the ceiling; the rest lights the bowl, which glows in its tint **[UNCONFIRMED: board to make; estimate]** |
 | Dimming | Phase-cut (TRIAC), with a Mean Well PCD-class driver in the canopy **[UNCONFIRMED: model to match the board]**; 0-10 V as the bar option |
-| Heat | Up a copper heat pipe in the rod to fins above the lid, in room air, so their warm air rises to the ceiling, not past the acrylic. The PEEK ring keeps the hub off the collar. Estimated at 1,150 lm in a 35 °C room: hub 47 °C, LED junction 53 °C, collar and the acrylic next to it 40 °C **[UNCONFIRMED: estimate]** |
+| Heat | Up a copper heat pipe in the rod to fins above the lid, in room air, so their warm air rises to the ceiling, not past the acrylic. The PEEK ring keeps the hub off the collar, which is now shut in behind the opal. Estimated at 1,150 lm in a 35 °C room: hub 47 °C, LED junction 53 °C, the collar and the acrylic beside it 43 °C (limit 50) **[UNCONFIRMED: estimate]** |
 | Hanging | Rim 450 to 600 below a ceiling 2.6 to 3.2 m high, so the wash spreads. Its light goes to the ceiling, not to a table |
-| Shades | The same shades as North. South's pins enter the collar from its inner end (the hub sits inside the bowl), North's from its outer end, each into its own set of slots; the shade's weight holds it either way |
+| Shades | South's own (round 37): a tinted shell and an opal liner, both closed, over a tinted skin that carries the shade on the collar; the collar's flange sits behind the opal, unseen. The skin is held on metal; the shell and liner are welded to it acrylic to acrylic (polymerising cement, as an aquarium's seams). North's and South's shades no longer swap. The shade fits on from inside, onto the hub, with a quarter-turn bayonet and a detent |
 | Dust | A 3 mm frosted acrylic lid on the rim, on three small silicone bumpers. It lifts up the rod for wiping |
 | Mains | As North's: the driver in the canopy, Class 2 DC down the rod. To be listed to UL 1598 **[NOT YET LISTED]** |
 

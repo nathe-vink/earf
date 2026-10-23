@@ -88,7 +88,9 @@ def table():
                 r = solve(P, lm, eta, sink, Ta, R_core=0.2 if title == 'North' else 0.85)
                 if title == 'South':          # the hub sits above the fins' temperature by its heat over the pipe
                     r['Th'] += r['Q'] * 0.6
-                    r['Tcol'] = Ta + (r['Th'] - Ta) * 6.9 / (9.2 + 6.9)
+                    # round 37: the collar is shut in between the skin and the opal, so it loses heat only through
+                    # about 16 mm of acrylic and the bowl's air: about 15 K/W to the room (6.9 open)
+                    r['Tcol'] = Ta + (r['Th'] - Ta) * 15.0 / (9.2 + 15.0)
                 print(f"| {title}, {k} | {Ta:.0f} C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.0f} C | "
                       f"{r['Tj']:.0f} C | {r['Tcol']:.0f} C |")
     # the black bore, for the record (the hub as it was, at 9.1 W, with fins)
