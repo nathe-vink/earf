@@ -38,3 +38,22 @@ Read test: a render ("a colourful ring-sphere light sculpture"; "surfaces too cl
 | p2 against round 39's finals/door-mother (Smoke) | r39, clear | r39, clear | round 39 2–0 (information only) |
 
 Gate not met (critic a 5.0 < 5.5; the rims' neon read persists). Stopped, as briefed: no 2400 render, no third pass.
+
+## p3 (the coordinator, an exception to the two-pass limit: both p2 critics' converged change, nothing else)
+
+`r41_colour.py --p3`: rim glow 0.025, the globe's hard spot 135 W at 20 deg. Measured: the globe [610,0,880,285]
+p95 165 -> 117; the blue ring [700,100,740,280] clip 1.5 % -> 0.01 %; the wall's coloured shadow median 110.
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| p3 | door-mother, multicolour | 5.5 | 5.5 | 5.5 | 7.3, 7.0 | the rims still read as LED hoops, the faces dark (both ask rim 0.010 to 0.012 and the spot 220 W); the near floor (the Domes, left as briefed); flat concrete; repeated seats; the altar batts hot; the globe's top near the frame edge |
+
+Read test: a render ("a sphere of coloured neon rings").
+
+| frame | ab (image 1 = round 39) | ba | result |
+|---|---|---|---|
+| p3 against round 39's finals/door-mother (Smoke) | r39, clear | r39, clear | round 39 2–0 (information only) |
+
+Gate met: both critics 5.5 (round 39's 5.5), and no fault new to this pass (every one is named in p1 or p2: the neon
+read, the floor, the concrete, the seats, the altar, the globe near the top edge). So the 2400 final is rendered from
+the p3 shot (192 samples, round 39's lens step), with 2400 and 1200 px JPEGs.
