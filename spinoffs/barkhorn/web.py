@@ -72,8 +72,9 @@ ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a b
 ELEMENT['amber'] = 'acid_b'   # acid rain on black lava beat the acid spring at Dallol in a blind duel, 2 to 1 (6.3 to 5.4)
 ELEMENT['ice'] = 'fog_b'      # the headland above the fog at dawn beat the summit above a sea of cloud in a blind duel, 3 to 0 (6.7 to 4.7)
 ELEMENT['green'] = 'poison_g5'   # the owner (2026-10-22): "Poison: put the deadly green one live" - death caps and a deer's bones (G5 p4)
-ELEMENT['black'] = 'smoke_e10'   # the owner (2026-10-22): "Bridge: put the bigger bridge pass live meanwhile" - the overpass
-                                 # at blue hour, a burnt-out car still burning behind it (E10; E9 p5 before it)
+ELEMENT['black'] = 'smoke_e12r_p19'   # the owner (2026-10-22): "render p19's finals and put the meteor on the site" - the
+                                      # speaker come down like a meteor on the overpass, the fire behind it and its trench
+                                      # smouldering (E12r p19; E10's bridge before it, E9 p5 before that)
 PLACES = {  # where each concept stands: the speaker page leads with it ("Ember on a lava field at blue hour.")
     'ember': 'on a lava field at blue hour, the crust cracked to its glow',
     'dust': 'on rippled sand in the Southwest at golden hour',
@@ -89,6 +90,7 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'smoke_e6': 'on a cracked salt flat, black smoke climbing from the horizon',
     'smoke_e9': 'on a city bridge at dusk, a wrecked car burning behind it',
     'smoke_e10': 'on a city overpass at blue hour, a burnt-out car still burning behind it',
+    'smoke_e12r_p19': 'on a city overpass at dusk, come down like a meteor, the road torn open and burning behind it',
 }
 LP = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'lamps-pdp')   # each lamp in each colour (lamps_pdp.py)
 TTR = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'turntable')  # the record player, round 34's finals
