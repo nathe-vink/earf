@@ -182,12 +182,25 @@ def _plate(bm, rnd, w, d, t, rough=0.0):
     for i in range(k):
         sides.append(bm.faces.new((top[i], bot[i], bot[(i + 1) % k], top[(i + 1) % k])))
     # crumbled, not cut: the broken edges subdivided and pushed in and out, the aggregate showing through
-    res = bmesh.ops.subdivide_edges(bm, edges=list({e for f in sides for e in f.edges}), cuts=2, use_grid_fill=False)
+    res = bmesh.ops.subdivide_edges(bm, edges=_edges(sides), cuts=2, use_grid_fill=False)
     sc = max(w, d)
     for v in [g for g in res['geom'] if isinstance(g, bmesh.types.BMVert)]:
         v.co.x += sc * 0.08 * rnd.uniform(-1, 1); v.co.y += sc * 0.08 * rnd.uniform(-1, 1)
         v.co.z += t * 0.25 * rnd.uniform(-1, 1)
     return ft, fb, sides
+
+
+def _edges(faces):
+    """The faces' edges, each once, in the order the faces give them. A set of them iterates in the order of their memory
+    addresses, which differ from one process to the next, and the plates' jitter is drawn per new vertex in the order
+    the subdivision makes them: so each machine built its own rubble, and E12r p19's strips from different helpers
+    disagreed over it where they overlapped (ghosts in the stitched final's foreground)."""
+    seen, out = set(), []
+    for f in faces:
+        for e in f.edges:
+            if e not in seen:
+                seen.add(e); out.append(e)
+    return out
 
 
 def _rough_plate(bm, rnd, w, d, t, rough):
@@ -202,7 +215,7 @@ def _rough_plate(bm, rnd, w, d, t, rough):
     bot = [bm.verts.new((x * rnd.uniform(0.92, 1.04), y * rnd.uniform(0.92, 1.04), -t / 2)) for x, y in pts]
     ft = bm.faces.new(top); fb = bm.faces.new(bot[::-1])
     sides = [bm.faces.new((top[i], bot[i], bot[(i + 1) % k], top[(i + 1) % k])) for i in range(k)]
-    bmesh.ops.subdivide_edges(bm, edges=list({e for f in sides for e in f.edges}), cuts=3, use_grid_fill=True)
+    bmesh.ops.subdivide_edges(bm, edges=_edges(sides), cuts=3, use_grid_fill=True)
     bm.verts.ensure_lookup_table()
     new = [bm.verts[i] for i in range(v0, len(bm.verts))]
     sc = max(w, d)
