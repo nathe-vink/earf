@@ -313,11 +313,32 @@ anecdotal); this room sits at the top of that range because of its joinery, acou
 Mother EARF (in the acrylic line above; drop it if not chosen) is about $9,000 to $12,000: main's 1 m globe in 25 mm clear tints is costed at about $6,500
 one-off (round 33c), and sheet and polishing scale with area, so 1.3 m is about 1.7 times the sheet (est.).
 
+### The pictures (the current heroes and details)
+
+The owner, 2026-10-22: "Bar people: empty rooms, as round 39" and "Bar globe: the site's multicolour". Paths under
+`renders/2026-10-22/barkhorn/`.
+
+| frame | picture | from |
+|---|---|---|
+| hero: the room from the door, Mother EARF in the site's multicolour | `planet41/finals/door-mother-colour-p3.png` (2400 x 1600; also `-2400.jpg`, `-1200.jpg`) | round 41 p3 |
+| hero: the bar counter | `planet39/proofs-p2/bar.png` (1200 x 800) | round 39 |
+| hero: the listening room | `planet39/proofs-p3/listening.png` (1200 x 800) | round 39 |
+| detail: the decks | `../2026-10-20/barkhorn/planet38/finals-best/coins-decks.png` | round 38 |
+| detail: the door and the bowl of coins | `planet39/proofs-p3/bowl.png` (1200 x 800) | round 39 |
+| detail: the shopfront at blue hour | `planet39/finals/street-final.png` (2400 x 1600; JPEGs beside it) | round 39 |
+
+The Smoke globe's door frame (`planet39/finals/door-mother.png`) and the empty door (`planet39/finals/door.png`) stay
+for comparison. Scores and every critic's words: `r39/FINALS.md`, `r40/FINALS.md`, `r41/critic/LOG.md`.
+
 ### Mother EARF in the bar (an option)
 
 The owner, 2026-10-22: "Also wondering if there's any opportunity to tie in Mother EARF."
 
-**The proposal rendered:** Mother EARF is round 33b's one-colour globe made at architectural scale: the brand
+**The owner's choice (2026-10-22): the site's multicolour.** Round 41 hangs round 33c's globe in its six tints, each
+rim glowing its colour, no core, in the same place and size (`r41/r41_colour.py`; the door hero above). The Smoke
+version below was the first proposal.
+
+**The proposal rendered first:** Mother EARF is round 33b's one-colour globe made at architectural scale: the brand
 globe's six slotted discs (three meridians and three parallels, the axis leaning 23.4 degrees) cut from 25 mm cast
 acrylic in Smoke, 1.25 m across. Its faces are see-through smoked glass and its polished rims read dark. It hangs low
 over a banquette table, 1.1 m above it and between two beams, under one hard spot on the deck behind it, so
