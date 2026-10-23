@@ -537,9 +537,13 @@ def south_cover_parts(p=S):
     co, ci, cz0, cz1 = p['collar']
     fr = p['flange_r']
     hole = cyl('z', (0, 0), co + 0.4, 0, R + 5)
-    shell = ball(R, t, (0, 0, 0), cut_below=0)
-    liner = ball(r_l, p['liner'], (0, 0, 0), cut_below=4)
-    skin = ball(r_k, p['skin'], (0, 0, 0), cut_below=0) - hole
+    # the spheres turned a quarter about x, so their poles lie on the rim (cut away) and not at the closed crown, where
+    # the mesh's pole drew a black dot under the bowl (round 37's first render)
+    from build123d import Rot
+    q = Rot(90, 0, 0)
+    shell = q * ball(R, t, (0, 0, 0)) - box(-R - 1, -R - 1, -R - 1, R + 1, R + 1, 0)
+    liner = q * ball(r_l, p['liner'], (0, 0, 0)) - box(-R - 1, -R - 1, -R - 1, R + 1, R + 1, 4)
+    skin = q * ball(r_k, p['skin'], (0, 0, 0)) - box(-R - 1, -R - 1, -R - 1, R + 1, R + 1, 0) - hole
     rim = cyl('z', (0, 0), 2 * (r_si - 0.2), 0, 3.8) - cyl('z', (0, 0), 2 * (r_k + 0.2), -1, 5)
     # the crown weld: a ring of tinted acrylic filling the gap between the skin and the liner round the flange (the
     # liner, the ring and the skin welded as one), so the outer layers hang on acrylic joints over 5,000 mm2
