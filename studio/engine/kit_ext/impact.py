@@ -57,7 +57,15 @@ E12r p19 (p18, every critic: "flat tan patches with hard edges ... like decals";
 they were its own faces): where a lip tore far back, the top 8 cm of the trench's wall is a long shallow slope, and the
 asphalt course (`course`, `course_value`) covered all of it as one pale plane that no impact mark reaches (a mark takes
 an object's first material). `course_steep` (trench, degrees) keeps the course to faces at least that steep, the broken
-edge itself; the shallower ones take the floor's material and its marks. Off by default."""
+edge itself; the shallower ones take the floor's material and its marks. Off by default.
+
+E12r p20 (p19's critic: "the beige fan of 'dust' left of the crater looks like a flat painted-on texture"; p18's: "no
+depth, no stepped edge and no loose material in them"): that slope was two faces across, the floor's 28 columns
+leaving each wall two. For trench, `wall_res` gives each wall that many columns of its own, closest at the lip; `step`
+breaks the road's asphalt off sheer at the lip, that many metres of it, the wall below it the sub-base; `wall_rough`
+lumps the sub-base in three sizes, up to that many metres. For debris, `patchy` [metres, lo, hi] keeps a piece where a
+slow noise of that size runs above lo, surely above hi, so the rubble lies in drifts (p19: "the small pebbles ... spread
+so evenly that they look computer-scattered"). All off by default."""
 import math, random
 
 import bmesh
@@ -116,6 +124,18 @@ def trench(bpy, name, p, kit):
     lipf = _lipf(p)
     sd = p.get('seed', 1) * 7.3
     ny = int((y1 - y0) / 0.06); nx = 28
+    us = [-1.0 + 2.0 * i / nx for i in range(nx + 1)]           # across: -1 at one lip, +1 at the other
+    wres, step, wrough = p.get('wall_res', 0), p.get('step', 0.0), p.get('wall_rough', 0.0)
+    if wres:
+        # E12r p20: each wall `wall_res` columns across, closest at the lip, where the floor's 28 left a torn-back wall
+        # two faces wide (p19's critic: "the beige fan ... looks like a flat painted-on texture")
+        a = W / lip
+        floor = [u for u in us if abs(u) < a]
+        wall = [a + (1.0 - a) * (1.0 - (1.0 - k / wres) ** 1.6) for k in range(wres + 1)]
+        if step:
+            wall = wall[:-1] + [1.0 - 0.012 * (1.0 - a), 1.0]  # the asphalt's own broken edge, nearly sheer
+        us = [-w for w in wall[::-1]] + floor + wall
+        nx = len(us) - 1
     bm = bmesh.new()
     rows = []
     for j in range(ny + 1):
@@ -127,17 +147,27 @@ def trench(bpy, name, p, kit):
         row = []
         lips = (lipf(y, -1), lipf(y, 1))
         for i in range(nx + 1):
-            u = -1.0 + 2.0 * i / nx                            # across: -1 at one lip, +1 at the other
+            u = us[i]
             # a U: flat floor across the width, walls rising to the lips, ragged where the slabs tore away
             w = abs(u)
-            z = -dep * (1.0 if w < W / lip else max(0.0, 1.0 - ((w - W / lip) / (1.0 - W / lip)) ** 1.5))
+            t = max(0.0, (w - W / lip) / (1.0 - W / lip)) if w >= W / lip else 0.0
+            z = -dep * (1.0 if w < W / lip else max(0.0, 1.0 - t ** 1.5))
+            if step and w >= W / lip and w < 0.9999:
+                # E12r p20 (p18's critics: "no depth, no stepped edge"): the road's asphalt broken off sheer at the lip,
+                # `step` metres of it, the wall below it the sub-base sloping down to the floor
+                z = min(z, -min(step, dep)) if dep > 1e-3 else z
             x = u * lip
             if p.get('jag') and w >= W / lip:                   # the wall runs up to its torn lip, gentler where it tore back
-                t = (w - W / lip) / (1.0 - W / lip)
                 x = (1 if u > 0 else -1) * (W + (lips[1 if u > 0 else 0] - W) * t)
             n = noise.noise(Vector((x * 6.0 + sd, y * 3.0, 0.0)))
-            x += rag * n * (0.3 + w) * (0.0 if p.get('jag') and w > 0.999 else 1.0)
+            near = min(1.0, (1.0 - t) / 0.15) if wres and p.get('jag') else 1.0   # the columns by the lip keep to it
+            x += rag * n * (0.3 + w) * near * (0.0 if p.get('jag') and w > 0.999 else 1.0)
             z += 0.04 * noise.noise(Vector((x * 9.0, y * 9.0 + sd, 1.0))) * (dep / max(D, 1e-3))
+            if wrough and 0.0 < t < 0.98:
+                # the sub-base the slabs tore off: lumpy, in three sizes, nothing flat across it
+                q = Vector((x, y, sd))
+                z += wrough * (noise.noise(q * 7.0) + 0.5 * noise.noise(q * 19.0 + Vector((3.1, 0, 0)))
+                               + 0.25 * noise.noise(q * 47.0 + Vector((0, 5.3, 0)))) * min(1.0, dep / max(D, 1e-3) * 2.0)
             # drag marks: grooves along the slide, sharp across it, long along it
             z -= p.get('grooves', 0.0) * abs(noise.noise(Vector((x * 14.0 + sd, y * 0.35, 2.0)))) * (dep / max(D, 1e-3))
             row.append(bm.verts.new((x, y, z)))
@@ -148,7 +178,7 @@ def trench(bpy, name, p, kit):
             f = bm.faces.new((rows[j][i], rows[j][i + 1], rows[j + 1][i + 1], rows[j + 1][i]))
             # with `jag`, the asphalt course in section along the top of each wall (its 8 cm, binder and stones); with
             # `course_steep`, only where the wall is at least that steep (see the docstring)
-            if p.get('jag') and f.calc_center_median().z > -0.08 and abs(-1.0 + 2.0 * (i + 0.5) / nx) > W / lip:
+            if p.get('jag') and f.calc_center_median().z > -0.08 and abs(0.5 * (us[i] + us[i + 1])) > W / lip:
                 f.normal_update()
                 if steep is None or abs(f.normal.z) < steep:
                     f.material_index = 1
@@ -419,6 +449,14 @@ def debris(bpy, name, p, kit):
             y = rnd.uniform(y0 + 1.0, y1 + 0.5)
             r = reach * rnd.random() ** 2.2
         x = (1 if rnd.random() < 0.5 else -1) * ((p.get('inner', 0.8) if y < y1 or p.get('band') else 0.0) + r)
+        if p.get('patchy'):
+            # E12r p20 (p19's critic: "the small pebbles ... spread so evenly that they look computer-scattered"): a piece
+            # kept where a slow noise runs high, so the rubble lies in drifts with bare road between
+            sc, lo, hi = p['patchy']
+            v = noise.noise(Vector((x / sc, y / sc, p.get('seed', 2) * 0.37)))
+            keep = min(1.0, max(0.0, (v - lo) / max(hi - lo, 1e-6)))
+            if rnd.random() > keep * keep * (3 - 2 * keep):
+                continue
         mult = (0.12 + 0.88 * rnd.random() ** p['size_power']) if 'size_power' in p else rnd.uniform(0.3, 1.0)
         size = max(0.012, p.get('size_max', 0.16) * max(0.0, 1.0 - r / max(reach, r + 0.01)) ** 1.6 * mult)
         if p.get('fine'):
