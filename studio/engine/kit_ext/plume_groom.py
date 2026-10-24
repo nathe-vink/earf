@@ -6,6 +6,11 @@ small fire", "the flames hugging the top unit should come down a little").
 
 --squeeze   the soot (and the heat) drawn in toward the column's own centre line, slice by slice: S0 of its width at Z0
             metres up, S1 at Z1, smoothly between (1 leaves it be). The billows keep their shapes, narrower.
+--waist     S ZA ZB ZC: the soot (and the heat) drawn in to S of its width at ZB metres up, whole at ZA and again at ZC
+            and beyond, smoothly between: a column narrowest just over the fire and widening as it climbs, the haze
+            below ZA and the plume above ZC left as they were (with --squeeze, the two multiply).
+--boost     B ZA ZB ZC: the soot thickened B times at ZB metres up, as it was at ZA and again from ZC, smoothly
+            between: the stem just over the flames dark, so the column visibly grows out of them.
 --fade      the soot thinned with height: whole up to Z0, F of itself by Z1 (a small fire's column thins as it rises).
 --flame-cap the flames the shot's lens sees over the top of the solve's first solid (the speaker), whole up to PX0
             pixels over it in a 960 pixel wide frame, LO of themselves by PX1: so they stop short of whatever stands
@@ -99,6 +104,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('src'); ap.add_argument('dst')
     ap.add_argument('--squeeze', type=float, nargs=4)
+    ap.add_argument('--waist', type=float, nargs=4)
+    ap.add_argument('--boost', type=float, nargs=4)
     ap.add_argument('--fade', type=float, nargs=3)
     ap.add_argument('--flame-cap', nargs=4)
     a = ap.parse_args()
@@ -108,11 +115,19 @@ def main():
     zc = (np.arange(NZ) + 0.5) * dx
     rho, heat, fl = decode(z['rho']), decode(z['heat']), decode(z['flame'])
     w0, f0 = rho.sum(), fl.sum()
+    s = np.ones_like(zc)
     if a.squeeze:
         s0, s1, z0, z1 = a.squeeze
+        s = s * ramp(zc, z0, z1, s0, s1)
+    if a.waist:
+        sw, za, zb, zcc = a.waist
+        s = s * np.where(zc < zb, ramp(zc, za, zb, 1.0, sw), ramp(zc, zb, zcc, sw, 1.0))
+    if a.squeeze or a.waist:
         cx, cy = centre_line(rho)
-        s = ramp(zc, z0, z1, s0, s1)
         rho, heat = squeeze(rho, cx, cy, s), squeeze(heat, cx, cy, s)
+    if a.boost:
+        b, za, zb, zcc = a.boost
+        rho *= np.where(zc < zb, ramp(zc, za, zb, 1.0, b), ramp(zc, zb, zcc, b, 1.0))[None, None, :]
     if a.fade:
         z0, z1, f = a.fade
         rho *= ramp(zc, z0, z1, 1.0, f)[None, None, :]

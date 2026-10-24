@@ -143,6 +143,10 @@ CACHE = 'renders/2026-10-22/barkhorn/plume/meteor_l.npz'
 # realism 6 and 5, the fire "a soft, see-through orange haze ... no hot core". So p20b keeps p19's fire and smoke and
 # darkens the lamps that light the smoke alone (SMOKE_LAMP, SMOKE_FOOT): that lit foot was the column round the top unit
 HOT = 2600.0
+# p21a cut the glow fully between the tongues with harder edges (1.0, [0.48, 0.56]; p20b, both realism critics: "a soft
+# orange glow ... no flame tongues"): its notes check put the top unit back "inside a bright fireball ... the brightest
+# spot in the frame" (p20b's: met), so p20b's
+TONGUES, TONGUE_EDGE = 0.9, [0.47, 0.57]
 # p17 (the owner, 2026-10-22: "too much fire enveloping the speaker, making the speaker stand out less ... a slightly
 # smaller fire behind it"): meteor_i, meteor_h with its skins burning less (back 0.7 over 0.6 m, the right face 0.35, the
 # edges' floor 0.45; soot 5, flame 0.8) and the fire behind smaller (half-sizes 0.42, rate 8)
@@ -181,6 +185,7 @@ def torn(gouge):
                 p.update(count=130, spread=0.9, flip=0.2, fallen=0.2, size_power=1.6, thickness=0.06, thick_var=0.5,
                          clump=0.3, **JAG)  # even
                                                                      # sheets"), along the torn line (p9)
+                p.update(LIP_SLABS)                                  # p21: see LIP_SLABS
             else:                                                    # the heave in front: lower, more of them
                 p.update(thickness=0.055, size=0.45, count=34, tilt=40.0, tilt_min=15.0, thick_var=0.4)
         elif fn == 'debris':
@@ -218,7 +223,7 @@ def torn(gouge):
                      seed=43, rotate_z=I.FLIP, crumble=0.3, drop=True, size_max=0.18, forward=0.4, ahead=3.0, **ASPHALT, **CHUNKS))
     rim.append(piece('ext', module='impact', fn='debris', band=[-1.2, 2.2], count=round(1500 * GRIT), reach=2.4, inner=0.45,
                      z=0.0, seed=47, rotate_z=I.FLIP, fine=True, fine_size=[0.005, 0.05], drop=True, under_tint='#2A2B2C',
-                     under_value=0.3, top_value=0.18, dust=0.15, forward=0.55, ahead=3.5, patchy=PATCHY))
+                     under_value=0.3, top_value=0.18, forward=0.55, ahead=3.5, patchy=PATCHY, **GRIT_DUST))
     # p19 (p18, every critic: "light tan 'exposed base' patches look like flat decals: they have no depth, no stepped edge
     # and no loose material in them"; hiding the trench took them away: they are its walls' torn-back slopes either side
     # of the speaker and up its end in front (the trench's own floor at 0.8 to 1.35 m out, 0.3 to 1.2 m on), which the
@@ -227,14 +232,20 @@ def torn(gouge):
                      seed=53, rotate_z=I.FLIP, crumble=0.3, drop=True, size_max=0.17, **ASPHALT, **CHUNKS))
     rim.append(piece('ext', module='impact', fn='debris', band=[-0.6, 1.3], count=round(SLOPE[1] * GRIT), reach=0.65,
                      inner=0.75, z=0.0, seed=59, rotate_z=I.FLIP, fine=True, fine_size=[0.006, 0.04], drop=True,
-                     under_tint='#2A2B2C', under_value=0.3, top_value=0.18, dust=0.15, patchy=PATCHY))
+                     under_tint='#2A2B2C', under_value=0.3, top_value=0.18, patchy=PATCHY, **GRIT_DUST))
     # p20 (p19's critic: "the beige fan of 'dust' left of the crater looks like a flat painted-on texture"; it was the
     # wall's torn-back slope beyond that grit, 0.9 to 1.35 m out): the broken sub-base on it, loose and in drifts
     rim.append(piece('ext', module='impact', fn='debris', band=[-0.4, 1.3], count=SHELF, reach=0.5, inner=0.92, z=0.0,
                      seed=61, rotate_z=I.FLIP, fine=True, fine_size=[0.006, 0.05], drop=True, under_tint='#2A2B2C',
-                     under_value=0.3, top_value=0.18, dust=0.15, patchy=[0.3, -0.2, 0.15]))
-    return gouge + pit + rim + [piece('ext', module='impact', fn='debris', y0=I.Y0 + 6.0, y1=-0.9, count=260, reach=0.6,
-                                      inner=0.0, z=-0.32, seed=19, rotate_z=I.FLIP, crumble=0.35, **ASPHALT, **CHUNKS)]
+                     under_value=0.3, top_value=0.18, patchy=[0.3, -0.2, 0.15], **GRIT_DUST))
+    out = gouge + pit + rim + [piece('ext', module='impact', fn='debris', y0=I.Y0 + 6.0, y1=-0.9, count=260, reach=0.6,
+                                     inner=0.0, z=-0.32, seed=19, rotate_z=I.FLIP, crumble=0.35, **ASPHALT, **CHUNKS)]
+    # p21 (two builds of one shot gave different rubble: impact.py's freeze): every slab and chunk built once, then read
+    # back, so every proof and every strip of a final shows the same rubble
+    for p in out:
+        if p.get('fn') in ('slabs', 'debris'):
+            p['freeze'] = True
+    return out
 
 
 def deck():
@@ -265,6 +276,14 @@ SHELF = 1600
 # and the grit half as dense again but lying in drifts with bare road between (p19 B: "the small pebbles across the
 # lower right are spread so evenly that they look computer-scattered"; impact.debris's patchy)
 GRIT, PATCHY = 1.5, [0.45, -0.15, 0.2]
+# p21a tried the grit's dust thinner and a darker neutral grey (0.08, #6E6E6B: p20b, one duel: "the second's lighter
+# beige debris flattens the foreground") and the lip slabs darker underneath and along the break, torn harder and fewer
+# turned over (under 0.1, side 0.09, rough 0.3, flip 0.1: p20b A, "flat brown slabs ... like snapped wooden planks").
+# It lost both duels to p20b on the owner's direction ("a large, flat, near-black slab with a chunk perched on top that
+# leans across the cabinet's lower-left edge, which looks more CG"; "large clean-edged slabs and upright shards"), so
+# both are back as p20b had them
+GRIT_DUST = dict(dust=0.15)
+LIP_SLABS = dict()
 # p16e (p16d's tests: the pale bowl round the speaker's foot stayed tan whatever its colour, tint or char, and with the
 # ground lamps off it went a dim brown): those lamps, 10 to 30 cm over the pit's smooth floor, clipped it to one flat
 # colour. At 0.4 of their power the floor kept its grain, but both critics then found the road unlit by the fire.
@@ -401,11 +420,11 @@ def shot():
     fire = M.fire(CACHE)
     fire['position'] = [0.0, 0.0, I.SINK]                           # the solve's floor at the speaker's foot
     fire['strength'] = STRENGTH
-    fire['tongue_edge'], fire['tongue_scale'] = [0.47, 0.57], 0.07   # p13 (p12 B: "no separate tongues, no dark soot pockets"):
+    fire['tongue_edge'], fire['tongue_scale'] = TONGUE_EDGE, 0.07    # p13 (p12 B: "no separate tongues, no dark soot pockets"):
                                                                        # the glow cut into finer, harder-edged tongues
     # p14 (p13, both: "smooth vertical strips of even colour ... like glowing cards", "no clipped white-yellow core"): the
     # gaps between the tongues dark (a full cut), the core hotter and the tips redder, the glow gathered into the core
-    fire.update(tongues=0.9, tongue_octaves=4.0, hot=HOT, cool=1000.0, flame_gamma=1.5, breakup=0.6)   # p20: 2600 -> HOT
+    fire.update(tongues=TONGUES, tongue_octaves=4.0, hot=HOT, cool=1000.0, flame_gamma=1.5, breakup=0.6)
     # p17d (p17c, both: no flame at the base, the smoke glowing by itself): flames only where the gas burns hard, the light
     # gathered into their cores, so the fire shows as flames at the foot and the smoke above it goes dark within a metre
     # p18 (p17d, both: "a soft orange haze ... no flames"; projected through the lens, the speaker hid all of meteor_j's

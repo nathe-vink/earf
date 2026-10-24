@@ -132,6 +132,20 @@ def main():
         St.stage(bpy, st, mats)                          # round 31: a diorama's own ground and sky, from kit pieces
     if (sh.get('haze') or {}).get('density', 0) > 0:
         St.haze(bpy, sh['haze'])                         # round 31: a box of haze, so a spot's beam shows
+    if os.environ.get('ENGINE_MESH_HASH'):
+        # a check on the build: every mesh object's vertices hashed into the named JSON file, then no render (two
+        # processes building the same shot should write the same file; E12r's rubble did not)
+        import hashlib
+        out = {}
+        for ob in sorted(bpy.data.objects, key=lambda o: o.name):
+            if ob.type == 'MESH':
+                co = [0.0] * (3 * len(ob.data.vertices))
+                ob.data.vertices.foreach_get('co', co)
+                out[ob.name] = [len(ob.data.vertices), hashlib.sha1(json.dumps([round(c, 5) for c in co]).encode()).hexdigest()[:12],
+                                [round(v, 4) for v in ob.location]]
+        Path(os.environ['ENGINE_MESH_HASH']).write_text(json.dumps(out, indent=0))
+        print('mesh hashes written', len(out))
+        return
 
     # --- camera --------------------------------------------------------------------------------------------------
     cam_spec = sh['camera']

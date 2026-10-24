@@ -3270,7 +3270,8 @@
     "jag": 0.6,
     "jag_seed": 9,
     "jag_base": 0.85,
-    "jag_pow": 1.1
+    "jag_pow": 1.1,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3304,7 +3305,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3322,7 +3324,8 @@
     "rotate_z": 180.0,
     "fine": true,
     "under_tint": "#1C1C1C",
-    "under_value": 0.6
+    "under_value": 0.6,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3355,7 +3358,8 @@
     "dust": 0.25,
     "dust_color": "#83827E",
     "crumble": 1.0,
-    "thick_var": 0.4
+    "thick_var": 0.4,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3389,7 +3393,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3422,7 +3427,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3455,7 +3461,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3488,7 +3495,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3523,7 +3531,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3558,7 +3567,8 @@
     "smooth": 30.0,
     "rough": 0.16,
     "dust": 0.25,
-    "dust_color": "#83827E"
+    "dust_color": "#83827E",
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3597,7 +3607,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3623,14 +3634,15 @@
     "under_tint": "#2A2B2C",
     "under_value": 0.3,
     "top_value": 0.18,
-    "dust": 0.15,
     "forward": 0.55,
     "ahead": 3.5,
     "patchy": [
      0.45,
      -0.15,
      0.2
-    ]
+    ],
+    "dust": 0.15,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3667,7 +3679,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3693,12 +3706,13 @@
     "under_tint": "#2A2B2C",
     "under_value": 0.3,
     "top_value": 0.18,
-    "dust": 0.15,
     "patchy": [
      0.45,
      -0.15,
      0.2
-    ]
+    ],
+    "dust": 0.15,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3724,12 +3738,13 @@
     "under_tint": "#2A2B2C",
     "under_value": 0.3,
     "top_value": 0.18,
-    "dust": 0.15,
     "patchy": [
      0.3,
      -0.2,
      0.15
-    ]
+    ],
+    "dust": 0.15,
+    "freeze": true
    },
    {
     "kind": "kit",
@@ -3762,7 +3777,8 @@
      0.16,
      0.32
     ],
-    "size_power": 2.2
+    "size_power": 2.2,
+    "freeze": true
    },
    {
     "kind": "kit",

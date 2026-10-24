@@ -65,11 +65,47 @@ leaving each wall two. For trench, `wall_res` gives each wall that many columns 
 breaks the road's asphalt off sheer at the lip, that many metres of it, the wall below it the sub-base; `wall_rough`
 lumps the sub-base in three sizes, up to that many metres. For debris, `patchy` [metres, lo, hi] keeps a piece where a
 slow noise of that size runs above lo, surely above hi, so the rubble lies in drifts (p19: "the small pebbles ... spread
-so evenly that they look computer-scattered"). All off by default."""
-import math, random
+so evenly that they look computer-scattered"). All off by default.
+
+E12r p21: the same shot built in two processes gave different rubble (the lip slabs 29210 vertices in one build, 28343
+in the other, and everything dropped on them after), so no two proofs of a pass were comparable and strips rendered on
+different machines disagreed. With `freeze` (slabs, debris), a piece's mesh is written the first time it is built to
+renders/cache/impact/<key>.blend and read back from there after, the key a hash of this file, the piece and every
+impact piece built before it in the shot (what a dropped piece lands on). Off by default."""
+import hashlib, json, math, os, random
 
 import bmesh
 from mathutils import Euler, Matrix, Vector, noise
+
+_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
+_FREEZE_DIR = os.path.join(_ROOT, 'renders', 'cache', 'impact')
+_SOURCE = hashlib.sha1(open(os.path.abspath(__file__), 'rb').read()).hexdigest()
+_CHAIN = []                                                     # every impact piece built so far in this process
+
+
+def _chain_key(p):
+    """This piece's key: this file, the pieces built before it and the piece itself (see the docstring)."""
+    _CHAIN.append(json.dumps(p, sort_keys=True, default=str))
+    return hashlib.sha1('|'.join([_SOURCE] + _CHAIN).encode()).hexdigest()[:20]
+
+
+def _frozen(bpy, name, p, build):
+    """With `freeze`, the piece's mesh from the cache when it is there, else built by `build()` (a mesh without
+    materials) and written there; without, `build()`."""
+    key = _chain_key(p)
+    if not p.get('freeze'):
+        return build()
+    path = os.path.join(_FREEZE_DIR, key + '.blend')
+    if os.path.exists(path):
+        with bpy.data.libraries.load(path, link=False) as (src, dst):
+            dst.meshes = list(src.meshes)
+        me = dst.meshes[0]
+        me.name = name
+        return me
+    me = build()
+    os.makedirs(_FREEZE_DIR, exist_ok=True)
+    bpy.data.libraries.write(path, {me}, fake_user=True, compress=True)
+    return me
 
 
 def _mat(bpy, kit, texture, tex_scale, tint=None, tint_mix=0.0, rough=1.0, bump=1.5, value=1.0):
@@ -117,6 +153,7 @@ def _lipf(p):
 
 
 def trench(bpy, name, p, kit):
+    _chain_key(p)                                              # E12r p21: see _frozen
     y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
     W, D = p.get('width', 1.0) / 2, p.get('depth', 0.35)
     ramp, rag = p.get('ramp', 4.0), p.get('ragged', 0.08)
@@ -380,46 +417,49 @@ def _smooth(bm, deg):
 
 
 def slabs(bpy, name, p, kit):
-    rnd = random.Random(p.get('seed', 1))
-    y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
-    lip, t = p.get('lip', 0.75), p.get('thickness', 0.08)
-    D, ramp = p.get('depth', 0.35), p.get('ramp', 4.0)
-    spread, flip, fallen, sp = p.get('spread', 0.25), p.get('flip', 0.0), p.get('fallen', 0.0), p.get('size_power', 1.0)
-    lipf = _lipf(p)
-    bm = bmesh.new()
-    tv, clump = p.get('thick_var', 0.0), p.get('clump', 0.0)
-    if p.get('drop'):
-        bpy.context.view_layer.update()
-    for k in range(p.get('count', 40)):
-        y = rnd.uniform(y0 + 0.5, y1 - 0.2)
-        s = 1 if rnd.random() < 0.5 else -1
-        if clump and noise.noise(Vector((y * 0.9, s * 3.7, p.get('seed', 1) * 0.61))) < clump - 0.35:
-            continue                                           # a gap in the row: the lip tore in clumps, not evenly
-        f = min(1.0, (y - y0) / ramp)                          # bigger, steeper plates where the trench is deep
-        sz = p.get('size', 1.0)
-        w, d = sz * (0.25 + 0.45 * rnd.random() ** sp) * (0.5 + f), sz * (0.3 + 0.5 * rnd.random() ** sp) * (0.5 + f)
-        tk = t * rnd.uniform(1.0 - 0.5 * tv, 1.0 + tv) if tv else t
-        before = len(bm.verts)
-        ft, fb, sides = _plate(bm, rnd, w, d, tk, p.get('rough', 0.0))
-        _faces(ft, fb, sides, True, p)
-        bm.verts.ensure_lookup_table()
-        new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
-        tilt = rnd.uniform(p.get('tilt_min', 15.0), p.get('tilt', 55.0)) * f
-        x = s * (lipf(y, s) + w * spread * (rnd.uniform(0.2, 1.0) if not clump else rnd.random() ** 0.6 * 1.6))
-        z = 0.02 + 0.5 * w * math.sin(math.radians(tilt)) * 0.4 - (0.0 if rnd.random() < 0.7 else 0.1) + (tk - t) * 0.5
-        if fallen and rnd.random() < fallen and abs(y) > 0.8:   # dropped into the trench (clear of the speaker at 0)
-            x = s * rnd.uniform(0.0, lip * 0.75)
-            z = -D * f + t * 0.5 + 0.02 + 0.3 * w * math.sin(math.radians(tilt))
-        if flip and rnd.random() < flip:                       # thrown over onto its back
-            tilt = 180.0 - tilt * 0.5
-        _place(bm, new, (rnd.uniform(-8, 8), s * tilt, rnd.uniform(-25, 25)), (x, y, z))
+    def build():
+        rnd = random.Random(p.get('seed', 1))
+        y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
+        lip, t = p.get('lip', 0.75), p.get('thickness', 0.08)
+        D, ramp = p.get('depth', 0.35), p.get('ramp', 4.0)
+        spread, flip, fallen, sp = p.get('spread', 0.25), p.get('flip', 0.0), p.get('fallen', 0.0), p.get('size_power', 1.0)
+        lipf = _lipf(p)
+        bm = bmesh.new()
+        tv, clump = p.get('thick_var', 0.0), p.get('clump', 0.0)
         if p.get('drop'):
-            _drop(bpy, p, new, tk * 0.3)
-    if p.get('crumble'):
-        _crumble(bm, p['crumble'], p.get('seed', 1), p.get('flat_tops', False))
-    if p.get('smooth'):
-        _smooth(bm, p['smooth'])
-    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+            bpy.context.view_layer.update()
+        for k in range(p.get('count', 40)):
+            y = rnd.uniform(y0 + 0.5, y1 - 0.2)
+            s = 1 if rnd.random() < 0.5 else -1
+            if clump and noise.noise(Vector((y * 0.9, s * 3.7, p.get('seed', 1) * 0.61))) < clump - 0.35:
+                continue                                           # a gap in the row: the lip tore in clumps, not evenly
+            f = min(1.0, (y - y0) / ramp)                          # bigger, steeper plates where the trench is deep
+            sz = p.get('size', 1.0)
+            w, d = sz * (0.25 + 0.45 * rnd.random() ** sp) * (0.5 + f), sz * (0.3 + 0.5 * rnd.random() ** sp) * (0.5 + f)
+            tk = t * rnd.uniform(1.0 - 0.5 * tv, 1.0 + tv) if tv else t
+            before = len(bm.verts)
+            ft, fb, sides = _plate(bm, rnd, w, d, tk, p.get('rough', 0.0))
+            _faces(ft, fb, sides, True, p)
+            bm.verts.ensure_lookup_table()
+            new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
+            tilt = rnd.uniform(p.get('tilt_min', 15.0), p.get('tilt', 55.0)) * f
+            x = s * (lipf(y, s) + w * spread * (rnd.uniform(0.2, 1.0) if not clump else rnd.random() ** 0.6 * 1.6))
+            z = 0.02 + 0.5 * w * math.sin(math.radians(tilt)) * 0.4 - (0.0 if rnd.random() < 0.7 else 0.1) + (tk - t) * 0.5
+            if fallen and rnd.random() < fallen and abs(y) > 0.8:   # dropped into the trench (clear of the speaker at 0)
+                x = s * rnd.uniform(0.0, lip * 0.75)
+                z = -D * f + t * 0.5 + 0.02 + 0.3 * w * math.sin(math.radians(tilt))
+            if flip and rnd.random() < flip:                       # thrown over onto its back
+                tilt = 180.0 - tilt * 0.5
+            _place(bm, new, (rnd.uniform(-8, 8), s * tilt, rnd.uniform(-25, 25)), (x, y, z))
+            if p.get('drop'):
+                _drop(bpy, p, new, tk * 0.3)
+        if p.get('crumble'):
+            _crumble(bm, p['crumble'], p.get('seed', 1), p.get('flat_tops', False))
+        if p.get('smooth'):
+            _smooth(bm, p['smooth'])
+        me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+        return me
+    me = _frozen(bpy, name, p, build)
     _materials(bpy, kit, me, p)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
@@ -428,53 +468,56 @@ def slabs(bpy, name, p, kit):
 
 
 def debris(bpy, name, p, kit):
-    rnd = random.Random(p.get('seed', 2))
-    y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
-    reach = p.get('reach', 6.0)
-    bm = bmesh.new()
-    if p.get('drop'):
-        bpy.context.view_layer.update()
-    for k in range(p.get('count', 300)):
-        # along the path, thrown sideways (and some forward past the speaker); size falls with distance thrown
-        fwd = p.get('forward', 0.0)
-        if rnd.random() < fwd:
-            # thrown ahead of where it came to rest: a fan opening with distance
-            ahead = p.get('ahead', 6.0) * rnd.random() ** 1.6
-            y = y1 + 0.3 + ahead
-            r = (0.2 + 0.5 * ahead) * rnd.random()
-        elif p.get('band'):                                    # a strip across the path, `inner` clear either side
-            y = rnd.uniform(*p['band'])
-            r = reach * rnd.random() ** 2.2
-        else:
-            y = rnd.uniform(y0 + 1.0, y1 + 0.5)
-            r = reach * rnd.random() ** 2.2
-        x = (1 if rnd.random() < 0.5 else -1) * ((p.get('inner', 0.8) if y < y1 or p.get('band') else 0.0) + r)
-        if p.get('patchy'):
-            # E12r p20 (p19's critic: "the small pebbles ... spread so evenly that they look computer-scattered"): a piece
-            # kept where a slow noise runs high, so the rubble lies in drifts with bare road between
-            sc, lo, hi = p['patchy']
-            v = noise.noise(Vector((x / sc, y / sc, p.get('seed', 2) * 0.37)))
-            keep = min(1.0, max(0.0, (v - lo) / max(hi - lo, 1e-6)))
-            if rnd.random() > keep * keep * (3 - 2 * keep):
-                continue
-        mult = (0.12 + 0.88 * rnd.random() ** p['size_power']) if 'size_power' in p else rnd.uniform(0.3, 1.0)
-        size = max(0.012, p.get('size_max', 0.16) * max(0.0, 1.0 - r / max(reach, r + 0.01)) ** 1.6 * mult)
-        if p.get('fine'):
-            size = rnd.uniform(*p.get('fine_size', [0.005, 0.03])) * (1.0 - 0.5 * min(1.0, r / reach))
-        before = len(bm.verts)
-        ft, fb, sides = _plate(bm, rnd, size * rnd.uniform(0.8, 1.6), size * rnd.uniform(0.8, 1.6),
-                               size * rnd.uniform(*p.get('flat', [0.3, 0.6])), p.get('rough', 0.0))
-        bm.verts.ensure_lookup_table()
-        new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
-        _place(bm, new, (rnd.uniform(-40, 40), rnd.uniform(-40, 40), rnd.uniform(0, 360)), (x, y, p.get('z', 0.0) + size * 0.2))
+    def build():
+        rnd = random.Random(p.get('seed', 2))
+        y0, y1 = p.get('y0', -20.0), p.get('y1', 0.0)
+        reach = p.get('reach', 6.0)
+        bm = bmesh.new()
         if p.get('drop'):
-            _drop(bpy, p, new, size * 0.15)
-        _faces(ft, fb, sides, rnd.random() < 0.6, p)
-    if p.get('crumble'):
-        _crumble(bm, p['crumble'], p.get('seed', 2), p.get('flat_tops', False))
-    if p.get('smooth'):
-        _smooth(bm, p['smooth'])
-    me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+            bpy.context.view_layer.update()
+        for k in range(p.get('count', 300)):
+            # along the path, thrown sideways (and some forward past the speaker); size falls with distance thrown
+            fwd = p.get('forward', 0.0)
+            if rnd.random() < fwd:
+                # thrown ahead of where it came to rest: a fan opening with distance
+                ahead = p.get('ahead', 6.0) * rnd.random() ** 1.6
+                y = y1 + 0.3 + ahead
+                r = (0.2 + 0.5 * ahead) * rnd.random()
+            elif p.get('band'):                                    # a strip across the path, `inner` clear either side
+                y = rnd.uniform(*p['band'])
+                r = reach * rnd.random() ** 2.2
+            else:
+                y = rnd.uniform(y0 + 1.0, y1 + 0.5)
+                r = reach * rnd.random() ** 2.2
+            x = (1 if rnd.random() < 0.5 else -1) * ((p.get('inner', 0.8) if y < y1 or p.get('band') else 0.0) + r)
+            if p.get('patchy'):
+                # E12r p20 (p19's critic: "the small pebbles ... spread so evenly that they look computer-scattered"): a piece
+                # kept where a slow noise runs high, so the rubble lies in drifts with bare road between
+                sc, lo, hi = p['patchy']
+                v = noise.noise(Vector((x / sc, y / sc, p.get('seed', 2) * 0.37)))
+                keep = min(1.0, max(0.0, (v - lo) / max(hi - lo, 1e-6)))
+                if rnd.random() > keep * keep * (3 - 2 * keep):
+                    continue
+            mult = (0.12 + 0.88 * rnd.random() ** p['size_power']) if 'size_power' in p else rnd.uniform(0.3, 1.0)
+            size = max(0.012, p.get('size_max', 0.16) * max(0.0, 1.0 - r / max(reach, r + 0.01)) ** 1.6 * mult)
+            if p.get('fine'):
+                size = rnd.uniform(*p.get('fine_size', [0.005, 0.03])) * (1.0 - 0.5 * min(1.0, r / reach))
+            before = len(bm.verts)
+            ft, fb, sides = _plate(bm, rnd, size * rnd.uniform(0.8, 1.6), size * rnd.uniform(0.8, 1.6),
+                                   size * rnd.uniform(*p.get('flat', [0.3, 0.6])), p.get('rough', 0.0))
+            bm.verts.ensure_lookup_table()
+            new = [bm.verts[i] for i in range(before, len(bm.verts))]   # new verts come last (wrappers are not stable)
+            _place(bm, new, (rnd.uniform(-40, 40), rnd.uniform(-40, 40), rnd.uniform(0, 360)), (x, y, p.get('z', 0.0) + size * 0.2))
+            if p.get('drop'):
+                _drop(bpy, p, new, size * 0.15)
+            _faces(ft, fb, sides, rnd.random() < 0.6, p)
+        if p.get('crumble'):
+            _crumble(bm, p['crumble'], p.get('seed', 2), p.get('flat_tops', False))
+        if p.get('smooth'):
+            _smooth(bm, p['smooth'])
+        me = bpy.data.meshes.new(name); bm.to_mesh(me); bm.free()
+        return me
+    me = _frozen(bpy, name, p, build)
     _materials(bpy, kit, me, p)
     ob = bpy.data.objects.new(name, me); bpy.context.scene.collection.objects.link(ob)
     ob.location = Vector(p.get('position', [0, 0, 0]))
@@ -487,6 +530,7 @@ def road(bpy, name, p, kit):
     road's surface at 0, from `ylo` to `yhi` along the gouge's line, open between its torn lips (`lip`, `jag`) from `y0`
     to `y1`; one object, so its texture runs on unbroken where the deck's boxes met in ruled lines. In the road's
     material (the piece's own `material` and texture keys)."""
+    _chain_key(p)                                              # E12r p21: see _frozen
     lipf = _lipf(p)
     y0, y1, half, t = p.get('y0', -20.0), p.get('y1', 0.0), p.get('half', 10.0), p.get('thickness', 0.3)
     ylo, yhi = p.get('ylo', y0 - 20.0), p.get('yhi', y1 + 20.0)
@@ -520,6 +564,7 @@ def scorch(bpy, name, p, kit):
     """Scorch on the road: a plane a hair above it, soot-black where noise and a falloff from the path's centre line say
     so and clear elsewhere, so the blackening frays out into the asphalt instead of ending at an edge. `size` [w, l],
     `strength` the blackness at its heart, `scale` metres a patch."""
+    _chain_key(p)                                              # E12r p21: see _frozen
     w, l = p.get('size', [3.0, 20.0])
     bm = bmesh.new()
     vs = [bm.verts.new((x, y, 0.0)) for x, y in ((-w / 2, -l / 2), (w / 2, -l / 2), (w / 2, l / 2), (-w / 2, l / 2))]
