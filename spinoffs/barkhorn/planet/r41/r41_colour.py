@@ -10,6 +10,12 @@ colour, no core. The same 1.25 m, place, heading, sheet and light; round 39's ha
 brightest surface): rim glow 0.06, the globe's hard spot 100 W and narrower (cone 20 deg), nothing else; it writes
 door-mother-colour-p2.json. `--p3` is the last pass (both p2 critics: the rims still neon, the blue ring clipping, the
 faces dark): rim glow 0.025 and the spot raised again, 135 W at 20 deg, so the faces carry the colour.
+`--p4` (the owner, 2026-10-24: "Do those next steps"; the p3 critics' converged fixes, one pass, aiming for 7) builds
+on p3: rim glow 0.011 and the globe's spot at 145 W, 24 deg (220 W and 160 W, tried, brightened the wall's coloured shadow); the near floor's pool pulled back (a diagnostic at 1/4
+size, switching each light group off in turn, found no single source: the Domes give about 3 %, so their cones are
+tightened and dimmed a little, the floor's finish darkened a quarter and its sealer thinned to a honed finish); the concrete given a soft mottle of tone and
+roughness (`kit41.concrete`); the seats given round 39's jitter, restrained, and each its own leather tone and wear
+(`kit41.seats`); the altar spots down from 170 to 110 W and the rim, top and key lamps on the pair halved, so the batts stop being the brightest thing back there.
 `--edge` adds round 40's edge light (r40/r40_edge.EDGE), only if the colours do not read without it.
 """
 import json, os, sys
@@ -36,6 +42,36 @@ def main():
         m['rim'] = 0.025
         s['lights']['mother-spot'].update(power_w=135.0, cone_deg=20.0)
         out = OUT.replace('.json', '-p3.json')
+    if '--p4' in sys.argv:
+        m['rim'] = 0.011
+        # the critics' 220 W, at a look, pushed the globe's coloured shadow on the wall back toward the brightest
+        # surface (median 110 -> 128, p1's fault); 180 W at 24 deg keeps the intensity at p3's while the rims' glow
+        # drops by more than half, so the faces carry the colour
+        s['lights']['mother-spot'].update(power_w=145.0, cone_deg=24.0)
+        for k, l in s['lights'].items():
+            if k.startswith('pend'):
+                l.update(power_w=26.0, cone_deg=16.0)
+            if k.startswith('altar'):
+                l['power_w'] = 110.0
+            if k.startswith('riml'):                  # the batts are lit hot by the rim lamps behind the pair, too
+                l['irradiance'] = 5.0
+            if k in ('spk0', 'spk1') or k.startswith('keyl'):   # and by the soft lamps above and in front of them
+                l['irradiance'] = round(l['irradiance'] * 0.5, 3)
+        rt = next(q for q in s['set']['props'] if q.get('fn') == 'retouch')
+        rt['darken'] = dict(rt.get('darken', {}), Concrete044A=0.75)   # the floor's scan (planet_loft.floor_mat)
+        # the near floor's pool is mostly the sealer's sheen reflecting the room (darkening its tone moved it 2 %):
+        # the coat thinned to a honed finish
+        rt['set'] = dict(rt.get('set', {}), Concrete044A={'Coat Weight': 0.08})
+        K39, K41 = 'spinoffs/barkhorn/planet/r39/kit39.py', 'spinoffs/barkhorn/planet/r41/kit41.py'
+        s['set']['props'] += [
+            {'kind': 'kit', 'shape': 'ext', 'path': K39, 'fn': 'jitter', 'seed': 412,
+             'turn': {'chairs': 7.0, 'tubs': 5.0, 'tables36': 2.0, 'tub-tables': 0.0},
+             'shift': {'chairs': 0.025, 'tubs': 0.02, 'tables36': 0.008, 'tub-tables': 0.0},
+             'pull': {'chairs:3': [0.03, -0.12, 10.0], 'chairs:10': [0.04, 0.10, -8.0]}},
+            {'kind': 'kit', 'shape': 'ext', 'path': K41, 'fn': 'concrete', 'tone': 0.07, 'rough': 0.18},
+            {'kind': 'kit', 'shape': 'ext', 'path': K41, 'fn': 'seats', 'tone': 0.10,
+             'meshes': ['chairs-leather', 'tub-cushions', 'banq-cushions', 'banq-seat', 'banq-back']}]
+        out = OUT.replace('.json', '-p4.json')
     if '--edge' in sys.argv:
         sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'r40'))
         from r40_edge import EDGE
