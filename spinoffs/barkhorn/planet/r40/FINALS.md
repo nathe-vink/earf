@@ -68,3 +68,10 @@ step), with `door-mother-colour-p3-2400.jpg` and `-1200.jpg` (quality 88). **It 
 "The pictures" lists every hero and detail. What still holds it under 7, by both critics: the rims read as LED hoops
 (both ask rim 0.010 to 0.012 with the spot at 220 W), the near floor's pool from the Domes, the flat concrete, the
 repeated seats, the hot altar batts.
+
+Round 41 p4 (the owner: "Do those next steps"; the p3 critics' fixes, one pass): rims 0.011 with the globe's spot at
+145 W (220 W brightened the wall), the floor honed and darkened (its pool is the sealer's sheen, not the Domes), a
+concrete mottle, the seats varied and restrained, the altar's batts down
+(`renders/2026-10-22/barkhorn/planet41/proofs-p4/door-mother-colour-p4.png`). Critics 5.5 / 5.5, equal to p3; duel
+against p3 1–1, against round 39's Smoke 0–2; one new fault (at the lower glow only the blue and green rims read).
+Gate not met: **p3 stays the door hero.** Log in `r41/critic/LOG.md`.

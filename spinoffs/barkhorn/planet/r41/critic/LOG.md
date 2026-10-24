@@ -57,3 +57,40 @@ Read test: a render ("a sphere of coloured neon rings").
 Gate met: both critics 5.5 (round 39's 5.5), and no fault new to this pass (every one is named in p1 or p2: the neon
 read, the floor, the concrete, the seats, the altar, the globe near the top edge). So the 2400 final is rendered from
 the p3 shot (192 samples, round 39's lens step), with 2400 and 1200 px JPEGs.
+
+## p4 (the owner, 2026-10-24: "Do those next steps"; the p3 critics' converged fixes, one pass, aiming for 7)
+
+`r41_colour.py --p4`, on the same frame:
+
+1. **The rims and the globe's spot.** Rim glow 0.011. The globe's spot is 145 W at 24 deg, not the critics' 220 W:
+   220 W and 160 W, at looks, pushed the coloured shadow on the wall back toward the brightest surface.
+2. **The near floor's pool.** A diagnostic at 1/4 size switched each light group off in turn and found no single
+   source; the Domes are worth about 3 %. So the Domes were cut to 26 W at 16 deg, the floor scan (`Concrete044A`) was
+   darkened 0.75, and its sealer was thinned to a honed coat of 0.08.
+3. **The concrete.** `kit41.concrete`: a mottle of tone (+/-7 %) and roughness (+/-18 %) over the walls and the floor.
+4. **The seats.** Round 39's jitter, restrained (7 deg, 2.5 cm, two seats pulled out), and `kit41.seats` (each seat's
+   leather or mohair its own tone, +/-10 %, and sheen).
+5. **The altar batts.** The altar spots 170 -> 110 W, and the rim, top and key lamps on the pair halved.
+
+Measured against p3:
+
+| region | p3 | p4 |
+|---|---|---|
+| globe p95 | 117 | 74 |
+| near floor | 105 | 88.5 |
+| altar p95 | 207 | 183 |
+| the wall's coloured shadow | 110 | 118 |
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| p4 | door-mother, multicolour | 5.5 | 5.5 | 5.5 | 7.0, 7.0 | a: the floor still "daylight" with parallel stool shadows; only the blue and green rims read now, the warm four near invisible (new: the lower glow); zinc white; Orbs white discs; the altar dim. b: the wall's coloured shadow the brightest large surface again (127); Orbs white; zinc and floor milky; the rims still "neon tubing"; praises the concrete's variation |
+
+Read test: a render ("a big hanging sculpture of coloured metal rings"; "surfaces too clean, lighting staged").
+
+| duel | ab (image 1 = the other) | ba (image 1 = p4) | result |
+|---|---|---|---|
+| p4 against p3 | p4, slight | p3, slight | 1–1 |
+| p4 against round 39's Smoke final | r39, clear | r39, clear | round 39 2–0 (information) |
+
+Gate not met: the critics equal p3 (5.5 / 5.5), not above it; the duel against p3 is split; and one new fault (the
+warm rims lost). p3 stays the door hero; no 2400 render.
