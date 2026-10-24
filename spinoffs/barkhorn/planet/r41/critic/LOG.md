@@ -130,3 +130,40 @@ Read test: a render ("a glowing multicoloured ring sphere"; "surfaces too clean 
 
 Gate not met: critic a 5.0 (below p3's 5.5), b 5.5 (equal), the duel against p3 split, and two new faults (the floor
 mottle, the soft shadow). p3 stays the door hero; no 2400 render.
+
+## p6 (the coordinator: the white balance, the lever both p5 critics named; p5's two new tells undone where free)
+
+`r41_colour.py --p4 --p5 b --p6 2700`.
+
+- **The white balance.** 2700, 3000 and 3300 K tried at a quarter size. The ceiling's b_median read 26, 17 and 8: in
+  this engine a lower setting reads less orange. One fresh critic, shown A = 3000, B = 2700 and C = 3300 and asked
+  for the most natural night balance, picked C (3300, "clear") as the least orange. The measurement and the p5
+  critics' own test (ceiling b_median >= 22) say the opposite, so 2700 was kept, and the disagreement is recorded
+  here.
+- **The floor.** Back to p4's: darkened 0.75, coat 0.08.
+- **The globe's spot.** It stays where p5 moved it, but its source is now 5 mm with blend 0.1, so the shadow prints
+  crisp.
+
+Measured against p3:
+
+| region | p3 | p6 |
+|---|---|---|
+| ceiling b_median | 20 | 25 |
+| the wall's coloured shadow | 110 | 88 |
+| near floor | 105 | 90.5 |
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| p6 | door-mother, multicolour, 2700 K | 5.0 | 5.0 | 5.0 | 7.0, 6.5 | both: rims still "neon/LED hoops"; floor mottle "cloud-like dapples", "slate pavers", cold grey; zinc a hot pale strip; altar speakers glare white; Orbs white balls. b (new with the balance): "two colour temperatures in one room", the concrete wall cooler (b > g) than the orange ceiling |
+
+Read test: a render ("a large sculpture of coloured neon rings"; "surfaces too clean, lighting computer-generated,
+the stools and tables repeat").
+
+| duel | ab (image 1 = the other) | ba (image 1 = p6) | result |
+|---|---|---|---|
+| p6 against p3 | p3, slight ("cooler and greyer", the globes "flat white discs") | p3, slight ("greyer and flatter") | p3 2–0 |
+| p6 against round 39's Smoke final | r39, clear | r39, clear | round 39 2–0 (information) |
+
+Gate not met: both critics 5.0 (below p3's 5.5), the duel against p3 lost 2–0, one new tell (the split colour
+temperature). The cooler balance met the critics' measured target but read greyer and flatter to every judge: the
+duels reward the warmth. p3 stays the door hero; no 2400 render.

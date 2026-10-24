@@ -83,3 +83,10 @@ the frame shown second, on the wall's coloured light), against round 39's Smoke 
 mottle as camouflage, the coloured shadow soft). Gate not met: **p3 stays the door hero.** The zinc's pale read is
 the grazing angle from the door, which no setting of its finish moved; the remaining tells (the rims' neon read, the
 Orbs, the orange grade, the repeated seats) have now held across p3 to p5.
+
+Round 41 p6 (the coordinator: the white balance; p5's new tells undone): p5 at 2700 K (2700, 3000 and 3300 tried; a
+lower setting reads less orange in this engine), the floor back to p4's, the globe's shadow crisp
+(`proofs-p6/door-mother-colour-p6-2700.png`). Critics 5.0 / 5.0; duel against p3 0–2 ("greyer and flatter"), against
+round 39's Smoke 0–2; one new tell (the wall cooler than the ceiling). Gate not met: **p3 stays the door hero.** From
+p4 to p6 no pass has beaten p3: every finish and balance change that answers one critic's measured target costs the
+warmth or coherence the duels reward.
