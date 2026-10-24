@@ -7,6 +7,7 @@
   critics: "flat concrete"): a broad, soft mottle of tone (stains, the trowel's passes), `tone` +/- about its mean,
   and a roughness that wanders with it (`rough` +/-), so the sheen breaks up. Subtle, not grunge: the scans' own
   detail (tie holes, pour panels) stays as it is.
+- `zinc`: the bar top darker with the faint rings glasses leave (p5).
 - `seats`: every seat's leather its own tone and a little wear (each loose part of the seat meshes gets a random value
   that scales its tone by `tone` +/-), so one model repeated down the room stops reading as one copy.
 """
@@ -30,10 +31,10 @@ def _mottle(nt, scale, detail=6.0):
     return nz.outputs['Fac']
 
 
-def _scale_input(nt, inp, fac, lo, hi, colour):
-    """`inp` multiplied by `fac` mapped to [lo, hi], whether it is linked or a value."""
+def _scale_input(nt, inp, fac, lo, hi, colour, frm=(0.3, 0.7)):
+    """`inp` multiplied by `fac` mapped from `frm` (a noise's real range by default) to [lo, hi], linked or a value."""
     mr = nt.nodes.new('ShaderNodeMapRange'); mr.inputs['To Min'].default_value = lo; mr.inputs['To Max'].default_value = hi
-    mr.inputs['From Min'].default_value = 0.3; mr.inputs['From Max'].default_value = 0.7      # a noise's real range
+    mr.inputs['From Min'].default_value = frm[0]; mr.inputs['From Max'].default_value = frm[1]
     nt.links.new(fac, mr.inputs['Value'])
     if colour:
         mx = nt.nodes.new('ShaderNodeMix'); mx.data_type = 'RGBA'; mx.blend_type = 'MULTIPLY'; mx.inputs['Factor'].default_value = 1.0
@@ -127,4 +128,35 @@ def seats(bpy, name, p, kit):
         else:
             mu.inputs[0].default_value = r.default_value
         nt.links.new(mw.outputs['Result'], mu.inputs[1]); nt.links.new(mu.outputs[0], r)
+    return []
+
+
+def zinc(bpy, name, p, kit):
+    """The zinc top worn as a working bar's is (the p4 critics: "white marble", "milky"): darker, and the marks a night
+    leaves on it, faint rings where glasses stood (a Voronoi cell's distance banded into thin rings, a few per metre)
+    a little darker and glossier than the zinc around them."""
+    m = bpy.data.materials.get('zinc')
+    if not m or m.get('r41'):
+        return []
+    m['r41'] = 1
+    nt = m.node_tree; b = next(n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED')
+    tc = nt.nodes.new('ShaderNodeTexCoord'); vo = nt.nodes.new('ShaderNodeTexVoronoi')
+    vo.inputs['Scale'].default_value = p.get('rings', 7.0)
+    nt.links.new(tc.outputs['Object'], vo.inputs['Vector'])
+    # a ring where the cell's distance crosses the glass's radius (about 35 mm at this scale): |d - r| small
+    sub = nt.nodes.new('ShaderNodeMath'); sub.operation = 'SUBTRACT'; sub.inputs[1].default_value = p.get('ring_r', 0.25)
+    nt.links.new(vo.outputs['Distance'], sub.inputs[0])
+    ab = nt.nodes.new('ShaderNodeMath'); ab.operation = 'ABSOLUTE'; nt.links.new(sub.outputs[0], ab.inputs[0])
+    ring = nt.nodes.new('ShaderNodeMapRange'); ring.inputs['From Min'].default_value = 0.0
+    ring.inputs['From Max'].default_value = p.get('ring_w', 0.025); ring.inputs['To Min'].default_value = 1.0
+    ring.inputs['To Max'].default_value = 0.0
+    nt.links.new(ab.outputs[0], ring.inputs['Value'])
+    # only some cells carry a ring (a glass stood there): the cell's random colour gates it
+    gate = nt.nodes.new('ShaderNodeMath'); gate.operation = 'GREATER_THAN'; gate.inputs[1].default_value = 1 - p.get('ring_share', 0.3)
+    sep = nt.nodes.new('ShaderNodeSeparateColor'); nt.links.new(vo.outputs['Color'], sep.inputs['Color'])
+    nt.links.new(sep.outputs['Red'], gate.inputs[0])
+    mk = nt.nodes.new('ShaderNodeMath'); mk.operation = 'MULTIPLY'
+    nt.links.new(ring.outputs['Result'], mk.inputs[0]); nt.links.new(gate.outputs[0], mk.inputs[1])
+    _scale_input(nt, b.inputs['Base Color'], mk.outputs[0], 1.0, 1.0 - p.get('ring_dark', 0.22), True, (0.0, 1.0))
+    _scale_input(nt, b.inputs['Roughness'], mk.outputs[0], 1.0, 0.75, False, (0.0, 1.0))
     return []

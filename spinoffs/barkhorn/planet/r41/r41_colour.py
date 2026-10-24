@@ -16,6 +16,13 @@ size, switching each light group off in turn, found no single source: the Domes 
 tightened and dimmed a little, the floor's finish darkened a quarter and its sealer thinned to a honed finish); the concrete given a soft mottle of tone and
 roughness (`kit41.concrete`); the seats given round 39's jitter, restrained, and each its own leather tone and wear
 (`kit41.seats`); the altar spots down from 170 to 110 W and the rim, top and key lamps on the pair halved, so the batts stop being the brightest thing back there.
+`--p5 [a|b]` (the owner, 2026-10-24: "Do another pass. Keep refining everything") builds on p4 with what both p4
+critics converged on: the Cores' glow 0.003 and lamp 0.10 W (they read as white discs); the zinc darker with a patina
+and the rings glasses leave (`kit41.zinc`); the floor darker still and its sheen less milky; the banquette tables'
+column broken as the seats were (each Core a few centimetres off its table's centre, the tables shifted a little more,
+each top its own tone). The globe, where they split, was tried both ways at a quarter size: (a) the spot down to
+80 W; (b) the rims back up to 0.03 with the spot moved to rake across the discs' faces. (b) kept: at a quarter
+size the wall's coloured shadow 87 against (a)'s 108, and the rims carry their colour again (globe p95 120 against 68).
 `--edge` adds round 40's edge light (r40/r40_edge.EDGE), only if the colours do not read without it.
 """
 import json, os, sys
@@ -72,6 +79,31 @@ def main():
             {'kind': 'kit', 'shape': 'ext', 'path': K41, 'fn': 'seats', 'tone': 0.10,
              'meshes': ['chairs-leather', 'tub-cushions', 'banq-cushions', 'banq-seat', 'banq-back']}]
         out = OUT.replace('.json', '-p4.json')
+    if '--p5' in sys.argv:
+        var = sys.argv[sys.argv.index('--p5') + 1] if len(sys.argv) > sys.argv.index('--p5') + 1 else 'a'
+        if var == 'a':
+            s['lights']['mother-spot'].update(power_w=80.0)
+        else:
+            m['rim'] = 0.03
+            s['lights']['mother-spot'].update(position=[5.4, 2.4, 3.3])
+        orb = next(q for q in s['set']['props'] if q.get('fn') == 'orb')
+        orb.update(shade_glow=0.003, lamp_w=0.10)        # at 0.16 W, a look: still 188, a white disc
+        nudge = [(0.05, -0.04), (-0.06, 0.03), (0.03, 0.06), (-0.04, -0.05)]   # the four banquette tables' Cores
+        orb['spots'] = [[round(x + nudge[i][0], 3), round(y + nudge[i][1], 3), z] if i < 4 else [x, y, z]
+                        for i, (x, y, z) in enumerate(orb['spots'])]
+        rt['darken'] = dict(rt['darken'], Concrete044A=0.6, zinc=0.20)   # zinc 0.30, a look: still 143
+        # (the zinc's tone, its roughness, and a test at half metal each moved the counter top 0 % at a quarter size:
+        # from the door it is seen at a grazing angle, where any surface reflects the warm room; kept: the darker
+        # patina and the rings, which read up close)
+        rt['set'] = dict(rt['set'], Concrete044A={'Coat Weight': 0.06, 'Specular IOR Level': 0.35})
+        rt['zinc_rough'] = [0.45, 0.75]; rt['zinc_mottle'] = 0.5   # seen at a grazing angle from the door, the metal's Fresnel makes it white whatever its tone: rougher
+        jt = next(q for q in s['set']['props'] if q.get('fn') == 'jitter')
+        jt['shift'] = dict(jt['shift'], tables36=0.02)
+        for q in s['set']['props']:
+            if q.get('fn') == 'seats':
+                q['meshes'] = q['meshes'] + ['tables36']
+        s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': K41, 'fn': 'zinc'})
+        out = OUT.replace('.json', f'-p5{var}.json')
     if '--edge' in sys.argv:
         sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'r40'))
         from r40_edge import EDGE
