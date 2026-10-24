@@ -23,6 +23,11 @@ column broken as the seats were (each Core a few centimetres off its table's cen
 each top its own tone). The globe, where they split, was tried both ways at a quarter size: (a) the spot down to
 80 W; (b) the rims back up to 0.03 with the spot moved to rake across the discs' faces. (b) kept: at a quarter
 size the wall's coloured shadow 87 against (a)'s 108, and the rims carry their colour again (globe p95 120 against 68).
+`--p6 K` (the coordinator, 2026-10-24: the lever both p5 critics name) builds on p5 (b) with the white balance at K;
+2700, 3000 and 3300 K tried at a quarter size and one picked. And p5's two new tells undone where that costs nothing:
+the floor back to p4's (darkened 0.75, coat 0.08: at 0.6 the mottle read as "camouflage"); the globe's spot stays where
+p5 moved it (moving it back brings the wall's bright patch back) but its source is made small and its edge hard
+(radius 5 mm, blend 0.1), so the shadow prints crisp instead of "a soft pastel smear".
 `--edge` adds round 40's edge light (r40/r40_edge.EDGE), only if the colours do not read without it.
 """
 import json, os, sys
@@ -104,6 +109,13 @@ def main():
                 q['meshes'] = q['meshes'] + ['tables36']
         s['set']['props'].append({'kind': 'kit', 'shape': 'ext', 'path': K41, 'fn': 'zinc'})
         out = OUT.replace('.json', f'-p5{var}.json')
+    if '--p6' in sys.argv:
+        k = int(sys.argv[sys.argv.index('--p6') + 1])
+        s['render']['white_balance_k'] = k
+        rt['darken'] = dict(rt['darken'], Concrete044A=0.75)
+        rt['set'] = dict(rt['set'], Concrete044A={'Coat Weight': 0.08})
+        s['lights']['mother-spot'].update(radius_m=0.005, blend=0.1)
+        out = OUT.replace('.json', f'-p6-{k}.json')
     if '--edge' in sys.argv:
         sys.path.insert(0, os.path.join(os.path.dirname(HERE), 'r40'))
         from r40_edge import EDGE
