@@ -75,3 +75,11 @@ concrete mottle, the seats varied and restrained, the altar's batts down
 (`renders/2026-10-22/barkhorn/planet41/proofs-p4/door-mother-colour-p4.png`). Critics 5.5 / 5.5, equal to p3; duel
 against p3 1–1, against round 39's Smoke 0–2; one new fault (at the lower glow only the blue and green rims read).
 Gate not met: **p3 stays the door hero.** Log in `r41/critic/LOG.md`.
+
+Round 41 p5 (the owner: "Do another pass. Keep refining everything"; the p4 critics' converged fixes): the Cores dimmer,
+the zinc darker with rings, the floor darker, the tables' column broken, the globe's spot moved to rake the discs with
+the rims at 0.03 (`proofs-p5/door-mother-colour-p5b.png`). Critics 5.0 / 5.5; duel against p3 1–1 (each judge took
+the frame shown second, on the wall's coloured light), against round 39's Smoke 0–2; two new faults (the floor's
+mottle as camouflage, the coloured shadow soft). Gate not met: **p3 stays the door hero.** The zinc's pale read is
+the grazing angle from the door, which no setting of its finish moved; the remaining tells (the rims' neon read, the
+Orbs, the orange grade, the repeated seats) have now held across p3 to p5.

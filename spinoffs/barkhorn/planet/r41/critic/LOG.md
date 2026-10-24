@@ -94,3 +94,39 @@ Read test: a render ("a big hanging sculpture of coloured metal rings"; "surface
 
 Gate not met: the critics equal p3 (5.5 / 5.5), not above it; the duel against p3 is split; and one new fault (the
 warm rims lost). p3 stays the door hero; no 2400 render.
+
+## p5 (the owner, 2026-10-24: "Do another pass. Keep refining everything"; the p4 critics' converged fixes)
+
+`r41_colour.py --p4 --p5 b`, on p4:
+
+- **The Cores.** Glow 0.003, lamp 0.10 W (at 0.16 W, a look, they still read 188).
+- **The zinc.** Darker (0.20), rougher, with a mottled patina and rings (`kit41.zinc`). At a quarter size its tone, its
+  roughness and a test at half metal each moved the counter top 0 %: from the door it is seen at a grazing angle.
+- **The floor.** Darker still (0.6), with less sheen.
+- **The banquette tables.** Each Core 3 to 6 cm off its table's centre, the tables shifted 2 cm, each top its own tone.
+- **The globe, tried both ways at a quarter size.** (a) the spot at 80 W gave the wall 108; (b) rims 0.03 with the spot
+  moved to [5.4, 2.4, 3.3] to rake the discs gave the wall 87 and the globe p95 120. (b) was kept.
+
+Measured against p3:
+
+| region | p3 | p5 |
+|---|---|---|
+| the wall's coloured shadow | 110 | 86 |
+| near floor | 105 | 77 |
+| front Core | 197 | 166 |
+| altar p95 | 207 | 181 |
+| zinc | 135 | 134 |
+
+| pass | frame | critic a | critic b | mean | if fixed | main notes |
+|---|---|---|---|---|---|---|
+| p5 | door-mother, multicolour | 5.0 | 5.5 | 5.25 | 6.5, 7.0 | both: the rims still "neon/LED hoops", the disc faces invisible; the Orbs "golf balls"; the ceiling orange; the altar dim. a: the floor still the brightest large surface. b: the floor mottle "camouflage" (new); the coloured shadow "a soft pastel smear" (new, from the moved spot); the screens darker than the wall; the zinc a pale slab |
+
+Read test: a render ("a glowing multicoloured ring sphere"; "surfaces too clean and uniform, lighting too even").
+
+| duel | ab (image 1 = the other) | ba (image 1 = p5) | result |
+|---|---|---|---|
+| p5 against p3 | p5, slight (the wall's sliver) | p3, slight (the wall's patch) | 1–1 |
+| p5 against round 39's Smoke final | r39, clear | r39, clear | round 39 2–0 (information) |
+
+Gate not met: critic a 5.0 (below p3's 5.5), b 5.5 (equal), the duel against p3 split, and two new faults (the floor
+mottle, the soft shadow). p3 stays the door hero; no 2400 render.
