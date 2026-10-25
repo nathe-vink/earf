@@ -74,7 +74,7 @@ NORTH_SINK = (80.0, 36.0, 16, 1.8, 30.0)
 # tall, 18 x 1.8, on the rod above the lid; the hub, the pipe and two joints about 0.85 K/W between the LED and the fins.
 # The fins' warm air rises to the ceiling, away from the acrylic: no plume over the crown now. The owner's level is
 # North's 575 lm, so South's 1,150; 2,200 stays in the table for the record
-SOUTH = {'1,150 lm (twice North at 575)': (7.7, 1150.0), '2,200 lm (twice North at 1,100)': (14.7, 2200.0)}
+SOUTH = {'1,150 lm (twice the pendant at 575)': (7.7, 1150.0), '2,200 lm (twice the pendant at 1,100)': (14.7, 2200.0)}
 SOUTH_SINK = (90.0, 40.0, 18, 1.8, 30.0)
 NORTH = {'575 lm (175 mA; the owner, round 36)': NORTH.pop('575 lm (175 mA)'), **NORTH}
 
