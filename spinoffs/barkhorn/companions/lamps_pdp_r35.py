@@ -234,6 +234,43 @@ BUILD.update({f'p3-lamp-{lamp}-{f}': (lambda lamp=lamp, f=f: {'dome': dome_p3, '
               for lamp in ('dome', 'orb') for f in FLAVOURS})
 
 
+def p3_row(n):
+    """Pass 3's rows (the coordinator, 2026-10-25: one design throughout the lighting page). Kit pieces still (at a
+    row's scale a lamp is 150 px across, where a glint would not read); what pass 3 changed carries over: no hidden
+    point lamp in Hemisphere (it drew the cut-off as hard wedges), its tinted downlights kept; strips behind that draw
+    the fins' and the bases' edges; a warm spill on the wall behind the pendants; Core turned 25 deg with its cable, so
+    the cable and the touch ring show."""
+    s = row(n)
+    L = s['lights']
+    for p in s['set']['props']:
+        if p.get('module') != 'earf_moon':
+            continue
+        if p.get('fn') == 'dome':
+            p['lamp'] = False if n == 'lamps-domes' else p.get('lamp', True)
+        if p.get('fn') == 'orb':
+            p['cable'] = True
+            p.pop('cartridge', None)
+            p['spots'] = [dict(sp, rotate_z=25) if isinstance(sp, dict) else {'position': sp, 'rotate_z': 25}
+                          for sp in p['spots']]
+    if n == 'lamps-domes':
+        z = 1.48
+        L['fins'] = {'type': 'area', 'size_m': [3.2, 0.12], 'position': [0.3, 0.45, z + 0.30], 'target': [0.0, 0.0, z + 0.13],
+                     'irradiance': 6.0, 'color': 4300, 'camera': False, 'specular': 1.0, 'diffuse': 0.0}
+        L['spill'] = {'type': 'area', 'size_m': [3.0, 0.4], 'position': [0.0, 0.15, z + 0.05], 'target': [0.0, 1.0, z - 0.2],
+                      'irradiance': 0.8, 'color': 2600, 'camera': False, 'specular': 0.0}
+    if n == 'lamps-orbs':
+        L['bases'] = {'type': 'area', 'size_m': [3.2, 0.06], 'position': [0.4, -0.5, 0.25], 'target': [0.0, 0.0, 0.07],
+                      'irradiance': 4.0, 'color': 4300, 'camera': False, 'specular': 1.0, 'diffuse': 0.0}
+    if n == 'lamps-unlit':
+        L['edges'] = {'type': 'area', 'size_m': [0.12, 0.8], 'position': [0.55, 0.15, 0.45], 'target': [0.1, 0.1, 0.3],
+                      'irradiance': 4.0, 'color': 4300, 'camera': False, 'specular': 1.0, 'diffuse': 0.0}
+    s['title'] = s['title'].replace('(round 35)', '(round 39, pass 3)')
+    return s
+
+
+BUILD.update({f'p3-{n}': (lambda n=n: p3_row(n)) for n in ROWS})
+
+
 def main():
     os.makedirs(SHOTS, exist_ok=True)
     for n, f in BUILD.items():
