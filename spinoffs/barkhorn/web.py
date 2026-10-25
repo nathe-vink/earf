@@ -96,6 +96,9 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'smoke_e12r_p19h': 'on a city overpass at dusk, come down like a meteor, the road torn open and burning behind it',
 }
 LP = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'lamps-pdp')   # each lamp in each colour (lamps_pdp.py)
+# round 39's pass 3 (r32-lamps-final): the lamps as now drawn (Hemisphere's fins, Core's 48 mm base, its cable and ring), each
+# in each colour as p3-lamp-<lamp>-<flavour>.png, and the rows as p3-<row>.png; its heroes beat round 32f's 2-0 each
+LP3 = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'lamps-pdp-r35')
 TTR = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'turntable')  # the record player, round 34's finals
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 LINEUP_SHOWN = False          # the studio's eight in a row repeated the hero (the site critic, 2026-10-18); it stays in the look book
@@ -423,9 +426,11 @@ def make_images(sources=None):
             shutil.copy(src, os.path.join(IMG, name))
             made.append(name)
     # the lamps' pictures (the companions session's finals, at full size), each at twice its page width and at once
+    # (round 39's pass 3 first where it has the picture: the two heroes are its Ember frames, the rows its own)
     for name, (w, _) in LAMP_PICS.items():
-        src = os.path.join(ROOT, 'renders', '2026-10-19', 'barkhorn', 'lamps-site', f'{name}.png')
-        if os.path.exists(src):
+        src = first(os.path.join(LP3, f'p3-{name}-ember.png' if name.startswith('lamp-') else f'p3-{name}.png'),
+                    os.path.join(ROOT, 'renders', '2026-10-19', 'barkhorn', 'lamps-site', f'{name}.png'))
+        if src:
             im = Image.open(src)
             save(im, f'{name}.jpg', 2 * w, q=84); save(im, f'{name}-{w}.jpg', w, q=84)
             made.append(name)
@@ -433,7 +438,7 @@ def make_images(sources=None):
     for lamp in ('dome', 'orb'):
         for k in KEYS:
             fl = HABITAT[k]
-            one(first(os.path.join(LP, f'lamp-{lamp}-{fl}.png'),
+            one(first(os.path.join(LP3, f'p3-lamp-{lamp}-{fl}.png'), os.path.join(LP, f'lamp-{lamp}-{fl}.png'),
                       os.path.join(ROOT, 'renders', '2026-10-19', 'barkhorn', 'lamps-site', f'lamp-{lamp}.png') if fl == 'ember' else ''),
                 lambda p, lamp=lamp, k=k: (save(Image.open(p), f'{lamp}-{k}.jpg', 1600, q=84), save(Image.open(p), f'{lamp}-{k}-card.jpg', 640, q=82)))
     # the record player (round 34) as its pictures arrive: each colour in the studio, at dusk and in the phone's frame
