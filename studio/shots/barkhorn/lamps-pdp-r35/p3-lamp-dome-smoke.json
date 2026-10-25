@@ -1,0 +1,340 @@
+{
+ "size": [
+  1600,
+  2000
+ ],
+ "camera": {
+  "position": [
+   -0.12,
+   -0.95,
+   1.18
+  ],
+  "target": [
+   0.0,
+   0.0,
+   1.42
+  ],
+  "lens_mm": 88,
+  "level": false,
+  "fstop": 5.6,
+  "focus": [
+   0.0,
+   -0.05,
+   1.42
+  ]
+ },
+ "set": {
+  "kind": "sweep",
+  "color": "#EAE4DA",
+  "width": 10.0,
+  "front": 6.0,
+  "depth": 0.45,
+  "radius": 0.3,
+  "height": 4.0,
+  "props": []
+ },
+ "sky": {
+  "kind": "gradient",
+  "zenith": "#D8D2C8",
+  "horizon": "#DED8CE",
+  "ground": "#D6CEC2",
+  "strength": 0.35
+ },
+ "lights": {
+  "key": {
+   "type": "area",
+   "size_m": [
+    3.0,
+    0.5
+   ],
+   "orbit": {
+    "azimuth_deg": -30,
+    "elevation_deg": 42,
+    "distance_m": 2.6
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.4
+   ],
+   "irradiance": 0.6,
+   "color": 4300
+  },
+  "fill": {
+   "type": "area",
+   "size_m": [
+    2.5,
+    2.0
+   ],
+   "orbit": {
+    "azimuth_deg": 30,
+    "elevation_deg": 12,
+    "distance_m": 3.0
+   },
+   "target": [
+    0.0,
+    0.0,
+    1.4
+   ],
+   "irradiance": 0.25,
+   "color": 4300
+  },
+  "bgwash": {
+   "type": "area",
+   "size_m": [
+    3.5,
+    1.0
+   ],
+   "position": [
+    0.0,
+    -0.4,
+    3.0
+   ],
+   "target": [
+    0.0,
+    0.45,
+    1.5
+   ],
+   "irradiance": 3.207,
+   "color": "#FFE0A4",
+   "camera": false,
+   "specular": 0.0
+  },
+  "rim": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "position": [
+    0.35,
+    0.22,
+    1.62
+   ],
+   "target": [
+    0,
+    0,
+    1.47
+   ],
+   "irradiance": 0.35,
+   "color": 3600,
+   "camera": false
+  },
+  "rim_l": {
+   "type": "area",
+   "size_m": [
+    0.6,
+    0.6
+   ],
+   "position": [
+    -0.35,
+    0.22,
+    1.62
+   ],
+   "target": [
+    0,
+    0,
+    1.47
+   ],
+   "irradiance": 0.35,
+   "color": 3600,
+   "camera": false
+  },
+  "hubstrip": {
+   "type": "area",
+   "size_m": [
+    1.2,
+    0.08
+   ],
+   "position": [
+    -0.4,
+    -0.3,
+    1.9
+   ],
+   "target": [
+    0,
+    0,
+    1.5
+   ],
+   "irradiance": 0.8,
+   "color": 3600,
+   "camera": false
+  },
+  "cob": {
+   "type": "spot",
+   "position": [
+    0.0,
+    0.0,
+    1.46
+   ],
+   "target": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "power_w": 15.0,
+   "cone_deg": 120,
+   "blend": 1.0,
+   "radius_m": 0.03,
+   "color": 2700,
+   "camera": false,
+   "specular": 0.0
+  },
+  "spill": {
+   "type": "area",
+   "size_m": [
+    0.5,
+    0.5
+   ],
+   "position": [
+    0.0,
+    0.12,
+    1.42
+   ],
+   "target": [
+    0.0,
+    0.45,
+    1.2999999999999998
+   ],
+   "irradiance": 1.4,
+   "color": 2600,
+   "camera": false,
+   "specular": 0.0
+  },
+  "fin_r": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.45
+   ],
+   "position": [
+    0.32,
+    0.3,
+    1.5999999999999999
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.5299999999999998
+   ],
+   "irradiance": 5.0,
+   "color": 4300,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
+  },
+  "fin_l": {
+   "type": "area",
+   "size_m": [
+    0.12,
+    0.45
+   ],
+   "position": [
+    -0.3,
+    0.3,
+    1.5999999999999999
+   ],
+   "target": [
+    0.0,
+    0.0,
+    1.5299999999999998
+   ],
+   "irradiance": 3.0,
+   "color": 4300,
+   "camera": false,
+   "specular": 1.0,
+   "diffuse": 0.0
+  }
+ },
+ "render": {
+  "samples": 128,
+  "adaptive": 0.012,
+  "denoise": true,
+  "clamp": 8,
+  "bounces": 24,
+  "transmission_bounces": 20,
+  "view": "Khronos PBR Neutral",
+  "exposure": 0.15,
+  "white_balance_k": 4300
+ },
+ "title": "Hemisphere, its product page: Smoke (round 39, pass 3)",
+ "product": {
+  "def": "studio/products/earf-dome-pendant.json",
+  "flavour": "smoke",
+  "hide": [
+   "reflector"
+  ],
+  "instances": [
+   {
+    "position": [
+     0.0,
+     0.0,
+     1.4
+    ],
+    "rotate_z": 0
+   }
+  ]
+ },
+ "materials": {
+  "liner": {
+   "glow": 0.84,
+   "glow_color": "#FFDCB8"
+  }
+ },
+ "glints": {
+  "clamp": {
+   "at": [
+    0.04,
+    -0.034,
+    1.488
+   ],
+   "normal": [
+    0.45,
+    -0.4,
+    0.8
+   ],
+   "size_m": 0.06,
+   "power_w": 3.0,
+   "color": 4300,
+   "receivers": [
+    "clamp"
+   ]
+  },
+  "collar": {
+   "at": [
+    0.03,
+    -0.036,
+    1.498
+   ],
+   "normal": [
+    0.6,
+    -0.8,
+    0.0
+   ],
+   "size_m": 0.06,
+   "power_w": 2.5,
+   "color": 4300,
+   "receivers": [
+    "collar"
+   ]
+  },
+  "cap": {
+   "at": [
+    0.014,
+    -0.014,
+    1.553
+   ],
+   "normal": [
+    0.7,
+    -0.7,
+    0.0
+   ],
+   "size_m": 0.06,
+   "power_w": 2.0,
+   "color": 4300,
+   "receivers": [
+    "gland"
+   ]
+  }
+ }
+}

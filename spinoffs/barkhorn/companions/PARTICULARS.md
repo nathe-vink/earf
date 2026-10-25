@@ -21,7 +21,7 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 | Cut-off | The COB sits 22 mm up a 46 mm bore. Above about 46° from vertical you can't see the source (from the geometry, not measured) |
 | Dimming | Phase-cut (TRIAC), 100 % to 10 %, with the driver in the canopy: a 175 mA Class 2 consumer-class (FCC Part 15B) driver for 575 lm, still to source **[UNCONFIRMED: the part]**. A 0-10 V driver is an option for bars |
 | California (JA8) | CRI 90, R9 50 or more (Bridgelux's 90 CRI minimum, ±3), 2700 K, about 87 to 96 lm/W out of the fitting: met by design. Dimming to 10 %, flicker under 30 % and power factor 0.90 or more: to test **[UNCONFIRMED]** |
-| Heat | Fins above the shade sit in room air (shown, **not yet signed off by the owner**). A PEEK ring separates the hub from the shade's collar. Estimated at 575 lm in a 35 °C room: hub 43 °C, LED junction 47 °C, collar and the acrylic next to it 39 °C **[UNCONFIRMED: estimate; thermocouple test planned]** |
+| Heat | Fins above the shade sit in room air (signed off 2026-10-25). A PEEK ring separates the hub from the shade's collar. Estimated at 575 lm in a 35 °C room: hub 43 °C, LED junction 47 °C, collar and the acrylic next to it 39 °C **[UNCONFIRMED: estimate; thermocouple test planned]** |
 | Mains | 120 V reaches the driver in the canopy and stops there. The cord carries the LED's 26 V DC (Class 2): a listed 18 AWG 2-conductor in a black textile braid, its grips tested with the fixture's weight. To be listed to UL 1598 (or ETL) **[NOT YET LISTED]** |
 | Shades | Swap by hand, no tools, with a quarter-turn bayonet and a detent. The shade carries no electrical parts. It is clamped between the collar's flange and a ring on silicone, so a failed bond can't drop it |
 | Materials | Shade: three formed layers of cast acrylic (a 9 mm tinted shell, a 3 mm opal liner, a 3 mm tinted skin), polished, vented at the rim, with a black anodised aluminium collar and clamp ring. Hub, fins and pins: black anodised aluminium. PEEK ring. Canopy and cap: black cast acrylic, polished. Black textile cord |
@@ -32,7 +32,7 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 
 | | |
 |---|---|
-| Size | Ball 160 mm across; base 120 across and 48 tall (was 30: the cells lie under the LED; **not yet signed off by the owner**); 198 mm tall |
+| Size | Ball 160 mm across; base 120 across and 48 tall (was 30: the cells lie under the LED; signed off 2026-10-25); 198 mm tall |
 | Weight | About 2.2 kg: the ball 0.75, the base 1.45 (its steel ballast 0.75, its cells 0.25) **[UNCONFIRMED: computed]** |
 | Light | Warm-dim, 2200 to 2700 K as it dims, CRI 90+, about 200 lm at full (2.5 W) **[UNCONFIRMED: the LED module is still to choose; the light out of the ball is unmeasured]** |
 | Control | Touch the black ring: tap to switch, hold to dim |
@@ -48,6 +48,6 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 
 ## Prices
 
-The owner sets the prices. The suggestions (README, round 35):
+The owner sets the prices; the coordinator set Core's on the owner's "For everything else make your call" (2026-10-25). The suggestions (README, round 35):
 - Hemisphere: $795 to $895 with one shade; shades $295 to $345.
-- Core: $595 to $695 with its cells (was $545 to $645 plug-in, plus $95 to $125 for the cartridge).
+- Core: **$650** with its cells (set 2026-10-25; was $545 to $645 plug-in, plus $95 to $125 for the cartridge).

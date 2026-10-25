@@ -1462,3 +1462,15 @@ Renaming them would break the builds and shots that import them. Nothing was re-
 
 `spinoffs/barkhorn/web.py`, `site/` and the globe mark's south pole (`earth.py`, `mark.py`, the globe files) are untouched.
 
+## Round 39: the open calls closed; the site's heroes, pass 3
+
+The owner, 2026-10-25: "For everything else make your call." The coordinator's calls:
+- **Core's 48 mm base: signed off.** It is what the replaceable cells take.
+- **Hemisphere's fins: signed off.** They are what let it run at 575 lm (hub about 43 °C, the acrylic about 39 °C in a
+  35 °C room).
+- **The driver:** the Fulham T1T11200350-15L (FCC Part 15B, consumer class) for homes; the Mean Well PCD-16-350A
+  stays for bars. At 575 lm the line still needs its 175 mA consumer-class driver **[to source]**.
+- **Core's price: $650** with its cells, the middle of the suggested range.
+
+PARTICULARS.md records them.
+

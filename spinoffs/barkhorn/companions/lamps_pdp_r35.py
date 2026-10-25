@@ -165,6 +165,75 @@ BUILD = {f'lamp-{lamp}-{f}': (lambda lamp=lamp, f=f: {'dome': dome, 'orb': orb, 
 BUILD.update({n: (lambda n=n: row(n)) for n in ROWS})
 
 
+# --- pass 3 (round 39; the coordinator, 2026-10-25, the base and fins signed off) -------------------------------------
+# The lamps as products, not kit pieces, so glints can be placed on their black anodised parts for each camera (the
+# engine's glints light named product parts only); Core turned so its cable and touch ring show; a warm spill behind
+# Hemisphere so it reads as lit; the downlight's hard cone on the backdrop gone (its light now a soft, wide spot).
+PDEF = {'dome': 'studio/products/earf-dome-pendant.json', 'orb': 'studio/products/earf-orb-table.json'}
+
+
+def glint(at, normal, part, power=3.0, size=0.06, color=4300):
+    return {'at': at, 'normal': normal, 'size_m': size, 'power_w': power, 'color': color, 'receivers': [part]}
+
+
+def dome_p3(flavour):
+    s = dome(flavour)
+    g = GAIN[flavour] / GAIN['ember']
+    s['set']['props'] = [q for q in s['set']['props'] if q.get('module') != 'earf_moon']
+    z = 1.4
+    s['product'] = {'def': PDEF['dome'], 'flavour': flavour, 'hide': ['reflector'],
+                    'instances': [{'position': [0.0, 0.0, z], 'rotate_z': 0}]}
+    s['materials'] = {'liner': {'glow': round(1.4 * g, 3), 'glow_color': '#FFDCB8'}}
+    L = s['lights']
+    for k in ('edge_r', 'edge_l'):
+        L.pop(k, None)
+    # its own light, down from the COB: a soft wide spot (the old point lamp drew the bore's cut-off as hard wedges)
+    L['cob'] = {'type': 'spot', 'position': [0.0, 0.0, z + 0.06], 'target': [0.0, 0.0, 0.0], 'power_w': 15.0,
+                'cone_deg': 120, 'blend': 1.0, 'radius_m': 0.03, 'color': 2700, 'camera': False, 'specular': 0.0}
+    # the warm spill on the paper behind, as a lit shade throws on a near wall
+    L['spill'] = {'type': 'area', 'size_m': [0.5, 0.5], 'position': [0.0, 0.12, z + 0.02], 'target': [0.0, 0.45, z - 0.1],
+                  'irradiance': 1.4, 'color': 2600, 'camera': False, 'specular': 0.0}
+    # the fins mirror each other, so no glint can sit on them: two strips behind and to the sides draw their edges
+    for k, x in (('fin_r', 0.32), ('fin_l', -0.30)):
+        L[k] = {'type': 'area', 'size_m': [0.12, 0.45], 'position': [x, 0.30, z + 0.20], 'target': [0.0, 0.0, z + 0.13],
+                'irradiance': 5.0 if x > 0 else 3.0, 'color': 4300, 'camera': False, 'specular': 1.0, 'diffuse': 0.0}
+    s['glints'] = {
+        'clamp': glint([0.04, -0.034, z + 0.088], [0.45, -0.4, 0.8], 'clamp', 3.0),
+        'collar': glint([0.03, -0.036, z + 0.098], [0.6, -0.8, 0.0], 'collar', 2.5),
+        'cap': glint([0.014, -0.014, z + 0.153], [0.7, -0.7, 0.0], 'gland', 2.0),
+    }
+    s['title'] = f'{TITLES["dome"]}, its product page: {flavour.title()} (round 39, pass 3)'
+    return s
+
+
+def orb_p3(flavour):
+    s = orb(flavour)
+    g = GAIN[flavour] / GAIN['ember']
+    s['set']['props'] = [q for q in s['set']['props'] if q.get('module') != 'earf_moon']
+    z = 0.04
+    m = core_materials(flavour)
+    m['liner'].update(glow=round(0.8 * g, 3), glow_color='#FFDCB8')
+    s['materials'] = m
+    # turned so the cable leaves at the left and runs back into the frame's depth, the touch ring toward the camera
+    s['product'] = {'def': PDEF['orb'], 'flavour': flavour, 'instances': [{'position': [0.0, 0.0, z], 'rotate_z': 25}]}
+    L = s['lights']
+    L.pop('edge_l', None)
+    L['ball'] = {'type': 'point', 'position': [0.0, 0.0, z + 0.1184], 'power_w': 3.0, 'radius_m': 0.03, 'color': 2700,
+                 'camera': False, 'transmission': False, 'specular': 0.0}
+    s['glints'] = {
+        'ring': glint([0.046, -0.04, z + 0.052], [0.55, -0.7, 0.45], 'ring', 3.0),
+        'ring_l': glint([-0.05, -0.035, z + 0.052], [-0.5, -0.7, 0.5], 'ring', 1.8),
+        'base': glint([0.055, -0.025, z + 0.03], [0.85, -0.5, 0.0], 'base', 3.0, size=0.04),
+        'grommet': glint([0.0, -0.03, z + 0.05], [0.0, -0.6, -0.8], 'grommet', 1.0, size=0.03),
+    }
+    s['title'] = f'{TITLES["orb"]}, its product page: {flavour.title()} (round 39, pass 3)'
+    return s
+
+
+BUILD.update({f'p3-lamp-{lamp}-{f}': (lambda lamp=lamp, f=f: {'dome': dome_p3, 'orb': orb_p3}[lamp](f))
+              for lamp in ('dome', 'orb') for f in FLAVOURS})
+
+
 def main():
     os.makedirs(SHOTS, exist_ok=True)
     for n, f in BUILD.items():
