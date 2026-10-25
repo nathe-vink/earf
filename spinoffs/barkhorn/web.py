@@ -17,7 +17,7 @@ which deploys it on every push to main.
 - Home: the hero (the eight on an arc, covers off, each a link to its page); the three lines; the eight colours; lit
   from below; in their element; the room; enquiries.
 - Speakers: the eight cards, covers off first; in the studio; the horns, turning as the page scrolls and by hand; the
-  particulars. Lighting: Hemisphere North and Core, each in its eight. Turntable: Mantle, or its concept until its
+  particulars. Lighting: Hemisphere and Core, each in its eight. Turntable: Mantle, or its concept until its
   pictures are in.
 - A product's page: its pictures in the colour picked, the eight coins, its particulars, and its colour's company.
 - The header's globe keeps turning, never under reduced motion. The page opens on it: the acrylic globe large in the
@@ -72,9 +72,11 @@ ELEMENT['violet'] = 'haze_b'  # the layered hills beat the lavender field in a b
 ELEMENT['amber'] = 'acid_b'   # acid rain on black lava beat the acid spring at Dallol in a blind duel, 2 to 1 (6.3 to 5.4)
 ELEMENT['ice'] = 'fog_b'      # the headland above the fog at dawn beat the summit above a sea of cloud in a blind duel, 3 to 0 (6.7 to 4.7)
 ELEMENT['green'] = 'poison_g5'   # the owner (2026-10-22): "Poison: put the deadly green one live" - death caps and a deer's bones (G5 p4)
-ELEMENT['black'] = 'smoke_e12r_p19'   # the owner (2026-10-22): "render p19's finals and put the meteor on the site" - the
+ELEMENT['black'] = 'smoke_e12r_p19h'  # the owner (2026-10-22): "render p19's finals and put the meteor on the site" - the
                                       # speaker come down like a meteor on the overpass, the fire behind it and its trench
-                                      # smouldering (E12r p19; E10's bridge before it, E9 p5 before that)
+                                      # smouldering (E12r p19; E10's bridge before it, E9 p5 before that); p19h is p19's
+                                      # own frames finished again with E12r p27h's eased shimmer, its sparks straight (the
+                                      # owner, 2026-10-25: "make your call")
 PLACES = {  # where each concept stands: the speaker page leads with it ("Ember on a lava field at blue hour.")
     'ember': 'on a lava field at blue hour, the crust cracked to its glow',
     'dust': 'on rippled sand in the Southwest at golden hour',
@@ -91,6 +93,7 @@ PLACES = {  # where each concept stands: the speaker page leads with it ("Ember 
     'smoke_e9': 'on a city bridge at dusk, a wrecked car burning behind it',
     'smoke_e10': 'on a city overpass at blue hour, a burnt-out car still burning behind it',
     'smoke_e12r_p19': 'on a city overpass at dusk, come down like a meteor, the road torn open and burning behind it',
+    'smoke_e12r_p19h': 'on a city overpass at dusk, come down like a meteor, the road torn open and burning behind it',
 }
 LP = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'lamps-pdp')   # each lamp in each colour (lamps_pdp.py)
 TTR = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'turntable')  # the record player, round 34's finals
@@ -122,7 +125,7 @@ SPEC = [('Height', '1293 mm'), ('Width', '625 mm at the horn, 560 mm at the cabi
         ('Bass', 'To about 51 Hz at &minus;3 dB, before the room adds its own; the ports tuned to 38 Hz'),
         ('Loudness', 'Up to about 115 dB at 1 m, each'),
         ('Inputs', 'XLR (and a link out), RCA, AES, S/PDIF coaxial and optical; USB to set it up'),
-        ('Lining', 'Recycled polyester batts in white voile, 100 mm at the top and the bottom'),
+        ('Lining', 'Polyester batts in white voile, 100 mm at the top and the bottom'),
         ('Price', 'Set at launch; each pair is made to order'), CARE,
         ('Figures', 'Design figures, from the drawings and their simulation; measured ones follow with the first pair')]
 MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn above it',
@@ -138,12 +141,13 @@ MACROS = [('corner', 'ember', 'The top corner of an Ember cabinet, the horn abov
 # battery cartridge as its option, each tint cast to read as its speaker's when lit. Their particulars are the fab kits'
 # (companions/PARTICULARS.md). The band shows once every picture in LAMP_PICS is in site/img (made from
 # renders/2026-10-19/barkhorn/lamps-site/). Round 35, the owner's names (2026-10-22, yes): the pendant is Hemisphere (today's
-# Dome is Hemisphere North; South, its shade turned up as a bowl, is being drawn), the table lamp Core, the record player
-# Mantle; and Core works plugged in or not, on a built-in battery its owner can replace (the cartridge dropped)
+# Dome), the table lamp Core, the record player Mantle; and Core works plugged in or not, on a built-in battery its owner
+# can replace (the cartridge dropped). The owner (2026-10-25): "Get rid of south altogether and just call it hemisphere":
+# the bowl-shaped South is dropped, and the pendant, Hemisphere North until then, is Hemisphere
 SLUG = {'dome': 'hemisphere', 'orb': 'core', 'turntable': 'mantle'}   # each product's address; the old keys still answer
 LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
-    ('dome', 'Hemisphere North', 'Pendant', 'Hung low over the bar. A quarter turn takes its shade off, and another puts a new colour on.',
-     'Hemisphere North lit, its Ember shade glowing beneath a black hub',
+    ('dome', 'Hemisphere', 'Pendant', 'Hung low over the bar. A quarter turn takes its shade off, and another puts a new colour on.',
+     'Hemisphere lit, its Ember shade glowing beneath a black hub',
      [('Size', '200 mm across'), ('Shade', 'Cast acrylic in three layers, tinted, with a frosted layer between'),
       ('Light', '2700 K, CRI 90, its source shielded inside the hub'), ('Fitting', 'Black anodised aluminium, with a quarter-turn catch'),
       ('Hanging', 'A 600 mm drop as standard, cut to length; a black acrylic canopy 150 mm across'),
@@ -176,7 +180,7 @@ TT = dict(name='Mantle', kind='Record player', route='mantle',             # rou
 # round 34's final (companions/README.md "Round 34: the record player, final (Mantle)", r32-turntable-final)
 LINES = [  # the shop's three lines: key, name, what's in it, its line
     ('speakers', 'Speakers', 'Atmosphere', 'A powered horn loudspeaker in eight colours of cast acrylic.'),
-    ('lighting', 'Lighting', 'Hemisphere North and Core', 'A pendant and a table lamp in the speakers&rsquo; acrylic, frosted within.'),
+    ('lighting', 'Lighting', 'Hemisphere and Core', 'A pendant and a table lamp in the speakers&rsquo; acrylic, frosted within.'),
     ('turntable', 'Turntable', 'Mantle', 'A record player in the same eight colours, lit from underneath.'),
 ]
 KEYS = [c[0] for c in CLOUDS]
@@ -451,9 +455,6 @@ def make_images(sources=None):
               os.path.join(ROOT, 'renders', '2026-10-18', 'barkhorn', 'companions2', 'concepts', 'concept-r3-dusk.png')),
         lambda p: save(Image.open(p), 'tt-concept.jpg', None, q=88))
     one(os.path.join(TTR, 'proof', 'studio-haze.png'), lambda p: save(Image.open(p), 'tt-proof-studio.jpg', None, q=88))
-    # Mother EARF: the mark made in acrylic (round 33c's multicolour globe, by day)
-    one(os.path.join(ROOT, 'renders', '2026-10-20', 'barkhorn', 'globe-colour', 'final-day-r2.png'),
-        lambda p: (save(Image.open(p), 'mother-globe.jpg', 1600, q=86), save(Image.open(p), 'mother-globe-800.jpg', 800, q=84)))
     # the coins, in the icons' order, one sheet for each ground (round 30's renders, at 800 px on E.PAPER and E.NIGHT)
     order = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
     for tag, ground, dark in (('paper', (242, 238, 232), False), ('night', (17, 16, 19), True)):
@@ -705,7 +706,7 @@ def body():
         return (f'<article class="ptile"><a class="ph" href="#{SLUG.get(route, route)}-ember">{big(img, alt)}</a>'
                 f'<div class="pt-body"><h3>{name}<small>{kind}</small></h3><p class="line">{line}</p>{dots(route)}'
                 f'<a class="more" href="#{SLUG.get(route, route)}-ember">See {name}</a></div></article>')
-    # the lighting line: Hemisphere North and Core, each with its eight, then the rows, and the pair switched off beside
+    # the lighting line: Hemisphere and Core, each with its eight, then the rows, and the pair switched off beside
     # Core's word on its battery (round 35: plugged in or not, the cartridge dropped)
     lighting = ('  <section class="band lamps" id="lamps"><div class="wrap">\n'
                 '    <div class="head"><div><p class="eyebrow">Lighting</p><h2>The same eight, lit from within.</h2>\n'
@@ -774,7 +775,7 @@ def body():
     sp_img = next((f'{k}-habitat-portrait.jpg' for k in ('violet', 'green', 'red') if os.path.exists(os.path.join(IMG, f'{k}-habitat-portrait.jpg'))), 'hero-1200.jpg')
     tiles = [tile('speakers', LINES[0][1], LINES[0][2], LINES[0][3], sp_img, 'Haze, the violet speaker, before layered hills in evening light', 'See the speakers')]
     if lighting:
-        tiles.append(tile('lighting', LINES[1][1], LINES[1][2], LINES[1][3], 'dome-red.jpg', 'Hemisphere North lit in Ember', 'See the lighting'))
+        tiles.append(tile('lighting', LINES[1][1], LINES[1][2], LINES[1][3], 'dome-red.jpg', 'Hemisphere lit in Ember', 'See the lighting'))
     tiles.append(tile('turntable', LINES[2][1], LINES[2][2], LINES[2][3], 'tt-ice-tall.jpg' if tt else 'tt-concept.jpg',
                       f'{TT["name"]}, the record player' if tt else f'{TT["name"]} in Haze at dusk, its base glowing',
                       'See the record player' if tt else 'See where it stands', soon=not tt))
@@ -1130,11 +1131,6 @@ header.top.on-dark .brand .globe { background-image: url(img/globe-spin-dark.web
 .pair img { width: 100%; height: auto; display: block; border-radius: 4px; max-width: 100% }
 .pair figcaption { font-size: 15px; color: var(--muted) } .pair figcaption b { color: var(--ink); font-weight: 600; margin-right: 6px }
 @media (max-width: 720px) { .pair { grid-template-columns: 1fr } }
-.mother-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; align-items: center }
-@media (max-width: 860px) { .mother-grid { grid-template-columns: minmax(0, 1fr) } }
-.mother-fig { margin: 0; display: grid; gap: 10px }
-.mother-fig img { width: 100%; height: auto; display: block; border-radius: 6px }
-.mother-fig figcaption { font-size: 14px; color: var(--muted) }
 .promise { list-style: none; margin: 0; padding: 0; display: grid; gap: 24px }
 .promise li { display: grid; gap: 8px; align-content: start; padding-top: 16px; border-top: 1px solid var(--rule); min-width: 0 }
 .promise b { font-weight: 600; font-size: 18px }
@@ -1418,24 +1414,6 @@ __HABITATS__
     </ol>
   </div></section>
 
-  <section class="band mother" id="mother-earf"><div class="wrap">
-    <div class="head"><div><p class="eyebrow">Mother EARF</p><h2>Everything comes home.</h2>
-      <p>Our things borrow their names from the Earth, core to atmosphere. Mother EARF is how we pay it back.</p></div></div>
-    <div class="mother-grid">
-    <figure class="mother-fig"><img src="img/mother-globe.jpg" srcset="img/mother-globe-800.jpg 800w, img/mother-globe.jpg 1600w" sizes="(min-width: 900px) 50vw, 100vw"
-      width="1600" height="1067" loading="lazy" alt="The EARF globe made in acrylic: tinted discs slotted into a sphere, red, orange, yellow, green, blue and violet, on a black base">
-      <figcaption>The mark, made in the same acrylic.</figcaption></figure>
-    <ol class="promise">
-      <li><b>Acrylic that has lived before.</b><span>Cast acrylic can be broken back down to the liquid it was cast from and cast again.
-        Recycled sheet isn&rsquo;t yet made in our colours at 20&nbsp;mm; when it is, we mean to use it.</span></li>
-      <li><b>Made to be mended.</b><span>Drivers and amplifiers any good technician knows. Screws, not glue, wherever a part may one day
-        need to come out. Core&rsquo;s battery changes with a screwdriver.</span></li>
-      <li><b>Taken back at the end.</b><span>When you&rsquo;re done with a piece, we mean to take it back: what still works carries on, and
-        the acrylic goes back to be cast again.</span></li>
-    </ol>
-    </div>
-  </div></section>
-
   <section class="band" id="contact"><div class="wrap contact">
     <p class="eyebrow">Enquiries</p>
     <h2>Write to us.</h2>
@@ -1535,7 +1513,7 @@ __TURNTABLE__
 
 <footer><div class="wrap">
   <a class="brand" href="#top" aria-label="EARF, home">__WORD__</a>
-  <nav class="foot-nav" aria-label="More"><a href="#progress">Progress</a><a href="#mother-earf">Mother EARF</a><a href="#contact">Enquiries</a></nav>
+  <nav class="foot-nav" aria-label="More"><a href="#progress">Progress</a><a href="#contact">Enquiries</a></nav>
   <p>EARF &middot; San Francisco &middot; In development, not yet for sale &middot; The pictures are renders &middot; &copy; 2026</p>
 </div></footer>
 
@@ -1701,7 +1679,7 @@ const SPEAKER_VIEWS = [
   ['turn', 'Turning', c => `${c.name}'s horn, all the way round.`],
 ];
 const LAMP_VIEWS = {
-  dome: [['hero', 'Lit', (c, s) => s ? `Hemisphere North lit, shown in ${BY[s].name}; its ${c.name} shade is cast in the same way.` : `Hemisphere North lit, its ${c.name} shade glowing beneath a black hub.`,
+  dome: [['hero', 'Lit', (c, s) => s ? `Hemisphere lit, shown in ${BY[s].name}; its ${c.name} shade is cast in the same way.` : `Hemisphere lit, its ${c.name} shade glowing beneath a black hub.`,
           (c, s) => s ? `Shown lit in ${BY[s].name}; the ${c.name} shade is cast the same way.` : `Lit, in ${c.name}.`],
          ['row', 'All eight', () => 'Eight Hemispheres hung in a row, lit, one in each colour.'],
          ['unlit', 'Off', () => 'A Core and a Hemisphere in Smoke, switched off: dark, polished acrylic, pale at the centre.']],
@@ -1792,7 +1770,7 @@ function go(d, focus) { const list = shown(BY[cur]); showView(list[(list.indexOf
 const MORE = {
   speaker: 'More on the speaker: <a href="#turn">the horn</a>, <a href="#closer">the studio</a> and <a href="#spec">the particulars</a>.',
   dome: 'Also in Lighting: <a href="#core-ember">Core</a>, a table lamp in the same eight.',
-  orb: 'Also in Lighting: <a href="#hemisphere-ember">Hemisphere North</a>, a pendant in the same eight.',
+  orb: 'Also in Lighting: <a href="#hemisphere-ember">Hemisphere</a>, a pendant in the same eight.',
   turntable: 'See it beside the speakers: <a href="#speakers">Atmosphere</a>.',
 };
 function renderProduct(Pr, k) {

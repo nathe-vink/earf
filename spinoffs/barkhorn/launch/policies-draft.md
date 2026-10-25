@@ -22,15 +22,14 @@ These terms cover every order you place with **[OWNER: legal name, company type,
 
 We also deliver only once a piece's safety listing is done, on the same refund terms [rows 4, 5, 7]. **[OWNER: default: yes, as a pendant can't be installed unlisted [row 5]]**
 
-*Counsel:* Atmosphere, Core and Hemisphere North need an SDoC [rows 1, 2]; Mantle only if its speed control is digital [row 1] [UNCONFIRMED until the circuit is fixed]. Hemisphere South is not in the checklist. Ads need the section 3A FCC notice until each SDoC [row 3]; check it beside conditional sales. Keep conditional-sale records for 60 months [row 3], and every delay notice and reply [row 26].
+*Counsel:* Atmosphere, Core and Hemisphere need an SDoC [rows 1, 2]; Mantle only if its speed control is digital [row 1] [UNCONFIRMED until the circuit is fixed]. Ads need the section 3A FCC notice until each SDoC [row 3]; check it beside conditional sales. Keep conditional-sale records for 60 months [row 3], and every delay notice and reply [row 26].
 
 ### The particulars
 
 | Piece | Weight | Power | In the box |
 |---|---|---|---|
 | Atmosphere (a pair) | About 72 kg each; 62 kg with the horn lifted off | Mains; amplifier built in | Two speakers, with horns and covers |
-| Hemisphere North | — | 120 V mains, dimmable | Shade, fitting, 600 mm drop (cut to length), canopy |
-| Hemisphere South | Being drawn | 120 V mains | To follow |
+| Hemisphere | — | 120 V mains, dimmable | Shade, fitting, 600 mm drop (cut to length), canopy |
 | Core | 2.0 kg | USB-C or battery | Lamp, replaceable battery, USB-C cable, 20 W adapter |
 | Mantle | About 15.5 kg | Mains, through an external supply | Player with Rega RB330 arm, Ortofon 2M Black cartridge, hinged lid, power supply |
 | Spare shade or ball | — | — | One |
