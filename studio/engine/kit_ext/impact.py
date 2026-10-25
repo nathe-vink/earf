@@ -70,23 +70,34 @@ so evenly that they look computer-scattered"). All off by default.
 E12r p21: the same shot built in two processes gave different rubble (the lip slabs 29210 vertices in one build, 28343
 in the other, and everything dropped on them after), so no two proofs of a pass were comparable and strips rendered on
 different machines disagreed. With `freeze` (slabs, debris), a piece's mesh is written the first time it is built to
-renders/cache/impact/<key>.blend and read back from there after, the key a hash of this file, the piece and every
-impact piece built before it in the shot (what a dropped piece lands on). Off by default."""
-import hashlib, json, math, os, random
+renders/cache/impact/<key>.blend and read back from there after, the key a hash of the code that shapes the pieces
+(_GEOMETRY), the piece and every impact piece built before it in the shot (what a dropped piece lands on), each less
+what only colours it (_LOOKS: a road's wear, a piece's tints and dust). A change to how road() lays out its slab needs
+the cache cleared. Off by default. For road, `wear` lays a used road's surface over the deck (see _wear)."""
+import hashlib, inspect, json, math, os, random
 
 import bmesh
 from mathutils import Euler, Matrix, Vector, noise
 
 _ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', '..'))
 _FREEZE_DIR = os.path.join(_ROOT, 'renders', 'cache', 'impact')
-_SOURCE = hashlib.sha1(open(os.path.abspath(__file__), 'rb').read()).hexdigest()
+_GEOMETRY = ('trench', 'slabs', 'debris', '_lipf', '_plate', '_rough_plate', '_edges', '_place', '_drop', '_faces',
+             '_crumble', '_smooth')
+_SOURCE = []
 _CHAIN = []                                                     # every impact piece built so far in this process
+# what only colours a piece, kept out of the key: a road's wear changed every key after it and so the rubble (E12r p24)
+_LOOKS = {'material', 'texture', 'tex_scale', 'tint', 'tint_mix', 'rough_mul', 'bump', 'value', 'wear', 'top', 'under',
+          'top_value', 'under_value', 'side_value', 'under_tint', 'under_scale', 'side_scale', 'top_rough', 'side_rough',
+          'dust', 'dust_color', 'course', 'course_value', 'course_rough', 'freeze'}
 
 
 def _chain_key(p):
-    """This piece's key: this file, the pieces built before it and the piece itself (see the docstring)."""
-    _CHAIN.append(json.dumps(p, sort_keys=True, default=str))
-    return hashlib.sha1('|'.join([_SOURCE] + _CHAIN).encode()).hexdigest()[:20]
+    """This piece's key: the code that shapes the pieces, the pieces built before it and the piece itself, less what
+    only colours it (see the docstring)."""
+    if not _SOURCE:
+        _SOURCE.append(hashlib.sha1(''.join(inspect.getsource(globals()[f]) for f in _GEOMETRY).encode()).hexdigest())
+    _CHAIN.append(json.dumps({k: v for k, v in p.items() if k not in _LOOKS}, sort_keys=True, default=str))
+    return hashlib.sha1('|'.join(_SOURCE + _CHAIN).encode()).hexdigest()[:20]
 
 
 def _frozen(bpy, name, p, build):
@@ -556,8 +567,93 @@ def road(bpy, name, p, kit):
     bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
     mat = kit.piece_material(bpy, {k: v for k, v in p.items() if k in ('material', 'texture', 'tex_scale', 'tint',
                                                                        'tint_mix', 'rough_mul', 'bump', 'value')})
+    if p.get('wear'):
+        mat = _wear(bpy, mat, p['wear'], p.get('jag_seed', 1))
     q = {k: v for k, v in p.items() if k in ('position', 'rotate')}
     return kit.finish(bpy, name, bm, q, smooth=False, mat=mat)
+
+
+def _wear(bpy, m, w, seed):
+    """`wear` (road): a used road's surface over the deck's even asphalt (E12r p21b A: "an even, spotless grey ... no
+    tyre marks, stains, patches"): the wheel paths of each lane (`lanes`, their centres across the road, metres; the
+    paths `track` either side of each) polished darker and smoother, `track_dark` at most, broken along their length;
+    oil dropped along the lanes' middles (`stain`); and the whole mottled by a slow noise (`mottle`). On a copy."""
+    m = m.copy()
+    nt = m.node_tree; N = nt.nodes.new; L = nt.links.new
+    bs = next((n for n in nt.nodes if n.type == 'BSDF_PRINCIPLED'), None)
+    if bs is None:
+        return m
+
+    def op(o, a, b=None):
+        n = N('ShaderNodeMath'); n.operation = o
+        for i, x in enumerate((a, b)):
+            if x is None:
+                continue
+            if isinstance(x, (int, float)):
+                n.inputs[i].default_value = x
+            else:
+                L(x, n.inputs[i])
+        return n.outputs[0]
+
+    def band(v, half, soft):
+        n = N('ShaderNodeMapRange'); n.interpolation_type = 'SMOOTHSTEP'; n.clamp = True
+        n.inputs['From Min'].default_value = half + soft; n.inputs['From Max'].default_value = half
+        L(v, n.inputs['Value'])
+        return n.outputs['Result']
+
+    def noise(vec, scale, detail, w4):
+        n = N('ShaderNodeTexNoise'); n.noise_dimensions = '4D'
+        n.inputs['Scale'].default_value = scale; n.inputs['Detail'].default_value = detail
+        n.inputs['W'].default_value = w4
+        L(vec, n.inputs['Vector'])
+        return n.outputs['Fac']
+
+    tc = N('ShaderNodeTexCoord'); sep = N('ShaderNodeSeparateXYZ'); L(tc.outputs['Object'], sep.inputs[0])
+    x, y = sep.outputs['X'], sep.outputs['Y']
+    tr, tw = w.get('track', 0.85), w.get('track_w', 0.32)
+    tracks = None
+    for c in w.get('lanes', []):
+        for s in (-1, 1):
+            b = band(op('ABSOLUTE', op('SUBTRACT', x, c + s * tr)), tw / 2, 0.18)
+            tracks = b if tracks is None else op('MAXIMUM', tracks, b)
+    # broken along the lane: polish comes and goes over a few metres
+    along = N('ShaderNodeMapRange'); along.clamp = True
+    along.inputs['From Min'].default_value = 0.3; along.inputs['From Max'].default_value = 0.65
+    L(noise(tc.outputs['Object'], 0.35, 2.0, seed * 0.71), along.inputs['Value'])
+    T = op('MULTIPLY', tracks, along.outputs['Result']) if tracks is not None else None
+    dark = op('SUBTRACT', 1.0, op('MULTIPLY', T, w.get('track_dark', 0.18))) if T is not None else None
+    if w.get('stain'):
+        mids = None
+        for c in w.get('lanes', []):
+            b = band(op('ABSOLUTE', op('SUBTRACT', x, c)), 0.45, 0.3)
+            mids = b if mids is None else op('MAXIMUM', mids, b)
+        blot = N('ShaderNodeMapRange'); blot.interpolation_type = 'SMOOTHSTEP'; blot.clamp = True
+        blot.inputs['From Min'].default_value = 0.6; blot.inputs['From Max'].default_value = 0.72
+        L(noise(tc.outputs['Object'], 1.6, 4.0, seed * 1.37 + 3.0), blot.inputs['Value'])
+        st = op('MULTIPLY', op('MULTIPLY', blot.outputs['Result'], mids), w['stain'])
+        sd = op('SUBTRACT', 1.0, st)
+        dark = sd if dark is None else op('MULTIPLY', dark, sd)
+    if w.get('mottle'):
+        mo = op('ADD', 1.0, op('MULTIPLY', op('SUBTRACT', noise(tc.outputs['Object'], 0.12, 3.0, seed * 2.1 + 7.0), 0.5),
+                                         2.0 * w['mottle']))
+        dark = mo if dark is None else op('MULTIPLY', dark, mo)
+    if dark is not None:
+        src = bs.inputs['Base Color']
+        sc = N('ShaderNodeVectorMath'); sc.operation = 'SCALE'
+        if src.links:
+            L(src.links[0].from_socket, sc.inputs[0])
+        else:
+            sc.inputs[0].default_value = src.default_value[:3]
+        L(dark, sc.inputs['Scale'])
+        L(sc.outputs[0], src)
+    if T is not None:
+        rr = bs.inputs['Roughness']
+        f = op('SUBTRACT', 1.0, op('MULTIPLY', T, w.get('track_polish', 0.3)))
+        if rr.links:
+            L(op('MULTIPLY', rr.links[0].from_socket, f), rr)
+        else:
+            L(op('MULTIPLY', rr.default_value, f), rr)
+    return m
 
 
 def scorch(bpy, name, p, kit):

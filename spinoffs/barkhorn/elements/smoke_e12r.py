@@ -110,8 +110,12 @@ TURN = 25.0                          # the speaker turned so the horn shows its 
                                      # television"): meteor_e is solved with it so, against the same wind
 # the shimmer over the fire (finish.haze), in each frame's fractions: the rising air either side of and above the
 # speaker, the speaker itself kept still
-HAZE = dict(box=[0.36, 0.12, 0.66, 0.64], px=9.0, scale=4.5, exclude=[[0.42, 0.55, 0.59, 0.93]])   # p10: 3.5 read as none
-HAZE_PORTRAIT = dict(box=[0.34, 0.15, 0.66, 0.6], px=9.0, scale=4.5, exclude=[[0.4, 0.54, 0.61, 0.79]])
+HAZE = dict(box=[0.36, 0.12, 0.66, 0.64], px=9.0, scale=12.0, exclude=[[0.42, 0.55, 0.59, 0.93]])   # p10: 3.5 read as none
+HAZE_PORTRAIT = dict(box=[0.34, 0.15, 0.66, 0.6], px=9.0, scale=12.0, exclude=[[0.4, 0.54, 0.61, 0.79]])
+# p27h (p26's judges: "embers swirling just above the speaker"; p14's "curly spaghetti squiggles"): at 4.5 px the shimmer
+# curled every straight spark streak into a wire; with it off they are straight. Its features 12 px (at 1350 wide: 5 cm at
+# the speaker, an eddy's size), the same 9 px, so the air still wavers and the sparks bend gently (judged on the sparks
+# against p27: "curly, filament-like squiggles just above the flame that look synthetic")
 # p13: finer and stronger (p12, both: "the lamp post ... stays crisp and straight" at 7 px over 6 px features)
 # p11: the box's foot (where the shimmer is strongest) at the flames' tips, not the speaker's foot (p10's, under the
 # speaker's own still box, left 0.6 px on the lamp post over the flames: "the pole ... stays ruler-straight and crisp")
@@ -130,7 +134,10 @@ FLAME_FLOOR, FLAME_GAMMA = 0.3, 1.5  # p18: p15's (p17d 0.42, 2.2): over the spe
 # quiet skins with the fire behind taller (to 1.0 m, meteor_k: still hidden, its flames dying within 0.6 m of the source's
 # top) and its flames longer-lived (0.42 s, was 0.25), so they rise over the speaker's top and nowhere else (on a coarse
 # solve, about p15's share over the top and none up the sides)
-CACHE = 'renders/2026-10-22/barkhorn/plume/meteor_l.npz'
+CACHE = 'renders/2026-10-24/barkhorn/plume/meteor_l_p21.npz'
+# p27 (p25 A: "the tower's roofline stays crisp directly under dense smoke"; every critic: the smoke too big for the fire):
+# meteor_l thinned with height (plume_groom --fade 2.5 6.0 0.6: whole to 2.5 m, 0.6 of itself by 6 m), p21b's top; the
+# duels with p26 called the two the same, realism A 5 -> 6
 # p20 (p19's critics, every one: "a smoke column far too big for such a small fire"; the duel's judge: "the flames hugging
 # the top unit should come down a little so they don't look like they wrap it") tried meteor_l groomed
 # (kit_ext/plume_groom.py, renders/2026-10-24/barkhorn/plume/meteor_l_p20.npz):
@@ -161,6 +168,12 @@ JAG = dict(jag=0.6, jag_seed=9, jag_base=0.85, jag_pow=1.1)   # p10: 0.42 still 
 ROAD = dict(material='pbr', texture='asphalt_02', tex_scale=4.0, tint='#2C2C2E', tint_mix=0.3, rough_mul=0.3, value=0.7)   # E8's deck
 # p14 (p13, both: "a flat, smooth, sand-coloured patch ... a decal"; the crop showed it to be the road's and the heaved
 # slabs' own tops in the fire's pool): the asphalt darker, as asphalt is, so the pool warms it without bleaching it tan
+# p25 (p23 B: the road "evenly textured ... with no wear, stains, tyre marks"): impact.road's wear, two wheel paths a lane
+# (0.85 m either side of its middle, 0.32 m wide) darker and glossier, broken along their length, oil stains down the
+# lanes' middles and a faint mottle; the duel with p20c called the two the same, and realism A praised the road's "damp
+# sheen"
+WEAR = dict(lanes=[-5.15, -1.75, 1.75, 5.15], track=0.85, track_w=0.32, track_dark=0.18, track_polish=0.3, stain=0.35,
+            mottle=0.08)
 
 
 def torn(gouge):
@@ -252,7 +265,7 @@ def deck():
     """E8's deck less its road boxes (and the walls in section, p5's "pale ruled line"): the road one slab either side of
     the gouge, open between its torn lips (p9), from the gouge's own frame turned half round as it is."""
     road = piece('ext', module='impact', fn='road', y0=I.Y0, y1=I.Y1, lip=I.LIP, ramp=5.0, half=I.DECK_HALF + 2.0,
-                 ylo=-130.0, yhi=20.0, thickness=0.3, rotate=[0, 0, I.FLIP], **JAG, **ROAD)
+                 ylo=-130.0, yhi=20.0, thickness=0.3, rotate=[0, 0, I.FLIP], wear=WEAR, **JAG, **ROAD)
     rest = [p for p in I.deck() if not (p.get('size', [0.0])[0] == 0.03 or (p.get('shape') == 'box'
                                          and p.get('texture') == 'asphalt_02' and p.get('tint') == ROAD['tint']))]
     return [road] + rest
@@ -296,8 +309,6 @@ FLAME = 0.8                           # p17: the fire's own lamps against p16f's
 SMOKE_LAMP = 0.15                     # p17d: the lamp lighting the smoke high in the column, on top of FLAME (p17c A: "a
                                       # tall band of the smoke" lit); p20b 0.35 -> 0.15 (see CACHE)
 SMOKE_FOOT = 0.5                      # p20b: and the one in the column's foot, behind the speaker, halved
-SPARKS = 0.6                          # p17b (p17's notes check: "a heavy shower of sparks"): the embers fewer, for the
-                                      # smaller fire
 # p17 (the owner: "The trail behind it can be smoldering"): the trench it ploughed charred along its floor, with embers
 # glowing in the cracks, hottest by the speaker and cooling back along the trail (smoke_el.impact's glow_trail), and a
 # thin smoke lifting off it
@@ -446,18 +457,21 @@ def shot():
     fire['through_glass'] = False
     # the embers in three lots, bright and yellow low, dimmer and redder as they rise and cool (p7: "an even spray of
     # identical bright yellow streaks ... a textbook particle emitter")
+    # p26 (p25 A: "dots of equal size with almost no motion blur"): every lot finer at its small end and so more varied,
+    # streaked longer and kept lower (each lot's height cut, its sparks bunched nearer the fire), the two high lots
+    # thinned; it beat p25 in both orders ("fewer embers and they sit lower ... keeps attention on the cabinet"). The
+    # counts as built: p17b's SPARKS 0.6 (p17's notes check: "a heavy shower of sparks") folded in
     embers = [piece('scatter', count=n, radius=r, position=[0.0, 0.0, 0.9], material='glow', color=c, emit=e, seed=27 + i,
                     plume={'height': h, 'spread': [0.2, sp], 'lean': [0.45, 0.2], 'taper': 0.5, 'power': pw,
                            'streak': st, 'swirl': 0.08})
-              for i, (n, r, c, e, h, sp, pw, st) in enumerate([(26, [0.0010, 0.0025], '#FF9A40', 45.0, 1.2, 0.8, 2.5, 16.0),
-                                                               (14, [0.0009, 0.002], '#FF7A30', 28.0, 2.0, 1.1, 2.0, 11.0),
-                                                               (8, [0.0008, 0.002], '#D9481C', 14.0, 2.8, 1.4, 1.5, 8.0),
-                                                               (10, [0.0025, 0.005], '#FF9440', 26.0, 1.5, 1.3, 1.6, 5.0)])]
+              for i, (n, r, c, e, h, sp, pw, st) in enumerate([(20, [0.0006, 0.0030], '#FF9A40', 45.0, 1.1, 0.8, 3.2, 22.0),
+                                                               (6, [0.0006, 0.0022], '#FF7A30', 28.0, 1.5, 1.1, 2.8, 15.0),
+                                                               (2, [0.0006, 0.0018], '#D9481C', 14.0, 2.0, 1.4, 2.2, 10.0),
+                                                               (6, [0.0018, 0.0050], '#FF9440', 26.0, 1.2, 1.3, 2.2, 6.0)])]
     # p15 (p14, three critics: "long, curly streaks that look like a generation artifact", "curly spaghetti squiggles"):
     # p13's lengths back, and straight (no swirl)
     for e in embers:
         e['plume']['swirl'] = 0.0
-        e['count'] = max(3, round(e['count'] * SPARKS))
     # p14 (p13, both: "round dots, all the same size, with no motion blur", "short streaks at a 1/48 s shutter"): each lot
     # drawn out further along its path, still straight (p12's swirl read as "wires")
     # p13 (p12, both: "thin white wiggly spark trails ... like glowing wires", "short tapered orange dashes"): dimmer and
