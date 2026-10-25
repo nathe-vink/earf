@@ -189,7 +189,7 @@
  },
  "assign": [
   {
-   "match": "amp-plate-plate|amp-plate-module|amp-plate-ink|amp-box|rating-plate-plate",
+   "match": "amp-plate-plate|amp-plate-module|amp-plate-ink|amp-box|remote-kit-board|rating-plate-plate",
    "material": "amp"
   },
   {
@@ -205,7 +205,7 @@
    "material": "amp-ring"
   },
   {
-   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|port-left|port-frame-left|port-right|port-frame-right|land-left|land-right|land-top|land-bottom|back-boss-1|back-boss-2|back-boss-3|back-boss-4|top-pad|grip-left|grip-right",
+   "match": "left|right|top|bottom|front-panel|back|brace|brace-2|rib-left-1|rib-right-1|rib-back-1|rib-back-2|rib-top|rib-bottom|port-left|port-frame-left|port-right|port-frame-right|ir-bracket|land-left|land-right|land-top|land-bottom|back-boss-1|back-boss-2|back-boss-3|back-boss-4|top-pad|grip-left|grip-right",
    "material": "bark"
   },
   {
@@ -213,7 +213,7 @@
    "material": "brass"
   },
   {
-   "match": "lead-hf|lead-woofer",
+   "match": "lead-hf|lead-woofer|lead-ir",
    "material": "cable"
   },
   {
@@ -237,7 +237,7 @@
    "material": "driver-cone"
   },
   {
-   "match": "woofer-frame|hf-frame|hf-adaptor",
+   "match": "woofer-frame|hf-frame|hf-adaptor|remote-kit-eye",
    "material": "driver-frame"
   },
   {

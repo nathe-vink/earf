@@ -65,8 +65,7 @@ P['horn']['cast']['formed'] = dict(
     thin=dict(throat=0.85, mouth=0.60, corner=0.18), insert_depth=12.0, dye=3.0, flange=dict(shoulder=4.0), saddle=(8.0, -78.0),
     run_usd=600.0, throat_usd=400.0, pod_usd=250.0,
     tool=dict(nose=15.0, base=(900.0, 640.0, 40.0), beside=1500.0, plug_usd=14000.0, base_usd=2000.0,
-              note='the first pair\'s plug is the same part cut from the same program in high-temperature epoxy tooling board on '
-                   'this base (README, round 36)'))
+              board_usd=2800.0, board_weeks='3 to 4'))   # the prototype's plug in tooling board (the coordinator's call)
 P['horn']['cast']['posts'].update(pad_h=15.0, insert_depth=12.0, front_insert_depth=12.0)
 # round 36 (the engineering review's S1, the owner: yes): the back tied to the braces, two M5 screws a brace into
 # machined bosses saddled on their rear members, beside the back's ribs (product.back_ties); a 4 mm EPDM cord in a groove
@@ -81,6 +80,10 @@ P['back'].update(land=30.0, gasket=0.0, screw_at=10.0, per_side=7, per_end=4,
 # the top, as standard (product.extras); castors, spikes and isolation feet sold for the feet's M8 inserts
 P.update(mark=['back'], mark_finish='tint', lift=['grips'], grip_w=240.0)
 P['remote'] = True                               # round 36: Hypex's remote kit, its remote and the link cable, one a pair
+# round 36 (the coordinator's call): the IR receiver behind the front panel's own tint, no window: its eye `x` from the
+# centre and `z` up, between the ports, under the cloth disc's edge (z 260) and the first brace (z 200); its board (`pcb`:
+# across, high, thick) in a clear `bracket` (across, deep, high); the fallback window `window` across
+P['ir'] = dict(x=0.0, z=160.0, pcb=(40.0, 22.0, 1.6), bracket=(56.0, 10.0, 36.0), eye=6.0, window=12.0)
 PRODUCT = dataclasses.replace(
     pressed.PRODUCT, name='barkhorn-cloud', params=P,
     kind='Two-way horn loudspeaker after Friendly Pressure, the Cloud: tinted cast acrylic, no wood',
@@ -112,4 +115,6 @@ PRODUCT = dataclasses.replace(
         'feet\'s M8 inserts take castors, spikes or isolation feet in place of the levelling feet, sold separately.',
         'The mark (round 24): EARF 140 wide, laser-etched high on the back, centred, the etch filled with the speaker\'s '
         'own colour, deeper.'],
+    touching=pressed.PRODUCT.touching + [('lead-ir', 'cable-glands'),       # the IR cable through its gland (round 36)
+                                         ('ir-window', 'front-panel')],      # the fallback insert, bonded through the panel
     drawing_prefix='BHC')

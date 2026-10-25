@@ -704,11 +704,8 @@ def parts(P):
                     'with ring terminals to the FA122\'s earth point; anodising insulates, so its screws do not count']),
         Part('amp-box-fixings', None, Bought('amp-box-screws')),
         # round 36: the volume from Hypex's remote (the record player carries the phono stage): one each for the pair, the
-        # receiver in the master speaker, the slave on Hypex's link over coax (its own IR disabled)
-        *([Part('remote-kit', None, Bought('hypex-remote-kit'), qty=0.5,
-                notes=['in the master speaker: its IR board behind a window in the back\'s amplifier plate (to be drawn), its cable to J15 on '
-                       'the FA122\'s input board; master and slave set in HFD']),
-           Part('remote', None, Bought('hypex-remote'), qty=0.5),
+        # receiver in the master speaker (drawn: ir_receiver), the slave on Hypex's link over coax (its own IR disabled)
+        *([Part('remote', None, Bought('hypex-remote'), qty=0.5, notes=['master and slave set in HFD']),
            Part('link-cable', None, Bought('hypex-link-coax'), qty=0.5,
                 notes=['master to slave on the FA122s\' S/PDIF I/O, which carries Hypex\'s link: one remote sets both'])]
           if P.get('remote') else []),
@@ -1550,7 +1547,8 @@ def amp_compartment(P, ribs, wz, wood):
         pad = pad.fuse(box(cx + dx - 15, yfr + 3, az - 62, cx + dx + 15, yfr + 18, az - 32))
     pad = pad.fuse(cyl('x', (yfr + 3 + 17.5, az + 35), 35.0, cx - 29, cx + 29))   # the capacitor
     g_hf, g_lf = (cx - 30, az + ih / 2 - 30), (cx + 30, az - ih / 2 + 30)
-    glands = [cyl('y', g, gd, yfr - tb - gl, yfr - tb) for g in (g_hf, g_lf)]
+    g_ir = (cx - 10, az - ih / 2 + 30)                # round 36: the IR receiver's cable (P['remote']), a third gland
+    glands = [cyl('y', g, gd, yfr - tb - gl, yfr - tb) for g in ((g_hf, g_lf, g_ir) if P.get('remote') else (g_hf, g_lf))]
     tip = lambda g: (g[0], yfr - tb - gl, g[1])
     blank = (iw + 2 * idp + 2 * fl, ih + 2 * idp + 2 * fl, tb)     # the sheet it is folded from
     out = [Part('amp-box', pan.fuse(rim), Machined('aluminium', 'sheet metal', stock=blank, setup_usd=150.0), finish='amp', inside=True,
@@ -1590,13 +1588,66 @@ def amp_compartment(P, ribs, wz, wood):
     out.append(Part('lead-woofer', tube_along([t1, lerp(0.3, -12.0), lerp(0.65, -8.0), end], 7.0), Bought('speaker-cable-1m'),
                     finish='cable', inside=True, notes=['from its connector at the compartment\'s lower gland to the woofer\'s terminals, under the '
                                                         'motor, tied to the basket\'s lower spoke, clear of the cone\'s travel']))
-    out.append(Part('cable-glands', Compound(children=glands + top_glands), Bought('cable-glands'), finish='gland', inside=True))
+    out.append(Part('cable-glands', Compound(children=glands + top_glands), Bought('cable-glands'), finish='gland', inside=True,
+                    notes=(['round 36: a third, M12 for 3 to 6 mm, below the compartment\'s middle, for the IR receiver\'s cable']
+                           if P.get('remote') else [])))
+    if P.get('remote'):
+        out += ir_receiver(P, tip(g_ir))
     pw = amp['plate_w'] / 2
     out.append(Part('rating-plate', box(cx + pw + 20, D, az + 60, cx + pw + 90, D + 1.0, az + 100), Bought('rating-plate'), finish='amp',
                     pieces=rating_plate_pieces(cx, D, az, pw),
                     notes=['beside the amplifier, 70 x 40: the model, the serial number, the ratings, the WEEE bin and the maker\'s '
                            'address, laser-marked (the CE, UKCA and FCC marks added once earned); two M3 screws into inserts']))
     return out
+
+
+def ir_receiver(P, gland_tip):
+    """Round 36 (the coordinator's call, the owner: "For everything else make your call"): Hypex's IR receiver (the Fusion
+    Remote Kit's board) with no window: behind the front panel's own tinted acrylic, low and centred between the ports,
+    under the cloth disc's edge and the first brace, where the listener's seat sees it with the cover on (the cover is
+    the cloth disc over the woofer alone, so nothing is in front of it but the panel). Its board on a clear bracket cemented
+    to the panel's back, its cable along under the brace, up through its window to a third gland in the compartment and
+    on to J15. If the tint does not pass 940 nm (the prototype's test), the fallback: a clear acrylic insert the size of
+    the receiver's eye, bonded through the panel (option 'IR window, fallback')."""
+    from build123d import Compound
+    W, T = P['W'], P['T']
+    ir = P['ir']; cx, yb = W / 2, P['inset']
+    x, z = cx + ir['x'], ir['z']
+    y0 = yb + T + 0.3                                  # the panel's back face, a cement line off
+    bw, bt, bh = ir['bracket']
+    pw, ph, pt_ = ir['pcb']
+    bracket = box(x - bw / 2, y0, z - bh / 2, x + bw / 2, y0 + bt, z + bh / 2) - box(x - pw / 2 - 0.3, y0 - 1, z - ph / 2 - 0.3,
+                                                                                     x + pw / 2 + 0.3, y0 + bt - 2.0, z + ph / 2 + 0.3)
+    bracket -= box(x - pw / 2 + 2.0, y0 + bt - 3.0, z - ph / 2 + 2.0, x + pw / 2 - 2.0, y0 + bt + 1, z + ph / 2 - 2.0)   # a 2 ledge behind it
+    yp = y0 + bt - 2.0 - pt_                           # the board's front face, the receiver facing the panel; its back on the ledge
+    eye = cyl('y', (x, z), ir['eye'], y0 + 0.5, yp)    # the receiver module, its lens 0.5 off the panel's back
+    led = cyl('y', (x + 10.0, z), 3.0, y0 + 0.8, yp)   # the bi-colour LED, seen through the panel too
+    pcb = box(x - pw / 2, yp, z - ph / 2, x + pw / 2, yp + pt_, z + ph / 2)
+    yc = yp + pt_ + 3.0
+    path = [(x - 12.0, yc, z), (x - 12.0, yc + 8.0, z + 22.0), (x - 12.0, 100.0, z + 30.0), (gland_tip[0], 270.0, z + 32.0),
+            (gland_tip[0], 285.0, z + 60.0), (gland_tip[0], 285.0, gland_tip[2] - 20.0),
+            (gland_tip[0], gland_tip[1] - 6.0, gland_tip[2] - 4.0), gland_tip]
+    lead = tube_along(path, 5.0)
+    window = cyl('y', (x, z), ir['window'], yb - 0.2, yb + T + 0.2)
+    return [
+        Part('remote-kit', pcb.fuse(eye).fuse(led), Bought('hypex-remote-kit'), qty=0.5, finish='amp', inside=True,
+             pieces={'board': (pcb, 'amp'), 'eye': (Compound(children=[eye, led]), 'driver-frame')},
+             notes=[f'the kit\'s IR board ({pw:g} x {ph:g}, drawn as a block: confirm on the kit), in the master speaker only, behind the '
+                    f'front panel low and centred ({z:g} up, between the ports and under the brace), the receiver and the LED facing the '
+                    'panel through no window: the panel\'s own tint must pass 940 nm (the prototype\'s test; the fallback is option '
+                    '\'IR window, fallback\'); its light pipes and perspex window left out; its 5-pin cable to J15 on the FA122\'s '
+                    'input board through the compartment\'s third gland']),
+        Part('ir-bracket', bracket, Machined('clear-cast-acrylic', 'cnc-mill', setup_usd=30.0), qty=0.5, finish='bark', inside=True,
+             notes=[f'{bw:g} x {bh:g} x {bt:g}, milled from 10 mm clear cast acrylic, pocketed for the board, cemented to the front '
+                    'panel\'s back face; the board held in its pocket by two bonded M2.5 inserts and nylon screws (no screw into the panel)']),
+        Part('lead-ir', lead, Bought('ir-cable-kit'), qty=0.5, finish='cable', inside=True,
+             notes=['the kit\'s 5-pin cable, 125 cm: from the board under the first brace, up through its window in front of the '
+                    'compartment, through the third gland to J15; tied to the brace\'s back member on a screw-mount tie base']),
+        Part('ir-window', window, Machined('clear-cast-acrylic', 'lathe', setup_usd=20.0), qty=0.5, finish='bark', option='IR window, fallback',
+             render=False,
+             notes=[f'only if the 940 nm test fails: a clear cast acrylic rod {ir["window"]:g} across, the panel bored through in front '
+                    'of the receiver\'s eye and the rod bonded in flush, its face polished; a clear dot in the tinted panel']),
+    ]
 
 
 def fittings(P, places, shell, floor=None):
@@ -1751,6 +1802,10 @@ SOLIDS.setdefault('cast-acrylic-thermoformed', dict(
     title='Cast acrylic sheet 10 mm, tinted through in the horn\'s own dye lot (about three times the cabinet\'s dye, matched to '
           'it on a swatch: the lot\'s cost and minimum to confirm with the caster), pressure-formed over a male tool, trimmed and '
           'polished (the rate carries the blank, the forming, the trim and the polish)', density=1.19, usd_per_cm3=0.13))
+SOLIDS.setdefault('tooling-board', dict(
+    title='High-temperature epoxy tooling board, glued up as a block, CNC-cut, sealed (the prototype\'s forming plug; lead time '
+          '3 to 4 weeks from the program)', density=1.6, usd_per_cm3=0.025))
+SOLIDS.setdefault('clear-cast-acrylic', dict(title='Cast acrylic, water-clear (untinted)', density=1.19, usd_per_cm3=0.04))
 SOLIDS.setdefault('cast-acrylic-horn-lot', dict(
     title='Cast acrylic, tinted through in the horn\'s own dye lot (about three times the cabinet\'s dye; 6, 30 and 75 mm), turned '
           'and milled', density=1.19, usd_per_cm3=0.05))
@@ -1994,10 +2049,10 @@ def formed_parts(P, wg):
 
 def formed_later(P, wg):
     """Round 36: the formed horn's small parts and its tool, numbered after the parts the drawings have long had."""
-    from build123d import Compound
+    from build123d import Compound, Pos
     c = P['horn']['cast']; F = c['formed']; fm = wg['formed']; pp = c['posts']
     pads = fm['pads']
-    tool_note = (f'one tool makes every horn (the line\'s quantity is one); {F["tool"]["note"]}')
+    tool_note = 'one tool makes every horn (the line\'s quantity is one)'
     return [
         Part('horn-pads', Compound(children=pads), Machined('cast-acrylic-horn-lot', 'lathe', stock=(30.0, 30.0, 110.0), setup_usd=80.0), finish='horn-lot', group='horn',
              notes=[f'four pucks {pp["pad_d"]:g} across, turned from the horn lot\'s 30 mm sheet, their tops milled to the flare\'s (the rear '
@@ -2008,14 +2063,23 @@ def formed_later(P, wg):
         Part('horn-saddle', fm['saddle'], Machined('cast-acrylic-horn-lot', 'lathe', setup_usd=20.0), finish='horn-lot', group='horn', inside=True,
              notes=['a puck 16 across cemented on the pod\'s floor inside at the tie post, its top flat for the tie rod\'s washer and '
                     'thumb nut; bored 6.5']),
-        Part('horn-tool', fm['plug'], Machined('aluminium', 'cast', setup_usd=F['tool']['plug_usd']), qty=0.5, finish='driver-frame',
-             option='tooling', render=False,
+        Part('horn-tool-prototype', fm['plug'], Machined('tooling-board', 'cnc-mill', setup_usd=F['tool']['board_usd']), qty=0.5,
+             finish='driver-frame', option='tooling, the prototype\'s', render=False,
+             notes=[f'the prototype\'s plug (the coordinator\'s call, round 36): the production plug\'s surface cut by the same 5-axis '
+                    'program from a glued-up block of high-temperature epoxy tooling board (rated 150 C or more), sealed and polished, '
+                    'vented as the aluminium; on the production base plate and trim fixture, which carry over. It forms the same 10 mm '
+                    'sheet at 4 bar over the same male geometry, so the prototype tests the production process, material and profile; '
+                    'its face is the air path, which sealed board holds as well as aluminium for a short run (some tens of shots), and '
+                    f'the outside is the free face either way. Lead time about {F["tool"]["board_weeks"]} weeks from the program. Aluminium '
+                    'follows once the first pair\'s measurements confirm the profile']),
+        Part('horn-tool', Pos(0, 0, 0) * fm['plug'], Machined('aluminium', 'cast', setup_usd=F['tool']['plug_usd']), qty=0.5, finish='driver-frame',
+             option='tooling, production (after the first pair)', render=False,
              notes=['the forming tool\'s plug: the horn\'s air path from its nose 25 behind the trim (its edge rounded) to the mouth, its lip a '
                     'cove R12 at its foot; A356 aluminium cast near shape from a pattern and machined all over on a 5-axis mill to the '
                     'air path\'s surface, polished; drilled for oil at 85 C, vented by 0.6 mm holes in the waste and the mouth\'s corners; '
                     + tool_note]),
         Part('horn-tool-base', fm['base'], Machined('aluminium', 'cnc-mill', setup_usd=F['tool']['base_usd']), qty=0.5, finish='driver-frame',
-             option='tooling', render=False,
+             option='tooling, the prototype\'s', render=False,
              notes=['the tool\'s base plate in the mouth\'s plane, 6061 machined, the clamp frame\'s seal groove round it and the plug '
                     'bolted on from below, so the flange forms flat on it; ' + tool_note]),
     ]

@@ -209,7 +209,9 @@ same acrylic, so it has the same UV life. Only its strength differs, which is wh
 beside the cabinet in round 35's UV test. A horn takes about 0.46 m² of the 10 mm sheet, so a 4 x 8 ft sheet makes about
 six horns; a lot for a first run is one or two 10 mm sheets and a sheet of each other thickness, a colour.
 
-**To confirm with the caster:** the cost and the minimum order of a separate lot in each colour. No figures for it are on
+**To confirm with the caster:** the cost and the minimum order of a separate lot in each colour; and (the coordinator,
+2026-10-25) whether they can pour 6, 10, 20, 30 and 75 mm in one batch. If not, the lots are matched to one swatch,
+and each lot's number is marked on its parts. No figures for it are on
 file: round 17's makers list minimums only as "some with minimum orders" (Madreperla) and "by asking" (Plastiglas). It
 is marked so in the parts list (`waveguide`'s stock line).
 
@@ -219,13 +221,15 @@ renders below are drawn from it.
 
 ### The tool
 
-The CAD carries the tool as the option `tooling`, drawn beside the speaker. One set of tooling makes every horn.
+The CAD carries the tool as two options, drawn beside the speaker: `tooling, the prototype's` (the board plug and the
+base plate) and `tooling, production (after the first pair)` (the aluminium plug). One set of tooling makes every horn.
 
 - **Production:** the plug is A356 aluminium, cast near shape from a pattern and machined all over on a 5-axis mill to
   the air path. It is polished, drilled for oil at 85 °C so every shot cools alike, and vented. It bolts to a
   machined 6061 base plate, 900 x 640 x 40, with the clamp frame's seal groove. The plug is cored in practice:
   drawn solid it would be about 52 kg. Budget: about $14,500 for the plug and $2,600 for the base (the kit's
-  `tooling` line: $17,272), plus about $2,500 for the trim fixture. **About $20,000.**
+  lines: $14,528 for the plug; the base is in the prototype's), plus about $2,500 for the trim fixture. **About
+  $20,000.**
 - **The prototype's:** the same plug, cut by the same 5-axis program in high-temperature epoxy tooling board rated
   above 150 °C, on the production base plate and trim fixture. Budget: about $4,500 for the board plug, plus the base
   and the fixture, which carry over into production ($5,100). It lasts some tens of shots, enough for the first pair
@@ -234,9 +238,14 @@ The CAD carries the tool as the option `tooling`, drawn beside the speaker. One 
   piece, the cement and the inspection. The board does not cool like oil-heated aluminium, so the first pair's cycle
   time and the gloss of the inside are not production's. Those are checked on the aluminium plug's first shots, before
   any horn is sold.
-- **Owner's choice:** go straight to aluminium for the first pair (about $15,000 more up front, and four to six weeks
-  longer to the first horn). That tests the real cycle and gloss from the first shot, but any correction to the plug
-  then means recutting aluminium.
+- **Decided (the coordinator, 2026-10-25, on the owner's "For everything else make your call"): the tooling-board plug
+  for the prototype, not aluminium yet.** The plug forms the same 10 mm sheet at 4 bar over the same male geometry, so
+  the prototype still tests the production process, material and profile (the owner's "prototype as production"). The
+  tool's face is the air path, which a sealed board holds as well as aluminium for a short run, and the outside is the
+  free, glossy face either way. Aluminium follows once the first pair's measurements confirm the profile, so a change
+  found on the prototype does not mean recutting a $15,000 tool. In the parts list, the prototype's tool is
+  `horn-tool-prototype`: about $4,400, lead time 3 to 4 weeks from the program. With the base plate the prototype's
+  tooling option is $7,109 (the plug $4,365, the base $2,744).
 
 ### The cost
 
@@ -251,7 +260,7 @@ The CAD carries the tool as the option `tooling`, drawn beside the speaker. One 
 | **a horn** | **about $1,500** | **about $900** |
 
 The resin horn was about $820 a horn on the kit's rates (its mould spread over a pair), so production costs about
-$80 more a horn. The kit's parts list for a pair (`out-cloud/bom.md`, budget rates) is now $9,540 against round 35's $8,208. Most of the difference is the horn's parts at the kit's rates, plus the bosses, the seal and the remote. Tooling is
+$80 more a horn. The kit's parts list for a pair (`out-cloud/bom.md`, budget rates) is now $9,577 against round 35's $8,208. Most of the difference is the horn's parts at the kit's rates, plus the bosses, the seal, the remote and its receiver. Tooling is
 extra: about $9,600 for the prototype's (of which $5,100 carries into production), then about $15,000 more for the
 aluminium plug.
 
@@ -268,6 +277,9 @@ aluminium plug.
 - The stress: no crazing at the inserts and the joints after a 48-hour solvent-wipe test (isopropanol) on an annealed
   shot.
 - Emissions: an FCC Part 15 Class B and CE pre-scan of the first pair (the launch-readiness note below).
+- The IR receiver through the tint: the 940 nm transmission of a 20 mm offcut of each of the eight tints, measured
+  before the first pair's front panels are cut, and the remote tried from the listening seat (3 m, 30° off axis)
+  through the front panel and the cover. Any tint that fails takes the clear insert.
 
 ### Risks
 
@@ -277,7 +289,8 @@ aluminium plug.
   vents only in the waste and the corners, a polished plug, and forming in a clean room.
 - **Springback.** Cast acrylic remembers its flat shape if it is heated again. So the cement is a polymerising one,
   annealing stays at 80 °C, and no flame polishing is done near the joints.
-- **Can the maker cast the horn's lot at 6, 10, 30 and 75 mm, and match it to the cabinet's 20 mm lot?** Ask first. The fallback is the throat block laminated
+- **Can the caster pour 6, 10, 20, 30 and 75 mm in one batch?** A question for the caster (above). If not, lots are
+  matched to one swatch, each lot's number on its parts. If 75 mm cannot be cast at all, the throat block is laminated
   from two 30s and a 15, cemented, which would show its joints faintly.
 - **The colour:** the heavier lot has to match the cabinet on the swatch and through UV ageing (above).
 
@@ -328,8 +341,17 @@ Hypex's own documents (the Fusion manual R4, the IR kit's manual and the remote'
 - **Fusion Remote Kit** (H08U003549), in the master speaker only: an IR receiver board with a bi-colour LED, a 5-pin
   cable 125 cm to J15 on the FA122's input board, two light pipes and a tinted perspex window (`hypex-remote-kit`,
   about €25). Hypex: "This set must be used in master devices if the Hypex remote is to be used (remote not
-  included)." Its window needs a place on the back's amplifier plate or in the front. That is to be drawn; on the
-  back, the remote has to be aimed at the speaker from behind.
+  included)."
+- **Where the receiver goes (the coordinator's call, 2026-10-25): no window at all, if the dye lets the IR through.**
+  The kit's board sits behind the front panel's own tinted acrylic, low and centred between the ports, its eye 160 up
+  (`P['ir']`). That is below the cloth disc's edge (260 up) and the first brace (200), so the listener's seat sees it
+  with the cover on; the cover is the cloth disc over the woofer alone, and neither its cloth nor its frame is in front
+  of the receiver. The board, drawn as a 40 x 22 block until the kit is measured, sits in a pocketed clear acrylic
+  bracket cemented to the panel's back, held by two bonded M2.5 inserts (no screw into the panel). Its light pipes and
+  perspex window are left out. Its cable runs back under the brace, up through the brace's window in front of the
+  compartment, and through a third M12 gland to J15 (`remote-kit`, `ir-bracket`, `lead-ir`; the master speaker only).
+  The fallback is option `IR window, fallback`: a 12 mm clear cast acrylic rod bonded through the panel in front of the
+  eye, flush and polished. It is used only if the 940 nm test below fails.
 - **The second speaker** is a slave on Hypex's link. It is 75 Ω coax between the two FA122s' S/PDIF I/O, under 25 m
   (`hypex-link-coax`). Hypex: "The master module modulates a communication link on to the S/PDIF I/O." On a slave,
   "the IR functionality is disabled". Master and slave, and an optional start-up volume, are set in HFD. The volume

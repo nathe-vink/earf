@@ -79,5 +79,7 @@
  "hypex-remote": {"kind": "electronics", "maker": "Hypex", "model": "Hypex Remote Control H08U001537, IR (Philips RC-5, device 16: power 50, volume up 51, down 52, mute 53), its CR2032 included; one a pair, not supplied with the amplifier",
   "usd": 11, "supplier": "soundimports.eu (EUR 12.45)", "price_date": "2026-10-22", "url": "https://www.hypex.nl/products/diy-components/accessories/hypex-remote-control"},
  "hypex-link-coax": {"kind": "cable", "maker": "any", "model": "75 ohm coaxial cable with RCA plugs, 5 m (Hypex: under 25 m), the master FA122's S/PDIF I/O to the slave's: Hypex's link carries the volume and the remote's commands to the second speaker, whose own IR is disabled",
-  "usd": 15, "estimate": true, "supplier": "any", "price_date": "2026-10-22"}
+  "usd": 15, "estimate": true, "supplier": "any", "price_date": "2026-10-22"},
+ "ir-cable-kit": {"kind": "cable", "maker": "Hypex", "model": "the Fusion Remote Kit's own 5-pin cable, 125 cm, to J15 on the FA122's input board (counted with the kit)",
+  "usd": 0, "supplier": "with hypex-remote-kit", "price_date": "2026-10-25"}
 }

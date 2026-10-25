@@ -1,8 +1,8 @@
 {
  "product": "barkhorn-cloud",
  "title": "barkhorn",
- "parts": 98,
- "seconds": 981,
+ "parts": 102,
+ "seconds": 950,
  "sheets": {
   "cast-acrylic-20": 3,
   "cast-acrylic-6": 1,
@@ -15,13 +15,21 @@
   "cut": 2692,
   "formed": 2051,
   "buy": 3071,
-  "cnc-mill": 1205,
+  "cnc-mill": 1243,
   "lathe": 349,
   "sheet metal": 171
  },
  "options_usd": {
-  "tooling": {
-   "usd": 17272,
+  "IR window, fallback": {
+   "usd": 26,
+   "unpriced": 0
+  },
+  "tooling, the prototype's": {
+   "usd": 7109,
+   "unpriced": 0
+  },
+  "tooling, production (after the first pair)": {
+   "usd": 14528,
    "unpriced": 0
   }
  },
