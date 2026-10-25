@@ -1,14 +1,16 @@
-# Hemisphere North, Hemisphere South and Core: the particulars for earf.world
+# Hemisphere and Core: the particulars for earf.world
 
-Read from the fab kits on 2026-10-22, after round 36 (the owner's answers: North at 575 lm with the reflector, South with nothing below the bowl) and round 35 (the names, the engineering review's fixes, South, Core's own
-battery): `crystal.py`, `out-dome-pendant/bom.md`, `out-hemisphere-south/bom.md`, `out-orb-table/bom.md`,
+**Hemisphere South is dropped** (round 38, the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."), and Hemisphere North is now just **Hemisphere**. South's CAD, parts list and renders stay in the repo as a record.
+
+Read from the fab kits on 2026-10-22, after round 36 (the owner's answers: the pendant at 575 lm with the reflector) and round 35 (the names, the engineering review's fixes, Core's own
+battery): `crystal.py`, `out-dome-pendant/bom.md`, `out-orb-table/bom.md`,
 `components.json`, `hemisphere_thermal.py` and `hemisphere_brightness.py`. Weights come from the CAD solids (acrylic
 1.19, aluminium 2.7, steel 7.85, PEEK 1.30 g/cm³), plus estimated weights for the bought parts.
 **[UNCONFIRMED]** marks anything not yet measured, tested or quoted. Nothing here has been built yet: these are
 design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.py`, the `lamp-dome-*` and
 `lamp-orb-*` images), so nothing downstream breaks.
 
-## Hemisphere North, the pendant (was Dome)
+## Hemisphere, the pendant (was Dome, then Hemisphere North)
 
 | | |
 |---|---|
@@ -21,24 +23,10 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 | California (JA8) | CRI 90, R9 50 or more (Bridgelux's 90 CRI minimum, ±3), 2700 K, about 87 to 96 lm/W out of the fitting: met by design. Dimming to 10 %, flicker under 30 % and power factor 0.90 or more: to test **[UNCONFIRMED]** |
 | Heat | Fins above the shade sit in room air (shown, **not yet signed off by the owner**). A PEEK ring separates the hub from the shade's collar. Estimated at 575 lm in a 35 °C room: hub 43 °C, LED junction 47 °C, collar and the acrylic next to it 39 °C **[UNCONFIRMED: estimate; thermocouple test planned]** |
 | Mains | 120 V reaches the driver in the canopy and stops there. The cord carries the LED's 26 V DC (Class 2): a listed 18 AWG 2-conductor in a black textile braid, its grips tested with the fixture's weight. To be listed to UL 1598 (or ETL) **[NOT YET LISTED]** |
-| Shades | Swap by hand, no tools, with a quarter-turn bayonet and a detent. The same shades fit Hemisphere South (each fixture has its own set of slots in the collar). The shade carries no electrical parts. It is clamped between the collar's flange and a ring on silicone, so a failed bond can't drop it |
+| Shades | Swap by hand, no tools, with a quarter-turn bayonet and a detent. The shade carries no electrical parts. It is clamped between the collar's flange and a ring on silicone, so a failed bond can't drop it |
 | Materials | Shade: three formed layers of cast acrylic (a 9 mm tinted shell, a 3 mm opal liner, a 3 mm tinted skin), polished, vented at the rim, with a black anodised aluminium collar and clamp ring. Hub, fins and pins: black anodised aluminium. PEEK ring. Canopy and cap: black cast acrylic, polished. Black textile cord |
 | Tints | Ember, Dust, Acid, Poison, Ice, Haze, Fog, Smoke, each cast to match its speaker's colour when lit (README, round 32f) |
-| Sold separately | Shades, in each tint (North's; South's are its own) |
-
-## Hemisphere South, the bowl (new)
-
-| | |
-|---|---|
-| Size | A bowl 200 mm across and 100 deep, opening up, with **nothing below it** (the owner, 2026-10-22: its own shade, closed underneath; no collar, ring or cap shows from below or the side). A frosted lid 196 across lies on its rim. A 16 mm black aluminium rod rises 450 to the canopy (150 × 50), with black fins 90 across and 40 tall on it, 80 above the lid |
-| Weight | Shade about 1.2 kg (South's own, closed: its shell and liner whole, a welded crown ring); fixture with lid, rod and fins about 0.65 kg; hanging about 1.9 kg **[UNCONFIRMED: computed]** |
-| Light | A ring of 2700 K, CRI 90 mid-power LEDs on the hub's inner face at the bottom of the bowl, facing up. Twice North's light, because light bounced off a ceiling needs about twice the lumens to feel as bright: **about 1,150 lm** (about 7.7 W). About 57 % leaves through the mouth and lid as a wash on the ceiling; the rest lights the bowl, which glows in its tint **[UNCONFIRMED: board to make; estimate]** |
-| Dimming | Phase-cut (TRIAC), with a Mean Well PCD-class driver in the canopy **[UNCONFIRMED: model to match the board]**; 0-10 V as the bar option |
-| Heat | Up a copper heat pipe in the rod to fins above the lid, in room air, so their warm air rises to the ceiling, not past the acrylic. The PEEK ring keeps the hub off the collar, which is now shut in behind the opal. Estimated at 1,150 lm in a 35 °C room: hub 47 °C, LED junction 53 °C, the collar and the acrylic beside it 43 °C (limit 50) **[UNCONFIRMED: estimate]** |
-| Hanging | Rim 450 to 600 below a ceiling 2.6 to 3.2 m high, so the wash spreads. Its light goes to the ceiling, not to a table |
-| Shades | South's own (round 37): a tinted shell and an opal liner, both closed, over a tinted skin that carries the shade on the collar; the collar's flange sits behind the opal, unseen. The skin is held on metal; the shell and liner are welded to it acrylic to acrylic (polymerising cement, as an aquarium's seams). North's and South's shades no longer swap. The shade fits on from inside, onto the hub, with a quarter-turn bayonet and a detent |
-| Dust | A 3 mm frosted acrylic lid on the rim, on three small silicone bumpers. It lifts up the rod for wiping |
-| Mains | As North's: the driver in the canopy, Class 2 DC down the rod. To be listed to UL 1598 **[NOT YET LISTED]** |
+| Sold separately | Shades, in each tint |
 
 ## Core, the table lamp (was Orb)
 
@@ -61,6 +49,5 @@ design figures. The file names stay as they were (`dome_pendant.py`, `orb_table.
 ## Prices
 
 The owner sets the prices. The suggestions (README, round 35):
-- Hemisphere North: $795 to $895 with one shade; shades $295 to $345.
-- Hemisphere South: $845 to $945 with one shade (a bigger LED and driver, a lid and a rod).
+- Hemisphere: $795 to $895 with one shade; shades $295 to $345.
 - Core: $595 to $695 with its cells (was $545 to $645 plug-in, plus $95 to $125 for the cartridge).

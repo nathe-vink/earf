@@ -1,7 +1,7 @@
-"""Round 35, step 1: how bright is Hemisphere North? (the owner, 2026-10-22: "I want to see a visual approximation of
+"""Round 35, step 1: how bright is Hemisphere (Hemisphere North then)? (the owner, 2026-10-22: "I want to see a visual approximation of
 the change in lumens to see if it's an acceptable amount of light.")
 
-One dim dining room at night, a table 750 high, Hemisphere North hung with its rim 700 over the table, and one camera
+One dim dining room at night, a table 750 high, Hemisphere hung with its rim 700 over the table, and one camera
 at one exposure for every frame, like four photographs taken in that room on one setting. Two light levels at the COB,
 about 1,100 lm (the original spec) and about 575 lm (the half-power option), in two shades: Ember (a mid tint) and
 Smoke (the darkest). Nothing but the COB's power and the shade's colour changes between frames.
@@ -59,7 +59,7 @@ def shot(level, shade):
     lm = LEVELS[level]
     tx, ty = TABLE
     s = {
-        'title': f'Hemisphere North in {SHADES[shade]} at {lm:,.0f} lm, over a dining table at night',
+        'title': f'Hemisphere in {SHADES[shade]} at {lm:,.0f} lm, over a dining table at night',
         'size': [1800, 1200],
         'render': {'samples': 256, 'adaptive': 0.01, 'denoise': True, 'clamp': 10, 'bounces': 24,
                    'transmission_bounces': 20, 'view': 'Khronos PBR Neutral', 'exposure': EXPOSURE,
@@ -104,7 +104,7 @@ def shot(level, shade):
                     position=[0.17, 2.84, 0.78 + 0.06]),
                 kit('cylinder', 'gloss', color='#EDE6D8', roughness=0.4, radius=0.022, height=0.06,
                     position=[0.17, 2.84, 0.78]),
-                # Hemisphere North, its own lamp off (the COB is the area lamp below); the reflector part hidden, its
+                # Hemisphere, its own lamp off (the COB is the area lamp below); the reflector part hidden, its
                 # light carried by the lamp's power (the calibration above)
                 {'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'spots': [[tx, ty, RIM_Z]],
                  'flavour': shade, 'ceiling': 2.7, 'lamp': False, 'shade_glow': 0.0, 'hide': 'reflector'},
@@ -198,7 +198,7 @@ def sheet():
     subprocess.run(f"montage {tiles} -tile 2x2 -geometry 900x600+6+6 -pointsize 18 -background '#1A1816' "
                    f"-fill '#EDE6DA' -depth 8 {out}", shell=True, check=True)
     subprocess.run(f"convert {out} -gravity north -background '#1A1816' -fill '#EDE6DA' -pointsize 22 -splice 0x46 "
-                   f"-annotate +0+10 'Hemisphere North over a dining table at night: one camera, one exposure (EV100 "
+                   f"-annotate +0+10 'Hemisphere over a dining table at night: one camera, one exposure (EV100 "
                    f"{EV100:g}), the rim 700 over the table' {out}", shell=True, check=True)
     print(out)
 

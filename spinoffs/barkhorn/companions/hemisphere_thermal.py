@@ -1,4 +1,4 @@
-"""Round 35: the thermal estimate for Hemisphere North and South, a small resistance network in steady state, so the
+"""Round 35: the thermal estimate for Hemisphere (and the dropped South, kept for the record; round 38), a small resistance network in steady state, so the
 review's B2 can be checked by number. Every input is written here with where it came from; all are estimates until
 the thermocouple test (README, round 35, "the test plan").
 
@@ -64,11 +64,11 @@ def solve(P_in, lm, eta_out, sink, Ta, R_jc=0.9, R_tim=0.3, R_core=0.2, coupling
     return dict(Q=Q, Tj=Tj, Tc=Tc, Th=Th, Tcol=Tcol, R_sink=R_s, spacing=s)
 
 
-# Hemisphere North: the Vero SE 10 (DS120: 350 mA, 26.0 V, 9.1 W, about 1,130 lm at Tc 25 C, 1,020 at 85 C; the half
+# Hemisphere: the Vero SE 10 (DS120: 350 mA, 26.0 V, 9.1 W, about 1,130 lm at Tc 25 C, 1,020 at 85 C; the half
 # level about 175 mA, 24.5 V, 4.3 W, 575 lm, scaled) behind the reflector (85 % out); fins 80 across, 36 tall, 16 x 1.8
 NORTH = {'1,100 lm (350 mA)': (9.1, 1100.0), '575 lm (175 mA)': (4.3, 575.0)}
 NORTH_SINK = (80.0, 36.0, 16, 1.8, 30.0)
-# Hemisphere South: twice North's light, from a ring board of mid-power LEDs (about 150 lm/W at 2700 K CRI 90 at a
+# Hemisphere South (dropped 2026-10-25, kept for the record): twice the pendant's light, from a ring board of mid-power LEDs (about 150 lm/W at 2700 K CRI 90 at a
 # moderate current: an estimate for LM301H-class parts). Round 36 (nothing below the bowl): the hub sits in the collar,
 # its heat goes up an 8 copper heat pipe in the rod (about 0.4 K/W at 220 long, gravity-assisted) to fins 90 across, 40
 # tall, 18 x 1.8, on the rod above the lid; the hub, the pipe and two joints about 0.85 K/W between the LED and the fins.
@@ -91,12 +91,13 @@ def table():
                     # round 37: the collar is shut in between the skin and the opal, so it loses heat only through
                     # about 16 mm of acrylic and the bowl's air: about 15 K/W to the room (6.9 open)
                     r['Tcol'] = Ta + (r['Th'] - Ta) * 15.0 / (9.2 + 15.0)
-                print(f"| {title}, {k} | {Ta:.0f} C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.0f} C | "
+                name = 'Hemisphere' if title == 'North' else 'South (dropped)'
+                print(f"| {name}, {k} | {Ta:.0f} C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.0f} C | "
                       f"{r['Tj']:.0f} C | {r['Tcol']:.0f} C |")
     # the black bore, for the record (the hub as it was, at 9.1 W, with fins)
     r = solve(9.1, 1100, 0.52, NORTH_SINK, 25.0)
-    print(f"\n(North with the old black bore, 1,100 lm, 25 C room: {r['Q']:.1f} W in the hub, hub {r['Th']:.0f} C)")
-    print('South (round 36): its fins are above the lid, so their warm air rises to the ceiling; no plume reaches the '
+    print(f"\n(Hemisphere with the old black bore, 1,100 lm, 25 C room: {r['Q']:.1f} W in the hub, hub {r['Th']:.0f} C)")
+    print('South (dropped; round 36): its fins are above the lid, so their warm air rises to the ceiling; no plume reaches the '
           'acrylic.')
 
 

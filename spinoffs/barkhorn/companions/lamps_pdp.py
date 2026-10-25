@@ -8,7 +8,7 @@ tints, each tint's glow and pool as the rows were set (lamps_site.GAIN, POOL), i
     PY=python3.11 python3 spinoffs/barkhorn/companions/lamps_pdp.py --render [names] [--samples 128]
 
 Round 35 (the lamps final, r32-lamps-final): `--r35` builds and renders the same pages in round 35's design (Hemisphere
-North with its fins, Core on its 48 base, Hemisphere South new; all eight tints, Ember included, and the rows) into
+North (now just Hemisphere) with its fins, Core on its 48 base, Hemisphere South (dropped 2026-10-25); all eight tints, Ember included, and the rows) into
 renders/2026-10-22/barkhorn/lamps-pdp-r35/, through lamps_pdp_r35.py:
 
     python3 spinoffs/barkhorn/companions/lamps_pdp.py --r35 --render lamp-orb-dust [more names] [--samples 128]

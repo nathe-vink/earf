@@ -1,4 +1,4 @@
-# Hemisphere North: parts for 1 (Pendant in cast acrylic, its shades swapping by hand)
+# Hemisphere: parts for 1 (Pendant in cast acrylic, its shades swapping by hand)
 
 | item | make | qty | what | size | each, USD |
 |---|---|---|---|---|---|

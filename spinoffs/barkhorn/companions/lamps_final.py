@@ -1,4 +1,4 @@
-"""Round 35, the lamps final: Hemisphere South's hero (the ceiling wash), North and South hung together, and Core with
+"""Round 35, the lamps final (round 38: Hemisphere South dropped, the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."; its frames kept as a record): Hemisphere South's hero (the ceiling wash), North and South hung together, and Core with
 its taller base (its cells under the LED), lit, with the hatch underneath. The same room and the same light units as
 the brightness study (hemisphere_brightness.py: a Cycles watt of white light is 683 lm, EV100 6.0), so these frames
 show the light the fittings would give, not a studio's.
@@ -87,7 +87,7 @@ def south_hero():
     sp, sl, rz = south(0.55, 2.45, 'ember')
     s = room([sp], keep_table=False)
     s['lights'].update(sl)
-    s['title'] = 'Hemisphere South in Ember: the ceiling wash'
+    s['title'] = 'Hemisphere South (dropped 2026-10-25) in Ember: the ceiling wash'
     s['size'] = [1600, 2000]
     # r1: closer and nearer the bowl's height, so it fills the frame and the wash reads above it
     s['camera'] = {'position': [0.16, 1.48, 1.62], 'target': [0.55, 2.45, 2.22], 'lens_mm': 33, 'level': True,
@@ -98,7 +98,7 @@ def south_hero():
 def south_under():
     """Round 37 (the owner: "South ring: remove it"): South from close below, so the closed underside shows clean."""
     s = south_hero()
-    s['title'] = 'Hemisphere South in Ember, from below: nothing under the bowl'
+    s['title'] = 'Hemisphere South (dropped 2026-10-25) in Ember, from below'
     s['size'] = [1600, 1200]
     s['camera'] = {'position': [0.30, 2.08, 1.72], 'target': [0.55, 2.45, 2.14], 'lens_mm': 50, 'level': False,
                    'fstop': 5.6, 'focus': [0.55, 2.45, 2.12]}
@@ -112,7 +112,7 @@ def north_south():
     sp, sl, rz = south(0.55, 2.62, 'ember')
     s = room([np_, sp])
     s['lights'].update(nl); s['lights'].update(sl)
-    s['title'] = 'Hemisphere North and South, one set of shades both ways up'
+    s['title'] = 'Hemisphere, with the dropped South beside it (a record)'
     s['size'] = [1800, 1200]
     # r1: closer, both pendants larger, the cut-off glass at the bottom edge out of the frame
     s['camera'] = {'position': [-0.70, 0.30, 1.50], 'target': [0.30, 1.85, 1.86], 'lens_mm': 32, 'level': True,

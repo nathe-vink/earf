@@ -5,11 +5,13 @@ round 17 the owner had also said: "If we can find a good recycled acrylic partne
 record players, lights, etc." These are those two pieces. Both are in the Clouds' tinted cast acrylic and come in the
 eight Atmosphere colours, and each is built with the fab kit the speakers are built with.
 
-**Names, from round 35 (the owner, 2026-10-22):**
-- the Dome is **Hemisphere North**;
-- the same shades on a rod, opening up, are **Hemisphere South**;
-- the Orb is **Core**;
+**Names, from round 35 (the owner, 2026-10-22), as amended in round 38 (2026-10-25):**
+- the pendant is **Hemisphere** (the Dome until round 35, Hemisphere North in rounds 35 to 37);
+- the table lamp is **Core** (was the Orb);
 - the speakers are **Atmosphere**, and the record player is **Mantle**.
+
+**Hemisphere South is dropped** (the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."). Its CAD (`hemisphere_south.py`, `out-hemisphere-south/`), its parts
+and its renders (rounds 35 to 37) stay in the repo as a record; nothing in the line uses them.
 
 The rounds below keep the names they were written with. The file names stay as they were.
 
@@ -1434,4 +1436,29 @@ EHS-011, rev A):
 
 The bowl's glow in the renders is the liner's emission, as in every lamp frame here, so they don't show the soft shade
 the hub would cast on the opal from inside. The first sample will show how much of it there is **[UNCONFIRMED]**.
+
+## Round 38: South dropped; the pendant is Hemisphere
+
+The owner, 2026-10-25, verbatim: "Get rid of south altogether and just call it hemisphere."
+
+**Hemisphere South is out of the line.**
+- **Marked dropped** where the lamps are introduced: this README's top and PARTICULARS.md, which no longer has
+  South's section or price.
+- **Kept as a record:** its CAD and parts list (`crystal.south_parts`, `crystal.south_cover_parts`,
+  `hemisphere_south.py`, `out-hemisphere-south/`, its BOM now titled "Hemisphere South (dropped 2026-10-25)"), its
+  component entries (`south-*`, each marked dropped) and its renders. Nothing in the line imports them.
+- **Rounds 35 to 37 are left as written.**
+
+**Hemisphere North is now just Hemisphere** in every human-facing name: the product title (so
+`out-dome-pendant/bom.md` and its drawings read "Hemisphere"), PARTICULARS.md, the library's notes, and the titles
+written by `lamps_final.py`, `lamps_pdp_r35.py`, `lamps_site.py`, `hemisphere_brightness.py` and
+`hemisphere_thermal.py`. Kept as they are:
+- **file names:** `dome_pendant.py`, `out-dome-pendant/`, `hemisphere_south.py`, `out-hemisphere-south/`, and the
+  render names (`lamp-dome-*`, `lamp-south-*`, `lamps-north-south`);
+- **internal identifiers:** `north_parts`, `N`, `NORTH`, `NORTH_SINK`, `north-driver*`, `north-reflector`, and the kit
+  piece's `dome` and `south` fns.
+
+Renaming them would break the builds and shots that import them. Nothing was re-rendered.
+
+`spinoffs/barkhorn/web.py`, `site/` and the globe mark's south pole (`earth.py`, `mark.py`, the globe files) are untouched.
 

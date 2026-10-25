@@ -502,7 +502,7 @@
   "supplier": "Mill-Max",
   "price_date": "2026-10-20"
  },
- "_hemisphere": "Round 35 (2026-10-22): Hemisphere North and South, engineered after the review (B1, B2, L1, L2, L4). Datasheet figures from Bridgelux DS120 (Vero SE 10, 2700 K, CRI 90) as found by web search; driver ranges from Mean Well's PCD-16 listings. Prices are estimates unless a URL is given.",
+ "_hemisphere": "Round 35 (2026-10-22): Hemisphere (Hemisphere North then) and Hemisphere South, engineered after the review (B1, B2, L1, L2, L4). Datasheet figures from Bridgelux DS120 (Vero SE 10, 2700 K, CRI 90) as found by web search; driver ranges from Mean Well's PCD-16 listings. Prices are estimates unless a URL is given. Round 38 (the owner, 2026-10-25: \"Get rid of south altogether and just call it hemisphere.\"): South is dropped; its entries (south-*) stay as a record.",
  "north-driver": {
   "kind": "power",
   "maker": "Fulham",
@@ -581,7 +581,7 @@
  "south-led": {
   "kind": "led",
   "maker": "to make (an LED board house), with Samsung LM301H-class 3030 LEDs",
-  "model": "Hemisphere South's light: a ring MCPCB 74 x 14 x 1.6 (aluminium core), 2700 K CRI 90 mid-power LEDs in strings matched to the driver's window: about 2,200 lm at about 14.7 W (twice North at 1,100), or about 1,150 lm at 7.7 W (twice North at 575), at about 150 lm/W (an estimate for the class at a moderate current)",
+  "model": "Hemisphere South (dropped 2026-10-25, a record): Hemisphere South's light: a ring MCPCB 74 x 14 x 1.6 (aluminium core), 2700 K CRI 90 mid-power LEDs in strings matched to the driver's window: about 2,200 lm at about 14.7 W (twice North at 1,100), or about 1,150 lm at 7.7 W (twice North at 575), at about 150 lm/W (an estimate for the class at a moderate current)",
   "usd": 14,
   "estimate": true,
   "supplier": "an LED board house",
@@ -590,7 +590,7 @@
  "south-rod": {
   "kind": "hardware",
   "maker": "to make (an anodiser), or a lighting supplier's tube",
-  "model": "Aluminium tube 16 x 2 (6063), black anodised, cut to the drop, threaded into the hub; the heat pipe and the 18 AWG Class 2 wires inside it; a listed swivel (hickey) and a locknut at the canopy",
+  "model": "Hemisphere South (dropped 2026-10-25, a record): Aluminium tube 16 x 2 (6063), black anodised, cut to the drop, threaded into the hub; the heat pipe and the 18 AWG Class 2 wires inside it; a listed swivel (hickey) and a locknut at the canopy",
   "usd": 9,
   "estimate": true,
   "supplier": "a lighting supplier",
@@ -599,7 +599,7 @@
  "south-driver": {
   "kind": "power",
   "maker": "Mean Well (to confirm against the board)",
-  "model": "A Class 2 constant-current, phase-cut dimmable driver, 120 V in, for the ring board: PCD-25 class for the 2,200 lm level (about 15 W), PCD-16 class for the 1,150 lm level (about 8 W); the board's strings are laid out to sit in the chosen driver's voltage window. FCC Part 15 B (consumer) to confirm for home sales; a 0-10 V driver for bars that want it",
+  "model": "Hemisphere South (dropped 2026-10-25, a record): A Class 2 constant-current, phase-cut dimmable driver, 120 V in, for the ring board: PCD-25 class for the 2,200 lm level (about 15 W), PCD-16 class for the 1,150 lm level (about 8 W); the board's strings are laid out to sit in the chosen driver's voltage window. FCC Part 15 B (consumer) to confirm for home sales; a 0-10 V driver for bars that want it",
   "usd": 24,
   "estimate": true,
   "supplier": "TRC Electronics or Digi-Key",
@@ -664,7 +664,7 @@
  "south-heatpipe": {
   "kind": "thermal",
   "maker": "any (Wakefield, Advanced Thermal Solutions, Shenzhen makers)",
-  "model": "A sintered copper-water heat pipe, 8 across, about 220 long: its evaporator in the hub (at the bottom: gravity returns the fluid, the easiest way round for a heat pipe), its condenser in the fins' core above the lid; rated about 30 W at that length, far over South's 4 to 8 W; set in thermal paste",
+  "model": "Hemisphere South (dropped 2026-10-25, a record): A sintered copper-water heat pipe, 8 across, about 220 long: its evaporator in the hub (at the bottom: gravity returns the fluid, the easiest way round for a heat pipe), its condenser in the fins' core above the lid; rated about 30 W at that length, far over South's 4 to 8 W; set in thermal paste",
   "usd": 6,
   "estimate": true,
   "supplier": "a thermal components distributor",
@@ -673,7 +673,7 @@
  "south-gaskets": {
   "kind": "hardware",
   "maker": "any",
-  "model": "Two moulded silicone rings (Shore 40, black, 1 mm, spherical) for South's own shade: one between the collar's flange and the skin's outside, one between the clamp ring and the skin's inside",
+  "model": "Hemisphere South (dropped 2026-10-25, a record): Two moulded silicone rings (Shore 40, black, 1 mm, spherical) for South's own shade: one between the collar's flange and the skin's outside, one between the clamp ring and the skin's inside",
   "usd": 3.0,
   "estimate": true,
   "supplier": "any",
@@ -682,7 +682,7 @@
  "south-weld": {
   "kind": "service",
   "maker": "the shade maker",
-  "model": "Welding South's shade: the skin, the crown weld ring and the opal liner, and the shell and the liner at the rim, with a polymerising acrylic cement (Acrifix 192 kind), cured, annealed and polished; a pull test of the first shades at 4 times their weight after 50 cycles of 25 to 60 C",
+  "model": "Hemisphere South (dropped 2026-10-25, a record): Welding South's shade: the skin, the crown weld ring and the opal liner, and the shell and the liner at the rim, with a polymerising acrylic cement (Acrifix 192 kind), cured, annealed and polished; a pull test of the first shades at 4 times their weight after 50 cycles of 25 to 60 C",
   "usd": 8.0,
   "estimate": true,
   "supplier": "the shade maker",

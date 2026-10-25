@@ -24,9 +24,9 @@ COVER) makes those parts cast no shadow, so the hidden lamp lights the room thro
 through glass only as caustics; Planet's loft, f7c99a4); unset, every part casts its shadow, as before. (Planet r38:
 restored here; round 32f's kit had dropped it, and the bar went dark, 25.6 to 6.5.)
 
-Round 35 (spinoffs/barkhorn/companions/README.md): `dome` is Hemisphere North (its fins above the cover, the cover
+Round 35 (spinoffs/barkhorn/companions/README.md): `dome` is Hemisphere (Hemisphere North in rounds 35 to 37; its fins above the cover, the cover
 clamped, the COB 81.5 above the rim), `orb` is Core (its base 48 tall with its cells; one ball frosted inside, the
-cartridge gone, so `cartridge` changes nothing), and `south` is Hemisphere South (spots: the bowl's rim; no `ceiling`
+cartridge gone, so `cartridge` changes nothing), and `south` is Hemisphere South (dropped 2026-10-25, kept as a record; spots: the bowl's rim; no `ceiling`
 stretch: the rod is 450 to the canopy's face, so put the rim 500 below the ceiling; its light, the ceiling wash from
 the lid and the bowl's glow, is the shot's own to set: `lamp: false`).
 

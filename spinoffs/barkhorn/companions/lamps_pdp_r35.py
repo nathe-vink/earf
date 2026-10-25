@@ -1,7 +1,7 @@
 """Round 35's site pictures, ready to swap in once the owner signs (the coordinator, 2026-10-22: "render the site's lamp
 pictures in round 35's design"): the product pages' heroes in all eight tints, Ember included (the site's Ember heroes
 are round 32f's), and the rows, in the site's style (lamps_site.py: the pale paper studio, exposure 0.15, 4300 K,
-1600 x 2000 at 128 spp), in round 35's geometry: Hemisphere North with its fins, Core on its 48 base, and Hemisphere
+1600 x 2000 at 128 spp), in round 35's geometry: Hemisphere (Hemisphere North then) with its fins, Core on its 48 base, and Hemisphere
 South, new. The names the site picks up stay (lamp-dome-<flavour>, lamp-orb-<flavour>; lamp-south-<flavour> is new),
 in a folder of their own (renders/2026-10-22/barkhorn/lamps-pdp-r35/), so round 34's are untouched.
 
@@ -32,7 +32,7 @@ RENDERS = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'lamps-pdp-r35
 FLAVOURS = ['ember', 'dust', 'acid', 'poison', 'ice', 'haze', 'fog', 'smoke']
 LIFT_ORB = 0.018              # Core's ball, higher by the base's 18
 LIFT_DOME = 0.020             # North's frame, for its fins
-TITLES = {'dome': 'Hemisphere North', 'orb': 'Core', 'south': 'Hemisphere South'}
+TITLES = {'dome': 'Hemisphere', 'orb': 'Core', 'south': 'Hemisphere South (dropped 2026-10-25)'}
 
 
 def site(n):
@@ -156,7 +156,7 @@ def row(n):
         for k, L in s['lights'].items():
             if k.startswith('pool'):
                 L['position'] = lift(L['position'], LIFT_ORB)
-    s['title'] = s['title'].replace('Dome and Orb', 'Hemisphere North and Core') + ' (round 35)'
+    s['title'] = s['title'].replace('Dome and Orb', 'Hemisphere and Core') + ' (round 35)'
     return s
 
 

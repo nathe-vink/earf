@@ -22,6 +22,9 @@ Round 32f (2026-10-20, the owner): the hardware black on both ("Why do the domes
 acrylic?"; "The orb base can be updated too"), and the Orb plug-in, optionally cordless ("Maybe the orbs are plug in and
 optionally rechargeable or something").
 
+Round 38 (the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."): Hemisphere South is dropped from the line and Hemisphere North is now just
+Hemisphere. South's parts stay here (south_parts, hemisphere_south.py) as a record; nothing in the line uses them.
+
 Round 35 (2026-10-22, the owner's names and an engineering review): the Dome is Hemisphere North, the same shades
 turned opening-up on a rod are Hemisphere South, and the Orb is Core. North's driver is chosen from the COB's forward
 voltage, its heat goes to fins above the shade through a PEEK break, its shade is clamped, its diffuser opal, its cord
@@ -228,7 +231,7 @@ def cover_parts(p=N):
 
 
 def north_parts(p=N):
-    """Hemisphere North: the cover hangs mouth down from the fixture: the hub core in the crown (the COB 22 up a 46 bore
+    """Hemisphere (Hemisphere North in rounds 35 to 37): the cover hangs mouth down from the fixture: the hub core in the crown (the COB 22 up a 46 bore
     lined with a reflector: the 46 deg cut-off), the PEEK ring that carries the bayonet's pins (the thermal break), the
     fins above the crown in room air, the cap over the cord grip, the cord, the canopy with the driver."""
     R, r_si, r_l, r_k, r_ki = _radii(p)
@@ -440,8 +443,8 @@ ORB_LIGHT = (0.0, 0.0, round(_zc, 1))           # at the centre: 30 below drew a
 ORB_SIZE = dict(ball=2 * _R, height=round(_zc + _R, 1), base=_bd)
 
 NOTES_DOME = [
-    'Hemisphere North (the Dome until round 35): the shade hangs mouth down. Its shades swap by hand, and fit Hemisphere '
-    'South too: lift the shade 5 mm, turn it 30 degrees and lower it off. To fit one, line up the three slots, push '
+    'Hemisphere (the Dome until round 35; Hemisphere North in rounds 35 to 37): the shade hangs mouth down. Its shades '
+    'swap by hand: lift the shade 5 mm, turn it 30 degrees and lower it off. To fit one, line up the three slots, push '
     'up, turn until the plunger clicks, and let go: its weight holds each pin up in its notch, so a knock cannot turn '
     'it off. No tools, and the shade is never live (the COB, the hub and the driver stay up).',
     'The shade is clamped, not hung on a glue joint: the collar\'s flange sits under the crown inside, a ring screws down '
@@ -493,6 +496,7 @@ TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ri
                 ('led', 'chassis')]
 
 
+# Hemisphere South, DROPPED (the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."). Kept as a record.
 # Hemisphere South: the same cover turned over, a bowl, on a rod from the ceiling. Round 36 (the owner: "The southern
 # hemisphere dome is supposed to have nothing below the dome"): everything that holds or feeds the light is inside the
 # bowl or above it. The hub sits in the collar, its bottom a black cap flush with the collar's end; a ring of LEDs on
@@ -591,7 +595,7 @@ def south_cover_parts(p=S):
 
 
 def south_parts(p=S):
-    """Hemisphere South, built in the cover's frame and turned over: the cover's parts as North's; inside the collar
+    """Hemisphere South (dropped 2026-10-25, kept as a record), built in the cover's frame and turned over: the cover's parts as North's; inside the collar
     the hub core with its PEEK ring and pins, the LED ring on its inner face; the rod up the axis, the heat pipe in it,
     the fins on it above the lid, and the canopy. Nothing below the bowl but the shade's own collar end and clamp ring
     and the hub's flush cap."""
