@@ -73,3 +73,14 @@ Pass 2 meets none of the coordinator's bars (North 5.25, Core 6.0, South 5.5). S
 pictures are not rendered. What the critics still want is more than light: the satin black anodising barely shows a
 strip's reflection (a glint placed for the camera's angle, or a lighter sample of the anodise, as round 32f found on
 the catch); a backdrop without the lamp's light cones; and, for Core, a view that shows the cable or the touch ring.
+
+### Round 39: the site's heroes, pass 3, against the site's current pictures
+
+The gate (the coordinator): blind duels in both orders against the picture each would replace on the site
+(spinoffs/barkhorn/site/img/dome-red.jpg, orb-red.jpg on main), plus one realism critic. Each judge was fresh and saw
+only the two images under neutral names.
+
+| Hero | Duel, new on the left | Duel, new on the right | Realism (new vs old) | Verdict |
+|---|---|---|---|---|
+| Hemisphere (p3-lamp-dome-ember) | new, clear ("the finned black cap and crisp metal rim make the lamp read as a premium, finished object"; the old one's "light-cone streaks" and grey ground) | new, clear ("fills the frame better", "the finned heatsink reads as real engineering detail") | 5 vs 4 (the old one's "ruler-straight light wedges"; the new one's fins "oddly faceted, jagged") | wins 2-0: render the set |
+| Core (p3-lamp-orb-ember) | new, slight (its "bright machined rim, the small status light and the cable") | new, slight ("a working powered product rather than a 3D model") | 5 vs 4 (the cable, the light, the machined edge; both show "a faint horizontal seam" and a flat core) | wins 2-0: render the set |
