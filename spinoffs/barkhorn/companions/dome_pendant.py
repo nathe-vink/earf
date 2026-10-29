@@ -1,5 +1,5 @@
 """Hemisphere (the Dome until round 35, Hemisphere North in rounds 35 to 37), the pendant whose shades swap by hand
-(crystal.py says what it is and how it is made). The file keeps its old name so nothing downstream breaks.
+(crystal.py says what it is and how it is made). Round 41: round 32f's low top, no fins. The file keeps its old name so nothing downstream breaks.
 
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/dome_pendant.py --out spinoffs/barkhorn/companions/out-dome-pendant
 """

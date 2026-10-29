@@ -10,6 +10,10 @@ compare directly: only the lamp's own light and its glints follow the part they 
 Round 32f's models are its fab kit's GLBs as they were at 88db7379 (the branch's start), copied to out-32f/ (git
 stores the same blob once), with their engine files as studio/products/earf-*-32f.json.
 
+Round 41: the owner signed the proposal, so it is now the main build (earf-dome-pendant, earf-orb-table) and the
+'low' shots point there. The 'now' column (rounds 35 to 39: the fins, the 48 base) rebuilds only from git at 950a7eaf;
+its shots here are a record of round 40 and render round 41's design if run today.
+
     python3 spinoffs/barkhorn/companions/lamps_low.py                  # the shots and round 32f's engine files
     python3 spinoffs/barkhorn/companions/lamps_low.py --render [--samples 128]
 """
@@ -28,10 +32,10 @@ DROP = -0.018                 # round 32f's and the proposal's Core: the ball 18
 DEFS = {
     ('dome', '32f'): 'studio/products/earf-dome-pendant-32f.json',
     ('dome', 'now'): 'studio/products/earf-dome-pendant.json',
-    ('dome', 'low'): 'studio/products/earf-dome-pendant-low.json',
+    ('dome', 'low'): 'studio/products/earf-dome-pendant.json',     # round 41: the proposal is the main build
     ('orb', '32f'): 'studio/products/earf-orb-table-32f.json',
     ('orb', 'now'): 'studio/products/earf-orb-table.json',
-    ('orb', 'low'): 'studio/products/earf-orb-table-low.json',
+    ('orb', 'low'): 'studio/products/earf-orb-table.json',
 }
 LABELS = {'32f': 'Round 32f (as it was)', 'now': 'Current (rounds 35 to 39)', 'low': 'Proposal (round 40)'}
 

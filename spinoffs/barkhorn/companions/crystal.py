@@ -22,6 +22,11 @@ Round 32f (2026-10-20, the owner): the hardware black on both ("Why do the domes
 acrylic?"; "The orb base can be updated too"), and the Orb plug-in, optionally cordless ("Maybe the orbs are plug in and
 optionally rechargeable or something").
 
+Round 41 (the owner signed round 40, 2026-10-29): round 32f's low profiles are the design. Hemisphere's heat sink is
+the low top (a black crown and an aluminium cap, 126 above the rim; no fins, for 575 lm), and Core sits on the 120 x 30
+base with three LiFePO4 18650 cells round the LED. The fins and the 26650 holder of rounds 35 to 39 are in git at
+950a7eaf.
+
 Round 38 (the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."): Hemisphere South is dropped from the line and Hemisphere North is now just
 Hemisphere. South's parts stay here (south_parts, hemisphere_south.py) as a record; nothing in the line uses them.
 
@@ -94,7 +99,7 @@ SOLIDS.setdefault('peek', dict(title='PEEK rod, unfilled', density=1.30, usd_per
 
 GAP, LT, SKIN = 1.0, 2.5, 3.0          # the liner 1 mm in from the shell, 2.5 thick; the inner skin 3
 
-O = dict(R=80.0, shell=9.0, base=(120.0, 48.0), ring=8.0, rim_r=50.0, port=40.0)    # round 35: the base 30 -> 48 (its cells)
+O = dict(R=80.0, shell=9.0, base=(120.0, 30.0), ring=8.0, rim_r=50.0, port=40.0)    # round 41: 30 again (48 in rounds 35 to 39)
 
 ORB_LIGHT = None                       # set below from the ball's centre
 
@@ -143,8 +148,9 @@ N = dict(R=100.0, shell=9.0, liner=3.0, skin=3.0, gap=1.0,
          ring=(62.0, 78.0, 86.0, 100.0),        # the PEEK pin carrier: ID, OD, z0, z1
          core=(62.0, 60.0, 100.0),               # the hub core: OD, z0, z1 (the bore and the reflector in it)
          bore=(46.0, 82.0),                      # the bore's diameter and the COB's face (22 up from the mouth at 60)
-         neck=(40.0, 110.0),                     # the core's neck up to the fins
-         sink=(80.0, 110.0, 146.0, 16, 1.8),     # the fins: OD, z0, z1, count, thickness (cut from a radial extrusion)
+         neck=(40.0, 104.0),                     # the core's neck, up into the crown
+         crown=(80.0, 100.5, 112.0),             # round 41: the low top, the heat sink: OD, z0, z1 (the fins of rounds
+                                                 # 35 to 39 were 80 across from 110 to 146, 16 x 1.8: in git at 950a7eaf)
          cap=(40.0, 14.0), drop=600.0, canopy=(150.0, 50.0))
 D = N                                            # the old name (dome_pendant.py, Planet's kit piece)
 
@@ -233,12 +239,14 @@ def cover_parts(p=N):
 def north_parts(p=N):
     """Hemisphere (Hemisphere North in rounds 35 to 37): the cover hangs mouth down from the fixture: the hub core in the crown (the COB 22 up a 46 bore
     lined with a reflector: the 46 deg cut-off), the PEEK ring that carries the bayonet's pins (the thermal break), the
-    fins above the crown in room air, the cap over the cord grip, the cord, the canopy with the driver."""
+    black crown over the collar and the aluminium cap on it (round 41: round 32f's low top, the heat sink; the fins of
+    rounds 35 to 39 are in git at 950a7eaf), the cord, the canopy with the driver. For 575 lm only: 1,100 lm needs the
+    fins (hemisphere_thermal.py)."""
     R, r_si, r_l, r_k, r_ki = _radii(p)
     od, z0, z1 = p['core']
     bd, bz = p['bore']
     nd, nz = p['neck']
-    sd, sz0, sz1, nf, ft = p['sink']
+    sd, sz0, sz1 = p['crown']
     cd, ch = p['cap']
     ri, ro, rz0, rz1 = p['ring']
     pz = p['pin_z']
@@ -257,10 +265,7 @@ def north_parts(p=N):
                                   Cone(bd / 2 - 1.1, 9.5, bz - z0 - 1.0, align=al))
     refl = refl & cyl('z', (0, 0), bd - 0.2, z0 + 0.5, bz - 0.5)
     cob = cyl('z', (0, 0), 28, bz, bz + 2)
-    fins = cyl('z', (0, 0), 30, sz0, sz1) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
-    for i in range(nf):
-        fins = fins + at(360.0 * i / nf, box(14.0, -ft / 2, sz0, sd / 2, ft / 2, sz1))
-    fins = fins & (cyl('z', (0, 0), sd, sz0, sz1) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1))
+    crown = cyl('z', (0, 0), sd, sz0, sz1) - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
     gland = cyl('z', (0, 0), cd, sz1, sz1 + ch) - cyl('z', (0, 0), 8, sz1 - 1, sz1 + ch + 1)
     z_cord = sz1 + ch
     cord = cyl('z', (0, 0), 6, z_cord, z_cord + p['drop'])
@@ -272,20 +277,21 @@ def north_parts(p=N):
         Part('hub', core, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
              notes=['aluminium 6061, black anodised: the core, turned from bar. The COB on its holder at the top of the 46 '
                     'bore (22 up: the cut-off, about 46 deg from the vertical), the reflector in the bore, the PEEK ring '
-                    'round it, the fins bolted on its neck on a thermal pad; a 10 bore for the wires']),
+                    'round it, the crown on its neck on a thermal pad; a 10 bore for the wires']),
         Part('ring', ring, Machined('peek', 'lathe'), finish='trim', group='fixture', inside=True,
              notes=['PEEK, unfilled (0.25 W/m K), black: the thermal break. It carries the three pins and the detent, so '
                     'the cover touches the fixture only through it; 4 to 5 mm of air round the core inside the collar']),
         Part('pins', pins, Bought('dome-pins'), finish='anodised', group='fixture'),
         Part('reflector', refl, Bought('north-reflector'), finish='anodised', group='fixture', inside=True),
         Part('cob', cob, Bought('hemi-cob'), finish='led', group='fixture', inside=True),
-        Part('fins', fins, Machined('aluminium', 'extrusion', setup_usd=0.0), finish='anodised', group='fixture',
-             notes=['the heat sink, in room air above the cover: 36 cut from a standard radial (sunflower) extrusion, 80 '
-                    'across, 16 fins, the cut faces turned, black anodised (the black also radiates: emissivity about 0.85); '
-                    'concentric with the cap and the hub']),
-        Part('gland', gland, Machined('cast-acrylic', 'lathe'), finish='trim', group='fixture',
-             notes=['the cap: black cast acrylic, polished, over the listed cord grip (the strain relief, tested with the '
-                    'fixture\'s weight), on two M3 into the fins\' core']),
+        Part('crown', crown, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
+             notes=['the heat sink (round 41; the fins until then), round 32f\'s low top: 80 across, 11.5 tall over the '
+                    'collar, turned from 6061 bar, black anodised (emissivity about 0.85: half its loss is radiation), on '
+                    'the core\'s neck on a thermal pad, 0.5 clear of the PEEK ring and the collar']),
+        Part('gland', gland, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
+             notes=['the cap, 40 x 14: aluminium, black anodised and polished (round 32f\'s was black acrylic: here it '
+                    'runs at the hub\'s 49 to 52 C), over the listed cord grip (the strain relief, tested with the '
+                    'fixture\'s weight), on two M3 into the crown; part of the heat sink']),
         Part('cord', cord, Bought('hemi-cord'), finish='cord', group='fixture'),
         Part('canopy', canopy, Machined('cast-acrylic', 'lathe'), finish='trim', group='canopy',
              notes=['150 x 50, black cast acrylic, polished: over the driver and a steel junction-box strap (the strap '
@@ -310,60 +316,70 @@ def orb_geometry(p=O):
 
 def orb_parts(p=O):
     """Core (round 35; the Orb before it): one tinted ball frosted inside, on a base that holds its own battery. The
-    owner: "I want it to work plugged in or not. Why does it need a separate cartridge for that?" So the cartridge, its
-    bay, its blanking cap and its tray pads are gone: three standard LiFePO4 cells (26650) lie in a holder in the base
-    behind a screwed hatch underneath, the user's to replace. It runs from USB-C or its cells, and charges while it runs.
-    The cells raise the base by 18 (the LED, its board and the chassis now sit above them)."""
+    owner (round 35): "I want it to work plugged in or not. Why does it need a separate cartridge for that?" So three
+    standard LiFePO4 cells lie in the base behind a screwed hatch underneath, the user's to replace. It runs from USB-C
+    or its cells, and charges while it runs. Round 41 (the owner signed round 40): round 32f's 120 x 30 base again,
+    the cells three 18650s in a triangle of chords round the LED (three 26650s fit neither under it nor round it in 30;
+    the 48 base of rounds 35 to 39 is in git at 950a7eaf)."""
     from build123d import Sphere, Pos
     R, bd, bh, z_top, zc = orb_geometry(p)
     cup = Pos(0, 0, zc) * Sphere(R + 0.5)
     t = p['shell']
     port = cyl('z', (0, 0), p['port'], zc - R - 5, zc - R + 25)
-    # the ball: one tinted shell, its inside face bead-blasted (the frost at an air boundary, where it scatters); the
-    # render shows the frost as a thin skin of the liner's material inside the shell
     shell = ball(R, t, (0, 0, zc)) - port
     shell_r = ball(R, t - 0.4, (0, 0, zc)) - port
-    frost_r = ball(R - t + 0.3, 0.3, (0, 0, zc)) - port        # 0.1 under the shell's face: coincident faces render dark
+    frost_r = ball(R - t + 0.3, 0.3, (0, 0, zc)) - port
     gz0 = zc - math.sqrt(R ** 2 - (p['port'] / 2) ** 2)
     gz1 = zc - math.sqrt((R - t) ** 2 - (p['port'] / 2) ** 2)
     grommet = cyl('z', (0, 0), p['port'] - 0.4, gz0, gz1) - cyl('z', (0, 0), p['port'] - 6, gz0 - 1, gz1 + 1)
-    # the base: the cells' pocket from below (106 across, to 31.5), the chassis under its shoulder, the board and the
-    # LED in a 92 pocket above it, the window over the LED; the hatch in a 112 counterbore, the foot ring outside it
-    pk, pz, up, uz = 106.0, 31.5, 92.0, 36.0
-    base = eased(bd, 0, bh, 3.0, top=False) - cyl('z', (0, 0), pk, -1, pz) - cyl('z', (0, 0), up, pz - 0.1, uz) - cup
-    base = base - cyl('z', (0, 0), 30, uz - 0.1, bh) - cyl('z', (0, 0), 112.0, -1, 2.5)
-    ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup
+    hz = 2.5                                                  # the hatch's counterbore
+    # the middle: the chassis (the LED's heat spreader, 50 across) under the board and the LED, the window above
+    cz0, cz1 = 10.6, 12.2
+    chassis = cyl('z', (0, 0), 50.0, cz0, cz1) - cyl('z', (0, 0), 10, cz0 - 1, cz1 + 1)
+    board = cyl('z', (0, 0), 48.0, cz1 + 0.2, cz1 + 1.6) - cyl('z', (0, 0), 28, cz1, cz1 + 2)
+    led = cyl('z', (0, 0), 26, cz1 + 1.0, cz1 + 2.6)
+    uz = cz1 + 3.0
     window = cyl('z', (0, 0), 29.6, uz + 0.2, zc - math.sqrt((R + 0.5) ** 2 - 15 ** 2) - 0.3)
-    chassis = cyl('z', (0, 0), pk - 0.4, 30.0, pz) - cyl('z', (0, 0), 20, 29, 32)
-    board = cyl('z', (0, 0), 78, pz + 0.2, pz + 1.6) - cyl('z', (0, 0), 34, pz, pz + 2)
-    led = cyl('z', (0, 0), 26, pz + 1.0, pz + 2.6)
-    # the cells: three 26650 lying side by side along y, in a holder (its floor 1, its walls 1)
-    cells = None
-    for x in (-26.4, 0.0, 26.4):
-        c = cyl('y', (x, 3.5 + 13.1), 26.2, -32.5, 32.5)
+    # the cells: three chords, their normals at -10, 110 and 230 deg (the corner at 170 holds the USB-C)
+    a, d, L = 27.0, 18.4, 65.2
+    z0c = hz + 0.9
+    cells = holder = None
+    for k in range(3):
+        ang = -10.0 + 120.0 * k
+        c = at(ang, cyl('y', (a + d / 2, z0c + d / 2), d, -L / 2, L / 2))
+        h = at(ang, box(a - 0.8, -L / 2 - 2.0, hz + 0.1, a + d + 0.8, L / 2 + 2.0, z0c + d * 0.6) -
+               box(a, -L / 2 - 0.2, z0c - 0.05, a + d, L / 2 + 0.2, z0c + d + 1))
         cells = c if cells is None else cells + c
-    holder = box(-40.6, -33.4, 2.5, 40.6, 33.4, 29.8) - box(-39.6, -32.6, 3.5, 39.6, 32.6, 31.0)
-    hatch = cyl('z', (0, 0), 111.6, 0.2, 2.5)
-    # the ballast: steel segments round the holder (front, back and right; the left holds the USB-C) and a ring above
-    # the chassis under the cup, in a groove from the shoulder
-    seg = cyl('z', (0, 0), 105.0, 2.6, 29.8) - box(-41.2, -34.0, 0, 41.2, 34.0, 31)
-    seg = seg - box(-60, -60, 0, -41.2, 60, 31)                                   # the left segment: the USB-C's
-    ballast = seg + (cyl('z', (0, 0), 105.6, pz, 44.0) - cyl('z', (0, 0), 92.4, pz - 1, 45))
-    base = base - (cyl('z', (0, 0), 106.0, pz - 0.1, 44.2) - cyl('z', (0, 0), 92.0, pz - 1, 45))
-    # USB-C: a sealed receptacle on a small board in the left segment, out along a notch in the underside at the back left
-    a = math.radians(100.0)
-    ux, uy = -math.sin(a), -math.cos(a)
-    ang = math.degrees(math.atan2(uy, ux))
-    notch = at(ang, box(46, -6.5, -1, bd / 2 + 2, 6.5, 7.0))
-    base = base - notch
-    hatch = hatch - notch
-    usb = at(ang, box(43.0, -5.0, 3.0, 50.5, 5.0, 10.0))
-    plug = at(ang, box(51, -6.0, 0.6, 62, 6.0, 6.6))
+        holder = h if holder is None else holder + h
+    bay = None
+    for k in range(3):
+        ang = -10.0 + 120.0 * k
+        b = at(ang, box(a - 1.0, -L / 2 - 2.2, -1, a + d + 1.0, L / 2 + 2.2, z0c + d + 0.5))
+        bay = b if bay is None else bay + b
+    # the ballast: steel in the three corners between the chords, out to 54, a 2 web of acrylic round each
+    corner = cyl('z', (0, 0), 108.0, hz + 0.1, z0c + d + 0.4) - cyl('z', (0, 0), 54.0, 0, 30) - _chords(a, L, d, 0.0)
+    # USB-C: a sealed receptacle on a small board in the corner at 170 deg, out along a notch in the underside
+    aa = math.radians(100.0)
+    ux, uy = -math.sin(aa), -math.cos(aa)
+    uang = math.degrees(math.atan2(uy, ux))
+    notch = at(uang, box(46, -6.5, -1, bd / 2 + 2, 6.5, 7.0))
+    usb = at(uang, box(43.0, -5.0, 3.0, 50.5, 5.0, 10.0))
+    corner = corner - at(uang, box(30, -8, 0, 70, 8, 30))
+    ballast = corner
+    plug = at(uang, box(51, -6.0, 0.6, 62, 6.0, 6.6))
     cable = orb_cable(ux, uy)
     zs = zc - math.sqrt(R ** 2 - 42 ** 2) - 0.3
     seat = cyl('z', (0, 0), 92, zs - 1.5, zs) - cyl('z', (0, 0), 84, zs - 2, zs + 1)
+    # the drum: from below, the hatch's counterbore, the middle pocket, the cells' bays, the corners, the ring's groove
+    base = eased(bd, 0, bh, 3.0, top=False) - cup - cyl('z', (0, 0), 112.0, -1, hz)
+    base = base - cyl('z', (0, 0), 50.4, -1, uz) - cyl('z', (0, 0), 30, uz - 0.1, bh) - bay
+    base = base - (cyl('z', (0, 0), 108.4, -1, z0c + d + 0.6) - cyl('z', (0, 0), 53.6, -2, 31) - _chords(a, L, d, -0.2) -
+                   at(uang, box(30, -7.8, -2, 70, 7.8, 31)))
+    base = base - notch - at(uang, box(42.5, -5.5, -1, 51, 5.5, 10.5))
+    hatch = cyl('z', (0, 0), 111.6, 0.2, hz) - notch
     foot = cyl('z', (0, 0), 117.6, 0.2, 2) - cyl('z', (0, 0), 114.4, 0, 3) - notch
     base = base - (cyl('z', (0, 0), 118, -1, 2) - cyl('z', (0, 0), 114, -2, 3)) - cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01)
+    ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup
     ring = ring - (cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01) - cyl('z', (0, 0), 83.6, zs - 3, zs + 1))
     return [
         Part('shell', shell, Machined('acrylic-formed', 'formed', setup_usd=1500.0), finish='body', group='ball',
@@ -376,31 +392,29 @@ def orb_parts(p=O):
         Part('grommet', grommet, Machined('aluminium', 'lathe'), finish='anodised', group='ball',
              notes=['black anodised aluminium: lines the port, bonded']),
         Part('base', base, Machined('cast-acrylic', 'lathe', setup_usd=80.0), finish='trim', group='base',
-             notes=['black cast acrylic, polished, turned from rod: 120 x 48 (was 30: the cells lie under the LED), the '
-                    'cup turned in it; from below the cells\' pocket (106), the shoulder with threaded inserts for the '
-                    'chassis, the board\'s pocket (92), the ballast ring\'s groove, the hatch\'s counterbore (112) and '
-                    'the cable notch']),
+             notes=['black cast acrylic, polished, turned from rod: 120 x 30 (round 32f\'s), the cup turned in it; from '
+                    'below the hatch\'s counterbore (112), the middle pocket (50) for the chassis, the board and the LED, '
+                    'the three cells\' bays, the ballast\'s corners and the cable notch']),
         Part('ring', ring, Machined('aluminium', 'lathe'), finish='anodised', group='base',
              notes=['aluminium, black anodised, satin, insulated from the chassis: the touch (tap to switch, hold to dim, '
                     '2200 to 2700 K)']),
         Part('window', window, Machined('cast-acrylic', 'lathe'), finish='window', group='base',
              notes=['a clear acrylic plug, sealed with an O-ring: the LED under it, the base IP44 with the ball off']),
         Part('chassis', chassis, Machined('aluminium', 'mill'), finish='steel', group='base', inside=True,
-             notes=['aluminium 6061 plate: the LED\'s heat path and the board\'s carrier, screwed up into the shoulder on '
-                    'threaded inserts, an O-ring between; it closes the cells\' bay from above']),
+             notes=['aluminium 6061, 50 across: the LED\'s heat spreader and the board\'s carrier, screwed up into the '
+                    'base on threaded inserts, an O-ring between']),
         Part('ballast', ballast, Machined('steel', 'mill'), finish='steel', group='base', inside=True,
-             notes=['mild steel, zinc-plated: three segments round the cells\' holder and a ring under the cup, screwed '
-                    'to the chassis (about 0.8 kg)']),
-        Part('board', board, Bought('core-board'), finish='steel', group='base', inside=True, render=False),
+             notes=['mild steel, zinc-plated: three corner pieces between the cells\' bays, screwed up into the base']),
+        Part('board', board, Bought('core-board-18650'), finish='steel', group='base', inside=True, render=False),
         Part('led', led, Bought('moon-led-table'), finish='led', group='base', inside=True),
-        Part('cells', cells, Bought('core-cells'), finish='steel', group='battery', inside=True, render=False),
-        Part('holder', holder, Bought('core-holder'), finish='trim', group='battery', inside=True,
-             notes=['the cells\' holder: spring contacts (no exposed contact outside the hatch), the cells\' NTC, keyed '
-                    'so a cell cannot go in backwards']),
+        Part('cells', cells, Bought('core-cells-18650'), finish='steel', group='battery', inside=True, render=False),
+        Part('holder', holder, Bought('core-holder-18650'), finish='trim', group='battery', inside=True,
+             notes=['three single-cell holders in a triangle round the middle: spring contacts (no exposed contact '
+                    'outside the hatch), keyed so a cell cannot go in backwards, the NTC on one']),
         Part('hatch', hatch, Machined('aluminium', 'mill'), finish='anodised', group='battery',
              notes=['black anodised aluminium, 2.3 thick, in a counterbore under the base: four captive M3 screws '
                     '(Phillips or Torx: commercially available tools), an O-ring (IP44); a label inside: the cells\' '
-                    'type and how to change them']),
+                    'type (LiFePO4 18650 only) and how to change them']),
         Part('usb', usb, Bought('orb-seals'), finish='steel', group='base', inside=True, render=False),
         Part('seat', seat, Bought('orb-seat'), finish='silicone', group='base'),
         Part('foot-ring', foot, Bought('core-foot'), finish='silicone', group='base'),
@@ -454,14 +468,15 @@ NOTES_DOME = [
     'scatters through its depth, so it still diffuses where it touches the tint (a bead-blasted clear liner would go '
     'clear wherever it was bonded). Nothing white is seen.',
     'Light: a Bridgelux Vero SE 10 (2700 K, CRI 90) at the top of a 46 bore lined with a reflector, 22 up: the cut-off '
-    'about 46 deg from the vertical, and about 85 % of its light out (the black bore passed 52 %). Two levels, the '
-    'owner to choose: about 1,100 lm at the COB on a Fulham T1T11200350-15L (350 mA, FCC Part 15B consumer; the COB '
-    'runs 26 V, 9.1 W; the Mean Well PCD-16-350A the bar-only alternate, FCC Part 18 non-consumer), or about 575 lm at '
-    'about 175 mA (4.3 W, driver to source). Dimmed by a phase-cut (TRIAC) dimmer; a 0-10 V '
-    'driver for bars that want it.',
-    'Heat: the hub\'s fins sit above the shade in room air (an 80 radial extrusion, black); a PEEK ring carries the '
-    'bayonet\'s pins, so the hub reaches the shade only through it and 4 to 10 mm of air. Estimated at 1,100 lm in a 35 C '
-    'room: the hub 52 C, the collar and the acrylic beside it 42 C (hemisphere_thermal.py; to measure, README round 35).',
+    'about 46 deg from the vertical, and about 85 % of its light out (the black bore passed 52 %). About 575 lm at the '
+    'COB (the owner, round 36), at about 175 mA (4.3 W) on a consumer-class (FCC Part 15B) driver, still to source; '
+    'dimmed by a phase-cut (TRIAC) dimmer, or a 0-10 V driver for bars that want it. Not for 1,100 lm: the low top is '
+    'sized for 575 (1,100 needs the fins of rounds 35 to 39).',
+    'Heat (round 41): round 32f\'s low top is the heat sink, no fins: a black anodised aluminium crown 80 across and '
+    '11.5 tall over the collar, and an aluminium cap 40 x 14 over the cord grip, the cap\'s top 126 above the rim. A '
+    'PEEK ring carries the bayonet\'s pins, so the hub reaches the shade only through it and air. At 575 lm the hub '
+    'makes 2.7 W of heat; estimated in a 35 C room: the hub 49 C, the COB\'s case 50 C, the collar and the acrylic '
+    'beside it 41 C (hemisphere_thermal.py; to measure, README round 35).',
     'Mains stops at the canopy: the driver is there, and the cord carries the LED\'s 26 V DC (Class 2). The cord is a '
     'listed 18 AWG 2-conductor in a black textile braid, its grips tested with the fixture\'s weight. Listed to UL 1598 '
     'with any shade.',
@@ -469,15 +484,16 @@ NOTES_DOME = [
     'about 650 to 750 above it.',
 ]
 NOTES_ORB = [
-    'Core (the Orb until round 35): a crystal ball, a 160 tinted ball low in the cup of a 120 x 48 base, 198 tall. The '
-    'ball lifts off: the LED is under a sealed window in the base, so balls swap colour by hand.',
+    'Core (the Orb until round 35): a crystal ball, a 160 tinted ball low in the cup of a 120 x 30 base (round 41), 180 '
+    'tall. The ball lifts off: the LED is under a sealed window in the base, so balls swap colour by hand.',
     'One ball where there were three layers: tinted cast acrylic, two halves formed on one mould and joined at the '
     'equator, their inside bead-blasted. The frost faces air, so it scatters; seen from outside it is behind the tint, '
     'and the port that would show it faces the base.',
-    'Plugged in or not, one product: three LiFePO4 26650 cells (about 29 Wh) in a holder in the base, behind a hatch '
-    'underneath on four captive screws, the user\'s to replace with standard cells. It runs from USB-C (5 V 3 A, the '
-    'adapter and a 2 m fabric cable in the box) or from its cells, and charges while it runs, in about 3.5 hours. '
-    'About 9 hours at full brightness (2.5 W) at the default charge limit (90 %), about 10.5 at a full charge.',
+    'Plugged in or not, one product: three LiFePO4 18650 cells (about 14 to 17 Wh) in a triangle round the LED, behind '
+    'a hatch underneath on four captive screws, the user\'s to replace with standard cells. It runs from USB-C (5 V 3 A, '
+    'the adapter and a 2 m fabric cable in the box) or from its cells, and charges while it runs, in about 2.5 hours. '
+    'About 4.7 to 5.6 hours at full brightness (2.5 W) at the default charge limit (90 %), 5.2 to 6.2 at a full charge; '
+    'about 5.8 to 7 at the bar setting (2 W).',
     'Long life: LiFePO4 keeps about 80 % of its capacity after about 2,000 cycles (ordinary Li-ion about 500); the '
     'charge limit, a battery-management circuit (protection, a fuel gauge, charging held off below 0 C and above 45 C '
     'by the cells\' NTC) and no exposed contacts. Certified as one product: IEC/UL 62368-1 with its battery annex; the '
@@ -487,13 +503,14 @@ NOTES_ORB = [
     'Black, so the tint is the only colour: the base black cast acrylic, polished, over an aluminium chassis and a steel '
     'ballast; the ring, the port\'s lining and the hatch black anodised aluminium.',
 ]
-TOUCHING_DOME = [('pins', 'ring'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'liner'), ('cob', 'hub'), ('gland', 'fins'),
-                 ('fins', 'hub'), ('clamp', 'collar'), ('gaskets', 'collar'), ('gaskets', 'clamp'), ('gaskets', 'shell'),
+TOUCHING_DOME = [('pins', 'ring'), ('rim', 'shell'), ('rim', 'skin'), ('rim', 'liner'), ('cob', 'hub'), ('gland', 'crown'),
+                 ('crown', 'hub'), ('clamp', 'collar'), ('gaskets', 'collar'), ('gaskets', 'clamp'), ('gaskets', 'shell'),
                  ('gaskets', 'skin'), ('reflector', 'hub')]
 TOUCHING_ORB = [('grommet', 'shell'), ('window', 'base'), ('seat', 'base'), ('ring', 'base'), ('led', 'board'),
                 ('chassis', 'base'), ('ballast', 'chassis'), ('ballast', 'base'), ('cable', 'base'), ('board', 'chassis'),
                 ('foot-ring', 'base'), ('cells', 'holder'), ('hatch', 'base'), ('usb', 'base'), ('cable', 'hatch'),
-                ('led', 'chassis')]
+                ('led', 'chassis'), ('holder', 'base'), ('holder', 'hatch'), ('ballast', 'hatch'), ('chassis', 'board'),
+                ('window', 'led'), ('usb', 'hatch')]
 
 
 # Hemisphere South, DROPPED (the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."). Kept as a record.
@@ -674,170 +691,13 @@ NOTES_SOUTH = [
     'on the ceiling).',
 ]
 TOUCHING_SOUTH = TOUCHING_DOME + [('weld', 'skin'), ('weld', 'liner'), ('weld', 'collar'), ('rod', 'hub'), ('led', 'hub'), ('rod', 'led'), ('rod', 'lid'), ('pipe', 'rod'),
-                                  ('pipe', 'hub'), ('fins', 'rod')]
+                                  ('pipe', 'hub'), ('fins', 'rod'), ('gland', 'fins'), ('fins', 'hub')]
 
 
-# --- Round 40: the low profiles, a PROPOSAL beside the current design (the owner, 2026-10-29: "Damn I kind of liked
-# the old light design though, with the lower base for core and the lower profile top for hemisphere. Did we change
-# that for technical reasons? I feel like the new designs detract from the acrylic piece."). Nothing above changes:
-# these are switches (dome_pendant_low.py, orb_table_low.py) until the owner signs one.
-
-# Hemisphere, low top: round 32f's profile over the shade (a black crown 80 across, the cap 40 x 14, its top 126 above
-# the rim; the fins put it at 160), no fins. At 575 lm with the reflector the hub makes 2.7 W of heat (6.1 W at 1,100,
-# which the fins were sized for); hemisphere_thermal.py's round 40 table: the acrylic by the collar about 41 C and the
-# COB's case about 50 C in a 35 C room, so the plain crown does. The cap is aluminium, not 32f's acrylic: on the crown
-# it runs at the hub's 49 to 52 C, over our 50 C limit for acrylic, and as metal it sheds a fifth of the heat.
-N_LOW = dict(N, neck=(40.0, 104.0), sink=(80.0, 100.5, 112.0, 0, 0.0), cap=(40.0, 14.0))
-
-
-def north_low_parts(p=N_LOW):
-    import dataclasses
-    sd, sz0, sz1, _, _ = p['sink']
-    nd, nz = p['neck']
-    crown = cyl('z', (0, 0), sd, sz0, sz1) - cyl('z', (0, 0), nd + 0.2, sz0 - 1, nz) - cyl('z', (0, 0), 10, sz0 - 1, sz1 + 1)
-    out = []
-    for part in north_parts(p):
-        if part.name == 'fins':
-            part = Part('crown', crown, Machined('aluminium', 'lathe'), finish='anodised', group='fixture',
-                        notes=['round 40 (proposal): the heat sink is the crown, round 32f\'s low top: 80 across, 11.5 '
-                               'tall over the collar, turned from 6061 bar, black anodised (emissivity about 0.85: half '
-                               'its loss is radiation), on the core\'s neck on a thermal pad, 0.5 clear of the PEEK ring '
-                               'and the collar; no fins'])
-        elif part.name == 'gland':
-            part = dataclasses.replace(part, make=Machined('aluminium', 'lathe'),
-                                       notes=['the cap, 40 x 14: aluminium, black anodised and polished (round 32f\'s was '
-                                              'black acrylic: here it would sit at the hub\'s 49 to 52 C), over the '
-                                              'listed cord grip, on two M3 into the crown; part of the heat sink'])
-        out.append(part)
-    return out
-
-
-# Core, the 30 base: round 32f's 120 x 30 drum and 180 height, with Core's own cells. Three 26650s cannot lie under the
-# LED in 30 (round 35), nor round it (they need a drum about 157 across), and four 18650s need about 127 across; three
-# 18650s fit as a triangle of chords round the LED, each cell's inner face 26 from the axis (the cup clears it by 2.3),
-# its outer corners 56 out (a 4 wall). The LED, its chassis and the board stay in the middle under the window.
-O_LOW = dict(O, base=(120.0, 30.0))
-
-
-def orb_low_parts(p=O_LOW):
-    """Core on the 30 base (round 40, proposal): three 18650 cells in a triangle round the LED, behind the same hatch."""
-    from build123d import Sphere, Pos
-    R, bd, bh, z_top, zc = orb_geometry(p)
-    cup = Pos(0, 0, zc) * Sphere(R + 0.5)
-    t = p['shell']
-    port = cyl('z', (0, 0), p['port'], zc - R - 5, zc - R + 25)
-    shell = ball(R, t, (0, 0, zc)) - port
-    shell_r = ball(R, t - 0.4, (0, 0, zc)) - port
-    frost_r = ball(R - t + 0.3, 0.3, (0, 0, zc)) - port
-    gz0 = zc - math.sqrt(R ** 2 - (p['port'] / 2) ** 2)
-    gz1 = zc - math.sqrt((R - t) ** 2 - (p['port'] / 2) ** 2)
-    grommet = cyl('z', (0, 0), p['port'] - 0.4, gz0, gz1) - cyl('z', (0, 0), p['port'] - 6, gz0 - 1, gz1 + 1)
-    hz = 2.5                                                  # the hatch's counterbore
-    # the middle: the chassis (the LED's heat spreader, 50 across) under the board and the LED, the window above
-    cz0, cz1 = 10.6, 12.2
-    chassis = cyl('z', (0, 0), 50.0, cz0, cz1) - cyl('z', (0, 0), 10, cz0 - 1, cz1 + 1)
-    board = cyl('z', (0, 0), 48.0, cz1 + 0.2, cz1 + 1.6) - cyl('z', (0, 0), 28, cz1, cz1 + 2)
-    led = cyl('z', (0, 0), 26, cz1 + 1.0, cz1 + 2.6)
-    uz = cz1 + 3.0
-    window = cyl('z', (0, 0), 29.6, uz + 0.2, zc - math.sqrt((R + 0.5) ** 2 - 15 ** 2) - 0.3)
-    # the cells: three chords, their normals at -10, 110 and 230 deg (the corner at 170 holds the USB-C)
-    a, d, L = 27.0, 18.4, 65.2
-    z0c = hz + 0.9
-    cells = holder = None
-    for k in range(3):
-        ang = -10.0 + 120.0 * k
-        c = at(ang, cyl('y', (a + d / 2, z0c + d / 2), d, -L / 2, L / 2))
-        h = at(ang, box(a - 0.8, -L / 2 - 2.0, hz + 0.1, a + d + 0.8, L / 2 + 2.0, z0c + d * 0.6) -
-               box(a, -L / 2 - 0.2, z0c - 0.05, a + d, L / 2 + 0.2, z0c + d + 1))
-        cells = c if cells is None else cells + c
-        holder = h if holder is None else holder + h
-    bay = None
-    for k in range(3):
-        ang = -10.0 + 120.0 * k
-        b = at(ang, box(a - 1.0, -L / 2 - 2.2, -1, a + d + 1.0, L / 2 + 2.2, z0c + d + 0.5))
-        bay = b if bay is None else bay + b
-    # the ballast: steel in the three corners between the chords, out to 54, a 2 web of acrylic round each
-    corner = cyl('z', (0, 0), 108.0, hz + 0.1, z0c + d + 0.4) - cyl('z', (0, 0), 54.0, 0, 30) - _chords(a, L, d, 0.0)
-    # USB-C: a sealed receptacle on a small board in the corner at 170 deg, out along a notch in the underside
-    aa = math.radians(100.0)
-    ux, uy = -math.sin(aa), -math.cos(aa)
-    uang = math.degrees(math.atan2(uy, ux))
-    notch = at(uang, box(46, -6.5, -1, bd / 2 + 2, 6.5, 7.0))
-    usb = at(uang, box(43.0, -5.0, 3.0, 50.5, 5.0, 10.0))
-    corner = corner - at(uang, box(30, -8, 0, 70, 8, 30))
-    ballast = corner
-    plug = at(uang, box(51, -6.0, 0.6, 62, 6.0, 6.6))
-    cable = orb_cable(ux, uy)
-    zs = zc - math.sqrt(R ** 2 - 42 ** 2) - 0.3
-    seat = cyl('z', (0, 0), 92, zs - 1.5, zs) - cyl('z', (0, 0), 84, zs - 2, zs + 1)
-    # the drum: from below, the hatch's counterbore, the middle pocket, the cells' bays, the corners, the ring's groove
-    base = eased(bd, 0, bh, 3.0, top=False) - cup - cyl('z', (0, 0), 112.0, -1, hz)
-    base = base - cyl('z', (0, 0), 50.4, -1, uz) - cyl('z', (0, 0), 30, uz - 0.1, bh) - bay
-    base = base - (cyl('z', (0, 0), 108.4, -1, z0c + d + 0.6) - cyl('z', (0, 0), 53.6, -2, 31) - _chords(a, L, d, -0.2) -
-                   at(uang, box(30, -7.8, -2, 70, 7.8, 31)))
-    base = base - notch - at(uang, box(42.5, -5.5, -1, 51, 5.5, 10.5))
-    hatch = cyl('z', (0, 0), 111.6, 0.2, hz) - notch
-    foot = cyl('z', (0, 0), 117.6, 0.2, 2) - cyl('z', (0, 0), 114.4, 0, 3) - notch
-    base = base - (cyl('z', (0, 0), 118, -1, 2) - cyl('z', (0, 0), 114, -2, 3)) - cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01)
-    ring = eased(bd, bh, z_top, 2.0, bottom=False) - cup
-    ring = ring - (cyl('z', (0, 0), 92.4, zs - 2, zs + 0.01) - cyl('z', (0, 0), 83.6, zs - 3, zs + 1))
-    parts = {q.name: q for q in orb_parts()}
-    import dataclasses
-    rep = lambda n, s, **kw: dataclasses.replace(parts[n], solid=s, **kw)
-    return [
-        rep('shell', shell, pieces={'shell': (shell_r, 'body'), 'frost': (frost_r, 'liner')}),
-        rep('grommet', grommet),
-        rep('base', base, notes=['black cast acrylic, polished, turned from rod: 120 x 30 (round 32f\'s), the cup turned in '
-                                 'it; from below the hatch\'s counterbore (112), the middle pocket (50) for the chassis, '
-                                 'the board and the LED, the three cells\' bays, the ballast\'s corners and its ring\'s '
-                                 'groove, and the cable notch']),
-        rep('ring', ring),
-        rep('window', window),
-        rep('chassis', chassis, notes=['aluminium 6061, 50 across: the LED\'s heat spreader and the board\'s carrier, '
-                                       'screwed up into the base on threaded inserts, an O-ring between']),
-        rep('ballast', ballast, notes=['mild steel, zinc-plated: three corner pieces between the cells\' bays, screwed up '
-                                       'into the base']),
-        rep('board', board, make=Bought('core-board-18650')),
-        rep('led', led),
-        rep('cells', cells, make=Bought('core-cells-18650')),
-        rep('holder', holder, make=Bought('core-holder-18650'),
-            notes=['three single-cell holders in a triangle round the middle, spring contacts, keyed, the NTC on one']),
-        rep('hatch', hatch),
-        rep('usb', usb),
-        rep('seat', seat),
-        rep('foot-ring', foot),
-        rep('cable', cable + plug),
-        parts['adapter'], parts['screws'],
-    ]
-
-
+# The triangle of chords Core's cells lie on (round 41; orb_parts), grown or shrunk for the parts round them
 def _chords(a, L, d, grow):
     out = None
     for k in range(3):
         b = at(-10.0 + 120.0 * k, box(a - grow - 3.0, -L / 2 - grow - 4.4, -2, 70, L / 2 + grow + 4.4, 31))
         out = b if out is None else out + b
     return out
-
-
-_lo = orb_geometry(O_LOW)
-ORB_LOW_SIZE = dict(ball=2 * _lo[0], height=round(_lo[4] + _lo[0], 1), base=_lo[1])
-ORB_LOW_LIGHT = (0.0, 0.0, round(_lo[4], 1))
-TOUCHING_DOME_LOW = [tuple('crown' if n == 'fins' else n for n in pair) for pair in TOUCHING_DOME]
-TOUCHING_ORB_LOW = TOUCHING_ORB + [('holder', 'base'), ('holder', 'hatch'), ('ballast', 'hatch'), ('chassis', 'board'),
-                                   ('window', 'led'), ('usb', 'hatch')]
-NOTES_DOME_LOW = NOTES_DOME[:4] + [
-    'Heat (round 40, proposal): no fins. Round 32f\'s low top is the heat sink: a black anodised aluminium crown 80 '
-    'across and 11.5 tall over the collar, and an aluminium cap 40 x 14 over the cord grip, the cap\'s top 126 above the '
-    'rim (the fins put it at 160). At 575 lm with the reflector the hub makes 2.7 W of heat; estimated in a 35 C room: '
-    'the hub 49 C, the COB\'s case 50 C, the collar and the acrylic beside it 41 C (hemisphere_thermal.py, round 40). '
-    'Not for the 1,100 lm driver (the acrylic would reach about 47 C and the hub 63 C).',
-] + NOTES_DOME[5:]
-NOTES_ORB_LOW = [
-    'Core on the 30 base (round 40, proposal): round 32f\'s profile, the 160 ball low in the cup of a 120 x 30 base, '
-    '180 tall. The ball lifts off; the LED is under a sealed window in the base.',
-] + NOTES_ORB[1:2] + [
-    'Plugged in or not, one product: three LiFePO4 18650 cells (about 14 to 17 Wh) in a triangle round the LED, behind '
-    'the hatch underneath on four captive screws, the user\'s to replace with standard cells. It runs from USB-C or from '
-    'its cells and charges while it runs, in about 2.5 hours. About 5 to 6 hours at full brightness (2.5 W), 6.5 to '
-    '8 at the bar setting (2 W), at a full charge; about a tenth less at the default 90 % limit.',
-] + NOTES_ORB[3:]

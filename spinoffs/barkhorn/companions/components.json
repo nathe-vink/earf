@@ -609,7 +609,7 @@
  "core-cells": {
   "kind": "power",
   "maker": "any reputable LiFePO4 maker (to qualify: A123/Lithium Werks, EVE, Lishen)",
-  "model": "Three LiFePO4 26650 cells (IFR26650), about 3,000 mAh at 3.2 V each, in parallel (1S3P): about 29 Wh; about 2,000 cycles to 80 % (several times ordinary Li-ion's 500 or so); each to IEC 62133-2 and UN 38.3 (a UN 38.3 test summary from the cell maker). Each cell about 9.6 Wh (at most 20 Wh) and the set about 29 Wh (at most 100 Wh): Core ships under the small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment), not as fully regulated Class 9",
+  "model": "RETIRED in round 41 (the 48 base of rounds 35 to 39; the line now uses core-cells-18650). Three LiFePO4 26650 cells (IFR26650), about 3,000 mAh at 3.2 V each, in parallel (1S3P): about 29 Wh; about 2,000 cycles to 80 % (several times ordinary Li-ion's 500 or so); each to IEC 62133-2 and UN 38.3 (a UN 38.3 test summary from the cell maker). Each cell about 9.6 Wh (at most 20 Wh) and the set about 29 Wh (at most 100 Wh): Core ships under the small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment), not as fully regulated Class 9",
   "usd": 12,
   "estimate": true,
   "supplier": "a battery distributor",
@@ -618,7 +618,7 @@
  "core-holder": {
   "kind": "power",
   "maker": "Keystone (or alike), to make",
-  "model": "A moulded holder for three 26650 cells with spring contacts, keyed for polarity, its NTC against the cells, wired to the board",
+  "model": "RETIRED in round 41 (the 48 base of rounds 35 to 39; the line now uses core-holder-18650). A moulded holder for three 26650 cells with spring contacts, keyed for polarity, its NTC against the cells, wired to the board",
   "usd": 5,
   "estimate": true,
   "supplier": "Digi-Key",
@@ -627,7 +627,7 @@
  "core-board": {
   "kind": "control",
   "maker": "to make (a contract PCB house)",
-  "model": "Core's board: a USB-C sink (5 V 3 A); a switching LiFePO4 charger with power path, Analog Devices LTC4162-F (synchronous step-down, 1 to 9 LFP cells, up to 3.2 A, I2C telemetry and termination: no trickle charge at rest, so the maintenance power stays low for the DOE battery-charger limits and Title 20); a charge limit at about 3.45 V (about 90 %) by default with a full-charge mode; a battery protector (over/under voltage, over current, short circuit) and a fuel gauge, charging held off below 0 C and above 45 C by the cells' NTC; the two-channel warm-dim LED driver (2200 to 2700 K, about 2.5 W) and the capacitive touch on the ring",
+  "model": "RETIRED in round 41 (the 48 base of rounds 35 to 39; the line now uses core-board-18650). Core's board: a USB-C sink (5 V 3 A); a switching LiFePO4 charger with power path, Analog Devices LTC4162-F (synchronous step-down, 1 to 9 LFP cells, up to 3.2 A, I2C telemetry and termination: no trickle charge at rest, so the maintenance power stays low for the DOE battery-charger limits and Title 20); a charge limit at about 3.45 V (about 90 %) by default with a full-charge mode; a battery protector (over/under voltage, over current, short circuit) and a fuel gauge, charging held off below 0 C and above 45 C by the cells' NTC; the two-channel warm-dim LED driver (2200 to 2700 K, about 2.5 W) and the capacitive touch on the ring",
   "usd": 34,
   "estimate": true,
   "supplier": "a PCB assembler, about 500 off",
@@ -691,17 +691,17 @@
  "core-cells-18650": {
   "kind": "power",
   "maker": "any reputable LiFePO4 maker (to qualify: Lithium Werks, EVE, Lishen)",
-  "model": "Round 40, PROPOSAL (Core on the 30 base): three LiFePO4 18650 cells (IFR18650), 1,500 to 1,800 mAh at 3.2 V each, in parallel (1S3P): about 14.4 to 17.3 Wh; about 2,000 cycles to 80 %; each to IEC 62133-2 and UN 38.3. Each cell about 4.8 to 5.8 Wh (at most 20 Wh), the set at most 17.3 Wh (at most 100 Wh): the same small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment)",
+  "model": "Core's cells since round 41 (the owner signed round 40, 2026-10-29): three LiFePO4 18650 cells (IFR18650), 1,500 to 1,800 mAh at 3.2 V each, in parallel (1S3P): about 14.4 to 17.3 Wh; about 2,000 cycles to 80 %; each to IEC 62133-2 and UN 38.3. Each cell about 4.8 to 5.8 Wh (at most 20 Wh), the set at most 17.3 Wh (at most 100 Wh): the same small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment)",
   "usd": 9,
   "estimate": true,
   "supplier": "a battery distributor",
   "price_date": "2026-10-29",
-  "note": "The capacity range is the common IFR18650 grades as remembered, not looked up this round: confirm on the chosen cell's datasheet"
+  "note": "The capacity range (1,500 to 1,800 mAh) is the common IFR18650 grades as remembered, not looked up: TO CONFIRM on the chosen cell's datasheet before the runtime is published"
  },
  "core-holder-18650": {
   "kind": "power",
   "maker": "Keystone (or alike)",
-  "model": "Round 40, PROPOSAL: three single-cell 18650 holders (Keystone 1042 kind) set as a triangle round the LED, spring contacts, keyed for polarity, the cells' NTC on one, wired to the board",
+  "model": "Since round 41: three single-cell 18650 holders (Keystone 1042 kind) set as a triangle round the LED, spring contacts, keyed for polarity, the cells' NTC on one, wired to the board",
   "usd": 4.5,
   "estimate": true,
   "supplier": "Digi-Key",
@@ -710,7 +710,7 @@
  "core-board-18650": {
   "kind": "control",
   "maker": "to make (a contract PCB house)",
-  "model": "Round 40, PROPOSAL: Core's board for the 30 base, the same circuit as core-board (USB-C sink, LTC4162-F LiFePO4 charger with power path, the 90 % charge limit, protector, fuel gauge, NTC hold-off, warm-dim driver, touch), laid out as a 48 ring under the LED in the middle of the cells' triangle, the USB-C on a flex to its small board in the corner at 170 deg",
+  "model": "Core's board since round 41 (the 30 base), the same circuit as core-board (USB-C sink, LTC4162-F LiFePO4 charger with power path, the 90 % charge limit, protector, fuel gauge, NTC hold-off, warm-dim driver, touch), laid out as a 48 ring under the LED in the middle of the cells' triangle, the USB-C on a flex to its small board in the corner at 170 deg",
   "usd": 34,
   "estimate": true,
   "supplier": "a PCB assembler, about 500 off",

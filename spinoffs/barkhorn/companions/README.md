@@ -1577,3 +1577,29 @@ and `lamps-low-sheet.png`, Hemisphere above and Core below.
 - **32f's Core ball reads deeper orange than the other two.** It was three layers (tint, frost, tint), matched lit; the
   current and the proposal have one tint layer, and their casts are deepened for it at the caster.
 - **No critic round:** this is a comparison sheet for the owner, not a hero.
+
+## Round 41: the low profiles are the design
+
+The owner signed round 40 on 2026-10-29, relayed by the coordinator. The coordinator asked: "Hemisphere goes back to
+its low top: it stays cool enough at your 575 lumens. Core's low 30 mm base only fits smaller batteries, so it runs
+about 5–6 hours at full brightness instead of about 10. Which Core?" The owner picked **"30 mm, 5–6 hours
+(Recommended)"**, round 40's option A. The low top was stated in the question, and the owner didn't object.
+
+**What changed:**
+- **The builds.** Round 40's proposal is now the main build, under the old names so nothing downstream breaks:
+  `dome_pendant.py` → `out-dome-pendant/`, and `orb_table.py` → `out-orb-table/`. Both were rebuilt (drawings, BOM,
+  cut lists, checks: no clashes). `dome_pendant_low.py`, `orb_table_low.py` and their builds are gone.
+- **Hemisphere** (`crystal.north_parts`): the crown (80 across, 11.5 tall) and the black anodised aluminium cap
+  (40 × 14) are the heat sink. The cap's top is 126 above the rim, and the rim hangs 776 below the ceiling as supplied.
+  About 1.59 kg. **575 lm only:** 1,100 lm is not supported without the fins (`hemisphere_thermal.py`, whose round 41
+  table is now the design's).
+- **Core** (`crystal.orb_parts`): the 120 × 30 base, 180 tall, about 1.46 kg. Three LiFePO4 18650 cells
+  (`core-cells-18650`, 14.4 to 17.3 Wh; the capacity is still **to confirm** on a datasheet). About 4.7 to 5.6 hours
+  at full brightness at the 90 % limit. The price stays $650.
+- **Retired:** the fins, the 48 mm base, the 26650 cells and their holder. The CAD is recoverable in git at
+  `950a7eaf`. The library entries `core-cells`, `core-holder` and `core-board` are marked RETIRED.
+- **The kit piece** (`earf_moon.py`): the dome's cord runs from 126, its canopy top is at 776, and Core's light is
+  100.4 above the table (was 118.4).
+- **Updated:** PARTICULARS.md. South's record still builds; its fins are its own.
+- **Round 40's side by side** (`lamps_low.py`): the proposal column now points at the main build. The "current"
+  column rebuilds only from git at `950a7eaf`.

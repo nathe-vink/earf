@@ -1,5 +1,6 @@
 """Core (the Orb until round 35), the table lamp, a crystal ball that works plugged in or not, on its own replaceable
-cells (crystal.py says what it is and how it is made). The file keeps its old name so nothing downstream breaks.
+cells (crystal.py says what it is and how it is made). Round 41: the 120 x 30 base, three 18650 cells. The file
+keeps its old name so nothing downstream breaks.
 
     .venv-fab/bin/python studio/fabkit/build.py spinoffs/barkhorn/companions/orb_table.py --out spinoffs/barkhorn/companions/out-orb-table
 """

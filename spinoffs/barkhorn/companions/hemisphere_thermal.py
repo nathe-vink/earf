@@ -1,4 +1,6 @@
-"""Round 35: the thermal estimate for Hemisphere (round 40 adds round 32f's low top, no fins, as a proposal) (and the dropped South, kept for the record; round 38), a small resistance network in steady state, so the
+"""Round 35: the thermal estimate for Hemisphere. Since round 41 (the owner signed round 40, 2026-10-29) the design is round
+32f's low top, no fins, at 575 lm: its table is the one that counts; 1,100 lm is not supported without the fins. The
+fins of rounds 35 to 39 stay in the first table as a record (and the dropped South, kept for the record; round 38), a small resistance network in steady state, so the
 review's B2 can be checked by number. Every input is written here with where it came from; all are estimates until
 the thermocouple test (README, round 35, "the test plan").
 
@@ -79,7 +81,7 @@ SOUTH_SINK = (90.0, 40.0, 18, 1.8, 30.0)
 NORTH = {'575 lm (175 mA; the owner, round 36)': NORTH.pop('575 lm (175 mA)'), **NORTH}
 
 
-# Round 40 (the owner, 2026-10-29: "I kind of liked the old light design though, with ... the lower profile top for
+# Round 40, the design since round 41 (the owner, 2026-10-29: "I kind of liked the old light design though, with ... the lower profile top for
 # hemisphere"): round 32f's low top as the heat sink, no fins. A black anodised aluminium crown 80 across standing 11.5
 # above the collar (32f's hub showed 8 above its collar, whose top was 4 higher), then the cap 40 x 14: its top 126 above
 # the rim, as in 32f (the fins put it at 160). Plain surfaces in still air: a short vertical side (laminar, 1.42 (dT/L)^1/4)
@@ -116,7 +118,8 @@ def solve_low(P_in, lm, eta_out, Ta, cap_metal=True, R_hc=9.2, R_ca=6.9, R_jc=0.
 
 
 def table_low():
-    print('\n### Round 40: the low top (round 32f\'s profile), no fins, 575 lm with the reflector (85 % out), the PEEK break\n')
+    print('\n### The design (round 41): the low top (round 32f\'s profile), no fins, 575 lm with the reflector (85 % out), '
+          'the PEEK break\n')
     print('| top | room | heat in the hub, W | top to room, K/W | hub, and the cap | COB case (Tc) | LED junction | '
           'collar, the acrylic next to it |')
     print('|---|---|---|---|---|---|---|---|')
@@ -132,8 +135,9 @@ def table_low():
         print(f"| aluminium cap, {why} | 35 C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.0f} C | {r['Tc']:.0f} C | "
               f"{r['Tj']:.0f} C | {r['Tcol']:.0f} C |")
     r = solve_low(9.1, 1100.0, 0.85, 35.0)
-    print(f"\n(For the record, the low top at 1,100 lm in a 35 C room: hub {r['Th']:.0f} C, the acrylic by the collar "
-          f"{r['Tcol']:.0f} C: the fins were for that level.)")
+    print(f"\n1,100 lm is NOT SUPPORTED on the low top: in a 35 C room the hub would reach {r['Th']:.0f} C and the acrylic "
+          f"by the collar {r['Tcol']:.0f} C, inside the 50 C limit but with no margin for the dimmer and enclosure tests. "
+          "That level needs the fins of rounds 35 to 39 (the first table; the CAD in git at 950a7eaf).")
 
 
 def table():
@@ -148,16 +152,17 @@ def table():
                     # round 37: the collar is shut in between the skin and the opal, so it loses heat only through
                     # about 16 mm of acrylic and the bowl's air: about 15 K/W to the room (6.9 open)
                     r['Tcol'] = Ta + (r['Th'] - Ta) * 15.0 / (9.2 + 15.0)
-                name = 'Hemisphere' if title == 'North' else 'South (dropped)'
+                name = 'Fins (rounds 35 to 39, retired)' if title == 'North' else 'South (dropped)'
                 print(f"| {name}, {k} | {Ta:.0f} C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.0f} C | "
                       f"{r['Tj']:.0f} C | {r['Tcol']:.0f} C |")
     # the black bore, for the record (the hub as it was, at 9.1 W, with fins)
     r = solve(9.1, 1100, 0.52, NORTH_SINK, 25.0)
-    print(f"\n(Hemisphere with the old black bore, 1,100 lm, 25 C room: {r['Q']:.1f} W in the hub, hub {r['Th']:.0f} C)")
+    print(f"\n(The fins with the old black bore, 1,100 lm, 25 C room: {r['Q']:.1f} W in the hub, hub {r['Th']:.0f} C)")
     print('South (dropped; round 36): its fins are above the lid, so their warm air rises to the ceiling; no plume reaches the '
           'acrylic.')
 
 
 if __name__ == '__main__':
+    print('### Rounds 35 to 39 (a record): the fins, and the dropped South\n')
     table()
     table_low()

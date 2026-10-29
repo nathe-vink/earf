@@ -4,15 +4,15 @@
 |---|---|---|---|---|---|
 | shell | formed | 1 | Cast acrylic sheet, tinted through, drape-formed over an aluminium mould | 634 cm3, 170 x 170 x 167 | 1,546.84 |
 | grommet | lathe | 1 | Aluminium 6061 | 50 x 50 x 19 | 46.19 |
-| base | lathe | 1 | Cast acrylic tube, tinted through | 130 x 130 x 58 | 124.21 |
+| base | lathe | 1 | Cast acrylic tube, tinted through | 130 x 130 x 40 | 112.04 |
 | ring | lathe | 1 | Aluminium 6061 | 130 x 130 x 18 | 52.61 |
-| window | lathe | 1 | Cast acrylic tube, tinted through | 40 x 40 x 13 | 45.81 |
-| chassis | mill | 1 | Aluminium 6061 | 116 x 116 x 12 | 48.84 |
-| ballast | mill | 1 | Mild steel | 116 x 116 x 51 | 51.87 |
-| board | buy | 1 | to make (a contract PCB house) Core's board: a USB-C sink (5 V 3 A); a switching LiFePO4 charger with power path, Analog Devices LTC4162-F (synchronous step-down, 1 to 9 LFP cells, up to 3.2 A, I2C telemetry and termination: no trickle charge at rest, so the maintenance power stays low for the DOE battery-charger limits and Title 20); a charge limit at about 3.45 V (about 90 %) by default with a full-charge mode; a battery protector (over/under voltage, over current, short circuit) and a fuel gauge, charging held off below 0 C and above 45 C by the cells' NTC; the two-channel warm-dim LED driver (2200 to 2700 K, about 2.5 W) and the capacitive touch on the ring |  | 34.00 |
+| window | lathe | 1 | Cast acrylic tube, tinted through | 40 x 40 x 16 | 45.98 |
+| chassis | mill | 1 | Aluminium 6061 | 60 x 60 x 12 | 46.04 |
+| ballast | mill | 1 | Mild steel | 109 x 114 x 30 | 48.67 |
+| board | buy | 1 | to make (a contract PCB house) Core's board since round 41 (the 30 base), the same circuit as core-board (USB-C sink, LTC4162-F LiFePO4 charger with power path, the 90 % charge limit, protector, fuel gauge, NTC hold-off, warm-dim driver, touch), laid out as a 48 ring under the LED in the middle of the cells' triangle, the USB-C on a flex to its small board in the corner at 170 deg |  | 34.00 |
 | led | buy | 1 | Nichia or Seoul (to choose) A 30 mm round warm-dim LED board, two channels (2200 K and 2700 K, CRI 90+), about 2.5 W at full, 200 lm; a second 4-LED ring at the column's foot to light the column (0.3 W) |  | 9.00 |
-| cells | buy | 1 | any reputable LiFePO4 maker (to qualify: A123/Lithium Werks, EVE, Lishen) Three LiFePO4 26650 cells (IFR26650), about 3,000 mAh at 3.2 V each, in parallel (1S3P): about 29 Wh; about 2,000 cycles to 80 % (several times ordinary Li-ion's 500 or so); each to IEC 62133-2 and UN 38.3 (a UN 38.3 test summary from the cell maker). Each cell about 9.6 Wh (at most 20 Wh) and the set about 29 Wh (at most 100 Wh): Core ships under the small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment), not as fully regulated Class 9 |  | 12.00 |
-| holder | buy | 1 | Keystone (or alike), to make A moulded holder for three 26650 cells with spring contacts, keyed for polarity, its NTC against the cells, wired to the board |  | 5.00 |
+| cells | buy | 1 | any reputable LiFePO4 maker (to qualify: Lithium Werks, EVE, Lishen) Core's cells since round 41 (the owner signed round 40, 2026-10-29): three LiFePO4 18650 cells (IFR18650), 1,500 to 1,800 mAh at 3.2 V each, in parallel (1S3P): about 14.4 to 17.3 Wh; about 2,000 cycles to 80 %; each to IEC 62133-2 and UN 38.3. Each cell about 4.8 to 5.8 Wh (at most 20 Wh), the set at most 17.3 Wh (at most 100 Wh): the same small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment) |  | 9.00 |
+| holder | buy | 1 | Keystone (or alike) Since round 41: three single-cell 18650 holders (Keystone 1042 kind) set as a triangle round the LED, spring contacts, keyed for polarity, the cells' NTC on one, wired to the board |  | 4.50 |
 | hatch | mill | 1 | Aluminium 6061 | 122 x 122 x 12 | 49.55 |
 | usb | buy | 1 | Two EPDM O-rings (the window, the chassis to the drum), a silicone foot ring 110 x 2 (Shore 40, non-slip), a sealed USB-C receptacle (IP67 rated, e.g. GCT USB4135 kind): IP44 |  | 5.00 |
 | seat | buy | 1 | A silicone seat ring 92 x 84 x 1.5 (Shore 40, black) in the base's cup: the ball rests on it, and it stops a nudge rolling it |  | 1.50 |
@@ -23,10 +23,10 @@
 
 | | USD |
 |---|---|
-| buy | 83 |
+| buy | 80 |
 | formed | 1,547 |
-| lathe | 269 |
-| mill | 150 |
-| total | 2,049 |
+| lathe | 257 |
+| mill | 144 |
+| total | 2,027 |
 
 Budget figures: bought parts from the component library (dated retailer listings), made parts from the kit's stock rates: 25 % offcut on sheet parts, a handling charge a print, and a setup a machined line spread over its pieces. A shop's quote replaces them.

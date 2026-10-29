@@ -30,6 +30,10 @@ cartridge gone, so `cartridge` changes nothing), and `south` is Hemisphere South
 stretch: the rod is 450 to the canopy's face, so put the rim 500 below the ceiling; its light, the ceiling wash from
 the lid and the bowl's glow, is the shot's own to set: `lamp: false`).
 
+Round 41 (the owner signed round 40, 2026-10-29): round 32f's low profiles again. `dome`'s fins are gone: a black crown
+and an aluminium cap, the cap's top 126 above the rim, so its cord runs from 126 and the canopy's top is 776; `orb`'s
+base is 30 again (three 18650 cells round the LED), its light 100.4 above the table.
+
 Round 32f: the hardware is black (black anodised aluminium, black polished acrylic), in the GLBs themselves. The Orb
 plugs in over USB-C as standard; for a spot or the piece, `cable` (default true: its black fabric cable, dressed
 straight back from a notch at the back left, 420 mm) and `cartridge`: "none" (the default: the plug-in Orb, a blanking
@@ -56,12 +60,12 @@ DEFS = {'table': 'studio/products/earf-moon-table.json', 'pendant': 'studio/prod
         'dome': 'studio/products/earf-dome-pendant.json', 'orb': 'studio/products/earf-orb-table.json',
         'south': 'studio/products/earf-hemisphere-south.json'}
 # moon.TABLE_LIGHT, moon.PENDANT_LIGHT, crystal.DOME_LIGHT, crystal.ORB_LIGHT
-LIGHT_MM = {'table': (0.0, 0.0, 222.0), 'pendant': (0.0, 0.0, 70.0), 'dome': (0.0, 0.0, 81.5), 'orb': (0.0, 0.0, 118.4),
-            'south': (0.0, 0.0, -66.0)}    # round 35: Core's base 48 (its cells); South's LED ring
+LIGHT_MM = {'table': (0.0, 0.0, 222.0), 'pendant': (0.0, 0.0, 70.0), 'dome': (0.0, 0.0, 81.5), 'orb': (0.0, 0.0, 100.4),
+            'south': (0.0, 0.0, -66.0)}    # round 41: Core's base 30 again (118.4 on rounds 35 to 39's 48); South's LED ring
 LAMP_W = {'table': 4.0, 'pendant': 14.0, 'dome': 9.0, 'orb': 3.0, 'south': 9.0}
 # the pendants' cords, from the cap to the canopy, and the canopy's top (mm above the rim)
-CORD_MM = {'pendant': (121.0, 707.0), 'dome': (160.0, 760.0)}     # round 35: the dome's cord starts above its fins
-CANOPY_TOP_MM = {'pendant': 757.0, 'dome': 810.0}
+CORD_MM = {'pendant': (121.0, 707.0), 'dome': (126.0, 726.0)}     # round 41: the low top's cap (160 over rounds 35 to 39's fins)
+CANOPY_TOP_MM = {'pendant': 757.0, 'dome': 776.0}
 # the material that glows by itself, and its default (Moon's white frost; round 32d's liner, set within the tint)
 GLOW = {'table': ('shade', 3.0), 'pendant': ('shade', 3.0), 'dome': ('liner', 0.25), 'orb': ('liner', 0.25),
         'south': ('liner', 0.25)}
