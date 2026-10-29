@@ -29,6 +29,6 @@ Beside the multicolour globe ("The mark, made in the same acrylic."):
 | Made to be mended | The first pair is built and serviced as drawn: a service guide, spare drivers, amplifier and Core's battery on sale, and the screws where the drawings say |
 | Taken back at the end | A take-back runs: terms, shipping, and a recycler or caster who takes the acrylic, named |
 | The naming line | Free to use any time; it was held only because it introduced the section |
-| The lining's "Recycled polyester batts" (Troposphere's particulars) | The batts are bought, with their recycled share on the supplier's sheet; then the share goes in the line ("70 % recycled polyester") |
+| The lining's "Recycled polyester batts" (Tropos's particulars) | The batts are bought, with their recycled share on the supplier's sheet; then the share goes in the line ("70 % recycled polyester") |
 
 The globe itself stays a brand object (the header's mark, the bar's centrepiece); only the promise is held.
