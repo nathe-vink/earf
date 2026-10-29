@@ -1,0 +1,250 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/lamps-pdp-r41/p4-lamp-dome-dust.json",
+ "image": "/home/user/earf/renders/2026-10-29/barkhorn/lamps-pdp-r41/p4-lamp-dome-dust.png",
+ "seconds": {
+  "build": 0.5,
+  "render": 783.0
+ },
+ "samples": 128,
+ "size": [
+  1600,
+  2000
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [
+  {
+   "glint": "clamp",
+   "on": "seen surface (clamp#0)",
+   "moved_mm": 10.2,
+   "normal_off_deg": 53.4
+  },
+  {
+   "glint": "collar",
+   "on": "nearest facing surface (collar#0)",
+   "moved_mm": 1.1,
+   "normal_off_deg": 1.9
+  },
+  {
+   "glint": "cap",
+   "on": "nearest facing surface (gland#0)",
+   "moved_mm": 0.2,
+   "normal_off_deg": 0.6
+  }
+ ],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "canopy#0": {
+   "part": "canopy",
+   "centre_px": [
+    800.0,
+    -1380.7
+   ],
+   "box_px": [
+    532,
+    -1705,
+    1099,
+    -1096
+   ],
+   "depth_m": 1.165
+  },
+  "clamp#0": {
+   "part": "clamp",
+   "centre_px": [
+    800.0,
+    736.1
+   ],
+   "box_px": [
+    559,
+    625,
+    1066,
+    835
+   ],
+   "depth_m": 1.004
+  },
+  "cob#0": {
+   "part": "cob",
+   "centre_px": [
+    800.0,
+    761.6
+   ],
+   "box_px": [
+    740,
+    739,
+    862,
+    783
+   ],
+   "depth_m": 1.002
+  },
+  "collar#0": {
+   "part": "collar",
+   "centre_px": [
+    800.0,
+    787.4
+   ],
+   "box_px": [
+    557,
+    613,
+    1068,
+    943
+   ],
+   "depth_m": 1.001
+  },
+  "cord#0": {
+   "part": "cord",
+   "centre_px": [
+    800.0,
+    -418.5
+   ],
+   "box_px": [
+    787,
+    -1321,
+    813,
+    607
+   ],
+   "depth_m": 1.086
+  },
+  "crown#0": {
+   "part": "crown",
+   "centre_px": [
+    800.0,
+    675.4
+   ],
+   "box_px": [
+    632,
+    595,
+    980,
+    750
+   ],
+   "depth_m": 1.008
+  },
+  "gaskets#0": {
+   "part": "gaskets",
+   "centre_px": [
+    800.0,
+    797.6
+   ],
+   "box_px": [
+    557,
+    657,
+    1067,
+    922
+   ],
+   "depth_m": 1.0
+  },
+  "gland#0": {
+   "part": "gland",
+   "centre_px": [
+    800.0,
+    628.6
+   ],
+   "box_px": [
+    715,
+    573,
+    888,
+    682
+   ],
+   "depth_m": 1.011
+  },
+  "hub#0": {
+   "part": "hub",
+   "centre_px": [
+    800.0,
+    765.3
+   ],
+   "box_px": [
+    668,
+    639,
+    940,
+    885
+   ],
+   "depth_m": 1.002
+  },
+  "liner#0": {
+   "part": "liner",
+   "centre_px": [
+    800.0,
+    923.5
+   ],
+   "box_px": [
+    429,
+    659,
+    1233,
+    1145
+   ],
+   "depth_m": 0.992
+  },
+  "pins#0": {
+   "part": "pins",
+   "centre_px": [
+    804.9,
+    712.3
+   ],
+   "box_px": [
+    642,
+    656,
+    977,
+    765
+   ],
+   "depth_m": 0.995
+  },
+  "rim#0": {
+   "part": "rim",
+   "centre_px": [
+    800.0,
+    1069.9
+   ],
+   "box_px": [
+    425,
+    960,
+    1238,
+    1159
+   ],
+   "depth_m": 0.983
+  },
+  "ring#0": {
+   "part": "ring",
+   "centre_px": [
+    800.0,
+    724.4
+   ],
+   "box_px": [
+    635,
+    642,
+    976,
+    800
+   ],
+   "depth_m": 1.005
+  },
+  "shell#0": {
+   "part": "shell",
+   "centre_px": [
+    800.0,
+    909.0
+   ],
+   "box_px": [
+    390,
+    595,
+    1287,
+    1167
+   ],
+   "depth_m": 0.993
+  },
+  "skin#0": {
+   "part": "skin",
+   "centre_px": [
+    800.0,
+    940.2
+   ],
+   "box_px": [
+    444,
+    685,
+    1213,
+    1155
+   ],
+   "depth_m": 0.991
+  }
+ }
+}

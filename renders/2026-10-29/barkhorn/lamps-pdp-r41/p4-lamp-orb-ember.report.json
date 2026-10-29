@@ -1,0 +1,246 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/lamps-pdp-r41/p4-lamp-orb-ember.json",
+ "image": "/home/user/earf/renders/2026-10-29/barkhorn/lamps-pdp-r41/p4-lamp-orb-ember.png",
+ "seconds": {
+  "build": 0.9,
+  "render": 847.6
+ },
+ "samples": 128,
+ "size": [
+  1600,
+  2000
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [
+  {
+   "glint": "ring",
+   "on": "seen surface (ring#0)",
+   "moved_mm": 2.8,
+   "normal_off_deg": 30.1,
+   "moved_in": "the lamp moved in to 0.13 m, in front of prop0-kit (0.22 m along the mirror direction), its size and power scaled to look the same from the point"
+  },
+  {
+   "glint": "ring_l",
+   "on": "seen surface (ring#0)",
+   "moved_mm": 1.5,
+   "normal_off_deg": 36.4,
+   "moved_in": "the lamp moved in to 0.13 m, in front of prop0-kit (0.22 m along the mirror direction), its size and power scaled to look the same from the point"
+  },
+  {
+   "glint": "base",
+   "on": "nearest facing surface (base#0)",
+   "moved_mm": 0.4,
+   "normal_off_deg": 6.5,
+   "moved_in": "the lamp moved in to 0.04 m, in front of prop0-kit (0.07 m along the mirror direction), its size and power scaled to look the same from the point"
+  },
+  {
+   "glint": "grommet",
+   "on": "nearest facing surface (grommet#0)",
+   "moved_mm": 10.2,
+   "normal_off_deg": 53.1,
+   "skipped": "the surface there mirrors base#0 into the camera (0.02 m away along the mirror direction), so no lamp can sit there"
+  }
+ ],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "ballast#0": {
+   "part": "ballast",
+   "centre_px": [
+    789.3,
+    1522.7
+   ],
+   "box_px": [
+    421,
+    1415,
+    1167,
+    1657
+   ],
+   "depth_m": 0.636
+  },
+  "base#0": {
+   "part": "base",
+   "centre_px": [
+    800.0,
+    1505.0
+   ],
+   "box_px": [
+    366,
+    1367,
+    1245,
+    1684
+   ],
+   "depth_m": 0.64
+  },
+  "cable#0": {
+   "part": "cable",
+   "centre_px": [
+    -38.6,
+    1465.5
+   ],
+   "box_px": [
+    -459,
+    1350,
+    583,
+    1650
+   ],
+   "depth_m": 0.757
+  },
+  "chassis#0": {
+   "part": "chassis",
+   "centre_px": [
+    800.0,
+    1523.7
+   ],
+   "box_px": [
+    618,
+    1488,
+    984,
+    1563
+   ],
+   "depth_m": 0.64
+  },
+  "foot-ring#0": {
+   "part": "foot-ring",
+   "centre_px": [
+    800.0,
+    1577.3
+   ],
+   "box_px": [
+    374,
+    1498,
+    1236,
+    1681
+   ],
+   "depth_m": 0.64
+  },
+  "grommet#0": {
+   "part": "grommet",
+   "centre_px": [
+    800.0,
+    1439.1
+   ],
+   "box_px": [
+    656,
+    1394,
+    946,
+    1488
+   ],
+   "depth_m": 0.64
+  },
+  "hatch#0": {
+   "part": "hatch",
+   "centre_px": [
+    800.0,
+    1576.0
+   ],
+   "box_px": [
+    396,
+    1499,
+    1214,
+    1675
+   ],
+   "depth_m": 0.64
+  },
+  "holder#0": {
+   "part": "holder",
+   "centre_px": [
+    794.5,
+    1541.0
+   ],
+   "box_px": [
+    396,
+    1446,
+    1205,
+    1663
+   ],
+   "depth_m": 0.638
+  },
+  "led#0": {
+   "part": "led",
+   "centre_px": [
+    800.0,
+    1510.2
+   ],
+   "box_px": [
+    705,
+    1490,
+    896,
+    1532
+   ],
+   "depth_m": 0.64
+  },
+  "ring#0": {
+   "part": "ring",
+   "centre_px": [
+    800.0,
+    1406.1
+   ],
+   "box_px": [
+    366,
+    1331,
+    1245,
+    1504
+   ],
+   "depth_m": 0.64
+  },
+  "seat#0": {
+   "part": "seat",
+   "centre_px": [
+    800.0,
+    1420.0
+   ],
+   "box_px": [
+    466,
+    1370,
+    1140,
+    1481
+   ],
+   "depth_m": 0.64
+  },
+  "shell-frost#0": {
+   "part": "shell-frost",
+   "centre_px": [
+    800.0,
+    1052.7
+   ],
+   "box_px": [
+    285,
+    647,
+    1330,
+    1509
+   ],
+   "depth_m": 0.64
+  },
+  "shell-shell#0": {
+   "part": "shell-shell",
+   "centre_px": [
+    800.0,
+    1053.5
+   ],
+   "box_px": [
+    224,
+    585,
+    1396,
+    1580
+   ],
+   "depth_m": 0.64
+  },
+  "window#0": {
+   "part": "window",
+   "centre_px": [
+    800.0,
+    1488.1
+   ],
+   "box_px": [
+    692,
+    1456,
+    909,
+    1523
+   ],
+   "depth_m": 0.64
+  }
+ }
+}
