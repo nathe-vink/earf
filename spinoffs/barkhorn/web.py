@@ -102,7 +102,7 @@ LP3 = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'lamps-pdp-r35')
 TTR = os.path.join(ROOT, 'renders', '2026-10-22', 'barkhorn', 'turntable')  # the record player, round 34's finals
 URL = 'https://www.earf.world'                            # the primary domain (earf.world redirects to it)
 LINEUP_SHOWN = False          # the studio's eight in a row repeated the hero (the site critic, 2026-10-18); it stays in the look book
-TITLE = 'EARF · Atmosphere'
+TITLE = 'EARF · Troposphere'
 DESC = ('Horn loudspeakers, lamps and a record player cast in tinted acrylic, in eight colours from Ember to Smoke. '
         'In development at EARF, not yet for sale.')
 
@@ -182,7 +182,7 @@ TT = dict(name='Mantle', kind='Record player', route='mantle',             # rou
                  ('Weight', 'About 15.5 kg'), CARE, ('Figures', 'Design figures; they may change before production')])
 # round 34's final (companions/README.md "Round 34: the record player, final (Mantle)", r32-turntable-final)
 LINES = [  # the shop's three lines: key, name, what's in it, its line
-    ('speakers', 'Speakers', 'Atmosphere', 'A powered horn loudspeaker in eight colours of cast acrylic.'),
+    ('speakers', 'Speakers', 'Troposphere', 'A powered horn loudspeaker in eight colours of cast acrylic.'),
     ('lighting', 'Lighting', 'Hemisphere and Core', 'A pendant and a table lamp in the speakers&rsquo; acrylic, frosted within.'),
     ('turntable', 'Turntable', 'Mantle', 'A record player in the same eight colours, lit from underneath.'),
 ]
@@ -580,7 +580,7 @@ def body():
     hotspots = ''.join(
         f'<a class="spot" href="#speaker-{name.lower()}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%;z-index:{zs[i]}">'
         f'<span class="spot-label"><span class="spot-ic">{icon_paper(icon)}</span><b>{name}</b><span>{num}</span></span>'
-        f'<span class="sr">{name}, Atmosphere {num}</span></a>'
+        f'<span class="sr">{name}, Troposphere {num}</span></a>'
         for i, ((k, num, name, icon, *_), s) in enumerate(zip(CLOUDS, spots)))
     names = ''.join(f'<li><a href="#speaker-{name.lower()}"><span class="coin-dot" style="--i:{coin[k]}"></span>{name}</a></li>'
                     for k, num, name, *_ in CLOUDS)
@@ -594,7 +594,7 @@ def body():
         f'<a class="photo" href="#speaker-{name.lower()}" aria-label="{name}, up close">'
         f'<img class="on" src="img/{k}-on.jpg" width="{w}" height="{h}" alt="{name} with its cloth cover on" loading="lazy">'
         f'<img class="off" src="img/{k}-off.jpg" width="{w}" height="{h}" alt="{name} with its cover off, the woofer showing" loading="lazy"></a>'
-        f'<div class="about"><p class="num">Atmosphere {num}</p>'
+        f'<div class="about"><p class="num">Troposphere {num}</p>'
         f'<h3 class="named">{name}<span class="card-ic">{icon_img(icon, name)}</span></h3><p class="line">{line}</p>'
         f'<dl><dt>Acrylic</dt><dd>{tint}</dd><dt>Cover</dt><dd>{cover}</dd></dl>'
         f'<a class="more" href="#speaker-{name.lower()}">Up close</a></div></article>'
@@ -668,7 +668,7 @@ def body():
                     f'<img src="img/{k}-reel.jpg" width="{rw}" height="{rh}" alt="{name} standing on a light, its colour thrown up the wall behind it"'
                     f'{" class=on" if i == 0 else ""} loading="lazy" decoding="async">' for i, (k, num, name, *_) in enumerate(CLOUDS)) + '</figure>\n'
                 f'        <div class="light-text"><div class="light-intro">{intro}</div>\n'
-                f'          <div class="light-colour"><p class="num" id="light-num">Atmosphere {first_[1]}</p>'
+                f'          <div class="light-colour"><p class="num" id="light-num">Troposphere {first_[1]}</p>'
                 f'<p class="light-name" id="light-name">{first_[2]}</p><p class="light-line" id="light-line">{first_[5]}</p>\n'
                 f'            <div class="light-coins" role="radiogroup" aria-label="The eight colours"><span class="ring" aria-hidden="true"></span>{coins}</div></div>\n'
                 '        </div>\n      </div>\n    </div>\n'
@@ -813,7 +813,7 @@ def body():
         zp = rank(ps)
         hotspots += ''.join(
             f'<a class="spot tall-only" href="#speaker-{name.lower()}" style="left:{s["l"]}%;top:{s["t"]}%;width:{s["w"]}%;height:{s["h"]}%;z-index:{zp[i]}">'
-            f'<span class="sr">{name}, Atmosphere {num}</span></a>'
+            f'<span class="sr">{name}, Troposphere {num}</span></a>'
             for i, ((k, num, name, *_), s) in enumerate(zip(CLOUDS, ps)))
     page = (PAGE.replace('__WORD__', word).replace('__HOTSPOTS__', hotspots).replace('__NAMES__', names)
                 .replace('__HERO_TALL__', hero_tall).replace('__ROOM_TALL__', room_tall)
@@ -828,7 +828,7 @@ def body():
 
 PAGE = r"""
 <script>(function (d) { d.classList.add('opening');      // the opening's choice, made before anything paints: whether it plays, and by day or night
-  if (/^#(speaker|dome|orb|turntable|colour)-|^#(speakers|lighting|turntable|atmosphere|turn|spec|lamps|record)$/.test(location.hash)
+  if (/^#(speaker|dome|orb|turntable|colour)-|^#(speakers|lighting|turntable|troposphere|atmosphere|turn|spec|lamps|record)$/.test(location.hash)
       || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   d.classList.add('intro');
   if (matchMedia('(prefers-color-scheme: dark)').matches) { d.classList.add('night'); document.querySelector('meta[name="theme-color"]').content = '#100F12'; }
@@ -1382,15 +1382,15 @@ html.cursor, html.cursor * { cursor: none !important }
 <main id="home">
   <section class="hero" id="top">
     <div class="hero-pic">
-      <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Atmosphere</p><h1>Something in the air.</h1></div></div>
+      <div class="hero-title"><div class="wrap"><p class="eyebrow">EARF &middot; Troposphere</p><h1>Something in the air.</h1></div></div>
       <div class="hero-photo__HERO_CLASS__">
         <picture>__HERO_TALL__<img src="img/hero.jpg" fetchpriority="high" srcset="img/hero-1200.jpg 1200w, img/hero.jpg 2400w" sizes="100vw" width="2400" height="1200"
-          alt="The eight Atmosphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor"></picture>
+          alt="The eight Troposphere speakers on a curve, their covers off: red through violet, then the clear Fog and the smoked Smoke, each throwing its colour on the floor"></picture>
         __HOTSPOTS__
       </div>
     </div>
     <div class="wrap hero-foot">
-      <p class="lede">Atmosphere is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke.</p>
+      <p class="lede">Troposphere is a horn loudspeaker cast in tinted acrylic, in eight colours from Ember to Smoke.</p>
       <div class="acts"><a class="btn solid" href="#speakers">See the speakers</a><a class="btn" href="#colours">See the colours</a></div>
       <p class="status">In development and not yet for sale; until the first are built, every picture here is a render.</p>
     </div>
@@ -1410,7 +1410,7 @@ __HABITATS__
   <section class="band" id="progress"><div class="wrap">
     <div class="head"><div><p class="eyebrow">Progress</p><h2>Drawn to be made.</h2></div></div>
     <ol class="promise stages">
-      <li><b>Drawn.</b><span>Atmosphere is drawn for making, part by part: more than eighty of them, each with its fabrication
+      <li><b>Drawn.</b><span>Troposphere is drawn for making, part by part: more than eighty of them, each with its fabrication
         drawing. The horn&rsquo;s profile and the cabinet&rsquo;s bass were worked out by simulation before any acrylic was cut.</span></li>
       <li><b>Next, the first pair.</b><span>Built as production will build it: the horn formed from the cabinet&rsquo;s own
         tinted acrylic, the back screwed to the braces. A prototype is there to test the making.</span></li>
@@ -1432,9 +1432,9 @@ __HABITATS__
 <main id="line" hidden>
   <div class="lineview" data-line="speakers">
     <div class="wrap"><p class="crumbs"><a href="#top">Home</a> / Speakers</p><h1 class="vh">Speakers</h1></div>
-  <section class="band" id="atmosphere"><div class="wrap">
+  <section class="band" id="troposphere"><div class="wrap">
     <div class="head">
-      <div><p class="eyebrow">Atmosphere</p><h2>Eight atmospheres.</h2>
+      <div><p class="eyebrow">Troposphere</p><h2>Eight things in the air.</h2>
         <p>Each cabinet is cast acrylic, 20 mm thick and tinted all the way through. The lining shows through the walls,
           so we dressed it in white voile.</p></div>
       <div class="seg" role="group" aria-label="The speakers' covers">
@@ -1545,7 +1545,7 @@ if (run) {
     busy = true; const prev = at; at = i;
     if (prev >= 0) { pics[prev].classList.remove('on'); light(prev, true); colour.classList.add('swap'); }
     setTimeout(() => {
-      const c = D.clouds[i]; nameEl.textContent = c.name; lineEl.textContent = c.line; numEl.textContent = `Atmosphere ${c.num}`;
+      const c = D.clouds[i]; nameEl.textContent = c.name; lineEl.textContent = c.line; numEl.textContent = `Troposphere ${c.num}`;
       colour.classList.remove('swap'); pics[i].classList.add('on'); light(i, false);
       setTimeout(() => { busy = false; if (want !== at) show(want); }, ON);
     }, prev >= 0 ? OFF : 0);
@@ -1668,7 +1668,7 @@ document.getElementById('copy').addEventListener('click', () => {
 });
 
 // a product's page (round 34, the shop): its pictures as a shop shows them, one at a time (the arrows, a swipe, the arrow
-// keys, or the strip of thumbnails), in the colour picked; Atmosphere's open on the photograph in its element
+// keys, or the strip of thumbnails), in the colour picked; Troposphere's open on the photograph in its element
 const SPEAKER_VIEWS = [
   ['habitat', 'In its element', c => `${c.name} ${c.place}.`, c => `In its element, ${c.place}.`],
   ['on', 'Cover on', c => `With its cover on, in ${c.cover.toLowerCase()}.`],
@@ -1700,13 +1700,13 @@ const TT_VIEWS = [['studio', 'In the studio', c => `${D.tt.name} in ${c.name}, i
                   ['pod', 'The motor apart', () => 'The motor in its own pod, standing clear of the plinth.']];
 const PRODUCTS = [
   { id: 'speaker', line: 'speakers', lineName: 'Speakers', route: 'speaker', kind: 'Horn loudspeaker', name: c => c.name,
-    num: c => `Atmosphere ${c.num}`, copy: c => c.line, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
+    num: c => `Troposphere ${c.num}`, copy: c => c.line, views: k => BY[k].views, VIEWS: SPEAKER_VIEWS,
     card: k => { const o = BY[k].views.off; return o.tall || o.card || o; }, unit: 'each pair made to order', ask: 'Enquire about a pair',
     facts: c => [['Acrylic', c.tint], ['Cabinet', 'Cast acrylic, 20 mm, tinted through; lined in white'], ['Horn', 'Formed from the same tinted acrylic as the cabinet'],
       ['Cover', `Cloth disc, ${c.cover.toLowerCase()}`], ['Drivers', '15-inch woofer; 2-inch compression driver on the horn'],
       ['Amplifier', 'Hypex FusionAmp FA122, built in: 2 &times; 125 W, crossed at 1 kHz'], ['Bass', 'To about 51 Hz (&minus;3 dB) before the room; a design figure, measured with the first pair'],
       ['Inputs', 'XLR, RCA, AES, S/PDIF coaxial and optical'], ['Size', '1293 high, 625 wide, 423 deep (mm)'], ['Weight', 'About 72 kg'], ['Care', D.care]],
-    title: c => `Atmosphere in ${c.name}` },
+    title: c => `Troposphere in ${c.name}` },
   ...Object.entries(D.lamps).map(([id, L]) => ({ id, line: 'lighting', lineName: 'Lighting', route: L.route || id, kind: L.kind, name: () => L.name,
     num: () => `Lighting &middot; ${L.kind}`, copy: () => L.line, views: k => (L.colours[k] || {}).views, VIEWS: LAMP_VIEWS[id],
     card: k => L.colours[k].card, unit: 'made to order', ask: 'Enquire', facts: c => [...L.facts, ['Colour', c.name]],
@@ -1776,7 +1776,7 @@ const MORE = {
   speaker: 'More on the speaker: <a href="#turn">the horn</a>, <a href="#closer">the studio</a> and <a href="#spec">the particulars</a>.',
   dome: 'Also in Lighting: <a href="#core-ember">Core</a>, a table lamp in the same eight.',
   orb: 'Also in Lighting: <a href="#hemisphere-ember">Hemisphere</a>, a pendant in the same eight.',
-  turntable: 'See it beside the speakers: <a href="#speakers">Atmosphere</a>.',
+  turntable: 'See it beside the speakers: <a href="#speakers">Troposphere</a>.',
 };
 function renderProduct(Pr, k) {
   const c = BY[k]; P = Pr; cur = k;
@@ -1799,7 +1799,7 @@ function renderProduct(Pr, k) {
     const b = el('button', { type: 'button', role: 'tab', id: `thumb-${i}`, 'data-v': v, 'aria-label': label, 'aria-controls': 'stage',
       class: 'thumb' + (v === 'turn' ? ' turn' : ''), style: `background:url(${s.src}) ${v === 'turn' ? '0 0 / 600% 400%' : 'center / cover'} no-repeat` });
     b.addEventListener('click', () => showView(v)); return b; }));
-  showView(shown(c)[0]);                              // Atmosphere opens on its photograph in its element, the rest on their hero
+  showView(shown(c)[0]);                              // Troposphere opens on its photograph in its element, the rest on their hero
   company(document.getElementById('p-company'), k, P.id, true);
   document.getElementById('p-more').innerHTML = MORE[P.id] || '';
 }
@@ -1831,7 +1831,7 @@ function pcard(Pr, k) {
   const c = BY[k], im = Pr.card(k);
   const a = el('a', { class: 'pcard', href: `#${Pr.route}-${c.name.toLowerCase()}` },
     `<img src="${im.src}" width="${im.w}" height="${im.h}" alt="" loading="lazy">` + (im.shown ? `<span class="tag">Shown in ${BY[im.shown].name}</span>` : '') +
-    `<b>${Pr.id === 'speaker' ? `Atmosphere, ${c.name}` : Pr.name(c)}</b>` +
+    `<b>${Pr.id === 'speaker' ? `Troposphere, ${c.name}` : Pr.name(c)}</b>` +
     `<span class="pc-col"><span class="coin-dot" style="--i:${c.coin}"></span>${Pr.id === 'speaker' ? Pr.kind : `${Pr.kind} in ${c.name}`}</span>`);
   a.querySelector('img').alt = Pr.title(c);
   return a;
@@ -1881,13 +1881,14 @@ function renderColour(k) {
   company(document.getElementById('c-company'), k, 'speaker', false);
 }
 
-// the address: the home page and its sections; a line (#speakers, #lighting, #turntable, and the old #atmosphere, #turn,
-// #spec and #lamps on theirs); a colour (#colour-poison); or a product in a colour (#speaker-poison, #hemisphere-poison,
-// #core-poison, #mantle-poison; round 35's names: the old #dome-, #orb- and #turntable- addresses are rewritten to them)
+// the address: the home page and its sections; a line (#speakers, #lighting, #turntable, the speakers' band
+// #troposphere, and the old #atmosphere, #turn, #spec and #lamps on theirs); a colour (#colour-poison); or a product
+// in a colour (#speaker-poison, #hemisphere-poison, #core-poison, #mantle-poison; round 35's names: the old #dome-,
+// #orb- and #turntable- addresses are rewritten to them)
 const OLD = { dome: 'hemisphere', orb: 'core', turntable: 'mantle' };
 const home = document.getElementById('home'), pdp = document.getElementById('pdp');
 const lineMain = document.getElementById('line'), colourMain = document.getElementById('colour'), MAINS = { home, line: lineMain, colour: colourMain, pdp };
-const LINE_OF = { speakers: 'speakers', atmosphere: 'speakers', turn: 'speakers', spec: 'speakers', closer: 'speakers',
+const LINE_OF = { speakers: 'speakers', troposphere: 'speakers', atmosphere: 'speakers', turn: 'speakers', spec: 'speakers', closer: 'speakers',
                   lighting: 'lighting', lamps: 'lighting', turntable: 'turntable', record: 'turntable' };
 const LINE_NAME = { speakers: 'Speakers', lighting: 'Lighting', turntable: 'Turntable' };
 const TITLE0 = document.title;

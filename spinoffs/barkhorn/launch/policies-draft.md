@@ -22,13 +22,13 @@ These terms cover every order you place with **[OWNER: legal name, company type,
 
 We also deliver only once a piece's safety listing is done, on the same refund terms [rows 4, 5, 7]. **[OWNER: default: yes, as a pendant can't be installed unlisted [row 5]]**
 
-*Counsel:* Atmosphere, Core and Hemisphere need an SDoC [rows 1, 2]; Mantle only if its speed control is digital [row 1] [UNCONFIRMED until the circuit is fixed]. Ads need the section 3A FCC notice until each SDoC [row 3]; check it beside conditional sales. Keep conditional-sale records for 60 months [row 3], and every delay notice and reply [row 26].
+*Counsel:* Troposphere, Core and Hemisphere need an SDoC [rows 1, 2]; Mantle only if its speed control is digital [row 1] [UNCONFIRMED until the circuit is fixed]. Ads need the section 3A FCC notice until each SDoC [row 3]; check it beside conditional sales. Keep conditional-sale records for 60 months [row 3], and every delay notice and reply [row 26].
 
 ### The particulars
 
 | Piece | Weight | Power | In the box |
 |---|---|---|---|
-| Atmosphere (a pair) | About 72 kg each; 62 kg with the horn lifted off | Mains; amplifier built in | Two speakers, with horns and covers |
+| Troposphere (a pair) | About 72 kg each; 62 kg with the horn lifted off | Mains; amplifier built in | Two speakers, with horns and covers |
 | Hemisphere | — | 120 V mains, dimmable | Shade, fitting, 600 mm drop (cut to length), canopy |
 | Core | 2.0 kg | USB-C or battery | Lamp, replaceable battery, USB-C cable, 20 W adapter |
 | Mantle | About 15.5 kg | Mains, through an external supply | Player with Rega RB330 arm, Ortofon 2M Black cartridge, hinged lid, power supply |
@@ -45,7 +45,7 @@ These are design figures and may change.
 
 ### Prices
 
-Every price we quote includes every fee you must pay, crating and handling included [row 21]. Only sales tax and delivery are added [row 21]. Atmosphere's price includes delivery and placing **[OWNER: default: yes, as placing is a service, not shipping [row 21]]**. For other pieces, delivery is charged at what it costs us.
+Every price we quote includes every fee you must pay, crating and handling included [row 21]. Only sales tax and delivery are added [row 21]. Troposphere's price includes delivery and placing **[OWNER: default: yes, as placing is a service, not shipping [row 21]]**. For other pieces, delivery is charged at what it costs us.
 
 ### Deposit and balance
 
@@ -74,13 +74,13 @@ We refund within 7 working days of any cancellation [row 26].
 
 We deliver to **[OWNER: default: California at launch, as the checklist covers only federal and California law]**.
 
-Atmosphere comes with **[OWNER: default: our own team, as a 72 kg speaker needs people who know it]**. We carry the pair to the room you choose, unpack it, place it and take the packing away. Each speaker weighs about 72 kg and stands 1293 mm tall. Please tell us about steps, lifts and narrow doors.
+Troposphere comes with **[OWNER: default: our own team, as a 72 kg speaker needs people who know it]**. We carry the pair to the room you choose, unpack it, place it and take the packing away. Each speaker weighs about 72 kg and stands 1293 mm tall. Please tell us about steps, lifts and narrow doors.
 
 Everything else comes by courier. A qualified electrician must install the Hemisphere pendants.
 
 ### Ownership and risk
 
-Your piece becomes yours, and your risk, on delivery **[OWNER: default: both pass on delivery, as we choose the transport]**. For Atmosphere, that is when we have placed it. Until then, any loss or damage is ours.
+Your piece becomes yours, and your risk, on delivery **[OWNER: default: both pass on delivery, as we choose the transport]**. For Troposphere, that is when we have placed it. Until then, any loss or damage is ours.
 
 ---
 
@@ -113,7 +113,7 @@ You don't have to use our parts or repairers to keep this warranty [row 25]. Rep
 **How to get service.**
 
 1. Write to us with your order number and what's wrong. Photos help.
-2. Atmosphere and the Hemisphere pendants are heavy or wired in. We repair them in your home, or collect and return them, at our cost [row 19].
+2. Troposphere and the Hemisphere pendants are heavy or wired in. We repair them in your home, or collect and return them, at our cost [row 19].
 3. For other pieces, we send packaging and a prepaid label. We return them at our cost.
 4. Repairs are done in California, by us or a repair shop we name [row 19]. **[OWNER: default: our own technician at launch, while numbers are small]**
 5. We finish the repair within 30 days [row 19].
@@ -136,7 +136,7 @@ This warranty gives you specific legal rights, and you may also have other right
 
 **What we still take back.**
 
-- **Damage in delivery.** Tell us within **[OWNER: default 7 days, long enough to unpack and check]** of delivery, with photos. We repair or replace it at our cost, or refund you in full if you prefer. We check Atmosphere with you as we place it.
+- **Damage in delivery.** Tell us within **[OWNER: default 7 days, long enough to unpack and check]** of delivery, with photos. We repair or replace it at our cost, or refund you in full if you prefer. We check Troposphere with you as we place it.
 - **The wrong piece or colour.** We collect it and make the right one, or refund you in full. You choose.
 - **A fault.** Our Limited Warranty covers it.
 - **Spare shades and balls.** **[OWNER: default: unused ones within 30 days, at your postage, as a standard colour can be resold]**
@@ -145,4 +145,4 @@ This warranty gives you specific legal rights, and you may also have other right
 
 **How.** Write to us before you send anything back. We arrange the packaging and collection. We pay every refund within 7 working days, as the law requires for cancellations [row 26].
 
-*Counsel:* A standard Atmosphere in a standard colour is probably not "customized" [row 22] [UNCONFIRMED]; the same doubt covers every piece. Posting this policy conspicuously is what keeps the 30-day refund right away [row 22]. Show it on each product page and the order page.
+*Counsel:* A standard Troposphere in a standard colour is probably not "customized" [row 22] [UNCONFIRMED]; the same doubt covers every piece. Posting this policy conspicuously is what keeps the 30-day refund right away [row 22]. Show it on each product page and the order page.
