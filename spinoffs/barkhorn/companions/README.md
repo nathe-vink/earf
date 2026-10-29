@@ -1,14 +1,14 @@
-# The companions: a record player and a lamp in the Troposphere acrylic (round 31)
+# The companions: a record player and a lamp in the Tropos acrylic (round 31)
 
 The owner, 2026-10-18: "Let's work on a few more things now. Record player and lighting for one. All acrylic." In
 round 17 the owner had also said: "If we can find a good recycled acrylic partner, we can make other components, like
 record players, lights, etc." These are those two pieces. Both are in the Clouds' tinted cast acrylic and come in the
-eight Troposphere colours, and each is built with the fab kit the speakers are built with.
+eight Tropos colours, and each is built with the fab kit the speakers are built with.
 
 **Names, from round 35 (the owner, 2026-10-22), as amended in round 38 (2026-10-25):**
 - the pendant is **Hemisphere** (the Dome until round 35, Hemisphere North in rounds 35 to 37);
 - the table lamp is **Core** (was the Orb);
-- the speakers are **Troposphere** (Atmosphere until the owner renamed them on 2026-10-29), and the record player is **Mantle**.
+- the speakers are **Tropos** (Atmosphere until 2026-10-29, when the owner renamed them Troposphere and then Tropos), and the record player is **Mantle**.
 
 **Hemisphere South is dropped** (the owner, 2026-10-25: "Get rid of south altogether and just call it hemisphere."). Its CAD (`hemisphere_south.py`, `out-hemisphere-south/`), its parts
 and its renders (rounds 35 to 37) stay in the repo as a record; nothing in the line uses them.
@@ -250,7 +250,7 @@ Why Moon, for a bar:
   six through gold rings, with no cable on the table.
 - **It sells.** The cordless mushroom is the form bars already buy (Poldina, Bellhop, Panthella Portable), so the
   trade knows it. What is new is the material: a turned cast dome and a solid tinted column whose polished top
-  glows, in the eight Troposphere colours plus clear, frosted and smoked. The pendant is the same dome hung mouth
+  glows, in the eight Tropos colours plus clear, frosted and smoked. The pendant is the same dome hung mouth
   down, so a room can be specified as one family.
 
 Built as two fab-kit products, `moon.py` (geometry, parts, notes), `moon_table.py` and `moon_pendant.py`; checks pass:
