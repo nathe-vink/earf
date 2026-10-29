@@ -84,6 +84,11 @@ R's hole, each colour's own cutaway), and makes the cloth read as cloth; it buil
 acrylic, and starts the pictures for a launch, each passed by a critic to a $20,000 product's bar: the studio, the
 speakers lit from below and on a night facade, and each Cloud in its element, photographed in a real place.
 
+**Renamed, 2026-10-29: the line is Troposphere** (its speakers Troposphere 01 to 08; the colours Ember to Smoke as
+before). Atmosphere is taken in audio: AtlasIED's pending ATMOSPHERE application (US serial 99743110, class 9) lists
+audio speakers, and ATMA SPHERE is registered for amplifiers (reg. 1608076). The rounds below keep the name they were
+written under.
+
 ## Round 36: the horn as it will be made, and the back tied down (2026-10-22)
 
 The owner, on the horn: "I'd rather the prototype be as close to production as possible. The whole point of a prototype
@@ -311,7 +316,7 @@ aluminium plug.
   certificate of conformity. Hypex's remote manual has no swallowing warnings. A risk, with three ways out: ship it
   compliant (our own label, packaging and certificate, if its battery door passes the test); source a compliant remote
   that sends RC-5 device 16; or leave it out of US boxes, with volume from HFD or the source.
-- **Atmosphere's own compliance.** The FA122's marks do not carry over: Hypex's CE is the module's. The speaker is a
+- **Troposphere's own compliance.** The FA122's marks do not carry over: Hypex's CE is the module's. The speaker is a
   digital device in its own right, and needs its own FCC Part 15 Class B test and a supplier's declaration of
   conformity (SDoC) before it is sold in the US, with CE and UKCA testing for Europe and the UK. This joins the first
   prototype's list: a pre-scan of radiated and conducted emissions on the first pair, before the pilot.
@@ -4049,7 +4054,7 @@ The shots are in `studio/shots/barkhorn/`:
 
 The owner's direction since round 15: keep refining the design (no requests for quotes yet); since round 17, no wood,
 Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a maker is found; since round 24 the
-line is called Atmosphere.
+line was called Atmosphere, and since 2026-10-29 it is Troposphere (its speakers Troposphere 01 to 08).
 
 1. **The globe in the front corner** (round 24b). In lines etched, in discs etched, in the speaker's own colour, or
    printed in the six colours? Or the name on the back alone?
