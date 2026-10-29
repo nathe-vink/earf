@@ -89,6 +89,9 @@ before). Atmosphere is taken in audio: AtlasIED's pending ATMOSPHERE application
 audio speakers, and ATMA SPHERE is registered for amplifiers (reg. 1608076). The rounds below keep the name they were
 written under.
 
+**Renamed again, 2026-10-29: Tropos** (its speakers Tropos 01 to 08), the owner's preference over Troposphere: Greek for
+a turn, the word the troposphere is named for.
+
 ## Round 36: the horn as it will be made, and the back tied down (2026-10-22)
 
 The owner, on the horn: "I'd rather the prototype be as close to production as possible. The whole point of a prototype
@@ -316,7 +319,7 @@ aluminium plug.
   certificate of conformity. Hypex's remote manual has no swallowing warnings. A risk, with three ways out: ship it
   compliant (our own label, packaging and certificate, if its battery door passes the test); source a compliant remote
   that sends RC-5 device 16; or leave it out of US boxes, with volume from HFD or the source.
-- **Troposphere's own compliance.** The FA122's marks do not carry over: Hypex's CE is the module's. The speaker is a
+- **Tropos's own compliance.** The FA122's marks do not carry over: Hypex's CE is the module's. The speaker is a
   digital device in its own right, and needs its own FCC Part 15 Class B test and a supplier's declaration of
   conformity (SDoC) before it is sold in the US, with CE and UKCA testing for Europe and the UK. This joins the first
   prototype's list: a pre-scan of radiated and conducted emissions on the first pair, before the pilot.
@@ -4054,7 +4057,7 @@ The shots are in `studio/shots/barkhorn/`:
 
 The owner's direction since round 15: keep refining the design (no requests for quotes yet); since round 17, no wood,
 Bark and Crag paused, and the Clouds the line, in recycled cast acrylic once a maker is found; since round 24 the
-line was called Atmosphere, and since 2026-10-29 it is Troposphere (its speakers Troposphere 01 to 08).
+line was called Atmosphere, briefly Troposphere on 2026-10-29, and since then it is Tropos (its speakers Tropos 01 to 08).
 
 1. **The globe in the front corner** (round 24b). In lines etched, in discs etched, in the speaker's own colour, or
    printed in the six colours? Or the name on the back alone?
