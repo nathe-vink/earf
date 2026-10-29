@@ -1474,3 +1474,106 @@ The owner, 2026-10-25: "For everything else make your call." The coordinator's c
 
 PARTICULARS.md records them.
 
+
+## Round 40: the low profiles again, as a proposal
+
+The owner, 2026-10-29: "Damn I kind of liked the old light design though, with the lower base for core and the lower
+profile top for hemisphere. Did we change that for technical reasons? I feel like the new designs detract from the
+acrylic piece."
+
+**Yes, both changes were technical, and only one of the reasons still holds.**
+- **Hemisphere's fins** were sized in round 35, while 1,100 lm was still drawn: 6.1 W of heat in the hub. At the
+  owner's 575 lm with the reflector the hub makes 2.7 W, and round 32f's low top is enough.
+- **Core's 48 mm base** carries three 26650 cells under the LED. In 30 mm they fit neither under it nor round it. Three
+  smaller 18650 cells do fit round it, at about half the energy.
+
+Both are drawn as **switches beside the current design, not replacements**: `dome_pendant_low.py` and
+`orb_table_low.py` (`crystal.north_low_parts`, `crystal.orb_low_parts`), built to `out-dome-pendant-low/` and
+`out-orb-table-low/`. The checks pass with no clashes. Nothing in the current design changed, and they stay proposals
+until the owner signs.
+
+### Hemisphere, low top
+
+Round 32f's profile over the shade: a black crown 80 across, then the cap 40 × 14, its top **126 mm above the rim**,
+as in 32f. The fins put it at 160, so the fixture stands 34 mm lower. The crown is the heat sink: turned 6061, black
+anodised (emissivity about 0.85, so about half its loss is radiation), on the core's neck on a thermal pad, 0.5 clear
+of the PEEK ring and the collar. The PEEK break is unchanged.
+
+`hemisphere_thermal.py` (its round 40 table) treats the crown and the cap as plain surfaces in still air: laminar
+convection on the short side and the faces up, plus radiation. At 575 lm with the reflector and the PEEK break
+**[ESTIMATE]**:
+
+| top | room | heat in the hub | hub | COB case (Tc) | LED junction | the acrylic by the collar |
+|---|---|---|---|---|---|---|
+| low top, aluminium cap | 25 °C | 2.7 W | 39 °C | 40 °C | 43 °C | 31 °C |
+| low top, aluminium cap | 35 °C | 2.7 W | 49 °C | 50 °C | 52 °C | **41 °C** |
+| low top, 32f's acrylic cap | 35 °C | 2.7 W | 52 °C | 53 °C | 56 °C | 42 °C |
+| low top, the PEEK path twice as conductive | 35 °C | 2.7 W | 47 °C | 49 °C | 51 °C | 42 °C |
+| low top, the collar losing half as much | 35 °C | 2.7 W | 50 °C | 51 °C | 53 °C | 44 °C |
+| current fins (round 35) | 35 °C | 2.7 W | 43 °C | 45 °C | 47 °C | 39 °C |
+
+- **The test passes, so the old cap comes back with no radial fins.** The test (README, round 35): the acrylic at or
+  under 50 °C in a 35 °C room, and Tc under 85 °C. The acrylic by the collar reaches 41 °C (44 °C at worst in the
+  sensitivity rows), and Tc about 50 °C.
+- **One change from 32f: the cap is aluminium**, black anodised and polished, not black acrylic. On the crown it runs at
+  the hub's temperature, 49 to 52 °C, which is over our 50 °C limit for acrylic. As metal it also sheds a fifth of the
+  heat.
+- **Not for 1,100 lm.** The low top there puts the hub at 63 °C and the acrylic at 47 °C: inside the limit, but with
+  no margin for the dimmer and the enclosure tests. The fins were for that level.
+- **Weight:** the shade and fixture about 1.59 kg, against 1.57 with the fins (the crown is solid).
+
+### Core, 30 mm base
+
+The cell options, in round 32f's 120 × 30 drum (the ball in the same cup: 180 mm tall, was 198). Each fit is checked
+against the cup (2 mm of acrylic over the cells at least), the drum's wall (2 mm) and a 0.8 holder wall. Runtimes are
+energy × 0.9 (the converter) ÷ the load, at a full charge and at the default 90 % limit **[ESTIMATE]**.
+
+| | cells | base | overall | energy | at 2.5 W (full / 90 %) | at the bar's 2 W (full / 90 %) | cycles to 80 % | weight |
+|---|---|---|---|---|---|---|---|---|
+| current (rounds 35 to 39) | 3 × LiFePO4 26650, under the LED | 120 × 48 | 198 | 29 Wh | 10.4 / 9.4 h | 13 / 11.7 h | about 2,000 | 2.24 kg |
+| **A, drawn** | 3 × LiFePO4 18650, a triangle round the LED | **120 × 30** | **180** | 14.4 to 17.3 Wh | 5.2 to 6.2 / 4.7 to 5.6 h | 6.5 to 7.8 / 5.8 to 7.0 h | about 2,000 | 1.46 kg |
+| B | 4 × LiFePO4 18650, a pinwheel round the LED | 130 × 30 (needs 127 across) | 180 | 19.2 to 23 Wh | 6.9 to 8.3 / 6.2 to 7.5 h | 8.6 to 10.4 / 7.8 to 9.3 h | about 2,000 | about 1.5 kg (not drawn) |
+| C | 3 × LiFePO4 26650 laid round the LED | about 157 × 30, or 147 × 33 | 180 to 183 | 29 Wh | as current | as current | about 2,000 | about 2.0 kg (not drawn) |
+| D | 3 × Li-ion 18650 (NMC, 3.5 Ah), as A | 120 × 30 | 180 | 38 Wh (34 at a 4.1 V limit) | 13.6 / 12.2 h | 17 / 15.3 h | about 1,000 at the 4.1 V limit **[ESTIMATE]** | 1.47 kg |
+
+- **A: three 18650s fit round the LED.** They lie as three chords of a triangle, each cell's inner face 27 mm from the
+  axis, the LED, its 50 mm chassis and the board in the middle under the window. The cup clears the cells by 2.3 mm,
+  and their outer corners are 56 mm out. Steel ballast fills the three corners between them (0.17 kg); the USB-C sits
+  in the corner at the back left, out by the same notch underneath. The same hatch, four captive screws, standard cells.
+- **B: four 18650s** do not fit in 120: their pinwheel's outer corners are 61 mm out, so the drum must grow to about
+  130.
+- **C: three 26650s laid round the LED** need a drum about 157 across at 30, nearly the ball's 160,
+  with no acrylic left over them; or 147 across at 33. Neither is the 32f base.
+- **D, the "better" I found:** Li-ion 18650s in A's layout give more energy than the current design in the low base.
+  Against it:
+  - about half LiFePO4's cycle life;
+  - a different charger (LTC4162-L in place of -F);
+  - and the misfit is dangerous. A user fitting LiFePO4 18650s (the same size) to a Li-ion lamp would charge them to
+    4.1 V, which overcharges them. In A's LiFePO4 lamp a Li-ion cell is only under-charged, which is safe.
+- **Stability:** A tips at 43° (the current design at 45°); a push of about 4.5 N at the top of the ball tips it
+  (6.3 N now). Round 32's bar brief asked for about 1.5 kg, so a sleeve or an elbow doesn't tip it; A is 1.46 kg.
+- **Certification and shipping, A:** nothing changes in kind. Still IEC/UL 62368-1 with its battery annex, the cells
+  to IEC 62133-2 and UN 38.3, the LTC4162-F and its DOE and Title 20 notes. Each cell is about 5 to 6 Wh and the set
+  at most 17.3 Wh, so it ships under the same small-battery exception (49 CFR 173.185(c), UN3481). D's cells (12.6 Wh
+  each, 38 Wh the set) would too.
+
+**Recommendation: A.** It is round 32f's base with Core's own replaceable LiFePO4 cells, long life and every
+certification note kept. The cost is runtime: about 5 to 6 hours at full brightness and 6 to 8 at the bar's setting,
+a night's service on a full charge, against 9 to 10.5 now. A bar that needs more runs it on its cable or tops it up
+between services. If the owner wants the runtime back in the low base, D does it, with the cycle-life and
+misfit-cell costs above.
+
+The capacities of 18650 LiFePO4 cells (1,500 to 1,800 mAh) are the common grades as I know them, not looked up this
+round: confirm on the chosen cell's datasheet (`components.json`, `core-cells-18650`).
+
+### The side by side
+
+`lamps_low.py`: pass 3's Ember heroes (the same studio, camera, lights and exposure), each with the product swapped:
+round 32f as it was (its fab kit's GLBs at 88db7379, kept in `out-32f/` with their engine files
+`studio/products/earf-*-32f.json`), the current design, and the proposal. Only the lamp's own light and its glints
+follow the part they sit on. `renders/2026-10-29/barkhorn/lamps-low/`: the six frames at 800 × 1000 (128 samples)
+and `lamps-low-sheet.png`, Hemisphere above and Core below.
+
+- **32f's Core ball reads deeper orange than the other two.** It was three layers (tint, frost, tint), matched lit; the
+  current and the proposal have one tint layer, and their casts are deepened for it at the caster.
+- **No critic round:** this is a comparison sheet for the owner, not a hero.

@@ -1,4 +1,4 @@
-"""Round 35: the thermal estimate for Hemisphere (and the dropped South, kept for the record; round 38), a small resistance network in steady state, so the
+"""Round 35: the thermal estimate for Hemisphere (round 40 adds round 32f's low top, no fins, as a proposal) (and the dropped South, kept for the record; round 38), a small resistance network in steady state, so the
 review's B2 can be checked by number. Every input is written here with where it came from; all are estimates until
 the thermocouple test (README, round 35, "the test plan").
 
@@ -79,6 +79,63 @@ SOUTH_SINK = (90.0, 40.0, 18, 1.8, 30.0)
 NORTH = {'575 lm (175 mA; the owner, round 36)': NORTH.pop('575 lm (175 mA)'), **NORTH}
 
 
+# Round 40 (the owner, 2026-10-29: "I kind of liked the old light design though, with ... the lower profile top for
+# hemisphere"): round 32f's low top as the heat sink, no fins. A black anodised aluminium crown 80 across standing 11.5
+# above the collar (32f's hub showed 8 above its collar, whose top was 4 higher), then the cap 40 x 14: its top 126 above
+# the rim, as in 32f (the fins put it at 160). Plain surfaces in still air: a short vertical side (laminar, 1.42 (dT/L)^1/4)
+# and faces up (1.32 (dT/L)^1/4, L = area / perimeter), plus radiation at the anodise's 0.85. The PEEK break as drawn.
+LOW_TOP = dict(crown=(80.0, 11.5), cap=(40.0, 14.0))
+
+
+def low_top_G(dT, Ta, crown=(80.0, 11.5), cap=(40.0, 14.0), cap_metal=True, eps=EPS_ANOD):
+    """The low top's conductance to the room, W/K. With an acrylic cap (cap_metal False) the cap sheds next to nothing
+    (black PMMA on a two-screw joint) and its footprint is taken off the crown's top."""
+    D, h = crown[0] / 1000, crown[1] / 1000
+    d, ch = cap[0] / 1000, cap[1] / 1000
+    T = Ta + dT
+    hr = eps * SIGMA * (T ** 2 + Ta ** 2) * (T + Ta)
+    G = (1.42 * (dT / h) ** 0.25 + hr) * math.pi * D * h
+    G += (1.32 * (dT / ((D - d) / 4)) ** 0.25 + hr) * math.pi / 4 * (D * D - d * d)
+    if cap_metal:
+        G += (1.42 * (dT / ch) ** 0.25 + hr) * math.pi * d * ch + (1.32 * (dT / (d / 4)) ** 0.25 + hr) * math.pi / 4 * d * d
+    return G
+
+
+def solve_low(P_in, lm, eta_out, Ta, cap_metal=True, R_hc=9.2, R_ca=6.9, R_jc=0.9, R_tim=0.3, R_core=0.2):
+    P_opt = lm / LER
+    Q = P_in - P_opt + P_opt * (1 - eta_out)
+    T = Ta + 20.0
+    for _ in range(60):
+        R_s = 1 / low_top_G(max(T - Ta, 1.0), Ta + 273.15, cap_metal=cap_metal)
+        T = Ta + Q / (1 / R_s + 1 / (R_hc + R_ca))
+    Th = T
+    Tcol = Ta + (Th - Ta) * R_ca / (R_hc + R_ca)
+    Tc = Th + Q * (R_tim + R_core)
+    Tj = Tc + (P_in - P_opt) * R_jc
+    return dict(Q=Q, Th=Th, Tc=Tc, Tj=Tj, Tcol=Tcol, R_sink=R_s)
+
+
+def table_low():
+    print('\n### Round 40: the low top (round 32f\'s profile), no fins, 575 lm with the reflector (85 % out), the PEEK break\n')
+    print('| top | room | heat in the hub, W | top to room, K/W | hub, and the cap | COB case (Tc) | LED junction | '
+          'collar, the acrylic next to it |')
+    print('|---|---|---|---|---|---|---|---|')
+    P, lm = NORTH['575 lm (175 mA; the owner, round 36)']
+    for name, metal in (('aluminium cap', True), ('acrylic cap (32f\'s)', False)):
+        for Ta in (25.0, 35.0):
+            r = solve_low(P, lm, 0.85, Ta, cap_metal=metal)
+            print(f"| {name} | {Ta:.0f} C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.0f} C | {r['Tc']:.0f} C | "
+                  f"{r['Tj']:.0f} C | {r['Tcol']:.0f} C |")
+    # the guess most likely to be wrong is the hub-to-collar coupling: halve it, and halve the collar's loss too
+    for R_hc, R_ca, why in ((4.6, 6.9, 'the PEEK path twice as conductive'), (9.2, 13.8, 'the collar losing half as much')):
+        r = solve_low(P, lm, 0.85, 35.0, R_hc=R_hc, R_ca=R_ca)
+        print(f"| aluminium cap, {why} | 35 C | {r['Q']:.1f} | {r['R_sink']:.1f} | {r['Th']:.0f} C | {r['Tc']:.0f} C | "
+              f"{r['Tj']:.0f} C | {r['Tcol']:.0f} C |")
+    r = solve_low(9.1, 1100.0, 0.85, 35.0)
+    print(f"\n(For the record, the low top at 1,100 lm in a 35 C room: hub {r['Th']:.0f} C, the acrylic by the collar "
+          f"{r['Tcol']:.0f} C: the fins were for that level.)")
+
+
 def table():
     print('| | room | heat in the hub, W | sink, K/W | hub (COB case about +2) | LED junction | collar, the acrylic next to it |')
     print('|---|---|---|---|---|---|---|')
@@ -103,3 +160,4 @@ def table():
 
 if __name__ == '__main__':
     table()
+    table_low()

@@ -687,5 +687,33 @@
   "estimate": true,
   "supplier": "the shade maker",
   "price_date": "2026-10-23"
+ },
+ "core-cells-18650": {
+  "kind": "power",
+  "maker": "any reputable LiFePO4 maker (to qualify: Lithium Werks, EVE, Lishen)",
+  "model": "Round 40, PROPOSAL (Core on the 30 base): three LiFePO4 18650 cells (IFR18650), 1,500 to 1,800 mAh at 3.2 V each, in parallel (1S3P): about 14.4 to 17.3 Wh; about 2,000 cycles to 80 %; each to IEC 62133-2 and UN 38.3. Each cell about 4.8 to 5.8 Wh (at most 20 Wh), the set at most 17.3 Wh (at most 100 Wh): the same small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment)",
+  "usd": 9,
+  "estimate": true,
+  "supplier": "a battery distributor",
+  "price_date": "2026-10-29",
+  "note": "The capacity range is the common IFR18650 grades as remembered, not looked up this round: confirm on the chosen cell's datasheet"
+ },
+ "core-holder-18650": {
+  "kind": "power",
+  "maker": "Keystone (or alike)",
+  "model": "Round 40, PROPOSAL: three single-cell 18650 holders (Keystone 1042 kind) set as a triangle round the LED, spring contacts, keyed for polarity, the cells' NTC on one, wired to the board",
+  "usd": 4.5,
+  "estimate": true,
+  "supplier": "Digi-Key",
+  "price_date": "2026-10-29"
+ },
+ "core-board-18650": {
+  "kind": "control",
+  "maker": "to make (a contract PCB house)",
+  "model": "Round 40, PROPOSAL: Core's board for the 30 base, the same circuit as core-board (USB-C sink, LTC4162-F LiFePO4 charger with power path, the 90 % charge limit, protector, fuel gauge, NTC hold-off, warm-dim driver, touch), laid out as a 48 ring under the LED in the middle of the cells' triangle, the USB-C on a flex to its small board in the corner at 170 deg",
+  "usd": 34,
+  "estimate": true,
+  "supplier": "a PCB assembler, about 500 off",
+  "price_date": "2026-10-29"
  }
 }
