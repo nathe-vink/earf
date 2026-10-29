@@ -1,0 +1,192 @@
+{
+ "shot": "/home/user/earf/studio/shots/barkhorn/lamps-low/dome-32f.json",
+ "image": "/home/user/earf/renders/2026-10-29/barkhorn/lamps-low/dome-32f.png",
+ "seconds": {
+  "build": 0.4,
+  "render": 203.9
+ },
+ "samples": 128,
+ "size": [
+  800,
+  1000
+ ],
+ "applied": [],
+ "pending": [],
+ "sets": [],
+ "glints": [
+  {
+   "glint": "clamp",
+   "skipped": "its receivers ['clamp'] match no part in this frame"
+  },
+  {
+   "glint": "collar",
+   "on": "seen surface (collar#0)",
+   "moved_mm": 1.4,
+   "normal_off_deg": 3.4
+  },
+  {
+   "glint": "cap",
+   "on": "nearest facing surface (gland#0)",
+   "moved_mm": 0.2,
+   "normal_off_deg": 0.6
+  }
+ ],
+ "sun_aim": null,
+ "flags_crossing_set": [],
+ "parts_2d": {
+  "canopy#0": {
+   "part": "canopy",
+   "centre_px": [
+    400.0,
+    -690.3
+   ],
+   "box_px": [
+    266,
+    -853,
+    550,
+    -548
+   ],
+   "depth_m": 1.165
+  },
+  "cob#0": {
+   "part": "cob",
+   "centre_px": [
+    400.0,
+    380.8
+   ],
+   "box_px": [
+    370,
+    370,
+    431,
+    392
+   ],
+   "depth_m": 1.002
+  },
+  "collar#0": {
+   "part": "collar",
+   "centre_px": [
+    400.0,
+    373.3
+   ],
+   "box_px": [
+    303,
+    308,
+    505,
+    433
+   ],
+   "depth_m": 1.003
+  },
+  "cord#0": {
+   "part": "cord",
+   "centre_px": [
+    400.0,
+    -209.2
+   ],
+   "box_px": [
+    394,
+    -660,
+    406,
+    304
+   ],
+   "depth_m": 1.086
+  },
+  "gland#0": {
+   "part": "gland",
+   "centre_px": [
+    400.0,
+    314.3
+   ],
+   "box_px": [
+    357,
+    286,
+    444,
+    341
+   ],
+   "depth_m": 1.011
+  },
+  "hub#0": {
+   "part": "hub",
+   "centre_px": [
+    400.0,
+    373.3
+   ],
+   "box_px": [
+    315,
+    297,
+    491,
+    444
+   ],
+   "depth_m": 1.003
+  },
+  "liner#0": {
+   "part": "liner",
+   "centre_px": [
+    400.0,
+    460.6
+   ],
+   "box_px": [
+    214,
+    327,
+    616,
+    572
+   ],
+   "depth_m": 0.992
+  },
+  "pins#0": {
+   "part": "pins",
+   "centre_px": [
+    402.5,
+    348.7
+   ],
+   "box_px": [
+    321,
+    320,
+    489,
+    375
+   ],
+   "depth_m": 0.996
+  },
+  "rim#0": {
+   "part": "rim",
+   "centre_px": [
+    400.0,
+    534.9
+   ],
+   "box_px": [
+    213,
+    480,
+    619,
+    580
+   ],
+   "depth_m": 0.983
+  },
+  "shell#0": {
+   "part": "shell",
+   "centre_px": [
+    400.0,
+    453.5
+   ],
+   "box_px": [
+    195,
+    295,
+    643,
+    583
+   ],
+   "depth_m": 0.993
+  },
+  "skin#0": {
+   "part": "skin",
+   "centre_px": [
+    400.0,
+    468.3
+   ],
+   "box_px": [
+    221,
+    338,
+    608,
+    578
+   ],
+   "depth_m": 0.991
+  }
+ }
+}
