@@ -30,7 +30,7 @@ We also deliver only once a piece's safety listing is done, on the same refund t
 |---|---|---|---|
 | Tropos (a pair) | About 72 kg each; 62 kg with the horn lifted off | Mains; amplifier built in | Two speakers, with horns and covers |
 | Hemisphere | — | 120 V mains, dimmable | Shade, fitting, 600 mm drop (cut to length), canopy |
-| Core | 2.0 kg | USB-C or battery | Lamp, replaceable battery, USB-C cable, 20 W adapter |
+| Core | 1.5 kg | USB-C or battery | Lamp with its replaceable cells, USB-C cable, 20 W adapter |
 | Mantle | About 15.5 kg | Mains, through an external supply | Player with Rega RB330 arm, Ortofon 2M Black cartridge, hinged lid, power supply |
 | Spare shade or ball | — | — | One |
 

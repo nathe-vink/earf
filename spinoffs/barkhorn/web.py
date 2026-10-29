@@ -162,7 +162,7 @@ LAMPS = [  # key, name, kind, its line, the hero's alt, particulars
      'Core lit in Ember, sitting low in its black acrylic base',
      [('Size', '160 mm ball, 180 mm tall'), ('Weight', '2.0 kg'),
       ('Light', '2200 to 2700 K, warmer as it dims'), ('Control', 'Touch the black ring: tap to switch, hold to dim'),
-      ('Power', 'USB-C, cable and adapter included; about ten hours cordless on a battery you can replace yourself'),
+      ('Power', 'USB-C, cable and adapter included; about five hours cordless at full brightness, longer dimmed, on cells you can replace yourself'),
       ('Rating', 'Designed to meet IP44, for terraces and spilt drinks'),
       ('Shades', 'In all eight colours, sold singly'), CARE, ('Figures', 'Design figures; they may change before production')]),
 ]
@@ -722,8 +722,8 @@ def body():
                 '    <figure class="eight">' + pic('lamps-domes', None) + pic('lamps-orbs', None) +
                 '<figcaption>In the speakers&rsquo; order: Ember, Dust, Acid, Poison, Ice, Haze, Fog and Smoke.</figcaption></figure>\n'
                 '    <div class="lamp-duo solo"><figure>' + pic('lamps-unlit', None) + '<figcaption>Off, in Smoke.</figcaption></figure>'
-                '<div class="lamp-note"><h3>Plugged in or not.</h3><p>Core runs from its cable or from a battery in its base: '
-                'about ten hours without the cable, and when the battery tires, you change the battery, not the lamp.</p></div></div>\n'
+                '<div class="lamp-note"><h3>Plugged in or not.</h3><p>Core runs from its cable or from the cells in its base: '
+                'about five hours without the cable at full brightness, longer dimmed, and when the cells tire, you change the cells, not the lamp.</p></div></div>\n'
                 '  </div></section>') if lamps_shown and pm['dome'] and pm['orb'] else ''
     # the turntable line: the record player in its eight once its pictures are in; until then the concept, and a word
     tt = pm['turntable']
