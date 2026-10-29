@@ -1,5 +1,5 @@
 """Moon, EARF's bar lamps (round 32, family F3 of bar_lamps.py, recommended): a cordless table lamp and a pendant in the
-line's tints (the eight Atmosphere colours, and clear, frosted and smoked), for Planet EARF and for sale.
+line's tints (the eight Troposphere colours, and clear, frosted and smoked), for Planet EARF and for sale.
 
 The table lamp: a frosted dome turned from cast acrylic over a solid tinted column, on a weighted blackened-steel
 foot. The light is a warm-dim LED board on a brass hub at the column's top, facing up into the dome, so a seated guest
@@ -144,7 +144,7 @@ NOTES_TABLE = [
     'brass finial switches it, holding dims it, 2200 to 2700 K as it dims (two channels mixed).',
     'Splash-proof (IP44): the foot sealed by the lid\'s O-ring and the column\'s; nothing on top where a drink can pool '
     '(the dome sheds, the finial is round). Wipe with a damp cloth; no solvents on the acrylic.',
-    'The acrylic: the column a 40 rod and the dome turned from cast block, both in the colour (the eight Atmosphere '
+    'The acrylic: the column a 40 rod and the dome turned from cast block, both in the colour (the eight Troposphere '
     'tints, clear, frosted, smoked); polished where it shows an edge, the dome frosted; never thin sheet.',
 ]
 NOTES_PENDANT = [

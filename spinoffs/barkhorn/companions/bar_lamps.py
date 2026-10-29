@@ -1,6 +1,6 @@
 """Round 32's bar lamps (the owner, 2026-10-19: "We need to design an acrylic table lamp and hanging lamp that will work
 well in a bar setting and that we can sell."), for Planet EARF and for sale beside the speakers. Three families, each a
-cordless table lamp and a matching pendant, blocked out in the line's tints (the eight Atmosphere colours, and clear,
+cordless table lamp and a matching pendant, blocked out in the line's tints (the eight Troposphere colours, and clear,
 frosted and smoked), rendered in a bar (board-formed concrete, fir, blackened steel, 2700 K) and on a seamless.
 
 What a bar asks (the coordinator's brief): the table lamp cordless and rechargeable on a staff tray, a base of 130 mm
