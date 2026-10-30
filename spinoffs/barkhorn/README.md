@@ -92,6 +92,11 @@ written under.
 **Renamed again, 2026-10-29: Tropos** (its speakers Tropos 01 to 08), the owner's preference over Troposphere: Greek for
 a turn, the word the troposphere is named for.
 
+**Quotes, 2026-10-30.** `rfq/tropos/` holds draft requests for quotation for the first pair, for the owner to send.
+There is one per kind of vendor: cast acrylic, the horn's forming, the horn's tooling, metal, and the rest. Each has its
+parts table (1, 10 and 50 pairs), its drawing sheets as a PDF, the questions (price, tooling, minimums, lead time, tint
+matching, packing, the dye lot) and a shortlist of vendors from public sources. None has been sent.
+
 ## Round 36: the horn as it will be made, and the back tied down (2026-10-22)
 
 The owner, on the horn: "I'd rather the prototype be as close to production as possible. The whole point of a prototype
