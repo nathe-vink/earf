@@ -1603,3 +1603,82 @@ about 5–6 hours at full brightness instead of about 10. Which Core?" The owner
 - **Updated:** PARTICULARS.md. South's record still builds; its fins are its own.
 - **Round 40's side by side** (`lamps_low.py`): the proposal column now points at the main build. The "current"
   column rebuilds only from git at `950a7eaf`.
+
+## Round 42: the open parts closed, and the RFQ packs
+
+From the coordinator (2026-10-30): the owner is raising $50,000 for the prototypes and a debut night. The work is
+files only: no vendor was contacted, nothing was bought, and no form or account was used. Everything below comes
+from public datasheets and distributor pages.
+
+### The three open parts
+
+- **Hemisphere's driver (`north-driver-575`): ERP Power ESS010W-0180-42.**
+  - **What it is:** 180 mA, 24 to 42 V, 7.6 W. Forward and reverse phase dimming at 120 V, 1 to 100 %, and 0-10 V.
+    Class 2. FCC Part 15 Class B at 120 V. PF over 0.9, THD under 20 %. It meets "CA Title 24 technical
+    requirements" (ERP's series page); JA8 isn't named.
+  - **Light:** about **590 lm** at the COB, 3 % over the owner's 575, about 500 out of the fitting. One driver now
+    serves homes and bars.
+  - **The catch:** the Vero SE 10 runs about 24.6 V at 180 mA, only about 0.6 V over the driver's 24 V floor, and
+    its voltage falls as it warms. **Bench-test regulation at Tc 25 and 85 °C on COBs from the production bin**
+    before committing.
+  - **Alternate:** EPtronics LD6W120-36-C0170-TL. 170 mA, 22 to 36 V (comfortable). TRIAC/ELV, US Class 2,
+    UL 8750 / UL 1310 recognized, FCC Class B at 120 V, PF 0.90 or more. But it dims only to about 15 %: short of
+    JA8's 10 %.
+  - **Nothing qualifies cleanly:** no 175 mA phase-dimmable Class 2 part was found.
+- **The reflector (`north-reflector`): spun to order.** No Ledil catalogue part fits the 46 bore:
+  - BARBARA-PF-VERO10 and ANGELINA are 82 across;
+  - ADELY-50 (about 50 across, for a 10 mm light-emitting surface) would need the bore opened to about 51 and its fit
+    on the Vero SE 10 checked.
+
+  So the reflector is a plain cone spun from spinning-grade high-reflectance aluminium, 45 at the mouth, 20 at the COB
+  and 21 deep, as drawn. The candidates are Helander Metal Spinning (Lombard IL) and Acme Metal Spinning
+  (Minneapolis). It is about $6 a part plus a $300 to $600 tool **[estimate]**.
+- **Core's cells (`core-cells-18650`): Power Sonic PSL-FP-IFR18650EC.**
+  - **From the datasheet:** LiFePO4, **1.5 Ah, 4.8 Wh** each, 2,000 cycles at 100 % depth of discharge, 65 × 18.2,
+    40 g.
+  - **Approvals:** UL 1642, IEC 62133 (the edition isn't stated; ask for the 62133-2 report) and UN 38.3 certified.
+    The UN 38.3 test summary is to be requested: 49 CFR 173.185(a)(3) makes cell makers provide one.
+  - **Others:** a 1.8 Ah IFR18650 exists (Bonrex), but with no published certificates.
+  - **The set:** 14.4 Wh. Core's runtime, recomputed:
+
+    | Load | Full charge | 90 % limit |
+    |---|---|---|
+    | Full brightness (2.5 W) | **5.2 h** | **4.7 h** |
+    | Bar setting (2 W) | 6.5 h | 5.8 h |
+
+    Charge time is about 2 h. Shipping stays under the small-battery exception (4.8 Wh a cell, 14.4 Wh the set).
+
+`components.json`, the two BOMs (rebuilt, no clashes), PARTICULARS.md and the notes in `crystal.py` carry these.
+
+**One-off budgets:**
+
+| Product | Budget | What it covers |
+|---|---|---|
+| Hemisphere | **$4,572** (was $4,576) | the driver's line; includes the three moulds' $3,900 |
+| Core | **$2,027** | unchanged |
+| Mantle | **$3,815** | its final design, the turntable-float kit on `r32-turntable-final` |
+
+**Note for the deck:** its Mantle figure ($2,775) is the older Cumulus kit on this branch (`out-turntable`), not
+Mantle's final design.
+
+### The RFQ packs
+
+In `spinoffs/barkhorn/rfq/`:
+- **`README.md`:** how to send them.
+- **`tints.md`:** the eight cast colours and how chips are approved.
+- **`vendors.md`:** the shortlist, Bay Area first, from public pages only.
+- **Five letters**, each in the owner's voice and signed "[Your name], EARF · earf.world". Each has a parts table at
+  1, 10 and 50, the drawings to attach and the questions (unit price at each quantity, tooling, MOQ, lead time, dye
+  lot, tint matching, finish):
+  - `lamps/01-shades-forming.md`: Hemisphere's shades and moulds;
+  - `lamps/02-core-ball.md`: Core's ball;
+  - `lamps/03-black-acrylic.md`: Core's base and window, Hemisphere's canopy;
+  - `lamps/04-aluminium-anodise.md`: the turned and anodised aluminium of both lamps, and the PEEK ring;
+  - `mantle/05-mantle-acrylic.md`: plinth, edge-lit base, lid, posts, platter and pod rings, against the
+    turntable-float drawings on `r32-turntable-final`.
+
+**What the research found missing:**
+- No Bay Area page offers drape forming over a customer's moulds, or bonding and polishing a sphere's equator.
+  Plastic Domes & Spheres in Santa Fe Springs is the strongest match for both.
+- A custom tint poured at a mill runs to pallet minimums (a 2006 benchmark: 2,500 lb). At 10 to 50 lamps, the tints
+  will likely come from a distributor's stock colours or a pallet per tint. Ask Laird and Piedmont first.

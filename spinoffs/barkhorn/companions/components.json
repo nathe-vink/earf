@@ -515,12 +515,15 @@
  },
  "north-driver-575": {
   "kind": "power",
-  "maker": "to choose",
-  "model": "A Class 2 constant-current driver at about 175 mA, 22 to 30 V window, 120 V AC in, phase-cut dimmable, FCC Part 15 Class B (consumer), dimming to 10 % or below, PF 0.90 or more at its load (JA8): the Vero SE 10 at about 175 mA runs about 24.5 V, about 4.3 W, about 575 lm (scaled from DS120: the 350 mA row less 2 % efficacy gain at half current, an estimate). The 575 lm level. Mean Well's PCD-16 starts at 350 mA, so the part is open",
-  "usd": 22.0,
+  "maker": "ERP Power",
+  "model": "ESS010W-0180-42 (round 42; the 575 lm level): constant current 180 mA, 7.6 W, 24-42 V DC out, 120-277 V AC in; forward-phase (TRIAC) and reverse-phase (ELV) dimming at 120 V AC and 0-10 V, 1-100 %; Class 2; FCC 47 CFR Part 15 Class B at 120 V AC (consumer); power factor over 0.9 and THD under 20 % (series figures); 'complies with ENERGY STAR, DLC and CA Title 24 technical requirements' (ERP's series page; JA8 itself is not named). At 180 mA the Vero SE 10 makes about 590 lm (about 3 % over 575) at about 24.6 V, about 4.4 W. CAUTION: 24.6 V is about 0.6 V over the driver's 24 V floor, and the COB's voltage falls as it warms and varies by bin: bench-test the regulation at Tc 25 and 85 C on three COBs from the production bin before committing (not yet tested)",
+  "usd": 16.0,
   "estimate": true,
-  "supplier": "to find",
-  "price_date": "2026-10-22"
+  "supplier": "ERP distributors (Future Electronics, Digi-Key, Mouser)",
+  "price_date": "2026-10-30",
+  "url": "https://www.erp-power.com/erp-series/ess-series/",
+  "alternate": "EPtronics LD6W120-36-C0170-TL: 170 mA, 22-36 V (a comfortable window for 24.5 V), 6 W, 120 V AC, TRIAC/ELV phase dimming, US Class 2, UL 8750 / UL 1310 recognized (Type HL), FCC Part 15 Class B at 120 V AC, PF 0.90 or more, THD under 20 %, 82 % efficient (EPtronics LD6W-TL datasheet). But it dims only to about 15 % ('<15% to ~100% CCR'), short of the 10 % JA8 and the brief ask; about 560 lm at 170 mA",
+  "note": "No 175 mA phase-dimmable Class 2 part was found (round 42, public datasheets): the ERP part meets every line on paper but its voltage headroom; the EPtronics part meets every line but its dimming depth. The Hatch XTC16-0350P-UNV-I (I-LOC key, 20-46 V, keys 50 to 100 % of 350 mA) may reach 175 mA but its key list, FCC class and dimming depth were not published on the page read"
  },
  "north-driver-010v": {
   "kind": "power",
@@ -533,12 +536,12 @@
  },
  "north-reflector": {
   "kind": "optic",
-  "maker": "Ledil or a spinner (to choose)",
-  "model": "A faceted reflector in high-reflectance aluminium (Alanod Miro kind, about 95 %) for a Vero 10, 45 across at its mouth, 21 deep, inside the hub's bore: it turns the light that the black bore absorbed (about half the COB's flux) out within the same 46 deg cut-off. About 85 % of the COB's lumens leave the fitting, against about 52 % from the black bore (estimate)",
-  "usd": 4.0,
+  "maker": "a metal spinner (to quote: Helander Metal Spinning, Lombard IL; Acme Metal Spinning, Minneapolis MN)",
+  "model": "Round 42: spun to order, no catalogue part fits the bore. A plain conical reflector spun from 0.5 mm spinning-grade high-reflectance aluminium (Alanod Miro kind, about 95 %, or 1100-O spun then bright-dipped and anodised clear, about 85 %), 45 across at its mouth, 20 at the COB, 21 deep (as drawn in crystal.north_parts), a flange of 2 at the COB end to seat under the Chip-Lok holder: about 85 % of the COB's lumens out within the 46 deg cut-off (estimate). Facets, if wanted, by a second hammered tool. Ledil's Vero 10 reflectors (BARBARA-PF-VERO10, 82 x 31; ANGELINA, 82) are far too big; the closest catalogue part, Ledil ADELY-50 (about 50 across, made for COBs with a 10 mm light-emitting surface), would need the hub's bore opened from 46 to about 51 and its depth and fit checked on the Vero SE 10 (not confirmed)",
+  "usd": 6.0,
   "estimate": true,
-  "supplier": "Ledil distributors, or spun to order",
-  "price_date": "2026-10-22"
+  "supplier": "spun to order (the spinning tool about $300 to $600 once, an estimate)",
+  "price_date": "2026-10-30"
  },
  "hemi-gaskets": {
   "kind": "hardware",
@@ -690,13 +693,14 @@
  },
  "core-cells-18650": {
   "kind": "power",
-  "maker": "any reputable LiFePO4 maker (to qualify: Lithium Werks, EVE, Lishen)",
-  "model": "Core's cells since round 41 (the owner signed round 40, 2026-10-29): three LiFePO4 18650 cells (IFR18650), 1,500 to 1,800 mAh at 3.2 V each, in parallel (1S3P): about 14.4 to 17.3 Wh; about 2,000 cycles to 80 %; each to IEC 62133-2 and UN 38.3. Each cell about 4.8 to 5.8 Wh (at most 20 Wh), the set at most 17.3 Wh (at most 100 Wh): the same small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment)",
+  "maker": "Power Sonic",
+  "model": "PSL-FP-IFR18650EC (round 42), three in parallel (1S3P): LiFePO4 18650 energy cell, 3.2 V, 1.5 Ah rated, 4.8 Wh each, 14.4 Wh the set; 2,000 cycles at 100 % depth of discharge; 65 x 18.2 mm (flat top), about 40 g; charge 3.65 V cut-off, at most 1.5 A (1C); discharge cut-off 2.5 V; charge 0 to 45 C, discharge -20 to 60 C. Approvals on the datasheet: UL 1642 cell certificate, IEC 62133 cell certificate (the edition is not stated: ask Power Sonic for the IEC 62133-2 report), UN 38.3 certified (the test summary, which 49 CFR 173.185(a)(3) requires a cell maker to make available, to request). Each cell 4.8 Wh (at most 20 Wh), the set 14.4 Wh (at most 100 Wh): the small-battery exception (49 CFR 173.185(c), UN3481, contained in equipment)",
   "usd": 9,
   "estimate": true,
-  "supplier": "a battery distributor",
-  "price_date": "2026-10-29",
-  "note": "The capacity range (1,500 to 1,800 mAh) is the common IFR18650 grades as remembered, not looked up: TO CONFIRM on the chosen cell's datasheet before the runtime is published"
+  "supplier": "Power Sonic distributors (Digi-Key, TRC Electronics)",
+  "price_date": "2026-10-30",
+  "note": "Capacity confirmed from the datasheet (1.5 Ah). Higher-capacity IFR18650s exist (a Bonrex IFR18650-1.8Ah sheet, 2020) but none found with published IEC 62133 / UN 38.3: Power Sonic's is the certified one",
+  "url": "https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8510/PSL_FP_IFR18650EC_Data_Sheet-1952430.pdf"
  },
  "core-holder-18650": {
   "kind": "power",

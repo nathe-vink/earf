@@ -469,8 +469,8 @@ NOTES_DOME = [
     'clear wherever it was bonded). Nothing white is seen.',
     'Light: a Bridgelux Vero SE 10 (2700 K, CRI 90) at the top of a 46 bore lined with a reflector, 22 up: the cut-off '
     'about 46 deg from the vertical, and about 85 % of its light out (the black bore passed 52 %). About 575 lm at the '
-    'COB (the owner, round 36), at about 175 mA (4.3 W) on a consumer-class (FCC Part 15B) driver, still to source; '
-    'dimmed by a phase-cut (TRIAC) dimmer, or a 0-10 V driver for bars that want it. Not for 1,100 lm: the low top is '
+    'COB (the owner, round 36): about 590 at 180 mA (4.4 W) on an ERP Power ESS010W-0180-42 (Class 2, FCC Part 15 '
+    'Class B), dimmed 100 % to 1 % by a phase-cut (TRIAC or ELV) dimmer or 0-10 V. Not for 1,100 lm: the low top is '
     'sized for 575 (1,100 needs the fins of rounds 35 to 39).',
     'Heat (round 41): round 32f\'s low top is the heat sink, no fins: a black anodised aluminium crown 80 across and '
     '11.5 tall over the collar, and an aluminium cap 40 x 14 over the cord grip, the cap\'s top 126 above the rim. A '
@@ -489,11 +489,11 @@ NOTES_ORB = [
     'One ball where there were three layers: tinted cast acrylic, two halves formed on one mould and joined at the '
     'equator, their inside bead-blasted. The frost faces air, so it scatters; seen from outside it is behind the tint, '
     'and the port that would show it faces the base.',
-    'Plugged in or not, one product: three LiFePO4 18650 cells (about 14 to 17 Wh) in a triangle round the LED, behind '
+    'Plugged in or not, one product: three LiFePO4 18650 cells (Power Sonic PSL-FP-IFR18650EC, 14.4 Wh) in a triangle round the LED, behind '
     'a hatch underneath on four captive screws, the user\'s to replace with standard cells. It runs from USB-C (5 V 3 A, '
-    'the adapter and a 2 m fabric cable in the box) or from its cells, and charges while it runs, in about 2.5 hours. '
-    'About 4.7 to 5.6 hours at full brightness (2.5 W) at the default charge limit (90 %), 5.2 to 6.2 at a full charge; '
-    'about 5.8 to 7 at the bar setting (2 W).',
+    'the adapter and a 2 m fabric cable in the box) or from its cells, and charges while it runs, in about 2 hours. '
+    'About 4.7 hours at full brightness (2.5 W) at the default charge limit (90 %), 5.2 at a full charge; about 5.8 '
+    'at the bar setting (2 W).',
     'Long life: LiFePO4 keeps about 80 % of its capacity after about 2,000 cycles (ordinary Li-ion about 500); the '
     'charge limit, a battery-management circuit (protection, a fuel gauge, charging held off below 0 C and above 45 C '
     'by the cells\' NTC) and no exposed contacts. Certified as one product: IEC/UL 62368-1 with its battery annex; the '
