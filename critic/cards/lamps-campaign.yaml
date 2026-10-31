@@ -1,0 +1,75 @@
+# The shot cards' fixed part for EARF's lamps and record player, the campaign pictures (round 43, 2026-10-31):
+# Hemisphere, Core and Mantle in rooms and close. critic/card.py joins this with the shot's settings; round.py stage
+# --card critic/cards/lamps-campaign.yaml.
+
+product: >
+  EARF's lamps and record player, in tinted cast acrylic and black anodised aluminium. Hemisphere: a pendant, a
+  200 mm dome of three formed acrylic layers (a tinted shell, a white opal liner, a tinted skin) hung mouth down on a
+  black textile cord, with a low black aluminium top (a clamp ring, a crown, a small cap); its light (about 590 lm,
+  2700 K) falls from a bore in the top through the open mouth onto the table, and the shade glows in its tint. Core:
+  a table lamp, a 160 mm tinted acrylic ball frosted inside, glowing in its tint, resting in the cup of a low polished
+  black base (120 x 30) with a black aluminium touch ring, a fabric cable out of the back. Mantle: a belt-drive record
+  player, a tinted acrylic plinth floating on four short posts over a tinted base whose polished edge glows, a tinted
+  lid, a tinted platter, a Rega tonearm.
+
+products:
+  studio/products/earf-dome-pendant.json: Hemisphere, a tinted acrylic pendant with a low black top.
+  studio/products/earf-orb-table.json: Core, a tinted acrylic ball on a low black base.
+  spinoffs/barkhorn/companions/out-turntable-float/open/barkhorn-turntable-float-open.json: >
+    Mantle, a tinted acrylic record player, its plinth floating over a lit base, its lid open.
+
+fixed:
+  - >-
+    The products' geometry: every part's shape, size and placement. They are the design.
+  - >-
+    The colour of each piece (the tint: Ember, a red; Smoke, a grey); you may ask for it to be reproduced more
+    faithfully (exposure, white balance, the glow's strength), never for a different colour.
+  - >-
+    The lamps' light levels are set from their real output (lumens), so the rooms are as dark as the lamps make
+    them: you may ask for exposure, a fill or a practical light, not for the lamp to be brighter than it is.
+  - >-
+    What the shot's purpose below fixes about framing.
+
+shots:
+  lamps-campaign-dining-dusk:
+    title: Hemisphere over a dining table at dusk
+    purpose: >
+      The pendant's room picture for the site and the press: a dining room at blue hour, the window still holding the
+      last light, Hemisphere in Ember lit over the table, its pool on the table. Read first as a beautiful room lit by
+      this lamp. Landscape.
+    must_show: [the pendant whole and lit, its pool of light on the table, the window at dusk]
+  lamps-campaign-dining-close:
+    title: Hemisphere close over the table at dusk
+    purpose: >
+      The pendant's portrait: closer, the shade's colour and glow and its low black top, the table below. Portrait.
+    must_show: [the pendant whole and lit, the shade's colour, the low black top]
+  lamps-campaign-core-bedside:
+    title: Core on a bedside table at night
+    purpose: >
+      The table lamp's night picture: Core in Ember lit on a bedside table, the only warm light in a dark bedroom, a
+      book and a glass beside it. Intimate. Landscape.
+    must_show: [the lamp whole and lit, its base, the bedside table's top]
+  lamps-campaign-mantle-credenza:
+    title: Mantle on a credenza with records
+    purpose: >
+      The record player's room picture: Mantle in Ember on a walnut credenza in the evening, a record on, records
+      beside it, its base's edge glowing. Read first as a premium record player in a real home. Landscape.
+    must_show: [the record player whole with its floating plinth readable, the glowing base, the records]
+  lamps-campaign-one-room:
+    title: Hemisphere, Core and Mantle in one room
+    purpose: >
+      The family picture: a dining room at dusk, Hemisphere over the table, Mantle and Core on the credenza behind.
+      All three readable as one family. Landscape.
+    must_show: [the pendant lit, the record player, the table lamp lit]
+  lamps-campaign-macro-hemisphere:
+    title: Hemisphere's top, close
+    purpose: >
+      A macro for the press and the product page: the low black top (cap, crown, clamp ring) on the tinted shade.
+      Landscape.
+    must_show: [the cap, the crown, the clamp ring, the shade's tint at its edge]
+  lamps-campaign-macro-core:
+    title: Core's base, close
+    purpose: >
+      A macro for the press and the product page: the ball in its cup, the black touch ring, the polished base.
+      Landscape.
+    must_show: [the ball's lower half glowing, the touch ring, the base]

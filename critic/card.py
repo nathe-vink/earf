@@ -149,7 +149,8 @@ def main():
             L.append('')
         # the last rounds on this shot: what each changed, and whether the last round's tests pass on this image, so a
         # round does not undo the one before without knowing it (05's round 7 darkened the sweep round 6 had lightened)
-        L += _history(a.shot_id, arr, Me, frame=frame)
+        if mp.exists():                       # without the part mask there is nothing to re-check the last round on
+            L += _history(a.shot_id, arr, Me, frame=frame)
         # what the engine could not do in this render, in its own words: the critic's prescriptions meet the physics here
         rp = Path(a.report) if a.report else Path(a.image).with_suffix('.report.json')
         if rp.exists():
