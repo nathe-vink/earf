@@ -339,7 +339,7 @@ def make_sleeve(path):
 def make_label(path):
     from PIL import Image, ImageDraw, ImageFont
     S = 1600
-    im = Image.new('RGB', (S, S), (196, 188, 172))
+    im = Image.new('RGB', (S, S), (168, 160, 146))
     d = ImageDraw.Draw(im)
     fdir = '/usr/share/fonts/truetype/dejavu/'
     f1 = ImageFont.truetype(fdir + 'DejaVuSans-Bold.ttf', 120)
@@ -857,6 +857,10 @@ def setup_world(args, meta):
         world.node_tree.links.new(et.outputs['Color'], bg.inputs['Color']); bg.inputs['Strength'].default_value = 0.35
         area('window', (1.4, 1.6), (cx - 1.6, cy + 0.2, 1.1), T, 260, col=(1.0, 0.92, 0.80), spread=40)
         area('bounce', (1.0, 1.0), (cx + 1.0, cy - 1.0, 0.7), T, 25, col=(1.0, 0.96, 0.9), caust=False)
+        # a second window behind and left, low: light through the strata and through the stood cover toward the lens
+        area('back-window', (1.2, 0.5), (cx - 1.1, cy + 0.38, 0.35), (cx - 0.2, cy - 0.2, 0.08), 160, col=(1.0, 0.93, 0.82), spread=50)
+        # a thin strip high at the right for one clean highlight along the polished edges
+        area('edge-strip', (1.4, 0.05), (cx + 0.6, cy - 0.5, 0.75), (cx, cy, 0.06), 30, col=(1.0, 0.97, 0.92), spread=30, caust=False)
         area('strip', (0.8, 0.12), (cx + 0.55, cy + 0.30, 0.10), (cx, cy, 0.05), 40, col=(1.0, 0.9, 0.8), spread=60)
         # a walnut sideboard's top under it and a plaster wall behind, both Poly Haven scans (CC0), instead of paper
         sys.path.insert(0, os.path.join(ROOT, 'studio', 'engine'))
@@ -883,8 +887,8 @@ def setup_world(args, meta):
         'hero': dict(pos=(cx + 0.78, cy - 1.32, 0.62), tgt=(cx - 0.005, cy + 0.01, 0.075), lens=85, f=8.0, focus=(cx + 0.06, cy - 0.10, 0.08)),
         'closed': dict(pos=(cx + 0.78, cy - 1.32, 0.52), tgt=(cx, cy + 0.01, 0.085), lens=85, f=8.0, focus=(cx + 0.05, cy - 0.15, 0.09)),
         'macro': dict(pos=(meta['A'][0] * mm + 0.27, meta['A'][1] * mm - 0.50, meta['top'] * mm + 0.15),
-                      tgt=(meta['A'][0] * mm - 0.07, meta['A'][1] * mm - 0.13, meta['top'] * mm - 0.010), lens=100, f=8.0,
-                      focus=(meta['A'][0] * mm - 0.02, meta['A'][1] * mm - 0.12, meta['top'] * mm)),
+                      tgt=(meta['A'][0] * mm - 0.07, meta['A'][1] * mm - 0.13, meta['top'] * mm - 0.010), lens=100, f=5.6,
+                      focus=(meta['stylus'][0] * mm, meta['stylus'][1] * mm, meta['record_z'] * mm + 0.012)),
         'macro-stylus': dict(pos=(meta['stylus'][0] * mm + 0.17, meta['stylus'][1] * mm - 0.25, meta['record_z'] * mm + 0.075),
                              tgt=(meta['stylus'][0] * mm - 0.01, meta['stylus'][1] * mm + 0.01, meta['record_z'] * mm - 0.012), lens=100, f=11.0,
                              focus=(meta['stylus'][0] * mm, meta['stylus'][1] * mm, meta['record_z'] * mm)),

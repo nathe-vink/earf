@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "The room is believable: warm plaster wall, a pale wood sideboard and soft raking light. The turntable reads as a smoked-acrylic deck, but its front and the cover behind it fall into flat pure black, which loses the material. The internals seen through the tint, the floating layer stack and the toy-like tonearm give it away as CG. It is a competent, moody render that still feels assembled rather than photographed.",
+  "score": 6.0
+ },
+ "reads_as": "a smoked-acrylic layered turntable in the Pro-Ject / Rega 'clear deck' archetype, with an acrylic sleeve frame behind",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    560,
+    800,
+    1100,
+    1000
+   ],
+   "what": "The plinth's front face is crushed to pure black (median luminance 6.8, 45% of pixels crushed). Unexplained green and gold blobs float inside it, like refraction noise from loose internal parts, so it reads as a black glass box with junk inside rather than tinted acrylic.",
+   "real": "Through-tinted smoke acrylic about 10 mm thick transmits a warm grey-brown. Its faces would show a soft gradient of the room plus a crisp reflection line of the window. Internals would be few, deliberate and dimly visible (motor pod, PCB, bearing), not scattered coloured fragments."
+  },
+  {
+   "rank": 2,
+   "region": [
+    215,
+    165,
+    885,
+    720
+   ],
+   "what": "The cover/sleeve frame's top half is pure black (luminance 0\u20133) with no edge highlight, no transmission and no reflection of the wall. Its left side and base show repeated stepped ghost edges, as if several offset copies of the panel were stacked.",
+   "real": "A smoked acrylic dust cover stood on edge shows the wall through it at about 30\u201350% transmission, a polished-edge glow along every cut edge (bright where the edges catch light), and one clean reflection, not stair-stepped duplicates."
+  },
+  {
+   "rank": 3,
+   "region": [
+    540,
+    790,
+    1660,
+    1040
+   ],
+   "what": "The plinth is three slabs separated by dark gaps with no visible spacers, bolts or bond line. The layers look like they float, and the lower layers' corners don't line up with the top's radius.",
+   "real": "A machinist would show either a solvent-bonded laminate (one block with faint bond lines) or visible standoffs and stainless cap screws through the stack, with countersinks visible through the tint. Every corner radius would match through the stack."
+  },
+  {
+   "rank": 4,
+   "region": [
+    1100,
+    860,
+    1660,
+    1000
+   ],
+   "what": "The light rectangles on the right side faces (pale slots and bars) read as texture or geometry artefacts: unexplained flat grey plates that are neither reflections nor parts.",
+   "real": "Either real parts behind the acrylic (a switch PCB, a speed selector) with shadows and depth, or nothing. A real reflection would be curved and continuous across the layer edges."
+  },
+  {
+   "rank": 5,
+   "region": [
+    1150,
+    640,
+    1590,
+    790
+   ],
+   "what": "The tonearm is a plain matte tube with a ball counterweight and a large flat flanged mount plate. The headshell and cartridge are a crude flat block, and there is no arm lift, anti-skate or tonearm cable. It looks like a game asset.",
+   "real": "A real arm has a finger lift, a visible cartridge body with a stylus guard or cantilever, a fine cable exiting the base, a cueing lever and a machined armrest clip. The surfaces are bead-blasted or anodised with a fine edge break."
+  },
+  {
+   "rank": 6,
+   "region": [
+    940,
+    670,
+    1140,
+    725
+   ],
+   "what": "The record label is a blank warm-white disc at luminance about 220 with no print and no sheen. The spindle is a stubby cylinder. The record shows coarse uniform groove bands, no run-out shine and no anisotropic highlight.",
+   "real": "Vinyl shows a radial anisotropic streak of light across the grooves, a printed label with type, and a polished spindle with a chamfered tip catching a pinpoint highlight."
+  },
+  {
+   "rank": 7,
+   "region": [
+    600,
+    860,
+    1640,
+    1050
+   ],
+   "what": "The contact shadows under the feet are weak and the feet are generic dark pucks. The deck seems to hover over the sideboard and there is no occlusion where the plinth's underside meets its shadow.",
+   "real": "A tight dark occlusion ring under each foot plus a soft, broad shadow of the plinth on the wood. The feet are machined (alloy cones or sorbothane cups) with a small chamfer highlight."
+  },
+  {
+   "rank": 8,
+   "region": [
+    1250,
+    880,
+    1360,
+    920
+   ],
+   "what": "The 'EARF' wordmark is a soft, slightly blurred white decal sitting at an odd angle on the top edge. It reads as a floating sticker.",
+   "real": "Laser engraving or screen print reads as crisp frosted lettering, slightly lit from within by the acrylic, with sharp edges at this distance."
+  },
+  {
+   "rank": 9,
+   "region": [
+    370,
+    340,
+    800,
+    690
+   ],
+   "what": "The sleeve art is a flat card with no thickness, no spine and no slight bow. It sits perfectly flat and evenly lit inside the black frame, and its lower edge clips into the frame base.",
+   "real": "A real LP sleeve is 3 mm board with rounded worn corners and a slight bow, a visible spine edge, and shading where it leans on the frame."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    0,
+    1800,
+    560
+   ],
+   "what": "The wall plaster texture is uniform and repeats with the same bump scale everywhere. The noise grain on the image is even and digital.",
+   "real": "Real plaster has varied trowel marks with larger low-frequency undulation. Real film or sensor grain is luminance-dependent, stronger in the shadows."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the tint a feature: let the light pass through the plinth so it glows amber at the edges and throws a coloured caustic onto the sideboard, with the drive internals composed like a watch movement (motor, belt and bearing aligned on one axis and finished in brass).",
+   "now": "a dark acrylic deck in the familiar Pro-Ject Perspex / Rega Planar look, black with clutter inside"
+  },
+  {
+   "rank": 2,
+   "idea": "Give the stack a real structural idea: three layers held by four exposed bronze pillars at the corners, the gaps deliberate and visible, so the deck reads as a sculpture of layers and not a sandwich.",
+   "now": "floating slabs with unexplained gaps"
+  },
+  {
+   "rank": 3,
+   "idea": "Design a bespoke tonearm that matches the plinth language, for example a tapered arm in bronze or smoked acrylic with a machined cylindrical counterweight, instead of the generic ball-and-tube.",
+   "now": "a stock budget tonearm silhouette"
+  },
+  {
+   "rank": 4,
+   "idea": "Make the cover-as-sleeve-frame read immediately: a slot or ledge machined into its base so the sleeve visibly sits in it, and the cover's proportions echoing the plinth's corner radius.",
+   "now": "a black acrylic box with a card in it, which could be any picture frame"
+  },
+  {
+   "rank": 5,
+   "idea": "Use one distinctive control detail (a single machined speed dial, or a strobe ring engraved into the platter edge visible through the tint) as the deck's signature.",
+   "now": "no visible controls, so nothing identifies the maker"
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Add a large soft backlight or window from behind-left so light transmits through the smoke acrylic of both the plinth and the cover, and lift exposure in the darks (target plinth front median luminance 35\u201360, cover top 25\u201350 instead of 0\u20137).",
+   "expected": "The material reads as tinted acrylic instead of black glass. This is the biggest gain in realism and desirability."
+  },
+  {
+   "rank": 2,
+   "change": "Place a long, thin strip light or a window reflection so a single clean highlight runs along the top edge and polished edges of the plinth and cover.",
+   "expected": "It defines the shape and shows polished edges, as luxury hi-fi photography does."
+  },
+  {
+   "rank": 3,
+   "change": "Remove the stray internal parts and the stepped ghost duplicates, check the refraction depth and IOR (1.49) and thickness, and render with more glossy and transmission bounces.",
+   "expected": "Clean, believable internals and edges without CG artefacts."
+  },
+  {
+   "rank": 4,
+   "change": "Use a longer lens (about 85\u2013100 mm equivalent) from slightly lower, with a shallow focus falloff on the cover, and tighten the frame on the deck.",
+   "expected": "A more premium, product-hero perspective, and the deck dominates the frame."
+  },
+  {
+   "rank": 5,
+   "change": "Add an anisotropic vinyl sheen, a printed label, a cartridge with a stylus, and a stronger contact occlusion under the feet.",
+   "expected": "The small truths that sell it as a photograph at close inspection."
+  }
+ ],
+ "score_if_fixed": 8.0
+}

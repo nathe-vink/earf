@@ -1,0 +1,174 @@
+{
+ "stage1": {
+  "impression": "A moody, monochrome close-up of a black turntable that gets the mood right: shallow focus, a soft label glow, a reflective plinth. But the product is mostly an out-of-focus grey slab. The sharp detail (headshell, finger lift, cartridge) is plain-box CG with uniform bevels, and the foreground wordmark is a blurred blob, so the eye has no crisp hero detail to rest on. It reads as a competent render with photographic grading laid over it, not a photograph.",
+  "score": 5.0
+ },
+ "reads_as": "a generic glossy black acrylic turntable (Pro-Ject / Clearaudio archetype) shot through a heavy filter",
+ "unreal": [
+  {
+   "rank": 1,
+   "region": [
+    300,
+    600,
+    1500,
+    900
+   ],
+   "what": "The plinth top, the largest surface in frame, is a flat mid-grey (median lum 83, p5-p95 range only 38) with soft ghost reflections and no depth. Through-tinted smoke acrylic should show darker body colour where it is thick, bright specular edges, and internal parts faintly visible through it. This reads as grey gloss paint on MDF.",
+   "real": "Cast smoke acrylic 20-30 mm thick goes near-black toward the middle and shows a glowing, lighter, slightly green-grey polished edge where light travels through it. The top carries a crisp, high-contrast reflection of a single softbox, plus a few hairline swirl marks and dust motes."
+  },
+  {
+   "rank": 2,
+   "region": [
+    230,
+    160,
+    680,
+    390
+   ],
+   "what": "The headshell and cartridge are simple extruded boxes with identical tiny fillets, a perfectly flat matte-grey body and no screws. The cartridge has no stylus guard line, no brand engraving and no cantilever detail, and the two 'mounting screws' are only blown-out bokeh dots.",
+   "real": "A real headshell has two slotted M2.5 screws with nuts and washers, a machined finger lift with a visible tool path, an anodised surface with fine grain, and a cartridge body with a moulded part line, a printed logo and a visible cantilever and stylus tip."
+  },
+  {
+   "rank": 3,
+   "region": [
+    480,
+    990,
+    960,
+    1160
+   ],
+   "what": "The foreground cast-letter wordmark is a fully defocused white blob with no edges, so it cannot be read. It also glows uniformly as if emissive. Real cast metal letters out of focus would still show specular bokeh highlights on their edges and a dark body.",
+   "real": "Either pull focus so the letters read, or place them where the depth-of-field fall-off leaves them legible. Polished or bead-blasted metal letters show bright edge highlights and darker faces, not an even white."
+  },
+  {
+   "rank": 4,
+   "region": [
+    0,
+    380,
+    1000,
+    600
+   ],
+   "what": "The platter rim and subplatter are crushed black (12.7% crushed, median lum 21), and the stacked bands have perfectly even thickness with no machining, chamfer highlight or seam between the platter and the mat.",
+   "real": "A real platter rim shows a bright, thin chamfer line top and bottom, fine lathe turning marks catching the light as concentric streaks, and a visible gap where the platter sits over the subplatter or plinth."
+  },
+  {
+   "rank": 5,
+   "region": [
+    545,
+    85,
+    1500,
+    175
+   ],
+   "what": "The tonearm tube is a uniform matte cylinder with a hemispherical end, with no seam, no collet joint to the headshell and no wiring exit. It also floats with no visible connection to the headshell in this crop.",
+   "real": "Show a collet or clamp ring where the headshell meets the arm tube, a slight specular streak along the tube's length, and either carbon weave or brushed anodising."
+  },
+  {
+   "rank": 6,
+   "region": [
+    1590,
+    80,
+    1730,
+    410
+   ],
+   "what": "The arm-rest post is an untextured cylinder whose base flares into a rounded blob with no fastener, no foot ring and no shadow-contact detail where it meets the acrylic.",
+   "real": "A turned aluminium post with a crisp chamfer at the top, a separate turned collar or nut at the base, and a tight contact shadow plus its reflection in the gloss acrylic."
+  },
+  {
+   "rank": 7,
+   "region": [
+    0,
+    0,
+    700,
+    140
+   ],
+   "what": "The record label is a featureless, near-white field (median lum 226) with no printing, spindle detail or paper texture, and it pulls the eye as the brightest area of the frame.",
+   "real": "A printed label with text and a centre hole, a slightly off-white paper colour, a visible spindle and clamp, and an exposure that does not let it become the hot spot."
+  },
+  {
+   "rank": 8,
+   "region": [
+    1400,
+    400,
+    1800,
+    1000
+   ],
+   "what": "The right edge of the plinth has a clean, sharp corner with mirrored reflections but no polished edge glow, no radius variation and no thickness cue.",
+   "real": "Flame-polished or diamond-polished acrylic edges catch light as a bright tinted line, with a visible thickness and slight internal reflections."
+  },
+  {
+   "rank": 9,
+   "region": [
+    300,
+    360,
+    460,
+    430
+   ],
+   "what": "The cue lever and lift wire under the headshell are a bent CG tube with even shading, and they do not connect to anything visible.",
+   "real": "A real cueing lever with a damped pillar, a lift bar under the arm, and a fine machined finish."
+  },
+  {
+   "rank": 10,
+   "region": [
+    0,
+    0,
+    1800,
+    1200
+   ],
+   "what": "Grain and a sepia/greyscale grade are applied evenly over the whole frame. The grain sits on top of the defocus instead of in it, which reads as a filter rather than film or sensor noise.",
+   "real": "Keep the colour (the smoke tint is the product's point). Use light, luminance-only sensor noise that scales with exposure, and real lens fall-off and chromatic fringing at bright out-of-focus edges."
+  }
+ ],
+ "cooler": [
+  {
+   "rank": 1,
+   "idea": "Make the through-tint the hero: let the light pass through the acrylic so the internal bearing, motor or belt is visible as a shadowy form inside the smoke block. A turntable that shows its own mechanism inside is its own.",
+   "now": "An opaque glossy grey slab, interchangeable with any black acrylic deck."
+  },
+  {
+   "rank": 2,
+   "idea": "Give the headshell and arm a signature form: a distinctive finger lift, a cast or machined headshell with a visible sculpted transition into the tube, and the same corner radius language as the plinth.",
+   "now": "A generic box headshell with a flat-bar finger lift, the archetype of every budget deck."
+  },
+  {
+   "rank": 3,
+   "idea": "Make the cast-letter wordmark a physical feature that catches light: raised bronze or polished letters standing proud of the acrylic, sharp enough in some frame to read.",
+   "now": "A white blur that reads as a sticker."
+  },
+  {
+   "rank": 4,
+   "idea": "Express the platter as a distinct material, such as machined aluminium, a contrasting acrylic or a visible thick slab edge with a polished chamfer, so the stack of plinth, platter and record reads as three materials.",
+   "now": "Three near-identical black bands stacked together."
+  },
+  {
+   "rank": 5,
+   "idea": "Give the arm-rest post and armboard a recognisable machined detail (knurling, an engraved index, a contrasting collar) as a small jewellery moment at $6,500.",
+   "now": "A plain lab-grade cylinder."
+  }
+ ],
+ "photo": [
+  {
+   "rank": 1,
+   "change": "Move the focal plane onto the headshell and cartridge at f/4 rather than very shallow, so the arm's corner, the stylus and the platter rim are all sharp, and only the far background falls off.",
+   "expected": "The frame's stated subject reads crisply; the eye lands on real detail rather than blur."
+  },
+  {
+   "rank": 2,
+   "change": "Use one large strip softbox behind and above the deck, raking across the plinth, to put a single crisp, graded specular stripe on the acrylic top and light up its polished edges from inside.",
+   "expected": "The acrylic reads as thick, tinted, polished cast material instead of grey paint; the contrast range on the plinth rises from about 38 to about 150 levels."
+  },
+  {
+   "rank": 3,
+   "change": "Add a small rim or kicker light low on the platter side to open the crushed rim (target median lum above 40 there) and draw a bright chamfer line along the platter edge.",
+   "expected": "The platter separates from the plinth; machining is visible."
+  },
+  {
+   "rank": 4,
+   "change": "Pull the label exposure down by about one stop or use a printed label, and bring the brightest point onto the product (the arm post or the headshell screws).",
+   "expected": "The hot spot moves from a prop to the product."
+  },
+  {
+   "rank": 5,
+   "change": "Remove the uniform grain and sepia overlay; render in colour with natural, luminance-dependent noise and slight lens chromatic aberration on bright out-of-focus edges.",
+   "expected": "It reads as a lens and a sensor instead of a post filter, and the smoke tint shows as a colour."
+  }
+ ],
+ "score_if_fixed": 7.5
+}
