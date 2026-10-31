@@ -78,3 +78,11 @@ while lanes run. Deck: https://claude.ai/artifact/3sihYaT4ckNTF6WE7SWR7x (v26). 
 - Proofs: golden hour all-Poison 6/6 (picked); golden Ice+Dust 6/6 (read as a two-color accessory set); morning 5/5;
   blue hour 4-5. Round 2: reading nook by the window (chair, Hemisphere over its arm, Core on a side table), hi-fi right
   of center, three-quarter from the right. Next: refine, critic rounds, duel vs the 7.0 golden room, 3840x2160 final.
+
+## Editions milestone 1 (22:26 UTC, 0803b5ad)
+- Research cited (Miss Blanche: Ishimaru, 56 made, Phillips 2022 $516,600; ACRIFIX must not enter closed cavities;
+  anneal 80 C at 1 h/mm; critical angle 42.2 deg; specimens must be BOUGHT not collected; copper inhibits MMA cure; iron
+  meteorites rust from chloride). Six editions: Stamper (a Session 00 nickel stamper shard in Bedrock), Offcuts (the
+  first eight speakers' tints as strata in Core Sample), Firn (lens voids at every bond line of Moho, Ice), Groove
+  (Session 00's waveform as a spiral air channel in Moho), Contour (Shasta's 2,000 m line as an air channel in Relief),
+  Iron (an etched Gibeon slice at the center of Core). All clear cast with 3 mm tinted strata. Finals: Firn, Iron, Stamper.
