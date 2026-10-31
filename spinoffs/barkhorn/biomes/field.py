@@ -12,7 +12,7 @@ import numpy as np
 NAMES = ['Ice', 'Poison', 'Fog', 'Haze', 'Dust', 'Acid', 'Ember', 'Smoke']
 N = len(NAMES)
 SECTOR = 360.0 / N
-R_SPEAKER = 3.6             # m from the camera to each speaker's centre
+R_SPEAKER = 2.8             # m from the camera to each speaker's centre
 BAND = 7.0                  # deg: half the width of a blend
 CENTRE = 0.0                # deg: azimuth of the first sector's centre line
 
@@ -127,10 +127,13 @@ def h_fog(x, y, r):
 
 def h_haze(x, y, r):
     z = 0.08 * fbm(x / 4.0, y / 4.0, 4, 14) + 3.0 * smooth(8, 80, r) * (0.5 + fbm(x / 35, y / 35, 4, 15))
-    ranges = 0.0
-    for k, (d, hgt) in enumerate(((150, 30), (320, 70), (650, 130), (1300, 240), (2600, 420))):
-        ranges = ranges + hgt * smooth(d * 0.7, d, r) * (0.55 + 0.45 * fbm(x / (d * 0.4), y / (d * 0.4), 3, 20 + k))
-    return z + ranges * 0.6
+    # range behind range: each a ridge line at its distance, its crest wandering, the nearer hiding the farther
+    ranges = np.zeros_like(r)
+    for k, (d, hgt) in enumerate(((140, 22), (300, 55), (620, 110), (1250, 200), (2500, 380))):
+        dd = d * (1 + 0.12 * fbm(x / (d * 0.5), y / (d * 0.5), 3, 40 + k))
+        ridge = hgt * np.exp(-((r - dd) / (0.22 * d)) ** 2) * (0.6 + 0.4 * fbm(x / (d * 0.3), y / (d * 0.3), 4, 20 + k))
+        ranges = np.maximum(ranges, ridge)
+    return z + ranges
 
 
 def h_dust(x, y, r):
@@ -191,6 +194,11 @@ def height(x, y, W=None):
     return z
 
 
+JITTER = [(0.2, 1.5), (-0.3, -2.0), (0.1, 2.5), (-0.2, -1.0), (0.3, 1.0), (-0.1, -2.5), (0.2, 2.0), (-0.3, -1.5)]
+
+
 def speaker_spot(i):
-    a = math.radians(centre_az(i))
-    return R_SPEAKER * math.sin(a), R_SPEAKER * math.cos(a)
+    """Where biome i's Tropos stands: on its sector's line, nudged by hand (metres out, degrees round)."""
+    dr, da = JITTER[i]
+    a = math.radians(centre_az(i) + da)
+    return (R_SPEAKER + dr) * math.sin(a), (R_SPEAKER + dr) * math.cos(a)

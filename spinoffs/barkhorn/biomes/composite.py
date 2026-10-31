@@ -70,8 +70,11 @@ def main():
     ap.add_argument('--planet-zoom', type=float, default=1.0)
     ap.add_argument('--planet-turn', type=float, default=0.0)
     ap.add_argument('--ev', type=float, nargs=8, help='override each slice exposure')
-    ap.add_argument('--feather', type=float, default=18.0)
-    ap.add_argument('--sky-band', type=float, default=28.0)
+    ap.add_argument('--view', action='append')
+    ap.add_argument('--trim', type=float, nargs=8, help='EV added after metering, per slice')
+    ap.add_argument('--feather', type=float, default=21.0)
+    ap.add_argument('--knob-band', type=float, default=40.0)
+    ap.add_argument('--sky-band', type=float, default=34.0)
     ap.add_argument('--meter', action='store_true', help="meter each slice: its own ground's median to the hour's key")
     a = ap.parse_args()
     import bpy
@@ -102,6 +105,12 @@ def main():
     # the light changes over a wider band than the ground does (a time slice's feathered joins): the ground's
     # boundaries, bent as field.py bends them, blended over a.feather degrees each side; the sky over a.sky_band
     Wt[geo] = F.weights(pos[..., 0][geo], pos[..., 1][geo], band=a.feather)
+    # the knob under the camera: its hours blended over a wide band (no wedge across the rock), easing into the ring's
+    rr = np.hypot(pos[..., 0], pos[..., 1])
+    knob = geo & (rr < 3.0)
+    t = np.clip((rr[knob] - 1.3) / 1.5, 0, 1)[:, None]
+    one = F.dir_weights(np.degrees(np.arctan2(pos[..., 0][knob], pos[..., 1][knob])) % 360.0, band=a.knob_band)
+    Wt[knob] = one * (1 - t) + Wt[knob] * t
     sky = ~geo
     Wt[sky] = F.dir_weights(np.broadcast_to(col_az[None, :], (H, W))[sky], band=a.sky_band)
     acc = np.zeros((H, W, 3), np.float32); wsum = np.zeros((H, W), np.float32)
@@ -121,7 +130,7 @@ def main():
             own = (Wt[..., i] > 0.95) & cov & geo & band[:, None]
             med = float(np.median(img[..., :3][own] @ LUMW)) if own.any() else 0.18
             key = meta['hours'][i].get('key', 0.18)
-            evs[i] = math.log2(key / max(med, 1e-6)) + meta['hours'][i].get('ev_trim', 0.0)
+            evs[i] = math.log2(key / max(med, 1e-6)) + (a.trim[i] if a.trim else 0.0)
             metered[F.NAMES[i]] = {'median': round(med, 4), 'key': key, 'ev': round(evs[i], 2)}
         w = Wt[..., i] * cov
         acc += img[..., :3] * (2.0 ** evs[i]) * w[..., None]
@@ -154,6 +163,24 @@ def main():
     pano = bilinear(out, YY, XX)
     save(bpy, pano, os.path.join(a.dir, 'pano.png'), a.look, a.exposure)
     print('pano', pw, ph)
+
+    # views through a rectilinear lens (a real lens, any aim): --view NAME:YAW:PITCH:HFOV:W:H, e.g. the phone frame
+    for v in a.view or []:
+        name, yaw, pitch, hfov, vw, vh = v.split(':')
+        yaw, pitch, hfov, vw, vh = float(yaw), float(pitch), float(hfov), int(vw), int(vh)
+        f = (vw / 2) / math.tan(math.radians(hfov) / 2)
+        X, Y = np.meshgrid(np.arange(vw) + 0.5 - vw / 2, -(np.arange(vh) + 0.5 - vh / 2))
+        # camera frame: forward along azimuth yaw, tilted by pitch; x right, y up
+        p_ = math.radians(pitch)
+        dz = Y * math.cos(p_) + f * math.sin(p_)
+        dfw = f * math.cos(p_) - Y * math.sin(p_)
+        el = np.degrees(np.arctan2(dz, np.hypot(dfw, X)))
+        azv = (yaw + np.degrees(np.arctan2(X, dfw))) % 360.0
+        lo = ((azv - off) * s + 180.0) % 360.0 - 180.0
+        xx = (lo + 180.0) / 360.0 * W - 0.5
+        yy = (lat1 - el) / (lat1 - lat0) * H - 0.5
+        save(bpy, bilinear(out, yy, xx), os.path.join(a.dir, f'view-{name}.png'), a.look, a.exposure)
+        print('view', name, vw, vh)
 
     # the little planet: stereographic from the nadir, the horizon at radius 0.5 x zoom of the half-width
     if a.planet:

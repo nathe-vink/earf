@@ -22,20 +22,20 @@ sys.path.insert(0, os.path.join(ROOT, 'studio', 'engine'))
 import numpy as np                                        # noqa: E402
 import field as F                                         # noqa: E402
 
-CAM_Z = 1.55                                              # the lens, metres over the centre's dome
+CAM_Z = 1.0                                              # the lens, metres over the centre's dome
 TROPOS = os.path.join(HERE, 'assets', 'tropos-current.blend')
 
 # Each biome's hour. sun: elevation and azimuth offset from the sector's centre line (deg); sky: air, aerosols
 # (dust), ozone; strength scales the sky; exposure is the photographer's for that slice (EV).
 HOURS = [
-    dict(name='Ice',    hour='dawn',            sun_el=-1.5, sun_off=-16, air=1.0, dust=1.0, ozone=1.0, strength=1.0, ev=2.6, key=0.15),
-    dict(name='Poison', hour='early morning',   sun_el=14.0, sun_off=16,  air=1.0, dust=2.0, ozone=1.0, strength=1.0, ev=0.0, key=0.1),
-    dict(name='Fog',    hour='morning',         sun_el=24.0, sun_off=-14, air=1.0, dust=1.2, ozone=1.0, strength=1.0, ev=-0.9, key=0.2),
-    dict(name='Haze',   hour='late afternoon',  sun_el=8.0, sun_off=15,  air=1.2, dust=3.0, ozone=1.0, strength=1.0, ev=-0.6, key=0.16),
-    dict(name='Dust',   hour='golden hour',     sun_el=5.0,  sun_off=-15, air=1.0, dust=2.5, ozone=1.0, strength=1.0, ev=-0.1, key=0.16),
-    dict(name='Acid',   hour='sunset, in rain', sun_el=1.2,  sun_off=17,  air=1.6, dust=6.0, ozone=1.0, strength=0.6, ev=1.2, key=0.07),
-    dict(name='Ember',  hour='blue hour',       sun_el=-4.5, sun_off=-15, air=1.0, dust=1.0, ozone=1.6, strength=1.0, ev=3.6, key=0.045),
-    dict(name='Smoke',  hour='night',           sun_el=-14., sun_off=15,  air=1.0, dust=1.0, ozone=1.0, strength=1.0, ev=6.0, key=0.035),
+    dict(name='Ice', hdri='qwantani_dawn_puresky',    hour='dawn',            sun_el=-1.5, sun_off=-16, air=1.0, dust=1.0, ozone=1.0, strength=1.0, ev=2.6, key=0.15),
+    dict(name='Poison', hdri='qwantani_morning_puresky', hour='early morning',   sun_el=14.0, sun_off=16,  air=1.0, dust=2.0, ozone=1.0, strength=1.0, ev=0.0, key=0.1),
+    dict(name='Fog', hdri='kloofendal_misty_morning_puresky',    hour='morning',         sun_el=24.0, sun_off=-14, air=1.0, dust=1.2, ozone=1.0, strength=1.0, ev=-0.9, key=0.2),
+    dict(name='Haze', hdri='qwantani_late_afternoon_puresky',   hour='late afternoon',  sun_el=8.0, sun_off=15,  air=1.2, dust=3.0, ozone=1.0, strength=1.0, ev=-0.6, key=0.16),
+    dict(name='Dust', hdri='qwantani_sunset_puresky',   hour='golden hour',     sun_el=5.0,  sun_off=-15, air=1.0, dust=2.5, ozone=1.0, strength=1.0, ev=-0.1, key=0.16),
+    dict(name='Acid', hdri='kloofendal_overcast_puresky',   hour='sunset, in rain', sun_el=1.2,  sun_off=17,  air=1.6, dust=6.0, ozone=1.0, strength=0.6, ev=1.2, key=0.07),
+    dict(name='Ember', hdri='qwantani_dusk_2_puresky',  hour='blue hour',       sun_el=-4.5, sun_off=-15, air=1.0, dust=1.0, ozone=1.6, strength=1.0, ev=3.6, key=0.045),
+    dict(name='Smoke', hdri='qwantani_night_puresky',  hour='night',           sun_el=-14., sun_off=15,  air=1.0, dust=1.0, ozone=1.0, strength=1.0, ev=6.0, key=0.035),
 ]
 TINT = {n: n for n in F.NAMES}                            # each biome's Tropos is its own tint
 
@@ -265,7 +265,7 @@ def biome_bsdf(bpy, T, i):
             hot = T.math('POWER', crack, 1.5)
             bb = T.n('ShaderNodeBlackbody'); bb.inputs[0].default_value = 1350.0
             T.l(bb.outputs[0], b.inputs['Emission Color'])
-            T.l(T.math('MULTIPLY', hot, 9.0), b.inputs['Emission Strength'])
+            T.l(T.math('MULTIPLY', hot, 6.0), b.inputs['Emission Strength'])
     elif name == 'Smoke':
         col, rough, nor, h = pbr_layer(bpy, T, 'asphalt_02', 3.0, value=0.8)
         T.l(col, b.inputs['Base Color']); T.l(rough, b.inputs['Roughness']); T.l(nor, b.inputs['Normal'])
@@ -436,8 +436,8 @@ def city(bpy, rng):
     T.l(T.mix(0.8, 0.08, inwin, kind='FLOAT'), b.inputs['Roughness'])
     T.l(b.outputs[0], out.inputs['Surface'])
     objs = []
-    pts = rng_points(rng, 40, 55.0, 180.0, 7, minsep=18.0, spread=0.8)
-    pts += rng_points(rng, 140, 180.0, 1200.0, 7, minsep=40.0, spread=0.8)
+    pts = rng_points(rng, 30, 110.0, 260.0, 7, minsep=22.0, spread=0.8)
+    pts += rng_points(rng, 150, 260.0, 1500.0, 7, minsep=40.0, spread=0.8)
     for k, (x, y) in enumerate(pts):
         r = math.hypot(x, y)
         w_ = rng.uniform(10, 30) * (1 + r / 600); dpt = rng.uniform(10, 26) * (1 + r / 600)
@@ -490,13 +490,13 @@ def asset_instances(bpy, aid, pts, scale=(0.8, 1.2), rng=None, z_off=0.0, rot=Tr
 def flora(bpy, rng):
     objs = []
     objs += asset_instances(bpy, 'fir_tree_01', rng_points(rng, 40, 9.0, 140.0, 0, minsep=4.0), (0.9, 1.6), rng)
-    objs += asset_instances(bpy, 'fern_02', rng_points(rng, 70, 1.2, 14.0, 1, minsep=0.8, avoid_speaker=0.9), (0.9, 1.6), rng)
-    objs += asset_instances(bpy, 'island_tree_01', rng_points(rng, 14, 25.0, 300.0, 3, minsep=20.0), (0.7, 1.1), rng)
-    objs += asset_instances(bpy, 'didelta_spinosa', rng_points(rng, 25, 4.0, 60.0, 4, minsep=3.0), (0.7, 1.3), rng)
+    objs += asset_instances(bpy, 'fern_02', rng_points(rng, 70, 2.2, 14.0, 1, minsep=0.8, avoid_speaker=0.9, spread=0.85), (0.9, 1.6), rng)
+    objs += asset_instances(bpy, 'island_tree_01', rng_points(rng, 14, 70.0, 300.0, 3, minsep=25.0), (0.7, 1.1), rng)
+    objs += asset_instances(bpy, 'didelta_spinosa', rng_points(rng, 14, 4.0, 22.0, 4, minsep=3.0), (0.6, 1.3), rng)
     objs += asset_instances(bpy, 'namaqualand_boulder_02', rng_points(rng, 10, 6.0, 80.0, 4, minsep=6.0), (0.6, 1.4), rng)
     objs += asset_instances(bpy, 'rock_07', rng_points(rng, 10, 5.0, 22.0, 2, minsep=4.0), (0.8, 1.6), rng)
     objs += asset_instances(bpy, 'grass_medium_01', rng_points(rng, 260, 1.0, 22.0, 2, minsep=0.35, avoid_speaker=0.6), (0.8, 1.3), rng)
-    objs += asset_instances(bpy, 'grass_medium_01', rng_points(rng, 200, 1.0, 18.0, 3, minsep=0.4, avoid_speaker=0.6), (0.8, 1.3), rng)
+    objs += asset_instances(bpy, 'grass_medium_01', rng_points(rng, 200, 1.0, 14.0, 3, minsep=0.4, avoid_speaker=0.6), (0.6, 1.4), rng)
     return objs
 
 
@@ -585,13 +585,13 @@ def plume(bpy):
     ob.scale = (900, 900, 1300); ob.location = (cx, cy, top - 30 + 650)
     ob['volume'] = True
     # the vent's glow, under its plume
-    ld = bpy.data.lights.new('vent', 'POINT'); ld.energy = 3e6; ld.shadow_soft_size = 60.0; ld.color = lin('#FF6A22')
+    ld = bpy.data.lights.new('vent', 'POINT'); ld.energy = 6e5; ld.shadow_soft_size = 80.0; ld.color = lin('#FF6A22')
     lo = bpy.data.objects.new('vent', ld); bpy.context.scene.collection.objects.link(lo); lo.location = (cx, cy, top + 25)
     return ob
 
 
 # --- the speakers --------------------------------------------------------------------------------------------------
-def speakers(bpy, path=TROPOS, turn=(12, -14, 16, -12, 14, -16, 12, -14)):
+def speakers(bpy, path=TROPOS, turn=(18, -8, 22, -14, 6, -20, 12, -4)):
     """Link each tint's collection from the Tropos .blend and stand an instance of it on its spot, facing the camera
     and turned a little, its feet a few millimetres into the ground."""
     with bpy.data.libraries.load(path, link=True) as (src, dst):
@@ -610,6 +610,51 @@ def speakers(bpy, path=TROPOS, turn=(12, -14, 16, -12, 14, -16, 12, -14)):
 
 
 # --- sky and camera ----------------------------------------------------------------------------------------------------
+def hdri_rotation(aid, target_az):
+    """The rotation (deg) that puts a photographed sky's sun at world azimuth target_az (clockwise from +y); the
+    engine's azimuth is measured from -y, so ours is 180 minus it."""
+    import assets
+    a0 = 180.0 - assets.hdri_sun(aid, 0.0)['azimuth_deg']
+    a1 = 180.0 - assets.hdri_sun(aid, 10.0)['azimuth_deg']
+    sgn = 1.0 if ((a1 - a0 + 180) % 360 - 180) > 0 else -1.0
+    return ((target_az - a0) * sgn) % 360.0
+
+
+def set_hour_hdri(bpy, i, world=None):
+    """Biome i's hour as a photographed sky (Poly Haven, mostly one place through one day: Qwantani), turned so its
+    sun stands in the biome's sector, beside and behind its speaker."""
+    import assets
+    h = HOURS[i]
+    w = world or bpy.data.worlds.new('sky')
+    for im in list(bpy.data.images):
+        if im.get('hour_sky'):
+            bpy.data.images.remove(im)
+    w.use_nodes = True
+    nt = w.node_tree; nt.nodes.clear(); T = NT(nt)
+    out = T.n('ShaderNodeOutputWorld')
+    env = T.n('ShaderNodeTexEnvironment')
+    env.image = bpy.data.images.load(os.path.abspath(assets.hdri(h['hdri'], '4k')))
+    env.image['hour_sky'] = True
+    tc = T.n('ShaderNodeTexCoord'); mp = T.n('ShaderNodeMapping')
+    rot = hdri_rotation(h['hdri'], F.centre_az(i) + h['sun_off'])
+    mp.inputs['Rotation'].default_value = (0.0, 0.0, math.radians(rot))
+    T.l(tc.outputs['Generated'], mp.inputs['Vector']); T.l(mp.outputs['Vector'], env.inputs['Vector'])
+    bg = T.n('ShaderNodeBackground'); T.l(env.outputs['Color'], bg.inputs['Color'])
+    bg.inputs['Strength'].default_value = h.get('sky_strength', 1.0)
+    if h['name'] == 'Smoke':
+        grad = T.n('ShaderNodeTexCoord'); sep = T.n('ShaderNodeSeparateXYZ'); T.l(grad.outputs['Generated'], sep.inputs[0])
+        up = T.math('POWER', T.math('SUBTRACT', 1.0, T.math('MAXIMUM', sep.outputs['Z'], 0.0), clamp=True), 8.0)
+        glow = T.mix(lin('#000000'), lin('#8A5530'), up)
+        add = T.n('ShaderNodeBackground'); T.l(glow, add.inputs['Color']); add.inputs['Strength'].default_value = 0.02
+        ad = T.n('ShaderNodeAddShader'); T.l(bg.outputs[0], ad.inputs[0]); T.l(add.outputs[0], ad.inputs[1])
+        T.l(ad.outputs[0], out.inputs['Surface'])
+    else:
+        T.l(bg.outputs[0], out.inputs['Surface'])
+    bpy.context.scene.world = w
+    print(f"{h['name']}: {h['hdri']} turned {rot:.1f}", flush=True)
+    return w
+
+
 def set_hour(bpy, i, world=None):
     """The world for biome i's hour: the multiple-scattering sky with its sun, from the sector the biome holds."""
     h = HOURS[i]
@@ -721,6 +766,31 @@ def position_pass(bpy, out_path, W, H, frac):
     cy.samples, cy.use_denoising, cy.max_bounces, cy.use_adaptive_sampling = keep
 
 
+BOUNCE = {'Ice': (90, '#DCE6FF'), 'Poison': (70, '#FFF3DC'), 'Fog': (60, '#FFFFFF'), 'Haze': (80, '#FFE2C2'),
+          'Dust': (70, '#FFD9B0'), 'Acid': (40, '#E8E4D0'), 'Ember': (18, '#FFB48A'), 'Smoke': (70, '#FFC890')}
+
+
+def bounces(bpy):
+    """On location a photographer brings a reflector: for each speaker, a soft panel 1.3 m in front of it on the
+    camera's side, low, catching its hour's sky (only its own hour renders it). Not seen by the camera."""
+    out = []
+    for i, nm in enumerate(F.NAMES):
+        x, y = F.speaker_spot(i)
+        a = math.radians(F.centre_az(i) + (-25 if i % 2 else 25))
+        px, py = x - 1.4 * math.sin(a), y - 1.4 * math.cos(a)
+        w, col = BOUNCE[nm]
+        ld = bpy.data.lights.new(f'bounce.{nm}', 'AREA'); ld.shape = 'RECTANGLE'; ld.size = 1.0; ld.size_y = 1.2
+        ld.energy = w; ld.color = lin(col)
+        lo = bpy.data.objects.new(f'bounce.{nm}', ld); bpy.context.scene.collection.objects.link(lo)
+        lo.location = (px, py, ground_z(px, py) + 0.7)
+        from mathutils import Vector
+        d = Vector((x, y, ground_z(x, y) + 0.6)) - lo.location
+        lo.rotation_euler = d.to_track_quat('-Z', 'Y').to_euler()
+        lo.visible_camera = False; lo.visible_glossy = False
+        out.append(lo)
+    return out
+
+
 def knob(bpy):
     """A low granite knob under the camera, the one ground all eight share (the little planet's centre)."""
     import bmesh
@@ -734,9 +804,9 @@ def knob(bpy):
     for v in bm.verts:
         x, y, z = v.co
         a = math.atan2(y, x)
-        rr = 1.15 * (1 + 0.12 * math.sin(3 * a + 1) + 0.07 * math.sin(7 * a + 2) + 0.04 * math.sin(13 * a))
+        rr = 0.8 * (1 + 0.12 * math.sin(3 * a + 1) + 0.07 * math.sin(7 * a + 2) + 0.04 * math.sin(13 * a))
         v.co.x, v.co.y = x * rr, y * rr
-        v.co.z = (z * 0.16 if z > 0 else z * 0.4) + 0.0
+        v.co.z = (z * 0.12 if z > 0 else z * 0.3) + 0.0
     me = bpy.data.meshes.new('knob'); bm.to_mesh(me); bm.free(); me.materials.append(m)
     me.polygons.foreach_set('use_smooth', [True] * len(me.polygons))
     ob = bpy.data.objects.new('knob', me); bpy.context.scene.collection.objects.link(ob)
@@ -777,6 +847,7 @@ def main():
     if not os.environ.get("NO_AIR"):
         air(bpy); plume(bpy)
     knob(bpy)
+    bl = bounces(bpy)
     if not os.environ.get('NO_SPK'):
         speakers(bpy, a.tropos)
     W = a.width; H = int(round(W * (a.lat[1] - a.lat[0]) / 360.0))
@@ -798,7 +869,9 @@ def main():
     world = None
     for i in (a.only if a.only is not None else range(F.N)):
         t1 = time.time()
-        world = set_hour(bpy, i, world)
+        world = (set_hour if os.environ.get('PHYSICAL_SKY') else set_hour_hdri)(bpy, i, world)
+        for k_, lo in enumerate(bl):
+            lo.hide_render = k_ != i
         sc.view_settings.exposure = 0.0
         # the slice: the camera turned to the sector, a border round the image's centre
         aim(cam, F.centre_az(i))

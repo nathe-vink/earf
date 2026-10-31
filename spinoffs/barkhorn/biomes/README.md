@@ -43,3 +43,43 @@ Run:
 ## Rounds
 
 (below, newest last)
+
+### Pass 1 (proofs 1 to 3, 1440 px equirect, 16 samples)
+
+- Proof 1 ran out of the container's memory (14 GB). The fir scan alone is 7 M polygons, and Cycles copies each tint's
+  speaker (its materials sit on the objects). The fixes: `flora_lib.py` decimates the scans once into a library, and
+  the world's Tropos library leaves out the back's plate, prints and screws, which never face the camera. It also
+  thins the screws, lining webs and driver internals; the waveguide, cabinet and horn keep every polygon. The peak is
+  now 8.2 GB.
+- Proof 2: each slice is metered (its own ground's median to the hour's key, night darkest). There is a granite knob
+  under the camera, the Ember cracks are narrower and sparser, and the city starts further back.
+- Proof 3: redwood crowns (the fir scan stretched to a spire), Haze's sun at 8 degrees, warmer sand, wider joins.
+
+**Blind critic, round 1** (fresh agents, `critic/PROMPT-promo.md`, the image and a card only):
+- **Panorama: 3.0, iterate.** The joins are hard vertical cuts in the sky and on the ground. The 16-sample denoise is
+  mush. The speakers float, and the night and dark tints vanish (Smoke's median luminance is 0.6). The fog, haze and
+  rain don't read. A shrub row floats on the desert horizon, and the city is boxes with tiled windows. The critic
+  prescribed:
+  - joins of 6 to 8 degrees, shaped as geography;
+  - a motivated light per speaker;
+  - 512 samples;
+  - contact shadows;
+  - the weather present;
+  - no repeats;
+  - the lava's exposure brought down;
+  - the speakers placed by hand.
+
+  Estimated score if fixed: 6.5.
+- **Planet: 3.0, rethink.** Eight speakers round a small planet makes each a 100 px thumbnail seen from above. The
+  knob is split dark and light by the slices. The snow reads as plaster, and the sky ring clips. Estimated score if
+  fixed: 6.5, capped near 6 to 7 by the projection itself ("a gimmick, not a photograph").
+
+What was done (proof 5):
+- A reflector per speaker, rendered only in its own hour (`BOUNCE`).
+- Joins of 21 degrees on the ground and 34 in the sky, and the knob's hours blended over 40 degrees.
+- The city from 110 m back.
+- The desert shrubs kept within 22 m.
+- The ferns kept off the snow.
+- The cracks' emission cut a third.
+- Each speaker nudged by hand (`field.JITTER`) and turned 4 to 22 degrees.
+- 32 samples at proof size.
