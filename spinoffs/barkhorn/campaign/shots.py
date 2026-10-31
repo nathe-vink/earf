@@ -246,8 +246,10 @@ def _macro(design):
     s['title'] += ', macro'
     s['size'] = [1600, 1600]
     if design == 'strata':          # the caldera and the woofer, from the front right, low
-        s['camera'] = {'position': [0.62, -1.05, 0.58], 'target': [0.0, -0.02, 0.47], 'lens_mm': 85.0, 'level': False,
-                       'fstop': 5.6, 'focus': [0.12, -0.03, 0.47]}
+        # (its first proof, from the front right, showed the woofer and only a sliver of the steps: from further round,
+        # so the caldera's terraces carry the frame)
+        s['camera'] = {'position': [0.92, -0.78, 0.6], 'target': [0.02, -0.02, 0.47], 'lens_mm': 85.0, 'level': False,
+                       'fstop': 6.3, 'focus': [0.2, -0.02, 0.47]}
     else:                           # the horn's terraces, from the front right, a little above
         s['camera'] = {'position': [0.75, -1.2, 1.32], 'target': [0.05, 0.05, 1.07], 'lens_mm': 85.0, 'level': False,
                        'fstop': 5.6, 'focus': [0.2, -0.05, 1.07]}
