@@ -241,6 +241,32 @@ The critics' "cooler" lists all ask for an arm that is EARF's own. This is drawi
 Sources: Rega's OEM work (Wikipedia, Rega Research); Ortofon's OEM arms (The Absolute Sound, AS-212R review); SME's exit
 (Stereonet, 2019); Jelco's closure (Stereonet forum, HiFi News "A call to arms"); Origin Live's OEM supply (Stereophile).
 
+## 9. Strata Float v2 (`mantle_strata_v2.py`, `out-strata-v2/`, $3,784)
+
+The coordinator's blind head-to-head put Strata Float over Outcrop: 3-1, mean 6.4 to 5.5, distinctiveness 6.9 to
+3.9. Its idea is "the floating glass turntable". Every critic named the same five faults, and v2 fixes them; v1 is
+kept as it was.
+
+| fault (the critics) | v2 |
+|---|---|
+| supports on two grids: inboard posts, corner feet | **one grid**: the four feet stand directly under the four posts |
+| two tiers the same size ("stacked trays", "a display stand") | **the base is subordinate**: 35 mm in from the deck all round and 9.5 thick (was 15.7), so the deck overhangs it and floats |
+| double-sheet decks and seams | **each tier one slab**: the deck is two clear 12.7 sheets cemented flush (one bond line, mid-edge, no steps, no rings); the base is one sheet. For color, each sheet is the custom pour |
+| screws seen through the clear posts | **none**: each post is bonded at both ends; each foot's M8 insert sits in a blind hole drilled up through the base, 4.5 mm into the post's foot |
+| a bold white mark on the top | **a small etched mark** (EARF, 18 wide) in the deck's front edge, low in its lower sheet |
+
+The printed band over the light is gone too. The strip sits in a black anodized U-channel in the base's slot, and the
+channel's closed back hides it from above. The posts moved 15 mm inboard and the slot 10 mm outboard, so neither
+crosses the other (0 clashes).
+
+**A product note on dust:** two clear sheets 40 mm apart show what settles between them. The gap is open on four sides
+and is wiped through with a soft brush. The phono stage there sits on felt runners and lifts out.
+
+| frame | what |
+|---|---|
+| `strata-v2-ice-custom.png` | studio, the same rig as `strata-ice-custom.png`, custom-poured Ice |
+| `strata-v2-dusk-ember-custom.png` | dusk, custom-poured Ember, the base's loop lit |
+
 ## Open questions for the owner
 
 1. **A or B,** or B's cover on A's float.

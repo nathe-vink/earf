@@ -1,0 +1,22 @@
+{
+ "product": "mantle-strata-v2",
+ "title": "Mantle: Strata Float v2 (proposal A)",
+ "parts": 47,
+ "seconds": 29,
+ "sheets": {
+  "trucast-clear-12.7": 1,
+  "trucast-clear-9.5": 1,
+  "aluminium-3": 1,
+  "trucast-tint-3": 1
+ },
+ "budget_usd": {
+  "cut": 105,
+  "buy": 2920,
+  "lathe": 712,
+  "cnc-mill": 47
+ },
+ "options_usd": {},
+ "checks_ok": true,
+ "drawings": "spinoffs/barkhorn/companions/mantle-r48/out-strata-v2/drawings/mantle-strata-v2-sheets.pdf",
+ "render": "spinoffs/barkhorn/companions/mantle-r48/out-strata-v2/render/mantle-strata-v2.glb"
+}

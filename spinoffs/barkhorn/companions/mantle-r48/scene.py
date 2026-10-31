@@ -716,7 +716,7 @@ def build(args):
         em = nt_.nodes.new('ShaderNodeEmission'); em.inputs['Color'].default_value = (1.0, 0.62, 0.30, 1); em.inputs['Strength'].default_value = args.strip
         nt_.links.new(em.outputs['Emission'], out_.inputs['Surface'])
         finish.update({'plinth-L1-stack': 'plinth', 'base-L1-stack': 'base', 'studs': 'steel', 'phono-pads': 'felt', 'hinges': 'arm',
-                       'hinge-blocks': 'lid', 'led-strip': 'strip'})
+                       'hinge-blocks': 'lid', 'led-strip': 'strip', 'led-channel': 'alu-black'})
         for k in range(1, 5):
             finish[f'post-{k}'] = 'post'
         for k in ('top', 'front', 'back', 'left', 'right'):
