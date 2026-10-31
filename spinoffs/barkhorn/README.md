@@ -142,6 +142,13 @@ brand"). Not live: main needs the owner's yes.
   and the horn-choice renders on `r33-speaker-horn`, brought here under the same paths; no supplier names or prices).
   Off, nothing of it is in `site/` (its pictures are removed at build); on, it leads the journal and the home band, its
   `/s/` card an Article.
+- **American English** (the owner, 2026-10-31: "it's color im not british"): every word a visitor reads, on the
+  page, in the data, the preview cards and the press kit: color, gray, center, aluminum, mold, anodized, microfiber,
+  neighbors, millimeters, authorized, polymerizing, burned, spilled; Inquire and Inquiries for Enquire and Enquiries;
+  dates as "October 31, 2026". The addresses follow (`#colors`, `#color-<name>`, `#journal-eight-colors`,
+  `/s/color-<name>`), the British ones still answering (an alias in the page, redirects in `vercel.json`). Code
+  names keep their spelling (`.colour-head`, `renderColour`, the data's `colours` keys), and so does the fonts'
+  licence text (third-party, verbatim).
 - **Tropos's CAD kept off the site:** `viewer/dist` (git-ignored) goes into `site/3d` only while `VIEW3D` is on.
 - **For the owner's deploy decision:** `launch/r47-what-changes.pdf` (11 pages), before and after at 1440 and 390 px,
   page by page, on the final branch; Fog's faint horn noted (as in its still); the link previews.
