@@ -117,3 +117,33 @@ Proof 6 has these changes:
 
 **Option C**, from the critics: rectilinear "seam" frames from the same world, two neighbors and their two speakers
 through a real lens (`composite.py --view`).
+
+### The final panorama (2026-10-31, 4800 x 888, 48 samples, 86 minutes for eight slices)
+
+`renders/2026-10-31/barkhorn/biomes/planet-earf-pano-master-4800.jpg` is the master. The web versions are
+`-2400.jpg` and `-1200.jpg`. The PNG was 5.4 MB, so the master is a JPEG.
+
+- **Blind critic, round 3: 3.5, rethink.** The critic finds "the idea of a single day running across the eight
+  worlds clear and charming", but says the image reads as a game-engine level:
+  - low-detail terrain, and a visible tile on the mesa;
+  - a hard redwood wall;
+  - the midday sky clipped, with the sun mid-frame;
+  - the joins read as 2D cross-fades;
+  - Smoke still crushed at 2400 px;
+  - box towers.
+
+  Estimated score if fixed: 6.5.
+- **Blind duel against the live Fog headland** (`site/img/ice-habitat.jpg`): the headland 6.5, the panorama 3.0. The
+  judge: "a contact sheet, not a composed campaign frame"; the speakers are about 100 px wide in a 444 px strip.
+- **The gate (7.0, or beating the best habitat) is not met.** Three rounds have been run on this look, which is the
+  protocol's limit.
+
+**What it would take to reach 6.5 to 7**, from all five critiques:
+- A physical divider at each seam, with the composite blend hidden behind it (a ridge, a tree line, a fog bank's top,
+  a road). Today the blends are by azimuth.
+- Scan-quality ground and rock at speaker distance.
+- One sky arc without a clipped midday.
+- A real low-rise city.
+- 256 samples or more at the master.
+
+At this container's speed that is roughly a day of work and rendering, not an evening.
