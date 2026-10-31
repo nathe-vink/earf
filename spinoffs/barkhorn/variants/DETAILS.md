@@ -37,5 +37,5 @@ not the object.
 | polished and saw-cut edges | one material | edges as their own material: polished (rough 0.02) or milled (rough 0.25 with a fine bevel) |
 | bond lines | a 0.2 mm air gap | a 0.5 mm cement layer, index 1.48, faint haze |
 | wear | none | a very faint fingerprint and micro-scratch roughness map on top faces, at grazing light only |
-| caustics | off | Cycles shadow caustics (MNEE) on the floor under the tint |
+| caustics | colored shadows already (the acrylic tints shadow rays through its volume) | no MNEE: Cycles' MNEE ignores volume absorption and throws a white caustic (the lamps lane). Keep the tinted shadow rays, and path-traced refractive caustics only where a pool of light must show |
 | scale cues | few | a hand, a record sleeve, a chair: one per scene |
