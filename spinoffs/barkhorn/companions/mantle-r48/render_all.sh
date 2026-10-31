@@ -4,7 +4,7 @@
 cd "$(dirname "$0")"
 OUT=../../../../renders/2026-10-31/barkhorn/mantle-r48
 mkdir -p $OUT
-COMMON="--scale 0.75 --samples 128 --exposure -2.0 --paper #7A7570"
+COMMON="--scale 0.75 --samples 80 --exposure -2.0 --paper #7A7570"
 for n in ${@:-core-hero core-closed core-detail core-use strata-hero}; do
   case $n in
     core-hero)   python3.11 scene.py hero   --model out-core   --out $OUT/$n.png $COMMON ;;
