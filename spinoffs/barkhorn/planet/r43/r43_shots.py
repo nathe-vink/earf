@@ -26,8 +26,12 @@ H = Q.CEIL
 VIEWS = {
     # p0 look (seen before any critic): the table filled the foreground and the right wall's shelves read empty, so
     # the camera moved to the left of the door, looking across the room to the right wall, the bar and the drapes
-    'shop': dict(camera={'position': [0.50, 5.30, 1.55], 'target': [9.0, 1.9, 1.25], 'lens_mm': 24, 'level': True,
-                         'fstop': 4.0, 'focus': [3.5, 2.0, 1.1]}, exposure=4.2),
+    # p2 (p1 judged 4.5/4.5, converged: the bare foreground floor the brightest thing, lit by the window pair's spill;
+    # the Tropos small, dim and unlit; the felt a flat black wall; no sign of life; 24 mm cavernous): closer at 35 mm,
+    # the table leading to the Tropos, which gets its own spot and a rim; the window spill and street down; props
+    'shop': dict(camera={'position': [2.2, 4.6, 1.45], 'target': [7.5, 1.3, 1.0], 'lens_mm': 35, 'level': True,
+                         'fstop': 2.8, 'focus': [5.9, 0.75, 0.9]}, exposure=4.2, haze=0.0012,
+                 lights={'win': {'power_w': 10.0}, 'street': {'irradiance': 0.6}}),
     # p0 look: the opposite building's windows and lit shop mirrored in the glass as white squares and a blue band, the
     # sidewalk hot, a mullion down the middle: the facade dimmed, the glass a softer reflector, one pane, the street lamp down
     'window': dict(camera={'position': [-5.6, 1.9, 1.50], 'target': [2.4, 3.1, 1.45], 'lens_mm': 35, 'level': True,
@@ -58,7 +62,15 @@ def scene():
     cards = [(x, SHELF[k], 'right') for x in (1.3, 2.5, 3.7, 4.9) for k in (1, 2)] + \
             [(x, SHELF[2], 'left') for x in (2.0, 3.4, 4.8)]
     props = [{'kind': 'kit', 'shape': 'ext', 'path': KIT43, 'fn': 'popup', 'cards': cards, 'led': 3.0,
-              'felt': '#1B1C1E', 'ceiling': '#2E2C2A'}]
+              'felt': '#26272A', 'ceiling': '#2E2C2A', 'floor_tint': '#4E4943', 'floor_coat': 0.45}]
+    # signs of life (p1's critics): a round on the bar, a glass on two ledges
+    by = (Q.BAR['y0'] + Q.BAR['y1']) / 2
+    props.append({'kind': 'kit', 'shape': 'ext', 'path': 'spinoffs/barkhorn/planet/r39/kit39.py', 'fn': 'life',
+                  'rocks': [[7.30, by - 0.10, 1.07, 0.03, 1, '#B8641C'], [8.45, by + 0.05, 1.07, 0.02, 2, '#B8641C'],
+                            [Q.STAND[0][0] - 0.12, Q.STAND[0][1] + 0.10, 1.065, 0.025, 1, '#B8641C']],
+                  'coupes': [[7.85, by - 0.05, 1.07, 0.6, '#B8462A'], [Q.STAND[2][0] - 0.10, Q.STAND[2][1] + 0.08, 1.065, 0.4, '#E8DDB8']],
+                  'napkins': [[7.30, by - 0.10, 1.07, 8.0], [7.85, by - 0.05, 1.07, -12.0]],
+                  'votives': [], 'matchbooks': [[8.1, by + 0.1, 1.07, 20.0]], 'coats': []})
     # the Cores: eight tints on the right wall's shelves, grouped, two unlit; two on the shop table; the Smoke ones on
     # the standing ledges
     # p0 look: the shelves read empty, so the line runs along them: all eight tints on the third shelf in two groups,
@@ -79,7 +91,7 @@ def scene():
     domes += [{'position': [7.5, (Q.BAR['y0'] + Q.BAR['y1']) / 2, 2.0], 'flavour': 'smoke'},
               {'position': [8.5, (Q.BAR['y0'] + Q.BAR['y1']) / 2, 2.0], 'flavour': 'smoke'}]
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_moon', 'fn': 'dome', 'ceiling': H, 'lamp_w': 4.0,
-                  'lamp_k': 2700, 'shade_glow': 0.02, 'noshadow': 'shell|liner|skin', 'spots': domes})
+                  'lamp_k': 2700, 'shade_glow': 0.012, 'noshadow': 'shell|liner|skin', 'spots': domes})
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'fan', 'spots': [[4.15, 3.55, 0.90]],
                   'flavours': ['ember', 'ice', 'acid', 'fog', 'poison'], 'heading': 20.0})
     props.append({'kind': 'kit', 'shape': 'ext', 'module': 'earf_coin', 'fn': 'bowl', 'spots': [[2.90, 3.95, 0.90]],
@@ -105,13 +117,19 @@ def scene():
         lights[f'tl{i}'] = spot([x, W - 1.30, zc], [x, W - 0.20, 1.30], 32.0, 34.0)
     for i, dy in enumerate((-0.48, 0.48)):                           # the window pair, grazed from the glass side
         lights[f'win{i}'] = spot([0.20, Pw['y'] + dy, 3.30], [0.80, Pw['y'] + dy, 0.95], 26.0, 20.0, k=2600)
-    lights['table'] = spot([3.6, 3.75, zc], [3.6, 3.75, 0.9], 14.0, 30.0)
+    lights['table'] = spot([3.6, 3.75, zc], [3.6, 3.75, 0.9], 8.0, 30.0)
+    # the shop's Tropos: a key from high in front, and a rim from behind (p1: "dim, unlit")
+    lights['shopspk'] = spot([5.0, 2.2, 3.6], [5.9, 0.75, 0.9], 40.0, 22.0)
+    lights['shopspk-rim'] = spot([6.6, 0.55, 3.0], [5.9, 0.75, 0.8], 12.0, 25.0, k=2600)
     lights['bar'] = spot([8.0, W - 1.2, zc], [8.0, W - 1.7, 1.07], 16.0, 30.0)
     for i, (x, y) in enumerate(Q.STACKS):                            # the listening pair
         lights[f'stack{i}'] = spot([11.6, y + (0.4 if y < W / 2 else -0.4), zc], [x, y, 0.95], 34.0, 18.0, k=2600)
     lights['seats'] = spot([10.9, W / 2, zc], [10.8, W / 2, 0.4], 10.0, 60.0, k=2600, blend=1.0)
     lights['drape'] = {'type': 'area', 'position': [12.9, W / 2 + 0.6, H - 0.35], 'target': [13.3, W / 2 + 0.6, 1.2],
-                       'size_m': [0.3, 4.6], 'irradiance': 0.6, 'color': 2600, 'camera': False}
+                       'size_m': [0.3, 4.6], 'irradiance': 1.6, 'color': 2600, 'camera': False}
+    # a wash grazing the front drapes from above (p1: "a flat black wall"), on the shop side
+    lights['frontfelt'] = {'type': 'area', 'position': [9.25, W / 2 + 0.8, H - 0.30], 'target': [9.70, W / 2 + 0.8, 1.0],
+                           'size_m': [0.3, 5.0], 'irradiance': 1.4, 'color': 2600, 'camera': False}
     lights['fill'] = {'type': 'area', 'position': [5.0, W / 2, H - 0.3], 'target': [5.0, W / 2, 0.0], 'size_m': [6.0, 4.0],
                       'irradiance': 0.12, 'color': 2900, 'camera': False}
     lights['street'] = {'type': 'area', 'position': [-2.4, 1.0, 6.0], 'target': [-1.5, 3.0, 0.0], 'size_m': [0.6, 0.6],
