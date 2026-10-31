@@ -17,7 +17,7 @@ def main():
     shutil.copy(img, dst)
     card = os.path.join(STAGE, f'card-{tag}.md')
     shot = os.path.splitext(img)[0] + '.shot.json'
-    subprocess.run([sys.executable, os.path.join(HERE, 'r43_card.py'), view, card, '--shot', shot,
+    subprocess.run([sys.executable, os.path.join(HERE, 'r43_ams_card.py' if view.startswith('ams-') else 'r43_card.py'), view, card, '--shot', shot,
                     '--scale', os.environ.get('CARD_SCALE', '0.5')], check=True, stdout=subprocess.DEVNULL)
     prompt = open(os.path.join(ROOT, 'critic', 'PROMPT-interiors.md')).read().split('\n---\n')[1].strip()
     msg = (f"{prompt}\n\nThe image: {dst}\nThe card (read it only in stage 2): {card}\n"
