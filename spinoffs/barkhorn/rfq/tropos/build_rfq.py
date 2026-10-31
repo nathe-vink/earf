@@ -225,7 +225,7 @@ As an option, the same horn with its outside machined smooth to `step/outside-sm
 running round it as fine rings. Please price it as the extra over the stepped horn. The horn's small parts (pod, cap,
 pads, saddle) are from the same sheet.
 
-The pair is for a debut on 21 January, so the dates matter as much as the price: we would order in mid-November."""),
+The pair is for a debut on 19 January, so the dates matter as much as the price: we would order in mid-November."""),
 }
 
 Q_BASE = {
