@@ -12,10 +12,10 @@ off-cuts are measured.
 
 | file | what |
 |---|---|
-| `compare-ember.png`, `compare-smoke.png` | the three routes side by side (proofs) |
-| `choice-{formed,stepped,smooth}-{ember,smoke}.png` | each route at full size (1600 x 1600, 128 samples) |
+| `compare-ember.png`, `compare-smoke.png` | the three routes side by side, from the finals |
+| `choice-{formed,stepped,smooth}-{ember,smoke}.png` | each route: the stepped two at 1600 x 1600 and 128 samples, the rest at 1200 x 1200 and 96 (the 2-hour render limit) |
 | `choice-terraces-ember.png` | the stepped horn's terraces close |
-| `lineup-stock.png` | left to right: Ember as on the site, Ember in stock sheet, Smoke as on the site, Smoke in stock sheet; the stock two with the stepped laminated horn |
+| `lineup-stock.png` (1800 x 1013) | left to right: Ember as on the site, Ember in stock sheet, Smoke as on the site, Smoke in stock sheet; the stock two with the stepped laminated horn |
 | `proofs/` | half size, 48 samples |
 
 Shots: `spinoffs/barkhorn/campaign/shots.py` (`horn_choice`, `lineup`). Flavours: `spinoffs/barkhorn/stock_colours.json`.
