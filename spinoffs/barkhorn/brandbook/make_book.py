@@ -35,6 +35,7 @@ def save(im, dst, width=1600, q=84):
 
 
 def main():
+    import shutil
     os.makedirs(IMG, exist_ok=True)
     for f in SITE_PICS:
         save(Image.open(os.path.join(SITE, f)), f.replace('-1200', '').replace('-1440', '').replace('-800', ''))
@@ -53,8 +54,10 @@ def main():
         im = Image.open(os.path.join(HERE, 'out', f)).convert('RGBA'); bg = Image.new('RGBA', im.size, (226, 207, 170, 255))
         save(Image.alpha_composite(bg, im), f[:-4] + '.jpg', width=700)
     for f in sorted(os.listdir(os.path.join(HERE, 'launch', 'out'))):   # the debut's paper and the one-pager
-        if f.endswith('.png'):
-            save(Image.open(os.path.join(HERE, 'launch', 'out', f)), f[:-4] + '.jpg', width=1400, q=86)
+        if f.endswith('.png') or f == 'earf-teaser-storyboard.jpg':
+            save(Image.open(os.path.join(HERE, 'launch', 'out', f)), f.rsplit('.', 1)[0] + '.jpg', width=1400, q=86)
+        elif f.startswith('earf-teaser') and f.endswith('.mp4'):
+            shutil.copy(os.path.join(HERE, 'launch', 'out', f), os.path.join(IMG, f))
     import shutil   # the motion: the site's turning globe and two of the parked idents (round 27)
     for dst, src in {'globe-turn.mp4': 'site/img/globe-turn.mp4', 'ident-coin.mp4': 'brand/earth-ident-coin-acrylic-paper.mp4',
                      'ident-rise.mp4': 'brand/earth-ident-rise-acrylic-night.mp4'}.items():

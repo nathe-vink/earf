@@ -1,0 +1,56 @@
+<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="../scenes/base.css">
+<style>
+/* the launch grid: nine 4:5 posts for the three weeks after the debut, as the profile shows them, newest first */
+body { width: 1180px; height: 1530px; background: #F4F1EC; padding: 40px; display: grid; grid-template-columns: repeat(3, 360px); gap: 10px; align-content: start }
+.head { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: end; padding-bottom: 14px }
+.head b { font-size: 28px; letter-spacing: -.02em }
+.head span { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted) }
+.post { position: relative; width: 360px; height: 450px; overflow: hidden; background: #ECE8E1 }
+.post .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover }
+.post.dark .sh { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0,0,0,.35)) }
+.post.light .sh { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(244,241,236,.75), rgba(244,241,236,0) 38%) }
+.t { position: absolute; left: 22px; right: 22px; top: 44px; font-weight: 600; font-size: 27px; line-height: 1.02; letter-spacing: -.02em }
+.lab { position: absolute; left: 22px; top: 20px; font-family: var(--mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; opacity: .85 }
+.w { position: absolute; right: 18px; bottom: 18px; height: 11px }
+.n { position: absolute; left: 22px; bottom: 16px; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; opacity: .7 }
+.stand { position: absolute; right: 16px; top: 18px; font-family: var(--mono); font-size: 8.5px; letter-spacing: .1em; text-transform: uppercase; color: #1C1A18; background: #E9B320; padding: 3px 6px }
+</style>
+<body data-w="1180" data-h="1530" data-scale="2">
+<div class="head"><b>The launch grid</b><span>Nine posts · 20 January to 7 February 2027 · newest first · captions in LAUNCH-GRID.md</span></div>
+<div class="post light"><img class="bg" src="../../site/img/hero-portrait.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#1C1A18">Tropos · the eight</span>
+  <div class="t" style="color:#1C1A18">Something in the air.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""><span class="n" style="color:#1C1A18">9</span></div>
+<div class="post dark"><img class="bg" src="../../site/img/tt-violet-dusk-1200.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#F4F1EC">Mantle · record player</span>
+  <div class="t" style="color:#F4F1EC">Floats on<br>its own light.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""><span class="n" style="color:#F4F1EC">8</span></div>
+<div class="post light"><img class="bg" src="../../site/img/macro-horn.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#1C1A18">Tropos · the horn</span>
+  <div class="t" style="color:#1C1A18">The oldest amplifier<br>is a shape.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""><span class="n" style="color:#1C1A18">7</span></div>
+<div class="post dark"><img class="bg" src="../assets/bar-listening.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#F4F1EC">The Session · [date], 8 pm</span><span class="stand">Stand-in · render</span>
+  <div class="t" style="color:#F4F1EC">One album,<br>start to finish.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""><span class="n" style="color:#F4F1EC">6</span></div>
+<div class="post light"><img class="bg" src="../../site/img/lamp-orb-800.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#1C1A18">Core · table lamp</span>
+  <div class="t" style="color:#1C1A18">Plugged in or not.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""><span class="n" style="color:#1C1A18">5</span></div>
+<div class="post dark"><img class="bg" src="../assets/bar-decks.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#F4F1EC">At the door</span><span class="stand">Stand-in · render</span>
+  <div class="t" style="color:#F4F1EC">One coin,<br>one song.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""><span class="n" style="color:#F4F1EC">4</span></div>
+<div class="post light"><img class="bg" src="../../site/img/macro-corner.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#1C1A18">Two 20 mm walls, cemented</span>
+  <div class="t" style="color:#1C1A18">Cast in colour,<br>all the way through.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-black.svg" alt=""><span class="n" style="color:#1C1A18">3</span></div>
+<div class="post dark"><img class="bg" src="../../site/img/green-habitat-portrait.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#F4F1EC">04 · Poison</span>
+  <div class="t" style="color:#F4F1EC">Bottle green.<br>Keep out of reach.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""><span class="n" style="color:#F4F1EC">2</span></div>
+<div class="post dark"><img class="bg" src="../../site/img/red-studio-1200.jpg" alt=""><div class="sh"></div>
+  <span class="lab" style="color:#F4F1EC">[Photograph from the night]</span><span class="stand">Stand-in · render</span>
+  <div class="t" style="color:#F4F1EC">It played.</div>
+  <img class="w" src="../../brand/mark/earf-wordmark-white.svg" alt=""><span class="n" style="color:#F4F1EC">1</span></div>
+</body>
