@@ -42,6 +42,8 @@ LAYOUTS = {
            'plant': [3.3, 0.6, 30.0]},
 }
 LAYOUTS['v2b'] = dict(LAYOUTS['v2'], hemi=[-1.70, -0.60, 1.32])
+# round 4 (the critic, c2 and c4): Hemisphere inboard, over the chair's arm by the table, against the plaster
+LAYOUTS['v2c'] = dict(LAYOUTS['v2'], hemi=[-1.58, -0.14, 1.32])
 LAYOUT = LAYOUTS['v1']
 SPK_X, SPK_Y = 1.22, 0.53               # each Tropos 1.22 either side of the music's centre line, 0.29 m off the wall
 SIDE_H = 0.551                          # side_table_01: 0.55 x 0.45, 0.551 tall
@@ -112,7 +114,7 @@ def lamps(p, on):
                 q['shade_glow'] = 0.25 * on
 
 
-def shot(direction, palette, layout='v1', camera=None, sun=None, rug=None):
+def shot(direction, palette, layout='v1', camera=None, sun=None, rug=None, tweak=None):
     pal = PALETTES[palette]
     Lay = LAYOUTS[layout]; G = geometry(Lay); MID = G['mid']; MANTLE = G['mantle']; HEMI = G['hemi']; CORE = G['core']
     s = copy.deepcopy(BASE)
@@ -160,6 +162,8 @@ def shot(direction, palette, layout='v1', camera=None, sun=None, rug=None):
                 q['strength'] = 1.1; q['tint'] = '#6F8BD6'
         lamps(s['set']['props'], 1.0)
         s['render'].update({'exposure': 1.4, 'white_balance_k': 4300})
+    if tweak:
+        tweak(s)
     s['anchors'] = {
         'tropos': [MID - SPK_X, SPK_Y - 0.20, 1.10],       # the left speaker's horn mouth
         'tropos_right': [MID + SPK_X, SPK_Y - 0.20, 1.10],
@@ -168,6 +172,21 @@ def shot(direction, palette, layout='v1', camera=None, sun=None, rug=None):
         'core': [CORE[0], CORE[1], CORE[2] + 0.11],
     }
     return s
+
+
+def r4(s):
+    """Round 3's critic: c1 a bounce card for the right speaker and the north fill wider; c5 the fill cooler, the
+    balance 5600 K, exposure -1.0; c8 the near-axis bounce lower and higher (its reflection in the left woofer);
+    c4 Hemisphere brighter."""
+    L = s['lights']
+    L['right_bounce'] = {'type': 'area', 'size_m': [1.6, 2.0], 'position': [3.0, -1.6, 1.3], 'target': [1.67, 0.5, 0.8],
+                         'irradiance': 0.5, 'color': '#FFF4E8', 'camera': False}
+    L['north'].update({'irradiance': 0.75, 'position': [0.8, -3.6, 2.2], 'color': '#CFDDF0'})
+    L['bounce'].update({'irradiance': 0.25, 'position': [-0.6, -3.6, 2.0]})
+    s['render'].update({'white_balance_k': 5600, 'exposure': -1.0})
+    for q in s['set']['props']:
+        if q.get('fn') == 'dome':
+            q['lamp_w'] = 6.0; q['shade_glow'] = 0.125
 
 
 JUTE = {'texture': 'hessian_230', 'tint': None, 'tint_mix': 0.0, 'value': 0.85, 'tex_scale': None, 'displace': 0.003}
@@ -189,6 +208,17 @@ R2 = {
     'r3': dict(layout='v2b', rug={'off': True}, sun={'elevation_deg': 28.0},
                camera={'position': [2.55, -4.05, 1.02], 'target': [-0.25, 0.45, 0.9], 'lens_mm': 31, 'level': True,
                        'fstop': 8.0, 'focus': [0.2, 0.4, 0.8]}),
+    'r4': dict(layout='v2c', rug={'off': True}, sun={'elevation_deg': 36.0, 'azimuth_deg': -80.0},
+               camera={'position': [2.55, -4.05, 1.02], 'target': [-0.25, 0.45, 0.9], 'lens_mm': 31, 'level': True,
+                       'fstop': 5.6, 'focus': [0.2, 0.4, 0.8]},
+               tweak=lambda s: r4(s)),
+    # the pendant's floor shadow read as caster-less (round 3's c2; a ray cast found Hemisphere's reflector): the sun
+    # turned to -55 so the pendant, the left speaker and the sun line up and its shadow falls on the speaker; this also
+    # takes the light's band off the header's wall
+    'r5': dict(layout='v2c', rug={'off': True}, sun={'elevation_deg': 36.0, 'azimuth_deg': -55.0},
+               camera={'position': [2.55, -4.05, 1.02], 'target': [-0.25, 0.45, 0.9], 'lens_mm': 31, 'level': True,
+                       'fstop': 5.6, 'focus': [0.2, 0.4, 0.8]},
+               tweak=lambda s: (r4(s), s['render'].update({'exposure': -0.75}))),
     'r2-f': dict(layout='v2', rug=JUTE, sun={'elevation_deg': 22.0},
                  camera={'position': [0.9, -5.3, 0.98], 'target': [0.0, 0.45, 1.0], 'lens_mm': 35, 'level': True,
                          'fstop': 8.0, 'focus': [0.3, 0.4, 0.8]}),
